@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,17 +12,12 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_GRAPHIC_TEXT_BIDI_H
 #define WL_GRAPHIC_TEXT_BIDI_H
-
-#include <limits>
-#include <string>
-#include <vector>
 
 #include <unicode/uchar.h>
 #include <unicode/unistr.h>
@@ -39,13 +34,12 @@ bool has_rtl_character(const char* input, int32_t limit = std::numeric_limits<in
 bool has_rtl_character(std::vector<std::string> input);
 // True if a string contains a character from the script's code blocks
 bool has_script_character(const char* input, UI::FontSets::Selector script);
-UI::FontSet const * find_fontset(const char* word, const UI::FontSets& fontsets);
-std::string icustring2string(const UnicodeString& convertme);
-std::string icuchar2string(const UChar& convertme);
+UI::FontSet const* find_fontset(const char* word, const UI::FontSets& fontsets);
+std::string icustring2string(const icu::UnicodeString& convertme);
 bool cannot_start_line(const UChar& c);
 bool cannot_end_line(const UChar& c);
 bool is_diacritic(const UChar& c);
 
-} // namespace UI
+}  // namespace i18n
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_BIDI_H

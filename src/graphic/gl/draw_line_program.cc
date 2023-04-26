@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,18 +12,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "graphic/gl/draw_line_program.h"
 
-#include <algorithm>
 #include <cassert>
-#include <vector>
-
-#include "base/log.h"
+#include <iterator>
 
 // static
 DrawLineProgram& DrawLineProgram::instance() {
@@ -43,7 +39,8 @@ void DrawLineProgram::draw(std::vector<Arguments> arguments) {
 
 	auto& gl_state = Gl::State::instance();
 	gl_state.enable_vertex_attrib_array({
-	   attr_position_, attr_color_,
+	   attr_position_,
+	   attr_color_,
 	});
 
 	gl_array_buffer_.bind();

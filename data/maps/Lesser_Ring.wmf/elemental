@@ -1,0 +1,14 @@
+# Automatically created by Widelands 1.0~git25123[e32d698@master] (Release)
+
+[global]
+packet_version="1"
+map_w="192"
+map_h="192"
+nr_players="8"
+name=_"Lesser Ring 1.2"
+author="Philipp Klaus Krause"
+descr=_"A fair 8-player map with natural geographic features dividing land. The geographic features are meant to be somewhat realistic with rivers flowing from glaciers in the mountains through hills and flatlands into the sea. Gold is a much rarer resource compared to coal and iron. Different resources are often found at some distance to each other."
+hint=
+tags="balanced,official,seafaring"
+theme="summer"
+addons=

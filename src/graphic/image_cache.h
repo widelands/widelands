@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,14 +21,10 @@
 
 #include <map>
 #include <memory>
-#include <string>
-#include <vector>
-
-#include <boost/utility.hpp>
 
 #include "base/macros.h"
 #include "graphic/image.h"
-#include "graphic/texture_atlas.h"
+#include "graphic/texture.h"
 
 // For historic reasons, most part of the Widelands code base expect that an
 // Image stays valid for the whole duration of the program run. This class is
@@ -39,8 +34,8 @@
 // ownership.
 class ImageCache {
 public:
-	ImageCache();
-	~ImageCache();
+	ImageCache() = default;
+	~ImageCache() = default;
 
 	// Insert the 'image' into the cache and returns a pointer to the inserted
 	// image for convenience.
@@ -49,10 +44,10 @@ public:
 	// Returns the image associated with the 'hash'. If no image by this hash is
 	// known, it will try to load one from disk with the filename = hash. If
 	// this fails, it will throw an error.
-	const Image* get(const std::string& hash);
+	const Image* get(std::string hash, bool theme_lookup = true);
 
 	// Returns true if the 'hash' is stored in the cache.
-	bool has(const std::string& hash) const;
+	[[nodiscard]] bool has(const std::string& hash) const;
 
 	// Fills the image cache with the hash -> Texture map 'textures_in_atlas'
 	// and take ownership of 'texture_atlases' so that the textures stay valid.
@@ -64,7 +59,12 @@ private:
 	std::vector<std::unique_ptr<Texture>> texture_atlases_;
 	std::map<std::string, std::unique_ptr<const Image>> images_;
 
+	std::vector<std::unique_ptr<const Image>> outdated_images_;
+	std::vector<std::unique_ptr<Texture>> outdated_texture_atlases_;
+
 	DISALLOW_COPY_AND_ASSIGN(ImageCache);
 };
+
+extern ImageCache* g_image_cache;
 
 #endif  // end of include guard: WL_GRAPHIC_IMAGE_CACHE_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,70 +20,65 @@
 #define WL_LOGIC_MAP_OBJECTS_WORLD_MAP_GEN_H
 
 #include <map>
-#include <string>
-#include <vector>
 
 #include "logic/map_objects/world/terrain_description.h"
 
-class LuaTable;
-
 namespace Widelands {
 
-class World;
 struct MapGenInfo;
 
 /// Holds world and area specific information for the map generator.
 /// Areas are: Water, Land, Wasteland and Mountains.
 struct MapGenAreaInfo {
-	enum MapGenAreaType {
-		atWater,
-		atLand,
-		atWasteland,
-		atMountains
+	enum class Area { kWater, kLand, kWasteland, kMountains };
+
+	enum class Terrain {
+		kWaterOcean,
+		kWaterShelf,
+		kWaterShallow,
+
+		kLandCoast,
+		kLandLand,
+		kLandUpper,
+
+		kWastelandInner,
+		kWastelandOuter,
+
+		kMountainsFoot,
+		kMountainsMountain,
+		kMountainsSnow
 	};
 
-	enum MapGenTerrainType {
-		ttWaterOcean,
-		ttWaterShelf,
-		ttWaterShallow,
+	MapGenAreaInfo(const LuaTable& table, const Descriptions& descriptions, Area area_type);
 
-		ttLandCoast,
-		ttLandLand,
-		ttLandUpper,
-
-		ttWastelandInner,
-		ttWastelandOuter,
-
-		ttMountainsFoot,
-		ttMountainsMountain,
-		ttMountainsSnow
-	};
-
-	MapGenAreaInfo(const LuaTable& table, const World& world, MapGenAreaType areaType);
-
-	size_t get_num_terrains(MapGenTerrainType) const;
-	DescriptionIndex get_terrain(MapGenTerrainType terrType, uint32_t index) const;
-	uint32_t get_weight() const {return weight_;}
+	[[nodiscard]] size_t get_num_terrains(Terrain) const;
+	[[nodiscard]] DescriptionIndex get_terrain(Terrain terrain_type, uint32_t index) const;
+	[[nodiscard]] uint32_t get_weight() const {
+		return weight_;
+	}
 
 private:
-	std::vector<DescriptionIndex>  terrains1_; //  ocean, coast, inner or foot
-	std::vector<DescriptionIndex>  terrains2_; //  shelf, land, outer or mountain
-	std::vector<DescriptionIndex>  terrains3_; //  shallow, upper, snow
+	std::vector<DescriptionIndex> terrains1_;  //  ocean, coast, inner or foot
+	std::vector<DescriptionIndex> terrains2_;  //  shelf, land, outer or mountain
+	std::vector<DescriptionIndex> terrains3_;  //  shallow, upper, snow
 
 	uint32_t weight_;
-	MapGenAreaType areaType_;
 };
 
 struct MapGenBobCategory {
-	MapGenBobCategory(const LuaTable& table);
+	explicit MapGenBobCategory(const LuaTable& table);
 
-	size_t num_immovables() const {return immovables_.size();}
-	size_t num_critters() const {return critters_.size();}
+	[[nodiscard]] size_t num_immovables() const {
+		return immovables_.size();
+	}
+	[[nodiscard]] size_t num_critters() const {
+		return critters_.size();
+	}
 
-	const std::string & get_immovable(size_t index) const {
+	[[nodiscard]] const std::string& get_immovable(size_t index) const {
 		return immovables_[index];
 	}
-	const std::string & get_critter(size_t index) const {
+	[[nodiscard]] const std::string& get_critter(size_t index) const {
 		return critters_[index];
 	}
 
@@ -94,53 +88,76 @@ private:
 };
 
 struct MapGenLandResource {
-	MapGenLandResource(const LuaTable& table, MapGenInfo& mapGenInfo);
+	MapGenLandResource(const LuaTable& table, MapGenInfo& map_gen_info);
 
-	uint32_t get_weight() const {return weight_;}
-	const MapGenBobCategory * get_bob_category
-		(MapGenAreaInfo::MapGenTerrainType terrType) const;
+	[[nodiscard]] uint32_t get_weight() const {
+		return weight_;
+	}
+	[[nodiscard]] const MapGenBobCategory*
+	get_bob_category(MapGenAreaInfo::Terrain terrain_type) const;
 
-	uint8_t get_immovable_density() const {return immovable_density_;}
-	uint8_t get_moveable_density() const {return critter_density_;}
+	[[nodiscard]] uint8_t get_immovable_density() const {
+		return immovable_density_;
+	}
+	[[nodiscard]] uint8_t get_moveable_density() const {
+		return critter_density_;
+	}
 
 private:
-	uint32_t        weight_;
-	uint8_t         immovable_density_; // In percent
-	uint8_t         critter_density_;  // In percent
-	const MapGenBobCategory * land_coast_bob_category_;
-	const MapGenBobCategory * land_inner_bob_category_;
-	const MapGenBobCategory * land_upper_bob_category_;
-	const MapGenBobCategory * wasteland_inner_bob_category_;
-	const MapGenBobCategory * wasteland_outer_bob_category_;
+	uint32_t weight_;
+	uint8_t immovable_density_;  // In percent
+	uint8_t critter_density_;    // In percent
+	const MapGenBobCategory* land_coast_bob_category_;
+	const MapGenBobCategory* land_inner_bob_category_;
+	const MapGenBobCategory* land_upper_bob_category_;
+	const MapGenBobCategory* wasteland_inner_bob_category_;
+	const MapGenBobCategory* wasteland_outer_bob_category_;
 };
 
 /** struct MapGenInfo
-  *
-  * This class holds world specific information for the map generator.
-  * This info is usually read from the file "mapgeninfo" of a world.
-  */
+ *
+ * This class holds world specific information for the map generator.
+ * This info is usually read from the file "mapgeninfo" of a world.
+ */
 struct MapGenInfo {
-	MapGenInfo(const LuaTable& table, const World& world);
+	MapGenInfo(const LuaTable& table, const Descriptions& descriptions);
 
-	size_t get_num_areas(MapGenAreaInfo::MapGenAreaType areaType) const;
-	const MapGenAreaInfo& get_area(MapGenAreaInfo::MapGenAreaType areaType, uint32_t index)
-		const;
-	const MapGenBobCategory * get_bob_category(const std::string & bobCategory) const;
+	size_t get_num_areas(MapGenAreaInfo::Area area_type) const;
+	const MapGenAreaInfo& get_area(MapGenAreaInfo::Area area_type, uint32_t index) const;
+	const MapGenBobCategory* get_bob_category(const std::string& bob_category) const;
 
-	uint8_t get_water_ocean_height  () const {return ocean_height_;}
-	uint8_t get_water_shelf_height  () const {return shelf_height_;}
-	uint8_t get_water_shallow_height() const {return shallow_height_;}
-	uint8_t get_land_coast_height   () const {return coast_height_;}
-	uint8_t get_land_upper_height   () const {return upperland_height_;}
-	uint8_t get_mountain_foot_height() const {return mountainfoot_height_;}
-	uint8_t get_mountain_height     () const {return mountain_height_;}
-	uint8_t get_snow_height         () const {return snow_height_;}
-	uint8_t get_summit_height       () const {return summit_height_;}
+	uint8_t get_water_ocean_height() const {
+		return ocean_height_;
+	}
+	uint8_t get_water_shelf_height() const {
+		return shelf_height_;
+	}
+	uint8_t get_water_shallow_height() const {
+		return shallow_height_;
+	}
+	uint8_t get_land_coast_height() const {
+		return coast_height_;
+	}
+	uint8_t get_land_upper_height() const {
+		return upperland_height_;
+	}
+	uint8_t get_mountain_foot_height() const {
+		return mountainfoot_height_;
+	}
+	uint8_t get_mountain_height() const {
+		return mountain_height_;
+	}
+	uint8_t get_snow_height() const {
+		return snow_height_;
+	}
+	uint8_t get_summit_height() const {
+		return summit_height_;
+	}
 
 	uint32_t get_sum_land_weight() const;
 
 	size_t get_num_land_resources() const;
-	const MapGenLandResource & get_land_resource(size_t index) const;
+	const MapGenLandResource& get_land_resource(size_t index) const;
 	uint32_t get_sum_land_resource_weight() const;
 
 private:
@@ -149,7 +166,7 @@ private:
 	std::vector<MapGenAreaInfo> wasteland_areas_;
 	std::vector<MapGenAreaInfo> mountain_areas_;
 
-	std::vector<MapGenLandResource>           land_resources_;
+	std::vector<MapGenLandResource> land_resources_;
 	std::map<std::string, MapGenBobCategory> bob_categories_;
 
 	uint8_t ocean_height_;
@@ -162,12 +179,11 @@ private:
 	uint8_t mountain_height_;
 	uint8_t summit_height_;
 
-	mutable int32_t  land_weight_;
+	mutable int32_t land_weight_;
 	mutable bool land_weight_valid_;
 
 	mutable int32_t sum_bob_area_weights_;
 	mutable bool sum_bob_area_weights_valid_;
-
 };
 
 }  // namespace Widelands

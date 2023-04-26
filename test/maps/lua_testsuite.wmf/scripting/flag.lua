@@ -150,7 +150,7 @@ function flag_tests:roads_and_buildings_test()
    local field = map:get_field(4,14)
    self.w = player1:place_building("barbarians_warehouse", field)
    self.f1 = self.w.flag
-   local road = player1:place_road(self.f1, "br", "br", "br")
+   local road = player1:place_road("normal", self.f1, "br", "br", "br")
    self.f2 = self.f1.fields[1].brn.brn.brn.immovable
 
    assert_equal(self.f2.roads.tl, road)
@@ -158,5 +158,6 @@ function flag_tests:roads_and_buildings_test()
    assert_equal(self.f2.roads.tl.end_flag, self.f2)
    assert_equal(self.f1.building, self.w)
    assert_nil(self.f2.building)
-   assert_equal(self.f2.debug_economy, self.w.debug_economy)
+   assert_equal(self.f2.debug_ware_economy, self.w.debug_ware_economy)
+   assert_equal(self.f2.debug_worker_economy, self.w.debug_worker_economy)
 end

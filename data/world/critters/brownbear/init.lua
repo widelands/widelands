@@ -1,20 +1,45 @@
+push_textdomain("world")
+
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "brownbear_idle_??.png"),
-      hotspot = {21, 16},
-      fps = 20
-   },
-}
-add_walking_animations(animations, dirname, "brownbear_walk", {24, 24}, 4)
-
-world:new_critter_type{
+wl.Descriptions():new_critter_type{
    name = "brownbear",
-   descname = _ "Brown bear",
-   attributes = { "eatable" },
+   descname = _("Brown bear"),
+   icon = dirname .. "menu.png",
+   animation_directory = dirname,
    programs = {
       remove = { "remove" },
    },
-   animations = animations,
+   size = 10,
+   reproduction_rate = 60,
+   appetite = 90,
+   carnivore = true,
+
+   spritesheets = {
+      idle = {
+         fps = 20,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 21, 16 }
+      },
+      eating = {
+         basename = "idle", -- TODO(Nordfriese): Make animation
+         fps = 20,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 21, 16 }
+      },
+      walk = {
+         fps = 20,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         directional = true,
+         hotspot = { 24, 24 }
+      },
+   },
 }
+
+pop_textdomain()

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2007-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,21 +12,16 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_MAP_IO_MAP_OBJECT_PACKET_H
 #define WL_MAP_IO_MAP_OBJECT_PACKET_H
 
-#include <set>
-
 #include "logic/map_objects/map_object.h"
 
 class FileSystem;
-class WorldLegacyLookupTable;
-class TribesLegacyLookupTable;
 
 namespace Widelands {
 
@@ -42,29 +37,23 @@ struct MapObjectSaver;
  */
 struct MapObjectPacket {
 	struct LoaderSorter {
-		bool operator()
-			(MapObject::Loader * const a, MapObject::Loader * const b) const
-		{
+		bool operator()(MapObject::Loader* const a, MapObject::Loader* const b) const {
 			assert(a->get_object()->serial() != b->get_object()->serial());
 			return a->get_object()->serial() < b->get_object()->serial();
 		}
 	};
 
-	using LoaderSet = std::set<MapObject::Loader *, LoaderSorter>;
+	using LoaderSet = std::set<MapObject::Loader*, LoaderSorter>;
 	LoaderSet loaders;
 
 	~MapObjectPacket();
 
-	void read
-		(FileSystem &, EditorGameBase &, MapObjectLoader &,
-		 const WorldLegacyLookupTable& world_lookup_table,
-		 const TribesLegacyLookupTable& tribe_lookup_table);
+	void read(FileSystem&, EditorGameBase&, MapObjectLoader&);
 
 	void load_finish();
 
-	void write(FileSystem &, EditorGameBase &, MapObjectSaver  &);
+	void write(FileSystem&, EditorGameBase&, MapObjectSaver&);
 };
-
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_MAP_IO_MAP_OBJECT_PACKET_H

@@ -1,358 +1,3229 @@
-### Build 19 until r7734
+[TOC]
 
-- Fixed bug #1532279: Spin box not displayed correct in options menu
-- Fixed bug #1438611: Widelands is leaking memory
-- Fixed bug #1535569: Messages window slows down game speed
-- Fixed bug #1522564: Table icons on bottom of table need cropping
-- Fixed bug #1530398: Wrong text above marble mine
-- Fixed bug #1530240: wrong text in the tribal encyclopedia for the battle ax
-- Fixed bug #1536053: Widelands without sound on win
-- Fixed bug #1519361: PlayerColor in Building menu causes render errors
-- Fixed bug #1532417: complete indicators for resource water
-- Fixed bug #1523096: Options Window redesign
-- Fixed bug #1302565: Screenshot shows wrong image when a game is chosen with
-                      the mouse pointer
-- Fixed bug #992598:  Improve road visibility for the color-blind
-- Fixed bug #1302577: Wrong minimap in load dialog when the save game has been
-                      overwritten
-- Fixed bug #1370144: Playercolor mask is sometimes black
-- Fixed bug #977980:  Fish and mountain ressources cannot be removed when they
-                      are on grass
-- Fixed bug #1525395: atlantean mines failing to extract all resources
-- Fixed bug #1523165: ai malfunctions after introduction of difficulty levels
-- Fixed bug #1526514: player 2 in "" section [player_2] not found
-- Fixed bug #1503949: excessive CPU usage and loading time seemingly related to
-                      lenght of the game
-- Fixed bug #1425870: Artefacts in render queue branch
-- Fixed bug #1515006: Create a new forested mountain terrain
-- Fixed bug #1526903: Editor crashes when changing tribe
-- Fixed bug #1522290: Gameplay suddenly gets very slow
-- Fixed bug #1395238: soldiers getting stuck
-- Fixed bug #566729:  Add gametime display to replays
-- Fixed bug #1490116: fully promoted soldiers remaining in training sites
-- Fixed bug #1512077: change icons for workers in the menus
-- Fixed bug #1457425: Fight never end (also not 2h later)
-- Fixed bug #1529363: empire fisher: fishing animation does not work
-- Fixed bug #1527368: Some buildings have lost build animations; Add check for
-                      lua tables
-- Fixed bug #1421942: Unified term for "Black" and "Wasteland"
-- Fixed bug #1492114: Making the message window smaller
-- Fixed bug #1502965: Building statistics window does not "courtain up" 
-                      correctly
-- Fixed bug #1505723: Some performance values for the buildings help text
-- Fixed bug #1412242: Multiplayer save game selection does not show the filename
-- Fixed bug #1509301: Loading older multiplayer savegame doesn't work
-- Fixed bug #1385859: Selecting a map in multiplayer mode crashes the game
-- Fixed bug #1508553: New win condition: artifacts
-- Fixed bug #1516777: Atlantean corn farms unproductive
-- Fixed bug #1227984: Autosave should not trigger while game is paused
-- Fixed bug #1516214: Game data error: unseen immovable: tribe "field_harvested" 
-                      does not exist
-- Fixed bug #1515161: Worker does not actually exist crash and unseen immovable 
-                      when loading....
-- Fixed bug #1515359: Missing animation dismantlesite worker
-- Fixed bug #1513550: Unable to load savegame - tribe ... does not define 
-                      building type
-- Fixed bug #1278050: login problems with metaserver
-- Fixed bug #1274279: Metaserver entry in config gets deleted
-- Fixed bug #1480928: Lumberjack animation glitches
-- Fixed bug #1251914: soldier stuck in battle animation loop
-- Fixed bug #1493238: Options screen layout errors
-- Fixed bug #1368133: One Tribe
-- Fixed bug #1453528: Buildings missing menu icons
-- Fixed bug #1345663: format_help.lua has no Textdomain
-- Fixed bug #1341080: Building help: remove logic from wrappers
-- Fixed bug #1509220: Atlanteans campaign keeps counting 0 ships
-- Fixed bug #1402786: "Set origin" should be in the tools menu
-- Fixed bug #1171231: Size of minimap in the editor not changed when new map is 
-                      loaded
-- Fixed bug #1406301: Various strings need fixing
-- Fixed bug #1509452: Scenario maps aren't loaded as scenarios
-- Fixed bug #1504948: Performance issue when "no use for ships on this map"
-- Fixed bug #1426654: Only list compatible .wmf files in the load game dialog
-- Fixed bug #861761:  Improve production prioritisation
-- Fixed bug #1504952: "No use for ships on this map!" message is not 
-                      translateable
-- Fixed bug #1504366: editor crashes unexpectedly
-- Fixed bug #1502458: Carrier hiding in Warehouse/HQ is hardcoded
-- Fixed bug #580923:  Production of carrier does not respect building costs
-- Fixed bug #1390793: Editor should always show filenames, not map names when 
-                      dealing with saving and loading
-- Fixed bug #814500:  The Edit box in the Editor's "Map Options" should have a 
-                      "save" and "cancel" button to exit this window
-- Fixed bug #1493972: editor load / save menu has issues with nested directories 
-                      of the same name
-- Fixed bug #1375915: scripting files get deleted when a map is resaved
-- Fixed bug #1215412: graphic artifacts
-- Fixed bug #1401479: Minimaps button images are scaled down instead of cropped.
-- Fixed bug #849896:  Heal the highest level, healthiest soldier first
-- Fixed bug #1489974: Military tutorial should mention Hero-Rookie topic earlier
-- Fixed bug #1487887: Translation missing in editor and in replay tooltip
-- Fixed bug #1463829: Building statistics: Last line needs more space
-- Fixed bug #1480937: Escape key doesn't work in all dialogues
-- Fixed bug #978175:  localization not yet loaded in command line
-- Fixed bug #1413226: Spaces in attack box disappear
-- Fixed bug #1201398: Save game claims win condition is Scenario, even when it 
-                      isn't
-- Fixed bug #1408712: Waves are rolling in different speed /rolling angle is 
-                      different
-- Fixed bug #653308:  The attack dialog is not updating the number of possible 
-                      attackers
-- Fixed bug #1326395: Information tool in the editor has large tool area
-- Fixed bug #1460724: Icon in news inbox overlaps with long message text
-- Fixed bug #1424950: strange character relationships in the empire campaigns
-- Fixed bug #1454371: "Out of resources" messages should be triggered by 
-                      productivity
-- Fixed bug #1399621: Building Statistics Window Redesign
-- Fixed bug #849705:  Add a column for "stopped" buildings in building 
-                      statistics
-- Fixed bug #1426276: Editor Player Menu doesn't update tool overlay when player 
-                      is removed
-- Fixed bug #1455732: New building encyclopedia causes crash with saveloading
-- Fixed bug #998544:  Replay name should contain Widelands version
-- Fixed bug #1442869: Stopped production sites should produce something from 
-                      their consumed wares befor they stop
-- Fixed bug #1451147: Game crashes when headquarters is taken over
-- Fixed bug #1442945: Atlanteans ship construction much faster
-- Fixed bug #1451977: Collectors message contains bad names
-- Fixed bug #1243700: Statistic window displays graph incorrectly when in 
-                      hour-mode
-- Fixed bug #1428396: savefile broken when enemy deafed
-- Fixed bug #978138:  Ship is under fisher's hut
-- Fixed bug #1451078: labyrinth malfunctions full report
-- Fixed bug #1451069: Collectors win condition doesn't count wares in ports
-- Fixed bug #1407418: Multiple hunters hunt for same animal
-- Fixed bug #1447333: Crashes on main menu under Windows 7.  Mouse movement 
-                      seems to trigger this.
-- Fixed bug #731987:  mouse does not work in full screen on virtual machines
-- Fixed bug #1422072: Private message improvements
-- Fixed bug #1434291: collectors game over message
-- Fixed bug #1418151: Collectors: status points are no longer shown in the 
-                      statistics
-- Fixed bug #1378798: Editor: 'new map' options redesign
-- Fixed bug #1406298: Load game screen lists campvis file
-- Fixed bug #1424408: Graphics become all white in tutorial
-- Fixed bug #1423468: After reload, all percentages are blue until they are 
-                      updated again
-- Fixed bug #1421997: Shipcontrols doesn' t work correctly
-- Fixed bug #1395521: [7237][7261] AI is too eager to raze newly conquered 
-                      buildings
-- Fixed bug #969366:  Computer player has a bad military strategy
-- Fixed bug #951546:  Atlantean AI can handle Citadel villages in forests only
-- Fixed bug #1243226: Enable AI to build and use ships
-- Fixed bug #1422452: REPLAY: Caught exception 
-                      [c:/data/bzr/widelands/working/src/logic/replay.cc:182] 
-                      Unknown packet 0
-- Fixed bug #1387801: Crash when expedition port is destroyed while wares are 
-                      unloaded
-- Fixed bug #1419537: Allow Observers to show building spaces
-- Fixed bug #1402231: Wl crashes when saving after port is reduced to warehouse
-- Fixed bug #1389211: port without a portdock (game crashing)
-- Fixed bug #1420521: Reset target quantitiy is overwritten easily
-- Fixed bug #1328637: Road textures are hard to see in some worlds
-- Fixed bug #1408775: Make autocrat &amp; territorial lord the last win 
-                      conditions, make Collectors the first
-- Fixed bug #536470:  Make mouse sensitivity configurable
-- Fixed bug #1392215: Secondary and Third Alternative Tool no longer working in 
-                      the Editor
-- Fixed bug #1399758: Make a new graphic for the Options menu button
-- Fixed bug #736404:  Cannot switch from Widelands in full screen on Linux 
-                      (alt+tab)
-- Fixed bug #980287:  productivity drops on game load
-- Fixed bug #1348800: Parameters for terrain affinity need tweaking
-- Fixed bug #1413734: savegame does not load
-- Fixed bug #1388255: Widelands crashes when loading a multiplayer game
-- Fixed bug #1413326: Current trunk on Linux cannot join a game that is hosted 
-                      on Windows
-- Fixed bug #1411939: in multiplayer games, the HQ is not shown correct
-- Fixed bug #1409267: Graphic errors with text on Windows
-- Fixed bug #829984:  Tweak the duck animation
-- Fixed bug #1408707: Water should be dithered as land terrain
-- Fixed bug #1407948: More autosave files would help debugging
-- Fixed bug #1324642: playercolor mask has wrong size
-- Fixed bug #1370136: Drag selection for wares does not work when started on 
-                      Barbarian ax
-- Fixed bug #1257320: strange vertical lines during gameplay
-- Fixed bug #1402392: widelands crashed with SIGSEGV in 
-                      LuaGame::LuaPlayer::get_buildings()
-- Fixed bug #1407799: Fatal exception:  Image not found: 
-                      tribes/empire/soldier/untrained.png
-- Fixed bug #1388028: Unable to load saved game
-- Fixed bug #987510:  Filter for Messages
-- Fixed bug #1404478: Windows installer puts string "Widelands" into the version 
-                      field
-- Fixed bug #973714:  Fonts are different between daily PPA and bzr repository
-- Fixed bug #1378797: When playing fullscreen mode Unity locks the screen
-- Fixed bug #1402253: Install fails (file INSTALL cannot find "..../fonts")
-- Fixed bug #1207415: Many screens do not honor the font setting
-- Fixed bug #662800:  Fonts have problems with non-latin characters
-- Fixed bug #859245:  Authors / developers button in main menu
-- Fixed bug #1281823: Setting resources via LUA API broken in Editor
-- Fixed bug #536559:  Fullscreen must not change physical screen resolution
-- Fixed bug #682351:  wishlist: Fullscreen toogle also in Menu
-- Fixed bug #1397302: Fullscreen Toggle Text Overlay
-- Fixed bug #1397301: Screenshots black
-- Fixed bug #768826:  Show altitude level in the editor
-- Fixed bug #1219914: Lots of warnings "internationalized messages should not 
-                      contain the '\r' escape sequence" when doing make lang
-- Fixed bug #1203006: Increasing resolution in fullscreen results in the right 
-                      and bottom sides not being updated properly
-- Fixed bug #536500:  Can not toggle fullscreen with Alt+Enter or resize with 
-                      w.m.
-- Fixed bug #1322280: Remove Hint and feature for "ALT GR key lets you drag the 
-                      window" does not work
-- Fixed bug #1389346: Disabling opengl results in black screen
-- Fixed bug #1336097: Localization not working
-- Fixed bug #1390978: Textinput triggers hotkeys
-- Fixed bug #1393547: Flashing black background when autosaving
-- Fixed bug #1392406: Confirmation dialog when leaving the editor although Ctrl 
-                      has been pressed
-- Fixed bug #1341990: Map names cause confusion in internet play
-- Fixed bug #959605:  Barbarian In-Game Help Development
-- Fixed bug #960164:  Imperial In-Game Help Development
-- Fixed bug #960170:  Atlantean In-Game Help Development
-- Fixed bug #1388166: Cannot open savegame of build 18 with bzr 7237
-- Fixed bug #672248:  duplicated animations
-- Fixed bug #1283693: crash after very long chat message
-- Fixed bug #1257476: Crash when attempting to load a game after toggeling 
-                      opengl rendering
-- Fixed bug #676241:  The list of loadable maps for the editor does not list 
-                      number of players
-- Fixed bug #1298304: Pop-up message "We lost a ... to the ocean!" in Atlantean 
-                      campaign is annoying
-- Fixed bug #1298301: Do not show scenario messages when player is in road 
-                      building mode
-- Fixed bug #1088222: Barbarians Campaign: small suggestions for improvement
-- Fixed bug #1286576: Tutorial fails if player is in road building mode when 
-                      military building finishes
-- Fixed bug #1386777: No maps in mapselect and crash
-- Fixed bug #1289698: Sorting maps by name sort by original instead of 
-                      translated name
-- Fixed bug #1378339: Writing Scripting Data ... PANIC: unprotected error in 
-                      call to Lua API
-- Fixed bug #1382832: Latest PPA version refuse to start (could not find file or 
-                      directory: /usr/games/usr/share/games/widelands)
-- Fixed bug #1169445: Commandline options 1/0 &lt;=&gt; true/false on win32
-- Fixed bug #1371062: Add confirmation dialog to exit game
-- Fixed bug #1344288: segmentation fault - AI building enhancement
-- Fixed bug #1342554: [defaultai.cc:2406] Help: I do not know what to do with a 
-                      outpost
-- Fixed bug #1377394: Map background images refactoring
-- Fixed bug #1378801: Random map: Wasteland % change not reflected in Mountains 
-                      %
-- Fixed bug #669699:  trainer is only a carrier
-- Fixed bug #1371905: Localized strings doesn'tfit in the available place
-- Fixed bug #1174075: Clarify meaning of icons in editor terrain preview
-- Fixed bug #744749:  Training sites should either show statistics as a military 
-                      or as a productionsite
-- Fixed bug #1254116: Crash on saving game: unprotected error in call to Lua API 
-                      (table index is NaN)
-- Fixed bug #1366725: Building help assumes that every worker needs only one 
-                      tool
-- Fixed bug #979995:  Game crashes with large map when saving
-- Fixed bug #988831:  Remove message expiry feature.
-- Fixed bug #1226624: AI sometimes runs out of trunks with castle village
-- Fixed bug #951548:  AI building too many military buildings
-- Fixed bug #536360:  improve sentence structure
-- Fixed bug #1048528: AI builds roads around its vineyards
-- Fixed bug #965044:  Improve the rich text renderer with new formatting options
-- Fixed bug #1344179: Granite mines should check if their output is needed
-- Fixed bug #1332856: Regression from one_world: Crash when opening message 
-                      regarding resources
-- Fixed bug #536230:  building icons in menu are shown without correct 
-                      playercolor
-- Fixed bug #1310774: Problems with translating "%1$s %2$s mine %3$s"
-- Fixed bug #1295992: Cattle Farm shows wrong hover text
-- Fixed bug #1328635: Bring back terrain affinity
-- Fixed bug #647456:  options: colors of the main WL menu changes when changing 
-                      the language
-- Fixed bug #1349721: Most maps do not contain animals
-- Fixed bug #1347648: Add Map_Object:descr to Lua interface
-- Fixed bug #1349378: get_soldiers doesn't return a table in Island Hopping
-- Fixed bug #1344350: Constructionsites/dismantlesites only show a dot instead 
-                      of building image
-- Fixed bug #999262:  Immovable attribs (e.g. stone) are not translatable
-- Fixed bug #682405:  Some variables are not translatable
-- Fixed bug #1298411: No necessity to conquer all military buildings in the 
-                      third Barbarian Campaign
-- Fixed bug #674839:  Some issues of barbarian tutorial 3
-- Fixed bug #1322741: text issue: fps statistics overlaps with xz coordinates
-- Fixed bug #964534:  Building names in help headlines create duplicate 
-                      translations of building names
-- Fixed bug #1027824: Mistakes in in-game help of Barbarian trainingscamp
-- Fixed bug #1005194: building help: clear indication of the meaning of working 
-                      area
-- Fixed bug #571796:  Stop the rounding to full 10ths for productivity 
-                      percentages
-- Fixed bug #1341662: Remove the animals out of the Barbarian directory
-- Fixed bug #1341082: Building help: clean up name, descname
-- Fixed bug #1342563: When choosing random tribe and castle village, the tribe 
-                      can be guessed
-- Fixed bug #1342801: Building help is broken (get_worker_description string 
-                      expected got table)
-- Fixed bug #965633:  Set default AI to random tribe
-- Fixed bug #1247384: Newly conquered building should prefer heros
-- Fixed bug #1322473: Add Win conditions as an Objective
-- Fixed bug #1341112: Editor line abruption in Noise height tool
-- Fixed bug #1293158: Odd line in information tool in editor
-- Fixed bug #1339861: Remove the "Military settings" option
-- Fixed bug #1332455: Productivity of the Atlantean farm does not drop to 0 when 
-                      it does not work
-- Fixed bug #902807:  Stopped production sites do not have their reserves filled
-- Fixed bug #1167242: Ctrl+destroying a flag with a building does not destroy 
-                      the whole road
-- Fixed bug #1332842: Remove support for different flag and frontier 'styles'.
-- Fixed bug #821553:  Increase maximum number of terrain types
-- Fixed bug #1161971: Graphics conf files "picture=" parameter
-- Fixed bug #1332984: Regression from one_world: Crash when finding granite 
-                      mining location (as any tribe)
-- Fixed bug #1300359: Installation dialog shows old screenshot
-- Fixed bug #1332832: Warning when starting a new game Unused key "name" in 
-                      LuaTable.
-- Fixed bug #992829:  Console output: WARNING: There are 73 unloaded objects. 
-                      This is a bug, please consider committing!
-- Fixed bug #1041436: Game jerks and stops after playing awhile. bzr6421
-- Fixed bug #1332452: Crop does not grow
-- Fixed bug #1330070: AI crashes
-- Fixed bug #993059:  AI runs out of wood in desert
-- Fixed bug #1303669: Reduce size of campaign savegames
-- Fixed bug #1311244: Atlantean Mission Trigger fail
-- Fixed bug #1311716: Segfault when loading a game with nightly build
-- Fixed bug #899928:  Translation overflow in "action" window
-- Fixed bug #1311790: Assertion error Widelands::StreamWrite::Coords32 shortly 
-                      after starting a new game
-- Fixed bug #536218:  Text does not fit buttons in objectives dialog
-- Fixed bug #1240880: Needed experience for workers cut off in building window
-- Fixed bug #1304638: Wrong sound played
-- Fixed bug #1300724: Minor string issues
-- Fixed bug #1290070: Plateau scenario needs a string fix
-- Fixed bug #1298309: Message "We lost a %s to the ocean!" cannot easily be 
-                      translated
-- Fixed bug #1306728: crash when info window opened if statistics window has
-                      been opened
-- Fixed bug #1302635: Random tribe selection always gives the same result
-- Fixed bug #1296655: News window crashes when building has not been seen in 
-                      the game
-- Fixed bug #1303070: Gracefully deal with older savegames failing to load in
-                      build 19
-- Fixed bug #1298011: Formatting stuff in Atlantean campaign texts shown
-- Fixed bug #1299919: AT: %1$u/%2$u in miltary sites
-- Fixed bug #964541:  Closing building window closes (child) help window
-- Fixed bug #1096453: Massive memory leaks
-- Fixed bug #1289575: Dialog for selecting immovable bobs in editor lacks tooltips
-- Fixed bug #1202133: Dialogs (and list of maps) have white background and
-                      repetition
-- Fixed bug #1278583: build completion status not translated
-- Fixed bug #1291554: Remove compatibility wares
-- Fixed bug #536317:  Graphics libraries still in memory when no longer needed
-- Fixed bug #1290073: Training grounds description vs Warrior's axe description
-- Fixed bug #1290123: Delete barbarian stronghold
-- Fixed bug #1289586: Let tree descriptions use the same size scheme as buildings
-- Fixed bug #1290066: Sort languages by their native names
-- Fixed bug #961526:  Articles and %s
-- Fixed bug #1232392: Allow tabbing in forms
+## Post-1.1 until [git 75dfa800](https://github.com/widelands/widelands/commit/75dfa800f399355adb7ee17b5be3237f243afd41)
 
-### Build 18-rc1
+### Animations, Icons and Overlays
+
+- Remove leftover individual animation frames of buildings (#5269)
+- Upscaled editor splash image (#5634)
+- Move empty sign on Atlantean mines to make it visible when status labels are shown (#5642)
+
+
+### Sounds and Music
+
+
+
+### Tutorials and Campaigns
+
+- Minor tweaks in emp03 to reflect user comments in #5478 (#5648)
+
+
+### Scripting
+
+- Limit `set_soldiers` to 10000 soldiers (#5568)
+
+
+### Maps
+
+
+
+### Add-Ons
+
+
+
+### Saveloading
+
+- Allow loading another replay in replay mode (#5611)
+- Fix saving game with new name (#5639)
+
+
+### AI
+
+- Small AI Fixes (#5683)
+
+
+### Gameplay
+
+- Configurable Win Condition Duration (#5380)
+- Seed random number generator before starting new game (#5608)
+- Fix trainingsites' definition of when a soldier is present (#5640)
+- Fix portspace detection (#5647)
+- Cancel battles when players negotiate truce (#5665)
+- Allow letting individual productionsites produce indefinitely (#4961)
+
+
+### User Interface
+
+- Default select the first worker to kick from a production site (#5515)
+- Do not cut filename extension for directories (#5623)
+- Consume every keydown event in editbox (#5626)
+- Show name and experience type of missing workers (#5432)
+- Delete selected text on text input (#5633)
+- Show coming and absent soldiers in building soldier list (#5437)
+- Draw Actual Game Speed (#5621)
+- Make diplomacy window available to spectators (#5609)
+- Fix cursor flashing (#5674)
+- Redesign Diplomacy Accept/Reject/Retract UI (#5670)
+    - Allow retracting your own pending invitations and join requests.
+    - Join requests may be approved or rejected by any member of the team, not just the player the request was made to.
+    - Removed the confirmation popup and instead added the buttons to the diplomacy window.
+    - Prompt for confirmation before resigning.
+- Quick Navigation GUI (#5487)
+- UI Elements Fixes And Tweaks (#5668)
+     * Allow using PageUp/PageDown and Ctrl+scroll in sliders and spinboxes to change the value faster
+     * Make sure that no slider nor spinbox can wrap around due to integer overflow
+     * Add missing changed() call in spinbox when value is set to min/max (fixes warning update in Editor/Map Options/Ferry Range)
+     * Decrease width of big step buttons of spinboxes (should help dealing with #5631)
+     * Fix updating slider position when min/max is changed (affected attack window)
+     * Add "Click to sort/reverse" to table header tooltips (requested by @frankystone for map selection)
+     * Reset sorting order when user changes column to sort by
+     * Handle big step in inputqueue
+     * Allow using Shift + arrow keys in priority slider to set all input priorities at once
+     * Stabilize selection end in editbox (fixes #5676)
+     * Handle big step in soldier capacity settings
+     * Converted all users of `get_keyboard_change()` to handle big step, remove `enable_big_step` option
+- Add shortcut keys for all menu items (#5705)
+     * add shortcut to statistics button tooltip in interactive_spectator.cc
+     * unify Load and Save hotkeys
+     * change some editor tool hotkeys and make all tools use Shift modifier
+     * editor new map window: create new map when terrain is doubleclicked
+     * editor: remove Alt modifier for third tool function (old TODO item)
+     * editor: ask for exit confirmation even if map is not modified (still skip on Ctrl+click)
+     * ask for exit confirmation in main menu (can be skipped by Ctrl+clicking)
+- Worker and Soldier Statistics Tweaks (#5607)
+    - Fix incorrect genstats labels font colour
+    - Add statistics about civil buildings defeated
+    - Workers without buildcost and soldiers now don't count for the workers graph
+    - Refactored military graph calculation
+    - Show total number of soldiers in soldier stats window
+- Pinned Notes (#5569)
+
+
+### Internationalization
+
+- String Fixes (#5710)
+
+
+### Help and Documentation
+
+- Encyclopedia Hyperlinks (#5533)
+- Fix buildings help button (#5661)
+- Explain clearer what an economy is (#5630)
+- Trainigsite encyclopedia enhancements (#5673)
+
+
+### Editor
+
+- Explain waterway setting in Editor Map Options and add toolips to all map tags (#5653)
+- Map Generator Add-Ons & Map Generating Dialog Accessibility Tweaks (#5537)
+- Editor: Show Starting Positions on Minimap (#5704)
+- Fix segfault in multiselect editor tools (#5708)
+
+
+### Graphics Engine
+
+- Show chat with customized player colours (#5671)
+
+
+### Networking
+
+- Networking log output and formatting usage cleanups (#5560)
+- Prevent spectating host from changing game speed (#5604)
+- Show enabled game-relevant add-ons before hosting (#5599)
+
+
+### Build System
+
+- Fix undefined `PATH_MAX` (#5615)
+- Drop support for g++-5 and g++-6 (#5541)
+- Require libpng >= 1.6 (#5625)
+- Fix Clang15 Compiler Warnings (#5629)
+- Replace `sprintf` with `snprintf` (#5651)
+- Switch to C++17 (#5672)
+- Update clang-tidy CI version (#5682)
+- Fix more clang-tidy checks (#5679, #5689, #5696, #5684, #5695, #5693, #5690, #5694, #5692, #5685, #5688, #5698, #5697, #5686, #5699, #5687, #5691, #5681)
+- Fix member initializer ambiguity regression
+
+
+### Other Issues
+
+- Caret-escape control characters in strings (#5496)
+
+
+
+## Release 1.1
+
+### Animations, Icons and Overlays
+
+- Fix some "deprecated pictures parameter" warnings (#4908)
+- Create spritesheets (#4935)
+- Spritesheet cleanup & campaigns (#4974)
+- Updated barbarian barracks graphics by DragonAtma (#4977)
+- Spritesheets fixes and cleanups (#5049)
+- Upscaled Splashscreen (#5183)
+- Optimize images with PNGQuant (#5204)
+- Fix pause and jump in empire mill animation (#5270)
+- Add high resolution images for Empire buildings (#5376)
+- Add high resolution images for Atlantean buildings (#5384)
+- Add some new main menu background images (#5606)
+
+
+### Sounds and Music
+
+- Write config after sound initialization (#4940)
+- Enable custom in-game music (#5138)
+
+
+### Tutorials and Campaigns
+
+- Emp02: Allow sheep farm and weaving mill with barracks (#5048)
+- Add "Along the river" scenario (#5062)
+- Trident of Fire Fixes (#5198)
+    - Fix player detection and slot usage
+    - Fix shipyard wasting a ware and therefore not providing a ship for AI
+    - Fixes workerpart of #2933
+    - Fixed flooding and foresting functions
+    - Changed the map slightly to fix #3878
+    - Fixed starting position
+    - Changed Player positions for balance
+    - Fixed accessibility of volcano craters
+    - Fixed lua volcano scripting
+    - No remains of lava after eruption is gone
+    - Rocks are not removed by lava anymore
+    - For each lava field a region of radius 1 is considered for removal
+- Basic control tutorial: only show first object once (#5338)
+- Fix legacy scenario units load order (#5350)
+- Atlantean02 (#5196)
+- Fri04 (#5104)
+- Fri03 Tweaks (#5104)
+
+
+### Scripting
+
+- Replenish reed in Frisian trading outpost (#4955)
+- Add enhancement method for buildings to Lua (#4989)
+- Added more ship names for Amazon tribes (#5034)
+- Amazon encyclopedia enhancements (#5037)
+  - Added lore for Dressmakery
+  - Added help text and lore for liana cutter's hut
+  - Added tips for amazons
+    - Tips on liana cutters, wilderness keepers, water gatherers, ropes, jungle masters, rare wood plantations and gold mines.
+    - Last change for now, to add info for plantations to close off #4981.
+    - Added extra note to wilderness keeper as that is necessary info not covered elsewhere.
+- Atlantean and Amazon soldier prefs (#5047): Sets military sites with 4+ soldiers to request heroes by default, and Atlantean small tower now requests rookies by default.
+- Support more properties in `modify_unit` (#4866)
+- Extend productionsite/worker program failure handling (#5146)
+    - Allow specifying `callworker` failure handling method
+    - Allow suppressing sending out-of-resource notifications in programs
+- Decouple Registries (#5169)
+- Add script to check for optional Lua parentheses (#4787, #5225, #5226)
+- Clean up `descriptions` vs `wl.Descriptions()` in init.lua files (#5296)
+- Restore global descriptions for savegame compatibility (#5393)
+- Fix Lua Scripting Multithreading (#5475)
+- Fixes in dump- and load economy scripts (#5601)
+
+
+### Maps
+
+- Fix map preview heights rendering (#5488)
+- Optimized height calculation for map preview (#5492)
+
+
+
+### Add-Ons
+
+- Use shared_ptr for AddOnInfo (#4747)
+- Fix duplicate description registries by add-ons (#4760)
+- Add-Ons Webserver (#4934)
+- Add-ons: Disambiguations for dither layers and registries (#4936)
+- Fix add-on translation handling glitches (#4976)
+- Refactor `ui_fsmenu/addons.*` (#5012)
+- Add-On UI Tweaks (#5061)
+    - Fix add-on comment layouting glitch
+    - Make dependency checking more clever
+    - Packager enhancements
+    - Fix multiple-dependency logic
+- Add-Ons Packager File Name Handling (#5074)
+    - Fix invalid file/dir names in the packager
+    - Add UI to set dirnames
+    - Enable save/discard buttons after editing displayname
+- Allow loading add-ons with unit replacements first (#5141)
+- Update Add-Ons Manager for Protocol Version 5 (#5039)
+- Speed up add-on remote interaction window (#5076)
+- Add-Ons Protocol Version 6 (#5092)
+- Show server name and check add-on version before upload (#5234)
+- Disable add-ons manager autoconnect and autologin (#5245)
+- Update Add-On Upload to Command Version 2 (#5231)
+- Fix Add-Ons Admin Menu Visibility (#5266)
+- Refactor Add-Ons Postloading (#5286)
+- Fix tribes postloading again and add regression test (#5323)
+- v1.0 backwards compatibility for world/tribe add-ons (#5353)
+- Fix too-early add-on descriptions registries & legacy scenario units loading (#5480)
+- Remove outdated info that add-on maps should not be zipped (#5538)
+
+
+### Saveloading
+
+- In-game game/scenario loading (#4843)
+    - Adds a Load Game button to the in-game menu (singleplayer only) to allow loading a new game in-game
+    - Adds a Restart Scenario button to the in-game menu in singleplayer scenarios
+    - Adds a Next Mission button to the Victory message box in singleplayer campaigns and tutorials
+    - GameController is now handled by `shared_ptr`
+- Reset Lua interface when loading games in-game (#4954)
+- Fix invalid resource loading (#4918)
+- Fix replay writing in savegames created from replays (#4972)
+- Implement saveloading unique windows (#4823)
+- Fix immovable savegame compatibility Long Long Way (#5060)
+- Cleanup player end statuses on loading (#5070)
+- Fix `DescriptionManager` Stacking (#5386)
+- Saveload `destruction_blocked` Property (#5450)
+- Relax Invalid Assumption in AttackWindow Saveloading (#5597)
+- Fix fri03 v1.0 Saveloading Compatibility (#5510)
+
+
+### AI
+
+- Miscellaneous AI Fixes (#4995)
+- Fix auto speed (#5149)
+    - Moved autospeed detection to defaultai.cc
+    - Changed the documentation of the commandline option --auto_speed
+    - Added some debug log
+- Adding performance statistics for AI tasks (#5156)
+- AI improvements - change of scoring, training (#5168)
+- Update_all_bfCheck bf redesign (#5171)
+- Introducing limit for fields to be updated (#5173)
+    - Introducing limit for fields to be updated
+    - Increasing number of checked unusable fields
+    - Adding expiration info, increasing max fields to check
+- Training of AI (#5213, #5278)
+- AI: Update bf redesign (#5216): Perfomance improvement of buildable fields check in AI code
+- Considering distance to warehouse when starting new buildings (#5229)
+    - Malus variable introduced
+    - Considering only connected flags
+    - Training
+- Misc AI Fixes (#5263)
+    - Fix basic_amount handling of wells, hunters and fishers
+    - Deduplicated magic numbers
+    - Made the well necessity more generic algorithm susceptible
+    - Moved detection of neededness by stocklevel to the appropriate part of the code
+    - Tried to delay first warehouse a bit
+    - Prioritized fruit collectors if supporter nearby
+    - Insert a safeguard bonus for basic wells
+- Fixing wrong initialization of AI `last_seen_time` (#5284)
+- Refactoring of `construct_building` (#5282)
+- Fixing bug #5375 - update buildable fields crash (#5378)
+- Stop loop after iterator is invalidated in defaultai (#5401)
+- Remove NOCOM comments (#5430)
+- AI Training (#5439)
+- Improving building and dismantling mil. sites (#5446)
+- Add AI Basic Decision Algorithm For Accepting Diplomacy (#5457)
+- Rework AI Military Site Dismantlement (#5449)
+
+
+### Gameplay
+
+- Fixed the `SupplyList::remove_supply` crash (#4913)
+- Multiplayer template game (#4884)
+- Fix constructionsite enhancement race condition (#5002)
+- Catch invalid cast in `Carrier::transport_update` (#5009)
+- Fix race condition when changing military-constructionsite soldier capacity (#5007)
+- Fix another race condition in constructionsite enhancing (#5033)
+- Support having more than 2 carriers on a road (#4938)
+- Intelligent worker reordering (#5099)
+- Remove messages of muted buildings (#5109)
+- Fix worker reordering stack overflow (#5125)
+- Remove messages when muting building via "mute all" (#5130)
+- Fix Port Paths Reordering On Port Removal (#5154)
+- Check for unknown wares/workers when loading economy profiles (#5215)
+- Ensure Notifications only reach the topmost DescriptionManager (#5184)
+- Unmark Amazons as Experimental (#5442)
+- Diplomacy (#5091)
+- Made diking part of the official tribe (#5104)
+- Fix Segfault on Building Dismantle (#5482)
+- Do not delete units during random game loading (#5590)
+- Prevent shipwright from building ferries where no ferry can live (#5534)
+
+
+### User Interface
+
+- Add Spinbox background (#4859)
+- Blinking caret for EditBox and MultilineEditBox (#4860)
+- Remove invisible scrollbar in dropdown (#4883)
+- Option to invert map movement (#4831)
+- Automatically enable themes after installing (#4734)
+- Screenshot notification (#4949)
+- Add soldiers overview tab to WarehouseWindow (#4901)
+- Multiplayer savegame setup UI improvements (#4968)
+- Show message box when a replay desyncs (#4896)
+- Change tab panel hotkeys to `CTRL+<num>` (#4993)
+- Fix richtext escape issues in message boxes (#4879)
+- Fastplace Shortcuts (#4849)
+- Mousewheel and key fixes (#5053)
+- Allow textually filtering dropdowns (#5040)
+- Unify arrow and +/- handling for spinbox and slider (#5054)
+    - Also refactors hardcoded key scancode detection
+- Disable keys for fullscreen and screenshot when changing shortcuts (#5066)
+- Only handle textinput when dropdown is expanded (#5065)
+- Add technical info to About window (#5071)
+- Add more uses for mousewheel scrolling (#5068)
+- Fix race condition when resizing game window (#5067)
+- Allow the same fastplace shortcut for different tribes' buildings (#5073)
+- Fix segfault when no modal panel exists (#5093)
+- Fix Save Game Window Layout Issues (#5105)
+- Fix mouse fastclick offset for construction site windows (#5107)
+- Convert Attack Box to Window (#5094)
+- Fastplace Groups (#5110)
+- Use `unique_ptr` for settings box in construction site window (#5116)
+- Hide Empty Input Queue Displays (#5139)
+- Protect map object drawing with a mutex (#5147)
+- Fix spacing in warehouse window soldiers tab (#5185)
+- Fix `nullptr` dereference in `BaseListselect::handle_key()` (#5212)
+- Window Clicking Behaviour Fixes (#5219): Fix clicking a window not changing tool in editor. Also make the window focused.
+- Keep progress window open until game is ready (#5191)
+- Use correct mechanism to hide dropdown list (#5237)
+- Enable Hotkeys in Dropdowns (#5238)
+- Fix Race Condition in Attack Window (#5235)
+- Dropdown shortcuts for ingame and editor (#5261)
+- Remove OK button in non-modal story boxes (#5292)
+- Fix texthandling for dropdowns (#5281)
+- Show port space hint in buildhelp (#5267)
+- Ships on minimap (#5297)
+- No hotkey for empty dropdown entry (#5320)
+- Fix Sound Options Panel Styling (#5372)
+- Fix Duplicated Workareas Display Bug (#5371)
+- Pan map view to keep it centered when resizing game window (#5388)
+- Fix collapsing permanently collapsed input queues (#5426)
+- Fix infinite loop at startup map panning (#5429)
+- Add highlighting of filter text in dropdown list (#5443)
+- Fix save dialog and debug window text input bug (#5421)
+- Workaround for inverted horizontal scrolling bug in SDL (#5394, #5543)
+- Fix fake-modal in-game load dialog releasing modal grab (#5454)
+- Make space available as dropdown hotkey & only trigger hotkey when not filtered (#5441)
+- Add-Ons Admin Dialog Accessibility (#5452)
+    - Enable Enter/Escape keys
+    - Focus list initially
+- Make Save/Load Game Dialog Truly Modal (#5491)
+- Warp mouse to target when launching attack (#5497)
+- Richtext-Escape Hotkey Strings (#5499)
+- Consistent UI Keyboard Selection (#5495)
+- Misc Replay Fixes (#5554)
+    - Use default display flags in replays
+    - Skip version mismatch message on Ctrl+click
+- Don't warp mouse to dropdown if it's already there (#5536)
+
+
+### Internationalization
+
+- Localize certain hotkeys (#4784)
+- Disambiguate productionsites' worker(s) missing/coming strings (#4971)
+- Some renamings and string fixes (#4956)
+    - Renamed tundra/taiga terrains
+    - Renaming the “Statistics” labels to “Status”
+    - Some helptext fixes
+- More missing gettext calls in emp04 (#4983)
+- Improved exception reporting (#5003)
+    - Fix exception reporting in the game logic thread.
+    - Adds `--verbose-i18n` flag.
+- Fix Transifex String Issues (#5072, #5399, #5462)
+- Fix Lua `(n|p)gettext` ignoring textdomains (#5080)
+- Properly format `size_t` type printf placeholder (#5096)
+- Tx String and CLI Help Fixes (#5179)
+- More Stringfixes (#5190)
+- Fix unhealthy usage of `split` in language menu (#5241)
+- Skip installing locales when translations are disabled (#5302)
+- Tut01 String Fix (#5327)
+- Military capacity string refactor (#5476)
+- Sort xgettext inputs in translations update
+
+
+### Help and Documentation
+
+- Fix documentation wl (#4920)
+- Add theme image `ending.png` to themes documentation (#4945)
+- Lua doc enhancements (#4984)
+- Add produced wares and workers to productionsites encyclopedia (#5205)
+    - Pulled out code and first working solution
+    - Use visionrange only for militarysites
+    - Fixed documentation for ware_help.lua
+    - Added example fix failure for documentation
+    - Fixed documentation for format_help
+    - Added recuited workers part to Production section
+    - Fixed charcoal burner  and aqua farm help with dummy program
+- Fixed links for documentations svg-images (#5209)
+- World immovables in encyclopedia (#5077)
+    - Made all tribes available for lua
+    - Corrected grapevine size to small to be consistent with other tribe immovables
+    - Changed "Space required:" to "Size:" and added a walkability hint
+    - Cleared the list of world immovables of all immovables with size "none"
+    - Display only one entry per treetype
+    - Filter amazon tree doublettes
+    - Use species as title for trees
+    - Added menu icons for dead and felled tree to be shown as image
+    - Cleared tribes immovables that are fields from world immovables regardless of addon status
+    - Fixed Size text for immovables
+    - Fixed amazons resi menu icon size
+- Atlantean Lore (#5271)
+- `tips/singleplayer.lua`: Reduce use of "Our" (#5349)
+- Add Empire Lore Texts (#5285)
+
+
+### Editor
+
+- Editor toolsize menu: use spinbox instead of custom dialog (#4990)
+- Add offset to editor info windows (#5145)
+- Editor: Add toggle maximum building spaces option (#5220)
+    - Convert all show/hide toggles to use display flags
+- Editor: History of last tool settings (#5365)
+- Enable Enter in Editor Map Options Window (#5503)
+
+
+### Graphics Engine
+
+- Catch crash when preloading minimap (#5021)
+- Fix a texture deletion from wrong thread (#5174)
+- Fix linking the OpenGL library (#5299)
+- Calculate max battle animation height (#5381)
+- Thread safe destructor for Texture `shared_ptr` (#5436)
+- Use SDL Relative Mouse Mode (#5494)
+- Set SDL hint for relative mouse mode (#5504)
+- Support Non-Indexed Terrain Textures (#5545)
+- Use old style name for SDL pixelformat (#5547)
+
+
+### Networking
+
+- Break mutex deadlock in GameClient (#4948)
+- Fix game client deletion crash (#4970)
+- Keep GameController pointer alive for template game (#5128)
+- Replace Boost::Asio → Asio (#5164, #5532)
+- Fix Description Index Misordering from UI Code (#5288)
+- Fix sync report requesting during game startup (#5382)
+
+
+### Build System
+
+- Autogenerate and compare datadir version file (#4853)
+- Make `compile.sh` show help for invalid arguments (#4979)
+- `compile.sh` improvements (#4980)
+    - Implement local default options for `compile.sh`
+    - Argument checking for `-j`
+    - Add an override for every switch
+    - Support custom `-D` options to CMake
+- Add option to skip datadir version check (#4987)
+- Modify compiler static dependencies (#4991, #4992)
+- Linux: only enable backtrace when using glibc (#5011)
+- cmake: add support for None build type (#5010)
+- Added missing direct include (#5025)
+- Fix clang compiler warnings (#5057)
+- Fix compiling error introduced by boost 1.77 (#5063)
+- Honour `--(no|with)-asan`-option regardless of ARGV-order (#5078)
+- Fix Brotli Windows CI Error (#5079)
+- Build System Update (#5085, #5513, #5539)
+    - Silence an undesired naming scheme warning in the SDL2 finding module
+    - Add a customized copy of CMake's deprecated Documentation module as recommended
+    - Update latest g++/clang versions in the CI
+    - Treat enabled compiler warnings as errors in debug builds
+    - Allow silencing compile.sh status messages with `-q`
+- Fix Clang 13 Warnings (#5088)
+- Handle undefined `__WORDSIZE32_SIZE_ULONG` (#5098)
+- Enable ASan in the Testsuite (#5090)
+- Allow validating `appdata.xml` with `appstream-util` if `appstreamcli` is not available (#5084)
+- `appdata.xml`: Add leading `~` to release names as necessary to force proper ordering (#5102)
+- Deprecate Boost (#5101)
+- Refactor String Assembly / Boost Format (#5081)
+- Clean some more clang-tidy checks (#5108, #5131, #5289, #5319)
+- Resolve thread sanitizer issues (#5114)
+    - Increased thread safety using atomic member variables
+    - New compile option to build with TSan
+- Replace Boost Unit Tests (#5122, #5137)
+- Compile on MacOS 11 and M1 Arm Processor (Apple Silicon) (#5112)
+- Fix Frequent Testsuite Timeouts (#5129)
+- Replace `boost::signals2` (#5133, #5144)
+- GitHub MSVC CI Action (#5132)
+- Replace Boost UUID, Boost SHA1, and `std::rand` (#5124)
+- Deploy build artifacts to automated pre-release (#5143)
+- Replace `boost::format` (#5118, #5163, #5178, #5207)
+- Remove `graphic_text_layout` dependency from `io_filesystem` (#5161)
+- Resolve MSVC warnings (#5157)
+- Fix older g++ optimization segfaults (#5176)
+- Fix -O3/-O2 typos (#5187)
+- Dependencies: Asio include handling, Solus support, installation script coverage (#5182, #5524)
+- Don't require Homebrew to be installed at `/usr/local` (#5208)
+- CMakeLists.txt: Use a list for many build flags (#5328)
+- Only use embedded minizip if not installed (#5360, #5392)
+- Put binaries in correct locations when installing (#5359)
+- Enable Include Order Codecheck on Header Files (#5373)
+- Move definition of `WL_INSTALL_BINDIR` (#5383)
+- Remove `SYSTEM` from `target_compile_options` (#5396)
+- CMakeLists.txt: add custom uninstall target (#5358)
+- Resolve relative parts before uninstalling empty dirs (#5417)
+- Reformat version string (remove markdown format) (#5385)
+- Xenial's CMake version does not know `VERSION_GREATER_EQUAL`, use `NOT VERSION_LESS` instead
+- `compile.sh` fix and tweaks (#5465)
+    - Fix non-portable globbing
+    - Add `--dry-run`
+    - Break up the CMake command line for readibility
+- Added new SDL2-image dependencies to static linking (#5472)
+- Added static SDL2 targets for transitioning (#5484)
+- Update screenshots in `appdata.xml` (#5598)
+
+
+### Other Issues
+
+- Command line overhaul (#4806)
+- Multithreading (#4319)
+- Resolve threading race conditions by assigning mutex locking priorities (#4943)
+- Fix more threading-related issues (#4966)
+- Set Windows logging dir in all website main functions (#4973)
+- Continue parsing commandline without datadir (#5134)
+- Allow using `--script` with `--new_game_from_template` (#5153)
+- Extend copyright script to update year in all files (#5188)
+- Add check for missing copyright headers (#5223)
+- Preallocate task stack before program update (#5406)
+- Fix use of vector fill constructor (#5409)
+- Update testsuite compilers and OSs for Jammy (#5415)
+- Integrate AppImage building into CI (#5377)
+- Readme Typo Fixes (#5461)
+- Fix race in use of `logic_thread_locked` (#5419)
+- Disable logging in notifications test (#5490)
+- Fix non-i18n Spelling Issues Reported by Lintian (#5502, #5512)
+
+
+
+## Release 1.0
+
+### Animations, Icons and Overlays
+
+- Optimized pngs (#3959)
+- Improve spritesheet exporting (#3756)
+    - Fix cropping algorithm
+    - Support reexporting spritesheets
+    - Catch mismatch with number of scales in directional animations
+    - Basename is redundant when it's identical to the animation name, so making it optional
+- Frisian toolbar icons (#4231)
+    - Add Frisian toolbar icons
+    - Delete atlantean toolbar
+- Amazon & Frisian graphics (#4554)
+- Tapir & Tapir Farm (#4631)
+- New empire barracks graphics by DragonAtma (#4668)
+- Building animation for empire barracks by DragonAtma (#4695)
+- New barbarians barracks graphics by DragonAtma (#4785)
+- fix graphic glitch in Barbarian flag (#4910)
+- New atlantean barracks graphics by DragonAtma (#4923)
+
+
+### Sounds and Music
+
+- Track `descriptions` instances to fix a sound handler bug (#4687)
+
+
+### Tutorials and Campaigns
+
+- `3997_emp03_messagebox` (#4012)
+    - changed artifact model picture to landscape
+    - fixed div width and alignment
+- Campaign Empire 02: improved scenario continuity (#4038): Trigger mining infrastructure objective when marble mine is done.
+- Fixed a file reference in atl01 scenario (#4157)
+- Fix link to starting conditions for tutorial1 (#4257)
+- Fix image link in first tutorial (#4261)
+- Fix empire04 helptexts by changing an obsolete reference (#4267)
+- Handle additional expedition items in fri01/fri02 (#4330): Allow taking certain wares and workers to fri02
+- Training wheels (#4369, #4406)
+- Wait for field action in flags training wheel (#4472)
+- Fix crashes in seafaring tutorial (#4615)
+- empire 4 script fixes (#4625)
+    - fixed 2 appearances where the resource was mising the resource prefix
+    - fixed mine location. Necessary due to changes in mine spot calculation
+    - Inserted Messages Table
+- Disable training wheels code for v1.0 (#4644)
+- Third frisian scenario (#4550)
+- Fix Trident of Fire player slot detection (#4696)
+- Seafaring tutorial: Explain additional expedition items feature (#4711)
+- Fix hotkeys in tutorials (#4720)
+- Basic Tutorial fixes (#4717)
+- Fri03 Fixes (#4738)
+    - Fix duplicate soldier detection
+    - Add missing translation markups
+- Fix detection of amount of starting gold in fri02 (#4797)
+- Fix typo and outdated instructions in emp03 (#4836)
+- Empire 04 text improvements (#4844, #4847, #4848, #4852)
+- Better fri03 placeholder portraits (#4891)
+- Make fri03 starting port indestructible (#4874)
+
+
+### Scripting
+
+- Parse production outputs (#3983)
+    - Deduce building outputs from worker and productionsite programs
+    - Remove outputs tables from Lua
+- Replace buildferry with createbob
+- Stack lua textdomains in C++ (#4006)
+    - Stack lua textdomains in C++
+    - Push and pop correct textdomains for custom scenario buildings
+- Detect work area overlaps from MapObject programs (#4014)
+    - Use information from WorkerProgram, ImmovableProgram and ProductionSiteProgram to calculate work area overlaps
+    - Distinguish competing, supported and supporting productionsites
+    - Get rid of default attributes to unclutter the code
+- Animation duration units (#4044)
+    - Implement more human-readable duration units for `animate` programs, e.g. `duration:1m20s500ms`.
+    - Only the interesting units needs to be specified, e.g. as `duration:35s`.
+- Correct shipwright's work area (#4048)
+- Add "success:" prefix to number parameters in "grow", "remove" and "transform" immovable programs (#4007)
+- Change probability Lua specification from `[0, 255]` to percentage for `transform` and `remove` programs.
+- Transform and remove by percent (#4070)
+- Rename main immovable program to 'main' (#4086)
+- New syntax for productionsite construct program (#4118)
+- The worker experience parameter is now optional.
+- Use named parameters in ActMine (#4099)
+- Convert ambient sound specification to percent notation (#4081)
+    - Sound priorities now have the range `0.1% - 100%` with new optional parameter `allow_multiple`
+    - Get rid of silent sound files
+    - Make priority mandatory
+- Rename main productionsite program to 'main' (#4119)
+    - Shift check for `ActCall` to after all programs are loaded, so we can call them now anything we like.
+    - Check that productionsites have a `main` program defined.
+- New API for remaining Worker programs (#4124)
+    - breed
+    - mine
+    - repeatsearch
+    - scout
+- New API for remaining Immovable programs (#4131)
+    - `seed=<immovable_name> proximity:<percent>`
+    - Fix datatypes for probability ranges
+    - Update documentation
+- New API for trainingsite programs (#4126)
+    - Redesign training programd & add some checks
+    - Calculate min/max levels from action
+    - Update documentation
+- Get rid of `add_animation`/`add_directional_animation` functions (#4137)
+- Separate the definitions of each tribe into separate files (#4134)
+    - Get rid of global init and preload files
+    - Define each tribe separately in a `tribes/<tribe_name>` directory
+    - Shift starting condition and image files into each tribe's directory
+    - Shift wares' and workers' `default_target_quantity` and `preciousness` to tribe definitions
+    - Reduce number of disk reading operations in game loading screens
+- fix fishermens resource name (#4200)
+- Define enhancement cost in base building (#4156)
+- Update eris to `1566f6cfa027694941fb34229048e9b576aaa8e5` (#4243)
+- Make terrain dither layer unique to prevent hard edges (#4281)
+- fix territorial messages by resetting last winning candidate values if no winner candidate available (#4333)
+- Zap `luaopen_eris` compiler warning (#4351)
+- Cleanup messages (#4386)
+    - renamed `LuaMessage` to `LuaInboxMessage`; `wl.game.Message` to `wl.game.InboxMessage`
+    - adjusted main scripting files
+    - documentation tweaks
+- Unify tribes world (#4240)
+    - Replace `Tribes` and `World` with `Descriptions`
+    - Consistent function naming in `Descriptions`
+    - No longer distinguish tribe from world immovables
+- Merge `wl.World()` and `wl.Tribes()` (#4412)
+- Rename Lua `tribes` object to `descriptions` (#4416)
+- Implement percent notation for animation sound probability (#4423)
+- Shift asserts in ActTrain to get the log message first for debugging
+- Add support for running training wheels in scenarios (#4470)
+- Fix Amazons ferry program (#4492)
+- Allow hiding fields that are seen by units (#4478)
+- Fix argument position in `campaign_message_box` (#4517)
+    - Make the window's position centered when unspecified.
+    - This solution removes also some magic numbers for moving the window(s) to the right or to the bottom by getting the width and height of the main window through `wl.ui.MapView()`.
+- Allow hiding players from the general statistics menu via Lua (#4520)
+- Tweak ATL New World start (#4613)
+- Show initial status message for win conditions (#4633)
+- New lua methods & properties (#4584)
+- Win conditions fixes (#4648)
+- Expose win condition name to Lua (#4675)
+- HQ Hunter fix (#4683): destroy also conquered milsites
+- fix a variable conflict (#4701)
+- Discovery and New World starting conditions for amazons (#4705)
+- Make atlantean Discovery start easier (#4709)
+- Fix artifact messages (#4727)
+- Fix amazons fortified village (#4793)
+- Add ordered iteration for lua tables (#4818)
+- Fix scenario vision bugs (#4832): Added a new option `hide_fields` to unreveal and unexplore fields rather then completely hiding them
+- Allow defining target quantity and preciousness for add-on wares and workers (#4825)
+
+
+### Maps
+
+- Update Crossing The Horizon hint (#4008)
+- Fix incorrect allows_seafaring detection (#4082)
+- Fix nodecaps calculation error (#4033)
+    - Update Long Long Way volcanoes minable areas
+- Rephrase some map hints (#4211)
+- Update Europa Map to v1.2 (#4506)
+- Remove version numbers from all maps' file names
+- Adjust field size for mountains (#4562)
+- v1.0 Maps Review (#4634)
+    - New map Lesser Ring
+    - Updated map Wide World
+    - Deleted map Sun of Fire
+    - Marked Desert Tournament as unbalanced and renamed it
+- Adapt maps' minimum version number (#4646)
+
+
+### Saveloading
+
+- Replace unknown programs with "work" while saveloading (#3961)
+- Add some scenario savegame compabitility (#3963)
+    - Scenario tribes
+    - reveal_scenario
+- Rip out savegame compatibility code (#3980)
+- Fix map compatibility for MapObject Loaders (#4028)
+- Fix game saving crash in spectator mode (#4095)
+- Speedup player vision packet (#4113): Combine fields data into long strings
+- Skip redundant information in view packet (#4144)
+- Fix loading critters + resources
+    - Fix loading critters from map + fix an example
+    - Fis resources in lua_bases
+- Write timestamps in zip filesystem (#4193)
+- Fail gracefully on Lua PANIC (#4147)
+- Fix description loading in LuaBases (#4182)
+- Fix the `stol` saveloading issue (#4387)
+- Rediscover kVisible fields when loading the game (#4395)
+- Fix Lua savegame compatibility (#4437)
+- Unify legacy lookup tables (#4415)
+    - Merge `WorldLegacyLookupTable` and `TribesLegacyLookupTable` into `DescriptionsCompatibilityTable`.
+    - Let `Descriptions` handle the lookup to make the saveloading code easier to read
+- Fix savegame compatibility #4482 (#4483)
+- Saveload lua textdomain stack (#4461): Persist textdomain stack in scripting packet
+- Fix saveloading in economy options window (#4498)
+- Fix loading saves with see_all players (#4525)
+- Saveload `TrainingSite::checked_soldier_training_` to fix a crash (#4524)
+- Delete a dead function that causes savegame loading errors
+- Allow savegames anywhere (#4515)
+- Increase player info packet version (#4581)
+- Warn about replay version mismatch (#4605)
+- Fix S2 map loader to load stones correctly (#4619)
+- Add missing postload call for replays (#4616)
+- Hotfix for savegame compatibility #4273 (#4706)
+- Immovable savegame compatibility (#4690)
+- Reduce crashes from missing add-on dependencies (#4710)
+- Don't store Script add-ons in savegames (#4811)
+- Fix missing compatibility lookups during gameloading (#4862)
+- Fix additional expedition items saveloading (#4921)
+
+
+### AI
+
+- Fix a crash due to wrong AI Hint (#4191)
+- Give the AI its own namespace (#4225)
+- Quick AI fix to avoid crashes (#4388)
+- AI quick fix (#4401)
+- Read mining information for help & AI (#4489)
+    - Read AI mining hints from production program
+    - Add building name to deprecation messages
+    - Automate mining percentages in building help
+    - mines_percent is unused, so removing it
+- Trainingsites only evaluate fish/meat substitutes if present in inputs (#4641)
+- Delay AI initalization after scenario init (#4656)
+- Fixed an unsafe AI time operation (#4749)
+- AI production support (#4618)
+    - Deprecate `collects_ware_from_map` AI hint
+    - Deprecate `supports_production_of` AI hint
+    - Add support for multiple lumberjack/ranger pairs
+    - Get rid of dirty hack for rare tree cutter/plantation. `amazons_rare_tree_plantation` no longer needs supporters, but the `rare_tree_cutters_hut` still does
+    - Fix miscategorization of Frisian Fishers being supported by clay pits
+    - `frisians_reed_farm` is now detected as supporting the `frisians_beekeepers_house`
+    - Hotfix for Amazon trainingsites
+    - New property `needed_attributes` for productionsites when the immovable doesn't get removed from the map
+    - Get rid of hard-coded work area radius when detecting useful immovables near a building
+    - If a building has no input but some output wares and creates no immovables, but collects some:
+        - If it produces a construction material
+            - If it has supporters -> lumberjack
+            - If it has no supporters -> quarry
+        - If it produces ware that is not a construction material -> needs berry
+    - A hunter collects and bob from the map. This adds `amazons_hunter_gatherers_hut` to the list
+    - If needs water and collects "resource_fish" -> fisher
+    - If a building has no input and it produces "water" -> well
+    - If a building supports a lumberjack, it's a ranger
+    - introduce `number_of_same_nearby` to identify nearby buildings of same type
+    - if upgrade building needs supporters take this into consideration
+    - fixes some values in training to make the AI train amazons
+    - minor updates of basic amounts and other lua values
+
+
+- Fix AI handling of amazon water gatherer (#4753)
+
+
+### Gameplay
+
+- Fix 1% too-high soldier evade (#3911)
+- Set correct WorkerQueue Economy after economy split (#3939)
+- Ignore multiple enhance commands (#3953)
+- Fixed two desyncs in New World & Discovery (#3976)
+- Clever Critters (#3718)
+    - Critters can reproduce
+    - Carnivores can eat other critters
+    - Herbivores can eat on farm fields, delaying their growth
+    - Improved critters roaming algorithm
+    - Critters die of old age
+- Immediately-upgraded constructionsites burn no longer (#3988)
+- Clear space for portdocks (#3994)
+- Fix ware/worker economy mismatch in `set_target_quantity` (#4003)
+    - Catch economy type mismatch in `Economy::set_target_quantity`
+    - AI only sets default quantity targets for ware economies
+- Fix a crash after cancelling an expedition when no port is left (#4027)
+- Disallow enhancing conquered enemy militarysites (#4029)
+- Increase critter death chance in crowded regions (#4042)
+- Unblock soldiers (#4037): Allow soldiers to pass other soldiers if they are not fighting
+- Refactor playerfields visibility (#4046)
+- Fix carriers keeping wares (#4076)
+- Increased the chance that fugitive workers return to their homeland
+- Follow-up cornercase fix against carriers keeping wares (#4104)
+- Remember dismantlesite's state when unseeing a field (#4114)
+    - Remember dismantlesite's state when unseeing a field
+    - Performance tweak regarding rendering of unexplored fields (#4122)
+- Tribes filtering (#3693): Only load the tribes that are actually being used.
+    - Map object types are registered in a new class `DescriptionManager`
+    - Each tribe only gets loaded when a player is playing as that tribe
+    - Buildings and immovables can still be placed via Lua, e.g. we can place a `frisian_fortress` if nobody is playing Frisians. If they need immovables with an attribute, these are loaded dynamically via the attribute.
+    - Support for custom scenario wares as well as workers and buildings
+    - Support for overwriting default units via scenario code
+    - Fix subdirectory handling in zip file system
+    - Player statistics and allowed ware/worker types are now stored in maps rather than vectors
+    - Make success of `LuaFlag::set_wares` independent of wares order
+    - Clean up some superfluous includes
+    - New test scenario that places all tribes' buildings
+    - Added new tests to market scenario and lua_testsuite for foreign and custom units
+    - Added a script for bulk renaming files with `git mv`. It just somehow ended up in this branch...
+    - For each init.lua, there is a `register.lua` which registers the names and attributes with the engine.
+    - Custom scenario units to be added to a tribe are now defined via a table rather than special Lua functions
+    - If you're overwriting a default unit without assigning it to a different tribe, just place an `init.lua` and `register.lua` below `<scenario>/scripting/tribes`. There's no need to list it in `<scenario>/scripting/tribes/init.lua` as well.
+- Load world units on demand (#4148)
+    - World map object descriptions are now registered via `register.lua`
+    - World map object descriptions are loaded on map load
+    - Split terrains into separate files so that they can be loaded separately
+    - Reorganize files according to editor category
+    - `world/init.lua` now defines the editor category members
+    - Map objects no longer know about their editor categories
+    - Internal map object names now need to be globally unique
+        - Rename all resources, e.g. `coal` -> `resource_coal` to fix conflicts with wares
+        - Rename `ashes` terrain to `ashes1` to fix conflict with tribe immovable
+    - Bottom-align icons in editor tools
+- Option to let players choose their own starting position (#4158)
+- Trigger economy rebalancing on warehouse policy change (#4155)
+- Disallow ferries to swim on lava (#4176)
+- Target workers to immovables (#4209)
+- Fix heap use after free in ShipFleet (#4247)
+- Optimize player vision, part 1 (#4270)
+- Fix vision glitches (#4283)
+- Immovable targeting fixes (#4302)
+- Unload expeditions at once (#4313)
+- Fix a typo in an assert introduced in #4302
+- Optimize player vision, part 2 (#4287)
+- Remove unneeded NEVER_HERE in Vision (#4394)
+- Wares/Workers Cheats (#4376)
+- Change geologist's mountain definition (#4391)
+- Ware Priority Improvements (#4441): Redesigned the input queue display from scratch and tidied up the priority backend. New priorites "Very High" (always served first) and "Very Low" (served only when there are no open requests with higher priority).
+- New tribe: Amazons (#4424)
+- Amazon fixes (#4473)
+- Fix crash after evicting a worker (#4496)
+- Update partially seen buildings' visibility when placed/removed (#4521)
+- Add-Ons (#4464)
+- Some more add-on features (#4541)
+    - Add-On sub-versions in the form 1.2.3
+    - More modding functions
+    - Add-On manager layouting tweaks
+    - new namespace AddOns
+- adding productivity threshhold to amazon stonecutter_hut (#4583)
+    - fix bug 4580 by adopting amazons stonecutters hut to other quarries
+    - fixed amazon scout gender form
+- Targeted Scouting (#4493)
+- Fix crash when worker's terraform program fails (#4571)
+- Amazons fixes (#4621)
+- Fix distribution of idle ships to ports (#4623)
+- Fix two crashes with tribe add-ons (#4682)
+- Allow starting game from template (#4702)
+- Support custom tribes in add-ons (#4708)
+    - Support custom tribes in add-ons
+    - Make collectors at last compatible with custom tribes
+    - Disallow AI players for unsuited tribes
+    - Update tribe dropdown when setting AI
+- Shorten the ripe stage of barley fields (#4712)
+- doubled trainers patience due to cycles failing quicker (#4726)
+- renamed Youth Gathering to Initiation Site (#4739)
+- Fix duplicate description registries by add-ons (#4767)
+- Fix replays and savegames with add-on tribes (#4766)
+- Fix add-on compatibility issues in random match setup (#4835)
+    - Add some notes to the random match setup menu
+    - Prevent crashes with invalid add-on
+- Fix several add-on cornercase crashes (#4827)
+    - 2 crashes with MP games with add-ons
+    - 1 in SP scenarios
+    - 1 with custom building enhancements
+    - 1 with custom worker enhancements
+- Rename Cassava Root Field/Plantation → Cassava Field/Plantation (#4850)
+- Quickfix against workers reoccupying the building they were evicted from (#4890)
+- Fix workers gaining experience for idling (#4905)
+
+
+### User Interface
+
+- Fix a WException when shift-clicking constructionsite WareQueues (#3949)
+- Fix UI bugs (#3970)
+    - Fix diverse gettext markup bugs where translations weren't being displayed
+    - Fix textures for stones resources
+    - Remove pngrewrite from PNG optimization tools, because it broke the textures
+    - Deactivate translation catalogue updates
+    - 1 new translatable string in loader UI
+- Don't add a dismantle button when no wares will be returned (#3987)
+- Additional Expedition Items dropdown sorting order (#4011)
+    - Sort additional items dropdowns by item descname
+    - Exclude ferries from the dropdowns
+- Continue button in main menu (#4010)
+- Button to toggle buildings visibility (#4017)
+- Forbid destroying expedition port construction sites (#4039)
+- Add buttons to mute/unmute buildings (#4034): Mute/unmute buildings' "out of resources" messages per building, or for all buildings of the same type
+- Add new option: Allow diagonal scrolling with numeric keypad (#4050)
+- Soldier statistics window (#4018)
+- Only show MultilineTextarea scrollbar when really needed (#4068)
+- Fix disappearing language stats (#4075)
+- Draw window frames with a different colour when focused (#4077)
+- Show buildhelp semi-transparent on PreviouslySeen nodes (#4083)
+- Remember the active tab when starting/stopping a building (#4111)
+- Fixes minimap revealing unseen enemy buildings
+- Show partially seen buildings in main view (#4105)
+- Rebuild show/hide menu when toggling via hotkeys (#4116)
+    - Rebuild show/hide menu when toggling via hotkeys
+    - Don't close menus when pressing hotkeys
+- Stop text input fields consuming some hotkeys (#4117)
+- Fix detecting whether dropdown fits on screen (#4123)
+- Finalize ware selection when mouse leaves WareDisplay (#4129)
+- Fix fullscreen switching for Internet lobby (#4128)
+    - FullscreenMenuInternetLobby now relayouts itself on resolution changes
+    - Fix focus toggling for editboxes
+- Make the Widelands window resizable (#4125)
+    - Make the Widelands window resizable
+    - Increase panel size asserts to 10000
+    - Remove `size >= 0` asserts
+- Fix ware indices in ware statistic menu (#4149)
+- Extend keyboard support (#4145): Extend keyboard and focus support to most UI elements where it makes sense, and fixes some bugs in focus passing with the Tab key.
+    - Expose PageUp, PageDown, Home, End, and Mousewheel to BaseListSelect
+    - Allow checkboxes, spinners and sliders to gain focus
+    - Fix focus transferring
+    - Allow buttons to gain focus and fix duplicate calls to child elements
+    - Don't let dropdowns grab the focus when closing
+- Load About screen tab contents on demand (#4163)
+- Only show .wgf files in load/save menu (#4192)
+    - Only show .wgf files in load/save menu to remove incompatibility warnings for files, which clearly are no save games.
+    - Also works for loading replays, where a .wrpl file has to have a corresponding .wgf file.
+- Improve `UI::Box` (#4188): Add support for deletion of panels for `UI::Box` and ignoring invisible panels while layouting.
+- Reset dropdown list selection when toggled off (#4205)
+- Add copy paste support (#4074)
+- Focus tweaks (#4197)
+- Fix BaseListselect key handling when no entry selected (#4213)
+- Fix window resizing problems (#4183)
+    - Save maximized state and unmaximized window size on exit
+    - Set window as not resizable before resizing it
+    - Add Fullscreen and Maximized to Window Size dropdown
+    - Set window as not resizable and don't change its size when toggling fullscreen
+    - Disable resizable window when compiled with SDL < 2.0.5
+- Map preview on selection screen (#4201)
+    - Show map preview in new game screen and replays
+    - Use faster map loading for website info
+    - Render starting positions
+- take invisble items into account again (#4249)
+- Improve debug window (#4244)
+    - Fix scrolling (#4167)
+    - Open bobs with double click
+    - Change structs to classes
+- Redesign splash screen and main menu (#4080)
+    - Let splash screen fade out after a few seconds
+    - Redesign main menu
+    - Convert About and Options to modal windows
+    - Ugly hack to fix dropdowns
+    - Add some screenshots as main menu backgrounds and use photographs for loading screens.
+- Fix windows moving on their own when docking is enabled (#4272)
+- Toolbar fix (#4277): Fix toolbar tabbing order and issues with mixing mouse and keyboard controls
+- Default show hide options (#4262)
+- Default-initialize display flags when no config file exists
+- Overhaul of SP and MP launch game screen (#3847)
+- Faster minimap previews (#4299)
+    - Improve minimap rendering speed
+    - Cache rendered minimaps
+- Handle GameDataError during preview rendering (#4315)
+- Do not layout invisible items (#4260)
+- Refactor string assembly in MapDetailsBox (#4301)
+- Make ProgressWindow respond to window resizing (#4310)
+- Cleanup LaunchSPG (#4320)
+- Refactor checkbox layouting (#4321)
+- improve layout in game setup (#4331)
+- Draw checkbox borders on top of focus overlay (#4292)
+- Clear minimap icon on multiselect (#4342)
+- Categorize loadscreens with map-specific themes (#4304)
+- Generalize building- and ship windows to use InteractiveBase (#4282)
+- Box Layouting Fixes (#4357)
+- Fast fix for the drop up menu bug #4341  (#4363)
+    - Open menu and show message box instantly
+    - Add a method that shows an item from dropdown menu.
+    - New method highlights menu items step by step until the target is reached.
+    - Change the instructions of tutorial 1 to match with its actions.
+- Fix WareStatisticsMenu main box assert (#4393)
+- Random matches & Editor launching convenience (#4289)
+    - Allow quick generating of random matches against AIs, and ask editor users to choose their first action before launching the editor
+    - Beautify random map menu
+- Table/Tabpanel Navigation (#4385)
+    - Implement mousewheel support for TabPanel and fix arrow keys for Table
+    - Implement PageUp, PageDown, Home, End for Table
+    - Let TabPanel ignore Left/Right, use Ctrl(+Shift)+Tab instead
+- Overhaul building statistics menu (#4390)
+- Add tooltips to tablerows (#4358)
+- Draw road length tooltip in road building mode (#4381)
+- Focus indicator tweaks (#4366)
+    - Tweak focus indicator display for buttons, dropdowns, and stateboxes
+    - Don't darken pictorial statebox icons
+    - Put focus on scrollbar instead of MultilineTextarea
+- Add economy options button to warehouses (#4379)
+- Main Menu Redesign, Part 2 (#4274)
+- Split minimap rendering into stages (#4435)
+- Main Menu Redesign, Part 3 (#4425)
+- Reset individual training wheels (#4408): Add Options window for deactivating/reactivating individual training wheels
+- More box layouting (#4411): Introduce a small inheritance tree of classes that use nested UI::Boxes to avoid any magic numbers and make all setup screens look alike regarding basic widget alignment, padding, etc
+- Tweak low productivity threshold in building statistics UI (#4436)
+    - Tweak low productivity display in building statistics
+    - Tweak spinbox padding calculations
+- Change ware queue priority colors to heatmap (#4467)
+- Fix missing spinbox labels in random map window (#4485)
+- Fix tooltip position (#4491)
+- Fixes for mark/unmark button in training wheel options (#4475)
+- Option to destroy attack target instead of conquering (#4477)
+- Scale minimap based on the maximum of width and height of map. (#4495)
+- Minimap: Use two rows if there are less than 120 pixels available for six buttons (#4536)
+- Inform about required restart after installing world add-ons (#4539)
+- Refactor toolbar and overlay strings to an info panel (#4526)
+- Accessibility Options (#4530)
+    - New option to scroll the map view when the mouse cursor is near the screen edge
+    - New option for sticky tooltips: Tooltips stay visible and fixed in place, and can then be made to disappear by clicking anywhere or pressing F2
+- Fix two info panel crashes (#4559)
+- Move mouse to the place flag button consistently (#4561)
+- Main Menu Redesign, Part 4 (#4518)
+- Allow configuring playercolor (#4549)
+- Fix double-deletion of message previews (#4577)
+- Main Menu Redesign, Part 5 (#4572)
+- Color chooser enhancements (#4582)
+- Color Chooser: Mouse drag support & Enter key (#4591)
+- Switch UI themes (#4569)
+- Ensure at least one statistics data point (#4593)
+- move caret with mouse click in editbox (#4578)
+- Disallow random matches if starting positions are too close (#4592)
+- Fix statistics plots player colours (#4600)
+- Fix Enter/Esc consistency issues (#4597)
+- Fix crash in seafaring stats menu (#4609)
+- Add-Ons: Screenshots and voting stats (#4552)
+- Fix forwarding of keypresses in main menu (#4620)
+- Move autosave messages to info panel (#4614)
+- Fix game tips display (#4624)
+- Configurable keyboard shortcuts (#4476)
+- Indicate stock/target amount relations and trends in stock menu (#4529)
+- Configurable Keyboard Shortcuts, Part 2 & 3 (#4637, #4640)
+    - Use Cmd instead of Ctrl as default modifier on MacOS
+- implement caret positioning via mouse (#4649)
+- Add-Ons Packager (#4603)
+- Fix statistics string cache (#4653)
+- Fix LAN shortcut in main menu (#4658)
+- Disable player and tribe buttons in scenario setup (#4663)
+- Select text via mouse (#4660)
+- Update hero/rookie radiobuttons (#4657)
+- Generalize addon packager (#4667)
+- Campaign editing (#4678)
+- Multiplayer setup UI fixes (#4691)
+- Set minimal progress value in add-on packager (#4714)
+- Toggle preserve wares default behaviour with Shift (#4719)
+- Relayout stock menu on tab change (#4724)
+- Fix scrolling in gamedetails and mapdetails (#4742)
+- Fix save game menu buttons (#4751)
+- Disable Autofix Dependencies v1.0 (#4736)
+- Fix crash on invalid screenshot (#4764)
+- No custom starting positions for Discovery (#4765)
+- Add-Ons: Get rid of required restarts (#4758): Rebuild the texture atlas instead, and be more intelligent about detecting whether this is required.
+- Fix MP dropdown conditions (#4780)
+- Prevent large dropdowns dropping out of the screen (#4782)
+- Add text size checks in multiline editbox (#4800)
+- Add missing richtext escape for map descriptions (#4817)
+- Fix initial info panel text visibility (#4810)
+- Don't let invisible panels handle keys (#4826)
+- Don't jump to undefined landmarks (#4855)
+
+
+### Internationalization
+
+- Fix some bugs flagged up by the translation validator
+- Ship Localization (#4040)
+    - Localize shipnames
+    - Shipname consistency in network games
+    - Show roaming and idle ships as "empty"
+- Add localedir parameter (#4112)
+- Force pull and skip timestamp-only changes to po directory
+- Fix problems with git lockfile during translation updates
+- Get rid of duplicate translation fetching for tribes (#4170)
+    - Get rid of duplicate translation fetching for tribes
+    - Add examples to documentation
+- Get rid of duplicate translation fetching for world (#4171)
+- Fix poor hamlet warning message localization (#4293)
+- Fix lua ngettext textdomain recognition
+- Tribe descnames are already localized when loading the tribe info. (#4336)
+- Fix statistics button translation (#4337): Dump the lua value untranslated and let C++ do the translation
+- fix player name (#4354)
+- Fix typography in tribes (#4474)
+- Add missing translators comments (#4487)
+- Disambiguate helptexts for soldier-related buildings (#4499)
+- Disambiguate soldier strings in training site tooltips (#4501)
+- Disambiguate militarysite statistics for tribes (#4502)
+    - Disambiguate militarysite census for tribes via Lua scripts
+    - Cache statistics strings to we don't have to keep running the Lua scripts
+- Fix Lua npgettext
+- Amazons string fixes (#4507)
+- Disambiguate messages sent by military sites (#4511)
+- Replace remaining occurrences of `set_textdomain` (#4512)
+- Improve profile handling of translatable strings (#4547)
+    - Saved maps' name, descr and hint are now always marked for translation. The author is by default not translated, but if the markup is added manually it will be readded when saving.
+    - As a side-effect this branch allows us to remove redundant strings from add-on config files.
+- Add missing textdomain calls (#4643, #4652)
+- Localize timestamps of remote add-ons (#4700)
+- Send localized cheating messages (#4462)
+- Fixed string issues (#4005, #4723, #4728, #4731, #4752, #4770, #4808, #4846)
+- Catch exception on invalid locale (#4725)
+- Fix textdomains for add-on maps and support localized map set directory names (#4743)
+- Fix npgettext textdomains for add-ons (#4762)
+- Tribe-specific No Scout Hut Connected hint (#4770)
+- Fix textdomain for keyboard shortcuts (#4799)
+- Fix skipping of one-liner diffs in translation updates
+- Add missing `pgettext` calls in emp04 (#4830)
+
+
+### Help and Documentation
+
+- fixed the helptext_note for frisian beekeeper (#3967)
+- Corrections to Mask and Warhelm descriptions (#3896)
+- Shift production program documentation to source code. (#4045)
+    - Shift production program documentation to source code
+    - Add documentation for construct and recruit
+- Document animations (#4059)
+    - Add documentation for `duration` data type to scripting reference
+    - Shift `animate=` documentation to central location
+    - Add deprecation warnings
+    - Fix Empire scenario 4
+- Add "becomes" to immovable help (#4071)
+    - Add immovable transformations to Tribes Encyclopedia
+    - Expose ShipDescr to Lua
+    - Add some checks for validating immovable transformations
+- Program documentation (#4140)
+    - Update Production Program documentation
+    - Modernize program code for empire scenario 4
+- Fix help for atlantean labyrinth (#4165)
+- adopted mines hint to use new resource names
+- Shift tribe helptexts (#4153): Shift tribe helptexts to `units.lua` in order to move the tribe-dependent information out of units.
+- Delete obsolete helptexts (#4206)
+- Enhance production site help (#4088)
+    - Add "creates" and "collects" sections to productionsites in the Encyclopedia
+    - Use created/collected info to add some purpose icons
+    - Add menu icons to rocks
+    - Make tree menu icons smaller
+    - Add regression tests for supporting/supported productionsites
+- Fix typos in comments, messages, documentation (#4221)
+- Fix representative images in building help (#4298)
+- Removed outdated reference to number of tribes (#4312)
+- Add helptexts for Frisian immovables (#4361)
+    - Add helptexts for berry bushes
+    - Add pond helptexts
+    - Add explanation for flowering
+- Fix lua doc for custom buildings (#4371)
+- Start fixing encyclopedia strings (#4551)
+- Themes: Docs & Fail Safe (#4594): Fail safe on missing template images, and write documentation for theme definitions
+- added info about ports vulnerability to port helptexts and empire 03 (#4665)
+- added documentation for start conditions
+- Clean up helptexts files (#4756)
+- Reworked RST for `lua_game.cc` (#4773)
+- Add-Ons: More verbose documentation (#4758)
+- Fix documentation 2 (#4776)
+- Document `LuaDescriptions::modify_unit` (#4807)
+- Fix documentation 3 (#4798)
+- Fix documentation `wlmaps` (#4822): Make MapObjectDescription understandable
+- Remove pseudo classes HasXy's (#4865)
+
+
+### Editor
+
+- Fix editor player menu glitches (#4031)
+- Fix editor MapOptions tabbing order (#4035)
+- Editor Suggested Teams Box (#4023): Add Editor UI for defining suggested teams
+- Editor MainMenuLoadOrSaveMap Tweaks (#4101)
+    - Use dropdown to select between (localized) map names and filenames
+    - Default to (localized) map names
+- Add terrain affinity to editor tooltips (#4185)
+    - Show preferred terrains tooltips when placing immovables
+    - Add tree tooltip to terrain help
+    - Remove obsolete 'likes trees' workaround
+- Fix random map generator terrain selection (#4290)
+- Use basic tribe info in editor player menu (#4428)
+- Tweak some random map terrain definitions (#4449)
+- Random map menu tweaks (#4469): Predefined profiles for Default, Alpine, Atoll, Wasteland, Random
+- Resize minimap when map size changes to prevent a crash (#4519)
+- Resize minimap on map creation (#4560)
+- Fix crash when using debug console in editor (#4737)
+- Make editor toolsize hotkeys configurable (#4769)
+- Fix crash when loading map with not installed add-on in editor (#4900)
+- Catch more editor exceptions gracefully (#4902)
+
+
+### Graphics Engine
+
+- Fix spritesheet representative image display (#3972)
+- Fix coordinate maths error in road graphics (#4032)
+- Fix `GL_SHADING_LANGUAGE_VERSION` parsing (#4058)
+    - The version number may be followed by vendor-specific information after a space.
+    - This fix ensures that it's not glued to the minor version number, which would break lexical_cast.
+- Fix z-layering glitches of roads (#4049)
+- Use player fields for terrain rendering (#4036)
+- Fix terrain glitches in `see_all` mode (#4084)
+- Clamp textures to fix artifacts at edges (#4107)
+- Remove bytes per pixel check and improve graphics report (#4115)
+    - Remove bytes per pixel check and improve graphics report
+    - Improve Codecheck %z detection
+- Add advdef to optimize png (#4150)
+- Fix blurry sprite rendering at 1x zoom (#4169)
+    - Align the sprites to whole pixels when at 1x zoom to get pixel-perfect rendering.
+    - Tweak mouse wheel zooming formula so when we zoom the same number of steps in and out we end up at the same zoom we started at.
+- Deactivate optipng
+- Fix text baseline and vertical alignment (#4133)
+    - Determine the real ascent of a rendered string.
+    - Valign: When aligning text make sure all text nodes in a line are aligned to the same baseline.
+    - Valign: Change bottom alignment of images to align to the very bottom, not to the text baseline.
+    - Valign: Top and center alignment were moving some nodes too far up. This was fixed.
+- Add tests for spritesheet and file animations (#4064)
+- Fix ImageCache/FontHandler initialization order (#4252)
+- Fix garbage at sprite edges in tree spritesheets (#4372)
+- Optimize drawing overlapping workareas (#4439)
+- Set swap interval to 0 (#4430): This reduces graphics latency
+- Add-ons performance tweaks (#4694)
+- Warn&Exit on too old OpenGL version (#4666)
+
+
+### Networking
+
+- Fixing not being able to load multiplayer games. (#4402)
+- Remove wrong assert in came client (#4443): The information comes from the host at a later point, so we can't guarantee it.
+- Chat recipients (#4344)
+    - Added dropdown menu to select the recipient of a chat message.
+    - Allow sending chat messages to all team members at once.
+    - Implement auto-complete for player names in chat with ctrl+space or double-space.
+- Fix LAN mapname localization (#4567)
+- Add missing postload call (#4568)
+- Fix heap-use-after-free in LaunchMPG (#4587)
+- MP: Do not load empty map (#4680)
+- Add-Ons Sync Safety (#4685)
+- Enforce host's choice of add-ons on clients (#4692)
+- No message box on `CLIENT_LEFT_GAME` (#4703)
+- MP Fixes (#4716)
+- Request no bug report for expected disconnects (#4722)
+- Fix desyncs with tribe add-ons (#4777)
+- Fix uncaught exception on MP add-on mismatches (#4885)
+
+
+### Build System
+
+- Fix snprintf error for Windows build (#3916)
+- Fix Clang compiler warnings (#3991)
+- Update keyring of MSYS2
+- Enforce clang-tidy checks to clean up the codebase (#4025)
+- Add -flto optimization flag with gcc, when building without debugging (=Release)
+- Add cross-compile-unit optimization with Linux GCC. (#3879)
+- Move MS-Windows and MacOS packaging and integration, clang-tidy checks, and testsuites to GitHub actions
+- CMake Cleanups (#4100)
+    - correct naming of Intl variables
+    - remove outdated cmake module
+    - glew fixes
+    - more variable changes and modules
+    - use targets for sdl2_image|ttf|mixer
+    - module/config mode is implicit
+    - SDL2 itself checks for threads (if not on OSX)
+    - correct SDL2 linking
+    - set minimum cmake version to 3.9 (cmake on the trusty images on travis)
+- Build a static linked executable with msys2 (Appveyor&Github Workflow) (#3982)
+- allow building on Xenial daily ppa
+- Update CMakeLists.txt (#4161)
+    - lower Cmake requirment to 3.5
+    - re-include the FindICU module for cmake older than 3.7
+    - show cmake version
+- Clean up includes
+- Fix CMake packages on Xenial (#4181)
+- fixed usage of static glew (#4195)
+- Update compiler minimum versions
+- Include `<cstdlib>` in files that need it (#4219, #4218)
+- Fixes "error: chosen constructor is explicit in copy-initialization" (#4220)
+- Replace boost::regex with std::regex (#4199)
+    - Replace `boost:regex` with `std::regex`
+    - Upgrade minimum requirement from clang5 to clang6
+- fix appveyor cmake (#4246): install msys2 cmake rather then using windows installed one
+- Add codecheck rule for image files (#4063): Added a codecheck rule to check if images exist. Only image files that can be found via string literals are being checked.
+- Add Codecheck rule for `<cstdlib>` to make `libc++` happy (#4223): Add codecheck rule to ensure cstdlib for older Macs
+- Fix Codecheck `<cstdlib>` error message (#4264)
+    - Fix Codecheck `<cstdlib>` error message
+    - Strip whitespace from function names
+- revert the cmake installation to use system cmake again
+- Improve testsuite error handling (#4326)
+- Convert `\` in windows path to `/` (#4389)
+- Fix transient SDL error handling (#4414)
+- Strip comments in codecheck rule (#4481)
+- MSVC support (VS 2019) (#4420)
+- Add curl dependency
+- added libdeflate as static library where tiff is to be linked (#4573)
+- Fix linking with opus (#4789)
+- Fix MinGW revision detection and linking (#4870)
+- Fix codecheck path magic (#4895)
+
+
+### Other Issues
+
+- Use Ubuntu 20.04 for code formatting (#3946)
+- Switch to new version scheme (#4001)
+- Use std::make_pair when inserting elements into maps (#4066)
+- Turn some enums into enum classes (#4079)
+- Removed unused enum `PlayerType`
+- Sort directories & files when running optimize_pngs.py (#3958)
+- Get rid of some "using namespace" statements (#4094)
+- Add Frisians to lua_testsuite map (#4135)
+- Fix an `#ifdef` in wlapplication messages (#4166)
+    - Fix compiler warning about `#elif _WIN32`
+    - Show game data path on MacOS
+- Reduce `graphic.h` includes (#4159)
+- Refactor log() output (#4162)
+    - Add timestamps to log output
+    - End all log entries with a newline
+    - Distinguish log levels (info, debug, warning, error)
+- Create directory structure in homedir (#4189)
+    - Create directory structure in homedir for maps, replays and savegames
+    - Hide empty directories in map selection
+- Allow sparse IDs in plot area data (#4179)
+- Fix compiler warnings
+- Log output formatting (#4212)
+- Optimize `ObjectManager::object_still_available()` (#4242)
+- Handle video problems of helper applications in CI environment (#4245)
+- Restore `object_still_available` to its former "glory" (#4263)
+- Using Visual Studio 2019 on appveyor
+- Delete the `is_a()` macro (#4297)
+- Reducing too strong asserts to an if-clause. (#4364)
+- Modernize loops (#4348)
+- Remove `ObjectManager::object_still_available` and use `OPtr` instead (#4353)
+- Fix simple cppcheck issues (#4355)
+- Make `Time` and `Duration` typesafe (#4325)
+- Do not use `memset` to initialize arrays in Map (#4377)
+- Refactor PartiallyFinishedBuildingDetails (#4397)
+- Refactor get_all_tribeinfos() (#4421)
+    - Shift exception triggering for missing tribe infos to the UI to fix the road tests. Remove some superfluous loalization markers.
+    - Show messagebox to player instead of crashing
+- Get rid of code duplication in `lua_root.cc` (#4419)
+- Use `unique_ptr` for building settings (#4448)
+- Python 3 compatibility and modernizing; Ensure utils directory works with Python3 (#4546, #4730)
+- Clean up superfluous log output (#4755)
+- Fix vision unequality operator (#4771)
+- Forward compatibility for remote add-ons (#4802)
+- Skip preloading invalid add-ons (#4840)
+
+
+
+## Build 21
+
+
+### Animations, Icons and Overlays
+
+- New Road Textures for Frisians
+- All animations for soldiers can depend on their training levels.
+  4 complete sets of animations for the Frisian soldier
+- New Widelands logo
+- New cornfield images for Atlanteans
+- New reedfield graphics (#3500)
+- Add support for spritesheets #3162 (#3489)
+- Change color code for blue and black player (#3582)
+- Add proper menu icons (#3557)
+  - added proper icons for zoom
+  - add proper sound options menu
+  - added icons for gamespeed
+  - add clock for gamespeed
+- Mipmap Spritesheets for all frisian units (#3554)
+- Graphics for the stink tree shrub
+- Images for new charcoal burner animations, charcoal burner´s house, and the two new pond types
+- Add footbridge eye candy (#3610)
+- Improve soldier level graphics and chat menu code (#3479)
+  - Improve visibility of health bar graphs
+  - Add toggle for soldier level/health bar graphics
+  - Indicate in building statistics whether workers are on their way
+  - Small refactoring for chat menu code
+- Spritesheet graphics for frisian ferry yard and ferry; nicer placeholders for the other tribes' ferries
+- Added 'X' signpost to frisian empty mine anims (#3676)
+- Create spritesheets for trees (#3702)
+- Spritesheets & MipMaps for Barbarian workers (#3779)
+- Fix recycling center hotspot (#3922)
+
+
+### Sounds and Music
+
+- Complete overhaul of the sound handler
+  - Categorize sound effects and overhaul the sound options to have
+    separate sliders for music, UI sounds, chat messages, game messages
+    and ambient sounds. Available both in-game and in the Fullscreen menu
+    options.
+  - Memory saver: Only load sound effects when they are played for the
+    first time and then keep them in memory until their category is
+    cleared. Clear the ambient sounds when EditorGameBase gets destroyed
+  - Implement stereo position and distance for sounds emitted by map
+    objects. This includes in-game messages to the player that have been
+    triggered by map objects.
+  - Website binaries no longer instantiate the global sound handler.
+  - Switch to ingame music set in netsetup and internet lobby, because
+    just 1 song can get annoying while waiting for other players.
+- Added sound to helmsmithy
+- Use sound handler to change music in editor (#3591)
+- Play sound on new messages when chat windows is closed (#3586)
+
+
+### Tutorials and Campaigns
+
+- Fixed formatting of victory messages in Empire scenarios 3 & 4
+- Converted campaigns definition to Lua
+- Mark scenarios as solved rather than as unlocked
+- Always unlock all campaigns
+- Overhauled Tutorial 1 & 4
+- Fixes and improvements for Empire scenarios 3 + 4
+- Fixed bug #1838193: Single player campaigns no longer work
+- String improvements for Frisian campaign
+- Additional autosave in fri01 (#3567)
+- Fixed #3642: add ferries to seafaring tutorial
+- Fixes to empire scenario 4 (#3690)
+  - Fix nil index if Temple of Vesta is trying to donate but was destroyed by enemy
+  - Give farm plans if player captures the artefact before objective was triggered
+- Minimal startconditions (#3689): New hardcore and minimal starting conditions "Poor Hamlet" and "Struggling Outpost" for all tribes
+- Fixes to the economy tutorial (#3746)
+  - Fix image filepath for wheatfields
+  - Explain wares input queues for wares that are on their way
+- Tutorial message: speed change shortcuts (#3761): Added message about keyboard shortcuts to Tutorial 1.
+- Seafaring tutorial improvements (#3782)
+  - Start the Ship Yard objective while the port is still building
+  - Add Ferry Yard objective (to make a break in ferrying tutorial text)
+  - Scroll to gold resource indicator
+- Refined text about water resources in Barbarian campaign.
+- Warfare tutorial - Teach the player about scouting (#3774)
+  - New objective "Build Scout's Hut"
+  - New objective "Explore the map"
+- More seafaring tutorial improvements (#3788)
+  - Run waterways tutorial along with shipyard objective
+  - New objective: Build an iron mine
+  - Remind player to stop ferry yard production
+  - Remind player to stop shipyard production when second ship is built
+  - Evaluate gold mine and ferries simultaneously
+- Difficulty stages for scenarios (#3795): Allow campaign designers to define various difficulty stages for campaigns
+- Replace deprecated `message_box_objective()` function (#3807)
+  - Replaced deprecated function `message_box_objective()`
+  - "Scolded" message box was too high
+  - Removed height properties
+  - Updated image links
+  - Move `new_objectives` over from `richtext_scenarios`
+- Replace deprecated reveal_scenario with mark_scenario_as_solved in frisian campaign (#3825)
+- Include all scripts in scenarios from the init.lua (#3828)
+- Tutorial 01: Click-by-click demonstration of worker area (#3818)
+- Fix duplicate campaign descriptions in the campaign select menu (#3892)
+
+
+### Scripting
+
+- Unified notification code for Territorial Time and Territorial Lord win
+  conditions
+- Added statistics hook for Territorial Time and Territorial Lord win conditions
+- Added statistics hook for Artifacts win condition
+- Fixed a bug in Artifacts which led to coroutine error if Player defeated when
+  reaching win condition
+- Skip recalculate_allows_seafaring more often when setting/unsetting port
+  spaces via Lua
+- Allow scripts to override the hostility of each player to each other player.
+- Renamed some World and Tribes units
+  - Tribe Immovable: "field"       -> "wheat field"
+  - Tribe Immovable: "reed"        -> "reed field"
+  - Ware:            "thatch reed" -> "reed"
+  - Critter:         "elk"         -> "moose"
+- Added dropdowns to Lua interface
+- Territorial Time don't add previous message to status (#3559)
+- Allow peaceful mode for territorial time (#3587). Since the game ends after 4 hours anyway, we can also allow peacful mode here.
+- Cleanup luainterface include (#3672): Remove superfluous Lua interface include in tribe_descr.cc
+- Territorial peaceful (#3717): In peaceful mode, end the territorial win conditions prematurely if no more land can be gained.
+- Fix trading outpost and village start condition (#3753)
+- Allow starting expeditions and changing a ship's capacity via Lua.
+- `count_owned_valuable_fields`: check for `nil` (#3932): assign 0 if player has no valuable fields
+
+
+### Maps
+
+- Simplifying the Fellowships map, for better playing experience. (#3792)
+- More official maps (#3773)
+  - Made Europa 1.1, Long Long Way v2, No Metal Challenge v2, Astoria 2.R (without artefacts, with ferries), and Escher_Goose_Fish official
+  - Removed Impact and Volcanic Winter
+  - Updated Dolomites
+
+### Saveloading
+
+- Add support for critter renamings depending on packet version to
+  WorldLegacyLookupTable
+- New map version property "needs_widelands_version_after" for the website
+- Use legacy_lookup_table to avoid thatch_reed problem (#3549). Extend legacy_lookup_table to have consistent code.
+- Map saving critical characters (#3590)
+  - add call edit_box_changed to check for invalid characters
+  - enable ok button by default
+- More verbose progress info during saveloading (#3598)
+- Current stats value now is saved. Side effect is that Ai has current stats after saveloading as well
+- Rework GamePlayerEconomiesPacket to fix saveloading when 2 ships are on the same location
+- Make emergency saves not cause additional crashes (#3710)
+- Fix wares stuck on flag after loading (#3712). Legal values for Carrier::promised_pickup_to_ are -1 to 1. Previously values under -1 were used. This compatibility code was supposed to change them to -1 when loading saved games with the old values. Instead it changed values *over* -1 which could cause carriers to forget they acked a ware, and never go to pick it up.
+- Make inputqueue saveloading robust (#3707)
+  - Save `descr().name()` instead of `DescriptionIndex`
+  - Skip outdated wares/workers when loading `BuildingSettings`
+  - Make exception for nonexisting input queues more informative
+  - Improve performance for `BuildingSettings` by using switch statements
+- Rework economy savegame compatibility (#3721): Reworked the way old-style economies from b20 savegames are split into new-style economies
+- Faster game saving with endless_game_fogless win condition (#3858)
+- Fix economy mismatch in Request loading (#3870)
+- Load replay savegames in multiplayer screens (#3948)
+
+
+### AI
+- Many hundreds of rounds of AI training
+- Performance improvements
+- AI is now able to adopt to scenarios to a certain extent
+- Implemented AI hints for workers
+- We now deduce whether a building is a barracks or recruits other workers from
+  building outputs
+- Moved ware preciousness into a new AI hint object
+- Reworked how AI internally calculates utilization of productionsites
+- Improved distance calculation between flags and warehouses
+- Added AI unit tests
+- Relaxed AI requirement for hunters
+- AI error is more informative when building is missing the
+  "collects_ware_from_map" AI hint
+- Replace some asserts in the AI with more informative Exceptions for tribe/world designers. (#3524)
+- Limit ware/worker preciousness for the AI. (#3530): Warn if ware/worker preciousness is a bit high and throw an exception if it's over 200.
+- AI supports seafaring (#3528). This introduces new ai_hint "supports_seafaring", that will be used to boost building score for particular building when on seafaring map.
+- AI fixes (#3602)
+  - fixed crude percent to prevent overflow
+  - AI worker management
+  - implemented a worker management for AI Productionsites and mines.
+  - added a malus for unoccupied sites to the build decisions.
+  - some small improvements for upgradehandling of buildings
+- Added 1 empire toolsmithy to basic economy
+- Added barbarian charcoal kiln to basic economy
+- Allow ware preciousness of 50 in AI hints. (#3725)
+- Remove unused AI properties + some improvements (#3681)
+  - Remove 'refinedlog', 'rawlog', 'ironore' and granite' parameters
+    from Ai Code and TribeDescr
+  - improve AI mines handling
+  - Make the Ai build mines as needed
+  - Fix an issue where trainingsite proportion was not taken into account
+    when upgrading a trainingsite
+  - Attempt to fix Ai unnecessary dismantling Militarysites
+- Fixed bugs in the AI's attack decision algorithm and exposed some weighting factors to the genetic algorithm (#3873)
+- preventing zero division in Check_building_necesity (#3910)
+
+
+### Gameplay
+
+- Improved ware/worker routing algorithm for ships and portdocks
+- Added new option 'Peaceful Mode' to the launch game screens
+- Fixed diverse bugs in tooltips generated by production programs
+- When a mine's main vein is exhausted, don't show tooltip for missing food
+- Switch building to unoccupied animation when worker is removed
+- Allow basic tasks like carrying out superfluous wares even if not all workers
+  are present yet
+- Do not send soldiers to attack if they are not stationed in a militarysite
+  any more
+- Improve performance and memory usage when loading tribes and world
+- Failed programs are now added to the skipped stacks
+- Moved sleep behind return/consume/callworker
+- Add some sleep time to costly loops in fri02 to prevent freezing
+- Split time 50/50 between building/worker for Atlantean fishbreeder
+- Fixed a bug where a building remains inactive after kicking a worker
+- Added a new option "swim" to the "findspace" worker program that will detect
+  coastal nodes
+- Implemented terraforming:
+  - Added a new parameter "terraform" to the "findspace" worker program that
+    will detect nodes where terrains can be terraformed
+  - Added new optional parameter "enhancement" to terrains for defining
+    terraforming targets
+- Allow constructing buildings over immovables with building parameter
+  "built_over_immovable" = <immovable attribute>
+- Fixed bug #1642882: Port should clear enough land to build
+- Fixed bug #1827033: Fix an assert fail because of nullptr destinations in the shipping algorithm
+- Tweak trainingsites' sleep/work cycle. Split animation times in half where possible to make the screen less "noisy".
+- New planning-ahead ship scheduling algorithm (#3483): Redesigned ship transport algorithm
+- When enhancing constructionsite, soldier and inptqueue capacities are subtracted instead of preserved (#3593)
+- Ferry (#3481): Rowboats to transport wares over streams
+- Balancing tweaks:
+  - Change Barbarian evade increase per level from 15 to 16.
+  - Make Empire Piggery work 20% faster
+  - Empire Vineyards plant a bit faster
+  - Made piggeries work as fast as donkeybreeders
+  - Sped up empire vineyard to deliver approx every 40 secs
+  - Increased basic amount of vineyards to 2
+  - Made empire weaving mill and weapon smith medium buildings
+  - Reduced evade trainingcosts from 2 to 1 for empire
+  - Reduced barbarian evade 2 costs by 1 bread
+  - Made barbarian farmer as fast as empire and atlantean
+  - Increased barbarian conquer radius of tower and barrier from 8 to 9
+  - Adapted frisian farming cycle to match the other tribes
+  - Reduced frisian food cost for training
+  - Reduced frisian blacksmithy inputs
+  - sped up honeybread baking: only 5 secs more than normal bread
+  - spead up mead brewing by 5 secs (same sleeptime as for beer)
+  - reduced input of aqua farm
+  - sped up barbarians smelting works.
+  - sped up frisian ironsmelting
+  - reduced buildcost for several buildings
+  - removed superfluous "remove= chance" commands from berry bushes
+  - made new frisian small charcoal kiln using ponds of claydigger
+  - created Stink tree as bush suited for blackland.
+- Reduce default target quantity of planks for empire from 40 to 20.
+- Improved ferries buildcost and ferry yard working radius
+- Productionsite performance (#3645): Changes Productionsite Productivity from attempt based to time based
+  - made it reach 100 %
+  - based the statistics period on average working time
+  - switched back to common time base
+  - fixed 3 program cycles
+  - Quarry Productivity Drop Fix (#3933)
+- Tribes fixes (#3682)
+  - increased starting hammers for frisians to 10
+  - charcoal burner consumes before making a stack, searches for a pond first.
+  - Collects coal always only making stacks is dependend on economy
+  - frisian tavern prefers berries over bread
+  - changed ware order for frisians
+  - deleted default_target_quantitiy for blacckroot flour
+  - removed superfluous Ai hints
+- Remove experimental mark from Frisians. (#3703)
+- Interpolate linear when applying building settings (#3735) (preserve proportions rather than absolute numbers). Fixes #3734, improves the fix for #3592.
+- Consistent farmers (#3749): Made farmers consistently use space. they can plant between buildings but not on shore now
+- Quickfix for shippingitems without destination (#3751)
+- Configurable expeditions & Discovery starting condition (#3692)
+  - New starting condition Discovery: Start with three expedition ships on the ocean and a handful of starting wares and workers.
+  - Allow selecting additional wares to take on the expedition in the portdock.
+- Soldier healing (#3736): Military sites start healing their soldiers when they're on their way home
+- Fix huge soldier healing in the field (#3797): Healing was higher than intended because of min() and max() mix-up.
+- Tweaked builtin economy profiles (#3787)
+- Fix rookie creation for hero demands (#3804): Requests for heroes should not trigger rookie production
+- Fix desyncs due to an uninitialized variable by exposing the Seed radius random factor of trees to the init.lua
+- 2940 better trainingsite soldier selection (#3835): Trainingsite attempts to get soldiers that already are partially trained. If the trainingsite fails to train, it switches strategy and requests soldiers that are below the failing level. If training succeeds, the site starts requesting strong soldiers again. If the site does not get new soldiers, it will gradually start accepting all trainable soldiers (old way).
+- Let Barbarians produce cloth on maps without seafaring (#3846): Remove productionsite program "checkmap". It is redundant because all buildings that use it also use map_check, which checks for the same thing at construction time.
+- Hide economy setting when default target quantity is 0 (#3855) (for atlantean blackroot flour)
+- Allow preserving wares left in buildings when dismantling or enhancing (#3844)
+- Allow setting economy targets to ∞ (#3837)
+- Removed `return=no_stats` from productionsite programs (#3865)
+- Barbarian Poor Hamlet fix (#3888): Changed tool order in barbarian metal workshop
+- Fixes issue #3869: No training in camp for Empire (#3871)
+- Refactor Ship Scheduling (#3857): Reimplements the new planning-ahead shipping algorithm
+
+
+### User Interface
+
+- Hold down Ctrl when using the capacity arrow buttons in military- and
+  trainingsites to set the capacity to min/max
+- Redesigned the campaign/scenario selection screens to use Box layout
+- Fixed fullscreen switching for the campaign/scenario selection screens
+- Files to be included in the "load savegame" screens are now determined
+  by file extension
+- Improved layout for the statistics graphs
+- Show a port icon on the field where an expedition ship can build a port
+- Sort the lobby client list. The admin users will be on top of the list,
+  followed by registered and unregistered. IRC users are at the bottom.
+- Display IRC users' join/part messages
+- Automatically set focus to chat input in lobby & multiplayer game setup
+- On input queues, hold down Shift to increase/decrease all ware types at the
+  same time
+- On an input queue, hold down Ctrl to allow/disallow all of its ware
+- Allow the player to choose the soldiers to send in the attack box
+- Indicate overlapping work areas when placing buildings
+  - Added the hotkey W to enable/disable highlighting workarea overlaps
+  - Productionsite overlaps are only shown for certain building types
+    of interest by using the table "indicate_workarea_overlaps"
+- Except for scenario and win condition messages, define all font styles via Lua
+- Users can define and save their own profiles of economy target quantities
+- Don't show % for trend in building statistics overlay
+- Increased caret to 14px
+- Allow players to define settings for and to enhance buildings under
+  construction
+- Fix positioning of dropdown lists on fullscreen switches
+- Define dropdown list height by number of items rather than by pixels on screen
+- Bug fix: Panel::free_children() now frees all its children
+- Fix toggling of minimized UniqueWindows
+- Fixed keyboard map movement when windows are open
+- Converted toolbar menus to dropdowns
+- Fixed moving the economy options window to top when clicking Configure Economy
+- Fix time display in General Statistics (#3486)
+- Keyboard handling for the Escape key (#3527): Window closing, opening OptionsMenu and exiting using the keyboard
+- Fixed #3320 Building windows too easy to minimize (Ctrl-click)
+- Fixed accidental sending of playercommands in ConstructionSiteWindow::think and made soldier capacity buttons repeating (#3562)
+- Fix deleting of dropdown lists in UniqueWindow and Player Menu. (#3478)
+- Fix changing window width and button location in milsite-constructionsites (#3572): Tie soldier capacity buttons to edges in milsite-csites and set a fixed string width of 145
+- Move csite enhance button to caps buttons box (#3575)
+- Add Hotkey for General Statistics &  Wares Statistics (#3589): Also, capitalized Hotkeys in description i → I, m → M
+- Ship statistics: change window size and button placement (#3584). The window and the description row are now 20px wider. Filterbox buttons are now centered.
+- Changed spacing for Construction Sites & Warehouses (#3576): Change spacing for construction sites; unify the layout for the priority buttons in warehouses; center "Stopped"-Checkbox.
+- Make mouse behavior consitent for FieldActionWindow (#3564)
+- Fix heap-use-after-free in dropdown lambdas (#3601)
+- Display seafaring buildings at the end of the list (#3566)
+- Press Ctrl + F to toggle Fullscreen (#3606)
+- make game speed more fine grained (#3611)
+  - SHIFT + PAGE UP/DOWN = +/- .25x
+  - CTRL + PAGE UP/DOWN = +/- 10x
+  - This also works with the menus buttons.
+  - SHIFT + PAUSE Resets the speed to 1x
+- Implemented diagonal scrolling:
+  - Number pad is now dedicated for map scrolling.
+  - Number pad: 1/3/7/9 scrolls diagonal.
+  - 5 works like pressing HOME.
+  - Arrow keys: LEFT/UP, LEFT/DOWN, RIGHT/UP & RIGHT/DOWN scrolls diagonal
+  - Scrolling distance is 1/8, with CTRL 1/4 and with SHIFT 1/16 of the screen resolution in x/y-direction and set to smooth.
+- MiniMap overhaul (#3616)
+  - buttons for the MiniMap are in one row
+  - MiniMap zoom limited to 600px
+  - MiniMap tries to scale up to 300px/400px in normal mode
+  - when map has a width of more than 300, zoom is disabled
+  - disable zoom if the MiniMap height gets greater than the game's
+  - check size when switching into window mode
+  - redraw viewport window after resolution change
+  - MiniMap renderer: tiny refactoring
+- Add new Options (#3614)
+  - add option to only zoom when ctrl is pressed
+  - read/write sound settings to config on start (fixes #3507)
+  - add option to disable game clock
+  - add missing game options to UI
+  - add a little more spacing for wares decription
+- Fix Multiplayer Setup Window (#3580)
+  - Chatpanel is now properly aligned to the ok and back button
+  - Chatpanel only has focus when clicked on it (removes cursor when not active)
+  - Peaceful Mode checkbox has fixed spacing above and below
+  - Text for missing map/savegame files has been moved to map_info_
+  - client_info_ has been remove since it does not provide any information of value and only duplicates information already available.
+  - Full width button for map select.
+  - Start Game button has been moved below the back button.
+- Disable start attack button when zero soldiers are selected
+- Progress UI issues (#3644)
+  - Placeholders in saveloading progress messages
+  - Wider progress window bar
+- FullscreenMenuNetSetupLAN now relayouts itself for resolution switches (#3632)
+- Display workarea to illustrate waterway length limit in waterwaybuildingmode
+- Loading map menu (#3561): Add support for subdirectories to game loading and saving
+- Use dropdowns for filtering mapselect (#3651): Redesign filters in Mapselect to use driopdowns. This saves us horizontal space for translations, and we also gain 1 row of vertical space.
+  - Add autofit text width capabilities to buttons and dropdowns
+  - Replace broken "Show all maps" checkbox with button
+  - Replace team-related checkboxes with dropdown
+  - Add dropdown for balanced/unbalanced.
+  - Add dropdown for official/unofficial
+- Shift window positions on fullscreen toggle (#3677)
+  - Make in-game/in-editor windows fit on resolution changes:
+  - Centered windows stay centered
+  - Windows that are completely in the right/bottom half keep their relationship to the right/bottom edge
+  - Windows that don't fit any more are shifted left/up
+  - Full-size windows get resized instead of shifted (editor load/save map).
+- Typo in FieldActionWindow::building_icon_mouse_in (#3661): When placing a constructionsite for a military building or port, highlight overlapping workareas not only for nearby existing milsites & ports but also for nearby milsites & ports under construction
+- Fixing dialog for non attackable big buildings (#3684)
+  - Fixing bug that an attack window can be opened for a not attackable big building.
+  - Fixing sporadic flickering of newly opened attack window.
+- Refactor loader_ui (#3688)
+  - ProgressWindow and GameTips are now managed by EditorGameGase.
+    This avoids ownership conflicts and crashes when we run without window.
+  - Show game tips on scenarios that don't have a special background image
+  - Remove ProgressWindow as early as possible
+  - Don't show progress on autosaves and scenario objective saves
+- Don't start zoom animation if target zoom is the same as current (#3713). Fixes flickering census strings on invisible map movement #3660
+- Use capital letters for shortcuts (#3733)
+- Add missing `richtext_escape` to `text_width` function and editbox (#3764)
+- Use a dropdown for selecting starting conditions in PlayerDescrGroup.
+- Window titlebar buttons (#3763)
+  - Add buttons to close, pin/unpin and minimize/restore windows to every window's titlebar.
+  - Pinned windows cannot be closed by right-click, Esc, or the close button, and cannot be minimized.
+- Refactor saveloading ui (#3748)
+  - Further separating of concerns: Extracted savegame loading code (SavegameLoader) and savegame deleting code (SavegameDeleter) into own classes
+  - Introduced small inheritance hierachy for both of these classes to adhere to different loading/deleting of replays/multiplayer/singleplayer
+  - Show directory names in game details
+- Refactored road and waterway building mode and Lua road building functions and fixed a bug in secret village
+- Re-add quick navigation with comma and period keys (#3799)
+- Delete Ctrl-F10 hotkey (#3813)
+- Fix a bug causing road buttons instead of waterway buttons to be added in waterway building mode when clicking on a field where the waterway can't be built.
+- Make wares_in_warehouses the default tab for stock statistics (#3765)
+- Add an option to use SDL mouse cursor (#3810)
+- Add numpad hotkeys (#3840)
+  - Handle zooming with numpad +/-/0 keys and = key
+  - Handle numpad keys in the editor
+  - Handle filtering game messages with numpad keys
+  - Handle filtering seafaring statistics with numpad keys
+  - Handle quick navigation with numpad keys
+- Fix visual glitches and division by zero in WuiPlotArea (#3838)
+- Fix text alignment problem (#3854)
+- Use crude percent from AI for performance statistics string in productionsites
+
+
+### Internationalization
+- Added localized versions to the basic SDL error messages
+- Delete translations that are below 10% and that have not had any active translators for 5 years. Removed locales are:
+  - af_ZA
+  - ast
+  - en_CA
+  - et
+  - ia
+  - jv
+  - mr
+  - my
+  - oc
+  - rw
+  - si
+  - vi
+  Also, removed backend support for Sinhala and Sinhala + Myanmar fonts.
+- Return correct description instead of empty string. (#3533): Fix string representation of description negation in production prgrams (Fixes #3510)
+- Track po/widelands properly.
+- Diverse string fixes for issues reported on Transifex. (#3622)
+  - Diverse string fixes for issues reported on Transifex.
+  - Add missing localization for hotkey
+- Fix i18n-specific update script creation (#3732)
+  - Use git status -s in translation update script too
+- Add missing entries to buildcat.py (#3814)
+- Fix wrong textdomain for some strings (#3853)
+- Handle missing locale dir on Windows (#3757)
+- Fix transifex issues (#3875)
+- Marked tut03 objective headings for translation (#3901)
+- Fix textdomain for »New Objective(s)« headers (#3936)
+
+
+### Help and Documentation
+
+- New Lore texts for Barbarian units and Atlantean Fishbreeder's House
+- Documented "strange" behavior of atlanteans mill for players
+- Improved headings for worker help
+- Fixed path for encyclopedia immovables icon
+- Added missing menu icons for immovables
+- Update Production Program documentation. Ignore has been changed to Skip.
+- Help & tips enhancements (#3772)
+  - Help/tip on keyboard shortcuts to change game speed
+  - Help/tips on map view movement
+- Sphinx documentation: Corrected typo in documentation of PlayerBase::get_workers() method (#3781)
+- Immovable program documentation (#3829)
+- Fix duplicated ware help entries (#3889)
+- Add missing include in building_help.lua (#3924)
+
+
+### Editor
+
+- New tool to change the map size
+- Add a grid overlay that can be toggled with a button or the hotkey 'G'
+- Fix editor loader UI issues (#3653)
+- Fix editor selpos assert after map resize (#3767)
+- Escape richtext in editor info tool (#3798): Fixes broken info tool texts when the map description or author contains '<' or '>'
+- Suggested teams truncated (#3839): Set suggested teams box width to correct calculated parent width and remove superfluous `set_size()`
+- Restrict waterway length limit (#3842): Show a warning when the waterway length limit is set to > 20 in the editor map options
+- Fix editor resize tool (#3850): Reimplements the map's `resize()` function
+
+
+### Graphics Engine
+
+- Added support for mipmaps
+- Show the work areas of buildings as overlays on triangles
+- Add support for map objects' representative images to the font renderer
+- Cache soldiers' directional animations as unique_ptr to prevent memory leaks
+- On newer libmesa versions, context creation fails if we use
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY).
+  Disabled this, which *should* still give us a reasonable context (either the
+  core, which is what we need, or compatible which will give us more than we need).
+- Handle shading language version error (#3531): Show error message box rather than crashing when reading the shading language version returns an error.
+- Abort without failure when there is no working video driver found by SDL. (#3620)
+- Handle video problems in CI environment (#3637): Exit with code 2 if the SDL/TTF system is not available and mark tests as skipped in the test suite when this happens.
+- Animation uncluttering (#3780)
+  - Make savegames robust against changes in animation names
+  - Get rid of Lua tables for "walkload" animation if it's identical
+    to the "walk" animation
+  - Prefer "idle" as main animation
+  - Omit basename when it's identical to the animation name
+  - Add option to `utils/optimize_pngs.py` for restricting to filename prefix
+  - Shift definition of animation directory from individual animations to the
+    map object in order to declutter the Lua tables.
+  - Add mipmaps to Barbarian Carrier to test the changes
+- Fix wrong colors on Big Endian systems (#3890)
+  - Print endianness on startup
+
+
+### Networking
+
+- Check for client.type to not confuse IRC and lobby names
+- Added checks to networking usernames for illegal usernames. If username is
+  taken, append number.
+- Only display games for the same version and when they are open
+- Redesigned login box. Passwords are now replaced with ***.
+- Refactored gameclient.h/.cc for better readability
+- We now use the loopback network interface for LAN announcements
+- We now check the metaserver password without doing a full login
+- Added support for /warn and /kick commands of superusers in the internet
+  gaming lobby
+- Fix for corner case: don't set empty game name if no game is present
+- Fixed bug #1833352: Disallow empty game names in internet lobby
+- Fixed bug # 1842396: Random tribes crash multiplayer client
+- Default uuid to empty string rather than nullptr to prevent crashes. #3501 (#3503)
+- Allow empty password for unregistered accounts in internet gaming. (#3532)
+- Refactoring of the lower layer networking classes (#3540)
+  - Renamed NetRelayConnection to BufferedConnection and rewrote most of it.
+  - Made NetClient an adapter to the new BufferedConnection.
+  - Updated NetHostProxy and NetClientProxy to use the new BufferedConnection.
+  - The NetHost class (for LAN games) is now using a BufferedConnection per client instead of implementing the networking code itself.
+  - Removing the no longer needed Deserializer class.
+- change address to www in lobby messages (#3571)
+- Changing BufferedConnection to be more lenient about network failures (#3579)
+  - Changing BufferedConnection to be more lenient about network failures.
+  - Changing position of log output.
+- Refactor gamehost (#3545): Refactor gamehost for better readability
+- Fixing bug with LAN promotion of games and long map names.
+- Don't send too much data over the network at once, keep the buffers empty.
+- Speeding up file transfers by sending the whole file at once.
+- Switched to alternative low-latency method.
+- Removed operating system specific code branch.
+- Faster file transfers
+- Removing new networking accept code (#3859): The new accept code does not work on Windows, making it impossible to play LAN games with a host running Windows. The reason for this is unknown, but seems to either be in boost or Windows itself. Maybe it can be re-added with some future boost version.
+
+
+### Build System
+
+- Fixed web links in Windows installer
+- Added compile.sh switch -s to skip building the tests
+- Link GL libraries instead of setting flags. This fixes AppVeyor failures due
+  to missing lbpdcurses.dll
+- Added basic support for the XDG standard
+  https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
+- Moved the official repository from Launchpad to GitHub
+- Revamp Travis-CI builds (#3508, #3512)
+- Document CMake, Ninja, and make options in README
+- Add script for installing dependencies (#3523)
+- Make UI test more resilient against timeouts. (#3525)
+- Add codecheck rule for increment operators. (#3513)
+- Fix formatting when updating translations. #3471 (#3504)
+- Dependency check doesn't work with ninja, so we run it manually from compile.sh (#3480)
+- Replacing a [[ in compile.sh. "sh" does not know what to do with it since it requires "bash".
+- Add the latest CLANG and GCC versions to Travis (#3539)
+  - Clang 8
+  - Clang 9
+  - GCC 9.1
+- enforce LF for .py .cc .h .lua files
+- explicitely set text mode for Popen to avoid ugly binary strings on windows, e.g. rb'24260'[b'f1fa8f3'@b'master'](Release) (#3551)
+- Fix detect_revision.py to work with a wide variety of python versions (#3552)
+- Update XDG files and move XDG-related stuff from debian/rules to xdg/CMakeLists.txt  (#3547)
+  - utils/update_appdata.py: Make it deterministic
+  - Sort textdomains in alphanumeric order
+  - Regenerate XDG files
+  - Desktop file: Add Keywords
+  - Update desktop file
+     - Add Terminal tag
+     - Add StartupNotify tag
+     - Add StartupWMClass tag
+  - XDG files: Add info about old ID
+    - https://github.com/widelands/widelands/blob/build19/debian/widelands.appdata.xml.stub#L4
+  - AppData file: Remove icon tag
+    - The icon should be fetched from the desktop file.
+  - AppData file: Update links
+     - Update bugtracker url (Launchpad -> GitHub)
+     - Update donation url
+     - Add faq url
+     - Update help url
+     - Update homepage url
+     - Update translate url
+  - Fix Application ID
+    - https://github.com/widelands/widelands/issues/3368#issuecomment-529546678
+  - Update manual
+  - Move XDG-related stuff from debian/rules to xdg/CMakeLists.txt
+     - icons
+     - manual
+     - desktop file
+     - AppData file
+  - Fix old Application ID
+- Appveyor: Install InnoSetup dependency beforehand (#3604)
+- Format C++ before Lua (#3631)
+- Automatically run fix_formatting.py on master and pull requests (#3664): On every push to master and any branch with an open pull request, GitHub runs the formatting suite on it. If there are changes, they are pushed back to the branch.
+- Update macOS Travis-CI
+- Made some functions const to help the compiler optimize (#3674)
+  - Made a bunch of functions const
+  - Got rid of an iterator loop
+  - Remove unimplemented function `void print_land_stats();`
+- Test website binaries on Travis.
+- Improve autoformat PR detection and diff info (#3701)
+  - Check whether the branch has an open PR *after* running fix_formatting. If the user opens the PR within three minutes after pushing, this allows the action to push the changes straight to the new PR, so no "dummy" commit is needed in this case to get the action running.
+  - Fix `git diff` showing empty in non-PR branches
+- Fix some compiler warnings (#3694)
+- Catch exception when bzr returns non-zero exit status (#3714): When the bzr command fails to detect a branch the version string correctly falls back to REVDETECT-BROKEN-PLEASE-REPORT-THIS instead of crashing the script
+- Fix translations formatting (#3722)
+  - Add command line switches to `fix_formatting.py` for formatting selectively
+  - Add formatting directives to translation update script for generated Lua files
+- Removing the gce environment setting so build should on hyper-v (with more ram?)
+- Let fix_formatting.py format the codecheck directory (#3723)
+  - Add codecheck directory to pyformat runs
+  - Give codecheck rules file ending so that fix_formatting will pick them up.
+  - Format codecheck rules.
+- Fix sigsev for XDG_DATA_DIRS (#3700)
+- Launchpad mirror (#3766)
+  - Mirrors all changes at widelands:master to lp:widelands
+  - Link entries in xdg to debian to fix daily PPA
+  - Merge latest Debian rules from https://sources.debian.org/src/widelands/1:20-2/debian/rules/ to fix daily PPA
+  - Fix appdata/desktop filenames
+  - Fix Debian build errors about missing files
+  - Only list missing and delete symlinks for debian packaging.
+  - Fix CRLF/LF handling in LP commit messages
+  - Copy rather than move icons and appdata for debian packaging
+- Prettier stdout files when regression_test is run with python 3 (#3800): Print regression test suite output as raw byte strings
+- Fix stalling test suite scenarios (#3784)
+  - `stable_save` now uses last save time and average frame rate for waiting
+  - pass desired speed explicitly to `stable_save`
+- Update CMakeLists for Ubuntu Focal
+- Replace dependency python with python3
+- Fix packaging for Focal and #3783
+- Fix travis MacOS builds (#3848): On Travis MacOS, gettext needs to be added to the PATH and some CMake CXX and linker flags have to be set because brew force-linking is no longer allowed for whatever reason
+- Fix travis failure on gcc-9.1_debug (#3861)
+- Improve SDL2 detection on modern systems (#3872)
+- Add Git hash to AppVeyor and bzr version numbers (#3894)
+- updated innosetup file to reflect new Icu filenames (#3903)
+- gcc-10 compatibility (#3908)
+- Replaced all uses of boost::bind with lambda functions and added a codecheck rule to deprecate boost::bind() and boost::ref()
+- Several AppVeyor/MSYS2 build environment fixes (#3917, #3919)
+- Use `detect_revision.py` on AppVeyor
+
+
+### Other Issues
+
+- Broke down logic library to get rid of some circular dependencies
+- Fixed logging for homedir
+- We now wait longer in test_inputqueues.lua after stable_save
+- Implemented support for GCC 9
+- Got rid of duplicate listing of player commands
+- Fixed diverse compiler warnings
+- Added a README and a CONTRIBUTING file and issue templates for bugs and feature requests
+- use proper in-/decrement operators (#3487)
+- Declare a variable needed only for an assert in debug builds only (#3568)
+- Needed to adopt test suite due to increased conquer range of barbarian tower
+- Replace wl.widelands with www.widelands and add some https
+- Replace or remove references to Launchpad where possible. (#3628)
+- Cleanup includes and forward declarations (#3720)
+  - Add new script for detecting superfluous includes and forward declarations
+  - Run the new script on Travis
+  - Cleanup the codebase
+- Larger DescriptionIndex (#3715)
+  - Change DescriptionIndex data type to uint16_t, because we're running out of IDs for Building Descriptions
+  - Fix usages of DescriptionIndex
+  - Rename function `get_resource` to `resource_index` for consistency.
+- Delete unneeded boost headers and replace outdated usages (#3724)
+  - Replace `boost::function` with `std::function`
+  - Replace `boost::shared_ptr` with `std::shared_ptr`
+  - Replace `boost::unordered_map` with `std::unordered_map`
+  - Add codecheck rule so that these won't regress
+  - Require including `<memory>` for `shared_ptr` via codecheck
+  - Delete all boost headers that the compiler won't ask for
+- Cleanup system includes (#3731)
+  - Delete all system headers that the compiler won't ask for
+  - Deprecate `<ctype.h>`, `<io.h>` and `<stdint.h>` in favor of
+    `<cctype>`, `<cstdio>` and `<cstdint>`
+  - Fix `USES_BOOST_REGEX` in CMakeLists.txt
+- Fix memory leak in ConstructionSite::enhance (#3744)
+- Resolve some circular dependencies + shift random library (#3727)
+  - Split AI hints into separate CMake library
+  - Shift random library to base
+  - Delete superfluous scripting/logic.h includes
+  - Map objects no longer depend on `ui_basic`
+  - Clean up game_renderer a bit
+  - Resolve circular dependency between `wui_mapview_pixelfunctions` and `logic_map`
+  - `create_debug_panels` is a one-liner, no need for a function
+- Consistent farmers follow on fix (#3768): Deleted an unused variable
+- Fix compiler warnings in MapViewPacket (#3771)
+- Added missing `break` in window.cc
+- Add lots of optional braces (#3802)
+- Unify program parsers (#3805): Refactor program parsers.
+  - Pull out common code into new class MapObjectProgram
+  - Fix ware demand checks so that they only affect the correct tribes
+  - Get rid of extraneous calls to EditorGameBase::postload()
+  - Small performance tweak for trainingsite programs
+  - Get rid of now empty helper library
+- Fix off-by-one in `get_road()` (#3806): Use `WalkingDir::FIRST_DIRECTION` and `WalkingDir::LAST_DIRECTION` or ranged `for` loops for iterating the roads of a flag
+- Updated copyright end year to 2020
+- Add optional braces to ui_fsmenu (#3809)
+- Removing signal from warelist. (#3845): Removed some dead code, exit more cleanly in some cases, and be more verbose in regression tests. Fixes a GCC9-release regression test failure.
+- Cleanup SDL headers (#3743)
+- Fix table column index mismatch regression (#3915)
+
+
+## Build 20
+
+### Animations, Icons and Overlays
+
+  - New wheatfield graphics by fraang
+  - Shorten a soldier's last evade_failure animation if the soldier is about to
+    die to prevent overlooping.
+  - The health bar of a soldier now falls gradually during an attack instead of
+    one-shot.
+  - New graphics for field selectors and field action tabs
+  - Special field selector for road building mode
+  - Added missing call to get_rand_anim when a soldier is dying
+  - Added missing working animations for barbarians big inn and wood hardener
+  - Each tribe now has individual resource indicator graphics
+  - Added util to rename animation files in bulk.
+  - Fixed bug #1639253: Add missing walkload animation to Atlantean smoker
+
+
+### Sounds and Music
+
+  - New music tracks "Scotty the Scout", "Hypathia's Theme", "We Work in the
+    Vineyards" and "Running out of Coal" by Stuart Marshall
+  - New music tracks "Silkweaver's Song" and "The beauty of the flatlands" by
+    Klaus Halfmann
+  - Added new sound files for Barbarians Inn + Big-Inn, Empire Inn,
+    Atlantean Mill, Toolsmith, Smelting-Works, all Weaving Mills, Atlantean
+    Woodcutter, Sawmill, Stonecutter, Goldspinner.
+  - Modified smithies sounds to dimmer versions; added tree-falling sounds,
+    substituted Timber shouting with tree-falling.
+  - Allocate 32 mixing channels instead of the default 8.
+  - Never play the same song twice in a row
+  - Improvements to sounds and the sound mix
+
+
+### Tutorials and Campaigns
+
+  - 2 new missions for the Empire campaign
+  - 2 new missions for the new Frisians tribe
+  - Tweaked timings in tutorials and scenarios
+  - Updated the Economy tutorial to match the new, enhanced encyclopedia
+  - Add roads to p2 in warfare tutorial because the AI is empty
+  - Fixed reveal_campaign in bar_01
+  - Fixed bug #1639514: Barbarian campaign, scenario 2: yellow brother bails out
+  - Fixed bug #1656192: Economy tutorial assumes window is open
+
+
+### Scripting
+
+  - Updated Eris to version 1.1.2 (Lua 5.3.4)
+  - Changes and additions to Lua methods and objects:
+    - New method player:get_produced_wares_count()
+    - New object LuaMap  -> LuaEconomy.
+    - Added option to Lua function player:hide_fields to mark them as unexplored
+    - New scripting functions for random and concentric revealing/hiding of
+      fields
+    - New attribute 'is_stopped' in LuaProductionSite
+    - New method 'toggle_start_stop()' in LuaProductionSite
+    - Added Lua method to get the type of the current game, i.e., single or
+      multiplayer.
+  - Changes to territorial win conditions:
+    - Pulled out common code for Territorial Lord and Territorial Time.
+    - Ensure that check_player_defeated is called before points are calculated.
+    - New function to check whether a field is buildable.
+    - Check if a player still exists before making it the winning player.
+      Player will also win if there are no other players left.
+    - Fixed desyncs
+    - Updated documentation not to use some functions for multiplayer games
+    - More precise calculation of conquerable fields to make territorial win
+      conditions playable on all maps
+  - Various fixes for win conditions:
+    - Unified some functions for wood_gnome and collectors
+    - Removed duplicated code and moved it to win_condition_functions
+    - Notify only every hour, 10 minutes in the last 30 minutes
+    - Move _game_over function out of the main loop.
+    - Don't show points when game ended by military defeat
+    - Main loop ends when time is over or only one faction is left
+    - Check every second for defeated players
+    - Refactor initialization of win conditions:
+    - Shift calculations for territorial functions and Wood Gnome to C++
+      to improve performance
+    - Add immovables to the table for territory calculation
+    - Expose port spaces and max caps to Lua interface
+    - Fixed bug for Wood Gnome in which a destroyed player would gain infinite
+      points. Also, no longer calculate score for a defeated player.
+  - Remove unused parameters of message_box_objective.
+  - Removed unused parameter 'req_suitability' from function
+    place_building_in_region in infrastructure.lua
+  - Added capability to add custom scenario buildings
+  - Allow writing and loading of campaign data, so that some scenario state can
+    be transferred from one scenario to the next in campaigns.
+  - Do not broadcast Lua coroutine error messages to empty player slots.
+    Also, use richtext_escape on them.
+  - Orthogonal design for mapobject program names
+  - Fix unpersisting of LuaImmovableDescription for tribe immovables.
+  - Safeguard to avoid desyncs when using send_message() from ui.lua
+  - Add parameter to send_message() to avoid an error
+  - Fixed a memory leak in persistence.cc
+  - Fixed bug #1670065: Random tree growth can block building sites needed to
+                        progress in scenario
+  - Fixed bug #1688655: lua func "place_building_in_region" not work for mines
+  - Fixed bug #1815283: Nil value in Territorial Lord
+  - Fixed bug #1790456: The final message in collectors doesn't show the points
+                        of all players anymore
+
+
+### Maps
+
+  - Map tags: Added "1v1" to Firegames, Islands at war and The Pass through
+    the Mountains. Removed "unbalanced" from The Pass through the Mountains.
+  - Moved hint texts from map descriptions to hints for the Last Bastion and
+    Rendez-vous maps.
+  - Increased maximum number of players from 8 to 16, to be used for testing
+    purposes.
+  - Minor fixes to Last Bastion map where a player's expansion could become
+    completely blocked across the sea
+  - Fixed bug in Crossing the Horizon map where an artifact couldn't be
+    conquered by a player
+  - Fixed desyncs in Smugglers scenario
+  - Allow random player tribes in scenarios
+
+
+### Saveloading
+
+  - Old scenario save games will no longer work due to changes to the map
+    scrolling functions.
+  - Broke savegame compatibility in version bzr8747
+  - Savehandler: Avoid reading config more than once per game
+  - Corrupt zip files now appear as "incompatible" on game loading/saving
+    screens. This fixes stack-buffer-overflows.
+  - Fixed bugs with missing files/folders in savegames by creating a temporary
+    map save on game start
+  - Improved error checking in filesystem functions
+  - In Load/Save menu for games/replays:
+    - All deletion errors are caught, player gets a message.
+    - When deleting multiplayer replays, also the corresponding syncstream file
+      is deleted.
+    - After deleting replays, the table now respects the Show Filenames setting.
+  - In Save menu for maps:
+    - Errors when trying to create a directory are now caught, player gets a
+      message.
+    - Directory creation now doesn't allow names with map extensions, because
+      the game would just try to interpret them as maps and not show as
+      directories. A tooltip is shown.
+    - Directory creation can now also be triggered by pressing Enter in the name
+      edit box.
+  - Other file errors are caught and logged:
+    - Syncstream deletion in SyncWrapper destructor
+    - In Map::get_correct_loader
+    - File deletion/renaming in GameClient::handle_packet
+  - Introduced a new class to robustly handle saving of files (incl. dealing
+    with backups, handling errors, etc.) and using it whenever maps/games are
+    being saved.
+  - Remove superfluous "postload" call from replay
+  - Added validity checks for S2 map headers to avoid crashes when preloading
+    invalid S2 map files
+  - Shift calculation of map fields relevant to win conditions from Lua to C++.
+    This gives us a huge performance boost during saveloading those win
+    conditions.
+  - Fixed bug #1678987: Endless autosave cycles when a save takes longer than
+                        the autosave interval, and inefficient statistics saving
+  - Fixed bug #1746270: Unable to rename rolling autosave
+  - Fixed bug #1798812: Saving a game from replay does not show up in load game
+                        menu
+
+
+### AI
+
+  - The AI now uses a genetic algorithm. The genetic parameters are trained and
+    then kept in .wai files.
+  - New command line switch --ai_training: Dumps new AI files in home folder and
+    uses higher mutation ratios
+  - New command line switch --auto_speed: Activates auto-speed in multiplayer
+    games
+  - Various refactorings of AI hints
+  - Multiple changes to the logic
+  - Improvements to training sites
+  - Add support for productionsites that are also supporting site to the AI.
+    One productionsite can now support multiple wares/productionsites.
+  - Allow resetting of teams via LUA during game
+  - Improved selection of which fields to build something on
+  - Improved identification of unconnectable regions based on walking algorithm.
+    Used to keep AI from wasting attempts to build something there.
+  - AI now splits and counts mineable fileds per resource/mine type and uses it
+    for decision making, ignoring inaccessible fields in the process
+  - When looking for the nearest buildable spot, the AI will accept mineable
+    fields also. This affects willingness to expand when there are no buildable
+    spots nearby, but some mines can be conquered by a new militarysite.
+  - AI now calculates military strength based on the actual init.lua files
+    rather than hard-coding the values. This also removes the tribe name
+    restriction for modders.
+  - When considering a quarry, the AI makes sure there is at least one rock in
+    the vicinity. Same for fishers and fish.
+  - Improved ship exploration decisions for AI.
+  - AI now considers whether possible sea direction leads to unknown territories
+  - AI also continues exploring when the last port is lost to prevent crashes.
+  - Since the AI can handle only 1 expedition at a time, any extra expeditions
+    are canceled
+  - Prohibit seafaring buildings for AI on non-seafaring maps. AI can still
+    handle ships and shipyards that already exist when a map does not allow
+    seafaring at the moment.
+  - AI now scans entire map for portspaces
+  - Fixed endless loop in DefaultAI::dispensable_road_test
+  - Added one well to the atlantean basic economy, as water is needed
+    for crucial spidercloth production
+  - Replaced logic_rand() with std::rand() in seafaring code of AI to fix
+    desyncs in network gaming
+  - Fixed bug #1724073: AI crashes when some AI slots are empty
+
+
+### Gameplay
+
+  - New Frisian tribe
+  - New "Village" starting condition
+  - New "Barracks" (casern) building for recruiting soldiers. Soldiers are no
+    longer created by warehouses. Production sites can now have workers as input
+    to consume.
+  - Started implementing new "Market" building with a Barbarian prototype.
+    Not functional yet.
+  - Balancing: Halved needed experience for Barbarian brewer and blacksmith
+  - Balancing: Buffed Barbarian and Empire soldiers
+  - Balancing: Added more trainers to headquarters at game start
+  - Balancing: Removed meat default target quantity for Barbarians and
+               Atlanteans
+  - Balancing: Lowered productivity threshold for lumberjacks to 60%.
+  - Balancing: Depleted Atlantean crystal (and iron) mines work slightly better
+               when depleted
+  - Balancing: Improvements to various production sites' logic
+  - The worker program "plant" no longer takes "tribe:" as a parameter;
+    immovables are now identified via their attributes only, and both world and
+    tribe immovables are searched. As a side effect, tribe immovables can now
+    have terrain affinity.
+  - Forester/Ranger now prefers good soil, and is thus more efficient
+  - Make the scout aware of nearby military sites. The scout now switches
+    between random walking and doing an excursion to enemy military sites
+  - When a Fish Breeder's fishing grounds are full, display a special tooltip
+    instead of sending an "Out of Resources" message
+  - When a warehouse is destroyed, the maximum number of fleeing units is now
+    limited to 500 per unit type
+  - Only cancel expedition if there is a reachable portdock. Show a warning
+    message to owner.
+  - Shifted ware hotspot definition from WorkerDescr to CarrierDescr
+  - Fixed a bug where higher-level workers wouldn't occupy lower-level workers'
+    working position slots in productionsites
+  - The port now conquers every location where its military influence is higher
+    than the influence of other players. This fixes a segfault when all
+    potential portdock fields are owned by another player, but there is a
+    portdock location available where the player owning the port has highest
+    influence.
+  - Fixed bug in collectors script where a broken message was sent after the
+    game ended
+  - Check for visibility of military buildings before permitting attack. This
+    solves a problem with impregnable castles.
+  - Improved algorithm for promotion and demotion of roads
+  - Removed hardcoding for resources
+  - New return value no_stats for work programs
+  - Tweaked production programs for shipyards
+  - Balancing: All Smelting Works, Furnaces, Smokeries, Recycling Center,
+    Atlantean and Frisian Toolsmithies, Taverns, Inns and Drinking Halls no
+    longer waste time if a ware is missing and they have to skip a program
+  - Balancing: Tweaked programs for Weapon/Armor producing buildings
+  - Balancing: Imperial Armor Smithy produces 1 more Helm per run to balance the
+    amount of armor types for training
+  - Balancing: Changed the order of programs in the Atlantean Toolsmithy
+  - Balancing: Gave the Barbarian Deep Gold Mine the same stats as the Deep Iron
+    Mine
+  - Increased the area where the map is recalculated after conquering by 1.
+    This prevents buildings from sitting between borders.
+  - Fixed heap-use-after-free in fleet while processing
+    EditorGameBase::cleanup_objects() when ship has already been deleted
+  - Allow return on dismantle values without buildcost
+  - Fix desyncs caused by floating point arithmetic in terrain affinity
+  - Reset economy serial in Game constructor. This fixes desyncs in replays.
+  - Stop ware dropoff when the target building has been destroyed. This fixes a
+    crash when the enemy conquers a militarysite near a warehouse.
+  - Cancel Worker::fetchfromflag when the building is destroyed/dismantled/
+    enhanced to prevent crashes
+  - Fixed bug  #963799: shortsighted shipwright (ship in pond)
+  - Fixed bug #1611323: ships can be built in non-floating spaces (shipyard)
+  - Fixed bug #1636966: Segfault in battle
+  - Fixed bug #1637386: Militarysites warn about allies
+  - Fixed bug #1639444: Workers with wares inside ships can crash the game
+  - Fixed bug #1643209: No-cost workers are not removed correctly
+  - Fixed bug #1643284: Ships of a fleet can have the same name
+  - Fixed bug #1656671: Wares are not always transported to construction site
+  - Fixed bug #1658456: Imperials: Soldier target quantity not changeable
+  - Fixed bug #1749586: Fish breeder can't breed fish if the game is loaded
+                        after all fish is caught
+
+
+### User Interface
+
+  - Maps can now be zoomed using the mouse wheel or keyboard keys: CTRL+, CTRL-
+    to in-/decrease, and CTRL+0 to reset. This also removes 0 as a possible
+    landmark number.
+  - All map transitions like jumping in messages and in the buildings menu are
+    now animated. New command line option "animate_map_panning".
+  - Moved smooth animation of cursor and MapView from Lua into C++. This fixes
+    the transitions in tutorials, which were broken when zoomed.
+  - Show census information on destroyed building with the former building's
+    name.
+  - Added supplementary warning to enhancement message for military sites.
+  - Fixed statistics label overlap. Ware statistics now update their plot range
+    correctly.
+  - Removed quick navigation with '.' and ','.
+  - The game summary window now restores the original desired speed when it's
+    closed.
+  - Productionsites no longer close their window when the stop/start button is
+    pressed.
+  - Minimized construction windows no longer get maximized when the construction
+    is finished.
+  - Window is no longer closed on enhance or dismantle.
+  - Let the user select multiple entries in a table using Ctrl/Shift + Click
+    (multiple/range selection) and Ctrl+A (select all) where appropriate.
+  - Implemented textual and pictorial dropdown menus. Dropdowns are used for win
+    condition and multiplayer tribe selection in the launch game screens.
+  - Fullscreen background images are now tiled rather than stretched.
+  - Stopped fullscreen toggle from flickering.
+  - The following menus now relayout themselves when fullscreen mode is toggled:
+    main, multiplayer, single player, about, map selection, options, load game,
+    save game.
+  - For multiplayer game setup, use dropdowns instead of buttons to select
+    player options
+  - Improved scrollbar and table header layout.
+  - Remove buttons from economy options window for spectators
+  - Improvements to StoryMessageBox, keyboard navigation and UI focusing
+  - Updating all ware priorities of a building when CTRL is pressed while
+    clicking
+  - Sorting IRC users behind the players in the lobby
+  - Replaced get_key_state with SDL_GetModState() to fix keyboard mappings.
+  - Actionconfirm now uses Box layout and resizes according to text size.
+  - Display loading times on the console while loading the tribes.
+  - Simplified the UI::Align enum and various alignment-related cleanup and
+    fixes.
+  - Replaced booleans in UI::Box::add() with enum classes for better readability
+  - Converted all text to new font renderer. Formatting functions for the new
+    renderer live in data/scripting/richtext.lua
+  - A more principled fix to dangling object pointers in the UI using Optr<>
+  - Building Statistics now only show relevant buildings
+  - Building Statistics now show "under construction" navigation for buildings
+    being enhanced
+  - Show in-game clock in release builds too
+  - In multiplayer games, scroll to starting position when a game is loaded
+  - New Ship Statistics window
+  - Bugfixes to multiplayer dropdowns
+  - Use Lua to define background and button styles
+    - Background images and colors are now defined in data/templates/default
+    - Combine common background graphics with color overlays
+    - Added StyleManager class to load and access backgrounds
+    - Downscale background images (e.g. campaign maps) on small screens
+    - New graphics for ui_fsmenu
+    - Darker background for wui elements
+  - Fixed keyboard navigation after "remove game" dialog has been displayed
+  - Modified row selection/display in tables and message list
+  - Remove focus from editbox in gamechatpanel when it minimizes
+  - Added tooltip to file save and make directory edit boxes if illegal filename
+    is being entered
+  - Added a checkbox to toggle filenames when loading a replay
+  - Fixed scenario title and tooltip during game setup
+  - Preselect player names and tribes for non-scenario maps in single player
+    mode
+  - Set AI from selection in UI when saveloading
+  - Missing wares (and workers) are indicated differently in InputQueueDisplays
+    if the ware is on the way to the building than if it's really missing
+  - Redesigned and fixed the showing of workarea overlays
+  - Tweaks for the multiplayer game setup screen: less empty spaces and more
+    space for important content
+  - Very large amounts in WaresDisplays are shortened as "10k", "10M", "10G" to
+    prevent text from flowing over on the left
+  - When dismantling a building, the building window closes automatically
+  - Added a dialog for the host when the connection to a client is lost. Allows
+    the host to select whether to replace the client with an AI or to exit.
+  - Setting focus to edit box when opening the game save menu
+  - Don't provide the filename for the standard background image in the progress
+    window. This fixes image positioning when starting multiplayer games.
+  - Make dismantle button independent of buildable/enhanced. This fixes missing
+    Dismantle buttons in Empire scenario 4.
+  - Improve formatting for user status in the lobby
+  - Allow hotkey usage while windows are open
+  - Fixed memory leak in network UI
+  - Fixed bug #1191295: Seafaring: builder not listed in expedition list in port
+  - Fixed bug #1635808: Display of worker in training sites is not updated.
+  - Fixed bug #1653254: Action window of Road stays open under some
+                        circumstances
+  - Fixed bug #1653460: UI::Panel::get_inner_h() const: Assertion `tborder_ +
+                        bborder_ <= h_' failed
+  - Fixed bug #1658489: Expedition tab in Port window messed up some times
+  - Fixed bug #1644553: Crash when buildhelp icon is clicked twice
+  - Fixed bug #1687043: Memory leak in Multilineeditbox
+  - Fixed bug #1695701: Crash when a militarysite window is open while the
+                        enemy conquers it by sending a notification.
+  - Fixed bug #1672059: Selection is not cleared when new message arrives
+  - Fixed bug #1691336: Building window suddenly appears after construction has
+                        finished
+  - Fixed bug #1658668: Menu Launch Game: Switching AI player on/off changes AI
+                        setting
+  - Fixed bug #1656245: Scrolling with mousewheel is slow in some places
+  - Fixed bug #1769344: High processor load single player launch game screen
+  - Fixed bug #1785404: Chat does not autoscroll
+  - Fixed bug #1794063: Extra message arrival sound
+  - Fixed bug #1801208: Message boxes with long unbreakable strings show empty
+
+
+### Internationalization
+
+  - Removed building names from confirmation messages, as they cause grammar
+    problems in some languages.
+  - Production program descnames can now be fetched by pgettext as well as plain
+    gettext.
+  - Deleted unused networking messages and unified the "Something went wrong"
+    message.
+  - Added a Python script to do automated glossary checks for translations. It
+    enlists the help of Hunspell and 'misuses' the Transifex note field in order
+    to reduce noise.
+  - Implemented glossary generation for the Transifex glossary with help from
+    the Translate Toolkit (http://toolkit.translatehouse.org/).
+  - Show translation stats next to the language selection menu and invite
+    translators if a translation is incomplete, with the help of the Translate
+    Toolkit. New utils script "update_translation_stats.py" that will write
+    translation statistics to data/i18n/translation_stats.conf and is called
+    on every translation pull.
+  - Fixed various string issues and added some translators' comments
+  - Completed the switchover to the new font renderer
+  - Fixed translation of trainingsite program names
+  - Fix undefined / unexpected behavior in case LANG environment is empty
+  - Fix fetching of translations when user locale is set to C. If the desired
+    Widelands locale does not exist, try to fall back to en_US.utf8 to make
+    libintl happy.
+  - Adapted buildcat.py to get translations for resources
+  - Add an extra key to get a translatable author-value in the developers list
+  - Fixed bug #1636586: Inconsistent localization of player names in Editor
+                        player menu
+
+
+### Help and Documentation
+
+  - Convert editor/game tips to Lua and display them in the in-editor/in-game
+    help. Added new tips.
+  - Restructured, enhanced and added to the Lua scripting reference for Tribes.
+  - Added/Improved documentation for animations, worker programs, worker
+    helptexts, AI hints, World units and the Richtext system
+  - Added immovables to in-game help
+  - Fixed some wrong indentation for the documentation in the website.
+  - Added toptopple sound documentation in .ods spreadsheet format (LibreCalc)
+    into 'doc' folder
+  - Fixed and improved documentation for LuaMapObjectDescription::get_type_name.
+  - More cross-linking between map object classes and their description objects.
+  - Fixed some miscellaneous bugs in the LuaMap documentation.
+  - Use mathjax for latex in docs instead of imgmath
+  - Enable building documentation with warnings as errors on Travis
+  - Constructionsites' help button now points to the help for the building being
+    built
+  - Documented metaserver command line options
+  - Added lua_path.cc to the documentation
+  - Add tribe-specific ware purpose texts to web encyclopedia
+  - Fixed bug #1792297: Advanced buildings report wrong worker experience in the
+    encyclopedia
+
+
+### Editor
+
+  - Overhauled the selection menu for critters to give them categories
+  - Added an option "items per row" and rearranged the terrains and immovables
+  - Display of bobs, immovables and resources can now be toggled individually
+  - Fixed drag and drop
+  - Removed dead code for make infrastructure tool that was never finished
+  - Fixed keyboard navigation with escape and enter for save map and save game
+    screens. If the editbox is focused, escape will reset the text if changed,
+    and close the window if unchanged.
+  - Refactored Editor Player Menu to use Box layout. Show dismissable warning if
+    more than 8 players are selected.
+  - Map Editors now can choose "Random" tribe in the player menu
+  - Converted editor infotool to new font renderer and added some layout tweaks
+  - Enable OK button in map options when tags have changed.
+  - Use temporary container in cleanup_port_spaces to prevent invalid iterators
+  - Limited the editor undo stack to 500 items to prevent boundless growth of
+    memory use
+  - Fixed bug #1627537: Release mouse button does not work when placing things
+                        and mouse gets under a window
+  - Fixed bug #1738641: Resources can be replaced only once in editor
+  - Fixed bug #1749146: MultilineEditboxes: Entering text not possible
+  - Fixed bug #1736086: Saving a map with no player set shows up as having one
+                        player:
+                        - Initialize new maps with 0 players
+                        - Disable selection of maps with 0 players
+                        - Automatically add first player to editor player menu
+  - Fixed bug #1741779: Description is cut in map options multilineeditbox
+  - Fixed bug #1782593: Segfault in random map generator
+  - Fixed bug #1783878: Saved random map does segfault on load if no tribe is
+                        explicitly set
+  - Fixed bug #1815613: Editor crash when setting new 0,0 coordinates
+
+
+### Graphics Engine
+
+  - Renamed "sub" tag to "div" in new font renderer.
+  - The new font renderer now sets the width properly and supports player color
+    for images. Added width property to img tag
+  - The new font renderer now creates a set of textures that will be blitted
+    separately by the new class RenderedText. This avoids issues with texture
+    sizes exceeding the maximum size supported by graphics drivers when
+    MultilineTextareas get arbitrarily long.
+  - Fixed incorrect layout of divs with width=fill when the previous div is
+    wider than 50%
+  - Fixed superfluous space characters at beginning and end of lines
+  - Implemented text floating around images
+  - Messages try to render with the new font renderer first, then fall back to
+    the old font renderer for layouting messages that haven't been converted yet
+    (and from savegames).
+  - All images with player color now receive their color by a common
+    playercolor_image function. Available player colors are kept in an array.
+  - Replaced raw pointers in the font renderer with shared_ptr
+  - Split graphics into multiple Cmake libraries.
+  - Got rid of EdgeOverlayManager and FieldOverlayManager and shifted their
+    functionality to local draw() functions in individual classes. Gave the
+    Interactive* classes their own draw() functions.
+  - Refactored Tcoords, Fcoords and TriangleIndex
+  - Force integer precision for overlays. This fixes fuzzy overlay images when
+    the player hits Ctrl+0 to reset the zoom.
+  - Show a basic SDL error message box to the user if the shading language
+    can't be detected or is too old.
+  - Print the shading language as double to console
+  - Fix shading language version detection for system locales that don't
+    use . as a decimal separator
+  - Fail with SDL messagebox if SDL_BYTESPERPIXEL != 4
+  - Fixed bug #1674243: Assign owners to neighbors in Player::rediscover_node.
+                        The lack of owners was causing crashes with the road
+                        program, which no longer knew which texture to pick.
+  - Fixed bug #1711816: Black terrains on fullscreen switch.
+
+
+### Networking
+
+  - Replaced SDL-Net with Boost.Asio
+  - Added IPv6 support
+  - Implemented a relay server. Opening a router port is no longer necessary
+    for the host of internet games
+  - Improved the online login code by adding semi-constant user ids that are
+    valid for 12 hours, allowing to reclaim a username after a disconnect
+  - Increasing password security by no longer storing and transmitting it in
+    plaintext
+  - Improvements to Metaserver protocol
+  - Fixed memory leak in LanGameFinder
+  - Fixes on the communication between widelands and the metaserver:
+    - Permit answering PING requests even while logging in
+    - Print current time to console when logging in
+    - Ease finding the corresponding log entry on the metaserver when debugging
+    - Re-enabled and fixed unused code for whisper message to nonexisting player
+    - Handle error message when trying to join a non-existing game
+    - Avoid hanging client even after being notified about the non-existing game
+    - Removed no longer needed error messages
+  - Fixed bug #1691335: Multiplayer client crashes when the host hasn't selected
+                        a map yet
+  - Fixed bug #1794339: Segfault joining game
+  - Fixed bug #1805325: Crash on late joins of LAN games, and display of map
+                        name in LAN lobby.
+
+
+### Build System
+
+  - Windows builds now have a unique app id for every build. This allows
+    parallel installation of several versions.
+  - Added support for gcc7 and llvm8.
+  - Removed "redundant-decls" flag for Windows builds due to conflict between
+    SDL and MinGW.
+  - New Macro FALLS_THROUGH; for use in switch statements.
+  - Let Travis build each commit on MacOS in addition to our Linux builds. Note
+    that the regression test suite is only run for Linux.
+  - Allow compiling with AddressSanitizer, and choosing between gcc and clang on
+    the first compile.
+  - Deactivated the rich text testing project, as it's currently unmaintained.
+  - Move website related binaries to base dir in compile.sh
+  - Do not build website tools on appveyor, this saves 20 minutes on x64 debug
+    builds
+  - Check for minor version of CMake
+  - Only export ICU_ROOT if CMake version is lower than 3.12
+  - Support for glbinding 3 and new Boost version
+  - Fix revision detection
+  - Fixes for handling different Cmake policies
+  - Use MacOSX.sdk if an appropriate versioned SDK can't be found.
+  - Add linker flags to please Ubuntu 18.10
+  - Use more processing units when using the compile script. Defaults to: max.
+    Processors -1. Can be set with the -j switch.
+  - Copy the version file instead of moving it, so that the update script can be
+    run twice in a row.
+  - Use compile.sh when running update.sh
+  - Added tags for Flatpak to appdata.xml
+  - Modernized how Mac OS X releases are done:
+    - Add CFBundleShortVersionString to Mac builds
+    - The script for building on macOS uses gcc-7 now. Also it checks whether
+      the SDK10.7 is installed or not and uses the latest installed version if
+      it cannot find the old one.
+    - Choose between compiler clang or gcc, specify build type: debug or release
+    - Set build target to 10.9 if macOS 10.9 or newer is found
+    - Append macOS target version to dmg filename
+  - Fixes for Debian-based software centers:
+    - Add stock icon to appdata.xml
+      (c.f. https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=857644)
+    - Change icon definition in .desktop to be a generic one
+    - Content ratings are now accepted by the validator, so we've activated them
+    - Validate .desktop file on translation updates. Removed deprecated category
+      from .desktop file.
+
+
+### Other Issues
+
+  - Moved utils/fix_lua_tabs.py to utils/fix_formatting.py and added calls to
+    clang-format and pyformat.
+  - Cleaned up Windows utils
+  - Removed unused images
+  - Fixed a series of compiler warnings for clang, gcc and Windows.
+  - The ProductionSiteDescr constructor still contained some checks from the
+    time when they used to inherit from MilitarysiteDescr. Removed this obsolete
+    code and made working_positions and programs mandatory.
+  - Used the Notification system to reduce some code interdependency.
+  - Various code cleanups to make the code more readable.
+  - Fixed diverse crashes and memory leaks with the help of AddressSanitizer
+  - Diverse refactorings to use composition over inheritance and to get rid of
+    multiple inheritance
+  - Replaced SyncCallback through a std::function<void()>.
+  - More widespread use of smart pointers
+  - Untangled MapView and InteractiveBase.
+  - Cleaned up map handling in EditorGameBase
+  - Removed some dead code and reduced dependency cycles
+  - Options screen now saves immediately so that the changes are persistent even
+    if Widelands crashes afterwards.
+  - Added 2 new functions to Lua interface: list_directory and is_directory
+  - Split new function cleanup_portspaces() from allows_seafaring(), and
+    refactored port spaces checks.
+  - Only recalculate whether a map allows seafaring when something has changed
+  - Economies are now mapped to global serials and kept as unique_ptr in the
+    Player objects
+  - Exit gracefully if user specifies a datadir that doesn't exist
+  - More strict sanitizing of chat messages
+  - Print a welcome message on joining the metaserver
+  - Write Windows log output to homedir instead of the program dir
+  - Widelands is now installed into local appdata on Windows
+  - Copy translation validation results into maintainers' and translators' views
+    to make them easier for translators to navigate
+  - Use std::cout for logging when calling terminate on shutdown, because the
+    logger might not exist any more
+  - Remove test logging output from production_program.cc
+  - Use internal names rather than descnames for log messages and workarea IDs
+  - Refactor website binaries to use a real tree data structure for writing JSON
+  - Print more information in syncstreams. Create additional smaller syncstream
+    files containing the last few seconds leading to a desync.
+  - Added a suppressions file for Valgrind to mask memory errors caused by
+    backend libraries
+  - Fixed bug #1648178: Fatal Exception: Bad Cast
+  - Fixed bug #1743086: ASAN memcopy overlap on Ubuntu Budgie from libSDL
+                        2.0.6+dfsg1 by disabling sound as a workaround to a bug
+                        in the backend
+  - Fixed bug #1724145: Crashes in master-2511_release_x64 on save, caused by
+                        economy merges making Lua variables go nil
+  - Fixed bug #1776603: ASAN: wl_map_object_info leaks memory
+
+
+## Build 19
+
+### Animations, Icons and Overlays
+
+  - New animations for Barbarians buildings: Wood Hardener, Farm, Fisher's Hut,
+    Gamekeeper's Hut, Lumberjack's Hut, Quarry, Ranger's Hut, Taver, Inn,
+    Big Inn, Warehouse, Scout.
+  - New animations: Imperial Vintner, Blackroot Field.
+  - New menu icons: All workers, Blackroot, Pitta Bread, Snack, Ration, Meal,
+    Spidercloth, Options Menu, Warehouse stock policy, Messages window
+  - New road textures to improve visibility on all terrains
+  - Better coloring for workarea pics.
+  - Fixed hotspot for Babarian Brewer walk animation.
+  - Fixed bug #1453528: Buildings missing menu icons
+  - Fixed bug #1408712: Waves are rolling in different speed /rolling angle is
+                        different
+  - Fixed bug #1407799: Fatal exception:  Image not found:
+                        tribes/empire/soldier/untrained.png
+  - Fixed bug #1324642: Playercolor mask has wrong size
+  - Fixed bug #829984:  Tweak the duck animation
+  - Fixed bug #672248:  Duplicated animations
+
+
+### Sounds
+
+  - Added sounds for Fox, Elk, Wolf, Stag, Boar, Smelting Works, Weapon
+    Smithies, Ax workshop, Lime Kilns, Taverns, Breweries, Winery,
+    Wood Hardener.
+  - Replaced sound for Sheep and Mills.
+  - Fixed bug #1592692: No production sounds on some maps
+  - Fixed bug #1536053: Widelands without sound on win
+  - Fixed bug #1500531: Random corrupted audio (loud garbled noise) when
+                        ox breeder is working for Barbarian tribe.
+  - Fixed bug #1304638: Wrong sound played
+
+
+### Tutorials and Campaigns
+
+  - Split tutorial into "Basic Control" and "Warefare" and added encancements.
+  - New "Seafaring" and "Economy" tutorials"
+  - Redesigned Barbarian campaign to remove topcs that are covered by the
+    tutorials.
+  - Fixed bug #1424950: Strange character relationships in the empire campaigns
+  - Fixed bug #1349378: Get_soldiers doesn't return a table in Island Hopping
+  - Fixed bug #1311244: Atlantean Mission Trigger fail
+  - Fixed bug #1298411: No necessity to conquer all military buildings in the
+                        third Barbarian Campaign
+  - Fixed bug #1286576: Tutorial fails if player is in road building mode when
+                        military building finishes
+  - Fixed bug #1088222: Barbarians Campaign: small suggestions for improvement
+  - Fixed bug #674839:  Some issues of barbarian tutorial 3
+
+
+### Maps
+
+  - New maps: Archipelago Sea, Dolomites, Wide World
+  - Removed maps: Dry Riverbed, Long long way, War of the Valleys
+  - Overhauled maps: Comet Islands, Full Moon, Glacier Lake, Kings and Queens,
+    Last Bastion, River Explorers, The Nile, Twin Lagoons, Volcanic Winter
+  - Added "hint" to the json file created by wl_map_info for use on the website.
+
+
+### Saveloading
+
+  - Older savegames can no longer be loaded.
+  - Older maps can be loaded, but new maps can't be loaded with previous
+    versions of Widelands.
+  - User maps are now saved in a 'My Maps' subdirectory to prevent overwriting
+    of official maps
+  - No longer write replay files for scenarios
+  - Implemented rolling autosave
+  - Disallow changing player slots in single player scenarios.
+  - Added checks for illegal file names during map saving.
+  - Fixed a crash where a leaked remnant of the game session would still be
+    subscribed to the 'changed resolution' event if a savegame failed to load.
+  - Fixed crash with identical autosave filenames when LAN game is run with
+    multiple instances of Widelands on a single computer. Also, more informative
+    error messages in disk_filesystem.cc.
+  - Fixed bug #1548932: Editor fails on save with zip filesystem
+  - Fixed bug #1526514: player 2 in "" section [player_2] not found
+  - Fixed bug #1509172: Editor gives error on saving maps in Windows.
+  - Fixed bug #1428396: Savefile broken when enemy deafed
+  - Fixed bug #1413734: Savegame does not load
+  - Fixed bug #1388028: Unable to load saved game
+  - Fixed bug #1375915: Scripting files get deleted when a map is resaved
+  - Fixed bug #1332832: Warning when starting a new game Unused key "name" in
+                        LuaTable.
+  - Fixed bug #1311716: Segfault when loading a game with nightly build
+  - Fixed bug #1303669: Reduce size of campaign savegames
+  - Fixed bug #1302577: Wrong minimap in load dialog when the save game has been
+                        overwritten
+  - Fixed bug #1254116: Crash on saving game: unprotected error in call to Lua
+                        API (table index is NaN)
+  - Fixed bug #1228811: Observers savegame contains no minimap.
+  - Fixed bug #1227984: Autosave should not trigger while game is paused
+  - Fixed bug #992829:  Console output: WARNING: There are 73 unloaded objects.
+  - Fixed bug #979995:  Game crashes with large map when saving
+
+
+### AI
+
+  - AI can now build and use ships
+  - Improved placing, upgrading and dismantling buildings
+  - Improved placing and destroying roads.
+  - AI no longer runs out of wood
+  - Enhanced military and soldier training strategy
+  - Reworked the way how AI stores some data in Player object
+    (GamePlayerAiPersistentPacket)
+  - Fixed bug #1388255: Widelands crashes when loading a multiplayer game
+  - Fixed bug #1344288: Segmentation fault - AI building enhancement
+  - Fixed bug #1342554: [defaultai.cc:2406] Help: I do not know what to do with
+                        a outpost
+  - Fixed bug #1330070: AI crashes
+  - Fixed bug #1311790: Assertion error Widelands::StreamWrite::Coords32 shortly
+                        after starting a new game
+
+
+### Gameplay
+
+  - Collectors win condition now reports team scores as well as player scores.
+  - New win condition: Artifacts
+  - Added New starting condition "Trading Outpost" that will periodically give
+    the player some wares if needed (cheat mode)
+  - Other tribes' buildings that have been conquered can now be dismantled
+  - Balancing: Added gold to building cost for Atlantean training sites.
+    Made Barbarian attack stronger.
+  - When an expedition ship places a port, a bit of land is cleared of trees to
+    make room for a few buildings.
+  - Ports can be affected by terrain changes up to 3 tiles away from their original
+    position, so we recalculate as much when changing a terrain tile.
+  - New tree/terrain affinity values.
+  - Forcing a constructionsite properly conquers the area that the finished
+    building will occupy.
+  - Reworked find_portdock.
+  - "Out of resources" messages are now be triggered by productivity
+  - Engine change: all tribes can now use any building/ware/worker etc.
+    Use Lua instead of finf file for initialization.
+  - Ontology cleanup: Internal unit names now match their display names.
+    Renamed worker program "geologist-find" to "geologist_find" and "playFX" to
+    "play_sound" and removed unused option "setdescription".
+  - Added Description objects for all tribe and world entities to Lua interface.
+  - Removed LuaBaseImmovable::get_size. The corresponding functions now return
+    strings instead of ints.
+  - Added LUA interface to ship - RO property shipname
+  - Updated Eris to version 683ac97476a8634d9e5c17f0dec8dff8b7f3e595 (Lua 5.3).
+  - Fixed bug #1554552: Wounded attacking soldiers failing to retreat
+  - Fixed bug #1551578: Fortified Village crashes when building can't be placed.
+  - Fixed bug #1542703: Crash during battle in editor_game_base.cc:677: Only
+                        allow building a port if all fields can be conquered.
+                        Also added a test for this issue.
+  - Fixed bug #1525395: Atlantean mines failing to extract all resources
+  - Fixed bug #1509220: Atlanteans campaign keeps counting 0 ships
+  - Fixed bug #1504948: Performance issue when "no use for ships on this map"
+  - Fixed bug #1502458: Carrier hiding in Warehouse/HQ is hardcoded
+  - Fixed bug #1490116: Fully promoted soldiers remaining in training sites
+  - Fixed bug #1457425: Fight never ends (also not 2h later)
+  - Fixed bug #1451078: Labyrinth malfunctions full report
+  - Fixed bug #1451069: Collectors win condition doesn't count wares in ports
+  - Fixed bug #1442945: Atlanteans ship construction much faster
+  - Fixed bug #1442869: Stopped production sites should produce something from
+                        their consumed wares before they stop
+  - Fixed bug #1434291: Collectors game over message
+  - Fixed bug #1423468: After reload, all percentages are blue until they are
+                        updated again
+  - Fixed bug #1420521: Reset target quantity is overwritten easily
+  - Fixed bug #1407418: Multiple hunters hunt for same animal
+  - Fixed bug #1402392: Widelands crashed with SIGSEGV in
+                        LuaGame::LuaPlayer::get_buildings()
+  - Fixed bug #1402231: Wl crashes when saving after port is reduced to
+                        warehouse
+  - Fixed bug #1395238: Soldiers getting stuck
+  - Fixed bug #1389211: Port without a portdock (game crashing)
+  - Fixed bug #1387801: Crash when expedition port is destroyed while wares are
+                        unloaded
+  - Fixed bug #1344179: Granite mines should check if their output is needed
+  - Fixed bug #1341662: Remove the animals out of the Barbarian directory
+  - Fixed bug #1332842: Remove support for different flag and frontier 'styles'.
+  - Fixed bug #1332455: Productivity of the Atlantean farm does not drop to 0
+                        when it does not work
+  - Fixed bug #1332452: Crop does not grow
+  - Fixed bug #1302635: Random tribe selection always gives the same result
+  - Fixed bug #1302593: Result screen not shown in loaded game when a player was
+                        already defeated in saved game
+  - Fixed bug #1290123: Delete barbarian stronghold
+  - Fixed bug #1251914: Soldier stuck in battle animation loop
+  - Fixed bug #980287:  Productivity drops on game load
+  - Fixed bug #978138:  Ship is under fisher's hut
+  - Fixed bug #902807:  Stopped production sites do not have their reserves
+                        filled
+  - Fixed bug #861761:  Improve production prioritisation
+  - Fixed bug #849896:  Heal the highest level, healthiest soldier first
+  - Fixed bug #653308:  The attack dialog is not updating the number of possible
+                        attackers
+  - Fixed bug #580923:  Production of carrier does not respect building costs
+
+
+### User Interface
+
+  - Display Widelands version for each client in Internet lobby.
+  - Overhaul of diverse menu screens and windows: map and game loading,
+    in-game Building Statistics, main menu Options and "About Widelands"
+  - Messages can be filtered
+  - Added Win condition descriptions as an Objective
+  - Remember map location markers in singleplayer savegames.
+  - Ships now have individual names and show their states in the statistics
+    string
+  - Added census/statistics strings to ships and ship construction.
+  - Hide wares which do not need prerequisites and therefore are produced
+    'endlessly' from configure economy
+  - Watchwindow fixes: Fixed some oddities such as view duplication:
+    - Possibly fixed bug #1553699 (probable cause: std::erase used on invalid
+      position, which results in undefined behavior).
+    - Highlight the current view button.
+  - Editor CategorizedItemSelectionMenu no longer grows excessively wide when
+    multiple items are selected.
+  - Shifted chat overlay up so it won't overlap with the menu buttons.
+  - Most UI elements now use the new font renderer
+  - Various scrollbar-related fixes.
+  - Fixed handling of Alt key in Linux
+  - Fixed bug #1566441: String "Saving Game" appears too late
+  - Fixed bug #1559729: Port space not shown.
+  - Fixed bug #1542214: Inconsistent ordering of OK/Cancel buttons.
+  - Fixed bug #1526916: When selecting a map, the parent directory now has a
+                        lower sort order than all other directories.
+  - Fixed bug #1480937: Escape key doesn't work in all dialogues
+  - Fixed bug #1451147: Game crashes when headquarters is taken over
+  - Fixed bug #1426654: Only list compatible .wmf files in the load game dialog
+  - Fixed bug #1422072: Private message improvements
+  - Fixed bug #1419537: Allow Observers to show building spaces
+  - Fixed bug #1413226: Spaces in attack box disappear
+  - Fixed bug #1412242: Multiplayer save game selection does not show the
+                        filename
+  - Fixed bug #1371062: Add confirmation dialog to exit game
+  - Fixed bug #1344350: Constructionsites/dismantlesites only show a dot instead
+                        of building image
+  - Fixed bug #1342563: When choosing random tribe and castle village, the tribe
+                        can be guessed
+  - Fixed bug #1339861: Remove the "Military settings" option
+  - Fixed bug #1322741: Text issue: fps statistics overlaps with xz coordinates
+  - Fixed bug #1306728: Crash when info window opened if statistics window has
+                        been opened
+  - Fixed bug #1300359: Installation dialog shows old screenshot
+  - Fixed bug #1298301: Do not show scenario messages when player is in road
+                        building mode
+  - Fixed bug #1296655: News window crashes when building has not been seen in
+                        the game
+  - Fixed bug #1283693: Crash after very long chat message
+  - Fixed bug #1252625: Plot areas now update their data less often.
+  - Fixed bug #1247384: Newly conquered building should prefer heroes
+  - Fixed bug #1232392: Allow tabbing in forms
+  - Fixed bug #1191556: The "Cancel Expedition" button in Port windows will now
+                        toggle and remove the tab.
+  - Fixed bug #1167242: Ctrl+destroying a flag with a building does not destroy
+                        the whole road
+  - Fixed bug #998544:  Replay name should contain Widelands version
+  - Fixed bug #988831:  Remove message expiry feature.
+  - Fixed bug #965633:  Set default AI to random tribe
+  - Fixed bug #964541:  Closing building window closes (child) help window
+  - Fixed bug #744749:  Training sites should either show statistics as a
+                        military or as a productionsite
+  - Fixed bug #736404:  Cannot switch from Widelands in full screen on Linux
+                        (alt+tab)
+  - Fixed bug #682351:  Wishlist: Fullscreen toogle also in Menu
+  - Fixed bug #571796:  Stop the rounding to full 10ths for productivity
+                        percentages
+  - Fixed bug #566729:  Add gametime display to replays
+  - Fixed bug #536230:  Building icons in menu are shown without correct
+                        playercolor
+
+
+### Internationalization
+
+  - Big string overhaul to improve translations
+  - UI redesigns to make translated strings fit
+  - Automatic font selection and support for Arabic script
+  - Fixed escaping of special characters in messages
+  - Richtext and rt_render can now handle &nbsp;
+  - ngettext and pgettext are now available in Lua
+  - Fixed bug #1341990: Map names cause confusion in internet play
+  - Fixed bug #1289698: Sorting maps by name sort by original instead of
+                        translated name
+  - Fixed bug #1289586: Let tree descriptions use the same size scheme as
+                        buildings
+  - Fixed bug #1290066: Sort languages by their native names
+  - Fixed bug #978175:  Localization not yet loaded in command line
+  - Fixed bug #973714:  Fonts are different between daily PPA and bzr repository
+
+
+### Editor
+
+  - Merged the four worlds into one, so any entity can be placed on any map now.
+  - New forested mountain terrains
+  - Editor now starts with the Info tool instead of the Set Height tool
+  - The user can choose to display map or filenames when loading or saving a map
+  - Overhaul of all main menu subenus
+  - Stopped the infotool from painting and gave it size 1.
+  - Fixed various cashes in editor when loading a map or using the Set Origin
+    tool.
+  - Fixed bug #1535065: Editor crashes with random map regarding player
+                        positions.
+  - Fixed bug #1532417: Complete indicators for resource water
+  - Fixed bug #1504366: Editor crashes unexpectedly
+  - Fixed bug #1426276: Editor Player Menu doesn't update tool overlay when
+                        player is removed
+  - Fixed bug #1402786: "Set origin" should be in the tools menu
+  - Fixed bug #1392406: Confirmation dialog when leaving the editor although
+                        Ctrl has been pressed
+  - Fixed bug #1392215: Secondary and Third Alternative Tool no longer working
+                        in the Editor
+  - Fixed bug #1378801: Random map: Wasteland % change not reflected in
+                        Mountains %
+  - Fixed bug #1341112: Editor line abruption in Noise height tool
+  - Fixed bug #1289575: Dialog for selecting immovable bobs in editor lacks
+                        tooltips
+  - Fixed bug #1281823: Setting resources via LUA API broken in Editor
+  - Fixed bug #1174075: Clarify meaning of icons in editor terrain preview
+  - Fixed bug #1171231: Size of minimap in the editor not changed when new map
+                        is loaded
+  - Fixed bug #977980:  Fish and mountain ressources cannot be removed when they
+                        are on grass
+  - Fixed bug #821553:  Increase maximum number of terrain types
+  - Fixed bug #768826:  Show altitude level in the editor
+
+
+### Help and Documentation:
+
+  - Generic in-game and in-editor help system driven by Lua scripts. All values
+    except for performance are now read from the current Lua configuration
+    files.
+  - Added some performance values for the buildings help text
+  - Improved documentation: Started adding Tribe and World information to our
+    online Widelands Scripting Reference.
+  - Created a new executable 'wl_map_object_info' that will generate JSON files
+    for updating the encyclopedia on the website.
+
+
+### Graphics Engine
+
+  - Fixed line drawing by replacing the broken use of GL_LINES with a
+    tessellation algorithm for drawing lines.
+  - Decoupled UI update frequency from game update frequency (which is now 15
+    times per second).
+  - Removed graphic::update() and Panel::update() and always redraw at maxfps.
+  - Changed default maxfps to 30 (instead of 25).
+  - Filter all textures linearly instead of near. This looks nicer and texture
+    bleeding has been taken care of.
+  - Added a new undocumented command line argument --debug_gl_trace which will
+    log every OpenGL call that is made, together with arguments, return values
+    and glError status. This requires that Widelands is build using
+    -DOPTION_USE_GLBINDING:BOOL=ON. It is a NoOp for GLEW. This will help
+    debugging non-reproducible OpenGL errors that are reported. Tested with
+    glbinding 1.1.0.
+  - More logging when OpenGL is initialized.
+  - Correctly crop destination and source rectangle while blitting.
+  - Fixed memory leaks in UI::Table::draw and around code found using the Leaks
+    tool in Apple's Instruments.
+  - Fixed bug #1562071: Visual glitch in chat overlay as well as chat overlay
+                        transparency.
+  - Fixed bug #1535569: Messages window slows down game speed
+  - Fixed bug #1480928: Lumberjack animation glitches
+  - Fixed bug #1447333: Crashes on main menu under Windows 7. Mouse movement
+                        seems to trigger this.
+  - Fixed bug #1424408: Graphics become all white in tutorial
+  - Fixed bug #1409267: Graphic errors with text on Windows
+  - Fixed bug #1408707: Water should be dithered as land terrain
+  - Fixed bug #1397302: Fullscreen Toggle Text Overlay
+  - Fixed bug #1397301: Screenshots black
+  - Fixed bug #1393547: Flashing black background when autosaving
+  - Fixed bug #1389346: Disabling opengl results in black screen
+  - Fixed bug #1378797: When playing fullscreen mode Unity locks the screen
+  - Fixed bug #1370144: Playercolor mask is sometimes black
+  - Fixed bug #1302565: Screenshot shows wrong image when a game is chosen with
+                        the mouse pointer
+  - Fixed bug #1257476: Crash when attempting to load a game after toggeling
+                        opengl rendering
+  - Fixed bug #1257320: Strange vertical lines during gameplay
+  - Fixed bug #1243700: Statistic window displays graph incorrectly when in
+                        hour-mode
+  - Fixed bug #1215412: Graphic artifacts
+  - Fixed bug #1203006: Increasing resolution in fullscreen results in the right
+                        and bottom sides not being updated properly
+  - Fixed bug #1202133: Dialogs (and list of maps) have white background and
+                        repetition
+  - Fixed bug #1041436: Game jerks and stops after playing awhile. Bzr6421
+  - Fixed bug #731987:  Mouse does not work in full screen on virtual machines
+  - Fixed bug #647456:  Options: colors of the main WL menu changes when changing
+                        the language
+  - Fixed bug #536559:  Fullscreen must not change physical screen resolution
+  - Fixed bug #536500:  Can not toggle fullscreen with Alt+Enter or resize with
+                        w.m.
+  - Fixed bug #536317:  Graphics libraries still in memory when no longer needed
+
+
+### Other Issues
+
+  - Added build instructions for OpenBSD
+  - Ships get debug window. Also its content are extended.
+  - Removed --logfile command line flag - use redirects instead.
+    Added an SDL2 aware logger that replicates writing a stdout.txt on windows.
+  - Removed --remove-replays and --remove-syncstreams. We now always delete
+    them if they were autogenerated and older than 4 weeks.
+  - Added --write-syncstreams option which defaults to true for now.
+    This will give us more debug information for future desyncs.
+  - Remove --dedicated commandline option and associated code.
+  - Added Widelands version to log output
+  - Moved all data-related directories into a new "data" directory.
+  - Fixed bug #1581828: Desync while testing bzr8001[bug-1418154-collectors-teams]
+  - Fixed bug #1562332: Crash with playing chat sound in Internet lobby
+  - Fixed bug #1522290: Gameplay suddenly gets very slow
+  - Fixed bug #1503949: Excessive CPU usage and loading time seemingly related
+                        to length of the game
+  - Fixed bug #1438611: Widelands is leaking memory
+  - Fixed bug #1413326: Current trunk on Linux cannot join a game that is hosted
+                        on Windows
+  - Fixed bug #1404478: Windows installer puts string "Widelands" into the
+                        version field
+  - Fixed bug #1278050: Login problems with metaserver
+  - Fixed bug #1274279: Metaserver entry in config gets deleted
+  - Fixed bug #1169445: Commandline options 1/0 &lt;=&gt; true/false on win32
+  - Fixed bug #1096453: Massive memory leaks
+
+
+
+## Build 18
 - Added a preview for the costs of a building and the resources gained
   through the dismantling of a building.
 - Added a button to productionsites for evicting a worker.
@@ -650,7 +3521,7 @@
 - Fixed bug #1228596: Important system messages are not forwarded to ingame chat
 
 
-### Build 17
+## Build 17
 - Diversified heal rate for military buildings - the bigger, the quicker.
 - Improved and remodelled a lot of the buildings' animations.
 - Improved and remodelled a lot of the bobs' animations.
@@ -804,7 +3675,7 @@
 
 
 
-### Build 16
+## Build 16
 - Many new graphics, new sounds.
 - Added a dedicated server function for terminal use.
 - Improved and refactored font handler.
@@ -941,7 +3812,7 @@
 - Fixed bug #568373: Removed flag display in the building statistic menu
 - Fixed many other bugs.
 
-### Build 15
+## Build 15
 - Removed registering functionality for metaserver. This is to be compatible
   with future changes to the metaserver.
 - Small text tweaks and translation updates.
@@ -1095,7 +3966,7 @@
   locales), the program would crash when a letter was typed in the description
   multilineeditbox. (svn:r4563)
 
-### Build 14
+## Build 14
 - Fix bug that the Firegames map had no water. (svn:r4533)
 - New tree and stone graphics for the Blackland world. (svn:r4525, svn:r4526,
   svn:r4527, svn:r4528, svn:r4529)
@@ -1446,7 +4317,7 @@
 - Fixed Trigger_Time (and replaced Trigger_Null with it). Introduced
   Event_Set_Timer. (svn:r3541, svn:r4485)
 
-### Build 13
+## Build 13
 - Count casualties/kills, military/civilian buildings lost/defeated and present
   them in the general statistics menu (except for civilian buildings defeated,
   which is omitted from the user interface) (svn:r3395, svn:r3407).
@@ -1635,7 +4506,7 @@
   (svn:r3539)
 
 
-### Build 12
+## Build 12
 - New feature: Additional scenario event types and trigger types.
 - New feature: Flags are automatically placed when holding down Ctrl while
   building a road.
@@ -1673,7 +4544,7 @@
   multiplayer games.
 - Many other bugfixes, optimizations and cleanups.
 
-### Build 11
+## Build 11
 - New feature: Game Tips during loading
 - New feature: Progress message windows (Loading-screens)
 - New feature: Fog of war
@@ -1694,11 +4565,11 @@
 - Fix of bug 1633431 (Attacking headquarters crashes game.)
 - Fix of bug 1451851 (Upgrade building while delievering to/from cause
   crash/hang)
-- Fix of bug 1690070 (ware: can not move from building A to B)
+- Fix of bug 1690070 (ware: can not move from building A to B )
 - Many other bugfixes
 
 
-### Build 10
+## Build 10
 - Addition of new tribe "The Empire"
 - Tribe "Barbarians" was completely overhauled
 - New blender graphics for the Barbarians and the Empire by bithunter32
@@ -1724,7 +4595,7 @@
 - Bug fixes, bug fixes, bug fixes
 
 
-### Build 9half
+## Build 9half
 - Updated Campaign Missions
 - Added proper localization support (language selectable in options menu)
 - Font renderer now renders multiple newlines correctly and in richtext accepts
@@ -1747,7 +4618,7 @@
 - new font renderer
 
 
-### Build 9
+## Build 9
 - Chat for multiplayer
 - Global Stock, Menu structure reworked
 - General statistics menu
@@ -1768,7 +4639,7 @@
 - fixed crash when using 32-bit fullscreen mode under win32
 
 
-### Build 8
+## Build 8
 - some UI ergonomics (new mapselect dialog,
   double click function in listselects)
 - resources and default resources support
@@ -1781,7 +4652,7 @@
 - editor bob tool
 
 
-### Build 7
+## Build 7
 - many new buildings
 - improved in-game graphics
 - improved in-game UI
@@ -1794,14 +4665,14 @@
 - various code cleanups and bug fixes
 
 
-### Build 6
+## Build 6
 - graphics reworked
 - added functionality for the first few buildings
 - reworked transport code
 - added multiselect option for editor's set texture tool
 
 
-### Build 5
+## Build 5
 - added Immovable Tool in editor
 - added Map_Loader support
 - added support for multifield-fieldsels (for editor and to select areas)
@@ -1812,12 +4683,12 @@
 - added support for more (and most importantly: compressed) graphics formats
 
 
-### Build 4
+## Build 4
 - added Warehouse options window
 - added ware requests
 
 
-### Build 3
+## Build 3
 - added !DirAnimations for convenience
 - added Economy code
 - added record/playback code
@@ -1826,7 +4697,7 @@
 - use different background images for different menus
 
 
-### Build 2
+## Build 2
 - options handling redesigned
 - introduced System
 - added keyboard input
@@ -1843,6 +4714,6 @@
 - split of moving and non-moving objects in hierarchy
 
 
-### Build 1
+## Build 1
 * First release
 

@@ -1,14 +1,14 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
+wl.Descriptions():new_productionsite_type {
    name = "barbarians_shipyard",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Shipyard"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   needs_seafaring = true,
+   map_check = {"seafaring"},
 
    buildcost = {
       log = 3,
@@ -22,29 +22,32 @@ tribes:new_productionsite_type {
       granite = 2
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 62, 48 },
-      },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 62, 48 },
       },
       unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
          hotspot = { 62, 48 },
       },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 62, 48 },
+         hotspot = { 61, 47 },
+      },
+   },
+
+   spritesheets = {
+      build = {
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 61, 47 }
       },
    },
 
    aihints = {
       needs_water = true,
       shipyard = true,
-      prohibited_till = 1500
+      prohibited_till = 1050
    },
 
    working_positions = {
@@ -52,30 +55,35 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      blackwood = 10,
-      log = 2,
-      cloth = 4
+      { name = "log", amount = 2 },
+      { name = "blackwood", amount = 10 },
+      { name = "cloth", amount = 4 }
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
-            "sleep=20000",
-            "call=ship",
-            "return=skipped"
+            "call=ship on failure fail",
+            "call=ship_preparation",
          }
       },
       ship = {
          -- TRANSLATORS: Completed/Skipped/Did not start constructing a ship because ...
-         descname = _"constructing a ship",
+         descname = _("constructing a ship"),
          actions = {
-            "check_map=seafaring",
-            "construct=barbarians_shipconstruction buildship 6",
-            "animate=working 35000",
-            "return=completed"
+            "construct=barbarians_shipconstruction worker:buildship radius:6",
+            "sleep=duration:20s",
+         }
+      },
+      ship_preparation = {
+         descname = _("working"),
+         actions = {
+            "animate=working duration:35s",
          }
       },
    },
 }
+
+pop_textdomain()

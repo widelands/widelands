@@ -4,8 +4,11 @@ wl_test(test_economy
     test_road.cc
     test_routing.cc
   DEPENDS
+    base_macros
+    base_test
     economy
     io_filesystem
     logic
+    logic_map_objects
     logic_widelands_geometry
 )

@@ -1,0 +1,1207 @@
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2023 Widelands Development Team
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# SevyRide, 2018
+# Wuzzy <Wuzzy@disroot.org>, 2018
+# Elisabeth Jäger, 2018
+# Markus M <mayer.markus@gmx.at>, 2019
+# Stephan Lutz <stephan-lutz@gmx.de>, 2022
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands svnVERSION\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"PO-Revision-Date: 2018-03-24 18:15+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2022\n"
+"Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. TRANSLATORS: Name of a backup autosave
+#: ../../data/campaigns/fri01.wmf/scripting/mission_thread.lua:129
+msgid "The Great Stormflood (Backup Autosave)"
+msgstr "Die große Sturmflut (automatische Sicherung)"
+
+#: ../../data/campaigns/fri01.wmf/scripting/starting_conditions.lua:8
+msgid "Langeneß"
+msgstr "Langeneß"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:25
+msgid "Build a wood economy and a reed farm"
+msgstr "Baue eine Holzwirtschaft auf und errichte eine Reetpflanzung"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:27
+msgid "Wood Economy"
+msgstr "Holzwirtschaft"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:28
+msgid ""
+"Build at least one woodcutter’s house and two forester’s houses to start "
+"producing logs, and a reed farm to start growing reed."
+msgstr ""
+"Baue mindestens eine Holzfällerhütte, zwei Försterhütten und eine "
+"Reetpflanzung, um Stämme und Reet zu produzieren."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:33
+msgid "Start producing bricks"
+msgstr "Beginne die Ziegelproduktion"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:35
+msgid "Brick Economy"
+msgstr "Ziegelwirtschaft"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:36
+msgid ""
+"Build a brick kiln, a coal mine, a rock mine, a clay pit and a well to start"
+" producing bricks."
+msgstr ""
+"Baue eine Ziegelei, eine Kohlemine, eine Felsmine, eine Lehmgrube und einen "
+"Brunnen, um mit der Produktion von Ziegeln zu beginnen."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:41
+msgid "Gather building materials"
+msgstr "Baumaterial sammeln"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:43
+msgid "Stockpile Building Materials"
+msgstr "Häufe Baumaterial an"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:44
+msgid ""
+"Stockpile some building materials in your headquarters. Gather at least:"
+msgstr ""
+"Häufe ein paar Baumaterialien in deinem Hauptquartier an. Sammle mindestens:"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:45
+msgid "30 × Log"
+msgstr "30 × Stamm"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:46
+msgid "30 × Granite"
+msgstr "30 × Stein"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:47
+msgid "10 × Clay"
+msgstr "10 × Lehm"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:48
+msgid "40 × Brick"
+msgstr "40 × Ziegel"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:49
+msgid "20 × Coal"
+msgstr "20 × Kohle"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:50
+msgid "30 × Reed"
+msgstr "30 × Reet"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:51
+msgid ""
+"Remember that you can set target quantities for most of these wares in your "
+"economy settings."
+msgstr ""
+"Denk daran, dass du die Zielmengen für die meisten dieser Waren in deinen "
+"Wirtschaftseinstellungen setzen kannst."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:56
+msgid "Produce food for the miners"
+msgstr "Stelle Nahrung für die Bergleute her"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:58
+msgid "Food Economy"
+msgstr "Nahrungswirtschaft"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:59
+msgid ""
+"Build a tavern, a fisher’s house, a smokery, a berry farm and a fruit "
+"collector’s house."
+msgstr ""
+"Baue eine Taverne, ein Fischerhaus, eine Räucherei, eine Beerenzucht und ein"
+" Beerensammlerhaus."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:64
+msgid "Enhance your food economy"
+msgstr "Erweitere deine Nahrungswirtschaft"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:66
+msgid "Enhance Food Economy"
+msgstr "Erweitere die Nahrungswirtschaft"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:67
+msgid ""
+"Build at least two farms, a beekeeper’s house (next to the berry farm), a "
+"bakery, a brewery, and another tavern."
+msgstr ""
+"Baue mindestens zwei Bauernhöfe, eine Imkerei (neben der Beerenzucht), eine "
+"Bäckerei, eine Brauerei und eine weitere Taverne."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:72
+msgid "Build an iron mine and a mining infrastructure"
+msgstr "Baue einen Eisenerzmine und eine Mineninfrastruktur"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:74
+msgid "Build Mines and Mining Infrastructure"
+msgstr "Baue Minen und eine Mineninfrastruktur"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:75
+msgid "Build an iron mine, a furnace, a blacksmithy and a small armor smithy."
+msgstr ""
+"Baue eine Eisenerzmine, einen Schmelzofen, eine Schmiede und eine kleine "
+"Rüstungsschmiede."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:80
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:255
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:264
+msgid "Start recruiting soldiers"
+msgstr "Beginne das Rekrutieren von Kriegern"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:82
+msgid "Recruiting Soldiers"
+msgstr "Krieger rekrutieren"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:83
+msgid "Build a barracks, a reindeer farm and a sewing room."
+msgstr "Baue eine Kaserne, eine Rentierzucht und ein Nähstübchen."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:88
+msgid "Discover more of the island"
+msgstr "Erkunde mehr von der Insel"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:90
+msgid "Expand and Discover"
+msgstr "Ausbreitung und Erkundung"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:91
+msgid "Expand further and discover more of the island."
+msgstr "Breite dich weiter aus und erkunde mehr von der Insel."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:96
+msgid "Train your soldiers"
+msgstr "Bilde deine Krieger aus"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:98
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:309
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:318
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:330
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:346
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:352
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:358
+msgid "Training Soldiers"
+msgstr "Krieger ausbilden"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:99
+msgid ""
+"Train a soldier to the highest possible level. Soldiers are trained in "
+"training camps and training arenas. We will need a gold mine, a tailor’s "
+"shop to sew sturdier garments, and a large armor smithy for better weapons "
+"and helmets."
+msgstr ""
+"Bilde einen Krieger auf die höchstmögliche Stufe aus. Krieger werden in "
+"Ausbildungslagern und -arenen ausgebildet. Wir werden eine Goldmine, eine "
+"Schneiderei für robustere Gewänder und eine große Rüstungsschmiede für "
+"bessere Waffen und Helme benötigen."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:104
+msgid "Defeat the enemy!"
+msgstr "Besiege den Feind!"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:106
+msgid "Defeat the Enemy!"
+msgstr "Besiege den Feind!"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:107
+msgid "Destroy the enemy tribe’s headquarters."
+msgstr "Zerstöre das Hauptquartier des feindlichen Stammes."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:112
+msgid "Escape from the floods"
+msgstr "Entkomme den Fluten"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:114
+msgid "Flee from the Floods"
+msgstr "Fliehe vor den Fluten"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:115
+msgid ""
+"Build a port, a weaving mill and a shipyard, then start an expedition to "
+"flee before the storm flood drowns the island."
+msgstr ""
+"Baue einen Hafen, eine Weberei und eine Werft, dann beginne eine Expedition,"
+" um zu fliehen, bevor die Sturmflut die Insel versinken lässt."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:116
+msgid ""
+"You can build the port either on the easternmost tip of the island or in the"
+" place where the enemy’s headquarters stood."
+msgstr ""
+"Du kannst den Hafen entweder am östlichsten Ende der Insel, oder an der "
+"Stelle, an der das feindliche Hauptquartier stand, errichten."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:117
+msgid ""
+"If you did not prepare well enough to master this challenge in time, you can"
+" reload the scenario from the backup savegame automatically created for you "
+"shortly before you reached the enemy’s headquarters."
+msgstr ""
+"Falls du nicht genügend vorbereitet warst, um diese Herausforderung "
+"innerhalb der zur Verfügung stehenden Zeit zu meistern, kannst du das "
+"Szenario von der automatisch kurz vor Erreichen des gegnerischen "
+"Hauptquartiers erstellten Sicherung neu laden."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:126
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:135
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:144
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:160
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:176
+msgid "Introduction"
+msgstr "Einführung"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:127
+msgid "Welcome!"
+msgstr "Willkommen!"
+
+#. TRANSLATORS: Reebaud – Introduction 1
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:129
+msgid ""
+"Welcome to the beautiful isle of Langeness! I am Reebaud, the chieftain of "
+"this pristine island."
+msgstr ""
+"Willkommen auf der schönen Insel Langeneß! Ich bin Reebaud, der Häuptling "
+"dieser unberührten Insel."
+
+#. TRANSLATORS: Reebaud – Introduction 1. Schauenburg and Holstein are
+#. dukedoms
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:132
+msgid ""
+"My tribe and I have just arrived from the mainland. There were fights with "
+"the Danes in the North, the Schauenburgers and Holsteiners in the East and "
+"South… So I decided to lead my tribe away to start a quiet, peaceful life on"
+" this untouched island."
+msgstr ""
+"Mein Stamm und ich sind gerade vom Festland angekommen. Es gab dort Kämpfe "
+"mit den Dänen im Norden, den Schauenburgern und Holsteinern im Osten und "
+"Süden … Daher entschied ich mich, meinen Stamm wegzuführen, um ein stilles, "
+"friedliches Leben auf dieser unberührten Insel anzufangen."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:136
+msgid "A new home"
+msgstr "Ein neues Zuhause"
+
+#. TRANSLATORS: Reebaud – Introduction 2
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:138
+msgid ""
+"This is as good a place as any to start building our new home. First of all,"
+" we must ensure a stable supply of basic building materials."
+msgstr ""
+"Dieser Platz ist so gut wie jeder andere, um unser neues Zuhause aufzubauen."
+" Als Allererstes müssen wir eine stabile Versorgung mit den grundlegenden "
+"Baumaterialien sicherstellen."
+
+#. TRANSLATORS: Reebaud – Introduction 2
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:141
+msgid ""
+"I have asked Hauke, one of my advisors, to oversee the construction of our "
+"settlement."
+msgstr ""
+"Ich habe Hauke, einen meiner Berater gebeten, den Aufbau unserer Siedlung zu"
+" überwachen."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:145
+msgid "The first buildings"
+msgstr "Die ersten Gebäude"
+
+#. TRANSLATORS: Hauke – Introduction 3. "Peace" is the traditional frisian
+#. greeting
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:147
+msgid ""
+"Peace, Chieftain Reebaud! I will start with the colonization of the island "
+"straight away."
+msgstr ""
+"Frieden, Häuptling Reebaud! Ich werde mit der Besiedelung der Insel sofort "
+"beginnen."
+
+#. TRANSLATORS: Hauke – Introduction 3
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:150
+msgid ""
+"Like all Frisians, we build our houses mainly with bricks. We improve them "
+"by adding some logs and granite. The roofs are thatched with reed, "
+"naturally. Nothing is better suited to keep the rain out."
+msgstr ""
+"Wie alle Friesen bauen wir unsere Häuser hauptsächlich aus Ziegeln. Wir "
+"verstärken die Mauern durch den Zusatz von Stämmen und Steinen. Die Dächer "
+"werden natürlich mit Reet gedeckt. Nichts ist besser geeignet, den Regen "
+"abzuhalten."
+
+#. TRANSLATORS: Hauke – Introduction 3
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:153
+msgid ""
+"We should start by taking care of our wood production. Trees don’t seem to "
+"grow well on this island; better build at least two houses for foresters and"
+" one for a woodcutter."
+msgstr ""
+"Wir sollten damit anfangen, uns um die Holzproduktion zu kümmern. Bäume "
+"scheinen auf dieser Insel nicht allzu gut zu wachsen, daher ist es wohl "
+"besser, wenn wir je Holzfällerhaus mindestens zwei Häuser für Förster bauen."
+
+#. TRANSLATORS: Hauke – Introduction 3
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:156
+msgid ""
+"Also, we had better build a reed farm soon. Even reed farms need reed to be "
+"built, so we must take care not to run short before we can grow our own. "
+"Reed is easily cultivated, so the reed farmer doesn’t need anything more to "
+"start growing reed fields."
+msgstr ""
+"Außerdem sollten wir möglichst bald eine Reetpflanzung bauen. Da auch der "
+"Bau einer Reetpflanzung ohne Reet nicht möglich ist, müssen wir dafür "
+"sorgen, dass uns der Reet nicht ausgeht, bevor er bei uns wächst. Reetanbau "
+"ist nicht schwer, daher braucht der Reetbauer nichts weiter, um mit dem "
+"Anbau zu beginnen."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:161
+msgid "Building our new home"
+msgstr "Unsere neue Heimat aufbauen"
+
+#. TRANSLATORS: Hauke – Introduction 4
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:163
+msgid ""
+"Our wood and reed supplies are ensured. Now, we must take care of our brick "
+"supply. Bricks are burned in a brick kiln out of granite and clay, so we "
+"first need to produce those. On the mainland, we used to cut granite out of "
+"rocks, but I don’t see any here. Perhaps these hills contain enough stones "
+"to mine some granite."
+msgstr ""
+"Unsere Versorgung mit Holz und Reet ist nun gesichert. Jetzt müssen wir uns "
+"um die Ziegelproduktion kümmern. Ziegelsteine werden in der Ziegelei aus "
+"Stein und Lehm gebrannt, also müssen wir zunächst Stein und Lehm herstellen."
+" Auf dem Festland war es üblich, Steinblöcke aus Felsen zu schneiden, aber "
+"hier kann ich keine Felsen entdecken. Vielleicht enthalten diese Hügel ja "
+"genug Gestein um Steinblöcke abzubauen."
+
+#. TRANSLATORS: Hauke – Introduction 4
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:166
+msgid ""
+"Clay is easy to make: A clay digger working at a clay pit will simply dig up"
+" some earth and mix it with water. Just make sure that he has plenty of "
+"space for digging around his clay pit. It might be a good idea to build some"
+" sentinels to expand."
+msgstr ""
+"Lehm ist leicht herzustellen: ein Lehmgräber, der in einer Lehmgrube "
+"arbeitet, gräbt einfach ein wenig Tonerde aus und mischt sie mit Wasser. Wir"
+" müssen nur sicherstellen, dass er viel Platz zum Graben rund um seine "
+"Lehmgrube hat. Vielleicht wäre es eine gute Idee, einige Vorposten zu "
+"errichten, um unser Gebiet zu erweitern."
+
+#. TRANSLATORS: Hauke – Introduction 4
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:169
+msgid ""
+"To burn bricks, the brick kiln needs a fire. We need to use coal as fuel. "
+"Build a coal mine to make sure we don’t run out. No coal means no bricks, no"
+" bricks means no mines, no mines mean no coal… you can see the problem."
+msgstr ""
+"Um Ziegel zu brennen, braucht die Ziegelei ein heißes Feuer. Wir müssen "
+"daher Kohle als Brennstoff verwenden. Baut eine Kohlemine, um zu vermeiden, "
+"dass uns die Kohle ausgeht. Keine Kohle bedeutet keine Ziegel, keine Ziegel "
+"bedeutet keine Minen, keine Minen bedeutet keine Kohle … Ihr seht das "
+"Problem."
+
+#. TRANSLATORS: Hauke – Introduction 4
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:172
+msgid ""
+"Also, build a well – nobody likes to drink salt water, and it is no good for"
+" making clay."
+msgstr ""
+"Außerdem brauchen wir Brunnen – Salzwasser will niemand trinken und für die "
+"Lehmherstellung ist es auch nicht zu gebrauchen."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:177
+msgid "Our first settlement"
+msgstr "Unsere erste Siedlung"
+
+#. TRANSLATORS: Reebaud – Introduction 5
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:179
+msgid ""
+"You did well. Our entire building material production is working now. Let’s "
+"wait until we have gathered some more materials. We could expand our "
+"territory some more, to see what else can be found on this island."
+msgstr ""
+"Nicht schlecht, nicht schlecht. Unsere gesamte Baumaterialproduktion "
+"arbeitet jetzt. Wir sollten warten, bis wir mehr Material gesammelt haben. "
+"Wir könnten unser Gebiet etwas mehr erweitern, um zu sehen, was sich noch so"
+" auf dieser Insel befindet."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:184
+msgid "Reed Shortages"
+msgstr "Reetmangel"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:185
+msgid "Build another reed farm"
+msgstr "Baue eine weitere Reetpflanzung"
+
+#. TRANSLATORS: Hauke – no reed
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:187
+msgid ""
+"I noticed we have been short of reed for a while now. Our buildings seem to "
+"need quite a lot of it. We should build another reed farm or two. Reed is "
+"also used for making fishing nets and other tools; therefore, resolving this"
+" shortage should be a priority."
+msgstr ""
+"Mir ist aufgefallen, dass wir seit einer Weile zu wenig Reet haben. Unsere "
+"Gebäude scheinen ziemlich viel davon zu verbrauchen. Wir sollten ein oder "
+"zwei weitere Reetpflanzungen bauen. Da Reet auch für die Herstellung von "
+"Fischernetzen und anderen Werkzeugen benötigt wird, sollten wir diesen "
+"Engpass schnellstmöglich beseitigen."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:188
+msgid ""
+"You should assign the new reed farm the highest priority for reed in the "
+"construction site window."
+msgstr ""
+"Du solltest der neuen Reetpflanzung die höchste Priorität für Reet im "
+"Baustellenfenster zuweisen."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:191
+msgid "Clay Shortages"
+msgstr "Lehmmangel"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:192
+msgid "Build another clay pit"
+msgstr "Baue eine weitere Lehmgrube"
+
+#. TRANSLATORS: Hauke – no clay
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:194
+msgid ""
+"Our brickmakers have been complaining about a shortage of clay for a while "
+"now. No clay means no bricks can be produced, so this shortage is slowing us"
+" down a lot. It would be better to build one or two more clay pits, and "
+"wells to supply them with water."
+msgstr ""
+"Unsere Ziegler beschweren sich jetzt schon eine Weile über einen Mangel an "
+"Lehm. Ohne Lehm können aber keine Ziegel hergestellt werden, daher "
+"verlangsamt uns dieser Mangel enorm. Es wäre besser, ein oder zwei "
+"zusätzliche Lehmgruben und Brunnen, welche sie mit Wasser versorgen, zu "
+"bauen."
+
+#. TRANSLATORS: Hauke – no clay
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:197
+msgid ""
+"Clay is also used in shipbuilding and to improve charcoal kilns. If we ever "
+"need to build a ship, or the mines cannot provide us with enough coal, we "
+"will need more clay, so the shortage must be resolved."
+msgstr ""
+"Lehm wird außerdem im Schiffsbau und zur Verstärkung der Köhlereien "
+"benötigt. Sollten wir jemals ein Schiff bauen wollen, oder wenn die Minen "
+"nicht genug Kohle fördern können, brauchen wir mehr Lehm, daher muss der "
+"Engpass beseitigt werden."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:200
+msgid "Brick Shortages"
+msgstr "Ziegelmangel"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:201
+msgid "Build another brick kiln"
+msgstr "Baue eine weitere Ziegelei"
+
+#. TRANSLATORS: Hauke – no bricks
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:203
+msgid ""
+"I noticed we are running out of bricks. This slows down construction of our "
+"buildings a lot, since we need so many bricks. We should really start to "
+"construct another brick kiln, and assign it the highest priority for bricks "
+"in the construction site window so as to resolve the shortage as soon as "
+"possible."
+msgstr ""
+"Ich bemerkte, dass uns die Ziegel ausgehen. Das verlangsamt die Errichtung "
+"unserer Gebäude erheblich, da wir so viele Ziegel brauchen. Wir sollten "
+"wirklich eine weitere Ziegelei errichten und ihr die höchstmögliche "
+"Priorität für Ziegel im Baustellenfenster zuweisen, um den Mangel so schnell"
+" wie möglich zu beheben."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:204
+msgid ""
+"You should assign the new brick kiln the highest priority for bricks in the "
+"construction site window."
+msgstr ""
+"Du solltest der neuen Ziegelei die höchste Priorität für Ziegel im "
+"Baustellenfenster zuweisen."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:207
+msgid "Warehouses"
+msgstr "Lagerhäuser"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:208
+msgid "Build a warehouse in the east"
+msgstr "Baue ein Lagerhaus im Osten"
+
+#. TRANSLATORS: Hauke – build a warehouse
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:210
+msgid ""
+"We are expanding our territory further and further to the east, and wares "
+"need to be transported over longer distances. We should build warehouses "
+"near our eastern border in certain distances and preferably store "
+"construction materials in the easternmost one. Our headquarters is too far "
+"in the west to be useful for long-time ware storage."
+msgstr ""
+"Wir erweitern unser Gebiet immer weiter gen Osten, was dazu führt, dass "
+"Waren immer längere Wege zurücklegen müssen. Wir sollten Lagerhäuser in "
+"bestimmten Abständen nahe unserer östlichen Grenze bauen und Baumaterial "
+"vorzugsweise im östlichsten Lagerhaus aufbewahren. Unser Hauptquartier ist "
+"zu weit im Westen, um dauerhaft als Hauptlager zu dienen."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:214
+msgid "Hungry Miners"
+msgstr "Hungrige Bergleute"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:215
+msgid "The miners are protesting…"
+msgstr "Die Bergleute protestieren …"
+
+#. TRANSLATORS: Hauke – no rations left
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:217
+msgid ""
+"Chieftain Reebaud! I bring bad news. The miners are working so hard that "
+"they have no time to prepare their own food. They demand to be supplied with"
+" it."
+msgstr ""
+"Häuptling Reebaud, ich bringe schlechte Neuigkeiten! Die Bergleute arbeiten "
+"so hart, dass sie keine Zeit haben, sich selbst Essen zu machen. Sie "
+"verlangen, damit versorgt zu werden."
+
+#. TRANSLATORS: Hauke – no rations left
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:220
+msgid ""
+"We need to build a tavern for preparing rations. To get the raw food, we "
+"have to build a fisher’s house, and as nobody likes raw fish, a smokery to "
+"smoke it. Furthermore, build a berry farm which will plant berry bushes, and"
+" a fruit collector’s house so the bushes will be harvested."
+msgstr ""
+"Wir müssen eine Taverne bauen, die Rationen zubereiten kann. Um rohe Nahrung"
+" zu bekommen, müssen wir ein Fischerhaus bauen, und da niemand rohen Fisch "
+"mag, eine Räucherei, um die Fische zu räuchern. Des Weiteren brauchen wir "
+"eine Beerenzucht zum Anpflanzen von Beerenbüschen und ein Beerensammlerhaus,"
+" damit die Büsche auch abgeerntet werden."
+
+#. TRANSLATORS: Hauke – no rations left
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:223
+msgid ""
+"We should start expanding our territory faster in order to have enough space"
+" for many berry farms, and a longer coastline for fishing."
+msgstr ""
+"Wir sollten unser Gebiet schneller erweitern, damit wir mehr Platz für "
+"Beerenzuchten und eine längere Küste zum Fischen haben."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:227
+msgid "Enhancing the Food Economy"
+msgstr "Erweitern der Nahrungswirtschaft"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:228
+msgid "Feeding the soldiers"
+msgstr "Die Krieger ernähren"
+
+#. TRANSLATORS: Hauke – better food
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:230
+msgid "Well done. The miners are satisfied and have started working again."
+msgstr ""
+"Sehr gut. Die Bergleute sind zufrieden und haben die Arbeit wieder "
+"aufgenommen."
+
+#. TRANSLATORS: Hauke – better food
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:233
+msgid ""
+"But when the mines will have to be enhanced, rations won’t keep the miners "
+"happy. Better take precautions – build a second tavern, then consider "
+"enhancing one to a drinking hall."
+msgstr ""
+"Wenn aber die Minen erweitert werden müssen, werden Rationen die Bergleute "
+"nicht länger glücklich machen. Wir sollten uns vorbereiten – indem wir eine "
+"zweite Taverne bauen und dann eine davon zu einer Trinkhalle erweitern."
+
+#. TRANSLATORS: Hauke – better food
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:236
+msgid ""
+"A drinking hall needs better food. Build a bakery, a brewery, and two or "
+"three farms to start growing barley. Keep in mind that barley grows very "
+"slowly; therefore, these few farms won’t suffice when we actually need the "
+"bread and beer. We should keep expanding quickly to have more space for "
+"farming."
+msgstr ""
+"Eine Trinkhalle benötigt besseres Essen. Wir sollten nun eine Bäckerei, eine"
+" Brauerei und zwei oder drei Bauernhöfe zum Anbau von Gerste bauen. Denkt "
+"daran, dass Gerste sehr langsam wächst; daher werden diese Bauernhöfe nicht "
+"ausreichen, wenn wir ernsthaft Brot und Bier brauchen. Deshalb sollten wir "
+"schnellstens unser Gebiet vergrößern, um mehr Platz zum Gersteanbau zu "
+"haben."
+
+#. TRANSLATORS: Hauke – better food
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:239
+msgid ""
+"The bakery and brewery should be enhanced as soon as the workers have enough"
+" experience. They can then produce mead, and bread sweetened with honey. "
+"Build a beekeeper’s house next to the berry farm to produce some honey, "
+"which we can store until we need it."
+msgstr ""
+"Die Bäckerei und Brauerei sollten erweitert werden, sobald die Arbeiter "
+"genug Erfahrung gesammelt haben. Sie können anschließend Met brauen und Brot"
+" backen, das mit Honig gesüßt wurde. Baut eine Imkerei neben einer "
+"Beerenzucht, um etwas Honig herzustellen, welchen wir einlagern können, bis "
+"wir ihn brauchen."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:244
+msgid "Build a Mining Economy"
+msgstr "Baue eine Minenwirtschaft"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:245
+msgid "Mining economy"
+msgstr "Minenwirtschaft"
+
+#. TRANSLATORS: Reebaud – mining economy
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:247
+msgid ""
+"We can now produce all the kinds of food that we are used to. I wonder what "
+"treasures these hills might contain? We should find out."
+msgstr ""
+"Wir können jetzt jegliche Nahrung herstellen, die wir von früher gewohnt "
+"sind. Ich frage mich, was sich wohl in diesen Hügeln verbirgt. Wir sollten "
+"es rausfinden."
+
+#. TRANSLATORS: Reebaud – mining economy
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:250
+msgid ""
+"Build an iron mine and perhaps a gold mine. As they produce only ores, we "
+"will need a furnace to smelt them. Also build a blacksmithy to ensure we "
+"won’t run out of tools – and yes, a small armor smithy as well. It produces "
+"helmets as well as swords. I hope we won’t meet enemies here, but it’s "
+"better to be prepared."
+msgstr ""
+"Baue eine Eisenerzmine und vielleicht eine Goldmine. Da sie nur Erze "
+"fördern, werden wir einen Schmelzofen benötigen, um sie zu schmelzen. Baue "
+"auch eine Schmiede, um sicherzustellen, dass uns nicht die Werkzeuge "
+"ausgehen – und ja, ebenfalls eine kleine Rüstungsschmiede. Sie stellt Helme "
+"und Schwerter her. Ich hoffe, dass wir hier keinen Feinden begegnen werden, "
+"aber es ist besser, vorbereitet zu sein."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:254
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:263
+msgid "Be Prepared"
+msgstr "Sei bereit"
+
+#. TRANSLATORS: Reebaud – recruit 1
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:257
+msgid ""
+"Our mines are working well. We can now produce all the tools we need, and "
+"some weapons as well."
+msgstr ""
+"Unsere Minen arbeiten gut. Wir können jetzt alle Werkzeuge schmieden, die "
+"wir brauchen, und natürlich ein paar Waffen."
+
+#. TRANSLATORS: Reebaud – recruit 1
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:260
+msgid ""
+"We could use these weapons to equip some new soldiers. I hope we won’t find "
+"enemies here, but it is always better to be prepared. New soldiers are "
+"equipped in a barracks with a short sword and a fur garment, the uniform of "
+"all honorable warriors."
+msgstr ""
+"Wir könnten diese Waffen benutzen, um ein paar neue Krieger auszustatten. "
+"Ich hoffe nicht, dass wir Gegner hier finden, aber es ist immer besser, sich"
+" darauf einzustellen. Neue Krieger werden in einer Kaserne mit einem "
+"Kurzschwert und einem Fellgewand ausstaffiert; das ist die Uniform eines "
+"jeden ehrbaren Kämpfers."
+
+#. TRANSLATORS: Hauke – recruit 2
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:266
+msgid ""
+"We will need a barracks, of course; a reindeer farm to produce fur, and a "
+"sewing room to sew the fur into garments. The reindeer farm produces some "
+"meat as a by-product of fur, and it also trains reindeer to help our "
+"carriers on busy roads."
+msgstr ""
+"Wir werden natürlich eine Kaserne brauchen; ebenso eine Rentierzucht für die"
+" Felle und ein Nähstübchen, das daraus Gewänder näht. Die Rentierzucht "
+"produziert als Nebenprodukt auch etwas Fleisch. Die Rentiere, die nicht "
+"geschlachtet werden, helfen auf den besonders geschäftigen Straßen als "
+"Lasttiere aus."
+
+#. TRANSLATORS: Hauke – recruit 2
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:269
+msgid ""
+"I advise to build all those buildings within a short distance of each other,"
+" and to construct two warehouses nearby: One should be set to store only "
+"weapons, armor, ores, metal and coal; the other to store building materials."
+msgstr ""
+"Mein Rat ist, diese Gebäude möglichst nah aneinander zu bauen, und zwei "
+"Lagerhäuser in die Nähe zu setzen: Eins, in dem nur Waffen, Rüstungen, Erze,"
+" Metalle und Kohle gelagert werden, und eins nur für Baumaterialien."
+
+#. TRANSLATORS: Hauke – recruit 2
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:272
+msgid ""
+"We should also build other related buildings nearby, such as a furnace, and "
+"some wells and farms to supply the reindeer farm. This design will make our "
+"military economy more efficient, because it reduces the waiting time for "
+"wares in the processing buildings."
+msgstr ""
+"Wir sollten zusätzlich weitere zugehörige Gebäude in der Nähe errichten, wie"
+" zum Beispiel ein paar Brunnen und Bauernhöfe, um die Rentierzucht zu "
+"versorgen. In dieser Form wird unsere Kriegswirtschaft effizienter, weil so "
+"die Wartezeiten für Waren in den verarbeitenden Gebäuden reduziert werden."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:276
+msgid "Explore the Island"
+msgstr "Erkunde die Insel"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:277
+msgid "Expanding"
+msgstr "Erweiterung"
+
+#. TRANSLATORS: Reebaud – expand
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:279
+msgid ""
+"Our barracks has started working, and we are recruiting new soldiers now."
+msgstr ""
+"Unsere Kaserne hat die Arbeit aufgenommen und wir rekrutieren neue Krieger."
+
+#. TRANSLATORS: Reebaud – expand
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:282
+msgid ""
+"But we can’t be sure we’re safe here yet. It would be better to expand "
+"further to the east to find out whether we really are alone here."
+msgstr ""
+"Aber wir wissen nach wie vor nicht, ob wir hier sicher sind. Es ist besser, "
+"unser weiter in Richtung Osten zu erweitern, um rauszufinden, ob wir hier "
+"wirklich allein sind."
+
+#. TRANSLATORS: Reebaud – expand
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:285
+msgid ""
+"Expanding would also provide more space for farming. We could use some extra"
+" barley to recruit more reindeer, as our roads are quite busy."
+msgstr ""
+"Ganz nebenbei würde uns das mehr Platz für Bauernhöfe verschaffen. Wir "
+"könnten zusätzliche Gerste gut gebrauchen, um mehr Rentiere zu züchten, da "
+"unsere Straßen derzeit sehr ausgelastet sind."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:290
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:296
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:302
+msgid "Enemies!"
+msgstr "Feinde!"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:291
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:297
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:303
+msgid "Enemy sighted!"
+msgstr "Feind gesichtet!"
+
+#. TRANSLATORS: Reebaud – enemy sighted
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:293
+msgid "Another tribe! On OUR island! What are you doing here, invaders?"
+msgstr ""
+"Ein anderer Stamm! Auf UNSERER Insel! Was macht ihr hier, Eindringlinge?"
+
+#. TRANSLATORS: Maukor – enemy sighted. The great storm flood of 1362 was
+#. supposed to be a sign of the victory of the Christian God over the old
+#. northern gods
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:299
+msgid ""
+"This is MY island! YOU are the intruder here! I pray to the one and solely "
+"true God that we will kill you all, and your souls shall be tormented in "
+"hell for ever!"
+msgstr ""
+"Das ist MEINE Insel! IHR seid hier die Eindringlinge! Ich bete zu dem einen "
+"wahren Gott, dass wir euch alle töten werden, und eure Seelen werden für "
+"immer in der Hölle schmoren!"
+
+#. TRANSLATORS: Reebaud – enemy sighted
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:305
+msgid ""
+"Unbelievers! I pray to OUR gods that this faithless tribe shall be utterly "
+"shattered! War upon them!"
+msgstr ""
+"Ungläubige! Ich bete zu UNSEREN Göttern, dass dieser treulose Stamm völlig "
+"zerschmettert werde! Das bedeutet Krieg!"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:310
+msgid "Stronger in battle"
+msgstr "Stärker im Kampf"
+
+#. TRANSLATORS: Reebaud – train soldiers 1
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:312
+msgid ""
+"We are recruiting soldiers easily enough, but they are fairly weak. We must "
+"train our soldiers if they are to beat the enemy."
+msgstr ""
+"Wir rekrutieren Krieger ziemlich schnell, aber sie sind recht schwach. Wir "
+"müssen unsere Krieger ausbilden, wenn sie unseren Feind besiegen sollen."
+
+#. TRANSLATORS: Reebaud – train soldiers 1
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:315
+msgid ""
+"Soldiers are trained in basic attack, health and defense by a training camp."
+" They can learn the finer points in a training arena."
+msgstr ""
+"Krieger lernen die Grundlagen von Angriff, Lebenspunkten und Verteidigung im"
+" Ausbildungslager. Den Feinschliff bekommen sie dann in der "
+"Ausbildungsarena."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:319
+msgid "Frisian fighting"
+msgstr "Friesisches Kämpfen"
+
+#. TRANSLATORS: Reebaud – train soldiers 2
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:321
+msgid ""
+"Soldiers are trained in two steps in defense and health. They get fur "
+"garments studded with iron and also gold to cushion blows; and helmets "
+"forged from iron, and gold as well, to lengthen their life in battle."
+msgstr ""
+"Wir bilden unsere Krieger in zwei Schritten in Verteidigung und "
+"Lebenspunkten aus. Sie bekommen mit Eisen und Gold beschlagene Fellgewänder,"
+" um Trefferschaden zu mindern, und Helme aus Eisen und Gold, um in der "
+"Schlacht länger zu überleben."
+
+#. TRANSLATORS: Reebaud – train soldiers 2
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:324
+msgid ""
+"They learn to attack with three different swords: The long sword, broadsword"
+" and double-edged sword. The latter two contain gold, and all of them iron. "
+"The advanced soldiers are taught to use two swords at once: They keep their "
+"first double-edged sword, and are given various other swords to wield in "
+"their other hand. This makes six steps of attack training."
+msgstr ""
+"Sie lernen den Angriff mit drei verschiedenen Schwertern: Dem Langschwert, "
+"dem Breitschwert und dem zweischneidigen Schwert. Die letzten beiden sind "
+"mit Gold verziert und alle bestehen aus Eisen. Fortgeschrittene Krieger "
+"lernen, mit zwei Schwertern gleichzeitig umzugehen. Sie behalten ihr erstes "
+"zweischneidiges Schwert und bekommen jeweils die anderen Schwerttypen, um "
+"sie in ihrer zweiten Hand zu führen. Damit gibt es sechs Stufen bei der "
+"Angriffsausbildung."
+
+#. TRANSLATORS: Reebaud – train soldiers 2
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:327
+msgid ""
+"We do not train soldiers to evade attacks; a true warrior can block his "
+"opponent’s blows with a skillful twist of the sword instead of jumping away "
+"like a coward."
+msgstr ""
+"Ausweichmanöver lehren wir unseren Kriegern nicht; ein wahrer Kämpfer kann "
+"den Schlag seines Gegners mit einer gekonnten Drehung seines Schwertes "
+"abwehren, statt feige aus dem Weg zu hüpfen."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:331
+msgid "Planning a training center"
+msgstr "Ein Ausbildungszentrum planen"
+
+#. TRANSLATORS: Hauke – train soldiers 3
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:333
+msgid ""
+"We will need a tailor’s shop to sew more protective garments, and another "
+"sewing room to keep producing normal fur garments. Also, you should enhance "
+"the small armor smithy to produce better weapons and helmets, and build a "
+"new small one so we will still get basic weapons. We need at least one gold "
+"mine now, because the best weapons and armor use gold."
+msgstr ""
+"Wir werden eine Schneiderei brauchen, um widerstandsfähigere Gewänder zu "
+"nähen und ein weiteres Nähstübchen, um weiterhin normale Fellgewänder "
+"anzufertigen. Ebenso sollten wir die kleine Rüstungsschmiede erweitern, um "
+"bessere Waffen und Helme schmieden zu können, und eine neue kleine bauen, "
+"damit neue Krieger weiterhin die Grundausstattung erhalten können. Wir "
+"brauchen nun mindestens eine Goldmine, denn die besten Waffen und Rüstungen "
+"werden mit Gold geschmückt."
+
+#. TRANSLATORS: Hauke – train soldiers 3
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:336
+msgid ""
+"We should build these buildings close to the barracks, since it is, as I "
+"already mentioned earlier, much more efficient to centralize all our "
+"military facilities in one recruiting and training center, than if they were"
+" strewn out over a long distance. Build a third warehouse there which will "
+"store only the food needed for training."
+msgstr ""
+"Wir sollten diese Gebäude wiederum in die Nähe der Kaserne stellen, da es, "
+"wie bereits erwähnt, wesentlich effizienter ist, die militärischen "
+"Einrichtungen zentral zusammenzulegen, statt sie über große Gebiete zu "
+"verstreuen. Baut dort auch ein drittes Lagerhaus, in dem nur die Nahrung für"
+" die Ausbildung gelagert wird."
+
+#. TRANSLATORS: Hauke – train soldiers 3
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:339
+msgid ""
+"When soldiers train to use new weapons, their old equipment is discarded. "
+"Take into account that the useless scraps will clutter up your roads until "
+"they are stored in a warehouse somewhere."
+msgstr ""
+"Wenn Krieger lernen, mit neuen Waffen umzugehen, wird ihre alte Ausrüstung "
+"weggeworfen. Bedenkt, dass dieser unnütze Schrott eure Straßen verstopfen "
+"wird, bis er in irgendeinem Lagerhaus untergebracht wird."
+
+#. TRANSLATORS: Hauke – train soldiers 3
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:342
+msgid ""
+"I recommend to train at least one soldier to the highest level in health, "
+"defense and attack. Until then, the enemy is just too strong for us."
+msgstr ""
+"Ich empfehle, mindestens einen Krieger zur höchsten Stufe in allen "
+"Kategorien auszubilden. Bis dahin ist der Feind einfach zu stark für uns."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:347
+msgid "Our soldiers are strong"
+msgstr "Unsere Krieger sind stark"
+
+#. TRANSLATORS: Reebaud – attack enemy 1
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:349
+msgid "We finally have our first fully trained soldier. Let’s attack!"
+msgstr "Wir haben endlich unseren ersten voll ausgebildeten Krieger. Angriff!"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:353
+msgid "Are our soldiers strong enough?"
+msgstr "Sind unsere Krieger stark genug?"
+
+#. TRANSLATORS: Hauke – attack enemy 2
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:355
+msgid ""
+"With respect, Chieftain, please be not so hasty! The enemies are very "
+"strong, and I’m still not convinced we can defeat them. I’d prefer not to "
+"send any soldiers into a battle they will likely lose. I’d prefer to wait a "
+"bit longer until we can certainly beat the enemy without losing soldiers."
+msgstr ""
+"Bei allem Respekt, Häuptling, seid bitte nicht so hastig! Die Feinde sind "
+"sehr stark und ich bin noch nicht überzeugt, dass wir sie besiegen können. "
+"Ich würde es bevorzugen, keine Krieger in eine Schlacht zu schicken, die sie"
+" mit großer Wahrscheinlichkeit verlieren werden. Ich würde es bevorzugen, "
+"ein bisschen zu warten, bis wir mit Sicherheit den Gegner besiegen können, "
+"ohne Krieger zu opfern."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:359
+msgid "Our soldiers are strong enough"
+msgstr "Unsere Krieger sind stark genug"
+
+#. TRANSLATORS: Reebaud – attack enemy 3
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:361
+msgid ""
+"Of course I also prefer to keep our soldiers alive, but we can’t save every "
+"life. Soldiers die in battle, that’s just the way things are. You may decide"
+" how long to wait until attacking, but don’t take too long, or the enemies "
+"will exploit our weakness."
+msgstr ""
+"Natürlich ist mir das Leben unserer Krieger auch wichtig, aber wir können "
+"nicht jedes Leben retten. Krieger sterben im Kampf, so ist das nunmal. Ihr "
+"könnt entscheiden, wie lange wir warten, bevor wir angreifen, aber wartet "
+"nicht zu lange, sonst werden die Feinde unsere Schwächen finden."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:365
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:371
+msgid "Beware!"
+msgstr "Vorsicht!"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:366
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:372
+msgid "Not strong enough"
+msgstr "Nicht stark genug"
+
+#. TRANSLATORS: Hauke – beware of early attacks 1
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:368
+msgid ""
+"Chieftain Reebaud! Our scouts report that the enemy is advancing fast. I "
+"fear we are not strong enough yet to defend ourselves if he attacks first. "
+"You must devise something to hold him off."
+msgstr ""
+"Häuptling Reebaud! Unsere Kundschafter berichten, dass sich der Feind "
+"schnell nähert. Ich befürchte, dass wir nicht stark genug sind, um uns zu "
+"verteidigen, sollte er angreifen. Ihr müsst euch etwas ausdenken, um ihn "
+"aufzuhalten."
+
+#. TRANSLATORS: Reebaud – beware of early attacks 2
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:374
+msgid ""
+"The scouts informed me that the enemy can’t build towers. We could build a "
+"fortress, which is the building that will push the border as far east as "
+"possible in one go. The enemy will only be able to see it if they build a "
+"fortress right at the border."
+msgstr ""
+"Die Kundschafter erzählten mir, dass der Feind keine Türme bauen kann. Wir "
+"könnten eine Festung errichten, weil sie das Gebäude ist, das die Grenze auf"
+" einen Schlag sehr weit gen Osten erweitert. Der Feind kann sie nur sehen, "
+"wenn er selbst eine Festung direkt an der Grenze hat."
+
+#. TRANSLATORS: Reebaud – beware of early attacks 2
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:377
+msgid ""
+"We can prevent this, or at least make it harder to do, by ordering some "
+"foresters to plant trees at the border. The enemy will have to cut down many"
+" of them to make room for it, so we may be safe until we open the battle at "
+"a time of our choosing."
+msgstr ""
+"Wir können das verhindern, oder zumindest verzögern, indem wir Förster an "
+"die Grenze schicken. Der Feind muss dann erst viele Bäume fällen, um genug "
+"Platz für die Festung zu haben, sodass wir halbwegs sicher sind, bis wir den"
+" Kampf zu einem für uns günstigen Zeitpunkt eröffnen."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:380
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:386
+msgid "Enemy Defeated"
+msgstr "Feind besiegt"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:381
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:387
+msgid "Enemy defeated!"
+msgstr "Feind besiegt!"
+
+#. TRANSLATORS: Reebaud – enemy defeated 1
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:383
+msgid ""
+"They are defeated! I thank you, all my gods, for granting us victory over "
+"the unbelievers!"
+msgstr ""
+"Sie sind besiegt! Ich danke allen meinen Göttern, die uns den Sieg über die "
+"Ungläubigen gebracht haben!"
+
+#. TRANSLATORS: Maukor – enemy defeated 2
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:389
+msgid ""
+"I pray to God to hear my last words. Let not the false fiend triumph! Punish"
+" them for this ignoble feat!"
+msgstr ""
+"Ich bete zu Gott: Erhöre meine letzten Worte. Lass diese falschen Teufel "
+"nicht triumphieren! Bestrafe sie für diese schändliche Tat!"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:392
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:398
+msgid "Storm Flood"
+msgstr "Sturmflut"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:393
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:399
+msgid "The island is flooding!"
+msgstr "Die Insel wird überflutet!"
+
+#. TRANSLATORS: Reebaud – enemy defeated 3
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:395
+msgid ""
+"His God has granted his wish! The ocean is rising! The island is almost flat"
+" – we will all drown!"
+msgstr ""
+"Sein Gott hat seine Bitte erhört! Der Meeresspiegel steigt! Die Insel ist "
+"beinahe eben – wir werden alle ertrinken!"
+
+#. TRANSLATORS: Hauke – rising water
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:401
+msgid ""
+"Despair not, I did espy some hope! The easternmost tip of the island, as "
+"well as the space where the fiends’ headquarters stood, seems well suited to"
+" build a port on. If we manage to construct a ship, and fill it with all we "
+"need to build a new settlement, we may be able to escape."
+msgstr ""
+"Verzweifelt nicht, ich sehe noch einen Hoffnungsschimmer! Das östlichste "
+"Ende der Insel, sowie die Stelle an der das Hauptquartier des Feindes stand,"
+" scheinen für einen Hafen gut geeignet zu sein. Wenn wir es schaffen, ein "
+"Schiff zu bauen und alles zu verfrachten, was wir für eine neue Siedlung "
+"brauchen, dann können wir vielleicht entkommen."
+
+#. TRANSLATORS: Hauke – rising water
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:404
+msgid ""
+"The storm flood seems to be coming from the west. If we hurry, we will just "
+"make it! We only need to build a port and a shipyard – oh, and a weaving "
+"mill to weave the durable cloth, which is made from reed and fur, for the "
+"sails. Then we can launch an expedition from the port. Pray to the gods and "
+"make haste!"
+msgstr ""
+"Die Sturmflut kommt von Westen. Wenn wir uns beeilen, werden wir es gerade "
+"noch schaffen! Wir müssen nur einen Hafen und eine Werft bauen – oh, und "
+"eine Weberei, um den kräftigen Segelstoff zu weben, der aus Reet und Fell "
+"gemacht wird. Dann können wir eine Expedition vom Hafen aus starten. Betet "
+"zu den Göttern und beeilt euch!"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:411
+msgid "Don’t Forget the Soldiers"
+msgstr "Vergesst die Krieger nicht"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:412
+msgid "Soldiers to the port!"
+msgstr "Krieger zum Hafen!"
+
+#. TRANSLATORS: Reebaud – rising water
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:414
+#, lua-format
+msgid ""
+"I almost forgot in this haste – wherever we will land, we’ll need some "
+"construction materials to get started, and soldiers to secure and expand our"
+" new colony. Even after loading the expedition, the ship should have enough "
+"free space for a few wares and workers. On top of that, there should be room"
+" for up to %d soldier, if nobody minds being all crammed together. Let’s "
+"send some building supplies and our best men to the port when it’s "
+"completed, to get ready to embark when we set sail!"
+msgid_plural ""
+"I almost forgot in this haste – wherever we will land, we’ll need some "
+"construction materials to get started, and soldiers to secure and expand our"
+" new colony. Even after loading the expedition, the ship should have enough "
+"free space for a few wares and workers. On top of that, there should be room"
+" for up to %d soldiers, if nobody minds being all crammed together. Let’s "
+"send some building supplies and our best men to the port when it’s "
+"completed, to get ready to embark when we set sail!"
+msgstr[0] ""
+"In der Eile hätte ich es fast vergessen – Wo auch immer wir landen, wir "
+"werden ein paar Baumaterialien für den neuen Anfang und Krieger für den "
+"Schutz und die Erweiterung unserer Kolonie benötigen. Auch nach der "
+"Ausrüstung der Expedition sollte unser Schiff noch Platz für ein paar Waren "
+"und Arbeiter haben. Zusätzlich gibt es noch Platz für bis zu %d Krieger auf "
+"unserem Schiff, wenn es Niemanden stört komplett zusammengepfercht zu sein. "
+"Lasst uns unsere besten Männer zum Hafen schicken sobald er fertig ist, "
+"damit sie an Bord gehen können, sobald wir in See stechen."
+msgstr[1] ""
+"In der Eile hätte ich es fast vergessen – Wo auch immer wir landen, wir "
+"werden ein paar Baumaterialien für den neuen Anfang und Krieger für den "
+"Schutz und die Erweiterung unserer Kolonie benötigen. Auch nach der "
+"Ausrüstung der Expedition sollte unser Schiff noch Platz für ein paar Waren "
+"und Arbeiter haben. Zusätzlich gibt es noch Platz für bis zu %d Krieger auf "
+"unserem Schiff, wenn es Niemanden stört komplett zusammengepfercht zu sein. "
+"Lasst uns unsere besten Männer zum Hafen schicken sobald er fertig ist, "
+"damit sie an Bord gehen können, sobald wir in See stechen."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:417
+msgid ""
+"All wares and workers that are loaded onto the expedition as well as some of"
+" the soldiers in the port will be carried over to the next scenario."
+msgstr ""
+"Alle Waren und Arbeiter, die auf das Expeditionsschiff geladen wurden, sowie"
+" einige der Soldaten im Hafen werden in das nächste Szenario übernommen."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:421
+msgid "Victory"
+msgstr "Sieg"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:422
+msgid "We escaped!"
+msgstr "Wir sind entkommen!"
+
+#. TRANSLATORS: Reebaud – victory
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:424
+msgid ""
+"The gods have answered our prayers. We will escape the island’s drowning, "
+"and I am confident we will be able to build a new home again in a more "
+"peaceful corner of this world!"
+msgstr ""
+"Die Götter haben unsere Gebete erhört. Wir werden dem Untergang der Insel "
+"entkommen und ich bin mir sicher, dass wir uns in einer anderen, "
+"friedlicheren Ecke der Welt ein neues Zuhause aufbauen werden!"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:425
+msgid "Congratulations"
+msgstr "Glückwunsch"
+
+#. TRANSLATORS: Reebaud – victory
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:427
+msgid ""
+"You have completed this mission. You may move on to the next scenario now to"
+" help us build a new home, far from the false God’s vengeful reach…"
+msgstr ""
+"Du hast diese Mission abgeschlossen. Du kannst uns nun im nächsten Szenario "
+"helfen, eine neue Heimat aufzubauen, weit weg von der rächenden Hand dieses "
+"falschen Gottes …"

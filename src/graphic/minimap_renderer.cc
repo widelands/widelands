@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2013 by the Widelands Development Team
+ * Copyright (C) 2010-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,34 +12,28 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "graphic/minimap_renderer.h"
 
+#include <algorithm>
 #include <memory>
 
-#include "base/macros.h"
 #include "economy/flag.h"
-#include "economy/road.h"
-#include "graphic/graphic.h"
-#include "graphic/image_io.h"
-#include "graphic/texture.h"
+#include "economy/roadbase.h"
+#include "graphic/playercolor.h"
 #include "logic/field.h"
-#include "logic/map.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "logic/map_objects/world/world.h"
-#include "logic/player.h"
-#include "wui/mapviewpixelconstants.h"
+#include "logic/vision.h"
 #include "wui/mapviewpixelfunctions.h"
 
-using namespace Widelands;
-
-namespace  {
+namespace {
 
 const RGBColor kWhite(255, 255, 255);
+const RGBColor kRed(255, 0, 0);
 
 // Blend two colors.
 inline RGBColor blend_color(const RGBColor& c1, const RGBColor& c2) {
@@ -61,19 +55,24 @@ inline RGBColor invert_color(const RGBColor& c) {
 	return RGBColor(r, g, b);
 }
 
+int round_up_to_nearest_even(int number) {
+	return number % 2 == 0 ? number : number + 1;
+}
+
 // Returns the color to be used in the minimap for the given field.
 inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
                                    const Widelands::FCoords& f,
-                                   MiniMapLayer layers,
-                                   Widelands::PlayerNumber owner,
-                                   bool see_details) {
+                                   const MiniMapLayer layers,
+                                   const Widelands::PlayerNumber owner,
+                                   const bool see_details) {
 	RGBColor color;
-	if (layers & MiniMapLayer::Terrain) {
-		color = egbase.world().terrain_descr(f.field->terrain_d()).get_minimap_color(
-		   f.field->get_brightness());
+	if ((layers & MiniMapLayer::Terrain) != 0) {
+		color = egbase.descriptions()
+		           .get_terrain_descr(f.field->terrain_d())
+		           ->get_minimap_color(f.field->get_brightness());
 	}
-	
-	if (layers & MiniMapLayer::Owner) {
+
+	if ((layers & MiniMapLayer::Owner) != 0) {
 		if (0 < owner) {
 			color = blend_color(color, egbase.player(owner).get_playercolor());
 		}
@@ -84,164 +83,194 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 	if (see_details) {
 		// if ownership layer is displayed, it creates enough contrast to
 		// visualize objects using white color.
-		
-		bool high_traffic = false;
 
-		if (upcast(PlayerImmovable const, immovable, f.field->get_immovable())) {
-			if ((layers & MiniMapLayer::Road) && is_a(Road, immovable)) {
-				upcast(Road const, road, immovable);
+		if (((layers & (MiniMapLayer::Road | MiniMapLayer::Flag | MiniMapLayer::Building)) != 0) &&
+		    (f.field->get_immovable() != nullptr)) {
+			bool high_traffic = false;
+			const Widelands::MapObjectType type = f.field->get_immovable()->descr().type();
+			if ((layers & MiniMapLayer::Flag) != 0 && type == Widelands::MapObjectType::FLAG) {
+				upcast(Flag const, flag, f.field->get_immovable());
+				if (flag->current_wares() > 5) {
+					//color = contrast_color;
+					high_traffic = true;
+				} else {
+					color = kWhite;
+				}
+			} else if ((layers & MiniMapLayer::Building) != 0 && type >= Widelands::MapObjectType::BUILDING) {
+				color = kWhite;
+			} else if (((layers & MiniMapLayer::Road) != 0) &&
+			           type == Widelands::MapObjectType::WATERWAY) {
+				color = blend_color(color, kWhite);
+			} else if (((layers & MiniMapLayer::Road) != 0) &&
+			           type == Widelands::MapObjectType::ROAD) {
+				upcast(Road const, road, f.field->get_immovable());
 				if (road->get_roadtype() == RoadType::kBusy) {
 					//color = contrast_color;
 					high_traffic = true;
 				} else {
-					color = kWhite;
+					color = blend_color(color, kWhite);
 				}
-			} 			
-
-			if ((layers & MiniMapLayer::Building) && is_a(Building, immovable)) {
-				color = kWhite;
-			} 
-			
-			if ((layers & MiniMapLayer::Flag) && is_a(Flag, immovable)) {
-				upcast(Flag const, flag, immovable); // why this cannot be inside if ?
-		    	if (flag->current_wares() > 5) {
-					//color = contrast_color;
-					high_traffic = true;
-				} else {
-					color = kWhite;
-				}
-			} 
+			}
 			if (high_traffic) {
 				color = contrast_color;
-			}			
+			}
+		}
+
+		if (((layers & MiniMapLayer::Ship) != 0) && (f.field->get_first_bob() != nullptr)) {
+			for (Widelands::Bob* bob = f.field->get_first_bob(); bob != nullptr;
+			     bob = bob->get_next_bob()) {
+				if (bob->descr().type() == Widelands::MapObjectType::SHIP) {
+					color = kWhite;
+					break;
+				}
+			}
+		}
+
+		if ((layers & MiniMapLayer::StartingPositions) != 0) {
+			const Widelands::Map& map = egbase.map();
+			Widelands::Coords starting_pos;
+			for (uint32_t p = 1; p <= map.get_nrplayers(); p++) {
+				starting_pos = map.get_starting_pos(p);
+				if (!static_cast<bool>(starting_pos)) {
+					continue;
+				}
+				uint32_t dist = map.calc_distance(f, starting_pos);
+				if (dist < 9) {
+					color = dist == 0 ? kWhite : blend_color(color, kPlayerColors[p - 1]);
+					break;
+				}
+			}
 		}
 	}
 
 	return color;
 }
 
-// Draws the dotted frame border onto the minimap.
-bool is_minimap_frameborder
-	(const Widelands::FCoords& f, const Point& ptopleft, const Point& pbottomright,
-	 int32_t mapwidth, int32_t mapheight, int32_t modx, int32_t mody)
-{
-	bool isframepixel = false;
+void draw_view_window(const Widelands::Map& map,
+                      const Rectf& view_area,
+                      const MiniMapType minimap_type,
+                      const bool zoom,
+                      Texture* texture) {
+	const float multiplier = scale_map(map, zoom);
+	const int half_width =
+	   round_up_to_nearest_even(std::ceil(view_area.w / kTriangleWidth * multiplier / 2.f));
+	const int half_height =
+	   round_up_to_nearest_even(std::ceil(view_area.h / kTriangleHeight * multiplier / 2.f));
 
-	if (ptopleft.x <= pbottomright.x) {
-		if
-			(f.x >= ptopleft.x && f.x <= pbottomright.x
-			 && (f.y == ptopleft.y || f.y == pbottomright.y)
-			 && f.x % 2 == modx)
-			isframepixel = true;
-	} else {
-		if
-			(((f.x >= ptopleft.x && f.x <= mapwidth)
-			  ||
-			  (f.x >= 0 && f.x <= pbottomright.x))
-			 &&
-			 (f.y == ptopleft.y || f.y == pbottomright.y)
-			 &&
-			 (f.x % 2) == modx)
-			isframepixel = true;
+	Vector2i center_pixel = Vector2i::zero();
+	switch (minimap_type) {
+	case MiniMapType::kStaticViewWindow:
+		center_pixel = Vector2i(texture->width() / 2, texture->height() / 2);
+		break;
+
+	case MiniMapType::kStaticMap: {
+		Vector2f origin = view_area.center();
+		MapviewPixelFunctions::normalize_pix(map, &origin);
+		center_pixel =
+		   Vector2i(origin.x / kTriangleWidth, origin.y / kTriangleHeight) * scale_map(map, zoom);
+		break;
+	}
 	}
 
-	if (ptopleft.y <= pbottomright.y) {
-		if
-			(f.y >= ptopleft.y && f.y <= pbottomright.y
-			 && (f.x == ptopleft.x || f.x == pbottomright.x)
-			 && f.y % 2 == mody)
-			isframepixel = true;
-	} else {
-		if
-			(((f.y >= ptopleft.y && f.y <= mapheight)
-			  ||
-			  (f.y >= 0 && f.y <= pbottomright.y))
-			 &&
-			 (f.x == ptopleft.x || f.x == pbottomright.x)
-			 &&
-			 f.y % 2 == mody)
-			isframepixel = true;
+	const int width = map.get_width() * scale_map(map, zoom);
+	const int height = map.get_height() * scale_map(map, zoom);
+	const auto make_red = [width, height, &texture](int x, int y) {
+		if (x < 0) {
+			x += width;
+		}
+		if (x >= width) {
+			x -= width;
+		}
+		if (y < 0) {
+			y += height;
+		}
+		if (y >= height) {
+			y -= height;
+		}
+		texture->set_pixel(x, y, kRed);
+	};
+
+	bool draw = true;
+	for (int y = -half_height; y <= half_height; ++y) {
+		if (draw) {
+			make_red(-half_width + center_pixel.x, y + center_pixel.y);
+			make_red(half_width + center_pixel.x, y + center_pixel.y);
+		}
+		draw = !draw;
 	}
 
-	return isframepixel;
+	draw = true;
+	for (int x = -half_width; x <= half_width; ++x) {
+		if (draw) {
+			make_red(x + center_pixel.x, -half_height + center_pixel.y);
+			make_red(x + center_pixel.x, half_height + center_pixel.y);
+		}
+		draw = !draw;
+	}
 }
 
 // Does the actual work of drawing the minimap.
-void draw_minimap_int(Texture* texture,
-                      const Widelands::EditorGameBase& egbase,
-                      const Widelands::Player* player,
-                      const Point& viewpoint,
-                      MiniMapLayer layers) {
+void do_draw_minimap(Texture& texture,
+                     const Widelands::EditorGameBase& egbase,
+                     const Widelands::Player* const player,
+                     const Vector2i& top_left,
+                     const MiniMapLayer layers,
+                     const bool draw_full = true,
+                     uint16_t* const rows_drawn = nullptr) {
 	const Widelands::Map& map = egbase.map();
+	const uint8_t scale = scale_map(map, (layers & MiniMapLayer::Zoom2) != 0);
+	const uint16_t map_h = map.get_height();
+	const uint16_t map_w = map.get_width();
 
-	const uint16_t surface_h = texture->height();
-	const uint16_t surface_w = texture->width();
+	uint16_t start_row;
+	uint16_t end_row;
+	if (draw_full) {
+		start_row = 0;
+		end_row = map_h;
+	} else {
+		// Number of fields to update per frame. Feel free to tweak this.
+		const uint32_t fields_per_frame = 128 * 256 / scale;
 
-	// size of the display frame
-	int32_t xsize = g_gr->get_xres() / TRIANGLE_WIDTH / 2;
-	int32_t ysize = g_gr->get_yres() / TRIANGLE_HEIGHT / 2;
-
-	const int32_t mapwidth = egbase.get_map().get_width();
-	const int32_t mapheight = map.get_height();
-
-	Point ptopleft;  // top left point of the current display frame
-	ptopleft.x = viewpoint.x + mapwidth / 2 - xsize;
-	if (ptopleft.x < 0) {
-		ptopleft.x += mapwidth;
-	}
-	ptopleft.y = viewpoint.y + mapheight / 2 - ysize;
-	if (ptopleft.y < 0) {
-		ptopleft.y += mapheight;
+		assert(rows_drawn != nullptr);
+		start_row = *rows_drawn < map_h ? *rows_drawn : 0;
+		end_row = std::min(static_cast<uint16_t>(start_row + fields_per_frame / map_w), map_h);
+		*rows_drawn = end_row;
 	}
 
-	Point pbottomright;  // bottom right point of the current display frame
-	pbottomright.x = viewpoint.x + mapwidth / 2 + xsize;
-	if (pbottomright.x >= mapwidth) {
-		pbottomright.x -= mapwidth;
-	}
-	pbottomright.y = viewpoint.y + mapheight / 2 + ysize;
-	if (pbottomright.y >= mapheight) {
-		pbottomright.y -= mapheight;
-	}
+	for (uint16_t y = start_row; y < end_row; ++y) {
+		for (uint16_t x = 0; x < map_w; ++x) {
+			Widelands::Coords coords(Widelands::Coords(top_left.x + x, top_left.y + y));
+			map.normalize_coords(coords);
+			Widelands::FCoords f = map.get_fcoords(coords);
+			Widelands::MapIndex i = Widelands::Map::get_index(f, map_w);
+			move_r(map_w, f, i);
 
-	uint32_t modx = pbottomright.x % 2;
-	uint32_t mody = pbottomright.y % 2;
-
-	for (uint32_t y = 0; y < surface_h; ++y) {
-		Widelands::FCoords f(
-		   Widelands::Coords(viewpoint.x, viewpoint.y + (layers & MiniMapLayer::Zoom2 ? y / 2 : y)));
-		map.normalize_coords(f);
-		f.field = &map[f];
-		Widelands::MapIndex i = Widelands::Map::get_index(f, mapwidth);
-		for (uint32_t x = 0; x < surface_w; ++x) {
-			if (x % 2 || !(layers & MiniMapLayer::Zoom2)) {
-				move_r(mapwidth, f, i);
-			}
-
-			RGBColor pixel_color;
-			if ((layers & MiniMapLayer::ViewWindow) &&
-			    is_minimap_frameborder(f, ptopleft, pbottomright, mapwidth, mapheight, modx, mody)) {
-				pixel_color = RGBColor(255, 0, 0);
+			Widelands::VisibleState vision;
+			Widelands::PlayerNumber owner;
+			if (player == nullptr || player->see_all()) {
+				// This player has omnivision - show the field like it is in reality.
+				vision = Widelands::VisibleState::kVisible;  // Seen right now.
+				owner = f.field->get_owned_by();
 			} else {
-				uint16_t vision =
-				   0;  // See Player::Field::Vision: 1 if seen once, > 1 if seen right now.
-				Widelands::PlayerNumber owner = 0;
-				if (player == nullptr || player->see_all()) {
-					vision = 2;  // Seen right now.
-					owner = f.field->get_owned_by();
-				} else if (player != nullptr) {
-					const auto& field = player->fields()[i];
-					vision = field.vision;
-					owner = field.owner;
-				}
-
-				if (vision > 0) {
-					pixel_color = calc_minimap_color(egbase, f, layers, owner, vision > 1);
-				}
+				// This player might be affected by fog of war - instead of the
+				// reality, we show her what she last saw on this field. If she has
+				// vision of this field, this will be the same as reality -
+				// otherwise this shows reality as it was the last time she had
+				// vision on the field.
+				// If she never had vision, field.vision will be kUnexplored.
+				const auto& field = player->fields()[i];
+				vision = field.vision;
+				owner = field.owner;
 			}
 
-			if (pixel_color.r != 0 || pixel_color.g != 0 || pixel_color.b != 0) {
-				texture->set_pixel(x, y, pixel_color);
+			if (vision != Widelands::VisibleState::kUnexplored) {
+				const RGBAColor color = calc_minimap_color(
+				   egbase, f, layers, owner, vision == Widelands::VisibleState::kVisible);
+				for (uint8_t x_offset = 0; x_offset < scale; ++x_offset) {
+					for (uint8_t y_offset = 0; y_offset < scale; ++y_offset) {
+						texture.set_pixel(x * scale + x_offset, y * scale + y_offset, color);
+					}
+				}
 			}
 		}
 	}
@@ -249,56 +278,143 @@ void draw_minimap_int(Texture* texture,
 
 }  // namespace
 
-std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
-                                      const Player* player,
-                                      const Point& viewpoint,
-                                      MiniMapLayer layers) {
-	// TODO(unknown): Currently the minimap is redrawn every frame. That is not really
-	//       necesary. The created texture could be cached and only redrawn two
-	//       or three times per second
-	const Map& map = egbase.map();
-	const int16_t map_w = (layers & MiniMapLayer::Zoom2) ? map.get_width() * 2 : map.get_width();
-	const int16_t map_h = (layers & MiniMapLayer::Zoom2) ? map.get_height() * 2 : map.get_height();
+Vector2f minimap_pixel_to_mappixel(const Widelands::Map& map,
+                                   const Vector2i& minimap_pixel,
+                                   const Rectf& view_area,
+                                   MiniMapType minimap_type,
+                                   const bool zoom) {
+	Vector2f top_left = Vector2f::zero();
+	switch (minimap_type) {
+	case MiniMapType::kStaticViewWindow:
+		top_left =
+		   view_area.center() -
+		   Vector2f(map.get_width() * kTriangleWidth, map.get_height() * kTriangleHeight) / 2.f;
+		break;
 
-	std::unique_ptr<Texture> texture(new Texture(map_w, map_h));
+	case MiniMapType::kStaticMap:
+		top_left = Vector2f::zero();
+		break;
+	}
 
-	texture->fill_rect(Rect(0, 0, texture->width(), texture->height()), RGBAColor(0, 0, 0, 255));
+	const float multiplier = scale_map(map, zoom);
+	Vector2f map_pixel = top_left + Vector2f(minimap_pixel.x / multiplier * kTriangleWidth,
+	                                         minimap_pixel.y / multiplier * kTriangleHeight);
+	MapviewPixelFunctions::normalize_pix(map, &map_pixel);
+	return map_pixel;
+}
 
-	texture->lock();
-	draw_minimap_int(texture.get(), egbase, player, viewpoint, layers);
-	texture->unlock(Texture::Unlock_Update);
+std::unique_ptr<Texture> draw_minimap(const Widelands::EditorGameBase& egbase,
+                                      const Widelands::Player* const player,
+                                      const Rectf& view_area,
+                                      const MiniMapType& minimap_type,
+                                      const MiniMapLayer layers) {
+	std::unique_ptr<Texture> texture_static = create_minimap_empty(egbase, layers);
+	draw_minimap_static(*texture_static, egbase, player, layers);
+	return draw_minimap_final(*texture_static, egbase, view_area, minimap_type, layers);
+}
+
+std::unique_ptr<Texture> create_minimap_empty(const Widelands::EditorGameBase& egbase,
+                                              const MiniMapLayer layers) {
+	const Widelands::Map& map = egbase.map();
+	const int8_t scale = scale_map(map, (layers & MiniMapLayer::Zoom2) != 0);
+	const int16_t minimap_w = map.get_width() * scale;
+	const int16_t minimap_h = map.get_height() * scale;
+
+	std::unique_ptr<Texture> texture(new Texture(minimap_w, minimap_h));
+	texture->fill_rect(Rectf(0.f, 0.f, minimap_w, minimap_h), RGBAColor(0, 0, 0, 255));
+	return texture;
+}
+
+void draw_minimap_static(Texture& texture,
+                         const Widelands::EditorGameBase& egbase,
+                         const Widelands::Player* player,
+                         const MiniMapLayer layers,
+                         const bool draw_full,
+                         uint16_t* const rows_drawn) {
+	NoteThreadSafeFunction::instantiate(
+	   [&texture, &egbase, player, layers, draw_full, rows_drawn]() {
+		   const Widelands::Map& map = egbase.map();
+		   const Widelands::Coords node =
+		      MapviewPixelFunctions::calc_node_and_triangle(map, 0, 0).node;
+
+		   texture.lock();
+		   do_draw_minimap(
+		      texture, egbase, player, Vector2i(node.x, node.y), layers, draw_full, rows_drawn);
+		   texture.unlock(Texture::Unlock_Update);
+	   },
+	   true);
+}
+
+std::unique_ptr<Texture> draw_minimap_final(const Texture& input_texture,
+                                            const Widelands::EditorGameBase& egbase,
+                                            const Rectf& view_area,
+                                            const MiniMapType& minimap_type,
+                                            const MiniMapLayer layers) {
+	const Widelands::Map& map = egbase.map();
+	const bool zoom = (layers & MiniMapLayer::Zoom2) != 0;
+	const int8_t scale = scale_map(map, zoom);
+	const int16_t minimap_w = map.get_width() * scale;
+	const int16_t minimap_h = map.get_height() * scale;
+
+	std::unique_ptr<Texture> texture(new Texture(minimap_w, minimap_h));
+
+	// Center the view on the middle of the 'view_area'.
+	switch (minimap_type) {
+	case MiniMapType::kStaticViewWindow: {
+		const uint16_t move_x =
+		   static_cast<uint16_t>(view_area.center().x * scale / kTriangleWidth + minimap_w / 2.f) %
+		   minimap_w;
+		const uint16_t move_y =
+		   static_cast<uint16_t>(view_area.center().y * scale / kTriangleHeight + minimap_h / 2.f) %
+		   minimap_h;
+
+		// Assemble the output texture from 4 parts of the input texture.
+		// Bottom-right -> top-left
+		texture->blit(Rectf(0.f, 0.f, minimap_w - move_x, minimap_h - move_y), input_texture,
+		              Rectf(move_x, move_y, minimap_w - move_x, minimap_h - move_y), 1.,
+		              BlendMode::Copy);
+		// Bottom-left -> top-right
+		texture->blit(Rectf(minimap_w - move_x, 0.f, move_x, minimap_h - move_y), input_texture,
+		              Rectf(0.f, move_y, move_x, minimap_h - move_y), 1., BlendMode::Copy);
+		// Top-right -> bottom-left
+		texture->blit(Rectf(0.f, minimap_h - move_y, minimap_w - move_x, move_y), input_texture,
+		              Rectf(move_x, 0.f, minimap_w - move_x, move_y), 1., BlendMode::Copy);
+		// Top-left -> bottom-right
+		texture->blit(Rectf(minimap_w - move_x, minimap_h - move_y, move_x, move_y), input_texture,
+		              Rectf(0.f, 0.f, move_x, move_y), 1., BlendMode::Copy);
+		break;
+	}
+
+	case MiniMapType::kStaticMap:
+		texture->blit(Rectf(0.f, 0.f, minimap_w, minimap_h), input_texture,
+		              Rectf(0.f, 0.f, minimap_w, minimap_h), 1., BlendMode::Copy);
+		break;
+	}
+
+	if ((layers & MiniMapLayer::ViewWindow) != 0) {
+		texture->lock();
+		draw_view_window(map, view_area, minimap_type, zoom, texture.get());
+		texture->unlock(Texture::Unlock_Update);
+	}
 
 	return texture;
 }
 
-void write_minimap_image
-	(const EditorGameBase& egbase, const Player* player, const Point& gviewpoint, MiniMapLayer layers,
-	 ::StreamWrite* const streamwrite)
-{
-	assert(streamwrite != nullptr);
-
-	Point viewpoint(gviewpoint);
-
-	// map dimension
-	const int16_t map_w = egbase.get_map().get_width();
-	const int16_t map_h = egbase.get_map().get_height();
-	const int32_t maxx = MapviewPixelFunctions::get_map_end_screen_x(egbase.get_map());
-	const int32_t maxy = MapviewPixelFunctions::get_map_end_screen_y(egbase.get_map());
-	// adjust the viewpoint top topleft in map coords
-	viewpoint.x += g_gr->get_xres() / 2;
-	if (viewpoint.x >= maxx) {
-		viewpoint.x -= maxx;
+int scale_map(const Widelands::Map& map, bool zoom) {
+	// The MiniMap can have a maximum size of 600px (width or height).
+	// Borders and button height takes 2x20px + 20px. -> 60px
+	// If a map width or height is greater than 270px we don't scale.
+	// Otherwise we fit as much as possible into a 300px or 400px
+	// MiniMap window when zoom is disabled.
+	const auto max = std::max(map.get_width(), map.get_height());
+	if (max <= 270) {
+		if (zoom) {
+			return 540 / max;
+		}
+		if (max > 135) {
+			return 370 / max;
+		}
+		return 270 / max;
 	}
-	viewpoint.y += g_gr->get_yres() / 2;
-	if (viewpoint.y >= maxy) {
-		viewpoint.y -= maxy;
-	}
-	viewpoint.x /= TRIANGLE_WIDTH;
-	viewpoint.y /= TRIANGLE_HEIGHT;
-	viewpoint.x -= map_w / 2;
-	viewpoint.y -= map_h / 2;
-
-	// Render minimap
-	std::unique_ptr<Texture> texture(draw_minimap(egbase, player, viewpoint, layers));
-	save_to_png(texture.get(), streamwrite, ColorType::RGBA);
+	return 1;
 }

@@ -1,4 +1,6 @@
+# Automatically created by Widelands bzr7890[trunk] (Debug)
+
 [global]
-packet_version=2
-player_1=11 53
-player_2=53 16
+packet_version="2"
+player_1="11 53"
+player_2="53 16"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2016 by the Widelands Development Team
+ * Copyright (C) 2003-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,27 +12,22 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_WUI_WARESDISPLAY_H
 #define WL_WUI_WARESDISPLAY_H
 
-#include <vector>
+#include <functional>
+#include <memory>
 
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warelist.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "ui_basic/textarea.h"
 
-namespace UI {struct Textarea;}
-
-namespace Widelands {
-class TribeDescr;
-struct WareList;
-}
+using WaresOrderCoords = std::map<Widelands::DescriptionIndex, Widelands::Coords>;
 
 /**
  * Display wares or workers together with some string (typically a number)
@@ -42,17 +37,23 @@ struct WareList;
  */
 class AbstractWaresDisplay : public UI::Panel {
 public:
-	AbstractWaresDisplay
-		(UI::Panel * const parent,
-		 int32_t x, int32_t y,
-		 const Widelands::TribeDescr &,
-		 Widelands::WareWorker type,
-		 bool selectable,
-		 boost::function<void(Widelands::DescriptionIndex, bool)> callback_function = 0,
-		 bool horizontal = false);
+	AbstractWaresDisplay(
+	   UI::Panel* parent,
+	   int32_t x,
+	   int32_t y,
+	   const Widelands::TribeDescr&,
+	   Widelands::WareWorker type,
+	   bool selectable,
+	   CLANG_DIAG_OFF("-Wunknown-pragmas") CLANG_DIAG_OFF("-Wzero-as-null-pointer-constant")
+	      std::function<void(Widelands::DescriptionIndex, bool)> callback_function = nullptr,
+	   CLANG_DIAG_ON("-Wzero-as-null-pointer-constant")
+	      CLANG_DIAG_ON("-Wunknown-pragmas") bool horizontal = false,
+	   int32_t hgap = 3,
+	   int32_t vgap = 4);
 
-	bool handle_mousemove
-		(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
+	bool
+	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
+	void handle_mousein(bool inside) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 
@@ -63,11 +64,38 @@ public:
 
 	// Wares may be hidden
 	void hide_ware(Widelands::DescriptionIndex);
-	void unhide_ware(Widelands::DescriptionIndex);
-	bool ware_hidden(Widelands::DescriptionIndex);
+	bool is_ware_hidden(Widelands::DescriptionIndex) const;
 
 	Widelands::DescriptionIndex ware_at_point(int32_t x, int32_t y) const;
-	Widelands::WareWorker get_type() const {return type_;}
+	Widelands::WareWorker get_type() const {
+		return type_;
+	}
+
+	int32_t get_hgap() const {
+		return hgap_;
+	}
+	int32_t get_vgap() const {
+		return vgap_;
+	}
+	void set_hgap(int32_t, bool = true);
+	void set_vgap(int32_t, bool = true);
+
+	Widelands::Extent get_extent() const;
+
+	const WaresOrderCoords& icons_order_coords() const;
+	Widelands::DescriptionIndex ware_at_coords(int16_t x, int16_t y) const;
+	uint16_t column_length(int16_t) const;
+
+	void set_min_free_vertical_space(int32_t s) {
+		min_free_vertical_space_ = s;
+	}
+	int32_t get_min_free_vertical_space() const {
+		return min_free_vertical_space_;
+	}
+
+	static inline int32_t calc_hgap(int32_t columns, int32_t total_w, int32_t min = 3) {
+		return std::max(min, (total_w - columns * kWareMenuPicWidth) / (columns - 1));
+	}
 
 protected:
 	void layout() override;
@@ -76,16 +104,16 @@ protected:
 
 	virtual RGBColor info_color_for_ware(Widelands::DescriptionIndex);
 
-	const Widelands::TribeDescr::WaresOrder & icons_order() const;
-	const Widelands::TribeDescr::WaresOrderCoords & icons_order_coords() const;
-	virtual Point ware_position(Widelands::DescriptionIndex) const;
-	void draw(RenderTarget &) override;
-	virtual void draw_ware
-		(RenderTarget &,
-		 Widelands::DescriptionIndex);
+	const Widelands::TribeDescr::WaresOrder& icons_order() const;
+	virtual Vector2i ware_position(Widelands::DescriptionIndex) const;
+	void draw(RenderTarget&) override;
+	virtual void draw_ware(RenderTarget&, Widelands::DescriptionIndex);
+	virtual RGBAColor draw_ware_background_overlay(Widelands::DescriptionIndex) {
+		return RGBAColor(0, 0, 0, 0);
+	}
 
 private:
-	using WareListVector = std::vector<const Widelands::WareList *>;
+	using WareListVector = std::vector<const Widelands::WareList*>;
 	using WareListSelectionType = std::map<const Widelands::DescriptionIndex, bool>;
 
 	/**
@@ -97,23 +125,35 @@ private:
 	 * selection of multiple wares by dragging.
 	 */
 	void update_anchor_selection(int32_t x, int32_t y);
+	void finalize_anchor_selection();
 
-	const Widelands::TribeDescr & tribe_;
+	const Widelands::TribeDescr& tribe_;
 	Widelands::WareWorker type_;
 	const std::set<Widelands::DescriptionIndex> indices_;
-	UI::Textarea        curware_;
-	WareListSelectionType      selected_;
-	WareListSelectionType      hidden_;
-	WareListSelectionType      in_selection_;  // Wares in temporary anchored selection
-	bool                selectable_;
-	bool                horizontal_;
+	UI::Textarea curware_;
+	WareListSelectionType selected_;
+	WareListSelectionType hidden_;
+	WareListSelectionType in_selection_;  // Wares in temporary anchored selection
+	bool selectable_;
+	bool horizontal_;
+	int32_t hgap_;
+	int32_t vgap_;
+
+	WaresOrderCoords order_coords_;
+
+	void relayout_icons_order_coords();
+	void recalc_desired_size(bool);
 
 	/**
 	 * The ware on which the mouse press has been performed.
 	 * It is not selected directly, but will be on mouse release.
 	 */
 	Widelands::DescriptionIndex selection_anchor_;
-	boost::function<void(Widelands::DescriptionIndex, bool)> callback_function_;
+	std::function<void(Widelands::DescriptionIndex, bool)> callback_function_;
+
+	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
+	   graphic_resolution_changed_subscriber_;
+	int32_t min_free_vertical_space_{290};
 };
 
 /*
@@ -124,28 +164,49 @@ must be valid while they are registered with this class.
 */
 class WaresDisplay : public AbstractWaresDisplay {
 public:
-	WaresDisplay
-		(UI::Panel * const parent,
-		 int32_t x, int32_t y,
-		 const Widelands::TribeDescr &,
-		 Widelands::WareWorker type,
-		 bool selectable);
+	WaresDisplay(UI::Panel* parent,
+	             int32_t x,
+	             int32_t y,
+	             const Widelands::TribeDescr&,
+	             Widelands::WareWorker type,
+	             bool selectable);
 
-	virtual ~WaresDisplay();
+	~WaresDisplay() override;
 
-	void add_warelist(const Widelands::WareList &);
+	void add_warelist(const Widelands::WareList&);
 	void remove_all_warelists();
 
 protected:
+	uint32_t amount_of(Widelands::DescriptionIndex);
 	std::string info_for_ware(Widelands::DescriptionIndex) override;
 
 private:
-	using WareListVector = std::vector<const Widelands::WareList *>;
-	WareListVector         warelists_;
+	using WareListVector = std::vector<const Widelands::WareList*>;
+	WareListVector warelists_;
 };
 
-std::string waremap_to_richtext
-		(const Widelands::TribeDescr & tribe,
-		 const std::map<Widelands::DescriptionIndex, uint8_t> & map);
+class StockMenuWaresDisplay : public WaresDisplay {
+public:
+	StockMenuWaresDisplay(UI::Panel* parent,
+	                      int32_t x,
+	                      int32_t y,
+	                      const Widelands::Player&,
+	                      Widelands::WareWorker type);
+
+	void set_solid_icon_backgrounds(const bool s) {
+		solid_icon_backgrounds_ = s;
+	}
+
+protected:
+	RGBAColor draw_ware_background_overlay(Widelands::DescriptionIndex) override;
+	std::string info_for_ware(Widelands::DescriptionIndex) override;
+
+	const Widelands::Player& player_;
+	bool solid_icon_backgrounds_{true};
+};
+
+std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
+                                const std::map<Widelands::DescriptionIndex, uint8_t>& map);
+std::string get_amount_string(uint32_t, bool cutoff1k = false);
 
 #endif  // end of include guard: WL_WUI_WARESDISPLAY_H

@@ -14,7 +14,7 @@ prefilled_buildings(p1,
          basket = 1,
          empire_bread = 8,
          bread_paddle = 2,
-         cloth = 5,
+         cloth = 15,
          coal = 12,
          felling_ax = 6,
          fire_tongs = 2,
@@ -70,6 +70,7 @@ prefilled_buildings(p1,
 -- =======================================================================
 --                                 Player 2
 -- =======================================================================
+p2.hidden_from_general_statistics = true
 p2:forbid_buildings("all")
 p2:allow_buildings{
    "barbarians_bakery",
@@ -116,7 +117,7 @@ prefilled_buildings(p2,
       scythe = 6,
       shovel = 4,
       snack = 3,
-      thatch_reed = 24,
+      reed = 24,
    },
    workers = {
       barbarians_blacksmith = 2,

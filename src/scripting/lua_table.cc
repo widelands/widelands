@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,14 +20,12 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "base/log.h"
 
-LuaTable::LuaTable(lua_State* L) : L_(L), warn_about_unaccessed_keys_(true) {
+LuaTable::LuaTable(lua_State* L) : mutex_lock_(MutexLock::ID::kLua), L_(L) {
 	// S: <table>
 	lua_pushlightuserdata(L_, const_cast<LuaTable*>(this));  // S: this
-	lua_pushvalue(L, -2); // S: <table> this <table>
+	lua_pushvalue(L, -2);                                    // S: <table> this <table>
 	lua_rawset(L, LUA_REGISTRYINDEX);
 }
 
@@ -36,20 +33,20 @@ LuaTable::~LuaTable() {
 	if (warn_about_unaccessed_keys_) {
 		std::vector<std::string> unused_keys;
 		std::set<std::string> all_keys = keys<std::string>();
-		std::set_difference(all_keys.begin(),
-		                    all_keys.end(),
-		                    accessed_keys_.begin(),
-		                    accessed_keys_.end(),
-		                    std::back_inserter(unused_keys));
+		std::set_difference(all_keys.begin(), all_keys.end(), accessed_keys_.begin(),
+		                    accessed_keys_.end(), std::back_inserter(unused_keys));
 
 		for (const std::string& unused_key : unused_keys) {
 			// We must not throw in destructors as this can shadow other errors.
-			log("ERROR: Unused key \"%s\" in LuaTable. Please report as a bug.\n", unused_key.c_str());
+			if (!starts_with(unused_key, "UNUSED_")) {
+				log_warn(
+				   "Unused key \"%s\" in LuaTable. Please report as a bug.\n", unused_key.c_str());
+			}
 		}
 	}
 
 	lua_pushlightuserdata(L_, const_cast<LuaTable*>(this));  // S: this
-	lua_pushnil(L_); // S: this nil
+	lua_pushnil(L_);                                         // S: this nil
 	lua_rawset(L_, LUA_REGISTRYINDEX);
 }
 
@@ -63,7 +60,7 @@ void LuaTable::get_existing_table_value(const std::string& key) const {
 }
 
 void LuaTable::get_existing_table_value(const int key) const {
-	const std::string key_as_string = boost::lexical_cast<std::string>(key);
+	const std::string key_as_string = as_string(key);
 	lua_pushint32(L_, key);
 	check_if_key_was_in_table(key_as_string);
 }
@@ -71,12 +68,12 @@ void LuaTable::get_existing_table_value(const int key) const {
 void LuaTable::check_if_key_was_in_table(const std::string& key) const {
 	// S: key
 	lua_pushlightuserdata(L_, const_cast<LuaTable*>(this));  // S: this
-	lua_rawget(L_, LUA_REGISTRYINDEX); // S: key table
-	lua_pushvalue(L_, -2); // S: key table key
+	lua_rawget(L_, LUA_REGISTRYINDEX);                       // S: key table
+	lua_pushvalue(L_, -2);                                   // S: key table key
 
-	lua_rawget(L_, -2); // S: key table value
-	lua_remove(L_, -2); // S: key value
-	lua_remove(L_, -2); // S: value
+	lua_rawget(L_, -2);  // S: key table value
+	lua_remove(L_, -2);  // S: key value
+	lua_remove(L_, -2);  // S: value
 
 	if (lua_isnil(L_, -1)) {
 		lua_pop(L_, 1);
@@ -112,18 +109,17 @@ template <> int LuaTable::get_value() const {
 	int is_num;
 	int return_value = lua_tointegerx(L_, -1, &is_num);
 	lua_pop(L_, 1);
-	if (!is_num) {
+	if (is_num == 0) {
 		throw LuaError("Could not convert value at top of the stack to integer.");
 	}
 	return return_value;
 }
 
 const std::string get_string_with_default(const LuaTable& table,
-														const std::string& key,
-														const std::string& default_value) {
+                                          const std::string& key,
+                                          const std::string& default_value) {
 	if (table.has_key(key)) {
 		return table.get_string(key);
-	} else {
-		return default_value;
 	}
+	return default_value;
 }

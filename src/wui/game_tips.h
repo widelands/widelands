@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2016 by the Widelands Development Team
+ * Copyright (C) 2007-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,44 +12,41 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_WUI_GAME_TIPS_H
 #define WL_WUI_GAME_TIPS_H
 
-#include <cstring>
-#include <string>
-#include <vector>
-
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "ui_basic/progresswindow.h"
 
 /// Displays game tips in progress window
 struct GameTips : public UI::IProgressVisualization {
-	GameTips
-		(UI::ProgressWindow & progressWindow, const std::vector<std::string>&);
-	virtual ~GameTips();
+	GameTips(UI::ProgressWindow& progressWindow,
+	         const std::vector<std::string>&,
+	         const Widelands::AllTribes&);
+	~GameTips() override;
 
-	void update(bool repaint) override;
+	void update(RenderTarget&, const Recti& bounds) override;
 	void stop() override;
 
 private:
 	struct Tip {
-		std::string  text;
-		int32_t          interval;
+		std::string text;
+		int32_t interval;
 	};
-	void load_tips(std::string);
-	void show_tip(int32_t index);
+	void load_tips(const std::string& name, const Widelands::AllTribes&);
+	void show_tip(RenderTarget&, const Recti& bounds, int32_t index);
 
-	uint32_t             lastUpdated_;
-	uint32_t             updateAfter_;
-	UI::ProgressWindow & progressWindow_;
-	bool                 registered_;
-	uint32_t             lastTip_;
+	uint32_t last_updated_{0U};
+	uint32_t update_after_{0U};
+	UI::ProgressWindow& progressWindow_;
+	bool registered_{false};
+	uint32_t last_tip_{0U};
 
-	std::vector<Tip>     tips_;
+	std::vector<Tip> tips_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_TIPS_H

@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_productionsite_type {
    name = "empire_fishers_house",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Fisher’s House"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -18,40 +18,41 @@ tribes:new_productionsite_type {
       granite = 1
    },
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 42, 60 },
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 41, 59 },
       },
    },
 
    aihints = {
       needs_water = true,
-      prohibited_till = 600
+      prohibited_till = 410
    },
 
    working_positions = {
       empire_fisher = 1
    },
 
-   outputs = {
-      "fish"
-   },
-
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...
-         descname = _"fishing",
+         descname = _("fishing"),
          actions = {
-            "sleep=17000",
-            "worker=fish"
+            "callworker=fish",
+            "sleep=duration:10s"
          }
       },
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Fish",
-      heading = _"Out of Fish",
+      title = _("No Fish"),
+      heading = _("Out of Fish"),
       message = pgettext("empire_building", "The fisher working out of this fisher’s house can’t find any fish in his work area."),
    },
 }
+
+pop_textdomain()

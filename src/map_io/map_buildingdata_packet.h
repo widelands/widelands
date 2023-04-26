@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -46,37 +45,26 @@ public:
 	void write(FileSystem&, EditorGameBase&, MapObjectSaver&);
 
 private:
-	void read_constructionsite
-		(ConstructionSite       &, FileRead  &, Game &, MapObjectLoader &);
-	void read_dismantlesite
-		(DismantleSite       &, FileRead  &, Game &, MapObjectLoader &);
-	void read_partially_finished_building
-		(PartiallyFinishedBuilding   &, FileRead  &, Game &, MapObjectLoader &);
-	void read_warehouse
-		(Warehouse              &, FileRead  &, Game &, MapObjectLoader &);
-	void read_militarysite
-		(MilitarySite           &, FileRead  &, Game &, MapObjectLoader &);
-	void read_trainingsite
-		(TrainingSite           &, FileRead  &, Game &, MapObjectLoader &);
-	void read_productionsite
-		(ProductionSite         &, FileRead  &, Game &, MapObjectLoader &);
+	void read_constructionsite(ConstructionSite&, FileRead&, Game&, MapObjectLoader&);
+	void read_dismantlesite(DismantleSite&, FileRead&, Game&, MapObjectLoader&);
+	void
+	read_partially_finished_building(PartiallyFinishedBuilding&, FileRead&, Game&, MapObjectLoader&);
+	void read_warehouse(Warehouse&, FileRead&, Game&, MapObjectLoader&);
+	void read_militarysite(MilitarySite&, FileRead&, Game&, MapObjectLoader&);
+	void read_trainingsite(TrainingSite&, FileRead&, Game&, MapObjectLoader&);
+	void read_productionsite(ProductionSite&, FileRead&, Game&, MapObjectLoader&);
 
-	void write_constructionsite
-		(const ConstructionSite &, FileWrite &, Game &, MapObjectSaver  &);
-	void write_dismantlesite
-		(const DismantleSite &, FileWrite &, Game &, MapObjectSaver  &);
-	void write_partially_finished_building
-		(const PartiallyFinishedBuilding &, FileWrite &, Game &, MapObjectSaver  &);
-	void write_warehouse
-		(const Warehouse        &, FileWrite &, Game &, MapObjectSaver  &);
-	void write_militarysite
-		(const MilitarySite     &, FileWrite &, Game &, MapObjectSaver  &);
-	void write_trainingsite
-		(const TrainingSite     &, FileWrite &, Game &, MapObjectSaver  &);
-	void write_productionsite
-		(const ProductionSite   &, FileWrite &, Game &, MapObjectSaver  &);
+	void write_constructionsite(const ConstructionSite&, FileWrite&, Game&, MapObjectSaver&);
+	void write_dismantlesite(const DismantleSite&, FileWrite&, Game&, MapObjectSaver&);
+	void write_partially_finished_building(const PartiallyFinishedBuilding&,
+	                                       FileWrite&,
+	                                       Game&,
+	                                       MapObjectSaver&);
+	void write_warehouse(const Warehouse&, FileWrite&, Game&, MapObjectSaver&);
+	void write_militarysite(const MilitarySite&, FileWrite&, Game&, MapObjectSaver&);
+	void write_trainingsite(const TrainingSite&, FileWrite&, Game&, MapObjectSaver&);
+	void write_productionsite(const ProductionSite&, FileWrite&, Game&, MapObjectSaver&);
 };
-
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_MAP_IO_MAP_BUILDINGDATA_PACKET_H

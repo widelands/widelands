@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,26 +12,23 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_SCRIPTING_LUA_ERRORS_H
 #define WL_SCRIPTING_LUA_ERRORS_H
 
-#include <string>
-
 #include "base/wexception.h"
 
 class LuaError : public WException {
 public:
-	LuaError(const std::string& reason);
+	explicit LuaError(const std::string& reason);
 };
 
 class LuaScriptNotExistingError : public LuaError {
 public:
-	LuaScriptNotExistingError(const std::string& name);
+	explicit LuaScriptNotExistingError(const std::string& name);
 };
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_ERRORS_H

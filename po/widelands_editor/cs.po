@@ -1,0 +1,220 @@
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2023 Widelands Development Team
+# 
+# Translators:
+# Zlopez <michal.konecny@psmail.xyz>, 2021
+# Milan Fašina <matrix17@seznam.cz>, 2016-2017
+# af24e571988b09e5b46468ac89010e87_d1b4333, 2020-2021
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2023-02-10 03:09+0000\n"
+"PO-Revision-Date: 2016-03-24 07:33+0000\n"
+"Last-Translator: Zlopez <michal.konecny@psmail.xyz>, 2021\n"
+"Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: cs\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+
+#: ../../data/scripting/editor/editor_controls.lua:11
+#: ../../data/scripting/editor/editor_help.lua:66
+msgid "Controls"
+msgstr "Ovládání"
+
+#: ../../data/scripting/editor/editor_controls.lua:13
+msgid "Keyboard Shortcuts"
+msgstr "Klávesové zkratky"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:16
+msgid "Help"
+msgstr "Nápověda"
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/scripting/editor/editor_controls.lua:18
+msgid "Toggle main menu"
+msgstr "Zapnout hlavní nabídku"
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 't'
+#: ../../data/scripting/editor/editor_controls.lua:20
+msgid "Toggle tools menu"
+msgstr "Zapnout nabídku nástrojů"
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 'p'
+#: ../../data/scripting/editor/editor_controls.lua:24
+msgid "Toggle player menu"
+msgstr "Zobrazit nabídku hráčů"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:26
+msgid "Undo"
+msgstr "Zpět"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:28
+msgid "Redo"
+msgstr "Provést znovu"
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 'i'
+#: ../../data/scripting/editor/editor_controls.lua:30
+msgid "Activate information tool"
+msgstr "Zapnout režim zobrazení informací"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:32
+msgid "Load map"
+msgstr "Nahrát mapu"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:34
+msgid "Save map"
+msgstr "Uložit mapu"
+
+#: ../../data/scripting/editor/editor_controls.lua:38
+msgid "Tools"
+msgstr "Nástroje"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:41
+msgid "Change tool size"
+msgstr "Změnit velikost nástroje"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:43
+msgctxt "hotkey"
+msgid "Click"
+msgstr "Klik"
+
+#: ../../data/scripting/editor/editor_controls.lua:43
+msgid ""
+"Place new elements on the map, or increase map elements by the value "
+"selected by ‘Increase/Decrease value’"
+msgstr "Vlož nové prvky do mapy nebo zvyš počet prvků na mapě o hodnotu v \"Zvýšit/Snížit hodnotu\""
+
+#: ../../data/scripting/editor/editor_controls.lua:45
+msgid ""
+"Remove elements from the map, or decrease map elements by the value selected"
+" by ‘Increase/Decrease value’"
+msgstr "Odstranit prvky z mapy nebo snížit počet prvků o hodnotu v \"Zvýšit/Snížit hodnotu\""
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:45
+msgctxt "hotkey"
+msgid "Shift + Click"
+msgstr "Shift + klik"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/scripting/editor/editor_controls.lua:47
+msgctxt "hotkey"
+msgid "Ctrl + Click"
+msgstr "Ctrl + klik"
+
+#: ../../data/scripting/editor/editor_controls.lua:47
+msgid "Set map elements to the value selected by ‘Set Value’"
+msgstr "Nastavit počet prvků na mapě v \"Nastavit hodnotu\""
+
+#: ../../data/scripting/editor/editor_help.lua:50
+msgid "Editor Help"
+msgstr "Nápověda editoru"
+
+#: ../../data/scripting/editor/editor_help.lua:55
+msgid "General"
+msgstr "Obecné"
+
+#: ../../data/scripting/editor/editor_help.lua:60
+#: ../../data/scripting/editor/editor_introduction.lua:10
+msgid "Introduction"
+msgstr "Úvod"
+
+#: ../../data/scripting/editor/editor_help.lua:72
+#: ../../data/scripting/editor/tips.lua:15
+msgid "Tips"
+msgstr "Tipy"
+
+#: ../../data/scripting/editor/editor_help.lua:82
+msgid "Terrains"
+msgstr "Terén"
+
+#: ../../data/scripting/editor/editor_help.lua:89
+msgid "Trees"
+msgstr "Stromy"
+
+#: ../../data/scripting/editor/editor_introduction.lua:8
+msgid "The Widelands Editor"
+msgstr "Widelands editor"
+
+#: ../../data/scripting/editor/editor_introduction.lua:12
+msgid ""
+"This editor is intended for players who would like to design their own maps "
+"to use with Widelands."
+msgstr "Tento editor má za cíl umožnit tvoření vlastních map pro hru Widelands těm, kdo o to mají zájem."
+
+#: ../../data/scripting/editor/editor_introduction.lua:13
+msgid ""
+"As you can see, this editor is heavy work in progress and as the editor "
+"becomes better and better, this text will also get longer and more complete."
+msgstr "Jak si můžeš všimnout, na tomto editoru se neustále intenzivně pracuje. S tím, jak se bude editor zlepšovat, bude i tento popis delší a úplnější."
+
+#: ../../data/scripting/editor/editor_introduction.lua:16
+msgid "The wiki also includes a short tutorial on how to build a map."
+msgstr "Wiki také zahrnuje krátký tutoriál na vytváření map."
+
+#: ../../data/scripting/editor/terrain_help.lua:21
+msgid "Resources"
+msgstr "Suroviny"
+
+#. TRANSLATORS: A header in the editor help if there is 1 valid resource
+#: ../../data/scripting/editor/terrain_help.lua:25
+msgid "Valid Resource:"
+msgstr "Platný zdroj:"
+
+#. TRANSLATORS: A header in the editor help if there is more than 1 valid
+#. resource
+#: ../../data/scripting/editor/terrain_help.lua:28
+msgid "Valid Resources:"
+msgstr "Platné zdroje:"
+
+#: ../../data/scripting/editor/terrain_help.lua:39
+msgid "Default:"
+msgstr "Výchozí:"
+
+#. TRANSLATORS: e.g. "5x Water"
+#: ../../data/scripting/editor/terrain_help.lua:41
+msgid "%1%x %2%"
+msgstr "%1%x %2%"
+
+#. TRANSLATORS: A header in the editor help
+#: ../../data/scripting/editor/terrain_help.lua:57
+#: ../../data/scripting/editor/terrain_tooltip.lua:36
+msgid "Probability of trees growing"
+msgstr "Pravděpodobnost růstu stromů."
+
+#: ../../data/scripting/editor/terrain_help.lua:63
+#: ../../data/scripting/editor/terrain_tooltip.lua:40
+msgid "No trees will grow here."
+msgstr "Zde stromy neporostou."
+
+#: ../../data/scripting/editor/terrain_tooltip.lua:25
+#: ../../data/scripting/editor/tree_tooltip.lua:25
+#, lua-format
+msgid "%2.1f%%"
+msgstr "%2.1f%%"
+
+#. TRANSLATORS: A header in the editor help. Terrains preferred by a type of
+#. tree.
+#: ../../data/scripting/editor/tree_help.lua:20
+#: ../../data/scripting/editor/tree_tooltip.lua:34
+msgid "Preferred terrains"
+msgstr "Preferovaný terén"

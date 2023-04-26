@@ -1,27 +1,12 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 6, 24 },
-      fps = 10
-   },
-   hacking = {
-      pictures = path.list_files(dirname .. "hacking_??.png"),
-      hotspot = { 23, 23 },
-      fps = 10
-   }
-}
-add_worker_animations(animations, "walk", dirname, "walk", {9, 22}, 10)
-add_worker_animations(animations, "walkload", dirname, "walkload", {9, 22}, 10)
-
-
-tribes:new_worker_type {
-   msgctxt = "empire_worker",
+wl.Descriptions():new_worker_type {
    name = "empire_lumberjack",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("empire_worker", "Lumberjack"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -31,18 +16,51 @@ tribes:new_worker_type {
    },
 
    programs = {
-      chop = {
-         "findobject attrib:tree radius:10",
-         "walk object",
-         "play_sound sound/woodcutting fast_woodcutting 250",
-         "animation hacking 10000",
-         "play_sound sound/spoken timber 156",
-         "object fall",
-         "animation idle 2000",
-         "createware log",
+      harvest = {
+         "findobject=attrib:tree radius:10",
+         "walk=object",
+         "playsound=sound/woodcutting/fast_woodcutting priority:95% allow_multiple",
+         "animate=hacking duration:20s",
+         "playsound=sound/woodcutting/tree_falling priority:100%",
+         "callobject=fall",
+         "animate=idle duration:2s",
+         "createware=log",
          "return"
       }
    },
 
-   animations = animations,
+   spritesheets = {
+      idle = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         hotspot = { 6, 24 }
+      },
+      hacking = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         hotspot = { 23, 23 }
+      },
+      walk = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 9, 22 }
+      },
+      walkload = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 9, 22 }
+      },
+   },
 }
+
+pop_textdomain()

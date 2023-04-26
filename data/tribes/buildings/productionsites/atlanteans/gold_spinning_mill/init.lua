@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
+wl.Descriptions():new_productionsite_type {
    name = "atlanteans_gold_spinning_mill",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Gold Spinning Mill"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -19,19 +19,19 @@ tribes:new_productionsite_type {
       granite = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 33, 64 },
+         hotspot = { 34, 74 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
-         hotspot = { 33, 64 },
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
+         hotspot = { 34, 74 },
       }
    },
 
    aihints = {
-      prohibited_till = 600
+      prohibited_till = 1210
    },
 
    working_positions = {
@@ -39,23 +39,23 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      gold = 5
-   },
-   outputs = {
-      "gold_thread"
+      { name = "gold", amount = 5 }
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start spinning gold because ...
-         descname = _"spinning gold",
+         descname = _("spinning gold"),
          actions = {
-            "sleep=15000",
             "return=skipped unless economy needs gold_thread",
             "consume=gold",
-            "animate=working 25000",
+            "sleep=duration:15s",
+            "playsound=sound/atlanteans/goldspin priority:50% allow_multiple",
+            "animate=working duration:25s",
             "produce=gold_thread"
          }
       },
    },
 }
+
+pop_textdomain()

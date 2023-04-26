@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2016 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,151 +12,114 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_NETWORK_NETHOST_H
 #define WL_NETWORK_NETHOST_H
 
-#include "logic/game_controller.h"
-#include "logic/game_settings.h"
-#include "logic/widelands.h"
-#include "network/network.h"
+#include <memory>
+#include <thread>
 
-struct ChatMessage;
-struct NetHostImpl;
-struct Client;
+#include "network/bufferedconnection.h"
+#include "network/nethost_interface.h"
 
 /**
- * NetHost manages the lifetime of a network game in which this computer
- * acts as the host.
- *
- * This includes running the game setup screen and the actual game after
- * launch, as well as dealing with the actual network protocol.
+ * NetHost manages the client connections of a network game in which this computer
+ * participates as a server.
+ * This class tries to create sockets for IPv4 and IPv6 for gaming in the local network.
  */
-struct NetHost : public GameController, private SyncCallback {
-	NetHost (const std::string & playername, bool internet = false);
-	virtual ~NetHost ();
+class NetHost : public NetHostInterface {
+public:
+	/**
+	 * Tries to listen on the given port.
+	 * \param port The port to listen on.
+	 * \return A pointer to a listening \c NetHost object or a nullptr if the connection failed.
+	 */
+	static std::unique_ptr<NetHost> listen(uint16_t port);
 
-	void run();
-	const std::string & get_local_playername() const;
-	int16_t get_local_playerposition();
+	/**
+	 * Closes the server.
+	 */
+	~NetHost() override;
 
-	// GameController interface
-	void think() override;
-	void send_player_command(Widelands::PlayerCommand &) override;
-	int32_t get_frametime() override;
-	GameController::GameType get_game_type() override;
+	// Inherited from NetHostInterface
+	[[nodiscard]] bool is_connected(ConnectionId id) const override;
+	void close(ConnectionId id) override;
+	bool try_accept(ConnectionId* new_id) override;
+	std::unique_ptr<RecvPacket> try_receive(ConnectionId id) override;
+	void send(ConnectionId id,
+	          const SendPacket& packet,
+	          NetPriority priority = NetPriority::kNormal) override;
+	void send(const std::vector<ConnectionId>& ids,
+	          const SendPacket& packet,
+	          NetPriority priority = NetPriority::kNormal) override;
 
-	uint32_t real_speed() override;
-	uint32_t desired_speed() override;
-	void set_desired_speed(uint32_t speed) override;
-	bool is_paused() override;
-	void set_paused(bool paused) override;
-	// End GameController interface
-
-	// Pregame-related stuff
-	const GameSettings & settings();
-	bool can_launch();
-	void set_scenario(bool);
-	void set_map
-		(const std::string & mapname,
-		 const std::string & mapfilename,
-		 uint32_t            maxplayers,
-		 bool                savegame = false);
-	void set_player_state    (uint8_t number, PlayerSettings::State state, bool host = false);
-	void set_player_tribe    (uint8_t number, const std::string & tribe, bool const random_tribe = false);
-	void set_player_init     (uint8_t number, uint8_t index);
-	void set_player_ai       (uint8_t number, const std::string & name, bool const random_ai = false);
-	void set_player_name     (uint8_t number, const std::string & name);
-	void set_player          (uint8_t number, PlayerSettings);
-	void set_player_number   (uint8_t number);
-	void set_player_team     (uint8_t number, Widelands::TeamNumber team);
-	void set_player_closeable(uint8_t number, bool closeable);
-	void set_player_shared   (uint8_t number, uint8_t shared);
-	void switch_to_player    (uint32_t user,  uint8_t number);
-	void set_win_condition_script   (std::string);
-
-	// just visible stuff for the select mapmenu
-	void set_multiplayer_game_settings();
-
-	// Chat-related stuff
-	void send(ChatMessage msg);
-
-	//  Host command related stuff
-	int32_t check_client(std::string name);
-	void kick_user(uint32_t, std::string);
-	void split_command_array
-		(const std::string & cmdarray, std::string & cmd, std::string & arg1, std::string & arg2);
-
-	void report_result(uint8_t player, Widelands::PlayerEndResult result, const std::string & info) override;
-
-	void force_pause() {
-		forced_pause_ = true;
-		update_network_speed();
-	}
-
-	void end_forced_pause() {
-		forced_pause_ = false;
-		update_network_speed();
-	}
-
-	bool forced_pause() {return forced_pause_;}
+	/**
+	 * Stops listening for connections.
+	 */
+	void stop_listening();
 
 private:
+	/**
+	 * Returns whether the server is started and is listening.
+	 * \return \c true if the server is listening, \c false otherwise.
+	 */
+	// Feel free to make this method public if you need it
+	[[nodiscard]] bool is_listening() const;
 
-	void send_system_message_code
-		(const std::string &,
-		 const std::string & a = "", const std::string & b = "", const std::string & c = "");
-	void request_sync_reports();
-	void check_sync_reports();
-	void syncreport() override;
+	/**
+	 * Starts an asynchronous accept on the given acceptor.
+	 * If someone wants to connect, establish a connection
+	 * and add the connection to accept_queue_ and continue waiting.
+	 * @param acceptor The acceptor we should be listening on.
+	 * @param pair A pair of the BufferedConnection for the new client and its socket.
+	 */
+	void
+	start_accepting(asio::ip::tcp::acceptor& acceptor,
+	                std::pair<std::unique_ptr<BufferedConnection>, asio::ip::tcp::socket*>& pair);
 
-	void clear_computer_players();
-	void init_computer_player(Widelands::PlayerNumber p);
-	void init_computer_players();
+	/**
+	 * Tries to listen on the given port.
+	 * If it fails, is_listening() will return \c false.
+	 * \param port The port to listen on.
+	 */
+	explicit NetHost(uint16_t port);
 
-	void handle_packet(uint32_t i, RecvPacket &);
-	void handle_network ();
-	void send_file_part(TCPsocket, uint32_t);
+	/**
+	 * Prepare the given acceptor for accepting connections for the given
+	 * network protocol and port.
+	 * @param acceptor The acceptor to prepare.
+	 * @param endpoint The IP version, transport protocol and port number we should listen on.
+	 * @return \c True iff the acceptor is listening now.
+	 */
+	bool open_acceptor(asio::ip::tcp::acceptor* acceptor, const asio::ip::tcp::endpoint& endpoint);
 
-	void check_hung_clients();
-	void broadcast_real_speed(uint32_t speed);
-	void update_network_speed();
+	/// A map linking client ids to the respective network connections.
+	/// Client ids not in this map should be considered invalid.
+	std::map<NetHostInterface::ConnectionId, std::unique_ptr<BufferedConnection>> clients_;
+	/// The next client id that will be used
+	NetHostInterface::ConnectionId next_id_{1};
+	/// An io_service needed by asio. Primary needed for async operations.
+	asio::io_service io_service_;
+	/// The acceptor we get IPv4 connection requests to.
+	asio::ip::tcp::acceptor acceptor_v4_;
+	/// The acceptor we get IPv6 connection requests to.
+	asio::ip::tcp::acceptor acceptor_v6_;
 
-	std::string get_computer_player_name(uint8_t playernum);
-	bool has_user_name
-		(const std::string & name,
-		 uint8_t             ignoreplayer = UserSettings::none());
-	void welcome_client(uint32_t number, std::string & playername);
-	void committed_network_time(int32_t time);
-	void receive_client_time(uint32_t number, int32_t time);
+	/// Socket and unconnected BuffereConnection that will be used for accepting IPv4 connections
+	std::pair<std::unique_ptr<BufferedConnection>, asio::ip::tcp::socket*> accept_pair_v4_;
+	/// Socket and unconnected BuffereConnection that will be used for accepting IPv6 connections
+	std::pair<std::unique_ptr<BufferedConnection>, asio::ip::tcp::socket*> accept_pair_v6_;
 
-	void broadcast(SendPacket &);
-	void write_setting_map(SendPacket &);
-	void write_setting_player(SendPacket &, uint8_t number);
-	void write_setting_all_players(SendPacket &);
-	void write_setting_user(SendPacket &, uint32_t number);
-	void write_setting_all_users(SendPacket &);
-	bool write_map_transfer_info(SendPacket &, std::string);
-
-	void disconnect_player_controller
-		(uint8_t number,
-		 const std::string & name);
-	void disconnect_client
-		(uint32_t number,
-		 const std::string & reason,
-		 bool sendreason = true,
-		 const std::string & arg = "");
-	void reaper();
-
-	NetTransferFile * file_;
-	NetHostImpl     * d;
-	bool              internet_;
-	bool              forced_pause_;
+	/// A thread used to wait for connections on the acceptor.
+	std::thread asio_thread_;
+	/// The new connections the acceptor accepted. Will be moved to clients_
+	/// when try_accept() is called by the using class.
+	std::queue<std::unique_ptr<BufferedConnection>> accept_queue_;
+	/// A mutex avoiding concurrent access to accept_queue_.
+	std::mutex mutex_accept_;
 };
-
 
 #endif  // end of include guard: WL_NETWORK_NETHOST_H

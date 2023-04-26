@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2011 by the Widelands Development Team
+ * Copyright (C) 2007-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,21 +12,15 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_IO_STREAMREAD_H
 #define WL_IO_STREAMREAD_H
 
-#include <cstring>
-#include <string>
-
 #include "base/macros.h"
 #include "base/wexception.h"
-#include "io/machdep.h"
-
 
 /**
  * Abstract base class for stream-like data sources.
@@ -43,8 +37,8 @@
  */
 class StreamRead {
 public:
-	explicit StreamRead() {}
-	virtual ~StreamRead();
+	explicit StreamRead() = default;
+	virtual ~StreamRead() = default;
 
 	/**
 	 * Read a number of bytes from the stream.
@@ -52,14 +46,14 @@ public:
 	 * \return the number of bytes that were actually read. Will return 0 at
 	 * end of stream.
 	 */
-	virtual size_t data(void * read_data, size_t bufsize) = 0;
+	virtual size_t data(void* read_data, size_t bufsize) = 0;
 
 	/**
 	 * \return \c true if the end of file / end of stream has been reached.
 	 */
-	virtual bool end_of_file() const = 0;
+	[[nodiscard]] virtual bool end_of_file() const = 0;
 
-	void data_complete(void * data, size_t size);
+	void data_complete(void* data, size_t size);
 
 	int8_t signed_8();
 	uint8_t unsigned_8();
@@ -67,13 +61,17 @@ public:
 	uint16_t unsigned_16();
 	int32_t signed_32();
 	uint32_t unsigned_32();
+	float float_32();
 	std::string string();
-	virtual char const * c_string() {throw;}
+	virtual char const* c_string() {
+		throw;
+	}
 
 	///  Base of all exceptions that are caused by errors in the data that is
 	///  read.
-	struct DataError : public WException {
-		DataError(char const * const fmt, ...) PRINTF_FORMAT(2, 3);
+	class DataError : public WException {
+	public:
+		explicit DataError(char const* fmt, ...) PRINTF_FORMAT(2, 3);
 	};
 #define data_error(...) DataError(__VA_ARGS__)
 

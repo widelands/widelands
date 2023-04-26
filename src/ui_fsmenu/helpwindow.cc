@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,17 +12,15 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "ui_fsmenu/helpwindow.h"
 
 #include <memory>
-#include <string>
 
-#include <boost/format.hpp>
+#include <SDL_mouse.h>
 
 #include "base/i18n.h"
 #include "graphic/graphic.h"
@@ -30,30 +28,35 @@
 #include "scripting/lua_table.h"
 #include "ui_basic/button.h"
 
-namespace UI {
+namespace FsMenu {
 
-FullscreenHelpWindow::FullscreenHelpWindow
-	(Panel * const parent,
-	 LuaInterface* lua,
-	 const std::string& script_path,
-	 const std::string & caption,
-	 uint32_t width, uint32_t height)
-	:
-	Window(parent, "help_window", 0, 0, width, height, (boost::format(_("Help: %s")) % caption).str()),
-	textarea_(new MultilineTextarea(this, 5, 5, width - 10, height - 30, std::string(), UI::Align::kLeft))
-{
+HelpWindow::HelpWindow(UI::Panel* const parent,
+                       LuaInterface* lua,
+                       const std::string& script_path,
+                       const std::string& caption,
+                       uint32_t width,
+                       uint32_t height)
+   : UI::Window(parent,
+                UI::WindowStyle::kFsMenu,
+                "help_window",
+                0,
+                0,
+                width,
+                height,
+                format(_("Help: %s"), caption)),
+     textarea_(
+        new UI::MultilineTextarea(this, 5, 5, width - 10, height - 30, UI::PanelStyle::kFsMenu)) {
 	int margin = 5;
 
 	// Calculate sizes
-	width  = (width  == 0) ? g_gr->get_xres() * 3 / 5 : width;
+	width = (width == 0) ? g_gr->get_xres() * 3 / 5 : width;
 	height = (height == 0) ? g_gr->get_yres() * 4 / 5 : height;
 
-	Button* btn = new Button(this, "ok", width / 3, 0, width / 3, 0,
-									 g_gr->images().get("images/ui_basic/but5.png"),
-									 _("OK"), "", true, false);
+	UI::Button* btn = new UI::Button(
+	   this, "ok", width / 3, 0, width / 3, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK"));
 
-	btn->sigclicked.connect(boost::bind(&FullscreenHelpWindow::clicked_ok, boost::ref(*this)));
-	btn->set_pos(Point(btn->get_x(), height - margin - btn->get_h()));
+	btn->sigclicked.connect([this]() { clicked_ok(); });
+	btn->set_pos(Vector2i(btn->get_x(), height - margin - btn->get_h()));
 
 	std::string helptext;
 	try {
@@ -71,53 +74,45 @@ FullscreenHelpWindow::FullscreenHelpWindow
 	set_inner_size(width, height);
 	center_to_parent();
 	focus();
-}
 
+	initialization_complete();
+}
 
 /**
  * Handle mouseclick.
  *
  * Clicking the right mouse button inside the window acts like pressing Ok.
  */
-bool FullscreenHelpWindow::handle_mousepress(const uint8_t btn, int32_t, int32_t)
-{
+bool HelpWindow::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_RIGHT) {
 		play_click();
 		clicked_ok();
+		return true;
 	}
-	return true;
+	return UI::Window::handle_mousepress(btn, x, y);
 }
 
-bool FullscreenHelpWindow::handle_mouserelease(const uint8_t, int32_t, int32_t)
-{
-	return true;
-}
-
-bool FullscreenHelpWindow::handle_key(bool down, SDL_Keysym code)
-{
+bool HelpWindow::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
-			case SDLK_KP_ENTER:
-			case SDLK_RETURN:
-				clicked_ok();
-				return true;
-			default:
-				return true; // handled
+		case SDLK_RETURN:
+			clicked_ok();
+			return true;
+		default:
+			break;
 		}
 	}
-	return true;
+	return UI::Window::handle_key(down, code);
 }
 
-
-void FullscreenHelpWindow::clicked_ok()
-{
-	if (is_modal())
+void HelpWindow::clicked_ok() {
+	if (is_modal()) {
 		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
-	else {
+	} else {
 		// Do not call die() here - could lead to broken pointers.
 		// The window should get deleted with the parent anyways - best use a unique_ptr there.
 		set_visible(false);
 	}
 }
 
-} // namespace UI
+}  // namespace FsMenu

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,83 +12,78 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_LOGIC_MAP_OBJECTS_CHECKSTEP_H
 #define WL_LOGIC_MAP_OBJECTS_CHECKSTEP_H
 
+#include <memory>
 #include <set>
 #include <vector>
-
-#include <boost/shared_ptr.hpp>
 
 #include "logic/widelands_geometry.h"
 
 namespace Widelands {
 
+class EditorGameBase;
 class Map;
 class Player;
 
 struct CheckStep {
 	enum StepId {
-		stepNormal, //  normal step treatment
-			stepFirst,  //  first step of a path
-			stepLast,   //  last step of a path
+		stepNormal,  //  normal step treatment
+		stepFirst,   //  first step of a path
+		stepLast,    //  last step of a path
 	};
 
 private:
 	struct BaseCapsule {
-		virtual ~BaseCapsule() {}
-		virtual bool allowed
-			(Map &, const FCoords & start, const FCoords & end,
-			 int32_t dir,
-			 StepId  id)
-			const
-			= 0;
-		virtual bool reachable_dest(Map &, const FCoords & dest) const = 0;
+		virtual ~BaseCapsule() = default;
+		[[nodiscard]] virtual bool allowed(
+		   const Map&, const FCoords& start, const FCoords& end, int32_t dir, StepId id) const = 0;
+		[[nodiscard]] virtual bool reachable_dest(const Map&, const FCoords& dest) const = 0;
 	};
-	template<typename T>
-	struct Capsule : public BaseCapsule {
-		Capsule(const T & init_op) : op(init_op) {}
+	template <typename T> struct Capsule : public BaseCapsule {
+		Capsule(const T& init_op) : op(init_op) {  // NOLINT allow implicit conversion
+		}
 
-		bool allowed
-			(Map & map, const FCoords & start, const FCoords & end,
-			 int32_t const dir,
-			 StepId  const id)
-			const override
-		{
+		[[nodiscard]] bool allowed(const Map& map,
+		                           const FCoords& start,
+		                           const FCoords& end,
+		                           int32_t const dir,
+		                           StepId const id) const override {
 			return op.allowed(map, start, end, dir, id);
 		}
-		bool reachable_dest(Map & map, const FCoords & dest) const override {
+		[[nodiscard]] bool reachable_dest(const Map& map, const FCoords& dest) const override {
 			return op.reachable_dest(map, dest);
 		}
 
 		const T op;
 	};
 
-	boost::shared_ptr<BaseCapsule> capsule;
+	std::shared_ptr<BaseCapsule> capsule;
 
-	static const CheckStep & always_false();
+	static const CheckStep& always_false();
 
 public:
 	CheckStep();
 
-	template<typename T>
-	CheckStep(const T & op) : capsule(new Capsule<T>(op)) {}
+	template <typename T>
+	CheckStep(const T& op)  // NOLINT allow implicit conversion
+	   : capsule(new Capsule<T>(op)) {
+	}
 
 	/**
 	 * \return \c true true if moving from start to end (single step in the given
 	 * direction) is allowed.
 	 */
-	bool allowed
-		(Map & map, const FCoords & start, const FCoords & end,
-		 int32_t const dir,
-		 StepId  const id)
-		const
-	{
+	[[nodiscard]] bool allowed(const Map& map,
+	                           const FCoords& start,
+	                           const FCoords& end,
+	                           int32_t const dir,
+	                           StepId const id) const {
 		return capsule->allowed(map, start, end, dir, id);
 	}
 
@@ -96,25 +91,24 @@ public:
 	 * \return \c true if the destination field can be reached at all
 	 * (e.g. return false for land-based bobs when dest is in water).
 	 */
-	bool reachable_dest(Map & map, const FCoords & dest) const {
+	[[nodiscard]] bool reachable_dest(const Map& map, const FCoords& dest) const {
 		return capsule->reachable_dest(map, dest);
 	}
 };
-
 
 /**
  * CheckStep implementation that returns the logic and of all
  * sub-implementations that have been added via \ref add().
  */
 struct CheckStepAnd {
-	void add(const CheckStep & sub);
+	void add(const CheckStep& sub);
 
-	bool allowed
-		(Map &, FCoords start, FCoords end,
-		 int32_t           dir,
-		 CheckStep::StepId id)
-		const;
-	bool reachable_dest(Map &, FCoords dest) const;
+	[[nodiscard]] bool allowed(const Map&,
+	                           const FCoords& start,
+	                           const FCoords& end,
+	                           int32_t dir,
+	                           CheckStep::StepId id) const;
+	[[nodiscard]] bool reachable_dest(const Map&, const FCoords& dest) const;
 
 private:
 	std::vector<CheckStep> subs;
@@ -128,17 +122,33 @@ private:
  * bobs moving onto the shore).
  */
 struct CheckStepDefault {
-	CheckStepDefault(uint8_t const movecaps) : movecaps_(movecaps) {}
+	explicit CheckStepDefault(uint8_t const movecaps) : movecaps_(movecaps) {
+	}
 
-	bool allowed
-		(Map &, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
-		const;
-	bool reachable_dest(Map &, FCoords dest) const;
+	[[nodiscard]] bool allowed(
+	   const Map&, const FCoords& start, const FCoords& end, int32_t dir, CheckStep::StepId) const;
+	[[nodiscard]] bool reachable_dest(const Map&, const FCoords& dest) const;
 
 private:
 	uint8_t movecaps_;
 };
 
+/**
+ * Implements the step checking behaviour for ferries.
+ *
+ * A ferry can travel on an edge if and only if both adjacent triangles are water.
+ */
+struct CheckStepFerry {
+	explicit CheckStepFerry(const EditorGameBase& egbase) : egbase_(egbase) {
+	}
+
+	[[nodiscard]] bool allowed(
+	   const Map&, const FCoords& from, const FCoords& to, int32_t dir, CheckStep::StepId) const;
+	[[nodiscard]] bool reachable_dest(const Map&, const FCoords& dest) const;
+
+private:
+	const EditorGameBase& egbase_;
+};
 
 /**
  * Implements the default step checking behaviours with one exception: we can
@@ -146,19 +156,18 @@ private:
  * If onlyend is true, we can only do this on the final step.
  */
 struct CheckStepWalkOn {
-	CheckStepWalkOn(uint8_t const movecaps, bool const onlyend) :
-		movecaps_(movecaps), onlyend_(onlyend) {}
+	CheckStepWalkOn(uint8_t const movecaps, bool const onlyend)
+	   : movecaps_(movecaps), onlyend_(onlyend) {
+	}
 
-	bool allowed
-		(Map &, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
-		const;
-	bool reachable_dest(Map &, FCoords dest) const;
+	[[nodiscard]] bool allowed(
+	   const Map&, const FCoords& start, const FCoords& end, int32_t dir, CheckStep::StepId) const;
+	[[nodiscard]] bool reachable_dest(const Map&, FCoords dest) const;
 
 private:
 	uint8_t movecaps_;
-	bool  onlyend_;
+	bool onlyend_;
 };
-
 
 /**
  * Implements the step checking behaviour for road building.
@@ -168,17 +177,16 @@ private:
  * for boats, walking for normal roads).
  */
 struct CheckStepRoad {
-	CheckStepRoad(const Player & player, uint8_t const movecaps)
-		: player_(player), movecaps_(movecaps)
-	{}
+	CheckStepRoad(const Player& player, uint8_t const movecaps)
+	   : player_(player), movecaps_(movecaps) {
+	}
 
-	bool allowed
-		(Map &, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
-		const;
-	bool reachable_dest(Map &, FCoords dest) const;
+	[[nodiscard]] bool allowed(
+	   const Map&, const FCoords& start, const FCoords& end, int32_t dir, CheckStep::StepId) const;
+	[[nodiscard]] bool reachable_dest(const Map&, const FCoords& dest) const;
 
 private:
-	const Player & player_;
+	const Player& player_;
 	uint8_t movecaps_;
 };
 
@@ -187,21 +195,19 @@ private:
  * only checks whether the target is an allowed location.
  */
 struct CheckStepLimited {
-	void add_allowed_location(const Coords & c) {allowed_locations_.insert(c);}
-	bool allowed
-		(Map &, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
-		const;
-	bool reachable_dest(Map &, FCoords dest) const;
+	void add_allowed_location(const Coords& c) {
+		allowed_locations_.insert(c);
+	}
+	[[nodiscard]] bool allowed(
+	   const Map&, const FCoords& start, const FCoords& end, int32_t dir, CheckStep::StepId) const;
+	[[nodiscard]] bool reachable_dest(const Map&, FCoords dest) const;
 
 private:
-	// It is OK to use Coords::OrderingFunctor because the ordering of the set
-	// does not matter, as long as it is system independent (for parallel
-	// simulation).
+	// The ordering of the set does not matter, as long as it is system
+	// independent (for parallel simulation).
 	// The only thing that matters is whether a location is in the set.
-	std::set<Coords, Coords::OrderingFunctor> allowed_locations_;
+	std::set<Coords> allowed_locations_;
 };
-
-
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_CHECKSTEP_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -28,12 +27,13 @@ namespace Widelands {
 class CarrierDescr : public WorkerDescr {
 public:
 	CarrierDescr(const std::string& init_descname,
-					 const LuaTable& table, const EditorGameBase& egbase) :
-		WorkerDescr(init_descname, MapObjectType::CARRIER, table, egbase) {}
-	~CarrierDescr() override {}
+	             const LuaTable& table,
+	             Descriptions& descriptions,
+	             MapObjectType t = MapObjectType::CARRIER);
+	~CarrierDescr() override = default;
 
 protected:
-	Bob & create_object() const override;
+	[[nodiscard]] Bob& create_object() const override;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(CarrierDescr);
@@ -47,39 +47,38 @@ struct Carrier : public Worker {
 
 	MO_DESCR(CarrierDescr)
 
-	Carrier(const CarrierDescr & carrier_descr)
-		: Worker(carrier_descr), promised_pickup_to_(NOONE)
-	{}
-	virtual ~Carrier() {}
+	explicit Carrier(const CarrierDescr& carrier_descr)
+	   : Worker(carrier_descr), promised_pickup_to_(NOONE) {
+	}
+	~Carrier() override = default;
 
-	bool notify_ware(Game &, int32_t flag);
+	bool notify_ware(Game&, int32_t flag);
 
-	void start_task_road(Game &);
-	void update_task_road(Game &);
-	void start_task_transport(Game &, int32_t fromflag);
-	bool start_task_walktoflag(Game &, int32_t flag, bool offset = false);
+	void start_task_road(Game&);
+	void update_task_road(Game&);
+	void start_task_transport(Game&, int32_t fromflag);
+	bool start_task_walktoflag(Game&, int32_t flag, bool offset = false);
 
-	void log_general_info(const EditorGameBase &) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	static Task const taskRoad;
 
 private:
-
-	void find_pending_ware(Game &);
-	int32_t find_closest_flag(Game &);
+	void find_pending_ware(Game&);
+	int32_t find_closest_flag(const Game&);
 
 	// internal task stuff
-	void road_update        (Game &, State &);
-	void road_pop           (Game &, State &);
-	void transport_update   (Game &, State &);
+	void road_update(Game&, State&);
+	void road_pop(Game&, State&);
+	void transport_update(Game&, State&);
 
 	static Task const taskTransport;
 
-	void deliver_to_building(Game &, State &);
-	void pickup_from_flag   (Game &, State &);
-	void drop_ware          (Game &, State &);
-	void enter_building     (Game &, State &);
-	bool swap_or_wait       (Game &, State &);
+	void deliver_to_building(Game&, State&);
+	void pickup_from_flag(Game&, const State&);
+	void drop_ware(Game&, State&);
+	void enter_building(Game&, State&);
+	bool swap_or_wait(Game&, State&);
 
 	/// -1: no ware acked; 0/1: acked ware for start/end flag of road
 	// This should be an enum, but this clutters the code with too many casts
@@ -92,20 +91,19 @@ private:
 protected:
 	struct Loader : public Worker::Loader {
 	public:
-		Loader();
+		Loader() = default;
 
-		void load(FileRead &) override;
+		void load(FileRead&) override;
 
 	protected:
-		const Task * get_task(const std::string & name) override;
+		const Task* get_task(const std::string& name) override;
 	};
 
-	Loader * create_loader() override;
+	Loader* create_loader() override;
 
 public:
 	void do_save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 };
-
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_CARRIER_H

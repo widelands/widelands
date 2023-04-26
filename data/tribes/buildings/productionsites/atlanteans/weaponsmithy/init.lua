@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
+wl.Descriptions():new_productionsite_type {
    name = "atlanteans_weaponsmithy",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Weapon Smithy"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -22,19 +22,19 @@ tribes:new_productionsite_type {
       planks = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 50, 58 },
+         hotspot = { 56, 67 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
-         hotspot = { 50, 58 },
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
+         hotspot = { 56, 67 },
       }
    },
 
    aihints = {
-      prohibited_till = 900
+      prohibited_till = 1400
    },
 
    working_positions = {
@@ -42,96 +42,100 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      iron = 8,
-      gold = 8,
-      coal = 8,
-      planks = 8
-   },
-   outputs = {
-      "trident_light",
-      "trident_long",
-      "trident_steel",
-      "trident_double",
-      "trident_heavy_double"
+      { name = "planks", amount = 8 },
+      { name = "coal", amount = 8 },
+      { name = "iron", amount = 8 },
+      { name = "gold", amount = 8 }
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=produce_trident_light",
             "call=produce_trident_long",
             "call=produce_trident_steel",
             "call=produce_trident_double",
             "call=produce_trident_heavy_double",
-            "return=skipped"
          }
       },
       produce_trident_light = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a light trident because ...
-         descname = _"forging a light trident",
+         descname = _("forging a light trident"),
          actions = {
+            -- time total: 50 + 3.6
             "return=skipped unless economy needs trident_light",
-            "sleep=20000",
             "consume=iron planks",
-            "play_sound=sound/smiths smith 192",
-            "animate=working 30000",
-            "play_sound=sound/smiths sharpening 192",
+            "sleep=duration:20s",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:21s",
+            "playsound=sound/smiths/sharpening priority:90%",
+            "sleep=duration:9s",
             "produce=trident_light"
          }
       },
       produce_trident_long = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a long trident because ...
-         descname = _"forging a long trident",
+         descname = _("forging a long trident"),
          actions = {
+            -- time total: 77 + 3.6
             "return=skipped unless economy needs trident_long",
-            "sleep=32000",
             "consume=iron coal planks",
-            "play_sound=sound/smiths smith 192",
-            "animate=working 45000",
-            "play_sound=sound/smiths sharpening 192",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:36s",
+            "playsound=sound/smiths/sharpening priority:90%",
+            "sleep=duration:9s",
             "produce=trident_long"
          }
       },
       produce_trident_steel = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a steel trident because ...
-         descname = _"forging a steel trident",
+         descname = _("forging a steel trident"),
          actions = {
+            -- time total: 77 + 3.6
             "return=skipped unless economy needs trident_steel",
-            "sleep=32000",
             "consume=iron:2 coal planks",
-            "play_sound=sound/smiths smith 192",
-            "animate=working 45000",
-            "play_sound=sound/smiths sharpening 192",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:36s",
+            "playsound=sound/smiths/sharpening priority:90%",
+            "sleep=duration:9s",
             "produce=trident_steel"
          }
       },
       produce_trident_double = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a double trident because ...
-         descname = _"forging a double trident",
+         descname = _("forging a double trident"),
          actions = {
+            -- time total: 77 + 3.6
             "return=skipped unless economy needs trident_double",
-            "sleep=32000",
             "consume=iron coal:2 planks gold",
-            "play_sound=sound/smiths smith 192",
-            "animate=working 45000",
-            "play_sound=sound/smiths sharpening 192",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:36s",
+            "playsound=sound/smiths/sharpening priority:90%",
+            "sleep=duration:9s",
             "produce=trident_double"
          }
       },
       produce_trident_heavy_double = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a heavy double trident because ...
-         descname = _"forging a heavy double trident",
+         descname = _("forging a heavy double trident"),
          actions = {
+            -- time total: 77 + 3.6
             "return=skipped unless economy needs trident_heavy_double",
-            "sleep=32000",
             "consume=iron:2 coal:2 planks gold",
-            "play_sound=sound/smiths smith 192",
-            "animate=working 45000",
-            "play_sound=sound/smiths sharpening 192",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:36s",
+            "playsound=sound/smiths/sharpening priority:90%",
+            "sleep=duration:9s",
             "produce=trident_heavy_double"
          }
       },
    },
 }
+
+pop_textdomain()

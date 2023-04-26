@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,26 +12,23 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "graphic/build_texture_atlas.h"
 
-#include <map>
 #include <memory>
-#include <string>
-#include <unordered_set>
-#include <vector>
 
-#include <boost/algorithm/string/predicate.hpp>
-
+#include "base/log.h"
+#include "base/string.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
 #include "graphic/texture_atlas.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "io/profile.h"
+#include "logic/filesystem_constants.h"
 
 namespace {
 
@@ -39,13 +36,9 @@ namespace {
 // threshold, but not background pictures.
 constexpr int kMaxAreaForTextureAtlas = 240 * 240;
 
-// A graphics card must at least support this size for texture for Widelands to
-// run.
-constexpr int kMinimumSizeForTextures = 2048;
-
 // Returns true if 'filename' ends with an image extension.
 bool is_image(const std::string& filename) {
-	return boost::ends_with(filename, ".png") || boost::ends_with(filename, ".jpg");
+	return ends_with(filename, ".png") || ends_with(filename, ".jpg");
 }
 
 // Recursively adds all images in 'directory' to 'ordered_images' and
@@ -61,7 +54,7 @@ void find_images(const std::string& directory,
 			find_images(filename, images, ordered_images);
 			continue;
 		}
-		if (is_image(filename) && !images->count(filename)) {
+		if (is_image(filename) && (images->count(filename) == 0u)) {
 			images->insert(filename);
 			ordered_images->push_back(filename);
 		}
@@ -71,15 +64,12 @@ void find_images(const std::string& directory,
 // If 'filename' should end up in the texture atlas, will load it into 'image'
 // and return true.
 bool should_be_packed(const std::string& filename, std::unique_ptr<Texture>* image) {
-	if (boost::ends_with(filename, ".jpg")) {
+	if (ends_with(filename, ".jpg")) {
 		return false;
 	}
 	*image = load_image(filename, g_fs);
 	const auto area = (*image)->width() * (*image)->height();
-	if (area > kMaxAreaForTextureAtlas) {
-		return false;
-	}
-	return true;
+	return area <= kMaxAreaForTextureAtlas;
 }
 
 // Pack the images in 'filenames' into texture atlases.
@@ -91,7 +81,7 @@ pack_images(const std::vector<std::string>& filenames,
 	for (const auto& filename : filenames) {
 		std::unique_ptr<Texture> image;
 		if (should_be_packed(filename, &image)) {
-			to_be_packed.push_back(std::make_pair(filename, std::move(image)));
+			to_be_packed.emplace_back(filename, std::move(image));
 		}
 	}
 
@@ -126,14 +116,45 @@ build_texture_atlas(const int max_size,
 	// For terrain textures.
 	find_images("world/terrains", &all_images, &first_atlas_images);
 	// For flags and roads.
-	find_images("tribes/images", &all_images, &first_atlas_images);
+	find_images("tribes/initialization", &all_images, &first_atlas_images);
 	// For UI elements mostly, but we get more than we need really.
 	find_images("images", &all_images, &first_atlas_images);
+
+	// New terrains defined by world add-ons, and road images defined by tribe add-ons,
+	// need to be in the same texture atlas as all other terrains and roads.
+	// So we put all world images and all tribe-initialization images into this atlas.
+	for (const std::string& dir : g_fs->list_directory(kAddOnDir)) {
+		std::string file = dir;
+		file += FileSystem::file_separator();
+		file += kAddOnMainFile;
+		try {
+			Profile profile(file.c_str());
+			const std::string category =
+			   profile.get_safe_section("global").get_safe_string("category");
+			if (category == "world") {
+				find_images(dir, &all_images, &first_atlas_images);
+			} else if (category == "tribes") {
+				std::string tribes_dir = dir;
+				tribes_dir += FileSystem::file_separator();
+				tribes_dir += "tribes";
+				if (g_fs->is_directory(tribes_dir)) {
+					find_images(tribes_dir, &all_images, &first_atlas_images);
+				}
+			}
+		} catch (const std::exception& e) {
+			log_warn("Ignoring unreadable add-ons profile %s: %s", file.c_str(), e.what());
+		}
+	}
+
+	// …and similar for scenario-specific terrains.
+	for (const std::string& dir : g_fs->list_directory("campaigns")) {
+		find_images(dir + "/scripting/tribes", &all_images, &first_atlas_images);
+	}
 
 	auto first_texture_atlas = pack_images(first_atlas_images, max_size, textures_in_atlas);
 	if (first_texture_atlas.size() != 1) {
 		throw wexception("Not all images that should fit in the first texture atlas did actually "
 		                 "fit. Widelands has now more images than before.");
 	}
-	return {std::move(first_texture_atlas)};
+	return first_texture_atlas;
 }

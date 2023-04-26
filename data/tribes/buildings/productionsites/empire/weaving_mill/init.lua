@@ -1,46 +1,52 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_productionsite_type {
    name = "empire_weaving_mill",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Weaving Mill"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   size = "big",
+   size = "medium",
 
    buildcost = {
       log = 3,
-      granite = 4,
+      granite = 3,
       marble = 1
    },
    return_on_dismantle = {
       log = 1,
-      granite = 3
+      granite = 2
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 65, 62 },
-      },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 65, 62 },
       },
       unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
          hotspot = { 65, 62 },
       },
+   },
+
+   spritesheets = {
+      build = {
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 65, 62 }
+      },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 65, 62 },
-         fps = 5
+         fps = 5,
+         frames = 11,
+         rows = 4,
+         columns = 3,
+         hotspot = { 65, 62 }
       },
    },
 
    aihints = {
-      prohibited_till = 120
+      prohibited_till = 420
    },
 
    working_positions = {
@@ -48,23 +54,24 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      wool = 8
-   },
-   outputs = {
-      "cloth"
+      { name = "wool", amount = 6 }
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start weaving because ...
-         descname = _"weaving",
+         descname = _("weaving"),
          actions = {
-            "sleep=25000",
             "return=skipped unless economy needs cloth",
             "consume=wool",
-            "animate=working 15000", -- Unsure of balancing CW
+            "sleep=duration:20s",
+            "playsound=sound/mill/weaving priority:90%",
+            "animate=working duration:15s", -- Unsure of balancing CW
+            "sleep=duration:5s",
             "produce=cloth"
          }
       },
    },
 }
+
+pop_textdomain()

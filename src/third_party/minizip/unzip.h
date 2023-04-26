@@ -3,10 +3,10 @@
 
    Copyright (C) 1998-2004 Gilles Vollant
 
-	This unzip package allow extract file from .ZIP file, compatible with PKZip
-	2.04g WinZip, InfoZip tools and compatible.  Encryption and multi volume
-	ZipFile (span) are not supported.  Old compressions used by old PKZip 1.x
-	are not supported
+   This unzip package allow extract file from .ZIP file, compatible with PKZip
+   2.04g WinZip, InfoZip tools and compatible.  Encryption and multi volume
+   ZipFile (span) are not supported.  Old compressions used by old PKZip 1.x
+   are not supported
 
 
    I WAIT FEEDBACK at mail info@winimage.com
@@ -60,67 +60,61 @@ extern "C" {
 #if defined(STRICTUNZIP) || defined(STRICTZIPUNZIP)
 /* like the STRICT of _WIN32, we define a pointer that cannot be converted
     from (void*) without cast */
-typedef struct TagunzFile__ {int32_t unused;} unzFile__;
-typedef unzFile__ * unzFile;
+typedef struct TagunzFile__ { int32_t unused; } unzFile__;
+typedef unzFile__* unzFile;
 #else
 typedef voidp unzFile;
 #endif
 
-
-#define UNZ_OK                          (0)
-#define UNZ_END_OF_LIST_OF_FILE         (-100)
-#define UNZ_ERRNO                       (Z_ERRNO)
-#define UNZ_EOF                         (0)
-#define UNZ_PARAMERROR                  (-102)
-#define UNZ_BADZIPFILE                  (-103)
-#define UNZ_INTERNALERROR               (-104)
-#define UNZ_CRCERROR                    (-105)
+#define UNZ_OK (0)
+#define UNZ_END_OF_LIST_OF_FILE (-100)
+#define UNZ_ERRNO (Z_ERRNO)
+#define UNZ_EOF (0)
+#define UNZ_PARAMERROR (-102)
+#define UNZ_BADZIPFILE (-103)
+#define UNZ_INTERNALERROR (-104)
+#define UNZ_CRCERROR (-105)
 
 /* tm_unz contain date/time info */
-typedef struct tm_unz_s
-{
-	uInt tm_sec;            /* seconds after the minute - [0, 59] */
-	uInt tm_min;            /* minutes after the hour - [0, 59] */
-	uInt tm_hour;           /* hours since midnight - [0, 23] */
-	uInt tm_mday;           /* day of the month - [1, 31] */
-	uInt tm_mon;            /* months since January - [0, 11] */
-	uInt tm_year;           /* years - [1980..2044] */
+typedef struct tm_unz_s {
+	uInt tm_sec;  /* seconds after the minute - [0, 59] */
+	uInt tm_min;  /* minutes after the hour - [0, 59] */
+	uInt tm_hour; /* hours since midnight - [0, 23] */
+	uInt tm_mday; /* day of the month - [1, 31] */
+	uInt tm_mon;  /* months since January - [0, 11] */
+	uInt tm_year; /* years - [1980..2044] */
 } tm_unz;
 
 /* unz_global_info structure contain global data about the ZIPfile
    These data comes from the end of central dir */
-typedef struct unz_global_info_s
-{
+typedef struct unz_global_info_s {
 	//  total number of entries in the central dir on this disk
 	uLong number_entry;
-	uLong size_comment;         /* size of the global comment of the zipfile */
+	uLong size_comment; /* size of the global comment of the zipfile */
 } unz_global_info;
 
-
 /* unz_file_info contain information about a file in the zipfile */
-typedef struct unz_file_info_s
-{
-	uLong version;              /* version made by                 2 bytes */
-	uLong version_needed;       /* version needed to extract       2 bytes */
-	uLong flag;                 /* general purpose bit flag        2 bytes */
-	uLong compression_method;   /* compression method              2 bytes */
-	uLong dosDate;              /* last mod file date in Dos fmt   4 bytes */
-	uLong crc;                  /* crc-32                          4 bytes */
-	uLong compressed_size;      /* compressed size                 4 bytes */
-	uLong uncompressed_size;    /* uncompressed size               4 bytes */
-	uLong size_filename;        /* filename length                 2 bytes */
-	uLong size_file_extra;      /* extra field length              2 bytes */
-	uLong size_file_comment;    /* file comment length             2 bytes */
+typedef struct unz_file_info_s {
+	uLong version;            /* version made by                 2 bytes */
+	uLong version_needed;     /* version needed to extract       2 bytes */
+	uLong flag;               /* general purpose bit flag        2 bytes */
+	uLong compression_method; /* compression method              2 bytes */
+	uLong dosDate;            /* last mod file date in Dos fmt   4 bytes */
+	uLong crc;                /* crc-32                          4 bytes */
+	uLong compressed_size;    /* compressed size                 4 bytes */
+	uLong uncompressed_size;  /* uncompressed size               4 bytes */
+	uLong size_filename;      /* filename length                 2 bytes */
+	uLong size_file_extra;    /* extra field length              2 bytes */
+	uLong size_file_comment;  /* file comment length             2 bytes */
 
-	uLong disk_num_start;       /* disk number start               2 bytes */
-	uLong internal_fa;          /* internal file attributes        2 bytes */
-	uLong external_fa;          /* external file attributes        4 bytes */
+	uLong disk_num_start; /* disk number start               2 bytes */
+	uLong internal_fa;    /* internal file attributes        2 bytes */
+	uLong external_fa;    /* external file attributes        4 bytes */
 
 	tm_unz tmu_date;
 } unz_file_info;
 
-
-extern unzFile ZEXPORT unzOpen OF((char const * path));
+extern unzFile ZEXPORT unzOpen OF((char const* path));
 /*
   Open a Zip file. path contain the full pathname (by example,
      on a Windows XP computer "c:\\zlib\\zlib113.zip" or on an Unix computer
@@ -131,8 +125,7 @@ extern unzFile ZEXPORT unzOpen OF((char const * path));
        of this unzip package.
 */
 
-extern unzFile ZEXPORT unzOpen2 OF
-	((char const * path, zlib_filefunc_def * pzlib_filefunc_def));
+extern unzFile ZEXPORT unzOpen2 OF((char const* path, zlib_filefunc_def* pzlib_filefunc_def));
 /*
    Open a Zip file, like unzOpen, but provide a set of file low level API
       for read/write the zip file (see ioapi.h)
@@ -144,7 +137,6 @@ extern int32_t ZEXPORT unzClose OF((unzFile file));
   opened with unzOpenCurrentFile (see later), these files MUST be closed with
   unzipCloseCurrentFile before call unzipClose.
   return UNZ_OK if there is no problem. */
-
 
 /***************************************************************************/
 /* Unzip package allow you browse the directory of the zipfile */
@@ -164,25 +156,24 @@ extern int32_t ZEXPORT unzGoToNextFile OF((unzFile file));
 
 /* ****************************************** */
 
-extern int32_t ZEXPORT unzGetCurrentFileInfo OF
-	((unzFile         file,
-	  unz_file_info * pfile_info,
-	  char          * szFileName,
-	  uLong           fileNameBufferSize,
-	  void          * extraField,
-	  uLong           extraFieldBufferSize,
-	  char          * szComment,
-	  uLong           commentBufferSize));
-	//  Get Info about the current file
-	//  * If pfile_info, the *pfile_info structure will contain some info about
-	//    the current file.
-	//  * If szFileName, the filemane string will be copied in szFileName
-	//    (fileNameBufferSize is the size of the buffer).
-	//  * If extraField, the extra field information will be copied in
-	//    extraField (extraFieldBufferSize is the size of the buffer). This is
-	//    the Central-header version of the extra field.
-	//  * If szComment, the comment string of the file will be copied in
-	//    szComment (commentBufferSize is the size of the buffer).
+extern int32_t ZEXPORT unzGetCurrentFileInfo OF((unzFile file,
+                                                 unz_file_info* pfile_info,
+                                                 char* szFileName,
+                                                 uLong fileNameBufferSize,
+                                                 void* extraField,
+                                                 uLong extraFieldBufferSize,
+                                                 char* szComment,
+                                                 uLong commentBufferSize));
+//  Get Info about the current file
+//  * If pfile_info, the *pfile_info structure will contain some info about
+//    the current file.
+//  * If szFileName, the filemane string will be copied in szFileName
+//    (fileNameBufferSize is the size of the buffer).
+//  * If extraField, the extra field information will be copied in
+//    extraField (extraFieldBufferSize is the size of the buffer). This is
+//    the Central-header version of the extra field.
+//  * If szComment, the comment string of the file will be copied in
+//    szComment (commentBufferSize is the size of the buffer).
 
 /***************************************************************************/
 /* for reading the content of the current zipfile, you can open it, read data
@@ -195,12 +186,8 @@ extern int32_t ZEXPORT unzOpenCurrentFile OF((unzFile file));
   If there is no error, the return value is UNZ_OK.
 */
 
-extern int32_t ZEXPORT unzOpenCurrentFile3 OF
-	((unzFile      file,
-	  int32_t    * method,
-	  int32_t    * level,
-	  int32_t      raw,
-	  char const * password));
+extern int32_t ZEXPORT unzOpenCurrentFile3
+OF((unzFile file, int32_t* method, int32_t* level, int32_t raw, char const* password));
 /*
   Same than unzOpenCurrentFile, but open for read raw the file (not uncompress)
     if raw==1
@@ -210,15 +197,13 @@ extern int32_t ZEXPORT unzOpenCurrentFile3 OF
          but you CANNOT set method parameter as nullptr
 */
 
-
 extern int32_t ZEXPORT unzCloseCurrentFile OF((unzFile file));
 /*
   Close the file in zip opened with unzOpenCurrentFile
   Return UNZ_CRCERROR if all the file was read but the CRC is not good
 */
 
-extern int32_t ZEXPORT unzReadCurrentFile OF
-	((unzFile file, voidp buf, unsigned len));
+extern int32_t ZEXPORT unzReadCurrentFile OF((unzFile file, voidp buf, unsigned len));
 /*
   Read bytes from the current file (opened by unzOpenCurrentFile)
   buf contain buffer where data must be copied
@@ -231,8 +216,6 @@ extern int32_t ZEXPORT unzReadCurrentFile OF
 */
 
 /***************************************************************************/
-
-
 
 #ifdef __cplusplus
 }

@@ -34,12 +34,12 @@ function UserInputDisabler:lift_blocks()
    wl.Game().desired_speed = self._game_speed
 end
 
-function click_on_field(f, g_T, g_sleeptime)
-   local sleeptime = g_sleeptime or 500
+function click_on_field(f)
+   local sleeptime = 500
 
    local blocker = UserInputDisabler:new()
 
-   mouse_smoothly_to(f, g_T)
+   mouse_to_field(f)
    sleep(sleeptime)
 
    wl.ui.MapView():click(f)
@@ -48,15 +48,15 @@ function click_on_field(f, g_T, g_sleeptime)
    blocker:lift_blocks()
 end
 
-function click_on_panel(panel, g_T, g_sleeptime)
-   local sleeptime = g_sleeptime or 500
+function click_on_panel(panel)
+   local sleeptime = 500
 
    local blocker = UserInputDisabler:new()
 
    sleep(sleeptime)
    if panel ~= nil then
       if not panel.active then -- If this is a tab and already on, do nothing
-         mouse_smoothly_to_panel(panel, g_T)
+         mouse_to_panel(panel)
          sleep(sleeptime)
          if panel.press then panel:press() sleep(250) end
          if panel.click then panel:click() end
@@ -64,6 +64,31 @@ function click_on_panel(panel, g_T, g_sleeptime)
       end
    else
       print('Attempt to click on a non-existing panel.')
+   end
+   blocker:lift_blocks()
+end
+
+
+function select_item_from_dropdown(name, item)
+   local blocker = UserInputDisabler:new()
+   wl.ui.MapView().dropdowns[name]:select()
+   sleep(3000)
+   blocker:lift_blocks()
+end
+
+function open_item_from_dropdown(name, item)
+   wl.ui.MapView().dropdowns[name]:open(item)
+end
+
+function show_item_from_dropdown(name, item)
+   local blocker = UserInputDisabler:new()
+   local ind = wl.ui.MapView().dropdowns[name].no_of_items
+   wl.ui.MapView().dropdowns[name]:highlight_item(ind)
+   sleep(500)
+   while ind >= item do
+      wl.ui.MapView().dropdowns[name]:highlight_item(ind)
+      ind = ind - 1
+      sleep(300)
    end
    blocker:lift_blocks()
 end
@@ -120,7 +145,7 @@ function bad_boy_sentry()
                if not immovable_is_legal(f.immovable) then
                   -- scold the player
                   if not sent_msg then
-                     message_box_objective(plr, scold_player)
+                     campaign_message_box(scold_player)
                      sent_msg = true
                   end
 

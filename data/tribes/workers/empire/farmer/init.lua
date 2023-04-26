@@ -1,36 +1,12 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 10, 23 }
-   },
-   planting = {
-      pictures = path.list_files(dirname .. "plant_??.png"),
-      hotspot = { 14, 25 },
-      fps = 10
-   },
-   harvesting = {
-      pictures = path.list_files(dirname .. "harvest_??.png"),
-      hotspot = { 19, 24 },
-      fps = 10
-   },
-   gathering = {
-      pictures = path.list_files(dirname .. "gather_??.png"),
-      hotspot = { 10, 23 },
-      fps = 5
-   }
-}
-add_worker_animations(animations, "walk", dirname, "walk", {18, 24}, 10)
-add_worker_animations(animations, "walkload", dirname, "walk", {18, 24}, 10)
-
-
-tribes:new_worker_type {
-   msgctxt = "empire_worker",
+wl.Descriptions():new_worker_type {
    name = "empire_farmer",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("empire_worker", "Farmer"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -41,24 +17,71 @@ tribes:new_worker_type {
 
    programs = {
       plant = {
-         "findspace size:any radius:2 space",
-         "walk coords",
-         "animation planting 4000",
-         "plant tribe:field_tiny",
-         "animation planting 4000",
+         "findspace=size:any radius:2 space",
+         "walk=coords",
+         "animate=planting duration:6s",
+         "plant=attrib:seed_wheat",
+         "animate=planting duration:6s",
          "return",
       },
       harvest = {
-         "findobject attrib:ripe_wheat radius:2",
-         "walk object",
-         "play_sound sound/farm scythe 220",
-         "animation harvesting 10000",
-         "object harvest",
-         "animation gathering 4000",
-         "createware wheat",
+         "findobject=attrib:ripe_wheat radius:2",
+         "walk=object",
+         "playsound=sound/farm/scythe priority:80% allow_multiple",
+         "animate=harvesting duration:10s",
+         "callobject=harvest",
+         "animate=gathering duration:4s",
+         "createware=wheat",
          "return"
       }
    },
 
-   animations = animations,
+   animations = {
+      idle = {
+         hotspot = { 10, 23 }
+      },
+   },
+
+   spritesheets = {
+      planting = {
+         fps = 10,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 14, 25 }
+      },
+      harvesting = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         hotspot = { 19, 24 }
+      },
+      gathering = {
+         fps = 5,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 10, 23 }
+      },
+      walk = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 18, 24 }
+      },
+      walkload = {
+         basename = "walk",
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 18, 24 }
+      },
+   },
 }
+
+pop_textdomain()

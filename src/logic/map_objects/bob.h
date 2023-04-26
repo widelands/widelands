@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,30 +20,17 @@
 #define WL_LOGIC_MAP_OBJECTS_BOB_H
 
 #include "base/macros.h"
-#include "base/point.h"
+#include "base/vector.h"
 #include "economy/route.h"
-#include "graphic/animation.h"
-#include "graphic/diranimations.h"
+#include "graphic/animation/diranimations.h"
+#include "logic/map_objects/info_to_draw.h"
 #include "logic/map_objects/map_object.h"
+#include "logic/map_objects/map_object_program.h"
 #include "logic/map_objects/walkingdir.h"
+#include "logic/path.h"
 #include "logic/widelands_geometry.h"
 
 namespace Widelands {
-class Map;
-struct Route;
-struct Transfer;
-class TribeDescr;
-
-
-/**
- * BobProgramBase is only used that
- * get_name always works
- */
-
-struct BobProgramBase {
-	virtual ~BobProgramBase() {}
-	virtual std::string get_name() const = 0;
-};
 
 class Bob;
 
@@ -56,25 +42,29 @@ public:
 	friend struct MapBobdataPacket;
 
 	BobDescr(const std::string& init_descname,
-				const MapObjectType type,
-				MapObjectDescr::OwnerType owner_type,
-				const LuaTable& table);
+	         MapObjectType type,
+	         MapObjectDescr::OwnerType owner_type,
+	         const LuaTable& table);
+	BobDescr(const std::string& init_name,
+	         const std::string& init_descname,
+	         MapObjectType type,
+	         MapObjectDescr::OwnerType owner_type);
 
-	~BobDescr() override {}
+	~BobDescr() override = default;
 
 	Bob& create(EditorGameBase&, Player* owner, const Coords&) const;
 
-	MapObjectDescr::OwnerType get_owner_type() const {
+	[[nodiscard]] MapObjectDescr::OwnerType get_owner_type() const {
 		return owner_type_;
 	}
 
-	virtual uint32_t movecaps() const {
+	[[nodiscard]] virtual uint32_t movecaps() const {
 		return 0;
 	}
-	uint32_t vision_range() const;
+	[[nodiscard]] uint32_t vision_range() const;
 
 protected:
-	virtual Bob& create_object() const = 0;
+	[[nodiscard]] virtual Bob& create_object() const = 0;
 
 private:
 	const MapObjectDescr::OwnerType owner_type_;
@@ -158,13 +148,15 @@ public:
 	friend struct MapBobdataPacket;
 	friend struct MapBobPacket;
 
+	~Bob() override;
+
 	struct State;
-	using Ptr = void (Bob::*)(Game &, State &);
-	using PtrSignal = void (Bob::*)(Game &, State &, const std::string &);
+	using Ptr = void (Bob::*)(Game&, State&);
+	using PtrSignal = void (Bob::*)(Game&, State&, const std::string&);
 
 	/// \see struct Bob for in-depth explanation
 	struct Task {
-		char const * name;
+		char const* name;
 
 		/**
 		 * Called to update the current task and schedule the next
@@ -186,7 +178,7 @@ public:
 		 */
 		Ptr pop;
 
-		bool unique; /// At most 1 of this task type can be on the stack.
+		bool unique;  /// At most 1 of this task type can be on the stack.
 	};
 
 	/**
@@ -199,167 +191,177 @@ public:
 	 * \see class Bob for in-depth explanation
 	 */
 	struct State {
-		State(const Task * const the_task = nullptr) :
-			task    (the_task),
-			ivar1   (0),
-			ivar2   (0),
-			ivar3   (0),
-			coords  (Coords::null()),
-			path    (nullptr),
-			route   (nullptr),
-			program (nullptr)
-		{}
+		explicit State(const Task* const the_task = nullptr) : task(the_task) {
+		}
 
-		const Task           * task;
-		int32_t                ivar1;
-		int32_t                ivar2;
-		union                  {int32_t ivar3; uint32_t ui32var3;};
-		ObjectPointer             objvar1;
-		std::string            svar1;
+		const Task* task;
+		int32_t ivar1{0};
+		int32_t ivar2{0};
+		int32_t ivar3{0};
+		ObjectPointer objvar1;
+		std::string svar1;
 
-		Coords                 coords;
-		DirAnimations          diranims;
-		Path                 * path;
-		Route                * route;
-		const BobProgramBase * program; ///< pointer to current program
+		Coords coords{Coords::null()};
+		DirAnimations diranims;
+		Path* path{nullptr};
+		Route* route{nullptr};
+		const MapObjectProgram* program{nullptr};  ///< pointer to current program
 	};
 
 	MO_DESCR(BobDescr)
 
-	uint32_t get_current_anim() const {return anim_;}
-	int32_t get_animstart() const {return animstart_;}
+	[[nodiscard]] uint32_t get_current_anim() const {
+		return anim_;
+	}
+	[[nodiscard]] const Time& get_animstart() const {
+		return animstart_;
+	}
 
-	void init(EditorGameBase &) override;
-	void cleanup(EditorGameBase &) override;
-	void act(Game &, uint32_t data) override;
-	void schedule_destroy(Game &);
-	void schedule_act(Game &, uint32_t tdelta);
+	bool init(EditorGameBase&) override;
+	void cleanup(EditorGameBase&) override;
+	void act(Game&, uint32_t data) override;
+	void schedule_destroy(Game&);
+	void schedule_act(Game&, const Duration& tdelta);
 	void skip_act();
-	Point calc_drawpos(const EditorGameBase &, Point) const;
-	void set_owner(Player *);
-	Player * get_owner() const {return owner_;}
-	void set_position(EditorGameBase &, const Coords &);
-	const FCoords & get_position() const {return position_;}
-	Bob * get_next_bob() const {return linknext_;}
+	[[nodiscard]] Vector2f
+	calc_drawpos(const EditorGameBase&, const Vector2f& field_on_dst, float scale) const;
+	void set_owner(Player*);
+
+	void set_position(EditorGameBase&, const Coords&);
+	[[nodiscard]] const FCoords& get_position() const {
+		return position_;
+	}
+	[[nodiscard]] Bob* get_next_bob() const {
+		return linknext_;
+	}
 
 	/// Check whether this bob should be able to move onto the given node.
 	///
 	/// \param commit indicates whether this function is called from the
 	///    \ref start_walk function, i.e. whether the bob will actually move
 	///    onto the \p to node if this function allows it to.
-	virtual bool check_node_blocked(Game &, const FCoords &, bool commit);
+	virtual bool check_node_blocked(Game&, const FCoords&, bool commit);
 
-	virtual void draw
-		(const EditorGameBase &, RenderTarget &, const Point&) const;
+	// Draws the bob onto the screen with 'field_on_dst' being the position of
+	// the field associated with this bob (if it is walking, that is its
+	// starting field) in pixel space of 'dst' (including scale). The 'scale' is
+	// required to draw the bob in the right size.
+	virtual void draw(const EditorGameBase&,
+	                  const InfoToDraw& info_to_draw,
+	                  const Vector2f& field_on_dst,
+	                  const Coords& coords,
+	                  float scale,
+	                  RenderTarget* dst) const;
 
 	// For debug
-	void log_general_info(const EditorGameBase &) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	// default tasks
-	void reset_tasks(Game &);
+	void reset_tasks(Game&);
 
 	// TODO(feature-Hasi50): correct (?) Send a signal that may switch to some other \ref Task
-	void send_signal(Game &, char const *);
-	void start_task_idle(Game &, uint32_t anim, int32_t timeout);
+	void send_signal(Game&, char const*);
+	void start_task_idle(Game&, uint32_t anim, int32_t timeout, Vector2i offset = Vector2i::zero());
+	[[nodiscard]] bool is_idle() const;
 
 	/// This can fail (and return false). Therefore the caller must check the
 	/// result and find something else for the bob to do. Otherwise there will
 	/// be a "failed to act" error.
-	bool start_task_movepath
-		(Game                &,
-		 const Coords        & dest,
-		 const int32_t         persist,
-		 const DirAnimations &,
-		 const bool            forceonlast = false,
-		 const int32_t         only_step = -1,
-		 const bool            forceall = false)
-		__attribute__((warn_unused_result));
+	bool start_task_movepath(Game&,
+	                         const Coords& dest,
+	                         int32_t persist,
+	                         const DirAnimations&,
+	                         bool forceonlast = false,
+	                         int32_t only_step = -1,
+	                         bool forceall = false) __attribute__((warn_unused_result));
 
 	/// This can fail (and return false). Therefore the caller must check the
 	/// result and find something else for the bob to do. Otherwise there will
 	/// be a "failed to act" error.
-	void start_task_movepath
-		(Game                &,
-		 const Path          &,
-		 const DirAnimations &,
-		 const bool            forceonlast  = false,
-		 const int32_t         only_step = -1);
+	void start_task_movepath(
+	   Game&, const Path&, const DirAnimations&, bool forceonlast = false, int32_t only_step = -1);
 
-	bool start_task_movepath
-		(Game                &,
-		 const Path          &,
-		 const int32_t         index,
-		 const DirAnimations &,
-		 const bool            forceonlast = false,
-		 const int32_t         only_step = -1)
-		__attribute__((warn_unused_result));
+	bool start_task_movepath(Game&,
+	                         const Path&,
+	                         int32_t index,
+	                         const DirAnimations&,
+	                         bool forceonlast = false,
+	                         int32_t only_step = -1) __attribute__((warn_unused_result));
 
-	void start_task_move(Game & game, int32_t dir, const DirAnimations &, bool);
+	void start_task_move(Game& game, int32_t dir, const DirAnimations&, bool);
 
 	// higher level handling (task-based)
-	State & top_state() {assert(stack_.size()); return *stack_.rbegin();}
-	State * get_state() {return stack_.size() ? &*stack_.rbegin() : nullptr;}
+	[[nodiscard]] State& top_state() {
+		assert(!stack_.empty());
+		return *stack_.rbegin();
+	}
+	[[nodiscard]] State* get_state() {
+		return !stack_.empty() ? &*stack_.rbegin() : nullptr;
+	}
 
-
-	std::string get_signal() {return signal_;}
-	State       * get_state(const Task &);
-	State const * get_state(const Task &) const;
-	void push_task(Game & game, const Task & task, uint32_t tdelta = 10);
-	void pop_task(Game &);
+	[[nodiscard]] std::string get_signal() const {
+		return signal_;
+	}
+	[[nodiscard]] State* get_state(const Task&);
+	[[nodiscard]] State const* get_state(const Task&) const;
+	void push_task(Game& game, const Task& task, const Duration& tdelta = Duration(10));
+	void pop_task(Game&);
 
 	void signal_handled();
 
 	/// Automatically select a task.
-	virtual void init_auto_task(Game &) {}
+	virtual void init_auto_task(Game&) {
+	}
 
 	// low level animation and walking handling
-	void set_animation(EditorGameBase &, uint32_t anim);
+	void set_animation(const EditorGameBase&, uint32_t anim);
 
 	/// \return true if we're currently walking
-	bool is_walking() {return walking_ != IDLE;}
-
+	[[nodiscard]] bool is_walking() const {
+		return walking_ != IDLE;
+	}
 
 	/**
 	 * This is a hack that should not be used, if possible.
 	 * It is only introduced here because profiling showed
 	 * that soldiers spend a lot of time in the node blocked check.
 	 */
-	Bob * get_next_on_field() const {return linknext_;}
+	[[nodiscard]] Bob* get_next_on_field() const {
+		return linknext_;
+	}
 
 protected:
-	Bob(const BobDescr & descr);
-	virtual ~Bob();
+	explicit Bob(const BobDescr& descr);
 
 private:
-	void do_act(Game &);
-	void do_pop_task(Game &);
-	void idle_update(Game &, State &);
-	void movepath_update(Game &, State &);
-	void move_update(Game &, State &);
+	void do_act(Game&);
+	void do_pop_task(Game&);
+	void idle_update(Game&, State&);
+	void movepath_update(Game&, State&);
+	void move_update(Game&, State&);
 
-	int32_t start_walk
-		(Game & game, WalkingDir, uint32_t anim, bool force = false);
+	int32_t start_walk(Game& game, WalkingDir, uint32_t anim, bool force = false);
 
 	/**
 	 * Call this from your task_act() function that was scheduled after
 	 * start_walk().
 	 */
-	void end_walk() {walking_ = IDLE;}
-
+	void end_walk() {
+		walking_ = IDLE;
+	}
 
 	static Task const taskIdle;
 	static Task const taskMovepath;
 	static Task const taskMove;
 
-	Player   * owner_; ///< can be 0
-	FCoords    position_; ///< where are we right now?
-	Bob      * linknext_; ///< next object on this node
-	Bob    * * linkpprev_;
-	uint32_t       anim_;
-	int32_t        animstart_; ///< gametime when the animation was started
-	WalkingDir walking_;
-	int32_t        walkstart_; ///< start time (used for interpolation)
-	int32_t        walkend_;   ///< end time (used for interpolation)
+	FCoords position_{Coords(0, 0), nullptr};  ///< where are we right now?
+	Bob* linknext_{nullptr};                   ///< next object on this node
+	Bob** linkpprev_{nullptr};
+	uint32_t anim_{0U};
+	Time animstart_{0U};  ///< gametime when the animation was started
+	WalkingDir walking_{IDLE};
+	Time walkstart_{0U};  ///< start time (used for interpolation)
+	Time walkend_{0U};    ///< end time (used for interpolation)
 
 	// Task framework variables
 	std::vector<State> stack_;
@@ -371,7 +373,7 @@ private:
 	 * only the earliest \ref Cmd_Act issued during one act phase is actually
 	 * executed. Subsequent \ref Cmd_Act could interfere and are eliminated.
 	 */
-	uint32_t actid_;
+	uint32_t actid_{0U};
 
 	/**
 	 * Whether something was scheduled during this act phase.
@@ -380,23 +382,23 @@ private:
 	 * Bobs that hang themselves up. So e.g. \ref skip_act() also sets this
 	 * to \c true, even though it technically doesn't schedule anything.
 	 */
-	bool actscheduled_;
-	bool in_act_; ///< if do_act is currently running
+	bool actscheduled_{false};
+	bool in_act_{false};  ///< if do_act is currently running
 	std::string signal_;
 
 	// saving and loading
 protected:
 	struct Loader : public MapObject::Loader {
 	public:
-		Loader();
+		Loader() = default;
 
-		void load(FileRead &);
+		void load(FileRead&);
 		void load_pointers() override;
 		void load_finish() override;
 
 	protected:
-		virtual const Task * get_task(const std::string & name);
-		virtual const BobProgramBase * get_program(const std::string & name);
+		virtual const Task* get_task(const std::string& name);
+		virtual const MapObjectProgram* get_program(const std::string& name);
 
 	private:
 		struct LoadState {
@@ -408,12 +410,13 @@ protected:
 	};
 
 public:
-	bool has_new_save_support() override {return true;}
+	bool has_new_save_support() override {
+		return true;
+	}
 
-	void save(EditorGameBase &, MapObjectSaver &, FileWrite &) override;
+	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 	// Pure Bobs cannot be loaded
 };
-
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_BOB_H

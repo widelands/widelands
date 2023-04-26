@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011, 2013, 2015-2016 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,14 +21,13 @@
 
 #include <string>
 
-#include "logic/widelands.h"
+#include "base/times.h"
+#include "logic/player_end_result.h"
 
 namespace Widelands {
 class Game;
 class PlayerCommand;
-enum class PlayerEndResult: uint8_t;
-}
-
+}  // namespace Widelands
 
 /**
  * A game controller implements the policies surrounding the actual
@@ -42,18 +40,15 @@ enum class PlayerEndResult: uint8_t;
  */
 class GameController {
 public:
-	enum class GameType : uint8_t {
-		SINGLEPLAYER = 1, // we don't want SINGLEPLAYER just because a value is empty
-		NETCLIENT,
-		NETHOST,
-		REPLAY
-	};
+	enum class GameType : uint8_t { kUndefined = 0, kSingleplayer, kNetClient, kNetHost, kReplay };
 
-	virtual ~GameController() {}
+	virtual ~GameController() = default;
 
 	virtual void think() = 0;
-	virtual void send_player_command(Widelands::PlayerCommand &) = 0;
-	virtual int32_t get_frametime() = 0;
+
+	// TODO(Klaus Halfmann): Command must be deleted once it was handled.
+	virtual void send_player_command(Widelands::PlayerCommand*) = 0;
+	virtual Duration get_frametime() = 0;
 	virtual GameType get_game_type() = 0;
 
 	/**
@@ -79,9 +74,16 @@ public:
 	virtual bool is_paused() = 0;
 
 	/**
+	 * Whether the game is stopped.
+	 */
+	bool is_paused_or_zero_speed() {
+		return is_paused() || real_speed() == 0;
+	}
+
+	/**
 	 * Sets whether the game is paused.
 	 */
-	virtual void set_paused(const bool paused) = 0;
+	virtual void set_paused(bool paused) = 0;
 
 	/**
 	 * Toggle pause state (convenience function)
@@ -90,18 +92,19 @@ public:
 		set_paused(!is_paused());
 	}
 
+	virtual void set_write_replay(bool replay) = 0;
+
 	/**
 	 * Report a player result once he has left the game. This may be done through lua
 	 * by the win_condition scripts.
-	 * \param player : the player idx;
-	 * \param result : the player result
-	 * \param info : The info string (\see \struct PlayerEndStatus)
 	 */
-	virtual void report_result
-	    (uint8_t /* player */,
-	     Widelands::PlayerEndResult /*result*/,
-	     const std::string & /* info */)
-	{}
+	virtual void report_result(uint8_t /* player */,
+	                           Widelands::PlayerEndResult /*result*/,
+	                           const std::string& /* info */) = 0;
+
+	/** Callback when the game setup UI is closed before a game was started. */
+	virtual void game_setup_aborted() {
+	}
 };
 
 #endif  // end of include guard: WL_LOGIC_GAME_CONTROLLER_H

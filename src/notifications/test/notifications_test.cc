@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,49 +12,48 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
-#include <memory>
-#include <string>
+#include <vector>
 
-#define BOOST_TEST_MODULE Notifications
-#include <boost/test/unit_test.hpp>
-
+#include "base/test.h"
 #include "notifications/notifications.h"
+
+TEST_EXECUTABLE(notifications, false)
 
 struct SimpleNote {
 	CAN_BE_SENT_AS_NOTE(100)
 
-	SimpleNote(const std::string& init_text) : text(init_text) {}
+	explicit SimpleNote(const std::string& init_text) : text(init_text) {
+	}
 
 	std::string text;
 };
 
-BOOST_AUTO_TEST_SUITE(NotificationsTestSuite)
+TESTSUITE_START(NotificationsTestSuite)
 
+TESTCASE(SimpleTest) {
 
-BOOST_AUTO_TEST_CASE(SimpleTest) {
 	std::vector<SimpleNote> received1;
 	auto subscriber1 = Notifications::subscribe<SimpleNote>(
-	   [&received1](const SimpleNote& got) {received1.push_back(got);});
+	   [&received1](const SimpleNote& got) { received1.push_back(got); });
 
 	Notifications::publish(SimpleNote("Hello"));
 
 	std::vector<SimpleNote> received2;
 	auto subscriber2 = Notifications::subscribe<SimpleNote>(
-	   [&received2](const SimpleNote& got) {received2.push_back(got);});
+	   [&received2](const SimpleNote& got) { received2.push_back(got); });
 
 	Notifications::publish(SimpleNote("World"));
 
-	BOOST_CHECK_EQUAL(received1.size(), 2);
-	BOOST_CHECK_EQUAL("Hello", received1[0].text);
-	BOOST_CHECK_EQUAL("World", received1[1].text);
+	check_equal(received1.size(), 2);
+	check_equal("Hello", received1[0].text);
+	check_equal("World", received1[1].text);
 
-	BOOST_CHECK_EQUAL(received2.size(), 1);
-	BOOST_CHECK_EQUAL("World", received2[0].text);
+	check_equal(received2.size(), 1);
+	check_equal("World", received2[0].text);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+TESTSUITE_END()

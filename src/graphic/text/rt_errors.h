@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,46 +12,49 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_GRAPHIC_TEXT_RT_ERRORS_H
 #define WL_GRAPHIC_TEXT_RT_ERRORS_H
 
-#include "base/wexception.h"
-
 #include <exception>
+
+#include "base/wexception.h"
 
 namespace RT {
 
 class Exception : public std::exception {
 public:
-	Exception(std::string msg) : std::exception(), msg_(msg) {
+	explicit Exception(const std::string& msg) : msg_(msg) {
 	}
-	const char* what() const noexcept override {return msg_.c_str();}
+	[[nodiscard]] const char* what() const noexcept override {
+		return msg_.c_str();
+	}
 
 private:
 	std::string msg_;
 };
 
-#define DEF_ERR(Name) class Name : public Exception { \
-public: \
-		  Name(std::string msg) : Exception(msg) {} \
-};
+#define DEF_ERR(Name)                                                                              \
+	class Name : public Exception {                                                                 \
+	public:                                                                                         \
+		explicit Name(const std::string& msg) : Exception(msg) {                                     \
+		}                                                                                            \
+	};
 
 DEF_ERR(AttributeNotFound)
 DEF_ERR(BadFont)
 DEF_ERR(EndOfText)
 DEF_ERR(InvalidColor)
+DEF_ERR(NumberOutOfRange)
 DEF_ERR(RenderError)
 DEF_ERR(SyntaxError)
+DEF_ERR(TextureTooBig)
 DEF_ERR(WidthTooSmall)
 
 #undef DEF_ERR
-
-
-}
+}  // namespace RT
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_RT_ERRORS_H

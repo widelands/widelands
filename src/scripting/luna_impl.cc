@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,62 +12,59 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "scripting/luna_impl.h"
 
-#include <string>
-
-#include "base/log.h"
 #include "scripting/luna.h"
-
 
 /*
  * =======================================
  * Private Functions
  * =======================================
  */
-static void instantiate_new_lua_class(lua_State * L) {
+static void instantiate_new_lua_class(lua_State* L) {
 	assert(lua_gettop(L) == 0);  // S:
 
-	std::string module, klass;
-	UNPERS_STRING("module", module);
-	UNPERS_STRING("class", klass);
+	std::string module;
+	std::string klass;
+	UNPERS_STRING("module", module)
+	UNPERS_STRING("class", klass)
 
 	// get this classes instantiator
-	lua_getglobal(L, "wl"); //  S: wl
-	if (module != "")
-		lua_getfield(L, -1, module.c_str()); // S: wl module
-	else
-		lua_pushvalue(L, -1); // S: wl wl
+	lua_getglobal(L, "wl");  //  S: wl
+	if (module.empty()) {
+		lua_pushvalue(L, -1);  // S: wl wl
+	} else {
+		lua_getfield(L, -1, module.c_str());  // S: wl module
+	}
 
 	const std::string instantiator = "__" + klass;
-	lua_getfield(L, -1, instantiator.c_str()); // S: wl module func
+	lua_getfield(L, -1, instantiator.c_str());  // S: wl module func
 
 	// Hopefully this is a function!
 	luaL_checktype(L, -1, LUA_TFUNCTION);
 
 	lua_call(L, 0, 1);  // S: wl module luna_obj
 
-	lua_remove(L, -2); // S: wl luna_obj
-	lua_remove(L, -2); // S: luna_obj
+	lua_remove(L, -2);  // S: wl luna_obj
+	lua_remove(L, -2);  // S: luna_obj
 
 	assert(lua_gettop(L) == 1);
 }
 
-static LunaClass** get_new_empty_user_data(lua_State * L) {
+static LunaClass** get_new_empty_user_data(lua_State* L) {
 	assert(lua_gettop(L) == 0);  // S:
 
-	instantiate_new_lua_class(L); // S: luna_obj
+	instantiate_new_lua_class(L);  // S: luna_obj
 
-	lua_pushint32(L, 0); // luna_obj int
-	lua_gettable(L, -2); // luna_obj userdata
+	lua_pushint32(L, 0);  // luna_obj int
+	lua_gettable(L, -2);  // luna_obj userdata
 
 	LunaClass** obj = static_cast<LunaClass**>(lua_touserdata(L, -1));
-	lua_pop(L, 1); // luna_obj
+	lua_pop(L, 1);  // luna_obj
 
 	return obj;
 }
@@ -92,10 +89,10 @@ bool luna_table_has_key(lua_State* L, const std::string& key) {
  * and fill it with information from the table (the upvalue for the closure)
  * via its __unpersist function.
  */
-int luna_unpersisting_closure(lua_State * L) {
+int luna_unpersisting_closure(lua_State* L) {
 	assert(lua_gettop(L) == 0);
 
-	LunaClass ** obj = get_new_empty_user_data(L); // S: luna_obj
+	LunaClass** obj = get_new_empty_user_data(L);  // S: luna_obj
 
 	(*obj)->__unpersist(L);
 

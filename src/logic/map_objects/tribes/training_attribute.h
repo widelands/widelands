@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2008 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,15 +12,12 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_TRAINING_ATTRIBUTE_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_TRAINING_ATTRIBUTE_H
-
-#include <cstdint>
 
 namespace Widelands {
 
@@ -28,14 +25,7 @@ namespace Widelands {
  * Indices for specific, individual attributes that \ref MapObject instances
  * may have. Used in conjunction with \ref Requirements.
  */
-enum class TrainingAttribute : uint8_t {
-	kHealth = 0,
-	kAttack,
-	kDefense,
-	kEvade,
-	kTotal = 100
-};
-
-}
+enum class TrainingAttribute : uint8_t { kHealth = 0, kAttack, kDefense, kEvade, kTotal = 100 };
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_TRAINING_ATTRIBUTE_H

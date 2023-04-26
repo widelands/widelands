@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -30,59 +29,62 @@
 
 namespace Widelands {
 
-CmdCallEconomyBalance::CmdCallEconomyBalance
-	(uint32_t const starttime, Economy * const economy, uint32_t const timerid)
-	: GameLogicCommand(starttime)
-{
-	flag_ = economy->get_arbitrary_flag();
+CmdCallEconomyBalance::CmdCallEconomyBalance(const Time& starttime,
+                                             Economy* const economy,
+                                             uint32_t const timerid)
+   : GameLogicCommand(starttime) {
+	Flag* flag = economy->get_arbitrary_flag();
+	flag_ = flag;
 	timerid_ = timerid;
+	type_ = economy->type();
+	assert(flag->get_economy(type_) == economy);
 }
 
 /**
  * Called by Cmd_Queue as requested by start_request_timer().
  * Call economy functions to balance supply and request.
  */
-void CmdCallEconomyBalance::execute(Game & game)
-{
-	if (Flag * const flag = flag_.get(game))
-		flag->get_economy()->balance(timerid_);
+void CmdCallEconomyBalance::execute(Game& game) {
+	if (Flag* const flag = flag_.get(game)) {
+		flag->get_economy(type_)->balance(timerid_);
+	}
 }
 
-constexpr uint16_t kCurrentPacketVersion = 3;
+constexpr uint16_t kCurrentPacketVersion = 4;
 
 /**
  * Read and write
  */
-void CmdCallEconomyBalance::read
-	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
-{
+void CmdCallEconomyBalance::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
 			GameLogicCommand::read(fr, egbase, mol);
 			uint32_t serial = fr.unsigned_32();
-			if (serial)
+			if (serial != 0u) {
 				flag_ = &mol.get<Flag>(serial);
+			}
 			timerid_ = fr.unsigned_32();
+			type_ = fr.unsigned_8() != 0u ? wwWORKER : wwWARE;
 		} else {
-			throw UnhandledVersionError("CmdCallEconomyBalance", packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError(
+			   "CmdCallEconomyBalance", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const WException & e) {
+	} catch (const WException& e) {
 		throw wexception("call economy balance: %s", e.what());
 	}
 }
-void CmdCallEconomyBalance::write
-	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
-{
+void CmdCallEconomyBalance::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersion);
 
 	// Write Base Commands
 	GameLogicCommand::write(fw, egbase, mos);
-	if (Flag * const flag = flag_.get(egbase))
+	if (Flag* const flag = flag_.get(egbase)) {
 		fw.unsigned_32(mos.get_object_file_index(*flag));
-	else
+	} else {
 		fw.unsigned_32(0);
+	}
 	fw.unsigned_32(timerid_);
+	fw.unsigned_8(type_);
 }
-
-}
+}  // namespace Widelands

@@ -28,6 +28,10 @@ function wait_for_message(title)
       archive_messages()
       if title == message_title then
          break
+      else
+         print("Expected message: " .. title)
+         print("Got: " .. message_title)
+         assert(false, "### Test failed")
       end
    end
    game.desired_speed = old_speed
@@ -52,7 +56,7 @@ function create_infrastructure(tower_x, tower_y)
             grout = 100,
             iron = 100,
             granite = 100,
-            thatch_reed = 100,
+            reed = 100,
             log = 100,
          },
          workers = {
@@ -65,7 +69,7 @@ function create_infrastructure(tower_x, tower_y)
             grout = 100,
             iron = 100,
             granite = 100,
-            thatch_reed = 100,
+            reed = 100,
             log = 100,
             gold = 100,
          },

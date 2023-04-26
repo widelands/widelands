@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -33,20 +32,27 @@ struct Supply;
  * SupplyList is used in the Economy to keep track of supplies.
  */
 struct SupplyList {
-	void add_supply(Supply &);
-	void remove_supply(Supply &);
+	void add_supply(Supply&);
+	void remove_supply(Supply&);
 
-	size_t get_nrsupplies() const {return supplies_.size();}
-	const Supply & operator[](size_t const idx) const {return *supplies_[idx];}
-	Supply & operator[](size_t const idx) {return *supplies_[idx];}
+	[[nodiscard]] size_t get_nrsupplies() const {
+		return supplies_.size();
+	}
+	const Supply& operator[](size_t const idx) const {
+		return *supplies_[idx];
+	}
+	Supply& operator[](size_t const idx) {
+		return *supplies_[idx];
+	}
 
-	bool have_supplies(Game & game, const Request &);
+	bool have_supplies(const Game& game, const Request&);
 
 private:
-	using Supplies = std::vector<Supply *>;
+	// TODO(klaus-halfmann): try to use a Map or Set
+	// (-> keep in mind that the iteration order needs to be platform-independent though)
+	using Supplies = std::vector<Supply*>;
 	Supplies supplies_;
 };
-
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_SUPPLY_LIST_H

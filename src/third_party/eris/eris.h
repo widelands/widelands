@@ -1,6 +1,6 @@
 /*
-Eris - Heavy-duty persistence for Lua 5.2.2 - Based on Pluto
-Copyright (c) 2013 by Florian Nuecke.
+Eris - Heavy-duty persistence for Lua 5.3.4 - Based on Pluto
+Copyright (c) 2013-2015 by Florian Nuecke.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,6 +25,11 @@ THE SOFTWARE.
 
 #ifndef ERIS_H
 #define ERIS_H
+
+#define ERIS_VERSION_MAJOR  "1"
+#define ERIS_VERSION_MINOR  "1"
+#define ERIS_VERSION_NUM    101
+#define ERIS_VERSION_RELEASE  "2"
 
 /*
 ** ==================================================================
@@ -142,7 +147,9 @@ LUA_API void eris_set_setting(lua_State *L, const char *name, int value);
  *     persisted data returned by persist(). Returns the unpersisted value.
  *     If only one value is given, the perms table is assumed to be empty.
  */
+#ifndef luaopen_eris_declaration
+#define luaopen_eris_declaration
 LUA_API int luaopen_eris(lua_State* L);
-
 #endif
 
+#endif

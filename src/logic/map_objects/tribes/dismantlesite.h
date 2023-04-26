@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009, 2011 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -27,8 +26,6 @@
 #include "scripting/lua_table.h"
 
 namespace Widelands {
-
-class Building;
 
 /*
 DismantleSite
@@ -45,45 +42,64 @@ class DismantleSite;
 
 class DismantleSiteDescr : public BuildingDescr {
 public:
-	DismantleSiteDescr(const std::string& init_descname, const LuaTable& t, const EditorGameBase& egbase);
-	~DismantleSiteDescr() override {}
+	DismantleSiteDescr(const std::string& init_descname,
+	                   const LuaTable& t,
+	                   Descriptions& descriptions);
+	~DismantleSiteDescr() override = default;
 
-	Building& create_object() const override;
+	[[nodiscard]] Building& create_object() const override;
+
+	[[nodiscard]] FxId creation_fx() const;
 
 private:
+	const FxId creation_fx_;
+
 	DISALLOW_COPY_AND_ASSIGN(DismantleSiteDescr);
 };
 
 class DismantleSite : public PartiallyFinishedBuilding {
 	friend class MapBuildingdataPacket;
 
-	static const uint32_t DISMANTLESITE_STEP_TIME = 45000;
-
 	MO_DESCR(DismantleSiteDescr)
 
 public:
-	DismantleSite(const DismantleSiteDescr & descr);
-	DismantleSite
-		(const DismantleSiteDescr & descr, EditorGameBase &,
-		 Coords const, Player &, bool, Building::FormerBuildings & former_buildings);
+	explicit DismantleSite(const DismantleSiteDescr& descr);
+	explicit DismantleSite(const DismantleSiteDescr& descr,
+	                       EditorGameBase&,
+	                       const Coords&,
+	                       Player*,
+	                       bool,
+	                       const FormerBuildings& former_buildings,
+	                       const std::map<DescriptionIndex, Quantity>& preserved_wares);
 
 	bool burn_on_destroy() override;
-	void init   (EditorGameBase &) override;
+	bool init(EditorGameBase&) override;
 
-	bool get_building_work(Game &, Worker &, bool success) override;
+	bool get_building_work(Game&, Worker&, bool success) override;
 
-	static void count_returned_wares(Building* building, std::map<DescriptionIndex, uint8_t> & res);
+	static const Buildcost count_returned_wares(Building* building);
 
 protected:
 	void update_statistics_string(std::string*) override;
 
-	uint32_t build_step_time() const override {return DISMANTLESITE_STEP_TIME;}
+	void cleanup(EditorGameBase&) override;
 
-	void create_options_window(InteractiveGameBase&, UI::Window*& registry) override;
+	static constexpr Duration kDismantlesiteStepTime{45000};
+	const Duration& build_step_time() const override {
+		return kDismantlesiteStepTime;
+	}
 
-	void draw(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&) override;
+	void draw(const Time& gametime,
+	          InfoToDraw info_to_draw,
+	          const Vector2f& point_on_dst,
+	          const Widelands::Coords& coords,
+	          float scale,
+	          RenderTarget* dst) override;
+
+private:
+	std::map<DescriptionIndex, Quantity> preserved_wares_;
+	size_t next_dropout_index_;
 };
-
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_DISMANTLESITE_H

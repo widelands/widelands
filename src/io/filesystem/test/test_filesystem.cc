@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2007-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,179 +12,174 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
-#include <exception>
 #ifdef _WIN32
 #include <sstream>
 #endif
 
-#include <boost/test/unit_test.hpp>
-
+#include "base/test.h"
 #include "io/filesystem/disk_filesystem.h"
 
 #ifdef _WIN32
-static std::string Win32Path(std::string s)
-{
+static std::string Win32Path(std::string s) {
 	for (size_t i = 0; i < s.size(); i++)
-		if (s[i] == '/') s[i] = '\\';
-	if (!s.empty() && s[0] == '\\')
-	{
+		if (s[i] == '/')
+			s[i] = '\\';
+	if (!s.empty() && s[0] == '\\') {
 		// Insert drive letter part from current working directory
 		std::string cwd = FileSystem::get_working_directory();
 		s.insert(0, cwd.substr(0, 2));
 	}
 	return s;
 }
-static int setenv(const char* envname, const char* envval, int overwrite)
-{
+static int setenv(const char* envname, const char* envval, int /* overwrite */) {
 	return _putenv_s(envname, envval);
 }
 #else
-// BOOST_CHECK_EQUAL generates an old-style cast usage warning, so ignore
+// check_equal generates an old-style cast usage warning, so ignore
 #pragma GCC diagnostic ignored "-Wold-style-cast"
 #endif
 
-BOOST_AUTO_TEST_SUITE(FileSystemTests)
+TESTSUITE_START(FileSystemTests)
 #ifndef _WIN32
-#define TEST_CANONICALIZE_NAME(root, path, expected)                          \
-	BOOST_CHECK_EQUAL(RealFSImpl(root).canonicalize_name(path), expected);
+#define TEST_CANONICALIZE_NAME(root, path, expected)                                               \
+	check_equal(RealFSImpl(root).canonicalize_name(path), expected);
 #else
-#define TEST_CANONICALIZE_NAME(root, path, expected)                          \
-	BOOST_CHECK_EQUAL(RealFSImpl(Win32Path(root)).canonicalize_name(path), Win32Path(expected));
+#define TEST_CANONICALIZE_NAME(root, path, expected)                                               \
+	check_equal(RealFSImpl(Win32Path(root)).canonicalize_name(path), Win32Path(expected));
 #endif
 
-BOOST_AUTO_TEST_CASE(test_canonicalize_name) {
+TESTCASE(test_canonicalize_name) {
 	setenv("HOME", "/home/test", 1);
-	std::string cwd = RealFSImpl("").get_working_directory();
+	const std::string cwd(FileSystem::get_working_directory());
 
 	// RealFSImpl is constructed with a root directory...
 
-	TEST_CANONICALIZE_NAME("", "path", cwd + "/path");
-	TEST_CANONICALIZE_NAME(".", "path", cwd + "/path");
+	TEST_CANONICALIZE_NAME("", "path", cwd + "/path")
+	TEST_CANONICALIZE_NAME(".", "path", cwd + "/path")
 
-	TEST_CANONICALIZE_NAME("/home", "path", "/home/path");
-	TEST_CANONICALIZE_NAME("/opt", "path", "/opt/path");
-	TEST_CANONICALIZE_NAME("/opt/test", "path", "/opt/test/path");
-	TEST_CANONICALIZE_NAME("/opt", "some/path", "/opt/some/path");
+	TEST_CANONICALIZE_NAME("/home", "path", "/home/path")
+	TEST_CANONICALIZE_NAME("/opt", "path", "/opt/path")
+	TEST_CANONICALIZE_NAME("/opt/test", "path", "/opt/test/path")
+	TEST_CANONICALIZE_NAME("/opt", "some/path", "/opt/some/path")
 
 	// single dot is removed (root path)...
 
-	TEST_CANONICALIZE_NAME("./home/me", "path", cwd + "/home/me/path");
-	TEST_CANONICALIZE_NAME("/home/./you", "path", "/home/you/path");
-	TEST_CANONICALIZE_NAME("/home/us/.", "path", "/home/us/path");
+	TEST_CANONICALIZE_NAME("./home/me", "path", cwd + "/home/me/path")
+	TEST_CANONICALIZE_NAME("/home/./you", "path", "/home/you/path")
+	TEST_CANONICALIZE_NAME("/home/us/.", "path", "/home/us/path")
 
 	// single dot is removed (file path)...
 
-	TEST_CANONICALIZE_NAME("/opt", "./no/where", "/opt/no/where");
-	TEST_CANONICALIZE_NAME("/opt", "some/./where", "/opt/some/where");
-	TEST_CANONICALIZE_NAME("/opt", "any/where/.", "/opt/any/where");
+	TEST_CANONICALIZE_NAME("/opt", "./no/where", "/opt/no/where")
+	TEST_CANONICALIZE_NAME("/opt", "some/./where", "/opt/some/where")
+	TEST_CANONICALIZE_NAME("/opt", "any/where/.", "/opt/any/where")
 
 	// empty path nodes are removed (root path)...
 
-	TEST_CANONICALIZE_NAME("//usr/empty", "path", "/usr/empty/path");
-	TEST_CANONICALIZE_NAME("/usr//empty", "path", "/usr/empty/path");
-	TEST_CANONICALIZE_NAME("/usr/empty/", "path", "/usr/empty/path");
-	TEST_CANONICALIZE_NAME("/usr/empty//", "path", "/usr/empty/path");
+	TEST_CANONICALIZE_NAME("//usr/empty", "path", "/usr/empty/path")
+	TEST_CANONICALIZE_NAME("/usr//empty", "path", "/usr/empty/path")
+	TEST_CANONICALIZE_NAME("/usr/empty/", "path", "/usr/empty/path")
+	TEST_CANONICALIZE_NAME("/usr/empty//", "path", "/usr/empty/path")
 
 	// empty path nodes are removed (file path)...
 
-	TEST_CANONICALIZE_NAME("/usr", "/empty/path", "/usr/empty/path");
-	TEST_CANONICALIZE_NAME("/usr", "//empty/path", "/usr/empty/path");
-	TEST_CANONICALIZE_NAME("/usr", "empty//path", "/usr/empty/path");
-	TEST_CANONICALIZE_NAME("/usr", "empty/path/", "/usr/empty/path");
-	TEST_CANONICALIZE_NAME("/usr", "empty/path//", "/usr/empty/path");
+	TEST_CANONICALIZE_NAME("/usr", "/empty/path", "/usr/empty/path")
+	TEST_CANONICALIZE_NAME("/usr", "//empty/path", "/usr/empty/path")
+	TEST_CANONICALIZE_NAME("/usr", "empty//path", "/usr/empty/path")
+	TEST_CANONICALIZE_NAME("/usr", "empty/path/", "/usr/empty/path")
+	TEST_CANONICALIZE_NAME("/usr", "empty/path//", "/usr/empty/path")
 
 	// '..' moves up a directory in the path (root path)...
 
-	TEST_CANONICALIZE_NAME("/usr/../home", "path", "/home/path");
-	TEST_CANONICALIZE_NAME("/usr/../../home", "path", "/home/path");
-	TEST_CANONICALIZE_NAME("/usr/test/..", "path", "/usr/path");
-	TEST_CANONICALIZE_NAME("/usr/one/../two/..", "path", "/usr/path");
-	TEST_CANONICALIZE_NAME("/usr/one/../a/b/..", "path", "/usr/a/path");
+	TEST_CANONICALIZE_NAME("/usr/../home", "path", "/home/path")
+	TEST_CANONICALIZE_NAME("/usr/../../home", "path", "/home/path")
+	TEST_CANONICALIZE_NAME("/usr/test/..", "path", "/usr/path")
+	TEST_CANONICALIZE_NAME("/usr/one/../two/..", "path", "/usr/path")
+	TEST_CANONICALIZE_NAME("/usr/one/../a/b/..", "path", "/usr/a/path")
 
 	// '..' moves up a directory in the path (file path)...
 
-	TEST_CANONICALIZE_NAME("/home/test", "../path", "/home/path");
-	TEST_CANONICALIZE_NAME("/home/test", "../../path", "/path");
-	TEST_CANONICALIZE_NAME("/home/test", "../../../path", "/path");
+	TEST_CANONICALIZE_NAME("/home/test", "../path", "/home/path")
+	TEST_CANONICALIZE_NAME("/home/test", "../../path", "/path")
+	TEST_CANONICALIZE_NAME("/home/test", "../../../path", "/path")
 
-	TEST_CANONICALIZE_NAME("/home/test", "path/..", "/home/test");
-	TEST_CANONICALIZE_NAME("/home/test", "path/../..", "/home");
+	TEST_CANONICALIZE_NAME("/home/test", "path/..", "/home/test")
+	TEST_CANONICALIZE_NAME("/home/test", "path/../..", "/home")
 
-	TEST_CANONICALIZE_NAME("/home/test", "path/../one", "/home/test/one");
-	TEST_CANONICALIZE_NAME("/home/test", "path/../../one", "/home/one");
-	TEST_CANONICALIZE_NAME("/home/test", "path/../../../one", "/one");
-	TEST_CANONICALIZE_NAME("/home/test", "path/../../../../one", "/one");
+	TEST_CANONICALIZE_NAME("/home/test", "path/../one", "/home/test/one")
+	TEST_CANONICALIZE_NAME("/home/test", "path/../../one", "/home/one")
+	TEST_CANONICALIZE_NAME("/home/test", "path/../../../one", "/one")
+	TEST_CANONICALIZE_NAME("/home/test", "path/../../../../one", "/one")
 
 	// ...but not a '..' coming from two different strings...
 
-	TEST_CANONICALIZE_NAME("/home/test/.", "./path", "/home/test/path");
+	TEST_CANONICALIZE_NAME("/home/test/.", "./path", "/home/test/path")
 
 #ifdef _WIN32
 	// Check drive letter handling.
-	BOOST_CHECK_EQUAL(RealFSImpl("C:\\").canonicalize_name("C:\\"), "C:");
-	BOOST_CHECK_EQUAL(RealFSImpl("C:\\").canonicalize_name("D:\\"), "C:\\D:");
+	check_equal(RealFSImpl("C:\\").canonicalize_name("C:\\"), "C:");
+	check_equal(RealFSImpl("C:\\").canonicalize_name("D:\\"), "C:\\D:");
 #endif
 }
 
 // Skip testing tilde expansion on windows.
 #ifndef _WIN32
 // ~ gets expanded to $HOME
-BOOST_AUTO_TEST_CASE(test_canonicalize_name_home_expansion) {
+TESTCASE(test_canonicalize_name_home_expansion) {
 	setenv("HOME", "/my/home", 1);
-	std::string cwd = RealFSImpl("").get_working_directory();
+	const std::string cwd(FileSystem::get_working_directory());
 
-	TEST_CANONICALIZE_NAME("~", "path", "/my/home/path");
-	TEST_CANONICALIZE_NAME("~/test", "path", "/my/home/test/path");
+	TEST_CANONICALIZE_NAME("~", "path", "/my/home/path")
+	TEST_CANONICALIZE_NAME("~/test", "path", "/my/home/test/path")
 
 	setenv("HOME", "/somewhere", 1);
-	TEST_CANONICALIZE_NAME("~", "path", "/somewhere/path");
+	TEST_CANONICALIZE_NAME("~", "path", "/somewhere/path")
 
 	// ~ at the start of the path overrides the root
 
-	TEST_CANONICALIZE_NAME("~", "~", "/somewhere");
-	TEST_CANONICALIZE_NAME("~/vanish", "~", "/somewhere");
-	TEST_CANONICALIZE_NAME("~/fs", "~/sf", "/somewhere/sf");
+	TEST_CANONICALIZE_NAME("~", "~", "/somewhere")
+	TEST_CANONICALIZE_NAME("~/vanish", "~", "/somewhere")
+	TEST_CANONICALIZE_NAME("~/fs", "~/sf", "/somewhere/sf")
 
 	// ~ anywhere other than at the start of a path does not get expanded
 
-	TEST_CANONICALIZE_NAME("/opt/~", "path", "/opt/~/path");
-	TEST_CANONICALIZE_NAME("/opt/~/the", "path", "/opt/~/the/path");
+	TEST_CANONICALIZE_NAME("/opt/~", "path", "/opt/~/path")
+	TEST_CANONICALIZE_NAME("/opt/~/the", "path", "/opt/~/the/path")
 
-	TEST_CANONICALIZE_NAME("/opt", "path/~", "/opt/path/~");
-	TEST_CANONICALIZE_NAME("/opt", "path/~/here", "/opt/path/~/here");
+	TEST_CANONICALIZE_NAME("/opt", "path/~", "/opt/path/~")
+	TEST_CANONICALIZE_NAME("/opt", "path/~/here", "/opt/path/~/here")
 
 	// ~ as part of a root-path spec segment name does not get expanded
 
-	TEST_CANONICALIZE_NAME("~a", "path", cwd + "/~a/path");
-	TEST_CANONICALIZE_NAME("a~", "path", cwd + "/a~/path");
+	TEST_CANONICALIZE_NAME("~a", "path", cwd + "/~a/path")
+	TEST_CANONICALIZE_NAME("a~", "path", cwd + "/a~/path")
 
-	TEST_CANONICALIZE_NAME("/opt/~a", "path", "/opt/~a/path");
-	TEST_CANONICALIZE_NAME("/opt/a~", "path", "/opt/a~/path");
+	TEST_CANONICALIZE_NAME("/opt/~a", "path", "/opt/~a/path")
+	TEST_CANONICALIZE_NAME("/opt/a~", "path", "/opt/a~/path")
 
-	TEST_CANONICALIZE_NAME("~a/b", "path", cwd + "/~a/b/path");
-	TEST_CANONICALIZE_NAME("a~/b", "path", cwd + "/a~/b/path");
+	TEST_CANONICALIZE_NAME("~a/b", "path", cwd + "/~a/b/path")
+	TEST_CANONICALIZE_NAME("a~/b", "path", cwd + "/a~/b/path")
 
-	TEST_CANONICALIZE_NAME("/opt/~the/test", "path", "/opt/~the/test/path");
-	TEST_CANONICALIZE_NAME("/opt/the~/test", "path", "/opt/the~/test/path");
+	TEST_CANONICALIZE_NAME("/opt/~the/test", "path", "/opt/~the/test/path")
+	TEST_CANONICALIZE_NAME("/opt/the~/test", "path", "/opt/the~/test/path")
 
 	// ~ as part of a path spec segment name does not get expanded
 
-	TEST_CANONICALIZE_NAME("/opt", "~path", "/opt/~path");
-	TEST_CANONICALIZE_NAME("/opt", "path~", "/opt/path~");
+	TEST_CANONICALIZE_NAME("/opt", "~path", "/opt/~path")
+	TEST_CANONICALIZE_NAME("/opt", "path~", "/opt/path~")
 
-	TEST_CANONICALIZE_NAME("/opt", "some/~path", "/opt/some/~path");
-	TEST_CANONICALIZE_NAME("/opt", "some/path~", "/opt/some/path~");
+	TEST_CANONICALIZE_NAME("/opt", "some/~path", "/opt/some/~path")
+	TEST_CANONICALIZE_NAME("/opt", "some/path~", "/opt/some/path~")
 
-	TEST_CANONICALIZE_NAME("/opt", "~path/here", "/opt/~path/here");
-	TEST_CANONICALIZE_NAME("/opt", "path~/here", "/opt/path~/here");
+	TEST_CANONICALIZE_NAME("/opt", "~path/here", "/opt/~path/here")
+	TEST_CANONICALIZE_NAME("/opt", "path~/here", "/opt/path~/here")
 
-	TEST_CANONICALIZE_NAME("/opt", "a/~path/here", "/opt/a/~path/here");
-	TEST_CANONICALIZE_NAME("/opt", "a/path~/here", "/opt/a/path~/here");
+	TEST_CANONICALIZE_NAME("/opt", "a/~path/here", "/opt/a/~path/here")
+	TEST_CANONICALIZE_NAME("/opt", "a/path~/here", "/opt/a/path~/here")
 }
 #endif
-BOOST_AUTO_TEST_SUITE_END()
+TESTSUITE_END()

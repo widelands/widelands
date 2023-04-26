@@ -2,111 +2,137 @@ wl_library(editor
   SRCS
     editorinteractive.cc
     editorinteractive.h
+    editor_category.cc
+    editor_category.h
     map_generator.cc
     map_generator.h
-    tools/editor_action_args.h
-    tools/editor_decrease_height_tool.cc
-    tools/editor_decrease_height_tool.h
-    tools/editor_decrease_resources_tool.cc
-    tools/editor_decrease_resources_tool.h
-    tools/editor_delete_bob_tool.cc
-    tools/editor_delete_bob_tool.h
-    tools/editor_delete_immovable_tool.cc
-    tools/editor_delete_immovable_tool.h
-    tools/editor_draw_tool.cc
-    tools/editor_draw_tool.h
-    tools/editor_history.cc
-    tools/editor_history.h
-    tools/editor_increase_height_tool.cc
-    tools/editor_increase_height_tool.h
-    tools/editor_increase_resources_tool.cc
-    tools/editor_increase_resources_tool.h
-    tools/editor_info_tool.cc
-    tools/editor_info_tool.h
-    tools/editor_make_infrastructure_tool.cc
-    tools/editor_make_infrastructure_tool.h
-    tools/editor_noise_height_tool.cc
-    tools/editor_noise_height_tool.h
-    tools/editor_place_bob_tool.cc
-    tools/editor_place_bob_tool.h
-    tools/editor_place_immovable_tool.cc
-    tools/editor_place_immovable_tool.h
-    tools/editor_set_height_tool.cc
-    tools/editor_set_height_tool.h
-    tools/editor_set_origin_tool.cc
-    tools/editor_set_origin_tool.h
-    tools/editor_set_port_space_tool.cc
-    tools/editor_set_port_space_tool.h
-    tools/editor_set_resources_tool.cc
-    tools/editor_set_resources_tool.h
-    tools/editor_set_starting_pos_tool.cc
-    tools/editor_set_starting_pos_tool.h
-    tools/editor_set_terrain_tool.cc
-    tools/editor_set_terrain_tool.h
-    tools/editor_tool.h
-    tools/editor_tool_action.h
+    tools/action_args.h
+    tools/decrease_height_tool.cc
+    tools/decrease_height_tool.h
+    tools/decrease_resources_tool.cc
+    tools/decrease_resources_tool.h
+    tools/delete_critter_tool.cc
+    tools/delete_critter_tool.h
+    tools/delete_immovable_tool.cc
+    tools/delete_immovable_tool.h
+    tools/draw_tool.cc
+    tools/draw_tool.h
+    tools/history.cc
+    tools/history.h
+    tools/increase_height_tool.cc
+    tools/increase_height_tool.h
+    tools/increase_resources_tool.cc
+    tools/increase_resources_tool.h
+    tools/info_tool.cc
+    tools/info_tool.h
     tools/multi_select.h
+    tools/noise_height_tool.cc
+    tools/noise_height_tool.h
+    tools/place_critter_tool.cc
+    tools/place_critter_tool.h
+    tools/place_immovable_tool.cc
+    tools/place_immovable_tool.h
+    tools/resize_tool.cc
+    tools/resize_tool.h
+    tools/set_height_tool.cc
+    tools/set_height_tool.h
+    tools/set_origin_tool.cc
+    tools/set_origin_tool.h
+    tools/set_port_space_tool.cc
+    tools/set_port_space_tool.h
+    tools/set_resources_tool.cc
+    tools/set_resources_tool.h
+    tools/set_starting_pos_tool.cc
+    tools/set_starting_pos_tool.h
+    tools/set_terrain_tool.cc
+    tools/set_terrain_tool.h
+    tools/tool.h
+    tools/tool_action.h
+    tools/tool_conf.cc
+    tools/tool_conf.h
+    tools/toolhistory_tool.cc
+    tools/toolhistory_tool.h
     ui_menus/categorized_item_selection_menu.h
-    ui_menus/editor_help.cc
-    ui_menus/editor_help.h
-    ui_menus/editor_main_menu.cc
-    ui_menus/editor_main_menu.h
-    ui_menus/editor_main_menu_load_map.cc
-    ui_menus/editor_main_menu_load_map.h
-    ui_menus/editor_main_menu_load_or_save_map.cc
-    ui_menus/editor_main_menu_load_or_save_map.h
-    ui_menus/editor_main_menu_map_options.cc
-    ui_menus/editor_main_menu_map_options.h
-    ui_menus/editor_main_menu_new_map.cc
-    ui_menus/editor_main_menu_new_map.h
-    ui_menus/editor_main_menu_random_map.cc
-    ui_menus/editor_main_menu_random_map.h
-    ui_menus/editor_main_menu_save_map.cc
-    ui_menus/editor_main_menu_save_map.h
-    ui_menus/editor_main_menu_save_map_make_directory.cc
-    ui_menus/editor_main_menu_save_map_make_directory.h
-    ui_menus/editor_player_menu.cc
-    ui_menus/editor_player_menu.h
-    ui_menus/editor_tool_change_height_options_menu.cc
-    ui_menus/editor_tool_change_height_options_menu.h
-    ui_menus/editor_tool_change_resources_options_menu.cc
-    ui_menus/editor_tool_change_resources_options_menu.h
-    ui_menus/editor_tool_menu.cc
-    ui_menus/editor_tool_menu.h
-    ui_menus/editor_tool_noise_height_options_menu.cc
-    ui_menus/editor_tool_noise_height_options_menu.h
-    ui_menus/editor_tool_options_menu.cc
-    ui_menus/editor_tool_options_menu.h
-    ui_menus/editor_tool_place_bob_options_menu.cc
-    ui_menus/editor_tool_place_bob_options_menu.h
-    ui_menus/editor_tool_place_immovable_options_menu.cc
-    ui_menus/editor_tool_place_immovable_options_menu.h
-    ui_menus/editor_tool_set_terrain_options_menu.cc
-    ui_menus/editor_tool_set_terrain_options_menu.h
-    ui_menus/editor_toolsize_menu.cc
-    ui_menus/editor_toolsize_menu.h
+    ui_menus/field_info_window.h
+    ui_menus/field_info_window.cc
+    ui_menus/help.cc
+    ui_menus/help.h
+    ui_menus/main_menu_load_map.cc
+    ui_menus/main_menu_load_map.h
+    ui_menus/main_menu_load_or_save_map.cc
+    ui_menus/main_menu_load_or_save_map.h
+    ui_menus/main_menu_map_options.cc
+    ui_menus/main_menu_map_options.h
+    ui_menus/main_menu_new_map.cc
+    ui_menus/main_menu_new_map.h
+    ui_menus/main_menu_random_map.cc
+    ui_menus/main_menu_random_map.h
+    ui_menus/main_menu_save_map.cc
+    ui_menus/main_menu_save_map.h
+    ui_menus/main_menu_save_map_make_directory.cc
+    ui_menus/main_menu_save_map_make_directory.h
+    ui_menus/map_size_box.cc
+    ui_menus/map_size_box.h
+    ui_menus/player_menu.cc
+    ui_menus/player_menu.h
+    ui_menus/tool_change_height_options_menu.cc
+    ui_menus/tool_change_height_options_menu.h
+    ui_menus/tool_change_resources_options_menu.cc
+    ui_menus/tool_change_resources_options_menu.h
+    ui_menus/tool_noise_height_options_menu.cc
+    ui_menus/tool_noise_height_options_menu.h
+    ui_menus/tool_options_menu.cc
+    ui_menus/tool_options_menu.h
+    ui_menus/tool_place_critter_options_menu.cc
+    ui_menus/tool_place_critter_options_menu.h
+    ui_menus/tool_place_immovable_options_menu.cc
+    ui_menus/tool_place_immovable_options_menu.h
+    ui_menus/tool_resize_options_menu.cc
+    ui_menus/tool_resize_options_menu.h
+    ui_menus/tool_set_terrain_options_menu.cc
+    ui_menus/tool_set_terrain_options_menu.h
+    ui_menus/tool_toolhistory_options_menu.cc
+    ui_menus/tool_toolhistory_options_menu.h
+    ui_menus/toolsize_menu.cc
+    ui_menus/toolsize_menu.h
   USES_SDL2
   DEPENDS
+    base
     base_exceptions
-    base_i18n
     base_macros
+    base_random
     base_scoped_timer
+    build_info
     graphic
+    graphic_fonthandler
+    graphic_mouse_cursor
+    graphic_playercolor
     graphic_surface
+    graphic_text_layout
     io_filesystem
+    io_filesystem_illegal_filename_check
     logic
+    logic_addons
+    logic_constants
+    logic_exceptions
+    logic_filesystem_constants
+    logic_generic_save_handler
+    logic_map
+    logic_map_object_type
+    logic_map_objects
+    logic_map_objects_description_maintainer
+    logic_single_player_game_settings
+    logic_tribe_basic_info
     logic_widelands_geometry
     map_io
     map_io_map_loader
-    notifications
-    random
+    network
     scripting_lua_interface
     scripting_lua_table
+    sound
+    ui_addons
     ui_basic
-    ui_fsmenu
-    widelands_ball_of_mud
+    widelands_options
     wui
-    wui_common
-    wui_field_overlay_manager
-    wui_mapview_pixelfunctions
+    wui_common_mapdetails
 )

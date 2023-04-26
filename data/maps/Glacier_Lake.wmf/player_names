@@ -1,10 +1,10 @@
-# Automatically created by Widelands bzr7574[artifacts] (Debug)
+# Automatically created by Widelands bzr7905[revised_maps] (Debug)
 
 [global]
 packet_version="2"
 
 [player_1]
-name="Bjorn"
+name="Bjørn"
 tribe="barbarians"
 ai=
 closeable="false"

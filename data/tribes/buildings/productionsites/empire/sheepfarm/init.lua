@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_productionsite_type {
    name = "empire_sheepfarm",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Sheep Farm"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
 
@@ -19,19 +19,27 @@ tribes:new_productionsite_type {
       granite = 2
    },
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 73, 60 },
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 89, 82 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
-         hotspot = { 73, 60 },
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 89, 82 },
       },
    },
 
    aihints = {
-      prohibited_till = 600
+      prohibited_till = 380,
+      very_weak_ai_limit = 1,
+      weak_ai_limit = 3
    },
 
    working_positions = {
@@ -39,25 +47,24 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      wheat = 7,
-      water = 7
-   },
-   outputs = {
-      "wool"
+      { name = "water", amount = 7 },
+      { name = "wheat", amount = 7 }
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start breeding sheep because ...
-         descname = _"breeding sheep",
+         descname = _("breeding sheep"),
          actions = {
-            "sleep=25000",
             "return=skipped unless economy needs wool",
             "consume=water wheat",
-            "play_sound=sound/farm sheep 192",
-            "animate=working 30000",
+            "sleep=duration:25s",
+            "playsound=sound/farm/sheep priority:50% allow_multiple",
+            "animate=working duration:30s",
             "produce=wool"
          }
       },
    },
 }
+
+pop_textdomain()

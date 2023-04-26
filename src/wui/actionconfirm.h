@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010, 2013 by the Widelands Development Team
+ * Copyright (C) 2010-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -28,30 +27,26 @@ namespace Widelands {
 class Building;
 struct PlayerImmovable;
 struct Ship;
-}
+}  // namespace Widelands
 
 // Building confirm windows
-void show_bulldoze_confirm
-	(InteractivePlayer & player,
-	 Widelands::Building & building,
-	 Widelands::PlayerImmovable * const todestroy = nullptr);
+void show_bulldoze_confirm(InteractivePlayer& player,
+                           Widelands::Building& building,
+                           Widelands::PlayerImmovable* todestroy = nullptr);
 
-void show_dismantle_confirm
-	(InteractivePlayer & player,
-	 Widelands::Building & building);
+void show_dismantle_confirm(InteractivePlayer& player, Widelands::Building& building);
 
-void show_enhance_confirm
-	(InteractivePlayer & player,
-	 Widelands::Building & building,
-	 const Widelands::DescriptionIndex & id);
+void show_enhance_confirm(InteractivePlayer& player,
+                          Widelands::Building& building,
+                          const Widelands::DescriptionIndex& id,
+                          bool constructionsite = false);
 
 // Ship confirm windows
-void show_ship_sink_confirm
-	(InteractivePlayer & player,
-	 Widelands::Ship & ship);
+void show_ship_sink_confirm(InteractivePlayer& player, Widelands::Ship& ship);
 
-void show_ship_cancel_expedition_confirm
-	(InteractivePlayer & player,
-	 Widelands::Ship & ship);
+void show_ship_cancel_expedition_confirm(InteractivePlayer& player, Widelands::Ship& ship);
+
+// Diplomacy confirm windows
+void show_resign_confirm(InteractivePlayer& player);
 
 #endif  // end of include guard: WL_WUI_ACTIONCONFIRM_H

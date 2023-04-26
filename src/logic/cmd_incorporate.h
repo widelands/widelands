@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -26,22 +25,25 @@
 namespace Widelands {
 
 struct CmdIncorporate : public GameLogicCommand {
-	CmdIncorporate() : GameLogicCommand(0), worker(nullptr) {} // For savegame loading
-	CmdIncorporate (uint32_t const t, Worker * const w)
-		: GameLogicCommand(t), worker(w)
-	{}
+	CmdIncorporate() : GameLogicCommand(Time(0)) {
+	}  // For savegame loading
+	CmdIncorporate(const Time& t, Worker* const w) : GameLogicCommand(t), worker(w) {
+	}
 
-	void execute (Game & game) override {worker->incorporate(game);}
+	void execute(Game& game) override {
+		worker->incorporate(game);
+	}
 
-	void write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
-	void read (FileRead  &, EditorGameBase &, MapObjectLoader &) override;
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {return QueueCommandTypes::kIncorporate;}
+	[[nodiscard]] QueueCommandTypes id() const override {
+		return QueueCommandTypes::kIncorporate;
+	}
 
 private:
-	Worker * worker;
+	Worker* worker{nullptr};
 };
-
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_CMD_INCORPORATE_H

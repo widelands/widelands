@@ -1,21 +1,24 @@
+push_textdomain("world")
+
 dirname = path.dirname(__file__)
 
-world:new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "deadtree5",
-   descname = _ "Dead Tree",
-   editor_category = "trees_dead",
+   descname = _("Dead Tree"),
    size = "none",
-   attributes = {},
    programs = {
-      program = {
-        "animate=idle 20000",
-       "remove=12"
+      main = {
+         "animate=idle duration:20s",
+         "remove=chance:4.69%"
       }
    },
+   animation_directory = dirname,
+   icon = dirname .. "menu.png",
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle.png"),
          hotspot = { 27, 56 },
       },
    }
 }
+
+pop_textdomain()

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -24,31 +23,27 @@
 #include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
-#include "scripting/logic.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
 
-void CmdLuaScript::execute (Game & game) {
-	log("Trying to run: %s: ", script_.c_str());
+void CmdLuaScript::execute(Game& game) {
+	verb_log_info("Trying to run %s", script_.c_str());
 	try {
 		game.lua().run_script(script_);
-	} catch (LuaScriptNotExistingError &) {
+	} catch (LuaScriptNotExistingError&) {
 		// The script has not been found.
-		log("not found.\n");
+		log_err("Script %s not found.", script_.c_str());
 		return;
-	} catch (LuaError & e) {
+	} catch (LuaError& e) {
 		throw GameDataError("lua: %s", e.what());
 	}
-	log("done\n");
-	return;
+	verb_log_info("Done running %s.", script_.c_str());
 }
 
 constexpr uint16_t kCurrentPacketVersion = 1;
 
-void CmdLuaScript::read
-	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
-{
+void CmdLuaScript::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
@@ -57,17 +52,14 @@ void CmdLuaScript::read
 		} else {
 			throw UnhandledVersionError("CmdLuaScript", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const WException & e) {
+	} catch (const WException& e) {
 		throw GameDataError("lua: %s", e.what());
 	}
 }
-void CmdLuaScript::write
-	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
-{
+void CmdLuaScript::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersion);
 	GameLogicCommand::write(fw, egbase, mos);
 
 	fw.string(script_);
 }
-
-}
+}  // namespace Widelands

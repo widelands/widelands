@@ -1,0 +1,9 @@
+Other Scripts
+=============
+
+The help files for the editor that describe the world entities are located in ``data/scripting/editor``.
+
+.. toctree::
+   :maxdepth: 3
+
+REPLACE_ME

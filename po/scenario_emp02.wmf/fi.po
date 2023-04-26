@@ -1,16 +1,20 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
+# Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2021
+# Atte Timonen, 2022
 # GunChleoc, 2014
+# Jukka Pakarinen, 2016-2020
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
+# Teppo Mäenpää <teppo@runbox.com>, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-11-28 11:19+0000\n"
-"PO-Revision-Date: 2015-11-28 11:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"PO-Revision-Date: 2015-02-03 14:45+0000\n"
+"Last-Translator: Atte Timonen, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,161 +22,171 @@ msgstr ""
 "Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:28
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:25
 msgid "Build up a wood economy"
 msgstr "Rakenna puutalous"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:30
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:27
 msgid "Wood Economy"
-msgstr ""
+msgstr "Puutalous"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:31
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:28
 msgid "Build three lumberjack’s houses, a forester’s house and a sawmill."
-msgstr "Rakenna kolme puunhakkaajan mökkiä, puunistuttajan mökki ja saha."
+msgstr "Rakenna kolme puunhakkaajan mökkiä, metsänhoitajan mökki ja saha."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:37
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:34
 msgid "Build a quarry"
 msgstr "Rakenna kivilouhos"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:39
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:36
 msgid "Quarry"
 msgstr "Kivilouhos"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:40
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:37
 msgid "Build a quarry to the south of your headquarters."
 msgstr "Rakenna kivilouhos päämajasi eteläpuolelle."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:46
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:43
 msgid "Protect your colony"
 msgstr "Suojaa yhdyskuntasi"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:48
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:45
 msgid "Protect Your Colony"
 msgstr "Suojaa yhdyskuntasi"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:49
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:46
 msgid "Build some blockhouses and sentries around the colony."
-msgstr ""
+msgstr "Rakenna muutamia vahtitupia ja vartiopaikkoja yhdyskunnan ympärille."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:55
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:52
 msgid "Start mining marble"
-msgstr "Ala louhia marmoria"
+msgstr "Aloita marmorin louhinta"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:57
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:54
 msgid "Marble"
 msgstr "Marmori"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:58
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:55
 msgid "Expand to the east, to start mining marble from the mountain."
-msgstr "Laajenna valtakuntaasi itään, ja ala louhia marmoria vuoresta."
+msgstr "Laajenna valtakuntaasi itään, ja aloita marmorin louhiminen vuorelta."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:64
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:61
 msgid "Build a stonemason’s house and mining infrastructure"
-msgstr ""
+msgstr "Rakenna marmoriveistämö ja kaivosalan tuotantoketju"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:66
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:63
 msgid "Stonemason’s house and Mining Infrastructure"
-msgstr ""
+msgstr "Marmoriveistämö ja kaivosalan tuotantoketju"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:67
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:64
 msgid ""
 "Build a stonemason’s house and then a complete mining and production "
-"infrastructure (coal mine and / or charcoal kiln, iron ore mine, toolsmithy,"
-" weapon smithy, armor smithy and smelting works)."
-msgstr ""
+"infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, "
+"weapon smithy, armor smithy and smelting works)."
+msgstr "Rakenna marmoriveistämö ja sitten kokonainen kaivos- ja tuotantoinfrastuktuuri (hiilikaivos ja / tai miilu, rautakaivos, työkalupaja, asepaja, haarniskapaja ja sulattamo)."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:73
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:70
 msgid "Provide your miners with food"
 msgstr "Tuota ruokaa kaivostyöläisillesi"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:75
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:72
 msgid "Food For Your Miners"
-msgstr "Ruokaa kaivostyöntekijöille"
+msgstr "Ruokaa Kaivostyöntekijöillesi"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:76
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:73
+msgid "Build a tavern to produce some food to sustain our miners."
+msgstr "Rakenna krouvi tuottaaksesi kaivostyöläisillemme ruokaa."
+
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:74
 msgid ""
-"To produce some sustaining food for our miners, we could build up a tavern. "
-"To supply them with some good and strong drinks, we could build up a brewery"
-" and a winery."
-msgstr "Kaivostyöläisten kunnollista ruokkimista varten voisi rakentaa krouvin. Panimosta ja viinikellarista taas saisi palan painikkeeksi hyvää ja vahvistavaa juomaa."
+"Of course this means you will need more resources for preparing this food – "
+"like fish, meat or bread."
+msgstr "Se tietenkin tarkoittaa, että tarvitset lisää resursseja valmistaaksesi ruokia – kuten kalaa, lihaa tai leipää."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:77
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:75
 msgid ""
-"Of course this means we will need more resources for preparing this food – "
-"like fish, meat or bread. To provide these foodstuffs, you would have to "
-"build a fisher’s house, a farm, a mill and a bakery."
-msgstr ""
+"To provide these foodstuffs, you can build a fisher’s house, a hunter’s "
+"house, a farm, a mill and a bakery."
+msgstr "Tarjotaksesi näitä ruokia voit rakentaa kalastajatorpan, maatilan, myllyn ja leipomon."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:78
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:76
 msgid ""
-"Maybe you will also need a hunter’s house, a piggery, a vineyard and some "
-"wells."
-msgstr ""
+"Build a brewery and a winery to supply the miners with some good and strong "
+"drinks."
+msgstr "Rakenna panimo ja viinikellari toimittaaksesi kaivostyöläisille hyvää ja vahvaa juotavaa."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:79
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:77
+msgid "Maybe you will also need a piggery, a vineyard and some wells."
+msgstr "Ehkäpä tarvitset myös sikalan, viinitarhan ja joitakin kaivoja."
+
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:78
 msgid ""
-"It’s up to you what you want to build. But remember – coal and iron ore "
-"mines need beer, marble and gold mines need wine and all mines need at least"
-" rations, which are produced out of bread OR meat OR fish."
-msgstr ""
+"It’s up to you what you want to build. But remember – coal and iron mines "
+"need beer, marble and gold mines need wine and all mines need at least "
+"rations, which are produced out of bread OR meat OR fish."
+msgstr "Se on sinusta kiinni mitä haluat rakentaa. Mutta muista – hiili- ja rautakaivokset tarvitsevat olutta, marmori- ja kultakaivokset tarvitsevat viiniä ja kaikki kaivokset tarvitsevat vähintäänkin ruoka-annoksia, joita tuotetaan leivästä TAI lihasta TAI kalasta."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:85
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:84
 msgid "Protect your eastern frontier"
 msgstr "Suojele itärajaasi"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:87
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:86
 msgid "Protect Your Eastern Frontier"
 msgstr "Suojele itärajaasi"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:88
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:87
 msgid ""
-"Build up stronger military buildings, such as an outpost, a barrier or a "
-"tower, on the eastern frontier."
-msgstr "Rakenna itärajallesi kestävämpiä sotilasrakennuksia, kuten etuvartioasema rajalinnake tai torni."
+"Build stronger military buildings, such as an outpost, a barrier or a tower,"
+" on the eastern frontier."
+msgstr "Rakenna itärajalle kestävämpiä sotilasrakennuksia, kuten etuvartioasema, rajalinnake tai torni."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:89
-msgid "To watch deep inside the enemy territory, build a tower."
-msgstr "Rakenna torneja nähdäksesi syvälle vihollisen alueelle."
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:88
+msgid "Build a tower to watch deep inside the enemy territory."
+msgstr "Rakenna torni, jotta näet syvälle vihollisen alueelle."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:95
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:94
 msgid "Destroy the Barbarian tribe"
-msgstr ""
+msgstr "Tuhoa Barbaariheimo"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:97
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:96
 msgid "Destroy the Barbarian Tribe"
 msgstr "Tuhoa barbaariheimo"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:98
-msgid ""
-"As soon as you have enough soldiers, attack and completely destroy the "
-"Barbarian buildings."
-msgstr ""
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:97
+msgid "Build a barracks to start training soldiers."
+msgstr "Rakenna kasarmi koluttaaksesi sotilaita."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:99
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:98
 msgid ""
-"Finally, build up a fortress on the peninsula (near where the Barbarian "
-"headquarters stood before), to avoid new settlements of other tribes in that"
-" region."
-msgstr ""
+"Attack and completely destroy the Barbarian buildings as soon as you have "
+"enough soldiers."
+msgstr "Hyökkää ja tuhoa Barbaarien rakennukset täysin heti, kun sinulla on riittävästi sotilaita."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:107
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:99
+msgid ""
+"Build a fortress on the peninsula (near where the Barbarian headquarters "
+"stood before). Finally, this will avoid new settlements of other tribes in "
+"that region."
+msgstr "Rakenna linnoitus niemen kärkeen (lähelle paikkaa, jossa barbaarien päämaja oli). Se estää toisien heimojen siirtokuntien tulon tuolle alueelle."
+
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:107
 msgid "A New Island"
 msgstr "Uusi saari"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:109
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:120
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:135
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:147
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:155
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:230
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:248
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:257
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:277
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:109
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:120
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:135
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:147
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:155
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:235
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:253
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:262
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:283
 msgid "Diary of Lutius"
 msgstr "Lutiuksen päiväkirja"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:111
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:111
 msgid ""
 "Finally! This island appears to have been made for us, it is a gift from the"
 " Gods to my people and myself. Until now, we have only seen a small part of "
@@ -181,19 +195,19 @@ msgid ""
 msgstr "Viimeinkin! Tämä saari on kuin luotu meille, lahja jumalilta minulle ja väelleni. Tähän mennessä olemme nähneet vain pienen osan tästä saaresta, mutta tämäkin osa riittää kirkastamaan mieleni. Tuntuu kuin olisimme löytäneet mittaamattoman arvokkaan aarteen, paratiisinomaisen maan."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:114
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:114
 msgid ""
 "On this island, we will start our new life. We will build up an outpost for "
 "our exile, which perhaps will become a new, beautiful home for every one of "
 "us."
-msgstr "Tällä saarella aloitamme uuden elämämme. Rakennamme rajalinnoituksen maanpaollemme, josta kasvaa kenties uusi, kaunis koti meille kaikille."
+msgstr "Tällä saarella aloitamme uuden elämämme. Rakennamme etuvartioaseman maanpaollemme, josta kasvaa kenties uusi, kaunis koti meille kaikille."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:118
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:118
 msgid "The Green Forests"
 msgstr "Vihreät metsät"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:122
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:122
 msgid ""
 "As Saledus and I walked through these wonderful forests in the north, we "
 "felt that our future had just begun. This land is so peaceful, good and "
@@ -201,316 +215,305 @@ msgid ""
 msgstr "Kulkiessamme näissä ihmeellisissä pohjoisen metsissä Saledus ja minä tunsimme, että tulevaisuutemme on vasta alkanut. Tämä maa on niin rauhallista, hyvää ja kaunista, että voisin asua täällä päivieni loppuun."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:125
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:125
 msgid ""
 "But until that day, many years may pass! For now, we must concentrate on the"
 " present, and build a few lumberjack’s houses and a sawmill to produce some "
 "basic building materials."
-msgstr ""
+msgstr "Ennen sitä päivää on edessä vielä monia vuosia! Juuri nyt meidän täytyy keskittyä nykyhetkeen ja rakentaa muutama puunhakkaajan mökki ja saha tuottamaan joitakin perusrakennusmateriaaleja."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:128
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:128
 msgid ""
 "But we mustn’t forget to preserve this natural bounty. These forests should "
 "last forever, so we really have to build a forester’s house too."
-msgstr ""
+msgstr "Meidän ei myöskään tule unohtaa suojella tätä luonnon aarreaittaa. Näiden metsien pitäisi kestää ikuisesti, joten meidän tosiaankin täytyy rakentaa myös metsänhoitajan mökki."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:133
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:133
 msgid "The Rocks"
 msgstr "Kivikko"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:137
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:137
 msgid ""
 "Later, I walked down to the rocks in the south and looked for a place where "
 "we could build a quarry to get some granite for our larger buildings."
-msgstr ""
+msgstr "Myöhemmin kävelin alas eteläiselle kivikolle ja etsiskelin paikkaa, jonne me voisimme rakentaa kivilouhoksen saadaksemme jonkin verran graniittia suuriin rakennuksiimme."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:140
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:140
 msgid ""
 "Again, I felt like I was in paradise when I noticed that some marble-like "
 "stones were among the rocks. It seems that we will soon be able to build "
 "strong, luxurious buildings, like those we were accustomed to in Fremil."
 msgstr "Tunsin jälleen olevani paratiisissa huomatessani lohkareiden seassa marmoria muistuttavaa kiveä. Näyttää siltä, että voimme piankin rakentaa kestäviä, ylellisiä rakennuksia, sellaisia kuin mihin olemme Fremilissä tottuneet."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:145
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:145
 msgid "Wood for the Colony"
 msgstr "Puuta yhdyskunnalle"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:149
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:149
 msgid ""
 "Good news! Today our wood economy was completed. Now we can be sure that we "
 "will have enough wood for our future building projects."
-msgstr "Hyviä uutisia! Tänään puutaloutemme on käynnistetty. Nyt voimme olla varmoja siitä, että meillä on riittävästi puuta tuleville rakennusprojekteillemme."
+msgstr "Hyviä uutisia! Puutaloutemme on nyt käynnistetty. Voimme olla varmoja, että meillä on riittävästi puuta tuleville rakennusprojekteillemme."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:153
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:153
 msgid "Stones for the Colony"
-msgstr ""
+msgstr "Kiviä Yhdyskunnalle"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:157
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:157
 msgid ""
 "Great! Today the building of the quarry was completed. Now we will get "
 "enough granite and marble to construct larger buildings."
-msgstr ""
+msgstr "Loistavaa! Tänään kivilouhoksen rakentaminen valmistui. Nyt saamme riittävästi graniittia ja marmoria suurempien rakennuksien rakenteisiin."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:161
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:161
 msgid "Dangerous Ship Parts"
 msgstr "Vaarallisia laivan palasia"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:163
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:164
 msgid "Saledus looks unhappy"
 msgstr "Saledus näyttää harmistuneelta"
 
 #. TRANSLATORS: Saledus
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:165
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:166
 msgid ""
 "Sire, I don’t want to start a panic, but I found something which gives me a "
 "sinking feeling in my stomach and spreads waves of fear in my heart. As I "
 "walked down to the southern shore, I found the remains of another ship. I "
 "don’t know whether these parts are all that is left of that ship. In any "
 "case, these parts do not seem to be old."
-msgstr ""
+msgstr "Herra, en halua lietsoa paniikkia, mutta löysin jotakin, mikä tekee minun vatsaani kummallisen tunteen ja leviää pelonaaltoina sydämeeni. Kun kävelin kohti eteläistä rantaa, löysin toisen laivan jäänteet. En tiedä ovatko ne osat kaikki mitä laivasta on jäljellä. Joka tapauksessa, ne osat eivät näytä olevan kovin vanhoja."
 
 #. TRANSLATORS: Saledus
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:168
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:169
 msgid ""
 "Perhaps the people aboard that ship were caught in the same storm which "
 "brought us to Malac’ Mor – and were brought to this island."
-msgstr ""
+msgstr "Ehkäpä ihmiset tuolla laivalla joutuivat saman myrskyn riepottelemiksi kuin mikä toi meidät Malac’ Moriin – ja toi tälle saarelle."
 
 #. TRANSLATORS: Saledus
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:171
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:172
 msgid ""
 "I beg you to be cautious and to build some blockhouses or sentries around "
 "our colony."
-msgstr ""
+msgstr "Pyydän sinua olemaan varovainen ja rakentamaan joitakin vahtitupia tai vartiomökkejä yhdyskuntaamme."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:176
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:179
 msgid "Marble on the Mountain"
 msgstr "Marmoria vuorella"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:177
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:180
 msgid "Saledus smiles"
 msgstr "Saledus hymyilee"
 
 #. TRANSLATORS: Saledus
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:179
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:182
 msgid ""
 "Sire, I’ve got good news for you: As I walked to the east, I found a larger "
 "mountain. I am not absolutely sure – a geologist should check if I am right "
 "– but I believe we could mine marble from some places on the mountain."
-msgstr ""
+msgstr "Herra, minulla on teille hyviä uutisia: Kun kävelin itään, löysin suuren vuoren. En ole aivan varma – geologin pitäisi tarkistaa olenko oikeassa – mutta uskon meidän voivan kaivaa marmoria joistakin kohdista vuorella."
 
 #. TRANSLATORS: Saledus
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:182
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:185
 msgid ""
 "It would be a good source for bolstering our supply of quality marble, "
 "beyond the meager quantities available from the quarry. Perhaps you were "
 "right when you said that this island was like paradise."
-msgstr "Se olisi hyvä tapa kohentaa laadukkaan marmorin varastojame - kivilouhokselta sitä saadaan verrattain vähän. Ehkäpä olit oikeassa kutsuessasi tätä saarta paratiisiksi."
+msgstr "Se olisi hyvä tapa kohentaa laadukkaan marmorin varastojamme - kivilouhokselta sitä saadaan verrattain vähän. Ehkäpä olit oikeassa kutsuessasi tätä saarta paratiisiksi."
 
 #. TRANSLATORS: Saledus
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:185
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:188
 msgid "Please, expand to that mountain and start mining marble."
-msgstr ""
+msgstr "Olkaa hyvä, laajentakaa tuolle vuorelle ja aloittakaa marmorin louhinta."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:190
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:195
 msgid "Further Mountains"
 msgstr "Lisää vuoria"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:191
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:196
 msgid "Saledus is excited"
-msgstr ""
+msgstr "Saledus innostuu"
 
 #. TRANSLATORS: Saledus
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:193
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:198
 msgid ""
 "By the Gods, this is an unbelievable stroke of fortune! There are two more "
 "mountains, and it seems that one has a large quantity of coal and the other "
-"of iron ore. I advise you to immediately build iron ore and coal mines (or "
-"at least charcoal kilns), smelting works, toolsmithies, armor and weapon "
+"of iron ore. I advise you to immediately build iron and coal mines (or at "
+"least charcoal kilns), smelting works, toolsmithies, armor and weapon "
 "smithies."
-msgstr ""
+msgstr "Tämä on uskomaton onnenkantamoinen suoraan jumalilta! Tuolla on kaksi muuta vuorta lisää ja näyttää siltä, että toisessa on suuri määrä hiiltä ja toisessa rautamalmia. Neuvon sinua rakentamaan viipymättä rauta- ja hiilikaivoksia (tai vähintäänkin miiluja), sulattamoita, työkalupajoja sekä haarniska- ja asepajoja."
 
 #. TRANSLATORS: Saledus
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:196
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:201
 msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
 "building materials. So you have to build a house for the stonemason, who "
 "will cut columns from marble."
-msgstr ""
+msgstr "Tosin näitä suurempia rakennuksia varten tarvitsemme parempia ja jalompia rakennusmateriaaleja. Joten sinun täytyy rakentaa talo kivenhakkaajalle, joka tulee leikkaamaan marmorista pylväitä."
 
 #. TRANSLATORS: Saledus
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:199
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:204
 msgid "After everything, we can now begin to live like we did in Fremil."
-msgstr "Voimme vihdoin alkaa elää kuin Fremilissä."
+msgstr "Voimme vihdoin elää kuin Fremilissä."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:204
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:209
 msgid "Food for the Miners"
-msgstr ""
+msgstr "Ruokaa Kaivostyöntekijöille"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:205
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:210
 msgid "Amalea enters…"
-msgstr ""
+msgstr "Amalea saapuu…"
 
 #. TRANSLATORS: Amalea
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:207
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:212
 msgid "Lutius, don’t you think you forgot something important?"
-msgstr ""
+msgstr "Lutius, mitä luulet, oletko unohtanut jotain tärkeää?"
 
 #. TRANSLATORS: Amalea
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:210
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:215
 msgid ""
-"It’s nice, and of course a good idea, to build up mines, which will give us "
-"a more comfortable life, but the people working in the mines are unhappy "
-"with the current situation. They have to do hard work and have no time for "
-"making their own food."
+"It’s nice, and of course a good idea, to build mines, which will give us a "
+"more comfortable life, but the people working in the mines are unhappy with "
+"the current situation. They have to do hard work and have no time for making"
+" their own food."
 msgstr "On toki mukavaa ja hyvä idea rakennella kaivoksia, jotka mahdollistavat erinäisiä elämän mukavuuksia, mutta kaivostyöläiset nurisevat työoloistaan. Heidän täytyy raataa selkä vääränä , eivätkä he ehdi kokkaamaan."
 
 #. TRANSLATORS: Amalea
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:213
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:218
 msgid ""
 "What do you think about helping them out? I can’t tell you what we need "
 "exactly… but here are my recommendations:"
-msgstr ""
+msgstr "Mitä mieltä olet heidän auttamisesta? En osaa sanoa tarkasti mitä tarvitsemme… mutta tässä on ehdotukseni:"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:218
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:223
 msgid "Our New Tavern"
 msgstr "Uusi krouvimme"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:219
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:224
 msgid "Amalea smiles"
 msgstr "Amalea hymyilee"
 
 #. TRANSLATORS: Amalea
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:221
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:226
 msgid ""
 "I just visited our new tavern ‘At the palms’. The beer they serve is really "
 "tasty. You really should have a drink there, too."
-msgstr ""
+msgstr "Vierailin juuri uudessa krouvissamme ‘Palmujen alla’. Siellä tarjoiltu olut on todella maukasta. Sinun todellakin pitäisi käväistä siellä olusella."
 
 #. TRANSLATORS: Amalea
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:224
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:229
 msgid ""
 "It is good to see that we have now got a warmer and more familiar "
 "environment on our island. Thank you, Lutius."
 msgstr "On mukava nähdä, kuinka saarellamme on nyt lämpimämpi ja tuttavallisempi ilmapiiri. Kiitos, Lutius."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:228
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:233
 msgid "The Barbarians"
 msgstr "Barbaarit"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:232
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:237
 msgid ""
 "By the Gods! This is absolutely terrible. It seems as if we stand close to a"
 " test – and it seems as if Saledus was right with his fear concerning the "
 "shipwreck he found."
-msgstr ""
+msgstr "Jumalat sentään! Tämä on aivan kauheaa. Näyttää siltä, että olemme lähellä koettelemusta – ja vaikuttaa, että Saledus oli oikeassa löydettyä laivahylkyä koskevan pelkonsa kanssa."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:235
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:240
 msgid ""
 "Today, as I walked down to the eastern shore, I got a shock. I caught sight "
 "of one of those hated, evil, Barbarian tribes with whom we have had so many "
 "problems before."
-msgstr ""
+msgstr "Tänään järkytyin kävellessäni kohti etäistä rantaa. Silmiini osui yksi noista vihatuista, pahoista, barbaariheimoista joiden kanssa meillä on ollut ongelmia niin monta kertaa aiemmin."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:238
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:243
 msgid ""
 "At first, I was naive and hoped that they were peaceful, but as soon as one "
 "of them saw me, they charged towards me and started attacking me with their "
 "throwing spears. Thanks be to the Gods that I was able to flee and hide "
 "myself, before retreating back to our colony under cover of darkness."
-msgstr ""
+msgstr "Ensin olin naiivi ja toivoin, että he olisivat rauhanomaisia. Mutta yhden heistä nähtyä minut he ryntäsivät kohti ja alkoivat hyökätä heittelemällä keihäitä. Jumalille kiitos, onnistuin pakenemaan ja piiloutumaan ennen vetäytymistä pimeyden turvin takaisin yhdyskuntaamme."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:241
-msgid ""
-"Anyway, we must build up stronger military buildings as soon as possible."
-msgstr ""
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:246
+msgid "Anyway, we must build stronger military buildings as soon as possible."
+msgstr "Joka tapauksessa, meidän täytyy rakentaa vahvempia sotarakennuksia niin pian kuin mahdollista."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:246
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:251
 msgid "Command to Attack"
 msgstr "Hyökkäyskäsky"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:250
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:255
 msgid ""
-"That’s good. The first large military building is complete and the mining "
+"That’s good. The first big military building is complete and the mining "
 "infrastructure is getting better and better. Now we should think about "
 "preparing ourselves for battle."
-msgstr "Hyvä, ensimmäinen suuri sotilasrakennus on valmis ja kaivosinfrastruktuuri sen kun paranee. Nyt meidän pitää valmistautua taisteluun."
+msgstr "Hyvä, ensimmäinen suuri sotilasrakennus on valmis ja kaivosinfrastruktuuri sen kun paranee. Nyt meidän tulisi valmistautua taisteluun."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:255
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:263
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:260
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:289
 msgid "Victory"
 msgstr "Voitto"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:259
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:264
 msgid ""
 "Today is a proud day. We have fought for our new home and risen victorious."
 msgstr "Tänään on juhlan päivä. Olemme puolustaneet kotejamme voittoisasti."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:262
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:267
 msgid ""
 "There are still a few Barbarians hiding on our island, but I am sure that we"
 " will find them soon. Every Barbarian who doesn’t attack us will be put in a"
 " boat with the other peaceful ones, and sent back to their country."
-msgstr ""
+msgstr "Tuolla jossain päin saartamme on vielä muutamia barbaareja piilossa, mutta olen varma, että löydämme heidät pian. Jokainen barbaari joka ei käy kimppuumme laitetaan muiden rauhanomaisten kanssa veneeseen ja lähetetään takaisin omaan maahansa."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:264
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:269
 msgid ""
-"You have established a working economy, trained new soldiers and driven the "
-"Barbarians from the island."
-msgstr ""
+"We have established a working economy, trained new soldiers and driven the "
+"Barbarians from the island. Now we can think about our next steps."
+msgstr "Olemme luoneet toimivan talouden, kouluttaneet uusia sotilaita ja häätäneet Barbaarit pois saarelta. Nyt voimme miettiä seuraavia askeliamme."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:268
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:273
 msgid "As Time is Running By"
 msgstr "Kun aika rientää"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:271
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:276
 msgid "7 days later…"
-msgstr ""
+msgstr "7 päivää myöhemmin…"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:275
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:280
 msgid "A Message"
 msgstr "Viesti"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:279
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:285
 msgid ""
 "Today a pigeon landed on our island. It brought a message which fills me "
 "with dark thoughts and brings back my fears."
 msgstr "Tänään viestikyyhky laskeutui saarellemme. Se kantoi mukanaan viestiä, joka ajaa minut synkeisiin aatoksiin ja täyttää sieluni pelolla."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:282
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:288
 msgid ""
 "The message was addressed to me, begging me to come back to Fremil. It says "
 "that the Empire is at war with the Barbarians. They were attacked from the "
 "north by the tribe that I was forbidden to attack. It is clear to me what I "
 "must do…"
-msgstr ""
+msgstr "Viesti oli osoitettu minulle, anellen pyytävät minua palaamaan takaisin Fremiliin. Siinä kerrotaan, että Keisarikunta on sodassa Barbaareja vastaan. Sama heimo jota vastaan minua oli kielletty hyökkäämästä oli hyökännyt pohjoisesta. On selvää mitä minun täytyy tehdä…"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:284
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:290
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr "Olet selviytynyt tästä komennuksesta. Voit jatkaa pelaamista halutessasi, tai siirtyä seuraavaan komennukseen."
-
-#: ../../scripting/format_scenario.lua:36
-msgid "“%s”"
-msgstr ""
-
-#: ../../scripting/format_scenario.lua:146
-msgid "New Objective"
-msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""

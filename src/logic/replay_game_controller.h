@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 by the Widelands Development Team
+ * Copyright (C) 2015-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -26,37 +25,43 @@
 #include "logic/game_controller.h"
 
 namespace Widelands {
-	class ReplayReader;
-}
+class ReplayReader;
+}  // namespace Widelands
 
 class ReplayGameController : public GameController {
 public:
-	ReplayGameController(Widelands::Game & game, const std::string & filename);
+	explicit ReplayGameController(Widelands::Game& game);
 
 	void think() override;
 
-	void send_player_command(Widelands::PlayerCommand &) override;
-	int32_t get_frametime() override;
+	void send_player_command(Widelands::PlayerCommand* command) override;
+	Duration get_frametime() override;
 	GameController::GameType get_game_type() override;
 	uint32_t real_speed() override;
 	uint32_t desired_speed() override;
-	void set_desired_speed(uint32_t const speed) override;
+	void set_desired_speed(uint32_t speed) override;
 	bool is_paused() override;
-	void set_paused(bool const paused) override;
+	void set_paused(bool paused) override;
+	void
+	report_result(uint8_t p_nr, Widelands::PlayerEndResult result, const std::string& info) override;
+	void set_write_replay(bool /* replay */) override {
+		NEVER_HERE();
+	}
 
 private:
 	struct CmdReplayEnd : public Widelands::Command {
-		CmdReplayEnd (uint32_t const init_duetime) : Widelands::Command(init_duetime) {}
-		virtual void execute (Widelands::Game & game);
-		virtual Widelands::QueueCommandTypes id() const;
+		explicit CmdReplayEnd(const Time& init_duetime) : Widelands::Command(init_duetime) {
+		}
+		void execute(Widelands::Game& game) override;
+		[[nodiscard]] Widelands::QueueCommandTypes id() const override;
 	};
 
-	Widelands::Game & game_;
+	Widelands::Game& game_;
 	std::unique_ptr<Widelands::ReplayReader> replayreader_;
 	int32_t lastframe_;
-	int32_t time_;
-	uint32_t speed_;
-	bool paused_;
+	Time time_;
+	uint32_t speed_{1000};
+	bool paused_{false};
 };
 
 #endif  // end of include guard: WL_LOGIC_REPLAY_GAME_CONTROLLER_H

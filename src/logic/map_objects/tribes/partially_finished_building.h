@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,20 +12,22 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_PARTIALLY_FINISHED_BUILDING_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_PARTIALLY_FINISHED_BUILDING_H
 
+#include "economy/wares_queue.h"
 #include "logic/map_objects/tribes/building.h"
 
-namespace Widelands {
+namespace LuaMaps {
+class LuaConstructionSite;
+class LuaDismantleSite;
+}  // namespace LuaMaps
 
-class Request;
-class WaresQueue;
+namespace Widelands {
 
 /*
 PartiallyFinishedBuilding
@@ -37,47 +39,68 @@ dismantlesites.
 class PartiallyFinishedBuilding : public Building {
 	friend class MapBuildingdataPacket;
 	friend struct MapBuildingPacket;
+	friend class LuaMaps::LuaConstructionSite;
+	friend class LuaMaps::LuaDismantleSite;
 
 public:
-	PartiallyFinishedBuilding(const BuildingDescr & building_descr);
+	explicit PartiallyFinishedBuilding(const BuildingDescr& gdescr);
 
-	virtual void set_building         (const BuildingDescr &);
+	virtual void set_building(const BuildingDescr&);
 
 	int32_t get_size() const override;
 	uint32_t get_playercaps() const override;
 	const Image* representative_image() const override;
-	void cleanup(EditorGameBase &) override;
-	void init   (EditorGameBase &) override;
-	void set_economy(Economy *) override;
+	void cleanup(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
+	void set_economy(Economy*, WareWorker) override;
 
-	uint32_t get_nrwaresqueues() {return wares_.size();}
-	WaresQueue * get_waresqueue(uint32_t const idx) {return wares_[idx];}
+	uint32_t nr_consume_waresqueues() {
+		return consume_wares_.size();
+	}
+	WaresQueue* get_consume_waresqueue(uint32_t const idx) {
+		return consume_wares_[idx];
+	}
+	uint32_t nr_dropout_waresqueues() {
+		return dropout_wares_.size();
+	}
+	WaresQueue* get_dropout_waresqueue(uint32_t const idx) {
+		return dropout_wares_[idx];
+	}
+
+	const BuildingDescr* get_building() const {
+		return building_;
+	}
 
 	uint32_t get_built_per64k() const;
-	Request * get_builder_request() {return builder_request_;}
-	static void request_builder_callback(Game &, Request &, DescriptionIndex, Worker *, PlayerImmovable &);
+	Request* get_builder_request() {
+		return builder_request_;
+	}
+	static void
+	request_builder_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
+
+	void add_worker(Worker&) override;
 
 private:
-	void request_builder(Game &);
+	void request_builder(Game&);
 
-
-	virtual uint32_t build_step_time() const = 0;
+	virtual const Duration& build_step_time() const = 0;
 
 protected:
-	const BuildingDescr * building_; // type of building that was or will become
+	const BuildingDescr* building_{nullptr};  // type of building that was or will become
 
-	Request * builder_request_;
+	Request* builder_request_{nullptr};
 	OPtr<Worker> builder_;
 
-	using Wares = std::vector<WaresQueue *>;
-	Wares wares_;
+	using Wares = std::vector<WaresQueue*>;
+	Wares consume_wares_;  // wares to consume (constructionsites) or to painstakingly recover
+	                       // (dismantlesites)
+	Wares dropout_wares_;  // additional items to drop out immediately
 
-	bool     working_;        // true if the builder is currently working
-	uint32_t work_steptime_;  // time when next step is completed
-	uint32_t work_completed_; // how many steps have we done so far?
-	uint32_t work_steps_;     // how many steps (= wares) until we're done?
+	bool working_{false};          // true if the builder is currently working
+	Time work_steptime_{0U};       // time when next step is completed
+	uint32_t work_completed_{0U};  // how many steps have we done so far?
+	uint32_t work_steps_{0U};      // how many steps (= wares) until we're done?
 };
-
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_PARTIALLY_FINISHED_BUILDING_H

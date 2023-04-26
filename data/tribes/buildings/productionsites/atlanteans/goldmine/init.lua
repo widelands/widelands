@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
+wl.Descriptions():new_productionsite_type {
    name = "atlanteans_goldmine",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Gold Mine"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "mine",
 
@@ -19,23 +19,21 @@ tribes:new_productionsite_type {
       planks = 2
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 50, 56 },
+         hotspot = { 53, 61 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
-         hotspot = { 50, 56 },
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
+         hotspot = { 53, 61 },
       },
       empty = {
-         pictures = path.list_files(dirname .. "empty_??.png"),
-         hotspot = { 50, 56 },
+         hotspot = { 53, 61 },
       },
    },
 
    aihints = {
-      mines = "gold",
       prohibited_till = 1200
    },
 
@@ -44,39 +42,48 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      atlanteans_bread = 10,
-      smoked_fish = 10,
-      smoked_meat = 6
-   },
-   outputs = {
-      "gold_ore"
+      { name = "smoked_fish", amount = 10 },
+      { name = "smoked_meat", amount = 6 },
+      { name = "atlanteans_bread", amount = 10 }
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
-         descname = _"mining gold",
+         descname = _("mining gold"),
          actions = {
-            "sleep=45000",
             "return=skipped unless economy needs gold_ore",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "animate=working 20000",
-            "mine=gold 4 100 5 2",
+            "sleep=duration:39s",
+            "call=mine_produce",
+            "call=mine_produce",
+            "call=mine_produce",
+         }
+      },
+      mine_produce = {
+         descname = _("mining gold"),
+         actions = {
+            "animate=working duration:22s",
+            "mine=resource_gold radius:4 yield:100% when_empty:5%",
             "produce=gold_ore",
-            "animate=working 20000",
-            "mine=gold 4 100 5 2",
-            "produce=gold_ore",
-            "animate=working 20000",
-            "mine=gold 4 100 5 2",
-            "produce=gold_ore"
+         }
+      },
+      encyclopedia = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
+            "produce=gold_ore:3",
          }
       },
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Gold",
-      heading = _"Main Gold Vein Exhausted",
+      title = _("No Gold"),
+      heading = _("Main Gold Vein Exhausted"),
       message =
          pgettext("atlanteans_building", "This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

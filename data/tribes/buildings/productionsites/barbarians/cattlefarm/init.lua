@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
+wl.Descriptions():new_productionsite_type {
    name = "barbarians_cattlefarm",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Cattle Farm"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
 
@@ -19,19 +19,19 @@ tribes:new_productionsite_type {
       blackwood = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 57, 80 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
          hotspot = { 57, 80 },
       },
    },
 
    aihints = {
-      recruitment = true
+      prohibited_till = 610,
    },
 
    working_positions = {
@@ -39,25 +39,24 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      wheat = 8,
-      water = 8
-   },
-   outputs = {
-      "barbarians_ox"
+      { name = "water", amount = 8 },
+      { name = "wheat", amount = 8 }
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start rearing cattle because ...
-         descname = _"rearing cattle",
+         descname = pgettext("barbarians_building", "rearing cattle"),
          actions = {
-            "sleep=15000",
             "return=skipped unless economy needs barbarians_ox",
             "consume=wheat water",
-            "play_sound=sound/farm ox 192",
-            "animate=working 15000", -- Animation of feeding the cattle
+            "sleep=duration:15s",
+            "playsound=sound/farm/ox priority:50% allow_multiple",
+            "animate=working duration:15s", -- Animation of feeding the cattle
             "recruit=barbarians_ox"
          }
       },
    },
 }
+
+pop_textdomain()

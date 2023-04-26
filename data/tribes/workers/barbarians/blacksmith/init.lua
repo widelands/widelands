@@ -1,21 +1,12 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 6, 28 },
-   }
-}
-add_worker_animations(animations, "walk", dirname, "walk", {11, 24}, 15)
-add_worker_animations(animations, "walkload", dirname, "walk", {11, 24}, 15)
-
-
-tribes:new_worker_type {
-   msgctxt = "barbarians_worker",
+wl.Descriptions():new_worker_type {
    name = "barbarians_blacksmith",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Blacksmith"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -24,8 +15,25 @@ tribes:new_worker_type {
       hammer = 1
    },
 
-   experience = 24,
+   experience = 12,
    becomes = "barbarians_blacksmith_master",
 
-   animations = animations,
+   animations = {
+      idle = {
+         hotspot = { 6, 28 },
+      }
+   },
+   spritesheets = {
+      walk = {
+         fps = 15,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 11, 24 }
+      }
+      -- TODO(GunChleoc): Needs walkload animation
+   }
 }
+
+pop_textdomain()

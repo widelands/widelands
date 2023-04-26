@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
+wl.Descriptions():new_productionsite_type {
    name = "atlanteans_spiderfarm",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Spider Farm"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
 
@@ -19,19 +19,19 @@ tribes:new_productionsite_type {
       planks = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 87, 75 },
+         hotspot = { 86, 78 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
-         hotspot = { 87, 75 },
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
+         hotspot = { 86, 78 },
       }
    },
 
    aihints = {
-      forced_after = 450,
+      basic_amount = 1,
       prohibited_till = 350
    },
 
@@ -40,24 +40,23 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      corn = 7,
-      water = 7
-   },
-   outputs = {
-      "spider_silk"
+      { name = "water", amount = 7 },
+      { name = "corn", amount = 7 }
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
-            "sleep=25000",
             "return=skipped unless economy needs spider_silk",
             "consume=corn water",
-            "animate=working 30000",
+            "sleep=duration:25s",
+            "animate=working duration:30s",
             "produce=spider_silk"
          }
       },
    },
 }
+
+pop_textdomain()

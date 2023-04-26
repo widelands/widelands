@@ -1,0 +1,20 @@
+Description: compile with -g so that the dbg package contains something
+Forwarded-Upstream: n/a (upstream strips dbg symbols on purpose from  releases)
+
+---
+ CMakeLists.txt |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+Index: b/CMakeLists.txt
+===================================================================
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -95,7 +95,7 @@ endif (NOT CMAKE_BUILD_TYPE OR CMAKE_BUI
+ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+   set(WL_DEBUG_FLAGS "-g -DDEBUG")
+ elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
+-  set(WL_OPTIMIZE_FLAGS "-O3")
++  set(WL_OPTIMIZE_FLAGS "-g -O3")
+   set(WL_DEBUG_FLAGS "-DNDEBUG -DNOPARACHUTE")
+ elseif(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
+   set(WL_OPTIMIZE_FLAGS "-O3")

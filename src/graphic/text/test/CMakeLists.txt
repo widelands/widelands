@@ -1,3 +1,6 @@
+# TODO(GunChleoc): This unit testing project is currently unmaintained
+# Reactivate in parent directory once work resumes on this
+
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/paths.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/paths.h)
 
 # Simple binary that renders a text into an image for manual
@@ -5,8 +8,8 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/paths.h.cmake ${CMAKE_CURRENT_BINARY_
 wl_binary(wl_render_richtext
   SRCS
     render_richtext.cc
+  USES_SDL2_TTF
   DEPENDS
-    base_log
     graphic
     graphic_image_io
     graphic_surface
@@ -21,9 +24,8 @@ wl_library(graphic_text_test_render
     render.cc
     render.h
   DEPENDS
-    base_i18n
-    graphic_image_cache
-    graphic_surface
+    base
+    graphic
     graphic_text
     io_filesystem
 )

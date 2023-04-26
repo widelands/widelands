@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,7 +20,6 @@
 
 #include <memory>
 
-#include "helper.h"
 #include "logic/game_data_error.h"
 #include "scripting/lua_table.h"
 
@@ -31,13 +29,16 @@ ResourceDescription::ResourceDescription(const LuaTable& table)
    : name_(table.get_string("name")),
      descname_(table.get_string("descname")),
      detectable_(table.get_bool("detectable")),
-	  max_amount_(table.get_int("max_amount")),
-	  representative_image_(table.get_string("representative_image")) {
+     timeout_ms_(table.get_int("timeout_ms")),
+     timeout_radius_(table.get_int("timeout_radius")),
+     max_amount_(table.get_int("max_amount")),
+     representative_image_(table.get_string("representative_image")) {
 
 	std::unique_ptr<LuaTable> st = table.get_table("editor_pictures");
 	const std::set<int> keys = st->keys<int>();
 	for (int upper_limit : keys) {
-		ResourceDescription::EditorPicture editor_picture = {st->get_string(upper_limit), upper_limit};
+		ResourceDescription::EditorPicture editor_picture = {
+		   st->get_string(upper_limit), upper_limit};
 		editor_pictures_.push_back(editor_picture);
 	}
 	if (editor_pictures_.empty()) {
@@ -45,13 +46,11 @@ ResourceDescription::ResourceDescription(const LuaTable& table)
 	}
 }
 
-const std::string & ResourceDescription::editor_image
-	(uint32_t const amount) const
-{
+const std::string& ResourceDescription::editor_image(uint32_t const amount) const {
 	uint32_t bestmatch = 0;
 	int32_t min_diff = editor_pictures_[bestmatch].upper_limit - static_cast<int32_t>(amount);
 
-	assert(editor_pictures_.size());
+	assert(!editor_pictures_.empty());
 
 	for (uint32_t i = 1; i < editor_pictures_.size(); ++i) {
 		const int32_t diff = editor_pictures_[i].upper_limit - static_cast<int32_t>(amount);
@@ -77,9 +76,16 @@ bool ResourceDescription::detectable() const {
 	return detectable_;
 }
 
-int32_t ResourceDescription::max_amount() const {
-	return max_amount_;
+uint32_t ResourceDescription::timeout_ms() const {
+	return timeout_ms_;
 }
 
+uint32_t ResourceDescription::timeout_radius() const {
+	return timeout_radius_;
+}
+
+ResourceAmount ResourceDescription::max_amount() const {
+	return max_amount_;
+}
 
 }  // namespace Widelands

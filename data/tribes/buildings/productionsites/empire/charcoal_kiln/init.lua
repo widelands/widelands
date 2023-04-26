@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_productionsite_type {
    name = "empire_charcoal_kiln",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Charcoal Kiln"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -20,19 +20,25 @@ tribes:new_productionsite_type {
       marble = 1
    },
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 51, 48 },
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 54, 60 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
-         hotspot = { 51, 48 },
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 54, 60 },
       },
    },
 
    aihints = {
-      prohibited_till = 600
+      prohibited_till = 690
    },
 
    working_positions = {
@@ -40,23 +46,22 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      log = 8
-   },
-   outputs = {
-      "coal"
+      { name = "log", amount = 8 }
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start producing coal because ...
-         descname = _"producing coal",
+         descname = _("producing coal"),
          actions = {
-            "sleep=30000",
             "return=skipped unless economy needs coal",
             "consume=log:6",
-            "animate=working 90000", -- Charcoal fires will burn for some days in real life
+            "sleep=duration:30s",
+            "animate=working duration:1m30s", -- Charcoal fires will burn for some days in real life
             "produce=coal"
          }
       },
    },
 }
+
+pop_textdomain()

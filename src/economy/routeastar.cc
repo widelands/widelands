@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 by the Widelands Development Team
+ * Copyright (C) 2011-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,12 +12,13 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "economy/routeastar.h"
+
+#include <cassert>
 
 #include "base/wexception.h"
 #include "economy/iroute.h"
@@ -25,10 +26,8 @@
 
 namespace Widelands {
 
-BaseRouteAStar::BaseRouteAStar(Router & router, WareWorker type) :
-	type_(type),
-	mpf_cycle(router.assign_cycle())
-{
+BaseRouteAStar::BaseRouteAStar(Router& router, WareWorker type)
+   : open_(type), type_(type), mpf_cycle(router.assign_cycle()) {
 }
 
 /**
@@ -36,16 +35,17 @@ BaseRouteAStar::BaseRouteAStar(Router & router, WareWorker type) :
  * set up by @ref RouteAStar::push to the destination node @p to.
  * The route is stored in @p route.
  */
-void BaseRouteAStar::routeto(RoutingNode & to, IRoute & route)
-{
-	if (to.cookie().is_active()) {
+void BaseRouteAStar::routeto(RoutingNode& to, IRoute& route) {
+	if (to.cookie(type_).is_active()) {
 		throw wexception("BaseRouteAStar::routeto should not have an active cookie.");
 	}
-	assert(to.mpf_cycle == mpf_cycle);
+	assert(mpf_cycle == (type_ == wwWARE ? to.mpf_cycle_ware : to.mpf_cycle_worker));
 
-	route.init(to.mpf_realcost);
-	for (RoutingNode * node = &to; node; node = node->mpf_backlink)
+	route.init(type_ == wwWARE ? to.mpf_realcost_ware : to.mpf_realcost_worker);
+	for (RoutingNode* node = &to; node != nullptr;
+	     node = (type_ == wwWARE ? node->mpf_backlink_ware : node->mpf_backlink_worker)) {
 		route.insert_as_first(node);
+	}
 }
 
-} // namespace Widelands
+}  // namespace Widelands

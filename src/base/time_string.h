@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,22 +12,20 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_BASE_TIME_STRING_H
 #define WL_BASE_TIME_STRING_H
 
+#include <cstdint>
 #include <string>
-
-#include <stdint.h>
 
 /// Get a string representation conforming to ISO 8601 of the current time (in
 /// seconds since the Epoch). The return value points to a statically allocated
 /// string which might be overwritten by subsequent calls.
-char * timestring();
+char* timestring();
 
 /// Turn a month number into a short, localized month string,
 /// 0 = "Jan" ... 11 = "Dec"
@@ -36,7 +34,7 @@ std::string localize_month(int8_t month);
 /// Get a string representation of the game time as hhh:mm:ss. If Time
 /// represents more than 999 hours, it wraps around. Use this in table columns
 /// for easy sorting.
-char * gamestring_with_leading_zeros(uint32_t gametime);
+char* gamestring_with_leading_zeros(uint32_t gametime);
 
 /// Get a string representation of the game time as [hh]h:mm.
 /// If show_seconds = true, this returns [hhh:]mm:ss instead.

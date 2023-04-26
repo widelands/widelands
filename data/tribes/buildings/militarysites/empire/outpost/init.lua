@@ -1,14 +1,27 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_militarysite_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_militarysite_type {
    name = "empire_outpost",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Outpost"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "empire_barrier",
+
+   enhancement = {
+      name = "empire_barrier",
+      enhancement_cost = {
+         log = 1,
+         planks = 2,
+         granite = 1,
+         marble = 1
+      },
+      enhancement_return_on_dismantle = {
+         planks = 1,
+         granite = 1
+      }
+   },
 
    buildcost = {
       log = 1,
@@ -21,16 +34,19 @@ tribes:new_militarysite_type {
       marble = 1
    },
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 57, 77 }
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 59, 77 }
       }
    },
 
    aihints = {
       expansion = true,
-      prohibited_till=600
+      fighting = true
    },
 
    max_soldiers = 3,
@@ -39,10 +55,17 @@ tribes:new_militarysite_type {
    prefer_heroes = false,
 
    messages = {
-      occupied = _"Your soldiers have occupied your outpost.",
-      aggressor = _"Your outpost discovered an aggressor.",
-      attack = _"Your outpost is under attack.",
-      defeated_enemy = _"The enemy defeated your soldiers at the outpost.",
-      defeated_you = _"Your soldiers defeated the enemy at the outpost."
+      -- TRANSLATORS: Message sent by an Empire military site
+      occupied = pgettext("empire_building", "Your soldiers have occupied your outpost."),
+      -- TRANSLATORS: Message sent by an Empire military site
+      aggressor = pgettext("empire_building", "Your outpost discovered an aggressor."),
+      -- TRANSLATORS: Message sent by an Empire military site
+      attack = pgettext("empire_building", "Your outpost is under attack."),
+      -- TRANSLATORS: Message sent by an Empire military site
+      defeated_enemy = pgettext("empire_building", "The enemy defeated your soldiers at the outpost."),
+      -- TRANSLATORS: Message sent by an Empire military site
+      defeated_you = pgettext("empire_building", "Your soldiers defeated the enemy at the outpost.")
    },
 }
+
+pop_textdomain()

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,84 +12,51 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_ECONOMY_WARES_QUEUE_H
 #define WL_ECONOMY_WARES_QUEUE_H
 
+#include "economy/input_queue.h"
 #include "logic/map_objects/immovable.h"
-#include "logic/widelands.h"
 
 namespace Widelands {
-
-class Economy;
-class EditorGameBase;
-class Game;
-class MapObjectLoader;
-struct MapObjectSaver;
-class Player;
-class Request;
-class Worker;
 
 /**
  * This micro storage room can hold any number of items of a fixed ware.
  */
-class WaresQueue {
+class WaresQueue : public InputQueue {
 public:
-	using CallbackFn = void
-		(Game &, WaresQueue *, DescriptionIndex ware, void * data);
-
-	WaresQueue(PlayerImmovable &, DescriptionIndex, uint8_t size);
+	WaresQueue(PlayerImmovable&, DescriptionIndex, uint8_t size);
 
 #ifndef NDEBUG
-	~WaresQueue() {assert(ware_ == INVALID_INDEX);}
+	~WaresQueue() override {
+		assert(index_ == INVALID_INDEX);
+	}
 #endif
 
-	DescriptionIndex get_ware()    const {return ware_;}
-	uint32_t get_max_fill() const {return max_fill_;}
-	uint32_t get_max_size() const {return max_size_;}
-	uint32_t get_filled()   const {return filled_;}
+	[[nodiscard]] Quantity get_filled() const override {
+		return filled_;
+	}
 
-	void cleanup();
+	void cleanup() override;
 
-	void set_callback(CallbackFn *, void * data);
+	void remove_from_economy(Economy&) override;
+	void add_to_economy(Economy&) override;
 
-	void remove_from_economy(Economy &);
-	void add_to_economy(Economy &);
+	void set_filled(Quantity) override;
 
-	void set_max_size        (uint32_t);
-	void set_max_fill        (uint32_t);
-	void set_filled          (uint32_t);
-	void set_consume_interval(uint32_t);
+protected:
+	void read_child(FileRead&, Game&, MapObjectLoader&) override;
+	void write_child(FileWrite&, Game&, MapObjectSaver&) override;
 
-	Player & owner() const {return owner_.owner();}
+	void entered(DescriptionIndex index, Worker* worker) override;
 
-	void read (FileRead  &, Game &, MapObjectLoader &);
-	void write(FileWrite &, Game &, MapObjectSaver  &);
-
-private:
-	static void request_callback
-		(Game &, Request &, DescriptionIndex, Worker *, PlayerImmovable &);
-	void update();
-
-	PlayerImmovable & owner_;
-	DescriptionIndex         ware_;    ///< ware ID
-	uint32_t max_size_;         ///< nr of items that fit into the queue maximum
-	uint32_t max_fill_;         ///< nr of wares that should be ideally in this queue
-	uint32_t filled_;           ///< nr of items that are currently in the queue
-
-	///< time in ms between consumption at full speed
-	uint32_t consume_interval_;
-
-	Request         * request_; ///< currently pending request
-
-	CallbackFn      * callback_fn_;
-	void            * callback_data_;
+	/// Number of items that are currently in the queue
+	Quantity filled_{0};
 };
-
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_WARES_QUEUE_H

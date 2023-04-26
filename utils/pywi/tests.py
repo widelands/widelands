@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-"""
-Tests for various pywi modules
-"""
+import config
+import animation
+"""Tests for various pywi modules."""
 
 import os
 import StringIO
@@ -10,8 +10,6 @@ import unittest
 source_dir = os.path.dirname(os.path.abspath(__file__))
 root_dir = os.path.normpath(source_dir + '/../..')
 
-import animation
-import config
 
 class TestConfig(unittest.TestCase):
     def sample_text(self):
@@ -33,7 +31,8 @@ baz= quux
 
     def test_itersections(self):
         c = config.read(StringIO.StringIO(self.sample_text()))
-        self.assertEqual([name for name, section in c.itersections()], ['section'])
+        self.assertEqual(
+            [name for name, section in c.itersections()], ['section'])
 
     def test_modify(self):
         c = config.read(StringIO.StringIO(self.sample_text()))
@@ -55,14 +54,16 @@ baz= quux
         s = c.make_section('other')
         s.set('x', 'y')
         c.remove_section('other')
-        self.assertEqual([name for name, section in c.itersections()], ['section'])
+        self.assertEqual(
+            [name for name, section in c.itersections()], ['section'])
         s = c.get_section('section')
-        self.assertItemsEqual([(k,v) for k,v in s.iterentries()], [('foo', 'bar'), ('baz', 'quux')])
+        self.assertItemsEqual([(k, v) for k, v in s.iterentries()], [
+                              ('foo', 'bar'), ('baz', 'quux')])
 
     def test_make_section(self):
         c = config.read(StringIO.StringIO(self.sample_text()))
         s = c.make_section('section')
-        self.assertEqual([(k,v) for k,v in s.iterentries()], [])
+        self.assertEqual([(k, v) for k, v in s.iterentries()], [])
         s.set('foo', 'written')
         s2 = c.make_section('new')
         s2.set('bar', 'baz')
@@ -70,9 +71,11 @@ baz= quux
         c.write(stringio)
         c = config.read(StringIO.StringIO(stringio.getvalue()))
         s = c.get_section('section')
-        self.assertItemsEqual([(k,v) for k,v in s.iterentries()], [('foo', 'written')])
+        self.assertItemsEqual([(k, v) for k, v in s.iterentries()], [
+                              ('foo', 'written')])
         s2 = c.get_section('new')
-        self.assertItemsEqual([(k,v) for k,v in s2.iterentries()], [('bar', 'baz')])
+        self.assertItemsEqual([(k, v)
+                               for k, v in s2.iterentries()], [('bar', 'baz')])
 
     def test_makers(self):
         c = config.File()
@@ -82,15 +85,20 @@ baz= quux
         s2 = c.make_section('sec2')
         s2.set('a', 'a')
         s2.set('b', 'b')
-        self.assertItemsEqual([(k,v) for k,v in s1.iterentries()], [('0', '0'), ('1', '1')])
-        self.assertItemsEqual([(k,v) for k,v in s2.iterentries()], [('a', 'a'), ('b', 'b')])
+        self.assertItemsEqual([(k, v) for k, v in s1.iterentries()], [
+                              ('0', '0'), ('1', '1')])
+        self.assertItemsEqual([(k, v) for k, v in s2.iterentries()], [
+                              ('a', 'a'), ('b', 'b')])
         stringio = StringIO.StringIO()
         c.write(stringio)
         c = config.read(StringIO.StringIO(stringio.getvalue()))
         s1 = c.get_section('sec1')
         s2 = c.get_section('sec2')
-        self.assertItemsEqual([(k,v) for k,v in s1.iterentries()], [('0', '0'), ('1', '1')])
-        self.assertItemsEqual([(k,v) for k,v in s2.iterentries()], [('a', 'a'), ('b', 'b')])
+        self.assertItemsEqual([(k, v) for k, v in s1.iterentries()], [
+                              ('0', '0'), ('1', '1')])
+        self.assertItemsEqual([(k, v) for k, v in s2.iterentries()], [
+                              ('a', 'a'), ('b', 'b')])
+
 
 class TestAnimation(unittest.TestCase):
     def test_load_conf(self):

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2008-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,35 +12,28 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_LOGIC_MAP_OBJECTS_IMMOVABLE_PROGRAM_H
 #define WL_LOGIC_MAP_OBJECTS_IMMOVABLE_PROGRAM_H
 
-#include <cstring>
-#include <string>
+#include <memory>
 
-#include "base/macros.h"
-
-/*
- * Implementation is in immovable.cc
- */
-
-#include "logic/map_objects/buildcost.h"
 #include "logic/map_objects/immovable.h"
+#include "logic/map_objects/map_object_program.h"
 
 namespace Widelands {
 
 /// Ordered sequence of actions (at least 1). Has a name.
-struct ImmovableProgram {
+struct ImmovableProgram : public MapObjectProgram {
 
 	/// Can be executed on an Immovable.
-	struct Action {
+	class Action {
+	public:
 		Action() = default;
-		virtual ~Action();
+		virtual ~Action() = default;
 		virtual void execute(Game&, Immovable&) const = 0;
 
 	private:
@@ -62,65 +55,58 @@ struct ImmovableProgram {
 	/// to equal the length of the animation. It will loop around. The animation
 	/// will not be stopped by this command. It will run until another animation
 	/// is started.)
-	struct ActAnimate : public Action {
-		ActAnimate(char * parameters, ImmovableDescr &);
-		void execute(Game &, Immovable &) const override;
-		uint32_t animation() const {return id_;}
+	class ActAnimate : public Action {
+	public:
+		ActAnimate(const std::vector<std::string>& arguments, const ImmovableDescr&);
+		void execute(Game&, Immovable&) const override;
+		[[nodiscard]] uint32_t animation() const {
+			return parameters.animation;
+		}
+
 	private:
-		uint32_t id_;
-		Duration duration_;
+		AnimationParameters parameters;
 	};
 
-	/// Transforms the immovable into another immovable or into a bob
-	///
-	/// Parameter syntax
-	///    parameters ::= {probability} {bob|immovable} world|tribe:name
-	/// Parameter semantics:
-	///    probability: (defaults to 0 -- i.e. always)
-	///       The probability (out of 255) for replacing the immovable with
-	///       a new one; if the probability is 0 (i.e. the default), then the
-	///       transformation always happens
-	///    bob|immovable: (defaults to immovable)
-	///       whether we'll be replaced by a bob or by an immovable
-	///    world|tribe:
-	///       whether the other object is taken from the world or from
-	///       the owner's tribe
-	///    name:
-	///       name of the replacement object
-	struct ActTransform : public Action {
-		ActTransform
-			(char * parameters, ImmovableDescr &);
-		void execute(Game &, Immovable &) const override;
+	/// Transforms the immovable into another immovable or into a bob.
+	/// For parameters, see scripting documentation.
+	class ActTransform : public Action {
+	public:
+		ActTransform(std::vector<std::string>& arguments, ImmovableDescr&);
+		void execute(Game&, Immovable&) const override;
+
 	private:
-		std::string type_name;
-		bool        bob;
-		bool        tribe;
-		uint8_t     probability;
+		std::string type_name_;
+		bool bob_;
+		unsigned probability_;
 	};
 
 	/// Like ActTransform but the probability is determined by the suitability.
-	struct ActGrow : public Action {
-		ActGrow
-			(char * parameters, ImmovableDescr &);
-		void execute(Game &, Immovable &) const override;
+	class ActGrow : public Action {
+	public:
+		ActGrow(std::vector<std::string>& arguments, ImmovableDescr&);
+		void execute(Game&, Immovable&) const override;
+
 	private:
-		std::string type_name;
-		bool        tribe;
+		std::string type_name_;
 	};
 
-	struct ActRemove : public Action {
-		ActRemove(char * parameters, ImmovableDescr &);
-		void execute(Game &, Immovable &) const override;
+	class ActRemove : public Action {
+	public:
+		ActRemove(std::vector<std::string>& arguments, const ImmovableDescr& descr);
+		void execute(Game&, Immovable&) const override;
+
 	private:
-		uint8_t probability;
+		unsigned probability_;
 	};
 
-	struct ActSeed : public Action {
-		ActSeed(char * parameters, ImmovableDescr &);
-		void execute(Game &, Immovable &) const override;
+	class ActSeed : public Action {
+	public:
+		ActSeed(std::vector<std::string>& arguments, const ImmovableDescr&);
+		void execute(Game&, Immovable&) const override;
+
 	private:
-		std::string type_name;
-		uint8_t probability;
+		std::string type_name_;
+		unsigned probability_;
 	};
 
 	/// Plays a sound effect.
@@ -128,21 +114,21 @@ struct ImmovableProgram {
 	/// Parameter syntax:
 	///    parameters ::= directory sound [priority]
 	/// Parameter semantics:
-	///    directory:
-	///       The directory of the sound files, relative to the datadir.
-	///    sound:
-	///       The base filename of a sound effect (relative to the directory).
+	///    path:
+	///       The directory of the sound files, relative to the datadir, followed
+	///       by the base filename of a sound effect (relative to the directory).
 	///    priority:
 	///       An integer. If omitted, 127 is used.
 	///
 	/// Plays the specified sound effect with the specified priority. Whether the
 	/// sound effect is actually played is determined by the sound handler.
-	struct ActPlaySound : public Action {
-		ActPlaySound(char* parameters, const ImmovableDescr &);
-		void execute(Game &, Immovable &) const override;
+	class ActPlaySound : public Action {
+	public:
+		ActPlaySound(const std::vector<std::string>& arguments, const ImmovableDescr& descr);
+		void execute(Game&, Immovable&) const override;
+
 	private:
-		std::string name;
-		uint8_t     priority;
+		PlaySoundParameters parameters;
 	};
 
 	/**
@@ -158,62 +144,63 @@ struct ImmovableProgram {
 	 *    decay-time:
 	 *       Time until construction decays one step if no progress has been made.
 	 */
-	struct ActConstruction : public Action {
-		ActConstruction(char* parameters, ImmovableDescr&);
-		void execute(Game &, Immovable &) const override;
+	class ActConstruct : public Action {
+	public:
+		ActConstruct(std::vector<std::string>& arguments, const ImmovableDescr&);
+		void execute(Game&, Immovable&) const override;
 
-		Duration buildtime() const {return buildtime_;}
-		Duration decaytime() const {return decaytime_;}
+		[[nodiscard]] Duration buildtime() const {
+			return buildtime_;
+		}
+		[[nodiscard]] Duration decaytime() const {
+			return decaytime_;
+		}
 
 	private:
-		uint32_t animid_;
+		std::string animation_name_;
 		Duration buildtime_;
 		Duration decaytime_;
 	};
 
 	/// Create a program with a single action.
-	ImmovableProgram(char const * const init_name, Action * const action)
-		: name_(init_name)
-	{
-		actions_.push_back(action);
-	}
+	ImmovableProgram(const std::string& init_name, std::unique_ptr<Action> action);
 
-	// Create an immovable program from a number of lines.
+	/// Create an immovable program from a number of lines.
 	ImmovableProgram(const std::string& init_name,
 	                 const std::vector<std::string>& lines,
-	                 ImmovableDescr* immovable);
+	                 ImmovableDescr& immovable);
 
-	~ImmovableProgram() {
-		for (Action * action : actions_) {
-			delete action;
-		}
+	~ImmovableProgram() override = default;
+
+	[[nodiscard]] size_t size() const {
+		return actions_.size();
 	}
-
-	const std::string & name() const {return name_;}
-	size_t size() const {return actions_.size();}
-	const Action & operator[](size_t const idx) const {
+	const Action& operator[](size_t const idx) const {
 		assert(idx < actions_.size());
 		return *actions_[idx];
 	}
 
-	using Actions = std::vector<Action *>;
-	const Actions & actions() const {return actions_;}
-
 private:
-	std::string name_;
-	Actions     actions_;
+	std::vector<std::unique_ptr<Action>> actions_;
 };
 
 struct ImmovableActionData {
-	ImmovableActionData() {}
-	virtual ~ImmovableActionData() {}
+	ImmovableActionData() = default;
+	virtual ~ImmovableActionData() = default;
 
-	virtual const char * name() const = 0;
-	virtual void save(FileWrite & fw, Immovable & imm) = 0;
+	[[nodiscard]] virtual const char* name() const = 0;
+	virtual void save(FileWrite& fw, Immovable& imm) const = 0;
 
-	static ImmovableActionData * load(FileRead & fr, Immovable & imm, const std::string & name);
+	static ImmovableActionData* load(FileRead& fr, const Immovable& imm, const std::string& name);
 };
 
-}
+struct ActConstructData : ImmovableActionData {
+	[[nodiscard]] const char* name() const override;
+	void save(FileWrite& fw, Immovable& imm) const override;
+	static ActConstructData* load(FileRead& fr, const Immovable& imm);
+
+	Buildcost delivered;
+};
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_IMMOVABLE_PROGRAM_H

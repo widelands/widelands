@@ -1,14 +1,14 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
+wl.Descriptions():new_productionsite_type {
    name = "atlanteans_shipyard",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Shipyard"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   needs_seafaring = true,
+   map_check = {"seafaring"},
 
    buildcost = {
       log = 3,
@@ -23,29 +23,34 @@ tribes:new_productionsite_type {
       spidercloth = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 53, 66 },
-      },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 53, 66 },
+         hotspot = { 56, 72 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
-         hotspot = { 53, 66 },
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
+         hotspot = { 56, 72 },
       },
       unoccupied = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
-         hotspot = { 53, 66 },
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
+         hotspot = { 56, 72 },
       }
+   },
+
+   spritesheets = {
+      build = {
+         frames = 5,
+         columns = 5,
+         rows = 1,
+         hotspot = { 56, 72 },
+      },
    },
 
    aihints = {
       needs_water = true,
       shipyard = true,
-      prohibited_till = 1500
+      prohibited_till = 1050
    },
 
    working_positions = {
@@ -53,30 +58,35 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      planks = 10,
-      log = 2,
-      spidercloth = 4
+      { name = "log", amount = 2 },
+      { name = "planks", amount = 10 },
+      { name = "spidercloth", amount = 4 }
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
-            "sleep=20000",
-            "call=ship",
-            "return=skipped"
+            "call=ship on failure fail",
+            "call=ship_preparation",
          }
       },
       ship = {
          -- TRANSLATORS: Completed/Skipped/Did not start constructing a ship because ...
-         descname = _"constructing a ship",
+         descname = _("constructing a ship"),
          actions = {
-            "check_map=seafaring",
-            "construct=atlanteans_shipconstruction buildship 6",
-            "animate=working 35000",
-            "return=completed"
+            "construct=atlanteans_shipconstruction worker:buildship radius:6",
+            "sleep=duration:20s",
+         }
+      },
+      ship_preparation = {
+         descname = _("working"),
+         actions = {
+            "animate=working duration:35s",
          }
       },
    },
 }
+
+pop_textdomain()

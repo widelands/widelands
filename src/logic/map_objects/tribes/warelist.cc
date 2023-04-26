@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -30,100 +29,98 @@ namespace Widelands {
  * operations before the destructor is called. If you are sure of what you're
  * doing, call clear().
  */
-WareList::~WareList()
-{
+WareList::~WareList() {
 	for (uint32_t id = 0; id < wares_.size(); ++id) {
-		if (wares_[id])
-			log("WareList: %i items of %i left.\n", wares_[id], id);
+		if (wares_[id] != 0u) {
+			log_warn("WareList: %i items of %i left.\n", wares_[id], id);
+		}
 	}
 }
-
 
 /**
  * Add the given number of items (default = 1) to the storage.
  */
-void WareList::add(DescriptionIndex const i, const WareCount count) {
-	if (!count)
+void WareList::add(DescriptionIndex const i, const Quantity count) {
+	if (count == 0u) {
 		return;
+	}
 
-	if (wares_.size() <= i)
+	if (wares_.size() <= i) {
 		wares_.resize(i + 1, 0);
+	}
 	wares_[i] += count;
 	assert(wares_[i] >= count);
-
-	changed();
 }
 
-
-void WareList::add(const WareList & wl)
-{
+void WareList::add(const WareList& wl) {
 	DescriptionIndex const nr_wares = wl.get_nrwareids();
-	if (wares_.size() < nr_wares)
+	if (wares_.size() < nr_wares) {
 		wares_.reserve(nr_wares);
-	for (DescriptionIndex i = 0; i < nr_wares; ++i)
-		if (wl.wares_[i])
+	}
+	for (DescriptionIndex i = 0; i < nr_wares; ++i) {
+		if (wl.wares_[i] != 0u) {
 			add(i, wl.wares_[i]);
+		}
+	}
 }
-
 
 /**
  * Remove the given number of items (default = 1) from the storage.
  */
-void WareList::remove(DescriptionIndex const i, const WareCount count) {
-	if (!count)
+void WareList::remove(DescriptionIndex const i, const Quantity count) {
+	if (count == 0u) {
 		return;
+	}
 
 	assert(i < wares_.size());
 	assert(wares_[i] >= count);
 	wares_[i] -= count;
-
-	changed();
 }
 
-
-void WareList::remove(const WareList & wl)
-{
+void WareList::remove(const WareList& wl) {
 	DescriptionIndex const nr_wares = wl.get_nrwareids();
-	for (DescriptionIndex i = 0; i < nr_wares; ++i)
-		if (wl.wares_[i])
+	for (DescriptionIndex i = 0; i < nr_wares; ++i) {
+		if (wl.wares_[i] != 0u) {
 			remove(i, wl.wares_[i]);
+		}
+	}
 }
 
 /**
  * Return the number of wares of a given type stored in this storage.
  */
-WareList::WareCount WareList::stock(DescriptionIndex const id) const {
+Quantity WareList::stock(DescriptionIndex const id) const {
 	return id < wares_.size() ? wares_[id] : 0;
 }
-
 
 /**
  * Two WareLists are only equal when they contain the exact same stock of
  * all wares types.
-*/
-bool WareList::operator== (const WareList & wl) const
-{
+ */
+bool WareList::operator==(const WareList& wl) const {
 	uint32_t i = 0;
 
 	while (i < wl.wares_.size()) {
-		const WareCount count = wl.wares_[i];
+		const Quantity count = wl.wares_[i];
 		if (i < wares_.size()) {
-			if (count != wares_[i])
+			if (count != wares_[i]) {
 				return false;
+			}
 		} else {
-			if (count) // wl2 has 0 stock per definition
+			if (count != 0u) {  // wl2 has 0 stock per definition
 				return false;
+			}
 		}
 		++i;
 	}
 
 	while (i < wares_.size()) {
-		if (wares_[i]) // wl1 has 0 stock per definition
+		if (wares_[i] != 0u) {  // wl1 has 0 stock per definition
 			return false;
+		}
 		++i;
 	}
 
 	return true;
 }
-
-}
+}  // namespace Widelands

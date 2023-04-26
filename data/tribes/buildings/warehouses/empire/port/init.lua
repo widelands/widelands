@@ -1,13 +1,14 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_warehouse_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_warehouse_type {
    name = "empire_port",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Port"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "port",
+   map_check = {"seafaring"},
 
    buildcost = {
       log = 3,
@@ -27,22 +28,29 @@ tribes:new_warehouse_type {
       gold = 1
    },
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 74, 96 },
-         fps = 10
+         fps = 10,
+         frames = 20,
+         columns = 10,
+         rows = 2,
+         hotspot = { 87, 116 }
       },
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 74, 96 },
-      }
+         frames = 4,
+         columns = 4,
+         rows = 1,
+         hotspot = { 87, 116 }
+      },
    },
 
    aihints = {
-      prohibited_till = 900
+      prohibited_till = 1000
    },
 
    conquers = 5,
    heal_per_second = 170,
 }
+
+pop_textdomain()

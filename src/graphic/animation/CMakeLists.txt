@@ -1,0 +1,29 @@
+wl_library(graphic_animation
+  SRCS
+    animation.cc
+    animation.h
+    animation_manager.cc
+    animation_manager.h
+    diranimations.h
+    diranimations.cc
+    nonpacked_animation.cc
+    nonpacked_animation.h
+    spritesheet_animation.cc
+    spritesheet_animation.h
+  DEPENDS
+    base
+    base_geometry
+    base_macros
+    base_math
+    graphic
+    graphic_color
+    graphic_playercolor
+    graphic_surface
+    io_filesystem
+    logic_constants
+    logic_exceptions
+    note_sound
+    scripting_lua_table
+    sound
+    sound_constants
+)

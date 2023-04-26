@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,31 +12,46 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_NOTIFICATIONS_NOTE_IDS_H
 #define WL_NOTIFICATIONS_NOTE_IDS_H
 
-#include <stdint.h>
+#include <cstdint>
 
 // List all note ids here. They must be unique in the running
 // system, this is easier to guarantee when they are all listed in
 // one place.
 enum class NoteId : uint32_t {
 	ChatMessage,
-	LogMessage,
 	Immovable,
+	ConstructionsiteEnhanced,
 	FieldPossession,
 	FieldTerrainChanged,
-	FieldResourceTypeChanged,
 	ProductionSiteOutOfResources,
 	TrainingSiteSoldierTrained,
-	ShipMessage,
+	Ship,
+	Building,
+	Economy,
+	EconomyProfile,
 	GraphicResolutionChanged,
-	NoteExpeditionCanceled
+	NoteExpeditionCanceled,
+	Sound,
+	Dropdown,
+	GameSettings,
+	MapOptions,
+	MapObjectDescription,
+	MapObjectDescriptionTypeCheck,
+	LoadingMessage,
+	ThreadSafeFunction,
+	ThreadSafeFunctionHandled,
+	Panel,
+	PinnedNoteMoved,
+	QuicknavChangedEvent,
+	Hyperlink,
+	PlayerDetailsEvent
 };
 
 #endif  // end of include guard: WL_NOTIFICATIONS_NOTE_IDS_H

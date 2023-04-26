@@ -8,10 +8,11 @@ wl_library(economy
     economy_data_packet.h
     expedition_bootstrap.cc
     expedition_bootstrap.h
+    ferry_fleet.cc
+    ferry_fleet.h
     flag.cc
     flag.h
-    fleet.cc
-    fleet.h
+    flag_job.h
     idleworkersupply.cc
     idleworkersupply.h
     iroute.h
@@ -20,6 +21,8 @@ wl_library(economy
     portdock.h
     request.cc
     request.h
+    roadbase.cc
+    roadbase.h
     road.cc
     road.h
     route.cc
@@ -29,8 +32,12 @@ wl_library(economy
     router.cc
     router.h
     routing_node.h
+    ship_fleet.cc
+    ship_fleet.h
     shippingitem.cc
     shippingitem.h
+    shipping_schedule.cc
+    shipping_schedule.h
     supply.h
     supply_list.cc
     supply_list.h
@@ -40,17 +47,33 @@ wl_library(economy
     ware_instance.cc
     ware_instance.h
     warehousesupply.h
+    input_queue.cc
+    input_queue.h
+    ware_priority.cc
+    ware_priority.h
     wares_queue.cc
     wares_queue.h
+    waterway.cc
+    waterway.h
+    workers_queue.cc
+    workers_queue.h
   DEPENDS
+    base
     base_exceptions
-    base_log
     base_macros
+    base_times
+    graphic
     io_fileread
+    io_stream
     logic
+    logic_commands
+    logic_constants
+    logic_exceptions
+    logic_map
+    logic_map_objects
     logic_widelands_geometry
+    logic_widelands_geometry_io
     map_io
-    ui_basic
-    wui
+    notifications
 )
 add_subdirectory(test)

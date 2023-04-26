@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 by the Widelands Development Team
+ * Copyright (C) 2011-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -29,33 +28,8 @@ struct Utf8 {
 	 * a multi-byte UTF8 character. This function returns false for
 	 * the first byte of a multi-byte UTF8 character.
 	 */
-	static bool is_utf8_extended(char ch)
-	{
+	static bool is_utf8_extended(char ch) {
 		return (ch & 0xc0) == 0x80;
-	}
-
-	/**
-	 * Convert a unicode character into a multi-byte utf8 string.
-	 */
-	static std::string unicode_to_utf8(uint16_t unicode)
-	{
-		unsigned char buf[4];
-
-		if (unicode < 0x80) {
-			buf[0] = unicode;
-			buf[1] = 0;
-		} else if (unicode < 0x800) {
-			buf[0] = ((unicode & 0x7c0) >> 6) | 0xc0;
-			buf[1] = (unicode & 0x3f) | 0x80;
-			buf[2] = 0;
-		} else {
-			buf[0] = ((unicode & 0xf000) >> 12) | 0xe0;
-			buf[1] = ((unicode & 0xfc0) >> 6) | 0x80;
-			buf[2] = (unicode & 0x3f) | 0x80;
-			buf[3] = 0;
-		}
-
-		return reinterpret_cast<char *>(buf);
 	}
 
 	/**
@@ -63,10 +37,9 @@ struct Utf8 {
 	 * \p pos will point to the beginning of the next unicode character.
 	 * Return 0 on decoding errors.
 	 */
-	static uint16_t utf8_to_unicode(const std::string & in, std::string::size_type & pos)
-	{
+	static uint16_t utf8_to_unicode(const std::string& in, std::string::size_type& pos) {
 		assert(pos < in.size());
-		if (in[pos] & 0xc0) {
+		if ((in[pos] & 0x80) != 0) {
 			if (is_utf8_extended(in[pos])) {
 				pos++;
 				return 0;
@@ -74,22 +47,26 @@ struct Utf8 {
 
 			uint8_t ctrl = in[pos];
 			uint16_t value = in[pos++];
-			if (!is_utf8_extended(in[pos]))
+			if (!is_utf8_extended(in[pos])) {
 				return 0;
+			}
 			value = (value << 6) | (in[pos++] & 0x3f);
-			if ((ctrl & 0xe0) == 0xc0)
+			if ((ctrl & 0xe0) == 0xc0) {
 				return value & 0x07ff;
-			if (!is_utf8_extended(in[pos]))
+			}
+			if (!is_utf8_extended(in[pos])) {
 				return 0;
+			}
 			value = (value << 6) | (in[pos++] & 0x3f);
-			if ((ctrl & 0xf0) == 0xe0)
+			if ((ctrl & 0xf0) == 0xe0) {
 				return value & 0xffff;
-			while (is_utf8_extended(in[pos]))
+			}
+			while (is_utf8_extended(in[pos])) {
 				++pos;
+			}
 			return 0;
-		} else {
-			return in[pos++];
 		}
+		return in[pos++];
 	}
 };
 

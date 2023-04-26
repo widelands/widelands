@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_productionsite_type {
    name = "empire_farm",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Farm"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
 
@@ -22,58 +22,61 @@ tribes:new_productionsite_type {
       marble_column = 1
    },
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 82, 74 },
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 89, 82 },
       },
    },
 
    aihints = {
+      basic_amount = 1,
       space_consumer = true,
-      forced_after = 900
+      prohibited_till = 510,
+      very_weak_ai_limit = 1,
+      weak_ai_limit = 3
    },
 
    working_positions = {
       empire_farmer = 1
    },
 
-   outputs = {
-      "wheat"
-   },
-
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
-            "call=plant_wheat",
-            "call=harvest_wheat",
-            "return=skipped"
+            "call=plant",
+            "call=harvest",
          }
       },
-      plant_wheat = {
+      plant = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
-         descname = _"planting wheat",
+         descname = _("planting wheat"),
          actions = {
-            "sleep=14000",
-            "worker=plant"
+            "callworker=plant",
+            "sleep=duration:10s"
          }
       },
-      harvest_wheat = {
+      harvest = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
-         descname = _"harvesting wheat",
+         descname = _("harvesting wheat"),
          actions = {
-            "sleep=4000",
-            "worker=harvest"
+            "callworker=harvest",
+            "sleep=duration:4s"
          }
       },
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Fields",
-      heading = _"Out of Fields",
+      title = _("No Fields"),
+      heading = _("Out of Fields"),
       message = pgettext("empire_building", "The farmer working at this farm has no cleared soil to plant his seeds."),
       productivity_threshold = 30
    },
 }
+
+pop_textdomain()

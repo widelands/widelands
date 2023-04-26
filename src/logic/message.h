@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,43 +12,36 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_LOGIC_MESSAGE_H
 #define WL_LOGIC_MESSAGE_H
 
-#include <string>
-#include <boost/signals2.hpp>
-
-#include "graphic/graphic.h"
+#include "base/times.h"
+#include "graphic/image_cache.h"
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
 
 namespace Widelands {
 
 struct Message {
-	enum class Status: uint8_t {kNew, kRead, kArchived};
-	enum class Type: uint8_t {
+	enum class Status : uint8_t { kNew, kRead, kArchived };
+	enum class Type : uint8_t {
 		kNoMessages,
 		kAllMessages,
 		kGameLogic,
 		kGeologists,
-		kGeologistsCoal,
-		kGeologistsGold,
-		kGeologistsStones,
-		kGeologistsIron,
-		kGeologistsWater,
 		kScenario,
 		kSeafaring,
-		kEconomy,      // economy
-		kEconomySiteOccupied, // economy
-		kWarfare,     // everything starting from here is warfare
+		kEconomy,              // economy
+		kEconomySiteOccupied,  // economy
+		kWarfare,              // everything starting from here is warfare
 		kWarfareSiteDefeated,
 		kWarfareSiteLost,
-		kWarfareUnderAttack
+		kWarfareUnderAttack,
+		kTradeOfferReceived,
 	};
 
 	/**
@@ -62,72 +55,96 @@ struct Message {
 	 * \param ser        A MapObject serial. If non null, the message will be deleted once
 	 *                   the object is removed from the game. Defaults to 0
 	 * \param s          The message status. Defaults to Status::New
+	 * \param subt       The extended message type, used for comparisons in
+	 *                   Player::add_message_with_timeout(). Defaults to ""
 	 */
-	Message
-		(Message::Type             msgtype,
-		 uint32_t                  sent_time,
-		 const std::string&        init_title,
-		 const std::string&        init_icon_filename,
-		 const std::string&        init_heading,
-		 const std::string&        init_body,
-		 Widelands::Coords   const c = Coords::null(),
-		 Widelands::Serial         ser = 0,
-		 Status                    s = Status::kNew)
-		:
-		type_    (msgtype),
-		title_   (init_title),
-		icon_filename_(init_icon_filename),
-		icon_    (g_gr->images().get(init_icon_filename)),
-		heading_ (init_heading),
-		body_    (init_body),
-		sent_    (sent_time),
-		position_(c),
-		serial_  (ser),
-		status_  (s)
-	{}
+	Message(Message::Type msgtype,
+	        const Time& sent_time,
+	        const std::string& init_title,
+	        const std::string& init_icon_filename,
+	        const std::string& init_heading,
+	        const std::string& init_body,
+	        const Widelands::Coords& c = Coords::null(),
+	        Widelands::Serial ser = 0,
+	        const std::string& subt = "",
+	        Status s = Status::kNew)
+	   : type_(msgtype),
+	     sub_type_(subt),
+	     title_(init_title),
+	     icon_filename_(init_icon_filename),
+	     icon_(g_image_cache->get(init_icon_filename)),
+	     heading_(init_heading),
+	     body_(init_body),
+	     sent_(sent_time),
+	     position_(c),
+	     serial_(ser),
+	     status_(s) {
+	}
 
-	Message::Type         type    () const   {return type_;}
-	uint32_t              sent    () const   {return sent_;}
-	const std::string &   title   () const   {return title_;}
-	const std::string& icon_filename() const {return icon_filename_;}
-	const Image*          icon    () const   {return icon_;}
-	const std::string &   heading () const   {return heading_;}
-	const std::string &   body    () const   {return body_;}
-	Widelands::Coords     position() const   {return position_;}
-	Widelands::Serial     serial  () const   {return serial_;}
-	Status                status  () const   {return status_;}
-	Status set_status(Status const s)        {return status_ = s;}
+	[[nodiscard]] Message::Type type() const {
+		return type_;
+	}
+	[[nodiscard]] const std::string& sub_type() const {
+		return sub_type_;
+	}
+	[[nodiscard]] const Time& sent() const {
+		return sent_;
+	}
+	[[nodiscard]] const std::string& title() const {
+		return title_;
+	}
+	[[nodiscard]] const std::string& icon_filename() const {
+		return icon_filename_;
+	}
+	[[nodiscard]] const Image* icon() const {
+		return icon_;
+	}
+	[[nodiscard]] const std::string& heading() const {
+		return heading_;
+	}
+	[[nodiscard]] const std::string& body() const {
+		return body_;
+	}
+	[[nodiscard]] const Widelands::Coords& position() const {
+		return position_;
+	}
+	[[nodiscard]] Widelands::Serial serial() const {
+		return serial_;
+	}
+	[[nodiscard]] Status status() const {
+		return status_;
+	}
+	Status set_status(Status const s) {
+		return status_ = s;
+	}
 
 	/**
 	 * Returns the main type for the message's sub type
 	 */
-	Message::Type message_type_category() const {
-		if (type_ >=  Widelands::Message::Type::kWarfare) {
+	[[nodiscard]] Message::Type message_type_category() const {
+		if (type_ >= Widelands::Message::Type::kWarfare) {
 			return Widelands::Message::Type::kWarfare;
-
-		} else if (type_ >= Widelands::Message::Type::kEconomy &&
-					  type_ <= Widelands::Message::Type::kEconomySiteOccupied) {
+		}
+		if (type_ >= Widelands::Message::Type::kEconomy &&
+		    type_ <= Widelands::Message::Type::kEconomySiteOccupied) {
 			return Widelands::Message::Type::kEconomy;
-		} else if (type_ >= Widelands::Message::Type::kGeologists &&
-					 type_ <= Widelands::Message::Type::kGeologistsWater) {
-		  return Widelands::Message::Type::kGeologists;
-	  }
+		}
 		return type_;
 	}
 
 private:
-	Message::Type     type_;
+	Message::Type type_;
+	const std::string sub_type_;
 	const std::string title_;
 	const std::string icon_filename_;
-	const Image     * icon_;   // Pointer to icon into picture stack
+	const Image* icon_;  // Pointer to icon into picture stack
 	const std::string heading_;
 	const std::string body_;
-	uint32_t          sent_;
+	Time sent_;
 	Widelands::Coords position_;
-	Widelands::Serial serial_; // serial to map object
-	Status            status_;
+	Widelands::Serial serial_;  // serial to map object
+	Status status_;
 };
-
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MESSAGE_H

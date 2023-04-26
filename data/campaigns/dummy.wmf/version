@@ -1,0 +1,11 @@
+# Automatically created by Widelands bzr8532[bug-1727987_dummy_map] (Release)
+
+[global]
+map_source_url=
+map_release=
+map_creator_version="bzr8532[bug-1727987_dummy_map]"
+map_version_major="0"
+map_version_minor="1"
+map_version_timestamp="1513452941"
+packet_version="1"
+packet_compatibility="1"

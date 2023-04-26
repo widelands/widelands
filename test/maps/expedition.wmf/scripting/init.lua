@@ -2,6 +2,7 @@ include "scripting/lunit.lua"
 include "scripting/coroutine.lua"
 include "scripting/infrastructure.lua"
 include "scripting/ui.lua"
+include "test/scripting/stable_save.lua"
 
 -- This is a test case for bug 1234058: there is constant demand for logs,
 -- so the expedition initially never got any.
@@ -22,7 +23,7 @@ prefilled_buildings(p1,
       grout = 2,
       iron = 2,
       granite = 5,
-      thatch_reed = 4,
+      reed = 4,
       log = 3,
    },
    workers = {
@@ -48,30 +49,22 @@ prefilled_buildings(p1,
 hq = map:get_field(8, 18).immovable
 port = map:get_field(16, 16).immovable
 
-connected_road(p1, map:get_field(8,19).immovable, "r,r|r,r|r,r|r,tr,tr|", true)
-connected_road(p1, map:get_field(7,21).immovable, "tr,tr|", true)
+connected_road("normal", p1, map:get_field(8,19).immovable, "r,r|r,r|r,r|r,tr,tr|", true)
+connected_road("normal", p1, map:get_field(7,21).immovable, "tr,tr|", true)
 first_ship = nil
 second_ship = nil
 
--- Save the game so that reloading does not skip
-function stable_save(safename)
-   local old_speed = game.desired_speed
-   game.desired_speed = 1000
-   sleep(100)
-   game:save(safename)
-   game.desired_speed = 1000
-   sleep(2000)  -- Give the loaded game a chance to catch up
-   game.desired_speed = old_speed
-   sleep(1000)
-end
-
 function click_on_ship(which_ship)
+   local mv = wl.ui.MapView()
    for x=0,map.width-1 do
       for y=0,map.height-1 do
          local field = map:get_field(x,y)
          for idx, bob in ipairs(field.bobs) do
             if bob == which_ship then
-               mouse_smoothly_to(field, 1)
+               if not mv:is_visible(field) then
+                  scroll_to_field(field)
+                  click_on_ship(which_ship)
+               end
                wl.ui.MapView():click(field)
                return
             end
@@ -87,7 +80,7 @@ function check_wares_in_port_are_all_there(args)
    assert_equal(2, wares.grout)
    assert_equal(2, wares.iron)
    assert_equal(5, wares.granite)
-   assert_equal(4, wares.thatch_reed)
+   assert_equal(4, wares.reed)
    -- We do not check for logs here as they might be carried out of the
    -- warehouse already when we check (because they might get requested by the
    -- hardener).
@@ -95,13 +88,15 @@ function check_wares_in_port_are_all_there(args)
 end
 
 function cancel_expedition_in_shipwindow(which_ship)
+   game.desired_speed = 2 * 1000
    click_on_ship(which_ship or first_ship)
+   sleep(2000)
    assert_true(click_button("cancel_expedition"))
-   sleep(100)
+   sleep(2000)
    assert_true(click_button("ok"))
-   sleep(100)
+   sleep(2000)
    close_windows()
-   sleep(100)
+   sleep(2000)
 end
 
 --function cancel_expedition_or_sink_in_shipwindow()
@@ -136,9 +131,13 @@ end
 
 function dismantle_hardener()
    assert_true(click_building(p1, "barbarians_wood_hardener"))
+   sleep(2000)
    assert_true(click_button("dismantle"))
+   sleep(2000)
    assert_true(click_button("ok"))
+   sleep(2000)
    close_windows()
+   sleep(2000)
    while map:get_field(10, 18).immovable do
       sleep(317)
    end
@@ -154,7 +153,7 @@ function wait_for_message(title)
    archive_messages()
    sleep(5000)
    local old_speed = game.desired_speed
-   game.desired_speed = 100 * 1000
+   game.desired_speed = 50 * 1000
    sleep(5000)
    while true do
       while #p1.inbox == 0 do
@@ -204,17 +203,17 @@ function test_cancel_started_expedition_on_ship(needs_second_ship)
       create_second_ship()
    end
 
-   game.desired_speed = 10 * 1000
+   game.desired_speed = 2 * 1000
    sleep(10000)
 
-   stable_save("ready_to_sail")
+   stable_save(game, "ready_to_sail", 2 * 1000)
 
    sleep(10000)
    assert_equal(1, p1:get_workers("barbarians_builder"))
 
    -- Now cancel the expedition before it even got send out.
    cancel_expedition_in_shipwindow()
-   sleep(100)
+   sleep(40000)
    assert_equal(1, p1:get_workers("barbarians_builder"))
    sleep(8000)  -- ship needs a while to get wares back.
    check_wares_in_port_are_all_there()
@@ -235,7 +234,7 @@ function test_cancel_started_expedition_underway()
    -- Start a new expedition.
    port:start_expedition()
    wait_for_message("Expedition")
-   game.desired_speed = 10 * 1000
+   game.desired_speed = 2 * 1000
    sleep(10000)
 
    if first_ship.state=="exp_waiting" then
@@ -251,11 +250,11 @@ function test_cancel_started_expedition_underway()
    assert_equal("ccw",expedition_ship.island_explore_direction)
    sleep(6000)
 
-   stable_save("sailing")
+   stable_save(game, "sailing", 10 * 1000)
    assert_equal(1, p1:get_workers("barbarians_builder"))
 
    cancel_expedition_in_shipwindow(expedition_ship)
-   sleep(20000)
+   sleep(50000)
    assert_equal(1, p1:get_workers("barbarians_builder"))
    check_wares_in_port_are_all_there()
 
@@ -269,7 +268,7 @@ end
 
 function test_cancel_when_port_space_was_reached()
    sleep(100)
-   game.desired_speed = 10 * 1000
+   game.desired_speed = 2 * 1000
 
    -- Send expedition to port space.
    port:start_expedition()
@@ -285,7 +284,7 @@ function test_cancel_when_port_space_was_reached()
    sleep(500)
    assert_equal(1, p1:get_workers("barbarians_builder"))
 
-   stable_save("reached_port_space")
+   stable_save(game, "reached_port_space", 10 * 1000)
    sleep(5000)
    ships = p1:get_ships()
    --ships table should contain 1-2 items (1-2 ships)
@@ -295,7 +294,7 @@ function test_cancel_when_port_space_was_reached()
    assert_equal(1, p1:get_workers("barbarians_builder"))
 
    cancel_expedition_in_shipwindow(first_ship)
-   sleep(20000)
+   sleep(50000)
    assert_equal(1, p1:get_workers("barbarians_builder"))
    check_wares_in_port_are_all_there()
 
@@ -309,16 +308,18 @@ end
 
 function test_transporting_works()
    sleep(100)
-   game.desired_speed = 10 * 1000
+   game.desired_speed = 2 * 1000
 
    -- Some optimization. No need to feed the hardener and to wait for logs.
    p1:get_buildings("barbarians_wood_hardener")[1]:remove()
    hq:set_wares("log", 100)
    port:set_wares("blackwood", 100)
 
-
    port:start_expedition()
    wait_for_message("Expedition")
+
+   game.desired_speed = 2 * 1000
+   sleep(20000)
 
    if first_ship.state=="exp_waiting" then
       expedition_ship=first_ship
@@ -329,7 +330,7 @@ function test_transporting_works()
    end
 
    expedition_ship.island_explore_direction="ccw"
-   sleep(2000)
+   sleep(5000)
    assert_equal("ccw",expedition_ship.island_explore_direction)
    wait_for_message("Port Space")
    expedition_ship:build_colonization_port()
@@ -339,12 +340,11 @@ function test_transporting_works()
    sleep(500)
    assert_equal(1, p1:get_workers("barbarians_builder"))
 
-   stable_save("port_done")
-   game.desired_speed = 25 * 1000
+   stable_save(game, "port_done", 25 * 1000)
 
    -- build a lumberjack and see if the ship starts transporting stuff
    p1:place_building("barbarians_lumberjacks_hut", map:get_field(17, 1), true)
-   connected_road(p1, map:get_field(18,2).immovable, "bl,l|", true)
+   connected_road("normal", p1, map:get_field(18,2).immovable, "bl,l|", true)
    while map:get_field(17, 1).immovable.descr.name ~= "barbarians_lumberjacks_hut" do
       sleep(3222)
    end

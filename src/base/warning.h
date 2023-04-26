@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003, 2009 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,25 +12,21 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_BASE_WARNING_H
 #define WL_BASE_WARNING_H
 
-#include <cstring>
 #include <exception>
 #include <string>
-
-#include <stdint.h>
 
 #include "base/macros.h"
 
 #ifndef PRINTF_FORMAT
 #ifdef __GNUC__
-#define PRINTF_FORMAT(b, c) __attribute__ ((__format__ (__printf__, b, c)))
+#define PRINTF_FORMAT(b, c) __attribute__((__format__(__printf__, b, c)))
 #else
 #define PRINTF_FORMAT(b, c)
 #endif
@@ -39,16 +35,15 @@
 /// Similar exception type as wexception, but without the debug output.
 /// Intended for normal warnings like "map could not be found".
 struct WLWarning : public std::exception {
-	explicit WLWarning (char const * title, char const * message, ...)
-	 PRINTF_FORMAT(3, 4);
+	explicit WLWarning(char const* title, char const* message, ...) PRINTF_FORMAT(3, 4);
 
 	/// The target of the returned pointer remains valid during the lifetime of
 	/// the warning object.
-	virtual const char * title() const;
-	const char * what() const noexcept override;
+	[[nodiscard]] virtual const char* title() const;
+	[[nodiscard]] const char* what() const noexcept override;
 
 protected:
-	WLWarning() {}
+	WLWarning() = default;
 	std::string what_;
 	std::string title_;
 };

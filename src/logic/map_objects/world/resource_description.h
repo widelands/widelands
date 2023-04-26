@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,7 +20,6 @@
 #define WL_LOGIC_MAP_OBJECTS_WORLD_RESOURCE_DESCRIPTION_H
 
 #include <string>
-#include <vector>
 
 #include "base/macros.h"
 #include "logic/widelands.h"
@@ -37,32 +35,46 @@ public:
 		int upper_limit;
 	};
 
-	ResourceDescription(const LuaTable& table);
+	explicit ResourceDescription(const LuaTable& table);
 
 	/// Returns the in engine name of this resource.
-	const std::string& name() const;
+	[[nodiscard]] const std::string& name() const;
 
 	/// Returns the name of this resource for users. Usually translated.
-	const std::string& descname() const;
+	[[nodiscard]] const std::string& descname() const;
 
 	/// Returns if this resource is detectable by a geologist.
-	bool detectable() const;
+	[[nodiscard]] bool detectable() const;
+
+	/// Returns the time for which nearby geologist messages for this resource are muted
+	[[nodiscard]] uint32_t timeout_ms() const;
+
+	/// Returns the radius within which geologist messages for this resource are temporarily muted
+	[[nodiscard]] uint32_t timeout_radius() const;
 
 	/// Returns the maximum amount that can be in a field for this resource.
-	int32_t max_amount() const;
+	[[nodiscard]] ResourceAmount max_amount() const;
 
 	/// Returns the path to the image that should be used in the editor to
 	/// represent an 'amount' of this resource.
-	const std::string& editor_image(uint32_t amount) const;
+	[[nodiscard]] const std::string& editor_image(uint32_t amount) const;
 
 	/// Returns the path to the image that should be used in menus to represent this resource
-	const std::string& representative_image() const {return representative_image_;}
+	[[nodiscard]] const std::string& representative_image() const {
+		return representative_image_;
+	}
+
+	void set_max_amount(ResourceAmount r) {
+		max_amount_ = r;
+	}
 
 private:
 	const std::string name_;
 	const std::string descname_;
 	const bool detectable_;
-	const int32_t max_amount_;
+	const uint32_t timeout_ms_;
+	const uint32_t timeout_radius_;
+	ResourceAmount max_amount_;
 	const std::string representative_image_;
 	std::vector<EditorPicture> editor_pictures_;
 

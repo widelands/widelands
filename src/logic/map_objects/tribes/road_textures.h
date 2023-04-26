@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,34 +12,39 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_ROAD_TEXTURES_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_ROAD_TEXTURES_H
 
-#include <memory>
 #include <vector>
 
 #include "graphic/image.h"
+#include "logic/widelands_geometry.h"
 
 // Simple container to give access of the road textures of a tribe.
 class RoadTextures {
 public:
-	// Returns the road texture that should be used for the Cooordinate x, y and
-	// the road going into direction 'direction' (which can be any number).
-	const Image& get_normal_texture(int x, int y, int direction) const;
-	const Image& get_busy_texture(int x, int y, int direction) const;
+	// Returns the road texture that should be used for 'coords' and the road
+	// going into direction 'direction' (which can be any number).
+	[[nodiscard]] const Image& get_normal_texture(const Widelands::Coords& coords,
+	                                              int direction) const;
+	[[nodiscard]] const Image& get_busy_texture(const Widelands::Coords& coords,
+	                                            int direction) const;
+	[[nodiscard]] const Image& get_waterway_texture(const Widelands::Coords& coords,
+	                                                int direction) const;
 
 	// Adds a new road texture.
-	void add_normal_road_texture(const Image* texture);
-	void add_busy_road_texture(const Image* texture);
+	void add_normal_road_texture(const Image* image);
+	void add_busy_road_texture(const Image* image);
+	void add_waterway_texture(const Image* image);
 
 private:
 	std::vector<const Image*> normal_textures_;
 	std::vector<const Image*> busy_textures_;
+	std::vector<const Image*> waterway_textures_;
 };
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_ROAD_TEXTURES_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,8 +20,6 @@
 #define WL_UI_BASIC_MESSAGEBOX_H
 
 #include <memory>
-
-#include <boost/signals2.hpp>
 
 #include "graphic/align.h"
 #include "ui_basic/button.h"
@@ -32,8 +29,9 @@
 namespace UI {
 
 /**
- * Shows a standard messagebox. The message box can be used either as a modal
- * or as a non-modal dialog box.
+ * Shows a standard messagebox.
+ *
+ * The message box can be used either as a modal or as a non-modal dialog box.
  *
  * Using it as a modal dialog box is very straightforward:
  *     WLMessageBox mb(parent, "Title", "Text", MBoxType::kOK);
@@ -49,17 +47,20 @@ namespace UI {
  * \note this function is named "WLMessageBox" instead of simply "MessageBox"
  *       because else linking on Windows (even with #undef MessageBox) will
  *       not work.
-*/
+ *
+ * Text conventions: Title Case for the 'caption', Sentence case for the 'text'
+ */
 struct WLMessageBox : public Window {
 	enum class MBoxType { kOk, kOkCancel };
 	WLMessageBox(Panel* parent,
+	             WindowStyle,
 	             const std::string& caption,
-	             const std::string& text,
+	             std::string text,
 	             MBoxType,
 	             Align = UI::Align::kCenter);
 
-	boost::signals2::signal<void()> ok;
-	boost::signals2::signal<void()> cancel;
+	Notifications::Signal<> ok;
+	Notifications::Signal<> cancel;
 
 	bool handle_mousepress(uint8_t btn, int32_t mx, int32_t my) override;
 	bool handle_mouserelease(uint8_t btn, int32_t mx, int32_t my) override;
@@ -76,6 +77,6 @@ private:
 	std::unique_ptr<Button> ok_button_, cancel_button_;
 	std::unique_ptr<MultilineTextarea> textarea_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_MESSAGEBOX_H

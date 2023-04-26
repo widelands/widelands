@@ -1,0 +1,23 @@
+wl_library(graphic_styles
+  SRCS
+    building_statistics_style.h
+    button_style.cc
+    button_style.h
+    font_style.cc
+    font_style.h
+    panel_styles.h
+    paragraph_style.cc
+    paragraph_style.h
+    progress_bar_style.h
+    text_panel_style.h
+    statistics_plot_style.h
+    table_style.h
+    ware_info_style.h
+    window_style.h
+  DEPENDS
+    base
+    base_exceptions
+    graphic_color
+    graphic_surface
+    graphic_text_layout
+)

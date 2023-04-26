@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,12 +21,14 @@
 
 A ICON MOVEABLE PURE LOADONCALL DISCARDABLE "@CMAKE_CURRENT_SOURCE_DIR@/../utils/win32/WL.ico"
 
-//
-// TO CHANGE VERSION INFORMATION, EDIT  OPTIONS BELOW...
-//
+// To change version information, edit FILEVERSION and PRODUCTVERSION. Keep these two identical.
+// Version "A,B,C,D" translates to version "A.B.C.D",
+// e.g. for version "1.2" we need "1,2,0,0".
+// For development versions the last number is 99, e.g. between 1.2 and 1.3 we have "1.2.0.99".
+// https://docs.microsoft.com/en-us/windows/win32/menurc/versioninfo-resource
 1 VERSIONINFO
-FILEVERSION 0,18,0,1
-PRODUCTVERSION 0,18,0,1
+FILEVERSION 1,1,0,99
+PRODUCTVERSION 1,1,0,99
 FILETYPE VFT_APP
 {
   BLOCK "StringFileInfo"
@@ -38,7 +40,7 @@ FILETYPE VFT_APP
 			 VALUE "FileDescription", "Widelands - realtime strategy game"
 			 VALUE "InternalName", "WL"
 			 VALUE "LegalCopyright", "GPL v2"
-			 VALUE "WWW", "http://www.widelands.org"
+			 VALUE "WWW", "https://www.widelands.org"
 			 VALUE "License", "Gnu GPL v2"
 			 VALUE "OriginalFilename", "widelands"
 			 VALUE "ProductName", "Widelands - an Open-Source realtime strategy game"

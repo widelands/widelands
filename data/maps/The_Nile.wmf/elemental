@@ -1,42 +1,44 @@
-# Automatically created by Widelands bzr6718[widelands] (Debug)
+# Automatically created by Widelands bzr7905[trunk] (Debug)
 
 [global]
 packet_version="1"
 map_w="256"
 map_h="256"
 nr_players="8"
-world="desert"
 name=_"The Nile"
 author="Einstein13"
 descr=_"The river has always provided food and communication. This time, eight empires will fight for control over this land."
-tags="official,seafaring,1v1,2teams,3teams,4teams"
+hint=_"Use the river wisely. Your opponents will do the same. You will find the main ore resources deep in the desert."
+hint=
+tags="1v1,2teams,3teams,4teams,balanced,ferries,seafaring,official"
+theme="desert"
 
 [teams00]
-team1=2
-team2=3
-# yellow vs. green
+team1="0"
+team2="1"
+# Blue vs Red
 
 [teams01]
-team1=2
-team2=5
-#  yellow vs. orange
+team1="0,2"
+team2="1,3"
+# Blue & Yellow vs Green & Red
 
 [teams02]
-team1=2,6
-team2=3,7
-# (yellow, purple) vs. (green, white)
+team1="7,6"
+team2="5,4"
+# White & Purple vs Orange & Black
 
 [teams03]
-team1=2,5,6
-team2=3,4,7
-# (yellow, orange, purple) vs. (green, black, white)
+team1="0,7,6"
+team2="1,5,4"
+# Blue & white & Purple vs Red & Orange & Black
 
 [teams04]
-team1=2,4,6
-team2=3,5,7
-# (yellow, black, purple) vs. (green, orange, white)
+team1="0,2,6,7"
+team2="1,3,4,5"
+# Blue & Yellow & Purple & White vs Red & Green & Black & Orange
 
 [teams05]
-team1=1,2,5,6
-team2=0,3,4,7
-# (red, yellow, orange, purple) vs. (blue, green, black, white)
+team1="0,2,6,7"
+team2="1,5,4,3"
+# Blue & Yellow & Purple & White vs Red & Orange & Black & Green

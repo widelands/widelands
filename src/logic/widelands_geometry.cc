@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,17 +20,14 @@
 
 namespace Widelands {
 
-Coords::Coords() {}
+Coords::Coords(const int16_t nx, const int16_t ny) : x(nx), y(ny) {
+}
 
-Coords::Coords(const int16_t nx, const int16_t ny)
-		: x(nx), y(ny)
-	{}
-
-bool Coords::operator== (const Coords& other) const {
+bool Coords::operator==(const Coords& other) const {
 	return x == other.x && y == other.y;
 }
 
-bool Coords::operator!= (const Coords & other) const {
+bool Coords::operator!=(const Coords& other) const {
 	return !(*this == other);
 }
 
@@ -41,13 +37,16 @@ Coords::operator bool() const {
 
 void Coords::reorigin(Coords new_origin, const Extent& extent) {
 	if (*this) {
-		if (y < new_origin.y)
+		if (y < new_origin.y) {
 			y += extent.h;
+		}
 		y -= new_origin.y;
-		if ((y & 1) && (new_origin.y & 1) && ++ new_origin.x == extent.w)
+		if (((y & 1) != 0) && ((new_origin.y & 1) != 0) && ++new_origin.x == extent.w) {
 			new_origin.x = 0;
-		if (x < new_origin.x)
+		}
+		if (x < new_origin.x) {
 			x += extent.w;
+		}
 		x -= new_origin.x;
 	}
 }

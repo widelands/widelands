@@ -6,16 +6,18 @@ wl_library(map_io_map_loader
     s2map.cc
     s2map.h
   DEPENDS
+    base
     base_exceptions
-    base_i18n
-    base_log
     base_macros
     base_scoped_timer
     io_fileread
     io_filesystem
     logic
+    logic_filesystem_constants
+    logic_map
+    logic_map_objects
     map_io
-    scripting_lua_interface
+    ui_basic
 )
 
 # TODO(sirver): separate map_object_loader/saver into
@@ -24,10 +26,6 @@ wl_library(map_io
   SRCS
     coords_profile.cc
     coords_profile.h
-    tribes_legacy_lookup_table.cc
-    tribes_legacy_lookup_table.h
-    world_legacy_lookup_table.cc
-    world_legacy_lookup_table.h
     map_allowed_building_types_packet.cc
     map_allowed_building_types_packet.h
     map_allowed_worker_types_packet.cc
@@ -41,8 +39,6 @@ wl_library(map_io
     map_data_packet.h
     map_elemental_packet.cc
     map_elemental_packet.h
-    map_exploration_packet.cc
-    map_exploration_packet.h
     map_flag_packet.cc
     map_flag_packet.h
     map_flagdata_packet.cc
@@ -62,6 +58,7 @@ wl_library(map_io
     map_object_saver.h
     map_objective_packet.cc
     map_objective_packet.h
+    map_packet_versions.h
     map_player_names_and_tribes_packet.cc
     map_player_names_and_tribes_packet.h
     map_player_position_packet.cc
@@ -86,23 +83,35 @@ wl_library(map_io
     map_terrain_packet.h
     map_version_packet.cc
     map_version_packet.h
+    map_waterway_packet.cc
+    map_waterway_packet.h
+    map_waterwaydata_packet.cc
+    map_waterwaydata_packet.h
+    map_wincondition_packet.cc
+    map_wincondition_packet.h
+  USES_ATOMIC
   DEPENDS
+    base
     base_exceptions
-    base_log
     base_macros
     base_scoped_timer
-    build_info
     economy
     graphic
     graphic_image_io
     graphic_minimap_renderer
+    graphic_playercolor
     graphic_surface
-    helper
     io_fileread
     io_filesystem
+    io_profile
     logic
+    logic_constants
+    logic_exceptions
+    logic_map
+    logic_map_objects
+    logic_objectives
     logic_widelands_geometry
-    profile
+    logic_widelands_geometry_io
     scripting_logic
-    wui
+    ui_basic
 )

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -31,27 +30,29 @@ struct WidelandsMapLoader;
  * This is just a wrapper around MapSaver and MapLoader
  */
 struct GameMapPacket : public GameDataPacket {
-	GameMapPacket() : mos_(nullptr), mol_(nullptr), wms_(nullptr), wml_(nullptr) {}
-	virtual ~GameMapPacket();
-
+	GameMapPacket() = default;
+	~GameMapPacket() override;
 
 	/// Ensures that the world gets loaded but does not much more.
-	void read (FileSystem &, Game &, MapObjectLoader * = nullptr) override;
+	void read(FileSystem&, Game&, MapObjectLoader* = nullptr) override;
 
-	void read_complete(Game &); ///  Loads the rest of the map.
+	void read_complete(Game&);  ///  Loads the rest of the map.
 
-	void write(FileSystem &, Game &, MapObjectSaver  * = nullptr) override;
+	void write(FileSystem&, Game&, MapObjectSaver* = nullptr) override;
 
-	MapObjectSaver  * get_map_object_saver () {return mos_;}
-	MapObjectLoader * get_map_object_loader() {return mol_;}
+	MapObjectSaver* get_map_object_saver() {
+		return mos_;
+	}
+	MapObjectLoader* get_map_object_loader() {
+		return mol_;
+	}
 
 private:
-	MapObjectSaver  * mos_;
-	MapObjectLoader * mol_;
-	MapSaver             * wms_;
-	WidelandsMapLoader         * wml_;
+	MapObjectSaver* mos_{nullptr};
+	MapObjectLoader* mol_{nullptr};
+	MapSaver* wms_{nullptr};
+	WidelandsMapLoader* wml_{nullptr};
 };
-
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_GAME_IO_GAME_MAP_PACKET_H

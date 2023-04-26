@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,20 +12,15 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_ECONOMY_ECONOMY_H
 #define WL_ECONOMY_ECONOMY_H
 
+#include <functional>
 #include <memory>
-#include <set>
-#include <vector>
-
-#include <boost/function.hpp>
-#include <boost/utility.hpp>
 
 #include "base/macros.h"
 #include "economy/supply.h"
@@ -33,21 +28,33 @@
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/warelist.h"
 #include "logic/map_objects/tribes/wareworker.h"
-#include "ui_basic/unique_window.h"
-
+#include "notifications/note_ids.h"
+#include "notifications/notifications.h"
 
 namespace Widelands {
 
-class Game;
-class Player;
-class Soldier;
-class Warehouse;
+class Economy;
 struct Flag;
+class ProductionSite;
 struct RSPairStruct;
-class Request;
 struct Route;
 struct Router;
-struct Supply;
+class WorkerDescr;
+
+struct NoteEconomy {
+	CAN_BE_SENT_AS_NOTE(NoteId::Economy)
+
+	// When 2 economies have been merged, this is the economy number that has
+	// been removed, while the other one is the number of the resulting economy.
+	// For all other messages old_economy == new_economy.
+	Widelands::Serial old_economy;
+	Widelands::Serial new_economy;
+
+	enum class Action { kMerged, kDeleted };
+	const Action action;
+};
+
+constexpr Quantity kEconomyTargetInfinity = std::numeric_limits<Quantity>::max();
 
 /**
  * Each Economy represents all building and flags, which are connected over the same
@@ -66,16 +73,24 @@ struct Supply;
  * and in particular during game shutdown or when a large network is destroyed
  * in a military operation, cascading economy splits could take a lot of processing time.
  * For this reason, economies do not split immediately when a road is destroyed,
- * but instead keep track of where a potential split occured and evaluate the split lazily.
+ * but instead keep track of where a potential split occurred and evaluate the split lazily.
  *
  * This means that two flags which are connected by the road (and seafaring) network
  * are \b always in the same economy, but two flags in the same economy are not always
  * connected by roads or the seafaring network - though of course, most code operates
  * on the assumption that they are, with fallbacks for when they aren't.
+ *
+ * Everything that has economies now has one economy that handles only wares and one that handles
+ * only workers. The reason for this design is that two road networks connected only by ferries
+ * are the same economy from the ware point of view, but separate economies from a worker's point
+ * of view. This fix involves the least amount of code duplication.
  */
 class Economy {
 public:
 	friend class EconomyDataPacket;
+
+	// Initialize the global serial on game start
+	static void initialize_serial();
 
 	/// Configurable target quantity for the supply of a ware type in the
 	/// economy.
@@ -89,111 +104,124 @@ public:
 	/// economies are merged. The setting that was modified most recently will
 	/// be used for the merged economy.
 	struct TargetQuantity {
-		uint32_t permanent;
-		Time     last_modified;
+		Quantity permanent;
+		Time last_modified;
 	};
 
-	Economy(Player &);
+	explicit Economy(Player&, WareWorker);
+	explicit Economy(Player&, Serial serial, WareWorker);  // For saveloading
 	~Economy();
 
-	Player & owner() const {return owner_;}
+	[[nodiscard]] Serial serial() const {
+		return serial_;
+	}
 
-	static void check_merge(Flag &, Flag &);
-	static void check_split(Flag &, Flag &);
+	[[nodiscard]] Player& owner() const {
+		return owner_;
+	}
 
-	bool find_route
-		(Flag & start, Flag & end,
-		 Route * route,
-		 WareWorker type,
-		 int32_t cost_cutoff = -1);
+	[[nodiscard]] WareWorker type() const {
+		return type_;
+	}
 
-	using WarehouseAcceptFn = boost::function<bool (Warehouse &)>;
-	Warehouse * find_closest_warehouse
-		(Flag & start, WareWorker type = wwWORKER, Route * route = nullptr,
-		 uint32_t cost_cutoff = 0,
-		 const WarehouseAcceptFn & acceptfn = WarehouseAcceptFn());
+	static void check_merge(const Flag&, const Flag&, WareWorker);
+	static void check_split(Flag&, Flag&, WareWorker);
 
-	std::vector<Flag *>::size_type get_nrflags() const {return flags_.size();}
-	void    add_flag(Flag &);
-	void remove_flag(Flag &);
+	bool find_route(Flag& start, Flag& end, Route* route, int32_t cost_cutoff = -1);
+
+	using WarehouseAcceptFn = std::function<bool(Warehouse&)>;
+	Warehouse* find_closest_warehouse(Flag& start,
+	                                  Route* route = nullptr,
+	                                  uint32_t cost_cutoff = 0,
+	                                  const WarehouseAcceptFn& acceptfn = WarehouseAcceptFn());
+
+	[[nodiscard]] std::vector<Flag*>::size_type get_nrflags() const {
+		return flags_.size();
+	}
+	void add_flag(Flag&);
+	void remove_flag(Flag&);
 
 	// Returns an arbitrary flag or nullptr if this is an economy without flags
 	// (i.e. an Expedition ship).
-	Flag* get_arbitrary_flag();
+	Flag* get_arbitrary_flag(const Economy* other = nullptr);
 
-	void set_ware_target_quantity  (DescriptionIndex, uint32_t, Time);
-	void set_worker_target_quantity(DescriptionIndex, uint32_t, Time);
+	void set_target_quantity(WareWorker economy_type, DescriptionIndex, Quantity, Time);
 
-	void    add_wares  (DescriptionIndex, uint32_t count = 1);
-	void remove_wares  (DescriptionIndex, uint32_t count = 1);
+	void
+	add_wares_or_workers(DescriptionIndex, Quantity count = 1, Economy* other_economy = nullptr);
+	void remove_wares_or_workers(DescriptionIndex, Quantity count = 1);
 
-	void    add_workers(DescriptionIndex, uint32_t count = 1);
-	void remove_workers(DescriptionIndex, uint32_t count = 1);
+	void add_warehouse(Warehouse&);
+	void remove_warehouse(Warehouse&);
+	[[nodiscard]] const std::vector<Warehouse*>& warehouses() const {
+		return warehouses_;
+	}
 
-	void    add_warehouse(Warehouse &);
-	void remove_warehouse(Warehouse &);
-	const std::vector<Warehouse *>& warehouses() const {return warehouses_;}
+	void add_request(Request&);
+	void remove_request(Request&);
 
-	void    add_request(Request &);
-	void remove_request(Request &);
-
-	void    add_supply(Supply &);
-	void remove_supply(Supply &);
+	void add_supply(Supply&);
+	void remove_supply(Supply&);
 
 	/// information about this economy
-	WareList::WareCount stock_ware  (DescriptionIndex const i) {
-		return wares_  .stock(i);
-	}
-	WareList::WareCount stock_worker(DescriptionIndex const i) {
-		return workers_.stock(i);
+	Quantity stock_ware_or_worker(DescriptionIndex const i) {
+		return wares_or_workers_.stock(i);
 	}
 
-	/// Whether the economy needs more of this ware type.
+	/// Whether the economy needs more of this ware/worker type.
 	/// Productionsites may ask this before they produce, to avoid depleting a
 	/// ware type by overproducing another from it.
-	bool needs_ware(DescriptionIndex) const;
+	[[nodiscard]] bool needs_ware_or_worker(DescriptionIndex) const;
 
-	/// Whether the economy needs more of this worker type.
-	/// Productionsites may ask this before they produce, to avoid depleting a
-	/// ware type by overproducing a worker type from it.
-	bool needs_worker(DescriptionIndex) const;
-
-	const TargetQuantity & ware_target_quantity  (DescriptionIndex const i) const {
-		return ware_target_quantities_[i];
+	[[nodiscard]] const TargetQuantity& target_quantity(DescriptionIndex const i) const {
+		return target_quantities_[i];
 	}
-	TargetQuantity       & ware_target_quantity  (DescriptionIndex const i)       {
-		return ware_target_quantities_[i];
-	}
-	const TargetQuantity & worker_target_quantity(DescriptionIndex const i) const {
-		return worker_target_quantities_[i];
-	}
-	TargetQuantity       & worker_target_quantity(DescriptionIndex const i)       {
-		return worker_target_quantities_[i];
+	TargetQuantity& target_quantity(DescriptionIndex const i) {
+		return target_quantities_[i];
 	}
 
-	void show_options_window();
-	UI::UniqueWindow::Registry& optionswindow_registry() {
-		return optionswindow_registry_;
+	[[nodiscard]] void* get_options_window() const {
+		return options_window_;
+	}
+	void set_options_window(void* window) {
+		options_window_ = window;
 	}
 
-	const WareList & get_wares  () const {return wares_;}
-	const WareList & get_workers() const {return workers_;}
+	[[nodiscard]] const WareList& get_wares_or_workers() const {
+		return wares_or_workers_;
+	}
+
+	// Checks whether this economy contains a building of the specified type
+	[[nodiscard]] bool has_building(DescriptionIndex) const;
+	/**
+	 * Of all occupied ProductionSites of the specified type in this economy,
+	 * find the one that is closest to the specified flag and return it.
+	 * Stopped buildings are also accepted. If `check_inputqueues` is `true`,
+	 * buildings with all inputqueues set to zero capacity are ignored.
+	 * If no matching site is found, nullptr is returned.
+	 */
+	ProductionSite*
+	find_closest_occupied_productionsite(const Flag&, DescriptionIndex, bool check_inputqueues);
 
 	///< called by \ref Cmd_Call_Economy_Balance
 	void balance(uint32_t timerid);
 
-	void rebalance_supply() {start_request_timer();}
+	void rebalance_supply() {
+		start_request_timer();
+	}
+
+protected:
+	static Serial last_economy_serial_;
 
 private:
-
 	// This structs is to store distance from supply to request(or), but to allow unambiguous
-	// sorting if distances are the same, we use also serial number of provider and type of provider (flag,
+	// sorting if distances are the same, we use also serial number of provider and type of provider
+	// (flag,
 	// warehouse)
 	struct UniqueDistance {
 		bool operator<(const UniqueDistance& other) const {
-       		return std::forward_as_tuple(distance, serial, provider_type)
-				<
-				std::forward_as_tuple(other.distance, other.serial, other.provider_type);
+			return std::forward_as_tuple(distance, serial, provider_type) <
+			       std::forward_as_tuple(other.distance, other.serial, other.provider_type);
 		}
 
 		uint32_t distance;
@@ -201,46 +229,48 @@ private:
 		SupplyProviders provider_type;
 	};
 
-/*************/
-/* Functions */
-/*************/
-	void do_remove_flag(Flag &);
+	/*************/
+	/* Functions */
+	/*************/
+	void do_remove_flag(Flag&);
 	void reset_all_pathfinding_cycles();
 
-	void merge(Economy &);
+	void merge(Economy&);
 	void check_splits();
-	void split(const std::set<OPtr<Flag> > &);
+	void split(const std::set<OPtr<Flag>>&);
 
-	void start_request_timer(int32_t delta = 200);
+	void start_request_timer(const Duration& delta = Duration(200));
 
-	Supply * find_best_supply(Game &, const Request &, int32_t & cost);
-	void process_requests(Game &, RSPairStruct &);
-	void balance_requestsupply(Game &);
-	void handle_active_supplies(Game &);
-	void create_requested_workers(Game &);
-	void create_requested_worker(Game &, DescriptionIndex);
+	Supply* find_best_supply(Game&, const Request&, int32_t& cost);
+	void process_requests(Game&, RSPairStruct* supply_pairs);
+	void balance_requestsupply(Game&);
+	void handle_active_supplies(Game&);
+	void create_requested_workers(Game&);
+	void create_requested_worker(Game&, DescriptionIndex);
 
-	bool has_request(Request &);
+	bool has_request(Request&) const;
 
-/*************/
-/* Variables */
-/*************/
-	using RequestList = std::vector<Request *>;
+	/*************/
+	/* Variables */
+	/*************/
+	using RequestList = std::vector<Request*>;
 
-	Player & owner_;
+	const Serial serial_;
 
-	using Flags = std::vector<Flag *>;
+	Player& owner_;
+
+	using Flags = std::vector<Flag*>;
 	Flags flags_;
-	WareList wares_;     ///< virtual storage with all wares in this Economy
-	WareList workers_;   ///< virtual storage with all workers in this Economy
-	std::vector<Warehouse *> warehouses_;
+	WareList wares_or_workers_;  ///< virtual storage with all wares/workers in this Economy
+	std::vector<Warehouse*> warehouses_;
 
-	RequestList requests_; ///< requests
+	WareWorker type_;  ///< whether we are a WareEconomy or a WorkerEconomy
+
+	RequestList requests_;  ///< requests
 	SupplyList supplies_;
 
-	TargetQuantity        * ware_target_quantities_;
-	TargetQuantity        * worker_target_quantities_;
-	Router                 * router_;
+	TargetQuantity* target_quantities_;
+	std::unique_ptr<Router> router_;
 
 	using SplitPair = std::pair<OPtr<Flag>, OPtr<Flag>>;
 	std::vector<SplitPair> split_checks_;
@@ -251,15 +281,22 @@ private:
 	 */
 	uint32_t request_timerid_;
 
-	static std::unique_ptr<Soldier> soldier_prototype_;
-	UI::UniqueWindow::Registry optionswindow_registry_;
+	static std::unique_ptr<Worker> soldier_prototype_;
+	static Worker& soldier_prototype(const WorkerDescr* = nullptr);
+
+	// This is always an EconomyOptionsWindow* (or nullptr) but I don't want a wui dependency here.
+	// We cannot use UniqueWindow to make sure an economy never has two windows because the serial
+	// may change when merging while the window is open, so we have to keep track of it here.
+	void* options_window_;
 
 	// 'list' of unique providers
 	std::map<UniqueDistance, Supply*> available_supplies_;
 
+	// Helper function for `find_closest_occupied_productionsite()`
+	bool check_building_can_start_working(const ProductionSite&, bool check_inputqueues);
+
 	DISALLOW_COPY_AND_ASSIGN(Economy);
 };
-
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_ECONOMY_H

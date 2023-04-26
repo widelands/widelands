@@ -18,7 +18,7 @@ function remove_all_rocks(fields, g_sleeptime)
             f.immovable:remove()
             if n > 1 then
                remove_field = false
-               map:place_immovable("greenland_rocks" .. n-1, f, "world")
+               map:place_immovable("greenland_rocks" .. n-1, f)
             end
             sleep(sleeptime)
          end

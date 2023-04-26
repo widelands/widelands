@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,34 +12,33 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_ECONOMY_ECONOMY_DATA_PACKET_H
 #define WL_ECONOMY_ECONOMY_DATA_PACKET_H
 
+#include <cassert>
+
 class FileRead;
 class FileWrite;
 
 namespace Widelands {
 class Economy;
-class Game;
-class MapObjectLoader;
-struct MapObjectSaver;
 
 class EconomyDataPacket {
-	public:
-		EconomyDataPacket(Economy * e) : eco_(e) {}
+public:
+	explicit EconomyDataPacket(Economy* e) : eco_(e) {
+		assert(eco_);
+	}
 
-		void read(FileRead &);
-		void write(FileWrite &);
+	void read(FileRead&);
+	void write(FileWrite&);
 
-	private:
-		Economy * eco_;
+private:
+	Economy* eco_;
 };
-
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_ECONOMY_DATA_PACKET_H

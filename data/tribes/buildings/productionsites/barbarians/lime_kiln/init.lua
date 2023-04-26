@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
+wl.Descriptions():new_productionsite_type {
    name = "barbarians_lime_kiln",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Lime Kiln"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -19,21 +19,21 @@ tribes:new_productionsite_type {
       granite = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 45, 53 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
          hotspot = { 45, 53 },
       },
    },
 
    aihints = {
-      forced_after = 600,
       very_weak_ai_limit = 1,
-      weak_ai_limit = 2
+      weak_ai_limit = 2,
+      basic_amount = 1
    },
 
    working_positions = {
@@ -41,25 +41,27 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      granite = 6,
-      water = 6,
-      coal = 3
-   },
-   outputs = {
-      "grout"
+      { name = "granite", amount = 6 },
+      { name = "water", amount = 6 },
+      { name = "coal", amount = 3 }
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mixing grout because ...
-         descname = _"mixing grout",
+         descname = _("mixing grout"),
          actions = {
-            "sleep=50000",
             "return=skipped unless economy needs grout",
             "consume=coal granite:2 water:2",
-            "animate=working 32000",
+            "sleep=duration:50s",
+            "playsound=sound/barbarians/stonegrind priority:80%",
+            "animate=working duration:29s",
+            "playsound=sound/barbarians/mortar priority:60%",
+            "sleep=duration:3s",
             "produce=grout:2"
          }
       },
    },
 }
+
+pop_textdomain()

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,17 +12,18 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "io/filewrite.h"
 
+#include <cassert>
+
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/filesystem.h"
 
-FileWrite::FileWrite() : data_(nullptr), length_(0), max_size_(0), filepos_(0) {
+FileWrite::FileWrite() : filepos_(0) {
 }
 
 FileWrite::~FileWrite() {
@@ -36,13 +37,8 @@ void FileWrite::clear() {
 	filepos_ = 0;
 }
 
-void FileWrite::write(FileSystem& fs, char const* const filename) {
+void FileWrite::write(FileSystem& fs, const std::string& filename) {
 	fs.write(filename, data_, length_);
-	clear();
-}
-
-void FileWrite::write_append(RealFSImpl& fs, char const* const filename) {
-	fs.write(filename, data_, length_, true);
 	clear();
 }
 
@@ -50,7 +46,7 @@ FileWrite::Pos FileWrite::get_pos() const {
 	return filepos_;
 }
 
-void FileWrite::set_pos(const Pos pos) {
+void FileWrite::set_pos(const Pos& pos) {
 	filepos_ = pos;
 }
 
@@ -65,8 +61,9 @@ void FileWrite::data(const void* const src, const size_t size, Pos const pos = P
 	if (i + size > length_) {
 		if (i + size > max_size_) {
 			max_size_ += 4096;
-			if (max_size_ < i + size)
+			if (max_size_ < i + size) {
 				max_size_ = i + size;
+			}
 			char* new_data = static_cast<char*>(realloc(data_, max_size_));
 			assert(new_data);
 			data_ = new_data;

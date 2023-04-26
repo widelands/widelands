@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_productionsite_type {
    name = "empire_donkeyfarm",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Donkey Farm"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
 
@@ -19,19 +19,25 @@ tribes:new_productionsite_type {
       granite = 2
    },
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 85, 78 },
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 89, 82 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
-         hotspot = { 85, 78 },
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 89, 82 },
       },
    },
 
    aihints = {
-      recruitment = true
+      prohibited_till = 610,
    },
 
    working_positions = {
@@ -39,25 +45,24 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      wheat = 8,
-      water = 8
-   },
-   outputs = {
-      "empire_donkey"
+      { name = "water", amount = 8 },
+      { name = "wheat", amount = 8 }
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start rearing donkeys because ...
-         descname = _"rearing donkeys",
+         descname = pgettext("empire_building", "rearing donkeys"),
          actions = {
-            "sleep=15000",
             "return=skipped unless economy needs empire_donkey",
             "consume=wheat water",
-            "play_sound=sound/farm donkey 192",
-            "animate=working 15000", -- Feeding cute little baby donkeys ;)
+            "sleep=duration:15s",
+            "playsound=sound/farm/donkey priority:50% allow_multiple",
+            "animate=working duration:15s", -- Feeding cute little baby donkeys ;)
             "recruit=empire_donkey"
          }
       },
    },
 }
+
+pop_textdomain()

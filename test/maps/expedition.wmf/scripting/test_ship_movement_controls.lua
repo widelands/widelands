@@ -1,5 +1,5 @@
 run(function()
-   game.desired_speed = 30 * 1000
+   game.desired_speed = 4 * 1000
 
     -- placing a ship on coast
    p1:place_ship(map:get_field(8, 8))
@@ -24,8 +24,8 @@ run(function()
    --ship has no wares on it
    assert_equal(0,ships[1]:get_wares())
 
-   --no destination is set
-   assert(not ships[1].destination)
+   --heading to the port
+   assert(ships[1].destination)
    --ships in transport state
    assert_equal("transport", ships[1].state)
 
@@ -35,7 +35,7 @@ run(function()
    --starting prepartion for expedition
    assert(not port.expedition_in_progress)
    port:start_expedition()
-   sleep (300)
+   sleep (5000)
    assert(port.expedition_in_progress)
    assert(ships[1])
 
@@ -102,10 +102,8 @@ run(function()
 
    --starting colonization port here
    assert(ships[1]:build_colonization_port())
-   sleep(500)
-   assert_equal("exp_colonizing", ships[1].state)
    sleep(15000)
-   stable_save("port_in_constr")
+   stable_save(game, "port_in_constr", 30 * 1000)
 
    -- while unfinished yet, removing it
    new_port=map:get_field(16,2).immovable

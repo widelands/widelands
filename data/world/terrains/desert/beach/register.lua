@@ -1,0 +1,3 @@
+return {
+   desert_beach = {}
+}

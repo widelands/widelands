@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2007-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -23,58 +22,83 @@
 
 namespace Widelands {
 
-template <>
-bool MapFringeRegion<Area<FCoords> >::advance(const Map & map) {
+template <> bool MapFringeRegion<Area<FCoords>>::advance(const Map& map) {
 	switch (phase_) {
 	case 0:
-		if (area_.radius) {
+		if (area_.radius != 0u) {
 			remaining_in_phase_ = area_.radius;
-			phase_              = 6;
-		}
-		else
+			phase_ = 6;
+			// Fallthrough
+		} else {
 			return false;
-		/* no break */
-	case 1: map.get_trn(area_, &area_); break;
-	case 2: map.get_tln(area_, &area_); break;
-	case 3: map. get_ln(area_, &area_); break;
-	case 4: map.get_bln(area_, &area_); break;
-	case 5: map.get_brn(area_, &area_); break;
-	case 6: map. get_rn(area_, &area_); break;
-	default:
-	  NEVER_HERE();
-	}
-	if (--remaining_in_phase_ == 0) {
-		remaining_in_phase_ = area_.radius;
-		--phase_;
-	}
-	return phase_;
-}
-
-template <>
-bool MapFringeRegion<Area<> >::advance(const Map & map) {
-	switch (phase_) {
-	case 0:
-		if (area_.radius) {
-			remaining_in_phase_ = area_.radius;
-			phase_              = 6;
 		}
-		else
-			return false;
-		/* no break */
-	case 1: map.get_trn(area_, &area_); break;
-	case 2: map.get_tln(area_, &area_); break;
-	case 3: map. get_ln(area_, &area_); break;
-	case 4: map.get_bln(area_, &area_); break;
-	case 5: map.get_brn(area_, &area_); break;
-	case 6: map. get_rn(area_, &area_); break;
+		FALLS_THROUGH;
+	case 1:
+		map.get_trn(area_, &area_);
+		break;
+	case 2:
+		map.get_tln(area_, &area_);
+		break;
+	case 3:
+		map.get_ln(area_, &area_);
+		break;
+	case 4:
+		map.get_bln(area_, &area_);
+		break;
+	case 5:
+		map.get_brn(area_, &area_);
+		break;
+	case 6:
+		map.get_rn(area_, &area_);
+		break;
 	default:
 		NEVER_HERE();
 	}
+
 	if (--remaining_in_phase_ == 0) {
 		remaining_in_phase_ = area_.radius;
 		--phase_;
 	}
-	return phase_;
+	return phase_ != 0u;
 }
 
+template <> bool MapFringeRegion<Area<>>::advance(const Map& map) {
+	switch (phase_) {
+	case 0:
+		if (area_.radius != 0u) {
+			remaining_in_phase_ = area_.radius;
+			phase_ = 6;
+			// Fallthrough
+		} else {
+			return false;
+		}
+		FALLS_THROUGH;
+	case 1:
+		map.get_trn(area_, &area_);
+		break;
+	case 2:
+		map.get_tln(area_, &area_);
+		break;
+	case 3:
+		map.get_ln(area_, &area_);
+		break;
+	case 4:
+		map.get_bln(area_, &area_);
+		break;
+	case 5:
+		map.get_brn(area_, &area_);
+		break;
+	case 6:
+		map.get_rn(area_, &area_);
+		break;
+	default:
+		NEVER_HERE();
+	}
+
+	if (--remaining_in_phase_ == 0) {
+		remaining_in_phase_ = area_.radius;
+		--phase_;
+	}
+	return phase_ != 0u;
 }
+}  // namespace Widelands

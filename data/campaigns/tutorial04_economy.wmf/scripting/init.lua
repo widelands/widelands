@@ -5,16 +5,19 @@
 plr = wl.Game().players[1]
 plr2 = wl.Game().players[2]
 
-set_textdomain("scenario_tutorial04_economy.wmf")
+push_textdomain("scenario_tutorial04_economy.wmf")
 
 include "scripting/coroutine.lua"
+include "scripting/field_animations.lua"
 include "scripting/infrastructure.lua"
 include "scripting/messages.lua"
+include "scripting/richtext_scenarios.lua"
 include "scripting/table.lua"
 include "scripting/ui.lua"
 
 map = wl.Game().map
 mv = wl.ui.MapView()
+wl.Game().allow_diplomacy = false
 
 tavern_field = map:get_field(105, 44)
 warehouse_field = map:get_field(78, 67)

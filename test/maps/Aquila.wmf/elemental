@@ -1,0 +1,11 @@
+# Automatically created by Widelands svn4982 (inoffical)
+
+[global]
+packet_version="1"
+map_w="128"
+map_h="128"
+nr_players="4"
+world="desert"
+name="Aquila"
+author="Templer"
+descr="Aquila, das gelobte Land, es ist uns verheißen. Wo mag es sich befinden? Niemand kann etwas sagen.  Jüngst widerfuhr Oma Kaygur ein Wachtraum. Seither deutet sie vage in Richtung Norden, wann immer von Aquila gesprochen wird. Anführer Tigiquas lachte nur breit. Er gab nie etwas auf Aberglaube. Wird unser neuer Anführer den Aufbruch befehlen? Das Volk schaut auf Euch, My Lord."

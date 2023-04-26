@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -25,10 +24,10 @@
 namespace Widelands {
 
 // Load all images from 'pics/*' in the map.
-void load_map_images(FileSystem& filesystem);
+void load_map_images(FileSystem& fs);
 
 // Copies all images from 'pics/*' in 'old_fs' into the 'new_fs'.
-void save_map_images(FileSystem* new_fs, FileSystem* old_fs);
+void save_map_images(FileSystem* new_fs, FileSystem* map_fs);
 
 }  // namespace Widelands
 

@@ -1,14 +1,25 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_productionsite_type {
    name = "empire_marblemine",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Marble Mine"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "mine",
-   enhancement = "empire_marblemine_deep",
+
+   enhancement = {
+      name = "empire_marblemine_deep",
+      enhancement_cost = {
+         log = 4,
+         planks = 2
+      },
+      enhancement_return_on_dismantle = {
+         log = 2,
+         planks = 1
+      }
+   },
 
    buildcost = {
       log = 4,
@@ -19,26 +30,33 @@ tribes:new_productionsite_type {
       planks = 1
    },
 
-   animations = {
+   animation_directory = dirname,
+
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 49, 49 },
-      },
-      working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 49, 49 },
-         fps = 10
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 51, 54 },
       },
       empty = {
-         pictures = path.list_files(dirname .. "empty_??.png"),
-         hotspot = { 49, 49 },
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 51, 54 }
+      },
+      working = {
+         fps = 10,
+         frames = 10,
+         columns = 10,
+         rows = 1,
+         hotspot = { 51, 54 }
       },
    },
 
    aihints = {
-      mines = "stones",
-      mines_percent = 50,
-      prohibited_till = 450
+      prohibited_till = 600,
+      basic_amount = 1
    },
 
    working_positions = {
@@ -46,60 +64,92 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      ration = 6,
-      wine = 6
-   },
-   outputs = {
-      "marble",
-      "granite"
+      { name = "ration", amount = 6 },
+      { name = "wine", amount = 6 }
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
-            "call=mine_marble",
+            -- "return=skipped" causes 10 sec delay
+            -- time total: 69 + 69 + 10 = 148 sec
             "call=mine_granite",
+            "call=mine_marble",
+            "return=skipped"
+         }
+      },
+      mine_granite = {
+         -- TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
+         descname = _("mining granite"),
+         actions = {
+            -- time: 12.6 + 4 * (10.5 + 3.6) = 69 sec
+            "return=skipped unless economy needs marble or economy needs granite",
+            "consume=ration wine",
+            "sleep=duration:12s600ms",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_marble",
+            "call=a_mine_produce_granite",
             "return=skipped"
          }
       },
       mine_marble = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
-         descname = _"mining marble",
+         descname = _("mining marble"),
          actions = {
-            "sleep=20000",
+            -- time: 12.6 + 4 * (10.5 + 3.6) = 69 sec
             "return=skipped unless economy needs marble or economy needs granite",
             "consume=wine ration",
-            "animate=working 20000",
-            "mine=stones 2 50 5 17",
-            "produce=marble:2",
-            "animate=working 20000",
-            "mine=stones 2 50 5 17",
-            "produce=marble granite"
+            "sleep=duration:12s600ms",
+            "call=a_mine_produce_marble",
+            "call=a_mine_produce_marble",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_marble",
+            "return=skipped"
          }
       },
-      mine_granite = {
-         -- TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
-         descname = _"mining granite",
+      a_mine_produce_granite = {
+         descname = _("mining granite"),
          actions = {
-            "sleep=20000",
-            "return=skipped unless economy needs marble or economy needs granite",
+            "animate=working duration:10s500ms",
+            "mine=resource_stones radius:2 yield:50% when_empty:5% experience_on_fail:17%",
+            "produce=granite",
+         }
+      },
+      a_mine_produce_marble = {
+         descname = _("mining marble"),
+         actions = {
+            "animate=working duration:10s500ms",
+            "mine=resource_stones radius:2 yield:50% when_empty:5% experience_on_fail:17%",
+            "produce=marble",
+         }
+      },
+      encyclopedia_granite = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
             "consume=ration wine",
-            "animate=working 20000",
-            "mine=stones 2 50 5 17",
-            "produce=granite marble",
-            "animate=working 20000",
-            "mine=stones 2 50 5 17",
-            "produce=granite:2"
+            "produce=granite:3 marble",
+         }
+      },
+      encyclopedia_marble = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=wine ration",
+            "produce=marble:3 granite",
          }
       },
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Marble",
-      heading = _"Main Marble Vein Exhausted",
+      title = _("No Marble"),
+      heading = _("Main Marble Vein Exhausted"),
       message =
          pgettext("empire_building", "This marble mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

@@ -1,5 +1,3 @@
-set_textdomain("tribes")
-
 test_descr = lunit.TestCase("Tribes descriptions test")
 
 --  =======================================================
@@ -13,9 +11,9 @@ function test_descr:test_tribe_descr()
 end
 
 function test_descr:test_descname()
-   assert_equal(_"Atlanteans", egbase:get_tribe_description("atlanteans").descname)
-   assert_equal(_"Barbarians", egbase:get_tribe_description("barbarians").descname)
-   assert_equal(_"Empire", egbase:get_tribe_description("empire").descname)
+   assert_equal(_("Atlanteans"), egbase:get_tribe_description("atlanteans").descname)
+   assert_equal(_("Barbarians"), egbase:get_tribe_description("barbarians").descname)
+   assert_equal(_("Empire"), egbase:get_tribe_description("empire").descname)
 end
 
 function test_descr:test_name()
@@ -25,18 +23,32 @@ function test_descr:test_name()
 end
 
 function test_descr:test_get_buildings()
-   local nobuildings = function(t)
-      local count = 0
-      for _ in pairs(t) do count = count + 1 end
-      return count
-   end
-
    local tribe = egbase:get_tribe_description("atlanteans")
-   assert_equal(41, nobuildings(tribe.buildings))
+   assert_equal(43, #tribe.buildings)
    tribe = egbase:get_tribe_description("barbarians")
-   assert_equal(50, nobuildings(tribe.buildings))
+   assert_equal(52, #tribe.buildings)
    tribe = egbase:get_tribe_description("empire")
-   assert_equal(51, nobuildings(tribe.buildings))
+   assert_equal(53, #tribe.buildings)
+
+   -- Test if buildings have been casted to their correct types
+   for i, building in ipairs(tribe.buildings) do
+      if (building.type_name == "productionsite") then
+         assert_true(#building.production_programs > 0)
+      elseif (building.type_name == "militarysite") then
+         assert_true(building.heal_per_second > 0)
+         assert_true(building.max_number_of_soldiers > 0)
+      elseif (building.type_name == "warehouse") then
+         assert_true(building.heal_per_second > 0)
+         assert_true(building.max_number_of_soldiers == nil)
+      elseif (building.type_name == "trainingsite") then
+         assert_true(building.max_attack ~= nil or building.max_defense ~= nil or building.max_evade ~= nil or building.max_health ~= nil)
+      end
+   end
+end
+
+function test_descr:test_get_builder()
+   local tribe = egbase:get_tribe_description("atlanteans")
+   assert_equal("atlanteans_builder", tribe.builder)
 end
 
 function test_descr:test_get_carrier()
@@ -47,11 +59,6 @@ end
 function test_descr:test_get_carrier2()
    local tribe = egbase:get_tribe_description("atlanteans")
    assert_equal("atlanteans_horse", tribe.carrier2)
-end
-
-function test_descr:test_get_headquarters()
-   local tribe = egbase:get_tribe_description("atlanteans")
-   assert_equal("atlanteans_headquarters", tribe.headquarters)
 end
 
 function test_descr:test_get_geologist()
@@ -76,34 +83,20 @@ end
 
 function test_descr:test_get_wares()
    local tribe = egbase:get_tribe_description("atlanteans")
-   local nowares = function(t)
-      local count = 0
-      for _ in pairs(t) do count = count + 1 end
-      return count
-   end
-
-   local tribe = egbase:get_tribe_description("atlanteans")
-   assert_equal(44, nowares(tribe.wares))
+   assert_equal(44, #tribe.wares)
    tribe = egbase:get_tribe_description("barbarians")
-   assert_equal(40, nowares(tribe.wares))
+   assert_equal(40, #tribe.wares)
    tribe = egbase:get_tribe_description("empire")
-   assert_equal(44, nowares(tribe.wares))
+   assert_equal(44, #tribe.wares)
 end
 
 function test_descr:test_get_workers()
    local tribe = egbase:get_tribe_description("atlanteans")
-   local noworkers = function(t)
-      local count = 0
-      for _ in pairs(t) do count = count + 1 end
-      return count
-   end
-
-   local tribe = egbase:get_tribe_description("atlanteans")
-   assert_equal(29, noworkers(tribe.workers))
+   assert_equal(31, #tribe.workers)
    tribe = egbase:get_tribe_description("barbarians")
-   assert_equal(31, noworkers(tribe.workers))
+   assert_equal(33, #tribe.workers)
    tribe = egbase:get_tribe_description("empire")
-   assert_equal(32, noworkers(tribe.workers))
+   assert_equal(34, #tribe.workers)
 end
 
 function test_descr:test_has_building()

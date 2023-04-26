@@ -1,27 +1,12 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 9, 21 },
-      fps = 10
-   },
-   hacking = {
-      pictures = path.list_files(dirname .. "hacking_??.png"),
-      hotspot = { 11, 18 },
-      fps = 10
-   }
-}
-add_worker_animations(animations, "walk", dirname, "walk", {9, 21}, 10)
-add_worker_animations(animations, "walkload", dirname, "walk", {9, 21}, 10)
-
-
-tribes:new_worker_type {
-   msgctxt = "empire_worker",
+wl.Descriptions():new_worker_type {
    name = "empire_geologist",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("empire_worker", "Geologist"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -35,17 +20,51 @@ tribes:new_worker_type {
       -- The specialized geologist command walks the geologist around his starting
       -- location, executing the search program from time to time.
       expedition = {
-         "geologist 15 5 search"
+         "repeatsearch=search repetitions:15 radius:5"
       },
       -- Search program, executed when we have found a place to hack on
       search = {
-         "animation hacking 5000",
-         "animation idle 2000",
-         "play_sound sound/hammering geologist_hammer 192",
-         "animation hacking 3000",
-         "geologist_find"
+         "animate=hacking duration:5s",
+         "animate=idle duration:2s",
+         "playsound=sound/hammering/geologist_hammer priority:50% allow_multiple",
+         "animate=hacking duration:3s",
+         "findresources"
       }
    },
 
-   animations = animations,
+   spritesheets = {
+      idle = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         hotspot = { 9, 21 }
+      },
+      hacking = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         hotspot = { 11, 18 }
+      },
+      walk = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 9, 21 }
+      },
+      walkload = {
+         basename = "walk",
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 9, 21 }
+      },
+   },
 }
+
+pop_textdomain()

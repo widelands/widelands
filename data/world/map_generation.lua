@@ -7,7 +7,6 @@
 --  Former greenland  --
 ------------------------
 
-
 greenland = {
    heights = {
       ocean = 10,
@@ -25,48 +24,48 @@ greenland = {
          {
             name = "ocean",
             weight = 1,
-            ocean_terrains = { "wasser" },
-            shelf_terrains = { "wasser" },
-            shallow_terrains = { "wasser" },
+            ocean_terrains = { "summer_water" },
+            shelf_terrains = { "summer_water" },
+            shallow_terrains = { "summer_water" },
          }
       },
       land = {
          {
             name = "beach",
             weight = 2,
-            coast_terrains = { "strand" },
-            land_terrains = { "wiese2", "wiese3" },
-            upper_terrains = { "wiese2", "wiese3" },
+            coast_terrains = { "summer_beach" },
+            land_terrains = { "summer_meadow2", "summer_meadow3" },
+            upper_terrains = { "summer_meadow2", "summer_meadow3" },
          },
          {
             name = "meadow",
             weight = 1,
-            coast_terrains = { "strand" },
-            land_terrains = { "wiese1" },
-            upper_terrains = { "wiese2", "wiese3" },
+            coast_terrains = { "summer_beach" },
+            land_terrains = { "summer_meadow1" },
+            upper_terrains = { "summer_meadow2", "summer_meadow3" },
          }
       },
       wasteland = {
          {
             name = "swamp",
             weight = 1,
-            inner_terrains = { "sumpf" },
-            outer_terrains = { "sumpf" },
+            inner_terrains = { "summer_swamp" },
+            outer_terrains = { "summer_swamp" },
          },
          {
             name = "tundra",
-            inner_terrains = { "steppe_kahl" },
+            inner_terrains = { "summer_steppe_barren" },
             weight = 1,
-            outer_terrains = { "steppe" },
+            outer_terrains = { "summer_steppe" },
          }
       },
       mountains = {
          {
             name = "mountains",
             weight = 1,
-            mountainfoot_terrains = { "bergwiese" },
-            mountain_terrains = { "berg1", "berg2", "berg3", "berg4" },
-            snow_terrains = { "schnee" },
+            mountainfoot_terrains = { "summer_mountain_meadow" },
+            mountain_terrains = { "summer_mountain1", "summer_mountain2", "summer_mountain3", "summer_mountain4" },
+            snow_terrains = { "summer_snow" },
          }
       }
    }, -- areas
@@ -78,17 +77,17 @@ greenland = {
             "alder_summer_old", "birch_summer_old", "beech_summer_old",
             "larch_summer_old", "rowan_summer_old"
          },
-         critters = { "brownbear", "chamois", "elk", "lynx", "reindeer", "stag", "wildboar", "wolf" },
+         critters = { "brownbear", "chamois", "moose", "lynx", "reindeer", "stag", "wildboar", "wolf" },
       },
       {
          name = "bushes",
          immovables = { "bush1", "bush2", "bush3", "bush4", "bush5" },
-         critters = { "bunny", "elk", "fox", "lynx", "marten", "sheep", "sheep", "wildboar", "wisent", "wolf", "wolf" },
+         critters = { "bunny", "moose", "fox", "lynx", "marten", "sheep", "sheep", "wildboar", "wisent", "wolf", "wolf" },
       },
       {
          name = "grasses",
          immovables = { "grass1", "grass2", "grass3" },
-         critters = { "bunny", "elk", "fox", "lynx", "marten", "sheep", "sheep", "wolf" },
+         critters = { "bunny", "moose", "fox", "lynx", "marten", "sheep", "sheep", "wolf" },
       },
       {
          name = "standing_stones",
@@ -222,8 +221,8 @@ blackland = {
             name = "ashes",
             weight = 1,
             coast_terrains = { "ashes2" },
-            land_terrains = { "ashes" },
-            upper_terrains = { "ashes" },
+            land_terrains = { "ashes1" },
+            upper_terrains = { "ashes1" },
          },
       },
       wasteland = {
@@ -414,10 +413,10 @@ desert = {
             weight = 1,
             mountainfoot_terrains = { "mountainmeadow" },
             mountain_terrains = {
-               "mountain1", "mountain2", "mountain3", "mountain4"
+               "mountain1", "mountain2"
             },
             snow_terrains = {
-               "mountain1", "mountain2", "mountain3", "mountain4"
+               "mountain3", "mountain4"
             },
          }
       }
@@ -581,8 +580,8 @@ winterland = {
             name = "land",
             weight = 1,
             coast_terrains = { "winter_beach" },
-            land_terrains = { "tundra", "tundra2", "tundra3" },
-            upper_terrains = { "tundra", "tundra2", "tundra3" },
+            land_terrains = { "winter_taiga1", "winter_taiga2", "winter_taiga3" },
+            upper_terrains = { "winter_taiga1", "winter_taiga2", "winter_taiga3" },
          },
       },
       wasteland = {
@@ -590,7 +589,7 @@ winterland = {
             name = "wasteland",
             weight = 1,
             inner_terrains = { "tundra_taiga" },
-            outer_terrains = { "tundra" },
+            outer_terrains = { "winter_tundra", "snow" },
          },
       },
       mountains = {
@@ -598,11 +597,8 @@ winterland = {
             name = "mountains",
             weight = 1,
             mountainfoot_terrains = { "tundra_taiga" },
-            mountain_terrains = {
-               "winter_mountain1", "winter_mountain2",
-               "winter_mountain3", "winter_mountain4"
-            },
-            snow_terrains = { "snow" },
+            mountain_terrains = { "winter_mountain3", "winter_mountain4" },
+            snow_terrains = { "winter_mountain1", "winter_mountain2" },
          }
       }
    }, -- areas
@@ -615,13 +611,13 @@ winterland = {
             "birch_summer_old", "beech_summer_old",
             "larch_summer_old", "rowan_summer_old",
          },
-         critters = { "deer", "elk", "lynx", "reindeer", "wolf" },
+         critters = { "deer", "moose", "lynx", "reindeer", "wolf" },
       },
       {
          name = "bushes",
          immovables = { "bush1", "bush2", "bush3", "bush4", "bush5" },
          critters = {
-            "wisent", "wolf", "bunny", "elk", "fox", "lynx",
+            "wisent", "wolf", "bunny", "moose", "fox", "lynx",
             "wolf", "marten", "sheep"
          },
       },
@@ -629,7 +625,7 @@ winterland = {
          name = "grasses",
          immovables = { "grass1", "grass2", "grass3" },
          critters = {
-            "wisent", "wolf", "bunny", "elk", "fox", "lynx",
+            "wisent", "wolf", "bunny", "moose", "fox", "lynx",
             "wolf", "marten", "sheep"
          },
       },
@@ -722,8 +718,8 @@ winterland = {
 }
 
 return {
-   greenland = greenland,
-   blackland = blackland,
+   summer = greenland,
+   wasteland = blackland,
    desert = desert,
-   winterland = winterland,
+   winter = winterland
 }

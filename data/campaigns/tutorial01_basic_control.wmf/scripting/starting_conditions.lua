@@ -5,5 +5,5 @@
 plr:allow_buildings("all")
 
 -- A default headquarters
-include "tribes/scripting/starting_conditions/barbarians/headquarters.lua"
+include "tribes/initialization/barbarians/starting_conditions/headquarters.lua"
 init.func(plr) -- defined in headquarters

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,16 +12,13 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "map_io/map_images.h"
 
-#include <memory>
-
-#include "graphic/graphic.h"
+#include "graphic/image_cache.h"
 #include "graphic/image_io.h"
 
 namespace Widelands {
@@ -30,22 +27,20 @@ void load_map_images(FileSystem& fs) {
 	// Read all pics.
 	if (!fs.file_exists("pics") || !fs.is_directory("pics")) {
 		return;
-
 	}
 	for (const std::string& pname : fs.list_directory("pics")) {
-		if (fs.is_directory(pname.c_str())) {
+		if (fs.is_directory(pname)) {
 			continue;
 		}
 		const std::string hash = std::string("map:") + FileSystem::fs_filename(pname.c_str());
-		if (!g_gr->images().has(hash)) {
-			g_gr->images().insert(hash, load_image(pname, &fs));
+		if (!g_image_cache->has(hash)) {
+			g_image_cache->insert(hash, load_image(pname, &fs));
 		}
-   }
+	}
 }
 
-void save_map_images(FileSystem* new_fs, FileSystem* map_fs)
-{
-	if (!map_fs || !map_fs->file_exists("pics") || !map_fs->is_directory("pics")) {
+void save_map_images(FileSystem* new_fs, FileSystem* map_fs) {
+	if ((map_fs == nullptr) || !map_fs->file_exists("pics") || !map_fs->is_directory("pics")) {
 		return;
 	}
 	new_fs->ensure_directory_exists("pics");
@@ -56,5 +51,4 @@ void save_map_images(FileSystem* new_fs, FileSystem* map_fs)
 		free(input_data);
 	}
 }
-
-}
+}  // namespace Widelands

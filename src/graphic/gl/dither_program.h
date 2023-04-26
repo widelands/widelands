@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,24 +21,23 @@
 
 #include <memory>
 
-#include "base/point.h"
+#include "base/vector.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
-#include "logic/description_maintainer.h"
+#include "logic/map_objects/description_maintainer.h"
 #include "logic/map_objects/world/terrain_description.h"
-
-class Texture;
 
 class DitherProgram {
 public:
 	DitherProgram();
-	~DitherProgram();
+	~DitherProgram() = default;
 
 	// Draws the terrain.
 	void draw(uint32_t gametime,
-	          const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
+	          const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
 	          const FieldsToDraw& fields_to_draw,
-	          float z_value);
+	          float z_value,
+	          const Widelands::Player*);
 
 private:
 	enum class TrianglePoint {
@@ -53,7 +51,7 @@ private:
 	// agree.
 	void maybe_add_dithering_triangle(
 	   uint32_t gametime,
-	   const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
+	   const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
 	   const FieldsToDraw& fields_to_draw,
 	   int idx1,
 	   int idx2,
@@ -66,7 +64,7 @@ private:
 	// this vertex.
 	void add_vertex(const FieldsToDraw::Field& field,
 	                TrianglePoint triangle_point,
-	                const FloatPoint& texture_offset);
+	                const Vector2f& texture_offset);
 
 	struct PerVertexData {
 		float gl_x;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -28,12 +27,9 @@ NotificationsManager* NotificationsManager::get() {
 	return &instance;
 }
 
-NotificationsManager::NotificationsManager() : next_subscriber_id_(1), num_subscribers_(0) {
-}
-
 NotificationsManager::~NotificationsManager() {
 	if (num_subscribers_ != 0) {
-		log("ERROR: NotificationsManager is destroyed, but there are still subscribers.");
+		log_err("NotificationsManager is destroyed, but there are still subscribers.\n");
 	}
 }
 

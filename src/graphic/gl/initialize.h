@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2016 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,15 +12,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_GRAPHIC_GL_INITIALIZE_H
 #define WL_GRAPHIC_GL_INITIALIZE_H
 
-#include <SDL.h>
+#include <SDL_video.h>
 
 #include "graphic/gl/system_headers.h"
 
@@ -36,8 +35,7 @@ enum class Trace {
 	kYes,
 	kNo,
 };
-SDL_GLContext
-initialize(const Trace& trace, SDL_Window* window, GLint* max_texture_size);
+SDL_GLContext initialize(const Trace& trace, SDL_Window* window, GLint* max_texture_size);
 
 }  // namespace Gl
 

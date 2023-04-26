@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_productionsite_type {
    name = "empire_armorsmithy",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Armor Smithy"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -21,29 +21,37 @@ tribes:new_productionsite_type {
       marble_column = 2
    },
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 50, 62 },
-      },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 50, 62 },
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 50, 66 },
       },
       unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
-         hotspot = { 50, 62 },
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 50, 66 },
+      },
+      build = {
+         frames = 4,
+         columns = 4,
+         rows = 1,
+         hotspot = { 50, 66 }
       },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 50, 62 },
-         fps = 5
+         fps = 5,
+         frames = 20,
+         columns = 10,
+         rows = 2,
+         hotspot = { 50, 66 }
       },
    },
 
    aihints = {
-      prohibited_till = 700,
-      forced_after = 900
+      prohibited_till = 1400,
    },
 
    working_positions = {
@@ -51,73 +59,73 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      iron = 8,
-      gold = 8,
-      coal = 8,
-      cloth = 8
-   },
-   outputs = {
-      "armor_helmet",
-      "armor",
-      "armor_chain",
-      "armor_gilded"
+      { name = "coal", amount = 8 },
+      { name = "iron", amount = 8 },
+      { name = "gold", amount = 8 },
+      { name = "cloth", amount = 8 }
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=produce_armor_helmet",
             "call=produce_armor",
             "call=produce_armor_chain",
+            "call=produce_armor_helmet",
             "call=produce_armor_gilded",
-            "return=skipped"
          }
       },
       produce_armor_helmet = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
-         descname = _"forging a helmet",
+         descname = _("forging a helmet"),
          actions = {
+            -- time total: 67 + 3.6
             "return=skipped unless economy needs armor_helmet",
-            "sleep=32000",
             "consume=iron coal",
-            "animate=working 35000",
+            "sleep=duration:47s",
+            "animate=working duration:20s",
             "produce=armor_helmet"
          }
       },
       produce_armor = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a suit of armor because ...
-         descname = _"forging a suit of armor",
+         descname = _("forging a suit of armor"),
          actions = {
+            -- time total: 77 + 3.6
             "return=skipped unless economy needs armor",
-            "sleep=32000",
             "consume=iron coal cloth",
-            "animate=working 45000",
+            "sleep=duration:32s",
+            "animate=working duration:45s",
             "produce=armor"
          }
       },
       produce_armor_chain = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a suit of chain armor because ...
-         descname = _"forging a suit of chain armor",
+         descname = _("forging a suit of chain armor"),
          actions = {
+            -- time total: 77 + 3.6
             "return=skipped unless economy needs armor_chain",
-            "sleep=32000",
             "consume=iron:2 coal cloth",
-            "animate=working 45000",
+            "sleep=duration:32s",
+            "animate=working duration:45s",
             "produce=armor_chain"
          }
       },
       produce_armor_gilded = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a suit of gilded armor because ...
-         descname = _"forging a suit of gilded armor",
+         descname = _("forging a suit of gilded armor"),
          actions = {
+            -- time total: 77 + 3.6
             "return=skipped unless economy needs armor_gilded",
-            "sleep=32000",
             "consume=iron:2 coal:2 cloth gold",
-            "animate=working 45000",
+            "sleep=duration:32s",
+            "animate=working duration:45s",
             "produce=armor_gilded"
          }
       },
    },
 }
+
+pop_textdomain()

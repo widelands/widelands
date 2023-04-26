@@ -1,7 +1,0 @@
-<rt padding=5>
-<sub padding=7 background=00ff00>
-<p>
-<img src="pics/red_box.png">
-</p>
-</sub>
-</rt>

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2016 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,17 +12,21 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "scripting/lua_coroutine.h"
 
+#include <memory>
+
+#include "base/mutex.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
+#include "logic/game_data_error.h"
 #include "scripting/lua_errors.h"
 #include "scripting/lua_game.h"
+#include "scripting/lua_globals.h"
 #include "scripting/lua_map.h"
 
 namespace {
@@ -43,9 +47,9 @@ uint32_t reference_coroutine(lua_State* L) {
 		lua_getglobal(L, kReferenceTableName);
 	}
 	// S: __references
-	lua_pushthread(L); // S: __references thread
+	lua_pushthread(L);  // S: __references thread
 	uint32_t idx = luaL_ref(L, -2);
-	lua_pop(L, 1); // S:
+	lua_pop(L, 1);  // S:
 	return idx;
 }
 
@@ -59,10 +63,8 @@ void unreference_coroutine(lua_State* L, uint32_t idx) {
 
 }  // namespace
 
-LuaCoroutine::LuaCoroutine(lua_State * ms)
-	: lua_state_(ms), idx_(LUA_REFNIL), ninput_args_(0), nreturn_values_(0)
-{
-	if (lua_state_) {
+LuaCoroutine::LuaCoroutine(lua_State* ms) : lua_state_(ms) {
+	if (lua_state_ != nullptr) {
 		idx_ = reference_coroutine(lua_state_);
 	}
 }
@@ -75,8 +77,9 @@ int LuaCoroutine::get_status() {
 	return lua_status(lua_state_);
 }
 
-int LuaCoroutine::resume()
-{
+int LuaCoroutine::resume() {
+	MutexLock m(MutexLock::ID::kLua);
+
 	int rv = lua_resume(lua_state_, nullptr, ninput_args_);
 	ninput_args_ = 0;
 	nreturn_values_ = lua_gettop(lua_state_);
@@ -88,32 +91,14 @@ int LuaCoroutine::resume()
 	return rv;
 }
 
-void LuaCoroutine::push_arg(const Widelands::Player * plr) {
+void LuaCoroutine::push_arg(const Widelands::Player* plr) {
 	to_lua<LuaGame::LuaPlayer>(lua_state_, new LuaGame::LuaPlayer(plr->player_number()));
 	ninput_args_++;
 }
 
-void LuaCoroutine::push_arg(const Widelands::Coords & coords) {
+void LuaCoroutine::push_arg(const Widelands::Coords& coords) {
 	to_lua<LuaMaps::LuaField>(lua_state_, new LuaMaps::LuaField(coords));
 	++nargs_;
-	++ninput_args_;
-}
-
-void LuaCoroutine::push_arg(const Widelands::BuildingDescr* building_descr) {
-	assert(building_descr != nullptr);
-	to_lua<LuaMaps::LuaBuildingDescription>(lua_state_, new LuaMaps::LuaBuildingDescription(building_descr));
-	++ninput_args_;
-}
-
-void LuaCoroutine::push_arg(const Widelands::WareDescr* ware_descr) {
-	assert(ware_descr != nullptr);
-	to_lua<LuaMaps::LuaWareDescription>(lua_state_, new LuaMaps::LuaWareDescription(ware_descr));
-	++ninput_args_;
-}
-
-void LuaCoroutine::push_arg(const Widelands::WorkerDescr* worker_descr) {
-	assert(worker_descr != nullptr);
-	to_lua<LuaMaps::LuaWorkerDescription>(lua_state_, new LuaMaps::LuaWorkerDescription(worker_descr));
 	++ninput_args_;
 }
 
@@ -123,24 +108,29 @@ void LuaCoroutine::push_arg(const std::string& string) {
 	++ninput_args_;
 }
 
+void LuaCoroutine::push_arg(const int number) {
+	lua_pushinteger(lua_state_, number);
+	++ninput_args_;
+}
+
 std::string LuaCoroutine::pop_string() {
-	if (!nreturn_values_) {
+	if (nreturn_values_ == 0u) {
 		return "";
 	}
-	if (!lua_isstring(lua_state_, -1)) {
+	if (lua_isstring(lua_state_, -1) == 0) {
 		throw LuaError("pop_string(), but no string on the stack.");
 	}
-	const std::string return_value = lua_tostring(lua_state_, -1);
+	std::string return_value = lua_tostring(lua_state_, -1);
 	lua_pop(lua_state_, 1);
 	--nreturn_values_;
 	return return_value;
 }
 
 uint32_t LuaCoroutine::pop_uint32() {
-	if (!nreturn_values_) {
+	if (nreturn_values_ == 0u) {
 		return 0;
 	}
-	if (!lua_isnumber(lua_state_, -1)) {
+	if (lua_isinteger(lua_state_, -1) == 0) {
 		throw LuaError("pop_uint32(), but no integer on the stack.");
 	}
 	const uint32_t return_value = luaL_checkuint32(lua_state_, -1);
@@ -149,20 +139,35 @@ uint32_t LuaCoroutine::pop_uint32() {
 	return return_value;
 }
 
-constexpr uint8_t kCoroutineDataPacketVersion = 3;
-void LuaCoroutine::write(FileWrite& fw) {
+std::unique_ptr<LuaTable> LuaCoroutine::pop_table() {
+	std::unique_ptr<LuaTable> result(nullptr);
+	if (nreturn_values_ == 0u) {
+		return result;
+	}
+	result.reset(new LuaTable(lua_state_));
+	lua_pop(lua_state_, 1);
+	--nreturn_values_;
+	return result;
+}
+
+constexpr uint8_t kCoroutineDataPacketVersion = 5;
+void LuaCoroutine::write(FileWrite& fw) const {
 	fw.unsigned_8(kCoroutineDataPacketVersion);
 
 	fw.unsigned_32(ninput_args_);
 	fw.unsigned_32(nreturn_values_);
 	fw.unsigned_32(idx_);
+
+	LuaGlobals::write_textdomain_stack(fw, lua_state_);
 }
 
 void LuaCoroutine::read(lua_State* parent, FileRead& fr) {
-	uint8_t version = fr.unsigned_8();
+	const uint8_t packet_version = fr.unsigned_8();
 
-	if (version != kCoroutineDataPacketVersion)
-		throw wexception("Unhandled data packet version: %i\n", version);
+	if (packet_version > kCoroutineDataPacketVersion || packet_version < 4) {
+		throw Widelands::UnhandledVersionError(
+		   "LuaCoroutine", packet_version, kCoroutineDataPacketVersion);
+	}
 
 	ninput_args_ = fr.unsigned_32();
 	nreturn_values_ = fr.unsigned_32();
@@ -172,4 +177,9 @@ void LuaCoroutine::read(lua_State* parent, FileRead& fr) {
 	lua_rawgeti(parent, -1, idx_);
 	lua_state_ = luaL_checkthread(parent, -1);
 	lua_pop(parent, 2);
+
+	// TODO(Nordfriese): Savegame compatibility
+	if (packet_version >= 5) {
+		LuaGlobals::read_textdomain_stack(fr, lua_state_);
+	}
 }

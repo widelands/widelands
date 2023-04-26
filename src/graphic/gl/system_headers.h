@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -29,14 +28,25 @@
 // are stuck with it. Before making any changes here, see:
 // https://www.opengl.org/wiki/OpenGL_Loading_Library
 // and
-// http://stackoverflow.com/questions/13558073/program-crash-on-glgenvertexarrays-call.
+// https://stackoverflow.com/questions/13558073/program-crash-on-glgenvertexarrays-call.
 //
 // TODO(sirver): glbinding seems to be a sane solution to the GL
 // loading problem. Switch to it everywhere. (https://github.com/hpicgs/glbinding).
 
 #ifdef USE_GLBINDING
-#   include <glbinding/gl/gl.h>
-#   include <glbinding/Binding.h>
+#include <glbinding/Binding.h>
+#include <glbinding/gl/gl.h>
+
+// testing for the presence of glbinding.h to determine whether we have a glbinding version newer
+// then 2.1.4
+#ifdef __has_include
+#if __has_include("glbinding/glbinding.h")
+#include <glbinding/ProcAddress.h>
+#include <glbinding/glbinding.h>
+#define GLBINDING3
+#endif
+#endif
+
 // This fakes that most other gl bindings define gl functions in the public namespace.
 CLANG_DIAG_OFF("-Wheader-hygiene")
 using namespace gl;
@@ -44,7 +54,7 @@ CLANG_DIAG_ON("-Wheader-hygiene")
 #else
 // GLEW must be first. Do not include any other GL headers, it
 // should define all functions.
-#   include <GL/glew.h>
+#include <GL/glew.h>
 #endif
 
 #endif  // end of include guard: WL_GRAPHIC_GL_SYSTEM_HEADERS_H

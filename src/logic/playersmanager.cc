@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,17 +12,13 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "logic/playersmanager.h"
 
-#include <cstring>
-
 #include "base/wexception.h"
-#include "logic/constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_settings.h"
 #include "logic/player.h"
@@ -30,36 +26,30 @@
 
 namespace Widelands {
 
-PlayersManager::PlayersManager(EditorGameBase& egbase) :
-egbase_(egbase),
-number_of_players_(0)
-{
+PlayersManager::PlayersManager(EditorGameBase& egbase) : egbase_(egbase) {
 	memset(players_, 0, sizeof(players_));
 }
 
-PlayersManager::~PlayersManager()
-{
+PlayersManager::~PlayersManager() {
 	cleanup();
 }
 
-void PlayersManager::cleanup()
-{
-	const Player * const * const players_end = players_ + MAX_PLAYERS;
-	for (Player * * p = players_; p < players_end; ++p) {
+void PlayersManager::cleanup() {
+	const Player* const* const players_end = players_ + kMaxPlayers;
+	for (Player** p = players_; p < players_end; ++p) {
 		delete *p;
 		*p = nullptr;
 	}
 	number_of_players_ = 0;
+	players_end_status_.clear();
 }
 
-
-void PlayersManager::remove_player(PlayerNumber plnum)
-{
+void PlayersManager::remove_player(PlayerNumber plnum) {
 	assert(1 <= plnum);
-	assert(plnum <= MAX_PLAYERS);
+	assert(plnum <= kMaxPlayers);
 
-	Player * & p = players_[plnum - 1];
-	if (p) {
+	Player*& p = players_[plnum - 1];
+	if (p != nullptr) {
 		delete p;
 		p = nullptr;
 		if (plnum <= UserSettings::highest_playernum()) {
@@ -68,29 +58,27 @@ void PlayersManager::remove_player(PlayerNumber plnum)
 	}
 }
 
-Player* PlayersManager::add_player
-	(PlayerNumber       const player_number,
-	 uint8_t             const initialization_index,
-	 const std::string &       tribe,
-	 const std::string &       name,
-	 TeamNumber                team)
-{
+Player* PlayersManager::add_player(PlayerNumber const player_number,
+                                   uint8_t const initialization_index,
+                                   const RGBColor& pc,
+                                   const std::string& tribe,
+                                   const std::string& name,
+                                   TeamNumber team) {
 	assert(1 <= player_number);
-	assert(player_number <= MAX_PLAYERS);
+	assert(player_number <= kMaxPlayers);
 
-	Player * & p = players_[player_number - 1];
-	if (p) {
+	Player*& p = players_[player_number - 1];
+	if (p != nullptr) {
 		delete p;
 		if (player_number <= UserSettings::highest_playernum()) {
 			number_of_players_--;
 		}
 	}
-	p = new Player
-		(egbase_,
-		 player_number,
-		 initialization_index,
-		 *egbase_.tribes().get_tribe_descr(egbase_.tribes().tribe_index(tribe)),
-		 name);
+
+	const DescriptionIndex tribe_index = egbase_.mutable_descriptions()->load_tribe(tribe);
+	p = new Player(egbase_, player_number, initialization_index, pc,
+	               *egbase_.descriptions().get_tribe_descr(tribe_index), name);
+
 	p->set_team_number(team);
 	if (player_number <= UserSettings::highest_playernum()) {
 		number_of_players_++;
@@ -98,27 +86,36 @@ Player* PlayersManager::add_player
 	return p;
 }
 
-void PlayersManager::add_player_end_status(const PlayerEndStatus& status)
-{
-	// Ensure we don't have a status for it yet
-	std::vector<PlayerEndStatus>::iterator it;
-	for (it = players_end_status_.begin(); it != players_end_status_.end(); ++it) {
-		PlayerEndStatus pes = *it;
-		if (pes.player == status.player) {
-			throw wexception("Player End status for player %d already reported", pes.player);
-		}
+const PlayerEndStatus* PlayersManager::get_player_end_status(PlayerNumber player) const {
+	auto it = players_end_status_.find(player);
+	if (it == players_end_status_.end()) {
+		return nullptr;
 	}
-	players_end_status_.push_back(status);
+	return &(it->second);
+}
 
-	// If all results have been gathered, save game and show summary screen
+void PlayersManager::add_player_end_status(const PlayerEndStatus& status, bool change_existing) {
+	assert(status.player > 0);
+	const PlayerNumber& pn = status.player;
+	auto it = players_end_status_.find(pn);
+
+	if (it == players_end_status_.end()) {
+		players_end_status_.emplace(pn, status);
+	} else {
+		if (!change_existing) {
+			throw wexception("Player end status for player %d already reported", status.player);
+		}
+		it->second = status;
+	}
+
+	/* If all results have been gathered, show the summary screen. */
+	if (change_existing || egbase_.get_igbase() == nullptr) {
+		return;
+	}
 	if (players_end_status_.size() < number_of_players_) {
 		return;
 	}
-
-	if (egbase_.get_igbase()) {
-		egbase_.get_igbase()->show_game_summary();
-	}
+	egbase_.get_igbase()->show_game_summary();
 }
-
 
 }  // namespace Widelands

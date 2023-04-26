@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,23 +12,15 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_GRAPHIC_IMAGE_H
 #define WL_GRAPHIC_IMAGE_H
 
-#include <string>
-
-#include <stdint.h>
-
 #include "base/macros.h"
-#include "base/rect.h"
 #include "graphic/gl/blit_data.h"
-
-class Texture;
 
 /**
  * Interface to a bitmap that can act as the source of a rendering
@@ -36,22 +28,20 @@ class Texture;
  */
 class Image {
 public:
-
 	Image() = default;
-	virtual ~Image() {}
+	virtual ~Image() = default;
 
 	// Dimensions of this Image in pixels.
-	virtual int width() const = 0;
-	virtual int height() const = 0;
+	[[nodiscard]] virtual int width() const = 0;
+	[[nodiscard]] virtual int height() const = 0;
 
 	// OpenGL texture and texture coordinates backing this Image. This can
 	// change at any time, so do not hold one to this value for more than one
 	// frame.
-	virtual const BlitData& blit_data() const = 0;
+	[[nodiscard]] virtual const BlitData& blit_data() const = 0;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(Image);
 };
-
 
 #endif  // end of include guard: WL_GRAPHIC_IMAGE_H

@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+GENERIC_NAME_COMMENT_HOOK
+Icon=org.widelands.Widelands
+TryExec=widelands
+Exec=widelands
+Categories=Game;StrategyGame;
+Keywords=Game;RTS;Real-time;Strategy;
+Terminal=false
+StartupNotify=true
+StartupWMClass=widelands
+X-Flatpak-RenamedFrom=widelands.desktop;org.widelands.widelands.desktop;

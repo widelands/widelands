@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,169 +12,134 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_LOGIC_MAP_OBJECTS_MAP_OBJECT_H
 #define WL_LOGIC_MAP_OBJECTS_MAP_OBJECT_H
 
-#include <cstring>
-#include <map>
-#include <set>
-#include <string>
-#include <vector>
+#include <atomic>
 
-#include <boost/function.hpp>
-#include <boost/unordered_map.hpp>
-#include <boost/signals2.hpp>
-
-#include "base/log.h"
 #include "base/macros.h"
+#include "graphic/animation/animation.h"
+#include "graphic/animation/diranimations.h"
 #include "graphic/color.h"
 #include "graphic/image.h"
 #include "logic/cmd_queue.h"
+#include "logic/map_objects/info_to_draw.h"
+#include "logic/map_objects/map_object_type.h"
 #include "logic/map_objects/tribes/training_attribute.h"
 #include "logic/widelands.h"
+#include "notifications/signal.h"
 #include "scripting/lua_table.h"
 
-class FileRead;
 class RenderTarget;
-struct DirAnimations;
-namespace UI {struct TabPanel;}
 
 namespace Widelands {
 
-class EditorCategory;
-class MapObjectLoader;
+class MapObject;
 class Player;
-struct Path;
-
-// This enum lists the available classes of Map Objects.
-enum class MapObjectType : uint8_t {
-	MAPOBJECT = 0,  // Root superclass
-
-	WARE,  //  class WareInstance
-	BATTLE,
-	FLEET,
-
-	BOB = 10,  // Bob
-	CRITTER,   // Bob -- Critter
-	SHIP,      // Bob -- Ship
-	WORKER,    // Bob -- Worker
-	CARRIER,   // Bob -- Worker -- Carrier
-	SOLDIER,   // Bob -- Worker -- Soldier
-
-	// everything below is at least a BaseImmovable
-	IMMOVABLE = 30,
-
-	// everything below is at least a PlayerImmovable
-	FLAG = 40,
-	ROAD,
-	PORTDOCK,
-
-	// everything below is at least a Building
-	BUILDING = 100,    // Building
-	CONSTRUCTIONSITE,  // Building -- Constructionsite
-	DISMANTLESITE,     // Building -- Dismantlesite
-	WAREHOUSE,         // Building -- Warehouse
-	PRODUCTIONSITE,    // Building -- Productionsite
-	MILITARYSITE,      // Building -- Productionsite -- Militarysite
-	TRAININGSITE       // Building -- Productionsite -- Trainingsite
-};
-
-// Returns a string representation for 'type'.
-std::string to_string(MapObjectType type);
 
 /**
  * Base class for descriptions of worker, files and so on. This must just
  * link them together
  */
-struct MapObjectDescr {
+class MapObjectDescr {
+public:
+	using AttributeIndex = uint32_t;
+	using Attributes = std::vector<AttributeIndex>;
 
-	enum class OwnerType {
-		kWorld,
-		kTribe
-	};
+	enum class OwnerType { kWorld, kTribe };
 
-	MapObjectDescr(const MapObjectType init_type,
-						const std::string& init_name,
-						const std::string& init_descname);
-	MapObjectDescr(const MapObjectType init_type,
-						const std::string& init_name,
-						const std::string& init_descname,
-						const LuaTable& table);
+	MapObjectDescr(MapObjectType init_type,
+	               const std::string& init_name,
+	               const std::string& init_descname);
+	MapObjectDescr(MapObjectType init_type,
+	               const std::string& init_name,
+	               const std::string& init_descname,
+	               const LuaTable& table);
 	virtual ~MapObjectDescr();
 
-	const std::string &     name() const {return name_;}
-	const std::string &     descname() const {return descname_;}
+	[[nodiscard]] const std::string& name() const {
+		return name_;
+	}
+	[[nodiscard]] const std::string& descname() const {
+		return descname_;
+	}
 
 	// Type of the MapObjectDescr.
-	MapObjectType type() const {return type_;}
-
-	struct AnimationNonexistent {};
-	uint32_t get_animation(char const * const anim) const {
-		std::map<std::string, uint32_t>::const_iterator it = anims_.find(anim);
-		if (it == anims_.end())
-			throw AnimationNonexistent();
-		return it->second;
-	}
-	uint32_t get_animation(const std::string & animname) const {
-		return get_animation(animname.c_str());
+	[[nodiscard]] MapObjectType type() const {
+		return type_;
 	}
 
-	uint32_t main_animation() const {
-		return !anims_.empty()? anims_.begin()->second : 0;
-	}
+	virtual uint32_t get_animation(const std::string& animname, const MapObject* mo) const;
 
-	std::string get_animation_name(uint32_t) const; ///< needed for save, debug
-	bool has_attribute(uint32_t) const;
-	static uint32_t get_attribute_id(const std::string & name, bool add_if_not_exists = false);
-	static std::string get_attribute_name(uint32_t id);
+	[[nodiscard]] uint32_t main_animation() const;
+	[[nodiscard]] std::string get_animation_name(uint32_t) const;  ///< needed for save, debug
 
-	bool is_animation_known(const std::string & name) const;
-	void add_animation(const std::string & name, uint32_t anim);
+	[[nodiscard]] bool is_animation_known(const std::string& name) const;
 
-	/// Sets the directional animations in 'anims' with the animations '&lt;prefix&gt;_(ne|e|se|sw|w|nw)'.
-	void add_directional_animation(DirAnimations* anims, const std::string& prefix);
+	/// Preload animation graphics at default scale
+	void load_graphics() const;
 
 	/// Returns the image for the first frame of the idle animation if the MapObject has animations,
 	/// nullptr otherwise
 	const Image* representative_image(const RGBColor* player_color = nullptr) const;
-	/// Returns the image fileneme for first frame of the idle animation if the MapObject has animations,
-	/// is empty otherwise
-	const std::string& representative_image_filename() const;
 
 	/// Returns the menu image if the MapObject has one, nullptr otherwise
-	const Image* icon() const;
+	[[nodiscard]] const Image* icon() const;
 	/// Returns the image fileneme for the menu image if the MapObject has one, is empty otherwise
-	const std::string& icon_filename() const;
+	[[nodiscard]] const std::string& icon_filename() const;
+
+	[[nodiscard]] bool has_attribute(AttributeIndex) const;
+	[[nodiscard]] const MapObjectDescr::Attributes& attributes() const;
+	static AttributeIndex get_attribute_id(const std::string& name, bool add_if_not_exists = false);
+
+	/// Sets a tribe-specific ware or immovable helptext for this MapObject
+	void set_helptexts(const std::string& tribename,
+	                   std::map<std::string, std::string> localized_helptext);
+	/// Gets the tribe-specific ware or immovable helptext for the given tribe. Fails if it doesn't
+	/// exist.
+	[[nodiscard]] const std::map<std::string, std::string>&
+	get_helptexts(const std::string& tribename) const;
+	/// Returns whether a tribe-specific helptext exists for the given tribe
+	[[nodiscard]] bool has_helptext(const std::string& tribename) const;
 
 protected:
-	// Add all the special attributes to the attribute list. Only the 'allowed_special'
-	// attributes are allowed to appear - i.e. resi are fine for immovables.
-	void add_attributes(const std::vector<std::string>& attributes, const std::set<uint32_t>& allowed_special);
-	void add_attribute(uint32_t attr);
+	// Add attributes to the attribute list
+	void add_attributes(const std::vector<std::string>& attribs);
+	void add_attribute(AttributeIndex attr);
+
+	/// Sets the directional animations in 'anims' with the animations
+	/// '&lt;basename&gt;_(ne|e|se|sw|w|nw)'.
+	void assign_directional_animation(DirAnimations* anims, const std::string& basename) const;
 
 private:
-	using Anims = std::map<std::string, uint32_t>;
-	using AttribMap = std::map<std::string, uint32_t>;
-	using Attributes = std::vector<uint32_t>;
+	void add_animations(const LuaTable& table,
+	                    const std::string& animation_directory,
+	                    Animation::Type anim_type);
 
-	const MapObjectType type_;           /// Subclasses pick from the enum above
-	std::string const   name_;           /// The name for internal reference
-	std::string const   descname_;       /// A localized Descriptive name
-	Attributes          attributes_;
-	Anims               anims_;
-	static uint32_t     dyn_attribhigh_; ///< highest attribute ID used
-	static AttribMap    dyn_attribs_;
-	std::string representative_image_filename_; // Image for big represenations, e.g. on buttons
-	std::string icon_filename_; // Filename for the menu icon
+	/// Throws an exception if the MapObjectDescr has no representative image
+	void check_representative_image() const;
+
+	using Anims = std::map<std::string, uint32_t>;
+
+	static std::map<std::string, AttributeIndex> attribute_names_;
+	Attributes attribute_ids_;
+
+	const MapObjectType type_;    /// Subclasses pick from the enum above
+	std::string const name_;      /// The name for internal reference
+	std::string const descname_;  /// A localized Descriptive name
+
+	/// Tribe-specific helptexts. Format: <tribename, <category, localized_text>>
+	std::map<std::string, std::map<std::string, std::string>> helptexts_;
+
+	Anims anims_;
+	std::string icon_filename_;  // Filename for the menu icon
 
 	DISALLOW_COPY_AND_ASSIGN(MapObjectDescr);
 };
-
 
 /**
  * \par Notes on MapObject
@@ -201,17 +166,18 @@ private:
  *
  * When you do create a new object yourself (i.e. when you're implementing one
  * of the create() functions), you need to allocate the object using new,
- * potentially set it up by calling basic functions like set_position(),
- * set_owner(), etc. and then call init(). After that, the object is supposed to
+ * potentially set it up by calling basic functions like set_position(), etc.
+ * and then call init(). After that, the object is supposed to
  * be fully created.
-*/
+ */
 
 /// If you find a better way to do this that doesn't cost a virtual function
 /// or additional member variable, go ahead
-#define MO_DESCR(type)                     \
-public: const type & descr() const {       \
-		return dynamic_cast<const type&>(*descr_); \
-   }                                                                          \
+#define MO_DESCR(type)                                                                             \
+public:                                                                                            \
+	const type& descr() const {                                                                     \
+		return dynamic_cast<const type&>(*descr_);                                                   \
+	}
 
 class MapObject {
 	friend struct ObjectManager;
@@ -220,41 +186,33 @@ class MapObject {
 	MO_DESCR(MapObjectDescr)
 
 public:
-	/// Some default, globally valid, attributes.
-	/// Other attributes (such as "harvestable corn") could be
-	/// allocated dynamically (?)
-	enum Attribute {
-		CONSTRUCTIONSITE = 1, ///< assume BUILDING
-		WORKER,               ///< assume BOB
-		SOLDIER,              ///<  assume WORKER
-		RESI,                 ///<  resource indicator, assume IMMOVABLE
-
-		HIGHEST_FIXED_ATTRIBUTE
-	};
+	virtual ~MapObject() = default;
 
 	struct LogSink {
-		virtual void log(std::string str) = 0;
-		virtual ~LogSink() {}
+		virtual void log(const std::string& str) = 0;
+		virtual ~LogSink() = default;
 	};
 
-	virtual void load_finish(EditorGameBase &) {}
+	virtual void load_finish(EditorGameBase&) {
+	}
 
 	virtual const Image* representative_image() const;
 
 protected:
-	MapObject(MapObjectDescr const * descr);
-	virtual ~MapObject() {}
+	explicit MapObject(MapObjectDescr const* descr);
 
 public:
-	Serial serial() const {return serial_;}
+	Serial serial() const {
+		return serial_;
+	}
 
 	/**
 	 * Is called right before the object will be removed from
-	 * the game. No conncetion is handled in this class.
+	 * the game. No connection is handled in this class.
 	 *
 	 * param serial : the object serial (cannot use param comment as this is a callback)
 	 */
-	boost::signals2::signal<void(uint32_t serial)> removed;
+	Notifications::Signal<uint32_t /* serial */> removed;
 
 	/**
 	 * Attributes are fixed boolean properties of an object.
@@ -274,23 +232,27 @@ public:
 	 */
 	virtual int32_t get_training_attribute(TrainingAttribute attr) const;
 
-	void remove(EditorGameBase &);
-	virtual void destroy(EditorGameBase &);
+	void remove(EditorGameBase&);
+	virtual void destroy(EditorGameBase&);
 
 	//  The next functions are really only needed in games, not in the editor.
-	void schedule_destroy(Game &);
-	uint32_t schedule_act(Game &, uint32_t tdelta, uint32_t data = 0);
-	virtual void act(Game &, uint32_t data);
+	void schedule_destroy(Game&);
+	Time schedule_act(Game&, const Duration& tdelta, uint32_t data = 0);
+	virtual void act(Game&, uint32_t data);
 
-	// implementation is in game_debug_ui.cc
-	virtual void create_debug_panels
-		(const EditorGameBase & egbase, UI::TabPanel & tabs);
-
-	LogSink * get_logsink() {return logsink_;}
-	void set_logsink(LogSink *);
+	LogSink* get_logsink() {
+		return logsink_;
+	}
+	void set_logsink(LogSink*);
 
 	/// Called when a new logsink is set. Used to give general information.
-	virtual void log_general_info(const EditorGameBase &);
+	virtual void log_general_info(const EditorGameBase&) const;
+
+	Player* get_owner() const {
+		return owner_;
+	}
+
+	const Player& owner() const;
 
 	// Header bytes to distinguish between data packages for the different
 	// MapObject classes. Be careful in changing those, since they are written
@@ -306,10 +268,10 @@ public:
 		HeaderWareInstance = 8,
 		HeaderShip = 9,
 		HeaderPortDock = 10,
-		HeaderFleet = 11,
+		HeaderShipFleet = 11,
+		HeaderFerryFleet = 12,
+		HeaderPinnedNote = 13,
 	};
-
-	public:
 
 	/**
 	 * Returns whether this immovable was reserved by a worker.
@@ -321,7 +283,6 @@ public:
 	 */
 	void set_reserved_by_worker(bool reserve);
 
-
 	/**
 	 * Static load functions of derived classes will return a pointer to
 	 * a Loader class. The caller needs to call the virtual functions
@@ -332,33 +293,37 @@ public:
 	 * all Loader objects should be deleted.
 	 */
 	struct Loader {
-		EditorGameBase      * egbase_;
-		MapObjectLoader * mol_;
-		MapObject            * object_;
+		EditorGameBase* egbase_{nullptr};
+		MapObjectLoader* mol_{nullptr};
+		MapObject* object_{nullptr};
 
 	protected:
-		Loader() : egbase_(nullptr), mol_(nullptr), object_(nullptr) {}
+		Loader() = default;
 
 	public:
-		virtual ~Loader() {}
+		virtual ~Loader() = default;
 
-		void init
-			(EditorGameBase & e, MapObjectLoader & m, MapObject & object)
-		{
+		void init(EditorGameBase& e, MapObjectLoader& m, MapObject& object) {
 			egbase_ = &e;
-			mol_    = &m;
+			mol_ = &m;
 			object_ = &object;
 		}
 
-		EditorGameBase      & egbase    () {return *egbase_;}
-		MapObjectLoader & mol   () {return *mol_;}
-		MapObject            * get_object() {return object_;}
-		template<typename T> T & get() {
+		[[nodiscard]] EditorGameBase& egbase() const {
+			return *egbase_;
+		}
+		[[nodiscard]] MapObjectLoader& mol() const {
+			return *mol_;
+		}
+		[[nodiscard]] MapObject* get_object() const {
+			return object_;
+		}
+		template <typename T> T& get() {
 			return dynamic_cast<T&>(*object_);
 		}
 
 	protected:
-		void load(FileRead &);
+		void load(FileRead&) const;
 
 	public:
 		virtual void load_pointers();
@@ -367,30 +332,35 @@ public:
 
 	/// This is just a fail-safe guard for the time until we fully transition
 	/// to the new MapObject saving system
-	virtual bool has_new_save_support() {return false;}
+	virtual bool has_new_save_support() {
+		return false;
+	}
 
-	virtual void save(EditorGameBase &, MapObjectSaver &, FileWrite &);
+	virtual void save(EditorGameBase&, MapObjectSaver&, FileWrite&);
 	// Pure MapObjects cannot be loaded
 
 protected:
 	/// Called only when the oject is logically created in the simulation. If
 	/// called again, such as when the object is loaded from a savegame, it will
 	/// cause bugs.
-	virtual void init(EditorGameBase &);
+	virtual bool init(EditorGameBase&);
 
-	virtual void cleanup(EditorGameBase &);
+	virtual void cleanup(EditorGameBase&);
 
 	/// Draws census and statistics on screen
-	void do_draw_info(bool show_census, const std::string& census,
-							bool show_statictics, const std::string& statictics,
-							RenderTarget& dst, const Point& pos) const;
+	void do_draw_info(const InfoToDraw& info_to_draw,
+	                  const std::string& census,
+	                  const std::string& statictics,
+	                  const Vector2f& field_on_dst,
+	                  float scale,
+	                  RenderTarget* dst) const;
 
-	void molog(char const * fmt, ...) const
-		__attribute__((format(printf, 2, 3)));
+	void molog(const Time& gametime, char const* fmt, ...) const PRINTF_FORMAT(3, 4);
 
-	const MapObjectDescr * descr_;
-	Serial                   serial_;
-	LogSink                * logsink_;
+	const MapObjectDescr* descr_;
+	Serial serial_{0U};
+	LogSink* logsink_{nullptr};
+	std::atomic<Player*> owner_{nullptr};
 
 	/**
 	 * MapObjects like trees are reserved by a worker that is walking
@@ -398,7 +368,7 @@ protected:
 	 * work on the same tree simultaneously or two hunters try to hunt
 	 * the same animal.
 	 */
-	bool reserved_by_worker_;
+	bool reserved_by_worker_{false};
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(MapObject);
@@ -408,147 +378,166 @@ inline int32_t get_reverse_dir(int32_t const dir) {
 	return 1 + ((dir - 1) + 3) % 6;
 }
 
-
 /**
  *
  * Keeps the list of all objects currently in the game.
  */
-struct ObjectManager  {
-	using MapObjectMap = boost::unordered_map<Serial, MapObject *>;
+struct ObjectManager {
+	using MapObjectMap = std::unordered_map<Serial, MapObject*>;
 
-	ObjectManager() {lastserial_ = 0;}
+	ObjectManager() = default;
 	~ObjectManager();
 
-	void cleanup(EditorGameBase &);
+	void cleanup(EditorGameBase&);
 
-	MapObject * get_object(Serial const serial) const {
+	MapObject* get_object(Serial const serial) const {
 		const MapObjectMap::const_iterator it = objects_.find(serial);
 		return it != objects_.end() ? it->second : nullptr;
 	}
 
-	void insert(MapObject *);
-	void remove(MapObject &);
-
-	bool object_still_available(const MapObject * const t) const {
-		if (!t)
-			return false;
-		MapObjectMap::const_iterator it = objects_.begin();
-		while (it != objects_.end()) {
-			if (it->second == t)
-				return true;
-			++it;
-		}
-		return false;
-	}
+	void insert(MapObject*);
+	void remove(MapObject&);
 
 	/**
 	 * When saving the map object, ordere matters. Return a vector of all ids
 	 * that are currently available;
 	 */
-	std::vector<Serial> all_object_serials_ordered () const;
+	std::vector<Serial> all_object_serials_ordered() const;
+
+	bool is_cleaning_up() const {
+		return is_cleaning_up_;
+	}
 
 private:
-	Serial   lastserial_;
+	Serial lastserial_{0U};
 	MapObjectMap objects_;
+
+	bool is_cleaning_up_{false};
 
 	DISALLOW_COPY_AND_ASSIGN(ObjectManager);
 };
 
 /**
  * Provides a safe pointer to a MapObject
+ * Make sure the MapObject is initialized (has a serial) before using it in ObjectPointer!
  */
 struct ObjectPointer {
 	// Provide default constructor to shut up cppcheck.
-	ObjectPointer() {serial_ = 0;}
-	ObjectPointer(MapObject * const obj) {serial_ = obj ? obj->serial_ : 0;}
+	ObjectPointer() {
+		serial_ = 0;
+	}
+	ObjectPointer(const MapObject* const obj) {  // NOLINT allow implicit conversion
+		assert(obj == nullptr || obj->serial_ != 0);
+		serial_ = obj != nullptr ? obj->serial_ : 0;
+	}
 	// can use standard copy constructor and assignment operator
 
-	ObjectPointer & operator= (MapObject * const obj) {
-		serial_ = obj ? obj->serial_ : 0;
+	ObjectPointer& operator=(const MapObject* const obj) {
+		assert(obj == nullptr || obj->serial_ != 0);
+		serial_ = obj != nullptr ? obj->serial_ : 0;
 		return *this;
 	}
 
-	bool is_set() const {return serial_;}
+	[[nodiscard]] bool is_set() const {
+		return serial_ != 0u;
+	}
 
 	// TODO(unknown): dammit... without an EditorGameBase object, we can't implement a
 	// MapObject* operator (would be really nice)
-	MapObject * get(const EditorGameBase &);
-	MapObject * get(const EditorGameBase & egbase) const;
+	MapObject* get(const EditorGameBase&);
+	[[nodiscard]] MapObject* get(const EditorGameBase& egbase) const;
 
-	bool operator<  (const ObjectPointer & other) const {
+	bool operator<(const ObjectPointer& other) const {
 		return serial_ < other.serial_;
 	}
-	bool operator== (const ObjectPointer & other) const {
+	bool operator==(const ObjectPointer& other) const {
 		return serial_ == other.serial_;
 	}
-	bool operator!= (const ObjectPointer & other) const {
+	bool operator!=(const ObjectPointer& other) const {
 		return serial_ != other.serial_;
 	}
 
-	uint32_t serial() const {return serial_;}
+	[[nodiscard]] uint32_t serial() const {
+		return serial_;
+	}
 
 private:
 	uint32_t serial_;
 };
 
-template<class T>
-struct OPtr {
-	OPtr(T * const obj = 0) : m(obj) {}
+template <class T> struct OPtr {
+	OPtr(T* const obj = nullptr) : m(obj) {  // NOLINT allow implicit conversion
+	}
 
-	OPtr & operator= (T * const obj) {
+	OPtr& operator=(T* const obj) {
 		m = obj;
 		return *this;
 	}
 
-	bool is_set() const {return m.is_set();}
-
-	T * get(const EditorGameBase &       egbase) {
-		return static_cast<T *>(m.get(egbase));
-	}
-	T * get(const EditorGameBase &       egbase) const {
-		return static_cast<T *>(m.get(egbase));
+	[[nodiscard]] bool is_set() const {
+		return m.is_set();
 	}
 
-	bool operator<  (const OPtr<T> & other) const {return m <  other.m;}
-	bool operator== (const OPtr<T> & other) const {return m == other.m;}
-	bool operator!= (const OPtr<T> & other) const {return m != other.m;}
+	T* get(const EditorGameBase& egbase) {
+		return static_cast<T*>(m.get(egbase));
+	}
+	[[nodiscard]] T* get(const EditorGameBase& egbase) const {
+		return static_cast<T*>(m.get(egbase));
+	}
 
-	Serial serial() const {return m.serial();}
+	bool operator<(const OPtr<T>& other) const {
+		return m < other.m;
+	}
+	bool operator==(const OPtr<T>& other) const {
+		return m == other.m;
+	}
+	bool operator!=(const OPtr<T>& other) const {
+		return m != other.m;
+	}
+
+	[[nodiscard]] Serial serial() const {
+		return m.serial();
+	}
 
 private:
 	ObjectPointer m;
 };
 
 struct CmdDestroyMapObject : public GameLogicCommand {
-	CmdDestroyMapObject() : GameLogicCommand(0), obj_serial(0) {} ///< For savegame loading
-	CmdDestroyMapObject (uint32_t t, MapObject &);
-	void execute (Game &) override;
+	CmdDestroyMapObject() : GameLogicCommand(Time()) {
+	}  ///< For savegame loading
+	CmdDestroyMapObject(const Time&, MapObject&);
+	void execute(Game&) override;
 
-	void write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
-	void read (FileRead  &, EditorGameBase &, MapObjectLoader &) override;
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {return QueueCommandTypes::kDestroyMapObject;}
+	[[nodiscard]] QueueCommandTypes id() const override {
+		return QueueCommandTypes::kDestroyMapObject;
+	}
 
 private:
-	Serial obj_serial;
+	Serial obj_serial{0U};
 };
 
 struct CmdAct : public GameLogicCommand {
-	CmdAct() : GameLogicCommand(0), obj_serial(0), arg(0) {} ///< For savegame loading
-	CmdAct (uint32_t t, MapObject &, int32_t a);
+	CmdAct() : GameLogicCommand(Time()) {
+	}  ///< For savegame loading
+	CmdAct(const Time& t, MapObject&, int32_t a);
 
-	void execute (Game &) override;
+	void execute(Game&) override;
 
-	void write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
-	void read (FileRead  &, EditorGameBase &, MapObjectLoader &) override;
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {return QueueCommandTypes::kAct;}
+	[[nodiscard]] QueueCommandTypes id() const override {
+		return QueueCommandTypes::kAct;
+	}
 
 private:
-	Serial obj_serial;
-	int32_t arg;
+	Serial obj_serial{0U};
+	int32_t arg{0};
 };
-
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_MAP_OBJECT_H

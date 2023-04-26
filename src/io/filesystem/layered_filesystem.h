@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -46,7 +45,7 @@
 class LayeredFileSystem : public FileSystem {
 public:
 	LayeredFileSystem();
-	virtual ~LayeredFileSystem();
+	~LayeredFileSystem() override = default;
 
 	// Add a new filesystem to the top of the stack. Take ownership of the given
 	// filesystem.
@@ -56,40 +55,40 @@ public:
 	// files). Take ownership of the given filesystem.
 	void set_home_file_system(FileSystem*);
 
-	virtual void remove_file_system(const FileSystem &);
+	[[nodiscard]] FilenameSet list_directory(const std::string& path) const override;
 
-	std::set<std::string> list_directory(const std::string& path) override;
+	[[nodiscard]] bool is_writable() const override;
+	[[nodiscard]] bool file_exists(const std::string& path) const override;
+	[[nodiscard]] bool is_directory(const std::string& path) const override;
+	void ensure_directory_exists(const std::string& fs_dirname) override;
+	void make_directory(const std::string& fs_dirname) override;
 
-	bool is_writable            () const override;
-	bool file_exists            (const std::string & path) override;
-	bool is_directory           (const std::string & path) override;
-	void ensure_directory_exists(const std::string & fs_dirname) override;
-	void make_directory         (const std::string & fs_dirname) override;
+	void* load(const std::string& fname, size_t& length) override;
+	void write(const std::string& fname, void const* data, size_t length) override;
 
-	void * load(const std::string & fname, size_t & length) override;
-	void write(const std::string& fname, void const* data, int32_t length) override;
+	StreamRead* open_stream_read(const std::string& fname) override;
+	StreamWrite* open_stream_write(const std::string& fname) override;
 
-	StreamRead  * open_stream_read (const std::string & fname) override;
-	StreamWrite * open_stream_write(const std::string & fname) override;
+	FileSystem* make_sub_file_system(const std::string& dirname) override;
+	FileSystem* create_sub_file_system(const std::string& dirname, Type type) override;
+	void fs_unlink(const std::string& file) override;
+	void fs_rename(const std::string& old_name, const std::string& new_name) override;
 
-	FileSystem * make_sub_file_system(const std::string & fs_dirname) override;
-	FileSystem * create_sub_file_system(const std::string & fs_dirname, Type) override;
-	void fs_unlink(const std::string & file) override;
-	void fs_rename(const std::string &, const std::string &) override;
+	std::string get_basename() override {
+		return std::string();
+	}
 
-	std::string get_basename() override {return std::string();}
-
-	unsigned long long disk_space() override;
+	unsigned long long disk_space() override;  // NOLINT
 
 private:
 	/// This is used to assemble an error message for exceptions that includes all file paths
-	std::string paths_error_message(const std::string& filename) const;
+	[[nodiscard]] std::string paths_error_message(const std::string& filename) const;
 
 	std::vector<std::unique_ptr<FileSystem>> filesystems_;
 	std::unique_ptr<FileSystem> home_;
 };
 
 /// Access all game data files etc. through this FileSystem
-extern LayeredFileSystem * g_fs;
+extern LayeredFileSystem* g_fs;
 
 #endif  // end of include guard: WL_IO_FILESYSTEM_LAYERED_FILESYSTEM_H

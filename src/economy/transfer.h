@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -27,8 +26,6 @@ class Game;
 struct PlayerImmovable;
 class Request;
 class WareInstance;
-class MapObjectLoader;
-struct MapObjectSaver;
 class Worker;
 
 /**
@@ -46,44 +43,54 @@ class Worker;
 struct Transfer {
 	friend class Request;
 
-	Transfer(Game &, Request &, WareInstance &);
-	Transfer(Game &, Request &, Worker       &);
-	Transfer(Game &, WareInstance &);
-	Transfer(Game &, Worker &);
+	Transfer(Game&, Request&, WareInstance&);
+	Transfer(Game&, Request&, Worker&);
+	Transfer(Game&, WareInstance&);
+	Transfer(Game&, Worker&);
 	~Transfer();
 
-	Request * get_request() const {return request_;}
-	void set_request(Request * req);
-	void set_destination(PlayerImmovable & imm);
-	PlayerImmovable * get_destination(Game & g);
-	uint32_t get_steps_left() const {return route_.get_nrsteps();}
+	[[nodiscard]] Request* get_request() const {
+		return request_;
+	}
+	void set_request(Request* req);
+	void set_destination(PlayerImmovable& imm);
+	PlayerImmovable* get_destination(Game& g);
+	[[nodiscard]] uint32_t get_steps_left() const {
+		return route_.get_nrsteps();
+	}
 
 	/// Called by the controlled ware or worker
-	PlayerImmovable * get_next_step(PlayerImmovable *, bool & psuccess);
+	PlayerImmovable* get_next_step(PlayerImmovable*, bool& psuccess);
 	void has_finished();
 	void has_failed();
 
-	struct ReadData {
-		uint32_t destination;
+	[[nodiscard]] WareInstance* get_ware() const {
+		return ware_;
+	}
+	[[nodiscard]] Worker* get_worker() const {
+		return worker_;
+	}
 
-		ReadData() : destination(0) {}
+	struct ReadData {
+		uint32_t destination{0U};
+
+		ReadData() = default;
 	};
 
-	void read(FileRead & fr, ReadData & rd);
-	void read_pointers(MapObjectLoader & mol, const ReadData & rd);
-	void write(MapObjectSaver & mos, FileWrite & fw);
+	void read(FileRead& fr, ReadData& rd);
+	void read_pointers(MapObjectLoader& mol, const ReadData& rd);
+	void write(MapObjectSaver& mos, FileWrite& fw);
 
 private:
-	void tlog(char const * fmt, ...) PRINTF_FORMAT(2, 3);
+	void tlog(char const* fmt, ...) PRINTF_FORMAT(2, 3);
 
-	Game & game_;
-	Request * request_;
+	Game& game_;
+	Request* request_;
 	OPtr<PlayerImmovable> destination_;
-	WareInstance * ware_;    ///< non-null iff this is transferring a ware
-	Worker * worker_;  ///< non-null iff this is transferring a worker
+	WareInstance* ware_;  ///< non-null iff this is transferring a ware
+	Worker* worker_;      ///< non-null iff this is transferring a worker
 	Route route_;
 };
-
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_TRANSFER_H

@@ -1,12 +1,12 @@
-# Automatically created by Widelands bzr6718[widelands] (Debug)
+# Automatically created by Widelands bzr7905[trunk] (Debug)
 
 [global]
 packet_version="2"
-player_1="18 97"
-player_2="113 242"
-player_3="157 103"
-player_4="16 234"
-player_5="111 112"
-player_6="230 238"
-player_7="131 71"
-player_8="242 27"
+player_1="65 168"
+player_2="191 93"
+player_3="63 100"
+player_4="192 165"
+player_5="212 212"
+player_6="174 214"
+player_7="83 50"
+player_8="45 50"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2007-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -32,18 +31,17 @@ namespace Widelands {
  * the current implementation begins at the top left node and then moves around
  * clockwise when advance is called repeatedly).
  */
-template <typename AreaType = Area<> > struct MapFringeRegion {
-	MapFringeRegion(const Map & map, AreaType area) :
-		area_              (area),
-		remaining_in_phase_(area.radius),
-		phase_             (area.radius ? 6 : 0)
-	{
-		for (typename AreaType::RadiusType r = area.radius; r; --r)
+template <typename AreaType = Area<>> struct MapFringeRegion {
+	MapFringeRegion(const Map& map, AreaType area)
+	   : area_(area), remaining_in_phase_(area.radius), phase_(area.radius ? 6 : 0) {
+		for (typename AreaType::RadiusType r = area.radius; r; --r) {
 			map.get_tln(area_, &area_);
+		}
 	}
 
-
-	const typename AreaType::CoordsType & location() const {return area_;}
+	[[nodiscard]] const typename AreaType::CoordsType& location() const {
+		return area_;
+	}
 
 	/**
 	 * Moves on to the next location. The return value indicates whether the new
@@ -56,27 +54,33 @@ template <typename AreaType = Area<> > struct MapFringeRegion {
 	 * again, which will return true until it reaches the first location the next
 	 * time around, and so on.
 	 */
-	bool advance(const Map &);
+	bool advance(const Map&);
 
 	/**
 	 * When advance has returned false, iterating over the same fringe again is
 	 * not the only possibility. It is also possible to call extend. This makes
 	 * the region ready to iterate over the next layer of nodes.
 	 */
-	void extend(const Map & map) {
+	void extend(const Map& map) {
 		map.get_tln(area_, &area_);
 		++area_.radius;
 		remaining_in_phase_ = area_.radius;
 		phase_ = 6;
 	}
 
-	typename AreaType::RadiusType radius() const {return area_.radius;}
+	[[nodiscard]] typename AreaType::RadiusType radius() const {
+		return area_.radius;
+	}
+
 private:
-	AreaType                       area_;
+	AreaType area_;
 	typename AreaType::RadiusType remaining_in_phase_;
-	uint8_t   phase_;
+	uint8_t phase_;
 };
 
-}
+// Forward declarations of template instantiations
+template <> bool MapFringeRegion<Area<FCoords>>::advance(const Map& map);
+template <> bool MapFringeRegion<Area<>>::advance(const Map& map);
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAPFRINGEREGION_H

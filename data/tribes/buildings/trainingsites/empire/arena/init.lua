@@ -1,14 +1,32 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_trainingsite_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_trainingsite_type {
    name = "empire_arena",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Arena"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
-   enhancement = "empire_colosseum",
+
+   enhancement = {
+      name = "empire_colosseum",
+      enhancement_cost = {
+         planks = 2,
+         granite = 4,
+         marble = 4,
+         cloth = 2,
+         gold = 4,
+         marble_column = 4
+      },
+      enhancement_return_on_dismantle = {
+         planks = 1,
+         granite = 2,
+         marble = 2,
+         gold = 2,
+         marble_column = 2
+      }
+   },
 
    buildcost = {
       log = 2,
@@ -25,23 +43,27 @@ tribes:new_trainingsite_type {
       marble_column = 1
    },
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 81, 82 }
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 91, 89 }
       },
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 82, 83 },
-      }
+         frames = 4,
+         columns = 4,
+         rows = 1,
+         hotspot = { 91, 89 }
+      },
    },
 
    aihints = {
-      trainingsite_type = "basic",
+      trainingsites_max_percent = 10,
       prohibited_till = 900,
       very_weak_ai_limit = 1,
-      weak_ai_limit = 2,
-      forced_after = 1500
+      weak_ai_limit = 2
    },
 
    working_positions = {
@@ -49,46 +71,44 @@ tribes:new_trainingsite_type {
    },
 
    inputs = {
-      empire_bread = 10,
-      fish = 6,
-      meat = 6
+      { name = "fish", amount = 6 },
+      { name = "meat", amount = 6 },
+      { name = "empire_bread", amount = 10 }
    },
-   outputs = {
-      "empire_soldier",
-   },
-
-   ["soldier evade"] = {
-      min_level = 0,
-      max_level = 0,
-      food = {
-         {"fish", "meat"},
-         {"empire_bread"}
-      }
-   },
-
 
    programs = {
       sleep = {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
-         descname = _"sleeping",
+         descname = _("sleeping"),
          actions = {
-            "sleep=5000",
-            "check_soldier=soldier attack 9", -- dummy check to get sleep rated as skipped - else it will change statistics
+            "sleep=duration:5s",
+            "return=skipped",
          }
       },
       upgrade_soldier_evade_0 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = _"upgrading soldier evade from level 0 to level 1",
+         descname = pgettext("empire_building", "upgrading soldier evade from level 0 to level 1"),
          actions = {
-            "check_soldier=soldier evade 0", -- Fails when aren't any soldier of level 0 evade
-            "sleep=30000",
-            "check_soldier=soldier evade 0", -- Because the soldier can be expelled by the player
-            "consume=empire_bread:2 fish,meat",
-            "train=soldier evade 0 1"
+            "checksoldier=soldier:evade level:0", -- Fails when aren't any soldier of level 0 evade
+            "return=failed unless site has empire_bread",
+            "return=failed unless site has fish,meat",
+            "sleep=duration:30s",
+            "checksoldier=soldier:evade level:0", -- Because the soldier can be expelled by the player
+            "consume=empire_bread fish,meat",
+            "train=soldier:evade level:1"
          }
       },
    },
 
    soldier_capacity = 8,
-   trainer_patience = 8
+   trainer_patience = 16,
+
+   messages = {
+      -- TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
+      no_soldier = pgettext("empire_building", "No soldier to train!"),
+      -- TRANSLATORS: Empire training site tooltip when none of the present soldiers match the current training program
+      no_soldier_for_level = pgettext("empire_building", "No soldier found for this training level!"),
+   },
 }
+
+pop_textdomain()

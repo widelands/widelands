@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,15 +12,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_LOGIC_CMD_LUACOROUTINE_H
 #define WL_LOGIC_CMD_LUACOROUTINE_H
 
-#include <string>
+#include <memory>
 
 #include "logic/cmd_queue.h"
 #include "scripting/lua_coroutine.h"
@@ -28,26 +27,27 @@
 namespace Widelands {
 
 struct CmdLuaCoroutine : public GameLogicCommand {
-	CmdLuaCoroutine() : GameLogicCommand(0), cr_(nullptr) {} // For savegame loading
-	CmdLuaCoroutine(uint32_t const init_duetime, LuaCoroutine * const cr) :
-		GameLogicCommand(init_duetime), cr_(cr) {}
-
-	~CmdLuaCoroutine() {
-		delete cr_;
+	CmdLuaCoroutine() : GameLogicCommand(Time(0)) {
+	}  // For savegame loading
+	CmdLuaCoroutine(const Time& init_duetime, std::unique_ptr<LuaCoroutine> cr)
+	   : GameLogicCommand(init_duetime), cr_(std::move(cr)) {
 	}
 
+	~CmdLuaCoroutine() override = default;
+
 	// Write these commands to a file (for savegames)
-	void write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
-	void read (FileRead  &, EditorGameBase &, MapObjectLoader &) override;
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {return QueueCommandTypes::kLuaCoroutine;}
+	[[nodiscard]] QueueCommandTypes id() const override {
+		return QueueCommandTypes::kLuaCoroutine;
+	}
 
-	void execute(Game &) override;
+	void execute(Game&) override;
 
 private:
-	LuaCoroutine * cr_;
+	std::unique_ptr<LuaCoroutine> cr_;
 };
-
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_CMD_LUACOROUTINE_H

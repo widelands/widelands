@@ -1,0 +1,8 @@
+# Automatically created by Widelands bzr8439[frisians] (Release)
+
+[global]
+packet_version="1"
+number_of_port_spaces="1"
+
+[port_spaces]
+0="83 97"

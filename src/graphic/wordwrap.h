@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2011 by the Widelands Development Team
+ * Copyright (C) 2010-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,18 +12,21 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifndef WL_GRAPHIC_WORDWRAP_H
 #define WL_GRAPHIC_WORDWRAP_H
 
-#include <string>
+#include <memory>
 
+#include <base/scoped_timer.h>
+#include <unicode/uchar.h>
+
+#include "base/vector.h"
 #include "graphic/align.h"
-#include "graphic/text_layout.h"
-#include "base/point.h"
+#include "graphic/color.h"
+#include "graphic/text/sdl_ttf_font.h"
 
 class RenderTarget;
 
@@ -33,27 +36,43 @@ namespace UI {
  * Helper struct that provides word wrapping and related functionality.
  */
 struct WordWrap {
-	WordWrap();
-	WordWrap(const TextStyle & style, uint32_t wrapwidth = std::numeric_limits<uint32_t>::max());
+	static constexpr int kLineMargin = 1;
 
-	void set_style(const TextStyle & style);
+	explicit WordWrap(int fontsize, const RGBColor& color, uint32_t wrapwidth);
+
 	void set_wrapwidth(uint32_t wrapwidth);
 
-	uint32_t wrapwidth() const;
+	[[nodiscard]] uint32_t wrapwidth() const;
 
-	void wrap(const std::string & text);
+	void wrap(const std::string& text);
 
-	uint32_t width() const;
-	uint32_t height() const;
-	void set_draw_caret(bool draw_it) {draw_caret_ = draw_it;}
+	[[nodiscard]] uint32_t width() const;
+	[[nodiscard]] uint32_t height() const;
+	void set_draw_caret(bool draw_it) {
+		draw_caret_ = draw_it;
+	}
 
-	void draw
-		(RenderTarget & dst, Point where, Align align = UI::Align::kLeft,
-		 uint32_t caret = std::numeric_limits<uint32_t>::max());
+	void draw(RenderTarget& dst,
+	          Vector2i where,
+	          Align align = UI::Align::kLeft,
+	          uint32_t caret = std::numeric_limits<uint32_t>::max(),
+	          bool with_selection = false,
+	          uint32_t selection_start = 0,
+	          uint32_t selection_end = 0,
+	          uint32_t scrollbar_position = 0,
+	          const std::string& caret_image_path = std::string());
 
-	void calc_wrapped_pos(uint32_t caret, uint32_t & line, uint32_t & pos) const;
-	uint32_t nrlines() const {return lines_.size();}
-	uint32_t line_offset(uint32_t line) const;
+	void calc_wrapped_pos(uint32_t caret, uint32_t& line, uint32_t& pos) const;
+	[[nodiscard]] uint32_t nrlines() const {
+		return lines_.size();
+	}
+	[[nodiscard]] uint32_t line_offset(uint32_t line) const;
+	[[nodiscard]] uint32_t offset_of_line_at(int32_t y) const;
+	[[nodiscard]] std::string text_of_line_at(int32_t y) const;
+	int text_width_of(std::string& text) const;
+
+	void focus();
+	void enter_cursor_movement_mode();
 
 private:
 	struct LineData {
@@ -64,22 +83,45 @@ private:
 		size_t start;
 	};
 
-	void compute_end_of_line
-		(const std::string & text,
-		 std::string::size_type line_start,
-		 std::string::size_type & line_end,
-		 std::string::size_type & next_line_start,
-		 uint32_t safety_margin);
+	void compute_end_of_line(const std::string& text,
+	                         std::string::size_type line_start,
+	                         std::string::size_type& line_end,
+	                         std::string::size_type& next_line_start,
+	                         uint32_t safety_margin);
 
-	bool line_fits(const std::string& text, uint32_t safety_margin) const;
+	[[nodiscard]] bool line_fits(const std::string& text, uint32_t safety_margin) const;
 
-	TextStyle style_;
+	[[nodiscard]] uint32_t quick_width(const UChar& c) const;
+	[[nodiscard]] uint32_t quick_width(const std::string& text) const;
+
 	uint32_t wrapwidth_;
-	bool draw_caret_;
+	bool draw_caret_{false};
+
+	// TODO(GunChleoc): We can tie these to constexpr once the old font renderer is gone.
+	const int fontsize_;
+	RGBColor color_;
+
+	// Editor font is sans bold.
+	std::unique_ptr<RT::IFont> font_;
 
 	std::vector<LineData> lines_;
+	void highlight_selection(RenderTarget& dst,
+	                         uint32_t scrollbar_position,
+	                         uint32_t selection_start_line,
+	                         uint32_t selection_start_x,
+	                         uint32_t selection_end_line,
+	                         uint32_t selection_end_x,
+	                         int fontheight,
+	                         uint32_t line,
+	                         const Vector2i& point) const;
+	[[nodiscard]] uint32_t line_index(int32_t y) const;
+	ScopedTimer caret_timer_;
+	uint32_t caret_ms_;
+	ScopedTimer cursor_movement_timer_;
+	uint32_t cursor_ms_;
+	bool cursor_movement_active_ = false;
 };
 
-} // namespace UI
+}  // namespace UI
 
 #endif  // end of include guard: WL_GRAPHIC_WORDWRAP_H

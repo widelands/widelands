@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_militarysite_type {
-   msgctxt = "barbarians_building",
+wl.Descriptions():new_militarysite_type {
    name = "barbarians_sentry",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Sentry"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -16,20 +16,26 @@ tribes:new_militarysite_type {
       blackwood = 1
    },
 
+   animation_directory = dirname,
    animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 39, 40 },
-         fps = 10
-      },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 39, 40 },
-      },
       unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
          hotspot = { 39, 40 }
       }
+   },
+   spritesheets = {
+      idle = {
+         fps = 10,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 39, 40 }
+      },
+      build = {
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 39, 40 }
+      },
    },
 
    aihints = {
@@ -44,10 +50,17 @@ tribes:new_militarysite_type {
    prefer_heroes = false,
 
    messages = {
-      occupied = _"Your soldiers have occupied your sentry.",
-      aggressor = _"Your sentry discovered an aggressor.",
-      attack = _"Your sentry is under attack.",
-      defeated_enemy = _"The enemy defeated your soldiers at the sentry.",
-      defeated_you = _"Your soldiers defeated the enemy at the sentry."
+      -- TRANSLATORS: Message sent by a Barbarian military site
+      occupied = pgettext("barbarians_building", "Your soldiers have occupied your sentry."),
+      -- TRANSLATORS: Message sent by a Barbarian military site
+      aggressor = pgettext("barbarians_building", "Your sentry discovered an aggressor."),
+      -- TRANSLATORS: Message sent by a Barbarian military site
+      attack = pgettext("barbarians_building", "Your sentry is under attack."),
+      -- TRANSLATORS: Message sent by a Barbarian military site
+      defeated_enemy = pgettext("barbarians_building", "The enemy defeated your soldiers at the sentry."),
+      -- TRANSLATORS: Message sent by a Barbarian military site
+      defeated_you = pgettext("barbarians_building", "Your soldiers defeated the enemy at the sentry.")
    },
 }
+
+pop_textdomain()

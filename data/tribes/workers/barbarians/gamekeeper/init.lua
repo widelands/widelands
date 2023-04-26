@@ -1,31 +1,12 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 14, 22 }
-   },
-   releasein = {
-      pictures = path.list_files(dirname .. "releasein_??.png"),
-      hotspot = { 15, 22 },
-      fps = 5
-   },
-   releaseout = {
-      pictures = path.list_files(dirname .. "releaseout_??.png"),
-      hotspot = { 15, 22 },
-      fps = 5
-   }
-}
-add_worker_animations(animations, "walk", dirname, "walk", {15, 22}, 10)
-add_worker_animations(animations, "walkload", dirname, "walkload", {15, 22})
-
-
-tribes:new_worker_type {
-   msgctxt = "barbarians_worker",
+wl.Descriptions():new_worker_type {
    name = "barbarians_gamekeeper",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Gamekeeper"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -35,15 +16,44 @@ tribes:new_worker_type {
 
    programs = {
       release = {
-         "setbobdescription wildboar stag sheep",
-         "findspace size:any radius:3",
-         "walk coords",
-         "animation releasein 2000",
-         "create_bob",
-         "animation releaseout 2000",
+         "findspace=size:any radius:3",
+         "walk=coords",
+         "animate=releasein duration:2s",
+         "createbob=bunny chamois deer moose reindeer sheep stag wildboar wisent",
+         "animate=releaseout duration:2s",
          "return"
       }
    },
 
-   animations = animations,
+   animations = {
+      idle = {
+         hotspot = { 14, 22 }
+      },
+   },
+   spritesheets = {
+      walk = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 15, 22 }
+      },
+      releasein = {
+         fps = 5,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         hotspot = { 15, 22 }
+      },
+      releaseout = {
+         fps = 5,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         hotspot = { 15, 22 }
+      }
+   }
 }
+
+pop_textdomain()

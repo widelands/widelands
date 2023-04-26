@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,20 +12,18 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "graphic/image_io.h"
 
+#include <cstddef>
 #include <memory>
 
-#include <SDL.h>
 #include <SDL_image.h>
 #include <png.h>
 
-#include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/texture.h"
 #include "io/fileread.h"
@@ -54,7 +52,6 @@ inline void ensure_sdl_image_is_initialized() {
 	}
 }
 
-
 }  // namespace
 
 std::unique_ptr<Texture> load_image(const std::string& fname, FileSystem* fs) {
@@ -66,7 +63,7 @@ SDL_Surface* load_image_as_sdl_surface(const std::string& fname, FileSystem* fs)
 
 	FileRead fr;
 	bool found;
-	if (fs) {
+	if (fs != nullptr) {
 		found = fr.try_open(*fs, fname);
 	} else {
 		found = fr.try_open(*g_fs, fname);
@@ -77,8 +74,8 @@ SDL_Surface* load_image_as_sdl_surface(const std::string& fname, FileSystem* fs)
 	}
 
 	SDL_Surface* sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.data(0), fr.get_size()), 1);
-	if (!sdlsurf) {
-		throw ImageLoadingError(fname.c_str(), IMG_GetError());
+	if (sdlsurf == nullptr) {
+		throw ImageLoadingError(fname, IMG_GetError());
 	}
 	return sdlsurf;
 }
@@ -87,17 +84,18 @@ bool save_to_png(Texture* texture, StreamWrite* sw, ColorType color_type) {
 	png_structp png_ptr = png_create_write_struct(
 	   PNG_LIBPNG_VER_STRING, static_cast<png_voidp>(nullptr), nullptr, nullptr);
 
-	if (!png_ptr)
+	if (png_ptr == nullptr) {
 		throw wexception("save_to_png: could not create png struct");
+	}
 
 	png_infop info_ptr = png_create_info_struct(png_ptr);
-	if (!info_ptr) {
+	if (info_ptr == nullptr) {
 		png_destroy_write_struct(&png_ptr, static_cast<png_infopp>(nullptr));
 		throw wexception("save_to_png: could not create png info struct");
 	}
 
 	// Set jump for error
-	if (setjmp(png_jmpbuf(png_ptr))) {
+	if (setjmp(png_jmpbuf(png_ptr))) {  // NOLINT
 		png_destroy_write_struct(&png_ptr, &info_ptr);
 		throw wexception("save_to_png: Error writing PNG!");
 	}
@@ -111,15 +109,9 @@ bool save_to_png(Texture* texture, StreamWrite* sw, ColorType color_type) {
 	png_set_write_fn(png_ptr, sw, &png_write_function, &png_flush_function);
 
 	// Fill info struct
-	png_set_IHDR(png_ptr,
-	             info_ptr,
-	             texture->width(),
-	             texture->height(),
-	             8,
+	png_set_IHDR(png_ptr, info_ptr, texture->width(), texture->height(), 8,
 	             (color_type == ColorType::RGB) ? PNG_COLOR_TYPE_RGB : PNG_COLOR_TYPE_RGBA,
-	             PNG_INTERLACE_NONE,
-	             PNG_COMPRESSION_TYPE_DEFAULT,
-	             PNG_FILTER_TYPE_DEFAULT);
+	             PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 
 	// Start writing
 	png_write_info(png_ptr, info_ptr);
@@ -139,7 +131,7 @@ bool save_to_png(Texture* texture, StreamWrite* sw, ColorType color_type) {
 			for (uint32_t y = 0; y < surf_h; ++y) {
 				for (uint32_t x = 0; x < surf_w; ++x) {
 					color = texture->get_pixel(x, y);
-					row[3 * x] = color.r;
+					row[static_cast<std::size_t>(3) * x] = color.r;
 					row[3 * x + 1] = color.g;
 					row[3 * x + 2] = color.b;
 				}
@@ -149,7 +141,7 @@ bool save_to_png(Texture* texture, StreamWrite* sw, ColorType color_type) {
 			for (uint32_t y = 0; y < surf_h; ++y) {
 				for (uint32_t x = 0; x < surf_w; ++x) {
 					color = texture->get_pixel(x, y);
-					row[4 * x] = color.r;
+					row[static_cast<std::size_t>(4) * x] = color.r;
 					row[4 * x + 1] = color.g;
 					row[4 * x + 2] = color.b;
 					row[4 * x + 3] = color.a;

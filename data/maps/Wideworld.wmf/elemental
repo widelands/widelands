@@ -1,0 +1,14 @@
+# Automatically created by Widelands 1.0~git25124[86b440b@master] (Release)
+
+[global]
+packet_version="1"
+map_w="384"
+map_h="256"
+nr_players="3"
+name=_"Wide World"
+author="Einstein13"
+descr=_"The world is not enough! If you want to win, you have to send some ships. But remember: your opponents are very close to you."
+hint=
+theme="winter"
+tags="balanced,official,seafaring"
+addons=

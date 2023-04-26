@@ -1,15 +1,31 @@
 wl_library(network
   SRCS
+    bufferedconnection.cc
+    bufferedconnection.h
     constants.h
     internet_gaming.cc
     internet_gaming.h
     internet_gaming_messages.cc
     internet_gaming_messages.h
     internet_gaming_protocol.h
+    gameclient.cc
+    gameclient.h
+    gamehost.cc
+    gamehost.h
+    host_game_settings_provider.cc
+    host_game_settings_provider.h
+    net_addons.cc
+    net_addons.h
+    netclient_interface.h
     netclient.cc
     netclient.h
+    netclientproxy.cc
+    netclientproxy.h
+    nethost_interface.h
     nethost.cc
     nethost.h
+    nethostproxy.cc
+    nethostproxy.h
     network.cc
     network.h
     network_gaming_messages.cc
@@ -19,31 +35,42 @@ wl_library(network
     network_player_settings_backend.cc
     network_player_settings_backend.h
     network_protocol.h
-    network_system.h
-  USES_SDL2_NET
+    relay_protocol.h
+    participantlist.cc
+    participantlist.h
+  USES_SDL2
   DEPENDS
     ai
+    base
     base_exceptions
-    base_i18n
-    base_log
     base_macros
+    base_math
     base_md5
+    base_random
+    base_time_string
     build_info
     chat
     game_io
-    helper
+    graphic
     io_fileread
     io_filesystem
     io_stream
     logic
+    logic_addons
+    logic_commands
+    logic_constants
+    logic_filesystem_constants
     logic_game_controller
     logic_game_settings
+    logic_tribe_basic_info
     map_io_map_loader
-    profile
+    notifications
     scripting_lua_interface
     scripting_lua_table
+    third_party_sha1
     ui_basic
     ui_fsmenu
     widelands_ball_of_mud
+    widelands_options
     wui
 )

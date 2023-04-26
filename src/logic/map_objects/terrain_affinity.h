@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,18 +12,15 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_LOGIC_MAP_OBJECTS_TERRAIN_AFFINITY_H
 #define WL_LOGIC_MAP_OBJECTS_TERRAIN_AFFINITY_H
 
-#include <string>
-
 #include "base/macros.h"
-#include "logic/description_maintainer.h"
+#include "logic/map_objects/description_maintainer.h"
 
 class LuaTable;
 
@@ -31,7 +28,6 @@ namespace Widelands {
 
 class Map;
 class TerrainDescription;
-class World;
 struct FCoords;
 
 // Describes the parameters and the pickiness of Immovables towards terrain
@@ -39,39 +35,49 @@ struct FCoords;
 // define this.
 class TerrainAffinity {
 public:
+	static constexpr int kPrecisionFactor = 1 << 26;
+
 	explicit TerrainAffinity(const LuaTable& table, const std::string& immovable_name);
 
 	// Preferred temperature is in arbitrary units.
-	double preferred_temperature() const;
+	[[nodiscard]] int preferred_temperature() const;
 
-	// Preferred fertility in percent [0, 1].
-	double preferred_fertility() const;
+	// Preferred fertility, ranging from 0 to 1000.
+	[[nodiscard]] int preferred_fertility() const;
 
-	// Preferred humidity in percent [0, 1].
-	double preferred_humidity() const;
+	// Preferred humidity, ranging from 0 to 1000.
+	[[nodiscard]] int preferred_humidity() const;
 
-	// A value in [0, 1] that defines how well this can deal with non-ideal
+	// A value in [0, 99] that defines how well this can deal with non-ideal
 	// situations. Lower means it is less picky, i.e. it can deal better.
-	double pickiness() const;
+	[[nodiscard]] int pickiness() const;
 
 private:
-	double preferred_fertility_;
-	double preferred_humidity_;
-	double preferred_temperature_;
-	double pickiness_;
+	const int preferred_fertility_;
+	const int preferred_humidity_;
+	const int preferred_temperature_;
+	const int pickiness_;
 
 	DISALLOW_COPY_AND_ASSIGN(TerrainAffinity);
 };
 
-// Returns a value in [0., 1.] that describes the suitability for the
-// 'immovable_affinity' for 'field'. Higher is better suited.
-double probability_to_grow
-	(const TerrainAffinity& immovable_affinity, const FCoords& fcoords,
-	 const Map& map, const DescriptionMaintainer<TerrainDescription>& terrains);
+/**
+ * Returns a value in [0, TerrainAffinity::kPrecisionFactor] that describes the suitability for the
+ * 'immovable_affinity' for all 6 terrains around 'field'.
+ * Higher is better suited, with TerrainAffinity::kPrecisionFactor representing a probability of 1.
+ * */
+unsigned int probability_to_grow(const TerrainAffinity& immovable_affinity,
+                                 const FCoords& fcoords,
+                                 const Map& map,
+                                 const DescriptionMaintainer<TerrainDescription>& terrains);
 
-// Probability to grow for a single terrain
-double probability_to_grow
-	(const TerrainAffinity& immovable_affinity, const TerrainDescription& terrain);
+/**
+ * Returns a value in [0, TerrainAffinity::kPrecisionFactor] that describes the suitability for the
+ * 'immovable_affinity' for a single 'terrain'.
+ * Higher is better suited, with TerrainAffinity::kPrecisionFactor representing a probability of 1.
+ * */
+unsigned int probability_to_grow(const TerrainAffinity& immovable_affinity,
+                                 const TerrainDescription& terrain);
 
 }  // namespace Widelands
 

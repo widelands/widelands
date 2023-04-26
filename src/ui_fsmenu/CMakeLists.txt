@@ -1,68 +1,106 @@
+add_subdirectory(addons)
+
 wl_library(ui_fsmenu
   SRCS
-    base.cc
-    base.h
+    about.cc
+    about.h
+    campaigndetails.cc
+    campaigndetails.h
+    campaigns.cc
+    campaigns.h
     campaign_select.cc
     campaign_select.h
-    fileview.cc
-    fileview.h
     helpwindow.cc
     helpwindow.h
     internet_lobby.cc
     internet_lobby.h
-    intro.cc
-    intro.h
+    keyboard_options.cc
+    keyboard_options.h
+    launch_game.cc
+    launch_game.h
     launch_mpg.cc
     launch_mpg.h
     launch_spg.cc
     launch_spg.h
     loadgame.cc
     loadgame.h
-    load_map_or_game.cc
-    load_map_or_game.h
-    main.cc
-    main.h
-    main_menu.cc
-    main_menu.h
+    login_box.cc
+    login_box.h
+    mapdetailsbox.cc
+    mapdetailsbox.h
     mapselect.cc
     mapselect.h
-    multiplayer.cc
-    multiplayer.h
+    main.cc
+    main.h
+    menu.h
+    menu.cc
+    mousewheel_options.cc
+    mousewheel_options.h
+    mousewheel_report.cc
+    mousewheel_report.h
+    multiplayersetupgroup.cc
+    multiplayersetupgroup.h
     netsetup_lan.cc
     netsetup_lan.h
     options.cc
     options.h
-    singleplayer.cc
-    singleplayer.h
+    random_game.cc
+    random_game.h
+    scenariodetails.cc
+    scenariodetails.h
+    scenario_select.cc
+    scenario_select.h
+    singleplayerdropdown.cc
+    singleplayerdropdown.h
+    singleplayersetupbox.cc
+    singleplayersetupbox.h
+    tech_info.cc
+    tech_info.h
+    training_wheel_options.cc
+    training_wheel_options.h
   DEPENDS
+    ai
+    base
     base_exceptions
-    base_i18n
-    base_log
-    base_macros
-    base_time_string
+    base_random
     build_info
-    game_io
+    editor
     graphic
-    graphic_image_io
+    graphic_fonthandler
+    graphic_mouse_cursor
+    graphic_playercolor
+    graphic_styles
     graphic_surface
     graphic_text
     graphic_text_layout
-    helper
     io_filesystem
+    io_profile
     logic
-    logic_campaign_visibility
-    logic_game_controller
+    logic_addons
+    logic_filesystem_constants
     logic_game_settings
+    logic_game_controller
+    logic_map
+    logic_map_objects
+    logic_single_player_game_settings
+    logic_training_wheels
+    logic_tribe_basic_info
     map_io_map_loader
     network
-    profile
     scripting_coroutine
     scripting_lua_interface
     scripting_lua_table
-    sound
     ui_basic
+    sound
+    third_party_sha1
+    ui_addons
     widelands_ball_of_mud
+    widelands_options
     wui
     wui_chat_ui
-    wui_common
+    wui_common_mapdetails
+    wui_common_gamedetails
+    wui_common_suggested_teams
+    wui_sound_options
+  USES_SDL2
 )

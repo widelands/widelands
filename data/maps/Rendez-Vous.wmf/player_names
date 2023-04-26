@@ -1,18 +1,28 @@
+# Automatically created by Widelands bzr7905[trunk] (Debug)
+
 [global]
-packet_version="1"
+packet_version="2"
 
 [player_1]
 name="King Knut"
 tribe="barbarians"
+ai=
+closeable="false"
 
 [player_2]
 name="Count Douku"
 tribe="barbarians"
+ai=
+closeable="false"
 
 [player_3]
 name="Queen Mary"
 tribe="empire"
+ai=
+closeable="false"
 
 [player_4]
 name="Princess Peach"
 tribe="empire"
+ai=
+closeable="false"

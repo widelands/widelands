@@ -8,58 +8,6 @@ function player_tests:test_name_property()
    assert_equal("Awesome Atlantean", egbase.players[3].name)
 end
 
--- -- =======================================================================
--- --                          See Fields/Hide Fields
--- -- =======================================================================
-player_vision_tests = lunit.TestCase("Player vision tests")
-function player_vision_tests:setup()
-   self.f = map:get_field(50, 20)
-   player1.see_all = false
-end
-function player_vision_tests:teardown()
-   player1:hide_fields(self.f:region(1))
-   player1.see_all = false
-end
--- This test must appear as the very first
-function player_vision_tests:test_seen_field()
-   assert_equal(false, player1:sees_field(self.f))
-   assert_equal(false, player1:seen_field(self.f))
-   player1:reveal_fields(self.f:region(1))
-   player1:hide_fields(self.f:region(1))
-   assert_equal(false, player1:sees_field(self.f))
-   assert_equal(true, player1:seen_field(self.f))
-end
-
-function player_vision_tests:test_sees_field()
-   assert_equal(false, player1:sees_field(self.f))
-   player1:reveal_fields(self.f:region(1))
-   assert_equal(true, player1:sees_field(self.f))
-   player1:hide_fields(self.f:region(1))
-   assert_equal(false, player1:sees_field(self.f))
-end
-function player_vision_tests:test_see_all()
-   assert_equal(false, player1:sees_field(self.f))
-   player1.see_all = true
-   assert_equal(true, player1.see_all)
-   assert_equal(true, player1:sees_field(self.f))
-   player1.see_all = false
-   assert_equal(false, player1:sees_field(self.f))
-end
-function player_vision_tests:test_sees_field_see_all_hide()
-   player1.see_all = true
-   assert_equal(true, player1:sees_field(self.f))
-   player1:hide_fields(self.f:region(1))
-   assert_equal(true, player1:sees_field(self.f))
-   player1.see_all = false
-   assert_equal(false, player1:sees_field(self.f))
-
-   player1:reveal_fields(self.f:region(1))
-   assert_equal(true, player1:sees_field(self.f))
-   player1.see_all = false
-   assert_equal(true, player1:sees_field(self.f))
-end
-
-
 -- =========================
 -- Forbid & Allow buildings
 -- =========================
@@ -143,4 +91,17 @@ function player_building_access:test_access()
    assert_equal(b3, rv.barbarians_quarry[1])
    b1.fields[1].brn.immovable:remove()
    assert_equal(1, #player1:get_buildings("barbarians_lumberjacks_hut"))
+end
+-- ================
+-- Players production statistics
+-- ================
+player_production_statistics = lunit.TestCase("Players production statistics")
+function player_building_access:test_single()
+   self.bs = {
+      player1:place_building("barbarians_lumberjacks_hut", map:get_field(10,10)),
+      player1:place_building("barbarians_lumberjacks_hut", map:get_field(13,10)),
+      player1:place_building("barbarians_quarry", map:get_field(8,10)),
+   }
+
+   assert_equal((player1:get_produced_wares_count('all'))['log'], player1:get_produced_wares_count('log'))
 end

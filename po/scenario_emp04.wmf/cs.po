@@ -1,0 +1,1958 @@
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2023 Widelands Development Team
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Milan Fašina <matrix17@seznam.cz>, 2018
+# af24e571988b09e5b46468ac89010e87_d1b4333, 2021
+# Zlopez <michal.konecny@psmail.xyz>, 2021
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands svnVERSION\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"PO-Revision-Date: 2017-12-27 17:17+0000\n"
+"Last-Translator: Zlopez <michal.konecny@psmail.xyz>, 2021\n"
+"Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: cs\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+
+#: ../../data/campaigns/emp04.wmf/scripting/starting_conditions.lua:39
+msgid "Fremil"
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:43
+msgid "Dismantle the unproductive buildings"
+msgstr "Rozeber neproduktivní budovy"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:45
+msgid "Dismantle Buildings"
+msgstr "Rozeber budovy"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:46
+msgid ""
+"Dismantle all unproductive small buildings to get some resources for new "
+"buildings."
+msgstr ""
+"Rozeber všechny zbytečné malé budovy, aby se z nich získané suroviny mohly "
+"použít na novou výstavbu."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:47
+msgid ""
+"Remember to check the messages and the building status labels for "
+"unproductive buildings."
+msgstr ""
+"Nezapomínej kontrolovat zprávy a stav budov, aby jsi odhalil neproduktivní "
+"budovy."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:53
+msgid "Clear all unnecessary roads"
+msgstr "Odstraň všechny nepotřebné cesty"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:55
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:60
+msgid "Clear Road Network"
+msgstr "Pročisti síť cest"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:56
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:61
+msgid "Resolve the chaotic road network by clearing all unnecessary roads."
+msgstr ""
+"Optimalizuj neuspořádanou síť cest tím, že odstraníš nepotřebné cesty."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:62
+msgid ""
+"Ensure there are not more than 3 dead ends, nor more than one flag with more"
+" than 4 roads."
+msgstr ""
+"Zajisti, abychom neměli víc než 3 slepé cesty a ne víc než jednu vlajku s "
+"více než 4 připojenými cestami."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:67
+msgid "Click on one of the farms"
+msgstr "Klikni na jeden ze svých statků"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:69
+msgid "Open the Building Window of a Farm"
+msgstr "Otevři okno dobytčí farmy"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:70
+msgid ""
+"Click on a farm building to open its building window. This will let you "
+"analyze the building."
+msgstr ""
+"Klikni na nějaký statek a otevři tak jeho okno. To ti umožní získat si o něm"
+" informace."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:76
+msgid "Find the construction plans for the farms"
+msgstr "Získej stavební a výrobní postupy pro statky"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:78
+msgid "Find Farm Construction Plans"
+msgstr "Získej stavební a výrobní postupy pro statek"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:79
+msgid ""
+"Recover the construction plans for the farms. Search for them in the hills "
+"east of your border."
+msgstr ""
+"Obnov znalost stavebních a výrobních postupů pro statky. Hledej místo, kde "
+"se uchovaly, v kopcích na východ od tvých hranic."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:85
+msgid "Build at least 3 lumberjack’s houses and 2 quarries"
+msgstr "Postav nejméně 3 domky dřevorubce a 2 lomy"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:87
+msgid "Quarries and Lumberjacks"
+msgstr "Lomy a dřevorubci"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:88
+msgid ""
+"Build at least three lumberjack’s houses and two quarries to renew your "
+"building material supply chain."
+msgstr ""
+"Postav nejméně tři domky dřevorubce a dva lomy, které ti poslouží k obnově "
+"dodávek stavebního materiálu."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:94
+msgid "Produce fish and rations"
+msgstr "Chytej ryby a připravuj malé svačiny"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:96
+msgid "Food Production"
+msgstr "Výroba jídla"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:97
+msgid "Find and catch some fish. Afterwards, produce rations for your miners."
+msgstr "Najdi a ulov pár ryb. Pak pro své horníky připrav malé svačiny."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:103
+msgid "Replace the old and ineffective forester’s houses"
+msgstr "Nahraď staré a nevýkonné domky lesníků"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:105
+msgid "Build Two New Forester’s Houses"
+msgstr "Postav dva nové domky lesníka"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:106
+msgid ""
+"Replace the two forester’s houses by new ones to increase productivity."
+msgstr "Nahraď dva domky lesníka novými, produktivnějšími."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:112
+msgid "Find the monastery in the north"
+msgstr "Najdi na severu klášter"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:114
+msgid "Find the Monastery"
+msgstr "Najdi klášter"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:115
+msgid ""
+"Find the monastery in the north to obtain the improved technology for your "
+"wheat production chain."
+msgstr ""
+"Najdi na severu klášter a získej tak vylepšenou technologii pěstování "
+"pšenice."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:121
+msgid "Deal with Julia to get the technology"
+msgstr "Jednej s Julií a získej technologii"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:123
+msgid "Diplomacy: Trade or War"
+msgstr "Diplomacie: obchod nebo válka"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:124
+msgid ""
+"Decide: Either collect 35 sheaves of wheat and 15 amphoras of wine for the "
+"goddess in your headquarters or conquer the monastery."
+msgstr ""
+"Rozhodni se. Buďto sesbírej 35 snopů pšenice a 15 džbánů vína pro bohyni a "
+"uskladni je ve své hlavní budově, nebo dobuď klášter."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:130
+msgid "Train at least 3 heroes"
+msgstr "Vycvič nejméně 3 hrdiny"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:132
+msgid "Hero Training"
+msgstr "Výcvik hrdinů"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:133
+msgid ""
+"Use your resources wisely to train at least three fully promoted heroes."
+msgstr ""
+"Nakládej s dostupnými surovinami dobře a vycvič nejméně 3 hrdiny  na "
+"nejvyšší úrovni."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:134
+msgid ""
+"To train a soldier to the highest level in one site, consider stopping the "
+"trainingsite until it is fully equipped with all food and weapons needed."
+msgstr ""
+"K vycvičení vojáka na cvičišti na nejvyšší level zkus zvážit pozastavení "
+"cvičiště, dokud nebude plně vybaveno vším potřebným jídlem a zbraněmi."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:135
+msgid ""
+"To prevent waste of goods, reduce the soldiers to be trained to one per "
+"site."
+msgstr ""
+"Abys zabránil plýtvání surovinami, omez počet vojáků na cvičišti na jednoho."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:136
+msgid ""
+"A site will always prefer the best suited soldier available for training. "
+"Make sure you don’t have your half trained soldiers garrisoned in a military"
+" building."
+msgstr ""
+"Cvičiště bude pro trénink vždy preferovat nejvhodnějšího vojáka. Ujisti se, "
+"že tvoji zpola vycvičení vojáci nejsou umístěni ve vojenských stavbách."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:142
+msgid "Produce at least 10 tools"
+msgstr "Vyrob nejméně 10 nástrojů"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:144
+msgid "Tool Production"
+msgstr "Výroba nástrojů"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:145
+msgid "Produce at least ten tools to improve your economy."
+msgstr ""
+"Vyrob nejméně deset nástrojů, díky kterým budeš moci zlepšit své "
+"hospodářství."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:146
+msgid ""
+"Remember that you can control the production amount in the economy settings."
+msgstr ""
+"Nezapomeň, že v nastavení hospodářství lze určovat vyráběná množství "
+"nástrojů."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:152
+msgid "Recruit new soldiers"
+msgstr "Naverbuj nové vojáky"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:154
+msgid "New Soldier Recruiting"
+msgstr "Verbování nového vojáka"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:155
+msgid "Recruit at least ten new soldiers in your barracks."
+msgstr "Ve svých kasárnách naverbuj nejméně deset nových vojáků."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:161
+msgid "Defeat the Barbarians"
+msgstr "Poraž barbary"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:163
+msgid "Defeat the Enemy"
+msgstr "Poraž nepřítele"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:164
+msgid "End the Barbarian intrusion into your very own part of the world."
+msgstr "Zamez pronikání Barbarů do tebou kontrolované části světa."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:170
+msgid "Build 2 charcoal kilns"
+msgstr "Postav 2 milíře na dřevěné uhlí"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:172
+msgid "Build Two Charcoal Kilns"
+msgstr "Postav dva milíře na dřevěné uhlí"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:173
+msgid "Build two charcoal kilns to support the iron industry."
+msgstr "Postav dva milíře na dřevěné uhlí, aby podporovaly tvou výrobu."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:174
+msgid "Remember to ensure a constant log supply for them."
+msgstr "Zajisti pro ně stabilní přísun kmenů."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:180
+msgid "Increase your military strength by training your soldiers"
+msgstr "Zvyš svůj vojenský potenciál výcvikem vojáků"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:182
+msgid "Training is Important"
+msgstr "Výcvik je důležitý"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:183
+msgid "Train your soldiers hard and train them fast."
+msgstr "Soustřeď se na kvalitní a rychlý výcvik vojáků."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:184
+msgid "You need to increase your military strength."
+msgstr "Musíš zvýšit svůj vojenský a bojový potenciál."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:190
+msgid "Build a training camp and enhance the arena"
+msgstr "Postav výcvikový tábor a vylepši svou arénu"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:192
+msgid "More Efficient Training Buildings"
+msgstr "Účinější výcvikové budovy"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:193
+msgid "Build a training camp and enhance your arena to a colosseum."
+msgstr "Postav výcvikový tábor a vylepši svou arénu na koloseum."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:204
+msgid "Home, Sweet Home"
+msgstr "Domov, sladký domov"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:205
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:216
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:224
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:232
+msgid "Diary of Lutius"
+msgstr "Lutiův deník"
+
+#. TRANSLATORS: Lutius - Diary
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:207
+msgid ""
+"Finally, we managed to reach home. I am so glad to see our beautiful country"
+" again. I am really looking forward to a walk on our lovely coast and to "
+"hunting in our deep forests."
+msgstr ""
+"Konečně se nám podařilo dorazit domů. Je pro mě potěšením opět vidět naši "
+"překrásnou zemi. Už se opravdu velmi těším, až se projdu po našem nádherném "
+"pobřeží a nebo se vydám na lov do hlubokých lesů."
+
+#. TRANSLATORS: Lutius - Diary
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:210
+msgid "I expect that Saledus and Amalea are deeply delighted as well."
+msgstr "Saledus a Amalea určitě musí cítit to samé potěšení."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:215
+msgid "Tools, Tools, Tools"
+msgstr "Nástroje, nástroje, nástroje"
+
+#. TRANSLATORS: Lutius - Diary
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:218
+msgid ""
+"Praise the gods! We just ensured a constant tool supply. Now we should be "
+"able to expand our economy."
+msgstr ""
+"Budiž velebeno božstvo! Právě jsme dosáhli stabilní výroby nástrojů. Nyní "
+"již není nic, co by bránilo našemu hospodářství v rozvoji."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:223
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:622
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:668
+msgid "Military Strength"
+msgstr "Vojenská síla"
+
+#. TRANSLATORS: Lutius - Diary
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:226
+msgid ""
+"Thank the gods! Now we have everything prepared to fully train our soldiers."
+" We can increase our military strength at last."
+msgstr ""
+"Božstvu budiž dík! Nyní disponujeme vším, co je nám třeba k všestrannému "
+"výcviku našich vojáků. Konečně můžeme zvýšit naši vojenskou sílu."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:231
+msgid "The Battle is Won"
+msgstr "Bitva je vyhraná"
+
+#. TRANSLATORS: Lutius - Diary
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:234
+msgid ""
+"Praise the gods, we have succeeded. We managed all the challenges that were "
+"imposed on us. We even expelled the Barbarians out of our country. However, "
+"our victory is only temporary, as this is still just the beginning of the "
+"war. Let’s see what the future still holds for us."
+msgstr ""
+"Budiž velebeno božstvo, uspěli jsme. Překonali jsme všechny nesnáze, které "
+"nám stály v cestě. Dokonce jsme naši zemi očistili od toho barbarského "
+"plémě. Přesto naše vítězství není zcela u konce, jde pouze o začátek našeho "
+"boje. Musíme odhalit všechny nástrahy, které nám budoucnost chystá."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:235
+msgid "Victory"
+msgstr "Vítězství"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:236
+msgid ""
+"You have completed this mission. You may continue playing if you wish, "
+"otherwise move on to the next mission."
+msgstr ""
+"Mise je splněna. Můžeš pokračovat ve hře, jestli chceš, v opačném případě "
+"můžeš zahájit misi další."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:245
+msgid "Chaos"
+msgstr "Zmatek"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:246
+msgid "Lutius is disappointed"
+msgstr "Lutius je zklamán"
+
+#. TRANSLATORS: Lutius
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:248
+msgid ""
+"Oh no! Amalea is right. In fact, I can’t see any productivity at all. And "
+"the road network seems to be completely in shambles as well. Who might be "
+"responsible for this chaos?"
+msgstr ""
+"Ale, ne! Amalea dí pravdu. Vskutku to nevypadá, že by se vůbec něco "
+"vyrábělo. A dopravní síť se zdá také být v troskách. Kdo jen může mít takový"
+" rozkol na svědomí?"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:253
+msgid "Explanation Needed"
+msgstr "Žádané vysvětlení"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:254
+msgid "Lutius greets the official"
+msgstr "Lutius zdraví úředníka"
+
+#. TRANSLATORS: Lutius
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:256
+msgid "Ave! Who are you and what happened to our beautiful land?"
+msgstr "Ave! Kdo jsi a co uvrhlo naši krásnou zemi do takového stavu?"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:261
+msgid "Difficult Times"
+msgstr "Těžké časy"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:262
+msgid "Lutius accepts the challenge"
+msgstr "Lutius přijímá výzvu"
+
+#. TRANSLATORS: Lutius
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:264
+msgid ""
+"Mayor, we have to thank you for your efforts to safeguard our city. And we "
+"will do our very best to recover from the chaos. But unfortunately, this "
+"seems to be very difficult."
+msgstr ""
+"Správce, přijměte náš dík za vaše úsilí vynakládané při dohlížení na chod "
+"našeho města. Uděláme vše, co je v našich silách, pro to, aby naše země opět"
+" vzkvétala. Obávám se ale, že to bude těžký úkol."
+
+#. TRANSLATORS: Lutius
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:267
+msgid ""
+"I am really afraid, because we are completely unprepared should the "
+"Barbarians decide to attack us."
+msgstr ""
+"Mám vážné obavy, rozhodnou-li se barbaři nás napadnout, jsme zcela "
+"nepřipraveni."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:275
+msgid "Welcome Back"
+msgstr "Vítej zpět"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:276
+msgid "A high Fremil official is welcoming you…"
+msgstr "Vysoký představitel Fremilu tě vítá..."
+
+#. TRANSLATORS: Marcus - Mayor of Fremil welcoming Lutius and explaining the
+#. chaos
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:278
+msgid ""
+"Ave, Sire! The people and me are so glad to see you returning back home. We "
+"really need some good leadership around here."
+msgstr ""
+"Ave, pane! Já i moji lidé jsme velmi potěšeni vaším návratem do vlasti. "
+"Opravdu zde potřebujeme někoho s dobrými organizačními schopnostmi."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:280
+msgid ""
+"As you have already noticed, things have gone terribly wrong around here "
+"since you left."
+msgstr ""
+"Jak jste si jistě již mohl všimnout, zdejší poměry se od vašeho posledního "
+"odchodu velmi zhoršily."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:285
+msgid "A Long Story"
+msgstr "Příběh na dlouhé vyprávění"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:286
+msgid "The official sighs deeply…"
+msgstr "Hluboký vhled nového správce…"
+
+#. TRANSLATORS: Marcus - Mayor of Fremil welcoming Lutius and explaining the
+#. chaos
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:288
+msgid ""
+"Sire, let me start from the beginning. The king left Fremil a long time ago "
+"to fight the Barbarians. As this duty was demanding his full commitment, he "
+"delegated the authority of running the city to his former secretary and "
+"instated him as his surrogate around here."
+msgstr ""
+"Pane, dovolte mi to vzít od začátku. Už je tomu dlouho, co náš král opustil "
+"Fremil, aby bojoval proti Barbarům. Neboť ho tato jeho povinnost plně "
+"zaměstnávala, pověřil výkonem správy města místo sebe svého tehdejšího "
+"zástupce, aby tento řešil jeho zdejší povinnosti."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:290
+msgid ""
+"But this was one of his worst decisions ever. The secretary got blinded by "
+"his new power. His selfish instincts were as awful as his complete stupidity"
+" and inability to govern the city."
+msgstr ""
+"Ale rozhodnutí toto bylo jedním z jeho nejhorších. Zástupce se nechal "
+"zaslepit svou nově nabytou mocí. Projevy jeho sebestředného chování byly "
+"stejně odpornými jako jeho naprostá tupost a neschopnost zhostit se úlohy "
+"řízení města."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:292
+msgid ""
+"After a while, the people discovered the truth and expelled the utter fool. "
+"Afterwards, they elected me as mayor of this city. However, recovering from "
+"the chaos seems to be a task too big for my abilities."
+msgstr ""
+"Po čase lidé uviděli pravdu a zbavili se toho naprosto nesoudného pomatence."
+" Následně si vybrali mě jako správce města. A ač uplatňuji všechny své "
+"schopnosti a vynakládám veškeré úsilí, nedaří se mi napravit napáchané "
+"škody."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:300
+msgid "Amalea Looks Puzzled"
+msgstr "Amalea vypadá zmateně"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:301
+msgid "Amalea is doubtful…"
+msgstr "Amalea váhá..."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:303
+msgid ""
+"Ave, Saledus! On the one hand you are right, it really is a delight to see "
+"our homeland again. But on the other hand, I have the impression that "
+"something went deeply wrong here."
+msgstr ""
+"Ave, Salede! Na jednu stranu s tebou souhlasím, člověk je potěšen tím, že "
+"opět vidí svůj domov, ale na druhou stranu se nelze zbavit dojmu, že se tu "
+"stalo něco hluboce znepokojivého."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:306
+msgid ""
+"Have a look at the economy. There is hardly any productivity at all. Whoever"
+" managed our country while we were absent created utter chaos. I’m not quite"
+" sure how we can fix this, if at all possible."
+msgstr ""
+"Jen se podívej na stav hospodářství. Stěží se dá říct, že se vůbec něco "
+"vyrobí. Ať to byl kdokoli, kdo řídil naši zemi, zatímco jsme byli pryč, "
+"způsobil naprostý rozvrat. Nejsem si jistá, jak můžeme pomoci s nápravou, "
+"jestli je tedy vůbec nějaká možná."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:311
+msgid "Amalea Investigates"
+msgstr "Amalea se chce dovědět víc"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:312
+msgid "Amalea is nodding thoughtfully…"
+msgstr "Amalea pohroužená v myšlenkách přikyvuje…"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:314
+msgid ""
+"Lutius, in my opinion this will again be a very difficult challenge. But I’m"
+" afraid that we’re doomed to manage this situation. To make things even "
+"worse, I was met with a nasty surprise at our warehouses: they’re all empty."
+" You can hardly find a grain of dust left in there: no wares, no tools, no "
+"workers and no soldiers either."
+msgstr ""
+"Lutie, tento úkol se mi zdá opět velmi obtížnou výzvou, ale obávám se, že "
+"jsme odsouzeni k tomu, abychom se ho ujali. Co dělá věc ještě horší, byla "
+"jsem velmi nemile překvapena při návštěvě skladů. Jsou zcela prázdné. Stěží "
+"bys v nich smítka dohledal. Žádné suroviny, žádné nástroje, ani dělníci, "
+"natož vojáci."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:317
+msgid ""
+"So, first of all we need some building materials to start correcting the "
+"mistakes made by the infamous secretary. I think we should try dismantling "
+"unproductive small buildings to recover some building materials from them "
+"and collect them in our headquarters. As far as I can see now, the "
+"fishermen’s houses and the quarries don’t have any resources near them. All "
+"of the lumberjacks’ houses and the wells seem also to be inefficient or worn"
+" out."
+msgstr ""
+"Takže, abychom napravili to, co tu onen nechvalně proslulý zástupce "
+"napáchal, budeme v první řadě potřebovat stavební materiál. Měli bychom se "
+"podívat po nějakých nepotřebných malých budovách, které bude možné rozebrat,"
+" a z nich získané stavební suroviny shromáždit v naší hlavní budově. Pokud "
+"jsem si dobře všimla, domky rybářů a lomy už nemají ve svém okolí žádné "
+"suroviny. Všechny domky dřevorubců a studny se zdají také býti bez užitku "
+"nebo značně přesluhujícími."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:320
+msgid ""
+"For the other buildings we can’t tell yet, if they are working properly. We "
+"need to closely monitor them when we are able to supply them. Until then we "
+"shouldn’t do anything with them."
+msgstr ""
+"U ostatních budov nelze zatím jejich činnost řádně posoudit. Až jim budeme "
+"schopni zajistit dodávky, musíme je důsledně sledovat. Do té doby bychom u "
+"nich s rozhodnutím měli posečkat."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:323
+msgid ""
+"Except, maybe we should restrict the input of all buildings which consume "
+"any of our building materials to zero. Or maybe we could even pause the "
+"production in all bigger buildings and get the workers some rest until we "
+"have produced some of their input wares."
+msgstr ""
+"Kromě toho bude, zdá se, ještě třeba zcela omezit dodávky do budov, které "
+"spotřebovávají nějaký stavební materiál. Zřejmě by také mohlo být vhodné "
+"dokonce pozastavit činnost všech větších budov, aby měli jejich dělníci "
+"možnost si odpočinout, a to do doby, než si u nich budeme jisti, že máme "
+"dostatek surovin pro jejich zásobování."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:330
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:590
+msgid "Amalea has Bad News"
+msgstr "Amalea přináší špatné zprávy"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:331
+msgid "Amalea recommends…"
+msgstr "Amalea se zasazuje za..."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:333
+msgid ""
+"Brother, I’m really worried that I have to deliver bad news again. As you "
+"can see, our farms aren’t producing anything and we can’t dismantle them."
+msgstr ""
+"Bratře, opravdu mě to netěší, ale musím zmínit ještě jeden problém. Jak "
+"možná vidíš, naše statky neposkytují žádnou úrodu, a ani je nelze rozebrat."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:336
+msgid ""
+"This situation was caused by the sad fact that our people lost the "
+"instructions on how to construct and operate farms. Therefore they have zero"
+" productivity and the constructors don’t know how to dismantle them either."
+msgstr ""
+"Tento stav zapříčinila smutná skutečnost, že naši lidé pozbyli vědomostí o "
+"jejich budování a provozování. Proto mají nulové výnosy a stavitelé si "
+"nedokáží poradit s jejich rozebráním."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:339
+msgid ""
+"So, we urgently need to recover the plans regarding the construction and "
+"operation of farms. One older constructor told me that they might have been "
+"concealed in a cave in the hills east of our border."
+msgstr ""
+"Takže musíme velmi rychle získat povědomí o jejich stavbě a o tom, jakým "
+"způsobem je provozovat. Jeden zasloužilý stavitel mi poradil, že tato "
+"vědomost se mohla udržet v kopcích východně od našich hranic v místě, kde je"
+" jeskyně."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:342
+msgid ""
+"Until we have found the plans, the only option for our farms is to destroy "
+"them."
+msgstr ""
+"Než se nám podaří získat informace ke způsobu stavby, máme jedinou možnost, "
+"jak s nimi nakládat a to zbořit je."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:349
+msgid "Amalea Looks Confident"
+msgstr "Amalea vypadá, že je pevná v kramflecích"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:350
+msgid "Amalea is more confident"
+msgstr "Amalea si je jistější"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:352
+msgid ""
+"Lutius, now we are getting somewhere. As we have gained some construction "
+"materials, we can start to rebuild our economy."
+msgstr ""
+"Lutie, už se nám podařilo něco nashromáždit. Teď když máme k dispozici "
+"nějaký ten stavební materiál, měli bychom začít s obnovou našeho "
+"hospodářství."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:355
+msgid ""
+"First of all, we need more construction materials. So, we should build at "
+"least three lumberjacks’ houses and two quarries. Be sure to have dismantled"
+" all of the unproductive buildings though."
+msgstr ""
+"V první řadě budeme potřebovat více stavebního materiálu. Proto bychom měli "
+"postavit nejméně 3 domky dřevorubce a dva lomy. Ujisti se, že všechny "
+"nepotřebné budovy jsou rozebrány."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:358
+msgid ""
+"Oh, before I forget, there is another task to accomplish. While our builders"
+" are doing their job, somebody should clear up our road network. They are "
+"leaving us no space to place the buildings that we need."
+msgstr ""
+"A abych nezapomněla, je tu ještě jeden úkol, který je potřeba splnit. "
+"Zatímco naši stavitelé pracují, někdo by měl pročistit síť našich cest. "
+"Zabírají příliš mnoho místa, které bychom mohli využít pro stavbu potřebných"
+" budov."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:365
+msgid "Amalea is Somewhat Relieved"
+msgstr "Amalei spadl kámen ze srdce"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:366
+msgid "Amalea is giving a deep sigh…"
+msgstr "Amalea bilancuje nad situací…"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:368
+msgid ""
+"Praise the gods, Lutius! We have found the plans on how to build and operate"
+" farms."
+msgstr ""
+"Budiž velebeno božstvo, Lutie! Získali jsme informaci o tom, jak budovat a "
+"řídit chod statků."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:371
+msgid ""
+"Now we can start building farms to produce the beer which our miners need so"
+" desperately. Furthermore, the plans have enabled us to upgrade our old "
+"farms to get to work again."
+msgstr ""
+"Teď můžeme začít se stavbou statků, abychom mohli vařit pivo, které si tak "
+"úpěnlivě žádají naši horníci. Navíc jsme byli schopni uplatnit postupy "
+"pěstování i na našich starých statcích, která opět obnovila svou činnost."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:374
+msgid "But I’m afraid that this problem hasn’t been the last in our economy."
+msgstr ""
+"Ale obávám se, že toto nebyl poslední problém, s který se naše hospodářství "
+"potýká."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:380
+msgid "Amalea has Good News"
+msgstr "Amalea přináší dobré zprávy"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:381
+msgid "Amalea smiles for the first time in weeks…"
+msgstr "Amalea se po dlouhých týdnech poprvé usmála…"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:383
+msgid ""
+"Lutius, well done so far. I just got the news that we have finished the "
+"basic buildings to obtain some construction materials."
+msgstr ""
+"Lutie, zatím se nám daří. Právě se ke mě donesla zpráva, že naše výstavba "
+"základních budov na získávání stavebního materiálu je dokončena."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:386
+msgid ""
+"This is offering us more options to get the shambles in our economy solved."
+msgstr ""
+"Toto nám dává větší prostor pro nápravu té spouště, s kterou se v rámci "
+"našeho hospodářství potýkáme."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:389
+msgid ""
+"I really think we can start to be hopeful about our future now. I pray that "
+"we can make ourselves comfortable in our homeland again."
+msgstr ""
+"Myslím, že je to pro nás povzbuzením k tomu, abychom se na naše nadcházející"
+" dny mohli dívat s nadějí. Opravdu si velmi přeji, abychom se v naší zemi "
+"cítili opět dobře."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:392
+msgid ""
+"But this will be some hard work still. For now, we should start by building "
+"some houses for our fishermen. As all the fish has been caught at our coast,"
+" we should try our luck in the eastern part of our territory."
+msgstr ""
+"Ale čeká nás i nadále těžká práce. V tuto chvíli by bylo vhodné začít se "
+"stavbou domků pro rybáře. Protože při našem pobřeží byly všechny ryby "
+"vyloveny, měli bychom zkusit své štěstí ve východní části našeho území."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:395
+msgid "After we have managed this, we can start making rations in our tavern."
+msgstr ""
+"Až to úspěšně dokončíme, můžeme začít s přípravou malých svačin v naší "
+"hospodě."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:402
+msgid "Amalea is Pleased"
+msgstr "Amalea je potěšena"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:403
+msgid "Amalea is nodding her head…"
+msgstr "Amalea uznale přikyvuje…"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:405
+msgid ""
+"Well done, well done. Our road network looks a lot more structured than "
+"before."
+msgstr ""
+"Velmi dobře, velmi dobře. Naše přepravní síť konečně vypadá, že u ní "
+"projektant přemýšlel."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:408
+msgid "Now we can focus on rebuilding our economy."
+msgstr "Teď se můžeme soustředit na přestavbu našeho hospodářství."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:414
+msgid "Amalea Shakes Her Head"
+msgstr "Amalea kroutí hlavou..."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:415
+msgid "Amalea is getting fed up with all the problems in this economy…"
+msgstr ""
+"Amalea už začíná mít po krk hospodářských problémů, které neustále řeší…"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:417
+msgid ""
+"For the sake of Neptune, I just discovered another problem! It seems that "
+"really very few things are working as expected in this economy."
+msgstr ""
+"Co Neptun nechtěl, zase další problém! Toto hospodářství je zcela "
+"nevyzpytatelné."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:420
+msgid ""
+"One of our lumberjacks told me that the reproduction of our forests is far "
+"behind his experience and expectations. So, I took a close look at our "
+"foresters’ performance."
+msgstr ""
+"Jeden z našich dřevorubců mi vykládal, že obnova našich lesů se nepotkává s "
+"jeho dosavadní zkušeností a zaostává daleko za jeho očekáváními. Tak jsem "
+"udělala zevrubnou prohlídku našich lesníků."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:423
+msgid ""
+"And guess what? They are very old. Their houses and tools are worn and their"
+" seed is degenerated. For this reason, they need much more time than usual "
+"for planting trees."
+msgstr ""
+"A na co myslíte, že jsem asi přišla? Jsou staří, jejich příbytky a nástroje "
+"mají svá nejlepší léta taky už za sebou a z jejich osiva stěží něco vzejde. "
+"S takovou moc stromů nevypěstují."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:426
+msgid ""
+"The only solution is to build two new forester’s houses near our "
+"lumberjacks. Be sure to first build a new forester’s house and then "
+"eventually destroy the old one or at least expel the forester to change "
+"houses."
+msgstr ""
+"Jediným řešením je postavit dva nové domky lesníka blízko našich dřevorubců."
+" Postarej se, aby byly nejprve postaveny nové domky a pak teprve případně "
+"zničeny ty staré. Nebo alespoň pošli lesníky pryč, aby došlo k jejich "
+"výměně."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:433
+msgid "Amalea Laughs Sarcastically"
+msgstr "Amalea se ironicky usmívá"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:434
+msgid "Amalea is laughing sarcastically…"
+msgstr "Amalea si neodpustí uštěpačnou poznámku…"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:436
+msgid ""
+"Well, Lutius, we have just solved another weird behavior in our economy. Now"
+" our lumberjacks should be supplied with enough trees to enhance our "
+"economy."
+msgstr ""
+"Tak to bychom měli, Lutie. Další věc, která se může přihodit jen v našich "
+"podmínkách, je vyřešena. Teď už naši dřevorubci budou mít dost stromů, aby "
+"mohli zásobovat naše hospodářství."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:439
+msgid "I am really very curious about what will go wrong next!"
+msgstr "Jsem opravdu velmi zvědavá, co se pokazí příště!"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:444
+msgid "Amalea Shrugs"
+msgstr "Amalea krčí rameny"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:445
+msgid "Amalea is getting used to bad news…"
+msgstr "Amalea si začíná zvykat na špatné zprávy..."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:447
+msgid ""
+"Alright Lutius, here is another problem: after the production of some beer "
+"and some flour, I realized that the technology that we are using in our "
+"mills and breweries is somewhat outdated. This way, they are consuming far "
+"too many resources."
+msgstr ""
+"Tak a máme to tu, Lutie, další problém. Poté co jsme vyrobili nějaké pivo a "
+"něco mouky, zjistila jsem, že výrobní postupy, které používáme v našich "
+"mlýnech a pivovarech, neodpovídají soudobým normám. Dochází tak ke zvýšené "
+"spotřebě surovin."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:450
+msgid ""
+"And you wouldn’t believe it, but nobody knows how to improve the technology "
+"or how to build more efficient buildings. I only heard some rumors about a "
+"monastery in the north where the priestesses are supposed to possess some "
+"knowledge about improved technologies."
+msgstr ""
+"A těžko uvěřit, ale nikdo neví, jak výrobní postup napravit, nebo jak "
+"postavit výkonnější provoz. Slyšela jsem, že mezi lidem kolují nějaké skazky"
+" o klášteře na severu, kde kněží vědí něco o vylepšených výrobních "
+"postupech."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:453
+msgid ""
+"But I’m not sure if they will share their knowledge with us for free. "
+"Anyway, we have no choice. We need to find them to improve our economy."
+msgstr ""
+"Ale nejsem si jistá, zda s námi budou chtít své vědomosti jen tak sdílet. "
+"Každopádně nemáme na výběr. Musíme je vyhledat a problém napravit."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:460
+msgid "Amalea Looks Happy"
+msgstr "Amalea vypadá šťastně"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:461
+msgid "Amalea comes in…"
+msgstr "Amalea přichází..."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:463
+msgid ""
+"Brother, I think this is a rather fair offer. And some good will from any of"
+" our gods could be very helpful as well."
+msgstr ""
+"Bratře, tohle se zdá jako rozumná nabídka. A nějaká ta přízeň božstva nemusí"
+" být také úplně k zahození."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:466
+msgid ""
+"The only problem might be that it will take significant time to collect all "
+"the wares. In particular, we will need to shorten the supply to our mines "
+"drastically. This will give us a real drawback in metal production."
+msgstr ""
+"Jen mě trápí, že to zabere opravdu hodně času nashromáždit tolik surovin. "
+"Obzvlášť hodně, když uvážíme,  že budeme muset po celý ten čas výrazně "
+"omezovat dodávky do našich dolů. To opravdu citelně zbrzdí naši kovodělnou "
+"výrobu."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:472
+msgid "Amalea Looks Sad"
+msgstr "Amalea vypadá sklíčeně"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:473
+msgid "Amalea is really sad…"
+msgstr "Amalea je opravdu smutná..."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:475
+msgid ""
+"I’m not sure if that was the right thing to do. Yes, we have obtained the "
+"plans. But although we are now able to build and upgrade our mills and "
+"breweries with the improved technology, we will never know if and how Vesta "
+"and her priestesses could have helped us against the Barbarians."
+msgstr ""
+"Nejsem si jistá, jestli to bylo správné rozhodnutí. Ano, máme nyní "
+"technologii. Ale přestože jsme teď schopni stavět mlýny a pivovary a těžit z"
+" vylepšených výrobních postupů, nikdy už se nedozvíme, jestli jsme mohli "
+"získat nějakou pomoc a co by to bylo za pomoc od Vesty a jejích kněžek v "
+"našem boji proti Barbarům."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:478
+msgid ""
+"Furthermore, we will have to live with the guilt of destroying a temple of "
+"an Empire goddess on our souls."
+msgstr ""
+"Navíc naše duše tíží pocit viny, s kterým se nyní budeme muset naučit žít, "
+"za to, že jsme zničili chrám císařské bohyně."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:483
+msgid "Amalea is Very Content"
+msgstr "Amalea je velmi spokojená"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:484
+msgid "Amalea claps her hands…"
+msgstr "Amalea tleská..."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:486
+msgid ""
+"Well done. Now we are able to build more efficient buildings to refine our "
+"wheat. Furthermore, the plans enable us to upgrade our current mill and "
+"brewery with the improved technology."
+msgstr ""
+"Skvělé. Nyní můžeme stavět budovy, které pšenici zpracovávají s vyšší "
+"efektivitou. Co víc, tyto vylepšené výrobní postupy mohou převzít i naše "
+"stávající provozy mlýnu a pivovarů."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:489
+msgid ""
+"And, best of all, we have a new ally who just provided us with lots of "
+"water, flour and beer. Now I really think that nothing can prevent us from "
+"getting stronger and taking back our homeland."
+msgstr ""
+"A, co je úplně nejlepší, máme také nového spojence, který nám právě poskytl "
+"velké množství vody, mouky a piva. Teď už mě nenechává nic na pochybách, že "
+"budeme silní a náš domov bude opět pod kontrolou."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:494
+msgid "Amalea is Satisfied"
+msgstr "Amalea je spokojená"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:495
+msgid "Amalea is satisfied with the progress…"
+msgstr "Amaleu těší dosažený pokrok..."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:497
+msgid ""
+"Alright Lutius, another problem solved. Still more to come. As we are able "
+"to produce food now, we should start mining some coal and iron ore "
+"immediately. After all, we need more tools to get our economy back up and "
+"build more and different production sites."
+msgstr ""
+"Hotovo Lutie, další problém vyřešen. Stále však máme před sebou práci. Když "
+"nyní vyrábíme jídlo, měli bychom ihned začít s těžbou uhlí a železné rudy. A"
+" potom budeme potřebovat více nástrojů, aby mělo naše hospodářství pevný "
+"základ a mohli jsme stavět více budov všech odvětví."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:500
+msgid ""
+"But according to our recent experiences, I assume that something will be "
+"wrong with our mines as well. It’s probably a good idea to send a geologist "
+"to check whether there are enough resources in the vicinity of our mines."
+msgstr ""
+"Ale podle toho, s čím jsme se potýkali doteď, už tak nějak předpokládám, že "
+"ani naše lomy nebudou fungovat tak, jak mají. Bude dobrý nápad poslat "
+"geologa, aby prověřil nerostné zdroje v okolí našich dolů, zda jsou "
+"dostatečné."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:503
+msgid ""
+"As soon as we have melted some iron, we need to start producing tools. "
+"Perhaps we should control the production of them via the economy settings. "
+"In the meantime, we can start raising the buildings that we need most "
+"urgently. I think we are still lacking a vineyard in our economy."
+msgstr ""
+"Jakmile zahájíme slévání železa, musíme rozběhnout výrobu nástrojů. Zřejmě "
+"bude vhodné řídit jejich výrobu prostřednictvím nastavení hospodářství. "
+"Mezitím můžeme postavit budovy, které budeme nutně potřebovat. Myslím, že "
+"naše hospodářství stále postrádá vinici."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:510
+msgid "Amalea has Some Advice"
+msgstr "Amalea nabízí radu"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:511
+msgid "Amalea is providing economic advice…"
+msgstr "Amalea poskytuje ekonomickou radu..."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:513
+msgid ""
+"Lutius, it seems that our coal supply is a little weak. So, we need to "
+"expand and explore all mineable areas for more coal."
+msgstr ""
+"Lutie, zdá se, že naše produkce uhlí je nedostatečná. Měli bychom proto "
+"rozšířit své území a pokusit se získat a prozkoumat nová naleziště."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:516
+msgid ""
+"In the meantime, it might help to build a charcoal kiln for buffering any "
+"mining shortfalls with charcoal. But be careful to ensure a continuous log "
+"supply afterwards."
+msgstr ""
+"Stavba milíře na dřevěné uhlí by zatím mohla pomoci částečně pokrýt výpadky "
+"těžby. Ale dávej pozor na to, abychom měli stabilní dodávky klád."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:523
+msgid "Amalea is in a Good Mood"
+msgstr "Amalea je dobře naladěna..."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:524
+msgid "Amalea is celebrating success…"
+msgstr "Amalea slaví úspěch..."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:526
+msgid ""
+"Great, another issue solved! Now the charcoal will support our metal "
+"production and we can concentrate more on exploration and military strength."
+msgstr ""
+"Skvělé, další problém vyřešen! Naše kovodělná výroba je nyní podpořena "
+"dodávkami dřevěného uhlí. Můžeme tak soustředit svou pozornost na průzkum "
+"území a na posílení naší armády."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:531
+msgid "Amalea Looks Thoughtful"
+msgstr "Amalea vypadá zamyšleně"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:532
+msgid "Amalea is sorrowful…"
+msgstr "Amalea cítí lítost…"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:534
+msgid ""
+"Dear brother, I have bad news to report. One of our buildings has just been "
+"destroyed by an uncontrolled kitchen fire. I fear this might be a sign of "
+"the goddess Vesta still being in a bad mood."
+msgstr ""
+"Drahý bratře, mám zlou zprávu. Jedna z našich budov právě lehla popelem, "
+"protože se oheň v kuchyni vymkl kontrole. Obávám se, že to může být "
+"znamením, že bohyně Vesta je stále rozladěna."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:539
+msgid "Amalea is Positively Surprised"
+msgstr "Amalea je příjemně překvapena"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:540
+msgid "Amalea is celebrating a happy event…"
+msgstr "Amalea slaví radostnou událost…"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:542
+msgid ""
+"Cheers Lutius, I don’t know how, but we have been gifted with some beer and "
+"wine. We found the additional wares while we were taking stock recently. "
+"Maybe the goddess Vesta is still supporting us."
+msgstr ""
+"Na zdraví, Lutie. Nevím, jak se to stalo, ale někdo nás obdaroval pivem a "
+"vínem. Zjistili jsme to, když jsme před nedávnem přepočítávali sklad. Možná "
+"je nám bohyně Vesta stále nakloněna."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:547
+msgid "Amalea Analyzes the Economy"
+msgstr "Amalea prověřuje výkonnost hospodářství"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:548
+msgid "Amalea reminds Lutius of the farms…"
+msgstr "Amalea upozorňuje Lutia na statky…"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:550
+msgid ""
+"Look Lutius, I have just analyzed our economy somewhat further. I think "
+"there might be a problem with our farms. They don’t show any productivity "
+"although there is enough space to plant wheat."
+msgstr ""
+"Podívej Lutie. Právě jsem udělala důkladnou prověrku výkonnosti našeho "
+"hospodářství. Myslím, že s našimi statky se nezdá být úplně vše v pořádku. "
+"Nevykazují činnost, přestože mají dostatek místa na osev pšenice."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:553
+msgid ""
+"I think we should have a deeper look into the issue and visit one of them."
+msgstr ""
+"Myslím, že bychom to měli důkladně prověřit a navštívit jeden ze statků."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:560
+msgid "Amalea’s Restrictions"
+msgstr "Amalea přijímá ochranná opatření"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:561
+msgid "Amalea restricts the building possibilities…"
+msgstr "Amalea omezuje výstavbu budov…"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:563
+msgid ""
+"Excuse me Lutius, but I think the most critical resources in the current "
+"state of our economy are logs."
+msgstr ""
+"Žádám o prominutí, Lutie, ale jako nejproblematičtější surovinu našeho "
+"hospodářství vidím za současných podmínek kmeny."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:566
+msgid ""
+"Therefore I took the freedom to restrict our current building options to the"
+" lumberjack’s house until we have gained enough building materials by "
+"dismantling the ineffective buildings."
+msgstr ""
+"Proto odebírám práva a omezuji svobodnou stavbu všech budov, kromě domků "
+"dřevorubce. A to do té doby, než získáme dostatek stavebního materiálu "
+"rozebráním nepotřebných a nevýkonných budov."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:571
+msgid "Amalea Reminds to Clear Road Network"
+msgstr "Amalea připomíná promazání sítě cest"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:572
+msgid "Amalea reminds Lutius of the scrambled road network…"
+msgstr "Amalea upozorňuje Lutia na zmatečnou přepravní síť"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:574
+msgid ""
+"Look Brother, I have just realized we haven’t cleared the road network yet. "
+"I think we should do so very quickly to free enough space for new buildings."
+msgstr ""
+"Pohleď, bratře, právě jsem zjistila, že ne všechny nepotřebné cesty byly "
+"odstraněny. Považuji za důležité, abychom rychle uvolnili dostatek místa pro"
+" novou zástavbu."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:577
+msgid ""
+"To achieve this, we should make sure that there aren’t more than three dead "
+"ends (flags with only one road) and not more than one flag with more than "
+"four roads attached."
+msgstr ""
+"Abychom toho dosáhli, měli bychom se postarat o to, že nebudeme mít víc než "
+"tři slepé cesty (vlajky s napojením na pouze jednu cestu) a ne víc než jednu"
+" vlajku s více než čtyřmi připojenými cestami."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:582
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:601
+msgid "Defeated!"
+msgstr "Porážka!"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:583
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:602
+msgid "Amalea reports our defeat…"
+msgstr "Amalea podává zprávu o naší porážce…"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:585
+msgid ""
+"Oh no Lutius, I don’t know how this could have happened, but the Barbarians "
+"have sacked our headquarters. So, we have lost this battle and our empire!"
+msgstr ""
+"Ó né, Lutie, vůbec tomu nerozumím, jak se to mohlo stát, ale Barbaři "
+"vyplenili naši hlavní budovu. To znamená, že jsme prohráli náš boj a "
+"ztratili celé Císařství!"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:591
+msgid "Amalea reports our headquarters lost…"
+msgstr "Amalea informuje o ztrátě naší hlavní budovy…"
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:593
+msgid ""
+"Oh no Lutius, I don’t know how this could have happened, but the Barbarians "
+"have destroyed our headquarters. So, we can’t deliver the wares to Julia "
+"anymore."
+msgstr ""
+"Ó né, Lutie, vůbec tomu nerozumím, jak se to mohlo stát, ale Barbaři zničili"
+" naši hlavní budovu. To znamená, že už se nám nepodaří nashromáždit potřebné"
+" suroviny pro Julii."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:596
+msgid ""
+"Now we need to try to fulfil our duties without their technology. But this "
+"will not be an easy task at all."
+msgstr ""
+"Teď se musíme pokusit splnit naše povinnosti bez výrobních a stavebních "
+"postupů. Obávám se ale, že to nebude vůbec lehké."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:604
+msgid ""
+"Oh no Lutius, I don’t know how this could have happened, but the Barbarians "
+"have destroyed our last warehouse. So, we have lost this battle and our "
+"empire!"
+msgstr ""
+"Ó né, Lutie, vůbec tomu nerozumím, jak se to mohlo stát, ale Barbaři zničili"
+" náš poslední sklad. To znamená, že jsme prohráli náš boj a ztratili celé "
+"Císařství!"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:609
+msgid "Amalea in a Hurry"
+msgstr "Amalea spěchá"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:610
+msgid "Amalea is very busy…"
+msgstr "Amalea je velmi zaměstnaná..."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:612
+msgid ""
+"Brother, as you can see, a lot of things seem to be wrong in this economy. "
+"I’ll be very busy to examine everything, so I won’t be here to provide as "
+"detailed advice as I used to do."
+msgstr ""
+"Bratře, jak můžeš vidět, je v tomto hospodářství spousta věcí špatně. Budu "
+"velmi zaneprázdněna, abych vše prověřila, takže ti nebudu moci podávat tak "
+"podrobné rady jako dříve."
+
+#. TRANSLATORS: Amalea
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:615
+msgid ""
+"But I am very confident that you will handle everything properly all by "
+"yourself. Of course I will report and advise immediately whenever I discover"
+" new problems."
+msgstr ""
+"Ale věřím, že tohle všechno zvládneš hravě sám. Samozřejmě ti vždy podám "
+"zprávu a radu, jakmile objevím nějaké další problémy."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:623
+msgid "Saledus looks very relaxed…"
+msgstr "Saledus vypadá velmi uvolněně…"
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:625
+msgid ""
+"Sire, it is really a great pleasure to be at home again. And best of all: I "
+"can see we still have some military strength. I can count five towers and a "
+"fortress in our vicinity to guard us."
+msgstr ""
+"Pane, je opravdu velkým potěšením být opět doma. A co je lepší, stále vidím,"
+" že máme nějaké vojenské zázemí. V našem okolí jsem napočítal pět věží a "
+"pevnost, které stráží naši bezpečnost."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:630
+msgid "We Could Use The Military Instead"
+msgstr "Místo toho můžeme použít armádu"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:631
+msgid "Saledus raises his voice…"
+msgstr "Saledus zvýšil hlas..."
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:633
+msgid ""
+"Sire, if we need the technology that badly, why don’t we conquer it? We "
+"could defeat the little monastery in an instant."
+msgstr ""
+"Pane, pokud potřebujeme ty stavební a výrobní postupy tak bezvýhradně, proč "
+"si je nevybojovat? Takový malý klášter dobudeme hned."
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:636
+msgid ""
+"The problem is however that the gods won’t be amused if we destroy one of "
+"their temples. And you never know what this could lead to."
+msgstr ""
+"Problémem je, že sympatie božstva si asi zrovna nezískáme tím, že zničíme "
+"jeden z jeho chrámů. A těžko se dá předpokládat, jaké by to pro nás mohlo "
+"mít následky."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:643
+msgid "Easy Victory"
+msgstr "Snadné vítězství"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:644
+msgid "Saledus is cheering proudly…"
+msgstr "Saledus hrdě jásá..."
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:646
+msgid ""
+"General, our armies just swept over the priestesses and conquered the plans."
+" That was a rather easy victory."
+msgstr ""
+"Generále, naše vojsko se hladce vypořádalo s kněžkami a získalo stavební a "
+"výrobní postupy. Bylo to poměrně jednoduché vítězství."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:651
+msgid "Defiance"
+msgstr "Utvrzení se"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:652
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:660
+msgid "Saledus asserts his point…"
+msgstr "Saledus říká svůj názor…"
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:654
+msgid ""
+"Sire, I admit this has been proven to be a very good deal, although we could"
+" have had the plans much earlier. Anyhow, we will not be able to make any "
+"deals with the Barbarians, so, we better keep our soldiers in a good mood "
+"and train them adequately."
+msgstr ""
+"Pane, připouštím, že naše rozhodnutí se ukázalo být velmi dobrým řešením, "
+"přestože jsme stavební a výrobní postupy mohli získat daleko dříve. Tak či "
+"onak, s Barbary moc vyjednávat nepůjde, proto je dobře, že jsme nechali naše"
+" vojáky odpočívat a věnovat se výcviku."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:659
+msgid "Pride"
+msgstr "Pýcha"
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:662
+msgid ""
+"Sire, I admit that we most probably courted the gods’ resentment, but in "
+"wartime, the end will sometimes justify the means. And we won’t be able to "
+"make any deals with the Barbarians either, so, we better keep our soldiers "
+"in good mood and train them adequately."
+msgstr ""
+"Pane, připouštím, že jsme si s velkou pravděpodobností naběhli a rozhněvali "
+"si božstvo, ale v boji často účel světí prostředky. A s Barbary moc "
+"vyjednávat nepůjde, proto by bylo lepší udržovat naše vojáky v dobré náladě "
+"a dobře je výcvičit."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:669
+msgid "Saledus asks for a stronger army…"
+msgstr "Saledus požaduje silnější armádu..."
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:671
+msgid ""
+"Now that we have produced some tools, I think it is time to divert some of "
+"our iron and coal towards military production."
+msgstr ""
+"Nyní, když máme vyrobeny nějaké ty nástroje, je dle mého názoru vhodná "
+"chvíle, abychom vyčlenili nějaké to železo a uhlí i na zbrojení."
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:674
+msgid ""
+"I am really worried about the weakness of our army. We should start to "
+"increase our military power. As a starting point, we should recruit at least"
+" ten new soldiers."
+msgstr ""
+"Nedostatečná připravenost naší armády mne opravdu znepokojuje. Musíme "
+"zapracovat na zlepšení naší bojeschopnosti. Pro začátek by bylo vhodné, "
+"naverbovat nejméně 10 nových vojáků."
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:677
+msgid "Perhaps we should train them further in the arena as well."
+msgstr "Možná bychom je měli vycvičit ještě i v aréně."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:684
+msgid "Training is Needed"
+msgstr "Výcvik je třeba"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:685
+msgid "Saledus still has security concerns…"
+msgstr "Saledus má stále obavy o bezpečnost…"
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:687
+msgid ""
+"General, although we have started recruiting new soldiers, we still need to "
+"train them well. It is important to increase the strength of our soldiers as"
+" fast as we can."
+msgstr ""
+"Generále, i přesto, že verbujeme nové vojáky, stále je potřebujeme také "
+"vycvičit. Musíme je naučit technikám boje tak rychle, jak jen to jde."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:689
+msgid ""
+"Unfortunately, we only have an arena and a very old and small training camp "
+"with very little storage capacity. And none of our builders knows how to "
+"improve this. Alas! But we need to use what we have to get prepared for "
+"battle."
+msgstr ""
+"Bohužel máme pouze arénu a velmi starý a malý výcvikový tábor s malou "
+"úložnou kapacitou. A nikdo z našich stavitelů neví, jakým způsobem by to "
+"bylo možné vylepšit. To je nadělení! Budeme si muset pro přípravu na bitvu "
+"jednoduše vystačit s tím, co máme."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:696
+msgid "Praise The Army of The Empire"
+msgstr "Budiž vzdán hold armádě Císařství"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:697
+msgid "Saledus is happy…"
+msgstr "Saledus je šťastný..."
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:699
+msgid ""
+"Sire, after training a bunch of recruits, our trainers conferred with our "
+"builders and developed better and more efficient training buildings "
+"together."
+msgstr ""
+"Pane, po vycvičení několika branců, naši cvičitelé dali hlavy dohromady s "
+"našimi staviteli a společně připravili plány lepších a výkonnějších cvičišť."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:701
+msgid ""
+"Now we can really improve our army and build the military strength that we "
+"will need to defend our country."
+msgstr ""
+"Nyní můžeme skutečně budovat armádu a dosáhnout takové bojeschopnosti, jaké "
+"si žádá obrana naší země."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:708
+msgid "We Just Need Another Hero"
+msgstr "Jen potřebujeme nového hrdinu"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:709
+msgid "Saledus is in a good mood…"
+msgstr "Saledus je dobře naladěn..."
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:711
+msgid ""
+"General, now that we have more and better beer in addition to enhanced "
+"training facilities, we should train as many fully promoted soldiers as we "
+"can. I really would consider them heroes after that."
+msgstr ""
+"Generále, když máme nyní více lepšího piva v kombinaci s vylepšenými "
+"cvičišti, měli bychom vycvičit tolik vojáků s nejlepšími schopnostmi, kolik "
+"jen zvládneme. Budou to pak naši opravdoví hrdinové."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:713
+msgid ""
+"It will give us great advantage in battle if our soldiers are much more "
+"powerful than the Barbarians’. So, we need to spend our resources wisely to "
+"get some heroes as soon as we can."
+msgstr ""
+"Získáme tak podstatnou výhodu v bitvě, pokud naši vojáci budou schopnější "
+"než Barbaři. Proto musíme s našimi surovinami nakládat s rozmyslem, abychom "
+"získali hrdiny tak rychle, jak jen bude možné."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:715
+msgid ""
+"I would say that three fully trained heroes should be sufficient to begin "
+"with. But don’t forget to send them to the front line, because they are not "
+"that useful back home."
+msgstr ""
+"Řekl bych, že tři plně vycvičení vojáci budou pro začátek stačit. Ale "
+"nezapomeň je poslat na bojovou linii, protože pokud budou hlídkovat v hloubi"
+" našeho území, moc velký užitek z nich mít nebudeme."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:722
+msgid "We Should Expel The Barbarians"
+msgstr "Měli bychom vyhnat barbary"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:723
+msgid "Saledus is excited…"
+msgstr "Saledus je pln vzrušení..."
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:725
+msgid ""
+"Now that we have some fully trained soldiers, it is time to expel the "
+"Barbarians from our homeland."
+msgstr ""
+"Nyní, když máme několik plně vycvičených vojáků, nadešel čas, abychom "
+"vyhnali Barbary z naší domoviny."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:727
+msgid ""
+"Let’s finish them off and regain control over our lands. They shall regret "
+"deeply that they ever came!"
+msgstr ""
+"Ukončeme to s nimi a získejme opět kontrolu nad naší zemí. Budou hluboce "
+"litovat, že se tu kdy octli!"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:734
+msgid "Victory is Ours"
+msgstr "Vítězství je naše"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:735
+msgid "Saledus is cheering loudly…"
+msgstr "Saledus hlasitě jásá..."
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:737
+msgid ""
+"Sire, finally we have defeated the Barbarians. We have expelled even the "
+"last of them. May they never come back!"
+msgstr ""
+"Pane, konečně jsme Barbary porazili. Zbavili jsme se jich do posledního. "
+"Budiž, ať se více nevrátí!"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:739
+msgid ""
+"Now it is time to find out why this big mess around us could have happened. "
+"But first of all we should have some wine to celebrate our victory and our "
+"reclaimed freedom."
+msgstr ""
+"Nyní bychom měli zjistit, co to způsobilo, že jsme se dostali do tak velkých"
+" problémů. Ale nejprve musíme kapkou vína oslavit vítězství a naši znovu "
+"nabytou svobodu."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:744
+msgid "The Enemy is Near"
+msgstr "Nepřítel je nedaleko"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:745
+msgid "Saledus is alerted…"
+msgstr "Saledus se má na pozoru..."
+
+#. TRANSLATORS: Saledus
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:747
+msgid ""
+"Sire, although we don’t have enough fully trained soldiers yet, we just have"
+" made contact with the enemy."
+msgstr ""
+"Pane, přestože nemáme dostatek plně vycvičených vojáků, právě jsme narazili "
+"na nepřítele."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:749
+msgid ""
+"We have to finish them off and regain control over our lands. They shall "
+"regret deeply that they ever came!"
+msgstr ""
+"Měli bychom se s nimi jednou provždy vypořádat a získat zpět kontrolu nad "
+"naší zemí. Budou velmi litovat, že se tu octli!"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:760
+msgid "Worship to be Gifted"
+msgstr "Ucti a buď obdarován"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:761
+msgid "Julia is demanding a sacrifice for Vesta…"
+msgstr "Julie vyžaduje oběť pro Vestu..."
+
+#. TRANSLATORS: Julia - priestess of the goddess Vesta
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:763
+msgid ""
+"Ave, Lutius! If you want us to help you, you first have to worship our "
+"goddess Vesta. Therefore deliver 35 sheaves of wheat and 15 amphoras of wine"
+" to prepare a worthy sacrifice for her."
+msgstr ""
+"Ave, Lutie! Pokud chceš, abychom ti pomohly, musíš nejprve uctít naši bohyni"
+" Vestu. Za tímto účelem dodej 35 otepí pšenice a 15 džbánů vína, to bude pro"
+" ni postačující obětí."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:768
+msgid "May The Gods Bless You"
+msgstr "Nechť vám božstvo žehná"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:769
+msgid "Vesta is blessing us…"
+msgstr "Vesta nám žehná..."
+
+#. TRANSLATORS: Julia - priestess of the goddess Vesta
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:771
+msgid ""
+"Thank you Lutius, you have served our goddess well. You will not only be "
+"gifted with the improvements to your technology but with some of the goods "
+"you need so desperately as well. Furthermore, we will pray for you and join "
+"your party to safeguard our land from the Barbarians."
+msgstr ""
+"Děkuji ti, Lutie, za tvou dobře odvedenou službu bohyni. Nezískáš darem "
+"pouze vylepšené výrobní postupy, ale i něco zboží, které tak naléhavě "
+"potřebuješ. Dále se za tebe budeme modlit a budeme stát při tobě, abychom "
+"chránily tvou zemi proti Barbarům."
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:776
+msgid "Damned"
+msgstr "Zatraceni"
+
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:777
+msgid "Vesta is cursing us…"
+msgstr "Vesta na nás uvalila kletbu..."
+
+#. TRANSLATORS: Julia - priestess of the goddess Vesta
+#: ../../data/campaigns/emp04.wmf/scripting/texts.lua:779
+msgid ""
+"Damn you Lutius for killing peaceful servants of the goddess Vesta! May your"
+" life and your land be cursed and may the wrath of the goddess scourge your "
+"family from the face of the earth!"
+msgstr ""
+"Buď proklet, Lutie, za to, že jsi vzal život pokojným služebnicím kultu "
+"bohyně Vesty! Nechť je tvůj život i tvá zem prokleta a hněv bohyně nechť "
+"sprovodí tvůj rod z povrchu zemského!"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:7
+msgctxt "empire_building"
+msgid "Brewery"
+msgstr "Pivovar"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:55
+msgctxt "empire_building"
+msgid "brewing beer"
+msgstr "vaření piva"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:7
+msgctxt "empire_building"
+msgid "Farm"
+msgstr "Statek"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:42
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:42
+msgctxt "empire_building"
+msgid "working"
+msgstr "pracuje"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:49
+msgctxt "empire_building"
+msgid "planting wheat"
+msgstr "setí pšenice"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:56
+msgctxt "empire_building"
+msgid "harvesting wheat"
+msgstr "sklízení pšenice"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:64
+msgctxt "empire_building"
+msgid "No Fields"
+msgstr "Žádná pole"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:65
+msgctxt "empire_building"
+msgid "Out of Fields"
+msgstr "Došla pole"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:66
+msgctxt "empire_building"
+msgid ""
+"The farmer working at this farm has no cleared soil to plant his seeds."
+msgstr "Sedlák pracující na tomto statku nemá žádnou volnou půdu na osev."
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:7
+msgctxt "empire_building"
+msgid "Forester’s House"
+msgstr "Domek lesníka"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:36
+msgctxt "empire_building"
+msgid "planting trees"
+msgstr "sázení stromů"
+
+#. TRANSLATORS: Purpose helptext for an empire production site: Brewery
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:98
+msgctxt "empire_building"
+msgid "Produces beer to keep the miners strong and happy."
+msgstr "Vaří pivo, aby byli horníci silní a spokojení."
+
+#. TRANSLATORS: Purpose helptext for an empire production site: Farm
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:105
+msgctxt "empire_building"
+msgid "Sows and harvests wheat."
+msgstr "Seje a sklízí pšenici."
+
+#. TRANSLATORS: Purpose helptext for an empire production site: Forester’s
+#. House
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:112
+msgctxt "empire_building"
+msgid "Plants trees in the surrounding area."
+msgstr "Vysazuje stromy ve svém okolí."
+
+#. TRANSLATORS: Note helptext for an empire production site: Forester’s House
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:114
+msgctxt "empire_building"
+msgid ""
+"The forester’s house needs free space within the work area to plant the "
+"trees."
+msgstr ""
+"Domek lesníka musí mít ve své pracovní oblasti volnou plochu, na které lze "
+"vysazovat stromy."
+
+#. TRANSLATORS: Purpose helptext for an empire production site: Lumberjack’s
+#. House
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:121
+msgctxt "empire_building"
+msgid "Fells trees in the surrounding area and processes them into logs."
+msgstr "Kácí stromy ve svém okolí a zpracovává je na klády."
+
+#. TRANSLATORS: Note helptext for an empire production site: Lumberjack’s
+#. House
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:123
+msgctxt "empire_building"
+msgid "The lumberjack’s house needs trees to fell within the work area."
+msgstr ""
+"Domek dřevorubce potřebuje ve své pracovní oblasti stromy, které dorostly ke"
+" kácení."
+
+#. TRANSLATORS: Purpose helptext for an empire production site: Mill
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:130
+msgctxt "empire_building"
+msgid "Grinds wheat to produce flour."
+msgstr "Mele pšenici na mouku."
+
+#. TRANSLATORS: Purpose helptext for an empire training site: Training Camp,
+#. part 1
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:138
+msgctxt "empire_building"
+msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
+msgstr "Trénuje vojáky v \"útoku\" a \"zdraví\"."
+
+#. TRANSLATORS: Purpose helptext for an empire training site: Training Camp,
+#. part 2
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:140
+msgctxt "empire_building"
+msgid "Equips the soldiers with all necessary weapons and armor parts."
+msgstr "Poskytuje vojákům všechny potřebné zbraně a zbroj."
+
+#. TRANSLATORS: Note helptext for an empire training site: Training Camp
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:143
+msgctxt "empire_building"
+msgid ""
+"Imperial soldiers cannot be trained in ‘Defense’ and will remain at the "
+"level with which they came."
+msgstr "Vojáci císařství se v obraně necvičí a drží si svou počáteční úroveň."
+
+#. TRANSLATORS: Purpose helptext for an empire production site: Well
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:150
+msgctxt "empire_building"
+msgid "Draws water out of the deep."
+msgstr "Čerpá podzemní vodu."
+
+#. TRANSLATORS: Purpose helptext for an empire warehouse: Temple of Vesta
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:157
+msgctxt "empire_building"
+msgid ""
+"In the temple of Vesta, the wares to worship are stored. It is the home of "
+"the priestesses and the guards of the goddess."
+msgstr ""
+"V chrámě Vesty je skladováno zboží pro její uctívání. Je domovem kněžek a "
+"ochránkyň bohyně."
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:7
+msgctxt "empire_building"
+msgid "Lumberjack’s House"
+msgstr "Domek dřevorubce"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:37
+msgctxt "empire_building"
+msgid "felling trees"
+msgstr "kácení stromů"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:45
+msgctxt "empire_building"
+msgid "No Trees"
+msgstr "Žádné stromy"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:46
+msgctxt "empire_building"
+msgid "Out of Trees"
+msgstr "Došly stromy"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:47
+msgctxt "empire_building"
+msgid ""
+"The lumberjack working at this lumberjack’s house can’t find any trees in "
+"his work area. You should consider dismantling or destroying the building or"
+" building a forester’s house."
+msgstr ""
+"Dřevorubec pracující v tomto domku dřevorubce nemůže ve svém okolí najít "
+"žádné stromy. Zvaž jeho rozebrání, zničení nebo postavení domku lesníka."
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:7
+msgctxt "empire_building"
+msgid "Mill"
+msgstr "Mlýn"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:62
+msgctxt "empire_building"
+msgid "grinding wheat"
+msgstr "mletí pšenice"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/temple_of_vesta/init.lua:8
+msgctxt "empire_building"
+msgid "Temple of Vesta"
+msgstr "Chrám bohyně Vesty"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:7
+msgctxt "empire_building"
+msgid "Training Camp"
+msgstr "Výcvikový tábor"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:84
+msgctxt "empire_building"
+msgid "sleeping"
+msgstr "spí"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:91
+msgctxt "empire_building"
+msgid "upgrading soldier attack from level 0 to level 1"
+msgstr "cvičení útoku vojáka z úrovně 0 na úroveň 1"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:101
+msgctxt "empire_building"
+msgid "upgrading soldier attack from level 1 to level 2"
+msgstr "cvičení útoku vojáka z úrovně 1 na úroveň 2"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:111
+msgctxt "empire_building"
+msgid "upgrading soldier attack from level 2 to level 3"
+msgstr "cvičení útoku vojáka z úrovně 2 na úroveň 3"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:121
+msgctxt "empire_building"
+msgid "upgrading soldier attack from level 3 to level 4"
+msgstr "cvičení útoku vojáka z úrovně 3 na úroveň 4"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:131
+msgctxt "empire_building"
+msgid "upgrading soldier health from level 0 to level 1"
+msgstr "vylepšení zdraví vojáka z úrovně 0 na úroveň 1"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:141
+msgctxt "empire_building"
+msgid "upgrading soldier health from level 1 to level 2"
+msgstr "vylepšení zdraví vojáka z úrovně 1 na úroveň 2"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:151
+msgctxt "empire_building"
+msgid "upgrading soldier health from level 2 to level 3"
+msgstr "vylepšení zdraví vojáka z úrovně 2 na úroveň 3"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:161
+msgctxt "empire_building"
+msgid "upgrading soldier health from level 3 to level 4"
+msgstr "vylepšení zdraví vojáka z úrovně 3 na úroveň 4"
+
+#. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:177
+msgctxt "empire_building"
+msgid "No soldier to train!"
+msgstr "Žádný voják k výcviku!"
+
+#. TRANSLATORS: Empire training site tooltip when none of the present soldiers
+#. match the current training program
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:179
+msgctxt "empire_building"
+msgid "No soldier found for this training level!"
+msgstr "Nenalezen voják pro požadovanou úroveň výcviku!"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:7
+msgctxt "empire_building"
+msgid "Well"
+msgstr "Studna"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:52
+msgctxt "empire_building"
+msgid "No Water"
+msgstr "Žádná voda"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:53
+msgctxt "empire_building"
+msgid "Out of Water"
+msgstr "Došla voda"
+
+#: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:54
+msgctxt "empire_building"
+msgid "The carrier working at this well can’t find any water in his well."
+msgstr "Nosič pracující u této studny nemá ve studni žádnou vodu."

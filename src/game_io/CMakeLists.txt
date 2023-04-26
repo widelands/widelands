@@ -8,7 +8,7 @@ wl_library(game_io
     game_interactive_player_packet.cc
     game_interactive_player_packet.h
     game_player_ai_persistent_packet.cc
-    game_player_ai_persistent_packet.h    
+    game_player_ai_persistent_packet.h
     game_loader.cc
     game_loader.h
     game_map_packet.cc
@@ -22,24 +22,31 @@ wl_library(game_io
     game_saver.cc
     game_saver.h
   DEPENDS
+    base
     base_exceptions
-    base_log
     base_macros
     base_scoped_timer
-    base_time_string
+    base_times
     build_info
     economy
-    graphic
+    graphic_image_io
     graphic_minimap_renderer
     io_fileread
     io_filesystem
+    io_profile
     logic
+    logic_addons
+    logic_commands
+    logic_exceptions
     logic_game_controller
+    logic_map
+    logic_map_objects
+    logic_widelands_geometry_io
     map_io
     map_io_map_loader
-    profile
-    scripting_lua_interface
     scripting_lua_table
+    ui_basic
     wui
+    wui_mapview
     wui_mapview_pixelfunctions
 )

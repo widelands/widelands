@@ -2,19 +2,36 @@
 
 set -e
 
-if [ "$#" == "0" ]; then
-	echo "Usage: $0 <bzr_repo_directory>"
-	exit 1
+USAGE="See compile.sh"
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+SOURCE_DIR=$DIR/../../
+
+# Check if the SDK for the minimum build target is available.
+# If not, use the one for the installed macOS Version
+OSX_MIN_VERSION="10.7"
+SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$OSX_MIN_VERSION.sdk"
+
+OSX_VERSION=$(sw_vers -productVersion | cut -d . -f 1,2)
+OSX_MINOR=$(sw_vers -productVersion | cut -d . -f 2)
+
+if [ ! -d "$SDK_DIRECTORY" ]; then
+   if [ "$OSX_MINOR" -ge 9 ]; then
+      OSX_MIN_VERSION="10.9"
+   fi
+   SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$OSX_VERSION.sdk"
+   if [ ! -d "$SDK_DIRECTORY" ]; then
+      # If the SDK for the current macOS Version can't be found, use whatever is linked to MacOSX.sdk
+      SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
+   fi
 fi
 
-SOURCE_DIR=$1
-REVISION=`bzr revno $SOURCE_DIR`
+WLVERSION=`python $DIR/../detect_revision.py`
+
 DESTINATION="WidelandsRelease"
-TYPE="Release"
+
 if [[ -f $SOURCE_DIR/WL_RELEASE ]]; then
    WLVERSION="$(cat $SOURCE_DIR/WL_RELEASE)"
-else
-   WLVERSION="r$REVISION"
 fi
 
 echo ""
@@ -22,6 +39,9 @@ echo "   Source:      $SOURCE_DIR"
 echo "   Version:     $WLVERSION"
 echo "   Destination: $DESTINATION"
 echo "   Type:        $TYPE"
+echo "   macOS:       $OSX_VERSION"
+echo "   Target:      $OSX_MIN_VERSION"
+echo "   Compiler:    $COMPILER"
 echo ""
 
 function MakeDMG {
@@ -35,27 +55,11 @@ function MakeDMG {
    cp $SOURCE_DIR/COPYING  $DESTINATION/COPYING.txt
 
    echo "Creating DMG ..."
-   hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_64bit_$WLVERSION.dmg"
-}
-
-function FixDependencies {
-   binary=$1; shift
-
-   echo "Copying dynamic libraries for ${binary} ..."
-
-   dylibbundler -b -of \
-      -p '@executable_path/' \
-      -d $DESTINATION/Widelands.app/Contents/MacOS \
-      -x $DESTINATION/Widelands.app/Contents/MacOS/${binary}
-}
-
-function CopyAndFixDependencies {
-   path=$1; shift
-
-   cp $path "$DESTINATION/Widelands.app/Contents/MacOS/"
-   chmod 644 "$DESTINATION/Widelands.app/Contents/MacOS/$(basename ${path})"
-
-   FixDependencies "$(basename ${path})"
+   # if [ "$TYPE" == "Release" ]; then
+      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}.dmg"
+   # elif [ "$TYPE" == "Debug" ]; then
+   #  hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}_${TYPE}.dmg"
+   # fi
 }
 
 function MakeAppPackage {
@@ -70,12 +74,15 @@ function MakeAppPackage {
    cp $SOURCE_DIR/data/images/logos/widelands.icns $DESTINATION/Widelands.app/Contents/Resources/widelands.icns
    ln -s /Applications $DESTINATION/Applications
 
+   # TODO(stonerl/k.halfmann): Check if NSHighResolutionCapable = false; is still neede with #3542
+   # is resolved. This needs an updated SDL2.
    cat > $DESTINATION/Widelands.app/Contents/Info.plist << EOF
 {
    CFBundleName = widelands;
    CFBundleDisplayName = Widelands;
    CFBundleIdentifier = "org.widelands.wl";
    CFBundleVersion = "$WLVERSION";
+   CFBundleShortVersionString = "$WLVERSION";
    CFBundleInfoDictionaryVersion = "6.0";
    CFBundlePackageType = APPL;
    CFBundleSignature = wdld;
@@ -88,42 +95,44 @@ EOF
    rsync -Ca $SOURCE_DIR/data $DESTINATION/Widelands.app/Contents/MacOS/
 
    echo "Copying locales ..."
-   rsync -Ca locale $DESTINATION/Widelands.app/Contents/MacOS/data/
+   rsync -Ca $SOURCE_DIR/build/locale $DESTINATION/Widelands.app/Contents/MacOS/data/
 
    echo "Copying binary ..."
-   cp -a src/widelands $DESTINATION/Widelands.app/Contents/MacOS/
+   cp -a $SOURCE_DIR/widelands $DESTINATION/Widelands.app/Contents/MacOS/
+
+   # Locate ASAN Library by asking llvm (nice trick by SirVer I suppose)
+   ASANLIB=$(echo "int main(void){return 0;}" | xcrun clang -fsanitize=address \
+       -xc -o/dev/null -v - 2>&1 |   tr ' ' '\n' | grep libclang_rt.asan_osx_dynamic.dylib)
+
+   ASANPATH=`dirname $ASANLIB`
+
+   echo "Copying and fixing dynamic libraries... "
+   dylibbundler --create-dir --bundle-deps \
+	--fix-file $DESTINATION/Widelands.app/Contents/MacOS/widelands \
+	--dest-dir $DESTINATION/Widelands.app/Contents/libs \
+	--search-path $ASANPATH 
+
+   echo "Re-sign libraries with an 'ad-hoc signing' see man codesign"
+   codesign --sign - --force $DESTINATION/Widelands.app/Contents/libs/*
 
    echo "Stripping binary ..."
    strip -u -r $DESTINATION/Widelands.app/Contents/MacOS/widelands
-
-   FixDependencies widelands
-
-   echo "Copying dynamic libraries for SDL_image ... "
-   pushd $DESTINATION/Widelands.app/Contents/MacOS/
-   ln -s libpng*.dylib libpng.dylib
-   popd
-   CopyAndFixDependencies "/usr/local/lib/libjpeg.dylib"
-
-   echo "Copying dynamic libraries for SDL_mixer ... "
-   CopyAndFixDependencies /usr/local/lib/libogg.dylib
-   CopyAndFixDependencies /usr/local/lib/libvorbis.dylib
-   CopyAndFixDependencies /usr/local/lib/libvorbisfile.dylib
 }
 
 function BuildWidelands() {
-   cmake $SOURCE_DIR -G Ninja \
-      -DCMAKE_CXX_COMPILER:FILEPATH="$(cd $(dirname $0); pwd)/compiler_wrapper.sh" \
-      -DCMAKE_OSX_DEPLOYMENT_TARGET:STRING="10.7" \
-      -DCMAKE_OSX_SYSROOT:PATH="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk" \
-      -DCMAKE_INSTALL_PREFIX:PATH="$DESTINATION/Widelands.app/Contents/MacOS" \
-      -DCMAKE_OSX_ARCHITECTURES:STRING="x86_64" \
-      -DCMAKE_BUILD_TYPE:STRING="$TYPE" \
-      -DCMAKE_PREFIX_PATH:PATH="/usr/local"
-   ninja
+   PREFIX_PATH=$(brew --prefix)
+   eval "$($PREFIX_PATH/bin/brew shellenv)"
+   export CMAKE_PREFIX_PATH="${PREFIX_PATH}/opt/icu4c"
+
+   echo "FIXED ICU Issue $CMAKE_PREFIX_PATH"
+
+   pushd $SOURCE_DIR
+   ./compile.sh $@
+   popd
 
    echo "Done building."
 }
 
-BuildWidelands
+BuildWidelands $@
 MakeAppPackage
 MakeDMG

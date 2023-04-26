@@ -1,7 +1,8 @@
-# Automatically created by Widelands bzr7574[artifacts] (Debug)
+# Automatically created by Widelands bzr8117[bug_1627948_map_river_explorers] (Debug)
 
 [global]
 packet_version="1"
+waterway_max_length="16"
 number_of_port_spaces="19"
 
 [port_spaces]

@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_productionsite_type {
    name = "empire_winery",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Winery"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -21,22 +21,28 @@ tribes:new_productionsite_type {
       marble_column = 1
    },
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 39, 62 },
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 42, 66 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
-         hotspot = { 39, 62 },
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 42, 66 },
       },
    },
 
    aihints = {
-      forced_after = 600,
-      prohibited_till = 600,
+      prohibited_till = 560,
       very_weak_ai_limit = 1,
-      weak_ai_limit = 2
+      weak_ai_limit = 2,
+      basic_amount = 1
    },
 
    working_positions = {
@@ -44,23 +50,23 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      grape = 8
-   },
-   outputs = {
-      "wine"
+      { name = "grape", amount = 8 }
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start making wine because ...
-         descname = _"making wine",
+         descname = _("making wine"),
          actions = {
             -- Grapes are only needed for wine, so no need to check if wine is needed
-            "sleep=30000",
             "consume=grape:2",
-            "animate=working 30000",
+            "sleep=duration:30s",
+            "playsound=sound/empire/winebubble priority:40% allow_multiple",
+            "animate=working duration:30s",
             "produce=wine"
          }
       },
    },
 }
+
+pop_textdomain()

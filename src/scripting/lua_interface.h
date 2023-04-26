@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2016 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,7 +20,6 @@
 #define WL_SCRIPTING_LUA_INTERFACE_H
 
 #include <memory>
-#include <string>
 
 #include "scripting/lua.h"
 #include "scripting/lua_errors.h"
@@ -38,7 +36,10 @@ public:
 	void interpret_string(const std::string&);
 
 	// Runs 'script' and returns the table it returned.
-	virtual std::unique_ptr<LuaTable> run_script(const std::string& script);
+	virtual std::unique_ptr<LuaTable> run_script(const std::string& path);
+
+	// Returns an empty table.
+	std::unique_ptr<LuaTable> empty_table();
 
 protected:
 	lua_State* lua_state_;

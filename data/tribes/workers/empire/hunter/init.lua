@@ -1,22 +1,12 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 10, 21 },
-      fps = 10
-   }
-}
-add_worker_animations(animations, "walk", dirname, "walk", {9, 32}, 10)
-add_worker_animations(animations, "walkload", dirname, "walkload", {9, 32}, 10)
-
-
-tribes:new_worker_type {
-   msgctxt = "empire_worker",
+wl.Descriptions():new_worker_type {
    name = "empire_hunter",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("empire_worker", "Hunter"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -26,14 +16,40 @@ tribes:new_worker_type {
    },
    programs = {
       hunt = {
-         "findobject type:bob radius:13 attrib:eatable",
-         "walk object",
-         "animation idle 1000",
-         "object remove",
-         "createware meat",
+         "findobject=type:bob radius:13 attrib:eatable",
+         "walk=object",
+         "animate=idle duration:1s",
+         "removeobject",
+         "createware=meat",
          "return"
       }
    },
 
-   animations = animations,
+   spritesheets = {
+      idle = {
+         fps = 10,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 10, 21 }
+      },
+      walk = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 9, 32 }
+      },
+      walkload = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 9, 32 }
+      },
+   },
 }
+
+pop_textdomain()

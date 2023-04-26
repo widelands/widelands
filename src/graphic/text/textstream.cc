@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,36 +12,31 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "graphic/text/textstream.h"
 
-#include <boost/algorithm/string/replace.hpp>
-#include <boost/format.hpp>
-
+#include "base/string.h"
 #include "graphic/text/rt_errors_impl.h"
-
-using namespace std;
-using namespace boost;
 
 namespace RT {
 
 struct EndOfTextImpl : public EndOfText {
-	EndOfTextImpl(size_t pos, string text)
-		: EndOfText((format("Unexpected End of Text, starting at %1%. Text is: '%2%'") % pos % text).str())
-	{}
+	EndOfTextImpl(size_t pos, const std::string& text)
+	   : EndOfText(format("Unexpected End of Text, starting at %1%. Text is: '%2%'", pos, text)) {
+	}
 };
 
 void TextStream::consume(size_t cnt) {
-	while (cnt) {
+	while (cnt != 0u) {
 		if (text_[pos_] == '\n') {
 			++line_;
 			col_ = 0;
-		} else
+		} else {
 			++col_;
+		}
 		++pos_;
 		--cnt;
 	}
@@ -54,18 +49,20 @@ void TextStream::consume(size_t cnt) {
  * r* means skip_ws starting from the back of the string
  */
 void TextStream::skip_ws() {
-	while (pos_ < end_ && isspace(text_[pos_]))
+	while (pos_ < end_ && (isspace(text_[pos_]) != 0)) {
 		consume(1);
+	}
 }
 void TextStream::rskip_ws() {
-	while (pos_ < end_ && isspace(text_[end_ - 1]))
+	while (pos_ < end_ && (isspace(text_[end_ - 1]) != 0)) {
 		--end_;
+	}
 }
 
 /*
  * Return the next few characters without advancing the stream
  */
-string TextStream::peek(size_t n, size_t at) const {
+std::string TextStream::peek(size_t n, size_t at) const {
 	return text_.substr(at > text_.size() ? pos_ : at, n);
 }
 
@@ -73,12 +70,14 @@ string TextStream::peek(size_t n, size_t at) const {
  * Throw a synatx error if not the thing shows up, we expected to.
  * Also advances the stream.
  */
-void TextStream::expect(string n, bool skip_whitespace) {
-	if (skip_whitespace)
+void TextStream::expect(std::string n, bool skip_whitespace) {
+	if (skip_whitespace) {
 		skip_ws();
+	}
 
-	if (peek(n.size()) != n)
-		throw SyntaxErrorImpl(line_, col_, (format("'%s'") % n).str(), peek(n.size()), peek(100));
+	if (peek(n.size()) != n) {
+		throw SyntaxErrorImpl(line_, col_, format("'%s'", n), peek(n.size()), peek(100));
+	}
 	consume(n.size());
 }
 
@@ -86,25 +85,26 @@ void TextStream::expect(string n, bool skip_whitespace) {
  * Parse forward till the next char is any of of the given chars.
  * Return the substring we went over
  */
-string TextStream::till_any(string chars) {
-	// Boost should provide a function here, but I was unable to figure it out
+std::string TextStream::till_any(std::string chars) {
 	// Sticking with a double loop because chars will likely be short
-	string rv;
+	std::string rv;
 
 	size_t j = pos_;
 	size_t started_at = pos_;
 	bool found = false;
 	while (j < end_) {
-		for (size_t k = 0; k < chars.size(); ++k) {
-			if (chars[k] == text_[j]) {
+		for (char& ch : chars) {
+			if (ch == text_[j]) {
 				found = true;
 				break;
 			}
 		}
-		if (found) break;
+		if (found) {
+			break;
+		}
 
 		// Get rid of control characters
-		// http://en.cppreference.com/w/cpp/language/escape
+		// https://en.cppreference.com/w/cpp/language/escape
 		switch (text_[j]) {
 		case '\a':
 		case '\b':
@@ -119,12 +119,13 @@ string TextStream::till_any(string chars) {
 		rv += text_[j];
 		++j;
 	}
-	if (!found)
+	if (!found) {
 		throw EndOfTextImpl(started_at, peek(100, started_at));
+	}
 	consume(j - started_at);
 
 	// Undo the extra \ that were inserted in Parser::parse to prevent crashes.
-	boost::replace_all(rv, "\\\\", "\\");
+	replace_all(rv, "\\\\", "\\");
 
 	return rv;
 }
@@ -132,11 +133,11 @@ string TextStream::till_any(string chars) {
 /*
  * Parse till any of the chars is found or the end of the string has been hit.
  */
-string TextStream::till_any_or_end(string chars) {
-	string rv;
+std::string TextStream::till_any_or_end(const std::string& chars) {
+	std::string rv;
 	try {
 		rv = till_any(chars);
-	} catch (EndOfTextImpl &) {
+	} catch (EndOfTextImpl&) {
 		rv = text_.substr(pos_, end_ - pos_);
 		consume(end_ + 1 - pos_);
 	}
@@ -146,23 +147,21 @@ string TextStream::till_any_or_end(string chars) {
 /*
  * Return the next (potentially quoted) string
  */
-string TextStream::parse_string() {
-	string delim = peek(1);
+std::string TextStream::parse_string() {
+	std::string delim = peek(1);
 	if (delim == "'" || delim == "\"") {
 		consume(1);
-		string rv = till_any(delim);
+		std::string rv = till_any(delim);
 		consume(1);
 		return rv;
-	} else
-		return till_any(" \t>");
+	}
+	return till_any(" \t>");
 }
 
 /*
  * Return the text that is yet to be parsed
  */
-string TextStream::remaining_text() {
+std::string TextStream::remaining_text() {
 	return text_.substr(pos_, end_ - pos_);
 }
-
-}
-
+}  // namespace RT

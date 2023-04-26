@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,11 +12,11 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
+#include <cstdlib>
 #include <fstream>
 #include <iostream>
 #include <memory>
@@ -27,12 +27,12 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 
-#undef main // No, we do not want SDL_main
+#undef main  // No, we do not want SDL_main
 
-#include "base/log.h"
 #include "config.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
+#include "graphic/rendertarget.h"
 #include "graphic/text/rt_errors.h"
 #include "graphic/text/test/render.h"
 #include "graphic/texture.h"
@@ -69,14 +69,18 @@ std::string read_file(std::string fn) {
 	return txt;
 }
 
-int parse_arguments(
-   int argc, char** argv, int32_t* w, std::string& outname,
-	std::string& inname, std::set<std::string>& allowed_tags)
-{
+int parse_arguments(int argc,
+                    char** argv,
+                    int32_t* w,
+                    std::string& outname,
+                    std::string& inname,
+                    std::set<std::string>& allowed_tags) {
 	if (argc < 4) {
 		std::cout << "Usage: render <width in pixels> <outname> <inname> [allowed tag1] [allowed "
 		             "tags2] ... < "
-		             "input.txt" << std::endl << std::endl
+		             "input.txt"
+		          << std::endl
+		          << std::endl
 		          << "input.txt should contain a valid rich text formatting" << std::endl;
 		return 1;
 	}
@@ -134,11 +138,16 @@ int main(int argc, char** argv) {
 	StandaloneRenderer standalone_renderer;
 
 	try {
+		std::shared_ptr<const UI::RenderedText> rendered_text =
+		   standalone_renderer.renderer()->render(txt, w, allowed_tags);
 		std::unique_ptr<Texture> texture(
-		   standalone_renderer.renderer()->render(txt, w, allowed_tags));
+		   new Texture(rendered_text->width(), rendered_text->height()));
+		std::unique_ptr<RenderTarget> dst(new RenderTarget(texture.get()));
+		rendered_text->draw(*dst, Vector2i::zero());
 
 		std::unique_ptr<FileSystem> fs(&FileSystem::create("."));
 		std::unique_ptr<StreamWrite> sw(fs->open_stream_write(outname));
+
 		if (!save_to_png(texture.get(), sw.get(), ColorType::RGBA)) {
 			std::cout << "Could not encode PNG." << std::endl;
 		}

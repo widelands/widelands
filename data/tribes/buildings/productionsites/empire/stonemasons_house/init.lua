@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_productionsite_type {
    name = "empire_stonemasons_house",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Stonemason’s House"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -20,20 +20,25 @@ tribes:new_productionsite_type {
       marble = 2
    },
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 58, 61 },
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 63, 64 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
-         hotspot = { 58, 61 },
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 63, 64 },
       },
    },
 
    aihints = {
-      forced_after = 400,
-      prohibited_till = 400,
+      basic_amount = 1,
       very_weak_ai_limit = 1,
       weak_ai_limit = 2
    },
@@ -43,24 +48,23 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      marble = 6
-   },
-   outputs = {
-      "marble_column"
+      { name = "marble", amount = 6 }
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start sculpting a marble column because ...
-         descname = _"sculpting a marble column",
+         descname = _("sculpting a marble column"),
          actions = {
-            "sleep=50000",
             "return=skipped unless economy needs marble_column",
             "consume=marble:2",
-            "play_sound=sound/stonecutting stonemason 192",
-            "animate=working 32000",
+            "sleep=duration:50s",
+            "playsound=sound/stonecutting/stonemason priority:50% allow_multiple",
+            "animate=working duration:32s",
             "produce=marble_column"
          }
       },
    },
 }
+
+pop_textdomain()

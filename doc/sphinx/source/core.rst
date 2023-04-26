@@ -8,6 +8,7 @@ which are implemented in C++ and provide the glue between Lua and Widelands.
    :maxdepth: 3
 
    autogen_globals
+   autogen_path
    autogen_wl
    autogen_wl_bases
    autogen_wl_editor

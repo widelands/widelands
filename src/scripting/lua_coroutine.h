@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2016 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,28 +12,23 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_SCRIPTING_LUA_COROUTINE_H
 #define WL_SCRIPTING_LUA_COROUTINE_H
 
-#include <string>
-
-#include <stdint.h>
+#include <memory>
 
 #include "scripting/lua.h"
 
 class FileRead;
 class FileWrite;
+class LuaTable;
 
 namespace Widelands {
 class Player;
-class BuildingDescr;
-class WareDescr;
-class WorkerDescr;
 struct Coords;
 }  // namespace Widelands
 
@@ -43,12 +38,9 @@ public:
 	// The state of the coroutine, which can either be yielded, i.e. it expects
 	// to be resumed again or done which means that it will not do any more work
 	// and can be deleted.
-	enum {
-		DONE = 0,
-		YIELDED = LUA_YIELD
-	};
+	enum { DONE = 0, YIELDED = LUA_YIELD };
 
-	LuaCoroutine(lua_State* L);
+	explicit LuaCoroutine(lua_State* ms);
 	virtual ~LuaCoroutine();
 
 	// Returns either 'DONE' or 'YIELDED'.
@@ -62,28 +54,27 @@ public:
 	// in hooks.
 	void push_arg(const Widelands::Player*);
 	void push_arg(const Widelands::Coords&);
-	void push_arg(const Widelands::BuildingDescr*);
-	void push_arg(const Widelands::WareDescr*);
-	void push_arg(const Widelands::WorkerDescr*);
 	void push_arg(const std::string&);
+	void push_arg(int);
 
 	// Accesses the returned values from the run of the coroutine.
 	uint32_t pop_uint32();
 	std::string pop_string();
+	std::unique_ptr<LuaTable> pop_table();
 
 private:
 	friend class LuaGameInterface;
 
 	// Input/Output for coroutines. Do not call directly, instead use
 	// LuaGameInterface methods for this.
-	void write(FileWrite&);
+	void write(FileWrite&) const;
 	void read(lua_State*, FileRead&);
 
 	lua_State* lua_state_;
-	uint32_t idx_;
+	uint32_t idx_{static_cast<uint32_t>(LUA_REFNIL)};
 	uint32_t nargs_;
-	uint32_t ninput_args_;
-	uint32_t nreturn_values_;
+	uint32_t ninput_args_{0U};
+	uint32_t nreturn_values_{0U};
 };
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_COROUTINE_H

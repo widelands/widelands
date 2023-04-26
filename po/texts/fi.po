@@ -1,18 +1,23 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
+# Atte Timonen, 2022
+# GunChleoc, 2016,2018
 # GunChleoc, 2014
+# heidi.wenger, 2022
+# Jukka Pakarinen, 2016-2020
+# LINUX-SAUNA, 2022
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2015
-# Sampo Harjula <sahtor@sahtor.net>, 2015
-# Teppo Mäenpää <teppo@runbox.com>, 2016
+# Sampo Harjula <sahtor.transifex@sahtor.net>, 2015
+# Teppo Mäenpää <teppo@runbox.com>, 2016,2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-02-09 16:38+0000\n"
-"PO-Revision-Date: 2016-02-11 15:12+0000\n"
-"Last-Translator: Teppo Mäenpää <teppo@runbox.com>\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2023-02-10 03:09+0000\n"
+"PO-Revision-Date: 2015-02-03 14:50+0000\n"
+"Last-Translator: LINUX-SAUNA, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,377 +25,196 @@ msgstr ""
 "Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/txts/AUTHORS.lua:40
-msgid "Authors"
-msgstr "Tekijät"
+#: ../../data/txts/ABOUT.lua:7
+msgid "Readme"
+msgstr "Käyttöohje"
 
-#: ../../data/txts/AUTHORS.lua:42
-msgid "Widelands Development Team"
-msgstr "Widelands-kehittäjät"
-
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/ABOUT.lua:11
 msgid "License"
 msgstr "Lisenssi"
 
-#: ../../data/txts/LICENSE.lua:20
+#: ../../data/txts/ABOUT.lua:15
+msgid "Developers"
+msgstr "Kehittäjät"
+
+#: ../../data/txts/ABOUT.lua:19
+msgid "Translators"
+msgstr "Kääntäjät"
+
+#: ../../data/txts/AUTHORS.lua:28
+msgid "Widelands Development Team"
+msgstr "Widelands-kehittäjät"
+
+#: ../../data/txts/LICENSE.lua:12
 msgid "Licensing information for Widelands"
-msgstr "Pelin lisenssi:"
+msgstr "Widelands-pelin lisenssi"
 
-#: ../../data/txts/LICENSE.lua:23
-msgid "Copyright 2002 - 2016 by the Widelands Development Team."
-msgstr ""
+#. TRANSLATORS: Placeholder is copyright end year
+#: ../../data/txts/LICENSE.lua:14
+msgid "Copyright 2002 - %1% by the Widelands Development Team."
+msgstr "Copyright 2002 - %1% Widelands-kehittäjätiimi."
 
-#: ../../data/txts/LICENSE.lua:24
+#: ../../data/txts/LICENSE.lua:16
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
-msgstr "Tämä peli on vapaata ohjelmistoa, lisenssinä NU General Public License (GPL) V2.0"
+msgstr "Tämä peli on vapaata ohjelmistoa (FOSS), lisenssinä GNU General Public License (GPL) V2.0."
 
-#: ../../data/txts/LICENSE.lua:26
+#: ../../data/txts/LICENSE.lua:18
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
-"webpage:  %s"
-msgstr "Lisätietoa vapaista ohjelmistoista ja GPL-lisenssistä osoitteesta %s"
+"webpage: %s"
+msgstr "Löydät lisätietoa vapaista FOSS ohjelmistoista ja GPL-lisenssistä osoitteesta: %s"
 
-#: ../../data/txts/LICENSE.lua:27
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr "Sieltä löydät linsenssitekstin sekä muuta tietoa vapaista ohjelmistoista."
 
-#: ../../data/txts/LICENSE.lua:29
+#: ../../data/txts/LICENSE.lua:22
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr "GPL-lisenssiteksti löytyy myös Widelands-paketista."
 
-#: ../../data/txts/LICENSE.lua:30
+#: ../../data/txts/LICENSE.lua:23
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
-msgstr ""
+msgstr "Linux-käyttöjärjerstelmässä teksti löytyy COPYING -nimisestä tiedostosta, joka puolestaan löytyy asennuspuun juurihakemistosta (usein ‘%1%’)."
 
-#: ../../data/txts/LICENSE.lua:31
+#: ../../data/txts/LICENSE.lua:24
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr "Windows-käyttöjärjestelmässä lisenssi löytyy COPYING.txt -nimisestä tiedostosta. Asennushakemiston löydät Widelands Start -valikon avulla."
 
-#: ../../data/txts/LICENSE.lua:32
+#: ../../data/txts/LICENSE.lua:25
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr "MacOS:n alla lisenssiteksti löytyy COPYING -nimisestä tiedostosta, joka löytyy veppisivulta lataamastasi asennuspaketista."
 
-#: ../../data/txts/LICENSE.lua:34
+#: ../../data/txts/LICENSE.lua:27
+msgid "This game comes as-is and without any warranty."
+msgstr "Tämä peli tulee sellaisena kuin se on ja ilman minkäänlaista takuuta."
+
+#: ../../data/txts/LICENSE.lua:28
 msgid ""
-"This game comes as-is and without any warranty. For more information and "
-"support you can find us at %1% (Website, Wiki, Forum for questions or "
-"general support), %2% (Bugtracker), and %3% (Translations)."
-msgstr ""
+"For more information and support you can find us at %1% (Website, Wiki, "
+"Forum for questions or general support), %2% (Bugtracker), and %3% "
+"(Translations)."
+msgstr "Lisätietoa ja tukea voit etsiä ja saada osoitteesta %1% (Kotisivut, Wiki, Keskustelupalsta kysymyksille tai yleiselle tuelle), %2% (Bugiraportointijärjestelmä), ja %3% (Käännökset)."
 
-#: ../../data/txts/README.lua:6
-msgid "README"
-msgstr "Ohje"
-
-#: ../../data/txts/README.lua:13
+#: ../../data/txts/README.lua:9
 msgid "an open source strategy game"
 msgstr "Avoimen lähdekoodin strategiapeli"
 
-#: ../../data/txts/README.lua:17 ../../data/txts/editor_readme.lua:10
-msgid "Introduction"
-msgstr "Esittely"
-
-#: ../../data/txts/README.lua:19
-msgid ""
-"Widelands is a free, open source real-time strategy game with singleplayer\n"
-"campaigns and a multiplayer mode. The game was inspired by Settlers II but has\n"
-"significantly more variety and depth to it. Still, it is easy to get started\n"
-"through playable tutorials."
-msgstr "Widelands on ilmainen, vapaan koodin reaaliaikastrategiapeli, jossa on yksinpelikampanjoitasekä mahdollisuus moninpeliin verkossa. Peli ammensi alunperin inspiraatiota Settlers II -pelistä,mutta on sitemmin kehittynyt esikuvaansa monipuolisemmaksi."
-
-#: ../../data/txts/README.lua:24
-msgid ""
-"In this game, you start out on a small piece of land with just a few\n"
-"resources. Using these, you’ll create an empire with many thousands of\n"
-"inhabitants. On your way towards this goal, you will have to establish an\n"
-"economic infrastructure, explore the land around you and face rivaling\n"
-"tribes."
-msgstr "Pelin alussa sinulla on pieni maa-alue sekä jonkin verran eri tarvikkeita.Niiden avulla voit laajentaa valtakuntaasi useiden tuhansien työntekijöiden kokoiseksi.Sinun pitää tehdä valtakuntaasi toimiva talous, ja selviytyä kohtaamisista kilpailevienheimojen kanssa."
-
-#: ../../data/txts/README.lua:30
+#: ../../data/txts/README.lua:11
 msgid "Check out the Widelands project homepage:"
 msgstr "Widelands-projektin kotisivut:"
 
-#: ../../data/txts/README.lua:34
+#: ../../data/txts/README.lua:12
 msgid ""
-"Widelands is licensed under the GNU General Public License (GPL). For more\n"
+"Widelands is licensed under the GNU General Public License (GPL). For more "
 "information, see the file ‘COPYING’."
-msgstr "Widelands jaetaan GNU General Public License (GPL) -lisenssillä. LisätietoaCOPYING -tiedostosta"
+msgstr "Widelands jaetaan GNU General Public License (GPL) -lisenssillä. Lisätietoa tiedostossa ‘COPYING’."
 
-#: ../../data/txts/README.lua:37
+#: ../../data/txts/README.lua:13
 msgid "Status"
 msgstr "Tila"
 
-#: ../../data/txts/README.lua:39
+#: ../../data/txts/README.lua:14
 msgid ""
-"Widelands is nearly feature complete and is much fun to play alone and even\n"
-"more in multiplayer with others. Still, there is always more work to be done in\n"
-"all areas. If you are interested in contributing – be it by making graphics,\n"
-"fixing bugs or adding new features, translating the game into your language or\n"
-"creating new maps – get in touch on our homepage."
-msgstr "Widelands on sangen toimiva peli, ja hauska myös moninpelinä. Peliä voi kuitenkinkehittää edelleen. Jos haluat piirtää grafiikkaa, säveltää pelimusiikkia, tehdä uusiakarttoja, tai parantaa käännöksiä -- tule kotisivullemme!"
+"Widelands is nearly feature complete and is much fun to play alone and even "
+"more in multiplayer with others. Still, there is always more work to be done"
+" in all areas. If you are interested in contributing – be it by making "
+"graphics, fixing bugs or adding new features, translating the game into your"
+" language or creating new maps – get in touch on our homepage."
+msgstr "Widelands on sangen toimiva peli, ja hauska erityisesti moninpelinä. Peliä voi kuitenkinkehittää edelleen. Jos haluat piirtää grafiikkaa, säveltää pelimusiikkia, tehdä uusia karttoja, ohjelmoida uusia ominaisuuksia tai parantaa käännöksiä -- tule kotisivullemme."
 
-#: ../../data/txts/README.lua:45
-msgid "General game control"
-msgstr "Yleinen pelin hallinta"
+#: ../../data/txts/README.lua:16
+msgid "Widelands Help"
+msgstr "Widelands-ohje"
 
-#: ../../data/txts/README.lua:47
+#. TRANSLATORS: %1% is a key on the keyboard
+#: ../../data/txts/README.lua:18
 msgid ""
-"To close an open window, right-click on it. To minimize/maximize a window, "
-"click on it with the middle mouse button or with the left mouse button while"
-" holding down Ctrl."
-msgstr ""
+"You can find help about gameplay or the editor by using the help button on "
+"the bottom menu, or by pressing %1%."
+msgstr "Saat apua pelaamiseen tai karttamuokkaimeen, kun napsautat \"help\" -painiketta tai painat %1%."
 
-#: ../../data/txts/README.lua:49
-msgid ""
-"If you hold Ctrl while building a road, flags will be placed automatically.\n"
-"If you hold Ctrl while removing a road, all flags up to the first junction are\n"
-"removed."
-msgstr ""
+#. TRANSLATORS: This is a key on the keyboard
+#: ../../data/txts/README.lua:20
+msgid "F1"
+msgstr "F1"
 
-#: ../../data/txts/README.lua:53
-msgid ""
-"You can skip confirmation windows for irreversible actions if you hold Ctrl\n"
-"while clicking on the action button."
-msgstr ""
-
-#: ../../data/txts/README.lua:56
-msgid "Keyboard shortcuts (in-game)"
-msgstr "Näppäimistöoikotiet (pelin aikana)"
-
-#: ../../data/txts/README.lua:58
-msgid " Page Up: increases game speed"
-msgstr "PAGEUP: nopeuttaa pelin kulkua"
-
-#: ../../data/txts/README.lua:59
-msgid " Page Down: decreases game speed"
-msgstr "PAGEDOWN: Hidastaa pelin kulkua"
-
-#: ../../data/txts/README.lua:60
-msgid "Pause: pauses the game"
-msgstr "PAUSE: pysäyttää pelin"
-
-#: ../../data/txts/README.lua:61
-msgid "Space: toggles if building spaces are shown"
-msgstr "VÄLILYÖNTI: Näytä tai piiloita rakennusvihjeet."
-
-#: ../../data/txts/README.lua:62
-msgid "M: toggles minimap"
-msgstr "M: käännä minikartta päälle tai pois."
-
-#: ../../data/txts/README.lua:63
-msgid "N: toggles messages (‘news’)"
-msgstr "N: Kääntää \"news\" -viestit päälle tai pois."
-
-#: ../../data/txts/README.lua:64
-msgid "C: toggles census"
-msgstr "C: näytä rakennusten nimet"
-
-#: ../../data/txts/README.lua:65
-msgid "S: toggles statistics"
-msgstr "S: näytä/piilota rakennusten statistiikka"
-
-#: ../../data/txts/README.lua:66
-msgid "I: toggles stock inventory"
-msgstr "I: näyttää tai piiloittaa varastoluettelon."
-
-#: ../../data/txts/README.lua:67
-msgid "O: toggles objectives"
-msgstr "kirjain O: näytä tavoitteet."
-
-#: ../../data/txts/README.lua:68
-msgid "B: toggles building statistics"
-msgstr "rakennusten tilastot päälle/pois"
-
-#: ../../data/txts/README.lua:69
-msgid "F: toggles fullscreen (if supported by the OS)"
-msgstr "F: kokoruutumoodi päälle/pois, jos käyttöjärjestelmä tukee toimintoa."
-
-#: ../../data/txts/README.lua:70
-msgid "Home: centers main mapview on starting location"
-msgstr "Home: keskittää kartan aloituspaikkaasi."
-
-#: ../../data/txts/README.lua:71
-msgid "(Ctrl +) 0-9: Remember and go to previously remembered locations"
-msgstr "(CTRL+) 0-9: Tallenna ja palaa kohteisiin"
-
-#: ../../data/txts/README.lua:72
-msgid ",: goes to the previous location"
-msgstr ",: palaa edelliseen kohteeseen"
-
-#: ../../data/txts/README.lua:73
-msgid ".: goes to the next location"
-msgstr ".: mene seuraavaan kohteeseen"
-
-#: ../../data/txts/README.lua:74
-msgid "F6: shows the debug console (only in debug-builds)"
-msgstr "F6: näytä debuggauskonsoli. Tämä toimii vain, debug-käännöksissä."
-
-#: ../../data/txts/README.lua:75
-msgid "Ctrl + F10: quits the game immediately"
-msgstr "CTRL + F10: poistuu välittömästi"
-
-#: ../../data/txts/README.lua:76
-msgid "Ctrl + Leftclick: skips confirmation dialogs"
-msgstr "CTRL+Hiiren vasen: ohittaa varmistusdialogit"
-
-#: ../../data/txts/README.lua:77
-msgid "Ctrl + F11: takes a screenshot"
-msgstr "CTRL+F11: ottaa kuvakaappauksen"
-
-#: ../../data/txts/README.lua:79
-msgid ""
-"In the message window, the following additional shortcuts are available:"
-msgstr "Seuraavat pikakomennot toimivat viesti-ikkunassa:"
-
-#: ../../data/txts/README.lua:81
-msgid "0: shows all messages"
-msgstr "0: Näyttää kaikki viestit"
-
-#: ../../data/txts/README.lua:82
-msgid "1: shows geologists’ messages only"
-msgstr "1: Näyttää vain geologien viestit"
-
-#: ../../data/txts/README.lua:83
-msgid "2: shows economy messages only"
-msgstr "2: Näyttää vain talouden viestit"
-
-#: ../../data/txts/README.lua:84
-msgid "3: shows seafaring messages only"
-msgstr "3: Näyttää vain merenkäynnin viestit"
-
-#: ../../data/txts/README.lua:85
-msgid "4: shows warfare messages only"
-msgstr "4: Näyttää vain sotimisen viestit"
-
-#: ../../data/txts/README.lua:86
-msgid "5: shows scenario messages only"
-msgstr "5: Näyttää vain skenaarion viestit"
-
-#: ../../data/txts/README.lua:87
-msgid "G: jumps to the location corresponding to the current message"
-msgstr "G: siirry siihen kohtaan karttaa, jota viesti koskee."
-
-#: ../../data/txts/README.lua:88
-msgid "Delete: archives/restores the current message"
-msgstr "DELETE: arkistoi/palauttaa nykyisen viestin"
-
-#: ../../data/txts/README.lua:90
-msgid "Online Help"
-msgstr "Verkko-ohje"
-
-#: ../../data/txts/README.lua:91
-msgid ""
-"A detailed description of the tribes’ economies is available in the in-game "
-"Tribal Encyclopedia."
-msgstr "Yksityiskohtainen kuvaus heimojen taloudesta löytyy pelin sisäisestä tietosanakirjasta."
-
-#: ../../data/txts/README.lua:92
-#, lua-format
-msgid ""
-"If you need more documentation or help for Widelands or the Widelands "
-"Editor, be sure to visit our homepage at %s. You can find online help in our"
-" Wiki there."
-msgstr "Jos tarvitset lisäohjeita Widelandsin tai editorin kanssa, kotisivumme %s auttaa.\nWikisivuilta löytyy myös yksityiskohtaista tietoja eri heimoista."
-
-#: ../../data/txts/README.lua:94
+#: ../../data/txts/README.lua:23
 msgid "Reporting Bugs"
 msgstr "Vikaraportit"
 
-#: ../../data/txts/README.lua:96
+#: ../../data/txts/README.lua:24
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr "Jos törmäät bugiin, kerro siitä meidän bugiraportointijärjestelmällemme:"
 
-#: ../../data/txts/README.lua:100
+#: ../../data/txts/README.lua:26
 msgid "Please provide enough background information. Tell us:"
 msgstr "Toivomme sinun littävän raporttiin riittävät taustatiedot virheen paikantamiseksi. Kerro meille:"
 
-#: ../../data/txts/README.lua:102
-msgid "- Detailed steps on how to trigger the bug, if possible."
-msgstr "- Yksityiskohtaiset ohjeet bugin liipaisemiseen, jos pystyt"
+#: ../../data/txts/README.lua:28
+msgid "Detailed steps on how to trigger the bug, if possible."
+msgstr "Yksityiskohtaiset ohjeet bugin liipaisemiseen, jos pystyt."
 
-#: ../../data/txts/README.lua:104
+#: ../../data/txts/README.lua:29
 msgid ""
-"- What you expected to happen when performing the steps and what actually "
+"What you expected to happen when performing the steps and what actually "
 "happened."
-msgstr "- Mitä piti tapahtua ja mitä tapahtui."
+msgstr "Mitä piti tapahtua ja mitä tapahtui."
 
-#: ../../data/txts/README.lua:106
+#: ../../data/txts/README.lua:30
 msgid ""
-"- Which version of Widelands you are running (i.e. either the build number or\n"
-"the revision number if you are running a development version or a daily build.)"
-msgstr "- Mitä Widelandsin versiota käytät? (joko julkaisun tai kehitysversion numero)"
+"Which version of Widelands you are running (i.e. either the build number or "
+"the revision number if you are running a development version or a daily "
+"build.)"
+msgstr "Mitä Widelandsin versiota käytät? (joko julkaisun tai kehitysversion numero)"
 
-#: ../../data/txts/README.lua:109
+#: ../../data/txts/README.lua:31
 msgid ""
-"- Please also include which operating system you are running Widelands on as\n"
+"Please also include which operating system you are running Widelands on as "
 "some bugs can be platform specific."
-msgstr "- Kerro, mitä käyttöjärjestelmää käytät; jotkin bugit ovat alustariippuvaisia."
+msgstr "Kerro, mitä käyttöjärjestelmää käytät; jotkin bugit ovat alustariippuvaisia."
 
-#: ../../data/txts/README.lua:112
-msgid "- Which map you were playing when the bug occurred."
-msgstr "- Mitä karttaa pelasit kun ongelma ilmeni."
+#: ../../data/txts/README.lua:32
+msgid "Which map you were playing when the bug occurred."
+msgstr "Mitä karttaa pelasit kun ongelma ilmeni."
 
-#: ../../data/txts/README.lua:114
+#: ../../data/txts/README.lua:33
 msgid ""
-"- If the bug concerns something not being displayed correctly or if it helps\n"
+"If the bug concerns something not being displayed correctly or if it helps "
 "demonstrate the issue, please include one or more screenshots."
-msgstr "- Jos bugi koskee jotain virheellisesti piirtyvää, liitä kuvaruutukaappauksia jos voit."
+msgstr "Jos bugi koskee jotain virheellisesti piirtyvää, liitä kuvaruutukaappauksia jos voit."
 
-#: ../../data/txts/README.lua:117
+#: ../../data/txts/README.lua:34
 msgid ""
-"- If you have a save game or replay demonstrating the issue (for instance\n"
-"crashes where it can be hard to tell exactly what is triggering it), please\n"
+"If you have a save game or replay demonstrating the issue (for instance "
+"crashes where it can be hard to tell exactly what is triggering it), please "
 "include that too. For more information, see the section on Replays below."
-msgstr "- Voit liittää pelitallenteen, jos sellainen helpottaa ongelman toistamista."
+msgstr "Voit liittää pelitallenteen, jos sellainen helpottaa ongelman toistamista."
 
-#: ../../data/txts/README.lua:121
-msgid "Replays"
-msgstr "Pelien toistot"
-
-#: ../../data/txts/README.lua:123
-msgid ""
-"Widelands records every game you play in two files. One of these files has a\n"
-".wrpl.wgf extension and contains an initial savegame. The other file has a\n"
-".wrpl extension and contains all commands that were issued by all players, such\n"
-"as building a road or attacking an enemy. The rest of the filenames will tell\n"
-"you the time you started the game."
-msgstr "Widelands tallentaa pelien kulun kahteen tiedostoon. Toinen näistä on nimeltään.wrpl.wgf, ja sisältää alkutilanteen. Toisen tiedostonnimen pääte on .wrpl, ja se sisltääkaikki pelin aikana annetut komennot, kuten rakennus- ja hyökkäyskomennot.Tiedostonnimen alkuosana on pelin aloittamisaika."
-
-#: ../../data/txts/README.lua:129
-msgid ""
-"Using the Watch Replay option in the main menu, a previously played game will\n"
-"be precisely reconstructed for you to watch. Note, however, that even small\n"
-"changes in the game data files or the Widelands executable can cause a replay\n"
-"to become incompatible and to ‘go out of sync’. This is similar to how network\n"
-"games will suffer from desynchronization problems if one of the players has a\n"
-"different version of the game."
-msgstr "Voit katsoa pelin toiston päävalikon \"replay\" -toiminnolla.Huomaathan, että pienetkin muutokset peliohjelmassa voivat johtaa siihen, ettätallenteen seuraaminen keskeytyy synkroinointiongelmaan. Samoin verkkopelitvoivat epäonnistua, jos pelaajilla käytössään eri versiot pelistä."
-
-#: ../../data/txts/README.lua:136
-msgid ""
-"Replays are a very useful tool to find bugs in the game logic, so they\n"
-"can be useful as attachments to bug reports. The replay files are saved in the\n"
-"~/.widelands/replays directory on Linux and Mac OS X. On Windows,\n"
-"they are in the ‘replays’ subdirectory of your Widelands installation."
-msgstr "Pelitallenteet ovat hyödyllisiä virheiden etsimisessä, joten ne kannattaa useinliittää bugiraportteihin. Tallenteet löytyvät \"~/.widelands/replays\" -hakemistostaLinuxissa ja Mac OSX:ssa. Windoesissa ne ovat asennushakemistosn \"replays\"-nimisessä alikansiossa."
+#: ../../data/txts/TRANSLATORS.lua:26
+msgid "Widelands Translators"
+msgstr "Kääntäjät"
 
 #: ../../data/txts/developers.lua:3
-msgid "Atlantean"
-msgstr "Atlantislainen"
+msgid "Add-Ons"
+msgstr "Lisäosat"
 
 #: ../../data/txts/developers.lua:3
-msgid "Barbarian"
+msgid "Atlanteans"
+msgstr "Atlantislaiset"
+
+#: ../../data/txts/developers.lua:3
+msgid "Barbarians"
 msgstr "Barbaarit"
 
 #: ../../data/txts/developers.lua:3
@@ -398,8 +222,8 @@ msgid "Campaign Story"
 msgstr "Kampanjatarina"
 
 #: ../../data/txts/developers.lua:3
-msgid "Chieftain"
-msgstr "Päällikkö"
+msgid "Chieftains"
+msgstr "Päälliköt"
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
@@ -407,7 +231,7 @@ msgstr "Ohjelmoijat"
 
 #: ../../data/txts/developers.lua:3
 msgid "Debian Linux"
-msgstr ""
+msgstr "Debian Linux"
 
 #: ../../data/txts/developers.lua:3
 msgid "Documentation, Help and Wiki"
@@ -423,15 +247,23 @@ msgstr "Keisarikunta"
 
 #: ../../data/txts/developers.lua:3
 msgid "Fedora Linux"
-msgstr ""
+msgstr "Fedora Linux"
+
+#: ../../data/txts/developers.lua:3
+msgid "Flatpak"
+msgstr "Flatpak"
 
 #: ../../data/txts/developers.lua:3
 msgid "Former Elders"
-msgstr ""
+msgstr "Entiset vanhimmat"
 
 #: ../../data/txts/developers.lua:3
 msgid "FreeBSD"
-msgstr ""
+msgstr "FreeBSD"
+
+#: ../../data/txts/developers.lua:3
+msgid "Frisians"
+msgstr "Vapaamieliset"
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphicians"
@@ -451,11 +283,11 @@ msgstr "Kotisivun koodarit"
 
 #: ../../data/txts/developers.lua:3
 msgid "Mac OS X"
-msgstr ""
+msgstr "Mac OS X"
 
 #: ../../data/txts/developers.lua:3
 msgid "Mandriva Linux"
-msgstr ""
+msgstr "Mandriva Linux"
 
 #: ../../data/txts/developers.lua:3
 msgid "Maps and Missions"
@@ -474,6 +306,10 @@ msgid "Packagers"
 msgstr "Paketoijat"
 
 #: ../../data/txts/developers.lua:3
+msgid "Scripting"
+msgstr "Ohjelmakoodisyöttö"
+
+#: ../../data/txts/developers.lua:3
 msgid "Sound"
 msgstr "Ääni"
 
@@ -490,354 +326,567 @@ msgid "Translation"
 msgstr "Käännökset"
 
 #: ../../data/txts/developers.lua:3
-msgid "Translators"
-msgstr "Kääntäjät"
-
-#: ../../data/txts/developers.lua:3
 msgid "Windows"
-msgstr ""
+msgstr "Windows"
 
 #: ../../data/txts/developers.lua:3
 msgid "ZetaOS"
-msgstr ""
+msgstr "ZetaOS"
 
-#: ../../data/txts/editor_readme.lua:6
-msgid "README for the Widelands Editor"
-msgstr "Ohje Widelandsin karttamuokkaimelle"
+#: ../../data/txts/developers.lua:3
+msgid "and many, many more (thank you for everything you’ve done)"
+msgstr "ja monia, monia muita lisää (kiitokset kaikesta mitä olet tehnyt)"
 
-#: ../../data/txts/editor_readme.lua:8
-msgid "The Widelands Editor"
-msgstr "Widelandsin karttamuokkain"
+#: ../../data/txts/developers.lua:3
+msgid "vacant"
+msgstr "vacant"
 
-#: ../../data/txts/editor_readme.lua:12
-msgid ""
-"This editor is intended for players who would like to design their own maps "
-"to use with Widelands."
-msgstr "Muokkaimen avulla voit tehdä tai muokata Widelandsin karttoja."
+#: ../../data/txts/help/common_helptexts.lua:10
+msgid "Online Help"
+msgstr "Verkko-ohje"
 
-#: ../../data/txts/editor_readme.lua:13
-msgid ""
-"As you can see, this editor is heavy work in progress and as the editor "
-"becomes better and better, this text will also get longer and more complete."
-msgstr ""
-
-#: ../../data/txts/editor_readme.lua:14
+#: ../../data/txts/help/common_helptexts.lua:11
 #, lua-format
-msgid "Please have a look at our enduser manuals on our wiki pages at: %s"
-msgstr "Katso myös loppukäyttäjien ohjekirjoja wiki-sivuillamme osoitteessa %s"
-
-#: ../../data/txts/editor_readme.lua:15
 msgid ""
-"Those pages might be more complete and up to date than this file, and you "
-"will also find a short tutorial about building a map there."
-msgstr "Sivuston ohjeet voivat hyvinkin olla täydellisempiä ja päiväntasaisempia kuin tämä tiedosto, ja sieltä löydät mm. lyhyen opastuksen kartan rakentamiseen."
+"If you need more documentation or help for Widelands or the Widelands "
+"Editor, be sure to visit our homepage at %s. You can find online help in our"
+" wiki there."
+msgstr "Jos tarvitset lisäohjeita Widelandsin tai editorin kanssa, kotisivumme %s auttaa.\nWikisivuilta löytyy myös yksityiskohtaista tietoja eri heimoista."
 
-#: ../../data/txts/editor_readme.lua:17
-msgid "Keyboard shortcuts"
-msgstr "Näppäimistöoikotiet"
+#: ../../data/txts/help/common_helptexts.lua:19
+msgid "Introduction"
+msgstr "Esittely"
 
-#. TRANSLATORS: This is a hotkey
-#: ../../data/txts/editor_readme.lua:21
-msgid "Space:"
-msgstr "Välilyönti:"
-
-#: ../../data/txts/editor_readme.lua:21
-msgid "toggles if building spaces are shown"
-msgstr "rakennusten tilastot päälle/pois"
-
-#. TRANSLATORS: This is a hotkey
-#: ../../data/txts/editor_readme.lua:23
-msgid "C:"
-msgstr "C:"
-
-#: ../../data/txts/editor_readme.lua:23
-msgid "toggles census"
-msgstr "näytä rakennusten nimet"
-
-#. TRANSLATORS: This is a hotkey
-#: ../../data/txts/editor_readme.lua:25
-msgid "F:"
-msgstr ""
-
-#: ../../data/txts/editor_readme.lua:25
-msgid "toggles fullscreen"
-msgstr "vaihtaa kokonäyttötilaan"
-
-#. TRANSLATORS: This is a hotkey
-#: ../../data/txts/editor_readme.lua:27
-msgid "H:"
-msgstr ""
-
-#: ../../data/txts/editor_readme.lua:27
-msgid "toggles main menu"
-msgstr "päävalikko päälle/pois"
-
-#. TRANSLATORS: This is a hotkey
-#: ../../data/txts/editor_readme.lua:29
-msgid "M:"
-msgstr ""
-
-#: ../../data/txts/editor_readme.lua:29
-msgid "toggles minimap"
-msgstr "minikartta päälle/pois"
-
-#. TRANSLATORS: This is a hotkey
-#: ../../data/txts/editor_readme.lua:31
-msgid "P:"
-msgstr ""
-
-#: ../../data/txts/editor_readme.lua:31
-msgid "toggles player menu"
-msgstr "pelaajavalikko päälle/pois"
-
-#. TRANSLATORS: This is a hotkey
-#: ../../data/txts/editor_readme.lua:33
-msgid "T:"
-msgstr ""
-
-#: ../../data/txts/editor_readme.lua:33
-msgid "toggles tools menu"
-msgstr "työkaluvalikko päälle/pois"
-
-#. TRANSLATORS: This is a hotkey
-#: ../../data/txts/editor_readme.lua:35
-msgid "I:"
-msgstr ""
-
-#: ../../data/txts/editor_readme.lua:35
-msgid "activates information tool"
-msgstr "aktivoi tietotyökalun"
-
-#. TRANSLATORS: This is a hotkey
-#: ../../data/txts/editor_readme.lua:37
-msgid "Ctrl + L:"
-msgstr ""
-
-#: ../../data/txts/editor_readme.lua:37
-msgid "load map"
-msgstr "lataa kartta"
-
-#. TRANSLATORS: This is a hotkey
-#: ../../data/txts/editor_readme.lua:39
-msgid "Ctrl + S:"
-msgstr ""
-
-#: ../../data/txts/editor_readme.lua:39
-msgid "save map"
-msgstr "tallenna kartta"
-
-#. TRANSLATORS: This is a hotkey
-#: ../../data/txts/editor_readme.lua:41
-msgid "1-0:"
-msgstr ""
-
-#: ../../data/txts/editor_readme.lua:41
-msgid "changes tool size"
-msgstr "vaihtaa työkalun kokoa"
-
-#. TRANSLATORS: This is a hotkey
-#: ../../data/txts/editor_readme.lua:43
-msgid "Shift (Hold):"
-msgstr "SHIFT pohjassa:"
-
-#: ../../data/txts/editor_readme.lua:43
-msgid "selects first alternative tool while pressed"
-msgstr "Vaihtoehtoinen työkalu käytössä"
-
-#. TRANSLATORS: This is a hotkey
-#: ../../data/txts/editor_readme.lua:45
-msgid "Alt (Hold):"
-msgstr "ALT painettuna"
-
-#: ../../data/txts/editor_readme.lua:45
-msgid "Selects second alternative tool while pressed"
-msgstr "Toinen lisätyökalu käytössä"
-
-#: ../../data/txts/tips/atlanteans.tip:2 ../../data/txts/tips/barbarians.tip:2
-#: ../../data/txts/tips/empire.tip:2
+#: ../../data/txts/help/common_helptexts.lua:20
 msgid ""
-"Some buildings, such as the farm, have a very small work area. If the "
-"building is surrounded with trees or roads, production will stop."
-msgstr "Jotkin rakennukset, kuten maatila, toimivat vain pienellä lähialueella. Jos rakennus on puiden tai teiden ympäröimä, sen tuotanto lakkaa."
+"Widelands is a free, open source real-time strategy game with singleplayer "
+"campaigns and a multiplayer mode. The game was inspired by Settlers II but "
+"has significantly more variety and depth to it. Still, it is easy to get "
+"started through playable tutorials."
+msgstr "Widelands on ilmainen, vapaan koodin reaaliaikastrategiapeli, jossa on yksinpelikampanjoita sekä mahdollisuus moninpeliin verkossa. Peli ammensi alunperin inspiraatiota Settlers II -pelistä, mutta on sitemmin kehittynyt esikuvaansa monipuolisemmaksi."
 
-#: ../../data/txts/tips/atlanteans.tip:6
+#: ../../data/txts/help/common_helptexts.lua:21
 msgid ""
-"Always build a forester’s and a fish breeder’s house, so you will not run "
-"out of logs or food."
-msgstr "Rakenna metsänvartija ja kalankasvattaja, jotta puut ja tukit riittäisivät paremmin."
+"In this game, you start out on a small piece of land with just a few "
+"resources. Using these, you’ll create an empire with many thousands of "
+"inhabitants. On your way towards this goal, you will have to establish an "
+"economic infrastructure, explore the land around you and face rivaling "
+"tribes."
+msgstr "Pelin alussa sinulla on pieni maa-alue sekä jonkin verran eri tarvikkeita. Niiden avulla voit laajentaa valtakuntaasi useiden tuhansien työntekijöiden kokoiseksi. Sinun pitää tehdä valtakuntaasi toimiva talous, ja selviytyä kohtaamisista kilpailevienheimojen kanssa."
 
-#: ../../data/txts/tips/barbarians.tip:6 ../../data/txts/tips/empire.tip:6
+#: ../../data/txts/help/common_helptexts.lua:29
+msgid "Replays"
+msgstr "Pelien toistot"
+
+#: ../../data/txts/help/common_helptexts.lua:30
+msgid ""
+"Widelands records every game you play in two files. One of these files has a"
+" .wrpl.wgf extension and contains an initial savegame. The other file has a "
+".wrpl extension and contains all commands that were issued by all players, "
+"such as building a road or attacking an enemy. The rest of the filenames "
+"will tell you the time you started the game."
+msgstr "Widelands tallentaa pelien kulun kahteen tiedostoon. Toinen näistä on nimeltään.wrpl.wgf, ja sisältää alkutilanteen. Toisen tiedostonnimen pääte on .wrpl, ja se sisltääkaikki pelin aikana annetut komennot, kuten rakennus- ja hyökkäyskomennot. Tiedostonnimen alkuosana on pelin aloittamisaika."
+
+#: ../../data/txts/help/common_helptexts.lua:31
+msgid ""
+"Using the Watch Replay option in the main menu, a previously played game "
+"will be precisely reconstructed for you to watch. Note, however, that even "
+"small changes in the game data files or the Widelands executable can cause a"
+" replay to become incompatible and to ‘go out of sync’. This is similar to "
+"how network games will suffer from desynchronization problems if one of the "
+"players has a different version of the game."
+msgstr "Voit katsoa pelin toiston päävalikon \"replay\" -toiminnolla.Huomaathan, että pienetkin muutokset peliohjelmassa voivat johtaa siihen, ettätallenteen seuraaminen keskeytyy synkroinointiongelmaan. Samoin verkkopelit voivat epäonnistua, jos pelaajilla käytössään eri versiot pelistä."
+
+#: ../../data/txts/help/common_helptexts.lua:32
+#, lua-format
+msgid ""
+"Replays are a very useful tool to find bugs in the game logic, so they can "
+"be useful as attachments to bug reports. The replay files are saved in the "
+"%s directory on Linux and Mac OS X. On Windows, they are in the ‘replays’ "
+"subdirectory of your Widelands installation."
+msgstr "Pelitallenteet ovat hyödyllisiä virheiden etsimisessä, joten ne kannattaa usein liittää bugiraportteihin. Tallenteet löytyvät \"%s\" -hakemistosta Linuxissa ja Mac OSX:ssa. Windowsissa ne ovat asennushakemiston \"replays\"-nimisessä alikansiossa."
+
+#. TRANSLATORS: The generic hotkey format
+#: ../../data/txts/help/common_helptexts.lua:41
+#, lua-format
+msgctxt "hotkey"
+msgid "%s:"
+msgstr "%s:"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/txts/help/common_helptexts.lua:48
+msgid "Toggle building spaces"
+msgstr "Rakennuspaikat päälle/pois"
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
+#: ../../data/txts/help/common_helptexts.lua:57
+msgid "Toggle fullscreen (if supported by the OS)"
+msgstr "Kokoruutumoodi päälle/pois, jos käyttöjärjestelmä tukee toimintoa"
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 'm'
+#: ../../data/txts/help/common_helptexts.lua:66
+msgid "Toggle minimap"
+msgstr "Pienkartta päälle/pois"
+
+#: ../../data/txts/help/common_helptexts.lua:75
+#: ../../data/txts/help/common_helptexts.lua:84
+#: ../../data/txts/help/common_helptexts.lua:93
+msgid "%1% / %2%"
+msgstr "%1% / %2%"
+
+#: ../../data/txts/help/multiplayer_help.lua:8
+msgid "Multiplayer Game Setup"
+msgstr "Moninpeliasetukset"
+
+#: ../../data/txts/help/multiplayer_help.lua:9
+msgid "You are in the multiplayer launch game menu."
+msgstr "Olet moninpelin käynnistysvalikossa."
+
+#: ../../data/txts/help/multiplayer_help.lua:11
+msgid "Client settings"
+msgstr "Asiakasasetukset"
+
+#: ../../data/txts/help/multiplayer_help.lua:12
+msgid ""
+"On the left side is a list of all clients including you. You can set your "
+"role with the button following your nickname. Available roles are:"
+msgstr "Vasemmalla ovat kaikki asiakkaat, myös sinä. Voit valita roolisi nimimerkkisi vieressä olevalla painikkeella. Vaihtoehdot ovat:"
+
+#: ../../data/txts/help/multiplayer_help.lua:13
+msgid ""
+"The player with the color of the flag. If more than one client selected the "
+"same color, these share control over the player (‘shared kingdom mode’)."
+msgstr "Pelaaja, jonka väri vastaa lipun väriä. Jos useampi asiakas valitsee saman värin, nämä asiakkaat jakavat pelaajan hallinnan (\"jaettu valtakunta -tila\")."
+
+#: ../../data/txts/help/multiplayer_help.lua:14
+msgid ""
+"Spectator mode, meaning you can see everything, but cannot control any "
+"player"
+msgstr "Sivustakatsojatilassa näet kaiken, mutta et voi hallita mitään pelaajaa"
+
+#: ../../data/txts/help/multiplayer_help.lua:16
+msgid "Player settings"
+msgstr "Pelaaja-asetukset"
+
+#: ../../data/txts/help/multiplayer_help.lua:17
+msgid ""
+"In the middle are the settings for the players. To start a game, each player"
+" must be one of the following:"
+msgstr "Keskellä ovat pelaajien asetukset. Ennen kuin peli voi alkaa, jokisen pelaajan täyyy olla yksi seuraavista:"
+
+#: ../../data/txts/help/multiplayer_help.lua:18
+msgid "Connected to one or more clients (see ‘Client settings’)."
+msgstr "Liitetty yhteen tai useampaan asiakkaaseen (katso \"Asiakasasetukset\")."
+
+#: ../../data/txts/help/multiplayer_help.lua:19
+msgid ""
+"Connected to a computer player (the face in the picture as well as the mouse"
+" hover texts indicate the strength of the currently selected computer "
+"player)."
+msgstr "Liitetty tietokoneen hallitsemaan pelaajaan. Pelaajan vaikeustaso näkyy kuvan naamasta sekä hiiren ollessa valitun pelaajan päällä."
+
+#: ../../data/txts/help/multiplayer_help.lua:20
+msgid "Set as shared in starting position for another player."
+msgstr "Aseta jaetuksi aloituspaikaksi toisen pelaajan kanssa."
+
+#: ../../data/txts/help/multiplayer_help.lua:21
+msgid "Closed."
+msgstr "Suljettu."
+
+#: ../../data/txts/help/multiplayer_help.lua:22
+msgid ""
+"The latter three can only be set by the hosting client by left-clicking the "
+"‘type’ button of a player. Hosting players can also set the initialization "
+"of each player (the set of buildings, wares and workers the player starts "
+"with) and the tribe and team for computer players."
+msgstr "Vain peliä isännöivä taho voi säätää kolmea jälkimmäistä asetusta klikkaamalla pelaajan ‘Tyyppi’ painiketta. Isännöivät palaajat voivat myös asettaa jokaisen pelaajan alkuasetelman (rakennukset, tuotteet ja työntekijät, joilla pelaaja aloittaa) ja heimon sekä joukkueen tekoälypelaajille."
+
+#: ../../data/txts/help/multiplayer_help.lua:23
+msgid ""
+"Every client connected to a player (who isn’t a spectator) can set the tribe"
+" and the team for that player."
+msgstr "Jokainen pelaajaan liitetty asiakas (joka ei ole sivustakatsoja) voi asettaa oman pelaajan heimon ja joukkueen."
+
+#: ../../data/txts/help/multiplayer_help.lua:25
+msgid "Map details"
+msgstr "Kartan tiedot"
+
+#: ../../data/txts/help/multiplayer_help.lua:26
+msgid ""
+"You can see information about the selected map or savegame on the right-hand"
+" side. A button next to the map name allows the host to change to a "
+"different map. Furthermore, the host is able to set a specific win "
+"condition, and finally can start the game as soon as all players are set up."
+msgstr "Oikealla sivustalla on tiedot valitusta kartasta tai pelitallenteesta. Kartan nimen oikealla puolella olevalla painikkeella isäntä voi vaihtaa kartan tai pelitallenteen toiseksi. Lisäksi isäntä voi asettaa erityiset voiton edellytykset sekä aloittaa pelin heti kun kaikki pelaajat ovat valmiina."
+
+#: ../../data/txts/tips/amazons.lua:4
+msgid ""
+"Amazons love trees. Build enough jungle preserver’s huts to have enough of "
+"them."
+msgstr "Amatsoonit rakastavat puita. Rakenna tarpeeksi viidakonsuojelijoiden majoja jotta niitä tulee olemaan tarpeeksi."
+
+#: ../../data/txts/tips/amazons.lua:8
+msgid ""
+"Rare woods are the backbone of an Amazon economy. Build rare tree "
+"plantations to plant the special trees for these woods."
+msgstr "Harvinaismetsät ovat amatsonitalouden selkäranka. Rakenna harvinaisia puuistutuksia istuttaaksesi erikoispuita näihin metsiin."
+
+#: ../../data/txts/tips/amazons.lua:12
+msgid ""
+"Rare trees are cut by experienced woodcutters in woodcutter’s huts enhanced "
+"to rare tree cutter’s huts. But they stop cutting normal trees. Plan their "
+"locations in advance."
+msgstr "Harvinaisten puiden kaatamisesta vastaavat kokeneet metsurit metsureiden majoissa jotka hioontuvat harvinaispuumetsureiden majoiksi. Täten he lakkaavat kaatamasta tavallisia puita. Suunnittele heidän sijaintinsa etukäteen."
+
+#: ../../data/txts/tips/amazons.lua:16
+msgid "Food is dried with charcoal fires. Ensure a steady supply."
+msgstr "Ruoka kuivatetaan hiilitulilla. Varmista näiden vakaa jatkuva toimitus."
+
+#: ../../data/txts/tips/amazons.lua:20
+msgid ""
+"Liana cutters harvest lianas from nearby trees, but trees are not harmed in "
+"this process."
+msgstr "Lianakaatajat korjaavat lianasatoa lähellä olevista puista, mutta puita ei vahingoiteta tässä toimituksessa."
+
+#: ../../data/txts/tips/amazons.lua:24
+msgid ""
+"Water is life for the Amazons. Water gatherers perform an important service "
+"to their tribe."
+msgstr "Amatsoonien elämänvesi. Vedenkerääjät suorittavat tärkeää palvelusta heimolleen."
+
+#: ../../data/txts/tips/amazons.lua:28
+msgid ""
+"Panning for gold requires a steady stream of water, better sourced as close "
+"as possible for efficiency and freshness."
+msgstr "Kullan vaskaus vaatii vakaan vesivirran, täten parhaimmillaan tehokkuuden ja tuoreuden suhteen. "
+
+#: ../../data/txts/tips/amazons.lua:32
+msgid ""
+"Wilderness keepers ensure fresh game for hunting and fish for fishing. Game "
+"is only released near trees uninhabited by sentries."
+msgstr "Eränkävijät varmistavat ja turvaavat tuoreen riistan metsästykseen ja kalaa kalastukseen. Avut vapautetaan ainoastaan lähellä puita ja ilman vartijoiden asutusta. "
+
+#: ../../data/txts/tips/amazons.lua:36
+msgid ""
+"Rare wood stock levels are monitored by rare tree plantations, and jungle "
+"masters will plant according to economic requirements."
+msgstr "Harvinaispuiden määrää valvotaan harvinaispuiden istuttamoissa, ja viidakkomestarit istuttavat aina taloudellisten vaatimusten mukaisesti."
+
+#: ../../data/txts/tips/amazons.lua:40
+msgid ""
+"Ropes are essential for ensuring sound buildings, sewing sturdy clothing, "
+"and lashing canoes together to form ships."
+msgstr "Köydet ovat elintärkeitä turvaamaan kelvollisia rakennuksia, kestävien asusteiden neulontaa ja kanoottien sitomista laivojen muodostamiseen."
+
+#: ../../data/txts/tips/amazons.lua:43
+msgid ""
+"Jungle masters learn their skills by working as jungle preservers before "
+"working in gardening centres or rare tree plantations."
+msgstr "Viidakkomestarit oppivat taitonsa työskennellessään viidakonsuojelijoina ennen työskentelyään puutarhakeskuksissa tai harvinaispuuistutuksilla."
+
+#: ../../data/txts/tips/atlanteans.lua:4
+msgid ""
+"Keep an eye on your fishers and build a fish breeder’s house. After fish "
+"resources are exhausted in their work area, the fish supply cannot be "
+"regenerated."
+msgstr "Pidä kalastajiasi silmällä ja rakenna kalankasvattajan mökki. Kun kalaresurssit loppuvat työskentelyalueelta, kalakantaa ei voi enää elvyttää."
+
+#: ../../data/txts/tips/atlanteans.lua:8
+msgid ""
+"Always build a forester’s and a woodcutter’s house, so you will not run out "
+"of logs."
+msgstr "Rakenna aina metsänhoitajan ja metsurin mökit, jotta tukit eivät pääse loppumaan."
+
+#: ../../data/txts/tips/atlanteans.lua:12
+msgid ""
+"Atlanteans need spidercloth for many buildings. Build the needed "
+"infrastructure early before you run out."
+msgstr "Atlantislaiset tarvitsevat hämähäkinsilkkiä moniin rakennuksiin. Rakenna tarvittava infrastruktuuri ajoissa ennen kuin silkki loppuu."
+
+#: ../../data/txts/tips/barbarians.lua:4 ../../data/txts/tips/empire.lua:4
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "work area, they will stop fishing."
 msgstr "Pidä kalastajia silmällä. Kun kalaresurssit loppuvat työalueelta he lopettavat kalastamisen."
 
-#: ../../data/txts/tips/barbarians.tip:10
+#: ../../data/txts/tips/barbarians.lua:8
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
-"logs or food."
-msgstr "Rakenna metsänvartijan ja riistanvartijan mökit, jotta tukkeja ja riistaa olisi riittämiin."
+"logs or game."
+msgstr "Rakenna aina metsänvartijan ja riistanvartijan majat, jotta tukit ja riista eivät pääse loppumaan."
 
-#: ../../data/txts/tips/editor.tip:2
+#: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
+#: ../../data/txts/tips/frisians.lua:12
+msgid ""
+"Most enhanced buildings need experienced workers. Do not enhance a building "
+"unless you have the necessary workers available."
+msgstr "Useimmat laajennetut rakennukset tarvitsevat kokeneita työläisiä. Älä laajenna rakennusta ennen kuin sinulla on tarvittavat työntekijät saatavilla."
+
+#. TRANSLATORS: %s = URL to the Widelands website
+#: ../../data/txts/tips/editor.lua:8
+#, lua-format
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
-"wiki at www.widelands.org"
-msgstr "Kartan muokkaus- ja muita ohjeita sekä lyhyt johdanto löytyy wikisivulta osoiteesta www.widelands.org"
+"wiki at %s."
+msgstr "Kartan muokkaus- ja muita ohjeita sekä lyhyt johdanto löytyy wikisivulta osoiteesta %s."
 
-#: ../../data/txts/tips/editor.tip:6
+#: ../../data/txts/tips/editor.lua:12
 msgid ""
 "You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
 msgstr "Voit valita useita eläinlajeja pitämällä CTRL-näppäintä alhaalla valinnan aikana. Sen jälkeen karttaa painaessa kyseiseen paikkaan ilmestyy joku valituista eläimistä."
 
-#: ../../data/txts/tips/editor.tip:10
+#: ../../data/txts/tips/editor.lua:16
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
 "textures with Ctrl + mouse click."
-msgstr "Aivan kuten eläinten kanssa, voit valita useita kiinteitä tai maastotekstuureita CTRL + hiiren oikean kanssa."
+msgstr "Aivan kuten eläinten kanssa, voit myös valita useita kiinteitä esineitä tai maastotekstuureita käyttämällä Ctrl + hiiren klikkas."
 
-#: ../../data/txts/tips/editor.tip:14
+#: ../../data/txts/tips/editor.lua:20
 msgid ""
 "Holding down Shift switches the first alternative tool on. This tool is in "
 "most cases the complete opposite of the normal tool (for example deletion of"
 " an object instead of placing one)."
 msgstr "Saat vaihtoehtoisen työkalun käyttöön pitämällä vaihtonäppäintä (SHIFT) pohjassa. Useimmissa tapauksissa tämä tekee käänteisen toiminnon varsinaiseen työkaluun verrattuna, esimerkiksi postaa esineen lisäämisen sijaan."
 
-#: ../../data/txts/tips/editor.tip:18
+#: ../../data/txts/tips/editor.lua:24
 msgid ""
 "Holding down Alt switches the second alternative tool on (if it exists)."
 msgstr "Saat toisen vaihtoehtoisen työkalun käyttöösi pitämällä ALT-näppäintä pohjassa. Joskus toinen vaihtoehtoinen työkalu ei tee mitään, joissakin tapauksissa tekee."
 
-#: ../../data/txts/tips/editor.tip:22
+#: ../../data/txts/tips/editor.lua:28
 msgid ""
-"The number keys (1 - 0) allow you to directly set the size of the selected "
-"area around your mouse cursor."
-msgstr "Voit valita työkalun koon numeronäppäimillä (1-0)."
+"The keys %1% allow you to directly set the size of the selected area around "
+"your mouse cursor."
+msgstr "Avaimet %1% mahdollistavat suoran aluekoon määrittämisen ja asettamisen jonka valitset hiiren osoittimella."
 
-#: ../../data/txts/tips/editor.tip:26
+#: ../../data/txts/tips/editor.lua:32
 msgid ""
-"Space key behaves like in normal game. It switches if building spaces are "
-"shown on or off."
-msgstr ""
+"%1% behaves like in normal games: It switches if building spaces are shown "
+"on or off."
+msgstr "%1% käyttäytyy kuten yleensäkin perinteisissä peleissä: se vaihtaa tilan näytetäänkö rakennustiloja vaiko ei."
 
-#: ../../data/txts/tips/empire.tip:10
+#: ../../data/txts/tips/editor.lua:36
+msgid ""
+"When placing trees, use the help button to see which trees are more likely "
+"to survive on which terrain."
+msgstr "Kun sijoitat puita, käytä ohje painiketta nähdäksesi mitkä puut selviytyvät parhaiten missäkin maastossa."
+
+#: ../../data/txts/tips/editor.lua:40
+msgid ""
+"If you do not set water and fish resources, a default amount will be used."
+msgstr "Jos et aseta vesi- ja kalaresursseja, käytetään oletusmäärää."
+
+#: ../../data/txts/tips/editor.lua:44
+msgid ""
+"You can place a medium building on any node where there is a slope no "
+"greater than 1 in the south-east direction and its height difference to all "
+"nodes in a radius of 2 is no greater than 2."
+msgstr "Voit sijoittaa keskikokoisen rakennuksen mihin tahansa solmukohtaan, missä kallistus ei ole suurempi kuin 1 kaakon suunnassa ja sen korkeusero kaikkiin solmukohtiin säteellä 2 ei ole suurempi kuin 2."
+
+#: ../../data/txts/tips/editor.lua:48
+msgid ""
+"You can place a big building on any node where you could place a medium "
+"building if there is no obstacle or non-arable terrain towards the west, "
+"northwest and northeast."
+msgstr "Voit sijoittaa suuren rakennuksen mihin tahansa solmukohtaan, johon voisit sijoittaa keskisuuren rakennuksen, jos lännen, luoteen ja koillisen suunnalla ei ole esinettä tai viljelykelvotonta maata."
+
+#: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
-msgstr "Rakenna aina metsänvartijan talo, jottei taloutesi tukehtuisi tukkipulaan."
+msgstr "Rakenna aina metsänhoitajan mökki, jottei taloutesi tukehtuisi tukkipulaan."
 
-#: ../../data/txts/tips/general_game.tip:2
+#: ../../data/txts/tips/empire.lua:16
+msgid "Empire needs a lot of marble. Keep looking for marble resources."
+msgstr "Keisarikunta tarvitsee paljon marmoria. Jatka marmoriresurssien etsimistä."
+
+#: ../../data/txts/tips/frisians.lua:4
+msgid ""
+"To produce bricks, you need granite; to produce granite, you need a quarry "
+"or rock mine; to build those, you need bricks. Take care not to get "
+"deadlocked!"
+msgstr "Tuottaaksesi tiiliä, tarvitset graniittia; tuottaaksesi graniittia, tarvitset kivilouhoksen tai kivikaivoksen; rakentaaksesi ne, tarvitset tiiliä. Pidä huoli ettet jumiudu umpikujaan!"
+
+#: ../../data/txts/tips/frisians.lua:8
+msgid "Always build a forester’s house, so you will not run out of logs."
+msgstr "Rakenna aina metsänhoitajan mökki, jottei taloutesi tukehtuisi tukkipulaan."
+
+#: ../../data/txts/tips/general_game.lua:7
 msgid ""
 "The building process will only start after a road is built to the "
 "construction site."
 msgstr "Rakentaminen alkaa varsinaisesti vasta kun rakennuspaikka on yhdistetty tieverkostoon."
 
-#: ../../data/txts/tips/general_game.tip:6
+#: ../../data/txts/tips/general_game.lua:11
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a "
 "mine."
 msgstr "Muista lähettää geologi tutkimaan alue ennen kuin rakennat kaivon tai kaivoksen."
 
-#: ../../data/txts/tips/general_game.tip:10
+#: ../../data/txts/tips/general_game.lua:15
 msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Blockhouse, etc."
-msgstr ""
+msgstr "Laajenna maa-aluettasi sotilasrakennuksilla – Vartijamökki, Linnoitus, jne."
 
-#: ../../data/txts/tips/general_game.tip:14
+#: ../../data/txts/tips/general_game.lua:19
 msgid "Miners will work only if supplied with food."
 msgstr "Kaivokset toimivat vain, jos kaivosmiehet saavat ruokaa."
 
-#: ../../data/txts/tips/general_game.tip:18
+#: ../../data/txts/tips/general_game.lua:23
 msgid ""
 "Split your roads into shorter sections by planting some flags. This will "
 "speed up transportation of your wares."
-msgstr "Jaa tiesi lyhyempiin pätkiin asettamalla niille lippuja. Tämä nopeuttaa tavaroiden kuljetusta."
+msgstr "Jaa tiesi lyhyempiin pätkiin asettamalla niille lippuja. Tämä nopeuttaa tuotteiden kuljetusta."
 
-#: ../../data/txts/tips/general_game.tip:22
+#. TRANSLATORS: %s = URL to the Widelands website
+#: ../../data/txts/tips/general_game.lua:28
+#, lua-format
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
-"can be found at www.widelands.org."
-msgstr "Lisäkysymyksiä voit esittää veppisivumme keskustelupalstoilla osoitteessa http:/www.widelands.org/"
+"can be found online at %s."
+msgstr "Kysymyksiä mielessä? Vastauksia voit löytää FAQ sivuilta eli usein kysytyistä kysymyksistä, wikistä ja yhteisömme keskustelupalstoilta osoitteessa %s."
 
-#: ../../data/txts/tips/general_game.tip:26
+#: ../../data/txts/tips/general_game.lua:32
 msgid ""
-"Use the priority buttons in building windows to adjust delivery of a "
-"specific ware."
-msgstr "Tarvikkeiden jakoon eri rakennusten välillä voi vaikuttaa prioriteettipainikkeilla."
+"Use the priority sliders in building windows to adjust delivery of a "
+"specific ware. Holding down Shift while clicking will adjust all wares at "
+"once."
+msgstr "Käytä ensisijaisuusliukuria rakennusten ikkunoissa säätääksesi tietyn tarvikkeen toimitusta. Shift-näppäimen alhaallapito samalla kun napsautat hiirellä säätää kaikkia tarvikkeita kerralla."
 
-#: ../../data/txts/tips/general_game.tip:30
+#: ../../data/txts/tips/general_game.lua:36
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
-msgstr "Säädä tavaroiden tavoitemäärät varastossa 'Muokkaa taloutta' -valikon avulla. Taloudenmuokkausvalikon löydät minkä tahansa lipun valikosta."
+msgstr "Säädä tavaroiden tavoitemäärät varastossa 'Muuta talouden asetuksia' -valikon avulla. Taloudenmuokkausvalikon löydät minkä tahansa lipun valikosta."
 
-#: ../../data/txts/tips/general_game.tip:34
+#: ../../data/txts/tips/general_game.lua:40
 msgid ""
-"Manage your messages more efficiently: press ‘N’ for News to access the "
-"messages window, then use ‘G’ for Go To, and the Delete key to archive "
-"messages."
-msgstr "Hallinnoi viestejä tehokkaammin. 'N' painike avaa uutisikkunan, 'G' menee viestinmukaiseen kohtaan kartalla, 'Del' painike vie viestin arkistoon."
+"Manage your messages more efficiently: press ‘%1%’ to access the messages "
+"window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive messages."
+msgstr "Hallitse viestejäsi tehokkaammin: paina ‘%1%’ asioidaksesi viesti-ikkunassa, ja sitten käytä ‘%2%’ Mennäksesi johonkin kohteeseen, ja ‘%3%’ näppäintä arkistoidaksesi viestejä."
 
-#: ../../data/txts/tips/general_game.tip:38
-msgid ""
-"Use the ‘,’ (comma) and ‘.’ (period) keys to go back and forth between "
-"recently visited places in the world."
-msgstr "Pilkku (,) ja piste (.) painikkeilla voit vaihtaa näkymää viimeksi vierailtujen kohteiden välillä."
+#: ../../data/txts/tips/general_game.lua:45
+msgid "Press %1% to store important locations, then press %2% to recall them."
+msgstr "Paina %1% tallentaaksesi tärkeät paikat ja sitten paina %2% palataksesi niihin."
 
-#: ../../data/txts/tips/general_game.tip:42
-msgid ""
-"Press Ctrl+(0-9) to store important locations, then press 0-9 to recall "
-"them."
-msgstr "CTRL + 0-9 tallentaa kiinnostavia paikkoja kartalla, 0-9 palaa niihin."
-
-#: ../../data/txts/tips/general_game.tip:46
+#: ../../data/txts/tips/general_game.lua:49
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first"
 " junction."
 msgstr "Jos pidät CTRL-näppäintä pohjassa tietä postettaessa, tie ja liput katoavat aina lähimpään risteykseen saakka."
 
-#: ../../data/txts/tips/general_game.tip:50
+#: ../../data/txts/tips/general_game.lua:53
 msgid ""
-"New soldiers are recruited in the headquarters or a warehouse if all needed "
-"tools are available. Training sites are for improving their abilities."
-msgstr "Uusia sotilaita rektytoidaan päämajassa ja varastoissa tarpeen mukaan, jos tarvikkeita on. Koulutuspaikat parantavat sotilaiden taistelutaitoja."
+"New soldiers are recruited in a barracks. Their abilities can then be "
+"improved in training sites."
+msgstr "Uusia sotilaita palkataan kasarmiin. Heidän taitoja voi parantaa harjoittelupaikoissa."
 
-#: ../../data/txts/tips/general_game.tip:54
+#: ../../data/txts/tips/general_game.lua:57
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
-msgstr "Jos pidät CTRL-näppäintä pohjassa, sivuutan turhat varmistuskysymykset rakenuksia päivitettäessä ja tuhottaessa. Vain rohkeille!"
+msgstr "Jos tunnet olevasi rohkea, pidä CTRL-näppäintä pohjassa saat sivuutettua turhat varmistuskysymykset rakenuksia laajenenttaessa, päivitettäessä ja tuhottaessa."
 
-#: ../../data/txts/tips/general_game.tip:58
-msgid "Press I to quickly toggle the display of your stock inventory."
-msgstr "I näyttää tai piiloittaa varastoluettelon."
+#: ../../data/txts/tips/general_game.lua:61
+#, lua-format
+msgid "Press ‘%s’ to quickly toggle the display of your stock inventory."
+msgstr "Paina ‘%s’ muuttaaksesi pikaisesti varantojesi näyttämistilaa."
 
-#: ../../data/txts/tips/general_game.tip:62
+#: ../../data/txts/tips/general_game.lua:65
 msgid ""
-"An economy consists of all buildings and flags connected by roads. The "
-"supplies and demands of buildings are handled in its economy."
-msgstr "Yksi talous koostuu rakennuksista ja ne toisiinsa liittävistä teistä. Tavaroiden tuottaminen ja kuluttaminen tapahtuu talouden piirissä."
+"An economy consists of all buildings and flags connected by roads, ferries, "
+"or ships. The supplies and demands of buildings are handled in their "
+"economy. A player can have more than one economy."
+msgstr ""
 
-#: ../../data/txts/tips/multiplayer.tip:2
+#: ../../data/txts/tips/general_game.lua:69
+msgid ""
+"You can have more than one economy if their flags are not connected by any "
+"means of transportation. This is why the Configure Economy menu can only be "
+"accessed from flags and warehouses, not the player’s main menu."
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:73
+msgid ""
+"Some buildings, such as the farm, have a very small work area. If the "
+"building is surrounded with trees or roads, production will stop."
+msgstr "Jotkin rakennukset, kuten maatila, toimivat vain pienellä lähialueella. Jos rakennus on puiden tai teiden ympäröimä, sen tuotanto lakkaa."
+
+#: ../../data/txts/tips/general_game.lua:77
+msgid ""
+"Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."
+msgstr "Kohdenna hiiren rullan avulla sisään/ulos tai %1%/%2%. paina %3% nollataksesi kohdennuksen."
+
+#: ../../data/txts/tips/general_game.lua:84
+msgid ""
+"Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
+"locations."
+msgstr "Käytä ‘%1$s’ ja ‘%2$s’ näppäimiä hyppiäksesi nopeasti viimeksi vierailtujen määränpäiden välillä."
+
+#: ../../data/txts/tips/general_game.lua:88
+msgid ""
+"Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
+"%5%/%6% will adjust speed smoothly."
+msgstr "Nopeuta tai hidasta peliä näppäimillä %1%/%2%. Käytä %3%/%4% pikamuutokselle; %5%/%6% säätää nopeutta jouhevasti."
+
+#: ../../data/txts/tips/general_game.lua:98
+msgctxt "hotkey"
+msgid "Arrow keys"
+msgstr "Nuolinäppäimet"
+
+#: ../../data/txts/tips/general_game.lua:98
+msgctxt "hotkey"
+msgid "Ctrl + Arrow keys"
+msgstr "Ctrl + nuolinäppäimet"
+
+#: ../../data/txts/tips/general_game.lua:98
+msgid ""
+"Move map view using %1%. %2% will move the view faster, %3% moves slowly."
+msgstr "%1%siirtää karttanäkymää. %2%nopeuttaa siirtoa, %3% hidastaa sitä."
+
+#: ../../data/txts/tips/general_game.lua:98
+msgctxt "hotkey"
+msgid "Shift + Arrow keys"
+msgstr "Shift-vaihtonäppäin + nuolinäppäimet"
+
+#: ../../data/txts/tips/general_game.lua:102
+msgid ""
+"When a building is destroyed, its workers will start looking for a nearby "
+"flag from which they can move by road to a connected warehouse. If there are"
+" no such flags in the vicinity, they will keep wandering around and "
+"eventually die."
+msgstr "Kun rakennus tuhotaan, sen työntekijät käyvät etsimään lähistöltä lippua, mistä he voivat kulkea tietä pitkin tieverkostossa olevalle varastolle. Jos lähistöllä ei ole sellaista lippua, he jatkavat kuljeskelua ja lopulta kuolevat."
+
+#: ../../data/txts/tips/multiplayer.lua:4
 msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
 "– the real speed is then democratically set."
 msgstr "PageUp ja PageDown -näppäimillä säädetään pelinopeutta. Moninpelissä toteutuva nopeus valitaan demokraattisesti pelaajien toiveiden pohjalta."
 
-#: ../../data/txts/tips/multiplayer.tip:6
+#: ../../data/txts/tips/multiplayer.lua:8
 msgid ""
 "You can use ‘/me’ at the beginning of a chatmessage: ‘/me is tired’ will be "
 "printed as ‘-> Nickname is tired’."
 msgstr "Voit käyttää '/me' viestin alussa; esimerkiksi '/me puuteroi nenänpäätään'. Tällöin /me korvautuu nimimerkilläsi."
 
-#: ../../data/txts/tips/multiplayer.tip:10
+#: ../../data/txts/tips/multiplayer.lua:12
 msgid ""
 "Use ‘@name’ at the beginning of a chat message to send it to only one "
 "player."
-msgstr "jos laitat viestin alkuu '@name', vain nimimerkki name näkee kirjoittamasi tekstin."
+msgstr "Jos laitat viestin alkuu '@name', vain nimimerkki name näkee kirjoittamasi tekstin."
 
-#: ../../data/txts/tips/singleplayer.tip:2
+#: ../../data/txts/tips/multiplayer.lua:16
 msgid ""
-"Our computer players are too boring? Visit our website at www.widelands.org "
-"and meet other players to play online."
-msgstr "Ovatko tietokonevastustajamme liian tylsiä? Käy verkkosivuillamme osoitteessa www.widelands.org (tai irkissä freenode-verkon kanavalla #widelands) ja tapaa muita pelaajia pelataksesi verkossa!"
+"If the game should crash, don’t worry! The game will be saved automatically "
+"so that you can reload it afterwards."
+msgstr "Mikäli peli joskus kaatuu, älä huoli! Peli tallentuu itsestään taustalla joten voit jälkeenpäin ladata itsesi takaisin siihen mihin jäit."
+
+#. TRANSLATORS: %s = URL to the Widelands website
+#: ../../data/txts/tips/singleplayer.lua:7
+#, lua-format
+msgid ""
+"Are the computer players too boring? Visit our website at %s and meet other "
+"players to play online."
+msgstr "Ovatko tietokonepelaajat liian tylsiä? Käy verkkosivuillamme osoitteessa %s ja löydä peliseuraa."

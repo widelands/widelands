@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2008, 2011 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,17 +12,12 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_LOGIC_OBJECTIVE_H
 #define WL_LOGIC_OBJECTIVE_H
-
-#include <cassert>
-#include <cstring>
-#include <string>
 
 #include "base/i18n.h"
 
@@ -32,21 +27,17 @@ namespace Widelands {
 // end a scenario successfully.
 class Objective {
 public:
-	Objective(const std::string& init_name)
-		: name_(init_name),
-		  descname_(init_name),
-		  descr_(_("This objective has no description.")),
-		  visible_(true),
-		  done_(false) {
+	explicit Objective(const std::string& init_name)
+	   : name_(init_name), descname_(init_name), descr_(_("This objective has no description.")) {
 	}
 
 	// Unique internal name of the objective.
-	const std::string& name() const {
+	[[nodiscard]] const std::string& name() const {
 		return name_;
 	}
 
 	// User facing (translated) descriptive name.
-	const std::string& descname() const {
+	[[nodiscard]] const std::string& descname() const {
 		return descname_;
 	}
 	void set_descname(const std::string& new_name) {
@@ -54,7 +45,7 @@ public:
 	}
 
 	// Description text of this name.
-	const std::string& descr() const {
+	[[nodiscard]] const std::string& descr() const {
 		return descr_;
 	}
 	void set_descr(const std::string& new_descr) {
@@ -62,7 +53,7 @@ public:
 	}
 
 	// True, if this objective is fulfilled.
-	bool done() const {
+	[[nodiscard]] bool done() const {
 		return done_;
 	}
 
@@ -71,7 +62,7 @@ public:
 	}
 
 	// True, if this objective is visible to the user.
-	bool visible() const {
+	[[nodiscard]] bool visible() const {
 		return visible_;
 	}
 	void set_visible(const bool t) {
@@ -82,9 +73,9 @@ private:
 	const std::string name_;
 	std::string descname_;
 	std::string descr_;
-	bool visible_;
-	bool done_;
+	bool visible_{true};
+	bool done_{false};
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_OBJECTIVE_H

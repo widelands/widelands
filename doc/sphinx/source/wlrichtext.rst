@@ -1,126 +1,71 @@
+.. _wlrichtext:
+
 The Widelands Rich Text System
 ==============================
 
-All texts that can be displayed to the user can be formatted to be layouted
+All texts that can be displayed to the user can be marked up to be laid out
 and nicely formatted. This allows for changing of font sizes, weights, colors
 and for the embedding of images. This documents how to format a string to be
 recognized as rich text and which attributes are understood.
 
 The Widelands rich text language is inspired by HTML and therefore uses a
-syntax very similar to it. A rich text is started with ``<rt>`` and ended with
-``</rt>``. A rich text can have an image associated with it, this image is
-then displayed next to the text.
+syntax very similar to it. To tell our rendering system to go into richtext mode,
+start your text with ``<rt>`` and end it with ``</rt>``.
 
-Inside the rich text, each paragraph is enclosed by ``<p>`` and ``</p>``. You
-give font attributes to this tag to change the appearance of the text
-displayed inside.
+.. toctree::
+   :maxdepth: 2
 
-Reference
----------
-
-``<rt>``
-^^^^^^^^
-
-Starts or ends a rich text. Must be the first tag to appear in the string.
-A full example would be::
-
-   <rt image=map:khanktrukh.png><p line-spacing=3 font-size=12>Hello<br>World</p></rt>
-
-This would instruct widelands to use the image of Khankruth that comes with
-the map, left align it. To the right of it there would be two lines of text.
-The first line being ``Hello`` and the second being ``World``. They would be
-displayed with a font-size of 12 points and a line-spacing of 3 points.
-
-Valid attributes for ``<rt>`` are:
-
-image
-   The name of a image to use, can be prefixed with ``map:`` which instructs
-   widelands to load the image from the ``pics/`` directory inside the map of
-   this scenario.
-
-image-align
-   ``right``, ``center`` or ``left``. Defines were the image is displayed.
-
-text-align
-   ``right``, ``center`` or ``left``. Defines were the text is displayed.
+   General Markup Functions <autogen_auxiliary_richtext.rst>
+   Scenario Markup Functions <autogen_auxiliary_richtext_scenarios.rst>
+   Richtext Tags, their Attributes and Restrictions <autogen_rt_tags.rst>
 
 
-``<p>``
-^^^^^^^^
+Code Example
+------------
 
-A text paragraph inside a rich text. This gives control over which font is
-used for rendering and how it should be formatted.
-
-Valid attributes for ``<p>`` are:
-
-font-size
-   The font size to use in points. 10 points is the default. Use 12 points for
-   mission texts.
-
-font-face
-   Font face style of the font to use. The valid fonts are ``sans``, ``serif``,
-   and ``condensed``.
-
-font-color
-   The color of this font as a RGB hex tuple. That means 000000 is completely
-   black while ff0000 is completely red. Default color is a bright yellow
-   (ffff00).
-
-font-weight
-   ``normal`` or ``bold``. Note that not everything is supported by all fonts.
-   Do not use with ``font-style=italic`` at the same time; double formatting is
-   typographically bad.
-
-font-style
-   ``normal`` or ``italic``. Note that not everything is supported by all fonts.
-   Do not use with ``font-weight=bold`` at the same time; double formatting is
-   typographically bad.
-
-font-decoration
-   ``normal`` or ``underline``. Note that not everything is supported by all fonts.
-   Do not use with ``font-weight=bold`` or ``font-style=italic`` at the same time;
-   double formatting is typographically bad.
-
-line-spacing
-   Line spacing in points. Default is 0.
-
-``<br>``
-^^^^^^^^
-
-This inserts a line break into the text. The line break character (``\n``) is
-ignored inside a rich text.
-
-Real world Lua example
-----------------------
-
-Here is a small example of a fancy message send to the user via the
-:meth:`wl.game.Player.send_message` method:
+Here is a simplified version of a fancy message displayed to the user:
 
 .. code-block:: lua
 
-   wl.Game().players[1]:send_message(
-      "Hi",
-      "<rt image=images/logos/wl-ico-128.png image-align=center></rt>" ..
-      "<rt text-align=center>" ..
-      "<p font-weight=bold font-decoration=underline font-style=italic font-size=24>" ..
-         "YOU so rock dude!" ..
-      "</p></rt>" ..
-      "<rt><p>No. I really mean this.<br><br>Seriously.</p></rt>",
-      { popup = true }
-   )
+   body =
+      "<rt>                                     -- This is richtext
+         <p>                                    -- Start a paragraph
+            <font size=18 bold=1 color=D1D1D1>  -- Set font size and color
+               Big font to create a header
+            </font>
+         </p>
+         <p>
+            <font size=12>
+               Normal paragraph, just with a bit more text to show how it looks like.
+            </font>
+         </p>
+         -- The following content should be spread across a full line
+         <div width=100%>
+            <div>
+               <p>
+                  <font size=12>
+                  <img src=images/wui/menus/menu_toggle_menu.png>
+                  </font>
+               </p>
+            </div>
+            <div width=*>                       -- Fill up the remaining space
+               <p>
+                  <font size=12>
+                     Another normal paragraph
+                  </font>
+               </p>
+            </div>
+         </div>
+         ...
+      </rt>"
 
-The title of the message mustn't be a rich text, the body (which is just one
-string, it has been separated for easier reading and concatenated Lua-style
-via the ``..`` operator) is one: the first rich text includes a centered image
-and no text. The second is the text ``YOU so rock dude!`` in italic, bold and
-underlined. Then a simple text follows in four lines -- two of them being
-empty. The message popups the message window when it is received.
+This is quite a lot of hacking, so we have :ref:`Lua convenience functions <richtext.lua>`
+set up. We recommend that you always use those while scripting in Lua, which will
+also give us consistency in style throughout Widelands.
+Using the convenience functions will also result in cleaner code when
+including translation markup (the ``_([[Some text]])`` or ``_("Some text")`` function).
 
-The complete message rendered looks like this on my system:
+A code example how to use the convenience functions and their attributes is given in the
+documentation for the :ref:`richtext convenience functions <lua_formatting_example>`.
 
-.. image:: images/fancymsg.png
-   :scale: 100
-   :alt: sample rendering
-   :align: center
-
-
+:ref:`Return to index<richtext.lua>`

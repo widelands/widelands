@@ -1,21 +1,14 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 4, 22 },
-   }
-}
-add_worker_animations(animations, "walk", dirname, "walk", {9, 25}, 10)
-
-tribes:new_worker_type {
-   msgctxt = "atlanteans_worker",
+wl.Descriptions():new_worker_type {
    name = "atlanteans_scout",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("atlanteans_worker", "Scout"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
-   vision_range = 2,
+   vision_range = 3,
 
    buildcost = {
       atlanteans_carrier = 1
@@ -23,10 +16,32 @@ tribes:new_worker_type {
 
    programs = {
       scout = {
-         "scout 15 75000", -- radius 15, 75 seconds until return
+         "scout=radius:15 duration:1m15s",
+         "return"
+      },
+      targeted_scouting = {
+         "walk=object",
+         "scout=radius:15 duration:1m15s",
          "return"
       }
    },
 
-   animations = animations,
+   animations = {
+      idle = {
+         hotspot = { 4, 22 }
+      },
+   },
+
+   spritesheets = {
+      walk = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 9, 25 }
+      },
+   },
 }
+
+pop_textdomain()

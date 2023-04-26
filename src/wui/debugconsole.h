@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2016 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,18 +12,16 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_WUI_DEBUGCONSOLE_H
 #define WL_WUI_DEBUGCONSOLE_H
 
+#include <functional>
 #include <string>
 #include <vector>
-
-#include <boost/function.hpp>
 
 struct ChatProvider;
 
@@ -50,14 +48,14 @@ struct Handler {
 	 * The passed array contains a list of all (space-separated) components
 	 * of the command, including the command name itself.
 	 */
-	using HandlerFn = boost::function<void (const std::vector<std::string> &)>;
+	using HandlerFn = std::function<void(const std::vector<std::string>&)>;
 
-	Handler();
+	Handler() = default;
 	virtual ~Handler();
 
 protected:
-	void addCommand(const std::string &, const HandlerFn &);
-	void setDefaultCommand(const HandlerFn &);
+	void addCommand(const std::string&, const HandlerFn&);
+	void setDefaultCommand(const HandlerFn&);
 
 private:
 	std::vector<std::string> commands_;
@@ -69,7 +67,7 @@ private:
  * the given command string, and the log of messages contains a log
  * of console messages.
  */
-ChatProvider * get_chat_provider();
+ChatProvider* get_chat_provider();
 
 /**
  * Write some output on the console.
@@ -81,8 +79,7 @@ ChatProvider * get_chat_provider();
  * \ref get_chat_provider(). Sending a message via \ref get_chat_provider()
  * executes a command, while this function writes to the console.
  */
-void write(const std::string & text);
-
-}
+void write(const std::string& text);
+}  // namespace DebugConsole
 
 #endif  // end of include guard: WL_WUI_DEBUGCONSOLE_H

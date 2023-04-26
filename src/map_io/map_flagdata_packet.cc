@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,14 +12,11 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "map_io/map_flagdata_packet.h"
-
-#include <map>
 
 #include "base/macros.h"
 #include "economy/flag.h"
@@ -38,39 +35,46 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 5;
+constexpr uint16_t kCurrentPacketVersion = 6;
 
-void MapFlagdataPacket::read
-	(FileSystem            &       fs,
-	 EditorGameBase      &       egbase,
-	 bool                    const skip,
-	 MapObjectLoader &       mol)
-{
-	if (skip)
+void MapFlagdataPacket::read(FileSystem& fs,
+                             EditorGameBase& egbase,
+                             bool const skip,
+                             MapObjectLoader& mol) {
+	if (skip) {
 		return;
+	}
 
 	FileRead fr;
-	try {fr.open(fs, "binary/flag_data");} catch (...) {return;}
+	try {
+		fr.open(fs, "binary/flag_data");
+	} catch (...) {
+		return;
+	}
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
-			const Map  & map    = egbase.map();
-			while (! fr.end_of_file()) {
+		if (packet_version >= 5 && packet_version <= kCurrentPacketVersion) {
+			const Map& map = egbase.map();
+			while (!fr.end_of_file()) {
 				Serial const serial = fr.unsigned_32();
 				try {
-					Flag & flag = mol.get<Flag>(serial);
+					Flag& flag = mol.get<Flag>(serial);
 
 					//  Owner is already set, nothing to do from PlayerImmovable.
 
-					flag.animstart_ = fr.unsigned_16();
+					// TODO(Nordfriese): Savegame compatibility
+					if (packet_version < 6) {
+						flag.animstart_ = Time(fr.unsigned_16());
+					} else {
+						flag.animstart_ = Time(fr);
+					}
 
 					{
 						FCoords building_position = map.get_fcoords(flag.position_);
 						map.get_tln(building_position, &building_position);
 						flag.building_ =
-							dynamic_cast<Building *>
-								(building_position.field->get_immovable());
+						   dynamic_cast<Building*>(building_position.field->get_immovable());
 					}
 
 					//  Roads are set somewhere else.
@@ -80,41 +84,35 @@ void MapFlagdataPacket::read
 						uint32_t const wares_filled = fr.unsigned_32();
 						flag.ware_filled_ = wares_filled;
 						for (uint32_t i = 0; i < wares_filled; ++i) {
-							flag.wares_[i].pending = fr.unsigned_8();
+							flag.wares_[i].pending = (fr.unsigned_8() != 0u);
 							flag.wares_[i].priority = fr.signed_32();
 							uint32_t const ware_serial = fr.unsigned_32();
 							try {
-								flag.wares_[i].ware =
-									&mol.get<WareInstance>(ware_serial);
+								flag.wares_[i].ware = &mol.get<WareInstance>(ware_serial);
 
 								if (uint32_t const nextstep_serial = fr.unsigned_32()) {
 									try {
-										flag.wares_[i].nextstep =
-											&mol.get<PlayerImmovable>(nextstep_serial);
-									} catch (const WException & e) {
-										throw GameDataError
-											("next step (%u): %s",
-											 nextstep_serial, e.what());
+										flag.wares_[i].nextstep = &mol.get<PlayerImmovable>(nextstep_serial);
+									} catch (const WException& e) {
+										throw GameDataError("next step (%u): %s", nextstep_serial, e.what());
 									}
-								} else
+								} else {
 									flag.wares_[i].nextstep = nullptr;
-							} catch (const WException & e) {
-								throw GameDataError
-									("ware #%u (%u): %s", i, ware_serial, e.what());
+								}
+							} catch (const WException& e) {
+								throw GameDataError("ware #%u (%u): %s", i, ware_serial, e.what());
 							}
 						}
 
 						if (uint32_t const always_call_serial = fr.unsigned_32()) {
 							try {
-								flag.always_call_for_flag_ =
-									&mol.get<Flag>(always_call_serial);
-							} catch (const WException & e) {
-								throw GameDataError
-									("always_call (%u): %s",
-									 always_call_serial, e.what());
+								flag.always_call_for_flag_ = &mol.get<Flag>(always_call_serial);
+							} catch (const WException& e) {
+								throw GameDataError("always_call (%u): %s", always_call_serial, e.what());
 							}
-						} else
+						} else {
 							flag.always_call_for_flag_ = nullptr;
+						}
 
 						//  workers waiting
 						uint16_t const nr_workers = fr.unsigned_16();
@@ -125,11 +123,9 @@ void MapFlagdataPacket::read
 								//  waitforcapacity task for this flag is in
 								//  Flag::load_finish, which is called after the worker
 								//  (with his stack of tasks) has been fully loaded.
-								flag.capacity_wait_.push_back
-									(&mol.get<Worker>(worker_serial));
-							} catch (const WException & e) {
-								throw GameDataError
-									("worker #%u (%u): %s", i, worker_serial, e.what());
+								flag.capacity_wait_.push_back(&mol.get<Worker>(worker_serial));
+							} catch (const WException& e) {
+								throw GameDataError("worker #%u (%u): %s", i, worker_serial, e.what());
 							}
 						}
 
@@ -137,16 +133,12 @@ void MapFlagdataPacket::read
 						uint16_t const nr_jobs = fr.unsigned_16();
 						assert(flag.flag_jobs_.empty());
 						for (uint16_t i = 0; i < nr_jobs; ++i) {
-							Flag::FlagJob f;
-							if (fr.unsigned_8()) {
-								f.request =
-									new Request
-										(flag,
-										 0,
-										 Flag::flag_job_request_callback,
-										 wwWORKER);
-								f.request->read
-									(fr, dynamic_cast<Game&>(egbase), mol);
+							FlagJob f;
+							f.type = packet_version < 6 ? FlagJob::Type::kGeologist :
+                                                   static_cast<FlagJob::Type>(fr.unsigned_8());
+							if (fr.unsigned_8() != 0u) {
+								f.request = new Request(flag, 0, Flag::flag_job_request_callback, wwWORKER);
+								f.request->read(fr, dynamic_cast<Game&>(egbase), mol);
 							} else {
 								f.request = nullptr;
 							}
@@ -154,32 +146,32 @@ void MapFlagdataPacket::read
 							flag.flag_jobs_.push_back(f);
 						}
 
+						flag.act_pending_ = packet_version >= 6 && (fr.unsigned_8() != 0u);
+
 						mol.mark_object_as_loaded(flag);
 					}
-				} catch (const WException & e) {
+				} catch (const WException& e) {
 					throw GameDataError("%u: %s", serial, e.what());
 				}
 			}
 		} else {
 			throw UnhandledVersionError("MapFlagdataPacket", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const WException & e) {
+	} catch (const WException& e) {
 		throw GameDataError("flagdata: %s", e.what());
 	}
 }
 
-
-void MapFlagdataPacket::write
-	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver & mos)
+void MapFlagdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver& mos)
 
 {
 	FileWrite fw;
 
 	fw.unsigned_16(kCurrentPacketVersion);
 
-	const Map & map = egbase.map();
-	const Field & fields_end = map[map.max_index()];
-	for (Field * field = &map[0]; field < &fields_end; ++field)
+	const Map& map = egbase.map();
+	const Field& fields_end = map[map.max_index()];
+	for (Field* field = &map[0]; field < &fields_end; ++field) {
 		if (upcast(Flag const, flag, field->get_immovable())) {
 			assert(mos.is_object_known(*flag));
 			assert(!mos.is_object_saved(*flag));
@@ -189,7 +181,7 @@ void MapFlagdataPacket::write
 			//  Owner is already written in the existanz packet.
 
 			//  Animation is set by creator.
-			fw.unsigned_16(flag->animstart_);
+			flag->animstart_.save(fw);
 
 			//  Roads are not saved, they are set on load.
 
@@ -198,61 +190,53 @@ void MapFlagdataPacket::write
 			fw.unsigned_32(flag->ware_filled_);
 
 			for (int32_t i = 0; i < flag->ware_filled_; ++i) {
-				fw.unsigned_8(flag->wares_[i].pending);
+				fw.unsigned_8(static_cast<uint8_t>(flag->wares_[i].pending));
 				fw.signed_32(flag->wares_[i].priority);
 				assert(mos.is_object_known(*flag->wares_[i].ware));
 				fw.unsigned_32(mos.get_object_file_index(*flag->wares_[i].ware));
-				if
-					(PlayerImmovable const * const nextstep =
-						flag->wares_[i].nextstep.get(egbase))
+				if (PlayerImmovable const* const nextstep = flag->wares_[i].nextstep.get(egbase)) {
 					fw.unsigned_32(mos.get_object_file_index(*nextstep));
-				else
+				} else {
 					fw.unsigned_32(0);
+				}
 			}
 
-			if (Flag const * const always_call_for = flag->always_call_for_flag_)
-			{
+			if (Flag const* const always_call_for = flag->always_call_for_flag_) {
 				assert(mos.is_object_known(*always_call_for));
 				fw.unsigned_32(mos.get_object_file_index(*always_call_for));
-			} else
+			} else {
 				fw.unsigned_32(0);
+			}
 
 			//  worker waiting for capacity
-			const Flag::CapacityWaitQueue & capacity_wait =
-				flag->capacity_wait_;
+			const Flag::CapacityWaitQueue& capacity_wait = flag->capacity_wait_;
 			fw.unsigned_16(capacity_wait.size());
-			for (const OPtr<Worker >&  temp_worker : capacity_wait) {
-				Worker const * const obj = temp_worker.get(egbase);
-				assert
-					(obj);
-				assert
-					(obj->get_state(Worker::taskWaitforcapacity));
-				assert
-					(obj->get_state(Worker::taskWaitforcapacity)->objvar1.serial()
-					 ==
-					 flag                                               ->serial());
+			for (const OPtr<Worker>& temp_worker : capacity_wait) {
+				Worker const* const obj = temp_worker.get(egbase);
+				assert(obj);
+				assert(obj->get_state(Worker::taskWaitforcapacity));
+				assert(obj->get_state(Worker::taskWaitforcapacity)->objvar1.serial() == flag->serial());
 				assert(mos.is_object_known(*obj));
 				fw.unsigned_32(mos.get_object_file_index(*obj));
 			}
-			const Flag::FlagJobs & flag_jobs = flag->flag_jobs_;
-			fw.unsigned_16(flag_jobs.size());
 
-			for (const Flag::FlagJob& temp_job : flag_jobs) {
-				if (temp_job.request) {
+			fw.unsigned_16(flag->flag_jobs_.size());
+			for (const FlagJob& job : flag->flag_jobs_) {
+				fw.unsigned_8(static_cast<uint8_t>(job.type));
+				if (job.request != nullptr) {
 					fw.unsigned_8(1);
-					temp_job.request->write
-						(fw, dynamic_cast<Game&>(egbase), mos);
-				} else
+					job.request->write(fw, dynamic_cast<Game&>(egbase), mos);
+				} else {
 					fw.unsigned_8(0);
-
-				fw.string(temp_job.program);
+				}
+				fw.string(job.program);
 			}
 
+			fw.unsigned_8(flag->act_pending_ ? 1 : 0);
+
 			mos.mark_object_as_saved(*flag);
-
 		}
-
+	}
 	fw.write(fs, "binary/flag_data");
 }
-
-}
+}  // namespace Widelands

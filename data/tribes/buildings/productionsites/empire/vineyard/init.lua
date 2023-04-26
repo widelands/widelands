@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_productionsite_type {
    name = "empire_vineyard",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Vineyard"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -20,58 +20,62 @@ tribes:new_productionsite_type {
       marble = 2
    },
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 53, 53 },
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 59, 65 },
       },
    },
 
    aihints = {
       space_consumer = true,
-      forced_after = 300
+      basic_amount = 2,
+      prohibited_till = 490,
+      very_weak_ai_limit = 1,
+      weak_ai_limit = 3
+
    },
 
    working_positions = {
       empire_vinefarmer = 1
    },
 
-   outputs = {
-      "grape"
-   },
-
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
-            "call=plant_vine",
-            "call=harvest_vine",
-            "return=skipped"
+            "call=plant",
+            "call=harvest",
          }
       },
-      plant_vine = {
+      plant = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting grapevines because ...
-         descname = _"planting grapevines",
+         descname = _("planting grapevines"),
          actions = {
-            "sleep=20000",
-            "worker=plantvine"
+            "callworker=plant",
+            "sleep=duration:5s"
          }
       },
-      harvest_vine = {
+      harvest = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting grapevines because ...
-         descname = _"harvesting grapes",
+         descname = _("harvesting grapes"),
          actions = {
-            "sleep=5000",
-            "worker=harvestvine"
+            "callworker=harvest",
+            "sleep=duration:5s"
          }
       },
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Fields",
-      heading = _"Out of Fields",
+      title = _("No Fields"),
+      heading = _("Out of Fields"),
       message = pgettext("empire_building", "The vine farmer working at this vineyard has no cleared soil to plant his grapevines."),
       productivity_threshold = 30
    },
 }
+
+pop_textdomain()

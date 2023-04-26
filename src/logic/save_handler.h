@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2009, 2015 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,57 +12,87 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_LOGIC_SAVE_HANDLER_H
 #define WL_LOGIC_SAVE_HANDLER_H
 
-#include <cstring>
-#include <string>
+#include <cstdint>
+#include <optional>
 
-#include <stdint.h>
+#include "io/filesystem/filesystem.h"
+#include "logic/filesystem_constants.h"
 
-namespace Widelands {class Game;}
+namespace Widelands {
+class Game;
+}  // namespace Widelands
 
-// default autosave interval in minutes
-#define DEFAULT_AUTOSAVE_INTERVAL 15
-
+/**
+ * Takes care of manual or autosave via think().
+ *
+ * Note that this handler is used for replays via the ReplayWriter, too.
+ */
 class SaveHandler {
 public:
-	SaveHandler() : last_saved_realtime_(0), initialized_(false), allow_saving_(true),
-		save_requested_(false), save_filename_(""), autosave_filename_("wl_autosave") {}
-	void think(Widelands::Game &);
-	std::string create_file_name(const std::string& dir, const std::string& filename) const;
-	bool save_game
-		(Widelands::Game   &,
-		 const std::string & filename,
-		 std::string       * error = nullptr);
+	SaveHandler() = default;
 
-	static std::string get_base_dir() {return "save";}
-	const std::string get_cur_filename() {return current_filename_;}
-	void set_current_filename(const std::string& filename) {current_filename_ = filename;}
-	void set_autosave_filename(const std::string& filename) {autosave_filename_ = filename;}
-	void set_allow_saving(bool t) {allow_saving_ = t;}
-	bool get_allow_saving() {return allow_saving_;}
-	void request_save(const std::string& filename = "")
-	{
+	void think(Widelands::Game&);
+	[[nodiscard]] std::string create_file_name(const std::string& dir,
+	                                           const std::string& filename) const;
+
+	// Saves the game, overwrites file, handles errors
+	bool save_game(Widelands::Game&,
+	               const std::string& filename,
+	               std::optional<FileSystem::Type> fstype,
+	               std::string* error_str = nullptr);
+
+	const std::string get_cur_filename() {
+		return current_filename_;
+	}
+	void set_current_filename(const std::string& filename) {
+		current_filename_ = filename;
+	}
+	void set_autosave_filename(const std::string& filename) {
+		autosave_filename_ = filename;
+	}
+	// Used by lua only
+	void set_allow_saving(bool t) {
+		allow_saving_ = t;
+	}
+	// Used by lua only
+	[[nodiscard]] bool get_allow_saving() const {
+		return allow_saving_;
+	}
+	// Used by lua only
+	void request_save(const std::string& filename = "") {
 		save_requested_ = true;
 		save_filename_ = filename;
 	}
 
+	[[nodiscard]] uint32_t last_save_time() const {
+		return last_save_realtime_;
+	}
+
 private:
-	uint32_t last_saved_realtime_;
-	bool initialized_;
-	bool allow_saving_;
-	bool save_requested_;
+	uint32_t next_save_realtime_{0U};
+	uint32_t last_save_realtime_{0U};
+	bool initialized_{false};
+	bool allow_saving_{true};
+	bool save_requested_{false};
+	bool saving_next_tick_{false};
 	std::string save_filename_;
 	std::string current_filename_;
-	std::string autosave_filename_;
+	std::string autosave_filename_{kAutosavePrefix};
 
-	void initialize(uint32_t gametime);
+	FileSystem::Type fs_type_{FileSystem::ZIP};
+	int32_t autosave_interval_in_ms_{kDefaultAutosaveInterval * 60 * 1000};
+	int32_t number_of_rolls_{5};  // For rolling file update
+
+	void initialize(uint32_t realtime);
+	bool roll_save_files(const std::string& filename, std::string* error) const;
+	bool check_next_tick(Widelands::Game& game, uint32_t realtime) const;
 };
 
 #endif  // end of include guard: WL_LOGIC_SAVE_HANDLER_H

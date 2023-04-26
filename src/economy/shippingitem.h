@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 by the Widelands Development Team
+ * Copyright (C) 2011-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -29,11 +28,8 @@ class FileWrite;
 namespace Widelands {
 
 class Economy;
-class Game;
 class MapObjectLoader;
 struct MapObjectSaver;
-class MapObject;
-class PortDock;
 class WareInstance;
 class Worker;
 
@@ -42,48 +38,50 @@ class Worker;
  * encapsulated in this structure during shipping and the waiting time in the @ref PortDock.
  */
 struct ShippingItem {
-	ShippingItem() {}
-	ShippingItem(WareInstance & ware);
-	ShippingItem(Worker & worker);
+	ShippingItem() = default;
+	explicit ShippingItem(WareInstance& ware);
+	explicit ShippingItem(Worker& worker);
 
 	// Unboxes the item that is shipped which might be either a ware or a
 	// worker. It is safe to pass nullptr for 'ware' or 'worker' in case you are
 	// only interested in the ware if it is the one or the other.
-	void get(EditorGameBase& game, WareInstance** ware, Worker** worker) const;
+	void get(const EditorGameBase& game, WareInstance** ware, Worker** worker) const;
 
-	void set_economy(Game &, Economy * e);
-	PortDock * get_destination(Game &);
-	void schedule_update(Game &, int32_t delay);
+	void set_economy(const Game&, Economy* e, WareWorker) const;
+	const PortDock* get_destination(Game&) const;
 
-	void remove(EditorGameBase &);
+	void remove(EditorGameBase&);
 
 	struct Loader {
-		void load(FileRead & fr);
-		ShippingItem get(MapObjectLoader & mol);
+		void load(FileRead& fr);
+		ShippingItem get(MapObjectLoader& mol) const;
 
 	private:
-		uint32_t serial_;
+		uint32_t serial_ = 0U;
+		uint32_t destination_serial_ = 0U;
 	};
 
-	void save(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw);
+	void save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw);
 
 private:
 	friend class PortDock;
 	friend struct Ship;
+	friend struct ShipFleet;
+	friend struct ShippingSchedule;
 
 	// Called when a port is reached. The item will act again on its own.
-	void end_shipping(Game &);
+	void end_shipping(Game&) const;
 
 	// Sets the location of this shippingitem, this could be a ship, a portdock or a warehouse.
-	void set_location(Game&, MapObject* obj);
+	void set_location(Game&, MapObject* obj) const;
 
 	// Updates destination_dock_.
-	void update_destination(Game &, PortDock &);
+	void update_destination(Game&, PortDock&);
 
 	ObjectPointer object_;
 	OPtr<PortDock> destination_dock_;
 };
 
-} // namespace Widelands
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_SHIPPINGITEM_H

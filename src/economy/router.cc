@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,16 +12,11 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "economy/router.h"
-
-#include <cassert>
-#include <cstdio>
-#include <cstdlib>
 
 #include "economy/iroute.h"
 #include "economy/itransport_cost_calculator.h"
@@ -33,12 +28,12 @@ namespace Widelands {
 /*************************************************************************/
 /*                         Router Implementation                         */
 /*************************************************************************/
-Router::Router(const ResetCycleFn & reset) : reset_(reset), mpf_cycle(0) {}
+Router::Router(const ResetCycleFn& reset) : reset_(reset) {
+}
 
-uint32_t Router::assign_cycle()
-{
+uint32_t Router::assign_cycle() {
 	++mpf_cycle;
-	if (!mpf_cycle) { // reset all cycle fields
+	if (mpf_cycle == 0u) {  // reset all cycle fields
 		reset_();
 		++mpf_cycle;
 	}
@@ -67,25 +62,27 @@ uint32_t Router::assign_cycle()
  *
  * \return true if a route has been found, false otherwise
  */
-bool Router::find_route
-	(RoutingNode & start, RoutingNode & end,
-	 IRoute * const route,
-	 WareWorker const type,
-	 int32_t const cost_cutoff,
-	 ITransportCostCalculator & cost_calculator)
-{
+bool Router::find_route(RoutingNode& start,
+                        RoutingNode& end,
+                        IRoute* const route,
+                        WareWorker const type,
+                        int32_t const cost_cutoff,
+                        ITransportCostCalculator& cost_calculator) {
 	RouteAStar<AStarEstimator> astar(*this, type, AStarEstimator(cost_calculator, end));
 
 	astar.push(start);
 
-	while (RoutingNode * current = astar.step()) {
-		if (cost_cutoff >= 0 && current->mpf_realcost > cost_cutoff)
+	while (RoutingNode* current = astar.step()) {
+		if (cost_cutoff >= 0 && (type == wwWARE ? current->mpf_realcost_ware :
+                                                current->mpf_realcost_worker) > cost_cutoff) {
 			return false;
+		}
 
 		if (current == &end) {
 			// found our goal
-			if (route)
+			if (route != nullptr) {
 				astar.routeto(end, *route);
+			}
 			return true;
 		}
 	}
@@ -93,4 +90,4 @@ bool Router::find_route
 	return false;
 }
 
-} // namespace Widelands
+}  // namespace Widelands

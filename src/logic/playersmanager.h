@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,28 +12,25 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_LOGIC_PLAYERSMANAGER_H
 #define WL_LOGIC_PLAYERSMANAGER_H
 
-#include <string>
-#include <vector>
+#include <cassert>
+#include <map>
 
-#include "logic/constants.h"
+#include "base/times.h"
+#include "graphic/playercolor.h"
+#include "logic/player_end_result.h"
 #include "logic/widelands.h"
 
 namespace Widelands {
 
 class EditorGameBase;
 class Player;
-class Player;
-
-enum class PlayerEndResult : uint8_t
-	{PLAYER_LOST = 0, PLAYER_WON = 1, PLAYER_RESIGNED = 2, UNDEFINED = 255};
 
 /**
  * Hold data once a player left the game, or on game ends.
@@ -45,15 +42,15 @@ enum class PlayerEndResult : uint8_t
  * \e resign_reason : The reason for resigning (forfeit, disconnection, ..) (string)
  */
 struct PlayerEndStatus {
-	PlayerNumber player;
-	PlayerEndResult result;
-	uint32_t time;
+	PlayerNumber player = 0;
+	PlayerEndResult result = PlayerEndResult::kUndefined;
+	Time time;
 	std::string info;
 };
 
 class PlayersManager {
 public:
-	PlayersManager(EditorGameBase & egbase);
+	explicit PlayersManager(EditorGameBase& egbase);
 	virtual ~PlayersManager();
 
 	void cleanup();
@@ -64,42 +61,47 @@ public:
 	 * Create the player structure for the given plnum.
 	 * Note that AI player structures and the InteractivePlayer are created when
 	 * the game starts. Similar for remote players.
-	*/
-	Player * add_player
-		(PlayerNumber,
-		 uint8_t             initialization_index,
-		 const std::string & tribe,
-		 const std::string & name,
-		 TeamNumber team = 0);
-	Player * get_player(int32_t n) const {
+	 */
+	Player* add_player(PlayerNumber,
+	                   uint8_t initialization_index,
+	                   const RGBColor&,
+	                   const std::string& tribe,
+	                   const std::string& name,
+	                   TeamNumber team = 0);
+	[[nodiscard]] Player* get_player(int32_t n) const {
 		assert(1 <= n);
-		assert     (n <= MAX_PLAYERS);
+		assert(n <= kMaxPlayers);
 		return players_[n - 1];
 	}
-	Player & player(int32_t n) const {
+	[[nodiscard]] const Player& player(int32_t n) const {
 		assert(1 <= n);
-		assert     (n <= MAX_PLAYERS);
+		assert(n <= kMaxPlayers);
 		return *players_[n - 1];
 	}
 
 	/**
 	 * \return the number of players (human or ai)
 	 */
-	uint8_t get_number_of_players() {return number_of_players_;}
-
-	const std::vector<PlayerEndStatus> & get_players_end_status() {return players_end_status_;}
+	[[nodiscard]] uint8_t get_number_of_players() const {
+		return number_of_players_;
+	}
 
 	/**
-	* Adds a new player status for a player that left the game.
-	*/
-	void add_player_end_status(const PlayerEndStatus & status);
+	 * Adds or sets the player status for a player that left the game.
+	 */
+	void add_player_end_status(const PlayerEndStatus& status, bool change_existing = false);
+
+	[[nodiscard]] const PlayerEndStatus* get_player_end_status(PlayerNumber player) const;
+	[[nodiscard]] const std::map<PlayerNumber, PlayerEndStatus>& get_all_players_end_status() {
+		return players_end_status_;
+	}
 
 private:
-	Player* players_[MAX_PLAYERS];
+	Player* players_[kMaxPlayers];
 	EditorGameBase& egbase_;
-	uint8_t number_of_players_;
-	std::vector<PlayerEndStatus> players_end_status_;
+	uint8_t number_of_players_{0U};
+	std::map<PlayerNumber, PlayerEndStatus> players_end_status_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_PLAYERSMANAGER_H

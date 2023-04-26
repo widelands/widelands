@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 by the Widelands Development Team
+ * Copyright (C) 2010-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,8 +21,6 @@
 
 #include <cassert>
 #include <map>
-
-#include <stdint.h>
 
 #include "logic/message_id.h"
 
@@ -39,19 +36,21 @@ namespace Widelands {
 /// CmdDeleteMessage) that refers to a message by id, use this map to
 /// translate from the id that is stored in the command to the sequence number
 /// that will be used as the id of the message when the game is loaded.
-struct MapMessageSaver : private std::map<MessageId, MessageId> {
-	MapMessageSaver() : counter(0) {}
-	void add(MessageId const id) {
-		assert(find(id) == end());
-		insert(std::pair<MessageId, MessageId>(id, ++counter));
+struct MapMessageSaver {
+	MapMessageSaver() : counter_(0) {
 	}
-	MessageId operator[](MessageId const id) const {
-		return find(id) != end() ? find(id)->second : MessageId::null();
+	void add(const MessageId& id) {
+		assert(messages_.find(id) == messages_.end());
+		messages_.insert(std::make_pair(id, ++counter_));
 	}
-private:
-	MessageId counter;
-};
+	MessageId operator[](const MessageId& id) const {
+		return messages_.find(id) != messages_.end() ? messages_.find(id)->second : MessageId::null();
+	}
 
-}
+private:
+	std::map<MessageId, MessageId> messages_;
+	MessageId counter_;
+};
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_MAP_IO_MAP_MESSAGE_SAVER_H

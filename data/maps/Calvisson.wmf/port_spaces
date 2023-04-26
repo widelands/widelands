@@ -1,7 +1,8 @@
-# Automatically created by Widelands bzr6742[trunk] (RelWithDebInfo)
+# Automatically created by Widelands bzr7905[trunk] (Debug)
 
 [global]
 packet_version="1"
+waterway_max_length="5"
 number_of_port_spaces="45"
 
 [port_spaces]

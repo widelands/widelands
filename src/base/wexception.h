@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003, 2009, 2016 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,50 +12,46 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_BASE_WEXCEPTION_H
 #define WL_BASE_WEXCEPTION_H
 
-#include <cstring>
 #include <exception>
 #include <string>
-
-#include <stdint.h>
 
 #include "base/macros.h"
 
 #ifndef PRINTF_FORMAT
 #ifdef __GNUC__
-#define PRINTF_FORMAT(b, c) __attribute__ ((__format__ (__printf__, b, c)))
+#define PRINTF_FORMAT(b, c) __attribute__((__format__(__printf__, b, c)))
 #else
 #define PRINTF_FORMAT(b, c)
 #endif
 #endif
 
-/** class wexception
+/** Stupid, simple exception class.
  *
- * Stupid, simple exception class. It has the nice bonus that you can give it
- * sprintf()-style format strings
+ * It has the nice bonus that you can give it sprintf()-style format strings.
  */
-struct WException : public std::exception {
-	explicit WException
-		(char const * const file, uint32_t const line, char const * const fmt, ...)
-	 PRINTF_FORMAT(4, 5);
+class WException : public std::exception {
+public:
+	explicit WException(char const* file, uint32_t line, char const* fmt, ...) PRINTF_FORMAT(4, 5);
 
 	/**
-    * The target of the returned pointer remains valid during the lifetime of
+	 * The target of the returned pointer remains valid during the lifetime of
 	 * the WException object.
 	 */
-	const char * what() const noexcept override;
+	[[nodiscard]] const char* what() const noexcept override;
 
 protected:
-	WException() {}
+	WException() = default;
 	std::string what_;
 };
+
+extern bool g_fail_on_lua_error;
 
 #define wexception(...) WException(__FILE__, __LINE__, __VA_ARGS__)
 

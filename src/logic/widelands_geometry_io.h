@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -28,36 +27,36 @@ namespace Widelands {
 
 struct DirectionIsNull : public FileRead::DataError {
 	DirectionIsNull()
-		: DataError("direction is 0 but must be one of {1 (northeast), 2 (east), 3 "
-	                 "(southeast), 4 (southwest), 5 (west), 6 (northwest)}") {
+	   : DataError("direction is 0 but must be one of {1 (northeast), 2 (east), 3 "
+	               "(southeast), 4 (southwest), 5 (west), 6 (northwest)}") {
 	}
 };
 
 struct DirectionInvalid : public FileRead::DataError {
-	DirectionInvalid(Direction const D)
-		: DataError("direction is %u but must be one of {0 (idle), 1 (northeast), 2 "
-	                 "(east), 3 (southeast), 4 (southwest), 5 (west), 6 (northwest)}",
-	                 D),
+	explicit DirectionInvalid(Direction const D)
+	   : DataError("direction is %u but must be one of {0 (idle), 1 (northeast), 2 "
+	               "(east), 3 (southeast), 4 (southwest), 5 (west), 6 (northwest)}",
+	               D),
 	     direction(D) {
 	}
 	Direction direction;
 };
 struct ExceededMaxIndex : public FileRead::DataError {
 	ExceededMaxIndex(MapIndex const Max, MapIndex const I)
-		: DataError("index is %u but max index is only %u", I, Max), max(Max), i(I) {
+	   : DataError("index is %u but max index is only %u", I, Max), max(Max), i(I) {
 	}
 	MapIndex const max, i;
 };
 struct ExceededWidth : public FileRead::DataError {
 	ExceededWidth(uint16_t const W, const uint16_t X)
-		: DataError("x coordinate is %i but width is only %u", X, W), w(W), x(X) {
+	   : DataError("x coordinate is %i but width is only %u", X, W), w(W), x(X) {
 	}
 	uint16_t const w;
 	uint16_t const x;
 };
 struct ExceededHeight : public FileRead::DataError {
 	ExceededHeight(uint16_t const H, const int16_t Y)
-		: DataError("y coordinate is %i but height is only %u", Y, H), h(H), y(Y) {
+	   : DataError("y coordinate is %i but height is only %u", Y, H), h(H), y(Y) {
 	}
 	uint16_t h;
 	int16_t y;
@@ -76,8 +75,6 @@ Direction read_direction_8(StreamRead* fr);
 /// \throws direction_invalid if direction is > 6.
 Direction read_direction_8_allow_null(StreamRead* fr);
 
-MapIndex read_map_index_32(StreamRead* fr, MapIndex max);
-
 /// Read a Coords from the file. Use this when the result can only be a
 /// coordinate pair referring to a node.
 ///
@@ -94,8 +91,6 @@ Coords read_coords_32(StreamRead* stream_read, const Extent& extent);
 /// invalidity, as defined by Coords::null.
 Coords read_coords_32_allow_null(StreamRead* fr, const Extent& extent);
 
-Area<Coords, uint16_t> read_area_48(StreamRead* fr, const Extent& extent);
-
 // Writes 'd' to 'wr'.
 void write_direction_8(StreamWrite* wr, Direction d);
 
@@ -104,9 +99,6 @@ void write_direction_8_allow_null(StreamWrite* wr, Direction d);
 
 // Writes 'c' to 'wr'.
 void write_coords_32(StreamWrite* wr, const Coords& c);
-
-// Writes 'area' to 'wr'.
-void write_area_48(StreamWrite* wr, Area<Coords, uint16_t> const area);
 
 }  // namespace Widelands
 

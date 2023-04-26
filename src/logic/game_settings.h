@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,68 +21,108 @@
 
 #include <memory>
 #include <string>
-#include <vector>
 
+#include "graphic/color.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/addons.h"
+#include "logic/filesystem_constants.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
+#include "logic/player_end_result.h"
 #include "logic/widelands.h"
+#include "notifications/note_ids.h"
+#include "notifications/notifications.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
-namespace Widelands {
-enum class PlayerEndResult : uint8_t;
-}
+// PlayerSlot 0 will give us Widelands::PlayerNumber 1 etc., so we rename it to avoid confusion.
+// TODO(GunChleoc): Rename all uint8_t to PlayerSlot or Widelands::PlayerNumber
+using PlayerSlot = Widelands::PlayerNumber;
 
 struct PlayerSettings {
-	enum State {
-		stateOpen,
-		stateHuman,
-		stateComputer,
-		stateClosed,
-		stateShared
-	};
+	enum class State { kOpen, kHuman, kComputer, kClosed, kShared };
+
+	/// Returns whether the given state allows sharing a slot at all
+	static bool can_be_shared(PlayerSettings::State state) {
+		return state != PlayerSettings::State::kClosed && state != PlayerSettings::State::kShared;
+	}
 
 	State state;
-	uint8_t     initialization_index;
+	uint8_t initialization_index;
 	std::string name;
 	std::string tribe;
 	bool random_tribe;
 	std::string ai; /**< Preferred AI provider for this player */
 	bool random_ai;
+	RGBColor color;
 	Widelands::TeamNumber team;
-	bool closeable; // only used in multiplayer scenario maps
-	uint8_t shared_in; // the number of the player that uses this player's starting position
+	bool closeable;     // only used in multiplayer scenario maps
+	uint8_t shared_in;  // the number of the player that uses this player's starting position
 };
 
 struct UserSettings {
-	static uint8_t none() {return std::numeric_limits<uint8_t>::max();}
-	static uint8_t not_connected() {return none() - 1;}
-	static uint8_t highest_playernum() {return not_connected() - 1;}
+	// Seems to be used if a user is a spectator but not a player
+	constexpr static uint8_t none() {
+		return std::numeric_limits<uint8_t>::max();
+	}
+	// Seems to be used only in the GameHost when a client connects over the
+	// (low level) network but has not finished its initialization yet
+	constexpr static uint8_t not_connected() {
+		return none() - 1;
+	}
+	constexpr static uint8_t highest_playernum() {
+		return not_connected() - 1;
+	}
 
-	uint8_t     position;
+	UserSettings(Widelands::PlayerEndResult init_result, bool init_ready)
+	   : result(init_result), ready(init_ready) {
+	}
+	UserSettings() : UserSettings(Widelands::PlayerEndResult::kUndefined, false) {
+	}
+
+	uint8_t position = 0;
 	std::string name;
-	Widelands::PlayerEndResult     result;
+	Widelands::PlayerEndResult result;
 	std::string win_condition_string;
-	bool        ready; // until now only used as a check for whether user is currently receiving a file or not
+	bool ready;  // until now only used as a check for whether user is currently receiving a file or
+	             // not
 };
 
-/**
- * Holds all settings about a game that can be configured before the
- * game actually starts.
- *
- * Think of it as the Model in MVC.
- */
+/// The gamehost/gameclient are sending those to notify about status changes, which are then picked
+/// up by the UI.
+struct NoteGameSettings {
+	CAN_BE_SENT_AS_NOTE(NoteId::GameSettings)
+
+	enum class Action {
+		kUser,    // A client has picked a different player slot / become a spectator
+		kPlayer,  // A player slot has changed its status (type, tribe etc.)
+		kMap      // A new map/savegame was selected
+	};
+
+	Action action;
+	PlayerSlot position;
+	uint8_t usernum;
+
+	explicit NoteGameSettings(Action init_action,
+	                          PlayerSlot init_position = std::numeric_limits<uint8_t>::max(),
+	                          uint8_t init_usernum = UserSettings::none())
+	   : action(init_action), position(init_position), usernum(init_usernum) {
+	}
+};
+
+/** Holds all settings about a game that can be configured before the game actually starts. */
 struct GameSettings {
-	GameSettings() :
-		playernum(0),
-		usernum(0),
-		scenario(false),
-		multiplayer(false),
-		savegame(false)
-	{
+	enum Flags : uint16_t {
+		kDefaultSettings = 0,               ///< No special options; the default.
+		kPeaceful = 1 << 0,                 ///< No fighting between players.
+		kCustomStartingPositions = 1 << 1,  ///< Players may choose their own starting positions.
+		kFogless = 1 << 2,                  ///< The entire map is always visible.
+		kForbidDiplomacy = 1 << 3,          ///< Players may not change their alliances.
+	};
+
+	GameSettings() {
 		std::unique_ptr<LuaInterface> lua(new LuaInterface);
 		std::unique_ptr<LuaTable> win_conditions(
-					lua->run_script("scripting/win_conditions/init.lua"));
+		   lua->run_script("scripting/win_conditions/init.lua"));
 		for (const int key : win_conditions->keys<int>()) {
 			std::string filename = win_conditions->get_string(key);
 			if (g_fs->file_exists(filename)) {
@@ -92,12 +131,38 @@ struct GameSettings {
 				throw wexception("Win condition file \"%s\" does not exist", filename.c_str());
 			}
 		}
+		for (const auto& pair : AddOns::g_addons) {
+			if (pair.first->category == AddOns::AddOnCategory::kWinCondition && pair.second) {
+				const std::string filename = kAddOnDir + LayeredFileSystem::file_separator() +
+				                             pair.first->internal_name +
+				                             LayeredFileSystem::file_separator() + "init.lua";
+				if (g_fs->file_exists(filename)) {
+					win_condition_scripts.push_back(filename);
+				} else {
+					throw wexception(
+					   "Add-on win condition file \"%s\" does not exist", filename.c_str());
+				}
+			}
+		}
 	}
 
-	/// Number of player position
-	int16_t playernum;
+	/// Returns the basic preload info for a tribe.
+	[[nodiscard]] Widelands::TribeBasicInfo get_tribeinfo(const std::string& tribename) const;
+
+	/// Find a player number that the slot could share in. Does not guarantee that a viable slot was
+	/// actually found.
+	[[nodiscard]] Widelands::PlayerNumber find_shared(PlayerSlot slot) const;
+	/// Check if the player number returned by find_shared is usable
+	[[nodiscard]] bool is_shared_usable(PlayerSlot slot, Widelands::PlayerNumber shared) const;
+	/// Savegame slots and certain scenario slots can't be closed
+	[[nodiscard]] bool uncloseable(PlayerSlot slot) const;
+	/// AIs cannot be changed in scenarios
+	[[nodiscard]] bool allows_ais(PlayerSlot slot) const;
+
+	/// Number of player position of the host player
+	int16_t playernum{0};
 	/// Number of users entry
-	int8_t usernum;
+	int8_t usernum{0};
 
 	/// Name of the selected map
 	std::string mapname;
@@ -107,18 +172,26 @@ struct GameSettings {
 	std::string win_condition_script;
 	/// An ordered list of all win condition script files.
 	std::vector<std::string> win_condition_scripts;
+	/// User-configured win condition time limit, in minutes.
+	int32_t win_condition_duration{Widelands::kDefaultWinConditionDuration};
 
 	/// Is map a scenario
-	bool scenario;
+	bool scenario{false};
 
 	/// Is this a multiplayer game
-	bool multiplayer;
+	bool multiplayer{false};
 
 	/// Is a savegame selected for loading?
-	bool savegame;
+	bool savegame{false};
+
+	/// Additional flags to control game behaviour.
+	uint16_t flags{Flags::kDefaultSettings};
+
+	std::string map_theme;
+	std::string map_background;
 
 	/// List of tribes that players are allowed to choose
-	std::vector<TribeBasicInfo> tribes;
+	std::vector<Widelands::TribeBasicInfo> tribes;
 
 	/// Player configuration, with 0-based indices for players
 	std::vector<PlayerSettings> players;
@@ -126,7 +199,6 @@ struct GameSettings {
 	/// Users connected to the game (0-based indices) - only used in multiplayer
 	std::vector<UserSettings> users;
 };
-
 
 /**
  * UI classes are given a GameSettingsProvider instead of direct
@@ -137,47 +209,59 @@ struct GameSettings {
  * Think of it as a mix of Model and Controller in MVC.
  */
 struct GameSettingsProvider {
-	virtual ~GameSettingsProvider() {}
+	virtual ~GameSettingsProvider() = default;
 
-	virtual const GameSettings & settings() = 0;
+	virtual const GameSettings& settings() = 0;
 
 	virtual void set_scenario(bool set) = 0;
 	virtual bool can_change_map() = 0;
 	virtual bool can_change_player_state(uint8_t number) = 0;
 	virtual bool can_change_player_tribe(uint8_t number) = 0;
-	virtual bool can_change_player_init (uint8_t number) = 0;
-	virtual bool can_change_player_team (uint8_t number) = 0;
+	virtual bool can_change_player_init(uint8_t number) = 0;
+	virtual bool can_change_player_team(uint8_t number) = 0;
+	virtual bool can_change_player_color(uint8_t number);
 
 	virtual bool can_launch() = 0;
 
-	virtual void set_map
-		(const std::string & mapname,
-		 const std::string & mapfilename,
-		 uint32_t maxplayers,
-		 bool savegame = false)
-		= 0;
-	virtual void set_player_state   (uint8_t number, PlayerSettings::State) = 0;
-	virtual void set_player_ai      (uint8_t number, const std::string &, bool const random_ai = false) = 0;
-	virtual void next_player_state  (uint8_t number) = 0;
-	virtual void set_player_tribe   (uint8_t number, const std::string &, bool const random_tribe = false) = 0;
-	virtual void set_player_init    (uint8_t number, uint8_t index) = 0;
-	virtual void set_player_name    (uint8_t number, const std::string &) = 0;
-	virtual void set_player         (uint8_t number, PlayerSettings) = 0;
-	virtual void set_player_number  (uint8_t number) = 0;
-	virtual void set_player_team    (uint8_t number, Widelands::TeamNumber team) = 0;
+	virtual void set_map(const std::string& mapname,
+	                     const std::string& mapfilename,
+	                     const std::string& map_theme,
+	                     const std::string& map_bg,
+	                     uint32_t maxplayers,
+	                     bool savegame = false) = 0;
+	virtual void set_player_state(uint8_t number, PlayerSettings::State) = 0;
+	virtual void set_player_ai(uint8_t number, const std::string&, bool random_ai = false) = 0;
+	// Multiplayer no longer toggles per button
+	virtual void next_player_state(uint8_t /* number */) {
+	}
+	virtual void set_player_tribe(uint8_t number, const std::string&, bool random_tribe = false) = 0;
+	virtual void set_player_init(uint8_t number, uint8_t index) = 0;
+	virtual void set_player_name(uint8_t number, const std::string&) = 0;
+	virtual void set_player(uint8_t number, const PlayerSettings&) = 0;
+	virtual void set_player_number(uint8_t number) = 0;
+	virtual void set_player_team(uint8_t number, Widelands::TeamNumber team) = 0;
+	virtual void set_player_color(uint8_t number, const RGBColor&) = 0;
 	virtual void set_player_closeable(uint8_t number, bool closeable) = 0;
-	virtual void set_player_shared  (uint8_t number, uint8_t shared) = 0;
-	virtual void set_win_condition_script(std::string wc) = 0;
-	virtual void next_win_condition      () = 0;
+	virtual void set_player_shared(PlayerSlot number, Widelands::PlayerNumber shared) = 0;
+	virtual void set_win_condition_script(const std::string& wc) = 0;
 	virtual std::string get_win_condition_script() = 0;
+	virtual void set_win_condition_duration(int32_t duration) = 0;
+	virtual int32_t get_win_condition_duration() = 0;
 
-	struct NoTribe {};
-	const std::string & get_players_tribe() {
-		if (UserSettings::highest_playernum() < settings().playernum)
+	virtual void set_flag(GameSettings::Flags flag, bool state) = 0;
+	virtual bool get_flag(GameSettings::Flags flag) = 0;
+
+	bool has_players_tribe() {
+		return UserSettings::highest_playernum() >= settings().playernum;
+	}
+	// For retrieving tips texts
+	struct NoTribe : public std::exception {};
+	const std::string& get_players_tribe() {
+		if (!has_players_tribe()) {
 			throw NoTribe();
+		}
 		return settings().players[settings().playernum].tribe;
 	}
 };
-
 
 #endif  // end of include guard: WL_LOGIC_GAME_SETTINGS_H

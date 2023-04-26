@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 by the Widelands Development Team
+ * Copyright (C) 2009-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,24 +12,20 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "logic/game_data_error.h"
 
 #include <cstdarg>
-#include <cstdio>
-
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/string.h"
 
 namespace Widelands {
 
-GameDataError::GameDataError(char const * const fmt, ...)
-{
+GameDataError::GameDataError(char const* const fmt, ...) {
 	char buffer[512];
 	{
 		va_list va;
@@ -40,17 +36,20 @@ GameDataError::GameDataError(char const * const fmt, ...)
 	what_ = buffer;
 }
 
-
-UnhandledVersionError::UnhandledVersionError(const char* packet_name, int32_t packet_version,
-											int32_t current_packet_version)
-{
-	what_ = (boost::format
-				 ("\n\nUnhandledVersionError: %s\n\nPacket Name: %s\nSaved Version: %i\nCurrent Version: %i")
-				 % _("This game was saved using an older version of Widelands and cannot be loaded anymore, "
-					  "or it's a new version that can't be handled yet.")
-				 % packet_name
-				 % static_cast<int>(packet_version)
-				 % static_cast<int>(current_packet_version)).str();
+bool UnhandledVersionError::is_unhandled_version_error(const std::string& err) {
+	/* Check that the given error message looks mostly like the standard message
+	 * of an UnhandledVersionError as created below. */
+	return contains(err, "UnhandledVersionError");
 }
 
+UnhandledVersionError::UnhandledVersionError(const char* packet_name,
+                                             int32_t packet_version,
+                                             int32_t current_packet_version) {
+	what_ = format(
+	   "\n\nUnhandledVersionError: %s\n\nPacket Name: %s\nSaved Version: %i\nCurrent "
+	   "Version: %i",
+	   _("This game was saved using an older version of Widelands and cannot be loaded anymore, "
+	     "or it’s a new version that can’t be handled yet."),
+	   packet_name, static_cast<int>(packet_version), static_cast<int>(current_packet_version));
 }
+}  // namespace Widelands

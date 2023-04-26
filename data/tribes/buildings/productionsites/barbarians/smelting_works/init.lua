@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
+wl.Descriptions():new_productionsite_type {
    name = "barbarians_smelting_works",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Smelting Works"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -14,7 +14,7 @@ tribes:new_productionsite_type {
       blackwood = 1,
       granite = 1,
       grout = 1,
-      thatch_reed = 2
+      reed = 2
    },
    return_on_dismantle = {
       log = 1,
@@ -22,19 +22,20 @@ tribes:new_productionsite_type {
       granite = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 44, 58 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
          hotspot = { 44, 58 },
       },
    },
 
    aihints = {
-      prohibited_till = 400,
+      prohibited_till = 700,
+      basic_amount = 1,
       very_weak_ai_limit = 1,
       weak_ai_limit = 2
    },
@@ -44,47 +45,62 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      iron_ore = 8,
-      gold_ore = 8,
-      coal = 8
-   },
-   outputs = {
-      "iron",
-      "gold"
+      { name = "coal", amount = 8 },
+      { name = "iron_ore", amount = 8 },
+      { name = "gold_ore", amount = 8 }
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=smelt_iron",
             "call=smelt_gold",
-            "call=smelt_iron",
-            "return=skipped"
+            "call=smelt_iron_2",
          }
       },
+      -- 2 identical programs for iron to prevent unnecessary skipping penalty
       smelt_iron = {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
-         descname = _"smelting iron",
+         descname = _("smelting iron"),
          actions = {
             "return=skipped unless economy needs iron",
-            "sleep=32000",
             "consume=coal iron_ore",
-            "animate=working 35000",
+            "sleep=duration:29s",
+            "playsound=sound/metal/furnace priority:50% allow_multiple",
+            "animate=working duration:35s",
+            "playsound=sound/metal/ironping priority:60%",
+            "produce=iron"
+         }
+      },
+      smelt_iron_2 = {
+         -- TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
+         descname = _("smelting iron"),
+         actions = {
+            "return=skipped unless economy needs iron",
+            "consume=coal iron_ore",
+            "sleep=duration:29s",
+            "playsound=sound/metal/furnace priority:50% allow_multiple",
+            "animate=working duration:35s",
+            "playsound=sound/metal/ironping priority:60%",
             "produce=iron"
          }
       },
       smelt_gold = {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
-         descname = _"smelting gold",
+         descname = _("smelting gold"),
          actions = {
             "return=skipped unless economy needs gold",
-            "sleep=32000",
             "consume=coal gold_ore",
-            "animate=working 35000",
+            "sleep=duration:29s",
+            "playsound=sound/metal/furnace priority:50% allow_multiple",
+            "animate=working duration:35s",
+            "playsound=sound/metal/goldping priority:60%",
             "produce=gold"
          }
       },
    },
 }
+
+pop_textdomain()

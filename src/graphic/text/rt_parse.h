@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -23,15 +22,11 @@
 #include <map>
 #include <memory>
 #include <set>
-#include <string>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
 
-#include <stdint.h>
-
 #include "graphic/color.h"
-#include "graphic/text/rt_errors.h"
 
 namespace RT {
 
@@ -42,11 +37,11 @@ class Attr {
 public:
 	Attr(const std::string& gname, const std::string& value);
 
-	const std::string& name() const;
-	long get_int() const;
-	bool get_bool() const;
-	std::string get_string() const;
-	RGBColor get_color() const;
+	[[nodiscard]] const std::string& name() const;
+	[[nodiscard]] int64_t get_int(int64_t max_value) const;
+	[[nodiscard]] bool get_bool() const;
+	[[nodiscard]] std::string get_string() const;
+	[[nodiscard]] RGBColor get_color() const;
 
 private:
 	const std::string name_, value_;
@@ -59,10 +54,10 @@ public:
 	void add_attribute(const std::string& name, Attr* a);
 
 	// Returns the attribute with 'name' or throws an error if it is not found.
-	const Attr& operator[](const std::string& name) const;
+	const Attr& operator[](const std::string& s) const;
 
 	// Returns true if 'name' is a known attribute.
-	bool has(const std::string& name) const;
+	[[nodiscard]] bool has(const std::string& s) const;
 
 private:
 	std::map<std::string, std::unique_ptr<Attr>> attrs_;
@@ -83,16 +78,16 @@ public:
 
 	~Tag();
 
-	const std::string & name() const;
-	const AttrMap & attrs() const;
-	const ChildList & children() const;
+	[[nodiscard]] const std::string& name() const;
+	[[nodiscard]] const AttrMap& attrs() const;
+	[[nodiscard]] const ChildList& children() const;
 	void parse(TextStream& ts, TagConstraints& tcs, const TagSet&);
 
 private:
-	void parse_opening_tag(TextStream & ts, TagConstraints & tcs);
-	void parse_closing_tag(TextStream & ts);
-	void parse_attribute(TextStream & ts, std::unordered_set<std::string> &);
-	void parse_content(TextStream & ts, TagConstraints & tc, const TagSet &);
+	void parse_opening_tag(TextStream& ts, TagConstraints& tcs);
+	void parse_closing_tag(TextStream& ts);
+	void parse_attribute(TextStream& ts, std::unordered_set<std::string>&);
+	void parse_content(TextStream& ts, TagConstraints& tc, const TagSet&);
 
 	std::string name_;
 	AttrMap attribute_map_;
@@ -100,24 +95,23 @@ private:
 };
 
 struct Child {
-	Child() : tag(nullptr), text() {
+	Child() = default;
+	explicit Child(Tag* t) : tag(t) {
 	}
-	Child(Tag* t) : tag(t) {
-	}
-	Child(std::string t) : tag(nullptr), text(t) {
+	explicit Child(const std::string& t) : tag(nullptr), text(t) {
 	}
 	~Child() {
-		if (tag)
-			delete tag;
+
+		delete tag;
 	}
-	Tag* tag;
+	Tag* tag{nullptr};
 	std::string text;
 };
 
 class Parser {
 public:
 	Parser();
-	~Parser();
+	~Parser() = default;
 	Tag* parse(std::string text, const TagSet&);
 	std::string remaining_text();
 
@@ -125,6 +119,6 @@ private:
 	TagConstraints tag_constraints_;
 	std::unique_ptr<TextStream> text_stream_;
 };
-}
+}  // namespace RT
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_RT_PARSE_H

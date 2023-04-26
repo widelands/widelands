@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,15 +12,12 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_GRAPHIC_GL_FILL_RECT_PROGRAM_H
 #define WL_GRAPHIC_GL_FILL_RECT_PROGRAM_H
-
-#include <vector>
 
 #include "base/rect.h"
 #include "graphic/blend_mode.h"
@@ -30,7 +27,7 @@
 class FillRectProgram {
 public:
 	struct Arguments {
-		FloatRect destination_rect;
+		Rectf destination_rect;
 		float z_value;
 		RGBAColor color;
 		BlendMode blend_mode;
@@ -41,11 +38,8 @@ public:
 
 	// Fills a solid rect in 'color'. If blend_mode is BlendMode::UseAlpha, this
 	// will brighten the rect, if it is BlendMode::Subtract it darkens it.
-	void draw(const FloatRect& destination_rect,
-	          float z_value,
-	          const RGBAColor& color,
-	          BlendMode blend_mode);
-
+	void
+	draw(const Rectf& destination_rect, float z_value, const RGBAColor& color, BlendMode blend_mode);
 
 	void draw(const std::vector<Arguments>& arguments);
 
@@ -90,6 +84,5 @@ private:
 
 	DISALLOW_COPY_AND_ASSIGN(FillRectProgram);
 };
-
 
 #endif  // end of include guard: WL_GRAPHIC_GL_FILL_RECT_PROGRAM_H

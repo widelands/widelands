@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2007-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,61 +12,54 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "map_io/map_object_packet.h"
 
 #include "base/wexception.h"
-#include "economy/fleet.h"
+#include "economy/ferry_fleet.h"
 #include "economy/portdock.h"
+#include "economy/ship_fleet.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/map_objects/immovable.h"
+#include "logic/map_objects/pinned_note.h"
 #include "logic/map_objects/tribes/battle.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/map_objects/world/critter.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
+#include "map_io/map_packet_versions.h"
 
 namespace Widelands {
 
-constexpr uint8_t kCurrentPacketVersion = 2;
-
 MapObjectPacket::~MapObjectPacket() {
-	while (loaders.size()) {
+	while (!loaders.empty()) {
 		delete *loaders.begin();
 		loaders.erase(loaders.begin());
 	}
 }
 
-
-void MapObjectPacket::read
-	(FileSystem & fs, EditorGameBase & egbase, MapObjectLoader & mol,
-	 const WorldLegacyLookupTable& world_lookup_table,
-	 const TribesLegacyLookupTable& tribe_lookup_table)
-{
+void MapObjectPacket::read(FileSystem& fs, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		FileRead fr;
 		fr.open(fs, "binary/mapobjects");
 
+		// Packet version is checked by individual loaders as necessary
 		const uint8_t packet_version = fr.unsigned_8();
 
-		// Some maps contain ware/worker info, so we need compatibility here.
-		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
-
 		// Initial loading stage
-		for (;;)
+		for (;;) {
 			switch (uint8_t const header = fr.unsigned_8()) {
 			case 0:
 				return;
 			case MapObject::HeaderImmovable:
-				loaders.insert(Immovable::load(egbase, mol, fr, world_lookup_table, tribe_lookup_table));
+				loaders.insert(Immovable::load(egbase, mol, fr));
 				break;
 
 			case MapObject::HeaderBattle:
@@ -74,17 +67,22 @@ void MapObjectPacket::read
 				break;
 
 			case MapObject::HeaderCritter:
-				loaders.insert(Critter::load(egbase, mol, fr, world_lookup_table));
+				loaders.insert(Critter::load(egbase, mol, fr));
+				break;
+
+			case MapObject::HeaderPinnedNote:
+				loaders.insert(PinnedNote::load(egbase, mol, fr));
 				break;
 
 			case MapObject::HeaderWorker:
-				// We can't use the worker's savegame version, because some stuff is loaded before that
+				// We can't use the worker's savegame version, because some stuff is loaded before
+				// that
 				// packet version, and we removed the tribe name.
-				loaders.insert(Worker::load(egbase, mol, fr, tribe_lookup_table, packet_version));
+				loaders.insert(Worker::load(egbase, mol, fr, packet_version));
 				break;
 
 			case MapObject::HeaderWareInstance:
-				loaders.insert(WareInstance::load(egbase, mol, fr, tribe_lookup_table));
+				loaders.insert(WareInstance::load(egbase, mol, fr));
 				break;
 
 			case MapObject::HeaderShip:
@@ -95,31 +93,31 @@ void MapObjectPacket::read
 				loaders.insert(PortDock::load(egbase, mol, fr));
 				break;
 
-			case MapObject::HeaderFleet:
-				loaders.insert(Fleet::load(egbase, mol, fr));
+			case MapObject::HeaderShipFleet:
+				loaders.insert(ShipFleet::load(egbase, mol, fr));
+				break;
+
+			case MapObject::HeaderFerryFleet:
+				loaders.insert(FerryFleet::load(egbase, mol, fr));
 				break;
 
 			default:
 				throw GameDataError("unknown object header %u", header);
 			}
-		} else {
-			throw UnhandledVersionError("MapObjectPacket", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const std::exception & e) {
+	} catch (const std::exception& e) {
 		throw GameDataError("map objects: %s", e.what());
 	}
 }
-
 
 void MapObjectPacket::load_finish() {
 	// load_pointer stage
 	for (MapObject::Loader* temp_loader : loaders) {
 		try {
 			temp_loader->load_pointers();
-		} catch (const std::exception & e) {
+		} catch (const std::exception& e) {
 			throw wexception("load_pointers for %s: %s",
-				to_string(temp_loader->get_object()->descr().type()).c_str(),
-				e.what());
+			                 to_string(temp_loader->get_object()->descr().type()).c_str(), e.what());
 		}
 	}
 
@@ -127,43 +125,35 @@ void MapObjectPacket::load_finish() {
 	for (MapObject::Loader* temp_loader : loaders) {
 		try {
 			temp_loader->load_finish();
-		} catch (const std::exception & e) {
+		} catch (const std::exception& e) {
 			throw wexception("load_finish for %s: %s",
-			                 to_string(temp_loader->get_object()->descr().type()).c_str(),
-			                 e.what());
+			                 to_string(temp_loader->get_object()->descr().type()).c_str(), e.what());
 		}
 		temp_loader->mol().mark_object_as_loaded(*temp_loader->get_object());
 	}
 }
 
-
-void MapObjectPacket::write
-	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver & mos)
-{
+void MapObjectPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver& mos) {
 	FileWrite fw;
 
-	fw.unsigned_8(kCurrentPacketVersion);
+	fw.unsigned_8(kCurrentPacketVersionMapObject);
 
-	std::vector<Serial> obj_serials = egbase.objects().all_object_serials_ordered();
-	for
-		(std::vector<Serial>::iterator cit = obj_serials.begin();
-		 cit != obj_serials.end();
-		 ++cit)
-	{
-		MapObject * pobj = egbase.objects().get_object(*cit);
+	for (const Serial ser : egbase.objects().all_object_serials_ordered()) {
+		MapObject* pobj = egbase.objects().get_object(ser);
 		assert(pobj);
-		MapObject & obj = *pobj;
+		MapObject& obj = *pobj;
 
 		// These checks can be eliminated and the object saver simplified
 		// once all MapObjects are saved using the new system
-		if (mos.is_object_known(obj))
+		if (mos.is_object_known(obj)) {
 			continue;
+		}
 
-		if (!obj.has_new_save_support())
-			throw GameDataError
-				("MO(%u of type %s) without new style save support not saved "
-				 "explicitly",
-				 obj.serial(), obj.descr().descname().c_str());
+		if (!obj.has_new_save_support()) {
+			throw GameDataError("MO(%u of type %s) without new style save support not saved "
+			                    "explicitly",
+			                    obj.serial(), obj.descr().name().c_str());
+		}
 
 		mos.register_object(obj);
 		obj.save(egbase, mos, fw);
@@ -174,5 +164,4 @@ void MapObjectPacket::write
 
 	fw.write(fs, "binary/mapobjects");
 }
-
-}
+}  // namespace Widelands

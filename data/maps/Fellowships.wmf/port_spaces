@@ -1,7 +1,8 @@
-# Automatically created by Widelands bzr6712[widelands] (Debug)
+# Automatically created by Widelands r24502[97cef98@master] (Release)
 
 [global]
 packet_version="1"
+waterway_max_length="6"
 number_of_port_spaces="9"
 
 [port_spaces]

@@ -1,0 +1,13 @@
+# Automatically created by Widelands build-19 (Release)
+
+[global]
+packet_version="1"
+map_w="96"
+map_h="96"
+nr_players="3"
+name=_"Escher_Goose_Fish"
+author="Marwin"
+descr=_"Equal starting conditions for three players."
+hint=_"v0.2"
+tags="1v1,ffa,official"
+theme="summer"

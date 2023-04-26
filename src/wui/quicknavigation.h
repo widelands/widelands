@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2016 by the Widelands Development Team
+ * Copyright (C) 2010-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,80 +12,108 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_WUI_QUICKNAVIGATION_H
 #define WL_WUI_QUICKNAVIGATION_H
 
-#include <vector>
+#include <memory>
 
-#include <SDL_keyboard.h>
-#include <boost/function.hpp>
-#include <stdint.h>
+#include "ui_basic/box.h"
+#include "ui_basic/button.h"
+#include "ui_basic/unique_window.h"
+#include "wui/mapview.h"
 
-#include "base/point.h"
+class InteractiveBase;
 
-namespace Widelands {
-class EditorGameBase;
-}
+constexpr uint16_t kQuicknavSlots = 9;
 
-/**
- * Provide quick navigation shortcuts.
- *
- * \note This functionality is really only used by \ref InteractiveBase,
- * but it is moved in its own structure to avoid overloading that class.
- */
+struct NoteQuicknavChangedEvent {
+	CAN_BE_SENT_AS_NOTE(NoteId::QuicknavChangedEvent)
+};
+
+/** Provide quick navigation shortcuts and landmarks. */
 struct QuickNavigation {
-	using SetViewFn = boost::function<void (Point)>;
+	struct Landmark {
+		MapView::View view;
+		bool set{false};
+		std::string name;
 
-	QuickNavigation(const Widelands::EditorGameBase & egbase, uint32_t screenwidth, uint32_t screenheight);
+		Landmark() = default;
+	};
 
-	void set_setview(const SetViewFn & fn);
+	explicit QuickNavigation(MapView* map_view);
 
-	void view_changed(Point point, bool jump);
+	// Set the landmark for 'index' to 'view'. A landmark with the given index must already exist.
+	void set_landmark(size_t index, const MapView::View& view);
+	inline void set_landmark_to_current(size_t index) {
+		set_landmark(index, current_);
+	}
+	void unset_landmark(size_t index);
+	void add_landmark();
+	void remove_landmark(size_t index);
+
+	/** Returns the vector of all landmarks. */
+	[[nodiscard]] const std::vector<Landmark>& landmarks() const {
+		return landmarks_;
+	}
+	std::vector<Landmark>& landmarks() {
+		return landmarks_;
+	}
+
+	/** Go to the previous/next location or a landmark. */
+	void goto_prev();
+	void goto_next();
+	void goto_landmark(int index);
+	[[nodiscard]] bool can_goto_prev() const;
+	[[nodiscard]] bool can_goto_next() const;
 
 	bool handle_key(bool down, SDL_Keysym key);
 
 private:
-	void setview(Point where);
+	void view_changed();
+	void jumped();
 
-	const Widelands::EditorGameBase & egbase_;
-	uint32_t screenwidth_;
-	uint32_t screenheight_;
-
-	/**
-	 * This is the callback function that we call to request a change in view position.
-	 */
-	SetViewFn setview_;
+	MapView* map_view_;
 
 	bool havefirst_;
-	bool update_;
-	Point anchor_;
-	Point current_;
+	MapView::View current_;
 
-	/**
-	 * Keeps track of what the player has looked at to allow jumping back and forth
-	 * in the history.
-	 */
-	/*@{*/
-	std::vector<Point> history_;
-	std::vector<Point>::size_type history_index_;
-	/*@}*/
+	// Landmarks that were set explicitly by the player, mapped on the 1-9 keys.
+	std::vector<Landmark> landmarks_;
 
-	struct Landmark {
-		Point point;
-		bool set;
+	// navigation with ',' and '.'
+	std::list<MapView::View> previous_locations_;
+	std::list<MapView::View> next_locations_;
+	// Ignore the initial (0,0,1×) view
+	bool location_jumping_started_{false};
+	void insert_if_applicable(std::list<MapView::View>&);
+};
 
-		Landmark() : set(false) {}
-	};
+/** A window with all landmarks and quick navigation UI. */
+class QuickNavigationWindow : public UI::UniqueWindow {
+public:
+	QuickNavigationWindow(InteractiveBase& ibase, UI::UniqueWindow::Registry& r);
 
-	/**
-	 * Landmarks that were set explicitly by the player, mapped on the 0-9 keys.
-	 */
-	Landmark landmarks_[10];
+	void think() override;
+
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kQuicknav;
+	}
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	static UI::Window& load(FileRead&, InteractiveBase&);
+
+private:
+	void rebuild();
+
+	InteractiveBase& ibase_;
+	UI::Box main_box_, buttons_box_;
+	UI::Button prev_, next_, new_;
+	std::unique_ptr<UI::Box> content_box_;
+
+	std::unique_ptr<Notifications::Subscriber<NoteQuicknavChangedEvent>> subscriber_;
 };
 
 #endif  // end of include guard: WL_WUI_QUICKNAVIGATION_H

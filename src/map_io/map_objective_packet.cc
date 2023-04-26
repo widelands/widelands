@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,37 +20,32 @@
 
 #include <memory>
 
+#include "io/profile.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "logic/objective.h"
-#include "profile/profile.h"
 
 namespace Widelands {
 
 constexpr int32_t kCurrentPacketVersion = 2;
 
-void MapObjectivePacket::read
-	(FileSystem            &       fs,
-	 EditorGameBase      &       egbase,
-	 bool                    const skip,
-	 MapObjectLoader &)
-{
-	if (skip)
-		return;
-
+void read_objective_data(FileSystem& fs, EditorGameBase& egbase) {
 	Profile prof;
-	try {prof.read("objective", nullptr, fs);} catch (...) {return;}
 	try {
-		int32_t const packet_version =
-			prof.get_safe_section("global").get_safe_int("packet_version");
+		prof.read("objective", nullptr, fs);
+	} catch (...) {
+		return;
+	}
+	try {
+		int32_t const packet_version = prof.get_safe_section("global").get_safe_int("packet_version");
 		if (packet_version == kCurrentPacketVersion) {
-			while (Section * const s = prof.get_next_section(nullptr)) {
-				char const * const         name = s->get_name();
+			while (Section* const s = prof.get_next_section(nullptr)) {
+				char const* const name = s->get_name();
 				try {
 					std::unique_ptr<Objective> objective(new Objective(name));
-					Map::Objectives* objectives = egbase.map().mutable_objectives();
-					if (objectives->count(name)) {
+					Map::Objectives* objectives = egbase.mutable_map()->mutable_objectives();
+					if (objectives->count(name) != 0u) {
 						throw GameDataError("duplicated");
 					}
 					objective->set_descname(s->get_string("name", name));
@@ -59,25 +53,21 @@ void MapObjectivePacket::read
 					objective->set_visible(s->get_safe_bool("visible"));
 					objective->set_done(s->get_bool("done", false));
 					objectives->insert(std::make_pair(name, std::move(objective)));
-				} catch (const WException & e) {
+				} catch (const WException& e) {
 					throw GameDataError("%s: %s", name, e.what());
 				}
 			}
 		} else {
 			throw UnhandledVersionError("MapObjectivePacket", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const WException & e) {
+	} catch (const WException& e) {
 		throw GameDataError("Objectives: %s", e.what());
 	}
 }
 
-
-void MapObjectivePacket::write
-	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
-{
+void write_objective_data(FileSystem& fs, EditorGameBase& egbase) {
 	Profile prof;
-	prof.create_section("global").set_int
-		("packet_version", kCurrentPacketVersion);
+	prof.create_section("global").set_int("packet_version", kCurrentPacketVersion);
 
 	for (const auto& item : egbase.map().objectives()) {
 		Section& s = prof.create_section(item.second->name().c_str());
@@ -89,5 +79,4 @@ void MapObjectivePacket::write
 
 	prof.write("objective", false, fs);
 }
-
-}
+}  // namespace Widelands

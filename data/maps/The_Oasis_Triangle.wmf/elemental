@@ -1,4 +1,4 @@
-# Automatically created by Widelands bzr7574[artifacts] (Debug)
+# Automatically created by Widelands bzr7905[trunk] (Debug)
 
 [global]
 packet_version="1"
@@ -9,4 +9,5 @@ name=_"The Oasis Triangle"
 author="Nasenbaer"
 descr=_"There is something mystical like a gray atmosphere around these three oases, which no one has found out about yet. Perhaps you will be the one, but be aware of the others who are searching too!"
 hint=
-tags="artifacts,ffa,official"
+tags="artifacts,balanced,ffa,official"
+theme="desert"

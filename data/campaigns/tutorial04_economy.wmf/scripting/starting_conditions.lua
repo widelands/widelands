@@ -94,16 +94,16 @@ function init_player()
       {"empire_bakery",116,28},
       {"empire_bakery",115,32},
       {"empire_tavern",tavern_field.x,tavern_field.y}, -- (105,44), will be destroyed
-      {"empire_coalmine",118,45, wares = {beer = 6}},
-      {"empire_coalmine",119,39, wares = {beer = 6}},
-      {"empire_ironmine",107,59, wares = {beer = 6}},
-      {"empire_marblemine",98,38, wares = {wine = 6}},
-      {"empire_marblemine",102,38, wares = {wine = 6}},
-      {"empire_smelting_works",110,38, wares = {}},
-      {"empire_smelting_works",111,43, wares = {}},
-      {"empire_toolsmithy",104,64, wares = {log = 8}},
-      {"empire_weaponsmithy",113,40, wares = {planks = 8}},
-      {"empire_armorsmithy",112,37, wares = {cloth = 8}},
+      {"empire_coalmine",118,45, inputs = {beer = 6}},
+      {"empire_coalmine",119,39, inputs = {beer = 6}},
+      {"empire_ironmine",107,59, inputs = {beer = 6}},
+      {"empire_marblemine",98,38, inputs = {wine = 6}},
+      {"empire_marblemine",102,38, inputs = {wine = 6}},
+      {"empire_smelting_works",110,38, inputs = {}},
+      {"empire_smelting_works",111,43, inputs = {}},
+      {"empire_toolsmithy",104,64, inputs = {log = 8}},
+      {"empire_weaponsmithy",113,40, inputs = {planks = 8}},
+      {"empire_armorsmithy",112,37, inputs = {cloth = 8}},
       {"empire_farm",105,70},
       {"empire_farm",101,71},
       {"empire_farm",99,77},
@@ -138,35 +138,47 @@ function init_player()
       {"empire_fortress",71,66},
       {"empire_fortress",75,72}
    )
-   plr:place_building("empire_quarry", map:get_field(87,36), true, true) -- a construction site
 
    plr:conquer(map:get_field(111,34),3) -- some remaining fields inside
 
-   connected_road(plr,map:get_field(97,54).immovable,"tr,tr|tr,tl")
-   connected_road(plr,map:get_field(98,52).immovable,"br,r|r,r|tr,r,tr|tr,r|r,r|tr,tr|tr,tr|tr,tr|r,r|r,r|r,r|br,br|r,r")
-   connected_road(plr,map:get_field(99,53).immovable,"tr,tr|tr,tr|tl,tr|tr,tr|tr,tr|tr,tl|tl,tl|l,l|l,l|l,l|l,bl")
-   connected_road(plr,map:get_field(97,54).immovable,"bl,br|br,bl,bl|bl,bl|bl,l|bl,bl|br,bl|bl,bl,l|l,l|l,l|l,l|l,l|l,l|l,l|l,l|l,l|l,l|l,tl|l,l|l,tl|tl,tl")
-   connected_road(plr,map:get_field(97,56).immovable,"r,br|br,r|r,r|r,tr|r,r|br,br|br,r")
-   connected_road(plr,map:get_field(97,54).immovable,"l,l|l,tl|tl,tl|bl,l|l,bl")
-   connected_road(plr,map:get_field(88,49).immovable,"br,br|r,br")
-   connected_road(plr,map:get_field(92,51).immovable,"tr,tl|tr,tl,tl|tr,tr|tr,tr|tr,tr")
-   connected_road(plr,map:get_field(94,42).immovable,"tl,l|tl,tl|l,l|l,tl,tl|tr,tr|tr,tr,tr")
-   connected_road(plr,map:get_field(75,73).immovable,"tr,tr|tr,r|tr,tr")
-   connected_road(plr,map:get_field(92,54).immovable,"tr,r")
-   connected_road(plr,map:get_field(93,58).immovable,"tr,tr|tr,tr")
-   connected_road(plr,map:get_field(102,45).immovable,"br,r|br,r|br,bl,bl")
-   connected_road(plr,map:get_field(105,47).immovable,"tr,tl|r,r|br,r")
-   connected_road(plr,map:get_field(116,44).immovable,"tr,tr|tr,tr|r,r")
-   connected_road(plr,map:get_field(105,45).immovable,"tr,tr|tr,tr|r,tr|tr,r|tr,tr|tr,tr|tr,tr|r,r|tr,tr|tr,tl|l,tl,tl|l,tl|l,tl,tl")
-   connected_road(plr,map:get_field(114,22).immovable,"br,bl|bl,bl|bl,bl|bl,bl|bl,bl|bl,bl|bl,bl|bl,bl|bl,bl|bl,bl|bl,l")
-   connected_road(plr,map:get_field(105,42).immovable,"br,r")
-   connected_road(plr,map:get_field(111,37).immovable,"br,r|r,br|bl,bl|bl,bl,bl")
-   connected_road(plr,map:get_field(106,59).immovable,"bl,bl|bl,br|bl,bl|l,bl,bl|bl,br|br,br|r,r|br,bl|br,br|br,br,bl|l,l|bl,bl|l,tl|tl,tl|tl,tl|tr,tr,tr|tr,r")
-   connected_road(plr,map:get_field(100,78).immovable,"tr,r|r,r")
-   connected_road(plr,map:get_field(104,48).immovable,"r,tr")
-   connected_road(plr,map:get_field(105,52).immovable,"tr,tl")
-   connected_road(plr,map:get_field(107,52).immovable,"tr,tl")
-   connected_road(plr,map:get_field(112,32).immovable,"l,l")
-   connected_road(plr,map:get_field(115,25).immovable,"bl,bl")
-   connected_road(plr,map:get_field(97,54).immovable,"r,r,tr")
+   connected_road("normal", plr,map:get_field(97,54).immovable,"tr,tr|tr,tl")
+   connected_road("normal", plr,map:get_field(97,54).immovable,"l,l|l,tl|tl,tl|bl,l|l,bl")
+   connected_road("normal", plr,map:get_field(88,49).immovable,"br,br|r,br")
+   connected_road("normal", plr,map:get_field(92,51).immovable,"tr,tl|tr,tl,tl|tr,tr|tr,tr|tr,tr")
+   connected_road("normal", plr,map:get_field(75,73).immovable,"tr,tr|tr,r|tr,tr")
+   connected_road("normal", plr,map:get_field(92,54).immovable,"tr,r")
+   connected_road("normal", plr,map:get_field(93,58).immovable,"tr,tr|tr,tr")
+   connected_road("normal", plr,map:get_field(105,47).immovable,"tr,tl|r,r|br,r")
+   connected_road("normal", plr,map:get_field(105,45).immovable,"tr,tr|tr,tr|r,tr|tr,r|tr,tr|tr,tr|tr,tr|r,r|tr,tr|tr,tl|l,tl,tl|l,tl|l,tl,tl")
+   connected_road("normal", plr,map:get_field(114,22).immovable,"br,bl|bl,bl|bl,bl|bl,bl|bl,bl|bl,bl|bl,bl|bl,bl|bl,bl|bl,bl|bl,l")
+   connected_road("normal", plr,map:get_field(105,42).immovable,"br,r")
+   connected_road("normal", plr,map:get_field(111,37).immovable,"br,r|r,br|bl,bl|bl,bl,bl")
+   connected_road("normal", plr,map:get_field(100,78).immovable,"tr,r|r,r")
+   connected_road("normal", plr,map:get_field(104,48).immovable,"r,tr")
+   connected_road("normal", plr,map:get_field(105,52).immovable,"tr,tl")
+   connected_road("normal", plr,map:get_field(107,52).immovable,"tr,tl")
+   connected_road("normal", plr,map:get_field(112,32).immovable,"l,l")
+   connected_road("normal", plr,map:get_field(115,25).immovable,"bl,bl")
+   connected_road("normal", plr,map:get_field(97,54).immovable,"r,r,tr")
+   connected_road("normal", plr,map:get_field(97,54).immovable,"bl,br|br,bl,bl|bl,bl|bl,l|bl,bl|br,bl|bl,bl,l|l,l|l,l|l,l|l,l|l,l|l,l|l,l|l,l|l,l|l,tl|l,l|l,tl|tl,tl")
+   connected_road("normal", plr,map:get_field(98,52).immovable,"br,r|r,r|tr,r,tr|tr,r|r,r|tr,tr|tr,tr|tr,tr|r,r|r,r|r,r|br,br")
+   connected_road("normal", plr,map:get_field(99,53).immovable,"tr,tr|tr,tr|tl,tr|tr,tr|tr,tr|tr,tl")
+   connected_road("normal", plr,map:get_field(95,40).immovable,"tr,r")
+   connected_road("normal", plr,map:get_field(97,56).immovable,"r,br|br,r|r,r|r,tr|r,r|br,br")
+   connected_road("normal", plr,map:get_field(94,42).immovable,"tl,l|tl,tl|l,l|l,tl,tl|tr,tr|tr,tr,tr")
+   connected_road("normal", plr,map:get_field(102,45).immovable,"br,r|br,r|br,bl,bl")
+   connected_road("normal", plr,map:get_field(116,44).immovable,"tr,tr|tr,tr")
+   connected_road("normal", plr,map:get_field(106,59).immovable,"bl,bl|bl,br|bl,bl|l,bl,bl|bl,br|br,br|r,r|br,bl|br,br|br,br,bl|l,l|bl,bl|l,tl|tl,tl|tl,tl|tr,tr,tr|tr,r")
+end
+
+-- Roads to mines and constructionsites mess up the hide field function, so we add them later
+function remaining_roads()
+-- Mines
+   connected_road("normal", plr,map:get_field(119,46).immovable,"l,l")
+   connected_road("normal", plr,map:get_field(103,41).immovable,"tl,tl|l,l|l,l|l,l")
+   connected_road("normal", plr,map:get_field(108,60).immovable,"l,tl")
+   connected_road("normal", plr,map:get_field(120,40).immovable,"l,l")
+
+-- Constructionsite
+   plr:place_building("empire_quarry", map:get_field(87,36), true, true)
 end

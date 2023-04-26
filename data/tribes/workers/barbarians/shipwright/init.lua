@@ -1,30 +1,12 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 11, 23 },
-   },
-   work = {
-      pictures = path.list_files(dirname .. "work_??.png"),
-      sound_effect = {
-            directory = "sound/hammering",
-            name = "hammering",
-      },
-      hotspot = { 11, 26 },
-      fps = 10
-   }
-}
-add_worker_animations(animations, "walk", dirname, "walk", {9, 24}, 10)
-add_worker_animations(animations, "walkload", dirname, "walkload", {11, 22}, 10)
-
-
-tribes:new_worker_type {
-   msgctxt = "barbarians_worker",
+wl.Descriptions():new_worker_type {
    name = "barbarians_shipwright",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Shipwright"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -35,15 +17,60 @@ tribes:new_worker_type {
 
    programs = {
       buildship = {
-         "walk object-or-coords",
-         "plant tribe:barbarians_shipconstruction unless object",
-         "play_sound sound/sawmill sawmill 230",
-         "animation work 500",
+         "walk=object-or-coords",
+         "plant=attrib:barbarians_shipconstruction unless object",
+         "playsound=sound/sawmill/sawmill priority:80% allow_multiple",
+         "animate=work duration:500ms",
          "construct",
-         "animation work 5000",
+         "animate=work duration:5s",
          "return"
-      }
+      },
+      buildferry_1 = {
+         "findspace=size:swim radius:5 ferry",
+      },
+      buildferry_2 = {
+         "findspace=size:swim radius:5 ferry",
+         "walk=coords",
+         "animate=work duration:10s",
+         "createbob=barbarians_ferry",
+         "return"
+      },
    },
 
-   animations = animations,
+   animations = {
+      idle = {
+         hotspot = { 4, 18 }
+      },
+   },
+   spritesheets = {
+      walk = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 6, 18 }
+      },
+      walkload = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 10, 20 }
+      },
+      work = {
+         fps = 10,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 12, 22 },
+         sound_effect = {
+            path = "sound/hammering/hammering",
+            priority = "50%"
+         }
+      },
+   }
 }
+
+pop_textdomain()

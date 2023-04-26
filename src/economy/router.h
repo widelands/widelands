@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,17 +12,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 #ifndef WL_ECONOMY_ROUTER_H
 #define WL_ECONOMY_ROUTER_H
 
-#include <vector>
-
-#include <boost/function.hpp>
-#include <stdint.h>
+#include <cstdint>
+#include <functional>
 
 #include "logic/map_objects/tribes/wareworker.h"
 
@@ -36,22 +33,21 @@ struct RoutingNode;
  * The functionality was split from Economy
  */
 struct Router {
-	using ResetCycleFn = boost::function<void ()>;
+	using ResetCycleFn = std::function<void()>;
 
-	Router(const ResetCycleFn & reset);
+	explicit Router(const ResetCycleFn& reset);
 
-	bool find_route
-		(RoutingNode & start, RoutingNode & end,
-		 IRoute * route,
-		 WareWorker type,
-		 int32_t cost_cutoff,
-		 ITransportCostCalculator   & cost_calculator);
+	bool find_route(RoutingNode& start,
+	                RoutingNode& end,
+	                IRoute* route,
+	                WareWorker type,
+	                int32_t cost_cutoff,
+	                ITransportCostCalculator& cost_calculator);
 	uint32_t assign_cycle();
 
 private:
 	ResetCycleFn reset_;
-	uint32_t mpf_cycle;       ///< pathfinding cycle, see Flag::mpf_cycle
+	uint32_t mpf_cycle{0U};  ///< pathfinding cycle, see Flag::mpf_cycle
 };
-
-}
+}  // namespace Widelands
 #endif  // end of include guard: WL_ECONOMY_ROUTER_H

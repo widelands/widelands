@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,83 +20,82 @@
 #define WL_LOGIC_MESSAGE_QUEUE_H
 
 #include <cassert>
-#include <map>
+#include <memory>
 
 #include "base/macros.h"
+#include "base/mutex.h"
 #include "logic/message.h"
 #include "logic/message_id.h"
 
 namespace Widelands {
 
-struct MessageQueue : private std::map<MessageId, Message *> {
+struct MessageQueue {
+	using MessageMap = std::map<MessageId, std::unique_ptr<Message>>;
+
 	friend class MapPlayersMessagesPacket;
 
 	MessageQueue() {
-		counts_[static_cast<int>(Message::Status::kNew)]      = 0; //  C++0x:
-		counts_[static_cast<int>(Message::Status::kRead)]     = 0; //  C++0x:
-		counts_[static_cast<int>(Message::Status::kArchived)] = 0; //  C++0x:
-	}                                   //  C++0x:
-
-	~MessageQueue() {
-		while (size()) {
-			delete begin()->second;
-			erase(begin());
-		}
+		MutexLock m(MutexLock::ID::kMessages);
+		counts_[static_cast<int>(Message::Status::kNew)] = 0;
+		counts_[static_cast<int>(Message::Status::kRead)] = 0;
+		counts_[static_cast<int>(Message::Status::kArchived)] = 0;
 	}
+
+	~MessageQueue() = default;
 
 	//  Make some selected inherited members public.
-	MessageQueue::const_iterator begin() const {
-		return std::map<MessageId, Message *>::begin();
+	//  TODO(sirver): This is weird design. Instead pass out a const ref& to
+	//  'messages_'?
+	[[nodiscard]] MessageMap::const_iterator begin() const {
+		return messages_.begin();
 	}
-	MessageQueue::const_iterator end() const {
-		return std::map<MessageId, Message *>::end();
+	[[nodiscard]] MessageMap::const_iterator end() const {
+		return messages_.end();
 	}
-	size_type count(uint32_t const i) const {
+	[[nodiscard]] size_t count(uint32_t const i) const {
+		MutexLock m(MutexLock::ID::kMessages);
 		assert_counts();
-		return std::map<MessageId, Message *>::count(MessageId(i));
+		return messages_.count(MessageId(i));
 	}
 
-	/// \returns a pointer to the message if it exists, otherwise 0.
-	Message const * operator[](const MessageId& id) const {
+	/// \returns a pointer to the message if it exists, otherwise nullptr.
+	Message const* operator[](const MessageId& id) const {
+		MutexLock m(MutexLock::ID::kMessages);
 		assert_counts();
-		MessageQueue::const_iterator const it = find(MessageId(id));
-		return it != end() ? it->second : nullptr;
+		const auto it = messages_.find(MessageId(id));
+		return it != end() ? it->second.get() : nullptr;
 	}
 
 	/// \returns the number of messages with the given status.
-	uint32_t nr_messages(Message::Status const status) const {
+	[[nodiscard]] uint32_t nr_messages(Message::Status const status) const {
+		MutexLock m(MutexLock::ID::kMessages);
 		assert_counts();
 		assert(static_cast<int>(status) < 3);
 		return counts_[static_cast<int>(status)];
 	}
 
-	/// Adds the message. Takes ownership of the message. Assumes that it has
-	/// been allocated in a separate memory block (not as a component of an
-	/// array or struct) with operator new, so that it can be deallocated with
-	/// operator delete.
-	///
 	/// \returns the id of the added message.
 	///
 	/// The loading code calls this function to add messages form the map file.
-	MessageId add_message(Message & message) {
+	MessageId add_message(std::unique_ptr<Message> message) {
+		MutexLock m(MutexLock::ID::kMessages);
 		assert_counts();
-		assert(static_cast<int>(message.status()) < 3);
-		++counts_[static_cast<int>(message.status())];
-		insert
-			(std::map<MessageId, Message *>::end(),
-			 std::pair<MessageId, Message *>(++current_message_id_, &message));
+		assert(static_cast<int>(message->status()) < 3);
+		++counts_[static_cast<int>(message->status())];
+		messages_[++current_message_id_] = std::move(message);
 		assert_counts();
 		return current_message_id_;
 	}
 
 	/// Sets the status of the message with the given id, if it exists.
 	void set_message_status(const MessageId& id, Message::Status const status) {
+		MutexLock m(MutexLock::ID::kMessages);
 		assert_counts();
 		assert(static_cast<int>(status) < 3);
-		MessageQueue::iterator const it = find(id);
-		if (it != end()) {
-			Message & message = *it->second;
-			assert(static_cast<int>(it->second->status()) < 3);
+		const auto it = messages_.find(id);
+		if (it != messages_.end()) {
+			Message& message = *it->second;
+			assert(static_cast<int>(message.status()) < 3);
 			assert(counts_[static_cast<int>(message.status())]);
 			--counts_[static_cast<int>(message.status())];
 			++counts_[static_cast<int>(message.set_status(status))];
@@ -108,31 +106,34 @@ struct MessageQueue : private std::map<MessageId, Message *> {
 	/// Delete the message with the given id so that it no longer exists.
 	/// Assumes that a message with the given id exists.
 	void delete_message(const MessageId& id) {
+		MutexLock m(MutexLock::ID::kMessages);
 		assert_counts();
-		MessageQueue::iterator const it = find(id);
-		if (it == end()) {
+		const auto it = messages_.find(id);
+		if (it == messages_.end()) {
 			// Messages can be deleted when the linked MapObject is removed. Two delete commands
 			// will be executed, and the message will not be present for the second one.
 			// So we assume here that the message was removed from an earlier delete cmd.
 			return;
 		}
-		Message & message = *it->second;
+		const Message& message = *it->second;
 		assert(static_cast<int>(message.status()) < 3);
 		assert(counts_[static_cast<int>(message.status())]);
 		--counts_[static_cast<int>(message.status())];
-		delete &message;
-		erase(it);
+		messages_.erase(it);
 		assert_counts();
 	}
 
-	MessageId current_message_id() const {return current_message_id_;}
+	[[nodiscard]] MessageId current_message_id() const {
+		return current_message_id_;
+	}
 
 	/// \returns whether all messages with id 1, 2, 3, ..., current_message_id
 	/// exist. This should be the case when messages have been loaded from a map
 	/// file/savegame but the simulation has not started to run yet.
-	bool is_continuous() const {
+	[[nodiscard]] bool is_continuous() const {
+		MutexLock m(MutexLock::ID::kMessages);
 		assert_counts();
-		return current_message_id().value() == size();
+		return current_message_id().value() == messages_.size();
 	}
 
 private:
@@ -141,14 +142,17 @@ private:
 	/// around by clearing the queue before the saved messages are loaded into
 	/// it.
 	void clear() {
+		MutexLock m(MutexLock::ID::kMessages);
 		assert_counts();
-		current_message_id_        = MessageId::null();
-		counts_[static_cast<int>(Message::Status::kNew)]      = 0;
-		counts_[static_cast<int>(Message::Status::kRead)]     = 0;
+		current_message_id_ = MessageId::null();
+		counts_[static_cast<int>(Message::Status::kNew)] = 0;
+		counts_[static_cast<int>(Message::Status::kRead)] = 0;
 		counts_[static_cast<int>(Message::Status::kArchived)] = 0;
-		std::map<MessageId, Message *>::clear();
+		messages_.clear();
 		assert_counts();
 	}
+
+	MessageMap messages_;
 
 	/// The id of the most recently added message, or null if none has been
 	/// added yet.
@@ -156,19 +160,17 @@ private:
 
 	/// Number of messages with each status (new, read, deleted).
 	/// Indexed by Message::Status.
-	uint32_t   counts_[3];
+	uint32_t counts_[3];
 
 	void assert_counts() const {
-		assert
-			(size() ==
-			 counts_[static_cast<int>(Message::Status::kNew)]  +
-			 counts_[static_cast<int>(Message::Status::kRead)] +
-			 counts_[static_cast<int>(Message::Status::kArchived)]);
+		MutexLock m(MutexLock::ID::kMessages);
+		assert(messages_.size() == counts_[static_cast<int>(Message::Status::kNew)] +
+		                              counts_[static_cast<int>(Message::Status::kRead)] +
+		                              counts_[static_cast<int>(Message::Status::kArchived)]);
 	}
 
 	DISALLOW_COPY_AND_ASSIGN(MessageQueue);
 };
-
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MESSAGE_QUEUE_H

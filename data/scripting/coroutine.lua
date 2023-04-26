@@ -6,6 +6,18 @@
 -- of coroutines and yielding proper sleeping times to widelands. These
 -- functions are more specially tailored to widelands and take a lot of
 -- the awkwardness out of using coroutines directly.
+--
+-- .. Note::
+--    Do not use these functions for multiplayer scripting (scenarios and
+--    winconditions) in combination with any functions in :ref:`ui.lua`
+--
+-- To make these functions available include this file at the beginning
+-- of a script via:
+--
+-- .. code-block:: lua
+--
+--    include "scripting/coroutine.lua"
+--
 
 -- =======================================================================
 --                             PUBLIC FUNCTIONS

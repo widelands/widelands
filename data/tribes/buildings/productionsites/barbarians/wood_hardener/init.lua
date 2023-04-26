@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
+wl.Descriptions():new_productionsite_type {
    name = "barbarians_wood_hardener",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Wood Hardener"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -18,28 +18,35 @@ tribes:new_productionsite_type {
       granite = 1
    },
 
+   animation_directory = dirname,
    animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
+      unoccupied = {
          hotspot = { 52, 64 },
+      }
+   },
+   spritesheets = {
+      idle = {
+         frames = 20,
+         columns = 4,
+         rows = 5,
+         hotspot = { 50, 65 }
       },
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 52, 64 },
+         frames = 4,
+         columns = 2,
+         rows = 2,
+         hotspot = { 50, 61 }
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
-         hotspot = { 52, 64 },
-      },
-      unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
-         hotspot = { 52, 64 },
-      },
+         frames = 20,
+         columns = 4,
+         rows = 5,
+         hotspot = { 53, 65 }
+      }
    },
 
    aihints = {
-      forced_after = 250,
-      prohibited_till = 250,
+      basic_amount = 1,
       very_weak_ai_limit = 1,
       weak_ai_limit = 2
    },
@@ -49,23 +56,23 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      log = 8
-   },
-   outputs = {
-      "blackwood"
+      { name = "log", amount = 8 }
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start hardening wood because ...
-         descname = _"hardening wood",
+         descname = _("hardening wood"),
          actions = {
-            "sleep=43000",
             "return=skipped unless economy needs blackwood",
             "consume=log:2",
-            "animate=working 24000",
+            "sleep=duration:43s",
+            "playsound=sound/barbarians/blackwood priority:60%",
+            "animate=working duration:24s",
             "produce=blackwood"
          }
       },
    },
 }
+
+pop_textdomain()

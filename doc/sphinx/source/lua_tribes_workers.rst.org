@@ -1,0 +1,155 @@
+Workers
+=======
+
+Workers are created in a warehouse or recruited by a building. Most workers will work in buildings, while special worker types will act as carriers or soldiers.
+
+Widelands knows about the following worker types:
+
+.. toctree::
+   :maxdepth: 3
+
+REPLACE_ME
+
+.. _lua_tribes_workers_common:
+
+Common Worker Properties
+------------------------
+
+Workers are defined with Lua functions called ``new_<worker_type>_type{table}``. The contents of ``table`` depend on the type of worker that you are defining. The common properties shared by all workers are:
+
+**name**: A string containing the internal name of this worker.
+
+**descname**: The translatable display name. Use ``pgettext`` to fetch the string.
+
+**icon**: The full path to the menu icon for this worker.
+
+**vision_range**
+    The size of the radius that the worker sees.
+
+**buildcost**
+    *Optional*. A table with the wares and workers used by warehouses to
+    create this worker, containing warename - amount pairs, e.g.::
+
+        buildcost = { atlanteans_carrier = 1, hammer = 1 }
+
+**default_target_quantity**:
+    *Optional*. An int defining the default target quantity for the worker's
+    tribe's economy. Use this if the worker is produced by a production site
+    rather than the warehouses. For example, ``default_target_quantity = 10``
+
+    .. note:: This parameter has been shifted to tribes initialization in the current
+       development version.**
+
+**experience**
+    *Optional*. The amount of experience that the worker needs to gather
+    in order to be transformend into a higher worker type. If `becomes`
+    is defined, this needs to be set as well.
+
+**becomes**
+    *Optional*. The name of the higher worker type that this worker will
+    transform to after gaining enough experience. If `experience`
+    is defined, this needs to be set as well.
+
+**animation_directory**
+    *Mandatory*. The location of the animation png files.
+
+**animations**:
+     A table containing all file animations for this worker.
+     Workers have an "idle" animation. They also have directional animations
+     called "walk" and "walkload", plus additional animations used in their
+     worker programs. The "idle" and "walk" animations are mandatory.
+     Animations can either be defined as file animations in this table or as spritesheet animations
+     as defined in table ``spritesheets``. A mixture of the two animation formats is allowed.
+     See :doc:`animations` for a detailed description of the animation formats.
+
+**spritesheets**:
+     A table containing all spritesheet animations for this worker.
+     Workers have an "idle" animation. They also have directional animations
+     called "walk" and "walkload", plus additional animations used in their
+     worker programs. The "idle" and "walk" animations are mandatory.
+     Animations can either be defined as spritesheet animations in this table or as file animations
+     as defined in table ``animations``. A mixture of the two animation formats is allowed.
+     See :doc:`animations` for a detailed description of the animation formats.
+
+**programs**:
+    *Optional*. If the worker leaves the building to do his work, the
+    :ref:`tribes_worker_programs` that define which type of space or resource
+    the worker has to find on the map in order to do his work, and what that
+    work is, including any animations and sounds played.
+
+**ware_hotspot**
+    *Optional*. The x, y coordinates for adjusting the placement of the
+    ware being carried. The default value is ``{0, 15}``. Increase ``x``
+    to shift the ware to the left and ``y`` to shift it upwards. For example::
+
+        ware_hotspot = { -2, 13 },
+
+**aihints**
+    *Optional*. A list of hints for the AI. Can contain the following optional entries:
+
+        **preciousness**: How precious this worker is to each tribe. For example,
+        ``{ atlanteans = 0, empire = 1 }``. You can use this for workers that are recruited.
+
+    .. note:: This parameter has been shifted to tribes initialization in the current
+       development version.
+
+For making the UI texts translateable, we also need to push/pop the correct textdomain.
+
+Example:
+
+.. code-block:: lua
+
+    push_textdomain("tribes")
+
+    dirname = path.dirname (__file__)
+
+    wl.Descriptions():new_worker_type {
+       name = "frisians_baker",
+       -- TRANSLATORS: This is a worker name used in lists of workers
+       descname = pgettext("frisians_worker", "Baker"),
+       animation_directory = dirname,
+       icon = dirname .. "menu.png",
+       vision_range = 2,
+
+       buildcost = {
+          frisians_carrier = 1,
+          bread_paddle = 1
+       },
+
+       experience = 13,
+       becomes = "frisians_baker_master",
+
+       ware_hotspot = {0, 20},
+
+       spritesheets = {
+          walk = {
+             fps = 15,
+             frames = 10,
+             columns = 5,
+             rows = 2,
+             directional = true,
+             hotspot = {11, 23}
+          },
+          walkload = {
+             fps = 15,
+             frames = 10,
+             columns = 5,
+             rows = 2,
+             directional = true,
+             hotspot = {10, 26}
+          },
+       },
+       animations = {
+          idle = {
+             hotspot = {8, 23}
+          },
+       },
+    }
+
+    pop_textdomain()
+
+
+Help Texts
+----------
+
+See :ref:`lua_tribes_tribes_helptexts`.

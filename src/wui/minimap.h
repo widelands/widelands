@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-20116 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -22,34 +21,50 @@
 
 #include <memory>
 
-#include <boost/signals2.hpp>
-
 #include "graphic/minimap_renderer.h"
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
 
 class InteractiveBase;
 
-struct MiniMap : public UI::UniqueWindow {
+class MiniMap : public UI::UniqueWindow {
+public:
 	struct Registry : public UI::UniqueWindow::Registry {
-		MiniMapLayer flags; /**< Combination of \ref MiniMapLayer flags */
+		MiniMapLayer minimap_layers;
+		MiniMapType minimap_type{MiniMapType::kStaticViewWindow};
 
-		Registry()
-		   : flags(MiniMapLayer::Terrain | MiniMapLayer::Owner |
-		                           MiniMapLayer::Flag | MiniMapLayer::Road |
-		                           MiniMapLayer::Building) {
+		explicit Registry(bool is_game)
+		   : minimap_layers(MiniMapLayer::Terrain | MiniMapLayer::Flag | MiniMapLayer::Road |
+		                    MiniMapLayer::Building | MiniMapLayer::Ship |
+		                    (is_game ? MiniMapLayer::Owner : MiniMapLayer::StartingPositions)) {
+		}
+
+		MiniMap* get_window() const {
+			return dynamic_cast<MiniMap*>(window);
 		}
 	};
 
-	MiniMap(InteractiveBase & parent, Registry *);
+	MiniMap(InteractiveBase& ibase, Registry* registry);
 
-	boost::signals2::signal<void (int32_t, int32_t)> warpview;
+	Notifications::Signal<const Vector2f&> warpview;
 
-	void set_view_pos(int32_t const x, int32_t const y) {
-		view_.set_view_pos(x, y);
+	void set_view(const Rectf& rect) {
+		view_.set_view(rect);
 	}
+	void check_boundaries();
+
+	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
+
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kMinimap;
+	}
+	void save(FileWrite& fw, Widelands::MapObjectSaver& mos) const override;
+	static UI::Window& load(FileRead&, InteractiveBase&);
 
 private:
+	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
+	   graphic_resolution_changed_subscriber_;
+
 	void toggle(MiniMapLayer);
 	void update_button_permpressed();
 	void resize();
@@ -57,51 +72,63 @@ private:
 	/**
 	 * MiniMap::View is the panel that represents the pure representation of the
 	 * map, without any borders or gadgets.
-	 *
-	 * If the size of MiniMapView is not the same as the size of the map itself,
-	 * it will either show a subset of the map, or it will show the map more than
-	 * once.
-	 * The minimap always centers around the current viewpoint.
 	 */
 	struct View : public UI::Panel {
-		View
-			(UI::Panel & parent, MiniMapLayer * flags,
-			 int32_t x, int32_t y, uint32_t w, uint32_t h,
-			 InteractiveBase &);
+		View(UI::Panel& parent,
+		     MiniMapLayer* flags,
+		     MiniMapType* minimap_type,
+		     int32_t x,
+		     int32_t y,
+		     uint32_t w,
+		     uint32_t h,
+		     InteractiveBase&);
 
-		void set_view_pos(int32_t x, int32_t y);
+		// Set the currently viewed area in map pixel space.
+		void set_view(const Rectf&);
 
-		void draw(RenderTarget &) override;
+		// Delete the intermediate texture, causing a full redraw on the next draw().
+		void reset();
 
-		bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y) override;
-		bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
+		void draw(RenderTarget&) override;
 
-		void set_zoom(int32_t z);
+		bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
+
+		void set_zoom(bool zoom);
+
+		bool can_zoom();
 
 	private:
-		InteractiveBase & ibase_;
-		int32_t                viewx_, viewy_;
+		InteractiveBase& ibase_;
+		Rectf view_area_;
 		const Image* pic_map_spot_;
+
+		// Intermediate texture, cached between frames.
+		std::unique_ptr<Texture> minimap_image_static_;
+		uint16_t rows_drawn_{0U};
 
 		// This needs to be owned since it will be rendered by the RenderQueue
 		// later, so it must be valid for the whole frame.
-		std::unique_ptr<Texture> minimap_image_;
+		std::unique_ptr<Texture> minimap_image_final_;
 
 	public:
-		MiniMapLayer* flags_;
+		MiniMapLayer* minimap_layers_;
+		MiniMapType* minimap_type_;
 	};
 
 	uint32_t number_of_buttons_per_row() const;
-	uint32_t number_of_button_rows    () const;
-	uint32_t but_w                    () const;
-	uint32_t but_h                    () const;
+	uint32_t number_of_button_rows() const;
+	uint32_t but_w() const;
+	uint32_t but_h() const;
 
-	View     view_;
+	InteractiveBase& ibase_;
+	MiniMapLayer owner_button_impl_;
+	View view_;
 	UI::Button button_terrn;
 	UI::Button button_owner;
 	UI::Button button_flags;
 	UI::Button button_roads;
 	UI::Button button_bldns;
+	UI::Button button_ships;
 	UI::Button button_zoom;
 };
 

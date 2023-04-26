@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,10 +20,6 @@
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_WARELIST_H
 
 #include <cassert>
-#include <vector>
-
-#include <boost/bind.hpp>
-#include <boost/signals2.hpp>
 
 #include "logic/widelands.h"
 
@@ -35,37 +30,37 @@ namespace Widelands {
  * It is useful for warehouses and for economy-wide inventory.
  */
 struct WareList {
-	WareList() {}
+	WareList() = default;
 	~WareList();
 
-	void clear() {wares_.clear();} /// Clear the storage
-
-	using WareCount = uint32_t;
-	using WareCountVector = std::vector<WareCount>;
+	void clear() {
+		wares_.clear();
+	}  /// Clear the storage
 
 	/// \return Highest possible ware id
-	DescriptionIndex get_nrwareids() const {return DescriptionIndex(wares_.size());}
+	[[nodiscard]] DescriptionIndex get_nrwareids() const {
+		return DescriptionIndex(wares_.size());
+	}
 
-	void add   (DescriptionIndex, WareCount = 1);
-	void add(const WareList &);
-	void remove(DescriptionIndex, WareCount = 1);
-	void remove(const WareList & wl);
-	WareCount stock(DescriptionIndex) const;
+	void add(DescriptionIndex, Quantity = 1);
+	void add(const WareList&);
+	void remove(DescriptionIndex, Quantity = 1);
+	void remove(const WareList& wl);
+	[[nodiscard]] Quantity stock(DescriptionIndex) const;
 
 	void set_nrwares(DescriptionIndex const i) {
 		assert(wares_.empty());
 		wares_.resize(i, 0);
 	}
 
-	bool operator== (const WareList &)    const;
-	bool operator!= (const WareList & wl) const {return !(*this == wl);}
-
-	mutable boost::signals2::signal<void ()> changed;
+	bool operator==(const WareList&) const;
+	bool operator!=(const WareList& wl) const {
+		return !(*this == wl);
+	}
 
 private:
-	WareCountVector wares_;
+	std::vector<Quantity> wares_;
 };
-
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_WARELIST_H

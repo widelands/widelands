@@ -5,7 +5,7 @@
 include "scripting/coroutine.lua" -- for sleep
 include "scripting/win_conditions/win_condition_functions.lua"
 
-set_textdomain("win_conditions")
+push_textdomain("win_conditions")
 
 include "scripting/win_conditions/win_condition_texts.lua"
 
@@ -14,10 +14,11 @@ local wc_name = "Autocrat"
 -- will be used as the key to fetch the translation in C++
 local wc_descname = _("Autocrat")
 local wc_version = 2
-local wc_desc = _ "The tribe or team that can defeat all others wins the game!"
-return {
+local wc_desc = _("The tribe or team that can defeat all others wins the game! This means the opponents do not have any headquarters, ports or warehouses left.")
+local r = {
    name = wc_name,
    description = wc_desc,
+   peaceful_mode_allowed = false,
    func = function()
       local plrs = wl.Game().players
 
@@ -40,3 +41,5 @@ return {
 
    end,
 }
+pop_textdomain()
+return r

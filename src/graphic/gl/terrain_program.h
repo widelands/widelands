@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,22 +12,18 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_GRAPHIC_GL_TERRAIN_PROGRAM_H
 #define WL_GRAPHIC_GL_TERRAIN_PROGRAM_H
 
-#include <vector>
-
-#include "base/point.h"
+#include "base/vector.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
-#include "logic/description_maintainer.h"
+#include "logic/map_objects/description_maintainer.h"
 #include "logic/map_objects/world/terrain_description.h"
-
 
 class TerrainProgram {
 public:
@@ -36,9 +32,10 @@ public:
 
 	// Draws the terrain.
 	void draw(uint32_t gametime,
-	          const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
+	          const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
 	          const FieldsToDraw& fields_to_draw,
-	          float z_value);
+	          float z_value,
+	          const Widelands::Player*);
 
 private:
 	struct PerVertexData {
@@ -55,7 +52,7 @@ private:
 	void gl_draw(int gl_texture, float texture_w, float texture_h, float z_value);
 
 	// Adds a vertex to the end of vertices with data from 'field' and 'texture_coordinates'.
-	void add_vertex(const FieldsToDraw::Field& field, const FloatPoint& texture_coordinates);
+	void add_vertex(const FieldsToDraw::Field& field, const Vector2f& texture_offset);
 
 	// The program used for drawing the terrain.
 	Gl::Program gl_program_;

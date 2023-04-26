@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,36 +12,30 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_GRAPHIC_GL_ROAD_PROGRAM_H
 #define WL_GRAPHIC_GL_ROAD_PROGRAM_H
 
-#include <memory>
-#include <vector>
-
 #include "base/macros.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
-#include "logic/roadtype.h"
-
-class Texture;
-class Surface;
+#include "graphic/road_segments.h"
 
 class RoadProgram {
 public:
 	// Compiles the program. Throws on error.
 	RoadProgram();
-	~RoadProgram();
+	~RoadProgram() = default;
 
 	// Draws the roads. The dimensions of the renderbuffer are needed to convert from pixel to GL
 	// space.
 	void draw(int renderbuffer_width,
 	          int renderbuffer_height,
 	          const FieldsToDraw& fields_to_draw,
+	          float scale,
 	          float z_value);
 
 private:
@@ -56,13 +50,14 @@ private:
 
 	// Adds a road from 'start' to 'end' to be rendered in this frame using the
 	// correct texture for 'road_type'.
-	enum Direction {kEast, kSouthEast, kSouthWest};
+	enum Direction { kEast, kSouthEast, kSouthWest };
 	void add_road(int renderbuffer_width,
 	              int renderbuffer_height,
 	              const FieldsToDraw::Field& start,
 	              const FieldsToDraw::Field& end,
-	              const Widelands::RoadType road_type,
-	              const Direction direction,
+	              float scale,
+	              Widelands::RoadSegment road_type,
+	              Direction direction,
 	              uint32_t* gl_texture);
 
 	// The buffer that will contain 'vertices_' for rendering.

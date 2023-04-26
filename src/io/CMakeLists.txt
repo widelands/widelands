@@ -24,23 +24,17 @@ wl_library(io_fileread
     io_stream
 )
 
-wl_library(io_filesystem
+wl_library(io_profile
   SRCS
-    filesystem/disk_filesystem.cc
-    filesystem/disk_filesystem.h
-    filesystem/filesystem.cc
-    filesystem/filesystem.h
-    filesystem/filesystem_exceptions.h
-    filesystem/layered_filesystem.cc
-    filesystem/layered_filesystem.h
-    filesystem/zip_exceptions.h
-    filesystem/zip_filesystem.cc
-    filesystem/zip_filesystem.h
+    profile.h
+    profile.cc
+  USES_ATOMIC
   DEPENDS
+    base
     base_exceptions
-    base_log
+    base_geometry
     base_macros
+    build_info
     io_fileread
-    io_stream
-    third_party_minizip
-)
+    io_filesystem
+ )

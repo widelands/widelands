@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
+wl.Descriptions():new_productionsite_type {
    name = "atlanteans_charcoal_kiln",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Charcoal Kiln"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -19,19 +19,24 @@ tribes:new_productionsite_type {
       granite = 2
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 47, 57 },
+         hotspot = { 50, 61 },
       },
+   },
+
+   spritesheets = {
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 47, 60 },
+         frames = 5,
+         columns = 5,
+         rows = 1,
+         hotspot = { 50, 61 },
       },
    },
 
    aihints = {
-      prohibited_till = 1200
+      prohibited_till = 690
    },
 
    working_positions = {
@@ -39,24 +44,23 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      log = 8
-   },
-   outputs = {
-      "coal"
+      { name = "log", amount = 8 }
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start producing coal because ...
-         descname = _"producing coal",
+         descname = _("producing coal"),
          actions = {
-            "sleep=30000",
             "return=skipped unless economy needs coal",
             "consume=log:6",
-            "animate=working 90000", -- Charcoal fires will burn for some days in real life
+            "sleep=duration:30s",
+            "animate=working duration:1m30s", -- Charcoal fires will burn for some days in real life
             "produce=coal"
          }
       },
 
    },
 }
+
+pop_textdomain()

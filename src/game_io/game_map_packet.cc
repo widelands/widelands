@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -34,37 +33,30 @@ GameMapPacket::~GameMapPacket() {
 	delete wml_;
 }
 
-void GameMapPacket::read
-	(FileSystem & fs, Game & game, MapObjectLoader * const)
-{
-	if (!fs.file_exists("map") || !fs.is_directory("map"))
+void GameMapPacket::read(FileSystem& fs, Game& game, MapObjectLoader* const /* mol */) {
+	if (!fs.file_exists("map") || !fs.is_directory("map")) {
 		throw GameDataError("no map");
+	}
 
 	//  Now Load the map as it would be a normal map saving.
 	delete wml_;
 
-	wml_ = new WidelandsMapLoader(fs.make_sub_file_system("map"), &game.map());
+	wml_ = new WidelandsMapLoader(fs.make_sub_file_system("map"), game.mutable_map());
 
-	wml_->preload_map(true);
+	wml_->preload_map(
+	   true, nullptr /* add-ons should already have been loaded by GamePreloadPacket */);
 
 	//  DONE, mapfs gets deleted by WidelandsMapLoader.
-
-	return;
 }
 
-
-void GameMapPacket::read_complete(Game & game) {
+void GameMapPacket::read_complete(Game& game) {
 	wml_->load_map_complete(game, MapLoader::LoadType::kScenario);
 	mol_ = wml_->get_map_object_loader();
 }
 
+void GameMapPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const /* mos */) {
 
-void GameMapPacket::write
-	(FileSystem & fs, Game & game, MapObjectSaver * const)
-{
-
-	std::unique_ptr<FileSystem> mapfs
-		(fs.create_sub_file_system("map", FileSystem::DIR));
+	std::unique_ptr<FileSystem> mapfs(fs.create_sub_file_system("map", FileSystem::DIR));
 
 	//  Now Write the map as it would be a normal map saving.
 	delete wms_;
@@ -72,5 +64,4 @@ void GameMapPacket::write
 	wms_->save();
 	mos_ = wms_->get_map_object_saver();
 }
-
-}
+}  // namespace Widelands

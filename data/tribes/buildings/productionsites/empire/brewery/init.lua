@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_productionsite_type {
    name = "empire_brewery",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Brewery"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -19,20 +19,25 @@ tribes:new_productionsite_type {
       granite = 1
    },
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 39, 62 },
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 42, 66 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
-         hotspot = { 39, 62 },
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 42, 66 },
       },
    },
 
    aihints = {
-      forced_after = 900,
-      prohibited_till = 600,
+      prohibited_till = 790,
       very_weak_ai_limit = 1,
       weak_ai_limit = 2
    },
@@ -42,24 +47,24 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      water = 7,
-      wheat = 7
-   },
-   outputs = {
-      "beer"
+      { name = "water", amount = 7 },
+      { name = "wheat", amount = 7 }
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
-         descname = _"brewing beer",
+         descname = _("brewing beer"),
          actions = {
-            "sleep=30000",
             "return=skipped unless economy needs beer",
             "consume=water wheat",
-            "animate=working 30000",
+            "sleep=duration:30s",
+            "playsound=sound/empire/beerbubble priority:40% allow_multiple",
+            "animate=working duration:30s",
             "produce=beer"
          }
       },
    },
 }
+
+pop_textdomain()

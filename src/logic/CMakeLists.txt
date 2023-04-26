@@ -1,17 +1,10 @@
-wl_binary(wl_map_info
+wl_library(logic_exceptions
   SRCS
-    map_info.cc
-  USES_SDL2
+    game_data_error.cc
+    game_data_error.h
   DEPENDS
-    base_log
-    graphic
-    graphic_image_io
-    graphic_minimap_renderer
-    graphic_surface
-    io_fileread
-    io_filesystem
-    logic
-    map_io_map_loader
+    base
+    base_exceptions
 )
 
 wl_library(logic_widelands_geometry
@@ -20,18 +13,47 @@ wl_library(logic_widelands_geometry
     widelands_geometry.h
 )
 
+wl_library(logic_widelands_geometry_io
+  SRCS
+    widelands_geometry_io.cc
+    widelands_geometry_io.h
+  DEPENDS
+    io_fileread
+    io_stream
+    logic_constants
+    logic_widelands_geometry
+)
+
 wl_library(logic_game_settings
   SRCS
+    game_settings.cc
     game_settings.h
+    player_end_result.h
+  DEPENDS
+    graphic_color
+    io_filesystem
+    logic_addons
+    logic_constants
+    logic_exceptions
+    logic_filesystem_constants
+    logic_tribe_basic_info
+    notifications
+    scripting_lua_interface
+    scripting_lua_table
+)
+
+wl_library(logic_single_player_game_settings
+  SRCS
     single_player_game_settings_provider.cc
     single_player_game_settings_provider.h
   DEPENDS
     ai
+    base
     base_exceptions
-    io_filesystem
-    logic
-    scripting_lua_interface
-    scripting_lua_table
+    base_random
+    graphic_playercolor
+    logic_game_settings
+    logic_tribe_basic_info
 )
 
 wl_library(logic_game_controller
@@ -41,29 +63,128 @@ wl_library(logic_game_controller
     replay_game_controller.cc
     single_player_game_controller.h
     single_player_game_controller.cc
+  USES_SDL2
   DEPENDS
     ai
+    base_times
     logic
-    profile
+    logic_commands
+    logic_game_settings
     ui_basic
-    widelands_ball_of_mud
+    widelands_options
     wui
 )
 
-wl_library(logic_campaign_visibility
+wl_library(logic_constants
   SRCS
-    campaign_visibility.cc
-    campaign_visibility.h
-  DEPENDS
-    base_exceptions
-    io_filesystem
-    profile
+    vision.h
+    widelands.cc
+    widelands.h
 )
 
-wl_library(logic
+wl_library(logic_filesystem_constants
   SRCS
-    backtrace.cc
-    backtrace.h
+    filesystem_constants.h
+    filesystem_constants.cc
+)
+
+wl_library(logic_addons
+  SRCS
+    addons.cc
+    addons.h
+    mutable_addon.cc
+    mutable_addon.h
+  DEPENDS
+    base
+    base_exceptions
+    base_math
+    base_time_string
+    build_info
+    graphic
+    graphic_text_layout
+    io_fileread
+    io_filesystem
+    io_profile
+    logic_filesystem_constants
+    logic_map
+    map_io
+    widelands_options
+)
+
+wl_library(logic_objectives
+  SRCS
+    objective.cc
+    objective.h
+  DEPENDS
+    base
+)
+
+
+wl_library(logic_generic_save_handler
+  SRCS
+    generic_save_handler.h
+    generic_save_handler.cc
+  DEPENDS
+    base
+    base_time_string
+    io_filesystem
+    logic_filesystem_constants
+)
+
+wl_library(logic_map
+  SRCS
+    cookie_priority_queue.h
+    field.cc
+    field.h
+    map.cc
+    map.h
+    map_revision.cc
+    map_revision.h
+    mapastar.cc
+    mapastar.h
+    mapdifferenceregion.cc
+    mapdifferenceregion.h
+    mapfringeregion.cc
+    mapfringeregion.h
+    maphollowregion.cc
+    maphollowregion.h
+    mapregion.h
+    maptriangleregion.cc
+    maptriangleregion.h
+    nodecaps.h
+    note_map_options.h
+    path.cc
+    path.h
+    pathfield.cc
+    pathfield.h
+  USES_ATOMIC
+  DEPENDS
+    base
+    base_exceptions
+    base_macros
+    base_scoped_timer
+    build_info
+    economy
+    graphic
+    graphic_playercolor
+    io_fileread
+    io_filesystem
+    logic
+    logic_addons
+    logic_constants
+    logic_exceptions
+    logic_filesystem_constants
+    logic_map_objects
+    logic_objectives
+    logic_widelands_geometry
+    logic_widelands_geometry_io
+    map_io_map_loader
+    notifications
+    wui_mapview_pixelconstants
+)
+
+wl_library(logic_commands
+  SRCS
     cmd_calculate_statistics.cc
     cmd_calculate_statistics.h
     cmd_delete_message.cc
@@ -76,186 +197,119 @@ wl_library(logic
     cmd_luascript.h
     cmd_queue.cc
     cmd_queue.h
-    constants.h
-    cookie_priority_queue.h
-    description_maintainer.h
-    editor_game_base.cc
-    editor_game_base.h
-    field.cc
-    field.h
-    findbob.cc
-    findbob.h
-    findimmovable.cc
-    findimmovable.h
-    findnode.cc
-    findnode.h
-    game_data_error.cc
-    game_data_error.h
-    game.cc
-    game.h
-    map_revision.cc
-    map_revision.h
-    map.cc
-    map.h
-    mapastar.cc
-    mapastar.h
-    mapdifferenceregion.cc
-    mapdifferenceregion.h
-    mapfringeregion.cc
-    mapfringeregion.h
-    maphollowregion.cc
-    maphollowregion.h
-    mapregion.h
-    maptriangleregion.cc
-    maptriangleregion.h
-    message_id.h
-    message_queue.h
-    message.h
-    nodecaps.h
-    objective.h
-    path.cc
-    path.h
-    pathfield.cc
-    pathfield.h
-    player_area.h
-    player.cc
-    player.h
-    playercommand.cc
-    playercommand.h
-    playersmanager.cc
-    playersmanager.h
     queue_cmd_factory.cc
     queue_cmd_factory.h
     queue_cmd_ids.h
+    playercommand.cc
+    playercommand.h
+  DEPENDS
+    base
+    base_exceptions
+    base_macros
+    base_times
+    economy # TODO(GunChleoc): Circular dependency
+    graphic_text_layout
+    io_fileread
+    io_stream
+    logic # TODO(GunChleoc): Circular dependency
+    logic_constants
+    logic_exceptions
+    logic_game_controller
+    logic_map
+    logic_map_objects
+    logic_widelands_geometry_io
+    map_io
+    scripting_coroutine
+    scripting_logic # TODO(GunChleoc): Circular dependency
+    scripting_lua_table
+    wui
+)
+
+
+wl_library(logic_training_wheels
+  SRCS
+    training_wheels.cc
+    training_wheels.h
+  DEPENDS
+    base
+    io_filesystem
+    io_profile
+    logic_filesystem_constants
+    scripting_lua_table
+    scripting_lua_interface
+)
+
+wl_library(logic
+  SRCS
+    ai_dna_handler.cc
+    ai_dna_handler.h
+    editor_game_base.cc
+    editor_game_base.h
+    game.cc
+    game.h
+    message.h
+    message_id.h
+    message_queue.h
+    player.cc
+    player.h
+    player_area.h
+    playersmanager.cc
+    playersmanager.h
     replay.cc
     replay.h
-    roadtype.h
     save_handler.cc
     save_handler.h
-    widelands_geometry_io.cc
-    widelands_geometry_io.h
-    widelands.h
-    map_objects/attackable.h
-    map_objects/bob.cc
-    map_objects/bob.h
-    map_objects/buildcost.cc
-    map_objects/buildcost.h
-    map_objects/checkstep.cc
-    map_objects/checkstep.h
-    map_objects/immovable_program.h
-    map_objects/immovable.cc
-    map_objects/immovable.h
-    map_objects/map_object.cc
-    map_objects/map_object.h
-    map_objects/terrain_affinity.cc
-    map_objects/terrain_affinity.h
-    map_objects/walkingdir.cc
-    map_objects/walkingdir.h
-    map_objects/tribes/battle.cc
-    map_objects/tribes/battle.h
-    map_objects/tribes/bill_of_materials.h
-    map_objects/tribes/building.cc
-    map_objects/tribes/building.h
-    map_objects/tribes/carrier.cc
-    map_objects/tribes/carrier.h
-    map_objects/tribes/constructionsite.cc
-    map_objects/tribes/constructionsite.h
-    map_objects/tribes/dismantlesite.cc
-    map_objects/tribes/dismantlesite.h
-    map_objects/tribes/militarysite.cc
-    map_objects/tribes/militarysite.h
-    map_objects/tribes/partially_finished_building.cc
-    map_objects/tribes/partially_finished_building.h
-    map_objects/tribes/production_program.cc
-    map_objects/tribes/production_program.h
-    map_objects/tribes/productionsite.cc
-    map_objects/tribes/productionsite.h
-    map_objects/tribes/program_result.h
-    map_objects/tribes/requirements.cc
-    map_objects/tribes/requirements.h
-    map_objects/tribes/road_textures.cc
-    map_objects/tribes/road_textures.h
-    map_objects/tribes/ship.cc
-    map_objects/tribes/ship.h
-    map_objects/tribes/soldier.cc
-    map_objects/tribes/soldier.h
-    map_objects/tribes/soldiercontrol.h
-    map_objects/tribes/training_attribute.h
-    map_objects/tribes/trainingsite.cc
-    map_objects/tribes/trainingsite.h
-    map_objects/tribes/tribe_basic_info.cc
-    map_objects/tribes/tribe_basic_info.h
-    map_objects/tribes/tribe_descr.cc
-    map_objects/tribes/tribe_descr.h
-    map_objects/tribes/tribes.cc
-    map_objects/tribes/tribes.h
-    map_objects/tribes/ware_descr.cc
-    map_objects/tribes/ware_descr.h
-    map_objects/tribes/warehouse.cc
-    map_objects/tribes/warehouse.h
-    map_objects/tribes/warelist.cc
-    map_objects/tribes/warelist.h
-    map_objects/tribes/wareworker.h
-    map_objects/tribes/workarea_info.h
-    map_objects/tribes/worker_descr.cc
-    map_objects/tribes/worker_descr.h
-    map_objects/tribes/worker_program.cc
-    map_objects/tribes/worker_program.h
-    map_objects/tribes/worker.cc
-    map_objects/tribes/worker.h
-    map_objects/world/critter_program.h
-    map_objects/world/critter.cc
-    map_objects/world/critter.h
-    map_objects/world/editor_category.cc
-    map_objects/world/editor_category.h
-    map_objects/world/map_gen.cc
-    map_objects/world/map_gen.h
-    map_objects/world/resource_description.cc
-    map_objects/world/resource_description.h
-    map_objects/world/terrain_description.cc
-    map_objects/world/terrain_description.h
-    map_objects/world/world.cc
-    map_objects/world/world.h
+    trade_agreement.h
   # TODO(sirver): Uses SDL2 only on WIN32 for a dirty hack.
   USES_SDL2
+  USES_ATOMIC
   DEPENDS
-    ai
+    base
     base_exceptions
-    base_geometry
-    base_i18n
-    base_log
     base_macros
     base_md5
+    base_random
     base_scoped_timer
     base_time_string
+    base_times
     build_info
     economy
-    editor
+    editor  # TODO(Nordfriese): Needed only for an ugly temporary hack
     game_io
     graphic
     graphic_color
-    graphic_image_io
-    graphic_surface
-    graphic_text_layout
-    helper
+    graphic_playercolor
     io_fileread
     io_filesystem
+    io_profile
     io_stream
+    logic_addons
+    logic_commands
+    logic_constants
+    logic_exceptions
+    logic_filesystem_constants
     logic_game_controller
     logic_game_settings
+    logic_generic_save_handler
+    logic_map
+    logic_map_objects
+    logic_tribe_basic_info
+    logic_training_wheels
     logic_widelands_geometry
     map_io
     map_io_map_loader
-    network
+    note_sound
     notifications
-    random
-    scripting_coroutine
-    scripting_logic
+    scripting_logic # TODO(GunChleoc): Circular dependency
     scripting_lua_interface
     scripting_lua_table
     sound
+    sound_constants
     ui_basic
-    widelands_ball_of_mud
-    wui
-    wui_mapview_pixelfunctions
+    ui_basic_loading_message
+    widelands_options
+    wui # TODO(GunChleoc): Circular dependency
+    wui_game_tips
 )
+
+add_subdirectory(map_objects)

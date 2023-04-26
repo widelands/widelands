@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 by the Widelands Development Team
+ * Copyright (C) 2008-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -27,8 +26,7 @@
 
 namespace Widelands {
 
-bool Requirements::check(const MapObject & obj) const
-{
+bool Requirements::check(const MapObject& obj) const {
 	return !m || m->check(obj);
 }
 
@@ -37,9 +35,7 @@ constexpr uint16_t kCurrentPacketVersion = 4;
 /**
  * Read this requirement from a file
  */
-void Requirements::read
-	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
-{
+void Requirements::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
@@ -47,15 +43,12 @@ void Requirements::read
 		} else {
 			throw UnhandledVersionError("Requirements", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const WException & e) {
+	} catch (const WException& e) {
 		throw wexception("requirements: %s", e.what());
 	}
 }
 
-void Requirements::write
-	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
-	const
-{
+void Requirements::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 
 	if (!m) {
@@ -66,68 +59,53 @@ void Requirements::write
 	}
 }
 
-RequirementsStorage::RequirementsStorage
-	(uint32_t const init_id, Reader const init_reader)
-	: id_(init_id), reader_(init_reader)
-{
-	StorageMap & s = storageMap();
+RequirementsStorage::RequirementsStorage(uint32_t const init_id, Reader const init_reader)
+   : id_(init_id), reader_(init_reader) {
+	StorageMap& s = storageMap();
 
 	assert(0 < init_id);
-	assert    (init_id < 65535);
+	assert(init_id < 65535);
 	assert(s.find(init_id) == s.end());
 
 	s.insert(std::make_pair(init_id, this));
 }
 
-uint32_t RequirementsStorage::id() const
-{
+uint32_t RequirementsStorage::id() const {
 	return id_;
 }
 
-Requirements RequirementsStorage::read
-	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
-{
+Requirements RequirementsStorage::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	uint32_t const id = fr.unsigned_16();
 
-	if (id == 0)
+	if (id == 0) {
 		return Requirements();
+	}
 
-	StorageMap & s = storageMap();
+	StorageMap& s = storageMap();
 	StorageMap::iterator it = s.find(id);
 
-	if (it == s.end())
+	if (it == s.end()) {
 		throw GameDataError("unknown requirement id %u", id);
+	}
 
 	return it->second->reader_(fr, egbase, mol);
 }
 
-RequirementsStorage::StorageMap & RequirementsStorage::storageMap()
-{
+RequirementsStorage::StorageMap& RequirementsStorage::storageMap() {
 	static StorageMap map;
 	return map;
 }
 
-
-void RequireOr::add(const Requirements & req)
-{
+void RequireOr::add(const Requirements& req) {
 	m.push_back(req);
 }
 
-bool RequireOr::check(const MapObject & obj) const
-{
-	for (const Requirements& req : m) {
-		if (req.check(obj)) {
-			return true;
-		}
-	}
-
-	return false;
+bool RequireOr::check(const MapObject& obj) const {
+	return std::any_of(
+	   m.begin(), m.end(), [&obj](const Requirements& req) { return req.check(obj); });
 }
 
-void RequireOr::write
-	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
-	const
-{
+void RequireOr::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) const {
 	assert(m.size() == static_cast<uint16_t>(m.size()));
 	fw.unsigned_16(m.size());
 
@@ -136,9 +114,7 @@ void RequireOr::write
 	}
 }
 
-static Requirements read_or
-	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
-{
+static Requirements read_or(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	uint32_t const count = fr.unsigned_16();
 	RequireOr req;
 
@@ -153,26 +129,16 @@ static Requirements read_or
 
 const RequirementsStorage RequireOr::storage(requirementIdOr, read_or);
 
-
-void RequireAnd::add(const Requirements & req)
-{
+void RequireAnd::add(const Requirements& req) {
 	m.push_back(req);
 }
 
-bool RequireAnd::check(const MapObject & obj) const
-{
-	for (const Requirements& req : m) {
-		if (!req.check(obj)) {
-			return false;
-		}
-	}
-	return true;
+bool RequireAnd::check(const MapObject& obj) const {
+	return std::all_of(
+	   m.begin(), m.end(), [&obj](const Requirements& req) { return req.check(obj); });
 }
 
-void RequireAnd::write
-	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
-	const
-{
+void RequireAnd::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) const {
 	assert(m.size() == static_cast<uint16_t>(m.size()));
 	fw.unsigned_16(m.size());
 
@@ -181,9 +147,7 @@ void RequireAnd::write
 	}
 }
 
-static Requirements read_and
-	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
-{
+static Requirements read_and(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	uint32_t const count = fr.unsigned_16();
 	RequireAnd req;
 
@@ -198,40 +162,33 @@ static Requirements read_and
 
 const RequirementsStorage RequireAnd::storage(requirementIdAnd, read_and);
 
-
-bool RequireAttribute::check(const MapObject & obj) const
-{
-	if (TrainingAttribute::kTotal != at)
-	{
+bool RequireAttribute::check(const MapObject& obj) const {
+	if (TrainingAttribute::kTotal != at) {
 		int32_t const value = obj.get_training_attribute(at);
 
 		return value >= min && value <= max;
 	}
-	else
-	{
-		int32_t value = 0;
-		value += obj.get_training_attribute(TrainingAttribute::kHealth);
-		value += obj.get_training_attribute(TrainingAttribute::kAttack);
-		value += obj.get_training_attribute(TrainingAttribute::kDefense);
-		value += obj.get_training_attribute(TrainingAttribute::kEvade);
-		return value >= min && value <= max;
-	}
+	int32_t value = 0;
+	value += obj.get_training_attribute(TrainingAttribute::kHealth);
+	value += obj.get_training_attribute(TrainingAttribute::kAttack);
+	value += obj.get_training_attribute(TrainingAttribute::kDefense);
+	value += obj.get_training_attribute(TrainingAttribute::kEvade);
+	return value >= min && value <= max;
 }
 
-void RequireAttribute::write
-	(FileWrite & fw, EditorGameBase &, MapObjectSaver &) const
-{
+void RequireAttribute::write(FileWrite& fw,
+                             EditorGameBase& /* egbase */,
+                             MapObjectSaver& /* mos */) const {
 	fw.unsigned_8(static_cast<uint8_t>(at));
 	fw.signed_32(min);
 	fw.signed_32(max);
 }
 
-static Requirements read_attribute
-	(FileRead & fr, EditorGameBase &, MapObjectLoader &)
-{
+static Requirements
+read_attribute(FileRead& fr, EditorGameBase& /* egbase */, MapObjectLoader& /* mol */) {
 	// Get the training attribute and check if it is a valid enum member
 	// We use a temp value, because the static_cast to the enum might be undefined.
-	uint8_t temp_at  = fr.unsigned_8();
+	uint8_t temp_at = fr.unsigned_8();
 	switch (temp_at) {
 	case static_cast<uint8_t>(TrainingAttribute::kHealth):
 	case static_cast<uint8_t>(TrainingAttribute::kAttack):
@@ -240,18 +197,15 @@ static Requirements read_attribute
 	case static_cast<uint8_t>(TrainingAttribute::kTotal):
 		break;
 	default:
-		throw GameDataError
-			(
-			 "expected kHealth (%u), kAttack (%u), kDefense (%u), kEvade "
-			 "(%u) or kTotal (%u) but found unknown attribute value (%u)",
-				TrainingAttribute::kHealth,
-				TrainingAttribute::kAttack,
-				TrainingAttribute::kDefense,
-				TrainingAttribute::kEvade,
-				TrainingAttribute::kTotal,
-				temp_at);
+		throw GameDataError("expected kHealth (%u), kAttack (%u), kDefense (%u), kEvade "
+		                    "(%u) or kTotal (%u) but found unknown attribute value (%u)",
+		                    static_cast<unsigned int>(TrainingAttribute::kHealth),
+		                    static_cast<unsigned int>(TrainingAttribute::kAttack),
+		                    static_cast<unsigned int>(TrainingAttribute::kDefense),
+		                    static_cast<unsigned int>(TrainingAttribute::kEvade),
+		                    static_cast<unsigned int>(TrainingAttribute::kTotal), temp_at);
 	}
-	TrainingAttribute const at  = static_cast<TrainingAttribute>(temp_at);
+	TrainingAttribute const at = static_cast<TrainingAttribute>(temp_at);
 
 	int32_t const min = fr.signed_32();
 	int32_t const max = fr.signed_32();
@@ -259,6 +213,5 @@ static Requirements read_attribute
 	return RequireAttribute(at, min, max);
 }
 
-const RequirementsStorage RequireAttribute::
-	storage(requirementIdAttribute, read_attribute);
-}
+const RequirementsStorage RequireAttribute::storage(requirementIdAttribute, read_attribute);
+}  // namespace Widelands

@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_productionsite_type {
    name = "empire_toolsmithy",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Toolsmithy"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -20,20 +20,25 @@ tribes:new_productionsite_type {
       marble = 2
    },
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 58, 61 },
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 63, 64 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
-         hotspot = { 58, 61 },
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 63, 64 },
       },
    },
 
    aihints = {
-      forced_after = 400,
-      prohibited_till = 400
+      basic_amount = 1
    },
 
    working_positions = {
@@ -41,28 +46,14 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      iron = 8,
-      log = 8
-   },
-   outputs = {
-      "felling_ax",
-      "bread_paddle",
-      "fire_tongs",
-      "fishing_rod",
-      "hammer",
-      "kitchen_tools",
-      "pick",
-      "scythe",
-      "shovel",
-      "hunting_spear",
-      "basket",
-      "saw"
+      { name = "log", amount = 8 },
+      { name = "iron", amount = 8 },
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=produce_felling_ax",
             "call=produce_basket",
@@ -76,152 +67,153 @@ tribes:new_productionsite_type {
             "call=produce_saw",
             "call=produce_scythe",
             "call=produce_shovel",
-            "return=skipped"
          }
       },
       produce_felling_ax = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a felling ax because ...
-         descname = _"making a felling ax",
+         descname = _("making a felling ax"),
          actions = {
             "return=skipped unless economy needs felling_ax",
-            "sleep=32000",
             "consume=iron log",
-            "play_sound=sound/smiths toolsmith 192",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
+            "animate=working duration:35s",
             "produce=felling_ax"
          }
       },
       produce_basket = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
-         descname = _"making a basket",
+         descname = _("making a basket"),
          actions = {
             "return=skipped unless economy needs basket",
-            "sleep=32000",
             "consume=iron log",
-            "play_sound=sound/smiths toolsmith 192",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
+            "animate=working duration:35s",
             "produce=basket"
          }
       },
       produce_bread_paddle = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because ...
-         descname = _"making a bread paddle",
+         descname = _("making a bread paddle"),
          actions = {
             "return=skipped unless economy needs bread_paddle",
-            "sleep=32000",
             "consume=iron log",
-            "play_sound=sound/smiths toolsmith 192",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
+            "animate=working duration:35s",
             "produce=bread_paddle"
          }
       },
       produce_fire_tongs = {
          -- TRANSLATORS: Completed/Skipped/Did not start making fire tongs because ...
-         descname = _"making fire tongs",
+         descname = _("making fire tongs"),
          actions = {
             "return=skipped unless economy needs fire_tongs",
-            "sleep=32000",
             "consume=iron log",
-            "play_sound=sound/smiths toolsmith 192",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
+            "animate=working duration:35s",
             "produce=fire_tongs"
          }
       },
       produce_fishing_rod = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a fishing rod because ...
-         descname = _"making a fishing rod",
+         descname = _("making a fishing rod"),
          actions = {
             "return=skipped unless economy needs fishing_rod",
-            "sleep=32000",
             "consume=iron log",
-            "play_sound=sound/smiths toolsmith 192",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
+            "animate=working duration:35s",
             "produce=fishing_rod"
          }
       },
       produce_hammer = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
-         descname = _"making a hammer",
+         descname = _("making a hammer"),
          actions = {
             "return=skipped unless economy needs hammer",
-            "sleep=32000",
             "consume=iron log",
-            "play_sound=sound/smiths toolsmith 192",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
+            "animate=working duration:35s",
             "produce=hammer"
          }
       },
       produce_hunting_spear = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because ...
-         descname = _"making a hunting spear",
+         descname = _("making a hunting spear"),
          actions = {
             "return=skipped unless economy needs hunting_spear",
-            "sleep=32000",
             "consume=iron log",
-            "play_sound=sound/smiths toolsmith 192",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
+            "animate=working duration:35s",
             "produce=hunting_spear"
          }
       },
       produce_kitchen_tools = {
          -- TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
-         descname = _"making kitchen tools",
+         descname = _("making kitchen tools"),
          actions = {
             "return=skipped unless economy needs kitchen_tools",
-            "sleep=32000",
             "consume=iron log",
-            "play_sound=sound/smiths toolsmith 192",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
+            "animate=working duration:35s",
             "produce=kitchen_tools"
          }
       },
       produce_pick = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
-         descname = _"making a pick",
+         descname = _("making a pick"),
          actions = {
             "return=skipped unless economy needs pick",
-            "sleep=32000",
             "consume=iron log",
-            "play_sound=sound/smiths toolsmith 192",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
+            "animate=working duration:35s",
             "produce=pick"
          }
       },
       produce_saw = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a saw because ...
-         descname = _"making a saw",
+         descname = _("making a saw"),
          actions = {
             "return=skipped unless economy needs saw",
-            "sleep=32000",
             "consume=iron log",
-            "play_sound=sound/smiths toolsmith 192",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
+            "animate=working duration:35s",
             "produce=saw"
          }
       },
       produce_scythe = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
-         descname = _"making a scythe",
+         descname = _("making a scythe"),
          actions = {
             "return=skipped unless economy needs scythe",
-            "sleep=32000",
             "consume=iron log",
-            "play_sound=sound/smiths toolsmith 192",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
+            "animate=working duration:35s",
             "produce=scythe"
          }
       },
       produce_shovel = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
-         descname = _"making a shovel",
+         descname = _("making a shovel"),
          actions = {
             "return=skipped unless economy needs shovel",
-            "sleep=32000",
             "consume=iron log",
-            "play_sound=sound/smiths toolsmith 192",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
+            "animate=working duration:35s",
             "produce=shovel"
          }
       },
    },
 }
+
+pop_textdomain()

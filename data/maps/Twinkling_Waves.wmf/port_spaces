@@ -1,7 +1,8 @@
-# Automatically created by Widelands bzr7574[artifacts] (Debug)
+# Automatically created by Widelands bzr7905[trunk] (Debug)
 
 [global]
 packet_version="1"
+waterway_max_length="7"
 number_of_port_spaces="13"
 
 [port_spaces]

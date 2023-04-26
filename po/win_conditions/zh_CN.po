@@ -1,16 +1,18 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Frank Tang <roadtang@gmail.com>, 2015
+# Roy Luo <1598359376@qq.com>, 2021
+# liu lizhi <xingzuo88@qq.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-12-14 05:31+0000\n"
-"PO-Revision-Date: 2015-12-17 16:18+0000\n"
-"Last-Translator: Frank Tang <roadtang@gmail.com>\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2023-01-16 09:46+0000\n"
+"PO-Revision-Date: 2015-02-03 14:55+0000\n"
+"Last-Translator: liu lizhi <xingzuo88@qq.com>, 2021\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,305 +20,356 @@ msgstr ""
 "Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../../scripting/win_condition_texts.lua:4
-msgid "Congratulations!"
-msgstr "恭喜！"
-
-#: ../../scripting/win_condition_texts.lua:5
-msgid "You have won this game!"
-msgstr ""
-
-#: ../../scripting/win_condition_texts.lua:9
-msgid "You are defeated!"
-msgstr ""
-
-#: ../../scripting/win_condition_texts.lua:10
-msgid ""
-"You lost your last warehouse and are therefore defeated. You may continue as"
-" spectator if you want."
-msgstr ""
-
-#: ../../scripting/win_condition_texts.lua:14
-msgid "You won"
-msgstr ""
-
-#: ../../scripting/win_condition_texts.lua:15
-msgid "You are the winner!"
-msgstr ""
-
-#: ../../scripting/win_condition_texts.lua:19
-msgid "You lost"
-msgstr ""
-
-#: ../../scripting/win_condition_texts.lua:20
-msgid "You’ve lost this game!"
-msgstr ""
-
-#: ../../scripting/win_condition_texts.lua:24
-msgid "Status"
-msgstr ""
-
-#: ../../scripting/win_condition_texts.lua:25
-msgid "Player overview:"
-msgstr ""
-
-#: ../../scripting/win_conditions/artifacts.lua:16
+#: ../../data/scripting/win_conditions/artifacts.lua:15
 msgid "Artifacts"
-msgstr ""
+msgstr "远古遗物"
 
-#: ../../scripting/win_conditions/artifacts.lua:18
+#: ../../data/scripting/win_conditions/artifacts.lua:17
 msgid ""
 "Search for ancient artifacts. Once all of them are found, the team who owns "
 "most of them will win the game."
-msgstr ""
+msgstr "搜寻远古遗物。一旦它们被全部找到，拥有最多数量远古遗物的团队将赢得比赛。"
 
-#: ../../scripting/win_conditions/artifacts.lua:55
+#: ../../data/scripting/win_conditions/artifacts.lua:21
+msgid "Artifacts owned"
+msgstr "拥有的远古遗物"
+
+#: ../../data/scripting/win_conditions/artifacts.lua:76
 msgid "No Artifacts"
-msgstr ""
+msgstr "没有远古遗物"
 
-#: ../../scripting/win_conditions/artifacts.lua:55
+#: ../../data/scripting/win_conditions/artifacts.lua:76
+#, lua-format
 msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
-"bug report on https://launchpad.net/widelands and specify your Widelands "
-"version and the map you tried to load."
-msgstr ""
+"bug report on %s and specify your Widelands version and the map you tried to"
+" load."
+msgstr "这张地图上没有远古遗物。这不应该发生。请提交一份 %s 的软件错误并详述你的Widelands版本和所尝试加载的地图。"
 
-#: ../../scripting/win_conditions/artifacts.lua:61
-msgid "New Artifact Found"
-msgstr ""
+#. TRANSLATORS: Keep this as short as possible. You can also translate this as
+#. "New artifact"
+#: ../../data/scripting/win_conditions/artifacts.lua:83
+msgid "Artifact Found"
+msgstr "找到远古遗物"
 
-#: ../../scripting/win_conditions/artifacts.lua:62
+#: ../../data/scripting/win_conditions/artifacts.lua:84
 msgid "Your team found a new artifact."
-msgstr ""
+msgstr "你的团队找到新的远古遗物。"
 
-#: ../../scripting/win_conditions/artifacts.lua:65
+#: ../../data/scripting/win_conditions/artifacts.lua:85
+msgid "You found a new artifact."
+msgstr "你发现了一件远古遗物。"
+
+#. TRANSLATORS: Keep this as short as possible.
+#: ../../data/scripting/win_conditions/artifacts.lua:89
 msgid "Artifact Lost"
-msgstr ""
+msgstr "丢失远古遗物"
 
-#: ../../scripting/win_conditions/artifacts.lua:66
+#: ../../data/scripting/win_conditions/artifacts.lua:90
 msgid "One of your team’s artifacts was stolen by an enemy."
-msgstr ""
+msgstr "你所在团队的一件远古遗物被敌人偷走了。"
 
-#: ../../scripting/win_conditions/artifacts.lua:69
+#: ../../data/scripting/win_conditions/artifacts.lua:91
+msgid "One of your artifacts was stolen by an enemy."
+msgstr "你的一件远古遗物被偷了。"
+
+#. TRANSLATORS: Keep this as short as possible.
+#: ../../data/scripting/win_conditions/artifacts.lua:95
 msgid "Artifact Conquered"
-msgstr ""
+msgstr "控制远古遗物"
 
-#: ../../scripting/win_conditions/artifacts.lua:70
+#: ../../data/scripting/win_conditions/artifacts.lua:96
 msgid "Your team stole an artifact from an enemy."
-msgstr ""
+msgstr "你所在的团队从敌人哪里偷来了一件远古遗物。"
 
-#. TRANSLATORS: This is used to seperate players’ names in a list, e.g.
-#. "Steve, Robert, David"
-#: ../../scripting/win_conditions/artifacts.lua:140
-msgid ", "
-msgstr ""
+#: ../../data/scripting/win_conditions/artifacts.lua:97
+msgid "You stole an artifact from an enemy."
+msgstr "你从敌人偷了一件远古遗物。"
 
-#: ../../scripting/win_conditions/artifacts.lua:147
+#: ../../data/scripting/win_conditions/artifacts.lua:180
 msgid "Overview:"
-msgstr ""
+msgstr "概览："
 
-#: ../../scripting/win_conditions/artifacts.lua:150
-#: ../../scripting/win_conditions/artifacts.lua:162
+#: ../../data/scripting/win_conditions/artifacts.lua:183
+#: ../../data/scripting/win_conditions/artifacts.lua:196
 #, lua-format
 msgid "%i artifact"
 msgid_plural "%i artifacts"
-msgstr[0] ""
+msgstr[0] "%i远古遗物"
 
-#: ../../scripting/win_conditions/artifacts.lua:151
+#. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
+#: ../../data/scripting/win_conditions/artifacts.lua:185
 msgid "%1$s owns %2$s."
-msgstr ""
+msgstr "%1$s拥有%2$s。"
 
 #. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members
 #. (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
-#: ../../scripting/win_conditions/artifacts.lua:164
+#: ../../data/scripting/win_conditions/artifacts.lua:198
 msgid "Team %1$i (%2$s) owns %3$s."
-msgstr ""
+msgstr "团队%1$i (%2$s) 拥有 %3$s。"
 
-#: ../../scripting/win_conditions/collectors.lua:19
+#: ../../data/scripting/win_conditions/collectors.lua:17
 msgid "Collectors"
-msgstr "采集者"
+msgstr "收集者"
 
-#: ../../scripting/win_conditions/collectors.lua:22
+#: ../../data/scripting/win_conditions/collectors.lua:20
+#, lua-format
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
-"highest number of wares at the end of 4 hours wins the game."
+"highest score after %s wins the game."
 msgstr ""
 
-#: ../../scripting/win_conditions/collectors.lua:25
-msgid "Points"
-msgstr "分数"
+#. TRANSLATORS: Will be inserted into "The player with the highest score after
+#. %s wins the game."
+#. TRANSLATORS: Will be inserted into "The winner will be the player […] with
+#. the most territory after %s"
+#. TRANSLATORS: Will be inserted into "The game will end after %s."
+#: ../../data/scripting/win_conditions/collectors.lua:24
+#: ../../data/scripting/win_conditions/territorial_time.lua:32
+#: ../../data/scripting/win_conditions/wood_gnome.lua:23
+msgid "the configured time limit"
+msgstr ""
 
-#: ../../scripting/win_conditions/collectors.lua:104
+#: ../../data/scripting/win_conditions/collectors.lua:28
+msgid "Points"
+msgstr "得分"
+
+#: ../../data/scripting/win_conditions/collectors.lua:72
 #, lua-format
 msgid "Status for %s"
-msgstr ""
+msgstr "%s的状态"
 
 #. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
-#: ../../scripting/win_conditions/collectors.lua:116
+#: ../../data/scripting/win_conditions/collectors.lua:84
 msgid "%1$s (%2$i P) x %3$i = %4$i P"
-msgstr ""
+msgstr "%1$s ( %2$i P) x %3$i= %4$iP"
 
-#: ../../scripting/win_conditions/collectors.lua:120
+#: ../../data/scripting/win_conditions/collectors.lua:88
 #, lua-format
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
-msgstr[0] ""
+msgstr[0] "总计：%i 点"
 
-#. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-#: ../../scripting/win_conditions/collectors.lua:134
+#: ../../data/scripting/win_conditions/collectors.lua:111
 #, lua-format
-msgid "%i minute"
-msgid_plural "%i minutes"
-msgstr[0] ""
+msgid "Status for Team %d"
+msgstr "%d团队的状态"
 
-#. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../scripting/win_conditions/collectors.lua:139
-msgid "%1% hour and %2%"
-msgid_plural "%1% hours and %2%"
-msgstr[0] ""
-
-#. TRANSLATORS: Context: 'The game will end in 2 hours.'
-#: ../../scripting/win_conditions/collectors.lua:142
-msgid "%1% hour"
-msgid_plural "%1% hours"
-msgstr[0] ""
-
-#. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../scripting/win_conditions/collectors.lua:146
+#: ../../data/scripting/win_conditions/collectors.lua:113
 #, lua-format
-msgid "The game will end in %s."
-msgstr ""
+msgid "Team Total: %i point"
+msgid_plural "Team Total: %i points"
+msgstr[0] "团队总计：%i点"
 
-#: ../../scripting/win_conditions/defeat_all.lua:15
+#: ../../data/scripting/win_conditions/defeat_all.lua:15
 msgid "Autocrat"
-msgstr ""
+msgstr "独裁者"
 
-#: ../../scripting/win_conditions/defeat_all.lua:17
-msgid "The tribe or team that can defeat all others wins the game!"
-msgstr ""
-
-#: ../../scripting/win_conditions/endless_game.lua:15
-msgid "Endless Game"
-msgstr ""
-
-#: ../../scripting/win_conditions/endless_game.lua:17
-msgid "This is an endless game without rules."
-msgstr ""
-
-#: ../../scripting/win_conditions/endless_game_fogless.lua:15
-msgid "Endless Game (no fog)"
-msgstr ""
-
-#: ../../scripting/win_conditions/endless_game_fogless.lua:16
-msgid "This is an endless game without rules. Fog of war is disabled."
-msgstr ""
-
-#: ../../scripting/win_conditions/territorial_lord.lua:17
-msgid "Territorial Lord"
-msgstr ""
-
-#: ../../scripting/win_conditions/territorial_lord.lua:20
+#: ../../data/scripting/win_conditions/defeat_all.lua:17
 msgid ""
-"Each player or team tries to obtain more than half of the map’s area. The "
-"winner will be the player or the team that is able to keep that area for at "
-"least 20 minutes."
+"The tribe or team that can defeat all others wins the game! This means the "
+"opponents do not have any headquarters, ports or warehouses left."
 msgstr ""
 
-#: ../../scripting/win_conditions/territorial_lord.lua:155
-#: ../../scripting/win_conditions/territorial_time.lua:27
+#: ../../data/scripting/win_conditions/endless_game.lua:14
+msgid "Endless Game"
+msgstr "无休止的游戏"
+
+#: ../../data/scripting/win_conditions/endless_game.lua:16
+msgid "This is an endless game without rules."
+msgstr "这是一场没有规则的无休止游戏。"
+
+#: ../../data/scripting/win_conditions/hq_hunter.lua:16
+msgid "HQ Hunter"
+msgstr ""
+
+#: ../../data/scripting/win_conditions/hq_hunter.lua:18
+msgid ""
+"The tribe or team that can find and destroy all other headquarters wins the "
+"game! Does not work with starting conditions without headquarters."
+msgstr ""
+
+#: ../../data/scripting/win_conditions/territorial_functions.lua:21
 #, lua-format
 msgid "Team %i"
-msgstr ""
+msgstr "团队%i"
 
-#: ../../scripting/win_conditions/territorial_lord.lua:157
-#: ../../scripting/win_conditions/territorial_time.lua:201
-#, lua-format
-msgid "%s owns more than half of the map’s area."
-msgstr ""
+#: ../../data/scripting/win_conditions/territorial_functions.lua:22
+msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
+msgstr "%1$s拥有%2$3.0f%%的土地 (%3$i of %4$i)。"
 
-#: ../../scripting/win_conditions/territorial_lord.lua:159
-#: ../../scripting/win_conditions/territorial_time.lua:203
-#, lua-format
-msgid "You’ve still got %i minute to prevent a victory."
-msgid_plural "You’ve still got %i minutes to prevent a victory."
-msgstr[0] ""
+#: ../../data/scripting/win_conditions/territorial_functions.lua:23
+msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
+msgstr "%1$s拥有了%2$3.0f%%的土地 (%3$i of %4$i)。"
 
-#: ../../scripting/win_conditions/territorial_lord.lua:164
-#: ../../scripting/win_conditions/territorial_time.lua:208
+#. TRANSLATORS: subtext of the territorial statistics hook. Keep it short and
+#. consistent with the translation of the Win condition.
+#: ../../data/scripting/win_conditions/territorial_functions.lua:29
+msgid "Territory percentage"
+msgstr "领土百分比"
+
+#: ../../data/scripting/win_conditions/territorial_functions.lua:235
 msgid "You own more than half of the map’s area."
-msgstr ""
+msgstr "你拥有超过半数的地图面积。"
 
-#: ../../scripting/win_conditions/territorial_lord.lua:166
-#: ../../scripting/win_conditions/territorial_time.lua:210
+#: ../../data/scripting/win_conditions/territorial_functions.lua:236
 #, lua-format
 msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
-msgstr[0] ""
+msgstr[0] "再坚持 %i 分钟就赢了。"
 
-#: ../../scripting/win_conditions/territorial_time.lua:17
-msgid "Territorial Time"
-msgstr ""
+#: ../../data/scripting/win_conditions/territorial_functions.lua:264
+#, lua-format
+msgid "%s owns more than half of the map’s area."
+msgstr "%s拥有超过半数的地图面积。"
 
-#: ../../scripting/win_conditions/territorial_time.lua:20
+#: ../../data/scripting/win_conditions/territorial_functions.lua:265
+#, lua-format
+msgid "You’ve still got %i minute to prevent a victory."
+msgid_plural "You’ve still got %i minutes to prevent a victory."
+msgstr[0] "你还有%i分钟的时间来阻止胜利。"
+
+#: ../../data/scripting/win_conditions/territorial_lord.lua:18
+msgid "Territorial Lord"
+msgstr "领土之主"
+
+#: ../../data/scripting/win_conditions/territorial_lord.lua:21
 msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
-"least 20 minutes, or the one with the most territory after 4 hours, "
-"whichever comes first."
-msgstr ""
+"least 20 minutes. If the peaceful mode is selected, the game ends if one "
+"player has more land than any other player could gain."
+msgstr "每一个游戏玩家或团队都试图获得地图面积的一半以上的领土。能够持续控制该区域至少20分钟的游戏玩家或团队将会成为胜利者。如果选择了和平模式，如果一个游戏玩家拥有的土地面积超过了其他的任何玩家，游戏就结束了。"
 
-#: ../../scripting/win_conditions/territorial_time.lua:25
-msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr ""
+#: ../../data/scripting/win_conditions/territorial_lord.lua:58
+msgid "Currently no faction owns more than half of the map’s area."
+msgstr "目前没有任何团队拥有超过半数以上的地图面积。"
 
-#: ../../scripting/win_conditions/territorial_time.lua:26
-msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr ""
+#: ../../data/scripting/win_conditions/territorial_time.lua:21
+msgid "Territorial Time"
+msgstr "领土时间"
 
-#: ../../scripting/win_conditions/territorial_time.lua:224
+#: ../../data/scripting/win_conditions/territorial_time.lua:24
 #, lua-format
-msgid "Otherwise the game will end in %i minute."
-msgid_plural "Otherwise the game will end in %i minutes."
+msgid ""
+"Each player or team tries to obtain more than half of the map’s area. The "
+"winner will be the player or the team that is able to keep that area for at "
+"least 20 minutes, or the one with the most territory after %s, whichever "
+"comes first. If the peaceful mode is selected, the game ends if one player "
+"has more land than any other player could gain."
+msgstr ""
+
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:357
+msgid "%1% day"
+msgid_plural "%1% days"
 msgstr[0] ""
 
-#: ../../scripting/win_conditions/territorial_time.lua:229
-#: ../../scripting/win_conditions/wood_gnome.lua:86
-#, lua-format
-msgid "The game will end in %i minute."
-msgid_plural "The game will end in %i minutes."
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:358
+msgid "%1% hour"
+msgid_plural "%1% hours"
+msgstr[0] "%1%小时"
+
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:359
+msgid "%1% minute"
+msgid_plural "%1% minutes"
 msgstr[0] ""
 
-#: ../../scripting/win_conditions/wood_gnome.lua:16
+#. TRANSLATORS: 1 day, 12 hours, and 30 minutes
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:364
+msgid "%1$s, %2$s, and %3$s"
+msgstr ""
+
+#. TRANSLATORS: "2 hours and 30 minutes" or "2 days and 12 hours" or "2 days
+#. and 30 minutes"
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:367
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:371
+msgid "%1$s and %2$s"
+msgstr ""
+
+#. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:394
+#, lua-format
+msgid "The game will end in %s."
+msgstr "游戏将在%s结束。"
+
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:33
+msgid "Congratulations!"
+msgstr "恭喜！"
+
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:34
+msgid "You have won this game!"
+msgstr "你已经赢得了本局游戏！"
+
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:45
+msgid "You are defeated!"
+msgstr "你被打败了！"
+
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:46
+msgid ""
+"You lost your last warehouse and are therefore defeated. You may continue as"
+" spectator if you want."
+msgstr "你失去了你的最后一个仓库，因此输掉了游戏。如果你愿意，你可以作为观众继续留在游戏里。 "
+
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:57
+msgid "You won"
+msgstr "你赢了"
+
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:58
+msgid "You are the winner!"
+msgstr "你是胜利者！"
+
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:69
+msgid "You lost"
+msgstr "你输了"
+
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:70
+msgid "You’ve lost this game!"
+msgstr "你已经输掉了本局游戏！"
+
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:81
+msgid "Status"
+msgstr "状态"
+
+#. TRANSLATORS: This is an overview for all players.
+#: ../../data/scripting/win_conditions/win_condition_texts.lua:83
+msgid "Player overview:"
+msgstr "游戏玩家概览："
+
+#: ../../data/scripting/win_conditions/wood_gnome.lua:16
 msgid "Wood Gnome"
-msgstr ""
+msgstr "木材守护神"
 
-#: ../../scripting/win_conditions/wood_gnome.lua:19
+#: ../../data/scripting/win_conditions/wood_gnome.lua:19
+#, lua-format
 msgid ""
 "As wood gnome you like big forests, so your task is to have more trees on "
-"your territory than any other player. The game will end after 4 hours of "
-"playing. The one with the most trees at that point will win the game."
+"your territory than any other player. The game will end after %s. The one "
+"with the most trees at that point will win the game."
 msgstr ""
 
-#: ../../scripting/win_conditions/wood_gnome.lua:22
+#: ../../data/scripting/win_conditions/wood_gnome.lua:28
 msgid "Trees owned"
-msgstr ""
+msgstr "拥有的树木"
 
-#: ../../scripting/win_conditions/wood_gnome.lua:92
-#: ../../scripting/win_conditions/wood_gnome.lua:143
-#: ../../scripting/win_conditions/wood_gnome.lua:147
+#: ../../data/scripting/win_conditions/wood_gnome.lua:68
+#: ../../data/scripting/win_conditions/wood_gnome.lua:90
+#: ../../data/scripting/win_conditions/wood_gnome.lua:95
 #, lua-format
 msgid "%i tree"
 msgid_plural "%i trees"
-msgstr[0] ""
+msgstr[0] "%i树木"
 
-#: ../../scripting/win_conditions/wood_gnome.lua:94
+#. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
+#: ../../data/scripting/win_conditions/wood_gnome.lua:71
 msgid "%1$s has %2$s at the moment."
-msgstr ""
+msgstr "%1$s目前拥有%2$s。"
 
-#: ../../scripting/win_conditions/wood_gnome.lua:144
+#. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
+#: ../../data/scripting/win_conditions/wood_gnome.lua:92
 msgid "%1$s had %2$s."
-msgstr ""
+msgstr "%1$s拥有%2$s。"
 
-#: ../../scripting/win_conditions/wood_gnome.lua:149
+#. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
+#: ../../data/scripting/win_conditions/wood_gnome.lua:98
 msgid "The winner is %1$s with %2$s."
-msgstr ""
+msgstr "胜利者是%1$s和%2$s。"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2007-2008, 2010-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,40 +20,35 @@
 
 #include "base/wexception.h"
 #include "logic/editor_game_base.h"
-#include "logic/map_objects/map_object.h"
 
 namespace Widelands {
 
 /*
  * Returns true if this object has already been inserted
  */
-bool MapObjectLoader::is_object_known(Serial const n) {
-	return objects_.find(n) != objects_.end();
+bool MapObjectLoader::is_object_known(Serial const n) const {
+	return objects_.count(n) == 1;
 }
-
 
 /*
  * mark this object as saved
  */
-void MapObjectLoader::mark_object_as_loaded(MapObject & obj)
-{
+void MapObjectLoader::mark_object_as_loaded(MapObject& obj) {
 	loaded_objects_[&obj] = true;
 }
 
 /*
  * Return the number of unsaved objects
  */
-int32_t MapObjectLoader::get_nr_unloaded_objects()
-{
+int32_t MapObjectLoader::get_nr_unloaded_objects() {
 	int32_t result = 0;
-	std::map<MapObject *, bool>::const_iterator const loaded_obj_end =
-		loaded_objects_.end();
-	for
-		(std::map<MapObject *, bool>::const_iterator it = loaded_objects_.begin();
-		 it != loaded_obj_end;
-		 ++it)
-		if (!it->second)
+	std::map<MapObject*, bool>::const_iterator const loaded_obj_end = loaded_objects_.end();
+	for (std::map<MapObject*, bool>::const_iterator it = loaded_objects_.begin();
+	     it != loaded_obj_end; ++it) {
+		if (!it->second) {
 			++result;
+		}
+	}
 	return result;
 }
 
@@ -63,8 +57,7 @@ int32_t MapObjectLoader::get_nr_unloaded_objects()
  *
  * \note Only use this for compatibility hacks!
  */
-void MapObjectLoader::schedule_destroy(MapObject & obj)
-{
+void MapObjectLoader::schedule_destroy(MapObject& obj) {
 	schedule_destroy_.push_back(&obj);
 }
 
@@ -74,8 +67,7 @@ void MapObjectLoader::schedule_destroy(MapObject & obj)
  *
  * \note Only use this for compatibility hacks!
  */
-void MapObjectLoader::schedule_act(Bob & bob)
-{
+void MapObjectLoader::schedule_act(Bob& bob) {
 	schedule_act_.push_back(&bob);
 }
 
@@ -84,17 +76,16 @@ void MapObjectLoader::schedule_act(Bob & bob)
  *
  * \note Only use this for compatibility hacks!
  */
-void MapObjectLoader::load_finish_game(Game & g)
-{
+void MapObjectLoader::load_finish_game(Game& g) {
 	while (!schedule_destroy_.empty()) {
 		schedule_destroy_.back()->schedule_destroy(g);
 		schedule_destroy_.pop_back();
 	}
 
 	while (!schedule_act_.empty()) {
-		schedule_act_.back()->schedule_act(g, 1);
+		schedule_act_.back()->schedule_act(g, Duration(1));
 		schedule_act_.pop_back();
 	}
 }
 
-}
+}  // namespace Widelands

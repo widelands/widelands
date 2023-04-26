@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -27,23 +26,25 @@
 namespace Widelands {
 
 struct CmdLuaScript : public GameLogicCommand {
-	CmdLuaScript() : GameLogicCommand(0) {} // For savegame loading
-	CmdLuaScript
-		(uint32_t const init_duetime, const std::string& script) :
-		GameLogicCommand(init_duetime), script_(script) {}
+	CmdLuaScript() : GameLogicCommand(Time(0)) {
+	}  // For savegame loading
+	CmdLuaScript(const Time& init_duetime, const std::string& script)
+	   : GameLogicCommand(init_duetime), script_(script) {
+	}
 
 	// Write these commands to a file (for savegames)
-	void write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
-	void read (FileRead  &, EditorGameBase &, MapObjectLoader &) override;
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
-	QueueCommandTypes id() const override {return QueueCommandTypes::kLuaScript;}
+	[[nodiscard]] QueueCommandTypes id() const override {
+		return QueueCommandTypes::kLuaScript;
+	}
 
-	void execute(Game &) override;
+	void execute(Game&) override;
 
 private:
 	std::string script_;
 };
-
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_CMD_LUASCRIPT_H

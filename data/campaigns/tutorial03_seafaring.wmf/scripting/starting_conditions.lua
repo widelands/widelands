@@ -78,12 +78,20 @@ function init_player()
    {"atlanteans_guardhouse", 49, 60},
    {"atlanteans_crystalmine", 51, 61},
    {"atlanteans_guardhall", 43, 64},
+   {"atlanteans_guardhall", 16, 90},
+   {"atlanteans_guardhall", 47, 92},
+   {"atlanteans_guardhall", 41, 101},
+   {"atlanteans_guardhall", 27, 82},
+   {"atlanteans_guardhall", 37, 92},
    {"atlanteans_fishbreeders_house", 40, 66},
    {"atlanteans_fishers_house", 42, 66},
    {"atlanteans_fishbreeders_house", 44, 66},
    {"atlanteans_fishers_house", 46, 66},
    {"atlanteans_fishbreeders_house", 48, 66},
    {"atlanteans_castle", 22, 55},
+   {"atlanteans_castle", 19, 71},
+   {"atlanteans_castle", 40, 74},
+   {"atlanteans_castle", 27, 99},
    {"atlanteans_coalmine", 22, 48},
    {"atlanteans_coalmine", 16, 49},
    {"atlanteans_farm", 20, 59},
@@ -102,8 +110,8 @@ function init_player()
    {"atlanteans_horsefarm", 40, 55},
    {"atlanteans_spiderfarm", 37, 45},
    {"atlanteans_weaving_mill", 45, 45},
-   {"atlanteans_smelting_works", 35, 56, wares = {coal = 8, iron_ore = 8}}, -- no gold
-   {"atlanteans_smelting_works", 35, 59, wares = {coal = 8, iron_ore = 8}},
+   {"atlanteans_smelting_works", 35, 56, inputs = {coal = 8, iron_ore = 8}}, -- no gold
+   {"atlanteans_smelting_works", 35, 59, inputs = {coal = 8, iron_ore = 8}},
    {"atlanteans_toolsmithy", 41, 52},
    {"atlanteans_weaponsmithy", 37, 54},
    {"atlanteans_tower_small", 34, 63},
@@ -142,22 +150,32 @@ function init_player()
    {"atlanteans_goldmine", 32, 25}
    )
 
-   plr:forbid_buildings{"atlanteans_shipyard"}
+   plr:forbid_buildings{"atlanteans_shipyard", "atlanteans_ferry_yard"}
 
-   connected_road(plr,map:get_field(42,44).immovable,"bl,br,bl|bl,bl|bl,l|l,bl|l,l,l|l,l|tr,tl|r,tr")
-   connected_road(plr,map:get_field(42,44).immovable,"br,r|br,r,r|r,r,tr|r,r|r,r|br,bl|br,br|br,br|r,r")
-   connected_road(plr,map:get_field(35,47).immovable,"r,r,tr|r,r|br,r|br,br|br,br|br,bl|br,br,r|br,r|br,bl|br,br|br,r|r,br,r")
-   connected_road(plr,map:get_field(45,58).immovable,"r,r|bl,br,bl|bl,bl,l|bl,bl|bl,bl")
-   connected_road(plr,map:get_field(48,67).immovable,"l,l|l,l|l,l|l,l|l,tl|tl,tl|l,l,l|l,l,bl|l,tl,l|l,bl|l,l|bl,l,l|l,l|l,l,tl|tr,tr|tl,tr,tr|tr,tr|tr,tr|tr,tr|tr,tr|tr,tr|tr,tr|tr,tr|tr,tr|tr,r|r,r|r,r|br,br|br,r,r")
-   connected_road(plr,map:get_field(43,53).immovable,"l,l|br,bl,bl|l,l|l,tl|bl,l,bl|bl,bl|br,r|br,bl|bl,bl")
-   connected_road(plr,map:get_field(17,50).immovable,"r,r|r,r|tr,r|br,r|br,br|r,br|br,br|br,br,r|br,r|bl,br|r,r|tr,r")
-   connected_road(plr,map:get_field(24,60).immovable,"l,l,l")
-   connected_road(plr,map:get_field(54,54).immovable,"tr,tr,tl")
-   connected_road(plr,map:get_field(42,44).immovable,"l,l|l,tl|l,l|l,l")
-   connected_road(plr,map:get_field(37,58).immovable,"bl,bl")
-   connected_road(plr,map:get_field(41,47).immovable,"r,tr,tr")
+   connected_road("normal", plr,map:get_field(42,44).immovable,"bl,br,bl|bl,bl|bl,l|l,bl|l,l,l|l,l|tr,tl|r,tr")
+   connected_road("normal", plr,map:get_field(42,44).immovable,"br,r|br,r,r|r,r,tr|r,r|r,r|br,bl|br,br|br,br|r,r")
+   connected_road("normal", plr,map:get_field(35,47).immovable,"r,r,tr|r,r|br,r|br,br|br,br|br,bl|br,br,r|br,r|br,bl|br,br|br,r|r,br,r")
+   connected_road("normal", plr,map:get_field(45,58).immovable,"r,r|bl,br,bl|bl,bl,l|bl,bl|bl,bl")
+   connected_road("normal", plr,map:get_field(48,67).immovable,"l,l|l,l|l,l|l,l|l,tl|tl,tl|l,l,l|l,l,bl|l,tl,l|l,bl|l,l|bl,l,l|l,l|l,l,tl|tr,tr|tl,tr,tr|tr,tr|tr,tr|tr,tr|tr,tr|tr,tr|tr,tr|tr,tr|tr,tr|tr,r|r,r|r,r|br,br|br,r,r")
+   connected_road("normal", plr,map:get_field(43,53).immovable,"l,l|br,bl,bl|l,l|l,tl|bl,l,bl|bl,bl|br,r|br,bl|bl,bl")
+   connected_road("normal", plr,map:get_field(17,50).immovable,"r,r|r,r|tr,r|br,r|br,br|r,br|br,br|br,br,r|br,r|bl,br|r,r|tr,r")
+   connected_road("normal", plr,map:get_field(24,60).immovable,"l,l,l")
+   connected_road("normal", plr,map:get_field(54,54).immovable,"tr,tr,tl")
+   connected_road("normal", plr,map:get_field(42,44).immovable,"l,l|l,tl|l,l|l,l")
+   connected_road("normal", plr,map:get_field(37,58).immovable,"bl,bl")
+   connected_road("normal", plr,map:get_field(41,47).immovable,"r,tr,tr")
 
-   connected_road(plr,map:get_field(33,26).immovable,"r,tr|tr,tr|tr,tr|tr,tr|tl,tr")
+   connected_road("normal", plr,map:get_field(33,26).immovable,"r,tr|tr,tr|tr,tr|tr,tr|tl,tr")
+
+   connected_road("normal", plr,map:get_field(20,72).immovable, "tr,tr|tr,tr|tr,tl")
+   connected_road("normal", plr,map:get_field(20,72).immovable, "l,bl|br,br|r,r|r,r|r,r|r,r|r,r|r,r|r,r|r,r|r,r|r,r,r")
+   connected_road("normal", plr,map:get_field(40,75).immovable, "r,r|r,r|br,br|br,bl|br,bl|bl,bl|bl,l|l,l|l,l|l,l|tl,tl|l,l|l,l|l,l|l,l,bl")
+   connected_road("normal", plr,map:get_field(27,83).immovable, "l,l|l,l|l,l|l,l|l,l|bl,bl|bl,bl|br,br|br,bl")
+   connected_road("normal", plr,map:get_field(16,91).immovable, "br,r|r,r|r,r|r,r|r,r|r,r|r,r|r,r|r,r|r,r|br,r")
+   connected_road("normal", plr,map:get_field(37,93).immovable, "tr,r|r,r|r,r|r,r|r,br,r")
+   connected_road("normal", plr,map:get_field(47,93).immovable, "br,br|bl,bl|bl,bl|bl,bl|l,l|l,bl")
+   connected_road("normal", plr,map:get_field(42,102).immovable, "l,l|l,l|tl,tl|l,tl|l,tl|l,l|l,l|bl,l,bl")
+   connected_road("normal", plr,map:get_field(30,98).immovable, "l,tl|tl,tl")
 end
 
 run(init_player)

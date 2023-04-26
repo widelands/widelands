@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,14 +12,11 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "map_io/map_road_packet.h"
-
-#include <map>
 
 #include "base/macros.h"
 #include "economy/road.h"
@@ -35,17 +32,20 @@ namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 1;
 
-void MapRoadPacket::read
-	(FileSystem            &       fs,
-	 EditorGameBase      &       egbase,
-	 bool                    const skip,
-	 MapObjectLoader &       mol)
-{
-	if (skip)
+void MapRoadPacket::read(FileSystem& fs,
+                         EditorGameBase& egbase,
+                         bool const skip,
+                         MapObjectLoader& mol) {
+	if (skip) {
 		return;
+	}
 
 	FileRead fr;
-	try {fr.open(fs, "binary/road");} catch (...) {return;}
+	try {
+		fr.open(fs, "binary/road");
+	} catch (...) {
+		return;
+	}
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
@@ -56,39 +56,38 @@ void MapRoadPacket::read
 					//  If this is already known, get it.
 					//  Road data is read somewhere else
 					mol.register_object(serial, *new Road()).init(egbase);
-				} catch (const WException & e) {
+				} catch (const WException& e) {
 					throw GameDataError("%u: %s", serial, e.what());
 				}
 			}
 		} else {
 			throw UnhandledVersionError("MapRoadPacket", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const WException & e) {
+	} catch (const WException& e) {
 		throw GameDataError("road: %s", e.what());
 	}
 }
 
-
-void MapRoadPacket::write
-	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver & mos)
-{
+void MapRoadPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver& mos) {
 	FileWrite fw;
 
 	fw.unsigned_16(kCurrentPacketVersion);
 
 	//  Write roads. Register this with the map_object_saver so that its data
 	//  can be saved later.
-	const Map & map = egbase.map();
-	Field * field = &map[0];
-	Field const * const fields_end = field + map.max_index();
-	for (; field < fields_end; ++field)
-		if (upcast(Road const, road, field->get_immovable())) // only roads
+	const Map& map = egbase.map();
+	Field* field = &map[0];
+	Field const* const fields_end = field + map.max_index();
+	for (; field < fields_end; ++field) {
+		if (upcast(Road const, road, field->get_immovable())) {  // only roads
 			//  Roads can life on multiple positions.
-			if (!mos.is_object_known(*road))
+			if (!mos.is_object_known(*road)) {
 				fw.unsigned_32(mos.register_object(*road));
+			}
+		}
+	}
 	fw.unsigned_32(0xffffffff);
 
 	fw.write(fs, "binary/road");
 }
-
-}
+}  // namespace Widelands

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,17 +12,16 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "io/fileread.h"
 
-FileRead::FileRead() : data_(nullptr), length_(0) {}
+#include <cassert>
 
 FileRead::~FileRead() {
-	if (data_) {
+	if (data_ != nullptr) {
 		close();
 	}
 }
@@ -36,8 +35,7 @@ void FileRead::open(FileSystem& fs, const std::string& filename) {
 bool FileRead::try_open(FileSystem& fs, const std::string& filename) {
 	try {
 		open(fs, filename);
-	}
-	catch (const std::exception&) {
+	} catch (const std::exception&) {
 		return false;
 	}
 	return true;
@@ -57,10 +55,11 @@ bool FileRead::end_of_file() const {
 	return length_ <= filepos_;
 }
 
-void FileRead::set_file_pos(Pos const pos) {
+void FileRead::set_file_pos(const Pos& pos) {
 	assert(data_);
-	if (pos >= length_)
+	if (pos >= length_) {
 		throw FileBoundaryExceeded();
+	}
 	filepos_ = pos;
 }
 
@@ -77,32 +76,36 @@ size_t FileRead::data(void* dst, size_t bufsize) {
 	return read;
 }
 
-char* FileRead::data(uint32_t const bytes, const Pos pos) {
+char* FileRead::data(uint32_t const bytes, const Pos& pos) {
 	assert(data_);
 	Pos i = pos;
 	if (pos.is_null()) {
 		i = filepos_;
 		filepos_ += bytes;
 	}
-	if (length_ < i + bytes)
+	if (length_ < i + bytes) {
 		throw FileBoundaryExceeded();
+	}
 	return data_ + i;
 }
 
-char* FileRead::c_string(Pos const pos) {
+char* FileRead::c_string(const Pos& pos) {
 	assert(data_);
 
 	Pos i = pos.is_null() ? filepos_ : pos;
-	if (i >= length_)
+	if (i >= length_) {
 		throw FileBoundaryExceeded();
-	char* const result = data_ + i;
-	for (char* p = result; *p; ++p, ++i) {
 	}
-	++i;                   //  beyond the null
-	if (i > (length_ + 1))  // allow EOF as end marker for string
+	char* const result = data_ + i;
+	for (char* p = result; *p != 0; ++p, ++i) {
+	}
+	++i;                      //  beyond the null
+	if (i > (length_ + 1)) {  // allow EOF as end marker for string
 		throw FileBoundaryExceeded();
-	if (pos.is_null())
+	}
+	if (pos.is_null()) {
 		filepos_ = i;
+	}
 	return result;
 }
 
@@ -111,18 +114,20 @@ char const* FileRead::c_string() {
 }
 
 char* FileRead::read_line() {
-	if (end_of_file())
+	if (end_of_file()) {
 		return nullptr;
+	}
 	char* result = data_ + filepos_;
-	for (; data_[filepos_] && data_[filepos_] != '\n'; ++filepos_)
+	for (; (data_[filepos_] != 0) && data_[filepos_] != '\n'; ++filepos_) {
 		if (data_[filepos_] == '\r') {
 			data_[filepos_] = '\0';
 			++filepos_;
-			if (data_[filepos_] == '\n')
+			if (data_[filepos_] == '\n') {
 				break;
-			else
-				throw typename StreamRead::DataError("CR not immediately followed by LF");
+			}
+			throw typename StreamRead::DataError("CR not immediately followed by LF");
 		}
+	}
 	data_[filepos_] = '\0';
 	++filepos_;
 	return result;

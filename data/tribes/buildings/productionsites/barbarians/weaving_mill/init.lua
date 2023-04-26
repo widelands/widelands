@@ -1,42 +1,41 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
+wl.Descriptions():new_productionsite_type {
    name = "barbarians_weaving_mill",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Weaving Mill"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
-   needs_seafaring = true,
+   map_check = {"seafaring", "waterways"},
 
    buildcost = {
       log = 5,
       granite = 2,
-      thatch_reed = 2
+      reed = 2
    },
    return_on_dismantle = {
       log = 2,
       granite = 2
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 36, 74 },
       },
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 36, 74 },
       },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
          hotspot = { 36, 74 },
       },
    },
 
    aihints = {
-      prohibited_till = 1200
+      prohibited_till = 990,
+      supports_seafaring = true
    },
 
    working_positions = {
@@ -44,24 +43,23 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      thatch_reed = 8
-   },
-   outputs = {
-      "cloth"
+      { name = "reed", amount = 8 }
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start weaving because ...
-         descname = _"weaving",
+         descname = _("weaving"),
          actions = {
-            "sleep=20000",
-            "check_map=seafaring",
+            "sleep=duration:25s",
             "return=skipped unless economy needs cloth",
-            "consume=thatch_reed",
-            "animate=working 25000",
+            "consume=reed",
+            "playsound=sound/barbarians/weaver priority:90%",
+            "animate=working duration:20s",
             "produce=cloth"
          }
       },
    },
 }
+
+pop_textdomain()

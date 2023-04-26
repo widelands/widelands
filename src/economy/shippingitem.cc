@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 by the Widelands Development Team
+ * Copyright (C) 2011-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -30,167 +29,149 @@
 
 namespace Widelands {
 
-ShippingItem::ShippingItem(WareInstance & ware) :
-	object_(&ware)
-{
+ShippingItem::ShippingItem(WareInstance& ware) : object_(&ware) {
 }
 
-ShippingItem::ShippingItem(Worker & worker) :
-	object_(&worker)
-{
+ShippingItem::ShippingItem(Worker& worker) : object_(&worker) {
 }
 
-void ShippingItem::get(EditorGameBase& game, WareInstance** ware, Worker** worker) const {
-	if (ware) {
+void ShippingItem::get(const EditorGameBase& game, WareInstance** ware, Worker** worker) const {
+	if (ware != nullptr) {
 		*ware = nullptr;
 	}
-	if (worker) {
+	if (worker != nullptr) {
 		*worker = nullptr;
 	}
 
 	MapObject* obj = object_.get(game);
-	if (!obj) {
+	if (obj == nullptr) {
 		return;
 	}
 
 	if (obj->descr().type() == MapObjectType::WARE) {
-		if (ware) {
+		if (ware != nullptr) {
 			*ware = dynamic_cast<WareInstance*>(obj);
 		}
 		return;
 	}
 
-	if (worker) {
+	if (worker != nullptr) {
 		*worker = dynamic_cast<Worker*>(obj);
 	}
 }
 
-void ShippingItem::set_economy(Game & game, Economy * e)
-{
-	WareInstance * ware;
-	Worker * worker;
+void ShippingItem::set_economy(const Game& game, Economy* e, WareWorker type) const {
+	WareInstance* ware;
+	Worker* worker;
 	get(game, &ware, &worker);
 
-	if (ware)
+	if ((ware != nullptr) && type == wwWARE) {
 		ware->set_economy(e);
-	if (worker)
-		worker->set_economy(e);
+	}
+	if (worker != nullptr) {
+		worker->set_economy(e, type);
+	}
 }
 
-void ShippingItem::set_location(Game& game, MapObject* obj) {
-	WareInstance * ware;
-	Worker * worker;
+void ShippingItem::set_location(Game& game, MapObject* obj) const {
+	WareInstance* ware;
+	Worker* worker;
 	get(game, &ware, &worker);
 
-	if (ware) {
+	if (ware != nullptr) {
 		if (upcast(Building, building, obj)) {
 			ware->enter_building(game, *building);
 		} else {
 			ware->set_location(game, obj);
 		}
 	}
-	if (worker) {
-		worker->set_location(dynamic_cast<PlayerImmovable *>(obj));
+	if (worker != nullptr) {
+		worker->set_location(dynamic_cast<PlayerImmovable*>(obj));
 		if (upcast(Building, building, obj)) {
 			worker->set_position(game, building->get_position());
 		}
 	}
 }
 
-void ShippingItem::end_shipping(Game & game)
-{
-	WareInstance * ware;
-	Worker * worker;
+void ShippingItem::end_shipping(Game& game) const {
+	WareInstance* ware;
+	Worker* worker;
 	get(game, &ware, &worker);
 
-	if (ware) {
+	if (ware != nullptr) {
 		ware->update(game);
-		ware->schedule_act(game, 10);
+		ware->schedule_act(game, Duration(10));
 	}
-	if (worker)
+	if (worker != nullptr) {
 		worker->end_shipping(game);
+	}
 }
 
-PortDock * ShippingItem::get_destination(Game & game)
-{
+const PortDock* ShippingItem::get_destination(Game& game) const {
 	return destination_dock_.get(game);
 }
 
-void ShippingItem::update_destination(Game & game, PortDock & pd)
-{
-	WareInstance * ware;
-	Worker * worker;
+void ShippingItem::update_destination(Game& game, PortDock& pd) {
+	WareInstance* ware;
+	Worker* worker;
 	get(game, &ware, &worker);
 
-	PlayerImmovable * next = nullptr;
+	PlayerImmovable* next = nullptr;
 
-	if (ware)
+	if (ware != nullptr) {
 		next = ware->get_next_move_step(game);
-	if (worker) {
-		Transfer * transfer = worker->get_transfer();
-		if (transfer) {
+	}
+	if (worker != nullptr) {
+		Transfer* transfer = worker->get_transfer();
+		if (transfer != nullptr) {
 			bool success;
 			next = transfer->get_next_step(&pd, success);
 		}
 	}
 
-	destination_dock_ = dynamic_cast<PortDock *>(next);
-}
-
-void ShippingItem::schedule_update(Game & game, int32_t delay)
-{
-	WareInstance * ware;
-	Worker * worker;
-	get(game, &ware, &worker);
-
-	if (ware) {
-		ware->schedule_act(game, delay);
-	}
-	if (worker) {
-		worker->send_signal(game, "wakeup");
-	}
+	destination_dock_ = dynamic_cast<PortDock*>(next);
 }
 
 /**
  * Remove the underlying item directly. This is used when ships are removed.
  */
-void ShippingItem::remove(EditorGameBase & egbase)
-{
-	if (MapObject * obj = object_.get(egbase)) {
+void ShippingItem::remove(EditorGameBase& egbase) {
+	if (MapObject* obj = object_.get(egbase)) {
 		obj->remove(egbase);
 		object_ = nullptr;
 	}
 }
 
+constexpr uint16_t kCurrentPacketVersion = 2;
 
-constexpr uint16_t kCurrentPacketVersion = 1;
-
-void ShippingItem::Loader::load(FileRead & fr)
-{
+void ShippingItem::Loader::load(FileRead& fr) {
 	try {
 		uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersion) {
 			serial_ = fr.unsigned_32();
+			destination_serial_ = fr.unsigned_32();
 		} else {
 			throw UnhandledVersionError("ShippingItem", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const WException & e) {
+	} catch (const WException& e) {
 		throw GameDataError("shipping item: %s", e.what());
 	}
 }
 
-ShippingItem ShippingItem::Loader::get(MapObjectLoader & mol)
-{
+ShippingItem ShippingItem::Loader::get(MapObjectLoader& mol) const {
 	ShippingItem it;
-	if (serial_ != 0)
+	if (serial_ != 0) {
 		it.object_ = &mol.get<MapObject>(serial_);
+		it.destination_dock_ =
+		   destination_serial_ != 0u ? &mol.get<PortDock>(destination_serial_) : nullptr;
+	}
 	return it;
 }
 
-void ShippingItem::save(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
-{
+void ShippingItem::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_8(kCurrentPacketVersion);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(object_.get(egbase)));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(destination_dock_.get(egbase)));
 }
 
-} // namespace Widelands
+}  // namespace Widelands

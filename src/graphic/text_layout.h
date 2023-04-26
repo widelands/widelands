@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,46 +12,41 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_GRAPHIC_TEXT_LAYOUT_H
 #define WL_GRAPHIC_TEXT_LAYOUT_H
 
-#include <string>
-#include <unicode/uchar.h>
+#include <memory>
+
+#include <SDL.h>
 
 #include "graphic/align.h"
-#include "graphic/font.h"
-#include "graphic/font_handler1.h"
 #include "graphic/color.h"
-#include "graphic/image.h"
-#include "graphic/text_constants.h"
-#include "graphic/text/font_set.h"
+#include "graphic/styles/font_style.h"
+#include "graphic/styles/panel_styles.h"
+#include "graphic/styles/paragraph_style.h"
+#include "graphic/text/rendered_text.h"
+
+#define HAS_PRIMARY_SELECTION_BUFFER SDL_VERSION_ATLEAST(2, 26, 0)
 
 /**
- * This function replaces some HTML entities in strings, e.g. %nbsp;.
- * It is used by the renderers after the tags have been parsed.
+ * Returns the exact width of the text rendered as editorfont for the given font size.
+ * This function is inefficient; only call when we need the exact width.
  */
-void replace_entities(std::string* text);
+int text_width(const std::string& text, const UI::FontStyleInfo& style, float scale = 1.0f);
 
 /**
-  * Returns the exact width of the text rendered as editorfont for the given font size.
-  * This function is inefficient; only call when we need the exact width.
-  */
-
-uint32_t text_width(const std::string& text, int ptsize);
-
-/**
-  * Returns the exact height of the text rendered as editorfont for the given font size.
-  * This function is inefficient; only call when we need the exact height.
-  */
-uint32_t text_height(const std::string& text, int ptsize);
+ * Returns the exact height of the text rendered for the given font size and face.
+ * This function is inefficient; only call when we need the exact height.
+ */
+int text_height(const UI::FontStyleInfo& style, float scale = 1.0f);
+int text_height(UI::FontStyle style, float scale = 1.0f);
 
 /**
- * Checks it the given string is RichText or not. Does not do validity checking.
+ * Checks if the given string is RichText or not. Does not do validity checking.
  */
 inline bool is_richtext(const std::string& text) {
 	return text.compare(0, 3, "<rt") == 0;
@@ -62,83 +57,88 @@ inline bool is_richtext(const std::string& text) {
  */
 std::string richtext_escape(const std::string& given_text);
 
+std::string as_richtext(const std::string&);
+
 /**
  * Convenience functions to convert simple text into a valid block
  * of rich text which can be rendered.
  */
-std::string as_uifont
-	(const std::string&, int ptsize = UI_FONT_SIZE_SMALL, const RGBColor& clr = UI_FONT_CLR_FG,
-	 UI::FontSet::Face face = UI::FontSet::Face::kSans);
+std::string as_richtext_paragraph(const std::string& text,
+                                  UI::FontStyle style,
+                                  UI::Align align = UI::Align::kLeft);
+std::string as_richtext_paragraph(const std::string& text,
+                                  const UI::FontStyleInfo& style,
+                                  UI::Align align = UI::Align::kLeft);
+std::string as_editor_richtext_paragraph(const std::string& text, const UI::FontStyleInfo& style);
 
-// Same as as_aligned, but with the condensed font preselected.
-std::string as_condensed
-	(const std::string& text,
-	 UI::Align align = UI::Align::kLeft,
-	 int ptsize = UI_FONT_SIZE_SMALL,
-	 const RGBColor& clr = UI_FONT_CLR_FG);
+std::string as_font_tag(UI::FontStyle style, const std::string& text);
+std::string as_font_tag(const std::string& text, UI::FontStyle style);
 
-std::string as_editorfont(const std::string& text, int ptsize = UI_FONT_SIZE_SMALL,
-								  const RGBColor& clr = UI_FONT_CLR_FG);
+std::string as_listitem(const std::string&, UI::FontStyle style);
 
-std::string as_aligned(const std::string & txt, UI::Align align, int ptsize = UI_FONT_SIZE_SMALL,
-							  const RGBColor& clr = UI_FONT_CLR_FG,
-							  UI::FontSet::Face face = UI::FontSet::Face::kSans);
-
-std::string as_tooltip(const std::string&);
-std::string as_waresinfo(const std::string&);
 std::string as_game_tip(const std::string&);
+/// Format message to player. 'image' is either an image filename or a map object name.
+std::string as_mapobject_message(const std::string& image,
+                                 int width,
+                                 const std::string& txt,
+                                 const RGBColor* player_color = nullptr);
+std::string as_message(const std::string& heading, const std::string& body);
+
+std::string
+as_url_hyperlink(const std::string& url, const std::string& text, const std::string& mouseover);
+inline std::string as_url_hyperlink(const std::string& url) {
+	return as_url_hyperlink(url, url, url);
+}
+
+void newlines_to_richtext(std::string&);
 
 /**
-  * Render 'text' as ui_font. If 'width' > 0 and the rendered image is too
+
+  * Render 'text' with the given font style. If 'width' > 0 and the rendered image is too
   * wide, it will first use the condensed font face and then make the text
   * smaller until it fits 'width'. The resulting font size will not go below
-  * 'kMinimumFontSize'.
+  * 'StyleManager::minimum_font_size()'.
   */
-const Image* autofit_ui_text(const std::string& text,
-									  int width = 0,
-									  RGBColor color = UI_FONT_CLR_FG,
-									  int fontsize = UI_FONT_SIZE_SMALL);
-
-namespace UI {
+std::shared_ptr<const UI::RenderedText>
+autofit_text(const std::string& text, const UI::FontStyleInfo& font_info, int width);
 
 /**
- * Text style combines font with other characteristics like color
- * and style (italics, bold).
+ * 'is_first' omits the vertical gap before the line.
+ * 'noescape' is needed for error message formatting and does not call richtext_escape. */
+std::string as_heading_with_content(const std::string& header,
+                                    const std::string& content,
+                                    UI::PanelStyle style,
+                                    bool is_first = false,
+                                    bool noescape = false);
+
+/**
+ * Heading in menu info texts
+ * 'is_first' omits the vertical gap before the line.
  */
-// TODO(GunChleoc): This struct will disappear with the old font handler
-struct TextStyle {
-	TextStyle();
+std::string as_heading(const std::string& txt, UI::PanelStyle style, bool is_first = false);
+/// Paragraph in menu info texts
+std::string as_content(const std::string& txt, UI::PanelStyle style);
 
-	static TextStyle makebold(Font * font, RGBColor fg) {
-		TextStyle ts;
-		ts.font = font;
-		ts.bold = true;
-		ts.fg = fg;
-		return ts;
-	}
+std::string
+as_tooltip_text_with_hotkey(const std::string& text, const std::string& hotkey, UI::PanelStyle);
 
-	uint32_t calc_bare_width(const std::string & text) const;
-	uint32_t calc_width_for_wrapping(const UChar& c) const;
-	uint32_t calc_width_for_wrapping(const std::string & text) const;
-	void calc_bare_height_heuristic(const std::string & text, int32_t & miny, int32_t & maxy) const;
-	void setup() const;
+/// Insert vertical space. Returns an empty string if gap is zero or negative.
+[[nodiscard]] std::string as_vspace(int gap);
 
-	Font * font;
-	RGBColor fg;
-	bool bold : 1;
-	bool italics : 1;
-	bool underline : 1;
+/// Format 'text' with paragraph style 'style'
+std::string as_paragraph_style(UI::ParagraphStyle style, const std::string& text);
 
-	bool operator== (const TextStyle & o) const {
-		return
-			font == o.font && fg == o.fg &&
-			bold == o.bold && italics == o.italics && underline == o.underline;
-	}
-	bool operator!= (const TextStyle & o) const {
-		return !(*this == o);
-	}
-};
+/// Format 'text' with paragraph style 'style' with optional 'attributes' to be included
+/// in the paragraph tag. (Font attributes can be changed in a nested font tag.)
+std::string as_paragraph_style(UI::ParagraphStyle style,
+                               const std::string& attributes,
+                               const std::string& text);
 
-} // namespace UI
+/// Return opening paragraph and font tags for formatting with paragraph style 'style'.
+/// The optional 'attributes' will be included in the paragraph tag.
+std::string open_paragraph_style(UI::ParagraphStyle style, const std::string& attributes = "");
+
+/// Return closing font and paragraph tags for formatting as plain paragraph.
+std::string close_paragraph_style(UI::ParagraphStyle style);
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_LAYOUT_H

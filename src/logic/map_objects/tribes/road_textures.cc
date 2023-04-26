@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,21 +12,24 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "logic/map_objects/tribes/road_textures.h"
 
-#include <memory>
-
-const Image& RoadTextures::get_normal_texture(int x, int y, int direction) const {
-	return *normal_textures_.at((x + y + direction) % normal_textures_.size());
+const Image& RoadTextures::get_normal_texture(const Widelands::Coords& coords,
+                                              int direction) const {
+	return *normal_textures_.at((coords.x + coords.y + direction) % normal_textures_.size());
 }
 
-const Image& RoadTextures::get_busy_texture(int x, int y, int direction) const {
-	return *busy_textures_.at((x + y + direction) % busy_textures_.size());
+const Image& RoadTextures::get_busy_texture(const Widelands::Coords& coords, int direction) const {
+	return *busy_textures_.at((coords.x + coords.y + direction) % busy_textures_.size());
+}
+
+const Image& RoadTextures::get_waterway_texture(const Widelands::Coords& coords,
+                                                int direction) const {
+	return *waterway_textures_.at((coords.x + coords.y + direction) % waterway_textures_.size());
 }
 
 void RoadTextures::add_normal_road_texture(const Image* image) {
@@ -35,4 +38,8 @@ void RoadTextures::add_normal_road_texture(const Image* image) {
 
 void RoadTextures::add_busy_road_texture(const Image* image) {
 	busy_textures_.emplace_back(image);
+}
+
+void RoadTextures::add_waterway_texture(const Image* image) {
+	waterway_textures_.emplace_back(image);
 }

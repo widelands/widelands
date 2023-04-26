@@ -1,14 +1,25 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_productionsite_type {
    name = "empire_goldmine",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Gold Mine"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "mine",
-   enhancement = "empire_goldmine_deep",
+
+   enhancement = {
+      name = "empire_goldmine_deep",
+      enhancement_cost = {
+         log = 4,
+         planks = 2
+      },
+      enhancement_return_on_dismantle = {
+         log = 2,
+         planks = 1
+      }
+   },
 
    buildcost = {
       log = 4,
@@ -19,25 +30,31 @@ tribes:new_productionsite_type {
       planks = 1
    },
 
-   animations = {
+   animation_directory = dirname,
+
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 49, 49 },
-      },
-      working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 49, 49 },
-         fps = 10
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 51, 54 },
       },
       empty = {
-         pictures = path.list_files(dirname .. "empty_??.png"),
-         hotspot = { 49, 49 },
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 51, 54 },
+      },
+      working = {
+         fps = 10,
+         frames = 10,
+         columns = 10,
+         rows = 1,
+         hotspot = { 51, 54 },
       },
    },
 
    aihints = {
-      mines = "gold",
-      mines_percent = 50,
       prohibited_till = 1200
    },
 
@@ -46,35 +63,49 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      ration = 6,
-      wine = 6
-   },
-   outputs = {
-      "gold_ore"
+      { name = "ration", amount = 6 },
+      { name = "wine", amount = 6 }
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
-         descname = _"mining gold",
+         descname = _("mining gold"),
          actions = {
-            "sleep=45000",
+            -- "return=skipped" causes 10 sec delay
+            -- time total: 32.8 + 2 * (21 + 3.6) + 10 = 92 sec
             "return=skipped unless economy needs gold_ore",
             "consume=ration wine",
-            "animate=working 20000",
-            "mine=gold 2 50 5 17",
+            "sleep=duration:32s800ms",
+            "call=mine_produce",
+            "call=mine_produce",
+            "return=skipped"
+         }
+      },
+      mine_produce = {
+         descname = _("mining gold"),
+         actions = {
+            "animate=working duration:21s",
+            "mine=resource_gold radius:2 yield:50% when_empty:5% experience_on_fail:17%",
             "produce=gold_ore",
-            "animate=working 20000",
-            "mine=gold 2 50 5 17",
-            "produce=gold_ore"
+         }
+      },
+      encyclopedia = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=ration wine",
+            "produce=gold_ore:2",
          }
       },
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Gold",
-      heading = _"Main Gold Vein Exhausted",
+      title = _("No Gold"),
+      heading = _("Main Gold Vein Exhausted"),
       message =
          pgettext("empire_building", "This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

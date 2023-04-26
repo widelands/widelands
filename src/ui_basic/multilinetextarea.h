@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -23,14 +22,13 @@
 #include <memory>
 
 #include "graphic/align.h"
-#include "graphic/color.h"
-#include "graphic/richtext.h"
-#include "graphic/text_layout.h"
+#include "graphic/styles/font_style.h"
+#include "graphic/styles/panel_styles.h"
+#include "graphic/text/rendered_text.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/scrollbar.h"
 
 namespace UI {
-struct Scrollbar;
 
 /**
  * This defines an area, where a text can easily be printed.
@@ -38,32 +36,48 @@ struct Scrollbar;
  */
 struct MultilineTextarea : public Panel {
 	enum class ScrollMode {
-		kNoScrolling,        // Expand the height instead of showing a scroll bar
-		kScrollNormal,       // (default) only explicit scrolling
-		kScrollNormalForced, // forced scrolling
-		kScrollLog,          // follow the bottom of the text
-		kScrollLogForced     // follow the bottom of the text, and forced
+		kNoScrolling,         // Expand the height instead of showing a scroll bar
+		kScrollNormal,        // (default) only explicit scrolling
+		kScrollNormalForced,  // forced scrolling
+		kScrollLog,           // follow the bottom of the text
+		kScrollLogForced      // follow the bottom of the text, and forced
 	};
 
-	MultilineTextarea
-		(Panel * const parent,
-		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 const std::string& text          = std::string(),
-		 const Align                      = UI::Align::kLeft,
-		 MultilineTextarea::ScrollMode scroll_mode = MultilineTextarea::ScrollMode::kScrollNormal);
+	MultilineTextarea(
+	   Panel* parent,
+	   int32_t x,
+	   int32_t y,
+	   uint32_t w,
+	   uint32_t h,
+	   UI::PanelStyle style,
+	   const std::string& text = std::string(),
+	   Align = UI::Align::kLeft,
+	   MultilineTextarea::ScrollMode scroll_mode = MultilineTextarea::ScrollMode::kScrollNormal);
 
-	const std::string& get_text() const {return text_;}
+	const std::string& get_text() const {
+		return text_;
+	}
 
 	void set_text(const std::string&);
-	uint32_t get_eff_w() const {return scrollbar_.is_enabled() ? get_w() - Scrollbar::kSize : get_w();}
+	// int instead of uint because of overflow situations
+	int32_t get_eff_w() const {
+		return scrollbar_.is_enabled() ? get_w() - Scrollbar::kSize : get_w();
+	}
 
-	void set_color(RGBColor fg) {color_ = fg;}
+	void set_style(FontStyle);
+	void set_font_scale(float scale);
 
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
 
-	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
+	bool handle_key(bool down, SDL_Keysym code) override;
+	bool
+	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
 	void scroll_to_top();
+
+	void set_scrollmode(MultilineTextarea::ScrollMode scroll_mode);
 
 protected:
 	void layout() override;
@@ -74,21 +88,24 @@ private:
 
 	/**
 	 * This prepares a non-richtext text for rendering. It escapes the source text and
-	 * turns \n into <br> tags as needed, then creates the richtext style wrappers.
+	 * turns '\\n' into '<br>' tags as needed, then creates the richtext style wrappers.
 	 */
 	std::string make_richtext();
-
 	std::string text_;
-	RGBColor color_;
-	Align align_;
+	std::string tooltip_before_hyperlink_tooltip_;
 
-	bool isrichtext;
-	RichText rt;
+	std::shared_ptr<const UI::RenderedText> rendered_text_;
+	Vector2i render_anchor_;
 
-	Scrollbar   scrollbar_;
-	ScrollMode  scrollmode_;
+	FontStyle font_style_;
+	const FontStyleInfo& font_style() const;
+	float font_scale_{1.0f};
+
+	const Align align_;
+
+	Scrollbar scrollbar_;
+	ScrollMode scrollmode_;
 };
-
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_MULTILINETEXTAREA_H

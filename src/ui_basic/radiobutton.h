@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2016 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,18 +12,15 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_UI_BASIC_RADIOBUTTON_H
 #define WL_UI_BASIC_RADIOBUTTON_H
 
-#include <stdint.h>
-
+#include "base/vector.h"
 #include "ui_basic/checkbox.h"
-#include "base/point.h"
 
 namespace UI {
 
@@ -34,18 +31,19 @@ struct Radiogroup;
 struct Radiobutton : public Statebox {
 	friend struct Radiogroup;
 
-	Radiobutton
-		(Panel * parent, Point, const Image* pic, Radiogroup &, int32_t id);
-	~Radiobutton();
+	Radiobutton(Panel* parent, PanelStyle, Vector2i, const Image* pic, Radiogroup&, int32_t id);
+	~Radiobutton() override;
 
-	Radiobutton * next_button() {return nextbtn_;}
+	Radiobutton* next_button() {
+		return nextbtn_;
+	}
 
 private:
-	void clicked() override;
+	void button_clicked() override;
 
-	Radiobutton * nextbtn_;
-	Radiogroup  & group_;
-	int32_t           id_;
+	Radiobutton* nextbtn_;
+	Radiogroup& group_;
+	int32_t id_;
 };
 
 /**
@@ -58,23 +56,34 @@ struct Radiogroup {
 	Radiogroup();
 	~Radiogroup();
 
-	boost::signals2::signal<void ()> changed;
-	boost::signals2::signal<void (int32_t)> changedto;
-	boost::signals2::signal<void ()> clicked; //  clicked without things changed
+	Notifications::Signal<> changed;
+	Notifications::Signal<int32_t> changedto;
+	Notifications::Signal<> clicked;  //  clicked without things changed
 
-	int32_t add_button
-		(Panel * parent, Point, const Image* pic, const std::string& tooltip = "", Radiobutton ** = nullptr);
+	/**
+	 * Text conventions: Sentence case for the 'tooltip'
+	 */
+	int32_t add_button(Panel* parent,
+	                   PanelStyle,
+	                   Vector2i,
+	                   const Image* pic,
+	                   const std::string& tooltip = "",
+	                   Radiobutton** = nullptr);
 
-	int32_t get_state() const {return state_;}
-	void set_state(int32_t state);
+	int32_t get_state() const {
+		return state_;
+	}
+	void set_state(int32_t state, bool send_signal);
 	void set_enabled(bool);
-	Radiobutton * get_first_button() {return buttons_;}
-private:
-	Radiobutton * buttons_; //  linked list of buttons (not sorted)
-	int32_t           highestid_;
-	int32_t           state_;   //  -1: none
-};
+	Radiobutton* get_first_button() {
+		return buttons_;
+	}
 
-}
+private:
+	Radiobutton* buttons_;  //  linked list of buttons (not sorted)
+	int32_t highestid_;
+	int32_t state_;  //  -1: none
+};
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_RADIOBUTTON_H

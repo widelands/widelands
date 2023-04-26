@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2013 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,30 +12,25 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_ECONOMY_WARE_INSTANCE_H
 #define WL_ECONOMY_WARE_INSTANCE_H
 
+#include <memory>
+
 #include "economy/transfer.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/ware_descr.h"
-#include "logic/widelands.h"
-#include "map_io/tribes_legacy_lookup_table.h"
 
 namespace Widelands {
 
 class Building;
 class Economy;
 class EditorGameBase;
-class Game;
 struct IdleWareSupply;
-class MapObject;
-struct PlayerImmovable;
-struct Transfer;
 
 /**
  * WareInstance represents one item while it is being carried around.
@@ -59,10 +54,10 @@ class WareInstance : public MapObject {
 	MO_DESCR(WareDescr)
 
 public:
-	WareInstance(DescriptionIndex, const WareDescr* const);
-	~WareInstance();
+	WareInstance(DescriptionIndex, const WareDescr*);
+	~WareInstance() override;
 
-	MapObject* get_location(EditorGameBase& egbase) {
+	MapObject* get_location(const EditorGameBase& egbase) const {
 		return location_.get(egbase);
 	}
 	Economy* get_economy() const {
@@ -72,7 +67,7 @@ public:
 		return descr_index_;
 	}
 
-	void init(EditorGameBase&) override;
+	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 	void update(Game&);
@@ -93,29 +88,29 @@ public:
 		return transfer_;
 	}
 
-	void log_general_info(const EditorGameBase& egbase) override;
+	void log_general_info(const EditorGameBase& egbase) const override;
 
 private:
 	ObjectPointer location_;
-	Economy* economy_;
+	Economy* economy_{nullptr};
 	DescriptionIndex descr_index_;
 
-	IdleWareSupply* supply_;
-	Transfer* transfer_;
+	std::unique_ptr<IdleWareSupply> supply_;
+	Transfer* transfer_{nullptr};
 	ObjectPointer transfer_nextstep_;  ///< cached PlayerImmovable, can be 0
 
 	// loading and saving stuff
 protected:
 	struct Loader : MapObject::Loader {
-		Loader();
+		Loader() = default;
 
 		void load(FileRead&);
 		void load_pointers() override;
 		void load_finish() override;
 
 	private:
-		uint32_t location_;
-		uint32_t transfer_nextstep_;
+		uint32_t location_ = 0U;
+		uint32_t transfer_nextstep_ = 0U;
 		Transfer::ReadData transfer_;
 	};
 
@@ -125,9 +120,8 @@ public:
 	}
 
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
-	static MapObject::Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&,
-											 const TribesLegacyLookupTable& lookup_table);
+	static MapObject::Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_WARE_INSTANCE_H

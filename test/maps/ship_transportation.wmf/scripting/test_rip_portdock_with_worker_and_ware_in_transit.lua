@@ -29,7 +29,7 @@ run(function()
 
    local flag_oversea = northern_port().flag
 
-   stable_save("restored_port")
+   stable_save(game, "restored_port", 10 * 1000)
 
    -- remove the portdock while the blackwood is in transit.
    north_port_portdock=northern_port().portdock
@@ -40,8 +40,10 @@ run(function()
 
    assert_equal(p1:get_workers("barbarians_builder"), 1)
    assert_equal(p1:get_wares("blackwood"), 1)
-   assert_equal(ship.debug_economy, southern_port().debug_economy)
-   assert_equal(ship.debug_economy, flag_oversea.debug_economy)
+   assert_equal(ship.debug_ware_economy, southern_port().debug_ware_economy)
+   assert_equal(ship.debug_ware_economy, flag_oversea.debug_ware_economy)
+   assert_equal(ship.debug_worker_economy, southern_port().debug_worker_economy)
+   assert_equal(ship.debug_worker_economy, flag_oversea.debug_worker_economy)
 
    sleep(5000)
 

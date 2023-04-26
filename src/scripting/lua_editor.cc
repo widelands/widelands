@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,14 +12,12 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "scripting/lua_editor.h"
 
-#include "base/log.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "wui/interactive_player.h"
@@ -42,7 +40,6 @@ editor. This module is not loaded inside the game, that is if wl.editor is
 :const:`nil` the script is run inside a game, else in the editor.
 */
 
-
 /*
  * ========================================================================
  *                         MODULE CLASSES
@@ -55,28 +52,24 @@ Module Classes
 
 */
 
-
 /* RST
 Player
 ------
 
 .. class:: Player
 
-	Child of: :class:`wl.bases.PlayerBase`
-
-	This class represents one of the players in the editor.
-	Note that you cannot instantiate a class of this type directly, use the
-	:attr:`wl.Editor.players`.
+   This class represents one of the players in the editor.
+   Note that you cannot instantiate a class of this type directly, use
+   ``wl.Editor().players``.
 
 */
 const char LuaPlayer::className[] = "Player";
 const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
-	{nullptr, nullptr},
+   {nullptr, nullptr},
 };
 const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
-	{nullptr, nullptr, nullptr},
+   {nullptr, nullptr, nullptr},
 };
-
 
 /*
  * ========================================================================
@@ -84,20 +77,17 @@ const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
  * ========================================================================
  */
 
-const static struct luaL_Reg wleditor [] = {
-	{nullptr, nullptr}
-};
+const static struct luaL_Reg wleditor[] = {{nullptr, nullptr}};
 
-void luaopen_wleditor(lua_State * const L) {
-	lua_getglobal(L, "wl");  // S: wl_table
-	lua_pushstring(L, "editor"); // S: wl_table "editor"
-	luaL_newlib(L, wleditor);  // S: wl_table "editor" wl.editor_table
-	lua_settable(L, -3); // S: wl_table
-	lua_pop(L, 1); // S:
+void luaopen_wleditor(lua_State* const L) {
+	lua_getglobal(L, "wl");       // S: wl_table
+	lua_pushstring(L, "editor");  // S: wl_table "editor"
+	luaL_newlib(L, wleditor);     // S: wl_table "editor" wl.editor_table
+	lua_settable(L, -3);          // S: wl_table
+	lua_pop(L, 1);                // S:
 
 	register_class<LuaPlayer>(L, "editor", true);
 	add_parent<LuaPlayer, LuaBases::LuaPlayerBase>(L);
-	lua_pop(L, 1); // Pop the meta table
+	lua_pop(L, 1);  // Pop the meta table
 }
-
-}
+}  // namespace LuaEditor

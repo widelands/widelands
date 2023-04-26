@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2016 by the Widelands Development Team
+ * Copyright (C) 2004-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,14 +12,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_UI_BASIC_PROGRESSBAR_H
 #define WL_UI_BASIC_PROGRESSBAR_H
 
+#include "graphic/styles/progress_bar_style.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -29,36 +29,44 @@ namespace UI {
  * graphically enhanced with a coloured bar.
  *
  * The actual state of progress
-*/
+ */
 struct ProgressBar : public Panel {
 	enum {
-		Horizontal = 0, ///< from left to right
-		Vertical   = 1, ///< from bottom to top
+		Horizontal = 0,  ///< from left to right
+		Vertical = 1,    ///< from bottom to top
 
 		DefaultWidth = 100,
 		DefaultHeight = 24,
 	};
 
 public:
-	ProgressBar
-		(Panel * parent,
-		 int32_t x, int32_t y, int32_t w, int32_t h,
-		 uint32_t orientation);
+	ProgressBar(
+	   Panel* parent, PanelStyle, int32_t x, int32_t y, int32_t w, int32_t h, uint32_t orientation);
 
-	uint32_t get_state() const {return state_;}
+	uint32_t get_state() const {
+		return state_;
+	}
 	void set_state(uint32_t);
-	uint32_t get_total() const {return total_;}
+	uint32_t get_total() const {
+		return total_;
+	}
 	void set_total(uint32_t);
 
+	void set_show_percent(bool p) {
+		show_percent_ = p;
+	}
+
 protected:
-	void draw(RenderTarget &) override;
+	void draw(RenderTarget&) override;
 
 private:
 	uint32_t orientation_;
-	uint32_t state_; ///< state_ is [0..total_]
-	uint32_t total_; ///< maximum progress
+	uint32_t state_{0U};    ///< state_ is [0..total_]
+	uint32_t total_{100U};  ///< maximum progress
+	const UI::PanelStyle progress_style_;
+	const UI::ProgressbarStyleInfo& progress_style() const;
+	bool show_percent_{true};
 };
-
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_PROGRESSBAR_H

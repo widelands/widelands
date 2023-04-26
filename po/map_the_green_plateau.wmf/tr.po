@@ -1,32 +1,34 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2015 Widelands Development Team
+# Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
+# D Tufan, 2022
+# Erdoğan Şahin, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Recep Hasanbaş <swarfhell@gmail.com>, 2015
 # Volkan Gezer <volkangezer@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2015-02-20 11:38+0000\n"
-"PO-Revision-Date: 2015-02-21 23:55+0000\n"
-"Last-Translator: Volkan Gezer <volkangezer@gmail.com>\n"
-"Language-Team: Turkish (http://www.transifex.com/projects/p/widelands/language/tr/)\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2023-02-10 03:09+0000\n"
+"PO-Revision-Date: 2015-02-02 13:53+0000\n"
+"Last-Translator: D Tufan, 2022\n"
+"Language-Team: Turkish (http://www.transifex.com/widelands/widelands/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: tr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:15
-#: ../../maps/Plateau.wmf/scripting/texts.lua:17
-#: ../../maps/Plateau.wmf/scripting/texts.lua:68
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:12
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:14
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:60
 msgid "The Forbidden Island"
 msgstr "Yasak Ada"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:18
-#: ../../maps/Plateau.wmf/scripting/texts.lua:69
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:15
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:61
 msgid ""
 "Finally! We have just taken our first step towards victory! Last night, we "
 "landed on the forbidden island and defeated the few guards that were "
@@ -34,77 +36,77 @@ msgid ""
 "the other warlords has detected us so far, so we should keep quiet and build"
 " up our infrastructure. Soon we will be strong enough to raid their "
 "positions."
-msgstr ""
+msgstr "Nihayet! Zafere doğru ilk adımımızı attık! Dün gece yasak adaya indik ve adanın kuzey-batı kesimini izleyen birkaç muhafızı yendik. Diğer savaş ağalarından hiçbirinin bizi şu ana kadar tespit etmediğinden oldukça eminim, bu yüzden sessiz kalmalı ve altyapımızı inşa etmeliyiz. Yakında onların mevzilerine baskın yapacak kadar güçlü olacağız."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:26
-#: ../../maps/Plateau.wmf/scripting/texts.lua:28
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:23
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:25
 msgid "Capture the Ancient Castle"
-msgstr ""
+msgstr "Antik Kaleyi Ele Geçir"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:29
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:26
 msgid "Defeat Lanissa and capture the ancient castle."
-msgstr ""
+msgstr "Lanissa'yı yen ve antik kaleyi ele geçir."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:35
-#: ../../maps/Plateau.wmf/scripting/texts.lua:37
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:32
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:34
 msgid "Defeat Erwyn"
 msgstr "Erwyn'i Yen"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:38
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:35
 msgid ""
 "Defeat Erwyn. He commands the strongest opposing military force left on this"
 " island."
 msgstr "Erwyn'i yen. Bu adada kalan en güçlü karşıt gücü komuta ediyor."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:43
-#: ../../maps/Plateau.wmf/scripting/texts.lua:45
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:40
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:42
 msgid "Defeat Jomo"
 msgstr "Jomo'yu Yen"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:46
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:43
 msgid "Defeat Jomo. He is taking care of the soldiers’ food supply."
 msgstr "Jomo'yu yen. Askerlerin yemek kaynağıyla ilgileniyor."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:64
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:56
 msgid "First Briefing"
 msgstr "İlk Açıklama"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:74
-#: ../../maps/Plateau.wmf/scripting/texts.lua:85
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:66
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:77
 msgid "Second Briefing"
 msgstr "İkinci Açıklama"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:78
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:70
 msgid "An Ancient Castle"
 msgstr "Antik Bir Kale"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:79
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:71
 msgid ""
 "By the Gods! One of our scouts has discovered a mighty castle at the center "
 "of the old plateau. The castle must be quite old and seems to have been "
 "built in a foreign style. It’s quite obvious that this is not barbarian "
 "craft."
-msgstr ""
+msgstr "Tanrılar aşkına! Gözcülerimizden biri, eski platonun ortasında ihtişamlı bir kale keşfetti. Kale epey eski olmalı ve öyle görünüyor ki yabancı bir tarzda inşa edilmiş. Bunun barbar zanaati olmadığı oldukça açık."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:80
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:72
 msgid ""
 "Let’s hope that Lanissa – the warlord holding sway over that castle – has "
 "not discovered our movements yet. Perhaps we have a chance of conquering "
 "that mighty building without a bigger fight! However, it is essential that "
 "we capture it. It will be the key to our reign over this island!"
-msgstr ""
+msgstr "Umalım ki,  – o kale üzerinde hüküm süren savaş ağası  –  Lanissa henüz hareketlerimizi keşfetmesin. Belki de o ihtişamlı kaleyi daha büyük bir savaşa girmeden fethetme şansımız vardır! Ne var ki, bu kaleyi zaptetmemiz elzem. Ada üzerindeki saltanatımızın anahtarı bu kale olacak!\n "
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:89
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:81
 msgid "Ancient Castle Captured"
-msgstr ""
+msgstr "Antik Kale Ele Geçirildi"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:90
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:82
 msgid ""
 "Wonderful! Our troops have finally defeated Lanissa and her soldiers. The "
 "ancient castle is ours!"
-msgstr ""
+msgstr "Harika! Askerlerimiz sonunda Lanissa'yı ve askerlerini yendi. Antik kale bizim!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:91
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:83
 msgid ""
 "It is amazing how far one can see from the highest tower of the castle. We "
 "can watch the whole island. So now I wonder why Lanissa did not see us and "
@@ -115,48 +117,48 @@ msgid ""
 "commands the strongest warriors. In the south, we caught sight of some food "
 "infrastructures guarded by Jomo – a younger warlord – and we should take "
 "care of those infrastructures so we can cut off our enemies’ food supply."
-msgstr ""
+msgstr "Kalenin en yüksek kulesinden ne kadar uzağın görülebildiği şaşırtıcı. Bütün adayı seyredebiliriz. Şimdi ise Lanissa'nın neden bizi görmediğini ve bu yüzden hazırlanmadığını merak ediyorum. Ne olursa olsun, bazı şeyler asla gün ışığına çıkmayacak. Şu an için tek önemli konu, geriye kalan rakip birlikler. Kalenin kuzeyinde ve doğusunda, düşmanımız Erwyn tarafından tutulan mevzileri keşfettik. Kendisi güçlü bir savaş ağası olarak bilinir ve kesinlikle en güçlü savaşçıları komuta eder. Güneyde,–genç bir savaş ağası olan– Jomo tarafından korunan bazı gıda altyapıları gözümüze ilişti ve düşmanlarımızın gıda tedarikini kesebilmek için bu altyapının icabına bakmalıyız.\n "
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:96
-#: ../../maps/Plateau.wmf/scripting/texts.lua:105
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:88
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:97
 msgid "Another Briefing"
 msgstr "Başka bir Açıklama"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:100
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:92
 msgid "Erwyn Defeated"
 msgstr "Erwyn Yenildi"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:101
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:93
 msgid ""
 "Great! Erwyn gave up when he saw his last buildings burning down. That’s one"
 " less strong warlord on this island!"
 msgstr "Harika! Erwyn son binasının yandığını görünce pes etti. Bu, adadaki güçlü savaş kralından birini azaltıyor!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:109
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:101
 msgid "Jomo Defeated"
 msgstr "Jomo Yenildi"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:110
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:102
 msgid ""
 "Great! Jomo gave up when he saw his last buildings burning down. That’s one "
 "less warlord on this island!"
 msgstr "Harika! Jomo son binasının yandığını görünce pes etti. Bu, adadaki bir savaş kralından birini azaltıyor!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:114
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:106
 msgid "Last Briefing"
 msgstr "Son Açıklama"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:118
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:110
 msgid "Victory!"
 msgstr "Zafer!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:119
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:111
 msgid ""
 "Finally! The island is completely ours. Now we just have to defend it better"
 " than the warlords did."
 msgstr "Sonunda! Ada tamamıyla bizim. Artık savaş krallarının yaptığından daha iyi savunmamız gerek."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:120
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:112
 msgid ""
 "Congratulations! You have mastered this scenario. You may play on if you "
 "like!"

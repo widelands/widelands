@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
+wl.Descriptions():new_productionsite_type {
    name = "atlanteans_smelting_works",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Smelting Works"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -19,19 +19,19 @@ tribes:new_productionsite_type {
       granite = 3
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 57, 72 },
+         hotspot = { 62, 76 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
-         hotspot = { 57, 72 },
+         basename = "idle", -- TODO(GunChleoc): No animation yet.
+         hotspot = { 62, 76 },
       }
    },
 
    aihints = {
-      prohibited_till = 600,
+      prohibited_till = 700,
       very_weak_ai_limit = 1,
       weak_ai_limit = 2
    },
@@ -41,47 +41,62 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      iron_ore = 8,
-      gold_ore = 8,
-      coal = 8
-   },
-   outputs = {
-      "iron",
-      "gold"
+      { name = "coal", amount = 8 },
+      { name = "iron_ore", amount = 8 },
+      { name = "gold_ore", amount = 8 }
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=smelt_iron",
             "call=smelt_gold",
-            "call=smelt_iron",
-            "return=skipped"
+            "call=smelt_iron_2",
          }
       },
+      -- 2 identical programs for iron to prevent unnecessary skipping penalty
       smelt_iron = {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
-         descname = _"smelting iron",
+         descname = _("smelting iron"),
          actions = {
             "return=skipped unless economy needs iron",
-            "sleep=25000",
             "consume=iron_ore coal",
-            "animate=working 35000",
+            "sleep=duration:25s",
+            "playsound=sound/metal/fizzle priority:15% allow_multiple",
+            "animate=working duration:35s",
+            "playsound=sound/metal/ironping priority:60%",
+            "produce=iron"
+         }
+      },
+      smelt_iron_2 = {
+         -- TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
+         descname = _("smelting iron"),
+         actions = {
+            "return=skipped unless economy needs iron",
+            "consume=iron_ore coal",
+            "sleep=duration:25s",
+            "playsound=sound/metal/fizzle priority:15% allow_multiple",
+            "animate=working duration:35s",
+            "playsound=sound/metal/ironping priority:60%",
             "produce=iron"
          }
       },
       smelt_gold = {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
-         descname = _"smelting gold",
+         descname = _("smelting gold"),
          actions = {
             "return=skipped unless economy needs gold",
-            "sleep=25000",
             "consume=gold_ore coal",
-            "animate=working 35000",
+            "sleep=duration:25s",
+            "playsound=sound/metal/fizzle priority:15% allow_multiple",
+            "animate=working duration:35s",
+            "playsound=sound/metal/goldping priority:60%",
             "produce=gold"
          }
       },
    },
 }
+
+pop_textdomain()

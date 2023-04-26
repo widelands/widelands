@@ -10,7 +10,6 @@ The Widelands Development Team thanks the following projects:
 
     libSDL2
     libSDL2_mixer
-    libSDL2_net
     libSDL2_image
     libSDL2_ttf
     * All files from SDL2-Project
@@ -37,8 +36,8 @@ The Widelands Development Team thanks the following projects:
     * Project can be found at http://www.gzip.org/zlib/
 
 
-    boost
-    * Project can be found at http://www.boost.org
+    Asio
+    * Project can be found at https://think-async.com/Asio/
 
 
     STLport
@@ -81,10 +80,13 @@ The Widelands Development Team thanks the following projects:
 
 
 and last but not least:
-    http://www.launchpad.org
-    * for their bazaar service
+    https://github.com/
+    * for their git service
     * bugtracker
     * and many more services :-)
+and before
+    http://www.launchpad.org
+    * for their bazaar service
 
 
 

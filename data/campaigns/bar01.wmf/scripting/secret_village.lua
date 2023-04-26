@@ -12,9 +12,9 @@ function village_thread()
 
    reveal_village()
 
-   local pts = scroll_smoothly_to(map:get_field(55, 25), 3000)
+   local prior_center = scroll_to_field(map:get_field(55, 25))
    campaign_message_box(msg_village)
-   timed_scroll(array_reverse(pts), 10)
+   scroll_to_map_pixel(prior_center)
 
    sleep(1500)
 end
@@ -48,49 +48,49 @@ function reveal_village()
          if f.immovable then
             pcall(f.immovable.remove, f.immovable)
          end
-         map:place_immovable(id[1], f, id[4])
+         map:place_immovable(id[1], f)
       end
    end
 
    force_map_immovables{
-      { "spruce_summer_old", 55, 19, "world" },
-      { "larch_summer_pole", 58, 19, "world" },
-      { "birch_summer_mature", 58, 20, "world" },
-      { "larch_summer_old", 57, 21, "world" },
-      { "alder_summer_pole", 54, 22, "world" },
-      { "birch_summer_pole", 56, 24, "world" },
-      { "aspen_summer_old", 58, 24, "world" },
-      { "larch_summer_pole", 56, 25, "world" },
-      { "spruce_summer_old", 53, 27, "world" },
-      { "larch_summer_pole", 57, 27, "world" },
-      { "aspen_summer_mature", 52, 29, "world" },
-      { "birch_summer_pole", 54, 30, "world" },
-      { "beech_summer_old", 55, 30, "world" },
-      { "larch_summer_old", 56, 30, "world" },
-      { "field_harvested", 56, 14, "tribes" },
-      { "field_small",57, 14, "tribes" },
-      { "field_harvested", 54, 15, "tribes" },
-      { "field_harvested", 57, 15, "tribes" },
-      { "field_harvested", 54, 16, "tribes" },
-      { "field_ripe", 57, 16, "tribes" },
-      { "field_harvested", 58, 16, "tribes" },
-      { "field_harvested", 54, 17, "tribes" },
-      { "field_medium", 55, 17, "tribes" },
-      { "field_harvested", 57, 17, "tribes" },
-      { "field_harvested", 55, 18, "tribes" },
-      { "field_harvested", 57, 18, "tribes" },
-      { "field_harvested", 53, 31, "tribes" },
-      { "field_harvested", 54, 31, "tribes" },
-      { "field_medium", 55, 31, "tribes" },
-      { "field_harvested", 56, 32, "tribes" },
-      { "field_harvested", 52, 33, "tribes" },
-      { "field_small",55, 33, "tribes" },
-      { "field_harvested", 56, 33, "tribes" },
-      { "field_harvested", 53, 34, "tribes" },
-      { "field_ripe", 54, 34, "tribes" },
-      { "field_harvested", 56, 34, "tribes" },
-      { "field_harvested", 53, 35, "tribes" },
-      { "field_harvested", 55, 35, "tribes" },
+      { "spruce_summer_old", 55, 19 },
+      { "larch_summer_pole", 58, 19 },
+      { "birch_summer_mature", 58, 20 },
+      { "larch_summer_old", 57, 21 },
+      { "alder_summer_pole", 54, 22 },
+      { "birch_summer_pole", 56, 24 },
+      { "aspen_summer_old", 58, 24 },
+      { "larch_summer_pole", 56, 25 },
+      { "spruce_summer_old", 53, 27 },
+      { "larch_summer_pole", 57, 27 },
+      { "aspen_summer_mature", 52, 29 },
+      { "birch_summer_pole", 54, 30 },
+      { "beech_summer_old", 55, 30 },
+      { "larch_summer_old", 56, 30 },
+      { "wheatfield_harvested", 56, 14 },
+      { "wheatfield_small",57, 14 },
+      { "wheatfield_harvested", 54, 15 },
+      { "wheatfield_harvested", 57, 15 },
+      { "wheatfield_harvested", 54, 16 },
+      { "wheatfield_ripe", 57, 16 },
+      { "wheatfield_harvested", 58, 16 },
+      { "wheatfield_harvested", 54, 17 },
+      { "wheatfield_medium", 55, 17 },
+      { "wheatfield_harvested", 57, 17 },
+      { "wheatfield_harvested", 55, 18 },
+      { "wheatfield_harvested", 57, 18 },
+      { "wheatfield_harvested", 53, 31 },
+      { "wheatfield_harvested", 54, 31 },
+      { "wheatfield_medium", 55, 31 },
+      { "wheatfield_harvested", 56, 32 },
+      { "wheatfield_harvested", 52, 33 },
+      { "wheatfield_small",55, 33 },
+      { "wheatfield_harvested", 56, 33 },
+      { "wheatfield_harvested", 53, 34 },
+      { "wheatfield_ripe", 54, 34 },
+      { "wheatfield_harvested", 56, 34 },
+      { "wheatfield_harvested", 53, 35 },
+      { "wheatfield_harvested", 55, 35 },
    }
 
    local plr = wl.Game().players[1]
@@ -101,13 +101,13 @@ function reveal_village()
       {"barbarians_gamekeepers_hut", 56, 12},
       {"barbarians_farm", 56, 16},
       {"barbarians_well", 54, 18},
-      {"barbarians_bakery", 55, 20, wares = {wheat = 6, water = 6}},
+      {"barbarians_bakery", 55, 20, inputs = {wheat = 6, water = 6}},
       {"barbarians_lumberjacks_hut", 56, 21},
       {"barbarians_lumberjacks_hut", 55, 22},
       {"barbarians_lumberjacks_hut", 54, 24},
       {"barbarians_rangers_hut", 57, 24},
       {"barbarians_rangers_hut", 55, 25},
-      {"barbarians_wood_hardener", 54, 26, wares = {log = 8}},
+      {"barbarians_wood_hardener", 54, 26, inputs = {log = 8}},
       -- to make it more realistic
       {"barbarians_warehouse", 53, 28,
          wares = {
@@ -116,11 +116,11 @@ function reveal_village()
             meat = 30
          }
       },
-      {"barbarians_inn", 55, 28, wares = {barbarians_bread = 4, meat = 4}},
-      {"barbarians_tavern", 57, 28, wares = {barbarians_bread = 4, meat = 4}},
+      {"barbarians_inn", 55, 28, inputs = {barbarians_bread = 4, meat = 4}},
+      {"barbarians_tavern", 57, 28, inputs = {barbarians_bread = 4, meat = 4}},
       {"barbarians_well", 52, 30},
       {"barbarians_farm", 54, 33},
-      {"barbarians_bakery", 51, 35, wares = {wheat = 6, water = 6}},
+      {"barbarians_bakery", 51, 35, inputs = {wheat = 6, water = 6}},
       {"barbarians_well", 52, 37}
    )
 
@@ -143,16 +143,16 @@ function reveal_village()
 
    -- Build roads
    -- Start at northern sentry
-   connected_road(plr, map:get_field(58, 10).immovable,
+   connected_road("normal", plr, map:get_field(58, 10).immovable,
       "w,sw|se,sw|e,se|se,se|sw,sw|sw,w|sw,sw|se,sw|sw,sw|se,sw|" ..
       "sw,sw|sw,sw|sw,sw|se,se,sw|e,e|sw,sw|se,sw|")
 
-   connected_road(plr, map:get_field(57, 25).immovable, "sw,w|sw,w")
-   connected_road(plr, map:get_field(57, 29).immovable, "w,w|w,w")
-   connected_road(plr, map:get_field(55, 34).immovable, "sw,sw")
-   connected_road(plr, map:get_field(57, 22).immovable, "sw,w")
-   connected_road(plr, map:get_field(54, 19).immovable, "sw,se,e")
-   connected_road(plr, map:get_field(56, 17).immovable, "sw,se")
+   connected_road("normal", plr, map:get_field(57, 25).immovable, "sw,w|sw,w")
+   connected_road("normal", plr, map:get_field(57, 29).immovable, "w,w|w,w")
+   connected_road("normal", plr, map:get_field(55, 34).immovable, "sw,sw")
+   connected_road("normal", plr, map:get_field(57, 22).immovable, "sw,w")
+   connected_road("normal", plr, map:get_field(54, 19).immovable, "sw,se,e")
+   connected_road("normal", plr, map:get_field(56, 17).immovable, "sw,se")
 end
 
 run(village_thread)

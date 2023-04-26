@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,29 +12,33 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_GRAPHIC_TEXT_RT_ERRORS_IMPL_H
 #define WL_GRAPHIC_TEXT_RT_ERRORS_IMPL_H
 
-#include <boost/format.hpp>
-
+#include "base/string.h"
 #include "graphic/text/rt_errors.h"
 
 namespace RT {
 
 struct SyntaxErrorImpl : public SyntaxError {
-	SyntaxErrorImpl(size_t line, size_t col, std::string expected, std::string got, std::string next_chars)
-		: SyntaxError
-		  ((boost::format("Syntax error at %1%:%2%: expected %3%, got '%4%'. String continues with: '%5%'")
-					% line % col % expected % got % next_chars)
-			.str())
-	{}
+	SyntaxErrorImpl(size_t line,
+	                size_t col,
+	                const std::string& expected,
+	                const std::string& got,
+	                const std::string& next_chars)
+	   : SyntaxError(
+	        format("Syntax error at %1%:%2%: expected %3%, got '%4%'. String continues with: '%5%'",
+	               line,
+	               col,
+	               expected,
+	               got,
+	               next_chars)) {
+	}
 };
-
-}
+}  // namespace RT
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_RT_ERRORS_IMPL_H

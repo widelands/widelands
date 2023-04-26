@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,15 +12,17 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #include "logic/cmd_luacoroutine.h"
 
+#include <memory>
+
 #include "base/log.h"
 #include "base/macros.h"
+#include "graphic/text_layout.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game.h"
@@ -32,31 +34,36 @@
 
 namespace Widelands {
 
-void CmdLuaCoroutine::execute (Game & game) {
+void CmdLuaCoroutine::execute(Game& game) {
 	try {
 		int rv = cr_->resume();
 		const uint32_t sleeptime = cr_->pop_uint32();
 		if (rv == LuaCoroutine::YIELDED) {
-			game.enqueue_command(new Widelands::CmdLuaCoroutine(sleeptime, cr_));
-			cr_ = nullptr;  // Remove our ownership so we don't delete.
+			game.enqueue_command(new Widelands::CmdLuaCoroutine(Time(sleeptime), std::move(cr_)));
 		} else if (rv == LuaCoroutine::DONE) {
-			delete cr_;
-			cr_ = nullptr;
+			cr_.reset();
 		}
-	} catch (LuaError & e) {
-		log("Error in Lua Coroutine\n");
-		log("%s\n", e.what());
-		log("Send message to all players and pause game");
+	} catch (LuaError& e) {
+		log_err_time(game.get_gametime(), "Error in Lua Coroutine\n");
+		log_err_time(game.get_gametime(), "%s\n", e.what());
+
+		if (g_fail_on_lua_error) {
+			log_err_time(game.get_gametime(), "Terminating Widelands.");
+			abort();
+		}
+
+		log_err_time(game.get_gametime(), "Send message to all players and pause game\n");
+		const std::string error_message = richtext_escape(e.what());
 		for (int i = 1; i <= game.map().get_nrplayers(); i++) {
-			Widelands::Message & msg =
-				*new Widelands::Message
-				(Message::Type::kGameLogic,
-				 game.get_gametime(),
-				 "images/ui_basic/menu_help.png",
-				 "Coroutine",
-				 "Lua Coroutine Failed",
-				 e.what());
-			game.player(i).add_message(game, msg, true);
+			// Send message only to open player slots
+			Player* recipient = game.get_player(i);
+			if (recipient != nullptr) {
+				std::unique_ptr<Message> msg(new Widelands::Message(
+				   Message::Type::kGameLogic, game.get_gametime(), "Coroutine",
+				   "images/ui_basic/menu_help.png", "Lua Coroutine Failed", error_message));
+
+				recipient->add_message(game, std::move(msg), true);
+			}
 		}
 		game.game_controller()->set_desired_speed(0);
 	}
@@ -73,28 +80,25 @@ void CmdLuaCoroutine::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader
 			// This function is only called when saving/loading savegames. So save
 			// to cast here
 			upcast(LuaGameInterface, lgi, &egbase.lua());
-			assert(lgi); // If this is not true, this is not a game.
+			assert(lgi);  // If this is not true, this is not a game.
 
 			cr_ = lgi->read_coroutine(fr);
 		} else {
 			throw UnhandledVersionError("CmdLuaCoroutine", packet_version, kCurrentPacketVersion);
 		}
-	} catch (const WException & e) {
+	} catch (const WException& e) {
 		throw GameDataError("lua function: %s", e.what());
 	}
 }
-void CmdLuaCoroutine::write
-	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
-{
+void CmdLuaCoroutine::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersion);
 	GameLogicCommand::write(fw, egbase, mos);
 
 	// This function is only called when saving/loading savegames. So save to
 	// cast here
 	upcast(LuaGameInterface, lgi, &egbase.lua());
-	assert(lgi); // If this is not true, this is not a game.
+	assert(lgi);  // If this is not true, this is not a game.
 
-	lgi->write_coroutine(fw, cr_);
+	lgi->write_coroutine(fw, *cr_);
 }
-
-}
+}  // namespace Widelands

@@ -1,20 +1,49 @@
+push_textdomain("world")
+
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "stag_idle_??.png"),
-      hotspot = { 12, 26 },
-      fps = 20,
-   },
-}
-add_walking_animations(animations, dirname, "stag_walk", {25, 30}, 20)
-
-world:new_critter_type{
+wl.Descriptions():new_critter_type{
    name = "stag",
-   descname = _ "Stag",
-   attributes = { "eatable" },
+   descname = _("Stag"),
+   icon = dirname .. "menu.png",
+   animation_directory = dirname,
    programs = {
       remove = { "remove" },
    },
-   animations = animations,
+   size = 7,
+   reproduction_rate = 30,
+   appetite = 30,
+   herbivore = {"field"},
+
+   spritesheets = {
+      idle = {
+         sound_effect = {
+            path = "sound/animals/stag",
+            priority = "2%"
+         },
+         fps = 20,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 12, 26 }
+      },
+      eating = {
+         basename = "idle", -- TODO(Nordfriese): Make animation
+         fps = 20,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 12, 26 }
+      },
+      walk = {
+         fps = 20,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         directional = true,
+         hotspot = { 16, 30 }
+      },
+   },
 }
+
+pop_textdomain()

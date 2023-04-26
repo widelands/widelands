@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_productionsite_type {
    name = "empire_bakery",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Bakery"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -19,25 +19,34 @@ tribes:new_productionsite_type {
       granite = 2
    },
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 42, 65 },
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 50, 62 },
       },
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 42, 65 },
+         frames = 4,
+         columns = 4,
+         rows = 1,
+         hotspot = { 50, 62 },
       },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 43, 65 },
-         fps = 2
+         fps = 2,
+         frames = 20,
+         columns = 10,
+         rows = 2,
+         hotspot = { 50, 62 },
       },
    },
 
    aihints = {
-      prohibited_till = 600,
-      forced_after = 700
+      prohibited_till = 550,
+      basic_amount = 1,
+      very_weak_ai_limit = 1,
+      weak_ai_limit = 2
    },
 
    working_positions = {
@@ -45,24 +54,23 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      flour = 6,
-      water = 6
-   },
-   outputs = {
-      "empire_bread"
+      { name = "water", amount = 6 },
+      { name = "flour", amount = 6 }
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
-         descname = _"baking bread",
+         descname = pgettext("empire_building", "baking bread"),
          actions = {
-            "sleep=15000",
             "return=skipped unless economy needs empire_bread",
             "consume=flour water",
-            "animate=working 15000",
+            "sleep=duration:20s",
+            "animate=working duration:10s",
             "produce=empire_bread"
          }
       },
    },
 }
+
+pop_textdomain()

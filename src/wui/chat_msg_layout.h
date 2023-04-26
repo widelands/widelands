@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,22 +12,16 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_WUI_CHAT_MSG_LAYOUT_H
 #define WL_WUI_CHAT_MSG_LAYOUT_H
 
-#include <string>
-
-struct ChatMessage;
-
-// Formats 'chat_message' as old richtext.
-std::string format_as_old_richtext(const ChatMessage& chat_message);
+#include "chat/chat.h"
 
 // Formats 'chat_message' as richtext.
-std::string format_as_richtext(const ChatMessage& chat_message);
+std::string format_as_richtext(const ChatMessage& chat_message, const ChatColorForPlayer& fn);
 
 #endif  // end of include guard: WL_WUI_CHAT_MSG_LAYOUT_H

@@ -1,0 +1,3 @@
+return {
+   lynx = { "eatable" }
+}

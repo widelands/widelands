@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -31,17 +30,16 @@
  * "couldn't open file (from zipfile "+zipfilename_+")");
  */
 struct ZipOperationError : public std::logic_error {
-	ZipOperationError
-		(const std::string & thrower,
-		 const std::string & filename,
-		 const std::string & zipfilename,
-		 const std::string & message = "problem during zipfile operation")
-		:
-		std::logic_error
-			(thrower + ": " + message + " (working on '" + filename +
-			 "' in zipfile '" + zipfilename + "')"),
-		thrower_(thrower), filename_(filename), zipfilename_(zipfilename)
-	{}
+	ZipOperationError(const std::string& thrower,
+	                  const std::string& filename,
+	                  const std::string& zipfilename,
+	                  const std::string& message = "problem during zipfile operation")
+	   : std::logic_error(thrower + ": " + message + " (working on '" + filename + "' in zipfile '" +
+	                      zipfilename + "')"),
+	     thrower_(thrower),
+	     filename_(filename),
+	     zipfilename_(zipfilename) {
+	}
 
 	std::string thrower_;
 	std::string filename_;

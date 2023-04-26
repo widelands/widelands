@@ -1,31 +1,12 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "waiting_???.png"),
-      hotspot = { 11, 22 },
-      fps = 10
-   },
-   work = {
-      pictures = path.list_files(dirname .. "work_??.png"),
-      sound_effect = {
-            directory = "sound/hammering",
-            name = "hammering",
-      },
-      hotspot = { 10, 22 },
-      fps = 10
-   }
-}
-add_worker_animations(animations, "walk", dirname, "walk", {7, 22}, 10)
-add_worker_animations(animations, "walkload", dirname, "walk", {7, 22}, 10)
-
-
-tribes:new_worker_type {
-   msgctxt = "barbarians_worker",
+wl.Descriptions():new_worker_type {
    name = "barbarians_builder",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Builder"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -34,5 +15,34 @@ tribes:new_worker_type {
       hammer = 1
    },
 
-   animations = animations,
+   spritesheets = {
+      idle = {
+         fps = 10,
+         frames = 150,
+         rows = 13,
+         columns = 12,
+         hotspot = { 9, 18 }
+      },
+      walk = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 7, 22 }
+      },
+      work = {
+         fps = 10,
+         frames = 92,
+         rows = 11,
+         columns = 9,
+         hotspot = { 9, 22 },
+         sound_effect = {
+            path = "sound/hammering/hammering",
+            priority = "50%"
+         }
+      }
+   }
 }
+
+pop_textdomain()

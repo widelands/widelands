@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009, 2011 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,33 +12,44 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_CONSTRUCTIONSITE_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_CONSTRUCTIONSITE_H
 
-#include <vector>
+#include <memory>
 
 #include "base/macros.h"
+#include "logic/map_objects/tribes/building_settings.h"
 #include "logic/map_objects/tribes/partially_finished_building.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
 
 class Building;
-class Request;
-class WaresQueue;
+enum class StockPolicy;
 
 /// Per-player and per-field constructionsite information
 struct ConstructionsiteInformation {
-	ConstructionsiteInformation() : becomes(nullptr), was(nullptr), totaltime(0), completedtime(0) {}
-	const BuildingDescr* becomes; // Also works as a marker telling whether there is a construction site.
-	const BuildingDescr* was; // only valid if "becomes" is an enhanced building.
-	uint32_t totaltime;
-	uint32_t completedtime;
+	ConstructionsiteInformation() = default;
+
+	/// Draw the partly finished constructionsite
+	void draw(const Vector2f& point_on_dst,
+	          const Coords& coords,
+	          float scale,
+	          bool visible,
+	          const RGBColor& player_color,
+	          RenderTarget* dst) const;
+
+	const BuildingDescr* becomes{
+	   nullptr};  // Also works as a marker telling whether there is a construction site.
+	const BuildingDescr* was{nullptr};  // only valid if "becomes" is an enhanced building.
+	std::vector<const BuildingDescr*>
+	   intermediates;  // If we enhance a building while it's still under construction
+	Duration totaltime{0U};
+	Duration completedtime{0U};
 };
 
 /*
@@ -61,58 +72,95 @@ The ConstructionSite's idling animation is the basic construction site marker.
 */
 class ConstructionSiteDescr : public BuildingDescr {
 public:
-	ConstructionSiteDescr(const std::string& init_descname, const LuaTable& t, const EditorGameBase& egbase);
-	~ConstructionSiteDescr() override {}
+	ConstructionSiteDescr(const std::string& init_descname,
+	                      const LuaTable& t,
+	                      Descriptions& descriptions);
+	~ConstructionSiteDescr() override = default;
 
-	Building & create_object() const override;
+	[[nodiscard]] Building& create_object() const override;
+
+	[[nodiscard]] FxId creation_fx() const;
 
 private:
+	const FxId creation_fx_;
+
 	DISALLOW_COPY_AND_ASSIGN(ConstructionSiteDescr);
 };
 
 class ConstructionSite : public PartiallyFinishedBuilding {
 	friend class MapBuildingdataPacket;
 
-	static const uint32_t CONSTRUCTIONSITE_STEP_TIME = 30000;
-
 	MO_DESCR(ConstructionSiteDescr)
 
 public:
-	ConstructionSite(const ConstructionSiteDescr & descr);
+	explicit ConstructionSite(const ConstructionSiteDescr& descr);
 
-	const ConstructionsiteInformation & get_info() {return info_;}
+	const ConstructionsiteInformation& get_info() {
+		return info_;
+	}
 
-	WaresQueue & waresqueue(DescriptionIndex) override;
+	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
 
-	void set_building(const BuildingDescr &) override;
-	const BuildingDescr & building() const {return *building_;}
+	void set_building(const BuildingDescr&) override;
+	const BuildingDescr& building() const {
+		return *building_;
+	}
 
-	void init   (EditorGameBase &) override;
-	void cleanup(EditorGameBase &) override;
+	bool init(EditorGameBase&) override;
+	void cleanup(EditorGameBase&) override;
 
 	bool burn_on_destroy() override;
 
-	bool fetch_from_flag(Game &) override;
-	bool get_building_work(Game &, Worker &, bool success) override;
+	bool fetch_from_flag(Game&) override;
+	bool get_building_work(Game&, Worker&, bool success) override;
+
+	void add_additional_ware(DescriptionIndex);
+	void add_additional_worker(Game&, Worker&);
+	const std::map<DescriptionIndex, uint8_t>& get_additional_wares() const {
+		return additional_wares_;
+	}
+	const std::vector<Worker*>& get_additional_workers() const {
+		return additional_workers_;
+	}
+
+	BuildingSettings* get_settings() const {
+		return settings_.get();
+	}
+	void apply_settings(const BuildingSettings&);
+
+	void enhance(const EditorGameBase&);
+
+	void add_dropout_wares(const std::map<DescriptionIndex, Quantity>&);
 
 protected:
 	void update_statistics_string(std::string* statistics_string) override;
 
-	uint32_t build_step_time() const override {return CONSTRUCTIONSITE_STEP_TIME;}
-	void create_options_window(InteractiveGameBase&, UI::Window*& registry) override;
+	static constexpr Duration kConstructionsiteStepTime{30000};
+	const Duration& build_step_time() const override {
+		return kConstructionsiteStepTime;
+	}
 
-	static void wares_queue_callback
-		(Game &, WaresQueue *, DescriptionIndex, void * data);
+	static void wares_queue_callback(Game&, InputQueue*, DescriptionIndex, Worker*, void* data);
 
-	void draw(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&) override;
+	void draw(const Time& gametime,
+	          InfoToDraw info_to_draw,
+	          const Vector2f& point_on_dst,
+	          const Coords& coords,
+	          float scale,
+	          RenderTarget* dst) override;
 
 private:
-	int32_t     fetchfromflag_;  // # of wares to fetch from flag
+	int32_t fetchfromflag_{0};  // # of wares to fetch from flag
 
-	bool        builder_idle_;   // used to determine whether the builder is idle
-	ConstructionsiteInformation info_; // asked for by player point of view for the gameview
+	bool builder_idle_{false};          // used to determine whether the builder is idle
+	ConstructionsiteInformation info_;  // asked for by player point of view for the gameview
+
+	std::map<DescriptionIndex, uint8_t> additional_wares_;
+	std::vector<Worker*> additional_workers_;
+
+	std::unique_ptr<BuildingSettings> settings_;
+	void init_settings();
 };
-
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_CONSTRUCTIONSITE_H

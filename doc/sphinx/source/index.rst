@@ -12,9 +12,7 @@ Contents:
    :maxdepth: 2
 
    development
-   server
    geometry
-   productionsite_program
    lua_index
 
 
@@ -22,6 +20,5 @@ Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
 

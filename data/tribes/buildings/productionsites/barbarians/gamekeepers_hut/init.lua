@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
+wl.Descriptions():new_productionsite_type {
    name = "barbarians_gamekeepers_hut",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Gamekeeper’s Hut"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -18,24 +18,31 @@ tribes:new_productionsite_type {
       granite = 1
    },
 
+   animation_directory = dirname,
    animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 44, 43 },
-      },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 44, 43 },
-      },
       unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
          hotspot = { 44, 43 },
       },
    },
 
+   spritesheets = {
+      build = {
+         frames = 4,
+         rows = 2,
+         columns = 2,
+         hotspot = { 44, 43 }
+      },
+      idle = {
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 44, 43 }
+      },
+   },
+
    aihints = {
-      renews_map_resource = "meat",
-      prohibited_till = 900
+      prohibited_till = 510,
+      basic_amount = 1
    },
 
    working_positions = {
@@ -43,13 +50,16 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
-            "sleep=52500",
-            "worker=release"
+            -- time total: 53 sec
+            "callworker=release",
+            "sleep=duration:53s"
          }
       },
    },
 }
+
+pop_textdomain()

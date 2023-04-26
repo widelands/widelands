@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2010 by the Widelands Development Team
+ * Copyright (C) 2007-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,42 +12,24 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
-#include <exception>
-
-#include <boost/test/unit_test.hpp>
-
+#include "base/test.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/editor_game_base.h"
-#include "logic/map_objects/map_object.h"
 #include "logic/player.h"
-
-namespace Widelands {
-class World;
-}  // namespace Widelands
-
-using namespace Widelands;
 
 /******************/
 /* Helper classes */
 /******************/
-struct TestingFlag : public Flag {
-	TestingFlag(EditorGameBase &, Coords const c) : Flag() {
+struct TestingFlag : public Widelands::Flag {
+	TestingFlag(Widelands::EditorGameBase& /* egbase */, const Widelands::Coords& c) {
 		set_flag_position(c);
 	}
-
-};
-struct TestingMap : public Map {
-	TestingMap(int const w, int const h) : Map() {set_size(w, h);}
-
-	void recalc_for_field_area(const World&, Area<FCoords>) override {}
-
 };
 
 /*************************************************************************/
@@ -55,24 +37,22 @@ struct TestingMap : public Map {
 /*************************************************************************/
 struct WlTestFixture {
 	WlTestFixture() {
-	g_fs = new LayeredFileSystem();
+		g_fs = new LayeredFileSystem();
 	}
-	~WlTestFixture() {delete g_fs; g_fs = nullptr;}
+	~WlTestFixture() {
+		delete g_fs;
+		g_fs = nullptr;
+	}
 };
 
 struct SimpleRoadTestsFixture : public WlTestFixture {
-	SimpleRoadTestsFixture() :
-		g(nullptr),
-		path(Coords(5, 5))
-	{
-		map = new TestingMap(32, 32);
-		g.set_map(map);
+	SimpleRoadTestsFixture() : g(nullptr), path(Widelands::Coords(5, 5)) {
+		g.mutable_map()->set_size(32, 32);
+		path.append(g.map(), Widelands::WALK_E);
+		path.append(g.map(), Widelands::WALK_E);
 
-		path.append(*map, WALK_E);
-		path.append(*map, WALK_E);
-
-		start = new TestingFlag(g, Coords(5, 5));
-		end = new TestingFlag(g, Coords(7, 5));
+		start = new TestingFlag(g, Widelands::Coords(5, 5));
+		end = new TestingFlag(g, Widelands::Coords(7, 5));
 	}
 	~SimpleRoadTestsFixture() {
 		delete start;
@@ -80,30 +60,28 @@ struct SimpleRoadTestsFixture : public WlTestFixture {
 		// Map is deleted by EditorGameBase
 	}
 
-	TestingMap * map;
-	EditorGameBase g;
-	Road r;
-	Path path;
-	TestingFlag * start;
-	TestingFlag * end;
+	DISALLOW_COPY_AND_ASSIGN(SimpleRoadTestsFixture);
+
+	Widelands::EditorGameBase g;
+	Widelands::Road r;
+	Widelands::Path path;
+	TestingFlag* start;
+	TestingFlag* end;
 };
 
-BOOST_AUTO_TEST_SUITE(Road)
+TESTSUITE_START(Road)
 
 /*
  * Simple tests
  */
-BOOST_FIXTURE_TEST_CASE(PassabilityTest, SimpleRoadTestsFixture) {
-	BOOST_CHECK_EQUAL(r.get_passable(), true);
+
+TESTCASE(passability) {
+	SimpleRoadTestsFixture f;
+	check_equal(f.r.get_passable(), true);
 }
-BOOST_FIXTURE_TEST_CASE(CorrectSizeTest, SimpleRoadTestsFixture) {
-	BOOST_CHECK_EQUAL(r.get_size(), static_cast<int32_t>(BaseImmovable::SMALL));
-}
-BOOST_FIXTURE_TEST_CASE(InstantiateEditorGameBase, SimpleRoadTestsFixture) {
-	BOOST_TEST_MESSAGE
-		(start->get_position().x << ',' << start->get_position().y <<
-		 "   " << end->get_position().x << ',' << end->get_position().y <<
-		 "   " << path.get_start().x << ',' << path.get_start().y);
+TESTCASE(correct_size) {
+	SimpleRoadTestsFixture f;
+	check_equal(f.r.get_size(), static_cast<int32_t>(Widelands::BaseImmovable::SMALL));
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+TESTSUITE_END()

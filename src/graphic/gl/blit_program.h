@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2015 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,16 +12,12 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_GRAPHIC_GL_BLIT_PROGRAM_H
 #define WL_GRAPHIC_GL_BLIT_PROGRAM_H
-
-#include <memory>
-#include <vector>
 
 #include "base/macros.h"
 #include "base/rect.h"
@@ -36,7 +32,7 @@
 class BlitProgram {
 public:
 	struct Arguments {
-		FloatRect destination_rect;
+		Rectf destination_rect;
 		float z_value;
 		BlitData texture;
 		BlitData mask;
@@ -47,28 +43,27 @@ public:
 
 	// Returns the (singleton) instance of this class.
 	static BlitProgram& instance();
-	~BlitProgram();
+	~BlitProgram() = default;
 
 	// Draws the rectangle 'gl_src_rect' from the texture with the name
 	// 'gl_texture_image' to 'gl_dest_rect' in the currently bound framebuffer. All
 	// coordinates are in the OpenGL frame. The 'texture_mask' is used to selectively apply
 	// the 'blend'. This is used for blitting player colored images.
-	void draw(const FloatRect& gl_dest_rect,
-	          const float z_value,
-				 const BlitData& texture,
-				 const BlitData& mask,
+	void draw(const Rectf& gl_dest_rect,
+	          float z_value,
+	          const BlitData& texture,
+	          const BlitData& mask,
 	          const RGBAColor& blend,
-				 const BlendMode& blend_mode);
+	          const BlendMode& blend_mode);
 
 	// Draws the rectangle 'gl_src_rect' from the texture with the name
 	// 'texture' to 'gl_dest_rect' in the currently bound framebuffer. All
 	// coordinates are in the OpenGL frame. The image is first converted to
 	// luminance, then all values are multiplied with blend.
-	void draw_monochrome(const FloatRect& gl_dest_rect,
-				 const float z_value,
-				 const BlitData& blit_source,
-				 const RGBAColor& blend);
-
+	void draw_monochrome(const Rectf& gl_dest_rect,
+	                     float z_value,
+	                     const BlitData& texture,
+	                     const RGBAColor& blend);
 
 	// Draws a bunch of items at once.
 	void draw(const std::vector<Arguments>& arguments);

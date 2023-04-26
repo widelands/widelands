@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,65 +12,51 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
+// TODO(unknown): rename
 #ifndef WL_GRAPHIC_FONT_HANDLER_H
 #define WL_GRAPHIC_FONT_HANDLER_H
 
-#include <limits>
 #include <memory>
-#include <string>
 
-#include "graphic/align.h"
-#include "base/point.h"
-
-class RenderTarget;
+#include "base/macros.h"
+#include "graphic/image_cache.h"
+#include "graphic/text/font_set.h"
+#include "graphic/text/rendered_text.h"
 
 namespace UI {
-
-struct TextStyle;
 
 /**
  * Main class for string rendering. Manages the cache of pre-rendered strings.
  */
-struct FontHandler {
-	FontHandler();
-	~FontHandler();
+class IFontHandler {
+public:
+	IFontHandler() = default;
+	virtual ~IFontHandler() = default;
 
-	void draw_text
-		(RenderTarget &,
-		 const TextStyle &,
-		 Point dstpoint,
-		 const std::string & text,
-		 Align align = UI::Align::kCenterLeft,
-		 uint32_t caret = std::numeric_limits<uint32_t>::max());
-	uint32_t draw_text_raw(RenderTarget &, const TextStyle &, Point dstpoint, const std::string & text);
+	/// Renders the given text into a set of images. The images are cached in a transient cache,
+	/// so we share the ownership. Will throw on error.
+	virtual std::shared_ptr<const UI::RenderedText> render(const std::string& text,
+	                                                       uint16_t w = 0) = 0;
 
-	void get_size
-		(const TextStyle &,
-		 const std::string & text,
-		 uint32_t & w, uint32_t & h,
-		 uint32_t wrap = std::numeric_limits<uint32_t>::max());
-	void get_size
-		(const std::string & fontname, int32_t size,
-		 const std::string & text,
-		 uint32_t & w, uint32_t & h,
-		 uint32_t wrap = std::numeric_limits<uint32_t>::max());
-	uint32_t get_fontheight(const std::string & name, int32_t size);
+	/// Returns the font handler's current FontSet
+	[[nodiscard]] virtual UI::FontSet const* fontset() const = 0;
 
-	// Delete the whole cache.
-	void flush();
+	/// Loads the FontSet for the currently active locale into the
+	/// font handler. This needs to be called after the language of the
+	/// game has changed.
+	virtual void reinitialize_fontset(const std::string& locale) = 0;
 
-private:
-	struct Data;
-	std::unique_ptr<Data> d;
+	DISALLOW_COPY_AND_ASSIGN(IFontHandler);
 };
 
-extern FontHandler * g_fh;
+/// Create a new FontHandler.
+IFontHandler* create_fonthandler(ImageCache* image_cache, const std::string& locale);
 
-}
+extern IFontHandler* g_fh;
+}  // namespace UI
 
 #endif  // end of include guard: WL_GRAPHIC_FONT_HANDLER_H

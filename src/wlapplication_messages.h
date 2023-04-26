@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 by the Widelands Development Team
+ * Copyright (C) 2012-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,7 +20,21 @@
 #define WL_WLAPPLICATION_MESSAGES_H
 
 #include <string>
+#include <vector>
 
-void show_usage(const std::string&, const std::string&);
+struct Parameter {
+	std::string title_;
+	std::string key_;
+	std::string hint_;
+	std::string help_;
+	bool is_verbose_;
+};
+
+enum class CmdLineVerbosity { None, Normal, All };
+
+void fill_parameter_vector();
+bool is_parameter(const std::string&);
+const std::vector<std::string> get_all_parameters();
+void show_usage(const std::string&, CmdLineVerbosity verbosity);
 
 #endif  // end of include guard: WL_WLAPPLICATION_MESSAGES_H

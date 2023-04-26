@@ -1,5 +1,5 @@
 /*
-//  * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,18 +12,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_MAP_IO_MAP_OBJECT_SAVER_H
 #define WL_MAP_IO_MAP_OBJECT_SAVER_H
 
-#include <map>
-#include <string>
-
-#include "logic/constants.h"
+#include "graphic/playercolor.h"
 #include "logic/widelands.h"
 #include "map_io/map_message_saver.h"
 
@@ -37,32 +33,49 @@ class MapObject;
  *   - translate MapObject* Pointer into the index used in the saved file
  */
 struct MapObjectSaver {
-	MapObjectSaver();
+	MapObjectSaver() = default;
 
-	bool is_object_known(const MapObject &) const;
-	Serial register_object(const MapObject &);
+	[[nodiscard]] bool is_object_known(const MapObject&) const;
+	Serial register_object(const MapObject&);
 
-	uint32_t get_object_file_index(const MapObject &);
-	uint32_t get_object_file_index_or_zero(MapObject const *);
+	uint32_t get_object_file_index(const MapObject&);
+	uint32_t get_object_file_index_or_zero(MapObject const*);
 
-	void mark_object_as_saved(const MapObject &);
+	void mark_object_as_saved(const MapObject&);
 
-	// Information functions
+// Information functions
 #ifndef NDEBUG
-	void     detect_unsaved_objects() const;
+	void detect_unsaved_objects() const;
 #endif
-	uint32_t get_nr_roads          () const {return nr_roads_;}
-	uint32_t get_nr_flags          () const {return nr_flags_;}
-	uint32_t get_nr_buildings      () const {return nr_buildings_;}
-	uint32_t get_nr_wares          () const {return nr_wares_;}
-	uint32_t get_nr_bobs           () const {return nr_bobs_;}
-	uint32_t get_nr_immovables     () const {return nr_immovables_;}
-	uint32_t get_nr_battles        () const {return nr_battles_;}
+	[[nodiscard]] uint32_t get_nr_roads() const {
+		return nr_roads_;
+	}
+	[[nodiscard]] uint32_t get_nr_waterways() const {
+		return nr_waterways_;
+	}
+	[[nodiscard]] uint32_t get_nr_flags() const {
+		return nr_flags_;
+	}
+	[[nodiscard]] uint32_t get_nr_buildings() const {
+		return nr_buildings_;
+	}
+	[[nodiscard]] uint32_t get_nr_wares() const {
+		return nr_wares_;
+	}
+	[[nodiscard]] uint32_t get_nr_bobs() const {
+		return nr_bobs_;
+	}
+	[[nodiscard]] uint32_t get_nr_immovables() const {
+		return nr_immovables_;
+	}
+	[[nodiscard]] uint32_t get_nr_battles() const {
+		return nr_battles_;
+	}
 
-	bool is_object_saved(const MapObject &);
+	bool is_object_saved(const MapObject&);
 
 	/// \note Indexed by player number - 1.
-	MapMessageSaver message_savers[MAX_PLAYERS];
+	MapMessageSaver message_savers[kMaxPlayers];
 
 private:
 	struct MapObjectRec {
@@ -73,23 +86,24 @@ private:
 		bool registered;
 		bool saved;
 	};
-	using MapObjectRecordMap = std::map<const MapObject *, MapObjectRec>;
+	using MapObjectRecordMap = std::map<const MapObject*, MapObjectRec>;
 
-	MapObjectRec & get_object_record(const MapObject &);
+	MapObjectRec& get_object_record(const MapObject&);
 
 	MapObjectRecordMap objects_;
-	uint32_t nr_roads_;
-	uint32_t nr_flags_;
-	uint32_t nr_buildings_;
-	uint32_t nr_bobs_;
-	uint32_t nr_wares_;
-	uint32_t nr_immovables_;
-	uint32_t nr_battles_;
-	uint32_t nr_fleets_;
-	uint32_t nr_portdocks_;
-	uint32_t lastserial_;
+	uint32_t nr_roads_{0U};
+	uint32_t nr_waterways_{0U};
+	uint32_t nr_flags_{0U};
+	uint32_t nr_buildings_{0U};
+	uint32_t nr_bobs_{0U};
+	uint32_t nr_wares_{0U};
+	uint32_t nr_immovables_{0U};
+	uint32_t nr_battles_{0U};
+	uint32_t nr_ship_fleets_{0U};
+	uint32_t nr_ferry_fleets_{0U};
+	uint32_t nr_portdocks_{0U};
+	uint32_t lastserial_{0U};
 };
-
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_MAP_IO_MAP_OBJECT_SAVER_H

@@ -1,16 +1,16 @@
-# Automatically created by Widelands bzr7574[artifacts] (Debug)
+# Automatically created by Widelands bzr7890[trunk] (Debug)
 
 [global]
 packet_version="2"
 
 [player_1]
-name="Spieler 1"
+name="Player 1"
 tribe="barbarians"
 ai=
 closeable="false"
 
 [player_2]
-name="Spieler 2"
+name="Player 2"
 tribe="barbarians"
 ai=
 closeable="false"

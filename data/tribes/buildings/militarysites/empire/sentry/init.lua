@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_militarysite_type {
-   msgctxt = "empire_building",
+wl.Descriptions():new_militarysite_type {
    name = "empire_sentry",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Sentry"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -18,18 +18,14 @@ tribes:new_militarysite_type {
       granite = 1,
       planks = 1
    },
-   enhancement_cost = {
-      planks = 1,
-      granite = 1
-   },
-   return_on_dismantle_on_enhanced = {
-      granite = 1
-   },
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 37, 60 }
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 38, 61 }
       }
    },
 
@@ -45,10 +41,17 @@ tribes:new_militarysite_type {
    prefer_heroes = false,
 
    messages = {
-      occupied = _"Your soldiers have occupied your sentry.",
-      aggressor = _"Your sentry discovered an aggressor.",
-      attack = _"Your sentry is under attack.",
-      defeated_enemy = _"The enemy defeated your soldiers at the sentry.",
-      defeated_you = _"Your soldiers defeated the enemy at the sentry."
+      -- TRANSLATORS: Message sent by an Empire military site
+      occupied = pgettext("empire_building", "Your soldiers have occupied your sentry."),
+      -- TRANSLATORS: Message sent by an Empire military site
+      aggressor = pgettext("empire_building", "Your sentry discovered an aggressor."),
+      -- TRANSLATORS: Message sent by an Empire military site
+      attack = pgettext("empire_building", "Your sentry is under attack."),
+      -- TRANSLATORS: Message sent by an Empire military site
+      defeated_enemy = pgettext("empire_building", "The enemy defeated your soldiers at the sentry."),
+      -- TRANSLATORS: Message sent by an Empire military site
+      defeated_you = pgettext("empire_building", "Your soldiers defeated the enemy at the sentry.")
    },
 }
+
+pop_textdomain()

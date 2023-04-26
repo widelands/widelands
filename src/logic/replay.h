@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2009,2013 by the Widelands Development Team
+ * Copyright (C) 2007-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -28,13 +27,9 @@
  * playercommands.
  */
 
-#include <cstring>
 #include <string>
 
-#include <stdint.h>
-
-#define REPLAY_DIR "replays"
-#define REPLAY_SUFFIX ".wrpl"
+#include "base/times.h"
 
 struct Md5Checksum;
 
@@ -51,16 +46,16 @@ class PlayerCommand;
  */
 class ReplayReader {
 public:
-	ReplayReader(Game & game, const std::string & filename);
+	ReplayReader(Game& game, const std::string& filename);
 	~ReplayReader();
 
-	Command * get_next_command(uint32_t time);
+	Command* get_next_command(const Time& time);
 	bool end_of_replay();
 
 private:
-	StreamRead * cmdlog_;
+	StreamRead* cmdlog_;
 
-	uint32_t replaytime_;
+	Time replaytime_;
 };
 
 /**
@@ -68,18 +63,32 @@ private:
  */
 class ReplayWriter {
 public:
-	ReplayWriter(Game &, const std::string & filename);
+	ReplayWriter(Game&, const std::string& filename);
 	~ReplayWriter();
 
-	void send_player_command(PlayerCommand *);
-	void send_sync(const Md5Checksum &);
+	void send_player_command(PlayerCommand*);
+	void send_sync(const Md5Checksum&);
 
 private:
-	Game        & game_;
+	Game& game_;
 	StreamWrite* cmdlog_;
 	std::string filename_;
 };
 
-}
+/** Extract the savegame from a replay to a temporary file. */
+struct ReplayfileSavegameExtractor {
+	explicit ReplayfileSavegameExtractor(const std::string& gamefilename);
+	~ReplayfileSavegameExtractor();
+
+	[[nodiscard]] inline const std::string& file() const {
+		return temp_file_.empty() ? source_file_ : temp_file_;
+	}
+
+private:
+	const std::string& source_file_;
+	std::string temp_file_;
+};
+
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_REPLAY_H

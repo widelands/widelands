@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -21,12 +20,11 @@
 #define WL_GRAPHIC_TEXT_SDL_TTF_FONT_H
 
 #include <memory>
-#include <string>
 
 #include <SDL_ttf.h>
 
+#include "graphic/text/texture_cache.h"
 #include "graphic/texture.h"
-#include "graphic/texture_cache.h"
 
 namespace RT {
 
@@ -47,30 +45,35 @@ public:
 		UNDERLINE = 4,
 		SHADOW = 8,
 	};
-	virtual ~IFont() {}
+	virtual ~IFont() = default;
 
-	virtual void dimensions(const std::string&, int, uint16_t *, uint16_t *) = 0;
-	virtual const Texture& render(const std::string&, const RGBColor& clr, int, TextureCache*) = 0;
+	virtual void dimensions(const std::string&, int, uint16_t*, uint16_t*) = 0;
+	virtual std::shared_ptr<const Image>
+	render(const std::string&, const RGBColor& clr, int, TextureCache*) = 0;
 
-	virtual uint16_t ascent(int) const = 0;
+	[[nodiscard]] virtual uint16_t ascent(int) const = 0;
+	[[nodiscard]] virtual TTF_Font* get_ttf_font() const = 0;
 };
 
 // Implementation of a Font object using SDL_ttf.
 class SdlTtfFont : public IFont {
 public:
-	SdlTtfFont
-		(TTF_Font* ttf, const std::string& face, int ptsize, std::string* ttf_memory_block);
-	virtual ~SdlTtfFont();
+	SdlTtfFont(TTF_Font* font, const std::string& face, int ptsize, std::string* ttf_memory_block);
+	~SdlTtfFont() override;
 
-	void dimensions(const std::string&, int, uint16_t * w, uint16_t * h) override;
-	const Texture& render(const std::string&, const RGBColor& clr, int, TextureCache*) override;
-	uint16_t ascent(int) const override;
+	void dimensions(const std::string&, int, uint16_t* w, uint16_t* h) override;
+	std::shared_ptr<const Image>
+	render(const std::string&, const RGBColor& clr, int, TextureCache*) override;
+	[[nodiscard]] uint16_t ascent(int) const override;
+	[[nodiscard]] TTF_Font* get_ttf_font() const override {
+		return font_;
+	}
 
 private:
 	void set_style(int);
 
-	TTF_Font * font_;
-	int style_;
+	TTF_Font* font_;
+	int style_{TTF_STYLE_NORMAL};
 	const std::string font_name_;
 	const int ptsize_;
 	// Old version of SDLTtf seem to need to keep this around.

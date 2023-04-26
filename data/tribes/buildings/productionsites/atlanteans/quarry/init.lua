@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
+wl.Descriptions():new_productionsite_type {
    name = "atlanteans_quarry",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Quarry"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -17,53 +17,36 @@ tribes:new_productionsite_type {
       log = 1
    },
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 40, 45 },
+         hotspot = { 40, 49 },
       },
    },
 
-   aihints = {
-      forced_after = 240,
-      prohibited_till = 240,
-      graniteproducer = true
-   },
+   aihints = {},
 
    working_positions = {
       atlanteans_stonecutter = 1
    },
 
-   outputs = {
-      "granite"
-   },
-
    programs = {
-      work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
-         actions = {
-           -- This order is on purpose so that the productivity
-           -- drops fast once all rocks are gone.
-            "call=mine_stone",
-            "return=skipped"
-         },
-      },
-      mine_stone = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
-         descname = _"quarrying granite",
+         descname = _("quarrying granite"),
          actions = {
-           -- This order is on purpose so that the productivity
-           -- drops fast once all rocks are gone.
-            "worker=cut_granite",
-            "sleep=25000"
+            "callworker=cut_granite",
+            "sleep=duration:18s500ms"
          }
       },
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Rocks",
-      heading = _"Out of Rocks",
+      title = _("No Rocks"),
+      heading = _("Out of Rocks"),
       message = pgettext("atlanteans_building", "The stonecutter working at this quarry can’t find any rocks in his work area."),
+      productivity_threshold = 75
    },
 }
+
+pop_textdomain()

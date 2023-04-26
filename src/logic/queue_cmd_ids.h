@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2008, 2010, 2012-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -12,13 +12,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef WL_LOGIC_QUEUE_CMD_IDS_H
 #define WL_LOGIC_QUEUE_CMD_IDS_H
+
+#include <cstdint>
 
 /*
  * This file contains the ids for the different
@@ -33,17 +34,22 @@
 
 namespace Widelands {
 
-enum class QueueCommandTypes {
+// The command types are used by the QueueCmdFactory, for network serialization
+// and for savegame compatibility.
+// DO NOT change the order
+// TODO(GunChleoc): Whenever we break savegame compatibility, clean this up and change data type to
+// uint16_t.
+enum class QueueCommandTypes : uint8_t {
 
 	/* ID zero is reserved and must never be used */
 	kNone = 0,
 
 	/* PLAYER COMMANDS BELOW */
 	kBuild,
-	kFlag,
+	kBuildFlag,
 	kBuildRoad,
 	kFlagAction,
-	kStopBuilding,
+	kStartStopBuilding,
 	kEnhanceBuilding,
 	kBulldoze,
 
@@ -54,13 +60,13 @@ enum class QueueCommandTypes {
 
 	kSetWarePriority,
 	kSetWareTargetQuantity,
-	kResetWareTargetQuantity,
-	kSetWorkerTargetQuantity,
-	kResetWorkerTargetQuantity, // 16
+	// 14 removed post Build 21
+	kSetWorkerTargetQuantity = 15,
+	// 16 removed post Build 21
 
 	// 17 was a command related to old events. removed
 
-	kSetWareMaxFill = 18,
+	kSetInputMaxFill = 18,
 
 	kMessageSetStatusRead = 21,
 	kMessageSetStatusArchived,
@@ -70,32 +76,45 @@ enum class QueueCommandTypes {
 
 	kEvictWorker,
 
-	kMilitarysiteSetSoldierPreference, // 26
+	kMilitarysiteSetSoldierPreference,
+	kProposeTrade,
+	kBuildWaterway,  // 28
 
-	kSinkShip = 121,
+	kShipSink = 121,
 	kShipCancelExpedition,
-	kPortStartExpedition,
+	kStartOrCancelExpedition,
 	kShipConstructPort,
-	kShipScout,
-	kShipExplore,
+	kShipScoutDirection,
+	kShipExploreIsland,
+
+	// The commands below are never serialized, but we still keep the IDs stable for savegame
+	// compatibility.
 
 	kDestroyMapObject,
-	kAct, // 128
+	kAct,  // 128
 	// 129 was a command related to old events. removed
 	kIncorporate = 130,
 	kLuaScript,
 	kLuaCoroutine,
-	kCalculateStatistics, // 133
-	kCallEconomyBalance = 200,
+	kCalculateStatistics,
+	kExpeditionConfig,
+	kPickCustomStartingPosition,  // 135
 
-	kDeleteMessage, // 201
+	kCallEconomyBalance = 200,
+	kDeleteMessage,
+	kToggleMuteMessages,
+	kMarkMapObjectForRemoval,
+	kDiplomacy,
+	kPinnedNote,
+	kToggleInfiniteProduction,
+	kShipPortName,  // 207
 
 	kNetCheckSync = 250,
 	kReplaySyncWrite,
 	kReplaySyncRead,
-	kReplayEnd // 253
+	kReplayEnd  // 253
 };
 
-} // namespace Widelands
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_QUEUE_CMD_IDS_H

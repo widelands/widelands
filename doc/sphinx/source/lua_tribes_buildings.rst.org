@@ -1,0 +1,164 @@
+Buildings
+=========
+
+Buildings are defined in their ``init.lua`` file. They have corresponding help texts contained in ``data/tribes/initialization/<tribe_name>/units.lua``.
+
+Types of Buildings
+------------------
+
+Widelands knows about the following types of buildings:
+
+.. toctree::
+   :maxdepth: 3
+
+REPLACE_ME
+
+.. _lua_tribes_buildings_common:
+
+Common Building Properties
+--------------------------
+
+Buildings are defined with Lua functions called ``new_<building_type>_type{table}``. The contents of ``table`` depend on the type of building that you are defining. The common properties shared by all buildings are:
+
+**name**
+    *Mandatory*. A string containing the internal name of this building, e.g.::
+
+        name = "atlanteans_fortress",
+
+**descname**
+    *Mandatory*. The translatable display name. Use ``pgettext`` to fetch the string, e.g.::
+
+        descname = pgettext("atlanteans_building", "Fortress"),
+
+**icon**
+    *Mandatory*. The full path to the menu icon for this building.
+
+**representative_image**
+    *Optional*. The full path to a representative image for this building.
+    This is needed if the building has a scaled "idle" animation.
+
+**size**
+    *Mandatory*. The size of this building: ``"small"``, ``"medium"``, or ``"big"``.
+
+**vision_range**
+    *Optional. Default:* ``0``. The size of the radius that the building sees.
+
+**buildcost**
+    *Optional*. A table with the wares used to build this building, containing
+    warename - amount pairs, e.g.::
+
+        buildcost = { log = 4, granite = 2 }
+
+    When ``buildcost`` is defined, you also need to define ``return_on_dismantle``.
+
+**return_on_dismantle**
+    *Optional*. The wares that this building will give back to the player when it is
+    dismantled, e.g.::
+
+        buildcost = { log = 2, granite = 1 }
+
+**enhancement**
+    *Optional*. A table defining the name of a building that this building can be enhanced to,
+    and its additional build cost and wares that this enhanced building will give back to the player
+    when it is dismantled. The ``enhancement_cost`` and ``enhancement_return_on_dismantle``
+    table contents can be empty. Example::
+
+        enhancement = {
+           name = "atlanteans_fancy_building",
+           enhancement_cost = {
+              log = 3,
+              granite = 1,
+              planks = 1
+           },
+           enhancement_return_on_dismantle = {
+              log = 1,
+              granite = 1
+           }
+        },
+
+**enhancement_cost**
+    *Deprecated*. The wares needed to upgrade this building, e.g.::
+
+        enhancement_cost = { log = 1, granite = 1 }
+
+**return_on_dismantle_on_enhanced**
+    *Deprecated*. The wares that this enhanced building will give back to the player
+    when it is dismantled, e.g.::
+
+        return_on_dismantle_on_enhanced = { granite = 1 }
+
+**animation_directory**
+    *Mandatory*. The location of the animation png files.
+
+**animations**
+    *Optional*. A table containing all file animations for this building. Every building
+    needs to have an ``idle`` animation. Other animations that a building
+    can have are ``build``, ``working``, ``unoccupied``. Mines also have
+    an ``empty`` animation.
+    Animations can either be defined as file animations in this table or as spritesheet animations
+    as defined in table ``spritesheets``. A mixture of the two animation formats is allowed.
+    See :doc:`animations` for a detailed description of the animation formats.
+
+**spritesheets**
+    *Optional*. A table containing all spritesheet animations for this building. Every building
+    needs to have an ``idle`` animation. Other animations that a building
+    can have are ``build``, ``working``, ``unoccupied``. Mines also have
+    an ``empty`` animation.
+    Animations can either be defined as spritesheet animations in this table or as file animations
+    as defined in table ``animations``. A mixture of the two animation formats is allowed.
+    See :doc:`animations` for a detailed description of the animation formats.
+
+**needs_seafaring**
+    *Optional. Default:* ``false``. Set to ``true`` if this building will only be available on seafaring maps.
+
+**aihints**
+    *Mandatory*. A list of name - value pairs with hints for the AI. Can be empty.
+
+For making the UI texts translateable, we also need to push/pop the correct textdomain.
+
+Example:
+
+.. code-block:: lua
+
+    push_textdomain("tribes")
+
+    dirname = path.dirname (__file__)
+
+    tribes:new_warehouse_type {
+       name = "frisians_headquarters",
+       -- TRANSLATORS: This is a building name used in lists of buildings
+       descname = pgettext("frisians_building", "Headquarters"),
+       animation_directory = dirname,
+       icon = dirname .. "menu.png",
+       size = "big",
+       destructible = false,
+
+       spritesheets = {
+          idle = {
+             hotspot = {92, 102},
+             frames = 10,
+             columns = 5,
+             rows = 2,
+             fps = 10
+          }
+       },
+
+       aihints = {},
+
+       heal_per_second = 220,
+       conquers = 9,
+    }
+
+    pop_textdomain()
+
+
+.. toctree::
+   :maxdepth: 2
+
+   autogen_ai_hints
+
+
+Help Texts
+----------
+
+See :ref:`lua_tribes_tribes_helptexts`.

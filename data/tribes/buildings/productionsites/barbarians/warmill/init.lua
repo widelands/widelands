@@ -1,48 +1,43 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
+wl.Descriptions():new_productionsite_type {
    name = "barbarians_warmill",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "War Mill"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
-   enhancement_cost = {
-      log = 1,
-      blackwood = 1,
-      granite = 2,
-      grout = 1,
-      thatch_reed = 1
-   },
-   return_on_dismantle_on_enhanced = {
-      blackwood = 1,
-      granite = 1,
-      grout = 1
-   },
-
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 57, 76 },
-      },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
          hotspot = { 57, 76 },
       },
       unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
          hotspot = { 57, 76 },
-      },
-      working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 57, 76 },
-         fps = 10
       },
    },
 
-   aihints = {},
+   spritesheets = {
+      build = {
+         frames = 5,
+         rows = 3,
+         columns = 2,
+         hotspot = { 57, 76 }
+      },
+      working = {
+         fps = 10,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 57, 76 }
+      },
+   },
+
+   aihints = {
+      prohibited_till = 1300
+   },
 
    working_positions = {
       barbarians_blacksmith = 1,
@@ -50,24 +45,18 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      iron = 8,
-      coal = 8,
-      gold = 8
-   },
-   outputs = {
-      "ax",
-      "ax_sharp",
-      "ax_broad",
-      "ax_bronze",
-      "ax_battle",
-      "ax_warriors"
+      { name = "coal", amount = 8 },
+      { name = "iron", amount = 8 },
+      { name = "gold", amount = 8 }
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
+            -- "return=skipped" causes 10 sec delay
+            -- time total: 6 * 59.333 + 10 = 366 sec
             "call=produce_ax",
             "call=produce_ax_sharp",
             "call=produce_ax_broad",
@@ -79,81 +68,95 @@ tribes:new_productionsite_type {
       },
       produce_ax = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging an ax because ...
-         descname = _"forging an ax",
+         descname = _("forging an ax"),
          actions = {
+            -- time: 24.733 + 22 + 9 + 3.6 = 59.333 sec
             "return=skipped unless economy needs ax",
-            "sleep=32000",
             "consume=coal iron",
-            "play_sound=sound/smiths smith 192",
-            "animate=working 25000",
-            "play_sound=sound/smiths sharpening 192",
+            "sleep=duration:24s733ms",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:22s",
+            "playsound=sound/smiths/sharpening priority:90%",
+            "sleep=duration:9s",
             "produce=ax"
          }
       },
       produce_ax_sharp = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a sharp ax because ...
-         descname = _"forging a sharp ax",
+         descname = _("forging a sharp ax"),
          actions = {
+            -- time: 24.733 + 22 + 9 + 3.6 = 59.333 sec
             "return=skipped unless economy needs ax_sharp",
-            "sleep=32000",
             "consume=coal iron:2",
-            "play_sound=sound/smiths smith 192",
-            "animate=working 25000",
-            "play_sound=sound/smiths sharpening 192",
+            "sleep=duration:24s733ms",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:22s",
+            "playsound=sound/smiths/sharpening priority:90%",
+            "sleep=duration:9s",
             "produce=ax_sharp"
          }
       },
       produce_ax_broad = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a broad ax because ...
-         descname = _"forging a broad ax",
+         descname = _("forging a broad ax"),
          actions = {
+            -- time: 24.733 + 22 + 9 + 3.6 = 59.333 sec
             "return=skipped unless economy needs ax_broad",
-            "sleep=32000",
             "consume=coal:2 iron:2",
-            "play_sound=sound/smiths smith 192",
-            "animate=working 25000",
-            "play_sound=sound/smiths sharpening 192",
+            "sleep=duration:24s733ms",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:22s",
+            "playsound=sound/smiths/sharpening priority:90%",
+            "sleep=duration:9s",
             "produce=ax_broad"
          }
       },
       produce_ax_bronze = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a bronze ax because ...
-         descname = _"forging a bronze ax",
+         descname = _("forging a bronze ax"),
          actions = {
+            -- time: 24.733 + 22 + 9 + 3.6 = 59.333 sec
             "return=skipped unless economy needs ax_bronze",
-            "sleep=32000",
             "consume=coal:2 iron:2",
-            "play_sound=sound/smiths smith 192",
-            "animate=working 25000",
-            "play_sound=sound/smiths sharpening 192",
+            "sleep=duration:24s733ms",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:22s",
+            "playsound=sound/smiths/sharpening priority:90%",
+            "sleep=duration:9s",
             "produce=ax_bronze"
          }
       },
       produce_ax_battle = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a battle ax because ...
-         descname = _"forging a battle ax",
+         descname = _("forging a battle ax"),
          actions = {
+            -- time: 24.733 + 22 + 9 + 3.6 = 59.333 sec
             "return=skipped unless economy needs ax_battle",
-            "sleep=32000",
             "consume=coal gold iron:2",
-            "play_sound=sound/smiths smith 192",
-            "animate=working 25000",
-            "play_sound=sound/smiths sharpening 192",
+            "sleep=duration:24s733ms",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:22s",
+            "playsound=sound/smiths/sharpening priority:90%",
+            "sleep=duration:9s",
             "produce=ax_battle"
          }
       },
       produce_ax_warriors = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a warrior’s ax because ...
-         descname = _"forging a warrior’s ax",
+         descname = _("forging a warrior’s ax"),
          actions = {
+            -- time: 24.733 + 22 + 9 + 3.6 = 59.333 sec
             "return=skipped unless economy needs ax_warriors",
-            "sleep=32000",
             "consume=coal:2 gold:2 iron:2",
-            "play_sound=sound/smiths smith 192",
-            "animate=working 25000",
-            "play_sound=sound/smiths sharpening 192",
+            "sleep=duration:24s733ms",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:22s",
+            "playsound=sound/smiths/sharpening priority:90%",
+            "sleep=duration:9s",
             "produce=ax_warriors"
          }
       },
    },
 }
+
+pop_textdomain()
