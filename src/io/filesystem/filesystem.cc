@@ -357,15 +357,15 @@ std::string FileSystem::create_unique_temp_file_path(std::string prefix,
 
 	std::string complete_filename = prefix + suffix;
 	if (!file_exists(complete_filename)) {
-		log_dbg("NOCOM *** Disambiguatied filename: %s", complete_filename.c_str());
 		return complete_filename;
 	}
 
 	prefix += '-';
 	for (int i = 0; i <= 9; ++i) {
-		complete_filename = prefix + std::to_string(i) + suffix;
+		complete_filename = prefix;
+		complete_filename += std::to_string(i);
+		complete_filename += suffix;
 		if (!file_exists(complete_filename)) {
-			log_dbg("NOCOM *** Disambiguatied filename: %s", complete_filename.c_str());
 			return complete_filename;
 		}
 	}
