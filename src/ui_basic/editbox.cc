@@ -832,7 +832,8 @@ uint32_t EditBox::prev_char(uint32_t cursor) const {
 	return cursor;
 }
 
-std::pair<uint32_t, uint32_t> EditBox::word_boundary(uint32_t cursor, bool require_non_blank) const {
+std::pair<uint32_t, uint32_t> EditBox::word_boundary(uint32_t cursor,
+                                                     bool require_non_blank) const {
 	uint32_t start = snap_to_char(cursor);
 	uint32_t end = start;
 

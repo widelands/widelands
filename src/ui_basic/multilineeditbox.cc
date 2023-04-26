@@ -274,7 +274,8 @@ uint32_t MultilineEditbox::Data::snap_to_char(std::string& txt, uint32_t cursor)
 	return cursor;
 }
 
-std::pair<uint32_t, uint32_t> MultilineEditbox::Data::word_boundary(uint32_t cursor, bool require_non_blank) {
+std::pair<uint32_t, uint32_t> MultilineEditbox::Data::word_boundary(uint32_t cursor,
+                                                                    bool require_non_blank) {
 	uint32_t start = snap_to_char(cursor);
 	uint32_t end = start;
 
