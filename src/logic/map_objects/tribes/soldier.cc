@@ -1829,7 +1829,8 @@ bool Soldier::check_node_blocked(Game& game, const FCoords& field, bool const co
 			if (!soldier->is_on_battlefield() || (soldier->get_current_health() == 0u)) {
 				continue;
 			}
-			if (soldier->get_state(taskNavalInvasion) != nullptr && get_state(taskNavalInvasion) != nullptr && soldier->get_owner() == get_owner()) {
+			if (soldier->get_state(taskNavalInvasion) != nullptr &&
+			    get_state(taskNavalInvasion) != nullptr && soldier->get_owner() == get_owner()) {
 				continue;
 			}
 

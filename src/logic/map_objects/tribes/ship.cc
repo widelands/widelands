@@ -158,7 +158,9 @@ struct FindNodeAttackTarget {
 
 		if (ship_.get_nritems() > 0) {
 			Coords portspace = egbase.map().find_portspace_for_dockpoint(f);
-			if (static_cast<bool>(portspace) && egbase.map().calc_distance(portspace, ship_.get_position()) <= ship_.descr().vision_range()) {
+			if (static_cast<bool>(portspace) &&
+			    egbase.map().calc_distance(portspace, ship_.get_position()) <=
+			       ship_.descr().vision_range()) {
 				const PlayerNumber owner = egbase.map()[portspace].get_owned_by();
 				if (owner == 0 || ship_.owner().is_hostile(egbase.player(owner))) {
 					return true;
@@ -1197,7 +1199,7 @@ void Ship::battle_update(Game& game) {
 					if ((field.nodecaps() & MOVECAPS_WALK) != 0U &&
 					    (field.get_immovable() == nullptr ||
 					     field.get_immovable()->descr().type() != MapObjectType::FLAG) &&
-					     map.findpath(coords, portspace, 3, unused_path, worker_checkstep) >= 0) {
+					    map.findpath(coords, portspace, 3, unused_path, worker_checkstep) >= 0) {
 						worker->set_position(game, coords);
 						break;
 					}
