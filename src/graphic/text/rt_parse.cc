@@ -20,6 +20,7 @@
 
 #include <cstdlib>
 #include <memory>
+#include <regex>
 
 #include "base/string.h"
 #include "graphic/text/rt_errors_impl.h"
@@ -141,7 +142,37 @@ void Tag::parse_content(TextStream& ts, TagConstraints& tcs, const TagSet& allow
 				throw SyntaxErrorImpl(
 				   line, col, "no text, as only tags are allowed here", text, ts.peek(100));
 			}
-			children_.push_back(new Child(text));
+
+			// Regex taken from https://stackoverflow.com/a/3809435
+			static std::regex kLinkRegex("https?:\\/\\/"
+			                             "(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}"
+			                             "\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)");
+			static thread_local bool autolink_protection(false);
+			while (!text.empty()) {
+				std::smatch match;
+				if (autolink_protection || !std::regex_search(text, match, kLinkRegex)) {
+					children_.push_back(new Child(text));
+					break;
+				}
+				autolink_protection = true;
+
+				size_t match_start = match.position();
+				size_t match_len = match.length();
+				if (match_start > 0) {
+					children_.push_back(new Child(text.substr(0, match_start)));
+				}
+
+				Tag* child = new Tag();
+				std::string url = text.substr(match_start, match_len);
+				TextStream linktext(format(
+				   "<link type=url target=%1$s mouseover=\"%2$s\"><font underline=1>%3$s</font></link>",
+				   url, url, url));
+				child->parse(linktext, tcs, allowed_tags);
+				children_.push_back(new Child(child));
+
+				text = text.substr(match_start + match_len);
+				autolink_protection = false;
+			}
 		}
 
 		if (ts.peek(2 + name_.size()) == ("</" + name_)) {
