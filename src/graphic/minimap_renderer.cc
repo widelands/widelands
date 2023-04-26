@@ -23,6 +23,7 @@
 
 #include "economy/flag.h"
 #include "economy/roadbase.h"
+#include "economy/road.h"
 #include "graphic/playercolor.h"
 #include "logic/field.h"
 #include "logic/map_objects/descriptions.h"
@@ -89,9 +90,8 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 			bool high_traffic = false;
 			const Widelands::MapObjectType type = f.field->get_immovable()->descr().type();
 			if ((layers & MiniMapLayer::Flag) != 0 && type == Widelands::MapObjectType::FLAG) {
-				upcast(Flag const, flag, f.field->get_immovable());
+				upcast(Widelands::Flag, flag, f.field->get_immovable());
 				if (flag->current_wares() > 5) {
-					//color = contrast_color;
 					high_traffic = true;
 				} else {
 					color = kWhite;
@@ -103,9 +103,8 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 				color = blend_color(color, kWhite);
 			} else if (((layers & MiniMapLayer::Road) != 0) &&
 			           type == Widelands::MapObjectType::ROAD) {
-				upcast(Road const, road, f.field->get_immovable());
-				if (road->get_roadtype() == RoadType::kBusy) {
-					//color = contrast_color;
+				upcast(Widelands::Road, road, f.field->get_immovable());
+				if (road->is_busy()) {
 					high_traffic = true;
 				} else {
 					color = blend_color(color, kWhite);
