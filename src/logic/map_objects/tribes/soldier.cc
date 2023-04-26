@@ -1822,8 +1822,14 @@ bool Soldier::check_node_blocked(Game& game, const FCoords& field, bool const co
 	bool multiplesoldiers = false;
 
 	for (Bob* bob = field.field->get_first_bob(); bob != nullptr; bob = bob->get_next_on_field()) {
+		if (bob == this || bob->descr().type() != MapObjectType::SOLDIER) {
+			continue;
+		}
 		if (upcast(Soldier, soldier, bob)) {
 			if (!soldier->is_on_battlefield() || (soldier->get_current_health() == 0u)) {
+				continue;
+			}
+			if (soldier->get_state(taskNavalInvasion) != nullptr && get_state(taskNavalInvasion) != nullptr && soldier->get_owner() == get_owner()) {
 				continue;
 			}
 
