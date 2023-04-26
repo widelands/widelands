@@ -282,7 +282,7 @@ std::pair<uint32_t, uint32_t> MultilineEditbox::Data::word_boundary(uint32_t cur
 	bool found_non_blank = false;
 	while (start > 0) {
 		uint32_t newpos = prev_char(start);
-		if (isspace(text[newpos])) {
+		if (isspace(text[newpos]) != 0) {
 			if (!require_non_blank || found_non_blank) {
 				break;
 			}
@@ -295,7 +295,7 @@ std::pair<uint32_t, uint32_t> MultilineEditbox::Data::word_boundary(uint32_t cur
 
 	found_non_blank = false;
 	while (end < text.size()) {
-		if (isspace(text[end])) {
+		if (isspace(text[end]) != 0) {
 			if (!require_non_blank || found_non_blank) {
 				break;
 			}

@@ -840,7 +840,7 @@ std::pair<uint32_t, uint32_t> EditBox::word_boundary(uint32_t cursor,
 	bool found_non_blank = false;
 	while (start > 0) {
 		uint32_t newpos = prev_char(start);
-		if (isspace(m_->text[newpos])) {
+		if (isspace(m_->text[newpos]) != 0) {
 			if (!require_non_blank || found_non_blank) {
 				break;
 			}
@@ -853,7 +853,7 @@ std::pair<uint32_t, uint32_t> EditBox::word_boundary(uint32_t cursor,
 
 	found_non_blank = false;
 	while (end < m_->text.size()) {
-		if (isspace(m_->text[end])) {
+		if (isspace(m_->text[end]) != 0) {
 			if (!require_non_blank || found_non_blank) {
 				break;
 			}
