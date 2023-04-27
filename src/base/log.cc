@@ -78,9 +78,7 @@ public:
 		SDL_LogSetOutputFunction(sdl_logging_func, this);
 		std::cout << "Log output will be written to: " << stdout_filename_ << std::endl;
 
-		// Configure redirection
-		// std::cout.rdbuf(stdout_.rdbuf());
-		// std::cerr.rdbuf(stderr_.rdbuf());
+
 		// Repeat version info so that we'll have it available in the log file too
 		stdout_ << "This is Widelands version " << build_ver_details() << std::endl;
 		stdout_.flush();
@@ -90,11 +88,11 @@ public:
 		stdout_ << buffer;
 		stdout_.flush();
 	}
-	void redirect_output() {
+/* 	void redirect_output() {
 		// Configure redirection
 		std::cout.rdbuf(stdout_.rdbuf());
 		std::cerr.rdbuf(stderr_.rdbuf());
-	}
+	} */
 
 private:
 	const std::string stdout_filename_, stderr_filename_;
@@ -157,7 +155,7 @@ bool set_logging_dir(const std::string& homedir) {
 // Set the logging dir to the program's dir. For running test cases where we don't have a homedir.
 void set_testcase_logging_dir() {
 	logger.reset(new WindowsLogger(get_output_directory()));
-	logger->redirect_output();
+	// logger->redirect_output();
 }
 
 #else
