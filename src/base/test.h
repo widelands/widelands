@@ -200,11 +200,11 @@ inline void do_check_error(const char* f,
 			for (const auto& suite : all_testsuites()) {                                              \
 				for (const auto& test : suite.second) {                                                \
 					try {                                                                               \
-						log_info("Running %s::%s\n", suite.first, test.first);                          \
+						log_info("Running %s::%s\n", suite.first.c_str(), test.first.c_str());                          \
 						test.second();                                                                   \
 					} catch (const std::exception& e) {                                                 \
 						errors = true;                                                                   \
-						log_info("Error in %s::%s: %s\n", suite.first, test.first, e.what());          \
+						log_info("Error in %s::%s: %s\n", suite.first.c_str(), test.first.c_str(), e.what());          \
 					}                                                                                   \
 				}                                                                                      \
 			}                                                                                         \
