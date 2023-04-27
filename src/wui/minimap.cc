@@ -124,14 +124,13 @@ destructor
 ===============
 */
 inline uint32_t MiniMap::number_of_buttons_per_row() const {
-	const int kNumberOfButtons = (ibase_.egbase().map().allows_seafaring() ? 7 : 6);
+	const int kNumberOfButtons = (ibase_.egbase().map().allows_seafaring() ? 8 : 7);
 	return view_.get_w() < kNumberOfButtons * 20 ? 3 : kNumberOfButtons;
 }
 inline uint32_t MiniMap::number_of_button_rows() const {
 	// Use multi row layout if there is not enough width.
-	const bool seafaring = ibase_.egbase().map().allows_seafaring();
-	const int kNumberOfButtons = (seafaring ? 7 : 6);
-	return view_.get_w() < kNumberOfButtons * 20 ? (seafaring ? 3 : 2) : 1;
+	const int kNumberOfButtons = (ibase_.egbase().map().allows_seafaring() ? 8 : 7);
+	return view_.get_w() < kNumberOfButtons * 20 ? 3 : 1;
 }
 inline uint32_t MiniMap::but_w() const {
 	return view_.get_w() / number_of_buttons_per_row();
@@ -212,6 +211,17 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                   _("Ships"),
                   UI::Button::VisualState::kRaised,
                   UI::Button::ImageMode::kUnscaled),
+     button_traff(this,
+                  "traffic",
+                  but_w() * 2,
+                  view_.get_h() + but_h(),
+                  but_w(),
+                  but_h(),
+                  UI::ButtonStyle::kWuiSecondary,
+                  g_image_cache->get("images/wui/buildings/menu_list_workers.png"),
+                  _("High Traffic"),
+                  UI::Button::VisualState::kRaised,
+                  UI::Button::ImageMode::kUnscaled),
      button_zoom(this,
                  "zoom",
                  but_w() * 3,
@@ -229,6 +239,7 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
 	button_roads.sigclicked.connect([this]() { toggle(MiniMapLayer::Road); });
 	button_bldns.sigclicked.connect([this]() { toggle(MiniMapLayer::Building); });
 	button_ships.sigclicked.connect([this]() { toggle(MiniMapLayer::Ship); });
+	button_traff.sigclicked.connect([this]() { toggle(MiniMapLayer::Traffic); });
 	button_zoom.sigclicked.connect([this]() { toggle(MiniMapLayer::Zoom2); });
 
 	check_boundaries();
@@ -261,7 +272,7 @@ void MiniMap::resize() {
 	const uint32_t rows = number_of_button_rows();
 	const bool seafaring = ibase_.egbase().map().allows_seafaring();
 	uint32_t height_offset = 0;
-	if (rows == 3 || (rows == 2 && !seafaring)) {
+	if (rows > 1) {
 		height_offset = 1;
 	}
 	set_inner_size(view_.get_w(), view_.get_h() + rows * but_h());
@@ -277,22 +288,20 @@ void MiniMap::resize() {
 	button_bldns.set_pos(
 	   Vector2i(but_w() * (4 - 3 * height_offset), view_.get_h() + but_h() * height_offset));
 	button_bldns.set_size(but_w(), but_h());
-	button_ships.set_pos(
+	button_traff.set_pos(
 	   Vector2i(but_w() * (5 - 3 * height_offset), view_.get_h() + but_h() * height_offset));
+	button_traff.set_size(but_w(), but_h());
+	button_ships.set_pos(
+	   Vector2i(but_w() * (6 - 3 * 2 * height_offset), view_.get_h() + but_h() * 2 * height_offset));
 	button_ships.set_size(but_w(), but_h());
 	if (seafaring) {
-		if (rows == 3) {
-			button_zoom.set_pos(Vector2i(but_w() * 0, view_.get_h() + 2 * but_h()));
-			button_zoom.set_size(view_.get_w(), but_h());
-		} else {
-			button_zoom.set_pos(
-			   Vector2i(but_w() * (6 - 3 * height_offset), view_.get_h() + but_h() * height_offset));
-			button_zoom.set_size(but_w(), but_h());
-		}
-	} else {
 		button_zoom.set_pos(
-		   Vector2i(but_w() * (5 - 3 * height_offset), view_.get_h() + but_h() * height_offset));
+		   Vector2i(but_w() * (7 - 3 * 2 * height_offset), view_.get_h() + but_h() * 2 * height_offset));
 		button_zoom.set_size(but_w(), but_h());
+	} else {
+		button_zoom.set_pos(Vector2i(but_w() * 0, view_.get_h() + 2 * but_h()));
+		button_zoom.set_size(view_.get_w(), but_h());
+		
 	}
 	button_zoom.set_enabled(view_.can_zoom());
 
@@ -308,6 +317,7 @@ void MiniMap::update_button_permpressed() {
 	button_roads.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Road) != 0);
 	button_bldns.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Building) != 0);
 	button_ships.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Ship) != 0);
+	button_traff.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Traffic) != 0);
 	button_zoom.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Zoom2) != 0);
 }
 
@@ -329,7 +339,7 @@ bool MiniMap::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 	return true;
 }
 
-constexpr uint16_t kCurrentPacketVersion = 1;
+constexpr uint16_t kCurrentPacketVersion = 2;
 UI::Window& MiniMap::load(FileRead& fr, InteractiveBase& ib) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();

@@ -115,7 +115,7 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 					color = blend_color(color, kWhite);
 				}
 			}
-			if (high_traffic) {
+			if (high_traffic && (layers & MiniMapLayer::Traffic) != 0) {
 				color = contrast_color;
 			}
 		}
