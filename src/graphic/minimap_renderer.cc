@@ -43,7 +43,9 @@ inline RGBColor blend_color(const RGBColor& c1, const RGBColor& c2) {
 
 inline RGBColor invert_color(const RGBColor& c) {
 	// assuming overflow and underflow
-	uint8_t r,g,b;
+	uint8_t r;
+	uint8_t g;
+	uint8_t b;
 	if (c.r > c.g && c.r > c.b && c.g < 200 && c.g + 50 < c.r) {
 		r = 0;
 		g = c.g;// + (255 - c.g) / 2;
