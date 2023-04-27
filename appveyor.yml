@@ -35,7 +35,6 @@ shallow_clone: false
 branches:
   only:
     - master
-    - 5819_windows_logging
 
 skip_tags: true
 

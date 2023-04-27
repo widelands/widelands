@@ -88,11 +88,6 @@ public:
 		stdout_ << buffer;
 		stdout_.flush();
 	}
-/* 	void redirect_output() {
-		// Configure redirection
-		std::cout.rdbuf(stdout_.rdbuf());
-		std::cerr.rdbuf(stderr_.rdbuf());
-	} */
 
 private:
 	const std::string stdout_filename_, stderr_filename_;
@@ -155,7 +150,6 @@ bool set_logging_dir(const std::string& homedir) {
 // Set the logging dir to the program's dir. For running test cases where we don't have a homedir.
 void set_testcase_logging_dir() {
 	logger.reset(new WindowsLogger(get_output_directory()));
-	// logger->redirect_output();
 }
 
 #else
