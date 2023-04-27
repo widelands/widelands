@@ -16,6 +16,7 @@ wl_library(io_filesystem
     base
     base_exceptions
     base_macros
+    base_time_string
     io_stream
   USES_MINIZIP
 )
