@@ -35,7 +35,7 @@ public:
 
 		explicit Registry(bool is_game)
 		   : minimap_layers(MiniMapLayer::Terrain | MiniMapLayer::Flag | MiniMapLayer::Road |
-		                    MiniMapLayer::Building | MiniMapLayer::Ship | MiniMapLayer::Traffic |
+		                    MiniMapLayer::Building | MiniMapLayer::Ship |
 		                    (is_game ? MiniMapLayer::Owner : MiniMapLayer::StartingPositions)) {
 		}
 
