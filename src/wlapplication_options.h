@@ -310,6 +310,8 @@ uint16_t operator-(const KeyboardShortcut& a, const KeyboardShortcut& b);
  */
 bool is_real(KeyboardShortcut id);
 
+bool is_debug_only(KeyboardShortcut id);
+
 /** Check whether a given shortcut is reserved for a fastplace shortcut slot. */
 inline bool is_fastplace(const KeyboardShortcut id) {
 	return id >= KeyboardShortcut::kFastplace_Begin && id <= KeyboardShortcut::kFastplace_End;

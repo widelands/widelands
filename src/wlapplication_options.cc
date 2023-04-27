@@ -814,6 +814,10 @@ bool is_real(const KeyboardShortcut id) {
 	return it != shortcuts_.end();
 }
 
+bool is_debug_only(KeyboardShortcut id) {
+	return id == KeyboardShortcut::kCommonDebugConsole || id == KeyboardShortcut::kCommonCheatMode;
+}
+
 static const std::map<KeyboardShortcut, KeyboardShortcutAlias> shortcut_aliases_ = {
    {KeyboardShortcut::kEditorLoad,
     /** TRANSLATORS: This is the helptext for an access key combination. */
@@ -1000,6 +1004,9 @@ std::string get_editor_shortcut_help() {
 	   get_shortcut_range_help(KeyboardShortcut::kEditor_Begin, KeyboardShortcut::kEditorMain_End);
 	rv += get_shortcut_range_help(
 	   KeyboardShortcut::kCommonGeneral_Begin, KeyboardShortcut::kCommonGeneral_End);
+#ifndef NDEBUG
+	rv += get_shortcut_help_line(KeyboardShortcut::kCommonDebugConsole);
+#endif
 
 	/** TRANSLATORS: Heading in the editor keyboard shortcuts help */
 	rv += as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, pgettext("editor", "Tools"));
@@ -1162,6 +1169,15 @@ bool set_shortcut(const KeyboardShortcut id, const SDL_Keysym code, KeyboardShor
 	for (auto& pair : shortcuts_) {
 		if (pair.first != id && shared_scope(scopes, pair.second) &&
 		    matches_shortcut(pair.first, code)) {
+#ifdef NDEBUG
+			// Release builds are not supposed to know about debug features, so we silently
+			// clear their shortcuts on conflict
+			if (is_debug_only(pair.first)) {
+				shortcuts_.at(pair.first).current_shortcut = keysym(SDLK_UNKNOWN);
+				write_shortcut(pair.first, keysym(SDLK_UNKNOWN));
+				continue;
+			}
+#endif
 			if (conflict != nullptr) {
 				*conflict = pair.first;
 			}
