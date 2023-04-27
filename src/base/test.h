@@ -193,20 +193,21 @@ inline void do_check_error(const char* f,
 	namespace WLTestsuite {                                                                         \
 	namespace WLTestsuite_##name {                                                                  \
 		static int main() {                                                                          \
-			set_testcase_logging_dir();                                                            \
+			set_testcase_logging_dir();                                                               \
 			bool errors = false;                                                                      \
 			for (const auto& suite : all_testsuites()) {                                              \
 				for (const auto& test : suite.second) {                                                \
 					try {                                                                               \
-						if (needs_logging) {                                                            \
-							log_info("Running %s::%s\n", suite.first.c_str(), test.first.c_str());       \
+						if (needs_logging) {                                                             \
+							log_info("Running %s::%s\n", suite.first.c_str(), test.first.c_str());        \
 						}                                                                                \
 						test.second();                                                                   \
 					} catch (const std::exception& e) {                                                 \
 						errors = true;                                                                   \
-						if (needs_logging) {                                                            \
-							log_info("Error in %s::%s: %s\n", suite.first.c_str(), test.first.c_str(), e.what());  \
-						}                                                                               \
+						if (needs_logging) {                                                             \
+							log_info("Error in %s::%s: %s\n", suite.first.c_str(), test.first.c_str(),    \
+							         e.what());                                                           \
+						}                                                                                \
 					}                                                                                   \
 				}                                                                                      \
 			}                                                                                         \

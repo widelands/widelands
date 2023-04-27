@@ -78,7 +78,6 @@ public:
 		SDL_LogSetOutputFunction(sdl_logging_func, this);
 		std::cout << "Log output will be written to: " << stdout_filename_ << std::endl;
 
-
 		// Repeat version info so that we'll have it available in the log file too
 		stdout_ << "This is Widelands version " << build_ver_details() << std::endl;
 		stdout_.flush();
