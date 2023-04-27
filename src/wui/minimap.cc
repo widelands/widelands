@@ -295,13 +295,12 @@ void MiniMap::resize() {
 	   Vector2i(but_w() * (6 - 3 * 2 * height_offset), view_.get_h() + but_h() * 2 * height_offset));
 	button_ships.set_size(but_w(), but_h());
 	if (seafaring) {
-		button_zoom.set_pos(
-		   Vector2i(but_w() * (7 - 3 * 2 * height_offset), view_.get_h() + but_h() * 2 * height_offset));
+		button_zoom.set_pos(Vector2i(
+		   but_w() * (7 - 3 * 2 * height_offset), view_.get_h() + but_h() * 2 * height_offset));
 		button_zoom.set_size(but_w(), but_h());
 	} else {
 		button_zoom.set_pos(Vector2i(but_w() * 0, view_.get_h() + 2 * but_h()));
 		button_zoom.set_size(view_.get_w(), but_h());
-		
 	}
 	button_zoom.set_enabled(view_.can_zoom());
 
