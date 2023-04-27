@@ -22,8 +22,8 @@
 #include <memory>
 
 #include "economy/flag.h"
-#include "economy/roadbase.h"
 #include "economy/road.h"
+#include "economy/roadbase.h"
 #include "graphic/playercolor.h"
 #include "logic/field.h"
 #include "logic/map_objects/descriptions.h"
@@ -43,18 +43,20 @@ inline RGBColor blend_color(const RGBColor& c1, const RGBColor& c2) {
 
 inline RGBColor invert_color(const RGBColor& c) {
 	// assuming overflow and underflow
+
 	uint8_t r;
 	uint8_t g;
 	uint8_t b;
+
 	if (c.r > c.g && c.r > c.b && c.g < 200 && c.g + 50 < c.r) {
 		r = 0;
-		g = c.g;// + (255 - c.g) / 2;
+		g = c.g;  // + (255 - c.g) / 2;
 		b = c.b + (255 - c.b) / 2;
 	} else {
 		r = 255;
 		g = c.g / 2;
 		b = c.b / 2;
-	}	
+	}
 	return RGBColor(r, g, b);
 }
 
@@ -98,7 +100,8 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 				} else {
 					color = kWhite;
 				}
-			} else if ((layers & MiniMapLayer::Building) != 0 && type >= Widelands::MapObjectType::BUILDING) {
+			} else if ((layers & MiniMapLayer::Building) != 0 &&
+			           type >= Widelands::MapObjectType::BUILDING) {
 				color = kWhite;
 			} else if (((layers & MiniMapLayer::Road) != 0) &&
 			           type == Widelands::MapObjectType::WATERWAY) {
