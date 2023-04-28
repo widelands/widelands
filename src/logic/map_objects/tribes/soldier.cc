@@ -35,7 +35,6 @@
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_data_error.h"
-#include "logic/mapregion.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/findbob.h"
 #include "logic/map_objects/findimmovable.h"
@@ -45,6 +44,7 @@
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
+#include "logic/mapregion.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
@@ -1668,9 +1668,8 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 	const FCoords portspace_fcoords = map.get_fcoords(state.coords);
 
 	std::vector<ImmovableFound> results;
-	map.find_reachable_immovables(
-	   game, Area<FCoords>(portspace_fcoords, state.ivar2 + state.ivar3), &results,
-	   checkstep, FindImmovableAttackTarget());
+	map.find_reachable_immovables(game, Area<FCoords>(portspace_fcoords, state.ivar2 + state.ivar3),
+	                              &results, checkstep, FindImmovableAttackTarget());
 	// Consider closest targets first (estimate by air distance to us, not to the port space)
 	std::sort(results.begin(), results.end(),
 	          [this, &map](const ImmovableFound& a, const ImmovableFound& b) {
@@ -1749,8 +1748,8 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 		do {
 			if (mr.location().field->get_owned_by() != owner().player_number()) {
 				molog(game.get_gametime(), "[naval_invasion] Conquering port area\n");
-				game.conquer_area_no_building(
-				   PlayerArea<Area<FCoords>>(owner().player_number(), Area<FCoords>(portspace_fcoords, kPortSpaceRadius)));
+				game.conquer_area_no_building(PlayerArea<Area<FCoords>>(
+				   owner().player_number(), Area<FCoords>(portspace_fcoords, kPortSpaceRadius)));
 				return start_task_idle(game, descr().get_animation("idle", this), 1000);
 			}
 		} while (mr.advance(map));
@@ -1764,8 +1763,9 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 		return start_task_idle(game, descr().get_animation("idle", this), 1000);
 	}
 
-	if (start_task_movepath(
-	       game, state.coords, 0, descr().get_right_walk_anims(does_carry_ware(), this), false, kPortSpaceRadius)) {
+	if (start_task_movepath(game, state.coords, 0,
+	                        descr().get_right_walk_anims(does_carry_ware(), this), false,
+	                        kPortSpaceRadius)) {
 		molog(game.get_gametime(), "[naval_invasion] Return to camp\n");
 		return;
 	}
@@ -1773,8 +1773,9 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 	// Camp is blocked, try to get as close as we can
 	for (int i = 10; i > 0; --i) {
 		Coords coords = game.random_location(state.coords, kPortSpaceRadius);
-		if (start_task_movepath(
-			   game, coords, 0, descr().get_right_walk_anims(does_carry_ware(), this), false, kPortSpaceRadius)) {
+		if (start_task_movepath(game, coords, 0,
+		                        descr().get_right_walk_anims(does_carry_ware(), this), false,
+		                        kPortSpaceRadius)) {
 			molog(game.get_gametime(), "[naval_invasion] Approach camp\n");
 			return;
 		}
