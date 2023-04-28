@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-04-22 04:30+0000\n"
+"POT-Creation-Date: 2023-04-25 02:53+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Hindi (http://app.transifex.com/widelands/widelands/language/hi/)\n"
@@ -335,7 +335,7 @@ msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:213
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:808
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:805
 #: ../../src/wlapplication_options.cc:416
 msgid "New Random Map"
 msgstr ""
@@ -628,13 +628,13 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:454
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:460
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:123
-#: ../../src/ui_fsmenu/launch_mpg.cc:311 ../../src/ui_fsmenu/main.cc:249
-#: ../../src/wlapplication.cc:1641
+#: ../../src/ui_fsmenu/launch_mpg.cc:309 ../../src/ui_fsmenu/main.cc:249
+#: ../../src/wlapplication.cc:1644
 msgid "Error"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:1104 ../../src/ui_fsmenu/main.cc:233
-#: ../../src/wlapplication.cc:1643
+#: ../../src/wlapplication.cc:1646
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -1040,7 +1040,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:77
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:257
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:68
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:826
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:823
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:68
 #: ../../src/ui_basic/color_chooser.cc:267
 #: ../../src/ui_basic/messagebox.cc:117 ../../src/ui_basic/text_prompt.cc:55
@@ -1375,18 +1375,18 @@ msgid ""
 "This map was generated automatically by the Widelands Random Map Generator."
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:702
-#: ../../src/network/gamehost.cc:1632
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:699
+#: ../../src/network/gamehost.cc:1616
 #, c-format
 msgid "Computer %u"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:702
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:699
 #: ../../src/wui/game_summary.cc:111
 msgid "Player"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:818
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:815
 msgid "Generate Map"
 msgstr ""
 
@@ -1489,7 +1489,7 @@ msgstr ""
 #. * TRANSLATORS: Default player name, e.g. Player 1
 #: ../../src/editor/ui_menus/player_menu.cc:160
 #: ../../src/editor/ui_menus/player_menu.cc:288
-#: ../../src/logic/single_player_game_settings_provider.cc:118
+#: ../../src/logic/single_player_game_settings_provider.cc:106
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:65
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:99
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:131
@@ -1986,7 +1986,7 @@ msgid "Not set"
 msgstr ""
 
 #: ../../src/logic/game.cc:274 ../../src/logic/game.cc:317
-#: ../../src/logic/game.cc:433 ../../src/logic/game.cc:488
+#: ../../src/logic/game.cc:434 ../../src/logic/game.cc:489
 msgid "Preloading map…"
 msgstr ""
 
@@ -1995,30 +1995,30 @@ msgid "Initializing game…"
 msgstr ""
 
 #. * TRANSLATORS: All players (plural)
-#: ../../src/logic/game.cc:630
+#: ../../src/logic/game.cc:631
 msgid "Creating player infrastructure…"
 msgstr ""
 
-#: ../../src/logic/game.cc:647 ../../src/logic/player.cc:257
+#: ../../src/logic/game.cc:648 ../../src/logic/player.cc:257
 msgid "Missing starting position"
 msgstr ""
 
-#: ../../src/logic/game.cc:648 ../../src/logic/player.cc:258
+#: ../../src/logic/game.cc:649 ../../src/logic/player.cc:258
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr ""
 
-#: ../../src/logic/game.cc:748
+#: ../../src/logic/game.cc:749
 msgid "Initializing…"
 msgstr ""
 
-#: ../../src/logic/game.cc:1233
+#: ../../src/logic/game.cc:1234
 msgid "Trade Offer"
 msgstr ""
 
-#: ../../src/logic/game.cc:1235
+#: ../../src/logic/game.cc:1236
 msgid "This market has received a new trade offer."
 msgstr ""
 
@@ -2895,7 +2895,7 @@ msgid "Checking map"
 msgstr ""
 
 #: ../../src/network/gameclient.cc:144 ../../src/network/gamehost.cc:523
-#: ../../src/ui_fsmenu/launch_spg.cc:171 ../../src/wlapplication.cc:750
+#: ../../src/ui_fsmenu/launch_spg.cc:174 ../../src/wlapplication.cc:753
 msgid "Preparing game…"
 msgstr ""
 
@@ -2911,42 +2911,42 @@ msgid ""
 " you tried to connect."
 msgstr ""
 
-#: ../../src/network/gameclient.cc:779
+#: ../../src/network/gameclient.cc:767
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/network/gameclient.cc:781
+#: ../../src/network/gameclient.cc:769
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ required by host not found"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:784
+#: ../../src/network/gameclient.cc:772
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:955
+#: ../../src/network/gameclient.cc:943
 msgid "/me ’s file failed md5 checksumming."
 msgstr ""
 
-#: ../../src/network/gameclient.cc:997
+#: ../../src/network/gameclient.cc:985
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr ""
 
-#: ../../src/network/gameclient.cc:1310
+#: ../../src/network/gameclient.cc:1292
 msgid "Disconnected"
 msgstr ""
 
-#: ../../src/network/gameclient.cc:1311
+#: ../../src/network/gameclient.cc:1293
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -3067,7 +3067,7 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr ""
 
-#: ../../src/network/gamehost.cc:1891
+#: ../../src/network/gamehost.cc:1865
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -3531,11 +3531,11 @@ msgstr ""
 msgid "No matches"
 msgstr ""
 
-#: ../../src/ui_basic/panel.cc:295
+#: ../../src/ui_basic/panel.cc:294
 msgid "Please wait…"
 msgstr ""
 
-#: ../../src/ui_basic/panel.cc:425
+#: ../../src/ui_basic/panel.cc:424
 msgid "Game ending – please wait…"
 msgstr ""
 
@@ -5289,91 +5289,119 @@ msgstr ""
 msgid "Configure this game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:55
-msgid "Write Replay"
-msgstr ""
-
-#: ../../src/ui_fsmenu/launch_game.cc:66
+#: ../../src/ui_fsmenu/launch_game.cc:64
 msgid ""
 "An enabled add-on is known to cause desyncs. No replay will be written."
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:89
+#: ../../src/ui_fsmenu/launch_game.cc:87
 msgid "Playing time"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:95
+#: ../../src/ui_fsmenu/launch_game.cc:101
+msgid "Show or hide additional game configuration options"
+msgstr ""
+
+#: ../../src/ui_fsmenu/launch_game.cc:107
 msgid "Peaceful mode"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:97
+#: ../../src/ui_fsmenu/launch_game.cc:112
 msgid "No fog of war"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:101
+#: ../../src/ui_fsmenu/launch_game.cc:119
+msgid "Forbid diplomacy"
+msgstr ""
+
+#: ../../src/ui_fsmenu/launch_game.cc:126
 msgid "Custom starting positions"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:110
+#: ../../src/ui_fsmenu/launch_game.cc:131
+msgid "Write Replay"
+msgstr ""
+
+#: ../../src/ui_fsmenu/launch_game.cc:141
 msgid "Change map…"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:120
+#: ../../src/ui_fsmenu/launch_game.cc:151
 msgid "Change saved game…"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:139
+#: ../../src/ui_fsmenu/launch_game.cc:177
 msgid "Start game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:211
-msgid "The relations between players are set by the scenario"
-msgstr ""
-
-#: ../../src/ui_fsmenu/launch_game.cc:213
-msgid "The relations between players are set by the saved game"
-msgstr ""
-
-#: ../../src/ui_fsmenu/launch_game.cc:215
-msgid "The selected win condition does not allow peaceful matches"
-msgstr ""
-
-#: ../../src/ui_fsmenu/launch_game.cc:217
-msgid "Forbid fighting between players"
-msgstr ""
-
-#: ../../src/ui_fsmenu/launch_game.cc:244
-msgid "All selected starting conditions ignore the map’s starting positions"
-msgstr ""
-
-#: ../../src/ui_fsmenu/launch_game.cc:249
-msgid "The starting positions are set by the scenario"
+#: ../../src/ui_fsmenu/launch_game.cc:251
+msgid "Show fewer options"
 msgstr ""
 
 #: ../../src/ui_fsmenu/launch_game.cc:251
+msgid "Show more options"
+msgstr ""
+
+#: ../../src/ui_fsmenu/launch_game.cc:266
+msgid "The relations between players are set by the scenario"
+msgstr ""
+
+#: ../../src/ui_fsmenu/launch_game.cc:268
+msgid "The relations between players are set by the saved game"
+msgstr ""
+
+#: ../../src/ui_fsmenu/launch_game.cc:270
+msgid "The selected win condition does not allow peaceful matches"
+msgstr ""
+
+#: ../../src/ui_fsmenu/launch_game.cc:272
+msgid "Forbid fighting between players"
+msgstr ""
+
+#: ../../src/ui_fsmenu/launch_game.cc:302
+msgid "All selected starting conditions ignore the map’s starting positions"
+msgstr ""
+
+#: ../../src/ui_fsmenu/launch_game.cc:308
+msgid "The starting positions are set by the scenario"
+msgstr ""
+
+#: ../../src/ui_fsmenu/launch_game.cc:310
 msgid "The starting positions are set by the saved game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:254
+#: ../../src/ui_fsmenu/launch_game.cc:313
 msgid ""
 "Allow the players to choose their own starting positions at the beginning of"
 " the game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:270
+#: ../../src/ui_fsmenu/launch_game.cc:332
 msgid "Player vision is set by the scenario"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:272
+#: ../../src/ui_fsmenu/launch_game.cc:334
 msgid "Player vision is set by the saved game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:274
+#: ../../src/ui_fsmenu/launch_game.cc:336
 msgid "Give all players permanent vision of the entire map"
 msgstr ""
 
+#: ../../src/ui_fsmenu/launch_game.cc:355
+msgid "Player relations are set by the scenario"
+msgstr ""
+
+#: ../../src/ui_fsmenu/launch_game.cc:357
+msgid "Player relations are set by the saved game"
+msgstr ""
+
+#: ../../src/ui_fsmenu/launch_game.cc:359
+msgid "Disallow players to change their alliances during the game"
+msgstr ""
+
 #. * TRANSLATORS: This is a map tag
-#: ../../src/ui_fsmenu/launch_game.cc:282
+#: ../../src/ui_fsmenu/launch_game.cc:367
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:492
 #: ../../src/ui_fsmenu/scenariodetails.cc:46
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:283
@@ -5381,21 +5409,21 @@ msgstr ""
 msgid "Scenario"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:283
+#: ../../src/ui_fsmenu/launch_game.cc:368
 msgid "Win condition is set through the scenario"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:289
+#: ../../src/ui_fsmenu/launch_game.cc:374
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:496
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:287
 msgid "Saved Game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:291
+#: ../../src/ui_fsmenu/launch_game.cc:376
 msgid "The game is a saved game – the win condition was set before."
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:364
+#: ../../src/ui_fsmenu/launch_game.cc:449
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
@@ -5425,11 +5453,11 @@ msgid ""
 "Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:223 ../../src/ui_fsmenu/launch_spg.cc:131
+#: ../../src/ui_fsmenu/launch_mpg.cc:223 ../../src/ui_fsmenu/launch_spg.cc:134
 msgid "File not found"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:224 ../../src/ui_fsmenu/launch_spg.cc:132
+#: ../../src/ui_fsmenu/launch_mpg.cc:224 ../../src/ui_fsmenu/launch_spg.cc:135
 #, c-format
 msgid ""
 "Widelands tried to start a game with a file that could not be found at the given path.\n"
@@ -5443,13 +5471,13 @@ msgid ""
 "to you, please write to the host about this problem."
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:313
+#: ../../src/ui_fsmenu/launch_mpg.cc:311
 #, c-format
 msgid "Unable to load the win condition script file ‘%s’."
 msgstr ""
 
 #. * TRANSLATORS: This is a heading for a help window
-#: ../../src/ui_fsmenu/launch_mpg.cc:440
+#: ../../src/ui_fsmenu/launch_mpg.cc:438
 msgid "Multiplayer Game Setup"
 msgstr ""
 
@@ -6572,60 +6600,60 @@ msgstr ""
 msgid "Unmark All"
 msgstr ""
 
-#: ../../src/wlapplication.cc:792
+#: ../../src/wlapplication.cc:795
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr ""
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:793 ../../src/wlapplication.cc:798
+#: ../../src/wlapplication.cc:796 ../../src/wlapplication.cc:801
 #: ../../src/wui/savegameloader.cc:119
 msgid "Error message:"
 msgstr ""
 
-#: ../../src/wlapplication.cc:794
+#: ../../src/wlapplication.cc:797
 msgid "File system error"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1294
+#: ../../src/wlapplication.cc:1297
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1299
+#: ../../src/wlapplication.cc:1302
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1454
+#: ../../src/wlapplication.cc:1457
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1575
+#: ../../src/wlapplication.cc:1578
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1593
+#: ../../src/wlapplication.cc:1596
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1619
+#: ../../src/wlapplication.cc:1622
 msgid "Incompatible"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1656
+#: ../../src/wlapplication.cc:1659
 msgid "Game ended unexpectedly"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1656
+#: ../../src/wlapplication.cc:1659
 msgid "Unexpected error during the game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1659
+#: ../../src/wlapplication.cc:1662
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6639,7 +6667,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1668
+#: ../../src/wlapplication.cc:1671
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6649,11 +6677,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1694
+#: ../../src/wlapplication.cc:1697
 msgid "Emergency save failed"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1695
+#: ../../src/wlapplication.cc:1698
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"

@@ -17,4 +17,4 @@
  */
 
 #include "base/test.h"
-TEST_EXECUTABLE(filesystem, false)
+TEST_EXECUTABLE(filesystem)

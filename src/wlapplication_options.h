@@ -20,6 +20,7 @@
 #define WL_WLAPPLICATION_OPTIONS_H
 
 #include <map>
+#include <vector>
 
 #include <SDL_keyboard.h>
 
@@ -108,24 +109,35 @@ enum class KeyboardShortcut : uint16_t {
 	kMainMenu_End = kMainMenuQuit,
 
 	kCommon_Begin = kMainMenu_End + 1,
-	kCommonFullscreen = kCommon_Begin,
-	kCommonScreenshot,
+
+	// These will get different descriptions for the in-game and in-editor help
+	kCommonLoad = kCommon_Begin,
 	kCommonSave,
-	kCommonLoad,
 	kCommonExit,
+	kCommonEncyclopedia,
+
+	// These can be inserted as one block in the in-game and in-editor help
+	kCommonGeneral_Begin,
+	kCommonZoomIn = kCommonGeneral_Begin,
+	kCommonZoomOut,
+	kCommonZoomReset,
 	kCommonTextCut,
 	kCommonTextCopy,
 	kCommonTextPaste,
 	kCommonSelectAll,
 	kCommonDeleteItem,
 	kCommonTooltipAccessibilityMode,
-	kCommonEncyclopedia,
+	kCommonFullscreen,
+	kCommonScreenshot,
+	kCommonGeneral_End = kCommonScreenshot,
+
+	// These are only shown in the help in debug builds
+	kCommonDebugConsole,
+	kCommonCheatMode,
+
+	// These will be moved to related items in the in-game and in-editor help
 	kCommonBuildhelp,
 	kCommonMinimap,
-	kCommonZoomIn,
-	kCommonZoomOut,
-	kCommonZoomReset,
-	kCommonQuicknavGUI,
 	kCommonQuicknavPrev,
 	kCommonQuicknavNext,
 	kCommon_End = kCommonQuicknavNext,
@@ -133,10 +145,27 @@ enum class KeyboardShortcut : uint16_t {
 	kEditor_Begin = kCommon_End + 1,
 	kEditorNewMap = kEditor_Begin,
 	kEditorNewRandomMap,
+	kEditorLoad,  // alias of kCommonLoad
+	kEditorSave,  // alias of kCommonSave
+	kEditorUploadMap,
 	kEditorMapOptions,
-	kEditorUndo,
-	kEditorRedo,
-	kEditorTools,
+	kEditorExit,               // alias of kCommonExit
+	kEditorHelp,               // alias of kCommonEncyclopedia
+	kEditorShowhideBuildhelp,  // alias of kCommonBuildhelp
+	kEditorShowhideMaximumBuildhelp,
+	kEditorShowhideGrid,
+	kEditorShowhideImmovables,
+	kEditorShowhideCritters,
+	kEditorShowhideResources,
+	kEditorMinimap,           // alias of kCommonMinimap
+	kEditor_Special_MapMove,  // special entries for map movement with arrow keys
+	kEditorQuicknavPrev,      // alias of kCommonQuicknavPrev
+	kEditorQuicknavNext,      // alias of kCommonQuicknavNext
+	kEditorMain_End = kEditorQuicknavNext,
+
+	// This will be a separate section in the help
+	kEditorTools_Begin = kEditorMain_End + 1,
+	kEditorTools = kEditorTools_Begin,
 	kEditorChangeHeight,
 	kEditorRandomHeight,
 	kEditorTerrain,
@@ -149,11 +178,11 @@ enum class KeyboardShortcut : uint16_t {
 	kEditorMapSize,
 	kEditorPlayers,
 	kEditorToolHistory,
-	kEditorShowhideGrid,
-	kEditorShowhideImmovables,
-	kEditorShowhideCritters,
-	kEditorShowhideResources,
-	kEditorShowhideMaximumBuildhelp,
+	kEditorUndo,
+	kEditorRedo,
+	kEditorTools_End = kEditorRedo,
+
+	// These will be grouped to one line in the in-editor help
 	kEditorToolsize1,
 	kEditorToolsize2,
 	kEditorToolsize3,
@@ -168,49 +197,51 @@ enum class KeyboardShortcut : uint16_t {
 
 	kInGame_Begin = kEditor_End + 1,
 	kInGameSoundOptions = kInGame_Begin,
+	kInGameSave,  // alias of kCommonSave
+	kInGameLoad,  // alias of kCommonLoad
 	kInGameRestart,
-	kInGameChat,
-	kInGamePinnedNote,
+	kInGameExit,          // alias of kCommonExit
+	kInGameEncyclopedia,  // alias of kCommonEncyclopedia
+
 	kInGameMessages,
 	kInGameObjectives,
 	kInGameDiplomacy,
-	kInGameShowhideCensus,
-	kInGameShowhideStats,
-	kInGameShowhideSoldiers,
-	kInGameShowhideBuildings,
-	kInGameShowhideWorkareas,
+	kInGameChat,
+
 	kInGameStatsGeneral,
 	kInGameStatsWares,
 	kInGameStatsBuildings,
 	kInGameStatsStock,
 	kInGameStatsSoldiers,
 	kInGameStatsSeafaring,
-	kInGamePause,
+
 	kInGameSpeedUp,
 	kInGameSpeedUpSlow,
 	kInGameSpeedUpFast,
 	kInGameSpeedDown,
 	kInGameSpeedDownSlow,
 	kInGameSpeedDownFast,
+	kInGamePause,
 	kInGameSpeedReset,
+
+	kInGameShowhideBuildhelp,  // alias of kCommonBuildhelp
+	kInGameShowhideCensus,
+	kInGameShowhideStats,
+	kInGameShowhideSoldiers,
+	kInGameShowhideBuildings,
+	kInGameShowhideWorkareas,
+
+	kInGameMinimap,           // alias of kCommonMinimap
+	kInGame_Special_MapMove,  // special entries for map movement with arrow keys
 	kInGameScrollToHQ,
-	kInGameMessagesGoto,
-	kInGameMessagesFilterAll,
-	kInGameMessagesFilterGeologists,
-	kInGameMessagesFilterEconomy,
-	kInGameMessagesFilterSeafaring,
-	kInGameMessagesFilterWarfare,
-	kInGameMessagesFilterScenario,
-	kInGameSeafaringstatsGotoShip,
-	kInGameSeafaringstatsWatchShip,
-	kInGameSeafaringstatsOpenShipWindow,
-	kInGameSeafaringstatsOpenShipWindowAndGoto,
-	kInGameSeafaringstatsFilterAll,
-	kInGameSeafaringstatsFilterIdle,
-	kInGameSeafaringstatsFilterShipping,
-	kInGameSeafaringstatsFilterExpWait,
-	kInGameSeafaringstatsFilterExpScout,
-	kInGameSeafaringstatsFilterExpPortspace,
+	kInGameQuicknavPrev,       // alias of kCommonQuicknavPrev
+	kInGameQuicknavNext,       // alias of kCommonQuicknavNext
+	kInGame_Special_Quicknav,  // special entries with grouped quicknav set/goto shortcuts
+	kInGameQuicknavGUI,
+	kInGamePinnedNote,
+	kInGameMain_End = kInGamePinnedNote,
+
+	// These will be grouped to two lines in the Encyclopedia
 	kInGameQuicknavSet1,
 	kInGameQuicknavGoto1,
 	kInGameQuicknavSet2,
@@ -229,13 +260,57 @@ enum class KeyboardShortcut : uint16_t {
 	kInGameQuicknavGoto8,
 	kInGameQuicknavSet9,
 	kInGameQuicknavGoto9,
-	kInGame_End = kInGameQuicknavGoto9,
+
+	// These have their own sections in the Encyclopedia
+
+	kInGameMessages_Begin,
+	kInGameMessagesFilterAll = kInGameMessages_Begin,
+	kInGameMessagesFilterGeologists,
+	kInGameMessagesFilterEconomy,
+	kInGameMessagesFilterSeafaring,
+	kInGameMessagesFilterWarfare,
+	kInGameMessagesFilterScenario,
+	kInGameMessagesGoto,
+	kInGameMessages_End = kInGameMessagesGoto,
+
+	kInGameSeafaringstats_Begin = kInGameMessages_End + 1,
+	kInGameSeafaringstatsFilterAll = kInGameSeafaringstats_Begin,
+	kInGameSeafaringstatsFilterIdle,
+	kInGameSeafaringstatsFilterShipping,
+	kInGameSeafaringstatsFilterExpWait,
+	kInGameSeafaringstatsFilterExpScout,
+	kInGameSeafaringstatsFilterExpPortspace,
+	kInGameSeafaringstatsGotoShip,
+	kInGameSeafaringstatsWatchShip,
+	kInGameSeafaringstatsOpenShipWindow,
+	kInGameSeafaringstatsOpenShipWindowAndGoto,
+	kInGameSeafaringstats_End = kInGameSeafaringstatsOpenShipWindowAndGoto,
+
+	kInGame_End = kInGameSeafaringstats_End,
 
 	kFastplace_Begin = kInGame_End + 1,
 	kFastplace_End = kFastplace_Begin + 127,  // Arbitrary limit of 128 fastplace shortcuts.
 
 	k_End = kFastplace_End
 };
+
+KeyboardShortcut operator+(const KeyboardShortcut& id, int i);
+KeyboardShortcut& operator++(KeyboardShortcut& id);
+uint16_t operator-(const KeyboardShortcut& a, const KeyboardShortcut& b);
+
+/**
+ * Check whether the given shortcut can be used for setting and retrieving the
+ * actual key combination.
+ *
+ * This function should be used when iterating over KeyboardShortcut ranges.
+ *
+ * Not "real" shortcuts are aliases and special entries, that are only used for
+ * help generation to simplify inserting common shortcuts and other related
+ * help entries at the right place.
+ */
+bool is_real(KeyboardShortcut id);
+
+bool is_debug_only(KeyboardShortcut id);
 
 /** Check whether a given shortcut is reserved for a fastplace shortcut slot. */
 inline bool is_fastplace(const KeyboardShortcut id) {
@@ -254,6 +329,20 @@ bool set_shortcut(KeyboardShortcut id, SDL_Keysym code, KeyboardShortcut* confli
 
 /** Look up the keysym assigned to a given shortcut ID. */
 SDL_Keysym get_shortcut(KeyboardShortcut);
+
+/** Get the formatted help of the current in game keyboard shortcuts including headers. */
+std::string get_ingame_shortcut_help();
+
+struct FastplaceShortcut {
+	std::string hotkey;
+	std::string building;
+};
+
+/** Get the current fastplace shortcuts for tribe. */
+std::vector<FastplaceShortcut> get_active_fastplace_shortcuts(const std::string& tribe);
+
+/** Get the formatted help of the current editor keyboard shortcuts including headers. */
+std::string get_editor_shortcut_help();
 
 /** Look up the hardcoded default keysym for a given shortcut ID. */
 SDL_Keysym get_default_shortcut(KeyboardShortcut);
