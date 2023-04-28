@@ -1056,9 +1056,61 @@ static int L_get_shortcut(lua_State* L) {
 	return 1;
 }
 
+/* RST
+.. method:: get_ingame_shortcut_help()
+
+   .. versionadded:: 1.2
+
+   Returns the list of current in-game keyboard shortcuts formatted as richtext.
+
+   :returns: The richtext formatted list of shortcuts
+   :rtype: :class:`string`
+*/
+static int L_get_ingame_shortcut_help(lua_State* L) {
+	lua_pushstring(L, get_ingame_shortcut_help().c_str());
+	return 1;
+}
+
+/* RST
+.. method:: get_fastplace_help()
+
+   .. versionadded:: 1.2
+
+   Returns the list of current fastplace shortcuts for the current player formatted as richtext.
+
+   :returns: The richtext formatted list of shortcuts
+   :rtype: :class:`string`
+*/
+static int L_get_fastplace_help(lua_State* L) {
+	InteractivePlayer* ipl = get_game(L).get_ipl();
+	if (ipl == nullptr) {
+		report_error(L, "This can only be called when there's an interactive player");
+	}
+	lua_pushstring(L, ipl->get_fastplace_help().c_str());
+	return 1;
+}
+
+/* RST
+.. method:: get_editor_shortcut_help()
+
+   .. versionadded:: 1.2
+
+   Returns the list of current map editor keyboard shortcuts formatted as richtext.
+
+   :returns: The richtext formatted list of shortcuts
+   :rtype: :class:`string`
+*/
+static int L_get_editor_shortcut_help(lua_State* L) {
+	lua_pushstring(L, get_editor_shortcut_help().c_str());
+	return 1;
+}
+
 const static struct luaL_Reg wlui[] = {{"set_user_input_allowed", &L_set_user_input_allowed},
                                        {"get_user_input_allowed", &L_get_user_input_allowed},
                                        {"get_shortcut", &L_get_shortcut},
+                                       {"get_ingame_shortcut_help", &L_get_ingame_shortcut_help},
+                                       {"get_fastplace_help", &L_get_fastplace_help},
+                                       {"get_editor_shortcut_help", &L_get_editor_shortcut_help},
                                        {nullptr, nullptr}};
 
 void luaopen_wlui(lua_State* L) {
