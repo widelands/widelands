@@ -36,6 +36,9 @@ namespace {
 
 const RGBColor kWhite(255, 255, 255);
 const RGBColor kRed(255, 0, 0);
+const RGBColor kRoad(220, 220, 220);
+const RGBColor kDark(100, 100, 100);
+const RGBColor kBright(160, 160, 160);
 
 // Blend two colors.
 inline RGBColor blend_color(const RGBColor& c1, const RGBColor& c2) {
@@ -81,7 +84,13 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 
 	if ((layers & MiniMapLayer::Owner) != 0) {
 		if (0 < owner) {
-			color = blend_color(color, egbase.player(owner).get_playercolor());
+			RGBColor plcolor = egbase.player(owner).get_playercolor();
+			if (plcolor.r + plcolor.g + plcolor.b < 384) { // dark playercolor
+				plcolor = blend_color(plcolor, kDark); // darken it
+			} else { // bright playercolor
+				plcolor = blend_color(plcolor, kRoad); // brighten it
+			}
+			color = blend_color(color, plcolor);
 		}
 	}
 
@@ -98,24 +107,22 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 			const Widelands::MapObjectType type = f.field->get_immovable()->descr().type();
 			if ((layers & MiniMapLayer::Flag) != 0 && type == Widelands::MapObjectType::FLAG) {
 				upcast(Widelands::Flag, flag, f.field->get_immovable());
+				color = kWhite;
 				if (flag->current_wares() > 5) {
 					high_traffic = true;
-				} else {
-					color = kWhite;
 				}
 			} else if ((layers & MiniMapLayer::Building) != 0 &&
 			           type >= Widelands::MapObjectType::BUILDING) {
 				color = kWhite;
 			} else if (((layers & MiniMapLayer::Road) != 0) &&
 			           type == Widelands::MapObjectType::WATERWAY) {
-				color = blend_color(color, kWhite);
+				color = kRoad;
 			} else if (((layers & MiniMapLayer::Road) != 0) &&
 			           type == Widelands::MapObjectType::ROAD) {
+				color = kRoad;
 				upcast(Widelands::Road, road, f.field->get_immovable());
 				if (road->is_busy()) {
 					high_traffic = true;
-				} else {
-					color = blend_color(color, kWhite);
 				}
 			} else if ((layers & MiniMapLayer::Artifacts) != 0) {
 				Widelands::FCoords coord[7];
