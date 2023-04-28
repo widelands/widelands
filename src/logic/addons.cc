@@ -468,7 +468,8 @@ std::shared_ptr<AddOnInfo> preload_addon(const std::string& name) {
 		throw wexception("preload_addon (%s): version string is empty", name.c_str());
 	}
 	if (!i->matches_widelands_version()) {
-		throw wexception("preload_addon (%s): incompatible with this Widelands version", name.c_str());
+		throw wexception(
+		   "preload_addon (%s): incompatible with this Widelands version", name.c_str());
 	}
 
 	for (std::string req(s.get_safe_string("requires")); !req.empty();) {
