@@ -127,8 +127,9 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 				map.get_brn(f, &coord[5]);
 				map.get_bln(f, &coord[6]);
 				for (const Widelands::FCoords& fc : coord) {
-					if (fc.field->get_immovable() != nullptr && fc.field->get_immovable()->descr().has_attribute(
-			              Widelands::MapObjectDescr::get_attribute_id("artifact"))) {
+					if (fc.field->get_immovable() != nullptr &&
+					    fc.field->get_immovable()->descr().has_attribute(
+					       Widelands::MapObjectDescr::get_attribute_id("artifact"))) {
 						color = kRed;
 					}
 				}
