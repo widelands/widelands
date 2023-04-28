@@ -143,8 +143,8 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
      ibase_(ibase),
      owner_button_impl_(ibase.egbase().is_game() ? MiniMapLayer::Owner :
                                                    MiniMapLayer::StartingPositions),
-	additional_button_impl_(ibase.egbase().is_game() ? MiniMapLayer::Traffic :
-                                                   MiniMapLayer::Artifacts),
+     additional_button_impl_(ibase.egbase().is_game() ? MiniMapLayer::Traffic :
+                                                        MiniMapLayer::Artifacts),
      view_(*this, &registry->minimap_layers, &registry->minimap_type, 0, 0, 0, 0, ibase),
 
      button_terrn(this,
@@ -220,7 +220,9 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                   but_w(),
                   but_h(),
                   UI::ButtonStyle::kWuiSecondary,
-                  ibase.egbase().is_game() ? g_image_cache->get("images/wui/buildings/menu_list_workers.png") : g_image_cache->get("images/wui/minimap/button_artifacts.png"),
+                  ibase.egbase().is_game() ?
+                     g_image_cache->get("images/wui/buildings/menu_list_workers.png") :
+                     g_image_cache->get("images/wui/minimap/button_artifacts.png"),
                   ibase.egbase().is_game() ? _("High Traffic") : _("Artifacts"),
                   UI::Button::VisualState::kRaised,
                   UI::Button::ImageMode::kUnscaled),

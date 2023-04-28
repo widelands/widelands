@@ -89,7 +89,8 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 		// if ownership layer is displayed, it creates enough contrast to
 		// visualize objects using white color.
 
-		if (((layers & (MiniMapLayer::Road | MiniMapLayer::Flag | MiniMapLayer::Building | MiniMapLayer::Artifacts)) != 0) &&
+		if (((layers & (MiniMapLayer::Road | MiniMapLayer::Flag | MiniMapLayer::Building |
+		                MiniMapLayer::Artifacts)) != 0) &&
 		    (f.field->get_immovable() != nullptr)) {
 			bool high_traffic = false;
 			const Widelands::MapObjectType type = f.field->get_immovable()->descr().type();
@@ -115,7 +116,8 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 					color = blend_color(color, kWhite);
 				}
 			} else if (((layers & MiniMapLayer::Artifacts) != 0) &&
-			           f.field->get_immovable()->descr().has_attribute(MapObjectDescr::get_attribute_id("artifact"))) {
+			           f.field->get_immovable()->descr().has_attribute(
+			              MapObjectDescr::get_attribute_id("artifact"))) {
 				color = kRed;
 			}
 			if (high_traffic && (layers & MiniMapLayer::Traffic) != 0) {
