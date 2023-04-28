@@ -28,6 +28,7 @@
 #include <sstream>
 #include <string>
 
+#include "base/log.h"
 #include "base/string.h"
 #include "base/wexception.h"
 
@@ -160,7 +161,7 @@ inline bool compare(const double a,
 #define check_equal(a, b) do_check_equal(__FILE__, __LINE__, a, b)
 template <typename T1, typename T2>
 inline void do_check_equal(const char* f, uint32_t l, const T1& a, const T2& b) {
-	std::cout << "Running testcase " << f << ':' << l << std::endl;
+	log_info("Running testcase %s:%d\n", f, l);
 	if (!compare(a, b)) {
 		std::ostringstream oss;
 		oss << "Check failed: (";
@@ -178,7 +179,7 @@ inline void do_check_error(const char* f,
                            uint32_t l,
                            const std::string& what,
                            const std::function<void()>& fn) {
-	std::cout << "Running testcase " << f << ':' << l << std::endl;
+	log_info("Running testcase %s:%d\n", f, l);
 	try {
 		fn();
 	} catch (...) {
@@ -188,23 +189,21 @@ inline void do_check_error(const char* f,
 }
 }  // namespace WLTestsuite
 
-#define TEST_EXECUTABLE(name, needs_logging)                                                       \
+#define TEST_EXECUTABLE(name)                                                                      \
 	namespace WLTestsuite {                                                                         \
 	namespace WLTestsuite_##name {                                                                  \
 		static int main() {                                                                          \
-			if (needs_logging) {                                                                      \
-				set_testcase_logging_dir();                                                            \
-			}                                                                                         \
+			set_testcase_logging_dir();                                                               \
 			bool errors = false;                                                                      \
 			for (const auto& suite : all_testsuites()) {                                              \
 				for (const auto& test : suite.second) {                                                \
 					try {                                                                               \
-						std::cout << "Running " << suite.first << "::" << test.first << std::endl;       \
+						log_info("Running %s::%s\n", suite.first.c_str(), test.first.c_str());           \
 						test.second();                                                                   \
 					} catch (const std::exception& e) {                                                 \
 						errors = true;                                                                   \
-						std::cout << "Error in " << suite.first << "::" << test.first << ": "            \
-						          << e.what() << std::endl;                                              \
+						log_info(                                                                        \
+						   "Error in %s::%s: %s\n", suite.first.c_str(), test.first.c_str(), e.what());  \
 					}                                                                                   \
 				}                                                                                      \
 			}                                                                                         \
