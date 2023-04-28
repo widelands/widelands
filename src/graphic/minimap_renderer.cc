@@ -117,7 +117,7 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 				}
 			} else if (((layers & MiniMapLayer::Artifacts) != 0) &&
 			           f.field->get_immovable()->descr().has_attribute(
-			              MapObjectDescr::get_attribute_id("artifact"))) {
+			              Widelands::MapObjectDescr::get_attribute_id("artifact"))) {
 				color = kRed;
 			}
 			if (high_traffic && (layers & MiniMapLayer::Traffic) != 0) {

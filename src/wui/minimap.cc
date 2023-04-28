@@ -243,7 +243,7 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
 	button_roads.sigclicked.connect([this]() { toggle(MiniMapLayer::Road); });
 	button_bldns.sigclicked.connect([this]() { toggle(MiniMapLayer::Building); });
 	button_ships.sigclicked.connect([this]() { toggle(MiniMapLayer::Ship); });
-	button_addtn.sigclicked.connect([this]() { toggle(MiniMapLayer::Traffic); });
+	button_addtn.sigclicked.connect([this]() { toggle(additional_button_impl_); });
 	button_zoom.sigclicked.connect([this]() { toggle(MiniMapLayer::Zoom2); });
 
 	check_boundaries();
