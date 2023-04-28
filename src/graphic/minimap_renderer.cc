@@ -85,10 +85,10 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 	if ((layers & MiniMapLayer::Owner) != 0) {
 		if (0 < owner) {
 			RGBColor plcolor = egbase.player(owner).get_playercolor();
-			if (plcolor.r + plcolor.g + plcolor.b < 384) { // dark playercolor
-				plcolor = blend_color(plcolor, kDark); // darken it
-			} else { // bright playercolor
-				plcolor = blend_color(plcolor, kRoad); // brighten it
+			if (plcolor.r + plcolor.g + plcolor.b < 384) {  // dark playercolor
+				plcolor = blend_color(plcolor, kDark);       // darken it
+			} else {                                        // bright playercolor
+				plcolor = blend_color(plcolor, kRoad);       // brighten it
 			}
 			color = blend_color(color, plcolor);
 		}
