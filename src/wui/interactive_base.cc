@@ -158,13 +158,13 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
 		   "images/wui/overlays/set_flag.png", "images/wui/overlays/small.png",
 		   "images/wui/overlays/medium.png",   "images/wui/overlays/big.png",
 		   "images/wui/overlays/mine.png",     "images/wui/overlays/port.png"};
-		for (uint8_t scale = 0; scale < ImageCache::kScalesCount; ++scale) {
+		for (uint8_t scale_index = 0; scale_index < ImageCache::kScalesCount; ++scale_index) {
 			const char* const* filename = filenames;
 
 			//  Special case for flag, which has a different formula for hotspot_y.
-			buildhelp_overlay->pic = g_image_cache->get(*filename, true, scale);
+			buildhelp_overlay->pic = g_image_cache->get(*filename, true, scale_index);
 			if (buildhelp_overlay->pic != nullptr) {
-				buildhelp_overlay->scale = ImageCache::kScales[scale].first;
+				buildhelp_overlay->scale = ImageCache::kScales[scale_index].first;
 				buildhelp_overlay->hotspot =
 				   Vector2i(buildhelp_overlay->pic->width() / 2, buildhelp_overlay->pic->height() - 1);
 			}
@@ -178,9 +178,9 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
 					break;
 				}
 
-				buildhelp_overlay->pic = g_image_cache->get(*filename, true, scale);
+				buildhelp_overlay->pic = g_image_cache->get(*filename, true, scale_index);
 				if (buildhelp_overlay->pic != nullptr) {
-					buildhelp_overlay->scale = ImageCache::kScales[scale].first;
+					buildhelp_overlay->scale = ImageCache::kScales[scale_index].first;
 					buildhelp_overlay->hotspot = Vector2i(
 					   buildhelp_overlay->pic->width() / 2, buildhelp_overlay->pic->height() / 2);
 				}
