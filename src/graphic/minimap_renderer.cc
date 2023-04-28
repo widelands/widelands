@@ -26,6 +26,7 @@
 #include "economy/roadbase.h"
 #include "graphic/playercolor.h"
 #include "logic/field.h"
+#include "logic/map.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/vision.h"
@@ -71,6 +72,7 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
                                    const Widelands::PlayerNumber owner,
                                    const bool see_details) {
 	RGBColor color;
+	const Widelands::Map& map = egbase.map();
 	if ((layers & MiniMapLayer::Terrain) != 0) {
 		color = egbase.descriptions()
 		           .get_terrain_descr(f.field->terrain_d())
@@ -115,11 +117,23 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 				} else {
 					color = blend_color(color, kWhite);
 				}
-			} else if (((layers & MiniMapLayer::Artifacts) != 0) &&
-			           f.field->get_immovable()->descr().has_attribute(
+			} else if ((layers & MiniMapLayer::Artifacts) != 0) {
+				Widelands::FCoords coord[7];
+				coord[0] = f;
+				map.get_ln(f, &coord[1]);
+				map.get_tln(f, &coord[2]);
+				map.get_trn(f, &coord[3]);
+				map.get_rn(f, &coord[4]);
+				map.get_brn(f, &coord[5]);
+				map.get_bln(f, &coord[6]);
+				for (const Widelands::FCoords& fc : coord) {
+					if (fc.field->get_immovable() != nullptr && fc.field->get_immovable()->descr().has_attribute(
 			              Widelands::MapObjectDescr::get_attribute_id("artifact"))) {
-				color = kRed;
+						color = kRed;
+					}
+				}
 			}
+
 			if (high_traffic && (layers & MiniMapLayer::Traffic) != 0) {
 				color = contrast_color;
 			}
