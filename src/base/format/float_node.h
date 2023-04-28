@@ -134,10 +134,7 @@ struct FloatNode : FormatNode {
 
 		// Right aligned, padding with spaces
 		if ((flags_ & (kPadWith0 | kLeftAlign)) == 0) {
-			for (; padding > 0; --padding) {
-				*out = ' ';
-				++out;
-			}
+			out = pad_with_space(out, padding, localize);
 		}
 
 		if (is_negative) {
@@ -148,10 +145,7 @@ struct FloatNode : FormatNode {
 
 		// Pad with zeroes as needed
 		if ((flags_ & kPadWith0) != 0) {
-			for (; padding > 0; --padding) {
-				*out = '0';
-				++out;
-			}
+			out = pad_with_char(out, padding, '0');
 		}
 
 		// Write the integer part
@@ -164,10 +158,8 @@ struct FloatNode : FormatNode {
 			out = write_digits(out, fractional, current_precision);
 		}
 
-		// No need to check for left aligned: Other cases already zeroed the padding.
-		for (; padding > 0; --padding) {
-			*out = ' ';
-			++out;
+		if ((flags_ & kLeftAlign) != 0) {
+			out = pad_with_space(out, padding, localize);
 		}
 
 		return out;

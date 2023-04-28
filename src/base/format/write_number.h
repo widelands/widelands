@@ -21,8 +21,6 @@
 
 #include <cassert>
 
-#include "base/format/abstract_node.h"
-
 namespace format_impl {
 
 // Always writes exactly `width` characters.
@@ -56,16 +54,27 @@ inline size_t number_of_digits(uint64_t arg, bool hexadecimal = false) {
 	return n;
 }
 
+// These are multi-character UTF-8 strings
+static const char kLocalizedMinusSign[] = "−";  // minus sign
+static const char kDigitWidthSpace[] = " ";     // digit-sized whitespace
+static const size_t kLocalizedMinusSignLength = strlen(kLocalizedMinusSign);
+static const size_t kDigitWidthSpaceLength = strlen(kDigitWidthSpace);
+
+inline char* write_utf8_char(char* out, const char* utf8) {
+	for (const char* c = utf8; *c != 0; ++c) {
+		*out = *c;
+		++out;
+	}
+	return out;
+}
+
 // Only counts as a single display character, even if it requires a UTF-8 multi-byte
 // character sequence for storage.
 // We return the next position, display width counter should be increased
 // by 1 in caller.
 inline char* write_minus_sign(char* out, bool localize) {
 	if (localize) {
-		for (const char* c = kLocalizedMinusSign; *c != 0; ++c) {
-			*out = *c;
-			++out;
-		}
+		out = write_utf8_char(out, kLocalizedMinusSign);
 	} else {
 		*out = '-';
 		++out;
@@ -79,13 +88,33 @@ inline char* write_minus_sign(char* out, bool localize) {
 // by 1 in caller.
 inline char* write_forced_plus_sign(char* out, bool localize, bool is_zero = false) {
 	if (localize && is_zero) {
-		for (const char* c = kDigitWidthSpace; *c != 0; ++c) {
-			*out = *c;
-			++out;
-		}
+		out = write_utf8_char(out, kDigitWidthSpace);
 	} else {
 		*out = '+';
 		++out;
+	}
+	return out;
+}
+
+// Always writes exactly `width` characters.
+inline char* pad_with_char(char* out, size_t width, const char c) {
+	for (; width > 0; --width) {
+		*out = c;
+		++out;
+	}
+	return out;
+}
+
+// Always counts as `width` characters, but may use multi-byte UTF-8 character
+// sequences for storage.
+// We return the next position, display width counter should be increased
+// by `width` in caller.
+inline char* pad_with_space(char* out, size_t width, const bool localize) {
+	if (!localize) {
+		return pad_with_char(out, width, ' ');
+	}
+	for (; width > 0; --width) {
+		out = write_utf8_char(out, kDigitWidthSpace);
 	}
 	return out;
 }

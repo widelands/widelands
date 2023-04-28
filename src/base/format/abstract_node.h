@@ -30,12 +30,6 @@ enum Flags : uint8_t {
 	kPadWith0 = 4,
 };
 
-// These are multi-character UTF-8 strings
-static const char kLocalizedMinusSign[] = "−";  // minus sign
-static const char kDigitWidthSpace[] = " ";     // digit-sized whitespace
-static const size_t kLocalizedMinusSignLength = strlen(kLocalizedMinusSign);
-static const size_t kDigitWidthSpaceLength = strlen(kDigitWidthSpace);
-
 constexpr int64_t kMaxInt = std::numeric_limits<int64_t>::max();
 constexpr unsigned kInfinitePrecision = std::numeric_limits<unsigned>::max();
 constexpr unsigned kDefaultFloatPrecision = 6;
