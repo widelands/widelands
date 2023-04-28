@@ -285,7 +285,7 @@ void InteractiveBase::rebuild_mapview_menu() {
                                                               _("Show Quick Navigation"),
 		                 MapviewMenuEntry::kQuicknav,
 		                 g_image_cache->get("images/wui/menus/quicknav.png"), false, "",
-		                 shortcut_string_for(KeyboardShortcut::kCommonQuicknavGUI, false));
+		                 shortcut_string_for(KeyboardShortcut::kInGameQuicknavGUI, false));
 	}
 
 	/** TRANSLATORS: An entry in the game's map view menu */
@@ -1749,37 +1749,31 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			toggle_minimap();
 			return true;
 		}
-		if (egbase().is_game() && matches_shortcut(KeyboardShortcut::kCommonQuicknavGUI, code)) {
+		if (egbase().is_game() && matches_shortcut(KeyboardShortcut::kInGameQuicknavGUI, code)) {
 			toggle_quicknav();
 			return true;
 		}
 
-		switch (code.sym) {
 #ifndef NDEBUG  //  only in debug builds
-		case SDLK_SPACE:
-			if (((code.mod & KMOD_CTRL) != 0) && ((code.mod & KMOD_SHIFT) != 0)) {
-				GameChatMenu::create_script_console(
-				   this, color_functor(), debugconsole_, *DebugConsole::get_chat_provider());
-				return true;
+		if (matches_shortcut(KeyboardShortcut::kCommonDebugConsole, code)) {
+			GameChatMenu::create_script_console(
+			   this, color_functor(), debugconsole_, *DebugConsole::get_chat_provider());
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kCommonCheatMode, code)) {
+			if (cheat_mode_enabled_) {
+				cheat_mode_enabled_ = false;
+			} else if (!omnipotent()) {
+				broadcast_cheating_message();
+				cheat_mode_enabled_ = true;
 			}
-			break;
-		case SDLK_BACKSPACE:
-			if (((code.mod & KMOD_CTRL) != 0) && ((code.mod & KMOD_SHIFT) != 0)) {
-				if (cheat_mode_enabled_) {
-					cheat_mode_enabled_ = false;
-				} else if (!omnipotent()) {
-					broadcast_cheating_message();
-					cheat_mode_enabled_ = true;
-				}
-				return true;
-			}
-			break;
+			return true;
+		}
 #endif
-		case SDLK_TAB:
+
+		if (code.sym == SDLK_TAB) {
 			toolbar()->focus();
 			return true;
-		default:
-			break;
 		}
 	}
 

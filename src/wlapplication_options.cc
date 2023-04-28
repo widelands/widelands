@@ -121,6 +121,20 @@ void set_config_string(const std::string& section,
 
 constexpr char kFastplaceNameSeparator = '$';
 
+KeyboardShortcut operator+(const KeyboardShortcut& id, const int i) {
+	return static_cast<KeyboardShortcut>(static_cast<uint16_t>(id) + i);
+}
+
+KeyboardShortcut& operator++(KeyboardShortcut& id) {
+	id = id + 1;
+	return id;
+}
+
+uint16_t operator-(const KeyboardShortcut& a, const KeyboardShortcut& b) {
+	assert(a >= b);
+	return static_cast<uint16_t>(a) - static_cast<uint16_t>(b);
+}
+
 struct KeyboardShortcutInfo {
 	enum class Scope {
 		kGlobal,  // special value that intersects with all other scopes
@@ -134,14 +148,28 @@ struct KeyboardShortcutInfo {
 	const SDL_Keysym default_shortcut;
 	SDL_Keysym current_shortcut;
 	const std::string internal_name;
-	const std::function<std::string()> descname;
+	const std::string descname;
 	std::map<std::string /* tribe */, std::string /* building */> fastplace;
 
 	KeyboardShortcutInfo(const std::set<Scope>& s,
 	                     const SDL_Keysym& sym,
 	                     const std::string& n,
-	                     const std::function<std::string()>& f)
+	                     const std::string& f)
 	   : scopes(s), default_shortcut(sym), current_shortcut(sym), internal_name(n), descname(f) {
+	}
+};
+
+// Aliases are used for help generation to simplify inserting common shortcuts
+struct KeyboardShortcutAlias {
+	const KeyboardShortcut real_shortcut;
+	const std::string descname_override;  // Use gettext_noop() for the init value!
+
+	KeyboardShortcutAlias(const KeyboardShortcut real,
+	                      const std::string& desc_override = std::string())
+	   : real_shortcut(real), descname_override(desc_override) {
+	}
+	[[nodiscard]] std::string translated_descname() const {
+		return descname_override.empty() ? to_string(real_shortcut) : _(descname_override);
 	}
 };
 
@@ -159,55 +187,55 @@ static inline SDL_Keysym keysym(const SDL_Keycode c, uint16_t mod = 0) {
 static const std::vector<KeyboardShortcutInfo> kFastplaceDefaults = {
 #define FP(name, descname)                                                                         \
 	KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_UNKNOWN),                \
-	                     kFastplaceGroupPrefix + name, []() { return descname; })
-   FP("warehouse", _("Warehouse")),
-   FP("port", _("Port")),
-   FP("training_small", _("Minor Training Site")),
-   FP("training_large", _("Major Training Site")),
-   FP("military_small_primary", _("Primary Small Military Site")),
-   FP("military_small_secondary", _("Secondary Small Military Site")),
-   FP("military_medium_primary", _("Primary Medium Military Site")),
-   FP("military_medium_secondary", _("Secondary Medium Military Site")),
-   FP("military_tower", _("Tower")),
-   FP("military_fortress", _("Fortress")),
-   FP("woodcutter", _("Woodcutter’s House")),
-   FP("forester", _("Forester’s House")),
-   FP("quarry", _("Quarry")),
-   FP("building_materials_primary", _("Primary Building Materials Industry")),
-   FP("building_materials_secondary", _("Secondary Building Materials Industry")),
-   FP("building_materials_tertiary", _("Tertiary Building Materials Industry")),
-   FP("fisher", _("Fishing")),
-   FP("hunter", _("Hunting")),
-   FP("fish_meat_replenisher", _("Fish/Meat Replenishing")),
-   FP("well", _("Well")),
-   FP("farm_primary", _("Primary Farm")),
-   FP("farm_secondary", _("Secondary Farm")),
-   FP("mill", _("Mill")),
-   FP("bakery", _("Bakery")),
-   FP("brewery", _("Brewery")),
-   FP("smokery", _("Smokery")),
-   FP("tavern", _("Tavern")),
-   FP("smelting", _("Ore Smelting")),
-   FP("tool_smithy", _("Tool Smithy")),
-   FP("weapon_smithy", _("Weapon Smithy")),
-   FP("armor_smithy", _("Armor Smithy")),
-   FP("weaving_mill", _("Weaving Mill")),
-   FP("shipyard", _("Shipyard")),
-   FP("ferry_yard", _("Ferry Yard")),
-   FP("scout", _("Scouting")),
-   FP("barracks", _("Barracks")),
-   FP("second_carrier", _("Second Carrier")),
-   FP("charcoal", _("Charcoal")),
-   FP("mine_stone", _("Stone Mine")),
-   FP("mine_coal", _("Coal Mine")),
-   FP("mine_iron", _("Iron Mine")),
-   FP("mine_gold", _("Gold Mine")),
-   FP("agriculture_producer", _("Agricultural Producer")),
-   FP("agriculture_consumer_primary", _("Primary Agricultural Consumer")),
-   FP("agriculture_consumer_secondary", _("Secondary Agricultural Consumer")),
-   FP("industry_alternative", _("Alternative Industry")),
-   FP("industry_supporter", _("Industry Support")),
-   FP("terraforming", _("Terraforming")),
+	                     kFastplaceGroupPrefix + name, descname)
+   FP("warehouse", gettext_noop("Warehouse")),
+   FP("port", gettext_noop("Port")),
+   FP("training_small", gettext_noop("Minor Training Site")),
+   FP("training_large", gettext_noop("Major Training Site")),
+   FP("military_small_primary", gettext_noop("Primary Small Military Site")),
+   FP("military_small_secondary", gettext_noop("Secondary Small Military Site")),
+   FP("military_medium_primary", gettext_noop("Primary Medium Military Site")),
+   FP("military_medium_secondary", gettext_noop("Secondary Medium Military Site")),
+   FP("military_tower", gettext_noop("Tower")),
+   FP("military_fortress", gettext_noop("Fortress")),
+   FP("woodcutter", gettext_noop("Woodcutter’s House")),
+   FP("forester", gettext_noop("Forester’s House")),
+   FP("quarry", gettext_noop("Quarry")),
+   FP("building_materials_primary", gettext_noop("Primary Building Materials Industry")),
+   FP("building_materials_secondary", gettext_noop("Secondary Building Materials Industry")),
+   FP("building_materials_tertiary", gettext_noop("Tertiary Building Materials Industry")),
+   FP("fisher", gettext_noop("Fishing")),
+   FP("hunter", gettext_noop("Hunting")),
+   FP("fish_meat_replenisher", gettext_noop("Fish/Meat Replenishing")),
+   FP("well", gettext_noop("Well")),
+   FP("farm_primary", gettext_noop("Primary Farm")),
+   FP("farm_secondary", gettext_noop("Secondary Farm")),
+   FP("mill", gettext_noop("Mill")),
+   FP("bakery", gettext_noop("Bakery")),
+   FP("brewery", gettext_noop("Brewery")),
+   FP("smokery", gettext_noop("Smokery")),
+   FP("tavern", gettext_noop("Tavern")),
+   FP("smelting", gettext_noop("Ore Smelting")),
+   FP("tool_smithy", gettext_noop("Tool Smithy")),
+   FP("weapon_smithy", gettext_noop("Weapon Smithy")),
+   FP("armor_smithy", gettext_noop("Armor Smithy")),
+   FP("weaving_mill", gettext_noop("Weaving Mill")),
+   FP("shipyard", gettext_noop("Shipyard")),
+   FP("ferry_yard", gettext_noop("Ferry Yard")),
+   FP("scout", gettext_noop("Scouting")),
+   FP("barracks", gettext_noop("Barracks")),
+   FP("second_carrier", gettext_noop("Second Carrier")),
+   FP("charcoal", gettext_noop("Charcoal")),
+   FP("mine_stone", gettext_noop("Stone Mine")),
+   FP("mine_coal", gettext_noop("Coal Mine")),
+   FP("mine_iron", gettext_noop("Iron Mine")),
+   FP("mine_gold", gettext_noop("Gold Mine")),
+   FP("agriculture_producer", gettext_noop("Agricultural Producer")),
+   FP("agriculture_consumer_primary", gettext_noop("Primary Agricultural Consumer")),
+   FP("agriculture_consumer_secondary", gettext_noop("Secondary Agricultural Consumer")),
+   FP("industry_alternative", gettext_noop("Alternative Industry")),
+   FP("industry_supporter", gettext_noop("Industry Support")),
+   FP("terraforming", gettext_noop("Terraforming")),
 #undef FP
 };
 
@@ -215,309 +243,317 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
    {KeyboardShortcut::kMainMenuNew, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
                                                          keysym(SDLK_n),
                                                          "mainmenu_new",
-                                                         []() { return _("New Game"); })},
+                                                         gettext_noop("New Game"))},
    {KeyboardShortcut::kMainMenuLoad, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
                                                           keysym(SDLK_l),
                                                           "mainmenu_load",
-                                                          []() { return _("Load Game"); })},
+                                                          gettext_noop("Load Game"))},
    {KeyboardShortcut::kMainMenuReplay,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
                          keysym(SDLK_r),
                          "mainmenu_replay",
-                         []() { return _("Watch Replay"); })},
+                         gettext_noop("Watch Replay"))},
    {KeyboardShortcut::kMainMenuRandomMatch,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
                          keysym(SDLK_z),
                          "mainmenu_random",
-                         []() { return _("New Random Game"); })},
+                         gettext_noop("New Random Game"))},
    {KeyboardShortcut::kMainMenuTutorial,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
                          keysym(SDLK_t),
                          "mainmenu_tutorial",
-                         []() { return _("Tutorials"); })},
+                         gettext_noop("Tutorials"))},
    {KeyboardShortcut::kMainMenuCampaign,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
                          keysym(SDLK_h),
                          "mainmenu_campaign",
-                         []() { return _("Campaigns"); })},
+                         gettext_noop("Campaigns"))},
    {KeyboardShortcut::kMainMenuSP, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
                                                         keysym(SDLK_s),
                                                         "mainmenu_sp",
-                                                        []() { return _("Singleplayer"); })},
+                                                        gettext_noop("Singleplayer"))},
    {KeyboardShortcut::kMainMenuMP, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
                                                         keysym(SDLK_m),
                                                         "mainmenu_mp",
-                                                        []() { return _("Multiplayer"); })},
+                                                        gettext_noop("Multiplayer"))},
    {KeyboardShortcut::kMainMenuE, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
                                                        keysym(SDLK_e),
                                                        "mainmenu_e",
-                                                       []() { return _("Editor"); })},
+                                                       gettext_noop("Editor"))},
    {KeyboardShortcut::kMainMenuEditorLoad,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
                          keysym(SDLK_b),
                          "mainmenu_editor_load",
-                         []() { return _("Editor – Load Map"); })},
+                         gettext_noop("Editor – Load Map"))},
    {KeyboardShortcut::kMainMenuEditorNew,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
                          keysym(SDLK_k),
                          "mainmenu_editor_new",
-                         []() { return _("Editor – New Map"); })},
+                         gettext_noop("Editor – New Map"))},
    {KeyboardShortcut::kMainMenuEditorRandom,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
                          keysym(SDLK_y),
                          "mainmenu_editor_random",
-                         []() { return _("Editor – New Random Map"); })},
+                         gettext_noop("Editor – New Random Map"))},
    {KeyboardShortcut::kMainMenuContinueEditing,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
                          keysym(SDLK_w),
                          "mainmenu_editor_continue",
-                         []() { return _("Continue Editing"); })},
+                         gettext_noop("Continue Editing"))},
    {KeyboardShortcut::kMainMenuContinuePlaying,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
                          keysym(SDLK_c),
                          "mainmenu_continue",
-                         []() { return _("Continue Playing"); })},
+                         gettext_noop("Continue Playing"))},
    {KeyboardShortcut::kMainMenuQuit, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
                                                           keysym(SDLK_ESCAPE),
                                                           "mainmenu_quit",
-                                                          []() { return _("Exit Widelands"); })},
+                                                          gettext_noop("Exit Widelands"))},
    {KeyboardShortcut::kMainMenuAbout, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
                                                            keysym(SDLK_F1),
                                                            "mainmenu_about",
-                                                           []() { return _("About"); })},
+                                                           gettext_noop("About"))},
    {KeyboardShortcut::kMainMenuAddons,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
                          keysym(SDLK_a),
                          "mainmenu_addons",
-                         []() { return _("Add-Ons"); })},
+                         gettext_noop("Add-Ons"))},
    {KeyboardShortcut::kMainMenuLAN, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
                                                          keysym(SDLK_p),
                                                          "mainmenu_lan",
-                                                         []() { return _("LAN / Direct IP"); })},
+                                                         gettext_noop("LAN / Direct IP"))},
    {KeyboardShortcut::kMainMenuLobby, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
                                                            keysym(SDLK_j),
                                                            "mainmenu_lobby",
-                                                           []() { return _("Metaserver Lobby"); })},
+                                                           gettext_noop("Metaserver Lobby"))},
    {KeyboardShortcut::kMainMenuLogin, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
                                                            keysym(SDLK_u),
                                                            "mainmenu_login",
-                                                           []() { return _("Internet Login"); })},
+                                                           gettext_noop("Internet Login"))},
    {KeyboardShortcut::kMainMenuOptions,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
                          keysym(SDLK_o),
                          "mainmenu_options",
-                         []() { return _("Options"); })},
+                         gettext_noop("Options"))},
 
    {KeyboardShortcut::kCommonBuildhelp,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame, KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_SPACE),
                          "buildhelp",
-                         []() { return _("Toggle Building Spaces"); })},
+                         gettext_noop("Toggle Building Spaces"))},
    {KeyboardShortcut::kCommonMinimap,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame, KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_m),
                          "minimap",
-                         []() { return _("Toggle Minimap"); })},
+                         gettext_noop("Toggle Minimap"))},
    {KeyboardShortcut::kCommonEncyclopedia,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame, KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_F1),
                          "encyclopedia",
-                         []() { return _("Encyclopedia"); })},
+                         gettext_noop("Encyclopedia"))},
    {KeyboardShortcut::kCommonTextCut, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGlobal},
                                                            keysym(SDLK_x, kDefaultCtrlModifier),
                                                            "cut",
-                                                           []() { return _("Cut Text"); })},
+                                                           gettext_noop("Cut Text"))},
    {KeyboardShortcut::kCommonTextCopy, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGlobal},
                                                             keysym(SDLK_c, kDefaultCtrlModifier),
                                                             "copy",
-                                                            []() { return _("Copy Text"); })},
+                                                            gettext_noop("Copy Text"))},
    {KeyboardShortcut::kCommonTextPaste, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGlobal},
                                                              keysym(SDLK_v, kDefaultCtrlModifier),
                                                              "paste",
-                                                             []() { return _("Paste Text"); })},
+                                                             gettext_noop("Paste Text"))},
    {KeyboardShortcut::kCommonSelectAll, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGlobal},
                                                              keysym(SDLK_a, kDefaultCtrlModifier),
                                                              "selectall",
-                                                             []() { return _("Select All"); })},
+                                                             gettext_noop("Select All"))},
    {KeyboardShortcut::kCommonDeleteItem,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGlobal},
                          keysym(SDLK_DELETE),
                          "delete",
-                         []() { return _("Delete Item"); })},
+                         gettext_noop("Delete Item"))},
    {KeyboardShortcut::kCommonTooltipAccessibilityMode,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGlobal},
                          keysym(SDLK_F2),
                          "tt_access_mode",
-                         []() { return _("Tooltip Accessibility Mode Key"); })},
+                         gettext_noop("Tooltip Accessibility Mode Key"))},
    {KeyboardShortcut::kCommonFullscreen,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGlobal},
                          keysym(SDLK_f, kDefaultCtrlModifier),
                          "fullscreen",
-                         []() { return _("Toggle Fullscreen"); })},
+                         gettext_noop("Toggle Fullscreen"))},
    {KeyboardShortcut::kCommonScreenshot,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGlobal},
                          keysym(SDLK_F11),
                          "screenshot",
-                         []() { return _("Take Screenshot"); })},
+                         gettext_noop("Take Screenshot"))},
+   {KeyboardShortcut::kCommonDebugConsole,
+    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGlobal},
+                         keysym(SDLK_SPACE, kDefaultCtrlModifier | KMOD_SHIFT),
+                         "debugconsole",
+                         gettext_noop("Open the Debug Console (only in debug builds)"))},
+   {KeyboardShortcut::kCommonCheatMode,
+    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGlobal},
+                         keysym(SDLK_BACKSPACE, kDefaultCtrlModifier | KMOD_SHIFT),
+                         "cheatmode",
+                         gettext_noop("Toggle Cheat Mode (only in debug builds)"))},
    {KeyboardShortcut::kCommonSave,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame, KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_s, kDefaultCtrlModifier),
                          "save",
-                         []() { return _("Save"); })},
+                         gettext_noop("Save"))},
    {KeyboardShortcut::kCommonLoad,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame, KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_l, kDefaultCtrlModifier),
                          "load",
-                         []() { return _("Load"); })},
+                         gettext_noop("Load"))},
    {KeyboardShortcut::kCommonExit,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame, KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_q, kDefaultCtrlModifier),
                          "exit",
-                         []() { return _("Exit"); })},
+                         gettext_noop("Exit"))},
    {KeyboardShortcut::kCommonZoomIn,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame, KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_PLUS, kDefaultCtrlModifier),
                          "zoom_in",
-                         []() { return _("Zoom In"); })},
+                         gettext_noop("Zoom In"))},
    {KeyboardShortcut::kCommonZoomOut,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame, KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_MINUS, kDefaultCtrlModifier),
                          "zoom_out",
-                         []() { return _("Zoom Out"); })},
+                         gettext_noop("Zoom Out"))},
    {KeyboardShortcut::kCommonZoomReset,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame, KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_0, kDefaultCtrlModifier),
                          "zoom_reset",
-                         []() { return _("Reset Zoom"); })},
-   {KeyboardShortcut::kCommonQuicknavGUI,
-    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
-                         keysym(SDLK_v),
-                         "quicknav_gui",
-                         []() { return _("Toggle Quick Navigation"); })},
+                         gettext_noop("Reset Zoom"))},
    {KeyboardShortcut::kCommonQuicknavNext,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame, KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_PERIOD),
                          "quicknav_next",
-                         []() { return _("Jump to Next Location"); })},
+                         gettext_noop("Jump to Next Location"))},
    {KeyboardShortcut::kCommonQuicknavPrev,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame, KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_COMMA),
                          "quicknav_prev",
-                         []() { return _("Jump to Previous Location"); })},
+                         gettext_noop("Jump to Previous Location"))},
 
    {KeyboardShortcut::kEditorNewMap, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                                                           keysym(SDLK_n, kDefaultCtrlModifier),
                                                           "editor_new_map",
-                                                          []() { return _("New Map"); })},
+                                                          gettext_noop("New Map"))},
    {KeyboardShortcut::kEditorNewRandomMap,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_r, kDefaultCtrlModifier),
                          "editor_new_random_map",
-                         []() { return _("New Random Map"); })},
+                         gettext_noop("New Random Map"))},
+   {KeyboardShortcut::kEditorUploadMap, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
+                                                             keysym(SDLK_u, kDefaultCtrlModifier),
+                                                             "editor_upload_map",
+                                                             gettext_noop("Publish Map Online"))},
    {KeyboardShortcut::kEditorMapOptions,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_o, kDefaultCtrlModifier),
                          "editor_mapoptions",
-                         []() { return _("Map Options"); })},
+                         gettext_noop("Map Options"))},
    {KeyboardShortcut::kEditorUndo, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                                                         keysym(SDLK_z, kDefaultCtrlModifier),
                                                         "editor_undo",
-                                                        []() { return _("Undo"); })},
+                                                        gettext_noop("Undo"))},
    {KeyboardShortcut::kEditorRedo, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                                                         keysym(SDLK_y, kDefaultCtrlModifier),
                                                         "editor_redo",
-                                                        []() { return _("Redo"); })},
+                                                        gettext_noop("Redo"))},
    {KeyboardShortcut::kEditorTools, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                                                          keysym(SDLK_t),
                                                          "editor_tools",
-                                                         []() { return _("Tools"); })},
+                                                         gettext_noop("Toggle Tools Menu"))},
    {KeyboardShortcut::kEditorChangeHeight,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_h, KMOD_SHIFT),
                          "editor_change_height",
-                         []() { return _("Change Height Tool"); })},
+                         gettext_noop("Change Height Tool"))},
    {KeyboardShortcut::kEditorRandomHeight,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_b, KMOD_SHIFT),
                          "editor_random_height",
-                         []() { return _("Random Height Tool"); })},
+                         gettext_noop("Random Height Tool"))},
    {KeyboardShortcut::kEditorTerrain, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                                                            keysym(SDLK_t, KMOD_SHIFT),
                                                            "editor_terrain",
-                                                           []() { return _("Terrain Tool"); })},
+                                                           gettext_noop("Terrain Tool"))},
    {KeyboardShortcut::kEditorImmovables,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_o, KMOD_SHIFT),
                          "editor_immovables",
-                         []() { return _("Immovables Tool"); })},
+                         gettext_noop("Immovables Tool"))},
    {KeyboardShortcut::kEditorAnimals, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                                                            keysym(SDLK_a, KMOD_SHIFT),
                                                            "editor_animals",
-                                                           []() { return _("Animals Tool"); })},
+                                                           gettext_noop("Animals Tool"))},
    {KeyboardShortcut::kEditorResources, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                                                              keysym(SDLK_r, KMOD_SHIFT),
                                                              "editor_resources",
-                                                             []() { return _("Resources Tool"); })},
+                                                             gettext_noop("Resources Tool"))},
    {KeyboardShortcut::kEditorPortSpaces,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_e, KMOD_SHIFT),
                          "editor_port_spaces",
-                         []() { return _("Port Spaces Tool"); })},
+                         gettext_noop("Port Spaces Tool"))},
    {KeyboardShortcut::kEditorInfo, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                                                         keysym(SDLK_i, KMOD_SHIFT),
                                                         "editor_info",
-                                                        []() { return _("Info Tool"); })},
-   {KeyboardShortcut::kEditorMapOrigin,
-    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
-                         keysym(SDLK_0, KMOD_SHIFT),
-                         "editor_map_origin",
-                         []() { return _("Map Origin Tool"); })},
+                                                        gettext_noop("Info Tool"))},
+   {KeyboardShortcut::kEditorMapOrigin, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
+                                                             keysym(SDLK_0, KMOD_SHIFT),
+                                                             "editor_map_origin",
+                                                             gettext_noop("Map Origin Tool"))},
    {KeyboardShortcut::kEditorMapSize, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                                                            keysym(SDLK_z, KMOD_SHIFT),
                                                            "editor_map_size",
-                                                           []() { return _("Map Size Tool"); })},
+                                                           gettext_noop("Map Size Tool"))},
    {KeyboardShortcut::kEditorPlayers, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                                                            keysym(SDLK_p, KMOD_SHIFT),
                                                            "editor_players",
-                                                           []() { return _("Players Menu"); })},
+                                                           gettext_noop("Players Menu"))},
    {KeyboardShortcut::kEditorToolHistory,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_h),
                          "editor_tool_history",
-                         []() { return _("Tool History"); })},
+                         gettext_noop("Tool History"))},
    {KeyboardShortcut::kEditorShowhideGrid,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_g),
                          "editor_showhide_grid",
-                         []() { return _("Toggle Grid"); })},
+                         gettext_noop("Toggle Grid"))},
    {KeyboardShortcut::kEditorShowhideImmovables,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_o),
                          "editor_showhide_immovables",
-                         []() { return _("Toggle Immovables"); })},
+                         gettext_noop("Toggle Immovables"))},
    {KeyboardShortcut::kEditorShowhideCritters,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_a),
                          "editor_showhide_critters",
-                         []() { return _("Toggle Animals"); })},
+                         gettext_noop("Toggle Animals"))},
    {KeyboardShortcut::kEditorShowhideResources,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_r),
                          "editor_showhide_resources",
-                         []() { return _("Toggle Resources"); })},
+                         gettext_noop("Toggle Resources"))},
 
    {KeyboardShortcut::kEditorShowhideMaximumBuildhelp,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_SPACE, KMOD_SHIFT),
                          "editor_showhide_maximum_buildhelp",
-                         []() { return _("Toggle Maximum Build Spaces"); })},
+                         gettext_noop("Toggle Maximum Build Spaces"))},
 
+// toolsize_descr() uses this format string and adds the toolsize
 #define EDITOR_TOOLSIZE(radius, key)                                                               \
 	{                                                                                               \
 		KeyboardShortcut::kEditorToolsize##radius,                                                   \
 		   KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor}, keysym(SDLK_##key),          \
-		                        "editor_toolsize" #radius,                                           \
-		                        []() { return format(_("Set Toolsize to %d"), radius); })            \
+		                        "editor_toolsize" #radius, gettext_noop("Set Toolsize to %d"))       \
 	}
    EDITOR_TOOLSIZE(1, 1),
    EDITOR_TOOLSIZE(2, 2),
@@ -535,238 +571,236 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_o, kDefaultCtrlModifier),
                          "game_sound_options",
-                         []() { return _("Sound Options"); })},
+                         gettext_noop("Sound Options"))},
    {KeyboardShortcut::kInGameRestart,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_r, kDefaultCtrlModifier),
                          "game_restart",
-                         []() { return _("Restart Scenario or Replay"); })},
+                         gettext_noop("Restart Scenario or Replay"))},
    {KeyboardShortcut::kInGameShowhideCensus,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_c),
                          "game_showhide_census",
-                         []() { return _("Toggle Census"); })},
+                         gettext_noop("Toggle Census"))},
    {KeyboardShortcut::kInGameShowhideStats,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_s),
                          "game_showhide_stats",
-                         []() { return _("Toggle Status Labels"); })},
+                         gettext_noop("Toggle Status Labels"))},
    {KeyboardShortcut::kInGameShowhideSoldiers,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_l),
                          "game_showhide_soldiers",
-                         []() { return _("Toggle Soldier Levels"); })},
+                         gettext_noop("Toggle Soldier Levels"))},
    {KeyboardShortcut::kInGameShowhideBuildings,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_u),
                          "game_showhide_buildings",
-                         []() { return _("Toggle Buildings Visibility"); })},
+                         gettext_noop("Toggle Buildings Visibility"))},
    {KeyboardShortcut::kInGameShowhideWorkareas,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_w),
                          "game_showhide_workareas",
-                         []() { return _("Toggle Overlapping Workareas"); })},
+                         gettext_noop("Toggle Overlapping Workareas"))},
    {KeyboardShortcut::kInGameStatsGeneral,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_a),
                          "game_stats_general",
-                         []() { return _("General Statistics"); })},
-   {KeyboardShortcut::kInGameStatsWares,
-    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
-                         keysym(SDLK_p),
-                         "game_stats_wares",
-                         []() { return _("Ware Statistics"); })},
+                         gettext_noop("General Statistics"))},
+   {KeyboardShortcut::kInGameStatsWares, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                              keysym(SDLK_p),
+                                                              "game_stats_wares",
+                                                              gettext_noop("Ware Statistics"))},
    {KeyboardShortcut::kInGameStatsBuildings,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_b),
                          "game_stats_buildings",
-                         []() { return _("Building Statistics"); })},
-   {KeyboardShortcut::kInGameStatsStock,
-    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
-                         keysym(SDLK_i),
-                         "game_stats_stock",
-                         []() { return _("Stock Inventory"); })},
+                         gettext_noop("Building Statistics"))},
+   {KeyboardShortcut::kInGameStatsStock, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                              keysym(SDLK_i),
+                                                              "game_stats_stock",
+                                                              gettext_noop("Stock Inventory"))},
    {KeyboardShortcut::kInGameStatsSoldiers,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_x),
                          "game_stats_soldiers",
-                         []() { return _("Soldier Statistics"); })},
+                         gettext_noop("Soldier Statistics"))},
    {KeyboardShortcut::kInGameStatsSeafaring,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_e),
                          "game_stats_seafaring",
-                         []() { return _("Seafaring Statistics"); })},
+                         gettext_noop("Seafaring Statistics"))},
    {KeyboardShortcut::kInGameObjectives, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                                                               keysym(SDLK_t),
                                                               "game_objectives",
-                                                              []() { return _("Objectives"); })},
+                                                              gettext_noop("Objectives"))},
    {KeyboardShortcut::kInGameDiplomacy,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_d),
                          "game_diplomacy",
-                         []() { return _("Diplomacy"); })},
+                         gettext_noop("Diplomacy"))},
    {KeyboardShortcut::kInGameMessages, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                                                             keysym(SDLK_n),
                                                             "game_messages",
-                                                            []() { return _("Messages"); })},
+                                                            gettext_noop("Messages"))},
    {KeyboardShortcut::kInGameSpeedDown,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_PAGEDOWN),
                          "game_speed_down",
-                         []() { return _("Decrease Game Speed by 1×"); })},
+                         gettext_noop("Decrease Game Speed by 1×"))},
    {KeyboardShortcut::kInGameSpeedDownSlow,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_PAGEDOWN, KMOD_SHIFT),
                          "game_speed_down_slow",
-                         []() { return _("Decrease Game Speed by 0.25×"); })},
+                         gettext_noop("Decrease Game Speed by 0.25×"))},
    {KeyboardShortcut::kInGameSpeedDownFast,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_PAGEDOWN, kDefaultCtrlModifier),
                          "game_speed_down_fast",
-                         []() { return _("Decrease Game Speed by 10×"); })},
+                         gettext_noop("Decrease Game Speed by 10×"))},
    {KeyboardShortcut::kInGameSpeedUp,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_PAGEUP),
                          "game_speed_up",
-                         []() { return _("Increase Game Speed by 1×"); })},
+                         gettext_noop("Increase Game Speed by 1×"))},
    {KeyboardShortcut::kInGameSpeedUpSlow,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_PAGEUP, KMOD_SHIFT),
                          "game_speed_up_slow",
-                         []() { return _("Increase Game Speed by 0.25×"); })},
+                         gettext_noop("Increase Game Speed by 0.25×"))},
    {KeyboardShortcut::kInGameSpeedUpFast,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_PAGEUP, kDefaultCtrlModifier),
                          "game_speed_up_fast",
-                         []() { return _("Increase Game Speed by 10×"); })},
-   {KeyboardShortcut::kInGameSpeedReset,
-    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
-                         keysym(SDLK_PAUSE, KMOD_SHIFT),
-                         "game_speed_reset",
-                         []() { return _("Reset Game Speed"); })},
+                         gettext_noop("Increase Game Speed by 10×"))},
+   {KeyboardShortcut::kInGameSpeedReset, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                              keysym(SDLK_PAUSE, KMOD_SHIFT),
+                                                              "game_speed_reset",
+                                                              gettext_noop("Reset Game Speed"))},
    {KeyboardShortcut::kInGamePause, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                                                          keysym(SDLK_PAUSE),
                                                          "game_pause",
-                                                         []() { return _("Pause"); })},
+                                                         gettext_noop("Pause The Game"))},
    {KeyboardShortcut::kInGameScrollToHQ,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_HOME),
                          "game_hq",
-                         []() { return _("Scroll to Starting Field"); })},
+                         gettext_noop("Scroll to Starting Field"))},
    {KeyboardShortcut::kInGameChat, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                                                         keysym(SDLK_RETURN),
                                                         "game_chat",
-                                                        []() { return _("Chat"); })},
+                                                        gettext_noop("Chat"))},
    {KeyboardShortcut::kInGamePinnedNote,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_F8),
                          "game_pinned_note",
-                         []() { return _("Pinned Note"); })},
+                         gettext_noop("Pinned Note"))},
    {KeyboardShortcut::kInGameMessagesGoto,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_g),
                          "game_msg_goto",
-                         []() { return _("Messages: Go to Location"); })},
+                         gettext_noop("Go to Location"))},
    {KeyboardShortcut::kInGameMessagesFilterAll,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_0, KMOD_ALT),
                          "game_msg_filter_all",
-                         []() { return _("Messages: Show All"); })},
+                         gettext_noop("Show All Messages"))},
    {KeyboardShortcut::kInGameMessagesFilterGeologists,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_1, KMOD_ALT),
                          "game_msg_filter_geo",
-                         []() { return _("Messages: Show Geologists’ Messages"); })},
+                         gettext_noop("Show Geologists’ Messages Only"))},
    {KeyboardShortcut::kInGameMessagesFilterEconomy,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_2, KMOD_ALT),
                          "game_msg_filter_eco",
-                         []() { return _("Messages: Show Economy Messages"); })},
+                         gettext_noop("Show Economy Messages Only"))},
    {KeyboardShortcut::kInGameMessagesFilterSeafaring,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_3, KMOD_ALT),
                          "game_msg_filter_seafaring",
-                         []() { return _("Messages: Show Seafaring Messages"); })},
+                         gettext_noop("Show Seafaring Messages Only"))},
    {KeyboardShortcut::kInGameMessagesFilterWarfare,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_4, KMOD_ALT),
                          "game_msg_filter_warfare",
-                         []() { return _("Messages: Show Military Messages"); })},
+                         gettext_noop("Show Military Messages Only"))},
    {KeyboardShortcut::kInGameMessagesFilterScenario,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_5, KMOD_ALT),
                          "game_msg_filter_scenario",
-                         []() { return _("Messages: Show Scenario Messages"); })},
+                         gettext_noop("Show Scenario Messages Only"))},
    {KeyboardShortcut::kInGameSeafaringstatsGotoShip,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_j),
                          "game_sfstats_goto",
-                         []() { return _("Seafaring: Go to Ship"); })},
+                         gettext_noop("Go to Ship"))},
    {KeyboardShortcut::kInGameSeafaringstatsWatchShip,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_f),
                          "game_sfstats_watch",
-                         []() { return _("Seafaring: Watch Ship"); })},
+                         gettext_noop("Watch Ship"))},
    {KeyboardShortcut::kInGameSeafaringstatsOpenShipWindow,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_o),
                          "game_sfstats_open",
-                         []() { return _("Seafaring: Open Ship Window"); })},
+                         gettext_noop("Open Ship Window"))},
    {KeyboardShortcut::kInGameSeafaringstatsOpenShipWindowAndGoto,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_o, KMOD_SHIFT),
                          "game_sfstats_open_goto",
-                         []() { return _("Seafaring: Open Ship Window And Go to Ship"); })},
+                         gettext_noop("Open Ship Window And Go to Ship"))},
    {KeyboardShortcut::kInGameSeafaringstatsFilterAll,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_0, KMOD_SHIFT),
                          "game_sfstats_filter_all",
-                         []() { return _("Seafaring: Show All Ships"); })},
+                         gettext_noop("Show All Ships"))},
    {KeyboardShortcut::kInGameSeafaringstatsFilterIdle,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_1, KMOD_SHIFT),
                          "game_sfstats_filter_idle",
-                         []() { return _("Seafaring: Show Idle Ships"); })},
+                         gettext_noop("Show Idle Ships"))},
    {KeyboardShortcut::kInGameSeafaringstatsFilterShipping,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_2, KMOD_SHIFT),
                          "game_sfstats_filter_ship",
-                         []() { return _("Seafaring: Show Transport Ships"); })},
+                         gettext_noop("Show Transport Ships"))},
    {KeyboardShortcut::kInGameSeafaringstatsFilterExpWait,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_3, KMOD_SHIFT),
                          "game_sfstats_filter_wait",
-                         []() { return _("Seafaring: Show Waiting Expeditions"); })},
+                         gettext_noop("Show Waiting Expeditions"))},
    {KeyboardShortcut::kInGameSeafaringstatsFilterExpScout,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_4, KMOD_SHIFT),
                          "game_sfstats_filter_scout",
-                         []() { return _("Seafaring: Show Scouting Expeditions"); })},
+                         gettext_noop("Show Scouting Expeditions"))},
    {KeyboardShortcut::kInGameSeafaringstatsFilterExpPortspace,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_5, KMOD_SHIFT),
                          "game_sfstats_filter_port",
-                         []() { return _("Seafaring: Show Expeditions with Port Spaces"); })},
+                         gettext_noop("Show Expeditions with Port Spaces"))},
    {KeyboardShortcut::kInGameSeafaringstatsFilterWarship,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_6, KMOD_SHIFT),
                          "game_sfstats_filter_warship",
-                         []() { return _("Seafaring: Show Warships"); })},
+                         gettext_noop("Show Warships"))},
    {KeyboardShortcut::kInGameSeafaringstatsFilterRefitting,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_7, KMOD_SHIFT),
                          "game_sfstats_filter_refitting",
-                         []() { return _("Seafaring: Show Ships Being Refitted"); })},
+                         gettext_noop("Show Ships Being Refitted"))},
+
+// quicknav_descr() uses these format strings and adds the landmark number
 #define QUICKNAV(i)                                                                                \
 	{KeyboardShortcut::kInGameQuicknavSet##i,                                                       \
 	 KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},                                     \
 	                      keysym(SDLK_##i, kDefaultCtrlModifier), "game_quicknav_set_" #i,          \
-	                      []() { return format(_("Set Landmark #%d"), i); })},                      \
+	                      gettext_noop("Set Landmark #%d"))},                                       \
 	{                                                                                               \
 		KeyboardShortcut::kInGameQuicknavGoto##i,                                                    \
 		   KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_##i),              \
-		                        "game_quicknav_goto_" #i,                                            \
-		                        []() { return format(_("Go To Landmark #%d"), i); })                 \
+		                        "game_quicknav_goto_" #i, gettext_noop("Go To Landmark #%d"))        \
 	}
    QUICKNAV(1),
    QUICKNAV(2),
@@ -780,7 +814,235 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
 #undef QUICKNAV
 };
 
+bool is_real(const KeyboardShortcut id) {
+	auto it = shortcuts_.find(id);
+	return it != shortcuts_.end();
+}
+
+bool is_debug_only(KeyboardShortcut id) {
+	return id == KeyboardShortcut::kCommonDebugConsole || id == KeyboardShortcut::kCommonCheatMode;
+}
+
+static const std::map<KeyboardShortcut, KeyboardShortcutAlias> shortcut_aliases_ = {
+   {KeyboardShortcut::kEditorLoad,
+    /** TRANSLATORS: This is the helptext for an access key combination. */
+    KeyboardShortcutAlias(KeyboardShortcut::kCommonLoad, gettext_noop("Load Map"))},
+   {KeyboardShortcut::kEditorSave,
+    /** TRANSLATORS: This is the helptext for an access key combination. */
+    KeyboardShortcutAlias(KeyboardShortcut::kCommonSave, gettext_noop("Save Map"))},
+   {KeyboardShortcut::kEditorExit,
+    /** TRANSLATORS: This is the helptext for an access key combination. */
+    KeyboardShortcutAlias(KeyboardShortcut::kCommonExit, gettext_noop("Exit Editor"))},
+   {KeyboardShortcut::kEditorHelp,
+    /** TRANSLATORS: This is the helptext for an access key combination. */
+    KeyboardShortcutAlias(KeyboardShortcut::kCommonEncyclopedia, gettext_noop("Help"))},
+
+   {KeyboardShortcut::kEditorShowhideBuildhelp,
+    KeyboardShortcutAlias(KeyboardShortcut::kCommonBuildhelp)},
+   {KeyboardShortcut::kEditorMinimap, KeyboardShortcutAlias(KeyboardShortcut::kCommonMinimap)},
+   {KeyboardShortcut::kEditorQuicknavPrev,
+    KeyboardShortcutAlias(KeyboardShortcut::kCommonQuicknavPrev)},
+   {KeyboardShortcut::kEditorQuicknavNext,
+    KeyboardShortcutAlias(KeyboardShortcut::kCommonQuicknavNext)},
+
+   {KeyboardShortcut::kInGameLoad,
+    /** TRANSLATORS: This is the helptext for an access key combination. */
+    KeyboardShortcutAlias(KeyboardShortcut::kCommonLoad, gettext_noop("Load Game"))},
+   {KeyboardShortcut::kInGameSave,
+    /** TRANSLATORS: This is the helptext for an access key combination. */
+    KeyboardShortcutAlias(KeyboardShortcut::kCommonSave, gettext_noop("Save Game"))},
+   {KeyboardShortcut::kInGameExit,
+    /** TRANSLATORS: This is the helptext for an access key combination. */
+    KeyboardShortcutAlias(KeyboardShortcut::kCommonExit, gettext_noop("Exit Game"))},
+   {KeyboardShortcut::kInGameEncyclopedia,
+    KeyboardShortcutAlias(KeyboardShortcut::kCommonEncyclopedia)},
+
+   {KeyboardShortcut::kInGameShowhideBuildhelp,
+    KeyboardShortcutAlias(KeyboardShortcut::kCommonBuildhelp)},
+   {KeyboardShortcut::kInGameMinimap, KeyboardShortcutAlias(KeyboardShortcut::kCommonMinimap)},
+   {KeyboardShortcut::kInGameQuicknavPrev,
+    KeyboardShortcutAlias(KeyboardShortcut::kCommonQuicknavPrev)},
+   {KeyboardShortcut::kInGameQuicknavNext,
+    KeyboardShortcutAlias(KeyboardShortcut::kCommonQuicknavNext)}};
+
+// Keyboard control additional help texts
+namespace {
+
+std::string help_move_map() {
+	std::string rv;
+	/** TRANSLATORS: This is an access key combination. */
+	rv += as_definition_line(pgettext("hotkey", "Arrow keys"),
+	                         /** TRANSLATORS: This is the helptext for an access key combination. */
+	                         _("Move the map"));
+	/** TRANSLATORS: This is an access key combination. */
+	rv += as_definition_line(pgettext("hotkey", "Ctrl + Arrow keys"),
+	                         /** TRANSLATORS: This is the helptext for an access key combination. */
+	                         _("Move the map fast"));
+	/** TRANSLATORS: This is an access key combination. */
+	rv += as_definition_line(pgettext("hotkey", "Shift + Arrow keys"),
+	                         /** TRANSLATORS: This is the helptext for an access key combination. */
+	                         _("Move the map slowly"));
+	return rv;
+}
+
+std::string get_related_hotkeys_help(KeyboardShortcut first,
+                                     int step,
+                                     int n_keys,
+                                     const std::string& description);
+
+std::string help_quicknav() {
+	std::string rv = get_related_hotkeys_help(
+	   /** TRANSLATORS: This is the helptext for an access key combination. */
+	   KeyboardShortcut::kInGameQuicknavSet1, 2, 9, _("Remember current location"));
+	rv += get_related_hotkeys_help(
+	   /** TRANSLATORS: This is the helptext for an access key combination. */
+	   KeyboardShortcut::kInGameQuicknavGoto1, 2, 9, _("Go to previously remembered location"));
+	return rv;
+}
+
+}  // namespace
+
+static const std::map<KeyboardShortcut, const std::function<std::string()>>
+   controls_special_entries_{{KeyboardShortcut::kEditor_Special_MapMove, help_move_map},
+                             {KeyboardShortcut::kInGame_Special_MapMove, help_move_map},
+                             {KeyboardShortcut::kInGame_Special_Quicknav, help_quicknav}};
+
+// Help formatting functions
+namespace {
+
+std::string get_shortcut_help_line(const KeyboardShortcut id) {
+	if (auto it = controls_special_entries_.find(id); it != controls_special_entries_.end()) {
+		return it->second();
+	}
+
+	KeyboardShortcut real_id = id;
+	std::string description;
+
+	if (auto it = shortcut_aliases_.find(id); it != shortcut_aliases_.end()) {
+		// This is an alias
+		real_id = it->second.real_shortcut;
+		description = it->second.translated_descname();
+	} else {
+		assert(is_real(id));
+		// Not using to_string(), because we don't want the prefixes for
+		// message- and ship window shortcuts.
+		description = _(shortcuts_.at(id).descname);
+	}
+
+	return as_definition_line(shortcut_string_for(real_id, true), description);
+}
+
+std::string get_shortcut_range_help(const KeyboardShortcut start, const KeyboardShortcut end) {
+	std::string rv;
+	for (KeyboardShortcut id = start; id <= end; ++id) {
+		rv += get_shortcut_help_line(id);
+	}
+	return rv;
+}
+
+std::string get_related_hotkeys_help(const KeyboardShortcut first,
+                                     const int step,
+                                     const int n_keys,
+                                     const std::string& description) {
+	/** TRANSLATORS: Separator for a list of hotkeys  */
+	const std::string separator_format(pgettext("hotkey", "%1$s / %2$s"));
+
+	std::string keys_list;
+	std::string current;
+	for (int i = 0; i < n_keys; ++i) {
+		current = shortcut_string_for(first + i * step, true);
+		if (i == 0) {
+			keys_list = current;
+		} else {
+			keys_list = format(separator_format, keys_list, current);
+		}
+	}
+	return as_definition_line(keys_list, description);
+}
+
+}  // namespace
+
+std::string get_ingame_shortcut_help() {
+	std::string rv(as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, _("Keyboard Shortcuts")));
+	rv +=
+	   get_shortcut_range_help(KeyboardShortcut::kInGame_Begin, KeyboardShortcut::kInGameMain_End);
+	rv += get_shortcut_range_help(
+	   KeyboardShortcut::kCommonGeneral_Begin, KeyboardShortcut::kCommonGeneral_End);
+#ifndef NDEBUG
+	rv += get_shortcut_help_line(KeyboardShortcut::kCommonDebugConsole);
+	rv += get_shortcut_help_line(KeyboardShortcut::kCommonCheatMode);
+#endif
+
+	/** TRANSLATORS: Section heading in "Controls" help */
+	rv += as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, _("Message Window"));
+	rv += get_shortcut_range_help(
+	   KeyboardShortcut::kInGameMessages_Begin, KeyboardShortcut::kInGameMessages_End);
+
+	/** TRANSLATORS: Section heading in "Controls" help */
+	rv += as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, _("Ship Statistics"));
+	rv += get_shortcut_range_help(
+	   KeyboardShortcut::kInGameSeafaringstats_Begin, KeyboardShortcut::kInGameSeafaringstats_End);
+
+	return rv;
+}
+
+std::vector<FastplaceShortcut> get_active_fastplace_shortcuts(const std::string& tribe) {
+	std::vector<FastplaceShortcut> rv;
+	for (KeyboardShortcut id = KeyboardShortcut::kFastplace_Begin;
+	     id <= KeyboardShortcut::kFastplace_End; ++id) {
+		if (get_shortcut(id).sym == SDLK_UNKNOWN) {
+			continue;
+		}
+		auto fastplace = get_fastplace_shortcuts(id);
+		auto it = fastplace.find(tribe);
+		if (it == fastplace.end()) {
+			continue;
+		}
+		rv.emplace_back(FastplaceShortcut{shortcut_string_for(id, true), it->second});
+	}
+	return rv;
+}
+
+std::string get_editor_shortcut_help() {
+	std::string rv(as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, _("Keyboard Shortcuts")));
+	rv +=
+	   get_shortcut_range_help(KeyboardShortcut::kEditor_Begin, KeyboardShortcut::kEditorMain_End);
+	rv += get_shortcut_range_help(
+	   KeyboardShortcut::kCommonGeneral_Begin, KeyboardShortcut::kCommonGeneral_End);
+#ifndef NDEBUG
+	rv += get_shortcut_help_line(KeyboardShortcut::kCommonDebugConsole);
+#endif
+
+	/** TRANSLATORS: Heading in the editor keyboard shortcuts help */
+	rv += as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, pgettext("editor", "Tools"));
+	rv += get_shortcut_range_help(
+	   KeyboardShortcut::kEditorTools_Begin, KeyboardShortcut::kEditorTools_End);
+	/** TRANSLATORS: This is the helptext for an access key combination. */
+	rv += get_related_hotkeys_help(KeyboardShortcut::kEditorToolsize1, 1, 10, _("Change tool size"));
+
+	// Mouse controls for tools are included here because they belong to the Tools section
+	rv += as_definition_line(
+	   /** TRANSLATORS: This is an access key combination. */
+	   pgettext("hotkey", "Click"),
+	   /** TRANSLATORS: This is the helptext for an access key combination. */
+	   _("Place new elements on the map, or increase map elements by the value selected by "
+	     "‘Increase/Decrease value’"));
+	rv += as_definition_line(
+	   /** TRANSLATORS: This is an access key combination. */
+	   pgettext("hotkey", "Shift + Click"),
+	   /** TRANSLATORS: This is the helptext for an access key combination. */
+	   _("Remove elements from the map, or decrease map elements by the value selected by "
+	     "‘Increase/Decrease value’"));
+	/** TRANSLATORS: This is an access key combination. */
+	rv += as_definition_line(pgettext("hotkey", "Ctrl + Click"),
+	                         /** TRANSLATORS: This is the helptext for an access key combination. */
+	                         _("Set map elements to the value selected by ‘Set Value’"));
+
+	return rv;
+}
+
 void unset_shortcut(const KeyboardShortcut id) {
+	assert(is_real(id));
 	set_shortcut(id, keysym(SDLK_UNKNOWN), nullptr);
 }
 
@@ -825,15 +1087,71 @@ const std::string& get_fastplace_group_name(const KeyboardShortcut id) {
 	return shortcuts_.at(id).internal_name;
 }
 
+// Keyboard shortcut description special cases
+namespace {
+
+std::string toolsize_descr(const KeyboardShortcut id) {
+	assert(id >= KeyboardShortcut::kEditorToolsize1 && id <= KeyboardShortcut::kEditorToolsize10);
+	const uint16_t i = id - KeyboardShortcut::kEditorToolsize1 + 1;
+	return format(_(shortcuts_.at(id).descname), i);
+}
+
+std::string quicknav_descr(const KeyboardShortcut id) {
+	assert(id >= KeyboardShortcut::kInGameQuicknavSet1 &&
+	       id <= KeyboardShortcut::kInGameQuicknavGoto9);
+	uint16_t i = id - KeyboardShortcut::kInGameQuicknavSet1;
+	if (i % 2 == 0) {
+		// id is Set Quicknav
+		i = i / 2 + 1;
+	} else {
+		// id is Goto Quicknav
+		i = (i + 1) / 2;
+	}
+	return format(_(shortcuts_.at(id).descname), i);
+}
+
+std::string fastplace_descr(const KeyboardShortcut id) {
+	assert(id >= KeyboardShortcut::kFastplace_Begin + kFastplaceDefaults.size() &&
+	       id <= KeyboardShortcut::kFastplace_End);
+	const uint16_t i = id - KeyboardShortcut::kFastplace_Begin - kFastplaceDefaults.size() + 1;
+	return format(_(shortcuts_.at(id).descname), i);
+}
+
+}  // namespace
+
 std::string to_string(const KeyboardShortcut id) {
-	return shortcuts_.at(id).descname();
+	assert(is_real(id));
+	if (id >= KeyboardShortcut::kEditorToolsize1 && id <= KeyboardShortcut::kEditorToolsize10) {
+		return toolsize_descr(id);
+	}
+	if (id >= KeyboardShortcut::kInGameQuicknavSet1 &&
+	    id <= KeyboardShortcut::kInGameQuicknavGoto9) {
+		return quicknav_descr(id);
+	}
+	if (id >= KeyboardShortcut::kInGameMessages_Begin &&
+	    id <= KeyboardShortcut::kInGameMessages_End) {
+		/** TRANSLATORS: prefix for message window shortcuts in keyboard options */
+		return format(pgettext("hotkey", "Messages: %s"), _(shortcuts_.at(id).descname));
+	}
+	if (id >= KeyboardShortcut::kInGameSeafaringstats_Begin &&
+	    id <= KeyboardShortcut::kInGameSeafaringstats_End) {
+		/** TRANSLATORS: prefix for seafaring statistics window shortcuts in keyboard options */
+		return format(pgettext("hotkey", "Seafaring: %s"), _(shortcuts_.at(id).descname));
+	}
+	if (id >= KeyboardShortcut::kFastplace_Begin + kFastplaceDefaults.size() &&
+	    id <= KeyboardShortcut::kFastplace_End) {
+		return fastplace_descr(id);
+	}
+	return _(shortcuts_.at(id).descname);
 }
 
 SDL_Keysym get_default_shortcut(const KeyboardShortcut id) {
+	assert(is_real(id));
 	return shortcuts_.at(id).default_shortcut;
 }
 
 static void write_shortcut(const KeyboardShortcut id, const SDL_Keysym code) {
+	assert(is_real(id));
 	set_config_int("keyboard_sym", shortcuts_.at(id).internal_name, code.sym);
 	set_config_int("keyboard_mod", shortcuts_.at(id).internal_name, code.mod);
 }
@@ -850,11 +1168,21 @@ static bool shared_scope(const std::set<KeyboardShortcutInfo::Scope>& scopes,
 }
 
 bool set_shortcut(const KeyboardShortcut id, const SDL_Keysym code, KeyboardShortcut* conflict) {
+	assert(is_real(id));
 	const std::set<KeyboardShortcutInfo::Scope>& scopes = shortcuts_.at(id).scopes;
 
 	for (auto& pair : shortcuts_) {
 		if (pair.first != id && shared_scope(scopes, pair.second) &&
 		    matches_shortcut(pair.first, code)) {
+#ifdef NDEBUG
+			// Release builds are not supposed to know about debug features, so we silently
+			// clear their shortcuts on conflict
+			if (is_debug_only(pair.first)) {
+				shortcuts_.at(pair.first).current_shortcut = keysym(SDLK_UNKNOWN);
+				write_shortcut(pair.first, keysym(SDLK_UNKNOWN));
+				continue;
+			}
+#endif
 			if (conflict != nullptr) {
 				*conflict = pair.first;
 			}
@@ -868,6 +1196,7 @@ bool set_shortcut(const KeyboardShortcut id, const SDL_Keysym code, KeyboardShor
 }
 
 SDL_Keysym get_shortcut(const KeyboardShortcut id) {
+	assert(is_real(id));
 	return shortcuts_.at(id).current_shortcut;
 }
 
@@ -977,9 +1306,8 @@ bool matches_shortcut(const KeyboardShortcut id, const SDL_Keycode code, const i
 }
 
 std::string matching_fastplace_shortcut(const SDL_Keysym key, const std::string& tribename) {
-	for (int i = static_cast<int>(KeyboardShortcut::kFastplace_Begin);
-	     i < static_cast<int>(KeyboardShortcut::kFastplace_End); ++i) {
-		const KeyboardShortcut id = static_cast<KeyboardShortcut>(i);
+	for (KeyboardShortcut id = KeyboardShortcut::kFastplace_Begin;
+	     id <= KeyboardShortcut::kFastplace_End; ++id) {
 		if (matches_shortcut(id, key)) {
 			const KeyboardShortcutInfo& info = shortcuts_.at(id);
 			const auto it = info.fastplace.find(tribename);
@@ -1127,16 +1455,14 @@ std::string shortcut_string_for(const SDL_Keysym sym, const bool rt_escape) {
 static void init_fastplace_shortcuts(const bool force_defaults) {
 	int counter = 0;
 	for (KeyboardShortcut k = KeyboardShortcut::kFastplace_Begin;
-	     k <= KeyboardShortcut::kFastplace_End;
-	     k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {
+	     k <= KeyboardShortcut::kFastplace_End; ++k) {
 		if (force_defaults) {
 			shortcuts_.erase(k);
 		} else if (shortcuts_.count(k) != 0u) {
 			continue;
 		}
 
-		const unsigned off =
-		   static_cast<uint16_t>(k) - static_cast<uint16_t>(KeyboardShortcut::kFastplace_Begin);
+		const unsigned off = k - KeyboardShortcut::kFastplace_Begin;
 		if (off < kFastplaceDefaults.size()) {
 			shortcuts_.emplace(k, kFastplaceDefaults[off]);
 		} else {
@@ -1144,7 +1470,9 @@ static void init_fastplace_shortcuts(const bool force_defaults) {
 			shortcuts_.emplace(
 			   k, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_UNKNOWN),
 			                           format("%scustom_%i", kFastplaceGroupPrefix, counter),
-			                           [counter]() { return format(_("Fastplace #%i"), counter); }));
+			                           // fastplace_descr() uses this format string and adds the
+			                           // fastplace number
+			                           gettext_noop("Fastplace #%i")));
 		}
 	}
 }
@@ -1156,9 +1484,8 @@ void init_fastplace_default_shortcuts(
 	std::set<std::string> used_keys;
 #endif
 
-	for (int i = static_cast<int>(KeyboardShortcut::kFastplace_Begin);
-	     i < static_cast<int>(KeyboardShortcut::kFastplace_End); ++i) {
-		const KeyboardShortcut id = static_cast<KeyboardShortcut>(i);
+	for (KeyboardShortcut id = KeyboardShortcut::kFastplace_Begin;
+	     id <= KeyboardShortcut::kFastplace_End; ++id) {
 		KeyboardShortcutInfo& info = shortcuts_.at(id);
 
 #ifndef NDEBUG
@@ -1186,8 +1513,10 @@ void init_fastplace_default_shortcuts(
 
 void init_shortcuts(const bool force_defaults) {
 	init_fastplace_shortcuts(force_defaults);
-	for (KeyboardShortcut k = KeyboardShortcut::k_Begin; k <= KeyboardShortcut::k_End;
-	     k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {
+	for (KeyboardShortcut k = KeyboardShortcut::k_Begin; k <= KeyboardShortcut::k_End; ++k) {
+		if (!is_real(k)) {
+			continue;
+		}
 		shortcuts_.at(k).current_shortcut = get_default_shortcut(k);
 		if (force_defaults) {
 			write_shortcut(k, shortcuts_.at(k).current_shortcut);
