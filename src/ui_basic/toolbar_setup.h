@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2023 by the Widelands Development Team
+ * Copyright (C) 2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,5 +16,27 @@
  *
  */
 
-#include "base/test.h"
-TEST_EXECUTABLE(scripting)
+#ifndef WL_UI_BASIC_TOOLBAR_SETUP_H
+#define WL_UI_BASIC_TOOLBAR_SETUP_H
+
+#include <cstdint>
+
+namespace UI {
+
+[[nodiscard]] int main_toolbar_button_size();
+
+[[nodiscard]] bool main_toolbar_at_bottom();
+
+constexpr uint8_t kMaxPopupMessages = 4;
+
+enum ToolbarDisplayMode {
+	kCmdSwap = 1,
+	kPinned = 2,
+	kMinimized = 4,
+	kOnMouse_Visible = 8,
+	kOnMouse_Hidden = 16
+};
+
+}  // namespace UI
+
+#endif  // end of include guard: WL_UI_BASIC_TOOLBAR_SETUP_H

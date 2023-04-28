@@ -72,6 +72,7 @@
 #include "sound/sound_handler.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
+#include "ui_basic/toolbar_setup.h"
 #include "ui_fsmenu/addons/login_box.h"
 #include "ui_fsmenu/addons/progress.h"
 #include "wlapplication_mousewheel_options.h"
@@ -90,9 +91,9 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                "dropdown_menu_main",
                0,
                0,
-               MainToolbar::kButtonSize,
+               UI::main_toolbar_button_size(),
                10,
-               MainToolbar::kButtonSize,
+               UI::main_toolbar_button_size(),
                as_tooltip_text_with_hotkey(
                   /** TRANSLATORS: Title for the main menu button in the editor */
                   _("Main Menu"),
@@ -105,12 +106,12 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                "dropdown_menu_tools",
                0,
                0,
-               MainToolbar::kButtonSize,
+               UI::main_toolbar_button_size(),
                12,
-               MainToolbar::kButtonSize,
+               UI::main_toolbar_button_size(),
                as_tooltip_text_with_hotkey(
                   /** TRANSLATORS: Title for the tool menu button in the editor */
-                  _("Tools"),
+                  pgettext("editor", "Tools"),
                   shortcut_string_for(KeyboardShortcut::kEditorTools, true),
                   UI::PanelStyle::kWui),
                UI::DropdownType::kPictorialMenu,
@@ -121,9 +122,9 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                    "dropdown_menu_showhide",
                    0,
                    0,
-                   MainToolbar::kButtonSize,
+                   UI::main_toolbar_button_size(),
                    10,
-                   MainToolbar::kButtonSize,
+                   UI::main_toolbar_button_size(),
                    /** TRANSLATORS: Title for a menu button in the editor. This menu will show/hide
                       building spaces, animals, immovables, resources */
                    _("Show / Hide"),
@@ -230,6 +231,11 @@ void EditorInteractive::add_main_menu() {
 	              g_image_cache->get("images/wui/editor/menus/save_map.png"), false, "",
 	              shortcut_string_for(KeyboardShortcut::kCommonSave, false));
 
+	/** TRANSLATORS: An entry in the editor's main menu */
+	mainmenu_.add(_("Publish Map Online…"), MainMenuEntry::kUploadAsAddOn,
+	              g_image_cache->get("images/wui/editor/menus/upload.png"), false, "",
+	              shortcut_string_for(KeyboardShortcut::kEditorUploadMap, false));
+
 	menu_windows_.mapoptions.open_window = [this] {
 		new MainMenuMapOptions(*this, menu_windows_.mapoptions);
 	};
@@ -237,10 +243,6 @@ void EditorInteractive::add_main_menu() {
 	mainmenu_.add(_("Map Options"), MainMenuEntry::kMapOptions,
 	              g_image_cache->get("images/wui/editor/menus/map_options.png"), false, "",
 	              shortcut_string_for(KeyboardShortcut::kEditorMapOptions, false));
-
-	/** TRANSLATORS: An entry in the editor's main menu */
-	mainmenu_.add(_("Publish Map Online…"), MainMenuEntry::kUploadAsAddOn,
-	              g_image_cache->get("images/wui/editor/menus/upload.png"));
 
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Exit Editor"), MainMenuEntry::kExitEditor,
@@ -908,6 +910,10 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			menu_windows_.newrandommap.toggle();
 			return true;
 		}
+		if (matches_shortcut(KeyboardShortcut::kEditorUploadMap, code)) {
+			publish_map();
+			return true;
+		}
 		if (matches_shortcut(KeyboardShortcut::kEditorMapOptions, code)) {
 			menu_windows_.mapoptions.toggle();
 			return true;
@@ -994,9 +1000,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		}
 
 		for (int i = 0; i < 10; ++i) {
-			if (matches_shortcut(static_cast<KeyboardShortcut>(
-			                        static_cast<uint16_t>(KeyboardShortcut::kEditorToolsize1) + i),
-			                     code)) {
+			if (matches_shortcut(KeyboardShortcut::kEditorToolsize1 + i, code)) {
 				set_sel_radius_and_update_menu(i, get_sel_gap_percent());
 				return true;
 			}
