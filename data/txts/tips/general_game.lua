@@ -99,6 +99,10 @@ tips = {
       seconds = 4
    },
    {
+      text = _("If you play on a laptop with a touchpad, you can assign functionality to touchpad scrolling in the ‘Options’ → ‘Edit keyboard and mouse actions’ menu. For example, moving the map view can be much more comfortable by scrolling instead of dragging with the right mouse button."),
+      seconds = 8
+   },
+   {
       text = _("When a building is destroyed, its workers will start looking for a nearby flag from which they can move by road to a connected warehouse. If there are no such flags in the vicinity, they will keep wandering around and eventually die."),
       seconds = 7
    },

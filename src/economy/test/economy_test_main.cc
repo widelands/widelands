@@ -17,4 +17,4 @@
  */
 
 #include "base/test.h"
-TEST_EXECUTABLE(economy, true)
+TEST_EXECUTABLE(economy)
