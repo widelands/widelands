@@ -143,6 +143,8 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
      ibase_(ibase),
      owner_button_impl_(ibase.egbase().is_game() ? MiniMapLayer::Owner :
                                                    MiniMapLayer::StartingPositions),
+	additional_button_impl_(ibase.egbase().is_game() ? MiniMapLayer::Traffic :
+                                                   MiniMapLayer::Artifacts),
      view_(*this, &registry->minimap_layers, &registry->minimap_type, 0, 0, 0, 0, ibase),
 
      button_terrn(this,
@@ -211,15 +213,15 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                   _("Ships"),
                   UI::Button::VisualState::kRaised,
                   UI::Button::ImageMode::kUnscaled),
-     button_traff(this,
-                  "traffic",
+     button_addtn(this,
+                  "traffic_artifacts",
                   but_w() * 2,
                   view_.get_h() + but_h(),
                   but_w(),
                   but_h(),
                   UI::ButtonStyle::kWuiSecondary,
-                  g_image_cache->get("images/wui/buildings/menu_list_workers.png"),
-                  _("High Traffic"),
+                  ibase.egbase().is_game() ? g_image_cache->get("images/wui/buildings/menu_list_workers.png") : g_image_cache->get("images/wui/minimap/button_artifacts.png"),
+                  ibase.egbase().is_game() ? _("High Traffic") : _("Artifacts"),
                   UI::Button::VisualState::kRaised,
                   UI::Button::ImageMode::kUnscaled),
      button_zoom(this,
@@ -239,7 +241,7 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
 	button_roads.sigclicked.connect([this]() { toggle(MiniMapLayer::Road); });
 	button_bldns.sigclicked.connect([this]() { toggle(MiniMapLayer::Building); });
 	button_ships.sigclicked.connect([this]() { toggle(MiniMapLayer::Ship); });
-	button_traff.sigclicked.connect([this]() { toggle(MiniMapLayer::Traffic); });
+	button_addtn.sigclicked.connect([this]() { toggle(MiniMapLayer::Traffic); });
 	button_zoom.sigclicked.connect([this]() { toggle(MiniMapLayer::Zoom2); });
 
 	check_boundaries();
@@ -288,9 +290,9 @@ void MiniMap::resize() {
 	button_bldns.set_pos(
 	   Vector2i(but_w() * (4 - 3 * height_offset), view_.get_h() + but_h() * height_offset));
 	button_bldns.set_size(but_w(), but_h());
-	button_traff.set_pos(
+	button_addtn.set_pos(
 	   Vector2i(but_w() * (5 - 3 * height_offset), view_.get_h() + but_h() * height_offset));
-	button_traff.set_size(but_w(), but_h());
+	button_addtn.set_size(but_w(), but_h());
 	button_ships.set_pos(
 	   Vector2i(but_w() * (6 - 3 * 2 * height_offset), view_.get_h() + but_h() * 2 * height_offset));
 	button_ships.set_size(but_w(), but_h());
@@ -316,7 +318,7 @@ void MiniMap::update_button_permpressed() {
 	button_roads.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Road) != 0);
 	button_bldns.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Building) != 0);
 	button_ships.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Ship) != 0);
-	button_traff.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Traffic) != 0);
+	button_addtn.set_perm_pressed((*view_.minimap_layers_ & additional_button_impl_) != 0);
 	button_zoom.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Zoom2) != 0);
 }
 
