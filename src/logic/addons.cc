@@ -403,7 +403,8 @@ bool AddOnInfo::matches_widelands_version(const bool warn_future) const {
 	// It is the responsibility of testers of development versions to always
 	// use the latest one, and to be prepared for failures in any case.
 	const size_t tilde = wl_version.find('~');
-	const AddOnVersion wl = string_to_version(tilde == std::string::npos ? wl_version : wl_version.substr(0, tilde));
+	const AddOnVersion wl =
+	   string_to_version(tilde == std::string::npos ? wl_version : wl_version.substr(0, tilde));
 
 	if (!min_wl_version.empty() && wl < string_to_version(min_wl_version)) {
 		return false;
@@ -416,8 +417,7 @@ bool AddOnInfo::matches_widelands_version(const bool warn_future) const {
 	    wl == string_to_version(min_wl_version)) {
 		log_warn("Addon '%s' requires minimum Widelands version %s from the future.\n"
 		         "Make sure your development build is up to date!",
-		         internal_name.c_str(),
-		         min_wl_version.c_str());
+		         internal_name.c_str(), min_wl_version.c_str());
 	}
 
 	return true;
