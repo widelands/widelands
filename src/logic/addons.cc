@@ -391,7 +391,7 @@ void update_ui_theme(const UpdateThemeAction action, std::string arg) {
 	NEVER_HERE();
 }
 
-bool AddOnInfo::matches_widelands_version() const {
+bool AddOnInfo::matches_widelands_version(const bool warn_future) const {
 	if (min_wl_version.empty() && max_wl_version.empty()) {
 		return true;
 	}
@@ -399,26 +399,27 @@ bool AddOnInfo::matches_widelands_version() const {
 	const std::string& wl_version = build_id();
 	// Two cases. Either we have a release version such as "1.0".
 	// Or we have a development version such as "1.0~git25169[9d77594@master]" –
-	// which is then considered older than the version string before the '~'
-	// but newer than any version less than that.
+	// which is then considered equal to the version string before the '~'.
+	// It is the responsibility of testers of development versions to always
+	// use the latest one, and to be prepared for failures in any case.
 	const size_t tilde = wl_version.find('~');
-	if (tilde == std::string::npos) {
-		AddOnVersion wl = string_to_version(wl_version);
-		if (!min_wl_version.empty() && wl < string_to_version(min_wl_version)) {
-			return false;
-		}
-		if (!max_wl_version.empty() && wl > string_to_version(max_wl_version)) {
-			return false;
-		}
-	} else {
-		AddOnVersion next_wl = string_to_version(wl_version.substr(0, tilde));
-		if (!min_wl_version.empty() && next_wl <= string_to_version(min_wl_version)) {
-			return false;
-		}
-		if (!max_wl_version.empty() && next_wl > string_to_version(max_wl_version)) {
-			return false;
-		}
+	const AddOnVersion wl = string_to_version(tilde == std::string::npos ? wl_version : wl_version.substr(0, tilde));
+
+	if (!min_wl_version.empty() && wl < string_to_version(min_wl_version)) {
+		return false;
 	}
+	if (!max_wl_version.empty() && wl > string_to_version(max_wl_version)) {
+		return false;
+	}
+
+	if (warn_future && !min_wl_version.empty() && tilde != std::string::npos &&
+	    wl == string_to_version(min_wl_version)) {
+		log_warn("Addon '%s' requires minimum Widelands version %s from the future.\n"
+		         "Make sure your development build is up to date!",
+		         internal_name.c_str(),
+		         min_wl_version.c_str());
+	}
+
 	return true;
 }
 
@@ -467,7 +468,7 @@ std::shared_ptr<AddOnInfo> preload_addon(const std::string& name) {
 	if (i->version.empty()) {
 		throw wexception("preload_addon (%s): version string is empty", name.c_str());
 	}
-	if (!i->matches_widelands_version()) {
+	if (!i->matches_widelands_version(true)) {
 		throw wexception(
 		   "preload_addon (%s): incompatible with this Widelands version", name.c_str());
 	}

@@ -124,7 +124,11 @@ struct AddOnInfo {
 	uint32_t votes[kMaxRating] = {0};  ///< Total number of votes for each of the ratings 1-10.
 	std::map<size_t, AddOnComment> user_comments;
 
-	[[nodiscard]] bool matches_widelands_version() const;
+	// Development builds (version 1.x~n) are treated as the next stable version (version 1.x)
+	// `warn_future` enables logging of the match in development versions if the addon requires
+	// the next stable version.
+	[[nodiscard]] bool matches_widelands_version(const bool warn_future = false) const;
+
 	[[nodiscard]] uint32_t number_of_votes() const;
 	[[nodiscard]] double average_rating() const;
 	[[nodiscard]] bool requires_texture_atlas_rebuild() const;
