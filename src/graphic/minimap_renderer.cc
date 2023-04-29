@@ -26,7 +26,6 @@
 #include "economy/roadbase.h"
 #include "graphic/playercolor.h"
 #include "logic/field.h"
-#include "logic/map.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/vision.h"
@@ -158,7 +157,6 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 		}
 
 		if ((layers & MiniMapLayer::StartingPositions) != 0) {
-			const Widelands::Map& map = egbase.map();
 			Widelands::Coords starting_pos;
 			for (uint32_t p = 1; p <= map.get_nrplayers(); p++) {
 				starting_pos = map.get_starting_pos(p);
