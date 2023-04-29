@@ -127,7 +127,7 @@ struct AddOnInfo {
 	// Development builds (version 1.x~n) are treated as the next stable version (version 1.x)
 	// `warn_future` enables logging of the match in development versions if the addon requires
 	// the next stable version.
-	[[nodiscard]] bool matches_widelands_version(const bool warn_future = false) const;
+	[[nodiscard]] bool matches_widelands_version(bool warn_future = false) const;
 
 	[[nodiscard]] uint32_t number_of_votes() const;
 	[[nodiscard]] double average_rating() const;
