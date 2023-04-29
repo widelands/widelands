@@ -24,7 +24,6 @@
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/scoped_timer.h"
-#include "base/time_string.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -138,26 +137,8 @@ void EditorGameBase::create_tempfile_and_save_mapdata(FileSystem::Type const typ
 	try {
 		g_fs->ensure_directory_exists(kTempFileDir);
 
-		std::string filename =
-		   kTempFileDir + FileSystem::file_separator() + timestring() + "_mapdata";
-		std::string complete_filename = filename + kTempFileExtension;
-
-		// if a file with that name already exists, then try a few name modifications
-		if (g_fs->file_exists(complete_filename)) {
-			int suffix;
-			for (suffix = 0; suffix <= 9; suffix++) {
-				complete_filename =
-				   filename.append("-").append(std::to_string(suffix)).append(kTempFileExtension);
-				if (!g_fs->file_exists(complete_filename)) {
-					break;
-				}
-			}
-			if (suffix > 9) {
-				throw wexception(
-				   "EditorGameBase::create_tempfile_and_save_mapdata(): for all considered "
-				   "filenames a file already existed");
-			}
-		}
+		std::string complete_filename = g_fs->create_unique_temp_file_path(
+		   kTempFileDir, std::string("_mapdata") + kTempFileExtension);
 
 		// create tmp_fs_
 		tmp_fs_.reset(g_fs->create_sub_file_system(complete_filename, type));
