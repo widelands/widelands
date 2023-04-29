@@ -206,6 +206,7 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
 		}
 		NEVER_HERE();
 	});
+	toggle_enabled_.set_enabled(info->matches_widelands_version());
 	category_.set_handle_mouse(true);
 	category_.set_tooltip(
 	   format(_("Category: %s"), AddOns::kAddOnCategories.at(info->category).descname()));
@@ -401,6 +402,9 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 		ctrl->install_or_upgrade(info_, false);
 		ctrl->rebuild(true);
 	});
+#ifdef NDEBUG
+	install_.set_enabled(info->matches_widelands_version());
+#endif
 	upgrade_.sigclicked.connect([this, ctrl, info, installed_version]() {
 		if (!info->verified || !matches_keymod(SDL_GetModState(), KMOD_CTRL)) {
 			UI::WLMessageBox w(
@@ -427,6 +431,9 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 		ctrl->install_or_upgrade(info, !full_upgrade_possible_);
 		ctrl->rebuild(true);
 	});
+#ifdef NDEBUG
+	upgrade_.set_enabled(info->matches_widelands_version());
+#endif
 	if (info->internal_name.empty()) {
 		install_.set_enabled(false);
 		upgrade_.set_enabled(false);
