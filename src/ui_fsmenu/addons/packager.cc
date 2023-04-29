@@ -150,12 +150,14 @@ AddOnsPackager::AddOnsPackager(FsMenu::MainMenu& parent, AddOnsCtrl& ctrl)
 	box_right_subbox_header_box_left_.add_space(3 * kSpacing);
 	box_right_subbox_header_box_left_.add(
 	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu,
-	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Minimum Widelands Version:"), UI::Align::kRight),
+	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Minimum Widelands Version:"),
+	                    UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
 	box_right_subbox_header_box_left_.add_space(3 * kSpacing);
 	box_right_subbox_header_box_left_.add(
 	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu,
-	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Maximum Widelands Version:"), UI::Align::kRight),
+	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Maximum Widelands Version:"),
+	                    UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
 	box_right_subbox_header_box_left_.add_space(3 * kSpacing);
 	box_right_subbox_header_box_left_.add(
@@ -321,7 +323,8 @@ void AddOnsPackager::current_addon_edited() {
 	const std::string& sel = addons_.get_selected();
 	AddOns::MutableAddOn* m = mutable_addons_.at(sel).get();
 
-	m->update_info(name_.text(), author_.text(), descr_.get_text(), version_.text(), min_wl_version_.text(), max_wl_version_.text());
+	m->update_info(name_.text(), author_.text(), descr_.get_text(), version_.text(),
+	               min_wl_version_.text(), max_wl_version_.text());
 
 	addons_with_changes_[sel] = false;
 	check_for_unsaved_changes();

@@ -415,7 +415,8 @@ bool AddOnInfo::matches_widelands_version() const {
 	return AddOns::matches_widelands_version(min_wl_version, max_wl_version);
 }
 
-bool matches_widelands_version(const std::string& min_wl_version, const std::string& max_wl_version) {
+bool matches_widelands_version(const std::string& min_wl_version,
+                               const std::string& max_wl_version) {
 	if (min_wl_version.empty() && max_wl_version.empty()) {
 		return true;
 	}

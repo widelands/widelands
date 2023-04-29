@@ -65,7 +65,8 @@ std::string version_to_string(const AddOnVersion&, bool localize = true);
 AddOnVersion string_to_version(std::string);
 // Returns true if and only if version `compare` is newer than version `base`
 bool is_newer_version(const AddOnVersion& base, const AddOnVersion& compare);
-bool matches_widelands_version(const std::string& min_wl_version, const std::string& max_wl_version);
+bool matches_widelands_version(const std::string& min_wl_version,
+                               const std::string& max_wl_version);
 
 // Required add-ons for an add-on, map, or savegame with the recommended version
 using AddOnRequirements = std::vector<std::pair<std::string, AddOnVersion>>;

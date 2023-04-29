@@ -182,18 +182,25 @@ bool MapDetails::update(const MapData& mapdata, bool localize_mapname, bool rend
 		if (!mapdata.minimum_required_widelands_version.empty()) {
 			bool compatible;
 			try {
-				compatible = AddOns::matches_widelands_version(mapdata.minimum_required_widelands_version, std::string());
+				compatible = AddOns::matches_widelands_version(
+				   mapdata.minimum_required_widelands_version, std::string());
 			} catch (const std::exception& e) {
 				compatible = false;
-				log_warn("Could not parse map version requirement '%s': %s", mapdata.minimum_required_widelands_version.c_str(), e.what());
+				log_warn("Could not parse map version requirement '%s': %s",
+				         mapdata.minimum_required_widelands_version.c_str(), e.what());
 			}
 
 			loadable &= compatible;
 
 			if (compatible) {
-				description += as_heading_with_content(_("Minimum Widelands Version:"), mapdata.minimum_required_widelands_version, style_, false, true);
+				description += as_heading_with_content(_("Minimum Widelands Version:"),
+				                                       mapdata.minimum_required_widelands_version,
+				                                       style_, false, true);
 			} else {
-				description += as_heading_with_content(_("Minimum Widelands Version:"), as_font_tag(UI::FontStyle::kWarning, mapdata.minimum_required_widelands_version), style_, false, true);
+				description += as_heading_with_content(
+				   _("Minimum Widelands Version:"),
+				   as_font_tag(UI::FontStyle::kWarning, mapdata.minimum_required_widelands_version),
+				   style_, false, true);
 			}
 		}
 
