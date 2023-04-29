@@ -1774,9 +1774,9 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 		return;
 	}
 
-	// Camp is blocked, try to get as close as we can
+	// Camp is blocked, try to get as close as we can.
 	for (int i = 10; i > 0; --i) {
-		Coords coords = game.random_location(state.coords, kPortSpaceRadius);
+		Coords coords = game.random_location(state.coords, kPortSpaceRadius * kPortSpaceRadius);
 		if (start_task_movepath(game, coords, 0,
 		                        descr().get_right_walk_anims(does_carry_ware(), this), false,
 		                        kPortSpaceRadius)) {
