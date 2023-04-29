@@ -612,9 +612,10 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 					}
 				}
 
-				const auto* overlay = get_buildhelp_overlay(caps);
+				const auto* overlay = get_buildhelp_overlay(caps, scale);
 				if (overlay != nullptr) {
-					blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale, opacity);
+					blit_field_overlay(
+					   dst, *f, overlay->pic, overlay->hotspot, scale / overlay->scale, opacity);
 				}
 
 				// Draw port space hint if a port could be built here, but current situation doesn't

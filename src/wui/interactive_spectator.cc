@@ -140,9 +140,9 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 					break;
 				}
 			}
-			const auto* overlay = get_buildhelp_overlay(caps);
+			const auto* overlay = get_buildhelp_overlay(caps, scale);
 			if (overlay != nullptr) {
-				blit_field_overlay(dst, field, overlay->pic, overlay->hotspot, scale);
+				blit_field_overlay(dst, field, overlay->pic, overlay->hotspot, scale / overlay->scale);
 			}
 		}
 

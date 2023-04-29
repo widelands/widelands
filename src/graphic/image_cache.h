@@ -34,6 +34,13 @@
 // ownership.
 class ImageCache {
 public:
+	using MipMapScale = std::pair<float, const char*>;
+	static constexpr unsigned kScalesCount = 4;
+	static constexpr MipMapScale kScales[kScalesCount] = {
+	   {0.5f, "_0.5"}, {1.f, "_1"}, {2.f, "_2"}, {4.f, "_4"}};
+	static constexpr int kNoScale = 0xff;
+	static constexpr int kDefaultScaleIndex = 1;
+
 	ImageCache() = default;
 	~ImageCache() = default;
 
@@ -44,7 +51,9 @@ public:
 	// Returns the image associated with the 'hash'. If no image by this hash is
 	// known, it will try to load one from disk with the filename = hash. If
 	// this fails, it will throw an error.
-	const Image* get(std::string hash, bool theme_lookup = true);
+	// If a scale is provided, the cache will return the image for the mipmap scale
+	// at the requested size, or nullptr if the image has no mipmap at this scale.
+	const Image* get(std::string hash, bool theme_lookup = true, uint8_t scale_index = kNoScale);
 
 	// Returns true if the 'hash' is stored in the cache.
 	[[nodiscard]] bool has(const std::string& hash) const;
@@ -58,6 +67,7 @@ public:
 private:
 	std::vector<std::unique_ptr<Texture>> texture_atlases_;
 	std::map<std::string, std::unique_ptr<const Image>> images_;
+	std::map<std::string, uint8_t /* scales bitset */> mipmap_cache_;
 
 	std::vector<std::unique_ptr<const Image>> outdated_images_;
 	std::vector<std::unique_ptr<Texture>> outdated_texture_atlases_;
