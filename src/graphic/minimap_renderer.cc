@@ -27,8 +27,8 @@
 #include "graphic/playercolor.h"
 #include "logic/field.h"
 #include "logic/map_objects/descriptions.h"
-#include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/world/terrain_description.h"
 #include "logic/vision.h"
 #include "wui/mapviewpixelfunctions.h"
 
@@ -171,14 +171,18 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 			}
 		}
 
-		if (((layers & (MiniMapLayer::Ship | MiniMapLayer::Attack)) != 0) && (f.field->get_first_bob() != nullptr)) {
+		if (((layers & (MiniMapLayer::Ship | MiniMapLayer::Attack)) != 0) &&
+		    (f.field->get_first_bob() != nullptr)) {
 			for (Widelands::Bob* bob = f.field->get_first_bob(); bob != nullptr;
 			     bob = bob->get_next_bob()) {
-				if ((layers & MiniMapLayer::Ship) != 0 && bob->descr().type() == Widelands::MapObjectType::SHIP) {
+				if ((layers & MiniMapLayer::Ship) != 0 &&
+				    bob->descr().type() == Widelands::MapObjectType::SHIP) {
 					color = kWhite;
 					break;
 				}
-				if ((layers & MiniMapLayer::Attack) != 0 && bob->descr().type() == Widelands::MapObjectType::SOLDIER && dynamic_cast<Widelands::Soldier*>(bob)->is_on_battlefield()) {
+				if ((layers & MiniMapLayer::Attack) != 0 &&
+				    bob->descr().type() == Widelands::MapObjectType::SOLDIER &&
+				    dynamic_cast<Widelands::Soldier*>(bob)->is_on_battlefield()) {
 					color = kRed;
 					break;
 				}
