@@ -391,6 +391,8 @@ int LuaPanel::indicate(lua_State* L) {
 
            * ``"value"``: **Mandatory**. The size of the space.
 
+         * ``"panel"``: A plain panel that can act as a spacer or as a container for other widgets.
+
          * ``"textarea"``: A static text area with a single line of text. Properties:
 
            * ``"text"``: **Mandatory**. The text to display.
@@ -673,6 +675,15 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 			report_error(L, "'space' only valid in boxes");
 		}
 		as_box->add_space(get_table_int(L, "value", true));
+
+	} else if (widget_type == "panel") {
+		std::string name = get_table_string(L, "name", false);
+		if (name.empty()) {
+			created_panel = new UI::Panel(parent, UI::PanelStyle::kWui, x, y, w, h, tooltip);
+		} else {
+			created_panel =
+			   new UI::NamedPanel(parent, UI::PanelStyle::kWui, name, x, y, w, h, tooltip);
+		}
 
 	} else if (widget_type == "window") {
 		if (parent != get_egbase(L).get_ibase()) {
