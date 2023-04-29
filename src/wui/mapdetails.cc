@@ -164,32 +164,46 @@ bool MapDetails::update(const MapData& mapdata, bool localize_mapname, bool rend
                forms here, please let us know. */
                _("Authors");
 		std::string description = as_heading(authors_heading, style_);
-		description = format("%s%s", description, as_content(mapdata.authors.get_names(), style_));
+		description += as_content(mapdata.authors.get_names(), style_);
 
 		std::vector<std::string> tags;
 		for (const auto& tag : mapdata.tags) {
 			tags.push_back(localize_tag(tag).displayname);
 		}
 		std::sort(tags.begin(), tags.end());
-		description = format("%s%s", description, as_heading(_("Tags"), style_));
-		description =
-		   format("%s%s", description,
-		          as_content(i18n::localize_list(tags, i18n::ConcatenateWith::COMMA), style_));
+		description += as_heading(_("Tags"), style_);
+		description += as_content(i18n::localize_list(tags, i18n::ConcatenateWith::COMMA), style_);
 
 		AddOns::AddOnConflict addons = AddOns::check_requirements(mapdata.required_addons);
 		loadable = !addons.second;
 
-		description =
-		   format("%s%s", description,
-		          as_heading_with_content(_("Add-Ons:"), addons.first, style_, false, true));
+		description += as_heading_with_content(_("Add-Ons:"), addons.first, style_, false, true);
 
-		description = format("%s%s", description, as_heading(_("Description"), style_));
-		description = format("%s%s", description, as_content(mapdata.description, style_));
+		if (!mapdata.minimum_required_widelands_version.empty()) {
+			bool compatible;
+			try {
+				compatible = AddOns::matches_widelands_version(mapdata.minimum_required_widelands_version, std::string());
+			} catch (const std::exception& e) {
+				compatible = false;
+				log_warn("Could not parse map version requirement '%s': %s", mapdata.minimum_required_widelands_version.c_str(), e.what());
+			}
+
+			loadable &= compatible;
+
+			if (compatible) {
+				description += as_heading_with_content(_("Minimum Widelands Version:"), mapdata.minimum_required_widelands_version, style_, false, true);
+			} else {
+				description += as_heading_with_content(_("Minimum Widelands Version:"), as_font_tag(UI::FontStyle::kWarning, mapdata.minimum_required_widelands_version), style_, false, true);
+			}
+		}
+
+		description += as_heading(_("Description"), style_);
+		description += as_content(mapdata.description, style_);
 
 		if (!mapdata.hint.empty()) {
 			/** TRANSLATORS: Map hint header when selecting a map. */
-			description = format("%s%s", description, as_heading(_("Hint"), style_));
-			description = format("%s%s", description, as_content(mapdata.hint, style_));
+			description += as_heading(_("Hint"), style_);
+			description += as_content(mapdata.hint, style_);
 		}
 
 		// Render minimap

@@ -63,6 +63,8 @@ AddOnsPackager::AddOnsPackager(FsMenu::MainMenu& parent, AddOnsCtrl& ctrl)
      name_(&box_right_subbox_header_box_right_, 0, 0, 100, UI::PanelStyle::kFsMenu),
      author_(&box_right_subbox_header_box_right_, 0, 0, 100, UI::PanelStyle::kFsMenu),
      version_(&box_right_subbox_header_box_right_, 0, 0, 100, UI::PanelStyle::kFsMenu),
+     min_wl_version_(&box_right_subbox_header_box_right_, 0, 0, 100, UI::PanelStyle::kFsMenu),
+     max_wl_version_(&box_right_subbox_header_box_right_, 0, 0, 100, UI::PanelStyle::kFsMenu),
      descr_(*new UI::MultilineEditbox(
         &box_right_subbox_header_box_right_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu)),
      addon_new_(&box_left_buttons_,
@@ -125,6 +127,10 @@ AddOnsPackager::AddOnsPackager(FsMenu::MainMenu& parent, AddOnsCtrl& ctrl)
 	box_right_subbox_header_box_right_.add(&version_, UI::Box::Resizing::kFullSize);
 	box_right_subbox_header_box_right_.add_space(kSpacing);
 	box_right_subbox_header_box_right_.add(&descr_, UI::Box::Resizing::kFullSize);
+	box_right_subbox_header_box_right_.add_space(kSpacing);
+	box_right_subbox_header_box_right_.add(&min_wl_version_, UI::Box::Resizing::kFullSize);
+	box_right_subbox_header_box_right_.add_space(kSpacing);
+	box_right_subbox_header_box_right_.add(&max_wl_version_, UI::Box::Resizing::kFullSize);
 
 	box_right_subbox_header_box_left_.add_space(kSpacing);
 	box_right_subbox_header_box_left_.add(
@@ -146,6 +152,16 @@ AddOnsPackager::AddOnsPackager(FsMenu::MainMenu& parent, AddOnsCtrl& ctrl)
 	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu,
 	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Description:"),
 	                    UI::Align::kRight),
+	   UI::Box::Resizing::kFullSize);
+	box_right_subbox_header_box_left_.add_space(3 * kSpacing);
+	box_right_subbox_header_box_left_.add(
+	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu,
+	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Minimum Widelands Version:"), UI::Align::kRight),
+	   UI::Box::Resizing::kFullSize);
+	box_right_subbox_header_box_left_.add_space(3 * kSpacing);
+	box_right_subbox_header_box_left_.add(
+	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu,
+	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Maximum Widelands Version:"), UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
 
 	box_right_subbox_header_hbox_.add(
@@ -193,6 +209,8 @@ AddOnsPackager::AddOnsPackager(FsMenu::MainMenu& parent, AddOnsCtrl& ctrl)
 	name_.changed.connect([this]() { current_addon_edited(); });
 	author_.changed.connect([this]() { current_addon_edited(); });
 	version_.changed.connect([this]() { current_addon_edited(); });
+	min_wl_version_.changed.connect([this]() { current_addon_edited(); });
+	max_wl_version_.changed.connect([this]() { current_addon_edited(); });
 	descr_.changed.connect([this]() { current_addon_edited(); });
 
 	initialize_mutable_addons();
@@ -280,6 +298,8 @@ void AddOnsPackager::addon_selected() {
 	descr_.set_text(selected->get_description());
 	author_.set_text(selected->get_author());
 	version_.set_text(selected->get_version());
+	min_wl_version_.set_text(selected->get_min_wl_version());
+	max_wl_version_.set_text(selected->get_min_wl_version());
 	update_in_progress_ = false;
 
 	if (addon_boxes_.count(selected->get_category()) == 0) {
@@ -301,7 +321,7 @@ void AddOnsPackager::current_addon_edited() {
 	const std::string& sel = addons_.get_selected();
 	AddOns::MutableAddOn* m = mutable_addons_.at(sel).get();
 
-	m->update_info(name_.text(), author_.text(), descr_.get_text(), version_.text());
+	m->update_info(name_.text(), author_.text(), descr_.get_text(), version_.text(), min_wl_version_.text(), max_wl_version_.text());
 
 	addons_with_changes_[sel] = false;
 	check_for_unsaved_changes();
@@ -522,6 +542,18 @@ bool AddOnsPackager::do_write_addon_to_disk(const std::string& addon) {
 		m->set_version(AddOns::version_to_string(v, false));
 		if (addons_.has_selection() && addons_.get_selected() == addon) {
 			version_.set_text(m->get_version());
+		}
+
+		v = AddOns::string_to_version(m->get_min_wl_version());
+		m->set_min_wl_version(AddOns::version_to_string(v, false));
+		if (addons_.has_selection() && addons_.get_selected() == addon) {
+			min_wl_version_.set_text(m->get_min_wl_version());
+		}
+
+		v = AddOns::string_to_version(m->get_max_wl_version());
+		m->set_max_wl_version(AddOns::version_to_string(v, false));
+		if (addons_.has_selection() && addons_.get_selected() == addon) {
+			max_wl_version_.set_text(m->get_max_wl_version());
 		}
 	} catch (...) {
 		main_menu_.show_messagebox(
