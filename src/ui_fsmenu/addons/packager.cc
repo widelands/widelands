@@ -126,11 +126,11 @@ AddOnsPackager::AddOnsPackager(FsMenu::MainMenu& parent, AddOnsCtrl& ctrl)
 	box_right_subbox_header_box_right_.add_space(kSpacing);
 	box_right_subbox_header_box_right_.add(&version_, UI::Box::Resizing::kFullSize);
 	box_right_subbox_header_box_right_.add_space(kSpacing);
-	box_right_subbox_header_box_right_.add(&descr_, UI::Box::Resizing::kFullSize);
-	box_right_subbox_header_box_right_.add_space(kSpacing);
 	box_right_subbox_header_box_right_.add(&min_wl_version_, UI::Box::Resizing::kFullSize);
 	box_right_subbox_header_box_right_.add_space(kSpacing);
 	box_right_subbox_header_box_right_.add(&max_wl_version_, UI::Box::Resizing::kFullSize);
+	box_right_subbox_header_box_right_.add_space(kSpacing);
+	box_right_subbox_header_box_right_.add(&descr_, UI::Box::Resizing::kFullSize);
 
 	box_right_subbox_header_box_left_.add_space(kSpacing);
 	box_right_subbox_header_box_left_.add(
@@ -150,18 +150,18 @@ AddOnsPackager::AddOnsPackager(FsMenu::MainMenu& parent, AddOnsCtrl& ctrl)
 	box_right_subbox_header_box_left_.add_space(3 * kSpacing);
 	box_right_subbox_header_box_left_.add(
 	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu,
-	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Description:"),
-	                    UI::Align::kRight),
-	   UI::Box::Resizing::kFullSize);
-	box_right_subbox_header_box_left_.add_space(3 * kSpacing);
-	box_right_subbox_header_box_left_.add(
-	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu,
 	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Minimum Widelands Version:"), UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
 	box_right_subbox_header_box_left_.add_space(3 * kSpacing);
 	box_right_subbox_header_box_left_.add(
 	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu,
 	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Maximum Widelands Version:"), UI::Align::kRight),
+	   UI::Box::Resizing::kFullSize);
+	box_right_subbox_header_box_left_.add_space(3 * kSpacing);
+	box_right_subbox_header_box_left_.add(
+	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu,
+	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Description:"),
+	                    UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
 
 	box_right_subbox_header_hbox_.add(
