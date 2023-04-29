@@ -1627,6 +1627,7 @@ void Soldier::start_task_naval_invasion(Game& game, const Coords& coords) {
 
 void Soldier::naval_invasion_update(Game& game, State& state) {
 	constexpr int kPortSpaceRadius = 2;
+	constexpr int kPortSpaceGeneralAreaRadius = 5;
 
 	std::string signal = get_signal();
 	if (!signal.empty()) {
@@ -1746,7 +1747,7 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 		}
 	}
 
-	if (map.calc_distance(get_position(), state.coords) <= kPortSpaceRadius) {
+	if (map.calc_distance(get_position(), state.coords) <= kPortSpaceGeneralAreaRadius) {
 		// The target should be unguarded now, conquer the port space.
 		MapRegion<Area<FCoords>> mr(map, Area<FCoords>(portspace_fcoords, kPortSpaceRadius));
 		do {
@@ -1776,7 +1777,7 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 
 	// Camp is blocked, try to get as close as we can.
 	for (int i = 10; i > 0; --i) {
-		Coords coords = game.random_location(state.coords, kPortSpaceRadius * kPortSpaceRadius);
+		Coords coords = game.random_location(state.coords, kPortSpaceGeneralAreaRadius);
 		if (start_task_movepath(game, coords, 0,
 		                        descr().get_right_walk_anims(does_carry_ware(), this), false,
 		                        kPortSpaceRadius)) {
