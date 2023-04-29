@@ -66,36 +66,26 @@ inline RGBColor invert_color(const RGBColor& c) {
 
 inline RGBColor brighten_color(const RGBColor& c, uint8_t percent) {
 	// we need higher range variables to avoid overflow in multiplying
-	uint16_t r;
-	uint16_t g;
-	uint16_t b;
+	uint16_t r = c.r;
+	uint16_t g = c.g;
+	uint16_t b = c.b;
 
-	uint16_t R = c.r;
-	uint16_t G = c.g;
-	uint16_t B = c.b;
-
-
-	r = R + ((255 - R) * percent) / 100;
-	g = G + ((255 - G) * percent) / 100;
-	b = B + ((255 - B) * percent) / 100;
+	r = r + ((255 - r) * percent) / 100;
+	g = g + ((255 - g) * percent) / 100;
+	b = b + ((255 - b) * percent) / 100;
 
 	return RGBColor(r, g, b);
 }
 
 inline RGBColor darken_color(const RGBColor& c, uint8_t percent) {
 	// we need higher range variables to avoid overflow in multiplying
-	uint16_t r;
-	uint16_t g;
-	uint16_t b;
+	uint16_t r = c.r;
+	uint16_t g = c.g;
+	uint16_t b = c.b;
 
-	uint16_t R = c.r;
-	uint16_t G = c.g;
-	uint16_t B = c.b;
-
-
-	r = R - (R * percent) / 100;
-	g = G - (G * percent) / 100;
-	b = B - (B * percent) / 100;
+	r = r - (r * percent) / 100;
+	g = g - (g * percent) / 100;
+	b = b - (b * percent) / 100;
 
 	return RGBColor(r, g, b);
 }
@@ -117,13 +107,13 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 		           .get_terrain_descr(f.field->terrain_d())
 		           ->get_minimap_color(f.field->get_brightness());
 		if ((layers & MiniMapLayer::Owner) != 0) {
-			color = darken_color(color, 20);
+			color = darken_color(color, 40);
 		}
 	}
 
 	if ((layers & MiniMapLayer::Owner) != 0) {
 		if (0 < owner) {
-			color = blend_color(color, brighten_color(egbase.player(owner).get_playercolor(), 20));
+			color = blend_color(color, brighten_color(egbase.player(owner).get_playercolor(), 30));
 		}
 	}
 
@@ -171,6 +161,7 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 					    fc.field->get_immovable()->descr().has_attribute(
 					       Widelands::MapObjectDescr::get_attribute_id("artifact"))) {
 						color = kRed;
+						break;
 					}
 				}
 			}
