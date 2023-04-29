@@ -63,6 +63,42 @@ inline RGBColor invert_color(const RGBColor& c) {
 	return RGBColor(r, g, b);
 }
 
+inline RGBColor brighten_color(const RGBColor& c, uint8_t percent) {
+	// we need higher range variables to avoid overflow in multiplying
+	uint16_t r;
+	uint16_t g;
+	uint16_t b;
+
+	uint16_t R = c.r;
+	uint16_t G = c.g;
+	uint16_t B = c.b;
+
+
+	r = R + ((255 - R) * percent) / 100;
+	g = G + ((255 - G) * percent) / 100;
+	b = B + ((255 - B) * percent) / 100;
+
+	return RGBColor(r, g, b);
+}
+
+inline RGBColor darken_color(const RGBColor& c, uint8_t percent) {
+	// we need higher range variables to avoid overflow in multiplying
+	uint16_t r;
+	uint16_t g;
+	uint16_t b;
+
+	uint16_t R = c.r;
+	uint16_t G = c.g;
+	uint16_t B = c.b;
+
+
+	r = R - (R * percent) / 100;
+	g = G - (G * percent) / 100;
+	b = B - (B * percent) / 100;
+
+	return RGBColor(r, g, b);
+}
+
 int round_up_to_nearest_even(int number) {
 	return number % 2 == 0 ? number : number + 1;
 }
@@ -79,17 +115,14 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 		color = egbase.descriptions()
 		           .get_terrain_descr(f.field->terrain_d())
 		           ->get_minimap_color(f.field->get_brightness());
+		if ((layers & MiniMapLayer::Owner) != 0) {
+			color = darken_color(color, 20);
+		}
 	}
 
 	if ((layers & MiniMapLayer::Owner) != 0) {
 		if (0 < owner) {
-			RGBColor plcolor = egbase.player(owner).get_playercolor();
-			if (plcolor.r + plcolor.g + plcolor.b < 384) {  // dark playercolor
-				plcolor = blend_color(plcolor, kDark);       // darken it
-			} else {                                        // bright playercolor
-				plcolor = blend_color(plcolor, kRoad);       // brighten it
-			}
-			color = blend_color(color, plcolor);
+			color = blend_color(color, brighten_color(egbase.player(owner).get_playercolor(), 20));
 		}
 	}
 
