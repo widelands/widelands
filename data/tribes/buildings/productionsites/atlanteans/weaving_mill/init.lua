@@ -52,6 +52,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- time total: 3 * 44 = 132 sec
             "call=produce_spidercloth",
             "call=produce_tabard",
             "call=produce_tabard_golden",
@@ -61,10 +62,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start weaving spidercloth because ...
          descname = _("weaving spidercloth"),
          actions = {
-            -- time total: 40 + 3.6
+            -- time: 20.4 + 20 + 3.6 = 44 sec
             "return=skipped unless economy needs spidercloth",
             "consume=spider_silk",
-            "sleep=duration:20s",
+            "sleep=duration:20s400ms",
             "playsound=sound/mill/weaving priority:90%",
             "animate=working duration:20s",
             "produce=spidercloth"
@@ -74,10 +75,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start tailoring a tabard because ...
          descname = _("tailoring a tabard"),
          actions = {
-            -- time total: 40 + 3.6
+            -- time: 20.4 + 20 + 3.6 = 44 sec
             "return=skipped unless economy needs tabard",
             "consume=spider_silk",
-            "sleep=duration:20s",
+            "sleep=duration:20s400ms",
             "playsound=sound/mill/weaving priority:90%",
             "animate=working duration:20s",
             "produce=tabard"
@@ -87,10 +88,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start tailoring a golden tabard because ...
          descname = _("tailoring a golden tabard"),
          actions = {
-            -- time total: 40 + 3.6
+            -- time: 20.4 + 20 + 3.6 = 44 sec
             "return=skipped unless economy needs tabard_golden",
             "consume=spider_silk gold_thread",
-            "sleep=duration:20s",
+            "sleep=duration:20s400ms",
             "playsound=sound/mill/weaving priority:90%",
             "animate=working duration:20s",
             "produce=tabard_golden"

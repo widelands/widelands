@@ -1626,7 +1626,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an atlantean production site:  Smokery
             lore = pgettext("atlanteans_building", "We are using pure logs, no other ingredients! Which drunken foreigner hath told you that myth?"),
             -- TRANSLATORS: Lore author helptext for an atlantean production site:  Smokery
-            lore_author = pgettext("atlanteans_building", "A Smoker answering a passer-by")
+            lore_author = pgettext("atlanteans_building", "A Smoker answering a passer-by"),
+            -- TRANSLATORS: Performance helptext for an atlantean production site: Smokery
+            performance = pgettext("atlanteans_building", "When this building is fully supplied and all kinds of food are needed by the economy, production of one smoked fish takes %1$s and one smoked meat takes %2$s on average. If only one kind of food is needed by the economy, production of one smoked fish takes %3$s and one smoked meat takes %4$s on average."):bformat(format_seconds(51), format_minutes_seconds(1, 42), format_seconds(34), format_seconds(34))
 
          }
       },
@@ -1640,7 +1642,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an atlantean production site:  Mill
             lore = pgettext("atlanteans_building", "We invented this vertical axis design first, the sawmill just copied our ideas but never acknowledged our claim."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Mill
-            lore_author = pgettext("atlanteans_building", "Miller arguing with a sawyer")
+            lore_author = pgettext("atlanteans_building", "Miller arguing with a sawyer"),
+            -- TRANSLATORS: Performance helptext for an atlantean production site: Mill
+            performance = pgettext("atlanteans_building", "When this building is fully supplied and all kinds of flour are needed by the economy, production of one cornmeal takes %1$s and one blackroot flour takes %2$s on average. If only one kind of flour is needed by the economy, production of one cornmeal takes %3$s and one blackroot flour takes %4$s on average."):bformat(format_seconds(44), format_seconds(44), format_seconds(22), format_seconds(22))
          }
       },
       {
@@ -1680,7 +1684,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an atlantean production site: Smelting Works
             lore = pgettext("atlanteans_building", "We learned the smelting from our forefathers, a basic craftsmanship taming the fire and the ore into pure metals."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Smelting Works
-            lore_author = pgettext("atlanteans_building", "A member of the smelters’ guild")
+            lore_author = pgettext("atlanteans_building", "A member of the smelters’ guild"),
+            -- TRANSLATORS: Performance helptext for an atlantean production site: Smelting Works
+            performance = pgettext("atlanteans_building", "When this building is fully supplied and all metals are needed by the economy, production of one iron takes %1$s and one gold takes %2$s on average. If only one kind of metal is needed by the economy, production of one iron takes %3$s and one gold takes %4$s on average."):bformat(format_minutes_seconds(1, 36), format_minutes_seconds(3, 12), format_minutes_seconds(1, 4), format_minutes_seconds(1, 4))
          }
       },
       {
@@ -1691,7 +1697,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an atlantean production site: Toolsmithy
             lore = pgettext("atlanteans_building", "People’s power working for the benefit of all"),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Toolsmithy
-            lore_author = pgettext("atlanteans_building", "Faded sign found on top of this building")
+            lore_author = pgettext("atlanteans_building", "Faded sign found on top of this building"),
+            -- TRANSLATORS: Performance helptext for an atlantean production site: Toolsmithy
+            performance = pgettext("atlanteans_building", "When this building is fully supplied and all tools are needed by the economy, production of one of each tool takes %1$s on average. If only one kind of tool is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(14, 12), format_minutes_seconds(1, 11))
          }
       },
       {
@@ -1702,8 +1710,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an atlantean production site:  Weapon Smithy
             lore = pgettext("atlanteans_building", "You hear that sound of metal strident? The weapon smith just forged a trident!"),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Weapon Smithy
-            lore_author = pgettext("atlanteans_building", "Atlantean nursery rhyme")
-
+            lore_author = pgettext("atlanteans_building", "Atlantean nursery rhyme"),
+            -- TRANSLATORS: Performance helptext for an atlantean production site: Weapon Smithy
+            performance = pgettext("atlanteans_building", "When this building is fully supplied and all tridents are needed by the economy, production of one of each tridents takes %1$s on average. If only one kind of trident is needed by the economy, production of one light trident takes %2$s, one long trident takes %3$s, one steel trident takes %4$s, one double trident takes %5$s and one heavy double trident takes %6$s on average."):bformat(format_minutes_seconds(6, 18), format_seconds(54), format_minutes_seconds(1, 21), format_minutes_seconds(1, 21), format_minutes_seconds(1, 21), format_minutes_seconds(1, 21))
          }
       },
       {
@@ -1717,7 +1726,9 @@ wl.Descriptions():new_tribe {
                                           [[most skillful foes, whose lethal lance<br>]] ..
                                           [[from this their armour off will glance!’]]),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Armor Smithy
-            lore_author = pgettext("atlanteans_building", "Atlantean nursery rhyme")
+            lore_author = pgettext("atlanteans_building", "Atlantean nursery rhyme"),
+            -- TRANSLATORS: Performance helptext for an atlantean production site: Armor Smithy
+            performance = pgettext("atlanteans_building", "When this building is fully supplied and all shields are needed by the economy, production of one steel shield takes %1$s and one advanced shield takes %2$s on average. If only one kind of shield is needed by the economy, production of one steel shield takes %3$s and one advanced shield takes %4$s on average."):bformat(format_minutes_seconds(2, 32), format_minutes_seconds(2, 32), format_minutes_seconds(1, 11), format_minutes_seconds(1, 21))
          }
       },
       {
@@ -1794,7 +1805,9 @@ wl.Descriptions():new_tribe {
             lore = pgettext("atlanteans_building", "Here are the Wide Lands where people may dwell, "..
                                                    "walking around caring everything’s well."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Weaving Mill
-            lore_author = pgettext("atlanteans_building", "Part of the silkweavers’ song")
+            lore_author = pgettext("atlanteans_building", "Part of the silkweavers’ song"),
+            -- TRANSLATORS: Performance helptext for an atlantean production site: Weaving Mill
+            performance = pgettext("atlanteans_building", "When this building is fully supplied and all kinds of clothing are needed by the economy, production of one spidercloth takes %1$s, one tabard takes %2$s and one golden tabard takes %3$s on average. If only one kind of clothing is needed by the economy, production of one spidercloth takes %4$s, one tabard takes %5$s and one golden tabard takes %6$s on average."):bformat(format_minutes_seconds(2, 12), format_minutes_seconds(2, 12), format_minutes_seconds(2, 12), format_seconds(44), format_seconds(44), format_seconds(44))
          }
       },
 

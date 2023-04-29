@@ -56,6 +56,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- time total: 22 + 22 = 44 sec
             "call=produce_cornmeal",
             "call=produce_blackroot_flour",
          }
@@ -64,9 +65,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start grinding corn because ...
          descname = _("grinding corn"),
          actions = {
+            -- time: 3.4 + 15 + 3.6 = 22 sec
             "return=skipped when site has blackroot and economy needs blackroot_flour and not economy needs cornmeal",
             "return=skipped unless economy needs cornmeal",
-            "sleep=duration:3s500ms",
+            "sleep=duration:3s400ms",
             "consume=corn",
             "playsound=sound/mill/mill_turning priority:85% allow_multiple",
             "animate=working duration:15s",
@@ -77,10 +79,11 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start grinding blackroot because ...
          descname = _("grinding blackroot"),
          actions = {
+            -- time: 3.4 + 15 + 3.6 = 22 sec
             -- No check whether we need blackroot_flour because blackroots cannot be used for anything else.
             "return=skipped when site has corn and economy needs cornmeal and not economy needs blackroot_flour",
             "consume=blackroot",
-            "sleep=duration:3s500ms",
+            "sleep=duration:3s400ms",
             "playsound=sound/mill/mill_turning priority:85% allow_multiple",
             "animate=working duration:15s",
             "produce=blackroot_flour"
