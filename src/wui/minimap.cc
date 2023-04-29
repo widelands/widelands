@@ -214,29 +214,29 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                   UI::Button::VisualState::kRaised,
                   UI::Button::ImageMode::kUnscaled),
      button_traffic_artifacts(this,
-                  "traffic_artifacts",
-                  but_w() * 2,
-                  view_.get_h() + but_h(),
-                  but_w(),
-                  but_h(),
-                  UI::ButtonStyle::kWuiSecondary,
-                  ibase.egbase().is_game() ?
-                     g_image_cache->get("images/wui/buildings/menu_list_workers.png") :
-                     g_image_cache->get("images/wui/minimap/button_artifacts.png"),
-                  ibase.egbase().is_game() ? _("High Traffic") : _("Artifacts"),
-                  UI::Button::VisualState::kRaised,
-                  UI::Button::ImageMode::kUnscaled),
+                              "traffic_artifacts",
+                              but_w() * 2,
+                              view_.get_h() + but_h(),
+                              but_w(),
+                              but_h(),
+                              UI::ButtonStyle::kWuiSecondary,
+                              ibase.egbase().is_game() ?
+                                 g_image_cache->get("images/wui/buildings/menu_list_workers.png") :
+                                 g_image_cache->get("images/wui/minimap/button_artifacts.png"),
+                              ibase.egbase().is_game() ? _("High Traffic") : _("Artifacts"),
+                              UI::Button::VisualState::kRaised,
+                              UI::Button::ImageMode::kUnscaled),
      button_attack(this,
-                  "attack",
-                  but_w() * 2,
-                  view_.get_h() + but_h(),
-                  but_w(),
-                  but_h(),
-                  UI::ButtonStyle::kWuiSecondary,
-                  g_image_cache->get("images/wui/messages/messages_warfare.png"),
-                  _("Attacks"),
-                  UI::Button::VisualState::kRaised,
-                  UI::Button::ImageMode::kUnscaled),
+                   "attack",
+                   but_w() * 2,
+                   view_.get_h() + but_h(),
+                   but_w(),
+                   but_h(),
+                   UI::ButtonStyle::kWuiSecondary,
+                   g_image_cache->get("images/wui/messages/messages_warfare.png"),
+                   _("Attacks"),
+                   UI::Button::VisualState::kRaised,
+                   UI::Button::ImageMode::kUnscaled),
      button_zoom(this,
                  "zoom",
                  but_w() * 3,
@@ -336,7 +336,8 @@ void MiniMap::update_button_permpressed() {
 	button_roads.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Road) != 0);
 	button_buildings.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Building) != 0);
 	button_ships.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Ship) != 0);
-	button_traffic_artifacts.set_perm_pressed((*view_.minimap_layers_ & additional_button_impl_) != 0);
+	button_traffic_artifacts.set_perm_pressed((*view_.minimap_layers_ & additional_button_impl_) !=
+	                                          0);
 	button_attack.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Attack) != 0);
 	button_zoom.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Zoom2) != 0);
 }
