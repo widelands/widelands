@@ -61,8 +61,8 @@ static const size_t kLocalizedMinusSignLength = strlen(kLocalizedMinusSign);
 static const size_t kDigitWidthSpaceLength = strlen(kDigitWidthSpace);
 
 inline char* write_utf8_char(char* out, const char* utf8) {
-	for (const char* c = utf8; *c != 0; ++c) {
-		*out = *c;
+	for (; *utf8 != 0; ++utf8) {
+		*out = *utf8;
 		++out;
 	}
 	return out;
