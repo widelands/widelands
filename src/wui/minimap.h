@@ -35,7 +35,7 @@ public:
 
 		explicit Registry(bool is_game)
 		   : minimap_layers(MiniMapLayer::Terrain | MiniMapLayer::Flag | MiniMapLayer::Road |
-		                    MiniMapLayer::Building | MiniMapLayer::Ship |
+		                    MiniMapLayer::Building | MiniMapLayer::Ship | MiniMapLayer::Attack |
 		                    (is_game ? MiniMapLayer::Owner :
                                      MiniMapLayer::StartingPositions | MiniMapLayer::Artifacts)) {
 		}
@@ -132,6 +132,7 @@ private:
 	UI::Button button_bldns;
 	UI::Button button_ships;
 	UI::Button button_addtn;
+	UI::Button button_attck;
 	UI::Button button_zoom;
 };
 

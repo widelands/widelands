@@ -226,6 +226,17 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                   ibase.egbase().is_game() ? _("High Traffic") : _("Artifacts"),
                   UI::Button::VisualState::kRaised,
                   UI::Button::ImageMode::kUnscaled),
+     button_attck(this,
+                  "attack",
+                  but_w() * 2,
+                  view_.get_h() + but_h(),
+                  but_w(),
+                  but_h(),
+                  UI::ButtonStyle::kWuiSecondary,
+                  g_image_cache->get("images/wui/messages/messages_warfare.png"),
+                  _("Attacks"),
+                  UI::Button::VisualState::kRaised,
+                  UI::Button::ImageMode::kUnscaled),
      button_zoom(this,
                  "zoom",
                  but_w() * 3,
@@ -244,6 +255,7 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
 	button_bldns.sigclicked.connect([this]() { toggle(MiniMapLayer::Building); });
 	button_ships.sigclicked.connect([this]() { toggle(MiniMapLayer::Ship); });
 	button_addtn.sigclicked.connect([this]() { toggle(additional_button_impl_); });
+	button_attck.sigclicked.connect([this]() { toggle(MiniMapLayer::Attack); });
 	button_zoom.sigclicked.connect([this]() { toggle(MiniMapLayer::Zoom2); });
 
 	check_boundaries();
@@ -295,16 +307,19 @@ void MiniMap::resize() {
 	button_addtn.set_pos(
 	   Vector2i(but_w() * (5 - 3 * height_offset), view_.get_h() + but_h() * height_offset));
 	button_addtn.set_size(but_w(), but_h());
-	button_ships.set_pos(
+	button_attck.set_pos(
 	   Vector2i(but_w() * (6 - 3 * 2 * height_offset), view_.get_h() + but_h() * 2 * height_offset));
+	button_attck.set_size(but_w(), but_h());
+	button_ships.set_pos(
+	   Vector2i(but_w() * (7 - 3 * 2 * height_offset), view_.get_h() + but_h() * 2 * height_offset));
 	button_ships.set_size(but_w(), but_h());
 	if (seafaring) {
 		button_zoom.set_pos(Vector2i(
-		   but_w() * (7 - 3 * 2 * height_offset), view_.get_h() + but_h() * 2 * height_offset));
+		   but_w() * (8 - 3 * 2 * height_offset), view_.get_h() + but_h() * 2 * height_offset));
 		button_zoom.set_size(but_w(), but_h());
 	} else {
-		button_zoom.set_pos(Vector2i(but_w() * 0, view_.get_h() + 2 * but_h()));
-		button_zoom.set_size(view_.get_w(), but_h());
+		button_zoom.set_pos(Vector2i(but_w() * (7 - 3 * 2 * height_offset), view_.get_h() + but_h() * 2 * height_offset));
+		button_zoom.set_size(but_w(), but_h());
 	}
 	button_zoom.set_enabled(view_.can_zoom());
 
@@ -321,6 +336,7 @@ void MiniMap::update_button_permpressed() {
 	button_bldns.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Building) != 0);
 	button_ships.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Ship) != 0);
 	button_addtn.set_perm_pressed((*view_.minimap_layers_ & additional_button_impl_) != 0);
+	button_attck.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Attack) != 0);
 	button_zoom.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Zoom2) != 0);
 }
 

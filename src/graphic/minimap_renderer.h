@@ -41,6 +41,7 @@ enum class MiniMapLayer {
 	Ship = 1 << 8,
 	Traffic = 1 << 9,
 	Artifacts = 1 << 10,
+	Attack = 1 << 11,
 };
 
 // A bunch of operators that turn MiniMapLayer into a bitwise combinable flag class.
