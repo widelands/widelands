@@ -26,6 +26,7 @@
 #include "graphic/image_io.h"
 #include "graphic/style_manager.h"
 #include "graphic/texture.h"
+#include "io/filesystem/layered_filesystem.h"
 
 ImageCache* g_image_cache;
 
@@ -63,22 +64,62 @@ void ImageCache::fill_with_texture_atlases(
 	for (auto& pair : textures_in_atlas) {
 		images_.insert(std::move(pair));
 	}
+	mipmap_cache_.clear();
 }
 
 /** Lazy access to images_ via hash.
  *
  * In case hash is not not found it will we fetched via load_image().
  */
-const Image* ImageCache::get(std::string hash, bool theme_lookup) {
-	if (theme_lookup) {
+const Image* ImageCache::get(std::string hash, const bool theme_lookup, const uint8_t scale_index) {
+	if (theme_lookup && scale_index == kNoScale) {
 		hash = resolve_template_image_filename(hash);
 	}
-	auto it = images_.find(hash);
-	if (it == images_.end()) {
-		NoteThreadSafeFunction::instantiate(
-		   [this, hash]() { images_.insert(std::make_pair(hash, load_image(hash))); }, true);
-		it = images_.find(hash);
-		assert(it != images_.end());
+
+	if (scale_index == kNoScale) {
+		auto it = images_.find(hash);
+
+		if (it == images_.end()) {
+			NoteThreadSafeFunction::instantiate(
+			   [this, &hash]() { images_.insert(std::make_pair(hash, load_image(hash))); }, true);
+			it = images_.find(hash);
+			assert(it != images_.end());
+		}
+
+		return it->second.get();
 	}
-	return it->second.get();
+
+	assert(scale_index < kScalesCount);
+	auto mipmap_it = mipmap_cache_.find(hash);
+
+	if (mipmap_it == mipmap_cache_.end()) {
+		size_t extpos = hash.rfind('.');
+		assert(extpos != std::string::npos);
+		std::string before_extpos = hash.substr(0, extpos);
+		std::string after_extpos = hash.substr(extpos);
+
+		uint8_t bitset = 0;
+		for (uint8_t i = 0; i < kScalesCount; ++i) {
+			std::string filename = before_extpos;
+			filename += kScales[i].second;
+			filename += after_extpos;
+			if (g_fs->file_exists(filename)) {
+				bitset |= 1 << i;
+			}
+		}
+
+		mipmap_it = mipmap_cache_.emplace(hash, bitset).first;
+	}
+
+	if (mipmap_it->second == 0 && scale_index == kDefaultScaleIndex) {
+		// Image without mipmaps
+		return get(hash, theme_lookup, kNoScale);
+	}
+
+	if ((mipmap_it->second & (1 << scale_index)) == 0) {
+		// No mipmap at this scale
+		return nullptr;
+	}
+
+	return get(hash.insert(hash.rfind('.'), kScales[scale_index].second), theme_lookup, kNoScale);
 }
