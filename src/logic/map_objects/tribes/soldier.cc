@@ -1691,7 +1691,7 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 		}
 
 		// Attack in next cycle
-		molog(game.get_gametime(), "[naval_invasion] Attack target selected\n");
+		molog(game.get_gametime(), "[naval_invasion] Attack target selected (%s at %3dx%3d)\n", bld.descr().name().c_str(), bld.get_position().x, bld.get_position().y);
 		state.ivar1 = bld.serial();
 		return schedule_act(game, Duration(10));
 	}
@@ -1713,7 +1713,7 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 			upcast(Soldier, soldier, bob);
 			if (soldier->can_be_challenged() && soldier->get_battle() == nullptr &&
 			    soldier->get_state(taskNavalInvasion) != nullptr) {
-				molog(game.get_gametime(), "[naval_invasion] Hostile soldier selected\n");
+				molog(game.get_gametime(), "[naval_invasion] Hostile soldier selected (%s at %3dx%3d)\n", soldier->descr().name().c_str(), soldier->get_position().x, soldier->get_position().y);
 				new Battle(game, this, soldier);
 				return start_task_battle(game);
 			}
@@ -1844,8 +1844,10 @@ bool Soldier::check_node_blocked(Game& game, const FCoords& field, bool const co
 			if (!soldier->is_on_battlefield() || (soldier->get_current_health() == 0u)) {
 				continue;
 			}
-			if (soldier->get_state(taskNavalInvasion) != nullptr &&
-			    get_state(taskNavalInvasion) != nullptr && soldier->get_owner() == get_owner()) {
+
+			if (soldier->get_state() != nullptr && soldier->get_state()->task == &taskNavalInvasion &&
+			    get_state() != nullptr && get_state()->task == &taskNavalInvasion &&
+			    soldier->get_owner() == get_owner()) {
 				continue;
 			}
 
