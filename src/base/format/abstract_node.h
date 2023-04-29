@@ -19,8 +19,6 @@
 #ifndef WL_BASE_FORMAT_ABSTRACT_NODE_H
 #define WL_BASE_FORMAT_ABSTRACT_NODE_H
 
-#include <cstring>
-
 namespace format_impl {
 
 enum Flags : uint8_t {

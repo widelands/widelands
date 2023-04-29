@@ -20,6 +20,7 @@
 #define WL_BASE_FORMAT_WRITE_NUMBER_H
 
 #include <cassert>
+#include <cstring>
 
 namespace format_impl {
 
