@@ -790,6 +790,11 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          keysym(SDLK_7, KMOD_SHIFT),
                          "game_sfstats_filter_refitting",
                          gettext_noop("Show Ships Being Refitted"))},
+   {KeyboardShortcut::kInGameQuicknavGUI,
+    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                         keysym(SDLK_v),
+                         "quicknav_gui",
+                         gettext_noop("Toggle Quick Navigation"))},
 
 // quicknav_descr() uses these format strings and adds the landmark number
 #define QUICKNAV(i)                                                                                \
