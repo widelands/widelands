@@ -44,13 +44,16 @@ static const RGBAColor& get_soldier_color(const Widelands::Soldier* soldier) {
 
 	if (soldier->is_shipping()) {
 		serial = soldier->get_ship_serial();
-	} else if (const Widelands::PlayerImmovable* loc = soldier->get_location(soldier->owner().egbase()); loc != nullptr) {
+	} else if (const Widelands::PlayerImmovable* loc =
+	              soldier->get_location(soldier->owner().egbase());
+	           loc != nullptr) {
 		serial = loc->serial();
 	}
 
 	static std::map<Widelands::Serial, RGBAColor> soldier_colors;
 	if (soldier_colors.count(serial) == 0) {
-		soldier_colors.emplace(serial, RGBAColor(RNG::static_rand(256), RNG::static_rand(256), RNG::static_rand(256), kAlpha));
+		soldier_colors.emplace(serial, RGBAColor(RNG::static_rand(256), RNG::static_rand(256),
+		                                         RNG::static_rand(256), kAlpha));
 	}
 	return soldier_colors.at(serial);
 }
@@ -160,7 +163,9 @@ std::vector<Widelands::Soldier*> AttackWindow::get_max_attackers() {
 
 	// Look for nearby warships
 	for (Widelands::Serial ship_serial : iplayer_.player().ships()) {
-		if (const Widelands::Ship* ship = dynamic_cast<const Widelands::Ship*>(egbase.objects().get_object(ship_serial)); ship != nullptr) {
+		if (const Widelands::Ship* ship =
+		       dynamic_cast<const Widelands::Ship*>(egbase.objects().get_object(ship_serial));
+		    ship != nullptr) {
 			if (ship->get_ship_type() == Widelands::ShipType::kWarship && ship->can_attack()) {
 				Widelands::Coords attack_port_space = ship->get_attack_coords();
 				if (!static_cast<bool>(attack_port_space)) {
@@ -171,7 +176,8 @@ std::vector<Widelands::Soldier*> AttackWindow::get_max_attackers() {
 					continue;
 				}
 
-				if (!is_naval_invasion_ && egbase.map()[attack_port_space].get_immovable() != building) {
+				if (!is_naval_invasion_ &&
+				    egbase.map()[attack_port_space].get_immovable() != building) {
 					continue;
 				}
 
@@ -427,23 +433,28 @@ void AttackWindow::act_attack() {
 		std::map<Widelands::OPtr<Widelands::Ship>, std::vector<uint32_t>> soldiers_on_warships;
 
 		for (Widelands::Serial serial : attack_panel_.soldiers()) {
-			if (Widelands::Soldier* temp_attacker = dynamic_cast<Widelands::Soldier*>(iplayer_.egbase().objects().get_object(serial)); temp_attacker != nullptr) {
-				if (Widelands::Ship* ship = dynamic_cast<Widelands::Ship*>(iplayer_.egbase().objects().get_object(temp_attacker->get_ship_serial())); ship != nullptr) {
+			if (Widelands::Soldier* temp_attacker =
+			       dynamic_cast<Widelands::Soldier*>(iplayer_.egbase().objects().get_object(serial));
+			    temp_attacker != nullptr) {
+				if (Widelands::Ship* ship = dynamic_cast<Widelands::Ship*>(
+				       iplayer_.egbase().objects().get_object(temp_attacker->get_ship_serial()));
+				    ship != nullptr) {
 					soldiers_on_warships[ship].push_back(serial);
 				}
 			}
 		}
 
 		for (auto& pair : soldiers_on_warships) {
-			iplayer_.game().send_player_warship_command(*pair.first.get(iplayer_.egbase()),
-				Widelands::WarshipCommand::kAttack, pair.second);
-				iplayer_.map_view()->mouse_to_field(target_coordinates_, MapView::Transition::Jump);
+			iplayer_.game().send_player_warship_command(
+			   *pair.first.get(iplayer_.egbase()), Widelands::WarshipCommand::kAttack, pair.second);
+			iplayer_.map_view()->mouse_to_field(target_coordinates_, MapView::Transition::Jump);
 		}
 
 		iplayer_.map_view()->mouse_to_field(target_coordinates_, MapView::Transition::Jump);
-	} else if (Widelands::Building* building = target_building_.get(iplayer_.egbase()); building != nullptr) {
+	} else if (Widelands::Building* building = target_building_.get(iplayer_.egbase());
+	           building != nullptr) {
 		iplayer_.game().send_player_enemyflagaction(building->base_flag(), iplayer_.player_number(),
-			                                        attack_panel_.soldiers(), get_allow_conquer());
+		                                            attack_panel_.soldiers(), get_allow_conquer());
 		iplayer_.map_view()->mouse_to_field(building->get_position(), MapView::Transition::Jump);
 	}
 	die();
@@ -607,7 +618,8 @@ void AttackPanel::ListOfSoldiers::draw(RenderTarget& dst) {
 	for (uint32_t i = 0; i < nr_soldiers; ++i) {
 		Vector2i location(column * kSoldierIconWidth, row * kSoldierIconHeight);
 
-		dst.fill_rect(Recti(location, kSoldierIconWidth, kSoldierIconHeight), get_soldier_color(soldiers_[i]), BlendMode::Default);
+		dst.fill_rect(Recti(location, kSoldierIconWidth, kSoldierIconHeight),
+		              get_soldier_color(soldiers_[i]), BlendMode::Default);
 
 		soldiers_[i]->draw_info_icon(location, 1.0f, Widelands::Soldier::InfoMode::kInBuilding,
 		                             InfoToDraw::kSoldierLevels, &dst);
@@ -617,9 +629,10 @@ void AttackPanel::ListOfSoldiers::draw(RenderTarget& dst) {
 			constexpr float kSize = 0.5f;
 			constexpr float kAlpha = 0.9f;
 			const Image* anchor = g_image_cache->get("images/wui/overlays/port_hint.png");
-			dst.blitrect_scale(Rectf((column + kOffset) * kSoldierIconWidth, (row + kOffset) * kSoldierIconHeight,
-					kSoldierIconWidth * kSize, kSoldierIconHeight * kSize),
-					anchor, Recti(0, 0, anchor->width(), anchor->height()), kAlpha, BlendMode::Default);
+			dst.blitrect_scale(
+			   Rectf((column + kOffset) * kSoldierIconWidth, (row + kOffset) * kSoldierIconHeight,
+			         kSoldierIconWidth * kSize, kSoldierIconHeight * kSize),
+			   anchor, Recti(0, 0, anchor->width(), anchor->height()), kAlpha, BlendMode::Default);
 		}
 
 		if (restricted_row_number_) {

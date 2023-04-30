@@ -1322,13 +1322,15 @@ void Player::enemyflagaction(const Flag& flag,
 						assert(temp_attacker != nullptr);
 						assert(temp_attacker->get_owner() == this);
 						if (temp_attacker->is_shipping()) {
-							if (Ship* ship = dynamic_cast<Ship*>(egbase().objects().get_object(temp_attacker->get_ship_serial())); ship != nullptr) {
+							if (Ship* ship = dynamic_cast<Ship*>(
+							       egbase().objects().get_object(temp_attacker->get_ship_serial()));
+							    ship != nullptr) {
 								soldiers_on_warships[ship].push_back(temp_attacker->serial());
 							} else {
 								verb_log_warn_time(egbase().get_gametime(),
-									               "Player(%u)::enemyflagaction: Not sending soldier %u "
-									               "because his warship has vanished\n",
-									               player_number(), temp_attacker->serial());
+								                   "Player(%u)::enemyflagaction: Not sending soldier %u "
+								                   "because his warship has vanished\n",
+								                   player_number(), temp_attacker->serial());
 							}
 						} else if (upcast(MilitarySite, ms, temp_attacker->get_location(egbase()))) {
 							assert(ms->get_owner() == this);
@@ -1344,7 +1346,8 @@ void Player::enemyflagaction(const Flag& flag,
 					}
 
 					for (auto& pair : soldiers_on_warships) {
-						pair.first.get(egbase())->warship_command(dynamic_cast<Game&>(egbase()), WarshipCommand::kAttack, pair.second);
+						pair.first.get(egbase())->warship_command(
+						   dynamic_cast<Game&>(egbase()), WarshipCommand::kAttack, pair.second);
 					}
 				}
 			}

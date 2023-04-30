@@ -151,8 +151,12 @@ private:
 SoldierPanel::SoldierPanel(UI::Panel& parent,
                            Widelands::EditorGameBase& gegbase,
                            Widelands::MapObject& building_or_ship)
-   : Panel(&parent, UI::PanelStyle::kWui, 0, 0, 0, 0), egbase_(gegbase), building_or_ship_(&building_or_ship), is_ship_(building_or_ship.descr().type() == Widelands::MapObjectType::SHIP) {
-	Widelands::Soldier::calc_info_icon_size(building_or_ship.owner().tribe(), icon_width_, icon_height_);
+   : Panel(&parent, UI::PanelStyle::kWui, 0, 0, 0, 0),
+     egbase_(gegbase),
+     building_or_ship_(&building_or_ship),
+     is_ship_(building_or_ship.descr().type() == Widelands::MapObjectType::SHIP) {
+	Widelands::Soldier::calc_info_icon_size(
+	   building_or_ship.owner().tribe(), icon_width_, icon_height_);
 	icon_width_ += 2 * kIconBorder;
 	icon_height_ += 2 * kIconBorder;
 
@@ -355,7 +359,8 @@ void SoldierPanel::draw(RenderTarget& dst) {
 
 		constexpr float kNoZoom = 1.f;
 		soldier->draw_info_icon(icon.pos + Vector2i(kIconBorder, kIconBorder), kNoZoom,
-		                        Widelands::Soldier::InfoMode::kInBuilding, InfoToDraw::kSoldierLevels, &dst);
+		                        Widelands::Soldier::InfoMode::kInBuilding, InfoToDraw::kSoldierLevels,
+		                        &dst);
 
 		if (!icon.cache_is_present) {
 			// Since the background is black, darkening the icon has the same effect
@@ -437,15 +442,16 @@ private:
 	UI::Panel* soldier_capacity_control_;
 };
 
-SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::MapObject& building_or_ship)
+SoldierList::SoldierList(UI::Panel& parent,
+                         InteractiveBase& ib,
+                         Widelands::MapObject& building_or_ship)
    : UI::Box(&parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
 
      ibase_(ib),
      building_or_ship_(building_or_ship),
 
      soldierpanel_(*this, ib.egbase(), building_or_ship),
-     infotext_(
-        this, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel) {
+     infotext_(this, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel) {
 	unset_infotext();
 	add(&soldierpanel_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
@@ -543,8 +549,11 @@ bool SoldierList::can_eject() const {
 	const Widelands::Building* building = is_ship ? nullptr : soldierpanel_.get_building();
 	const Widelands::Ship* ship = is_ship ? soldierpanel_.get_ship() : nullptr;
 
-	uint32_t const capacity_min = is_ship ? ship->min_warship_soldier_capacity() : building->soldier_control()->min_soldier_capacity();
-	bool over_min = capacity_min < (is_ship ? ship->onboard_soldiers().size() : building->soldier_control()->present_soldiers().size());
+	uint32_t const capacity_min = is_ship ? ship->min_warship_soldier_capacity() :
+                                           building->soldier_control()->min_soldier_capacity();
+	bool over_min =
+	   capacity_min < (is_ship ? ship->onboard_soldiers().size() :
+                                building->soldier_control()->present_soldiers().size());
 
 	return over_min;
 }
@@ -564,7 +573,7 @@ void SoldierList::set_soldier_preference(int32_t changed_to) {
 	if (Widelands::Game* game = ibase_.get_game()) {
 		game->send_player_militarysite_set_soldier_preference(
 		   *soldierpanel_.get_building(), changed_to == 0 ? Widelands::SoldierPreference::kRookies :
-                                      Widelands::SoldierPreference::kHeroes);
+                                                          Widelands::SoldierPreference::kHeroes);
 	} else {
 		NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 	}
@@ -574,7 +583,8 @@ bool SoldierList::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 	return soldier_capacity_control_->handle_mousewheel(x, y, modstate);
 }
 
-UI::Panel*
-create_soldier_list(UI::Panel& parent, InteractiveBase& ib, Widelands::MapObject& building_or_ship) {
+UI::Panel* create_soldier_list(UI::Panel& parent,
+                               InteractiveBase& ib,
+                               Widelands::MapObject& building_or_ship) {
 	return new SoldierList(parent, ib, building_or_ship);
 }
