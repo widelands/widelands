@@ -207,7 +207,7 @@ bool MapDetails::update(const MapData& mapdata, bool localize_mapname, bool rend
 					    0 == ml->load_map_for_render(egbase_, &egbase_.enabled_addons())) {
 						minimap_cache_[last_map_] = draw_minimap(
 						   egbase_, nullptr, Rectf(), MiniMapType::kStaticMap,
-						   MiniMapLayer::Terrain | MiniMapLayer::StartingPositions | MiniMapLayer::Owner);
+						   MiniMapLayer::Terrain | MiniMapLayer::StartingPositions);
 						minimap_icon_.set_icon(minimap_cache_.at(last_map_).get());
 						minimap_icon_.set_visible(true);
 					}
