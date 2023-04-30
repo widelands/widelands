@@ -26,9 +26,9 @@ class Panel;
 }  // namespace UI
 
 namespace Widelands {
-class Building;
+class MapObject;
 }  // namespace Widelands
 
-UI::Panel* create_soldier_list(UI::Panel& parent, InteractiveBase&, Widelands::Building& building);
+UI::Panel* create_soldier_list(UI::Panel& parent, InteractiveBase&, Widelands::MapObject& building_or_ship);
 
 #endif  // end of include guard: WL_WUI_SOLDIERLIST_H

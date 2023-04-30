@@ -764,7 +764,7 @@ private:
 
 struct CmdDropSoldier : public PlayerCommand {
 	CmdDropSoldier() = default;  //  for savegames
-	CmdDropSoldier(const Time& t, const int32_t p, Building& b, const int32_t init_soldier)
+	CmdDropSoldier(const Time& t, const int32_t p, MapObject& b, const int32_t init_soldier)
 	   : PlayerCommand(t, p), serial(b.serial()), soldier(init_soldier) {
 	}
 

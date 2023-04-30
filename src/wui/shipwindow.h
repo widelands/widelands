@@ -76,7 +76,6 @@ private:
 
 	UI::Box vbox_;
 	UI::Box navigation_box_;
-	UI::Box warship_controls_;
 	UI::Panel* warship_capacity_control_;
 	UI::EditBox* name_field_;
 	UI::Button* btn_goto_;

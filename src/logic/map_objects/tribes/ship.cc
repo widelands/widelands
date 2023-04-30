@@ -931,6 +931,39 @@ uint32_t Ship::min_warship_soldier_capacity() const {
 	return is_on_destination_dock() ? 0U : get_nritems();
 }
 
+std::vector<Soldier*> Ship::onboard_soldiers() const {
+	std::vector<Soldier*> result;
+	for (const ShippingItem& si : items_) {
+		Worker* worker;
+		si.get(owner().egbase(), nullptr, &worker);
+		if (worker != nullptr && worker->descr().type() == MapObjectType::SOLDIER) {
+			result.push_back(dynamic_cast<Soldier*>(worker));
+		}
+	}
+	return result;
+}
+
+void Ship::drop_soldier(Game& game, Serial soldier) {
+	PortDock* dest = get_destination_port(game);
+	if (dest == nullptr) {
+		verb_log_warn_time(game.get_gametime(), "Ship not in dock, cannot drop soldier");
+		return;
+	}
+
+	for (size_t i = 0; i < items_.size(); ++i) {
+		Worker* worker;
+		items_[i].get(game, nullptr, &worker);
+		if (worker != nullptr && worker->serial() == soldier) {
+			dest->shipping_item_arrived(game, items_[i]);
+
+			items_[i] = items_.back();
+			items_.pop_back();
+			return;
+		}
+	}
+	verb_log_warn_time(game.get_gametime(), "Ship::drop_soldier: %u is not on board", soldier);
+}
+
 void Ship::warship_command(Game& game,
                            const WarshipCommand cmd,
                            const std::vector<uint32_t>& parameters) {

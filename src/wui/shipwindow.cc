@@ -35,7 +35,7 @@
 #include "wui/actionconfirm.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
-#include "wui/soldiercapacitycontrol.h"
+#include "wui/soldierlist.h"
 
 namespace {
 constexpr const char* const kImgGoTo = "images/wui/ship/menu_ship_goto.png";
@@ -68,8 +68,7 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
      ship_(ship),
      vbox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
      navigation_box_(&vbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-     warship_controls_(&navigation_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
-     warship_capacity_control_(create_soldier_capacity_control(navigation_box_, ibase_, *ship)) {
+     warship_capacity_control_(create_soldier_list(vbox_, ibase_, *ship)) {
 	vbox_.set_inner_spacing(kPadding);
 	assert(ship->get_owner());
 
@@ -85,6 +84,7 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	display_ = new ItemWaresDisplay(&vbox_, ship->owner());
 	display_->set_capacity(ship->get_capacity());
 	vbox_.add(display_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	vbox_.add(warship_capacity_control_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	// Expedition buttons
 	UI::Box* exp_top =
@@ -97,10 +97,6 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	   new UI::Box(&navigation_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 	navigation_box_.add(exp_bot, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	navigation_box_.add_space(kPadding);
-	navigation_box_.add(warship_capacity_control_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	navigation_box_.add_space(kPadding);
-
-	navigation_box_.add(&warship_controls_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	btn_scout_[Widelands::WALK_NW - 1] =
 	   make_button(exp_top, "scnw", _("Scout towards the north west"), kImgScoutNW, true,
@@ -153,17 +149,17 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	exp_bot->add(btn_scout_[Widelands::WALK_SE - 1]);
 
 	btn_warship_attack_ =
-	   make_button(&warship_controls_, "war_attack", _("Attack the nearest enemy warship"),
+	   make_button(&navigation_box_, "war_attack", _("Attack the nearest enemy warship"),
 	               kImgWarshipAttack, false, [this]() { act_warship_attack(); });
-	warship_controls_.add(btn_warship_attack_);
-
-	set_destination_ = new UI::Dropdown<Widelands::OPtr<Widelands::MapObject>>(
-	   &navigation_box_, "set_destination", 0, 0, 200, 8, kButtonSize, _("Destination"),
-	   UI::DropdownType::kTextual, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
-	set_destination_->selected.connect([this]() { act_set_destination(); });
-	navigation_box_.add(set_destination_, UI::Box::Resizing::kFullSize);
+	navigation_box_.add(btn_warship_attack_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	vbox_.add(&navigation_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+
+	set_destination_ = new UI::Dropdown<Widelands::OPtr<Widelands::MapObject>>(
+	   &vbox_, "set_destination", 0, 0, 200, 8, kButtonSize, _("Destination"),
+	   UI::DropdownType::kTextual, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
+	set_destination_->selected.connect([this]() { act_set_destination(); });
+	vbox_.add(set_destination_, UI::Box::Resizing::kFullSize);
 
 	// Bottom buttons
 	UI::Box* buttons = new UI::Box(&vbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
@@ -244,14 +240,17 @@ void ShipWindow::set_button_visibility() {
 		return;
 	}
 
+	const bool show_expedition_controls = ship->state_is_expedition() && !ship->is_refitting();
 	const bool is_warship = ship->get_ship_type() == Widelands::ShipType::kWarship;
 
-	btn_cancel_expedition_->set_visible(btn_cancel_expedition_->enabled());
-	warship_controls_.set_visible(ibase_.egbase().is_game() && is_warship);
+	display_->set_visible(!is_warship);
 	warship_capacity_control_->set_visible(is_warship);
+	btn_warship_attack_->set_visible(ibase_.egbase().is_game() && is_warship);
+	btn_cancel_expedition_->set_visible(btn_cancel_expedition_->enabled());
 	btn_warship_stay_->set_visible(is_warship);
 	btn_construct_port_->set_visible(!is_warship);
-	navigation_box_.set_visible(ship->state_is_expedition() && !ship->is_refitting());
+	navigation_box_.set_visible(show_expedition_controls);
+	set_destination_->set_visible(show_expedition_controls);
 }
 
 void ShipWindow::no_port_error_message() {

@@ -175,13 +175,8 @@ std::vector<Widelands::Soldier*> AttackWindow::get_max_attackers() {
 					continue;
 				}
 
-				for (size_t i = 0; i < ship->get_nritems(); ++i) {
-					Widelands::Worker* worker;
-					ship->get_item(i).get(egbase, nullptr, &worker);
-					if (worker != nullptr && worker->descr().type() == Widelands::MapObjectType::SOLDIER) {
-						v.push_back(dynamic_cast<Widelands::Soldier*>(worker));
-					}
-				}
+				std::vector<Widelands::Soldier*> onboard = ship->onboard_soldiers();
+				v.insert(v.end(), onboard.begin(), onboard.end());
 			}
 		}
 	}
@@ -618,8 +613,13 @@ void AttackPanel::ListOfSoldiers::draw(RenderTarget& dst) {
 		                             InfoToDraw::kSoldierLevels, &dst);
 
 		if (soldiers_[i]->is_shipping()) {
+			constexpr float kOffset = 0.35f;
+			constexpr float kSize = 0.5f;
+			constexpr float kAlpha = 0.9f;
 			const Image* anchor = g_image_cache->get("images/wui/overlays/port_hint.png");
-			dst.blit(Vector2i(column * kSoldierIconWidth + (kSoldierIconWidth - anchor->width()) / 2, row * kSoldierIconHeight), anchor);
+			dst.blitrect_scale(Rectf((column + kOffset) * kSoldierIconWidth, (row + kOffset) * kSoldierIconHeight,
+					kSoldierIconWidth * kSize, kSoldierIconHeight * kSize),
+					anchor, Recti(0, 0, anchor->width(), anchor->height()), kAlpha, BlendMode::Default);
 		}
 
 		if (restricted_row_number_) {
