@@ -44,6 +44,7 @@
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
+#include "logic/mapregion.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
@@ -728,7 +729,8 @@ void Soldier::start_animation(EditorGameBase& egbase,
  * \return \c true if this soldier is considered to be on the battlefield
  */
 bool Soldier::is_on_battlefield() {
-	return (get_state(taskAttack) != nullptr) || (get_state(taskDefense) != nullptr);
+	return (get_state(taskAttack) != nullptr) || (get_state(taskDefense) != nullptr) ||
+	       (get_state(taskNavalInvasion) != nullptr);
 }
 
 /**
@@ -1624,9 +1626,17 @@ void Soldier::start_task_naval_invasion(Game& game, const Coords& coords) {
 }
 
 void Soldier::naval_invasion_update(Game& game, State& state) {
+	constexpr int kPortSpaceRadius = 2;
+	constexpr int kPortSpaceGeneralAreaRadius = 5;
+
 	std::string signal = get_signal();
 	if (!signal.empty()) {
 		signal_handled();
+	}
+
+	if (battle_ != nullptr) {
+		// We are being attacked
+		return start_task_battle(game);
 	}
 
 	/*
@@ -1655,12 +1665,13 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 
 	// No enemy, look for one
 	const Map& map = game.map();
+	CheckStepWalkOn checkstep(descr().movecaps(), false);
+	const FCoords portspace_fcoords = map.get_fcoords(state.coords);
 
 	std::vector<ImmovableFound> results;
-	map.find_reachable_immovables(game, Area<FCoords>(get_position(), state.ivar2 + state.ivar3),
-	                              &results, CheckStepWalkOn(descr().movecaps(), false),
-	                              FindImmovableAttackTarget());
-	// Consider closest targets first (estimate by air distance)
+	map.find_reachable_immovables(game, Area<FCoords>(portspace_fcoords, state.ivar2 + state.ivar3),
+	                              &results, checkstep, FindImmovableAttackTarget());
+	// Consider closest targets first (estimate by air distance to us, not to the port space)
 	std::sort(results.begin(), results.end(),
 	          [this, &map](const ImmovableFound& a, const ImmovableFound& b) {
 		          const uint32_t distance_a = map.calc_distance(get_position(), a.coords);
@@ -1681,24 +1692,45 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 		}
 
 		// Attack in next cycle
-		molog(game.get_gametime(), "[naval_invasion] Attack target selected\n");
+		molog(game.get_gametime(), "[naval_invasion] Attack target selected (%s at %3dx%3d)\n",
+		      bld.descr().name().c_str(), bld.get_position().x, bld.get_position().y);
 		state.ivar1 = bld.serial();
 		return schedule_act(game, Duration(10));
 	}
 
-	// No targets found, return to our temporary camp and wait there.
-	FCoords fcoords = map.get_fcoords(state.coords);
-	if (fcoords.field->get_owned_by() != owner().player_number()) {
-		// The target should be unguarded now, conquer the port space.
-		game.conquer_area(
-		   PlayerArea<Area<FCoords>>(owner().player_number(), Area<FCoords>(fcoords, 2)));
-		return schedule_act(game, Duration(10));
+	// Check if another enemy wants our port space as well
+	if (get_battle() == nullptr) {
+		std::vector<Bob*> hostile_soldiers;
+		map.find_reachable_bobs(game, Area<FCoords>(portspace_fcoords, state.ivar2),
+		                        &hostile_soldiers, checkstep, FindBobEnemySoldier(get_owner()));
+		std::sort(hostile_soldiers.begin(), hostile_soldiers.end(), [this, &map](Bob* a, Bob* b) {
+			const uint32_t distance_a = map.calc_distance(get_position(), a->get_position());
+			const uint32_t distance_b = map.calc_distance(get_position(), b->get_position());
+			if (distance_a != distance_b) {
+				return distance_a < distance_b;
+			}
+			return a->serial() < b->serial();
+		});
+		for (Bob* bob : hostile_soldiers) {
+			upcast(Soldier, soldier, bob);
+			if (soldier->can_be_challenged() && soldier->get_battle() == nullptr &&
+			    soldier->get_state(taskNavalInvasion) != nullptr) {
+				molog(game.get_gametime(),
+				      "[naval_invasion] Hostile soldier selected (%s at %3dx%3d)\n",
+				      soldier->descr().name().c_str(), soldier->get_position().x,
+				      soldier->get_position().y);
+				new Battle(game, this, soldier);
+				return start_task_battle(game);
+			}
+		}
 	}
 
-	if (fcoords.field->get_immovable() != nullptr &&
-	    fcoords.field->get_immovable()->descr().type() == MapObjectType::WAREHOUSE &&
-	    fcoords.field->get_immovable()->get_owner() == get_owner()) {
-		Warehouse& wh = dynamic_cast<Warehouse&>(*fcoords.field->get_immovable());
+	// No targets found, return to our temporary camp and wait there.
+
+	if (portspace_fcoords.field->get_immovable() != nullptr &&
+	    portspace_fcoords.field->get_immovable()->descr().type() == MapObjectType::WAREHOUSE &&
+	    portspace_fcoords.field->get_immovable()->get_owner() == get_owner()) {
+		Warehouse& wh = dynamic_cast<Warehouse&>(*portspace_fcoords.field->get_immovable());
 		if (wh.descr().get_isport()) {
 			// A port has been built. Our work here is done.
 			pop_task(game);
@@ -1715,24 +1747,43 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 		}
 	}
 
-	if (get_position() == state.coords) {
-		if (current_health_ < get_max_health()) {  // Stationed soldiers heal very slowly.
+	if (map.calc_distance(get_position(), state.coords) <= kPortSpaceGeneralAreaRadius) {
+		// The target should be unguarded now, conquer the port space.
+		MapRegion<Area<FCoords>> mr(map, Area<FCoords>(portspace_fcoords, kPortSpaceRadius));
+		do {
+			if (mr.location().field->get_owned_by() != owner().player_number()) {
+				molog(game.get_gametime(), "[naval_invasion] Conquering port area\n");
+				game.conquer_area_no_building(PlayerArea<Area<FCoords>>(
+				   owner().player_number(), Area<FCoords>(portspace_fcoords, kPortSpaceRadius)));
+				return start_task_idle(game, descr().get_animation("idle", this), 1000);
+			}
+		} while (mr.advance(map));
+
+		// Stationed soldiers heal very slowly.
+		if (current_health_ < get_max_health()) {
 			constexpr unsigned kStationaryHealPerSecond = 10;
 			heal(kStationaryHealPerSecond);
 		}
+
 		return start_task_idle(game, descr().get_animation("idle", this), 1000);
 	}
 
-	if (start_task_movepath(
-	       game, state.coords, 0, descr().get_right_walk_anims(does_carry_ware(), this), false, 3)) {
+	if (start_task_movepath(game, state.coords, 0,
+	                        descr().get_right_walk_anims(does_carry_ware(), this), false,
+	                        kPortSpaceRadius)) {
 		molog(game.get_gametime(), "[naval_invasion] Return to camp\n");
 		return;
 	}
 
-	if (fcoords.field->get_immovable() != nullptr &&
-	    !fcoords.field->get_immovable()->get_passable()) {
-		// Wait until the fire burns out
-		return schedule_act(game, Duration(100));
+	// Camp is blocked, try to get as close as we can.
+	for (int i = 10; i > 0; --i) {
+		Coords coords = game.random_location(state.coords, kPortSpaceGeneralAreaRadius);
+		if (start_task_movepath(game, coords, 0,
+		                        descr().get_right_walk_anims(does_carry_ware(), this), false,
+		                        kPortSpaceRadius)) {
+			molog(game.get_gametime(), "[naval_invasion] Approach camp\n");
+			return;
+		}
 	}
 
 	molog(game.get_gametime(), "[naval_invasion] Could not find a way to camp!\n");
@@ -1759,13 +1810,20 @@ struct FindBobSoldierOnBattlefield : public FindBob {
  */
 bool Soldier::check_node_blocked(Game& game, const FCoords& field, bool const commit) {
 	State* attackdefense = get_state(taskAttack);
+	bool is_retreating = false;
 
 	if (attackdefense == nullptr) {
 		attackdefense = get_state(taskDefense);
 	}
 
-	if ((attackdefense == nullptr) || (((attackdefense->ivar1 & CF_RETREAT_WHEN_INJURED) != 0) &&
-	                                   get_retreat_health() > get_current_health())) {
+	if (attackdefense == nullptr) {
+		attackdefense = get_state(taskNavalInvasion);
+	} else {
+		is_retreating = ((attackdefense->ivar1 & CF_RETREAT_WHEN_INJURED) != 0) &&
+		                get_retreat_health() > get_current_health();
+	}
+
+	if (attackdefense == nullptr || is_retreating) {
 		// Retreating or non-combatant soldiers act like normal bobs
 		return Bob::check_node_blocked(game, field, commit);
 	}
@@ -1784,8 +1842,17 @@ bool Soldier::check_node_blocked(Game& game, const FCoords& field, bool const co
 	bool multiplesoldiers = false;
 
 	for (Bob* bob = field.field->get_first_bob(); bob != nullptr; bob = bob->get_next_on_field()) {
+		if (bob == this || bob->descr().type() != MapObjectType::SOLDIER) {
+			continue;
+		}
 		if (upcast(Soldier, soldier, bob)) {
 			if (!soldier->is_on_battlefield() || (soldier->get_current_health() == 0u)) {
+				continue;
+			}
+
+			if (soldier->get_state() != nullptr && soldier->get_state()->task == &taskNavalInvasion &&
+			    get_state() != nullptr && get_state()->task == &taskNavalInvasion &&
+			    soldier->get_owner() == get_owner()) {
 				continue;
 			}
 
