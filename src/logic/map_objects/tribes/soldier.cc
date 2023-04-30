@@ -1748,7 +1748,9 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 	}
 
 	// The player doesn't have to build the port exactly where we envision it.
-	if (map.find_reachable_immovables(game, Area<FCoords>(get_position(), kPortSpaceGeneralAreaRadius), nullptr, checkstep, FindFlagWithPlayersWarehouse(*get_owner())) > 0) {
+	if (map.find_reachable_immovables(
+	       game, Area<FCoords>(get_position(), kPortSpaceGeneralAreaRadius), nullptr, checkstep,
+	       FindFlagWithPlayersWarehouse(*get_owner())) > 0) {
 		molog(game.get_gametime(), "[naval_invasion] Nearby economy found, join it\n");
 		return pop_task(game);
 	}
