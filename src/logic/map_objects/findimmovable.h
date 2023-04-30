@@ -159,6 +159,15 @@ struct FindFlagOf {
 	const FindImmovable finder;
 };
 
+struct FindFlagWithPlayersWarehouse {
+	explicit FindFlagWithPlayersWarehouse(const Player& owner) : owner_(owner) {
+	}
+	[[nodiscard]] bool accept(const BaseImmovable& imm) const;
+
+private:
+	const Player& owner_;
+};
+
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_FINDIMMOVABLE_H
