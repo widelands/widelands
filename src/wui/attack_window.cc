@@ -38,29 +38,49 @@ constexpr int kSpacing = 8;
 static unsigned next_serial_(0);
 static std::map<unsigned, AttackWindow*> living_attack_windows_;
 
+static const RGBAColor& get_soldier_color(const Widelands::Soldier* soldier) {
+	constexpr uint8_t kAlpha = 32;
+	Widelands::Serial serial = 0;
+
+	if (soldier->is_shipping()) {
+		serial = soldier->get_ship_serial();
+	} else if (const Widelands::PlayerImmovable* loc = soldier->get_location(soldier->owner().egbase()); loc != nullptr) {
+		serial = loc->serial();
+	}
+
+	static std::map<Widelands::Serial, RGBAColor> soldier_colors;
+	if (soldier_colors.count(serial) == 0) {
+		soldier_colors.emplace(serial, RGBAColor(RNG::static_rand(256), RNG::static_rand(256), RNG::static_rand(256), kAlpha));
+	}
+	return soldier_colors.at(serial);
+}
+
 AttackWindow::AttackWindow(InteractivePlayer& parent,
                            UI::UniqueWindow::Registry& reg,
-                           Widelands::Building& target_bld,
+                           Widelands::Building* target_bld,
                            const Widelands::Coords& target_coords,
                            bool fastclick)
    : UI::UniqueWindow(&parent, UI::WindowStyle::kWui, "attack", &reg, 0, 0, _("Attack")),
      serial_(next_serial_++),
      iplayer_(parent),
      map_(iplayer_.player().egbase().map()),
-     target_building_(&target_bld),
+     target_building_(target_bld),
      target_coordinates_(target_coords),
+     is_naval_invasion_(target_bld == nullptr),
 
      mainbox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
      attack_panel_(mainbox_, iplayer_, true, [this]() { return get_max_attackers(); }),
      bottombox_(&mainbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal) {
-	const unsigned serial = serial_;
-	living_attack_windows_[serial] = this;
-	target_bld.removed.connect([serial](unsigned /* index */) {
-		auto it = living_attack_windows_.find(serial);
-		if (it != living_attack_windows_.end()) {
-			it->second->die();
-		}
-	});
+	if (target_bld != nullptr) {
+		const unsigned serial = serial_;
+		living_attack_windows_[serial] = this;
+		target_bld->removed.connect([serial](unsigned /* index */) {
+			auto it = living_attack_windows_.find(serial);
+			if (it != living_attack_windows_.end()) {
+				it->second->die();
+			}
+		});
+	}
 
 	mainbox_.add(&attack_panel_, UI::Box::Resizing::kExpandBoth);
 	init_bottombox();
@@ -107,26 +127,65 @@ AttackWindow::~AttackWindow() {
 
 std::vector<Widelands::Soldier*> AttackWindow::get_max_attackers() {
 	MutexLock m(MutexLock::ID::kObjects);
-	Widelands::Building* building = target_building_.get(iplayer_.egbase());
-	if (building == nullptr) {
+	const Widelands::EditorGameBase& egbase = iplayer_.egbase();
+	Widelands::Building* building = target_building_.get(egbase);
+	if (building == nullptr && !is_naval_invasion_) {
 		die();  // The target building no longer exists.
 		return {};
 	}
 	std::vector<Widelands::Soldier*> v;
 
-	for (Widelands::Coords& coords : building->get_positions(iplayer_.egbase())) {
-		if (iplayer_.player().is_seeing(map_.get_index(coords, map_.get_width()))) {
-			// TODO(Nordfriese): This method decides by itself which soldier remains in the
-			// building. This soldier will not show up in the result vector. Perhaps we should show
-			// all available soldiers, grouped by building, so the player can choose between all
-			// soldiers knowing that at least one of each group will have to stay at home. However,
-			// this could clutter up the screen a lot. Especially if you have many small buildings.
-			iplayer_.get_player()->find_attack_soldiers(building->base_flag(), &v);
+	// First try land-based attack
+	if (!is_naval_invasion_) {
+		bool sees = false;
+		for (Widelands::Coords& coords : building->get_positions(egbase)) {
+			if (iplayer_.player().is_seeing(map_.get_index(coords, map_.get_width()))) {
+				// TODO(Nordfriese): This method decides by itself which soldier remains in the
+				// building. This soldier will not show up in the result vector. Perhaps we should show
+				// all available soldiers, grouped by building, so the player can choose between all
+				// soldiers knowing that at least one of each group will have to stay at home. However,
+				// this could clutter up the screen a lot. Especially if you have many small buildings.
+				iplayer_.get_player()->find_attack_soldiers(building->base_flag(), &v);
+				sees = true;
+				break;
+			}
+		}
+
+		// Player can't see any part of the building, so it can't be attacked
+		// This is the same check as done later on in send_player_enemyflagaction()
+		if (!sees) {
 			return v;
 		}
 	}
-	// Player can't see any part of the building, so it can't be attacked
-	// This is the same check as done later on in send_player_enemyflagaction()
+
+	// Look for nearby warships
+	for (Widelands::Serial ship_serial : iplayer_.player().ships()) {
+		if (const Widelands::Ship* ship = dynamic_cast<const Widelands::Ship*>(egbase.objects().get_object(ship_serial)); ship != nullptr) {
+			if (ship->get_ship_type() == Widelands::ShipType::kWarship && ship->can_attack()) {
+				Widelands::Coords attack_port_space = ship->get_attack_coords();
+				if (!static_cast<bool>(attack_port_space)) {
+					continue;
+				}
+				attack_port_space = egbase.map().find_portspace_for_dockpoint(attack_port_space);
+				if (!static_cast<bool>(attack_port_space)) {
+					continue;
+				}
+
+				if (!is_naval_invasion_ && egbase.map()[attack_port_space].get_immovable() != building) {
+					continue;
+				}
+
+				for (size_t i = 0; i < ship->get_nritems(); ++i) {
+					Widelands::Worker* worker;
+					ship->get_item(i).get(egbase, nullptr, &worker);
+					if (worker != nullptr && worker->descr().type() == Widelands::MapObjectType::SOLDIER) {
+						v.push_back(dynamic_cast<Widelands::Soldier*>(worker));
+					}
+				}
+			}
+		}
+	}
+
 	return v;
 }
 
@@ -182,7 +241,7 @@ void AttackPanel::think() {
 void AttackWindow::think() {
 	if (!iplayer_.player().is_seeing(iplayer_.egbase().map().get_index(target_coordinates_)) &&
 	    !iplayer_.player().see_all()) {
-		die();  // The target building no longer exists.
+		die();  // The target building can no longer be seen.
 	}
 
 	UI::UniqueWindow::think();
@@ -338,11 +397,11 @@ void AttackPanel::init_soldier_lists(const std::vector<Widelands::Soldier*>& all
 void AttackWindow::init_bottombox() {
 	MutexLock m(MutexLock::ID::kObjects);
 	Widelands::Building* building = target_building_.get(iplayer_.egbase());
-	if (building == nullptr) {
+	if (building == nullptr && !is_naval_invasion_) {
 		die();  // The target building no longer exists.
 		return;
 	}
-	if (building->descr().type() == Widelands::MapObjectType::MILITARYSITE) {
+	if (building != nullptr && building->descr().type() == Widelands::MapObjectType::MILITARYSITE) {
 		do_not_conquer_.reset(
 		   new UI::Checkbox(&bottombox_, UI::PanelStyle::kWui, Vector2i(0, 0), _("Destroy target"),
 		                    _("Destroy the target building instead of conquering it")));
@@ -368,10 +427,28 @@ void AttackWindow::init_bottombox() {
 /** The attack button was pressed. */
 void AttackWindow::act_attack() {
 	MutexLock m(MutexLock::ID::kObjects);
-	Widelands::Building* building = target_building_.get(iplayer_.egbase());
-	if (building != nullptr) {
+
+	if (is_naval_invasion_) {
+		std::map<Widelands::OPtr<Widelands::Ship>, std::vector<uint32_t>> soldiers_on_warships;
+
+		for (Widelands::Serial serial : attack_panel_.soldiers()) {
+			if (Widelands::Soldier* temp_attacker = dynamic_cast<Widelands::Soldier*>(iplayer_.egbase().objects().get_object(serial)); temp_attacker != nullptr) {
+				if (Widelands::Ship* ship = dynamic_cast<Widelands::Ship*>(iplayer_.egbase().objects().get_object(temp_attacker->get_ship_serial())); ship != nullptr) {
+					soldiers_on_warships[ship].push_back(serial);
+				}
+			}
+		}
+
+		for (auto& pair : soldiers_on_warships) {
+			iplayer_.game().send_player_warship_command(*pair.first.get(iplayer_.egbase()),
+				Widelands::WarshipCommand::kAttack, pair.second);
+				iplayer_.map_view()->mouse_to_field(target_coordinates_, MapView::Transition::Jump);
+		}
+
+		iplayer_.map_view()->mouse_to_field(target_coordinates_, MapView::Transition::Jump);
+	} else if (Widelands::Building* building = target_building_.get(iplayer_.egbase()); building != nullptr) {
 		iplayer_.game().send_player_enemyflagaction(building->base_flag(), iplayer_.player_number(),
-		                                            attack_panel_.soldiers(), get_allow_conquer());
+			                                        attack_panel_.soldiers(), get_allow_conquer());
 		iplayer_.map_view()->mouse_to_field(building->get_position(), MapView::Transition::Jump);
 	}
 	die();
@@ -534,8 +611,17 @@ void AttackPanel::ListOfSoldiers::draw(RenderTarget& dst) {
 	int32_t row = 0;
 	for (uint32_t i = 0; i < nr_soldiers; ++i) {
 		Vector2i location(column * kSoldierIconWidth, row * kSoldierIconHeight);
+
+		dst.fill_rect(Recti(location, kSoldierIconWidth, kSoldierIconHeight), get_soldier_color(soldiers_[i]), BlendMode::Default);
+
 		soldiers_[i]->draw_info_icon(location, 1.0f, Widelands::Soldier::InfoMode::kInBuilding,
 		                             InfoToDraw::kSoldierLevels, &dst);
+
+		if (soldiers_[i]->is_shipping()) {
+			const Image* anchor = g_image_cache->get("images/wui/overlays/port_hint.png");
+			dst.blit(Vector2i(column * kSoldierIconWidth + (kSoldierIconWidth - anchor->width()) / 2, row * kSoldierIconHeight), anchor);
+		}
+
 		if (restricted_row_number_) {
 			++row;
 			if (row >= current_size_) {
@@ -598,6 +684,7 @@ void AttackWindow::save(FileWrite& fw, Widelands::MapObjectSaver& mos) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 	fw.signed_32(target_coordinates_.x);
 	fw.signed_32(target_coordinates_.y);
+	// is_naval_invasion_ will be set automatically by the constructor on loading
 
 	fw.unsigned_8(do_not_conquer_ && !do_not_conquer_->get_state() ? 1 : 0);
 

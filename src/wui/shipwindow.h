@@ -29,7 +29,6 @@
 #include "ui_basic/dropdown.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/unique_window.h"
-#include "wui/attack_window.h"
 #include "wui/interactive_base.h"
 #include "wui/itemwaresdisplay.h"
 
@@ -49,7 +48,6 @@ public:
 private:
 	void think() override;
 	void update_destination_buttons(const Widelands::Ship* ship);
-	std::vector<Widelands::Soldier*> get_soldiers() const;
 
 	UI::Button* make_button(UI::Panel* parent,
 	                        const std::string& name,
@@ -97,7 +95,6 @@ private:
 	UI::Dropdown<Widelands::OPtr<Widelands::MapObject>>* set_destination_;
 	bool is_updating_destination_dropdown_{false};
 	ItemWaresDisplay* display_;
-	AttackPanel* warship_soldiers_display_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShip>> shipnotes_subscriber_;
 	DISALLOW_COPY_AND_ASSIGN(ShipWindow);
 };

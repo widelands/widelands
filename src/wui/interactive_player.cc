@@ -748,6 +748,18 @@ void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and
 UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& c,
                                                   const bool fastclick) {
 	const Map& map = egbase().map();
+	for (const auto& pair : expedition_port_spaces_) {
+		if (pair.second == c) {
+			UI::UniqueWindow::Registry& registry =
+			   unique_windows().get_registry(format("navalattack_%d_%d", c.x, c.y));
+			registry.open_window = [this, &registry, &c, fastclick]() {
+				new AttackWindow(*this, registry, nullptr, c, fastclick);
+			};
+			registry.create();
+			return registry.window;
+		}
+	}
+
 	if (Widelands::BaseImmovable* immo = map.get_immovable(c)) {
 		if (immo->descr().type() >= Widelands::MapObjectType::BUILDING) {
 			upcast(Building, building, immo);
@@ -757,7 +769,7 @@ UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& c,
 					UI::UniqueWindow::Registry& registry =
 					   unique_windows().get_registry(format("attack_%d", building->serial()));
 					registry.open_window = [this, &registry, building, &c, fastclick]() {
-						new AttackWindow(*this, registry, *building, c, fastclick);
+						new AttackWindow(*this, registry, building, c, fastclick);
 					};
 					registry.create();
 					return registry.window;

@@ -151,7 +151,7 @@ public:
 	AttackWindow(
 	   InteractivePlayer& parent,
 	   UI::UniqueWindow::Registry&,
-	   Widelands::Building& target_bld,
+	   Widelands::Building* target_bld,
 	   const Widelands::Coords& target_coords,  // not necessarily the building's main location
 	   bool fastclick);
 	~AttackWindow() override;
@@ -183,6 +183,7 @@ private:
 	const Widelands::Map& map_;
 	Widelands::OPtr<Widelands::Building> target_building_;
 	const Widelands::Coords target_coordinates_;
+	bool is_naval_invasion_;
 
 	void init_bottombox();
 

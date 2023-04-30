@@ -100,15 +100,6 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	navigation_box_.add(warship_capacity_control_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	navigation_box_.add_space(kPadding);
 
-	if (upcast(InteractivePlayer, ipl, &ibase_); ipl != nullptr) {
-		warship_soldiers_display_ =
-		   new AttackPanel(navigation_box_, *ipl, false, [this]() { return get_soldiers(); });
-		navigation_box_.add(warship_soldiers_display_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-		navigation_box_.add_space(kPadding);
-	} else {
-		warship_soldiers_display_ = nullptr;
-	}
-
 	navigation_box_.add(&warship_controls_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	btn_scout_[Widelands::WALK_NW - 1] =
@@ -162,7 +153,7 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	exp_bot->add(btn_scout_[Widelands::WALK_SE - 1]);
 
 	btn_warship_attack_ =
-	   make_button(&warship_controls_, "war_attack", _("Attack the nearest enemy port or warship"),
+	   make_button(&warship_controls_, "war_attack", _("Attack the nearest enemy warship"),
 	               kImgWarshipAttack, false, [this]() { act_warship_attack(); });
 	warship_controls_.add(btn_warship_attack_);
 
@@ -247,26 +238,6 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	initialization_complete();
 }
 
-std::vector<Widelands::Soldier*> ShipWindow::get_soldiers() const {
-	std::vector<Widelands::Soldier*> soldiers;
-	Widelands::Ship* ship = ship_.get(ibase_.egbase());
-	if (ship == nullptr) {
-		return soldiers;
-	}
-
-	for (size_t i = 0; i < ship->get_nritems(); ++i) {
-		Widelands::Worker* worker;
-		ship->get_item(i).get(ibase_.egbase(), nullptr, &worker);
-		if (worker != nullptr && worker->descr().type() == Widelands::MapObjectType::SOLDIER) {
-			soldiers.push_back(dynamic_cast<Widelands::Soldier*>(worker));
-		}
-		// TODO(Nordfriese): During refitting, we may also have other wares on board.
-		// Do we want to show these as well somewhere (maybe in the ItemWaresDisplay)?
-	}
-
-	return soldiers;
-}
-
 void ShipWindow::set_button_visibility() {
 	Widelands::Ship* ship = ship_.get(ibase_.egbase());
 	if (ship == nullptr) {
@@ -274,12 +245,6 @@ void ShipWindow::set_button_visibility() {
 	}
 
 	const bool is_warship = ship->get_ship_type() == Widelands::ShipType::kWarship;
-
-	if (warship_soldiers_display_ != nullptr) {
-		const bool warship_display = is_warship && !ship->is_refitting();
-		warship_soldiers_display_->set_visible(warship_display);
-		display_->set_visible(!warship_display);
-	}
 
 	btn_cancel_expedition_->set_visible(btn_cancel_expedition_->enabled());
 	warship_controls_.set_visible(ibase_.egbase().is_game() && is_warship);
@@ -444,8 +409,7 @@ void ShipWindow::think() {
                               _("Refit to transport ship") :
                               _("Refit to warship"));
 	btn_warship_attack_->set_enabled(can_act && ship->can_attack() &&
-	                                 (ship->get_attack_target(ibase_.egbase()) != nullptr ||
-	                                  warship_soldiers_display_->count_soldiers() > 0U));
+	                                 ship->get_attack_target(ibase_.egbase()) != nullptr);
 	btn_warship_stay_->set_enabled(can_act);
 
 	display_->clear();
@@ -597,8 +561,7 @@ void ShipWindow::act_warship_attack() {
 	if (ship == nullptr) {
 		return;
 	}
-	ibase_.game().send_player_warship_command(
-	   *ship, Widelands::WarshipCommand::kAttack, warship_soldiers_display_->soldiers());
+	ibase_.game().send_player_warship_command(*ship, Widelands::WarshipCommand::kAttack, {});
 }
 
 /// Show debug info

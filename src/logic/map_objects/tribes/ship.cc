@@ -2403,6 +2403,15 @@ void Ship::Loader::load_finish() {
 	ship.set_economy(dynamic_cast<Game&>(egbase()), ship.ware_economy_, wwWARE);
 	ship.set_economy(dynamic_cast<Game&>(egbase()), ship.worker_economy_, wwWORKER);
 	ship.get_owner()->add_ship(ship.serial());
+
+	// The ship's serial may have changed, inform onboard workers
+	for (uint32_t i = 0; i < ship.items_.size(); ++i) {
+		Worker* worker;
+		ship.items_[i].get(ship.owner().egbase(), nullptr, &worker);
+		if (worker != nullptr) {
+			worker->set_ship_serial(ship.serial());
+		}
+	}
 }
 
 MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {
