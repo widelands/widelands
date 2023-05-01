@@ -385,7 +385,7 @@ int LuaPanel::indicate(lua_State* L) {
            * ``"max_x"``: **Optional**. The maximum horizontal size.
            * ``"max_y"``: **Optional**. The maximum vertical size.
            * ``"spacing"``: **Optional**. The inner spacing between items.
-           * ``"scrolling"``: **Optional**. Whether the box max scroll if its content is too large.
+           * ``"scrolling"``: **Optional**. Whether the box may scroll if its content is too large.
 
          * ``"inf_space"``: Only valid as the direct child of a Box. A flexible spacer.
          * ``"space"``: Only valid as the direct child of a Box. A fixed-size spacer. Property:
@@ -419,6 +419,9 @@ int LuaPanel::indicate(lua_State* L) {
              * ``"permpressed"``
              * ``"flat"``
 
+           * ``"repeating"``: **Optional**. Whether pressing and holding
+             the button generates repeated events.
+
            * ``"on_click"``: **Optional**. Callback code to run when the
              button is clicked. To associate actions with a button press,
              prefer this over the ``on_panel_clicked`` event.
@@ -427,7 +430,7 @@ int LuaPanel::indicate(lua_State* L) {
       During the lifetime of a *toolbar* widget, the Lua Interface used by the game may be reset.
       Therefore, any callbacks attached to such widgets must not use any functions or variables
       defined at an arbitrary earlier time by your script -
-      they may be deleted by the time the callback is invoked.
+      they may have been deleted by the time the callback is invoked.
 */
 int LuaPanel::create_child(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -637,6 +640,8 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 		}
 		created_panel = button;
 
+		button->set_repeating(get_table_boolean(L, "repeating", false));
+
 		if (std::string on_click = get_table_string(L, "on_click", false); !on_click.empty()) {
 			button->sigclicked.connect(create_plugin_action_lambda(L, on_click));
 		}
@@ -661,9 +666,7 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 		   new UI::Box(parent, UI::PanelStyle::kWui, x, y, orientation, max_x, max_y, spacing);
 		created_panel = child_as_box;
 
-		if (get_table_boolean(L, "scrolling", false)) {
-			child_as_box->set_scrolling(true);
-		}
+		child_as_box->set_scrolling(get_table_boolean(L, "scrolling", false));
 
 	} else if (widget_type == "inf_space") {
 		if (as_box == nullptr) {
@@ -711,6 +714,7 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 		created_panel = txt;
 
 		txt->set_fixed_width(get_table_int(L, "fixed_width", false));
+
 	} else {
 		// TODO(Nordfriese): Add more widget types
 		report_error(L, "Unknown widget type '%s'", widget_type.c_str());
