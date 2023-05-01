@@ -56,14 +56,16 @@ bool FindImmovablePlayerImmovable::accept(const BaseImmovable& imm) const {
 }
 
 bool FindImmovablePlayerMilitarySite::accept(const BaseImmovable& imm) const {
-	if (upcast(MilitarySite const, ms, &imm)) {
+	if (imm.descr().type() == MapObjectType::MILITARYSITE) {
+		upcast(MilitarySite const, ms, &imm);
 		return &ms->owner() == &player;
 	}
 	return false;
 }
 
 bool FindImmovableAttackTarget::accept(const BaseImmovable& imm) const {
-	if (upcast(Building const, b, &imm)) {
+	if (imm.descr().type() >= MapObjectType::BUILDING) {
+		upcast(Building const, b, &imm);
 		return b->attack_target() != nullptr;
 	}
 	return false;
@@ -76,18 +78,14 @@ bool FindImmovableAttackTarget::accept(const BaseImmovable& imm) const {
 
 bool FindForeignMilitarysite::accept(const BaseImmovable& imm) const {
 	if (imm.descr().type() == MapObjectType::MILITARYSITE) {
-		if (upcast(MilitarySite const, ms, &imm)) {
-			return &ms->owner() != &player;
-		}
+		upcast(MilitarySite const, ms, &imm);
+		return &ms->owner() != &player;
 	}
 	return false;
 }
 
 bool FindImmovableByDescr::accept(const BaseImmovable& baseimm) const {
-	if (&baseimm.descr() == &descr) {
-		return true;
-	}
-	return false;
+	return &baseimm.descr() == &descr;
 }
 
 bool FindFlagOf::accept(const BaseImmovable& baseimm) const {
