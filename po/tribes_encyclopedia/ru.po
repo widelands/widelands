@@ -1308,7 +1308,7 @@ msgctxt "amazons_building"
 msgid ""
 "The furnace can produce one gold ingot in %s on average if the supply is "
 "steady."
-msgstr "Литейная выпускает в среднем 1 золотой слиток в %s, и то при полном обеспечении."
+msgstr "Литейная тратит в среднем %s на производство золотого слитка, если поставка сырья налажена."
 
 #. TRANSLATORS: Lore for helptext an amazon production site: Rare Tree
 #. Plantation
@@ -1441,7 +1441,7 @@ msgstr "Снаряжает новобранцев и тренирует их д�
 #, lua-format
 msgctxt "amazons_building"
 msgid "The initiation site needs %s on average to recruit one soldier."
-msgstr "На превращение новобранца в солдата в сборном пункте уходит в среднем %s."
+msgstr "Сборному пункту нужно в среднем %s чтобы нанять одного солдата."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Gardening
 #. Center
@@ -6245,7 +6245,7 @@ msgstr "Дровосеку, чтобы срубить дерево, нужно %
 #, lua-format
 msgctxt "barbarians_building"
 msgid "Afterwards he rests in the hut for %s."
-msgstr ""
+msgstr "После этого он отдыхает в хижине %s."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Ranger's Hut
 #: ../../data/tribes/initialization/barbarians/units.lua:1169
@@ -6368,7 +6368,7 @@ msgstr "Выпускает животных в дикую природу, что
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The gamekeeper pauses %s before going to work again."
-msgstr ""
+msgstr "Егерь делает перерыв в работе на %s."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Well
 #: ../../data/tribes/initialization/barbarians/units.lua:1227
@@ -6613,7 +6613,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce strong "
 "beer in about %s on average."
-msgstr ""
+msgstr "Если все необходимые товары поставляются вовремя, это здание может производить крепкое пиво, в среднем, за %s."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Tavern
 #: ../../data/tribes/initialization/barbarians/units.lua:1338
@@ -6643,7 +6643,7 @@ msgstr "Готовит пайки для питания разведчиков �
 msgctxt "barbarians_building"
 msgid ""
 "The tavern can produce one ration in %s on average, if the supply is steady."
-msgstr ""
+msgstr "Таверна тратит в среднем %s на производство пайка, если поставка сырья налажена."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Inn
 #: ../../data/tribes/initialization/barbarians/units.lua:1351
@@ -6671,7 +6671,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The inn can produce one ration in %1$s and one snack in %2$s on average, if "
 "the supply is steady."
-msgstr ""
+msgstr "Трактир тратит в среднем %1$s на производство пайка, или %2$s на призводство закуски, если поставка сырья налажена."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Big Inn
 #: ../../data/tribes/initialization/barbarians/units.lua:1364
@@ -6701,7 +6701,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The big inn can produce one ration in %1$s, one snack in %2$s and one meal "
 "in %3$s on average, if the supply is steady."
-msgstr ""
+msgstr "Гостиница тратит в среднем %1$s на производство пайка, %2$s на призводство закуски, или %3$s на проиводство обеда, если поставка сырья налажена."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Charcoal Kiln
 #: ../../data/tribes/initialization/barbarians/units.lua:1377
@@ -6876,7 +6876,7 @@ msgstr "Снаряжает новобранцев и тренирует их д�
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The barracks need %s on average to recruit one soldier."
-msgstr ""
+msgstr "Казарме нужно в среднем %s чтобы нанять одного солдата."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Cattle Farm
 #: ../../data/tribes/initialization/barbarians/units.lua:1475
@@ -7042,7 +7042,7 @@ msgstr "Древесину удобно использовать для приг
 msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in %s on average."
-msgstr ""
+msgstr "Если поставка пищи будет стабильной, эта шахта сможет производить уголь, в среднем, за %s."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Iron Mine
 #. TRANSLATORS: Lore helptext for a barbarian production site: Deep Iron Mine
@@ -7174,7 +7174,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, a battle arena can train evade "
 "for one soldier from 0 to the highest level in %s on average."
-msgstr ""
+msgstr "Если все необходимые товары доставляются вовремя, арена поединков может обучить одного солдата уклонению с нуля до наивысшего уровня, в среднем, за %s."
 
 #. TRANSLATORS: Lore helptext for a barbarian training site: Training Camp
 #: ../../data/tribes/initialization/barbarians/units.lua:1680
@@ -7213,7 +7213,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, a training camp can train one new"
 " soldier in attack and health to the final level in %s on average."
-msgstr ""
+msgstr "Если все необходимые товары доставляются вовремя, тренировочный лагерь может обучить одного солдата урону и здоровью до наивысшего уровня, в среднем, за %s."
 
 #. TRANSLATORS: Lore helptext for a barbarian military site: Sentry
 #: ../../data/tribes/initialization/barbarians/units.lua:1701
@@ -11093,7 +11093,7 @@ msgctxt "empire_building"
 msgid ""
 "If the food supply is steady, this mine can produce marble in %1$s and "
 "granite in %2$s on average."
-msgstr ""
+msgstr "Если поставка пищи будет стабильной, эта шахта сможет производить мрамор, в среднем за %1$s и гранит, в среднем за %2$s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11148,7 +11148,7 @@ msgstr "Уголь воскрешается из мертвых, из черно
 msgctxt "empire_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in %s on average."
-msgstr ""
+msgstr "Если поставка пищи будет стабильной, эта шахта сможет производить уголь, в среднем, за %s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11204,7 +11204,7 @@ msgctxt "empire_building"
 msgid ""
 "If the food supply is steady, this mine can produce iron ore in %s on "
 "average."
-msgstr ""
+msgstr "Если поставка пищи будет стабильной, эта шахта сможет производить железную руду, в среднем, за %s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11258,7 +11258,7 @@ msgctxt "empire_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in %s on "
 "average."
-msgstr ""
+msgstr "Если поставка пищи будет стабильной, эта шахта сможет производить золотую руду, в среднем, за %s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -14113,7 +14113,7 @@ msgid ""
 "If all needed wares are delivered in time, this building can produce one "
 "short sword in %1$s on average, one long sword in %2$s on average and one "
 "helmet in %3$s on average."
-msgstr ""
+msgstr "Если все необходимые товары поставляются вовремя, это здание может произвести один короткий меч, в среднем, за %1$s, один длинный меч за %2$s, и один шлем за %3$s."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Large Armor
 #. Smithy
@@ -14148,7 +14148,7 @@ msgid ""
 "If all needed wares are delivered in time, this building can produce one "
 "broadswordsword in %1$s on average, one double-edged sword in %2$s on "
 "average and one golden helmet in %3$s on average."
-msgstr ""
+msgstr "Если все необходимые товары поставляются вовремя, это здание может производить один тесак, в среднем, за %1$s, один обоюдоострый меч за %2$s, и один золотой шлем за %3$s."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Sewing Room
 #: ../../data/tribes/initialization/frisians/units.lua:1825
@@ -14207,7 +14207,7 @@ msgctxt "frisians_building"
 msgid ""
 "The tailor’s shop needs %1$s on average to produce one studded fur garment "
 "and %2$s on average to produce one golden fur garment."
-msgstr ""
+msgstr "Ателье нужно, в среднем %1$s, чтобы изготовить одну шипованную меховую одежду, и, %2$s, чтобы изготовить одну позолоченную меховую одежду."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Charcoal
 #. Kiln
@@ -14303,7 +14303,7 @@ msgctxt "frisians_building"
 msgid ""
 "The honey bread bakery needs %1$s on average to produce one loaf of bread "
 "and %2$s on average to produce one loaf of honey bread."
-msgstr ""
+msgstr "Пекарне нужно, в среднем %1$s, чтобы изготовить одну буханку хлеба, и, %2$s, чтобы изготовить один пряник."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Brewery
 #: ../../data/tribes/initialization/frisians/units.lua:1903
@@ -14359,7 +14359,7 @@ msgctxt "frisians_building"
 msgid ""
 "The mead brewery needs %1$s on average to brew one mug of beer and %2$s on "
 "average to brew one mug of mead."
-msgstr ""
+msgstr "Медоварне нужно, в среднем %1$s, чтобы сварить одну кружку пива, и, %2$s, чтобы сварить одну кружку медовухи."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Tavern
 #: ../../data/tribes/initialization/frisians/units.lua:1929
@@ -14433,7 +14433,7 @@ msgstr "Снаряжает новобранцев и тренирует их д�
 #, lua-format
 msgctxt "frisians_building"
 msgid "The barracks need %s on average to recruit one soldier."
-msgstr ""
+msgstr "Казарме нужно в среднем %s чтобы нанять одного солдата."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Reindeer Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1968
@@ -14525,7 +14525,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the rock mine can produce granite in %s on "
 "average."
-msgstr ""
+msgstr "Если поставка пищи будет стабильной, эти каменные копи смогут производить гранит, в среднем за %s."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Deep Rock
 #. Mine
@@ -14535,7 +14535,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep rock mine can produce granite in %s "
 "on average."
-msgstr ""
+msgstr "Если поставка пищи будет стабильной, эти глубокие каменные копи смогут производить гранит, в среднем за %s."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Coal Mine
 #: ../../data/tribes/initialization/frisians/units.lua:2025
@@ -14544,7 +14544,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the coal mine can produce coal in %s on "
 "average."
-msgstr ""
+msgstr "Если поставка пищи будет стабильной, эта угольная шахта сможет производить уголь, в среднем, за %s."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Deep Coal
 #. Mine
@@ -14554,7 +14554,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep coal mine can produce coal in %s on "
 "average."
-msgstr ""
+msgstr "Если поставка пищи будет стабильной, эта глубокая угольная шахта сможет производить уголь, в среднем, за %s."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Iron Mine
 #: ../../data/tribes/initialization/frisians/units.lua:2043
@@ -14573,7 +14573,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep iron mine can produce iron ore in %s "
 "on average."
-msgstr ""
+msgstr "Если поставка пищи будет стабильной, этот глубокий железный рудник сможет производить железную руду, в среднем за %s."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Gold Mine
 #: ../../data/tribes/initialization/frisians/units.lua:2061
@@ -14592,7 +14592,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep gold mine can produce gold ore in %s "
 "on average."
-msgstr ""
+msgstr "Если поставка пищи будет стабильной, эта глубокая золотая шахта сможет производить золотую руду, в среднем за %s."
 
 #. TRANSLATORS: Lore helptext for a frisian training site: Training Camp
 #: ../../data/tribes/initialization/frisians/units.lua:2079
