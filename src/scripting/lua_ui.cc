@@ -381,6 +381,7 @@ int LuaPanel::indicate(lua_State* L) {
 
            * ``"orientation"``: **Mandatory**. The box's layouting direction:
              ``"vertical"`` or ``"horizontal"``.
+             The shorthands ``"vert"``, ``"v"``, ``"horz"``, and ``"h"`` may be used.
            * ``"max_x"``: **Optional**. The maximum horizontal size.
            * ``"max_y"``: **Optional**. The maximum vertical size.
            * ``"spacing"``: **Optional**. The inner spacing between items.
