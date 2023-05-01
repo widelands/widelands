@@ -1761,7 +1761,7 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 		do {
 			if (mr.location().field->get_owned_by() != owner().player_number()) {
 				molog(game.get_gametime(), "[naval_invasion] Conquering port area\n");
-				game.conquer_area_no_building(PlayerArea<Area<FCoords>>(
+				game.conquer_area(PlayerArea<Area<FCoords>>(
 				   owner().player_number(), Area<FCoords>(portspace_fcoords, kPortSpaceRadius)));
 				return start_task_idle(game, descr().get_animation("idle", this), 1000);
 			}
