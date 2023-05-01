@@ -54,7 +54,7 @@ inline RGBColor invert_color(const RGBColor& c) {
 
 	if (c.r > c.g && c.r > c.b && c.g < 200 && c.g + 50 < c.r) {
 		r = 0;
-		g = c.g;  // + (255 - c.g) / 2;
+		g = c.g;
 		b = c.b + (255 - c.b) / 2;
 	} else {
 		r = 255;

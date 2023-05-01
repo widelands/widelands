@@ -360,7 +360,7 @@ bool MiniMap::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 	return true;
 }
 
-constexpr uint16_t kCurrentPacketVersion = 2;
+constexpr uint16_t kCurrentPacketVersion = 1;
 UI::Window& MiniMap::load(FileRead& fr, InteractiveBase& ib) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
