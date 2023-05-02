@@ -105,7 +105,7 @@ wl.Descriptions():new_productionsite_type {
             -- time: 25.4 + 35 + 3.6 = 64 sec
             "return=skipped unless economy needs gold",
             "consume=gold_ore coal",
-            "sleep=duration:25s400",
+            "sleep=duration:25s400ms",
             "playsound=sound/metal/fizzle priority:20% allow_multiple",
             "animate=working duration:35s",
             "playsound=sound/metal/goldping priority:60%",
