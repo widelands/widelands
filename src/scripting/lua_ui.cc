@@ -1445,7 +1445,6 @@ int LuaMapView::mouse_to_field(lua_State* L) {
 
       Recompute the size and position of the toolbar.
       Call this after you have modified the toolbar in any way.
-
 */
 int LuaMapView::update_toolbar(lua_State* L) {
 	get_egbase(L).get_ibase()->finalize_toolbar();
@@ -1556,12 +1555,47 @@ static int L_get_editor_shortcut_help(lua_State* L) {
 	return 1;
 }
 
+/* RST
+.. method:: show_messagebox(title, text[, cancel_button = true])
+
+   .. versionadded:: 1.2
+
+   Show the user a modal message box with an OK button and optionally a cancel button.
+
+   :arg title: The caption of the window
+   :type title: :class:`string`
+   :arg text: The message to show
+   :type text: :class:`string`
+   :arg cancel_button: Whether to include a Cancel button
+   :type cancel_button: :class:`boolean`
+   :returns: Whether the user clicked OK.
+   :rtype: :class:`boolean`
+*/
+static int L_show_messagebox(lua_State* L) {
+	const int nargs = lua_gettop(L);
+	if (nargs < 2 || nargs > 3) {
+		report_error(L, "Wrong number of arguments");
+	}
+
+	std::string title = luaL_checkstring(L, 1);
+	std::string text = luaL_checkstring(L, 2);
+	bool allow_cancel = nargs < 3 || luaL_checkboolean(L, 3);
+
+	UI::WLMessageBox m(get_egbase(L).get_ibase(), UI::WindowStyle::kWui, title, text,
+	                   allow_cancel ? UI::WLMessageBox::MBoxType::kOkCancel: UI::WLMessageBox::MBoxType::kOk);
+	UI::Panel::Returncodes result = m.run<UI::Panel::Returncodes>();
+
+	lua_pushboolean(L, result == UI::Panel::Returncodes::kOk);
+	return 1;
+}
+
 const static struct luaL_Reg wlui[] = {{"set_user_input_allowed", &L_set_user_input_allowed},
                                        {"get_user_input_allowed", &L_get_user_input_allowed},
                                        {"get_shortcut", &L_get_shortcut},
                                        {"get_ingame_shortcut_help", &L_get_ingame_shortcut_help},
                                        {"get_fastplace_help", &L_get_fastplace_help},
                                        {"get_editor_shortcut_help", &L_get_editor_shortcut_help},
+                                       {"show_messagebox", &L_show_messagebox},
                                        {nullptr, nullptr}};
 
 void luaopen_wlui(lua_State* L) {
