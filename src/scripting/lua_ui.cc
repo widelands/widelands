@@ -1581,8 +1581,9 @@ static int L_show_messagebox(lua_State* L) {
 	std::string text = luaL_checkstring(L, 2);
 	bool allow_cancel = nargs < 3 || luaL_checkboolean(L, 3);
 
-	UI::WLMessageBox m(get_egbase(L).get_ibase(), UI::WindowStyle::kWui, title, text,
-	                   allow_cancel ? UI::WLMessageBox::MBoxType::kOkCancel: UI::WLMessageBox::MBoxType::kOk);
+	UI::WLMessageBox m(
+	   get_egbase(L).get_ibase(), UI::WindowStyle::kWui, title, text,
+	   allow_cancel ? UI::WLMessageBox::MBoxType::kOkCancel : UI::WLMessageBox::MBoxType::kOk);
 	UI::Panel::Returncodes result = m.run<UI::Panel::Returncodes>();
 
 	lua_pushboolean(L, result == UI::Panel::Returncodes::kOk);
