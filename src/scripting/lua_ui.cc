@@ -1586,7 +1586,7 @@ static int L_show_messagebox(lua_State* L) {
 	   allow_cancel ? UI::WLMessageBox::MBoxType::kOkCancel : UI::WLMessageBox::MBoxType::kOk);
 	UI::Panel::Returncodes result = m.run<UI::Panel::Returncodes>();
 
-	lua_pushboolean(L, result == UI::Panel::Returncodes::kOk);
+	lua_pushboolean(L, static_cast<int>(result == UI::Panel::Returncodes::kOk));
 	return 1;
 }
 
