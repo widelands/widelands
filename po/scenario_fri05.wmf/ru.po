@@ -753,6 +753,10 @@ msgid ""
 "to liberate your own home. If there is anything else we can do for you, now "
 "or forevermore, you need only ask and we will be yours to command."
 msgstr ""
+"И я сам, и мой народ в неоплатном долгу перед вами. Всех солдат, которых вы "
+"обучили, я отправляю с вами, дабы они помогли вам освободить ваш дом. И если"
+" есть что-то еще, что мы можем для вас сделать, сейчас или в будущем - "
+"достаточного одного слова, и мы будем в вашем распоряжении."
 
 #. TRANSLATORS: Claus Lembeck – Victory 2
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:317
