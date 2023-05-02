@@ -1535,7 +1535,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an empire production site: Tavern
             purpose = pgettext("building", "Prepares rations to feed the scouts and miners."),
             -- TRANSLATORS: Performance helptext for an empire production site: Tavern
-            performance = pgettext("empire_building", "The innkeeper needs %1% on average to prepare a ration."):bformat(format_seconds(36))
+            performance = pgettext("empire_building", "The innkeeper needs %1% on average to prepare a ration."):bformat(format_seconds(37))
          }
       },
       {
@@ -1556,7 +1556,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an empire production site: Inn
             purpose = pgettext("empire_building", "Prepares rations for scouts and rations and meals to feed the miners in all mines."),
             -- TRANSLATORS: Performance helptext for an empire production site: Inn
-            performance = pgettext("empire_building", "The innkeeper needs %1% on average to prepare a ration and a meal. If the economy doesn’t need both, the innkeeper needs %2% on average to prepare one ration or one meal."):bformat(format_minutes_seconds(1, 25), format_seconds(48))
+            performance = pgettext("empire_building", "When this building is fully supplied and all kinds of food are needed by the economy, production of one ration takes %1$s and one meal takes %2$s on average. If only one kind of food is needed by the economy, production of one ration takes %3$s and one meal takes %4$s on average."):bformat(format_minutes_seconds(1, 21), format_minutes_seconds(1, 21), format_seconds(37), format_seconds(44))
          }
       },
       {
@@ -1596,7 +1596,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an empire production site: Smelting Works
             lore_author = pgettext("empire_building", "Amalea after inspecting a smelting works"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Smelting Works
-            purpose = pgettext("building", "Smelts iron ore into iron and gold ore into gold.")
+            purpose = pgettext("building", "Smelts iron ore into iron and gold ore into gold."),
+            -- TRANSLATORS: Performance helptext for an empire production site: Smelting Works
+            performance = pgettext("empire_building", "When this building is fully supplied and all metals are needed by the economy, production of one iron takes %1$s and one gold takes %2$s on average. If only one kind of metal is needed by the economy, production of one iron takes %3$s and one gold takes %4$s on average."):bformat(format_minutes_seconds(1, 36), format_minutes_seconds(3, 12), format_minutes_seconds(1, 4), format_minutes_seconds(1, 4))
          }
       },
       {
@@ -1615,7 +1617,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an empire production site: Toolsmithy
             lore_author = pgettext("empire_building", "Imperial proverb quoted in a toolsmith's advertising"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Toolsmithy
-            purpose = pgettext("building", "Forges all the tools that your workers need.")
+            purpose = pgettext("building", "Forges all the tools that your workers need."),
+            -- TRANSLATORS: Performance helptext for an empire production site: Toolsmithy
+            performance = pgettext("empire_building", "When this building is fully supplied and all tools are needed by the economy, production of one of each tool takes %1$s on average. If only one kind of tool is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(14, 12), format_minutes_seconds(1, 11))
          }
       },
       {
@@ -1638,7 +1642,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an empire production site: Armorsmithy
             lore_author = pgettext("empire_building", "An armorsmith teaching an apprentice"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Armor Smithy
-            purpose = pgettext("empire_building", "Forges armor and helmets that are used for training soldiers’ health in the training camp.")
+            purpose = pgettext("empire_building", "Forges armor and helmets that are used for training soldiers’ health in the training camp."),
+            -- TRANSLATORS: Performance helptext for an empire production site: Armor Smithy
+            performance = pgettext("empire_building", "When this building is fully supplied and all armaments are needed by the economy, production of one helmet takes %1$s, one armor takes %2$s, one chain armor takes %3$s and one gilded armor takes %4$s on average. If only one kind of armament is needed by the economy, production of one helmet takes %5$s, one armor takes %6$s, one chain armor takes %7$s and one gilded armor takes %8$s on average."):bformat(format_minutes_seconds(3, 13), format_minutes_seconds(6, 25), format_minutes_seconds(6, 25), format_minutes_seconds(6, 25), format_minutes_seconds(1, 11), format_minutes_seconds(1, 21), format_minutes_seconds(1, 21), format_minutes_seconds(1, 21))
          }
       },
       {
@@ -1781,7 +1787,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an empire production site: Weapon Smithy
             lore_author = pgettext("empire_building", "Motto of the Weaponsmiths’ Guild"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Weapon Smithy
-            purpose = pgettext("empire_building", "Forges spears to equip the soldiers and to train their attack in the training camp.")
+            purpose = pgettext("empire_building", "Forges spears to equip the soldiers and to train their attack in the training camp."),
+            -- TRANSLATORS: Performance helptext for an empire production site: Weapon Smithy
+            performance = pgettext("empire_building", "When this building is fully supplied and all spears are needed by the economy, production of one of each spears takes %1$s on average. If only one kind of spear is needed by the economy, production of one wooden spear takes %2$s, one spear takes %3$s, one advanced spear takes %4$s, one heavy spear takes %5$s and one war spear takes %6$s on average."):bformat(format_minutes_seconds(6, 18), format_seconds(54), format_minutes_seconds(1, 21), format_minutes_seconds(1, 21), format_minutes_seconds(1, 21), format_minutes_seconds(1, 21))
          }
       },
 
