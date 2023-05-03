@@ -20,6 +20,7 @@
 
 #include <list>
 #include <memory>
+#include <regex>
 #include <set>
 
 #include "base/log.h"
@@ -128,16 +129,35 @@ std::string version_to_string(const AddOnVersion& version, const bool localize) 
 }
 AddOnVersion string_to_version(std::string input) {
 	AddOnVersion result;
-	for (;;) {
-		const size_t pos = input.find('.');
-		if (pos == std::string::npos) {
-			result.push_back(math::to_long(input));
-			return result;
-		}
-		result.push_back(math::to_long(input.substr(0, pos)));
-		input = input.substr(pos + 1);
+	if (input.empty()) {
+		return result;
 	}
-	NEVER_HERE();
+
+	static std::regex kNewStyleRegex("[0-9]+(\\.[0-9]+)*");
+	static std::regex kOldStyleRegex("build ([0-9]+)");
+
+	if (std::regex_match(input, kNewStyleRegex)) {
+		for (;;) {
+			const size_t pos = input.find('.');
+			if (pos == std::string::npos) {
+				result.push_back(math::to_long(input));
+				return result;
+			}
+
+			result.push_back(math::to_long(input.substr(0, pos)));
+			input = input.substr(pos + 1);
+		}
+
+		NEVER_HERE();
+	}
+
+	if (std::smatch match; std::regex_match(input, match, kOldStyleRegex)) {
+		result.push_back(0);
+		result.push_back(math::to_long(match.str(1)));
+		return result;
+	}
+
+	throw wexception("Malformed version string: '%s'", input.c_str());
 }
 
 bool is_newer_version(const AddOnVersion& base, const AddOnVersion& compare) {
@@ -404,6 +424,13 @@ void update_ui_theme(const UpdateThemeAction action, std::string arg) {
 }
 
 bool AddOnInfo::matches_widelands_version(const bool warn_future) const {
+	return AddOns::matches_widelands_version(
+	   min_wl_version, max_wl_version, warn_future ? internal_name : std::string());
+}
+
+bool matches_widelands_version(const std::string& min_wl_version,
+                               const std::string& max_wl_version,
+                               const std::string& warn_future_name) {
 	if (min_wl_version.empty() && max_wl_version.empty()) {
 		return true;
 	}
@@ -425,11 +452,11 @@ bool AddOnInfo::matches_widelands_version(const bool warn_future) const {
 		return false;
 	}
 
-	if (warn_future && !min_wl_version.empty() && tilde != std::string::npos &&
+	if (!warn_future_name.empty() && !min_wl_version.empty() && tilde != std::string::npos &&
 	    wl == string_to_version(min_wl_version)) {
-		log_warn("Addon '%s' requires minimum Widelands version %s from the future.\n"
+		log_warn("Add-on '%s' requires minimum Widelands version %s from the future.\n"
 		         "Make sure your development build is up to date!",
-		         internal_name.c_str(), min_wl_version.c_str());
+		         warn_future_name.c_str(), min_wl_version.c_str());
 	}
 
 	return true;

@@ -126,11 +126,15 @@ std::string MutableAddOn::profile_path() {
 void MutableAddOn::update_info(const std::string& descname,
                                const std::string& author,
                                const std::string& description,
-                               const std::string& version) {
+                               const std::string& version,
+                               const std::string& min_wl_version,
+                               const std::string& max_wl_version) {
 	descname_ = descname;
 	author_ = author;
 	description_ = description;
 	version_ = version;
+	min_wl_version_ = min_wl_version;
+	max_wl_version_ = max_wl_version;
 }
 
 void MutableAddOn::setup_temp_dir() {
