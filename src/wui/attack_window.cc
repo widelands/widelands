@@ -18,6 +18,7 @@
 
 #include "wui/attack_window.h"
 
+#include <algorithm>
 #include <memory>
 
 #include <SDL_mouse.h>
