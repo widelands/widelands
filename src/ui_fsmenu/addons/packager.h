@@ -50,7 +50,7 @@ private:
 	UI::Box main_box_, box_left_, box_right_, box_left_buttons_, box_right_subbox_header_hbox_,
 	   box_right_subbox_header_box_left_, box_right_subbox_header_box_right_,
 	   box_right_addon_specific_, box_right_bottombox_;
-	UI::EditBox name_, author_, version_;
+	UI::EditBox name_, author_, version_, min_wl_version_, max_wl_version_;
 	UI::MultilineEditbox& descr_;
 	UI::Button addon_new_, addon_delete_, discard_changes_, write_changes_, ok_;
 	UI::Listselect<std::string> addons_;

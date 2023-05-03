@@ -65,6 +65,9 @@ std::string version_to_string(const AddOnVersion&, bool localize = true);
 AddOnVersion string_to_version(std::string);
 // Returns true if and only if version `compare` is newer than version `base`
 bool is_newer_version(const AddOnVersion& base, const AddOnVersion& compare);
+bool matches_widelands_version(const std::string& min_wl_version,
+                               const std::string& max_wl_version,
+                               const std::string& warn_future_name = std::string());
 
 // Required add-ons for an add-on, map, or savegame with the recommended version
 using AddOnRequirements = std::vector<std::pair<std::string, AddOnVersion>>;
@@ -124,7 +127,11 @@ struct AddOnInfo {
 	uint32_t votes[kMaxRating] = {0};  ///< Total number of votes for each of the ratings 1-10.
 	std::map<size_t, AddOnComment> user_comments;
 
-	[[nodiscard]] bool matches_widelands_version() const;
+	// Development builds (version 1.x~n) are treated as the next stable version (version 1.x)
+	// `warn_future` enables logging of the match in development versions if the addon requires
+	// the next stable version.
+	[[nodiscard]] bool matches_widelands_version(bool warn_future = false) const;
+
 	[[nodiscard]] uint32_t number_of_votes() const;
 	[[nodiscard]] double average_rating() const;
 	[[nodiscard]] bool requires_texture_atlas_rebuild() const;

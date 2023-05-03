@@ -21,7 +21,7 @@ tips = {
       seconds = 7
    },
    {
-      text = _("Holding down Alt switches the second alternative tool on (if it exists)."),
+      text = _("Holding down Ctrl switches the second alternative tool on (if it exists)."),
       seconds = 6
    },
    {

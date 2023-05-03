@@ -43,6 +43,7 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/string.h"
+#include "base/time_string.h"
 #include "config.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
@@ -348,6 +349,30 @@ std::vector<std::string> FileSystem::get_xdgdatadirs() {
 	return xdgdatadirs;
 }
 #endif
+
+std::string FileSystem::create_unique_temp_file_path(std::string prefix,
+                                                     const std::string& suffix) const {
+	prefix += file_separator();
+	prefix += timestring();
+
+	std::string complete_filename = prefix + suffix;
+	if (!file_exists(complete_filename)) {
+		return complete_filename;
+	}
+
+	prefix += '-';
+	for (int i = 0; i <= 9; ++i) {
+		complete_filename = prefix;
+		complete_filename += std::to_string(i);
+		complete_filename += suffix;
+		if (!file_exists(complete_filename)) {
+			return complete_filename;
+		}
+	}
+
+	throw wexception(
+	   "Could not create a unique filename similar near %s", complete_filename.c_str());
+}
 
 // Returning a vector rather than a set because animations need the indices
 std::vector<std::string> FileSystem::get_sequential_files(const std::string& directory,

@@ -141,4 +141,8 @@ std::string open_paragraph_style(UI::ParagraphStyle style, const std::string& at
 /// Return closing font and paragraph tags for formatting as plain paragraph.
 std::string close_paragraph_style(UI::ParagraphStyle style);
 
+/// Return 'term' and 'description' formatted as a definition list entry.
+/// (a paragraph with 'term' in bold and 'description' as normal text)
+std::string as_definition_line(const std::string& term, const std::string& description);
+
 #endif  // end of include guard: WL_GRAPHIC_TEXT_LAYOUT_H
