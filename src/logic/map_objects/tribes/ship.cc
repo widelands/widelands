@@ -2071,6 +2071,11 @@ void Ship::draw(const EditorGameBase& egbase,
 
 	if ((info_to_draw & InfoToDraw::kSoldierLevels) != 0 &&
 	    (ship_type_ == ShipType::kWarship || hitpoints_ < descr().max_hitpoints_)) {
+		draw_healthbar(egbase, dst, point_on_dst, scale);
+	}
+}
+
+void Ship::draw_healthbar(const EditorGameBase& egbase, RenderTarget* dst, const Vector2f& point_on_dst, float scale) const {
 		// TODO(Nordfriese): Common code with Soldier::draw_info_icon
 		const RGBColor& color = owner().get_playercolor();
 		const uint16_t color_sum = color.r + color.g + color.b;
@@ -2140,7 +2145,6 @@ void Ship::draw(const EditorGameBase& egbase,
 				}
 			}
 		}
-	}
 }
 
 void Ship::log_general_info(const EditorGameBase& egbase) const {

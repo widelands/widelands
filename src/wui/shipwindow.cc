@@ -56,7 +56,6 @@ constexpr const char* const kImgConstructPort = "images/wui/ship/ship_construct_
 constexpr const char* const kImgRefitTransport = "images/wui/ship/ship_refit_transport.png";
 constexpr const char* const kImgRefitWarship = "images/wui/ship/ship_refit_warship.png";
 constexpr const char* const kImgWarshipStay = "images/wui/ship/ship_stay.png";
-constexpr const char* const kImgWarshipAttack = "images/wui/ship/ship_attack.png";
 
 constexpr int kPadding = 5;
 constexpr int kButtonSize = 34;
@@ -147,11 +146,6 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	   make_button(exp_bot, "scse", _("Scout towards the south east"), kImgScoutSE, true,
 	               [this]() { act_scout_towards(Widelands::WALK_SE); });
 	exp_bot->add(btn_scout_[Widelands::WALK_SE - 1]);
-
-	btn_warship_attack_ =
-	   make_button(&navigation_box_, "war_attack", _("Attack the nearest enemy warship"),
-	               kImgWarshipAttack, false, [this]() { act_warship_attack(); });
-	navigation_box_.add(btn_warship_attack_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	vbox_.add(&navigation_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
@@ -245,7 +239,6 @@ void ShipWindow::set_button_visibility() {
 
 	display_->set_visible(!is_warship);
 	warship_capacity_control_->set_visible(is_warship);
-	btn_warship_attack_->set_visible(ibase_.egbase().is_game() && is_warship);
 	btn_cancel_expedition_->set_visible(btn_cancel_expedition_->enabled());
 	btn_warship_stay_->set_visible(is_warship);
 	btn_construct_port_->set_visible(!is_warship);
@@ -407,8 +400,6 @@ void ShipWindow::think() {
 	btn_refit_->set_tooltip(ship->get_ship_type() == Widelands::ShipType::kWarship ?
                               _("Refit to transport ship") :
                               _("Refit to warship"));
-	btn_warship_attack_->set_enabled(can_act && ship->can_attack() &&
-	                                 ship->get_attack_target(ibase_.egbase()) != nullptr);
 	btn_warship_stay_->set_enabled(can_act);
 
 	display_->clear();
@@ -553,14 +544,6 @@ void ShipWindow::act_refit() {
 	} else {
 		ship->set_ship_type(ibase_.egbase(), t);
 	}
-}
-
-void ShipWindow::act_warship_attack() {
-	Widelands::Ship* ship = ship_.get(ibase_.egbase());
-	if (ship == nullptr) {
-		return;
-	}
-	ibase_.game().send_player_warship_command(*ship, Widelands::WarshipCommand::kAttack, {});
 }
 
 /// Show debug info

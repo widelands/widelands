@@ -308,6 +308,12 @@ struct Ship : Bob {
 		warship_soldier_capacity_ = c;
 	}
 
+	void draw_healthbar(const EditorGameBase& egbase,
+	                    RenderTarget* dst,
+	                    const Vector2f&
+	                    point_on_dst,
+	                    float scale) const;
+
 protected:
 	void draw(const EditorGameBase& egbase,
 	          const InfoToDraw& info_to_draw,

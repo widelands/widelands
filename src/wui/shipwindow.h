@@ -68,7 +68,6 @@ private:
 	void act_scout_towards(Widelands::WalkingDir);
 	void act_construct_port();
 	void act_explore_island(Widelands::IslandExploreDirection);
-	void act_warship_attack();
 	void act_set_destination();
 
 	InteractiveBase& ibase_;
@@ -90,7 +89,6 @@ private:
 	UI::Button* btn_scout_[Widelands::LAST_DIRECTION];
 	UI::Button* btn_construct_port_;
 	UI::Button* btn_warship_stay_;
-	UI::Button* btn_warship_attack_;
 	UI::Dropdown<Widelands::OPtr<Widelands::MapObject>>* set_destination_;
 	bool is_updating_destination_dropdown_{false};
 	ItemWaresDisplay* display_;

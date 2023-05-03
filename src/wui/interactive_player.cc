@@ -751,7 +751,7 @@ UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& c,
 	for (const auto& pair : expedition_port_spaces_) {
 		if (pair.second == c) {
 			UI::UniqueWindow::Registry& registry =
-			   unique_windows().get_registry(format("navalattack_%d_%d", c.x, c.y));
+			   unique_windows().get_registry(format("attack_coords_%d_%d", c.x, c.y));
 			registry.open_window = [this, &registry, &c, fastclick]() {
 				new AttackWindow(*this, registry, nullptr, c, fastclick);
 			};
@@ -767,7 +767,7 @@ UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& c,
 			if (const Widelands::AttackTarget* attack_target = building->attack_target()) {
 				if (player().is_hostile(building->owner()) && attack_target->can_be_attacked()) {
 					UI::UniqueWindow::Registry& registry =
-					   unique_windows().get_registry(format("attack_%d", building->serial()));
+					   unique_windows().get_registry(format("attack_building_%u", building->serial()));
 					registry.open_window = [this, &registry, building, &c, fastclick]() {
 						new AttackWindow(*this, registry, building, c, fastclick);
 					};
@@ -777,6 +777,19 @@ UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& c,
 			}
 		}
 	}
+
+	for (Widelands::Bob* bob = map[c].get_first_bob(); bob != nullptr; bob = bob->get_next_bob()) {
+		if (bob->descr().type() == Widelands::MapObjectType::SHIP && player().is_hostile(bob->owner())) {
+			UI::UniqueWindow::Registry& registry =
+			   unique_windows().get_registry(format("attack_ship_%u", bob->serial()));
+			registry.open_window = [this, &registry, bob, &c, fastclick]() {
+				new AttackWindow(*this, registry, bob, c, fastclick);
+			};
+			registry.create();
+			return registry.window;
+		}
+	}
+
 	return nullptr;
 }
 

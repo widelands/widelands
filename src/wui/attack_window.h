@@ -29,6 +29,7 @@
 #include "ui_basic/slider.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
+#include "wui/interactive_player.h"
 
 /** Provides the attack settings when clicking on an enemy building. */
 class AttackPanel : public UI::Box {
@@ -36,7 +37,8 @@ public:
 	AttackPanel(UI::Panel& parent,
 	            InteractivePlayer& iplayer,
 	            bool can_attack,
-	            std::function<std::vector<Widelands::Soldier*>()> get_max_attackers);
+	            const Widelands::Coords* target_coordinates,
+	            std::function<std::vector<Widelands::Bob*>()> get_max_attackers);
 
 	size_t count_soldiers() const;
 	std::vector<Widelands::Serial> soldiers() const;
@@ -60,14 +62,15 @@ private:
 	UI::Textarea&
 	add_text(UI::Box& parent, const std::string& str, UI::Align alignment, UI::FontStyle style);
 
-	void init_slider(const std::vector<Widelands::Soldier*>&, bool can_attack);
-	void init_soldier_lists(const std::vector<Widelands::Soldier*>&);
+	void init_slider(const std::vector<Widelands::Bob*>&, bool can_attack);
+	void init_soldier_lists(const std::vector<Widelands::Bob*>&);
 
 	void update(bool);
 	void send_less_soldiers();
 	void send_more_soldiers();
 
 	InteractivePlayer& iplayer_;
+	const Widelands::Coords* target_coordinates_;
 
 	// A SoldierPanel is not applicable here as it's keyed to a building and thinks too much
 	struct ListOfSoldiers : public UI::Panel {
@@ -83,18 +86,19 @@ private:
 		void handle_mousein(bool) override;
 		bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
 
-		const Widelands::Soldier* soldier_at(int32_t x, int32_t y) const;
-		void add(const Widelands::Soldier*);
-		void remove(const Widelands::Soldier*);
-		bool contains(const Widelands::Soldier* soldier) const {
+		const Widelands::Bob* soldier_at(int32_t x, int32_t y) const;
+		void add(const Widelands::Bob*);
+		void remove(const Widelands::Bob*);
+		void sort();
+		bool contains(const Widelands::Bob* soldier) const {
 			return std::any_of(
 			   soldiers_.begin(), soldiers_.end(), [soldier](const auto& s) { return s == soldier; });
 		}
 
-		std::vector<const Widelands::Soldier*> get_soldiers() const {
+		std::vector<const Widelands::Bob*> get_soldiers() const {
 			return soldiers_;
 		}
-		const Widelands::Soldier* get_soldier() const {
+		const Widelands::Bob* get_soldier() const {
 			return soldiers_.back();
 		}
 
@@ -118,7 +122,7 @@ private:
 	private:
 		bool restricted_row_number_;
 		uint16_t current_size_;  // Current number of rows or columns
-		std::vector<const Widelands::Soldier*> soldiers_;
+		std::vector<const Widelands::Bob*> soldiers_;
 
 		ListOfSoldiers* other_;
 		AttackPanel* attack_box_;
@@ -126,7 +130,7 @@ private:
 		void update_desired_size() override;
 	};
 
-	std::function<std::vector<Widelands::Soldier*>()> get_max_attackers_;
+	std::function<std::vector<Widelands::Bob*>()> get_max_attackers_;
 
 	/// The last time the information in this Panel got updated
 	Time lastupdate_;
@@ -151,7 +155,7 @@ public:
 	AttackWindow(
 	   InteractivePlayer& parent,
 	   UI::UniqueWindow::Registry&,
-	   Widelands::Building* target_bld,
+	   Widelands::MapObject* target_building_or_ship,
 	   const Widelands::Coords& target_coords,  // not necessarily the building's main location
 	   bool fastclick);
 	~AttackWindow() override;
@@ -171,7 +175,7 @@ protected:
 	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
 
 private:
-	std::vector<Widelands::Soldier*> get_max_attackers();
+	std::vector<Widelands::Bob*> get_max_attackers();
 
 	void act_attack();
 	void act_goto();
@@ -181,9 +185,25 @@ private:
 
 	InteractivePlayer& iplayer_;
 	const Widelands::Map& map_;
-	Widelands::OPtr<Widelands::Building> target_building_;
-	const Widelands::Coords target_coordinates_;
-	bool is_naval_invasion_;
+	Widelands::OPtr<Widelands::MapObject> target_building_or_ship_;
+	Widelands::Coords target_coordinates_;
+
+	enum class AttackType {
+		kBuilding,
+		kShip,
+		kNavalInvasion
+	};
+	const AttackType attack_type_;
+
+	[[nodiscard]] Widelands::Building* get_building() const {
+		return attack_type_ != AttackType::kBuilding ? nullptr : dynamic_cast<Widelands::Building*>(target_building_or_ship_.get(iplayer_.egbase()));
+	}
+	[[nodiscard]] Widelands::Ship* get_ship() const {
+		return attack_type_ != AttackType::kShip ? nullptr : dynamic_cast<Widelands::Ship*>(target_building_or_ship_.get(iplayer_.egbase()));
+	}
+	[[nodiscard]] bool is_naval_invasion() const {
+		return attack_type_ == AttackType::kNavalInvasion;
+	}
 
 	void init_bottombox();
 
