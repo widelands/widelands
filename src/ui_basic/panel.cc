@@ -217,11 +217,13 @@ void Panel::handle_notes() {
 			// If there are multiple modal panels, ensure each note is handled only once
 			Notifications::publish(NoteThreadSafeFunctionHandled(notes_.front().id));
 
-			notes_.front().run();
+			NoteThreadSafeFunction note = notes_.front();
+			notes_.pop_front();
+			note.run();
 		} else {
 			handled_notes_.erase(notes_.front().id);
+			notes_.pop_front();
 		}
-		notes_.pop_front();
 	}
 }
 
