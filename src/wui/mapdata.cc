@@ -67,6 +67,7 @@ MapData::MapData(const Widelands::Map& map,
 	height = map.get_height();
 	suggested_teams = map.get_suggested_teams();
 	tags = map.get_tags();
+	minimum_required_widelands_version = map.version().minimum_required_widelands_version;
 
 	if (maptype == MapData::MapType::kScenario) {
 		tags.insert("scenario");
