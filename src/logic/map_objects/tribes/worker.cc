@@ -2665,24 +2665,6 @@ void Worker::start_task_fugitive(Game& game) {
 	top_state().ivar1 = game.get_gametime().get() + 120000 + 200 * (game.logic_rand() % 600);
 }
 
-struct FindFlagWithPlayersWarehouse {
-	explicit FindFlagWithPlayersWarehouse(const Player& owner) : owner_(owner) {
-	}
-	[[nodiscard]] bool accept(const BaseImmovable& imm) const {
-		if (upcast(Flag const, flag, &imm)) {
-			if (flag->get_owner() == &owner_) {
-				if (!flag->economy(wwWORKER).warehouses().empty()) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-private:
-	const Player& owner_;
-};
-
 void Worker::fugitive_update(Game& game, State& state) {
 	if (!get_signal().empty()) {
 		molog(game.get_gametime(), "[fugitive]: interrupted by signal '%s'\n", get_signal().c_str());
