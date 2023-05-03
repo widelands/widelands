@@ -346,6 +346,9 @@ int LuaPanel::indicate(lua_State* L) {
          * ``"w"``: **Optional**. The widget's width. Default: automatic.
          * ``"h"``: **Optional**. The widget's height. Default: automatic.
          * ``"tooltip"``: **Optional**. The widget's tooltip.
+
+         .. _resizing_strategies:
+
          * ``"resizing"``: **Optional**. If the parent component is a Box,
            the Resizing strategy to use for layouting. Valid values are:
 
@@ -354,10 +357,13 @@ int LuaPanel::indicate(lua_State* L) {
            * ``"fillspace"``: Use the widget's desired breadth and the full available depth.
            * ``"expandboth"``: Use the full available space.
 
+           A box's depth is its primary layout direction, and the breadth is the direction
+           orthogonal to it. See: :ref:`Box widgets <box_description>`
+
          * ``"align"``: **Optional**. If the parent component is a Box,
            the Alignment strategy to use for layouting.
-           Valid values are ``"left"``/``"top"``, ``"center"``,
-           and ``"right"``/`"bottom"``. Default: Center.
+           Valid values are ``"center"`` (the default,) ``"left"``/``"top"``,
+           and ``"right"``/``"bottom"``.
          * ``"on_panel_clicked"``: **Optional**. Callback code to run when the
            user clicks anywhere inside the widget.
          * ``"on_position_changed"``: **Optional**. Callback code to run when the
@@ -375,6 +381,8 @@ int LuaPanel::indicate(lua_State* L) {
            * ``"content"``: **Optional**. The main panel descriptor table.
              The window will resize itself to accommodate this widget perfectly.
 
+         .. _box_description:
+
          * ``"box"``: A wrapper around other components with intelligent layouting.
            It is strongly recommended to layout all your components
            exclusively with Boxes. Properties:
@@ -382,8 +390,12 @@ int LuaPanel::indicate(lua_State* L) {
            * ``"orientation"``: **Mandatory**. The box's layouting direction:
              ``"vertical"`` or ``"horizontal"``.
              The shorthands ``"vert"``, ``"v"``, ``"horz"``, and ``"h"`` may be used.
+
              The size of a child component along this direction is called its *depth*, and the size
              of a child component along the direction orthogonal to it is called its *breadth*.
+
+             See also: The :ref:`"resizing" <resizing_strategies>` property
+
            * ``"max_x"``: **Optional**. The maximum horizontal size. Default: unlimited.
            * ``"max_y"``: **Optional**. The maximum vertical size. Default: unlimited.
            * ``"spacing"``: **Optional**. The inner spacing between items. Default: 0.
@@ -401,7 +413,7 @@ int LuaPanel::indicate(lua_State* L) {
 
            * ``"text"``: **Mandatory**. The text to display.
            * ``"font"``: **Mandatory**. The font style to use.
-           * ``"text_align"``: **Optional**. The alignment of the text. Default: Center.
+           * ``"text_align"``: **Optional**. The alignment of the text. Valid values are ``"center"`` (the default), ``"left"``, and ``"right"``.
            * ``"fixed_width"``: **Optional**. If set, the text area's width is fixed instead
              of resizing to accomodate the text or the parent. Default: not set.
 
@@ -442,22 +454,27 @@ int LuaPanel::indicate(lua_State* L) {
 
          local mv = wl.ui.MapView()
 
+         -- Create a toolbar button
          mv.toolbar:create_child({
             widget   = "button",
-            name     = "yes_no_window",
+            name     = "yes_no_toolbar_button",
             w        = styles.get_size("toolbar_button_size"),
             h        = styles.get_size("toolbar_button_size"),
             tooltip  = _("Yes or No"),
             icon     = "images/ui_basic/different.png",
+            -- Callback code to run when the user presses the button
             on_click = [[
                push_textdomain("yes_no.wad", true)
+               -- Open a new window
                wl.ui.MapView():create_child({
                   widget   = "window",
                   name     = "yes_or_no_window",
                   title    = _("Yes or No"),
                   x        = wl.ui.MapView().width  // 2,
                   y        = wl.ui.MapView().height // 2,
+                  -- The window's content
                   content  = {
+                     -- The window's central panel: A box with three children
                      widget      = "box",
                      orientation = "vert",
                      children    = {
@@ -467,24 +484,36 @@ int LuaPanel::indicate(lua_State* L) {
                            text   = _("Click Yes or No"),
                         },
                         {
+                           -- Space between the text and the buttons is also created like a widget
                            widget = "space",
                            value  = 10,
                         },
                         {
-                           widget   = "button",
-                           name     = "yes",
-                           title    = _("Yes"),
-                           on_click = [=[
-                              wl.ui.show_messagebox(_("Hello"), _("You clicked yes!"))
-                           ]=],
-                        },
-                        {
-                           widget   = "button",
-                           name     = "no",
-                           title    = _("No"),
-                           on_click = [=[
-                              wl.ui.show_messagebox(_("Foo"), _("You clicked no!"), false)
-                           ]=],
+                           -- Place the buttons side by side in a horizontal box
+                           widget = "box",
+                           orientation = "horz",
+                           children = {
+                              {
+                                 widget   = "button",
+                                 name     = "no",
+                                 title    = _("No"),
+                                 on_click = [=[
+                                    wl.ui.show_messagebox(_("Hello"), _("You clicked no!"), false)
+                                 ]=],
+                              },
+                              {
+                                 widget = "space",
+                                 value  = 10,
+                              },
+                              {
+                                 widget   = "button",
+                                 name     = "yes",
+                                 title    = _("Yes"),
+                                 on_click = [=[
+                                    wl.ui.show_messagebox(_("Hello"), _("You clicked yes!"))
+                                 ]=],
+                              },
+                           },
                         },
                      }
                   }
