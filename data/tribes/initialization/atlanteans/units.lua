@@ -1807,7 +1807,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Weaving Mill
             lore_author = pgettext("atlanteans_building", "Part of the silkweavers’ song"),
             -- TRANSLATORS: Performance helptext for an atlantean production site: Weaving Mill
-            performance = pgettext("atlanteans_building", "When this building is fully supplied and all kinds of clothing are needed by the economy, production of one spidercloth takes %1$s, one tabard takes %2$s and one golden tabard takes %3$s on average. If only one kind of clothing is needed by the economy, production of one spidercloth takes %4$s, one tabard takes %5$s and one golden tabard takes %6$s on average."):bformat(format_minutes_seconds(2, 12), format_minutes_seconds(2, 12), format_minutes_seconds(2, 12), format_seconds(44), format_seconds(44), format_seconds(44))
+            performance = pgettext("atlanteans_building", "When this building is fully supplied and all kinds of clothing are needed by the economy, production of one of each clothing takes %1$s on average. If only one kind of clothing is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(2, 12), format_seconds(44))
          }
       },
 
