@@ -1507,7 +1507,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Helm Smithy
             purpose = pgettext("barbarians_building", "Forges helmets that are used for training soldiers’ health in the training camp."),
             -- TRANSLATORS: Performance helptext for a barbarian production site: Helm Smithy
-            performance = pgettext("barbarians_building", "When this building is fully supplied and all helmets are needed by the economy, production of one of each helmet takes %1$s on average. If only one kind of helmet is needed by the economy, production of one helmet takes %4$s, one mask takes %5$s and one warhelm takes %6$s on average."):bformat(format_minutes_seconds(4, 3), format_minutes_seconds(1, 11), format_minutes_seconds(1, 21), format_minutes_seconds(1, 31))
+            performance = pgettext("barbarians_building", "When this building is fully supplied and all helmets are needed by the economy, production of one of each helmet takes %1$s on average. If only one kind of helmet is needed by the economy, production of one helmet takes %2$s, one mask takes %3$s and one warhelm takes %4$s on average."):bformat(format_minutes_seconds(4, 3), format_minutes_seconds(1, 11), format_minutes_seconds(1, 21), format_minutes_seconds(1, 31))
          }
       },
 
