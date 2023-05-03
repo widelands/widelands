@@ -74,6 +74,7 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
                 _("Main Menu"),
                 _("Return to the main menu")),
      desired_speed_(game->game_controller()->desired_speed()),
+     modal_(modal),
      game_(game) {
 
 	// Pause the game
@@ -129,10 +130,7 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
 }
 
 void StoryMessageBox::clicked_ok() {
-	set_visible(false);
-	set_thinks(false);
-
-	if (is_modal()) {
+	if (modal_) {
 		resume_game();
 		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 	} else {
@@ -162,7 +160,7 @@ void StoryMessageBox::clicked_main_menu() {
 }
 
 bool StoryMessageBox::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {
-	if (btn == SDL_BUTTON_RIGHT && is_modal()) {
+	if (btn == SDL_BUTTON_RIGHT && modal_) {
 		return true;
 	}
 

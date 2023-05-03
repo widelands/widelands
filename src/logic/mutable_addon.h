@@ -36,7 +36,9 @@ public:
 	void update_info(const std::string& descname,
 	                 const std::string& author,
 	                 const std::string& description,
-	                 const std::string& version);
+	                 const std::string& version,
+	                 const std::string& min_wl_version,
+	                 const std::string& max_wl_version);
 	using ProgressFunction = std::function<void(size_t)>;
 	void set_callbacks(const ProgressFunction& init, const ProgressFunction& progress) {
 		callback_init_ = init;
@@ -69,6 +71,12 @@ public:
 	void set_version(const std::string& version) {
 		version_ = version;
 	}
+	void set_min_wl_version(const std::string& min_wl_version) {
+		min_wl_version_ = min_wl_version;
+	}
+	void set_max_wl_version(const std::string& max_wl_version) {
+		max_wl_version_ = max_wl_version;
+	}
 	void set_force_sync_safe(bool fss) {
 		force_sync_safe_ = fss;
 	}
@@ -85,8 +93,13 @@ protected:
 	                                             const std::string& dest,
 	                                             bool dry_run);
 
-	std::string internal_name_, descname_, description_, author_, version_, min_wl_version_,
-	   max_wl_version_;
+	std::string internal_name_;
+	std::string descname_;
+	std::string description_;
+	std::string author_;
+	std::string version_;
+	std::string min_wl_version_;
+	std::string max_wl_version_;
 	AddOnCategory category_;
 	/*
 	 * The `sync_safe` property is not stored here because all new or updated add-ons

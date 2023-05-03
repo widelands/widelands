@@ -1479,6 +1479,7 @@ void EditorInteractive::publish_map() {
 	info.unlocalized_author = egbase().map().get_author();
 	info.version = version;
 	info.category = AddOns::AddOnCategory::kMaps;
+	info.min_wl_version = egbase().map().version().minimum_required_widelands_version;
 
 	AddOns::NetAddons::CallbackFn fnn = [this](const std::string& /* f */, int64_t /* l */) {
 		do_redraw_now();
