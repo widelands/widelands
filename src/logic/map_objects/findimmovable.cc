@@ -19,6 +19,7 @@
 #include "logic/map_objects/findimmovable.h"
 
 #include "base/macros.h"
+#include "economy/economy.h"
 #include "economy/flag.h"
 #include "logic/map.h"
 #include "logic/map_objects/immovable.h"
@@ -55,14 +56,16 @@ bool FindImmovablePlayerImmovable::accept(const BaseImmovable& imm) const {
 }
 
 bool FindImmovablePlayerMilitarySite::accept(const BaseImmovable& imm) const {
-	if (upcast(MilitarySite const, ms, &imm)) {
+	if (imm.descr().type() == MapObjectType::MILITARYSITE) {
+		upcast(MilitarySite const, ms, &imm);
 		return &ms->owner() == &player;
 	}
 	return false;
 }
 
 bool FindImmovableAttackTarget::accept(const BaseImmovable& imm) const {
-	if (upcast(Building const, b, &imm)) {
+	if (imm.descr().type() >= MapObjectType::BUILDING) {
+		upcast(Building const, b, &imm);
 		return b->attack_target() != nullptr;
 	}
 	return false;
@@ -74,25 +77,34 @@ bool FindImmovableAttackTarget::accept(const BaseImmovable& imm) const {
 // msites are visible.
 
 bool FindForeignMilitarysite::accept(const BaseImmovable& imm) const {
-	if (upcast(MilitarySite const, ms, &imm)) {
+	if (imm.descr().type() == MapObjectType::MILITARYSITE) {
+		upcast(MilitarySite const, ms, &imm);
 		return &ms->owner() != &player;
 	}
 	return false;
 }
 
 bool FindImmovableByDescr::accept(const BaseImmovable& baseimm) const {
-	if (upcast(const Immovable, imm, &baseimm)) {
-		if (&imm->descr() == &descr) {
-			return true;
+	return &baseimm.descr() == &descr;
+}
+
+bool FindFlagOf::accept(const BaseImmovable& baseimm) const {
+	if (baseimm.descr().type() == MapObjectType::FLAG) {
+		upcast(const Flag, flag, &baseimm);
+		if (Building* building = flag->get_building(); building != nullptr) {
+			if (finder.accept(*building)) {
+				return true;
+			}
 		}
 	}
 	return false;
 }
 
-bool FindFlagOf::accept(const BaseImmovable& baseimm) const {
-	if (upcast(const Flag, flag, &baseimm)) {
-		if (Building* building = flag->get_building()) {
-			if (finder.accept(*building)) {
+bool FindFlagWithPlayersWarehouse::accept(const BaseImmovable& imm) const {
+	if (imm.descr().type() == MapObjectType::FLAG) {
+		upcast(const Flag, flag, &imm);
+		if (flag->get_owner() == &owner_) {
+			if (!flag->economy(wwWORKER).warehouses().empty()) {
 				return true;
 			}
 		}
