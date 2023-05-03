@@ -68,10 +68,14 @@ AttackWindow::AttackWindow(InteractivePlayer& parent,
      map_(iplayer_.player().egbase().map()),
      target_building_or_ship_(target_building_or_ship),
      target_coordinates_(target_coords),
-     attack_type_(target_building_or_ship == nullptr ? AttackType::kNavalInvasion : target_building_or_ship->descr().type() == Widelands::MapObjectType::SHIP ? AttackType::kShip : AttackType::kBuilding),
+     attack_type_(target_building_or_ship == nullptr ? AttackType::kNavalInvasion :
+                  target_building_or_ship->descr().type() == Widelands::MapObjectType::SHIP ?
+                                                       AttackType::kShip :
+                                                       AttackType::kBuilding),
 
      mainbox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-     attack_panel_(mainbox_, iplayer_, true, &target_coordinates_, [this]() { return get_max_attackers(); }),
+     attack_panel_(
+        mainbox_, iplayer_, true, &target_coordinates_, [this]() { return get_max_attackers(); }),
      bottombox_(&mainbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal) {
 	if (target_building_or_ship != nullptr) {
 		const unsigned serial = serial_;
@@ -167,7 +171,9 @@ std::vector<Widelands::Bob*> AttackWindow::get_max_attackers() {
 
 	// Look for nearby warships
 	for (Widelands::Serial ship_serial : iplayer_.player().ships()) {
-		if (Widelands::Ship* warship = dynamic_cast<Widelands::Ship*>(egbase.objects().get_object(ship_serial)); warship != nullptr) {
+		if (Widelands::Ship* warship =
+		       dynamic_cast<Widelands::Ship*>(egbase.objects().get_object(ship_serial));
+		    warship != nullptr) {
 			if (warship->get_ship_type() == Widelands::ShipType::kWarship && warship->can_attack()) {
 				if (ship != nullptr) {  // Ship-to-ship combat
 					if (warship->get_attack_target(egbase) == ship) {
@@ -186,8 +192,7 @@ std::vector<Widelands::Bob*> AttackWindow::get_max_attackers() {
 					continue;
 				}
 
-				if (building != nullptr &&
-				    map_[attack_port_space].get_immovable() != building) {
+				if (building != nullptr && map_[attack_port_space].get_immovable() != building) {
 					continue;
 				}
 
@@ -336,8 +341,7 @@ void AttackPanel::update(bool action_on_panel) {
 	more_soldiers_->set_title(std::to_string(max_attackers));
 }
 
-void AttackPanel::init_slider(const std::vector<Widelands::Bob*>& all_attackers,
-                              bool can_attack) {
+void AttackPanel::init_slider(const std::vector<Widelands::Bob*>& all_attackers, bool can_attack) {
 	const size_t max_attackers = all_attackers.size();
 
 	soldiers_text_.reset(&add_text(columnbox_, slider_heading(max_attackers > 0 ? 1 : 0),
@@ -473,9 +477,11 @@ void AttackWindow::act_attack() {
 		iplayer_.map_view()->mouse_to_field(building->get_position(), MapView::Transition::Jump);
 	} else if (Widelands::Ship* ship = get_ship(); ship != nullptr) {
 		for (Widelands::Serial serial : attack_panel_.soldiers()) {
-			if (Widelands::Ship* warship = dynamic_cast<Widelands::Ship*>(iplayer_.egbase().objects().get_object(serial));
-					warship != nullptr && warship->get_attack_target(iplayer_.egbase()) == ship) {
-				iplayer_.game().send_player_warship_command(*warship, Widelands::WarshipCommand::kAttack, {});
+			if (Widelands::Ship* warship =
+			       dynamic_cast<Widelands::Ship*>(iplayer_.egbase().objects().get_object(serial));
+			    warship != nullptr && warship->get_attack_target(iplayer_.egbase()) == ship) {
+				iplayer_.game().send_player_warship_command(
+				   *warship, Widelands::WarshipCommand::kAttack, {});
 			}
 		}
 		iplayer_.map_view()->mouse_to_field(ship->get_position(), MapView::Transition::Jump);
@@ -573,15 +579,16 @@ bool AttackPanel::ListOfSoldiers::handle_mousemove(
 	if (const Widelands::Bob* mo = soldier_at(x, y); mo != nullptr) {
 		if (mo->descr().type() == Widelands::MapObjectType::SHIP) {
 			upcast(const Widelands::Ship, ship, mo);
-			set_tooltip(format(_("%1$s  HP: %2$u/%3$u  AT: +%4$u%%"),
-					ship->get_shipname(), ship->get_hitpoints(), ship->descr().max_hitpoints_, ship->get_sea_attack_soldier_bonus(attack_box_->iplayer_.egbase())));
+			set_tooltip(format(_("%1$s  HP: %2$u/%3$u  AT: +%4$u%%"), ship->get_shipname(),
+			                   ship->get_hitpoints(), ship->descr().max_hitpoints_,
+			                   ship->get_sea_attack_soldier_bonus(attack_box_->iplayer_.egbase())));
 		} else {
 			upcast(const Widelands::Soldier, soldier, mo);
 			set_tooltip(format(_("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"),
-				               soldier->get_health_level(), soldier->descr().get_max_health_level(),
-				               soldier->get_attack_level(), soldier->descr().get_max_attack_level(),
-				               soldier->get_defense_level(), soldier->descr().get_max_defense_level(),
-				               soldier->get_evade_level(), soldier->descr().get_max_evade_level()));
+			                   soldier->get_health_level(), soldier->descr().get_max_health_level(),
+			                   soldier->get_attack_level(), soldier->descr().get_max_attack_level(),
+			                   soldier->get_defense_level(), soldier->descr().get_max_defense_level(),
+			                   soldier->get_evade_level(), soldier->descr().get_max_evade_level()));
 		}
 	} else {
 		set_tooltip(std::string());
@@ -644,10 +651,12 @@ void AttackPanel::ListOfSoldiers::remove(const Widelands::Bob* s) {
 }
 
 void AttackPanel::ListOfSoldiers::sort() {
-	std::sort(soldiers_.begin(), soldiers_.end(), [this](const Widelands::Bob* a, const Widelands::Bob* b) {
-		const Widelands::Map& map = attack_box_->iplayer_.egbase().map();
-		return map.calc_distance(a->get_position(), *attack_box_->target_coordinates_) < map.calc_distance(b->get_position(), *attack_box_->target_coordinates_);
-	});
+	std::sort(
+	   soldiers_.begin(), soldiers_.end(), [this](const Widelands::Bob* a, const Widelands::Bob* b) {
+		   const Widelands::Map& map = attack_box_->iplayer_.egbase().map();
+		   return map.calc_distance(a->get_position(), *attack_box_->target_coordinates_) <
+		          map.calc_distance(b->get_position(), *attack_box_->target_coordinates_);
+	   });
 }
 
 void AttackPanel::ListOfSoldiers::draw(RenderTarget& dst) {
@@ -666,10 +675,10 @@ void AttackPanel::ListOfSoldiers::draw(RenderTarget& dst) {
 			upcast(const Widelands::Soldier, soldier, soldiers_[i]);
 
 			dst.fill_rect(Recti(location, kSoldierIconWidth, kSoldierIconHeight),
-				          get_soldier_color(soldier), BlendMode::Default);
+			              get_soldier_color(soldier), BlendMode::Default);
 
 			soldier->draw_info_icon(location, 1.0f, Widelands::Soldier::InfoMode::kInBuilding,
-				                         InfoToDraw::kSoldierLevels, &dst);
+			                        InfoToDraw::kSoldierLevels, &dst);
 
 			if (soldier->is_shipping()) {
 				constexpr float kOffset = 0.35f;
@@ -678,7 +687,7 @@ void AttackPanel::ListOfSoldiers::draw(RenderTarget& dst) {
 				const Image* anchor = g_image_cache->get("images/wui/overlays/port_hint.png");
 				dst.blitrect_scale(
 				   Rectf((column + kOffset) * kSoldierIconWidth, (row + kOffset) * kSoldierIconHeight,
-					     kSoldierIconWidth * kSize, kSoldierIconHeight * kSize),
+				         kSoldierIconWidth * kSize, kSoldierIconHeight * kSize),
 				   anchor, Recti(0, 0, anchor->width(), anchor->height()), kAlpha, BlendMode::Default);
 			}
 		}

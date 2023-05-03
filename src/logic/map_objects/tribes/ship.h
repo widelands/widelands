@@ -310,8 +310,7 @@ struct Ship : Bob {
 
 	void draw_healthbar(const EditorGameBase& egbase,
 	                    RenderTarget* dst,
-	                    const Vector2f&
-	                    point_on_dst,
+	                    const Vector2f& point_on_dst,
 	                    float scale) const;
 
 protected:

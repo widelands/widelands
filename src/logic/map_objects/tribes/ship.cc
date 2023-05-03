@@ -2075,76 +2075,78 @@ void Ship::draw(const EditorGameBase& egbase,
 	}
 }
 
-void Ship::draw_healthbar(const EditorGameBase& egbase, RenderTarget* dst, const Vector2f& point_on_dst, float scale) const {
-		// TODO(Nordfriese): Common code with Soldier::draw_info_icon
-		const RGBColor& color = owner().get_playercolor();
-		const uint16_t color_sum = color.r + color.g + color.b;
+void Ship::draw_healthbar(const EditorGameBase& egbase,
+                          RenderTarget* dst,
+                          const Vector2f& point_on_dst,
+                          float scale) const {
+	// TODO(Nordfriese): Common code with Soldier::draw_info_icon
+	const RGBColor& color = owner().get_playercolor();
+	const uint16_t color_sum = color.r + color.g + color.b;
 
-		const Vector2i draw_position = point_on_dst.cast<int>();
+	const Vector2i draw_position = point_on_dst.cast<int>();
 
-		// The frame gets a slight tint of player color
-		const Recti energy_outer(draw_position - Vector2i(kShipHealthBarWidth, 0) * scale,
-		                         kShipHealthBarWidth * 2 * scale, 5 * scale);
-		dst->fill_rect(energy_outer, color);
-		dst->brighten_rect(energy_outer, 230 - color_sum / 3);
+	// The frame gets a slight tint of player color
+	const Recti energy_outer(draw_position - Vector2i(kShipHealthBarWidth, 0) * scale,
+	                         kShipHealthBarWidth * 2 * scale, 5 * scale);
+	dst->fill_rect(energy_outer, color);
+	dst->brighten_rect(energy_outer, 230 - color_sum / 3);
 
-		// Adjust health to current animation tick
-		uint32_t health_to_show = hitpoints_;
-		if (has_battle() &&
-		    battles_.back().phase == (battles_.back().is_first ? Battle::Phase::kDefenderAttacking :
-                                                               Battle::Phase::kAttackerAttacking)) {
-			uint32_t pending_damage =
-			   battles_.back().pending_damage *
-			   (owner().egbase().get_gametime() - battles_.back().time_of_last_action).get() /
-			   kAttackAnimationDuration;
-			if (pending_damage > health_to_show) {
-				health_to_show = 0;
-			} else {
-				health_to_show -= pending_damage;
+	// Adjust health to current animation tick
+	uint32_t health_to_show = hitpoints_;
+	if (has_battle() &&
+	    battles_.back().phase == (battles_.back().is_first ? Battle::Phase::kDefenderAttacking :
+                                                            Battle::Phase::kAttackerAttacking)) {
+		uint32_t pending_damage =
+		   battles_.back().pending_damage *
+		   (owner().egbase().get_gametime() - battles_.back().time_of_last_action).get() /
+		   kAttackAnimationDuration;
+		if (pending_damage > health_to_show) {
+			health_to_show = 0;
+		} else {
+			health_to_show -= pending_damage;
+		}
+	}
+
+	// Now draw the health bar itself
+	const int health_width = 2 * (kShipHealthBarWidth - 1) * health_to_show / descr().max_hitpoints_;
+
+	Recti energy_inner(draw_position + Vector2i(-kShipHealthBarWidth + 1, 1) * scale,
+	                   health_width * scale, 3 * scale);
+	Recti energy_complement(energy_inner.origin() + Vector2i(health_width, 0) * scale,
+	                        (2 * (kShipHealthBarWidth - 1) - health_width) * scale, 3 * scale);
+
+	const RGBColor complement_color =
+	   color_sum > 128 * 3 ? RGBColor(32, 32, 32) : RGBColor(224, 224, 224);
+	dst->fill_rect(energy_inner, color);
+	dst->fill_rect(energy_complement, complement_color);
+
+	// Now soldier strength bonus indicators
+	constexpr unsigned kBonusIconSize = 6;
+	constexpr unsigned kMaxRows = 16;
+	const unsigned bonus = get_sea_attack_soldier_bonus(egbase);
+	if (bonus > 0) {
+		unsigned n_cols = std::min(2 * kShipHealthBarWidth / kBonusIconSize, bonus);
+		unsigned n_rows = std::min(kMaxRows - 1, bonus / n_cols);
+		if (n_cols * n_rows < bonus) {
+			++n_rows;
+		}
+		while (n_cols * n_rows < bonus) {
+			++n_cols;
+		}
+		const unsigned last_row_cols = n_cols - (n_cols * n_rows - bonus);
+
+		for (unsigned row = 0; row < n_rows; ++row) {
+			const unsigned cols_in_row = (row + 1 < n_rows ? n_cols : last_row_cols);
+			for (unsigned col = 0; col < cols_in_row; ++col) {
+				Recti rect(
+				   draw_position.x + ((col - cols_in_row * 0.5f) * kBonusIconSize + 1.f) * scale,
+				   draw_position.y + (7.f + row * kBonusIconSize) * scale,
+				   (kBonusIconSize - 2.f) * scale, (kBonusIconSize - 2.f) * scale);
+				dst->fill_rect(rect, color);
+				dst->draw_rect(rect, complement_color);
 			}
 		}
-
-		// Now draw the health bar itself
-		const int health_width =
-		   2 * (kShipHealthBarWidth - 1) * health_to_show / descr().max_hitpoints_;
-
-		Recti energy_inner(draw_position + Vector2i(-kShipHealthBarWidth + 1, 1) * scale,
-		                   health_width * scale, 3 * scale);
-		Recti energy_complement(energy_inner.origin() + Vector2i(health_width, 0) * scale,
-		                        (2 * (kShipHealthBarWidth - 1) - health_width) * scale, 3 * scale);
-
-		const RGBColor complement_color =
-		   color_sum > 128 * 3 ? RGBColor(32, 32, 32) : RGBColor(224, 224, 224);
-		dst->fill_rect(energy_inner, color);
-		dst->fill_rect(energy_complement, complement_color);
-
-		// Now soldier strength bonus indicators
-		constexpr unsigned kBonusIconSize = 6;
-		constexpr unsigned kMaxRows = 16;
-		const unsigned bonus = get_sea_attack_soldier_bonus(egbase);
-		if (bonus > 0) {
-			unsigned n_cols = std::min(2 * kShipHealthBarWidth / kBonusIconSize, bonus);
-			unsigned n_rows = std::min(kMaxRows - 1, bonus / n_cols);
-			if (n_cols * n_rows < bonus) {
-				++n_rows;
-			}
-			while (n_cols * n_rows < bonus) {
-				++n_cols;
-			}
-			const unsigned last_row_cols = n_cols - (n_cols * n_rows - bonus);
-
-			for (unsigned row = 0; row < n_rows; ++row) {
-				const unsigned cols_in_row = (row + 1 < n_rows ? n_cols : last_row_cols);
-				for (unsigned col = 0; col < cols_in_row; ++col) {
-					Recti rect(
-					   draw_position.x + ((col - cols_in_row * 0.5f) * kBonusIconSize + 1.f) * scale,
-					   draw_position.y + (7.f + row * kBonusIconSize) * scale,
-					   (kBonusIconSize - 2.f) * scale, (kBonusIconSize - 2.f) * scale);
-					dst->fill_rect(rect, color);
-					dst->draw_rect(rect, complement_color);
-				}
-			}
-		}
+	}
 }
 
 void Ship::log_general_info(const EditorGameBase& egbase) const {

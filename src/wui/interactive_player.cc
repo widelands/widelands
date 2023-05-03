@@ -779,7 +779,8 @@ UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& c,
 	}
 
 	for (Widelands::Bob* bob = map[c].get_first_bob(); bob != nullptr; bob = bob->get_next_bob()) {
-		if (bob->descr().type() == Widelands::MapObjectType::SHIP && player().is_hostile(bob->owner())) {
+		if (bob->descr().type() == Widelands::MapObjectType::SHIP &&
+		    player().is_hostile(bob->owner())) {
 			UI::UniqueWindow::Registry& registry =
 			   unique_windows().get_registry(format("attack_ship_%u", bob->serial()));
 			registry.open_window = [this, &registry, bob, &c, fastclick]() {

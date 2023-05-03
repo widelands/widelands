@@ -188,18 +188,18 @@ private:
 	Widelands::OPtr<Widelands::MapObject> target_building_or_ship_;
 	Widelands::Coords target_coordinates_;
 
-	enum class AttackType {
-		kBuilding,
-		kShip,
-		kNavalInvasion
-	};
+	enum class AttackType { kBuilding, kShip, kNavalInvasion };
 	const AttackType attack_type_;
 
 	[[nodiscard]] Widelands::Building* get_building() const {
-		return attack_type_ != AttackType::kBuilding ? nullptr : dynamic_cast<Widelands::Building*>(target_building_or_ship_.get(iplayer_.egbase()));
+		return attack_type_ != AttackType::kBuilding ?
+                nullptr :
+                dynamic_cast<Widelands::Building*>(target_building_or_ship_.get(iplayer_.egbase()));
 	}
 	[[nodiscard]] Widelands::Ship* get_ship() const {
-		return attack_type_ != AttackType::kShip ? nullptr : dynamic_cast<Widelands::Ship*>(target_building_or_ship_.get(iplayer_.egbase()));
+		return attack_type_ != AttackType::kShip ?
+                nullptr :
+                dynamic_cast<Widelands::Ship*>(target_building_or_ship_.get(iplayer_.egbase()));
 	}
 	[[nodiscard]] bool is_naval_invasion() const {
 		return attack_type_ == AttackType::kNavalInvasion;
