@@ -341,15 +341,15 @@ int LuaPanel::indicate(lua_State* L) {
 
          * ``"widget"``: **Mandatory**. The type of widget to create. See below for allowed values.
          * ``"name"``: **Mandatory** for named panels. The internal name of the panel.
-         * ``"x"``: **Optional**. The horizontal offset inside the parent from the left.
-         * ``"y"``: **Optional**. The vertical offset inside the parent from the top.
-         * ``"w"``: **Optional**. The widget's width.
-         * ``"h"``: **Optional**. The widget's height.
+         * ``"x"``: **Optional**. The horizontal offset inside the parent from the left. Default: 0.
+         * ``"y"``: **Optional**. The vertical offset inside the parent from the top. Default: 0.
+         * ``"w"``: **Optional**. The widget's width. Default: automatic.
+         * ``"h"``: **Optional**. The widget's height. Default: automatic.
          * ``"tooltip"``: **Optional**. The widget's tooltip.
          * ``"resizing"``: **Optional**. If the parent component is a Box,
            the Resizing strategy to use for layouting. Valid values are:
 
-           * ``"align"``: Use the widget's desired size.
+           * ``"align"``: Use the widget's desired size. This is the default.
            * ``"fullsize"``: Use the widget's desired depth and the full available breadth.
            * ``"fillspace"``: Use the widget's desired breadth and the full available depth.
            * ``"expandboth"``: Use the full available space.
@@ -357,7 +357,7 @@ int LuaPanel::indicate(lua_State* L) {
          * ``"align"``: **Optional**. If the parent component is a Box,
            the Alignment strategy to use for layouting.
            Valid values are ``"left"``/``"top"``, ``"center"``,
-           and ``"right"``/`"bottom"``.
+           and ``"right"``/`"bottom"``. Default: Center.
          * ``"on_panel_clicked"``: **Optional**. Callback code to run when the
            user clicks anywhere inside the widget.
          * ``"on_position_changed"``: **Optional**. Callback code to run when the
@@ -366,7 +366,7 @@ int LuaPanel::indicate(lua_State* L) {
 
       Keys that are not supported by the widget type are silently ignored.
 
-      Component types are:
+      Currently supported types of widgets are:
 
          * ``"window"``: A window. Windows can only be added to the top-level
            :class:`~wl.ui.MapView`. Properties:
@@ -382,10 +382,11 @@ int LuaPanel::indicate(lua_State* L) {
            * ``"orientation"``: **Mandatory**. The box's layouting direction:
              ``"vertical"`` or ``"horizontal"``.
              The shorthands ``"vert"``, ``"v"``, ``"horz"``, and ``"h"`` may be used.
-           * ``"max_x"``: **Optional**. The maximum horizontal size.
-           * ``"max_y"``: **Optional**. The maximum vertical size.
-           * ``"spacing"``: **Optional**. The inner spacing between items.
-           * ``"scrolling"``: **Optional**. Whether the box may scroll if its content is too large.
+           * ``"max_x"``: **Optional**. The maximum horizontal size. Default: unlimited.
+           * ``"max_y"``: **Optional**. The maximum vertical size. Default: unlimited.
+           * ``"spacing"``: **Optional**. The inner spacing between items. Default: 0.
+           * ``"scrolling"``: **Optional**. Whether the box may scroll if its content
+             is too large. Default: false.
 
          * ``"inf_space"``: Only valid as the direct child of a Box. A flexible spacer.
          * ``"space"``: Only valid as the direct child of a Box. A fixed-size spacer. Property:
@@ -398,9 +399,9 @@ int LuaPanel::indicate(lua_State* L) {
 
            * ``"text"``: **Mandatory**. The text to display.
            * ``"font"``: **Mandatory**. The font style to use.
-           * ``"text_align"``: **Optional**. The alignment of the text.
+           * ``"text_align"``: **Optional**. The alignment of the text. Default: Center.
            * ``"fixed_width"``: **Optional**. If set, the text area's width is fixed instead
-             of resizing to accomodate the text or the parent.
+             of resizing to accomodate the text or the parent. Default: not set.
 
          * ``"button"``: A clickable button. A button must have either a title or an icon,
            but not both. Properties:
@@ -410,17 +411,17 @@ int LuaPanel::indicate(lua_State* L) {
            * ``"style"``: **Optional**. The button's style. One of:
 
              * ``"primary"``
-             * ``"secondary"``
+             * ``"secondary"`` (default)
              * ``"menu"``
 
            * ``"visual"``: **Optional**. The button's appearance. One of:
 
-             * ``"raised"``
+             * ``"raised"`` (default)
              * ``"permpressed"``
              * ``"flat"``
 
            * ``"repeating"``: **Optional**. Whether pressing and holding
-             the button generates repeated events.
+             the button generates repeated events. Default: false.
 
            * ``"on_click"``: **Optional**. Callback code to run when the
              button is clicked. To associate actions with a button press,
@@ -431,6 +432,69 @@ int LuaPanel::indicate(lua_State* L) {
       Therefore, any callbacks attached to such widgets must not use any functions or variables
       defined at an arbitrary earlier time by your script -
       they may have been deleted by the time the callback is invoked.
+      Example:
+
+      .. code-block:: lua
+
+         push_textdomain("yes_no.wad", true)
+
+         local mv = wl.ui.MapView()
+
+         mv.toolbar:create_child({
+            widget   = "button",
+            name     = "yes_no_window",
+            w        = styles.get_size("toolbar_button_size"),
+            h        = styles.get_size("toolbar_button_size"),
+            tooltip  = _("Yes or No"),
+            icon     = "images/ui_basic/different.png",
+            on_click = [[
+               push_textdomain("yes_no.wad", true)
+               wl.ui.MapView():create_child({
+                  widget   = "window",
+                  name     = "yes_or_no_window",
+                  title    = _("Yes or No"),
+                  x        = wl.ui.MapView().width  // 2,
+                  y        = wl.ui.MapView().height // 2,
+                  content  = {
+                     widget      = "box",
+                     orientation = "vert",
+                     children    = {
+                        {
+                           widget = "textarea",
+                           font   = "wui_info_panel_paragraph",
+                           text   = _("Click Yes or No"),
+                        },
+                        {
+                           widget = "space",
+                           value  = 10,
+                        },
+                        {
+                           widget   = "button",
+                           name     = "yes",
+                           title    = _("Yes"),
+                           on_click = [=[
+                              wl.ui.show_messagebox(_("Hello"), _("You clicked yes!"))
+                           ]=],
+                        },
+                        {
+                           widget   = "button",
+                           name     = "no",
+                           title    = _("No"),
+                           on_click = [=[
+                              wl.ui.show_messagebox(_("Foo"), _("You clicked no!"), false)
+                           ]=],
+                        },
+                     }
+                  }
+               })
+               pop_textdomain()
+            ]]
+         })
+
+         mv:update_toolbar()
+
+         pop_textdomain()
+
 */
 int LuaPanel::create_child(lua_State* L) {
 	if (lua_gettop(L) != 2) {
