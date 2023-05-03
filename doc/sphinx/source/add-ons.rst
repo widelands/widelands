@@ -19,7 +19,7 @@ An add-on contains a plain-text ini-style file called ``addons`` with the follow
 * ``description``: The long description
 * ``author``: The add-on’s author(s) name(s)
 * ``version``: The add-on’s version number
-* ``category``: One of "tribes", "world", "script", "maps", "map_generator", "campaign", "win_condition", "starting_condition", "theme"
+* ``category``: One of "tribes", "world", "script", "maps", "map_generator", "campaign", "win_condition", "starting_condition", "ui_plugin", "theme"
 * ``requires``: A comma-separated list of the filenames of add-ons required by this add-on.
 * ``min_wl_version`` *Optional*: The oldest Widelands version required by this add-on.
 * ``max_wl_version`` *Optional*: The newest Widelands version supported by this add-on.
@@ -53,6 +53,7 @@ Categories
 - `campaign`_
 - `win_condition`_
 - `starting_condition`_
+- `ui_plugin`_
 - `theme`_
 
 
@@ -138,6 +139,11 @@ starting_condition
 A starting condition script. May define the same starting conditions for any number of tribes.
 
 The add-on needs to contain one or more scripts called ``<tribename>.lua`` which must follow the same conventions as the files in ``data/tribes/initialization/<tribename>/starting_conditions/*.lua`` (see :doc:`autogen_lua_tribes_defining_discovery`).
+
+
+ui_plugin
+~~~~~~~~~
+A plugin for the graphical user interface. The add-on needs to contain a script called ``init.lua`` which will be run once upon creating the interactive game base or the editor. The script can then modify the user interface using the :doc:`UI scripting API <autogen_wl_ui>`.
 
 
 theme
