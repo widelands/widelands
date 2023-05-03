@@ -414,7 +414,7 @@ int LuaPanel::indicate(lua_State* L) {
            * ``"text"``: **Mandatory**. The text to display.
            * ``"font"``: **Mandatory**. The font style to use.
            * ``"text_align"``: **Optional**. The alignment of the text. Valid values are
-   ``"center"`` (the default), ``"left"``, and ``"right"``.
+             ``"center"`` (the default), ``"left"``, and ``"right"``.
            * ``"fixed_width"``: **Optional**. If set, the text area's width is fixed instead
              of resizing to accomodate the text or the parent. Default: not set.
 
