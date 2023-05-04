@@ -9,7 +9,7 @@
 # Максим Дронь <dronmax@gmail.com>, 2015
 # CupIvan <mail@cupivan.ru>, 2015
 # Viktor Skachkov <awsswa59@gmail.com>, 2018-2020
-# Yuriy Sokolov <lention@mail.ru>, 2015,2018,2022
+# Yuriy Sokolov <lention@mail.ru>, 2015,2018,2022-2023
 # 6da4f49c4b78e697e34b24b2a66289f5, 2016
 # Владимир Шевцов, 2022
 # bcd998a534fa92d05529385de8735da7_84390ba <27ce5340b01d4cdb2226fa37a41159b9_403942>, 2016
@@ -20,9 +20,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-10 03:09+0000\n"
+"POT-Creation-Date: 2023-05-01 02:42+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2018,2022\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2018,2022-2023\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -385,12 +385,11 @@ msgstr "Повторы"
 
 #: ../../data/txts/help/common_helptexts.lua:30
 msgid ""
-"Widelands records every game you play in two files. One of these files has a"
-" .wrpl.wgf extension and contains an initial savegame. The other file has a "
-".wrpl extension and contains all commands that were issued by all players, "
-"such as building a road or attacking an enemy. The rest of the filenames "
+"Widelands records every game you play in a replay file with .wry extension. "
+"This file contains an initial savegame and all commands that were issued by "
+"all players, such as building a road or attacking an enemy. The filename "
 "will tell you the time you started the game."
-msgstr "Widelands записывает каждую игру в два файла. Один из этих файлов имеет расширение .wrpl.wgf и содержит начальное сохранение. Другой файл имеет расширение .wrpl и содержит все команды игроков, таких как строительство дорог или атаки противников. Остальная часть имени файла указывает время начала игры."
+msgstr "Widelands записывает каждую игру в файл повтора с расширением .wry. Этот файл содержит начальное сохранение и все действия игроков, такие как строительство дорог или нападения на противников. В названии файла записано время начала игры."
 
 #: ../../data/txts/help/common_helptexts.lua:31
 msgid ""
@@ -418,25 +417,9 @@ msgctxt "hotkey"
 msgid "%s:"
 msgstr "%s:"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
 #: ../../data/txts/help/common_helptexts.lua:48
-msgid "Toggle building spaces"
-msgstr "Переключить показ мест строительства"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
 #: ../../data/txts/help/common_helptexts.lua:57
-msgid "Toggle fullscreen (if supported by the OS)"
-msgstr "Переключить полноэкранный режим (если поддерживается ОС)"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'm'
-#: ../../data/txts/help/common_helptexts.lua:66
-msgid "Toggle minimap"
-msgstr "Переключить миникарту"
-
-#: ../../data/txts/help/common_helptexts.lua:75
-#: ../../data/txts/help/common_helptexts.lua:84
-#: ../../data/txts/help/common_helptexts.lua:93
+#: ../../data/txts/help/common_helptexts.lua:67
 msgid "%1% / %2%"
 msgstr "%1% / %2%"
 
@@ -658,8 +641,8 @@ msgstr "Удерживая нажатой клавишу Shift, включает
 
 #: ../../data/txts/tips/editor.lua:24
 msgid ""
-"Holding down Alt switches the second alternative tool on (if it exists)."
-msgstr "Удерживая ALT переключает на второй альтернативный инструмент (если он есть)."
+"Holding down Ctrl switches the second alternative tool on (if it exists)."
+msgstr "Удерживая Ctrl переключает на второй альтернативный инструмент (если он есть)."
 
 #: ../../data/txts/tips/editor.lua:28
 msgid ""
@@ -857,6 +840,14 @@ msgid "Shift + Arrow keys"
 msgstr "Shift + стрелка"
 
 #: ../../data/txts/tips/general_game.lua:102
+msgid ""
+"If you play on a laptop with a touchpad, you can assign functionality to "
+"touchpad scrolling in the ‘Options’ → ‘Edit keyboard and mouse actions’ "
+"menu. For example, moving the map view can be much more comfortable by "
+"scrolling instead of dragging with the right mouse button."
+msgstr "Если вы играете на ноутбуке с тачпадом, вы можете задать функцию для прокрутки тачпада в меню \"Настройки\" → \"Настроить клавиатуру и мышь\". Например, перемещать вид карты может быть гораздо удобнее с помощью прокрутки, а не перетаскивания правой кнопкой мыши."
+
+#: ../../data/txts/tips/general_game.lua:106
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"

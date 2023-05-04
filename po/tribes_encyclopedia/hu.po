@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-03-07 03:08+0000\n"
+"POT-Creation-Date: 2023-05-01 02:42+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2023\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
@@ -15478,411 +15478,108 @@ msgstr "[Számítás hiányzik]"
 msgid "Performance:"
 msgstr "Teljesítmény:"
 
-#: ../../data/tribes/scripting/help/controls.lua:11
+#: ../../data/tribes/scripting/help/controls.lua:7
 #: ../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
 msgstr "Irányítás"
 
-#: ../../data/tribes/scripting/help/controls.lua:13
+#: ../../data/tribes/scripting/help/controls.lua:9
 msgid "Window Control"
 msgstr "Ablakvezérlés"
 
-#: ../../data/tribes/scripting/help/controls.lua:16
-msgid "Close window"
-msgstr "Ablak bezárása"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:16
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:12
 msgctxt "hotkey"
 msgid "Right-click"
 msgstr "Jobb kattintás"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:18
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:14
+msgid "Close window"
+msgstr "Ablak bezárása"
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:16
 msgctxt "hotkey"
 msgid "Middle-click or Ctrl + Left-click"
 msgstr "Középső kattintás vagy Ctrl + bal kattintás"
 
+#. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:18
 msgid "Minimize/Maximize window"
 msgstr "Ablak összecsukása/kinagyítása"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
+#. TRANSLATORS: This is an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:20
 msgctxt "hotkey"
 msgid "Ctrl + Left-click on Button"
 msgstr "Ctrl + bal kattintás a gombon"
 
-#: ../../data/tribes/scripting/help/controls.lua:20
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:22
 msgid "Skip confirmation dialog"
 msgstr "A megerősítő párbeszédablak kihagyása"
 
-#: ../../data/tribes/scripting/help/controls.lua:22
+#: ../../data/tribes/scripting/help/controls.lua:24
 msgid "Table Control"
 msgstr "Táblázatok kezelése"
 
-#: ../../data/tribes/scripting/help/controls.lua:23
+#: ../../data/tribes/scripting/help/controls.lua:25
 msgid ""
 "In tables that allow the selection of multiple entries, the following key "
 "combinations are available:"
 msgstr "A több elem kijelölését is megengedő táblázatokban az alábbi billentyűkombiációk használhatók:"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:26
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:28
 msgctxt "hotkey"
 msgid "Ctrl + Click"
 msgstr "Ctrl + kattintás"
 
-#: ../../data/tribes/scripting/help/controls.lua:26
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:30
 msgctxt "table_control"
 msgid "Select multiple entries"
 msgstr "Több elem kiválasztása"
 
-#: ../../data/tribes/scripting/help/controls.lua:28
-msgctxt "table_control"
-msgid "Select a range of entries"
-msgstr "Egymást követő elemek kiválasztása"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:28
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:32
 msgctxt "hotkey"
 msgid "Shift + Click"
 msgstr "Shift + kattintás"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:30
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:34
+msgctxt "table_control"
+msgid "Select a range of entries"
+msgstr "Egymást követő elemek kiválasztása"
+
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:36
 msgctxt "table_control"
 msgid "Select all entries"
 msgstr "Összes elem kiválasztása"
 
-#: ../../data/tribes/scripting/help/controls.lua:32
+#: ../../data/tribes/scripting/help/controls.lua:38
 msgid "Road Control"
 msgstr "Útvezérlés"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:35
-#: ../../data/tribes/scripting/help/controls.lua:37
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:41
+#: ../../data/tribes/scripting/help/controls.lua:45
 msgctxt "hotkey"
 msgid "Ctrl + Left-click"
 msgstr "Ctrl + bal kattintás"
 
-#: ../../data/tribes/scripting/help/controls.lua:35
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:43
 msgid "While connecting two flags: Place flags automatically"
 msgstr "Két zászló összekötésekor: zászlók automatikus elhelyezése"
 
-#: ../../data/tribes/scripting/help/controls.lua:37
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:47
 msgid "While removing a flag: Remove all flags up to the first junction"
 msgstr "Zászló törlésekor: minden zászló törlése az első útelágazásig"
-
-#: ../../data/tribes/scripting/help/controls.lua:39
-msgid "Keyboard Shortcuts"
-msgstr "Gyorsbillentyűk"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:42
-msgid "Increase game speed"
-msgstr "Játéksebesség növelése"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:44
-msgid "Decrease game speed"
-msgstr "Játéksebesség csökkentése"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:46
-msgid "Increase game speed by 10x"
-msgstr "Játéksebesség növelése 10-zel"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:48
-msgid "Decrease game speed by 10x"
-msgstr "Játéksebesség csökkentése 10-zel"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:50
-msgid "Increase game speed by 0.25x"
-msgstr "Játéksebesség növelése 0,25-tel"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:52
-msgid "Decrease game speed by 0.25x"
-msgstr "Játéksebesség csökkentése 0,25-tel"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:54
-msgid "Pause the game"
-msgstr "Játék megállítása"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'c'
-#: ../../data/tribes/scripting/help/controls.lua:56
-msgid "Toggle census"
-msgstr "Épületnevek ki/bekapcsolása"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 's'
-#: ../../data/tribes/scripting/help/controls.lua:58
-msgid "Toggle status"
-msgstr "Állapotsorok ki/bekapcsolása"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'l'
-#: ../../data/tribes/scripting/help/controls.lua:60
-msgid "Toggle soldier health bars and level icons"
-msgstr "Katonák életerősávjának és tapasztalati pont ikonjainak ki/bekapcsolása"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'u'
-#: ../../data/tribes/scripting/help/controls.lua:62
-msgid "Toggle building visibility"
-msgstr "Épületek ki/bekapcsolása"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'w'
-#: ../../data/tribes/scripting/help/controls.lua:64
-msgid "Toggle workarea overlap indicators"
-msgstr "Munkaterület átfedések ki/bekapcsolása"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'o'
-#: ../../data/tribes/scripting/help/controls.lua:68
-msgid "Toggle objectives"
-msgstr "Célkitűzések bekapcsolása"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'n'
-#: ../../data/tribes/scripting/help/controls.lua:70
-msgid "Toggle messages (‘news’)"
-msgstr "Üzenetek bekapcsolása („hírek”)"
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:72
-#: ../../data/tribes/scripting/help/init.lua:85
-msgid "Tribal Encyclopedia"
-msgstr "Törzsi enciklopédia"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'i'
-#: ../../data/tribes/scripting/help/controls.lua:74
-msgid "Toggle stock inventory"
-msgstr "Árukészlet ki/bekapcsolása"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'b'
-#: ../../data/tribes/scripting/help/controls.lua:76
-msgid "Toggle building statistics"
-msgstr "Épületek statisztika ki/bekapcsolása"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'x'
-#: ../../data/tribes/scripting/help/controls.lua:78
-msgid "Toggle soldier statistics"
-msgstr "Katonai statisztika ki/bekapcsolása"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'e'
-#: ../../data/tribes/scripting/help/controls.lua:80
-msgid "Toggle seafaring statistics"
-msgstr "Hajózási statisztika ki/bekapcsolása"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:82
-msgctxt "hotkey"
-msgid "Arrow keys"
-msgstr "Kurzor billentyűk"
-
-#: ../../data/tribes/scripting/help/controls.lua:82
-msgid "Move the map"
-msgstr "Térkép mozgatása"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:84
-msgctxt "hotkey"
-msgid "Ctrl + Arrow keys"
-msgstr "Ctrl + kurzor"
-
-#: ../../data/tribes/scripting/help/controls.lua:84
-msgid "Move the map fast"
-msgstr "Térkép gyors mozgatása"
-
-#: ../../data/tribes/scripting/help/controls.lua:86
-msgid "Move the map slowly"
-msgstr "Térkép lassú mozgatása"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:86
-msgctxt "hotkey"
-msgid "Shift + Arrow keys"
-msgstr "Shift + kurzor"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:88
-msgid "Center main mapview on starting location"
-msgstr "A fő térképnézet kiindulóhelyre igazítása"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:90
-msgid "Remember current location"
-msgstr "Jelenlegi hely megjegyzése"
-
-#: ../../data/tribes/scripting/help/controls.lua:91
-msgid "Go to previously remembered location"
-msgstr "Megjegyzett helyre ugrás"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:93
-msgid "Go to previous location"
-msgstr "Előző helyre ugrás"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:95
-msgid "Go to next location"
-msgstr "Következő helyre ugrás"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:97
-msgid "Increase zoom"
-msgstr "Nagyítás"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:99
-msgid "Decrease zoom"
-msgstr "Kicsinyítés"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:101
-msgid "Reset zoom"
-msgstr "Nagyítás alaphelyzet"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:103
-msgid "Take a screenshot"
-msgstr "Képernyőkép készítése"
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:106
-msgctxt "hotkey"
-msgid "Ctrl + Shift + Space"
-msgstr "Ctrl+Shift+Szóköz"
-
-#: ../../data/tribes/scripting/help/controls.lua:106
-msgid "Show the debug console (only in debug-builds)"
-msgstr "Megjeleníti a hibakereső konzolt (csak hibakeresési fordítás esetén)"
-
-#. TRANSLATORS: Heading in "Controls" help
-#: ../../data/tribes/scripting/help/controls.lua:110
-msgid "Message Window"
-msgstr "Üzenetablak"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:113
-msgid "Show all messages"
-msgstr "Minden üzenet megjelenítése"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:115
-msgid "Show geologists’ messages only"
-msgstr "Csak a geológusok üzeneteinek megjelenítése"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:117
-msgid "Show economy messages only"
-msgstr "Csak a gazdasági üzenetek megjelenítése"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:119
-msgid "Show seafaring messages only"
-msgstr "Csak a hajózási üzenetek megjelenítése"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:121
-msgid "Show warfare messages only"
-msgstr "Csak a hadi üzenetek megjelenítése"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:123
-msgid "Show scenario messages only"
-msgstr "Csak a küldetés üzeneteinek megjelenítése"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:125
-msgid "Jump to the location corresponding to the current message"
-msgstr "Ugrás arra a helyre, amelyről a kiválasztott üzenet szól"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:127
-msgid "Archive/Restore the current message"
-msgstr "A jelenlegi üzenetet archiválása/helyreállítása"
-
-#. TRANSLATORS: Heading in "Controls" help
-#: ../../data/tribes/scripting/help/controls.lua:131
-msgid "Ship Statistics"
-msgstr "Hajózási statisztika"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:134
-msgid "Show all ships"
-msgstr "Összes hajó megjelenítése"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:136
-msgid "Show idle ships"
-msgstr "Üres hajók megjelenítése"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:138
-msgid "Show ships shipping wares and workers"
-msgstr "Árut és munkásokat szállító hajók megjelenítése"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:140
-msgid "Show waiting expeditions"
-msgstr "Várakozó expedíciók megjelenítése"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:142
-msgid "Show scouting expeditions"
-msgstr "Felderítő expedíciók megjelenítése"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:144
-msgid "Show expeditions that have found a port space or are founding a colony"
-msgstr "Azon expedíciók megjelenítése, melyek találtak kikötőhelyet, vagy kolóniát alapítanak."
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:146
-msgid "Center the map on the selected ship"
-msgstr "Ugrás a kiválasztott hajóhoz"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:148
-msgid "Open the selected ship’s window"
-msgstr "A kiválasztott hajó ablakának megnyitása"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:150
-msgid "Go to the selected ship and open its window"
-msgstr "Ugrás a kiválasztott hajóhoz, és az ablakának megnyitása"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:152
-msgid "Watch the selected ship"
-msgstr "A kiválasztott hajó figyelése"
 
 #. TRANSLATORS: Size of a map immovablee
 #: ../../data/tribes/scripting/help/format_help.lua:60
@@ -16000,6 +15697,10 @@ msgstr "Lesz belőle:"
 #: ../../data/tribes/scripting/help/immovable_help.lua:100
 msgid "Preferred Terrains"
 msgstr "Kedvelt terepek:"
+
+#: ../../data/tribes/scripting/help/init.lua:85
+msgid "Tribal Encyclopedia"
+msgstr "Törzsi enciklopédia"
 
 #: ../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"

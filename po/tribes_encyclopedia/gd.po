@@ -10,10 +10,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-03-07 03:08+0000\n"
+"POT-Creation-Date: 2023-05-01 02:42+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: GunChleoc, 2015-2020\n"
-"Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
+"Language-Team: Gaelic, Scottish (http://app.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15515,411 +15515,108 @@ msgstr "Cha deach seo àireamhachadh fhathast"
 msgid "Performance:"
 msgstr "Dèanadas:"
 
-#: ../../data/tribes/scripting/help/controls.lua:11
+#: ../../data/tribes/scripting/help/controls.lua:7
 #: ../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
 msgstr "Stiùireadh"
 
-#: ../../data/tribes/scripting/help/controls.lua:13
+#: ../../data/tribes/scripting/help/controls.lua:9
 msgid "Window Control"
 msgstr "Stiùireadh nan uinneagan"
 
-#: ../../data/tribes/scripting/help/controls.lua:16
-msgid "Close window"
-msgstr "Dùin uinneag"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:16
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:12
 msgctxt "hotkey"
 msgid "Right-click"
 msgstr "Briogadh deas"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:18
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:14
+msgid "Close window"
+msgstr "Dùin uinneag"
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:16
 msgctxt "hotkey"
 msgid "Middle-click or Ctrl + Left-click"
 msgstr "Briogadh meadhanach no Ctrl + briogadh clì"
 
+#. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:18
 msgid "Minimize/Maximize window"
 msgstr "Fìor-lùghdaich/Làn-mheudaich uinneag"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
+#. TRANSLATORS: This is an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:20
 msgctxt "hotkey"
 msgid "Ctrl + Left-click on Button"
 msgstr "Ctrl + briogadh clì air putan"
 
-#: ../../data/tribes/scripting/help/controls.lua:20
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:22
 msgid "Skip confirmation dialog"
 msgstr "Geàrr leum thar còmhraidh dhearbhaidh"
 
-#: ../../data/tribes/scripting/help/controls.lua:22
+#: ../../data/tribes/scripting/help/controls.lua:24
 msgid "Table Control"
 msgstr "Stiùireadh nan clàran"
 
-#: ../../data/tribes/scripting/help/controls.lua:23
+#: ../../data/tribes/scripting/help/controls.lua:25
 msgid ""
 "In tables that allow the selection of multiple entries, the following key "
 "combinations are available:"
 msgstr "Ann an clàran a leigeas leat iomadh nì a thaghadh aig an aon àm, bidh na co-iuchraichean seo ri làimh dhut:"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:26
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:28
 msgctxt "hotkey"
 msgid "Ctrl + Click"
 msgstr "Ctrl + Briogadh"
 
-#: ../../data/tribes/scripting/help/controls.lua:26
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:30
 msgctxt "table_control"
 msgid "Select multiple entries"
 msgstr "Tagh iomadh nì"
 
-#: ../../data/tribes/scripting/help/controls.lua:28
-msgctxt "table_control"
-msgid "Select a range of entries"
-msgstr "Tagh rainse de nithean"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:28
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:32
 msgctxt "hotkey"
 msgid "Shift + Click"
 msgstr "Shift + Briogadh"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:30
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:34
+msgctxt "table_control"
+msgid "Select a range of entries"
+msgstr "Tagh rainse de nithean"
+
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:36
 msgctxt "table_control"
 msgid "Select all entries"
 msgstr "Tagh a h-uile nì"
 
-#: ../../data/tribes/scripting/help/controls.lua:32
+#: ../../data/tribes/scripting/help/controls.lua:38
 msgid "Road Control"
 msgstr "Stiùireadh nan rathaidean"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:35
-#: ../../data/tribes/scripting/help/controls.lua:37
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:41
+#: ../../data/tribes/scripting/help/controls.lua:45
 msgctxt "hotkey"
 msgid "Ctrl + Left-click"
 msgstr "Ctrl + briogadh clì"
 
-#: ../../data/tribes/scripting/help/controls.lua:35
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:43
 msgid "While connecting two flags: Place flags automatically"
 msgstr "Fhad ’s a bhios tu a’ ceangal dà bhratach: Cuir brataich ris gu fèin-obrachail"
 
-#: ../../data/tribes/scripting/help/controls.lua:37
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:47
 msgid "While removing a flag: Remove all flags up to the first junction"
 msgstr "Fhad ’s a bhios tu a’ toirt bratach air falbh: Thoir air falbh gach bratach gun chiad ghobhal"
-
-#: ../../data/tribes/scripting/help/controls.lua:39
-msgid "Keyboard Shortcuts"
-msgstr "Ath-ghoiridean a’ mheur-chlàir"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:42
-msgid "Increase game speed"
-msgstr "Dèan an geama nas luaithe"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:44
-msgid "Decrease game speed"
-msgstr "Dèan an geama nas maille"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:46
-msgid "Increase game speed by 10x"
-msgstr "Dèan an geama nas luaithe le 10x"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:48
-msgid "Decrease game speed by 10x"
-msgstr "Dèan an geama nas maille le 10x"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:50
-msgid "Increase game speed by 0.25x"
-msgstr "Dèan an geama nas luaithe le 0.25x"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:52
-msgid "Decrease game speed by 0.25x"
-msgstr "Dèan an geama nas maille le 0.25x"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:54
-msgid "Pause the game"
-msgstr "Cuir an geama ’na stad"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'c'
-#: ../../data/tribes/scripting/help/controls.lua:56
-msgid "Toggle census"
-msgstr "Toglaich an cunntas-sluaigh"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 's'
-#: ../../data/tribes/scripting/help/controls.lua:58
-msgid "Toggle status"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'l'
-#: ../../data/tribes/scripting/help/controls.lua:60
-msgid "Toggle soldier health bars and level icons"
-msgstr "Toglaich bàraichean slàinte ’s ìomhaigheagan leibheil nan saighdearan"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'u'
-#: ../../data/tribes/scripting/help/controls.lua:62
-msgid "Toggle building visibility"
-msgstr "Dèan na togalaichean so-/do-fhaicsinneach"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'w'
-#: ../../data/tribes/scripting/help/controls.lua:64
-msgid "Toggle workarea overlap indicators"
-msgstr "Cuir tar-iadhadh nan raointean-obrach air/dheth"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'o'
-#: ../../data/tribes/scripting/help/controls.lua:68
-msgid "Toggle objectives"
-msgstr "Toglaich na h-amasan"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'n'
-#: ../../data/tribes/scripting/help/controls.lua:70
-msgid "Toggle messages (‘news’)"
-msgstr "Toglaich na teachdaireachdan (“naidheachdan”)"
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:72
-#: ../../data/tribes/scripting/help/init.lua:85
-msgid "Tribal Encyclopedia"
-msgstr "Leabhar-eòlais na treubha"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'i'
-#: ../../data/tribes/scripting/help/controls.lua:74
-msgid "Toggle stock inventory"
-msgstr "Toglaich cunntas an stòrais"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'b'
-#: ../../data/tribes/scripting/help/controls.lua:76
-msgid "Toggle building statistics"
-msgstr "Toglaich stadastaireachd nan togalach"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'x'
-#: ../../data/tribes/scripting/help/controls.lua:78
-msgid "Toggle soldier statistics"
-msgstr "Toglaich stadastaireachd nan saighdearan"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'e'
-#: ../../data/tribes/scripting/help/controls.lua:80
-msgid "Toggle seafaring statistics"
-msgstr "Toglaich stadastaireachd na seòladaireachd"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:82
-msgctxt "hotkey"
-msgid "Arrow keys"
-msgstr "Iuchraichean saighde"
-
-#: ../../data/tribes/scripting/help/controls.lua:82
-msgid "Move the map"
-msgstr "Gluais am mapa"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:84
-msgctxt "hotkey"
-msgid "Ctrl + Arrow keys"
-msgstr "Ctrl + Iuchraichean saighde"
-
-#: ../../data/tribes/scripting/help/controls.lua:84
-msgid "Move the map fast"
-msgstr "Gluais am mapa gu luath"
-
-#: ../../data/tribes/scripting/help/controls.lua:86
-msgid "Move the map slowly"
-msgstr "Gluais am mapa gu slaodach"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:86
-msgctxt "hotkey"
-msgid "Shift + Arrow keys"
-msgstr "Shift + Iuchraichean saighde"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:88
-msgid "Center main mapview on starting location"
-msgstr "Meadhanaich prìomh-shealladh a’ mhapa air an ionad tòiseachaidh"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:90
-msgid "Remember current location"
-msgstr "Cuimhnich an t-ionad làithreach"
-
-#: ../../data/tribes/scripting/help/controls.lua:91
-msgid "Go to previously remembered location"
-msgstr "Rach gu ionad a chaidh a chuimhneachadh roimhe"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:93
-msgid "Go to previous location"
-msgstr "Rach gun ionad roimhe"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:95
-msgid "Go to next location"
-msgstr "Rach gun ath-ionad"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:97
-msgid "Increase zoom"
-msgstr "Meudaich an sùm"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:99
-msgid "Decrease zoom"
-msgstr "Lùghdaich an sùm"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:101
-msgid "Reset zoom"
-msgstr "Ath-shuidhich an sùm"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:103
-msgid "Take a screenshot"
-msgstr "Tog glacadh-sgrìn"
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:106
-msgctxt "hotkey"
-msgid "Ctrl + Shift + Space"
-msgstr "Ctrl + Shift + Space"
-
-#: ../../data/tribes/scripting/help/controls.lua:106
-msgid "Show the debug console (only in debug-builds)"
-msgstr "Seall a’ chonsoil dhì-bhugachaidh (le togail dì-bhugachaidh a-mhàin)"
-
-#. TRANSLATORS: Heading in "Controls" help
-#: ../../data/tribes/scripting/help/controls.lua:110
-msgid "Message Window"
-msgstr "Uinneag nan teachdaireachdan"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:113
-msgid "Show all messages"
-msgstr "Seall a h-uile teachdaireachd"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:115
-msgid "Show geologists’ messages only"
-msgstr "Na seall ach teachdaireachdan nan clach-eòlaichean"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:117
-msgid "Show economy messages only"
-msgstr "Na seall ach teachdaireachdan na h-eaconamaidh"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:119
-msgid "Show seafaring messages only"
-msgstr "Na seall ach teachdaireachdan na seòladaireachd"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:121
-msgid "Show warfare messages only"
-msgstr "Na seall ach teachdaireachdan a’ chogaidh"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:123
-msgid "Show scenario messages only"
-msgstr "Na seall ach teachdaireachdan a’ chnàmh-sgeòil"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:125
-msgid "Jump to the location corresponding to the current message"
-msgstr "Geàrr leum dhan ionad a tha co-cheangailte ris an teachdaireachd làithreach"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:127
-msgid "Archive/Restore the current message"
-msgstr "Cuir an teachdaireachd làithreach dhan tasglann no aisig i"
-
-#. TRANSLATORS: Heading in "Controls" help
-#: ../../data/tribes/scripting/help/controls.lua:131
-msgid "Ship Statistics"
-msgstr "Stadastaireachd na seòladaireachd"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:134
-msgid "Show all ships"
-msgstr "Seall na h-uile long"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:136
-msgid "Show idle ships"
-msgstr "Seall longan ’nan tàmh"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:138
-msgid "Show ships shipping wares and workers"
-msgstr "Seall longan a tha ag aiseag bhatharan is luchd-obrach"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:140
-msgid "Show waiting expeditions"
-msgstr "Seall triallan a tha a’ feitheamh"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:142
-msgid "Show scouting expeditions"
-msgstr "Seall triallan a tha a’ rùrachadh"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:144
-msgid "Show expeditions that have found a port space or are founding a colony"
-msgstr "Seall triallan a lorg raon puirt no a tha ri tuineachadh"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:146
-msgid "Center the map on the selected ship"
-msgstr "Meadhanaich am mapa air an long a thagh thu"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:148
-msgid "Open the selected ship’s window"
-msgstr "Fosgail uinneag na luinge a thagh thu"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:150
-msgid "Go to the selected ship and open its window"
-msgstr "Rach dhan long a thagh thu ’s fosgail a h-uinneag"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:152
-msgid "Watch the selected ship"
-msgstr "Cùm sùil air an long a thagh thu"
 
 #. TRANSLATORS: Size of a map immovablee
 #: ../../data/tribes/scripting/help/format_help.lua:60
@@ -16037,6 +15734,10 @@ msgstr "Thèid e ’na"
 #: ../../data/tribes/scripting/help/immovable_help.lua:100
 msgid "Preferred Terrains"
 msgstr "Na cruthan-tìre as fheàrr leatha"
+
+#: ../../data/tribes/scripting/help/init.lua:85
+msgid "Tribal Encyclopedia"
+msgstr "Leabhar-eòlais na treubha"
 
 #: ../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
