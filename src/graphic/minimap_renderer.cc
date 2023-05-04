@@ -131,7 +131,7 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 			if ((layers & MiniMapLayer::Flag) != 0 && type == Widelands::MapObjectType::FLAG) {
 				upcast(Widelands::Flag, flag, f.field->get_immovable());
 				color = kWhite;
-				if (flag->current_wares() > 5) {
+				if (flag->current_wares() > 5 && flag->get_owner()->player_number() == owner) {
 					high_traffic = true;
 				}
 			} else if ((layers & MiniMapLayer::Building) != 0 &&
@@ -144,7 +144,7 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 			           type == Widelands::MapObjectType::ROAD) {
 				color = kRoad;
 				upcast(Widelands::Road, road, f.field->get_immovable());
-				if (road->is_busy()) {
+				if (road->is_busy() && road->get_owner()->player_number() == owner) {
 					high_traffic = true;
 				}
 			} else if ((layers & MiniMapLayer::Artifacts) != 0) {
