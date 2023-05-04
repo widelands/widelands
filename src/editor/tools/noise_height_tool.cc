@@ -46,7 +46,7 @@ int32_t EditorNoiseHeightTool::handle_click_impl(const Widelands::NodeAndTriangl
 
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
-	auto gap_it = args->selection_gaps.cbegin();
+	auto gap_it = args->selection_gaps.cbegin();  // NOLINT
 	do {
 		if (Widelands::kEditorGapAffectsHeightTool && *gap_it++) {
 			continue;
