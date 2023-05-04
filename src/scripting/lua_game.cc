@@ -560,7 +560,7 @@ int LuaPlayer::message_box(lua_State* L) {
 		std::unique_ptr<StoryMessageBox> mb(new StoryMessageBox(&game, coords, luaL_checkstring(L, 2),
 		                                                        luaL_checkstring(L, 3), posx, posy, w,
 		                                                        h, is_modal, allow_next_scenario));
-		mb->run<UI::Panel::Returncodes>();
+		NoteThreadSafeFunction::instantiate([&mb]() { mb->run<UI::Panel::Returncodes>(); }, true);
 	} else {
 		new StoryMessageBox(&game, coords, luaL_checkstring(L, 2), luaL_checkstring(L, 3), posx, posy,
 		                    w, h, is_modal, allow_next_scenario);

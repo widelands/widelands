@@ -4,7 +4,7 @@
 # Translators:
 # Anton Khabarov <2233009@gmail.com>, 2015-2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
-# Yuriy Sokolov <lention@mail.ru>, 2015
+# Yuriy Sokolov <lention@mail.ru>, 2015,2023
 # Олег Шевченко <olegrock@gmail.com>, 2017
 msgid ""
 msgstr ""
@@ -12,8 +12,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-01-28 03:03+0000\n"
 "PO-Revision-Date: 2015-02-03 14:27+0000\n"
-"Last-Translator: Олег Шевченко <olegrock@gmail.com>, 2017\n"
-"Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2023\n"
+"Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -54,7 +54,7 @@ msgid ""
 "headquarters on a second island, which will get all wares, workers and "
 "soldiers transferred from your headquarters and warehouses on the first "
 "island."
-msgstr ""
+msgstr "Островная эстафета - традиционный для атлантов вид состязаний. Правила игры просты: вы начинаете игру со штабом на первом острове. Когда вы построите замок на краю первого острова, вам дадут второй остров со штабом, куда переедут все ваши товары, рабочие и солдаты из ваших складов и штаба."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:16
 msgid ""
@@ -63,7 +63,7 @@ msgid ""
 "soldiers getting transferred from your previous headquarters and warehouses "
 "again. You must build a castle at the center of the third island and hold it"
 " for 20 minutes to win the game."
-msgstr ""
+msgstr "Если вы построите замок в указанной зоне второго острова, вы получите третий штаб на следующем острове, куда вновь переедут все ваши товары, рабочие и солдаты. В центре третьего острова вам нужно построить замок и удерживать его 20 минут, чтобы победить."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:22
 msgid ""

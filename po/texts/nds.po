@@ -2,17 +2,17 @@
 # Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2022
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2023
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-10 03:09+0000\n"
+"POT-Creation-Date: 2023-05-01 02:42+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022\n"
-"Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2023\n"
+"Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -374,12 +374,11 @@ msgstr "Uptekens"
 
 #: ../../data/txts/help/common_helptexts.lua:30
 msgid ""
-"Widelands records every game you play in two files. One of these files has a"
-" .wrpl.wgf extension and contains an initial savegame. The other file has a "
-".wrpl extension and contains all commands that were issued by all players, "
-"such as building a road or attacking an enemy. The rest of the filenames "
+"Widelands records every game you play in a replay file with .wry extension. "
+"This file contains an initial savegame and all commands that were issued by "
+"all players, such as building a road or attacking an enemy. The filename "
 "will tell you the time you started the game."
-msgstr "Widelands nimmt elkeen Speel, wat du spöölst, in twee Dateien up. Eene daarvun hett eenen Naam, de up .wrpl.wgf ennt, un een sekert Speel vum Anfang hett. De Naam vun de anner Datei ennt up .wrpl; daarin sünd all Befehlen, de Spelers geven hebben, to ’n Bispööl eene Straat to bauen of eenen Feind antogriepen. De Rest vum Naam vun de Datei seggt di, wann dat Speel anfangen hett."
+msgstr "Widelands nimmt elkeen Speel, wat du spöölst, in eener Datei up, well hör Naam up .wry ennt. In deeser Datei stahn een sekert Speel vum Anfang un all Befehlen, de Spelers geven hebben, to ’n Bispööl eene Straat to bauen of eenen Feind antogriepen. De Dateinaam seggt di, wann dat Speel anfangen hett."
 
 #: ../../data/txts/help/common_helptexts.lua:31
 msgid ""
@@ -407,25 +406,9 @@ msgctxt "hotkey"
 msgid "%s:"
 msgstr "%s:"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
 #: ../../data/txts/help/common_helptexts.lua:48
-msgid "Toggle building spaces"
-msgstr "Rüümte tum Bauen wiesen of verbargen"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
 #: ../../data/txts/help/common_helptexts.lua:57
-msgid "Toggle fullscreen (if supported by the OS)"
-msgstr "Helen Billschirm umschalten (wenn dat BS dat verlöövt)"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'm'
-#: ../../data/txts/help/common_helptexts.lua:66
-msgid "Toggle minimap"
-msgstr "Lütt Kaart wiesen of verbargen"
-
-#: ../../data/txts/help/common_helptexts.lua:75
-#: ../../data/txts/help/common_helptexts.lua:84
-#: ../../data/txts/help/common_helptexts.lua:93
+#: ../../data/txts/help/common_helptexts.lua:67
 msgid "%1% / %2%"
 msgstr "%1% / %2%"
 
@@ -647,8 +630,8 @@ msgstr "Holl de Umschalt-Tast drückt, um dat eerste anner Warktüüg to bruken.
 
 #: ../../data/txts/tips/editor.lua:24
 msgid ""
-"Holding down Alt switches the second alternative tool on (if it exists)."
-msgstr "Holl de Alt-Tast drückt, um dat tweede anner Warktüüg to bruken (wenn ’t eens gifft)."
+"Holding down Ctrl switches the second alternative tool on (if it exists)."
+msgstr "Holl de Strg-Tast drückt, um dat tweede anner Warktüüg to bruken (wenn ’t eens gifft)."
 
 #: ../../data/txts/tips/editor.lua:28
 msgid ""
@@ -759,7 +742,7 @@ msgstr "Bruuk dat Menü »Weertskupp-Instellens«, um de Enn-Tahlen för Waren f
 msgid ""
 "Manage your messages more efficiently: press ‘%1%’ to access the messages "
 "window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive messages."
-msgstr "Kümmer di fixer um diene Narichten: Drück »%1%«, um dat Narichten-Fenster opentokregen, bruuk dann »%2%«, um daarhen to gahn, un de »%3%«-Tast, um de Naricht wegtodoon."
+msgstr "Kümmer di fixer um diene Narichten: Drück »%1%«, um dat Narichten-Fenster optomaken; bruuk dann »%2%«, um daarhen to gahn; un de »%3%«-Tast, um de Naricht wegtodoon."
 
 #: ../../data/txts/tips/general_game.lua:45
 msgid "Press %1% to store important locations, then press %2% to recall them."
@@ -846,6 +829,14 @@ msgid "Shift + Arrow keys"
 msgstr "Umschalt + Pieltasten"
 
 #: ../../data/txts/tips/general_game.lua:102
+msgid ""
+"If you play on a laptop with a touchpad, you can assign functionality to "
+"touchpad scrolling in the ‘Options’ → ‘Edit keyboard and mouse actions’ "
+"menu. For example, moving the map view can be much more comfortable by "
+"scrolling instead of dragging with the right mouse button."
+msgstr "Wenn du up eenem Klappreekner mit Röögfeld büst, kannst du unner »Instellens« → »Knöppboord- un Muus-Befehlen bewarken« instellen, wat bi de Röögfeld-Verschuven passeren sall. To ’n Bispööl is dat vööl lichter, de Kaart-Sicht mit Rollen to verschuven as mit de rechten Muustast to trecken."
+
+#: ../../data/txts/tips/general_game.lua:106
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"
