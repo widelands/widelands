@@ -50,6 +50,8 @@ struct MapGenerator;
 struct PathfieldManager;
 class Descriptions;
 
+constexpr bool kEditorGapAffectsHeightTool = false;
+
 // Global list of available map dimensions.
 const std::vector<int32_t> kMapDimensions = {64,  80,  96,  112, 128, 144, 160, 176, 192, 208,
                                              224, 240, 256, 272, 288, 304, 320, 336, 352, 368,

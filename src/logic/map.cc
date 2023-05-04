@@ -2453,7 +2453,7 @@ uint32_t Map::change_height(const EditorGameBase& egbase,
 	{
 		MapRegion<Area<FCoords>> mr(*this, area);
 		do {
-			if (*gap_iterator++) {
+			if (kEditorGapAffectsHeightTool && *gap_iterator++) {
 				continue;
 			}
 
@@ -2488,7 +2488,7 @@ uint32_t Map::set_height(const EditorGameBase& egbase,
 	{
 		MapRegion<Area<FCoords>> mr(*this, area);
 		do {
-			if (*gap_iterator++) {
+			if (kEditorGapAffectsHeightTool && *gap_iterator++) {
 				continue;
 			}
 

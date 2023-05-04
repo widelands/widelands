@@ -675,6 +675,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 
 	const float scale = 1.f / map_view()->view().zoom;
 	const Time& gametime = ebase.get_gametime();
+	const float sel_alpha = 1.f - get_sel_gap_percent() / 100.f;
 
 	// The map provides a mapping from player number to Coords, while we require
 	// the inverse here. We construct this, but this is done on every frame and
@@ -793,7 +794,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			if (selected_nodes.count(field.fcoords) > 0) {
 				const Image* pic = get_sel_picture();
 				blit_field_overlay(
-				   &dst, field, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
+				   &dst, field, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale, sel_alpha);
 			}
 
 			// Draw selection markers on the triangles.
@@ -811,7 +812,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 					                         3);
 					const Image* pic = get_sel_picture();
 					blit_overlay(
-					   &dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale, 1.f);
+					   &dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale, sel_alpha);
 				}
 				if (selected_triangles.count(
 				       Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::D)) != 0u) {
@@ -823,7 +824,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 					                         3);
 					const Image* pic = get_sel_picture();
 					blit_overlay(
-					   &dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale, 1.f);
+					   &dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale, sel_alpha);
 				}
 			}
 		}
