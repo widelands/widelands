@@ -811,8 +811,8 @@ void EditorInteractive::draw(RenderTarget& dst) {
 					                       brn.rendertarget_pixel.y) /
 					                         3);
 					const Image* pic = get_sel_picture();
-					blit_overlay(
-					   &dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale, sel_alpha);
+					blit_overlay(&dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale,
+					             sel_alpha);
 				}
 				if (selected_triangles.count(
 				       Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::D)) != 0u) {
@@ -823,8 +823,8 @@ void EditorInteractive::draw(RenderTarget& dst) {
 					                       brn.rendertarget_pixel.y) /
 					                         3);
 					const Image* pic = get_sel_picture();
-					blit_overlay(
-					   &dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale, sel_alpha);
+					blit_overlay(&dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale,
+					             sel_alpha);
 				}
 			}
 		}
