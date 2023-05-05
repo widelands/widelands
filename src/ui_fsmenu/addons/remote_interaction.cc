@@ -427,7 +427,8 @@ public:
 		str += name_.get_text();
 		str += "\n[";
 
-		str += std::regex_replace(categories_.get_text(), std::regex("( *)([a-zA-Z]+)( +|$)"), "\"$2\",");
+		str +=
+		   std::regex_replace(categories_.get_text(), std::regex("( *)([a-zA-Z]+)( +|$)"), "\"$2\",");
 		str.pop_back();  // strip last ','
 
 		str += ']';

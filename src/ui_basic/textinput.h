@@ -32,7 +32,8 @@ namespace UI {
  */
 class AbstractTextInputPanel : public Panel {
 protected:
-	AbstractTextInputPanel(UI::Panel*, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style);
+	AbstractTextInputPanel(
+	   UI::Panel*, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style);
 	~AbstractTextInputPanel() override;
 
 public:
@@ -79,7 +80,8 @@ protected:
 
 	void set_caret_to_cursor_pos(int32_t x, int32_t y);
 	int calculate_text_width(const std::string& text, int pos) const;
-	int approximate_cursor(const std::string& line, int32_t cursor_pos_x, int approx_caret_pos) const;
+	int
+	approximate_cursor(const std::string& line, int32_t cursor_pos_x, int approx_caret_pos) const;
 
 	[[nodiscard]] virtual uint32_t max_text_width_for_wrap() const;
 	virtual void scroll_cursor_into_view();
@@ -121,7 +123,8 @@ protected:
 /** Subclass for multi-line text input. */
 class MultilineEditbox : public AbstractTextInputPanel {
 public:
-	MultilineEditbox(UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style);
+	MultilineEditbox(
+	   UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style);
 };
 
 }  // namespace UI

@@ -214,11 +214,13 @@ void LoginBox::verify_input() {
 		b_login_.set_enabled(false);
 	}
 
-	if (eb_password_.has_focus() && eb_password_.get_text() == get_config_string("password_sha1", "")) {
+	if (eb_password_.has_focus() &&
+	    eb_password_.get_text() == get_config_string("password_sha1", "")) {
 		eb_password_.set_text("");
 	}
 
-	if (cb_register_.get_state() && eb_password_.get_text() == get_config_string("password_sha1", "")) {
+	if (cb_register_.get_state() &&
+	    eb_password_.get_text() == get_config_string("password_sha1", "")) {
 		b_login_.set_enabled(false);
 	}
 }

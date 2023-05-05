@@ -140,14 +140,19 @@ AbstractTextInputPanel::Data::Data(AbstractTextInputPanel& init_owner)
 }
 
 EditBox::EditBox(Panel* parent, int32_t x, int32_t y, uint32_t w, UI::PanelStyle style)
-: AbstractTextInputPanel(parent, x, y, w,
-		text_height(g_style_manager->editbox_style(style).font()) + 2 * g_style_manager->editbox_style(style).background().margin(),
-		style) {
+   : AbstractTextInputPanel(parent,
+                            x,
+                            y,
+                            w,
+                            text_height(g_style_manager->editbox_style(style).font()) +
+                               2 * g_style_manager->editbox_style(style).background().margin(),
+                            style) {
 	d_->scrollbar.set_visible(false);
 }
 
-MultilineEditbox::MultilineEditbox(UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style)
- : AbstractTextInputPanel(parent, x, y, w, h, style) {
+MultilineEditbox::MultilineEditbox(
+   UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style)
+   : AbstractTextInputPanel(parent, x, y, w, h, style) {
 }
 
 /**
@@ -176,8 +181,8 @@ void AbstractTextInputPanel::Data::draw(RenderTarget& dst, bool with_caret) {
 	uint32_t end;
 	calculate_selection_boundaries(start, end);
 	int margin = get_style().background().margin();
-	ww.draw(dst, Vector2i(margin - scrolloffset, margin - scrollbar.get_scrollpos()), UI::Align::kLeft,
-	        with_caret ? cursor_pos : std::numeric_limits<uint32_t>::max(),
+	ww.draw(dst, Vector2i(margin - scrolloffset, margin - scrollbar.get_scrollpos()),
+	        UI::Align::kLeft, with_caret ? cursor_pos : std::numeric_limits<uint32_t>::max(),
 	        mode == Data::Mode::kSelection, start, end, scrollbar.get_scrollpos(), caret_image_path);
 }
 
@@ -291,7 +296,7 @@ uint32_t AbstractTextInputPanel::Data::snap_to_char(const std::string& txt, uint
 }
 
 std::pair<uint32_t, uint32_t> AbstractTextInputPanel::Data::word_boundary(uint32_t cursor,
-                                                                    bool require_non_blank) {
+                                                                          bool require_non_blank) {
 	uint32_t start = snap_to_char(cursor);
 	uint32_t end = start;
 
@@ -454,8 +459,8 @@ void AbstractTextInputPanel::set_caret_to_cursor_pos(int32_t x, int32_t y) {
 }
 
 int AbstractTextInputPanel::approximate_cursor(const std::string& line,
-                                         int32_t cursor_pos_x,
-                                         int approx_caret_pos) const {
+                                               int32_t cursor_pos_x,
+                                               int approx_caret_pos) const {
 	static constexpr int error = 4;
 
 	// approximate using the first guess as start and increasing/decreasing text until error is small
@@ -787,7 +792,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		switch (code.sym) {
-			case SDLK_RETURN:
+		case SDLK_RETURN:
 			if ((SDL_GetModState() & KMOD_CTRL) != 0) {
 				return false;
 			}
@@ -804,40 +809,40 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			ok();
 			return true;
 
-			case SDLK_UP:
-				// Load entry from history if active and text is not empty
-				if (history_active_) {
-					if (history_position_ > static_cast<int>(kHistorySize) - 2) {
-						history_position_ = kHistorySize - 2;
-					}
-					if (!history_[++history_position_].empty()) {
-						d_->text = history_[history_position_];
-						set_caret_pos(d_->text.size());
-						d_->reset_selection();
-						changed();
-						d_->update();
-					}
+		case SDLK_UP:
+			// Load entry from history if active and text is not empty
+			if (history_active_) {
+				if (history_position_ > static_cast<int>(kHistorySize) - 2) {
+					history_position_ = kHistorySize - 2;
 				}
-				return true;
-
-			case SDLK_DOWN:
-				// Load entry from history if active and text is not equivalent to the current one
-				if (history_active_) {
-					if (history_position_ < 1) {
-						history_position_ = 1;
-					}
-					if (history_[--history_position_] != d_->text) {
-						d_->text = history_[history_position_];
-						set_caret_pos(d_->text.size());
-						d_->reset_selection();
-						changed();
-						d_->update();
-					}
+				if (!history_[++history_position_].empty()) {
+					d_->text = history_[history_position_];
+					set_caret_pos(d_->text.size());
+					d_->reset_selection();
+					changed();
+					d_->update();
 				}
-				return true;
+			}
+			return true;
 
-			default:
-				break;
+		case SDLK_DOWN:
+			// Load entry from history if active and text is not equivalent to the current one
+			if (history_active_) {
+				if (history_position_ < 1) {
+					history_position_ = 1;
+				}
+				if (history_[--history_position_] != d_->text) {
+					d_->text = history_[history_position_];
+					set_caret_pos(d_->text.size());
+					d_->reset_selection();
+					changed();
+					d_->update();
+				}
+			}
+			return true;
+
+		default:
+			break;
 		}
 	}
 
