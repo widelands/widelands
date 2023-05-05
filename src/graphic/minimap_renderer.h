@@ -19,7 +19,6 @@
 #ifndef WL_GRAPHIC_MINIMAP_RENDERER_H
 #define WL_GRAPHIC_MINIMAP_RENDERER_H
 
-#include <SDL_timer.h>
 #include <memory>
 
 #include "base/rect.h"
