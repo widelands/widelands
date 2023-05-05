@@ -18,6 +18,7 @@
 
 #include "graphic/minimap_renderer.h"
 
+#include <SDL_timer.h>
 #include <algorithm>
 #include <memory>
 
