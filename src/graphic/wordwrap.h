@@ -70,6 +70,7 @@ struct WordWrap {
 	[[nodiscard]] uint32_t offset_of_line_at(int32_t y) const;
 	[[nodiscard]] std::string text_of_line_at(int32_t y) const;
 	int text_width_of(std::string& text) const;
+	[[nodiscard]] uint32_t lineheight() const;
 
 	void focus();
 	void enter_cursor_movement_mode();

@@ -38,9 +38,8 @@
 
 namespace {
 inline std::string as_editorfont(const std::string& text, int ptsize, const RGBColor& clr) {
-	// UI Text is always bold due to historic reasons
 	return format(
-	   "<rt keep_spaces=1><p><font face=sans size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>",
+	   "<rt keep_spaces=1><p><font face=sans size=%i shadow=1 color=%s>%s</font></p></rt>",
 	   ptsize, clr.hex_value(), richtext_escape(text));
 }
 
@@ -284,12 +283,12 @@ uint32_t WordWrap::width() const {
  * Compute the total height of the word-wrapped text.
  */
 uint32_t WordWrap::height() const {
-	return lines_.size() * text_height(fontsize_) +
+	return lines_.size() * lineheight() +
 	       2UL * kLineMargin;  // NOLINT silence bugprone-implicit-widening-of-multiplication-result
 }
 
 uint32_t WordWrap::line_index(int32_t y) const {
-	return std::min(size_t((y - 2 * kLineMargin) / text_height(fontsize_)), lines_.size() - 1);
+	return std::min(size_t((y - 2 * kLineMargin) / lineheight()), lines_.size() - 1);
 }
 uint32_t WordWrap::offset_of_line_at(int32_t y) const {
 	return line_offset(line_index(y));
@@ -338,6 +337,10 @@ uint32_t WordWrap::line_offset(uint32_t line) const {
 	return lines_[line].start;
 }
 
+uint32_t WordWrap::lineheight() const {
+	return text_height(fontsize_);
+}
+
 /**
  * Draw the word-wrapped text onto \p dst, anchored at \p where with the given alignment.
  *
@@ -369,7 +372,7 @@ void WordWrap::draw(RenderTarget& dst,
 
 	Align alignment = mirror_alignment(align, g_fh->fontset()->is_rtl());
 
-	const int fontheight = text_height(fontsize_);
+	const int fontheight = lineheight();
 	for (uint32_t line = 0; line < lines_.size(); ++line, where.y += fontheight) {
 		if (where.y >= dst.height() || (where.y + fontheight) <= 0) {
 			continue;
@@ -435,6 +438,7 @@ void WordWrap::highlight_selection(RenderTarget& dst,
 
 	Vector2i highlight_start = Vector2i::zero();
 	Vector2i highlight_end = Vector2i::zero();
+
 	if (line == selection_start_line) {
 		std::string text_before_selection = lines_[line].text.substr(0, selection_start_x);
 		highlight_start = Vector2i(text_width(text_before_selection, fontsize_) + point.x,
@@ -458,6 +462,8 @@ void WordWrap::highlight_selection(RenderTarget& dst,
 		highlight_end =
 		   Vector2i(text_width(lines_[line].text.substr(0, selection_end_x), fontsize_), fontheight);
 	}
+
+	++highlight_start.y;
 	dst.brighten_rect(
 	   Recti(highlight_start, highlight_end.x, highlight_end.y), BUTTON_EDGE_BRIGHT_FACTOR);
 }

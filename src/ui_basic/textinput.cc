@@ -18,6 +18,8 @@
 
 #include "ui_basic/textinput.h"
 
+#include <algorithm>
+
 #include "base/utf8.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
@@ -51,7 +53,7 @@ struct AbstractTextInputPanel::Data {
 	uint32_t cursor_pos{0U};
 	std::string caret_image_path;
 
-	const int lineheight;
+	uint32_t scrolloffset{0U};
 
 	/// Maximum length of the text string, in bytes
 	const uint32_t maxbytes;
@@ -75,7 +77,6 @@ struct AbstractTextInputPanel::Data {
 
 	void update();
 
-	void scroll_cursor_into_view();
 	void set_cursor_pos(uint32_t newpos);
 
 	uint32_t prev_char(uint32_t cursor);
@@ -91,7 +92,7 @@ struct AbstractTextInputPanel::Data {
 
 	void calculate_selection_boundaries(uint32_t& start, uint32_t& end);
 
-	uint32_t snap_to_char(std::string& txt, uint32_t cursor);
+	uint32_t snap_to_char(const std::string& txt, uint32_t cursor);
 
 private:
 	AbstractTextInputPanel& owner;
@@ -125,7 +126,6 @@ AbstractTextInputPanel::Data::Data(AbstractTextInputPanel& init_owner)
      caret_image_path(init_owner.panel_style_ == PanelStyle::kWui ?
                          "images/ui_basic/caret_wui.png" :
                          "images/ui_basic/caret_fs.png"),
-     lineheight(text_height(get_style().font())),
      maxbytes(std::min(g_gr->max_texture_size_for_font_rendering() *
                           g_gr->max_texture_size_for_font_rendering() /
                           (text_height(get_style().font()) * text_height(get_style().font())),
@@ -135,8 +135,8 @@ AbstractTextInputPanel::Data::Data(AbstractTextInputPanel& init_owner)
      owner(init_owner) {
 	scrollbar.moved.connect([&init_owner](int32_t a) { init_owner.scrollpos_changed(a); });
 
-	scrollbar.set_pagesize(owner.get_h() - 2 * lineheight);
-	scrollbar.set_singlestepsize(lineheight);
+	scrollbar.set_pagesize(owner.get_h() - 2 * ww.lineheight());
+	scrollbar.set_singlestepsize(ww.lineheight());
 }
 
 EditBox::EditBox(Panel* parent, int32_t x, int32_t y, uint32_t w, UI::PanelStyle style)
@@ -176,7 +176,7 @@ void AbstractTextInputPanel::Data::draw(RenderTarget& dst, bool with_caret) {
 	uint32_t end;
 	calculate_selection_boundaries(start, end);
 	int margin = get_style().background().margin();
-	ww.draw(dst, Vector2i(margin, margin - scrollbar.get_scrollpos()), UI::Align::kLeft,
+	ww.draw(dst, Vector2i(margin - scrolloffset, margin - scrollbar.get_scrollpos()), UI::Align::kLeft,
 	        with_caret ? cursor_pos : std::numeric_limits<uint32_t>::max(),
 	        mode == Data::Mode::kSelection, start, end, scrollbar.get_scrollpos(), caret_image_path);
 }
@@ -203,13 +203,12 @@ void AbstractTextInputPanel::set_text(const std::string& text) {
 
 	d_->reset_selection();
 	d_->text = text;
-	while (d_->text.size() > d_->maxbytes) {
-		d_->erase_bytes(d_->prev_char(d_->text.size()), d_->text.size());
-	}
+
+	escape_illegal_characters();
 
 	d_->set_cursor_pos(d_->text.size());
 	d_->update();
-	d_->scroll_cursor_into_view();
+	scroll_cursor_into_view();
 
 	changed();
 }
@@ -280,7 +279,7 @@ uint32_t AbstractTextInputPanel::Data::snap_to_char(uint32_t cursor) {
 	return cursor;
 }
 
-uint32_t AbstractTextInputPanel::Data::snap_to_char(std::string& txt, uint32_t cursor) {
+uint32_t AbstractTextInputPanel::Data::snap_to_char(const std::string& txt, uint32_t cursor) {
 	if (cursor >= txt.size()) {
 		return cursor;
 	}
@@ -454,7 +453,7 @@ void AbstractTextInputPanel::set_caret_to_cursor_pos(int32_t x, int32_t y) {
 	d_->set_cursor_pos(previous_line_index + current_line_index);
 }
 
-int AbstractTextInputPanel::approximate_cursor(std::string& line,
+int AbstractTextInputPanel::approximate_cursor(const std::string& line,
                                          int32_t cursor_pos_x,
                                          int approx_caret_pos) const {
 	static constexpr int error = 4;
@@ -473,7 +472,7 @@ int AbstractTextInputPanel::approximate_cursor(std::string& line,
 	return d_->snap_to_char(line, approx_caret_pos);
 }
 
-int AbstractTextInputPanel::calculate_text_width(std::string& text, int pos) const {
+int AbstractTextInputPanel::calculate_text_width(const std::string& text, int pos) const {
 	std::string prefix = text.substr(0, d_->snap_to_char(text, pos));
 	return d_->ww.text_width_of(prefix);
 }
@@ -636,6 +635,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 
 		case SDLK_DOWN:
 			if (d_->cursor_pos < d_->text.size()) {
+				d_->ww.enter_cursor_movement_mode();
 				d_->refresh_ww();
 
 				uint32_t cursorline;
@@ -673,6 +673,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 
 		case SDLK_UP:
 			if (d_->cursor_pos > 0) {
+				d_->ww.enter_cursor_movement_mode();
 				d_->refresh_ww();
 
 				uint32_t cursorline;
@@ -770,7 +771,6 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 				return false;
 			}
 			d_->insert(d_->cursor_pos, "\n");
-			d_->update();
 			d_->reset_selection();
 			changed();
 			break;
@@ -894,7 +894,6 @@ bool AbstractTextInputPanel::handle_textinput(const std::string& input_text) {
 		d_->insert(d_->cursor_pos, input_text);
 		d_->reset_selection();
 		changed();
-		d_->update();
 	}
 	return true;
 }
@@ -966,9 +965,14 @@ void AbstractTextInputPanel::draw(RenderTarget& dst) {
  */
 void AbstractTextInputPanel::Data::insert(uint32_t where, const std::string& s) {
 	text.insert(where, s);
+	owner.escape_illegal_characters();
+
 	if (cursor_pos >= where) {
 		set_cursor_pos(cursor_pos + s.size());
 	}
+
+	update();
+	owner.scroll_cursor_into_view();
 }
 
 /**
@@ -984,24 +988,40 @@ void AbstractTextInputPanel::Data::set_cursor_pos(uint32_t newpos) {
 
 	cursor_pos = newpos;
 
-	scroll_cursor_into_view();
+	owner.scroll_cursor_into_view();
 }
 
 /**
  * Ensure that the cursor is visible.
  */
-void AbstractTextInputPanel::Data::scroll_cursor_into_view() {
-	refresh_ww();
+void AbstractTextInputPanel::scroll_cursor_into_view() {
+	d_->refresh_ww();
 
 	uint32_t cursorline;
 	uint32_t cursorpos = 0;
-	ww.calc_wrapped_pos(cursor_pos, cursorline, cursorpos);
+	d_->ww.calc_wrapped_pos(d_->cursor_pos, cursorline, cursorpos);
 
-	int32_t top = cursorline * lineheight;
-	if (top < int32_t(scrollbar.get_scrollpos())) {
-		scrollbar.set_scrollpos(top - lineheight);
-	} else if (top + lineheight > int32_t(scrollbar.get_scrollpos()) + owner.get_h()) {
-		scrollbar.set_scrollpos(top - owner.get_h() + 2 * lineheight);
+	int margin = d_->get_style().background().margin();
+	int32_t top = cursorline * d_->ww.lineheight();
+	int32_t bottom = top + d_->ww.lineheight();
+
+	if (top - static_cast<int32_t>(d_->scrollbar.get_scrollpos()) < 0) {
+		d_->scrollbar.set_scrollpos(top);
+	} else if (bottom - static_cast<int32_t>(d_->scrollbar.get_scrollpos()) > get_h() - 2 * margin) {
+		d_->scrollbar.set_scrollpos(bottom - get_h() + 2 * margin);
+	}
+}
+
+void EditBox::scroll_cursor_into_view() {
+	AbstractTextInputPanel::scroll_cursor_into_view();
+
+	int margin = d_->get_style().background().margin();
+	int32_t real_caret_x = calculate_text_width(get_text(), caret_pos());
+
+	if (real_caret_x - static_cast<int32_t>(d_->scrolloffset) < 0) {
+		d_->scrolloffset = real_caret_x;
+	} else if (real_caret_x - static_cast<int32_t>(d_->scrolloffset) > get_w() - 2 * margin) {
+		d_->scrolloffset = real_caret_x - get_w() + 2 * margin;
 	}
 }
 
@@ -1016,6 +1036,17 @@ void AbstractTextInputPanel::set_password(bool password) {
 }
 bool AbstractTextInputPanel::is_password() const {
 	return d_->password;
+}
+
+void AbstractTextInputPanel::escape_illegal_characters() const {
+	while (d_->text.size() > d_->maxbytes) {
+		d_->erase_bytes(d_->prev_char(d_->text.size()), d_->text.size());
+	}
+}
+void EditBox::escape_illegal_characters() const {
+	std::replace(d_->text.begin(), d_->text.end(), '\n', ' ');
+
+	AbstractTextInputPanel::escape_illegal_characters();
 }
 
 uint32_t AbstractTextInputPanel::max_text_width_for_wrap() const {
@@ -1045,7 +1076,7 @@ void AbstractTextInputPanel::Data::refresh_ww() {
 	ww_valid = true;
 
 	int32_t textheight = ww.height();
-	scrollbar.set_steps(textheight - owner.get_h());
+	scrollbar.set_steps(textheight - owner.get_h() + 2 * get_style().background().margin());
 }
 
 }  // namespace UI

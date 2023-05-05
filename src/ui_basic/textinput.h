@@ -78,10 +78,12 @@ protected:
 	void update_primary_selection_buffer() const;
 
 	void set_caret_to_cursor_pos(int32_t x, int32_t y);
-	int calculate_text_width(std::string& text, int pos) const;
-	int approximate_cursor(std::string& line, int32_t cursor_pos_x, int approx_caret_pos) const;
+	int calculate_text_width(const std::string& text, int pos) const;
+	int approximate_cursor(const std::string& line, int32_t cursor_pos_x, int approx_caret_pos) const;
 
 	[[nodiscard]] virtual uint32_t max_text_width_for_wrap() const;
+	virtual void scroll_cursor_into_view();
+	virtual void escape_illegal_characters() const;
 
 	struct Data;
 	std::unique_ptr<Data> d_;
@@ -108,6 +110,8 @@ public:
 protected:
 	bool handle_key(bool down, SDL_Keysym) override;
 	uint32_t max_text_width_for_wrap() const override;
+	void scroll_cursor_into_view() override;
+	void escape_illegal_characters() const override;
 
 	bool history_active_{false};
 	int16_t history_position_{-1};
