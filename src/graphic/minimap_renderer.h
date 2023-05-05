@@ -20,6 +20,7 @@
 #define WL_GRAPHIC_MINIMAP_RENDERER_H
 
 #include <memory>
+#include <SDL_timer.h>
 
 #include "base/rect.h"
 #include "base/vector.h"

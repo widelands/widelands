@@ -130,13 +130,13 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 			const Widelands::MapObjectType type = f.field->get_immovable()->descr().type();
 			if ((layers & MiniMapLayer::Flag) != 0 && type == Widelands::MapObjectType::FLAG) {
 				upcast(Widelands::Flag, flag, f.field->get_immovable());
-				color = kWhite;
+				color = blend_color(kWhite, egbase.player(owner).get_playercolor());
 				if (flag->current_wares() > 5 && flag->get_owner()->player_number() == owner) {
 					high_traffic = true;
 				}
 			} else if ((layers & MiniMapLayer::Building) != 0 &&
 			           type >= Widelands::MapObjectType::BUILDING) {
-				color = kWhite;
+				color = blend_color(kWhite, egbase.player(owner).get_playercolor());
 			} else if (((layers & MiniMapLayer::Road) != 0) &&
 			           type == Widelands::MapObjectType::WATERWAY) {
 				color = kRoad;
@@ -183,7 +183,13 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 				if ((layers & MiniMapLayer::Attack) != 0 &&
 				    bob->descr().type() == Widelands::MapObjectType::SOLDIER &&
 				    dynamic_cast<Widelands::Soldier*>(bob)->is_on_battlefield()) {
-					color = kRed;
+					uint32_t now = SDL_GetTicks();
+					now /= 500;
+					if (now % 2 == 0) {
+						color = kRed;
+					} else {
+						color = invert_color(kRed);
+					}
 					break;
 				}
 			}
