@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-03-07 03:08+0000\n"
+"POT-Creation-Date: 2023-05-01 02:42+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: GunChleoc, 2019\n"
-"Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
+"Language-Team: Japanese (http://app.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15451,411 +15451,108 @@ msgstr "情報無し"
 msgid "Performance:"
 msgstr "生産効率："
 
-#: ../../data/tribes/scripting/help/controls.lua:11
+#: ../../data/tribes/scripting/help/controls.lua:7
 #: ../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
 msgstr "操作"
 
-#: ../../data/tribes/scripting/help/controls.lua:13
+#: ../../data/tribes/scripting/help/controls.lua:9
 msgid "Window Control"
 msgstr "ウィンドウ操作"
 
-#: ../../data/tribes/scripting/help/controls.lua:16
-msgid "Close window"
-msgstr "ウィンドウを閉じる"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:16
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:12
 msgctxt "hotkey"
 msgid "Right-click"
 msgstr "右クリック"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:18
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:14
+msgid "Close window"
+msgstr "ウィンドウを閉じる"
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:16
 msgctxt "hotkey"
 msgid "Middle-click or Ctrl + Left-click"
 msgstr "中クリック or Ctrl + 左クリック"
 
+#. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:18
 msgid "Minimize/Maximize window"
 msgstr "ウィンドウの最小化／最大化"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
+#. TRANSLATORS: This is an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:20
 msgctxt "hotkey"
 msgid "Ctrl + Left-click on Button"
 msgstr "Ctrl + ボタンを左クリック"
 
-#: ../../data/tribes/scripting/help/controls.lua:20
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:22
 msgid "Skip confirmation dialog"
 msgstr "確認のダイアログを飛ばす"
 
-#: ../../data/tribes/scripting/help/controls.lua:22
+#: ../../data/tribes/scripting/help/controls.lua:24
 msgid "Table Control"
 msgstr "テーブル操作"
 
-#: ../../data/tribes/scripting/help/controls.lua:23
+#: ../../data/tribes/scripting/help/controls.lua:25
 msgid ""
 "In tables that allow the selection of multiple entries, the following key "
 "combinations are available:"
 msgstr "テーブルでは複数の項目を選択することができます。以下のキー操作が可能です："
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:26
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:28
 msgctxt "hotkey"
 msgid "Ctrl + Click"
 msgstr "Ctrl + クリック"
 
-#: ../../data/tribes/scripting/help/controls.lua:26
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:30
 msgctxt "table_control"
 msgid "Select multiple entries"
 msgstr "複数の項目を選ぶ"
 
-#: ../../data/tribes/scripting/help/controls.lua:28
-msgctxt "table_control"
-msgid "Select a range of entries"
-msgstr "範囲内の項目を選択"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:28
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:32
 msgctxt "hotkey"
 msgid "Shift + Click"
 msgstr "Shift + クリック"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:30
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:34
+msgctxt "table_control"
+msgid "Select a range of entries"
+msgstr "範囲内の項目を選択"
+
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:36
 msgctxt "table_control"
 msgid "Select all entries"
 msgstr "全て選択"
 
-#: ../../data/tribes/scripting/help/controls.lua:32
+#: ../../data/tribes/scripting/help/controls.lua:38
 msgid "Road Control"
 msgstr "道の操作"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:35
-#: ../../data/tribes/scripting/help/controls.lua:37
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:41
+#: ../../data/tribes/scripting/help/controls.lua:45
 msgctxt "hotkey"
 msgid "Ctrl + Left-click"
 msgstr "Ctrl + 左クリック"
 
-#: ../../data/tribes/scripting/help/controls.lua:35
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:43
 msgid "While connecting two flags: Place flags automatically"
 msgstr "二つの旗をつなぐ際：作る道に自動的に旗を置く"
 
-#: ../../data/tribes/scripting/help/controls.lua:37
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:47
 msgid "While removing a flag: Remove all flags up to the first junction"
 msgstr "旗の消去時：最寄りの交差点までの旗を除去する"
-
-#: ../../data/tribes/scripting/help/controls.lua:39
-msgid "Keyboard Shortcuts"
-msgstr "キーボードショートカット"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:42
-msgid "Increase game speed"
-msgstr "ゲームスピードを上げる"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:44
-msgid "Decrease game speed"
-msgstr "ゲームスピードを下げる"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:46
-msgid "Increase game speed by 10x"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:48
-msgid "Decrease game speed by 10x"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:50
-msgid "Increase game speed by 0.25x"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:52
-msgid "Decrease game speed by 0.25x"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:54
-msgid "Pause the game"
-msgstr "ゲームを一時停止する"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'c'
-#: ../../data/tribes/scripting/help/controls.lua:56
-msgid "Toggle census"
-msgstr "建物名の表示／非表示"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 's'
-#: ../../data/tribes/scripting/help/controls.lua:58
-msgid "Toggle status"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'l'
-#: ../../data/tribes/scripting/help/controls.lua:60
-msgid "Toggle soldier health bars and level icons"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'u'
-#: ../../data/tribes/scripting/help/controls.lua:62
-msgid "Toggle building visibility"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'w'
-#: ../../data/tribes/scripting/help/controls.lua:64
-msgid "Toggle workarea overlap indicators"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'o'
-#: ../../data/tribes/scripting/help/controls.lua:68
-msgid "Toggle objectives"
-msgstr "目的の表示／非表示"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'n'
-#: ../../data/tribes/scripting/help/controls.lua:70
-msgid "Toggle messages (‘news’)"
-msgstr "メッセージの表示／非表示 ('news')"
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:72
-#: ../../data/tribes/scripting/help/init.lua:85
-msgid "Tribal Encyclopedia"
-msgstr "部族事典"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'i'
-#: ../../data/tribes/scripting/help/controls.lua:74
-msgid "Toggle stock inventory"
-msgstr "ストックの表示／非表示"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'b'
-#: ../../data/tribes/scripting/help/controls.lua:76
-msgid "Toggle building statistics"
-msgstr "建物統計の表示／非表示"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'x'
-#: ../../data/tribes/scripting/help/controls.lua:78
-msgid "Toggle soldier statistics"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'e'
-#: ../../data/tribes/scripting/help/controls.lua:80
-msgid "Toggle seafaring statistics"
-msgstr "航海統計の表示／非表示"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:82
-msgctxt "hotkey"
-msgid "Arrow keys"
-msgstr ""
-
-#: ../../data/tribes/scripting/help/controls.lua:82
-msgid "Move the map"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:84
-msgctxt "hotkey"
-msgid "Ctrl + Arrow keys"
-msgstr ""
-
-#: ../../data/tribes/scripting/help/controls.lua:84
-msgid "Move the map fast"
-msgstr ""
-
-#: ../../data/tribes/scripting/help/controls.lua:86
-msgid "Move the map slowly"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:86
-msgctxt "hotkey"
-msgid "Shift + Arrow keys"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:88
-msgid "Center main mapview on starting location"
-msgstr "視点の中心を開始位置に戻す"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:90
-msgid "Remember current location"
-msgstr "現在の場所を覚える"
-
-#: ../../data/tribes/scripting/help/controls.lua:91
-msgid "Go to previously remembered location"
-msgstr "覚えた場所にジャンプする"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:93
-msgid "Go to previous location"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:95
-msgid "Go to next location"
-msgstr ""
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:97
-msgid "Increase zoom"
-msgstr "拡大率を上げる"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:99
-msgid "Decrease zoom"
-msgstr "拡大率を下げる"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:101
-msgid "Reset zoom"
-msgstr "拡大率のリセット"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:103
-msgid "Take a screenshot"
-msgstr "スクリーンショットを取る"
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:106
-msgctxt "hotkey"
-msgid "Ctrl + Shift + Space"
-msgstr ""
-
-#: ../../data/tribes/scripting/help/controls.lua:106
-msgid "Show the debug console (only in debug-builds)"
-msgstr "デバッグコンソールの表示 (デバッグビルド時のみ)"
-
-#. TRANSLATORS: Heading in "Controls" help
-#: ../../data/tribes/scripting/help/controls.lua:110
-msgid "Message Window"
-msgstr "メッセージウィンドウ"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:113
-msgid "Show all messages"
-msgstr "全てのメッセージを表示"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:115
-msgid "Show geologists’ messages only"
-msgstr "地質学者のメッセージのみを表示"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:117
-msgid "Show economy messages only"
-msgstr "経済メッセージのみを表示"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:119
-msgid "Show seafaring messages only"
-msgstr "航海メッセージのみを表示"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:121
-msgid "Show warfare messages only"
-msgstr "戦争メッセージのみを表示"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:123
-msgid "Show scenario messages only"
-msgstr "シナリオメッセージのみを表示"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:125
-msgid "Jump to the location corresponding to the current message"
-msgstr "現在のメッセージに関連する場所へジャンプ"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:127
-msgid "Archive/Restore the current message"
-msgstr "現在のメッセージを保管箱に入れる／保管箱から戻す"
-
-#. TRANSLATORS: Heading in "Controls" help
-#: ../../data/tribes/scripting/help/controls.lua:131
-msgid "Ship Statistics"
-msgstr "船統計"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:134
-msgid "Show all ships"
-msgstr "全ての船を表示"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:136
-msgid "Show idle ships"
-msgstr "待機中の船を表示"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:138
-msgid "Show ships shipping wares and workers"
-msgstr "物資や労働者を輸送中の船のみ表示"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:140
-msgid "Show waiting expeditions"
-msgstr "探検待ちの船を表示"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:142
-msgid "Show scouting expeditions"
-msgstr "偵察航海中の船を表示"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:144
-msgid "Show expeditions that have found a port space or are founding a colony"
-msgstr "港を発見したか植民地を建設中の探検船を表示"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:146
-msgid "Center the map on the selected ship"
-msgstr "選択した船に視点をジャンプ"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:148
-msgid "Open the selected ship’s window"
-msgstr "選択した船のウィンドウを開く"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:150
-msgid "Go to the selected ship and open its window"
-msgstr "選択した船に移動し、ウィンドウを開く"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:152
-msgid "Watch the selected ship"
-msgstr "選択した船を見る"
 
 #. TRANSLATORS: Size of a map immovablee
 #: ../../data/tribes/scripting/help/format_help.lua:60
@@ -15973,6 +15670,10 @@ msgstr ""
 #: ../../data/tribes/scripting/help/immovable_help.lua:100
 msgid "Preferred Terrains"
 msgstr "好む地形"
+
+#: ../../data/tribes/scripting/help/init.lua:85
+msgid "Tribal Encyclopedia"
+msgstr "部族事典"
 
 #: ../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"
