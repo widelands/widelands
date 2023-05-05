@@ -20,7 +20,6 @@
 
 #include <algorithm>
 #include <memory>
-#include <SDL_timer.h>
 
 #include "economy/flag.h"
 #include "economy/road.h"
