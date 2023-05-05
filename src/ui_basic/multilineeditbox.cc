@@ -81,7 +81,7 @@ struct MultilineEditbox::Data {
 	uint32_t next_char(uint32_t cursor);
 	uint32_t snap_to_char(uint32_t cursor);
 	std::pair<uint32_t, uint32_t> word_boundary(uint32_t cursor, bool require_non_blank);
-	std::pair<uint32_t, uint32_t> line_boundary(uint32_t cursor);
+	std::pair<uint32_t, uint32_t> paragraph_boundary(uint32_t cursor);
 
 	void erase_bytes(uint32_t start, uint32_t end);
 	void insert(uint32_t where, const std::string& s);
@@ -309,7 +309,7 @@ std::pair<uint32_t, uint32_t> MultilineEditbox::Data::word_boundary(uint32_t cur
 	return {start, end};
 }
 
-std::pair<uint32_t, uint32_t> MultilineEditbox::Data::line_boundary(uint32_t cursor) {
+std::pair<uint32_t, uint32_t> MultilineEditbox::Data::paragraph_boundary(uint32_t cursor) {
 	uint32_t start = snap_to_char(cursor);
 	uint32_t end = start;
 
@@ -342,8 +342,8 @@ bool MultilineEditbox::handle_mousepress(const uint8_t btn, int32_t x, int32_t y
 			std::pair<uint32_t, uint32_t> boundaries;
 			if ((multiclick_counter_ % 2) != 0) {  // Select current word
 				boundaries = d_->word_boundary(d_->cursor_pos, false);
-			} else {  // Select entire line
-				boundaries = d_->line_boundary(d_->cursor_pos);
+			} else {  // Select entire paragraph
+				boundaries = d_->paragraph_boundary(d_->cursor_pos);
 			}
 			d_->selection_start = boundaries.first;
 			d_->selection_end = boundaries.second;
