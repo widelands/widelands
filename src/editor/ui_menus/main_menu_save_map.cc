@@ -125,7 +125,7 @@ void MainMenuSaveMap::clicked_ok() {
 	if (!ok_.enabled()) {
 		return;
 	}
-	std::vector<std::string> filename = {editbox_.text()};
+	std::vector<std::string> filename = {editbox_.get_text()};
 	std::vector<std::string> complete_filename;
 
 	if (filename.empty() && table_.has_selection()) {  //  Maybe a directory is selected.
@@ -213,12 +213,12 @@ void MainMenuSaveMap::update_map_options() {
 		maptype = MapData::MapType::kNormal;
 	}
 
-	MapData mapdata(map, editbox_.text(), maptype, MapData::DisplayType::kMapnames);
+	MapData mapdata(map, editbox_.get_text(), maptype, MapData::DisplayType::kMapnames);
 
 	// TODO(GunChleoc): Trying to render the minimap while saving results in endless loop - probably
 	// because we're trying to load the map again there.
 	map_details_.update(mapdata, false, false);
-	if (old_name == editbox_.text()) {
+	if (old_name == editbox_.get_text()) {
 		editbox_.set_text(map_details_.name());
 		edit_box_changed();
 	}
@@ -258,13 +258,13 @@ void MainMenuSaveMap::double_clicked_item() {
  */
 void MainMenuSaveMap::edit_box_changed() {
 	// Prevent the user from creating nonsense file names, like e.g. ".." or "...".
-	const bool is_legal_filename = FileSystemHelper::is_legal_filename(editbox_.text());
+	const bool is_legal_filename = FileSystemHelper::is_legal_filename(editbox_.get_text());
 	ok_.set_enabled(is_legal_filename);
 	editbox_.set_tooltip(is_legal_filename ? "" : illegal_filename_tooltip_);
 }
 
 void MainMenuSaveMap::reset_editbox_or_die(const std::string& current_filename) {
-	if (editbox_.text() == current_filename) {
+	if (editbox_.get_text() == current_filename) {
 		die();
 	} else {
 		editbox_.set_text(current_filename);

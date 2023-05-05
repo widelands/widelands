@@ -367,8 +367,6 @@ void WordWrap::draw(RenderTarget& dst,
 	calc_wrapped_pos(selection_start, selection_start_line, selection_start_x);
 	calc_wrapped_pos(selection_end, selection_end_line, selection_end_x);
 
-	++where.y;
-
 	Align alignment = mirror_alignment(align, g_fh->fontset()->is_rtl());
 
 	const int fontheight = text_height(fontsize_);
@@ -385,7 +383,9 @@ void WordWrap::draw(RenderTarget& dst,
 
 		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
 		   as_editorfont(lines_[line].text, fontsize_ - UI::g_fh->fontset()->size_offset(), color_));
+
 		UI::correct_for_align(alignment, rendered_text->width(), &point);
+
 		rendered_text->draw(dst, point);
 
 		if (with_selection) {

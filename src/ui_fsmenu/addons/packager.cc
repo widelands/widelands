@@ -323,8 +323,8 @@ void AddOnsPackager::current_addon_edited() {
 	const std::string& sel = addons_.get_selected();
 	AddOns::MutableAddOn* m = mutable_addons_.at(sel).get();
 
-	m->update_info(name_.text(), author_.text(), descr_.get_text(), version_.text(),
-	               min_wl_version_.text(), max_wl_version_.text());
+	m->update_info(name_.get_text(), author_.get_text(), descr_.get_text(), version_.get_text(),
+	               min_wl_version_.get_text(), max_wl_version_.get_text());
 
 	addons_with_changes_[sel] = false;
 	check_for_unsaved_changes();
@@ -350,7 +350,7 @@ void AddOnsPackager::clicked_new_addon() {
 			return;
 		}
 
-		std::string name = n.text();
+		std::string name = n.get_text();
 
 		const std::string err = check_addon_filename_validity(name);
 		if (!err.empty()) {
@@ -385,7 +385,7 @@ void AddOnsPackager::clicked_new_addon() {
 		// These default strings are not localized because these editboxes are meant to be
 		// filled out in English. We will add localization markup to the resulting config file.
 		a.internal_name = name;
-		a.unlocalized_descname = n.text();
+		a.unlocalized_descname = n.get_text();
 		a.unlocalized_description = "No description";
 		a.unlocalized_author = get_config_string("realname", pgettext("author_name", "Unknown"));
 		a.version = {1, 0, 0};

@@ -133,7 +133,7 @@ void PinnedNoteEditor::send_delete() {
 void PinnedNoteEditor::ok() {
 	delete_on_cancel_ = false;
 	iplayer_.game().send_player_pinned_note(
-	   iplayer_.player_number(), pos_, text_->text(), current_color_, false);
+	   iplayer_.player_number(), pos_, text_->get_text(), current_color_, false);
 	die();
 }
 

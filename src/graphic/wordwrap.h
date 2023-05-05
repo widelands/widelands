@@ -54,13 +54,13 @@ struct WordWrap {
 
 	void draw(RenderTarget& dst,
 	          Vector2i where,
-	          Align align = UI::Align::kLeft,
-	          uint32_t caret = std::numeric_limits<uint32_t>::max(),
-	          bool with_selection = false,
-	          uint32_t selection_start = 0,
-	          uint32_t selection_end = 0,
-	          uint32_t scrollbar_position = 0,
-	          const std::string& caret_image_path = std::string());
+	          UI::Align align,
+	          uint32_t caret,
+	          bool with_selection,
+	          uint32_t selection_start,
+	          uint32_t selection_end,
+	          uint32_t scrollbar_position,
+	          const std::string& caret_image_path);
 
 	void calc_wrapped_pos(uint32_t caret, uint32_t& line, uint32_t& pos) const;
 	[[nodiscard]] uint32_t nrlines() const {
