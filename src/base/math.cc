@@ -18,7 +18,6 @@
 
 #include "base/math.h"
 
-#include <cstdint>
 #include <regex>
 
 #include "base/warning.h"
