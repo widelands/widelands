@@ -31,12 +31,9 @@ namespace UI {
  * Text conventions: Sentence case for labels associated with the text input field.
  */
 class AbstractTextInputPanel : public Panel {
-protected:
-	AbstractTextInputPanel(
-	   UI::Panel*, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style);
+public:
 	~AbstractTextInputPanel() override;
 
-public:
 	Notifications::Signal<> changed;
 	Notifications::Signal<> cancel;
 
@@ -65,6 +62,9 @@ public:
 	}
 
 protected:
+	AbstractTextInputPanel(
+	   UI::Panel*, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style);
+
 	void draw(RenderTarget&) override;
 
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
