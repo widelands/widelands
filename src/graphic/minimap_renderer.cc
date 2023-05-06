@@ -101,6 +101,7 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
                                    const Widelands::FCoords& f,
                                    const MiniMapLayer layers,
                                    const Widelands::PlayerNumber owner,
+                                   const Widelands::Player* const player,
                                    const bool see_details) {
 	RGBColor color;
 	const Widelands::Map& map = egbase.map();
@@ -133,7 +134,7 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 			if ((layers & MiniMapLayer::Flag) != 0 && type == Widelands::MapObjectType::FLAG) {
 				upcast(Widelands::Flag, flag, f.field->get_immovable());
 				color = blend_color(kWhite, egbase.player(owner).get_playercolor());
-				if (flag->current_wares() > 5 && flag->get_owner()->player_number() == owner) {
+				if (flag->current_wares() > 5 && (player == nullptr || flag->get_owner()->player_number() == player->player_number())) {
 					high_traffic = true;
 				}
 			} else if ((layers & MiniMapLayer::Building) != 0 &&
@@ -335,7 +336,7 @@ void do_draw_minimap(Texture& texture,
 
 			if (vision != Widelands::VisibleState::kUnexplored) {
 				const RGBAColor color = calc_minimap_color(
-				   egbase, f, layers, owner, vision == Widelands::VisibleState::kVisible);
+				   egbase, f, layers, owner, player, vision == Widelands::VisibleState::kVisible);
 				for (uint8_t x_offset = 0; x_offset < scale; ++x_offset) {
 					for (uint8_t y_offset = 0; y_offset < scale; ++y_offset) {
 						texture.set_pixel(x * scale + x_offset, y * scale + y_offset, color);
