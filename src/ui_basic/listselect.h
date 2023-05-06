@@ -103,6 +103,9 @@ struct BaseListselect : public Panel {
 
 	///  Return the total height (text + spacing) occupied by a single line.
 	int get_lineheight() const;
+	void set_min_lineheight(int minh) {
+		lineheight_ = std::max(lineheight_, minh);
+	}
 
 	uint32_t get_eff_w() const;
 
