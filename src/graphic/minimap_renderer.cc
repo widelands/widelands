@@ -149,7 +149,8 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 			           type == Widelands::MapObjectType::ROAD) {
 				color = kRoad;
 				upcast(Widelands::Road, road, f.field->get_immovable());
-				if (road->is_busy() && (player == nullptr || road->get_owner()->player_number() == player->player_number())) {
+				if (road->is_busy() && (player == nullptr || road->get_owner()->player_number() ==
+				                                                player->player_number())) {
 					high_traffic = true;
 				}
 			} else if ((layers & MiniMapLayer::Artifacts) != 0) {
