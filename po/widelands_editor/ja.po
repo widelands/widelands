@@ -7,121 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-10 03:09+0000\n"
+"POT-Creation-Date: 2023-05-01 02:42+0000\n"
 "PO-Revision-Date: 2016-03-24 07:33+0000\n"
 "Last-Translator: tamanegi, 2018\n"
-"Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
+"Language-Team: Japanese (http://app.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../../data/scripting/editor/editor_controls.lua:11
+#: ../../data/scripting/editor/editor_controls.lua:4
 #: ../../data/scripting/editor/editor_help.lua:66
 msgid "Controls"
 msgstr "操作"
-
-#: ../../data/scripting/editor/editor_controls.lua:13
-msgid "Keyboard Shortcuts"
-msgstr "キーボードショートカット"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:16
-msgid "Help"
-msgstr "ヘルプ"
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/scripting/editor/editor_controls.lua:18
-msgid "Toggle main menu"
-msgstr "メインメニュー表示／非表示"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 't'
-#: ../../data/scripting/editor/editor_controls.lua:20
-msgid "Toggle tools menu"
-msgstr "ツールメニュー表示／非表示"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'p'
-#: ../../data/scripting/editor/editor_controls.lua:24
-msgid "Toggle player menu"
-msgstr "プレイヤーメニュー表示／非表示"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:26
-msgid "Undo"
-msgstr "アンドゥ"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:28
-msgid "Redo"
-msgstr "リドゥ"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'i'
-#: ../../data/scripting/editor/editor_controls.lua:30
-msgid "Activate information tool"
-msgstr "情報ツールへ切り替え"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:32
-msgid "Load map"
-msgstr "マップ読み込み"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:34
-msgid "Save map"
-msgstr "マップ保存"
-
-#: ../../data/scripting/editor/editor_controls.lua:38
-msgid "Tools"
-msgstr "ツール"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:41
-msgid "Change tool size"
-msgstr "ツールサイズ変更"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:43
-msgctxt "hotkey"
-msgid "Click"
-msgstr "クリック"
-
-#: ../../data/scripting/editor/editor_controls.lua:43
-msgid ""
-"Place new elements on the map, or increase map elements by the value "
-"selected by ‘Increase/Decrease value’"
-msgstr "マップに新たな要素を配置、もしくは設定した値をマップ要素に追加"
-
-#: ../../data/scripting/editor/editor_controls.lua:45
-msgid ""
-"Remove elements from the map, or decrease map elements by the value selected"
-" by ‘Increase/Decrease value’"
-msgstr "マップ要素を消去、もしくは設定した値をマップ要素から差し引く"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:45
-msgctxt "hotkey"
-msgid "Shift + Click"
-msgstr "Shift + Click"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:47
-msgctxt "hotkey"
-msgid "Ctrl + Click"
-msgstr "Ctrl + Click"
-
-#: ../../data/scripting/editor/editor_controls.lua:47
-msgid "Set map elements to the value selected by ‘Set Value’"
-msgstr "マップ要素の値を「値を設定」で選択した値にする"
 
 #: ../../data/scripting/editor/editor_help.lua:50
 msgid "Editor Help"

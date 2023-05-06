@@ -2,15 +2,15 @@
 # Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2022
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-02-10 03:09+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022\n"
-"Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2023\n"
+"Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -120,13 +120,13 @@ msgid ""
 "game are the basic construction wares: logs and granite. Let’s make sure "
 "that we do not run out of logs. For this, we need a lumberjack and a hut for"
 " him to stay in."
-msgstr "För gewöhnelk begünnst du dat Speel mit eenem Raadhuus. Dat is dat grote Huus mit de blauen Fahn vör’m Ingang. Dat Raadhuus brengt Waren, Arbeiders un Soldaten unner. Eenige Waren bruukt man, um Husen to bauen, anner, um anner Waren to produzeren. De Waren, wat anfangs im Raadhuus sünd, langen natürelk nich ewich, also muttst du alls klaarmaken, um se uttowesseln. De wichtigsten Waren im frohen Speel sünd de wesentliken Baukraam: Boomstammen un Flint. Laat uns sekerstellen, dat uns de Boomstammen nich utgahn. Daarför bruken wi eenen Boomhauer un een Huus, waar he wohnen kann."
+msgstr "För gewöhnelk begünnst du dat Speel mit eenem Raadhuus. Dat is dat grote Huus mit de blauen Fahn vör’m Ingang. Dat Raadhuus brengt Waren, Arbeiders un Soldaten unner. Eenige Waren bruukt man, um Husen to bauen, anner, um anner Waren to produzeren. De Waren, wat anfangs im Raadhuus sünd, langen natürelk nich ewich, also muttst du alls klaarmaken, um se uttowesseln. De wichtigsten Waren im frohen Speel sünd de wesentliken Baukraam-Waren: Boomstammen un Flint. Laat uns sekerstellen, dat uns de Boomstammen nich utgahn. Daar bruken wi eenen Boomhauer för un een Huus, waar he wohnen kann."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:66
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’."
-msgstr "Wi mutten eene moje Stee finnen, waar wi dat Boomhauer-Huus bauen könen. Um dat lichter to maken könen wi »Wies Rüümte tum Bauen« anknipsen."
+msgstr "Wi mutten eene moje Stee finnen, waar wi dat Boomhauer-Huus bauen könen. Um dat lichter to maken, könen wi »Wies Rüümte tum Bauen« anknipsen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:67
 msgid ""

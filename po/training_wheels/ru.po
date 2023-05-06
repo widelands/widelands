@@ -4,9 +4,9 @@
 # 
 # Translators:
 # Viktor Skachkov <awsswa59@gmail.com>, 2020
-# nskdmitry, 2022
+# nskdmitry, 2021
 # Владимир Шевцов, 2022
-# Yuriy Sokolov <lention@mail.ru>, 2022
+# Yuriy Sokolov <lention@mail.ru>, 2023
 # 
 msgid ""
 msgstr ""
@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
-"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2022\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2023\n"
 "Language-Team: Russian (https://app.transifex.com/widelands/teams/35159/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,7 +53,7 @@ msgstr "Теперь мы можем видеть, где можно стави�
 #: ../../data/scripting/training_wheels/building_spaces.lua:55
 #: ../../data/scripting/training_wheels/welcome.lua:26
 msgid "Click ‘OK’ to continue."
-msgstr "Кликните ‘OK’ для продолжения."
+msgstr "Нажмите ‘OK’ для продолжения."
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/flags.lua:60
@@ -82,7 +82,7 @@ msgstr "Теперь проверьте, можно ли разбить доро
 
 #: ../../data/scripting/training_wheels/flags.lua:87
 msgid "Click ‘OK’ when you’re done."
-msgstr "Кликните ‘OK’ когда закончите."
+msgstr "Нажмите ‘OK’ когда закончите."
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:142
@@ -112,7 +112,7 @@ msgid ""
 "Click on a small, medium or big building space, then select the building "
 "from the small buildings tab."
 msgstr ""
-"Кликните по месту постройки любого размера, затем выберите вкладку с "
+"Щёлкните по месту постройки любого размера, затем выберите вкладку с "
 "маленькими зданиями."
 
 #: ../../data/scripting/training_wheels/logs.lua:117
@@ -121,7 +121,7 @@ msgid ""
 "Click on a medium or big building space, then select the building from the "
 "medium buildings tab."
 msgstr ""
-"Кликните по месту постройки любого размера, затем выберите вкладку со "
+"Щёлкните по месту постройки любого размера, затем выберите вкладку со "
 "среднеразмерными зданиями."
 
 #: ../../data/scripting/training_wheels/logs.lua:119
@@ -130,7 +130,7 @@ msgid ""
 "Click on a big building space, then select the building from the big "
 "buildings tab."
 msgstr ""
-"Кликните по месту постройки любого размера, затем выберите вкладку с "
+"Щёлкните по месту постройки любого размера, затем выберите вкладку с "
 "большими зданиями."
 
 #: ../../data/scripting/training_wheels/logs.lua:122
@@ -165,12 +165,12 @@ msgstr "Дороги"
 #: ../../data/scripting/training_wheels/logs.lua:141
 #: ../../data/scripting/training_wheels/rocks.lua:144
 msgid "Click on the flag in front of the building to start placing a road."
-msgstr "Кликните по флагу перед стройкой, чтобы начать прокладку дороги."
+msgstr "Щёлкните по флагу перед стройкой, чтобы начать прокладку дороги."
 
 #: ../../data/scripting/training_wheels/logs.lua:152
 msgid ""
 "Click on the ‘Build road’ button, then and click on the indicated flag."
-msgstr "Кликните по \"Строить дорогу\", затем кликните по выделенному флагу."
+msgstr "Щёлкните \"Строить дорогу\", затем щёлкните по выделенному флагу."
 
 #: ../../data/scripting/training_wheels/logs.lua:164
 #: ../../data/scripting/training_wheels/rocks.lua:166

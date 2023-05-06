@@ -3,22 +3,22 @@
 # 
 # Translators:
 # Elisabeth Jäger, 2016-2019
-# wl-zocker, 2014
+# 39a0b2e5ef9bf024c2fcfbdd0522de1a_96abb62, 2014
 # Klaus Halfmann <klaus.halfmann@arcor.de>, 2016
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
-# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2022
+# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2023
 # Elisabeth Jäger, 2015-2016
-# wl-zocker, 2015-2016
+# 39a0b2e5ef9bf024c2fcfbdd0522de1a_96abb62, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-10 03:09+0000\n"
+"POT-Creation-Date: 2023-05-01 02:42+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2022\n"
-"Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2023\n"
+"Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -380,12 +380,11 @@ msgstr "Aufzeichnungen"
 
 #: ../../data/txts/help/common_helptexts.lua:30
 msgid ""
-"Widelands records every game you play in two files. One of these files has a"
-" .wrpl.wgf extension and contains an initial savegame. The other file has a "
-".wrpl extension and contains all commands that were issued by all players, "
-"such as building a road or attacking an enemy. The rest of the filenames "
+"Widelands records every game you play in a replay file with .wry extension. "
+"This file contains an initial savegame and all commands that were issued by "
+"all players, such as building a road or attacking an enemy. The filename "
 "will tell you the time you started the game."
-msgstr "Widelands zeichnet alle Spiele, die du spielst, in zwei Dateien auf. Eine dieser Dateien hat die Endung „.wrpl.wgf“ und enthält den Ausgangsspeicherstand. Die andere Datei hat die Endung „.wrpl“ und enthält alle Anweisungen, die von allen Spielern gegeben wurde, wie eine Straße zu bauen oder einen Feind anzugreifen. Der Rest des Dateinamens teilt dir die Zeit mit, zu der du das Spiel gestartet hast."
+msgstr "Widelands zeichnet alle Spiele, die du spielst, in einer Aufzeichnungsdatei mit der Dateiendung .wry auf. Diese Datei enthält den Ausgangsspeicherstand und alle Anweisungen, die von allen Spielern gegeben wurde, wie eine Straße zu bauen oder einen Feind anzugreifen. Der Dateiname teilt dir die Zeit mit, zu der du das Spiel gestartet hast."
 
 #: ../../data/txts/help/common_helptexts.lua:31
 msgid ""
@@ -413,25 +412,9 @@ msgctxt "hotkey"
 msgid "%s:"
 msgstr "%s:"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
 #: ../../data/txts/help/common_helptexts.lua:48
-msgid "Toggle building spaces"
-msgstr "Schaltet die Bauhilfe ein und aus"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
 #: ../../data/txts/help/common_helptexts.lua:57
-msgid "Toggle fullscreen (if supported by the OS)"
-msgstr "Schaltet die Vollbilddarstellung an/aus (falls dies das Betriebssystem erlaubt)"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'm'
-#: ../../data/txts/help/common_helptexts.lua:66
-msgid "Toggle minimap"
-msgstr "Öffnet/schließt die Minikarte"
-
-#: ../../data/txts/help/common_helptexts.lua:75
-#: ../../data/txts/help/common_helptexts.lua:84
-#: ../../data/txts/help/common_helptexts.lua:93
+#: ../../data/txts/help/common_helptexts.lua:67
 msgid "%1% / %2%"
 msgstr "%1% / %2%"
 
@@ -653,8 +636,8 @@ msgstr "Festhalten der UMSCHALT-Taste aktiviert das erste alternative Werkzeug. 
 
 #: ../../data/txts/tips/editor.lua:24
 msgid ""
-"Holding down Alt switches the second alternative tool on (if it exists)."
-msgstr "Wenn du ALT gedrückt hältst, wird das zweite alternative Werkzeug aktiviert (falls es existiert)."
+"Holding down Ctrl switches the second alternative tool on (if it exists)."
+msgstr "Wenn du STRG gedrückt hältst, wird das zweite alternative Werkzeug aktiviert (falls es existiert)."
 
 #: ../../data/txts/tips/editor.lua:28
 msgid ""
@@ -852,6 +835,14 @@ msgid "Shift + Arrow keys"
 msgstr "UMSCHALT + Pfeiltasten"
 
 #: ../../data/txts/tips/general_game.lua:102
+msgid ""
+"If you play on a laptop with a touchpad, you can assign functionality to "
+"touchpad scrolling in the ‘Options’ → ‘Edit keyboard and mouse actions’ "
+"menu. For example, moving the map view can be much more comfortable by "
+"scrolling instead of dragging with the right mouse button."
+msgstr "Wenn du an einem Laptop mit Touchpad spielst, kannst du Funktionalitäten zum Touchpadscrollen im Menü \"Optionen → Tastatur- und Mausaktionen ändern\" zuordnen. Zum Beispiel kann es komfortabler sein, die Karte durch Scrollen anstelle von Ziehen mit dem rechten Mausknopf zu bewegen. "
+
+#: ../../data/txts/tips/general_game.lua:106
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"

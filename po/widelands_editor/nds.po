@@ -7,121 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-10 03:09+0000\n"
+"POT-Creation-Date: 2023-05-01 02:42+0000\n"
 "PO-Revision-Date: 2016-03-24 07:33+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2020\n"
-"Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
+"Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: nds\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/scripting/editor/editor_controls.lua:11
+#: ../../data/scripting/editor/editor_controls.lua:4
 #: ../../data/scripting/editor/editor_help.lua:66
 msgid "Controls"
 msgstr "Stüren"
-
-#: ../../data/scripting/editor/editor_controls.lua:13
-msgid "Keyboard Shortcuts"
-msgstr "Handigtasten"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:16
-msgid "Help"
-msgstr "Hülp"
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/scripting/editor/editor_controls.lua:18
-msgid "Toggle main menu"
-msgstr "Höövdmenü wiesen of verbargen"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 't'
-#: ../../data/scripting/editor/editor_controls.lua:20
-msgid "Toggle tools menu"
-msgstr "Warktüügmenü wiesen of verbargen"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'p'
-#: ../../data/scripting/editor/editor_controls.lua:24
-msgid "Toggle player menu"
-msgstr "Spelersmenü wiesen of verbargen"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:26
-msgid "Undo"
-msgstr "Torüggnehmen"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:28
-msgid "Redo"
-msgstr "Wedderhalen"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'i'
-#: ../../data/scripting/editor/editor_controls.lua:30
-msgid "Activate information tool"
-msgstr "Warktüüg för Informatioon"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:32
-msgid "Load map"
-msgstr "Kaart laden"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:34
-msgid "Save map"
-msgstr "Kaart sekern"
-
-#: ../../data/scripting/editor/editor_controls.lua:38
-msgid "Tools"
-msgstr "Warktüügkast"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:41
-msgid "Change tool size"
-msgstr "Warktüüg-Grött ännern"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:43
-msgctxt "hotkey"
-msgid "Click"
-msgstr "Klick an"
-
-#: ../../data/scripting/editor/editor_controls.lua:43
-msgid ""
-"Place new elements on the map, or increase map elements by the value "
-"selected by ‘Increase/Decrease value’"
-msgstr "Sett neje Dingen up de Kaart of verhoogt Kaart-Elementen um de »Verhoge/Minnere«-Weert"
-
-#: ../../data/scripting/editor/editor_controls.lua:45
-msgid ""
-"Remove elements from the map, or decrease map elements by the value selected"
-" by ‘Increase/Decrease value’"
-msgstr "Maakt Dingen vun de Kaart weg of minnert Kaart-Elementen um de »Verhoge/Minnere«-Weert"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:45
-msgctxt "hotkey"
-msgid "Shift + Click"
-msgstr "Klick an un drücke daar de Umschalt-Tast bi"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:47
-msgctxt "hotkey"
-msgid "Ctrl + Click"
-msgstr "Klick an un drücke daar de Strg-Tast bi"
-
-#: ../../data/scripting/editor/editor_controls.lua:47
-msgid "Set map elements to the value selected by ‘Set Value’"
-msgstr "Sett Kaart-Elementen up de »Fastmaken«-Weert fast"
 
 #: ../../data/scripting/editor/editor_help.lua:50
 msgid "Editor Help"
