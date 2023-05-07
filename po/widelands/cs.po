@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-05-01 02:42+0000\n"
+"POT-Creation-Date: 2023-05-04 02:38+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Václav Černý <vaclav.vatoz.cerny@gmail.com>, 2022\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
@@ -110,7 +110,7 @@ msgstr "%1$s nebo %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/richtext.lua:703 ../../data/scripting/richtext.lua:708
 #: ../../src/base/i18n.cc:408 ../../src/base/i18n.cc:417
-#: ../../src/logic/addons.cc:203
+#: ../../src/logic/addons.cc:223
 #, c-format
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
@@ -631,7 +631,7 @@ msgstr "Mapa nebyla uložena, opravdu chceš ukončit editor?"
 msgid "Are you sure you wish to exit the editor?"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1108 ../../src/logic/addons.cc:47
+#: ../../src/editor/editorinteractive.cc:1108 ../../src/logic/addons.cc:48
 #: ../../src/ui_basic/dropdown.cc:358 ../../src/ui_basic/dropdown.cc:360
 #: ../../src/ui_fsmenu/addons/contact.cc:81
 #: ../../src/ui_fsmenu/addons/manager.cc:1334
@@ -682,7 +682,7 @@ msgstr "Beze jména"
 #: ../../src/editor/editorinteractive.cc:1169
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:114
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:584
-#: ../../src/logic/map.h:227 ../../src/ui_fsmenu/addons/packager.cc:367
+#: ../../src/logic/map.h:227 ../../src/ui_fsmenu/addons/packager.cc:390
 msgctxt "author_name"
 msgid "Unknown"
 msgstr "Neznámý"
@@ -729,28 +729,28 @@ msgstr "Chyba při ukládání mapy!"
 msgid "Packaging add-on…"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1499
+#: ../../src/editor/editorinteractive.cc:1500
 msgid "Add-On Generation Error"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1500
+#: ../../src/editor/editorinteractive.cc:1501
 msgid "The add-on could not be written to the disk."
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1507
+#: ../../src/editor/editorinteractive.cc:1508
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:107
 msgid "Uploading…"
 msgstr "Nahrávám..."
 
-#: ../../src/editor/editorinteractive.cc:1513
+#: ../../src/editor/editorinteractive.cc:1514
 msgid "Upload Error"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1535
+#: ../../src/editor/editorinteractive.cc:1536
 msgid "Success"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1536
+#: ../../src/editor/editorinteractive.cc:1537
 msgid "The add-on was uploaded successfully."
 msgstr ""
 
@@ -1000,25 +1000,25 @@ msgstr "Chyba!"
 #. * TRANSLATORS: Directory name for user maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:81
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:279
-#: ../../src/ui_fsmenu/addons/packager_box.cc:210 ../../src/wui/mapdata.cc:195
+#: ../../src/ui_fsmenu/addons/packager_box.cc:210 ../../src/wui/mapdata.cc:196
 msgid "My Maps"
 msgstr "Moje mapy"
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:83
-#: ../../src/wui/mapdata.cc:189
+#: ../../src/wui/mapdata.cc:190
 msgid "Multiplayer Scenarios"
 msgstr "Scénáře pro hry více hráčů"
 
 #. * TRANSLATORS: Directory name for SP Scenarios in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:85
-#: ../../src/wui/mapdata.cc:192
+#: ../../src/wui/mapdata.cc:193
 msgid "Singleplayer Scenarios"
 msgstr "Scénáře pro hru jednoho hráče"
 
 #. * TRANSLATORS: Directory name for downloaded maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:87
-#: ../../src/wui/mapdata.cc:198
+#: ../../src/wui/mapdata.cc:199
 msgid "Downloaded Maps"
 msgstr "Stažené mapy"
 
@@ -1042,7 +1042,7 @@ msgstr "Zobrazení"
 #: ../../src/ui_basic/messagebox.cc:108 ../../src/ui_basic/text_prompt.cc:46
 #: ../../src/ui_fsmenu/addons/login_box.cc:54
 #: ../../src/ui_fsmenu/addons/manager.cc:250
-#: ../../src/ui_fsmenu/addons/packager.cc:109
+#: ../../src/ui_fsmenu/addons/packager.cc:111
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:175
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:462
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:678
@@ -1111,7 +1111,7 @@ msgid "Delete this suggested team lineup"
 msgstr "Smazat navržené složení týmu"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:108
-#: ../../src/ui_fsmenu/addons/packager.cc:75
+#: ../../src/ui_fsmenu/addons/packager.cc:77
 #: ../../src/ui_fsmenu/addons/packager_box.cc:148
 #: ../../src/wui/quicknavigation.cc:196
 msgid "+"
@@ -1122,7 +1122,7 @@ msgid "Add a player to this team"
 msgstr "Přidej hráče do tohoto týmu"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:321
-#: ../../src/logic/addons.cc:68
+#: ../../src/logic/addons.cc:69
 msgid "Theme"
 msgstr "Motiv"
 
@@ -1143,7 +1143,7 @@ msgid "Authors:"
 msgstr "Autoři:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:365
-#: ../../src/ui_fsmenu/addons/packager.cc:147
+#: ../../src/ui_fsmenu/addons/packager.cc:165
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:77
 msgid "Description:"
 msgstr "Popis:"
@@ -1247,7 +1247,7 @@ msgid "Creating empty map…"
 msgstr "Vytváření prázdné mapy…"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:63
-#: ../../src/logic/addons.cc:58
+#: ../../src/logic/addons.cc:59
 msgid "Map Generator"
 msgstr ""
 
@@ -1874,55 +1874,55 @@ msgstr "ne"
 msgid "off"
 msgstr "ne"
 
-#: ../../src/logic/addons.cc:49
+#: ../../src/logic/addons.cc:50
 msgid "Tribes"
 msgstr "Kmeny"
 
-#: ../../src/logic/addons.cc:51
+#: ../../src/logic/addons.cc:52
 msgid "World"
 msgstr "Svět"
 
-#: ../../src/logic/addons.cc:53
+#: ../../src/logic/addons.cc:54
 msgid "Script"
 msgstr "Skript"
 
-#: ../../src/logic/addons.cc:55
+#: ../../src/logic/addons.cc:56
 msgid "Map Set"
 msgstr "Volba mapy"
 
 #. * TRANSLATORS: Header for campaign name
-#: ../../src/logic/addons.cc:60 ../../src/ui_fsmenu/campaigndetails.cc:47
+#: ../../src/logic/addons.cc:61 ../../src/ui_fsmenu/campaigndetails.cc:47
 msgid "Campaign"
 msgstr "Kampaň"
 
-#: ../../src/logic/addons.cc:63
+#: ../../src/logic/addons.cc:64
 msgid "Win Condition"
 msgstr "Výherní podmínka"
 
-#: ../../src/logic/addons.cc:66
+#: ../../src/logic/addons.cc:67
 msgid "Starting Condition"
 msgstr "Počáteční nastavení"
 
-#: ../../src/logic/addons.cc:109
+#: ../../src/logic/addons.cc:110
 #, c-format
 msgid "%1$s.%2$u"
 msgstr "%1$s.%2$u"
 
-#: ../../src/logic/addons.cc:176
+#: ../../src/logic/addons.cc:196
 msgid "No conflicts"
 msgstr "Podmínky splněny"
 
-#: ../../src/logic/addons.cc:181
+#: ../../src/logic/addons.cc:201
 #, c-format
 msgid "%1$s (expected version %2$s, found %3$s)"
 msgstr "%1$s (očekávaná verze %2$s, nalezeno %3$s)"
 
-#: ../../src/logic/addons.cc:184 ../../src/logic/addons.cc:220
+#: ../../src/logic/addons.cc:204 ../../src/logic/addons.cc:240
 #, c-format
 msgid "%1$s, %2$s (expected version %3$s, found %4$s)"
 msgstr "%1$s, %2$s (očekávaná verze %3$s, nalezeno %4$s)"
 
-#: ../../src/logic/addons.cc:191
+#: ../../src/logic/addons.cc:211
 #, c-format
 msgid "%1$u add-on with wrong version: %2$s"
 msgid_plural "%1$u add-ons with wrong version: %2$s"
@@ -1931,7 +1931,7 @@ msgstr[1] "%1$u rozšíření ve špatné verzi: %2$s"
 msgstr[2] "%1$u rozšíření ve špatné verzi: %2$s"
 msgstr[3] "%1$u rozšíření ve špatné verzi: %2$s"
 
-#: ../../src/logic/addons.cc:206
+#: ../../src/logic/addons.cc:226
 #, c-format
 msgid "%1$u missing add-on: %2$s"
 msgid_plural "%1$u missing add-ons: %2$s"
@@ -1940,22 +1940,22 @@ msgstr[1] "%1$u chybějící rozšíření: %2$s"
 msgstr[2] "%1$u chybějících rozšíření: %2$s"
 msgstr[3] "%1$u chybějících rozšíření: %2$s"
 
-#: ../../src/logic/addons.cc:214
+#: ../../src/logic/addons.cc:234
 #, c-format
 msgid "%s (missing)"
 msgstr "%s (chybí)"
 
-#: ../../src/logic/addons.cc:216
+#: ../../src/logic/addons.cc:236
 #, c-format
 msgid "%1$s, %2$s (missing)"
 msgstr "%1$s, %2$s (chybí)"
 
-#: ../../src/logic/addons.cc:224
+#: ../../src/logic/addons.cc:244
 #, c-format
 msgid "%1$s and %2$s: %3$s"
 msgstr "%1$s a %2$s: %3$s"
 
-#: ../../src/logic/addons.cc:225
+#: ../../src/logic/addons.cc:245
 #, c-format
 msgid "%u missing add-on"
 msgid_plural "%u missing add-ons"
@@ -1964,7 +1964,7 @@ msgstr[1] "%u chybějící rozšíření"
 msgstr[2] "%u chybějících rozšíření"
 msgstr[3] "%u chybějících rozšíření"
 
-#: ../../src/logic/addons.cc:227
+#: ../../src/logic/addons.cc:247
 #, c-format
 msgid "%u add-on with wrong version"
 msgid_plural "%u add-ons with wrong version"
@@ -1974,20 +1974,20 @@ msgstr[2] "%u rozšíření ve špatné verzi"
 msgstr[3] "%u rozšíření ve špatné verzi"
 
 #. * TRANSLATORS: This map or savegame uses no add-ons
-#: ../../src/logic/addons.cc:238
+#: ../../src/logic/addons.cc:258
 msgid "None"
 msgstr "Žádné"
 
-#: ../../src/logic/addons.cc:242
+#: ../../src/logic/addons.cc:262
 #, c-format
 msgid "%1$s<br>· %2$s (version %3$s)"
 msgstr "%1$s<br>· %2$s (verze %3$s)"
 
-#: ../../src/logic/addons.cc:272
+#: ../../src/logic/addons.cc:292
 msgid "No game-relevant add-ons in use."
 msgstr ""
 
-#: ../../src/logic/addons.cc:277
+#: ../../src/logic/addons.cc:297
 #, c-format
 msgid "%u game-relevant add-on in use:"
 msgid_plural "%u game-relevant add-ons in use:"
@@ -2646,7 +2646,7 @@ msgstr "vytěžitelný"
 msgid "unwalkable"
 msgstr "neobydlitelný"
 
-#: ../../src/logic/mutable_addon.cc:235
+#: ../../src/logic/mutable_addon.cc:239
 #, c-format
 msgid ""
 "A map file is invalid:\n"
@@ -3580,11 +3580,11 @@ msgstr "Nevybráno"
 msgid "No matches"
 msgstr "Žádná shoda"
 
-#: ../../src/ui_basic/panel.cc:294
+#: ../../src/ui_basic/panel.cc:296
 msgid "Please wait…"
 msgstr "Prosím počkejte..."
 
-#: ../../src/ui_basic/panel.cc:424
+#: ../../src/ui_basic/panel.cc:426
 msgid "Game ending – please wait…"
 msgstr "Hra se ukončuje – prosím počkejte..."
 
@@ -4317,72 +4317,81 @@ msgstr "Požadované rozšíření „%s“ nelze na serveru nalézt."
 msgid "Add-Ons Packager"
 msgstr "Správce rozšíření"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:76
+#: ../../src/ui_fsmenu/addons/packager.cc:78
 msgid "New add-on"
 msgstr "Nové rozšíření"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:84
+#: ../../src/ui_fsmenu/addons/packager.cc:86
 #: ../../src/ui_fsmenu/addons/packager_box.cc:166
 #: ../../src/wui/quicknavigation.cc:285
 msgid "–"
 msgstr "–"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:85
+#: ../../src/ui_fsmenu/addons/packager.cc:87
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:793
 msgid "Delete this add-on"
 msgstr "Smazat toto rozšíření"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:93
+#: ../../src/ui_fsmenu/addons/packager.cc:95
 msgid "Discard changes"
 msgstr "Zrušit změny"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:101
+#: ../../src/ui_fsmenu/addons/packager.cc:103
 msgid "Save changes"
 msgstr "Uložit změny"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:111
+#: ../../src/ui_fsmenu/addons/packager.cc:113
 msgid "Writing Add-Ons…"
 msgstr "Zapisování rozšíření…"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:113
+#: ../../src/ui_fsmenu/addons/packager.cc:115
 msgid "Please be patient while your changes are written."
 msgstr "Prosíme o trpělivost, zatímco se změny zapisují."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:132
+#: ../../src/ui_fsmenu/addons/packager.cc:138
 msgid "Name:"
 msgstr "Jméno:"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:137
+#: ../../src/ui_fsmenu/addons/packager.cc:143
 msgid "Author:"
 msgstr "Autor:"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:142
+#: ../../src/ui_fsmenu/addons/packager.cc:148
 #: ../../src/ui_fsmenu/tech_info.cc:69
 msgid "Version:"
 msgstr "Verze:"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:311
+#: ../../src/ui_fsmenu/addons/packager.cc:153 ../../src/wui/mapdetails.cc:196
+#: ../../src/wui/mapdetails.cc:201
+msgid "Minimum Widelands Version:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/packager.cc:159
+msgid "Maximum Widelands Version:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/packager.cc:334
 msgid "New Add-On"
 msgstr "Nové rozšíření"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:312
+#: ../../src/ui_fsmenu/addons/packager.cc:335
 msgid "Enter the name for the new add-on."
 msgstr "Zadej jméno nového rozšíření."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:314
+#: ../../src/ui_fsmenu/addons/packager.cc:337
 msgid "Category"
 msgstr "Kategorie"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:335
-#: ../../src/ui_fsmenu/addons/packager.cc:351
-#: ../../src/ui_fsmenu/addons/packager.cc:356
+#: ../../src/ui_fsmenu/addons/packager.cc:358
+#: ../../src/ui_fsmenu/addons/packager.cc:374
+#: ../../src/ui_fsmenu/addons/packager.cc:379
 #: ../../src/ui_fsmenu/addons/packager_box.cc:389
 #: ../../src/ui_fsmenu/addons/packager_box.cc:405
 #: ../../src/ui_fsmenu/addons/packager_box.cc:411
 msgid "Invalid Name"
 msgstr "Neplatné jméno"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:336
+#: ../../src/ui_fsmenu/addons/packager.cc:359
 #: ../../src/ui_fsmenu/addons/packager_box.cc:391
 #, c-format
 msgid ""
@@ -4391,26 +4400,26 @@ msgid ""
 "Please choose a different name."
 msgstr "Toto je neplatné jméno. Důvod: %s\n\nProsím vyber jiné."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:351
+#: ../../src/ui_fsmenu/addons/packager.cc:374
 msgid "An add-on with this internal name already exists."
 msgstr "Rozšíření s tímto interním pojmenováním již existuje."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:356
+#: ../../src/ui_fsmenu/addons/packager.cc:379
 msgid ""
 "An add-on with this internal name was deleted recently. Please commit your "
 "changes before using this name again."
 msgstr "Rozšíření s tímto interním pojmenováním bylo nedávno smazáno. Prosím ulož svoje změny před tím, než bude jméno znovu použito."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:382
+#: ../../src/ui_fsmenu/addons/packager.cc:405
 msgid "Delete Add-on"
 msgstr "Smazat rozšíření"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:384
+#: ../../src/ui_fsmenu/addons/packager.cc:407
 #, c-format
 msgid "Do you really want to delete the add-on ‘%s’?"
 msgstr "Opravdu chceš smazat rozšíření „%s“?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:385
+#: ../../src/ui_fsmenu/addons/packager.cc:408
 #, c-format
 msgid ""
 "Do you really want to delete the local add-on ‘%s’?\n"
@@ -4418,7 +4427,7 @@ msgid ""
 "Note that this add-on can not be downloaded again from the server."
 msgstr "Opravdu chceš smazat lokální rozšíření „%s“?\n\nToto rozšíření nebude možné ze serveru znovu stáhnout."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:406
+#: ../../src/ui_fsmenu/addons/packager.cc:429
 #, c-format
 msgid ""
 "If you quit the packager now, all changes to the following %u add-on will be"
@@ -4431,25 +4440,25 @@ msgstr[1] "Pokud nyní opustíš správce rozšíření, všechny změny provede
 msgstr[2] "Pokud nyní opustíš správce rozšíření, všechny změny provedené v následujících %u rozšířeních budou ztraceny."
 msgstr[3] "Pokud nyní opustíš správce rozšíření, všechny změny provedené v následujících %u rozšířeních budou ztraceny."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:415
-#: ../../src/ui_fsmenu/addons/packager.cc:442
-#: ../../src/ui_fsmenu/addons/packager.cc:467
+#: ../../src/ui_fsmenu/addons/packager.cc:438
+#: ../../src/ui_fsmenu/addons/packager.cc:465
+#: ../../src/ui_fsmenu/addons/packager.cc:490
 #, c-format
 msgid ""
 "%1$s\n"
 "· %2$s"
 msgstr "%1$s\n· %2$s"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:418
+#: ../../src/ui_fsmenu/addons/packager.cc:441
 msgid "Quit Packager"
 msgstr "Opustit správce rozšíření"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:433
+#: ../../src/ui_fsmenu/addons/packager.cc:456
 #, c-format
 msgid "Do you really want to discard all changes to the add-on ‘%s’?"
 msgstr "Opravdu chceš zrušit všechny změny provedené v rozšíření „%s“?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:437
+#: ../../src/ui_fsmenu/addons/packager.cc:460
 #, c-format
 msgid "Do you really want to discard all changes to the following %u add-on?"
 msgid_plural ""
@@ -4459,16 +4468,16 @@ msgstr[1] "Opravdu chceš zrušit všechny změny v následujících %u rozší�
 msgstr[2] "Opravdu chceš zrušit všechny změny v následujících %u rozšířeních?"
 msgstr[3] "Opravdu chceš zrušit všechny změny v následujících %u rozšířeních?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:446
+#: ../../src/ui_fsmenu/addons/packager.cc:469
 msgid "Discard Changes"
 msgstr "Zrušit změny"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:458
+#: ../../src/ui_fsmenu/addons/packager.cc:481
 #, c-format
 msgid "Do you really want to commit all changes to the add-on ‘%s’ to disk?"
 msgstr "Opravdu chceš uložit všechny změny provedené v rozšíření „%s“?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:462
+#: ../../src/ui_fsmenu/addons/packager.cc:485
 #, c-format
 msgid ""
 "Do you really want to commit all changes to the following %u add-on to disk?"
@@ -4480,31 +4489,31 @@ msgstr[1] "Opravdu chceš uložit změny provedené v následujících %u rozš�
 msgstr[2] "Opravdu chceš uložit změny provedené v následujících %u rozšířeních na pevný disk?"
 msgstr[3] "Opravdu chceš uložit změny provedené v následujících %u rozšířeních na pevný disk?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:471
+#: ../../src/ui_fsmenu/addons/packager.cc:494
 msgid ""
 "Warning: If you manually edited any files in this add-on, your changes may "
 "be overwritten!"
 msgstr "Varování: Dojde-li k manuální úpravě souborů tohoto rozšíření, mohou být provedené úpravy přepsány a může tak dojít k jejich ztrátě!"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:474
+#: ../../src/ui_fsmenu/addons/packager.cc:497
 msgid "Confirm Saving"
 msgstr "Potvrdit uložení"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:528
+#: ../../src/ui_fsmenu/addons/packager.cc:563
 msgid "Invalid Version"
 msgstr "Neplatná verze"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:529
+#: ../../src/ui_fsmenu/addons/packager.cc:564
 #, c-format
 msgid ""
 "‘%1$s’ is not a valid version string. The add-on ‘%2$s’ will not be saved."
 msgstr "„%1$s“ není platným označením verze. Rozšíření „%2$s“ nebude uloženo."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:538
+#: ../../src/ui_fsmenu/addons/packager.cc:573
 msgid "Error Writing Addon"
 msgstr "Chyba ukládání rozšíření"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:539
+#: ../../src/ui_fsmenu/addons/packager.cc:574
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be saved to disk:\n"
@@ -5162,7 +5171,7 @@ msgstr "Nahrát snímek obrazovky pro '%s'"
 #. * TRANSLATORS: Header for campaign description
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:94
 #: ../../src/ui_fsmenu/campaigndetails.cc:66
-#: ../../src/ui_fsmenu/scenariodetails.cc:63 ../../src/wui/mapdetails.cc:186
+#: ../../src/ui_fsmenu/scenariodetails.cc:63 ../../src/wui/mapdetails.cc:207
 #: ../../src/wui/savegametable.cc:147 ../../src/wui/savegametable.cc:199
 #: ../../src/wui/savegametable.cc:258
 msgid "Description"
@@ -8696,7 +8705,7 @@ msgstr "Verze Widelands:"
 msgid "Win Condition:"
 msgstr "Výherní podmínka:"
 
-#: ../../src/wui/gamedetails.cc:182 ../../src/wui/mapdetails.cc:184
+#: ../../src/wui/gamedetails.cc:182 ../../src/wui/mapdetails.cc:180
 msgid "Add-Ons:"
 msgstr "Rozšíření:"
 
@@ -9239,17 +9248,17 @@ msgstr "Týmy po 4"
 msgid "Players form teams of four players each"
 msgstr ""
 
-#: ../../src/wui/mapdata.cc:51 ../../src/wui/mapdata.cc:79
+#: ../../src/wui/mapdata.cc:51 ../../src/wui/mapdata.cc:80
 msgid "No Author"
 msgstr "Neznámý autor"
 
 #. * TRANSLATORS: Parent directory/folder
-#: ../../src/wui/mapdata.cc:175 ../../src/wui/savegametable.cc:126
+#: ../../src/wui/mapdata.cc:176 ../../src/wui/savegametable.cc:126
 msgid "parent"
 msgstr "nadřazený adresář"
 
 #. * TRANSLATORS: This label is shown when a folder is empty
-#: ../../src/wui/mapdata.cc:181
+#: ../../src/wui/mapdata.cc:182
 msgid "empty"
 msgstr "prázdné"
 
@@ -9276,11 +9285,11 @@ msgid "The name of this map in your language: %s"
 msgstr "Název mapy v tvém jazyce: %s"
 
 #. * TRANSLATORS: Map hint header when selecting a map.
-#: ../../src/wui/mapdetails.cc:191
+#: ../../src/wui/mapdetails.cc:212
 msgid "Hint"
 msgstr "Další poznámky"
 
-#: ../../src/wui/mapdetails.cc:217
+#: ../../src/wui/mapdetails.cc:238
 msgid "Game data error"
 msgstr "Chyba herních dat"
 
@@ -10015,7 +10024,7 @@ msgstr "Další mise"
 msgid "Start the next mission now"
 msgstr "Začít hrát další misi"
 
-#: ../../src/wui/story_message_box.cc:109
+#: ../../src/wui/story_message_box.cc:110
 msgid "Continue playing this mission"
 msgstr "Pokračovat ve hraní této mise"
 
