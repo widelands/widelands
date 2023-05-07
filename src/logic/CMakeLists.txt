@@ -108,6 +108,7 @@ wl_library(logic_addons
     logic_filesystem_constants
     logic_map
     map_io
+    map_io_map_loader
     widelands_options
 )
 
