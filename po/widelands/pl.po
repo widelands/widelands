@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-05-01 02:42+0000\n"
+"POT-Creation-Date: 2023-05-04 02:38+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Sergiusz NA, 2023\n"
 "Language-Team: Polish (http://app.transifex.com/widelands/widelands/language/pl/)\n"
@@ -119,7 +119,7 @@ msgstr "%1$s lub %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/richtext.lua:703 ../../data/scripting/richtext.lua:708
 #: ../../src/base/i18n.cc:408 ../../src/base/i18n.cc:417
-#: ../../src/logic/addons.cc:203
+#: ../../src/logic/addons.cc:223
 #, c-format
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
@@ -640,7 +640,7 @@ msgstr "Mapa nie została zapisana, czy na pewno chcesz wyjść?"
 msgid "Are you sure you wish to exit the editor?"
 msgstr "Czy na pewno chcesz wyjść z edytora?"
 
-#: ../../src/editor/editorinteractive.cc:1108 ../../src/logic/addons.cc:47
+#: ../../src/editor/editorinteractive.cc:1108 ../../src/logic/addons.cc:48
 #: ../../src/ui_basic/dropdown.cc:358 ../../src/ui_basic/dropdown.cc:360
 #: ../../src/ui_fsmenu/addons/contact.cc:81
 #: ../../src/ui_fsmenu/addons/manager.cc:1334
@@ -691,7 +691,7 @@ msgstr "Bez nazwy"
 #: ../../src/editor/editorinteractive.cc:1169
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:114
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:584
-#: ../../src/logic/map.h:227 ../../src/ui_fsmenu/addons/packager.cc:367
+#: ../../src/logic/map.h:227 ../../src/ui_fsmenu/addons/packager.cc:390
 msgctxt "author_name"
 msgid "Unknown"
 msgstr "Nieznany"
@@ -738,28 +738,28 @@ msgstr "Błąd podczas zapisywania mapy!"
 msgid "Packaging add-on…"
 msgstr "Pakownie dodatku..."
 
-#: ../../src/editor/editorinteractive.cc:1499
+#: ../../src/editor/editorinteractive.cc:1500
 msgid "Add-On Generation Error"
 msgstr "Błąd Generowania Dodatku"
 
-#: ../../src/editor/editorinteractive.cc:1500
+#: ../../src/editor/editorinteractive.cc:1501
 msgid "The add-on could not be written to the disk."
 msgstr "Dodatek nie mógł zostać zapisany na dysku."
 
-#: ../../src/editor/editorinteractive.cc:1507
+#: ../../src/editor/editorinteractive.cc:1508
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:107
 msgid "Uploading…"
 msgstr "Przesyłanie..."
 
-#: ../../src/editor/editorinteractive.cc:1513
+#: ../../src/editor/editorinteractive.cc:1514
 msgid "Upload Error"
 msgstr "Błąd Przesyłania"
 
-#: ../../src/editor/editorinteractive.cc:1535
+#: ../../src/editor/editorinteractive.cc:1536
 msgid "Success"
 msgstr "Sukces"
 
-#: ../../src/editor/editorinteractive.cc:1536
+#: ../../src/editor/editorinteractive.cc:1537
 msgid "The add-on was uploaded successfully."
 msgstr "Dodatek został przesłany pomyślnie."
 
@@ -1009,25 +1009,25 @@ msgstr "Błąd!"
 #. * TRANSLATORS: Directory name for user maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:81
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:279
-#: ../../src/ui_fsmenu/addons/packager_box.cc:210 ../../src/wui/mapdata.cc:195
+#: ../../src/ui_fsmenu/addons/packager_box.cc:210 ../../src/wui/mapdata.cc:196
 msgid "My Maps"
 msgstr "Moje mapy"
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:83
-#: ../../src/wui/mapdata.cc:189
+#: ../../src/wui/mapdata.cc:190
 msgid "Multiplayer Scenarios"
 msgstr "Scenariusze dla wielu graczy"
 
 #. * TRANSLATORS: Directory name for SP Scenarios in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:85
-#: ../../src/wui/mapdata.cc:192
+#: ../../src/wui/mapdata.cc:193
 msgid "Singleplayer Scenarios"
 msgstr "Scenariusze dla jednego gracza"
 
 #. * TRANSLATORS: Directory name for downloaded maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:87
-#: ../../src/wui/mapdata.cc:198
+#: ../../src/wui/mapdata.cc:199
 msgid "Downloaded Maps"
 msgstr "Pobrane mapy"
 
@@ -1051,7 +1051,7 @@ msgstr "Wyświetl"
 #: ../../src/ui_basic/messagebox.cc:108 ../../src/ui_basic/text_prompt.cc:46
 #: ../../src/ui_fsmenu/addons/login_box.cc:54
 #: ../../src/ui_fsmenu/addons/manager.cc:250
-#: ../../src/ui_fsmenu/addons/packager.cc:109
+#: ../../src/ui_fsmenu/addons/packager.cc:111
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:175
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:462
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:678
@@ -1120,7 +1120,7 @@ msgid "Delete this suggested team lineup"
 msgstr "Usuń sugerowany skład drużyny"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:108
-#: ../../src/ui_fsmenu/addons/packager.cc:75
+#: ../../src/ui_fsmenu/addons/packager.cc:77
 #: ../../src/ui_fsmenu/addons/packager_box.cc:148
 #: ../../src/wui/quicknavigation.cc:196
 msgid "+"
@@ -1131,7 +1131,7 @@ msgid "Add a player to this team"
 msgstr "Dodaj gracza do tej drużyny"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:321
-#: ../../src/logic/addons.cc:68
+#: ../../src/logic/addons.cc:69
 msgid "Theme"
 msgstr "Motyw"
 
@@ -1152,7 +1152,7 @@ msgid "Authors:"
 msgstr "Autorzy:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:365
-#: ../../src/ui_fsmenu/addons/packager.cc:147
+#: ../../src/ui_fsmenu/addons/packager.cc:165
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:77
 msgid "Description:"
 msgstr "Opis:"
@@ -1256,7 +1256,7 @@ msgid "Creating empty map…"
 msgstr "Tworzenie pustej mapy..."
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:63
-#: ../../src/logic/addons.cc:58
+#: ../../src/logic/addons.cc:59
 msgid "Map Generator"
 msgstr "Generator Map"
 
@@ -1883,55 +1883,55 @@ msgstr "nie"
 msgid "off"
 msgstr "wyłącz"
 
-#: ../../src/logic/addons.cc:49
+#: ../../src/logic/addons.cc:50
 msgid "Tribes"
 msgstr "Plemiona"
 
-#: ../../src/logic/addons.cc:51
+#: ../../src/logic/addons.cc:52
 msgid "World"
 msgstr "Świat"
 
-#: ../../src/logic/addons.cc:53
+#: ../../src/logic/addons.cc:54
 msgid "Script"
 msgstr "Skrypt"
 
-#: ../../src/logic/addons.cc:55
+#: ../../src/logic/addons.cc:56
 msgid "Map Set"
 msgstr "Zestaw map"
 
 #. * TRANSLATORS: Header for campaign name
-#: ../../src/logic/addons.cc:60 ../../src/ui_fsmenu/campaigndetails.cc:47
+#: ../../src/logic/addons.cc:61 ../../src/ui_fsmenu/campaigndetails.cc:47
 msgid "Campaign"
 msgstr "Kampania"
 
-#: ../../src/logic/addons.cc:63
+#: ../../src/logic/addons.cc:64
 msgid "Win Condition"
 msgstr "Warunek zwycięstwa"
 
-#: ../../src/logic/addons.cc:66
+#: ../../src/logic/addons.cc:67
 msgid "Starting Condition"
 msgstr "Warunek początkowy"
 
-#: ../../src/logic/addons.cc:109
+#: ../../src/logic/addons.cc:110
 #, c-format
 msgid "%1$s.%2$u"
 msgstr "%1$s.%2$u"
 
-#: ../../src/logic/addons.cc:176
+#: ../../src/logic/addons.cc:196
 msgid "No conflicts"
 msgstr "Brak konfliktów"
 
-#: ../../src/logic/addons.cc:181
+#: ../../src/logic/addons.cc:201
 #, c-format
 msgid "%1$s (expected version %2$s, found %3$s)"
 msgstr "%1$s(oczekiwana wersja %2$s, znaleziono %3$s)"
 
-#: ../../src/logic/addons.cc:184 ../../src/logic/addons.cc:220
+#: ../../src/logic/addons.cc:204 ../../src/logic/addons.cc:240
 #, c-format
 msgid "%1$s, %2$s (expected version %3$s, found %4$s)"
 msgstr "%1$s, %2$s (oczekiwana wersja %3$s, znaleziono %4$s)"
 
-#: ../../src/logic/addons.cc:191
+#: ../../src/logic/addons.cc:211
 #, c-format
 msgid "%1$u add-on with wrong version: %2$s"
 msgid_plural "%1$u add-ons with wrong version: %2$s"
@@ -1940,7 +1940,7 @@ msgstr[1] "%1$u dodatki ze złą wersją: %2$s"
 msgstr[2] "%1$u dodatki ze złą wersją: %2$s"
 msgstr[3] "%1$udodatki ze złą wersją: %2$s"
 
-#: ../../src/logic/addons.cc:206
+#: ../../src/logic/addons.cc:226
 #, c-format
 msgid "%1$u missing add-on: %2$s"
 msgid_plural "%1$u missing add-ons: %2$s"
@@ -1949,22 +1949,22 @@ msgstr[1] "%1$u brakujące dodatki: %2$s"
 msgstr[2] "%1$u brakujące dodatki: %2$s"
 msgstr[3] "%1$u brakujące dodatki: %2$s"
 
-#: ../../src/logic/addons.cc:214
+#: ../../src/logic/addons.cc:234
 #, c-format
 msgid "%s (missing)"
 msgstr "%s (brakuje)"
 
-#: ../../src/logic/addons.cc:216
+#: ../../src/logic/addons.cc:236
 #, c-format
 msgid "%1$s, %2$s (missing)"
 msgstr "%1$s, %2$s (brakuje)"
 
-#: ../../src/logic/addons.cc:224
+#: ../../src/logic/addons.cc:244
 #, c-format
 msgid "%1$s and %2$s: %3$s"
 msgstr "%1$s i %2$s: %3$s"
 
-#: ../../src/logic/addons.cc:225
+#: ../../src/logic/addons.cc:245
 #, c-format
 msgid "%u missing add-on"
 msgid_plural "%u missing add-ons"
@@ -1973,7 +1973,7 @@ msgstr[1] "%u brakujące dodatki"
 msgstr[2] "%u brakujące dodatki"
 msgstr[3] "%u brakujące dodatki"
 
-#: ../../src/logic/addons.cc:227
+#: ../../src/logic/addons.cc:247
 #, c-format
 msgid "%u add-on with wrong version"
 msgid_plural "%u add-ons with wrong version"
@@ -1983,20 +1983,20 @@ msgstr[2] "%u dodatki ze złą wersją"
 msgstr[3] "%u dodatki ze złą wersją"
 
 #. * TRANSLATORS: This map or savegame uses no add-ons
-#: ../../src/logic/addons.cc:238
+#: ../../src/logic/addons.cc:258
 msgid "None"
 msgstr "Brak"
 
-#: ../../src/logic/addons.cc:242
+#: ../../src/logic/addons.cc:262
 #, c-format
 msgid "%1$s<br>· %2$s (version %3$s)"
 msgstr "%1$s<br>· %2$s (wersja %3$s)"
 
-#: ../../src/logic/addons.cc:272
+#: ../../src/logic/addons.cc:292
 msgid "No game-relevant add-ons in use."
 msgstr ""
 
-#: ../../src/logic/addons.cc:277
+#: ../../src/logic/addons.cc:297
 #, c-format
 msgid "%u game-relevant add-on in use:"
 msgid_plural "%u game-relevant add-ons in use:"
@@ -2655,7 +2655,7 @@ msgstr "umożliwia wydobycie"
 msgid "unwalkable"
 msgstr "nie do przejścia"
 
-#: ../../src/logic/mutable_addon.cc:235
+#: ../../src/logic/mutable_addon.cc:239
 #, c-format
 msgid ""
 "A map file is invalid:\n"
@@ -3589,11 +3589,11 @@ msgstr "Nie wybrano"
 msgid "No matches"
 msgstr "Brak dopasowania"
 
-#: ../../src/ui_basic/panel.cc:294
+#: ../../src/ui_basic/panel.cc:296
 msgid "Please wait…"
 msgstr "Proszę czekać..."
 
-#: ../../src/ui_basic/panel.cc:424
+#: ../../src/ui_basic/panel.cc:426
 msgid "Game ending – please wait…"
 msgstr "Trwa kończenie gry – proszę czekać..."
 
@@ -4326,72 +4326,81 @@ msgstr "Wymagany dodatek ’%s’ nie został znaleziony na serwerze."
 msgid "Add-Ons Packager"
 msgstr "Narzędzie do pakowania dodatków"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:76
+#: ../../src/ui_fsmenu/addons/packager.cc:78
 msgid "New add-on"
 msgstr "Nowy dodatek"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:84
+#: ../../src/ui_fsmenu/addons/packager.cc:86
 #: ../../src/ui_fsmenu/addons/packager_box.cc:166
 #: ../../src/wui/quicknavigation.cc:285
 msgid "–"
 msgstr "–"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:85
+#: ../../src/ui_fsmenu/addons/packager.cc:87
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:793
 msgid "Delete this add-on"
 msgstr "Usuń ten dodatek"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:93
+#: ../../src/ui_fsmenu/addons/packager.cc:95
 msgid "Discard changes"
 msgstr "Odrzuć zmiany"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:101
+#: ../../src/ui_fsmenu/addons/packager.cc:103
 msgid "Save changes"
 msgstr "Zapisz zmiany"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:111
+#: ../../src/ui_fsmenu/addons/packager.cc:113
 msgid "Writing Add-Ons…"
 msgstr "Pisanie dodatków"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:113
+#: ../../src/ui_fsmenu/addons/packager.cc:115
 msgid "Please be patient while your changes are written."
 msgstr "Prosimy o cierpliwość podczas zapisywania zmian."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:132
+#: ../../src/ui_fsmenu/addons/packager.cc:138
 msgid "Name:"
 msgstr "Nazwa:"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:137
+#: ../../src/ui_fsmenu/addons/packager.cc:143
 msgid "Author:"
 msgstr "Autor:"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:142
+#: ../../src/ui_fsmenu/addons/packager.cc:148
 #: ../../src/ui_fsmenu/tech_info.cc:69
 msgid "Version:"
 msgstr "Wersja:"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:311
+#: ../../src/ui_fsmenu/addons/packager.cc:153 ../../src/wui/mapdetails.cc:196
+#: ../../src/wui/mapdetails.cc:201
+msgid "Minimum Widelands Version:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/packager.cc:159
+msgid "Maximum Widelands Version:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/packager.cc:334
 msgid "New Add-On"
 msgstr "Nowy dodatek"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:312
+#: ../../src/ui_fsmenu/addons/packager.cc:335
 msgid "Enter the name for the new add-on."
 msgstr "Wpisz nazwę nowego dodatku."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:314
+#: ../../src/ui_fsmenu/addons/packager.cc:337
 msgid "Category"
 msgstr "Kategoria"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:335
-#: ../../src/ui_fsmenu/addons/packager.cc:351
-#: ../../src/ui_fsmenu/addons/packager.cc:356
+#: ../../src/ui_fsmenu/addons/packager.cc:358
+#: ../../src/ui_fsmenu/addons/packager.cc:374
+#: ../../src/ui_fsmenu/addons/packager.cc:379
 #: ../../src/ui_fsmenu/addons/packager_box.cc:389
 #: ../../src/ui_fsmenu/addons/packager_box.cc:405
 #: ../../src/ui_fsmenu/addons/packager_box.cc:411
 msgid "Invalid Name"
 msgstr "Nieprawidłowa nazwa"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:336
+#: ../../src/ui_fsmenu/addons/packager.cc:359
 #: ../../src/ui_fsmenu/addons/packager_box.cc:391
 #, c-format
 msgid ""
@@ -4400,26 +4409,26 @@ msgid ""
 "Please choose a different name."
 msgstr "Ta nazwa jest nieprawidłowa. Powód: %s\n\nProszę wybrać inną nazwę."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:351
+#: ../../src/ui_fsmenu/addons/packager.cc:374
 msgid "An add-on with this internal name already exists."
 msgstr "Dodatek z taką nazwą wewnętrzną już istnieje."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:356
+#: ../../src/ui_fsmenu/addons/packager.cc:379
 msgid ""
 "An add-on with this internal name was deleted recently. Please commit your "
 "changes before using this name again."
 msgstr "Dodatek o tej nazwie wewnętrznej został niedawno usunięty. Zatwierdź zmiany, zanim ponownie użyjesz tej nazwy."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:382
+#: ../../src/ui_fsmenu/addons/packager.cc:405
 msgid "Delete Add-on"
 msgstr "Usuń dodatek"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:384
+#: ../../src/ui_fsmenu/addons/packager.cc:407
 #, c-format
 msgid "Do you really want to delete the add-on ‘%s’?"
 msgstr "Czy ma pewno chcesz usunąć ten dodatek '%s'?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:385
+#: ../../src/ui_fsmenu/addons/packager.cc:408
 #, c-format
 msgid ""
 "Do you really want to delete the local add-on ‘%s’?\n"
@@ -4427,7 +4436,7 @@ msgid ""
 "Note that this add-on can not be downloaded again from the server."
 msgstr "Czy na pewno chcesz usunąć lokalny dodatek ‘%s’?\n\nTen dodatek nie może być pobrany ponownie z serwera."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:406
+#: ../../src/ui_fsmenu/addons/packager.cc:429
 #, c-format
 msgid ""
 "If you quit the packager now, all changes to the following %u add-on will be"
@@ -4440,25 +4449,25 @@ msgstr[1] "Jeśli opuścisz narzędzie do pakowania dodatków, wszystkie zmiany 
 msgstr[2] "Jeśli opuścisz narzędzie do pakowania dodatków, wszystkie zmiany wprowadzone w dodatkach %u zostaną odrzucone."
 msgstr[3] "Jeśli opuścisz narzędzie do pakowania dodatków, wszystkie zmiany wprowadzone w dodatkach %u zostaną odrzucone."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:415
-#: ../../src/ui_fsmenu/addons/packager.cc:442
-#: ../../src/ui_fsmenu/addons/packager.cc:467
+#: ../../src/ui_fsmenu/addons/packager.cc:438
+#: ../../src/ui_fsmenu/addons/packager.cc:465
+#: ../../src/ui_fsmenu/addons/packager.cc:490
 #, c-format
 msgid ""
 "%1$s\n"
 "· %2$s"
 msgstr "%1$s\n· %2$s"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:418
+#: ../../src/ui_fsmenu/addons/packager.cc:441
 msgid "Quit Packager"
 msgstr "Opuść narzędzie do pakowania dodatków"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:433
+#: ../../src/ui_fsmenu/addons/packager.cc:456
 #, c-format
 msgid "Do you really want to discard all changes to the add-on ‘%s’?"
 msgstr "Czy na pewno chcesz odrzucić zmiany w dodatku ‘%s’?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:437
+#: ../../src/ui_fsmenu/addons/packager.cc:460
 #, c-format
 msgid "Do you really want to discard all changes to the following %u add-on?"
 msgid_plural ""
@@ -4468,16 +4477,16 @@ msgstr[1] "Czy na pewno chcesz odrzucić wszystkie zmiany w następujących doda
 msgstr[2] "Czy na pewno chcesz odrzucić wszystkie zmiany w następujących dodatkach: %u?"
 msgstr[3] "Czy na pewno chcesz odrzucić wszystkie zmiany w następujących dodatkach: %u?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:446
+#: ../../src/ui_fsmenu/addons/packager.cc:469
 msgid "Discard Changes"
 msgstr "Odrzuć zmiany"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:458
+#: ../../src/ui_fsmenu/addons/packager.cc:481
 #, c-format
 msgid "Do you really want to commit all changes to the add-on ‘%s’ to disk?"
 msgstr "Czy na pewno chcesz zapisać wszystkie zmiany w dodatku ‘%s’ na dysk?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:462
+#: ../../src/ui_fsmenu/addons/packager.cc:485
 #, c-format
 msgid ""
 "Do you really want to commit all changes to the following %u add-on to disk?"
@@ -4489,31 +4498,31 @@ msgstr[1] "Czy na pewno chcesz zapisać wszystkie zmiany w następujących dodat
 msgstr[2] "Czy na pewno chcesz zapisać wszystkie zmiany w następujących dodatkach: %u?"
 msgstr[3] "Czy na pewno chcesz zapisać wszystkie zmiany w następujących dodatkach: %u?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:471
+#: ../../src/ui_fsmenu/addons/packager.cc:494
 msgid ""
 "Warning: If you manually edited any files in this add-on, your changes may "
 "be overwritten!"
 msgstr "Ostrzeżenie: Jeśli ręcznie edytowałeś jakiekolwiek pliki w tym dodatku, Twoje zmiany mogą zostać nadpisane!"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:474
+#: ../../src/ui_fsmenu/addons/packager.cc:497
 msgid "Confirm Saving"
 msgstr "Potwierdź zapis"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:528
+#: ../../src/ui_fsmenu/addons/packager.cc:563
 msgid "Invalid Version"
 msgstr "Nieprawidłowa wersja"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:529
+#: ../../src/ui_fsmenu/addons/packager.cc:564
 #, c-format
 msgid ""
 "‘%1$s’ is not a valid version string. The add-on ‘%2$s’ will not be saved."
 msgstr "„%1$s” nie jest prawidłowym ciągiem wersji. Dodatek „%2$s” nie zostanie zapisany."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:538
+#: ../../src/ui_fsmenu/addons/packager.cc:573
 msgid "Error Writing Addon"
 msgstr "Błąd pisania dodatku"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:539
+#: ../../src/ui_fsmenu/addons/packager.cc:574
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be saved to disk:\n"
@@ -5171,7 +5180,7 @@ msgstr "Prześlij zrzut ekranu dla ‘%s‘"
 #. * TRANSLATORS: Header for campaign description
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:94
 #: ../../src/ui_fsmenu/campaigndetails.cc:66
-#: ../../src/ui_fsmenu/scenariodetails.cc:63 ../../src/wui/mapdetails.cc:186
+#: ../../src/ui_fsmenu/scenariodetails.cc:63 ../../src/wui/mapdetails.cc:207
 #: ../../src/wui/savegametable.cc:147 ../../src/wui/savegametable.cc:199
 #: ../../src/wui/savegametable.cc:258
 msgid "Description"
@@ -8705,7 +8714,7 @@ msgstr "Wersja Widelands:"
 msgid "Win Condition:"
 msgstr "Warunek zwycięstwa:"
 
-#: ../../src/wui/gamedetails.cc:182 ../../src/wui/mapdetails.cc:184
+#: ../../src/wui/gamedetails.cc:182 ../../src/wui/mapdetails.cc:180
 msgid "Add-Ons:"
 msgstr "Dodatki:"
 
@@ -9248,17 +9257,17 @@ msgstr "Zespoły czteroosobowe"
 msgid "Players form teams of four players each"
 msgstr "Gracze tworzą drużyny składające się z czterech graczy każda"
 
-#: ../../src/wui/mapdata.cc:51 ../../src/wui/mapdata.cc:79
+#: ../../src/wui/mapdata.cc:51 ../../src/wui/mapdata.cc:80
 msgid "No Author"
 msgstr "Bez autora"
 
 #. * TRANSLATORS: Parent directory/folder
-#: ../../src/wui/mapdata.cc:175 ../../src/wui/savegametable.cc:126
+#: ../../src/wui/mapdata.cc:176 ../../src/wui/savegametable.cc:126
 msgid "parent"
 msgstr "nadrzędny"
 
 #. * TRANSLATORS: This label is shown when a folder is empty
-#: ../../src/wui/mapdata.cc:181
+#: ../../src/wui/mapdata.cc:182
 msgid "empty"
 msgstr "pusty"
 
@@ -9285,11 +9294,11 @@ msgid "The name of this map in your language: %s"
 msgstr "Nazwa mapy w twoim języku: %s"
 
 #. * TRANSLATORS: Map hint header when selecting a map.
-#: ../../src/wui/mapdetails.cc:191
+#: ../../src/wui/mapdetails.cc:212
 msgid "Hint"
 msgstr "Wskazówka"
 
-#: ../../src/wui/mapdetails.cc:217
+#: ../../src/wui/mapdetails.cc:238
 msgid "Game data error"
 msgstr "Błąd danych gry"
 
@@ -10024,7 +10033,7 @@ msgstr "Następna misja"
 msgid "Start the next mission now"
 msgstr "Zacznij następną misję teraz"
 
-#: ../../src/wui/story_message_box.cc:109
+#: ../../src/wui/story_message_box.cc:110
 msgid "Continue playing this mission"
 msgstr "Kontynuuj grę w tej misji"
 

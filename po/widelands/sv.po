@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-05-01 02:42+0000\n"
+"POT-Creation-Date: 2023-05-04 02:38+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: D M <kamera001dm@gmail.com>, 2021,2023\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
@@ -108,7 +108,7 @@ msgstr "%1$s eller %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/richtext.lua:703 ../../data/scripting/richtext.lua:708
 #: ../../src/base/i18n.cc:408 ../../src/base/i18n.cc:417
-#: ../../src/logic/addons.cc:203
+#: ../../src/logic/addons.cc:223
 #, c-format
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
@@ -629,7 +629,7 @@ msgstr "Kartan är osparad, vill du verkligen avsluta?"
 msgid "Are you sure you wish to exit the editor?"
 msgstr "Är du säker på att du vill lämna kartredigeraren?"
 
-#: ../../src/editor/editorinteractive.cc:1108 ../../src/logic/addons.cc:47
+#: ../../src/editor/editorinteractive.cc:1108 ../../src/logic/addons.cc:48
 #: ../../src/ui_basic/dropdown.cc:358 ../../src/ui_basic/dropdown.cc:360
 #: ../../src/ui_fsmenu/addons/contact.cc:81
 #: ../../src/ui_fsmenu/addons/manager.cc:1334
@@ -680,7 +680,7 @@ msgstr "Inget namn"
 #: ../../src/editor/editorinteractive.cc:1169
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:114
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:584
-#: ../../src/logic/map.h:227 ../../src/ui_fsmenu/addons/packager.cc:367
+#: ../../src/logic/map.h:227 ../../src/ui_fsmenu/addons/packager.cc:390
 msgctxt "author_name"
 msgid "Unknown"
 msgstr "Okänd"
@@ -727,28 +727,28 @@ msgstr "Fel när kartan skulle sparas!"
 msgid "Packaging add-on…"
 msgstr "Packar tillägg..."
 
-#: ../../src/editor/editorinteractive.cc:1499
+#: ../../src/editor/editorinteractive.cc:1500
 msgid "Add-On Generation Error"
 msgstr "Fel vid generering av tillägg"
 
-#: ../../src/editor/editorinteractive.cc:1500
+#: ../../src/editor/editorinteractive.cc:1501
 msgid "The add-on could not be written to the disk."
 msgstr "Tillägget kunde inte sparas på disken."
 
-#: ../../src/editor/editorinteractive.cc:1507
+#: ../../src/editor/editorinteractive.cc:1508
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:107
 msgid "Uploading…"
 msgstr "Laddar upp..."
 
-#: ../../src/editor/editorinteractive.cc:1513
+#: ../../src/editor/editorinteractive.cc:1514
 msgid "Upload Error"
 msgstr "Uppladdningsfel"
 
-#: ../../src/editor/editorinteractive.cc:1535
+#: ../../src/editor/editorinteractive.cc:1536
 msgid "Success"
 msgstr "Lyckad uppladdning"
 
-#: ../../src/editor/editorinteractive.cc:1536
+#: ../../src/editor/editorinteractive.cc:1537
 msgid "The add-on was uploaded successfully."
 msgstr "Uppladdning av tillägget lyckades."
 
@@ -998,25 +998,25 @@ msgstr "Fel!"
 #. * TRANSLATORS: Directory name for user maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:81
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:279
-#: ../../src/ui_fsmenu/addons/packager_box.cc:210 ../../src/wui/mapdata.cc:195
+#: ../../src/ui_fsmenu/addons/packager_box.cc:210 ../../src/wui/mapdata.cc:196
 msgid "My Maps"
 msgstr "Mina kartor"
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:83
-#: ../../src/wui/mapdata.cc:189
+#: ../../src/wui/mapdata.cc:190
 msgid "Multiplayer Scenarios"
 msgstr "Scenarier med flera spelare"
 
 #. * TRANSLATORS: Directory name for SP Scenarios in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:85
-#: ../../src/wui/mapdata.cc:192
+#: ../../src/wui/mapdata.cc:193
 msgid "Singleplayer Scenarios"
 msgstr "Scenarier med en spelare"
 
 #. * TRANSLATORS: Directory name for downloaded maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:87
-#: ../../src/wui/mapdata.cc:198
+#: ../../src/wui/mapdata.cc:199
 msgid "Downloaded Maps"
 msgstr "Nedladdade kartor"
 
@@ -1040,7 +1040,7 @@ msgstr "Visning"
 #: ../../src/ui_basic/messagebox.cc:108 ../../src/ui_basic/text_prompt.cc:46
 #: ../../src/ui_fsmenu/addons/login_box.cc:54
 #: ../../src/ui_fsmenu/addons/manager.cc:250
-#: ../../src/ui_fsmenu/addons/packager.cc:109
+#: ../../src/ui_fsmenu/addons/packager.cc:111
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:175
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:462
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:678
@@ -1109,7 +1109,7 @@ msgid "Delete this suggested team lineup"
 msgstr "Ta bort denna föreslagna laguppställning"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:108
-#: ../../src/ui_fsmenu/addons/packager.cc:75
+#: ../../src/ui_fsmenu/addons/packager.cc:77
 #: ../../src/ui_fsmenu/addons/packager_box.cc:148
 #: ../../src/wui/quicknavigation.cc:196
 msgid "+"
@@ -1120,7 +1120,7 @@ msgid "Add a player to this team"
 msgstr "Lägg till en spelare till detta lag"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:321
-#: ../../src/logic/addons.cc:68
+#: ../../src/logic/addons.cc:69
 msgid "Theme"
 msgstr "Tema"
 
@@ -1141,7 +1141,7 @@ msgid "Authors:"
 msgstr "Upphovsmän:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:365
-#: ../../src/ui_fsmenu/addons/packager.cc:147
+#: ../../src/ui_fsmenu/addons/packager.cc:165
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:77
 msgid "Description:"
 msgstr "Beskrivning:"
@@ -1243,7 +1243,7 @@ msgid "Creating empty map…"
 msgstr "Skapar tom karta..."
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:63
-#: ../../src/logic/addons.cc:58
+#: ../../src/logic/addons.cc:59
 msgid "Map Generator"
 msgstr "Kartgenererare"
 
@@ -1870,91 +1870,91 @@ msgstr "nej"
 msgid "off"
 msgstr "av"
 
-#: ../../src/logic/addons.cc:49
+#: ../../src/logic/addons.cc:50
 msgid "Tribes"
 msgstr "Stammar"
 
-#: ../../src/logic/addons.cc:51
+#: ../../src/logic/addons.cc:52
 msgid "World"
 msgstr "Värld"
 
-#: ../../src/logic/addons.cc:53
+#: ../../src/logic/addons.cc:54
 msgid "Script"
 msgstr "Skript"
 
-#: ../../src/logic/addons.cc:55
+#: ../../src/logic/addons.cc:56
 msgid "Map Set"
 msgstr "Kartuppsättning"
 
 #. * TRANSLATORS: Header for campaign name
-#: ../../src/logic/addons.cc:60 ../../src/ui_fsmenu/campaigndetails.cc:47
+#: ../../src/logic/addons.cc:61 ../../src/ui_fsmenu/campaigndetails.cc:47
 msgid "Campaign"
 msgstr "Fälttåg"
 
-#: ../../src/logic/addons.cc:63
+#: ../../src/logic/addons.cc:64
 msgid "Win Condition"
 msgstr "Segervillkor"
 
-#: ../../src/logic/addons.cc:66
+#: ../../src/logic/addons.cc:67
 msgid "Starting Condition"
 msgstr "Ursprungligt förhållande"
 
-#: ../../src/logic/addons.cc:109
+#: ../../src/logic/addons.cc:110
 #, c-format
 msgid "%1$s.%2$u"
 msgstr "%1$s.%2$u"
 
-#: ../../src/logic/addons.cc:176
+#: ../../src/logic/addons.cc:196
 msgid "No conflicts"
 msgstr "Inga konflikter"
 
-#: ../../src/logic/addons.cc:181
+#: ../../src/logic/addons.cc:201
 #, c-format
 msgid "%1$s (expected version %2$s, found %3$s)"
 msgstr "%1$s (förväntad version %2$s, hittade %3$s)"
 
-#: ../../src/logic/addons.cc:184 ../../src/logic/addons.cc:220
+#: ../../src/logic/addons.cc:204 ../../src/logic/addons.cc:240
 #, c-format
 msgid "%1$s, %2$s (expected version %3$s, found %4$s)"
 msgstr "%1$s, %2$s (förväntad version %3$s, hittade %4$s)"
 
-#: ../../src/logic/addons.cc:191
+#: ../../src/logic/addons.cc:211
 #, c-format
 msgid "%1$u add-on with wrong version: %2$s"
 msgid_plural "%1$u add-ons with wrong version: %2$s"
 msgstr[0] "%1$u tillägg med fel version: %2$s"
 msgstr[1] "%1$u tillägg med fel version: %2$s"
 
-#: ../../src/logic/addons.cc:206
+#: ../../src/logic/addons.cc:226
 #, c-format
 msgid "%1$u missing add-on: %2$s"
 msgid_plural "%1$u missing add-ons: %2$s"
 msgstr[0] "%1$usaknat tillägg: %2$s"
 msgstr[1] "%1$usaknade tillägg: %2$s"
 
-#: ../../src/logic/addons.cc:214
+#: ../../src/logic/addons.cc:234
 #, c-format
 msgid "%s (missing)"
 msgstr "%s (saknas)"
 
-#: ../../src/logic/addons.cc:216
+#: ../../src/logic/addons.cc:236
 #, c-format
 msgid "%1$s, %2$s (missing)"
 msgstr "%1$s, %2$s (saknas)"
 
-#: ../../src/logic/addons.cc:224
+#: ../../src/logic/addons.cc:244
 #, c-format
 msgid "%1$s and %2$s: %3$s"
 msgstr "%1$s och %2$s: %3$s"
 
-#: ../../src/logic/addons.cc:225
+#: ../../src/logic/addons.cc:245
 #, c-format
 msgid "%u missing add-on"
 msgid_plural "%u missing add-ons"
 msgstr[0] "%u saknat tillägg"
 msgstr[1] "%u saknade tillägg"
 
-#: ../../src/logic/addons.cc:227
+#: ../../src/logic/addons.cc:247
 #, c-format
 msgid "%u add-on with wrong version"
 msgid_plural "%u add-ons with wrong version"
@@ -1962,20 +1962,20 @@ msgstr[0] "%u tillägg med fel version"
 msgstr[1] "%u tillägg med fel version"
 
 #. * TRANSLATORS: This map or savegame uses no add-ons
-#: ../../src/logic/addons.cc:238
+#: ../../src/logic/addons.cc:258
 msgid "None"
 msgstr "Inga"
 
-#: ../../src/logic/addons.cc:242
+#: ../../src/logic/addons.cc:262
 #, c-format
 msgid "%1$s<br>· %2$s (version %3$s)"
 msgstr "%1$s<br>· %2$s (version %3$s)"
 
-#: ../../src/logic/addons.cc:272
+#: ../../src/logic/addons.cc:292
 msgid "No game-relevant add-ons in use."
 msgstr "Inga tillägg relevanta för spelet används."
 
-#: ../../src/logic/addons.cc:277
+#: ../../src/logic/addons.cc:297
 #, c-format
 msgid "%u game-relevant add-on in use:"
 msgid_plural "%u game-relevant add-ons in use:"
@@ -2626,7 +2626,7 @@ msgstr "brytbar"
 msgid "unwalkable"
 msgstr "opasserbar"
 
-#: ../../src/logic/mutable_addon.cc:235
+#: ../../src/logic/mutable_addon.cc:239
 #, c-format
 msgid ""
 "A map file is invalid:\n"
@@ -3554,11 +3554,11 @@ msgstr "Inte vald"
 msgid "No matches"
 msgstr "Inga träffar"
 
-#: ../../src/ui_basic/panel.cc:294
+#: ../../src/ui_basic/panel.cc:296
 msgid "Please wait…"
 msgstr "Var vänlig och vänta..."
 
-#: ../../src/ui_basic/panel.cc:424
+#: ../../src/ui_basic/panel.cc:426
 msgid "Game ending – please wait…"
 msgstr "Spel avslutas – var vänlig och vänta..."
 
@@ -4275,72 +4275,81 @@ msgstr "Det nödvändiga tillägget \"%s\" kunde inte hittas på servern."
 msgid "Add-Ons Packager"
 msgstr "Tillägsförpackare"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:76
+#: ../../src/ui_fsmenu/addons/packager.cc:78
 msgid "New add-on"
 msgstr "Nytt tillägg"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:84
+#: ../../src/ui_fsmenu/addons/packager.cc:86
 #: ../../src/ui_fsmenu/addons/packager_box.cc:166
 #: ../../src/wui/quicknavigation.cc:285
 msgid "–"
 msgstr "–"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:85
+#: ../../src/ui_fsmenu/addons/packager.cc:87
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:793
 msgid "Delete this add-on"
 msgstr "Radera detta tillägg"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:93
+#: ../../src/ui_fsmenu/addons/packager.cc:95
 msgid "Discard changes"
 msgstr "Avbryt ändringar"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:101
+#: ../../src/ui_fsmenu/addons/packager.cc:103
 msgid "Save changes"
 msgstr "Spara ändringar"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:111
+#: ../../src/ui_fsmenu/addons/packager.cc:113
 msgid "Writing Add-Ons…"
 msgstr "Skriver tillägg..."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:113
+#: ../../src/ui_fsmenu/addons/packager.cc:115
 msgid "Please be patient while your changes are written."
 msgstr "Var vänlig och ha tålamod medan dina ändringar sparas."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:132
+#: ../../src/ui_fsmenu/addons/packager.cc:138
 msgid "Name:"
 msgstr "Namn:"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:137
+#: ../../src/ui_fsmenu/addons/packager.cc:143
 msgid "Author:"
 msgstr "Upphovsman:"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:142
+#: ../../src/ui_fsmenu/addons/packager.cc:148
 #: ../../src/ui_fsmenu/tech_info.cc:69
 msgid "Version:"
 msgstr "Version:"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:311
+#: ../../src/ui_fsmenu/addons/packager.cc:153 ../../src/wui/mapdetails.cc:196
+#: ../../src/wui/mapdetails.cc:201
+msgid "Minimum Widelands Version:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/packager.cc:159
+msgid "Maximum Widelands Version:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/packager.cc:334
 msgid "New Add-On"
 msgstr "Nytt tillägg"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:312
+#: ../../src/ui_fsmenu/addons/packager.cc:335
 msgid "Enter the name for the new add-on."
 msgstr "Skriv det nya tilläggets namn."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:314
+#: ../../src/ui_fsmenu/addons/packager.cc:337
 msgid "Category"
 msgstr "Kategori"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:335
-#: ../../src/ui_fsmenu/addons/packager.cc:351
-#: ../../src/ui_fsmenu/addons/packager.cc:356
+#: ../../src/ui_fsmenu/addons/packager.cc:358
+#: ../../src/ui_fsmenu/addons/packager.cc:374
+#: ../../src/ui_fsmenu/addons/packager.cc:379
 #: ../../src/ui_fsmenu/addons/packager_box.cc:389
 #: ../../src/ui_fsmenu/addons/packager_box.cc:405
 #: ../../src/ui_fsmenu/addons/packager_box.cc:411
 msgid "Invalid Name"
 msgstr "Ogiltigt namn"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:336
+#: ../../src/ui_fsmenu/addons/packager.cc:359
 #: ../../src/ui_fsmenu/addons/packager_box.cc:391
 #, c-format
 msgid ""
@@ -4349,26 +4358,26 @@ msgid ""
 "Please choose a different name."
 msgstr "Namnet är felaktigt. Orsak: %s\n\nVar vänlig och välj ett annat namn."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:351
+#: ../../src/ui_fsmenu/addons/packager.cc:374
 msgid "An add-on with this internal name already exists."
 msgstr "Ett tillägg med detta interna namn existerar redan."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:356
+#: ../../src/ui_fsmenu/addons/packager.cc:379
 msgid ""
 "An add-on with this internal name was deleted recently. Please commit your "
 "changes before using this name again."
 msgstr "Ett tillägg med detta interna namn var nyligen borttaget. Var vänlig och gör dina ändringar innan du använder detta namn igen."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:382
+#: ../../src/ui_fsmenu/addons/packager.cc:405
 msgid "Delete Add-on"
 msgstr "Ta bort tillägg"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:384
+#: ../../src/ui_fsmenu/addons/packager.cc:407
 #, c-format
 msgid "Do you really want to delete the add-on ‘%s’?"
 msgstr "Vill du verkligen ta bort tillägget \"%s\"?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:385
+#: ../../src/ui_fsmenu/addons/packager.cc:408
 #, c-format
 msgid ""
 "Do you really want to delete the local add-on ‘%s’?\n"
@@ -4376,7 +4385,7 @@ msgid ""
 "Note that this add-on can not be downloaded again from the server."
 msgstr "Vill du verkligen ta bort det lokala tillägget \"%s\"?\n\nNotera att detta tillägg inte kan laddas ned från servern igen."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:406
+#: ../../src/ui_fsmenu/addons/packager.cc:429
 #, c-format
 msgid ""
 "If you quit the packager now, all changes to the following %u add-on will be"
@@ -4387,25 +4396,25 @@ msgid_plural ""
 msgstr[0] "Om du lämnar packeteraren nu kommer alla ändringar som berör följande %u tillägg att avbrytas."
 msgstr[1] "Om du lämnar packeteraren nu kommer alla ändringar som berör följande %u tillägg att avbrytas."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:415
-#: ../../src/ui_fsmenu/addons/packager.cc:442
-#: ../../src/ui_fsmenu/addons/packager.cc:467
+#: ../../src/ui_fsmenu/addons/packager.cc:438
+#: ../../src/ui_fsmenu/addons/packager.cc:465
+#: ../../src/ui_fsmenu/addons/packager.cc:490
 #, c-format
 msgid ""
 "%1$s\n"
 "· %2$s"
 msgstr "%1$s\n· %2$s"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:418
+#: ../../src/ui_fsmenu/addons/packager.cc:441
 msgid "Quit Packager"
 msgstr "Lämna packeteraren"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:433
+#: ../../src/ui_fsmenu/addons/packager.cc:456
 #, c-format
 msgid "Do you really want to discard all changes to the add-on ‘%s’?"
 msgstr "Vill du verkligen avbryta alla ändringar av tillägget \"%s\"?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:437
+#: ../../src/ui_fsmenu/addons/packager.cc:460
 #, c-format
 msgid "Do you really want to discard all changes to the following %u add-on?"
 msgid_plural ""
@@ -4413,16 +4422,16 @@ msgid_plural ""
 msgstr[0] "Vill du verkligen avbryta alla ändringar av följande %u tillägg?"
 msgstr[1] "Vill du verkligen avbryta alla ändringar av följande %u tillägg?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:446
+#: ../../src/ui_fsmenu/addons/packager.cc:469
 msgid "Discard Changes"
 msgstr "Avbryt ändringar"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:458
+#: ../../src/ui_fsmenu/addons/packager.cc:481
 #, c-format
 msgid "Do you really want to commit all changes to the add-on ‘%s’ to disk?"
 msgstr "Vill du verkligen spara alla ändringar av tillägget \"%s\" på disken?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:462
+#: ../../src/ui_fsmenu/addons/packager.cc:485
 #, c-format
 msgid ""
 "Do you really want to commit all changes to the following %u add-on to disk?"
@@ -4432,31 +4441,31 @@ msgid_plural ""
 msgstr[0] "Vill du verkligen spara alla ändringar av följande %u tillägg på disken?"
 msgstr[1] "Vill du verkligen spara alla ändringar av följande %u tillägg på disken?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:471
+#: ../../src/ui_fsmenu/addons/packager.cc:494
 msgid ""
 "Warning: If you manually edited any files in this add-on, your changes may "
 "be overwritten!"
 msgstr "Varning! Om du har gjort manuella förändringar i några filer i detta tillägg kan dina förändringar bli överskrivna!"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:474
+#: ../../src/ui_fsmenu/addons/packager.cc:497
 msgid "Confirm Saving"
 msgstr "Bekräfta sparning"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:528
+#: ../../src/ui_fsmenu/addons/packager.cc:563
 msgid "Invalid Version"
 msgstr "Ogiltig version"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:529
+#: ../../src/ui_fsmenu/addons/packager.cc:564
 #, c-format
 msgid ""
 "‘%1$s’ is not a valid version string. The add-on ‘%2$s’ will not be saved."
 msgstr "\"%1$s\" är inte en giltig versionssträng. Tillägget \"%2$s\" kommer inte att sparas."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:538
+#: ../../src/ui_fsmenu/addons/packager.cc:573
 msgid "Error Writing Addon"
 msgstr "Fel vid skrivning av tillägg"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:539
+#: ../../src/ui_fsmenu/addons/packager.cc:574
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be saved to disk:\n"
@@ -5102,7 +5111,7 @@ msgstr "Ladda upp skärmdump för '%s'"
 #. * TRANSLATORS: Header for campaign description
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:94
 #: ../../src/ui_fsmenu/campaigndetails.cc:66
-#: ../../src/ui_fsmenu/scenariodetails.cc:63 ../../src/wui/mapdetails.cc:186
+#: ../../src/ui_fsmenu/scenariodetails.cc:63 ../../src/wui/mapdetails.cc:207
 #: ../../src/wui/savegametable.cc:147 ../../src/wui/savegametable.cc:199
 #: ../../src/wui/savegametable.cc:258
 msgid "Description"
@@ -8626,7 +8635,7 @@ msgstr "Widelands version:"
 msgid "Win Condition:"
 msgstr "Vinstförutsättning:"
 
-#: ../../src/wui/gamedetails.cc:182 ../../src/wui/mapdetails.cc:184
+#: ../../src/wui/gamedetails.cc:182 ../../src/wui/mapdetails.cc:180
 msgid "Add-Ons:"
 msgstr "Tillägg:"
 
@@ -9167,17 +9176,17 @@ msgstr "Lag om 4"
 msgid "Players form teams of four players each"
 msgstr "Spelarna bildar lag om fyra spelare i varje"
 
-#: ../../src/wui/mapdata.cc:51 ../../src/wui/mapdata.cc:79
+#: ../../src/wui/mapdata.cc:51 ../../src/wui/mapdata.cc:80
 msgid "No Author"
 msgstr "Ingen upphovsman"
 
 #. * TRANSLATORS: Parent directory/folder
-#: ../../src/wui/mapdata.cc:175 ../../src/wui/savegametable.cc:126
+#: ../../src/wui/mapdata.cc:176 ../../src/wui/savegametable.cc:126
 msgid "parent"
 msgstr "ovanstående"
 
 #. * TRANSLATORS: This label is shown when a folder is empty
-#: ../../src/wui/mapdata.cc:181
+#: ../../src/wui/mapdata.cc:182
 msgid "empty"
 msgstr "tom"
 
@@ -9204,11 +9213,11 @@ msgid "The name of this map in your language: %s"
 msgstr "Namnet på denna karta på ditt språk: %s"
 
 #. * TRANSLATORS: Map hint header when selecting a map.
-#: ../../src/wui/mapdetails.cc:191
+#: ../../src/wui/mapdetails.cc:212
 msgid "Hint"
 msgstr "Tips"
 
-#: ../../src/wui/mapdetails.cc:217
+#: ../../src/wui/mapdetails.cc:238
 msgid "Game data error"
 msgstr "Speldatafel"
 
@@ -9929,7 +9938,7 @@ msgstr "Nästa uppdrag"
 msgid "Start the next mission now"
 msgstr "Påbörja nästa uppdrag nu"
 
-#: ../../src/wui/story_message_box.cc:109
+#: ../../src/wui/story_message_box.cc:110
 msgid "Continue playing this mission"
 msgstr "Fortsätt spela detta uppdrag"
 
