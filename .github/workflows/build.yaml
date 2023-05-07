@@ -324,7 +324,7 @@ jobs:
         path: ${{ github.workspace }}\Widelands-${{ github.sha }}-msvc-${{ matrix.config }}-${{ matrix.arch }}.exe
 
   windows:
-    # needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]  # NOCOM uncomment
+    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
     strategy:
       matrix:
         config: [Debug, Release]
