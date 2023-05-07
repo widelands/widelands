@@ -293,7 +293,8 @@ AddOnVersion MapsAddon::detect_min_wl_version(const DirectoryTree* start) const 
 		Widelands::Map map;
 		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(pair.second);
 		if (ml == nullptr) {
-			log_warn("%s: %s (%s) is not a valid map file!", get_internal_name().c_str(), pair.first.c_str(), pair.second.c_str());
+			log_warn("%s: %s (%s) is not a valid map file!", get_internal_name().c_str(),
+			         pair.first.c_str(), pair.second.c_str());
 			continue;
 		}
 

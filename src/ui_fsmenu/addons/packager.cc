@@ -566,8 +566,9 @@ bool AddOnsPackager::do_write_addon_to_disk(const std::string& addon) {
 		if (!min_wl_v.empty() && !max_wl_v.empty() && AddOns::is_newer_version(max_wl_v, min_wl_v)) {
 			main_menu_.show_messagebox(
 			   _("Invalid Version Requirement"),
-			   format(_("The minimum Widelands version ‘%1$s’ may not be newer than the maximum Widelands version ‘%2$s’. The add-on ‘%3$s’ will not be saved."),
-				      m->get_min_wl_version(), m->get_max_wl_version(), addon));
+			   format(_("The minimum Widelands version ‘%1$s’ may not be newer than the maximum "
+			            "Widelands version ‘%2$s’. The add-on ‘%3$s’ will not be saved."),
+			          m->get_min_wl_version(), m->get_max_wl_version(), addon));
 			return false;
 		}
 	} catch (...) {
@@ -581,20 +582,24 @@ bool AddOnsPackager::do_write_addon_to_disk(const std::string& addon) {
 	// Compare the version requirements of maps to the specified min version
 	if (m->get_category() == AddOns::AddOnCategory::kMaps) {
 		AddOns::AddOnVersion nominal_min = AddOns::string_to_version(m->get_min_wl_version());
-		AddOns::AddOnVersion actual_min = dynamic_cast<AddOns::MapsAddon*>(m)->detect_min_wl_version();
-		if (actual_min != AddOns::MapsAddon::kNoVersionRequirement && AddOns::is_newer_version(nominal_min, actual_min)) {
+		AddOns::AddOnVersion actual_min =
+		   dynamic_cast<AddOns::MapsAddon*>(m)->detect_min_wl_version();
+		if (actual_min != AddOns::MapsAddon::kNoVersionRequirement &&
+		    AddOns::is_newer_version(nominal_min, actual_min)) {
 			UI::WLMessageBox mbox(
 			   get_parent(), UI::WindowStyle::kFsMenu, _("Version Requirement"),
 			   nominal_min.empty() ?
-			   format(_("The add-on ‘%1$s’ does not specify a minimum Widelands version. "
-			            "None of the contained maps can be loaded with a Widelands version older than %2$s. "
-			            "The minimum version requirement will automatically be set accordingly."),
-			          addon, AddOns::version_to_string(actual_min))
-			   :
-			   format(_("The add-on ‘%1$s’ specifies a minimum Widelands version of %2$s. "
-			            "However, none of the contained maps can be loaded with a Widelands version older than %3$s. "
-			            "The version requirement will automatically be changed accordingly."),
-			          addon, AddOns::version_to_string(nominal_min), AddOns::version_to_string(actual_min)),
+               format(_("The add-on ‘%1$s’ does not specify a minimum Widelands version. "
+			               "None of the contained maps can be loaded with a Widelands version older "
+			               "than %2$s. "
+			               "The minimum version requirement will automatically be set accordingly."),
+			             addon, AddOns::version_to_string(actual_min)) :
+               format(_("The add-on ‘%1$s’ specifies a minimum Widelands version of %2$s. "
+			               "However, none of the contained maps can be loaded with a Widelands "
+			               "version older than %3$s. "
+			               "The version requirement will automatically be changed accordingly."),
+			             addon, AddOns::version_to_string(nominal_min),
+			             AddOns::version_to_string(actual_min)),
 			   UI::WLMessageBox::MBoxType::kOkCancel);
 			if (mbox.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 				return false;

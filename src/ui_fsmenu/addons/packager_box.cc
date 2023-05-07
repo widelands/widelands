@@ -283,7 +283,9 @@ void MapsAddOnsPackagerBox::load_addon(AddOns::MutableAddOn* a) {
 			                    .as_font_tag(std::to_string(entry.first.nrplayers))),
 			          format(_("Minimum Widelands Version: %s"),
 			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(entry.first.minimum_required_widelands_version.empty() ? _("(none)") : entry.first.minimum_required_widelands_version)),
+			                    .as_font_tag(entry.first.minimum_required_widelands_version.empty() ?
+                                             _("(none)") :
+                                             entry.first.minimum_required_widelands_version)),
 			          format(_("Description: %s"),
 			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 			                    .as_font_tag(entry.first.description))));
