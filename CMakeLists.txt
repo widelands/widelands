@@ -373,7 +373,7 @@ else()
     wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wlogical-op")
     wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wsync-nand")
     wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wtrampolines")
-  endif
+  endif()
 endif()
 
 if(NOT MSVC)
