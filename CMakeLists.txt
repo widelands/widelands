@@ -354,7 +354,6 @@ else()
     "-Wformat-y2k"
     "-Winit-self"
     "-Winvalid-pch"
-    "-Wlogical-op"
     "-Wmissing-include-dirs"
     "-Wno-undef"
     "-Wold-style-cast"
@@ -362,8 +361,6 @@ else()
     "-Wpacked"
     "-Wpointer-arith"
     "-Wsign-promo"
-    "-Wsync-nand"
-    "-Wtrampolines"
     "-Wundef"
     "-Wunused"
     "-Wunused-macros"
@@ -372,6 +369,11 @@ else()
   foreach(flag IN LISTS warn_flags)
     wl_add_flag(WL_COMPILE_DIAGNOSTICS ${flag})
   endforeach()
+  if (NOT APPLE)
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wlogical-op")
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wsync-nand")
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wtrampolines")
+  endif
 endif()
 
 if(NOT MSVC)
