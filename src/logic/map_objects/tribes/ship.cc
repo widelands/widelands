@@ -1094,7 +1094,8 @@ void Ship::battle_update(Game& game) {
 	               target_ship](Battle::Phase next) {
 		assert(target_ship != nullptr);
 		if (target_ship->hitpoints_ > current_battle.pending_damage) {
-			molog(game.get_gametime(), "[battle] Subtracting %u hitpoints from enemy", current_battle.pending_damage);
+			molog(game.get_gametime(), "[battle] Subtracting %u hitpoints from enemy",
+			      current_battle.pending_damage);
 			target_ship->hitpoints_ -= current_battle.pending_damage;
 			set_phase(next);
 		} else {
@@ -1121,7 +1122,8 @@ void Ship::battle_update(Game& game) {
 			molog(game.get_gametime(), "[battle] Defender's turn ends");
 			bool won = damage(Battle::Phase::kAttackersTurn);
 			// Make sure we will idle until the enemy ship is truly gone, so we won't attack again
-			start_task_idle(game, descr().main_animation(), won ? (kSinkAnimationDuration + 1000) : 100);
+			start_task_idle(
+			   game, descr().main_animation(), won ? (kSinkAnimationDuration + 1000) : 100);
 			return;
 		}
 
@@ -1311,9 +1313,9 @@ void Ship::battle_update(Game& game) {
 				// Let the best candidate launch an attack against us. This
 				// suspends the current battle until the new fight is over.
 				Ship& nearest_ship = dynamic_cast<Ship&>(*nearest);
-				molog(game.get_gametime(), "[battle] Summoning %s to the port's defense", nearest_ship.get_shipname().c_str());
-				nearest_ship.start_battle(
-				   game, Battle(this, Coords::null(), {}, true));
+				molog(game.get_gametime(), "[battle] Summoning %s to the port's defense",
+				      nearest_ship.get_shipname().c_str());
+				nearest_ship.start_battle(game, Battle(this, Coords::null(), {}, true));
 			}
 
 			// Since ports can't defend themselves on their own, start the next round at once.
