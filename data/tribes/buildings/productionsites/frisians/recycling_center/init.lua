@@ -74,6 +74,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- time total: 87 + 59 + 87 + 87 + 87 + 59 = 466 sec
             "call=smelt_iron",
             "call=make_fur",
             "call=smelt_iron",
@@ -86,9 +87,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start recycling fur because ...
          descname = pgettext("frisians_building", "recycling fur"),
          actions = {
+            -- time: 40.4 + 15 + 3.6 = 59 sec
             "return=skipped unless site has fur_garment_old",
             "consume=fur_garment_old",
-            "sleep=duration:40s",
+            "sleep=duration:40s400ms",
             "animate=working_fur duration:15s",
             "produce=fur"
          }
@@ -97,9 +99,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start recycling iron because ...
          descname = pgettext("frisians_building", "recycling iron"),
          actions = {
+            -- time: 39.8 + 40 + 2 * 3.6 = 87 sec
             "return=skipped unless economy needs iron or not economy needs coal", -- if the economy doesn't need coal the situation gets even improved because recycling saves coal
             "consume=scrap_iron:2 coal",
-            "sleep=duration:40s",
+            "sleep=duration:39s800ms",
             "animate=working_metal duration:40s",
             "produce=iron:2"
          }
@@ -108,9 +111,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start recycling iron and gold because ...
          descname = pgettext("frisians_building", "recycling iron and gold"),
          actions = {
+            -- time: 39.8 + 40 + 2 * 3.6 = 87 sec
             "return=skipped unless economy needs iron or economy needs gold or not economy needs coal", -- if the economy doesn't need coal the situation gets even improved because recycling saves coal
             "consume=scrap_metal_mixed:2 coal",
-            "sleep=duration:40s",
+            "sleep=duration:39s800ms",
             "animate=working_metal duration:40s",
             "produce=iron gold"
          }

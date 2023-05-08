@@ -82,7 +82,7 @@ wl.Descriptions():new_productionsite_type {
          descname = _("mining coal"),
          actions = {
             -- "return=skipped" causes 10 sec delay
-            -- time total: 34.8 + 2 * (15 + 3.6) + 10 = 82
+            -- time total: 34.8 + 2 * (15 + 3.6) + 10 = 82 sec
             "return=skipped unless economy needs coal",
             "consume=ration",
             "sleep=duration:34s800ms",

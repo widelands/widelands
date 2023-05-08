@@ -81,6 +81,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- time total: either 55.5 sec or 74 sec
             "call=produce_malus",
             "call=produce_bonus",
          },
@@ -89,11 +90,11 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
          descname = _("preparing only one ration"),
          actions = {
-            -- time total: 49.5
+            -- time: 7.4 + 34.5 + 10 + 3.6 = 55.5 sec
             "return=skipped unless economy needs ration",
             "return=skipped when site has fruit,bread_frisians and site has smoked_fish,smoked_meat",
             "consume=fruit,bread_frisians,smoked_fish,smoked_meat",
-            "sleep=duration:5s",
+            "sleep=duration:7s400ms",
             "animate=working duration:34s500ms",
             "sleep=duration:10s",
             "produce=ration"
@@ -103,10 +104,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing rations because ...
          descname = _("preparing rations"),
          actions = {
-            -- time total: 66
+            -- time: 5.8 + 51 + 10 + 2 * 3.6 = 74 sec
             "return=skipped unless economy needs ration",
             "consume=fruit,bread_frisians smoked_fish,smoked_meat",
-            "sleep=duration:5s",
+            "sleep=duration:5s800ms",
             "animate=working duration:51s",
             "sleep=duration:10s",
             "produce=ration:2"
