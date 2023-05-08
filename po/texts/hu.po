@@ -13,10 +13,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-10 03:09+0000\n"
+"POT-Creation-Date: 2023-05-01 02:42+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2023\n"
-"Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
+"Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -56,7 +56,7 @@ msgstr "Copyright 2002 - %1%, Widelands fejlesztőcsapat."
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
-msgstr "Ez a játék szabad és nyílt forrású, rá a GNU General Public License (GPL) V2.0 vonatkozik."
+msgstr "Ez a játék szabad és nyílt forrású, a GNU General Public License (GPL) V2.0 feltételei szerint terjeszthető."
 
 #: ../../data/txts/LICENSE.lua:18
 #, lua-format
@@ -378,12 +378,11 @@ msgstr "Visszajátszások"
 
 #: ../../data/txts/help/common_helptexts.lua:30
 msgid ""
-"Widelands records every game you play in two files. One of these files has a"
-" .wrpl.wgf extension and contains an initial savegame. The other file has a "
-".wrpl extension and contains all commands that were issued by all players, "
-"such as building a road or attacking an enemy. The rest of the filenames "
+"Widelands records every game you play in a replay file with .wry extension. "
+"This file contains an initial savegame and all commands that were issued by "
+"all players, such as building a road or attacking an enemy. The filename "
 "will tell you the time you started the game."
-msgstr "A Widelands rögzíti minden játékodat, játékonként két fájlban. Ezek egyike\n.wrpl.wgf kiterjesztésű, és egy kezdeti játékmentést tartalmaz. A másik fájl\n.wrpl kiterjesztésű, és a játékosok által kiadott parancsokat tartalmazza, mint\npéldául egy út építése vagy egy ellenség megtámadása. A fájlnév maradék\nrészében a játék elkezdésének időpontja olvasható."
+msgstr "A Widelands rögzíti minden játékodat egy .wry kiterjesztésű fájlban. Ez egy kezdeti játékmentést és a játékosok által kiadott parancsokat tartalmazza, mint például egy út építése vagy egy ellenség megtámadása. A fájlnévben megtalálható a játék elkezdésének időpontja."
 
 #: ../../data/txts/help/common_helptexts.lua:31
 msgid ""
@@ -411,25 +410,9 @@ msgctxt "hotkey"
 msgid "%s:"
 msgstr "%s:"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
 #: ../../data/txts/help/common_helptexts.lua:48
-msgid "Toggle building spaces"
-msgstr "Beépíthető helyek megjelenítése/elrejtése"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
 #: ../../data/txts/help/common_helptexts.lua:57
-msgid "Toggle fullscreen (if supported by the OS)"
-msgstr "Teljes képernyős mód (ha támogatja a számítógéped)"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'm'
-#: ../../data/txts/help/common_helptexts.lua:66
-msgid "Toggle minimap"
-msgstr "Kistérkép ki-/bekapcsolása"
-
-#: ../../data/txts/help/common_helptexts.lua:75
-#: ../../data/txts/help/common_helptexts.lua:84
-#: ../../data/txts/help/common_helptexts.lua:93
+#: ../../data/txts/help/common_helptexts.lua:67
 msgid "%1% / %2%"
 msgstr "%1% / %2%"
 
@@ -651,8 +634,8 @@ msgstr "A Shift gomb nyomva tartásával az első alternatív eszköz kapcsol be
 
 #: ../../data/txts/tips/editor.lua:24
 msgid ""
-"Holding down Alt switches the second alternative tool on (if it exists)."
-msgstr "Az Alt nyomva tartásával válthatsz a második alternatív eszközre (ha létezik)."
+"Holding down Ctrl switches the second alternative tool on (if it exists)."
+msgstr "A Ctrl billentyű nyomva tartásával válthatsz a második alternatív eszközre (ha létezik)."
 
 #: ../../data/txts/tips/editor.lua:28
 msgid ""
@@ -850,6 +833,14 @@ msgid "Shift + Arrow keys"
 msgstr "Shift + kurzor"
 
 #: ../../data/txts/tips/general_game.lua:102
+msgid ""
+"If you play on a laptop with a touchpad, you can assign functionality to "
+"touchpad scrolling in the ‘Options’ → ‘Edit keyboard and mouse actions’ "
+"menu. For example, moving the map view can be much more comfortable by "
+"scrolling instead of dragging with the right mouse button."
+msgstr "Ha érintőpados laptopon játszol, az érintőpados görgetést is használhatod egyes funkciókhoz, ha beállítod a „Beállítások” → „Billentyű- és egér-hozzárendelések szerkesztése” menüben. Pl. a térkép mozgatása sokkal kényelmesebb így érintőpadon mint a jobb gombos mozgatással."
+
+#: ../../data/txts/tips/general_game.lua:106
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"

@@ -102,6 +102,7 @@ private:
 	void select_until(uint32_t end) const;
 	uint32_t next_char(uint32_t cursor) const;
 	uint32_t prev_char(uint32_t cursor) const;
+	std::pair<uint32_t, uint32_t> word_boundary(uint32_t cursor, bool require_non_blank) const;
 	void calculate_selection_boundaries(uint32_t& start, uint32_t& end) const;
 	void delete_selected_text();
 	void copy_selected_text();
@@ -116,6 +117,8 @@ private:
 	ScopedTimer cursor_movement_timer_;
 	uint32_t cursor_ms_;
 	bool cursor_movement_active_ = false;
+	uint32_t multiclick_timer_{0U};
+	uint32_t multiclick_counter_{0U};
 };
 }  // namespace UI
 

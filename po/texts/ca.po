@@ -3,16 +3,16 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
-# Juanjo, 2015-2022
+# Juanjo, 2015-2023
 # Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-10 03:09+0000\n"
+"POT-Creation-Date: 2023-05-01 02:42+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Juanjo, 2015-2022\n"
-"Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
+"Last-Translator: Juanjo, 2015-2023\n"
+"Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -374,12 +374,11 @@ msgstr "Repeticions"
 
 #: ../../data/txts/help/common_helptexts.lua:30
 msgid ""
-"Widelands records every game you play in two files. One of these files has a"
-" .wrpl.wgf extension and contains an initial savegame. The other file has a "
-".wrpl extension and contains all commands that were issued by all players, "
-"such as building a road or attacking an enemy. The rest of the filenames "
+"Widelands records every game you play in a replay file with .wry extension. "
+"This file contains an initial savegame and all commands that were issued by "
+"all players, such as building a road or attacking an enemy. The filename "
 "will tell you the time you started the game."
-msgstr "El Widelands grava totes les partides que jugueu en dos fitxers. El que té extensió .wrpl.wgf conté les dades inicials de la partida i el que té extensió .wrpl conté totes les ordres executades pels jugadors, com ara construcció de camins i edificis o atacs a l’enemic. La resta del nom dels fitxers us pot ajudar a saber quan es va començar la partida."
+msgstr "El Widelands grava totes les partides que jugueu en una repetició amb l'extensió .wry. El fitxer conté una desada inicial i totes les ordres que han executat els jugadors, com ara construccions de camins o atacs a enemics. El nom del fitxer us dirà quan vau començar la partida."
 
 #: ../../data/txts/help/common_helptexts.lua:31
 msgid ""
@@ -407,25 +406,9 @@ msgctxt "hotkey"
 msgid "%s:"
 msgstr "%s:"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
 #: ../../data/txts/help/common_helptexts.lua:48
-msgid "Toggle building spaces"
-msgstr "Commuta entre mostrar o ocultar els espais de construcció"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
 #: ../../data/txts/help/common_helptexts.lua:57
-msgid "Toggle fullscreen (if supported by the OS)"
-msgstr "Commuta el mode pantalla completa (si el sistema operatiu ho permet)"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'm'
-#: ../../data/txts/help/common_helptexts.lua:66
-msgid "Toggle minimap"
-msgstr "Commuta la finestra del minimapa"
-
-#: ../../data/txts/help/common_helptexts.lua:75
-#: ../../data/txts/help/common_helptexts.lua:84
-#: ../../data/txts/help/common_helptexts.lua:93
+#: ../../data/txts/help/common_helptexts.lua:67
 msgid "%1% / %2%"
 msgstr "%1% / %2%"
 
@@ -647,8 +630,8 @@ msgstr "Mantenint premuda la tecla Maj, s’executarà la funció alternativa. A
 
 #: ../../data/txts/tips/editor.lua:24
 msgid ""
-"Holding down Alt switches the second alternative tool on (if it exists)."
-msgstr "Mantenint premuda la tecla «Alt», s’executarà la segona funció alternativa (si està definida)."
+"Holding down Ctrl switches the second alternative tool on (if it exists)."
+msgstr "Mantenint premuda la tecla «Ctrl», s’executarà la segona funció alternativa (si està definida)."
 
 #: ../../data/txts/tips/editor.lua:28
 msgid ""
@@ -846,6 +829,14 @@ msgid "Shift + Arrow keys"
 msgstr "Maj+Tecles de cursor"
 
 #: ../../data/txts/tips/general_game.lua:102
+msgid ""
+"If you play on a laptop with a touchpad, you can assign functionality to "
+"touchpad scrolling in the ‘Options’ → ‘Edit keyboard and mouse actions’ "
+"menu. For example, moving the map view can be much more comfortable by "
+"scrolling instead of dragging with the right mouse button."
+msgstr "Si jugueu amb un portàtil amb ratolí tàctil, podeu assignar-li funcions amb el menú «Opcions → Edita les accions de teclat i ratolí». Per exemple, per a moure la vista del mapa pot ser més còmode amb un desplaçament en lloc de fer servir el botó dret del ratolí."
+
+#: ../../data/txts/tips/general_game.lua:106
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"

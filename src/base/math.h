@@ -19,6 +19,7 @@
 #ifndef WL_BASE_MATH_H
 #define WL_BASE_MATH_H
 
+#include <cstdint>
 #include <string>
 
 namespace math {

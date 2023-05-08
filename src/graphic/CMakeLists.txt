@@ -192,6 +192,7 @@ wl_library(graphic_minimap_renderer
   SRCS
     minimap_renderer.cc
     minimap_renderer.h
+  USES_SDL2
   DEPENDS
     base_geometry
     economy
