@@ -12,6 +12,7 @@
 # C138, 2021
 # Atanase Albaran, 2021
 # Renaud Bouchard, 2022
+# C Jimmy, 2023
 # 
 msgid ""
 msgstr ""
@@ -19,8 +20,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Renaud Bouchard, 2022\n"
-"Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
+"Last-Translator: C Jimmy, 2023\n"
+"Language-Team: French (https://app.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -158,6 +159,9 @@ msgid ""
 "Now build a sheep farm and turn all the wheat into at least 50 bales of "
 "wool. Afterwards use the wool to weave cloth in order to build a ship."
 msgstr ""
+"Construisez une bergerie et transformez tout le blé en au moins 50 balles de"
+" laine. Utilisez ensuite la laine pour tisser de la toile afin de construire"
+" un navire."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:118
 msgid "Build 2 ports on distant islands"
@@ -174,6 +178,8 @@ msgid ""
 "Explore the island in the south. Send an expedition from our port to build a"
 " port there. Afterwards, try to find some mining resources."
 msgstr ""
+"Explorez l'île au sud. Envoyez une expédition de notre port pour y "
+"construire un port. Ensuite, essayez de trouver des ressources minières."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid ""

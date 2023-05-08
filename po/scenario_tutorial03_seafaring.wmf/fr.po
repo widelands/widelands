@@ -10,7 +10,7 @@
 # Jaypad <ju-ju@nataju.fr>, 2015
 # Julien Schneider <schneider.julien@gmail.com>, 2020
 # nicolas jardin <niko472006@sfr.fr>, 2016
-# Renaud Bouchard, 2019-2021
+# Renaud Bouchard, 2019-2021,2023
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020
 msgid ""
 msgstr ""
@@ -18,8 +18,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
-"Last-Translator: Renaud Bouchard, 2019-2021\n"
-"Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
+"Last-Translator: Renaud Bouchard, 2019-2021,2023\n"
+"Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -566,7 +566,7 @@ msgid ""
 "Ferries are built in ferry yards, one rowboat costs two logs and one piece "
 "of cloth and is quickly constructed. A ferry yard is a medium-sized building"
 " that needs to be built close to the shore."
-msgstr ""
+msgstr "Les ferries sont construit dans un chantier de ferries, une chaloupe coûte deux troncs, une pièce de tissue et est vite construite. Un chantier de construction de ferries est un bâtiment de taille moyenne qui nécessite d'être près de la côte."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:262
 msgid "Let’s build a ferry yard close to the shore before we will continue."

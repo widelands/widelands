@@ -57,6 +57,8 @@ struct EditBoxImpl {
 	     align(UI::g_fh->fontset()->is_rtl() ? UI::Align::kRight : UI::Align::kLeft) {
 	}
 
+	void erase_bytes(uint32_t start, uint32_t end);
+
 	const UI::PanelStyle style;
 
 	/// Background color and texture
@@ -98,6 +100,20 @@ struct EditBoxImpl {
 	/// Alignment of the text. Vertical alignment is always centered.
 	Align align;
 };
+
+void EditBoxImpl::erase_bytes(uint32_t start, uint32_t end) {
+	assert(start <= end);
+	assert(end <= text.size());
+
+	uint32_t nbytes = end - start;
+	text.erase(start, nbytes);
+
+	if (caret >= end) {
+		caret -= nbytes;
+	} else if (caret > start) {
+		caret = start;
+	}
+}
 
 EditBox::EditBox(Panel* const parent, int32_t x, int32_t y, uint32_t w, UI::PanelStyle style)
    : Panel(parent,
@@ -187,8 +203,31 @@ void EditBox::set_font_scale(float scale) {
  */
 bool EditBox::handle_mousepress(const uint8_t btn, int32_t x, int32_t /*y*/) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
-		reset_selection();
+		const uint32_t time = SDL_GetTicks();
+		const bool is_multiclick = (time - multiclick_timer_) < DOUBLE_CLICK_INTERVAL;
+		multiclick_timer_ = time;
+
 		set_caret_to_cursor_pos(x);
+
+		if (is_multiclick) {
+			++multiclick_counter_;
+			m_->mode = EditBoxImpl::Mode::kSelection;
+
+			if ((multiclick_counter_ % 2) != 0) {  // Select current word
+				std::pair<uint32_t, uint32_t> boundaries = word_boundary(m_->caret, false);
+				m_->selection_start = boundaries.first;
+				m_->selection_end = boundaries.second;
+			} else {  // Select entire line
+				m_->selection_start = 0;
+				m_->selection_end = m_->text.size();
+			}
+
+			update_primary_selection_buffer();
+		} else {
+			multiclick_counter_ = 0;
+			reset_selection();
+		}
+
 		focus();
 		clicked();
 		return true;
@@ -368,13 +407,16 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			}
 
 			if (m_->caret < m_->text.size()) {
-				while ((m_->text[++m_->caret] & 0xc0) == 0x80) {
+				if ((code.mod & KMOD_CTRL) != 0) {
+					m_->erase_bytes(m_->caret, word_boundary(m_->caret, true).second);
+				} else {
+					m_->erase_bytes(m_->caret, next_char(m_->caret));
 				}
-				// Now fallthrough to handle it like Backspace
-			} else {
-				return true;
+				check_caret();
+				reset_selection();
+				changed();
 			}
-			FALLS_THROUGH;
+			return true;
 		case SDLK_BACKSPACE:
 			if (m_->mode == EditBoxImpl::Mode::kSelection) {
 				delete_selected_text();
@@ -383,10 +425,11 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 				return true;
 			}
 			if (m_->caret > 0) {
-				while ((m_->text[--m_->caret] & 0xc0) == 0x80) {
-					m_->text.erase(m_->text.begin() + m_->caret);
+				if ((code.mod & KMOD_CTRL) != 0) {
+					m_->erase_bytes(word_boundary(m_->caret, true).first, m_->caret);
+				} else {
+					m_->erase_bytes(prev_char(m_->caret), m_->caret);
 				}
-				m_->text.erase(m_->text.begin() + m_->caret);
 				check_caret();
 				reset_selection();
 				changed();
@@ -396,7 +439,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_LEFT:
 			if (m_->caret > 0) {
 				enter_cursor_movement_mode();
-				if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL)) != 0) {
+				if ((code.mod & KMOD_CTRL) != 0) {
 					uint32_t newpos = prev_char(m_->caret);
 					while (newpos > 0 && (isspace(m_->text[newpos]) != 0)) {
 						newpos = prev_char(newpos);
@@ -430,7 +473,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_RIGHT:
 			if (m_->caret < m_->text.size()) {
 				enter_cursor_movement_mode();
-				if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL)) != 0) {
+				if ((code.mod & KMOD_CTRL) != 0) {
 					uint32_t newpos = next_char(m_->caret);
 					while (newpos < m_->text.size() && (isspace(m_->text[newpos]) != 0)) {
 						newpos = next_char(newpos);
@@ -787,6 +830,41 @@ uint32_t EditBox::prev_char(uint32_t cursor) const {
 	} while (cursor > 0 && Utf8::is_utf8_extended(m_->text[cursor]));
 
 	return cursor;
+}
+
+std::pair<uint32_t, uint32_t> EditBox::word_boundary(uint32_t cursor,
+                                                     bool require_non_blank) const {
+	uint32_t start = snap_to_char(cursor);
+	uint32_t end = start;
+
+	bool found_non_blank = false;
+	while (start > 0) {
+		uint32_t newpos = prev_char(start);
+		if (isspace(m_->text[newpos]) != 0) {
+			if (!require_non_blank || found_non_blank) {
+				break;
+			}
+		} else {
+			found_non_blank = true;
+		}
+
+		start = newpos;
+	}
+
+	found_non_blank = false;
+	while (end < m_->text.size()) {
+		if (isspace(m_->text[end]) != 0) {
+			if (!require_non_blank || found_non_blank) {
+				break;
+			}
+		} else {
+			found_non_blank = true;
+		}
+
+		end = next_char(end);
+	}
+
+	return {start, end};
 }
 
 /**
