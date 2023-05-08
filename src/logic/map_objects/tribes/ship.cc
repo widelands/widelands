@@ -1150,7 +1150,8 @@ void Ship::battle_update(Game& game) {
 		    (!exact_match_required && map.calc_distance(get_position(), dest) < 2)) {
 			// Already there, start the fight in the next act.
 			// For ports, skip the first round to allow defense warships to approach.
-			set_phase(target_ship != nullptr ? Battle::Phase::kAttackersTurn : Battle::Phase::kAttackerAttacking);
+			set_phase(target_ship != nullptr ? Battle::Phase::kAttackersTurn :
+                                            Battle::Phase::kAttackerAttacking);
 			return start_task_idle(game, descr().main_animation(), 100);
 		}
 
