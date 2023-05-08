@@ -88,10 +88,7 @@ template <typename Number> struct NumberNodeT : FormatNode {
 
 		// Right aligned, padding with spaces
 		if ((flags_ & (kPadWith0 | kLeftAlign)) == 0) {
-			for (; padding > 0; --padding) {
-				*out = ' ';
-				++out;
-			}
+			out = pad_with_space(out, padding, localize);
 		}
 
 		if (is_negative) {
@@ -105,19 +102,14 @@ template <typename Number> struct NumberNodeT : FormatNode {
 			out += 2;
 		}
 
-		if (flags_ & kPadWith0) {
-			for (; padding > 0; --padding) {
-				*out = '0';
-				++out;
-			}
+		if ((flags_ & kPadWith0) != 0) {
+			out = pad_with_char(out, padding, '0');
 		}
 
 		out = write_digits(out, arg, nr_digits, hexadecimal_, uppercase_);
 
-		// No need to check for left aligned: Other cases already zeroed the padding.
-		for (; padding > 0; --padding) {
-			*out = ' ';
-			++out;
+		if ((flags_ & kLeftAlign) != 0) {
+			out = pad_with_space(out, padding, localize);
 		}
 
 		return out;

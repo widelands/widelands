@@ -62,11 +62,15 @@ private:
 	void scrollpos_changed(int32_t);
 	void delete_selected_text() const;
 	void copy_selected_text() const;
+	void update_primary_selection_buffer() const;
 	struct Data;
 	std::unique_ptr<Data> d_;
 	void set_caret_to_cursor_pos(int32_t x, int32_t y);
 	int calculate_text_width(std::string& text, int pos) const;
 	int approximate_cursor(std::string& line, int32_t cursor_pos_x, int approx_caret_pos) const;
+
+	uint32_t multiclick_timer_{0U};
+	uint32_t multiclick_counter_{0U};
 };
 }  // namespace UI
 

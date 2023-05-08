@@ -57,6 +57,8 @@ struct EditBoxImpl {
 	     align(UI::g_fh->fontset()->is_rtl() ? UI::Align::kRight : UI::Align::kLeft) {
 	}
 
+	void erase_bytes(uint32_t start, uint32_t end);
+
 	const UI::PanelStyle style;
 
 	/// Background color and texture
@@ -98,6 +100,20 @@ struct EditBoxImpl {
 	/// Alignment of the text. Vertical alignment is always centered.
 	Align align;
 };
+
+void EditBoxImpl::erase_bytes(uint32_t start, uint32_t end) {
+	assert(start <= end);
+	assert(end <= text.size());
+
+	uint32_t nbytes = end - start;
+	text.erase(start, nbytes);
+
+	if (caret >= end) {
+		caret -= nbytes;
+	} else if (caret > start) {
+		caret = start;
+	}
+}
 
 EditBox::EditBox(Panel* const parent, int32_t x, int32_t y, uint32_t w, UI::PanelStyle style)
    : Panel(parent,
@@ -187,12 +203,76 @@ void EditBox::set_font_scale(float scale) {
  */
 bool EditBox::handle_mousepress(const uint8_t btn, int32_t x, int32_t /*y*/) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
-		reset_selection();
+		const uint32_t time = SDL_GetTicks();
+		const bool is_multiclick = (time - multiclick_timer_) < DOUBLE_CLICK_INTERVAL;
+		multiclick_timer_ = time;
+
 		set_caret_to_cursor_pos(x);
+
+		if (is_multiclick) {
+			++multiclick_counter_;
+			m_->mode = EditBoxImpl::Mode::kSelection;
+
+			if ((multiclick_counter_ % 2) != 0) {  // Select current word
+				std::pair<uint32_t, uint32_t> boundaries = word_boundary(m_->caret, false);
+				m_->selection_start = boundaries.first;
+				m_->selection_end = boundaries.second;
+			} else {  // Select entire line
+				m_->selection_start = 0;
+				m_->selection_end = m_->text.size();
+			}
+
+			update_primary_selection_buffer();
+		} else {
+			multiclick_counter_ = 0;
+			reset_selection();
+		}
+
 		focus();
 		clicked();
 		return true;
 	}
+#if HAS_PRIMARY_SELECTION_BUFFER
+	else if (btn == SDL_BUTTON_MIDDLE) {
+		/* Primary buffer is inserted without affecting cursor position, selection, and focus. */
+		const uint32_t old_caret_pos = m_->caret;
+		const uint32_t old_selection_start = m_->selection_start;
+		const uint32_t old_selection_end = m_->selection_end;
+		const EditBoxImpl::Mode old_mode = m_->mode;
+
+		reset_selection();
+		set_caret_to_cursor_pos(x);
+		const uint32_t new_caret_pos = m_->caret;
+
+		std::string text_to_insert = SDL_GetPrimarySelectionText();
+
+		if (old_mode == EditBoxImpl::Mode::kSelection &&
+		    ((old_selection_start <= new_caret_pos && new_caret_pos <= old_selection_end) ||
+		     (old_selection_end <= new_caret_pos && new_caret_pos <= old_selection_start))) {
+			text_to_insert.clear();  // Can't paste into the active selection.
+		} else {
+			std::string old_text = m_->text;
+			handle_textinput(text_to_insert);
+			if (old_text == m_->text) {
+				text_to_insert.clear();  // Text wasn't pasted, perhaps too long.
+			}
+		}
+
+		m_->mode = old_mode;
+		m_->caret = old_caret_pos;
+		m_->selection_start = old_selection_start;
+		m_->selection_end = old_selection_end;
+		if (new_caret_pos <= old_caret_pos) {
+			const uint32_t delta = text_to_insert.size();
+			m_->caret += delta;
+			m_->selection_start += delta;
+			m_->selection_end += delta;
+		}
+
+		changed();
+		return true;
+	}
+#endif
 
 	return false;
 }
@@ -288,6 +368,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			m_->selection_start = 0;
 			m_->selection_end = m_->text.size();
 			m_->mode = EditBoxImpl::Mode::kSelection;
+			update_primary_selection_buffer();
 			return true;
 		}
 
@@ -326,13 +407,16 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			}
 
 			if (m_->caret < m_->text.size()) {
-				while ((m_->text[++m_->caret] & 0xc0) == 0x80) {
+				if ((code.mod & KMOD_CTRL) != 0) {
+					m_->erase_bytes(m_->caret, word_boundary(m_->caret, true).second);
+				} else {
+					m_->erase_bytes(m_->caret, next_char(m_->caret));
 				}
-				// Now fallthrough to handle it like Backspace
-			} else {
-				return true;
+				check_caret();
+				reset_selection();
+				changed();
 			}
-			FALLS_THROUGH;
+			return true;
 		case SDLK_BACKSPACE:
 			if (m_->mode == EditBoxImpl::Mode::kSelection) {
 				delete_selected_text();
@@ -341,10 +425,11 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 				return true;
 			}
 			if (m_->caret > 0) {
-				while ((m_->text[--m_->caret] & 0xc0) == 0x80) {
-					m_->text.erase(m_->text.begin() + m_->caret);
+				if ((code.mod & KMOD_CTRL) != 0) {
+					m_->erase_bytes(word_boundary(m_->caret, true).first, m_->caret);
+				} else {
+					m_->erase_bytes(prev_char(m_->caret), m_->caret);
 				}
-				m_->text.erase(m_->text.begin() + m_->caret);
 				check_caret();
 				reset_selection();
 				changed();
@@ -354,7 +439,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_LEFT:
 			if (m_->caret > 0) {
 				enter_cursor_movement_mode();
-				if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL)) != 0) {
+				if ((code.mod & KMOD_CTRL) != 0) {
 					uint32_t newpos = prev_char(m_->caret);
 					while (newpos > 0 && (isspace(m_->text[newpos]) != 0)) {
 						newpos = prev_char(newpos);
@@ -388,7 +473,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_RIGHT:
 			if (m_->caret < m_->text.size()) {
 				enter_cursor_movement_mode();
-				if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL)) != 0) {
+				if ((code.mod & KMOD_CTRL) != 0) {
 					uint32_t newpos = next_char(m_->caret);
 					while (newpos < m_->text.size() && (isspace(m_->text[newpos]) != 0)) {
 						newpos = next_char(newpos);
@@ -490,6 +575,17 @@ void EditBox::copy_selected_text() {
 	auto nr_characters = end - start;
 	std::string selected_text = m_->text.substr(start, nr_characters);
 	SDL_SetClipboardText(selected_text.c_str());
+}
+void EditBox::update_primary_selection_buffer() const {
+#if HAS_PRIMARY_SELECTION_BUFFER
+	uint32_t start;
+	uint32_t end;
+	calculate_selection_boundaries(start, end);
+
+	auto nr_characters = end - start;
+	std::string selected_text = m_->text.substr(start, nr_characters);
+	SDL_SetPrimarySelectionText(selected_text.c_str());
+#endif
 }
 
 bool EditBox::handle_textinput(const std::string& input_text) {
@@ -736,6 +832,41 @@ uint32_t EditBox::prev_char(uint32_t cursor) const {
 	return cursor;
 }
 
+std::pair<uint32_t, uint32_t> EditBox::word_boundary(uint32_t cursor,
+                                                     bool require_non_blank) const {
+	uint32_t start = snap_to_char(cursor);
+	uint32_t end = start;
+
+	bool found_non_blank = false;
+	while (start > 0) {
+		uint32_t newpos = prev_char(start);
+		if (isspace(m_->text[newpos]) != 0) {
+			if (!require_non_blank || found_non_blank) {
+				break;
+			}
+		} else {
+			found_non_blank = true;
+		}
+
+		start = newpos;
+	}
+
+	found_non_blank = false;
+	while (end < m_->text.size()) {
+		if (isspace(m_->text[end]) != 0) {
+			if (!require_non_blank || found_non_blank) {
+				break;
+			}
+		} else {
+			found_non_blank = true;
+		}
+
+		end = next_char(end);
+	}
+
+	return {start, end};
+}
+
 /**
  * Selects text from @p cursor until @p end
  */
@@ -745,9 +876,10 @@ void EditBox::select_until(uint32_t end) const {
 		m_->mode = EditBoxImpl::Mode::kSelection;
 	}
 	m_->selection_end = end;
+	update_primary_selection_buffer();
 }
 
-void EditBox::calculate_selection_boundaries(uint32_t& start, uint32_t& end) {
+void EditBox::calculate_selection_boundaries(uint32_t& start, uint32_t& end) const {
 	start = snap_to_char(std::min(m_->selection_start, m_->selection_end));
 	end = std::max(m_->selection_start, m_->selection_end);
 	end = Utf8::is_utf8_extended(m_->text[end]) ? next_char(end) : snap_to_char(end);

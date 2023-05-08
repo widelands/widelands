@@ -27,7 +27,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 30,
+	NETWORK_PROTOCOL_VERSION = 31,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -435,20 +435,12 @@ enum : uint8_t {
 	NETCMD_SYSTEM_MESSAGE_CODE = 32,
 
 	/**
-	 * Sent by the host to toggle peaceful mode.
+	 * Sent by the host to set game flags.
 	 *
 	 * Attached data is:
-	 * \li uint8_t: 1 if peaceful mode is enabled, 0 otherwise
+	 * \li uint16_t: Bitset of all enabled game flags.
 	 */
-	NETCMD_PEACEFUL_MODE = 33,
-
-	/**
-	 * Sent by the host to toggle custom_starting_positions mode.
-	 *
-	 * Attached data is:
-	 * \li uint8_t: 1 if custom_starting_positions mode is enabled, 0 otherwise
-	 */
-	NETCMD_CUSTOM_STARTING_POSITIONS = 34,
+	NETCMD_GAMEFLAGS = 33,
 
 	/**
 	 * During game setup, this is sent by the client to indicate that the
@@ -468,14 +460,6 @@ enum : uint8_t {
 	 * \li signed_32: win condition duration in minutes
 	 */
 	NETCMD_WIN_CONDITION_DURATION = 36,
-
-	/**
-	 * Sent by the host to toggle fogless mode.
-	 *
-	 * Attached data is:
-	 * \li uint8_t: 1 if fogless mode is enabled, 0 otherwise
-	 */
-	NETCMD_FOGLESS = 37,
 
 	/**
 	 * Sent by the metaserver to a freshly opened game to check connectability

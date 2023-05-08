@@ -274,7 +274,7 @@ ReplayWriter::ReplayWriter(Game& game, const std::string& filename)
 	SaveHandler& save_handler = game_.save_handler();
 
 	const std::string temp_savegame =
-	   kTempFileDir + FileSystem::file_separator() + timestring() + kSavegameExtension;
+	   g_fs->create_unique_temp_file_path(kTempFileDir, kSavegameExtension);
 	std::string error;
 	if (!save_handler.save_game(game_, temp_savegame, FileSystem::ZIP, &error)) {
 		throw wexception("Failed to save game for replay: %s", error.c_str());
@@ -370,7 +370,7 @@ ReplayfileSavegameExtractor::ReplayfileSavegameExtractor(const std::string& game
 	fr.data_complete(buffer.get(), bytes);
 	FileWrite fw;
 	fw.data(buffer.get(), bytes);
-	temp_file_ = kTempFileDir + FileSystem::file_separator() + timestring() + kSavegameExtension;
+	temp_file_ = g_fs->create_unique_temp_file_path(kTempFileDir, kSavegameExtension);
 	fw.write(*g_fs, temp_file_);
 }
 

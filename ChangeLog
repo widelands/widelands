@@ -1,12 +1,14 @@
 [TOC]
 
-## Post-1.1 until [git 75dfa800](https://github.com/widelands/widelands/commit/75dfa800f399355adb7ee17b5be3237f243afd41)
+## Post-1.1 until [git 51a0dbc](https://github.com/widelands/widelands/commit/51a0dbca21baea2da748b693b67816a293961234)
 
 ### Animations, Icons and Overlays
 
 - Remove leftover individual animation frames of buildings (#5269)
 - Upscaled editor splash image (#5634)
 - Move empty sign on Atlantean mines to make it visible when status labels are shown (#5642)
+- Redesigned Amazon frontiers and flags with more visible playercolour (#5714)
+- Updated Frisian Campaign Portraits (#5737)
 
 
 ### Sounds and Music
@@ -16,11 +18,20 @@
 ### Tutorials and Campaigns
 
 - Minor tweaks in emp03 to reflect user comments in #5478 (#5648)
+- Fri05 (#5712)
+- Scenario "Island hopping" fix (#5746)
+- Carry over ship names in Atlantean campaign (#5781)
 
 
 ### Scripting
 
 - Limit `set_soldiers` to 10000 soldiers (#5568)
+- Add function `LuaMap::wrap_field` with wraparound (#5739)
+- Using helper functions in performance texts. (#5773)
+- Make Amazon treetop sentry placeable by scripts (#5821)
+- Optimize `LuaField` garbage collecting efficiency (#5839)
+- Validate that all tribes possess all special animations (#5862)
+- Fix constructionsite former buildings in Lua `place_building` (#5857)
 
 
 ### Maps
@@ -29,17 +40,30 @@
 
 ### Add-Ons
 
+- Allow themes to replace arbitrary UI images (#5734)
+- Allow starting new game with additional world add-ons (#5718)
+- Enable World Add-Ons in Random Matches & Maps (#5753)
+- Make richtext.lua styleable and allow partial theme addons (#5748)
+- Make `modify_unit` index lookup load-order-safe (#5871)
+- Disallow add-ons which are incompatible with the current Widelands version (#5879)
+- Fix add-ons admin dialog Enter key handling (#5763)
+- Turn unguaranteed add-on dependency check assert into a conditional (#5829)
 
 
 ### Saveloading
 
 - Allow loading another replay in replay mode (#5611)
 - Fix saving game with new name (#5639)
+- Replays: Single-File, Optional Writing, Autodeleting (#5645)
+- Fix Filesystem Errors from ReplayWriter (#5724)
+- Save only used terrains in terrain packet (#5803)
 
 
 ### AI
 
 - Small AI Fixes (#5683)
+- AI Diplomacy (#5774)
+- Make AI supplycheck non recursive and more efficient (#5866)
 
 
 ### Gameplay
@@ -50,6 +74,12 @@
 - Fix portspace detection (#5647)
 - Cancel battles when players negotiate truce (#5665)
 - Allow letting individual productionsites produce indefinitely (#4961)
+- Naming Warehouses and Ships (#5703)
+- Forbid soldiers leaving buildings through the wall (#5728)
+- Make "Fogless" a Game Setting (#5733)
+- Fix sleep times in production buildings (#5778)
+- Fix player end status handling (#5826)
+- Refactor Game Configuration Flags (#5863)
 
 
 ### User Interface
@@ -97,11 +127,33 @@
     - Refactored military graph calculation
     - Show total number of soldiers in soldier stats window
 - Pinned Notes (#5569)
+- Show flags preview in road building mode when Ctrl is held (#5557)
+- Fix SoldierList off-by-one buffer overflow (#5726)
+- Trigger `closed` signal when closing unique window (#5731)
+- Add tooltips to ItemWaresDisplay and fix icons alignment (#5729)
+- Fix heap-use-after-free in `BuildingWindow::init` (#5720)
+- Keep player colours if unchanged when changing slot (#5719)
+- Fix hang on building window warp (#5747)
+- Add Go To Road button to fieldaction roadbuild window (#5732)
+- Fix crash when dialog opens while dragging map (#5752)
+- Make Info Panel a Snap Target & Remove "Snap Only When Overlapping" Option (#5566)
+- Merge Add-On Dirnames in Map Select UIs (#5766)
+- Disable fastclick during game loading (#5780)
+- Fix collapsing input queues and other window handling fixes and enhancements (#5785)
+- Fix window Z ordering priorities (#5812)
+- Fix segfault in Panel::move_to_top() (#5824)
+- Sorting maps by size sorts by number of fields (#5842)
+- Integrate EditBox and MultilineEditbox with the primary selection buffer (#5835)
+- Watch window fixes and tweaks (#5820)
+- Improve landmark behaviour when game main window is resized (#5825)
+- Darken background behind modal windows (#5867)
+- Fix Window::move_out_of_the_way() (#5841)
+- Refine game error handling (#5735)
 
 
 ### Internationalization
 
-- String Fixes (#5710)
+- String Fixes (#5710, #5782)
 
 
 ### Help and Documentation
@@ -109,7 +161,10 @@
 - Encyclopedia Hyperlinks (#5533)
 - Fix buildings help button (#5661)
 - Explain clearer what an economy is (#5630)
-- Trainigsite encyclopedia enhancements (#5673)
+- Trainingsite encyclopedia enhancements (#5673)
+- Further fixes of economy gametips (#5711)
+- Fix performance text in encyclopedia and sleep times in production buildings where the workers need some experience (#5768)
+- Update keyboard controls help and generate it semi-automatically (#5717)
 
 
 ### Editor
@@ -118,11 +173,24 @@
 - Map Generator Add-Ons & Map Generating Dialog Accessibility Tweaks (#5537)
 - Editor: Show Starting Positions on Minimap (#5704)
 - Fix segfault in multiselect editor tools (#5708)
+- 3-Click Map Publishing as Add-On Inside the Editor (#5635)
+- Fix Editor Add-Ons Postloading (#5783)
+- Editor immovables menu: Added size to tooltip (#5849)
+- Editor Automatic Tree Placement Tool (#5848)
+- Fix editor painting mode regression (#5856)
 
 
 ### Graphics Engine
 
 - Show chat with customized player colours (#5671)
+- Indicate soldier preference in milsite stats string (#5730)
+- Fix map pixel to triangle computation regression (#5740)
+- Work around `glewInit` crash on Wayland (#5784)
+- Fix undefined `GLEW_ERROR_NO_GLX_DISPLAY` (#5804)
+- Replace directory with animation_directory in animations (#5519)
+- Linkify URLs in Rendered Text (#5870)
+- Scalable Buildhelp Overlays (#5868)
+- Implement padding numbers with digit width space UTF-8 characters (#5883)
 
 
 ### Networking
@@ -130,6 +198,7 @@
 - Networking log output and formatting usage cleanups (#5560)
 - Prevent spectating host from changing game speed (#5604)
 - Show enabled game-relevant add-ons before hosting (#5599)
+- Disambiguate temporary savegame for multiple LAN games (#5875)
 
 
 ### Build System
@@ -140,15 +209,24 @@
 - Fix Clang15 Compiler Warnings (#5629)
 - Replace `sprintf` with `snprintf` (#5651)
 - Switch to C++17 (#5672)
-- Update clang-tidy CI version (#5682)
-- Fix more clang-tidy checks (#5679, #5689, #5696, #5684, #5695, #5693, #5690, #5694, #5692, #5685, #5688, #5698, #5697, #5686, #5699, #5687, #5691, #5681)
+- CI enhancements (#5682, #5750, #5759. #5761, #5772, #5794, #5799, #5831, #5837, #5845)
+- Fix more clang-tidy checks (#5679, #5689, #5696, #5684, #5695, #5693, #5690, #5694, #5692, #5685, #5688, #5698, #5697, #5686, #5699, #5687, #5691, #5681, #5709)
 - Fix member initializer ambiguity regression
+- Added sharpyuv as new SDL_Image extra lib (#5756)
+- Fix build with gcc 13 by including `<cstdint>` (#5765)
+- Support compilation with musl libc (#5764)
+- Fix Windows Logging for Unit Tests (#5877)
+- Update SDL versioning check scheme
 
 
 ### Other Issues
 
 - Caret-escape control characters in strings (#5496)
-
+- Add pull request template
+- Call `SDL_PumpEvents` from main thread only (#5656)
+- Add mutexes for Notifications backend (#5715)
+- Add timeout support to regression_test.py and improve output (#5806)
+- Add amazons all buildings test to test suite (#5817)
 
 
 ## Release 1.1

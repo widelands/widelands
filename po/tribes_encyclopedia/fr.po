@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
-# adrien vigneron <adrienvigneron@ml1.net>, 2015
+# adrien vigneron <adrien.v@ml1.net>, 2015
 # Atanase Albaran, 2021
 # Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
 # Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
@@ -28,10 +28,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-03-07 03:08+0000\n"
+"POT-Creation-Date: 2023-05-01 02:42+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: C138, 2022\n"
-"Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
+"Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15512,411 +15512,108 @@ msgstr "Calcul nécessaire"
 msgid "Performance:"
 msgstr "Performance&nbsp;:"
 
-#: ../../data/tribes/scripting/help/controls.lua:11
+#: ../../data/tribes/scripting/help/controls.lua:7
 #: ../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
 msgstr "Contrôles"
 
-#: ../../data/tribes/scripting/help/controls.lua:13
+#: ../../data/tribes/scripting/help/controls.lua:9
 msgid "Window Control"
 msgstr "Contrôle de fenêtre"
 
-#: ../../data/tribes/scripting/help/controls.lua:16
-msgid "Close window"
-msgstr "Fermer la fenêtre"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:16
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:12
 msgctxt "hotkey"
 msgid "Right-click"
 msgstr "Clic-droit"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:18
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:14
+msgid "Close window"
+msgstr "Fermer la fenêtre"
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:16
 msgctxt "hotkey"
 msgid "Middle-click or Ctrl + Left-click"
 msgstr "Clic-central ou Ctrl + Clic-gauche"
 
+#. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:18
 msgid "Minimize/Maximize window"
 msgstr "Minimiser/Maximiser la fenêtre"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
+#. TRANSLATORS: This is an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:20
 msgctxt "hotkey"
 msgid "Ctrl + Left-click on Button"
 msgstr "Ctrl+Clic-gauche sur le bouton"
 
-#: ../../data/tribes/scripting/help/controls.lua:20
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:22
 msgid "Skip confirmation dialog"
 msgstr "Passer les dialogues de confirmation"
 
-#: ../../data/tribes/scripting/help/controls.lua:22
+#: ../../data/tribes/scripting/help/controls.lua:24
 msgid "Table Control"
 msgstr "Table de contrôle"
 
-#: ../../data/tribes/scripting/help/controls.lua:23
+#: ../../data/tribes/scripting/help/controls.lua:25
 msgid ""
 "In tables that allow the selection of multiple entries, the following key "
 "combinations are available:"
 msgstr "Dans les tables qui permettent la sélection d' entrées multiples, les combinaisons de touches suivantes sont disponibles:"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:26
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:28
 msgctxt "hotkey"
 msgid "Ctrl + Click"
 msgstr "Ctrl + Clic"
 
-#: ../../data/tribes/scripting/help/controls.lua:26
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:30
 msgctxt "table_control"
 msgid "Select multiple entries"
 msgstr "Sélection d' entrées multiples"
 
-#: ../../data/tribes/scripting/help/controls.lua:28
-msgctxt "table_control"
-msgid "Select a range of entries"
-msgstr "Sélectionnez une liste d' entrées"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:28
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:32
 msgctxt "hotkey"
 msgid "Shift + Click"
 msgstr "Shift + Clic"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:30
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:34
+msgctxt "table_control"
+msgid "Select a range of entries"
+msgstr "Sélectionnez une liste d' entrées"
+
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:36
 msgctxt "table_control"
 msgid "Select all entries"
 msgstr "Sélectionnez toutes les entrées"
 
-#: ../../data/tribes/scripting/help/controls.lua:32
+#: ../../data/tribes/scripting/help/controls.lua:38
 msgid "Road Control"
 msgstr "Contrôle des routes"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:35
-#: ../../data/tribes/scripting/help/controls.lua:37
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:41
+#: ../../data/tribes/scripting/help/controls.lua:45
 msgctxt "hotkey"
 msgid "Ctrl + Left-click"
 msgstr "Ctrl+Clic-gauche"
 
-#: ../../data/tribes/scripting/help/controls.lua:35
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:43
 msgid "While connecting two flags: Place flags automatically"
 msgstr "Quand vous connectez deux drapeaux : Place des drapeaux automatiquement"
 
-#: ../../data/tribes/scripting/help/controls.lua:37
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:47
 msgid "While removing a flag: Remove all flags up to the first junction"
 msgstr "Quand vous retirez des drapeaux : Retire tous les drapeaux jusqu'à la première jonction"
-
-#: ../../data/tribes/scripting/help/controls.lua:39
-msgid "Keyboard Shortcuts"
-msgstr "Raccourcis Clavier"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:42
-msgid "Increase game speed"
-msgstr "Augmente la vitesse de jeu"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:44
-msgid "Decrease game speed"
-msgstr "Diminue la vitesse du jeu"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:46
-msgid "Increase game speed by 10x"
-msgstr "Augmente la vitesse de jeu par 10x"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:48
-msgid "Decrease game speed by 10x"
-msgstr "Diminue la vitesse de jeu par 10x"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:50
-msgid "Increase game speed by 0.25x"
-msgstr "Augmente la vitesse de jeu par 0,25x"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:52
-msgid "Decrease game speed by 0.25x"
-msgstr "Diminue la vitesse de jeu par 0,25x"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:54
-msgid "Pause the game"
-msgstr "Met le jeu en pause"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'c'
-#: ../../data/tribes/scripting/help/controls.lua:56
-msgid "Toggle census"
-msgstr "Dés/activer le recensement"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 's'
-#: ../../data/tribes/scripting/help/controls.lua:58
-msgid "Toggle status"
-msgstr "Dés/activer les status"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'l'
-#: ../../data/tribes/scripting/help/controls.lua:60
-msgid "Toggle soldier health bars and level icons"
-msgstr "Active la barre de santé et l’icône de niveau des soldats"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'u'
-#: ../../data/tribes/scripting/help/controls.lua:62
-msgid "Toggle building visibility"
-msgstr "Basculer la visibilité des bâtiments"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'w'
-#: ../../data/tribes/scripting/help/controls.lua:64
-msgid "Toggle workarea overlap indicators"
-msgstr "basculer les indicateurs de l'aire de travail"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'o'
-#: ../../data/tribes/scripting/help/controls.lua:68
-msgid "Toggle objectives"
-msgstr "Dés/activer les objectifs"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'n'
-#: ../../data/tribes/scripting/help/controls.lua:70
-msgid "Toggle messages (‘news’)"
-msgstr "Dés/activer les messages ('nouvelles')"
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:72
-#: ../../data/tribes/scripting/help/init.lua:85
-msgid "Tribal Encyclopedia"
-msgstr "Encyclopédie Tribale"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'i'
-#: ../../data/tribes/scripting/help/controls.lua:74
-msgid "Toggle stock inventory"
-msgstr "Dés/activer l'inventaire du stock"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'b'
-#: ../../data/tribes/scripting/help/controls.lua:76
-msgid "Toggle building statistics"
-msgstr "Dés/activer les statistiques des bâtiments"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'x'
-#: ../../data/tribes/scripting/help/controls.lua:78
-msgid "Toggle soldier statistics"
-msgstr "Dés/activer les statistiques des soldats"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'e'
-#: ../../data/tribes/scripting/help/controls.lua:80
-msgid "Toggle seafaring statistics"
-msgstr "Dés/activer les statistiques sur les affaires marines"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:82
-msgctxt "hotkey"
-msgid "Arrow keys"
-msgstr "Touches fléchées"
-
-#: ../../data/tribes/scripting/help/controls.lua:82
-msgid "Move the map"
-msgstr "Bouge la carte"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:84
-msgctxt "hotkey"
-msgid "Ctrl + Arrow keys"
-msgstr "Ctrl + Touches fléchées"
-
-#: ../../data/tribes/scripting/help/controls.lua:84
-msgid "Move the map fast"
-msgstr "Bouge la carte rapidement"
-
-#: ../../data/tribes/scripting/help/controls.lua:86
-msgid "Move the map slowly"
-msgstr "Bouge la carte lentement"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:86
-msgctxt "hotkey"
-msgid "Shift + Arrow keys"
-msgstr "Shift + Touches fléchées"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:88
-msgid "Center main mapview on starting location"
-msgstr "Centrer la vue de la carte principale sur la position de départ"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:90
-msgid "Remember current location"
-msgstr "Se souvenir de l'endroit actuel"
-
-#: ../../data/tribes/scripting/help/controls.lua:91
-msgid "Go to previously remembered location"
-msgstr "Aller à l'emplacement mémorisé précédemment"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:93
-msgid "Go to previous location"
-msgstr "Aller au lieu précédent"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:95
-msgid "Go to next location"
-msgstr "Aller au lieu suivant"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:97
-msgid "Increase zoom"
-msgstr "Augmenter le zoom"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:99
-msgid "Decrease zoom"
-msgstr "Réduire le zoom"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:101
-msgid "Reset zoom"
-msgstr "Réinitialiser le zoom"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:103
-msgid "Take a screenshot"
-msgstr "Prendre une capture d'écran"
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:106
-msgctxt "hotkey"
-msgid "Ctrl + Shift + Space"
-msgstr "Ctrl + Shift + Espace"
-
-#: ../../data/tribes/scripting/help/controls.lua:106
-msgid "Show the debug console (only in debug-builds)"
-msgstr "Affiche la console de déboguage (seulement dans les compilations de déboguage)"
-
-#. TRANSLATORS: Heading in "Controls" help
-#: ../../data/tribes/scripting/help/controls.lua:110
-msgid "Message Window"
-msgstr "Fenêtre des messages"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:113
-msgid "Show all messages"
-msgstr "Afficher tous les messages"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:115
-msgid "Show geologists’ messages only"
-msgstr "N'afficher que les messages des géologues"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:117
-msgid "Show economy messages only"
-msgstr "N'afficher que les messages de l'économie"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:119
-msgid "Show seafaring messages only"
-msgstr "N'afficher que les messages des transports maritimes"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:121
-msgid "Show warfare messages only"
-msgstr "N'afficher que les messages d'opérations militaires"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:123
-msgid "Show scenario messages only"
-msgstr "N'afficher que les messages du scénario"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:125
-msgid "Jump to the location corresponding to the current message"
-msgstr "Saute vers la location correspondante  au message actuel"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:127
-msgid "Archive/Restore the current message"
-msgstr "Archive/Restaure le message courant"
-
-#. TRANSLATORS: Heading in "Controls" help
-#: ../../data/tribes/scripting/help/controls.lua:131
-msgid "Ship Statistics"
-msgstr "Statistiques sur les Navires"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:134
-msgid "Show all ships"
-msgstr "Afficher tous les navires"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:136
-msgid "Show idle ships"
-msgstr "Afficher les navires inactifs"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:138
-msgid "Show ships shipping wares and workers"
-msgstr "Afficher les navires transportant des marchandises et des ouvriers."
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:140
-msgid "Show waiting expeditions"
-msgstr "Afficher les expéditions en attente"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:142
-msgid "Show scouting expeditions"
-msgstr "Afficher les expéditions de reconnaissance"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:144
-msgid "Show expeditions that have found a port space or are founding a colony"
-msgstr "Afficher les expéditions qui ont trouvé un espace portuaire ou qui fondent une colonie."
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:146
-msgid "Center the map on the selected ship"
-msgstr "Centrer la carte sur le navire sélectionné"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:148
-msgid "Open the selected ship’s window"
-msgstr "Ouvrir la fenêtre du navire sélectionné"
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:150
-msgid "Go to the selected ship and open its window"
-msgstr "Aller au navire sélectionné et ouvrir sa fenêtre."
-
-#. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:152
-msgid "Watch the selected ship"
-msgstr "Voir le navire sélectionné"
 
 #. TRANSLATORS: Size of a map immovablee
 #: ../../data/tribes/scripting/help/format_help.lua:60
@@ -16034,6 +15731,10 @@ msgstr "Devenir"
 #: ../../data/tribes/scripting/help/immovable_help.lua:100
 msgid "Preferred Terrains"
 msgstr "Terrains préférés"
+
+#: ../../data/tribes/scripting/help/init.lua:85
+msgid "Tribal Encyclopedia"
+msgstr "Encyclopédie Tribale"
 
 #: ../../data/tribes/scripting/help/init.lua:95
 msgid "Introduction"

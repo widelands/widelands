@@ -69,7 +69,8 @@ private:
 	UI::Button ok_, next_scenario_, main_menu_;
 
 	const uint32_t desired_speed_;  // Remember the previous game speed
-	Widelands::Game* game_;         // For controlling the game speed
+	const bool modal_;
+	Widelands::Game* game_;  // For controlling the game speed
 };
 
 #endif  // end of include guard: WL_WUI_STORY_MESSAGE_BOX_H

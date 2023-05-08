@@ -12,7 +12,7 @@ msgstr ""
 "POT-Creation-Date: 2023-02-19 02:46+0000\n"
 "PO-Revision-Date: 2023-01-04 20:43+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2023\n"
-"Language-Team: Russian (https://www.transifex.com/widelands/teams/35159/ru/)\n"
+"Language-Team: Russian (https://app.transifex.com/widelands/teams/35159/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -753,6 +753,10 @@ msgid ""
 "to liberate your own home. If there is anything else we can do for you, now "
 "or forevermore, you need only ask and we will be yours to command."
 msgstr ""
+"И я сам, и мой народ в неоплатном долгу перед вами. Всех солдат, которых вы "
+"обучили, я отправляю с вами, дабы они помогли вам освободить ваш дом. И если"
+" есть что-то еще, что мы можем для вас сделать, сейчас или в будущем - "
+"достаточного одного слова, и мы будем в вашем распоряжении."
 
 #. TRANSLATORS: Claus Lembeck – Victory 2
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:317
@@ -882,6 +886,9 @@ msgid ""
 " then we’ll raise the people of Föhr and all the other islands in joint "
 "rebellion against the invader!"
 msgstr ""
+"И если мы его перкроем, они потеряют свой самый важнейший путь снабжения! "
+"Нам стоит поробовать. Выдвинемся в Каттегат, захватим пролив, а затем "
+"поднимем народ Фёра и других островов на восстание против захватчика!"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 6
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:357
@@ -893,6 +900,13 @@ msgid ""
 "to me afterwards. In the meantime, we will use the industry you built for us"
 " to train more soldiers who shall aid you in your subsequent endeavours."
 msgstr ""
+"Я хотел бы попросить ещё кое о чём. Впрочем, это скорее предложение чем "
+"просьба. Два моих сына, Харке Окесен и Эшель Окесен, обучаются воинскому "
+"искусству. Я был бы очень признателен, если бы вы позволили им сопровождать "
+"вас в вашем походе на Каттегат, чтобы они получили практический опыт, "
+"который, впоследствии пригодится и мне. А мы пока используем построенную "
+"вами промышленность, чтобы обучить больше солдат, которые помогут вам в "
+"ваших последующих начинаниях."
 
 #. TRANSLATORS: Reebaud – Victory 7
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:364
@@ -901,6 +915,9 @@ msgid ""
 "care of them. You certainly have a knack for assigning your sons the best "
 "teachers."
 msgstr ""
+"Мы будем очень рады если они составят нам компанию, и я обещаю, что мы будем"
+" хорошо заботиться о них. У вас определенно есть талант подбирать своим "
+"сыновьям лучших учителей."
 
 #. TRANSLATORS: Reebaud – Victory 7
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:367
@@ -908,13 +925,17 @@ msgid ""
 "And thus we part, to meet again soon. Farewell, and may lasting peace bless "
 "all of Helgoland!"
 msgstr ""
+"И вот мы расстаемся, чтобы вскоре встретиться снова. Прощайте, и пусть "
+"прочный мир благословит весь Гельголанд!"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:368
 msgid "Congratulations"
-msgstr ""
+msgstr "Поздравляем!"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:369
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Вы завершили эту миссию. Если хотите, можете продолжить игру, а если нет, "
+"переходите к следующей миссии."

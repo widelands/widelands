@@ -81,6 +81,7 @@ public:
 	struct BuildhelpOverlay {
 		const Image* pic = nullptr;
 		Vector2i hotspot = Vector2i::zero();
+		float scale = 0.f;
 	};
 
 	// Manages all UniqueWindows.
@@ -312,7 +313,7 @@ protected:
 
 	// Returns the 'BuildhelpOverlay' for 'caps' or nullptr if there is no help
 	// to be displayed on this field.
-	const BuildhelpOverlay* get_buildhelp_overlay(Widelands::NodeCaps caps) const;
+	const BuildhelpOverlay* get_buildhelp_overlay(Widelands::NodeCaps caps, float scale) const;
 
 	// Overlays displayed while a road or waterway is under construction.
 	struct RoadBuildingMode {
@@ -448,7 +449,8 @@ private:
 	std::unique_ptr<RoadBuildingMode> road_building_mode_;
 
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
-	BuildhelpOverlay buildhelp_overlays_[Widelands::Field::Buildhelp_None];
+	BuildhelpOverlay
+	   buildhelp_overlays_[Widelands::Field::Buildhelp_None * ImageCache::kScalesCount];
 
 	bool cheat_mode_enabled_{false};
 	bool screenshot_failed_{false};

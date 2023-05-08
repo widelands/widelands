@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-10 03:09+0000\n"
+"POT-Creation-Date: 2023-05-01 02:42+0000\n"
 "PO-Revision-Date: 2016-03-24 07:33+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2022\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
@@ -22,111 +22,10 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: ../../data/scripting/editor/editor_controls.lua:11
+#: ../../data/scripting/editor/editor_controls.lua:4
 #: ../../data/scripting/editor/editor_help.lua:66
 msgid "Controls"
 msgstr "Управление"
-
-#: ../../data/scripting/editor/editor_controls.lua:13
-msgid "Keyboard Shortcuts"
-msgstr "Горячие клавиши"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:16
-msgid "Help"
-msgstr "Помощь"
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/scripting/editor/editor_controls.lua:18
-msgid "Toggle main menu"
-msgstr "Показать главное меню"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 't'
-#: ../../data/scripting/editor/editor_controls.lua:20
-msgid "Toggle tools menu"
-msgstr "Показать меню инструментов"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'p'
-#: ../../data/scripting/editor/editor_controls.lua:24
-msgid "Toggle player menu"
-msgstr "Показать меню игрока"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:26
-msgid "Undo"
-msgstr "Отменить"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:28
-msgid "Redo"
-msgstr "Повторить"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'i'
-#: ../../data/scripting/editor/editor_controls.lua:30
-msgid "Activate information tool"
-msgstr "Активировать информационный инструмент"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:32
-msgid "Load map"
-msgstr "Загрузить карту"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:34
-msgid "Save map"
-msgstr "Сохранить Карту"
-
-#: ../../data/scripting/editor/editor_controls.lua:38
-msgid "Tools"
-msgstr "Инструменты"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:41
-msgid "Change tool size"
-msgstr "Изменить размер инструмента"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:43
-msgctxt "hotkey"
-msgid "Click"
-msgstr "Щёлчок"
-
-#: ../../data/scripting/editor/editor_controls.lua:43
-msgid ""
-"Place new elements on the map, or increase map elements by the value "
-"selected by ‘Increase/Decrease value’"
-msgstr "Разместите новые элементы на карте или увеличьте количество элементов выбрав \"Увеличить/Уменьшить значение\""
-
-#: ../../data/scripting/editor/editor_controls.lua:45
-msgid ""
-"Remove elements from the map, or decrease map elements by the value selected"
-" by ‘Increase/Decrease value’"
-msgstr "Удалите элементы с карты, или уменьшите количество элементов, выбрав «Увеличить/уменьшить значение»"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:45
-msgctxt "hotkey"
-msgid "Shift + Click"
-msgstr "Shift + щелчок"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:47
-msgctxt "hotkey"
-msgid "Ctrl + Click"
-msgstr "Ctrl + щелчок"
-
-#: ../../data/scripting/editor/editor_controls.lua:47
-msgid "Set map elements to the value selected by ‘Set Value’"
-msgstr "Установить для элементов карты значение, выбранное \"Установить значение\""
 
 #: ../../data/scripting/editor/editor_help.lua:50
 msgid "Editor Help"

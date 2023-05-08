@@ -86,6 +86,7 @@ public:
 	MapData::MapType maptype;
 	MapData::DisplayType displaytype;
 	AddOns::AddOnRequirements required_addons;
+	std::string minimum_required_widelands_version;
 };
 
 #endif  // end of include guard: WL_WUI_MAPDATA_H

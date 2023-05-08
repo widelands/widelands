@@ -80,6 +80,8 @@ struct MultilineEditbox::Data {
 	uint32_t prev_char(uint32_t cursor);
 	uint32_t next_char(uint32_t cursor);
 	uint32_t snap_to_char(uint32_t cursor);
+	std::pair<uint32_t, uint32_t> word_boundary(uint32_t cursor, bool require_non_blank);
+	std::pair<uint32_t, uint32_t> paragraph_boundary(uint32_t cursor);
 
 	void erase_bytes(uint32_t start, uint32_t end);
 	void insert(uint32_t where, const std::string& s);
@@ -272,16 +274,132 @@ uint32_t MultilineEditbox::Data::snap_to_char(std::string& txt, uint32_t cursor)
 	return cursor;
 }
 
+std::pair<uint32_t, uint32_t> MultilineEditbox::Data::word_boundary(uint32_t cursor,
+                                                                    bool require_non_blank) {
+	uint32_t start = snap_to_char(cursor);
+	uint32_t end = start;
+
+	bool found_non_blank = false;
+	while (start > 0) {
+		uint32_t newpos = prev_char(start);
+		if (isspace(text[newpos]) != 0) {
+			if (!require_non_blank || found_non_blank) {
+				break;
+			}
+		} else {
+			found_non_blank = true;
+		}
+
+		start = newpos;
+	}
+
+	found_non_blank = false;
+	while (end < text.size()) {
+		if (isspace(text[end]) != 0) {
+			if (!require_non_blank || found_non_blank) {
+				break;
+			}
+		} else {
+			found_non_blank = true;
+		}
+
+		end = next_char(end);
+	}
+
+	return {start, end};
+}
+
+std::pair<uint32_t, uint32_t> MultilineEditbox::Data::paragraph_boundary(uint32_t cursor) {
+	uint32_t start = snap_to_char(cursor);
+	uint32_t end = start;
+
+	while (start > 0 && '\n' != text[prev_char(start)]) {
+		start = prev_char(start);
+	}
+
+	while (end < text.size() && '\n' != text[end]) {
+		end = next_char(end);
+	}
+
+	return {start, end};
+}
+
 /**
  * The mouse was clicked on this editbox
  */
 bool MultilineEditbox::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
-		d_->reset_selection();
+		const uint32_t time = SDL_GetTicks();
+		const bool is_multiclick = (time - multiclick_timer_) < DOUBLE_CLICK_INTERVAL;
+		multiclick_timer_ = time;
+
 		set_caret_to_cursor_pos(x, y);
+
+		if (is_multiclick) {
+			++multiclick_counter_;
+			d_->mode = Data::Mode::kSelection;
+
+			std::pair<uint32_t, uint32_t> boundaries;
+			if ((multiclick_counter_ % 2) != 0) {  // Select current word
+				boundaries = d_->word_boundary(d_->cursor_pos, false);
+			} else {  // Select entire paragraph
+				boundaries = d_->paragraph_boundary(d_->cursor_pos);
+			}
+			d_->selection_start = boundaries.first;
+			d_->selection_end = boundaries.second;
+
+			update_primary_selection_buffer();
+		} else {
+			multiclick_counter_ = 0;
+			d_->reset_selection();
+		}
+
 		focus();
+		clicked();
 		return true;
 	}
+#if HAS_PRIMARY_SELECTION_BUFFER
+	else if (btn == SDL_BUTTON_MIDDLE) {
+		/* Primary buffer is inserted without affecting cursor position, selection, and focus. */
+		const uint32_t old_caret_pos = d_->cursor_pos;
+		const uint32_t old_selection_start = d_->selection_start;
+		const uint32_t old_selection_end = d_->selection_end;
+		const MultilineEditbox::Data::Mode old_mode = d_->mode;
+
+		d_->reset_selection();
+		set_caret_to_cursor_pos(x, y);
+		const uint32_t new_caret_pos = d_->cursor_pos;
+
+		std::string text_to_insert = SDL_GetPrimarySelectionText();
+
+		if (old_mode == MultilineEditbox::Data::Mode::kSelection &&
+		    ((old_selection_start <= new_caret_pos && new_caret_pos <= old_selection_end) ||
+		     (old_selection_end <= new_caret_pos && new_caret_pos <= old_selection_start))) {
+			text_to_insert.clear();  // Can't paste into the active selection.
+		} else {
+			std::string old_text = d_->text;
+			handle_textinput(text_to_insert);
+			if (old_text == d_->text) {
+				text_to_insert.clear();  // Text wasn't pasted, perhaps too long.
+			}
+		}
+
+		d_->mode = old_mode;
+		d_->cursor_pos = old_caret_pos;
+		d_->selection_start = old_selection_start;
+		d_->selection_end = old_selection_end;
+		if (new_caret_pos <= old_caret_pos) {
+			const uint32_t delta = text_to_insert.size();
+			d_->cursor_pos += delta;
+			d_->selection_start += delta;
+			d_->selection_end += delta;
+		}
+
+		changed();
+		return true;
+	}
+#endif
+
 	return false;
 }
 bool MultilineEditbox::handle_mousemove(
@@ -399,6 +517,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			d_->selection_start = 0;
 			d_->selection_end = d_->text.size();
 			d_->mode = Data::Mode::kSelection;
+			update_primary_selection_buffer();
 			return true;
 		}
 
@@ -410,7 +529,11 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			if (d_->mode == Data::Mode::kSelection) {
 				delete_selected_text();
 			} else if (d_->cursor_pos < d_->text.size()) {
-				d_->erase_bytes(d_->cursor_pos, d_->next_char(d_->cursor_pos));
+				if ((code.mod & KMOD_CTRL) != 0) {
+					d_->erase_bytes(d_->cursor_pos, d_->word_boundary(d_->cursor_pos, true).second);
+				} else {
+					d_->erase_bytes(d_->cursor_pos, d_->next_char(d_->cursor_pos));
+				}
 				changed();
 			}
 			break;
@@ -419,7 +542,11 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			if (d_->mode == Data::Mode::kSelection) {
 				delete_selected_text();
 			} else if (d_->cursor_pos > 0) {
-				d_->erase_bytes(d_->prev_char(d_->cursor_pos), d_->cursor_pos);
+				if ((code.mod & KMOD_CTRL) != 0) {
+					d_->erase_bytes(d_->word_boundary(d_->cursor_pos, true).first, d_->cursor_pos);
+				} else {
+					d_->erase_bytes(d_->prev_char(d_->cursor_pos), d_->cursor_pos);
+				}
 				changed();
 			}
 			break;
@@ -427,7 +554,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_LEFT: {
 			if (d_->cursor_pos > 0) {
 				d_->ww.enter_cursor_movement_mode();
-				if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL)) != 0) {
+				if ((code.mod & KMOD_CTRL) != 0) {
 					uint32_t newpos = d_->prev_char(d_->cursor_pos);
 					while (newpos > 0 && (isspace(d_->text[newpos]) != 0)) {
 						newpos = d_->prev_char(newpos);
@@ -460,7 +587,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_RIGHT:
 			if (d_->cursor_pos < d_->text.size()) {
 				d_->ww.enter_cursor_movement_mode();
-				if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL)) != 0) {
+				if ((code.mod & KMOD_CTRL) != 0) {
 					uint32_t newpos = d_->next_char(d_->cursor_pos);
 					while (newpos < d_->text.size() && (isspace(d_->text[newpos]) != 0)) {
 						newpos = d_->next_char(newpos);
@@ -557,7 +684,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			break;
 
 		case SDLK_HOME:
-			if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL)) != 0) {
+			if ((code.mod & KMOD_CTRL) != 0) {
 				if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
 					select_until(0);
 				} else {
@@ -580,7 +707,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			break;
 
 		case SDLK_END:
-			if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL)) != 0) {
+			if ((code.mod & KMOD_CTRL) != 0) {
 				if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
 					select_until(d_->text.size());
 				} else {
@@ -641,6 +768,18 @@ void MultilineEditbox::copy_selected_text() const {
 
 	SDL_SetClipboardText(selected_text.c_str());
 }
+void MultilineEditbox::update_primary_selection_buffer() const {
+#if HAS_PRIMARY_SELECTION_BUFFER
+	uint32_t start;
+	uint32_t end;
+	d_->calculate_selection_boundaries(start, end);
+
+	auto nr_characters = end - start;
+	std::string selected_text = d_->text.substr(start, nr_characters);
+	SDL_SetPrimarySelectionText(selected_text.c_str());
+#endif
+}
+
 /**
  * Selects text from @p cursor until @p end
  */
@@ -650,6 +789,7 @@ void MultilineEditbox::select_until(uint32_t end) const {
 		d_->mode = Data::Mode::kSelection;
 	}
 	d_->selection_end = end;
+	update_primary_selection_buffer();
 }
 void MultilineEditbox::delete_selected_text() const {
 	uint32_t start;
