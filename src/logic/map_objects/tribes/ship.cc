@@ -58,6 +58,7 @@ namespace Widelands {
 
 namespace {
 
+constexpr unsigned kSinkAnimationDuration = 3000;
 constexpr unsigned kNearDestinationShipRadius = 4;
 constexpr unsigned kNearDestinationNoteRadius = 1;
 
@@ -451,7 +452,7 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 	case ShipStates::kSinkRequest:
 		if (descr().is_animation_known("sinking")) {
 			ship_state_ = ShipStates::kSinkAnimation;
-			start_task_idle(game, descr().get_animation("sinking", this), 3000);
+			start_task_idle(game, descr().get_animation("sinking", this), kSinkAnimationDuration);
 			return;
 		}
 		log_warn_time(game.get_gametime(), "Oh no... this ship has no sinking animation :(!\n");
@@ -1043,6 +1044,7 @@ void Ship::battle_update(Game& game) {
 	Battle& current_battle = battles_.back();
 	Ship* target_ship = current_battle.opponent.get(game);
 	if (target_ship == nullptr && !static_cast<bool>(current_battle.attack_coords)) {
+		molog(game.get_gametime(), "[battle] Enemy disappeared, cancel");
 		battles_.pop_back();
 		start_task_idle(game, descr().main_animation(), 100);
 		return;
@@ -1067,6 +1069,7 @@ void Ship::battle_update(Game& game) {
 	};
 	auto fight = [this, &current_battle, other_battle, &game, target_ship]() {
 		if (target_ship == nullptr) {
+			molog(game.get_gametime(), "[battle] Attacking a port");
 			current_battle.pending_damage = 1;                             // Ports always take 1 point
 		} else if (game.logic_rand() % 100 < descr().attack_accuracy_) {  // Hit
 			uint32_t attack_strength =
@@ -1075,9 +1078,11 @@ void Ship::battle_update(Game& game) {
 
 			attack_strength += attack_strength * get_sea_attack_soldier_bonus(game) / 100;
 
+			molog(game.get_gametime(), "[battle] Hit with %u points", attack_strength);
 			current_battle.pending_damage =
 			   attack_strength * (100 - target_ship->descr().defense_) / 100;
 		} else {  // Miss
+			molog(game.get_gametime(), "[battle] Miss");
 			current_battle.pending_damage = 0;
 		}
 
@@ -1089,30 +1094,39 @@ void Ship::battle_update(Game& game) {
 	               target_ship](Battle::Phase next) {
 		assert(target_ship != nullptr);
 		if (target_ship->hitpoints_ > current_battle.pending_damage) {
+			molog(game.get_gametime(), "[battle] Subtracting %u hitpoints from enemy", current_battle.pending_damage);
 			target_ship->hitpoints_ -= current_battle.pending_damage;
 			set_phase(next);
 		} else {
+			molog(game.get_gametime(), "[battle] Enemy defeated");
 			target_ship->send_message(game, _("Ship Sunk"), _("Ship Destroyed"),
 			                          _("An enemy ship has destroyed your warship."),
 			                          "images/wui/ship/ship_attack.png");
+			target_ship->battles_.clear();
+			target_ship->reset_tasks(game);
 			target_ship->set_ship_state_and_notify(
 			   ShipStates::kSinkRequest, NoteShip::Action::kDestinationChanged);
-			target_ship->battles_.clear();
 			battles_.pop_back();
+			return true;
 		}
 		current_battle.pending_damage = 0;
 		other_battle->pending_damage = 0;
+		return false;
 	};
 
 	if (!current_battle.is_first) {
 		switch (current_battle.phase) {
-		case Battle::Phase::kDefenderAttacking:
+		case Battle::Phase::kDefenderAttacking: {
 			// Our turn is over, now it's the enemy's turn.
-			damage(Battle::Phase::kAttackersTurn);
-			start_task_idle(game, descr().main_animation(), 100);
+			molog(game.get_gametime(), "[battle] Defender's turn ends");
+			bool won = damage(Battle::Phase::kAttackersTurn);
+			// Make sure we will idle until the enemy ship is truly gone, so we won't attack again
+			start_task_idle(game, descr().main_animation(), won ? (kSinkAnimationDuration + 1000) : 100);
 			return;
+		}
 
 		case Battle::Phase::kDefendersTurn:
+			molog(game.get_gametime(), "[battle] Defender's turn begins");
 			fight();
 			set_phase(Battle::Phase::kDefenderAttacking);
 			start_task_idle(game, descr().main_animation(),
@@ -1133,6 +1147,7 @@ void Ship::battle_update(Game& game) {
 		return start_task_idle(game, descr().main_animation(), 100);
 
 	case Battle::Phase::kNotYetStarted:
+		molog(game.get_gametime(), "[battle] Preparing to engage");
 		set_phase(Battle::Phase::kAttackerMovingTowardsOpponent);
 		FALLS_THROUGH;
 	case Battle::Phase::kAttackerMovingTowardsOpponent: {
@@ -1150,6 +1165,7 @@ void Ship::battle_update(Game& game) {
 		    (!exact_match_required && map.calc_distance(get_position(), dest) < 2)) {
 			// Already there, start the fight in the next act.
 			// For ports, skip the first round to allow defense warships to approach.
+			molog(game.get_gametime(), "[battle] Enemy in range");
 			set_phase(target_ship != nullptr ? Battle::Phase::kAttackersTurn :
                                             Battle::Phase::kAttackerAttacking);
 			return start_task_idle(game, descr().main_animation(), 100);
@@ -1177,6 +1193,7 @@ void Ship::battle_update(Game& game) {
 			steps--;
 		}
 
+		molog(game.get_gametime(), "[battle] Moving towards enemy");
 		start_task_movepath(game, path, descr().get_sail_anims(), false, steps);
 		return;
 	}
@@ -1184,10 +1201,15 @@ void Ship::battle_update(Game& game) {
 	case Battle::Phase::kAttackerAttacking:
 		if (target_ship != nullptr) {
 			// Our turn is over, now it's the enemy's turn.
-			damage(Battle::Phase::kDefendersTurn);
+			molog(game.get_gametime(), "[battle] Attacker's turn ends");
+			bool won = damage(Battle::Phase::kDefendersTurn);
+			if (won) {
+				return start_task_idle(game, descr().main_animation(), kSinkAnimationDuration + 1000);
+			}
 		} else if (current_battle.pending_damage > 0) {
 			// The naval assault was successful. Now unload the soldiers.
 			// From the ship's perspective, the attack was a success.
+			molog(game.get_gametime(), "[battle] Naval invasion commencing");
 
 			Coords portspace = map.find_portspace_for_dockpoint(current_battle.attack_coords);
 			assert(portspace != Coords::null());
@@ -1288,17 +1310,21 @@ void Ship::battle_update(Game& game) {
 			if (nearest != nullptr) {
 				// Let the best candidate launch an attack against us. This
 				// suspends the current battle until the new fight is over.
-				dynamic_cast<Ship&>(*nearest).start_battle(
+				Ship& nearest_ship = dynamic_cast<Ship&>(*nearest);
+				molog(game.get_gametime(), "[battle] Summoning %s to the port's defense", nearest_ship.get_shipname().c_str());
+				nearest_ship.start_battle(
 				   game, Battle(this, Coords::null(), {}, true));
 			}
 
 			// Since ports can't defend themselves on their own, start the next round at once.
+			molog(game.get_gametime(), "[battle] Port is undefended");
 			set_phase(Battle::Phase::kAttackersTurn);
 		}
 		start_task_idle(game, descr().main_animation(), 100);
 		return;
 
 	case Battle::Phase::kAttackersTurn:
+		molog(game.get_gametime(), "[battle] Attacker's turn begins");
 		fight();
 		set_phase(Battle::Phase::kAttackerAttacking);
 		start_task_idle(game, descr().main_animation(),
