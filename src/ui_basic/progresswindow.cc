@@ -189,7 +189,7 @@ bool ProgressWindow::try_set_background(const std::string& template_directory) {
 /// Callback function: Buffer keypress events to be replayed after the loading is over.
 bool ProgressWindow::ui_key(bool const down, SDL_Keysym const code) {
 	// WLApplication can handle some keys immediately; don't buffer them.
-	if (WLApplication::get()->handle_key(down, code.sym, code.mod)) {
+	if (WLApplication::get().handle_key(down, code.sym, code.mod)) {
 		return true;
 	}
 	SDL_Event event;
@@ -203,7 +203,7 @@ void ProgressWindow::step(const std::string& description) {
 	// Handle events to respond to window resizing, to buffer keypresses,
 	// and to prevent "not responding" on windows & "beach ball" on macOS.
 	InputCallback input_callback = {nullptr, nullptr, nullptr, ui_key, nullptr, nullptr};
-	WLApplication::get()->handle_input(&input_callback);
+	WLApplication::get().handle_input(&input_callback);
 
 	progress_message_ =
 	   UI::g_fh->render(as_richtext_paragraph(description, progress_style().font()));

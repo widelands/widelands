@@ -309,8 +309,6 @@ void WLApplication::setup_homedir() {
 	i18n::set_homedir(homedir_);
 }
 
-WLApplication* WLApplication::the_singleton = nullptr;
-
 /**
  * The main entry point for the WLApplication singleton.
  *
@@ -325,14 +323,6 @@ WLApplication* WLApplication::the_singleton = nullptr;
  * \param argv Array of command line arguments
  * \return An (always valid!) pointer to the WLApplication singleton
  */
-// TODO(unknown): Return a reference - the return value is always valid anyway
-WLApplication* WLApplication::get(int const argc, char const** argv) {
-	if (the_singleton == nullptr) {
-		the_singleton = new WLApplication(argc, argv);
-	}
-	return the_singleton;
-}
-
 /**
  * Initialize an instance of WLApplication.
  *
@@ -468,6 +458,11 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	// Save configuration now. Otherwise, the UUID and sound options
 	// are not saved, when the game crashes
 	write_config();
+}
+
+WLApplication& WLApplication::get(int const argc, char const** argv) {
+	static WLApplication the_singleton{argc, argv};
+	return the_singleton;
 }
 
 /**
