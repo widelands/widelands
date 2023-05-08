@@ -158,9 +158,7 @@ struct FindNodeAttackTarget {
 
 		if (ship_.get_nritems() > 0) {
 			Coords portspace = egbase.map().find_portspace_for_dockpoint(f);
-			if (static_cast<bool>(portspace) &&
-			    egbase.map().calc_distance(portspace, ship_.get_position()) <=
-			       ship_.descr().vision_range()) {
+			if (static_cast<bool>(portspace)) {
 				const PlayerNumber owner = egbase.map()[portspace].get_owned_by();
 				if (owner == 0 || ship_.owner().is_hostile(egbase.player(owner))) {
 					return true;
@@ -1151,7 +1149,8 @@ void Ship::battle_update(Game& game) {
 		if (dest == get_position() ||
 		    (!exact_match_required && map.calc_distance(get_position(), dest) < 2)) {
 			// Already there, start the fight in the next act.
-			set_phase(Battle::Phase::kAttackersTurn);
+			// For ports, skip the first round to allow defense warships to approach.
+			set_phase(target_ship != nullptr ? Battle::Phase::kAttackersTurn : Battle::Phase::kAttackerAttacking);
 			return start_task_idle(game, descr().main_animation(), 100);
 		}
 
