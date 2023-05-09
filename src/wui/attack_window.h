@@ -34,10 +34,13 @@
 /** Provides the attack settings when clicking on an enemy building. */
 class AttackPanel : public UI::Box {
 public:
+	enum class AttackType { kBuilding, kShip, kNavalInvasion };
+
 	AttackPanel(UI::Panel& parent,
 	            InteractivePlayer& iplayer,
 	            bool can_attack,
 	            const Widelands::Coords* target_coordinates,
+	            AttackType attack_type,
 	            std::function<std::vector<Widelands::Bob*>()> get_max_attackers);
 
 	size_t count_soldiers() const;
@@ -131,6 +134,7 @@ private:
 	};
 
 	std::function<std::vector<Widelands::Bob*>()> get_max_attackers_;
+	const AttackType attack_type_;
 
 	/// The last time the information in this Panel got updated
 	Time lastupdate_;
@@ -188,21 +192,20 @@ private:
 	Widelands::OPtr<Widelands::MapObject> target_building_or_ship_;
 	Widelands::Coords target_coordinates_;
 
-	enum class AttackType { kBuilding, kShip, kNavalInvasion };
-	const AttackType attack_type_;
+	const AttackPanel::AttackType attack_type_;
 
 	[[nodiscard]] Widelands::Building* get_building() const {
-		return attack_type_ != AttackType::kBuilding ?
+		return attack_type_ != AttackPanel::AttackType::kBuilding ?
                 nullptr :
                 dynamic_cast<Widelands::Building*>(target_building_or_ship_.get(iplayer_.egbase()));
 	}
 	[[nodiscard]] Widelands::Ship* get_ship() const {
-		return attack_type_ != AttackType::kShip ?
+		return attack_type_ != AttackPanel::AttackType::kShip ?
                 nullptr :
                 dynamic_cast<Widelands::Ship*>(target_building_or_ship_.get(iplayer_.egbase()));
 	}
 	[[nodiscard]] bool is_naval_invasion() const {
-		return attack_type_ == AttackType::kNavalInvasion;
+		return attack_type_ == AttackPanel::AttackType::kNavalInvasion;
 	}
 
 	void init_bottombox();

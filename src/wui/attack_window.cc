@@ -69,14 +69,15 @@ AttackWindow::AttackWindow(InteractivePlayer& parent,
      map_(iplayer_.player().egbase().map()),
      target_building_or_ship_(target_building_or_ship),
      target_coordinates_(target_coords),
-     attack_type_(target_building_or_ship == nullptr ? AttackType::kNavalInvasion :
+     attack_type_(target_building_or_ship == nullptr ? AttackPanel::AttackType::kNavalInvasion :
                   target_building_or_ship->descr().type() == Widelands::MapObjectType::SHIP ?
-                                                       AttackType::kShip :
-                                                       AttackType::kBuilding),
+                                                       AttackPanel::AttackType::kShip :
+                                                       AttackPanel::AttackType::kBuilding),
 
      mainbox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
      attack_panel_(
-        mainbox_, iplayer_, true, &target_coordinates_, [this]() { return get_max_attackers(); }),
+        mainbox_, iplayer_, true, &target_coordinates_, attack_type_,
+        [this]() { return get_max_attackers(); }),
      bottombox_(&mainbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal) {
 	if (target_building_or_ship != nullptr) {
 		const unsigned serial = serial_;
@@ -110,11 +111,13 @@ AttackPanel::AttackPanel(UI::Panel& parent,
                          InteractivePlayer& iplayer,
                          bool can_attack,
                          const Widelands::Coords* target_coordinates,
+                         AttackType attack_type,
                          std::function<std::vector<Widelands::Bob*>()> get_max_attackers)
    : UI::Box(&parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
      iplayer_(iplayer),
      target_coordinates_(target_coordinates),
      get_max_attackers_(get_max_attackers),
+     attack_type_(attack_type),
      lastupdate_(0),
 
      linebox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
@@ -172,34 +175,32 @@ std::vector<Widelands::Bob*> AttackWindow::get_max_attackers() {
 
 	// Look for nearby warships
 	for (Widelands::Serial ship_serial : iplayer_.player().ships()) {
-		if (Widelands::Ship* warship =
-		       dynamic_cast<Widelands::Ship*>(egbase.objects().get_object(ship_serial));
-		    warship != nullptr) {
-			if (warship->get_ship_type() == Widelands::ShipType::kWarship && warship->can_attack()) {
-				if (ship != nullptr) {  // Ship-to-ship combat
-					if (warship->get_attack_target(egbase) == ship) {
-						result_vector.push_back(warship);
-					}
-					continue;
+		Widelands::Ship* warship = dynamic_cast<Widelands::Ship*>(egbase.objects().get_object(ship_serial));
+		assert(warship != nullptr);
+		if (warship->get_ship_type() == Widelands::ShipType::kWarship && warship->can_attack()) {
+			if (ship != nullptr) {  // Ship-to-ship combat
+				if (warship->get_attack_target(egbase) == ship) {
+					result_vector.push_back(warship);
 				}
-
-				// Ship-to-land invasion
-				Widelands::Coords attack_port_space = warship->get_attack_coords();
-				if (!static_cast<bool>(attack_port_space)) {
-					continue;
-				}
-				attack_port_space = map_.find_portspace_for_dockpoint(attack_port_space);
-				if (!static_cast<bool>(attack_port_space)) {
-					continue;
-				}
-
-				if (building != nullptr && map_[attack_port_space].get_immovable() != building) {
-					continue;
-				}
-
-				std::vector<Widelands::Soldier*> onboard = warship->onboard_soldiers();
-				result_vector.insert(result_vector.end(), onboard.begin(), onboard.end());
+				continue;
 			}
+
+			// Ship-to-land invasion
+			Widelands::Coords attack_port_space = warship->get_attack_coords();
+			if (!static_cast<bool>(attack_port_space)) {
+				continue;
+			}
+			attack_port_space = map_.find_portspace_for_dockpoint(attack_port_space);
+			if (!static_cast<bool>(attack_port_space)) {
+				continue;
+			}
+
+			if (building != nullptr && map_[attack_port_space].get_immovable() != building) {
+				continue;
+			}
+
+			std::vector<Widelands::Soldier*> onboard = warship->onboard_soldiers();
+			result_vector.insert(result_vector.end(), onboard.begin(), onboard.end());
 		}
 	}
 
@@ -268,9 +269,13 @@ void AttackWindow::think() {
 	UI::UniqueWindow::think();
 }
 
-static inline std::string slider_heading(uint32_t num_attackers) {
-	/** TRANSLATORS: Number of soldiers that should attack. Used in the attack window. */
-	return format(ngettext("%u soldier", "%u soldiers", num_attackers), num_attackers);
+static inline std::string slider_heading(const uint32_t num_attackers, const bool ship) {
+	return format(ship ?
+			/** TRANSLATORS: Number of ships that should attack. Used in the attack window. */
+			ngettext("%u ship", "%u ships", num_attackers) :
+			/** TRANSLATORS: Number of soldiers that should attack. Used in the attack window. */
+			ngettext("%u soldier", "%u soldiers", num_attackers),
+			num_attackers);
 }
 
 void AttackPanel::update(bool action_on_panel) {
@@ -337,7 +342,7 @@ void AttackPanel::update(bool action_on_panel) {
 	more_soldiers_->set_enabled(max_attackers > soldiers_slider_->get_value());
 	less_soldiers_->set_enabled(soldiers_slider_->get_value() > 0);
 
-	soldiers_text_->set_text(slider_heading(soldiers_slider_->get_value()));
+	soldiers_text_->set_text(slider_heading(soldiers_slider_->get_value(), attack_type_ == AttackType::kShip));
 
 	more_soldiers_->set_title(std::to_string(max_attackers));
 }
@@ -345,20 +350,22 @@ void AttackPanel::update(bool action_on_panel) {
 void AttackPanel::init_slider(const std::vector<Widelands::Bob*>& all_attackers, bool can_attack) {
 	const size_t max_attackers = all_attackers.size();
 
-	soldiers_text_.reset(&add_text(columnbox_, slider_heading(max_attackers > 0 ? 1 : 0),
+	soldiers_text_.reset(&add_text(columnbox_, slider_heading(max_attackers > 0 ? 1 : 0, attack_type_ == AttackType::kShip),
 	                               UI::Align::kCenter, UI::FontStyle::kWuiAttackBoxSliderLabel));
 	soldiers_slider_ = add_slider(
-	   columnbox_, 210, 17, 0, max_attackers, max_attackers > 0 ? 1 : 0, _("Number of soldiers"));
+	   columnbox_, 210, 17, 0, max_attackers, max_attackers > 0 ? 1 : 0, attack_type_ == AttackType::kShip ? _("Number of ships") : _("Number of soldiers"));
 	soldiers_slider_->changed.connect([this]() { update(false); });
 
 	add(&linebox_, UI::Box::Resizing::kFullSize);
 	less_soldiers_.reset(add_button(this, linebox_, "less", "0", &AttackPanel::send_less_soldiers,
 	                                UI::ButtonStyle::kWuiSecondary,
+	                                attack_type_ == AttackType::kShip ? _("Send less ships. Hold down Ctrl to send no ships") :
 	                                _("Send less soldiers. Hold down Ctrl to send no soldiers")));
 	linebox_.add(&columnbox_);
 	more_soldiers_.reset(
 	   add_button(this, linebox_, "more", std::to_string(max_attackers),
 	              &AttackPanel::send_more_soldiers, UI::ButtonStyle::kWuiSecondary,
+	              attack_type_ == AttackType::kShip ? _("Send more ships. Hold down Ctrl to send as many ships as possible") :
 	              _("Send more soldiers. Hold down Ctrl to send as many soldiers as possible")));
 	linebox_.add_space(kSpacing);
 	if (can_attack) {
@@ -390,10 +397,15 @@ void AttackPanel::init_soldier_lists(const std::vector<Widelands::Bob*>& all_att
 		txt.set_tooltip(format(
 		   tooltip_format,
 		   g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
-		      .as_font_tag(_("Click on a soldier to remove him from the list of attackers")),
+		      .as_font_tag(
+	              attack_type_ == AttackType::kShip ? _("Click on a ship to remove her from the list of attackers") :
+	              _("Click on a soldier to remove him from the list of attackers")),
 		   as_listitem(
+	              attack_type_ == AttackType::kShip ? _("Hold down Ctrl to remove all ships from the list") :
 		      _("Hold down Ctrl to remove all soldiers from the list"), UI::FontStyle::kWuiTooltip),
-		   as_listitem(_("Hold down Shift to remove all soldiers up to the one you’re pointing at"),
+		   as_listitem(
+	              attack_type_ == AttackType::kShip ? _("Hold down Shift to remove all ships up to the one you’re pointing at") :
+		   _("Hold down Shift to remove all soldiers up to the one you’re pointing at"),
 		               UI::FontStyle::kWuiTooltip)));
 		add(attacking_soldiers_.get(), UI::Box::Resizing::kFullSize);
 	}
@@ -405,10 +417,15 @@ void AttackPanel::init_soldier_lists(const std::vector<Widelands::Bob*>& all_att
 		txt.set_tooltip(format(
 		   tooltip_format,
 		   g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
-		      .as_font_tag(_("Click on a soldier to add him to the list of attackers")),
+		      .as_font_tag(
+	              attack_type_ == AttackType::kShip ? _("Click on a ship to add her to the list of attackers") :
+		      _("Click on a soldier to add him to the list of attackers")),
 		   as_listitem(
+	              attack_type_ == AttackType::kShip ? _("Hold down Ctrl to add all ships to the list") :
 		      _("Hold down Ctrl to add all soldiers to the list"), UI::FontStyle::kWuiTooltip),
-		   as_listitem(_("Hold down Shift to add all soldiers up to the one you’re pointing at"),
+		   as_listitem(
+	              attack_type_ == AttackType::kShip ? _("Hold down Shift to add all ships up to the one you’re pointing at") :
+		   _("Hold down Shift to add all soldiers up to the one you’re pointing at"),
 		               UI::FontStyle::kWuiTooltip)));
 		add(remaining_soldiers_.get(), UI::Box::Resizing::kFullSize);
 	}
@@ -419,7 +436,7 @@ void AttackWindow::init_bottombox() {
 	Widelands::Building* building = get_building();
 	Widelands::Ship* ship = get_ship();
 	if ((building == nullptr && ship == nullptr) && !is_naval_invasion()) {
-		die();  // The target building no longer exists.
+		die();  // The target object no longer exists.
 		return;
 	}
 
@@ -468,7 +485,6 @@ void AttackWindow::act_attack() {
 		for (auto& pair : soldiers_on_warships) {
 			iplayer_.game().send_player_warship_command(
 			   *pair.first.get(iplayer_.egbase()), Widelands::WarshipCommand::kAttack, pair.second);
-			iplayer_.map_view()->mouse_to_field(target_coordinates_, MapView::Transition::Jump);
 		}
 
 		iplayer_.map_view()->mouse_to_field(target_coordinates_, MapView::Transition::Jump);
