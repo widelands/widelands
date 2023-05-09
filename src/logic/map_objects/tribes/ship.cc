@@ -391,7 +391,8 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 			const Map& map = game.map();
 			FCoords position = map.get_fcoords(get_position());
 			if (position.field->get_immovable() != dest) {
-				start_task_movetodock(game, *dest);
+				molog(game.get_gametime(), "Move to dock %u for refit\n", dest->serial());
+				return start_task_movetodock(game, *dest);
 			} else {
 				// Arrived at destination, now unload and refit
 				set_destination(game, nullptr);
@@ -427,6 +428,7 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 			}
 		} else {
 			// Destination vanished, try to find a new one
+			molog(game.get_gametime(), "Refit failed, retry\n");
 			const ShipType t = pending_refit_;
 			pending_refit_ = ship_type_;
 			refit(game, t);
@@ -867,7 +869,7 @@ void Ship::refit(Game& game, const ShipType type) {
 		return;
 	}
 
-	if (destination_.get(game) != nullptr) {
+	if (get_destination_port(game) != nullptr) {
 		send_signal(game, "wakeup");
 	} else if (PortDock* dest = find_nearest_port(game); dest != nullptr) {
 		set_destination(game, dest);
