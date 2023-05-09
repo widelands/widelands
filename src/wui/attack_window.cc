@@ -75,9 +75,12 @@ AttackWindow::AttackWindow(InteractivePlayer& parent,
                                                        AttackPanel::AttackType::kBuilding),
 
      mainbox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-     attack_panel_(
-        mainbox_, iplayer_, true, &target_coordinates_, attack_type_,
-        [this]() { return get_max_attackers(); }),
+     attack_panel_(mainbox_,
+                   iplayer_,
+                   true,
+                   &target_coordinates_,
+                   attack_type_,
+                   [this]() { return get_max_attackers(); }),
      bottombox_(&mainbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal) {
 	if (target_building_or_ship != nullptr) {
 		const unsigned serial = serial_;
@@ -175,7 +178,8 @@ std::vector<Widelands::Bob*> AttackWindow::get_max_attackers() {
 
 	// Look for nearby warships
 	for (Widelands::Serial ship_serial : iplayer_.player().ships()) {
-		Widelands::Ship* warship = dynamic_cast<Widelands::Ship*>(egbase.objects().get_object(ship_serial));
+		Widelands::Ship* warship =
+		   dynamic_cast<Widelands::Ship*>(egbase.objects().get_object(ship_serial));
 		assert(warship != nullptr);
 		if (warship->get_ship_type() == Widelands::ShipType::kWarship && warship->can_attack()) {
 			if (ship != nullptr) {  // Ship-to-ship combat
@@ -270,12 +274,13 @@ void AttackWindow::think() {
 }
 
 static inline std::string slider_heading(const uint32_t num_attackers, const bool ship) {
-	return format(ship ?
-			/** TRANSLATORS: Number of ships that should attack. Used in the attack window. */
-			ngettext("%u ship", "%u ships", num_attackers) :
-			/** TRANSLATORS: Number of soldiers that should attack. Used in the attack window. */
-			ngettext("%u soldier", "%u soldiers", num_attackers),
-			num_attackers);
+	return format(
+	   ship ?
+         /** TRANSLATORS: Number of ships that should attack. Used in the attack window. */
+         ngettext("%u ship", "%u ships", num_attackers) :
+         /** TRANSLATORS: Number of soldiers that should attack. Used in the attack window. */
+         ngettext("%u soldier", "%u soldiers", num_attackers),
+	   num_attackers);
 }
 
 void AttackPanel::update(bool action_on_panel) {
@@ -342,7 +347,8 @@ void AttackPanel::update(bool action_on_panel) {
 	more_soldiers_->set_enabled(max_attackers > soldiers_slider_->get_value());
 	less_soldiers_->set_enabled(soldiers_slider_->get_value() > 0);
 
-	soldiers_text_->set_text(slider_heading(soldiers_slider_->get_value(), attack_type_ == AttackType::kShip));
+	soldiers_text_->set_text(
+	   slider_heading(soldiers_slider_->get_value(), attack_type_ == AttackType::kShip));
 
 	more_soldiers_->set_title(std::to_string(max_attackers));
 }
@@ -350,23 +356,27 @@ void AttackPanel::update(bool action_on_panel) {
 void AttackPanel::init_slider(const std::vector<Widelands::Bob*>& all_attackers, bool can_attack) {
 	const size_t max_attackers = all_attackers.size();
 
-	soldiers_text_.reset(&add_text(columnbox_, slider_heading(max_attackers > 0 ? 1 : 0, attack_type_ == AttackType::kShip),
-	                               UI::Align::kCenter, UI::FontStyle::kWuiAttackBoxSliderLabel));
+	soldiers_text_.reset(&add_text(
+	   columnbox_, slider_heading(max_attackers > 0 ? 1 : 0, attack_type_ == AttackType::kShip),
+	   UI::Align::kCenter, UI::FontStyle::kWuiAttackBoxSliderLabel));
 	soldiers_slider_ = add_slider(
-	   columnbox_, 210, 17, 0, max_attackers, max_attackers > 0 ? 1 : 0, attack_type_ == AttackType::kShip ? _("Number of ships") : _("Number of soldiers"));
+	   columnbox_, 210, 17, 0, max_attackers, max_attackers > 0 ? 1 : 0,
+	   attack_type_ == AttackType::kShip ? _("Number of ships") : _("Number of soldiers"));
 	soldiers_slider_->changed.connect([this]() { update(false); });
 
 	add(&linebox_, UI::Box::Resizing::kFullSize);
 	less_soldiers_.reset(add_button(this, linebox_, "less", "0", &AttackPanel::send_less_soldiers,
 	                                UI::ButtonStyle::kWuiSecondary,
-	                                attack_type_ == AttackType::kShip ? _("Send less ships. Hold down Ctrl to send no ships") :
-	                                _("Send less soldiers. Hold down Ctrl to send no soldiers")));
+	                                attack_type_ == AttackType::kShip ?
+                                      _("Send less ships. Hold down Ctrl to send no ships") :
+                                      _("Send less soldiers. Hold down Ctrl to send no soldiers")));
 	linebox_.add(&columnbox_);
 	more_soldiers_.reset(
 	   add_button(this, linebox_, "more", std::to_string(max_attackers),
 	              &AttackPanel::send_more_soldiers, UI::ButtonStyle::kWuiSecondary,
-	              attack_type_ == AttackType::kShip ? _("Send more ships. Hold down Ctrl to send as many ships as possible") :
-	              _("Send more soldiers. Hold down Ctrl to send as many soldiers as possible")));
+	              attack_type_ == AttackType::kShip ?
+                    _("Send more ships. Hold down Ctrl to send as many ships as possible") :
+                    _("Send more soldiers. Hold down Ctrl to send as many soldiers as possible")));
 	linebox_.add_space(kSpacing);
 	if (can_attack) {
 		attack_button_.reset(add_button(
@@ -397,16 +407,18 @@ void AttackPanel::init_soldier_lists(const std::vector<Widelands::Bob*>& all_att
 		txt.set_tooltip(format(
 		   tooltip_format,
 		   g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
-		      .as_font_tag(
-	              attack_type_ == AttackType::kShip ? _("Click on a ship to remove her from the list of attackers") :
-	              _("Click on a soldier to remove him from the list of attackers")),
+		      .as_font_tag(attack_type_ == AttackType::kShip ?
+                            _("Click on a ship to remove her from the list of attackers") :
+                            _("Click on a soldier to remove him from the list of attackers")),
+		   as_listitem(attack_type_ == AttackType::kShip ?
+                        _("Hold down Ctrl to remove all ships from the list") :
+                        _("Hold down Ctrl to remove all soldiers from the list"),
+		               UI::FontStyle::kWuiTooltip),
 		   as_listitem(
-	              attack_type_ == AttackType::kShip ? _("Hold down Ctrl to remove all ships from the list") :
-		      _("Hold down Ctrl to remove all soldiers from the list"), UI::FontStyle::kWuiTooltip),
-		   as_listitem(
-	              attack_type_ == AttackType::kShip ? _("Hold down Shift to remove all ships up to the one you’re pointing at") :
-		   _("Hold down Shift to remove all soldiers up to the one you’re pointing at"),
-		               UI::FontStyle::kWuiTooltip)));
+		      attack_type_ == AttackType::kShip ?
+               _("Hold down Shift to remove all ships up to the one you’re pointing at") :
+               _("Hold down Shift to remove all soldiers up to the one you’re pointing at"),
+		      UI::FontStyle::kWuiTooltip)));
 		add(attacking_soldiers_.get(), UI::Box::Resizing::kFullSize);
 	}
 
@@ -417,15 +429,16 @@ void AttackPanel::init_soldier_lists(const std::vector<Widelands::Bob*>& all_att
 		txt.set_tooltip(format(
 		   tooltip_format,
 		   g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
-		      .as_font_tag(
-	              attack_type_ == AttackType::kShip ? _("Click on a ship to add her to the list of attackers") :
-		      _("Click on a soldier to add him to the list of attackers")),
-		   as_listitem(
-	              attack_type_ == AttackType::kShip ? _("Hold down Ctrl to add all ships to the list") :
-		      _("Hold down Ctrl to add all soldiers to the list"), UI::FontStyle::kWuiTooltip),
-		   as_listitem(
-	              attack_type_ == AttackType::kShip ? _("Hold down Shift to add all ships up to the one you’re pointing at") :
-		   _("Hold down Shift to add all soldiers up to the one you’re pointing at"),
+		      .as_font_tag(attack_type_ == AttackType::kShip ?
+                            _("Click on a ship to add her to the list of attackers") :
+                            _("Click on a soldier to add him to the list of attackers")),
+		   as_listitem(attack_type_ == AttackType::kShip ?
+                        _("Hold down Ctrl to add all ships to the list") :
+                        _("Hold down Ctrl to add all soldiers to the list"),
+		               UI::FontStyle::kWuiTooltip),
+		   as_listitem(attack_type_ == AttackType::kShip ?
+                        _("Hold down Shift to add all ships up to the one you’re pointing at") :
+                        _("Hold down Shift to add all soldiers up to the one you’re pointing at"),
 		               UI::FontStyle::kWuiTooltip)));
 		add(remaining_soldiers_.get(), UI::Box::Resizing::kFullSize);
 	}
