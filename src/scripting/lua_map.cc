@@ -6713,7 +6713,7 @@ int LuaMarket::propose_trade(lua_State* L) {
 	const Widelands::BillOfMaterials items_to_send =
 	   parse_wares_as_bill_of_material(L, 4, self->owner().tribe());
 	// TODO(sirver,trading): unsure if correct. Test inter-tribe trading, i.e.
-	// Barbarians trading with Empire, but shipping Atlantean only wares.
+	// Barbarians trading with empire, but shipping Atlantean only wares.
 	const Widelands::BillOfMaterials items_to_receive =
 	   parse_wares_as_bill_of_material(L, 5, self->owner().tribe());
 	const int trade_id = game.propose_trade(Widelands::Trade{
