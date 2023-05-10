@@ -1391,7 +1391,9 @@ wl.Descriptions():new_tribe {
          name = "amazons_stone_workshop",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an amazon production site: Stone Workshop
-            purpose = pgettext("amazons_building", "Makes tools and spears for our soldiers.")
+            purpose = pgettext("amazons_building", "Makes tools and spears for our soldiers."),
+            -- TRANSLATORS: Performance helptext for an amazon production site: Stone Workshop
+            performance = pgettext("amazons_building", "When this building is fully supplied and all tools and spears are needed by the economy, production of one of each tool takes %1$s and one of each spear takes %2$s on average. If only one kind of tool or spear is is needed by the economy, its production takes %3$s on average."):bformat(format_minutes_seconds(21, 18), format_minutes_seconds(7, 6), format_minutes_seconds(1, 11))
          }
       },
       {
@@ -1402,7 +1404,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an amazon production site: Dressmakery
             lore_author = pgettext("amazons_building", "Dressmakers’ ethos, adapted from the traditional verse ‘Mother Jungle’s wisdom: Song of the Conscientious.’"),
             -- TRANSLATORS: Purpose helptext for an amazon production site: Dressmakery
-            purpose = pgettext("amazons_building", "Sews all dresses, boots and armor for our soldiers.")
+            purpose = pgettext("amazons_building", "Sews all dresses, boots and armor for our soldiers."),
+            -- TRANSLATORS: Performance helptext for an amazon production site: Dressmakery
+            performance = pgettext("amazons_building", "When this building is fully supplied and all dresses are needed by the economy, production of one of each dress takes %1$s on average. If only one kind of dress is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(10, 39), format_minutes_seconds(1, 11))
          }
       },
       {
