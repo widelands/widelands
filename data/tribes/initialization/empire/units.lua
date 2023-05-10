@@ -1789,7 +1789,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an empire production site: Weapon Smithy
             purpose = pgettext("empire_building", "Forges spears to equip the soldiers and to train their attack in the training camp."),
             -- TRANSLATORS: Performance helptext for an empire production site: Weapon Smithy
-            performance = pgettext("empire_building", "When this building is fully supplied and all spears are needed by the economy, production of one of each spears takes %1$s on average. If only one kind of spear is needed by the economy, production of one wooden spear takes %2$s, one spear takes %3$s, one advanced spear takes %4$s, one heavy spear takes %5$s and one war spear takes %6$s on average."):bformat(format_minutes_seconds(6, 18), format_seconds(54), format_minutes_seconds(1, 21), format_minutes_seconds(1, 21), format_minutes_seconds(1, 21), format_minutes_seconds(1, 21))
+            performance = pgettext("empire_building", "When this building is fully supplied and all spears are needed by the economy, production of one of each spear takes %1$s on average. If only one kind of spear is needed by the economy, production of one wooden spear takes %2$s, one spear takes %3$s, one advanced spear takes %4$s, one heavy spear takes %5$s and one war spear takes %6$s on average."):bformat(format_minutes_seconds(6, 18), format_seconds(54), format_minutes_seconds(1, 21), format_minutes_seconds(1, 21), format_minutes_seconds(1, 21), format_minutes_seconds(1, 21))
          }
       },
 

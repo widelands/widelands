@@ -1845,7 +1845,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Tailor's Shop
             purpose = pgettext("building", "Equips fur garments with iron or gold to produce good armor."),
             -- TRANSLATORS: Performance helptext for a frisian production site: Tailor's Shop
-            performance = pgettext("frisians_building", "When this building is fully supplied and all kinds of garments are needed by the economy, production of one of each garments takes %1$s on average. If only one kind of garments is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(1, 48), format_seconds(59))
+            performance = pgettext("frisians_building", "When this building is fully supplied and all garments are needed by the economy, production of one of each garment takes %1$s on average. If only one kind of garment is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(1, 48), format_seconds(59))
          }
       },
       {

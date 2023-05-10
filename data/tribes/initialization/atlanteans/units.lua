@@ -1712,7 +1712,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Weapon Smithy
             lore_author = pgettext("atlanteans_building", "Atlantean nursery rhyme"),
             -- TRANSLATORS: Performance helptext for an atlantean production site: Weapon Smithy
-            performance = pgettext("atlanteans_building", "When this building is fully supplied and all tridents are needed by the economy, production of one of each tridents takes %1$s on average. If only one kind of trident is needed by the economy, production of one light trident takes %2$s, one long trident takes %3$s, one steel trident takes %4$s, one double trident takes %5$s and one heavy double trident takes %6$s on average."):bformat(format_minutes_seconds(6, 18), format_seconds(54), format_minutes_seconds(1, 21), format_minutes_seconds(1, 21), format_minutes_seconds(1, 21), format_minutes_seconds(1, 21))
+            performance = pgettext("atlanteans_building", "When this building is fully supplied and all tridents are needed by the economy, production of one of each trident takes %1$s on average. If only one kind of trident is needed by the economy, production of one light trident takes %2$s, one long trident takes %3$s, one steel trident takes %4$s, one double trident takes %5$s and one heavy double trident takes %6$s on average."):bformat(format_minutes_seconds(6, 18), format_seconds(54), format_minutes_seconds(1, 21), format_minutes_seconds(1, 21), format_minutes_seconds(1, 21), format_minutes_seconds(1, 21))
          }
       },
       {
