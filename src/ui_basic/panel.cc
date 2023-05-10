@@ -217,11 +217,13 @@ void Panel::handle_notes() {
 			// If there are multiple modal panels, ensure each note is handled only once
 			Notifications::publish(NoteThreadSafeFunctionHandled(notes_.front().id));
 
-			notes_.front().run();
+			NoteThreadSafeFunction note = notes_.front();
+			notes_.pop_front();
+			note.run();
 		} else {
 			handled_notes_.erase(notes_.front().id);
+			notes_.pop_front();
 		}
-		notes_.pop_front();
 	}
 }
 
@@ -257,10 +259,9 @@ void Panel::do_redraw_now(const bool handle_input, const std::string& message) {
 		// until the logic frame has ended. During this time, we no longer
 		// handle input, and we gray out the user interface to indicate this.
 
-		rt.tile(Recti(0, 0, g_gr->get_xres(), g_gr->get_yres()),
-		        g_image_cache->get("loadscreens/ending.png"), Vector2i(0, 0));
+		rt.tile(rt.get_rect(), g_image_cache->get("loadscreens/ending.png"), Vector2i(0, 0));
 
-		draw_game_tip(rt, Recti(0, 0, g_gr->get_xres(), g_gr->get_yres()), message, 2);
+		draw_game_tip(rt, rt.get_rect(), message, 2);
 	}
 
 	if (g_mouse_cursor->is_visible()) {
@@ -1148,6 +1149,17 @@ void Panel::do_draw(RenderTarget& dst) {
 
 	if (!dst.enter_window(Recti(Vector2i(x_, y_), w_, h_), &outerrc, &outerofs)) {
 		return;
+	}
+
+	if (modal_.load() == this) {
+		// Darken out everything behind the modal window.
+		const Recti rect = dst.get_rect();
+		const Vector2i offset = dst.get_offset();
+		dst.set_window(Recti(Vector2i::zero(), g_gr->get_xres(), g_gr->get_yres()), Vector2i::zero());
+
+		dst.tile(dst.get_rect(), g_image_cache->get("loadscreens/ending.png"), Vector2i(0, 0));
+
+		dst.set_window(rect, offset);
 	}
 
 	draw_border(dst);

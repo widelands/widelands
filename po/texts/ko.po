@@ -14,10 +14,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-10 03:09+0000\n"
+"POT-Creation-Date: 2023-05-01 02:42+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: ks k, 2017-2021\n"
-"Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
+"Language-Team: Korean (http://app.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -379,12 +379,11 @@ msgstr "다시보기"
 
 #: ../../data/txts/help/common_helptexts.lua:30
 msgid ""
-"Widelands records every game you play in two files. One of these files has a"
-" .wrpl.wgf extension and contains an initial savegame. The other file has a "
-".wrpl extension and contains all commands that were issued by all players, "
-"such as building a road or attacking an enemy. The rest of the filenames "
+"Widelands records every game you play in a replay file with .wry extension. "
+"This file contains an initial savegame and all commands that were issued by "
+"all players, such as building a road or attacking an enemy. The filename "
 "will tell you the time you started the game."
-msgstr "와이드랜드는 당신이 하는 모든 게임을 두 개의 파일로 기록합니다. 하나는 확장자가 .wrpl.wgf이고 초기 상태를 저장 합니다. 다른 파일에는 .wrpl 확장자가 있으며, 땅길을 건설하거나 적을 공격하는 등 모든 플레이어가 실행한 모든 명령이 포함되어 있습니다. 파일 이름의 앞부분은 당신이 게임을 시작한 시간을 나타냅니다."
+msgstr ""
 
 #: ../../data/txts/help/common_helptexts.lua:31
 msgid ""
@@ -412,25 +411,9 @@ msgctxt "hotkey"
 msgid "%s:"
 msgstr "%s:"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
 #: ../../data/txts/help/common_helptexts.lua:48
-msgid "Toggle building spaces"
-msgstr "건물 공간 켜기/끄기"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
 #: ../../data/txts/help/common_helptexts.lua:57
-msgid "Toggle fullscreen (if supported by the OS)"
-msgstr "전체화면 켜기/끄기 (운영체제가 지원하는 경우)"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'm'
-#: ../../data/txts/help/common_helptexts.lua:66
-msgid "Toggle minimap"
-msgstr "작은 지도 켜기/끄기"
-
-#: ../../data/txts/help/common_helptexts.lua:75
-#: ../../data/txts/help/common_helptexts.lua:84
-#: ../../data/txts/help/common_helptexts.lua:93
+#: ../../data/txts/help/common_helptexts.lua:67
 msgid "%1% / %2%"
 msgstr "%1% / %2%"
 
@@ -652,8 +635,8 @@ msgstr "쉬프트키를 계속 누르면 첫 번째 대체 도구가 켜집니�
 
 #: ../../data/txts/tips/editor.lua:24
 msgid ""
-"Holding down Alt switches the second alternative tool on (if it exists)."
-msgstr "알트키를 누르면 두 번째 대체 도구가 켜집니다 (있는 경우)."
+"Holding down Ctrl switches the second alternative tool on (if it exists)."
+msgstr ""
 
 #: ../../data/txts/tips/editor.lua:28
 msgid ""
@@ -851,6 +834,14 @@ msgid "Shift + Arrow keys"
 msgstr "쉬프트 + 화살키"
 
 #: ../../data/txts/tips/general_game.lua:102
+msgid ""
+"If you play on a laptop with a touchpad, you can assign functionality to "
+"touchpad scrolling in the ‘Options’ → ‘Edit keyboard and mouse actions’ "
+"menu. For example, moving the map view can be much more comfortable by "
+"scrolling instead of dragging with the right mouse button."
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:106
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"

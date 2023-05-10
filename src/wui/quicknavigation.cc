@@ -18,7 +18,6 @@
 
 #include "wui/quicknavigation.h"
 
-#include "graphic/graphic.h"
 #include "graphic/text_layout.h"
 #include "logic/game_data_error.h"
 #include "ui_basic/editbox.h"
@@ -54,7 +53,7 @@ void QuickNavigation::jumped() {
 }
 
 void QuickNavigation::view_changed() {
-	current_ = map_view_->view();
+	current_ = map_view_->get_centered_view();
 	havefirst_ = true;
 }
 
@@ -91,17 +90,12 @@ bool QuickNavigation::handle_key(bool down, SDL_Keysym key) {
 	auto check_landmark = [this, key](const uint8_t i) {
 		// This function assumes that the shortcut entries are ordered
 		// Set1,Goto1,Set2,Goto2,Set3,Goto3,etc
-		if (matches_shortcut(static_cast<KeyboardShortcut>(
-		                        static_cast<uint16_t>(KeyboardShortcut::kInGameQuicknavSet1) + 2 * i),
-		                     key)) {
+		if (matches_shortcut(KeyboardShortcut::kInGameQuicknavSet1 + 2 * i, key)) {
 			set_landmark_to_current(i);
 			return true;
 		}
 		if (landmarks_[i].set &&
-		    matches_shortcut(
-		       static_cast<KeyboardShortcut>(
-		          static_cast<uint16_t>(KeyboardShortcut::kInGameQuicknavGoto1) + 2 * i),
-		       key)) {
+		    matches_shortcut(KeyboardShortcut::kInGameQuicknavGoto1 + 2 * i, key)) {
 			goto_landmark(i);
 			return true;
 		}
@@ -136,7 +130,7 @@ bool QuickNavigation::can_goto_next() const {
 }
 
 void QuickNavigation::goto_landmark(int index) {
-	map_view_->set_view(landmarks_[index].view, MapView::Transition::Smooth);
+	map_view_->set_centered_view(landmarks_[index].view, MapView::Transition::Smooth);
 }
 
 void QuickNavigation::goto_prev() {
@@ -144,7 +138,7 @@ void QuickNavigation::goto_prev() {
 		return;
 	}
 	insert_if_applicable(next_locations_);
-	map_view_->set_view(previous_locations_.back(), MapView::Transition::Smooth);
+	map_view_->set_centered_view(previous_locations_.back(), MapView::Transition::Smooth);
 	previous_locations_.pop_back();
 }
 
@@ -153,7 +147,7 @@ void QuickNavigation::goto_next() {
 		return;
 	}
 	insert_if_applicable(previous_locations_);
-	map_view_->set_view(next_locations_.back(), MapView::Transition::Smooth);
+	map_view_->set_centered_view(next_locations_.back(), MapView::Transition::Smooth);
 	next_locations_.pop_back();
 }
 
@@ -243,10 +237,7 @@ void QuickNavigationWindow::rebuild() {
 		   i < kQuicknavSlots ?
             as_tooltip_text_with_hotkey(
 		         _("Go to this landmark"),
-		         shortcut_string_for(
-		            static_cast<KeyboardShortcut>(
-		               static_cast<uint16_t>(KeyboardShortcut::kInGameQuicknavGoto1) + 2 * i),
-		            true),
+		         shortcut_string_for(KeyboardShortcut::kInGameQuicknavGoto1 + 2 * i, true),
 		         UI::PanelStyle::kWui) :
             _("Go to this landmark"));
 		b->set_enabled(q.landmarks()[i].set);
@@ -262,11 +253,8 @@ void QuickNavigationWindow::rebuild() {
 			show_watch_window(
 			   dynamic_cast<InteractiveGameBase&>(ibase_),
 			   MapviewPixelFunctions::calc_node_and_triangle(
-			      ibase_.egbase().map(),
-			      // Technically, a landmark is the top-left corner of the screen,
-			      // but we like to pretend it's the screen center instead.
-			      static_cast<int>(q.landmarks()[i].view.viewpoint.x) + g_gr->get_xres() / 2,
-			      static_cast<int>(q.landmarks()[i].view.viewpoint.y) + g_gr->get_yres() / 2)
+			      ibase_.egbase().map(), static_cast<int>(q.landmarks()[i].view.viewpoint.x),
+			      static_cast<int>(q.landmarks()[i].view.viewpoint.y))
 			      .node);
 		});
 		box.add(b);
@@ -284,10 +272,7 @@ void QuickNavigationWindow::rebuild() {
 		   i < kQuicknavSlots ?
             as_tooltip_text_with_hotkey(
 		         _("Set this landmark to the current map view location"),
-		         shortcut_string_for(
-		            static_cast<KeyboardShortcut>(
-		               static_cast<uint16_t>(KeyboardShortcut::kInGameQuicknavSet1) + 2 * i),
-		            true),
+		         shortcut_string_for(KeyboardShortcut::kInGameQuicknavSet1 + 2 * i, true),
 		         UI::PanelStyle::kWui) :
             _("Set this landmark to the current map view location"));
 		b->sigclicked.connect([&q, i]() { q.set_landmark_to_current(i); });

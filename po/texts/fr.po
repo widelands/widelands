@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-10 03:09+0000\n"
+"POT-Creation-Date: 2023-05-01 02:42+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020-2022\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
@@ -385,12 +385,11 @@ msgstr "Replays"
 
 #: ../../data/txts/help/common_helptexts.lua:30
 msgid ""
-"Widelands records every game you play in two files. One of these files has a"
-" .wrpl.wgf extension and contains an initial savegame. The other file has a "
-".wrpl extension and contains all commands that were issued by all players, "
-"such as building a road or attacking an enemy. The rest of the filenames "
+"Widelands records every game you play in a replay file with .wry extension. "
+"This file contains an initial savegame and all commands that were issued by "
+"all players, such as building a road or attacking an enemy. The filename "
 "will tell you the time you started the game."
-msgstr "Widelands enregistre chaque partie que vous jouez dans deux fichiers. Un de ces fichiers a une extension .wrpl.wgf et contient la sauvegarde du jeu initial. L'autre fichier possède une extension .wrpl et contient toutes les commandes qui ont été émises par l'ensemble des acteurs, tels que la construction d'une route ou l'attaque d'un ennemi. Le reste des noms des fichiers vous donnera l'heure à laquelle vous avez commencé la partie."
+msgstr ""
 
 #: ../../data/txts/help/common_helptexts.lua:31
 msgid ""
@@ -418,25 +417,9 @@ msgctxt "hotkey"
 msgid "%s:"
 msgstr "%s :"
 
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
 #: ../../data/txts/help/common_helptexts.lua:48
-msgid "Toggle building spaces"
-msgstr "Dés/Activer les espaces constructibles"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
 #: ../../data/txts/help/common_helptexts.lua:57
-msgid "Toggle fullscreen (if supported by the OS)"
-msgstr "Dés/Activer le plein-écran (si supporté par l'OS)"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'm'
-#: ../../data/txts/help/common_helptexts.lua:66
-msgid "Toggle minimap"
-msgstr "Dés/Activer la mini-carte"
-
-#: ../../data/txts/help/common_helptexts.lua:75
-#: ../../data/txts/help/common_helptexts.lua:84
-#: ../../data/txts/help/common_helptexts.lua:93
+#: ../../data/txts/help/common_helptexts.lua:67
 msgid "%1% / %2%"
 msgstr "%1% / %2%"
 
@@ -658,8 +641,8 @@ msgstr "Maintenir Shift active le premier outil alternatif. Cet outil est dans l
 
 #: ../../data/txts/tips/editor.lua:24
 msgid ""
-"Holding down Alt switches the second alternative tool on (if it exists)."
-msgstr "Maintenir Alt active le second outil alternatif (si celui-ci existe)."
+"Holding down Ctrl switches the second alternative tool on (if it exists)."
+msgstr ""
 
 #: ../../data/txts/tips/editor.lua:28
 msgid ""
@@ -857,6 +840,14 @@ msgid "Shift + Arrow keys"
 msgstr "Shift + Touches fléchées"
 
 #: ../../data/txts/tips/general_game.lua:102
+msgid ""
+"If you play on a laptop with a touchpad, you can assign functionality to "
+"touchpad scrolling in the ‘Options’ → ‘Edit keyboard and mouse actions’ "
+"menu. For example, moving the map view can be much more comfortable by "
+"scrolling instead of dragging with the right mouse button."
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:106
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"

@@ -48,4 +48,5 @@ wl_library(game_io
     ui_basic
     wui
     wui_mapview
+    wui_mapview_pixelfunctions
 )

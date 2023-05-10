@@ -121,6 +121,9 @@ public:
 	// Set the view to 'view'.
 	void set_view(const View& view, const Transition& transition);
 
+	// Set the view with the reference point of 'centered_view' in the center
+	void set_centered_view(const View& centered_view, const Transition& transition);
+
 	// Moves the view so that 'coords' is centered.
 	void scroll_to_field(const Widelands::Coords& coords, const Transition& transition);
 
@@ -145,6 +148,9 @@ public:
 
 	// The current view.
 	const View& view() const;
+
+	// Returns the current view with the center point as reference point
+	View get_centered_view() const;
 
 	// Set the zoom to the 'new_zoom'. This keeps the map_pixel that is
 	// displayed at 'panel_pixel' unchanging, i.e. the center of the zoom.

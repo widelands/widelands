@@ -40,7 +40,7 @@ inline uint32_t get_map_end_screen_y(const Widelands::Map& map) {
 
 inline Vector2f
 map_to_panel(const Vector2f& viewpoint, const float zoom, const Vector2f& map_pixel) {
-	return map_pixel / zoom - viewpoint / zoom;
+	return (map_pixel - viewpoint) / zoom;
 }
 
 inline Vector2f

@@ -36,6 +36,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
+#include "ui_basic/toolbar_setup.h"
 #include "ui_basic/unique_window.h"
 #include "wlapplication_options.h"
 #include "wui/attack_window.h"
@@ -177,9 +178,9 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
                      "dropdown_menu_statistics",
                      0,
                      0,
-                     MainToolbar::kButtonSize,
+                     UI::main_toolbar_button_size(),
                      10,
-                     MainToolbar::kButtonSize,
+                     UI::main_toolbar_button_size(),
                      /** TRANSLATORS: Title for the statistics menu button in the game */
                      _("Statistics"),
                      UI::DropdownType::kPictorialMenu,
@@ -612,9 +613,10 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 					}
 				}
 
-				const auto* overlay = get_buildhelp_overlay(caps);
+				const auto* overlay = get_buildhelp_overlay(caps, scale);
 				if (overlay != nullptr) {
-					blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale, opacity);
+					blit_field_overlay(
+					   dst, *f, overlay->pic, overlay->hotspot, scale / overlay->scale, opacity);
 				}
 
 				// Draw port space hint if a port could be built here, but current situation doesn't
@@ -850,6 +852,27 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 	}
 
 	return InteractiveGameBase::handle_key(down, code);
+}
+
+std::string InteractivePlayer::get_fastplace_help() const {
+	const Widelands::TribeDescr& tribe = player().tribe();
+	std::vector<FastplaceShortcut> fp_sc_v = get_active_fastplace_shortcuts(tribe.name());
+	if (fp_sc_v.empty()) {
+		return "";
+	}
+
+	std::string rv;
+	for (const FastplaceShortcut& fp_sc : fp_sc_v) {
+		const Widelands::DescriptionIndex bi = egbase().descriptions().building_index(fp_sc.building);
+		if (tribe.has_building(bi)) {
+			rv += as_definition_line(fp_sc.hotkey, tribe.get_building_descr(bi)->descname());
+		}
+	}
+
+	if (rv.empty()) {
+		return "";
+	}
+	return as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, _("Fastplace Shortcuts")) + rv;
 }
 
 void InteractivePlayer::edit_pinned_note(const Widelands::FCoords& c) {

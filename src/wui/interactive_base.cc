@@ -53,6 +53,7 @@
 #include "network/gamehost.h"
 #include "scripting/lua_interface.h"
 #include "sound/sound_handler.h"
+#include "ui_basic/toolbar_setup.h"
 #include "wlapplication_options.h"
 #include "wui/attack_window.h"
 #include "wui/building_statistics_menu.h"
@@ -128,9 +129,9 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
                   "dropdown_menu_mapview",
                   0,
                   0,
-                  MainToolbar::kButtonSize,
+                  UI::main_toolbar_button_size(),
                   10,
-                  MainToolbar::kButtonSize,
+                  UI::main_toolbar_button_size(),
                   /** TRANSLATORS: Title for the map view menu button in the game */
                   _("Map View"),
                   UI::DropdownType::kPictorialMenu,
@@ -153,28 +154,37 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
 	// Load the buildhelp icons.
 	{
 		BuildhelpOverlay* buildhelp_overlay = buildhelp_overlays_;
-		const char* filenames[] = {
+		constexpr const char* filenames[] = {
 		   "images/wui/overlays/set_flag.png", "images/wui/overlays/small.png",
 		   "images/wui/overlays/medium.png",   "images/wui/overlays/big.png",
 		   "images/wui/overlays/mine.png",     "images/wui/overlays/port.png"};
-		const char* const* filename = filenames;
+		for (uint8_t scale_index = 0; scale_index < ImageCache::kScalesCount; ++scale_index) {
+			const char* const* filename = filenames;
 
-		//  Special case for flag, which has a different formula for hotspot_y.
-		buildhelp_overlay->pic = g_image_cache->get(*filename);
-		buildhelp_overlay->hotspot =
-		   Vector2i(buildhelp_overlay->pic->width() / 2, buildhelp_overlay->pic->height() - 1);
-
-		const BuildhelpOverlay* const buildhelp_overlays_end =
-		   buildhelp_overlay + Widelands::Field::Buildhelp_None;
-		for (;;) {  // The other buildhelp overlays.
-			++buildhelp_overlay;
-			++filename;
-			if (buildhelp_overlay == buildhelp_overlays_end) {
-				break;
+			//  Special case for flag, which has a different formula for hotspot_y.
+			buildhelp_overlay->pic = g_image_cache->get(*filename, true, scale_index);
+			if (buildhelp_overlay->pic != nullptr) {
+				buildhelp_overlay->scale = ImageCache::kScales[scale_index].first;
+				buildhelp_overlay->hotspot =
+				   Vector2i(buildhelp_overlay->pic->width() / 2, buildhelp_overlay->pic->height() - 1);
 			}
-			buildhelp_overlay->pic = g_image_cache->get(*filename);
-			buildhelp_overlay->hotspot =
-			   Vector2i(buildhelp_overlay->pic->width() / 2, buildhelp_overlay->pic->height() / 2);
+
+			const BuildhelpOverlay* const buildhelp_overlays_end =
+			   buildhelp_overlay + Widelands::Field::Buildhelp_None;
+			for (;;) {  // The other buildhelp overlays.
+				++buildhelp_overlay;
+				++filename;
+				if (buildhelp_overlay == buildhelp_overlays_end) {
+					break;
+				}
+
+				buildhelp_overlay->pic = g_image_cache->get(*filename, true, scale_index);
+				if (buildhelp_overlay->pic != nullptr) {
+					buildhelp_overlay->scale = ImageCache::kScales[scale_index].first;
+					buildhelp_overlay->hotspot = Vector2i(
+					   buildhelp_overlay->pic->width() / 2, buildhelp_overlay->pic->height() / 2);
+				}
+			}
 		}
 	}
 
@@ -284,7 +294,7 @@ void InteractiveBase::rebuild_mapview_menu() {
                                                               _("Show Quick Navigation"),
 		                 MapviewMenuEntry::kQuicknav,
 		                 g_image_cache->get("images/wui/menus/quicknav.png"), false, "",
-		                 shortcut_string_for(KeyboardShortcut::kCommonQuicknavGUI, false));
+		                 shortcut_string_for(KeyboardShortcut::kInGameQuicknavGUI, false));
 	}
 
 	/** TRANSLATORS: An entry in the game's map view menu */
@@ -331,12 +341,34 @@ void InteractiveBase::mapview_menu_selected(MapviewMenuEntry entry) {
 }
 
 const InteractiveBase::BuildhelpOverlay*
-InteractiveBase::get_buildhelp_overlay(const Widelands::NodeCaps caps) const {
+InteractiveBase::get_buildhelp_overlay(const Widelands::NodeCaps caps, const float scale) const {
 	const int buildhelp_overlay_index = caps_to_buildhelp(caps);
-	if (buildhelp_overlay_index < Widelands::Field::Buildhelp_None) {
-		return &buildhelp_overlays_[buildhelp_overlay_index];
+	if (buildhelp_overlay_index >= Widelands::Field::Buildhelp_None) {
+		return nullptr;
 	}
-	return nullptr;
+
+	// buildhelp_overlays_ is ordered from smallest to biggest scale
+	const InteractiveBase::BuildhelpOverlay* result = nullptr;
+	for (int s = ImageCache::kScalesCount - 1; s >= 0; --s) {
+		const InteractiveBase::BuildhelpOverlay& overlay =
+		   buildhelp_overlays_[Widelands::Field::Buildhelp_None * s + buildhelp_overlay_index];
+		if (overlay.pic == nullptr) {
+			continue;
+		}
+
+		if (result == nullptr) {
+			result = &overlay;
+			continue;
+		}
+
+		if (overlay.scale < scale) {
+			break;
+		}
+
+		result = &overlay;
+	}
+
+	return result;
 }
 
 bool InteractiveBase::has_workarea_preview(const Widelands::Coords& coords,
@@ -450,8 +482,8 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
                                                 UI::UniqueWindow::Registry* window,
                                                 bool bind_default_toggle) {
 	UI::Button* button =
-	   new UI::Button(&toolbar_.box, name, 0, 0, MainToolbar::kButtonSize, MainToolbar::kButtonSize,
-	                  UI::ButtonStyle::kWuiPrimary,
+	   new UI::Button(&toolbar_.box, name, 0, 0, UI::main_toolbar_button_size(),
+	                  UI::main_toolbar_button_size(), UI::ButtonStyle::kWuiPrimary,
 	                  g_image_cache->get("images/" + image_basename + ".png"), tooltip_text);
 	toolbar_.box.add(button);
 	if (window != nullptr) {
@@ -1481,7 +1513,7 @@ void InteractiveBase::play_sound_effect(const NoteSound& note) const {
 
 // Repositions the chat overlay
 void InteractiveBase::resize_chat_overlay() {
-	chat_overlay_->set_size(get_w() / 2, get_h() - 25 - MainToolbar::kButtonSize);
+	chat_overlay_->set_size(get_w() / 2, get_h() - 25 - UI::main_toolbar_button_size());
 	chat_overlay_->recompute();
 }
 
@@ -1748,37 +1780,31 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			toggle_minimap();
 			return true;
 		}
-		if (egbase().is_game() && matches_shortcut(KeyboardShortcut::kCommonQuicknavGUI, code)) {
+		if (egbase().is_game() && matches_shortcut(KeyboardShortcut::kInGameQuicknavGUI, code)) {
 			toggle_quicknav();
 			return true;
 		}
 
-		switch (code.sym) {
 #ifndef NDEBUG  //  only in debug builds
-		case SDLK_SPACE:
-			if (((code.mod & KMOD_CTRL) != 0) && ((code.mod & KMOD_SHIFT) != 0)) {
-				GameChatMenu::create_script_console(
-				   this, color_functor(), debugconsole_, *DebugConsole::get_chat_provider());
-				return true;
+		if (matches_shortcut(KeyboardShortcut::kCommonDebugConsole, code)) {
+			GameChatMenu::create_script_console(
+			   this, color_functor(), debugconsole_, *DebugConsole::get_chat_provider());
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kCommonCheatMode, code)) {
+			if (cheat_mode_enabled_) {
+				cheat_mode_enabled_ = false;
+			} else if (!omnipotent()) {
+				broadcast_cheating_message();
+				cheat_mode_enabled_ = true;
 			}
-			break;
-		case SDLK_BACKSPACE:
-			if (((code.mod & KMOD_CTRL) != 0) && ((code.mod & KMOD_SHIFT) != 0)) {
-				if (cheat_mode_enabled_) {
-					cheat_mode_enabled_ = false;
-				} else if (!omnipotent()) {
-					broadcast_cheating_message();
-					cheat_mode_enabled_ = true;
-				}
-				return true;
-			}
-			break;
+			return true;
+		}
 #endif
-		case SDLK_TAB:
+
+		if (code.sym == SDLK_TAB) {
 			toolbar()->focus();
 			return true;
-		default:
-			break;
 		}
 	}
 

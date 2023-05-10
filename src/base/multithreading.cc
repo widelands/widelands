@@ -80,7 +80,7 @@ void NoteThreadSafeFunction::instantiate(const std::function<void()>& fn,
 	} else {
 		// All other threads must ask it politely to do this for them.
 		if (wait_until_completion) {
-			bool done = false;
+			volatile bool done = false;
 
 			// Some codepaths want to perform special error handling, so we catch
 			// any errors and forward them to the caller in a thread-safe manner.
@@ -100,7 +100,7 @@ void NoteThreadSafeFunction::instantiate(const std::function<void()>& fn,
 				}
 				done = true;
 			}));
-			while (!done) {  // NOLINT
+			while (!done) {
 				// Wait until the NoteThreadSafeFunction has been handled.
 				// Since `done` was passed by address, it will set to
 				// `true` when the function has been executed.

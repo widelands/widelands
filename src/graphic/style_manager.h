@@ -102,7 +102,8 @@ enum class StyledSize {
 	kCampaignMessageBoxMaxW,
 	kCampaignFri02PoemIndent,
 	kSPScenarioPlateauMessageBoxPosY,
-	kUIDefaultPadding
+	kUIDefaultPadding,
+	kToolbarButtonSize
 };
 
 }  // namespace UI

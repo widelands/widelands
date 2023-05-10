@@ -10,121 +10,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-10 03:09+0000\n"
+"POT-Creation-Date: 2023-05-01 02:42+0000\n"
 "PO-Revision-Date: 2016-03-24 07:33+0000\n"
 "Last-Translator: Balázs Meskó <meskobalazs@mailbox.org>, 2017\n"
-"Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
+"Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/scripting/editor/editor_controls.lua:11
+#: ../../data/scripting/editor/editor_controls.lua:4
 #: ../../data/scripting/editor/editor_help.lua:66
 msgid "Controls"
 msgstr "Irányítás"
-
-#: ../../data/scripting/editor/editor_controls.lua:13
-msgid "Keyboard Shortcuts"
-msgstr "Billentyűparancsok"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:16
-msgid "Help"
-msgstr "Súgó"
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/scripting/editor/editor_controls.lua:18
-msgid "Toggle main menu"
-msgstr "Főmenü megjelenítése/elrejtése"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 't'
-#: ../../data/scripting/editor/editor_controls.lua:20
-msgid "Toggle tools menu"
-msgstr "Eszközök menü megjelenítése/elrejtése"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'p'
-#: ../../data/scripting/editor/editor_controls.lua:24
-msgid "Toggle player menu"
-msgstr "Játékos menü megjelenítése/elrejtése"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:26
-msgid "Undo"
-msgstr "Visszavonás"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:28
-msgid "Redo"
-msgstr "Mégis"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'i'
-#: ../../data/scripting/editor/editor_controls.lua:30
-msgid "Activate information tool"
-msgstr "Az információs eszköz aktiválása"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:32
-msgid "Load map"
-msgstr "Térkép betöltése"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:34
-msgid "Save map"
-msgstr "Térkép mentése"
-
-#: ../../data/scripting/editor/editor_controls.lua:38
-msgid "Tools"
-msgstr "Eszközök"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:41
-msgid "Change tool size"
-msgstr "Eszköz méretének módosítása"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:43
-msgctxt "hotkey"
-msgid "Click"
-msgstr "Kattintás"
-
-#: ../../data/scripting/editor/editor_controls.lua:43
-msgid ""
-"Place new elements on the map, or increase map elements by the value "
-"selected by ‘Increase/Decrease value’"
-msgstr "Új elemek elhelyezése a térképen, vagy a térképen lévő elemek növelése az „Érték növelése/csökkentése” beállításban meghatározott értékkel."
-
-#: ../../data/scripting/editor/editor_controls.lua:45
-msgid ""
-"Remove elements from the map, or decrease map elements by the value selected"
-" by ‘Increase/Decrease value’"
-msgstr "Elemek törlése a térképről, vagy a térképen lévő elemek csökkentése az „Érték növelése/csökkentése” beállításban meghatározott értékkel."
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:45
-msgctxt "hotkey"
-msgid "Shift + Click"
-msgstr "Shift + Kattintás"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/scripting/editor/editor_controls.lua:47
-msgctxt "hotkey"
-msgid "Ctrl + Click"
-msgstr "Ctrl + Kattintás"
-
-#: ../../data/scripting/editor/editor_controls.lua:47
-msgid "Set map elements to the value selected by ‘Set Value’"
-msgstr "A térképen lévő elemeket az „Érték beállítása” részben meghatározott értékre állítja."
 
 #: ../../data/scripting/editor/editor_help.lua:50
 msgid "Editor Help"

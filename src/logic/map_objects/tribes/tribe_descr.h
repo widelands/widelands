@@ -241,9 +241,9 @@ private:
 	const std::string descname_;
 	const Descriptions& descriptions_;
 
-	uint32_t frontier_animation_id_;
-	uint32_t flag_animation_id_;
-	uint32_t pinned_note_animation_id_;
+	uint32_t frontier_animation_id_{0U};
+	uint32_t flag_animation_id_{0U};
+	uint32_t pinned_note_animation_id_{0U};
 	struct BridgeAnimationIDs {
 		uint32_t e;
 		uint32_t se;
