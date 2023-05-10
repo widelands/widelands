@@ -293,7 +293,8 @@ int BaseListselect::get_lineheight_without_padding() const {
 }
 
 int BaseListselect::get_lineheight() const {
-	return get_lineheight_without_padding() + (selection_mode_ == ListselectLayout::kDropdown ? 2 * kMargin : kMargin);
+	return get_lineheight_without_padding() +
+	       (selection_mode_ == ListselectLayout::kDropdown ? 2 * kMargin : kMargin);
 }
 
 uint32_t BaseListselect::get_eff_w() const {
@@ -703,7 +704,8 @@ Recti BaseListselect::get_highlight_rect(const std::string& text, int x, int y) 
 	   UI::g_fh->render(as_richtext_paragraph(
 	      richtext_escape(text2.substr(start, filter.length())), table_style().enabled()));
 
-	Recti highlight_rect(x + rendered_start->width(), y, rendered_substring->width(), get_lineheight_without_padding());
+	Recti highlight_rect(x + rendered_start->width(), y, rendered_substring->width(),
+	                     get_lineheight_without_padding());
 
 	return highlight_rect;
 }
