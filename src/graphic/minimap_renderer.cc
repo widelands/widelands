@@ -21,11 +21,15 @@
 #include <algorithm>
 #include <memory>
 
+#include <SDL_timer.h>
+
 #include "economy/flag.h"
+#include "economy/road.h"
 #include "economy/roadbase.h"
 #include "graphic/playercolor.h"
 #include "logic/field.h"
 #include "logic/map_objects/descriptions.h"
+#include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/vision.h"
 #include "wui/mapviewpixelfunctions.h"
@@ -34,10 +38,58 @@ namespace {
 
 const RGBColor kWhite(255, 255, 255);
 const RGBColor kRed(255, 0, 0);
+const RGBColor kRoad(220, 220, 220);
+const RGBColor kDark(100, 100, 100);
+const RGBColor kBright(160, 160, 160);
 
 // Blend two colors.
 inline RGBColor blend_color(const RGBColor& c1, const RGBColor& c2) {
 	return RGBColor((c1.r + c2.r) / 2, (c1.g + c2.g) / 2, (c1.b + c2.b) / 2);
+}
+
+inline RGBColor invert_color(const RGBColor& c) {
+	// assuming overflow and underflow
+
+	uint8_t r;
+	uint8_t g;
+	uint8_t b;
+
+	if (c.r > c.g && c.r > c.b && c.g < 200 && c.g + 50 < c.r) {
+		r = 0;
+		g = c.g;
+		b = c.b + (255 - c.b) / 2;
+	} else {
+		r = 255;
+		g = c.g / 2;
+		b = c.b / 2;
+	}
+	return RGBColor(r, g, b);
+}
+
+inline RGBColor brighten_color(const RGBColor& c, uint8_t percent) {
+	// we need higher range variables to avoid overflow in multiplying
+	uint16_t r = c.r;
+	uint16_t g = c.g;
+	uint16_t b = c.b;
+
+	r = r + ((255 - r) * percent) / 100;
+	g = g + ((255 - g) * percent) / 100;
+	b = b + ((255 - b) * percent) / 100;
+
+	return RGBColor(r, g, b);
+}
+
+inline RGBColor darken_color(const RGBColor& c, uint8_t percent) {
+	// we need higher range variables to avoid overflow in multiplying
+	uint16_t r = c.r;
+	uint16_t g = c.g;
+	uint16_t b = c.b;
+
+	r = r - (r * percent) / 100;
+	g = g - (g * percent) / 100;
+	b = b - (b * percent) / 100;
+
+	return RGBColor(r, g, b);
 }
 
 int round_up_to_nearest_even(int number) {
@@ -49,49 +101,107 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
                                    const Widelands::FCoords& f,
                                    const MiniMapLayer layers,
                                    const Widelands::PlayerNumber owner,
+                                   const Widelands::Player* const player,
                                    const bool see_details) {
 	RGBColor color;
+	const Widelands::Map& map = egbase.map();
 	if ((layers & MiniMapLayer::Terrain) != 0) {
 		color = egbase.descriptions()
 		           .get_terrain_descr(f.field->terrain_d())
 		           ->get_minimap_color(f.field->get_brightness());
+		if ((layers & MiniMapLayer::Owner) != 0) {
+			color = darken_color(color, 40);
+		}
 	}
 
 	if ((layers & MiniMapLayer::Owner) != 0) {
 		if (0 < owner) {
-			color = blend_color(color, egbase.player(owner).get_playercolor());
+			color = blend_color(color, brighten_color(egbase.player(owner).get_playercolor(), 30));
 		}
 	}
+
+	const RGBColor contrast_color = invert_color(color);
 
 	if (see_details) {
 		// if ownership layer is displayed, it creates enough contrast to
 		// visualize objects using white color.
-		if (((layers & (MiniMapLayer::Road | MiniMapLayer::Flag | MiniMapLayer::Building)) != 0) &&
+
+		if (((layers & (MiniMapLayer::Road | MiniMapLayer::Flag | MiniMapLayer::Building |
+		                MiniMapLayer::Artifacts)) != 0) &&
 		    (f.field->get_immovable() != nullptr)) {
+			bool high_traffic = false;
 			const Widelands::MapObjectType type = f.field->get_immovable()->descr().type();
-			if ((((layers & MiniMapLayer::Flag) != 0) && type == Widelands::MapObjectType::FLAG) ||
-			    (((layers & MiniMapLayer::Building) != 0) &&
-			     type >= Widelands::MapObjectType::BUILDING)) {
-				color = kWhite;
+			if ((layers & MiniMapLayer::Flag) != 0 && type == Widelands::MapObjectType::FLAG) {
+				upcast(Widelands::Flag, flag, f.field->get_immovable());
+				color = blend_color(kWhite, egbase.player(owner).get_playercolor());
+				if (flag->current_wares() > 5 &&
+				    (player == nullptr ||
+				     flag->get_owner()->player_number() == player->player_number())) {
+					high_traffic = true;
+				}
+			} else if ((layers & MiniMapLayer::Building) != 0 &&
+			           type >= Widelands::MapObjectType::BUILDING) {
+				color = blend_color(kWhite, egbase.player(owner).get_playercolor());
 			} else if (((layers & MiniMapLayer::Road) != 0) &&
-			           type >= Widelands::MapObjectType::ROADBASE &&
-			           type <= Widelands::MapObjectType::WATERWAY) {
-				color = blend_color(color, kWhite);
+			           type == Widelands::MapObjectType::WATERWAY) {
+				color = kRoad;
+			} else if (((layers & MiniMapLayer::Road) != 0) &&
+			           type == Widelands::MapObjectType::ROAD) {
+				color = kRoad;
+				upcast(Widelands::Road, road, f.field->get_immovable());
+				if (road->is_busy() && (player == nullptr || road->get_owner()->player_number() ==
+				                                                player->player_number())) {
+					high_traffic = true;
+				}
+			} else if ((layers & MiniMapLayer::Artifacts) != 0) {
+				Widelands::FCoords coord[7];
+				coord[0] = f;
+				map.get_ln(f, &coord[1]);
+				map.get_tln(f, &coord[2]);
+				map.get_trn(f, &coord[3]);
+				map.get_rn(f, &coord[4]);
+				map.get_brn(f, &coord[5]);
+				map.get_bln(f, &coord[6]);
+				for (const Widelands::FCoords& fc : coord) {
+					if (fc.field->get_immovable() != nullptr &&
+					    fc.field->get_immovable()->descr().has_attribute(
+					       Widelands::MapObjectDescr::get_attribute_id("artifact"))) {
+						color = kRed;
+						break;
+					}
+				}
+			}
+
+			if (high_traffic && (layers & MiniMapLayer::Traffic) != 0) {
+				color = contrast_color;
 			}
 		}
 
-		if (((layers & MiniMapLayer::Ship) != 0) && (f.field->get_first_bob() != nullptr)) {
+		if (((layers & (MiniMapLayer::Ship | MiniMapLayer::Attack)) != 0) &&
+		    (f.field->get_first_bob() != nullptr)) {
 			for (Widelands::Bob* bob = f.field->get_first_bob(); bob != nullptr;
 			     bob = bob->get_next_bob()) {
-				if (bob->descr().type() == Widelands::MapObjectType::SHIP) {
+				if ((layers & MiniMapLayer::Ship) != 0 &&
+				    bob->descr().type() == Widelands::MapObjectType::SHIP) {
 					color = kWhite;
+					break;
+				}
+				if ((layers & MiniMapLayer::Attack) != 0 &&
+				    bob->descr().type() == Widelands::MapObjectType::SOLDIER &&
+				    dynamic_cast<Widelands::Soldier*>(bob)->is_on_battlefield()) {
+					uint32_t now = SDL_GetTicks();
+					now /= 500;
+					if (now % 2 == 0) {
+						color = kRed;
+					} else {
+						color = invert_color(kRed);
+					}
 					break;
 				}
 			}
 		}
 
 		if ((layers & MiniMapLayer::StartingPositions) != 0) {
-			const Widelands::Map& map = egbase.map();
 			Widelands::Coords starting_pos;
 			for (uint32_t p = 1; p <= map.get_nrplayers(); p++) {
 				starting_pos = map.get_starting_pos(p);
@@ -229,7 +339,7 @@ void do_draw_minimap(Texture& texture,
 
 			if (vision != Widelands::VisibleState::kUnexplored) {
 				const RGBAColor color = calc_minimap_color(
-				   egbase, f, layers, owner, vision == Widelands::VisibleState::kVisible);
+				   egbase, f, layers, owner, player, vision == Widelands::VisibleState::kVisible);
 				for (uint8_t x_offset = 0; x_offset < scale; ++x_offset) {
 					for (uint8_t y_offset = 0; y_offset < scale; ++y_offset) {
 						texture.set_pixel(x * scale + x_offset, y * scale + y_offset, color);

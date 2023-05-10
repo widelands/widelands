@@ -19,6 +19,7 @@
 #ifndef WL_GAME_IO_GAME_LOADER_H
 #define WL_GAME_IO_GAME_LOADER_H
 
+#include <cstdint>
 #include <string>
 
 class FileSystem;
