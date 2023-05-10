@@ -149,30 +149,11 @@ private:
 	const Player& player_;
 };
 
-struct FindNodeAttackTarget {
-	explicit FindNodeAttackTarget(const Widelands::Ship& s) : ship_(s) {
+struct FindBobEnemyWarship : public FindBob {
+	explicit FindBobEnemyWarship(const Widelands::Ship& s) : ship_(s) {
 	}
-	[[nodiscard]] bool accept(const EditorGameBase& egbase, const FCoords& f) const {
-		if (ship_.owner().get_vision(egbase.map().get_index(f)) != VisibleState::kVisible) {
-			return false;
-		}
-
-		if (ship_.get_nritems() > 0) {
-			Coords portspace = egbase.map().find_portspace_for_dockpoint(f);
-			if (static_cast<bool>(portspace)) {
-				const PlayerNumber owner = egbase.map()[portspace].get_owned_by();
-				if (owner == 0 || ship_.owner().is_hostile(egbase.player(owner))) {
-					return true;
-				}
-			}
-		}
-
-		for (const Bob* b = f.field->get_first_bob(); b != nullptr; b = b->get_next_bob()) {
-			if (ship_.is_attackable_enemy_warship(*b)) {
-				return true;
-			}
-		}
-		return false;
+	[[nodiscard]] bool accept(Bob* bob) const override {
+		return ship_.is_attackable_enemy_warship(*bob);
 	}
 
 private:
@@ -579,71 +560,58 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 	}
 
 	if (get_ship_type() == ShipType::kWarship) {
-		// Look for nearby enemy warships and ports we can attack. We prefer the closest
-		// attackable object. Attacking warships takes precedent over attacking ports.
-		// Ports can only be attacked if we have any soldiers on board.
-		const Ship* old_target = expedition_->attack_target.get(game);
-		Ship* new_target = nullptr;
-		Coords new_coords = Coords::null();
-		Coords new_coords_portspace = Coords::null();
-		std::vector<Coords> candidates;
-		uint32_t distance = descr().vision_range();
-		map->find_reachable_fields(game, Area<FCoords>(get_position(), distance), &candidates,
-		                           CheckStepDefault(MOVECAPS_SWIM), FindNodeAttackTarget(*this));
-		for (const Coords& c : candidates) {
-			const uint32_t d = map->calc_distance(get_position(), c);
-			if (d <= distance) {
-				Field& f = (*map)[c];
-				for (Bob* b = f.get_first_bob(); b != nullptr; b = b->get_next_bob()) {
-					if (is_attackable_enemy_warship(*b)) {
-						new_target = dynamic_cast<Ship*>(b);
-						break;
-					}
-				}
+		// Look for nearby enemy warships.
+		Area<FCoords> area(get_position(), descr().vision_range());
+		bool found_new_target = false;
+		std::vector<Bob*> candidates;
+		map->find_reachable_bobs(game, area, &candidates, CheckStepDefault(MOVECAPS_SWIM), FindBobEnemyWarship(*this));
 
-				new_coords = c;
-				new_coords_portspace = map->find_portspace_for_dockpoint(new_coords);
-				distance = d;
+		// Clear outdated attack targets.
+		std::set<OPtr<Ship>>& attack_targets = expedition_->attack_targets;
+		for (auto it = attack_targets.begin(); it != attack_targets.end();) {
+			if (std::find_if(candidates.begin(), candidates.end(), [&it](Bob* b) { return b->serial() == it->serial(); }) != candidates.end()) {
+				++it;
+			} else {
+				it = attack_targets.erase(it);
 			}
 		}
 
-		if (new_target != nullptr) {
-			// Enemy ships always take precedence over port spaces
-			new_coords = Coords::null();
-			new_coords_portspace = Coords::null();
-		}
-
-		if (new_target != old_target || new_coords != expedition_->attack_coords) {
-			expedition_->attack_target = new_target;
-			expedition_->attack_coords = new_coords;
-
-			if (new_target != nullptr || new_coords != Coords::null()) {
-				if (new_target != nullptr) {
-					set_ship_state_and_notify(
-					   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
-
-					send_message(game, _("Enemy Ship"), _("Enemy Ship Spotted"),
-					             _("A warship spotted an enemy ship."),
-					             new_target->descr().icon_filename());
-				} else {
-					if (std::find(expedition_->seen_port_buildspaces.begin(),
-					              expedition_->seen_port_buildspaces.end(),
-					              new_coords_portspace) == expedition_->seen_port_buildspaces.end()) {
-						expedition_->seen_port_buildspaces.push_back(new_coords_portspace);
-
-						set_ship_state_and_notify(
-						   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
-
-						send_message(game, _("Port Space"), _("Port Space Found"),
-						             _("A warship found a new port build space."),
-						             descr().icon_filename());
-					}
-				}
+		// Add new attack targets.
+		for (Bob* enemy : candidates) {
+			if (attack_targets.insert(OPtr<Ship>(dynamic_cast<Ship*>(enemy))).second) {
+				found_new_target = true;
+				send_message(game, _("Enemy Ship"), _("Enemy Ship Spotted"),
+				             _("A warship spotted an enemy ship."),
+				             enemy->descr().icon_filename());
 			}
 		}
 
-		if (new_coords_portspace == Coords::null()) {
-			expedition_->seen_port_buildspaces.clear();
+		// Remove outdated port spaces.
+		std::vector<Coords>& portspaces = expedition_->seen_port_buildspaces;
+		for (size_t i = 0; i < portspaces.size();) {
+			if (map->calc_distance(get_position(), portspaces.at(i)) <= area.radius) {
+				++i;
+			} else {
+				portspaces.at(i) = portspaces.back();
+				portspaces.pop_back();
+			}
+		}
+
+		// Look for new nearby port spaces.
+		MapRegion<Area<Coords>> mr(*map, Area<Coords>(position, descr().vision_range()));
+		do {
+			if (map->is_port_space(mr.location()) && std::find(portspaces.begin(), portspaces.end(), mr.location()) == portspaces.end()) {
+				found_new_target = true;
+				portspaces.push_back(mr.location());
+				send_message(game, _("Port Space"), _("Port Space Found"),
+				             _("A warship found a new port build space."),
+				             descr().icon_filename());
+			}
+		} while (mr.advance(*map));
+
+		if (found_new_target) {
+			set_ship_state_and_notify(
+			   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
 		}
 	}
 
@@ -840,12 +808,6 @@ bool Ship::can_be_attacked() const {
 	       });
 }
 
-bool Ship::can_attack() const {
-	return get_ship_type() == Widelands::ShipType::kWarship && !has_battle() &&
-	       (static_cast<bool>(get_attack_coords()) ||
-	        get_attack_target(owner().egbase()) != nullptr);
-}
-
 bool Ship::can_refit(const ShipType type) const {
 	return !is_refitting() && !has_battle() && type != ship_type_;
 }
@@ -991,12 +953,21 @@ void Ship::warship_command(Game& game,
 	}
 
 	case WarshipCommand::kAttack:
-		if (Ship* target = get_attack_target(game); target != nullptr) {
-			assert(parameters.empty());
-			start_battle(game, Battle(target, Coords::null(), parameters, true));
-		} else if (Coords coords = get_attack_coords(); static_cast<bool>(coords)) {
-			assert(!parameters.empty());
-			start_battle(game, Battle(nullptr, coords, parameters, true));
+		assert(!parameters.empty());
+		if (parameters.size() == 1) {  // Attacking a ship.
+			if (Ship* target = dynamic_cast<Ship*>(game.objects().get_object(parameters.front())); target != nullptr) {
+				start_battle(game, Battle(target, Coords::null(), {}, true));
+			}
+		} else {  // Attacking port coordinates.
+			assert(parameters.size() > 2);
+			Coords portspace(parameters.at(0), parameters.at(1));
+			assert(game.map().is_port_space(portspace));
+
+			std::vector<Coords> dockpoints = game.map().find_portdock(portspace, true);
+			assert(!dockpoints.empty());
+
+			start_battle(game, Battle(nullptr, dockpoints.at(game.logic_rand() % dockpoints.size()),
+					std::vector<uint32_t>(parameters.begin() + 2, parameters.end()), true));
 		}
 		return;
 	}
@@ -1819,8 +1790,7 @@ void Ship::start_task_expedition(Game& game) {
 	expedition_->scouting_direction = WalkingDir::IDLE;
 	expedition_->exploration_start = Coords(0, 0);
 	expedition_->island_explore_direction = IslandExploreDirection::kClockwise;
-	expedition_->attack_target = nullptr;
-	expedition_->attack_coords = Coords::null();
+	expedition_->attack_targets.clear();
 	expedition_->ware_economy = get_owner()->create_economy(wwWARE);
 	expedition_->worker_economy = get_owner()->create_economy(wwWORKER);
 
@@ -2274,9 +2244,8 @@ Load / Save implementation
 /* Changelog:
  * 12 - v1.1
  * 13 - Added warships and naval warfare.
- * 14 - Added healing, send_message_at_destination_, and attack coords.
  */
-constexpr uint8_t kCurrentPacketVersion = 14;
+constexpr uint8_t kCurrentPacketVersion = 13;
 
 const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	if (name == "shipidle" || name == "ship") {
@@ -2325,12 +2294,8 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 			// Whether the exploration is done clockwise or counter clockwise
 			expedition_->island_explore_direction =
 			   static_cast<IslandExploreDirection>(fr.unsigned_8());
-			expedition_attack_target_serial_ = ((packet_version >= 13) ? fr.unsigned_32() : 0);
-			if (packet_version >= 14) {
-				expedition_->attack_coords.x = fr.signed_16();
-				expedition_->attack_coords.y = fr.signed_16();
-			} else {
-				expedition_->attack_coords = Coords::null();
+			for (unsigned i = (packet_version >= 13) ? fr.unsigned_32() : 0; i > 0; --i) {
+				expedition_attack_target_serials_.insert(fr.unsigned_32());
 			}
 		} break;
 
@@ -2344,10 +2309,8 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 			battle_serials_.push_back(fr.unsigned_32());
 			battles_.emplace_back(nullptr, Coords::null(), std::vector<uint32_t>(), first);
 			battles_.back().phase = static_cast<Battle::Phase>(fr.unsigned_8());
-			if (packet_version >= 14) {
-				battles_.back().attack_coords.x = fr.signed_16();
-				battles_.back().attack_coords.y = fr.signed_16();
-			}
+			battles_.back().attack_coords.x = fr.signed_16();
+			battles_.back().attack_coords.y = fr.signed_16();
 			battles_.back().pending_damage = fr.unsigned_32();
 			for (size_t j = fr.unsigned_32(); j > 0U; --j) {
 				battles_.back().attack_soldier_serials.push_back(fr.unsigned_32());
@@ -2355,7 +2318,7 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 			battles_.back().time_of_last_action = Time(fr);
 		}
 		hitpoints_ = (packet_version >= 13) ? fr.unsigned_32() : -1;
-		if (packet_version >= 14) {
+		if (packet_version >= 13) {
 			last_heal_time_ = Time(fr);
 			send_message_at_destination_ = fr.unsigned_8() != 0;
 		}
@@ -2393,19 +2356,8 @@ void Ship::Loader::load_pointers() {
 		ship.destination_ = nullptr;
 	}
 
-	if (expedition_attack_target_serial_ != 0U) {
-		MapObject& target = mol().get<MapObject>(expedition_attack_target_serial_);
-		switch (target.descr().type()) {
-		case MapObjectType::SHIP:
-			expedition_->attack_target = &dynamic_cast<Ship&>(target);
-			break;
-		case MapObjectType::PORTDOCK:
-			// TODO(Nordfriese): Savegame compatibility v1.1 - after v1.2 `target` MUST be a ship
-			break;
-		default:
-			throw GameDataError(
-			   "Unexpected warship attack target type %s", to_string(target.descr().type()).c_str());
-		}
+	for (Serial serial : expedition_attack_target_serials_) {
+		expedition_->attack_targets.insert(&mol().get<Ship>(serial));
 	}
 
 	for (uint32_t i = 0; i < battle_serials_.size(); ++i) {
@@ -2545,9 +2497,10 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 		write_coords_32(&fw, expedition_->exploration_start);
 		// Whether the exploration is done clockwise or counter clockwise
 		fw.unsigned_8(static_cast<uint8_t>(expedition_->island_explore_direction));
-		fw.unsigned_32(mos.get_object_file_index_or_zero(expedition_->attack_target.get(egbase)));
-		fw.signed_16(expedition_->attack_coords.x);
-		fw.signed_16(expedition_->attack_coords.y);
+		fw.unsigned_32(expedition_->attack_targets.size());
+		for (const auto& ptr : expedition_->attack_targets) {
+			fw.unsigned_32(mos.get_object_file_index_or_zero(ptr.get(egbase)));
+		}
 	}
 	fw.unsigned_8(battles_.size());
 	for (const Battle& b : battles_) {
