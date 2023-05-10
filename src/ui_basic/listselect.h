@@ -103,8 +103,9 @@ struct BaseListselect : public Panel {
 
 	///  Return the total height (text + spacing) occupied by a single line.
 	int get_lineheight() const;
+	int get_lineheight_without_padding() const;
 	void set_min_lineheight(int minh) {
-		lineheight_ = std::max(lineheight_, minh);
+		min_lineheight_ = minh;
 	}
 
 	uint32_t get_eff_w() const;
@@ -172,6 +173,7 @@ private:
 	const UI::PanelStyleInfo* background_style() const;  // Background color and texture
 
 	int lineheight_;
+	int min_lineheight_{0};
 	std::string current_tooltip_;
 
 	UI::BaseDropdown* linked_dropdown{nullptr};

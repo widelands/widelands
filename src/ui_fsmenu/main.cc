@@ -63,8 +63,6 @@ constexpr uint32_t kImageExchangeDuration = 2500;
 
 constexpr uint32_t kNoSplash = std::numeric_limits<uint32_t>::max();
 
-constexpr uint32_t kDropdownsLineheight = 33;
-
 int16_t MainMenu::calc_desired_window_width(const UI::Window::WindowLayoutID id) {
 	switch (id) {
 	case UI::Window::WindowLayoutID::kFsMenuDefault:
@@ -189,10 +187,6 @@ MainMenu::MainMenu(const bool skip_init)
 	options_.sigclicked.connect([this]() { action(MenuTarget::kOptions); });
 	about_.sigclicked.connect([this]() { action(MenuTarget::kAbout); });
 	exit_.sigclicked.connect([this]() { action(MenuTarget::kExit); });
-
-	singleplayer_.set_min_lineheight(kDropdownsLineheight);
-	multiplayer_.set_min_lineheight(kDropdownsLineheight);
-	editor_.set_min_lineheight(kDropdownsLineheight);
 
 	vbox1_.add(&singleplayer_, UI::Box::Resizing::kFullSize);
 	vbox1_.add_inf_space();
@@ -776,6 +770,11 @@ void MainMenu::layout() {
 	butw_ = get_inner_w() / 5;
 	buth_ = get_inner_h() / 25;
 	padding_ = buth_ / 3;
+
+	int dropdowns_lineheight = g_gr->get_yres() / 23;
+	singleplayer_.set_min_lineheight(dropdowns_lineheight);
+	multiplayer_.set_min_lineheight(dropdowns_lineheight);
+	editor_.set_min_lineheight(dropdowns_lineheight);
 
 	copyright_.set_pos(Vector2i(
 	   (get_inner_w() - copyright_.get_w()) / 2, get_inner_h() - copyright_.get_h() - padding_ / 2));
