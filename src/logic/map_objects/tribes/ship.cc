@@ -564,12 +564,15 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 		Area<FCoords> area(get_position(), descr().vision_range());
 		bool found_new_target = false;
 		std::vector<Bob*> candidates;
-		map->find_reachable_bobs(game, area, &candidates, CheckStepDefault(MOVECAPS_SWIM), FindBobEnemyWarship(*this));
+		map->find_reachable_bobs(
+		   game, area, &candidates, CheckStepDefault(MOVECAPS_SWIM), FindBobEnemyWarship(*this));
 
 		// Clear outdated attack targets.
 		std::set<OPtr<Ship>>& attack_targets = expedition_->attack_targets;
 		for (auto it = attack_targets.begin(); it != attack_targets.end();) {
-			if (std::find_if(candidates.begin(), candidates.end(), [&it](Bob* b) { return b->serial() == it->serial(); }) != candidates.end()) {
+			if (std::find_if(candidates.begin(), candidates.end(), [&it](Bob* b) {
+				    return b->serial() == it->serial();
+			    }) != candidates.end()) {
 				++it;
 			} else {
 				it = attack_targets.erase(it);
@@ -581,8 +584,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 			if (attack_targets.insert(OPtr<Ship>(dynamic_cast<Ship*>(enemy))).second) {
 				found_new_target = true;
 				send_message(game, _("Enemy Ship"), _("Enemy Ship Spotted"),
-				             _("A warship spotted an enemy ship."),
-				             enemy->descr().icon_filename());
+				             _("A warship spotted an enemy ship."), enemy->descr().icon_filename());
 			}
 		}
 
@@ -600,12 +602,12 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 		// Look for new nearby port spaces.
 		MapRegion<Area<Coords>> mr(*map, Area<Coords>(position, descr().vision_range()));
 		do {
-			if (map->is_port_space(mr.location()) && std::find(portspaces.begin(), portspaces.end(), mr.location()) == portspaces.end()) {
+			if (map->is_port_space(mr.location()) &&
+			    std::find(portspaces.begin(), portspaces.end(), mr.location()) == portspaces.end()) {
 				found_new_target = true;
 				portspaces.push_back(mr.location());
 				send_message(game, _("Port Space"), _("Port Space Found"),
-				             _("A warship found a new port build space."),
-				             descr().icon_filename());
+				             _("A warship found a new port build space."), descr().icon_filename());
 			}
 		} while (mr.advance(*map));
 
@@ -955,7 +957,8 @@ void Ship::warship_command(Game& game,
 	case WarshipCommand::kAttack:
 		assert(!parameters.empty());
 		if (parameters.size() == 1) {  // Attacking a ship.
-			if (Ship* target = dynamic_cast<Ship*>(game.objects().get_object(parameters.front())); target != nullptr) {
+			if (Ship* target = dynamic_cast<Ship*>(game.objects().get_object(parameters.front()));
+			    target != nullptr) {
 				start_battle(game, Battle(target, Coords::null(), {}, true));
 			}
 		} else {  // Attacking port coordinates.
@@ -966,8 +969,9 @@ void Ship::warship_command(Game& game,
 			std::vector<Coords> dockpoints = game.map().find_portdock(portspace, true);
 			assert(!dockpoints.empty());
 
-			start_battle(game, Battle(nullptr, dockpoints.at(game.logic_rand() % dockpoints.size()),
-					std::vector<uint32_t>(parameters.begin() + 2, parameters.end()), true));
+			start_battle(
+			   game, Battle(nullptr, dockpoints.at(game.logic_rand() % dockpoints.size()),
+			                std::vector<uint32_t>(parameters.begin() + 2, parameters.end()), true));
 		}
 		return;
 	}

@@ -478,7 +478,8 @@ void InteractivePlayer::think() {
 	for (auto it = expedition_port_spaces_.begin(); it != expedition_port_spaces_.end();) {
 		Widelands::Ship* ship = it->first.get(egbase());
 		if (ship == nullptr || ship->state_is_transport() ||
-				std::find(ship->exp_port_spaces().begin(), ship->exp_port_spaces().end(), it->second) == ship->exp_port_spaces().end()) {
+		    std::find(ship->exp_port_spaces().begin(), ship->exp_port_spaces().end(), it->second) ==
+		       ship->exp_port_spaces().end()) {
 			it = expedition_port_spaces_.erase(it);
 		} else {
 			++it;
