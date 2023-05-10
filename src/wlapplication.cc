@@ -321,8 +321,13 @@ void WLApplication::setup_homedir() {
  *
  * \param argc The number of command line arguments
  * \param argv Array of command line arguments
- * \return An (always valid!) pointer to the WLApplication singleton
+ * \return A reference to the WLApplication singleton
  */
+WLApplication& WLApplication::get(int const argc, char const** argv) {
+	static WLApplication the_singleton{argc, argv};
+	return the_singleton;
+}
+
 /**
  * Initialize an instance of WLApplication.
  *
@@ -458,11 +463,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	// Save configuration now. Otherwise, the UUID and sound options
 	// are not saved, when the game crashes
 	write_config();
-}
-
-WLApplication& WLApplication::get(int const argc, char const** argv) {
-	static WLApplication the_singleton{argc, argv};
-	return the_singleton;
 }
 
 /**
