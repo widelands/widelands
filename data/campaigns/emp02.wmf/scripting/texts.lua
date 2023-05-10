@@ -91,12 +91,12 @@ obj_build_bigger_military_buildings = {
 
 obj_remove_the_barbarians = {
    name = "remove_the_barbarians",
-   title =_("Destroy the Barbarian tribe"),
+   title =_("Destroy the Barbarians tribe"),
    number = 2,
-   body = objective_text(_("Destroy the Barbarian Tribe"),
+   body = objective_text(_("Destroy the Barbarians Tribe"),
       li(_([[Build a barracks to start training soldiers.]])) ..
-      li(_([[Attack and completely destroy the Barbarian buildings as soon as you have enough soldiers.]])) ..
-      li(_([[Build a fortress on the peninsula (near where the Barbarian headquarters stood before). Finally, this will avoid new settlements of other tribes in that region.]]))
+      li(_([[Attack and completely destroy the Barbarians buildings as soon as you have enough soldiers.]])) ..
+      li(_([[Build a fortress on the peninsula (near where the Barbarians headquarters stood before). Finally, this will avoid new settlements of other tribes in that region.]]))
    ),
 }
 
@@ -237,7 +237,7 @@ diary_page_8 = {
       _([[By the Gods! This is absolutely terrible. It seems as if we stand close to a test – and it seems as if Saledus was right with his fear concerning the shipwreck he found.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Lutius - Diary
-      _([[Today, as I walked down to the eastern shore, I got a shock. I caught sight of one of those hated, evil, Barbarian tribes with whom we have had so many problems before.]])
+      _([[Today, as I walked down to the eastern shore, I got a shock. I caught sight of one of those hated, evil, Barbarians tribes with whom we have had so many problems before.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Lutius - Diary
       _([[At first, I was naive and hoped that they were peaceful, but as soon as one of them saw me, they charged towards me and started attacking me with their throwing spears. Thanks be to the Gods that I was able to flee and hide myself, before retreating back to our colony under cover of darkness.]])
@@ -264,7 +264,7 @@ diary_page_10 = {
       _([[Today is a proud day. We have fought for our new home and risen victorious.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Lutius - Diary
-      _([[There are still a few Barbarians hiding on our island, but I am sure that we will find them soon. Every Barbarian who doesn’t attack us will be put in a boat with the other peaceful ones, and sent back to their country.]])
+      _([[There are still a few Barbarians hiding on our island, but I am sure that we will find them soon. Every Barbarians who doesn’t attack us will be put in a boat with the other peaceful ones, and sent back to their country.]])
       .. paragraphdivider() ..
       _([[We have established a working economy, trained new soldiers and driven the Barbarians from the island. Now we can think about our next steps.]]))
 }

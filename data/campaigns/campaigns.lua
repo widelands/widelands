@@ -39,7 +39,7 @@ return {
       {
          -- **** Barbarians Introduction ****
          -- The name the user sees on screen
-         -- TRANSLATORS: The name of a Barbarian campaign
+         -- TRANSLATORS: The name of a Barbarians campaign
          descname = _("The Second Empire"),
          -- The internal name of the tribe that the user will be playing
          tribe = "barbarians",
@@ -72,7 +72,7 @@ return {
          -- TRANSLATORS: A short description of a campaign
          difficulty = { level=2, description=_("Introduces the Empire.") },
          -- TRANSLATORS: A long description of a campaign
-         description = _("Six months ago, Lutius – a young general of the Empire – was sent with 150 soldiers to the frontier beyond the northern forests where Barbarian tribes were crossing onto land held by the Empire. His task was to defend the Empire’s land. At first, everything was calm. He even talked to a few Barbarian children and thought about a peaceful life – side by side with this archaic folk. He began to feel safer and his army began to drop their attention off the potential enemy. That was their undoing. One night in March his unprepared army was attacked by 100 Barbarian footmen and was completely scattered. Only with his bare life he and a handful of his soldiers survived."),
+         description = _("Six months ago, Lutius – a young general of the Empire – was sent with 150 soldiers to the frontier beyond the northern forests where Barbarians tribes were crossing onto land held by the Empire. His task was to defend the Empire’s land. At first, everything was calm. He even talked to a few Barbarians children and thought about a peaceful life – side by side with this archaic folk. He began to feel safer and his army began to drop their attention off the potential enemy. That was their undoing. One night in March his unprepared army was attacked by 100 Barbarians footmen and was completely scattered. Only with his bare life he and a handful of his soldiers survived."),
          -- If `prerequisites` is present, the campaign is greyed out by default.
          -- The campaign will become unlocked when any of the referenced scenarios
          -- have been solved.

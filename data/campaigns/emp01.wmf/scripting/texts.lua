@@ -75,10 +75,10 @@ diary_page_1 = {
    title =_("A Dark Night"),
    body=lutius(_("Diary of Lutius"),
       -- TRANSLATORS: Lutius - Diary
-      _([[What has become of our Empire? I really ask this question – why did my king forbid me from fighting against that monstrous Barbarian tribe, who first acted as a peaceful friend and then attacked my army in the darkest night?]])
+      _([[What has become of our Empire? I really ask this question – why did my king forbid me from fighting against that monstrous Barbarians tribe, who first acted as a peaceful friend and then attacked my army in the darkest night?]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Lutius - Diary
-      _([[With an army of 150 men, I was assigned to patrol on our northern frontier, which lies near the Galdin Mountains in a great, beautiful and ancient forest. Soon, we met a Barbarian tribe, which at first was friendly. A few of my men even traded with them and their children came to us, to admire our clean and tidy uniforms and weapons.]])
+      _([[With an army of 150 men, I was assigned to patrol on our northern frontier, which lies near the Galdin Mountains in a great, beautiful and ancient forest. Soon, we met a Barbarians tribe, which at first was friendly. A few of my men even traded with them and their children came to us, to admire our clean and tidy uniforms and weapons.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Lutius - Diary
       _([[But during our fifth night in that region, they attacked us with no reason. I lost dozens of good men, and found myself imprisoned and brought to their chieftain. He spat at me, mocked me and told me to leave this land forever. He did not want new land and did not want our land, but he told me that THIS forest was their land – and it would stay theirs until the spirits took the last man of his folk!]])

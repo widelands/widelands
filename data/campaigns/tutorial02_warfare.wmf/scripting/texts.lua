@@ -31,25 +31,25 @@ abilities = {
    position = "topright",
    title = _("Soldiers’ abilities"),
    body = (
-      p(_([[New soldiers are created differently from normal workers: recruits will walk from a warehouse (or your headquarters) to the barracks where they will receive some basic training and become soldiers. Basic Barbarian soldiers do not use armor, they only need an ax.]])) ..
+      p(_([[New soldiers are created differently from normal workers: recruits will walk from a warehouse (or your headquarters) to the barracks where they will receive some basic training and become soldiers. Basic Barbarians soldiers do not use armor, they only need an ax.]])) ..
       p(_([[Take a look at the soldiers that are on their way to our military buildings. They look different from normal workers: they have a health bar over their head that displays their remaining health, and they have four symbols, which symbolize the individual soldier’s current levels in the four different categories: health, attack, defense and evade.]])) ..
       -- TRANSLATORS: the current stats are: 3 health, 5 attack, 0 defense, 2 evade.
-      p((_([[If a Barbarian soldier is fully trained, he has level %1% health, level %2% attack, level %3% defense and level %4% evade. This is one fearsome warrior then! The individual abilities have the following meaning:]])):bformat(soldier.max_health_level, soldier.max_attack_level, soldier.max_defense_level, soldier.max_evade_level)) ..
+      p((_([[If a Barbarians soldier is fully trained, he has level %1% health, level %2% attack, level %3% defense and level %4% evade. This is one fearsome warrior then! The individual abilities have the following meaning:]])):bformat(soldier.max_health_level, soldier.max_attack_level, soldier.max_defense_level, soldier.max_evade_level)) ..
       h2_image("tribes/workers/barbarians/soldier/health_level0.png", _("Health:")) ..
       -- TRANSLATORS: the current stats are: 13000 health, 2800 health gain.
-      p(_([[The total life of a soldier. A Barbarian soldier starts with %1% health, and he will gain %2% health with each health level.]])):bformat(soldier.base_health, soldier.health_incr_per_level) ..
+      p(_([[The total life of a soldier. A Barbarians soldier starts with %1% health, and he will gain %2% health with each health level.]])):bformat(soldier.base_health, soldier.health_incr_per_level) ..
       h2_image("tribes/workers/barbarians/soldier/attack_level0.png", _("Attack:")) ..
       -- TRANSLATORS: the current stats are: 1400 damage, gains 850 damage points.
-      p(_([[The amount of damage a soldier will inflict on the enemy when an attack is successful. A Barbarian soldier with attack level 0 inflicts ~%1% points of health damage when he succeeds in hitting an enemy. For each attack level, he gains %2% damage points.]])):bformat(soldier.base_min_attack + (soldier.base_max_attack - soldier.base_min_attack) / 2, soldier.attack_incr_per_level) ..
-      -- The Atlanteans' image, because the Barbarian one has a white background
+      p(_([[The amount of damage a soldier will inflict on the enemy when an attack is successful. A Barbarians soldier with attack level 0 inflicts ~%1% points of health damage when he succeeds in hitting an enemy. For each attack level, he gains %2% damage points.]])):bformat(soldier.base_min_attack + (soldier.base_max_attack - soldier.base_min_attack) / 2, soldier.attack_incr_per_level) ..
+      -- The Atlanteans' image, because the Barbarians' one has a white background
       h2_image("tribes/workers/atlanteans/soldier/defense_level0.png", _("Defense:")) ..
       -- TRANSLATORS: the current stats are: 3%. The calculated health value is 3395
       -- TRANSLATORS: The last two %% after the placeholder are the percent symbol.
-      p(_([[The defense is the percentage that is subtracted from the attack value. The Barbarians cannot train in this skill and therefore have always defense level 0, which means that the damage is always reduced by %1%%%. If an attacker with an attack value of 3500 points hits a Barbarian soldier, the Barbarian will lose 3500·%2%%% = %3% health.]])):bformat(soldier.base_defense, (100 - soldier.base_defense), 3500 * (100 - soldier.base_defense) / 100) ..
+      p(_([[The defense is the percentage that is subtracted from the attack value. The Barbarians cannot train in this skill and therefore have always defense level 0, which means that the damage is always reduced by %1%%%. If an attacker with an attack value of 3500 points hits a Barbarians soldier, the Barbarians will lose 3500·%2%%% = %3% health.]])):bformat(soldier.base_defense, (100 - soldier.base_defense), 3500 * (100 - soldier.base_defense) / 100) ..
       h2_image("tribes/workers/barbarians/soldier/evade_level0.png", _("Evade:")) ..
       -- TRANSLATORS: the current stats are: 25% evade, increases in steps of 15%.
       -- TRANSLATORS: The last two %% after the placeholder are the percent symbol.
-      p(_([[Evade is the chance that the soldier is able to dodge an attack. A level 0 Barbarian has a %1%%% chance to evade an attack, and this increases in steps of %2%%% for each level.]])):bformat(soldier.base_evade, soldier.evade_incr_per_level))
+      p(_([[Evade is the chance that the soldier is able to dodge an attack. A level 0 Barbarians has a %1%%% chance to evade an attack, and this increases in steps of %2%%% for each level.]])):bformat(soldier.base_evade, soldier.evade_incr_per_level))
 }
 
 battlearena1 = {
@@ -95,7 +95,7 @@ trainingcamp1 = {
    title = _("The Training Camp"),
    body = (
       h1(_("The Training Camp")) ..
-      p(_([[There is a second training site: the training camp. It is a big building too, and to complement the battle arena, it trains attack and health (remember, the Barbarian soldiers cannot be trained in defense).]])) ..
+      p(_([[There is a second training site: the training camp. It is a big building too, and to complement the battle arena, it trains attack and health (remember, the Barbarians soldiers cannot be trained in defense).]])) ..
       li(_([[Build a training camp.]]))
    )
 }
@@ -116,8 +116,8 @@ trainingcamp2 = {
    body = (
       p(_([[Great, our training camp has now been finished, too. Now nothing will hinder us from getting the strongest warriors the world has ever seen.]])) ..
       p(_([[To train in the training camp, our soldiers need food like in the battle arena, but no strong beer. Instead, they need different axes for attack training and helmets for health training.]])) ..
-      p(_([[This equipment is produced in smithies out of coal, iron, and sometimes gold. You will learn more about this in the second scenario of the Barbarian campaign.]])) ..
-      p(_([[You should also keep in mind that each of the tribes in Widelands has its own way of training, so the buildings and wares are different. Also, the ability levels cannot be compared: an Imperial soldier has a base attack of %1% at level 0, while a Barbarian soldier at the same level only has a base attack of %2%.]]):bformat(empire_soldier.base_min_attack, soldier.base_min_attack))
+      p(_([[This equipment is produced in smithies out of coal, iron, and sometimes gold. You will learn more about this in the second scenario of the Barbarians campaign.]])) ..
+      p(_([[You should also keep in mind that each of the tribes in Widelands has its own way of training, so the buildings and wares are different. Also, the ability levels cannot be compared: an Imperial soldier has a base attack of %1% at level 0, while a Barbarians soldier at the same level only has a base attack of %2%.]]):bformat(empire_soldier.base_min_attack, soldier.base_min_attack))
    )
 }
 
@@ -210,7 +210,7 @@ dismantle = {
       p(_([[You can only reduce the number of soldiers to one. The last soldier of a building will never come out (unless this building is attacked). If you want to have your soldier elsewhere, you will have to dismantle or burn down the building.]])) ..
       p(_([[However, destroying a military building is always linked with a risk: the land is still yours, but it is no longer protected. Any enemy that builds his own military sites can take over that land without a fight, causing your buildings to burst into flames. Furthermore, some parts of the land can now be hidden under the fog of war. You should therefore only dismantle military buildings deep inside your territory where you are safe from enemies.]])) ..
       p(_([[Have you seen your sentry? Since it cannot contain many soldiers and is next to a stronger barrier, it is rather useless.]])) ..
-      -- TRANSLATORS: 'it' refers to the Barbarian sentry
+      -- TRANSLATORS: 'it' refers to the Barbarians sentry
       li(_([[Dismantle it.]])) ..
       p(_([[You can also use this opportunity to become familiar with the other options: the heroes/rookies preference and the capacity.]]))
    )

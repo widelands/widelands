@@ -319,31 +319,31 @@ colors
 
 The ``colors`` table contains subtables of RGB colors:
 
-* **campaign_bar_thron**: Text color for Thron's speech box titles in the Barbarian campaign
-* **campaign_bar_boldreth**: Text color for Boldreth's speech box titles in the Barbarian campaign
-* **campaign_bar_khantrukh**: Text color for Khantrukh's speech box titles in the Barbarian campaign
+* **campaign_bar_thron**: Text color for Thron's speech box titles in the Barbarians campaign
+* **campaign_bar_boldreth**: Text color for Boldreth's speech box titles in the Barbarians campaign
+* **campaign_bar_khantrukh**: Text color for Khantrukh's speech box titles in the Barbarians campaign
 * **campaign_emp_lutius**: Text color for Lutius's speech box titles in the Empire campaign
 * **campaign_emp_amalea**: Text color for Amalea's speech box titles in the Empire campaign
 * **campaign_emp_saledus**: Text color for Saledus's speech box titles in the Empire campaign
 * **campaign_emp_marcus**: Text color for Marcus's speech box titles in the Empire campaign
 * **campaign_emp_julia**: Text color for Julia's speech box titles in the Empire campaign
-* **campaign_atl_jundlina**: Text color for Jundlina's speech box titles in the Atlantean campaign
-* **campaign_atl_sidolus**: Text color for Sidolus's speech box titles in the Atlantean campaign
-* **campaign_atl_loftomor**: Text color for Loftomor's speech box titles in the Atlantean campaign
-* **campaign_atl_colionder**: Text color for Colionder's speech box titles in the Atlantean campaign
-* **campaign_atl_opol**: Text color for Opol's speech box titles in the Atlantean campaign
-* **campaign_atl_ostur**: Text color for Ostur's speech box titles in the Atlantean campaign
-* **campaign_atl_kalitath**: Text color for Kalitath's speech box titles in the Atlantean campaign
-* **campaign_fri_reebaud**: Text color for Reebaud's speech box titles in the Frisian campaign
-* **campaign_fri_hauke**: Text color for Hauke's speech box titles in the Frisian campaign
-* **campaign_fri_maukor**: Text color for Maukor's speech box titles in the Frisian campaign
-* **campaign_fri_murilius**: Text color for Murilius's speech box titles in the Frisian campaign
-* **campaign_fri_claus**: Text color for Claus Lembeck's speech box titles in the Frisian campaign
-* **campaign_fri_henneke**: Text color for Henneke's speech box titles in the Frisian campaign
-* **campaign_fri_iniucundus**: Text color for Iniucundus's speech box titles in the Frisian campaign
-* **campaign_fri_angadthur**: Text color for Angadthur's speech box titles in the Frisian campaign
-* **campaign_fri_amazon**: Text color for the amazon's speech box titles in the Frisian campaign
-* **campaign_fri_ketelsen**: Text color for Ketelsen's speech box titles in the Frisian campaign
+* **campaign_atl_jundlina**: Text color for Jundlina's speech box titles in the Atlanteans campaign
+* **campaign_atl_sidolus**: Text color for Sidolus's speech box titles in the Atlanteans campaign
+* **campaign_atl_loftomor**: Text color for Loftomor's speech box titles in the Atlanteans campaign
+* **campaign_atl_colionder**: Text color for Colionder's speech box titles in the Atlanteans campaign
+* **campaign_atl_opol**: Text color for Opol's speech box titles in the Atlanteans campaign
+* **campaign_atl_ostur**: Text color for Ostur's speech box titles in the Atlanteans campaign
+* **campaign_atl_kalitath**: Text color for Kalitath's speech box titles in the Atlanteans campaign
+* **campaign_fri_reebaud**: Text color for Reebaud's speech box titles in the Frisians campaign
+* **campaign_fri_hauke**: Text color for Hauke's speech box titles in the Frisians campaign
+* **campaign_fri_maukor**: Text color for Maukor's speech box titles in the Frisians campaign
+* **campaign_fri_murilius**: Text color for Murilius's speech box titles in the Frisians campaign
+* **campaign_fri_claus**: Text color for Claus Lembeck's speech box titles in the Frisians campaign
+* **campaign_fri_henneke**: Text color for Henneke's speech box titles in the Frisians campaign
+* **campaign_fri_iniucundus**: Text color for Iniucundus's speech box titles in the Frisians campaign
+* **campaign_fri_angadthur**: Text color for Angadthur's speech box titles in the Frisians campaign
+* **campaign_fri_amazon**: Text color for the amazon's speech box titles in the Frisians campaign
+* **campaign_fri_ketelsen**: Text color for Ketelsen's speech box titles in the Frisians campaign
 * **map_river_advisor**: Text color for the advisor's speech box titles in the Along the River SP scenario
 * **unknown**: Used when a Lua script requests a color not included in this list
 

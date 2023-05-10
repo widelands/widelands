@@ -1,11 +1,11 @@
--- This file contains the basic information for the Barbarian tribe that is
+-- This file contains the basic information for the Barbarians tribe that is
 -- needed before a game is loaded or the editor has been started.
 
 dirname = path.dirname(__file__)
 push_textdomain("tribes")
 
 local r = {
-   -- Basic information for the Barbarian tribe
+   -- Basic information for the Barbarians tribe
    name = "barbarians",
    author = _("The Widelands Development Team"),
    -- TRANSLATORS: This is a tribe name

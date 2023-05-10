@@ -333,7 +333,7 @@ function test_descr:test_working_positions()
 end
 
 function test_descr:test_critter_support()
-   -- Barbarian Gamekeeper supports Barbarian Hunter
+   -- Barbarians Gamekeeper supports Barbarians Hunter
    local site = egbase:get_building_description("barbarians_gamekeepers_hut")
    local site_support = site.supported_productionsites
    assert_equal(1, #site_support)
@@ -342,7 +342,7 @@ function test_descr:test_critter_support()
    assert_equal(0, #site.collected_bobs)
    assert_equal(9, #site.created_bobs) -- Match critters placed by barbarians_gamekeeper
 
-   -- Barbarian Hunter is supported by Barbarian Gamekeeper
+   -- Barbarians Hunter is supported by Barbarians Gamekeeper
    site = egbase:get_building_description("barbarians_hunters_hut")
    site_support = site.supported_by_productionsites
    assert_equal(1, #site_support)
@@ -360,7 +360,7 @@ function test_descr:test_critter_support()
 end
 
 function test_descr:test_ship_and_ferry_support()
-   -- Barbarian Shipyard has no support and creates 1 bob - a ship
+   -- Barbarians Shipyard has no support and creates 1 bob - a ship
    local site = egbase:get_building_description("barbarians_shipyard")
    assert_equal(0, #site.supported_productionsites)
    assert_equal(0, #site.supported_by_productionsites)
@@ -369,7 +369,7 @@ function test_descr:test_ship_and_ferry_support()
    assert_equal(1, #bobs)
    assert_equal("barbarians_ship", bobs[1].name)
 
-   -- Barbarian Ferry Yard has no support and creates 1 bob - a ferry
+   -- Barbarians Ferry Yard has no support and creates 1 bob - a ferry
    site = egbase:get_building_description("barbarians_ferry_yard")
    assert_equal(0, #site.supported_productionsites)
    assert_equal(0, #site.supported_by_productionsites)
@@ -380,7 +380,7 @@ function test_descr:test_ship_and_ferry_support()
 end
 
 function test_descr:test_immovable_support()
-   -- Barbarian Ranger supports Barbarian Lumberjack
+   -- Barbarians Ranger supports Barbarians Lumberjack
    local site = egbase:get_building_description("barbarians_rangers_hut")
    local site_support = site.supported_productionsites
    assert_equal(1, #site_support)
@@ -389,7 +389,7 @@ function test_descr:test_immovable_support()
    assert_equal(0, #site.collected_immovables)
    assert_equal(22, #site.created_immovables) -- Trees in the world
 
-   -- Barbarian Lumberjack is supported by Barbarian Ranger
+   -- Barbarians Lumberjack is supported by Barbarians Ranger
    site = egbase:get_building_description("barbarians_lumberjacks_hut")
    site_support = site.supported_by_productionsites
    assert_equal(1, #site_support)
@@ -398,14 +398,14 @@ function test_descr:test_immovable_support()
    assert_equal(34, #site.collected_immovables) -- Trees in the world
    assert_equal(0, #site.created_immovables)
 
-   -- Barbarian Quarry has no support
+   -- Barbarians Quarry has no support
    site = egbase:get_building_description("barbarians_quarry")
    assert_equal(0, #site.supported_productionsites)
    assert_equal(0, #site.supported_by_productionsites)
    assert_equal(4*6, #site.collected_immovables) -- Rocks in the world
    assert_equal(0, #site.created_immovables)
 
-   -- Barbarian Farm creates immovable, but has no dependencies
+   -- Barbarians Farm creates immovable, but has no dependencies
    site = egbase:get_building_description("barbarians_farm")
    site_support = site.supported_productionsites
    assert_equal(0, #site.supported_productionsites)
@@ -459,7 +459,7 @@ function test_descr:test_resource_support()
    assert_equal(1, #site.collected_resources)
    assert_equal(0, #site.created_resources)
 
-   -- Barbarian Fisher has no support
+   -- Barbarians Fisher has no support
    site = egbase:get_building_description("barbarians_fishers_hut")
    assert_equal(0, #site.supported_productionsites)
    assert_equal(0, #site.supported_by_productionsites)

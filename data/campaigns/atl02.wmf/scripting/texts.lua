@@ -166,7 +166,7 @@ obj_defeat_kalitath = {
    title = _("Defeat Kalitath"),
    number = 1,
    body = objective_text(_("Defeat Kalitath"),
-   p(_([[Now it’s time to finish off this annoying Barbarian. He has molested us far too long now.]])))
+   p(_([[Now it’s time to finish off this annoying Barbarians. He has molested us far too long now.]])))
 }
 
 -- =======================================================================
@@ -514,7 +514,7 @@ heretics_again = {
       title = _("Heretics!"),
       body = sidolus(_("Sidolus is very sad"),
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm us all. Our princess has been confused in her imprisonment by this Barbarian. But I will never worship any Barbarian god. I can’t imagine how we could change her mind though.]]))
+         _([[May Satul warm us all. Our princess has been confused in her imprisonment by this Barbarians. But I will never worship any Barbarians god. I can’t imagine how we could change her mind though.]]))
    },
    {
       title = _("Attracting Satul’s Help"),
@@ -526,7 +526,7 @@ heretics_again = {
       title = _("Build Temple"),
       body = sidolus(_("Sidolus"),
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm you, Loftomor. This is a very good idea indeed. So I task you to build a temple worth worshipping our god. Until we are ready to beg for Satul’s power we should keep an eye on our princess and this Barbarian. As we should stop our trader’s deliveries to not waste any wares to this Barbarian any more, I want you to ensure we have a scout out there to gather information.]]))
+         _([[May Satul warm you, Loftomor. This is a very good idea indeed. So I task you to build a temple worth worshipping our god. Until we are ready to beg for Satul’s power we should keep an eye on our princess and this Barbarians. As we should stop our trader’s deliveries to not waste any wares to this Barbarians any more, I want you to ensure we have a scout out there to gather information.]]))
          .. new_objectives(obj_build_temple),
    },
 }
@@ -573,7 +573,7 @@ princess_back = {
       title = _("Jundlina Explains"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
-         _([[Sidolus, they did not let me go. I met our scout and he managed to sneak me out, as I realized they still kept me hostage after I expressed some concerns about our previous agreement. So we need to settle the barbarian issue now and forever on this island. There is no other way to live here in peace than to defeat them.]]))
+         _([[Sidolus, they did not let me go. I met our scout and he managed to sneak me out, as I realized they still kept me hostage after I expressed some concerns about our previous agreement. So we need to settle the Barbarians issue now and forever on this island. There is no other way to live here in peace than to defeat them.]]))
          .. new_objectives(obj_defeat_kalitath),
    }
 }
@@ -636,7 +636,7 @@ trading = {
       title = _("Sidolus Agrees"),
       body = sidolus(_("Sidolus"),
          -- TRANSLATORS: Sidolus
-         _([[Well done, Loftomor, well done. May Satul warm our princess and our whole people. Now we need to begin sending goods to this Barbarian.]])
+         _([[Well done, Loftomor, well done. May Satul warm our princess and our whole people. Now we need to begin sending goods to this Barbarians.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Sidolus
          _([[I think we should start with the deliveries we could afford the easiest. But we need to find more metals for sure.]]))
@@ -734,7 +734,7 @@ suicide = {
       title = _("Jundlina’s Suicide"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
-         _([[Barbarian, I am an Atlantean princess and I will never go into slavery. I have prepared myself for this eventuality and will rather die from the poison I carry with me than be your slave. May Satul avenge my sacrifice.]]))
+         _([[Barbarians, I am an Atlantean princess and I will never go into slavery. I have prepared myself for this eventuality and will rather die from the poison I carry with me than be your slave. May Satul avenge my sacrifice.]]))
    },
    {
       title = _("Defeated!"),

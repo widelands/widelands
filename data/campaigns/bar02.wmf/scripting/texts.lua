@@ -330,7 +330,7 @@ story_msg_7 = {
       -- TRANSLATORS: Thron
       _([[Nothing is left of that beauty I remember, only ruins remain of the old capital. I am sorrowful but also relieved. I never hoped to see Al’thunran’s old beauty again – it was only a few months ago that I wondered whether I would ever be able to set my feet there again. Now the old town is back in my hands, and I will not hesitate to rebuild it with all the strength my people have. I can’t wait to see it again in its old beauty.]]))
       ..  objective_text(_("Victory"),
-         _([[You have completed the last mission of the Barbarian tutorial campaign. You may continue playing if you wish, otherwise move on to the next campaign.]]))
+         _([[You have completed the last mission of the Barbarians tutorial campaign. You may continue playing if you wish, otherwise move on to the next campaign.]]))
 }
 
 order_msg_7_free_althunran = {

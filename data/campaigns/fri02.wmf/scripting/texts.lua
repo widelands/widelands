@@ -375,7 +375,7 @@ defeat_both = {
       _([[Murilius has made it quite clear that he won’t leave us alone. I fear we must defeat him and destroy his colony if we ever want to have peace here.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – defeat both enemies
-      _([[The barbarian tribe he mentioned is also a threat. I don’t want to share this land with anyone, as sharing only leads to conflicts and battles, as we saw in our old home. We must defeat the Barbarians as well.]]))
+      _([[The Barbarians tribe he mentioned is also a threat. I don’t want to share this land with anyone, as sharing only leads to conflicts and battles, as we saw in our old home. We must defeat the Barbarians as well.]]))
       .. new_objectives(obj_defeat_both),
 }
 supply_murilius_thanks = {

@@ -117,9 +117,9 @@ wl.Descriptions():new_trainingsite_type {
    trainer_patience = 6,
 
    messages = {
-      -- TRANSLATORS: Barbarian training site tooltip when it has no soldiers assigned
+      -- TRANSLATORS: Barbarians training site tooltip when it has no soldiers assigned
       no_soldier = pgettext("barbarians_building", "No soldier to train!"),
-      -- TRANSLATORS: Barbarian training site tooltip when none of the present soldiers match the current training program
+      -- TRANSLATORS: Barbarians training site tooltip when none of the present soldiers match the current training program
       no_soldier_for_level = pgettext("barbarians_building", "No soldier found for this training level!"),
    },
 }

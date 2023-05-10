@@ -3003,7 +3003,7 @@ int LuaProductionSiteDescription::get_collected_immovables(lua_State* L) {
             }
          }
 
-      and for a Barbarian Coal Mine this will be:
+      and for a Barbarians Coal Mine this will be:
 
       .. code-block:: lua
 

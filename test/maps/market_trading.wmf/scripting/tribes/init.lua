@@ -22,7 +22,7 @@ return {
             {
                name = "barbarians_custom_worker",
                helptexts = {
-                  -- TRANSLATORS: Helptext for a barbarian worker: Custom Worker
+                  -- TRANSLATORS: Helptext for a Barbarians worker: Custom Worker
                   purpose = pgettext("barbarians_worker", "Custom Worker.")
                }
             }

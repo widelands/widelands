@@ -285,22 +285,22 @@
 --       {
 --          name = "barbarians_ax_workshop",
 --          helptexts = {
---             -- Lore helptext for a barbarian production site: Ax Workshop
+--             -- Lore helptext for a Barbarians production site: Ax Workshop
 --             lore = pgettext("barbarians_building", "‘A new warrior’s ax brings forth the best in its wielder – or the worst in its maker.’"),
 --
---             -- Lore author helptext for a barbarian production site: Ax Workshop
---             lore_author = pgettext("barbarians_building", "An old Barbarian proverb<br> meaning that you need to take some risks sometimes."),
+--             -- Lore author helptext for a Barbarians production site: Ax Workshop
+--             lore_author = pgettext("barbarians_building", "An old Barbarians proverb<br> meaning that you need to take some risks sometimes."),
 --
---             -- Purpose helptext for a barbarian production site: Ax Workshop
+--             -- Purpose helptext for a Barbarians production site: Ax Workshop
 --             purpose = pgettext("barbarians_building", "Produces axes, sharp axes and broad axes."),
 --
---             -- Note helptext for a barbarian production site: Ax Workshop
---             note = pgettext("barbarians_building", "The Barbarian ax workshop is the intermediate production site in a series of three buildings. It is enhanced from the metal workshop but doesn’t require additional qualification for the worker."),
+--             -- Note helptext for a Barbarians production site: Ax Workshop
+--             note = pgettext("barbarians_building", "The Barbarians ax workshop is the intermediate production site in a series of three buildings. It is enhanced from the metal workshop but doesn’t require additional qualification for the worker."),
 --
 --             performance = {
---                -- Performance helptext for a barbarian production site: Ax Workshop, part 1
+--                -- Performance helptext for a Barbarians production site: Ax Workshop, part 1
 --                pgettext("barbarians_building", "If all needed wares are delivered in time, this building can produce each type of ax in about %s on average."):bformat(format_seconds(57)),
---                -- Performance helptext for a barbarian production site: Ax Workshop, part 2
+--                -- Performance helptext for a Barbarians production site: Ax Workshop, part 2
 --                pgettext("barbarians_building", "All three weapons take the same time for making, but the required raw materials vary.")
 --             }
 --          },
