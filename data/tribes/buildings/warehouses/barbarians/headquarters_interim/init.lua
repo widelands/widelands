@@ -10,7 +10,7 @@ wl.Descriptions():new_warehouse_type {
    size = "big",
    destructible = false,
 
-   -- The interim headquarters of the barbarians is a simple stone building thatched
+   -- The interim headquarters of the Barbarians is a simple stone building thatched
    -- with reed and coated with many different wares.
    animation_directory = dirname,
    animations = {

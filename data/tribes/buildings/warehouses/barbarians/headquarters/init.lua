@@ -10,7 +10,7 @@ wl.Descriptions():new_warehouse_type {
    size = "big",
    destructible = false,
 
-   -- The Headquarters of the barbarians is from the apperance a stable military
+   -- The Headquarters of the Barbarians is from the apperance a stable military
    -- Building, fortified base and some towers made of blackwood. Some flags
    -- in the player colors may be present
    animation_directory = dirname,
