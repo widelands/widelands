@@ -50,7 +50,7 @@ function starting_infos()
    while wl.ui.MapView().windows.objectives do sleep(100) end
    -- TODO(Nordfriese): Re-add training wheels code after v1.0
    -- plr:mark_training_wheel_as_solved("objectives")
-   sleep(500)
+   set_objective_done(objective_to_explain_objectives, 500)
 
    -- Teach building spaces
    campaign_message_box(initial_message_02, 200)
@@ -431,16 +431,14 @@ function expansion()
       sleep(500)
    end
 
-   set_objective_done(o, 4 * wl.Game().desired_speed)
+   set_objective_done(o, 2 * wl.Game().desired_speed)
    campaign_message_box(military_building_finished)
 
    conclusion()
 end
 
 function conclusion()
-   set_objective_done(objective_to_explain_objectives)
-
-   sleep(5000) -- to give the player time to see his expanded area
+   sleep(5 * wl.Game().desired_speed) -- to give the player time to see his expanded area
 
    -- Conclude the tutorial with final words and information
    -- on how to quit
