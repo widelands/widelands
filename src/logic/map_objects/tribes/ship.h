@@ -274,6 +274,8 @@ struct Ship : Bob {
 	}
 	[[nodiscard]] uint32_t min_warship_soldier_capacity() const;
 
+	[[nodiscard]] std::vector<Soldier*> onboard_soldiers() const;
+
 	/**
 	 * Execute a warship command.
 	 * For a kAttack against a port, `parameters` contains the serials of the soldiers to send.
@@ -282,6 +284,7 @@ struct Ship : Bob {
 	 * For a kRetreat, `parameters` must be empty.
 	 */
 	void warship_command(Game& game, WarshipCommand cmd, const std::vector<uint32_t>& parameters);
+	void drop_soldier(Game& game, Serial soldier);
 
 	static void warship_soldier_callback(
 	   Game& game, Request& req, DescriptionIndex di, Worker* worker, PlayerImmovable& immovable);
@@ -304,6 +307,11 @@ struct Ship : Bob {
 		assert(c <= capacity_);
 		warship_soldier_capacity_ = c;
 	}
+
+	void draw_healthbar(const EditorGameBase& egbase,
+	                    RenderTarget* dst,
+	                    const Vector2f& point_on_dst,
+	                    float scale) const;
 
 protected:
 	void draw(const EditorGameBase& egbase,

@@ -1316,10 +1316,23 @@ void Player::enemyflagaction(const Flag& flag,
 			if (const AttackTarget* attack_target = building->attack_target()) {
 				if (attack_target->can_be_attacked()) {
 					attack_target->set_allow_conquer(player_number(), allow_conquer);
+					std::map<OPtr<Ship>, std::vector<uint32_t>> soldiers_on_warships;
+
 					for (Soldier* temp_attacker : soldiers) {
-						assert(temp_attacker);
+						assert(temp_attacker != nullptr);
 						assert(temp_attacker->get_owner() == this);
-						if (upcast(MilitarySite, ms, temp_attacker->get_location(egbase()))) {
+						if (temp_attacker->is_shipping()) {
+							if (Ship* ship = dynamic_cast<Ship*>(
+							       egbase().objects().get_object(temp_attacker->get_ship_serial()));
+							    ship != nullptr) {
+								soldiers_on_warships[ship].push_back(temp_attacker->serial());
+							} else {
+								verb_log_warn_time(egbase().get_gametime(),
+								                   "Player(%u)::enemyflagaction: Not sending soldier %u "
+								                   "because his warship has vanished\n",
+								                   player_number(), temp_attacker->serial());
+							}
+						} else if (upcast(MilitarySite, ms, temp_attacker->get_location(egbase()))) {
 							assert(ms->get_owner() == this);
 							ms->send_attacker(*temp_attacker, *building);
 						} else {
@@ -1327,10 +1340,14 @@ void Player::enemyflagaction(const Flag& flag,
 							// in the short delay between sending and executing a playercommand
 							verb_log_warn_time(egbase().get_gametime(),
 							                   "Player(%u)::enemyflagaction: Not sending soldier %u "
-							                   "because he left the "
-							                   "building\n",
+							                   "because he left the building\n",
 							                   player_number(), temp_attacker->serial());
 						}
+					}
+
+					for (auto& pair : soldiers_on_warships) {
+						pair.first.get(egbase())->warship_command(
+						   dynamic_cast<Game&>(egbase()), WarshipCommand::kAttack, pair.second);
 					}
 				}
 			}

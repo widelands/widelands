@@ -29,7 +29,6 @@
 #include "ui_basic/dropdown.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/unique_window.h"
-#include "wui/attack_window.h"
 #include "wui/interactive_base.h"
 #include "wui/itemwaresdisplay.h"
 
@@ -49,7 +48,6 @@ public:
 private:
 	void think() override;
 	void update_destination_buttons(const Widelands::Ship* ship);
-	std::vector<Widelands::Soldier*> get_soldiers() const;
 
 	UI::Button* make_button(UI::Panel* parent,
 	                        const std::string& name,
@@ -70,7 +68,6 @@ private:
 	void act_scout_towards(Widelands::WalkingDir);
 	void act_construct_port();
 	void act_explore_island(Widelands::IslandExploreDirection);
-	void act_warship_attack();
 	void act_set_destination();
 
 	InteractiveBase& ibase_;
@@ -78,7 +75,6 @@ private:
 
 	UI::Box vbox_;
 	UI::Box navigation_box_;
-	UI::Box warship_controls_;
 	UI::Panel* warship_capacity_control_;
 	UI::EditBox* name_field_;
 	UI::Button* btn_goto_;
@@ -93,11 +89,9 @@ private:
 	UI::Button* btn_scout_[Widelands::LAST_DIRECTION];
 	UI::Button* btn_construct_port_;
 	UI::Button* btn_warship_stay_;
-	UI::Button* btn_warship_attack_;
 	UI::Dropdown<Widelands::OPtr<Widelands::MapObject>>* set_destination_;
 	bool is_updating_destination_dropdown_{false};
 	ItemWaresDisplay* display_;
-	AttackPanel* warship_soldiers_display_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShip>> shipnotes_subscriber_;
 	DISALLOW_COPY_AND_ASSIGN(ShipWindow);
 };

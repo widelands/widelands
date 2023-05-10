@@ -29,6 +29,7 @@
 #include "graphic/text_layout.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/militarysite.h"
+#include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/player.h"
@@ -37,9 +38,6 @@
 #include "ui_basic/textarea.h"
 #include "wui/interactive_base.h"
 #include "wui/soldiercapacitycontrol.h"
-
-using Widelands::Soldier;
-using Widelands::SoldierControl;
 
 namespace {
 
@@ -53,11 +51,11 @@ constexpr int kIconBorder = 2;
  * Iconic representation of soldiers, including their levels and current health.
  */
 struct SoldierPanel : UI::Panel {
-	using SoldierFn = std::function<void(const Soldier*)>;
+	using SoldierFn = std::function<void(const Widelands::Soldier*)>;
 
 	SoldierPanel(UI::Panel& parent,
 	             Widelands::EditorGameBase& egbase,
-	             Widelands::Building& building);
+	             Widelands::MapObject& building_or_ship);
 
 	Widelands::EditorGameBase& egbase() const {
 		return egbase_;
@@ -69,6 +67,42 @@ struct SoldierPanel : UI::Panel {
 	void set_mouseover(const SoldierFn& fn);
 	void set_click(const SoldierFn& fn);
 
+	const Widelands::Ship* get_ship() const {
+		assert(is_ship_);
+		return dynamic_cast<const Widelands::Ship*>(building_or_ship_.get(egbase_));
+	}
+	Widelands::Ship* get_ship() {
+		assert(is_ship_);
+		return dynamic_cast<Widelands::Ship*>(building_or_ship_.get(egbase_));
+	}
+	const Widelands::Building* get_building() const {
+		assert(!is_ship_);
+		return dynamic_cast<const Widelands::Building*>(building_or_ship_.get(egbase_));
+	}
+	Widelands::Building* get_building() {
+		assert(!is_ship_);
+		return dynamic_cast<Widelands::Building*>(building_or_ship_.get(egbase_));
+	}
+
+	uint32_t get_max_capacity() const {
+		if (is_ship_) {
+			return get_ship()->get_capacity();
+		}
+		return get_building()->soldier_control()->max_soldier_capacity();
+	}
+	uint32_t get_cur_capacity() const {
+		if (is_ship_) {
+			return get_ship()->get_warship_soldier_capacity();
+		}
+		return get_building()->soldier_control()->soldier_capacity();
+	}
+	std::vector<Widelands::Soldier*> associated_soldiers() const {
+		if (is_ship_) {
+			return get_ship()->onboard_soldiers();
+		}
+		return get_building()->soldier_control()->associated_soldiers();
+	}
+
 protected:
 	void handle_mousein(bool inside) override;
 	bool
@@ -77,10 +111,10 @@ protected:
 
 private:
 	Vector2i calc_pos(uint32_t row, uint32_t col) const;
-	const Soldier* find_soldier(int32_t x, int32_t y) const;
+	const Widelands::Soldier* find_soldier(int32_t x, int32_t y) const;
 
 	struct Icon {
-		Widelands::OPtr<Soldier> soldier;
+		Widelands::OPtr<Widelands::Soldier> soldier;
 		uint32_t row;
 		uint32_t col;
 		Vector2i pos = Vector2i::zero();
@@ -97,7 +131,8 @@ private:
 	};
 
 	Widelands::EditorGameBase& egbase_;
-	Widelands::OPtr<Widelands::Building> building_;
+	Widelands::OPtr<Widelands::MapObject> building_or_ship_;
+	bool is_ship_;
 
 	SoldierFn mouseover_fn_;
 	SoldierFn click_fn_;
@@ -115,16 +150,19 @@ private:
 
 SoldierPanel::SoldierPanel(UI::Panel& parent,
                            Widelands::EditorGameBase& gegbase,
-                           Widelands::Building& building)
-   : Panel(&parent, UI::PanelStyle::kWui, 0, 0, 0, 0), egbase_(gegbase), building_(&building) {
-	assert(building.soldier_control() != nullptr);
-	Soldier::calc_info_icon_size(building.owner().tribe(), icon_width_, icon_height_);
+                           Widelands::MapObject& building_or_ship)
+   : Panel(&parent, UI::PanelStyle::kWui, 0, 0, 0, 0),
+     egbase_(gegbase),
+     building_or_ship_(&building_or_ship),
+     is_ship_(building_or_ship.descr().type() == Widelands::MapObjectType::SHIP) {
+	Widelands::Soldier::calc_info_icon_size(
+	   building_or_ship.owner().tribe(), icon_width_, icon_height_);
 	icon_width_ += 2 * kIconBorder;
 	icon_height_ += 2 * kIconBorder;
 
 	/* The +1 is because up to 1 additional soldier may be coming
 	 * to the building for the hero/rookie exchange. */
-	const Widelands::Quantity maxcapacity = building.soldier_control()->max_soldier_capacity() + 1;
+	const Widelands::Quantity maxcapacity = get_max_capacity() + 1;
 	if (maxcapacity <= kMaxColumns) {
 		cols_ = maxcapacity;
 		rows_ = 1;
@@ -140,7 +178,8 @@ SoldierPanel::SoldierPanel(UI::Panel& parent,
 	// Initialize the icons
 	uint32_t row = 0;
 	uint32_t col = 0;
-	for (Soldier* soldier : building.soldier_control()->associated_soldiers()) {
+	Widelands::Building* building = is_ship_ ? nullptr : get_building();
+	for (Widelands::Soldier* soldier : associated_soldiers()) {
 		Icon icon;
 		icon.soldier = soldier;
 		icon.row = row;
@@ -148,7 +187,7 @@ SoldierPanel::SoldierPanel(UI::Panel& parent,
 		icon.pos = calc_pos(row, col);
 		icon.cache_health = 0;
 		icon.cache_level = 0;
-		icon.cache_is_present = building.is_present(*soldier);
+		icon.cache_is_present = is_ship_ || building->is_present(*soldier);
 		icons_.push_back(icon);
 
 		if (++col >= cols_) {
@@ -173,25 +212,26 @@ void SoldierPanel::set_click(const SoldierPanel::SoldierFn& fn) {
 }
 
 void SoldierPanel::think() {
-	Widelands::Building* b = building_.get(egbase_);
-	if (b == nullptr) {
+	Widelands::Building* building = is_ship_ ? nullptr : get_building();
+	Widelands::Ship* ship = is_ship_ ? get_ship() : nullptr;
+	if (building == nullptr && ship == nullptr) {
 		return;
 	}
 
 	bool changes = false;
-	uint32_t capacity = b->soldier_control()->soldier_capacity();
+	uint32_t capacity = get_cur_capacity();
 
 	// Update soldier list and target row/col:
-	std::vector<Soldier*> soldierlist = b->soldier_control()->associated_soldiers();
+	std::vector<Widelands::Soldier*> soldierlist = associated_soldiers();
 	std::vector<uint32_t> row_occupancy;
 	row_occupancy.resize(rows_);
 
 	// First pass: check whether existing icons are still valid, and compact them
 	for (uint32_t idx = 0; idx < icons_.size(); ++idx) {
 		Icon& icon = icons_[idx];
-		Soldier* soldier = icon.soldier.get(egbase());
+		Widelands::Soldier* soldier = icon.soldier.get(egbase());
 		if (soldier != nullptr) {
-			std::vector<Soldier*>::iterator it =
+			std::vector<Widelands::Soldier*>::iterator it =
 			   std::find(soldierlist.begin(), soldierlist.end(), soldier);
 			if (it != soldierlist.end()) {
 				soldierlist.erase(it);
@@ -266,14 +306,14 @@ void SoldierPanel::think() {
 		icon.pos += dp;
 
 		// Check whether health and/or level of the soldier has changed
-		Soldier* soldier = icon.soldier.get(egbase());
+		Widelands::Soldier* soldier = icon.soldier.get(egbase());
 		uint32_t level = soldier->get_attack_level();
 		level = level * (soldier->descr().get_max_defense_level() + 1) + soldier->get_defense_level();
 		level = level * (soldier->descr().get_max_evade_level() + 1) + soldier->get_evade_level();
 		level = level * (soldier->descr().get_max_health_level() + 1) + soldier->get_health_level();
 
 		uint32_t health = soldier->get_current_health();
-		bool present = b->is_present(*soldier);
+		bool present = is_ship_ || building->is_present(*soldier);
 
 		if (health != icon.cache_health || level != icon.cache_level ||
 		    present != icon.cache_is_present) {
@@ -291,13 +331,14 @@ void SoldierPanel::think() {
 }
 
 void SoldierPanel::draw(RenderTarget& dst) {
-	Widelands::Building* b = building_.get(egbase_);
-	if (b == nullptr) {
+	Widelands::Building* building = is_ship_ ? nullptr : get_building();
+	Widelands::Ship* ship = is_ship_ ? get_ship() : nullptr;
+	if (building == nullptr && ship == nullptr) {
 		return;
 	}
 
 	// Fill a region matching the current site capacity with black
-	uint32_t capacity = b->soldier_control()->soldier_capacity();
+	uint32_t capacity = get_cur_capacity();
 	uint32_t fullrows = capacity / kMaxColumns;
 
 	if (fullrows != 0u) {
@@ -311,14 +352,15 @@ void SoldierPanel::draw(RenderTarget& dst) {
 
 	// Draw icons
 	for (const Icon& icon : icons_) {
-		const Soldier* soldier = icon.soldier.get(egbase());
+		const Widelands::Soldier* soldier = icon.soldier.get(egbase());
 		if (soldier == nullptr) {
 			continue;
 		}
 
 		constexpr float kNoZoom = 1.f;
 		soldier->draw_info_icon(icon.pos + Vector2i(kIconBorder, kIconBorder), kNoZoom,
-		                        Soldier::InfoMode::kInBuilding, InfoToDraw::kSoldierLevels, &dst);
+		                        Widelands::Soldier::InfoMode::kInBuilding, InfoToDraw::kSoldierLevels,
+		                        &dst);
 
 		if (!icon.cache_is_present) {
 			// Since the background is black, darkening the icon has the same effect
@@ -335,7 +377,7 @@ Vector2i SoldierPanel::calc_pos(uint32_t row, uint32_t col) const {
 /**
  * Return the soldier (if any) at the given coordinates.
  */
-const Soldier* SoldierPanel::find_soldier(int32_t x, int32_t y) const {
+const Widelands::Soldier* SoldierPanel::find_soldier(int32_t x, int32_t y) const {
 	for (const Icon& icon : icons_) {
 		Recti r(icon.pos, icon_width_, icon_height_);
 		if (r.contains(Vector2i(x, y))) {
@@ -363,7 +405,7 @@ bool SoldierPanel::handle_mousemove(
 bool SoldierPanel::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
 		if (click_fn_) {
-			if (const Soldier* soldier = find_soldier(x, y)) {
+			if (const Widelands::Soldier* soldier = find_soldier(x, y)) {
 				click_fn_(soldier);
 			}
 		}
@@ -377,21 +419,21 @@ bool SoldierPanel::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
  * List of soldiers \ref MilitarySiteWindow and \ref TrainingSiteWindow
  */
 struct SoldierList : UI::Box {
-	SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Building& building);
-
-	const SoldierControl* soldiers() const;
+	SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::MapObject& building_or_ship);
 
 protected:
 	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
 
 private:
-	void mouseover(const Soldier* soldier);
-	void eject(const Soldier* soldier);
+	void mouseover(const Widelands::Soldier* soldier);
+	void eject(const Widelands::Soldier* soldier);
 	void set_soldier_preference(int32_t changed_to);
 	void think() override;
+	bool can_eject() const;
+	void unset_infotext();
 
 	InteractiveBase& ibase_;
-	Widelands::Building& building_;
+	Widelands::MapObject& building_or_ship_;
 	const UI::FontStyle font_style_{UI::FontStyle::kWuiLabel};
 	SoldierPanel soldierpanel_;
 	UI::Radiogroup soldier_preference_;
@@ -400,23 +442,25 @@ private:
 	UI::Panel* soldier_capacity_control_;
 };
 
-SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Building& building)
+SoldierList::SoldierList(UI::Panel& parent,
+                         InteractiveBase& ib,
+                         Widelands::MapObject& building_or_ship)
    : UI::Box(&parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
 
      ibase_(ib),
-     building_(building),
+     building_or_ship_(building_or_ship),
 
-     soldierpanel_(*this, ib.egbase(), building),
-     infotext_(
-        this, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, _("Click soldier to send away")) {
+     soldierpanel_(*this, ib.egbase(), building_or_ship),
+     infotext_(this, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel) {
+	unset_infotext();
 	add(&soldierpanel_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	add_space(2);
 
 	add(&infotext_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
-	soldierpanel_.set_mouseover([this](const Soldier* s) { mouseover(s); });
-	soldierpanel_.set_click([this](const Soldier* s) { eject(s); });
+	soldierpanel_.set_mouseover([this](const Widelands::Soldier* s) { mouseover(s); });
+	soldierpanel_.set_click([this](const Widelands::Soldier* s) { eject(s); });
 
 	// We don't want translators to translate this twice, so it's a bit involved.
 	int w = UI::g_fh
@@ -436,8 +480,9 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
 
 	UI::Box* buttons = new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 
-	bool can_act = ibase_.can_act(building_.owner().player_number());
-	if (upcast(Widelands::MilitarySite, ms, &building)) {
+	bool can_act = ibase_.can_act(building_or_ship_.owner().player_number());
+	if (building_or_ship.descr().type() == Widelands::MapObjectType::MILITARYSITE) {
+		upcast(Widelands::MilitarySite, ms, &building_or_ship);
 		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, Vector2i::zero(),
 		                               g_image_cache->get("images/wui/buildings/prefer_rookies.png"),
 		                               _("Prefer rookies"));
@@ -459,17 +504,14 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
 		}
 	}
 	buttons->add_inf_space();
-	soldier_capacity_control_ = create_soldier_capacity_control(*buttons, ib, building);
+	soldier_capacity_control_ = create_soldier_capacity_control(*buttons, ib, building_or_ship);
 	buttons->add(soldier_capacity_control_);
 	add(buttons, UI::Box::Resizing::kFullSize);
 }
 
-const SoldierControl* SoldierList::soldiers() const {
-	return building_.soldier_control();
-}
-
 void SoldierList::think() {
-	if (upcast(Widelands::MilitarySite, ms, &building_)) {
+	if (building_or_ship_.descr().type() == Widelands::MapObjectType::MILITARYSITE) {
+		upcast(Widelands::MilitarySite, ms, &building_or_ship_);
 		switch (ms->get_soldier_preference()) {
 		case Widelands::SoldierPreference::kRookies:
 			soldier_preference_.set_state(0, false);
@@ -481,9 +523,9 @@ void SoldierList::think() {
 	}
 }
 
-void SoldierList::mouseover(const Soldier* soldier) {
+void SoldierList::mouseover(const Widelands::Soldier* soldier) {
 	if (soldier == nullptr) {
-		infotext_.set_text(_("Click soldier to send away"));
+		unset_infotext();
 		return;
 	}
 
@@ -494,14 +536,32 @@ void SoldierList::mouseover(const Soldier* soldier) {
 	                          soldier->get_evade_level(), soldier->descr().get_max_evade_level()));
 }
 
-void SoldierList::eject(const Soldier* soldier) {
-	uint32_t const capacity_min = soldiers()->min_soldier_capacity();
-	bool can_act = ibase_.can_act(building_.owner().player_number());
-	bool over_min = capacity_min < soldiers()->present_soldiers().size();
+void SoldierList::unset_infotext() {
+	infotext_.set_text(can_eject() ? _("Click soldier to send away") : "");
+}
 
-	if (can_act && over_min) {
-		if (Widelands::Game* game = ibase_.get_game()) {
-			game->send_player_drop_soldier(building_, soldier->serial());
+bool SoldierList::can_eject() const {
+	if (!ibase_.can_act(building_or_ship_.owner().player_number())) {
+		return false;
+	}
+
+	const bool is_ship = building_or_ship_.descr().type() == Widelands::MapObjectType::SHIP;
+	const Widelands::Building* building = is_ship ? nullptr : soldierpanel_.get_building();
+	const Widelands::Ship* ship = is_ship ? soldierpanel_.get_ship() : nullptr;
+
+	uint32_t const capacity_min = is_ship ? ship->min_warship_soldier_capacity() :
+                                           building->soldier_control()->min_soldier_capacity();
+	bool over_min =
+	   capacity_min < (is_ship ? ship->onboard_soldiers().size() :
+                                building->soldier_control()->present_soldiers().size());
+
+	return over_min;
+}
+
+void SoldierList::eject(const Widelands::Soldier* soldier) {
+	if (can_eject()) {
+		if (Widelands::Game* game = ibase_.get_game(); game != nullptr) {
+			game->send_player_drop_soldier(building_or_ship_, soldier->serial());
 		} else {
 			NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 		}
@@ -509,11 +569,11 @@ void SoldierList::eject(const Soldier* soldier) {
 }
 
 void SoldierList::set_soldier_preference(int32_t changed_to) {
-	assert(building_.descr().type() == Widelands::MapObjectType::MILITARYSITE);
+	assert(building_or_ship_.descr().type() == Widelands::MapObjectType::MILITARYSITE);
 	if (Widelands::Game* game = ibase_.get_game()) {
 		game->send_player_militarysite_set_soldier_preference(
-		   building_, changed_to == 0 ? Widelands::SoldierPreference::kRookies :
-                                      Widelands::SoldierPreference::kHeroes);
+		   *soldierpanel_.get_building(), changed_to == 0 ? Widelands::SoldierPreference::kRookies :
+                                                          Widelands::SoldierPreference::kHeroes);
 	} else {
 		NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 	}
@@ -523,7 +583,8 @@ bool SoldierList::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 	return soldier_capacity_control_->handle_mousewheel(x, y, modstate);
 }
 
-UI::Panel*
-create_soldier_list(UI::Panel& parent, InteractiveBase& ib, Widelands::Building& building) {
-	return new SoldierList(parent, ib, building);
+UI::Panel* create_soldier_list(UI::Panel& parent,
+                               InteractiveBase& ib,
+                               Widelands::MapObject& building_or_ship) {
+	return new SoldierList(parent, ib, building_or_ship);
 }

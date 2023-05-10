@@ -1758,7 +1758,8 @@ void Worker::start_task_shipping(Game& game, PortDock* pd) {
  * @note the worker must be in a @ref Warehouse location
  */
 void Worker::end_shipping(Game& game) {
-	if (State* state = get_state(taskShipping)) {
+	set_ship_serial(0);
+	if (State* state = get_state(taskShipping); state != nullptr) {
 		state->ivar1 = 1;
 		send_signal(game, "endshipping");
 	}
@@ -1767,7 +1768,7 @@ void Worker::end_shipping(Game& game) {
 /**
  * Whether we are currently being handled by the shipping code.
  */
-bool Worker::is_shipping() {
+bool Worker::is_shipping() const {
 	return get_state(taskShipping) != nullptr;
 }
 
