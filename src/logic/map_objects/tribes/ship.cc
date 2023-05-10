@@ -58,6 +58,7 @@ namespace Widelands {
 
 namespace {
 
+constexpr unsigned kSinkAnimationDuration = 3000;
 constexpr unsigned kNearDestinationShipRadius = 4;
 constexpr unsigned kNearDestinationNoteRadius = 1;
 
@@ -158,9 +159,7 @@ struct FindNodeAttackTarget {
 
 		if (ship_.get_nritems() > 0) {
 			Coords portspace = egbase.map().find_portspace_for_dockpoint(f);
-			if (static_cast<bool>(portspace) &&
-			    egbase.map().calc_distance(portspace, ship_.get_position()) <=
-			       ship_.descr().vision_range()) {
+			if (static_cast<bool>(portspace)) {
 				const PlayerNumber owner = egbase.map()[portspace].get_owned_by();
 				if (owner == 0 || ship_.owner().is_hostile(egbase.player(owner))) {
 					return true;
@@ -392,7 +391,8 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 			const Map& map = game.map();
 			FCoords position = map.get_fcoords(get_position());
 			if (position.field->get_immovable() != dest) {
-				start_task_movetodock(game, *dest);
+				molog(game.get_gametime(), "Move to dock %u for refit\n", dest->serial());
+				return start_task_movetodock(game, *dest);
 			} else {
 				// Arrived at destination, now unload and refit
 				set_destination(game, nullptr);
@@ -428,6 +428,7 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 			}
 		} else {
 			// Destination vanished, try to find a new one
+			molog(game.get_gametime(), "Refit failed, retry\n");
 			const ShipType t = pending_refit_;
 			pending_refit_ = ship_type_;
 			refit(game, t);
@@ -453,7 +454,7 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 	case ShipStates::kSinkRequest:
 		if (descr().is_animation_known("sinking")) {
 			ship_state_ = ShipStates::kSinkAnimation;
-			start_task_idle(game, descr().get_animation("sinking", this), 3000);
+			start_task_idle(game, descr().get_animation("sinking", this), kSinkAnimationDuration);
 			return;
 		}
 		log_warn_time(game.get_gametime(), "Oh no... this ship has no sinking animation :(!\n");
@@ -868,7 +869,7 @@ void Ship::refit(Game& game, const ShipType type) {
 		return;
 	}
 
-	if (destination_.get(game) != nullptr) {
+	if (get_destination_port(game) != nullptr) {
 		send_signal(game, "wakeup");
 	} else if (PortDock* dest = find_nearest_port(game); dest != nullptr) {
 		set_destination(game, dest);
@@ -929,6 +930,39 @@ bool Ship::is_on_destination_dock() const {
 
 uint32_t Ship::min_warship_soldier_capacity() const {
 	return is_on_destination_dock() ? 0U : get_nritems();
+}
+
+std::vector<Soldier*> Ship::onboard_soldiers() const {
+	std::vector<Soldier*> result;
+	for (const ShippingItem& si : items_) {
+		Worker* worker;
+		si.get(owner().egbase(), nullptr, &worker);
+		if (worker != nullptr && worker->descr().type() == MapObjectType::SOLDIER) {
+			result.push_back(dynamic_cast<Soldier*>(worker));
+		}
+	}
+	return result;
+}
+
+void Ship::drop_soldier(Game& game, Serial soldier) {
+	PortDock* dest = get_destination_port(game);
+	if (dest == nullptr) {
+		verb_log_warn_time(game.get_gametime(), "Ship not in dock, cannot drop soldier");
+		return;
+	}
+
+	for (size_t i = 0; i < items_.size(); ++i) {
+		Worker* worker;
+		items_[i].get(game, nullptr, &worker);
+		if (worker != nullptr && worker->serial() == soldier) {
+			dest->shipping_item_arrived(game, items_[i]);
+
+			items_[i] = items_.back();
+			items_.pop_back();
+			return;
+		}
+	}
+	verb_log_warn_time(game.get_gametime(), "Ship::drop_soldier: %u is not on board", soldier);
 }
 
 void Ship::warship_command(Game& game,
@@ -1012,6 +1046,7 @@ void Ship::battle_update(Game& game) {
 	Battle& current_battle = battles_.back();
 	Ship* target_ship = current_battle.opponent.get(game);
 	if (target_ship == nullptr && !static_cast<bool>(current_battle.attack_coords)) {
+		molog(game.get_gametime(), "[battle] Enemy disappeared, cancel");
 		battles_.pop_back();
 		start_task_idle(game, descr().main_animation(), 100);
 		return;
@@ -1036,6 +1071,7 @@ void Ship::battle_update(Game& game) {
 	};
 	auto fight = [this, &current_battle, other_battle, &game, target_ship]() {
 		if (target_ship == nullptr) {
+			molog(game.get_gametime(), "[battle] Attacking a port");
 			current_battle.pending_damage = 1;                             // Ports always take 1 point
 		} else if (game.logic_rand() % 100 < descr().attack_accuracy_) {  // Hit
 			uint32_t attack_strength =
@@ -1044,9 +1080,11 @@ void Ship::battle_update(Game& game) {
 
 			attack_strength += attack_strength * get_sea_attack_soldier_bonus(game) / 100;
 
+			molog(game.get_gametime(), "[battle] Hit with %u points", attack_strength);
 			current_battle.pending_damage =
 			   attack_strength * (100 - target_ship->descr().defense_) / 100;
 		} else {  // Miss
+			molog(game.get_gametime(), "[battle] Miss");
 			current_battle.pending_damage = 0;
 		}
 
@@ -1058,30 +1096,41 @@ void Ship::battle_update(Game& game) {
 	               target_ship](Battle::Phase next) {
 		assert(target_ship != nullptr);
 		if (target_ship->hitpoints_ > current_battle.pending_damage) {
+			molog(game.get_gametime(), "[battle] Subtracting %u hitpoints from enemy",
+			      current_battle.pending_damage);
 			target_ship->hitpoints_ -= current_battle.pending_damage;
 			set_phase(next);
 		} else {
+			molog(game.get_gametime(), "[battle] Enemy defeated");
 			target_ship->send_message(game, _("Ship Sunk"), _("Ship Destroyed"),
 			                          _("An enemy ship has destroyed your warship."),
 			                          "images/wui/ship/ship_attack.png");
+			target_ship->battles_.clear();
+			target_ship->reset_tasks(game);
 			target_ship->set_ship_state_and_notify(
 			   ShipStates::kSinkRequest, NoteShip::Action::kDestinationChanged);
-			target_ship->battles_.clear();
 			battles_.pop_back();
+			return true;
 		}
 		current_battle.pending_damage = 0;
 		other_battle->pending_damage = 0;
+		return false;
 	};
 
 	if (!current_battle.is_first) {
 		switch (current_battle.phase) {
-		case Battle::Phase::kDefenderAttacking:
+		case Battle::Phase::kDefenderAttacking: {
 			// Our turn is over, now it's the enemy's turn.
-			damage(Battle::Phase::kAttackersTurn);
-			start_task_idle(game, descr().main_animation(), 100);
+			molog(game.get_gametime(), "[battle] Defender's turn ends");
+			bool won = damage(Battle::Phase::kAttackersTurn);
+			// Make sure we will idle until the enemy ship is truly gone, so we won't attack again
+			start_task_idle(
+			   game, descr().main_animation(), won ? (kSinkAnimationDuration + 1000) : 100);
 			return;
+		}
 
 		case Battle::Phase::kDefendersTurn:
+			molog(game.get_gametime(), "[battle] Defender's turn begins");
 			fight();
 			set_phase(Battle::Phase::kDefenderAttacking);
 			start_task_idle(game, descr().main_animation(),
@@ -1102,6 +1151,7 @@ void Ship::battle_update(Game& game) {
 		return start_task_idle(game, descr().main_animation(), 100);
 
 	case Battle::Phase::kNotYetStarted:
+		molog(game.get_gametime(), "[battle] Preparing to engage");
 		set_phase(Battle::Phase::kAttackerMovingTowardsOpponent);
 		FALLS_THROUGH;
 	case Battle::Phase::kAttackerMovingTowardsOpponent: {
@@ -1118,7 +1168,10 @@ void Ship::battle_update(Game& game) {
 		if (dest == get_position() ||
 		    (!exact_match_required && map.calc_distance(get_position(), dest) < 2)) {
 			// Already there, start the fight in the next act.
-			set_phase(Battle::Phase::kAttackersTurn);
+			// For ports, skip the first round to allow defense warships to approach.
+			molog(game.get_gametime(), "[battle] Enemy in range");
+			set_phase(target_ship != nullptr ? Battle::Phase::kAttackersTurn :
+                                            Battle::Phase::kAttackerAttacking);
 			return start_task_idle(game, descr().main_animation(), 100);
 		}
 
@@ -1144,6 +1197,7 @@ void Ship::battle_update(Game& game) {
 			steps--;
 		}
 
+		molog(game.get_gametime(), "[battle] Moving towards enemy");
 		start_task_movepath(game, path, descr().get_sail_anims(), false, steps);
 		return;
 	}
@@ -1151,10 +1205,15 @@ void Ship::battle_update(Game& game) {
 	case Battle::Phase::kAttackerAttacking:
 		if (target_ship != nullptr) {
 			// Our turn is over, now it's the enemy's turn.
-			damage(Battle::Phase::kDefendersTurn);
+			molog(game.get_gametime(), "[battle] Attacker's turn ends");
+			bool won = damage(Battle::Phase::kDefendersTurn);
+			if (won) {
+				return start_task_idle(game, descr().main_animation(), kSinkAnimationDuration + 1000);
+			}
 		} else if (current_battle.pending_damage > 0) {
 			// The naval assault was successful. Now unload the soldiers.
 			// From the ship's perspective, the attack was a success.
+			molog(game.get_gametime(), "[battle] Naval invasion commencing");
 
 			Coords portspace = map.find_portspace_for_dockpoint(current_battle.attack_coords);
 			assert(portspace != Coords::null());
@@ -1255,17 +1314,21 @@ void Ship::battle_update(Game& game) {
 			if (nearest != nullptr) {
 				// Let the best candidate launch an attack against us. This
 				// suspends the current battle until the new fight is over.
-				dynamic_cast<Ship&>(*nearest).start_battle(
-				   game, Battle(this, Coords::null(), {}, true));
+				Ship& nearest_ship = dynamic_cast<Ship&>(*nearest);
+				molog(game.get_gametime(), "[battle] Summoning %s to the port's defense",
+				      nearest_ship.get_shipname().c_str());
+				nearest_ship.start_battle(game, Battle(this, Coords::null(), {}, true));
 			}
 
 			// Since ports can't defend themselves on their own, start the next round at once.
+			molog(game.get_gametime(), "[battle] Port is undefended");
 			set_phase(Battle::Phase::kAttackersTurn);
 		}
 		start_task_idle(game, descr().main_animation(), 100);
 		return;
 
 	case Battle::Phase::kAttackersTurn:
+		molog(game.get_gametime(), "[battle] Attacker's turn begins");
 		fight();
 		set_phase(Battle::Phase::kAttackerAttacking);
 		start_task_idle(game, descr().main_animation(),
@@ -2038,73 +2101,79 @@ void Ship::draw(const EditorGameBase& egbase,
 
 	if ((info_to_draw & InfoToDraw::kSoldierLevels) != 0 &&
 	    (ship_type_ == ShipType::kWarship || hitpoints_ < descr().max_hitpoints_)) {
-		// TODO(Nordfriese): Common code with Soldier::draw_info_icon
-		const RGBColor& color = owner().get_playercolor();
-		const uint16_t color_sum = color.r + color.g + color.b;
+		draw_healthbar(egbase, dst, point_on_dst, scale);
+	}
+}
 
-		const Vector2i draw_position = point_on_dst.cast<int>();
+void Ship::draw_healthbar(const EditorGameBase& egbase,
+                          RenderTarget* dst,
+                          const Vector2f& point_on_dst,
+                          float scale) const {
+	// TODO(Nordfriese): Common code with Soldier::draw_info_icon
+	const RGBColor& color = owner().get_playercolor();
+	const uint16_t color_sum = color.r + color.g + color.b;
 
-		// The frame gets a slight tint of player color
-		const Recti energy_outer(draw_position - Vector2i(kShipHealthBarWidth, 0) * scale,
-		                         kShipHealthBarWidth * 2 * scale, 5 * scale);
-		dst->fill_rect(energy_outer, color);
-		dst->brighten_rect(energy_outer, 230 - color_sum / 3);
+	const Vector2i draw_position = point_on_dst.cast<int>();
 
-		// Adjust health to current animation tick
-		uint32_t health_to_show = hitpoints_;
-		if (has_battle() &&
-		    battles_.back().phase == (battles_.back().is_first ? Battle::Phase::kDefenderAttacking :
-                                                               Battle::Phase::kAttackerAttacking)) {
-			uint32_t pending_damage =
-			   battles_.back().pending_damage *
-			   (owner().egbase().get_gametime() - battles_.back().time_of_last_action).get() /
-			   kAttackAnimationDuration;
-			if (pending_damage > health_to_show) {
-				health_to_show = 0;
-			} else {
-				health_to_show -= pending_damage;
-			}
+	// The frame gets a slight tint of player color
+	const Recti energy_outer(draw_position - Vector2i(kShipHealthBarWidth, 0) * scale,
+	                         kShipHealthBarWidth * 2 * scale, 5 * scale);
+	dst->fill_rect(energy_outer, color);
+	dst->brighten_rect(energy_outer, 230 - color_sum / 3);
+
+	// Adjust health to current animation tick
+	uint32_t health_to_show = hitpoints_;
+	if (has_battle() &&
+	    battles_.back().phase == (battles_.back().is_first ? Battle::Phase::kDefenderAttacking :
+                                                            Battle::Phase::kAttackerAttacking)) {
+		uint32_t pending_damage =
+		   battles_.back().pending_damage *
+		   (owner().egbase().get_gametime() - battles_.back().time_of_last_action).get() /
+		   kAttackAnimationDuration;
+		if (pending_damage > health_to_show) {
+			health_to_show = 0;
+		} else {
+			health_to_show -= pending_damage;
 		}
+	}
 
-		// Now draw the health bar itself
-		const int health_width =
-		   2 * (kShipHealthBarWidth - 1) * health_to_show / descr().max_hitpoints_;
+	// Now draw the health bar itself
+	const int health_width = 2 * (kShipHealthBarWidth - 1) * health_to_show / descr().max_hitpoints_;
 
-		Recti energy_inner(draw_position + Vector2i(-kShipHealthBarWidth + 1, 1) * scale,
-		                   health_width * scale, 3 * scale);
-		Recti energy_complement(energy_inner.origin() + Vector2i(health_width, 0) * scale,
-		                        (2 * (kShipHealthBarWidth - 1) - health_width) * scale, 3 * scale);
+	Recti energy_inner(draw_position + Vector2i(-kShipHealthBarWidth + 1, 1) * scale,
+	                   health_width * scale, 3 * scale);
+	Recti energy_complement(energy_inner.origin() + Vector2i(health_width, 0) * scale,
+	                        (2 * (kShipHealthBarWidth - 1) - health_width) * scale, 3 * scale);
 
-		const RGBColor complement_color =
-		   color_sum > 128 * 3 ? RGBColor(32, 32, 32) : RGBColor(224, 224, 224);
-		dst->fill_rect(energy_inner, color);
-		dst->fill_rect(energy_complement, complement_color);
+	const RGBColor complement_color =
+	   color_sum > 128 * 3 ? RGBColor(32, 32, 32) : RGBColor(224, 224, 224);
+	dst->fill_rect(energy_inner, color);
+	dst->fill_rect(energy_complement, complement_color);
 
-		// Now soldier strength bonus indicators
-		constexpr unsigned kBonusIconSize = 6;
-		constexpr unsigned kMaxRows = 16;
-		const unsigned bonus = get_sea_attack_soldier_bonus(egbase);
-		if (bonus > 0) {
-			unsigned n_cols = std::min(2 * kShipHealthBarWidth / kBonusIconSize, bonus);
-			unsigned n_rows = std::min(kMaxRows - 1, bonus / n_cols);
-			if (n_cols * n_rows < bonus) {
-				++n_rows;
-			}
-			while (n_cols * n_rows < bonus) {
-				++n_cols;
-			}
-			const unsigned last_row_cols = n_cols - (n_cols * n_rows - bonus);
+	// Now soldier strength bonus indicators
+	constexpr unsigned kBonusIconSize = 6;
+	constexpr unsigned kMaxRows = 16;
+	const unsigned bonus = get_sea_attack_soldier_bonus(egbase);
+	if (bonus > 0) {
+		unsigned n_cols = std::min(2 * kShipHealthBarWidth / kBonusIconSize, bonus);
+		unsigned n_rows = std::min(kMaxRows - 1, bonus / n_cols);
+		if (n_cols * n_rows < bonus) {
+			++n_rows;
+		}
+		while (n_cols * n_rows < bonus) {
+			++n_cols;
+		}
+		const unsigned last_row_cols = n_cols - (n_cols * n_rows - bonus);
 
-			for (unsigned row = 0; row < n_rows; ++row) {
-				const unsigned cols_in_row = (row + 1 < n_rows ? n_cols : last_row_cols);
-				for (unsigned col = 0; col < cols_in_row; ++col) {
-					Recti rect(
-					   draw_position.x + ((col - cols_in_row * 0.5f) * kBonusIconSize + 1.f) * scale,
-					   draw_position.y + (7.f + row * kBonusIconSize) * scale,
-					   (kBonusIconSize - 2.f) * scale, (kBonusIconSize - 2.f) * scale);
-					dst->fill_rect(rect, color);
-					dst->draw_rect(rect, complement_color);
-				}
+		for (unsigned row = 0; row < n_rows; ++row) {
+			const unsigned cols_in_row = (row + 1 < n_rows ? n_cols : last_row_cols);
+			for (unsigned col = 0; col < cols_in_row; ++col) {
+				Recti rect(
+				   draw_position.x + ((col - cols_in_row * 0.5f) * kBonusIconSize + 1.f) * scale,
+				   draw_position.y + (7.f + row * kBonusIconSize) * scale,
+				   (kBonusIconSize - 2.f) * scale, (kBonusIconSize - 2.f) * scale);
+				dst->fill_rect(rect, color);
+				dst->draw_rect(rect, complement_color);
 			}
 		}
 	}
@@ -2403,6 +2472,15 @@ void Ship::Loader::load_finish() {
 	ship.set_economy(dynamic_cast<Game&>(egbase()), ship.ware_economy_, wwWARE);
 	ship.set_economy(dynamic_cast<Game&>(egbase()), ship.worker_economy_, wwWORKER);
 	ship.get_owner()->add_ship(ship.serial());
+
+	// The ship's serial may have changed, inform onboard workers
+	for (uint32_t i = 0; i < ship.items_.size(); ++i) {
+		Worker* worker;
+		ship.items_[i].get(ship.owner().egbase(), nullptr, &worker);
+		if (worker != nullptr) {
+			worker->set_ship_serial(ship.serial());
+		}
+	}
 }
 
 MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {

@@ -1133,7 +1133,7 @@ void Game::send_player_change_training_options(TrainingSite& ts,
 	   new CmdChangeTrainingOptions(get_gametime(), ts.owner().player_number(), ts, attr, val));
 }
 
-void Game::send_player_drop_soldier(Building& b, int32_t const ser) {
+void Game::send_player_drop_soldier(MapObject& b, int32_t const ser) {
 	assert(ser != -1);
 	send_player_command(new CmdDropSoldier(get_gametime(), b.owner().player_number(), b, ser));
 }

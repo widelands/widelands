@@ -1796,6 +1796,8 @@ void CmdDropSoldier::execute(Game& game) {
 		if (upcast(Soldier, s, game.objects().get_object(soldier))) {
 			game.get_player(sender())->drop_soldier(*player_imm, *s);
 		}
+	} else if (upcast(Ship, ship, game.objects().get_object(serial))) {
+		ship->drop_soldier(game, soldier);
 	}
 }
 
@@ -1812,7 +1814,7 @@ void CmdDropSoldier::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader&
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersionCmdDropSoldier) {
 			PlayerCommand::read(fr, egbase, mol);
-			serial = get_object_serial_or_zero<PlayerImmovable>(fr.unsigned_32(), mol);
+			serial = get_object_serial_or_zero<MapObject>(fr.unsigned_32(), mol);
 			soldier = get_object_serial_or_zero<Soldier>(fr.unsigned_32(), mol);
 		} else {
 			throw UnhandledVersionError(
