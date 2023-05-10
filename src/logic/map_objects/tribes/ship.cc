@@ -1781,8 +1781,6 @@ void Ship::start_task_movetodock(Game& game, PortDock& pd) {
 
 /// Prepare everything for the coming exploration
 void Ship::start_task_expedition(Game& game) {
-	// Now we are waiting
-	set_ship_state_and_notify(ShipStates::kExpeditionWaiting, NoteShip::Action::kDestinationChanged);
 	// Initialize a new, yet empty expedition
 	expedition_.reset(new Expedition());
 	expedition_->seen_port_buildspaces.clear();
@@ -1793,6 +1791,9 @@ void Ship::start_task_expedition(Game& game) {
 	expedition_->attack_targets.clear();
 	expedition_->ware_economy = get_owner()->create_economy(wwWARE);
 	expedition_->worker_economy = get_owner()->create_economy(wwWORKER);
+
+	// Now we are waiting
+	set_ship_state_and_notify(ShipStates::kExpeditionWaiting, NoteShip::Action::kDestinationChanged);
 
 	// We are no longer in any other economy, but instead are an economy of our
 	// own.
@@ -2357,7 +2358,9 @@ void Ship::Loader::load_pointers() {
 	}
 
 	for (Serial serial : expedition_attack_target_serials_) {
-		expedition_->attack_targets.insert(&mol().get<Ship>(serial));
+		if (serial != 0) {
+			expedition_->attack_targets.insert(&mol().get<Ship>(serial));
+		}
 	}
 
 	for (uint32_t i = 0; i < battle_serials_.size(); ++i) {
