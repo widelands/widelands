@@ -338,7 +338,7 @@ int Panel::do_run() {
 	// TODO(sirver): the main loop should not be in UI, but in WLApplication.
 	WLApplication& app = WLApplication::get();
 	ModalGuard prevmodal(*this);
-	mousegrab_ = nullptr;        // good ol' paranoia
+	mousegrab_ = nullptr;       // good ol' paranoia
 	app.set_mouse_lock(false);  // more paranoia :-)
 
 	// With the default of 30FPS, the game will be drawn every 33ms.
