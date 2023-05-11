@@ -136,6 +136,10 @@ void terminate(int /*unused*/) {
 }
 #endif
 
+void toggle_verbose(int /*unused*/) {
+	g_verbose = !g_verbose;
+}
+
 bool is_absolute_path(const std::string& path) {
 	std::regex re("^/|\\w:");
 	return std::regex_search(path.c_str(), re);
@@ -366,6 +370,10 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	datadir_for_testing_ = g_fs->canonicalize_name(datadir_for_testing_);
 
 	set_initializer_thread();
+
+#ifdef SIGUSR1
+	signal(SIGUSR1, toggle_verbose);
+#endif
 
 	log_info("Adding directory: %s\n", datadir_.c_str());
 	g_fs->add_file_system(&FileSystem::create(datadir_));
