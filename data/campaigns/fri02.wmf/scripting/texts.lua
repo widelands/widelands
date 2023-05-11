@@ -280,7 +280,7 @@ supply_murilius_5 = {
    title =_("We Are Not Alone"),
    body=murilius(_("Salvete peregrini!"),
       -- TRANSLATORS: Murilius – Supply Murilius 5. "Reebaude" is the Latin vocative case (form of address) of Reebaud.
-      _([[In this case, Reebaude, I must inform you of the presence of an inhospitable, hostile tribe of Barbarians in the vicinity of this very outpost of the Empire.]])
+      _([[In this case, Reebaude, I must inform you of the presence of an inhospitable, hostile tribe of the Barbarians in the vicinity of this very outpost of the Empire.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Murilius – Supply Murilius 5
       _([[If you seek to live peacefully here, you are not faced with a choice whether to allow them to live here – you are required to assist the Empire in driving them out.]])),
@@ -375,7 +375,7 @@ defeat_both = {
       _([[Murilius has made it quite clear that he won’t leave us alone. I fear we must defeat him and destroy his colony if we ever want to have peace here.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – defeat both enemies
-      _([[The Barbarians tribe he mentioned is also a threat. I don’t want to share this land with anyone, as sharing only leads to conflicts and battles, as we saw in our old home. We must defeat the Barbarians as well.]]))
+      _([[The Barbarian tribe he mentioned is also a threat. I don’t want to share this land with anyone, as sharing only leads to conflicts and battles, as we saw in our old home. We must defeat the Barbarians as well.]]))
       .. new_objectives(obj_defeat_both),
 }
 supply_murilius_thanks = {

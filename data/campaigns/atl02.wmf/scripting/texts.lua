@@ -514,7 +514,7 @@ heretics_again = {
       title = _("Heretics!"),
       body = sidolus(_("Sidolus is very sad"),
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm us all. Our princess has been confused in her imprisonment by this Barbarian. But I will never worship any Barbarians god. I can’t imagine how we could change her mind though.]]))
+         _([[May Satul warm us all. Our princess has been confused in her imprisonment by this Barbarian. But I will never worship any Barbarian god. I can’t imagine how we could change her mind though.]]))
    },
    {
       title = _("Attracting Satul’s Help"),
@@ -734,7 +734,7 @@ suicide = {
       title = _("Jundlina’s Suicide"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
-         _([[Barbarians, I am an Atlantean princess and I will never go into slavery. I have prepared myself for this eventuality and will rather die from the poison I carry with me than be your slave. May Satul avenge my sacrifice.]]))
+         _([[Barbarian, I am an Atlantean princess and I will never go into slavery. I have prepared myself for this eventuality and will rather die from the poison I carry with me than be your slave. May Satul avenge my sacrifice.]]))
    },
    {
       title = _("Defeated!"),

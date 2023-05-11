@@ -3003,7 +3003,7 @@ int LuaProductionSiteDescription::get_collected_immovables(lua_State* L) {
             }
          }
 
-      and for a Barbarians Coal Mine this will be:
+      and for a Barbarian Coal Mine this will be:
 
       .. code-block:: lua
 
@@ -6713,7 +6713,7 @@ int LuaMarket::propose_trade(lua_State* L) {
 	const Widelands::BillOfMaterials items_to_send =
 	   parse_wares_as_bill_of_material(L, 4, self->owner().tribe());
 	// TODO(sirver,trading): unsure if correct. Test inter-tribe trading, i.e.
-	// Barbarians trading with empire, but shipping Atlantean only wares.
+	// Barbarians trading with empire, but shipping atlantean only wares.
 	const Widelands::BillOfMaterials items_to_receive =
 	   parse_wares_as_bill_of_material(L, 5, self->owner().tribe());
 	const int trade_id = game.propose_trade(Widelands::Trade{

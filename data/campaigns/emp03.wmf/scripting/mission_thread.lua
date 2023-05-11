@@ -262,7 +262,7 @@ function expedition()
    p1:mark_scenario_as_solved("emp03.wmf")
 end
 
--- After discovery of Barbarians ruins, we should hurry to build a full training capability
+-- After discovery of Barbarian ruins, we should hurry to build a full training capability
 function soldiers()
    local ruins = map:get_field(86,82)
    local ruin_fortress = map:get_field(85,80)

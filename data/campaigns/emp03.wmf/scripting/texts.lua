@@ -421,7 +421,7 @@ saledus_5 = {
       _([[But the following objective is even more important:]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Saledus
-      _([[I think I have heard the wind carrying some weird but well known sounds from the north. If I’m not totally wrong, I have heard some Barbarians war drums. So, we should better go and have a look at what is going on up there.]])
+      _([[I think I have heard the wind carrying some weird but well known sounds from the north. If I’m not totally wrong, I have heard some Barbarian war drums. So, we should better go and have a look at what is going on up there.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Saledus
       _([[In any case we should be careful with our ports. To defend them against possible enemies we should send some soldiers to each new port, until we can protect them with some military buildings.]]))
@@ -588,7 +588,7 @@ saledus_12 = {
    title=_("Unpleasant Discoveries"),
    body= saledus3(_("Saledus looks very worried…"),
       -- TRANSLATORS: Saledus
-      _([[Sire, we found the ruins of a former Barbarians fortress and village. I’m somewhat worried that we will have to fight against them before we are ready to do so.]])),
+      _([[Sire, we found the ruins of a former Barbarian fortress and village. I’m somewhat worried that we will have to fight against them before we are ready to do so.]])),
    posy=1,
    w=550,
 }
@@ -621,7 +621,7 @@ diary_page_5 = {
    title=_("Time to get Home Again"),
    body= lutius(_("Diary of Lutius"),
       -- TRANSLATORS: Lutius - Diary
-      _([[Yes my fellow soldiers, we have done it! We have met all the challenges that were put in front of us. But my heart is still with our home. We shall set sail as soon as possible to help defend the Empire from the Barbarians tribe.]]))
+      _([[Yes my fellow soldiers, we have done it! We have met all the challenges that were put in front of us. But my heart is still with our home. We shall set sail as soon as possible to help defend the Empire from the Barbarian tribe.]]))
       .. objective_text(_("Victory"),
       _([[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]])),
    posy=1,

@@ -1,4 +1,4 @@
--- Give the player a Barbarians headquarters
+-- Give the player a Barbarian headquarters
 function set_starting_conditions_barbarians(player, sf)
    prefilled_buildings(player, { "barbarians_headquarters", sf.x, sf.y,
       wares = {

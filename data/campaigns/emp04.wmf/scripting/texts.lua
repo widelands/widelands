@@ -161,7 +161,7 @@ obj_conquer_all = {
    title=_("Defeat the Barbarians"),
    number = 1,
    body = objective_text(_("Defeat the Enemy"),
-      li(_([[End the Barbarians intrusion into your very own part of the world.]]))
+      li(_([[End the Barbarian intrusion into your very own part of the world.]]))
    ),
 }
 
