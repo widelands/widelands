@@ -1213,7 +1213,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for a Barbarian production site: Gamekeeper's Hut
             lore = pgettext("barbarians_building", "‘He loves the animals and to breed them<br>as we love to cook and eat them.’"),
             -- TRANSLATORS: Lore author helptext for a Barbarian production site: Gamekeeper's Hut
-            lore_author = pgettext("barbarians_building", "Barbarians nursery rhyme"),
+            lore_author = pgettext("barbarians_building", "Barbarian nursery rhyme"),
             -- TRANSLATORS: Purpose helptext for production site: Gamekeeper's Hut
             purpose = pgettext("barbarians_building", "Releases animals into the wild to steady the meat production."),
             -- TRANSLATORS: Performance helptext for production site: Gamekeeper's Hut
@@ -1267,7 +1267,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for a Barbarian production site: Reed Yard
             lore_author = pgettext("barbarians_building", "Slogan of the Guild of Gardeners"),
             -- TRANSLATORS: Purpose helptext for a Barbarian production site: Reed Yard
-            purpose = pgettext("barbarians_building", "Cultivates reed that serves two different purposes for the Barbarians tribe."),
+            purpose = pgettext("barbarians_building", "Cultivates reed that serves two different purposes for the Barbarian tribe."),
             -- TRANSLATORS: Note helptext for a Barbarian production site: Reed Yard
             note = pgettext("barbarians_building", "Reed is the traditional material for roofing, and it is woven into the extremely durable cloth that they use for their ships’ sails."),
             -- TRANSLATORS: Performance helptext for a Barbarian production site: Reed Yard
@@ -1295,7 +1295,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for a Barbarian production site: Bakery
             lore = pgettext("barbarians_building", "‘He who has enough bread will never be too tired to dig the ore and wield the ax.’"),
             -- TRANSLATORS: Lore author helptext for a Barbarian production site: Bakery
-            lore_author = pgettext("barbarians_building", "Khantarakh, ‘The Modern Barbarians Economy’,<br>3ʳᵈ cowhide ‘Craftsmanship and Trade’"),
+            lore_author = pgettext("barbarians_building", "Khantarakh, ‘The Modern Barbarian Economy’,<br>3ʳᵈ cowhide ‘Craftsmanship and Trade’"),
             -- TRANSLATORS: Purpose helptext for a Barbarian production site: Bakery
             purpose = pgettext("barbarians_building", "Bakes pitta bread for soldiers and miners alike."),
             -- TRANSLATORS: Performance helptext for a Barbarian production site: Bakery
@@ -1474,7 +1474,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for a Barbarian production site: Cattle Farm
             lore = pgettext("barbarians_building", "‘The smart leader builds roads, while the really wise leader breeds cattle.’"),
             -- TRANSLATORS: Lore author helptext for a Barbarian production site: Cattle Farm
-            lore_author = pgettext("barbarians_building", "Khantarakh, ‘The Modern Barbarians Economy’,<br> 5ᵗʰ cowhide ‘Traffic and Logistics’"),
+            lore_author = pgettext("barbarians_building", "Khantarakh, ‘The Modern Barbarian Economy’,<br> 5ᵗʰ cowhide ‘Traffic and Logistics’"),
             -- TRANSLATORS: Purpose helptext for a Barbarian production site: Cattle Farm
             purpose = pgettext("barbarians_building", "Breeds strong oxen for adding them to the transportation system."),
             -- TRANSLATORS: Performance helptext for a Barbarian production site: Cattle Farm
@@ -1790,7 +1790,7 @@ wl.Descriptions():new_tribe {
             lore = pgettext("barbarians_building", [[‘Fine cloth and jewelry mean nothing to a true Barbarian.<br>]] ..
                                           [[But a noble sail in the wind will please his eyes.’]]),
             -- TRANSLATORS: Lore author helptext for a Barbarian production site: Weaving Mill
-            lore_author = pgettext("barbarians_building", "Khantarakh, ‘The Modern Barbarians Economy’,<br>9ᵗʰ cowhide ‘Seafaring and Conquest’"),
+            lore_author = pgettext("barbarians_building", "Khantarakh, ‘The Modern Barbarian Economy’,<br>9ᵗʰ cowhide ‘Seafaring and Conquest’"),
             -- TRANSLATORS: Purpose helptext for a Barbarian production site: Weaving Mill
             purpose = pgettext("barbarians_building", "Weaves cloth out of reed.")
          }

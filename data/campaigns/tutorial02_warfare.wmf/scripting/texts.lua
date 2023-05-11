@@ -41,7 +41,7 @@ abilities = {
       h2_image("tribes/workers/barbarians/soldier/attack_level0.png", _("Attack:")) ..
       -- TRANSLATORS: the current stats are: 1400 damage, gains 850 damage points.
       p(_([[The amount of damage a soldier will inflict on the enemy when an attack is successful. A Barbarian soldier with attack level 0 inflicts ~%1% points of health damage when he succeeds in hitting an enemy. For each attack level, he gains %2% damage points.]])):bformat(soldier.base_min_attack + (soldier.base_max_attack - soldier.base_min_attack) / 2, soldier.attack_incr_per_level) ..
-      -- The Atlanteans' image, because the Barbarians' one has a white background
+      -- The Atlanteans' image, because the Barbarian one has a white background
       h2_image("tribes/workers/atlanteans/soldier/defense_level0.png", _("Defense:")) ..
       -- TRANSLATORS: the current stats are: 3%. The calculated health value is 3395
       -- TRANSLATORS: The last two %% after the placeholder are the percent symbol.
@@ -116,7 +116,7 @@ trainingcamp2 = {
    body = (
       p(_([[Great, our training camp has now been finished, too. Now nothing will hinder us from getting the strongest warriors the world has ever seen.]])) ..
       p(_([[To train in the training camp, our soldiers need food like in the battle arena, but no strong beer. Instead, they need different axes for attack training and helmets for health training.]])) ..
-      p(_([[This equipment is produced in smithies out of coal, iron, and sometimes gold. You will learn more about this in the second scenario of the Barbarians campaign.]])) ..
+      p(_([[This equipment is produced in smithies out of coal, iron, and sometimes gold. You will learn more about this in the second scenario of the Barbarian campaign.]])) ..
       p(_([[You should also keep in mind that each of the tribes in Widelands has its own way of training, so the buildings and wares are different. Also, the ability levels cannot be compared: an Imperial soldier has a base attack of %1% at level 0, while a Barbarian soldier at the same level only has a base attack of %2%.]]):bformat(empire_soldier.base_min_attack, soldier.base_min_attack))
    )
 }

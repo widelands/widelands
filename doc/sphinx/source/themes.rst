@@ -319,9 +319,9 @@ colors
 
 The ``colors`` table contains subtables of RGB colors:
 
-* **campaign_bar_thron**: Text color for Thron's speech box titles in the Barbarians campaign
-* **campaign_bar_boldreth**: Text color for Boldreth's speech box titles in the Barbarians campaign
-* **campaign_bar_khantrukh**: Text color for Khantrukh's speech box titles in the Barbarians campaign
+* **campaign_bar_thron**: Text color for Thron's speech box titles in the Barbarian campaign
+* **campaign_bar_boldreth**: Text color for Boldreth's speech box titles in the Barbarian campaign
+* **campaign_bar_khantrukh**: Text color for Khantrukh's speech box titles in the Barbarian campaign
 * **campaign_emp_lutius**: Text color for Lutius's speech box titles in the Empire campaign
 * **campaign_emp_amalea**: Text color for Amalea's speech box titles in the Empire campaign
 * **campaign_emp_saledus**: Text color for Saledus's speech box titles in the Empire campaign
