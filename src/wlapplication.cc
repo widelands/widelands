@@ -309,8 +309,6 @@ void WLApplication::setup_homedir() {
 	i18n::set_homedir(homedir_);
 }
 
-WLApplication* WLApplication::the_singleton = nullptr;
-
 /**
  * The main entry point for the WLApplication singleton.
  *
@@ -323,13 +321,10 @@ WLApplication* WLApplication::the_singleton = nullptr;
  *
  * \param argc The number of command line arguments
  * \param argv Array of command line arguments
- * \return An (always valid!) pointer to the WLApplication singleton
+ * \return A reference to the WLApplication singleton
  */
-// TODO(unknown): Return a reference - the return value is always valid anyway
-WLApplication* WLApplication::get(int const argc, char const** argv) {
-	if (the_singleton == nullptr) {
-		the_singleton = new WLApplication(argc, argv);
-	}
+WLApplication& WLApplication::get(int const argc, char const** argv) {
+	static WLApplication the_singleton{argc, argv};
 	return the_singleton;
 }
 
