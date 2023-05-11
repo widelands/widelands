@@ -783,8 +783,8 @@ void MainMenu::layout() {
 	                          copyright_.get_y() - version_.get_h() - padding_ / 2));
 
 	box_rect_ = Recti((get_inner_w() - padding_) / 2 - butw_,
-	                  version_.get_y() - padding_ * 4 - get_inner_h() * 3 / 10,
-	                  2 * butw_ + padding_, get_inner_h() / 4);
+	                  version_.get_y() - padding_ * 4 - get_inner_h() * 3 / 10, 2 * butw_ + padding_,
+	                  get_inner_h() / 4);
 
 	singleplayer_.set_desired_size(butw_, buth_);
 	multiplayer_.set_desired_size(butw_, buth_);
