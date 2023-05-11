@@ -76,11 +76,13 @@ jobs:
         popd
         echo "Current HEAD is $HEAD"
         echo -n $HEAD > .github/scripts/vcpkg_ref
-        git config --global user.name "The Widelands Build Bot"
-        git config --global user.email "bunnybot@widelands.org"
-        git add .github/scripts/vcpkg_ref
-        git commit -m "Update vcpkg version"
-        # TODO activate push
-        # git push "https://bunnybot:${{ secrets.WIDELANDS_FORMAT_TOKEN }}@github.com/${{ github.repository }}.git" master
-        git push "https://matthiakl:${{ secrets.WIDELANDS_FORMAT_TOKEN }}@github.com/${{ github.repository }}.git" vcpkg_cache_key
+        if [ -n "$(git status -s)" ]; then
+          git config --global user.name "The Widelands Build Bot"
+          git config --global user.email "bunnybot@widelands.org"
+          git add .github/scripts/vcpkg_ref
+          git commit -m "Update vcpkg version"
+          # TODO activate push
+          # git push "https://bunnybot:${{ secrets.WIDELANDS_FORMAT_TOKEN }}@github.com/${{ github.repository }}.git" master
+          git push "https://matthiakl:${{ secrets.WIDELANDS_FORMAT_TOKEN }}@github.com/${{ github.repository }}.git" vcpkg_cache_key
+        fi
       shell: bash
