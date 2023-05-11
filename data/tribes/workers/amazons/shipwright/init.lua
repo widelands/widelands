@@ -23,10 +23,7 @@ wl.Descriptions():new_worker_type {
          "animate=work duration:5s",
          "return"
       },
-      buildferry_1 = {
-         "findspace=size:swim radius:4 ferry",
-      },
-      buildferry_2 = {
+      buildferry = {
          "findspace=size:swim radius:4 ferry",
          "walk=coords",
          "animate=work duration:10s",

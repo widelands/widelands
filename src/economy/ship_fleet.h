@@ -32,7 +32,9 @@ namespace Widelands {
 
 class Economy;
 struct Flag;
+class ProductionSite;
 struct RoutingNodeNeighbour;
+class ShipFleetYardInterface;
 
 class ShipFleetDescr : public MapObjectDescr {
 public:
@@ -43,6 +45,18 @@ public:
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(ShipFleetDescr);
+};
+
+class ShipFleetYardInterfaceDescr : public BobDescr {
+public:
+	ShipFleetYardInterfaceDescr(char const* const init_name, char const* const init_descname)
+	   : BobDescr(init_name, init_descname, MapObjectType::SHIP_FLEET_YARD_INTERFACE, MapObjectDescr::OwnerType::kTribe) {
+	}
+	~ShipFleetYardInterfaceDescr() override = default;
+	[[nodiscard]] Bob& create_object() const override;
+
+private:
+	DISALLOW_COPY_AND_ASSIGN(ShipFleetYardInterfaceDescr);
 };
 
 constexpr Duration kFleetInterval(4000);
@@ -83,7 +97,7 @@ struct ShipFleet : MapObject {
 	PortDock* get_arbitrary_dock() const;
 	void set_economy(Economy* e, WareWorker);
 
-	bool active() const;
+	[[nodiscard]] bool active() const;
 
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
@@ -93,27 +107,31 @@ struct ShipFleet : MapObject {
 	void remove_ship(EditorGameBase& egbase, Ship* ship);
 	void add_port(EditorGameBase& egbase, PortDock* port);
 	void remove_port(EditorGameBase& egbase, PortDock* port);
-	bool has_ports() const;
+	[[nodiscard]] bool has_ports() const;
+
+	void add_interface(ShipFleetYardInterface* i);
+	void remove_interface(EditorGameBase& egbase, ShipFleetYardInterface* i);
 
 	void log_general_info(const EditorGameBase&) const override;
 
 	bool get_path(const PortDock& start, const PortDock& end, Path& path);
 	void add_neighbours(PortDock& pd, std::vector<RoutingNodeNeighbour>& neighbours);
 
-	uint32_t count_ships() const;
-	uint32_t count_ports() const;
-	bool get_act_pending() const;
+	[[nodiscard]] uint32_t count_ships() const;
+	[[nodiscard]] uint32_t count_ports() const;
+	[[nodiscard]] bool get_act_pending() const;
 
-	bool empty() const;
+	[[nodiscard]] bool empty() const;
+	[[nodiscard]] bool lacks_ship() const;
 
-	ShippingSchedule& get_schedule() {
+	[[nodiscard]] ShippingSchedule& get_schedule() {
 		return schedule_;
 	}
 
-	const std::vector<Ship*>& get_ships() const {
+	[[nodiscard]] const std::vector<Ship*>& get_ships() const {
 		return ships_;
 	}
-	std::vector<PortDock*>& get_ports() {
+	[[nodiscard]] std::vector<PortDock*>& get_ports() {
 		return ports_;
 	}
 
@@ -132,6 +150,7 @@ private:
 	const PortPath& portpath_bidir(uint32_t i, uint32_t j, bool& reverse) const;
 
 	std::vector<Ship*> ships_;
+	std::vector<ShipFleetYardInterface*> interfaces_;
 	std::vector<PortDock*> ports_;
 
 	bool act_pending_{false};
@@ -145,12 +164,13 @@ protected:
 	struct Loader : MapObject::Loader {
 		Loader() = default;
 
-		void load(FileRead&);
+		void load(FileRead& fr, uint8_t packet_version);
 		void load_pointers() override;
 		void load_finish() override;
 
 	private:
 		std::vector<uint32_t> ships_;
+		std::vector<uint32_t> interfaces_;
 		std::vector<uint32_t> ports_;
 	};
 
@@ -161,6 +181,45 @@ public:
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 
 	static MapObject::Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
+};
+
+class ShipFleetYardInterface : public Bob {
+public:
+	ShipFleetYardInterface();
+	static ShipFleetYardInterface* create(EditorGameBase& egbase, ProductionSite& ps, const Coords& pos);
+
+	const ShipFleetYardInterfaceDescr& descr() const;
+	void init_auto_task(Game& game) override;
+	void cleanup(EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
+
+	[[nodiscard]] ProductionSite* get_building() const {
+		return building_;
+	}
+	[[nodiscard]] ShipFleet* get_fleet() const {
+		return fleet_;
+	}
+	void set_fleet(ShipFleet* fleet) {
+		fleet_ = fleet;
+	}
+
+	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
+	static Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
+
+private:
+	ProductionSite* building_{nullptr};
+	ShipFleet* fleet_{nullptr};
+
+protected:
+	struct Loader : Bob::Loader {
+		Loader() = default;
+
+		void load(FileRead& fr);
+		void load_pointers() override;
+
+	private:
+		Serial building_;
+	};
 };
 
 }  // namespace Widelands

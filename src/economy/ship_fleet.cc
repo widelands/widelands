@@ -44,10 +44,19 @@ namespace {
 // Every MapObject() needs to have a description. So we make a dummy one for
 // Fleet.
 ShipFleetDescr g_ship_fleet_descr("ship_fleet", "Ship Fleet");
+ShipFleetYardInterfaceDescr g_ship_fleet_yard_interface_descr("ship_fleet_yard_interface", "Ship Fleet Yard Interface");
 }  // namespace
 
 const ShipFleetDescr& ShipFleet::descr() const {
 	return g_ship_fleet_descr;
+}
+
+const ShipFleetYardInterfaceDescr& ShipFleetYardInterface::descr() const {
+	return g_ship_fleet_yard_interface_descr;
+}
+
+Bob& ShipFleetYardInterfaceDescr::create_object() const {
+	return *new ShipFleetYardInterface();
 }
 
 /**
@@ -143,6 +152,10 @@ bool ShipFleet::find_other_fleet(EditorGameBase& egbase) {
 		astar.push(temp_ship->get_position());
 	}
 
+	for (const ShipFleetYardInterface* temp_interface : interfaces_) {
+		astar.push(temp_interface->get_position());
+	}
+
 	for (const PortDock* temp_port : ports_) {
 		BaseImmovable::PositionList pos = temp_port->get_positions(egbase);
 
@@ -177,6 +190,12 @@ bool ShipFleet::find_other_fleet(EditorGameBase& egbase) {
 				if (ship->get_fleet() != nullptr && ship->get_fleet() != this &&
 				    ship->get_owner() == get_owner()) {
 					return ship->get_fleet()->merge(egbase, this);
+				}
+			} else if (type == MapObjectType::SHIP_FLEET_YARD_INTERFACE) {
+				upcast(ShipFleetYardInterface, interface, bob);
+				if (interface->get_fleet() != nullptr && interface->get_fleet() != this &&
+				    interface->get_owner() == get_owner()) {
+					return interface->get_fleet()->merge(egbase, this);
 				}
 			}
 		}
@@ -213,6 +232,12 @@ bool ShipFleet::merge(EditorGameBase& egbase, ShipFleet* other) {
 		Ship* ship = other->ships_.back();
 		other->ships_.pop_back();
 		add_ship(egbase, ship);
+	}
+
+	while (!other->interfaces_.empty()) {
+		ShipFleetYardInterface* interface = other->interfaces_.back();
+		other->interfaces_.pop_back();
+		add_interface(interface);
 	}
 
 	uint32_t old_nrports = ports_.size();
@@ -271,6 +296,12 @@ void ShipFleet::cleanup(EditorGameBase& egbase) {
 		Ship* ship = ships_.back();
 		ship->set_fleet(nullptr);
 		ships_.pop_back();
+	}
+
+	while (!interfaces_.empty()) {
+		ShipFleetYardInterface* interface = interfaces_.back();
+		interface->set_fleet(nullptr);
+		interfaces_.pop_back();
 	}
 
 	MapObject::cleanup(egbase);
@@ -440,8 +471,44 @@ void ShipFleet::remove_ship(EditorGameBase& egbase, Ship* ship) {
 	}
 }
 
+void ShipFleet::add_interface(ShipFleetYardInterface* interface) {
+	interfaces_.push_back(interface);
+	assert(std::count(interfaces_.begin(), interfaces_.end(), interface) == 1);
+	interface->set_fleet(this);
+}
+
+void ShipFleet::remove_interface(EditorGameBase& egbase, ShipFleetYardInterface* interface) {
+	auto it = std::find(interfaces_.begin(), interfaces_.end(), interface);
+	if (it == interfaces_.end()) {
+		log_warn_time(egbase.get_gametime(),
+		              "ShipFleet %u: Requested to remove interface %u which is not in this fleet\n",
+		              serial(), interface ? interface->serial() : 0);
+		return;
+	}
+	while (it != interfaces_.end()) {
+		interfaces_.erase(it);
+		it = std::find(interfaces_.begin(), interfaces_.end(), interface);
+		if (it != interfaces_.end()) {
+			log_warn_time(egbase.get_gametime(),
+			              "ShipFleet %u: Multiple instances of interface %u were in the Ship fleet",
+			              serial(), interface->serial());
+		}
+	}
+	assert(std::count(interfaces_.begin(), interfaces_.end(), interface) == 0);
+	interface->set_fleet(nullptr);
+
+	if (empty()) {
+		remove(egbase);
+	}
+}
+
 bool ShipFleet::empty() const {
-	return ships_.empty() && ports_.empty();
+	return ships_.empty() && interfaces_.empty() && ports_.empty();
+}
+
+bool ShipFleet::lacks_ship() const {
+	// Number of ports squared is a pretty good estimate for how many ships we'd like to have.
+	return ships_.empty() || ships_.size() < ports_.size() * ports_.size();
 }
 
 struct StepEvalFindPorts {
@@ -704,17 +771,55 @@ void ShipFleet::act(Game& game, uint32_t /*data*/) {
 void ShipFleet::log_general_info(const EditorGameBase& egbase) const {
 	MapObject::log_general_info(egbase);
 
-	molog(egbase.get_gametime(), "%" PRIuS " ships and %" PRIuS " ports\n", ships_.size(),
-	      ports_.size());
+	molog(egbase.get_gametime(), "%" PRIuS " ships and %" PRIuS " ports and %" PRIuS " shipyard interfaces\n", ships_.size(),
+	      ports_.size(), interfaces_.size());
 	molog(egbase.get_gametime(), "Schedule:\n");
 	schedule_.log_general_info(egbase);
 	molog(egbase.get_gametime(), "\n");
 }
 
-// Changelog of version 4 → 5: Added ShippingSchedule
-constexpr uint8_t kCurrentPacketVersion = 5;
+ShipFleetYardInterface::ShipFleetYardInterface() : Bob(g_ship_fleet_yard_interface_descr) {
+}
 
-void ShipFleet::Loader::load(FileRead& fr) {
+ShipFleetYardInterface* ShipFleetYardInterface::create(EditorGameBase& egbase, ProductionSite& ps, const Coords& pos) {
+	ShipFleetYardInterface* interface = new ShipFleetYardInterface();
+	interface->set_owner(ps.get_owner());
+	interface->set_position(egbase, pos);
+	interface->building_ = &ps;
+	interface->init(egbase);
+
+	ShipFleet* fleet = new ShipFleet(interface->get_owner());
+	fleet->add_interface(interface);
+	fleet->init(egbase);  // Calls interface->set_fleet()
+
+	return interface;
+}
+
+void ShipFleetYardInterface::init_auto_task(Game& game) {
+	start_task_idle(game, 0, -1);
+}
+
+void ShipFleetYardInterface::cleanup(EditorGameBase& egbase) {
+	building_->remove_fleet_interface(egbase, this);
+
+	if (fleet_ != nullptr) {
+		fleet_->remove_interface(egbase, this);
+	}
+
+	Bob::cleanup(egbase);
+}
+
+void ShipFleetYardInterface::log_general_info(const EditorGameBase& egbase) const {
+	Bob::log_general_info(egbase);
+	molog(egbase.get_gametime(), "Interface to building %u at %3dx%3d\n", building_->serial(), building_->get_position().x, building_->get_position().y);
+}
+
+// Changelog of version 4 → 5: Added ShippingSchedule
+// Changelog of version 5 → 6: Added ship yard interfaces
+constexpr uint8_t kCurrentPacketVersionShip = 6;
+constexpr uint8_t kCurrentPacketVersionInterface = 5;
+
+void ShipFleet::Loader::load(FileRead& fr, uint8_t packet_version) {
 	MapObject::Loader::load(fr);
 
 	ShipFleet& fleet = get<ShipFleet>();
@@ -723,6 +828,12 @@ void ShipFleet::Loader::load(FileRead& fr) {
 	ships_.resize(nrships);
 	for (uint32_t i = 0; i < nrships; ++i) {
 		ships_[i] = fr.unsigned_32();
+	}
+
+	const uint32_t nrinterfaces = packet_version >= 2 ? fr.unsigned_32() : 0;
+	interfaces_.resize(nrinterfaces);
+	for (uint32_t i = 0; i < nrinterfaces; ++i) {
+		interfaces_[i] = fr.unsigned_32();
 	}
 
 	const uint32_t nrports = fr.unsigned_32();
@@ -750,6 +861,12 @@ void ShipFleet::Loader::load_pointers() {
 		fleet.ships_.push_back(&map_object_loader.get<Ship>(temp_ship));
 		fleet.ships_.back()->set_fleet(&fleet);
 	}
+
+	for (const uint32_t& temp_interface : interfaces_) {
+		fleet.interfaces_.push_back(&mol().get<ShipFleetYardInterface>(temp_interface));
+		fleet.interfaces_.back()->set_fleet(&fleet);
+	}
+
 	for (const uint32_t& temp_port : ports_) {
 		fleet.ports_.push_back(&map_object_loader.get<PortDock>(temp_port));
 		fleet.ports_.back()->set_fleet(&fleet);
@@ -781,7 +898,8 @@ MapObject::Loader* ShipFleet::load(EditorGameBase& egbase, MapObjectLoader& mol,
 	try {
 		// The header has been peeled away by the caller
 		const uint8_t packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersion) {
+		// TODO(Nordfriese): Savegame compatibility v1.1
+		if (packet_version >= 5 && packet_version <= kCurrentPacketVersionShip) {
 			PlayerNumber owner_number = fr.unsigned_8();
 			if ((owner_number == 0u) || owner_number > egbase.map().get_nrplayers()) {
 				throw GameDataError("owner number is %u but there are only %u players", owner_number,
@@ -793,9 +911,9 @@ MapObject::Loader* ShipFleet::load(EditorGameBase& egbase, MapObjectLoader& mol,
 				throw GameDataError("owning player %u does not exist", owner_number);
 			}
 			loader->init(egbase, mol, *(new ShipFleet(owner)));
-			loader->load(fr);
+			loader->load(fr, packet_version);
 		} else {
-			throw UnhandledVersionError("ShipFleet", packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("ShipFleet", packet_version, kCurrentPacketVersionShip);
 		}
 	} catch (const std::exception& e) {
 		throw wexception("loading ship fleet: %s", e.what());
@@ -806,7 +924,7 @@ MapObject::Loader* ShipFleet::load(EditorGameBase& egbase, MapObjectLoader& mol,
 
 void ShipFleet::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_8(HeaderShipFleet);
-	fw.unsigned_8(kCurrentPacketVersion);
+	fw.unsigned_8(kCurrentPacketVersionShip);
 
 	fw.unsigned_8(owner_.load()->player_number());
 
@@ -816,6 +934,12 @@ void ShipFleet::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 	for (const Ship* temp_ship : ships_) {
 		fw.unsigned_32(mos.get_object_file_index(*temp_ship));
 	}
+
+	fw.unsigned_32(interfaces_.size());
+	for (const ShipFleetYardInterface* temp_interface : interfaces_) {
+		fw.unsigned_32(mos.get_object_file_index(*temp_interface));
+	}
+
 	fw.unsigned_32(ports_.size());
 	for (const PortDock* temp_port : ports_) {
 		fw.unsigned_32(mos.get_object_file_index(*temp_port));
@@ -824,6 +948,46 @@ void ShipFleet::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 	fw.unsigned_8(static_cast<uint8_t>(act_pending_));
 
 	schedule_.save(egbase, mos, fw);
+}
+
+void ShipFleetYardInterface::Loader::load(FileRead& fr) {
+	Bob::Loader::load(fr);
+	building_ = fr.unsigned_32();
+}
+
+void ShipFleetYardInterface::Loader::load_pointers() {
+	Bob::Loader::load_pointers();
+
+	ShipFleetYardInterface& interface = get<ShipFleetYardInterface>();
+	interface.building_ = &mol().get<ProductionSite>(building_);
+}
+
+Bob::Loader* ShipFleetYardInterface::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {
+	std::unique_ptr<Loader> loader(new Loader);
+
+	try {
+		// The header has been peeled away by the caller
+		uint8_t const packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionInterface) {
+			loader->init(egbase, mol, *new ShipFleetYardInterface);
+			loader->load(fr);
+		} else {
+			throw UnhandledVersionError("ShipFleetYardInterface", packet_version, kCurrentPacketVersionInterface);
+		}
+	} catch (const std::exception& e) {
+		throw wexception("loading ship fleet yard interface: %s", e.what());
+	}
+
+	return loader.release();
+}
+
+void ShipFleetYardInterface::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
+	fw.unsigned_8(HeaderShipFleetInterface);
+	fw.unsigned_8(kCurrentPacketVersionInterface);
+
+	Bob::save(egbase, mos, fw);
+
+	fw.unsigned_32(mos.get_object_file_index(*building_));
 }
 
 }  // namespace Widelands

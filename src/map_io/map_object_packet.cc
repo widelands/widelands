@@ -101,6 +101,14 @@ void MapObjectPacket::read(FileSystem& fs, EditorGameBase& egbase, MapObjectLoad
 				loaders.insert(FerryFleet::load(egbase, mol, fr));
 				break;
 
+			case MapObject::HeaderShipFleetInterface:
+				loaders.insert(ShipFleetYardInterface::load(egbase, mol, fr));
+				break;
+
+			case MapObject::HeaderFerryFleetInterface:
+				loaders.insert(FerryFleetYardInterface::load(egbase, mol, fr));
+				break;
+
 			default:
 				throw GameDataError("unknown object header %u", header);
 			}

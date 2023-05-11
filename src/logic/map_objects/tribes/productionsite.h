@@ -30,6 +30,8 @@
 
 namespace Widelands {
 
+class FerryFleetYardInterface;
+class ShipFleetYardInterface;
 class Soldier;
 class WorkerDescr;
 
@@ -194,6 +196,13 @@ public:
 		is_infinite_production_useful_ = u;
 	}
 
+	[[nodiscard]] bool has_ship_fleet_check() const {
+		return has_ship_fleet_check_;
+	}
+	[[nodiscard]] bool has_ferry_fleet_check() const {
+		return has_ferry_fleet_check_;
+	}
+
 	[[nodiscard]] const std::string& out_of_resource_title() const {
 		return out_of_resource_title_;
 	}
@@ -310,6 +319,8 @@ private:
 	std::set<std::string> competing_productionsites_;
 	std::set<std::string> supported_productionsites_;
 	std::set<std::string> supported_by_productionsites_;
+	bool has_ship_fleet_check_{false};
+	bool has_ferry_fleet_check_{false};
 
 	DISALLOW_COPY_AND_ASSIGN(ProductionSiteDescr);
 };
@@ -426,6 +437,15 @@ public:
 	}
 	void set_infinite_production(bool);
 
+	[[nodiscard]] const std::vector<ShipFleetYardInterface*>& get_ship_fleet_interfaces() const {
+		return ship_fleet_interfaces_;
+	}
+	[[nodiscard]] const std::vector<FerryFleetYardInterface*>& get_ferry_fleet_interfaces() const {
+		return ferry_fleet_interfaces_;
+	}
+	void remove_fleet_interface(EditorGameBase& egbase, const ShipFleetYardInterface* i);
+	void remove_fleet_interface(EditorGameBase& egbase, const FerryFleetYardInterface* i);
+
 protected:
 	void update_statistics_string(std::string* statistics) override;
 
@@ -484,6 +504,7 @@ protected:
 	                   MapObject* extra_data = nullptr);
 	virtual void program_end(Game&, ProgramResult);
 	virtual void train_workers(Game&);
+	void init_yard_interfaces(EditorGameBase& egbase);
 
 	void format_statistics_string();
 	void try_start_working(Game&);
@@ -521,6 +542,9 @@ protected:
 	bool is_stopped_{false};
 	bool infinite_production_{false};
 	std::string default_anim_{"idle"};  // normally "idle", "empty", if empty mine.
+
+	std::vector<ShipFleetYardInterface*> ship_fleet_interfaces_;
+	std::vector<FerryFleetYardInterface*> ferry_fleet_interfaces_;
 
 private:
 	enum class Trend { kUnchanged, kRising, kFalling };

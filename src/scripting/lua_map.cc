@@ -912,6 +912,8 @@ int upcasted_map_object_to_lua(lua_State* L, Widelands::MapObject* mo) {
 	case Widelands::MapObjectType::FERRY_FLEET:
 	case Widelands::MapObjectType::WARE:
 	case Widelands::MapObjectType::PINNED_NOTE:
+	case Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE:
+	case Widelands::MapObjectType::FERRY_FLEET_YARD_INTERFACE:
 		throw LuaError(
 		   format("upcasted_map_object_to_lua: Unknown %i", static_cast<int>(mo->descr().type())));
 	}
@@ -4680,6 +4682,8 @@ int LuaMapObject::get_descr(lua_State* L) {
 	case Widelands::MapObjectType::PORTDOCK:
 	case Widelands::MapObjectType::WARE:
 	case Widelands::MapObjectType::PINNED_NOTE:
+	case Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE:
+	case Widelands::MapObjectType::FERRY_FLEET_YARD_INTERFACE:
 		return CAST_TO_LUA(Widelands::MapObjectDescr, LuaMapObjectDescription);
 	}
 	NEVER_HERE();

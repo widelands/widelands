@@ -25,8 +25,10 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
+#include "economy/ferry_fleet.h"
 #include "economy/input_queue.h"
 #include "economy/request.h"
+#include "economy/ship_fleet.h"
 #include "economy/ware_instance.h"
 #include "economy/wares_queue.h"
 #include "economy/workers_queue.h"
@@ -35,7 +37,9 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
+#include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/descriptions.h"
+#include "logic/map_objects/findnode.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -512,6 +516,8 @@ bool ProductionSite::init(EditorGameBase& egbase) {
 		}
 	}
 
+	init_yard_interfaces(egbase);
+
 	if (upcast(Game, game, &egbase)) {
 		try_start_working(*game);
 	}
@@ -575,6 +581,13 @@ void ProductionSite::cleanup(EditorGameBase& egbase) {
 		delete iq;
 	}
 	input_queues_.clear();
+
+	while (!ship_fleet_interfaces_.empty()) {
+		ship_fleet_interfaces_.front()->remove(egbase);
+	}
+	while (!ferry_fleet_interfaces_.empty()) {
+		ferry_fleet_interfaces_.front()->remove(egbase);
+	}
 
 	Building::cleanup(egbase);
 }
@@ -1179,6 +1192,64 @@ void ProductionSite::notify_player(Game& game, uint8_t minutes, FailNotification
 
 void ProductionSite::unnotify_player() {
 	set_production_result("");
+}
+
+void ProductionSite::init_yard_interfaces(EditorGameBase& egbase) {
+	const Map& map = egbase.map();
+	if (descr().has_ship_fleet_check()) {
+		std::vector<Coords> result;
+		// 10 is custom value to make sure the "water" is at least 10 nodes big.
+		map.find_reachable_fields(egbase, Area<FCoords>(map.get_fcoords(get_position()), descr().workarea_info().rbegin()->first),
+	                               &result, CheckStepDefault(MOVECAPS_WALK), FindNodeShore(10));
+
+		for (const Coords& coords : result) {
+			ship_fleet_interfaces_.push_back(ShipFleetYardInterface::create(egbase, *this, coords));
+		}
+
+		if (ship_fleet_interfaces_.empty()) {
+			if (upcast(Game, game, &egbase)) {
+				send_message(*game, Message::Type::kEconomy,
+							 pgettext("building", "No Shore"), descr().icon_filename(), _("Ship Yard Without Shore"),
+							 _("Your ship yard has not been built close enough to a shore. It will not be able to build ships."));
+			}
+		}
+	}
+
+	if (descr().has_ferry_fleet_check()) {
+		std::vector<Coords> result;
+		map.find_reachable_fields(egbase, Area<FCoords>(map.get_fcoords(get_position()), descr().workarea_info().rbegin()->first),
+	                               &result, CheckStepDefault(MOVECAPS_WALK), FindNodeFerry(0));
+
+		for (const Coords& coords : result) {
+			ferry_fleet_interfaces_.push_back(FerryFleetYardInterface::create(egbase, *this, coords));
+		}
+
+		if (ferry_fleet_interfaces_.empty()) {
+			if (upcast(Game, game, &egbase)) {
+				send_message(*game, Message::Type::kEconomy,
+							 pgettext("building", "No Shore"), descr().icon_filename(), _("Ferry Yard Without Shore"),
+							 _("Your ferry yard has not been built close enough to a shore. It will not be able to build ferries."));
+			}
+		}
+	}
+}
+
+void ProductionSite::remove_fleet_interface(EditorGameBase& /*egbase*/, const ShipFleetYardInterface* interface) {
+	auto it = std::find(ship_fleet_interfaces_.begin(), ship_fleet_interfaces_.end(), interface);
+	if (it == ship_fleet_interfaces_.end()) {
+		throw wexception("Attempt to remove unknown ship fleet interface %u", interface == nullptr ? 0 : interface->serial());
+	}
+	*it = ship_fleet_interfaces_.back();
+	ship_fleet_interfaces_.pop_back();
+}
+
+void ProductionSite::remove_fleet_interface(EditorGameBase& /*egbase*/, const FerryFleetYardInterface* interface) {
+	auto it = std::find(ferry_fleet_interfaces_.begin(), ferry_fleet_interfaces_.end(), interface);
+	if (it == ferry_fleet_interfaces_.end()) {
+		throw wexception("Attempt to remove unknown ferry fleet interface %u", interface == nullptr ? 0 : interface->serial());
+	}
+	*it = ferry_fleet_interfaces_.back();
+	ferry_fleet_interfaces_.pop_back();
 }
 
 std::unique_ptr<const BuildingSettings> ProductionSite::create_building_settings() const {

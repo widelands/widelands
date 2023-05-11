@@ -584,14 +584,6 @@ private:
 	bool landbased_;
 };
 
-/** Accepts a node if and only if a ferry can reach it or depart from there. */
-struct FindNodeFerry {
-	[[nodiscard]] bool accept(const EditorGameBase& egbase, const FCoords& coords) const {
-		CheckStepFerry csf(egbase);
-		return csf.reachable_dest(egbase.map(), coords);
-	}
-};
-
 bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 	std::vector<Coords> list;
 	const Map& map = game.map();
@@ -619,7 +611,7 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 		functor.add(FindNodeSpace(findnodesize != FindNodeSize::Size::sizeSwim));
 	}
 	if ((action.iparam3 & (1 << 2)) != 0) {
-		functor.add(FindNodeFerry());
+		functor.add(FindNodeFerry(owner().player_number()));
 	}
 	for (const std::string& terraform : action.sparamv) {
 		functor.add(FindNodeTerraform(terraform));
@@ -646,7 +638,7 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 				functorAnyFull.add(FindNodeSpace(findnodesize != FindNodeSize::Size::sizeSwim));
 			}
 			if ((action.iparam3 & (1 << 2)) != 0) {
-				functorAnyFull.add(FindNodeFerry());
+				functorAnyFull.add(FindNodeFerry(owner().player_number()));
 			}
 			// If there are fields full of fish, we change the type of notification
 			if (map.find_reachable_fields(game, area, &list, cstep, functorAnyFull) != 0u) {

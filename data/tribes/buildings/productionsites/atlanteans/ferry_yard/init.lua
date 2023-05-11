@@ -56,10 +56,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            "return=skipped unless fleet needs ferry",
             "sleep=duration:20s",
-            "callworker=buildferry_1",
             "consume=log:2 spidercloth",
-            "callworker=buildferry_2"
+            "callworker=buildferry",
          }
       },
    },

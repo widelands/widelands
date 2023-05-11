@@ -211,5 +211,17 @@ private:
 	// Minimal number of reachable swimmable fields. 1 is minimum for this to be considered "shore"
 	uint16_t min_fields;
 };
+
+/** Accepts a node if and only if a ferry can reach it or depart from there. */
+struct FindNodeFerry {
+	explicit FindNodeFerry(PlayerNumber p) : player_who_needs_ferry_(p) {
+	}
+
+	[[nodiscard]] bool accept(const EditorGameBase& egbase, const FCoords& coords) const;
+
+private:
+	const PlayerNumber player_who_needs_ferry_;
+};
+
 }  // namespace Widelands
 #endif  // end of include guard: WL_LOGIC_FINDNODE_H
