@@ -258,6 +258,12 @@ Widelands::Game* MainMenu::create_safe_game(const bool show_error) {
 void MainMenu::update_template() {
 	UI::Panel::update_template();
 
+	int dropdowns_lineheight =
+	   g_style_manager->styled_size(UI::StyledSize::kFsMainMenuDropdownHeight);
+	singleplayer_.set_min_lineheight(dropdowns_lineheight);
+	multiplayer_.set_min_lineheight(dropdowns_lineheight);
+	editor_.set_min_lineheight(dropdowns_lineheight);
+
 	splashscreen_ = g_image_cache->get("loadscreens/splash.jpg");
 	title_image_ = g_image_cache->get("loadscreens/logo.png");
 
@@ -770,11 +776,6 @@ void MainMenu::layout() {
 	butw_ = get_inner_w() / 5;
 	buth_ = get_inner_h() / 25;
 	padding_ = buth_ / 3;
-
-	int dropdowns_lineheight = g_gr->get_yres() / 23;
-	singleplayer_.set_min_lineheight(dropdowns_lineheight);
-	multiplayer_.set_min_lineheight(dropdowns_lineheight);
-	editor_.set_min_lineheight(dropdowns_lineheight);
 
 	copyright_.set_pos(Vector2i(
 	   (get_inner_w() - copyright_.get_w()) / 2, get_inner_h() - copyright_.get_h() - padding_ / 2));
