@@ -113,7 +113,7 @@ FleetOptionsWindow::FleetOptionsWindow(UI::Panel* parent,
 	UI::Box* column1 = new UI::Box(columns_box, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 	UI::Box* column2 = new UI::Box(columns_box, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 
-	auto create_textarea = [this, column1, column2, rtl](UI::Textarea** txt, std::string label) {
+	auto create_textarea = [column1, column2, rtl](UI::Textarea** txt, std::string label) {
 		column1->add_space(kPadding);
 		column2->add_space(kPadding);
 
