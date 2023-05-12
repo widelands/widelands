@@ -36,6 +36,13 @@ local function wait_for_quarry_road_connection(field, cs, objective)
 end
 
 function starting_infos()
+   -- Let's always start like the default options
+   -- (except for automatic road building mode, which is handled by the
+   --  scripts)
+   wl.ui.MapView().buildhelp = false
+   wl.ui.MapView().census = false
+   wl.ui.MapView().statistics = false
+
    -- So that the player cannot build anything here
    map:place_immovable("debris00", second_quarry_field)
    reveal_concentric(plr, sf, 13, true, 80)
@@ -53,6 +60,7 @@ function starting_infos()
    set_objective_done(objective_to_explain_objectives, 500)
 
    -- Teach building spaces
+   wl.ui.MapView().buildhelp = false
    campaign_message_box(initial_message_02, 200)
    show_item_from_dropdown("dropdown_menu_showhide", 1)
    local o = campaign_message_with_objective(initial_message_03, obj_initial_toggle_building_spaces)
