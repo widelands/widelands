@@ -2519,7 +2519,8 @@ void CmdFleetTargets::execute(Game& game) {
 		return;
 
 	case MapObjectType::FERRY_FLEET_YARD_INTERFACE:
-		dynamic_cast<FerryFleetYardInterface*>(mo)->get_fleet()->set_idle_ferries_target(game, target_);
+		dynamic_cast<FerryFleetYardInterface*>(mo)->get_fleet()->set_idle_ferries_target(
+		   game, target_);
 		return;
 
 	default:

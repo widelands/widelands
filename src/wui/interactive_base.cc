@@ -535,12 +535,14 @@ void InteractiveBase::show_workarea(const WorkareaInfo& workarea_info,
                                     std::map<Widelands::TCoords<>, uint32_t>& extra_data,
                                     const std::set<Widelands::Coords>& special_coords) {
 	MutexLock m(MutexLock::ID::kIBaseVisualizations);
-	workarea_previews_.insert(
-	   std::unique_ptr<WorkareaPreview>(new WorkareaPreview{coords, &workarea_info, extra_data, special_coords}));
+	workarea_previews_.insert(std::unique_ptr<WorkareaPreview>(
+	   new WorkareaPreview{coords, &workarea_info, extra_data, special_coords}));
 	workareas_cache_.reset(nullptr);
 }
 
-void InteractiveBase::show_workarea(const WorkareaInfo& workarea_info, Widelands::Coords coords, const std::set<Widelands::Coords>& special_coords) {
+void InteractiveBase::show_workarea(const WorkareaInfo& workarea_info,
+                                    Widelands::Coords coords,
+                                    const std::set<Widelands::Coords>& special_coords) {
 	MutexLock m(MutexLock::ID::kIBaseVisualizations);
 	std::map<Widelands::TCoords<>, uint32_t> empty;
 	show_workarea(workarea_info, coords, empty, special_coords);

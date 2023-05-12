@@ -100,7 +100,8 @@ struct FerryFleet : MapObject {
 	}
 	void set_idle_ferries_target(EditorGameBase& egbase, Quantity t);
 	[[nodiscard]] bool lacks_ferry() const {
-		return !pending_ferry_requests_.empty() || count_unemployed_ferries() < get_idle_ferries_target();
+		return !pending_ferry_requests_.empty() ||
+		       count_unemployed_ferries() < get_idle_ferries_target();
 	}
 
 	void request_ferry(const EditorGameBase& egbase, Waterway* waterway, const Time&);

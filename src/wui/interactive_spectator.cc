@@ -131,7 +131,8 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 
 		if (has_workarea_special_coords(field.fcoords)) {
 			blit_field_overlay(dst, field, special_coords_marker_pic_,
-			                   Vector2i(special_coords_marker_pic_->width() / 2, special_coords_marker_pic_->height() / 2),
+			                   Vector2i(special_coords_marker_pic_->width() / 2,
+			                            special_coords_marker_pic_->height() / 2),
 			                   scale);
 		}
 

@@ -95,7 +95,9 @@ public:
 		return egbase_;
 	}
 
-	void show_workarea(const WorkareaInfo& workarea_info, Widelands::Coords coords, const std::set<Widelands::Coords>& special_coords);
+	void show_workarea(const WorkareaInfo& workarea_info,
+	                   Widelands::Coords coords,
+	                   const std::set<Widelands::Coords>& special_coords);
 	void show_workarea(const WorkareaInfo& workarea_info,
 	                   Widelands::Coords coords,
 	                   std::map<Widelands::TCoords<>, uint32_t>& extra_data,
