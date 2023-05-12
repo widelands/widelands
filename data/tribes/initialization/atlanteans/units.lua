@@ -429,9 +429,9 @@ wl.Descriptions():new_tribe {
             preciousness = 5,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Granite, part 1
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Granite, part 1
                   pgettext("ware", "Granite is a basic building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Granite, part 2
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Granite, part 2
                   pgettext("atlanteans_ware", "The Atlanteans produce granite blocks in quarries and crystal mines.")
                }
             }
@@ -441,9 +441,9 @@ wl.Descriptions():new_tribe {
             preciousness = 14,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Log, part 1
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Log, part 1
                   pgettext("ware", "Logs are an important basic building material. They are produced by felling trees."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Log, part 2
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Log, part 2
                   pgettext("atlanteans_ware", "Atlanteans use logs also as the base for planks, which are used in nearly every building. Besides the sawmill, the charcoal kiln, the toolsmithy and the smokery also need logs for their work.")
                }
             }
@@ -454,11 +454,11 @@ wl.Descriptions():new_tribe {
             preciousness = 10,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Planks, part 1
                   pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 2
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Planks, part 2
                   pgettext("atlanteans_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Planks, part 3
                   pgettext("atlanteans_ware", "The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships.")
                }
             }
@@ -468,7 +468,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 10,
             preciousness = 11,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Spider Silk
+               -- TRANSLATORS: Helptext for an Atlantean ware: Spider Silk
                purpose = pgettext("atlanteans_ware", "Spider silk is produced by spiders, which are bred by spider farms. It is processed into spidercloth in a weaving mill.")
             }
          },
@@ -477,7 +477,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 20,
             preciousness = 7,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Spidercloth
+               -- TRANSLATORS: Helptext for an Atlantean ware: Spidercloth
                purpose = pgettext("atlanteans_ware", "Spidercloth is made out of spider silk in a weaving mill. It is used in the toolsmithy and the shipyard. Also some higher developed buildings need spidercloth for their construction.")
             }
          },
@@ -488,7 +488,7 @@ wl.Descriptions():new_tribe {
             name = "fish",
             preciousness = 4,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Fish
+               -- TRANSLATORS: Helptext for an Atlantean ware: Fish
                purpose = pgettext("atlanteans_ware", "Fish is one of the biggest food resources of the Atlanteans. It has to be smoked in a smokery before being delivered to mines, training sites and scouts.")
             }
          },
@@ -497,7 +497,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 30,
             preciousness = 3,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Smoked Fish
+               -- TRANSLATORS: Helptext for an Atlantean ware: Smoked Fish
                purpose = pgettext("atlanteans_ware", "As no Atlantean likes raw fish, smoking it in a smokery is the most common way to make it edible.")
             }
          },
@@ -506,9 +506,9 @@ wl.Descriptions():new_tribe {
             preciousness = 2,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Meat, part 1
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Meat, part 1
                   pgettext("ware", "Meat contains a lot of energy, and it is obtained from wild game taken by hunters."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Meat, part 2
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Meat, part 2
                   pgettext("atlanteans_ware", "Meat has to be smoked in a smokery before being delivered to mines and training sites (dungeon and labyrinth).")
                }
             }
@@ -518,7 +518,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 20,
             preciousness = 2,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Smoked Meat
+               -- TRANSLATORS: Helptext for an Atlantean ware: Smoked Meat
                purpose = pgettext("atlanteans_ware", "Smoked meat is made out of meat in a smokery. It is delivered to the mines and training sites (labyrinth and dungeon) where the miners and soldiers prepare a nutritious lunch for themselves.")
             }
          },
@@ -527,9 +527,9 @@ wl.Descriptions():new_tribe {
             preciousness = 7,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Water, part 1
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Water, part 1
                   pgettext("ware", "Water is the essence of life!"),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Water, part 2
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Water, part 2
                   pgettext("atlanteans_ware", "Water is used in the bakery and the horse and spider farms.")
                }
             }
@@ -538,7 +538,7 @@ wl.Descriptions():new_tribe {
             name = "corn",
             preciousness = 12,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Corn
+               -- TRANSLATORS: Helptext for an Atlantean ware: Corn
                purpose = pgettext("atlanteans_ware", "This corn is processed in the mill into fine cornmeal that every Atlantean baker needs for a good bread. Also horse and spider farms need to be provided with corn.")
             }
          },
@@ -547,7 +547,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 15,
             preciousness = 7,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Cornmeal
+               -- TRANSLATORS: Helptext for an Atlantean ware: Cornmeal
                purpose = pgettext("atlanteans_ware", "Cornmeal is produced in a mill out of corn and is one of three parts of the Atlantean bread produced in bakeries.")
             }
          },
@@ -555,7 +555,7 @@ wl.Descriptions():new_tribe {
             name = "blackroot",
             preciousness = 10,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Blackroot
+               -- TRANSLATORS: Helptext for an Atlantean ware: Blackroot
                purpose = pgettext("atlanteans_ware", "Blackroots are a special kind of root produced at blackroot farms and processed in mills. The Atlanteans like their strong taste and use their flour for making bread.")
             }
          },
@@ -564,7 +564,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 0,
             preciousness = 2,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Blackroot Flour
+               -- TRANSLATORS: Helptext for an Atlantean ware: Blackroot Flour
                purpose = pgettext("atlanteans_ware", "Blackroot Flour is produced in mills out of blackroots. It is used in bakeries to make a tasty bread.")
             }
          },
@@ -573,7 +573,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 20,
             preciousness = 5,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Bread
+               -- TRANSLATORS: Helptext for an Atlantean ware: Bread
                purpose = pgettext("atlanteans_ware", "This tasty bread is made in bakeries out of cornmeal, blackroot flour and water. It is appreciated as basic food by miners, scouts and soldiers in training sites (labyrinth and dungeon).")
             }
          }
@@ -585,7 +585,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 5,
             preciousness = 1,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Quartz
+               -- TRANSLATORS: Helptext for an Atlantean ware: Quartz
                purpose = pgettext("atlanteans_ware", "These transparent quartz gems are used to build some exclusive buildings. They are produced in a crystal mine.")
             }
          },
@@ -594,7 +594,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 5,
             preciousness = 2,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Diamond
+               -- TRANSLATORS: Helptext for an Atlantean ware: Diamond
                purpose = pgettext("atlanteans_ware", "These wonderful diamonds are used to build some exclusive buildings. They are mined in a crystal mine.")
             }
          },
@@ -604,9 +604,9 @@ wl.Descriptions():new_tribe {
             preciousness = 10,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Coal, part 1
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Coal, part 1
                   pgettext("ware", "Coal is mined in coal mines or produced out of logs by a charcoal kiln."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Coal, part 2
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Coal, part 2
                   pgettext("atlanteans_ware", "The Atlantean fires in smelting works, armor smithies and weapon smithies are fed with coal.")
                }
             }
@@ -617,9 +617,9 @@ wl.Descriptions():new_tribe {
             preciousness = 4,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Iron Ore, part 1
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Iron Ore, part 1
                   pgettext("default_ware", "Iron ore is mined in iron mines."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Iron Ore, part 2
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Iron Ore, part 2
                   pgettext("atlanteans_ware", "It is smelted in a smelting works to retrieve the iron.")
                }
             }
@@ -630,9 +630,9 @@ wl.Descriptions():new_tribe {
             preciousness = 4,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Iron, part 1
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Iron, part 1
                   pgettext("ware", "Iron is smelted out of iron ores."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Iron, part 2
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Iron, part 2
                   pgettext("atlanteans_ware", "It is produced by the smelting works and used in the toolsmithy, armor smithy and weapon smithy.")
                }
             }
@@ -643,9 +643,9 @@ wl.Descriptions():new_tribe {
             preciousness = 2,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Gold Ore, part 1
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Gold Ore, part 1
                   pgettext("ware", "Gold ore is mined in a gold mine."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Gold Ore, part 2
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Gold Ore, part 2
                   pgettext("atlanteans_ware", "Smelted in a smelting works, it turns into gold which is used as a precious building material and to produce weapons and armor.")
                }
             }
@@ -656,9 +656,9 @@ wl.Descriptions():new_tribe {
             preciousness = 2,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Gold, part 1
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Gold, part 1
                   pgettext("ware", "Gold is the most valuable of all metals, and it is smelted out of gold ore."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Gold, part 2
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Gold, part 2
                   pgettext("atlanteans_ware", "It is produced by the smelting works and used by the armor smithy, the weapon smithy and the gold spinning mill.")
                }
             }
@@ -671,7 +671,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 3,
             preciousness = 1,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Pick
+               -- TRANSLATORS: Helptext for an Atlantean ware: Pick
                purpose = pgettext("ware", "Picks are used by stonecutters and miners. They are produced by the toolsmith.")
             }
          },
@@ -680,7 +680,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 2,
             preciousness = 0,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Saw
+               -- TRANSLATORS: Helptext for an Atlantean ware: Saw
                purpose = pgettext("atlanteans_ware", "The saw is needed by the sawyer, the woodcutter and the toolsmith. It is produced by the toolsmith.")
             }
          },
@@ -690,9 +690,9 @@ wl.Descriptions():new_tribe {
             preciousness = 0,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Shovel, part 1
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Shovel, part 1
                   pgettext("ware", "Shovels are needed for the proper handling of plants."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Shovel, part 2
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Shovel, part 2
                   pgettext("atlanteans_ware", "Therefore the forester and the blackroot farmer use them. They are produced by the toolsmith.")
                }
             }
@@ -703,9 +703,9 @@ wl.Descriptions():new_tribe {
             preciousness = 1,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Hammer, part 1
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Hammer, part 1
                   pgettext("ware", "The hammer is an essential tool."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Hammer, part 2
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Hammer, part 2
                   pgettext("atlanteans_ware", "Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make sure you’ve always got some in reserve! They are produced by the toolsmith.")
                }
             }
@@ -715,7 +715,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 1,
             preciousness = 0,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Milking Tongs
+               -- TRANSLATORS: Helptext for an Atlantean ware: Milking Tongs
                purpose = pgettext("atlanteans_ware", "Milking tongs are used by the spider breeder to milk the spiders. They are produced by the toolsmith.")
             }
          },
@@ -724,7 +724,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 2,
             preciousness = 0,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Fishing Net
+               -- TRANSLATORS: Helptext for an Atlantean ware: Fishing Net
                purpose = pgettext("atlanteans_ware", "The fishing net is used by the fisher and produced by the toolsmith.")
             }
          },
@@ -733,7 +733,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 2,
             preciousness = 0,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Buckets
+               -- TRANSLATORS: Helptext for an Atlantean ware: Buckets
                purpose = pgettext("atlanteans_ware", "Big buckets for the fish breeder – produced by the toolsmith.")
             }
          },
@@ -742,7 +742,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 1,
             preciousness = 0,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Hunting Bow
+               -- TRANSLATORS: Helptext for an Atlantean ware: Hunting Bow
                purpose = pgettext("atlanteans_ware", "This bow is used by the Atlantean hunter. It is produced by the toolsmith.")
             }
          },
@@ -751,7 +751,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 1,
             preciousness = 0,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Hook Pole
+               -- TRANSLATORS: Helptext for an Atlantean ware: Hook Pole
                purpose = pgettext("atlanteans_ware", "This hook pole is used by the smoker to suspend all the meat and fish from the top of the smokery. It is created by the toolsmith.")
             }
          },
@@ -761,9 +761,9 @@ wl.Descriptions():new_tribe {
             preciousness = 0,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Scythe, part 1
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Scythe, part 1
                   pgettext("ware", "The scythe is the tool of the farmers."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Scythe, part 2
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Scythe, part 2
                   pgettext("atlanteans_ware", "Scythes are produced by the toolsmith.")
                }
             }
@@ -774,9 +774,9 @@ wl.Descriptions():new_tribe {
             preciousness = 0,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Bread Paddle, part 1
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Bread Paddle, part 1
                   pgettext("ware", "The bread paddle is the tool of the baker, each baker needs one."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Bread Paddle, part 2
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Bread Paddle, part 2
                   pgettext("atlanteans_ware", "Bread paddles are produced by the toolsmith.")
                }
             }
@@ -787,9 +787,9 @@ wl.Descriptions():new_tribe {
             preciousness = 0,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Fire Tongs, part 1
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Fire Tongs, part 1
                   pgettext("ware", "Fire tongs are the tools for smelting ores."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Fire Tongs, part 2
+                  -- TRANSLATORS: Helptext for an Atlantean ware: Fire Tongs, part 2
                   pgettext("atlanteans_ware_fire_tongs", "They are used in the smelting works and produced by the toolsmith.")
                }
             }
@@ -802,7 +802,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 30,
             preciousness = 1,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Light Trident
+               -- TRANSLATORS: Helptext for an Atlantean ware: Light Trident
                purpose = pgettext("atlanteans_ware", "This is the basic weapon of the Atlantean soldiers. Together with a tabard, it makes up the equipment of young soldiers. Light tridents are produced in the weapon smithy as are all other tridents.")
             }
          },
@@ -811,7 +811,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 1,
             preciousness = 1,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Long Trident
+               -- TRANSLATORS: Helptext for an Atlantean ware: Long Trident
                purpose = pgettext("atlanteans_ware", "The long trident is the first trident in the training of soldiers. It is produced in the weapon smithy and used in the dungeon – together with food – to train soldiers from attack level 0 to level 1.")
             }
          },
@@ -820,7 +820,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 1,
             preciousness = 1,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Steel Trident
+               -- TRANSLATORS: Helptext for an Atlantean ware: Steel Trident
                purpose = pgettext("atlanteans_ware", "This is the medium trident. It is produced in the weapon smithy and used by advanced soldiers in the dungeon – together with food – to train from attack level 1 to level 2.")
             }
          },
@@ -829,7 +829,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 1,
             preciousness = 1,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Double Trident
+               -- TRANSLATORS: Helptext for an Atlantean ware: Double Trident
                purpose = pgettext("atlanteans_ware", "The double trident is one of the best tridents produced by the Atlantean weapon smithy. It is used in a dungeon – together with food – to train soldiers from attack level 2 to level 3.")
             }
          },
@@ -838,7 +838,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 1,
             preciousness = 1,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Heavy Double Trident
+               -- TRANSLATORS: Helptext for an Atlantean ware: Heavy Double Trident
                purpose = pgettext("atlanteans_ware", "This is the most dangerous weapon of the Atlantean military. Only the best of the best soldiers may use it. It is produced in the weapon smithy and used in the dungeon – together with food – to train soldiers from attack level 3 to level 4.")
             }
          },
@@ -847,7 +847,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 1,
             preciousness = 1,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Steel Shield
+               -- TRANSLATORS: Helptext for an Atlantean ware: Steel Shield
                purpose = pgettext("atlanteans_ware", "This steel shield is produced in the armor smithy and used in the labyrinth – together with food – to train soldiers from defense level 0 to level 1.")
             }
          },
@@ -856,7 +856,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 1,
             preciousness = 1,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Advanced Shield
+               -- TRANSLATORS: Helptext for an Atlantean ware: Advanced Shield
                purpose = pgettext("atlanteans_ware", "These advanced shields are used by the best soldiers of the Atlanteans. They are produced in the armor smithy and used in the labyrinth – together with food – to train soldiers from defense level 1 to level 2.")
             }
          },
@@ -865,7 +865,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 30,
             preciousness = 1,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Tabard
+               -- TRANSLATORS: Helptext for an Atlantean ware: Tabard
                purpose = pgettext("atlanteans_ware", "A tabard and a light trident are the basic equipment for young soldiers. Tabards are produced in the weaving mill.")
             }
          },
@@ -874,7 +874,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 5,
             preciousness = 2,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Gold Thread
+               -- TRANSLATORS: Helptext for an Atlantean ware: Gold Thread
                purpose = pgettext("atlanteans_ware", "This thread, made of gold by the gold spinning mill, is used for weaving the exclusive golden tabard in the weaving mill.")
             }
          },
@@ -883,7 +883,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 1,
             preciousness = 1,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Golden Tabard
+               -- TRANSLATORS: Helptext for an Atlantean ware: Golden Tabard
                purpose = pgettext("atlanteans_ware", "Golden tabards are produced in Atlantean weaving mills out of gold thread. They are used in the labyrinth – together with food – to train soldiers from health level 0 to level 1.")
             }
          }
@@ -899,14 +899,14 @@ wl.Descriptions():new_tribe {
          {
             name = "atlanteans_carrier",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Carrier
+               -- TRANSLATORS: Helptext for an Atlantean worker: Carrier
                purpose = pgettext("atlanteans_worker", "Carries items along your roads.")
             }
          },
          {
             name = "atlanteans_ferry",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Ferry
+               -- TRANSLATORS: Helptext for an Atlantean worker: Ferry
                purpose = pgettext("atlanteans_worker", "Ships wares across narrow rivers.")
             }
          },
@@ -915,14 +915,14 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 10,
             preciousness = 2,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Horse
+               -- TRANSLATORS: Helptext for an Atlantean worker: Horse
                purpose = pgettext("atlanteans_worker", "Horses help to carry items along busy roads. They are reared in a horse farm.")
             }
          },
          {
             name = "atlanteans_horsebreeder",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Horse Breeder
+               -- TRANSLATORS: Helptext for an Atlantean worker: Horse Breeder
                purpose = pgettext("atlanteans_worker", "Breeds the strong Atlantean horses for adding them to the transportation system.")
             }
          }
@@ -932,56 +932,56 @@ wl.Descriptions():new_tribe {
          {
             name = "atlanteans_stonecutter",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Stonecutter
+               -- TRANSLATORS: Helptext for an Atlantean worker: Stonecutter
                purpose = pgettext("atlanteans_worker", "Cuts blocks of granite out of rocks in the vicinity.")
             }
          },
          {
             name = "atlanteans_woodcutter",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Woodcutter
+               -- TRANSLATORS: Helptext for an Atlantean worker: Woodcutter
                purpose = pgettext("atlanteans_worker", "Fells trees.")
             }
          },
          {
             name = "atlanteans_sawyer",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Sawyer
+               -- TRANSLATORS: Helptext for an Atlantean worker: Sawyer
                purpose = pgettext("atlanteans_worker", "Saws logs to produce planks.")
             }
          },
          {
             name = "atlanteans_forester",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Forester
+               -- TRANSLATORS: Helptext for an Atlantean worker: Forester
                purpose = pgettext("atlanteans_worker", "Plants trees.")
             }
          },
          {
             name = "atlanteans_builder",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Builder
+               -- TRANSLATORS: Helptext for an Atlantean worker: Builder
                purpose = pgettext("atlanteans_worker", "Works at construction sites to raise new buildings.")
             }
          },
          {
             name = "atlanteans_spiderbreeder",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Spider Breeder
+               -- TRANSLATORS: Helptext for an Atlantean worker: Spider Breeder
                purpose = pgettext("atlanteans_worker", "Breeds spiders for silk.")
             }
          },
          {
             name = "atlanteans_weaver",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Weaver
+               -- TRANSLATORS: Helptext for an Atlantean worker: Weaver
                purpose = pgettext("atlanteans_worker", "Produces spidercloth for buildings, ships and soldiers.")
             }
          },
          {
             name = "atlanteans_shipwright",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Shipwright
+               -- TRANSLATORS: Helptext for an Atlantean worker: Shipwright
                purpose = pgettext("atlanteans_worker", "Works at the shipyard and constructs new ships.")
             }
          }
@@ -991,56 +991,56 @@ wl.Descriptions():new_tribe {
          {
             name = "atlanteans_fisher",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Fisher
+               -- TRANSLATORS: Helptext for an Atlantean worker: Fisher
                purpose = pgettext("atlanteans_worker", "The fisher fishes delicious fish.")
             }
          },
          {
             name = "atlanteans_fishbreeder",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Fish Breeder
+               -- TRANSLATORS: Helptext for an Atlantean worker: Fish Breeder
                purpose = pgettext("atlanteans_worker", "Breeds fish.")
             }
          },
          {
             name = "atlanteans_hunter",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Hunter
+               -- TRANSLATORS: Helptext for an Atlantean worker: Hunter
                purpose = pgettext("atlanteans_worker", "The hunter brings fresh, raw meat to the colonists.")
             }
          },
          {
             name = "atlanteans_smoker",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Smoker
+               -- TRANSLATORS: Helptext for an Atlantean worker: Smoker
                purpose = pgettext("atlanteans_worker", "Smokes meat and fish.")
             }
          },
          {
             name = "atlanteans_farmer",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Farmer
+               -- TRANSLATORS: Helptext for an Atlantean worker: Farmer
                purpose = pgettext("atlanteans_worker", "Plants and harvests cornfields.")
             }
          },
          {
             name = "atlanteans_blackroot_farmer",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Blackroot Farmer
+               -- TRANSLATORS: Helptext for an Atlantean worker: Blackroot Farmer
                purpose = pgettext("atlanteans_worker", "Plants and harvests blackroot.")
             }
          },
          {
             name = "atlanteans_miller",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Miller
+               -- TRANSLATORS: Helptext for an Atlantean worker: Miller
                purpose = pgettext("atlanteans_worker", "Grinds blackroots and corn to produce blackroot flour and cornmeal, respectively.")
             }
          },
          {
             name = "atlanteans_baker",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Baker
+               -- TRANSLATORS: Helptext for an Atlantean worker: Baker
                purpose = pgettext("atlanteans_worker", "Bakes bread for workers.")
             }
          }
@@ -1050,28 +1050,28 @@ wl.Descriptions():new_tribe {
          {
             name = "atlanteans_geologist",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Geologist
+               -- TRANSLATORS: Helptext for an Atlantean worker: Geologist
                purpose = pgettext("atlanteans_worker", "Discovers resources for mining.")
             }
          },
          {
             name = "atlanteans_miner",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Miner
+               -- TRANSLATORS: Helptext for an Atlantean worker: Miner
                purpose = pgettext("atlanteans_worker", "Works deep in the mines to obtain coal, iron, gold or precious stones.")
             }
          },
          {
             name = "atlanteans_charcoal_burner",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Charcoal Burner
+               -- TRANSLATORS: Helptext for an Atlantean worker: Charcoal Burner
                purpose = pgettext("atlanteans_worker", "Burns coal.")
             }
          },
          {
             name = "atlanteans_smelter",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Smelter
+               -- TRANSLATORS: Helptext for an Atlantean worker: Smelter
                purpose = pgettext("atlanteans_worker", "Smelts ores into metal.")
             }
          }
@@ -1081,7 +1081,7 @@ wl.Descriptions():new_tribe {
          {
             name = "atlanteans_toolsmith",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Toolsmith
+               -- TRANSLATORS: Helptext for an Atlantean worker: Toolsmith
                purpose = pgettext("atlanteans_worker", "Produces tools for the workers.")
             }
          }
@@ -1091,7 +1091,7 @@ wl.Descriptions():new_tribe {
          {
             name = "atlanteans_recruit",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Recruit
+               -- TRANSLATORS: Helptext for an Atlantean worker: Recruit
                purpose = pgettext("atlanteans_worker", "Eager to become a soldier and defend his tribe!")
             }
          },
@@ -1100,35 +1100,35 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 10,
             preciousness = 5,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Soldier
+               -- TRANSLATORS: Helptext for an Atlantean worker: Soldier
                purpose = pgettext("atlanteans_worker", "Defend and Conquer!")
             }
          },
          {
             name = "atlanteans_trainer",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Trainer
+               -- TRANSLATORS: Helptext for an Atlantean worker: Trainer
                purpose = pgettext("atlanteans_worker", "Trains the soldiers.")
             }
          },
          {
             name = "atlanteans_weaponsmith",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Weaponsmith
+               -- TRANSLATORS: Helptext for an Atlantean worker: Weaponsmith
                purpose = pgettext("atlanteans_worker", "Produces weapons for the soldiers.")
             }
          },
          {
             name = "atlanteans_armorsmith",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Armorsmith
+               -- TRANSLATORS: Helptext for an Atlantean worker: Armorsmith
                purpose = pgettext("atlanteans_worker", "Produces armor for the soldiers.")
             }
          },
          {
             name = "atlanteans_scout",
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean worker: Scout
+               -- TRANSLATORS: Helptext for an Atlantean worker: Scout
                purpose = pgettext("atlanteans_worker", "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion.")
                -- (c) WiHack Team 02.01.2010
             }
@@ -1140,98 +1140,98 @@ wl.Descriptions():new_tribe {
       {
          name = "ashes",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Ashes
+            -- TRANSLATORS: Helptext for an Atlantean immovable: Ashes
             purpose = _("The remains of a destroyed building.")
          }
       },
       {
          name = "blackrootfield_tiny",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an Atlantean immovable: Blackroot Field
             purpose = _("This field has just been planted.")
          }
       },
       {
          name = "blackrootfield_small",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an Atlantean immovable: Blackroot Field
             purpose = _("This field is growing.")
          }
       },
       {
          name = "blackrootfield_medium",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an Atlantean immovable: Blackroot Field
             purpose = _("This field is growing.")
          }
       },
       {
          name = "blackrootfield_ripe",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an Atlantean immovable: Blackroot Field
             purpose = _("This field is ready for harvesting.")
          }
       },
       {
          name = "blackrootfield_harvested",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an Atlantean immovable: Blackroot Field
             purpose = _("This field has been harvested.")
          }
       },
       {
          name = "cornfield_tiny",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an Atlantean immovable: Corn Field
             purpose = _("This field has just been planted.")
          }
       },
       {
          name = "cornfield_small",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an Atlantean immovable: Corn Field
             purpose = _("This field is growing.")
          }
       },
       {
          name = "cornfield_medium",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an Atlantean immovable: Corn Field
             purpose = _("This field is growing.")
          }
       },
       {
          name = "cornfield_ripe",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an Atlantean immovable: Corn Field
             purpose = _("This field is ready for harvesting.")
          }
       },
       {
          name = "cornfield_harvested",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an Atlantean immovable: Corn Field
             purpose = _("This field has been harvested.")
          }
       },
       {
          name = "destroyed_building",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Destroyed Building
+            -- TRANSLATORS: Helptext for an Atlantean immovable: Destroyed Building
             purpose = _("The remains of a destroyed building.")
          }
       },
       {
          name = "atlanteans_resi_none",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean resource indicator: No resources
+            -- TRANSLATORS: Helptext for an Atlantean resource indicator: No resources
             purpose = _("There are no resources in the ground here.")
          }
       },
       {
          name = "atlanteans_resi_water",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean resource indicator: Water
+            -- TRANSLATORS: Helptext for an Atlantean resource indicator: Water
             purpose = _("There is water in the ground here that can be pulled up by a well.")
          }
       },
@@ -1239,9 +1239,9 @@ wl.Descriptions():new_tribe {
          name = "atlanteans_resi_coal_1",
          helptexts = {
             purpose = {
-               -- TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 1
+               -- TRANSLATORS: Helptext for an Atlantean resource indicator: Coal, part 1
                _("Coal veins contain coal that can be dug up by coal mines."),
-               -- TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 2
+               -- TRANSLATORS: Helptext for an Atlantean resource indicator: Coal, part 2
                _("There is only a little bit of coal here.")
             }
          }
@@ -1250,9 +1250,9 @@ wl.Descriptions():new_tribe {
          name = "atlanteans_resi_iron_1",
          helptexts = {
             purpose = {
-               -- TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 1
+               -- TRANSLATORS: Helptext for an Atlantean resource indicator: Iron, part 1
                _("Iron veins contain iron ore that can be dug up by iron mines."),
-               -- TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 2
+               -- TRANSLATORS: Helptext for an Atlantean resource indicator: Iron, part 2
                _("There is only a little bit of iron here.")
             }
          }
@@ -1261,9 +1261,9 @@ wl.Descriptions():new_tribe {
          name = "atlanteans_resi_gold_1",
          helptexts = {
             purpose = {
-               -- TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 1
+               -- TRANSLATORS: Helptext for an Atlantean resource indicator: Gold, part 1
                _("Gold veins contain gold ore that can be dug up by gold mines."),
-               -- TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
+               -- TRANSLATORS: Helptext for an Atlantean resource indicator: Gold, part 2
                _("There is only a little bit of gold here.")
             }
          }
@@ -1283,9 +1283,9 @@ wl.Descriptions():new_tribe {
          name = "atlanteans_resi_coal_2",
          helptexts = {
             purpose = {
-               -- TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 1
+               -- TRANSLATORS: Helptext for an Atlantean resource indicator: Coal, part 1
                _("Coal veins contain coal that can be dug up by coal mines."),
-               -- TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 2
+               -- TRANSLATORS: Helptext for an Atlantean resource indicator: Coal, part 2
                _("There is a lot of coal here.")
             }
          }
@@ -1294,9 +1294,9 @@ wl.Descriptions():new_tribe {
          name = "atlanteans_resi_iron_2",
          helptexts = {
             purpose = {
-               -- TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 1
+               -- TRANSLATORS: Helptext for an Atlantean resource indicator: Iron, part 1
                _("Iron veins contain iron ore that can be dug up by iron mines."),
-               -- TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 2
+               -- TRANSLATORS: Helptext for an Atlantean resource indicator: Iron, part 2
                _("There is a lot of iron here.")
             }
          }
@@ -1305,9 +1305,9 @@ wl.Descriptions():new_tribe {
          name = "atlanteans_resi_gold_2",
          helptexts = {
             purpose = {
-               -- TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 1
+               -- TRANSLATORS: Helptext for an Atlantean resource indicator: Gold, part 1
                _("Gold veins contain gold ore that can be dug up by gold mines."),
-               -- TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
+               -- TRANSLATORS: Helptext for an Atlantean resource indicator: Gold, part 2
                _("There is a lot of gold here.")
             }
          }
@@ -1326,99 +1326,99 @@ wl.Descriptions():new_tribe {
       {
          name = "atlanteans_shipconstruction",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Ship Under Construction
+            -- TRANSLATORS: Helptext for an Atlantean immovable: Ship Under Construction
             purpose = _("A ship is being constructed at this site.")
          }
       },
-      -- non atlantean Immovables used by the woodcutter
+      -- non Atlantean immovables used by the woodcutter
       {
          name = "deadtree7",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Dead Tree
+            -- TRANSLATORS: Helptext for an Amazon immovable usable by Atlanteans: Dead Tree
             purpose = _("The remains of an old tree.")
          }
       },
       {
          name = "balsa_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Balsa Tree
+            -- TRANSLATORS: Helptext for an Amazon immovable usable by Atlanteans: Balsa Tree
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "balsa_black_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Balsa Tree
+            -- TRANSLATORS: Helptext for an Amazon immovable usable by Atlanteans: Balsa Tree
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "balsa_desert_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Balsa Tree
+            -- TRANSLATORS: Helptext for an Amazon immovable usable by Atlanteans: Balsa Tree
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "balsa_winter_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Balsa Tree
+            -- TRANSLATORS: Helptext for an Amazon immovable usable by Atlanteans: Balsa Tree
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Ironwood Tree
+            -- TRANSLATORS: Helptext for an Amazon immovable usable by Atlanteans: Ironwood Tree
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_black_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Ironwood Tree
+            -- TRANSLATORS: Helptext for an Amazon immovable usable by Atlanteans: Ironwood Tree
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_desert_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Ironwood Tree
+            -- TRANSLATORS: Helptext for an Amazon immovable usable by Atlanteans: Ironwood Tree
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_winter_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Ironwood Tree
+            -- TRANSLATORS: Helptext for an Amazon immovable usable by Atlanteans: Ironwood Tree
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Rubber Tree
+            -- TRANSLATORS: Helptext for an Amazon immovable usable by Atlanteans: Rubber Tree
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_black_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Rubber Tree
+            -- TRANSLATORS: Helptext for an Amazon immovable usable by Atlanteans: Rubber Tree
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_desert_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Rubber Tree
+            -- TRANSLATORS: Helptext for an Amazon immovable usable by Atlanteans: Rubber Tree
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_winter_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Rubber Tree
+            -- TRANSLATORS: Helptext for an Amazon immovable usable by Atlanteans: Rubber Tree
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
@@ -1430,13 +1430,13 @@ wl.Descriptions():new_tribe {
       {
          name = "atlanteans_headquarters",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean warehouse: Headquarters
+            -- TRANSLATORS: Purpose helptext for an Atlantean warehouse: Headquarters
             purpose = pgettext("atlanteans_building", "Accommodation for your people. Also stores your wares and tools."),
-            -- TRANSLATORS: Note helptext for an atlantean warehouse: Headquarters
+            -- TRANSLATORS: Note helptext for an Atlantean warehouse: Headquarters
             note = pgettext("atlanteans_building", "The headquarters is your main building."),
-            -- TRANSLATORS: Note lore for an atlantean production site: Headquarters
+            -- TRANSLATORS: Note lore for an Atlantean production site: Headquarters
             lore = pgettext("atlanteans_building", "We founded this new colony, now go with Satul and do the best you can do for your tribe."),
-            -- TRANSLATORS: Note lore_autor for an atlantean production site: Headquarters
+            -- TRANSLATORS: Note lore_autor for an Atlantean production site: Headquarters
             lore_author = pgettext("atlanteans_building", "Priest of Satul inaugurating you as leader of the Atleantean tribe")
 
          }
@@ -1444,13 +1444,13 @@ wl.Descriptions():new_tribe {
       {
          name = "atlanteans_warehouse",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean warehouse: Warehouse
+            -- TRANSLATORS: Purpose helptext for an Atlantean warehouse: Warehouse
             purpose = pgettext("atlanteans_building", "Your workers and soldiers will find shelter here. Also stores your wares and tools. "..
                     "It will help you to stabilize your economy."),
-            -- TRANSLATORS: Note lore for an atlantean production site: Warehouse
+            -- TRANSLATORS: Note lore for an Atlantean production site: Warehouse
             lore = pgettext("atlanteans_building", "Maybe you think it’s a boring task to store, count and retrieve all this stuff, "..
                      "but do you really want your carriers to walk all the way to your Headquarters?"),
-            -- TRANSLATORS: Note lore_autor for an atlantean production site: Headquarters
+            -- TRANSLATORS: Note lore_autor for an Atlantean production site: Headquarters
             lore_author = pgettext("atlanteans_building", "Head of the warehouse")
 
          }
@@ -1458,13 +1458,13 @@ wl.Descriptions():new_tribe {
       {
          name = "atlanteans_port",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean warehouse: Port
+            -- TRANSLATORS: Purpose helptext for an Atlantean warehouse: Port
             purpose = pgettext("atlanteans_building", "Serves as a base for overseas colonization and trade. Also stores your soldiers, wares and tools."),
-            -- TRANSLATORS: Note helptext for an atlantean warehouse: Port
+            -- TRANSLATORS: Note helptext for an Atlantean warehouse: Port
             note = pgettext("atlanteans_building", "Similar to the Headquarters a Port can be attacked and destroyed by an enemy. It is recommendable to send soldiers to defend it."),
-            -- TRANSLATORS: Note lore for an atlantean production site: Port
+            -- TRANSLATORS: Note lore for an Atlantean production site: Port
             lore = pgettext("atlanteans_building", "This is the building where expeditions will be equipped to boldly go and find new shores."),
-            -- TRANSLATORS: Note lore_autor for an atlantean production site: Port
+            -- TRANSLATORS: Note lore_autor for an Atlantean production site: Port
             lore_author = pgettext("atlanteans_building", "Ostur, the designer of the new Expedition ship class, during the opening of a new Port")
          }
       },
@@ -1473,133 +1473,133 @@ wl.Descriptions():new_tribe {
       {
          name = "atlanteans_quarry",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Quarry
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Quarry
             purpose = pgettext("atlanteans_building", "Cuts blocks of granite out of rocks in the vicinity."),
-            -- TRANSLATORS: Note helptext for an atlantean production site: Quarry
+            -- TRANSLATORS: Note helptext for an Atlantean production site: Quarry
             note = pgettext("atlanteans_building", "The quarry needs rocks to cut within the work area."),
-            -- TRANSLATORS: Note lore for an atlantean production site: Quarry
+            -- TRANSLATORS: Note lore for an Atlantean production site: Quarry
             lore = pgettext("atlanteans_building", "You must not assume Atlanteans will play everything soft, there are hard times we cannot avoid."),
-            -- TRANSLATORS: Note lore_autor for an atlantean production site: Quarry
+            -- TRANSLATORS: Note lore_autor for an Atlantean production site: Quarry
             lore_author = pgettext("atlanteans_building", "Priest of Satul asked why stones are needed for buildings")
          }
       },
       {
          name = "atlanteans_woodcutters_house",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Woodcutter's House
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Woodcutter's House
             purpose = pgettext("building", "Fells trees in the surrounding area and processes them into logs."),
-            -- TRANSLATORS: Note helptext for an atlantean production site: Woodcutter's House
+            -- TRANSLATORS: Note helptext for an Atlantean production site: Woodcutter's House
             note = pgettext("atlanteans_building", "The woodcutter’s house needs trees to fell within the work area."),
-            -- TRANSLATORS: Note lore for an atlantean production site: Woodcutter's House
+            -- TRANSLATORS: Note lore for an Atlantean production site: Woodcutter's House
             lore = pgettext("atlanteans_building", "We want to fell trees in a clean and dignified way, therefore we use saws. An ax is a tool used by other tribes only."),
-            -- TRANSLATORS: Note lore_autor for an atlantean production site: Woodcutter's House
+            -- TRANSLATORS: Note lore_autor for an Atlantean production site: Woodcutter's House
             lore_author = pgettext("atlanteans_building", "Atlantean woodcutter asked why saws are used to cut trees")
          }
       },
       {
          name = "atlanteans_foresters_house",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Forester's House
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Forester's House
             purpose = pgettext("building", "Plants trees in the surrounding area."),
-            -- TRANSLATORS: Note helptext for an atlantean production site: Forester's House
+            -- TRANSLATORS: Note helptext for an Atlantean production site: Forester's House
             note = pgettext("atlanteans_building", "The forester’s house needs free space within the work area to plant the trees."),
-            -- TRANSLATORS: Note lore for an atlantean production site: Forester's House
+            -- TRANSLATORS: Note lore for an Atlantean production site: Forester's House
             lore = pgettext("atlanteans_building", [[‘Only after the last tree has been cut<br>]] ..
                                           [[Only after the last forest was devastated<br>]] ..
                                           [[Only after the last piece of green has become bare soil<br>]] ..
                                           [[Then will you find that nature needs to be cared for.’]]),
-            -- TRANSLATORS: Note lore_autor for an atlantean production site: Forester's House
+            -- TRANSLATORS: Note lore_autor for an Atlantean production site: Forester's House
             lore_author = pgettext("atlanteans_building", "Prophecy of the foresters’ guild")
          }
       },
       {
          name = "atlanteans_fishers_house",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Fisher's House
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Fisher's House
             purpose = pgettext("atlanteans_building", "Fishes on the coast near the fisher’s house."),
             note = {
-               -- TRANSLATORS: Note helptext for an atlantean production site: Fisher's House, part 1
+               -- TRANSLATORS: Note helptext for an Atlantean production site: Fisher's House, part 1
                pgettext("atlanteans_building", "The fisher’s house needs water full of fish within the work area."),
-               -- TRANSLATORS: Note helptext for an atlantean production site: Fisher's House, part 2
+               -- TRANSLATORS: Note helptext for an Atlantean production site: Fisher's House, part 2
                pgettext("atlanteans_building", "Build a fish breeder’s house close to the fisher’s house to make sure that you don’t run out of fish.")
             },
-            -- TRANSLATORS: Note lore for an atlantean production site: Fisher's House use some local fise song as you like
+            -- TRANSLATORS: Note lore for an Atlantean production site: Fisher's House use some local fise song as you like
             lore = pgettext("atlanteans_building", [[‘Take your net and come to the sea<br>]] ..
                                           [[In the early morning the moon ya still see<br>]] ..
                                           [[Collect ya catch by net or by spear,<br>]] ..
                                           [[and don’t forget to give Satul his share.’]]),
-            -- TRANSLATORS: Note lore_autor for an atlantean production site: Fisher's House
+            -- TRANSLATORS: Note lore_autor for an Atlantean production site: Fisher's House
             lore_author = pgettext("atlanteans_building", "A song from the fishers’ guild")
          }
       },
       {
          name = "atlanteans_fishbreeders_house",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Fish Breeder's House
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Fish Breeder's House
             purpose = pgettext("building", "Breeds fish."),
-            -- TRANSLATORS: Note helptext for an atlantean production site: Fish Breeder's House
+            -- TRANSLATORS: Note helptext for an Atlantean production site: Fish Breeder's House
             note = pgettext("atlanteans_building", "The fish breeder needs open access to the coast."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site: Fish Breeder's House
+            -- TRANSLATORS: Lore helptext for an Atlantean production site: Fish Breeder's House
             lore = pgettext("atlanteans_building", [[‘Only after the last duck has been shot down<br>]] ..
                                           [[Only after the last deer has been put to death<br>]] ..
                                           [[Only after the last fish has been caught<br>]] ..
                                           [[Then will you find that spiders are not to be eaten.’]]),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: Fish Breeder's House
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Fish Breeder's House
             lore_author = pgettext("atlanteans_building", "Prophecy of the fish breeders")
          }
       },
       {
          name = "atlanteans_hunters_house",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Hunter's House
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Hunter's House
             purpose = pgettext("building", "Hunts animals to produce meat."),
-            -- TRANSLATORS: Note helptext for an atlantean production site: Hunter's House
+            -- TRANSLATORS: Note helptext for an Atlantean production site: Hunter's House
             note = pgettext("atlanteans_building", "The hunter’s house needs animals to hunt within the work area."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site: Hunter's House
+            -- TRANSLATORS: Lore helptext for an Atlantean production site: Hunter's House
             lore = pgettext("atlanteans_building", "Sometimes we end up in a region with no fish, so we must hunt. "..
                                                    "Game will reproduce by itself, if not hunted too much. But yes, fish is our main meal."),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: Hunter's House
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Hunter's House
             lore_author = pgettext("atlanteans_building", "Hunter answering a fisher")
          }
       },
       {
          name = "atlanteans_well",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Well
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Well
             purpose = pgettext("building", "Draws water out of the deep."),
-            -- TRANSLATORS: Note helptext for an atlantean production site: Well
+            -- TRANSLATORS: Note helptext for an Atlantean production site: Well
             note = pgettext("atlanteans_building", "I hope you have checked this spot with a geologist."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site: Well
+            -- TRANSLATORS: Lore helptext for an Atlantean production site: Well
             lore = pgettext("atlanteans_building", "Well, there is no wellbeing without a well."),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: Well
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Well
             lore_author = pgettext("atlanteans_building", "Water carrier muttering to himself")
          }
       },
       {
          name = "atlanteans_gold_spinning_mill",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Gold Spinning Mill
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Gold Spinning Mill
             purpose = pgettext("atlanteans_building", "Spins gold thread out of gold."),
-            -- TRANSLATORS: Note helptext for an atlantean production site: Gold Spinning Mill
+            -- TRANSLATORS: Note helptext for an Atlantean production site: Gold Spinning Mill
             note = pgettext("atlanteans_building", "Do not build until you have a steady gold supply."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site: Gold Spinning Mill
+            -- TRANSLATORS: Lore helptext for an Atlantean production site: Gold Spinning Mill
             lore = pgettext("atlanteans_building", "No, we can’t spin gold thread from straw. We need real gold. What kind of fairy tale did you get that idea from?"),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: Gold Spinning Mill
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Gold Spinning Mill
             lore_author = pgettext("atlanteans_building", "Painted on a gold spinning mill without supplies")
          }
       },
       {
          name = "atlanteans_scouts_house",
          helptexts = {
-            -- TRANSLATORS: Special helptext for an atlantean production site: Scout's House without road connection
+            -- TRANSLATORS: Special helptext for an Atlantean production site: Scout's House without road connection
             no_scouting_building_connected = pgettext("atlanteans_building", "You need to connect this flag to a scout’s house before you can send a scout here."),
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Scout's House
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Scout's House
             purpose = pgettext("building", "Explores unknown territory."),
-            -- TRANSLATORS: Note helptext for an atlantean production site: Scout's House
+            -- TRANSLATORS: Note helptext for an Atlantean production site: Scout's House
             note = pgettext("atlanteans_building", "Will need fish and bread to have his meal the Atlantean way."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site:  Scout's House
+            -- TRANSLATORS: Lore helptext for an Atlantean production site:  Scout's House
             lore = pgettext("atlanteans_building", "You do not see everything from your high towers. Sometimes you need someone to find out in person, that’s me!"),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site:  Scout's House
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site:  Scout's House
             lore_author = pgettext("atlanteans_building", "A scout answering a soldier")
          }
       },
@@ -1608,24 +1608,24 @@ wl.Descriptions():new_tribe {
       {
          name = "atlanteans_sawmill",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Sawmill
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Sawmill
             purpose = pgettext("building", "Saws logs to produce planks."),
-            -- TRANSLATORS: Note helptext for an atlantean production site: Sawmill
+            -- TRANSLATORS: Note helptext for an Atlantean production site: Sawmill
             note = pgettext("atlanteans_building", "Will need at least four woodcutters for a constant supply of planks."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site:  Sawmill
+            -- TRANSLATORS: Lore helptext for an Atlantean production site:  Sawmill
             lore = pgettext("atlanteans_building", "The design of our sawmills makes operation simple, yet powerful. Patent pending."),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site:  Sawmill
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site:  Sawmill
             lore_author = pgettext("atlanteans_building", "Askadus, Inventor of the vertical axis windmill")
          }
       },
       {
          name = "atlanteans_smokery",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Smokery
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Smokery
             purpose = pgettext("atlanteans_building", "Smokes meat and fish to feed the scouts and miners and to train soldiers in the dungeon and labyrinth."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site:  Smokery
+            -- TRANSLATORS: Lore helptext for an Atlantean production site:  Smokery
             lore = pgettext("atlanteans_building", "We are using pure logs, no other ingredients! Which drunken foreigner hath told you that myth?"),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site:  Smokery
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site:  Smokery
             lore_author = pgettext("atlanteans_building", "A Smoker answering a passer-by")
 
          }
@@ -1633,41 +1633,41 @@ wl.Descriptions():new_tribe {
       {
          name = "atlanteans_mill",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Mill
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Mill
             purpose = pgettext("atlanteans_building", "Grinds blackroots and corn to produce blackroot flour and cornmeal, respectively."),
-            -- TRANSLATORS: Note helptext for an atlantean production site: Mill
+            -- TRANSLATORS: Note helptext for an Atlantean production site: Mill
             note = pgettext("atlanteans_building", "When no cornmeal is required, the mill will try to produce blackroot flour even when there is no demand for it."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site:  Mill
+            -- TRANSLATORS: Lore helptext for an Atlantean production site:  Mill
             lore = pgettext("atlanteans_building", "We invented this vertical axis design first, the sawmill just copied our ideas but never acknowledged our claim."),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: Mill
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Mill
             lore_author = pgettext("atlanteans_building", "Miller arguing with a sawyer")
          }
       },
       {
          name = "atlanteans_bakery",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Bakery
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Bakery
             purpose = pgettext("atlanteans_building", "Bakes bread to feed the scouts and miners and to train soldiers."),
-            -- TRANSLATORS: Note helptext for an atlantean production site: Bakery
+            -- TRANSLATORS: Note helptext for an Atlantean production site: Bakery
             note = pgettext("atlanteans_building", "Will need cornmeal and blackroot flour."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site:  Bakery
+            -- TRANSLATORS: Lore helptext for an Atlantean production site:  Bakery
             lore = pgettext("atlanteans_building", "You cannot compare our bread to anything from those other tribes. This recipe was inherited for generations. "..
                                                    "It is more nutritious than that paper-like bread you find elsewhere. And it is needed for the personal rite "..
                                                    "of preparing one’s meal. May Satul bless you."),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: Bakery
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Bakery
             lore_author = pgettext("atlanteans_building", "Head of the bakers’ guild")
          }
       },
       {
          name = "atlanteans_charcoal_kiln",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Charcoal Kiln
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Charcoal Kiln
             purpose = pgettext("building", "Burns logs into charcoal."),
-            -- TRANSLATORS: Note helptext for an atlantean production site: Charcoal Kiln
+            -- TRANSLATORS: Note helptext for an Atlantean production site: Charcoal Kiln
             note = pgettext("atlanteans_building", "Build only if you absolutely must produce some coal, or when you have a very large amount of logs."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site: Charcoal Kiln
+            -- TRANSLATORS: Lore helptext for an Atlantean production site: Charcoal Kiln
             lore = pgettext("atlanteans_building", "We must admit that this business is not really the Atlantean way, but in times of need we do what’s necessary."),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: Charcoal Kiln
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Charcoal Kiln
             lore_author = pgettext("atlanteans_building", "A black voice from inside the charcoal kiln")
 
          }
@@ -1675,33 +1675,33 @@ wl.Descriptions():new_tribe {
       {
          name = "atlanteans_smelting_works",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Smelting Works
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Smelting Works
             purpose = pgettext("building", "Smelts iron ore into iron and gold ore into gold."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site: Smelting Works
+            -- TRANSLATORS: Lore helptext for an Atlantean production site: Smelting Works
             lore = pgettext("atlanteans_building", "We learned the smelting from our forefathers, a basic craftsmanship taming the fire and the ore into pure metals."),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: Smelting Works
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Smelting Works
             lore_author = pgettext("atlanteans_building", "A member of the smelters’ guild")
          }
       },
       {
          name = "atlanteans_toolsmithy",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Toolsmithy
             purpose = pgettext("building", "Forges all the tools that your workers need."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site: Toolsmithy
+            -- TRANSLATORS: Lore helptext for an Atlantean production site: Toolsmithy
             lore = pgettext("atlanteans_building", "People’s power working for the benefit of all"),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: Toolsmithy
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Toolsmithy
             lore_author = pgettext("atlanteans_building", "Faded sign found on top of this building")
          }
       },
       {
          name = "atlanteans_weaponsmithy",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Weapon Smithy
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Weapon Smithy
             purpose = pgettext("atlanteans_building", "Forges tridents to equip the soldiers and to train their attack in the dungeon."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site:  Weapon Smithy
+            -- TRANSLATORS: Lore helptext for an Atlantean production site:  Weapon Smithy
             lore = pgettext("atlanteans_building", "You hear that sound of metal strident? The weapon smith just forged a trident!"),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: Weapon Smithy
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Weapon Smithy
             lore_author = pgettext("atlanteans_building", "Atlantean nursery rhyme")
 
          }
@@ -1709,25 +1709,25 @@ wl.Descriptions():new_tribe {
       {
          name = "atlanteans_armorsmithy",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Armor Smithy
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Armor Smithy
             purpose = pgettext("atlanteans_building", "Forges shields that are used for training soldiers’ defense in the labyrinth."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site: Armor Smithy
+            -- TRANSLATORS: Lore helptext for an Atlantean production site: Armor Smithy
             lore = pgettext("atlanteans_building", [[‘She twists and tweaks the steel with might<br>]] ..
                                           [[that soldiers may therewith once fight<br>]] ..
                                           [[most skillful foes, whose lethal lance<br>]] ..
                                           [[from this their armour off will glance!’]]),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: Armor Smithy
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Armor Smithy
             lore_author = pgettext("atlanteans_building", "Atlantean nursery rhyme")
          }
       },
       {
          name = "atlanteans_barracks",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Barracks
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Barracks
             purpose = pgettext("atlanteans_building", "Equips recruits and trains them as soldiers."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site: Barracks
+            -- TRANSLATORS: Lore helptext for an Atlantean production site: Barracks
             lore = pgettext("atlanteans_building", "See these fine silk tabards and those sharp tridents? This is your way to defend your tribe!"),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: Barracks
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Barracks
             lore_author = pgettext("atlanteans_building", "Recruiting poster")
          }
       },
@@ -1736,51 +1736,51 @@ wl.Descriptions():new_tribe {
       {
          name = "atlanteans_horsefarm",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Horse Farm
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Horse Farm
             purpose = pgettext("atlanteans_building", "Breeds the strong Atlantean horses for adding them to the transportation system."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site: Horse Farm
+            -- TRANSLATORS: Lore helptext for an Atlantean production site: Horse Farm
             lore = pgettext("atlanteans_building", "I walk all day just back and forth. I need? I need … I need a horse!"),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: Horse Farm
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Horse Farm
             lore_author = pgettext("atlanteans_building", "Busy carrier murmuring to himself")
          }
       },
       {
          name = "atlanteans_farm",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Farm
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Farm
             purpose = pgettext("atlanteans_building", "Sows and harvests corn."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site: Farm
+            -- TRANSLATORS: Lore helptext for an Atlantean production site: Farm
             lore = pgettext("atlanteans_building", "I use my feet, I use my arm, I’m caring for this farm!"),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: Farm
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Farm
             lore_author = pgettext("atlanteans_building", "Atlantean harvesting song"),
-            -- TRANSLATORS: Performance helptext for an atlantean production site: Farm
+            -- TRANSLATORS: Performance helptext for an Atlantean production site: Farm
             performance = pgettext("atlanteans_building", "The farmer needs %1% on average to sow and harvest a sheaf of corn."):bformat(format_minutes_seconds(1, 20))
          }
       },
       {
          name = "atlanteans_blackroot_farm",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Blackroot Farm https://en.wikipedia.org/wiki/Scorzonera_hispanica
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Blackroot Farm https://en.wikipedia.org/wiki/Scorzonera_hispanica
             purpose = pgettext("atlanteans_building", "Sows and harvests blackroot."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site: Blackroot Farm
+            -- TRANSLATORS: Lore helptext for an Atlantean production site: Blackroot Farm
             lore = pgettext("atlanteans_building", "The secret of Atlantean health and strength is hidden in these roots. "..
                      "It’s not spinach, it’s not a carrot, it’s … a secret."),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: Blackroot Farm
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Blackroot Farm
             lore_author = pgettext("atlanteans_building", "Blackroot farmer asked by a foreigner"),
-            -- TRANSLATORS: Performance helptext for an atlantean production site: Blackroot Farm
+            -- TRANSLATORS: Performance helptext for an Atlantean production site: Blackroot Farm
             performance = pgettext("atlanteans_building", "The blackroot farmer needs %1% on average to sow and harvest a bundle of blackroot."):bformat(format_minutes_seconds(1, 20))
          }
       },
       {
          name = "atlanteans_spiderfarm",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Spider Farm
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Spider Farm
             purpose = pgettext("building", "Breeds spiders for silk."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site: Spider Farm
+            -- TRANSLATORS: Lore helptext for an Atlantean production site: Spider Farm
             lore = pgettext("atlanteans_building", "No, the spiders are not fed with corn. We feed it to fat grasshoppers, which in turn are digested by our spiders. "..
                                                    "We put them on a special device to gain the spider silk once a day. There is no need to spin this again. " ..
                      "The thread can directly be used by the weaving mill. Oh hello, here is one of our nice spiders … Hey! Why are you running away?"),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: Spider Farm
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Spider Farm
             lore_author = pgettext("atlanteans_building", "A spider breeder showing his farm")
 
          }
@@ -1788,12 +1788,12 @@ wl.Descriptions():new_tribe {
       {
          name = "atlanteans_weaving_mill",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Weaving Mill
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Weaving Mill
             purpose = pgettext("atlanteans_building", "Weaves spidercloth for buildings and ships’ sails, and tabards to equip and train the soldiers."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site: Weaving Mill -- listen to that song please
+            -- TRANSLATORS: Lore helptext for an Atlantean production site: Weaving Mill -- listen to that song please
             lore = pgettext("atlanteans_building", "Here are the Wide Lands where people may dwell, "..
                                                    "walking around caring everything’s well."),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: Weaving Mill
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Weaving Mill
             lore_author = pgettext("atlanteans_building", "Part of the silkweavers’ song")
          }
       },
@@ -1802,54 +1802,54 @@ wl.Descriptions():new_tribe {
       {
          name = "atlanteans_crystalmine",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Crystal Mine
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Crystal Mine
             purpose = pgettext("atlanteans_building", "Carves precious (and normal) stones out of the rock in mountain terrain."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site: Crystal Mine
+            -- TRANSLATORS: Lore helptext for an Atlantean production site: Crystal Mine
             lore = pgettext("atlanteans_building", "Only the pure, white stones Diamond and Quartz will enlighten our people. "..
                                                    "Thus, every major building will need them so the inhabitants may worship Satul to warm them."),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: Crystal Mine
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Crystal Mine
             lore_author = pgettext("atlanteans_building", "First part of the Atlantean almanach on architecture")
          }
       },
       {
          name = "atlanteans_coalmine",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Coal Mine
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Coal Mine
             purpose = pgettext("building", "Digs coal out of the ground in mountain terrain."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site: Coal Mine
+            -- TRANSLATORS: Lore helptext for an Atlantean production site: Coal Mine
             lore = pgettext("atlanteans_building", [[‘Way down here in this deep mine<br>]] ..
                                           [[where the sun it dare not shine,<br>]] ..
                                           [[I sweat and toil till day is done,<br>]] ..
                                           [[but I’ll be back with morning come.’]]),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site:  Coal Mine
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site:  Coal Mine
             lore_author = pgettext("atlanteans_building", "Song from the miners’ guild")
          }
       },
       {
          name = "atlanteans_ironmine",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Iron Mine
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Iron Mine
             purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site: Iron Mine
+            -- TRANSLATORS: Lore helptext for an Atlantean production site: Iron Mine
            lore = pgettext("atlanteans_building", [[‘Way down here in this deep mine<br>]] ..
                                           [[where the sun it dare not shine,<br>]] ..
                                           [[I sweat and toil till day is done,<br>]] ..
                                           [[but I’ll be back with morning come.’]]),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site:  Iron Mine
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site:  Iron Mine
             lore_author = pgettext("atlanteans_building", "Song from the miners’ guild")
          }
       },
       {
          name = "atlanteans_goldmine",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Gold Mine
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Gold Mine
             purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site: Gold Mine
+            -- TRANSLATORS: Lore helptext for an Atlantean production site: Gold Mine
             lore = pgettext("atlanteans_building", [[‘Way down here in these golden grounds<br>]] ..
                                           [[with stones above us the thousand pounds<br>]] ..
                                           [[I dig in the dust until I see the spark;<br>]] ..
                                           [[The golden ore I find in the dark.’]]),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: Gold Mine
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Gold Mine
             lore_author = pgettext("atlanteans_building", "Miner’s prayer")
 
          }
@@ -1860,14 +1860,14 @@ wl.Descriptions():new_tribe {
          name = "atlanteans_dungeon",
          helptexts = {
             purpose = {
-               -- TRANSLATORS: Purpose helptext for an atlantean training site: Dungeon, part 1
+               -- TRANSLATORS: Purpose helptext for an Atlantean training site: Dungeon, part 1
                pgettext("atlanteans_building", "Trains soldiers in ‘Attack’."),
-               -- TRANSLATORS: Purpose helptext for an atlantean training site: Dungeon, part 2
+               -- TRANSLATORS: Purpose helptext for an Atlantean training site: Dungeon, part 2
                pgettext("atlanteans_building", "Equips the soldiers with all necessary weapons and armor parts.")
             },
-            -- TRANSLATORS: Lore helptext for an atlantean production site: Dungeon
+            -- TRANSLATORS: Lore helptext for an Atlantean production site: Dungeon
             lore = pgettext("atlanteans_building", "Make our enemies feel the pain, so enter here to gain your train!"),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: Dungeon
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Dungeon
             lore_author = pgettext("atlanteans_building", "Engraving on the entrance to the dungeon")
     }
       },
@@ -1875,15 +1875,15 @@ wl.Descriptions():new_tribe {
          name = "atlanteans_labyrinth",
          helptexts = {
             purpose = {
-               -- TRANSLATORS: Purpose helptext for an atlantean training site: Labyrinth, part 1
+               -- TRANSLATORS: Purpose helptext for an Atlantean training site: Labyrinth, part 1
                pgettext("atlanteans_building", "Trains soldiers in ‘Defense’, ‘Evade’, and ‘Health’."),
-               -- TRANSLATORS: Purpose helptext for an atlantean training site: Labyrinth, part 2
+               -- TRANSLATORS: Purpose helptext for an Atlantean training site: Labyrinth, part 2
                pgettext("atlanteans_building", "Equips the soldiers with all necessary weapons and armor parts.")
             },
-            -- TRANSLATORS: Lore helptext for an atlantean production site: Labyrinth
+            -- TRANSLATORS: Lore helptext for an Atlantean production site: Labyrinth
             lore = pgettext("atlanteans_building", "Our enemies claim: we have a ruddy twisted way to fight. "..
            "Check the way we train, in this labyrinth they may be right."),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: Labyrinth
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Labyrinth
             lore_author = pgettext("atlanteans_building", "Atlantean hero after first contact with a real enemy")
          }
       },
@@ -1892,40 +1892,40 @@ wl.Descriptions():new_tribe {
       {
          name = "atlanteans_guardhouse",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean military site: Guardhouse
+            -- TRANSLATORS: Purpose helptext for an Atlantean military site: Guardhouse
             purpose = pgettext("atlanteans_building", "Garrisons soldiers to expand your territory."),
-            -- TRANSLATORS: Note helptext for an atlantean military site: Guardhouse
+            -- TRANSLATORS: Note helptext for an Atlantean military site: Guardhouse
             note = pgettext("atlanteans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow "..
                      "button to decrease the capacity. You can also click on a soldier to send him away."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site: Guardhouse
+            -- TRANSLATORS: Lore helptext for an Atlantean production site: Guardhouse
             lore = pgettext("atlanteans_building", "Hey soldier, even if this is the smallest of our military buildings you still must not sleep all day!"),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: Guardhouse
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Guardhouse
             lore_author = pgettext("atlanteans_building", "Officer visiting a remote guardhouse")
          }
       },
       {
          name = "atlanteans_guardhall",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean military site: Guardhall
+            -- TRANSLATORS: Purpose helptext for an Atlantean military site: Guardhall
             purpose = pgettext("atlanteans_building", "Garrisons soldiers to expand your territory."),
-            -- TRANSLATORS: Note helptext for an atlantean military site: Guardhall
+            -- TRANSLATORS: Note helptext for an Atlantean military site: Guardhall
             note = pgettext("atlanteans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site: Guardhall
+            -- TRANSLATORS: Lore helptext for an Atlantean production site: Guardhall
             lore = pgettext("atlanteans_building", "In this hall we praise the fight, Satul will warm us day and night."),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: Guardhall
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Guardhall
             lore_author = pgettext("atlanteans_building", "Scribbling on the wall of a guardhall")
          }
       },
       {
          name = "atlanteans_tower_small",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean military site: Small Tower
+            -- TRANSLATORS: Purpose helptext for an Atlantean military site: Small Tower
             purpose = pgettext("atlanteans_building", "Garrisons soldiers to expand your territory."),
-            -- TRANSLATORS: Note helptext for an atlantean military site: Small Tower
+            -- TRANSLATORS: Note helptext for an Atlantean military site: Small Tower
             note = pgettext("atlanteans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site: Small Tower
+            -- TRANSLATORS: Lore helptext for an Atlantean production site: Small Tower
             lore = pgettext("atlanteans_building", "With three soldiers we can achieve an optimal balance between military power and building cost."),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: Small Tower
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Small Tower
             lore_author = pgettext("atlanteans_building", "Notes on the building instructions")
 
          }
@@ -1933,13 +1933,13 @@ wl.Descriptions():new_tribe {
       {
          name = "atlanteans_tower",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean military site: Tower
+            -- TRANSLATORS: Purpose helptext for an Atlantean military site: Tower
             purpose = pgettext("atlanteans_building", "Garrisons soldiers to expand your territory."),
-            -- TRANSLATORS: Note helptext for an atlantean military site: Tower
+            -- TRANSLATORS: Note helptext for an Atlantean military site: Tower
             note = pgettext("atlanteans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site: Tower
+            -- TRANSLATORS: Lore helptext for an Atlantean production site: Tower
             lore = pgettext("atlanteans_building", "All the other tribes envy us for our towers, elegant outside, comfortable inside, still perfect for defense."),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: Tower
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Tower
             lore_author = pgettext("atlanteans_building", "Soldier handing over his duties to a younger one")
 
          }
@@ -1947,15 +1947,15 @@ wl.Descriptions():new_tribe {
       {
          name = "atlanteans_tower_high",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean military site: High Tower
+            -- TRANSLATORS: Purpose helptext for an Atlantean military site: High Tower
             purpose = pgettext("atlanteans_building", "Garrisons soldiers to expand your territory."),
-            -- TRANSLATORS: Note helptext for an atlantean military site: High Tower
+            -- TRANSLATORS: Note helptext for an Atlantean military site: High Tower
             note = pgettext("atlanteans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow "..
                      "button to decrease the capacity. You can also click on a soldier to send him away."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site: High Tower
+            -- TRANSLATORS: Lore helptext for an Atlantean production site: High Tower
             lore = pgettext("atlanteans_building", "Beware our mighty high towers! From the topmost spot we can see wide into the "..
                      "lands and spot the enemy far away."),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: High Tower
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: High Tower
             lore_author = pgettext("atlanteans_building", "Soldier showing off a High Tower")
 
          }
@@ -1963,14 +1963,14 @@ wl.Descriptions():new_tribe {
       {
          name = "atlanteans_castle",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean military site: Castle
+            -- TRANSLATORS: Purpose helptext for an Atlantean military site: Castle
             purpose = pgettext("atlanteans_building", "Garrisons soldiers to expand your territory."),
-            -- TRANSLATORS: Note helptext for an atlantean military site: Castle
+            -- TRANSLATORS: Note helptext for an Atlantean military site: Castle
             note = pgettext("atlanteans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow "..
                             "button to decrease the capacity. You can also click on a soldier to send him away."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site: Castle
+            -- TRANSLATORS: Lore helptext for an Atlantean production site: Castle
             lore = pgettext("atlanteans_building", "Sometimes even we Atlanteans need to use brute force, but we always play it wisely."),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: Castle
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Castle
             lore_author = pgettext("atlanteans_building", "‘Wisdom of the Fight’ by the warriors’ guild")
          }
       },
@@ -1979,30 +1979,30 @@ wl.Descriptions():new_tribe {
       {
          name = "atlanteans_ferry_yard",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Ferry Yard
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Ferry Yard
             purpose = pgettext("building", "Builds ferries."),
-            -- TRANSLATORS: Note helptext for an atlantean production site: Ferry Yard
+            -- TRANSLATORS: Note helptext for an Atlantean production site: Ferry Yard
             note = pgettext("building", "Needs water nearby. Be aware ferries carry wares only, no workers."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site: Ferry Yard
+            -- TRANSLATORS: Lore helptext for an Atlantean production site: Ferry Yard
             lore = pgettext("atlanteans_building", [[‘Row, row, row your boat<br>]] ..
                                           [[gently ’long the shore.<br>]] ..
                                           [[Steadily steadily steadily steadily<br>]] ..
                                           [[bring the wares ashore.’]]),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: Ferry Yard
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Ferry Yard
             lore_author = pgettext("atlanteans_building", "Traditional song of the ferrymen")
          }
       },
       {
          name = "atlanteans_shipyard",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Shipyard
+            -- TRANSLATORS: Purpose helptext for an Atlantean production site: Shipyard
             purpose = pgettext("building", "Constructs ships that are used for overseas colonization and for trading between ports."),
-            -- TRANSLATORS: Lore helptext for an atlantean production site: Shipyard
+            -- TRANSLATORS: Lore helptext for an Atlantean production site: Shipyard
             lore = pgettext("atlanteans_building", [[‘Soon may the wellerman come,<br>]] ..
                                           [[to bring us bread and smoked fish.<br>]] ..
                                           [[We set sail for a faraway shore<br>]] ..
                                           [[we praise Satul the best we wish.’]]),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site: Shipyard -- not directly stolen from the wellerman song
+            -- TRANSLATORS: Lore author helptext for an Atlantean production site: Shipyard -- not directly stolen from the wellerman song
             lore_author = pgettext("atlanteans_building", "Transcript from oral tradition")
 
          }
@@ -2012,22 +2012,22 @@ wl.Descriptions():new_tribe {
       {
          name = "constructionsite",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an atlantean building: Construction Site
+            -- TRANSLATORS: Lore helptext for an Atlantean building: Construction Site
             lore = pgettext("building", "‘Don’t swear at the builder who is short of building materials.’"),
-            -- TRANSLATORS: Lore author helptext for an atlantean building: Construction Site
+            -- TRANSLATORS: Lore author helptext for an Atlantean building: Construction Site
             lore_author = pgettext("building", "Proverb widely used for impossible tasks of any kind"),
-            -- TRANSLATORS: Purpose helptext for an atlantean building: Construction Site
+            -- TRANSLATORS: Purpose helptext for an Atlantean building: Construction Site
             purpose = pgettext("building", "A new building is being built at this construction site.")
          }
       },
       {
          name = "dismantlesite",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an atlantean building: Dismantle Site
+            -- TRANSLATORS: Lore helptext for an Atlantean building: Dismantle Site
             lore = pgettext("building", "‘New paths will appear when you are willing to tear down the old.’"),
-            -- TRANSLATORS: Lore author helptext for an atlantean building: Dismantle Site
+            -- TRANSLATORS: Lore author helptext for an Atlantean building: Dismantle Site
             lore_author = pgettext("building", "Proverb"),
-            -- TRANSLATORS: Purpose helptext for an atlantean building: Dismantle Site
+            -- TRANSLATORS: Purpose helptext for an Atlantean building: Dismantle Site
             purpose = pgettext("building", "A building is being dismantled at this dismantle site, returning some of the resources that were used during this building’s construction to your tribe’s stores.")
          }
       }
@@ -2188,17 +2188,17 @@ wl.Descriptions():new_tribe {
 
    -- Productionsite status strings
 
-   -- TRANSLATORS: Productivity label on an atlantean building if there is 1 worker missing
+   -- TRANSLATORS: Productivity label on an Atlantean building if there is 1 worker missing
    productionsite_worker_missing = pgettext("atlanteans", "Worker missing"),
-   -- TRANSLATORS: Productivity label on an atlantean building if there is 1 worker coming
+   -- TRANSLATORS: Productivity label on an Atlantean building if there is 1 worker coming
    productionsite_worker_coming = pgettext("atlanteans", "Worker is coming"),
-   -- TRANSLATORS: Productivity label on an atlantean building if there is more than 1 worker missing. If you need plural forms here, please let us know.
+   -- TRANSLATORS: Productivity label on an Atlantean building if there is more than 1 worker missing. If you need plural forms here, please let us know.
    productionsite_workers_missing = pgettext("atlanteans", "Workers missing"),
-   -- TRANSLATORS: Productivity label on an atlantean building if there is more than 1 worker coming. If you need plural forms here, please let us know.
+   -- TRANSLATORS: Productivity label on an Atlantean building if there is more than 1 worker coming. If you need plural forms here, please let us know.
    productionsite_workers_coming = pgettext("atlanteans", "Workers are coming"),
-   -- TRANSLATORS: Productivity label on an atlantean building if there is 1 experienced worker missing
+   -- TRANSLATORS: Productivity label on an Atlantean building if there is 1 experienced worker missing
    productionsite_experienced_worker_missing = pgettext("atlanteans", "Expert missing"),
-   -- TRANSLATORS: Productivity label on an atlantean building if there is more than 1 experienced worker missing. If you need plural forms here, please let us know.
+   -- TRANSLATORS: Productivity label on an Atlantean building if there is more than 1 experienced worker missing. If you need plural forms here, please let us know.
    productionsite_experienced_workers_missing = pgettext("atlanteans", "Experts missing"),
 
    -- Soldier strings to be used in Military Status strings

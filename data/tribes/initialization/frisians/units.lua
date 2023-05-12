@@ -1392,14 +1392,14 @@ wl.Descriptions():new_tribe {
       {
          name = "cornfield_medium",
          helptexts = {
-            -- TRANSLATORS: Helptext for a an atlantean immovable usable by frisians: Corn Field
+            -- TRANSLATORS: Helptext for a an Atlantean immovable usable by Frisians: Corn Field
             purpose = _("This field is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
          name = "blackrootfield_medium",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable usable by frisians: Blackroot Field
+            -- TRANSLATORS: Helptext for an Atlantean immovable usable by Frisians: Blackroot Field
             purpose = _("This field is flowering. Honey can be produced from it by a beekeeper.")
          }
       },

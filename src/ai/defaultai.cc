@@ -1080,7 +1080,7 @@ void DefaultAI::late_initialization() {
 		         tribe_->name().c_str());
 	}
 
-	// atlanteans they consider water as a resource
+	// the Atlanteans consider water as a resource
 	// (together with mines, rocks and wood)
 	// TODO(hessenfarmer): this should be moved from hardcoded to configurable / detectable
 	if (tribe_->name() == "atlanteans" || tribe_->name() == "amazons") {
@@ -1729,7 +1729,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			   find_open_water);
 		}
 
-		if (resource_necessity_water_needed_) {  // for atlanteans
+		if (resource_necessity_water_needed_) {  // for the Atlanteans
 			field.distant_water =
 			   map.find_fields(
 			      game(), Widelands::Area<Widelands::FCoords>(field.coords, kDistantResourcesArea),
