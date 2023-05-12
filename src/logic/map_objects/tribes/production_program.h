@@ -244,7 +244,7 @@ struct ProductionProgram : public MapObjectProgram {
 
 		/// Tests whether a nearby fleet needs a ship or ferry.
 		struct FleetNeeds : public Condition {
-			enum class Type {kShip, kFerry};
+			enum class Type { kShip, kFerry };
 			explicit FleetNeeds(Type t) : type_(t) {
 			}
 

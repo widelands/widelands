@@ -44,7 +44,8 @@ namespace {
 // Every MapObject() needs to have a description. So we make a dummy one for
 // Fleet.
 ShipFleetDescr g_ship_fleet_descr("ship_fleet", "Ship Fleet");
-ShipFleetYardInterfaceDescr g_ship_fleet_yard_interface_descr("ship_fleet_yard_interface", "Ship Fleet Yard Interface");
+ShipFleetYardInterfaceDescr g_ship_fleet_yard_interface_descr("ship_fleet_yard_interface",
+                                                              "Ship Fleet Yard Interface");
 }  // namespace
 
 const ShipFleetDescr& ShipFleet::descr() const {
@@ -771,8 +772,9 @@ void ShipFleet::act(Game& game, uint32_t /*data*/) {
 void ShipFleet::log_general_info(const EditorGameBase& egbase) const {
 	MapObject::log_general_info(egbase);
 
-	molog(egbase.get_gametime(), "%" PRIuS " ships and %" PRIuS " ports and %" PRIuS " shipyard interfaces\n", ships_.size(),
-	      ports_.size(), interfaces_.size());
+	molog(egbase.get_gametime(),
+	      "%" PRIuS " ships and %" PRIuS " ports and %" PRIuS " shipyard interfaces\n",
+	      ships_.size(), ports_.size(), interfaces_.size());
 	molog(egbase.get_gametime(), "Schedule:\n");
 	schedule_.log_general_info(egbase);
 	molog(egbase.get_gametime(), "\n");
@@ -781,7 +783,8 @@ void ShipFleet::log_general_info(const EditorGameBase& egbase) const {
 ShipFleetYardInterface::ShipFleetYardInterface() : Bob(g_ship_fleet_yard_interface_descr) {
 }
 
-ShipFleetYardInterface* ShipFleetYardInterface::create(EditorGameBase& egbase, ProductionSite& ps, const Coords& pos) {
+ShipFleetYardInterface*
+ShipFleetYardInterface::create(EditorGameBase& egbase, ProductionSite& ps, const Coords& pos) {
 	ShipFleetYardInterface* interface = new ShipFleetYardInterface();
 	interface->set_owner(ps.get_owner());
 	interface->set_position(egbase, pos);
@@ -811,7 +814,8 @@ void ShipFleetYardInterface::cleanup(EditorGameBase& egbase) {
 
 void ShipFleetYardInterface::log_general_info(const EditorGameBase& egbase) const {
 	Bob::log_general_info(egbase);
-	molog(egbase.get_gametime(), "Interface to building %u at %3dx%3d\n", building_->serial(), building_->get_position().x, building_->get_position().y);
+	molog(egbase.get_gametime(), "Interface to building %u at %3dx%3d\n", building_->serial(),
+	      building_->get_position().x, building_->get_position().y);
 }
 
 // Changelog of version 4 → 5: Added ShippingSchedule
@@ -962,7 +966,8 @@ void ShipFleetYardInterface::Loader::load_pointers() {
 	interface.building_ = &mol().get<ProductionSite>(building_);
 }
 
-Bob::Loader* ShipFleetYardInterface::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {
+Bob::Loader*
+ShipFleetYardInterface::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {
 	std::unique_ptr<Loader> loader(new Loader);
 
 	try {
@@ -972,7 +977,8 @@ Bob::Loader* ShipFleetYardInterface::load(EditorGameBase& egbase, MapObjectLoade
 			loader->init(egbase, mol, *new ShipFleetYardInterface);
 			loader->load(fr);
 		} else {
-			throw UnhandledVersionError("ShipFleetYardInterface", packet_version, kCurrentPacketVersionInterface);
+			throw UnhandledVersionError(
+			   "ShipFleetYardInterface", packet_version, kCurrentPacketVersionInterface);
 		}
 	} catch (const std::exception& e) {
 		throw wexception("loading ship fleet yard interface: %s", e.what());

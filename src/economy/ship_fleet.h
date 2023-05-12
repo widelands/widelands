@@ -50,7 +50,10 @@ private:
 class ShipFleetYardInterfaceDescr : public BobDescr {
 public:
 	ShipFleetYardInterfaceDescr(char const* const init_name, char const* const init_descname)
-	   : BobDescr(init_name, init_descname, MapObjectType::SHIP_FLEET_YARD_INTERFACE, MapObjectDescr::OwnerType::kTribe) {
+	   : BobDescr(init_name,
+	              init_descname,
+	              MapObjectType::SHIP_FLEET_YARD_INTERFACE,
+	              MapObjectDescr::OwnerType::kTribe) {
 	}
 	~ShipFleetYardInterfaceDescr() override = default;
 	[[nodiscard]] Bob& create_object() const override;
@@ -186,7 +189,8 @@ public:
 class ShipFleetYardInterface : public Bob {
 public:
 	ShipFleetYardInterface();
-	static ShipFleetYardInterface* create(EditorGameBase& egbase, ProductionSite& ps, const Coords& pos);
+	static ShipFleetYardInterface*
+	create(EditorGameBase& egbase, ProductionSite& ps, const Coords& pos);
 
 	const ShipFleetYardInterfaceDescr& descr() const;
 	void init_auto_task(Game& game) override;

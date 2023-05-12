@@ -204,8 +204,9 @@ bool FindNodeFerry::accept(const EditorGameBase& egbase, const FCoords& coords) 
 	}
 
 	for (Bob* bob = coords.field->get_first_bob(); bob != nullptr; bob = bob->get_next_bob()) {
-		if (bob->descr().type() == MapObjectType::FERRY_FLEET_YARD_INTERFACE && bob->owner().player_number() == player_who_needs_ferry_ &&
-				dynamic_cast<FerryFleetYardInterface*>(bob)->get_fleet()->lacks_ferry()) {
+		if (bob->descr().type() == MapObjectType::FERRY_FLEET_YARD_INTERFACE &&
+		    bob->owner().player_number() == player_who_needs_ferry_ &&
+		    dynamic_cast<FerryFleetYardInterface*>(bob)->get_fleet()->lacks_ferry()) {
 			return true;
 		}
 	}

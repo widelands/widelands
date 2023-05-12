@@ -43,7 +43,10 @@ private:
 class FerryFleetYardInterfaceDescr : public BobDescr {
 public:
 	FerryFleetYardInterfaceDescr(char const* const init_name, char const* const init_descname)
-	   : BobDescr(init_name, init_descname, MapObjectType::FERRY_FLEET_YARD_INTERFACE, MapObjectDescr::OwnerType::kTribe) {
+	   : BobDescr(init_name,
+	              init_descname,
+	              MapObjectType::FERRY_FLEET_YARD_INTERFACE,
+	              MapObjectDescr::OwnerType::kTribe) {
 	}
 	~FerryFleetYardInterfaceDescr() override = default;
 	[[nodiscard]] Bob& create_object() const override;
@@ -139,7 +142,8 @@ public:
 class FerryFleetYardInterface : public Bob {
 public:
 	FerryFleetYardInterface();
-	static FerryFleetYardInterface* create(EditorGameBase& egbase, ProductionSite& ps, const Coords& pos);
+	static FerryFleetYardInterface*
+	create(EditorGameBase& egbase, ProductionSite& ps, const Coords& pos);
 
 	const FerryFleetYardInterfaceDescr& descr() const;
 	void init_auto_task(Game& game) override;

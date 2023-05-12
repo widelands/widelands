@@ -817,10 +817,12 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 			// TODO(Nordfriese): Savegame compatibility
 			if (packet_version >= 11) {
 				for (size_t i = fr.unsigned_32(); i > 0; --i) {
-					productionsite.ship_fleet_interfaces_.push_back(&mol.get<ShipFleetYardInterface>(fr.unsigned_32()));
+					productionsite.ship_fleet_interfaces_.push_back(
+					   &mol.get<ShipFleetYardInterface>(fr.unsigned_32()));
 				}
 				for (size_t i = fr.unsigned_32(); i > 0; --i) {
-					productionsite.ferry_fleet_interfaces_.push_back(&mol.get<FerryFleetYardInterface>(fr.unsigned_32()));
+					productionsite.ferry_fleet_interfaces_.push_back(
+					   &mol.get<FerryFleetYardInterface>(fr.unsigned_32()));
 				}
 			} else {
 				productionsite.init_yard_interfaces(game);

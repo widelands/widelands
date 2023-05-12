@@ -41,7 +41,8 @@ namespace Widelands {
 namespace {
 // Every MapObject() needs to have a description. So we make some dummy singletons.
 FerryFleetDescr g_ferry_fleet_descr("ferry_fleet", "Ferry Fleet");
-FerryFleetYardInterfaceDescr g_ferry_fleet_yard_interface_descr("ferry_fleet_yard_interface", "Ferry Fleet Yard Interface");
+FerryFleetYardInterfaceDescr g_ferry_fleet_yard_interface_descr("ferry_fleet_yard_interface",
+                                                                "Ferry Fleet Yard Interface");
 }  // namespace
 
 const FerryFleetDescr& FerryFleet::descr() const {
@@ -480,7 +481,8 @@ void FerryFleet::log_general_info(const EditorGameBase& egbase) const {
 		molog(egbase.get_gametime(), "* Ferry %u\n", f->serial());
 	}
 	for (const FerryFleetYardInterface* i : interfaces_) {
-		molog(egbase.get_gametime(), "* Interface %u to %u\n", i->serial(), i->get_building()->serial());
+		molog(
+		   egbase.get_gametime(), "* Interface %u to %u\n", i->serial(), i->get_building()->serial());
 	}
 	for (const auto& pair : pending_ferry_requests_) {
 		molog(egbase.get_gametime(), "* Waterway %u (requested at %u)\n", pair.second->serial(),
@@ -491,7 +493,8 @@ void FerryFleet::log_general_info(const EditorGameBase& egbase) const {
 FerryFleetYardInterface::FerryFleetYardInterface() : Bob(g_ferry_fleet_yard_interface_descr) {
 }
 
-FerryFleetYardInterface* FerryFleetYardInterface::create(EditorGameBase& egbase, ProductionSite& ps, const Coords& pos) {
+FerryFleetYardInterface*
+FerryFleetYardInterface::create(EditorGameBase& egbase, ProductionSite& ps, const Coords& pos) {
 	FerryFleetYardInterface* interface = new FerryFleetYardInterface();
 	interface->set_owner(ps.get_owner());
 	interface->set_position(egbase, pos);
@@ -521,7 +524,8 @@ void FerryFleetYardInterface::cleanup(EditorGameBase& egbase) {
 
 void FerryFleetYardInterface::log_general_info(const EditorGameBase& egbase) const {
 	Bob::log_general_info(egbase);
-	molog(egbase.get_gametime(), "Interface to building %u at %3dx%3d\n", building_->serial(), building_->get_position().x, building_->get_position().y);
+	molog(egbase.get_gametime(), "Interface to building %u at %3dx%3d\n", building_->serial(),
+	      building_->get_position().x, building_->get_position().y);
 }
 
 constexpr uint8_t kCurrentPacketVersionFleet = 2;
@@ -652,7 +656,8 @@ void FerryFleetYardInterface::Loader::load_pointers() {
 	interface.building_ = &mol().get<ProductionSite>(building_);
 }
 
-Bob::Loader* FerryFleetYardInterface::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {
+Bob::Loader*
+FerryFleetYardInterface::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {
 	std::unique_ptr<Loader> loader(new Loader);
 
 	try {
@@ -662,7 +667,8 @@ Bob::Loader* FerryFleetYardInterface::load(EditorGameBase& egbase, MapObjectLoad
 			loader->init(egbase, mol, *new FerryFleetYardInterface);
 			loader->load(fr);
 		} else {
-			throw UnhandledVersionError("FerryFleetYardInterface", packet_version, kCurrentPacketVersionInterface);
+			throw UnhandledVersionError(
+			   "FerryFleetYardInterface", packet_version, kCurrentPacketVersionInterface);
 		}
 	} catch (const std::exception& e) {
 		throw wexception("loading ferry fleet yard interface: %s", e.what());

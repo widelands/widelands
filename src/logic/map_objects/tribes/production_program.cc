@@ -616,7 +616,8 @@ std::string ProductionProgram::ActReturn::FleetNeeds::description(
 
 std::string ProductionProgram::ActReturn::FleetNeeds::description_negation(
    const Descriptions& /* descriptions */) const {
-	/** TRANSLATORS: 'Completed/Skipped/Did not start ... because the fleet needs no ships/ferries'. */
+	/** TRANSLATORS: 'Completed/Skipped/Did not start ... because the fleet needs no ships/ferries'.
+	 */
 	return type_ == Type::kShip ? _("the fleet needs no ships") : _("the fleet needs no ferries");
 }
 
@@ -658,17 +659,21 @@ ProductionProgram::ActReturn::create_condition(const std::vector<std::string>& a
 		}
 		if (match_and_skip(arguments, begin, "fleet")) {
 			if (!match_and_skip(arguments, begin, "needs")) {
-				throw GameDataError("Expected 'need ship|ferry' after 'fleet' but found '%s'", begin->c_str());
+				throw GameDataError(
+				   "Expected 'need ship|ferry' after 'fleet' but found '%s'", begin->c_str());
 			}
 			if (match_and_skip(arguments, begin, "ship")) {
 				descr.has_ship_fleet_check_ = true;
-				return new ProductionProgram::ActReturn::FleetNeeds(ProductionProgram::ActReturn::FleetNeeds::Type::kShip);
+				return new ProductionProgram::ActReturn::FleetNeeds(
+				   ProductionProgram::ActReturn::FleetNeeds::Type::kShip);
 			}
 			if (match_and_skip(arguments, begin, "ferry")) {
 				descr.has_ferry_fleet_check_ = true;
-				return new ProductionProgram::ActReturn::FleetNeeds(ProductionProgram::ActReturn::FleetNeeds::Type::kFerry);
+				return new ProductionProgram::ActReturn::FleetNeeds(
+				   ProductionProgram::ActReturn::FleetNeeds::Type::kFerry);
 			}
-			throw GameDataError("Expected 'ship' or 'ferry' after 'fleet needs' but found '%s'", begin == end ? "" : begin->c_str());
+			throw GameDataError("Expected 'ship' or 'ferry' after 'fleet needs' but found '%s'",
+			                    begin == end ? "" : begin->c_str());
 		}
 		throw GameDataError("Expected not|economy|site|workers after '%s' but found '%s'",
 		                    (begin - 1)->c_str(), begin->c_str());
@@ -2109,9 +2114,7 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 	}
 
 	state.coord = candidates.at(game.logic_rand() % candidates.size())->get_position();
-	psite.working_positions_.at(psite.main_worker_)
-	   .worker.get(game)
-	   ->update_task_buildingwork(game);
+	psite.working_positions_.at(psite.main_worker_).worker.get(game)->update_task_buildingwork(game);
 }
 
 bool ProductionProgram::ActConstruct::get_building_work(Game& game,
