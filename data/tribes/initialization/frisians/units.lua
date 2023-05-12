@@ -1385,7 +1385,7 @@ wl.Descriptions():new_tribe {
       {
          name = "wheatfield_medium",
          helptexts = {
-            -- TRANSLATORS: Helptext for an Empire/barbarian immovable usable by frisians: Wheat field
+            -- TRANSLATORS: Helptext for an Empire/Barbarian immovable usable by frisians: Wheat field
             purpose = _("This field is flowering. Honey can be produced from it by a beekeeper.")
          }
       },

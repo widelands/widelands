@@ -213,7 +213,7 @@ function barbarians_thread()
       sleep(6674)
    end
 
-   -- show barbarians
+   -- show Barbarians
    local barbarians = array_combine(
       wl.Game().map:get_field(60, 61):region(6),
       wl.Game().map:get_field(60, 48):region(6)
