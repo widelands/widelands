@@ -5,8 +5,8 @@ concurrency:
 on:
   workflow_dispatch:
   schedule:
-    # Monday and Thursday at 2:00 a.m.
-    - cron: '0 2 * * 1,4'
+    # Monday, Thursday, Saturday at 2:00 a.m.
+    - cron: '0 2 * * 1,4,6'
 jobs:
   update:
     if: github.repository == 'widelands/widelands'
