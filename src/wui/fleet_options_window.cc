@@ -34,10 +34,16 @@ constexpr int kPadding = 4;
 constexpr const char kIconEndInfinity[] = "images/wui/menus/end_infinity.png";
 constexpr const char kIconInfinity[] = "images/wui/menus/infinity.png";
 
-FleetOptionsWindow& FleetOptionsWindow::create(UI::Panel* parent, InteractiveBase& ibase, Widelands::Bob* interface) {
+FleetOptionsWindow&
+FleetOptionsWindow::create(UI::Panel* parent, InteractiveBase& ibase, Widelands::Bob* interface) {
 	auto it = living_fleet_option_windows.find(interface->serial());
 	if (it == living_fleet_option_windows.end()) {
-		return *new FleetOptionsWindow(parent, ibase, interface->descr().type() == Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE ? Type::kShip : Type::kFerry, interface);
+		return *new FleetOptionsWindow(
+		   parent, ibase,
+		   interface->descr().type() == Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE ?
+            Type::kShip :
+            Type::kFerry,
+		   interface);
 	}
 
 	if (it->second->is_minimal()) {
@@ -51,21 +57,47 @@ FleetOptionsWindow::~FleetOptionsWindow() {
 	living_fleet_option_windows.erase(interface_.serial());
 }
 
-FleetOptionsWindow::FleetOptionsWindow(UI::Panel* parent, InteractiveBase& ibase, Type t, Widelands::Bob* interface)
-: UI::Window(parent, UI::WindowStyle::kWui, format("fleet_options_%u", interface->serial()), 0, 0, 100, 100,
-	       t == Type::kShip ? _("Ship Fleet Options") : _("Ferry Fleet Options")),
+FleetOptionsWindow::FleetOptionsWindow(UI::Panel* parent,
+                                       InteractiveBase& ibase,
+                                       Type t,
+                                       Widelands::Bob* interface)
+   : UI::Window(parent,
+                UI::WindowStyle::kWui,
+                format("fleet_options_%u", interface->serial()),
+                0,
+                0,
+                100,
+                100,
+                t == Type::kShip ? _("Ship Fleet Options") : _("Ferry Fleet Options")),
 
-	ibase_(ibase),
-	can_act_(ibase_.can_act(interface->owner().player_number())),
-	type_(t),
-	interface_(interface),
+     ibase_(ibase),
+     can_act_(ibase_.can_act(interface->owner().player_number())),
+     type_(t),
+     interface_(interface),
 
-	main_box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-	buttons_box_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
-	spinbox_(&buttons_box_, 0, 0, 300, 300, 0, 0, 0, UI::PanelStyle::kWui, "", UI::SpinBox::Units::kNone, UI::SpinBox::Type::kBig),
-	infinite_target_(&buttons_box_, "toggle_infinite", 0, 0, 34, 34,
-	    UI::ButtonStyle::kWuiSecondary, g_image_cache->get(kIconInfinity), _("Toggle infinite production"))
-{
+     main_box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+     buttons_box_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+     spinbox_(&buttons_box_,
+              0,
+              0,
+              300,
+              300,
+              0,
+              0,
+              0,
+              UI::PanelStyle::kWui,
+              "",
+              UI::SpinBox::Units::kNone,
+              UI::SpinBox::Type::kBig),
+     infinite_target_(&buttons_box_,
+                      "toggle_infinite",
+                      0,
+                      0,
+                      34,
+                      34,
+                      UI::ButtonStyle::kWuiSecondary,
+                      g_image_cache->get(kIconInfinity),
+                      _("Toggle infinite production")) {
 	living_fleet_option_windows.emplace(interface_.serial(), this);
 
 	const bool rtl = UI::g_fh->fontset()->is_rtl();
@@ -73,10 +105,9 @@ FleetOptionsWindow::FleetOptionsWindow(UI::Panel* parent, InteractiveBase& ibase
 	buttons_box_.add(&infinite_target_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	buttons_box_.add(&spinbox_, UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
 
-	main_box_.add(
-	   new UI::Textarea(&main_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel,
-	                    _("Fleet Statistics"), UI::Align::kCenter),
-	   UI::Box::Resizing::kFullSize);
+	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel,
+	                               _("Fleet Statistics"), UI::Align::kCenter),
+	              UI::Box::Resizing::kFullSize);
 
 	UI::Box* columns_box = new UI::Box(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 	UI::Box* column1 = new UI::Box(columns_box, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
@@ -87,9 +118,11 @@ FleetOptionsWindow::FleetOptionsWindow(UI::Panel* parent, InteractiveBase& ibase
 		column2->add_space(kPadding);
 
 		column1->add(
-				new UI::Textarea(column1, UI::PanelStyle::kWui, UI::FontStyle::kWuiInfoPanelHeading, label, UI::mirror_alignment(UI::Align::kLeft, rtl)),
-				UI::Box::Resizing::kFullSize);
-		*txt = new UI::Textarea(column2, UI::PanelStyle::kWui, UI::FontStyle::kWuiInfoPanelParagraph, "", UI::mirror_alignment(UI::Align::kRight, rtl));
+		   new UI::Textarea(column1, UI::PanelStyle::kWui, UI::FontStyle::kWuiInfoPanelHeading, label,
+		                    UI::mirror_alignment(UI::Align::kLeft, rtl)),
+		   UI::Box::Resizing::kFullSize);
+		*txt = new UI::Textarea(column2, UI::PanelStyle::kWui, UI::FontStyle::kWuiInfoPanelParagraph,
+		                        "", UI::mirror_alignment(UI::Align::kRight, rtl));
 		column2->add(*txt, UI::Box::Resizing::kFullSize);
 	};
 	if (type_ == Type::kShip) {
@@ -107,18 +140,17 @@ FleetOptionsWindow::FleetOptionsWindow(UI::Panel* parent, InteractiveBase& ibase
 
 	main_box_.add_space(kPadding * 2);
 
-	main_box_.add(
-	   new UI::Textarea(&main_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel,
-	                    type_ == Type::kShip ? _("Desired number of transport ships:") : _("Desired number of unemployed ferries:"), UI::Align::kCenter),
-	   UI::Box::Resizing::kFullSize);
+	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel,
+	                               type_ == Type::kShip ? _("Desired number of transport ships:") :
+                                                         _("Desired number of unemployed ferries:"),
+	                               UI::Align::kCenter),
+	              UI::Box::Resizing::kFullSize);
 
 	main_box_.add_space(kPadding);
 	main_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
 
 	if (can_act_) {
-		spinbox_.changed.connect([this]() {
-			set_target(spinbox_.get_value());
-		});
+		spinbox_.changed.connect([this]() { set_target(spinbox_.get_value()); });
 
 		infinite_target_.sigclicked.connect([this]() {
 			bool was_pressed = infinite_target_.style() == UI::Button::VisualState::kPermpressed;
@@ -148,12 +180,16 @@ void FleetOptionsWindow::set_target(Widelands::Quantity target) {
 	}
 
 	if (ibase_.egbase().is_game()) {
-		ibase_.game().send_player_fleet_targets(bob->owner().player_number(), interface_.serial(), target);
+		ibase_.game().send_player_fleet_targets(
+		   bob->owner().player_number(), interface_.serial(), target);
 	} else {
 		if (type_ == Type::kShip) {
-			dynamic_cast<const Widelands::ShipFleetYardInterface*>(bob)->get_fleet()->set_ships_target(ibase_.egbase(), target);
+			dynamic_cast<const Widelands::ShipFleetYardInterface*>(bob)->get_fleet()->set_ships_target(
+			   ibase_.egbase(), target);
 		} else {
-			dynamic_cast<const Widelands::FerryFleetYardInterface*>(bob)->get_fleet()->set_idle_ferries_target(ibase_.egbase(), target);
+			dynamic_cast<const Widelands::FerryFleetYardInterface*>(bob)
+			   ->get_fleet()
+			   ->set_idle_ferries_target(ibase_.egbase(), target);
 		}
 	}
 }
@@ -166,9 +202,13 @@ Widelands::Quantity FleetOptionsWindow::get_current_target() const {
 	}
 
 	if (type_ == Type::kShip) {
-		return dynamic_cast<const Widelands::ShipFleetYardInterface*>(bob)->get_fleet()->get_ships_target();
+		return dynamic_cast<const Widelands::ShipFleetYardInterface*>(bob)
+		   ->get_fleet()
+		   ->get_ships_target();
 	}
-	return dynamic_cast<const Widelands::FerryFleetYardInterface*>(bob)->get_fleet()->get_idle_ferries_target();
+	return dynamic_cast<const Widelands::FerryFleetYardInterface*>(bob)
+	   ->get_fleet()
+	   ->get_idle_ferries_target();
 }
 
 void FleetOptionsWindow::think() {
@@ -186,18 +226,19 @@ void FleetOptionsWindow::think() {
 	const bool infinite = current_target == Widelands::kEconomyTargetInfinity;
 
 	if (type_ == Type::kShip) {
-		const Widelands::ShipFleet* fleet = dynamic_cast<const Widelands::ShipFleetYardInterface*>(bob)->get_fleet();
+		const Widelands::ShipFleet* fleet =
+		   dynamic_cast<const Widelands::ShipFleetYardInterface*>(bob)->get_fleet();
 
 		txt_ships_->set_text(as_string(fleet->count_ships()));
 		txt_ports_->set_text(as_string(fleet->count_ports()));
 
 	} else {
-		const Widelands::FerryFleet* fleet = dynamic_cast<const Widelands::FerryFleetYardInterface*>(bob)->get_fleet();
+		const Widelands::FerryFleet* fleet =
+		   dynamic_cast<const Widelands::FerryFleetYardInterface*>(bob)->get_fleet();
 
 		txt_ferries_total_->set_text(as_string(fleet->count_ferries()));
 		txt_ferries_unemployed_->set_text(as_string(fleet->count_unemployed_ferries()));
 		txt_waterways_lacking_->set_text(as_string(fleet->count_unattended_waterways()));
-
 	}
 
 	if (can_act_) {
@@ -220,7 +261,8 @@ void FleetOptionsWindow::think() {
 }
 
 constexpr uint16_t kCurrentPacketVersion = 1;
-UI::Window& FleetOptionsWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::MapObjectLoader& mol) {
+UI::Window&
+FleetOptionsWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {

@@ -504,16 +504,16 @@ void FieldActionWindow::add_buttons_auto() {
 		    !has_ship_fleet &&
 		    (ipl == nullptr || bob->owner().player_number() == ipl->player_number())) {
 			has_ship_fleet = true;
-			add_button(buildbox, "configure_ship_fleet", "images/wui/fieldaction/menu_tab_ship_targets.png",
-			           &FieldActionWindow::act_configure_ship_fleet,
-			           _("Configure this ocean’s ship fleet"));
+			add_button(
+			   buildbox, "configure_ship_fleet", "images/wui/fieldaction/menu_tab_ship_targets.png",
+			   &FieldActionWindow::act_configure_ship_fleet, _("Configure this ocean’s ship fleet"));
 		} else if (bob->descr().type() == Widelands::MapObjectType::FERRY_FLEET_YARD_INTERFACE &&
 		           !has_ferry_fleet &&
 		           (ipl == nullptr || bob->owner().player_number() == ipl->player_number())) {
 			has_ferry_fleet = true;
-			add_button(buildbox, "configure_ferry_fleet", "images/wui/fieldaction/menu_tab_ferry_targets.png",
-			           &FieldActionWindow::act_configure_ferry_fleet,
-			           _("Configure this ocean’s ferry fleet"));
+			add_button(
+			   buildbox, "configure_ferry_fleet", "images/wui/fieldaction/menu_tab_ferry_targets.png",
+			   &FieldActionWindow::act_configure_ferry_fleet, _("Configure this ocean’s ferry fleet"));
 		}
 	}
 

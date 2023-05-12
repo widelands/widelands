@@ -30,11 +30,10 @@ class InteractiveBase;
 
 class FleetOptionsWindow : public UI::Window {
 public:
-	enum class Type {kShip, kFerry};
+	enum class Type { kShip, kFerry };
 
-	static FleetOptionsWindow& create(UI::Panel* parent,
-	                                  InteractiveBase& ibase,
-	                                  Widelands::Bob* interface);
+	static FleetOptionsWindow&
+	create(UI::Panel* parent, InteractiveBase& ibase, Widelands::Bob* interface);
 	~FleetOptionsWindow() override;
 
 	UI::Panel::SaveType save_type() const override {
@@ -47,10 +46,7 @@ protected:
 	void think() override;
 
 private:
-	FleetOptionsWindow(UI::Panel* parent,
-	                   InteractiveBase& ibase,
-	                   Type t,
-	                   Widelands::Bob* interface);
+	FleetOptionsWindow(UI::Panel* parent, InteractiveBase& ibase, Type t, Widelands::Bob* interface);
 
 	void set_target(Widelands::Quantity target);
 	Widelands::Quantity get_current_target() const;
