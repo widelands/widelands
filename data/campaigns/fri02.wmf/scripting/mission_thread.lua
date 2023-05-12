@@ -273,7 +273,7 @@ function supply_murilius()
    while not p3.defeated do sleep(4513) end
    set_objective_done(o)
 
-   -- If the barbarians already defeated Murilius – well done.
+   -- If the Barbarians already defeated Murilius – well done.
    -- Otherwise, Murilius provokes Reebaud into ordering the player to conquer his entire colony
    -- (merely defeating the Empire isn’t enough).
    -- We don't bother to check water, walkable-only and other useless terrains.
