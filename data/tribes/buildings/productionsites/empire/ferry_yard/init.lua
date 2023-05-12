@@ -66,8 +66,8 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
-            "return=skipped unless fleet needs ferry",
             "sleep=duration:20s",
+            "return=skipped unless fleet needs ferry",
             "consume=log:2 cloth",
             "callworker=buildferry"
          }
