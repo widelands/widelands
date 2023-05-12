@@ -594,14 +594,20 @@ std::string ProductionProgram::ActReturn::WorkersNeedExperience::description_neg
 bool ProductionProgram::ActReturn::FleetNeeds::evaluate(const ProductionSite& ps) const {
 	if (type_ == Type::kShip) {
 		for (ShipFleetYardInterface* interface : ps.get_ship_fleet_interfaces()) {
-			if (interface->get_fleet()->lacks_ship()) {
-				return true;
+			if (interface->get_fleet()->lacks_ship() || ps.infinite_production()) {
+				BaseImmovable* immo = interface->get_position().field->get_immovable();
+				if (immo == nullptr || immo->get_size() == BaseImmovable::Size::NONE) {
+					return true;
+				}
 			}
 		}
 	} else {
 		for (FerryFleetYardInterface* interface : ps.get_ferry_fleet_interfaces()) {
-			if (interface->get_fleet()->lacks_ferry()) {
-				return true;
+			if (interface->get_fleet()->lacks_ferry() || ps.infinite_production()) {
+				BaseImmovable* immo = interface->get_position().field->get_immovable();
+				if (immo == nullptr || immo->get_size() == BaseImmovable::Size::NONE) {
+					return true;
+				}
 			}
 		}
 	}
@@ -662,6 +668,7 @@ ProductionProgram::ActReturn::create_condition(const std::vector<std::string>& a
 				throw GameDataError(
 				   "Expected 'needs ship|ferry' after 'fleet' but found '%s'", begin->c_str());
 			}
+			descr.set_infinite_production_useful(true);
 			if (match_and_skip(arguments, begin, "ship")) {
 				descr.has_ship_fleet_check_ = true;
 				return new ProductionProgram::ActReturn::FleetNeeds(
