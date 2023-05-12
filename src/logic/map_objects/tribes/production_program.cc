@@ -660,7 +660,7 @@ ProductionProgram::ActReturn::create_condition(const std::vector<std::string>& a
 		if (match_and_skip(arguments, begin, "fleet")) {
 			if (!match_and_skip(arguments, begin, "needs")) {
 				throw GameDataError(
-				   "Expected 'need ship|ferry' after 'fleet' but found '%s'", begin->c_str());
+				   "Expected 'needs ship|ferry' after 'fleet' but found '%s'", begin->c_str());
 			}
 			if (match_and_skip(arguments, begin, "ship")) {
 				descr.has_ship_fleet_check_ = true;

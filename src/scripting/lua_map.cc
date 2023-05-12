@@ -2379,6 +2379,9 @@ int LuaMapObjectDescription::get_name(lua_State* L) {
         * :const:`battle`, holds information about two soldiers in a fight,
         * :const:`ship_fleet`, holds information for managing ships and ports,
         * :const:`ferry_fleet`, holds information for managing ferries and waterways.
+        * :const:`ship_fleet_yard_interface`, links a shipyard to a ship fleet.
+        * :const:`ferry_fleet_yard_interface`, links a ferry yard to a ferry fleet.
+        * :const:`pinned_note`, a textual note pinned to a field by the player.
 
       Example to fetch some information from a tribe's description:
 
