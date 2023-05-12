@@ -57,9 +57,9 @@ wl.Descriptions():new_productionsite_type {
          actions = {
             "return=skipped unless economy needs planks",
             "consume=log:2",
-            "sleep=duration:16s500ms", -- Much faster than barbarians' wood hardener
+            "sleep=duration:16s500ms", -- Much faster than Barbarians' wood hardener
             "playsound=sound/sawmill/sawmill priority:40% allow_multiple",
-            "animate=working duration:20s", -- Much faster than barbarians' wood hardener
+            "animate=working duration:20s", -- Much faster than Barbarians' wood hardener
             "produce=planks"
          }
       },

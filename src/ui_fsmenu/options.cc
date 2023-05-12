@@ -902,7 +902,7 @@ void OptionsCtrl::save_options() {
 	// Language options
 	opt_section_.set_string("language", opt.language);
 
-	WLApplication::get()->set_input_grab(opt.inputgrab);
+	WLApplication::get().set_input_grab(opt.inputgrab);
 	g_mouse_cursor->set_use_sdl(opt_dialog_->get_values().sdl_cursor);
 	i18n::set_locale(opt.language);
 	UI::g_fh->reinitialize_fontset(i18n::get_locale());

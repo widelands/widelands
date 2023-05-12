@@ -136,6 +136,10 @@ void terminate(int /*unused*/) {
 }
 #endif
 
+void toggle_verbose(int /*unused*/) {
+	g_verbose = !g_verbose;
+}
+
 bool is_absolute_path(const std::string& path) {
 	std::regex re("^/|\\w:");
 	return std::regex_search(path.c_str(), re);
@@ -309,8 +313,6 @@ void WLApplication::setup_homedir() {
 	i18n::set_homedir(homedir_);
 }
 
-WLApplication* WLApplication::the_singleton = nullptr;
-
 /**
  * The main entry point for the WLApplication singleton.
  *
@@ -323,13 +325,10 @@ WLApplication* WLApplication::the_singleton = nullptr;
  *
  * \param argc The number of command line arguments
  * \param argv Array of command line arguments
- * \return An (always valid!) pointer to the WLApplication singleton
+ * \return A reference to the WLApplication singleton
  */
-// TODO(unknown): Return a reference - the return value is always valid anyway
-WLApplication* WLApplication::get(int const argc, char const** argv) {
-	if (the_singleton == nullptr) {
-		the_singleton = new WLApplication(argc, argv);
-	}
+WLApplication& WLApplication::get(int const argc, char const** argv) {
+	static WLApplication the_singleton{argc, argv};
 	return the_singleton;
 }
 
@@ -371,6 +370,10 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	datadir_for_testing_ = g_fs->canonicalize_name(datadir_for_testing_);
 
 	set_initializer_thread();
+
+#ifdef SIGUSR1
+	signal(SIGUSR1, toggle_verbose);
+#endif
 
 	log_info("Adding directory: %s\n", datadir_.c_str());
 	g_fs->add_file_system(&FileSystem::create(datadir_));
