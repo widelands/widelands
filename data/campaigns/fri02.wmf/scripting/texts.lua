@@ -280,7 +280,7 @@ supply_murilius_5 = {
    title =_("We Are Not Alone"),
    body=murilius(_("Salvete peregrini!"),
       -- TRANSLATORS: Murilius – Supply Murilius 5. "Reebaude" is the Latin vocative case (form of address) of Reebaud.
-      _([[In this case, Reebaude, I must inform you of the presence of an inhospitable, hostile tribe of barbarians in the vicinity of this very outpost of the Empire.]])
+      _([[In this case, Reebaude, I must inform you of the presence of an inhospitable, hostile tribe of Barbarians in the vicinity of this very outpost of the Empire.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Murilius – Supply Murilius 5
       _([[If you seek to live peacefully here, you are not faced with a choice whether to allow them to live here – you are required to assist the Empire in driving them out.]])),
@@ -307,7 +307,7 @@ supply_murilius_8 = {
       _([[If you fail to deliver these wares, the Empire shall treat you like enemies. And so as to prevent you wasting your precious metal, I forbid you to expand your territory from this moment on until you have given us your gift. Fail to obey, and the Empire shall treat you like enemies.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Murilius – Supply Murilius 8
-      _([[You will have to fight those barbarians if you intend to live in the area; surely you can see that fighting them together with the Empire is easier than alone? And you really do not want the Empire as your enemy. Barbarians though you are, I do believe you will realize the truth of my words after some consideration.]]))
+      _([[You will have to fight those Barbarians if you intend to live in the area; surely you can see that fighting them together with the Empire is easier than alone? And you really do not want the Empire as your enemy. Barbarians though you are, I do believe you will realize the truth of my words after some consideration.]]))
       .. new_objectives(obj_supply_murilius),
 }
 supply_murilius_9 = {
@@ -375,7 +375,7 @@ defeat_both = {
       _([[Murilius has made it quite clear that he won’t leave us alone. I fear we must defeat him and destroy his colony if we ever want to have peace here.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – defeat both enemies
-      _([[The barbarian tribe he mentioned is also a threat. I don’t want to share this land with anyone, as sharing only leads to conflicts and battles, as we saw in our old home. We must defeat the barbarians as well.]]))
+      _([[The Barbarian tribe he mentioned is also a threat. I don’t want to share this land with anyone, as sharing only leads to conflicts and battles, as we saw in our old home. We must defeat the Barbarians as well.]]))
       .. new_objectives(obj_defeat_both),
 }
 supply_murilius_thanks = {
@@ -386,7 +386,7 @@ supply_murilius_thanks = {
       _([[Strangers! I see you have kept your word. The Empire rewards its friends, therefore I shall reward you with the friendship of the Empire!]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Murilius – Supplied Murilius. Murilius’s plan is to use the player as cannon fodder, while he himself only attacks when he has no choice
-      _([[Now I permit you to assist us in conquering the barbarians, who live in a sheltered valley northwest to us. I charge you, expand along the northern end of the mountains enclosing this outpost; you will find the barbarians there – attack them! We will fend off attacks launched by the enemy.]]))
+      _([[Now I permit you to assist us in conquering the Barbarians, who live in a sheltered valley northwest to us. I charge you, expand along the northern end of the mountains enclosing this outpost; you will find the Barbarians there – attack them! We will fend off attacks launched by the enemy.]]))
       .. new_objectives(obj_defeat_barbarians),
 }
 defeat_murilius_1 = {

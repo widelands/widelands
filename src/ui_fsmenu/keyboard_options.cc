@@ -247,8 +247,8 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 		box.add_space(kPadding);
 		b->sigclicked.connect([this, b, key, generate_title]() {
 			const bool fastplace = is_fastplace(key);
-			WLApplication* const app = WLApplication::get();
-			app->enable_handle_key(false);
+			WLApplication& app = WLApplication::get();
+			app.enable_handle_key(false);
 			ShortcutChooser c(*this, key, fastplace ? game_.get() : nullptr);
 			while (c.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 				KeyboardShortcut conflict;
@@ -270,7 +270,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 				   UI::WLMessageBox::MBoxType::kOk);
 				warning.run<UI::Panel::Returncodes>();
 			}
-			app->enable_handle_key(true);
+			app.enable_handle_key(true);
 		});
 	};
 

@@ -4345,11 +4345,11 @@ msgstr "Version:"
 #: ../../src/ui_fsmenu/addons/packager.cc:153 ../../src/wui/mapdetails.cc:196
 #: ../../src/wui/mapdetails.cc:201
 msgid "Minimum Widelands Version:"
-msgstr ""
+msgstr "Minimale Widelands Version:"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:159
 msgid "Maximum Widelands Version:"
-msgstr ""
+msgstr "Maximale Widelands Version:"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:334
 msgid "New Add-On"

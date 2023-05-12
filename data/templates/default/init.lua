@@ -1044,6 +1044,7 @@ return {
    styled_sizes = {
       fs_text_default_gap = fs_text_padding,
       fs_text_space_before_inline_header = 8,
+      fs_main_menu_dropdown_height = 33,
       wui_text_default_gap = wui_text_padding,
       wui_text_space_before_inline_header = 8,
       wui_space_before_immovable_icon = 14,
