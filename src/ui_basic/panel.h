@@ -423,6 +423,7 @@ public:
 		kShipWindow,
 		kAttackWindow,
 		kQuicknav,
+		kFleetOptions,
 	};
 	virtual SaveType save_type() const {
 		return SaveType::kNone;

@@ -62,6 +62,7 @@
 #include "wui/dismantlesitewindow.h"
 #include "wui/economy_options_window.h"
 #include "wui/encyclopedia_window.h"
+#include "wui/fleet_options_window.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
 #include "wui/game_diplomacy_menu.h"
@@ -1160,6 +1161,9 @@ void InteractiveBase::load_windows(FileRead& fr, Widelands::MapObjectLoader& mol
 					break;
 				case UI::Panel::SaveType::kQuicknav:
 					w = &QuickNavigationWindow::load(fr, *this);
+					break;
+				case UI::Panel::SaveType::kFleetOptions:
+					w = &FleetOptionsWindow::load(fr, *this, mol);
 					break;
 				default:
 					throw Widelands::GameDataError(
