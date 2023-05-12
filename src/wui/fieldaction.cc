@@ -21,8 +21,10 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "economy/economy.h"
+#include "economy/ferry_fleet.h"
 #include "economy/flag.h"
 #include "economy/road.h"
+#include "economy/ship_fleet.h"
 #include "economy/waterway.h"
 #include "graphic/style_manager.h"
 #include "logic/cmd_queue.h"
@@ -37,6 +39,7 @@
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/icongrid.h"
+#include "ui_basic/spinbox.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/unique_window.h"
 #include "wui/actionconfirm.h"
@@ -159,6 +162,8 @@ public:
 	void add_buttons_build(int32_t buildcaps, int32_t max_nodecaps);
 	void add_buttons_road(bool flag);
 	void add_buttons_waterway(bool flag);
+	void add_ship_fleet_targets_box(Widelands::ShipFleetYardInterface* interface);
+	void add_ferry_fleet_targets_box(Widelands::FerryFleetYardInterface* interface);
 
 	void act_watch();
 	void act_debug();
@@ -216,6 +221,8 @@ private:
 constexpr const char* const kImgTabBuildroad = "images/wui/fieldaction/menu_tab_buildroad.png";
 constexpr const char* const kImgTabBuildwaterway =
    "images/wui/fieldaction/menu_tab_buildwaterway.png";
+constexpr const char* const kImgTabShipTargets = "images/wui/fieldaction/menu_tab_ship_targets.png";
+constexpr const char* const kImgTabFerryTargets = "images/wui/fieldaction/menu_tab_ferry_targets.png";
 constexpr const char* const kImgTabWatch = "images/wui/fieldaction/menu_tab_watch.png";
 static const char* const pic_tab_buildhouse[] = {"images/wui/fieldaction/menu_tab_buildsmall.png",
                                                  "images/wui/fieldaction/menu_tab_buildmedium.png",
@@ -491,6 +498,19 @@ void FieldActionWindow::add_buttons_auto() {
 		}
 	}
 
+	// Fleet target settings
+	bool has_ship_fleet = false;
+	bool has_ferry_fleet = false;
+	for (Widelands::Bob* bob = node_.field->get_first_bob(); bob != nullptr; bob = bob->get_next_bob()) {
+		if (bob->descr().type() == Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE && !has_ship_fleet && (ipl == nullptr || bob->owner().player_number() == ipl->player_number())) {
+			has_ship_fleet = true;
+			add_ship_fleet_targets_box(dynamic_cast<Widelands::ShipFleetYardInterface*>(bob));
+		} else if (bob->descr().type() == Widelands::MapObjectType::FERRY_FLEET_YARD_INTERFACE && !has_ferry_fleet && (ipl == nullptr || bob->owner().player_number() == ipl->player_number())) {
+			has_ferry_fleet = true;
+			add_ferry_fleet_targets_box(dynamic_cast<Widelands::FerryFleetYardInterface*>(bob));
+		}
+	}
+
 	//  Watch actions, only when in game (no use in editor).
 	if (ibase().egbase().is_game()) {
 		add_button(&watchbox, "watch", kImgButtonWatchField, &FieldActionWindow::act_watch,
@@ -682,6 +702,75 @@ void FieldActionWindow::add_buttons_waterway(bool flag) {
 
 	// Add the box as tab
 	add_tab("waterways", kImgTabBuildwaterway, &buildbox, _("Build waterways"));
+}
+
+void FieldActionWindow::add_ferry_fleet_targets_box(Widelands::FerryFleetYardInterface* interface) {
+	upcast(InteractiveGameBase, igbase, &ibase());
+	if (igbase == nullptr) {
+		return;
+	}
+
+	upcast(InteractivePlayer, ipl, igbase);
+	const Widelands::Serial interface_serial = interface->serial();
+	const Widelands::Quantity initial = interface->get_fleet()->get_idle_ferries_target();
+	constexpr Widelands::Quantity kMax = 1000;  // arbitrary limit
+
+	UI::Box* box = new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	UI::SpinBox* spinner = new UI::SpinBox(box, 0, 0, 500, 200, initial,
+			ipl == nullptr ? initial : 0, ipl == nullptr ? initial : kMax,
+			UI::PanelStyle::kWui, _("Target number of idle ferries"), UI::SpinBox::Units::kNone, UI::SpinBox::Type::kBig);
+	box->add(spinner);
+
+	if (ipl != nullptr) {
+		spinner->changed.connect([ipl, interface_serial, spinner]() {
+			ipl->game().send_player_fleet_targets(ipl->player_number(), interface_serial, spinner->get_value());
+		});
+	}
+
+	add_tab("ferry_fleet", kImgTabShipTargets, box, _("Ferry fleet settings"));
+}
+
+void FieldActionWindow::add_ship_fleet_targets_box(Widelands::ShipFleetYardInterface* interface) {
+	upcast(InteractiveGameBase, igbase, &ibase());
+	if (igbase == nullptr) {
+		return;
+	}
+
+	upcast(InteractivePlayer, ipl, igbase);
+	const Widelands::Serial interface_serial = interface->serial();
+	Widelands::Quantity initial = interface->get_fleet()->get_ships_target();
+	const bool initial_inf = initial == Widelands::kEconomyTargetInfinity;
+	constexpr Widelands::Quantity kMax = 1000 * 1000;  // arbitrary limit
+	if (initial_inf) {
+		initial = 0;
+	}
+
+	UI::Box* box = new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	UI::SpinBox* spinner = new UI::SpinBox(box, 0, 0, 500, 200, initial,
+			(ipl == nullptr || initial_inf) ? initial : 0, (ipl == nullptr || initial_inf) ? initial : kMax,
+			UI::PanelStyle::kWui, _("Target number of transport ships"), UI::SpinBox::Units::kNone, UI::SpinBox::Type::kBig);
+	UI::Checkbox* infinite = new UI::Checkbox(box, UI::PanelStyle::kWui, Vector2i::zero(), _("Infinite"));
+	infinite->set_state(initial_inf);
+	infinite->set_enabled(ipl != nullptr);
+	box->add(spinner);
+	box->add(infinite);
+
+	if (ipl != nullptr) {
+		spinner->changed.connect([ipl, interface_serial, spinner]() {
+			ipl->game().send_player_fleet_targets(ipl->player_number(), interface_serial, spinner->get_value());
+		});
+		infinite->changedto.connect([ipl, interface_serial, spinner](bool state) {
+			if (state) {
+				spinner->set_value(0);
+				spinner->set_interval(0, 0);
+			} else {
+				spinner->set_interval(0, kMax);
+			}
+			ipl->game().send_player_fleet_targets(ipl->player_number(), interface_serial, state ? Widelands::kEconomyTargetInfinity : spinner->get_value());
+		});
+	}
+
+	add_tab("ship_fleet", kImgTabShipTargets, box, _("Ship fleet settings"));
 }
 
 /*
@@ -950,7 +1039,7 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 		building_under_mouse_ = idx;
 		const Widelands::BuildingDescr& descr = *player_->tribe().get_building_descr(idx);
 		const WorkareaInfo& workarea_info = descr.workarea_info();
-		ibase().show_workarea(workarea_info, node_);
+		ibase().show_workarea(workarea_info, node_, {});
 		showing_workarea_preview_ = true;
 		if (!is_showing_workarea_overlaps_) {
 			return;
@@ -1041,7 +1130,7 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 								colors[t] = kOverlapColorPale;
 							}
 						}
-						ibase().show_workarea(wa, mr.location(), colors);
+						ibase().show_workarea(wa, mr.location(), colors, {});
 						overlapping_workareas_.insert(mr.location());
 					}
 				}

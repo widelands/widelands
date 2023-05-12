@@ -116,6 +116,8 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 		return *new CmdPinnedNote();
 	case QueueCommandTypes::kShipPortName:
 		return *new CmdShipPortName();
+	case QueueCommandTypes::kFleetTargets:
+		return *new CmdFleetTargets();
 	case QueueCommandTypes::kPickCustomStartingPosition:
 		return *new CmdPickCustomStartingPosition();
 	case QueueCommandTypes::kDeleteMessage:  // Not a logic command

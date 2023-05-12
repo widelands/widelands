@@ -992,6 +992,29 @@ private:
 	std::string name_;
 };
 
+struct CmdFleetTargets : PlayerCommand {
+	CmdFleetTargets(const Time& t, PlayerNumber p, Serial i, Quantity q)
+	   : PlayerCommand(t, p), interface_(i), target_(q) {
+	}
+
+	[[nodiscard]] QueueCommandTypes id() const override {
+		return QueueCommandTypes::kFleetTargets;
+	}
+
+	void execute(Game& game) override;
+
+	explicit CmdFleetTargets(StreamRead& des);
+	void serialize(StreamWrite& ser) override;
+
+	CmdFleetTargets() = default;
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+private:
+	Serial interface_{0U};
+	Quantity target_{0U};
+};
+
 struct CmdPickCustomStartingPosition : PlayerCommand {
 	CmdPickCustomStartingPosition(const Time& t, PlayerNumber p, const Coords& c)
 	   : PlayerCommand(t, p), coords_(c) {

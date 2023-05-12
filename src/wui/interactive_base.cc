@@ -371,6 +371,16 @@ InteractiveBase::get_buildhelp_overlay(const Widelands::NodeCaps caps, const flo
 	return result;
 }
 
+bool InteractiveBase::has_workarea_special_coords(const Widelands::Coords& coords) const {
+	MutexLock m(MutexLock::ID::kIBaseVisualizations);
+	for (const auto& preview : workarea_previews_) {
+		if (preview->special_coords.count(coords) > 0) {
+			return true;
+		}
+	}
+	return false;
+}
+
 bool InteractiveBase::has_workarea_preview(const Widelands::Coords& coords,
                                            const Widelands::Map* map) const {
 	MutexLock m(MutexLock::ID::kIBaseVisualizations);
@@ -522,17 +532,18 @@ InteractiveBase::road_building_steepness_overlays() const {
 // Show the given workareas at the given coords
 void InteractiveBase::show_workarea(const WorkareaInfo& workarea_info,
                                     Widelands::Coords coords,
-                                    std::map<Widelands::TCoords<>, uint32_t>& extra_data) {
+                                    std::map<Widelands::TCoords<>, uint32_t>& extra_data,
+                                    const std::set<Widelands::Coords>& special_coords) {
 	MutexLock m(MutexLock::ID::kIBaseVisualizations);
 	workarea_previews_.insert(
-	   std::unique_ptr<WorkareaPreview>(new WorkareaPreview{coords, &workarea_info, extra_data}));
+	   std::unique_ptr<WorkareaPreview>(new WorkareaPreview{coords, &workarea_info, extra_data, special_coords}));
 	workareas_cache_.reset(nullptr);
 }
 
-void InteractiveBase::show_workarea(const WorkareaInfo& workarea_info, Widelands::Coords coords) {
+void InteractiveBase::show_workarea(const WorkareaInfo& workarea_info, Widelands::Coords coords, const std::set<Widelands::Coords>& special_coords) {
 	MutexLock m(MutexLock::ID::kIBaseVisualizations);
 	std::map<Widelands::TCoords<>, uint32_t> empty;
-	show_workarea(workarea_info, coords, empty);
+	show_workarea(workarea_info, coords, empty, special_coords);
 }
 
 /* Helper function to get the correct index for graphic/gl/workarea_program.cc::workarea_colors .
@@ -1250,7 +1261,7 @@ void InteractiveBase::start_build_road(Coords road_start,
 				                  pair.second && br->second && it->second ? 5 : 6));
 			}
 		}
-		show_workarea(*road_building_mode_->work_area, road_start, wa_data);
+		show_workarea(*road_building_mode_->work_area, road_start, wa_data, {});
 	}
 }
 

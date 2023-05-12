@@ -174,6 +174,11 @@ bool FerryFleet::find_other_fleet(EditorGameBase& egbase) {
 	return false;
 }
 
+void FerryFleet::set_idle_ferries_target(EditorGameBase& egbase, Quantity t) {
+	idle_ferries_target_ = t;
+	target_last_modified_ = egbase.get_gametime();
+}
+
 /**
  * Merge the @p other fleet into this fleet, and remove the other fleet.
  *
@@ -185,6 +190,11 @@ bool FerryFleet::merge(EditorGameBase& egbase, FerryFleet* other) {
 	if (ferries_.empty() && !other->ferries_.empty()) {
 		other->merge(egbase, this);
 		return true;
+	}
+
+	if (target_last_modified_ < other->target_last_modified_) {
+		idle_ferries_target_ = other->idle_ferries_target_;
+		target_last_modified_ = other->target_last_modified_;
 	}
 
 	while (!other->ferries_.empty()) {
@@ -250,6 +260,16 @@ bool FerryFleet::has_ferry(const Waterway& ww) const {
 		}
 	}
 	return true;
+}
+
+uint32_t FerryFleet::count_unemployed_ferries() const {
+	uint32_t n = 0;
+	for (Ferry* f : ferries_) {
+		if (f->unemployed()) {
+			++n;
+		}
+	}
+	return n;
 }
 
 void FerryFleet::add_ferry(Ferry* ferry) {
@@ -528,6 +548,7 @@ void FerryFleetYardInterface::log_general_info(const EditorGameBase& egbase) con
 	      building_->get_position().x, building_->get_position().y);
 }
 
+// Changelog version 1 (v1.1) → 2: Added ferry yard interfaces.
 constexpr uint8_t kCurrentPacketVersionFleet = 2;
 constexpr uint8_t kCurrentPacketVersionInterface = 1;
 
@@ -556,6 +577,9 @@ void FerryFleet::Loader::load(FileRead& fr, uint8_t packet_version) {
 		const uint32_t serial = fr.unsigned_32();
 		pending_ferry_requests_.emplace(gametime, serial);
 	}
+
+	fleet.idle_ferries_target_ = packet_version >= 2 ? fr.unsigned_32() : 0;
+	fleet.target_last_modified_ = Time(fr);
 }
 
 void FerryFleet::Loader::load_pointers() {
@@ -642,6 +666,9 @@ void FerryFleet::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw
 		temp_ww.first.save(fw);
 		fw.unsigned_32(mos.get_object_file_index(*temp_ww.second));
 	}
+
+	fw.unsigned_32(idle_ferries_target_);
+	target_last_modified_.save(fw);
 }
 
 void FerryFleetYardInterface::Loader::load(FileRead& fr) {

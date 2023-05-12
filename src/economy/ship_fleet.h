@@ -138,6 +138,11 @@ struct ShipFleet : MapObject {
 		return ports_;
 	}
 
+	[[nodiscard]] Quantity get_ships_target() const {
+		return ships_target_;
+	}
+	void set_ships_target(EditorGameBase& egbase, Quantity t);
+
 protected:
 	void act(Game&, uint32_t data) override;
 
@@ -156,6 +161,8 @@ private:
 	std::vector<ShipFleetYardInterface*> interfaces_;
 	std::vector<PortDock*> ports_;
 
+	Quantity ships_target_{kEconomyTargetInfinity};
+	Time target_last_modified_{0U};
 	bool act_pending_{false};
 
 	std::map<std::pair<Serial, Serial>, PortPath> port_paths_;

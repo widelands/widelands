@@ -47,6 +47,7 @@ struct WorkareaPreview {
 	Widelands::Coords coords;
 	const WorkareaInfo* info;
 	std::map<Widelands::TCoords<>, uint32_t> data;
+	std::set<Widelands::Coords> special_coords;
 };
 
 enum class RoadBuildingType { kRoad, kWaterway };
@@ -94,10 +95,11 @@ public:
 		return egbase_;
 	}
 
-	void show_workarea(const WorkareaInfo& workarea_info, Widelands::Coords coords);
+	void show_workarea(const WorkareaInfo& workarea_info, Widelands::Coords coords, const std::set<Widelands::Coords>& special_coords);
 	void show_workarea(const WorkareaInfo& workarea_info,
 	                   Widelands::Coords coords,
-	                   std::map<Widelands::TCoords<>, uint32_t>& extra_data);
+	                   std::map<Widelands::TCoords<>, uint32_t>& extra_data,
+	                   const std::set<Widelands::Coords>& special_coords);
 	void hide_workarea(const Widelands::Coords& coords, bool is_additional);
 
 	//  point of view for drawing
@@ -339,6 +341,7 @@ protected:
 	/// otherwise checks if the coords are within any workarea.
 	bool has_workarea_preview(const Widelands::Coords& coords,
 	                          const Widelands::Map* map = nullptr) const;
+	bool has_workarea_special_coords(const Widelands::Coords& coords) const;
 
 	/// Returns true if the current player is allowed to hear sounds from map objects on this field
 	virtual bool player_hears_field(const Widelands::Coords& coords) const = 0;

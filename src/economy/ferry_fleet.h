@@ -89,13 +89,19 @@ struct FerryFleet : MapObject {
 	[[nodiscard]] uint32_t count_ferries() const {
 		return ferries_.size();
 	}
+	[[nodiscard]] uint32_t count_unemployed_ferries() const;
 	[[nodiscard]] uint32_t count_unattended_waterways() const {
 		return pending_ferry_requests_.size();
 	}
-	[[nodiscard]] bool lacks_ferry() const {
-		return !pending_ferry_requests_.empty();
-	}
 	[[nodiscard]] bool has_ferry(const Waterway& ww) const;
+
+	[[nodiscard]] Quantity get_idle_ferries_target() const {
+		return idle_ferries_target_;
+	}
+	void set_idle_ferries_target(EditorGameBase& egbase, Quantity t);
+	[[nodiscard]] bool lacks_ferry() const {
+		return !pending_ferry_requests_.empty() || count_unemployed_ferries() < get_idle_ferries_target();
+	}
 
 	void request_ferry(const EditorGameBase& egbase, Waterway* waterway, const Time&);
 	void reroute_ferry_request(Game& game, Waterway* oldww, Waterway* newww);
@@ -114,6 +120,8 @@ private:
 	std::vector<FerryFleetYardInterface*> interfaces_;
 	std::multimap<Time, Waterway*> pending_ferry_requests_;
 
+	Quantity idle_ferries_target_{0U};
+	Time target_last_modified_{0U};
 	bool act_pending_{false};
 
 	// saving and loading

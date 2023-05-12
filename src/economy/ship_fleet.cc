@@ -209,6 +209,11 @@ bool ShipFleet::find_other_fleet(EditorGameBase& egbase) {
 	return false;
 }
 
+void ShipFleet::set_ships_target(EditorGameBase& egbase, Quantity t) {
+	ships_target_ = t;
+	target_last_modified_ = egbase.get_gametime();
+}
+
 /**
  * Merge the @p other fleet into this fleet, and remove the other fleet.
  *
@@ -220,6 +225,11 @@ bool ShipFleet::merge(EditorGameBase& egbase, ShipFleet* other) {
 	if (ports_.empty() && !other->ports_.empty()) {
 		other->merge(egbase, this);
 		return true;
+	}
+
+	if (target_last_modified_ < other->target_last_modified_) {
+		ships_target_ = other->ships_target_;
+		target_last_modified_ = other->target_last_modified_;
 	}
 
 	// TODO(Nordfriese): Currently fleets merge only directly after creation, so the fleet being
@@ -508,8 +518,8 @@ bool ShipFleet::empty() const {
 }
 
 bool ShipFleet::lacks_ship() const {
-	// Number of ports squared is a pretty good estimate for how many ships we'd like to have.
-	return ships_.empty() || ships_.size() < ports_.size() * ports_.size();
+	// If the target is explicitly set to 0, don't request any ships at all.
+	return ships_.size() < ships_target_;
 }
 
 struct StepEvalFindPorts {
@@ -821,7 +831,7 @@ void ShipFleetYardInterface::log_general_info(const EditorGameBase& egbase) cons
 // Changelog of version 4 → 5: Added ShippingSchedule
 // Changelog of version 5 → 6: Added ship yard interfaces
 constexpr uint8_t kCurrentPacketVersionShip = 6;
-constexpr uint8_t kCurrentPacketVersionInterface = 5;
+constexpr uint8_t kCurrentPacketVersionInterface = 1;
 
 void ShipFleet::Loader::load(FileRead& fr, uint8_t packet_version) {
 	MapObject::Loader::load(fr);
@@ -834,7 +844,7 @@ void ShipFleet::Loader::load(FileRead& fr, uint8_t packet_version) {
 		ships_[i] = fr.unsigned_32();
 	}
 
-	const uint32_t nrinterfaces = packet_version >= 2 ? fr.unsigned_32() : 0;
+	const uint32_t nrinterfaces = packet_version >= 6 ? fr.unsigned_32() : 0;
 	interfaces_.resize(nrinterfaces);
 	for (uint32_t i = 0; i < nrinterfaces; ++i) {
 		interfaces_[i] = fr.unsigned_32();
@@ -847,6 +857,9 @@ void ShipFleet::Loader::load(FileRead& fr, uint8_t packet_version) {
 	}
 
 	fleet.act_pending_ = (fr.unsigned_8() != 0u);
+	fleet.ships_target_ = packet_version >= 6 ? fr.unsigned_32() : kEconomyTargetInfinity;
+	fleet.target_last_modified_ = Time(fr);
+
 	fleet.schedule_.load(fr);
 }
 
@@ -950,6 +963,8 @@ void ShipFleet::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 	}
 
 	fw.unsigned_8(static_cast<uint8_t>(act_pending_));
+	fw.unsigned_32(ships_target_);
+	target_last_modified_.save(fw);
 
 	schedule_.save(egbase, mos, fw);
 }
