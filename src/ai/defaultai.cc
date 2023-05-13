@@ -798,7 +798,7 @@ void DefaultAI::late_initialization() {
 				   supported_building_index, dynamic_cast<const Widelands::ProductionSiteDescr*>(
 				                                tribe_->get_building_descr(supported_building_index))));
 			}
-			// TODO(hessenfarmer): we need to find a solution for amazons here as they do not mine
+			// TODO(hessenfarmer): we need to find a solution for the Amazons here as they do not mine
 			// iron
 			iron_resource_id = game().descriptions().resource_index("resource_iron");
 			if (iron_resource_id == Widelands::INVALID_INDEX) {
@@ -2907,7 +2907,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 							           number_of_supporters_nearby * 5, kAbsValue) /
 							        2;
 						}
-						// buildings that need coast and are not considered above e.g. amazons
+						// buildings that need coast and are not considered above e.g. Amazons
 						// water_gatherers
 						if (bo.is(BuildingAttribute::kNeedsCoast) && (bf->water_nearby < 3)) {
 							continue;

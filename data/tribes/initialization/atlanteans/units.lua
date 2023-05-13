@@ -1342,84 +1342,84 @@ wl.Descriptions():new_tribe {
          name = "balsa_amazons_old",
          helptexts = {
             -- TRANSLATORS: Helptext for an Amazon immovable usable by Atlanteans: Balsa Tree
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            purpose = _("This tree is only planted by the Amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "balsa_black_amazons_old",
          helptexts = {
             -- TRANSLATORS: Helptext for an Amazon immovable usable by Atlanteans: Balsa Tree
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            purpose = _("This tree is only planted by the Amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "balsa_desert_amazons_old",
          helptexts = {
             -- TRANSLATORS: Helptext for an Amazon immovable usable by Atlanteans: Balsa Tree
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            purpose = _("This tree is only planted by the Amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "balsa_winter_amazons_old",
          helptexts = {
             -- TRANSLATORS: Helptext for an Amazon immovable usable by Atlanteans: Balsa Tree
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            purpose = _("This tree is only planted by the Amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_amazons_old",
          helptexts = {
             -- TRANSLATORS: Helptext for an Amazon immovable usable by Atlanteans: Ironwood Tree
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            purpose = _("This tree is only planted by the Amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_black_amazons_old",
          helptexts = {
             -- TRANSLATORS: Helptext for an Amazon immovable usable by Atlanteans: Ironwood Tree
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            purpose = _("This tree is only planted by the Amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_desert_amazons_old",
          helptexts = {
             -- TRANSLATORS: Helptext for an Amazon immovable usable by Atlanteans: Ironwood Tree
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            purpose = _("This tree is only planted by the Amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_winter_amazons_old",
          helptexts = {
             -- TRANSLATORS: Helptext for an Amazon immovable usable by Atlanteans: Ironwood Tree
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            purpose = _("This tree is only planted by the Amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_amazons_old",
          helptexts = {
             -- TRANSLATORS: Helptext for an Amazon immovable usable by Atlanteans: Rubber Tree
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            purpose = _("This tree is only planted by the Amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_black_amazons_old",
          helptexts = {
             -- TRANSLATORS: Helptext for an Amazon immovable usable by Atlanteans: Rubber Tree
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            purpose = _("This tree is only planted by the Amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_desert_amazons_old",
          helptexts = {
             -- TRANSLATORS: Helptext for an Amazon immovable usable by Atlanteans: Rubber Tree
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            purpose = _("This tree is only planted by the Amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_winter_amazons_old",
          helptexts = {
             -- TRANSLATORS: Helptext for an Amazon immovable usable by Atlanteans: Rubber Tree
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            purpose = _("This tree is only planted by the Amazon tribe but can be harvested for logs.")
          }
       },
    },
