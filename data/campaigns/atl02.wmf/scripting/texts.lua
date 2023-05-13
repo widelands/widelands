@@ -573,7 +573,7 @@ princess_back = {
       title = _("Jundlina Explains"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
-         _([[Sidolus, they did not let me go. I met our scout and he managed to sneak me out, as I realized they still kept me hostage after I expressed some concerns about our previous agreement. So we need to settle the barbarian issue now and forever on this island. There is no other way to live here in peace than to defeat them.]]))
+         _([[Sidolus, they did not let me go. I met our scout and he managed to sneak me out, as I realized they still kept me hostage after I expressed some concerns about our previous agreement. So we need to settle the Barbarian issue now and forever on this island. There is no other way to live here in peace than to defeat them.]]))
          .. new_objectives(obj_defeat_kalitath),
    }
 }

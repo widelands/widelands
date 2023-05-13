@@ -8,7 +8,7 @@ return {
          {
             name = "barbarians_market",
             helptexts = {
-               -- TRANSLATORS: Purpose helptext for an barbarians market: Market
+               -- TRANSLATORS: Purpose helptext for a Barbarian market: Market
                purpose = pgettext("barbarians_building", "A market enables trading with other tribes.")
             }
          },
@@ -22,7 +22,7 @@ return {
             {
                name = "barbarians_custom_worker",
                helptexts = {
-                  -- TRANSLATORS: Helptext for a barbarian worker: Custom Worker
+                  -- TRANSLATORS: Helptext for a Barbarian worker: Custom Worker
                   purpose = pgettext("barbarians_worker", "Custom Worker.")
                }
             }

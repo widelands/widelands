@@ -254,7 +254,7 @@ function mission_thread()
             end
          end
          -- The campaign data contains two values:
-         -- · payment: is nil if the empire was conquered, else the amount of gold paid
+         -- · payment: is nil if the Empire was conquered, else the amount of gold paid
          -- · soldiers: a table of all soldiers we take with us (in the usual syntax convention)
          game:save_campaign_data("frisians", "fri03", fight)
          scroll_to_field(map.player_slots[3].starting_field)

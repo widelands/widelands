@@ -258,6 +258,12 @@ Widelands::Game* MainMenu::create_safe_game(const bool show_error) {
 void MainMenu::update_template() {
 	UI::Panel::update_template();
 
+	int dropdowns_lineheight =
+	   g_style_manager->styled_size(UI::StyledSize::kFsMainMenuDropdownHeight);
+	singleplayer_.set_min_lineheight(dropdowns_lineheight);
+	multiplayer_.set_min_lineheight(dropdowns_lineheight);
+	editor_.set_min_lineheight(dropdowns_lineheight);
+
 	splashscreen_ = g_image_cache->get("loadscreens/splash.jpg");
 	title_image_ = g_image_cache->get("loadscreens/logo.png");
 
@@ -761,7 +767,7 @@ void MainMenu::draw_overlay(RenderTarget& r) {
 }
 
 inline Rectf MainMenu::title_pos() {
-	const float imgh = box_rect_.y / 3.f;
+	const float imgh = box_rect_.y / 2.5f;
 	const float imgw = imgh * title_image_->width() / title_image_->height();
 	return Rectf((get_w() - imgw) / 2.f, buth_, imgw, imgh);
 }
@@ -777,7 +783,7 @@ void MainMenu::layout() {
 	                          copyright_.get_y() - version_.get_h() - padding_ / 2));
 
 	box_rect_ = Recti((get_inner_w() - padding_) / 2 - butw_,
-	                  version_.get_y() - padding_ * 5 / 2 - get_inner_h() / 4, 2 * butw_ + padding_,
+	                  version_.get_y() - padding_ * 4 - get_inner_h() * 3 / 10, 2 * butw_ + padding_,
 	                  get_inner_h() / 4);
 
 	singleplayer_.set_desired_size(butw_, buth_);
