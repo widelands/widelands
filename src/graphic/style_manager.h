@@ -85,6 +85,7 @@ enum class ColorStyle {
 enum class StyledSize {
 	kFsTextDefaultGap,
 	kFsTextSpaceBeforeInlineHeader,
+	kFsMainMenuDropdownHeight,
 	kWuiTextDefaultGap,
 	kWuiTextSpaceBeforeInlineHeader,
 	kWuiSpaceBeforeImmovableIcon,

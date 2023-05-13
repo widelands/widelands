@@ -382,7 +382,7 @@ local function init_mines(player, sf, total_previous_buildings)
 end
 
 
--- Place buildings for Barbarian tribe
+-- Place buildings for the Barbarian tribe
 function init_barbarians(player)
    assert_equal("barbarians", player.tribe.name)
 

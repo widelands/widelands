@@ -288,8 +288,13 @@ const Image* BaseListselect::get_selected_image() const {
 	return entry_records_[selection_]->pic;
 }
 
+int BaseListselect::get_lineheight_without_padding() const {
+	return std::max(lineheight_, min_lineheight_);
+}
+
 int BaseListselect::get_lineheight() const {
-	return lineheight_ + (selection_mode_ == ListselectLayout::kDropdown ? 2 * kMargin : kMargin);
+	return get_lineheight_without_padding() +
+	       (selection_mode_ == ListselectLayout::kDropdown ? 2 * kMargin : kMargin);
 }
 
 uint32_t BaseListselect::get_eff_w() const {
@@ -396,6 +401,8 @@ void BaseListselect::draw(RenderTarget& dst) {
 			break;
 		}
 
+		const int lineheight_unpadded = get_lineheight_without_padding();
+
 		Vector2i point(selection_mode_ == ListselectLayout::kDropdown ? 3 : 1, y);
 		uint32_t maxw =
 		   get_eff_w() -
@@ -403,7 +410,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		// Highlight the current selected entry
 		if (idx == selection_) {
-			Recti r(point, maxw, lineheight_);
+			Recti r(point, maxw, lineheight_unpadded);
 			if (r.x < 0) {
 				r.w += r.x;
 				r.x = 0;
@@ -426,15 +433,15 @@ void BaseListselect::draw(RenderTarget& dst) {
 			dst.blit(Vector2i(UI::g_fh->fontset()->is_rtl() ?
                               get_eff_w() - er.pic->width() - 1 - kIndentStrength * er.indent :
                               kIndentStrength * er.indent + 1,
-			                  y + (lineheight_ - er.pic->height()) / 2),
+			                  y + (lineheight_unpadded - er.pic->height()) / 2),
 			         er.pic);
 		}
 
 		// Fix vertical position for mixed font heights
 		if (get_lineheight() > txt_height) {
-			point.y += (lineheight_ - txt_height) / 2;
+			point.y += (lineheight_unpadded - txt_height) / 2;
 		} else {
-			point.y -= (txt_height - lineheight_) / 2;
+			point.y -= (txt_height - lineheight_unpadded) / 2;
 		}
 
 		// Don't draw over the bottom edge
@@ -697,7 +704,8 @@ Recti BaseListselect::get_highlight_rect(const std::string& text, int x, int y) 
 	   UI::g_fh->render(as_richtext_paragraph(
 	      richtext_escape(text2.substr(start, filter.length())), table_style().enabled()));
 
-	Recti highlight_rect(x + rendered_start->width(), y, rendered_substring->width(), lineheight_);
+	Recti highlight_rect(x + rendered_start->width(), y, rendered_substring->width(),
+	                     get_lineheight_without_padding());
 
 	return highlight_rect;
 }

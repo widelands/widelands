@@ -109,7 +109,7 @@ TechInfoBox::TechInfoBox(UI::Panel* parent, TechInfoBox::Type t)
 		ADD_CONTENT("Locale:", _("Locale:"), i18n::get_locale(), "");
 		ADD_CONTENT("Home Directory:", _("Home Directory:"), i18n::get_homedir(), "");
 		ADD_CONTENT("Configuration File:", _("Configuration File:"), get_config_file(), "");
-		ADD_CONTENT("Data Directory:", _("Data Directory:"), WLApplication::get()->get_datadir(), "");
+		ADD_CONTENT("Data Directory:", _("Data Directory:"), WLApplication::get().get_datadir(), "");
 		ADD_CONTENT("Locale Directory:", _("Locale Directory:"), i18n::get_localedir(), "");
 		ADD_CONTENT(
 		   "Executable Directory:", _("Executable Directory:"), get_executable_directory(false), "");

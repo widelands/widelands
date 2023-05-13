@@ -139,6 +139,9 @@ public:
 
 	///  Return the total height (text + spacing) occupied by a single entry.
 	int lineheight() const;
+	void set_min_lineheight(int minh) {
+		list_->set_min_lineheight(minh);
+	}
 
 	/// Toggle the list on and off and position the mouse on the button so that the dropdown won't
 	/// close on us. If this is a menu and nothing was selected yet, select the first item for easier
