@@ -1406,7 +1406,7 @@ wl.Descriptions():new_tribe {
       {
          name = "grapevine_medium",
          helptexts = {
-            -- TRANSLATORS: Helptext for an empire immovable usable by Frisians: Grapevine
+            -- TRANSLATORS: Helptext for an Empire immovable usable by Frisians: Grapevine
             purpose = _("This grapevine is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
@@ -1421,7 +1421,7 @@ wl.Descriptions():new_tribe {
       {
          name = "grapevine_ripe",
          helptexts = {
-            -- TRANSLATORS: Helptext for an empire immovable usable by Frisians: Grapevine
+            -- TRANSLATORS: Helptext for an Empire immovable usable by Frisians: Grapevine
             purpose = _("This grapevine is ready for harvesting.")
          }
       },
