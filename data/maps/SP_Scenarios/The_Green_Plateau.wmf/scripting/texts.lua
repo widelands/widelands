@@ -68,7 +68,7 @@ briefing_2_found_ancient_castle = {
    h = mb_h,
    posy = mb_y,
    body = objective_text(_("An Ancient Castle"),
-      p(_([[By the Gods! One of our scouts has discovered a mighty castle at the center of the old plateau. The castle must be quite old and seems to have been built in a foreign style. It’s quite obvious that this is not barbarian craft.]])) ..
+      p(_([[By the Gods! One of our scouts has discovered a mighty castle at the center of the old plateau. The castle must be quite old and seems to have been built in a foreign style. It’s quite obvious that this is not Barbarian craft.]])) ..
       p(_([[Let’s hope that Lanissa – the warlord holding sway over that castle – has not discovered our movements yet. Perhaps we have a chance of conquering that mighty building without a bigger fight! However, it is essential that we capture it. It will be the key to our reign over this island!]])))
       .. new_objectives(obj_capture_ancient_castle)
 }

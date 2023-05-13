@@ -5,7 +5,7 @@ local result = {
       buildings = {{
          name = "empire_port_large",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an empire warehouse: Port
+            -- TRANSLATORS: Purpose helptext for an Empire warehouse: Port
             purpose = pgettext("empire_building", "Serves as a base for overseas colonization and trade. Also stores your soldiers, wares and tools.")
          }
       }},

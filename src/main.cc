@@ -38,13 +38,10 @@
 int main(int argc, char* argv[]) {
 	std::cout << "This is Widelands version " << build_ver_details() << std::endl;
 
-	WLApplication* g_app = nullptr;
 	try {
-		g_app = WLApplication::get(argc, const_cast<char const**>(argv));
+		WLApplication& g_app = WLApplication::get(argc, const_cast<char const**>(argv));
 		// TODO(unknown): handle exceptions from the constructor
-		g_app->run();
-
-		delete g_app;
+		g_app.run();
 
 		return 0;
 	} catch (const ParameterError& e) {
@@ -53,7 +50,6 @@ int main(int argc, char* argv[]) {
 		if (e.what()[0] != 0) {
 			std::cerr << std::string(60, '=') << std::endl << std::endl << e.what() << std::endl;
 		}
-		delete g_app;
 
 		return 0;
 	}
@@ -65,7 +61,6 @@ int main(int argc, char* argv[]) {
 		          << build_ver_details() << ".\n"
 		          << "and remember to specify your operating system.\n\n"
 		          << std::flush;
-		delete g_app;
 
 		return 1;
 	} catch (const std::exception& e) {
@@ -75,7 +70,6 @@ int main(int argc, char* argv[]) {
 		          << build_ver_details() << ".\n"
 		          << "and remember to specify your operating system.\n\n"
 		          << std::flush;
-		delete g_app;
 
 		return 1;
 	}

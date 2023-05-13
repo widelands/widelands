@@ -1,7 +1,7 @@
-project (widelands)
-
 cmake_minimum_required (VERSION 3.5)
 cmake_policy(VERSION 3.5)
+
+project (widelands)
 
 message(STATUS "Using CMake version ${CMAKE_VERSION}")
 
@@ -354,7 +354,6 @@ else()
     "-Wformat-y2k"
     "-Winit-self"
     "-Winvalid-pch"
-    "-Wlogical-op"
     "-Wmissing-include-dirs"
     "-Wno-undef"
     "-Wold-style-cast"
@@ -362,8 +361,6 @@ else()
     "-Wpacked"
     "-Wpointer-arith"
     "-Wsign-promo"
-    "-Wsync-nand"
-    "-Wtrampolines"
     "-Wundef"
     "-Wunused"
     "-Wunused-macros"
@@ -372,14 +369,20 @@ else()
   foreach(flag IN LISTS warn_flags)
     wl_add_flag(WL_COMPILE_DIAGNOSTICS ${flag})
   endforeach()
+  if (NOT APPLE)
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wlogical-op")
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wsync-nand")
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wtrampolines")
+  endif()
 endif()
 
 if(NOT MSVC)
   if(CMAKE_BUILD_TYPE STREQUAL "Release")
     message(STATUS "Compiler warnings will be ignored.")
-  elseif(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND 
-         (NOT (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 12.0)) AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 12.2))
-    # Skip this on g++12.0 and 12.1 because of false-positives from system headers.
+  elseif(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (
+         ((NOT (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 12.0)) AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 12.2))
+         OR (NOT (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 13.0))))
+    # Skip this on g++ versions 12.0, 12.1, and 13.x because of false-positives from system headers.
     message(WARNING "This compiler is known to cause false-positive warnings.")
   else()
     # Turn some warnings into errors.
@@ -436,8 +439,8 @@ IF (WIN32)
     add_definitions(-Dor=|| -Dand=&& -Dnot=!)
     if (OPTION_BUILD_WINSTATIC)
       set(BROTLI brotlidec-static brotlicommon-static brotlienc-static)
-      set(SDL_EXTRA_LIBS charset)
-      set(SDL_IMG_EXTRA_LIBS libwebp)
+      wl_add_static_libs(SDL_STATIC_LIBS charset)
+      wl_add_static_libs(SDL_IMG_STATIC_LIBS libwebp)
       if(CMAKE_BUILD_TYPE STREQUAL "Debug")
         string(REPLACE "/MDd" "" CMAKE_CXX_FLAGS_DEBUG ${CMAKE_CXX_FLAGS_DEBUG})
         wl_add_flag(TARGET_COMPILE_FLAGS "/MTd /EHsc")
@@ -450,9 +453,9 @@ IF (WIN32)
     # Fix static library dependencies
     set(ZSTD zstd)
     set(BROTLI brotlidec brotlicommon brotlienc)
-    set(SDL_MIXER_EXTRA_LIBS ssp)
-    set(SDL_EXTRA_LIBS mingw32 dxerr8)
-    set(SDL_IMG_EXTRA_LIBS webp jbig deflate Lerc jxl hwy sharpyuv)
+    wl_add_static_libs(SDL_MIXER_STATIC_LIBS ssp)
+    wl_add_static_libs(SDL_STATIC_LIBS mingw32 dxerr8)
+    wl_add_static_libs(SDL_IMG_STATIC_LIBS webp jbig deflate Lerc jxl hwy sharpyuv)
     add_definitions(-DMINGW_HAS_SECURE_API -DWIN32_LEAN_AND_MEAN -D__STDC_FORMAT_MACROS -D__USE_MINGW_ANSI_STDIO)
     if (CMAKE_SIZEOF_VOID_P EQUAL 4)
       set (CMAKE_EXE_LINKER_FLAGS "-Wl,--large-address-aware" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
@@ -461,6 +464,10 @@ IF (WIN32)
       message (STATUS "Detected mingw32-w64")
     endif (CMAKE_SIZEOF_VOID_P EQUAL 4)
   endif()
+  wl_add_static_libs(SDL_IMG_STATIC_LIBS jpeg tiff lzma)
+  wl_add_static_libs(SDL_MIXER_STATIC_LIBS opusfile opus FLAC vorbisfile vorbis ogg mpg123 shlwapi)
+  wl_add_static_libs(SDL_TTF_STATIC_LIBS freetype bz2 graphite2 usp10 dwrite harfbuzz ${ZSTD} freetype rpcrt4)
+  wl_add_static_libs(SDL_STATIC_LIBS intl iconv dinput8 shell32 setupapi advapi32 uuid version oleaut32 ole32 imm32 winmm gdi32 user32 ${BROTLI} ${ZSTD})
 endif (WIN32)
 
 # on BSD this must be explicitly linked

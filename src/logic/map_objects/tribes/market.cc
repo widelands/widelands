@@ -239,7 +239,7 @@ void Market::traded_ware_arrived(const int trade_id,
 	ware->init(*game);
 
 	// TODO(sirver,trading): This is a hack. We should have a worker that
-	// carriers stuff out. At the moment this assumes this market is barbarians
+	// carriers stuff out. At the moment this assumes this market belongs to the Barbarians
 	// (which is always correct right now), creates a carrier for each received
 	// ware to drop it off. The carrier then leaves the building and goes home.
 	const WorkerDescr& w_desc = *game->descriptions().get_worker_descr(

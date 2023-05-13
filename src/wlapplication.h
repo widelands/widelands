@@ -139,7 +139,7 @@ struct InputCallback {
 // TODO(sirver): this class makes no sense for c++ - most of these should be
 // stand alone functions.
 struct WLApplication {
-	static WLApplication* get(int argc = 0, char const** argv = nullptr);
+	static WLApplication& get(int argc = 0, char const** argv = nullptr);
 	~WLApplication();
 
 	void run();
@@ -281,11 +281,6 @@ private:
 
 	/// Prevent toggling fullscreen on and off from flickering
 	uint32_t last_resolution_change_{0U};
-
-	/// Holds this process' one and only instance of WLApplication, if it was
-	/// created already. nullptr otherwise.
-	/// \note This is private on purpose. Read the class documentation.
-	static WLApplication* the_singleton;
 
 	void handle_mousebutton(SDL_Event&, InputCallback const*);
 };
