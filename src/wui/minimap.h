@@ -35,8 +35,9 @@ public:
 
 		explicit Registry(bool is_game)
 		   : minimap_layers(MiniMapLayer::Terrain | MiniMapLayer::Flag | MiniMapLayer::Road |
-		                    MiniMapLayer::Building | MiniMapLayer::Ship |
-		                    (is_game ? MiniMapLayer::Owner : MiniMapLayer::StartingPositions)) {
+		                    MiniMapLayer::Building | MiniMapLayer::Ship | MiniMapLayer::Attack |
+		                    (is_game ? MiniMapLayer::Owner | MiniMapLayer::Traffic :
+                                     MiniMapLayer::StartingPositions | MiniMapLayer::Artifacts)) {
 		}
 
 		MiniMap* get_window() const {
@@ -122,13 +123,16 @@ private:
 
 	InteractiveBase& ibase_;
 	MiniMapLayer owner_button_impl_;
+	MiniMapLayer additional_button_impl_;
 	View view_;
-	UI::Button button_terrn;
+	UI::Button button_terrain;
 	UI::Button button_owner;
 	UI::Button button_flags;
 	UI::Button button_roads;
-	UI::Button button_bldns;
+	UI::Button button_buildings;
 	UI::Button button_ships;
+	UI::Button button_traffic_artifacts;
+	UI::Button button_attack;
 	UI::Button button_zoom;
 };
 

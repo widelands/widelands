@@ -30,15 +30,18 @@
 
 // Layers for selecting what do display on the minimap.
 enum class MiniMapLayer {
-	Terrain = 1,
-	Owner = 2,
-	Flag = 4,
-	Road = 8,
-	Building = 16,
-	Zoom2 = 32,
-	ViewWindow = 64,
-	StartingPositions = 128,
-	Ship = 256,
+	Terrain = 1 << 0,
+	Owner = 1 << 1,
+	Flag = 1 << 2,
+	Road = 1 << 3,
+	Building = 1 << 4,
+	Zoom2 = 1 << 5,
+	ViewWindow = 1 << 6,
+	StartingPositions = 1 << 7,
+	Ship = 1 << 8,
+	Traffic = 1 << 9,
+	Artifacts = 1 << 10,
+	Attack = 1 << 11,
 };
 
 // A bunch of operators that turn MiniMapLayer into a bitwise combinable flag class.
