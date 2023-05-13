@@ -24,7 +24,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-05-04 02:38+0000\n"
+"POT-Creation-Date: 2023-05-10 02:40+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022-2023\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
@@ -423,7 +423,7 @@ msgstr "Установите высоту местности в случайны
 #: ../../src/editor/editorinteractive.cc:309
 #: ../../src/editor/ui_menus/field_info_window.cc:139
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:91
-#: ../../src/wui/minimap.cc:157
+#: ../../src/wui/minimap.cc:158
 msgid "Terrain"
 msgstr "Ландшафт"
 
@@ -948,7 +948,7 @@ msgstr "%1%× %2%"
 #: ../../src/editor/ui_menus/field_info_window.cc:229
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:158
 #: ../../src/ui_fsmenu/netsetup_lan.cc:137 ../../src/wui/mapdetails.cc:136
-#: ../../src/wui/minimap.cc:143
+#: ../../src/wui/minimap.cc:142
 msgid "Map"
 msgstr "Карта"
 
@@ -2510,7 +2510,7 @@ msgid "Loading %1%: %2% (%3%/%4%)"
 msgstr "Загрузка %1% (%2%, %3%/%4% )"
 
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:165
-#: ../../src/wui/minimap.cc:212
+#: ../../src/wui/minimap.cc:213
 msgid "Ships"
 msgstr "Корабли"
 
@@ -2540,7 +2540,7 @@ msgstr "Работники"
 #: ../../src/map_io/map_saver.cc:219
 #: ../../src/map_io/widelands_map_loader.cc:336
 #: ../../src/wui/general_statistics_menu.cc:150
-#: ../../src/wui/interactive_player.cc:329 ../../src/wui/minimap.cc:201
+#: ../../src/wui/interactive_player.cc:329 ../../src/wui/minimap.cc:202
 msgid "Buildings"
 msgstr "Строения"
 
@@ -2839,7 +2839,7 @@ msgid "Building restrictions"
 msgstr "Ограничения на постройки"
 
 #: ../../src/map_io/map_saver.cc:199
-#: ../../src/map_io/widelands_map_loader.cc:316 ../../src/wui/minimap.cc:179
+#: ../../src/map_io/widelands_map_loader.cc:316 ../../src/wui/minimap.cc:180
 msgid "Flags"
 msgstr "Флаги"
 
@@ -9192,7 +9192,7 @@ msgid "The map allows building ferries, ferry yards and waterways"
 msgstr "Карта позволяет строить паромы, паромные верфи и переправы"
 
 #. * TRANSLATORS: This is a map tag
-#: ../../src/wui/map_tags.cc:61
+#: ../../src/wui/map_tags.cc:61 ../../src/wui/minimap.cc:226
 msgid "Artifacts"
 msgstr "Есть артефакты"
 
@@ -9326,15 +9326,23 @@ msgstr "Размер карты (ширина x высота)"
 msgid "Map Name"
 msgstr "Карта"
 
-#: ../../src/wui/minimap.cc:168
+#: ../../src/wui/minimap.cc:169
 msgid "Owner"
 msgstr "Владелец"
 
-#: ../../src/wui/minimap.cc:190
+#: ../../src/wui/minimap.cc:191
 msgid "Roads"
 msgstr "Дороги"
 
-#: ../../src/wui/minimap.cc:223
+#: ../../src/wui/minimap.cc:226
+msgid "High Traffic"
+msgstr "Большая загруженность дорог"
+
+#: ../../src/wui/minimap.cc:237
+msgid "Attacks"
+msgstr "Нападения"
+
+#: ../../src/wui/minimap.cc:248
 msgid "Zoom"
 msgstr "Масштаб"
 
