@@ -183,9 +183,9 @@ constexpr uint32_t kGameLogicDelay = 50;
 void Panel::logic_thread() {
 	set_logic_thread();
 	logic_thread_running_ = true;
-	WLApplication* const app = WLApplication::get();
+	const WLApplication& app = WLApplication::get();
 
-	while (!app->should_die()) {
+	while (!app.should_die()) {
 		Panel* m =
 		   modal_;  // copy this because another panel may become modal during a lengthy logic frame
 
@@ -238,12 +238,12 @@ Panel& Panel::get_topmost_forefather() {
 void Panel::do_redraw_now(const bool handle_input, const std::string& message) {
 	assert(is_initializer_thread());
 
-	WLApplication* const app = WLApplication::get();
+	WLApplication& app = WLApplication::get();
 	static InputCallback input_callback = {Panel::ui_mousepress, Panel::ui_mouserelease,
 	                                       Panel::ui_mousemove,  Panel::ui_key,
 	                                       Panel::ui_textinput,  Panel::ui_mousewheel};
 	if (handle_input && message.empty()) {
-		app->handle_input(&input_callback);
+		app.handle_input(&input_callback);
 	}
 
 	Panel& ff = get_topmost_forefather();
@@ -265,8 +265,8 @@ void Panel::do_redraw_now(const bool handle_input, const std::string& message) {
 	}
 
 	if (g_mouse_cursor->is_visible()) {
-		g_mouse_cursor->change_cursor(app->is_mouse_pressed());
-		g_mouse_cursor->draw(rt, app->get_mouse_position());
+		g_mouse_cursor->change_cursor(app.is_mouse_pressed());
+		g_mouse_cursor->draw(rt, app.get_mouse_position());
 
 		// Tooltip magic. Some panels never want to show a tooltip, and if the display an
 		// overlay message we ignore user input and don't draw tooltips any more either.
@@ -336,10 +336,10 @@ int Panel::do_run() {
 	   LogicThreadState::kEndingConfirmed;  // don't start the logic thread ere we're ready
 
 	// TODO(sirver): the main loop should not be in UI, but in WLApplication.
-	WLApplication* const app = WLApplication::get();
+	WLApplication& app = WLApplication::get();
 	ModalGuard prevmodal(*this);
-	mousegrab_ = nullptr;        // good ol' paranoia
-	app->set_mouse_lock(false);  // more paranoia :-)
+	mousegrab_ = nullptr;       // good ol' paranoia
+	app.set_mouse_lock(false);  // more paranoia :-)
 
 	// With the default of 30FPS, the game will be drawn every 33ms.
 	const uint32_t draw_delay = 1000 / std::max(5, get_config_int("maxfps", 30));
@@ -380,11 +380,11 @@ int Panel::do_run() {
 		}
 
 		if (is_initializer) {
-			app->handle_input(&input_callback);
+			app.handle_input(&input_callback);
 		}
 
 		if (start_time >= next_time) {
-			if (app->should_die()) {
+			if (app.should_die()) {
 				end_modal<Returncodes>(Returncodes::kBack);
 				assert(!running_);
 			}
@@ -801,7 +801,7 @@ void Panel::do_think() {
  */
 Vector2i Panel::get_mouse_position() const {
 	return (parent_ != nullptr ? parent_->get_mouse_position() :
-                                WLApplication::get()->get_mouse_position()) -
+                                WLApplication::get().get_mouse_position()) -
 	       Vector2i(get_x() + get_lborder(), get_y() + get_tborder());
 }
 
@@ -813,7 +813,7 @@ void Panel::set_mouse_pos(const Vector2i p) {
 	if (parent_ != nullptr) {
 		parent_->set_mouse_pos(relative_p);
 	} else {
-		WLApplication::get()->warp_mouse(relative_p);
+		WLApplication::get().warp_mouse(relative_p);
 	}
 }
 
@@ -1187,7 +1187,7 @@ void Panel::set_tooltip(const std::string& text) {
 			tooltip_fixed_pos_ = Vector2i::invalid();
 		} else if (!text.empty()) {
 			tooltip_panel_ = this;
-			tooltip_fixed_pos_ = WLApplication::get()->get_mouse_position();
+			tooltip_fixed_pos_ = WLApplication::get().get_mouse_position();
 		}
 	}
 }
@@ -1250,7 +1250,7 @@ void Panel::do_mousein(bool const inside) {
 		    ((tooltip_panel_ == nullptr) || tooltip_fixed_pos_ == Vector2i::invalid()) &&
 		    !tooltip().empty()) {
 			tooltip_panel_ = this;
-			tooltip_fixed_pos_ = WLApplication::get()->get_mouse_position();
+			tooltip_fixed_pos_ = WLApplication::get().get_mouse_position();
 		} else if (!inside && tooltip_panel_ == this && tooltip_fixed_pos_ == Vector2i::invalid()) {
 			tooltip_panel_ = nullptr;
 		}
@@ -1442,7 +1442,7 @@ bool Panel::do_tooltip() {
  * \return \c true if the given key is currently pressed, or \c false otherwise
  */
 bool Panel::get_key_state(const SDL_Scancode key) const {
-	return WLApplication::get()->get_key_state(key);
+	return WLApplication::get().get_key_state(key);
 }
 
 UI::Panel* Panel::get_open_dropdown() {
@@ -1563,7 +1563,7 @@ bool Panel::ui_mousemove(uint8_t const state, int32_t x, int32_t y, int32_t xdif
 	}
 
 	int factor = 1;
-	if (WLApplication::get()->is_mouse_locked()) {
+	if (WLApplication::get().is_mouse_locked()) {
 		if (matches_keymod(SDL_GetModState(), KMOD_CTRL)) {
 			factor = 4;
 		} else if (!matches_keymod(SDL_GetModState(), KMOD_SHIFT)) {
@@ -1668,7 +1668,7 @@ bool Panel::draw_tooltip(const std::string& text, const PanelStyle style, Vector
 	const uint16_t tip_height = rendered_text->height() + kPadding;
 
 	if (pos == Vector2i::invalid()) {
-		pos = WLApplication::get()->get_mouse_position();
+		pos = WLApplication::get().get_mouse_position();
 	}
 	tooltip_fixed_rect_ = Recti(pos + Vector2i(2, kCursorHeight), tip_width, tip_height);
 	const Vector2i tooltip_bottom_right = tooltip_fixed_rect_.opposite_of_origin();
