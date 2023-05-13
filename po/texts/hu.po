@@ -56,7 +56,7 @@ msgstr "Copyright 2002 - %1%, Widelands fejlesztőcsapat."
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
-msgstr "Ez a játék szabad és nyílt forrású, rá a GNU General Public License (GPL) V2.0 vonatkozik."
+msgstr "Ez a játék szabad és nyílt forrású, a GNU General Public License (GPL) V2.0 feltételei szerint terjeszthető."
 
 #: ../../data/txts/LICENSE.lua:18
 #, lua-format
@@ -382,7 +382,7 @@ msgid ""
 "This file contains an initial savegame and all commands that were issued by "
 "all players, such as building a road or attacking an enemy. The filename "
 "will tell you the time you started the game."
-msgstr ""
+msgstr "A Widelands rögzíti minden játékodat egy .wry kiterjesztésű fájlban. Ez egy kezdeti játékmentést és a játékosok által kiadott parancsokat tartalmazza, mint például egy út építése vagy egy ellenség megtámadása. A fájlnévben megtalálható a játék elkezdésének időpontja."
 
 #: ../../data/txts/help/common_helptexts.lua:31
 msgid ""
@@ -635,7 +635,7 @@ msgstr "A Shift gomb nyomva tartásával az első alternatív eszköz kapcsol be
 #: ../../data/txts/tips/editor.lua:24
 msgid ""
 "Holding down Ctrl switches the second alternative tool on (if it exists)."
-msgstr ""
+msgstr "A Ctrl billentyű nyomva tartásával válthatsz a második alternatív eszközre (ha létezik)."
 
 #: ../../data/txts/tips/editor.lua:28
 msgid ""
@@ -838,7 +838,7 @@ msgid ""
 "touchpad scrolling in the ‘Options’ → ‘Edit keyboard and mouse actions’ "
 "menu. For example, moving the map view can be much more comfortable by "
 "scrolling instead of dragging with the right mouse button."
-msgstr ""
+msgstr "Ha érintőpados laptopon játszol, az érintőpados görgetést is használhatod egyes funkciókhoz, ha beállítod a „Beállítások” → „Billentyű- és egér-hozzárendelések szerkesztése” menüben. Pl. a térkép mozgatása sokkal kényelmesebb így érintőpadon mint a jobb gombos mozgatással."
 
 #: ../../data/txts/tips/general_game.lua:106
 msgid ""

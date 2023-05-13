@@ -1385,7 +1385,7 @@ wl.Descriptions():new_tribe {
       {
          name = "wheatfield_medium",
          helptexts = {
-            -- TRANSLATORS: Helptext for an empire/barbarian immovable usable by frisians: Wheat field
+            -- TRANSLATORS: Helptext for an Empire/Barbarian immovable usable by frisians: Wheat field
             purpose = _("This field is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
@@ -1406,7 +1406,7 @@ wl.Descriptions():new_tribe {
       {
          name = "grapevine_medium",
          helptexts = {
-            -- TRANSLATORS: Helptext for an empire immovable usable by frisians: Grapevine
+            -- TRANSLATORS: Helptext for an Empire immovable usable by frisians: Grapevine
             purpose = _("This grapevine is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
@@ -1421,7 +1421,7 @@ wl.Descriptions():new_tribe {
       {
          name = "grapevine_ripe",
          helptexts = {
-            -- TRANSLATORS: Helptext for an empire immovable usable by frisians: Grapevine
+            -- TRANSLATORS: Helptext for an Empire immovable usable by frisians: Grapevine
             purpose = _("This grapevine is ready for harvesting.")
          }
       },

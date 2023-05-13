@@ -500,7 +500,7 @@ void MapView::pan_by(Vector2i delta_pixels, const Transition& transition) {
 
 void MapView::stop_dragging() {
 	if (dragging_) {
-		WLApplication::get()->set_mouse_lock(false);
+		WLApplication::get().set_mouse_lock(false);
 		grab_mouse(false);
 		dragging_ = false;
 	}
@@ -518,7 +518,7 @@ bool MapView::handle_mousepress(uint8_t const btn, int32_t const x, int32_t cons
 		jump();
 		dragging_ = true;
 		grab_mouse(true);
-		WLApplication::get()->set_mouse_lock(true);
+		WLApplication::get().set_mouse_lock(true);
 		return true;
 	}
 	return false;

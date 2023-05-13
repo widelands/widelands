@@ -109,9 +109,9 @@ wl.Descriptions():new_tribe {
             preciousness = 0,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an empire ware: Granite, part 1
+                  -- TRANSLATORS: Helptext for an Empire ware: Granite, part 1
                   pgettext("ware", "Granite is a basic building material."),
-                  -- TRANSLATORS: Helptext for an empire ware: Granite, part 2
+                  -- TRANSLATORS: Helptext for an Empire ware: Granite, part 2
                   pgettext("empire_ware", "The Empire produces granite blocks in quarries and marble mines.")
                }
             }
@@ -121,9 +121,9 @@ wl.Descriptions():new_tribe {
             preciousness = 14,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an empire ware: Log, part 1
+                  -- TRANSLATORS: Helptext for an Empire ware: Log, part 1
                   pgettext("ware", "Logs are an important basic building material. They are produced by felling trees."),
-                  -- TRANSLATORS: Helptext for an empire ware: Log, part 2
+                  -- TRANSLATORS: Helptext for an Empire ware: Log, part 2
                   pgettext("empire_ware", "Imperial lumberjacks fell the trees; foresters take care of the supply of trees. Logs are also used by the charcoal kiln, the toolsmithy and the sawmill.")
                }
             }
@@ -134,11 +134,11 @@ wl.Descriptions():new_tribe {
             preciousness = 10,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an empire ware: Planks, part 1
+                  -- TRANSLATORS: Helptext for an Empire ware: Planks, part 1
                   pgettext("ware", "Planks are an important building material."),
-                  -- TRANSLATORS: Helptext for an empire ware: Planks, part 2
+                  -- TRANSLATORS: Helptext for an Empire ware: Planks, part 2
                   pgettext("empire_ware", "They are produced out of logs by the sawmill."),
-                  -- TRANSLATORS: Helptext for an empire ware: Planks, part 3
+                  -- TRANSLATORS: Helptext for an Empire ware: Planks, part 3
                   pgettext("empire_ware", "They are also used by the weapon smithy.")
                }
             }
@@ -148,7 +148,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 10,
             preciousness = 2,
             helptexts = {
-               -- TRANSLATORS: Helptext for an empire ware: Wool
+               -- TRANSLATORS: Helptext for an Empire ware: Wool
                purpose = pgettext("empire_ware", "Wool is the hair of sheep. Weaving mills use it to make cloth.")
             }
          },
@@ -157,7 +157,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 15,
             preciousness = 1,
             helptexts = {
-               -- TRANSLATORS: Helptext for an empire ware: Cloth
+               -- TRANSLATORS: Helptext for an Empire ware: Cloth
                purpose = pgettext("empire_ware", "Cloth is needed to build several buildings. It is also consumed in the armor smithy.")
             }
          }
@@ -168,7 +168,7 @@ wl.Descriptions():new_tribe {
             name = "fish",
             preciousness = 3,
             helptexts = {
-               -- TRANSLATORS: Helptext for an empire ware: Fish
+               -- TRANSLATORS: Helptext for an Empire ware: Fish
                purpose = pgettext("empire_ware", "Besides bread and meat, fish is also a foodstuff for the Empire. Fish are used in taverns, inns and training sites (arena, colosseum, training camp).")
             }
          },
@@ -178,9 +178,9 @@ wl.Descriptions():new_tribe {
             preciousness = 2,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an empire ware: Meat, part 1
+                  -- TRANSLATORS: Helptext for an Empire ware: Meat, part 1
                   pgettext("ware", "Meat contains a lot of energy, and it is obtained from wild game taken by hunters."),
-                  -- TRANSLATORS: Helptext for an empire ware: Meat, part 2
+                  -- TRANSLATORS: Helptext for an Empire ware: Meat, part 2
                   pgettext("empire_ware", "Meat can also be obtained as pork from piggeries. It is used in the inns and taverns to prepare lunch for the miners and is consumed at the training sites (arena, colosseum, training camp).")
                }
             }
@@ -190,9 +190,9 @@ wl.Descriptions():new_tribe {
             preciousness = 7,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an empire ware: Water, part 1
+                  -- TRANSLATORS: Helptext for an Empire ware: Water, part 1
                   pgettext("ware", "Water is the essence of life!"),
-                  -- TRANSLATORS: Helptext for an empire ware: Water, part 2
+                  -- TRANSLATORS: Helptext for an Empire ware: Water, part 2
                   pgettext("empire_ware", "Water is used in the bakery and the brewery. The donkey farm, the sheep farm and the piggery also need to be supplied with water.")
                }
             }
@@ -202,9 +202,9 @@ wl.Descriptions():new_tribe {
             preciousness = 12,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an empire ware: Wheat, part 1
+                  -- TRANSLATORS: Helptext for an Empire ware: Wheat, part 1
                   pgettext("ware", "Wheat is essential for survival."),
-                  -- TRANSLATORS: Helptext for an empire ware: Wheat, part 2
+                  -- TRANSLATORS: Helptext for an Empire ware: Wheat, part 2
                   pgettext("empire_ware", "Wheat is produced by farms and used by mills and breweries. Donkey farms, sheep farms and piggeries also need to be supplied with wheat.")
                }
             }
@@ -214,7 +214,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 20,
             preciousness = 9,
             helptexts = {
-               -- TRANSLATORS: Helptext for an empire ware: Flour
+               -- TRANSLATORS: Helptext for an Empire ware: Flour
                purpose = pgettext("empire_ware", "Flour is produced by the mill out of wheat and is needed in the bakery to produce the tasty Empire bread.")
             }
          },
@@ -223,7 +223,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 20,
             preciousness = 7,
             helptexts = {
-               -- TRANSLATORS: Helptext for an empire ware: Bread
+               -- TRANSLATORS: Helptext for an Empire ware: Bread
                purpose = pgettext("empire_ware", "The bakers of the Empire make really tasty bread out of flour and water. It is used in taverns and inns to prepare rations and meals. Bread is also consumed at the training sites (arena, colosseum, training camp).")
             }
          },
@@ -232,7 +232,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 15,
             preciousness = 5,
             helptexts = {
-               -- TRANSLATORS: Helptext for an empire ware: Beer
+               -- TRANSLATORS: Helptext for an Empire ware: Beer
                purpose = pgettext("empire_ware", "This beer is produced in a brewery out of wheat and water. It is consumed by miners in coal and iron mines.")
             }
          },
@@ -240,7 +240,7 @@ wl.Descriptions():new_tribe {
             name = "grape",
             preciousness = 10,
             helptexts = {
-               -- TRANSLATORS: Helptext for an empire ware: Grape
+               -- TRANSLATORS: Helptext for an Empire ware: Grape
                purpose = pgettext("empire_ware", "These grapes are the base for a tasty wine. They are harvested in a vineyard and processed in a winery.")
             }
          },
@@ -248,7 +248,7 @@ wl.Descriptions():new_tribe {
             name = "wine",
             preciousness = 8,
             helptexts = {
-               -- TRANSLATORS: Helptext for an empire ware: Wine
+               -- TRANSLATORS: Helptext for an Empire ware: Wine
                purpose = pgettext("empire_ware", "This tasty wine is drunk by the miners working the marble and gold mines. It is produced in a winery.")
             }
          },
@@ -258,9 +258,9 @@ wl.Descriptions():new_tribe {
             preciousness = 4,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an empire ware: Ration, part 1
+                  -- TRANSLATORS: Helptext for an Empire ware: Ration, part 1
                   pgettext("ware", "A small bite to keep miners strong and working. The scout also consumes rations on his scouting trips."),
-                  -- TRANSLATORS: Helptext for an empire ware: Ration, part 2
+                  -- TRANSLATORS: Helptext for an Empire ware: Ration, part 2
                   pgettext("empire_ware", "Rations are produced in a tavern out of fish or meat or bread.")
                }
             }
@@ -270,7 +270,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 20,
             preciousness = 4,
             helptexts = {
-               -- TRANSLATORS: Helptext for an empire ware: Meal
+               -- TRANSLATORS: Helptext for an Empire ware: Meal
                purpose = pgettext("empire_ware", "A real meal is made in inns out of bread and fish/meat. It satisfies the needs of miners in deep mines.")
             }
          }
@@ -282,7 +282,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 30,
             preciousness = 3,
             helptexts = {
-               -- TRANSLATORS: Helptext for an empire ware: Marble
+               -- TRANSLATORS: Helptext for an Empire ware: Marble
                purpose = pgettext("empire_ware", "Marble is the beautiful stone which is cut out of the mountains or produced in a quarry. Marble is used as a building material and gets chiseled into marble columns in the stonemason’s house.")
             }
          },
@@ -291,7 +291,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 10,
             preciousness = 5,
             helptexts = {
-               -- TRANSLATORS: Helptext for an empire ware: Marble Column
+               -- TRANSLATORS: Helptext for an Empire ware: Marble Column
                purpose = pgettext("empire_ware", "Marble columns represent the high culture of the Empire, so they are needed for nearly every larger building. They are produced out of marble at a stonemason’s house.")
             }
          },
@@ -301,9 +301,9 @@ wl.Descriptions():new_tribe {
             preciousness = 10,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an empire ware: Coal, part 1
+                  -- TRANSLATORS: Helptext for an Empire ware: Coal, part 1
                   pgettext("ware", "Coal is mined in coal mines or produced out of logs by a charcoal kiln."),
-                  -- TRANSLATORS: Helptext for an empire ware: Coal, part 2
+                  -- TRANSLATORS: Helptext for an Empire ware: Coal, part 2
                   pgettext("empire_ware", "The fires of the Empire smelting works, armor smithies and weapon smithies are usually fed with coal.")
                }
             }
@@ -314,9 +314,9 @@ wl.Descriptions():new_tribe {
             preciousness = 4,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an empire ware: Iron Ore, part 1
+                  -- TRANSLATORS: Helptext for an Empire ware: Iron Ore, part 1
                   pgettext("default_ware", "Iron ore is mined in iron mines."),
-                  -- TRANSLATORS: Helptext for an empire ware: Iron Ore, part 2
+                  -- TRANSLATORS: Helptext for an Empire ware: Iron Ore, part 2
                   pgettext("empire_ware", "It is smelted in a smelting works to retrieve the iron.")
                }
             }
@@ -327,9 +327,9 @@ wl.Descriptions():new_tribe {
             preciousness = 4,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an empire ware: Iron, part 1
+                  -- TRANSLATORS: Helptext for an Empire ware: Iron, part 1
                   pgettext("ware", "Iron is smelted out of iron ores."),
-                  -- TRANSLATORS: Helptext for an empire ware: Iron, part 2
+                  -- TRANSLATORS: Helptext for an Empire ware: Iron, part 2
                   pgettext("empire_ware", "It is produced by the smelting works. Weapons, armor and tools are made of iron.")
                }
             }
@@ -340,9 +340,9 @@ wl.Descriptions():new_tribe {
             preciousness = 2,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an empire ware: Gold Ore, part 1
+                  -- TRANSLATORS: Helptext for an Empire ware: Gold Ore, part 1
                   pgettext("ware", "Gold ore is mined in a gold mine."),
-                  -- TRANSLATORS: Helptext for an empire ware: Gold Ore, part 2
+                  -- TRANSLATORS: Helptext for an Empire ware: Gold Ore, part 2
                   pgettext("empire_ware", "Smelted in a smelting works, it turns into gold which is used as a precious building material and to produce weapons and armor.")
                }
             }
@@ -353,9 +353,9 @@ wl.Descriptions():new_tribe {
             preciousness = 2,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an empire ware: Gold, part 1
+                  -- TRANSLATORS: Helptext for an Empire ware: Gold, part 1
                   pgettext("ware", "Gold is the most valuable of all metals, and it is smelted out of gold ore."),
-                  -- TRANSLATORS: Helptext for an empire ware: Gold, part 2
+                  -- TRANSLATORS: Helptext for an Empire ware: Gold, part 2
                   pgettext("empire_ware", "It is produced by the smelting works. Armor and weapons are embellished with gold in the armor smithy and the weapon smithy.")
                }
             }
@@ -368,7 +368,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 2,
             preciousness = 1,
             helptexts = {
-               -- TRANSLATORS: Helptext for an empire ware: Pick
+               -- TRANSLATORS: Helptext for an Empire ware: Pick
                purpose = pgettext("empire_ware", "Picks are used by stonemasons and miners. They are produced by the toolsmith.")
             }
          },
@@ -378,9 +378,9 @@ wl.Descriptions():new_tribe {
             preciousness = 1,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an empire ware: Felling Ax, part 1
+                  -- TRANSLATORS: Helptext for an Empire ware: Felling Ax, part 1
                   pgettext("ware", "The felling ax is the tool to chop down trees."),
-                  -- TRANSLATORS: Helptext for an empire ware: Felling Ax, part 2
+                  -- TRANSLATORS: Helptext for an Empire ware: Felling Ax, part 2
                   pgettext("empire_ware", "Felling axes are used by lumberjacks and produced by the toolsmithy.")
                }
             }
@@ -390,7 +390,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 1,
             preciousness = 0,
             helptexts = {
-               -- TRANSLATORS: Helptext for an empire ware: Saw
+               -- TRANSLATORS: Helptext for an Empire ware: Saw
                purpose = pgettext("empire_ware", "This saw is needed by the carpenter. It is produced by the toolsmith.")
             }
          },
@@ -400,9 +400,9 @@ wl.Descriptions():new_tribe {
             preciousness = 0,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an empire ware: Shovel, part 1
+                  -- TRANSLATORS: Helptext for an Empire ware: Shovel, part 1
                   pgettext("ware", "Shovels are needed for the proper handling of plants."),
-                  -- TRANSLATORS: Helptext for an empire ware: Shovel, part 2
+                  -- TRANSLATORS: Helptext for an Empire ware: Shovel, part 2
                   pgettext("empire_ware", "Therefore the forester and the vine farmer use them. They are produced by the toolsmith.")
                }
             }
@@ -413,9 +413,9 @@ wl.Descriptions():new_tribe {
             preciousness = 1,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an empire ware: Hammer, part 1
+                  -- TRANSLATORS: Helptext for an Empire ware: Hammer, part 1
                   pgettext("ware", "The hammer is an essential tool."),
-                  -- TRANSLATORS: Helptext for an empire ware: Hammer, part 2
+                  -- TRANSLATORS: Helptext for an Empire ware: Hammer, part 2
                   pgettext("empire_ware", "Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make sure you’ve always got some in reserve! They are produced by the toolsmith.")
                }
             }
@@ -426,9 +426,9 @@ wl.Descriptions():new_tribe {
             preciousness = 0,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an empire ware: Fishing Rod, part 1
+                  -- TRANSLATORS: Helptext for an Empire ware: Fishing Rod, part 1
                   pgettext("ware", "Fishing rods are needed by fishers to catch fish."),
-                  -- TRANSLATORS: Helptext for an empire ware: Fishing Rod, part 2
+                  -- TRANSLATORS: Helptext for an Empire ware: Fishing Rod, part 2
                   pgettext("empire_ware", "They are produced by the toolsmith.")
                }
             }
@@ -439,9 +439,9 @@ wl.Descriptions():new_tribe {
             preciousness = 0,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an empire ware: Hunting Spear, part 1
+                  -- TRANSLATORS: Helptext for an Empire ware: Hunting Spear, part 1
                   pgettext("ware", "This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by hunters."),
-                  -- TRANSLATORS: Helptext for an empire ware: Hunting Spear, part 2
+                  -- TRANSLATORS: Helptext for an Empire ware: Hunting Spear, part 2
                   pgettext("empire_ware", "They are produced by the toolsmith.")
                }
             }
@@ -452,9 +452,9 @@ wl.Descriptions():new_tribe {
             preciousness = 0,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an empire ware: Scythe, part 1
+                  -- TRANSLATORS: Helptext for an Empire ware: Scythe, part 1
                   pgettext("ware", "The scythe is the tool of the farmers."),
-                  -- TRANSLATORS: Helptext for an empire ware: Scythe, part 2
+                  -- TRANSLATORS: Helptext for an Empire ware: Scythe, part 2
                   pgettext("empire_ware", "Scythes are produced by the toolsmith.")
                }
             }
@@ -465,9 +465,9 @@ wl.Descriptions():new_tribe {
             preciousness = 0,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an empire ware: Bread Paddle, part 1
+                  -- TRANSLATORS: Helptext for an Empire ware: Bread Paddle, part 1
                   pgettext("ware", "The bread paddle is the tool of the baker, each baker needs one."),
-                  -- TRANSLATORS: Helptext for an empire ware: Bread Paddle, part 2
+                  -- TRANSLATORS: Helptext for an Empire ware: Bread Paddle, part 2
                   pgettext("empire_ware", "Bread paddles are produced by the toolsmith.")
                }
             }
@@ -477,7 +477,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 1,
             preciousness = 0,
             helptexts = {
-               -- TRANSLATORS: Helptext for an empire ware: Basket
+               -- TRANSLATORS: Helptext for an Empire ware: Basket
                purpose = pgettext("empire_ware", "This basket is needed by the vine farmer for harvesting the grapes. It is produced by the toolsmith.")
             }
          },
@@ -486,7 +486,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 1,
             preciousness = 0,
             helptexts = {
-               -- TRANSLATORS: Helptext for an empire ware: Kitchen Tools
+               -- TRANSLATORS: Helptext for an Empire ware: Kitchen Tools
                purpose = pgettext("empire_ware", "Kitchen tools are needed for preparing rations and meals. They are produced in a toolsmithy and used in taverns and inns.")
             }
          },
@@ -496,9 +496,9 @@ wl.Descriptions():new_tribe {
             preciousness = 0,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an empire ware: Fire Tongs, part 1
+                  -- TRANSLATORS: Helptext for an Empire ware: Fire Tongs, part 1
                   pgettext("ware", "Fire tongs are the tools for smelting ores."),
-                  -- TRANSLATORS: Helptext for an empire ware: Fire Tongs, part 2
+                  -- TRANSLATORS: Helptext for an Empire ware: Fire Tongs, part 2
                   pgettext("empire_ware", "They are used in the smelting works and produced by the toolsmith.")
                }
             }
@@ -511,7 +511,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 30,
             preciousness = 1,
             helptexts = {
-               -- TRANSLATORS: Helptext for an empire ware: Wooden Spear
+               -- TRANSLATORS: Helptext for an Empire ware: Wooden Spear
                purpose = pgettext("empire_ware", "This wooden spear is the basic weapon in the Empire military system. It is produced in the weapon smithy. In combination with a helmet, it is the equipment to fit out young soldiers.")
             }
          },
@@ -520,7 +520,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 1,
             preciousness = 0,
             helptexts = {
-               -- TRANSLATORS: Helptext for an empire ware: Spear
+               -- TRANSLATORS: Helptext for an Empire ware: Spear
                purpose = pgettext("empire_ware", "This spear has an iron spike. It is produced in a weapon smithy and used in a training camp – together with food – to train soldiers from attack level 0 to attack level 1.")
             }
          },
@@ -529,7 +529,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 1,
             preciousness = 1,
             helptexts = {
-               -- TRANSLATORS: Helptext for an empire ware: Advanced Spear
+               -- TRANSLATORS: Helptext for an Empire ware: Advanced Spear
                purpose = pgettext("empire_ware", "This is an advanced spear with a steel tip. It is produced in a weapon smithy and used in a training camp – together with food – to train soldiers from attack level 1 to level 2.")
             }
          },
@@ -538,7 +538,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 1,
             preciousness = 1,
             helptexts = {
-               -- TRANSLATORS: Helptext for an empire ware: Heavy Spear
+               -- TRANSLATORS: Helptext for an Empire ware: Heavy Spear
                purpose = pgettext("empire_ware", "This is a strong spear with a steel-tip and a little blade. It is produced in the weapon smithy and used in the training camp – together with food – train soldiers from attack level 2 to level 3.")
             }
          },
@@ -547,7 +547,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 1,
             preciousness = 1,
             helptexts = {
-               -- TRANSLATORS: Helptext for an empire ware: War Spear
+               -- TRANSLATORS: Helptext for an Empire ware: War Spear
                purpose = pgettext("empire_ware", "This is the best and sharpest weapon the Empire weaponsmith creates for the soldiers. It is used in the training camp – together with food – to train soldiers from attack level 3 to level 4.")
             }
          },
@@ -556,7 +556,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 30,
             preciousness = 2,
             helptexts = {
-               -- TRANSLATORS: Helptext for an empire ware: Helmet
+               -- TRANSLATORS: Helptext for an Empire ware: Helmet
                purpose = pgettext("empire_ware", "The helmet is the basic defense of a warrior. It is produced in an armor smithy. In combination with a wooden spear, it is the equipment to fit out young soldiers. Helmets are also used in training camps – together with food – to train soldiers from health level 0 to level 1.")
             }
          },
@@ -565,7 +565,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 1,
             preciousness = 0,
             helptexts = {
-               -- TRANSLATORS: Helptext for an empire ware: Armor
+               -- TRANSLATORS: Helptext for an Empire ware: Armor
                purpose = pgettext("empire_ware", "Basic armor for Empire soldiers. It is produced in the armor smithy and used in the training camp – together with food – to train soldiers from health level 1 to level 2.")
             }
          },
@@ -574,7 +574,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 1,
             preciousness = 0,
             helptexts = {
-               -- TRANSLATORS: Helptext for an empire ware: Chain Armor
+               -- TRANSLATORS: Helptext for an Empire ware: Chain Armor
                purpose = pgettext("empire_ware", "The chain armor is a medium armor for Empire soldiers. It is produced in an armor smithy and used in a training camp – together with food – to train soldiers from health level 2 to level 3.")
             }
          },
@@ -583,7 +583,7 @@ wl.Descriptions():new_tribe {
             default_target_quantity = 1,
             preciousness = 1,
             helptexts = {
-               -- TRANSLATORS: Helptext for an empire ware: Gilded Armor
+               -- TRANSLATORS: Helptext for an Empire ware: Gilded Armor
                purpose = pgettext("empire_ware", "The gilded armor is the strongest armor an Empire soldier can have. It is produced in the armor smithy and used in the training camp – together with food – to train soldiers from health level 3 to level 4.")
             }
          }

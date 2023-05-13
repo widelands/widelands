@@ -260,7 +260,7 @@ function supply_murilius()
    local wh = p1:get_buildings("frisians_warehouse_empire")[1]
    local hq = p2:get_buildings("empire_headquarters")[1]
 
-   -- transfer all wares that frisians and empire have in common
+   -- transfer all wares that frisians and the Empire have in common
    for idx,ware in ipairs(p1.tribe.wares) do
       if p2.tribe:has_ware(ware.name) then
          local amount = wh:get_wares(ware.name)
@@ -273,7 +273,7 @@ function supply_murilius()
    while not p3.defeated do sleep(4513) end
    set_objective_done(o)
 
-   -- If the barbarians already defeated Murilius – well done.
+   -- If the Barbarians already defeated Murilius – well done.
    -- Otherwise, Murilius provokes Reebaud into ordering the player to conquer his entire colony
    -- (merely defeating the Empire isn’t enough).
    -- We don't bother to check water, walkable-only and other useless terrains.
