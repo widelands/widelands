@@ -383,7 +383,7 @@ private:
 
 	int16_t productionsites_ratio_;
 
-	bool resource_necessity_water_needed_{false};  // unless the Atlanteans or the Amazons
+	bool resource_necessity_water_needed_{false};  // unless we are Atlanteans or Amazons
 
 	// This stores the highest priority for new buildings except for military sites
 	int32_t highest_nonmil_prio_{0};

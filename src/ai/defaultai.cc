@@ -1729,7 +1729,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			   find_open_water);
 		}
 
-		if (resource_necessity_water_needed_) {  // for the Atlanteans
+		if (resource_necessity_water_needed_) {  // for the Atlanteans and the Amazons
 			field.distant_water =
 			   map.find_fields(
 			      game(), Widelands::Area<Widelands::FCoords>(field.coords, kDistantResourcesArea),
