@@ -145,7 +145,7 @@ function bad_boy_sentry()
                if not immovable_is_legal(f.immovable) then
                   -- scold the player
                   if not sent_msg then
-                     campaign_message_box(scold_player)
+                     campaign_message_box(scold_player())
                      sent_msg = true
                   end
 

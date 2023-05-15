@@ -383,9 +383,9 @@ private:
 
 	int16_t productionsites_ratio_;
 
-	bool resource_necessity_water_needed_{false};  // unless atlanteans or amazons
+	bool resource_necessity_water_needed_{false};  // unless we are Atlanteans or Amazons
 
-	// This stores highest priority for new buildings except for militarysites
+	// This stores the highest priority for new buildings except for military sites
 	int32_t highest_nonmil_prio_{0};
 
 	// if the basic economy is not established, there must be a non-empty list of remaining basic

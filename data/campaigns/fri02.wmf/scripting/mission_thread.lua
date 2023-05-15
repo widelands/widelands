@@ -260,7 +260,7 @@ function supply_murilius()
    local wh = p1:get_buildings("frisians_warehouse_empire")[1]
    local hq = p2:get_buildings("empire_headquarters")[1]
 
-   -- transfer all wares that frisians and empire have in common
+   -- transfer all wares that the Frisians and the Empire have in common
    for idx,ware in ipairs(p1.tribe.wares) do
       if p2.tribe:has_ware(ware.name) then
          local amount = wh:get_wares(ware.name)
