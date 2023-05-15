@@ -105,9 +105,9 @@
 #undef CLANG_DIAG_RESERVED_IDENTIFIER_ON
 #define CLANG_DIAG_RESERVED_IDENTIFIER_OFF                                                         \
 	CLANG_DIAG_OFF("-Wreserved-identifier")                                                         \
-   // NOLINTBEGIN(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
+	// NOLINTBEGIN(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
 #define CLANG_DIAG_RESERVED_IDENTIFIER_ON                                                          \
-   // NOLINTEND(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)                          \
+	// NOLINTEND(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)                          \
 	CLANG_DIAG_ON("-Wreserved-identifier")
 #endif
 #endif
