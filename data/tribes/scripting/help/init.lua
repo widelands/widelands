@@ -13,7 +13,7 @@ function map_object_entries(tribename, script_filename, map_object_table)
    local entries = {}
    local counter = 1
    for i, map_object in ipairs(map_object_table) do
-      -- we need to filter out double entries of amazon trees
+      -- we need to filter out double entries of Amazon trees
       if not entries[map_object.descname] or not (map_object.type_name == "immovable" and map_object.terrain_affinity) then
          local t = map_object.descname
          if map_object.type_name == "immovable" and map_object:has_attribute("tree") then

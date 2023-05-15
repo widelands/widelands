@@ -143,7 +143,7 @@ intro_2 = {
 intro_3 = {
    title =_("Introduction"),
    body=hauke(_("The first buildings"),
-      -- TRANSLATORS: Hauke – Introduction 3. "Peace" is the traditional frisian greeting
+      -- TRANSLATORS: Hauke – Introduction 3. "Peace" is the traditional Frisian greeting
       _([[Peace, Chieftain Reebaud! I will start with the colonization of the island straight away.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – Introduction 3
