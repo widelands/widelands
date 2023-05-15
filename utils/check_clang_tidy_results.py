@@ -55,9 +55,9 @@ SUPPRESSED_CHECKS = {
     'misc-no-recursion',
     'modernize-replace-disallow-copy-and-assign-macro',
     'readability-identifier-length',
+    'boost-use-to-string',
 
     # Checks we probably want to clean up sometime (discussible; see link above)
-    'boost-use-to-string',
     'bugprone-exception-escape',
     'bugprone-macro-parentheses',
     'bugprone-narrowing-conversions',

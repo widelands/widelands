@@ -1,9 +1,12 @@
 # See SUPPRESSED_CHECKS in utils/check_clang_tidy_results.py
+# TODO(tothxa): can be converted to "Checks: |" when lowest supported clang
+#               version reaches 15
 Checks: >-
   *,
   -abseil*,
   -altera*,
   -android*,
+  -boost*
   -fuchsia*,
   -linuxkernel*,
   -zircon*,
@@ -104,6 +107,9 @@ HeaderFilterRegex:
   # This is to exclude 'src/third_party'. Needs to be updated, if any new
   # directory is added. It's an old outstanding feature request for clang-tidy
   # to make this easier...
+  # It's better to list them, because the sources may be in e.g.
+  #   /home/user/src/widelands/
+  # TODO(tothxa): figure out which multiline format works...
   'src/((ai|base|chat|economy|editor|game_io|graphic|io|logic|map_io|network|notifications|scripting|sound|ui_basic|ui_fsmenu|website|wui)/|[a-z_]+\.h)'
 AnalyzeTemporaryDtors: true
 FormatStyle:     none
