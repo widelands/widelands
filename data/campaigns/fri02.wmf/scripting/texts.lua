@@ -273,7 +273,7 @@ supply_murilius_3 = {
 supply_murilius_4 = {
    title =_("We Are Not Alone"),
    body=reebaud(_("Strangers"),
-      -- TRANSLATORS: Reebaud – Supply Murilius 4. "Peace" is the traditional frisian greeting, nothing more.
+      -- TRANSLATORS: Reebaud – Supply Murilius 4. "Peace" is the traditional Frisian greeting, nothing more.
       _([[Peace, representative of the Empire! I am Reebaud, the chieftain of this tribe. All we want is to settle down here, build our home and live our lives in peace. We do not seek trouble, but we aren’t afraid to fight, either.]])),
 }
 supply_murilius_5 = {

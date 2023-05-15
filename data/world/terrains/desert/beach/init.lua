@@ -143,7 +143,7 @@
 --
 --    **enhancement**
 --        *Optional*. The terrains this terrain can be turned into by buildings like
---        the amazon gardening center. Example::
+--        the Amazon gardening center. Example::
 --
 --            enhancement = { amazons = "summer_meadow3" },
 --
