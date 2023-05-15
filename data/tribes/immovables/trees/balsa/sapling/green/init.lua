@@ -7,7 +7,7 @@ include(dirname .. "../spritesheets.lua")
 
 wl.Descriptions():new_immovable_type{
    name = "balsa_amazons_sapling",
-   -- TRANSLATORS: This is an amazon rare tree.
+   -- TRANSLATORS: This is an Amazon rare tree.
    descname = _("Balsa Tree (Sapling)"),
    size = "small",
    terrain_affinity = terrain_affinity,
