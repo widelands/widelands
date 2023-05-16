@@ -6,7 +6,7 @@ Checks: >-
   -abseil*,
   -altera*,
   -android*,
-  -boost*
+  -boost*,
   -fuchsia*,
   -linuxkernel*,
   -zircon*,
