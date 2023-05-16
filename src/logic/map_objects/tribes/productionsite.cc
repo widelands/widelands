@@ -1198,11 +1198,12 @@ void ProductionSite::init_yard_interfaces(EditorGameBase& egbase) {
 	const Map& map = egbase.map();
 	if (descr().has_ship_fleet_check()) {
 		std::vector<Coords> result;
-		// 10 is custom value to make sure the "water" is at least 10 nodes big.
+		// 10 is a custom value to make sure the "ocean" is at least 10 nodes big.
+		constexpr int kMinOceanSize = 10;
 		map.find_reachable_fields(
 		   egbase,
 		   Area<FCoords>(map.get_fcoords(get_position()), descr().workarea_info().rbegin()->first),
-		   &result, CheckStepDefault(MOVECAPS_WALK), FindNodeShore(10));
+		   &result, CheckStepDefault(MOVECAPS_WALK), FindNodeShore(kMinOceanSize));
 
 		for (const Coords& coords : result) {
 			ship_fleet_interfaces_.push_back(ShipFleetYardInterface::create(egbase, *this, coords));

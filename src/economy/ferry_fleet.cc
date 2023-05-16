@@ -60,7 +60,7 @@ Bob& FerryFleetYardInterfaceDescr::create_object() const {
 /**
  * Fleets are initialized empty.
  *
- * Intended use: @ref Ferry, @ ref FerryFleetYardInterface, and @ref Waterway, when created,
+ * Intended use: @ref Ferry, @ref FerryFleetYardInterface, and @ref Waterway, when created,
  * create a new @ref FerryFleet instance, then add themselves \em before calling the \ref init
  * function. The FerryFleet takes care of merging with existing fleets, if any.
  */

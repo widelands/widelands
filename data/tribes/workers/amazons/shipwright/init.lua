@@ -24,7 +24,7 @@ wl.Descriptions():new_worker_type {
          "return"
       },
       buildferry = {
-         "findspace=size:swim radius:4 ferry",
+         "findspace=size:swim radius:5 ferry",
          "walk=coords",
          "animate=work duration:10s",
          "createbob=amazons_ferry",

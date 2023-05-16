@@ -67,6 +67,17 @@ constexpr uint16_t kCurrentPacketVersionMilitarysite = 7;
 constexpr uint16_t kCurrentPacketVersionProductionsite = 11;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 7;
 
+/* Packet versions changelog:
+ * Overall: v1.1 = 9
+ * Dismantlesite: v1.1 = 1
+ * Constructionsite: v1.1 = 5
+ * PFBuilding: v1.1 = 2
+ * Militarysite: v1.1 = 7
+ * Productionsite: v1.1 = 10
+ * - 10 -> 11: Added ship/ferry fleet/yard interfaces
+ * Trainingesite: v1.1 = 7
+ */
+
 void MapBuildingdataPacket::read(FileSystem& fs,
                                  EditorGameBase& egbase,
                                  bool const skip,

@@ -63,9 +63,9 @@ Bob& ShipFleetYardInterfaceDescr::create_object() const {
 /**
  * Fleets are initialized empty.
  *
- * Intended use: @ref Ship and @ref PortDock, when created, create a new @ref ShipFleet
- * instance, then add themselves \em before calling the \ref init function.
- * The Fleet takes care of merging with existing fleets, if any.
+ * Intended use: @ref Ship, @ref ShipFleetYardInterface, and @ref PortDock, when created,
+ * create a new @ref ShipFleet instance, then add themselves \em before calling the
+ * \ref init function. The Fleet takes care of merging with existing fleets, if any.
  */
 ShipFleet::ShipFleet(Player* player) : MapObject(&g_ship_fleet_descr), schedule_(*this) {
 	owner_ = player;
