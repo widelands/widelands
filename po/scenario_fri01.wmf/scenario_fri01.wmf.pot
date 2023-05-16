@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-05-16 02:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -271,7 +271,7 @@ msgstr ""
 msgid "The first buildings"
 msgstr ""
 
-#. TRANSLATORS: Hauke – Introduction 3. "Peace" is the traditional frisian greeting
+#. TRANSLATORS: Hauke – Introduction 3. "Peace" is the traditional Frisian greeting
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:147
 msgid ""
 "Peace, Chieftain Reebaud! I will start with the colonization of the island "

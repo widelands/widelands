@@ -4,7 +4,7 @@ dirname = path.dirname (__file__)
 
 wl.Descriptions():new_immovable_type {
    name = "cocoa_tree_sapling",
-   -- TRANSLATORS:  This is an amazon rare tree.
+   -- TRANSLATORS:  This is an Amazon rare tree.
    descname = _("Cocoa Tree (sapling)"),
    size = "small",
    icon = dirname .. "menu_sapling.png",

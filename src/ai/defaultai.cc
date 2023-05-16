@@ -798,7 +798,7 @@ void DefaultAI::late_initialization() {
 				   supported_building_index, dynamic_cast<const Widelands::ProductionSiteDescr*>(
 				                                tribe_->get_building_descr(supported_building_index))));
 			}
-			// TODO(hessenfarmer): we need to find a solution for amazons here as they do not mine
+			// TODO(hessenfarmer): we need to find a solution for the Amazons here as they do not mine
 			// iron
 			iron_resource_id = game().descriptions().resource_index("resource_iron");
 			if (iron_resource_id == Widelands::INVALID_INDEX) {
@@ -1080,7 +1080,7 @@ void DefaultAI::late_initialization() {
 		         tribe_->name().c_str());
 	}
 
-	// atlanteans they consider water as a resource
+	// the Atlanteans consider water as a resource
 	// (together with mines, rocks and wood)
 	// TODO(hessenfarmer): this should be moved from hardcoded to configurable / detectable
 	if (tribe_->name() == "atlanteans" || tribe_->name() == "amazons") {
@@ -1729,7 +1729,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			   find_open_water);
 		}
 
-		if (resource_necessity_water_needed_) {  // for atlanteans
+		if (resource_necessity_water_needed_) {  // for the Atlanteans and the Amazons
 			field.distant_water =
 			   map.find_fields(
 			      game(), Widelands::Area<Widelands::FCoords>(field.coords, kDistantResourcesArea),
@@ -2739,9 +2739,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						if (bf->unowned_portspace_vicinity_nearby > 0) {
 							prio -= 500;
 						}
-						// frisian claypit and frisian farm
+						// Frisian claypit and Frisian farm
 					} else if (bo.is(BuildingAttribute::kSupportingProducer)) {
-						// we dont like trees nearby
+						// we don't like trees nearby
 						prio += 1 - std::max(
 						               bf->immovables_by_attribute_nearby[BuildingAttribute::kLumberjack],
 						               bf->immovables_by_attribute_nearby[BuildingAttribute::kRanger]) /
@@ -2779,9 +2779,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						    (bf->unowned_mines_spots_nearby != 0u)) {  // not close to mountains
 							prio -= std::abs(management_data.get_military_number_at(104)) / 5;
 						}
-						// frisian berry farm
+						// Frisian berry farm
 					} else if (bo.is(BuildingAttribute::kSpaceConsumer)) {
-						// we dont like trees nearby
+						// we don't like trees nearby
 						prio += 1 - std::max(
 						               bf->immovables_by_attribute_nearby[BuildingAttribute::kLumberjack],
 						               bf->immovables_by_attribute_nearby[BuildingAttribute::kRanger]) /
@@ -2907,7 +2907,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 							           number_of_supporters_nearby * 5, kAbsValue) /
 							        2;
 						}
-						// buildings that need coast and are not considered above e.g. amazons
+						// buildings that need coast and are not considered above e.g. Amazons
 						// water_gatherers
 						if (bo.is(BuildingAttribute::kNeedsCoast) && (bf->water_nearby < 3)) {
 							continue;

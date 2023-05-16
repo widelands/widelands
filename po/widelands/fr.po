@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-05-04 02:38+0000\n"
+"POT-Creation-Date: 2023-05-13 02:43+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Renaud Bouchard, 2015-2023\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
@@ -355,7 +355,7 @@ msgstr "Aide"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:205
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:40
-#: ../../src/ui_fsmenu/main.cc:414 ../../src/wlapplication_options.cc:444
+#: ../../src/ui_fsmenu/main.cc:420 ../../src/wlapplication_options.cc:444
 msgid "New Map"
 msgstr "Nouvelle carte"
 
@@ -370,7 +370,7 @@ msgstr "Nouvelle carte aléatoire"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/editor/editorinteractive.cc:222
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:33
-#: ../../src/ui_fsmenu/main.cc:419 ../../src/wlapplication_options.cc:824
+#: ../../src/ui_fsmenu/main.cc:425 ../../src/wlapplication_options.cc:824
 msgid "Load Map"
 msgstr "Charger une carte"
 
@@ -427,7 +427,7 @@ msgstr "Définis la hauteur du terrain aléatoirement"
 #: ../../src/editor/editorinteractive.cc:309
 #: ../../src/editor/ui_menus/field_info_window.cc:139
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:91
-#: ../../src/wui/minimap.cc:157
+#: ../../src/wui/minimap.cc:158
 msgid "Terrain"
 msgstr "Terrain"
 
@@ -660,12 +660,12 @@ msgstr "Êtes vous sûr de vouloir quitter l'éditeur ?"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:467
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:123
 #: ../../src/ui_fsmenu/launch_mpg.cc:309 ../../src/ui_fsmenu/main.cc:249
-#: ../../src/wlapplication.cc:1644
+#: ../../src/wlapplication.cc:1647
 msgid "Error"
 msgstr "Erreur"
 
 #: ../../src/editor/editorinteractive.cc:1110 ../../src/ui_fsmenu/main.cc:233
-#: ../../src/wlapplication.cc:1646
+#: ../../src/wlapplication.cc:1649
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -952,7 +952,7 @@ msgstr "%1%× %2%"
 #: ../../src/editor/ui_menus/field_info_window.cc:229
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:158
 #: ../../src/ui_fsmenu/netsetup_lan.cc:137 ../../src/wui/mapdetails.cc:136
-#: ../../src/wui/minimap.cc:143
+#: ../../src/wui/minimap.cc:142
 msgid "Map"
 msgstr "Carte"
 
@@ -982,7 +982,7 @@ msgstr "Auteur : %s"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:244
 #: ../../src/ui_fsmenu/addons/packager_box.cc:284
-#: ../../src/ui_fsmenu/main.cc:453 ../../src/ui_fsmenu/mapdetailsbox.cc:124
+#: ../../src/ui_fsmenu/main.cc:459 ../../src/ui_fsmenu/mapdetailsbox.cc:124
 #, c-format
 msgid "Description: %s"
 msgstr "Description : %s"
@@ -1003,7 +1003,7 @@ msgid "Enabled Add-Ons: %s"
 msgstr "Modules complémentaires activés: %s"
 
 #: ../../src/editor/ui_menus/help.cc:36 ../../src/ui_fsmenu/login_box.cc:238
-#: ../../src/ui_fsmenu/main.cc:231 ../../src/ui_fsmenu/main.cc:1043
+#: ../../src/ui_fsmenu/main.cc:231 ../../src/ui_fsmenu/main.cc:1049
 #: ../../src/wui/encyclopedia_window.cc:145
 #: ../../src/wui/tribal_encyclopedia.cc:55
 msgid "Error!"
@@ -1369,7 +1369,7 @@ msgstr "Génération d'une carte aléatoire..."
 #. editor.
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:654
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:688
-#: ../../src/ui_fsmenu/main.cc:416
+#: ../../src/ui_fsmenu/main.cc:422
 msgid "Random Map"
 msgstr "Carte aléatoire"
 
@@ -2505,7 +2505,7 @@ msgid "Loading %1%: %2% (%3%/%4%)"
 msgstr "Chargement de %1%: %2% (%3%/%4%)"
 
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:165
-#: ../../src/wui/minimap.cc:212
+#: ../../src/wui/minimap.cc:213
 msgid "Ships"
 msgstr "Bateaux"
 
@@ -2535,7 +2535,7 @@ msgstr "Ouvriers"
 #: ../../src/map_io/map_saver.cc:219
 #: ../../src/map_io/widelands_map_loader.cc:336
 #: ../../src/wui/general_statistics_menu.cc:150
-#: ../../src/wui/interactive_player.cc:329 ../../src/wui/minimap.cc:201
+#: ../../src/wui/interactive_player.cc:329 ../../src/wui/minimap.cc:202
 msgid "Buildings"
 msgstr "Bâtiments"
 
@@ -2834,7 +2834,7 @@ msgid "Building restrictions"
 msgstr "Restrictions de constructions"
 
 #: ../../src/map_io/map_saver.cc:199
-#: ../../src/map_io/widelands_map_loader.cc:316 ../../src/wui/minimap.cc:179
+#: ../../src/map_io/widelands_map_loader.cc:316 ../../src/wui/minimap.cc:180
 msgid "Flags"
 msgstr "Drapeaux"
 
@@ -2941,7 +2941,7 @@ msgid "Checking map"
 msgstr "Vérification de la carte"
 
 #: ../../src/network/gameclient.cc:144 ../../src/network/gamehost.cc:523
-#: ../../src/ui_fsmenu/launch_spg.cc:174 ../../src/wlapplication.cc:753
+#: ../../src/ui_fsmenu/launch_spg.cc:174 ../../src/wlapplication.cc:756
 msgid "Preparing game…"
 msgstr "Préparation de la partie"
 
@@ -3576,7 +3576,7 @@ msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Non sélectionné"
 
-#: ../../src/ui_basic/dropdown.h:467
+#: ../../src/ui_basic/dropdown.h:470
 msgid "No matches"
 msgstr "Aucunes correspondances"
 
@@ -3685,7 +3685,7 @@ msgstr "Accrocher"
 msgid "Unpin"
 msgstr "Décrocher"
 
-#: ../../src/ui_fsmenu/about.cc:38 ../../src/ui_fsmenu/main.cc:486
+#: ../../src/ui_fsmenu/about.cc:38 ../../src/ui_fsmenu/main.cc:492
 msgid "About Widelands"
 msgstr "A propos de Widelands"
 
@@ -4558,25 +4558,25 @@ msgid "Directory Tree"
 msgstr "Arborescence des répertoires"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:274
-#: ../../src/ui_fsmenu/main.cc:443
+#: ../../src/ui_fsmenu/main.cc:449
 #, c-format
 msgid "Name: %s"
 msgstr "Nom : %s"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:277
-#: ../../src/ui_fsmenu/main.cc:446 ../../src/ui_fsmenu/mapdetailsbox.cc:112
+#: ../../src/ui_fsmenu/main.cc:452 ../../src/ui_fsmenu/mapdetailsbox.cc:112
 #, c-format
 msgid "Size: %s"
 msgstr "Taille: %s"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:280
-#: ../../src/ui_fsmenu/main.cc:448 ../../src/ui_fsmenu/mapdetailsbox.cc:114
+#: ../../src/ui_fsmenu/main.cc:454 ../../src/ui_fsmenu/mapdetailsbox.cc:114
 #, c-format
 msgid "%1$u×%2$u"
 msgstr "%1$u×%2$u"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:281
-#: ../../src/ui_fsmenu/main.cc:387 ../../src/ui_fsmenu/main.cc:450
+#: ../../src/ui_fsmenu/main.cc:393 ../../src/ui_fsmenu/main.cc:456
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:119
 #, c-format
 msgid "Players: %s"
@@ -5584,7 +5584,7 @@ msgstr "Retour au menu de jeu solo"
 msgid "Load this game"
 msgstr "Charger cette partie"
 
-#: ../../src/ui_fsmenu/login_box.cc:37 ../../src/ui_fsmenu/main.cc:407
+#: ../../src/ui_fsmenu/login_box.cc:37 ../../src/ui_fsmenu/main.cc:413
 msgid "Online Game Settings"
 msgstr "Réglages de jeu en ligne"
 
@@ -5605,7 +5605,7 @@ msgstr "Pseudo :"
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:107
-#: ../../src/ui_fsmenu/netsetup_lan.cc:134 ../../src/wlapplication.cc:674
+#: ../../src/ui_fsmenu/netsetup_lan.cc:134 ../../src/wlapplication.cc:677
 msgid "nobody"
 msgstr "personne"
 
@@ -5631,209 +5631,209 @@ msgid ""
 "%s"
 msgstr "Incapable de créer une instance de jeu !\nMessage d'erreur:\n%s"
 
-#: ../../src/ui_fsmenu/main.cc:340
+#: ../../src/ui_fsmenu/main.cc:346
 msgid "Begin a new game"
 msgstr "Commencer une nouvelle partie"
 
-#: ../../src/ui_fsmenu/main.cc:340 ../../src/wlapplication_options.cc:246
+#: ../../src/ui_fsmenu/main.cc:346 ../../src/wlapplication_options.cc:246
 msgid "New Game"
 msgstr "Nouvelle partie"
 
-#: ../../src/ui_fsmenu/main.cc:342 ../../src/ui_fsmenu/random_game.cc:29
+#: ../../src/ui_fsmenu/main.cc:348 ../../src/ui_fsmenu/random_game.cc:29
 #: ../../src/wlapplication_options.cc:260
 msgid "New Random Game"
 msgstr "Nouvelle partie aléatoire "
 
-#: ../../src/ui_fsmenu/main.cc:343
+#: ../../src/ui_fsmenu/main.cc:349
 msgid "Create a new random match"
 msgstr "Créer une nouvelle correspondance aléatoire"
 
-#: ../../src/ui_fsmenu/main.cc:345 ../../src/wlapplication_options.cc:270
+#: ../../src/ui_fsmenu/main.cc:351 ../../src/wlapplication_options.cc:270
 msgid "Campaigns"
 msgstr "Campagnes"
 
-#: ../../src/ui_fsmenu/main.cc:345
+#: ../../src/ui_fsmenu/main.cc:351
 msgid "Play a campaign"
 msgstr "Jouez une campagne"
 
-#: ../../src/ui_fsmenu/main.cc:347 ../../src/wlapplication_options.cc:265
+#: ../../src/ui_fsmenu/main.cc:353 ../../src/wlapplication_options.cc:265
 msgid "Tutorials"
 msgstr "Tutoriels"
 
-#: ../../src/ui_fsmenu/main.cc:348
+#: ../../src/ui_fsmenu/main.cc:354
 msgid "Play one of our beginners’ tutorials"
 msgstr "Jouez à un de nos tutoriels pour débutants "
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/ui_fsmenu/main.cc:350 ../../src/wlapplication_options.cc:250
+#: ../../src/ui_fsmenu/main.cc:356 ../../src/wlapplication_options.cc:250
 #: ../../src/wlapplication_options.cc:845
 #: ../../src/wui/game_main_menu_save_game.cc:48
 #: ../../src/wui/interactive_gamebase.cc:177
 msgid "Load Game"
 msgstr "Charger une partie"
 
-#: ../../src/ui_fsmenu/main.cc:351
+#: ../../src/ui_fsmenu/main.cc:357
 msgid "Continue a saved game"
 msgstr "Continuer une partie sauvergardé"
 
-#: ../../src/ui_fsmenu/main.cc:372 ../../src/wlapplication_options.cc:307
+#: ../../src/ui_fsmenu/main.cc:378 ../../src/wlapplication_options.cc:307
 msgid "Continue Playing"
 msgstr "Continuer à jouer"
 
-#: ../../src/ui_fsmenu/main.cc:381
+#: ../../src/ui_fsmenu/main.cc:387
 #, c-format
 msgid "Map: %s"
 msgstr "Carte: %s"
 
-#: ../../src/ui_fsmenu/main.cc:384
+#: ../../src/ui_fsmenu/main.cc:390
 #, c-format
 msgid "Win Condition: %s"
 msgstr "Condition de victoire: %s"
 
-#: ../../src/ui_fsmenu/main.cc:390
+#: ../../src/ui_fsmenu/main.cc:396
 #, c-format
 msgid "Gametime: %s"
 msgstr "Temps de jeu: %s"
 
 #. * TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today,
 #. * 10:30'
-#: ../../src/ui_fsmenu/main.cc:396
+#: ../../src/ui_fsmenu/main.cc:402
 #, c-format
 msgid "Saved: %s"
 msgstr "Sauvegardé: %s"
 
-#: ../../src/ui_fsmenu/main.cc:404
+#: ../../src/ui_fsmenu/main.cc:410
 msgid "Online Game"
 msgstr "Jeux en ligne"
 
-#: ../../src/ui_fsmenu/main.cc:405
+#: ../../src/ui_fsmenu/main.cc:411
 msgid "Join the Widelands lobby"
 msgstr "Rejoindre le vestibule de Widelands"
 
-#: ../../src/ui_fsmenu/main.cc:408
+#: ../../src/ui_fsmenu/main.cc:414
 msgid "Log in as a registered user"
 msgstr "Se connecter en tant qu'utilisateur enregistré "
 
-#: ../../src/ui_fsmenu/main.cc:410 ../../src/wlapplication_options.cc:324
+#: ../../src/ui_fsmenu/main.cc:416 ../../src/wlapplication_options.cc:324
 msgid "LAN / Direct IP"
 msgstr "Partie en LAN / Direct IP"
 
-#: ../../src/ui_fsmenu/main.cc:411
+#: ../../src/ui_fsmenu/main.cc:417
 msgid "Play a private online game"
 msgstr "Jouez un jeu privé en ligne"
 
-#: ../../src/ui_fsmenu/main.cc:414
+#: ../../src/ui_fsmenu/main.cc:420
 msgid "Create a new empty map"
 msgstr "Créer une nouvelle carte vide"
 
-#: ../../src/ui_fsmenu/main.cc:417
+#: ../../src/ui_fsmenu/main.cc:423
 msgid "Create a new random map"
 msgstr "Créer une nouvelle carte aléatoire"
 
-#: ../../src/ui_fsmenu/main.cc:419
+#: ../../src/ui_fsmenu/main.cc:425
 msgid "Edit an existing map"
 msgstr "Modifier une carte existante"
 
-#: ../../src/ui_fsmenu/main.cc:436 ../../src/wlapplication_options.cc:302
+#: ../../src/ui_fsmenu/main.cc:442 ../../src/wlapplication_options.cc:302
 msgid "Continue Editing"
 msgstr "Continuer l'édition"
 
-#: ../../src/ui_fsmenu/main.cc:460
+#: ../../src/ui_fsmenu/main.cc:466
 msgid "Single Player…"
 msgstr "Un joueur..."
 
-#: ../../src/ui_fsmenu/main.cc:461
+#: ../../src/ui_fsmenu/main.cc:467
 msgid "Multiplayer…"
 msgstr "Multijoueur..."
 
-#: ../../src/ui_fsmenu/main.cc:462
+#: ../../src/ui_fsmenu/main.cc:468
 msgid "Editor…"
 msgstr "Éditeur..."
 
-#: ../../src/ui_fsmenu/main.cc:464
+#: ../../src/ui_fsmenu/main.cc:470
 msgid "Begin or load a single-player campaign or free game"
 msgstr "Commencer ou charger une campagne solo ou un jeu libre"
 
-#: ../../src/ui_fsmenu/main.cc:467
+#: ../../src/ui_fsmenu/main.cc:473
 msgid "Play with your friends over the internet"
 msgstr "Jouez avec vos amis sur internet"
 
-#: ../../src/ui_fsmenu/main.cc:470
+#: ../../src/ui_fsmenu/main.cc:476
 msgid "Launch the map editor"
 msgstr "Lancer l'éditeur de carte"
 
-#: ../../src/ui_fsmenu/main.cc:473 ../../src/wlapplication_options.cc:255
+#: ../../src/ui_fsmenu/main.cc:479 ../../src/wlapplication_options.cc:255
 msgid "Watch Replay"
 msgstr "Voir replay"
 
-#: ../../src/ui_fsmenu/main.cc:475
+#: ../../src/ui_fsmenu/main.cc:481
 msgid "Watch the replay of an old game"
 msgstr "Regarder le replay d'une vieille partie"
 
-#: ../../src/ui_fsmenu/main.cc:478 ../../src/wlapplication_options.cc:320
+#: ../../src/ui_fsmenu/main.cc:484 ../../src/wlapplication_options.cc:320
 msgid "Add-Ons"
 msgstr "Modules"
 
-#: ../../src/ui_fsmenu/main.cc:480
+#: ../../src/ui_fsmenu/main.cc:486
 msgid "Install and manage add-ons"
 msgstr "Installe et gère les modules complémentaires"
 
-#: ../../src/ui_fsmenu/main.cc:482 ../../src/ui_fsmenu/options.cc:86
+#: ../../src/ui_fsmenu/main.cc:488 ../../src/ui_fsmenu/options.cc:86
 #: ../../src/wlapplication_options.cc:337
 msgid "Options"
 msgstr "Options"
 
-#: ../../src/ui_fsmenu/main.cc:484
+#: ../../src/ui_fsmenu/main.cc:490
 msgid "Technical and game-related settings"
 msgstr "Réglages techniques et relatifs au jeu"
 
-#: ../../src/ui_fsmenu/main.cc:488
+#: ../../src/ui_fsmenu/main.cc:494
 msgid "Readme, License, and Credits"
 msgstr "Lisezmoi, Licence, Crédits"
 
-#: ../../src/ui_fsmenu/main.cc:490 ../../src/wlapplication_options.cc:311
+#: ../../src/ui_fsmenu/main.cc:496 ../../src/wlapplication_options.cc:311
 msgid "Exit Widelands"
 msgstr "Quitter Widelands"
 
-#: ../../src/ui_fsmenu/main.cc:492
+#: ../../src/ui_fsmenu/main.cc:498
 msgid "Quit the game"
 msgstr "Quitter la partie"
 
 #. * TRANSLATORS: %1$s = version string and build type  ("Debug" or "Release")
-#: ../../src/ui_fsmenu/main.cc:497
+#: ../../src/ui_fsmenu/main.cc:503
 #, c-format
 msgid "Version %1$s"
 msgstr "Version %1$s"
 
 #. * TRANSLATORS: Placeholders are the copyright years
-#: ../../src/ui_fsmenu/main.cc:500
+#: ../../src/ui_fsmenu/main.cc:506
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team · Licensed under the GNU "
 "General Public License V2.0"
 msgstr "(C) %1%-%2% par l'équipe de développement de Widelands · Sous licence GPL V2.0"
 
-#: ../../src/ui_fsmenu/main.cc:832
+#: ../../src/ui_fsmenu/main.cc:838
 msgid "Desyncing Add-On Found"
 msgstr "Module désynchronisant trouvé "
 
-#: ../../src/ui_fsmenu/main.cc:833
+#: ../../src/ui_fsmenu/main.cc:839
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
 msgstr "Un module complémentaire activé est connu pour provoquer des désynchronisations. Procédez à vous risques et périls."
 
-#: ../../src/ui_fsmenu/main.cc:935 ../../src/ui_fsmenu/netsetup_lan.cc:330
+#: ../../src/ui_fsmenu/main.cc:941 ../../src/ui_fsmenu/netsetup_lan.cc:330
 msgid "No tribes found!"
 msgstr "Pas de Tribus trouvées !"
 
-#: ../../src/ui_fsmenu/main.cc:936 ../../src/ui_fsmenu/netsetup_lan.cc:331
+#: ../../src/ui_fsmenu/main.cc:942 ../../src/ui_fsmenu/netsetup_lan.cc:331
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "Pas de Tribus trouvées dans data/tribes/initialization/[tribename]/init.lua."
 
-#: ../../src/ui_fsmenu/main.cc:980
+#: ../../src/ui_fsmenu/main.cc:986
 msgid "Exit Confirmation"
 msgstr "Confirmation de Sortie"
 
-#: ../../src/ui_fsmenu/main.cc:981
+#: ../../src/ui_fsmenu/main.cc:987
 msgid "Are you sure you wish to exit Widelands?"
 msgstr "Êtes vous sûr de vouloir quitter Widelands ?"
 
@@ -6677,60 +6677,60 @@ msgstr "Tout sélectionner"
 msgid "Unmark All"
 msgstr "Tout déselectionner"
 
-#: ../../src/wlapplication.cc:795
+#: ../../src/wlapplication.cc:798
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr "Widelands n' pas pu trouver le fichier \"%s\"."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:796 ../../src/wlapplication.cc:801
+#: ../../src/wlapplication.cc:799 ../../src/wlapplication.cc:804
 #: ../../src/wui/savegameloader.cc:119
 msgid "Error message:"
 msgstr "Message d'erreur :"
 
-#: ../../src/wlapplication.cc:797
+#: ../../src/wlapplication.cc:800
 msgid "File system error"
 msgstr "Erreur du système de fichier"
 
-#: ../../src/wlapplication.cc:1297
+#: ../../src/wlapplication.cc:1300
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr "Valeur de ligne de commande vide: %s"
 
-#: ../../src/wlapplication.cc:1302
+#: ../../src/wlapplication.cc:1305
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr "%s ne peut être combiné avec d'autres actions"
 
-#: ../../src/wlapplication.cc:1457
+#: ../../src/wlapplication.cc:1460
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Paramètre de ligne de commande inconnu: %s\nIl manque peut être '=' ?"
 
-#: ../../src/wlapplication.cc:1578
+#: ../../src/wlapplication.cc:1581
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr "--xres/--yres, --maximized et --fullscreen ne peuvent pas être combinés"
 
-#: ../../src/wlapplication.cc:1596
+#: ../../src/wlapplication.cc:1599
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Paramètre de ligne de commande inconnu: %s"
 
-#: ../../src/wlapplication.cc:1622
+#: ../../src/wlapplication.cc:1625
 msgid "Incompatible"
 msgstr "Incompatible"
 
-#: ../../src/wlapplication.cc:1659
+#: ../../src/wlapplication.cc:1662
 msgid "Game ended unexpectedly"
 msgstr "Le jeu s'est terminé inopinément "
 
-#: ../../src/wlapplication.cc:1659
+#: ../../src/wlapplication.cc:1662
 msgid "Unexpected error during the game"
 msgstr "Erreur inattendue pendant le jeu"
 
-#: ../../src/wlapplication.cc:1662
+#: ../../src/wlapplication.cc:1665
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6744,7 +6744,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Une erreur est survenue. Le message d'erreur est :\n\n%1$s\n\nS'il vous plait, reportez nous ce problème pour nous aider à améliorer Widelands. Vous trouverez les messages relatifs dans la sortie standard (stdout.txt sur windows). Vous utilisez la version %2$s.\nAjoutez cette information à ce rapport s'il vous plait.\n\nVoulez vous que Widelands essaye de créer une sauvegarde d'urgence ? Il est souvent – si ce n'est tout le temps – possible de la recharger et de continuer à jouer."
 
-#: ../../src/wlapplication.cc:1671
+#: ../../src/wlapplication.cc:1674
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6754,11 +6754,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Le jeu s'est terminé de manière innopiné pour la raison suivante:\n\n%s\n\nVoulez vous que Widelands essaye de créer un sauvegarde d'urgence? La plupart du temps – mais pas toujours – il est possible de la charger et de continuer à jouer."
 
-#: ../../src/wlapplication.cc:1697
+#: ../../src/wlapplication.cc:1700
 msgid "Emergency save failed"
 msgstr "Sauvegarde d'urgence échouée"
 
-#: ../../src/wlapplication.cc:1698
+#: ../../src/wlapplication.cc:1701
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -9161,7 +9161,7 @@ msgid "The map allows building ferries, ferry yards and waterways"
 msgstr "La carte permet de construire des ferries, des chantier de construction de ferries et des voies navigables"
 
 #. * TRANSLATORS: This is a map tag
-#: ../../src/wui/map_tags.cc:61
+#: ../../src/wui/map_tags.cc:61 ../../src/wui/minimap.cc:226
 msgid "Artifacts"
 msgstr "Artefacts"
 
@@ -9295,15 +9295,23 @@ msgstr "La taille de la carte (Largeur x Hauteur)"
 msgid "Map Name"
 msgstr "Nom de la carte"
 
-#: ../../src/wui/minimap.cc:168
+#: ../../src/wui/minimap.cc:169
 msgid "Owner"
 msgstr "Propriétaire"
 
-#: ../../src/wui/minimap.cc:190
+#: ../../src/wui/minimap.cc:191
 msgid "Roads"
 msgstr "Routes"
 
-#: ../../src/wui/minimap.cc:223
+#: ../../src/wui/minimap.cc:226
+msgid "High Traffic"
+msgstr ""
+
+#: ../../src/wui/minimap.cc:237
+msgid "Attacks"
+msgstr ""
+
+#: ../../src/wui/minimap.cc:248
 msgid "Zoom"
 msgstr "Zoom"
 
