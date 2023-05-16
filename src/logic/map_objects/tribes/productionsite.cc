@@ -293,11 +293,13 @@ ProductionSite::ProductionSite(const ProductionSiteDescr& ps_descr)
 	format_statistics_string();
 
 	if (descr().has_ship_fleet_check() || descr().has_ferry_fleet_check()) {
-		field_terrain_changed_subscriber_ = Notifications::subscribe<NoteFieldTerrainChanged>([this](const NoteFieldTerrainChanged& note) {
-			if (owner().egbase().map().calc_distance(note.fc, get_position()) <= descr().workarea_info().rbegin()->first + 1) {
-				init_yard_interfaces(get_owner()->egbase());
-			}
-		});
+		field_terrain_changed_subscriber_ = Notifications::subscribe<NoteFieldTerrainChanged>(
+		   [this](const NoteFieldTerrainChanged& note) {
+			   if (owner().egbase().map().calc_distance(note.fc, get_position()) <=
+			       descr().workarea_info().rbegin()->first + 1) {
+				   init_yard_interfaces(get_owner()->egbase());
+			   }
+		   });
 	}
 }
 

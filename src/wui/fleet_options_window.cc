@@ -42,17 +42,20 @@ FleetOptionsWindow::create(UI::Panel* parent, InteractiveBase& ibase, Widelands:
 	// We can't cache the fleet serial or pointer, they can change around a lot.
 	for (FleetOptionsWindow* window : living_fleet_option_windows) {
 		Widelands::Bob* window_interface = window->interface_.get(ibase.egbase());
-		if (window_interface == nullptr || window_interface->descr().type() != interface->descr().type()) {
+		if (window_interface == nullptr ||
+		    window_interface->descr().type() != interface->descr().type()) {
 			continue;  // Different type of window
 		}
 		if (interface->descr().type() == Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE) {
 			if (dynamic_cast<const Widelands::ShipFleetYardInterface*>(interface)->get_fleet() !=
-				dynamic_cast<const Widelands::ShipFleetYardInterface*>(window_interface)->get_fleet()) {
+			    dynamic_cast<const Widelands::ShipFleetYardInterface*>(window_interface)
+			       ->get_fleet()) {
 				continue;  // Different fleets
 			}
 		} else {
 			if (dynamic_cast<const Widelands::FerryFleetYardInterface*>(interface)->get_fleet() !=
-				dynamic_cast<const Widelands::FerryFleetYardInterface*>(window_interface)->get_fleet()) {
+			    dynamic_cast<const Widelands::FerryFleetYardInterface*>(window_interface)
+			       ->get_fleet()) {
 				continue;  // Different fleets
 			}
 		}
@@ -68,8 +71,8 @@ FleetOptionsWindow::create(UI::Panel* parent, InteractiveBase& ibase, Widelands:
 	return *new FleetOptionsWindow(
 	   parent, ibase,
 	   interface->descr().type() == Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE ?
-        Type::kShip :
-        Type::kFerry,
+         Type::kShip :
+         Type::kFerry,
 	   interface);
 }
 
