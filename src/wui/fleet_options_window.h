@@ -50,6 +50,7 @@ private:
 
 	void set_target(Widelands::Quantity target);
 	Widelands::Quantity get_current_target() const;
+	Widelands::Quantity previous_target_{0U};
 
 	InteractiveBase& ibase_;
 	bool can_act_;
@@ -65,6 +66,7 @@ private:
 	UI::Textarea* txt_ports_{nullptr};
 	UI::Textarea* txt_ferries_total_{nullptr};
 	UI::Textarea* txt_ferries_unemployed_{nullptr};
+	UI::Textarea* txt_waterways_total_{nullptr};
 	UI::Textarea* txt_waterways_lacking_{nullptr};
 };
 

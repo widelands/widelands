@@ -291,6 +291,14 @@ IMPLEMENTATION
 ProductionSite::ProductionSite(const ProductionSiteDescr& ps_descr)
    : Building(ps_descr), working_positions_(ps_descr.nr_working_positions()) {
 	format_statistics_string();
+
+	if (descr().has_ship_fleet_check() || descr().has_ferry_fleet_check()) {
+		field_terrain_changed_subscriber_ = Notifications::subscribe<NoteFieldTerrainChanged>([this](const NoteFieldTerrainChanged& note) {
+			if (owner().egbase().map().calc_distance(note.fc, get_position()) <= descr().workarea_info().rbegin()->first + 1) {
+				init_yard_interfaces(get_owner()->egbase());
+			}
+		});
+	}
 }
 
 void ProductionSite::load_finish(EditorGameBase& egbase) {
@@ -1196,6 +1204,16 @@ void ProductionSite::unnotify_player() {
 
 void ProductionSite::init_yard_interfaces(EditorGameBase& egbase) {
 	const Map& map = egbase.map();
+
+	for (ShipFleetYardInterface* interface : ship_fleet_interfaces_) {
+		interface->remove(egbase);
+	}
+	for (FerryFleetYardInterface* interface : ferry_fleet_interfaces_) {
+		interface->remove(egbase);
+	}
+	ship_fleet_interfaces_.clear();
+	ferry_fleet_interfaces_.clear();
+
 	if (descr().has_ship_fleet_check()) {
 		std::vector<Coords> result;
 		// 10 is a custom value to make sure the "ocean" is at least 10 nodes big.

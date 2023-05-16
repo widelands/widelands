@@ -272,6 +272,17 @@ uint32_t FerryFleet::count_unemployed_ferries() const {
 	return n;
 }
 
+uint32_t FerryFleet::count_total_waterways() const {
+	// Total number of waterways is number of employed ferries plus number of unserviced waterways.
+	uint32_t n = pending_ferry_requests_.size();
+	for (Ferry* f : ferries_) {
+		if (!f->unemployed()) {
+			++n;
+		}
+	}
+	return n;
+}
+
 void FerryFleet::add_ferry(Ferry* ferry) {
 	ferries_.push_back(ferry);
 	assert(std::count(ferries_.begin(), ferries_.end(), ferry) == 1);

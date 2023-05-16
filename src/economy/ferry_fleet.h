@@ -94,6 +94,7 @@ struct FerryFleet : MapObject {
 		return pending_ferry_requests_.size();
 	}
 	[[nodiscard]] bool has_ferry(const Waterway& ww) const;
+	[[nodiscard]] uint32_t count_total_waterways() const;
 
 	[[nodiscard]] Quantity get_idle_ferries_target() const {
 		return idle_ferries_target_;

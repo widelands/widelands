@@ -25,7 +25,7 @@
 #include "map_io/map_object_saver.h"
 #include "wui/interactive_base.h"
 
-static std::map<const Widelands::Serial, FleetOptionsWindow*> living_fleet_option_windows;
+static std::set<FleetOptionsWindow*> living_fleet_option_windows;
 
 constexpr Widelands::Quantity kMaxTarget = 1000 * 1000;  // Arbitrary limit
 
@@ -36,25 +36,45 @@ constexpr const char kIconInfinity[] = "images/wui/menus/infinity.png";
 
 FleetOptionsWindow&
 FleetOptionsWindow::create(UI::Panel* parent, InteractiveBase& ibase, Widelands::Bob* interface) {
-	auto it = living_fleet_option_windows.find(interface->serial());
-	if (it == living_fleet_option_windows.end()) {
-		return *new FleetOptionsWindow(
-		   parent, ibase,
-		   interface->descr().type() == Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE ?
-            Type::kShip :
-            Type::kFerry,
-		   interface);
+	MutexLock m(MutexLock::ID::kObjects);
+
+	// Check for an existing window pointing to the same fleet.
+	// We can't cache the fleet serial or pointer, they can change around a lot.
+	for (FleetOptionsWindow* window : living_fleet_option_windows) {
+		Widelands::Bob* window_interface = window->interface_.get(ibase.egbase());
+		if (window_interface == nullptr || window_interface->descr().type() != interface->descr().type()) {
+			continue;  // Different type of window
+		}
+		if (interface->descr().type() == Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE) {
+			if (dynamic_cast<const Widelands::ShipFleetYardInterface*>(interface)->get_fleet() !=
+				dynamic_cast<const Widelands::ShipFleetYardInterface*>(window_interface)->get_fleet()) {
+				continue;  // Different fleets
+			}
+		} else {
+			if (dynamic_cast<const Widelands::FerryFleetYardInterface*>(interface)->get_fleet() !=
+				dynamic_cast<const Widelands::FerryFleetYardInterface*>(window_interface)->get_fleet()) {
+				continue;  // Different fleets
+			}
+		}
+
+		// Same fleet
+		if (window->is_minimal()) {
+			window->restore();
+		}
+		window->move_to_top();
+		return *window;
 	}
 
-	if (it->second->is_minimal()) {
-		it->second->restore();
-	}
-	it->second->move_to_top();
-	return *it->second;
+	return *new FleetOptionsWindow(
+	   parent, ibase,
+	   interface->descr().type() == Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE ?
+        Type::kShip :
+        Type::kFerry,
+	   interface);
 }
 
 FleetOptionsWindow::~FleetOptionsWindow() {
-	living_fleet_option_windows.erase(interface_.serial());
+	living_fleet_option_windows.erase(this);
 }
 
 FleetOptionsWindow::FleetOptionsWindow(UI::Panel* parent,
@@ -98,7 +118,7 @@ FleetOptionsWindow::FleetOptionsWindow(UI::Panel* parent,
                       UI::ButtonStyle::kWuiSecondary,
                       g_image_cache->get(kIconInfinity),
                       _("Toggle infinite production")) {
-	living_fleet_option_windows.emplace(interface_.serial(), this);
+	living_fleet_option_windows.insert(this);
 
 	const bool rtl = UI::g_fh->fontset()->is_rtl();
 
@@ -129,6 +149,7 @@ FleetOptionsWindow::FleetOptionsWindow(UI::Panel* parent,
 		create_textarea(&txt_ports_, _("Ports:"));
 		create_textarea(&txt_ships_, _("Ships:"));
 	} else {
+		create_textarea(&txt_waterways_total_, _("Total waterways:"));
 		create_textarea(&txt_waterways_lacking_, _("Unserviced waterways:"));
 		create_textarea(&txt_ferries_total_, _("Total ferries:"));
 		create_textarea(&txt_ferries_unemployed_, _("Unemployed ferries:"));
@@ -155,10 +176,13 @@ FleetOptionsWindow::FleetOptionsWindow(UI::Panel* parent,
 		infinite_target_.sigclicked.connect([this]() {
 			bool was_pressed = infinite_target_.style() == UI::Button::VisualState::kPermpressed;
 			infinite_target_.set_perm_pressed(!was_pressed);
-			set_target(was_pressed ? 0 : Widelands::kEconomyTargetInfinity);
+			set_target(was_pressed ? previous_target_ : Widelands::kEconomyTargetInfinity);
 		});
 
-		infinite_target_.set_perm_pressed(get_current_target() == Widelands::kEconomyTargetInfinity);
+		const Widelands::Quantity current_target = get_current_target();
+		const bool infinite = current_target == Widelands::kEconomyTargetInfinity;
+		previous_target_ = infinite ? 0 : current_target;
+		infinite_target_.set_perm_pressed(infinite);
 	} else {
 		infinite_target_.set_enabled(false);
 	}
@@ -177,6 +201,10 @@ void FleetOptionsWindow::set_target(Widelands::Quantity target) {
 	const Widelands::Bob* bob = interface_.get(ibase_.egbase());
 	if (bob == nullptr) {
 		return;
+	}
+
+	if (target != Widelands::kEconomyTargetInfinity) {
+		previous_target_ = target;
 	}
 
 	if (ibase_.egbase().is_game()) {
@@ -239,19 +267,20 @@ void FleetOptionsWindow::think() {
 		txt_ferries_total_->set_text(as_string(fleet->count_ferries()));
 		txt_ferries_unemployed_->set_text(as_string(fleet->count_unemployed_ferries()));
 		txt_waterways_lacking_->set_text(as_string(fleet->count_unattended_waterways()));
+		txt_waterways_total_->set_text(as_string(fleet->count_total_waterways()));
 	}
 
 	if (can_act_) {
 		if (infinite) {
-			spinbox_.set_interval(0, 0);
-			spinbox_.set_value(0);
+			spinbox_.set_interval(previous_target_, previous_target_);
+			spinbox_.set_value(previous_target_);
 		} else {
 			spinbox_.set_interval(0, kMaxTarget);
 			spinbox_.set_value(current_target);
 		}
 	} else {
 		infinite_target_.set_perm_pressed(infinite);
-		Widelands::Quantity show = infinite ? 0 : current_target;
+		Widelands::Quantity show = infinite ? previous_target_ : current_target;
 		spinbox_.set_interval(show, show);
 		spinbox_.set_value(show);
 	}

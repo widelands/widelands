@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/macros.h"
+#include "logic/map.h"
 #include "logic/map_objects/tribes/bill_of_materials.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/production_program.h"
@@ -545,6 +546,8 @@ protected:
 
 	std::vector<ShipFleetYardInterface*> ship_fleet_interfaces_;
 	std::vector<FerryFleetYardInterface*> ferry_fleet_interfaces_;
+	std::unique_ptr<Notifications::Subscriber<NoteFieldTerrainChanged>>
+	   field_terrain_changed_subscriber_;
 
 private:
 	enum class Trend { kUnchanged, kRising, kFalling };
