@@ -6,7 +6,7 @@ on:
   pull_request:
     types: [ opened, reopened, synchronize ]
   push:
-    branches: [ master, vcpkg_cache_key ]
+    branches: [ master ]
 
 jobs:
   # This job runs multiple smaller checks where having several jobs would be overkill.
@@ -239,13 +239,14 @@ jobs:
         # REF can be empty, a commit hash or a pull request
         [ -n "$REF" ] && git fetch
         git checkout $REF || git pull origin $REF
+        echo "vcpkg_key=${{ hashFiles( './install-dependencies.sh' ) }}-${REF}" >> $GITHUB_OUTPUT
       shell: bash
     - name: Restore vcpkg and its artifacts.
       uses: actions/cache@v3
       with:
         path: ${{ env.VCPKG_ROOT }}/installed
         key: |
-          ${{ hashFiles( './install-dependencies.sh', '.github/scripts/vcpkg_ref' ) }}-${{ matrix.arch }}
+          ${{ steps.prepare.outputs.vcpkg_key }}-${{ matrix.arch }}
     - name: Installing dependencies
       run: |
         choco install innosetup

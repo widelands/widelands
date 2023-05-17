@@ -7,10 +7,6 @@ on:
   schedule:
     # Weekly on Friday at 2:00 a.m.
     - cron: '0 2 * * 5'
-  # TODO remove this trigger
-  push:
-    branches:
-      - vcpkg_cache_key
 
 jobs:
   vcpkg-packages:
@@ -41,6 +37,7 @@ jobs:
         popd
         echo "Current HEAD is $HEAD"
         echo -n $HEAD > .github/scripts/vcpkg_ref
+        echo "vcpkg_key=${{ hashFiles( './install-dependencies.sh' ) }}-${HEAD}" >> $GITHUB_OUTPUT
       shell: bash
     - name: Check whether cache exists
       id: lookup
@@ -48,7 +45,7 @@ jobs:
       with:
         path: ${{ env.VCPKG_ROOT }}/installed
         key: |
-          ${{ hashFiles( './install-dependencies.sh', '.github/scripts/vcpkg_ref' ) }}-${{ matrix.arch }}
+          ${{ steps.prepare.outputs.vcpkg_key }}-${{ matrix.arch }}
     - name: Building packages
       id: build
       if: steps.lookup.outputs.cache-hit != 'true'
@@ -81,8 +78,6 @@ jobs:
           git config --global user.email "bunnybot@widelands.org"
           git add .github/scripts/vcpkg_ref
           git commit -m "Update vcpkg version"
-          # TODO activate push
-          # git push "https://bunnybot:${{ secrets.WIDELANDS_FORMAT_TOKEN }}@github.com/${{ github.repository }}.git" master
-          git push "https://matthiakl:${{ secrets.WIDELANDS_FORMAT_TOKEN }}@github.com/${{ github.repository }}.git" vcpkg_cache_key
+          git push "https://bunnybot:${{ secrets.WIDELANDS_FORMAT_TOKEN }}@github.com/${{ github.repository }}.git" master
         fi
       shell: bash
