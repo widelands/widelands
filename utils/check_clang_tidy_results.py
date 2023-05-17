@@ -69,7 +69,6 @@ SUPPRESSED_CHECKS = {
     'cert-msc51-cpp',
     'clang-analyzer-core.CallAndMessage',
     'clang-analyzer-core.NonNullParamChecker',
-    'clang-analyzer-core.UndefinedBinaryOperatorResult',
     'clang-analyzer-cplusplus.NewDelete',
     'clang-analyzer-cplusplus.NewDeleteLeaks',
     'clang-analyzer-optin.cplusplus.UninitializedObject',

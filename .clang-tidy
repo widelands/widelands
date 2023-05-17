@@ -1,5 +1,7 @@
 # See SUPPRESSED_CHECKS in utils/check_clang_tidy_results.py
-# Also disable all aliases, because they only result in duplication of work
+# Also disable all aliases, because they only result in duplication of work,
+# except for clang-analyzer-* aliases, which behave strange, so we treat them
+# as normal checks.
 #
 # Alias list must be updated when clang-tidy version is bumped. Current list
 # was taken from:
@@ -22,6 +24,7 @@ Checks: >-
   -cert-dcl50-cpp,
   -cppcoreguidelines-pro-type-vararg,
   -COMMENT---probably-not-for-us---,
+  -clang-analyzer-optin.mpi.MPI-Checker,
   -cppcoreguidelines-avoid-goto,
   -cppcoreguidelines-no-malloc,
   -cppcoreguidelines-owning-memory,
@@ -57,6 +60,12 @@ Checks: >-
   -cert-err33-c,
   -cert-err58-cpp,
   -cert-msc51-cpp,
+  -clang-analyzer-core.CallAndMessage,
+  -clang-analyzer-core.NonNullParamChecker,
+  -clang-analyzer-cplusplus.NewDelete,
+  -clang-analyzer-cplusplus.NewDeleteLeaks,
+  -clang-analyzer-optin.cplusplus.UninitializedObject,
+  -clang-analyzer-optin.cplusplus.VirtualCall,
   -clang-diagnostic-documentation-unknown-command,
   -concurrency-mt-unsafe,
   -cppcoreguidelines-avoid-non-const-global-variables,
@@ -106,11 +115,6 @@ Checks: >-
   -cert-pos47-c,
   -cert-sig30-c,
   -cert-str34-c,
-  -clang-analyzer-optin.cplusplus.UninitializedObject,
-  -clang-analyzer-optin.cplusplus.VirtualCall,
-  -clang-analyzer-optin.mpi.MPI-Checker,
-  -clang-analyzer-optin.osx.cocoa.localizability.EmptyLocalizationContextChecker,
-  -clang-analyzer-optin.osx.cocoa.localizability.NonLocalizedStringChecker,
   -cppcoreguidelines-avoid-c-arrays,
   -cppcoreguidelines-avoid-magic-numbers,
   -cppcoreguidelines-c-copy-assignment-signature,
