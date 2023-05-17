@@ -40,6 +40,7 @@
 #endif
 
 /// Some macros to make i18n more readable and aid in tagging strings for translation
+// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
 #define _(str) i18n::translate(str)
 
 #undef pgettext
