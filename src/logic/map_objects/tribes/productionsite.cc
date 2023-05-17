@@ -1207,14 +1207,12 @@ void ProductionSite::unnotify_player() {
 void ProductionSite::init_yard_interfaces(EditorGameBase& egbase) {
 	const Map& map = egbase.map();
 
-	for (ShipFleetYardInterface* interface : ship_fleet_interfaces_) {
-		interface->remove(egbase);
+	while (!ship_fleet_interfaces_.empty()) {
+		ship_fleet_interfaces_.front()->remove(egbase);
 	}
-	for (FerryFleetYardInterface* interface : ferry_fleet_interfaces_) {
-		interface->remove(egbase);
+	while (!ferry_fleet_interfaces_.empty()) {
+		ferry_fleet_interfaces_.front()->remove(egbase);
 	}
-	ship_fleet_interfaces_.clear();
-	ferry_fleet_interfaces_.clear();
 
 	if (descr().has_ship_fleet_check()) {
 		std::vector<Coords> result;
