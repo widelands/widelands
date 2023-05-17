@@ -332,7 +332,7 @@ def main():
 
         # Fill the queue with files.
         for name in files:
-            if file_name_re.search(name):
+            if file_name_re.search(name) and not 'src/third_party' in name:
                 task_queue.put(name)
 
         # Wait for all threads to be done.
