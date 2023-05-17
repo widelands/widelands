@@ -872,6 +872,7 @@ public:
 	 * attributes
 	 */
 	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
+	// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
 	int get___hash(lua_State*);
 	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 	int get_descr(lua_State*);
@@ -881,6 +882,7 @@ public:
 	 * Lua Methods
 	 */
 	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
+	// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
 	int __eq(lua_State* L);
 	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 	int remove(lua_State* L);
@@ -1462,6 +1464,7 @@ public:
 	 * Properties
 	 */
 	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
+	// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
 	int get___hash(lua_State*);
 	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 	int get_x(lua_State* L);
@@ -1499,7 +1502,9 @@ public:
 	 * Lua methods
 	 */
 	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
+	// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
 	int __tostring(lua_State* L);
+	// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
 	int __eq(lua_State* L);
 	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 	int region(lua_State* L);
