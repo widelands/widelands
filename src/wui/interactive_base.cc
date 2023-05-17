@@ -533,7 +533,7 @@ InteractiveBase::road_building_steepness_overlays() const {
 // Show the given workareas at the given coords
 void InteractiveBase::show_workarea(const WorkareaInfo& workarea_info,
                                     Widelands::Coords coords,
-                                    std::map<Widelands::TCoords<>, uint32_t>& extra_data,
+                                    const std::map<Widelands::TCoords<>, uint32_t>& extra_data,
                                     const std::set<Widelands::Coords>& special_coords) {
 	MutexLock m(MutexLock::ID::kIBaseVisualizations);
 	workarea_previews_.insert(std::unique_ptr<WorkareaPreview>(
@@ -545,8 +545,7 @@ void InteractiveBase::show_workarea(const WorkareaInfo& workarea_info,
                                     Widelands::Coords coords,
                                     const std::set<Widelands::Coords>& special_coords) {
 	MutexLock m(MutexLock::ID::kIBaseVisualizations);
-	std::map<Widelands::TCoords<>, uint32_t> empty;
-	show_workarea(workarea_info, coords, empty, special_coords);
+	show_workarea(workarea_info, coords, {}, special_coords);
 }
 
 /* Helper function to get the correct index for graphic/gl/workarea_program.cc::workarea_colors .
