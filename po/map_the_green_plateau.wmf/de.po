@@ -5,16 +5,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
-# Stephan Lutz <stephan-lutz@gmx.de>, 2022
+# Stephan Lutz <stephan-lutz@gmx.de>, 2022-2023
 # Elisabeth Jäger, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-10 03:09+0000\n"
+"POT-Creation-Date: 2023-05-13 02:43+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2022\n"
-"Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2022-2023\n"
+"Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -84,7 +84,7 @@ msgstr "Eine fremdartige Burg"
 msgid ""
 "By the Gods! One of our scouts has discovered a mighty castle at the center "
 "of the old plateau. The castle must be quite old and seems to have been "
-"built in a foreign style. It’s quite obvious that this is not barbarian "
+"built in a foreign style. It’s quite obvious that this is not Barbarian "
 "craft."
 msgstr "Bei den Göttern! Einer unserer Kundschafter entdeckte eine mächtige Burg in der Mitte des alten Plateaus. Die Festung muss sehr alt sein und es scheint, als sei sie in einem fremden Baustil errichtet. Es ist sicher, dass dies nicht von Barbarenhand geschah."
 

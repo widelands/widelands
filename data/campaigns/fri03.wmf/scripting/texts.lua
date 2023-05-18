@@ -112,7 +112,7 @@ intro_5 = {
       _([[It is evident that alone, I cannot hope to defeat this arch-enemy. Nor would those I fought alongside many a time be able to help me, seeing that we were always hard-pressed to repel Atterdag; and this latest assault of his proved that he was never even truly trying to win until now. He was merely toying with us. No, if I am to stand a chance of winning against him I need to find a greater force to aid my cause.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Claus Lembeck – Introduction 5
-      _([[And such a force it is I am seeking out now. Reebaud, the chieftain of a small but strong frisian community whom I once befriended; his haughty pride and his tremendous skill in battle are unmatched in all parts of the known world. If anyone can stand up to Atterdag, it must be him.]])),
+      _([[And such a force it is I am seeking out now. Reebaud, the chieftain of a small but strong Frisian community whom I once befriended; his haughty pride and his tremendous skill in battle are unmatched in all parts of the known world. If anyone can stand up to Atterdag, it must be him.]])),
 }
 intro_6 = {
    title = _("Dark Future"),

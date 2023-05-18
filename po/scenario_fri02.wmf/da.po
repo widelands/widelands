@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-10 03:09+0000\n"
+"POT-Creation-Date: 2023-05-16 02:41+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2021\n"
-"Language-Team: Danish (https://www.transifex.com/widelands/teams/35159/da/)\n"
+"Language-Team: Danish (https://app.transifex.com/widelands/teams/35159/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -691,7 +691,7 @@ msgstr ""
 "Imperiet kræver at vide hvem du er og hvad du laver i dette område!"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 4. "Peace" is the traditional
-#. frisian greeting, nothing more.
+#. Frisian greeting, nothing more.
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:277
 msgid ""
 "Peace, representative of the Empire! I am Reebaud, the chieftain of this "
@@ -707,12 +707,9 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:283
 msgid ""
 "In this case, Reebaude, I must inform you of the presence of an "
-"inhospitable, hostile tribe of barbarians in the vicinity of this very "
+"inhospitable, hostile tribe of Barbarians in the vicinity of this very "
 "outpost of the Empire."
 msgstr ""
-"I dette tilfælde, Reebaude, så må jeg informere dig om tilstedeværelsen af "
-"en ugæstfri, fjendtlig stamme af barbarer i nærheden af denne fjerne forpost"
-" for Imperiet."
 
 #. TRANSLATORS: Murilius – Supply Murilius 5
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:286
@@ -777,16 +774,12 @@ msgstr ""
 #. TRANSLATORS: Murilius – Supply Murilius 8
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:310
 msgid ""
-"You will have to fight those barbarians if you intend to live in the area; "
+"You will have to fight those Barbarians if you intend to live in the area; "
 "surely you can see that fighting them together with the Empire is easier "
 "than alone? And you really do not want the Empire as your enemy. Barbarians "
 "though you are, I do believe you will realize the truth of my words after "
 "some consideration."
 msgstr ""
-"Du må kæmpe mod de barbarere, hvis du har planer om at leve i dette område; "
-"det er indlysende at en kamp mod dem sammen med Imperiet er nemmere end "
-"alene? Og du vil virkelig ikke have Imperiet som fjende. Selvom du er "
-"barbar, så vil du indse sandheden i mine ord efter lidt overvejelser."
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:317
@@ -910,13 +903,10 @@ msgstr ""
 #. TRANSLATORS: Reebaud – defeat both enemies
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:378
 msgid ""
-"The barbarian tribe he mentioned is also a threat. I don’t want to share "
+"The Barbarian tribe he mentioned is also a threat. I don’t want to share "
 "this land with anyone, as sharing only leads to conflicts and battles, as we"
-" saw in our old home. We must defeat the barbarians as well."
+" saw in our old home. We must defeat the Barbarians as well."
 msgstr ""
-"Barbarernes stamme han nævnte er også en trussel. Jeg ønsker ikke at dele "
-"dette land med nogen, da deling kun fører til konflikter og kampe, som vi så"
-" i vores gamle hjem. Vi må også besejre barbarerne."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:382
 msgid "The Empire is Grateful"
@@ -943,15 +933,11 @@ msgstr ""
 #. choice
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:389
 msgid ""
-"Now I permit you to assist us in conquering the barbarians, who live in a "
+"Now I permit you to assist us in conquering the Barbarians, who live in a "
 "sheltered valley northwest to us. I charge you, expand along the northern "
-"end of the mountains enclosing this outpost; you will find the barbarians "
+"end of the mountains enclosing this outpost; you will find the Barbarians "
 "there – attack them! We will fend off attacks launched by the enemy."
 msgstr ""
-"Nu får du lov til at assistere os med at erobre barbarerne, som lever i en "
-"beskyttet dal nordvest for os. Jeg udfordrer dig, udvid langs den nordlige "
-"del af bjergene, der omslutter denne forpost; du vil finde barbarerne der – "
-"angrib dem! Vi vil afvise angreb startet af fjenden."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:393
 msgid "The Reward For Your Service"
@@ -1048,7 +1034,7 @@ msgstr ""
 "Du har fuldført denne mission. Du kan fortsætte med at spille, hvis du "
 "ønsker det, eller gå til den næste mission."
 
-#. TRANSLATORS: Purpose helptext for an empire warehouse: Warehouse
+#. TRANSLATORS: Purpose helptext for an Empire warehouse: Warehouse
 #: ../../data/campaigns/fri02.wmf/scripting/tribes/init.lua:13
 msgctxt "empire_building"
 msgid ""

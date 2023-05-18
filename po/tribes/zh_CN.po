@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-03-13 02:46+0000\n"
+"POT-Creation-Date: 2023-05-16 02:41+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: liu lizhi <xingzuo88@qq.com>, 2021\n"
-"Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
+"Language-Team: Chinese (China) (http://app.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -5240,7 +5240,7 @@ msgctxt "immovable"
 msgid "Ship Under Construction"
 msgstr "建造中的船只"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/mature/black/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/mature/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/mature/green/init.lua:11
@@ -5248,7 +5248,7 @@ msgstr "建造中的船只"
 msgid "Balsa Tree (Mature)"
 msgstr "轻木树(成材的)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/old/black/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/old/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/old/green/init.lua:11
@@ -5256,7 +5256,7 @@ msgstr "轻木树(成材的)"
 msgid "Balsa Tree (Old)"
 msgstr "轻木树(老的)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/old/black/init.lua:13
 #: ../../data/tribes/immovables/trees/balsa/old/desert/init.lua:13
 #: ../../data/tribes/immovables/trees/balsa/old/green/init.lua:13
@@ -5264,7 +5264,7 @@ msgstr "轻木树(老的)"
 msgid "Balsa Tree"
 msgstr "轻木树"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/pole/black/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/pole/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/pole/green/init.lua:11
@@ -5272,9 +5272,9 @@ msgstr "轻木树"
 msgid "Balsa Tree (Pole)"
 msgstr "轻木树(树干)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
-#. TRANSLATORS: This is an amazon rare tree.
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
+#. TRANSLATORS: This is an Amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/green/init.lua:11
@@ -5282,32 +5282,32 @@ msgstr "轻木树(树干)"
 msgid "Balsa Tree (Sapling)"
 msgstr "轻木树(树苗)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/cocoa/mature/init.lua:8
 msgid "Cocoa Tree (mature)"
 msgstr "可可树(成材的)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/cocoa/old/init.lua:8
 msgid "Cocoa Tree (old)"
 msgstr "可可树(老的)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/cocoa/pole/init.lua:8
 msgid "Cocoa Tree (pole)"
 msgstr "可可树(树干)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/cocoa/sapling/init.lua:8
 msgid "Cocoa Tree (sapling)"
 msgstr "可可树(树苗)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/deadtree7/init.lua:9
 msgid "Dead Tree"
 msgstr "枯树"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/mature/black/init.lua:11
 #: ../../data/tribes/immovables/trees/ironwood/mature/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/ironwood/mature/green/init.lua:11
@@ -5315,7 +5315,7 @@ msgstr "枯树"
 msgid "Ironwood Tree (Mature)"
 msgstr "铁木树(成材的)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/old/black/init.lua:11
 #: ../../data/tribes/immovables/trees/ironwood/old/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/ironwood/old/green/init.lua:11
@@ -5323,7 +5323,7 @@ msgstr "铁木树(成材的)"
 msgid "Ironwood Tree (Old)"
 msgstr "铁木树(老的)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/old/black/init.lua:13
 #: ../../data/tribes/immovables/trees/ironwood/old/desert/init.lua:13
 #: ../../data/tribes/immovables/trees/ironwood/old/green/init.lua:13
@@ -5331,7 +5331,7 @@ msgstr "铁木树(老的)"
 msgid "Ironwood Tree"
 msgstr "铁木树"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/pole/black/init.lua:11
 #: ../../data/tribes/immovables/trees/ironwood/pole/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/ironwood/pole/green/init.lua:11
@@ -5339,7 +5339,7 @@ msgstr "铁木树"
 msgid "Ironwood Tree (Pole)"
 msgstr "铁木树(树干)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/sapling/black/init.lua:11
 #: ../../data/tribes/immovables/trees/ironwood/sapling/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/ironwood/sapling/green/init.lua:11
@@ -5347,7 +5347,7 @@ msgstr "铁木树(树干)"
 msgid "Ironwood Tree (Sapling)"
 msgstr "铁木树(树苗)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/mature/black/init.lua:11
 #: ../../data/tribes/immovables/trees/rubber/mature/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/rubber/mature/green/init.lua:11
@@ -5355,7 +5355,7 @@ msgstr "铁木树(树苗)"
 msgid "Rubber Tree (Mature)"
 msgstr "橡胶树(成材的)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/old/black/init.lua:11
 #: ../../data/tribes/immovables/trees/rubber/old/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/rubber/old/green/init.lua:11
@@ -5363,7 +5363,7 @@ msgstr "橡胶树(成材的)"
 msgid "Rubber Tree (Old)"
 msgstr "橡胶树(老的)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/old/black/init.lua:13
 #: ../../data/tribes/immovables/trees/rubber/old/desert/init.lua:13
 #: ../../data/tribes/immovables/trees/rubber/old/green/init.lua:13
@@ -5371,7 +5371,7 @@ msgstr "橡胶树(老的)"
 msgid "Rubber Tree"
 msgstr "橡胶树"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/pole/black/init.lua:11
 #: ../../data/tribes/immovables/trees/rubber/pole/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/rubber/pole/green/init.lua:11
@@ -5379,7 +5379,7 @@ msgstr "橡胶树"
 msgid "Rubber Tree (Pole)"
 msgstr "橡胶树(树干)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/sapling/black/init.lua:11
 #: ../../data/tribes/immovables/trees/rubber/sapling/desert/init.lua:12
 #: ../../data/tribes/immovables/trees/rubber/sapling/green/init.lua:11
@@ -7975,168 +7975,168 @@ msgctxt "frisians_ship"
 msgid "Ship"
 msgstr "船"
 
-#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:40
 msgctxt "shipname"
 msgid "Amrum"
 msgstr "阿姆鲁姆"
 
-#. TRANSLATORS: This frisian ship is named after a no longer existing island
+#. TRANSLATORS: This Frisian ship is named after a no longer existing island
 #. in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:42
 msgctxt "shipname"
 msgid "Alt-Nordstrand"
 msgstr "奥特-诺德斯特兰"
 
-#. TRANSLATORS: This frisian ship is named after a peninsula in Northern
+#. TRANSLATORS: This Frisian ship is named after a peninsula in Northern
 #. Frisia
 #: ../../data/tribes/ships/frisians/init.lua:44
 msgctxt "shipname"
 msgid "Eiderstedt"
 msgstr "艾德斯特德"
 
-#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:46
 msgctxt "shipname"
 msgid "Föhr"
 msgstr "弗尔"
 
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:48
 msgctxt "shipname"
 msgid "Gröde"
 msgstr "格勒德"
 
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:50
 msgctxt "shipname"
 msgid "Habel"
 msgstr "哈贝尔"
 
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:52
 msgctxt "shipname"
 msgid "Hamburger Hallig"
 msgstr "汉堡角"
 
-#. TRANSLATORS: This frisian ship is named after an island in the North Sea
+#. TRANSLATORS: This Frisian ship is named after an island in the North Sea
 #: ../../data/tribes/ships/frisians/init.lua:54
 msgctxt "shipname"
 msgid "Helgoland"
 msgstr "黑尔戈兰岛"
 
-#. TRANSLATORS: This frisian ship is named after a region in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a region in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:56
 msgctxt "shipname"
 msgid "Hever"
 msgstr "希佛堡"
 
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:58
 msgctxt "shipname"
 msgid "Hooge"
 msgstr "霍克岛"
 
-#. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a sand in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:60
 msgctxt "shipname"
 msgid "Japsand"
 msgstr "杰彭士德"
 
-#. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a sand in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:62
 msgctxt "shipname"
 msgid "Kormoransand"
 msgstr "鸬鹚沙滩"
 
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:64
 msgctxt "shipname"
 msgid "Langeneß"
 msgstr "兰根ß"
 
-#. TRANSLATORS: This frisian ship is named after a water body in Northern
+#. TRANSLATORS: This Frisian ship is named after a water body in Northern
 #. Frisia
 #: ../../data/tribes/ships/frisians/init.lua:66
 msgctxt "shipname"
 msgid "Norderaue"
 msgstr "诺德劳"
 
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:68
 msgctxt "shipname"
 msgid "Norderoog"
 msgstr "诺德罗格"
 
-#. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a sand in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:70
 msgctxt "shipname"
 msgid "Norderoogsand"
 msgstr "诺德罗格沙滩"
 
-#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:72
 msgctxt "shipname"
 msgid "Nordstrand"
 msgstr "诺德斯特兰德"
 
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:74
 msgctxt "shipname"
 msgid "Nordstrandischmoor"
 msgstr "诺德斯特兰德伊斯穆尔"
 
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:76
 msgctxt "shipname"
 msgid "Oland"
 msgstr "厄兰岛"
 
-#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:78
 msgctxt "shipname"
 msgid "Pellworm"
 msgstr "佩尔沃姆"
 
-#. TRANSLATORS: This frisian ship is named after a no longer existing island
+#. TRANSLATORS: This Frisian ship is named after a no longer existing island
 #. in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:80
 msgctxt "shipname"
 msgid "Strand"
 msgstr "斯特兰德"
 
-#. TRANSLATORS: This frisian ship is named after a water body in Northern
+#. TRANSLATORS: This Frisian ship is named after a water body in Northern
 #. Frisia
 #: ../../data/tribes/ships/frisians/init.lua:82
 msgctxt "shipname"
 msgid "Süderaue"
 msgstr "苏德劳"
 
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:84
 msgctxt "shipname"
 msgid "Süderoog"
 msgstr "苏德鲁格"
 
-#. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a sand in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:86
 msgctxt "shipname"
 msgid "Süderoogsand"
 msgstr "苏德鲁格沙滩"
 
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:88
 msgctxt "shipname"
 msgid "Südfall"
 msgstr "苏德福尔"
 
-#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:90
 msgctxt "shipname"
 msgid "Sylt"
 msgstr "叙尔特岛"
 
-#. TRANSLATORS: This frisian ship is named after a region in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a region in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:92
 msgctxt "shipname"
 msgid "Uthlande"

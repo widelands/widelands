@@ -4,16 +4,16 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
-# Yuriy Sokolov <lention@mail.ru>, 2015
+# Yuriy Sokolov <lention@mail.ru>, 2015,2023
 # Олег Шевченко <olegrock@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-10 03:09+0000\n"
+"POT-Creation-Date: 2023-05-13 02:43+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: Олег Шевченко <olegrock@gmail.com>, 2017\n"
-"Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2023\n"
+"Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -83,9 +83,9 @@ msgstr "Старинный замок"
 msgid ""
 "By the Gods! One of our scouts has discovered a mighty castle at the center "
 "of the old plateau. The castle must be quite old and seems to have been "
-"built in a foreign style. It’s quite obvious that this is not barbarian "
+"built in a foreign style. It’s quite obvious that this is not Barbarian "
 "craft."
-msgstr "По воле Богов! Наш разведчик обнаружил мощный замок в середине старого плато. Замок довольно старый и построен в иноземном стиле. Сразу видно, что его строили не варвары."
+msgstr "Клянусь Богами! Наш разведчик обнаружил мощный замок в середине старого плато. Замок довольно старый и построен в иноземном стиле. Сразу видно, что его строили не варвары."
 
 #: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:72
 msgid ""
