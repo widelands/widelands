@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-05-13 02:43+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: ks k, 2021\n"
-"Language-Team: Korean (https://www.transifex.com/widelands/teams/35159/ko/)\n"
+"Language-Team: Korean (https://app.transifex.com/widelands/teams/35159/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1567,26 +1567,26 @@ msgctxt "empire_building"
 msgid "planting trees"
 msgstr "나무를 심고 있음"
 
-#. TRANSLATORS: Purpose helptext for an empire production site: Brewery
+#. TRANSLATORS: Purpose helptext for an Empire production site: Brewery
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:98
 msgctxt "empire_building"
 msgid "Produces beer to keep the miners strong and happy."
 msgstr "광부들을 힘쎄고 행복하게 해줄 맥주를 만드십시오."
 
-#. TRANSLATORS: Purpose helptext for an empire production site: Farm
+#. TRANSLATORS: Purpose helptext for an Empire production site: Farm
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:105
 msgctxt "empire_building"
 msgid "Sows and harvests wheat."
 msgstr "밀을 심고 수확하십시오."
 
-#. TRANSLATORS: Purpose helptext for an empire production site: Forester’s
+#. TRANSLATORS: Purpose helptext for an Empire production site: Forester’s
 #. House
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:112
 msgctxt "empire_building"
 msgid "Plants trees in the surrounding area."
 msgstr "주변 지역에 나무를 심으십시오."
 
-#. TRANSLATORS: Note helptext for an empire production site: Forester’s House
+#. TRANSLATORS: Note helptext for an Empire production site: Forester’s House
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:114
 msgctxt "empire_building"
 msgid ""
@@ -1594,41 +1594,41 @@ msgid ""
 "trees."
 msgstr "숲꾼의 집은 작업 영역 내에 나무를 심을 여유 공간이 필요합니다."
 
-#. TRANSLATORS: Purpose helptext for an empire production site: Lumberjack’s
+#. TRANSLATORS: Purpose helptext for an Empire production site: Lumberjack’s
 #. House
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:121
 msgctxt "empire_building"
 msgid "Fells trees in the surrounding area and processes them into logs."
 msgstr "주변 지역에서 나무를 베어 통나무로 만드십시오."
 
-#. TRANSLATORS: Note helptext for an empire production site: Lumberjack’s
+#. TRANSLATORS: Note helptext for an Empire production site: Lumberjack’s
 #. House
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:123
 msgctxt "empire_building"
 msgid "The lumberjack’s house needs trees to fell within the work area."
 msgstr "벌목꾼의 집은 작업 영역 내에 베어낼 나무가 필요합니다."
 
-#. TRANSLATORS: Purpose helptext for an empire production site: Mill
+#. TRANSLATORS: Purpose helptext for an Empire production site: Mill
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:130
 msgctxt "empire_building"
 msgid "Grinds wheat to produce flour."
 msgstr "밀가루를 만들려고 밀을 갈아냅니다."
 
-#. TRANSLATORS: Purpose helptext for an empire training site: Training Camp,
+#. TRANSLATORS: Purpose helptext for an Empire training site: Training Camp,
 #. part 1
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:138
 msgctxt "empire_building"
 msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
 msgstr "군인들의 ‘공격력’ 과 ‘체력’을 훈련하십시오."
 
-#. TRANSLATORS: Purpose helptext for an empire training site: Training Camp,
+#. TRANSLATORS: Purpose helptext for an Empire training site: Training Camp,
 #. part 2
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:140
 msgctxt "empire_building"
 msgid "Equips the soldiers with all necessary weapons and armor parts."
 msgstr "모든 필요한 무기들과 갑옷들로 군인들을 무장하십시오."
 
-#. TRANSLATORS: Note helptext for an empire training site: Training Camp
+#. TRANSLATORS: Note helptext for an Empire training site: Training Camp
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:143
 msgctxt "empire_building"
 msgid ""
@@ -1636,13 +1636,13 @@ msgid ""
 "level with which they came."
 msgstr "제국 군인들은 ‘방어력’ 를 훈련할 수 없고 처음 단계에 머물러 있습니다."
 
-#. TRANSLATORS: Purpose helptext for an empire production site: Well
+#. TRANSLATORS: Purpose helptext for an Empire production site: Well
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:150
 msgctxt "empire_building"
 msgid "Draws water out of the deep."
 msgstr "심층에서 물을 끌어내십시오."
 
-#. TRANSLATORS: Purpose helptext for an empire warehouse: Temple of Vesta
+#. TRANSLATORS: Purpose helptext for an Empire warehouse: Temple of Vesta
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:157
 msgctxt "empire_building"
 msgid ""

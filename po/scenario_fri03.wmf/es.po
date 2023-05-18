@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-05-16 02:41+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2022\n"
 "Language-Team: Spanish (https://app.transifex.com/widelands/teams/35159/es/)\n"
@@ -190,7 +190,7 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:115
 msgid ""
 "And such a force it is I am seeking out now. Reebaud, the chieftain of a "
-"small but strong frisian community whom I once befriended; his haughty pride"
+"small but strong Frisian community whom I once befriended; his haughty pride"
 " and his tremendous skill in battle are unmatched in all parts of the known "
 "world. If anyone can stand up to Atterdag, it must be him."
 msgstr ""
@@ -652,7 +652,7 @@ msgctxt "empire_building"
 msgid "Port"
 msgstr "Puerto"
 
-#. TRANSLATORS: Purpose helptext for an empire warehouse: Port
+#. TRANSLATORS: Purpose helptext for an Empire warehouse: Port
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:11
 msgctxt "empire_building"
 msgid ""

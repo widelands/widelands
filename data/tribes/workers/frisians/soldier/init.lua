@@ -20,7 +20,7 @@ dirname = path.dirname (__file__)
 -- Oh, and by the way, the soldiers' swords are not long enough to touch the opponent if the
 -- hotspot is at the soldier's feet. That's why all battle hotspots are shifted by 3 pixels.
 --
--- The above explanation refers only to frisian soldiers. Other tribes's soldiers
+-- The above explanation refers only to Frisian soldiers. Other tribes's soldiers
 -- may follow other conventions described in their respective init.lua's.
 
 spritesheets = {

@@ -986,92 +986,92 @@ wl.Descriptions():new_tribe {
       {
          name = "deadtree7",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable usable by the Barbarians: Dead Tree
+            -- TRANSLATORS: Helptext for an Amazon immovable usable by the Barbarians: Dead Tree
             purpose = _("The remains of an old tree.")
          }
       },
       {
          name = "balsa_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable usable by the Barbarians: Balsa Tree
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an Amazon immovable usable by the Barbarians: Balsa Tree
+            purpose = _("This tree is only planted by the Amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "balsa_black_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable usable by the Barbarians: Balsa Tree
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an Amazon immovable usable by the Barbarians: Balsa Tree
+            purpose = _("This tree is only planted by the Amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "balsa_desert_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable usable by the Barbarians: Balsa Tree
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an Amazon immovable usable by the Barbarians: Balsa Tree
+            purpose = _("This tree is only planted by the Amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "balsa_winter_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable usable by the Barbarians: Blackroot Field
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an Amazon immovable usable by the Barbarians: Blackroot Field
+            purpose = _("This tree is only planted by the Amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable usable by the Barbarians: Balsa Tree
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an Amazon immovable usable by the Barbarians: Balsa Tree
+            purpose = _("This tree is only planted by the Amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_black_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable usable by the Barbarians: Ironwood Tree
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an Amazon immovable usable by the Barbarians: Ironwood Tree
+            purpose = _("This tree is only planted by the Amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_desert_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable usable by the Barbarians: Ironwood Tree
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an Amazon immovable usable by the Barbarians: Ironwood Tree
+            purpose = _("This tree is only planted by the Amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_winter_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable usable by the Barbarians: Ironwood Tree
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an Amazon immovable usable by the Barbarians: Ironwood Tree
+            purpose = _("This tree is only planted by the Amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable usable by the Barbarians: Rubber Tree
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an Amazon immovable usable by the Barbarians: Rubber Tree
+            purpose = _("This tree is only planted by the Amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_black_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable usable by the Barbarians: Rubber Tree
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an Amazon immovable usable by the Barbarians: Rubber Tree
+            purpose = _("This tree is only planted by the Amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_desert_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable usable by the Barbarians: Rubber Tree
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an Amazon immovable usable by the Barbarians: Rubber Tree
+            purpose = _("This tree is only planted by the Amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_winter_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an amazon immovable usable by the Barbarians: Rubber Tree
-            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+            -- TRANSLATORS: Helptext for an Amazon immovable usable by the Barbarians: Rubber Tree
+            purpose = _("This tree is only planted by the Amazon tribe but can be harvested for logs.")
          }
       },
    },

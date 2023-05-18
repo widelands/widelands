@@ -342,7 +342,7 @@ The ``colors`` table contains subtables of RGB colors:
 * **campaign_fri_henneke**: Text color for Henneke's speech box titles in the Frisian campaign
 * **campaign_fri_iniucundus**: Text color for Iniucundus's speech box titles in the Frisian campaign
 * **campaign_fri_angadthur**: Text color for Angadthur's speech box titles in the Frisian campaign
-* **campaign_fri_amazon**: Text color for the amazon's speech box titles in the Frisian campaign
+* **campaign_fri_amazon**: Text color for the Amazon's speech box titles in the Frisian campaign
 * **campaign_fri_ketelsen**: Text color for Ketelsen's speech box titles in the Frisian campaign
 * **map_river_advisor**: Text color for the advisor's speech box titles in the Along the River SP scenario
 * **unknown**: Used when a Lua script requests a color not included in this list

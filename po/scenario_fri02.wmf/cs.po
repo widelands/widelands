@@ -10,10 +10,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-10 03:09+0000\n"
+"POT-Creation-Date: 2023-05-16 02:41+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: Zlopez <michal.konecny@psmail.xyz>, 2021\n"
-"Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
+"Language-Team: Czech (https://app.transifex.com/widelands/teams/35159/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -706,7 +706,7 @@ msgstr ""
 "vyzývám, řekněte, kdo jste a co tu pohledáváte!"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 4. "Peace" is the traditional
-#. frisian greeting, nothing more.
+#. Frisian greeting, nothing more.
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:277
 msgid ""
 "Peace, representative of the Empire! I am Reebaud, the chieftain of this "
@@ -722,11 +722,9 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:283
 msgid ""
 "In this case, Reebaude, I must inform you of the presence of an "
-"inhospitable, hostile tribe of barbarians in the vicinity of this very "
+"inhospitable, hostile tribe of Barbarians in the vicinity of this very "
 "outpost of the Empire."
 msgstr ""
-"V tom případě, Rýbaude, ti musím sdělit, že se tu, poblíž přímo této "
-"císařské kolonie, nachází nekultivovaný, nepřátelský barbarský kmen."
 
 #. TRANSLATORS: Murilius – Supply Murilius 5
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:286
@@ -791,16 +789,12 @@ msgstr ""
 #. TRANSLATORS: Murilius – Supply Murilius 8
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:310
 msgid ""
-"You will have to fight those barbarians if you intend to live in the area; "
+"You will have to fight those Barbarians if you intend to live in the area; "
 "surely you can see that fighting them together with the Empire is easier "
 "than alone? And you really do not want the Empire as your enemy. Barbarians "
 "though you are, I do believe you will realize the truth of my words after "
 "some consideration."
 msgstr ""
-"Budete muset s Barbary bojovat, pokud zde chcete žít. Určitě vám musí být "
-"jasné, že bojovat po boku Císařství je jednoduší než zůstat sami. A opravdu "
-"nechcete mít Císařství za svého nepřítele. Ale pro Barbary jimi jste. Věřím,"
-" že po zvážení mých slov mi dáte za pravdu."
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:317
@@ -923,13 +917,10 @@ msgstr ""
 #. TRANSLATORS: Reebaud – defeat both enemies
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:378
 msgid ""
-"The barbarian tribe he mentioned is also a threat. I don’t want to share "
+"The Barbarian tribe he mentioned is also a threat. I don’t want to share "
 "this land with anyone, as sharing only leads to conflicts and battles, as we"
-" saw in our old home. We must defeat the barbarians as well."
+" saw in our old home. We must defeat the Barbarians as well."
 msgstr ""
-"Ten barbarský kmen, který zmínil, představuje taky hrozbu. Nechci tuto zemi "
-"sdílet s nikým, protože sdílení vždy způsobuje jen konflikty a války, jak už"
-" jsme se mohli přesvědčit v našem starém domově. Musíme porazit i barbary."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:382
 msgid "The Empire is Grateful"
@@ -956,15 +947,11 @@ msgstr ""
 #. choice
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:389
 msgid ""
-"Now I permit you to assist us in conquering the barbarians, who live in a "
+"Now I permit you to assist us in conquering the Barbarians, who live in a "
 "sheltered valley northwest to us. I charge you, expand along the northern "
-"end of the mountains enclosing this outpost; you will find the barbarians "
+"end of the mountains enclosing this outpost; you will find the Barbarians "
 "there – attack them! We will fend off attacks launched by the enemy."
 msgstr ""
-"Nyní vám dovoluji podílet se na našem tažení proti barbarům, kteří žijí v "
-"krytém údolí na severozápad od nás. Zmocňuji vás, zaberte území podél "
-"severního konce hor, přiléhajících k naší kolonii. Tam najdete barbary. "
-"Zaútočte na ně! My budeme odrážet útoky vedené nepřítelem."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:393
 msgid "The Reward For Your Service"
@@ -1060,7 +1047,7 @@ msgstr ""
 "Mise je splněna. Můžeš pokračovat ve hře, jestli chceš, v opačném případě "
 "můžeš zahájit misi další."
 
-#. TRANSLATORS: Purpose helptext for an empire warehouse: Warehouse
+#. TRANSLATORS: Purpose helptext for an Empire warehouse: Warehouse
 #: ../../data/campaigns/fri02.wmf/scripting/tribes/init.lua:13
 msgctxt "empire_building"
 msgid ""
