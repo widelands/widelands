@@ -371,41 +371,44 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 		if (PortDock* dest = get_destination_port(game); dest != nullptr) {
 			const Map& map = game.map();
 			FCoords position = map.get_fcoords(get_position());
+
 			if (position.field->get_immovable() != dest) {
 				molog(game.get_gametime(), "Move to dock %u for refit\n", dest->serial());
 				return start_task_movetodock(game, *dest);
-			} else {
-				// Arrived at destination, now unload and refit
-				set_destination(game, nullptr);
-				Warehouse* wh = dest->get_warehouse();
-				for (ShippingItem& si : items_) {
-					/* Since the items may not have been in transit properly,
-					 * force their reception instead of doing it the normal way.
-					 */
-					WareInstance* ware;
-					Worker* worker;
-					si.get(game, &ware, &worker);
-					if (worker == nullptr) {
-						assert(ware != nullptr);
-						wh->receive_ware(game, game.descriptions().safe_ware_index(ware->descr().name()));
-						ware->remove(game);
-					} else {
-						assert(ware == nullptr);
-						worker->set_economy(nullptr, wwWARE);
-						worker->set_economy(nullptr, wwWORKER);
-						worker->set_position(game, wh->get_position());
-						wh->incorporate_worker(game, worker);
-					}
-				}
-				items_.clear();
-				ship_type_ = pending_refit_;
-				warship_soldier_request_.reset();
-				if (ship_type_ == ShipType::kWarship) {
-					start_task_expedition(game);
-					set_destination(game, dest);
+			}
+
+			// Arrived at destination, now unload and refit
+			set_destination(game, nullptr);
+			Warehouse* wh = dest->get_warehouse();
+			for (ShippingItem& si : items_) {
+				/* Since the items may not have been in transit properly,
+				 * force their reception instead of doing it the normal way.
+				 */
+				WareInstance* ware;
+				Worker* worker;
+				si.get(game, &ware, &worker);
+				if (worker == nullptr) {
+					assert(ware != nullptr);
+					wh->receive_ware(game, game.descriptions().safe_ware_index(ware->descr().name()));
+					ware->remove(game);
 				} else {
-					exp_cancel(game);
+					assert(ware == nullptr);
+					worker->set_economy(nullptr, wwWARE);
+					worker->set_economy(nullptr, wwWORKER);
+					worker->set_position(game, wh->get_position());
+					wh->incorporate_worker(game, worker);
 				}
+			}
+			items_.clear();
+
+			ship_type_ = pending_refit_;
+			warship_soldier_request_.reset();
+
+			if (ship_type_ == ShipType::kWarship) {
+				start_task_expedition(game);
+				set_destination(game, dest);
+			} else {
+				exp_cancel(game);
 			}
 		} else {
 			// Destination vanished, try to find a new one
