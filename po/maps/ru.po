@@ -217,7 +217,7 @@ msgid ""
 "a new life. But his destiny takes his ship into a heavy storm, which nearly "
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
-msgstr ""
+msgstr "Потерпев поражение в важной битве с варварами, которое привело к потере значительной части территории Империи, Люций покидает Фремил, чтобы начать новую жизнь. Но, по прихоти судьбы, его корабль попадает в сильный шторм, едва избежав гибели. Лишь благодаря невероятному везению ему удается довести свой поврежденный корабль до неизвестного пустынного берега. Люций, и его люди почувствовали себя в безопасности. По-крайней мере, пока."
 
 #: ../../data/campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
@@ -250,7 +250,7 @@ msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
 "importance to reinstate the glory of the Empire."
-msgstr ""
+msgstr "После возвращения домой, Люций и его команда столкнулись с разрушенной экономикой. Урегулирование проблем в экономике будет иметь первостепенное значение для восстановления былой славы империи."
 
 #: ../../data/campaigns/fri01.wmf/elemental:8
 msgid "The Great Stormflood"

@@ -5379,7 +5379,7 @@ msgstr "Выбранная площадка"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:305
 msgid "Mouse Scrolling"
-msgstr "Прокрутка мышкой"
+msgstr "Прокрутка мыши"
 
 #: ../../src/ui_fsmenu/launch_game.cc:42
 msgid "Launch Game"
@@ -6393,7 +6393,7 @@ msgstr "Показывать наложения рабочих областей"
 
 #: ../../src/ui_fsmenu/options.cc:267
 msgid "Start building road after placing a flag"
-msgstr "Предлагать строительство дороги сразу после установки флага"
+msgstr "Начинать строительство дороги сразу после установки флага"
 
 #: ../../src/ui_fsmenu/options.cc:271
 msgid "Show in-game chat with transparent background"

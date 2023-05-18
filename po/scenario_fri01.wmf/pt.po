@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-05-16 02:41+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Last-Translator: zecas <jjorge@free.fr>, 2019\n"
-"Language-Team: Portuguese (https://www.transifex.com/widelands/teams/35159/pt/)\n"
+"Language-Team: Portuguese (https://app.transifex.com/widelands/teams/35159/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -300,7 +300,7 @@ msgstr ""
 msgid "The first buildings"
 msgstr "Os primeiros edifícios"
 
-#. TRANSLATORS: Hauke – Introduction 3. "Peace" is the traditional frisian
+#. TRANSLATORS: Hauke – Introduction 3. "Peace" is the traditional Frisian
 #. greeting
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:147
 msgid ""
