@@ -301,7 +301,7 @@ void AddOnsPackager::addon_selected() {
 	author_.set_text(selected->get_author());
 	version_.set_text(selected->get_version());
 	min_wl_version_.set_text(selected->get_min_wl_version());
-	max_wl_version_.set_text(selected->get_min_wl_version());
+	max_wl_version_.set_text(selected->get_max_wl_version());
 	update_in_progress_ = false;
 
 	if (addon_boxes_.count(selected->get_category()) == 0) {
@@ -540,30 +540,76 @@ bool AddOnsPackager::do_write_addon_to_disk(const std::string& addon) {
 	AddOns::MutableAddOn* m = mutable_addons_.at(addon).get();
 
 	// Check that the version string is valid and beautify it
+	std::string currently_checking;
 	try {
-		AddOns::AddOnVersion v = AddOns::string_to_version(m->get_version());
-		m->set_version(AddOns::version_to_string(v, false));
+		currently_checking = m->get_version();
+		AddOns::AddOnVersion addon_v = AddOns::string_to_version(currently_checking);
+		m->set_version(AddOns::version_to_string(addon_v, false));
 		if (addons_.has_selection() && addons_.get_selected() == addon) {
 			version_.set_text(m->get_version());
 		}
 
-		v = AddOns::string_to_version(m->get_min_wl_version());
-		m->set_min_wl_version(AddOns::version_to_string(v, false));
+		currently_checking = m->get_min_wl_version();
+		AddOns::AddOnVersion min_wl_v = AddOns::string_to_version(currently_checking);
+		m->set_min_wl_version(AddOns::version_to_string(min_wl_v, false));
 		if (addons_.has_selection() && addons_.get_selected() == addon) {
 			min_wl_version_.set_text(m->get_min_wl_version());
 		}
 
-		v = AddOns::string_to_version(m->get_max_wl_version());
-		m->set_max_wl_version(AddOns::version_to_string(v, false));
+		currently_checking = m->get_max_wl_version();
+		AddOns::AddOnVersion max_wl_v = AddOns::string_to_version(currently_checking);
+		m->set_max_wl_version(AddOns::version_to_string(max_wl_v, false));
 		if (addons_.has_selection() && addons_.get_selected() == addon) {
 			max_wl_version_.set_text(m->get_max_wl_version());
+		}
+
+		if (!min_wl_v.empty() && !max_wl_v.empty() && AddOns::is_newer_version(max_wl_v, min_wl_v)) {
+			main_menu_.show_messagebox(
+			   _("Invalid Version Requirement"),
+			   format(_("The minimum Widelands version ‘%1$s’ may not be newer than the maximum "
+			            "Widelands version ‘%2$s’. The add-on ‘%3$s’ will not be saved."),
+			          m->get_min_wl_version(), m->get_max_wl_version(), addon));
+			return false;
 		}
 	} catch (...) {
 		main_menu_.show_messagebox(
 		   _("Invalid Version"),
 		   format(_("‘%1$s’ is not a valid version string. The add-on ‘%2$s’ will not be saved."),
-		          m->get_version(), addon));
+		          currently_checking, addon));
 		return false;
+	}
+
+	// Compare the version requirements of maps to the specified min version
+	if (m->get_category() == AddOns::AddOnCategory::kMaps) {
+		AddOns::AddOnVersion nominal_min = AddOns::string_to_version(m->get_min_wl_version());
+		AddOns::AddOnVersion actual_min =
+		   dynamic_cast<AddOns::MapsAddon*>(m)->detect_min_wl_version();
+		if (actual_min != AddOns::MapsAddon::kNoVersionRequirement &&
+		    AddOns::is_newer_version(nominal_min, actual_min)) {
+			UI::WLMessageBox mbox(
+			   get_parent(), UI::WindowStyle::kFsMenu, _("Version Requirement"),
+			   nominal_min.empty() ?
+               format(_("The add-on ‘%1$s’ does not specify a minimum Widelands version. "
+			               "None of the contained maps can be loaded with a Widelands version older "
+			               "than %2$s. "
+			               "The minimum version requirement will automatically be set accordingly."),
+			             addon, AddOns::version_to_string(actual_min)) :
+               format(_("The add-on ‘%1$s’ specifies a minimum Widelands version of %2$s. "
+			               "However, none of the contained maps can be loaded with a Widelands "
+			               "version older than %3$s. "
+			               "The version requirement will automatically be changed accordingly."),
+			             addon, AddOns::version_to_string(nominal_min),
+			             AddOns::version_to_string(actual_min)),
+			   UI::WLMessageBox::MBoxType::kOkCancel);
+			if (mbox.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
+				return false;
+			}
+
+			m->set_min_wl_version(AddOns::version_to_string(actual_min, false));
+			if (addons_.has_selection() && addons_.get_selected() == addon) {
+				min_wl_version_.set_text(m->get_min_wl_version());
+			}
+		}
 	}
 
 	try {

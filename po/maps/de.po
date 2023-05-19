@@ -3,7 +3,7 @@
 # 
 # Translators:
 # Elisabeth Jäger, 2016-2018
-# wl-zocker, 2014
+# 39a0b2e5ef9bf024c2fcfbdd0522de1a_96abb62, 2014
 # GunChleoc, 2018
 # GunChleoc, 2018
 # millimarg, 2015
@@ -14,15 +14,15 @@
 # Tino Miegel <tino.miegel@gmail.com>, 2016
 # Elisabeth Jäger, 2015-2016
 # wl-zocker, 2014
-# wl-zocker, 2015-2016
+# 39a0b2e5ef9bf024c2fcfbdd0522de1a_96abb62, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-28 03:03+0000\n"
+"POT-Creation-Date: 2023-05-13 02:43+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2023\n"
-"Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
+"Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -216,12 +216,12 @@ msgstr "Die Strände von Malac’ Mor"
 
 #: ../../data/campaigns/emp01.wmf/elemental:9
 msgid ""
-"After losing an important battle against the barbarians which lead to the "
+"After losing an important battle against the Barbarians which lead to the "
 "loss of a big part of the Empire’s territory, Lutius leaves Fremil to start "
 "a new life. But his destiny takes his ship into a heavy storm, which nearly "
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
-msgstr "Nach der Niederlage in einer wichtigen Schlacht gegen die Barbaren, welche zum Verlust eines großen Teils des Reiches führte, verließ Lutius Fremil, um ein neues Leben zu beginnen. Aber sein Unglück verschlägt ihn mit seinem Schiff in einen starken Sturm, welcher es beinahe zerstört. Nur mit viel Glück schafft er es, sein leckes Schiff an einen unbekannten Wüstenstrand zu lenken, um seine Leute zu retten. Vorerst."
+msgstr "Nach der Niederlage in einer wichtigen Schlacht gegen die Barbaren, welche zum Verlust eines großen Teils des Imperiums führte, verließ Lutius Fremil, um ein neues Leben zu beginnen. Aber sein Unglück verschlägt ihn mit seinem Schiff in einen starken Sturm, welcher es beinahe zerstört. Nur mit viel Glück schafft er es, sein leckes Schiff an einen unbekannten Wüstenstrand zu lenken, um seine Leute zu retten. Vorerst."
 
 #: ../../data/campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
@@ -253,7 +253,7 @@ msgstr "Was für eine Überraschung!"
 msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
-"importance to reinstate the glory of the empire."
+"importance to reinstate the glory of the Empire."
 msgstr "Nach seiner Heimkehr finden Lutius und seine Mannschaft die Wirtschaft in heillosem Chaos vor. Die Engpässe der Wirtschaft zu lösen ist von größter Wichtigkeit, um die Pracht des Imperiums wiederherzustellen."
 
 #: ../../data/campaigns/fri01.wmf/elemental:8

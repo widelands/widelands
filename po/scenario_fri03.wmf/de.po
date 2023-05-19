@@ -3,16 +3,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Stephan Lutz <stephan-lutz@gmx.de>, 2022
+# Stephan Lutz <stephan-lutz@gmx.de>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-05-16 02:41+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2022\n"
-"Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2023\n"
+"Language-Team: German (https://app.transifex.com/widelands/teams/35159/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -234,12 +234,12 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:115
 msgid ""
 "And such a force it is I am seeking out now. Reebaud, the chieftain of a "
-"small but strong frisian community whom I once befriended; his haughty pride"
+"small but strong Frisian community whom I once befriended; his haughty pride"
 " and his tremendous skill in battle are unmatched in all parts of the known "
 "world. If anyone can stand up to Atterdag, it must be him."
 msgstr ""
 "Und solch eine Verstärkung suche ich jetzt. Reebaud, der Häuptling einer "
-"kleinen aber starken friesischen Gemeinde, mit dem ich einst befreundet war."
+"kleinen aber starken Gemeinde der Friesen, mit dem ich einst befreundet war."
 " Sein hochmütiger Stolz und seine enorme Kampfkunst sind unerreicht in allen"
 " Teilen der bekannten Welt. Wenn sich jemand gegen Atterdag behaupten kann, "
 "dann er."
@@ -840,7 +840,7 @@ msgctxt "empire_building"
 msgid "Port"
 msgstr "Hafen"
 
-#. TRANSLATORS: Purpose helptext for an empire warehouse: Port
+#. TRANSLATORS: Purpose helptext for an Empire warehouse: Port
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:11
 msgctxt "empire_building"
 msgid ""
