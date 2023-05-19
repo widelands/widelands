@@ -2422,7 +2422,7 @@ void Worker::fetchfromflag_update(Game& game, State& state) {
 		// This can happen "naturally" if the building gets destroyed, but the
 		// flag is still there and the worker tries to enter from that flag.
 		// E.g. the player destroyed the building, it is destroyed, through an
-		// enemy player, or it got destroyed through rising water (atlantean
+		// enemy player, or it got destroyed through rising water (Atlantean
 		// scenario)
 		molog(game.get_gametime(),
 		      "[fetchfromflag]: building disappeared - searching for alternative\n");

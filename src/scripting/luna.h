@@ -75,7 +75,9 @@ public:
 	virtual ~LunaClass() = default;
 
 	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
+	// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
 	virtual void __persist(lua_State*) = 0;
+	// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
 	virtual void __unpersist(lua_State*) = 0;
 	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 

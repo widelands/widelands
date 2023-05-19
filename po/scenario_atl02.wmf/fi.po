@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-05-16 02:41+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
 "Last-Translator: LINUX-SAUNA, 2022\n"
-"Language-Team: Finnish (https://www.transifex.com/widelands/teams/35159/fi/)\n"
+"Language-Team: Finnish (https://app.transifex.com/widelands/teams/35159/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1113,16 +1113,10 @@ msgstr ""
 msgid ""
 "Sidolus, they did not let me go. I met our scout and he managed to sneak me "
 "out, as I realized they still kept me hostage after I expressed some "
-"concerns about our previous agreement. So we need to settle the barbarian "
+"concerns about our previous agreement. So we need to settle the Barbarian "
 "issue now and forever on this island. There is no other way to live here in "
 "peace than to defeat them."
 msgstr ""
-"Sidolus, eivät he minua menemään päästäneet. Tapasin lähettimme ja hän "
-"onnistui kuljettamaan minut vaivihkaa ulos, kun ymmärsin että he pitävät "
-"minua edelleen panttivankina ilmaistuani joitakin huolenaiheita liittyen "
-"edelliseen sopimukseemme. Täten meidän tulee ratkaista tämä barbaarikysymys "
-"nyt ja siitä ikuisuuteen tällä saarella. Ei ole muuta vaihtoehtoa kukistaa "
-"heidät jotta voisimme elää rauhassa täällä. "
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:584
 msgid "Jundlina Is Relieved"
@@ -1582,7 +1576,7 @@ msgctxt "ware"
 msgid "Wood Coin"
 msgstr "Puukolikko"
 
-#. TRANSLATORS: Purpose helptext for an atlantean market site: Trading post
+#. TRANSLATORS: Purpose helptext for an Atlantean market site: Trading post
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:12
 msgctxt "atlanteans_building"
 msgid "Allows sharing goods with other players."
@@ -1597,14 +1591,14 @@ msgstr ""
 "Sinun tulee liittää tämä lippu lähetin taloon ennen kuin voit lähettää sinne"
 " varsinaisen lähetin."
 
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Scout's
+#. TRANSLATORS: Purpose helptext for an Atlantean production site: Scout's
 #. House
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:20
 msgctxt "building"
 msgid "Explores unknown territory."
 msgstr "Tutkii tuntemattomia seutuja."
 
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Temple of
+#. TRANSLATORS: Purpose helptext for an Atlantean production site: Temple of
 #. Satul
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:27
 msgctxt "atlanteans_building"
@@ -1613,7 +1607,7 @@ msgid ""
 msgstr ""
 "Suuri ja kallis temppeli Satulin palvomiseen sekä papittarien vihkimiseen."
 
-#. TRANSLATORS: Purpose helptext for an atlantean worker: Trader
+#. TRANSLATORS: Purpose helptext for an Atlantean worker: Trader
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:36
 msgctxt "atlanteans_worker"
 msgid "Transports wares to share with other players."
@@ -1625,7 +1619,7 @@ msgid "A trader is a scout who needs a horse to transport the wares."
 msgstr ""
 "Kaupustelija on lähetti joka tarvitsee hevosen toimittaakseen tarvikkeet."
 
-#. TRANSLATORS: Purpose helptext for an atlantean worker: Satul's Initiate
+#. TRANSLATORS: Purpose helptext for an Atlantean worker: Satul's Initiate
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:43
 msgctxt "atlanteans_worker"
 msgid "Takes care of the Temple of Satul."
@@ -1640,7 +1634,7 @@ msgstr ""
 "Alokkaat pitävät huolta Satulin temppelistä sillä välin kun opiskelevat "
 "papittariksi."
 
-#. TRANSLATORS: Purpose helptext for an atlantean worker: Priestess
+#. TRANSLATORS: Purpose helptext for an Atlantean worker: Priestess
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:50
 msgctxt "atlanteans_worker"
 msgid "Worships Satul."
@@ -1651,13 +1645,13 @@ msgctxt "atlanteans_worker"
 msgid "Priestesses are needed to make Satul show his might."
 msgstr "Papittaria tarvitaan Satulin mahdin osoittamiseen."
 
-#. TRANSLATORS: Purpose helptext for an atlantean ware: Wooden Coin
+#. TRANSLATORS: Purpose helptext for an Atlantean ware: Wooden Coin
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:64
 msgctxt "atlanteans_ware"
 msgid "A wooden coin, received as reward for delivering five logs."
 msgstr "Puukolikko, saatu palkkiona viiden tukin toimittamisesta."
 
-#. TRANSLATORS: Purpose helptext for an atlantean ware: Copper Coin
+#. TRANSLATORS: Purpose helptext for an Atlantean ware: Copper Coin
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:73
 msgctxt "atlanteans_building"
 msgid ""
@@ -1665,13 +1659,13 @@ msgid ""
 msgstr ""
 "Kolikko tehty kuparista, saatu palkkiona neljän hiilikasan toimittamisesta."
 
-#. TRANSLATORS: Purpose helptext for an atlantean ware: Silver Coin
+#. TRANSLATORS: Purpose helptext for an Atlantean ware: Silver Coin
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:82
 msgctxt "atlanteans_building"
 msgid "A silver coin, received as reward for delivering three iron ingots."
 msgstr "Hopeakolikko, saatu palkkiona kolmen rautaharkon toimittamisesta."
 
-#. TRANSLATORS: Purpose helptext for an atlantean ware: Golden Coin
+#. TRANSLATORS: Purpose helptext for an Atlantean ware: Golden Coin
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:91
 msgctxt "atlanteans_building"
 msgid "A golden coin, received as reward for delivering two bars of gold."

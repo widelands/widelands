@@ -140,6 +140,9 @@ public:
 		return &tree_;
 	}
 
+	static const AddOnVersion kNoVersionRequirement;
+	AddOnVersion detect_min_wl_version(const DirectoryTree* start = nullptr) const;
+
 	std::map<std::string, unsigned> count_all_dirnames(const DirectoryTree* start = nullptr) const;
 
 	void set_dirname(const std::string& dir, const std::string& name) {

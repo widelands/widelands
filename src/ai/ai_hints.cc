@@ -216,7 +216,7 @@ Production Sites
 
         requires_supporters = true,
 
-    For example if set for a frisian aqua farm, it will be built only if a clay pit producing the
+    For example if set for a Frisian aqua farm, it will be built only if a clay pit producing the
 ponds is nearby.
     **Note:** This hint shouldn't be used for lumberjacks due to internal AI mechanics
 

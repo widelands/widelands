@@ -42,7 +42,7 @@ constexpr float kBuildingSilhouetteOpacity = 0.3f;
 
 /* The value 'true' means that the DescriptionIndex is a normal building, as
  * happens e.g. when enhancing a building. The value 'false' means that the
- * DescriptionIndex refers to an immovable, as happens e.g. with amazon treetop sentry. This
+ * DescriptionIndex refers to an immovable, as happens e.g. with Amazon treetop sentry. This
  * immovable should therefore always be painted below the building image.
  */
 using FormerBuildings = std::vector<std::pair<DescriptionIndex, bool>>;

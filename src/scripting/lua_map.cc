@@ -3229,7 +3229,7 @@ int LuaProductionSiteDescription::get_supported_by_productionsites(lua_State* L)
    .. attribute:: working_positions
 
       (RO) An :class:`array` with :class:`WorkerDescription` containing the workers that
-      can work here with their multiplicity, i.e. for a atlantean mine this
+      can work here with their multiplicity, i.e. for an Atlantean mine this
       would be ``{miner,miner,miner}``.
 */
 int LuaProductionSiteDescription::get_working_positions(lua_State* L) {
@@ -3260,7 +3260,7 @@ int LuaProductionSiteDescription::get_working_positions(lua_State* L) {
          for. See :ref:`production site programs <productionsite_programs>`.
       :type program_name: :class:`string`
 
-      E.g. this will return for an atlanteans coalmine and the corresponding program:
+      E.g. this will return for an Atlantean coalmine and the corresponding program:
 
       .. code-block:: Lua
 

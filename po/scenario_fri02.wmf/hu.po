@@ -5,16 +5,16 @@
 # Translators:
 # Balázs Meskó <meskobalazs@mailbox.org>, 2018
 # litoll <litoll@freemail.hu>, 2020
-# Tóth András <txa-dev@posteo.hu>, 2021
+# Tóth András <txa-dev@posteo.hu>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-10 03:09+0000\n"
+"POT-Creation-Date: 2023-05-16 02:41+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021\n"
-"Language-Team: Hungarian (https://www.transifex.com/widelands/teams/35159/hu/)\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2023\n"
+"Language-Team: Hungarian (https://app.transifex.com/widelands/teams/35159/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -709,7 +709,7 @@ msgstr ""
 "követelem, hogy áruljátok el, kik vagytok, és mit kerestek ezen a vidéken!"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 4. "Peace" is the traditional
-#. frisian greeting, nothing more.
+#. Frisian greeting, nothing more.
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:277
 msgid ""
 "Peace, representative of the Empire! I am Reebaud, the chieftain of this "
@@ -725,7 +725,7 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:283
 msgid ""
 "In this case, Reebaude, I must inform you of the presence of an "
-"inhospitable, hostile tribe of barbarians in the vicinity of this very "
+"inhospitable, hostile tribe of Barbarians in the vicinity of this very "
 "outpost of the Empire."
 msgstr ""
 "Ez esetben, Reebaude, tájékoztatlak arról, hogy egy barátságtalan, "
@@ -795,7 +795,7 @@ msgstr ""
 #. TRANSLATORS: Murilius – Supply Murilius 8
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:310
 msgid ""
-"You will have to fight those barbarians if you intend to live in the area; "
+"You will have to fight those Barbarians if you intend to live in the area; "
 "surely you can see that fighting them together with the Empire is easier "
 "than alone? And you really do not want the Empire as your enemy. Barbarians "
 "though you are, I do believe you will realize the truth of my words after "
@@ -931,9 +931,9 @@ msgstr ""
 #. TRANSLATORS: Reebaud – defeat both enemies
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:378
 msgid ""
-"The barbarian tribe he mentioned is also a threat. I don’t want to share "
+"The Barbarian tribe he mentioned is also a threat. I don’t want to share "
 "this land with anyone, as sharing only leads to conflicts and battles, as we"
-" saw in our old home. We must defeat the barbarians as well."
+" saw in our old home. We must defeat the Barbarians as well."
 msgstr ""
 "Fenyegetést jelent a barbár törzs is, amiről beszélt. Nem akarok osztozni "
 "senkivel ezen az országon, mert az mindig ellentétekhez és háborúhoz vezet, "
@@ -964,9 +964,9 @@ msgstr ""
 #. choice
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:389
 msgid ""
-"Now I permit you to assist us in conquering the barbarians, who live in a "
+"Now I permit you to assist us in conquering the Barbarians, who live in a "
 "sheltered valley northwest to us. I charge you, expand along the northern "
-"end of the mountains enclosing this outpost; you will find the barbarians "
+"end of the mountains enclosing this outpost; you will find the Barbarians "
 "there – attack them! We will fend off attacks launched by the enemy."
 msgstr ""
 "Most már megengedem, hogy segítsetek nekünk legyőzni a barbárokat, akik "
@@ -1070,7 +1070,7 @@ msgstr ""
 "Befejezted ezt a küldetést. Ha szeretnél, játszhatsz még tovább, máskülönben"
 " folytasd a következő küldetéssel!"
 
-#. TRANSLATORS: Purpose helptext for an empire warehouse: Warehouse
+#. TRANSLATORS: Purpose helptext for an Empire warehouse: Warehouse
 #: ../../data/campaigns/fri02.wmf/scripting/tribes/init.lua:13
 msgctxt "empire_building"
 msgid ""

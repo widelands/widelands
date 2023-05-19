@@ -23,6 +23,7 @@
 #include <string>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/time_string.h"
 #include "base/warning.h"
 #include "base/wexception.h"
@@ -34,6 +35,7 @@
 #include "logic/filesystem_constants.h"
 #include "logic/map.h"
 #include "map_io/map_elemental_packet.h"
+#include "map_io/map_loader.h"
 
 namespace AddOns {
 
@@ -271,6 +273,43 @@ void MapsAddon::parse_map_requirements(const DirectoryTree& tree, std::vector<st
 			}
 		}
 	}
+}
+
+const AddOnVersion MapsAddon::kNoVersionRequirement = {std::numeric_limits<uint32_t>::max()};
+
+AddOnVersion MapsAddon::detect_min_wl_version(const DirectoryTree* start) const {
+	if (start == nullptr) {
+		return detect_min_wl_version(&tree_);
+	}
+
+	AddOnVersion min_version = kNoVersionRequirement;
+
+	for (const auto& pair : start->subdirectories) {
+		AddOnVersion v = detect_min_wl_version(&pair.second);
+		if (is_newer_version(v, min_version)) {
+			min_version = v;
+		}
+	}
+
+	for (const auto& pair : start->maps) {
+		Widelands::Map map;
+		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(pair.second);
+		if (ml == nullptr) {
+			log_warn("%s: %s (%s) is not a valid map file!", get_internal_name().c_str(),
+			         pair.first.c_str(), pair.second.c_str());
+			continue;
+		}
+
+		map.set_filename(pair.second);
+		ml->preload_map(true, nullptr);
+
+		AddOnVersion v = AddOns::string_to_version(map.version().minimum_required_widelands_version);
+		if (is_newer_version(v, min_version)) {
+			min_version = v;
+		}
+	}
+
+	return min_version;
 }
 
 std::map<std::string, unsigned> MapsAddon::count_all_dirnames(const DirectoryTree* start) const {
