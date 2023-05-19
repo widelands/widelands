@@ -307,8 +307,8 @@ void MainMenu::become_modal_again(UI::Panel& prevmodal) {
 }
 
 void MainMenu::find_maps(const std::string& directory, std::vector<MapEntry>& results) {
-	Widelands::Map map;
 	for (const std::string& file : g_fs->list_directory(directory)) {
+		Widelands::Map map;
 		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(file);
 		if (ml) {
 			try {

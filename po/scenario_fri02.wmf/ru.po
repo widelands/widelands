@@ -4,15 +4,15 @@
 # 
 # Translators:
 # nskdmitry, 2021
-# Yuriy Sokolov <lention@mail.ru>, 2022
+# Yuriy Sokolov <lention@mail.ru>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-05-13 02:43+0000\n"
+"POT-Creation-Date: 2023-05-16 02:41+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2022\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2023\n"
 "Language-Team: Russian (https://app.transifex.com/widelands/teams/35159/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -695,7 +695,7 @@ msgstr ""
 "знать, кто вы такие и что вас привело на наши земли!"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 4. "Peace" is the traditional
-#. frisian greeting, nothing more.
+#. Frisian greeting, nothing more.
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:277
 msgid ""
 "Peace, representative of the Empire! I am Reebaud, the chieftain of this "
@@ -714,6 +714,8 @@ msgid ""
 "inhospitable, hostile tribe of Barbarians in the vicinity of this very "
 "outpost of the Empire."
 msgstr ""
+"В этом случае, Ребауд, я должен уведомить тебя о враждебном племени "
+"Варваров, обитающем на этой имперской окраине."
 
 #. TRANSLATORS: Murilius – Supply Murilius 5
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:286
@@ -783,6 +785,10 @@ msgid ""
 "though you are, I do believe you will realize the truth of my words after "
 "some consideration."
 msgstr ""
+"Вам придется воевать с этими Варварами, если хотите ту жить. Надо ли "
+"говорить, что вместе с Империей это будет проще? Вам не нужно, чтобы Империя"
+" считала вас врагом. Даже варвары вроде вас, при здравом размышлении, могут "
+"понять истинность моих слов."
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:317
@@ -907,6 +913,9 @@ msgid ""
 "this land with anyone, as sharing only leads to conflicts and battles, as we"
 " saw in our old home. We must defeat the Barbarians as well."
 msgstr ""
+"Племя Варваров, о котором он говорил - еще одна угроза. Мне не нужны "
+"конфликты на почве дележа земли, как это было в старом доме, так что нам "
+"надо будет разбить варваров."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:382
 msgid "The Empire is Grateful"
@@ -938,6 +947,10 @@ msgid ""
 "end of the mountains enclosing this outpost; you will find the Barbarians "
 "there – attack them! We will fend off attacks launched by the enemy."
 msgstr ""
+"Теперь я разрешаю тебе помочь нам в покорении варваров, которые укрылись в "
+"долине к северо-западу от нас. Я приказываю вам, расширяйтесь вдоль северной"
+" оконечности гор, окружающих этот аванпост; вы найдете там варваров – "
+"атакуйте их! Мы будем отражать атаки противника."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:393
 msgid "The Reward For Your Service"

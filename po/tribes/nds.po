@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-03-13 02:46+0000\n"
+"POT-Creation-Date: 2023-05-16 02:41+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022\n"
-"Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
+"Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -5241,7 +5241,7 @@ msgctxt "immovable"
 msgid "Ship Under Construction"
 msgstr "Schipp-Baustee"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/mature/black/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/mature/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/mature/green/init.lua:11
@@ -5249,7 +5249,7 @@ msgstr "Schipp-Baustee"
 msgid "Balsa Tree (Mature)"
 msgstr "Balsaboom (Riep)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/old/black/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/old/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/old/green/init.lua:11
@@ -5257,7 +5257,7 @@ msgstr "Balsaboom (Riep)"
 msgid "Balsa Tree (Old)"
 msgstr "Balsaboom (Old)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/old/black/init.lua:13
 #: ../../data/tribes/immovables/trees/balsa/old/desert/init.lua:13
 #: ../../data/tribes/immovables/trees/balsa/old/green/init.lua:13
@@ -5265,7 +5265,7 @@ msgstr "Balsaboom (Old)"
 msgid "Balsa Tree"
 msgstr "Balsaboom"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/pole/black/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/pole/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/pole/green/init.lua:11
@@ -5273,9 +5273,9 @@ msgstr "Balsaboom"
 msgid "Balsa Tree (Pole)"
 msgstr "Balsaboom (Jung)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
-#. TRANSLATORS: This is an amazon rare tree.
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
+#. TRANSLATORS: This is an Amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/green/init.lua:11
@@ -5283,32 +5283,32 @@ msgstr "Balsaboom (Jung)"
 msgid "Balsa Tree (Sapling)"
 msgstr "Balsaboom (Kiensel)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/cocoa/mature/init.lua:8
 msgid "Cocoa Tree (mature)"
 msgstr "Kakaoboom (Riep)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/cocoa/old/init.lua:8
 msgid "Cocoa Tree (old)"
 msgstr "Kakaoboom (Old)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/cocoa/pole/init.lua:8
 msgid "Cocoa Tree (pole)"
 msgstr "Kakaoboom (Jung)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/cocoa/sapling/init.lua:8
 msgid "Cocoa Tree (sapling)"
 msgstr "Kakaoboom (Kiensel)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/deadtree7/init.lua:9
 msgid "Dead Tree"
 msgstr "Doder Boom"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/mature/black/init.lua:11
 #: ../../data/tribes/immovables/trees/ironwood/mature/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/ironwood/mature/green/init.lua:11
@@ -5316,7 +5316,7 @@ msgstr "Doder Boom"
 msgid "Ironwood Tree (Mature)"
 msgstr "Iesenholtboom (Riep)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/old/black/init.lua:11
 #: ../../data/tribes/immovables/trees/ironwood/old/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/ironwood/old/green/init.lua:11
@@ -5324,7 +5324,7 @@ msgstr "Iesenholtboom (Riep)"
 msgid "Ironwood Tree (Old)"
 msgstr "Iesenholtboom (Old)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/old/black/init.lua:13
 #: ../../data/tribes/immovables/trees/ironwood/old/desert/init.lua:13
 #: ../../data/tribes/immovables/trees/ironwood/old/green/init.lua:13
@@ -5332,7 +5332,7 @@ msgstr "Iesenholtboom (Old)"
 msgid "Ironwood Tree"
 msgstr "Iesenholtboom"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/pole/black/init.lua:11
 #: ../../data/tribes/immovables/trees/ironwood/pole/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/ironwood/pole/green/init.lua:11
@@ -5340,7 +5340,7 @@ msgstr "Iesenholtboom"
 msgid "Ironwood Tree (Pole)"
 msgstr "Iesenholtboom (Jung)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/sapling/black/init.lua:11
 #: ../../data/tribes/immovables/trees/ironwood/sapling/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/ironwood/sapling/green/init.lua:11
@@ -5348,7 +5348,7 @@ msgstr "Iesenholtboom (Jung)"
 msgid "Ironwood Tree (Sapling)"
 msgstr "Iesenholtboom (Kiensel)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/mature/black/init.lua:11
 #: ../../data/tribes/immovables/trees/rubber/mature/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/rubber/mature/green/init.lua:11
@@ -5356,7 +5356,7 @@ msgstr "Iesenholtboom (Kiensel)"
 msgid "Rubber Tree (Mature)"
 msgstr "Gummiboom (Riep)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/old/black/init.lua:11
 #: ../../data/tribes/immovables/trees/rubber/old/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/rubber/old/green/init.lua:11
@@ -5364,7 +5364,7 @@ msgstr "Gummiboom (Riep)"
 msgid "Rubber Tree (Old)"
 msgstr "Gummiboom (Old)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/old/black/init.lua:13
 #: ../../data/tribes/immovables/trees/rubber/old/desert/init.lua:13
 #: ../../data/tribes/immovables/trees/rubber/old/green/init.lua:13
@@ -5372,7 +5372,7 @@ msgstr "Gummiboom (Old)"
 msgid "Rubber Tree"
 msgstr "Gummiboom"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/pole/black/init.lua:11
 #: ../../data/tribes/immovables/trees/rubber/pole/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/rubber/pole/green/init.lua:11
@@ -5380,7 +5380,7 @@ msgstr "Gummiboom"
 msgid "Rubber Tree (Pole)"
 msgstr "Gummiboom (Jung)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/sapling/black/init.lua:11
 #: ../../data/tribes/immovables/trees/rubber/sapling/desert/init.lua:12
 #: ../../data/tribes/immovables/trees/rubber/sapling/green/init.lua:11
@@ -7976,168 +7976,168 @@ msgctxt "frisians_ship"
 msgid "Ship"
 msgstr "Schipp"
 
-#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:40
 msgctxt "shipname"
 msgid "Amrum"
 msgstr "Amrum"
 
-#. TRANSLATORS: This frisian ship is named after a no longer existing island
+#. TRANSLATORS: This Frisian ship is named after a no longer existing island
 #. in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:42
 msgctxt "shipname"
 msgid "Alt-Nordstrand"
 msgstr "Alt-Nordstrand"
 
-#. TRANSLATORS: This frisian ship is named after a peninsula in Northern
+#. TRANSLATORS: This Frisian ship is named after a peninsula in Northern
 #. Frisia
 #: ../../data/tribes/ships/frisians/init.lua:44
 msgctxt "shipname"
 msgid "Eiderstedt"
 msgstr "Eiderstedt"
 
-#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:46
 msgctxt "shipname"
 msgid "Föhr"
 msgstr "Föhr"
 
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:48
 msgctxt "shipname"
 msgid "Gröde"
 msgstr "Gröde"
 
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:50
 msgctxt "shipname"
 msgid "Habel"
 msgstr "Habel"
 
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:52
 msgctxt "shipname"
 msgid "Hamburger Hallig"
 msgstr "Hamburger Hallig"
 
-#. TRANSLATORS: This frisian ship is named after an island in the North Sea
+#. TRANSLATORS: This Frisian ship is named after an island in the North Sea
 #: ../../data/tribes/ships/frisians/init.lua:54
 msgctxt "shipname"
 msgid "Helgoland"
 msgstr "Helgoland"
 
-#. TRANSLATORS: This frisian ship is named after a region in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a region in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:56
 msgctxt "shipname"
 msgid "Hever"
 msgstr "Hever"
 
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:58
 msgctxt "shipname"
 msgid "Hooge"
 msgstr "Hooge"
 
-#. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a sand in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:60
 msgctxt "shipname"
 msgid "Japsand"
 msgstr "Japsand"
 
-#. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a sand in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:62
 msgctxt "shipname"
 msgid "Kormoransand"
 msgstr "Kormoransand"
 
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:64
 msgctxt "shipname"
 msgid "Langeneß"
 msgstr "Langeneß"
 
-#. TRANSLATORS: This frisian ship is named after a water body in Northern
+#. TRANSLATORS: This Frisian ship is named after a water body in Northern
 #. Frisia
 #: ../../data/tribes/ships/frisians/init.lua:66
 msgctxt "shipname"
 msgid "Norderaue"
 msgstr "Norderaue"
 
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:68
 msgctxt "shipname"
 msgid "Norderoog"
 msgstr "Norderoog"
 
-#. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a sand in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:70
 msgctxt "shipname"
 msgid "Norderoogsand"
 msgstr "Norderoogsand"
 
-#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:72
 msgctxt "shipname"
 msgid "Nordstrand"
 msgstr "Nordstrand"
 
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:74
 msgctxt "shipname"
 msgid "Nordstrandischmoor"
 msgstr "Nordstrandischmoor"
 
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:76
 msgctxt "shipname"
 msgid "Oland"
 msgstr "Oland"
 
-#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:78
 msgctxt "shipname"
 msgid "Pellworm"
 msgstr "Pellworm"
 
-#. TRANSLATORS: This frisian ship is named after a no longer existing island
+#. TRANSLATORS: This Frisian ship is named after a no longer existing island
 #. in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:80
 msgctxt "shipname"
 msgid "Strand"
 msgstr "Strand"
 
-#. TRANSLATORS: This frisian ship is named after a water body in Northern
+#. TRANSLATORS: This Frisian ship is named after a water body in Northern
 #. Frisia
 #: ../../data/tribes/ships/frisians/init.lua:82
 msgctxt "shipname"
 msgid "Süderaue"
 msgstr "Süderaue"
 
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:84
 msgctxt "shipname"
 msgid "Süderoog"
 msgstr "Süderoog"
 
-#. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a sand in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:86
 msgctxt "shipname"
 msgid "Süderoogsand"
 msgstr "Süderoogsand"
 
-#. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:88
 msgctxt "shipname"
 msgid "Südfall"
 msgstr "Südfall"
 
-#. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:90
 msgctxt "shipname"
 msgid "Sylt"
 msgstr "Sylt"
 
-#. TRANSLATORS: This frisian ship is named after a region in Northern Frisia
+#. TRANSLATORS: This Frisian ship is named after a region in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:92
 msgctxt "shipname"
 msgid "Uthlande"
