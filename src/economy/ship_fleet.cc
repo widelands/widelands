@@ -858,7 +858,7 @@ void ShipFleet::Loader::load(FileRead& fr, uint8_t packet_version) {
 
 	fleet.act_pending_ = (fr.unsigned_8() != 0u);
 	fleet.ships_target_ = packet_version >= 6 ? fr.unsigned_32() : kEconomyTargetInfinity;
-	fleet.target_last_modified_ = Time(fr);
+	fleet.target_last_modified_ = packet_version >= 6 ? Time(fr) : Time(0);
 
 	fleet.schedule_.load(fr);
 }

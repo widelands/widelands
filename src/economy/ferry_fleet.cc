@@ -590,7 +590,7 @@ void FerryFleet::Loader::load(FileRead& fr, uint8_t packet_version) {
 	}
 
 	fleet.idle_ferries_target_ = packet_version >= 2 ? fr.unsigned_32() : 0;
-	fleet.target_last_modified_ = Time(fr);
+	fleet.target_last_modified_ = packet_version >= 2 ? Time(fr) : Time(0);
 }
 
 void FerryFleet::Loader::load_pointers() {
