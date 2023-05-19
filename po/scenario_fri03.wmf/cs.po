@@ -11,10 +11,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-05-16 02:41+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
 "Last-Translator: Tomáš Mráz, 2022\n"
-"Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
+"Language-Team: Czech (https://app.transifex.com/widelands/teams/35159/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -236,12 +236,10 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:115
 msgid ""
 "And such a force it is I am seeking out now. Reebaud, the chieftain of a "
-"small but strong frisian community whom I once befriended; his haughty pride"
+"small but strong Frisian community whom I once befriended; his haughty pride"
 " and his tremendous skill in battle are unmatched in all parts of the known "
 "world. If anyone can stand up to Atterdag, it must be him."
 msgstr ""
-"A právě proto, abych ho získal, podnikám tuto cestu.\n"
-"Rýbaud, vůdce malé, ale silné fríské komunity, můj dobrý přítel. Jeho udatné šlechetnosti a obrovským zkušenostem v boji není v širém známém světě rovno. Pokud je někdo hoden toho, aby se Zítřkovi postavil, musí to být on."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:121
@@ -821,7 +819,7 @@ msgctxt "empire_building"
 msgid "Port"
 msgstr "Přístav"
 
-#. TRANSLATORS: Purpose helptext for an empire warehouse: Port
+#. TRANSLATORS: Purpose helptext for an Empire warehouse: Port
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:11
 msgctxt "empire_building"
 msgid ""

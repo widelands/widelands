@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-05-10 02:40+0000\n"
+"POT-Creation-Date: 2023-05-13 02:43+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: GunChleoc, 2015-2021\n"
 "Language-Team: Gaelic, Scottish (http://app.transifex.com/widelands/widelands/language/gd/)\n"
@@ -338,7 +338,7 @@ msgstr "Cobhair"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:205
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:40
-#: ../../src/ui_fsmenu/main.cc:414 ../../src/wlapplication_options.cc:444
+#: ../../src/ui_fsmenu/main.cc:420 ../../src/wlapplication_options.cc:444
 msgid "New Map"
 msgstr "Mapa ùr"
 
@@ -353,7 +353,7 @@ msgstr "Mapa tuaireamach ùr"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/editor/editorinteractive.cc:222
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:33
-#: ../../src/ui_fsmenu/main.cc:419 ../../src/wlapplication_options.cc:824
+#: ../../src/ui_fsmenu/main.cc:425 ../../src/wlapplication_options.cc:824
 msgid "Load Map"
 msgstr "Luchdaich mapa"
 
@@ -643,12 +643,12 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:467
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:123
 #: ../../src/ui_fsmenu/launch_mpg.cc:309 ../../src/ui_fsmenu/main.cc:249
-#: ../../src/wlapplication.cc:1644
+#: ../../src/wlapplication.cc:1647
 msgid "Error"
 msgstr "Mearachd"
 
 #: ../../src/editor/editorinteractive.cc:1110 ../../src/ui_fsmenu/main.cc:233
-#: ../../src/wlapplication.cc:1646
+#: ../../src/wlapplication.cc:1649
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -965,7 +965,7 @@ msgstr "Ùghdar: %s"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:244
 #: ../../src/ui_fsmenu/addons/packager_box.cc:284
-#: ../../src/ui_fsmenu/main.cc:453 ../../src/ui_fsmenu/mapdetailsbox.cc:124
+#: ../../src/ui_fsmenu/main.cc:459 ../../src/ui_fsmenu/mapdetailsbox.cc:124
 #, c-format
 msgid "Description: %s"
 msgstr "Tuairisgeul: %s"
@@ -986,7 +986,7 @@ msgid "Enabled Add-Ons: %s"
 msgstr "Na tuilleadan an comas: %s"
 
 #: ../../src/editor/ui_menus/help.cc:36 ../../src/ui_fsmenu/login_box.cc:238
-#: ../../src/ui_fsmenu/main.cc:231 ../../src/ui_fsmenu/main.cc:1043
+#: ../../src/ui_fsmenu/main.cc:231 ../../src/ui_fsmenu/main.cc:1049
 #: ../../src/wui/encyclopedia_window.cc:145
 #: ../../src/wui/tribal_encyclopedia.cc:55
 msgid "Error!"
@@ -1353,7 +1353,7 @@ msgstr "A’ gintinn mapa tuaireamach…"
 #. editor.
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:654
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:688
-#: ../../src/ui_fsmenu/main.cc:416
+#: ../../src/ui_fsmenu/main.cc:422
 msgid "Random Map"
 msgstr "Mapa tuaireamach"
 
@@ -2933,7 +2933,7 @@ msgid "Checking map"
 msgstr "A’ dearbhadh a’ mhapa"
 
 #: ../../src/network/gameclient.cc:144 ../../src/network/gamehost.cc:523
-#: ../../src/ui_fsmenu/launch_spg.cc:174 ../../src/wlapplication.cc:753
+#: ../../src/ui_fsmenu/launch_spg.cc:174 ../../src/wlapplication.cc:756
 msgid "Preparing game…"
 msgstr "Ag ullachadh a’ gheama…"
 
@@ -3571,7 +3571,7 @@ msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Cha deach nì a thaghadh"
 
-#: ../../src/ui_basic/dropdown.h:467
+#: ../../src/ui_basic/dropdown.h:470
 msgid "No matches"
 msgstr ""
 
@@ -3685,7 +3685,7 @@ msgstr "Prìnich"
 msgid "Unpin"
 msgstr "Dì-phrìnich"
 
-#: ../../src/ui_fsmenu/about.cc:38 ../../src/ui_fsmenu/main.cc:486
+#: ../../src/ui_fsmenu/about.cc:38 ../../src/ui_fsmenu/main.cc:492
 msgid "About Widelands"
 msgstr "Mu Widelands"
 
@@ -4564,25 +4564,25 @@ msgid "Directory Tree"
 msgstr "Craobh nam pasgan"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:274
-#: ../../src/ui_fsmenu/main.cc:443
+#: ../../src/ui_fsmenu/main.cc:449
 #, c-format
 msgid "Name: %s"
 msgstr "Ainm: %s"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:277
-#: ../../src/ui_fsmenu/main.cc:446 ../../src/ui_fsmenu/mapdetailsbox.cc:112
+#: ../../src/ui_fsmenu/main.cc:452 ../../src/ui_fsmenu/mapdetailsbox.cc:112
 #, c-format
 msgid "Size: %s"
 msgstr "Meud: %s"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:280
-#: ../../src/ui_fsmenu/main.cc:448 ../../src/ui_fsmenu/mapdetailsbox.cc:114
+#: ../../src/ui_fsmenu/main.cc:454 ../../src/ui_fsmenu/mapdetailsbox.cc:114
 #, c-format
 msgid "%1$u×%2$u"
 msgstr "%1$u×%2$u"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:281
-#: ../../src/ui_fsmenu/main.cc:387 ../../src/ui_fsmenu/main.cc:450
+#: ../../src/ui_fsmenu/main.cc:393 ../../src/ui_fsmenu/main.cc:456
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:119
 #, c-format
 msgid "Players: %s"
@@ -5596,7 +5596,7 @@ msgstr "Till do chlàr-taice aon-chluicheadair"
 msgid "Load this game"
 msgstr "Luchdaich an geama seo"
 
-#: ../../src/ui_fsmenu/login_box.cc:37 ../../src/ui_fsmenu/main.cc:407
+#: ../../src/ui_fsmenu/login_box.cc:37 ../../src/ui_fsmenu/main.cc:413
 msgid "Online Game Settings"
 msgstr "Roghainnean gheamannan air loidhne"
 
@@ -5617,7 +5617,7 @@ msgstr "Far-ainm:"
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:107
-#: ../../src/ui_fsmenu/netsetup_lan.cc:134 ../../src/wlapplication.cc:674
+#: ../../src/ui_fsmenu/netsetup_lan.cc:134 ../../src/wlapplication.cc:677
 msgid "nobody"
 msgstr "gun_ainm"
 
@@ -5643,209 +5643,209 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/main.cc:340
+#: ../../src/ui_fsmenu/main.cc:346
 msgid "Begin a new game"
 msgstr "Tòisich air geama ùr"
 
-#: ../../src/ui_fsmenu/main.cc:340 ../../src/wlapplication_options.cc:246
+#: ../../src/ui_fsmenu/main.cc:346 ../../src/wlapplication_options.cc:246
 msgid "New Game"
 msgstr "Geama ùr"
 
-#: ../../src/ui_fsmenu/main.cc:342 ../../src/ui_fsmenu/random_game.cc:29
+#: ../../src/ui_fsmenu/main.cc:348 ../../src/ui_fsmenu/random_game.cc:29
 #: ../../src/wlapplication_options.cc:260
 msgid "New Random Game"
 msgstr "Geama tuaireamach ùr"
 
-#: ../../src/ui_fsmenu/main.cc:343
+#: ../../src/ui_fsmenu/main.cc:349
 msgid "Create a new random match"
 msgstr "Cruthaich geama ùr air mapa tuaireamach"
 
-#: ../../src/ui_fsmenu/main.cc:345 ../../src/wlapplication_options.cc:270
+#: ../../src/ui_fsmenu/main.cc:351 ../../src/wlapplication_options.cc:270
 msgid "Campaigns"
 msgstr "Iomairtean"
 
-#: ../../src/ui_fsmenu/main.cc:345
+#: ../../src/ui_fsmenu/main.cc:351
 msgid "Play a campaign"
 msgstr "Cluich iomairt"
 
-#: ../../src/ui_fsmenu/main.cc:347 ../../src/wlapplication_options.cc:265
+#: ../../src/ui_fsmenu/main.cc:353 ../../src/wlapplication_options.cc:265
 msgid "Tutorials"
 msgstr "Oideachadh"
 
-#: ../../src/ui_fsmenu/main.cc:348
+#: ../../src/ui_fsmenu/main.cc:354
 msgid "Play one of our beginners’ tutorials"
 msgstr "Cluich oideachadh dhan luchd-tòiseachaidh"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/ui_fsmenu/main.cc:350 ../../src/wlapplication_options.cc:250
+#: ../../src/ui_fsmenu/main.cc:356 ../../src/wlapplication_options.cc:250
 #: ../../src/wlapplication_options.cc:845
 #: ../../src/wui/game_main_menu_save_game.cc:48
 #: ../../src/wui/interactive_gamebase.cc:177
 msgid "Load Game"
 msgstr "Luchdaich geama"
 
-#: ../../src/ui_fsmenu/main.cc:351
+#: ../../src/ui_fsmenu/main.cc:357
 msgid "Continue a saved game"
 msgstr "Lean air geama air a shàbhaladh"
 
-#: ../../src/ui_fsmenu/main.cc:372 ../../src/wlapplication_options.cc:307
+#: ../../src/ui_fsmenu/main.cc:378 ../../src/wlapplication_options.cc:307
 msgid "Continue Playing"
 msgstr "Lean air adhart a’ cluiche"
 
-#: ../../src/ui_fsmenu/main.cc:381
+#: ../../src/ui_fsmenu/main.cc:387
 #, c-format
 msgid "Map: %s"
 msgstr "Mapa: %s"
 
-#: ../../src/ui_fsmenu/main.cc:384
+#: ../../src/ui_fsmenu/main.cc:390
 #, c-format
 msgid "Win Condition: %s"
 msgstr "Cumha na buaidhe: %s"
 
-#: ../../src/ui_fsmenu/main.cc:390
+#: ../../src/ui_fsmenu/main.cc:396
 #, c-format
 msgid "Gametime: %s"
 msgstr "Àm sa gheama: %s"
 
 #. * TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today,
 #. * 10:30'
-#: ../../src/ui_fsmenu/main.cc:396
+#: ../../src/ui_fsmenu/main.cc:402
 #, c-format
 msgid "Saved: %s"
 msgstr "Chaidh a shàbhaladh: %s"
 
-#: ../../src/ui_fsmenu/main.cc:404
+#: ../../src/ui_fsmenu/main.cc:410
 msgid "Online Game"
 msgstr "Geama air loidhne"
 
-#: ../../src/ui_fsmenu/main.cc:405
+#: ../../src/ui_fsmenu/main.cc:411
 msgid "Join the Widelands lobby"
 msgstr "Tadhail air lobaidh Widelands"
 
-#: ../../src/ui_fsmenu/main.cc:408
+#: ../../src/ui_fsmenu/main.cc:414
 msgid "Log in as a registered user"
 msgstr "Clàraich a-steach mar chleachdaiche clàraichte"
 
-#: ../../src/ui_fsmenu/main.cc:410 ../../src/wlapplication_options.cc:324
+#: ../../src/ui_fsmenu/main.cc:416 ../../src/wlapplication_options.cc:324
 msgid "LAN / Direct IP"
 msgstr "LAN / IP dìreach"
 
-#: ../../src/ui_fsmenu/main.cc:411
+#: ../../src/ui_fsmenu/main.cc:417
 msgid "Play a private online game"
 msgstr "Cluich geama air loidhne prìobhaideach"
 
-#: ../../src/ui_fsmenu/main.cc:414
+#: ../../src/ui_fsmenu/main.cc:420
 msgid "Create a new empty map"
 msgstr "Cruthaich mapa falamh ùr"
 
-#: ../../src/ui_fsmenu/main.cc:417
+#: ../../src/ui_fsmenu/main.cc:423
 msgid "Create a new random map"
 msgstr "Cruthaich mapa tuaireamach ùr"
 
-#: ../../src/ui_fsmenu/main.cc:419
+#: ../../src/ui_fsmenu/main.cc:425
 msgid "Edit an existing map"
 msgstr "Deasaich mapa a tha ann"
 
-#: ../../src/ui_fsmenu/main.cc:436 ../../src/wlapplication_options.cc:302
+#: ../../src/ui_fsmenu/main.cc:442 ../../src/wlapplication_options.cc:302
 msgid "Continue Editing"
 msgstr "Lean air an deasachadh"
 
-#: ../../src/ui_fsmenu/main.cc:460
+#: ../../src/ui_fsmenu/main.cc:466
 msgid "Single Player…"
 msgstr "Aon chluicheadair…"
 
-#: ../../src/ui_fsmenu/main.cc:461
+#: ../../src/ui_fsmenu/main.cc:467
 msgid "Multiplayer…"
 msgstr "Ioma-chluicheadair…"
 
-#: ../../src/ui_fsmenu/main.cc:462
+#: ../../src/ui_fsmenu/main.cc:468
 msgid "Editor…"
 msgstr "Deasaiche…"
 
-#: ../../src/ui_fsmenu/main.cc:464
+#: ../../src/ui_fsmenu/main.cc:470
 msgid "Begin or load a single-player campaign or free game"
 msgstr "Tòisich no luchdaich geama no cnàmh-sgeul aon chluicheadair"
 
-#: ../../src/ui_fsmenu/main.cc:467
+#: ../../src/ui_fsmenu/main.cc:473
 msgid "Play with your friends over the internet"
 msgstr "Cluich le do charaidean air an eadar-lìon"
 
-#: ../../src/ui_fsmenu/main.cc:470
+#: ../../src/ui_fsmenu/main.cc:476
 msgid "Launch the map editor"
 msgstr "Deasaich mapaichean"
 
-#: ../../src/ui_fsmenu/main.cc:473 ../../src/wlapplication_options.cc:255
+#: ../../src/ui_fsmenu/main.cc:479 ../../src/wlapplication_options.cc:255
 msgid "Watch Replay"
 msgstr "Ath-chluiche"
 
-#: ../../src/ui_fsmenu/main.cc:475
+#: ../../src/ui_fsmenu/main.cc:481
 msgid "Watch the replay of an old game"
 msgstr "Coimhead air ath-chluiche de gheama roimhe"
 
-#: ../../src/ui_fsmenu/main.cc:478 ../../src/wlapplication_options.cc:320
+#: ../../src/ui_fsmenu/main.cc:484 ../../src/wlapplication_options.cc:320
 msgid "Add-Ons"
 msgstr "Tuilleadain"
 
-#: ../../src/ui_fsmenu/main.cc:480
+#: ../../src/ui_fsmenu/main.cc:486
 msgid "Install and manage add-ons"
 msgstr "Stàlaich is stiùiridh tuilleadain"
 
-#: ../../src/ui_fsmenu/main.cc:482 ../../src/ui_fsmenu/options.cc:86
+#: ../../src/ui_fsmenu/main.cc:488 ../../src/ui_fsmenu/options.cc:86
 #: ../../src/wlapplication_options.cc:337
 msgid "Options"
 msgstr "Roghainnean"
 
-#: ../../src/ui_fsmenu/main.cc:484
+#: ../../src/ui_fsmenu/main.cc:490
 msgid "Technical and game-related settings"
 msgstr "Roghainnean teicnigeach ’s a’ gheama"
 
-#: ../../src/ui_fsmenu/main.cc:488
+#: ../../src/ui_fsmenu/main.cc:494
 msgid "Readme, License, and Credits"
 msgstr "Leugh mi, ceadachas ⁊ urram"
 
-#: ../../src/ui_fsmenu/main.cc:490 ../../src/wlapplication_options.cc:311
+#: ../../src/ui_fsmenu/main.cc:496 ../../src/wlapplication_options.cc:311
 msgid "Exit Widelands"
 msgstr "Fàg Widelands"
 
-#: ../../src/ui_fsmenu/main.cc:492
+#: ../../src/ui_fsmenu/main.cc:498
 msgid "Quit the game"
 msgstr "Fàg an geama"
 
 #. * TRANSLATORS: %1$s = version string and build type  ("Debug" or "Release")
-#: ../../src/ui_fsmenu/main.cc:497
+#: ../../src/ui_fsmenu/main.cc:503
 #, c-format
 msgid "Version %1$s"
 msgstr ""
 
 #. * TRANSLATORS: Placeholders are the copyright years
-#: ../../src/ui_fsmenu/main.cc:500
+#: ../../src/ui_fsmenu/main.cc:506
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team · Licensed under the GNU "
 "General Public License V2.0"
 msgstr "(C) %1%-%2% le sgioba leasachaidh Widelands · Fo cheadachas GNU General Public License tionndadh 2.0"
 
-#: ../../src/ui_fsmenu/main.cc:832
+#: ../../src/ui_fsmenu/main.cc:838
 msgid "Desyncing Add-On Found"
 msgstr "Chaidh tuilleadain a chailleas an sioncronachadh a lorg"
 
-#: ../../src/ui_fsmenu/main.cc:833
+#: ../../src/ui_fsmenu/main.cc:839
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
 msgstr "Tha tuilleadan an comas a dh’adhbharaicheas call an t-sioncronachaidh. Bi an dùil air trioblaidean leis."
 
-#: ../../src/ui_fsmenu/main.cc:935 ../../src/ui_fsmenu/netsetup_lan.cc:330
+#: ../../src/ui_fsmenu/main.cc:941 ../../src/ui_fsmenu/netsetup_lan.cc:330
 msgid "No tribes found!"
 msgstr "Cha deach treubh a lorg!"
 
-#: ../../src/ui_fsmenu/main.cc:936 ../../src/ui_fsmenu/netsetup_lan.cc:331
+#: ../../src/ui_fsmenu/main.cc:942 ../../src/ui_fsmenu/netsetup_lan.cc:331
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "Cha deach treubh a lorg am broinn data/tribes/initialization/[tribename]/init.lua."
 
-#: ../../src/ui_fsmenu/main.cc:980
+#: ../../src/ui_fsmenu/main.cc:986
 msgid "Exit Confirmation"
 msgstr ""
 
-#: ../../src/ui_fsmenu/main.cc:981
+#: ../../src/ui_fsmenu/main.cc:987
 msgid "Are you sure you wish to exit Widelands?"
 msgstr ""
 
@@ -6689,60 +6689,60 @@ msgstr "Comharraich na h-uile"
 msgid "Unmark All"
 msgstr "Thoir an comharra far na h-uile"
 
-#: ../../src/wlapplication.cc:795
+#: ../../src/wlapplication.cc:798
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr "Cha do lorg Widelands am faidhle “%s”."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:796 ../../src/wlapplication.cc:801
+#: ../../src/wlapplication.cc:799 ../../src/wlapplication.cc:804
 #: ../../src/wui/savegameloader.cc:119
 msgid "Error message:"
 msgstr "Teachdaireachd na mearachd:"
 
-#: ../../src/wlapplication.cc:797
+#: ../../src/wlapplication.cc:800
 msgid "File system error"
 msgstr "Mearachd leis an t-siostam-fhaidhlichean"
 
-#: ../../src/wlapplication.cc:1297
+#: ../../src/wlapplication.cc:1300
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr "Luach falamh air paramadair na loidhne-àithne: %s"
 
-#: ../../src/wlapplication.cc:1302
+#: ../../src/wlapplication.cc:1305
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr "Cha ghabh %s a chur ri gnìomhan eile"
 
-#: ../../src/wlapplication.cc:1457
+#: ../../src/wlapplication.cc:1460
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Paramadair loidhne-àithne nach aithne dhuinn: %s\n’S dòcha gu bheil “=” a dhìth?"
 
-#: ../../src/wlapplication.cc:1578
+#: ../../src/wlapplication.cc:1581
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr "Cha ghabh --xres/--yres, --maximized agus --fullscreen a chur ri chèile"
 
-#: ../../src/wlapplication.cc:1596
+#: ../../src/wlapplication.cc:1599
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Paramadair loidhne-àithne nach aithne dhuinn: %s"
 
-#: ../../src/wlapplication.cc:1622
+#: ../../src/wlapplication.cc:1625
 msgid "Incompatible"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1659
+#: ../../src/wlapplication.cc:1662
 msgid "Game ended unexpectedly"
 msgstr "Thàinig an geama gu crìoch gun dùil"
 
-#: ../../src/wlapplication.cc:1659
+#: ../../src/wlapplication.cc:1662
 msgid "Unexpected error during the game"
 msgstr "Mearachd ris nach robh dùil rè a’ gheama"
 
-#: ../../src/wlapplication.cc:1662
+#: ../../src/wlapplication.cc:1665
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6756,7 +6756,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1671
+#: ../../src/wlapplication.cc:1674
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6766,11 +6766,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Thàinig an geama gu crìoch gun dùil air an adhbhar seo:\n\n%s\n\nAm bu mhiann leat gum feuch Widelands ri sàbhaladh èiginneach a chruthachadh? Tha teans gun gabh a luchdadh an uairsin ach an lean thu ort a chluiche."
 
-#: ../../src/wlapplication.cc:1697
+#: ../../src/wlapplication.cc:1700
 msgid "Emergency save failed"
 msgstr "Dh’fhàillig leis an t-sàbhaladh èiginneach"
 
-#: ../../src/wlapplication.cc:1698
+#: ../../src/wlapplication.cc:1701
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"

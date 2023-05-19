@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-05-16 02:41+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
 "Last-Translator: Renaud Bouchard, 2023\n"
 "Language-Team: French (https://app.transifex.com/widelands/teams/35159/fr/)\n"
@@ -237,15 +237,10 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:115
 msgid ""
 "And such a force it is I am seeking out now. Reebaud, the chieftain of a "
-"small but strong frisian community whom I once befriended; his haughty pride"
+"small but strong Frisian community whom I once befriended; his haughty pride"
 " and his tremendous skill in battle are unmatched in all parts of the known "
 "world. If anyone can stand up to Atterdag, it must be him."
 msgstr ""
-"Et c'est une telle force que je recherche maintenant. Reebaud, le chef d'une"
-" petite mais forte communauté frisonne avec qui je me suis un jour lié "
-"d'amitié; sa fierté hautaine et son immense talent au combat sont inégalées "
-"dans toutes les régions du monde connu. Si quelqu'un peut tenir tête à "
-"Atterdag, ce doit être lui."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:121
@@ -839,7 +834,7 @@ msgctxt "empire_building"
 msgid "Port"
 msgstr "Port"
 
-#. TRANSLATORS: Purpose helptext for an empire warehouse: Port
+#. TRANSLATORS: Purpose helptext for an Empire warehouse: Port
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:11
 msgctxt "empire_building"
 msgid ""

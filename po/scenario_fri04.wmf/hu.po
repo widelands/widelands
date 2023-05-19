@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-05-13 02:43+0000\n"
 "PO-Revision-Date: 2022-07-28 07:48+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>, 2022\n"
-"Language-Team: Hungarian (https://www.transifex.com/widelands/teams/35159/hu/)\n"
+"Language-Team: Hungarian (https://app.transifex.com/widelands/teams/35159/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -757,7 +757,7 @@ msgctxt "empire_building"
 msgid "Port"
 msgstr "Kikötő"
 
-#. TRANSLATORS: Purpose helptext for an empire warehouse: Port
+#. TRANSLATORS: Purpose helptext for an Empire warehouse: Port
 #: ../../data/campaigns/fri04.wmf/scripting/tribes/init.lua:9
 msgctxt "empire_building"
 msgid ""

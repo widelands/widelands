@@ -129,11 +129,11 @@ std::unique_ptr<LuaTable> try_section_or_empty(LuaInterface& lua,
                                                std::string parent = "") {
 	if (table.has_key(section)) {
 		return table.get_table(section);
-	} else {
-		std::string name = parent.empty() ? section : format("%s.%s", parent, section);
-		fail_if_doing_default_style("section", name);
-		return lua.empty_table();
 	}
+
+	std::string name = parent.empty() ? section : format("%s.%s", parent, section);
+	fail_if_doing_default_style("section", name);
+	return lua.empty_table();
 }
 
 // Read RGB(A) color from LuaTable

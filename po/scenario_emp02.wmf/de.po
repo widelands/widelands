@@ -3,13 +3,13 @@
 # 
 # Translators:
 # Elisabeth Jäger, 2016-2018
-# wl-zocker, 2014
+# 39a0b2e5ef9bf024c2fcfbdd0522de1a_96abb62, 2014
 # German Translation <widelands-public@lists.sourceforge.net>, 2007
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Stephan Lutz <stephan-lutz@gmx.de>, 2018-2020,2022
 # Elisabeth Jäger, 2015
-# wl-zocker, 2015
+# 39a0b2e5ef9bf024c2fcfbdd0522de1a_96abb62, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
@@ -17,7 +17,7 @@ msgstr ""
 "POT-Creation-Date: 2023-01-01 03:20+0000\n"
 "PO-Revision-Date: 2015-02-03 14:45+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2020,2022\n"
-"Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
+"Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"

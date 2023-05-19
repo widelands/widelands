@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-01 03:20+0000\n"
+"POT-Creation-Date: 2023-05-16 02:41+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
 "Last-Translator: C Jimmy, 2023\n"
 "Language-Team: French (https://app.transifex.com/widelands/teams/35159/fr/)\n"
@@ -1124,16 +1124,10 @@ msgstr ""
 msgid ""
 "Sidolus, they did not let me go. I met our scout and he managed to sneak me "
 "out, as I realized they still kept me hostage after I expressed some "
-"concerns about our previous agreement. So we need to settle the barbarian "
+"concerns about our previous agreement. So we need to settle the Barbarian "
 "issue now and forever on this island. There is no other way to live here in "
 "peace than to defeat them."
 msgstr ""
-"Sidolus, ils ne m'ont pas laissé partir. J'ai rencontré notre éclaireur et "
-"il a réussi à me faire sortir en douce, car je me suis rendu compte qu'ils "
-"me gardaient toujours en otage après que j'ai exprimé quelques craintes au "
-"sujet de notre précédent accord. Nous devons donc régler la question des "
-"barbares maintenant et pour toujours sur cette île. Il n'y a pas d'autre "
-"moyen de vivre en paix ici que de les vaincre."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:584
 msgid "Jundlina Is Relieved"
@@ -1602,7 +1596,7 @@ msgctxt "ware"
 msgid "Wood Coin"
 msgstr "Pièce en bois"
 
-#. TRANSLATORS: Purpose helptext for an atlantean market site: Trading post
+#. TRANSLATORS: Purpose helptext for an Atlantean market site: Trading post
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:12
 msgctxt "atlanteans_building"
 msgid "Allows sharing goods with other players."
@@ -1617,14 +1611,14 @@ msgstr ""
 "Vous devez relier ce drapeau à la maison d'un éclaireur avant de pouvoir "
 "envoyer un éclaireur ici."
 
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Scout's
+#. TRANSLATORS: Purpose helptext for an Atlantean production site: Scout's
 #. House
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:20
 msgctxt "building"
 msgid "Explores unknown territory."
 msgstr "Exploration de territoires inconnus."
 
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Temple of
+#. TRANSLATORS: Purpose helptext for an Atlantean production site: Temple of
 #. Satul
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:27
 msgctxt "atlanteans_building"
@@ -1633,7 +1627,7 @@ msgid ""
 msgstr ""
 "Un grand et coûteux temple pour vénérer Satul et consacrer les prêtresses."
 
-#. TRANSLATORS: Purpose helptext for an atlantean worker: Trader
+#. TRANSLATORS: Purpose helptext for an Atlantean worker: Trader
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:36
 msgctxt "atlanteans_worker"
 msgid "Transports wares to share with other players."
@@ -1646,7 +1640,7 @@ msgstr ""
 "Un commerçant est un éclaireur qui a besoin d'un cheval pour transporter ses"
 " marchandises."
 
-#. TRANSLATORS: Purpose helptext for an atlantean worker: Satul's Initiate
+#. TRANSLATORS: Purpose helptext for an Atlantean worker: Satul's Initiate
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:43
 msgctxt "atlanteans_worker"
 msgid "Takes care of the Temple of Satul."
@@ -1661,7 +1655,7 @@ msgstr ""
 "Les initiées s'occupent du temple de Satul pendant qu'elles apprennent à "
 "devenir prêtresses."
 
-#. TRANSLATORS: Purpose helptext for an atlantean worker: Priestess
+#. TRANSLATORS: Purpose helptext for an Atlantean worker: Priestess
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:50
 msgctxt "atlanteans_worker"
 msgid "Worships Satul."
@@ -1672,14 +1666,14 @@ msgctxt "atlanteans_worker"
 msgid "Priestesses are needed to make Satul show his might."
 msgstr "Les prêtresses sont nécessaires pour que Satul montre sa puissance."
 
-#. TRANSLATORS: Purpose helptext for an atlantean ware: Wooden Coin
+#. TRANSLATORS: Purpose helptext for an Atlantean ware: Wooden Coin
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:64
 msgctxt "atlanteans_ware"
 msgid "A wooden coin, received as reward for delivering five logs."
 msgstr ""
 "Une pièce de bois, reçue en récompense de la livraison de cinq grumes."
 
-#. TRANSLATORS: Purpose helptext for an atlantean ware: Copper Coin
+#. TRANSLATORS: Purpose helptext for an Atlantean ware: Copper Coin
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:73
 msgctxt "atlanteans_building"
 msgid ""
@@ -1688,14 +1682,14 @@ msgstr ""
 "Pièce de monnaie en cuivre, reçue en récompense de la livraison de quatre "
 "morceaux de charbon."
 
-#. TRANSLATORS: Purpose helptext for an atlantean ware: Silver Coin
+#. TRANSLATORS: Purpose helptext for an Atlantean ware: Silver Coin
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:82
 msgctxt "atlanteans_building"
 msgid "A silver coin, received as reward for delivering three iron ingots."
 msgstr ""
 "Pièce d'argent, reçue en récompense de la livraison de trois lingots de fer."
 
-#. TRANSLATORS: Purpose helptext for an atlantean ware: Golden Coin
+#. TRANSLATORS: Purpose helptext for an Atlantean ware: Golden Coin
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:91
 msgctxt "atlanteans_building"
 msgid "A golden coin, received as reward for delivering two bars of gold."
