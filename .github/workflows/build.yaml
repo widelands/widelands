@@ -116,7 +116,7 @@ jobs:
         cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
         popd
     - name: Restore cache
-      uses: actions/cache@v3
+      uses: actions/cache/restore@v3
       with:
         path: build/clang-tidy-cache
         key: clang-tidy-cache-${{ github.sha }}
