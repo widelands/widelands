@@ -240,8 +240,11 @@ class Cache:
         self.failed = set()
 
     def lookup(self, hash):
-        """Meaning of return values:
-               found (bool), passed (bool), stdout (string), stderr (string)"""
+        """Look up hash in the cache.
+
+        Meaning of return values:
+            found (bool), passed (bool), stdout (string), stderr (string)
+        """
         if hash in self.passed:
             self.hits += 1
             self.passed[hash] = int(time.time())

@@ -118,7 +118,7 @@ jobs:
       uses: actions/cache@v3
       with:
         path: build/clang-tidy-cache
-        key: clang-tidy-cache-${{ GITHUB_SHA }}
+        key: clang-tidy-cache-${{ github.sha }}
         restore-keys: |
           clang-tidy-cache-
     - name: Check
