@@ -465,8 +465,8 @@ def run_tidy(tidy_common_args, cache, tmpdir, build_path, queue, lock,
                 failed_files.append(name)
             sys.stdout.write('\n' + ' '.join(invocation) +
                              '\n' + output)
+            sys.stdout.flush()
             if len(err) > 0:
-                sys.stdout.flush()
                 sys.stderr.write(err)
                 sys.stderr.flush()
 
@@ -480,6 +480,7 @@ def run_tidy(tidy_common_args, cache, tmpdir, build_path, queue, lock,
                         print('Error saving output to the cache.\n',
                               file=sys.stderr)
                         traceback.print_exc()
+                        sys.stderr.flush()
 
         queue.task_done()
 
