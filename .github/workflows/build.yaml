@@ -123,19 +123,12 @@ jobs:
         restore-keys: |
           clang-tidy-cache-
     - name: Check
-      id: tidy-check
       # To run a single check, call:
       # python3 ../utils/run-clang-tidy.py -checks=-*,my-check-prefix* | tee ../clang-tidy.log
       run: |
         # run-clang-tidy.py
         pushd build
-        # TODO: debug only, remove before merging
-        CHECK=src/base
-        # TODO: restore full check before merging
-        python3 ../utils/run-clang-tidy.py -cache $CHECK | tee ../clang-tidy.log
-        # TODO: debug only, remove before merging
-        ls -laR clang-tidy-cache
-        du --si -s clang-tidy-cache
+        python3 ../utils/run-clang-tidy.py -cache | tee ../clang-tidy.log
         popd
     - name: Save cache
       # We want to save the cache even if the report fails because of failed files
