@@ -243,7 +243,8 @@ class Cache:
         """Look up hash in the cache.
 
         Meaning of return values:
-            found (bool), passed (bool), stdout (string), stderr (string)
+
+        found (bool), passed (bool), stdout (string), stderr (string)
         """
         if hash in self.passed:
             self.hits += 1
