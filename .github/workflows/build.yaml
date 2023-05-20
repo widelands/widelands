@@ -137,13 +137,12 @@ jobs:
         ls -laR clang-tidy-cache
         du --si -s clang-tidy-cache
         popd
-    # - name: Save cache
-    #   # We want to save the cache for failed files too
-    #   if steps.tidy-check.
-    #   uses: actions/cache/save@v3
-    #   with:
-    #     path: build/clang-tidy-cache
-    #     key: clang-tidy-cache-${{ GITHUB_SHA }}
+    - name: Save cache
+      # We want to save the cache even if the report fails because of failed files
+      uses: actions/cache/save@v3
+      with:
+        path: build/clang-tidy-cache
+        key: clang-tidy-cache-${{ GITHUB_SHA }}
     - name: Report
       run: utils/check_clang_tidy_results.py clang-tidy.log
 
