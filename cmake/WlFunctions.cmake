@@ -48,7 +48,6 @@ function(wl_add_static_libs VAR_NAME)
     set(STATIC_LIBS ${${VAR_NAME}})
     foreach(LIB IN ITEMS ${ARGN})
         find_library(${LIB}_STATIC NAMES ${LIB} REQUIRED)
-        message(STATUS "${LIB}_STATIC = ${${LIB}_STATIC}")
         list(APPEND STATIC_LIBS ${${LIB}_STATIC})
     endforeach()
     # Make it known to caller
