@@ -1644,7 +1644,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Empire production site: Armor Smithy
             purpose = pgettext("empire_building", "Forges armor and helmets that are used for training soldiers’ health in the training camp."),
             -- TRANSLATORS: Performance helptext for an Empire production site: Armor Smithy
-            performance = pgettext("empire_building", "If this building is fully supplied and all armors are needed by the economy, production of one helmet takes %1$s and one armor, one chain armor and one gilded armor  takes %2$s on average. If only one kind of armor is needed by the economy, production of one helmet takes %3$s, one armor, one chain armor or one gilded armor takes %4$s on average."):bformat(format_minutes_seconds(3, 13), format_minutes_seconds(6, 25), format_minutes_seconds(1, 11), format_minutes_seconds(1, 21))
+            performance = pgettext("empire_building", "If this building is fully supplied and all armors are needed by the economy, production of one helmet takes %1$s and one armor, one chain armor and one gilded armor takes %2$s on average. If only one kind of armor is needed by the economy, production of one helmet takes %3$s, one armor, one chain armor or one gilded armor takes %4$s on average."):bformat(format_minutes_seconds(3, 13), format_minutes_seconds(6, 25), format_minutes_seconds(1, 11), format_minutes_seconds(1, 21))
          }
       },
       {

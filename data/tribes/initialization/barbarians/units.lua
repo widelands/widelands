@@ -1449,7 +1449,7 @@ wl.Descriptions():new_tribe {
             note = pgettext("barbarians_building", "The Barbarian ax workshop is the intermediate production site in a series of three buildings. It is enhanced from the metal workshop but doesn’t require additional qualification for the worker."),
             performance = {
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Ax Workshop
-               pgettext("barbarians_building", "When this building is fully supplied and all axes are needed by the economy, production of one of each ax takes %1$s on average. If only one kind of ax is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(3, 2), format_minutes_seconds(1, 7)),
+               pgettext("barbarians_building", "If this building is fully supplied and all axes are needed by the economy, production of one of each ax takes %1$s on average. If only one kind of ax is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(3, 2), format_minutes_seconds(1, 7)),
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Ax Workshop
                pgettext("barbarians_building", "All three weapons take the same time for making, but the required raw materials vary.")
             }
