@@ -1600,7 +1600,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Note helptext for a Frisian production site: Hunter's House
             note = pgettext("frisians_building", "The hunter’s house needs animals to hunt within the work area."),
             -- TRANSLATORS: Performance helptext for a Frisian production site: Hunter's House
-            performance = pgettext("frisians_building", "The hunter pauses %s before going to work again. Hunter's house produces one fur after producing five pieces of meat."):bformat(format_seconds(35))
+            performance = pgettext("frisians_building", "The hunter pauses %s before going to work again. He produces one fur after he has produced five pieces of meat."):bformat(format_seconds(35))
          }
       },
       {
@@ -1767,7 +1767,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Furnace
             purpose = pgettext("building", "Smelts iron ore and gold ore into iron and gold ingots using coal."),
             -- TRANSLATORS: Performance helptext for a Frisian production site: Furnace
-            performance = pgettext("frisians_building", "When this building is fully supplied and all metals are needed by the economy, production of one iron takes %1$s and one gold takes %2$s on average. If only one kind of metal is needed by the economy, production of one iron takes %3$s and one gold takes %4$s on average."):bformat(format_minutes_seconds(1, 37), format_minutes_seconds(3, 14), format_minutes_seconds(1, 4), format_minutes_seconds(1, 6))
+            performance = pgettext("frisians_building", "If this building is fully supplied and all metals are needed by the economy, production of one iron takes %1$s and one gold takes %2$s on average. If only one kind of metal is needed by the economy, production of one iron takes %3$s and one gold takes %4$s on average."):bformat(format_minutes_seconds(1, 37), format_minutes_seconds(3, 14), format_minutes_seconds(1, 4), format_minutes_seconds(1, 6))
          }
       },
       {
@@ -1780,7 +1780,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Recycling Center
             purpose = pgettext("frisians_building", "Recycles old armor and weapon parts that have been discarded by training sites into fur, iron and gold."),
             -- TRANSLATORS: Performance helptext for a Frisian production site: Recycling Center
-            performance = pgettext("frisians_building", "When this building is fully supplied and all materials are needed by the economy, production of one fur takes %1$s, one iron takes %2$s and one gold takes %3$s on average. If only one kind of material is needed by the economy, production of one fur takes %4$s, one iron takes %5$s and one gold takes %6$s on average."):bformat(format_minutes_seconds(3, 53), format_minutes_seconds(1, 7), format_minutes_seconds(7, 46), format_seconds(59), format_seconds(50), format_minutes_seconds(1, 27))
+            performance = pgettext("frisians_building", "If this building is fully supplied and all materials are needed by the economy, production of one fur takes %1$s, one iron takes %2$s and one gold takes %3$s on average. If only one kind of material is needed by the economy, production of one fur takes %4$s, one iron takes %5$s and one gold takes %6$s on average."):bformat(format_minutes_seconds(3, 53), format_minutes_seconds(1, 7), format_minutes_seconds(7, 46), format_seconds(59), format_seconds(50), format_minutes_seconds(1, 27))
          }
       },
       {
@@ -1793,7 +1793,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Blacksmithy
             purpose = pgettext("building", "Forges tools to equip new workers."),
             -- TRANSLATORS: Performance helptext for a Frisian production site: Blacksmithy
-            performance = pgettext("frisians_building", "When this building is fully supplied and all tools are needed by the economy, production of one of each tool takes %1$s on average. If only one kind of tool is needed by the economy, its production takes %2$s on average. Needles are exception - for the time of one tool two needles are produced."):bformat(format_minutes_seconds(14, 12), format_minutes_seconds(1, 20))
+            performance = pgettext("frisians_building", "If this building is fully supplied and all tools are needed by the economy, production of one of each tool takes %1$s on average. If only one kind of tool is needed by the economy, its production takes %2$s on average. Needles are an exception - in the time to produce one tool two needles are produced."):bformat(format_minutes_seconds(14, 12), format_minutes_seconds(1, 20))
          }
       },
       {
@@ -1806,7 +1806,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Small Armor Smithy
             purpose = pgettext("frisians_building", "Produces basic weapons and helmets for the soldiers."),
             -- TRANSLATORS: Performance helptext for a Frisian production site: Small Armor Smithy
-            performance = pgettext("frisians_building", "When this building is fully supplied and all armaments are needed by the economy, production of one short sword takes %1$s, one long sword takes %2$s and one helmet takes %3$s on average. If only one kind of armament is needed by the economy, production of one short sword takes %4$s, one long sword takes %5$s and one helmet takes %6$s on average."):bformat(format_minutes_seconds(4, 12), format_minutes_seconds(2, 6), format_minutes_seconds(4, 12), format_minutes_seconds(1, 8), format_minutes_seconds(1, 3), format_minutes_seconds(1, 18))
+            performance = pgettext("frisians_building", "If this building is fully supplied and all swords and helmets are needed by the economy, production of one short sword takes %1$s, one long sword takes %2$s and one helmet takes %3$s on average. If only one kind of sword or helmet is needed by the economy, production of one short sword takes %4$s, one long sword takes %5$s and one helmet takes %6$s on average."):bformat(format_minutes_seconds(4, 12), format_minutes_seconds(2, 6), format_minutes_seconds(4, 12), format_minutes_seconds(1, 8), format_minutes_seconds(1, 3), format_minutes_seconds(1, 18))
          }
       },
       {
@@ -1819,7 +1819,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Large Armor Smithy
             purpose = pgettext("frisians_building", "Produces advanced weapons and golden helmets for the soldiers."),
             -- TRANSLATORS: Performance helptext for a Frisian production site: Large Armor Smithy
-            performance = pgettext("frisians_building", "When this building is fully supplied and all armaments are needed by the economy, production of one broadsword takes %1$s, one double-edged sword takes %2$s and one golden helmet takes %3$s on average. If only one kind of armament is needed by the economy, production of one broadsword takes %4$s, one double-edged sword takes %5$s and one golden helmet takes %6$s on average."):bformat(format_minutes_seconds(2, 37), format_minutes_seconds(2, 37), format_minutes_seconds(5, 14), format_minutes_seconds(1, 4), format_minutes_seconds(1, 4), format_minutes_seconds(1, 19))
+            performance = pgettext("frisians_building", "If this building is fully supplied and all swords and helmets are needed by the economy, production of one broadsword takes %1$s, one double-edged sword takes %2$s and one golden helmet takes %3$s on average. If only one kind of sword or helmet is needed by the economy, production of one broadsword takes %4$s, one double-edged sword takes %5$s and one golden helmet takes %6$s on average."):bformat(format_minutes_seconds(2, 37), format_minutes_seconds(2, 37), format_minutes_seconds(5, 14), format_minutes_seconds(1, 4), format_minutes_seconds(1, 4), format_minutes_seconds(1, 19))
          }
       },
       {
@@ -1845,7 +1845,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Tailor's Shop
             purpose = pgettext("building", "Equips fur garments with iron or gold to produce good armor."),
             -- TRANSLATORS: Performance helptext for a Frisian production site: Tailor's Shop
-            performance = pgettext("frisians_building", "When this building is fully supplied and all garments are needed by the economy, production of one of each garment takes %1$s on average. If only one kind of garment is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(1, 48), format_seconds(59))
+            performance = pgettext("frisians_building", "If this building is fully supplied and all garments are needed by the economy, production of one of each garment takes %1$s on average. If only one kind of garment is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(1, 48), format_seconds(59))
          }
       },
       {
@@ -1871,7 +1871,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Smokery
             purpose = pgettext("frisians_building", "Smokes fish and meat using logs. Only smoked meat and fish are good enough to be eaten by miners and soldiers."),
             -- TRANSLATORS: Performance helptext for a Frisian production site: Smokery
-            performance = pgettext("frisians_building", "When this building is fully supplied, production of one of each food takes %s on average."):bformat(format_seconds(27))
+            performance = pgettext("frisians_building", "If this building is fully supplied, production of one of each smoked food takes %s on average."):bformat(format_seconds(27))
          }
       },
       {
@@ -1897,7 +1897,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Honey Bread Bakery
             purpose = pgettext("frisians_building", "Bakes honey bread out of barley, water and honey to feed miners in deep mines and soldiers in advanced training."),
             -- TRANSLATORS: Performance helptext for a Frisian production site: Honey Bread Bakery
-            performance = pgettext("frisians_building", "When this building is fully supplied and all breads are needed by the economy, production of one bread takes %1$s and one honey bread takes %2$s on average. If only one kind of bread is needed by the economy, production of one bread takes %3$s and one honey bread takes %4$s on average."):bformat(format_minutes_seconds(2, 22), format_minutes_seconds(1, 11), format_seconds(51), format_seconds(51))
+            performance = pgettext("frisians_building", "If this building is fully supplied and all breads are needed by the economy, production of one bread takes %1$s and one honey bread takes %2$s on average. If only one kind of bread is needed by the economy, production of one bread or one honey bread takes %3$s on average."):bformat(format_minutes_seconds(2, 22), format_minutes_seconds(1, 11), format_seconds(51))
          }
       },
       {
@@ -1923,7 +1923,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Mead Brewery
             purpose = pgettext("frisians_building", "Brews beer out of barley and water. It also brews mead, which is beer refined with honey. Mead is consumed by experienced soldiers."),
             -- TRANSLATORS: Performance helptext for a Frisian production site: Mead Brewery
-            performance = pgettext("frisians_building", "When this building is fully supplied and all drinks are needed by the economy, production of one beer takes %1$s and one mead takes %2$s on average. If only one kind of drink is needed by the economy, production of one beer takes %3$s and one mead takes %4$s on average."):bformat(format_minutes_seconds(3, 22), format_minutes_seconds(1, 41), format_minutes_seconds(1, 11), format_minutes_seconds(1, 11))
+            performance = pgettext("frisians_building", "If this building is fully supplied and all drinks are needed by the economy, production of one beer takes %1$s and one mead takes %2$s on average. If only one kind of drink is needed by the economy, production of one beer or one mead takes %3$s on average."):bformat(format_minutes_seconds(3, 22), format_minutes_seconds(1, 41), format_minutes_seconds(1, 11))
          }
       },
       {
@@ -1949,7 +1949,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Drinking Hall
             purpose = pgettext("frisians_building", "Prepares rations for scouts and rations and meals to feed the miners in all mines."),
             -- TRANSLATORS: Performance helptext for a Frisian production site: Drinking Hall
-            performance = pgettext("frisians_building", "When this building is fully supplied and all kinds of food are needed by the economy, production of one ration takes %1$s and one meal takes %2$s on average. If only one kind of food is needed by the economy, production of one ration takes %3$s and one meal takes %4$s on average."):bformat(format_minutes_seconds(1, 21), format_minutes_seconds(1, 21), format_seconds(37), format_seconds(44))
+            performance = pgettext("frisians_building", "If this building is fully supplied and all kinds of food are needed by the economy, production of one ration takes %1$s and one meal takes %2$s on average. If only one kind of food is needed by the economy, production of one ration takes %3$s and one meal takes %4$s on average."):bformat(format_minutes_seconds(1, 21), format_minutes_seconds(1, 21), format_seconds(37), format_seconds(44))
          }
       },
       {
@@ -1977,7 +1977,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Reindeer Farm
             purpose = pgettext("frisians_building", "Breeds strong reindeer for adding them to the transportation system. Also keeps them for their fur, which is turned into armor and cloth."),
             -- TRANSLATORS: Note helptext for a Frisian production site: Reindeer Farm
-            note = pgettext("frisians_building", "When this building is fully supplied and both reindeers and furs are needed by the economy, production of one reindeer takes %1$s, one fur takes %2$s and one meat takes %3$s on average. If only reindeers are needed by the economy, their production takes %4$s on average. If only fur is needed by the economy, production of one fur takes %5$s and one meat takes %6$s on average."):bformat(format_minutes_seconds(1, 10), format_minutes_seconds(1, 10), format_minutes_seconds(3, 29), format_seconds(30), format_seconds(40), format_minutes_seconds(1, 59))
+            note = pgettext("frisians_building", "If this building is fully supplied and both reindeers and furs are needed by the economy, production of one reindeer takes %1$s, one fur takes %2$s and one meat takes %3$s on average. If only reindeers are needed by the economy, their production takes %4$s on average. If only fur is needed by the economy, production of one fur takes %5$s and one meat takes %6$s on average."):bformat(format_minutes_seconds(1, 10), format_minutes_seconds(1, 10), format_minutes_seconds(3, 29), format_seconds(30), format_seconds(40), format_minutes_seconds(1, 59))
          }
       },
       {

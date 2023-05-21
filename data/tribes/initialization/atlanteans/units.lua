@@ -1628,7 +1628,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Atlantean production site:  Smokery
             lore_author = pgettext("atlanteans_building", "A Smoker answering a passer-by"),
             -- TRANSLATORS: Performance helptext for an Atlantean production site: Smokery
-            performance = pgettext("atlanteans_building", "When this building is fully supplied and all kinds of food are needed by the economy, production of one smoked fish takes %1$s and one smoked meat takes %2$s on average. If only one kind of food is needed by the economy, production of one smoked fish takes %3$s and one smoked meat takes %4$s on average."):bformat(format_seconds(51), format_minutes_seconds(1, 42), format_seconds(34), format_seconds(34))
+            performance = pgettext("atlanteans_building", "If this building is fully supplied and all kinds of smoked food are needed by the economy, production of one smoked fish takes %1$s and one smoked meat takes %2$s on average. If only one kind of food is needed by the economy, production of one smoked fish takes %3$s and one smoked meat takes %4$s on average."):bformat(format_seconds(51), format_minutes_seconds(1, 42), format_seconds(34), format_seconds(34))
 
          }
       },
@@ -1644,7 +1644,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Mill
             lore_author = pgettext("atlanteans_building", "Miller arguing with a sawyer"),
             -- TRANSLATORS: Performance helptext for an Atlantean production site: Mill
-            performance = pgettext("atlanteans_building", "When this building is fully supplied and all kinds of flour are needed by the economy, production of one cornmeal takes %1$s and one blackroot flour takes %2$s on average. If only one kind of flour is needed by the economy, production of one cornmeal takes %3$s and one blackroot flour takes %4$s on average."):bformat(format_seconds(44), format_seconds(44), format_seconds(22), format_seconds(22))
+            performance = pgettext("atlanteans_building", "If this building is fully supplied and all kinds of flour are needed by the economy, production of one cornmeal takes %1$s and one blackroot flour takes %2$s on average. If only one kind of flour is needed by the economy, production of one cornmeal takes %3$s and one blackroot flour takes %4$s on average."):bformat(format_seconds(44), format_seconds(44), format_seconds(22), format_seconds(22))
          }
       },
       {
@@ -1686,7 +1686,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Smelting Works
             lore_author = pgettext("atlanteans_building", "A member of the smelters’ guild"),
             -- TRANSLATORS: Performance helptext for an Atlantean production site: Smelting Works
-            performance = pgettext("atlanteans_building", "When this building is fully supplied and all metals are needed by the economy, production of one iron takes %1$s and one gold takes %2$s on average. If only one kind of metal is needed by the economy, production of one iron takes %3$s and one gold takes %4$s on average."):bformat(format_minutes_seconds(1, 36), format_minutes_seconds(3, 12), format_minutes_seconds(1, 4), format_minutes_seconds(1, 4))
+            performance = pgettext("atlanteans_building", "If this building is fully supplied and all metals are needed by the economy, production of one iron takes %1$s and one gold takes %2$s on average. If only one kind of metal is needed by the economy, production of one iron takes %3$s and one gold takes %4$s on average."):bformat(format_minutes_seconds(1, 36), format_minutes_seconds(3, 12), format_minutes_seconds(1, 4), format_minutes_seconds(1, 4))
          }
       },
       {
@@ -1699,7 +1699,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Toolsmithy
             lore_author = pgettext("atlanteans_building", "Faded sign found on top of this building"),
             -- TRANSLATORS: Performance helptext for an Atlantean production site: Toolsmithy
-            performance = pgettext("atlanteans_building", "When this building is fully supplied and all tools are needed by the economy, production of one of each tool takes %1$s on average. If only one kind of tool is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(14, 12), format_minutes_seconds(1, 11))
+            performance = pgettext("atlanteans_building", "If this building is fully supplied and all tools are needed by the economy, production of one of each tool takes %1$s on average. If only one kind of tool is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(14, 12), format_minutes_seconds(1, 11))
          }
       },
       {
@@ -1712,7 +1712,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Weapon Smithy
             lore_author = pgettext("atlanteans_building", "Atlantean nursery rhyme"),
             -- TRANSLATORS: Performance helptext for an Atlantean production site: Weapon Smithy
-            performance = pgettext("atlanteans_building", "When this building is fully supplied and all tridents are needed by the economy, production of one of each trident takes %1$s on average. If only one kind of trident is needed by the economy, production of one light trident takes %2$s, one long trident takes %3$s, one steel trident takes %4$s, one double trident takes %5$s and one heavy double trident takes %6$s on average."):bformat(format_minutes_seconds(6, 18), format_seconds(54), format_minutes_seconds(1, 21), format_minutes_seconds(1, 21), format_minutes_seconds(1, 21), format_minutes_seconds(1, 21))
+            performance = pgettext("atlanteans_building", "If this building is fully supplied and all tridents are needed by the economy, production of one of each trident takes %1$s on average. If only one kind of trident is needed by the economy, production of one light trident takes %2$s and one long trident, one steel trident, one double trident or one heavy double trident takes %3$s on average."):bformat(format_minutes_seconds(6, 18), format_seconds(54), format_minutes_seconds(1, 21))
          }
       },
       {
@@ -1728,7 +1728,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Armor Smithy
             lore_author = pgettext("atlanteans_building", "Atlantean nursery rhyme"),
             -- TRANSLATORS: Performance helptext for an Atlantean production site: Armor Smithy
-            performance = pgettext("atlanteans_building", "When this building is fully supplied and all shields are needed by the economy, production of one steel shield takes %1$s and one advanced shield takes %2$s on average. If only one kind of shield is needed by the economy, production of one steel shield takes %3$s and one advanced shield takes %4$s on average."):bformat(format_minutes_seconds(2, 32), format_minutes_seconds(2, 32), format_minutes_seconds(1, 11), format_minutes_seconds(1, 21))
+            performance = pgettext("atlanteans_building", "If this building is fully supplied and all shields are needed by the economy, production of one steel shield takes %1$s and one advanced shield takes %2$s on average. If only one kind of shield is needed by the economy, production of one steel shield takes %3$s and one advanced shield takes %4$s on average."):bformat(format_minutes_seconds(2, 32), format_minutes_seconds(2, 32), format_minutes_seconds(1, 11), format_minutes_seconds(1, 21))
          }
       },
       {
@@ -1807,7 +1807,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Weaving Mill
             lore_author = pgettext("atlanteans_building", "Part of the silkweavers’ song"),
             -- TRANSLATORS: Performance helptext for an Atlantean production site: Weaving Mill
-            performance = pgettext("atlanteans_building", "When this building is fully supplied and all kinds of clothing are needed by the economy, production of one of each clothing takes %1$s on average. If only one kind of clothing is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(2, 12), format_seconds(44))
+            performance = pgettext("atlanteans_building", "If this building is fully supplied and all kinds of cloth and tabards are needed by the economy, production of one of each cloth or tabard takes %1$s on average. If only one kind of cloth or tabard is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(2, 12), format_seconds(44))
          }
       },
 
@@ -1823,7 +1823,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Crystal Mine
             lore_author = pgettext("atlanteans_building", "First part of the Atlantean almanach on architecture"),
             -- TRANSLATORS: Performance helptext for an Atlantean production site: Crystal Mine
-            performance = pgettext("atlanteans_building", "When this building is fully supplied and all minerals are needed by the economy, production of one granite takes %1$s, one quartz takes %2$s and one diamond takes %3$s on average. If only one kind of mineral is needed by the economy, production of one granite takes %4$s, one quartz takes %5$s and one diamond takes %6$s on average."):bformat(format_seconds(43), format_minutes_seconds(1, 37), format_minutes_seconds(3, 14), format_seconds(29), format_seconds(42), format_seconds(58))
+            performance = pgettext("atlanteans_building", "If this building is fully supplied and all minerals are needed by the economy, production of one granite takes %1$s, one quartz takes %2$s and one diamond takes %3$s on average. If only one kind of mineral is needed by the economy, production of one granite takes %4$s, one quartz takes %5$s and one diamond takes %6$s on average."):bformat(format_seconds(43), format_minutes_seconds(1, 37), format_minutes_seconds(3, 14), format_seconds(29), format_seconds(42), format_seconds(58))
          }
       },
       {
