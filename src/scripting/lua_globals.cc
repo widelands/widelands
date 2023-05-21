@@ -243,6 +243,7 @@ void write_textdomain_stack(FileWrite& fw, const lua_State* L) {
       :returns: The translated string.
 */
 CLANG_DIAG_RESERVED_IDENTIFIER_OFF
+// NOLINTNEXTLINE(bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp)
 static int L__(lua_State* L) {
 	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 	if (const TextdomainInfo* td = current_textdomain(L)) {

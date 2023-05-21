@@ -31,13 +31,13 @@ msgstr ""
 msgid ""
 "I am sorry, but I will have to tear this down. We might need the space here "
 "later on."
-msgstr ""
+msgstr "Sajnálom, de ezt le kell bontanom. Később még szükségünk lehet erre a helyre."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:17
 msgid ""
 "I am sorry, but I will have to tear this down again. We might need the space"
 " here later on."
-msgstr ""
+msgstr "Sajnálom, de ezt megint le kell bontanom. Később még szükségünk lehet erre a helyre."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:21
 msgid "Nice And Easy Does It All the Time"
@@ -48,7 +48,7 @@ msgid ""
 "If I am too slow for you, you might want to play a real game and just find "
 "everything out for yourself. Otherwise, please bear with me, I am not the "
 "youngest and quickest anymore."
-msgstr ""
+msgstr "Ha túl lassú vagyok, akkor lehet hogy egy igazi játékot kellene játszanod, és mindent magad felfedezned. Ellenkező esetben, kérlek légy türelemmel, már nem vagyok a legfiatalabb és a leggyorsabb."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:36
 msgid "Welcome to the Widelands Tutorial!"
@@ -90,7 +90,7 @@ msgstr "A legtöbb ablakot, így ezt is, be tudod zárni jobb gombos rákattint�
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid "You can also minimize windows by middle-clicking on them."
-msgstr ""
+msgstr "Középső gombos kattintással össze is tudod csukni az ablakokat."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:54
 msgid ""
@@ -99,7 +99,7 @@ msgstr "Amikor teljesítesz egy célkitűzést, az eltűnik a listáról."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:56
 msgid "Now please close the ‘Objectives’ window to proceed."
-msgstr ""
+msgstr "Most pedig zárd be a „Célkitűzések” ablakot!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:62
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:64
@@ -208,7 +208,7 @@ msgid ""
 "headquarters. After ordering the construction site, I was automatically put "
 "into road building mode, so all I have to do is click on the blue flag in "
 "front of my headquarters."
-msgstr ""
+msgstr "Ezzel még nem végeztem. Még össze kell kötni a favágókunyhót a főhadiszállással. Mivel felállítottam egy építkezési területet, ezért automatikusan útépítő módra vált a játék. Nincs más dolgom, mint a főhadiszállás kék zászlójára kattintani."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:140
 msgid ""
@@ -218,7 +218,7 @@ msgid ""
 "menu). Therefore, I have entered the road building mode manually. I will "
 "tell you later how to do that. To build the road, all I have to do now is "
 "click on the blue flag in front of my headquarters."
-msgstr ""
+msgstr "Ezzel még nem végeztem. Még össze kell kötni a favágókunyhót a főhadiszállással. Kikapcsoltad a „Út építése a zászlók elhelyezése után” beállítást (a megváltoztatáshoz válaszd a „Beállítások”-at a Widelands főmenüjében). Ezért kézzel váltottam át útépítési módba. Később elmondom azt hogyan kell. Az út megépítéséhez nincs más dolgom, mint a főhadiszállás kék zászlójára kattintani."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:148
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:182
@@ -379,7 +379,7 @@ msgid ""
 "on a laptop with a touchpad. You can enable map movement with touchpad "
 "scrolling in the the Widelands main menu: Choose ‘Options’ then press ‘Edit "
 "keyboard and mouse actions’, and select the ‘Mouse Scrolling’ tab."
-msgstr ""
+msgstr "Ha érintőpados laptopon játszol, a jobb egérgombos térképmozgatásnál kényelmesebb lehet az érintőpados görgetés használata. Ennek beállításához válaszd a főmenüben a „Beállítások” alatt a „Billentyű- és egér-hozzárendelések szerkesztése” gombot, majd a „Görgetés egérrel” fület."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:266
 msgid "Some Rocks Were Found"
@@ -572,7 +572,7 @@ msgid ""
 "Excellent! Remember, we also need to build a road to the quarry. To enter "
 "road building mode for any flag, left-click on a flag and select the road "
 "building symbol."
-msgstr ""
+msgstr "Nagyszerű! Ne feledd, még utat is kell építenünk a kőfejtőhöz. Bármelyik zászlónál útépítő módba válthatsz a zászlóra kattintva, és kiválasztva az „Út építése” gombot."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:376
 msgid ""
@@ -840,7 +840,7 @@ msgstr "A Widelandsben minden ablak bezárható, ha jobb egérgombbal kattintasz
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:530
 msgid "The windows can also be minimized by middle-clicking in them."
-msgstr ""
+msgstr "Az ablakokat középső gombos kattintással össze is tudod csukni."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:531
 msgid "Close the messages window now by right-clicking into it."
