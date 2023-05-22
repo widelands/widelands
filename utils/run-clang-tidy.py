@@ -131,11 +131,38 @@ def make_absolute(f, directory):
     return os.path.normpath(os.path.join(directory, f))
 
 
+cache = None
+
 class Cache:
+    """Implements the cache.
+
+    Acknowledgements:
+
+    The basic inspiration and some ideas for hashing the sources came from
+    https://github.com/freedick/cltcache.
+
+    Some more ideas for hashing and ideas for parsing compile_commands.json
+    came from https://github.com/matus-chochlik/ctcache.
+
+    No code is copied directly from either.
+    """
     failed_files_regexp = re.compile(r'^([0-9a-f]{64})\.std(out|err)$')
 
-    def __init__(self, dir, tidy_version, config, checks):
+    def __init__(self, dir, tidy_version, config, checks, custom):
         self.dir = os.path.join(dir, 'clang-tidy-cache')
+        if not os.path.isdir(self.dir):
+            os.mkdir(self.dir)
+
+        self.config_hash = get_hash(tidy_version + config + checks)
+
+        # We only put caches of custom runs in separate subdirs, so we can clean
+        # up the main directory on upgrades or when the default config changes.
+        # Custom subdirs have to be cleaned up manually on upgrades.
+        if custom:
+            self.dir = os.path.join(self.dir, '__custom_args', self.config_hash)
+            if not os.path.isdir(self.dir):
+                os.mkdir(self.dir)
+
         self.passed_file = os.path.join(self.dir, 'passed')
         self.failed_dir = os.path.join(self.dir, 'failed')
         if not os.path.isdir(self.dir):
@@ -152,44 +179,55 @@ class Cache:
         # last access time internally
         self.failed = set()
 
-        if self.check_version(tidy_version, config, checks):
+        if self.check_version(tidy_version, config, checks, custom):
             self.load_cache()
 
         # Statistics counters
         self.hits = 0
         self.misses = 0
 
-    def check_version(self, tidy_version, config, checks):
+    def check_version(self, tidy_version, config, checks, custom):
         self.version_file = os.path.join(self.dir, 'clang-tidy_version')
         self.config_dump_file = os.path.join(self.dir, 'clang-tidy_config')
         self.checks_file = os.path.join(self.dir, 'enabled_checks')
+        self.config_hash_file = os.path.join(self.dir, 'config_hash')
         old_version = ''
         old_config = ''
         old_checks = ''
-        filtered_config = ''
-        for line in config.splitlines(keepends = True):
-            if not line.startswith(('Checks:', 'User:')):
-                filtered_config += line
         if os.path.isfile(self.version_file):
             with open(self.version_file, 'r', encoding = 'utf-8') as vf:
-                old_version = vf.readline().strip()
+                old_version = vf.read()
         if os.path.isfile(self.config_dump_file):
             with open(self.config_dump_file, 'r', encoding = 'utf-8') as cf:
                 old_config = cf.read()
         if os.path.isfile(self.checks_file):
             with open(self.checks_file, 'r', encoding = 'utf-8') as cf:
                 old_checks = cf.read()
-        if tidy_version.splitlines()[0].strip() == old_version and \
-           filtered_config == old_config and checks == old_checks:
+
+        # For customized runs (when the run-time configuration is changed by
+        # the command line arguments), the directory name already contains the
+        # hash.
+        old_config_hash = self.config_hash
+        if not custom:
+            if os.path.isfile(self.config_hash_file):
+                with open(self.config_hash_file, 'r', encoding = 'utf-8') as hf:
+                    old_config_hash = hf.read()
+            else:
+                old_config_hash = ''
+        if tidy_version == old_version and config == old_config and \
+           checks == old_checks and self.config_hash == old_config_hash:
             return True
         else:
             self.clear()
             with open(self.version_file, 'w', encoding = 'utf-8') as vf:
                  vf.write(tidy_version)
             with open(self.config_dump_file, 'w', encoding = 'utf-8') as cf:
-                 cf.write(filtered_config)
+                 cf.write(config)
             with open(self.checks_file, 'w', encoding = 'utf-8') as cf:
                  cf.write(checks)
+            if not custom:
+                 with open(self.config_hash_file, 'w', encoding = 'utf-8') as hf:
+                     hf.write(self.config_hash)
             return False
 
     def load_cache(self):
@@ -218,6 +256,7 @@ class Cache:
         self.passed = keep
         with open(self.passed_file, 'w', encoding = 'utf-8') as pf:
             json.dump(self.passed, pf, sort_keys = True, indent = 2)
+            pf.write('\n')
         # failed entries are updated on the fly, we only need to delete old ones
         with os.scandir(self.failed_dir) as dir:
             for entry in dir:
@@ -228,8 +267,12 @@ class Cache:
     def clear(self):
         if os.path.isfile(self.version_file):
             os.remove(self.version_file)
+        if os.path.isfile(self.config_dump_file):
+            os.remove(self.config_dump_file)
         if os.path.isfile(self.checks_file):
             os.remove(self.checks_file)
+        if os.path.isfile(self.config_hash_file):
+            os.remove(self.config_hash_file)
         if os.path.isfile(self.passed_file):
             os.remove(self.passed_file)
         with os.scandir(self.failed_dir) as dir:
@@ -297,10 +340,15 @@ class Cache:
 def get_hash(text_to_hash):
     return hashlib.sha256(text_to_hash.encode('utf-8')).hexdigest()
 
+
+extra_before = []
+extra_after = []
+
 def pp_hash(file, command, dir):
     preprocessor_args = []
+    pp_args_loaded = shlex.split(command, posix = True)
     skip = False
-    for arg in shlex.split(command, posix = True):
+    for arg in pp_args_loaded[0:1] + extra_before + pp_args_loaded[1:] + extra_after:
         if skip:
             skip = False
             continue
@@ -308,20 +356,24 @@ def pp_hash(file, command, dir):
             skip = True
             continue
         if arg == '-c':
-            arg = '-E'
+            preprocessor_args.append('-E')
+            # We need this because of NOLINT comments
+            arg = '-C'
         preprocessor_args.append(arg)
-
-    # We need this because of NOLINT comments
-    preprocessor_args.append('-C')
 
     proc = subprocess.Popen(
        preprocessor_args, cwd=dir, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     output, err = proc.communicate()
     if proc.returncode != 0 or len(err) > 0:
-        raise Exception('preprocessor error')
+        print('Preprocessor exited with error:\n' +
+              ' '.join(preprocessor_args) + '\n' +
+              err.decode('utf-8'), file=sys.stderr)
+        sys.stderr.flush()
+        raise Exception('Preprocessor error')
+
+    hash = hashlib.sha256(cache.config_hash.encode('utf-8'))
 
     ### Would be nice (not very important), but we need the NOLINT comments...
-    # hash = hashlib.sha256()
     # # Try to make it more resistant to comment and formatting changes
     # for line in output.decode('utf-8').splitlines():
     #     l = line.strip()
@@ -335,12 +387,16 @@ def pp_hash(file, command, dir):
     # return hash.hexdigest()
     ###
 
-    return hashlib.sha256(output).hexdigest()
+    hash.update(output)
+    return hash.hexdigest()
 
 
-def get_tidy_common_args(clang_tidy_binary, checks, build_path, header_filter,
+tidy_common_args = []
+
+def set_tidy_common_args(clang_tidy_binary, checks, build_path, header_filter,
                          extra_arg, extra_arg_before, quiet, config):
     """Gets the global arguments for clang-tidy."""
+    global tidy_common_args
     tidy_common_args = [clang_tidy_binary]
     if header_filter is not None:
         tidy_common_args.append('-header-filter=' + header_filter)
@@ -353,8 +409,10 @@ def get_tidy_common_args(clang_tidy_binary, checks, build_path, header_filter,
         tidy_common_args.append('-config=' + config)
     for arg in extra_arg:
         tidy_common_args.append('-extra-arg=%s' % arg)
+        extra_after.append(arg)
     for arg in extra_arg_before:
         tidy_common_args.append('-extra-arg-before=%s' % arg)
+        extra_before.append(arg)
     return tidy_common_args
 
 def get_tidy_file_args(file, tmpdir):
@@ -419,9 +477,12 @@ def apply_fixes(args, tmpdir):
     subprocess.call(invocation)
 
 
-def run_tidy(tidy_common_args, cache, tmpdir, build_path, queue, lock,
-             failed_files):
+# List of files with a non-zero return code.
+failed_files = []
+
+def run_tidy(tmpdir, build_path, quiet, queue, lock):
     """Takes filenames out of queue and runs clang-tidy on them."""
+    global failed_files
     while True:
         name, command, dir = queue.get()
         hash = None
@@ -437,16 +498,15 @@ def run_tidy(tidy_common_args, cache, tmpdir, build_path, queue, lock,
             try:
                 hash = pp_hash(name, command, dir)
             except:
-                print('Preprocessing failed for {}, skipping cache lookup.\n'.format(name),
+                print('Preprocessing failed for {}, skipping cache lookup.'.format(name),
                       file=sys.stderr)
-                traceback.print_exc()
                 hash = None
             if hash:
                 with lock:
                     try:
                         hit, passed, output, err = cache.lookup(hash)
                     except:
-                        print('Cache lookup error for {} with hash {}.\n'.format(name, hash),
+                        print('Cache lookup error for {} with hash {}.'.format(name, hash),
                               file=sys.stderr)
                         traceback.print_exc()
                         hit = False
@@ -466,25 +526,25 @@ def run_tidy(tidy_common_args, cache, tmpdir, build_path, queue, lock,
             sys.stdout.write('\n' + ' '.join(invocation) +
                              '\n' + output)
             sys.stdout.flush()
-            if len(err) > 0:
+            if (tidy_error or not quiet) and len(err) > 0:
                 sys.stderr.write(err)
                 sys.stderr.flush()
 
-            if cache and not hit and hash:
+            if cache and not hit and hash and not tidy_error:
                 if passed:
                     cache.add_passed(hash)
                 else:
                     try:
                         cache.add_failed(hash, output, err)
                     except:
-                        print('Error saving output to the cache.\n',
+                        print('Error saving output to the cache.',
                               file=sys.stderr)
                         traceback.print_exc()
                         sys.stderr.flush()
 
         queue.task_done()
 
-def query_tidy(tidy_common_args, query, quiet):
+def query_tidy(query, quiet):
     invocation = tidy_common_args + [query]
     if not quiet:
         print(invocation)
@@ -501,6 +561,18 @@ def query_tidy(tidy_common_args, query, quiet):
         raise Exception('Unable to run clang-tidy.')
     return output
 
+def filter_config(config):
+    filtered_config = ''
+    for line in config.splitlines(keepends = True):
+        if not line.startswith(('Checks:', 'User:', 'FormatStyle:')):
+            filtered_config += line
+    return filtered_config
+
+def filter_version(tidy_version):
+    return tidy_version.splitlines()[0].strip()
+
+
+default_tidy_binary = 'clang-tidy'
 
 def main():
     parser = argparse.ArgumentParser(description='Runs clang-tidy over all files '
@@ -508,7 +580,7 @@ def main():
                                      'clang-tidy and clang-apply-replacements in '
                                      '$PATH.')
     parser.add_argument('-clang-tidy-binary', metavar='PATH',
-                        default='clang-tidy',
+                        default=default_tidy_binary,
                         help='path to clang-tidy binary')
     parser.add_argument('-clang-apply-replacements-binary', metavar='PATH',
                         default='clang-apply-replacements',
@@ -568,10 +640,6 @@ def main():
         # Find our database
         build_path = find_compilation_database(db_path)
 
-    tidy_common_args = get_tidy_common_args(args.clang_tidy_binary, args.checks,
-        build_path, args.header_filter, args.extra_arg, args.extra_arg_before,
-        args.quiet, args.config)
-
     tmpdir = None
     if args.fix or (yaml and args.export_fixes):
         check_clang_apply_replacements_binary(args)
@@ -580,15 +648,50 @@ def main():
             print('Caching is disabled because of -fix\n', file=sys.stderr)
         args.cache = False
 
-    cache = None
+    custom = False
+    default_version = ''
+    default_config = ''
+    default_checks = ''
+
+    if args.cache:
+        # -quiet only changes stderr, not the actual checks, so we
+        # suppress stderr completely with quiet as long as return code
+        # is 0, so we can use the same cache if the only difference
+        # is -quiet.
+        custom = args.checks or args.config or args.header_filter or \
+                 args.clang_tidy_binary != default_tidy_binary
+
+        # Maybe the command-line arguments don't actually change the config
+        # and the enabled checks. To find out, we need to get them for the
+        # default setup.
+        if custom:
+            set_tidy_common_args(default_tidy_binary, None, build_path,
+                None, [], [], False, None)
+            try:
+                default_version = filter_version(query_tidy('-version', True))
+                default_config = filter_config(query_tidy('-dump-config', True))
+                default_checks = query_tidy('-list-checks', True)
+            except:
+                # Ignore errors. Maybe the args are there to make it work.
+                pass
+
+    set_tidy_common_args(args.clang_tidy_binary, args.checks, build_path,
+        args.header_filter, args.extra_arg, args.extra_arg_before, args.quiet,
+        args.config)
+
+    global cache
+
     try:
-        version = query_tidy(tidy_common_args, '-version', args.quiet)
-        checks = query_tidy(tidy_common_args, '-list-checks', args.quiet)
+        version = query_tidy('-version', args.quiet)
+        checks = query_tidy('-list-checks', args.quiet)
 
         if args.cache:
             try:
-                config = query_tidy(tidy_common_args, '-dump-config', True)
-                cache = Cache(build_path, version, config, checks)
+                version_f = filter_version(version)
+                config = filter_config(query_tidy('-dump-config', True))
+                custom = custom and (version_f != default_version or
+                         config != default_config or checks != default_checks)
+                cache = Cache(build_path, version_f, config, checks, custom)
             except Exception as error:
                 print(error, file=sys.stderr)
                 traceback.print_exc()
@@ -613,8 +716,6 @@ def main():
         if file_name_re.search(name) and not 'src/third_party' in name:
             files.append((name, entry['command'], entry['directory']))
 
-    # List of files with a non-zero return code.
-    failed_files = []
     return_code = 0
     lock = threading.Lock()
     task_queue = queue.Queue(max_task)
@@ -623,9 +724,8 @@ def main():
         # Spin up a bunch of tidy-launching threads.
         for _ in range(max_task):
             t = threading.Thread(target=run_tidy,
-                                 args=(tidy_common_args, cache, tmpdir,
-                                       build_path, task_queue, lock,
-                                       failed_files))
+                                 args=(tmpdir, build_path, args.quiet,
+                                       task_queue, lock))
             t.daemon = True
             t.start()
 
@@ -636,7 +736,7 @@ def main():
         # Wait for all threads to be done.
         task_queue.join()
         if len(failed_files):
-            print('clang-tidy errors: {}\n'.format(len(failed_files)),
+            print('\nclang-tidy errors: {}\n'.format(len(failed_files)),
                   file=sys.stderr)
             return_code = 1
 
@@ -672,11 +772,12 @@ def main():
             print('\nCache statistics:\n'
                   f'   Total files:  {len(files):5}\n'
                   f'   Cache hits:   {cache.hits:5}\n'
-                  f'   Cache misses: {cache.misses:5}\n',
+                  f'   Cache misses: {cache.misses:5}',
                   file=sys.stderr)
             other = len(files) - cache.hits - cache.misses
             if other != 0:
-                print(f'   Lookup failed: {other:4}\n', file=sys.stderr)
+                print(f'   Lookup failed: {other:4}', file=sys.stderr)
+            print('', file=sys.stderr)
 
     if tmpdir:
         shutil.rmtree(tmpdir)
