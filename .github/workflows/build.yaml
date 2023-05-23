@@ -10,15 +10,6 @@ on:
     branches: [ master, cache-clang-tidy ]
 
 jobs:
-  ### TODO: clean-up before merging
-  # to prevent running compilation jobs
-  fail:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Always fail
-      run: false
-  ### TODO: clean-up before merging
-
   # This job runs multiple smaller checks where having several jobs would be overkill.
   misc_sanity_checks:
     runs-on: ubuntu-latest
@@ -71,8 +62,6 @@ jobs:
         fi
 
   documentation:
-    # TODO: clean-up before merging
-    needs: [fail]
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -233,6 +222,7 @@ jobs:
         build/src/website/wl_map_info data/maps/Archipelago_Sea.wmf || [ $? -eq 2 ]
     - name: Testsuite
       run: |
+        # regression_test.py
         TIMEOUT=""
         if [ "${{ matrix.config }}" = "Debug" ]
         then
