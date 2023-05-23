@@ -1430,7 +1430,7 @@ wl.Descriptions():new_tribe {
             note = pgettext("barbarians_building", "The Barbarian war mill is their most advanced production site for weapons. As such you will need to enhance an ax workshop in order to get one."),
             performance = {
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Warmill, part 1
-               pgettext("barbarians_building", "If this building is fully supplied and all axes are needed by the economy, production of one of each ax takes %1$s on average. If only one kind of ax is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(6, 4), format_minutes_seconds(1, 9)),
+               pgettext("barbarians_building", "If this building is fully supplied and all axes are needed by the economy, production of one of each ax takes %1$s on average. If only one kind of ax is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(5, 58), format_minutes_seconds(1, 8)),
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Warmill, part 2
                pgettext("barbarians_building", "All weapons require the same time for making, but the consumption of the same raw materials increases from step to step. The last two need gold.")
             }
@@ -1449,7 +1449,7 @@ wl.Descriptions():new_tribe {
             note = pgettext("barbarians_building", "The Barbarian ax workshop is the intermediate production site in a series of three buildings. It is enhanced from the metal workshop but doesn’t require additional qualification for the worker."),
             performance = {
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Ax Workshop
-               pgettext("barbarians_building", "If this building is fully supplied and all axes are needed by the economy, production of one of each ax takes %1$s on average. If only one kind of ax is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(3, 2), format_minutes_seconds(1, 7)),
+               pgettext("barbarians_building", "If this building is fully supplied and all axes are needed by the economy, production of one of each ax takes %1$s on average. If only one kind of ax is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(3, 4), format_minutes_seconds(1, 8)),
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Ax Workshop
                pgettext("barbarians_building", "All three weapons take the same time for making, but the required raw materials vary.")
             }
