@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-05-13 02:43+0000\n"
+"POT-Creation-Date: 2023-05-20 02:36+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Foppe Benedictus <foppe.benedictus@gmail.com>, 2020,2022\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
@@ -968,7 +968,7 @@ msgid "Author: %s"
 msgstr "Auteur: %s"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:244
-#: ../../src/ui_fsmenu/addons/packager_box.cc:284
+#: ../../src/ui_fsmenu/addons/packager_box.cc:289
 #: ../../src/ui_fsmenu/main.cc:459 ../../src/ui_fsmenu/mapdetailsbox.cc:124
 #, c-format
 msgid "Description: %s"
@@ -976,6 +976,7 @@ msgstr "Beschrijving: %s"
 
 #. * TRANSLATORS: No add-ons enabled
 #: ../../src/editor/ui_menus/field_info_window.cc:251
+#: ../../src/ui_fsmenu/addons/packager_box.cc:287
 msgid "(none)"
 msgstr "(geen)"
 
@@ -1097,7 +1098,7 @@ msgid "Click player to remove"
 msgstr "Klik speler om te verwijderen"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:61
-#: ../../src/ui_fsmenu/addons/packager_box.cc:425
+#: ../../src/ui_fsmenu/addons/packager_box.cc:430
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:66
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:89
 #: ../../src/wui/economy_options_window.cc:679
@@ -1520,7 +1521,7 @@ msgstr "Speler %u"
 
 #. * TRANSLATORS: Header for campaign tribe
 #: ../../src/editor/ui_menus/player_menu.cc:184
-#: ../../src/ui_fsmenu/addons/packager_box.cc:466
+#: ../../src/ui_fsmenu/addons/packager_box.cc:471
 #: ../../src/ui_fsmenu/campaign_select.cc:48
 #: ../../src/ui_fsmenu/campaigndetails.cc:55
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:213
@@ -2627,7 +2628,7 @@ msgstr "delfbaar"
 msgid "unwalkable"
 msgstr "onbegaanbaar"
 
-#: ../../src/logic/mutable_addon.cc:239
+#: ../../src/logic/mutable_addon.cc:241
 #, c-format
 msgid ""
 "A map file is invalid:\n"
@@ -4344,14 +4345,14 @@ msgstr "Catagorie"
 #: ../../src/ui_fsmenu/addons/packager.cc:358
 #: ../../src/ui_fsmenu/addons/packager.cc:374
 #: ../../src/ui_fsmenu/addons/packager.cc:379
-#: ../../src/ui_fsmenu/addons/packager_box.cc:389
-#: ../../src/ui_fsmenu/addons/packager_box.cc:405
-#: ../../src/ui_fsmenu/addons/packager_box.cc:411
+#: ../../src/ui_fsmenu/addons/packager_box.cc:394
+#: ../../src/ui_fsmenu/addons/packager_box.cc:410
+#: ../../src/ui_fsmenu/addons/packager_box.cc:416
 msgid "Invalid Name"
 msgstr "Ongeldige Naam"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:359
-#: ../../src/ui_fsmenu/addons/packager_box.cc:391
+#: ../../src/ui_fsmenu/addons/packager_box.cc:396
 #, c-format
 msgid ""
 "This name is invalid. Reason: %s\n"
@@ -4452,21 +4453,52 @@ msgstr "Waarschuwing: als je handmatig files hebt aangepast voor deze uitbreidin
 msgid "Confirm Saving"
 msgstr "Bevestig Bewaren"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:563
+#: ../../src/ui_fsmenu/addons/packager.cc:568
+msgid "Invalid Version Requirement"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/packager.cc:569
+#, c-format
+msgid ""
+"The minimum Widelands version ‘%1$s’ may not be newer than the maximum "
+"Widelands version ‘%2$s’. The add-on ‘%3$s’ will not be saved."
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/packager.cc:576
 msgid "Invalid Version"
 msgstr "Ongeldige Versie"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:564
+#: ../../src/ui_fsmenu/addons/packager.cc:577
 #, c-format
 msgid ""
 "‘%1$s’ is not a valid version string. The add-on ‘%2$s’ will not be saved."
 msgstr "'%1$s' is een ongeldige versie string. De uitbreiding '%2$s' zal niet bewaard worden."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:573
+#: ../../src/ui_fsmenu/addons/packager.cc:590
+msgid "Version Requirement"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/packager.cc:592
+#, c-format
+msgid ""
+"The add-on ‘%1$s’ does not specify a minimum Widelands version. None of the "
+"contained maps can be loaded with a Widelands version older than %2$s. The "
+"minimum version requirement will automatically be set accordingly."
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/packager.cc:597
+#, c-format
+msgid ""
+"The add-on ‘%1$s’ specifies a minimum Widelands version of %2$s. However, "
+"none of the contained maps can be loaded with a Widelands version older than"
+" %3$s. The version requirement will automatically be changed accordingly."
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/packager.cc:619
 msgid "Error Writing Addon"
 msgstr "Fout tijdens Schrijven Uitbreiding"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:574
+#: ../../src/ui_fsmenu/addons/packager.cc:620
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be saved to disk:\n"
@@ -4546,19 +4578,24 @@ msgstr "%1$u×%2$u"
 msgid "Players: %s"
 msgstr "Spelers: %s"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:312
+#: ../../src/ui_fsmenu/addons/packager_box.cc:284
+#, c-format
+msgid "Minimum Widelands Version: %s"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/packager_box.cc:317
 msgid "Top-level directory"
 msgstr "Hoogste map"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:377
+#: ../../src/ui_fsmenu/addons/packager_box.cc:382
 msgid "New Directory"
 msgstr "Nieuwe Map"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:378
+#: ../../src/ui_fsmenu/addons/packager_box.cc:383
 msgid "Enter the name for the new directory."
 msgstr "Geef de naam voor de nieuwe map."
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:398
+#: ../../src/ui_fsmenu/addons/packager_box.cc:403
 #, c-format
 msgid ""
 "Directories may not use the extension ‘%s’.\n"
@@ -4566,37 +4603,37 @@ msgid ""
 "Please choose a different name."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:411
+#: ../../src/ui_fsmenu/addons/packager_box.cc:416
 msgid "A directory with this name already exists."
 msgstr "Een map met deze naam bestaat al."
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:427
+#: ../../src/ui_fsmenu/addons/packager_box.cc:432
 #, c-format
 msgid "Do you really want to delete the directory ‘%s’ and all its contents?"
 msgstr "Wil je echt de map ' %s ' verwijderen met alles wat erin zit?"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:429
+#: ../../src/ui_fsmenu/addons/packager_box.cc:434
 #, c-format
 msgid "Do you really want to delete the map ‘%s’?"
 msgstr "wil je echt de map ' %s '  verwijderen ?"
 
 #. * TRANSLATORS: Header for campaign difficulty
-#: ../../src/ui_fsmenu/addons/packager_box.cc:477
+#: ../../src/ui_fsmenu/addons/packager_box.cc:482
 #: ../../src/ui_fsmenu/campaign_select.cc:47
 #: ../../src/ui_fsmenu/campaigndetails.cc:59
 #: ../../src/ui_fsmenu/scenario_select.cc:68
 msgid "Difficulty"
 msgstr "Moeilijkheidsgraad"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:486
+#: ../../src/ui_fsmenu/addons/packager_box.cc:491
 msgid "Difficulty:"
 msgstr "Moeilijkheid:"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:511
+#: ../../src/ui_fsmenu/addons/packager_box.cc:516
 msgid "The campaigns difficulty. One word."
 msgstr "De moeilijkheids graad van de veldtocht. Een Woord."
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:512
+#: ../../src/ui_fsmenu/addons/packager_box.cc:517
 msgid "Short description, which will be appended to the difficulty."
 msgstr "Korte omschrijving, die toegevoegd word aan de moeilijkheidsgraad."
 

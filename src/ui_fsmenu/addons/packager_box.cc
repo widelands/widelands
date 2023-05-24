@@ -268,7 +268,7 @@ void MapsAddOnsPackagerBox::load_addon(AddOns::MutableAddOn* a) {
 			}
 			my_maps_.add(
 			   entry.first.localized_name, entry.first.filenames.at(0), nullptr, false,
-			   format("%s<br>%s<br>%s<br>%s<br>%s",
+			   format("%s<br>%s<br>%s<br>%s<br>%s<br>%s",
 			          g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
 			             .as_font_tag(entry.first.filenames.at(0)),
 			          format(_("Name: %s"),
@@ -281,6 +281,11 @@ void MapsAddOnsPackagerBox::load_addon(AddOns::MutableAddOn* a) {
 			          format(_("Players: %s"),
 			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 			                    .as_font_tag(std::to_string(entry.first.nrplayers))),
+			          format(_("Minimum Widelands Version: %s"),
+			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                    .as_font_tag(entry.first.minimum_required_widelands_version.empty() ?
+                                             _("(none)") :
+                                             entry.first.minimum_required_widelands_version)),
 			          format(_("Description: %s"),
 			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 			                    .as_font_tag(entry.first.description))));
