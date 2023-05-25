@@ -343,7 +343,8 @@ extra_before = []
 extra_after = []
 
 def pp_hash(file, command, dir):
-    """Run the preprocessor for a source file and return the hash of the result.
+    """Run the preprocessor for a source file and return the hash of the
+    result.
 
     We use this hash to identify files in the cache. We don't do anything else
     with the preprocessed results, clang-tidy does its own thing independently.
