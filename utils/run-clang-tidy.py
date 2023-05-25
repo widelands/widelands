@@ -165,8 +165,6 @@ class Cache:
 
         self.passed_file = os.path.join(self.dir, 'passed')
         self.failed_dir = os.path.join(self.dir, 'failed')
-        if not os.path.isdir(self.dir):
-            os.mkdir(self.dir)
         if not os.path.isdir(self.failed_dir):
             os.mkdir(self.failed_dir)
 
