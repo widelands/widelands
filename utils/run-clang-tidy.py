@@ -538,9 +538,11 @@ def run_tidy(tmpdir, build_path, quiet, queue, lock):
         with lock:
             if tidy_error:
                 failed_files.append(name)
-            sys.stdout.write('\n' + ' '.join(invocation) +
-                             '\n' + output)
-            sys.stdout.flush()
+            sys.stderr.write('\n' + ' '.join(invocation) + '\n')
+            sys.stderr.flush()
+            if len(output) > 0:
+                sys.stdout.write(output + '\n')
+                sys.stdout.flush()
             if (tidy_error or not quiet) and len(err) > 0:
                 sys.stderr.write(err)
                 sys.stderr.flush()
@@ -584,7 +586,10 @@ def filter_config(config):
     return filtered_config
 
 def filter_version(tidy_version):
-    return tidy_version.splitlines()[0].strip()
+    for line in tidy_version.splitlines():
+        if 'version' in line:
+            return line.strip()
+    return None
 
 
 default_tidy_binary = 'clang-tidy'
@@ -684,6 +689,7 @@ def main():
                 None, [], [], False, None)
             try:
                 default_version = filter_version(query_tidy('-version', True))
+                assert default_version
                 default_config = filter_config(query_tidy('-dump-config', True))
                 default_checks = query_tidy('-list-checks', True)
             except:
@@ -703,6 +709,7 @@ def main():
         if args.cache:
             try:
                 version_f = filter_version(version)
+                assert version_f, 'Failed to detect clang-tidy version.'
                 config = filter_config(query_tidy('-dump-config', True))
                 custom = custom and (version_f != default_version or
                          config != default_config or checks != default_checks)
