@@ -102,7 +102,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
                                              // exist, but we need to assign a color anyway
                                              kPlayerColors[i];
 
-		int o = 0;
+		unsigned o = 0;
 		plot_.register_plot_data(i * ndatasets_ + o++, &genstats[i].land_size, color);
 		plot_.register_plot_data(i * ndatasets_ + o++, &genstats[i].nr_workers, color);
 		plot_.register_plot_data(i * ndatasets_ + o++, &genstats[i].nr_buildings, color);
