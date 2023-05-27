@@ -181,30 +181,31 @@ std::vector<Widelands::Bob*> AttackWindow::get_max_attackers() {
 		Widelands::Ship* warship =
 		   dynamic_cast<Widelands::Ship*>(egbase.objects().get_object(ship_serial));
 		assert(warship != nullptr);
-		if (warship->get_ship_type() == Widelands::ShipType::kWarship && warship->can_attack()) {
+		if (warship->get_ship_type() == Widelands::ShipType::kWarship) {
 			if (ship != nullptr) {  // Ship-to-ship combat
-				if (warship->get_attack_target(egbase) == ship) {
+				if (warship->has_attack_target(ship)) {
 					result_vector.push_back(warship);
 				}
-				continue;
-			}
+			} else {  // Ship-to-land invasion
+				const std::vector<Widelands::Coords>& spaces = warship->exp_port_spaces();
+				bool found = false;
 
-			// Ship-to-land invasion
-			Widelands::Coords attack_port_space = warship->get_attack_coords();
-			if (!static_cast<bool>(attack_port_space)) {
-				continue;
-			}
-			attack_port_space = map_.find_portspace_for_dockpoint(attack_port_space);
-			if (!static_cast<bool>(attack_port_space)) {
-				continue;
-			}
+				if (building != nullptr) {
+					for (const Widelands::Coords& coords : spaces) {
+						if (map_[coords].get_immovable() == building) {
+							found = true;
+							break;
+						}
+					}
+				} else {
+					found = std::find(spaces.begin(), spaces.end(), target_coordinates_) != spaces.end();
+				}
 
-			if (building != nullptr && map_[attack_port_space].get_immovable() != building) {
-				continue;
+				if (found) {
+					std::vector<Widelands::Soldier*> onboard = warship->onboard_soldiers();
+					result_vector.insert(result_vector.end(), onboard.begin(), onboard.end());
+				}
 			}
-
-			std::vector<Widelands::Soldier*> onboard = warship->onboard_soldiers();
-			result_vector.insert(result_vector.end(), onboard.begin(), onboard.end());
 		}
 	}
 
@@ -490,7 +491,12 @@ void AttackWindow::act_attack() {
 				if (Widelands::Ship* ship = dynamic_cast<Widelands::Ship*>(
 				       iplayer_.egbase().objects().get_object(temp_attacker->get_ship_serial()));
 				    ship != nullptr) {
-					soldiers_on_warships[ship].push_back(serial);
+					std::vector<uint32_t>& parameters_vector = soldiers_on_warships[ship];
+					if (parameters_vector.empty()) {
+						parameters_vector.push_back(target_coordinates_.x);
+						parameters_vector.push_back(target_coordinates_.y);
+					}
+					parameters_vector.push_back(serial);
 				}
 			}
 		}
@@ -509,9 +515,9 @@ void AttackWindow::act_attack() {
 		for (Widelands::Serial serial : attack_panel_.soldiers()) {
 			if (Widelands::Ship* warship =
 			       dynamic_cast<Widelands::Ship*>(iplayer_.egbase().objects().get_object(serial));
-			    warship != nullptr && warship->get_attack_target(iplayer_.egbase()) == ship) {
+			    warship != nullptr) {
 				iplayer_.game().send_player_warship_command(
-				   *warship, Widelands::WarshipCommand::kAttack, {});
+				   *warship, Widelands::WarshipCommand::kAttack, {ship->serial()});
 			}
 		}
 		iplayer_.map_view()->mouse_to_field(ship->get_position(), MapView::Transition::Jump);

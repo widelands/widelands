@@ -257,9 +257,10 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	shipnotes_subscriber_ =
 	   Notifications::subscribe<Widelands::NoteShip>([this](const Widelands::NoteShip& note) {
 		   if (note.ship->owner().player_number() == player_number() &&
+		       !note.ship->state_is_transport() && !note.ship->exp_port_spaces().empty() &&
 		       note.action == Widelands::NoteShip::Action::kWaitingForCommand &&
 		       (note.ship->get_ship_state() == Widelands::ShipStates::kExpeditionPortspaceFound ||
-		        static_cast<bool>(note.ship->get_attack_coords()))) {
+		        note.ship->get_ship_type() == Widelands::ShipType::kWarship)) {
 			   expedition_port_spaces_.emplace(note.ship, note.ship->exp_port_spaces().front());
 		   }
 	   });
@@ -474,14 +475,14 @@ void InteractivePlayer::think() {
 	}
 
 	// Cleanup found port spaces if the ship sailed on or was destroyed
-	for (auto it = expedition_port_spaces_.begin(); it != expedition_port_spaces_.end(); ++it) {
+	for (auto it = expedition_port_spaces_.begin(); it != expedition_port_spaces_.end();) {
 		Widelands::Ship* ship = it->first.get(egbase());
-		if (ship == nullptr ||
-		    (ship->get_ship_state() != Widelands::ShipStates::kExpeditionPortspaceFound &&
-		     !static_cast<bool>(ship->get_attack_coords()))) {
-			expedition_port_spaces_.erase(it);
-			// If another port space also needs removing, we'll take care of it in the next frame
-			return;
+		if (ship == nullptr || ship->state_is_transport() ||
+		    std::find(ship->exp_port_spaces().begin(), ship->exp_port_spaces().end(), it->second) ==
+		       ship->exp_port_spaces().end()) {
+			it = expedition_port_spaces_.erase(it);
+		} else {
+			++it;
 		}
 	}
 }

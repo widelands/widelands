@@ -143,7 +143,7 @@ struct Ship : Bob {
 			kDefenderAttacking = 5,
 		};
 
-		Battle(Ship* o, Coords ac, const std::vector<uint32_t>& a, bool f)
+		Battle(Ship* o, Coords ac, std::vector<uint32_t> a, bool f)
 		   : opponent(o), attack_coords(ac), attack_soldier_serials(a), is_first(f) {
 		}
 
@@ -226,6 +226,7 @@ struct Ship : Bob {
 
 	/// \returns (in expedition mode only!) the list of currently seen port build spaces
 	[[nodiscard]] const std::vector<Coords>& exp_port_spaces() const {
+		assert(expedition_ != nullptr);
 		return expedition_->seen_port_buildspaces;
 	}
 
@@ -252,11 +253,8 @@ struct Ship : Bob {
 		capacity_ = c;
 	}
 
-	[[nodiscard]] Ship* get_attack_target(const EditorGameBase& e) const {
-		return expedition_ != nullptr ? expedition_->attack_target.get(e) : nullptr;
-	}
-	[[nodiscard]] Coords get_attack_coords() const {
-		return expedition_ != nullptr ? expedition_->attack_coords : Coords::null();
+	[[nodiscard]] bool has_attack_target(Ship* s) const {
+		return expedition_ != nullptr && expedition_->attack_targets.count(s) > 0;
 	}
 	[[nodiscard]] bool has_battle() const {
 		return !battles_.empty();
@@ -264,7 +262,6 @@ struct Ship : Bob {
 	[[nodiscard]] unsigned get_sea_attack_soldier_bonus(const EditorGameBase& egbase) const;
 
 	[[nodiscard]] bool can_be_attacked() const;
-	[[nodiscard]] bool can_attack() const;
 	[[nodiscard]] bool is_attackable_enemy_warship(const Bob&) const;
 	[[nodiscard]] uint32_t get_hitpoints() const {
 		return hitpoints_;
@@ -278,8 +275,9 @@ struct Ship : Bob {
 
 	/**
 	 * Execute a warship command.
-	 * For a kAttack against a port, `parameters` contains the serials of the soldiers to send.
-	 * For a kAttack against a ship, `parameters` is ignored.
+	 * For a kAttack against a port, `parameters` contains first the port coordinates x,y and then
+	 * the serials of the soldiers to send.
+	 * For a kAttack against a ship, `parameters` contains the target ship's serial.
 	 * For a kSetCapacity, `parameters` must contain exactly one value to specify the new capacity.
 	 * For a kRetreat, `parameters` must be empty.
 	 */
@@ -374,8 +372,7 @@ private:
 		WalkingDir scouting_direction;
 		Coords exploration_start;
 		IslandExploreDirection island_explore_direction;
-		OPtr<Ship> attack_target;
-		Coords attack_coords;
+		std::set<OPtr<Ship>> attack_targets;
 		Economy* ware_economy;  // Owned by Player
 		Economy* worker_economy;
 	};
@@ -416,7 +413,7 @@ protected:
 		std::unique_ptr<Expedition> expedition_;
 		std::vector<Battle> battles_;
 		std::vector<ShippingItem::Loader> items_;
-		Serial expedition_attack_target_serial_{0U};
+		std::set<Serial> expedition_attack_target_serials_{0U};
 		std::vector<Serial> battle_serials_;
 	};
 
