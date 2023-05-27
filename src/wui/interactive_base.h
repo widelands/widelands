@@ -51,7 +51,7 @@ struct WorkareaPreview {
 	                const WorkareaInfo* wi,
 	                const ExtraDataMap& d,
 	                const std::set<Widelands::Coords>& sc)
-     : coords(c), info(wi), data(d), special_coords(sc) {
+	   : coords(c), info(wi), data(d), special_coords(sc) {
 	}
 
 	Widelands::Coords coords;
