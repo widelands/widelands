@@ -533,11 +533,11 @@ InteractiveBase::road_building_steepness_overlays() const {
 // Show the given workareas at the given coords
 void InteractiveBase::show_workarea(const WorkareaInfo& workarea_info,
                                     Widelands::Coords coords,
-                                    const std::map<Widelands::TCoords<>, uint32_t>& extra_data,
+                                    const WorkareaPreview::ExtraDataMap& extra_data,
                                     const std::set<Widelands::Coords>& special_coords) {
 	MutexLock m(MutexLock::ID::kIBaseVisualizations);
 	workarea_previews_.insert(std::unique_ptr<WorkareaPreview>(
-	   new WorkareaPreview{coords, &workarea_info, extra_data, special_coords}));
+	   new WorkareaPreview(coords, &workarea_info, extra_data, special_coords)));
 	workareas_cache_.reset(nullptr);
 }
 
@@ -545,7 +545,7 @@ void InteractiveBase::show_workarea(const WorkareaInfo& workarea_info,
                                     Widelands::Coords coords,
                                     const std::set<Widelands::Coords>& special_coords) {
 	MutexLock m(MutexLock::ID::kIBaseVisualizations);
-	show_workarea(workarea_info, coords, {}, special_coords);
+	show_workarea(workarea_info, coords, WorkareaPreview::ExtraDataMap(), special_coords);
 }
 
 /* Helper function to get the correct index for graphic/gl/workarea_program.cc::workarea_colors .
@@ -1247,7 +1247,7 @@ void InteractiveBase::start_build_road(Coords road_start,
 			                                    !mr.location().field->is_border() &&
 			                                    cstep.reachable_dest(map, mr.location())));
 		} while (mr.advance(map));
-		std::map<Widelands::TCoords<>, uint32_t> wa_data;
+		WorkareaPreview::ExtraDataMap wa_data;
 		for (const auto& pair : reachable_nodes) {
 			const auto br = reachable_nodes.find(map.br_n(pair.first));
 			if (br == reachable_nodes.end()) {
@@ -1266,7 +1266,8 @@ void InteractiveBase::start_build_road(Coords road_start,
 				                  pair.second && br->second && it->second ? 5 : 6));
 			}
 		}
-		show_workarea(*road_building_mode_->work_area, road_start, wa_data, {});
+		show_workarea(
+		   *road_building_mode_->work_area, road_start, wa_data, std::set<Widelands::Coords>());
 	}
 }
 

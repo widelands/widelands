@@ -45,9 +45,18 @@ class MapObjectLoader;
 }  // namespace Widelands
 
 struct WorkareaPreview {
+	using ExtraDataMap = std::map<Widelands::TCoords<>, uint32_t>;
+
+	WorkareaPreview(const Widelands::Coords& c,
+	                const WorkareaInfo* wi,
+	                const ExtraDataMap& d,
+	                const std::set<Widelands::Coords>& sc)
+     : coords(c), info(wi), data(d), special_coords(sc) {
+	}
+
 	Widelands::Coords coords;
 	const WorkareaInfo* info;
-	std::map<Widelands::TCoords<>, uint32_t> data;
+	ExtraDataMap data;
 	std::set<Widelands::Coords> special_coords;
 };
 
@@ -101,7 +110,7 @@ public:
 	                   const std::set<Widelands::Coords>& special_coords);
 	void show_workarea(const WorkareaInfo& workarea_info,
 	                   Widelands::Coords coords,
-	                   const std::map<Widelands::TCoords<>, uint32_t>& extra_data,
+	                   const WorkareaPreview::ExtraDataMap& extra_data,
 	                   const std::set<Widelands::Coords>& special_coords);
 	void hide_workarea(const Widelands::Coords& coords, bool is_additional);
 
