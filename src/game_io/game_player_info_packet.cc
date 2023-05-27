@@ -34,7 +34,7 @@ namespace Widelands {
 /* Changelog:
  * Version 30: Release 1.1
  * Version 31: Added warehouse names.
- * Version 32: Added fleet statistics (in Game::read_statistics).
+ * Version 32: Added fleet statistics (in Game::read_statistics) and naval attack stats.
  */
 constexpr uint16_t kCurrentPacketVersion = 32;
 
@@ -92,6 +92,8 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* 
 					player->msites_defeated_ = fr.unsigned_32();
 					player->civil_blds_lost_ = fr.unsigned_32();
 					player->civil_blds_defeated_ = fr.unsigned_32();
+					player->naval_victories_ = packet_version >= 32 ? fr.unsigned_32() : 0;
+					player->naval_losses_ = packet_version >= 32 ? fr.unsigned_32() : 0;
 
 					for (size_t j = fr.unsigned_32(); j > 0; --j) {
 						player->muted_building_types_.insert(fr.unsigned_32());
@@ -168,6 +170,8 @@ void GamePlayerInfoPacket::write(FileSystem& fs, Game& game, MapObjectSaver* /* 
 		fw.unsigned_32(plr->msites_defeated());
 		fw.unsigned_32(plr->civil_blds_lost());
 		fw.unsigned_32(plr->civil_blds_defeated());
+		fw.unsigned_32(plr->naval_victories());
+		fw.unsigned_32(plr->naval_losses());
 
 		fw.unsigned_32(plr->muted_building_types_.size());
 		for (const DescriptionIndex& di : plr->muted_building_types_) {

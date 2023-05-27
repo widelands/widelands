@@ -34,7 +34,7 @@
 #include "wui/interactive_player.h"
 
 constexpr int kPlotHeight = 145;
-constexpr int kNrBaseDatasets = 13;
+constexpr int kNrBaseDatasets = 15;
 
 GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
                                              GeneralStatisticsMenu::Registry& registry)
@@ -109,6 +109,8 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 		plot_.register_plot_data(i * ndatasets_ + o++, &genstats[i].nr_wares, color);
 		plot_.register_plot_data(i * ndatasets_ + o++, &genstats[i].productivity, color);
 		plot_.register_plot_data(i * ndatasets_ + o++, &genstats[i].nr_ships, color);
+		plot_.register_plot_data(i * ndatasets_ + o++, &genstats[i].nr_naval_losses, color);
+		plot_.register_plot_data(i * ndatasets_ + o++, &genstats[i].nr_naval_victories, color);
 		plot_.register_plot_data(i * ndatasets_ + o++, &genstats[i].nr_casualties, color);
 		plot_.register_plot_data(i * ndatasets_ + o++, &genstats[i].nr_kills, color);
 		plot_.register_plot_data(i * ndatasets_ + o++, &genstats[i].nr_msites_lost, color);
@@ -167,8 +169,20 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
 	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
-	                       g_image_cache->get("images/wui/stats/ship_stats_shipping.png"),
+	                       g_image_cache->get("images/wui/stats/genstats_ships.png"),
 	                       _("Ships"), &btn);
+	btn->set_visible(parent.egbase().map().allows_seafaring());
+	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
+
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
+	                       g_image_cache->get("images/wui/stats/genstats_naval_losses.png"),
+	                       _("Warships lost"), &btn);
+	btn->set_visible(parent.egbase().map().allows_seafaring());
+	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
+
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
+	                       g_image_cache->get("images/wui/stats/genstats_naval_victories.png"),
+	                       _("Warships defeated"), &btn);
 	btn->set_visible(parent.egbase().map().allows_seafaring());
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
