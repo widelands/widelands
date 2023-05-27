@@ -1327,6 +1327,7 @@ void Game::sample_statistics() {
 	PlayerNumber const nr_plrs = map().get_nrplayers();
 	std::vector<uint32_t> land_size;
 	std::vector<uint32_t> nr_buildings;
+	std::vector<uint32_t> nr_ships;
 	std::vector<uint32_t> nr_casualties;
 	std::vector<uint32_t> nr_kills;
 	std::vector<uint32_t> nr_msites_lost;
@@ -1341,6 +1342,7 @@ void Game::sample_statistics() {
 	std::vector<uint32_t> custom_statistic;
 	land_size.resize(nr_plrs);
 	nr_buildings.resize(nr_plrs);
+	nr_ships.resize(nr_plrs);
 	nr_casualties.resize(nr_plrs);
 	nr_kills.resize(nr_plrs);
 	nr_msites_lost.resize(nr_plrs);
@@ -1425,6 +1427,7 @@ void Game::sample_statistics() {
 		}
 		nr_wares[p - 1] = wastock;
 		nr_workers[p - 1] = wostock;
+		nr_ships[p - 1] = plr->ships().size();
 		nr_casualties[p - 1] = plr->casualties();
 		nr_kills[p - 1] = plr->kills();
 		nr_msites_lost[p - 1] = plr->msites_lost();
@@ -1458,6 +1461,7 @@ void Game::sample_statistics() {
 	for (uint32_t i = 0; i < map().get_nrplayers(); ++i) {
 		general_stats_[i].land_size.push_back(land_size[i]);
 		general_stats_[i].nr_buildings.push_back(nr_buildings[i]);
+		general_stats_[i].nr_ships.push_back(nr_ships[i]);
 		general_stats_[i].nr_casualties.push_back(nr_casualties[i]);
 		general_stats_[i].nr_kills.push_back(nr_kills[i]);
 		general_stats_[i].nr_msites_lost.push_back(nr_msites_lost[i]);
@@ -1481,7 +1485,7 @@ void Game::sample_statistics() {
  *
  * \param fr file to read from
  */
-void Game::read_statistics(FileRead& fr) {
+void Game::read_statistics(FileRead& fr, uint16_t packet_version) {
 	fr.unsigned_32();  // used to be last stats update time
 
 	// Read general statistics
@@ -1495,6 +1499,7 @@ void Game::read_statistics(FileRead& fr) {
 		general_stats_[p - 1].nr_buildings.resize(entries);
 		general_stats_[p - 1].nr_wares.resize(entries);
 		general_stats_[p - 1].productivity.resize(entries);
+		general_stats_[p - 1].nr_ships.resize(entries);
 		general_stats_[p - 1].nr_casualties.resize(entries);
 		general_stats_[p - 1].nr_kills.resize(entries);
 		general_stats_[p - 1].nr_msites_lost.resize(entries);
@@ -1512,6 +1517,8 @@ void Game::read_statistics(FileRead& fr) {
 		general_stats_[p - 1].nr_buildings[j] = fr.unsigned_32();
 		general_stats_[p - 1].nr_wares[j] = fr.unsigned_32();
 		general_stats_[p - 1].productivity[j] = fr.unsigned_32();
+		// TODO(Nordfriese): Savegame compatibility v1.1
+		general_stats_[p - 1].nr_ships[j] = packet_version >= 32 ? fr.unsigned_32() : 0;
 		general_stats_[p - 1].nr_casualties[j] = fr.unsigned_32();
 		general_stats_[p - 1].nr_kills[j] = fr.unsigned_32();
 		general_stats_[p - 1].nr_msites_lost[j] = fr.unsigned_32();
@@ -1547,6 +1554,7 @@ void Game::write_statistics(FileWrite& fw) {
 		fw.unsigned_32(general_stats_[p - 1].nr_buildings[j]);
 		fw.unsigned_32(general_stats_[p - 1].nr_wares[j]);
 		fw.unsigned_32(general_stats_[p - 1].productivity[j]);
+		fw.unsigned_32(general_stats_[p - 1].nr_ships[j]);
 		fw.unsigned_32(general_stats_[p - 1].nr_casualties[j]);
 		fw.unsigned_32(general_stats_[p - 1].nr_kills[j]);
 		fw.unsigned_32(general_stats_[p - 1].nr_msites_lost[j]);

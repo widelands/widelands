@@ -132,6 +132,7 @@ public:
 		std::vector<uint32_t> nr_buildings;
 		std::vector<uint32_t> nr_wares;
 		std::vector<uint32_t> productivity;
+		std::vector<uint32_t> nr_ships;
 		std::vector<uint32_t> nr_casualties;
 		std::vector<uint32_t> nr_kills;
 		std::vector<uint32_t> nr_msites_lost;
@@ -335,8 +336,8 @@ public:
 		return general_stats_;
 	}
 
-	void read_statistics(FileRead&);
-	void write_statistics(FileWrite&);
+	void read_statistics(FileRead& fr, uint16_t packet_version);
+	void write_statistics(FileWrite& fw);
 
 	void sample_statistics();
 

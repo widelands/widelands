@@ -34,8 +34,9 @@ namespace Widelands {
 /* Changelog:
  * Version 30: Release 1.1
  * Version 31: Added warehouse names.
+ * Version 32: Added fleet statistics (in Game::read_statistics).
  */
-constexpr uint16_t kCurrentPacketVersion = 31;
+constexpr uint16_t kCurrentPacketVersion = 32;
 
 void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* mol */) {
 	try {
@@ -114,7 +115,7 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* 
 				manager->add_player_end_status(status, true);
 			}
 
-			game.read_statistics(fr);
+			game.read_statistics(fr, packet_version);
 		} else {
 			throw UnhandledVersionError("GamePlayerInfoPacket", packet_version, kCurrentPacketVersion);
 		}
