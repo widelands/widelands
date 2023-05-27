@@ -169,8 +169,8 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
 	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
-	                       g_image_cache->get("images/wui/stats/genstats_ships.png"),
-	                       _("Ships"), &btn);
+	                       g_image_cache->get("images/wui/stats/genstats_ships.png"), _("Ships"),
+	                       &btn);
 	btn->set_visible(parent.egbase().map().allows_seafaring());
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
