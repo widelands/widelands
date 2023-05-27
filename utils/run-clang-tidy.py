@@ -161,7 +161,7 @@ class Cache:
         if custom:
             self.dir = os.path.join(self.dir, '__custom_args', self.config_hash)
             if not os.path.isdir(self.dir):
-                os.mkdir(self.dir)
+                os.makedirs(self.dir)
 
         self.passed_file = os.path.join(self.dir, 'passed')
         self.failed_dir = os.path.join(self.dir, 'failed')
@@ -246,12 +246,7 @@ class Cache:
         retention = 62 * 24 * 3600
 
         old = int(time.time()) - retention
-        keep = dict()
-        for hash in self.passed:
-            mtime = self.passed[hash]
-            if mtime > old:
-                keep[hash] = mtime
-        self.passed = keep
+        self.passed = dict((hash, mtime) for hash, mtime in self.passed.items() if mtime > old)
         with open(self.passed_file, 'w', encoding = 'utf-8') as pf:
             json.dump(self.passed, pf, sort_keys = True, indent = 2)
             pf.write('\n')
@@ -666,7 +661,7 @@ def main():
         tmpdir = tempfile.mkdtemp()
         if args.cache:
             print('Caching is disabled because of -fix\n', file=sys.stderr)
-        args.cache = False
+            args.cache = False
 
     custom = False
     default_version = ''
