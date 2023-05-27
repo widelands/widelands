@@ -4477,14 +4477,14 @@ msgstr "Speichern bestätigen"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:568
 msgid "Invalid Version Requirement"
-msgstr ""
+msgstr "Ungültige Versionsanforderung"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:569
 #, c-format
 msgid ""
 "The minimum Widelands version ‘%1$s’ may not be newer than the maximum "
 "Widelands version ‘%2$s’. The add-on ‘%3$s’ will not be saved."
-msgstr ""
+msgstr "Die minimale Widelands Version ‘%1$s’ darf nicht neuer als die maximale Widelands Version ‘%2$s’ sein. Die Erweiterung‘%3$s’ wird nicht gespeichert."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:576
 msgid "Invalid Version"
@@ -4498,7 +4498,7 @@ msgstr "„%1$s“ ist keine gültige Versionsbezeichnung. Die Erweiterung „%2
 
 #: ../../src/ui_fsmenu/addons/packager.cc:590
 msgid "Version Requirement"
-msgstr ""
+msgstr "Versionsanforderung"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:592
 #, c-format
@@ -4506,7 +4506,7 @@ msgid ""
 "The add-on ‘%1$s’ does not specify a minimum Widelands version. None of the "
 "contained maps can be loaded with a Widelands version older than %2$s. The "
 "minimum version requirement will automatically be set accordingly."
-msgstr ""
+msgstr "Die Erweiterung ‘%1$s’ spezifiziert keine minimale Widelands Version. Keine der enthaltenen Karten kann mit einer Widelands Version älter als %2$s geladen werden. Die minimale Widelands Version wird automatisch dementsprechend gesetzt."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:597
 #, c-format
@@ -4514,7 +4514,7 @@ msgid ""
 "The add-on ‘%1$s’ specifies a minimum Widelands version of %2$s. However, "
 "none of the contained maps can be loaded with a Widelands version older than"
 " %3$s. The version requirement will automatically be changed accordingly."
-msgstr ""
+msgstr "Die Erweiterung ‘%1$s’ spezifiziert die minimale Widelands Version zu %2$s. Keine der enthaltenen Karten kann jedoch mit einer Widelands Version älter als %3$s geladen werden. Die Versionsanforderung wird entsprechend korrigiert."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:619
 msgid "Error Writing Addon"
