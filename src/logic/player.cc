@@ -1336,7 +1336,12 @@ void Player::enemyflagaction(const Flag& flag,
 							if (Ship* ship = dynamic_cast<Ship*>(
 							       egbase().objects().get_object(temp_attacker->get_ship_serial()));
 							    ship != nullptr) {
-								soldiers_on_warships[ship].push_back(temp_attacker->serial());
+								std::vector<uint32_t>& parameters_vector = soldiers_on_warships[ship];
+								if (parameters_vector.empty()) {
+									parameters_vector.push_back(building->get_position().x);
+									parameters_vector.push_back(building->get_position().y);
+								}
+								parameters_vector.push_back(temp_attacker->serial());
 							} else {
 								verb_log_warn_time(egbase().get_gametime(),
 								                   "Player(%u)::enemyflagaction: Not sending soldier %u "
