@@ -351,6 +351,7 @@ void WordWrap::draw(RenderTarget& dst,
                     Align align,
                     uint32_t caret,
                     bool with_selection,
+                    bool expand_selection,
                     uint32_t selection_start,
                     uint32_t selection_end,
                     uint32_t scrollbar_position,
@@ -393,7 +394,8 @@ void WordWrap::draw(RenderTarget& dst,
 
 		if (with_selection) {
 			highlight_selection(dst, scrollbar_position, selection_start_line, selection_start_x,
-			                    selection_end_line, selection_end_x, fontheight, line, point);
+			                    selection_end_line, selection_end_x, expand_selection, fontheight,
+			                    line, point);
 		}
 
 		if (draw_caret_ && line == caretline) {
@@ -432,6 +434,7 @@ void WordWrap::highlight_selection(RenderTarget& dst,
                                    uint32_t selection_start_x,
                                    uint32_t selection_end_line,
                                    uint32_t selection_end_x,
+                                   bool expand,
                                    const int fontheight,
                                    uint32_t line,
                                    const Vector2i& point) const {
@@ -463,7 +466,12 @@ void WordWrap::highlight_selection(RenderTarget& dst,
 		   Vector2i(text_width(lines_[line].text.substr(0, selection_end_x), fontsize_), fontheight);
 	}
 
-	++highlight_start.y;
+	/* Correct for pixel-perfect alignment. */
+	highlight_start.y++;
+	if (expand) {
+		highlight_end.y += 2;
+	}
+
 	dst.brighten_rect(
 	   Recti(highlight_start, highlight_end.x, highlight_end.y), BUTTON_EDGE_BRIGHT_FACTOR);
 }

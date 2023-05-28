@@ -347,7 +347,7 @@ void CommentEditor::think() {
 }
 
 void CommentEditor::apply_format(const std::string& open_tag, const std::string& close_tag) {
-	const size_t caret = text_->caret_pos();
+	const size_t caret = text_->get_caret_pos();
 	if (text_->has_selection()) {
 		std::string str = open_tag;
 		str += text_->get_selected_text();

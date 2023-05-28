@@ -57,6 +57,7 @@ struct WordWrap {
 	          UI::Align align,
 	          uint32_t caret,
 	          bool with_selection,
+	          bool expand_selection,
 	          uint32_t selection_start,
 	          uint32_t selection_end,
 	          uint32_t scrollbar_position,
@@ -112,6 +113,7 @@ private:
 	                         uint32_t selection_start_x,
 	                         uint32_t selection_end_line,
 	                         uint32_t selection_end_x,
+	                         bool expand,
 	                         int fontheight,
 	                         uint32_t line,
 	                         const Vector2i& point) const;

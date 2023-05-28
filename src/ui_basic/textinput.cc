@@ -183,7 +183,8 @@ void AbstractTextInputPanel::Data::draw(RenderTarget& dst, bool with_caret) {
 	int margin = get_style().background().margin();
 	ww.draw(dst, Vector2i(margin - scrolloffset, margin - scrollbar.get_scrollpos()),
 	        UI::Align::kLeft, with_caret ? cursor_pos : std::numeric_limits<uint32_t>::max(),
-	        mode == Data::Mode::kSelection, start, end, scrollbar.get_scrollpos(), caret_image_path);
+	        mode == Data::Mode::kSelection, owner.should_expand_selection(), start, end,
+	        scrollbar.get_scrollpos(), caret_image_path);
 }
 
 void AbstractTextInputPanel::layout() {
@@ -504,10 +505,10 @@ void AbstractTextInputPanel::replace_selected_text(const std::string& text) {
 	str += d_->text.substr(end);
 	set_text(str);
 	set_caret_pos(start);
-	select_until(caret_pos() + text.size());
+	select_until(get_caret_pos() + text.size());
 }
 
-size_t AbstractTextInputPanel::caret_pos() const {
+size_t AbstractTextInputPanel::get_caret_pos() const {
 	return d_->cursor_pos;
 }
 
@@ -1021,7 +1022,7 @@ void EditBox::scroll_cursor_into_view() {
 	AbstractTextInputPanel::scroll_cursor_into_view();
 
 	int margin = d_->get_style().background().margin();
-	int32_t real_caret_x = calculate_text_width(get_text(), caret_pos());
+	int32_t real_caret_x = calculate_text_width(get_text(), get_caret_pos());
 
 	if (real_caret_x - static_cast<int32_t>(d_->scrolloffset) < 0) {
 		d_->scrolloffset = real_caret_x;

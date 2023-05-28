@@ -159,7 +159,7 @@ void GameChatPanel::key_changed() {
 	}
 	// Check if last entered two characters are space
 	std::string str = editbox.get_text();
-	const size_t cursor_pos = editbox.caret_pos();
+	const size_t cursor_pos = editbox.get_caret_pos();
 	if (cursor_pos < 2 || str[cursor_pos - 1] != ' ' || str[cursor_pos - 2] != ' ') {
 		// Update state of dropdown, we might have no valid recipient now
 		select_recipient();
@@ -175,7 +175,7 @@ void GameChatPanel::key_changed() {
 	} else {
 		// It worked and we replaced something. Remove the two spaces
 		str = editbox.get_text();
-		const size_t end_of_replacement = editbox.caret_pos();
+		const size_t end_of_replacement = editbox.get_caret_pos();
 		str.erase(end_of_replacement, 2);
 		editbox.set_text(str);
 	}
@@ -190,7 +190,7 @@ bool GameChatPanel::try_autocomplete() {
 	// Extract the name to complete
 	// rfind starts at the given pos and goes forward until it finds a space
 	std::string str = editbox.get_text();
-	size_t namepart_start = str.rfind(' ', (editbox.caret_pos() > 1 ? editbox.caret_pos() - 1 : 0));
+	size_t namepart_start = str.rfind(' ', (editbox.get_caret_pos() > 1 ? editbox.get_caret_pos() - 1 : 0));
 	if (namepart_start == std::string::npos) {
 		// Not found, meaning the input only contains the name
 		namepart_start = 0;
@@ -203,7 +203,7 @@ bool GameChatPanel::try_autocomplete() {
 		// assume it is the whisper-sign and ignore the @
 		++namepart_start;
 	}
-	size_t namepart_end = str.find(' ', editbox.caret_pos());
+	size_t namepart_end = str.find(' ', editbox.get_caret_pos());
 
 	if (namepart_end <= namepart_start || namepart_start == str.size()) {
 		// Nothing to complete

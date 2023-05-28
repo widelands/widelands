@@ -47,7 +47,7 @@ public:
 	[[nodiscard]] bool has_selection() const;
 	[[nodiscard]] std::string get_selected_text();
 	void replace_selected_text(const std::string&);
-	[[nodiscard]] size_t caret_pos() const;
+	[[nodiscard]] size_t get_caret_pos() const;
 	void set_caret_pos(size_t) const;
 	void select_until(uint32_t end) const;
 
@@ -86,6 +86,9 @@ protected:
 	[[nodiscard]] virtual uint32_t max_text_width_for_wrap() const;
 	virtual void scroll_cursor_into_view();
 	virtual void escape_illegal_characters() const;
+	[[nodiscard]] virtual bool should_expand_selection() const {
+		return false;
+	}
 
 	struct Data;
 	std::unique_ptr<Data> d_;
@@ -114,6 +117,9 @@ protected:
 	uint32_t max_text_width_for_wrap() const override;
 	void scroll_cursor_into_view() override;
 	void escape_illegal_characters() const override;
+	[[nodiscard]] bool should_expand_selection() const override {
+		return true;
+	}
 
 	bool history_active_{false};
 	int16_t history_position_{-1};
