@@ -184,7 +184,9 @@ void AbstractTextInputPanel::Data::draw(RenderTarget& dst, bool with_caret) {
 	ww.draw(dst, Vector2i(margin - scrolloffset, margin - scrollbar.get_scrollpos()),
 	        UI::Align::kLeft, with_caret ? cursor_pos : std::numeric_limits<uint32_t>::max(),
 	        with_caret && mode == Data::Mode::kSelection,
-	        owner.should_expand_selection() ? std::optional<std::pair<int32_t, int32_t>>(std::make_pair(0, owner.get_h())) : std::nullopt,
+	        owner.should_expand_selection() ?
+              std::optional<std::pair<int32_t, int32_t>>(std::make_pair(0, owner.get_h())) :
+              std::nullopt,
 	        start, end, scrollbar.get_scrollpos(), caret_image_path);
 }
 
