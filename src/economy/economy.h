@@ -54,8 +54,6 @@ struct NoteEconomy {
 	const Action action;
 };
 
-constexpr Quantity kEconomyTargetInfinity = std::numeric_limits<Quantity>::max();
-
 /**
  * Each Economy represents all building and flags, which are connected over the same
  * street network. In general a player can own multiple Economys, which

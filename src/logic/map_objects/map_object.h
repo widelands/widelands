@@ -271,6 +271,8 @@ public:
 		HeaderShipFleet = 11,
 		HeaderFerryFleet = 12,
 		HeaderPinnedNote = 13,
+		HeaderShipFleetInterface = 14,
+		HeaderFerryFleetInterface = 15,
 	};
 
 	/**
