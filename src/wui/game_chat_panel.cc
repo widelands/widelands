@@ -190,7 +190,8 @@ bool GameChatPanel::try_autocomplete() {
 	// Extract the name to complete
 	// rfind starts at the given pos and goes forward until it finds a space
 	std::string str = editbox.get_text();
-	size_t namepart_start = str.rfind(' ', (editbox.get_caret_pos() > 1 ? editbox.get_caret_pos() - 1 : 0));
+	size_t namepart_start =
+	   str.rfind(' ', (editbox.get_caret_pos() > 1 ? editbox.get_caret_pos() - 1 : 0));
 	if (namepart_start == std::string::npos) {
 		// Not found, meaning the input only contains the name
 		namepart_start = 0;
