@@ -61,8 +61,11 @@ class Immovable;
 struct NoteFieldTerrainChanged {
 	CAN_BE_SENT_AS_NOTE(NoteId::FieldTerrainChanged)
 
+	enum class Change { kTerrain, kImmovable };
+
 	FCoords fc;
 	MapIndex map_index;
+	Change action;
 };
 
 struct ImmovableFound {

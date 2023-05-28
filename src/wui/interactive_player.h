@@ -134,7 +134,6 @@ public:
 	UI::UniqueWindow::Registry message_menu_;
 
 private:
-	const Image* grid_marker_pic_;
 	const Image* portspace_hint_pic_;
 
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0

@@ -28,8 +28,10 @@
 #include "base/wexception.h"
 #include "config.h"
 #include "economy/economy.h"
+#include "economy/ferry_fleet.h"
 #include "economy/flag.h"
 #include "economy/input_queue.h"
+#include "economy/ship_fleet.h"
 #include "economy/wares_queue.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
@@ -589,6 +591,42 @@ std::string ProductionProgram::ActReturn::WorkersNeedExperience::description_neg
 	return _("the workers need no experience");
 }
 
+bool ProductionProgram::ActReturn::FleetNeeds::evaluate(const ProductionSite& ps) const {
+	if (type_ == Type::kShip) {
+		for (ShipFleetYardInterface* interface : ps.get_ship_fleet_interfaces()) {
+			if (interface->get_fleet()->lacks_ship() || ps.infinite_production()) {
+				BaseImmovable* immo = interface->get_position().field->get_immovable();
+				if (immo == nullptr || immo->get_size() == BaseImmovable::Size::NONE) {
+					return true;
+				}
+			}
+		}
+	} else {
+		for (FerryFleetYardInterface* interface : ps.get_ferry_fleet_interfaces()) {
+			if (interface->get_fleet()->lacks_ferry() || ps.infinite_production()) {
+				BaseImmovable* immo = interface->get_position().field->get_immovable();
+				if (immo == nullptr || immo->get_size() == BaseImmovable::Size::NONE) {
+					return true;
+				}
+			}
+		}
+	}
+
+	return false;
+}
+std::string ProductionProgram::ActReturn::FleetNeeds::description(
+   const Descriptions& /* descriptions */) const {
+	/** TRANSLATORS: 'Completed/Skipped/Did not start ... because the fleet needs a ship/ferry'. */
+	return type_ == Type::kShip ? _("the fleet needs a ship") : _("the fleet needs a ferry");
+}
+
+std::string ProductionProgram::ActReturn::FleetNeeds::description_negation(
+   const Descriptions& /* descriptions */) const {
+	/** TRANSLATORS: 'Completed/Skipped/Did not start ... because the fleet needs no ships/ferries'.
+	 */
+	return type_ == Type::kShip ? _("the fleet needs no ships") : _("the fleet needs no ferries");
+}
+
 ProductionProgram::ActReturn::Condition*
 ProductionProgram::ActReturn::create_condition(const std::vector<std::string>& arguments,
                                                std::vector<std::string>::const_iterator& begin,
@@ -624,6 +662,25 @@ ProductionProgram::ActReturn::create_condition(const std::vector<std::string>& a
 				   "Expected 'experience' after 'workers need' but found '%s'", begin->c_str());
 			}
 			return new ProductionProgram::ActReturn::WorkersNeedExperience();
+		}
+		if (match_and_skip(arguments, begin, "fleet")) {
+			if (!match_and_skip(arguments, begin, "needs")) {
+				throw GameDataError(
+				   "Expected 'needs ship|ferry' after 'fleet' but found '%s'", begin->c_str());
+			}
+			descr.set_infinite_production_useful(true);
+			if (match_and_skip(arguments, begin, "ship")) {
+				descr.has_ship_fleet_check_ = true;
+				return new ProductionProgram::ActReturn::FleetNeeds(
+				   ProductionProgram::ActReturn::FleetNeeds::Type::kShip);
+			}
+			if (match_and_skip(arguments, begin, "ferry")) {
+				descr.has_ferry_fleet_check_ = true;
+				return new ProductionProgram::ActReturn::FleetNeeds(
+				   ProductionProgram::ActReturn::FleetNeeds::Type::kFerry);
+			}
+			throw GameDataError("Expected 'ship' or 'ferry' after 'fleet needs' but found '%s'",
+			                    begin == end ? "" : begin->c_str());
 		}
 		throw GameDataError("Expected not|economy|site|workers after '%s' but found '%s'",
 		                    (begin - 1)->c_str(), begin->c_str());
@@ -1991,6 +2048,7 @@ ProductionProgram::ActConstruct::ActConstruct(const std::vector<std::string>& ar
 	     main_worker_descr.get_program(workerprogram)->created_attributes()) {
 		descr->add_created_attribute(attribute_info);
 	}
+	descr->has_ship_fleet_check_ = true;
 }
 
 const ImmovableDescr&
@@ -2039,46 +2097,31 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 		return;
 	}
 
-	// No object found, look for a field where we can build
-	std::vector<Coords> fields;
-	FindNodeAnd fna;
-	// 10 is custom value to make sure the "water" is at least 10 nodes big
-	fna.add(FindNodeShore(10));
-	fna.add(FindNodeImmovableSize(FindNodeImmovableSize::sizeNone));
-	if (map.find_reachable_fields(game, area, &fields, cstep, fna) != 0u) {
-		// Testing received fields to get one with less immovables nearby
-		Coords best_coords = fields.back();  // Just to initialize it
-		uint32_t best_score = std::numeric_limits<uint32_t>::max();
-		while (!fields.empty()) {
-			Coords coords = fields.back();
-
-			// Counting immovables nearby
-			std::vector<ImmovableFound> found_immovables;
-			const uint32_t imm_count =
-			   map.find_immovables(game, Area<FCoords>(map.get_fcoords(coords), 2), &found_immovables);
-			if (best_score > imm_count) {
-				best_score = imm_count;
-				best_coords = coords;
+	std::vector<ShipFleetYardInterface*> candidates;
+	bool ships_needed = false;
+	for (ShipFleetYardInterface* interface : psite.get_ship_fleet_interfaces()) {
+		if (interface->get_fleet()->lacks_ship()) {
+			ships_needed = true;
+			BaseImmovable* immo = interface->get_position().field->get_immovable();
+			if (immo == nullptr || immo->get_size() == BaseImmovable::Size::NONE) {
+				candidates.push_back(interface);
 			}
-
-			// No need to go on, it cannot be better
-			if (imm_count == 0) {
-				break;
-			}
-
-			fields.pop_back();
 		}
+	}
 
-		state.coord = best_coords;
-
-		psite.working_positions_.at(psite.main_worker_)
-		   .worker.get(game)
-		   ->update_task_buildingwork(game);
+	if (candidates.empty()) {
+		if (ships_needed || psite.get_ship_fleet_interfaces().empty()) {
+			psite.molog(game.get_gametime(), "construct: no space for ships\n");
+			psite.program_end(game, ProgramResult::kFailed);
+		} else {
+			psite.molog(game.get_gametime(), "construct: no ships needed\n");
+			psite.program_end(game, ProgramResult::kSkipped);
+		}
 		return;
 	}
 
-	psite.molog(game.get_gametime(), "construct: no object or buildable field\n");
-	psite.program_end(game, ProgramResult::kFailed);
+	state.coord = candidates.at(game.logic_rand() % candidates.size())->get_position();
+	psite.working_positions_.at(psite.main_worker_).worker.get(game)->update_task_buildingwork(game);
 }
 
 bool ProductionProgram::ActConstruct::get_building_work(Game& game,
