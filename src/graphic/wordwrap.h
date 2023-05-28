@@ -19,6 +19,7 @@
 #define WL_GRAPHIC_WORDWRAP_H
 
 #include <memory>
+#include <optional>
 
 #include <base/scoped_timer.h>
 #include <unicode/uchar.h>
@@ -57,7 +58,7 @@ struct WordWrap {
 	          UI::Align align,
 	          uint32_t caret,
 	          bool with_selection,
-	          bool expand_selection,
+	          std::optional<std::pair<int32_t, int32_t>> expand_selection_y,
 	          uint32_t selection_start,
 	          uint32_t selection_end,
 	          uint32_t scrollbar_position,
@@ -113,7 +114,7 @@ private:
 	                         uint32_t selection_start_x,
 	                         uint32_t selection_end_line,
 	                         uint32_t selection_end_x,
-	                         bool expand,
+	                         std::optional<std::pair<int32_t, int32_t>> expand_selection_y,
 	                         int fontheight,
 	                         uint32_t line,
 	                         const Vector2i& point) const;

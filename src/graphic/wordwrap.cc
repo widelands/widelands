@@ -351,7 +351,7 @@ void WordWrap::draw(RenderTarget& dst,
                     Align align,
                     uint32_t caret,
                     bool with_selection,
-                    bool expand_selection,
+                    std::optional<std::pair<int32_t, int32_t>> expand_selection_y,
                     uint32_t selection_start,
                     uint32_t selection_end,
                     uint32_t scrollbar_position,
@@ -394,7 +394,7 @@ void WordWrap::draw(RenderTarget& dst,
 
 		if (with_selection) {
 			highlight_selection(dst, scrollbar_position, selection_start_line, selection_start_x,
-			                    selection_end_line, selection_end_x, expand_selection, fontheight,
+			                    selection_end_line, selection_end_x, expand_selection_y, fontheight,
 			                    line, point);
 		}
 
@@ -434,7 +434,7 @@ void WordWrap::highlight_selection(RenderTarget& dst,
                                    uint32_t selection_start_x,
                                    uint32_t selection_end_line,
                                    uint32_t selection_end_x,
-                                   bool expand,
+                                   std::optional<std::pair<int32_t, int32_t>> expand_selection_y,
                                    const int fontheight,
                                    uint32_t line,
                                    const Vector2i& point) const {
@@ -467,9 +467,11 @@ void WordWrap::highlight_selection(RenderTarget& dst,
 	}
 
 	/* Correct for pixel-perfect alignment. */
-	highlight_start.y++;
-	if (expand) {
-		highlight_end.y += 2;
+	if (expand_selection_y.has_value()) {
+		highlight_start.y = expand_selection_y->first;
+		highlight_end.y = expand_selection_y->second;
+	} else {
+		highlight_start.y++;
 	}
 
 	dst.brighten_rect(
