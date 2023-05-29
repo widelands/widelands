@@ -47,9 +47,9 @@ wl.Descriptions():new_productionsite_type {
          descname = _("working"),
          actions = {
             "sleep=duration:20s",
-            "callworker=buildferry_1",
+            "return=skipped unless fleet needs ferry",
             "consume=log:2 cloth",
-            "callworker=buildferry_2"
+            "callworker=buildferry"
          }
       },
    },

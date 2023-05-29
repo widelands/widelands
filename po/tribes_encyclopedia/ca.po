@@ -452,7 +452,7 @@ msgstr "Aquesta llança és l’arma bàsica del sistema militar de les amazones
 #: ../../data/tribes/initialization/amazons/units.lua:367
 msgctxt "amazons_ware"
 msgid "It is used by the Amazon hunter-gatherers as well."
-msgstr ""
+msgstr "També l’usen les recol·lectores i caçadores amazones."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Chisel, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:378
@@ -1484,7 +1484,7 @@ msgstr "Cultiva cacau per fer després begudes de xocolata."
 #: ../../data/tribes/initialization/amazons/units.lua:1486
 msgctxt "amazons_building"
 msgid "Chocolate is essential for training Amazon soldiers."
-msgstr ""
+msgstr "La xocolata és essencial per entrenar les soldades amazones."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Stone Mine
 #: ../../data/tribes/initialization/amazons/units.lua:1495
@@ -3783,7 +3783,7 @@ msgstr "Aquí hi ha moltes pedres precioses."
 #: ../../data/tribes/initialization/frisians/units.lua:1517
 msgid ""
 "This tree is only planted by the Amazon tribe but can be harvested for logs."
-msgstr ""
+msgstr "Aquest arbre només el planta la cultura amazònica però les altres cultures el poden talar per aconseguir-ne troncs."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean warehouse: Headquarters
 #: ../../data/tribes/initialization/atlanteans/units.lua:1434

@@ -121,6 +121,9 @@ protected:
 	UI::UniqueWindow::Registry game_summary_;
 	UI::UniqueWindow::Registry client_disconnected_;
 
+	const Image* grid_marker_pic_;
+	const Image* special_coords_marker_pic_;
+
 private:
 	// For referencing the items in mainmenu_
 	enum class MainMenuEntry {

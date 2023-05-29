@@ -25,11 +25,7 @@ wl.Descriptions():new_worker_type {
          "animate=idle duration:5s",
          "return"
       },
-      buildferry_1 = {
-         -- checks whether water is available
-         "findspace=size:swim radius:5 ferry",
-      },
-      buildferry_2 = {
+      buildferry = {
          "findspace=size:swim radius:5 ferry",
          "walk=coords",
          "animate=idle duration:10s",
