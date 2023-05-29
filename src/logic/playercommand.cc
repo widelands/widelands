@@ -25,7 +25,9 @@
 #include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/expedition_bootstrap.h"
+#include "economy/ferry_fleet.h"
 #include "economy/input_queue.h"
+#include "economy/ship_fleet.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "io/streamwrite.h"
@@ -171,6 +173,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdPinnedNote(des);
 	case QueueCommandTypes::kShipPortName:
 		return new CmdShipPortName(des);
+	case QueueCommandTypes::kFleetTargets:
+		return new CmdFleetTargets(des);
 
 	default:
 		throw wexception("PlayerCommand::deserialize(): Encountered invalid command id: %d",
@@ -2500,6 +2504,65 @@ void CmdShipPortName::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSave
 	PlayerCommand::write(fw, egbase, mos);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
 	fw.string(name_);
+}
+
+// CmdFleetTargets
+void CmdFleetTargets::execute(Game& game) {
+	MapObject* mo = game.objects().get_object(interface_);
+	if (mo == nullptr) {
+		return;
+	}
+
+	switch (mo->descr().type()) {
+	case MapObjectType::SHIP_FLEET_YARD_INTERFACE:
+		dynamic_cast<ShipFleetYardInterface*>(mo)->get_fleet()->set_ships_target(game, target_);
+		return;
+
+	case MapObjectType::FERRY_FLEET_YARD_INTERFACE:
+		dynamic_cast<FerryFleetYardInterface*>(mo)->get_fleet()->set_idle_ferries_target(
+		   game, target_);
+		return;
+
+	default:
+		throw wexception("CmdFleetTargets for object %u of type %s", interface_,
+		                 to_string(mo->descr().type()).c_str());
+	}
+}
+
+CmdFleetTargets::CmdFleetTargets(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
+	interface_ = des.unsigned_32();
+	target_ = des.unsigned_32();
+}
+
+void CmdFleetTargets::serialize(StreamWrite& ser) {
+	write_id_and_sender(ser);
+	ser.unsigned_32(interface_);
+	ser.unsigned_32(target_);
+}
+
+constexpr uint8_t kCurrentPacketVersionCmdFleetTargets = 1;
+
+void CmdFleetTargets::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionCmdFleetTargets) {
+			PlayerCommand::read(fr, egbase, mol);
+			interface_ = fr.unsigned_32();
+			target_ = fr.unsigned_32();
+		} else {
+			throw UnhandledVersionError(
+			   "CmdFleetTargets", packet_version, kCurrentPacketVersionCmdFleetTargets);
+		}
+	} catch (const std::exception& e) {
+		throw GameDataError("Cmd_FleetTargets: %s", e.what());
+	}
+}
+
+void CmdFleetTargets::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_8(kCurrentPacketVersionCmdFleetTargets);
+	PlayerCommand::write(fw, egbase, mos);
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(interface_)));
+	fw.unsigned_32(target_);
 }
 
 // CmdPickCustomStartingPosition

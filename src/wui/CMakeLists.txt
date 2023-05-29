@@ -210,6 +210,8 @@ wl_library(wui
     encyclopedia_window.h
     fieldaction.cc
     fieldaction.h
+    fleet_options_window.cc
+    fleet_options_window.h
     game_client_disconnected.cc
     game_client_disconnected.h
     game_debug_ui.cc

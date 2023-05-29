@@ -1214,6 +1214,10 @@ void Game::send_player_ship_port_name(PlayerNumber p, Serial s, const std::strin
 	send_player_command(new CmdShipPortName(get_gametime(), p, s, name));
 }
 
+void Game::send_player_fleet_targets(PlayerNumber p, Serial i, Quantity q) {
+	send_player_command(new CmdFleetTargets(get_gametime(), p, i, q));
+}
+
 int Game::propose_trade(const Trade& trade) {
 	// TODO(sirver,trading): Check if a trade is possible (i.e. if there is a
 	// path between the two markets);

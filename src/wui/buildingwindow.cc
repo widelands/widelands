@@ -20,6 +20,8 @@
 
 #include "base/macros.h"
 #include "base/multithreading.h"
+#include "economy/ferry_fleet.h"
+#include "economy/ship_fleet.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
@@ -651,7 +653,17 @@ void BuildingWindow::show_workarea() {
 	if (workarea_info->empty()) {
 		return;
 	}
-	ibase()->show_workarea(*workarea_info, building_position_);
+
+	std::set<Widelands::Coords> special_coords;
+	if (upcast(const Widelands::ProductionSite, ps, building); ps != nullptr) {
+		for (const Widelands::ShipFleetYardInterface* interface : ps->get_ship_fleet_interfaces()) {
+			special_coords.insert(interface->get_position());
+		}
+		for (const Widelands::FerryFleetYardInterface* interface : ps->get_ferry_fleet_interfaces()) {
+			special_coords.insert(interface->get_position());
+		}
+	}
+	ibase()->show_workarea(*workarea_info, building_position_, special_coords);
 	showing_workarea_ = true;
 
 	configure_workarea_button();

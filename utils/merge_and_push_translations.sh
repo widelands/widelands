@@ -97,6 +97,7 @@ python3 utils/fix_formatting.py --lua --dir data/i18n
 python3 utils/fix_formatting.py --lua --dir data/txts
 
 # Undo one-liner diffs in po directory - these are pure timestamps with no other content
+if false; then  # Currently disabled due to TX no longer updating timestamps reliably
 set +x
 nrAdded=""
 nrDeleted=""
@@ -118,6 +119,7 @@ for entry in $(git diff --numstat po); do
   fi
 done
 set -x
+fi
 
 # Stage changes
 # - Translations
