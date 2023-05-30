@@ -499,6 +499,12 @@ public:
 	uint32_t civil_blds_defeated() const {
 		return civil_blds_defeated_;
 	}
+	uint32_t naval_losses() const {
+		return naval_losses_;
+	}
+	uint32_t naval_victories() const {
+		return naval_victories_;
+	}
 	void count_casualty() {
 		++casualties_;
 	}
@@ -516,6 +522,12 @@ public:
 	}
 	void count_civil_bld_defeated() {
 		++civil_blds_defeated_;
+	}
+	void count_naval_victory() {
+		++naval_victories_;
+	}
+	void count_naval_loss() {
+		++naval_losses_;
 	}
 
 	// Statistics
@@ -718,6 +730,8 @@ private:
 	uint32_t msites_defeated_{0U};
 	uint32_t civil_blds_lost_{0U};
 	uint32_t civil_blds_defeated_{0U};
+	uint32_t naval_victories_{0U};
+	uint32_t naval_losses_{0U};
 
 	// If we run out of ship names, we'll want to continue with unique numbers
 	uint32_t ship_name_counter_{0U};

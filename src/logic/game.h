@@ -139,6 +139,9 @@ public:
 		std::vector<uint32_t> nr_civil_blds_lost;
 		std::vector<uint32_t> nr_civil_blds_defeated;
 		std::vector<uint32_t> miltary_strength;
+		std::vector<uint32_t> nr_ships;
+		std::vector<uint32_t> nr_naval_victories;
+		std::vector<uint32_t> nr_naval_losses;
 
 		std::vector<uint32_t> custom_statistic;
 	};
@@ -336,8 +339,8 @@ public:
 		return general_stats_;
 	}
 
-	void read_statistics(FileRead&);
-	void write_statistics(FileWrite&);
+	void read_statistics(FileRead& fr, uint16_t packet_version);
+	void write_statistics(FileWrite& fw);
 
 	void sample_statistics();
 
