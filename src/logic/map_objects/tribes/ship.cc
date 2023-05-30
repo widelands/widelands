@@ -1080,16 +1080,22 @@ void Ship::battle_update(Game& game) {
 			set_phase(next);
 		} else {
 			molog(game.get_gametime(), "[battle] Enemy defeated");
+
+			get_owner()->count_naval_victory();
+			target_ship->get_owner()->count_naval_loss();
 			target_ship->send_message(game, _("Ship Sunk"), _("Ship Destroyed"),
 			                          _("An enemy ship has destroyed your warship."),
 			                          "images/wui/ship/ship_attack.png");
+
 			target_ship->battles_.clear();
 			target_ship->reset_tasks(game);
 			target_ship->set_ship_state_and_notify(
 			   ShipStates::kSinkRequest, NoteShip::Action::kDestinationChanged);
+
 			battles_.pop_back();
 			return true;
 		}
+
 		current_battle.pending_damage = 0;
 		other_battle->pending_damage = 0;
 		return false;
