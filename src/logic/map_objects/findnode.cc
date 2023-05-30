@@ -19,12 +19,15 @@
 #include "logic/map_objects/findnode.h"
 
 #include "base/wexception.h"
+#include "economy/ferry_fleet.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/map.h"
+#include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/world/terrain_description.h"
+#include "logic/player.h"
 
 namespace Widelands {
 
@@ -186,6 +189,25 @@ bool FindNodeResourceBreedable::accept(const EditorGameBase& egbase, const FCoor
 				}
 				break;
 			}
+		}
+	}
+	return false;
+}
+
+bool FindNodeFerry::accept(const EditorGameBase& egbase, const FCoords& coords) const {
+	CheckStepFerry csf(egbase);
+	if (!csf.reachable_dest(egbase.map(), coords)) {
+		return false;
+	}
+	if (player_who_needs_ferry_ == 0) {
+		return true;
+	}
+
+	for (Bob* bob = coords.field->get_first_bob(); bob != nullptr; bob = bob->get_next_bob()) {
+		if (bob->descr().type() == MapObjectType::FERRY_FLEET_YARD_INTERFACE &&
+		    bob->owner().player_number() == player_who_needs_ferry_ &&
+		    dynamic_cast<FerryFleetYardInterface*>(bob)->get_fleet()->lacks_ferry()) {
+			return true;
 		}
 	}
 	return false;

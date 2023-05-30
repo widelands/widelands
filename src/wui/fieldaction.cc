@@ -37,10 +37,12 @@
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/icongrid.h"
+#include "ui_basic/spinbox.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/unique_window.h"
 #include "wui/actionconfirm.h"
 #include "wui/economy_options_window.h"
+#include "wui/fleet_options_window.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
 #include "wui/waresdisplay.h"
@@ -164,6 +166,8 @@ public:
 	void act_debug();
 	void act_buildflag();
 	void act_configure_economy();
+	void act_configure_ship_fleet();
+	void act_configure_ferry_fleet();
 	void act_ripflag();
 	void act_buildroad();
 	void act_abort_buildroad();
@@ -491,6 +495,28 @@ void FieldActionWindow::add_buttons_auto() {
 		}
 	}
 
+	// Fleet target settings
+	bool has_ship_fleet = false;
+	bool has_ferry_fleet = false;
+	for (Widelands::Bob* bob = node_.field->get_first_bob(); bob != nullptr;
+	     bob = bob->get_next_bob()) {
+		if (bob->descr().type() == Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE &&
+		    !has_ship_fleet &&
+		    (ipl == nullptr || bob->owner().player_number() == ipl->player_number())) {
+			has_ship_fleet = true;
+			add_button(
+			   buildbox, "configure_ship_fleet", "images/wui/fieldaction/menu_tab_ship_targets.png",
+			   &FieldActionWindow::act_configure_ship_fleet, _("Configure this ocean’s ship fleet"));
+		} else if (bob->descr().type() == Widelands::MapObjectType::FERRY_FLEET_YARD_INTERFACE &&
+		           !has_ferry_fleet &&
+		           (ipl == nullptr || bob->owner().player_number() == ipl->player_number())) {
+			has_ferry_fleet = true;
+			add_button(
+			   buildbox, "configure_ferry_fleet", "images/wui/fieldaction/menu_tab_ferry_targets.png",
+			   &FieldActionWindow::act_configure_ferry_fleet, _("Configure this ocean’s ferry fleet"));
+		}
+	}
+
 	//  Watch actions, only when in game (no use in editor).
 	if (ibase().egbase().is_game()) {
 		add_button(&watchbox, "watch", kImgButtonWatchField, &FieldActionWindow::act_watch,
@@ -789,6 +815,32 @@ void FieldActionWindow::act_configure_economy() {
 	die();
 }
 
+void FieldActionWindow::act_configure_ship_fleet() {
+	upcast(InteractivePlayer, ipl, &ibase());
+	for (Widelands::Bob* bob = node_.field->get_first_bob(); bob != nullptr;
+	     bob = bob->get_next_bob()) {
+		if (bob->descr().type() == Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE &&
+		    (ipl == nullptr || bob->owner().player_number() == ipl->player_number())) {
+			FleetOptionsWindow::create(get_parent(), ibase(), bob);
+			break;
+		}
+	}
+	die();
+}
+
+void FieldActionWindow::act_configure_ferry_fleet() {
+	upcast(InteractivePlayer, ipl, &ibase());
+	for (Widelands::Bob* bob = node_.field->get_first_bob(); bob != nullptr;
+	     bob = bob->get_next_bob()) {
+		if (bob->descr().type() == Widelands::MapObjectType::FERRY_FLEET_YARD_INTERFACE &&
+		    (ipl == nullptr || bob->owner().player_number() == ipl->player_number())) {
+			FleetOptionsWindow::create(get_parent(), ibase(), bob);
+			break;
+		}
+	}
+	die();
+}
+
 /*
 ===============
 Remove the flag at this field
@@ -950,7 +1002,7 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 		building_under_mouse_ = idx;
 		const Widelands::BuildingDescr& descr = *player_->tribe().get_building_descr(idx);
 		const WorkareaInfo& workarea_info = descr.workarea_info();
-		ibase().show_workarea(workarea_info, node_);
+		ibase().show_workarea(workarea_info, node_, {});
 		showing_workarea_preview_ = true;
 		if (!is_showing_workarea_overlaps_) {
 			return;
@@ -1041,7 +1093,7 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 								colors[t] = kOverlapColorPale;
 							}
 						}
-						ibase().show_workarea(wa, mr.location(), colors);
+						ibase().show_workarea(wa, mr.location(), colors, {});
 						overlapping_workareas_.insert(mr.location());
 					}
 				}

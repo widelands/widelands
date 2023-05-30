@@ -912,6 +912,8 @@ int upcasted_map_object_to_lua(lua_State* L, Widelands::MapObject* mo) {
 	case Widelands::MapObjectType::FERRY_FLEET:
 	case Widelands::MapObjectType::WARE:
 	case Widelands::MapObjectType::PINNED_NOTE:
+	case Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE:
+	case Widelands::MapObjectType::FERRY_FLEET_YARD_INTERFACE:
 		throw LuaError(
 		   format("upcasted_map_object_to_lua: Unknown %i", static_cast<int>(mo->descr().type())));
 	}
@@ -2377,6 +2379,9 @@ int LuaMapObjectDescription::get_name(lua_State* L) {
         * :const:`battle`, holds information about two soldiers in a fight,
         * :const:`ship_fleet`, holds information for managing ships and ports,
         * :const:`ferry_fleet`, holds information for managing ferries and waterways.
+        * :const:`ship_fleet_yard_interface`, links a shipyard to a ship fleet.
+        * :const:`ferry_fleet_yard_interface`, links a ferry yard to a ferry fleet.
+        * :const:`pinned_note`, a textual note pinned to a field by the player.
 
       Example to fetch some information from a tribe's description:
 
@@ -4680,6 +4685,8 @@ int LuaMapObject::get_descr(lua_State* L) {
 	case Widelands::MapObjectType::PORTDOCK:
 	case Widelands::MapObjectType::WARE:
 	case Widelands::MapObjectType::PINNED_NOTE:
+	case Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE:
+	case Widelands::MapObjectType::FERRY_FLEET_YARD_INTERFACE:
 		return CAST_TO_LUA(Widelands::MapObjectDescr, LuaMapObjectDescription);
 	}
 	NEVER_HERE();

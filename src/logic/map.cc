@@ -2375,8 +2375,9 @@ int32_t Map::change_terrain(const EditorGameBase& egbase,
 		clear_resources(f_sw_e);
 	}
 
-	Notifications::publish(
-	   NoteFieldTerrainChanged{c.node, static_cast<MapIndex>(c.node.field - &fields_[0])});
+	Notifications::publish(NoteFieldTerrainChanged{c.node,
+	                                               static_cast<MapIndex>(c.node.field - &fields_[0]),
+	                                               NoteFieldTerrainChanged::Change::kTerrain});
 
 	// Changing the terrain can affect ports, which can be up to 3 fields away.
 	constexpr int kPotentiallyAffectedNeighbors = 3;

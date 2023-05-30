@@ -39,6 +39,10 @@ std::string to_string(const MapObjectType type) {
 		return "ship";
 	case MapObjectType::PINNED_NOTE:
 		return "pinned_note";
+	case MapObjectType::SHIP_FLEET_YARD_INTERFACE:
+		return "ship_fleet_yard_interface";
+	case MapObjectType::FERRY_FLEET_YARD_INTERFACE:
+		return "ferry_fleet_yard_interface";
 	case MapObjectType::WORKER:
 		return "worker";
 	case MapObjectType::CARRIER:

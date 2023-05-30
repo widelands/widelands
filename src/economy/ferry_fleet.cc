@@ -39,21 +39,30 @@
 namespace Widelands {
 
 namespace {
-// Every MapObject() needs to have a description. So we make a dummy one for
-// Fleet.
+// Every MapObject() needs to have a description. So we make some dummy singletons.
 FerryFleetDescr g_ferry_fleet_descr("ferry_fleet", "Ferry Fleet");
+FerryFleetYardInterfaceDescr g_ferry_fleet_yard_interface_descr("ferry_fleet_yard_interface",
+                                                                "Ferry Fleet Yard Interface");
 }  // namespace
 
 const FerryFleetDescr& FerryFleet::descr() const {
 	return g_ferry_fleet_descr;
 }
 
+const FerryFleetYardInterfaceDescr& FerryFleetYardInterface::descr() const {
+	return g_ferry_fleet_yard_interface_descr;
+}
+
+Bob& FerryFleetYardInterfaceDescr::create_object() const {
+	return *new FerryFleetYardInterface();
+}
+
 /**
  * Fleets are initialized empty.
  *
- * Intended use: @ref Ferry and @ref Waterway, when created, create a new @ref FerryFleet
- * instance, then add themselves \em before calling the \ref init function.
- * The FerryFleet takes care of merging with existing fleets, if any.
+ * Intended use: @ref Ferry, @ref FerryFleetYardInterface, and @ref Waterway, when created,
+ * create a new @ref FerryFleet instance, then add themselves \em before calling the \ref init
+ * function. The FerryFleet takes care of merging with existing fleets, if any.
  */
 FerryFleet::FerryFleet(Player* player) : MapObject(&g_ferry_fleet_descr) {
 	owner_ = player;
@@ -118,6 +127,9 @@ bool FerryFleet::find_other_fleet(EditorGameBase& egbase) {
 	for (const Ferry* temp_ferry : ferries_) {
 		astar.push(temp_ferry->get_position());
 	}
+	for (const FerryFleetYardInterface* temp_interface : interfaces_) {
+		astar.push(temp_interface->get_position());
+	}
 	for (const auto& temp_ww : pending_ferry_requests_) {
 		for (Coords& c : temp_ww.second->get_positions(egbase)) {
 			astar.push(c);
@@ -145,6 +157,12 @@ bool FerryFleet::find_other_fleet(EditorGameBase& egbase) {
 				    ferry->get_owner() == get_owner()) {
 					return ferry->get_fleet()->merge(egbase, this);
 				}
+			} else if (type == MapObjectType::FERRY_FLEET_YARD_INTERFACE) {
+				upcast(FerryFleetYardInterface, interface, bob);
+				if (interface->get_fleet() != nullptr && interface->get_fleet() != this &&
+				    interface->get_owner() == get_owner()) {
+					return interface->get_fleet()->merge(egbase, this);
+				}
 			}
 		}
 	}
@@ -154,6 +172,11 @@ bool FerryFleet::find_other_fleet(EditorGameBase& egbase) {
 		return true;
 	}
 	return false;
+}
+
+void FerryFleet::set_idle_ferries_target(EditorGameBase& egbase, Quantity t) {
+	idle_ferries_target_ = t;
+	target_last_modified_ = egbase.get_gametime();
 }
 
 /**
@@ -169,10 +192,21 @@ bool FerryFleet::merge(EditorGameBase& egbase, FerryFleet* other) {
 		return true;
 	}
 
+	if (target_last_modified_ < other->target_last_modified_) {
+		idle_ferries_target_ = other->idle_ferries_target_;
+		target_last_modified_ = other->target_last_modified_;
+	}
+
 	while (!other->ferries_.empty()) {
 		Ferry* ferry = other->ferries_.back();
 		other->ferries_.pop_back();
 		add_ferry(ferry);
+	}
+
+	while (!other->interfaces_.empty()) {
+		FerryFleetYardInterface* interface = other->interfaces_.back();
+		other->interfaces_.pop_back();
+		add_interface(interface);
 	}
 
 	while (!other->pending_ferry_requests_.empty()) {
@@ -197,6 +231,13 @@ void FerryFleet::cleanup(EditorGameBase& egbase) {
 		ferry->set_fleet(nullptr);
 		ferries_.pop_back();
 	}
+
+	while (!interfaces_.empty()) {
+		FerryFleetYardInterface* interface = interfaces_.back();
+		interface->set_fleet(nullptr);
+		interfaces_.pop_back();
+	}
+
 	while (!pending_ferry_requests_.empty()) {
 		auto pair = pending_ferry_requests_.begin();
 		assert(pair->second->get_fleet() == this);
@@ -205,14 +246,6 @@ void FerryFleet::cleanup(EditorGameBase& egbase) {
 	}
 
 	MapObject::cleanup(egbase);
-}
-
-uint32_t FerryFleet::count_ferries() const {
-	return ferries_.size();
-}
-
-uint32_t FerryFleet::count_unattended_waterways() const {
-	return pending_ferry_requests_.size();
 }
 
 // Returns true of this waterway has a ferry or a ferry is on the way there
@@ -229,10 +262,37 @@ bool FerryFleet::has_ferry(const Waterway& ww) const {
 	return true;
 }
 
+uint32_t FerryFleet::count_unemployed_ferries() const {
+	uint32_t n = 0;
+	for (Ferry* f : ferries_) {
+		if (f->unemployed()) {
+			++n;
+		}
+	}
+	return n;
+}
+
+uint32_t FerryFleet::count_total_waterways() const {
+	// Total number of waterways is number of employed ferries plus number of unserviced waterways.
+	uint32_t n = pending_ferry_requests_.size();
+	for (Ferry* f : ferries_) {
+		if (!f->unemployed()) {
+			++n;
+		}
+	}
+	return n;
+}
+
 void FerryFleet::add_ferry(Ferry* ferry) {
 	ferries_.push_back(ferry);
 	assert(std::count(ferries_.begin(), ferries_.end(), ferry) == 1);
 	ferry->set_fleet(this);
+}
+
+void FerryFleet::add_interface(FerryFleetYardInterface* interface) {
+	interfaces_.push_back(interface);
+	assert(std::count(interfaces_.begin(), interfaces_.end(), interface) == 1);
+	interface->set_fleet(this);
 }
 
 void FerryFleet::remove_ferry(EditorGameBase& egbase, Ferry* ferry) {
@@ -258,6 +318,31 @@ void FerryFleet::remove_ferry(EditorGameBase& egbase, Ferry* ferry) {
 	if (ferry->get_location(egbase) != nullptr) {
 		update(egbase);
 	}
+
+	if (empty()) {
+		remove(egbase);
+	}
+}
+
+void FerryFleet::remove_interface(EditorGameBase& egbase, FerryFleetYardInterface* interface) {
+	auto it = std::find(interfaces_.begin(), interfaces_.end(), interface);
+	if (it == interfaces_.end()) {
+		log_warn_time(egbase.get_gametime(),
+		              "FerryFleet %u: Requested to remove interface %u which is not in this fleet\n",
+		              serial(), interface ? interface->serial() : 0);
+		return;
+	}
+	while (it != interfaces_.end()) {
+		interfaces_.erase(it);
+		it = std::find(interfaces_.begin(), interfaces_.end(), interface);
+		if (it != interfaces_.end()) {
+			log_warn_time(egbase.get_gametime(),
+			              "FerryFleet %u: Multiple instances of interface %u were in the ferry fleet",
+			              serial(), interface->serial());
+		}
+	}
+	assert(std::count(interfaces_.begin(), interfaces_.end(), interface) == 0);
+	interface->set_fleet(nullptr);
 
 	if (empty()) {
 		remove(egbase);
@@ -325,7 +410,7 @@ void FerryFleet::reroute_ferry_request(Game& game, Waterway* oldww, Waterway* ne
 }
 
 bool FerryFleet::empty() const {
-	return ferries_.empty() && pending_ferry_requests_.empty();
+	return ferries_.empty() && interfaces_.empty() && pending_ferry_requests_.empty();
 }
 
 /**
@@ -426,15 +511,59 @@ void FerryFleet::log_general_info(const EditorGameBase& egbase) const {
 	for (const Ferry* f : ferries_) {
 		molog(egbase.get_gametime(), "* Ferry %u\n", f->serial());
 	}
+	for (const FerryFleetYardInterface* i : interfaces_) {
+		molog(
+		   egbase.get_gametime(), "* Interface %u to %u\n", i->serial(), i->get_building()->serial());
+	}
 	for (const auto& pair : pending_ferry_requests_) {
 		molog(egbase.get_gametime(), "* Waterway %u (requested at %u)\n", pair.second->serial(),
 		      pair.first.get());
 	}
 }
 
-constexpr uint8_t kCurrentPacketVersion = 1;
+FerryFleetYardInterface::FerryFleetYardInterface() : Bob(g_ferry_fleet_yard_interface_descr) {
+}
 
-void FerryFleet::Loader::load(FileRead& fr) {
+FerryFleetYardInterface*
+FerryFleetYardInterface::create(EditorGameBase& egbase, ProductionSite& ps, const Coords& pos) {
+	FerryFleetYardInterface* interface = new FerryFleetYardInterface();
+	interface->set_owner(ps.get_owner());
+	interface->set_position(egbase, pos);
+	interface->building_ = &ps;
+	interface->init(egbase);
+
+	FerryFleet* fleet = new FerryFleet(interface->get_owner());
+	fleet->add_interface(interface);
+	fleet->init(egbase);  // Calls interface->set_fleet()
+
+	return interface;
+}
+
+void FerryFleetYardInterface::init_auto_task(Game& game) {
+	start_task_idle(game, 0, -1);
+}
+
+void FerryFleetYardInterface::cleanup(EditorGameBase& egbase) {
+	building_->remove_fleet_interface(egbase, this);
+
+	if (fleet_ != nullptr) {
+		fleet_->remove_interface(egbase, this);
+	}
+
+	Bob::cleanup(egbase);
+}
+
+void FerryFleetYardInterface::log_general_info(const EditorGameBase& egbase) const {
+	Bob::log_general_info(egbase);
+	molog(egbase.get_gametime(), "Interface to building %u at %3dx%3d\n", building_->serial(),
+	      building_->get_position().x, building_->get_position().y);
+}
+
+// Changelog version 1 (v1.1) → 2: Added ferry yard interfaces.
+constexpr uint8_t kCurrentPacketVersionFleet = 2;
+constexpr uint8_t kCurrentPacketVersionInterface = 1;
+
+void FerryFleet::Loader::load(FileRead& fr, uint8_t packet_version) {
 	MapObject::Loader::load(fr);
 
 	FerryFleet& fleet = get<FerryFleet>();
@@ -447,12 +576,21 @@ void FerryFleet::Loader::load(FileRead& fr) {
 		ferries_[i] = fr.unsigned_32();
 	}
 
+	const uint32_t nrinterfaces = packet_version >= 2 ? fr.unsigned_32() : 0;
+	interfaces_.resize(nrinterfaces);
+	for (uint32_t i = 0; i < nrinterfaces; ++i) {
+		interfaces_[i] = fr.unsigned_32();
+	}
+
 	const uint32_t nrww = fr.unsigned_32();
 	for (uint32_t i = 0; i < nrww; ++i) {
 		const Time gametime(fr);
 		const uint32_t serial = fr.unsigned_32();
 		pending_ferry_requests_.emplace(gametime, serial);
 	}
+
+	fleet.idle_ferries_target_ = packet_version >= 2 ? fr.unsigned_32() : 0;
+	fleet.target_last_modified_ = packet_version >= 2 ? Time(fr) : Time(0);
 }
 
 void FerryFleet::Loader::load_pointers() {
@@ -468,6 +606,12 @@ void FerryFleet::Loader::load_pointers() {
 		fleet.ferries_.push_back(&mol().get<Ferry>(temp_ferry));
 		fleet.ferries_.back()->set_fleet(&fleet);
 	}
+
+	for (const uint32_t& temp_interface : interfaces_) {
+		fleet.interfaces_.push_back(&mol().get<FerryFleetYardInterface>(temp_interface));
+		fleet.interfaces_.back()->set_fleet(&fleet);
+	}
+
 	for (const auto& temp_ww : pending_ferry_requests_) {
 		Waterway& ww = mol().get<Waterway>(temp_ww.second);
 		fleet.pending_ferry_requests_.emplace(temp_ww.first, &ww);
@@ -483,7 +627,8 @@ MapObject::Loader* FerryFleet::load(EditorGameBase& egbase, MapObjectLoader& mol
 	try {
 		// The header has been peeled away by the caller
 		uint8_t const packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersion) {
+		// TODO(Nordfriese): Savegame compatibility v1.1
+		if (packet_version >= 1 && packet_version <= kCurrentPacketVersionFleet) {
 			PlayerNumber owner_number = fr.unsigned_8();
 			if ((owner_number == 0u) || owner_number > egbase.map().get_nrplayers()) {
 				throw GameDataError("owner number is %u but there are only %u players", owner_number,
@@ -496,9 +641,9 @@ MapObject::Loader* FerryFleet::load(EditorGameBase& egbase, MapObjectLoader& mol
 			}
 
 			loader->init(egbase, mol, *(new FerryFleet(owner)));
-			loader->load(fr);
+			loader->load(fr, packet_version);
 		} else {
-			throw UnhandledVersionError("FerryFleet", packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("FerryFleet", packet_version, kCurrentPacketVersionFleet);
 		}
 	} catch (const std::exception& e) {
 		throw wexception("loading ferry fleet: %s", e.what());
@@ -509,7 +654,7 @@ MapObject::Loader* FerryFleet::load(EditorGameBase& egbase, MapObjectLoader& mol
 
 void FerryFleet::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_8(HeaderFerryFleet);
-	fw.unsigned_8(kCurrentPacketVersion);
+	fw.unsigned_8(kCurrentPacketVersionFleet);
 
 	fw.unsigned_8(owner_.load()->player_number());
 
@@ -521,11 +666,62 @@ void FerryFleet::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw
 	for (const Ferry* temp_ferry : ferries_) {
 		fw.unsigned_32(mos.get_object_file_index(*temp_ferry));
 	}
+
+	fw.unsigned_32(interfaces_.size());
+	for (const FerryFleetYardInterface* temp_interface : interfaces_) {
+		fw.unsigned_32(mos.get_object_file_index(*temp_interface));
+	}
+
 	fw.unsigned_32(pending_ferry_requests_.size());
 	for (const auto& temp_ww : pending_ferry_requests_) {
 		temp_ww.first.save(fw);
 		fw.unsigned_32(mos.get_object_file_index(*temp_ww.second));
 	}
+
+	fw.unsigned_32(idle_ferries_target_);
+	target_last_modified_.save(fw);
+}
+
+void FerryFleetYardInterface::Loader::load(FileRead& fr) {
+	Bob::Loader::load(fr);
+	building_ = fr.unsigned_32();
+}
+
+void FerryFleetYardInterface::Loader::load_pointers() {
+	Bob::Loader::load_pointers();
+
+	FerryFleetYardInterface& interface = get<FerryFleetYardInterface>();
+	interface.building_ = &mol().get<ProductionSite>(building_);
+}
+
+Bob::Loader*
+FerryFleetYardInterface::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {
+	std::unique_ptr<Loader> loader(new Loader);
+
+	try {
+		// The header has been peeled away by the caller
+		uint8_t const packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionInterface) {
+			loader->init(egbase, mol, *new FerryFleetYardInterface);
+			loader->load(fr);
+		} else {
+			throw UnhandledVersionError(
+			   "FerryFleetYardInterface", packet_version, kCurrentPacketVersionInterface);
+		}
+	} catch (const std::exception& e) {
+		throw wexception("loading ferry fleet yard interface: %s", e.what());
+	}
+
+	return loader.release();
+}
+
+void FerryFleetYardInterface::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
+	fw.unsigned_8(HeaderFerryFleetInterface);
+	fw.unsigned_8(kCurrentPacketVersionInterface);
+
+	Bob::save(egbase, mos, fw);
+
+	fw.unsigned_32(mos.get_object_file_index(*building_));
 }
 
 }  // namespace Widelands

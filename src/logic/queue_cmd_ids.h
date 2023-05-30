@@ -110,7 +110,8 @@ enum class QueueCommandTypes : uint8_t {
 	kDiplomacy,
 	kPinnedNote,
 	kToggleInfiniteProduction,
-	kShipPortName,  // 207
+	kShipPortName,
+	kFleetTargets,  // 208
 
 	kNetCheckSync = 250,
 	kReplaySyncWrite,

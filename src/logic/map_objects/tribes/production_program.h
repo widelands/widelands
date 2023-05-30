@@ -242,6 +242,20 @@ struct ProductionProgram : public MapObjectProgram {
 			[[nodiscard]] std::string description_negation(const Descriptions&) const override;
 		};
 
+		/// Tests whether a nearby fleet needs a ship or ferry.
+		struct FleetNeeds : public Condition {
+			enum class Type { kShip, kFerry };
+			explicit FleetNeeds(Type t) : type_(t) {
+			}
+
+			[[nodiscard]] bool evaluate(const ProductionSite&) const override;
+			[[nodiscard]] std::string description(const Descriptions&) const override;
+			[[nodiscard]] std::string description_negation(const Descriptions&) const override;
+
+		private:
+			Type type_;
+		};
+
 		using Conditions = std::vector<Condition*>;
 		ProgramResult result_;
 		bool is_when_;  //  otherwise it is "unless"
