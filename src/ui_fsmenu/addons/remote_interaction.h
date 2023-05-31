@@ -27,11 +27,11 @@
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/icon.h"
-#include "ui_basic/multilineeditbox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/progressbar.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
+#include "ui_basic/textinput.h"
 #include "ui_basic/window.h"
 
 namespace AddOnsUI {

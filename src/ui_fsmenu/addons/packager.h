@@ -23,8 +23,7 @@
 
 #include "logic/addons.h"
 #include "logic/mutable_addon.h"
-#include "ui_basic/editbox.h"
-#include "ui_basic/multilineeditbox.h"
+#include "ui_basic/textinput.h"
 #include "ui_fsmenu/addons/manager.h"
 #include "ui_fsmenu/addons/packager_box.h"
 #include "ui_fsmenu/addons/progress.h"

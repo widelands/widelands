@@ -351,7 +351,7 @@ void EditorPlayerMenu::set_starting_pos_clicked(size_t row) {
 
 void EditorPlayerMenu::name_changed(size_t row) {
 	//  Player name has been changed.
-	const std::string& text = rows_.at(row)->name->text();
+	const std::string& text = rows_.at(row)->name->get_text();
 	EditorInteractive& menu = eia();
 	Widelands::Map* map = menu.egbase().mutable_map();
 	map->set_scenario_player_name(row + 1, text);

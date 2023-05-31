@@ -268,9 +268,9 @@ void WarehouseWindow::setup_name_field_editbox(UI::Box& vbox) {
 		}
 		if (Widelands::Game* game = ibase()->get_game(); game != nullptr) {
 			game->send_player_ship_port_name(
-			   wh->owner().player_number(), wh->serial(), name_field->text());
+			   wh->owner().player_number(), wh->serial(), name_field->get_text());
 		} else {
-			wh->set_warehouse_name(name_field->text());
+			wh->set_warehouse_name(name_field->get_text());
 		}
 	});
 	vbox.add(name_field, UI::Box::Resizing::kFullSize);

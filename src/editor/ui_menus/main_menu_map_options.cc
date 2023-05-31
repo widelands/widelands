@@ -25,9 +25,8 @@
 #include "graphic/text_layout.h"
 #include "logic/map.h"
 #include "logic/note_map_options.h"
-#include "ui_basic/editbox.h"
-#include "ui_basic/multilineeditbox.h"
 #include "ui_basic/textarea.h"
+#include "ui_basic/textinput.h"
 #include "wlapplication_options.h"
 #include "wui/map_tags.h"
 
@@ -568,9 +567,9 @@ void MainMenuMapOptions::changed() {
 
 void MainMenuMapOptions::clicked_ok() {
 	Widelands::Map& map = *eia().egbase().mutable_map();
-	map.set_name(name_.text());
-	map.set_author(author_.text());
-	set_config_string("realname", author_.text());
+	map.set_name(name_.get_text());
+	map.set_author(author_.get_text());
+	set_config_string("realname", author_.get_text());
 	map.set_description(descr_->get_text());
 	map.set_hint(hint_->get_text());
 	map.set_waterway_max_length(waterway_length_box_->get_value());

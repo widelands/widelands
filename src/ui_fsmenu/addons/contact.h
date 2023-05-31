@@ -21,7 +21,7 @@
 
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
-#include "ui_basic/multilineeditbox.h"
+#include "ui_basic/textinput.h"
 #include "ui_basic/window.h"
 
 namespace AddOnsUI {
