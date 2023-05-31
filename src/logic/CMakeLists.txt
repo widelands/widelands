@@ -244,6 +244,8 @@ wl_library(logic
   SRCS
     ai_dna_handler.cc
     ai_dna_handler.h
+    detected_port_space.cc
+    detected_port_space.h
     editor_game_base.cc
     editor_game_base.h
     game.cc
