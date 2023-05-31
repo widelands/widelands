@@ -40,8 +40,8 @@ void DetectedPortSpace::set_serial(Serial s) {
 	last_serial = std::max(last_serial, s);
 }
 
-bool DetectedPortSpace::has_dockpoint(const Coords& coords) const {
-	return std::find(dockpoints.begin(), dockpoints.end(), coords) != dockpoints.end();
+bool DetectedPortSpace::has_dockpoint(const Coords& c) const {
+	return std::find(dockpoints.begin(), dockpoints.end(), c) != dockpoints.end();
 }
 
 std::string DetectedPortSpace::to_string(const EditorGameBase& egbase) const {
