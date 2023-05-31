@@ -179,7 +179,7 @@ void GameMainMenuSaveGame::entry_selected() {
 
 void GameMainMenuSaveGame::edit_box_changed() {
 	// Prevent the user from creating nonsense directory names, like e.g. ".." or "...".
-	const bool is_legal_filename = FileSystemHelper::is_legal_filename(filename_editbox_.text());
+	const bool is_legal_filename = FileSystemHelper::is_legal_filename(filename_editbox_.get_text());
 	ok_.set_enabled(is_legal_filename);
 	filename_editbox_.set_tooltip(is_legal_filename ? "" : illegal_filename_tooltip_);
 	load_or_save_.delete_button()->set_enabled(false);
@@ -187,7 +187,7 @@ void GameMainMenuSaveGame::edit_box_changed() {
 }
 
 void GameMainMenuSaveGame::reset_editbox_or_die(const std::string& current_filename) {
-	if (filename_editbox_.text() == current_filename) {
+	if (filename_editbox_.get_text() == current_filename) {
 		die();
 	} else {
 		filename_editbox_.set_text(current_filename);
@@ -218,7 +218,7 @@ void GameMainMenuSaveGame::ok() {
 		}
 	}
 	if (type_ == Type::kSave) {
-		std::string filename = filename_editbox_.text();
+		std::string filename = filename_editbox_.get_text();
 		if (save_game(filename, !get_config_bool("nozip", false))) {
 			die();
 		} else {

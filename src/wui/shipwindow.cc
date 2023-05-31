@@ -324,9 +324,9 @@ void ShipWindow::act_rename() {
 	}
 	if (Widelands::Game* game = ibase_.get_game()) {
 		game->send_player_ship_port_name(
-		   ship->owner().player_number(), ship->serial(), name_field_->text());
+		   ship->owner().player_number(), ship->serial(), name_field_->get_text());
 	} else {
-		ship->set_shipname(name_field_->text());
+		ship->set_shipname(name_field_->get_text());
 	}
 }
 

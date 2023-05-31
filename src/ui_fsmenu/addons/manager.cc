@@ -38,7 +38,7 @@
 #include "scripting/lua_table.h"
 #include "ui_basic/color_chooser.h"
 #include "ui_basic/messagebox.h"
-#include "ui_basic/multilineeditbox.h"
+#include "ui_basic/textinput.h"
 #include "ui_fsmenu/addons/contact.h"
 #include "ui_fsmenu/addons/login_box.h"
 #include "ui_fsmenu/addons/packager.h"
@@ -965,14 +965,14 @@ bool AddOnsCtrl::matches_filter(std::shared_ptr<AddOns::AddOnInfo> info) {
 		return false;
 	}
 
-	if (filter_name_.text().empty()) {
+	if (filter_name_.get_text().empty()) {
 		// no text filter given, so we accept it
 		return true;
 	}
 	auto array = {info->descname(), info->author(), info->upload_username, info->internal_name,
 	              info->description()};
 	return std::any_of(array.begin(), array.end(), [this](const std::string& text) {
-		return text.find(filter_name_.text()) != std::string::npos;
+		return text.find(filter_name_.get_text()) != std::string::npos;
 	});
 }
 

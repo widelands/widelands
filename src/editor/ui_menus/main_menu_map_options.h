@@ -24,12 +24,11 @@
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
-#include "ui_basic/editbox.h"
 #include "ui_basic/icon.h"
-#include "ui_basic/multilineeditbox.h"
 #include "ui_basic/spinbox.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
+#include "ui_basic/textinput.h"
 #include "ui_basic/unique_window.h"
 
 class EditorInteractive;

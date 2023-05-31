@@ -26,8 +26,8 @@
 #include "editor/ui_menus/main_menu_map_options.h"
 #include "logic/note_map_options.h"
 #include "ui_basic/button.h"
-#include "ui_basic/editbox.h"
 #include "ui_basic/textarea.h"
+#include "ui_basic/textinput.h"
 
 /**
  * Choose a filename and save your brand new created map

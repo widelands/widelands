@@ -100,7 +100,7 @@ ScreenshotUploadWindow::ScreenshotUploadWindow(AddOnsCtrl& ctrl,
 	   [this](uint32_t /* value */) { icon_.set_icon(g_image_cache->get(images_.get_selected())); });
 	cancel_.sigclicked.connect([this]() { die(); });
 	ok_.sigclicked.connect([this, &ctrl, info, remote]() {
-		if (!images_.has_selection() || description_.text().empty()) {
+		if (!images_.has_selection() || description_.get_text().empty()) {
 			return;
 		}
 		const std::string& sel = images_.get_selected();
@@ -109,7 +109,7 @@ ScreenshotUploadWindow::ScreenshotUploadWindow(AddOnsCtrl& ctrl,
 		cancel_.set_enabled(false);
 		do_redraw_now();
 		try {
-			ctrl.net().upload_screenshot(info->internal_name, sel, description_.text());
+			ctrl.net().upload_screenshot(info->internal_name, sel, description_.get_text());
 			if (remote != nullptr) {
 				*remote = ctrl.net().fetch_one_remote(remote->internal_name);
 				ctrl.rebuild(false);
@@ -138,7 +138,7 @@ ScreenshotUploadWindow::ScreenshotUploadWindow(AddOnsCtrl& ctrl,
 }
 
 void ScreenshotUploadWindow::think() {
-	ok_.set_enabled(images_.has_selection() && !description_.text().empty());
+	ok_.set_enabled(images_.has_selection() && !description_.get_text().empty());
 	UI::Window::think();
 }
 

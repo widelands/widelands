@@ -413,8 +413,8 @@ public:
 
 	/** Whether the data is valid and can be submitted. */
 	bool ok_enabled() const {
-		return priority_.has_selection() && !name_.text().empty() &&
-		       std::regex_match(categories_.text(), std::regex("^( *[a-zA-Z]+)+ *$"));
+		return priority_.has_selection() && !name_.get_text().empty() &&
+		       std::regex_match(categories_.get_text(), std::regex("^( *[a-zA-Z]+)+ *$"));
 	}
 
 	/**
@@ -424,10 +424,11 @@ public:
 	std::string make_data() const {
 		std::string str = priority_.get_selected();
 		str += '\n';
-		str += name_.text();
+		str += name_.get_text();
 		str += "\n[";
 
-		str += std::regex_replace(categories_.text(), std::regex("( *)([a-zA-Z]+)( +|$)"), "\"$2\",");
+		str +=
+		   std::regex_replace(categories_.get_text(), std::regex("( *)([a-zA-Z]+)( +|$)"), "\"$2\",");
 		str.pop_back();  // strip last ','
 
 		str += ']';

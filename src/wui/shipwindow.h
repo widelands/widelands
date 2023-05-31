@@ -26,7 +26,7 @@
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/walkingdir.h"
 #include "ui_basic/button.h"
-#include "ui_basic/editbox.h"
+#include "ui_basic/textinput.h"
 #include "ui_basic/unique_window.h"
 #include "wui/interactive_base.h"
 #include "wui/itemwaresdisplay.h"
