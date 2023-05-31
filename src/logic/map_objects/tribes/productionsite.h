@@ -451,6 +451,7 @@ protected:
 	void update_statistics_string(std::string* statistics) override;
 
 	void load_finish(EditorGameBase& egbase) override;
+	void postload(EditorGameBase& egbase) override;
 
 	struct State {
 		const ProductionProgram* program{nullptr};  ///< currently running program
