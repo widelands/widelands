@@ -429,7 +429,7 @@ void WordWrap::draw(RenderTarget& dst,
 	}
 }
 void WordWrap::highlight_selection(RenderTarget& dst,
-                                   uint32_t scrollbar_position,
+                                   uint32_t /* scrollbar_position */,
                                    uint32_t selection_start_line,
                                    uint32_t selection_start_x,
                                    uint32_t selection_end_line,
@@ -439,13 +439,12 @@ void WordWrap::highlight_selection(RenderTarget& dst,
                                    uint32_t line,
                                    const Vector2i& point) const {
 
-	Vector2i highlight_start = Vector2i::zero();
+	Vector2i highlight_start = point;
 	Vector2i highlight_end = Vector2i::zero();
 
 	if (line == selection_start_line) {
 		std::string text_before_selection = lines_[line].text.substr(0, selection_start_x);
-		highlight_start = Vector2i(text_width(text_before_selection, fontsize_) + point.x,
-		                           (line * fontheight) - scrollbar_position);
+		highlight_start.x += text_width(text_before_selection, fontsize_);
 
 		if (line == selection_end_line) {
 			size_t nr_characters = selection_end_x - selection_start_x;
@@ -457,21 +456,19 @@ void WordWrap::highlight_selection(RenderTarget& dst,
 		}
 
 	} else if (line > selection_start_line && line < selection_end_line) {
-		highlight_start = Vector2i(point.x, (line * fontheight) - scrollbar_position);
 		highlight_end = Vector2i(text_width(lines_[line].text, fontsize_), fontheight);
 
 	} else if (line == selection_end_line) {
-		highlight_start = Vector2i(point.x, (line * fontheight) - scrollbar_position);
 		highlight_end =
 		   Vector2i(text_width(lines_[line].text.substr(0, selection_end_x), fontsize_), fontheight);
 	}
 
-	/* Correct for pixel-perfect alignment. */
+	if (highlight_end.x <= 0) {
+		return;
+	}
 	if (expand_selection_y.has_value()) {
 		highlight_start.y = expand_selection_y->first;
 		highlight_end.y = expand_selection_y->second;
-	} else {
-		highlight_start.y++;
 	}
 
 	dst.brighten_rect(
