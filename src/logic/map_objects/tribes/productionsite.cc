@@ -309,6 +309,15 @@ void ProductionSite::load_finish(EditorGameBase& egbase) {
 	format_statistics_string();
 }
 
+void ProductionSite::postload(EditorGameBase& egbase) {
+	Building::postload(egbase);
+
+	// TODO(Nordfriese): This is only needed for v1.1 savegame compatibility
+	if ((descr().has_ship_fleet_check() && ship_fleet_interfaces_.empty()) || (descr().has_ferry_fleet_check() && ferry_fleet_interfaces_.empty())) {
+		init_yard_interfaces(egbase);
+	}
+}
+
 /**
  * Display whether we're occupied.
  */
