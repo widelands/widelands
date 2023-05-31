@@ -374,7 +374,8 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 			const Field& fields_end = map()[map().max_index()];
 			for (Field* field = &map()[0]; field < &fields_end; ++field) {
 				if (BaseImmovable* const imm = field->get_immovable(); imm != nullptr) {
-					if (imm->descr().type() >= MapObjectType::BUILDING && field != &map()[dynamic_cast<Building*>(imm)->get_position()]) {
+					if (imm->descr().type() >= MapObjectType::BUILDING &&
+					    field != &map()[dynamic_cast<Building*>(imm)->get_position()]) {
 						continue;  //  not the building's main position
 					}
 					imm->load_finish(egbase);
@@ -451,7 +452,8 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 			const Field& fields_end = map()[map().max_index()];
 			for (Field* field = &map()[0]; field < &fields_end; ++field) {
 				if (BaseImmovable* const imm = field->get_immovable(); imm != nullptr) {
-					if (imm->descr().type() >= MapObjectType::BUILDING && field != &map()[dynamic_cast<Building*>(imm)->get_position()]) {
+					if (imm->descr().type() >= MapObjectType::BUILDING &&
+					    field != &map()[dynamic_cast<Building*>(imm)->get_position()]) {
 						continue;  //  not the building's main position
 					}
 					imm->postload(egbase);
