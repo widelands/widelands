@@ -20,7 +20,7 @@
 
 #include "graphic/text_layout.h"
 #include "logic/game_data_error.h"
-#include "ui_basic/editbox.h"
+#include "ui_basic/textinput.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/mapviewpixelfunctions.h"
@@ -289,7 +289,7 @@ void QuickNavigationWindow::rebuild() {
 
 		UI::EditBox& e = *new UI::EditBox(&box, 0, 0, 300, UI::PanelStyle::kWui);
 		e.set_text(q.landmarks()[i].name);
-		e.changed.connect([&q, &e, i]() { q.landmarks()[i].name = e.text(); });
+		e.changed.connect([&q, &e, i]() { q.landmarks()[i].name = e.get_text(); });
 		box.add(&e, UI::Box::Resizing::kExpandBoth);
 
 		content_box_->add(&box, UI::Box::Resizing::kFullSize);

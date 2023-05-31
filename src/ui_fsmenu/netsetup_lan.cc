@@ -164,7 +164,7 @@ void NetSetupLAN::think() {
 }
 
 bool NetSetupLAN::get_host_address(NetAddress* addr) {
-	const std::string& host = hostname_.text();
+	const std::string& host = hostname_.get_text();
 
 	for (uint32_t i = 0; i < table_.size(); ++i) {
 		const NetOpenGame& game = *table_[i];
@@ -186,7 +186,7 @@ bool NetSetupLAN::get_host_address(NetAddress* addr) {
 }
 
 void NetSetupLAN::clicked_ok() {
-	if (hostname_.text().empty()) {
+	if (hostname_.get_text().empty()) {
 		clicked_hostgame();
 	} else {
 		clicked_joingame();
@@ -273,7 +273,7 @@ void NetSetupLAN::discovery_callback(int32_t const type,
 void NetSetupLAN::change_hostname() {
 	// Allow user to enter a hostname manually
 	table_.select(UI::Table<const NetOpenGame* const>::no_selection_index());
-	joingame_.set_enabled(!hostname_.text().empty());
+	joingame_.set_enabled(!hostname_.get_text().empty());
 }
 
 void NetSetupLAN::change_playername() {
@@ -281,7 +281,7 @@ void NetSetupLAN::change_playername() {
 	playername_.set_tooltip("");
 	hostgame_.set_enabled(true);
 
-	if (!InternetGaming::ref().valid_username(playername_.text())) {
+	if (!InternetGaming::ref().valid_username(playername_.get_text())) {
 		playername_.set_warning(true);
 		playername_.set_tooltip(_("Enter a valid nickname. This value may contain only "
 		                          "English letters, numbers, and @ . + - _ characters "
@@ -290,16 +290,16 @@ void NetSetupLAN::change_playername() {
 		hostgame_.set_enabled(false);
 		return;
 	}
-	if (!hostname_.text().empty()) {
+	if (!hostname_.get_text().empty()) {
 		joingame_.set_enabled(true);
 	}
 
-	set_config_string("nickname", playername_.text());
+	set_config_string("nickname", playername_.get_text());
 }
 
 void NetSetupLAN::clicked_joingame() {
 	// Save selected host so users can reload it for reconnection.
-	set_config_string("lasthost", hostname_.text());
+	set_config_string("lasthost", hostname_.get_text());
 
 	NetAddress addr;
 	if (!get_host_address(&addr)) {
@@ -313,7 +313,7 @@ void NetSetupLAN::clicked_joingame() {
 
 	try {
 		running_game_.reset(new GameClient(
-		   capsule_, running_game_, std::make_pair(addr, NetAddress()), playername_.text()));
+		   capsule_, running_game_, std::make_pair(addr, NetAddress()), playername_.get_text()));
 	} catch (const std::exception& e) {
 		running_game_.reset();
 		UI::WLMessageBox mbox(&capsule_.menu(), UI::WindowStyle::kFsMenu, _("Network Error"),
@@ -335,7 +335,8 @@ void NetSetupLAN::clicked_hostgame() {
 	}
 
 	try {
-		running_game_.reset(new GameHost(&capsule_, running_game_, playername_.text(), tribeinfos));
+		running_game_.reset(
+		   new GameHost(&capsule_, running_game_, playername_.get_text(), tribeinfos));
 	} catch (const std::exception& e) {
 		running_game_.reset();
 		UI::WLMessageBox mbox(&capsule_.menu(), UI::WindowStyle::kFsMenu, _("Network Error"),

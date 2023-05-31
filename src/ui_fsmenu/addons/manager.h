@@ -29,10 +29,10 @@
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
-#include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
+#include "ui_basic/textinput.h"
 #include "ui_basic/window.h"
 #include "ui_fsmenu/main.h"
 

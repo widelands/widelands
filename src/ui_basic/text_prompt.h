@@ -21,7 +21,7 @@
 
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
-#include "ui_basic/editbox.h"
+#include "ui_basic/textinput.h"
 #include "ui_basic/window.h"
 
 namespace UI {
@@ -35,12 +35,12 @@ public:
 	                    const std::string& text);
 	~TextPrompt() override = default;
 
-	const std::string& text() const {
-		return editbox_.text();
+	[[nodiscard]] const std::string& get_text() const {
+		return editbox_.get_text();
 	}
 
 	/** Add custom content here, if desired. */
-	UI::Box& content_box() {
+	[[nodiscard]] UI::Box& content_box() {
 		return content_box_;
 	}
 

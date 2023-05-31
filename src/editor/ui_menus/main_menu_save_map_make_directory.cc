@@ -95,7 +95,7 @@ void MainMenuSaveMapMakeDirectory::start() {
  * Editbox changed
  */
 void MainMenuSaveMapMakeDirectory::edit_changed() {
-	const std::string& text = edit_.text();
+	const std::string& text = edit_.get_text();
 	// Prevent the user from creating nonsense directory names, like e.g. ".." or "...".
 	const bool is_legal_filename = FileSystemHelper::is_legal_filename(text);
 	// Prevent the user from creating directory names that the game would
