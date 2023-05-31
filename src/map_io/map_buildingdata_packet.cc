@@ -835,8 +835,6 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 					productionsite.ferry_fleet_interfaces_.push_back(
 					   &mol.get<FerryFleetYardInterface>(fr.unsigned_32()));
 				}
-			} else {
-				productionsite.init_yard_interfaces(game);
 			}
 
 			productionsite.infinite_production_ = packet_version >= 10 && fr.unsigned_8() > 0;

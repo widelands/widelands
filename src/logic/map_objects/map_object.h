@@ -195,6 +195,8 @@ public:
 
 	virtual void load_finish(EditorGameBase&) {
 	}
+	virtual void postload(EditorGameBase&) {
+	}
 
 	virtual const Image* representative_image() const;
 
