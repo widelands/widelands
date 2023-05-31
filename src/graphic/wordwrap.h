@@ -19,6 +19,7 @@
 #define WL_GRAPHIC_WORDWRAP_H
 
 #include <memory>
+#include <optional>
 
 #include <base/scoped_timer.h>
 #include <unicode/uchar.h>
@@ -54,13 +55,14 @@ struct WordWrap {
 
 	void draw(RenderTarget& dst,
 	          Vector2i where,
-	          Align align = UI::Align::kLeft,
-	          uint32_t caret = std::numeric_limits<uint32_t>::max(),
-	          bool with_selection = false,
-	          uint32_t selection_start = 0,
-	          uint32_t selection_end = 0,
-	          uint32_t scrollbar_position = 0,
-	          const std::string& caret_image_path = std::string());
+	          UI::Align align,
+	          uint32_t caret,
+	          bool with_selection,
+	          std::optional<std::pair<int32_t, int32_t>> expand_selection_y,
+	          uint32_t selection_start,
+	          uint32_t selection_end,
+	          uint32_t scrollbar_position,
+	          const std::string& caret_image_path);
 
 	void calc_wrapped_pos(uint32_t caret, uint32_t& line, uint32_t& pos) const;
 	[[nodiscard]] uint32_t nrlines() const {
@@ -70,6 +72,7 @@ struct WordWrap {
 	[[nodiscard]] uint32_t offset_of_line_at(int32_t y) const;
 	[[nodiscard]] std::string text_of_line_at(int32_t y) const;
 	int text_width_of(std::string& text) const;
+	[[nodiscard]] uint32_t lineheight() const;
 
 	void focus();
 	void enter_cursor_movement_mode();
@@ -111,6 +114,7 @@ private:
 	                         uint32_t selection_start_x,
 	                         uint32_t selection_end_line,
 	                         uint32_t selection_end_x,
+	                         std::optional<std::pair<int32_t, int32_t>> expand_selection_y,
 	                         int fontheight,
 	                         uint32_t line,
 	                         const Vector2i& point) const;

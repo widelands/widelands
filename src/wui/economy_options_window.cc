@@ -572,7 +572,7 @@ void EconomyOptionsWindow::update_profiles_select(const std::string& current_pro
 }
 
 void EconomyOptionsWindow::SaveProfileWindow::update_save_enabled() {
-	const std::string& text = profile_name_.text();
+	const std::string& text = profile_name_.get_text();
 	if (text.empty() || text == kDefaultEconomyProfile) {
 		save_.set_enabled(false);
 		save_.set_tooltip(text.empty() ? _("The profile name cannot be empty") :
@@ -610,7 +610,7 @@ void EconomyOptionsWindow::SaveProfileWindow::update_table() {
 }
 
 void EconomyOptionsWindow::SaveProfileWindow::save_profile() {
-	const std::string name = profile_name_.text();
+	const std::string name = profile_name_.get_text();
 	assert(!name.empty());
 	assert(name != kDefaultEconomyProfile);
 	for (const auto& pair : economy_options_->get_predefined_targets()) {

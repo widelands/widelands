@@ -142,11 +142,11 @@ AddOnsLoginBox::AddOnsLoginBox(UI::Panel& parent, UI::WindowStyle style)
 }
 
 const std::string& AddOnsLoginBox::get_username() const {
-	return username_.text();
+	return username_.get_text();
 }
 
 std::string AddOnsLoginBox::get_password() const {
-	const std::string& p = password_.text();
+	const std::string& p = password_.get_text();
 	return (p.empty() || p == password_sha1_) ? p : crypto::sha1(p);
 }
 
@@ -168,14 +168,14 @@ bool AddOnsLoginBox::handle_key(bool down, SDL_Keysym code) {
 
 void AddOnsLoginBox::think() {
 	UI::Window::think();
-	ok_.set_enabled(!username_.text().empty() && !password_.text().empty());
-	if (!password_sha1_.empty() && password_.has_focus() && password_.text() == password_sha1_) {
+	ok_.set_enabled(!username_.get_text().empty() && !password_.get_text().empty());
+	if (!password_sha1_.empty() && password_.has_focus() && password_.get_text() == password_sha1_) {
 		password_.set_text("");
 	}
 }
 
 void AddOnsLoginBox::ok() {
-	if (!username_.text().empty() && !password_.text().empty()) {
+	if (!username_.get_text().empty() && !password_.get_text().empty()) {
 		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 	}
 }

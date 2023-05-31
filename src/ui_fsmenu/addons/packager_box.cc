@@ -241,7 +241,7 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* 
 
 	dirstruct_displayname_.changed.connect([this]() {
 		selected_->set_dirname(dirstruct_to_tree_map_[dirstruct_.selection_index()].back(),
-		                       dirstruct_displayname_.text());
+		                       dirstruct_displayname_.get_text());
 		if (modified_) {
 			modified_();
 		}
@@ -386,7 +386,7 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 				return;
 			}
 
-			std::string name = n.text();
+			std::string name = n.get_text();
 
 			std::string err = check_addon_filename_validity(name);
 			if (!err.empty()) {
@@ -541,7 +541,7 @@ std::string CampaignAddOnsPackagerBox::reverse_icon_lookup(const std::string& va
 }
 
 void CampaignAddOnsPackagerBox::edited_difficulty_icon() {
-	if (difficulty_.text().empty() || difficulty_.text() == last_difficulty_) {
+	if (difficulty_.get_text().empty() || difficulty_.get_text() == last_difficulty_) {
 		// Transfer icon to editbox
 		last_difficulty_ = reverse_icon_lookup(icon_difficulty_.get_selected());
 		difficulty_.set_text(last_difficulty_);
@@ -550,17 +550,17 @@ void CampaignAddOnsPackagerBox::edited_difficulty_icon() {
 }
 
 void CampaignAddOnsPackagerBox::edited_difficulty() {
-	if (AddOns::kDifficultyIcons.count(difficulty_.text()) != 0u) {
+	if (AddOns::kDifficultyIcons.count(difficulty_.get_text()) != 0u) {
 		// Transfer editbox to icon
-		last_difficulty_ = difficulty_.text();
+		last_difficulty_ = difficulty_.get_text();
 		icon_difficulty_.select(AddOns::kDifficultyIcons.at(last_difficulty_));
 	}
 	edited();
 }
 
 void CampaignAddOnsPackagerBox::edited() {
-	selected_->set_difficulty(difficulty_.text());
-	selected_->set_short_desc(short_desc_.text());
+	selected_->set_difficulty(difficulty_.get_text());
+	selected_->set_short_desc(short_desc_.get_text());
 	selected_->set_tribe(tribe_select_.get_selected());
 	selected_->set_difficulty_icon(icon_difficulty_.get_selected());
 	if (modified_) {

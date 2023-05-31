@@ -25,7 +25,7 @@
 #include "logic/map_objects/pinned_note.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
-#include "ui_basic/editbox.h"
+#include "ui_basic/textinput.h"
 #include "ui_basic/unique_window.h"
 
 ///  Shows the current teams lineup and allows the player to perform diplomatic actions.

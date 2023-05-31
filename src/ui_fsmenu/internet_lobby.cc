@@ -426,7 +426,7 @@ void InternetLobby::change_servername() {
 	const std::vector<InternetGame>* games = InternetGaming::ref().games();
 	if (games != nullptr) {
 		for (const InternetGame& game : *games) {
-			if (game.name == servername_.text()) {
+			if (game.name == servername_.get_text()) {
 				hostgame_.set_enabled(false);
 				servername_.set_warning(true);
 				servername_.set_tooltip(
@@ -485,7 +485,7 @@ void InternetLobby::clicked_joingame() {
 void InternetLobby::clicked_hostgame() {
 	// Save selected servername as default for next time and during that take care that the name is
 	// not empty.
-	std::string servername_ui = servername_.text();
+	std::string servername_ui = servername_.get_text();
 
 	const std::vector<InternetGame>* games = InternetGaming::ref().games();
 	if (games != nullptr) {
