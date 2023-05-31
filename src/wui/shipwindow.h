@@ -89,7 +89,8 @@ private:
 	UI::Button* btn_scout_[Widelands::LAST_DIRECTION];
 	UI::Button* btn_construct_port_;
 	UI::Button* btn_warship_stay_;
-	using DestinationWrapper = std::pair<Widelands::OPtr<Widelands::MapObject>, const Widelands::DetectedPortSpace*>;
+	using DestinationWrapper =
+	   std::pair<Widelands::OPtr<Widelands::MapObject>, const Widelands::DetectedPortSpace*>;
 	UI::Dropdown<DestinationWrapper>* set_destination_;
 	bool is_updating_destination_dropdown_{false};
 	ItemWaresDisplay* display_;

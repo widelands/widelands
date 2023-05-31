@@ -610,7 +610,8 @@ public:
 	void reserve_shipname(const std::string& name);
 	void reserve_warehousename(const std::string& name);
 
-	[[nodiscard]] const std::vector<std::unique_ptr<DetectedPortSpace>>& detected_port_spaces() const {
+	[[nodiscard]] const std::vector<std::unique_ptr<DetectedPortSpace>>&
+	detected_port_spaces() const {
 		return detected_port_spaces_;
 	}
 	void detect_port_space(std::unique_ptr<DetectedPortSpace> new_dps);

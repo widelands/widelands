@@ -106,7 +106,9 @@ struct Ship : Bob {
 
 	/* A ship's destination can be a port, or another ship, or a pinned note (or nullptr). */
 	void set_destination(EditorGameBase& egbase, MapObject* dest, bool is_playercommand = false);
-	void set_destination(EditorGameBase& egbase, const DetectedPortSpace& dest, bool is_playercommand = false);
+	void set_destination(EditorGameBase& egbase,
+	                     const DetectedPortSpace& dest,
+	                     bool is_playercommand = false);
 	[[nodiscard]] PortDock* get_destination_port(EditorGameBase& e) const;
 	[[nodiscard]] Ship* get_destination_ship(EditorGameBase& e) const;
 	[[nodiscard]] PinnedNote* get_destination_note(EditorGameBase& e) const;

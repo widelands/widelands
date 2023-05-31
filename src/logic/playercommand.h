@@ -532,7 +532,10 @@ struct CmdShipSetDestination : public PlayerCommand {
 	CmdShipSetDestination(const Time& t, PlayerNumber const p, Serial s, Serial dest)
 	   : PlayerCommand(t, p), serial_(s), destination_object_(dest) {
 	}
-	CmdShipSetDestination(const Time& t, PlayerNumber const p, Serial s, const DetectedPortSpace& dest)
+	CmdShipSetDestination(const Time& t,
+	                      PlayerNumber const p,
+	                      Serial s,
+	                      const DetectedPortSpace& dest)
 	   : PlayerCommand(t, p), serial_(s), destination_coords_(dest.serial) {
 	}
 

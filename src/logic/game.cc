@@ -1167,8 +1167,8 @@ void Game::send_player_ship_set_destination(const Ship& ship, const MapObject* d
 	                                              dest == nullptr ? 0 : dest->serial()));
 }
 void Game::send_player_ship_set_destination(const Ship& ship, const DetectedPortSpace& dest) {
-	send_player_command(new CmdShipSetDestination(get_gametime(), ship.get_owner()->player_number(),
-	                                              ship.serial(), dest));
+	send_player_command(new CmdShipSetDestination(
+	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), dest));
 }
 
 void Game::send_player_sink_ship(const Ship& ship) {

@@ -48,32 +48,45 @@ std::string DetectedPortSpace::to_string(const EditorGameBase& egbase) const {
 	std::string direction;
 	switch (direction_from_portdock) {
 	case WALK_NW:
-		direction = format(_("northwest of %s"), nearest_portdock); break;
+		direction = format(_("northwest of %s"), nearest_portdock);
+		break;
 	case WALK_NE:
-		direction = format(_("northeast of %s"), nearest_portdock); break;
+		direction = format(_("northeast of %s"), nearest_portdock);
+		break;
 	case WALK_SW:
-		direction = format(_("southwest of %s"), nearest_portdock); break;
+		direction = format(_("southwest of %s"), nearest_portdock);
+		break;
 	case WALK_SE:
-		direction = format(_("southeast of %s"), nearest_portdock); break;
-	case WALK_W :
-		direction = format(_("west of %s"), nearest_portdock); break;
-	case WALK_E :
-		direction = format(_("east of %s"), nearest_portdock); break;
-	default: break;
+		direction = format(_("southeast of %s"), nearest_portdock);
+		break;
+	case WALK_W:
+		direction = format(_("west of %s"), nearest_portdock);
+		break;
+	case WALK_E:
+		direction = format(_("east of %s"), nearest_portdock);
+		break;
+	default:
+		break;
 	}
 
 	if (owner == 0) {
 		if (direction.empty()) {
-			return format(_("Unowned port space discovered at %1$s by %2$s"), gametimestring(time_discovered.get()), discovering_ship);
+			return format(_("Unowned port space discovered at %1$s by %2$s"),
+			              gametimestring(time_discovered.get()), discovering_ship);
 		}
 		/** TRANSLATORS: Last placeholder is "northwest/southeast/... of <port name>" */
-		return format(_("Unowned port space discovered at %1$s by %2$s %3$s"), gametimestring(time_discovered.get()), discovering_ship, direction);
+		return format(_("Unowned port space discovered at %1$s by %2$s %3$s"),
+		              gametimestring(time_discovered.get()), discovering_ship, direction);
 	}
 	if (direction.empty()) {
-		return format(_("Port space of %1$s discovered at %2$s by %3$s"), egbase.player(owner).get_name(), gametimestring(time_discovered.get()), discovering_ship);
+		return format(_("Port space of %1$s discovered at %2$s by %3$s"),
+		              egbase.player(owner).get_name(), gametimestring(time_discovered.get()),
+		              discovering_ship);
 	}
 	/** TRANSLATORS: Last placeholder is "northwest/southeast/... of <port name>" */
-	return format(_("Port space of %1$s discovered at %2$s by %3$s %4$s"), egbase.player(owner).get_name(), gametimestring(time_discovered.get()), discovering_ship, direction);
+	return format(_("Port space of %1$s discovered at %2$s by %3$s %4$s"),
+	              egbase.player(owner).get_name(), gametimestring(time_discovered.get()),
+	              discovering_ship, direction);
 }
 
 }  // namespace Widelands

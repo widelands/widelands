@@ -300,8 +300,8 @@ void ShipWindow::update_destination_buttons(const Widelands::Ship* ship) {
 		all_spaces.push_back(dps.get());
 	}
 
-	bool needs_update =
-	   (set_destination_->size() != all_ports.size() + all_ships.size() + all_notes.size() + all_spaces.size() + 1);
+	bool needs_update = (set_destination_->size() != all_ports.size() + all_ships.size() +
+	                                                    all_notes.size() + all_spaces.size() + 1);
 	if (!needs_update) {
 		size_t i = 0;
 		for (Widelands::PortDock* pd : all_ports) {
@@ -339,12 +339,13 @@ void ShipWindow::update_destination_buttons(const Widelands::Ship* ship) {
 		set_destination_->add(_("(none)"), DestinationWrapper(), nullptr, !ship->has_destination());
 
 		for (Widelands::PortDock* pd : all_ports) {
-			set_destination_->add(pd->get_warehouse()->get_warehouse_name(), DestinationWrapper(pd, nullptr),
-			                      pd->get_warehouse()->descr().icon(), pd == dest_dock);
+			set_destination_->add(pd->get_warehouse()->get_warehouse_name(),
+			                      DestinationWrapper(pd, nullptr), pd->get_warehouse()->descr().icon(),
+			                      pd == dest_dock);
 		}
 		for (Widelands::Ship* temp_ship : all_ships) {
-			set_destination_->add(temp_ship->get_shipname(), DestinationWrapper(temp_ship, nullptr), temp_ship->descr().icon(),
-			                      temp_ship == dest_ship);
+			set_destination_->add(temp_ship->get_shipname(), DestinationWrapper(temp_ship, nullptr),
+			                      temp_ship->descr().icon(), temp_ship == dest_ship);
 		}
 		for (Widelands::PinnedNote* note : all_notes) {
 			set_destination_->add(
@@ -354,7 +355,8 @@ void ShipWindow::update_destination_buttons(const Widelands::Ship* ship) {
 			   note == dest_note);
 		}
 		for (const Widelands::DetectedPortSpace* temp_dps : all_spaces) {
-			set_destination_->add(temp_dps->to_string(egbase), DestinationWrapper(nullptr, temp_dps), g_image_cache->get("images/wui/fieldaction/menu_tab_buildport.png"),
+			set_destination_->add(temp_dps->to_string(egbase), DestinationWrapper(nullptr, temp_dps),
+			                      g_image_cache->get("images/wui/fieldaction/menu_tab_buildport.png"),
 			                      temp_dps == dest_space);
 		}
 	} else if (!set_destination_->is_expanded()) {

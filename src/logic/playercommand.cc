@@ -1261,7 +1261,8 @@ void CmdShipSetDestination::execute(Game& game) {
 	upcast(Ship, ship, game.objects().get_object(serial_));
 	if (ship != nullptr && ship->get_owner()->player_number() == sender()) {
 		if (destination_coords_ != 0U) {
-			ship->set_destination(game, ship->owner().get_detected_port_space(destination_coords_), true);
+			ship->set_destination(
+			   game, ship->owner().get_detected_port_space(destination_coords_), true);
 		} else {
 			ship->set_destination(game, game.objects().get_object(destination_object_), true);
 		}
@@ -1299,7 +1300,8 @@ void CmdShipSetDestination::write(FileWrite& fw, EditorGameBase& egbase, MapObje
 	PlayerCommand::write(fw, egbase, mos);
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
-	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(destination_object_)));
+	fw.unsigned_32(
+	   mos.get_object_file_index_or_zero(egbase.objects().get_object(destination_object_)));
 	fw.unsigned_32(destination_coords_);
 }
 
