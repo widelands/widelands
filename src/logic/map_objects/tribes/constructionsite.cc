@@ -349,8 +349,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 				if (ms->desired_capacity != b.soldier_control()->soldier_capacity()) {
 					b.mutable_soldier_control()->set_soldier_capacity(ms->desired_capacity);
 				}
-				dynamic_cast<MilitarySite&>(b).set_soldier_preference(
-				   ms->prefer_heroes ? SoldierPreference::kHeroes : SoldierPreference::kRookies);
+				dynamic_cast<MilitarySite&>(b).set_soldier_preference(ms->soldier_preference);
 			} else if (upcast(WarehouseSettings, ws, settings_.get())) {
 				Warehouse& site = dynamic_cast<Warehouse&>(b);
 				for (const auto& pair : ws->ware_preferences) {
@@ -531,7 +530,7 @@ void ConstructionSite::enhance(const EditorGameBase& egbase) {
 		new_settings->desired_capacity = std::max<uint32_t>(
 		   1,
 		   new_desired_capacity(ms->max_capacity, ms->desired_capacity, new_settings->max_capacity));
-		new_settings->prefer_heroes = ms->prefer_heroes;
+		new_settings->soldier_preference = ms->soldier_preference;
 	} break;
 	default:
 		// TODO(Nordfriese): Add support for markets when trading is implemented

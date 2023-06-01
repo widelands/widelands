@@ -87,7 +87,7 @@ struct MilitarysiteSettings : public BuildingSettings {
 
 	const uint32_t max_capacity;
 	uint32_t desired_capacity;
-	bool prefer_heroes;
+	SoldierPreference soldier_preference;
 };
 
 struct TrainingsiteSettings : public ProductionsiteSettings {

@@ -483,20 +483,26 @@ SoldierList::SoldierList(UI::Panel& parent,
 	bool can_act = ibase_.can_act(building_or_ship_.owner().player_number());
 	if (building_or_ship.descr().type() == Widelands::MapObjectType::MILITARYSITE) {
 		upcast(Widelands::MilitarySite, ms, &building_or_ship);
+		// Make sure the order remains consistent with the constants of enum SoldierPreference!
 		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, Vector2i::zero(),
 		                               g_image_cache->get("images/wui/buildings/prefer_rookies.png"),
 		                               _("Prefer rookies"));
 		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, Vector2i(32, 0),
 		                               g_image_cache->get("images/wui/buildings/prefer_heroes.png"),
 		                               _("Prefer heroes"));
+		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, Vector2i(32, 0),
+		                               g_image_cache->get("images/wui/buildings/prefer_average.png"),
+		                               _("Prefer average"));
+		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, Vector2i(32, 0),
+		                               g_image_cache->get("images/wui/buildings/prefer_any.png"),
+		                               _("No preference"));
 		UI::Radiobutton* button = soldier_preference_.get_first_button();
 		while (button != nullptr) {
 			buttons->add(button);
 			button = button->next_button();
 		}
 
-		soldier_preference_.set_state(
-		   ms->get_soldier_preference() == Widelands::SoldierPreference::kHeroes ? 1 : 0, false);
+		soldier_preference_.set_state(static_cast<uint8_t>(ms->get_soldier_preference()), false);
 		if (can_act) {
 			soldier_preference_.changedto.connect([this](int32_t a) { set_soldier_preference(a); });
 		} else {
@@ -512,14 +518,7 @@ SoldierList::SoldierList(UI::Panel& parent,
 void SoldierList::think() {
 	if (building_or_ship_.descr().type() == Widelands::MapObjectType::MILITARYSITE) {
 		upcast(Widelands::MilitarySite, ms, &building_or_ship_);
-		switch (ms->get_soldier_preference()) {
-		case Widelands::SoldierPreference::kRookies:
-			soldier_preference_.set_state(0, false);
-			break;
-		case Widelands::SoldierPreference::kHeroes:
-			soldier_preference_.set_state(1, false);
-			break;
-		}
+		soldier_preference_.set_state(static_cast<uint8_t>(ms->get_soldier_preference()), false);
 	}
 }
 
@@ -572,8 +571,7 @@ void SoldierList::set_soldier_preference(int32_t changed_to) {
 	assert(building_or_ship_.descr().type() == Widelands::MapObjectType::MILITARYSITE);
 	if (Widelands::Game* game = ibase_.get_game()) {
 		game->send_player_militarysite_set_soldier_preference(
-		   *soldierpanel_.get_building(), changed_to == 0 ? Widelands::SoldierPreference::kRookies :
-                                                          Widelands::SoldierPreference::kHeroes);
+		   *soldierpanel_.get_building(), static_cast<Widelands::SoldierPreference>(changed_to));
 	} else {
 		NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 	}

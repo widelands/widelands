@@ -19,7 +19,9 @@
 #ifndef WL_ECONOMY_SOLDIER_REQUEST_H
 #define WL_ECONOMY_SOLDIER_REQUEST_H
 
+#include <functional>
 #include <memory>
+#include <vector>
 
 #include "base/macros.h"
 #include "economy/request.h"
@@ -27,10 +29,15 @@
 
 namespace Widelands {
 
+class Soldier;
+
 class SoldierRequest {
 public:
-	SoldierRequest(Building& target_building, SoldierPreference pref, Request::CallbackFn callback)
-	: building_(target_building), preference_(pref), callback_(callback) {
+	using DesiredCapacityFn = std::function<Quantity()>;
+	using StationedSoldiersFn = std::function<std::vector<Soldier*>()>;
+
+	SoldierRequest(PlayerImmovable& target, SoldierPreference pref, Request::CallbackFn callback, DesiredCapacityFn dcfn, StationedSoldiersFn ssfn)
+	: target_(target), preference_(pref), callback_(callback), get_desired_capacity_(dcfn), get_stationed_soldiers_(ssfn) {
 	}
 
 	void update();
@@ -39,8 +46,8 @@ public:
 		preference_ = p;
 	}
 
-	[[nodiscard]] Building& get_building() const {
-		return building_;
+	[[nodiscard]] PlayerImmovable& get_target() const {
+		return target_;
 	}
 	[[nodiscard]] SoldierPreference get_preference() const {
 		return preference_;
@@ -59,11 +66,14 @@ public:
 private:
 	void create_request();
 
-	Building& building_;
+	PlayerImmovable& target_;
 	SoldierPreference preference_;
 	Request::CallbackFn callback_;
 
 	std::unique_ptr<Request> request_;
+
+	DesiredCapacityFn get_desired_capacity_;
+	StationedSoldiersFn get_stationed_soldiers_;
 
 	DISALLOW_COPY_AND_ASSIGN(SoldierRequest);
 };

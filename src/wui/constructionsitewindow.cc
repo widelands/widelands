@@ -257,22 +257,30 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 		   *new Panel(&soldier_preference_box, UI::PanelStyle::kWui, 0, 0, 64, 32);
 		soldier_preference_box.add(&soldier_preference_panel);
 		cs_prefer_heroes_rookies_.reset(new UI::Radiogroup());
+		// Make sure the order remains consistent with the constants of enum SoldierPreference!
 		cs_prefer_heroes_rookies_->add_button(
 		   &soldier_preference_panel, UI::PanelStyle::kWui, Vector2i::zero(),
 		   g_image_cache->get("images/wui/buildings/prefer_heroes.png"), _("Prefer heroes"));
 		cs_prefer_heroes_rookies_->add_button(
 		   &soldier_preference_panel, UI::PanelStyle::kWui, Vector2i(32, 0),
 		   g_image_cache->get("images/wui/buildings/prefer_rookies.png"), _("Prefer rookies"));
-		cs_prefer_heroes_rookies_->set_state(ms->prefer_heroes ? 0 : 1, false);
+		cs_prefer_heroes_rookies_->add_button(
+		   &soldier_preference_panel, UI::PanelStyle::kWui, Vector2i(32, 0),
+		   g_image_cache->get("images/wui/buildings/prefer_average.png"), _("Prefer average"));
+		cs_prefer_heroes_rookies_->add_button(
+		   &soldier_preference_panel, UI::PanelStyle::kWui, Vector2i(32, 0),
+		   g_image_cache->get("images/wui/buildings/prefer_any.png"), _("No preference"));
+		cs_prefer_heroes_rookies_->set_state(static_cast<uint8_t>(ms->soldier_preference), false);
 		if (can_act) {
 			cs_prefer_heroes_rookies_->changedto.connect([this](int32_t state) {
 				if (game_ != nullptr) {
 					game_->send_player_militarysite_set_soldier_preference(
 					   *construction_site_.get(ibase()->egbase()),
-					   state != 0 ? Widelands::SoldierPreference::kRookies :
-                               Widelands::SoldierPreference::kHeroes);
+					   static_cast<Widelands::SoldierPreference>(state));
 				} else {
-					NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+					if (upcast(Widelands::MilitarysiteSettings, s, construction_site_.get(ibase()->egbase())->get_settings())) {
+						s->soldier_preference = static_cast<Widelands::SoldierPreference>(state);
+					}
 				}
 			});
 		}
@@ -422,7 +430,7 @@ void ConstructionSiteWindow::think() {
 		assert(cs_soldier_capacity_);
 		assert(cs_prefer_heroes_rookies_);
 		cs_soldier_capacity_->refresh(ms->desired_capacity, ms->max_capacity, can_act);
-		cs_prefer_heroes_rookies_->set_state(ms->prefer_heroes ? 0 : 1, false);
+		cs_prefer_heroes_rookies_->set_state(static_cast<uint8_t>(ms->soldier_preference), false);
 	} else if (upcast(Widelands::WarehouseSettings, ws, construction_site->get_settings())) {
 		if (cs_launch_expedition_ != nullptr) {
 			cs_launch_expedition_->set_state(ws->launch_expedition);

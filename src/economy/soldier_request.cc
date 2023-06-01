@@ -30,15 +30,14 @@
 namespace Widelands {
 
 void SoldierRequest::create_request() {
-	request_.reset(new Request(building_, building_.owner().tribe().soldier(), callback_, wwWORKER));
+	request_.reset(new Request(target_, target_.owner().tribe().soldier(), callback_, wwWORKER));
 	request_->set_exact_match(true);
 }
 
 void SoldierRequest::update() {
-	const SoldierControl* ctrl = building_.soldier_control();
-	assert(ctrl != nullptr);
-	const Quantity target = ctrl->soldier_capacity();
-	const Quantity current = ctrl->stationed_soldiers().size();
+	const Quantity target = get_desired_capacity_();
+	const std::vector<Soldier*> stationed = get_stationed_soldiers_();
+	const Quantity current = stationed.size();
 
 	if (current > target) {
 		// Site needs to drop soldiers, request nothing.
@@ -58,15 +57,26 @@ void SoldierRequest::update() {
 	}
 
 	// Exchange soldiers, but only one at a time.
-	const int16_t max_level = dynamic_cast<const SoldierDescr*>(building_.owner().egbase().descriptions().get_worker_descr(
-			building_.owner().tribe().soldier()))->get_max_total_level();
+	if (current < 1) {
+		request_.reset();
+		return;
+	}
+
+	const SoldierDescr* descr = dynamic_cast<const SoldierDescr*>(target_.owner().egbase().descriptions().get_worker_descr(
+			target_.owner().tribe().soldier()));
+	const int16_t max_level = descr->get_max_total_level();
 	int16_t rmin = 0;
 	int16_t rmax = max_level;
 
 	switch (preference_) {
+	case SoldierPreference::kAny:
+		// No exchange desired
+		request_.reset();
+		return;
+
 	case SoldierPreference::kHeroes: {
 		int16_t worst_soldier = max_level;
-		for (Soldier* soldier : ctrl->stationed_soldiers()) {
+		for (Soldier* soldier : stationed) {
 			worst_soldier = std::min<int16_t>(worst_soldier, soldier->get_total_level());
 		}
 		rmin = worst_soldier + 1;
@@ -75,10 +85,51 @@ void SoldierRequest::update() {
 
 	case SoldierPreference::kRookies: {
 		int16_t best_soldier = 0;
-		for (Soldier* soldier : ctrl->stationed_soldiers()) {
+		for (Soldier* soldier : stationed) {
 			best_soldier = std::max<int16_t>(best_soldier, soldier->get_total_level());
 		}
 		rmax = best_soldier - 1;
+		break;
+	}
+
+	case SoldierPreference::kAverage: {
+		int32_t avg_total_level = 0;
+		uint32_t n_total_soldiers = 0;
+		for (unsigned h = 0; h <= descr->get_max_health_level(); ++h) {
+			for (unsigned a = 0; a <= descr->get_max_attack_level(); ++a) {
+				for (unsigned d = 0; d <= descr->get_max_defense_level(); ++d) {
+					for (unsigned e = 0; e <= descr->get_max_evade_level(); ++e) {
+						const uint32_t n = target_.owner().count_soldiers(h, a, d, e);
+						n_total_soldiers += n;
+						avg_total_level += n * (h + a + d + e);
+					}
+				}
+			}
+		}
+		assert(n_total_soldiers >= current);
+		avg_total_level /= n_total_soldiers;
+		assert(avg_total_level >= 0);
+		assert(avg_total_level <= max_level);
+
+		for (Soldier* soldier : stationed) {
+			int16_t level = soldier->get_total_level();
+			if (level > avg_total_level && level < rmax) {
+				rmax = level;
+			} else if (level < avg_total_level && level > rmin) {
+				rmin = level;
+			}
+		}
+
+		if (rmin < avg_total_level) {
+			++rmin;
+		} else if (rmax > avg_total_level) {
+			--rmax;
+		} else {
+			// Already a perfect fit
+			request_.reset();
+			return;
+		}
+
 		break;
 	}
 	}

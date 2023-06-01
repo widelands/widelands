@@ -711,6 +711,10 @@ std::string soldier_preference_to_string(const Widelands::SoldierPreference p) {
 		return "heroes";
 	case Widelands::SoldierPreference::kRookies:
 		return "rookies";
+	case Widelands::SoldierPreference::kAverage:
+		return "average";
+	case Widelands::SoldierPreference::kAny:
+		return "any";
 	}
 	NEVER_HERE();
 }
@@ -721,6 +725,12 @@ Widelands::SoldierPreference string_to_soldier_preference(const std::string& p) 
 	}
 	if (p == "rookies") {
 		return Widelands::SoldierPreference::kRookies;
+	}
+	if (p == "average") {
+		return Widelands::SoldierPreference::kAverage;
+	}
+	if (p == "any") {
+		return Widelands::SoldierPreference::kAny;
 	}
 	throw wexception("Invalid soldier preference '%s'", p.c_str());
 }
@@ -5632,14 +5642,12 @@ int LuaConstructionSite::set_setting_stopped(lua_State* L) {
    .. attribute:: setting_soldier_preference
 
       (RW) Only valid for militarysites under construction. ``"heroes"`` if this site will prefer
-      heroes after completion; ``"rookies"`` otherwise.
+      heroes after completion; ``"rookies"`` for rookies; ``"average"`` for average soldiers, or
+      ``"any"`` for no predilection.
 */
 int LuaConstructionSite::get_setting_soldier_preference(lua_State* L) {
 	if (upcast(Widelands::MilitarysiteSettings, ms, get(L, get_egbase(L))->get_settings())) {
-		lua_pushstring(
-		   L, soldier_preference_to_string(ms->prefer_heroes ? Widelands::SoldierPreference::kHeroes :
-                                                             Widelands::SoldierPreference::kRookies)
-		         .c_str());
+		lua_pushstring(L, soldier_preference_to_string(ms->soldier_preference).c_str());
 	} else {
 		lua_pushnil(L);
 	}
@@ -5651,8 +5659,7 @@ int LuaConstructionSite::set_setting_soldier_preference(lua_State* L) {
 		report_error(L, "This constructionsite will not become a militarysite");
 	}
 	try {
-		ms->prefer_heroes = string_to_soldier_preference(luaL_checkstring(L, -1)) ==
-		                    Widelands::SoldierPreference::kHeroes;
+		ms->soldier_preference = string_to_soldier_preference(luaL_checkstring(L, -1));
 	} catch (const WException& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -6810,7 +6817,8 @@ int LuaMilitarySite::get_capacity(lua_State* L) {
 /* RST
    .. attribute:: soldier_preference
 
-      (RW) ``"heroes"`` if this site prefers heroes; ``"rookies"`` otherwise.
+      (RW) ``"heroes"`` if this site prefers heroes; ``"rookies"`` for rookies;
+         ``"average"`` for average soldiers, or ``"any"`` for no predilection.
 */
 int LuaMilitarySite::get_soldier_preference(lua_State* L) {
 	lua_pushstring(

@@ -47,7 +47,7 @@ MilitarysiteSettings::MilitarysiteSettings(const MilitarySiteDescr& descr, const
    : BuildingSettings(descr.name(), tribe),
      max_capacity(descr.get_max_number_of_soldiers()),
      desired_capacity(descr.get_max_number_of_soldiers()),
-     prefer_heroes(descr.prefers_heroes_at_start_) {
+     soldier_preference(descr.prefers_heroes_at_start_ ? SoldierPreference::kHeroes : SoldierPreference::kRookies) {
 }
 
 TrainingsiteSettings::TrainingsiteSettings(const TrainingSiteDescr& descr, const TribeDescr& tribe)
@@ -113,7 +113,7 @@ void MilitarysiteSettings::apply(const BuildingSettings& bs) {
 	if (upcast(const MilitarysiteSettings, s, &bs)) {
 		desired_capacity =
 		   new_desired_capacity(s->max_capacity, s->desired_capacity, desired_capacity);
-		prefer_heroes = s->prefer_heroes;
+		soldier_preference = s->soldier_preference;
 	}
 }
 
@@ -202,7 +202,7 @@ void MilitarysiteSettings::read(const Game& game, FileRead& fr) {
 		const uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersionMilitarysite) {
 			desired_capacity = fr.unsigned_32();
-			prefer_heroes = (fr.unsigned_8() != 0u);
+			soldier_preference = static_cast<SoldierPreference>(fr.unsigned_8());
 		} else {
 			throw UnhandledVersionError(
 			   "MilitarysiteSettings", packet_version, kCurrentPacketVersionMilitarysite);
@@ -217,7 +217,7 @@ void MilitarysiteSettings::save(const Game& game, FileWrite& fw) const {
 	fw.unsigned_8(kCurrentPacketVersionMilitarysite);
 
 	fw.unsigned_32(desired_capacity);
-	fw.unsigned_8(prefer_heroes ? 1 : 0);
+	fw.unsigned_8(static_cast<uint8_t>(soldier_preference));
 }
 
 void ProductionsiteSettings::read(const Game& game, FileRead& fr) {

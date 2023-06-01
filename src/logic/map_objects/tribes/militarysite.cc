@@ -349,7 +349,10 @@ MilitarySite::MilitarySite(const MilitarySiteDescr& ms_descr)
      soldier_control_(this),
 
      capacity_(ms_descr.get_max_number_of_soldiers()),
-     soldier_request_(*this, ms_descr.prefers_heroes_at_start_ ? SoldierPreference::kHeroes : SoldierPreference::kRookies, MilitarySite::request_soldier_callback) {
+     soldier_request_(*this, ms_descr.prefers_heroes_at_start_ ? SoldierPreference::kHeroes : SoldierPreference::kRookies,
+     		MilitarySite::request_soldier_callback,
+     		[this]() { return soldier_control_.soldier_capacity(); },
+     		[this]() { return soldier_control_.stationed_soldiers(); }) {
 	set_attack_target(&attack_target_);
 	set_soldier_control(&soldier_control_);
 }
@@ -405,7 +408,7 @@ void MilitarySite::update_statistics_string(std::string* s) {
 	}
 
 	*s = StyleManager::color_tag(
-	   format("%s %s", get_soldier_preference() == SoldierPreference::kHeroes ? "↑" : "↓", *s),
+	   format("%s %s", soldier_preference_icon(get_soldier_preference()), *s),
 	   style.medium_color());
 }
 
@@ -479,7 +482,8 @@ void MilitarySite::cleanup(EditorGameBase& egbase) {
 
 Soldier* MilitarySite::find_least_suited_soldier() {
 	const std::vector<Soldier*> present = soldier_control_.present_soldiers();
-	const int32_t multiplier = SoldierPreference::kHeroes == get_soldier_preference() ? -1 : 1;
+	// Always kick out a rookie, unless rookies are preferred - NOCOM
+	const int32_t multiplier = get_soldier_preference() == SoldierPreference::kRookies ? 1 : -1;
 	int worst_soldier_level = INT_MIN;
 	Soldier* worst_soldier = nullptr;
 	for (Soldier* sld : present) {
@@ -518,11 +522,14 @@ bool MilitarySite::drop_least_suited_soldier(bool new_soldier_has_arrived, Soldi
 		if (nullptr != newguy && nullptr != kickoutCandidate) {
 			int32_t old_level = kickoutCandidate->get_level(TrainingAttribute::kTotal);
 			int32_t new_level = newguy->get_level(TrainingAttribute::kTotal);
-			if (SoldierPreference::kHeroes == get_soldier_preference() && old_level >= new_level) {
-				return false;
-			}
-			if (SoldierPreference::kRookies == get_soldier_preference() && old_level <= new_level) {
-				return false;
+			if (get_soldier_preference() == SoldierPreference::kRookies) {
+				if (old_level <= new_level) {
+					return false;
+				}
+			} else {  // All policies except Prefer Rookies prefer heroes - NOCOM
+				if (old_level >= new_level) {
+					return false;
+				}
 			}
 		}
 
@@ -812,7 +819,7 @@ std::unique_ptr<const BuildingSettings> MilitarySite::create_building_settings()
 	   new MilitarysiteSettings(descr(), owner().tribe()));
 	settings->desired_capacity =
 	   std::min(settings->max_capacity, soldier_control_.soldier_capacity());
-	settings->prefer_heroes = get_soldier_preference() == SoldierPreference::kHeroes;
+	settings->soldier_preference = get_soldier_preference();
 	// Prior to the resolution of a defect report against ISO C++11, local variable 'settings' would
 	// have been copied despite being returned by name, due to its not matching the function return
 	// type. Call 'std::move' explicitly to avoid copying on older compilers.

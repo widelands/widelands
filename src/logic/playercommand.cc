@@ -676,7 +676,7 @@ void CmdMilitarySiteSetSoldierPreference::execute(Game& game) {
 	MapObject* mo = game.objects().get_object(serial);
 	if (upcast(ConstructionSite, cs, mo)) {
 		if (upcast(MilitarysiteSettings, s, cs->get_settings())) {
-			s->prefer_heroes = preference == SoldierPreference::kHeroes;
+			s->soldier_preference = preference;
 		}
 	} else if (upcast(MilitarySite, building, mo)) {
 		game.get_player(sender())->military_site_set_soldier_preference(*building, preference);
