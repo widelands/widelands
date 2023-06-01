@@ -1452,13 +1452,11 @@ InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type, const
 }
 
 void Warehouse::set_desired_soldier_count(Quantity q) {
-	assert(attack_target_.can_be_attacked());
 	desired_soldier_count_ = q;
 	soldier_request_.update();
 }
 
 void Warehouse::set_soldier_preference(SoldierPreference p) {
-	assert(attack_target_.can_be_attacked());
 	soldier_request_.set_preference(p);
 	soldier_request_.update();
 }
