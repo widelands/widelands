@@ -551,6 +551,11 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 				} while (mr.advance(map));
 			}
 			warehouse.next_military_act_ = game.get_gametime();
+
+			if (packet_version >= 10) {
+				warehouse.next_swap_soldiers_time_ = Time(fr);
+				warehouse.soldier_request_.read(fr, game, mol);
+			}
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Warehouse", packet_version,
 			                            kCurrentPacketVersionWarehouseAndExpedition);
@@ -1266,6 +1271,9 @@ void MapBuildingdataPacket::write_warehouse(const Warehouse& warehouse,
 			warehouse.portdock_->expedition_bootstrap()->save(fw, game, mos);
 		}
 	}
+
+	warehouse.next_swap_soldiers_time_.save(fw);
+	warehouse.soldier_request_.write(fw, game, mos);
 }
 
 void MapBuildingdataPacket::write_militarysite(const MilitarySite& militarysite,

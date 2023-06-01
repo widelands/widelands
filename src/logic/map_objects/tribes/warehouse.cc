@@ -354,11 +354,11 @@ Quantity Warehouse::SoldierControl::max_soldier_capacity() const {
 }
 
 Quantity Warehouse::SoldierControl::soldier_capacity() const {
-	return max_soldier_capacity();
+	return warehouse_->get_desired_soldier_count();
 }
 
-void Warehouse::SoldierControl::set_soldier_capacity(Quantity /* capacity */) {
-	throw wexception("Not implemented for a Warehouse!");
+void Warehouse::SoldierControl::set_soldier_capacity(Quantity capacity) {
+	warehouse_->set_desired_soldier_count(capacity);
 }
 
 void Warehouse::SoldierControl::drop_soldier(Soldier& /* soldier */) {
@@ -392,6 +392,10 @@ Warehouse::Warehouse(const WarehouseDescr& warehouse_descr)
    : Building(warehouse_descr),
      attack_target_(this),
      soldier_control_(this),
+     soldier_request_(*this, SoldierPreference::kAny /* no exchange by default */,
+     		Warehouse::request_soldier_callback,
+     		[this]() { return soldier_control_.soldier_capacity(); },
+     		[this]() { return soldier_control_.stationed_soldiers(); }),
      supply_(new WarehouseSupply(this)) {
 	cleanup_in_progress_ = false;
 	set_attack_target(&attack_target_);
@@ -817,6 +821,11 @@ void Warehouse::act(Game& game, uint32_t const data) {
 			}
 		}
 		next_military_act_ = schedule_act(game, Duration(1000));
+	}
+
+	if (gametime > next_swap_soldiers_time_) {
+		next_swap_soldiers_time_ = gametime + kSoldierSwapTime;
+		soldier_request_.update();
 	}
 
 	if (next_stock_remove_act_ <= gametime) {
@@ -1442,6 +1451,29 @@ InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type, const
                          portdock_->expedition_bootstrap()->inputqueue(index, type, false);
 }
 
+void Warehouse::set_desired_soldier_count(Quantity q) {
+	assert(attack_target_.can_be_attacked());
+	desired_soldier_count_ = q;
+	soldier_request_.update();
+}
+
+void Warehouse::set_soldier_preference(SoldierPreference p) {
+	assert(attack_target_.can_be_attacked());
+	soldier_request_.set_preference(p);
+	soldier_request_.update();
+}
+
+void Warehouse::request_soldier_callback(Game& game,
+                                            Request& /* req */,
+                                            DescriptionIndex /* index */,
+                                            Worker* const w,
+                                            PlayerImmovable& target) {
+	Warehouse& wh = dynamic_cast<Warehouse&>(target);
+	Soldier& s = dynamic_cast<Soldier&>(*w);
+
+	wh.soldier_control_.incorporate_soldier(game, s);
+}
+
 void Warehouse::update_statistics_string(std::string* str) {
 	*str = get_warehouse_name();
 }
@@ -1455,6 +1487,8 @@ std::unique_ptr<const BuildingSettings> Warehouse::create_building_settings() co
 		pair.second = get_worker_policy(pair.first);
 	}
 	settings->launch_expedition = (portdock_ != nullptr) && portdock_->expedition_started();
+	settings->desired_capacity = get_desired_soldier_count();
+	settings->soldier_preference = get_soldier_preference();
 	// Prior to the resolution of a defect report against ISO C++11, local variable 'settings' would
 	// have been copied despite being returned by name, due to its not matching the function return
 	// type. Call 'std::move' explicitly to avoid copying on older compilers.

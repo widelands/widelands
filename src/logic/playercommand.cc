@@ -675,11 +675,15 @@ void CmdMilitarySiteSetSoldierPreference::serialize(StreamWrite& ser) {
 void CmdMilitarySiteSetSoldierPreference::execute(Game& game) {
 	MapObject* mo = game.objects().get_object(serial);
 	if (upcast(ConstructionSite, cs, mo)) {
-		if (upcast(MilitarysiteSettings, s, cs->get_settings())) {
-			s->soldier_preference = preference;
+		if (upcast(MilitarysiteSettings, ms, cs->get_settings())) {
+			ms->soldier_preference = preference;
+		} else if (upcast(WarehouseSettings, wh, cs->get_settings())) {
+			wh->soldier_preference = preference;
 		}
-	} else if (upcast(MilitarySite, building, mo)) {
-		game.get_player(sender())->military_site_set_soldier_preference(*building, preference);
+	} else if (upcast(MilitarySite, ms, mo)) {
+		ms->set_soldier_preference(preference);
+	} else if (upcast(Warehouse, wh, mo)) {
+		wh->set_soldier_preference(preference);
 	}
 }
 

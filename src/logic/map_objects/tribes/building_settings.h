@@ -114,6 +114,8 @@ struct WarehouseSettings : public BuildingSettings {
 	std::map<DescriptionIndex, StockPolicy> worker_preferences;
 	const bool launch_expedition_allowed;
 	bool launch_expedition{false};
+	uint32_t desired_capacity{0U};
+	SoldierPreference soldier_preference{SoldierPreference::kAny};
 };
 
 }  // namespace Widelands

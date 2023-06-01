@@ -608,7 +608,7 @@ void MilitarySite::act(Game& game, uint32_t const data) {
 
 	// TODO(unknown): I would need two new callbacks, to get rid ot this polling.
 	if (timeofgame > next_swap_soldiers_time_) {
-		next_swap_soldiers_time_ = timeofgame + Duration(20000);
+		next_swap_soldiers_time_ = timeofgame + kSoldierSwapTime;
 		update_soldier_request();
 	}
 

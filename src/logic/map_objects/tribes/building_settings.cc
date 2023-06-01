@@ -133,16 +133,26 @@ void WarehouseSettings::apply(const BuildingSettings& bs) {
 			}
 		}
 		launch_expedition = launch_expedition_allowed && s->launch_expedition;
+		desired_capacity = s->desired_capacity;
+		soldier_preference = s->soldier_preference;
 	}
 }
 
 // Saveloading
 
+/* Versions changelogs:
+ * Global: 2: v1.1
+ * Militarysite: 1: v1.1
+ * Productionsite: 2: v1.1
+ * Trainingsite: 1: v1.1
+ * Warehouse: 2: v1.1
+ *   - 3: Added soldier preference and capacity
+ */
 constexpr uint8_t kCurrentPacketVersion = 2;
 constexpr uint8_t kCurrentPacketVersionMilitarysite = 1;
 constexpr uint8_t kCurrentPacketVersionProductionsite = 2;
 constexpr uint8_t kCurrentPacketVersionTrainingsite = 1;
-constexpr uint8_t kCurrentPacketVersionWarehouse = 2;
+constexpr uint8_t kCurrentPacketVersionWarehouse = 3;
 
 // static
 BuildingSettings* BuildingSettings::load(const Game& game, const TribeDescr& tribe, FileRead& fr) {
@@ -309,8 +319,13 @@ void WarehouseSettings::read(const Game& game, FileRead& fr) {
 	BuildingSettings::read(game, fr);
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersionWarehouse) {
+		if (packet_version >= 2 && packet_version <= kCurrentPacketVersionWarehouse) {
 			launch_expedition = (fr.unsigned_8() != 0u);
+			// TODO(Nordfriese): Savegame compatibility v1.1
+			if (packet_version >= 3) {
+				desired_capacity = fr.unsigned_32();
+				soldier_preference = static_cast<SoldierPreference>(fr.unsigned_8());
+			}
 			const uint32_t nr_wares = fr.unsigned_32();
 			const uint32_t nr_workers = fr.unsigned_32();
 			for (uint32_t i = 0; i < nr_wares; ++i) {
@@ -343,6 +358,9 @@ void WarehouseSettings::save(const Game& game, FileWrite& fw) const {
 	fw.unsigned_8(kCurrentPacketVersionWarehouse);
 
 	fw.unsigned_8(launch_expedition ? 1 : 0);
+	fw.unsigned_32(desired_capacity);
+	fw.unsigned_8(static_cast<uint8_t>(soldier_preference));
+
 	fw.unsigned_32(ware_preferences.size());
 	fw.unsigned_32(worker_preferences.size());
 	for (const auto& pair : ware_preferences) {

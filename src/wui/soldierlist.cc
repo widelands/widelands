@@ -160,6 +160,14 @@ SoldierPanel::SoldierPanel(UI::Panel& parent,
 	icon_width_ += 2 * kIconBorder;
 	icon_height_ += 2 * kIconBorder;
 
+	if (building_or_ship.descr().type() == Widelands::MapObjectType::WAREHOUSE) {
+		rows_ = 0;
+		cols_ = 0;
+		set_visible(false);
+		set_thinks(false);
+		return;
+	}
+
 	/* The +1 is because up to 1 additional soldier may be coming
 	 * to the building for the hero/rookie exchange. */
 	const Widelands::Quantity maxcapacity = get_max_capacity() + 1;
@@ -481,19 +489,20 @@ SoldierList::SoldierList(UI::Panel& parent,
 	UI::Box* buttons = new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 
 	bool can_act = ibase_.can_act(building_or_ship_.owner().player_number());
-	if (building_or_ship.descr().type() == Widelands::MapObjectType::MILITARYSITE) {
+	if (building_or_ship.descr().type() == Widelands::MapObjectType::MILITARYSITE || building_or_ship.descr().type() == Widelands::MapObjectType::WAREHOUSE) {
 		upcast(Widelands::MilitarySite, ms, &building_or_ship);
-		// Make sure the order remains consistent with the constants of enum SoldierPreference!
+		upcast(Widelands::Warehouse, wh, &building_or_ship);
+		// Make sure the creation order is consistent with enum SoldierPreference!
 		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, Vector2i::zero(),
 		                               g_image_cache->get("images/wui/buildings/prefer_rookies.png"),
 		                               _("Prefer rookies"));
-		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, Vector2i(32, 0),
+		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, Vector2i::zero(),
 		                               g_image_cache->get("images/wui/buildings/prefer_heroes.png"),
 		                               _("Prefer heroes"));
-		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, Vector2i(32, 0),
+		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, Vector2i::zero(),
 		                               g_image_cache->get("images/wui/buildings/prefer_average.png"),
 		                               _("Prefer average"));
-		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, Vector2i(32, 0),
+		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, Vector2i::zero(),
 		                               g_image_cache->get("images/wui/buildings/prefer_any.png"),
 		                               _("No preference"));
 		UI::Radiobutton* button = soldier_preference_.get_first_button();
@@ -502,7 +511,7 @@ SoldierList::SoldierList(UI::Panel& parent,
 			button = button->next_button();
 		}
 
-		soldier_preference_.set_state(static_cast<uint8_t>(ms->get_soldier_preference()), false);
+		soldier_preference_.set_state(static_cast<uint8_t>(ms != nullptr ? ms->get_soldier_preference() : wh->get_soldier_preference()), false);
 		if (can_act) {
 			soldier_preference_.changedto.connect([this](int32_t a) { set_soldier_preference(a); });
 		} else {
@@ -519,6 +528,9 @@ void SoldierList::think() {
 	if (building_or_ship_.descr().type() == Widelands::MapObjectType::MILITARYSITE) {
 		upcast(Widelands::MilitarySite, ms, &building_or_ship_);
 		soldier_preference_.set_state(static_cast<uint8_t>(ms->get_soldier_preference()), false);
+	} else if (building_or_ship_.descr().type() == Widelands::MapObjectType::WAREHOUSE) {
+		upcast(Widelands::Warehouse, wh, &building_or_ship_);
+		soldier_preference_.set_state(static_cast<uint8_t>(wh->get_soldier_preference()), false);
 	}
 }
 
@@ -541,6 +553,9 @@ void SoldierList::unset_infotext() {
 
 bool SoldierList::can_eject() const {
 	if (!ibase_.can_act(building_or_ship_.owner().player_number())) {
+		return false;
+	}
+	if (building_or_ship_.descr().type() == Widelands::MapObjectType::WAREHOUSE) {
 		return false;
 	}
 
