@@ -51,7 +51,6 @@ struct PlayerImmovable;
 enum class IslandExploreDirection;
 class PortDock;
 enum class ScoutingDirection;
-enum class SoldierPreference : uint8_t;
 struct Ship;
 class TrainingSite;
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0

@@ -24,9 +24,7 @@
 #include "base/log.h"
 #include "base/macros.h"
 #include "economy/flag.h"
-#include "economy/request.h"
 #include "graphic/style_manager.h"
-#include "io/filesystem/layered_filesystem.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/findbob.h"
@@ -65,14 +63,8 @@ std::vector<Soldier*> MilitarySite::SoldierControl::stationed_soldiers() const {
 
 std::vector<Soldier*> MilitarySite::SoldierControl::associated_soldiers() const {
 	std::vector<Soldier*> soldiers = stationed_soldiers();
-	if (military_site_->normal_soldier_request_ != nullptr) {
-		for (const Transfer* t : military_site_->normal_soldier_request_->get_transfers()) {
-			Soldier& s = dynamic_cast<Soldier&>(*t->get_worker());
-			soldiers.push_back(&s);
-		}
-	}
-	if (military_site_->upgrade_soldier_request_ != nullptr) {
-		for (const Transfer* t : military_site_->upgrade_soldier_request_->get_transfers()) {
+	if (military_site_->soldier_request_.get_request() != nullptr) {
+		for (const Transfer* t : military_site_->soldier_request_.get_request()->get_transfers()) {
 			Soldier& s = dynamic_cast<Soldier&>(*t->get_worker());
 			soldiers.push_back(&s);
 		}
@@ -357,15 +349,13 @@ MilitarySite::MilitarySite(const MilitarySiteDescr& ms_descr)
      soldier_control_(this),
 
      capacity_(ms_descr.get_max_number_of_soldiers()),
-     soldier_preference_(ms_descr.prefers_heroes_at_start_ ? SoldierPreference::kHeroes :
-                                                             SoldierPreference::kRookies) {
+     soldier_request_(*this, ms_descr.prefers_heroes_at_start_ ? SoldierPreference::kHeroes : SoldierPreference::kRookies, MilitarySite::request_soldier_callback) {
 	set_attack_target(&attack_target_);
 	set_soldier_control(&soldier_control_);
 }
 
 MilitarySite::~MilitarySite() {
-	assert(!normal_soldier_request_);
-	assert(!upgrade_soldier_request_);
+	assert(soldier_request_.get_request() == nullptr);
 }
 
 /**
@@ -415,7 +405,7 @@ void MilitarySite::update_statistics_string(std::string* s) {
 	}
 
 	*s = StyleManager::color_tag(
-	   format("%s %s", soldier_preference_ == SoldierPreference::kHeroes ? "↑" : "↓", *s),
+	   format("%s %s", get_soldier_preference() == SoldierPreference::kHeroes ? "↑" : "↓", *s),
 	   style.medium_color());
 }
 
@@ -452,11 +442,8 @@ Note that the workers are dealt with in the PlayerImmovable code.
 void MilitarySite::set_economy(Economy* const e, WareWorker type) {
 	Building::set_economy(e, type);
 
-	if (normal_soldier_request_ && (e != nullptr) && type == normal_soldier_request_->get_type()) {
-		normal_soldier_request_->set_economy(e);
-	}
-	if (upgrade_soldier_request_ && (e != nullptr) && type == upgrade_soldier_request_->get_type()) {
-		upgrade_soldier_request_->set_economy(e);
+	if (e != nullptr && type == wwWORKER && soldier_request_.get_request() != nullptr) {
+		soldier_request_.get_request()->set_economy(e);
 	}
 }
 
@@ -483,9 +470,6 @@ void MilitarySite::cleanup(EditorGameBase& egbase) {
 		--capacity_;
 	}
 	update_soldier_request();
-
-	normal_soldier_request_.reset();
-	upgrade_soldier_request_.reset();
 }
 
 /*
@@ -495,7 +479,7 @@ void MilitarySite::cleanup(EditorGameBase& egbase) {
 
 Soldier* MilitarySite::find_least_suited_soldier() {
 	const std::vector<Soldier*> present = soldier_control_.present_soldiers();
-	const int32_t multiplier = SoldierPreference::kHeroes == soldier_preference_ ? -1 : 1;
+	const int32_t multiplier = SoldierPreference::kHeroes == get_soldier_preference() ? -1 : 1;
 	int worst_soldier_level = INT_MIN;
 	Soldier* worst_soldier = nullptr;
 	for (Soldier* sld : present) {
@@ -534,10 +518,10 @@ bool MilitarySite::drop_least_suited_soldier(bool new_soldier_has_arrived, Soldi
 		if (nullptr != newguy && nullptr != kickoutCandidate) {
 			int32_t old_level = kickoutCandidate->get_level(TrainingAttribute::kTotal);
 			int32_t new_level = newguy->get_level(TrainingAttribute::kTotal);
-			if (SoldierPreference::kHeroes == soldier_preference_ && old_level >= new_level) {
+			if (SoldierPreference::kHeroes == get_soldier_preference() && old_level >= new_level) {
 				return false;
 			}
-			if (SoldierPreference::kRookies == soldier_preference_ && old_level <= new_level) {
+			if (SoldierPreference::kRookies == get_soldier_preference() && old_level <= new_level) {
 				return false;
 			}
 		}
@@ -587,147 +571,11 @@ void MilitarySite::request_soldier_callback(Game& game,
 	msite.soldier_control_.incorporate_soldier(game, s);
 }
 
-/**
- * Update the request for soldiers and cause soldiers to be evicted
- * as appropriate.
- */
-void MilitarySite::update_normal_soldier_request() {
-	std::vector<Soldier*> present = soldier_control_.present_soldiers();
-	Quantity const stationed = soldier_control_.stationed_soldiers().size();
+void MilitarySite::update_soldier_request(bool /* incd */) {
+	soldier_request_.update();
 
-	if (stationed < capacity_) {
-		if (!normal_soldier_request_) {
-			normal_soldier_request_.reset(new Request(
-			   *this, owner().tribe().soldier(), MilitarySite::request_soldier_callback, wwWORKER));
-			normal_soldier_request_->set_requirements(soldier_requirements_);
-		}
-
-		normal_soldier_request_->set_count(capacity_ - stationed);
-	} else {
-		normal_soldier_request_.reset();
-	}
-
-	if (capacity_ < present.size()) {
-		Game& game = dynamic_cast<Game&>(get_owner()->egbase());
-		for (uint32_t i = 0; i < present.size() - capacity_; ++i) {
-			Soldier& soldier = *present[i];
-			soldier.reset_tasks(game);
-			soldier.start_task_leavebuilding(game, true);
-		}
-	}
-}
-
-/* There are two kinds of soldier requests: "normal", which is used whenever the military site needs
- * more soldiers, and "upgrade" which is used when there is a preference for either heroes or
- * rookies.
- *
- * In case of normal requests, the military site is filled. In case of upgrade requests, only one
- * guy
- * is exchanged at a time.
- *
- * There would be more efficient ways to get well trained soldiers. Now, new buildings appearing in
- * battle
- * field are more vulnerable at the beginning. This is intentional. The purpose of this upgrade
- * thing is
- * to reduce the benefits of site micromanagement. The intention is not to make gameplay easier in
- * other ways.
- */
-void MilitarySite::update_upgrade_soldier_request() {
-	bool reqch = update_upgrade_requirements();
-	if (!soldier_upgrade_try_) {
-		return;
-	}
-
-	bool do_rebuild_request = reqch;
-
-	if (upgrade_soldier_request_) {
-		if (!upgrade_soldier_request_->is_open()) {
-			// If a replacement is already walking this way, let's not change our minds.
-			do_rebuild_request = false;
-		}
-		if (0 == upgrade_soldier_request_->get_count()) {
-			do_rebuild_request = true;
-		}
-	} else {
-		do_rebuild_request = true;
-	}
-
-	if (do_rebuild_request) {
-		upgrade_soldier_request_.reset(new Request(
-		   *this, owner().tribe().soldier(), MilitarySite::request_soldier_callback, wwWORKER));
-
-		upgrade_soldier_request_->set_requirements(soldier_upgrade_requirements_);
-		upgrade_soldier_request_->set_count(1);
-	}
-}
-
-/*
- * I have update_soldier_request
- *        update_upgrade_soldier_request
- *        update_normal_soldier_request
- *
- * The first one handles state switching between site fill (normal more)
- * and grabbing soldiers with proper training (upgrade mode). The last
- * two actually make the requests.
- *
- * The input parameter incd is true, if we just incorporated a new soldier
- * as a result of an upgrade request. In such cases, we will re-arm the
- * upgrade request.
- */
-
-void MilitarySite::update_soldier_request(bool incd) {
-	const uint32_t capacity = soldier_control_.soldier_capacity();
-	const uint32_t stationed = soldier_control_.stationed_soldiers().size();
-
-	if (doing_upgrade_request_) {
-		if (incd && upgrade_soldier_request_)  // update requests always ask for one soldier at time!
-		{
-			upgrade_soldier_request_.reset();
-		}
-		if (capacity > stationed) {
-			// Somebody is killing my soldiers in the middle of upgrade
-			// or I have kicked out his predecessor already.
-			if (upgrade_soldier_request_ &&
-			    (upgrade_soldier_request_->is_open() || 0 == upgrade_soldier_request_->get_count())) {
-
-				// Economy was not able to find the soldiers I need.
-				// I can safely drop the upgrade request and go to fill mode.
-				upgrade_soldier_request_.reset();
-			}
-			if (!upgrade_soldier_request_) {
-				// phoo -- I can safely request new soldiers.
-				doing_upgrade_request_ = false;
-				update_normal_soldier_request();
-			}
-			// else -- ohno please help me! Player is in trouble -- evil grin
-		} else                        // military site is full or overfull
-		   if (capacity < stationed)  // player is reducing capacity
-		{
-			drop_least_suited_soldier(false, nullptr);
-		} else  // capacity == stationed size
-		{
-			if (upgrade_soldier_request_ && (!(upgrade_soldier_request_->is_open())) &&
-			    1 == upgrade_soldier_request_->get_count() && (!incd)) {
-				drop_least_suited_soldier(false, nullptr);
-			} else {
-				update_upgrade_soldier_request();
-			}
-		}
-	} else  // not doing upgrade request
-	{
-		if ((capacity != stationed) || (normal_soldier_request_)) {
-			update_normal_soldier_request();
-		}
-
-		if ((capacity == stationed) && (!normal_soldier_request_)) {
-			if (soldier_control_.present_soldiers().size() == capacity) {
-				doing_upgrade_request_ = true;
-				update_upgrade_soldier_request();
-			}
-			// Note -- if there are non-present stationed soldiers, nothing gets
-			// called. Therefore, I revisit this routine periodically without apparent
-			// reason, hoping that all stationed soldiers would be present.
-		}
+	if (soldier_control()->soldier_capacity() < soldier_control_.present_soldiers().size()) {
+		drop_least_suited_soldier(false, nullptr);
 	}
 }
 
@@ -746,10 +594,6 @@ void MilitarySite::act(Game& game, uint32_t const data) {
 	Building::act(game, data);
 
 	const Time& timeofgame = game.get_gametime();
-	if (normal_soldier_request_ && upgrade_soldier_request_) {
-		throw wexception(
-		   "MilitarySite::act: Two soldier requests are ongoing -- should never happen!\n");
-	}
 
 	// I do not get a callback when stationed, non-present soldier returns --
 	// Therefore I must poll in some occasions. Let's do that rather infrequently,
@@ -757,7 +601,7 @@ void MilitarySite::act(Game& game, uint32_t const data) {
 
 	// TODO(unknown): I would need two new callbacks, to get rid ot this polling.
 	if (timeofgame > next_swap_soldiers_time_) {
-		next_swap_soldiers_time_ = timeofgame + Duration(soldier_upgrade_try_ ? 20000 : 100000);
+		next_swap_soldiers_time_ = timeofgame + Duration(20000);
 		update_soldier_request();
 	}
 
@@ -870,7 +714,6 @@ void MilitarySite::conquer_area(EditorGameBase& egbase) {
 
 /// Initialises the militarysite after it was "conquered" (the old was replaced)
 void MilitarySite::reinit_after_conqueration(Game& game) {
-	clear_requirements();
 	conquer_area(game);
 	update_soldier_request();
 	start_animation(game, descr().get_animation("idle", this));
@@ -908,24 +751,6 @@ void MilitarySite::notify_player(Game& game, bool const discovered) {
 	             pgettext("building", "Attack!"), descr().icon_filename(), _("You are under attack"),
 	             discovered ? descr().aggressor_str_ : descr().attack_str_, false,
 	             Duration(60 * 1000), 5);
-}
-
-/*
-   MilitarySite::set_requirements
-
-   Easy to use, overwrite with given requirements.
-*/
-void MilitarySite::set_requirements(const Requirements& r) {
-	soldier_requirements_ = r;
-}
-
-/*
-   MilitarySite::clear_requirements
-
-   This should cancel any requirement pushed at this house
-*/
-void MilitarySite::clear_requirements() {
-	soldier_requirements_ = Requirements();
 }
 
 void MilitarySite::send_attacker(Soldier& soldier, Building& target) {
@@ -982,61 +807,12 @@ MapObject* MilitarySite::pop_soldier_job(Soldier* const soldier, bool* const sta
 	return nullptr;
 }
 
-/*
- * When upgrading soldiers, we do not ask for just any soldiers, but soldiers
- * that are better than what we already have. This routine sets the requirements
- * used by the request.
- *
- * The routine returns true if upgrade request thresholds have changed. This information could be
- * used to decide whether the soldier-Request should be upgraded.
- */
-bool MilitarySite::update_upgrade_requirements() {
-	int32_t soldier_upgrade_required_min = soldier_upgrade_requirements_.get_min();
-	int32_t soldier_upgrade_required_max = soldier_upgrade_requirements_.get_max();
-
-	// Find the level of the soldier that is currently least-suited.
-	Soldier* worst_guy = find_least_suited_soldier();
-	if (worst_guy == nullptr) {
-		// There could be no soldier in the militarysite right now. No reason to freak out.
-		return false;
-	}
-	int32_t wg_level = worst_guy->get_level(TrainingAttribute::kTotal);
-
-	// Micro-optimization: I assume that the majority of military sites have only level-zero
-	// soldiers and prefer rookies. Handle them separately.
-	soldier_upgrade_try_ = true;
-	if (SoldierPreference::kRookies == soldier_preference_) {
-		if (0 == wg_level) {
-			soldier_upgrade_try_ = false;
-			return false;
-		}
-	}
-
-	// Now I actually build the new requirements.
-	int32_t reqmin = SoldierPreference::kHeroes == soldier_preference_ ? 1 + wg_level : 0;
-	int32_t reqmax = SoldierPreference::kHeroes == soldier_preference_ ? SHRT_MAX : wg_level - 1;
-
-	bool maxchanged = reqmax != soldier_upgrade_required_max;
-	bool minchanged = reqmin != soldier_upgrade_required_min;
-
-	if (maxchanged || minchanged) {
-		if (upgrade_soldier_request_ && (upgrade_soldier_request_->is_open())) {
-			upgrade_soldier_request_.reset();
-		}
-		soldier_upgrade_requirements_ = RequireAttribute(TrainingAttribute::kTotal, reqmin, reqmax);
-
-		return true;
-	}
-
-	return false;
-}
-
 std::unique_ptr<const BuildingSettings> MilitarySite::create_building_settings() const {
 	std::unique_ptr<MilitarysiteSettings> settings(
 	   new MilitarysiteSettings(descr(), owner().tribe()));
 	settings->desired_capacity =
 	   std::min(settings->max_capacity, soldier_control_.soldier_capacity());
-	settings->prefer_heroes = soldier_preference_ == SoldierPreference::kHeroes;
+	settings->prefer_heroes = get_soldier_preference() == SoldierPreference::kHeroes;
 	// Prior to the resolution of a defect report against ISO C++11, local variable 'settings' would
 	// have been copied despite being returned by name, due to its not matching the function return
 	// type. Call 'std::move' explicitly to avoid copying on older compilers.
@@ -1047,7 +823,7 @@ std::unique_ptr<const BuildingSettings> MilitarySite::create_building_settings()
 // setters
 
 void MilitarySite::set_soldier_preference(SoldierPreference p) {
-	soldier_preference_ = p;
+	soldier_request_.set_preference(p);
 	next_swap_soldiers_time_ = Time(0);
 }
 }  // namespace Widelands

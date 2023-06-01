@@ -89,6 +89,12 @@ struct SoldierStrength {
 	}
 };
 
+// It is assumed elsewhere that enum SoldierPreference fits to uint8_t.
+enum class SoldierPreference : uint8_t {
+	kRookies,
+	kHeroes,
+};
+
 // For suggested teams info during map preload
 using SuggestedTeam = std::vector<PlayerNumber>;  // Players in a team
 // Recommended teams to play against each other
