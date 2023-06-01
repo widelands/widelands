@@ -9841,7 +9841,7 @@ msgid ""
 "smithy. In combination with a wooden spear, it is the equipment to fit out "
 "young soldiers. Helmets are also used in training camps – together with food"
 " – to train soldiers from health level 0 to level 1."
-msgstr "Der Helm ist die Grundverteidigung eines Kriegers. Er wird in Rüstungsschmieden hergestellt. Zusammen mit einem Holzspeer ist er die Grundausrüstung für junge Soldaten. Helme werden auch in Ausbildungslagern – zusammen mit Nahrung – benötigt, um die Lebenspunkte der Soldaten von Stufe 0 auf 1 zu erhöhen."
+msgstr "Der Helm ist die Grundverteidigung eines Soldaten. Er wird in Rüstungsschmieden hergestellt. Zusammen mit einem Holzspeer ist er die Grundausrüstung für junge Soldaten. Helme werden auch in Ausbildungslagern – zusammen mit Nahrung – benötigt, um die Lebenspunkte der Soldaten von Stufe 0 auf 1 zu erhöhen."
 
 #. TRANSLATORS: Helptext for an Empire ware: Armor
 #: ../../data/tribes/initialization/empire/units.lua:569
