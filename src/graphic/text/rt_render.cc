@@ -1018,7 +1018,8 @@ public:
 	              bool use_playercolor)
 	   : RenderNode(c, ns),
 	     image_(use_playercolor ? playercolor_image(color, image_filename) :
-                                 g_image_cache->get(image_filename)),
+                                 g_image_cache->get(image_filename, true,
+                                                    ImageCache::kDefaultScaleIndex)),
 	     filename_(image_filename),
 	     scale_(scale),
 	     color_(color),
@@ -1468,7 +1469,8 @@ public:
 					         width, renderer_style_.overall_width, renderer_style_.overall_width);
 					width = renderer_style_.overall_width;
 				}
-				const int image_width = image_cache_->get(image_filename)->width();
+				const int image_width = image_cache_->get(image_filename, true,
+				                                          ImageCache::kDefaultScaleIndex)->width();
 				if (width < image_width) {
 					scale = static_cast<double>(width) / image_width;
 				}
