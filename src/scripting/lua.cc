@@ -37,10 +37,8 @@ bool luaL_checkboolean(lua_State* L, int n) {
 	return luaL_checkinteger(L, n) != 0;
 }
 
-std::string get_table_string(lua_State* L,
-                             const char* key,
-                             bool mandatory,
-                             std::string default_value) {
+std::string
+get_table_string(lua_State* L, const char* key, bool mandatory, std::string default_value) {
 	lua_getfield(L, -1, key);
 	if (!lua_isnil(L, -1)) {
 		default_value = luaL_checkstring(L, -1);

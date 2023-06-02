@@ -41,13 +41,7 @@ std::string get_table_string(lua_State* L,
                              const char* key,
                              bool mandatory,
                              std::string default_value = std::string());
-int32_t get_table_int(lua_State* L,
-                      const char* key,
-                      bool mandatory,
-                      int32_t default_value = 0);
-bool get_table_boolean(lua_State* L,
-                       const char* key,
-                       bool mandatory,
-                       bool default_value = false);
+int32_t get_table_int(lua_State* L, const char* key, bool mandatory, int32_t default_value = 0);
+bool get_table_boolean(lua_State* L, const char* key, bool mandatory, bool default_value = false);
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_H
