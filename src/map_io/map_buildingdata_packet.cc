@@ -534,6 +534,17 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 						warehouse.portdock_->expedition_bootstrap()->load(
 						   warehouse, fr, game, mol, packet_version);
 					}
+
+					for (uint32_t i = packet_version >= 10 ? fr.unsigned_32() : 0; i > 0; --i) {
+						Ship* ship = &mol.get<Ship>(fr.unsigned_32());
+						assert(warehouse.portdock_->warship_soldier_requests_.count(ship) == 0);
+						SoldierRequest* req = new SoldierRequest(warehouse, SoldierPreference::kHeroes, Ship::warship_soldier_callback,
+							[ship]() { return ship->get_warship_soldier_capacity(); },
+							[ship]() { return ship->onboard_soldiers(); }
+						);
+						req->read(fr, game, mol);
+						warehouse.portdock_->warship_soldier_requests_.emplace(ship->serial(), req);
+					}
 				}
 			}
 
@@ -1269,6 +1280,12 @@ void MapBuildingdataPacket::write_warehouse(const Warehouse& warehouse,
 		// Expedition specific stuff. See comment in loader.
 		if (warehouse.portdock_->expedition_started()) {
 			warehouse.portdock_->expedition_bootstrap()->save(fw, game, mos);
+		}
+
+		fw.unsigned_32(warehouse.portdock_->warship_soldier_requests_.size());
+		for (const auto& pair : warehouse.portdock_->warship_soldier_requests_) {
+			fw.unsigned_32(mos.get_object_file_index(*game.objects().get_object(pair.first)));
+			pair.second->write(fw, game, mos);
 		}
 	}
 

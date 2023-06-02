@@ -402,7 +402,7 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 			items_.clear();
 
 			ship_type_ = pending_refit_;
-			warship_soldier_request_.reset();
+			dest->erase_warship_request(serial());
 
 			if (ship_type_ == ShipType::kWarship) {
 				start_task_expedition(game);
@@ -639,15 +639,11 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 				hitpoints_ = std::min(descr().max_hitpoints_, hitpoints_ + descr().heal_per_second_);
 			}
 
+			lastdock_ = dest;
 			set_ship_state_and_notify(
 			   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
 
-			if (warship_soldier_request_ == nullptr) {
-				warship_soldier_request_.reset(new Request(*dest->get_warehouse(),
-				                                           owner().tribe().soldier(),
-				                                           Ship::warship_soldier_callback, wwWORKER));
-			}
-			update_warship_soldier_request(game);
+			update_warship_soldier_request(true);
 
 			start_task_idle(game, descr().main_animation(), 250);
 
@@ -696,7 +692,9 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 		}
 	}
 
-	warship_soldier_request_.reset();  // Clear the request when not in port
+	if (PortDock* last = lastdock_.get(game); last != nullptr) {
+		last->erase_warship_request(serial());  // Clear the request when not in port
+	}
 
 	if (ship_state_ == ShipStates::kExpeditionScouting && get_ship_type() == ShipType::kTransport) {
 		// Check surrounding fields for port buildspaces
@@ -747,13 +745,24 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 	return false;  // Continue with the regular expedition updates
 }
 
-void Ship::update_warship_soldier_request(Game& /* game */) {
-	if (warship_soldier_request_ == nullptr) {
-		return;
+void Ship::set_soldier_preference(SoldierPreference pref) {
+	soldier_preference_ = pref;
+	update_warship_soldier_request(false);
+}
+
+void Ship::update_warship_soldier_request(bool create) {
+	if (PortDock* dock = lastdock_.get(owner().egbase()); dock != nullptr) {
+		SoldierRequest* req = dock->get_warship_request(serial());
+		if (req != nullptr) {
+			req->set_preference(soldier_preference_);
+			req->update();
+		} else if (create) {
+			req = &dock->create_warship_request(this, soldier_preference_);
+			req->update();
+		}
+	} else if (create) {
+		throw wexception("Attempting to create warship soldier request while not in dock");
 	}
-	warship_soldier_request_->set_count(get_nritems() > get_warship_soldier_capacity() ?
-                                          0 :
-                                          get_warship_soldier_capacity() - get_nritems());
 }
 
 // static
@@ -763,36 +772,27 @@ void Ship::warship_soldier_callback(Game& game,
                                     Worker* worker,
                                     PlayerImmovable& immovable) {
 	Warehouse& warehouse = dynamic_cast<Warehouse&>(immovable);
-	PortDock* dock = warehouse.get_portdock();
-	assert(dock != nullptr);
+	Ship* ship = warehouse.get_portdock()->find_ship_for_warship_request(game, req);
 
-	for (const Coords& c : dock->get_positions(game)) {
-		for (Bob* b = game.map()[c].get_first_bob(); b != nullptr; b = b->get_next_bob()) {
-			if (b->descr().type() == MapObjectType::SHIP) {
-				upcast(Ship, ship, b);
-				if (ship->warship_soldier_request_.get() == &req) {
-					assert(ship->get_owner() == dock->get_owner());
-					assert(ship->get_ship_type() == ShipType::kWarship);
-
-					ship->molog(game.get_gametime(), "%s %u embarked on warship",
-					            worker->descr().name().c_str(), worker->serial());
-
-					worker->set_location(nullptr);
-					worker->start_task_shipping(game, nullptr);
-
-					ship->add_item(game, ShippingItem(*worker));
-					ship->update_warship_soldier_request(game);
-
-					return;
-				}
-			}
-		}
+	if (ship == nullptr) {
+		verb_log_info_time(game.get_gametime(), "%s %u missed his assigned warship at dock %s",
+			               worker->descr().name().c_str(), worker->serial(),
+			               warehouse.get_warehouse_name().c_str());
+		// The soldier is in the port now, ready to get some new assignment by the economy.
+		return;
 	}
 
-	verb_log_info_time(game.get_gametime(), "%s %u missed his assigned warship at dock %s",
-	                   worker->descr().name().c_str(), worker->serial(),
-	                   warehouse.get_warehouse_name().c_str());
-	// The soldier is in the port now, ready to get some new assignment by the economy.
+	assert(ship->get_owner() == warehouse.get_owner());
+	assert(ship->get_ship_type() == ShipType::kWarship);
+
+	ship->molog(game.get_gametime(), "%s %u embarked on warship",
+	            worker->descr().name().c_str(), worker->serial());
+
+	worker->set_location(nullptr);
+	worker->start_task_shipping(game, nullptr);
+
+	ship->add_item(game, ShippingItem(*worker));
+	ship->update_warship_soldier_request(false);
 }
 
 bool Ship::is_attackable_enemy_warship(const Bob& b) const {
@@ -911,6 +911,23 @@ std::vector<Soldier*> Ship::onboard_soldiers() const {
 	return result;
 }
 
+std::vector<Soldier*> Ship::associated_soldiers() const {
+	std::vector<Soldier*> result = onboard_soldiers();
+
+	if (PortDock* dock = lastdock_.get(owner().egbase()); dock != nullptr) {
+		if (const SoldierRequest* sr = dock->get_warship_request(serial()); sr != nullptr) {
+			if (const Request* request = sr->get_request(); request != nullptr) {
+				for (const Transfer* t : request->get_transfers()) {
+					Soldier& s = dynamic_cast<Soldier&>(*t->get_worker());
+					result.push_back(&s);
+				}
+			}
+		}
+	}
+
+	return result;
+}
+
 void Ship::drop_soldier(Game& game, Serial soldier) {
 	PortDock* dest = get_destination_port(game);
 	if (dest == nullptr) {
@@ -944,9 +961,10 @@ void Ship::warship_command(Game& game,
 		assert(parameters.size() == 1);
 		warship_soldier_capacity_ =
 		   std::max(std::min(parameters.back(), get_capacity()), min_warship_soldier_capacity());
-		update_warship_soldier_request(game);
+		update_warship_soldier_request(false);
 
 		// If we have too many soldiers on board now, unload the extras.
+		// NOCOM unload the worst fits first
 		PortDock* dest = get_destination_port(game);
 		while (get_nritems() > warship_soldier_capacity_) {
 			assert(dest != nullptr);
@@ -2258,8 +2276,9 @@ Load / Save implementation
 /* Changelog:
  * 12 - v1.1
  * 13 - Added warships and naval warfare.
+ * 14 - Added soldier preference.
  */
-constexpr uint8_t kCurrentPacketVersion = 13;
+constexpr uint8_t kCurrentPacketVersion = 14;
 
 const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	if (name == "shipidle" || name == "ship") {
@@ -2340,6 +2359,9 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 		shipname_ = fr.c_string();
 		capacity_ = fr.unsigned_32();
 		warship_soldier_capacity_ = (packet_version >= 13) ? fr.unsigned_32() : capacity_;
+		if (packet_version >= 14) {
+			soldier_preference_ =  static_cast<SoldierPreference>(fr.unsigned_8());
+		}
 		lastdock_ = fr.unsigned_32();
 		destination_ = fr.unsigned_32();
 
@@ -2420,6 +2442,7 @@ void Ship::Loader::load_finish() {
 
 	ship.capacity_ = capacity_;
 	ship.warship_soldier_capacity_ = warship_soldier_capacity_;
+	ship.soldier_preference_ = soldier_preference_;
 
 	// if the ship is on an expedition, restore the expedition specific data
 	if (expedition_) {
@@ -2539,6 +2562,7 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	fw.string(shipname_);
 	fw.unsigned_32(capacity_);
 	fw.unsigned_32(warship_soldier_capacity_);
+	fw.unsigned_8(static_cast<uint8_t>(soldier_preference_));
 	fw.unsigned_32(mos.get_object_file_index_or_zero(lastdock_.get(egbase)));
 	fw.unsigned_32(mos.get_object_file_index_or_zero(destination_.get(egbase)));
 

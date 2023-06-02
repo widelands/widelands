@@ -1678,7 +1678,7 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 			schedule_act(game, Duration(10));  //  wait a little
 		} else {
 			throw wexception(
-			   "MO(%u): [transfer]: flag to bad nextstep %u", serial(), nextstep->serial());
+			   "MO(%u): [transfer]: flag to bad nextstep %s %u", serial(), nextstep->descr().name().c_str(), nextstep->serial());
 		}
 	} else if (upcast(RoadBase, road, location)) {
 		// Road to Flag

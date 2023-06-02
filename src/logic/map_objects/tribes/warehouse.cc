@@ -860,6 +860,7 @@ void Warehouse::set_economy(Economy* const e, WareWorker type) {
 	}
 	supply_->set_economy(e, type);
 	Building::set_economy(e, type);
+	soldier_request_.set_economy(e, type);
 
 	for (const PlannedWorkers& pw : planned_workers_) {
 		for (Request* req : pw.requests) {

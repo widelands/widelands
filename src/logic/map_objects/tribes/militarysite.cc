@@ -444,10 +444,7 @@ Note that the workers are dealt with in the PlayerImmovable code.
 */
 void MilitarySite::set_economy(Economy* const e, WareWorker type) {
 	Building::set_economy(e, type);
-
-	if (e != nullptr && type == wwWORKER && soldier_request_.get_request() != nullptr) {
-		soldier_request_.get_request()->set_economy(e);
-	}
+	soldier_request_.set_economy(e, type);
 }
 
 /**

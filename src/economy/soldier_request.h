@@ -42,6 +42,7 @@ public:
 
 	void update();
 
+	void set_economy(Economy* const e, WareWorker type);
 	void set_preference(SoldierPreference p) {
 		preference_ = p;
 	}

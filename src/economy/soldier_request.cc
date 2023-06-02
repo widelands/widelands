@@ -34,6 +34,12 @@ void SoldierRequest::create_request() {
 	request_->set_exact_match(true);
 }
 
+void SoldierRequest::set_economy(Economy* const e, WareWorker type) {
+	if (type == wwWORKER && request_ != nullptr) {
+		request_->set_economy(e);
+	}
+}
+
 void SoldierRequest::update() {
 	const Quantity target = get_desired_capacity_();
 	const std::vector<Soldier*> stationed = get_stationed_soldiers_();
