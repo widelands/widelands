@@ -549,44 +549,6 @@ int LuaPanel::create_child(lua_State* L) {
 /*
  * C Functions
  */
-static std::string get_table_string(lua_State* L,
-                                    const char* key,
-                                    bool mandatory,
-                                    std::string default_value = std::string()) {
-	lua_getfield(L, -1, key);
-	if (!lua_isnil(L, -1)) {
-		default_value = luaL_checkstring(L, -1);
-	} else if (mandatory) {
-		report_error(L, "Missing string: %s", key);
-	}
-	lua_pop(L, 1);
-	return default_value;
-}
-
-static int32_t
-get_table_int(lua_State* L, const char* key, bool mandatory, int32_t default_value = 0) {
-	lua_getfield(L, -1, key);
-	if (!lua_isnil(L, -1)) {
-		default_value = luaL_checkint32(L, -1);
-	} else if (mandatory) {
-		report_error(L, "Missing integer: %s", key);
-	}
-	lua_pop(L, 1);
-	return default_value;
-}
-
-static bool
-get_table_boolean(lua_State* L, const char* key, bool mandatory, bool default_value = false) {
-	lua_getfield(L, -1, key);
-	if (!lua_isnil(L, -1)) {
-		default_value = luaL_checkboolean(L, -1);
-	} else if (mandatory) {
-		report_error(L, "Missing boolean: %s", key);
-	}
-	lua_pop(L, 1);
-	return default_value;
-}
-
 static UI::Align get_table_align(lua_State* L,
                                  const char* key,
                                  bool mandatory,
