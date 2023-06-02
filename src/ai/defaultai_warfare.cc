@@ -1051,8 +1051,7 @@ bool DefaultAI::check_militarysites(const Time& gametime) {
 			changed = true;
 		}
 		if (ms->get_soldier_preference() == Widelands::SoldierPreference::kRookies) {
-			game().send_player_set_soldier_preference(
-			   *ms, Widelands::SoldierPreference::kHeroes);
+			game().send_player_set_soldier_preference(*ms, Widelands::SoldierPreference::kHeroes);
 			changed = true;
 		}
 	} else if (should_be_dismantled && can_be_dismantled) {
@@ -1070,8 +1069,7 @@ bool DefaultAI::check_militarysites(const Time& gametime) {
 			changed = true;
 		}
 		if (ms->get_soldier_preference() == Widelands::SoldierPreference::kHeroes) {
-			game().send_player_set_soldier_preference(
-			   *ms, Widelands::SoldierPreference::kRookies);
+			game().send_player_set_soldier_preference(*ms, Widelands::SoldierPreference::kRookies);
 			changed = true;
 		}
 	}

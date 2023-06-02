@@ -134,7 +134,8 @@ public:
 	[[nodiscard]] SoldierRequest* get_warship_request(Serial ship) const;
 	SoldierRequest& create_warship_request(Ship* ship, SoldierPreference pref);
 	void erase_warship_request(Serial ship);
-	[[nodiscard]] Ship* find_ship_for_warship_request(const EditorGameBase& egbase, const Request& req) const;
+	[[nodiscard]] Ship* find_ship_for_warship_request(const EditorGameBase& egbase,
+	                                                  const Request& req) const;
 
 private:
 	friend class MapBuildingdataPacket;

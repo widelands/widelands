@@ -349,10 +349,13 @@ MilitarySite::MilitarySite(const MilitarySiteDescr& ms_descr)
      soldier_control_(this),
 
      capacity_(ms_descr.get_max_number_of_soldiers()),
-     soldier_request_(*this, ms_descr.prefers_heroes_at_start_ ? SoldierPreference::kHeroes : SoldierPreference::kRookies,
-     		MilitarySite::request_soldier_callback,
-     		[this]() { return soldier_control_.soldier_capacity(); },
-     		[this]() { return soldier_control_.stationed_soldiers(); }) {
+     soldier_request_(
+        *this,
+        ms_descr.prefers_heroes_at_start_ ? SoldierPreference::kHeroes :
+                                            SoldierPreference::kRookies,
+        MilitarySite::request_soldier_callback,
+        [this]() { return soldier_control_.soldier_capacity(); },
+        [this]() { return soldier_control_.stationed_soldiers(); }) {
 	set_attack_target(&attack_target_);
 	set_soldier_control(&soldier_control_);
 }
@@ -408,8 +411,7 @@ void MilitarySite::update_statistics_string(std::string* s) {
 	}
 
 	*s = StyleManager::color_tag(
-	   format("%s %s", soldier_preference_icon(get_soldier_preference()), *s),
-	   style.medium_color());
+	   format("%s %s", soldier_preference_icon(get_soldier_preference()), *s), style.medium_color());
 }
 
 bool MilitarySite::init(EditorGameBase& egbase) {

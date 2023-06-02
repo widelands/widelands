@@ -392,10 +392,12 @@ Warehouse::Warehouse(const WarehouseDescr& warehouse_descr)
    : Building(warehouse_descr),
      attack_target_(this),
      soldier_control_(this),
-     soldier_request_(*this, SoldierPreference::kAny /* no exchange by default */,
-     		Warehouse::request_soldier_callback,
-     		[this]() { return soldier_control_.soldier_capacity(); },
-     		[this]() { return soldier_control_.stationed_soldiers(); }),
+     soldier_request_(
+        *this,
+        SoldierPreference::kAny /* no exchange by default */,
+        Warehouse::request_soldier_callback,
+        [this]() { return soldier_control_.soldier_capacity(); },
+        [this]() { return soldier_control_.stationed_soldiers(); }),
      supply_(new WarehouseSupply(this)) {
 	cleanup_in_progress_ = false;
 	set_attack_target(&attack_target_);
@@ -1463,10 +1465,10 @@ void Warehouse::set_soldier_preference(SoldierPreference p) {
 }
 
 void Warehouse::request_soldier_callback(Game& game,
-                                            Request& /* req */,
-                                            DescriptionIndex /* index */,
-                                            Worker* const w,
-                                            PlayerImmovable& target) {
+                                         Request& /* req */,
+                                         DescriptionIndex /* index */,
+                                         Worker* const w,
+                                         PlayerImmovable& target) {
 	Warehouse& wh = dynamic_cast<Warehouse&>(target);
 	Soldier& s = dynamic_cast<Soldier&>(*w);
 

@@ -306,12 +306,15 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 			cs_launch_expedition_->set_enabled(can_act);
 		}
 	}
-	FALLS_THROUGH;
+		FALLS_THROUGH;
 	case Widelands::MapObjectType::MILITARYSITE: {
 		upcast(Widelands::MilitarysiteSettings, ms, construction_site->get_settings());
 		upcast(Widelands::WarehouseSettings, wh, construction_site->get_settings());
 		cs_soldier_capacity_ = new ConstructionSoldierCapacityBox(
-		   settings_box.get(), ms != nullptr ? ms->desired_capacity : wh->desired_capacity, ms != nullptr ? 1 : 0, ms != nullptr ? ms->max_capacity : std::numeric_limits<Widelands::Quantity>::max(), can_act);
+		   settings_box.get(), ms != nullptr ? ms->desired_capacity : wh->desired_capacity,
+		   ms != nullptr ? 1 : 0,
+		   ms != nullptr ? ms->max_capacity : std::numeric_limits<Widelands::Quantity>::max(),
+		   can_act);
 		settings_box->add(cs_soldier_capacity_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 		settings_box->add_space(8);
 		cs_soldier_capacity_->changed.connect([this]() {
@@ -328,8 +331,8 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 		settings_box->add(&soldier_preference_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 		// TODO(Nordfriese): Use box layout
 		constexpr int kButtonSize = 32;
-		Panel& soldier_preference_panel =
-		   *new Panel(&soldier_preference_box, UI::PanelStyle::kWui, 0, 0, kButtonSize * 3, kButtonSize);
+		Panel& soldier_preference_panel = *new Panel(
+		   &soldier_preference_box, UI::PanelStyle::kWui, 0, 0, kButtonSize * 3, kButtonSize);
 		soldier_preference_box.add(&soldier_preference_panel);
 		cs_prefer_heroes_rookies_.reset(new UI::Radiogroup());
 		// Make sure the creation order is consistent with enum SoldierPreference!
@@ -342,7 +345,9 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 		cs_prefer_heroes_rookies_->add_button(
 		   &soldier_preference_panel, UI::PanelStyle::kWui, Vector2i(kButtonSize * 0, 0),
 		   g_image_cache->get("images/wui/buildings/prefer_any.png"), _("No preference"));
-		cs_prefer_heroes_rookies_->set_state(static_cast<uint8_t>(ms != nullptr ? ms->soldier_preference : wh->soldier_preference), false);
+		cs_prefer_heroes_rookies_->set_state(
+		   static_cast<uint8_t>(ms != nullptr ? ms->soldier_preference : wh->soldier_preference),
+		   false);
 		if (can_act) {
 			cs_prefer_heroes_rookies_->changedto.connect([this](int32_t state) {
 				if (game_ != nullptr) {
@@ -350,9 +355,11 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 					   *construction_site_.get(ibase()->egbase()),
 					   static_cast<Widelands::SoldierPreference>(state));
 				} else {
-					if (upcast(Widelands::MilitarysiteSettings, ms, construction_site_.get(ibase()->egbase())->get_settings())) {
+					if (upcast(Widelands::MilitarysiteSettings, ms,
+					           construction_site_.get(ibase()->egbase())->get_settings())) {
 						ms->soldier_preference = static_cast<Widelands::SoldierPreference>(state);
-					} else if (upcast(Widelands::WarehouseSettings, wh, construction_site_.get(ibase()->egbase())->get_settings())) {
+					} else if (upcast(Widelands::WarehouseSettings, wh,
+					                  construction_site_.get(ibase()->egbase())->get_settings())) {
 						wh->soldier_preference = static_cast<Widelands::SoldierPreference>(state);
 					}
 				}
@@ -441,7 +448,8 @@ void ConstructionSiteWindow::think() {
 			assert(!ws->launch_expedition);
 		}
 #endif
-		cs_soldier_capacity_->refresh(ws->desired_capacity, std::numeric_limits<Widelands::Quantity>::max(), can_act);
+		cs_soldier_capacity_->refresh(
+		   ws->desired_capacity, std::numeric_limits<Widelands::Quantity>::max(), can_act);
 		cs_prefer_heroes_rookies_->set_state(static_cast<uint8_t>(ws->soldier_preference), false);
 	}
 }

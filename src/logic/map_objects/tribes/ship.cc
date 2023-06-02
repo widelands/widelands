@@ -776,8 +776,8 @@ void Ship::warship_soldier_callback(Game& game,
 
 	if (ship == nullptr) {
 		verb_log_info_time(game.get_gametime(), "%s %u missed his assigned warship at dock %s",
-			               worker->descr().name().c_str(), worker->serial(),
-			               warehouse.get_warehouse_name().c_str());
+		                   worker->descr().name().c_str(), worker->serial(),
+		                   warehouse.get_warehouse_name().c_str());
 		// The soldier is in the port now, ready to get some new assignment by the economy.
 		return;
 	}
@@ -785,8 +785,8 @@ void Ship::warship_soldier_callback(Game& game,
 	assert(ship->get_owner() == warehouse.get_owner());
 	assert(ship->get_ship_type() == ShipType::kWarship);
 
-	ship->molog(game.get_gametime(), "%s %u embarked on warship",
-	            worker->descr().name().c_str(), worker->serial());
+	ship->molog(game.get_gametime(), "%s %u embarked on warship", worker->descr().name().c_str(),
+	            worker->serial());
 
 	worker->set_location(nullptr);
 	worker->start_task_shipping(game, nullptr);
@@ -978,10 +978,8 @@ void Ship::warship_command(Game& game,
 				}
 				unsigned soldier_level = soldier->get_total_level();
 				if (worst_fit == nullptr || (get_soldier_preference() == SoldierPreference::kRookies ?
-						soldier_level >= worst_fit_level
-					:
-						soldier_level <= worst_fit_level
-				)) {
+                                            soldier_level >= worst_fit_level :
+                                            soldier_level <= worst_fit_level)) {
 					worst_fit = &si;
 					worst_fit_level = soldier_level;
 				}
@@ -2382,7 +2380,7 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 		capacity_ = fr.unsigned_32();
 		warship_soldier_capacity_ = (packet_version >= 13) ? fr.unsigned_32() : capacity_;
 		if (packet_version >= 14) {
-			soldier_preference_ =  static_cast<SoldierPreference>(fr.unsigned_8());
+			soldier_preference_ = static_cast<SoldierPreference>(fr.unsigned_8());
 		}
 		lastdock_ = fr.unsigned_32();
 		destination_ = fr.unsigned_32();

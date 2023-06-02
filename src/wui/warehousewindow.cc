@@ -292,7 +292,8 @@ void WarehouseWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	   _("Workers"));
 
 	UI::Box* soldiers_box = new UI::Box(get_tabs(), UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
-	soldiers_box->add(new SoldierStatisticsPanel(
+	soldiers_box->add(
+	   new SoldierStatisticsPanel(
 	      *soldiers_box, warehouse->owner(),
 	      [this](uint32_t h, uint32_t a, uint32_t d, uint32_t e) {
 		      uint32_t n = 0;
@@ -306,8 +307,10 @@ void WarehouseWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 			      }
 		      }
 		      return n;
-	      }), UI::Box::Resizing::kFullSize);
-	soldiers_box->add(create_soldier_list(*soldiers_box, *ibase(), *warehouse), UI::Box::Resizing::kFullSize);
+	      }),
+	   UI::Box::Resizing::kFullSize);
+	soldiers_box->add(
+	   create_soldier_list(*soldiers_box, *ibase(), *warehouse), UI::Box::Resizing::kFullSize);
 	get_tabs()->add("soldiers", g_image_cache->get(pic_tab_soldiers), soldiers_box, _("Soldiers"));
 
 	if (const Widelands::PortDock* pd = warehouse->get_portdock()) {

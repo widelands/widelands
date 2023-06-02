@@ -691,9 +691,7 @@ void CmdSetSoldierPreference::execute(Game& game) {
 
 constexpr uint16_t kCurrentPacketVersionSoldierPreference = 1;
 
-void CmdSetSoldierPreference::write(FileWrite& fw,
-                                                EditorGameBase& egbase,
-                                                MapObjectSaver& mos) {
+void CmdSetSoldierPreference::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 	// First, write version
 	fw.unsigned_16(kCurrentPacketVersionSoldierPreference);
 	// Write base classes
@@ -705,9 +703,7 @@ void CmdSetSoldierPreference::write(FileWrite& fw,
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
 }
 
-void CmdSetSoldierPreference::read(FileRead& fr,
-                                               EditorGameBase& egbase,
-                                               MapObjectLoader& mol) {
+void CmdSetSoldierPreference::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersionSoldierPreference) {
@@ -715,8 +711,8 @@ void CmdSetSoldierPreference::read(FileRead& fr,
 			preference = static_cast<Widelands::SoldierPreference>(fr.unsigned_8());
 			serial = get_object_serial_or_zero<MapObject>(fr.unsigned_32(), mol);
 		} else {
-			throw UnhandledVersionError("CmdSetSoldierPreference", packet_version,
-			                            kCurrentPacketVersionSoldierPreference);
+			throw UnhandledVersionError(
+			   "CmdSetSoldierPreference", packet_version, kCurrentPacketVersionSoldierPreference);
 		}
 	} catch (const WException& e) {
 		throw GameDataError("cmd soldier preference: %s", e.what());

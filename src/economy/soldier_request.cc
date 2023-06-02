@@ -68,8 +68,8 @@ void SoldierRequest::update() {
 		return;
 	}
 
-	const SoldierDescr* descr = dynamic_cast<const SoldierDescr*>(target_.owner().egbase().descriptions().get_worker_descr(
-			target_.owner().tribe().soldier()));
+	const SoldierDescr* descr = dynamic_cast<const SoldierDescr*>(
+	   target_.owner().egbase().descriptions().get_worker_descr(target_.owner().tribe().soldier()));
 	const int16_t max_level = descr->get_max_total_level();
 	int16_t rmin = 0;
 	int16_t rmax = max_level;

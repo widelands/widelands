@@ -538,10 +538,10 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 					for (uint32_t i = packet_version >= 10 ? fr.unsigned_32() : 0; i > 0; --i) {
 						Ship* ship = &mol.get<Ship>(fr.unsigned_32());
 						assert(warehouse.portdock_->warship_soldier_requests_.count(ship) == 0);
-						SoldierRequest* req = new SoldierRequest(warehouse, SoldierPreference::kHeroes, Ship::warship_soldier_callback,
-							[ship]() { return ship->get_warship_soldier_capacity(); },
-							[ship]() { return ship->onboard_soldiers(); }
-						);
+						SoldierRequest* req = new SoldierRequest(
+						   warehouse, SoldierPreference::kHeroes, Ship::warship_soldier_callback,
+						   [ship]() { return ship->get_warship_soldier_capacity(); },
+						   [ship]() { return ship->onboard_soldiers(); });
 						req->read(fr, game, mol);
 						warehouse.portdock_->warship_soldier_requests_.emplace(ship->serial(), req);
 					}

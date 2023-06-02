@@ -47,7 +47,8 @@ MilitarysiteSettings::MilitarysiteSettings(const MilitarySiteDescr& descr, const
    : BuildingSettings(descr.name(), tribe),
      max_capacity(descr.get_max_number_of_soldiers()),
      desired_capacity(descr.get_max_number_of_soldiers()),
-     soldier_preference(descr.prefers_heroes_at_start_ ? SoldierPreference::kHeroes : SoldierPreference::kRookies) {
+     soldier_preference(descr.prefers_heroes_at_start_ ? SoldierPreference::kHeroes :
+                                                         SoldierPreference::kRookies) {
 }
 
 TrainingsiteSettings::TrainingsiteSettings(const TrainingSiteDescr& descr, const TribeDescr& tribe)

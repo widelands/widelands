@@ -36,8 +36,16 @@ public:
 	using DesiredCapacityFn = std::function<Quantity()>;
 	using StationedSoldiersFn = std::function<std::vector<Soldier*>()>;
 
-	SoldierRequest(PlayerImmovable& target, SoldierPreference pref, Request::CallbackFn callback, DesiredCapacityFn dcfn, StationedSoldiersFn ssfn)
-	: target_(target), preference_(pref), callback_(callback), get_desired_capacity_(dcfn), get_stationed_soldiers_(ssfn) {
+	SoldierRequest(PlayerImmovable& target,
+	               SoldierPreference pref,
+	               Request::CallbackFn callback,
+	               DesiredCapacityFn dcfn,
+	               StationedSoldiersFn ssfn)
+	   : target_(target),
+	     preference_(pref),
+	     callback_(callback),
+	     get_desired_capacity_(dcfn),
+	     get_stationed_soldiers_(ssfn) {
 	}
 
 	void update();
