@@ -19,6 +19,7 @@
 #ifndef WL_SCRIPTING_LUA_H
 #define WL_SCRIPTING_LUA_H
 
+#include <cstdint>
 #include <string>
 
 #include "third_party/eris/lua.hpp"
