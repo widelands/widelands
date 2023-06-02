@@ -35,6 +35,7 @@
 #include "logic/game_controller.h"
 #include "logic/map_objects/pinned_note.h"
 #include "logic/map_objects/tribes/market.h"
+#include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
