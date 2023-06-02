@@ -461,7 +461,7 @@ SoldierRequest* PortDock::get_warship_request(Serial ship) const {
 }
 
 SoldierRequest& PortDock::create_warship_request(Ship* ship, SoldierPreference pref) {
-	assert(warship_soldier_requests_.count(ship) == 0);
+	assert(warship_soldier_requests_.count(ship->serial()) == 0);
 	SoldierRequest* req = new SoldierRequest(
 	   *get_warehouse(), pref, Ship::warship_soldier_callback,
 	   [ship]() { return ship->get_warship_soldier_capacity(); },

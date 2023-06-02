@@ -310,6 +310,7 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 	case Widelands::MapObjectType::MILITARYSITE: {
 		upcast(Widelands::MilitarysiteSettings, ms, construction_site->get_settings());
 		upcast(Widelands::WarehouseSettings, wh, construction_site->get_settings());
+		assert((ms != nullptr) ^ (wh != nullptr));
 		cs_soldier_capacity_ = new ConstructionSoldierCapacityBox(
 		   settings_box.get(), ms != nullptr ? ms->desired_capacity : wh->desired_capacity,
 		   ms != nullptr ? 1 : 0,
@@ -355,12 +356,14 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 					   *construction_site_.get(ibase()->egbase()),
 					   static_cast<Widelands::SoldierPreference>(state));
 				} else {
-					if (upcast(Widelands::MilitarysiteSettings, ms,
+					if (upcast(Widelands::MilitarysiteSettings, ms_settings,
 					           construction_site_.get(ibase()->egbase())->get_settings())) {
-						ms->soldier_preference = static_cast<Widelands::SoldierPreference>(state);
-					} else if (upcast(Widelands::WarehouseSettings, wh,
+						ms_settings->soldier_preference =
+						   static_cast<Widelands::SoldierPreference>(state);
+					} else if (upcast(Widelands::WarehouseSettings, wh_settings,
 					                  construction_site_.get(ibase()->egbase())->get_settings())) {
-						wh->soldier_preference = static_cast<Widelands::SoldierPreference>(state);
+						wh_settings->soldier_preference =
+						   static_cast<Widelands::SoldierPreference>(state);
 					}
 				}
 			});
