@@ -479,7 +479,7 @@ void MilitarySite::cleanup(EditorGameBase& egbase) {
 
 Soldier* MilitarySite::find_least_suited_soldier() {
 	const std::vector<Soldier*> present = soldier_control_.present_soldiers();
-	// Always kick out a rookie, unless rookies are preferred - NOCOM
+	// Always kick out a rookie, unless rookies are preferred.
 	const int32_t multiplier = get_soldier_preference() == SoldierPreference::kRookies ? 1 : -1;
 	int worst_soldier_level = INT_MIN;
 	Soldier* worst_soldier = nullptr;
@@ -523,7 +523,7 @@ bool MilitarySite::drop_least_suited_soldier(bool new_soldier_has_arrived, Soldi
 				if (old_level <= new_level) {
 					return false;
 				}
-			} else {  // All policies except Prefer Rookies prefer heroes - NOCOM
+			} else {  // All policies except Prefer Rookies prefer to kick out rookies.
 				if (old_level >= new_level) {
 					return false;
 				}

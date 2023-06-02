@@ -504,9 +504,6 @@ SoldierList::SoldierList(UI::Panel& parent,
 		                               g_image_cache->get("images/wui/buildings/prefer_heroes.png"),
 		                               _("Prefer heroes"));
 		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, Vector2i::zero(),
-		                               g_image_cache->get("images/wui/buildings/prefer_average.png"),
-		                               _("Prefer average"));
-		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, Vector2i::zero(),
 		                               g_image_cache->get("images/wui/buildings/prefer_any.png"),
 		                               _("No preference"));
 		UI::Radiobutton* button = soldier_preference_.get_first_button();
@@ -599,10 +596,9 @@ void SoldierList::eject(const Widelands::Soldier* soldier) {
 }
 
 void SoldierList::set_soldier_preference(int32_t changed_to) {
-	assert(building_or_ship_.descr().type() == Widelands::MapObjectType::MILITARYSITE);
 	if (Widelands::Game* game = ibase_.get_game()) {
-		game->send_player_militarysite_set_soldier_preference(
-		   *soldierpanel_.get_building(), static_cast<Widelands::SoldierPreference>(changed_to));
+		game->send_player_set_soldier_preference(
+		   building_or_ship_, static_cast<Widelands::SoldierPreference>(changed_to));
 	} else {
 		NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 	}

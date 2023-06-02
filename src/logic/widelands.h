@@ -95,8 +95,7 @@ struct SoldierStrength {
 enum class SoldierPreference : uint8_t {
 	kRookies = 0,
 	kHeroes = 1,
-	kAverage = 2,
-	kAny = 3,
+	kAny = 2,
 };
 
 std::string soldier_preference_icon(SoldierPreference p);

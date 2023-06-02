@@ -329,19 +329,16 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 		// TODO(Nordfriese): Use box layout
 		constexpr int kButtonSize = 32;
 		Panel& soldier_preference_panel =
-		   *new Panel(&soldier_preference_box, UI::PanelStyle::kWui, 0, 0, kButtonSize * 4, kButtonSize);
+		   *new Panel(&soldier_preference_box, UI::PanelStyle::kWui, 0, 0, kButtonSize * 3, kButtonSize);
 		soldier_preference_box.add(&soldier_preference_panel);
 		cs_prefer_heroes_rookies_.reset(new UI::Radiogroup());
 		// Make sure the creation order is consistent with enum SoldierPreference!
 		cs_prefer_heroes_rookies_->add_button(
-		   &soldier_preference_panel, UI::PanelStyle::kWui, Vector2i(kButtonSize * 3, 0),
+		   &soldier_preference_panel, UI::PanelStyle::kWui, Vector2i(kButtonSize * 2, 0),
 		   g_image_cache->get("images/wui/buildings/prefer_rookies.png"), _("Prefer rookies"));
 		cs_prefer_heroes_rookies_->add_button(
-		   &soldier_preference_panel, UI::PanelStyle::kWui, Vector2i(kButtonSize * 2, 0),
-		   g_image_cache->get("images/wui/buildings/prefer_heroes.png"), _("Prefer heroes"));
-		cs_prefer_heroes_rookies_->add_button(
 		   &soldier_preference_panel, UI::PanelStyle::kWui, Vector2i(kButtonSize * 1, 0),
-		   g_image_cache->get("images/wui/buildings/prefer_average.png"), _("Prefer average"));
+		   g_image_cache->get("images/wui/buildings/prefer_heroes.png"), _("Prefer heroes"));
 		cs_prefer_heroes_rookies_->add_button(
 		   &soldier_preference_panel, UI::PanelStyle::kWui, Vector2i(kButtonSize * 0, 0),
 		   g_image_cache->get("images/wui/buildings/prefer_any.png"), _("No preference"));
@@ -349,7 +346,7 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 		if (can_act) {
 			cs_prefer_heroes_rookies_->changedto.connect([this](int32_t state) {
 				if (game_ != nullptr) {
-					game_->send_player_militarysite_set_soldier_preference(
+					game_->send_player_set_soldier_preference(
 					   *construction_site_.get(ibase()->egbase()),
 					   static_cast<Widelands::SoldierPreference>(state));
 				} else {

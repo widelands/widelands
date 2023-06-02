@@ -26,10 +26,8 @@ std::string soldier_preference_icon(const SoldierPreference p) {
 		return "↑";
 	case SoldierPreference::kRookies:
 		return "↓";
-	case SoldierPreference::kAverage:
-		return "~";
 	case SoldierPreference::kAny:
-		return "×";
+		return "=";
 	}
 }
 

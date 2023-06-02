@@ -964,11 +964,33 @@ void Ship::warship_command(Game& game,
 		update_warship_soldier_request(false);
 
 		// If we have too many soldiers on board now, unload the extras.
-		// NOCOM unload the worst fits first
 		PortDock* dest = get_destination_port(game);
 		while (get_nritems() > warship_soldier_capacity_) {
+			// Always kick out a rookie, unless rookies are preferred.
+			ShippingItem* worst_fit = nullptr;
+			unsigned worst_fit_level = 0;
+			for (ShippingItem& si : items_) {
+				Worker* worker;
+				si.get(game, nullptr, &worker);
+				Soldier* soldier = dynamic_cast<Soldier*>(worker);
+				if (soldier == nullptr) {
+					continue;
+				}
+				unsigned soldier_level = soldier->get_total_level();
+				if (worst_fit == nullptr || (get_soldier_preference() == SoldierPreference::kRookies ?
+						soldier_level >= worst_fit_level
+					:
+						soldier_level <= worst_fit_level
+				)) {
+					worst_fit = &si;
+					worst_fit_level = soldier_level;
+				}
+			}
+
+			assert(worst_fit != nullptr);
 			assert(dest != nullptr);
-			dest->shipping_item_arrived(game, items_.back());
+			dest->shipping_item_arrived(game, *worst_fit);
+			*worst_fit = items_.back();
 			items_.pop_back();
 		}
 

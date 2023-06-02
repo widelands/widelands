@@ -97,47 +97,6 @@ void SoldierRequest::update() {
 		rmax = best_soldier - 1;
 		break;
 	}
-
-	case SoldierPreference::kAverage: {
-		int32_t avg_total_level = 0;
-		uint32_t n_total_soldiers = 0;
-		for (unsigned h = 0; h <= descr->get_max_health_level(); ++h) {
-			for (unsigned a = 0; a <= descr->get_max_attack_level(); ++a) {
-				for (unsigned d = 0; d <= descr->get_max_defense_level(); ++d) {
-					for (unsigned e = 0; e <= descr->get_max_evade_level(); ++e) {
-						const uint32_t n = target_.owner().count_soldiers(h, a, d, e);
-						n_total_soldiers += n;
-						avg_total_level += n * (h + a + d + e);
-					}
-				}
-			}
-		}
-		assert(n_total_soldiers >= current);
-		avg_total_level /= n_total_soldiers;
-		assert(avg_total_level >= 0);
-		assert(avg_total_level <= max_level);
-
-		for (Soldier* soldier : stationed) {
-			int16_t level = soldier->get_total_level();
-			if (level > avg_total_level && level < rmax) {
-				rmax = level;
-			} else if (level < avg_total_level && level > rmin) {
-				rmin = level;
-			}
-		}
-
-		if (rmin < avg_total_level) {
-			++rmin;
-		} else if (rmax > avg_total_level) {
-			--rmax;
-		} else {
-			// Already a perfect fit
-			request_.reset();
-			return;
-		}
-
-		break;
-	}
 	}
 
 	if (rmax < rmin || rmin > max_level || rmax < 0) {
