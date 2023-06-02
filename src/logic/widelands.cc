@@ -18,6 +18,8 @@
 
 #include "logic/widelands.h"
 
+#include "base/wexception.h"
+
 namespace Widelands {
 
 std::string soldier_preference_icon(const SoldierPreference p) {
@@ -29,6 +31,7 @@ std::string soldier_preference_icon(const SoldierPreference p) {
 	case SoldierPreference::kAny:
 		return "=";
 	}
+	NEVER_HERE();
 }
 
 }  // namespace Widelands
