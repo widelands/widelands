@@ -46,6 +46,9 @@ struct MapObjectSaver;
 
 namespace UI {
 
+// TODO(Nordfriese): Refactor all panels to be named panels
+struct NamedPanel;
+
 /**
  * Panel is a basic rectangular UI element.
  *
@@ -262,6 +265,7 @@ public:
 	Panel* get_last_child() {
 		return last_child_;
 	}
+	NamedPanel* find_child_by_name(const std::string& name, bool recurse);
 
 	void move_to_top(bool on_top_of_equal_z = true);
 	[[nodiscard]] virtual ZOrder get_z() const {

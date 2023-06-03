@@ -62,6 +62,30 @@ namespace LuaUi {
 
 */
 
+int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel) {
+	if (panel == nullptr) {
+		return 0;
+	}
+
+	// TODO(Nordfriese): Support more types of components
+
+	// TODO(Nordfriese): This trial-and-error approach is inefficient and extremely ugly,
+	// use a virtual function call similar to Widelands::MapObjectDescr::type.
+	if (upcast(UI::Window, w, panel)) {
+		to_lua<LuaWindow>(L, new LuaWindow(w));
+	} else if (upcast(UI::Button, btn, panel)) {
+		to_lua<LuaButton>(L, new LuaButton(btn));
+	} else if (upcast(UI::Tab, tab, panel)) {
+		to_lua<LuaTab>(L, new LuaTab(tab));
+	} else if (upcast(UI::BaseDropdown, dd, panel)) {
+		to_lua<LuaDropdown>(L, new LuaDropdown(dd));
+	} else {
+		to_lua<LuaPanel>(L, new LuaPanel(panel));
+	}
+
+	return 1;
+}
+
 /*
  * ========================================================================
  *                         MODULE CLASSES
@@ -93,6 +117,7 @@ const MethodType<LuaPanel> LuaPanel::Methods[] = {
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
    METHOD(LuaPanel, indicate),
 #endif
+   METHOD(LuaPanel, get_child),
    METHOD(LuaPanel, create_child),
    {nullptr, nullptr},
 };
@@ -334,6 +359,29 @@ int LuaPanel::indicate(lua_State* L) {
 	return 2;
 }
 #endif
+
+/* RST
+   .. method:: get_child(name[, recursive=true])
+
+      .. versionadded:: 1.2
+
+      Get a named panel that is a descendant of this panel.
+
+      If the optional parameter is ``false``, only direct children of this panel are considered.
+
+      :arg name: Name of the descendant to look for.
+      :type child: :class:`string`
+      :arg recursive: Also consider non-direct descendants.
+      :type child: :class:`boolean`
+
+      :returns: The child upcasted to the correct class, or ``nil`` if the child does not exist.
+*/
+int LuaPanel::get_child(lua_State* L) {
+	std::string name = luaL_checkstring(L, 2);
+	bool recurse = lua_gettop(L) < 3 || luaL_checkboolean(L, 3);
+
+	return upcasted_panel_to_lua(L, panel_->find_child_by_name(name, recurse));
+}
 
 /* RST
    .. method:: create_child(table)

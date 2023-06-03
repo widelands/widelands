@@ -88,6 +88,7 @@ public:
 	int indicate(lua_State* L);
 #endif
 	int create_child(lua_State* L);
+	int get_child(lua_State* L);
 
 	/*
 	 * C Methods
@@ -271,6 +272,8 @@ public:
 		return dynamic_cast<InteractiveBase*>(panel_);
 	}
 };
+
+int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel);
 
 void luaopen_wlui(lua_State*);
 }  // namespace LuaUi
