@@ -79,10 +79,16 @@ struct Radiogroup {
 		return buttons_;
 	}
 
+	// Signifies that the radio group is dynamically allocated and its lifetime is nowhere managed,
+	// so the radiogroup will be freed when its last radiobutton is deleted.
+	// If the group is empty, this will delete it instantly.
+	void manage_own_lifetime();
+
 private:
 	Radiobutton* buttons_;  //  linked list of buttons (not sorted)
 	int32_t highestid_;
 	int32_t state_;  //  -1: none
+	bool managing_own_lifetime_{false};
 };
 }  // namespace UI
 

@@ -45,6 +45,10 @@ Radiobutton::~Radiobutton() {
 			break;
 		}
 	}
+
+	if (group_.managing_own_lifetime_ && group_.buttons_ == nullptr) {
+		delete &group_;
+	}
 }
 
 /**
@@ -84,6 +88,14 @@ Radiogroup::~Radiogroup() {
 	while (buttons_ != nullptr) {
 		delete buttons_;
 	}
+}
+
+void Radiogroup::manage_own_lifetime() {
+	if (buttons_ == nullptr) {
+		delete this;
+		return;
+	}
+	managing_own_lifetime_ = true;
 }
 
 /**
