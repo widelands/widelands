@@ -623,6 +623,13 @@ const UI::FontStyleInfo& StyleManager::font_style(std::string style_name) const 
 	return font_style(fontstyle_keys_.at(style_name));
 }
 
+UI::FontStyle StyleManager::safe_font_style(std::string name) const {
+	if (fontstyle_keys_.count(name) != 1) {
+		throw wexception("Unknown font style %s", name.c_str());
+	}
+	return fontstyle_keys_.at(name);
+}
+
 const UI::ParagraphStyleInfo& StyleManager::paragraph_style(UI::ParagraphStyle style) const {
 	assert(paragraphstyles_.count(style) == 1);
 	return *paragraphstyles_.at(style);

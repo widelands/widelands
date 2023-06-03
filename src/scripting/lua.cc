@@ -18,6 +18,8 @@
 
 #include "scripting/lua.h"
 
+#include "scripting/report_error.h"
+
 void lua_pushstring(lua_State* L, const std::string& s) {
 	lua_pushstring(L, s.c_str());
 }
@@ -33,4 +35,38 @@ bool luaL_checkboolean(lua_State* L, int n) {
 		return lua_toboolean(L, n) != 0;
 	}
 	return luaL_checkinteger(L, n) != 0;
+}
+
+std::string
+get_table_string(lua_State* L, const char* key, bool mandatory, std::string default_value) {
+	lua_getfield(L, -1, key);
+	if (!lua_isnil(L, -1)) {
+		default_value = luaL_checkstring(L, -1);
+	} else if (mandatory) {
+		report_error(L, "Missing string: %s", key);
+	}
+	lua_pop(L, 1);
+	return default_value;
+}
+
+int32_t get_table_int(lua_State* L, const char* key, bool mandatory, int32_t default_value) {
+	lua_getfield(L, -1, key);
+	if (!lua_isnil(L, -1)) {
+		default_value = luaL_checkint32(L, -1);
+	} else if (mandatory) {
+		report_error(L, "Missing integer: %s", key);
+	}
+	lua_pop(L, 1);
+	return default_value;
+}
+
+bool get_table_boolean(lua_State* L, const char* key, bool mandatory, bool default_value) {
+	lua_getfield(L, -1, key);
+	if (!lua_isnil(L, -1)) {
+		default_value = luaL_checkboolean(L, -1);
+	} else if (mandatory) {
+		report_error(L, "Missing boolean: %s", key);
+	}
+	lua_pop(L, 1);
+	return default_value;
 }

@@ -4,19 +4,13 @@ wl_library(scripting_base
   SRCS
     lua.h
     lua.cc
-  DEPENDS
-    third_party_eris
-)
-
-wl_library(scripting_errors
-  SRCS
     lua_errors.cc
     lua_errors.h
     report_error.cc
     report_error.h
   DEPENDS
     base_exceptions
-    scripting_base
+    third_party_eris
 )
 
 wl_library(scripting_luna
@@ -27,7 +21,6 @@ wl_library(scripting_luna
   DEPENDS
     base_macros
     scripting_base
-    scripting_errors
 )
 
 wl_library(scripting_lua_table
@@ -39,7 +32,6 @@ wl_library(scripting_lua_table
     base_geometry
     scripting_base
     scripting_coroutine
-    scripting_errors
 )
 
 wl_library(scripting_coroutine
@@ -51,7 +43,6 @@ wl_library(scripting_coroutine
     io_fileread
     logic_exceptions
     scripting_base
-    scripting_errors
     # TODO(sirver): Cyclic dependency. introduce a seam so that logic can
     # push/pull new parameters to coroutines.
     scripting_logic
@@ -81,7 +72,6 @@ wl_library(scripting_lua_interface
     logic_addons
     logic_exceptions
     scripting_base
-    scripting_errors
     scripting_logic
     scripting_lua_table
     scripting_luna
@@ -116,6 +106,7 @@ wl_library(scripting_logic
     base_exceptions
     base_macros
     economy
+    graphic
     io_fileread
     io_filesystem
     io_profile
@@ -133,7 +124,6 @@ wl_library(scripting_logic
     map_io
     scripting_base
     scripting_coroutine
-    scripting_errors
     scripting_lua_interface
     scripting_lua_table
     scripting_luna
