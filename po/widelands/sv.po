@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-05-29 02:48+0000\n"
+"POT-Creation-Date: 2023-06-01 03:19+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: D M <kamera001dm@gmail.com>, 2021,2023\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
@@ -375,7 +375,7 @@ msgstr "Publicera karta online..."
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:243
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:227
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:226
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:62
 #: ../../src/wlapplication_options.cc:458
 msgid "Map Options"
@@ -640,8 +640,8 @@ msgstr "Är du säker på att du vill lämna kartredigeraren?"
 #: ../../src/ui_fsmenu/addons/manager.cc:1591
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:103
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:293
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:560
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:704
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:561
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:705
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:461
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:467
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:123
@@ -989,7 +989,7 @@ msgstr "%1$s; %2$s"
 msgid "Enabled Add-Ons: %s"
 msgstr "Aktiverade tillägg: %s"
 
-#: ../../src/editor/ui_menus/help.cc:36 ../../src/ui_fsmenu/login_box.cc:238
+#: ../../src/editor/ui_menus/help.cc:36 ../../src/ui_fsmenu/login_box.cc:240
 #: ../../src/ui_fsmenu/main.cc:231 ../../src/ui_fsmenu/main.cc:1049
 #: ../../src/wui/encyclopedia_window.cc:145
 #: ../../src/wui/tribal_encyclopedia.cc:55
@@ -1034,7 +1034,7 @@ msgid "Display"
 msgstr "Visning"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:76
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:249
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:248
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:60
 #: ../../src/editor/ui_menus/player_menu.cc:78
 #: ../../src/ui_basic/color_chooser.cc:258
@@ -1043,8 +1043,8 @@ msgstr "Visning"
 #: ../../src/ui_fsmenu/addons/manager.cc:250
 #: ../../src/ui_fsmenu/addons/packager.cc:111
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:175
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:462
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:678
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:463
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:679
 #: ../../src/ui_fsmenu/helpwindow.cc:56
 #: ../../src/ui_fsmenu/keyboard_options.cc:68
 #: ../../src/ui_fsmenu/keyboard_options.cc:230 ../../src/ui_fsmenu/menu.cc:143
@@ -1056,7 +1056,7 @@ msgid "OK"
 msgstr "OK"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:77
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:257
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:256
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:68
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:823
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:68
@@ -1065,7 +1065,7 @@ msgstr "OK"
 #: ../../src/ui_fsmenu/addons/contact.cc:55
 #: ../../src/ui_fsmenu/addons/login_box.cc:63
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:191
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:470
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:471
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:62
 #: ../../src/ui_fsmenu/keyboard_options.cc:63
 #: ../../src/ui_fsmenu/login_box.cc:46 ../../src/ui_fsmenu/options.cc:90
@@ -1092,11 +1092,11 @@ msgstr "Kartornas originalnamn"
 msgid "Translated map names"
 msgstr "Översatta kartnamn"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:51
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:50
 msgid "Click player to remove"
 msgstr "Klicka för att ta bort spelare"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:61
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:60
 #: ../../src/ui_fsmenu/addons/packager_box.cc:430
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:66
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:89
@@ -1105,86 +1105,86 @@ msgstr "Klicka för att ta bort spelare"
 msgid "Delete"
 msgstr "Ta bort"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:62
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:61
 msgid "Delete this suggested team lineup"
 msgstr "Ta bort denna föreslagna laguppställning"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:108
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:107
 #: ../../src/ui_fsmenu/addons/packager.cc:77
 #: ../../src/ui_fsmenu/addons/packager_box.cc:148
 #: ../../src/wui/quicknavigation.cc:196
 msgid "+"
 msgstr "+"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:114
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:113
 msgid "Add a player to this team"
 msgstr "Lägg till en spelare till detta lag"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:321
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:320
 #: ../../src/logic/addons.cc:69
 msgid "Theme"
 msgstr "Tema"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:332
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:331
 msgid "Add lineup"
 msgstr "Lägg till lag"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:333
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:332
 msgid "Add another suggested team lineup"
 msgstr "Lägg till ytterligare en föreslagen laguppställning"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:355
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:354
 msgid "Map name:"
 msgstr "Kartnamn:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:360
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:359
 msgid "Authors:"
 msgstr "Upphovsmän:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:365
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:364
 #: ../../src/ui_fsmenu/addons/packager.cc:165
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:77
 msgid "Description:"
 msgstr "Beskrivning:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:370
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:369
 msgid "Hint (optional):"
 msgstr "Tips (frivilligt):"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:381
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:380
 msgid "Tags:"
 msgstr "Märkning:"
 
 #. * TRANSLATORS: Header for suitable team line-up tags, like "Free for all",
 #. * "Teams of 2", etc.
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:389
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:388
 msgid "This map is suitable for:"
 msgstr "Denna karta passar för:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:391
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:390
 msgid ""
 "Please add suggested team line-ups in the next tab for all selected options"
 msgstr "Var vänlig och ange förslag på laguppställningar i nästa flik för alla valda alternativ."
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:407
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:406
 msgid ""
 "Mark whether the starting positions provide equal conditions for each player"
 msgstr "Ange om startpositionerna ger likvärdiga förutsättningar för alla spelare."
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:412
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:411
 msgid "Set the theme for the game loadscreens"
 msgstr "Ställ in skärmbildens tema vid inladdning"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:413
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:412
 msgctxt "map_theme"
 msgid "(none)"
 msgstr "(ingen)"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:424
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:423
 msgid "Ferry range:"
 msgstr "Transportbåtarnas räckvidd:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:425
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:424
 msgid ""
 "Enable ferries, waterways, and ferry yards on this map by setting the "
 "maximum length of waterways for ferries"
@@ -1193,41 +1193,41 @@ msgstr "Möjliggör transportbåtar/pråmar, vattenvägar och båtsnickerier på
 #. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:441
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:440
 #: ../../src/ui_fsmenu/mousewheel_options.cc:57
 msgid "Disabled"
 msgstr "Avstängd"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:463
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:462
 #, c-format
 msgid "%u Player"
 msgid_plural "%u Players"
 msgstr[0] "%u spelare"
 msgstr[1] "%u spelare"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:466
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:465
 msgid "Suggested Teams:"
 msgstr "Föreslagna lag:"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:489
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:488
 msgid "Main Options"
 msgstr "Huvudinställningar"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:491
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:490
 #: ../../src/wui/mapdetails.cc:174
 msgid "Tags"
 msgstr "Märkningar"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:493
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:492
 msgid "Teams"
 msgstr "Lag"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:527
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:526
 #, c-format
 msgid "It is not recommended to permit waterway lengths greater than %u"
 msgstr "Det är inte rekommenderat att tillåta vattenvägar som är längre än %u"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:543
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:542
 msgid "Size: %1% x %2%"
 msgstr "Storlek: %1% x %2%"
 
@@ -1718,7 +1718,7 @@ msgid "Command queue"
 msgstr "Kommandokö"
 
 #: ../../src/game_io/game_loader.cc:157 ../../src/map_io/map_saver.cc:146
-#: ../../src/map_io/widelands_map_loader.cc:401
+#: ../../src/map_io/widelands_map_loader.cc:400
 #: ../../src/wlapplication_options.cc:645
 #: ../../src/wui/interactive_player.cc:224
 #: ../../src/wui/interactive_player.cc:462
@@ -2341,43 +2341,43 @@ msgstr "Ingen soldat hittades för denna träningsnivå."
 msgid "Completed %s"
 msgstr "Färdig med att %s"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:385
+#: ../../src/logic/map_objects/tribes/productionsite.cc:395
 msgid "(stopped)"
 msgstr "(stoppad)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/map_objects/tribes/productionsite.cc:468
+#: ../../src/logic/map_objects/tribes/productionsite.cc:478
 #: ../../src/wui/building_statistics_menu.cc:683
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:1185
+#: ../../src/logic/map_objects/tribes/productionsite.cc:1195
 msgid "Can’t find any more resources!"
 msgstr "Kan inte hitta mer resurser."
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:1233
-#: ../../src/logic/map_objects/tribes/productionsite.cc:1254
+#: ../../src/logic/map_objects/tribes/productionsite.cc:1243
+#: ../../src/logic/map_objects/tribes/productionsite.cc:1264
 msgctxt "building"
 msgid "No Shore"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:1234
+#: ../../src/logic/map_objects/tribes/productionsite.cc:1244
 msgid "Ship Yard Without Shore"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:1235
+#: ../../src/logic/map_objects/tribes/productionsite.cc:1245
 msgid ""
 "Your ship yard has not been built close enough to a shore. It will not be "
 "able to build ships."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:1255
+#: ../../src/logic/map_objects/tribes/productionsite.cc:1265
 msgid "Ferry Yard Without Shore"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:1256
+#: ../../src/logic/map_objects/tribes/productionsite.cc:1266
 msgid ""
 "Your ferry yard has not been built close enough to a shore. It will not be "
 "able to build ferries."
@@ -2873,7 +2873,7 @@ msgid "Map objects"
 msgstr "Kartobjekt"
 
 #: ../../src/map_io/map_saver.cc:237
-#: ../../src/map_io/widelands_map_loader.cc:409
+#: ../../src/map_io/widelands_map_loader.cc:408
 msgid "Win condition"
 msgstr "Segervillkor"
 
@@ -2894,17 +2894,17 @@ msgid "Territory"
 msgstr "Territorium"
 
 #: ../../src/map_io/map_saver.cc:287
-#: ../../src/map_io/widelands_map_loader.cc:391
+#: ../../src/map_io/widelands_map_loader.cc:390
 msgid "Vision"
 msgstr "Sikt"
 
 #: ../../src/map_io/map_saver.cc:296
-#: ../../src/map_io/widelands_map_loader.cc:426
+#: ../../src/map_io/widelands_map_loader.cc:425
 msgid "Scripting"
 msgstr "Skript"
 
 #: ../../src/map_io/map_saver.cc:303
-#: ../../src/map_io/widelands_map_loader.cc:419
+#: ../../src/map_io/widelands_map_loader.cc:418
 #: ../../src/wlapplication_options.cc:636
 #: ../../src/wui/game_objectives_menu.cc:30
 #: ../../src/wui/interactive_player.cc:214
@@ -2912,7 +2912,7 @@ msgid "Objectives"
 msgstr "Uppdrag"
 
 #: ../../src/map_io/map_saver.cc:307
-#: ../../src/map_io/widelands_map_loader.cc:433
+#: ../../src/map_io/widelands_map_loader.cc:432
 msgid "Images"
 msgstr "Bilder"
 
@@ -2960,9 +2960,13 @@ msgstr "Initialiserar byggnader"
 msgid "Initializing map objects"
 msgstr "Initialiserar kartobjekt"
 
-#: ../../src/map_io/widelands_map_loader.cc:436
+#: ../../src/map_io/widelands_map_loader.cc:435
 msgid "Checking map"
 msgstr "Kontrollerar kartan"
+
+#: ../../src/map_io/widelands_map_loader.cc:450
+msgid "Postloading map objects"
+msgstr ""
 
 #: ../../src/network/gameclient.cc:144 ../../src/network/gamehost.cc:523
 #: ../../src/ui_fsmenu/launch_spg.cc:174 ../../src/wlapplication.cc:756
@@ -4333,7 +4337,7 @@ msgid "–"
 msgstr "–"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:87
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:793
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:794
 msgid "Delete this add-on"
 msgstr "Radera detta tillägg"
 
@@ -4855,95 +4859,95 @@ msgctxt "priority"
 msgid "High"
 msgstr "Hög"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:478
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:479
 msgid "Please explain why you are deleting this add-on."
 msgstr "Var vänlig och förklara varför du tar bort detta tillägg."
 
 #. * TRANSLATORS: This add-on has not yet been verified
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:495
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:496
 msgid "Unchecked"
 msgstr "Okontrollerat"
 
 #. * TRANSLATORS: This add-on has been verified
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:497
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:498
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:394
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:422
 msgid "Verified"
 msgstr "Verifierat"
 
 #. * TRANSLATORS: This add-on is known to cause desyncs
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:501
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:502
 msgid "Desyncs"
 msgstr "Synkproblem"
 
 #. * TRANSLATORS: This add-on will not cause desyncs
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:503
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:504
 msgid "Sync-safe"
 msgstr "Synksäkert"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:636
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:637
 msgid "Your vote"
 msgstr "Din röst"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:660
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:661
 msgid "Next screenshot"
 msgstr "Nästa skärmdump"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:669
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:670
 msgid "Previous screenshot"
 msgstr "Föregående skärmdump"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:677
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:678
 msgid "Write a comment…"
 msgstr "Skriv en kommentar..."
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:687
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:688
 msgid "Administrator actions"
 msgstr "Administratörshandlingar"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:694
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:695
 msgid "Not voted"
 msgstr "Inte röstat"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:705
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:706
 #, c-format
 msgid ""
 "The vote could not be submitted.\n"
 "Error code: %s"
 msgstr "Rösten kunde inte skickas.\nFelkod: %s"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:765
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:766
 #, c-format
 msgid "Screenshots (%u)"
 msgstr "Skärmdumpar (%u)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:788
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:789
 msgid "Change verification status"
 msgstr "Ändra verifieringsstatus"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:789
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:790
 msgid "Change quality rating"
 msgstr "Ändra kvalitetsgradering"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:790
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:791
 msgid "Change sync-safety status"
 msgstr "Ändra synksäkerhetsstatus"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:792
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:793
 msgid "Configure Transifex integration"
 msgstr "Konfigurera Transiflexintegration"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:843
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:844
 #, c-format
 msgid "Comments (%u)"
 msgstr "Kommentarer (%u)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:844
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:845
 #, c-format
 msgid "Votes (%u)"
 msgstr "Röster (%u)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:848
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:849
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:479
 #, c-format
 msgid "Average rating: %1$.3f (%2$u vote)"
@@ -4951,51 +4955,51 @@ msgid_plural "Average rating: %1$.3f (%2$u votes)"
 msgstr[0] "Medelbetyg: %1$.3f (%2$u röst)"
 msgstr[1] "Medelbetyg: %1$.3f (%2$u röster)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:851
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:852
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:482
 msgid "No votes yet"
 msgstr "Inga röster än"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:869
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:870
 msgid "No comments yet."
 msgstr "Inga kommentarer än."
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:870
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:871
 #, c-format
 msgid "%u comment:"
 msgid_plural "%u comments:"
 msgstr[0] "%u kommentar:"
 msgstr[1] "%u kommentarer:"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:881
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:882
 #, c-format
 msgid "%1$s (edited on %2$s)"
 msgstr "%1$s (editerad %2$s)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:887
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:888
 #, c-format
 msgid "%1$s (edited by ‘%2$s’ on %3$s)"
 msgstr "%1$s (editerad av '%2$s' den %3$s)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:893
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:894
 #, c-format
 msgid "‘%1$s’ commented on version %2$s:"
 msgstr "\"%1$s\" kommenterade version %2$s:"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:919
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:920
 #, c-format
 msgid "%1$u / %2$u"
 msgstr "%1$u / %2$u"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:955
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:956
 msgid "This screenshot could not be fetched from the server due to an error."
 msgstr "Denna skärmdump kunde inte hämtas från servern på grund av ett fel."
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:973
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:974
 msgid "Please log in to comment"
 msgstr "Var vänlig och logga in för att kommentera"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:975
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:976
 msgid "Please log in to vote"
 msgstr "Var vänlig och logga in för att rösta"
 
@@ -5323,7 +5327,7 @@ msgstr "Anslutning tog för lång tid"
 #: ../../src/ui_fsmenu/internet_lobby.cc:474
 #: ../../src/ui_fsmenu/internet_lobby.cc:533
 #: ../../src/ui_fsmenu/netsetup_lan.cc:319
-#: ../../src/ui_fsmenu/netsetup_lan.cc:341
+#: ../../src/ui_fsmenu/netsetup_lan.cc:342
 msgid "Network Error"
 msgstr "Nätverksfel"
 
@@ -6197,7 +6201,7 @@ msgstr "Typ"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:235
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:357
-#: ../../src/wui/game_chat_panel.cc:437 ../../src/wui/game_summary.cc:112
+#: ../../src/wui/game_chat_panel.cc:438 ../../src/wui/game_summary.cc:112
 msgid "Team"
 msgstr "Lag"
 
@@ -8404,11 +8408,11 @@ msgstr "Skriptkonsol"
 msgid "Recipient"
 msgstr "Mottagare"
 
-#: ../../src/wui/game_chat_panel.cc:362 ../../src/wui/game_chat_panel.cc:486
+#: ../../src/wui/game_chat_panel.cc:363 ../../src/wui/game_chat_panel.cc:487
 msgid "Unknown Recipient"
 msgstr "Okänd mottagare"
 
-#: ../../src/wui/game_chat_panel.cc:431
+#: ../../src/wui/game_chat_panel.cc:432
 msgid "All"
 msgstr "Alla"
 
