@@ -970,13 +970,13 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 		lua_pushnil(L);
 		while (lua_next(L, -2) != 0) {
 			std::string icon = get_table_string(L, "icon", true);
-			std::string tooltip = get_table_string(L, "tooltip", false);
+			std::string rtooltip = get_table_string(L, "tooltip", false);
 			int32_t rx = get_table_int(L, "x", false);
 			int32_t ry = get_table_int(L, "y", false);
 
 			UI::Radiobutton* radiobutton;
 			group->add_button(parent, UI::PanelStyle::kWui, Vector2i(rx, ry), g_image_cache->get(icon),
-			                  tooltip, &radiobutton);
+			                  rtooltip, &radiobutton);
 
 			// Box layouting if applicable
 			if (as_box != nullptr) {
