@@ -24,6 +24,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/tabpanel.h"
+#include "ui_basic/textinput.h"
 #include "ui_basic/window.h"
 #include "wui/interactive_base.h"
 
@@ -96,21 +97,44 @@ public:
 	static UI::Panel* do_create_child(lua_State* L, UI::Panel* parent, UI::Box* as_box);
 };
 
-class LuaButton : public LuaPanel {
+class LuaNamedPanel : public LuaPanel {
+public:
+	LUNA_CLASS_HEAD(LuaNamedPanel);
+
+	LuaNamedPanel() = default;
+	explicit LuaNamedPanel(UI::Panel* p) : LuaPanel(p) {
+	}
+	explicit LuaNamedPanel(lua_State* L) : LuaPanel(L) {
+	}
+	~LuaNamedPanel() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_name(lua_State* L);
+
+	/*
+	 * C Methods
+	 */
+	UI::NamedPanel* get() {
+		return dynamic_cast<UI::NamedPanel*>(panel_);
+	}
+};
+
+class LuaButton : public LuaNamedPanel {
 public:
 	LUNA_CLASS_HEAD(LuaButton);
 
 	LuaButton() = default;
-	explicit LuaButton(UI::Panel* p) : LuaPanel(p) {
+	explicit LuaButton(UI::Panel* p) : LuaNamedPanel(p) {
 	}
-	explicit LuaButton(lua_State* L) : LuaPanel(L) {
+	explicit LuaButton(lua_State* L) : LuaNamedPanel(L) {
 	}
 	~LuaButton() override = default;
 
 	/*
 	 * Properties
 	 */
-	int get_name(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -126,21 +150,57 @@ public:
 	}
 };
 
-class LuaDropdown : public LuaPanel {
+class LuaTextInputPanel : public LuaPanel {
+public:
+	LUNA_CLASS_HEAD(LuaTextInputPanel);
+
+	LuaTextInputPanel() = default;
+	explicit LuaTextInputPanel(UI::Panel* p) : LuaPanel(p) {
+	}
+	explicit LuaTextInputPanel(lua_State* L) : LuaPanel(L) {
+	}
+	~LuaTextInputPanel() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_text(lua_State* L);
+	int set_text(lua_State* L);
+	int get_selected_text(lua_State* L);
+	int get_password(lua_State* L);
+	int set_password(lua_State* L);
+	int get_warning(lua_State* L);
+	int set_warning(lua_State* L);
+	int get_caret_pos(lua_State* L);
+	int set_caret_pos(lua_State* L);
+	int get_multiline(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+
+	/*
+	 * C Methods
+	 */
+	UI::AbstractTextInputPanel* get() {
+		return dynamic_cast<UI::AbstractTextInputPanel*>(panel_);
+	}
+};
+
+class LuaDropdown : public LuaNamedPanel {
 public:
 	LUNA_CLASS_HEAD(LuaDropdown);
 
 	LuaDropdown() = default;
-	explicit LuaDropdown(UI::Panel* p) : LuaPanel(p) {
+	explicit LuaDropdown(UI::Panel* p) : LuaNamedPanel(p) {
 	}
-	explicit LuaDropdown(lua_State* L) : LuaPanel(L) {
+	explicit LuaDropdown(lua_State* L) : LuaNamedPanel(L) {
 	}
 	~LuaDropdown() override = default;
 
 	/*
 	 * Properties
 	 */
-	int get_name(lua_State* L);
 	int get_expanded(lua_State* L);
 	int get_no_of_items(lua_State* L);
 
@@ -160,21 +220,20 @@ public:
 	}
 };
 
-class LuaTab : public LuaPanel {
+class LuaTab : public LuaNamedPanel {
 public:
 	LUNA_CLASS_HEAD(LuaTab);
 
 	LuaTab() = default;
-	explicit LuaTab(UI::Panel* p) : LuaPanel(p) {
+	explicit LuaTab(UI::Panel* p) : LuaNamedPanel(p) {
 	}
-	explicit LuaTab(lua_State* L) : LuaPanel(L) {
+	explicit LuaTab(lua_State* L) : LuaNamedPanel(L) {
 	}
 	~LuaTab() override = default;
 
 	/*
 	 * Properties
 	 */
-	int get_name(lua_State* L);
 	int get_active(lua_State* L);
 
 	/*
@@ -190,21 +249,20 @@ public:
 	}
 };
 
-class LuaWindow : public LuaPanel {
+class LuaWindow : public LuaNamedPanel {
 public:
 	LUNA_CLASS_HEAD(LuaWindow);
 
 	LuaWindow() = default;
-	explicit LuaWindow(UI::Panel* p) : LuaPanel(p) {
+	explicit LuaWindow(UI::Panel* p) : LuaNamedPanel(p) {
 	}
-	explicit LuaWindow(lua_State* L) : LuaPanel(L) {
+	explicit LuaWindow(lua_State* L) : LuaNamedPanel(L) {
 	}
 	~LuaWindow() override = default;
 
 	/*
 	 * Properties
 	 */
-	int get_name(lua_State* L);
 
 	/*
 	 * Lua Methods

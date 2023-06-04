@@ -33,7 +33,6 @@
 #include "ui_basic/slider.h"
 #include "ui_basic/spinbox.h"
 #include "ui_basic/textarea.h"
-#include "ui_basic/textinput.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 #include "wui/unique_window_handler.h"
@@ -75,10 +74,14 @@ int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel) {
 		to_lua<LuaWindow>(L, new LuaWindow(w));
 	} else if (upcast(UI::Button, btn, panel)) {
 		to_lua<LuaButton>(L, new LuaButton(btn));
+	} else if (upcast(UI::AbstractTextInputPanel, txtin, panel)) {
+		to_lua<LuaTextInputPanel>(L, new LuaTextInputPanel(txtin));
 	} else if (upcast(UI::Tab, tab, panel)) {
 		to_lua<LuaTab>(L, new LuaTab(tab));
 	} else if (upcast(UI::BaseDropdown, dd, panel)) {
 		to_lua<LuaDropdown>(L, new LuaDropdown(dd));
+	} else if (upcast(UI::NamedPanel, dd, panel)) {
+		to_lua<LuaNamedPanel>(L, new LuaNamedPanel(dd));
 	} else {
 		to_lua<LuaPanel>(L, new LuaPanel(panel));
 	}
@@ -104,7 +107,7 @@ Panel
 
 .. class:: Panel
 
-   The Panel is the most basic ui class. Each ui element is a panel.
+   The Panel is the most basic ui class. Each UI element is a panel.
 */
 const char LuaPanel::className[] = "Panel";
 const PropertyType<LuaPanel> LuaPanel::Properties[] = {
@@ -146,12 +149,6 @@ static void put_all_visible_panels_into_table(lua_State* L, UI::Panel* g) {
 /*
  * Properties
  */
-
-/* RST
-   .. attribute:: name
-
-      (RO) The name of this panel
-*/
 
 /* RST
    .. attribute:: buttons
@@ -1254,6 +1251,47 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 }
 
 /* RST
+NamedPanel
+----------
+
+.. class:: NamedPanel
+
+   .. versionadded:: 1.2
+
+   A panel that can be addressed by its name.
+*/
+const char LuaNamedPanel::className[] = "NamedPanel";
+const MethodType<LuaNamedPanel> LuaNamedPanel::Methods[] = {
+   {nullptr, nullptr},
+};
+const PropertyType<LuaNamedPanel> LuaNamedPanel::Properties[] = {
+   PROP_RO(LuaNamedPanel, name),
+   {nullptr, nullptr, nullptr},
+};
+
+/*
+ * Properties
+ */
+
+/* RST
+   .. attribute:: name
+
+      (RO) The name of this panel.
+*/
+int LuaNamedPanel::get_name(lua_State* L) {
+	lua_pushstring(L, get()->get_name());
+	return 1;
+}
+
+/*
+ * Lua Functions
+ */
+
+/*
+ * C Functions
+ */
+
+/* RST
 Button
 ------
 
@@ -1268,19 +1306,12 @@ const MethodType<LuaButton> LuaButton::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaButton> LuaButton::Properties[] = {
-   PROP_RO(LuaButton, name),
    {nullptr, nullptr, nullptr},
 };
 
 /*
  * Properties
  */
-
-// Documented in parent Class
-int LuaButton::get_name(lua_State* L) {
-	lua_pushstring(L, get()->get_name());
-	return 1;
-}
 
 /*
  * Lua Functions
@@ -1316,6 +1347,118 @@ int LuaButton::click(lua_State* /* L */) {
  */
 
 /* RST
+TextInputPanel
+--------------
+
+.. class:: TextInputPanel
+
+   .. versionadded:: 1.2
+
+   This represents a box containing arbitrary text that can be edited by the user.
+*/
+const char LuaTextInputPanel::className[] = "TextInputPanel";
+const MethodType<LuaTextInputPanel> LuaTextInputPanel::Methods[] = {
+   {nullptr, nullptr},
+};
+const PropertyType<LuaTextInputPanel> LuaTextInputPanel::Properties[] = {
+   PROP_RW(LuaTextInputPanel, text),
+   PROP_RO(LuaTextInputPanel, selected_text),
+   PROP_RW(LuaTextInputPanel, password),
+   PROP_RW(LuaTextInputPanel, warning),
+   PROP_RW(LuaTextInputPanel, caret_pos),
+   PROP_RO(LuaTextInputPanel, multiline),
+   {nullptr, nullptr, nullptr},
+};
+
+/*
+ * Properties
+ */
+
+/* RST
+   .. attribute:: text
+
+      (RW) The text currently held in this box.
+*/
+int LuaTextInputPanel::get_text(lua_State* L) {
+	lua_pushstring(L, get()->get_text().c_str());
+	return 1;
+}
+int LuaTextInputPanel::set_text(lua_State* L) {
+	get()->set_text(luaL_checkstring(L, -1));
+	return 0;
+}
+
+/* RST
+   .. attribute:: selected_text
+
+      (RO) The text currently selected by the user (may be empty).
+*/
+int LuaTextInputPanel::get_selected_text(lua_State* L) {
+	lua_pushstring(L, get()->get_selected_text().c_str());
+	return 1;
+}
+
+/* RST
+   .. attribute:: password
+
+      (RW) Whether the actual text is displayed with asterisks for password boxes.
+*/
+int LuaTextInputPanel::get_password(lua_State* L) {
+	lua_pushboolean(L, static_cast<int>(get()->is_password()));
+	return 1;
+}
+int LuaTextInputPanel::set_password(lua_State* L) {
+	get()->set_password(luaL_checkboolean(L, -1));
+	return 0;
+}
+
+/* RST
+   .. attribute:: warning
+
+      (RW) Whether the box is highlighted to indicate an error.
+*/
+int LuaTextInputPanel::get_warning(lua_State* L) {
+	lua_pushboolean(L, static_cast<int>(get()->has_warning()));
+	return 1;
+}
+int LuaTextInputPanel::set_warning(lua_State* L) {
+	get()->set_warning(luaL_checkboolean(L, -1));
+	return 0;
+}
+
+/* RST
+   .. attribute:: caret_pos
+
+      (RW) The position of the caret in the text.
+*/
+int LuaTextInputPanel::get_caret_pos(lua_State* L) {
+	lua_pushinteger(L, get()->get_caret_pos());
+	return 1;
+}
+int LuaTextInputPanel::set_caret_pos(lua_State* L) {
+	get()->set_caret_pos(luaL_checkuint32(L, -1));
+	return 0;
+}
+
+/* RST
+   .. attribute:: multiline
+
+      (RO) Whether this editbox has multiple lines or just one line.
+*/
+int LuaTextInputPanel::get_multiline(lua_State* L) {
+	lua_pushboolean(L, dynamic_cast<const UI::MultilineEditbox*>(get()) != nullptr ? 1 : 0);
+	return 1;
+}
+
+/*
+ * Lua Functions
+ */
+
+/*
+ * C Functions
+ */
+
+/* RST
 Dropdown
 --------
 
@@ -1334,7 +1477,6 @@ const MethodType<LuaDropdown> LuaDropdown::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaDropdown> LuaDropdown::Properties[] = {
-   PROP_RO(LuaDropdown, name),
    PROP_RO(LuaDropdown, expanded),
    PROP_RO(LuaDropdown, no_of_items),
    {nullptr, nullptr, nullptr},
@@ -1343,12 +1485,6 @@ const PropertyType<LuaDropdown> LuaDropdown::Properties[] = {
 /*
  * Properties
  */
-
-// Documented in parent Class
-int LuaDropdown::get_name(lua_State* L) {
-	lua_pushstring(L, get()->get_name());
-	return 1;
-}
 
 /* RST
    .. attribute:: expanded
@@ -1510,7 +1646,6 @@ const MethodType<LuaTab> LuaTab::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaTab> LuaTab::Properties[] = {
-   PROP_RO(LuaTab, name),
    PROP_RO(LuaTab, active),
    {nullptr, nullptr, nullptr},
 };
@@ -1518,12 +1653,6 @@ const PropertyType<LuaTab> LuaTab::Properties[] = {
 /*
  * Properties
  */
-
-// Documented in parent Class
-int LuaTab::get_name(lua_State* L) {
-	lua_pushstring(L, get()->get_name());
-	return 1;
-}
 
 /* RST
    .. attribute:: active
@@ -1567,19 +1696,12 @@ const MethodType<LuaWindow> LuaWindow::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaWindow> LuaWindow::Properties[] = {
-   PROP_RO(LuaWindow, name),
    {nullptr, nullptr, nullptr},
 };
 
 /*
  * Properties
  */
-
-// Documented in parent Class
-int LuaWindow::get_name(lua_State* L) {
-	lua_pushstring(L, get()->get_name());
-	return 1;
-}
 
 /*
  * Lua Functions
@@ -2109,20 +2231,32 @@ void luaopen_wlui(lua_State* L) {
 
 	register_class<LuaPanel>(L, "ui");
 
+	register_class<LuaNamedPanel>(L, "ui", true);
+	add_parent<LuaNamedPanel, LuaPanel>(L);
+	lua_pop(L, 1);  // Pop the meta table
+
 	register_class<LuaButton>(L, "ui", true);
 	add_parent<LuaButton, LuaPanel>(L);
+	add_parent<LuaButton, LuaNamedPanel>(L);
+	lua_pop(L, 1);  // Pop the meta table
+
+	register_class<LuaTextInputPanel>(L, "ui", true);
+	add_parent<LuaTextInputPanel, LuaPanel>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
 	register_class<LuaDropdown>(L, "ui", true);
 	add_parent<LuaDropdown, LuaPanel>(L);
+	add_parent<LuaDropdown, LuaNamedPanel>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
 	register_class<LuaTab>(L, "ui", true);
 	add_parent<LuaTab, LuaPanel>(L);
+	add_parent<LuaTab, LuaNamedPanel>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
 	register_class<LuaWindow>(L, "ui", true);
 	add_parent<LuaWindow, LuaPanel>(L);
+	add_parent<LuaWindow, LuaNamedPanel>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
 	register_class<LuaMapView>(L, "ui", true);
