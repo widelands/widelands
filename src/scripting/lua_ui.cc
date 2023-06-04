@@ -66,28 +66,29 @@ int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel) {
 
 	// TODO(Nordfriese): This trial-and-error approach is inefficient and extremely ugly,
 	// use a virtual function call similar to Widelands::MapObjectDescr::type.
-#define TRY_TO_LUA(PanelType, LuaType) \
-	if (upcast(UI::PanelType, temp_##PanelType, panel)) { \
-		to_lua<LuaType>(L, new LuaType(temp_##PanelType)); \
+#define TRY_TO_LUA(PanelType, LuaType)                                                             \
+	if (upcast(UI::PanelType, temp_##PanelType, panel)) {                                           \
+		to_lua<LuaType>(L, new LuaType(temp_##PanelType));                                           \
 	}
 
 	TRY_TO_LUA(Window, LuaWindow)
-	else TRY_TO_LUA(Button, LuaButton)
-	else TRY_TO_LUA(Checkbox, LuaCheckbox)
-	else TRY_TO_LUA(Radiobutton, LuaRadioButton)
-	else TRY_TO_LUA(SpinBox, LuaSpinBox)
-	else TRY_TO_LUA(Slider, LuaSlider)
-	else if (upcast(UI::DiscreteSlider, temp_DiscreteSlider, panel)) {
+	else TRY_TO_LUA(Button, LuaButton) else TRY_TO_LUA(Checkbox, LuaCheckbox) else TRY_TO_LUA(
+	   Radiobutton,
+	   LuaRadioButton) else TRY_TO_LUA(SpinBox,
+	                                   LuaSpinBox) else TRY_TO_LUA(Slider,
+	                                                               LuaSlider) else if (upcast(UI::
+	                                                                                             DiscreteSlider,
+	                                                                                          temp_DiscreteSlider,
+	                                                                                          panel)) {
 		// Discrete sliders are wrapped, so we pass the actual slider through.
 		to_lua<LuaSlider>(L, new LuaSlider(&temp_DiscreteSlider->get_slider()));
 	}
-	else TRY_TO_LUA(MultilineTextarea, LuaMultilineTextarea)
-	else TRY_TO_LUA(Textarea, LuaTextarea)
-	else TRY_TO_LUA(AbstractTextInputPanel, LuaTextInputPanel)
-	else TRY_TO_LUA(Tab, LuaTab)
-	else TRY_TO_LUA(BaseDropdown, LuaDropdown)
-	else TRY_TO_LUA(NamedPanel, LuaNamedPanel)
-	else {
+	else TRY_TO_LUA(MultilineTextarea, LuaMultilineTextarea) else TRY_TO_LUA(Textarea, LuaTextarea) else TRY_TO_LUA(
+	   AbstractTextInputPanel,
+	   LuaTextInputPanel) else TRY_TO_LUA(Tab,
+	                                      LuaTab) else TRY_TO_LUA(BaseDropdown,
+	                                                              LuaDropdown) else TRY_TO_LUA(NamedPanel,
+	                                                                                           LuaNamedPanel) else {
 		to_lua<LuaPanel>(L, new LuaPanel(panel));
 	}
 #undef TRY_TO_LUA
@@ -117,11 +118,10 @@ Panel
 */
 const char LuaPanel::className[] = "Panel";
 const PropertyType<LuaPanel> LuaPanel::Properties[] = {
-   PROP_RO(LuaPanel, children),
-   PROP_RO(LuaPanel, buttons), PROP_RO(LuaPanel, dropdowns),  PROP_RO(LuaPanel, tabs),
-   PROP_RO(LuaPanel, windows), PROP_RW(LuaPanel, position_x), PROP_RW(LuaPanel, position_y),
-   PROP_RW(LuaPanel, width),   PROP_RW(LuaPanel, height),     PROP_RW(LuaPanel, visible),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaPanel, children),   PROP_RO(LuaPanel, buttons),  PROP_RO(LuaPanel, dropdowns),
+   PROP_RO(LuaPanel, tabs),       PROP_RO(LuaPanel, windows),  PROP_RW(LuaPanel, position_x),
+   PROP_RW(LuaPanel, position_y), PROP_RW(LuaPanel, width),    PROP_RW(LuaPanel, height),
+   PROP_RW(LuaPanel, visible),    {nullptr, nullptr, nullptr},
 };
 const MethodType<LuaPanel> LuaPanel::Methods[] = {
    METHOD(LuaPanel, get_descendant_position),
@@ -172,7 +172,8 @@ int LuaPanel::get_children(lua_State* L) {
 
 	lua_newtable(L);
 	int i = 1;
-	for (UI::Panel* child = panel_->get_first_child(); child != nullptr; child = child->get_next_sibling()) {
+	for (UI::Panel* child = panel_->get_first_child(); child != nullptr;
+	     child = child->get_next_sibling()) {
 		lua_pushint32(L, i++);
 		upcasted_panel_to_lua(L, child);
 		lua_rawset(L, -3);
@@ -852,11 +853,10 @@ static UI::Button::VisualState get_table_button_visual_state(
 	return default_value;
 }
 
-static unsigned get_table_button_box_orientation(
-   lua_State* L,
-   const char* key,
-   bool mandatory,
-   unsigned default_value = UI::Box::Vertical) {
+static unsigned get_table_button_box_orientation(lua_State* L,
+                                                 const char* key,
+                                                 bool mandatory,
+                                                 unsigned default_value = UI::Box::Vertical) {
 	lua_getfield(L, -1, key);
 	if (!lua_isnil(L, -1)) {
 		std::string str = luaL_checkstring(L, -1);
@@ -975,7 +975,8 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 			int32_t ry = get_table_int(L, "y", false);
 
 			UI::Radiobutton* radiobutton;
-			group->add_button(parent, UI::PanelStyle::kWui, Vector2i(rx, ry), g_image_cache->get(icon), tooltip, &radiobutton);
+			group->add_button(parent, UI::PanelStyle::kWui, Vector2i(rx, ry), g_image_cache->get(icon),
+			                  tooltip, &radiobutton);
 
 			// Box layouting if applicable
 			if (as_box != nullptr) {
@@ -1043,9 +1044,12 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 		}
 		lua_pop(L, 1);
 
-		UI::SpinBox* spinbox = new UI::SpinBox(parent, x, y, w, unit_w, val, val_min, val_max, UI::PanelStyle::kWui,
-				label, units, value_list.empty() ? step_size_big > 0 ? UI::SpinBox::Type::kBig : UI::SpinBox::Type::kSmall : UI::SpinBox::Type::kValueList,
-				step_size_small, step_size_big);
+		UI::SpinBox* spinbox = new UI::SpinBox(
+		   parent, x, y, w, unit_w, val, val_min, val_max, UI::PanelStyle::kWui, label, units,
+		   value_list.empty() ?
+            step_size_big > 0 ? UI::SpinBox::Type::kBig : UI::SpinBox::Type::kSmall :
+            UI::SpinBox::Type::kValueList,
+		   step_size_small, step_size_big);
 		created_panel = spinbox;
 
 		if (!value_list.empty()) {
@@ -1057,7 +1061,8 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 			luaL_checktype(L, -1, LUA_TTABLE);
 			lua_pushnil(L);
 			while (lua_next(L, -2) != 0) {
-				spinbox->add_replacement(get_table_int(L, "value", true), get_table_string(L, "replacement", true));
+				spinbox->add_replacement(
+				   get_table_int(L, "value", true), get_table_string(L, "replacement", true));
 				lua_pop(L, 1);
 			}
 		}
@@ -1084,9 +1089,13 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 
 		UI::Slider* slider;
 		if (orientation == UI::Box::Vertical) {
-			slider = new UI::VerticalSlider(parent, x, y, w, h, val_min, val_max, val, dark ? UI::SliderStyle::kWuiDark : UI::SliderStyle::kWuiLight, cursor_size, tooltip);
+			slider = new UI::VerticalSlider(
+			   parent, x, y, w, h, val_min, val_max, val,
+			   dark ? UI::SliderStyle::kWuiDark : UI::SliderStyle::kWuiLight, cursor_size, tooltip);
 		} else {
-			slider = new UI::HorizontalSlider(parent, x, y, w, h, val_min, val_max, val, dark ? UI::SliderStyle::kWuiDark : UI::SliderStyle::kWuiLight, tooltip, cursor_size);
+			slider = new UI::HorizontalSlider(
+			   parent, x, y, w, h, val_min, val_max, val,
+			   dark ? UI::SliderStyle::kWuiDark : UI::SliderStyle::kWuiLight, tooltip, cursor_size);
 		}
 		created_panel = slider;
 
@@ -1116,7 +1125,9 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 			report_error(L, "Discrete slider initial value out of range");
 		}
 
-		UI::DiscreteSlider* slider = new UI::DiscreteSlider(parent, x, y, w, h, labels, init_value, dark ? UI::SliderStyle::kWuiDark : UI::SliderStyle::kWuiLight, tooltip, cursor_size);
+		UI::DiscreteSlider* slider = new UI::DiscreteSlider(
+		   parent, x, y, w, h, labels, init_value,
+		   dark ? UI::SliderStyle::kWuiDark : UI::SliderStyle::kWuiLight, tooltip, cursor_size);
 		created_panel = slider;
 
 		if (std::string on_changed = get_table_string(L, "on_changed", false); !on_changed.empty()) {
@@ -1149,7 +1160,8 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 		bool password = get_table_boolean(L, "password", false);
 		bool warning = get_table_boolean(L, "warning", false);
 
-		UI::MultilineEditbox* editbox = new UI::MultilineEditbox(parent, x, y, w, h, UI::PanelStyle::kWui);
+		UI::MultilineEditbox* editbox =
+		   new UI::MultilineEditbox(parent, x, y, w, h, UI::PanelStyle::kWui);
 		created_panel = editbox;
 
 		editbox->set_password(password);
@@ -1217,7 +1229,8 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 		}
 
 		std::string registry = get_table_string(L, "registry", true);
-		UI::UniqueWindow::Registry& reg = get_egbase(L).get_ibase()->unique_windows().get_registry(registry);
+		UI::UniqueWindow::Registry& reg =
+		   get_egbase(L).get_ibase()->unique_windows().get_registry(registry);
 		if (reg.window != nullptr) {
 			return reg.window;
 		}
@@ -1225,7 +1238,8 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 		std::string name = get_table_string(L, "name", true);
 		std::string title = get_table_string(L, "title", true);
 
-		UI::UniqueWindow* window = new UI::UniqueWindow(parent, UI::WindowStyle::kWui, name, &reg, x, y, w, h, title);
+		UI::UniqueWindow* window =
+		   new UI::UniqueWindow(parent, UI::WindowStyle::kWui, name, &reg, x, y, w, h, title);
 		created_panel = window;
 
 		lua_getfield(L, -1, "content");
@@ -1264,7 +1278,8 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 			report_error(L, "Unknown scroll mode '%s'", scroll.c_str());
 		}
 
-		UI::MultilineTextarea* txt = new UI::MultilineTextarea(parent, x, y, w, h, UI::PanelStyle::kWui, text, align, scroll_mode);
+		UI::MultilineTextarea* txt = new UI::MultilineTextarea(
+		   parent, x, y, w, h, UI::PanelStyle::kWui, text, align, scroll_mode);
 		created_panel = txt;
 
 		if (std::string font = get_table_string(L, "font", false); !font.empty()) {
@@ -1824,12 +1839,9 @@ const MethodType<LuaTextInputPanel> LuaTextInputPanel::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaTextInputPanel> LuaTextInputPanel::Properties[] = {
-   PROP_RW(LuaTextInputPanel, text),
-   PROP_RO(LuaTextInputPanel, selected_text),
-   PROP_RW(LuaTextInputPanel, password),
-   PROP_RW(LuaTextInputPanel, warning),
-   PROP_RW(LuaTextInputPanel, caret_pos),
-   PROP_RO(LuaTextInputPanel, multiline),
+   PROP_RW(LuaTextInputPanel, text),      PROP_RO(LuaTextInputPanel, selected_text),
+   PROP_RW(LuaTextInputPanel, password),  PROP_RW(LuaTextInputPanel, warning),
+   PROP_RW(LuaTextInputPanel, caret_pos), PROP_RO(LuaTextInputPanel, multiline),
    {nullptr, nullptr, nullptr},
 };
 
