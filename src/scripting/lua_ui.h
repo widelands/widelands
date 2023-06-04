@@ -74,6 +74,7 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_children(lua_State* L);
 	int get_buttons(lua_State* L);
 	int get_dropdowns(lua_State* L);
 	int get_tabs(lua_State* L);

@@ -77,6 +77,10 @@ int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel) {
 	else TRY_TO_LUA(Radiobutton, LuaRadioButton)
 	else TRY_TO_LUA(SpinBox, LuaSpinBox)
 	else TRY_TO_LUA(Slider, LuaSlider)
+	else if (upcast(UI::DiscreteSlider, temp_DiscreteSlider, panel)) {
+		// Discrete sliders are wrapped, so we pass the actual slider through.
+		to_lua<LuaSlider>(L, new LuaSlider(&temp_DiscreteSlider->get_slider()));
+	}
 	else TRY_TO_LUA(MultilineTextarea, LuaMultilineTextarea)
 	else TRY_TO_LUA(Textarea, LuaTextarea)
 	else TRY_TO_LUA(AbstractTextInputPanel, LuaTextInputPanel)
@@ -113,6 +117,7 @@ Panel
 */
 const char LuaPanel::className[] = "Panel";
 const PropertyType<LuaPanel> LuaPanel::Properties[] = {
+   PROP_RO(LuaPanel, children),
    PROP_RO(LuaPanel, buttons), PROP_RO(LuaPanel, dropdowns),  PROP_RO(LuaPanel, tabs),
    PROP_RO(LuaPanel, windows), PROP_RW(LuaPanel, position_x), PROP_RW(LuaPanel, position_y),
    PROP_RW(LuaPanel, width),   PROP_RW(LuaPanel, height),     PROP_RW(LuaPanel, visible),
@@ -152,6 +157,29 @@ static void put_all_visible_panels_into_table(lua_State* L, UI::Panel* g) {
 /*
  * Properties
  */
+
+/* RST
+   .. attribute:: children
+
+      .. versionadded:: 1.2
+
+      (RO) An :class:`array` of all direct children of this panel.
+
+      The array also contains invisible children. It does not contain indirect descendants.
+*/
+int LuaPanel::get_children(lua_State* L) {
+	assert(panel_ != nullptr);
+
+	lua_newtable(L);
+	int i = 1;
+	for (UI::Panel* child = panel_->get_first_child(); child != nullptr; child = child->get_next_sibling()) {
+		lua_pushint32(L, i++);
+		upcasted_panel_to_lua(L, child);
+		lua_rawset(L, -3);
+	}
+
+	return 1;
+}
 
 /* RST
    .. attribute:: buttons
@@ -553,7 +581,8 @@ int LuaPanel::get_child(lua_State* L) {
              * ``"x"``: **Optional**. The radiobutton's x position.
              * ``"y"``: **Optional**. The radiobutton's y position.
 
-           * ``"state"``: **Optional**. The ID of the initially active radiobutton (-1 for none).
+           * ``"state"``: **Optional**. The ID of the initially active radiobutton
+             (0-based; -1 for none).
            * ``"on_changed"``: **Optional**. Callback code to run when the
              radiogroup's active button changes.
 
@@ -931,6 +960,9 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 	} else if (widget_type == "radiogroup") {
 		int32_t initial_state = get_table_int(L, "state", false);
 
+		UI::Align align = get_table_align(L, "align", false);
+		UI::Box::Resizing resizing = get_table_box_resizing(L, "resizing", false);
+
 		UI::Radiogroup* group = new UI::Radiogroup();
 
 		lua_getfield(L, -1, "buttons");
@@ -942,7 +974,14 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 			int32_t rx = get_table_int(L, "x", false);
 			int32_t ry = get_table_int(L, "y", false);
 
-			group->add_button(parent, UI::PanelStyle::kWui, Vector2i(rx, ry), g_image_cache->get(icon), tooltip);
+			UI::Radiobutton* radiobutton;
+			group->add_button(parent, UI::PanelStyle::kWui, Vector2i(rx, ry), g_image_cache->get(icon), tooltip, &radiobutton);
+
+			// Box layouting if applicable
+			if (as_box != nullptr) {
+				as_box->add(radiobutton, resizing, align);
+			}
+
 			lua_pop(L, 1);
 		}
 		lua_pop(L, 1);
@@ -1408,12 +1447,12 @@ int LuaCheckbox::set_state(lua_State* L) {
  */
 
 /* RST
-.. function:: set_enabled(b)
+   .. function:: set_enabled(b)
 
-   Set whether the user can change the state of this checkbox.
+      Set whether the user can change the state of this checkbox.
 
-   :arg b: :const:`true` or :const:`false`
-   :type b: :class:`boolean`
+      :arg b: :const:`true` or :const:`false`
+      :type b: :class:`boolean`
 */
 int LuaCheckbox::set_enabled(lua_State* L) {
 	get()->set_enabled(luaL_checkboolean(L, -1));
@@ -1454,7 +1493,7 @@ const PropertyType<LuaRadioButton> LuaRadioButton::Properties[] = {
 /* RST
    .. attribute:: state
 
-      (RW) The index of the radio group's currently active button (-1 for none).
+      (RW) The index of the radio group's currently active button (0-based; -1 for none).
 */
 int LuaRadioButton::get_state(lua_State* L) {
 	lua_pushinteger(L, get()->group().get_state());
@@ -1470,12 +1509,12 @@ int LuaRadioButton::set_state(lua_State* L) {
  */
 
 /* RST
-.. function:: set_enabled(b)
+   .. function:: set_enabled(b)
 
-   Set whether the user can change the state of the radio group.
+      Set whether the user can change the state of the radio group.
 
-   :arg b: :const:`true` or :const:`false`
-   :type b: :class:`boolean`
+      :arg b: :const:`true` or :const:`false`
+      :type b: :class:`boolean`
 */
 int LuaRadioButton::set_enabled(lua_State* L) {
 	get()->group().set_enabled(luaL_checkboolean(L, -1));
@@ -1531,12 +1570,12 @@ int LuaSpinBox::set_value(lua_State* L) {
  */
 
 /* RST
-.. function:: set_unit_width(w)
+   .. function:: set_unit_width(w)
 
-   Set the width of the spinbox's buttons and content.
+      Set the width of the spinbox's buttons and content.
 
-   :arg w: Width in pixels.
-   :type min: :class:`int`
+      :arg w: Width in pixels.
+      :type min: :class:`int`
 */
 int LuaSpinBox::set_unit_width(lua_State* L) {
 	get()->set_unit_width(luaL_checkuint32(L, 2));
@@ -1544,14 +1583,14 @@ int LuaSpinBox::set_unit_width(lua_State* L) {
 }
 
 /* RST
-.. function:: set_interval(min, max)
+   .. function:: set_interval(min, max)
 
-   Set the minimum and maximum value of the spinbox.
+      Set the minimum and maximum value of the spinbox.
 
-   :arg min: Minimum value.
-   :type min: :class:`int`
-   :arg max: Maximum value.
-   :type max: :class:`int`
+      :arg min: Minimum value.
+      :type min: :class:`int`
+      :arg max: Maximum value.
+      :type max: :class:`int`
 */
 int LuaSpinBox::set_interval(lua_State* L) {
 	get()->set_interval(luaL_checkint32(L, 2), luaL_checkint32(L, 3));
@@ -1559,14 +1598,14 @@ int LuaSpinBox::set_interval(lua_State* L) {
 }
 
 /* RST
-.. function:: add_replacement(value, label)
+   .. function:: add_replacement(value, label)
 
-   Replacement string to display instead of a specific value when that value is selected.
+      Replacement string to display instead of a specific value when that value is selected.
 
-   :arg value: Value to replace.
-   :type value: :class:`int`
-   :arg label: Replacement text.
-   :type label: :class:`string`
+      :arg value: Value to replace.
+      :type value: :class:`int`
+      :arg label: Replacement text.
+      :type label: :class:`string`
 */
 int LuaSpinBox::add_replacement(lua_State* L) {
 	get()->add_replacement(luaL_checkint32(L, 2), luaL_checkstring(L, 3));
@@ -1651,12 +1690,12 @@ int LuaSlider::set_max_value(lua_State* L) {
  */
 
 /* RST
-.. function:: set_enabled(b)
+   .. function:: set_enabled(b)
 
-   Set whether the user can move this slider.
+      Set whether the user can move this slider.
 
-   :arg b: :const:`true` or :const:`false`
-   :type b: :class:`boolean`
+      :arg b: :const:`true` or :const:`false`
+      :type b: :class:`boolean`
 */
 int LuaSlider::set_enabled(lua_State* L) {
 	get()->set_enabled(luaL_checkboolean(L, -1));
@@ -1664,12 +1703,12 @@ int LuaSlider::set_enabled(lua_State* L) {
 }
 
 /* RST
-.. function:: set_cursor_fixed_height(h)
+   .. function:: set_cursor_fixed_height(h)
 
-   Set the slider cursor's height.
+      Set the slider cursor's height.
 
-   :arg h: Height in pixels.
-   :type h: :class:`int`
+      :arg h: Height in pixels.
+      :type h: :class:`int`
 */
 int LuaSlider::set_cursor_fixed_height(lua_State* L) {
 	get()->set_cursor_fixed_height(luaL_checkint32(L, -1));
