@@ -23,7 +23,9 @@
 #include "scripting/luna.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
+#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/tabpanel.h"
+#include "ui_basic/textarea.h"
 #include "ui_basic/textinput.h"
 #include "ui_basic/window.h"
 #include "wui/interactive_base.h"
@@ -80,6 +82,8 @@ public:
 	int set_position_x(lua_State* L);
 	int get_position_y(lua_State* L);
 	int set_position_y(lua_State* L);
+	int get_visible(lua_State* L);
+	int set_visible(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -147,6 +151,64 @@ public:
 	 */
 	UI::Button* get() {
 		return dynamic_cast<UI::Button*>(panel_);
+	}
+};
+
+class LuaMultilineTextarea : public LuaPanel {
+public:
+	LUNA_CLASS_HEAD(LuaMultilineTextarea);
+
+	LuaMultilineTextarea() = default;
+	explicit LuaMultilineTextarea(UI::Panel* p) : LuaPanel(p) {
+	}
+	explicit LuaMultilineTextarea(lua_State* L) : LuaPanel(L) {
+	}
+	~LuaMultilineTextarea() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_text(lua_State* L);
+	int set_text(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+
+	/*
+	 * C Methods
+	 */
+	UI::MultilineTextarea* get() {
+		return dynamic_cast<UI::MultilineTextarea*>(panel_);
+	}
+};
+
+class LuaTextarea : public LuaPanel {
+public:
+	LUNA_CLASS_HEAD(LuaTextarea);
+
+	LuaTextarea() = default;
+	explicit LuaTextarea(UI::Panel* p) : LuaPanel(p) {
+	}
+	explicit LuaTextarea(lua_State* L) : LuaPanel(L) {
+	}
+	~LuaTextarea() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_text(lua_State* L);
+	int set_text(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+
+	/*
+	 * C Methods
+	 */
+	UI::Textarea* get() {
+		return dynamic_cast<UI::Textarea*>(panel_);
 	}
 };
 

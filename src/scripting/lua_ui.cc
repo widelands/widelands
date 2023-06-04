@@ -29,10 +29,8 @@
 #include "scripting/lua_map.h"
 #include "scripting/luna.h"
 #include "ui_basic/messagebox.h"
-#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/slider.h"
 #include "ui_basic/spinbox.h"
-#include "ui_basic/textarea.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 #include "wui/unique_window_handler.h"
@@ -70,21 +68,23 @@ int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel) {
 
 	// TODO(Nordfriese): This trial-and-error approach is inefficient and extremely ugly,
 	// use a virtual function call similar to Widelands::MapObjectDescr::type.
-	if (upcast(UI::Window, w, panel)) {
-		to_lua<LuaWindow>(L, new LuaWindow(w));
-	} else if (upcast(UI::Button, btn, panel)) {
-		to_lua<LuaButton>(L, new LuaButton(btn));
-	} else if (upcast(UI::AbstractTextInputPanel, txtin, panel)) {
-		to_lua<LuaTextInputPanel>(L, new LuaTextInputPanel(txtin));
-	} else if (upcast(UI::Tab, tab, panel)) {
-		to_lua<LuaTab>(L, new LuaTab(tab));
-	} else if (upcast(UI::BaseDropdown, dd, panel)) {
-		to_lua<LuaDropdown>(L, new LuaDropdown(dd));
-	} else if (upcast(UI::NamedPanel, dd, panel)) {
-		to_lua<LuaNamedPanel>(L, new LuaNamedPanel(dd));
-	} else {
+#define TRY_TO_LUA(PanelType, LuaType) \
+	if (upcast(UI::PanelType, temp_##PanelType, panel)) { \
+		to_lua<LuaType>(L, new LuaType(temp_##PanelType)); \
+	}
+
+	TRY_TO_LUA(Window, LuaWindow)
+	else TRY_TO_LUA(Button, LuaButton)
+	else TRY_TO_LUA(MultilineTextarea, LuaMultilineTextarea)
+	else TRY_TO_LUA(Textarea, LuaTextarea)
+	else TRY_TO_LUA(AbstractTextInputPanel, LuaTextInputPanel)
+	else TRY_TO_LUA(Tab, LuaTab)
+	else TRY_TO_LUA(BaseDropdown, LuaDropdown)
+	else TRY_TO_LUA(NamedPanel, LuaNamedPanel)
+	else {
 		to_lua<LuaPanel>(L, new LuaPanel(panel));
 	}
+#undef TRY_TO_LUA
 
 	return 1;
 }
@@ -113,7 +113,8 @@ const char LuaPanel::className[] = "Panel";
 const PropertyType<LuaPanel> LuaPanel::Properties[] = {
    PROP_RO(LuaPanel, buttons), PROP_RO(LuaPanel, dropdowns),  PROP_RO(LuaPanel, tabs),
    PROP_RO(LuaPanel, windows), PROP_RW(LuaPanel, position_x), PROP_RW(LuaPanel, position_y),
-   PROP_RW(LuaPanel, width),   PROP_RW(LuaPanel, height),     {nullptr, nullptr, nullptr},
+   PROP_RW(LuaPanel, width),   PROP_RW(LuaPanel, height),     PROP_RW(LuaPanel, visible),
+   {nullptr, nullptr, nullptr},
 };
 const MethodType<LuaPanel> LuaPanel::Methods[] = {
    METHOD(LuaPanel, get_descendant_position),
@@ -237,7 +238,7 @@ int LuaPanel::get_width(lua_State* L) {
 int LuaPanel::set_width(lua_State* L) {
 	assert(panel_);
 	panel_->set_size(luaL_checkint32(L, -1), panel_->get_h());
-	return 1;
+	return 0;
 }
 int LuaPanel::get_height(lua_State* L) {
 	assert(panel_);
@@ -247,7 +248,7 @@ int LuaPanel::get_height(lua_State* L) {
 int LuaPanel::set_height(lua_State* L) {
 	assert(panel_);
 	panel_->set_size(panel_->get_w(), luaL_checkint32(L, -1));
-	return 1;
+	return 0;
 }
 
 /* RST
@@ -267,7 +268,7 @@ int LuaPanel::set_position_x(lua_State* L) {
 	assert(panel_);
 	Vector2i p(luaL_checkint32(L, -1) - panel_->get_lborder(), panel_->get_y());
 	panel_->set_pos(p);
-	return 1;
+	return 0;
 }
 int LuaPanel::get_position_y(lua_State* L) {
 	assert(panel_);
@@ -280,7 +281,23 @@ int LuaPanel::set_position_y(lua_State* L) {
 	assert(panel_);
 	Vector2i p(panel_->get_x(), luaL_checkint32(L, -1) - panel_->get_tborder());
 	panel_->set_pos(p);
+	return 0;
+}
+
+/* RST
+   .. attribute:: visible
+
+      .. versionadded:: 1.2
+
+      (RW) Whether this panel is visible to the user.
+*/
+int LuaPanel::get_visible(lua_State* L) {
+	lua_pushboolean(L, static_cast<int>(panel_->is_visible()));
 	return 1;
+}
+int LuaPanel::set_visible(lua_State* L) {
+	panel_->set_visible(luaL_checkboolean(L, -1));
+	return 0;
 }
 
 /*
@@ -1347,6 +1364,96 @@ int LuaButton::click(lua_State* /* L */) {
  */
 
 /* RST
+MultilineTextarea
+-----------------
+
+.. class:: MultilineTextarea
+
+   .. versionadded:: 1.2
+
+   A static text area with multiple lines that can not be modified by the user.
+*/
+const char LuaMultilineTextarea::className[] = "MultilineTextarea";
+const MethodType<LuaMultilineTextarea> LuaMultilineTextarea::Methods[] = {
+   {nullptr, nullptr},
+};
+const PropertyType<LuaMultilineTextarea> LuaMultilineTextarea::Properties[] = {
+   PROP_RW(LuaMultilineTextarea, text),
+   {nullptr, nullptr, nullptr},
+};
+
+/*
+ * Properties
+ */
+
+/* RST
+   .. attribute:: text
+
+      (RW) The text currently shown by this area.
+*/
+int LuaMultilineTextarea::get_text(lua_State* L) {
+	lua_pushstring(L, get()->get_text().c_str());
+	return 1;
+}
+int LuaMultilineTextarea::set_text(lua_State* L) {
+	get()->set_text(luaL_checkstring(L, -1));
+	return 0;
+}
+
+/*
+ * Lua Functions
+ */
+
+/*
+ * C Functions
+ */
+
+/* RST
+Textarea
+--------
+
+.. class:: Textarea
+
+   .. versionadded:: 1.2
+
+   A static text area with a single line of text that can not be modified by the user.
+*/
+const char LuaTextarea::className[] = "Textarea";
+const MethodType<LuaTextarea> LuaTextarea::Methods[] = {
+   {nullptr, nullptr},
+};
+const PropertyType<LuaTextarea> LuaTextarea::Properties[] = {
+   PROP_RW(LuaTextarea, text),
+   {nullptr, nullptr, nullptr},
+};
+
+/*
+ * Properties
+ */
+
+/* RST
+   .. attribute:: text
+
+      (RW) The text currently shown by this area.
+*/
+int LuaTextarea::get_text(lua_State* L) {
+	lua_pushstring(L, get()->get_text().c_str());
+	return 1;
+}
+int LuaTextarea::set_text(lua_State* L) {
+	get()->set_text(luaL_checkstring(L, -1));
+	return 0;
+}
+
+/*
+ * Lua Functions
+ */
+
+/*
+ * C Functions
+ */
+
+/* RST
 TextInputPanel
 --------------
 
@@ -2238,6 +2345,14 @@ void luaopen_wlui(lua_State* L) {
 	register_class<LuaButton>(L, "ui", true);
 	add_parent<LuaButton, LuaPanel>(L);
 	add_parent<LuaButton, LuaNamedPanel>(L);
+	lua_pop(L, 1);  // Pop the meta table
+
+	register_class<LuaMultilineTextarea>(L, "ui", true);
+	add_parent<LuaMultilineTextarea, LuaPanel>(L);
+	lua_pop(L, 1);  // Pop the meta table
+
+	register_class<LuaTextarea>(L, "ui", true);
+	add_parent<LuaTextarea, LuaPanel>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
 	register_class<LuaTextInputPanel>(L, "ui", true);
