@@ -75,6 +75,7 @@ int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel) {
 	else TRY_TO_LUA(Button, LuaButton)
 	else TRY_TO_LUA(Checkbox, LuaCheckbox)
 	else TRY_TO_LUA(Radiobutton, LuaRadioButton)
+	else TRY_TO_LUA(SpinBox, LuaSpinBox)
 	else TRY_TO_LUA(MultilineTextarea, LuaMultilineTextarea)
 	else TRY_TO_LUA(Textarea, LuaTextarea)
 	else TRY_TO_LUA(AbstractTextInputPanel, LuaTextInputPanel)
@@ -1485,6 +1486,97 @@ int LuaRadioButton::set_enabled(lua_State* L) {
  */
 
 /* RST
+SpinBox
+-------
+
+.. class:: SpinBox
+
+   .. versionadded:: 1.2
+
+   NOCOM
+*/
+const char LuaSpinBox::className[] = "SpinBox";
+const MethodType<LuaSpinBox> LuaSpinBox::Methods[] = {
+   METHOD(LuaSpinBox, set_unit_width),
+   METHOD(LuaSpinBox, set_interval),
+   METHOD(LuaSpinBox, add_replacement),
+   {nullptr, nullptr},
+};
+const PropertyType<LuaSpinBox> LuaSpinBox::Properties[] = {
+   PROP_RW(LuaSpinBox, value),
+   {nullptr, nullptr, nullptr},
+};
+
+/*
+ * Properties
+ */
+
+/* RST
+   .. attribute:: value
+
+      (RW) The currently selected value.
+*/
+int LuaSpinBox::get_value(lua_State* L) {
+	lua_pushinteger(L, get()->get_value());
+	return 1;
+}
+int LuaSpinBox::set_value(lua_State* L) {
+	get()->set_value(luaL_checkint32(L, -1));
+	return 0;
+}
+
+/*
+ * Lua Functions
+ */
+
+/* RST
+.. function:: set_unit_width(w)
+
+   Set the width of the spinbox's buttons and content.
+
+   :arg w: Width in pixels.
+   :type min: :class:`int`
+*/
+int LuaSpinBox::set_unit_width(lua_State* L) {
+	get()->set_unit_width(luaL_checkuint32(L, 2));
+	return 0;
+}
+
+/* RST
+.. function:: set_interval(min, max)
+
+   Set the minimum and maximum value of the spinbox.
+
+   :arg min: Minimum value.
+   :type min: :class:`int`
+   :arg max: Maximum value.
+   :type max: :class:`int`
+*/
+int LuaSpinBox::set_interval(lua_State* L) {
+	get()->set_interval(luaL_checkint32(L, 2), luaL_checkint32(L, 3));
+	return 0;
+}
+
+/* RST
+.. function:: add_replacement(value, label)
+
+   Replacement string to display instead of a specific value when that value is selected.
+
+   :arg value: Value to replace.
+   :type value: :class:`int`
+   :arg label: Replacement text.
+   :type label: :class:`string`
+*/
+int LuaSpinBox::add_replacement(lua_State* L) {
+	get()->add_replacement(luaL_checkint32(L, 2), luaL_checkstring(L, 3));
+	return 0;
+}
+
+/*
+ * C Functions
+ */
+
+/* RST
 MultilineTextarea
 -----------------
 
@@ -2482,6 +2574,10 @@ void luaopen_wlui(lua_State* L) {
 
 	register_class<LuaRadioButton>(L, "ui", true);
 	add_parent<LuaRadioButton, LuaPanel>(L);
+	lua_pop(L, 1);  // Pop the meta table
+
+	register_class<LuaSpinBox>(L, "ui", true);
+	add_parent<LuaSpinBox, LuaPanel>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
 	register_class<LuaTextInputPanel>(L, "ui", true);

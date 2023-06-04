@@ -276,6 +276,38 @@ public:
 	}
 };
 
+class LuaSpinBox : public LuaPanel {
+public:
+	LUNA_CLASS_HEAD(LuaSpinBox);
+
+	LuaSpinBox() = default;
+	explicit LuaSpinBox(UI::Panel* p) : LuaPanel(p) {
+	}
+	explicit LuaSpinBox(lua_State* L) : LuaPanel(L) {
+	}
+	~LuaSpinBox() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_value(lua_State* L);
+	int set_value(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+	int set_unit_width(lua_State* L);
+	int set_interval(lua_State* L);
+	int add_replacement(lua_State* L);
+
+	/*
+	 * C Methods
+	 */
+	UI::SpinBox* get() {
+		return dynamic_cast<UI::SpinBox*>(panel_);
+	}
+};
+
 class LuaTextInputPanel : public LuaPanel {
 public:
 	LUNA_CLASS_HEAD(LuaTextInputPanel);
