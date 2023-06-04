@@ -29,8 +29,6 @@
 #include "scripting/lua_map.h"
 #include "scripting/luna.h"
 #include "ui_basic/messagebox.h"
-#include "ui_basic/slider.h"
-#include "ui_basic/spinbox.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 #include "wui/unique_window_handler.h"
@@ -75,6 +73,8 @@ int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel) {
 
 	TRY_TO_LUA(Window, LuaWindow)
 	else TRY_TO_LUA(Button, LuaButton)
+	else TRY_TO_LUA(Checkbox, LuaCheckbox)
+	else TRY_TO_LUA(Radiobutton, LuaRadioButton)
 	else TRY_TO_LUA(MultilineTextarea, LuaMultilineTextarea)
 	else TRY_TO_LUA(Textarea, LuaTextarea)
 	else TRY_TO_LUA(AbstractTextInputPanel, LuaTextInputPanel)
@@ -1364,6 +1364,127 @@ int LuaButton::click(lua_State* /* L */) {
  */
 
 /* RST
+Checkbox
+--------
+
+.. class:: Checkbox
+
+   .. versionadded:: 1.2
+
+   A tick box that can be toggled on or off by the user.
+*/
+const char LuaCheckbox::className[] = "Checkbox";
+const MethodType<LuaCheckbox> LuaCheckbox::Methods[] = {
+   METHOD(LuaCheckbox, set_enabled),
+   {nullptr, nullptr},
+};
+const PropertyType<LuaCheckbox> LuaCheckbox::Properties[] = {
+   PROP_RW(LuaCheckbox, state),
+   {nullptr, nullptr, nullptr},
+};
+
+/*
+ * Properties
+ */
+
+/* RST
+   .. attribute:: state
+
+      (RW) Whether the checkbox is currently checked.
+*/
+int LuaCheckbox::get_state(lua_State* L) {
+	lua_pushboolean(L, static_cast<int>(get()->get_state()));
+	return 1;
+}
+int LuaCheckbox::set_state(lua_State* L) {
+	get()->set_state(luaL_checkboolean(L, -1));
+	return 0;
+}
+
+/*
+ * Lua Functions
+ */
+
+/* RST
+.. function:: set_enabled(b)
+
+   Set whether the user can change the state of this checkbox.
+
+   :arg b: :const:`true` or :const:`false`
+   :type b: :class:`boolean`
+*/
+int LuaCheckbox::set_enabled(lua_State* L) {
+	get()->set_enabled(luaL_checkboolean(L, -1));
+	return 0;
+}
+
+/*
+ * C Functions
+ */
+
+/* RST
+RadioButton
+-----------
+
+.. class:: RadioButton
+
+   .. versionadded:: 1.2
+
+   One of the buttons in a radio group.
+   In each radio group, at most one button can be active at the same time.
+
+   Note that each button in the group also acts as a representation of the group itself.
+*/
+const char LuaRadioButton::className[] = "RadioButton";
+const MethodType<LuaRadioButton> LuaRadioButton::Methods[] = {
+   METHOD(LuaRadioButton, set_enabled),
+   {nullptr, nullptr},
+};
+const PropertyType<LuaRadioButton> LuaRadioButton::Properties[] = {
+   PROP_RW(LuaRadioButton, state),
+   {nullptr, nullptr, nullptr},
+};
+
+/*
+ * Properties
+ */
+
+/* RST
+   .. attribute:: state
+
+      (RW) The index of the radio group's currently active button (-1 for none).
+*/
+int LuaRadioButton::get_state(lua_State* L) {
+	lua_pushinteger(L, get()->group().get_state());
+	return 1;
+}
+int LuaRadioButton::set_state(lua_State* L) {
+	get()->group().set_state(luaL_checkint32(L, -1), true);
+	return 0;
+}
+
+/*
+ * Lua Functions
+ */
+
+/* RST
+.. function:: set_enabled(b)
+
+   Set whether the user can change the state of the radio group.
+
+   :arg b: :const:`true` or :const:`false`
+   :type b: :class:`boolean`
+*/
+int LuaRadioButton::set_enabled(lua_State* L) {
+	get()->group().set_enabled(luaL_checkboolean(L, -1));
+	return 0;
+}
+
+/*
+ * C Functions
+ */
+
+/* RST
 MultilineTextarea
 -----------------
 
@@ -2353,6 +2474,14 @@ void luaopen_wlui(lua_State* L) {
 
 	register_class<LuaTextarea>(L, "ui", true);
 	add_parent<LuaTextarea, LuaPanel>(L);
+	lua_pop(L, 1);  // Pop the meta table
+
+	register_class<LuaCheckbox>(L, "ui", true);
+	add_parent<LuaCheckbox, LuaPanel>(L);
+	lua_pop(L, 1);  // Pop the meta table
+
+	register_class<LuaRadioButton>(L, "ui", true);
+	add_parent<LuaRadioButton, LuaPanel>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
 	register_class<LuaTextInputPanel>(L, "ui", true);

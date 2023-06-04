@@ -34,7 +34,11 @@ struct Radiobutton : public Statebox {
 	Radiobutton(Panel* parent, PanelStyle, Vector2i, const Image* pic, Radiogroup&, int32_t id);
 	~Radiobutton() override;
 
-	Radiobutton* next_button() {
+	[[nodiscard]] Radiogroup& group() {
+		return group_;
+	}
+
+	[[nodiscard]] Radiobutton* next_button() {
 		return nextbtn_;
 	}
 
@@ -70,12 +74,12 @@ struct Radiogroup {
 	                   const std::string& tooltip = "",
 	                   Radiobutton** = nullptr);
 
-	int32_t get_state() const {
+	[[nodiscard]] int32_t get_state() const {
 		return state_;
 	}
 	void set_state(int32_t state, bool send_signal);
 	void set_enabled(bool);
-	Radiobutton* get_first_button() {
+	[[nodiscard]] Radiobutton* get_first_button() {
 		return buttons_;
 	}
 

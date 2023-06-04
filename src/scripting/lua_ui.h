@@ -22,8 +22,12 @@
 #include "scripting/lua.h"
 #include "scripting/luna.h"
 #include "ui_basic/button.h"
+#include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/multilinetextarea.h"
+#include "ui_basic/radiobutton.h"
+#include "ui_basic/slider.h"
+#include "ui_basic/spinbox.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/textinput.h"
@@ -209,6 +213,66 @@ public:
 	 */
 	UI::Textarea* get() {
 		return dynamic_cast<UI::Textarea*>(panel_);
+	}
+};
+
+class LuaCheckbox : public LuaPanel {
+public:
+	LUNA_CLASS_HEAD(LuaCheckbox);
+
+	LuaCheckbox() = default;
+	explicit LuaCheckbox(UI::Panel* p) : LuaPanel(p) {
+	}
+	explicit LuaCheckbox(lua_State* L) : LuaPanel(L) {
+	}
+	~LuaCheckbox() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_state(lua_State* L);
+	int set_state(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+	int set_enabled(lua_State* L);
+
+	/*
+	 * C Methods
+	 */
+	UI::Checkbox* get() {
+		return dynamic_cast<UI::Checkbox*>(panel_);
+	}
+};
+
+class LuaRadioButton : public LuaPanel {
+public:
+	LUNA_CLASS_HEAD(LuaRadioButton);
+
+	LuaRadioButton() = default;
+	explicit LuaRadioButton(UI::Panel* p) : LuaPanel(p) {
+	}
+	explicit LuaRadioButton(lua_State* L) : LuaPanel(L) {
+	}
+	~LuaRadioButton() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_state(lua_State* L);
+	int set_state(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+	int set_enabled(lua_State* L);
+
+	/*
+	 * C Methods
+	 */
+	UI::Radiobutton* get() {
+		return dynamic_cast<UI::Radiobutton*>(panel_);
 	}
 };
 
