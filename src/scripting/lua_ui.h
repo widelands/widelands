@@ -308,6 +308,41 @@ public:
 	}
 };
 
+class LuaSlider : public LuaPanel {
+public:
+	LUNA_CLASS_HEAD(LuaSlider);
+
+	LuaSlider() = default;
+	explicit LuaSlider(UI::Panel* p) : LuaPanel(p) {
+	}
+	explicit LuaSlider(lua_State* L) : LuaPanel(L) {
+	}
+	~LuaSlider() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_value(lua_State* L);
+	int set_value(lua_State* L);
+	int get_min_value(lua_State* L);
+	int set_min_value(lua_State* L);
+	int get_max_value(lua_State* L);
+	int set_max_value(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+	int set_enabled(lua_State* L);
+	int set_cursor_fixed_height(lua_State* L);
+
+	/*
+	 * C Methods
+	 */
+	UI::Slider* get() {
+		return dynamic_cast<UI::Slider*>(panel_);
+	}
+};
+
 class LuaTextInputPanel : public LuaPanel {
 public:
 	LUNA_CLASS_HEAD(LuaTextInputPanel);

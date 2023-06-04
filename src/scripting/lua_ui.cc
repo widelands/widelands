@@ -76,6 +76,7 @@ int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel) {
 	else TRY_TO_LUA(Checkbox, LuaCheckbox)
 	else TRY_TO_LUA(Radiobutton, LuaRadioButton)
 	else TRY_TO_LUA(SpinBox, LuaSpinBox)
+	else TRY_TO_LUA(Slider, LuaSlider)
 	else TRY_TO_LUA(MultilineTextarea, LuaMultilineTextarea)
 	else TRY_TO_LUA(Textarea, LuaTextarea)
 	else TRY_TO_LUA(AbstractTextInputPanel, LuaTextInputPanel)
@@ -596,8 +597,8 @@ int LuaPanel::get_child(lua_State* L) {
            * ``"dark"``: **Optional**. Draw the slider darker instead of lighter.
            * ``"on_changed"``: **Optional**. Callback code to run when the slider's value changes.
 
-         * ``"discrete_slider"``: A button that can be slid along a line to change a
-           value between several predefined points. Properties:
+         * ``"discrete_slider"``: A button that can be slid along a horizontal line to change
+           a value between several predefined points. Properties:
 
            * ``"labels"``: **Mandatory**. Array of strings. Each string defines one slider point.
            * ``"value"``: **Mandatory**. The initially selected value.
@@ -1493,7 +1494,7 @@ SpinBox
 
    .. versionadded:: 1.2
 
-   NOCOM
+   A box with buttons to increase or decrease a numerical value.
 */
 const char LuaSpinBox::className[] = "SpinBox";
 const MethodType<LuaSpinBox> LuaSpinBox::Methods[] = {
@@ -1569,6 +1570,109 @@ int LuaSpinBox::set_interval(lua_State* L) {
 */
 int LuaSpinBox::add_replacement(lua_State* L) {
 	get()->add_replacement(luaL_checkint32(L, 2), luaL_checkstring(L, 3));
+	return 0;
+}
+
+/*
+ * C Functions
+ */
+
+/* RST
+Slider
+------
+
+.. class:: Slider
+
+   .. versionadded:: 1.2
+
+   A button that can be slid along a line to change a value.
+*/
+const char LuaSlider::className[] = "Slider";
+const MethodType<LuaSlider> LuaSlider::Methods[] = {
+   METHOD(LuaSlider, set_enabled),
+   METHOD(LuaSlider, set_cursor_fixed_height),
+   {nullptr, nullptr},
+};
+const PropertyType<LuaSlider> LuaSlider::Properties[] = {
+   PROP_RW(LuaSlider, value),
+   PROP_RW(LuaSlider, min_value),
+   PROP_RW(LuaSlider, max_value),
+   {nullptr, nullptr, nullptr},
+};
+
+/*
+ * Properties
+ */
+
+/* RST
+   .. attribute:: value
+
+      (RW) The currently selected value.
+*/
+int LuaSlider::get_value(lua_State* L) {
+	lua_pushinteger(L, get()->get_value());
+	return 1;
+}
+int LuaSlider::set_value(lua_State* L) {
+	get()->set_value(luaL_checkint32(L, -1));
+	return 0;
+}
+
+/* RST
+   .. attribute:: min_value
+
+      (RW) The lowest selectable value.
+*/
+int LuaSlider::get_min_value(lua_State* L) {
+	lua_pushinteger(L, get()->get_min_value());
+	return 1;
+}
+int LuaSlider::set_min_value(lua_State* L) {
+	get()->set_min_value(luaL_checkint32(L, -1));
+	return 0;
+}
+
+/* RST
+   .. attribute:: max_value
+
+      (RW) The highest selectable value.
+*/
+int LuaSlider::get_max_value(lua_State* L) {
+	lua_pushinteger(L, get()->get_max_value());
+	return 1;
+}
+int LuaSlider::set_max_value(lua_State* L) {
+	get()->set_max_value(luaL_checkint32(L, -1));
+	return 0;
+}
+
+/*
+ * Lua Functions
+ */
+
+/* RST
+.. function:: set_enabled(b)
+
+   Set whether the user can move this slider.
+
+   :arg b: :const:`true` or :const:`false`
+   :type b: :class:`boolean`
+*/
+int LuaSlider::set_enabled(lua_State* L) {
+	get()->set_enabled(luaL_checkboolean(L, -1));
+	return 0;
+}
+
+/* RST
+.. function:: set_cursor_fixed_height(h)
+
+   Set the slider cursor's height.
+
+   :arg h: Height in pixels.
+   :type h: :class:`int`
+*/
+int LuaSlider::set_cursor_fixed_height(lua_State* L) {
+	get()->set_cursor_fixed_height(luaL_checkint32(L, -1));
 	return 0;
 }
 
@@ -2578,6 +2682,10 @@ void luaopen_wlui(lua_State* L) {
 
 	register_class<LuaSpinBox>(L, "ui", true);
 	add_parent<LuaSpinBox, LuaPanel>(L);
+	lua_pop(L, 1);  // Pop the meta table
+
+	register_class<LuaSlider>(L, "ui", true);
+	add_parent<LuaSlider, LuaPanel>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
 	register_class<LuaTextInputPanel>(L, "ui", true);
