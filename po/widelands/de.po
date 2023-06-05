@@ -37,7 +37,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-01 03:19+0000\n"
+"POT-Creation-Date: 2023-06-03 02:52+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2023\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
@@ -2989,7 +2989,7 @@ msgstr "Prüfe Karte"
 
 #: ../../src/map_io/widelands_map_loader.cc:450
 msgid "Postloading map objects"
-msgstr ""
+msgstr "Kartenobjekte nachladen"
 
 #: ../../src/network/gameclient.cc:144 ../../src/network/gamehost.cc:523
 #: ../../src/ui_fsmenu/launch_spg.cc:174 ../../src/wlapplication.cc:756
