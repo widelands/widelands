@@ -92,6 +92,8 @@ std::unique_ptr<MutableAddOn> MutableAddOn::create_mutable_addon(const AddOnInfo
 		return std::unique_ptr<MapsAddon>(new MapsAddon(a));
 	case AddOnCategory::kMapGenerator:
 		return std::unique_ptr<MapGenAddon>(new MapGenAddon(a));
+	case AddOnCategory::kUIPlugin:
+		return std::unique_ptr<UIPluginAddon>(new UIPluginAddon(a));
 	case AddOnCategory::kCampaign:
 		return std::unique_ptr<CampaignAddon>(new CampaignAddon(a));
 	case AddOnCategory::kWinCondition:

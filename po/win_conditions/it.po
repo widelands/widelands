@@ -12,15 +12,16 @@
 # Luigi Lain <lainluigi86@tiscali.it>, 2015
 # Riccardo Di Maio <riccardodimaio11@gmail.com>, 2015
 # Samuele Battarra, 2020-2021
+# Samuele Battarra, 2023
 # Stron Zios <danielekeb@gmail.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-16 09:46+0000\n"
+"POT-Creation-Date: 2023-06-01 03:19+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
-"Last-Translator: Log Merger, 2022\n"
-"Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
+"Last-Translator: Samuele Battarra, 2023\n"
+"Language-Team: Italian (http://app.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -35,7 +36,7 @@ msgstr "Manufatti preziosi"
 msgid ""
 "Search for ancient artifacts. Once all of them are found, the team who owns "
 "most of them will win the game."
-msgstr "Cerca antichi manufatti preziosi. Nel momento in cui tutti essi vengono trovati, la squadra che ne possiede di più vince la partita"
+msgstr "Cerca antichi manufatti preziosi. Nel momento in cui vengono trovati tutti, la squadra che ne possiede di più vince la partita."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:21
 msgid "Artifacts owned"
@@ -126,7 +127,7 @@ msgstr "Collezionisti"
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest score after %s wins the game."
-msgstr ""
+msgstr "Ottieni punti per beni preziosi presenti nei tuoi magazzini. Il giocatore con il punteggio più alto dopo %s vince la partita."
 
 #. TRANSLATORS: Will be inserted into "The player with the highest score after
 #. %s wins the game."
@@ -137,7 +138,7 @@ msgstr ""
 #: ../../data/scripting/win_conditions/territorial_time.lua:32
 #: ../../data/scripting/win_conditions/wood_gnome.lua:23
 msgid "the configured time limit"
-msgstr ""
+msgstr "tempo limite configurato"
 
 #: ../../data/scripting/win_conditions/collectors.lua:28
 msgid "Points"
@@ -274,14 +275,14 @@ msgid ""
 "least 20 minutes, or the one with the most territory after %s, whichever "
 "comes first. If the peaceful mode is selected, the game ends if one player "
 "has more land than any other player could gain."
-msgstr ""
+msgstr "Ciascun giocatore o squadra cerca di ottenere più della metà dell'area della mappa. Il vincitore sarà il giocatore o la squadra in grado di mantenerne il controllo per almeno 20 minuti, oppure colui con più territorio posseduto dopo %s, a seconda di quale condizione viene soddisfatta prima. Se la modalità pacifica è stata selezionata, la partita termina se uno dei giocatori possiede più territorio di quanto potrebbero ottenerne gli altri."
 
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:357
 msgid "%1% day"
 msgid_plural "%1% days"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1% giorno"
+msgstr[1] "%1% giorni"
+msgstr[2] "%1% giorni"
 
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:358
 msgid "%1% hour"
@@ -293,21 +294,21 @@ msgstr[2] "%1% ore"
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:359
 msgid "%1% minute"
 msgid_plural "%1% minutes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1% minuto"
+msgstr[1] "%1% minuti"
+msgstr[2] "%1% minuti"
 
 #. TRANSLATORS: 1 day, 12 hours, and 30 minutes
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:364
 msgid "%1$s, %2$s, and %3$s"
-msgstr ""
+msgstr "%1$s, %2$s, e %3$s"
 
 #. TRANSLATORS: "2 hours and 30 minutes" or "2 days and 12 hours" or "2 days
 #. and 30 minutes"
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:367
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:371
 msgid "%1$s and %2$s"
-msgstr ""
+msgstr "%1$s e %2$s"
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:394
@@ -368,7 +369,7 @@ msgid ""
 "As wood gnome you like big forests, so your task is to have more trees on "
 "your territory than any other player. The game will end after %s. The one "
 "with the most trees at that point will win the game."
-msgstr ""
+msgstr "Essendo uno gnomo del bosco, ti piacciono le grandi foreste, quindi il tuo compito sarà quello di avere più alberi nel tuo territorio rispetto ad ogni altro giocatore. Il gioco finirà dopo %s. Il giocatore che avrà più alberi in quel momento vincerà la partita."
 
 #: ../../data/scripting/win_conditions/wood_gnome.lua:28
 msgid "Trees owned"

@@ -22,11 +22,14 @@
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "graphic/style_manager.h"
 #include "logic/game_controller.h"
 #include "logic/player.h"
 #include "scripting/globals.h"
 #include "scripting/lua_map.h"
 #include "scripting/luna.h"
+#include "ui_basic/messagebox.h"
+#include "ui_basic/textarea.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 
@@ -85,6 +88,7 @@ const MethodType<LuaPanel> LuaPanel::Methods[] = {
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
    METHOD(LuaPanel, indicate),
 #endif
+   METHOD(LuaPanel, create_child),
    {nullptr, nullptr},
 };
 
@@ -326,9 +330,485 @@ int LuaPanel::indicate(lua_State* L) {
 }
 #endif
 
+/* RST
+   .. method:: create_child(table)
+
+      .. versionadded:: 1.2
+
+      Create a UI widget as a child of this panel as specified by the provided table.
+
+      A UI descriptor table contains multiple keys of type :class:`string`. Common properties are:
+
+         * ``"widget"``: **Mandatory**. The type of widget to create. See below for allowed values.
+         * ``"name"``: **Mandatory** for named panels. The internal name of the panel.
+         * ``"x"``: **Optional**. The horizontal offset inside the parent from the left. Default: 0.
+         * ``"y"``: **Optional**. The vertical offset inside the parent from the top. Default: 0.
+         * ``"w"``: **Optional**. The widget's width. Default: automatic.
+         * ``"h"``: **Optional**. The widget's height. Default: automatic.
+         * ``"tooltip"``: **Optional**. The widget's tooltip.
+
+         .. _resizing_strategies:
+
+         * ``"resizing"``: **Optional**. If the parent component is a Box,
+           the Resizing strategy to use for layouting. Valid values are:
+
+           * ``"align"``: Use the widget's desired size. This is the default.
+           * ``"fullsize"``: Use the widget's desired depth and the full available breadth.
+           * ``"fillspace"``: Use the widget's desired breadth and the full available depth.
+           * ``"expandboth"``: Use the full available space.
+
+           A box's depth is its primary layout direction, and the breadth is the direction
+           orthogonal to it. See: :ref:`Box widgets <box_description>`
+
+         * ``"align"``: **Optional**. If the parent component is a Box,
+           the Alignment strategy to use for layouting.
+           Valid values are ``"center"`` (the default,) ``"left"``/``"top"``,
+           and ``"right"``/``"bottom"``.
+         * ``"on_panel_clicked"``: **Optional**. Callback code to run when the
+           user clicks anywhere inside the widget.
+         * ``"on_position_changed"``: **Optional**. Callback code to run when the
+           widget's position changes.
+         * ``"children"``: **Optional**. An array of widget descriptor tables.
+
+      Keys that are not supported by the widget type are silently ignored.
+
+      Currently supported types of widgets are:
+
+         * ``"window"``: A window. Windows can only be added to the top-level
+           :class:`~wl.ui.MapView`. Properties:
+
+           * ``"title"``: **Mandatory**. The title bar text.
+           * ``"content"``: **Optional**. The main panel descriptor table.
+             The window will resize itself to accommodate this widget perfectly.
+
+         .. _box_description:
+
+         * ``"box"``: A wrapper around other components with intelligent layouting.
+           It is strongly recommended to layout all your components
+           exclusively with Boxes. Properties:
+
+           * ``"orientation"``: **Mandatory**. The box's layouting direction:
+             ``"vertical"`` or ``"horizontal"``.
+             The shorthands ``"vert"``, ``"v"``, ``"horz"``, and ``"h"`` may be used.
+
+             The size of a child component along this direction is called its *depth*, and the size
+             of a child component along the direction orthogonal to it is called its *breadth*.
+
+             See also: The :ref:`"resizing" <resizing_strategies>` property
+
+           * ``"max_x"``: **Optional**. The maximum horizontal size. Default: unlimited.
+           * ``"max_y"``: **Optional**. The maximum vertical size. Default: unlimited.
+           * ``"spacing"``: **Optional**. The inner spacing between items. Default: 0.
+           * ``"scrolling"``: **Optional**. Whether the box may scroll if its content
+             is too large. Default: false.
+
+         * ``"inf_space"``: Only valid as the direct child of a Box. A flexible spacer.
+         * ``"space"``: Only valid as the direct child of a Box. A fixed-size spacer. Property:
+
+           * ``"value"``: **Mandatory**. The size of the space.
+
+         * ``"panel"``: A plain panel that can act as a spacer or as a container for other widgets.
+
+         * ``"textarea"``: A static text area with a single line of text. Properties:
+
+           * ``"text"``: **Mandatory**. The text to display.
+           * ``"font"``: **Mandatory**. The font style to use.
+           * ``"text_align"``: **Optional**. The alignment of the text. Valid values are
+             ``"center"`` (the default), ``"left"``, and ``"right"``.
+           * ``"fixed_width"``: **Optional**. If set, the text area's width is fixed instead
+             of resizing to accomodate the text or the parent. Default: not set.
+
+         * ``"button"``: A clickable button. A button must have either a title or an icon,
+           but not both. Properties:
+
+           * ``"title"``: **Optional**. The text on the button.
+           * ``"icon"``: **Optional**. The file path of the button's icon.
+           * ``"style"``: **Optional**. The button's style. One of:
+
+             * ``"primary"``
+             * ``"secondary"`` (default)
+             * ``"menu"``
+
+           * ``"visual"``: **Optional**. The button's appearance. One of:
+
+             * ``"raised"`` (default)
+             * ``"permpressed"``
+             * ``"flat"``
+
+           * ``"repeating"``: **Optional**. Whether pressing and holding
+             the button generates repeated events. Default: false.
+
+           * ``"on_click"``: **Optional**. Callback code to run when the
+             button is clicked. To associate actions with a button press,
+             prefer this over the ``on_panel_clicked`` event.
+
+      Note that event callbacks functions must be provided as raw code in string form.
+      During the lifetime of a *toolbar* widget, the Lua Interface used by the game may be reset.
+      Therefore, any callbacks attached to such widgets must not use any functions or variables
+      defined at an arbitrary earlier time by your script -
+      they may have been deleted by the time the callback is invoked.
+      Example:
+
+      .. code-block:: lua
+
+         push_textdomain("yes_no.wad", true)
+
+         local mv = wl.ui.MapView()
+
+         -- Create a toolbar button
+         mv.toolbar:create_child({
+            widget   = "button",
+            name     = "yes_no_toolbar_button",
+            w        = styles.get_size("toolbar_button_size"),
+            h        = styles.get_size("toolbar_button_size"),
+            tooltip  = _("Yes or No"),
+            icon     = "images/ui_basic/different.png",
+            -- Callback code to run when the user presses the button
+            on_click = [[
+               push_textdomain("yes_no.wad", true)
+               -- Open a new window
+               wl.ui.MapView():create_child({
+                  widget   = "window",
+                  name     = "yes_or_no_window",
+                  title    = _("Yes or No"),
+                  x        = wl.ui.MapView().width  // 2,
+                  y        = wl.ui.MapView().height // 2,
+                  -- The window's content
+                  content  = {
+                     -- The window's central panel: A box with three children
+                     widget      = "box",
+                     orientation = "vert",
+                     children    = {
+                        {
+                           widget = "textarea",
+                           font   = "wui_info_panel_paragraph",
+                           text   = _("Click Yes or No"),
+                        },
+                        {
+                           -- Space between the text and the buttons is also created like a widget
+                           widget = "space",
+                           value  = 10,
+                        },
+                        {
+                           -- Place the buttons side by side in a horizontal box
+                           widget = "box",
+                           orientation = "horz",
+                           children = {
+                              {
+                                 widget   = "button",
+                                 name     = "no",
+                                 title    = _("No"),
+                                 on_click = [=[
+                                    wl.ui.show_messagebox(_("Hello"), _("You clicked no!"), false)
+                                 ]=],
+                              },
+                              {
+                                 widget = "space",
+                                 value  = 10,
+                              },
+                              {
+                                 widget   = "button",
+                                 name     = "yes",
+                                 title    = _("Yes"),
+                                 on_click = [=[
+                                    wl.ui.show_messagebox(_("Hello"), _("You clicked yes!"))
+                                 ]=],
+                              },
+                           },
+                        },
+                     }
+                  }
+               })
+               pop_textdomain()
+            ]]
+         })
+
+         mv:update_toolbar()
+
+         pop_textdomain()
+
+*/
+int LuaPanel::create_child(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes exactly one argument");
+	}
+	if (panel_ == nullptr) {
+		report_error(L, "Parent does not exist");
+	}
+
+	try {
+		UI::Panel* new_panel = do_create_child(L, panel_, dynamic_cast<UI::Box*>(panel_));
+		new_panel->initialization_complete();
+	} catch (const std::exception& e) {
+		report_error(L, "Could not create child: %s", e.what());
+	}
+
+	return 0;
+}
+
 /*
  * C Functions
  */
+static UI::Align get_table_align(lua_State* L,
+                                 const char* key,
+                                 bool mandatory,
+                                 UI::Align default_value = UI::Align::kCenter) {
+	lua_getfield(L, -1, key);
+	if (!lua_isnil(L, -1)) {
+		std::string str = luaL_checkstring(L, -1);
+		if (str == "center") {
+			default_value = UI::Align::kCenter;
+		} else if (str == "left" || str == "top") {
+			default_value = UI::Align::kLeft;
+		} else if (str == "right" || str == "bottom") {
+			default_value = UI::Align::kRight;
+		} else {
+			report_error(L, "Unknown align '%s'", str.c_str());
+		}
+	} else if (mandatory) {
+		report_error(L, "Missing align: %s", key);
+	}
+	lua_pop(L, 1);
+	return default_value;
+}
+
+static UI::Box::Resizing
+get_table_box_resizing(lua_State* L,
+                       const char* key,
+                       bool mandatory,
+                       UI::Box::Resizing default_value = UI::Box::Resizing::kAlign) {
+	lua_getfield(L, -1, key);
+	if (!lua_isnil(L, -1)) {
+		std::string str = luaL_checkstring(L, -1);
+		if (str == "align") {
+			default_value = UI::Box::Resizing::kAlign;
+		} else if (str == "expandboth") {
+			default_value = UI::Box::Resizing::kExpandBoth;
+		} else if (str == "fullsize") {
+			default_value = UI::Box::Resizing::kFullSize;
+		} else if (str == "fillspace") {
+			default_value = UI::Box::Resizing::kFillSpace;
+		} else {
+			report_error(L, "Unknown box resizing '%s'", str.c_str());
+		}
+	} else if (mandatory) {
+		report_error(L, "Missing box resizing: %s", key);
+	}
+	lua_pop(L, 1);
+	return default_value;
+}
+
+static UI::ButtonStyle
+get_table_button_style(lua_State* L,
+                       const char* key,
+                       bool mandatory,
+                       UI::ButtonStyle default_value = UI::ButtonStyle::kWuiSecondary) {
+	lua_getfield(L, -1, key);
+	if (!lua_isnil(L, -1)) {
+		std::string str = luaL_checkstring(L, -1);
+		if (str == "primary") {
+			default_value = UI::ButtonStyle::kWuiPrimary;
+		} else if (str == "secondary") {
+			default_value = UI::ButtonStyle::kWuiSecondary;
+		} else if (str == "menu") {
+			default_value = UI::ButtonStyle::kWuiMenu;
+		} else {
+			report_error(L, "Unknown button style '%s'", str.c_str());
+		}
+	} else if (mandatory) {
+		report_error(L, "Missing button style: %s", key);
+	}
+	lua_pop(L, 1);
+	return default_value;
+}
+
+static UI::Button::VisualState get_table_button_visual_state(
+   lua_State* L,
+   const char* key,
+   bool mandatory,
+   UI::Button::VisualState default_value = UI::Button::VisualState::kRaised) {
+	lua_getfield(L, -1, key);
+	if (!lua_isnil(L, -1)) {
+		std::string str = luaL_checkstring(L, -1);
+		if (str == "raised") {
+			default_value = UI::Button::VisualState::kRaised;
+		} else if (str == "permpressed") {
+			default_value = UI::Button::VisualState::kPermpressed;
+		} else if (str == "flat") {
+			default_value = UI::Button::VisualState::kFlat;
+		} else {
+			report_error(L, "Unknown button visual state '%s'", str.c_str());
+		}
+	} else if (mandatory) {
+		report_error(L, "Missing button visual state: %s", key);
+	}
+	lua_pop(L, 1);
+	return default_value;
+}
+
+static std::function<void()> create_plugin_action_lambda(lua_State* L, const std::string& cmd) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	return [&egbase, cmd]() {  // do not capture L directly
+		try {
+			egbase.lua().interpret_string(cmd);
+		} catch (const LuaError& e) {
+			log_err("Lua error in plugin: %s", e.what());
+			UI::WLMessageBox m(egbase.get_ibase(), UI::WindowStyle::kWui, _("Plugin Error"),
+			                   format_l(_("Error when running plugin:\n%s"), e.what()),
+			                   UI::WLMessageBox::MBoxType::kOk);
+			m.run<UI::Panel::Returncodes>();
+		}
+	};
+}
+
+// static, recursive function that does all the work for create_child()
+UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* as_box) {
+	luaL_checktype(L, -1, LUA_TTABLE);
+
+	// Read some common properties
+	std::string widget_type = get_table_string(L, "widget", true);
+	std::string tooltip = get_table_string(L, "tooltip", false);
+	int32_t x = get_table_int(L, "x", false);
+	int32_t y = get_table_int(L, "y", false);
+	int32_t w = get_table_int(L, "w", false);
+	int32_t h = get_table_int(L, "h", false);
+
+	// Actually create the panel
+	UI::Panel* created_panel = nullptr;
+	UI::Box* child_as_box = nullptr;
+
+	if (widget_type == "button") {
+		std::string name = get_table_string(L, "name", true);
+		std::string title = get_table_string(L, "title", false);
+		std::string icon = get_table_string(L, "icon", false);
+		if (title.empty() == icon.empty()) {
+			report_error(
+			   L, "Button must have either a title or an icon, but not both and not neither");
+		}
+
+		UI::ButtonStyle style = get_table_button_style(L, "style", false);
+		UI::Button::VisualState visual = get_table_button_visual_state(L, "visual", false);
+
+		UI::Button* button;
+		if (title.empty()) {
+			button = new UI::Button(
+			   parent, name, x, y, w, h, style, g_image_cache->get(icon), tooltip, visual);
+		} else {
+			button = new UI::Button(parent, name, x, y, w, h, style, title, tooltip, visual);
+		}
+		created_panel = button;
+
+		button->set_repeating(get_table_boolean(L, "repeating", false));
+
+		if (std::string on_click = get_table_string(L, "on_click", false); !on_click.empty()) {
+			button->sigclicked.connect(create_plugin_action_lambda(L, on_click));
+		}
+
+	} else if (widget_type == "box") {
+		std::string orientation_str = get_table_string(L, "orientation", true);
+		unsigned orientation;
+		if (orientation_str == "v" || orientation_str == "vert" || orientation_str == "vertical") {
+			orientation = UI::Box::Vertical;
+		} else if (orientation_str == "h" || orientation_str == "horz" ||
+		           orientation_str == "horizontal") {
+			orientation = UI::Box::Horizontal;
+		} else {
+			report_error(L, "Unknown box orientation '%s'", orientation_str.c_str());
+		}
+
+		int32_t max_x = get_table_int(L, "max_x", false);
+		int32_t max_y = get_table_int(L, "max_y", false);
+		int32_t spacing = get_table_int(L, "spacing", false);
+
+		child_as_box =
+		   new UI::Box(parent, UI::PanelStyle::kWui, x, y, orientation, max_x, max_y, spacing);
+		created_panel = child_as_box;
+
+		child_as_box->set_scrolling(get_table_boolean(L, "scrolling", false));
+
+	} else if (widget_type == "inf_space") {
+		if (as_box == nullptr) {
+			report_error(L, "'inf_space' only valid in boxes");
+		}
+		as_box->add_inf_space();
+
+	} else if (widget_type == "space") {
+		if (as_box == nullptr) {
+			report_error(L, "'space' only valid in boxes");
+		}
+		as_box->add_space(get_table_int(L, "value", true));
+
+	} else if (widget_type == "panel") {
+		std::string name = get_table_string(L, "name", false);
+		if (name.empty()) {
+			created_panel = new UI::Panel(parent, UI::PanelStyle::kWui, x, y, w, h, tooltip);
+		} else {
+			created_panel =
+			   new UI::NamedPanel(parent, UI::PanelStyle::kWui, name, x, y, w, h, tooltip);
+		}
+
+	} else if (widget_type == "window") {
+		if (parent != get_egbase(L).get_ibase()) {
+			report_error(L, "Windows must be toplevel components");
+		}
+
+		std::string name = get_table_string(L, "name", true);
+		std::string title = get_table_string(L, "title", true);
+		UI::Window* window = new UI::Window(parent, UI::WindowStyle::kWui, name, x, y, w, h, title);
+		created_panel = window;
+
+		lua_getfield(L, -1, "content");
+		if (!lua_isnil(L, -1)) {
+			window->set_center_panel(do_create_child(L, window, nullptr));
+		}
+		lua_pop(L, 1);
+
+	} else if (widget_type == "textarea") {
+		std::string text = get_table_string(L, "text", true);
+		UI::FontStyle font = g_style_manager->safe_font_style(get_table_string(L, "font", true));
+		UI::Align align = get_table_align(L, "text_align", false);
+		UI::Textarea* txt =
+		   new UI::Textarea(parent, UI::PanelStyle::kWui, font, x, y, w, h, text, align);
+		created_panel = txt;
+
+		txt->set_fixed_width(get_table_int(L, "fixed_width", false));
+
+	} else {
+		// TODO(Nordfriese): Add more widget types
+		report_error(L, "Unknown widget type '%s'", widget_type.c_str());
+	}
+
+	if (created_panel != nullptr) {
+		// Signal bindings
+		if (std::string cmd = get_table_string(L, "on_panel_clicked", false); !cmd.empty()) {
+			created_panel->clicked.connect(create_plugin_action_lambda(L, cmd));
+		}
+		if (std::string cmd = get_table_string(L, "on_position_changed", false); !cmd.empty()) {
+			created_panel->position_changed.connect(create_plugin_action_lambda(L, cmd));
+		}
+
+		// Box layouting if applicable
+		if (as_box != nullptr) {
+			UI::Align align = get_table_align(L, "align", false);
+			UI::Box::Resizing resizing = get_table_box_resizing(L, "resizing", false);
+			as_box->add(created_panel, resizing, align);
+		}
+
+		// Widget children (recursive iteration)
+		lua_getfield(L, -1, "children");
+		if (!lua_isnil(L, -1)) {
+			luaL_checktype(L, -1, LUA_TTABLE);
+			lua_pushnil(L);
+			while (lua_next(L, -2) != 0) {
+				do_create_child(L, created_panel, child_as_box);
+				lua_pop(L, 1);
+			}
+		}
+		lua_pop(L, 1);
+	}
+
+	return created_panel;
+}
 
 /* RST
 Button
@@ -699,6 +1179,7 @@ const MethodType<LuaMapView> LuaMapView::Methods[] = {
    METHOD(LuaMapView, is_visible),
    METHOD(LuaMapView, mouse_to_field),
    METHOD(LuaMapView, mouse_to_pixel),
+   METHOD(LuaMapView, update_toolbar),
    {nullptr, nullptr},
 };
 const PropertyType<LuaMapView> LuaMapView::Properties[] = {
@@ -710,6 +1191,7 @@ const PropertyType<LuaMapView> LuaMapView::Properties[] = {
    PROP_RO(LuaMapView, is_building_road),
    PROP_RO(LuaMapView, auto_roadbuilding_mode),
    PROP_RO(LuaMapView, is_animating),
+   PROP_RO(LuaMapView, toolbar),
    {nullptr, nullptr, nullptr},
 };
 
@@ -717,13 +1199,24 @@ LuaMapView::LuaMapView(lua_State* L) : LuaPanel(get_egbase(L).get_ibase()) {
 }
 
 void LuaMapView::__unpersist(lua_State* L) {
-	const Widelands::Game& game = get_game(L);
-	panel_ = game.get_ibase();
+	panel_ = get_egbase(L).get_ibase();
 }
 
 /*
  * Properties
  */
+/* RST
+   .. attribute:: toolbar
+
+      .. versionadded:: 1.2
+
+      (RO) The main toolbar.
+*/
+int LuaMapView::get_toolbar(lua_State* L) {
+	to_lua<LuaPanel>(L, new LuaPanel(get()->toolbar()));
+	return 1;
+}
+
 /* RST
    .. attribute:: average_fps
 
@@ -927,9 +1420,11 @@ int LuaMapView::close(lua_State* /* l */) {
       :type y: number
 */
 int LuaMapView::scroll_to_map_pixel(lua_State* L) {
-	Widelands::Game& game = get_game(L);
+	Widelands::EditorGameBase& egbase = get_egbase(L);
 	// don't move view in replays
-	if (game.game_controller()->get_game_type() == GameController::GameType::kReplay) {
+	if (egbase.is_game() &&
+	    dynamic_cast<Widelands::Game&>(egbase).game_controller()->get_game_type() ==
+	       GameController::GameType::kReplay) {
 		return 0;
 	}
 
@@ -998,6 +1493,19 @@ int LuaMapView::mouse_to_pixel(lua_State* L) {
 int LuaMapView::mouse_to_field(lua_State* L) {
 	get()->map_view()->mouse_to_field(
 	   (*get_user_class<LuaMaps::LuaField>(L, 2))->coords(), MapView::Transition::Smooth);
+	return 0;
+}
+
+/* RST
+   .. method:: update_toolbar(field)
+
+      .. versionadded:: 1.2
+
+      Recompute the size and position of the toolbar.
+      Call this after you have modified the toolbar in any way.
+*/
+int LuaMapView::update_toolbar(lua_State* L) {
+	get_egbase(L).get_ibase()->finalize_toolbar();
 	return 0;
 }
 
@@ -1105,12 +1613,48 @@ static int L_get_editor_shortcut_help(lua_State* L) {
 	return 1;
 }
 
+/* RST
+.. method:: show_messagebox(title, text[, cancel_button = true])
+
+   .. versionadded:: 1.2
+
+   Show the user a modal message box with an OK button and optionally a cancel button.
+
+   :arg title: The caption of the window
+   :type title: :class:`string`
+   :arg text: The message to show
+   :type text: :class:`string`
+   :arg cancel_button: Whether to include a Cancel button
+   :type cancel_button: :class:`boolean`
+   :returns: Whether the user clicked OK.
+   :rtype: :class:`boolean`
+*/
+static int L_show_messagebox(lua_State* L) {
+	const int nargs = lua_gettop(L);
+	if (nargs < 2 || nargs > 3) {
+		report_error(L, "Wrong number of arguments");
+	}
+
+	std::string title = luaL_checkstring(L, 1);
+	std::string text = luaL_checkstring(L, 2);
+	bool allow_cancel = nargs < 3 || luaL_checkboolean(L, 3);
+
+	UI::WLMessageBox m(
+	   get_egbase(L).get_ibase(), UI::WindowStyle::kWui, title, text,
+	   allow_cancel ? UI::WLMessageBox::MBoxType::kOkCancel : UI::WLMessageBox::MBoxType::kOk);
+	UI::Panel::Returncodes result = m.run<UI::Panel::Returncodes>();
+
+	lua_pushboolean(L, static_cast<int>(result == UI::Panel::Returncodes::kOk));
+	return 1;
+}
+
 const static struct luaL_Reg wlui[] = {{"set_user_input_allowed", &L_set_user_input_allowed},
                                        {"get_user_input_allowed", &L_get_user_input_allowed},
                                        {"get_shortcut", &L_get_shortcut},
                                        {"get_ingame_shortcut_help", &L_get_ingame_shortcut_help},
                                        {"get_fastplace_help", &L_get_fastplace_help},
                                        {"get_editor_shortcut_help", &L_get_editor_shortcut_help},
+                                       {"show_messagebox", &L_show_messagebox},
                                        {nullptr, nullptr}};
 
 void luaopen_wlui(lua_State* L) {
