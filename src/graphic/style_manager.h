@@ -146,6 +146,8 @@ public:
 	[[nodiscard]] const RGBColor& color(std::string name) const;
 	// Returns 0 if 'name' is not defined.
 	[[nodiscard]] int styled_size(std::string name) const;
+	// Throws an exception if the requested style does not exist.
+	[[nodiscard]] UI::FontStyle safe_font_style(std::string name) const;
 
 	// Special elements
 	[[nodiscard]] int minimum_font_size() const;
