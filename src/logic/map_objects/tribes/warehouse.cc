@@ -350,7 +350,7 @@ Quantity Warehouse::SoldierControl::min_soldier_capacity() const {
 }
 
 Quantity Warehouse::SoldierControl::max_soldier_capacity() const {
-	return std::numeric_limits<Quantity>::max();
+	return warehouse_->attack_target()->can_be_attacked() ? kMaxGarrison : 0;
 }
 
 Quantity Warehouse::SoldierControl::soldier_capacity() const {
@@ -529,6 +529,9 @@ bool Warehouse::init(EditorGameBase& egbase) {
 	warehouse_name_ = player->pick_warehousename(descr().get_isport());
 
 	set_seeing(true);
+
+	// Garrisons should be treated as more important than militarysites
+	set_priority(wwWORKER, player->tribe().soldier(), WarePriority::kHigh);
 
 	// Even though technically, a warehouse might be completely empty,
 	// we let warehouse see always for simplicity's sake (since there's

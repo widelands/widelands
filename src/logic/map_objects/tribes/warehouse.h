@@ -34,6 +34,9 @@ namespace Widelands {
 class PortDock;
 struct WareList;
 
+/** Maximum number of soldiers who can be permanently stationed in a port or HQ. */
+constexpr Quantity kMaxGarrison = 20;
+
 /*
 Warehouse
 */

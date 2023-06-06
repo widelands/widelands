@@ -309,8 +309,12 @@ void WarehouseWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 		      return n;
 	      }),
 	   UI::Box::Resizing::kFullSize);
-	soldiers_box->add(
-	   create_soldier_list(*soldiers_box, *ibase(), *warehouse), UI::Box::Resizing::kFullSize);
+
+	if (warehouse->attack_target()->can_be_attacked()) {
+		soldiers_box->add(
+		   create_soldier_list(*soldiers_box, *ibase(), *warehouse), UI::Box::Resizing::kFullSize);
+	}
+
 	get_tabs()->add("soldiers", g_image_cache->get(pic_tab_soldiers), soldiers_box, _("Soldiers"));
 
 	if (const Widelands::PortDock* pd = warehouse->get_portdock()) {

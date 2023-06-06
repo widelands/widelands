@@ -361,6 +361,8 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 				if (ws->launch_expedition) {
 					get_owner()->start_or_cancel_expedition(site);
 				}
+				site.mutable_soldier_control()->set_soldier_capacity(ws->desired_capacity);
+				site.set_soldier_preference(ws->soldier_preference);
 			} else {
 				NEVER_HERE();
 			}
@@ -462,6 +464,8 @@ void ConstructionSite::enhance(const EditorGameBase& egbase) {
 			new_settings->worker_preferences[pair.first] = pair.second;
 		}
 		new_settings->launch_expedition = ws->launch_expedition && building_->get_isport();
+		new_settings->desired_capacity = ws->desired_capacity;
+		new_settings->soldier_preference = ws->soldier_preference;
 	} break;
 	case Widelands::MapObjectType::TRAININGSITE: {
 		upcast(const TrainingSiteDescr, td, building_);
