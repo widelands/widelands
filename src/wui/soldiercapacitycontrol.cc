@@ -134,9 +134,10 @@ void SoldierCapacityControl::change_soldier_capacity(const int delta) {
 			NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 		}
 	} else {
-		const int32_t new_capacity =
-		   std::max<int32_t>(get_min_capacity(), std::min<int32_t>(get_max_capacity(),
-		   static_cast<int32_t>(ship_->get_warship_soldier_capacity()) + delta));
+		const int32_t new_capacity = std::max<int32_t>(
+		   get_min_capacity(),
+		   std::min<int32_t>(get_max_capacity(),
+		                     static_cast<int32_t>(ship_->get_warship_soldier_capacity()) + delta));
 		if (Widelands::Game* game = ibase_.get_game(); game != nullptr) {
 			game->send_player_warship_command(
 			   *ship_, Widelands::WarshipCommand::kSetCapacity, {static_cast<uint32_t>(new_capacity)});

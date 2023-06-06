@@ -306,10 +306,10 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 			cs_launch_expedition_->set_enabled(can_act);
 		}
 	}
-	if (construction_site->get_info().becomes->get_conquers() == 0) {
-		nothing_added = true;
-		break;
-	}
+		if (construction_site->get_info().becomes->get_conquers() == 0) {
+			nothing_added = true;
+			break;
+		}
 		FALLS_THROUGH;
 	case Widelands::MapObjectType::MILITARYSITE: {
 		upcast(Widelands::MilitarysiteSettings, ms, construction_site->get_settings());
@@ -317,8 +317,7 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 		assert((ms != nullptr) ^ (wh != nullptr));
 		cs_soldier_capacity_ = new ConstructionSoldierCapacityBox(
 		   settings_box.get(), ms != nullptr ? ms->desired_capacity : wh->desired_capacity,
-		   ms != nullptr ? 1 : 0,
-		   ms != nullptr ? ms->max_capacity : Widelands::kMaxGarrison,
+		   ms != nullptr ? 1 : 0, ms != nullptr ? ms->max_capacity : Widelands::kMaxGarrison,
 		   can_act);
 		settings_box->add(cs_soldier_capacity_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 		settings_box->add_space(8);
@@ -455,8 +454,7 @@ void ConstructionSiteWindow::think() {
 			assert(!ws->launch_expedition);
 		}
 #endif
-		cs_soldier_capacity_->refresh(
-		   ws->desired_capacity, Widelands::kMaxGarrison, can_act);
+		cs_soldier_capacity_->refresh(ws->desired_capacity, Widelands::kMaxGarrison, can_act);
 		cs_prefer_heroes_rookies_->set_state(static_cast<uint8_t>(ws->soldier_preference), false);
 	}
 }
