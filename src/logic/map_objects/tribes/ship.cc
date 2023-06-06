@@ -2133,7 +2133,7 @@ void Ship::draw(const EditorGameBase& egbase,
 					const MapObject* dest = destination_object_.get(egbase);
 					if (destination_coords_ != nullptr) {
 						format(pgettext("ship_state", "Sailing to %s"),
-						       destination_coords_->to_string(egbase));
+						       destination_coords_->to_long_string(egbase));
 					} else if (dest == nullptr) {
 						/** TRANSLATORS: This is a ship state. The ship is ready
 						 * to transport wares, but has nothing to do. */

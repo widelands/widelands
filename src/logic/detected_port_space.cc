@@ -44,7 +44,7 @@ bool DetectedPortSpace::has_dockpoint(const Coords& c) const {
 	return std::find(dockpoints.begin(), dockpoints.end(), c) != dockpoints.end();
 }
 
-std::string DetectedPortSpace::to_string(const EditorGameBase& egbase) const {
+std::string DetectedPortSpace::to_long_string(const EditorGameBase& egbase) const {
 	std::string direction;
 	switch (direction_from_portdock) {
 	case WALK_NW:
@@ -85,6 +85,61 @@ std::string DetectedPortSpace::to_string(const EditorGameBase& egbase) const {
 	}
 	/** TRANSLATORS: Last placeholder is "northwest/southeast/... of <port name>" */
 	return format(_("Port space of %1$s discovered at %2$s by %3$s %4$s"),
+	              egbase.player(owner).get_name(), gametimestring(time_discovered.get()),
+	              discovering_ship, direction);
+}
+
+std::string DetectedPortSpace::to_short_string(const EditorGameBase& egbase) const {
+	std::string direction;
+	switch (direction_from_portdock) {
+	case WALK_NW:
+		/** TRANSLATORS: This is a direction from a port. Keep this short and abbreviated. */
+		direction = format(_("NW %s"), nearest_portdock);
+		break;
+	case WALK_NE:
+		/** TRANSLATORS: This is a direction from a port. Keep this short and abbreviated. */
+		direction = format(_("NE %s"), nearest_portdock);
+		break;
+	case WALK_SW:
+		/** TRANSLATORS: This is a direction from a port. Keep this short and abbreviated. */
+		direction = format(_("SW %s"), nearest_portdock);
+		break;
+	case WALK_SE:
+		/** TRANSLATORS: This is a direction from a port. Keep this short and abbreviated. */
+		direction = format(_("SE %s"), nearest_portdock);
+		break;
+	case WALK_W:
+		/** TRANSLATORS: This is a direction from a port. Keep this short and abbreviated. */
+		direction = format(_("W %s"), nearest_portdock);
+		break;
+	case WALK_E:
+		/** TRANSLATORS: This is a direction from a port. Keep this short and abbreviated. */
+		direction = format(_("E %s"), nearest_portdock);
+		break;
+	default:
+		break;
+	}
+
+	if (owner == 0) {
+		if (direction.empty()) {
+			/** TRANSLATORS: Placeholders are gametime and shipname. Keep this short. */
+			return format(pgettext("detected_port_space", "Unowned / %1$s / %2$s"),
+			              gametimestring(time_discovered.get()), discovering_ship);
+		}
+		/** TRANSLATORS: Placeholders are gametime, shipname, and "<direction> <port name>".
+		 *  Keep this short. */
+		return format(pgettext("detected_port_space", "Unowned / %1$s / %2$s / %3$s"),
+		              gametimestring(time_discovered.get()), discovering_ship, direction);
+	}
+	if (direction.empty()) {
+		/** TRANSLATORS: Placeholders are owner, gametime, and shipname. Keep this short. */
+		return format(pgettext("detected_port_space", "%1$s / %2$s / %3$s"),
+		              egbase.player(owner).get_name(), gametimestring(time_discovered.get()),
+		              discovering_ship);
+	}
+	/** TRANSLATORS: Placeholders are owner, gametime, shipname, and "<direction> <port name>".
+	 *  Keep this short. */
+	return format(pgettext("detected_port_space", "%1$s / %2$s / %3$s / %4$s"),
 	              egbase.player(owner).get_name(), gametimestring(time_discovered.get()),
 	              discovering_ship, direction);
 }

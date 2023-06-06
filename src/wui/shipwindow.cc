@@ -327,7 +327,7 @@ void ShipWindow::update_destination_buttons(const Widelands::Ship* ship) {
 		}
 		for (const Widelands::DetectedPortSpace* dps : all_spaces) {
 			const auto& entry = set_destination_->at(++i);
-			if (entry.value.second != dps) {
+			if (entry.value.second != dps || entry.name != dps->to_short_string(egbase)) {
 				needs_update = true;
 				break;
 			}
@@ -336,6 +336,7 @@ void ShipWindow::update_destination_buttons(const Widelands::Ship* ship) {
 
 	if (needs_update) {
 		set_destination_->clear();
+		texture_cache_.clear();
 		set_destination_->add(_("(none)"), DestinationWrapper(), nullptr, !ship->has_destination());
 
 		for (Widelands::PortDock* pd : all_ports) {
@@ -348,16 +349,35 @@ void ShipWindow::update_destination_buttons(const Widelands::Ship* ship) {
 			                      temp_ship->descr().icon(), temp_ship == dest_ship);
 		}
 		for (Widelands::PinnedNote* note : all_notes) {
+			constexpr int kTextureSize = 24;
+			const Image* unscaled = g_animation_manager->get_animation(note->owner().tribe().pinned_note_animation())
+			      .representative_image(&note->get_rgb());
+
+			Texture* downscaled = new Texture(kTextureSize, kTextureSize);
+			RenderTarget rt(downscaled);
+			float aspect_ratio = static_cast<float>(unscaled->width()) / unscaled->height();
+			Rectf result_rect;
+			if (aspect_ratio < 1.f) {
+				result_rect.h = kTextureSize;
+				result_rect.w = kTextureSize * aspect_ratio;
+				result_rect.y = 0;
+				result_rect.x = (kTextureSize - result_rect.w) / 2.f;
+			} else {
+				result_rect.w = kTextureSize;
+				result_rect.h = kTextureSize / aspect_ratio;
+				result_rect.x = 0;
+				result_rect.y = (kTextureSize - result_rect.h) / 2.f;
+			}
+			rt.blitrect_scale(result_rect, unscaled, Recti(0, 0, unscaled->width(), unscaled->height()), 1.f, BlendMode::UseAlpha);
+			texture_cache_.emplace(downscaled);
+
 			set_destination_->add(
-			   note->get_text(), DestinationWrapper(note, nullptr),
-			   g_animation_manager->get_animation(note->owner().tribe().pinned_note_animation())
-			      .representative_image(&note->get_rgb()),
-			   note == dest_note);
+			   note->get_text(), DestinationWrapper(note, nullptr), downscaled, note == dest_note);
 		}
 		for (const Widelands::DetectedPortSpace* temp_dps : all_spaces) {
-			set_destination_->add(temp_dps->to_string(egbase), DestinationWrapper(nullptr, temp_dps),
+			set_destination_->add(temp_dps->to_short_string(egbase), DestinationWrapper(nullptr, temp_dps),
 			                      g_image_cache->get("images/wui/fieldaction/menu_tab_buildport.png"),
-			                      temp_dps == dest_space);
+			                      temp_dps == dest_space, temp_dps->to_long_string(egbase));
 		}
 	} else if (!set_destination_->is_expanded()) {
 		if (dest_dock != nullptr) {

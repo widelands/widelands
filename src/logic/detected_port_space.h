@@ -46,7 +46,8 @@ struct DetectedPortSpace {
 	WalkingDir direction_from_portdock;
 
 	[[nodiscard]] bool has_dockpoint(const Coords& c) const;
-	[[nodiscard]] std::string to_string(const EditorGameBase& egbase) const;
+	[[nodiscard]] std::string to_short_string(const EditorGameBase& egbase) const;
+	[[nodiscard]] std::string to_long_string(const EditorGameBase& egbase) const;
 
 	DISALLOW_COPY_AND_ASSIGN(DetectedPortSpace);
 };
