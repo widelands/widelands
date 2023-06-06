@@ -350,7 +350,8 @@ void ShipWindow::update_destination_buttons(const Widelands::Ship* ship) {
 		}
 		for (Widelands::PinnedNote* note : all_notes) {
 			constexpr int kTextureSize = 24;
-			const Image* unscaled = g_animation_manager->get_animation(note->owner().tribe().pinned_note_animation())
+			const Image* unscaled =
+			   g_animation_manager->get_animation(note->owner().tribe().pinned_note_animation())
 			      .representative_image(&note->get_rgb());
 
 			Texture* downscaled = new Texture(kTextureSize, kTextureSize);
@@ -368,14 +369,17 @@ void ShipWindow::update_destination_buttons(const Widelands::Ship* ship) {
 				result_rect.x = 0;
 				result_rect.y = (kTextureSize - result_rect.h) / 2.f;
 			}
-			rt.blitrect_scale(result_rect, unscaled, Recti(0, 0, unscaled->width(), unscaled->height()), 1.f, BlendMode::UseAlpha);
+			rt.blitrect_scale(result_rect, unscaled,
+			                  Recti(0, 0, unscaled->width(), unscaled->height()), 1.f,
+			                  BlendMode::UseAlpha);
 			texture_cache_.emplace(downscaled);
 
 			set_destination_->add(
 			   note->get_text(), DestinationWrapper(note, nullptr), downscaled, note == dest_note);
 		}
 		for (const Widelands::DetectedPortSpace* temp_dps : all_spaces) {
-			set_destination_->add(temp_dps->to_short_string(egbase), DestinationWrapper(nullptr, temp_dps),
+			set_destination_->add(temp_dps->to_short_string(egbase),
+			                      DestinationWrapper(nullptr, temp_dps),
 			                      g_image_cache->get("images/wui/fieldaction/menu_tab_buildport.png"),
 			                      temp_dps == dest_space, temp_dps->to_long_string(egbase));
 		}
