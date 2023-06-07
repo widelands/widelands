@@ -24,7 +24,7 @@
 
 #include "base/macros.h"
 #include "base/times.h"
-#include "logic/map_objects/walkingdir.h"
+#include "logic/map_compassdir.h"
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
 
@@ -43,7 +43,7 @@ struct DetectedPortSpace {
 	Time time_discovered;
 	std::string discovering_ship;
 	std::string nearest_portdock;
-	WalkingDir direction_from_portdock;
+	CompassDir direction_from_portdock;
 
 	[[nodiscard]] bool has_dockpoint(const Coords& c) const;
 	[[nodiscard]] std::string to_short_string(const EditorGameBase& egbase) const;

@@ -139,6 +139,8 @@ wl_library(logic_map
     field.h
     map.cc
     map.h
+    map_compassdir.cc
+    map_compassdir.h
     map_revision.cc
     map_revision.h
     mapastar.cc

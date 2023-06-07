@@ -807,25 +807,13 @@ void Ship::remember_detected_portspace(const Coords& coords) {
 		}
 	}
 
-	dps->direction_from_portdock = WalkingDir::IDLE;
+	// Find the main direction from the nearest own port to the portspace.
+	dps->direction_from_portdock = CompassDir::kInvalid;
 	if (static_cast<bool>(nearest_dock)) {
 		dps->nearest_portdock =
 		   dynamic_cast<const Warehouse&>(*map[nearest_dock].get_immovable()).get_warehouse_name();
-		// Find the main direction from the nearest own port to the portspace.
-		Path path;
-		map.findpath(nearest_dock, coords, 0, path, CheckStepAlwaysTrue());
-		std::array<unsigned, LAST_DIRECTION> counter{};
-		unsigned highest = 0;
-		for (size_t i = 0; i < path.get_nsteps(); ++i) {
-			counter[path[i] - 1]++;
-			highest = std::max(highest, counter[path[i] - 1]);
-		}
-		for (uint8_t i = 0; i < LAST_DIRECTION; ++i) {
-			if (counter[i] == highest) {
-				dps->direction_from_portdock = static_cast<WalkingDir>(i + 1);
-				break;
-			}
-		}
+		dps->direction_from_portdock =
+		   get_compass_dir(nearest_dock, coords, map.get_width(), map.get_height());
 	}
 
 	get_owner()->detect_port_space(std::move(dps));

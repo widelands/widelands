@@ -110,7 +110,7 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* 
 						dps->time_discovered = Time(fr);
 						dps->discovering_ship = fr.string();
 						dps->nearest_portdock = fr.string();
-						dps->direction_from_portdock = static_cast<WalkingDir>(fr.unsigned_8());
+						dps->direction_from_portdock = static_cast<CompassDir>(fr.unsigned_8());
 						player->detected_port_spaces_.push_back(std::move(dps));
 					}
 
@@ -206,7 +206,7 @@ void GamePlayerInfoPacket::write(FileSystem& fs, Game& game, MapObjectSaver* /* 
 			dps->time_discovered.save(fw);
 			fw.string(dps->discovering_ship);
 			fw.string(dps->nearest_portdock);
-			fw.unsigned_8(dps->direction_from_portdock);
+			fw.unsigned_8(static_cast<uint8_t>(dps->direction_from_portdock));
 		}
 
 		fw.unsigned_32(plr->muted_building_types_.size());

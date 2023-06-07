@@ -47,22 +47,28 @@ bool DetectedPortSpace::has_dockpoint(const Coords& c) const {
 std::string DetectedPortSpace::to_long_string(const EditorGameBase& egbase) const {
 	std::string direction;
 	switch (direction_from_portdock) {
-	case WALK_NW:
+	case CompassDir::kNorthWest:
 		direction = format(_("northwest of %s"), nearest_portdock);
 		break;
-	case WALK_NE:
+	case CompassDir::kNorthEast:
 		direction = format(_("northeast of %s"), nearest_portdock);
 		break;
-	case WALK_SW:
+	case CompassDir::kSouthWest:
 		direction = format(_("southwest of %s"), nearest_portdock);
 		break;
-	case WALK_SE:
+	case CompassDir::kSouthEast:
 		direction = format(_("southeast of %s"), nearest_portdock);
 		break;
-	case WALK_W:
+	case CompassDir::kNorth:
+		direction = format(_("north of %s"), nearest_portdock);
+		break;
+	case CompassDir::kSouth:
+		direction = format(_("south of %s"), nearest_portdock);
+		break;
+	case CompassDir::kWest:
 		direction = format(_("west of %s"), nearest_portdock);
 		break;
-	case WALK_E:
+	case CompassDir::kEast:
 		direction = format(_("east of %s"), nearest_portdock);
 		break;
 	default:
@@ -92,27 +98,35 @@ std::string DetectedPortSpace::to_long_string(const EditorGameBase& egbase) cons
 std::string DetectedPortSpace::to_short_string(const EditorGameBase& egbase) const {
 	std::string direction;
 	switch (direction_from_portdock) {
-	case WALK_NW:
+	case CompassDir::kNorthWest:
 		/** TRANSLATORS: This is a direction from a port. Keep this short and abbreviated. */
 		direction = format(_("NW %s"), nearest_portdock);
 		break;
-	case WALK_NE:
+	case CompassDir::kNorthEast:
 		/** TRANSLATORS: This is a direction from a port. Keep this short and abbreviated. */
 		direction = format(_("NE %s"), nearest_portdock);
 		break;
-	case WALK_SW:
+	case CompassDir::kSouthWest:
 		/** TRANSLATORS: This is a direction from a port. Keep this short and abbreviated. */
 		direction = format(_("SW %s"), nearest_portdock);
 		break;
-	case WALK_SE:
+	case CompassDir::kSouthEast:
 		/** TRANSLATORS: This is a direction from a port. Keep this short and abbreviated. */
 		direction = format(_("SE %s"), nearest_portdock);
 		break;
-	case WALK_W:
+	case CompassDir::kNorth:
+		/** TRANSLATORS: This is a direction from a port. Keep this short and abbreviated. */
+		direction = format(_("N %s"), nearest_portdock);
+		break;
+	case CompassDir::kSouth:
+		/** TRANSLATORS: This is a direction from a port. Keep this short and abbreviated. */
+		direction = format(_("S %s"), nearest_portdock);
+		break;
+	case CompassDir::kWest:
 		/** TRANSLATORS: This is a direction from a port. Keep this short and abbreviated. */
 		direction = format(_("W %s"), nearest_portdock);
 		break;
-	case WALK_E:
+	case CompassDir::kEast:
 		/** TRANSLATORS: This is a direction from a port. Keep this short and abbreviated. */
 		direction = format(_("E %s"), nearest_portdock);
 		break;
