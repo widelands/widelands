@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-01 03:19+0000\n"
+"POT-Creation-Date: 2023-06-03 02:52+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Samuele Battarra, 2023\n"
 "Language-Team: Italian (http://app.transifex.com/widelands/widelands/language/it/)\n"
@@ -1319,7 +1319,7 @@ msgstr "produrre carbone vegetale"
 #: ../../data/tribes/buildings/productionsites/amazons/chocolate_brewery/init.lua:8
 msgctxt "amazons_building"
 msgid "Chocolate Brewery"
-msgstr ""
+msgstr "Fabbrica di cioccolato"
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing chocolate because ...
 #: ../../data/tribes/buildings/productionsites/amazons/chocolate_brewery/init.lua:55
@@ -1353,7 +1353,7 @@ msgstr "Il coltivatore di cacao che lavora in questa fattoria di cacao non ha te
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:8
 msgctxt "amazons_building"
 msgid "Dressmakery"
-msgstr ""
+msgstr "Sartoria"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
@@ -1409,13 +1409,13 @@ msgstr "produrre un usbergo imbottito"
 #: ../../data/tribes/buildings/productionsites/amazons/ferry_yard/init.lua:8
 msgctxt "amazons_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "Cantiere per i traghetti"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/food_preserver/init.lua:8
 msgctxt "amazons_building"
 msgid "Food Preserver"
-msgstr ""
+msgstr "Stabilimento conserviero"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #: ../../data/tribes/buildings/productionsites/amazons/food_preserver/init.lua:60
@@ -1447,7 +1447,7 @@ msgstr "fondere oro"
 #: ../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:8
 msgctxt "amazons_building"
 msgid "Gardening Center"
-msgstr ""
+msgstr "Vivaio"
 
 #. TRANSLATORS: Completed/Skipped/Did not start enhancing the fertility of
 #. land because ...
@@ -1460,7 +1460,7 @@ msgstr "migliorare la fertilità del suolo"
 #: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:8
 msgctxt "amazons_building"
 msgid "Gold Digger Dwelling"
-msgstr ""
+msgstr "Abitazione del cercatore d'oro"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
 #: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:52
@@ -1511,13 +1511,13 @@ msgid ""
 "This gold digger dwelling’s main vein is exhausted. Expect strongly "
 "diminished returns on investment. You should consider dismantling or "
 "destroying it."
-msgstr ""
+msgstr "La vena principale di questa abitazione del cercatore d'oro. Aspettati un ritorno dell'investimento fortemente ridotto. Dovresti considerare lo smantellamento o la distruzione."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Hunter-Gatherer’s Hut"
-msgstr ""
+msgstr "Capanna del recco-cacciatore"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:40
@@ -1555,7 +1555,7 @@ msgstr "Il racco-cacciatore che lavora in questa capanna non può trovare ne sel
 #: ../../data/tribes/buildings/productionsites/amazons/initiation_site/init.lua:8
 msgctxt "amazons_building"
 msgid "Initiation Site"
-msgstr ""
+msgstr "Centro selezione reclute"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
 #: ../../data/tribes/buildings/productionsites/amazons/initiation_site/init.lua:60
@@ -1567,7 +1567,7 @@ msgstr "reclutare un soldato"
 #: ../../data/tribes/buildings/productionsites/amazons/jungle_preservers_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Jungle Preserver’s Hut"
-msgstr ""
+msgstr "Capanna del guardagiungla"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
 #: ../../data/tribes/buildings/productionsites/amazons/jungle_preservers_hut/init.lua:48
@@ -1582,7 +1582,7 @@ msgstr "piantare degli alberi"
 #: ../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Liana Cutter’s Hut"
-msgstr ""
+msgstr "Capanna del taglialiane"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making clay because ...
 #: ../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:39
@@ -1609,13 +1609,13 @@ msgid ""
 "The liana cutter working at this site can’t find any tree in her work area. "
 "You should consider dismantling or destroying the building or building a "
 "jungle preserver’s hut."
-msgstr ""
+msgstr "Il taglialiane che lavora in questo sito non riesce a trovare nessun albero nella sua area di lavoro. Considera lo smantellamento o la distruzione dell'edificio, oppure costruisci una capanna del guardagiungla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Rare Tree Cutter’s Hut"
-msgstr ""
+msgstr "Capanna del tagliatore di alberi rari"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
@@ -1663,7 +1663,7 @@ msgstr "piantare alberi di legnoferro"
 #: ../../data/tribes/buildings/productionsites/amazons/rope_weaver_booth/init.lua:8
 msgctxt "amazons_building"
 msgid "Rope Weaver Booth"
-msgstr ""
+msgstr "Cabina del tessitore di funi"
 
 #. TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
 #: ../../data/tribes/buildings/productionsites/amazons/rope_weaver_booth/init.lua:52
@@ -1674,7 +1674,7 @@ msgstr "produrre una fune"
 #: ../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Scout’s Hut"
-msgstr ""
+msgstr "Capanna dell'esploratore"
 
 #. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
 #: ../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:41
@@ -1710,7 +1710,7 @@ msgstr "costruire una nave"
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:8
 msgctxt "amazons_building"
 msgid "Stone Workshop"
-msgstr ""
+msgstr "Bottega dell'intagliatore"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
@@ -1837,7 +1837,7 @@ msgctxt "amazons_building"
 msgid ""
 "The stonecutter working at this stonecutter’s hut can’t find any rocks in "
 "her work area."
-msgstr ""
+msgstr "Il tagliapietre che lavora in questa capanna del tagliapietre non riesce a trovare rocce nella sua area di lavoro."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:8
@@ -6143,7 +6143,7 @@ msgstr "Içana"
 #: ../../data/tribes/ships/amazons/init.lua:167
 msgctxt "shipname"
 msgid "Igapó-Açu"
-msgstr ""
+msgstr "Igapó-Açu"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:169
@@ -6371,7 +6371,7 @@ msgstr "Mapari"
 #: ../../data/tribes/ships/amazons/init.lua:243
 msgctxt "shipname"
 msgid "Mapiá"
-msgstr ""
+msgstr "Mapiá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:245
@@ -6653,7 +6653,7 @@ msgstr "Toototobi"
 #: ../../data/tribes/ships/amazons/init.lua:337
 msgctxt "shipname"
 msgid "Traíra"
-msgstr ""
+msgstr "Traíra"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:339
@@ -6755,163 +6755,163 @@ msgstr "Xie"
 #: ../../data/tribes/ships/amazons/init.lua:371
 msgctxt "shipname"
 msgid "Apu Illapu"
-msgstr ""
+msgstr "Apu Illapu"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:373
 msgctxt "shipname"
 msgid "Ayar Cachi"
-msgstr ""
+msgstr "Ayar Cachi"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:375
 msgctxt "shipname"
 msgid "Illapa"
-msgstr ""
+msgstr "Illapa"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:377
 msgctxt "shipname"
 msgid "Inti"
-msgstr ""
+msgstr "Inti"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:379
 msgctxt "shipname"
 msgid "Kuychi"
-msgstr ""
+msgstr "Kuychi"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:381
 msgctxt "shipname"
 msgid "Mama Killa"
-msgstr ""
+msgstr "Mama Killa"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:383
 msgctxt "shipname"
 msgid "Mama Occlo"
-msgstr ""
+msgstr "Mama Occlo"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:385
 msgctxt "shipname"
 msgid "Manco Cápac"
-msgstr ""
+msgstr "Manco Cápac"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:387
 msgctxt "shipname"
 msgid "Pachamama"
-msgstr ""
+msgstr "Pachamama"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:389
 msgctxt "shipname"
 msgid "Quchamama"
-msgstr ""
+msgstr "Quchamama"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:391
 msgctxt "shipname"
 msgid "Sachamama"
-msgstr ""
+msgstr "Sachamama"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:393
 msgctxt "shipname"
 msgid "Viracocha"
-msgstr ""
+msgstr "Viracocha"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:395
 msgctxt "shipname"
 msgid "Yakumama"
-msgstr ""
+msgstr "Yakumama"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:397
 msgctxt "shipname"
 msgid "Atahuallpa"
-msgstr ""
+msgstr "Atahuallpa"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:399
 msgctxt "shipname"
 msgid "Lloqe Yupanki"
-msgstr ""
+msgstr "Lloqe Yupanki"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:401
 msgctxt "shipname"
 msgid "Manqo Qhapaq"
-msgstr ""
+msgstr "Manqo Qhapaq"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:403
 msgctxt "shipname"
 msgid "Mayta Qhapaq"
-msgstr ""
+msgstr "Mayta Qhapaq"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:405
 msgctxt "shipname"
 msgid "Pachakuti"
-msgstr ""
+msgstr "Pachakuti"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:407
 msgctxt "shipname"
 msgid "Qhapaq Yupanki"
-msgstr ""
+msgstr "Qhapaq Yupanki"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:409
 msgctxt "shipname"
 msgid "Thupa"
-msgstr ""
+msgstr "Thupa"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:411
 msgctxt "shipname"
 msgid "Urqon"
-msgstr ""
+msgstr "Urqon"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:413
 msgctxt "shipname"
 msgid "Washkar"
-msgstr ""
+msgstr "Washkar"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:415
 msgctxt "shipname"
 msgid "Wayna Qhapaq"
-msgstr ""
+msgstr "Wayna Qhapaq"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:417
 msgctxt "shipname"
 msgid "Yawar Waqaq"
-msgstr ""
+msgstr "Yawar Waqaq"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:419
 msgctxt "shipname"
 msgid "Zinchi Roqa"
-msgstr ""
+msgstr "Zinchi Roqa"
 
 #. TRANSLATORS: This Amazonian ship is named after the lake in the Andes
 #: ../../data/tribes/ships/amazons/init.lua:421
 msgctxt "shipname"
 msgid "Lake Titicaca"
-msgstr ""
+msgstr "Lago Titicaca"
 
 #. TRANSLATORS: This Amazonian ship is named after the main Inca temple
 #: ../../data/tribes/ships/amazons/init.lua:423
 msgctxt "shipname"
 msgid "Koricancha"
-msgstr ""
+msgstr "Koricancha"
 
 #. TRANSLATORS: This is the Atlanteans' ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:101
@@ -6935,7 +6935,7 @@ msgstr "Agate"
 #: ../../data/tribes/ships/atlanteans/init.lua:138
 msgctxt "shipname"
 msgid "Alexandrite"
-msgstr ""
+msgstr "Alexandrite"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:140
@@ -6953,25 +6953,25 @@ msgstr "Ametista"
 #: ../../data/tribes/ships/atlanteans/init.lua:144
 msgctxt "shipname"
 msgid "Anguilla"
-msgstr ""
+msgstr "Anguilla"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:146
 msgctxt "shipname"
 msgid "Antigua"
-msgstr ""
+msgstr "Antigua"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:148
 msgctxt "shipname"
 msgid "Aquamarine"
-msgstr ""
+msgstr "Aquamarina"
 
 #. TRANSLATORS: This is an Atlantean ship name
 #: ../../data/tribes/ships/atlanteans/init.lua:150
 msgctxt "shipname"
 msgid "Atlantean’s Stronghold"
-msgstr ""
+msgstr "Roccaforte atlantidea"
 
 #. TRANSLATORS: This is an Atlantean ship name
 #: ../../data/tribes/ships/atlanteans/init.lua:152
@@ -8675,7 +8675,7 @@ msgstr "Tavole"
 #: ../../data/tribes/wares/protector_padded/init.lua:8
 msgctxt "ware"
 msgid "Padded Protector"
-msgstr ""
+msgstr "Usbergo imbottito"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/quartz/init.lua:8
@@ -8904,7 +8904,7 @@ msgstr "Tunica"
 #: ../../data/tribes/wares/vest_padded/init.lua:8
 msgctxt "ware"
 msgid "Padded Vest"
-msgstr ""
+msgstr "Corpetto imbottito"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/warriors_coat/init.lua:8
@@ -9000,7 +9000,7 @@ msgstr "Cercatore d'oro"
 #: ../../data/tribes/workers/amazons/gold_smelter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Gold Smelter"
-msgstr ""
+msgstr "Fonditore d'oro"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/hunter_gatherer/init.lua:8
@@ -9012,19 +9012,19 @@ msgstr "Cacciatore e raccoglitore"
 #: ../../data/tribes/workers/amazons/jungle_master/init.lua:8
 msgctxt "amazons_worker"
 msgid "Jungle Master"
-msgstr ""
+msgstr "Mastro guardagiungla"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/jungle_preserver/init.lua:8
 msgctxt "amazons_worker"
 msgid "Jungle Preserver"
-msgstr ""
+msgstr "Guardagiungla"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/liana_cutter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Liana Cutter"
-msgstr ""
+msgstr "Taglialiane"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/scout/init.lua:8
@@ -9054,7 +9054,7 @@ msgstr "Intagliatore"
 #: ../../data/tribes/workers/amazons/stonecutter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Stonecutter"
-msgstr ""
+msgstr "Tagliapietre"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/tapir/init.lua:8
