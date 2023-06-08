@@ -17,7 +17,7 @@
 # nicolas jardin <niko472006@sfr.fr>, 2016
 # Papa Ben <ben-oni@hotmail.fr>, 2019
 # Renaud Bouchard, 2015
-# Renaud Bouchard, 2015-2022
+# Renaud Bouchard, 2015-2023
 # Stanislas Dolcini <stan@wildfiregames.com>, 2021
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020-2022
 # Tubuntu, 2015
@@ -26,9 +26,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-05-16 02:41+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: C138, 2021-2022\n"
+"Last-Translator: Renaud Bouchard, 2015-2023\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -6149,7 +6149,7 @@ msgstr "Içana"
 #: ../../data/tribes/ships/amazons/init.lua:167
 msgctxt "shipname"
 msgid "Igapó-Açu"
-msgstr ""
+msgstr "Igapó-Açu"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:169
@@ -6377,7 +6377,7 @@ msgstr "Mapari"
 #: ../../data/tribes/ships/amazons/init.lua:243
 msgctxt "shipname"
 msgid "Mapiá"
-msgstr ""
+msgstr "Mapiá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:245
@@ -6761,163 +6761,163 @@ msgstr "Xie"
 #: ../../data/tribes/ships/amazons/init.lua:371
 msgctxt "shipname"
 msgid "Apu Illapu"
-msgstr ""
+msgstr "Apu Illapu"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:373
 msgctxt "shipname"
 msgid "Ayar Cachi"
-msgstr ""
+msgstr "Ayar Cachi"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:375
 msgctxt "shipname"
 msgid "Illapa"
-msgstr ""
+msgstr "Illapa"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:377
 msgctxt "shipname"
 msgid "Inti"
-msgstr ""
+msgstr "Inti"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:379
 msgctxt "shipname"
 msgid "Kuychi"
-msgstr ""
+msgstr "Kuychi"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:381
 msgctxt "shipname"
 msgid "Mama Killa"
-msgstr ""
+msgstr "Mama Killa"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:383
 msgctxt "shipname"
 msgid "Mama Occlo"
-msgstr ""
+msgstr "Mama Occlo"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:385
 msgctxt "shipname"
 msgid "Manco Cápac"
-msgstr ""
+msgstr "Manco Cápac"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:387
 msgctxt "shipname"
 msgid "Pachamama"
-msgstr ""
+msgstr "Pachamama"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:389
 msgctxt "shipname"
 msgid "Quchamama"
-msgstr ""
+msgstr "Quchamama"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:391
 msgctxt "shipname"
 msgid "Sachamama"
-msgstr ""
+msgstr "Sachamama"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:393
 msgctxt "shipname"
 msgid "Viracocha"
-msgstr ""
+msgstr "Viracocha"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:395
 msgctxt "shipname"
 msgid "Yakumama"
-msgstr ""
+msgstr "Yakumama"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:397
 msgctxt "shipname"
 msgid "Atahuallpa"
-msgstr ""
+msgstr "Atahuallpa"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:399
 msgctxt "shipname"
 msgid "Lloqe Yupanki"
-msgstr ""
+msgstr "Lloqe Yupanki"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:401
 msgctxt "shipname"
 msgid "Manqo Qhapaq"
-msgstr ""
+msgstr "Manqo Qhapaq"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:403
 msgctxt "shipname"
 msgid "Mayta Qhapaq"
-msgstr ""
+msgstr "Mayta Qhapaq"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:405
 msgctxt "shipname"
 msgid "Pachakuti"
-msgstr ""
+msgstr "Pachakuti"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:407
 msgctxt "shipname"
 msgid "Qhapaq Yupanki"
-msgstr ""
+msgstr "Qhapaq Yupanki"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:409
 msgctxt "shipname"
 msgid "Thupa"
-msgstr ""
+msgstr "Thupa"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:411
 msgctxt "shipname"
 msgid "Urqon"
-msgstr ""
+msgstr "Urqon"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:413
 msgctxt "shipname"
 msgid "Washkar"
-msgstr ""
+msgstr "Washkar"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:415
 msgctxt "shipname"
 msgid "Wayna Qhapaq"
-msgstr ""
+msgstr "Wayna Qhapaq"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:417
 msgctxt "shipname"
 msgid "Yawar Waqaq"
-msgstr ""
+msgstr "Yawar Waqaq"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:419
 msgctxt "shipname"
 msgid "Zinchi Roqa"
-msgstr ""
+msgstr "Zinchi Roqa"
 
 #. TRANSLATORS: This Amazonian ship is named after the lake in the Andes
 #: ../../data/tribes/ships/amazons/init.lua:421
 msgctxt "shipname"
 msgid "Lake Titicaca"
-msgstr ""
+msgstr "Lake Titicaca"
 
 #. TRANSLATORS: This Amazonian ship is named after the main Inca temple
 #: ../../data/tribes/ships/amazons/init.lua:423
 msgctxt "shipname"
 msgid "Koricancha"
-msgstr ""
+msgstr "Koricancha"
 
 #. TRANSLATORS: This is the Atlanteans' ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:101
@@ -7313,7 +7313,7 @@ msgstr "Beowulf"
 #: ../../data/tribes/ships/barbarians/init.lua:44
 msgctxt "shipname"
 msgid "Bison"
-msgstr ""
+msgstr "Bison"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
 #: ../../data/tribes/ships/barbarians/init.lua:46
@@ -7337,7 +7337,7 @@ msgstr "Dellingr"
 #: ../../data/tribes/ships/barbarians/init.lua:52
 msgctxt "shipname"
 msgid "Eagle"
-msgstr ""
+msgstr "Aigle"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:54
@@ -7361,7 +7361,7 @@ msgstr "Hagbard"
 #: ../../data/tribes/ships/barbarians/init.lua:60
 msgctxt "shipname"
 msgid "Hakhor"
-msgstr ""
+msgstr "Hakhor"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:62
@@ -7499,13 +7499,13 @@ msgstr "Cochon Sauvage"
 #: ../../data/tribes/ships/barbarians/init.lua:106
 msgctxt "shipname"
 msgid "Valkyrie"
-msgstr ""
+msgstr "Valkyrie"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:108
 msgctxt "shipname"
 msgid "Wisent"
-msgstr ""
+msgstr "Wisent"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:110
@@ -7535,13 +7535,13 @@ msgstr "Mer Adriatique"
 #: ../../data/tribes/ships/empire/init.lua:36
 msgctxt "shipname"
 msgid "Adamas"
-msgstr ""
+msgstr "Adamas"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:38
 msgctxt "shipname"
 msgid "Agrippa"
-msgstr ""
+msgstr "Agrippa"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:40
@@ -7571,7 +7571,7 @@ msgstr "Apollo"
 #: ../../data/tribes/ships/empire/init.lua:48
 msgctxt "shipname"
 msgid "Aquila"
-msgstr ""
+msgstr "Aquila"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:50
@@ -7583,7 +7583,7 @@ msgstr "Augustus"
 #: ../../data/tribes/ships/empire/init.lua:52
 msgctxt "shipname"
 msgid "Aurum"
-msgstr ""
+msgstr "Aurum"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:54
@@ -7631,19 +7631,19 @@ msgstr "Carrara"
 #: ../../data/tribes/ships/empire/init.lua:68
 msgctxt "shipname"
 msgid "Cato"
-msgstr ""
+msgstr "Cato"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:70
 msgctxt "shipname"
 msgid "Cæsar"
-msgstr ""
+msgstr "César"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:72
 msgctxt "shipname"
 msgid "Cervus"
-msgstr ""
+msgstr "Cervus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:74
@@ -7667,7 +7667,7 @@ msgstr "Diane"
 #: ../../data/tribes/ships/empire/init.lua:80
 msgctxt "shipname"
 msgid "Delphinus"
-msgstr ""
+msgstr "Delphinus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:82
@@ -7679,7 +7679,7 @@ msgstr "Domitianus"
 #: ../../data/tribes/ships/empire/init.lua:84
 msgctxt "shipname"
 msgid "Etna"
-msgstr ""
+msgstr "Etna"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:86
@@ -7691,7 +7691,7 @@ msgstr "Faustulus"
 #: ../../data/tribes/ships/empire/init.lua:88
 msgctxt "shipname"
 msgid "Ferrum"
-msgstr ""
+msgstr "Ferrum"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:90
@@ -7709,13 +7709,13 @@ msgstr "Gallus"
 #: ../../data/tribes/ships/empire/init.lua:94
 msgctxt "shipname"
 msgid "Gladiator"
-msgstr ""
+msgstr "Gladiateur"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:96
 msgctxt "shipname"
 msgid "Gloria Imperii"
-msgstr ""
+msgstr "Gloria Imperii"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:98
@@ -7727,7 +7727,7 @@ msgstr "Ianus"
 #: ../../data/tribes/ships/empire/init.lua:100
 msgctxt "shipname"
 msgid "Iulius Cæsar"
-msgstr ""
+msgstr "Iulius César"
 
 #. TRANSLATORS: This Empire ship is named after a Roman goddess
 #: ../../data/tribes/ships/empire/init.lua:102
@@ -7757,13 +7757,13 @@ msgstr "Latonia"
 #: ../../data/tribes/ships/empire/init.lua:110
 msgctxt "shipname"
 msgid "Leo"
-msgstr ""
+msgstr "Leo"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:112
 msgctxt "shipname"
 msgid "Lepus"
-msgstr ""
+msgstr "Lepus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:114
@@ -7787,7 +7787,7 @@ msgstr "Marbre"
 #: ../../data/tribes/ships/empire/init.lua:120
 msgctxt "shipname"
 msgid "Marcus Aurelius"
-msgstr ""
+msgstr "Marc Aurèle"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../data/tribes/ships/empire/init.lua:122
@@ -7847,7 +7847,7 @@ msgstr "Porto Bello"
 #: ../../data/tribes/ships/empire/init.lua:140
 msgctxt "shipname"
 msgid "Præda"
-msgstr ""
+msgstr "Præda"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:142
@@ -7871,7 +7871,7 @@ msgstr "Romulus"
 #: ../../data/tribes/ships/empire/init.lua:148
 msgctxt "shipname"
 msgid "Sagitta"
-msgstr ""
+msgstr "Sagitta"
 
 #. TRANSLATORS: This Empire ship is named after an in-game character
 #: ../../data/tribes/ships/empire/init.lua:150
@@ -7889,13 +7889,13 @@ msgstr "Saturne"
 #: ../../data/tribes/ships/empire/init.lua:154
 msgctxt "shipname"
 msgid "Scipio"
-msgstr ""
+msgstr "Scipio"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:156
 msgctxt "shipname"
 msgid "Seneca"
-msgstr ""
+msgstr "Seneca"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:158
@@ -7907,7 +7907,7 @@ msgstr "Siena"
 #: ../../data/tribes/ships/empire/init.lua:160
 msgctxt "shipname"
 msgid "Spiculum"
-msgstr ""
+msgstr "Spiculum"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:162
@@ -7937,7 +7937,7 @@ msgstr "Traianus"
 #: ../../data/tribes/ships/empire/init.lua:170
 msgctxt "shipname"
 msgid "Venator"
-msgstr ""
+msgstr "Venator"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:172
@@ -7949,13 +7949,13 @@ msgstr "Venus"
 #: ../../data/tribes/ships/empire/init.lua:174
 msgctxt "shipname"
 msgid "Vergilius"
-msgstr ""
+msgstr "Vergilius"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:176
 msgctxt "shipname"
 msgid "Vespa"
-msgstr ""
+msgstr "Vespa"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:178
@@ -7973,7 +7973,7 @@ msgstr "Vesta"
 #: ../../data/tribes/ships/empire/init.lua:182
 msgctxt "shipname"
 msgid "Vesuvius"
-msgstr ""
+msgstr "Vésuve"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:184
