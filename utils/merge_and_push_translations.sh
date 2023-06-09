@@ -96,30 +96,16 @@ fi
 python3 utils/fix_formatting.py --lua --dir data/i18n
 python3 utils/fix_formatting.py --lua --dir data/txts
 
-# Undo one-liner diffs in po directory - these are pure timestamps with no other content
-if false; then  # Currently disabled due to TX no longer updating timestamps reliably
+# Undo one-liner diffs of pure timestamps with no other content
 set +x
-nrAdded=""
-nrDeleted=""
-for entry in $(git diff --numstat po); do
-  if [ -z "$nrAdded" ]
+for entry in $(git diff --numstat po/*/*.pot | sed -En 's/^1\t1\t//p'); do
+  if [ -z "$(git diff "$entry" | grep '^[+-][^+-]' | grep -v '^[+-]"POT-Creation-Date:')" ]
   then
-    nrAdded=$entry
-  elif [ -z "$nrDeleted" ]
-  then
-    nrDeleted=$entry
-  else
-    if [[ $nrAdded == 1 ]] && [[ $nrDeleted == 1 ]]
-    then
-      echo "Skipping changes to $entry"
-      git checkout $entry
-    fi
-    nrAdded=""
-    nrDeleted=""
+    echo "Skipping changes to $entry"
+    git checkout $entry
   fi
 done
 set -x
-fi
 
 # Stage changes
 # - Translations

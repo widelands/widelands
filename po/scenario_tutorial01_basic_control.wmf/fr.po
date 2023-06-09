@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-05-13 02:43+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
 "Last-Translator: Renaud Bouchard, 2015-2023\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
@@ -34,13 +34,13 @@ msgstr ""
 msgid ""
 "I am sorry, but I will have to tear this down. We might need the space here "
 "later on."
-msgstr ""
+msgstr "Je suis désolé, mais je vais devoir démonter ça. Nous pourrions avoir besoin de cet espace plus tard."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:17
 msgid ""
 "I am sorry, but I will have to tear this down again. We might need the space"
 " here later on."
-msgstr ""
+msgstr "Je suis désolé, mais je vais devoir démonter ça à nouveau. Nous pourrions avoir besoin de cet espace plus tard."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:21
 msgid "Nice And Easy Does It All the Time"
@@ -51,7 +51,7 @@ msgid ""
 "If I am too slow for you, you might want to play a real game and just find "
 "everything out for yourself. Otherwise, please bear with me, I am not the "
 "youngest and quickest anymore."
-msgstr ""
+msgstr "Si je suis trop lent pour vous, vous pourriez vouloir jouer à une partie de jeu réelle et tout trouver par vous même. Autrement, merci de me supporter, je ne suis ni le plus jeune ni le plus rapide désormais."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:36
 msgid "Welcome to the Widelands Tutorial!"
@@ -93,7 +93,7 @@ msgstr "Comme la plupart des fenêtres, vous pouvez fermer cette fenêtre en fai
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid "You can also minimize windows by middle-clicking on them."
-msgstr ""
+msgstr "Vous pouvez aussi minimiser les fenêtres en cliquant dessus avec le clic du milieu."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:54
 msgid ""
@@ -102,7 +102,7 @@ msgstr "Quand vous aurez accompli un objectif, il disparaîtra de la liste."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:56
 msgid "Now please close the ‘Objectives’ window to proceed."
-msgstr ""
+msgstr "Veuillez maintenant fermer la fenêtre \"Objectifs\" pour continuer."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:62
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:64
@@ -211,7 +211,7 @@ msgid ""
 "headquarters. After ordering the construction site, I was automatically put "
 "into road building mode, so all I have to do is click on the blue flag in "
 "front of my headquarters."
-msgstr ""
+msgstr "Cela ne va pas encore le faire. j'ai encore besoin de connecter la cabane du bûcheron au quartiers généraux. Après avoir créé le site de construction, j'ai été placé automatiquement en mode construction de route, tout ce que vous avez donc a faire est de cliquer sur le drapeau bleu devant mon quartier général."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:140
 msgid ""
@@ -221,7 +221,7 @@ msgid ""
 "menu). Therefore, I have entered the road building mode manually. I will "
 "tell you later how to do that. To build the road, all I have to do now is "
 "click on the blue flag in front of my headquarters."
-msgstr ""
+msgstr "Cela ne va pas encore le faire. j'ai encore besoin de connecter la cabane du bûcheron au quartiers généraux. Vous avez désactivé l'option \"Commencer à construire une route après avoir placé un drapeau\" (pour changer cela, choisissez \"Options\" dans le menu principal de Widelands). Donc, je suis passé en mode construction de route manuellement. Je vous dirais plus tard comment faire cela. Pour construire la route, tout ce que vous avez à faire maintenant est de cliquer sur le drapeau bleu devant mes quartiers généraux."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:148
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:182
@@ -382,7 +382,7 @@ msgid ""
 "on a laptop with a touchpad. You can enable map movement with touchpad "
 "scrolling in the the Widelands main menu: Choose ‘Options’ then press ‘Edit "
 "keyboard and mouse actions’, and select the ‘Mouse Scrolling’ tab."
-msgstr ""
+msgstr "Se déplacer avec le bouton droit de la souris peut être inconfortable si vous jouez sur un ordinateur portable avec un pavé tactile. Vous pouvez activer le mouvement de la carte avec le défilement du pavé tactile dans le menu principal de Widelands : choisissez \"Options\", puis appuyez sur \"Modifier les actions du clavier et de la souris\", et sélectionnez l'onglet \"Défilement de la souris\"."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:266
 msgid "Some Rocks Were Found"
@@ -575,7 +575,7 @@ msgid ""
 "Excellent! Remember, we also need to build a road to the quarry. To enter "
 "road building mode for any flag, left-click on a flag and select the road "
 "building symbol."
-msgstr ""
+msgstr "Excellent ! Rappelez-vous, nous devons aussi construire une route vers la carrière. Pour entrer en mode construction de route pour n'importe quel drapeau, cliquez avec le bouton gauche sur un drapeau et sélectionnez le symbole de construction de route."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:376
 msgid ""
@@ -843,7 +843,7 @@ msgstr "Toutes les fenêtres de Widelands (sauf les fenêtres de l'histoire affi
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:530
 msgid "The windows can also be minimized by middle-clicking in them."
-msgstr ""
+msgstr "Les fenêtres peuvent aussi êtres minimisées en cliquant dessus avec le clic du milieu."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:531
 msgid "Close the messages window now by right-clicking into it."
