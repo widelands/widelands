@@ -628,6 +628,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 
 	if (destination_coords_ != nullptr) {
 		if (destination_coords_->has_dockpoint(get_position())) {  // Already there
+			destination_coords_ = nullptr;
 			start_task_idle(game, descr().main_animation(), 250);
 			return true;
 		}
