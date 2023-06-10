@@ -809,12 +809,15 @@ void Ship::remember_detected_portspace(const Coords& coords) {
 	}
 
 	// Find the main direction from the nearest own port to the portspace.
-	dps->direction_from_portdock = CompassDir::kInvalid;
 	if (static_cast<bool>(nearest_dock)) {
 		dps->nearest_portdock =
 		   dynamic_cast<const Warehouse&>(*map[nearest_dock].get_immovable()).get_warehouse_name();
 		dps->direction_from_portdock =
 		   get_compass_dir(nearest_dock, coords, map.get_width(), map.get_height());
+		dps->distance_to_portdock = nearest_distance;
+	} else {
+		dps->direction_from_portdock = CompassDir::kInvalid;
+		dps->distance_to_portdock = 0;
 	}
 
 	get_owner()->detect_port_space(std::move(dps));

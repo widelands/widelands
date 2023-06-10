@@ -44,6 +44,7 @@ struct DetectedPortSpace {
 	std::string discovering_ship;
 	std::string nearest_portdock;
 	CompassDir direction_from_portdock;
+	uint32_t distance_to_portdock;
 
 	[[nodiscard]] bool has_dockpoint(const Coords& c) const;
 	[[nodiscard]] std::string to_short_string(const EditorGameBase& egbase) const;

@@ -2091,6 +2091,17 @@ const DetectedPortSpace& Player::get_detected_port_space(Serial serial) const {
 	throw wexception("Player %u has no detected port space with serial %u", player_number(), serial);
 }
 
+bool Player::remove_detected_port_space(const Coords& coords) {
+	for (size_t i = 0; i < detected_port_spaces_.size(); ++i) {
+		if (detected_port_spaces_[i]->coords == coords) {
+			detected_port_spaces_[i] = std::move(detected_port_spaces_.back());
+			detected_port_spaces_.pop_back();
+			return true;
+		}
+	}
+	return false;
+}
+
 /**
  * Read remaining ship names from the given file
  *

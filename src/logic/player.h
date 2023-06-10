@@ -617,6 +617,7 @@ public:
 	void detect_port_space(std::unique_ptr<DetectedPortSpace> new_dps);
 	DetectedPortSpace* has_detected_port_space(const Coords& coords);
 	[[nodiscard]] const DetectedPortSpace& get_detected_port_space(Serial serial) const;
+	bool remove_detected_port_space(const Coords& coords);
 
 	void add_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
 	void remove_soldier(unsigned h, unsigned a, unsigned d, unsigned e);

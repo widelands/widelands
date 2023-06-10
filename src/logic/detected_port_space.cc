@@ -80,55 +80,63 @@ std::string DetectedPortSpace::to_long_string(const EditorGameBase& egbase) cons
 			return format(_("Unowned port space discovered at %1$s by %2$s"),
 			              gametimestring(time_discovered.get()), discovering_ship);
 		}
+		return format(
 		/** TRANSLATORS: Last placeholder is "northwest/southeast/... of <port name>" */
-		return format(_("Unowned port space discovered at %1$s by %2$s %3$s"),
-		              gametimestring(time_discovered.get()), discovering_ship, direction);
+			ngettext(
+				"Unowned port space discovered at %1$s by %2$s %3$u step %4$s",
+				"Unowned port space discovered at %1$s by %2$s %3$u steps %4$s",
+				distance_to_portdock),
+		              gametimestring(time_discovered.get()), discovering_ship, distance_to_portdock, direction);
 	}
 	if (direction.empty()) {
 		return format(_("Port space of %1$s discovered at %2$s by %3$s"),
 		              egbase.player(owner).get_name(), gametimestring(time_discovered.get()),
 		              discovering_ship);
 	}
+	return format(
 	/** TRANSLATORS: Last placeholder is "northwest/southeast/... of <port name>" */
-	return format(_("Port space of %1$s discovered at %2$s by %3$s %4$s"),
+	ngettext(
+		"Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s",
+		"Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s",
+		distance_to_portdock),
 	              egbase.player(owner).get_name(), gametimestring(time_discovered.get()),
-	              discovering_ship, direction);
+	              discovering_ship, distance_to_portdock, direction);
 }
 
 std::string DetectedPortSpace::to_short_string(const EditorGameBase& egbase) const {
 	std::string direction;
 	switch (direction_from_portdock) {
 	case CompassDir::kNorthWest:
-		/** TRANSLATORS: This is a direction from a port. Keep this short and abbreviated. */
-		direction = format(_("NW %s"), nearest_portdock);
+		/** TRANSLATORS: This is a distance and direction from a port. Keep this short. */
+		direction = format(_("%1$u NW %2$s"), distance_to_portdock, nearest_portdock);
 		break;
 	case CompassDir::kNorthEast:
-		/** TRANSLATORS: This is a direction from a port. Keep this short and abbreviated. */
-		direction = format(_("NE %s"), nearest_portdock);
+		/** TRANSLATORS: This is a distance and direction from a port. Keep this short. */
+		direction = format(_("%1$u NE %2$s"), distance_to_portdock, nearest_portdock);
 		break;
 	case CompassDir::kSouthWest:
-		/** TRANSLATORS: This is a direction from a port. Keep this short and abbreviated. */
-		direction = format(_("SW %s"), nearest_portdock);
+		/** TRANSLATORS: This is a distance and direction from a port. Keep this short. */
+		direction = format(_("%1$u SW %2$s"), distance_to_portdock, nearest_portdock);
 		break;
 	case CompassDir::kSouthEast:
-		/** TRANSLATORS: This is a direction from a port. Keep this short and abbreviated. */
-		direction = format(_("SE %s"), nearest_portdock);
+		/** TRANSLATORS: This is a distance and direction from a port. Keep this short. */
+		direction = format(_("%1$u SE %2$s"), distance_to_portdock, nearest_portdock);
 		break;
 	case CompassDir::kNorth:
-		/** TRANSLATORS: This is a direction from a port. Keep this short and abbreviated. */
-		direction = format(_("N %s"), nearest_portdock);
+		/** TRANSLATORS: This is a distance and direction from a port. Keep this short. */
+		direction = format(_("%1$u N %2$s"), distance_to_portdock, nearest_portdock);
 		break;
 	case CompassDir::kSouth:
-		/** TRANSLATORS: This is a direction from a port. Keep this short and abbreviated. */
-		direction = format(_("S %s"), nearest_portdock);
+		/** TRANSLATORS: This is a distance and direction from a port. Keep this short. */
+		direction = format(_("%1$u S %2$s"), distance_to_portdock, nearest_portdock);
 		break;
 	case CompassDir::kWest:
-		/** TRANSLATORS: This is a direction from a port. Keep this short and abbreviated. */
-		direction = format(_("W %s"), nearest_portdock);
+		/** TRANSLATORS: This is a distance and direction from a port. Keep this short. */
+		direction = format(_("%1$u W %2$s"), distance_to_portdock, nearest_portdock);
 		break;
 	case CompassDir::kEast:
-		/** TRANSLATORS: This is a direction from a port. Keep this short and abbreviated. */
-		direction = format(_("E %s"), nearest_portdock);
+		/** TRANSLATORS: This is a distance and direction from a port. Keep this short. */
+		direction = format(_("%1$u E %2$s"), distance_to_portdock, nearest_portdock);
 		break;
 	default:
 		break;
