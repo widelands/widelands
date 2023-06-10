@@ -81,12 +81,11 @@ std::string DetectedPortSpace::to_long_string(const EditorGameBase& egbase) cons
 			              gametimestring(time_discovered.get()), discovering_ship);
 		}
 		return format(
-		/** TRANSLATORS: Last placeholder is "northwest/southeast/... of <port name>" */
-			ngettext(
-				"Unowned port space discovered at %1$s by %2$s %3$u step %4$s",
-				"Unowned port space discovered at %1$s by %2$s %3$u steps %4$s",
-				distance_to_portdock),
-		              gametimestring(time_discovered.get()), discovering_ship, distance_to_portdock, direction);
+		   /** TRANSLATORS: Last placeholder is "northwest/southeast/... of <port name>" */
+		   ngettext("Unowned port space discovered at %1$s by %2$s %3$u step %4$s",
+		            "Unowned port space discovered at %1$s by %2$s %3$u steps %4$s",
+		            distance_to_portdock),
+		   gametimestring(time_discovered.get()), discovering_ship, distance_to_portdock, direction);
 	}
 	if (direction.empty()) {
 		return format(_("Port space of %1$s discovered at %2$s by %3$s"),
@@ -94,13 +93,12 @@ std::string DetectedPortSpace::to_long_string(const EditorGameBase& egbase) cons
 		              discovering_ship);
 	}
 	return format(
-	/** TRANSLATORS: Last placeholder is "northwest/southeast/... of <port name>" */
-	ngettext(
-		"Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s",
-		"Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s",
-		distance_to_portdock),
-	              egbase.player(owner).get_name(), gametimestring(time_discovered.get()),
-	              discovering_ship, distance_to_portdock, direction);
+	   /** TRANSLATORS: Last placeholder is "northwest/southeast/... of <port name>" */
+	   ngettext("Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s",
+	            "Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s",
+	            distance_to_portdock),
+	   egbase.player(owner).get_name(), gametimestring(time_discovered.get()), discovering_ship,
+	   distance_to_portdock, direction);
 }
 
 std::string DetectedPortSpace::to_short_string(const EditorGameBase& egbase) const {
