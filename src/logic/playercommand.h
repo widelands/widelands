@@ -530,7 +530,13 @@ private:
 struct CmdShipSetDestination : public PlayerCommand {
 	CmdShipSetDestination() = default;  // For savegame loading
 	CmdShipSetDestination(const Time& t, PlayerNumber const p, Serial s, Serial dest)
-	   : PlayerCommand(t, p), serial_(s), destination_(dest) {
+	   : PlayerCommand(t, p), serial_(s), destination_object_(dest) {
+	}
+	CmdShipSetDestination(const Time& t,
+	                      PlayerNumber const p,
+	                      Serial s,
+	                      const DetectedPortSpace& dest)
+	   : PlayerCommand(t, p), serial_(s), destination_coords_(dest.serial) {
 	}
 
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
@@ -547,7 +553,8 @@ struct CmdShipSetDestination : public PlayerCommand {
 
 private:
 	Serial serial_{0U};
-	Serial destination_{0U};
+	Serial destination_object_{0U};
+	Serial destination_coords_{0U};
 };
 
 struct CmdShipSink : public PlayerCommand {

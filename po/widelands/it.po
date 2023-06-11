@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-01 03:19+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Samuele Battarra, 2023\n"
 "Language-Team: Italian (http://app.transifex.com/widelands/widelands/language/it/)\n"
@@ -117,7 +117,7 @@ msgstr "%1$s o %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/richtext.lua:703 ../../data/scripting/richtext.lua:708
 #: ../../src/base/i18n.cc:408 ../../src/base/i18n.cc:417
-#: ../../src/logic/addons.cc:223
+#: ../../src/logic/addons.cc:225
 #, c-format
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
@@ -1910,26 +1910,30 @@ msgstr "Condizione di vittoria"
 msgid "Starting Condition"
 msgstr "Condizioni Iniziali"
 
-#: ../../src/logic/addons.cc:110
+#: ../../src/logic/addons.cc:71
+msgid "UI Plugin"
+msgstr ""
+
+#: ../../src/logic/addons.cc:112
 #, c-format
 msgid "%1$s.%2$u"
 msgstr "%1$s.%2$u"
 
-#: ../../src/logic/addons.cc:196
+#: ../../src/logic/addons.cc:198
 msgid "No conflicts"
 msgstr "Nessun conflitto"
 
-#: ../../src/logic/addons.cc:201
+#: ../../src/logic/addons.cc:203
 #, c-format
 msgid "%1$s (expected version %2$s, found %3$s)"
 msgstr "%1$s ( prevista versione %2$s, trovata %3$s)"
 
-#: ../../src/logic/addons.cc:204 ../../src/logic/addons.cc:240
+#: ../../src/logic/addons.cc:206 ../../src/logic/addons.cc:242
 #, c-format
 msgid "%1$s, %2$s (expected version %3$s, found %4$s)"
 msgstr "%1$s, %2$s (prevista versione %3$s, trovata %4$s)"
 
-#: ../../src/logic/addons.cc:211
+#: ../../src/logic/addons.cc:213
 #, c-format
 msgid "%1$u add-on with wrong version: %2$s"
 msgid_plural "%1$u add-ons with wrong version: %2$s"
@@ -1937,7 +1941,7 @@ msgstr[0] "%1$u add-on con versione errata: %2$s"
 msgstr[1] "%1$u add-on con versione errata: %2$s"
 msgstr[2] "%1$u add-on con versione errata: %2$s"
 
-#: ../../src/logic/addons.cc:226
+#: ../../src/logic/addons.cc:228
 #, c-format
 msgid "%1$u missing add-on: %2$s"
 msgid_plural "%1$u missing add-ons: %2$s"
@@ -1945,22 +1949,22 @@ msgstr[0] "%1$u add-on mancante: %2$s"
 msgstr[1] "%1$u add-on mancante: %2$s"
 msgstr[2] "%1$u add-on mancante: %2$s"
 
-#: ../../src/logic/addons.cc:234
+#: ../../src/logic/addons.cc:236
 #, c-format
 msgid "%s (missing)"
 msgstr "%s (mancante)"
 
-#: ../../src/logic/addons.cc:236
+#: ../../src/logic/addons.cc:238
 #, c-format
 msgid "%1$s, %2$s (missing)"
 msgstr "%1$s, %2$s (mancante)"
 
-#: ../../src/logic/addons.cc:244
+#: ../../src/logic/addons.cc:246
 #, c-format
 msgid "%1$s and %2$s: %3$s"
 msgstr "%1$s e %2$s: %3$s"
 
-#: ../../src/logic/addons.cc:245
+#: ../../src/logic/addons.cc:247
 #, c-format
 msgid "%u missing add-on"
 msgid_plural "%u missing add-ons"
@@ -1968,7 +1972,7 @@ msgstr[0] "%u add-on mancanti"
 msgstr[1] "%u add-on mancanti"
 msgstr[2] "%u add-on mancanti"
 
-#: ../../src/logic/addons.cc:247
+#: ../../src/logic/addons.cc:249
 #, c-format
 msgid "%u add-on with wrong version"
 msgid_plural "%u add-ons with wrong version"
@@ -1977,20 +1981,20 @@ msgstr[1] ""
 msgstr[2] ""
 
 #. * TRANSLATORS: This map or savegame uses no add-ons
-#: ../../src/logic/addons.cc:258
+#: ../../src/logic/addons.cc:260
 msgid "None"
 msgstr "Nessuno"
 
-#: ../../src/logic/addons.cc:262
+#: ../../src/logic/addons.cc:264
 #, c-format
 msgid "%1$s<br>· %2$s (version %3$s)"
 msgstr "%1$s<br>· %2$s (versione %3$s)"
 
-#: ../../src/logic/addons.cc:292
+#: ../../src/logic/addons.cc:294
 msgid "No game-relevant add-ons in use."
 msgstr ""
 
-#: ../../src/logic/addons.cc:297
+#: ../../src/logic/addons.cc:299
 #, c-format
 msgid "%u game-relevant add-on in use:"
 msgid_plural "%u game-relevant add-ons in use:"
@@ -1998,24 +2002,24 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: ../../src/logic/editor_game_base.cc:226
+#: ../../src/logic/editor_game_base.cc:236
 #, c-format
 msgid "Creating player %d…"
 msgstr "Creazione giocatore %d..."
 
-#: ../../src/logic/editor_game_base.cc:296
+#: ../../src/logic/editor_game_base.cc:306
 msgid "Postloading world and tribes…"
 msgstr "Post-caricamento mondo e tribù"
 
-#: ../../src/logic/editor_game_base.cc:554
+#: ../../src/logic/editor_game_base.cc:564
 msgid "Cleaning up for loading: Map objects (1/3)"
 msgstr "Pulizia per caricamento: obbiettivi Mappa (1/3)"
 
-#: ../../src/logic/editor_game_base.cc:560
+#: ../../src/logic/editor_game_base.cc:570
 msgid "Cleaning up for loading: Players (2/3)"
 msgstr "Pulizia per caricamento: Giocatori (2/3)"
 
-#: ../../src/logic/editor_game_base.cc:563
+#: ../../src/logic/editor_game_base.cc:573
 msgid "Cleaning up for loading: Map (3/3)"
 msgstr "Pulizia per caricamento: Mappa (3/3)"
 
@@ -2691,7 +2695,7 @@ msgstr "terreno per miniere"
 msgid "unwalkable"
 msgstr "non attraversabile"
 
-#: ../../src/logic/mutable_addon.cc:241
+#: ../../src/logic/mutable_addon.cc:243
 #, c-format
 msgid ""
 "A map file is invalid:\n"
@@ -3568,6 +3572,17 @@ msgstr "Widelands non è riuscito a connettersi alla rete locale. Forse ci sono 
 #: ../../src/scripting/lua_game.cc:1351
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
+
+#: ../../src/scripting/lua_ui.cc:656
+msgid "Plugin Error"
+msgstr ""
+
+#: ../../src/scripting/lua_ui.cc:657
+#, c-format
+msgid ""
+"Error when running plugin:\n"
+"%s"
+msgstr ""
 
 #: ../../src/ui_basic/color_chooser.cc:240
 msgid "Choose Color…"
