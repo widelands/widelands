@@ -105,36 +105,36 @@ std::string DetectedPortSpace::to_short_string(const EditorGameBase& egbase) con
 	std::string direction;
 	switch (direction_from_portdock) {
 	case CompassDir::kNorthWest:
-		/** TRANSLATORS: This is a distance and direction from a port. Keep this short. */
-		direction = format(_("%1$u NW %2$s"), distance_to_portdock, nearest_portdock);
+		/** TRANSLATORS: This is an abbreviated direction: Northwest. */
+		direction = pgettext("direction", "NW");
 		break;
 	case CompassDir::kNorthEast:
-		/** TRANSLATORS: This is a distance and direction from a port. Keep this short. */
-		direction = format(_("%1$u NE %2$s"), distance_to_portdock, nearest_portdock);
+		/** TRANSLATORS: This is an abbreviated direction: Northeast. */
+		direction = pgettext("direction", "NE");
 		break;
 	case CompassDir::kSouthWest:
-		/** TRANSLATORS: This is a distance and direction from a port. Keep this short. */
-		direction = format(_("%1$u SW %2$s"), distance_to_portdock, nearest_portdock);
+		/** TRANSLATORS: This is an abbreviated direction: Southwest. */
+		direction = pgettext("direction", "SW");
 		break;
 	case CompassDir::kSouthEast:
-		/** TRANSLATORS: This is a distance and direction from a port. Keep this short. */
-		direction = format(_("%1$u SE %2$s"), distance_to_portdock, nearest_portdock);
+		/** TRANSLATORS: This is an abbreviated direction: Southeast. */
+		direction = pgettext("direction", "SE");
 		break;
 	case CompassDir::kNorth:
-		/** TRANSLATORS: This is a distance and direction from a port. Keep this short. */
-		direction = format(_("%1$u N %2$s"), distance_to_portdock, nearest_portdock);
+		/** TRANSLATORS: This is an abbreviated direction: North. */
+		direction = pgettext("direction", "N");
 		break;
 	case CompassDir::kSouth:
-		/** TRANSLATORS: This is a distance and direction from a port. Keep this short. */
-		direction = format(_("%1$u S %2$s"), distance_to_portdock, nearest_portdock);
+		/** TRANSLATORS: This is an abbreviated direction: South. */
+		direction = pgettext("direction", "S");
 		break;
 	case CompassDir::kWest:
-		/** TRANSLATORS: This is a distance and direction from a port. Keep this short. */
-		direction = format(_("%1$u W %2$s"), distance_to_portdock, nearest_portdock);
+		/** TRANSLATORS: This is an abbreviated direction: West. */
+		direction = pgettext("direction", "W");
 		break;
 	case CompassDir::kEast:
-		/** TRANSLATORS: This is a distance and direction from a port. Keep this short. */
-		direction = format(_("%1$u E %2$s"), distance_to_portdock, nearest_portdock);
+		/** TRANSLATORS: This is an abbreviated direction: East. */
+		direction = pgettext("direction", "E");
 		break;
 	default:
 		break;
@@ -146,10 +146,11 @@ std::string DetectedPortSpace::to_short_string(const EditorGameBase& egbase) con
 			return format(pgettext("detected_port_space", "Unowned / %1$s / %2$s"),
 			              gametimestring(time_discovered.get()), discovering_ship);
 		}
-		/** TRANSLATORS: Placeholders are gametime, shipname, and "<direction> <port name>".
+		/** TRANSLATORS: Placeholders are gametime, shipname, and distance direction port_name.
 		 *  Keep this short. */
-		return format(pgettext("detected_port_space", "Unowned / %1$s / %2$s / %3$s"),
-		              gametimestring(time_discovered.get()), discovering_ship, direction);
+		return format(pgettext("detected_port_space", "Unowned / %1$s / %2$s / %3$u %4$s %5$s"),
+		              gametimestring(time_discovered.get()), discovering_ship, distance_to_portdock,
+		              direction, nearest_portdock);
 	}
 	if (direction.empty()) {
 		/** TRANSLATORS: Placeholders are owner, gametime, and shipname. Keep this short. */
@@ -157,11 +158,11 @@ std::string DetectedPortSpace::to_short_string(const EditorGameBase& egbase) con
 		              egbase.player(owner).get_name(), gametimestring(time_discovered.get()),
 		              discovering_ship);
 	}
-	/** TRANSLATORS: Placeholders are owner, gametime, shipname, and "<direction> <port name>".
+	/** TRANSLATORS: Placeholders are owner, gametime, shipname, and "distance direction port_name.
 	 *  Keep this short. */
-	return format(pgettext("detected_port_space", "%1$s / %2$s / %3$s / %4$s"),
+	return format(pgettext("detected_port_space", "%1$s / %2$s / %3$s / %4$u %5$s %6$s"),
 	              egbase.player(owner).get_name(), gametimestring(time_discovered.get()),
-	              discovering_ship, direction);
+	              discovering_ship, distance_to_portdock, direction, nearest_portdock);
 }
 
 }  // namespace Widelands
