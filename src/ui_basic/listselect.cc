@@ -643,7 +643,8 @@ void BaseListselect::scroll_to_selection() {
 	if (selection_index() * get_lineheight() < scrollpos_) {
 		scrollpos_ = selection_index() * get_lineheight();
 		scrollbar_.set_scrollpos(scrollpos_);
-	} else if ((selection_index() + 1) * get_lineheight() - get_inner_h() > scrollpos_) {
+	} else if (static_cast<int>((selection_index() + 1) * get_lineheight() - get_inner_h()) >
+	           static_cast<int>(scrollpos_)) {
 		int32_t scrollpos = (selection_index() + 1) * get_lineheight() - get_inner_h();
 		scrollpos_ = (scrollpos < 0) ? 0 : scrollpos;
 		scrollbar_.set_scrollpos(scrollpos_);

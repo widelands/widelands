@@ -139,6 +139,8 @@ wl_library(logic_map
     field.h
     map.cc
     map.h
+    map_compassdir.cc
+    map_compassdir.h
     map_revision.cc
     map_revision.h
     mapastar.cc
@@ -244,6 +246,8 @@ wl_library(logic
   SRCS
     ai_dna_handler.cc
     ai_dna_handler.h
+    detected_port_space.cc
+    detected_port_space.h
     editor_game_base.cc
     editor_game_base.h
     game.cc
