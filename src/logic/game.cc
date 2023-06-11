@@ -145,6 +145,7 @@ Game::Game()
      /** TRANSLATORS: Win condition for this game has not been set. */
      win_condition_displayname_(_("Not set")) {
 	Economy::initialize_serial();
+	DetectedPortSpace::initialize_serial();
 }
 
 Game::~Game() {  // NOLINT
@@ -910,6 +911,7 @@ void Game::full_cleanup() {
 	replay_filename_.clear();
 	forester_cache_.clear();
 	Economy::initialize_serial();
+	DetectedPortSpace::initialize_serial();
 
 	if (has_loader_ui()) {
 		remove_loader_ui();
@@ -1175,6 +1177,10 @@ void Game::send_player_ship_set_destination(const Ship& ship, const MapObject* d
 	send_player_command(new CmdShipSetDestination(get_gametime(), ship.get_owner()->player_number(),
 	                                              ship.serial(),
 	                                              dest == nullptr ? 0 : dest->serial()));
+}
+void Game::send_player_ship_set_destination(const Ship& ship, const DetectedPortSpace& dest) {
+	send_player_command(new CmdShipSetDestination(
+	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), dest));
 }
 
 void Game::send_player_sink_ship(const Ship& ship) {

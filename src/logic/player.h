@@ -27,6 +27,7 @@
 #include "economy/economy.h"
 #include "economy/flag_job.h"
 #include "graphic/color.h"
+#include "logic/detected_port_space.h"
 #include "logic/editor_game_base.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/constructionsite.h"
@@ -582,6 +583,15 @@ public:
 	void set_shipnames(const std::set<std::string>& names);
 	void set_warehousenames(const std::set<std::string>& names);
 
+	[[nodiscard]] const std::vector<std::unique_ptr<DetectedPortSpace>>&
+	detected_port_spaces() const {
+		return detected_port_spaces_;
+	}
+	void detect_port_space(std::unique_ptr<DetectedPortSpace> new_dps);
+	DetectedPortSpace* has_detected_port_space(const Coords& coords);
+	[[nodiscard]] const DetectedPortSpace& get_detected_port_space(Serial serial) const;
+	bool remove_detected_port_space(const Coords& coords);
+
 	void add_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
 	void remove_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
 	uint32_t count_soldiers() const;
@@ -671,6 +681,8 @@ private:
 
 	std::vector<std::string> remaining_shipnames_;
 	std::vector<std::string> remaining_warehousenames_;
+
+	std::vector<std::unique_ptr<DetectedPortSpace>> detected_port_spaces_;
 
 	PlayerBuildingStats building_stats_;
 	std::vector<SoldierStatistics> soldier_stats_;
