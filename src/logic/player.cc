@@ -2060,6 +2060,39 @@ void Player::reserve_warehousename(const std::string& name) {
 	}
 }
 
+DetectedPortSpace* Player::has_detected_port_space(const Coords& coords) {
+	for (auto& dps : detected_port_spaces_) {
+		if (dps->coords == coords) {
+			return dps.get();
+		}
+	}
+	return nullptr;
+}
+
+void Player::detect_port_space(std::unique_ptr<DetectedPortSpace> new_dps) {
+	detected_port_spaces_.emplace_back(std::move(new_dps));
+}
+
+const DetectedPortSpace& Player::get_detected_port_space(Serial serial) const {
+	for (const auto& dps : detected_port_spaces_) {
+		if (dps->serial == serial) {
+			return *dps;
+		}
+	}
+	throw wexception("Player %u has no detected port space with serial %u", player_number(), serial);
+}
+
+bool Player::remove_detected_port_space(const Coords& coords) {
+	for (size_t i = 0; i < detected_port_spaces_.size(); ++i) {
+		if (detected_port_spaces_[i]->coords == coords) {
+			detected_port_spaces_[i] = std::move(detected_port_spaces_.back());
+			detected_port_spaces_.pop_back();
+			return true;
+		}
+	}
+	return false;
+}
+
 /**
  * Read remaining ship names from the given file
  *

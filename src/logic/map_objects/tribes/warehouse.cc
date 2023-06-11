@@ -588,6 +588,8 @@ bool Warehouse::init(EditorGameBase& egbase) {
 			log_warn_time(egbase.get_gametime(), " Portdock without a fleet created (%3dx%3d)\n",
 			              get_position().x, get_position().y);
 		}
+
+		player->remove_detected_port_space(get_position());
 	}
 	cleanup_in_progress_ = false;
 	return true;

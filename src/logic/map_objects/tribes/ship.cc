@@ -330,29 +330,34 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 	}
 
 	if (send_message_at_destination_) {
-		const MapObject* mo = destination_.get(game);
-		if (mo == nullptr) {  // Destination vanished.
+		const MapObject* mo = destination_object_.get(game);
+		if (mo == nullptr && destination_coords_ == nullptr) {  // Destination vanished.
 			send_message_at_destination_ = false;
 			send_message(game, _("Destination Gone"), _("Ship Destination Vanished"),
 			             _("Your ship’s destination has disappeared."), descr().icon_filename());
+			destination_object_ = nullptr;
 		} else {
 			bool arrived;
-			switch (mo->descr().type()) {
-			case MapObjectType::PORTDOCK:
-				arrived = get_position().field->get_immovable() == mo;
-				break;
-			case MapObjectType::SHIP:
-				arrived = game.map().calc_distance(
-				             get_position(), dynamic_cast<const Ship&>(*mo).get_position()) <=
-				          kNearDestinationShipRadius;
-				break;
-			case MapObjectType::PINNED_NOTE:
-				arrived = game.map().calc_distance(
-				             get_position(), dynamic_cast<const PinnedNote&>(*mo).get_position()) <=
-				          kNearDestinationNoteRadius;
-				break;
-			default:
-				NEVER_HERE();
+			if (destination_coords_ != nullptr) {
+				arrived = destination_coords_->has_dockpoint(get_position());
+			} else {
+				switch (mo->descr().type()) {
+				case MapObjectType::PORTDOCK:
+					arrived = get_position().field->get_immovable() == mo;
+					break;
+				case MapObjectType::SHIP:
+					arrived = game.map().calc_distance(
+					             get_position(), dynamic_cast<const Ship&>(*mo).get_position()) <=
+					          kNearDestinationShipRadius;
+					break;
+				case MapObjectType::PINNED_NOTE:
+					arrived = game.map().calc_distance(
+					             get_position(), dynamic_cast<const PinnedNote&>(*mo).get_position()) <=
+					          kNearDestinationNoteRadius;
+					break;
+				default:
+					NEVER_HERE();
+				}
 			}
 			if (arrived) {
 				send_message_at_destination_ = false;
@@ -457,7 +462,7 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 	const Map& map = game.map();
 
-	MapObject* destination_object = destination_.get(game);
+	MapObject* destination_object = destination_object_.get(game);
 	assert(destination_object == nullptr ||
 	       destination_object->descr().type() == MapObjectType::PORTDOCK);
 	PortDock* destination = dynamic_cast<PortDock*>(destination_object);
@@ -609,6 +614,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 			    std::find(portspaces.begin(), portspaces.end(), mr.location()) == portspaces.end()) {
 				found_new_target = true;
 				portspaces.push_back(mr.location());
+				remember_detected_portspace(mr.location());
 				send_message(game, _("Port Space"), _("Port Space Found"),
 				             _("A warship found a new port build space."), descr().icon_filename());
 			}
@@ -620,7 +626,30 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 		}
 	}
 
-	if (MapObject* destination_object = destination_.get(game); destination_object != nullptr) {
+	if (destination_coords_ != nullptr) {
+		if (destination_coords_->has_dockpoint(get_position())) {  // Already there
+			destination_coords_ = nullptr;
+			start_task_idle(game, descr().main_animation(), 250);
+			return true;
+		}
+
+		if (start_task_movepath(
+		       game, destination_coords_->dockpoints.front(), 0, descr().get_sail_anims())) {
+			return true;
+		}
+
+		molog(game.get_gametime(), "Could not find path to destination at %dx%d",
+		      destination_coords_->dockpoints.front().x, destination_coords_->dockpoints.front().y);
+		if (send_message_at_destination_) {
+			send_message(game, _("Destination Unreachable"), _("Ship Destination Unreachable"),
+			             _("Your ship could not find a path to its destination."),
+			             descr().icon_filename());
+			send_message_at_destination_ = false;
+		}
+		destination_coords_ = nullptr;
+
+	} else if (MapObject* destination_object = destination_object_.get(game);
+	           destination_object != nullptr) {
 		switch (destination_object->descr().type()) {
 		case MapObjectType::PORTDOCK: {
 			PortDock* dest = dynamic_cast<PortDock*>(destination_object);
@@ -720,6 +749,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 			}
 
 			// Check if the ship knows this port space already from its last check
+			remember_detected_portspace(mr.location());
 			if (std::find(expedition_->seen_port_buildspaces.begin(),
 			              expedition_->seen_port_buildspaces.end(),
 			              mr.location()) != expedition_->seen_port_buildspaces.end()) {
@@ -763,6 +793,52 @@ void Ship::update_warship_soldier_request(bool create) {
 	} else if (create) {
 		throw wexception("Attempting to create warship soldier request while not in dock");
 	}
+}
+
+void Ship::remember_detected_portspace(const Coords& coords) {
+	const EditorGameBase& egbase = owner().egbase();
+	const Map& map = egbase.map();
+	PlayerNumber space_owner = map[coords].get_owned_by();
+
+	if (DetectedPortSpace* dps = get_owner()->has_detected_port_space(coords); dps != nullptr) {
+		dps->owner = space_owner;
+		return;
+	}
+
+	std::unique_ptr<DetectedPortSpace> dps(new DetectedPortSpace());
+	dps->coords = coords;
+	dps->owner = space_owner;
+	dps->time_discovered = egbase.get_gametime();
+	dps->discovering_ship = get_shipname();
+	dps->dockpoints = map.find_portdock(coords, true);
+
+	Coords nearest_dock = Coords::null();
+	uint32_t nearest_distance = std::numeric_limits<uint32_t>::max();
+
+	for (const auto& warehouse : owner().get_building_statistics(owner().tribe().port())) {
+		if (warehouse.is_constructionsite) {
+			continue;
+		}
+		uint32_t d = map.calc_distance(coords, warehouse.pos);
+		if (d < nearest_distance) {
+			nearest_distance = d;
+			nearest_dock = warehouse.pos;
+		}
+	}
+
+	// Find the main direction from the nearest own port to the portspace.
+	if (static_cast<bool>(nearest_dock)) {
+		dps->nearest_portdock =
+		   dynamic_cast<const Warehouse&>(*map[nearest_dock].get_immovable()).get_warehouse_name();
+		dps->direction_from_portdock =
+		   get_compass_dir(nearest_dock, coords, map.get_width(), map.get_height());
+		dps->distance_to_portdock = nearest_distance;
+	} else {
+		dps->direction_from_portdock = CompassDir::kInvalid;
+		dps->distance_to_portdock = 0;
+	}
+
+	get_owner()->detect_port_space(std::move(dps));
 }
 
 // static
@@ -890,7 +966,7 @@ PortDock* Ship::find_nearest_port(Game& game) {
 }
 
 bool Ship::is_on_destination_dock() const {
-	const MapObject* dest = destination_.get(owner().egbase());
+	const MapObject* dest = destination_object_.get(owner().egbase());
 	return dest != nullptr && dest->descr().type() == MapObjectType::PORTDOCK &&
 	       get_position().field->get_immovable() == dest;
 }
@@ -1672,24 +1748,24 @@ void Ship::set_economy(const Game& game, Economy* e, WareWorker type) {
 }
 
 bool Ship::has_destination() const {
-	return destination_.get(owner().egbase()) != nullptr;
+	return destination_coords_ != nullptr || destination_object_.get(owner().egbase()) != nullptr;
 }
 PortDock* Ship::get_destination_port(EditorGameBase& e) const {
-	if (MapObject* mo = destination_.get(e);
+	if (MapObject* mo = destination_object_.get(e);
 	    mo != nullptr && mo->descr().type() == MapObjectType::PORTDOCK) {
 		return dynamic_cast<PortDock*>(mo);
 	}
 	return nullptr;
 }
 Ship* Ship::get_destination_ship(EditorGameBase& e) const {
-	if (MapObject* mo = destination_.get(e);
+	if (MapObject* mo = destination_object_.get(e);
 	    mo != nullptr && mo->descr().type() == MapObjectType::SHIP) {
 		return dynamic_cast<Ship*>(mo);
 	}
 	return nullptr;
 }
 PinnedNote* Ship::get_destination_note(EditorGameBase& e) const {
-	if (MapObject* mo = destination_.get(e);
+	if (MapObject* mo = destination_object_.get(e);
 	    mo != nullptr && mo->descr().type() == MapObjectType::PINNED_NOTE) {
 		return dynamic_cast<PinnedNote*>(mo);
 	}
@@ -1697,21 +1773,21 @@ PinnedNote* Ship::get_destination_note(EditorGameBase& e) const {
 }
 
 const PortDock* Ship::get_destination_port(const EditorGameBase& e) const {
-	if (const MapObject* mo = destination_.get(e);
+	if (const MapObject* mo = destination_object_.get(e);
 	    mo != nullptr && mo->descr().type() == MapObjectType::PORTDOCK) {
 		return dynamic_cast<const PortDock*>(mo);
 	}
 	return nullptr;
 }
 const Ship* Ship::get_destination_ship(const EditorGameBase& e) const {
-	if (const MapObject* mo = destination_.get(e);
+	if (const MapObject* mo = destination_object_.get(e);
 	    mo != nullptr && mo->descr().type() == MapObjectType::SHIP) {
 		return dynamic_cast<const Ship*>(mo);
 	}
 	return nullptr;
 }
 const PinnedNote* Ship::get_destination_note(const EditorGameBase& e) const {
-	if (const MapObject* mo = destination_.get(e);
+	if (const MapObject* mo = destination_object_.get(e);
 	    mo != nullptr && mo->descr().type() == MapObjectType::PINNED_NOTE) {
 		return dynamic_cast<const PinnedNote*>(mo);
 	}
@@ -1723,7 +1799,8 @@ void Ship::set_destination(EditorGameBase& egbase, MapObject* dest, bool is_play
 	       dest->descr().type() == MapObjectType::SHIP ||
 	       dest->descr().type() == MapObjectType::PINNED_NOTE);
 
-	destination_ = dest;
+	destination_object_ = dest;
+	destination_coords_ = nullptr;
 	send_message_at_destination_ = is_playercommand;
 
 	if (upcast(Game, g, &egbase)) {
@@ -1740,6 +1817,30 @@ void Ship::set_destination(EditorGameBase& egbase, MapObject* dest, bool is_play
 		set_ship_state_and_notify(
 		   dest == nullptr ? ShipStates::kExpeditionWaiting : ShipStates::kExpeditionScouting,
 		   NoteShip::Action::kDestinationChanged);
+	} else {
+		Notifications::publish(NoteShip(this, NoteShip::Action::kDestinationChanged));
+	}
+}
+void Ship::set_destination(EditorGameBase& egbase,
+                           const DetectedPortSpace& dest,
+                           bool is_playercommand) {
+	destination_object_ = nullptr;
+	destination_coords_ = &dest;
+	send_message_at_destination_ = is_playercommand;
+
+	if (upcast(Game, g, &egbase)) {
+		send_signal(*g, "wakeup");
+	}
+
+	if (is_playercommand) {
+		assert(ship_state_ != ShipStates::kTransport);
+		assert(expedition_ != nullptr);
+
+		expedition_->scouting_direction = WalkingDir::IDLE;
+		expedition_->island_exploration = false;
+
+		set_ship_state_and_notify(
+		   ShipStates::kExpeditionScouting, NoteShip::Action::kDestinationChanged);
 	} else {
 		Notifications::publish(NoteShip(this, NoteShip::Action::kDestinationChanged));
 	}
@@ -1889,7 +1990,8 @@ void Ship::start_task_expedition(Game& game) {
 /// @note only called via player command
 void Ship::exp_scouting_direction(Game& game, WalkingDir scouting_direction) {
 	assert(expedition_ != nullptr);
-	destination_ = nullptr;
+	destination_object_ = nullptr;
+	destination_coords_ = nullptr;
 	set_ship_state_and_notify(
 	   ShipStates::kExpeditionScouting, NoteShip::Action::kDestinationChanged);
 	expedition_->scouting_direction = scouting_direction;
@@ -1934,7 +2036,8 @@ void Ship::exp_construct_port(Game& game, const Coords& c) {
 /// @note only called via player command
 void Ship::exp_explore_island(Game& game, IslandExploreDirection island_explore_direction) {
 	assert(expedition_ != nullptr);
-	destination_ = nullptr;
+	destination_object_ = nullptr;
+	destination_coords_ = nullptr;
 	set_ship_state_and_notify(
 	   ShipStates::kExpeditionScouting, NoteShip::Action::kDestinationChanged);
 	expedition_->island_explore_direction = island_explore_direction;
@@ -2057,8 +2160,11 @@ void Ship::draw(const EditorGameBase& egbase,
 			} else {
 				switch (ship_state_) {
 				case (ShipStates::kTransport): {
-					const MapObject* dest = destination_.get(egbase);
-					if (dest == nullptr) {
+					const MapObject* dest = destination_object_.get(egbase);
+					if (destination_coords_ != nullptr) {
+						format(pgettext("ship_state", "Sailing to %s"),
+						       destination_coords_->to_long_string(egbase));
+					} else if (dest == nullptr) {
 						/** TRANSLATORS: This is a ship state. The ship is ready
 						 * to transport wares, but has nothing to do. */
 						statistics_string = pgettext("ship_state", "Empty");
@@ -2224,6 +2330,10 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 	} else if (const PinnedNote* note = get_destination_note(egbase); note != nullptr) {
 		molog(egbase.get_gametime(), "Has destination note %u (%3dx%3d) %s\n", note->serial(),
 		      note->get_position().x, note->get_position().y, note->get_text().c_str());
+	} else if (destination_coords_ != nullptr) {
+		molog(egbase.get_gametime(), "Has destination detected port space %u at %3dx%3d\n",
+		      destination_coords_->serial, destination_coords_->coords.x,
+		      destination_coords_->coords.y);
 	} else {
 		molog(egbase.get_gametime(), "No destination\n");
 	}
@@ -2296,7 +2406,7 @@ Load / Save implementation
 /* Changelog:
  * 12 - v1.1
  * 13 - Added warships and naval warfare.
- * 14 - Added soldier preference.
+ * 14 - Another naval warfare change (coords as destination and soldier preference).
  */
 constexpr uint8_t kCurrentPacketVersion = 14;
 
@@ -2383,7 +2493,8 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 			soldier_preference_ = static_cast<SoldierPreference>(fr.unsigned_8());
 		}
 		lastdock_ = fr.unsigned_32();
-		destination_ = fr.unsigned_32();
+		destination_object_ = fr.unsigned_32();
+		destination_coords_ = packet_version >= 14 ? fr.unsigned_32() : 0;
 
 		items_.resize(fr.unsigned_32());
 		for (ShippingItem::Loader& item_loader : items_) {
@@ -2402,15 +2513,18 @@ void Ship::Loader::load_pointers() {
 	if (lastdock_ != 0u) {
 		ship.lastdock_ = &mol().get<PortDock>(lastdock_);
 	}
-	if (destination_ != 0u) {
-		MapObject& mo = mol().get<MapObject>(destination_);
+	if (destination_object_ != 0u) {
+		MapObject& mo = mol().get<MapObject>(destination_object_);
 		assert(mo.descr().type() == MapObjectType::PORTDOCK ||
 		       mo.descr().type() == MapObjectType::SHIP ||
 		       mo.descr().type() == MapObjectType::PINNED_NOTE);
-		ship.destination_ = &mo;
+		ship.destination_object_ = &mo;
 	} else {
-		ship.destination_ = nullptr;
+		ship.destination_object_ = nullptr;
 	}
+	ship.destination_coords_ = destination_coords_ == 0U ?
+                                 nullptr :
+                                 &ship.owner().get_detected_port_space(destination_coords_);
 
 	for (Serial serial : expedition_attack_target_serials_) {
 		if (serial != 0) {
@@ -2584,7 +2698,8 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_32(warship_soldier_capacity_);
 	fw.unsigned_8(static_cast<uint8_t>(soldier_preference_));
 	fw.unsigned_32(mos.get_object_file_index_or_zero(lastdock_.get(egbase)));
-	fw.unsigned_32(mos.get_object_file_index_or_zero(destination_.get(egbase)));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(destination_object_.get(egbase)));
+	fw.unsigned_32(destination_coords_ == nullptr ? 0 : destination_coords_->serial);
 
 	fw.unsigned_32(items_.size());
 	for (ShippingItem& shipping_item : items_) {

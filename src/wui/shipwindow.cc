@@ -149,7 +149,7 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 
 	vbox_.add(&navigation_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
-	set_destination_ = new UI::Dropdown<Widelands::OPtr<Widelands::MapObject>>(
+	set_destination_ = new UI::Dropdown<DestinationWrapper>(
 	   &vbox_, "set_destination", 0, 0, 200, 8, kButtonSize, _("Destination"),
 	   UI::DropdownType::kTextual, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
 	set_destination_->selected.connect([this]() { act_set_destination(); });
@@ -270,11 +270,13 @@ void ShipWindow::update_destination_buttons(const Widelands::Ship* ship) {
 	Widelands::PortDock* dest_dock = ship->get_destination_port(egbase);
 	Widelands::Ship* dest_ship = ship->get_destination_ship(egbase);
 	Widelands::PinnedNote* dest_note = ship->get_destination_note(egbase);
+	const Widelands::DetectedPortSpace* dest_space = ship->get_destination_detected_port_space();
 
 	// Populate destination dropdown if anything changed since last think
 	std::vector<Widelands::PortDock*> all_ports;
 	std::vector<Widelands::Ship*> all_ships;
 	std::vector<Widelands::PinnedNote*> all_notes;
+	std::vector<const Widelands::DetectedPortSpace*> all_spaces;
 	for (const Widelands::Player::BuildingStats& port :
 	     ship->owner().get_building_statistics(ship->owner().tribe().port())) {
 		if (!port.is_constructionsite) {
@@ -294,28 +296,38 @@ void ShipWindow::update_destination_buttons(const Widelands::Ship* ship) {
 			all_notes.push_back(note);
 		}
 	}
+	for (const auto& dps : ship->owner().detected_port_spaces()) {
+		all_spaces.push_back(dps.get());
+	}
 
-	bool needs_update =
-	   (set_destination_->size() != all_ports.size() + all_ships.size() + all_notes.size() + 1);
+	bool needs_update = (set_destination_->size() != all_ports.size() + all_ships.size() +
+	                                                    all_notes.size() + all_spaces.size() + 1);
 	if (!needs_update) {
 		size_t i = 0;
 		for (Widelands::PortDock* pd : all_ports) {
 			const auto& entry = set_destination_->at(++i);
-			if (entry.value != pd || entry.name != pd->get_warehouse()->get_warehouse_name()) {
+			if (entry.value.first != pd || entry.name != pd->get_warehouse()->get_warehouse_name()) {
 				needs_update = true;
 				break;
 			}
 		}
 		for (Widelands::Ship* temp_ship : all_ships) {
 			const auto& entry = set_destination_->at(++i);
-			if (entry.value != temp_ship || entry.name != temp_ship->get_shipname()) {
+			if (entry.value.first != temp_ship || entry.name != temp_ship->get_shipname()) {
 				needs_update = true;
 				break;
 			}
 		}
 		for (Widelands::PinnedNote* note : all_notes) {
 			const auto& entry = set_destination_->at(++i);
-			if (entry.value != note || entry.name != note->get_text()) {
+			if (entry.value.first != note || entry.name != note->get_text()) {
+				needs_update = true;
+				break;
+			}
+		}
+		for (const Widelands::DetectedPortSpace* dps : all_spaces) {
+			const auto& entry = set_destination_->at(++i);
+			if (entry.value.second != dps || entry.name != dps->to_short_string(egbase)) {
 				needs_update = true;
 				break;
 			}
@@ -324,32 +336,64 @@ void ShipWindow::update_destination_buttons(const Widelands::Ship* ship) {
 
 	if (needs_update) {
 		set_destination_->clear();
-		set_destination_->add(_("(none)"), nullptr, nullptr, !ship->has_destination());
+		texture_cache_.clear();
+		set_destination_->add(_("(none)"), DestinationWrapper(), nullptr, !ship->has_destination());
 
 		for (Widelands::PortDock* pd : all_ports) {
-			set_destination_->add(pd->get_warehouse()->get_warehouse_name(), pd,
-			                      pd->get_warehouse()->descr().icon(), pd == dest_dock);
+			set_destination_->add(pd->get_warehouse()->get_warehouse_name(),
+			                      DestinationWrapper(pd, nullptr), pd->get_warehouse()->descr().icon(),
+			                      pd == dest_dock);
 		}
 		for (Widelands::Ship* temp_ship : all_ships) {
-			set_destination_->add(temp_ship->get_shipname(), temp_ship, temp_ship->descr().icon(),
-			                      temp_ship == dest_ship);
+			set_destination_->add(temp_ship->get_shipname(), DestinationWrapper(temp_ship, nullptr),
+			                      temp_ship->descr().icon(), temp_ship == dest_ship);
 		}
 		for (Widelands::PinnedNote* note : all_notes) {
-			set_destination_->add(
-			   note->get_text(), note,
+			constexpr int kTextureSize = 24;
+			const Image* unscaled =
 			   g_animation_manager->get_animation(note->owner().tribe().pinned_note_animation())
-			      .representative_image(&note->get_rgb()),
-			   note == dest_note);
+			      .representative_image(&note->get_rgb());
+
+			Texture* downscaled = new Texture(kTextureSize, kTextureSize);
+			RenderTarget rt(downscaled);
+			float aspect_ratio = static_cast<float>(unscaled->width()) / unscaled->height();
+			Rectf result_rect;
+			if (aspect_ratio < 1.f) {
+				result_rect.h = kTextureSize;
+				result_rect.w = kTextureSize * aspect_ratio;
+				result_rect.y = 0;
+				result_rect.x = (kTextureSize - result_rect.w) / 2.f;
+			} else {
+				result_rect.w = kTextureSize;
+				result_rect.h = kTextureSize / aspect_ratio;
+				result_rect.x = 0;
+				result_rect.y = (kTextureSize - result_rect.h) / 2.f;
+			}
+			rt.blitrect_scale(result_rect, unscaled,
+			                  Recti(0, 0, unscaled->width(), unscaled->height()), 1.f,
+			                  BlendMode::UseAlpha);
+			texture_cache_.emplace(downscaled);
+
+			set_destination_->add(
+			   note->get_text(), DestinationWrapper(note, nullptr), downscaled, note == dest_note);
+		}
+		for (const Widelands::DetectedPortSpace* temp_dps : all_spaces) {
+			set_destination_->add(temp_dps->to_short_string(egbase),
+			                      DestinationWrapper(nullptr, temp_dps),
+			                      g_image_cache->get("images/wui/fieldaction/menu_tab_buildport.png"),
+			                      temp_dps == dest_space, temp_dps->to_long_string(egbase));
 		}
 	} else if (!set_destination_->is_expanded()) {
 		if (dest_dock != nullptr) {
-			set_destination_->select(dest_dock);
+			set_destination_->select(DestinationWrapper(dest_dock, nullptr));
 		} else if (dest_ship != nullptr) {
-			set_destination_->select(dest_ship);
+			set_destination_->select(DestinationWrapper(dest_ship, nullptr));
 		} else if (dest_note != nullptr) {
-			set_destination_->select(dest_note);
+			set_destination_->select(DestinationWrapper(dest_note, nullptr));
+		} else if (dest_space != nullptr) {
+			set_destination_->select(DestinationWrapper(nullptr, dest_space));
 		} else {
-			set_destination_->select(nullptr);
+			set_destination_->select(DestinationWrapper());
 		}
 	}
 
@@ -642,11 +686,19 @@ void ShipWindow::act_set_destination() {
 		return;
 	}
 
-	Widelands::MapObject* dest = set_destination_->get_selected().get(ibase_.egbase());
-	if (Widelands::Game* game = ibase_.get_game()) {
-		game->send_player_ship_set_destination(*ship, dest);
+	const DestinationWrapper& dest = set_destination_->get_selected();
+	if (Widelands::Game* game = ibase_.get_game(); game != nullptr) {
+		if (dest.second == nullptr) {
+			game->send_player_ship_set_destination(*ship, dest.first.get(ibase_.egbase()));
+		} else {
+			game->send_player_ship_set_destination(*ship, *dest.second);
+		}
 	} else {
-		ship->set_destination(ibase_.egbase(), dest, true);
+		if (dest.second == nullptr) {
+			ship->set_destination(ibase_.egbase(), dest.first.get(ibase_.egbase()), true);
+		} else {
+			ship->set_destination(ibase_.egbase(), *dest.second, true);
+		}
 	}
 }
 

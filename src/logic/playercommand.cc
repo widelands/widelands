@@ -1256,31 +1256,40 @@ void CmdShipExploreIsland::write(FileWrite& fw, EditorGameBase& egbase, MapObjec
 CmdShipSetDestination::CmdShipSetDestination(StreamRead& des)
    : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial_ = des.unsigned_32();
-	destination_ = des.unsigned_32();
+	destination_object_ = des.unsigned_32();
+	destination_coords_ = des.unsigned_32();
 }
 
 void CmdShipSetDestination::execute(Game& game) {
 	upcast(Ship, ship, game.objects().get_object(serial_));
 	if (ship != nullptr && ship->get_owner()->player_number() == sender()) {
-		ship->set_destination(game, game.objects().get_object(destination_), true);
+		if (destination_coords_ != 0U) {
+			ship->set_destination(
+			   game, ship->owner().get_detected_port_space(destination_coords_), true);
+		} else {
+			ship->set_destination(game, game.objects().get_object(destination_object_), true);
+		}
 	}
 }
 
 void CmdShipSetDestination::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
 	ser.unsigned_32(serial_);
-	ser.unsigned_32(destination_);
+	ser.unsigned_32(destination_object_);
+	ser.unsigned_32(destination_coords_);
 }
 
-constexpr uint16_t kCurrentPacketVersionShipSetDestination = 1;
+constexpr uint16_t kCurrentPacketVersionShipSetDestination = 2;
 
 void CmdShipSetDestination::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionShipSetDestination) {
+		// TODO(Nordfriese): Savegame compatibility v1.1
+		if (packet_version >= 1 && packet_version <= kCurrentPacketVersionShipSetDestination) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial_ = get_object_serial_or_zero<Ship>(fr.unsigned_32(), mol);
-			destination_ = get_object_serial_or_zero<MapObject>(fr.unsigned_32(), mol);
+			destination_object_ = get_object_serial_or_zero<MapObject>(fr.unsigned_32(), mol);
+			destination_coords_ = packet_version >= 2 ? fr.unsigned_32() : 0;
 		} else {
 			throw UnhandledVersionError(
 			   "CmdShipSetDestination", packet_version, kCurrentPacketVersionShipSetDestination);
@@ -1292,8 +1301,11 @@ void CmdShipSetDestination::read(FileRead& fr, EditorGameBase& egbase, MapObject
 void CmdShipSetDestination::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersionShipSetDestination);
 	PlayerCommand::write(fw, egbase, mos);
+
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
-	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(destination_)));
+	fw.unsigned_32(
+	   mos.get_object_file_index_or_zero(egbase.objects().get_object(destination_object_)));
+	fw.unsigned_32(destination_coords_);
 }
 
 /*** Cmd_ShipSink ***/

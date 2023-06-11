@@ -26,6 +26,7 @@
 #include "economy/flag_job.h"
 #include "io/streamwrite.h"
 #include "logic/cmd_queue.h"
+#include "logic/detected_port_space.h"
 #include "logic/editor_game_base.h"
 #include "logic/map_objects/tribes/shipstates.h"
 #include "logic/save_handler.h"
@@ -303,6 +304,7 @@ public:
 	void send_player_ship_construct_port(const Ship& ship, Coords coords);
 	void send_player_ship_explore_island(const Ship& ship, IslandExploreDirection direction);
 	void send_player_ship_set_destination(const Ship& ship, const MapObject* dest);
+	void send_player_ship_set_destination(const Ship& ship, const DetectedPortSpace& dest);
 	void send_player_sink_ship(const Ship& ship);
 	void send_player_refit_ship(const Ship& ship, ShipType t);
 	void send_player_warship_command(const Ship& ship,

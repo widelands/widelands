@@ -106,6 +106,9 @@ struct Ship : Bob {
 
 	/* A ship's destination can be a port, or another ship, or a pinned note (or nullptr). */
 	void set_destination(EditorGameBase& egbase, MapObject* dest, bool is_playercommand = false);
+	void set_destination(EditorGameBase& egbase,
+	                     const DetectedPortSpace& dest,
+	                     bool is_playercommand = false);
 	[[nodiscard]] PortDock* get_destination_port(EditorGameBase& e) const;
 	[[nodiscard]] Ship* get_destination_ship(EditorGameBase& e) const;
 	[[nodiscard]] PinnedNote* get_destination_note(EditorGameBase& e) const;
@@ -114,6 +117,9 @@ struct Ship : Bob {
 	[[nodiscard]] const PinnedNote* get_destination_note(const EditorGameBase& e) const;
 	[[nodiscard]] bool is_on_destination_dock() const;
 	[[nodiscard]] bool has_destination() const;
+	[[nodiscard]] const DetectedPortSpace* get_destination_detected_port_space() const {
+		return destination_coords_;
+	}
 
 	// Returns the last visited portdock of this ship or nullptr if there is none or
 	// the last visited was removed.
@@ -355,6 +361,7 @@ private:
 	                  const std::string& heading,
 	                  const std::string& description,
 	                  const std::string& picture);
+	void remember_detected_portspace(const Coords& coords);
 
 	ShipFleet* fleet_{nullptr};
 	Economy* ware_economy_{nullptr};
@@ -366,7 +373,8 @@ private:
 	ShipType pending_refit_{ShipType::kTransport};
 	std::string shipname_;
 
-	OPtr<MapObject> destination_{nullptr};
+	OPtr<MapObject> destination_object_{nullptr};
+	const DetectedPortSpace* destination_coords_{nullptr};
 
 	struct Expedition {
 		~Expedition();
@@ -406,7 +414,8 @@ protected:
 		uint32_t lastdock_{0U};
 		Serial ware_economy_serial_{kInvalidSerial};
 		Serial worker_economy_serial_{kInvalidSerial};
-		uint32_t destination_{0U};
+		uint32_t destination_object_{0U};
+		uint32_t destination_coords_{0U};
 		Quantity capacity_{0U};
 		Quantity warship_soldier_capacity_{0U};
 		SoldierPreference soldier_preference_{SoldierPreference::kHeroes};
