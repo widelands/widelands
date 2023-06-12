@@ -98,7 +98,7 @@ python3 utils/fix_formatting.py --lua --dir data/txts
 
 # Undo one-liner diffs of pure timestamps with no other content
 set +x
-for entry in $(git diff --numstat po/*/*.pot | sed -En 's/^1\t1\t//p'); do
+for entry in $(git diff --numstat po/ | sed -En 's/^1\t1\t//p'); do
   if [ -z "$(git diff "$entry" | grep '^[+-][^+-]' | grep -v '^[+-]"POT-Creation-Date:')" ]
   then
     echo "Skipping changes to $entry"
