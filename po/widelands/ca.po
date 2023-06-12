@@ -1898,7 +1898,7 @@ msgstr "Condició inicial"
 
 #: ../../src/logic/addons.cc:71
 msgid "UI Plugin"
-msgstr ""
+msgstr "Complement de la interfície gràfica"
 
 #: ../../src/logic/addons.cc:112
 #, c-format
@@ -3550,14 +3550,14 @@ msgstr "%1% (%2%)"
 
 #: ../../src/scripting/lua_ui.cc:656
 msgid "Plugin Error"
-msgstr ""
+msgstr "Error del complement"
 
 #: ../../src/scripting/lua_ui.cc:657
 #, c-format
 msgid ""
 "Error when running plugin:\n"
 "%s"
-msgstr ""
+msgstr "Error mentre es feia servir un complement:\n%s"
 
 #: ../../src/ui_basic/color_chooser.cc:240
 msgid "Choose Color…"

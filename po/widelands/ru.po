@@ -1914,7 +1914,7 @@ msgstr "Стартовые условия"
 
 #: ../../src/logic/addons.cc:71
 msgid "UI Plugin"
-msgstr ""
+msgstr "Плагин интерфейса"
 
 #: ../../src/logic/addons.cc:112
 #, c-format
@@ -2998,7 +2998,7 @@ msgstr "Проверка карты"
 
 #: ../../src/map_io/widelands_map_loader.cc:450
 msgid "Postloading map objects"
-msgstr ""
+msgstr "Загрузка объектов карты"
 
 #: ../../src/network/gameclient.cc:144 ../../src/network/gamehost.cc:523
 #: ../../src/ui_fsmenu/launch_spg.cc:174 ../../src/wlapplication.cc:756
@@ -3588,14 +3588,14 @@ msgstr "%1% (%2%)"
 
 #: ../../src/scripting/lua_ui.cc:656
 msgid "Plugin Error"
-msgstr ""
+msgstr "Ошибка плагина"
 
 #: ../../src/scripting/lua_ui.cc:657
 #, c-format
 msgid ""
 "Error when running plugin:\n"
 "%s"
-msgstr ""
+msgstr "Ошибка во время запуска плагина\n%s"
 
 #: ../../src/ui_basic/color_chooser.cc:240
 msgid "Choose Color…"
