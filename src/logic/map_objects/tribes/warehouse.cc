@@ -278,11 +278,20 @@ void WarehouseSupply::send_to_storage(Game& /* game */, Warehouse* /* wh */) {
 }
 
 uint32_t WarehouseSupply::nr_supplies(const Game& game, const Request& req) const {
-	return req.get_type() == wwWORKER ?
-             warehouse_->count_workers(game, req.get_index(), req.get_requirements(),
+	if (req.get_type() == wwWARE) {
+		return wares_.stock(req.get_index());
+	}
+
+	Quantity available = warehouse_->count_workers(game, req.get_index(), req.get_requirements(),
 	                                    (req.get_exact_match() ? Warehouse::Match::kExact :
-                                                                Warehouse::Match::kCompatible)) :
-             wares_.stock(req.get_index());
+                                                                Warehouse::Match::kCompatible));
+
+	if (req.get_index() != warehouse_->owner().tribe().soldier()) {
+		return available;
+	}
+
+	Quantity garrison = warehouse_->get_desired_soldier_count();
+	return available > garrison ? available - garrison : 0;
 }
 
 /// Launch a ware.
