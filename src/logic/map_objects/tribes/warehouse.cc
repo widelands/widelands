@@ -282,9 +282,9 @@ uint32_t WarehouseSupply::nr_supplies(const Game& game, const Request& req) cons
 		return wares_.stock(req.get_index());
 	}
 
-	Quantity available = warehouse_->count_workers(game, req.get_index(), req.get_requirements(),
-	                                    (req.get_exact_match() ? Warehouse::Match::kExact :
-                                                                Warehouse::Match::kCompatible));
+	Quantity available = warehouse_->count_workers(
+	   game, req.get_index(), req.get_requirements(),
+	   (req.get_exact_match() ? Warehouse::Match::kExact : Warehouse::Match::kCompatible));
 
 	if (req.get_index() != warehouse_->owner().tribe().soldier()) {
 		return available;
