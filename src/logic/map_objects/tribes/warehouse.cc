@@ -364,7 +364,8 @@ Quantity Warehouse::SoldierControl::min_soldier_capacity() const {
 }
 
 Quantity Warehouse::SoldierControl::max_soldier_capacity() const {
-	return warehouse_->attack_target()->can_be_attacked() ? warehouse_->descr().get_max_garrison() : 0;
+	return warehouse_->attack_target()->can_be_attacked() ? warehouse_->descr().get_max_garrison() :
+                                                           0;
 }
 
 Quantity Warehouse::SoldierControl::soldier_capacity() const {

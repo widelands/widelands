@@ -317,8 +317,7 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 		assert((ms != nullptr) ^ (wh != nullptr));
 		cs_soldier_capacity_ = new ConstructionSoldierCapacityBox(
 		   settings_box.get(), ms != nullptr ? ms->desired_capacity : wh->desired_capacity,
-		   ms != nullptr ? 1 : 0, ms != nullptr ? ms->max_capacity : wh->max_garrison,
-		   can_act);
+		   ms != nullptr ? 1 : 0, ms != nullptr ? ms->max_capacity : wh->max_garrison, can_act);
 		settings_box->add(cs_soldier_capacity_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 		settings_box->add_space(8);
 		cs_soldier_capacity_->changed.connect([this]() {
