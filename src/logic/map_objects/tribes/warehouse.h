@@ -34,9 +34,6 @@ namespace Widelands {
 class PortDock;
 struct WareList;
 
-/** Maximum number of soldiers who can be permanently stationed in a port or HQ. */
-constexpr Quantity kMaxGarrison = 20;
-
 /*
 Warehouse
 */
@@ -63,9 +60,18 @@ public:
 		heal_per_second_ = h;
 	}
 
+	[[nodiscard]] Quantity get_max_garrison() const {
+		return max_garrison_;
+	}
+	void set_max_garrison(Quantity g) {
+		max_garrison_ = g;
+	}
+
 private:
 	int32_t conquers_{0};
 	unsigned heal_per_second_{0U};
+	Quantity max_garrison_{0U};
+
 	DISALLOW_COPY_AND_ASSIGN(WarehouseDescr);
 };
 

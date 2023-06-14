@@ -58,7 +58,7 @@ TrainingsiteSettings::TrainingsiteSettings(const TrainingSiteDescr& descr, const
 }
 
 WarehouseSettings::WarehouseSettings(const WarehouseDescr& wh, const TribeDescr& tribe)
-   : BuildingSettings(wh.name(), tribe), launch_expedition_allowed(wh.get_isport()) {
+   : BuildingSettings(wh.name(), tribe), launch_expedition_allowed(wh.get_isport()), max_garrison(wh.get_max_garrison()) {
 	for (const DescriptionIndex di : tribe.wares()) {
 		ware_preferences.emplace(di, StockPolicy::kNormal);
 	}
@@ -134,7 +134,8 @@ void WarehouseSettings::apply(const BuildingSettings& bs) {
 			}
 		}
 		launch_expedition = launch_expedition_allowed && s->launch_expedition;
-		desired_capacity = s->desired_capacity;
+		desired_capacity =
+		   new_desired_capacity(s->max_garrison, s->desired_capacity, desired_capacity);
 		soldier_preference = s->soldier_preference;
 	}
 }

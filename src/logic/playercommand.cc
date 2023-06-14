@@ -1871,7 +1871,7 @@ void CmdChangeSoldierCapacity::execute(Game& game) {
 		} else if (upcast(TrainingsiteSettings, ts, cs->get_settings())) {
 			ts->desired_capacity = std::max(0, std::min<int32_t>(ts->max_capacity, val));
 		} else if (upcast(WarehouseSettings, ws, cs->get_settings())) {
-			ws->desired_capacity = std::max(0, std::min<int32_t>(kMaxGarrison, val));
+			ws->desired_capacity = std::max(0, std::min<int32_t>(ws->max_garrison, val));
 		}
 	} else if (upcast(Building, building, mo)) {
 		if (building->get_owner() == game.get_player(sender()) &&

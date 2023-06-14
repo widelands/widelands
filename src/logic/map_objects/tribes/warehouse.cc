@@ -326,9 +326,14 @@ WarehouseDescr::WarehouseDescr(const std::string& init_descname,
                                Descriptions& descriptions)
    : BuildingDescr(init_descname, MapObjectType::WAREHOUSE, table, descriptions) {
 	heal_per_second_ = table.get_int("heal_per_second");
+
 	if (table.has_key("conquers")) {
 		conquers_ = table.get_int("conquers");
 		workarea_info_[conquers_].insert(name() + " conquer");
+	}
+
+	if (table.has_key("max_garrison")) {
+		max_garrison_ = table.get_int("max_garrison");
 	}
 }
 
@@ -359,7 +364,7 @@ Quantity Warehouse::SoldierControl::min_soldier_capacity() const {
 }
 
 Quantity Warehouse::SoldierControl::max_soldier_capacity() const {
-	return warehouse_->attack_target()->can_be_attacked() ? kMaxGarrison : 0;
+	return warehouse_->attack_target()->can_be_attacked() ? warehouse_->descr().get_max_garrison() : 0;
 }
 
 Quantity Warehouse::SoldierControl::soldier_capacity() const {

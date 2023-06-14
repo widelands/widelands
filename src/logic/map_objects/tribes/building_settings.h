@@ -115,6 +115,7 @@ struct WarehouseSettings : public BuildingSettings {
 	const bool launch_expedition_allowed;
 	bool launch_expedition{false};
 	uint32_t desired_capacity{0U};
+	const uint32_t max_garrison;
 	SoldierPreference soldier_preference{SoldierPreference::kAny};
 };
 
