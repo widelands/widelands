@@ -234,10 +234,10 @@ void SoldierPanel::think() {
 	}
 
 	bool changes = false;
-	uint32_t capacity = get_cur_capacity();
 
 	// Update soldier list and target row/col:
 	std::vector<Widelands::Soldier*> soldierlist = associated_soldiers();
+	uint32_t capacity = std::max<uint32_t>(get_cur_capacity(), soldierlist.size());
 	std::vector<uint32_t> row_occupancy;
 	row_occupancy.resize(rows_);
 
@@ -359,7 +359,7 @@ void SoldierPanel::draw(RenderTarget& dst) {
 	}
 
 	// Fill a region matching the current site capacity with black
-	uint32_t capacity = get_cur_capacity();
+	uint32_t capacity = std::max<uint32_t>(get_cur_capacity(), associated_soldiers().size());
 	uint32_t fullrows = capacity / kMaxColumns;
 
 	if (fullrows != 0u) {
