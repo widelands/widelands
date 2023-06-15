@@ -506,7 +506,7 @@ SoldierList::SoldierList(UI::Panel& parent,
 	UI::Box* buttons = new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 
 	bool can_act = ibase_.can_act(building_or_ship_.owner().player_number());
-	{
+	if (building_or_ship.descr().type() != Widelands::MapObjectType::TRAININGSITE) {
 		// Make sure the creation order is consistent with enum SoldierPreference!
 		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, Vector2i::zero(),
 		                               g_image_cache->get("images/wui/buildings/prefer_rookies.png"),
@@ -557,6 +557,8 @@ void SoldierList::think() {
 		soldier_preference_.set_state(static_cast<uint8_t>(ship->get_soldier_preference()), false);
 		break;
 	}
+	case Widelands::MapObjectType::TRAININGSITE:
+		break;
 	default:
 		NEVER_HERE();
 	}
