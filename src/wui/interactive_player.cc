@@ -246,7 +246,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 
 	finalize_toolbar();
 
-#ifndef NDEBUG  //  only in debug builds
+#ifdef SCRIPT_CONSOLE
 	addCommand(
 	   "switchplayer", [this](const std::vector<std::string>& str) { cmdSwitchPlayer(str); });
 #endif

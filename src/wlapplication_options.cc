@@ -963,7 +963,7 @@ std::string get_ingame_shortcut_help() {
 	   get_shortcut_range_help(KeyboardShortcut::kInGame_Begin, KeyboardShortcut::kInGameMain_End);
 	rv += get_shortcut_range_help(
 	   KeyboardShortcut::kCommonGeneral_Begin, KeyboardShortcut::kCommonGeneral_End);
-#ifndef NDEBUG
+#ifdef SCRIPT_CONSOLE
 	rv += get_shortcut_help_line(KeyboardShortcut::kCommonDebugConsole);
 	rv += get_shortcut_help_line(KeyboardShortcut::kCommonCheatMode);
 #endif
@@ -1004,7 +1004,7 @@ std::string get_editor_shortcut_help() {
 	   get_shortcut_range_help(KeyboardShortcut::kEditor_Begin, KeyboardShortcut::kEditorMain_End);
 	rv += get_shortcut_range_help(
 	   KeyboardShortcut::kCommonGeneral_Begin, KeyboardShortcut::kCommonGeneral_End);
-#ifndef NDEBUG
+#ifdef SCRIPT_CONSOLE
 	rv += get_shortcut_help_line(KeyboardShortcut::kCommonDebugConsole);
 #endif
 
@@ -1169,7 +1169,7 @@ bool set_shortcut(const KeyboardShortcut id, const SDL_Keysym code, KeyboardShor
 	for (auto& pair : shortcuts_) {
 		if (pair.first != id && shared_scope(scopes, pair.second) &&
 		    matches_shortcut(pair.first, code)) {
-#ifdef NDEBUG
+#ifdef SCRIPT_CONSOLE
 			// Release builds are not supposed to know about debug features, so we silently
 			// clear their shortcuts on conflict
 			if (is_debug_only(pair.first)) {

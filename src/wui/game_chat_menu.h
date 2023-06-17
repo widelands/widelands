@@ -36,7 +36,7 @@ struct GameChatMenu : public UI::UniqueWindow {
 	                                         UI::UniqueWindow::Registry&,
 	                                         ChatProvider&);
 
-#ifndef NDEBUG  //  only in debug builds
+#ifdef SCRIPT_CONSOLE
 	             /**
 	              * Creates a chat window only for scripting in debug mode
 	              */

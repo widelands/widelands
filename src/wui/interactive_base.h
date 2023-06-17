@@ -363,7 +363,7 @@ protected:
 
 	void broadcast_cheating_message() const;
 
-#ifndef NDEBUG  //  only in debug builds
+#ifdef SCRIPT_CONSOLE
 	UI::UniqueWindow::Registry debugconsole_;
 #endif
 

@@ -15,6 +15,8 @@ option(OPTION_BUILD_WINSTATIC "Build a static linked .exe on windows" OFF)
 option(OPTION_TSAN "Build with ThreadSanitizer" OFF)
 option(OPTION_FORCE_EMBEDDED_MINIZIP "Use embedded minizip sources" OFF)
 option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
+# TODO(tothxa): add to README.md if this stays in
+option(OPTION_SCRIPT_CONSOLE "Enable the debug console and cheating mode" OFF)
 
 set(CMAKE_FIND_FRAMEWORK LAST)
 
@@ -204,6 +206,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
       option(OPTION_ASAN "Build with AddressSanitizer" ON)
     endif()
   endif()
+  set(OPTION_SCRIPT_CONSOLE ON)
 elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
   if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 7.5))
     message(STATUS "GCC >7.5.0 breaks -O3, setting -O2")
@@ -259,6 +262,11 @@ endif(OPTION_ASAN)
 
 if(OPTION_ASAN AND OPTION_TSAN)
   message(FATAL_ERROR "OPTION_ASAN and OPTION_TSAN cannot be used together")
+endif()
+
+if(OPTION_SCRIPT_CONSOLE)
+  message(STATUS "Enabling Script Console and Cheating Mode")
+  add_definitions(-DSCRIPT_CONSOLE)
 endif()
 
 # This is set to avoid linker errors when using GLVND-libs on Linux

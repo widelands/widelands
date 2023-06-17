@@ -55,7 +55,7 @@ GameChatMenu* GameChatMenu::create_chat_console(UI::Panel* parent,
 	return new GameChatMenu(parent, fn, registry, chat, _("Chat"));
 }
 
-#ifndef NDEBUG  //  only in debug builds
+#ifdef SCRIPT_CONSOLE
 GameChatMenu* GameChatMenu::create_script_console(UI::Panel* parent,
                                                   ChatColorForPlayer fn,
                                                   UI::UniqueWindow::Registry& registry,

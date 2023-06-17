@@ -143,7 +143,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
      minimap_registry_(the_egbase.is_game()),
      workareas_cache_(nullptr),
      egbase_(the_egbase),
-#ifndef NDEBUG  //  not in releases
+#ifdef SCRIPT_CONSOLE
      display_flags_(dfDebug | get_config_int("display_flags", kDefaultDisplayFlags)),
 #else
      display_flags_(get_config_int("display_flags", kDefaultDisplayFlags)),
@@ -1802,7 +1802,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 		}
 
-#ifndef NDEBUG  //  only in debug builds
+#ifdef SCRIPT_CONSOLE
 		if (matches_shortcut(KeyboardShortcut::kCommonDebugConsole, code)) {
 			GameChatMenu::create_script_console(
 			   this, color_functor(), debugconsole_, *DebugConsole::get_chat_provider());

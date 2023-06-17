@@ -76,7 +76,7 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 				ibase->map_view()->scroll_to_map_pixel(center_map_pixel, MapView::Transition::Jump);
 			}
 			if (ipl != nullptr) {  // Not in replays
-#ifndef NDEBUG
+#ifdef SCRIPT_CONSOLE
 				display_flags |= InteractiveBase::dfDebug;
 #else
 				display_flags &= ~InteractiveBase::dfDebug;

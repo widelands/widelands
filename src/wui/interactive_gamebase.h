@@ -127,7 +127,7 @@ protected:
 private:
 	// For referencing the items in mainmenu_
 	enum class MainMenuEntry {
-#ifndef NDEBUG  //  only in debug builds
+#ifdef SCRIPT_CONSOLE
 		kScriptConsole,
 #endif
 		kOptions,

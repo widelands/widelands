@@ -130,12 +130,11 @@ void InteractiveGameBase::add_main_menu() {
 
 void InteractiveGameBase::rebuild_main_menu() {
 	mainmenu_.clear();
-#ifndef NDEBUG  //  only in debug builds
+#ifdef SCRIPT_CONSOLE
 	/** TRANSLATORS: An entry in the game's main menu */
 	mainmenu_.add(_("Script Console"), MainMenuEntry::kScriptConsole,
 	              g_image_cache->get("images/wui/menus/lua.png"), false,
-	              /** TRANSLATORS: Tooltip for Script Console in the game's main menu */
-	              "", pgettext("hotkey", "Ctrl+Shift+Space"));
+	              "", shortcut_string_for(KeyboardShortcut::kCommonDebugConsole, false));
 #endif
 
 	menu_windows_.sound_options.open_window = [this] {
@@ -196,7 +195,7 @@ void InteractiveGameBase::rebuild_main_menu() {
 
 void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 	switch (entry) {
-#ifndef NDEBUG  //  only in debug builds
+#ifdef SCRIPT_CONSOLE
 	case MainMenuEntry::kScriptConsole: {
 		GameChatMenu::create_script_console(
 		   this, color_functor(), debugconsole_, *DebugConsole::get_chat_provider());
