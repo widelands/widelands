@@ -99,17 +99,33 @@ protected:
 	uint32_t multiclick_counter_{0U};
 };
 
+class EditBoxHistory {
+public:
+	EditBoxHistory(uint16_t max_size) :
+	   max_size_(max_size) {}
+
+	// Newer entries have lower positions
+	void add_entry(const std::string& new_entry);
+	const std::string& get_entry(int16_t position) const;
+	int16_t current_size() {
+		return entries_.size();
+	}
+
+private:
+	uint16_t max_size_{0};
+	int16_t position_{-1};
+	std::vector<std::string> entries_;
+};
+
 /** Subclass for single-line text input. */
 class EditBox : public AbstractTextInputPanel {
 public:
-	static constexpr unsigned kHistorySize = 16;
-
 	EditBox(UI::Panel* parent, int32_t x, int32_t y, uint32_t w, UI::PanelStyle style);
 
 	Notifications::Signal<> ok;
 
-	void activate_history(bool activate) {
-		history_active_ = activate;
+	void activate_history(EditBoxHistory* history) {
+		history_ = history;
 	}
 
 protected:
@@ -121,9 +137,8 @@ protected:
 		return true;
 	}
 
-	bool history_active_{false};
 	int16_t history_position_{-1};
-	std::string history_[kHistorySize];
+	EditBoxHistory* history_{nullptr};
 };
 
 /** Subclass for multi-line text input. */

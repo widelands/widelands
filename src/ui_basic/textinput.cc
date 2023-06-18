@@ -596,14 +596,14 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 						}
 						newpos = prev;
 					}
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(newpos);
 					} else {
 						d_->reset_selection();
 					}
 					d_->set_cursor_pos(newpos);
 				} else {
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(d_->prev_char(d_->cursor_pos));
 					} else {
 						d_->reset_selection();
@@ -625,14 +625,14 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 					while (newpos < d_->text.size() && (isspace(d_->text[newpos]) == 0)) {
 						newpos = d_->next_char(newpos);
 					}
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(newpos);
 					} else {
 						d_->reset_selection();
 					}
 					d_->set_cursor_pos(newpos);
 				} else {
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(d_->next_char(d_->cursor_pos));
 					} else {
 						d_->reset_selection();
@@ -663,14 +663,14 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 					} else {
 						newpos = d_->snap_to_char(newpos);
 					}
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(newpos);
 					} else {
 						d_->reset_selection();
 					}
 					d_->set_cursor_pos(newpos);
 				} else {
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(d_->text.size());
 					} else {
 						d_->reset_selection();
@@ -698,14 +698,14 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 					} else {
 						newpos = d_->snap_to_char(newpos);
 					}
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(newpos);
 					} else {
 						d_->reset_selection();
 					}
 					d_->set_cursor_pos(newpos);
 				} else {
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(0);
 					} else {
 						d_->reset_selection();
@@ -717,7 +717,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 
 		case SDLK_HOME:
 			if ((code.mod & KMOD_CTRL) != 0) {
-				if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+				if ((code.mod & KMOD_SHIFT) != 0) {
 					select_until(0);
 				} else {
 					d_->reset_selection();
@@ -729,7 +729,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 				uint32_t cursorpos = 0;
 				d_->ww.calc_wrapped_pos(d_->cursor_pos, cursorline, cursorpos);
 
-				if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+				if ((code.mod & KMOD_SHIFT) != 0) {
 					select_until(d_->ww.line_offset(cursorline));
 				} else {
 					d_->reset_selection();
@@ -740,7 +740,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 
 		case SDLK_END:
 			if ((code.mod & KMOD_CTRL) != 0) {
-				if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+				if ((code.mod & KMOD_SHIFT) != 0) {
 					select_until(d_->text.size());
 				} else {
 					d_->reset_selection();
@@ -754,14 +754,14 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 				d_->ww.calc_wrapped_pos(d_->cursor_pos, cursorline, cursorpos);
 
 				if (cursorline + 1 < d_->ww.nrlines()) {
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(d_->prev_char(d_->ww.line_offset(cursorline + 1)));
 					} else {
 						d_->reset_selection();
 					}
 					d_->set_cursor_pos(d_->prev_char(d_->ww.line_offset(cursorline + 1)));
 				} else {
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(d_->text.size());
 					} else {
 						d_->reset_selection();
@@ -776,7 +776,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 			return true;
 
 		case SDLK_RETURN:
-			if ((SDL_GetModState() & KMOD_CTRL) != 0) {
+			if ((code.mod & KMOD_CTRL) != 0) {
 				return false;
 			}
 			d_->insert(d_->cursor_pos, "\n");
@@ -797,16 +797,13 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		switch (code.sym) {
 		case SDLK_RETURN:
-			if ((SDL_GetModState() & KMOD_CTRL) != 0) {
+			if ((code.mod & KMOD_CTRL) != 0) {
 				return false;
 			}
 
 			// Save history if active and text is not empty
-			if (history_active_ && !d_->text.empty()) {
-				for (unsigned i = kHistorySize - 1; i > 0; --i) {
-					history_[i] = history_[i - 1];
-				}
-				history_[0] = d_->text;
+			if (history_ != nullptr && !d_->text.empty()) {
+				history_->add_entry(d_->text);
 				history_position_ = -1;
 			}
 
@@ -815,12 +812,15 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_UP:
 			// Load entry from history if active and text is not empty
-			if (history_active_) {
-				if (history_position_ > static_cast<int>(kHistorySize) - 2) {
-					history_position_ = kHistorySize - 2;
+			if (history_ != nullptr) {
+				++history_position_;
+				if (history_position_ >= history_->current_size()) {
+					history_position_ = history_->current_size() - 1;
+					return true;
 				}
-				if (!history_[++history_position_].empty()) {
-					d_->text = history_[history_position_];
+				const std::string& hist_prev = history_->get_entry(history_position_);
+				if (!hist_prev.empty()) {
+					d_->text = hist_prev;
 					set_caret_pos(d_->text.size());
 					d_->reset_selection();
 					changed();
@@ -831,12 +831,15 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_DOWN:
 			// Load entry from history if active and text is not equivalent to the current one
-			if (history_active_) {
-				if (history_position_ < 1) {
-					history_position_ = 1;
+			if (history_ != nullptr) {
+				--history_position_;
+				if (history_position_ < 0) {
+					history_position_ = -1;
+					return true;
 				}
-				if (history_[--history_position_] != d_->text) {
-					d_->text = history_[history_position_];
+				const std::string& hist_next = history_->get_entry(history_position_);
+				if (!hist_next.empty() && hist_next != d_->text) {
+					d_->text = hist_next;
 					set_caret_pos(d_->text.size());
 					d_->reset_selection();
 					changed();
@@ -1087,6 +1090,25 @@ void AbstractTextInputPanel::Data::refresh_ww() {
 
 	int32_t textheight = ww.height();
 	scrollbar.set_steps(textheight - owner.get_h() + 2 * get_style().background().margin());
+}
+
+void EditBoxHistory::add_entry(const std::string& new_entry) {
+	// Avoid duplicates next to each other
+	if (entries_.size() > 0 && new_entry == entries_.at(0)) {
+		return;
+	}
+	entries_.emplace(entries_.begin(), new_entry);
+	if (entries_.size() > max_size_) {
+		entries_.pop_back();
+	}
+}
+
+const std::string& EditBoxHistory::get_entry(int16_t position) const {
+	if (position < 0 || position >= static_cast<int>(entries_.size())) {
+		static const std::string invalid;
+		return invalid;
+	}
+	return entries_.at(position);
 }
 
 }  // namespace UI

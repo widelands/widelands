@@ -58,6 +58,7 @@ private:
 	             ChatColorForPlayer fn,
 	             UI::UniqueWindow::Registry&,
 	             ChatProvider&,
+	             UI::EditBoxHistory*,
 	             const std::string& title);
 
 	void restore() override;

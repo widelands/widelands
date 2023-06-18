@@ -78,6 +78,7 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
         0,
         0,
         chat,
+        &g_chat_sent_history,
         UI::PanelStyle::kFsMenu)) {
 
 	help_button_.sigclicked.connect([this]() { help_clicked(); });

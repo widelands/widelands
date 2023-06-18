@@ -27,6 +27,12 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textinput.h"
 
+// Global input histories
+extern UI::EditBoxHistory g_chat_sent_history;
+#ifdef SCRIPT_CONSOLE
+extern UI::EditBoxHistory g_script_console_history;
+#endif
+
 /**
  * Provides a panel that contains chat message scrollbar and a chat message
  * entry field.
@@ -39,6 +45,7 @@ struct GameChatPanel : public UI::Panel {
 	              uint32_t w,
 	              uint32_t h,
 	              ChatProvider&,
+	              UI::EditBoxHistory*,
 	              UI::PanelStyle style);
 
 	// Signal is called when a message has been sent by the user.
