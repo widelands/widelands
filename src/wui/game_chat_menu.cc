@@ -35,7 +35,15 @@ GameChatMenu::GameChatMenu(UI::Panel* parent,
                            UI::EditBoxHistory* history,
                            const std::string& title)
    : UI::UniqueWindow(parent, UI::WindowStyle::kWui, "chat", &registry, 440, 235, title),
-     chat_(this, fn, 5, 5, get_inner_w() - 10, get_inner_h() - 10, chat, history, UI::PanelStyle::kWui) {
+     chat_(this,
+           fn,
+           5,
+           5,
+           get_inner_w() - 10,
+           get_inner_h() - 10,
+           chat,
+           history,
+           UI::PanelStyle::kWui) {
 	if (get_usedefaultpos()) {
 		center_to_parent();
 	}
@@ -61,7 +69,8 @@ GameChatMenu* GameChatMenu::create_script_console(UI::Panel* parent,
                                                   ChatColorForPlayer fn,
                                                   UI::UniqueWindow::Registry& registry,
                                                   ChatProvider& chat) {
-	return new GameChatMenu(parent, fn, registry, chat, &g_script_console_history, _("Script Console"));
+	return new GameChatMenu(
+	   parent, fn, registry, chat, &g_script_console_history, _("Script Console"));
 }
 #endif
 

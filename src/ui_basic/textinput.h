@@ -101,8 +101,8 @@ protected:
 
 class EditBoxHistory {
 public:
-	explicit EditBoxHistory(uint16_t max_size) :
-	   max_size_(max_size) {}
+	explicit EditBoxHistory(uint16_t max_size) : max_size_(max_size) {
+	}
 
 	// Newer entries have lower positions
 	void add_entry(const std::string& new_entry);

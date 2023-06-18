@@ -133,8 +133,8 @@ void InteractiveGameBase::rebuild_main_menu() {
 #ifdef SCRIPT_CONSOLE
 	/** TRANSLATORS: An entry in the game's main menu */
 	mainmenu_.add(_("Script Console"), MainMenuEntry::kScriptConsole,
-	              g_image_cache->get("images/wui/menus/lua.png"), false,
-	              "", shortcut_string_for(KeyboardShortcut::kCommonDebugConsole, false));
+	              g_image_cache->get("images/wui/menus/lua.png"), false, "",
+	              shortcut_string_for(KeyboardShortcut::kCommonDebugConsole, false));
 #endif
 
 	menu_windows_.sound_options.open_window = [this] {
