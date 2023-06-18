@@ -1094,7 +1094,7 @@ void AbstractTextInputPanel::Data::refresh_ww() {
 
 void EditBoxHistory::add_entry(const std::string& new_entry) {
 	// Avoid duplicates next to each other
-	if (entries_.size() > 0 && new_entry == entries_.at(0)) {
+	if (!entries_.empty() && new_entry == entries_.at(0)) {
 		return;
 	}
 	entries_.emplace(entries_.begin(), new_entry);

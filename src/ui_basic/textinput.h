@@ -101,19 +101,18 @@ protected:
 
 class EditBoxHistory {
 public:
-	EditBoxHistory(uint16_t max_size) :
+	explicit EditBoxHistory(uint16_t max_size) :
 	   max_size_(max_size) {}
 
 	// Newer entries have lower positions
 	void add_entry(const std::string& new_entry);
-	const std::string& get_entry(int16_t position) const;
+	[[nodiscard]] const std::string& get_entry(int16_t position) const;
 	int16_t current_size() {
 		return entries_.size();
 	}
 
 private:
 	uint16_t max_size_{0};
-	int16_t position_{-1};
 	std::vector<std::string> entries_;
 };
 
