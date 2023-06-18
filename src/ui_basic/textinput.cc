@@ -596,14 +596,14 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 						}
 						newpos = prev;
 					}
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(newpos);
 					} else {
 						d_->reset_selection();
 					}
 					d_->set_cursor_pos(newpos);
 				} else {
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(d_->prev_char(d_->cursor_pos));
 					} else {
 						d_->reset_selection();
@@ -625,14 +625,14 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 					while (newpos < d_->text.size() && (isspace(d_->text[newpos]) == 0)) {
 						newpos = d_->next_char(newpos);
 					}
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(newpos);
 					} else {
 						d_->reset_selection();
 					}
 					d_->set_cursor_pos(newpos);
 				} else {
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(d_->next_char(d_->cursor_pos));
 					} else {
 						d_->reset_selection();
@@ -663,14 +663,14 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 					} else {
 						newpos = d_->snap_to_char(newpos);
 					}
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(newpos);
 					} else {
 						d_->reset_selection();
 					}
 					d_->set_cursor_pos(newpos);
 				} else {
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(d_->text.size());
 					} else {
 						d_->reset_selection();
@@ -698,14 +698,14 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 					} else {
 						newpos = d_->snap_to_char(newpos);
 					}
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(newpos);
 					} else {
 						d_->reset_selection();
 					}
 					d_->set_cursor_pos(newpos);
 				} else {
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(0);
 					} else {
 						d_->reset_selection();
@@ -717,7 +717,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 
 		case SDLK_HOME:
 			if ((code.mod & KMOD_CTRL) != 0) {
-				if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+				if ((code.mod & KMOD_SHIFT) != 0) {
 					select_until(0);
 				} else {
 					d_->reset_selection();
@@ -729,7 +729,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 				uint32_t cursorpos = 0;
 				d_->ww.calc_wrapped_pos(d_->cursor_pos, cursorline, cursorpos);
 
-				if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+				if ((code.mod & KMOD_SHIFT) != 0) {
 					select_until(d_->ww.line_offset(cursorline));
 				} else {
 					d_->reset_selection();
@@ -740,7 +740,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 
 		case SDLK_END:
 			if ((code.mod & KMOD_CTRL) != 0) {
-				if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+				if ((code.mod & KMOD_SHIFT) != 0) {
 					select_until(d_->text.size());
 				} else {
 					d_->reset_selection();
@@ -754,14 +754,14 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 				d_->ww.calc_wrapped_pos(d_->cursor_pos, cursorline, cursorpos);
 
 				if (cursorline + 1 < d_->ww.nrlines()) {
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(d_->prev_char(d_->ww.line_offset(cursorline + 1)));
 					} else {
 						d_->reset_selection();
 					}
 					d_->set_cursor_pos(d_->prev_char(d_->ww.line_offset(cursorline + 1)));
 				} else {
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(d_->text.size());
 					} else {
 						d_->reset_selection();
@@ -776,7 +776,7 @@ bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) 
 			return true;
 
 		case SDLK_RETURN:
-			if ((SDL_GetModState() & KMOD_CTRL) != 0) {
+			if ((code.mod & KMOD_CTRL) != 0) {
 				return false;
 			}
 			d_->insert(d_->cursor_pos, "\n");
@@ -797,7 +797,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		switch (code.sym) {
 		case SDLK_RETURN:
-			if ((SDL_GetModState() & KMOD_CTRL) != 0) {
+			if ((code.mod & KMOD_CTRL) != 0) {
 				return false;
 			}
 
