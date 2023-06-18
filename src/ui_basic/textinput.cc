@@ -840,7 +840,8 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 				if (history_position_ < 0) {
 					history_position_ = -1;
 				}
-				const std::string& hist_next = history_position_ < 0 ? temporary_history_ : history_->get_entry(history_position_);
+				const std::string& hist_next =
+				   history_position_ < 0 ? temporary_history_ : history_->get_entry(history_position_);
 				if (hist_next != d_->text) {
 					d_->text = hist_next;
 					set_caret_pos(d_->text.size());
