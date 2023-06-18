@@ -136,8 +136,10 @@ protected:
 		return true;
 	}
 
+private:
 	int16_t history_position_{-1};
 	EditBoxHistory* history_{nullptr};
+	std::string temporary_history_;
 };
 
 /** Subclass for multi-line text input. */

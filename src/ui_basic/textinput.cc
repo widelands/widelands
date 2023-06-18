@@ -805,6 +805,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			if (history_ != nullptr && !d_->text.empty()) {
 				history_->add_entry(d_->text);
 				history_position_ = -1;
+				temporary_history_.clear();
 			}
 
 			ok();
@@ -813,6 +814,9 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_UP:
 			// Load entry from history if active and text is not empty
 			if (history_ != nullptr) {
+				if (history_position_ < 0) {
+					temporary_history_ = d_->text;
+				}
 				++history_position_;
 				if (history_position_ >= history_->current_size()) {
 					history_position_ = history_->current_size() - 1;
@@ -835,10 +839,9 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 				--history_position_;
 				if (history_position_ < 0) {
 					history_position_ = -1;
-					return true;
 				}
-				const std::string& hist_next = history_->get_entry(history_position_);
-				if (!hist_next.empty() && hist_next != d_->text) {
+				const std::string& hist_next = history_position_ < 0 ? temporary_history_ : history_->get_entry(history_position_);
+				if (hist_next != d_->text) {
 					d_->text = hist_next;
 					set_caret_pos(d_->text.size());
 					d_->reset_selection();
