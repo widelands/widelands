@@ -501,7 +501,7 @@ bool BaseDropdown::is_mouse_away() const {
 }
 
 bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
-	if (down && (SDL_GetModState() & KMOD_CTRL) == 0) {
+	if (down && (code.mod & KMOD_CTRL) == 0) {
 		switch (code.sym) {
 		case SDLK_RETURN:
 			if (list_->is_visible()) {
