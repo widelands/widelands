@@ -106,14 +106,26 @@ public:
 
 	// Newer entries have lower positions
 	void add_entry(const std::string& new_entry);
+
+	// Returns tmp_ when position is out of range
 	[[nodiscard]] const std::string& get_entry(int16_t position) const;
-	int16_t current_size() {
+
+	int16_t current_size() const {
 		return entries_.size();
 	}
+
+	void clear_tmp() {
+		tmp_.clear();
+	}
+	void set_tmp(const std::string& s) {
+		tmp_ = s;
+	}
+	// No getter, use get_entry(-1) to get tmp_
 
 private:
 	uint16_t max_size_{0};
 	std::vector<std::string> entries_;
+	std::string tmp_;
 };
 
 /** Subclass for single-line text input. */
@@ -139,7 +151,6 @@ protected:
 private:
 	int16_t history_position_{-1};
 	EditBoxHistory* history_{nullptr};
-	std::string temporary_history_;
 };
 
 /** Subclass for multi-line text input. */
