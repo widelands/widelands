@@ -52,7 +52,6 @@ struct PlayerImmovable;
 enum class IslandExploreDirection;
 class PortDock;
 enum class ScoutingDirection;
-enum class SoldierPreference : uint8_t;
 struct Ship;
 class TrainingSite;
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
@@ -281,7 +280,7 @@ public:
 	void send_player_flagaction(Flag&, FlagJob::Type);
 	void send_player_start_stop_building(Building&);
 	void send_player_toggle_infinite_production(Building&);
-	void send_player_militarysite_set_soldier_preference(Building&, SoldierPreference preference);
+	void send_player_set_soldier_preference(MapObject&, SoldierPreference preference);
 	void send_player_start_or_cancel_expedition(Building&);
 	void send_player_expedition_config(PortDock&, WareWorker, DescriptionIndex, bool);
 

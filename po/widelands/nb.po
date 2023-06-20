@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-05 02:59+0000\n"
+"POT-Creation-Date: 2023-06-15 02:47+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Per-Henrik Kvalnes <perhenrik.kvalnes@gmail.com, 2020\n"
 "Language-Team: Norwegian Bokmål (http://app.transifex.com/widelands/widelands/language/nb/)\n"
@@ -9919,22 +9919,22 @@ msgid "Go to ship"
 msgstr "Gå til skip"
 
 #. * TRANSLATORS: Window label when an expedition can't be canceled
-#: ../../src/wui/shipwindow.cc:226
+#: ../../src/wui/shipwindow.cc:228
 msgid "Cancel Expedition"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:227
+#: ../../src/wui/shipwindow.cc:229
 msgid ""
 "This expedition can’t be canceled, because the ship has no port to return "
 "to."
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:238
+#: ../../src/wui/shipwindow.cc:240
 msgid "Go to destination"
 msgstr ""
 
 #. * TRANSLATORS: Placeholder is the name of the destination port
-#: ../../src/wui/shipwindow.cc:240
+#: ../../src/wui/shipwindow.cc:242
 #, c-format
 msgid "Go to destination (%s)"
 msgstr ""

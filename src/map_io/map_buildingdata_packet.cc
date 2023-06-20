@@ -63,7 +63,7 @@ constexpr uint16_t kCurrentPacketVersion = 9;
 constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
 constexpr uint16_t kCurrentPacketVersionConstructionsite = 5;
 constexpr uint16_t kCurrentPacketPFBuilding = 2;
-constexpr uint16_t kCurrentPacketVersionMilitarysite = 7;
+constexpr uint16_t kCurrentPacketVersionMilitarysite = 8;
 constexpr uint16_t kCurrentPacketVersionProductionsite = 11;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 7;
 
@@ -73,6 +73,7 @@ constexpr uint16_t kCurrentPacketVersionTrainingsite = 7;
  * Constructionsite: v1.1 = 5
  * PFBuilding: v1.1 = 2
  * Militarysite: v1.1 = 7
+ * - 7 -> 8: Refactored soldier request handling
  * Productionsite: v1.1 = 10
  * - 10 -> 11: Added ship/ferry fleet/yard interfaces
  * Trainingesite: v1.1 = 7
@@ -533,6 +534,17 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 						warehouse.portdock_->expedition_bootstrap()->load(
 						   warehouse, fr, game, mol, packet_version);
 					}
+
+					for (uint32_t i = packet_version >= 10 ? fr.unsigned_32() : 0; i > 0; --i) {
+						Ship* ship = &mol.get<Ship>(fr.unsigned_32());
+						assert(warehouse.portdock_->warship_soldier_requests_.count(ship->serial()) == 0);
+						SoldierRequest* req = new SoldierRequest(
+						   warehouse, SoldierPreference::kHeroes, Ship::warship_soldier_callback,
+						   [ship]() { return ship->get_warship_soldier_capacity(); },
+						   [ship]() { return ship->onboard_soldiers(); });
+						req->read(fr, game, mol);
+						warehouse.portdock_->warship_soldier_requests_.emplace(ship->serial(), req);
+					}
 				}
 			}
 
@@ -550,6 +562,11 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 				} while (mr.advance(map));
 			}
 			warehouse.next_military_act_ = game.get_gametime();
+
+			if (packet_version >= 10) {
+				warehouse.next_swap_soldiers_time_ = Time(fr);
+				warehouse.soldier_request_.read(fr, game, mol);
+			}
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Warehouse", packet_version,
 			                            kCurrentPacketVersionWarehouseAndExpedition);
@@ -566,24 +583,17 @@ void MapBuildingdataPacket::read_militarysite(MilitarySite& militarysite,
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version >= 5 && packet_version <= kCurrentPacketVersionMilitarysite) {
-			militarysite.normal_soldier_request_.reset();
+			// TODO(Nordfriese): Savegame compatibility
+			if (packet_version < 8) {
+				if (fr.unsigned_8() != 0u) {
+					Request r(militarysite, 0, MilitarySite::request_soldier_callback, wwWORKER);
+					r.read(fr, game, mol);
+				}
 
-			if (fr.unsigned_8() != 0u) {
-				militarysite.normal_soldier_request_.reset(
-				   new Request(militarysite, 0, MilitarySite::request_soldier_callback, wwWORKER));
-				militarysite.normal_soldier_request_->read(fr, game, mol);
-			} else {
-				militarysite.normal_soldier_request_.reset();
-			}
-
-			if (fr.unsigned_8() != 0u) {
-				militarysite.upgrade_soldier_request_.reset(new Request(
-				   militarysite,
-				   (!militarysite.normal_soldier_request_) ? 0 : militarysite.owner().tribe().soldier(),
-				   MilitarySite::request_soldier_callback, wwWORKER));
-				militarysite.upgrade_soldier_request_->read(fr, game, mol);
-			} else {
-				militarysite.upgrade_soldier_request_.reset();
+				if (fr.unsigned_8() != 0u) {
+					Request r(militarysite, 0, MilitarySite::request_soldier_callback, wwWORKER);
+					r.read(fr, game, mol);
+				}
 			}
 
 			if ((militarysite.didconquer_ = (fr.unsigned_8() != 0u))) {
@@ -604,14 +614,18 @@ void MapBuildingdataPacket::read_militarysite(MilitarySite& militarysite,
 			militarysite.capacity_ = fr.unsigned_8();
 			militarysite.nexthealtime_ = Time(fr);
 
-			uint16_t reqmin = fr.unsigned_16();
-			uint16_t reqmax = fr.unsigned_16();
-			militarysite.soldier_upgrade_requirements_ =
-			   RequireAttribute(TrainingAttribute::kTotal, reqmin, reqmax);
-			militarysite.soldier_preference_ = static_cast<SoldierPreference>(fr.unsigned_8());
+			if (packet_version < 8) {
+				fr.unsigned_16();
+				fr.unsigned_16();
+				fr.unsigned_8();
+			}
+
 			militarysite.next_swap_soldiers_time_ = Time(fr);
-			militarysite.soldier_upgrade_try_ = 0 != fr.unsigned_8();
-			militarysite.doing_upgrade_request_ = 0 != fr.unsigned_8();
+
+			if (packet_version < 8) {
+				fr.unsigned_8();
+				fr.unsigned_8();
+			}
 
 			// TODO(Nordfriese): Savegame compatibility
 			if (packet_version >= 7) {
@@ -620,6 +634,10 @@ void MapBuildingdataPacket::read_militarysite(MilitarySite& militarysite,
 					const bool b = fr.unsigned_8() != 0u;
 					militarysite.attack_target_.allow_conquer_[p] = b;
 				}
+			}
+
+			if (packet_version >= 8) {
+				militarysite.soldier_request_.read(fr, game, mol);
 			}
 
 		} else {
@@ -1263,7 +1281,16 @@ void MapBuildingdataPacket::write_warehouse(const Warehouse& warehouse,
 		if (warehouse.portdock_->expedition_started()) {
 			warehouse.portdock_->expedition_bootstrap()->save(fw, game, mos);
 		}
+
+		fw.unsigned_32(warehouse.portdock_->warship_soldier_requests_.size());
+		for (const auto& pair : warehouse.portdock_->warship_soldier_requests_) {
+			fw.unsigned_32(mos.get_object_file_index(*game.objects().get_object(pair.first)));
+			pair.second->write(fw, game, mos);
+		}
 	}
+
+	warehouse.next_swap_soldiers_time_.save(fw);
+	warehouse.soldier_request_.write(fw, game, mos);
 }
 
 void MapBuildingdataPacket::write_militarysite(const MilitarySite& militarysite,
@@ -1272,42 +1299,19 @@ void MapBuildingdataPacket::write_militarysite(const MilitarySite& militarysite,
                                                MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersionMilitarysite);
 
-	if (militarysite.normal_soldier_request_) {
-		fw.unsigned_8(1);
-		militarysite.normal_soldier_request_->write(fw, game, mos);
-	} else {
-		fw.unsigned_8(0);
-	}
-
-	if (militarysite.upgrade_soldier_request_) {
-		fw.unsigned_8(1);
-		militarysite.upgrade_soldier_request_->write(fw, game, mos);
-	} else {
-		fw.unsigned_8(0);
-	}
-
 	fw.unsigned_8(static_cast<uint8_t>(militarysite.didconquer_));
 	fw.unsigned_8(militarysite.capacity_);
 	militarysite.nexthealtime_.save(fw);
 
-	if (militarysite.normal_soldier_request_) {
-		if (militarysite.upgrade_soldier_request_) {
-			throw GameDataError(
-			   "Internal error in a MilitarySite -- cannot continue. Use previous autosave.");
-		}
-	}
-	fw.unsigned_16(militarysite.soldier_upgrade_requirements_.get_min());
-	fw.unsigned_16(militarysite.soldier_upgrade_requirements_.get_max());
-	fw.unsigned_8(static_cast<uint8_t>(militarysite.soldier_preference_));
 	militarysite.next_swap_soldiers_time_.save(fw);
-	fw.unsigned_8(militarysite.soldier_upgrade_try_ ? 1 : 0);
-	fw.unsigned_8(militarysite.doing_upgrade_request_ ? 1 : 0);
 
 	fw.unsigned_8(militarysite.attack_target_.allow_conquer_.size());
 	for (const auto& pair : militarysite.attack_target_.allow_conquer_) {
 		fw.unsigned_8(pair.first);
 		fw.unsigned_8(pair.second ? 1 : 0);
 	}
+
+	militarysite.soldier_request_.write(fw, game, mos);
 }
 
 void MapBuildingdataPacket::write_productionsite(const ProductionSite& productionsite,

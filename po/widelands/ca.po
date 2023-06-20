@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-05 02:59+0000\n"
+"POT-Creation-Date: 2023-06-15 02:47+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Juanjo, 2015-2023\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
@@ -1898,7 +1898,7 @@ msgstr "Condició inicial"
 
 #: ../../src/logic/addons.cc:71
 msgid "UI Plugin"
-msgstr ""
+msgstr "Complement de la interfície gràfica"
 
 #: ../../src/logic/addons.cc:112
 #, c-format
@@ -3550,14 +3550,14 @@ msgstr "%1% (%2%)"
 
 #: ../../src/scripting/lua_ui.cc:656
 msgid "Plugin Error"
-msgstr ""
+msgstr "Error del complement"
 
 #: ../../src/scripting/lua_ui.cc:657
 #, c-format
 msgid ""
 "Error when running plugin:\n"
 "%s"
-msgstr ""
+msgstr "Error mentre es feia servir un complement:\n%s"
 
 #: ../../src/ui_basic/color_chooser.cc:240
 msgid "Choose Color…"
@@ -9921,22 +9921,22 @@ msgid "Go to ship"
 msgstr "Vés al vaixell"
 
 #. * TRANSLATORS: Window label when an expedition can't be canceled
-#: ../../src/wui/shipwindow.cc:226
+#: ../../src/wui/shipwindow.cc:228
 msgid "Cancel Expedition"
 msgstr "Cancel·la l’expedició"
 
-#: ../../src/wui/shipwindow.cc:227
+#: ../../src/wui/shipwindow.cc:229
 msgid ""
 "This expedition can’t be canceled, because the ship has no port to return "
 "to."
 msgstr "No es pot cancel·lar l’expedició perquè el vaixell no disposa de port on tornar."
 
-#: ../../src/wui/shipwindow.cc:238
+#: ../../src/wui/shipwindow.cc:240
 msgid "Go to destination"
 msgstr "Vés al destí"
 
 #. * TRANSLATORS: Placeholder is the name of the destination port
-#: ../../src/wui/shipwindow.cc:240
+#: ../../src/wui/shipwindow.cc:242
 #, c-format
 msgid "Go to destination (%s)"
 msgstr "Vés al destí (%s)"

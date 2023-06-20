@@ -25,8 +25,9 @@ constexpr uint8_t kCurrentPacketVersionMapObject = 2;
  * Changelog:
  * 8: Release 1.1
  * 9: Added warehouse name.
+ * 10: Added soldier requests to warehouses and portdocks.
  */
-constexpr uint16_t kCurrentPacketVersionWarehouseAndExpedition = 9;
+constexpr uint16_t kCurrentPacketVersionWarehouseAndExpedition = 10;
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_MAP_IO_MAP_PACKET_VERSIONS_H
