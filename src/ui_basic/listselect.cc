@@ -583,7 +583,7 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 			return UI::Panel::handle_key(down, code);
 		case SDLK_ESCAPE:
 		case SDLK_RETURN:
-			if (linked_dropdown != nullptr && (SDL_GetModState() & KMOD_CTRL) == 0) {
+			if (linked_dropdown != nullptr && (code.mod & KMOD_CTRL) == 0) {
 				return linked_dropdown->handle_key(down, code);
 			}
 			return UI::Panel::handle_key(down, code);
