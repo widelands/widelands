@@ -278,6 +278,7 @@ struct Ship : Bob {
 	[[nodiscard]] uint32_t min_warship_soldier_capacity() const;
 
 	[[nodiscard]] std::vector<Soldier*> onboard_soldiers() const;
+	[[nodiscard]] std::vector<Soldier*> associated_soldiers() const;
 
 	/**
 	 * Execute a warship command.
@@ -304,6 +305,11 @@ struct Ship : Bob {
 		return get_pending_refit() != get_ship_type();
 	}
 	void refit(Game&, ShipType);
+
+	void set_soldier_preference(SoldierPreference pref);
+	[[nodiscard]] SoldierPreference get_soldier_preference() const {
+		return soldier_preference_;
+	}
 
 	// Editor only
 	void set_ship_type(EditorGameBase& egbase, ShipType t);
@@ -340,7 +346,7 @@ private:
 	bool ship_update_expedition(Game&, State&);
 	void ship_update_idle(Game&, State&);
 	void battle_update(Game&);
-	void update_warship_soldier_request(Game& game);
+	void update_warship_soldier_request(bool create);
 	/// Set the ship's state to 'state' and if the ship state has changed, publish a notification.
 	void set_ship_state_and_notify(ShipStates state, NoteShip::Action action);
 	bool check_port_space_still_available(Game&);
@@ -369,7 +375,6 @@ private:
 
 	OPtr<MapObject> destination_object_{nullptr};
 	const DetectedPortSpace* destination_coords_{nullptr};
-	std::unique_ptr<Request> warship_soldier_request_;
 
 	struct Expedition {
 		~Expedition();
@@ -393,6 +398,7 @@ private:
 
 	Quantity capacity_;
 	Quantity warship_soldier_capacity_;
+	SoldierPreference soldier_preference_{SoldierPreference::kHeroes};
 
 	// saving and loading
 protected:
@@ -412,6 +418,7 @@ protected:
 		uint32_t destination_coords_{0U};
 		Quantity capacity_{0U};
 		Quantity warship_soldier_capacity_{0U};
+		SoldierPreference soldier_preference_{SoldierPreference::kHeroes};
 		int32_t hitpoints_{0};
 		Time last_heal_time_{0U};
 		bool send_message_at_destination_{false};

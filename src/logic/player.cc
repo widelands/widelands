@@ -992,15 +992,6 @@ void Player::start_or_cancel_expedition(const Warehouse& wh) {
 	}
 }
 
-void Player::military_site_set_soldier_preference(PlayerImmovable& imm,
-                                                  SoldierPreference soldier_preference) {
-	if (imm.get_owner() == this) {
-		if (upcast(MilitarySite, milsite, &imm)) {
-			milsite->set_soldier_preference(soldier_preference);
-		}
-	}
-}
-
 /*
  * enhance this building, remove it, but give the constructionsite
  * an idea of enhancing

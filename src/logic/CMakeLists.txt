@@ -80,6 +80,8 @@ wl_library(logic_constants
     vision.h
     widelands.cc
     widelands.h
+  DEPENDS
+    base_exceptions
 )
 
 wl_library(logic_filesystem_constants

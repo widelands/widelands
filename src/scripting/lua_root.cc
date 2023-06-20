@@ -827,6 +827,7 @@ int LuaDescriptions::new_tribe(lua_State* L) {
          ============================================  =======================================  =============
          :const:`"heal_per_second"`                    **amount**         (*int*)               1.1
          :const:`"conquers"`                           **radius**         (*int*)               1.1
+         :const:`"max_garrison"`                       **amount**         (*int*)               1.2
          ============================================  =======================================  =============
 
       .. table:: ``"tribe"``
@@ -1350,6 +1351,8 @@ void LuaDescriptions::do_modify_warehouse(lua_State* L,
 		whdescr.set_conquers(luaL_checkuint32(L, 5));
 	} else if (property == "heal_per_second") {
 		whdescr.set_heal_per_second(luaL_checkuint32(L, 5));
+	} else if (property == "max_garrison") {
+		whdescr.set_max_garrison(luaL_checkuint32(L, 5));
 	} else {
 		report_error(L, "modify_unit: invalid warehouse property '%s'", property.c_str());
 	}

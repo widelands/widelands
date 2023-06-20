@@ -98,7 +98,7 @@ struct SoldierPanel : UI::Panel {
 	}
 	std::vector<Widelands::Soldier*> associated_soldiers() const {
 		if (is_ship_) {
-			return get_ship()->onboard_soldiers();
+			return get_ship()->associated_soldiers();
 		}
 		return get_building()->soldier_control()->associated_soldiers();
 	}
@@ -160,6 +160,14 @@ SoldierPanel::SoldierPanel(UI::Panel& parent,
 	icon_width_ += 2 * kIconBorder;
 	icon_height_ += 2 * kIconBorder;
 
+	if (building_or_ship.descr().type() == Widelands::MapObjectType::WAREHOUSE) {
+		rows_ = 0;
+		cols_ = 0;
+		set_visible(false);
+		set_thinks(false);
+		return;
+	}
+
 	/* The +1 is because up to 1 additional soldier may be coming
 	 * to the building for the hero/rookie exchange. */
 	const Widelands::Quantity maxcapacity = get_max_capacity() + 1;
@@ -179,6 +187,10 @@ SoldierPanel::SoldierPanel(UI::Panel& parent,
 	uint32_t row = 0;
 	uint32_t col = 0;
 	Widelands::Building* building = is_ship_ ? nullptr : get_building();
+	std::vector<Widelands::Soldier*> onboard_soldiers;
+	if (is_ship_) {
+		onboard_soldiers = get_ship()->onboard_soldiers();
+	}
 	for (Widelands::Soldier* soldier : associated_soldiers()) {
 		Icon icon;
 		icon.soldier = soldier;
@@ -187,7 +199,10 @@ SoldierPanel::SoldierPanel(UI::Panel& parent,
 		icon.pos = calc_pos(row, col);
 		icon.cache_health = 0;
 		icon.cache_level = 0;
-		icon.cache_is_present = is_ship_ || building->is_present(*soldier);
+		icon.cache_is_present = is_ship_ ?
+                                 (std::find(onboard_soldiers.begin(), onboard_soldiers.end(),
+		                                      soldier) != onboard_soldiers.end()) :
+                                 building->is_present(*soldier);
 		icons_.push_back(icon);
 
 		if (++col >= cols_) {
@@ -219,10 +234,10 @@ void SoldierPanel::think() {
 	}
 
 	bool changes = false;
-	uint32_t capacity = get_cur_capacity();
 
 	// Update soldier list and target row/col:
 	std::vector<Widelands::Soldier*> soldierlist = associated_soldiers();
+	uint32_t capacity = std::max<uint32_t>(get_cur_capacity(), soldierlist.size());
 	std::vector<uint32_t> row_occupancy;
 	row_occupancy.resize(rows_);
 
@@ -292,6 +307,10 @@ void SoldierPanel::think() {
 	int32_t maxdist = dt * kAnimateSpeed / 1000;
 	last_animate_time_ = curtime;
 
+	std::vector<Widelands::Soldier*> onboard_soldiers;
+	if (is_ship_) {
+		onboard_soldiers = get_ship()->onboard_soldiers();
+	}
 	for (Icon& icon : icons_) {
 		Vector2i goal = calc_pos(icon.row, icon.col);
 		Vector2i dp = goal - icon.pos;
@@ -313,7 +332,9 @@ void SoldierPanel::think() {
 		level = level * (soldier->descr().get_max_health_level() + 1) + soldier->get_health_level();
 
 		uint32_t health = soldier->get_current_health();
-		bool present = is_ship_ || building->is_present(*soldier);
+		bool present = is_ship_ ? (std::find(onboard_soldiers.begin(), onboard_soldiers.end(),
+		                                     soldier) != onboard_soldiers.end()) :
+                                building->is_present(*soldier);
 
 		if (health != icon.cache_health || level != icon.cache_level ||
 		    present != icon.cache_is_present) {
@@ -338,7 +359,7 @@ void SoldierPanel::draw(RenderTarget& dst) {
 	}
 
 	// Fill a region matching the current site capacity with black
-	uint32_t capacity = get_cur_capacity();
+	uint32_t capacity = std::max<uint32_t>(get_cur_capacity(), associated_soldiers().size());
 	uint32_t fullrows = capacity / kMaxColumns;
 
 	if (fullrows != 0u) {
@@ -452,6 +473,10 @@ SoldierList::SoldierList(UI::Panel& parent,
 
      soldierpanel_(*this, ib.egbase(), building_or_ship),
      infotext_(this, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel) {
+	upcast(Widelands::MilitarySite, ms, &building_or_ship);
+	upcast(Widelands::Warehouse, wh, &building_or_ship);
+	upcast(Widelands::Ship, ship, &building_or_ship);
+
 	unset_infotext();
 	add(&soldierpanel_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
@@ -481,14 +506,17 @@ SoldierList::SoldierList(UI::Panel& parent,
 	UI::Box* buttons = new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 
 	bool can_act = ibase_.can_act(building_or_ship_.owner().player_number());
-	if (building_or_ship.descr().type() == Widelands::MapObjectType::MILITARYSITE) {
-		upcast(Widelands::MilitarySite, ms, &building_or_ship);
+	if (building_or_ship.descr().type() != Widelands::MapObjectType::TRAININGSITE) {
+		// Make sure the creation order is consistent with enum SoldierPreference!
 		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, Vector2i::zero(),
 		                               g_image_cache->get("images/wui/buildings/prefer_rookies.png"),
 		                               _("Prefer rookies"));
-		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, Vector2i(32, 0),
+		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, Vector2i::zero(),
 		                               g_image_cache->get("images/wui/buildings/prefer_heroes.png"),
 		                               _("Prefer heroes"));
+		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, Vector2i::zero(),
+		                               g_image_cache->get("images/wui/buildings/prefer_any.png"),
+		                               _("No preference"));
 		UI::Radiobutton* button = soldier_preference_.get_first_button();
 		while (button != nullptr) {
 			buttons->add(button);
@@ -496,7 +524,10 @@ SoldierList::SoldierList(UI::Panel& parent,
 		}
 
 		soldier_preference_.set_state(
-		   ms->get_soldier_preference() == Widelands::SoldierPreference::kHeroes ? 1 : 0, false);
+		   static_cast<uint8_t>(ms != nullptr ? ms->get_soldier_preference() :
+		                        wh != nullptr ? wh->get_soldier_preference() :
+                                              ship->get_soldier_preference()),
+		   false);
 		if (can_act) {
 			soldier_preference_.changedto.connect([this](int32_t a) { set_soldier_preference(a); });
 		} else {
@@ -510,16 +541,26 @@ SoldierList::SoldierList(UI::Panel& parent,
 }
 
 void SoldierList::think() {
-	if (building_or_ship_.descr().type() == Widelands::MapObjectType::MILITARYSITE) {
+	switch (building_or_ship_.descr().type()) {
+	case Widelands::MapObjectType::MILITARYSITE: {
 		upcast(Widelands::MilitarySite, ms, &building_or_ship_);
-		switch (ms->get_soldier_preference()) {
-		case Widelands::SoldierPreference::kRookies:
-			soldier_preference_.set_state(0, false);
-			break;
-		case Widelands::SoldierPreference::kHeroes:
-			soldier_preference_.set_state(1, false);
-			break;
-		}
+		soldier_preference_.set_state(static_cast<uint8_t>(ms->get_soldier_preference()), false);
+		break;
+	}
+	case Widelands::MapObjectType::WAREHOUSE: {
+		upcast(Widelands::Warehouse, wh, &building_or_ship_);
+		soldier_preference_.set_state(static_cast<uint8_t>(wh->get_soldier_preference()), false);
+		break;
+	}
+	case Widelands::MapObjectType::SHIP: {
+		upcast(Widelands::Ship, ship, &building_or_ship_);
+		soldier_preference_.set_state(static_cast<uint8_t>(ship->get_soldier_preference()), false);
+		break;
+	}
+	case Widelands::MapObjectType::TRAININGSITE:
+		break;
+	default:
+		NEVER_HERE();
 	}
 }
 
@@ -542,6 +583,9 @@ void SoldierList::unset_infotext() {
 
 bool SoldierList::can_eject() const {
 	if (!ibase_.can_act(building_or_ship_.owner().player_number())) {
+		return false;
+	}
+	if (building_or_ship_.descr().type() == Widelands::MapObjectType::WAREHOUSE) {
 		return false;
 	}
 
@@ -569,11 +613,9 @@ void SoldierList::eject(const Widelands::Soldier* soldier) {
 }
 
 void SoldierList::set_soldier_preference(int32_t changed_to) {
-	assert(building_or_ship_.descr().type() == Widelands::MapObjectType::MILITARYSITE);
 	if (Widelands::Game* game = ibase_.get_game()) {
-		game->send_player_militarysite_set_soldier_preference(
-		   *soldierpanel_.get_building(), changed_to == 0 ? Widelands::SoldierPreference::kRookies :
-                                                          Widelands::SoldierPreference::kHeroes);
+		game->send_player_set_soldier_preference(
+		   building_or_ship_, static_cast<Widelands::SoldierPreference>(changed_to));
 	} else {
 		NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 	}
