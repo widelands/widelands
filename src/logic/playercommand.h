@@ -23,7 +23,6 @@
 
 #include "economy/flag.h"
 #include "logic/cmd_queue.h"
-#include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/warehouse.h"
@@ -257,23 +256,23 @@ private:
 	Serial serial_{0U};
 };
 
-struct CmdMilitarySiteSetSoldierPreference : public PlayerCommand {
-	CmdMilitarySiteSetSoldierPreference() = default;  // For savegame loading
-	CmdMilitarySiteSetSoldierPreference(const Time& t,
-	                                    const PlayerNumber p,
-	                                    Building& b,
-	                                    SoldierPreference prefs)
-	   : PlayerCommand(t, p), serial(b.serial()), preference(prefs) {
+struct CmdSetSoldierPreference : public PlayerCommand {
+	CmdSetSoldierPreference() = default;  // For savegame loading
+	CmdSetSoldierPreference(const Time& t,
+	                        const PlayerNumber p,
+	                        MapObject& mo,
+	                        SoldierPreference prefs)
+	   : PlayerCommand(t, p), serial(mo.serial()), preference(prefs) {
 	}
 
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
 	[[nodiscard]] QueueCommandTypes id() const override {
-		return QueueCommandTypes::kMilitarysiteSetSoldierPreference;
+		return QueueCommandTypes::kSetSoldierPreference;
 	}
 
-	explicit CmdMilitarySiteSetSoldierPreference(StreamRead&);
+	explicit CmdSetSoldierPreference(StreamRead&);
 
 	void execute(Game&) override;
 	void serialize(StreamWrite&) override;

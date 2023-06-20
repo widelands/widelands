@@ -1086,10 +1086,9 @@ void Game::send_player_toggle_infinite_production(Building& building) {
 	   new CmdToggleInfiniteProduction(get_gametime(), building.owner().player_number(), building));
 }
 
-void Game::send_player_militarysite_set_soldier_preference(Building& building,
-                                                           SoldierPreference my_preference) {
-	send_player_command(new CmdMilitarySiteSetSoldierPreference(
-	   get_gametime(), building.owner().player_number(), building, my_preference));
+void Game::send_player_set_soldier_preference(MapObject& mo, SoldierPreference my_preference) {
+	send_player_command(
+	   new CmdSetSoldierPreference(get_gametime(), mo.owner().player_number(), mo, my_preference));
 }
 
 void Game::send_player_start_or_cancel_expedition(Building& building) {

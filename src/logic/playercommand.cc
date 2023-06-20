@@ -35,6 +35,7 @@
 #include "logic/game_controller.h"
 #include "logic/map_objects/pinned_note.h"
 #include "logic/map_objects/tribes/market.h"
+#include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
@@ -144,8 +145,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdDismantleBuilding(des);
 	case QueueCommandTypes::kEvictWorker:
 		return new CmdEvictWorker(des);
-	case QueueCommandTypes::kMilitarysiteSetSoldierPreference:
-		return new CmdMilitarySiteSetSoldierPreference(des);
+	case QueueCommandTypes::kSetSoldierPreference:
+		return new CmdSetSoldierPreference(des);
 	case QueueCommandTypes::kToggleMuteMessages:
 		return new CmdToggleMuteMessages(des);
 
@@ -658,36 +659,40 @@ void CmdToggleInfiniteProduction::write(FileWrite& fw,
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
 }
 
-/*** Cmd_MilitarySiteSetSoldierPreference ***/
+/*** Cmd_SetSoldierPreference ***/
 
-CmdMilitarySiteSetSoldierPreference::CmdMilitarySiteSetSoldierPreference(StreamRead& des)
+CmdSetSoldierPreference::CmdSetSoldierPreference(StreamRead& des)
    : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial = des.unsigned_32();
 	preference = static_cast<Widelands::SoldierPreference>(des.unsigned_8());
 }
 
-void CmdMilitarySiteSetSoldierPreference::serialize(StreamWrite& ser) {
+void CmdSetSoldierPreference::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 	ser.unsigned_8(static_cast<uint8_t>(preference));
 }
 
-void CmdMilitarySiteSetSoldierPreference::execute(Game& game) {
+void CmdSetSoldierPreference::execute(Game& game) {
 	MapObject* mo = game.objects().get_object(serial);
 	if (upcast(ConstructionSite, cs, mo)) {
-		if (upcast(MilitarysiteSettings, s, cs->get_settings())) {
-			s->prefer_heroes = preference == SoldierPreference::kHeroes;
+		if (upcast(MilitarysiteSettings, ms, cs->get_settings())) {
+			ms->soldier_preference = preference;
+		} else if (upcast(WarehouseSettings, wh, cs->get_settings())) {
+			wh->soldier_preference = preference;
 		}
-	} else if (upcast(MilitarySite, building, mo)) {
-		game.get_player(sender())->military_site_set_soldier_preference(*building, preference);
+	} else if (upcast(MilitarySite, ms, mo)) {
+		ms->set_soldier_preference(preference);
+	} else if (upcast(Warehouse, wh, mo)) {
+		wh->set_soldier_preference(preference);
+	} else if (upcast(Ship, ship, mo)) {
+		ship->set_soldier_preference(preference);
 	}
 }
 
 constexpr uint16_t kCurrentPacketVersionSoldierPreference = 1;
 
-void CmdMilitarySiteSetSoldierPreference::write(FileWrite& fw,
-                                                EditorGameBase& egbase,
-                                                MapObjectSaver& mos) {
+void CmdSetSoldierPreference::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 	// First, write version
 	fw.unsigned_16(kCurrentPacketVersionSoldierPreference);
 	// Write base classes
@@ -699,21 +704,19 @@ void CmdMilitarySiteSetSoldierPreference::write(FileWrite& fw,
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
 }
 
-void CmdMilitarySiteSetSoldierPreference::read(FileRead& fr,
-                                               EditorGameBase& egbase,
-                                               MapObjectLoader& mol) {
+void CmdSetSoldierPreference::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersionSoldierPreference) {
 			PlayerCommand::read(fr, egbase, mol);
 			preference = static_cast<Widelands::SoldierPreference>(fr.unsigned_8());
-			serial = get_object_serial_or_zero<MilitarySite>(fr.unsigned_32(), mol);
+			serial = get_object_serial_or_zero<MapObject>(fr.unsigned_32(), mol);
 		} else {
-			throw UnhandledVersionError("CmdMilitarySiteSetSoldierPreference", packet_version,
-			                            kCurrentPacketVersionSoldierPreference);
+			throw UnhandledVersionError(
+			   "CmdSetSoldierPreference", packet_version, kCurrentPacketVersionSoldierPreference);
 		}
 	} catch (const WException& e) {
-		throw GameDataError("start/stop building: %s", e.what());
+		throw GameDataError("cmd soldier preference: %s", e.what());
 	}
 }
 
@@ -753,7 +756,7 @@ void CmdStartOrCancelExpedition::read(FileRead& fr, EditorGameBase& egbase, MapO
 			   "CmdStartOrCancelExpedition", packet_version, kCurrentPacketVersionExpedition);
 		}
 	} catch (const WException& e) {
-		throw GameDataError("start/stop building: %s", e.what());
+		throw GameDataError("cmd start/cancel expedition: %s", e.what());
 	}
 }
 void CmdStartOrCancelExpedition::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
@@ -1867,6 +1870,8 @@ void CmdChangeSoldierCapacity::execute(Game& game) {
 			ms->desired_capacity = std::max(1, std::min<int32_t>(ms->max_capacity, val));
 		} else if (upcast(TrainingsiteSettings, ts, cs->get_settings())) {
 			ts->desired_capacity = std::max(0, std::min<int32_t>(ts->max_capacity, val));
+		} else if (upcast(WarehouseSettings, ws, cs->get_settings())) {
+			ws->desired_capacity = std::max(0, std::min<int32_t>(ws->max_garrison, val));
 		}
 	} else if (upcast(Building, building, mo)) {
 		if (building->get_owner() == game.get_player(sender()) &&

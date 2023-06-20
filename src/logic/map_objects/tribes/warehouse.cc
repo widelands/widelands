@@ -279,11 +279,20 @@ void WarehouseSupply::send_to_storage(Game& /* game */, Warehouse* /* wh */) {
 }
 
 uint32_t WarehouseSupply::nr_supplies(const Game& game, const Request& req) const {
-	return req.get_type() == wwWORKER ?
-             warehouse_->count_workers(game, req.get_index(), req.get_requirements(),
-	                                    (req.get_exact_match() ? Warehouse::Match::kExact :
-                                                                Warehouse::Match::kCompatible)) :
-             wares_.stock(req.get_index());
+	if (req.get_type() == wwWARE) {
+		return wares_.stock(req.get_index());
+	}
+
+	Quantity available = warehouse_->count_workers(
+	   game, req.get_index(), req.get_requirements(),
+	   (req.get_exact_match() ? Warehouse::Match::kExact : Warehouse::Match::kCompatible));
+
+	if (req.get_index() != warehouse_->owner().tribe().soldier()) {
+		return available;
+	}
+
+	Quantity garrison = warehouse_->get_desired_soldier_count();
+	return available > garrison ? available - garrison : 0;
 }
 
 /// Launch a ware.
@@ -318,9 +327,14 @@ WarehouseDescr::WarehouseDescr(const std::string& init_descname,
                                Descriptions& descriptions)
    : BuildingDescr(init_descname, MapObjectType::WAREHOUSE, table, descriptions) {
 	heal_per_second_ = table.get_int("heal_per_second");
+
 	if (table.has_key("conquers")) {
 		conquers_ = table.get_int("conquers");
 		workarea_info_[conquers_].insert(name() + " conquer");
+	}
+
+	if (table.has_key("max_garrison")) {
+		max_garrison_ = table.get_int("max_garrison");
 	}
 }
 
@@ -351,15 +365,16 @@ Quantity Warehouse::SoldierControl::min_soldier_capacity() const {
 }
 
 Quantity Warehouse::SoldierControl::max_soldier_capacity() const {
-	return std::numeric_limits<Quantity>::max();
+	return warehouse_->attack_target()->can_be_attacked() ? warehouse_->descr().get_max_garrison() :
+                                                           0;
 }
 
 Quantity Warehouse::SoldierControl::soldier_capacity() const {
-	return max_soldier_capacity();
+	return warehouse_->get_desired_soldier_count();
 }
 
-void Warehouse::SoldierControl::set_soldier_capacity(Quantity /* capacity */) {
-	throw wexception("Not implemented for a Warehouse!");
+void Warehouse::SoldierControl::set_soldier_capacity(Quantity capacity) {
+	warehouse_->set_desired_soldier_count(capacity);
 }
 
 void Warehouse::SoldierControl::drop_soldier(Soldier& /* soldier */) {
@@ -393,6 +408,12 @@ Warehouse::Warehouse(const WarehouseDescr& warehouse_descr)
    : Building(warehouse_descr),
      attack_target_(this),
      soldier_control_(this),
+     soldier_request_(
+        *this,
+        SoldierPreference::kAny /* no exchange by default */,
+        Warehouse::request_soldier_callback,
+        [this]() { return soldier_control_.soldier_capacity(); },
+        [this]() { return soldier_control_.stationed_soldiers(); }),
      supply_(new WarehouseSupply(this)) {
 	cleanup_in_progress_ = false;
 	set_attack_target(&attack_target_);
@@ -524,6 +545,9 @@ bool Warehouse::init(EditorGameBase& egbase) {
 	warehouse_name_ = player->pick_warehousename(descr().get_isport());
 
 	set_seeing(true);
+
+	// Garrisons should be treated as more important than militarysites
+	set_priority(wwWORKER, player->tribe().soldier(), WarePriority::kHigh);
 
 	// Even though technically, a warehouse might be completely empty,
 	// we let warehouse see always for simplicity's sake (since there's
@@ -822,6 +846,11 @@ void Warehouse::act(Game& game, uint32_t const data) {
 		next_military_act_ = schedule_act(game, Duration(1000));
 	}
 
+	if (gametime > next_swap_soldiers_time_) {
+		next_swap_soldiers_time_ = gametime + kSoldierSwapTime;
+		soldier_request_.update();
+	}
+
 	if (next_stock_remove_act_ <= gametime) {
 		check_remove_stock(game);
 
@@ -854,6 +883,7 @@ void Warehouse::set_economy(Economy* const e, WareWorker type) {
 	}
 	supply_->set_economy(e, type);
 	Building::set_economy(e, type);
+	soldier_request_.set_economy(e, type);
 
 	for (const PlannedWorkers& pw : planned_workers_) {
 		for (Request* req : pw.requests) {
@@ -1445,6 +1475,27 @@ InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type, const
                          portdock_->expedition_bootstrap()->inputqueue(index, type, false);
 }
 
+void Warehouse::set_desired_soldier_count(Quantity q) {
+	desired_soldier_count_ = q;
+	soldier_request_.update();
+}
+
+void Warehouse::set_soldier_preference(SoldierPreference p) {
+	soldier_request_.set_preference(p);
+	soldier_request_.update();
+}
+
+void Warehouse::request_soldier_callback(Game& game,
+                                         Request& /* req */,
+                                         DescriptionIndex /* index */,
+                                         Worker* const w,
+                                         PlayerImmovable& target) {
+	Warehouse& wh = dynamic_cast<Warehouse&>(target);
+	Soldier& s = dynamic_cast<Soldier&>(*w);
+
+	wh.soldier_control_.incorporate_soldier(game, s);
+}
+
 void Warehouse::update_statistics_string(std::string* str) {
 	*str = richtext_escape(get_warehouse_name());
 }
@@ -1458,6 +1509,8 @@ std::unique_ptr<const BuildingSettings> Warehouse::create_building_settings() co
 		pair.second = get_worker_policy(pair.first);
 	}
 	settings->launch_expedition = (portdock_ != nullptr) && portdock_->expedition_started();
+	settings->desired_capacity = get_desired_soldier_count();
+	settings->soldier_preference = get_soldier_preference();
 	// Prior to the resolution of a defect report against ISO C++11, local variable 'settings' would
 	// have been copied despite being returned by name, due to its not matching the function return
 	// type. Call 'std::move' explicitly to avoid copying on older compilers.
