@@ -1235,6 +1235,15 @@ void Ship::battle_update(Game& game) {
 			                kAttackAnimationDuration);  // TODO(Nordfriese): proper animation
 			return;
 
+		case Battle::Phase::kAttackerMovingTowardsOpponent: {
+			// Check if we need to move a little to the east to make room for an attacker west of us.
+			if (map.can_reach_by_water(map.l_n(map.l_n(get_position())))) {
+				return start_task_idle(game, descr().main_animation(), 100);
+			}
+			molog(game.get_gametime(), "[battle] Defender making room for attacker");
+			return start_task_move(game, WALK_E, descr().get_sail_anims(), true);
+		}
+
 		default:
 			// Idle until the enemy tells us it's our turn now.
 			return start_task_idle(game, descr().main_animation(), 100);
@@ -1255,16 +1264,17 @@ void Ship::battle_update(Game& game) {
 	case Battle::Phase::kAttackerMovingTowardsOpponent: {
 		// Move towards the opponent.
 		Coords dest;
-		bool exact_match_required;
 		if (target_ship != nullptr) {
-			exact_match_required = false;
+			// If we are still some distance away, get closer first ...
 			dest = target_ship->get_position();
+			if (map.calc_distance(get_position(), dest) <= kNearDestinationShipRadius) {
+				// ... then take up attack position two nodes west of the target.
+				dest = map.l_n(map.l_n(dest));
+			}
 		} else {
-			exact_match_required = true;
 			dest = current_battle.attack_coords;
 		}
-		if (dest == get_position() ||
-		    (!exact_match_required && map.calc_distance(get_position(), dest) < 2)) {
+		if (dest == get_position()) {
 			// Already there, start the fight in the next act.
 			// For ports, skip the first round to allow defense warships to approach.
 			molog(game.get_gametime(), "[battle] Enemy in range");
@@ -1280,23 +1290,21 @@ void Ship::battle_update(Game& game) {
 				      "Could not find a path to opponent ship %u %s from %dx%d to %dx%d",
 				      target_ship->serial(), target_ship->get_shipname().c_str(), get_position().x,
 				      get_position().y, dest.x, dest.y);
-			} else {
-				molog(game.get_gametime(), "Could not find a path to attack coords from %dx%d to %dx%d",
-				      get_position().x, get_position().y, dest.x, dest.y);
+				// The defender is responsible for determining a good attack position, so wait a bit.
+				return start_task_idle(game, descr().main_animation(), 500);
 			}
+
+			molog(game.get_gametime(), "Could not find a path to attack coords from %dx%d to %dx%d",
+			      get_position().x, get_position().y, dest.x, dest.y);
 
 			battles_.pop_back();
 			return start_task_idle(game, descr().main_animation(), 100);
 		}
 
-		int steps = path.get_nsteps();
-		if (!exact_match_required) {
-			assert(steps > 1);
-			steps--;
-		}
-
 		molog(game.get_gametime(), "[battle] Moving towards enemy");
-		start_task_movepath(game, path, descr().get_sail_anims(), false, steps);
+		// Move in small steps to allow for defender position change.
+		start_task_movepath(
+		   game, path, descr().get_sail_anims(), false, std::min<unsigned>(path.get_nsteps(), 3));
 		return;
 	}
 
