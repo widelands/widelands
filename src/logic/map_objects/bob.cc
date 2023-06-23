@@ -824,8 +824,10 @@ void Bob::draw(const EditorGameBase& egbase,
  * Set a looping animation, starting now.
  */
 void Bob::set_animation(const EditorGameBase& egbase, uint32_t const anim) {
-	anim_ = anim;
-	animstart_ = egbase.get_gametime();
+	if (anim_ != anim) {
+		anim_ = anim;
+		animstart_ = egbase.get_gametime();
+	}
 }
 
 /**
