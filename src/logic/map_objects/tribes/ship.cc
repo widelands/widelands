@@ -1046,8 +1046,8 @@ void Ship::kickout_superfluous_soldiers(Game& game) {
 			}
 			unsigned soldier_level = soldier->get_total_level();
 			if (worst_fit == nullptr || (get_soldier_preference() == SoldierPreference::kRookies ?
-                                        soldier_level >= worst_fit_level :
-                                        soldier_level <= worst_fit_level)) {
+                                         soldier_level >= worst_fit_level :
+                                         soldier_level <= worst_fit_level)) {
 				worst_fit = &si;
 				worst_fit_level = soldier_level;
 			}
@@ -2075,7 +2075,8 @@ void Ship::exp_cancel(Game& game) {
 	// Running colonization has the highest priority before cancelation
 	// + cancelation only works if an expedition is actually running
 
-	if ((ship_state_ == ShipStates::kExpeditionColonizing) || !state_is_expedition() || get_ship_type() == ShipType::kWarship) {
+	if ((ship_state_ == ShipStates::kExpeditionColonizing) || !state_is_expedition() ||
+	    get_ship_type() == ShipType::kWarship) {
 		return;
 	}
 
