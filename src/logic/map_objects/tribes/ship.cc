@@ -2075,7 +2075,7 @@ void Ship::exp_cancel(Game& game) {
 	// Running colonization has the highest priority before cancelation
 	// + cancelation only works if an expedition is actually running
 
-	if ((ship_state_ == ShipStates::kExpeditionColonizing) || !state_is_expedition()) {
+	if ((ship_state_ == ShipStates::kExpeditionColonizing) || !state_is_expedition() || get_ship_type() == ShipType::kWarship) {
 		return;
 	}
 
