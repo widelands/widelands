@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-15 02:47+0000\n"
+"POT-Creation-Date: 2023-06-22 02:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -1743,7 +1743,7 @@ msgstr ""
 msgid "Shading Language"
 msgstr ""
 
-#: ../../src/graphic/text/rt_render.cc:1421
+#: ../../src/graphic/text/rt_render.cc:1422
 msgid "Copy link to clipboard"
 msgstr ""
 
