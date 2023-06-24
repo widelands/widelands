@@ -282,6 +282,15 @@ void Ship::wakeup_neighbours(Game& game) {
 	}
 }
 
+void Ship::set_capacity(Quantity c) {
+	capacity_ = c;
+	warship_soldier_capacity_ = std::min(warship_soldier_capacity_, capacity_);
+}
+void Ship::set_warship_soldier_capacity(Quantity c) {
+	assert(c <= capacity_);
+	warship_soldier_capacity_ = c;
+}
+
 /**
  * Standard behaviour of ships.
  *
