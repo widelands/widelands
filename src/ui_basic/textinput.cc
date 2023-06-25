@@ -1011,13 +1011,17 @@ void AbstractTextInputPanel::Data::set_cursor_pos(uint32_t newpos) {
  * Ensure that the cursor is visible.
  */
 void AbstractTextInputPanel::scroll_cursor_into_view() {
+	const int margin = d_->get_style().background().margin();
+	if (get_inner_h() <= 2 * margin) {
+		return;  // Height not yet initialized.
+	}
+
 	d_->refresh_ww();
 
 	uint32_t cursorline;
 	uint32_t cursorpos = 0;
 	d_->ww.calc_wrapped_pos(d_->cursor_pos, cursorline, cursorpos);
 
-	int margin = d_->get_style().background().margin();
 	int32_t top = cursorline * d_->ww.lineheight();
 	int32_t bottom = top + d_->ww.lineheight();
 
@@ -1030,8 +1034,12 @@ void AbstractTextInputPanel::scroll_cursor_into_view() {
 
 void EditBox::scroll_cursor_into_view() {
 	AbstractTextInputPanel::scroll_cursor_into_view();
+	const int margin = d_->get_style().background().margin();
 
-	int margin = d_->get_style().background().margin();
+	if (get_inner_w() <= 2 * margin) {
+		return;  // Width not yet initialized.
+	}
+
 	int32_t real_caret_x = calculate_text_width(get_text(), get_caret_pos());
 
 	if (real_caret_x - static_cast<int32_t>(d_->scrolloffset) < 0) {

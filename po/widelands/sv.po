@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-15 02:47+0000\n"
+"POT-Creation-Date: 2023-06-22 02:48+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: D M <kamera001dm@gmail.com>, 2021,2023\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
@@ -1802,7 +1802,7 @@ msgstr "OpenGL"
 msgid "Shading Language"
 msgstr "OpenGL Shading Language"
 
-#: ../../src/graphic/text/rt_render.cc:1421
+#: ../../src/graphic/text/rt_render.cc:1422
 msgid "Copy link to clipboard"
 msgstr "Kopiera länk till urklipp"
 

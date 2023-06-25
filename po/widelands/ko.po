@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-15 02:47+0000\n"
+"POT-Creation-Date: 2023-06-22 02:48+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: ks k, 2017-2021\n"
 "Language-Team: Korean (http://app.transifex.com/widelands/widelands/language/ko/)\n"
@@ -1801,7 +1801,7 @@ msgstr "오픈지엘"
 msgid "Shading Language"
 msgstr "그림자 언어"
 
-#: ../../src/graphic/text/rt_render.cc:1421
+#: ../../src/graphic/text/rt_render.cc:1422
 msgid "Copy link to clipboard"
 msgstr ""
 
