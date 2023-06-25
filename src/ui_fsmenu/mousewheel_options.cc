@@ -415,13 +415,13 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
                    &(settings_.toolsize_mod_),
                    &(settings_.toolsize_dir_)),
      toolgap_box_(this,
-                   /** TRANSLATORS: Name of a function for the scroll wheel.
-                       Used as e.g.: "Change Editor Tool Gap: Ctrl+Any scroll"
-                       The ':' will be added by another format string. */
-                   _("Change Editor Tool Gap"),
-                   {&zoom_box_, &mapscroll_box_},
-                   &(settings_.toolgap_mod_),
-                   &(settings_.toolgap_dir_)),
+                  /** TRANSLATORS: Name of a function for the scroll wheel.
+                      Used as e.g.: "Change Editor Tool Gap: Ctrl+Any scroll"
+                      The ':' will be added by another format string. */
+                  _("Change Editor Tool Gap"),
+                  {&zoom_box_, &mapscroll_box_},
+                  &(settings_.toolgap_mod_),
+                  &(settings_.toolgap_dir_)),
      zoom_invert_box_(
         this,
         /** TRANSLATORS: Used as e.g. "Invert scroll direction for map zooming: Vertical" */
@@ -519,10 +519,11 @@ void MousewheelOptionsDialog::set_touchpad() {
 	if (conflict_speed || conflict_toolsize || conflict_toolgap) {
 		UI::WLMessageBox warning(
 		   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Scroll Settings Conflict"),
-		   as_richtext_paragraph(format(_("‘%1$s’, ‘%2$s’, or ‘%3$s’ conflicts with the recommended "
-		                                  "settings. Change the conflicting setting(s) too?"),
-		                                speed_box_.get_title(), toolsize_box_.get_title(), toolgap_box_.get_title()),
-		                         UI::FontStyle::kFsMenuLabel, UI::Align::kCenter),
+		   as_richtext_paragraph(
+		      format(_("‘%1$s’, ‘%2$s’, or ‘%3$s’ conflicts with the recommended "
+		               "settings. Change the conflicting setting(s) too?"),
+		             speed_box_.get_title(), toolsize_box_.get_title(), toolgap_box_.get_title()),
+		      UI::FontStyle::kFsMenuLabel, UI::Align::kCenter),
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		if (warning.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;

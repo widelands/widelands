@@ -567,11 +567,12 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
    EDITOR_TOOLSIZE(10, 0),
 #undef EDITOR_TOOLSIZE
 
-#define EDITOR_TOOLGAP(radius, key)                                                               \
+#define EDITOR_TOOLGAP(radius, key)                                                                \
 	{                                                                                               \
-		KeyboardShortcut::kEditorToolgap##radius,                                                   \
-		   KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor}, keysym(SDLK_##key, KMOD_SHIFT), \
-		                        "editor_toolgap" #radius, gettext_noop("Set Tool Gap to %d%%"))     \
+		KeyboardShortcut::kEditorToolgap##radius,                                                    \
+		   KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},                              \
+		                        keysym(SDLK_##key, KMOD_SHIFT), "editor_toolgap" #radius,            \
+		                        gettext_noop("Set Tool Gap to %d%%"))                                \
 	}
    EDITOR_TOOLGAP(0, 0),
    EDITOR_TOOLGAP(10, 1),
