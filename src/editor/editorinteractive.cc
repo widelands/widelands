@@ -675,7 +675,17 @@ void EditorInteractive::draw(RenderTarget& dst) {
 
 	const float scale = 1.f / map_view()->view().zoom;
 	const Time& gametime = ebase.get_gametime();
-	const float sel_alpha = 1.f - get_sel_gap_percent() / 100.f;
+
+	float sel_alpha;
+	if (get_sel_gap_percent() < 10) {
+		sel_alpha = 1.f;
+	} else if (get_sel_gap_percent() <= 50) {
+		sel_alpha = 0.8f;
+	} else if (get_sel_gap_percent() < 100) {
+		sel_alpha = 0.5f;
+	} else {
+		sel_alpha = 0.f;
+	}
 
 	// The map provides a mapping from player number to Coords, while we require
 	// the inverse here. We construct this, but this is done on every frame and
@@ -1009,6 +1019,13 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			}
 		}
 
+		for (int i = 0; i < 10; ++i) {
+			if (matches_shortcut(KeyboardShortcut::kEditorToolgap0 + i, code)) {
+				set_sel_radius_and_update_menu(get_sel_radius(), i * 10);
+				return true;
+			}
+		}
+
 		switch (code.sym) {
 		case SDLK_LSHIFT:
 		case SDLK_RSHIFT:
@@ -1050,14 +1067,18 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 }
 
 bool EditorInteractive::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
-	int32_t change =
+	const int32_t change_size =
 	   get_mousewheel_change(MousewheelHandlerConfigID::kEditorToolsize, x, y, modstate);
-	if (change == 0) {
+	const int32_t change_gap =
+	   get_mousewheel_change(MousewheelHandlerConfigID::kEditorToolgap, x, y, modstate);
+
+	if (change_size == 0 && change_gap == 0) {
 		return false;
 	}
+
 	set_sel_radius_and_update_menu(
-	   std::max(0, std::min(static_cast<int32_t>(get_sel_radius()) + change, MAX_TOOL_AREA)),
-	   get_sel_gap_percent());
+	   std::max(0, std::min(static_cast<int32_t>(get_sel_radius()) + change_size, MAX_TOOL_AREA)),
+	   std::max(0, std::min(static_cast<int32_t>(get_sel_gap_percent()) + change_gap, 100)));
 	return true;
 }
 
@@ -1371,6 +1392,7 @@ void EditorInteractive::set_sel_radius(uint32_t radius, uint16_t gap) {
 	InteractiveBase::set_sel_radius(radius);
 	InteractiveBase::set_sel_gap_percent(gap);
 	tool_settings_changed_ = true;
+	set_tooltip(gap > 0 ? format(_("Tool gaps: %u%%"), gap) : "");
 }
 
 void EditorInteractive::publish_map() {
