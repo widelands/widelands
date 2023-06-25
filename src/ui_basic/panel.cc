@@ -890,7 +890,7 @@ bool Panel::handle_key(bool down, SDL_Keysym code) {
 		}
 		switch (code.sym) {
 		case SDLK_TAB:
-			return handle_tab_pressed((SDL_GetModState() & KMOD_SHIFT) != 0);
+			return handle_tab_pressed((code.mod & KMOD_SHIFT) != 0);
 		case SDLK_ESCAPE:
 			if ((parent_ != nullptr) && parent_->focus_ == this && get_can_focus()) {
 				parent_->focus_ = nullptr;
