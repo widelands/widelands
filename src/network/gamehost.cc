@@ -1794,7 +1794,7 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	// TODO(tothxa): The host could warn only the new client, but other clients can only broadcast:
 	//                 1. They can only send commands to the host
 	//                 2. System messages are assembled and translated on each client, so individual
-   //                    players can't be @-addressed
+	//                    players can't be @-addressed
 	//               Until this is solved, it's better if the host broadcasts too.
 	send_system_message_code("CAN_CHEAT", d->localplayername);
 #endif
