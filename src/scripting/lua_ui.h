@@ -25,6 +25,7 @@
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/multilinetextarea.h"
+#include "ui_basic/progressbar.h"
 #include "ui_basic/radiobutton.h"
 #include "ui_basic/slider.h"
 #include "ui_basic/spinbox.h"
@@ -274,6 +275,39 @@ public:
 	 */
 	UI::Radiobutton* get() {
 		return dynamic_cast<UI::Radiobutton*>(panel_);
+	}
+};
+
+class LuaProgressBar : public LuaPanel {
+public:
+	LUNA_CLASS_HEAD(LuaProgressBar);
+
+	LuaProgressBar() = default;
+	explicit LuaProgressBar(UI::Panel* p) : LuaPanel(p) {
+	}
+	explicit LuaProgressBar(lua_State* L) : LuaPanel(L) {
+	}
+	~LuaProgressBar() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_state(lua_State* L);
+	int set_state(lua_State* L);
+	int get_total(lua_State* L);
+	int set_total(lua_State* L);
+	int get_show_percent(lua_State* L);
+	int set_show_percent(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+
+	/*
+	 * C Methods
+	 */
+	UI::ProgressBar* get() {
+		return dynamic_cast<UI::ProgressBar*>(panel_);
 	}
 };
 

@@ -71,26 +71,28 @@ int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel) {
 		to_lua<LuaType>(L, new LuaType(temp_##PanelType));                                           \
 	}
 
+	// clang-format off
 	TRY_TO_LUA(Window, LuaWindow)
-	else TRY_TO_LUA(Button, LuaButton) else TRY_TO_LUA(Checkbox, LuaCheckbox) else TRY_TO_LUA(
-	   Radiobutton,
-	   LuaRadioButton) else TRY_TO_LUA(SpinBox,
-	                                   LuaSpinBox) else TRY_TO_LUA(Slider,
-	                                                               LuaSlider) else if (upcast(UI::
-	                                                                                             DiscreteSlider,
-	                                                                                          temp_DiscreteSlider,
-	                                                                                          panel)) {
+	else TRY_TO_LUA(Button, LuaButton)
+	else TRY_TO_LUA(Checkbox, LuaCheckbox)
+	else TRY_TO_LUA(Radiobutton, LuaRadioButton)
+	else TRY_TO_LUA(ProgressBar, LuaProgressBar)
+	else TRY_TO_LUA(SpinBox, LuaSpinBox)
+	else TRY_TO_LUA(Slider, LuaSlider)
+	else if (upcast(UI::DiscreteSlider, temp_DiscreteSlider, panel)) {
 		// Discrete sliders are wrapped, so we pass the actual slider through.
 		to_lua<LuaSlider>(L, new LuaSlider(&temp_DiscreteSlider->get_slider()));
 	}
-	else TRY_TO_LUA(MultilineTextarea, LuaMultilineTextarea) else TRY_TO_LUA(Textarea, LuaTextarea) else TRY_TO_LUA(
-	   AbstractTextInputPanel,
-	   LuaTextInputPanel) else TRY_TO_LUA(Tab,
-	                                      LuaTab) else TRY_TO_LUA(BaseDropdown,
-	                                                              LuaDropdown) else TRY_TO_LUA(NamedPanel,
-	                                                                                           LuaNamedPanel) else {
+	else TRY_TO_LUA(MultilineTextarea, LuaMultilineTextarea)
+	else TRY_TO_LUA(Textarea, LuaTextarea)
+	else TRY_TO_LUA(AbstractTextInputPanel, LuaTextInputPanel)
+	else TRY_TO_LUA(Tab, LuaTab)
+	else TRY_TO_LUA(BaseDropdown, LuaDropdown)
+	else TRY_TO_LUA(NamedPanel, LuaNamedPanel)
+	else {
 		to_lua<LuaPanel>(L, new LuaPanel(panel));
 	}
+	// clang-format on
 #undef TRY_TO_LUA
 
 	return 1;
@@ -587,6 +589,17 @@ int LuaPanel::get_child(lua_State* L) {
            * ``"on_changed"``: **Optional**. Callback code to run when the
              radiogroup's active button changes.
 
+         * ``"progressbar"``: A partially filled bar that indicates the progress
+           of an operation. Properties:
+
+           * ``"orientation"``: **Mandatory**. The progress bar's direction:
+             ``"vertical"`` or ``"horizontal"``.
+             The shorthands ``"vert"``, ``"v"``, ``"horz"``, and ``"h"`` may be used.
+           * ``"total"``: **Mandatory**. The progress bar's maximum value.
+           * ``"state"``: **Mandatory**. The progress bar's initial value.
+           * ``"percent"``: **Optional**. Whether to show a percentage instead of absolute values.
+             Default: true.
+
          * ``"spinbox"``: A box with buttons to increase or decrease a numerical value. Properties:
 
            * ``"unit_w"``: **Mandatory**. The total width of the buttons and value display.
@@ -993,6 +1006,27 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 		}
 
 		group->manage_own_lifetime();
+
+	} else if (widget_type == "progressbar") {
+		unsigned orientation = get_table_button_box_orientation(L, "orientation", true);
+		int32_t total = get_table_int(L, "total", true);
+		int32_t state = get_table_int(L, "state", true);
+		bool percent = get_table_boolean(L, "percent", false, true);
+
+		if (total < 1) {
+			report_error(L, "Progressbar total must be positive");
+		}
+		if (state < 0 || state > total) {
+			report_error(L, "Progressbar initial state out of range");
+		}
+
+		UI::ProgressBar* bar =
+		   new UI::ProgressBar(parent, UI::PanelStyle::kWui, x, y, w, h, orientation);
+		created_panel = bar;
+
+		bar->set_total(total);
+		bar->set_state(state);
+		bar->set_show_percent(percent);
 
 	} else if (widget_type == "spinbox") {
 		uint32_t unit_w = get_table_int(L, "unit_w", true);
@@ -1535,6 +1569,82 @@ int LuaRadioButton::set_enabled(lua_State* L) {
 	get()->group().set_enabled(luaL_checkboolean(L, -1));
 	return 0;
 }
+
+/*
+ * C Functions
+ */
+
+/* RST
+ProgressBar
+-----------
+
+.. class:: ProgressBar
+
+   .. versionadded:: 1.2
+
+   A partially filled bar that indicates the progress of an operation.
+*/
+const char LuaProgressBar::className[] = "ProgressBar";
+const MethodType<LuaProgressBar> LuaProgressBar::Methods[] = {
+   {nullptr, nullptr},
+};
+const PropertyType<LuaProgressBar> LuaProgressBar::Properties[] = {
+   PROP_RW(LuaProgressBar, state),
+   PROP_RW(LuaProgressBar, total),
+   PROP_RW(LuaProgressBar, show_percent),
+   {nullptr, nullptr, nullptr},
+};
+
+/*
+ * Properties
+ */
+
+/* RST
+   .. attribute:: state
+
+      (RW) The current progress value.
+*/
+int LuaProgressBar::get_state(lua_State* L) {
+	lua_pushinteger(L, get()->get_state());
+	return 1;
+}
+int LuaProgressBar::set_state(lua_State* L) {
+	get()->set_state(luaL_checkint32(L, -1));
+	return 0;
+}
+
+/* RST
+   .. attribute:: total
+
+      (RW) The maximum progress value.
+*/
+int LuaProgressBar::get_total(lua_State* L) {
+	lua_pushinteger(L, get()->get_total());
+	return 1;
+}
+int LuaProgressBar::set_total(lua_State* L) {
+	get()->set_total(luaL_checkint32(L, -1));
+	return 0;
+}
+
+/* RST
+   .. attribute:: show_percent
+
+      (RW) Whether the progress bar label displays the absolute progress
+      or the percentage completed.
+*/
+int LuaProgressBar::get_show_percent(lua_State* L) {
+	lua_pushboolean(L, static_cast<int>(get()->get_show_percent()));
+	return 1;
+}
+int LuaProgressBar::set_show_percent(lua_State* L) {
+	get()->set_show_percent(luaL_checkboolean(L, -1));
+	return 0;
+}
+
+/*
+ * Lua Functions
+ */
 
 /*
  * C Functions
@@ -2729,6 +2839,10 @@ void luaopen_wlui(lua_State* L) {
 
 	register_class<LuaRadioButton>(L, "ui", true);
 	add_parent<LuaRadioButton, LuaPanel>(L);
+	lua_pop(L, 1);  // Pop the meta table
+
+	register_class<LuaProgressBar>(L, "ui", true);
+	add_parent<LuaProgressBar, LuaPanel>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
 	register_class<LuaSpinBox>(L, "ui", true);
