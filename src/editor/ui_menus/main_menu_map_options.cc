@@ -508,6 +508,9 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
 	cancel_.sigclicked.connect([this]() { clicked_cancel(); });
 
+	// This window is accessible from the Save Map fullscreen window, so it needs a higher Z order.
+	set_z(UI::Panel::ZOrder::kFullscreenWindow);
+
 	update();
 	ok_.set_enabled(true);
 
