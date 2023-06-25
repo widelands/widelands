@@ -459,10 +459,10 @@ void GameClient::set_map(const std::string& /*mapname*/,
 	// client is not allowed to do this
 }
 
-void GameClient::send_cheating_info() {
+void GameClient::send_cheating_info(const std::string& code) {
 	SendPacket packet;
 	packet.unsigned_8(NETCMD_SYSTEM_MESSAGE_CODE);
-	packet.string("CHEAT");
+	packet.string(code);
 	packet.string(d->localplayername);
 	packet.string("");
 	packet.string("");
@@ -1102,6 +1102,18 @@ void GameClient::handle_system_message(RecvPacket& packet) {
 	                                   // c.sender remains empty to indicate a system message
 	d->chatmessages.push_back(c);
 	Notifications::publish(c);
+
+#ifdef SCRIPT_CONSOLE
+	if (code == "CLIENT_HAS_JOINED_GAME") {
+		// Warn others
+		// TODO(tothxa): It would be better to only broadcast if we are the new user, otherwise send
+		//               it to the new user only, but
+		//                 1. We can only send commands to the host
+		//                 2. System messages are assembled and translated on each client, so
+		//                    individual players can't be @-addressed
+		send_cheating_info("CAN_CHEAT");
+	}
+#endif
 }
 
 /**

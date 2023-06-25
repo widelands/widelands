@@ -669,6 +669,10 @@ void InteractiveGameBase::start() {
 		if (game().get_player(pln) != nullptr) {
 			map_view()->scroll_to_field(game().map().get_starting_pos(pln), MapView::Transition::Jump);
 		}
+#ifdef SCRIPT_CONSOLE
+		// Let's warn all users once again
+		broadcast_cheating_message("CAN_CHEAT");
+#endif
 	}
 }
 

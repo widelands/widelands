@@ -74,6 +74,7 @@ static const std::map<std::string, std::string> ngmessages = {
    {"COMPLETED_FILE_TRANSFER", gettext_noop("Completed transfer of file %1$s to %2$s")},
    {"PLAYER_DEFEATED", gettext_noop("The player ‘%s’ was defeated and became a spectator.")},
    {"CLIENT_HUNG", gettext_noop("Client %1$s did not answer for more than %2$s.")},
+   {"CAN_CHEAT", gettext_noop("Client %s has cheating features enabled!")},
    {"CHEAT", gettext_noop("Client %s is cheating!")}};
 
 /// Returns a translated message fitting to the message code \arg code

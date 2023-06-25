@@ -629,6 +629,7 @@ Callback for debug window
 ===============
 */
 void BuildingWindow::act_debug() {
+	ibase()->broadcast_cheating_message();
 	show_field_debug(*ibase(), ibase()->egbase().map().get_fcoords(building_position_));
 }
 

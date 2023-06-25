@@ -118,7 +118,7 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 		return true;
 	}
 
-	void send_cheating_info();
+	void send_cheating_info(const std::string& code = "CHEAT");
 
 	std::shared_ptr<GameController>& get_pointer() {
 		return pointer_;

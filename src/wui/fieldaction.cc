@@ -777,6 +777,7 @@ Show a debug widow for this field.
 ===============
 */
 void FieldActionWindow::act_debug() {
+	ibase().broadcast_cheating_message();
 	show_field_debug(ibase(), node_);
 }
 

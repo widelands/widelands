@@ -244,6 +244,8 @@ public:
 	// Sets the toolbar's position to the bottom middle and configures its background images
 	void finalize_toolbar();
 
+	void broadcast_cheating_message(const std::string& code = "CHEAT") const;
+
 protected:
 	// For referencing the items in mapviewmenu_
 	enum class MapviewMenuEntry { kMinimap, kIncreaseZoom, kDecreaseZoom, kResetZoom, kQuicknav };
@@ -360,8 +362,6 @@ protected:
 	void set_toolbar_imageset(const ToolbarImageset& imageset);
 
 	ChatProvider* chat_provider_;
-
-	void broadcast_cheating_message() const;
 
 #ifdef SCRIPT_CONSOLE
 	UI::UniqueWindow::Registry debugconsole_;

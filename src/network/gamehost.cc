@@ -1789,6 +1789,15 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	}
 
 	send_system_message_code("CLIENT_HAS_JOINED_GAME", effective_name);
+
+#ifdef SCRIPT_CONSOLE
+	// TODO(tothxa): The host could warn only the new client, but other clients can only broadcast:
+	//                 1. They can only send commands to the host
+	//                 2. System messages are assembled and translated on each client, so individual
+   //                    players can't be @-addressed
+	//               Until this is solved, it's better if the host broadcasts too.
+	send_system_message_code("CAN_CHEAT", d->localplayername);
+#endif
 }
 
 void GameHost::committed_network_time(const Time& time) {
@@ -2410,7 +2419,7 @@ void GameHost::handle_system_message(RecvPacket& packet) {
 	const std::string arg1 = packet.string();
 	const std::string arg2 = packet.string();
 	const std::string arg3 = packet.string();
-	if (code != "CHEAT") {
+	if (code != "CHEAT" && code != "CAN_CHEAT") {
 		log_err("[Host]: Received system command %s(%s,%s,%s) from client", code.c_str(),
 		        arg1.c_str(), arg2.c_str(), arg3.c_str());
 		throw DisconnectException("MALFORMED_COMMANDS");

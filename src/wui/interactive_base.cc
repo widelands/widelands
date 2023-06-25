@@ -1757,15 +1757,15 @@ ChatColorForPlayer InteractiveBase::color_functor() const {
 	};
 }
 
-void InteractiveBase::broadcast_cheating_message() const {
+void InteractiveBase::broadcast_cheating_message(const std::string& code) const {
 	if (get_game() == nullptr) {
 		return;  // Editor
 	}
 	if (upcast(GameHost, h, game().game_controller())) {
 		h->send_system_message_code(
-		   "CHEAT", player_number() != 0u ? game().player(player_number()).get_name() : "");
+		   code, player_number() != 0u ? game().player(player_number()).get_name() : "");
 	} else if (upcast(GameClient, c, game().game_controller())) {
-		c->send_cheating_info();
+		c->send_cheating_info(code);
 	}
 }
 
