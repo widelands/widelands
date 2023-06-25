@@ -574,7 +574,7 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 	      << "Land = " << landval_ << " %\n"
 	      << "Wasteland = " << wastelandval_ << " %\n"
 	      << "Resources = " << resource_amounts_[resources_.get_selected()] << "\n"
-	      << "ID = " << map_id_edit_.text() << "\n"
+	      << "ID = " << map_id_edit_.get_text() << "\n"
 	      << "Generator = "
 	      << (generator_.get_selected() == nullptr ? "default" :
                                                     generator_.get_selected()->internal_name)
@@ -587,7 +587,7 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 	Notifications::publish(UI::NoteLoadingMessage(_("Generating random map…")));
 
 	log_info("============== Generating Map ==============\n");
-	log_info("ID:            %s\n", map_id_edit_.text().c_str());
+	log_info("ID:            %s\n", map_id_edit_.get_text().c_str());
 	log_info("Random number: %u\n", map_info.mapNumber);
 	log_info("Dimensions:    %d x %d\n", map_info.w, map_info.h);
 	log_info("Players:       %d\n", map_info.numPlayers);
@@ -628,7 +628,7 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 			lua.interpret_string(format("kWasteland = %d", map_info.wastelandRatio * 100));
 			lua.interpret_string(format("kIslandMode = %b", map_info.islandMode));
 			lua.interpret_string(format("kRandomNumber = %d", map_info.mapNumber));
-			lua.interpret_string(format("kMapID = \"%s\"", map_id_edit_.text()));
+			lua.interpret_string(format("kMapID = \"%s\"", map_id_edit_.get_text()));
 			lua.run_script(kAddOnDir + FileSystem::file_separator() +
 			               generator_.get_selected()->internal_name + FileSystem::file_separator() +
 			               "init.lua");
@@ -712,7 +712,7 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 void MainMenuNewRandomMapPanel::id_edit_box_changed() {
 	Widelands::UniqueRandomMapInfo map_info;
 
-	std::string str = map_id_edit_.text();
+	std::string str = map_id_edit_.get_text();
 
 	std::vector<std::string> world_names;
 	world_names.reserve(Widelands::Map::kOldWorldNames.size());
@@ -758,7 +758,7 @@ void MainMenuNewRandomMapPanel::id_edit_box_changed() {
 void MainMenuNewRandomMapPanel::nr_edit_box_changed() {
 
 	try {
-		std::string const text = map_number_edit_.text();
+		std::string const text = map_number_edit_.get_text();
 		std::stringstream sstrm(text);
 		unsigned int number;
 		sstrm >> number;

@@ -24,8 +24,8 @@
 #include "chat/chat.h"
 #include "ui_basic/box.h"
 #include "ui_basic/dropdown.h"
-#include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"
+#include "ui_basic/textinput.h"
 
 /**
  * Provides a panel that contains chat message scrollbar and a chat message
@@ -48,7 +48,7 @@ struct GameChatPanel : public UI::Panel {
 	Notifications::Signal<> aborted;
 
 	const std::string& get_edit_text() const {
-		return editbox.text();
+		return editbox.get_text();
 	}
 	void set_edit_text(const std::string& text) {
 		editbox.set_text(text);

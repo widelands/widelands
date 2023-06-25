@@ -16,7 +16,9 @@
  *
  */
 
-#include "ui_basic/multilineeditbox.h"
+#include "ui_basic/textinput.h"
+
+#include <algorithm>
 
 #include "base/utf8.h"
 #include "graphic/font_handler.h"
@@ -33,7 +35,7 @@
 
 namespace UI {
 
-struct MultilineEditbox::Data {
+struct AbstractTextInputPanel::Data {
 	Scrollbar scrollbar;
 
 	/// The text in the edit box
@@ -51,7 +53,7 @@ struct MultilineEditbox::Data {
 	uint32_t cursor_pos{0U};
 	std::string caret_image_path;
 
-	const int lineheight;
+	uint32_t scrolloffset{0U};
 
 	/// Maximum length of the text string, in bytes
 	const uint32_t maxbytes;
@@ -59,6 +61,7 @@ struct MultilineEditbox::Data {
 	enum class Mode { kNormal, kSelection };
 
 	Mode mode{Mode::kNormal};
+	bool password{false};
 
 	uint32_t selection_start{0U};
 	uint32_t selection_end{0U};
@@ -69,12 +72,11 @@ struct MultilineEditbox::Data {
 	WordWrap ww;
 	/*@}*/
 
-	explicit Data(MultilineEditbox& init_owner);
+	explicit Data(AbstractTextInputPanel& init_owner);
 	void refresh_ww();
 
 	void update();
 
-	void scroll_cursor_into_view();
 	void set_cursor_pos(uint32_t newpos);
 
 	uint32_t prev_char(uint32_t cursor);
@@ -90,16 +92,16 @@ struct MultilineEditbox::Data {
 
 	void calculate_selection_boundaries(uint32_t& start, uint32_t& end);
 
-	uint32_t snap_to_char(std::string& txt, uint32_t cursor);
+	uint32_t snap_to_char(const std::string& txt, uint32_t cursor);
 
 private:
-	MultilineEditbox& owner;
+	AbstractTextInputPanel& owner;
 };
 
 /**
  * Initialize an editbox that supports multiline strings.
  */
-MultilineEditbox::MultilineEditbox(
+AbstractTextInputPanel::AbstractTextInputPanel(
    Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const UI::PanelStyle style)
    : Panel(parent, style, x, y, w, h), d_(new Data(*this)) {
 	set_handle_mouse(true);
@@ -108,7 +110,11 @@ MultilineEditbox::MultilineEditbox(
 	set_handle_textinput();
 }
 
-MultilineEditbox::Data::Data(MultilineEditbox& init_owner)
+AbstractTextInputPanel::~AbstractTextInputPanel() {  // NOLINT
+	// Must be here because `Data` is an incomplete type in the header.
+}
+
+AbstractTextInputPanel::Data::Data(AbstractTextInputPanel& init_owner)
    : scrollbar(&init_owner,
                init_owner.get_w() - Scrollbar::kSize,
                0,
@@ -120,7 +126,6 @@ MultilineEditbox::Data::Data(MultilineEditbox& init_owner)
      caret_image_path(init_owner.panel_style_ == PanelStyle::kWui ?
                          "images/ui_basic/caret_wui.png" :
                          "images/ui_basic/caret_fs.png"),
-     lineheight(text_height(get_style().font())),
      maxbytes(std::min(g_gr->max_texture_size_for_font_rendering() *
                           g_gr->max_texture_size_for_font_rendering() /
                           (text_height(get_style().font()) * text_height(get_style().font())),
@@ -130,24 +135,40 @@ MultilineEditbox::Data::Data(MultilineEditbox& init_owner)
      owner(init_owner) {
 	scrollbar.moved.connect([&init_owner](int32_t a) { init_owner.scrollpos_changed(a); });
 
-	scrollbar.set_pagesize(owner.get_h() - 2 * lineheight);
-	scrollbar.set_singlestepsize(lineheight);
+	scrollbar.set_pagesize(owner.get_h() - 2 * ww.lineheight());
+	scrollbar.set_singlestepsize(ww.lineheight());
+}
+
+EditBox::EditBox(Panel* parent, int32_t x, int32_t y, uint32_t w, UI::PanelStyle style)
+   : AbstractTextInputPanel(parent,
+                            x,
+                            y,
+                            w,
+                            text_height(g_style_manager->editbox_style(style).font()) +
+                               2 * g_style_manager->editbox_style(style).background().margin(),
+                            style) {
+	d_->scrollbar.set_visible(false);
+}
+
+MultilineEditbox::MultilineEditbox(
+   UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style)
+   : AbstractTextInputPanel(parent, x, y, w, h, style) {
 }
 
 /**
  * Call this function whenever some part of the data changes that potentially
  * requires some redrawing.
  */
-void MultilineEditbox::Data::update() {
+void AbstractTextInputPanel::Data::update() {
 	ww_valid = false;
 }
 
-void MultilineEditbox::Data::reset_selection() {
+void AbstractTextInputPanel::Data::reset_selection() {
 	mode = Mode::kNormal;
 	selection_start = cursor_pos;
 	selection_end = cursor_pos;
 }
-void MultilineEditbox::Data::calculate_selection_boundaries(uint32_t& start, uint32_t& end) {
+void AbstractTextInputPanel::Data::calculate_selection_boundaries(uint32_t& start, uint32_t& end) {
 	start = snap_to_char(std::min(selection_start, selection_end));
 	end = std::max(selection_start, selection_end);
 	if (end < text.size()) {
@@ -155,16 +176,21 @@ void MultilineEditbox::Data::calculate_selection_boundaries(uint32_t& start, uin
 	}
 }
 
-void MultilineEditbox::Data::draw(RenderTarget& dst, bool with_caret) {
+void AbstractTextInputPanel::Data::draw(RenderTarget& dst, bool with_caret) {
 	uint32_t start;
 	uint32_t end;
 	calculate_selection_boundaries(start, end);
-	ww.draw(dst, Vector2i(0, -int32_t(scrollbar.get_scrollpos())), UI::Align::kLeft,
-	        with_caret ? cursor_pos : std::numeric_limits<uint32_t>::max(),
-	        mode == Data::Mode::kSelection, start, end, scrollbar.get_scrollpos(), caret_image_path);
+	int margin = get_style().background().margin();
+	ww.draw(dst, Vector2i(margin - scrolloffset, margin - scrollbar.get_scrollpos()),
+	        UI::Align::kLeft, with_caret ? cursor_pos : std::numeric_limits<uint32_t>::max(),
+	        with_caret && mode == Data::Mode::kSelection,
+	        owner.should_expand_selection() ?
+              std::optional<std::pair<int32_t, int32_t>>(std::make_pair(0, owner.get_h())) :
+              std::nullopt,
+	        start, end, scrollbar.get_scrollpos(), caret_image_path);
 }
 
-void MultilineEditbox::layout() {
+void AbstractTextInputPanel::layout() {
 	Panel::layout();
 	d_->scrollbar.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
 }
@@ -172,27 +198,26 @@ void MultilineEditbox::layout() {
 /**
  * Return the text currently stored by the editbox.
  */
-const std::string& MultilineEditbox::get_text() const {
+const std::string& AbstractTextInputPanel::get_text() const {
 	return d_->text;
 }
 
 /**
  * Replace the currently stored text with something else.
  */
-void MultilineEditbox::set_text(const std::string& text) {
+void AbstractTextInputPanel::set_text(const std::string& text) {
 	if (text == d_->text) {
 		return;
 	}
 
 	d_->reset_selection();
 	d_->text = text;
-	while (d_->text.size() > d_->maxbytes) {
-		d_->erase_bytes(d_->prev_char(d_->text.size()), d_->text.size());
-	}
+
+	escape_illegal_characters();
 
 	d_->set_cursor_pos(d_->text.size());
 	d_->update();
-	d_->scroll_cursor_into_view();
+	scroll_cursor_into_view();
 
 	changed();
 }
@@ -200,7 +225,7 @@ void MultilineEditbox::set_text(const std::string& text) {
 /**
  * Erase the given range of bytes, adjust the cursor position, and update.
  */
-void MultilineEditbox::Data::erase_bytes(uint32_t start, uint32_t end) {
+void AbstractTextInputPanel::Data::erase_bytes(uint32_t start, uint32_t end) {
 	assert(start <= end);
 	assert(end <= text.size());
 
@@ -218,7 +243,7 @@ void MultilineEditbox::Data::erase_bytes(uint32_t start, uint32_t end) {
 /**
  * Find the starting byte of the previous character
  */
-uint32_t MultilineEditbox::Data::prev_char(uint32_t cursor) {
+uint32_t AbstractTextInputPanel::Data::prev_char(uint32_t cursor) {
 	assert(cursor <= text.size());
 
 	if (cursor == 0) {
@@ -236,7 +261,7 @@ uint32_t MultilineEditbox::Data::prev_char(uint32_t cursor) {
 /**
  * Find the starting byte of the next character
  */
-uint32_t MultilineEditbox::Data::next_char(uint32_t cursor) {
+uint32_t AbstractTextInputPanel::Data::next_char(uint32_t cursor) {
 
 	if (cursor >= text.size()) {
 		return cursor;
@@ -252,7 +277,7 @@ uint32_t MultilineEditbox::Data::next_char(uint32_t cursor) {
 /**
  * Return the starting offset of the (multi-byte) character that @p cursor points to.
  */
-uint32_t MultilineEditbox::Data::snap_to_char(uint32_t cursor) {
+uint32_t AbstractTextInputPanel::Data::snap_to_char(uint32_t cursor) {
 	if (cursor >= text.size()) {
 		return cursor;
 	}
@@ -263,7 +288,7 @@ uint32_t MultilineEditbox::Data::snap_to_char(uint32_t cursor) {
 	return cursor;
 }
 
-uint32_t MultilineEditbox::Data::snap_to_char(std::string& txt, uint32_t cursor) {
+uint32_t AbstractTextInputPanel::Data::snap_to_char(const std::string& txt, uint32_t cursor) {
 	if (cursor >= txt.size()) {
 		return cursor;
 	}
@@ -274,8 +299,8 @@ uint32_t MultilineEditbox::Data::snap_to_char(std::string& txt, uint32_t cursor)
 	return cursor;
 }
 
-std::pair<uint32_t, uint32_t> MultilineEditbox::Data::word_boundary(uint32_t cursor,
-                                                                    bool require_non_blank) {
+std::pair<uint32_t, uint32_t> AbstractTextInputPanel::Data::word_boundary(uint32_t cursor,
+                                                                          bool require_non_blank) {
 	uint32_t start = snap_to_char(cursor);
 	uint32_t end = start;
 
@@ -309,7 +334,7 @@ std::pair<uint32_t, uint32_t> MultilineEditbox::Data::word_boundary(uint32_t cur
 	return {start, end};
 }
 
-std::pair<uint32_t, uint32_t> MultilineEditbox::Data::paragraph_boundary(uint32_t cursor) {
+std::pair<uint32_t, uint32_t> AbstractTextInputPanel::Data::paragraph_boundary(uint32_t cursor) {
 	uint32_t start = snap_to_char(cursor);
 	uint32_t end = start;
 
@@ -327,7 +352,7 @@ std::pair<uint32_t, uint32_t> MultilineEditbox::Data::paragraph_boundary(uint32_
 /**
  * The mouse was clicked on this editbox
  */
-bool MultilineEditbox::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
+bool AbstractTextInputPanel::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		const uint32_t time = SDL_GetTicks();
 		const bool is_multiclick = (time - multiclick_timer_) < DOUBLE_CLICK_INTERVAL;
@@ -364,7 +389,7 @@ bool MultilineEditbox::handle_mousepress(const uint8_t btn, int32_t x, int32_t y
 		const uint32_t old_caret_pos = d_->cursor_pos;
 		const uint32_t old_selection_start = d_->selection_start;
 		const uint32_t old_selection_end = d_->selection_end;
-		const MultilineEditbox::Data::Mode old_mode = d_->mode;
+		const AbstractTextInputPanel::Data::Mode old_mode = d_->mode;
 
 		d_->reset_selection();
 		set_caret_to_cursor_pos(x, y);
@@ -372,7 +397,7 @@ bool MultilineEditbox::handle_mousepress(const uint8_t btn, int32_t x, int32_t y
 
 		std::string text_to_insert = SDL_GetPrimarySelectionText();
 
-		if (old_mode == MultilineEditbox::Data::Mode::kSelection &&
+		if (old_mode == AbstractTextInputPanel::Data::Mode::kSelection &&
 		    ((old_selection_start <= new_caret_pos && new_caret_pos <= old_selection_end) ||
 		     (old_selection_end <= new_caret_pos && new_caret_pos <= old_selection_start))) {
 			text_to_insert.clear();  // Can't paste into the active selection.
@@ -402,7 +427,7 @@ bool MultilineEditbox::handle_mousepress(const uint8_t btn, int32_t x, int32_t y
 
 	return false;
 }
-bool MultilineEditbox::handle_mousemove(
+bool AbstractTextInputPanel::handle_mousemove(
    uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
 	// state != 0 -> mouse button is pressed
 	if ((state != 0u) && get_can_focus()) {
@@ -414,7 +439,12 @@ bool MultilineEditbox::handle_mousemove(
 
 	return Panel::handle_mousemove(state, x, y, xdiff, ydiff);
 }
-void MultilineEditbox::set_caret_to_cursor_pos(int32_t x, int32_t y) {
+
+bool AbstractTextInputPanel::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
+	return d_->scrollbar.handle_mousewheel(x, y, modstate);
+}
+
+void AbstractTextInputPanel::set_caret_to_cursor_pos(int32_t x, int32_t y) {
 	y += d_->scrollbar.get_scrollpos();
 
 	unsigned previous_line_index = d_->ww.offset_of_line_at(y);
@@ -432,9 +462,9 @@ void MultilineEditbox::set_caret_to_cursor_pos(int32_t x, int32_t y) {
 	d_->set_cursor_pos(previous_line_index + current_line_index);
 }
 
-int MultilineEditbox::approximate_cursor(std::string& line,
-                                         int32_t cursor_pos_x,
-                                         int approx_caret_pos) const {
+int AbstractTextInputPanel::approximate_cursor(const std::string& line,
+                                               int32_t cursor_pos_x,
+                                               int approx_caret_pos) const {
 	static constexpr int error = 4;
 
 	// approximate using the first guess as start and increasing/decreasing text until error is small
@@ -451,16 +481,16 @@ int MultilineEditbox::approximate_cursor(std::string& line,
 	return d_->snap_to_char(line, approx_caret_pos);
 }
 
-int MultilineEditbox::calculate_text_width(std::string& text, int pos) const {
+int AbstractTextInputPanel::calculate_text_width(const std::string& text, int pos) const {
 	std::string prefix = text.substr(0, d_->snap_to_char(text, pos));
 	return d_->ww.text_width_of(prefix);
 }
 
-bool MultilineEditbox::has_selection() const {
+bool AbstractTextInputPanel::has_selection() const {
 	return (d_->mode == Data::Mode::kSelection);
 }
 
-std::string MultilineEditbox::get_selected_text() {
+std::string AbstractTextInputPanel::get_selected_text() {
 	assert(d_->mode == Data::Mode::kSelection);
 	uint32_t start;
 	uint32_t end;
@@ -468,7 +498,7 @@ std::string MultilineEditbox::get_selected_text() {
 	return d_->text.substr(start, end - start);
 }
 
-void MultilineEditbox::replace_selected_text(const std::string& text) {
+void AbstractTextInputPanel::replace_selected_text(const std::string& text) {
 	assert(d_->mode == Data::Mode::kSelection);
 	uint32_t start;
 	uint32_t end;
@@ -481,18 +511,18 @@ void MultilineEditbox::replace_selected_text(const std::string& text) {
 	select_until(get_caret_pos() + text.size());
 }
 
-size_t MultilineEditbox::get_caret_pos() const {
+size_t AbstractTextInputPanel::get_caret_pos() const {
 	return d_->cursor_pos;
 }
 
-void MultilineEditbox::set_caret_pos(const size_t caret) const {
+void AbstractTextInputPanel::set_caret_pos(const size_t caret) const {
 	d_->set_cursor_pos(d_->snap_to_char(caret));
 }
 
 /**
  * This is called by the UI code whenever a key press or release arrives
  */
-bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
+bool AbstractTextInputPanel::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		if (matches_shortcut(KeyboardShortcut::kCommonTextPaste, code) &&
 		    (SDL_HasClipboardText() != 0u)) {
@@ -566,14 +596,14 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 						}
 						newpos = prev;
 					}
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(newpos);
 					} else {
 						d_->reset_selection();
 					}
 					d_->set_cursor_pos(newpos);
 				} else {
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(d_->prev_char(d_->cursor_pos));
 					} else {
 						d_->reset_selection();
@@ -595,14 +625,14 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 					while (newpos < d_->text.size() && (isspace(d_->text[newpos]) == 0)) {
 						newpos = d_->next_char(newpos);
 					}
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(newpos);
 					} else {
 						d_->reset_selection();
 					}
 					d_->set_cursor_pos(newpos);
 				} else {
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(d_->next_char(d_->cursor_pos));
 					} else {
 						d_->reset_selection();
@@ -614,6 +644,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_DOWN:
 			if (d_->cursor_pos < d_->text.size()) {
+				d_->ww.enter_cursor_movement_mode();
 				d_->refresh_ww();
 
 				uint32_t cursorline;
@@ -632,14 +663,14 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 					} else {
 						newpos = d_->snap_to_char(newpos);
 					}
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(newpos);
 					} else {
 						d_->reset_selection();
 					}
 					d_->set_cursor_pos(newpos);
 				} else {
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(d_->text.size());
 					} else {
 						d_->reset_selection();
@@ -651,6 +682,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_UP:
 			if (d_->cursor_pos > 0) {
+				d_->ww.enter_cursor_movement_mode();
 				d_->refresh_ww();
 
 				uint32_t cursorline;
@@ -666,14 +698,14 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 					} else {
 						newpos = d_->snap_to_char(newpos);
 					}
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(newpos);
 					} else {
 						d_->reset_selection();
 					}
 					d_->set_cursor_pos(newpos);
 				} else {
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(0);
 					} else {
 						d_->reset_selection();
@@ -685,7 +717,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_HOME:
 			if ((code.mod & KMOD_CTRL) != 0) {
-				if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+				if ((code.mod & KMOD_SHIFT) != 0) {
 					select_until(0);
 				} else {
 					d_->reset_selection();
@@ -697,7 +729,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 				uint32_t cursorpos = 0;
 				d_->ww.calc_wrapped_pos(d_->cursor_pos, cursorline, cursorpos);
 
-				if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+				if ((code.mod & KMOD_SHIFT) != 0) {
 					select_until(d_->ww.line_offset(cursorline));
 				} else {
 					d_->reset_selection();
@@ -708,7 +740,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_END:
 			if ((code.mod & KMOD_CTRL) != 0) {
-				if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+				if ((code.mod & KMOD_SHIFT) != 0) {
 					select_until(d_->text.size());
 				} else {
 					d_->reset_selection();
@@ -722,14 +754,14 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 				d_->ww.calc_wrapped_pos(d_->cursor_pos, cursorline, cursorpos);
 
 				if (cursorline + 1 < d_->ww.nrlines()) {
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(d_->prev_char(d_->ww.line_offset(cursorline + 1)));
 					} else {
 						d_->reset_selection();
 					}
 					d_->set_cursor_pos(d_->prev_char(d_->ww.line_offset(cursorline + 1)));
 				} else {
-					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						select_until(d_->text.size());
 					} else {
 						d_->reset_selection();
@@ -739,12 +771,15 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			break;
 
+		case SDLK_ESCAPE:
+			cancel();
+			return true;
+
 		case SDLK_RETURN:
-			if ((SDL_GetModState() & KMOD_CTRL) != 0) {
+			if ((code.mod & KMOD_CTRL) != 0) {
 				return false;
 			}
 			d_->insert(d_->cursor_pos, "\n");
-			d_->update();
 			d_->reset_selection();
 			changed();
 			break;
@@ -758,7 +793,67 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 	return Panel::handle_key(down, code);
 }
 
-void MultilineEditbox::copy_selected_text() const {
+bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
+	if (down) {
+		switch (code.sym) {
+		case SDLK_RETURN:
+			if ((code.mod & KMOD_CTRL) != 0) {
+				return false;
+			}
+
+			// Save history if active and text is not empty
+			if (history_active_ && !d_->text.empty()) {
+				for (unsigned i = kHistorySize - 1; i > 0; --i) {
+					history_[i] = history_[i - 1];
+				}
+				history_[0] = d_->text;
+				history_position_ = -1;
+			}
+
+			ok();
+			return true;
+
+		case SDLK_UP:
+			// Load entry from history if active and text is not empty
+			if (history_active_) {
+				if (history_position_ > static_cast<int>(kHistorySize) - 2) {
+					history_position_ = kHistorySize - 2;
+				}
+				if (!history_[++history_position_].empty()) {
+					d_->text = history_[history_position_];
+					set_caret_pos(d_->text.size());
+					d_->reset_selection();
+					changed();
+					d_->update();
+				}
+			}
+			return true;
+
+		case SDLK_DOWN:
+			// Load entry from history if active and text is not equivalent to the current one
+			if (history_active_) {
+				if (history_position_ < 1) {
+					history_position_ = 1;
+				}
+				if (history_[--history_position_] != d_->text) {
+					d_->text = history_[history_position_];
+					set_caret_pos(d_->text.size());
+					d_->reset_selection();
+					changed();
+					d_->update();
+				}
+			}
+			return true;
+
+		default:
+			break;
+		}
+	}
+
+	return AbstractTextInputPanel::handle_key(down, code);
+}
+
+void AbstractTextInputPanel::copy_selected_text() const {
 	uint32_t start;
 	uint32_t end;
 	d_->calculate_selection_boundaries(start, end);
@@ -768,7 +863,7 @@ void MultilineEditbox::copy_selected_text() const {
 
 	SDL_SetClipboardText(selected_text.c_str());
 }
-void MultilineEditbox::update_primary_selection_buffer() const {
+void AbstractTextInputPanel::update_primary_selection_buffer() const {
 #if HAS_PRIMARY_SELECTION_BUFFER
 	uint32_t start;
 	uint32_t end;
@@ -783,7 +878,7 @@ void MultilineEditbox::update_primary_selection_buffer() const {
 /**
  * Selects text from @p cursor until @p end
  */
-void MultilineEditbox::select_until(uint32_t end) const {
+void AbstractTextInputPanel::select_until(uint32_t end) const {
 	if (d_->mode == Data::Mode::kNormal) {
 		d_->selection_start = d_->cursor_pos;
 		d_->mode = Data::Mode::kSelection;
@@ -791,7 +886,7 @@ void MultilineEditbox::select_until(uint32_t end) const {
 	d_->selection_end = end;
 	update_primary_selection_buffer();
 }
-void MultilineEditbox::delete_selected_text() const {
+void AbstractTextInputPanel::delete_selected_text() const {
 	uint32_t start;
 	uint32_t end;
 	d_->calculate_selection_boundaries(start, end);
@@ -800,7 +895,7 @@ void MultilineEditbox::delete_selected_text() const {
 	d_->reset_selection();
 }
 
-bool MultilineEditbox::handle_textinput(const std::string& input_text) {
+bool AbstractTextInputPanel::handle_textinput(const std::string& input_text) {
 	if (d_->mode == Data::Mode::kSelection) {
 		delete_selected_text();
 	}
@@ -808,7 +903,6 @@ bool MultilineEditbox::handle_textinput(const std::string& input_text) {
 		d_->insert(d_->cursor_pos, input_text);
 		d_->reset_selection();
 		changed();
-		d_->update();
 	}
 	return true;
 }
@@ -816,7 +910,7 @@ bool MultilineEditbox::handle_textinput(const std::string& input_text) {
 /**
  * Grab the focus and redraw.
  */
-void MultilineEditbox::focus(bool topcaller) {
+void AbstractTextInputPanel::focus(bool topcaller) {
 	Panel::focus(topcaller);
 	d_->ww.focus();
 }
@@ -824,11 +918,11 @@ void MultilineEditbox::focus(bool topcaller) {
 /**
  * Redraw the Editbox
  */
-void MultilineEditbox::draw(RenderTarget& dst) {
+void AbstractTextInputPanel::draw(RenderTarget& dst) {
 	draw_background(dst, d_->get_style().background());
 
 	// Draw border.
-	if (get_w() >= 4 && get_h() >= 4) {
+	if (get_w() >= 4 && get_h() >= 4 && !warning_) {
 		static const RGBColor black(0, 0, 0);
 
 		// bottom edge
@@ -841,6 +935,24 @@ void MultilineEditbox::draw(RenderTarget& dst) {
 		// left edge
 		dst.fill_rect(Recti(0, 0, 1, get_h() - 1), black);
 		dst.fill_rect(Recti(1, 0, 1, get_h() - 2), black);
+	} else {
+		// Draw a red border for warnings.
+		static const RGBColor red(255, 22, 22);
+
+		// bottom edge
+		dst.fill_rect(Recti(0, get_h() - 2, get_w(), 2), red);
+		// right edge
+		dst.fill_rect(Recti(get_w() - 2, 0, 2, get_h() - 2), red);
+		// top edge
+		dst.fill_rect(Recti(0, 0, get_w() - 1, 1), red);
+		dst.fill_rect(Recti(0, 1, get_w() - 2, 1), red);
+		dst.brighten_rect(Recti(0, 0, get_w() - 1, 1), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(0, 1, get_w() - 2, 1), BUTTON_EDGE_BRIGHT_FACTOR);
+		// left edge
+		dst.fill_rect(Recti(0, 0, 1, get_h() - 1), red);
+		dst.fill_rect(Recti(1, 0, 1, get_h() - 2), red);
+		dst.brighten_rect(Recti(0, 0, 1, get_h() - 1), BUTTON_EDGE_BRIGHT_FACTOR);
+		dst.brighten_rect(Recti(1, 0, 1, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 	}
 
 	if (has_focus()) {
@@ -849,8 +961,9 @@ void MultilineEditbox::draw(RenderTarget& dst) {
 
 	d_->refresh_ww();
 
-	d_->ww.set_draw_caret(has_focus());
-	d_->draw(dst, has_focus());
+	const bool draw_caret = has_focus() && has_top_level_focus();
+	d_->ww.set_draw_caret(draw_caret);
+	d_->draw(dst, draw_caret);
 }
 
 /**
@@ -860,18 +973,23 @@ void MultilineEditbox::draw(RenderTarget& dst) {
  * If @p where is equal to the current cursor position, then the cursor is moved.
  * This is usually what one wants.
  */
-void MultilineEditbox::Data::insert(uint32_t where, const std::string& s) {
+void AbstractTextInputPanel::Data::insert(uint32_t where, const std::string& s) {
 	text.insert(where, s);
+	owner.escape_illegal_characters();
+
 	if (cursor_pos >= where) {
 		set_cursor_pos(cursor_pos + s.size());
 	}
+
+	update();
+	owner.scroll_cursor_into_view();
 }
 
 /**
  * Change the position of the cursor, cause a display refresh and scroll the cursor
  * into view when necessary.
  */
-void MultilineEditbox::Data::set_cursor_pos(uint32_t newpos) {
+void AbstractTextInputPanel::Data::set_cursor_pos(uint32_t newpos) {
 	assert(newpos <= text.size());
 
 	if (cursor_pos == newpos) {
@@ -880,51 +998,103 @@ void MultilineEditbox::Data::set_cursor_pos(uint32_t newpos) {
 
 	cursor_pos = newpos;
 
-	scroll_cursor_into_view();
+	owner.scroll_cursor_into_view();
 }
 
 /**
  * Ensure that the cursor is visible.
  */
-void MultilineEditbox::Data::scroll_cursor_into_view() {
-	refresh_ww();
+void AbstractTextInputPanel::scroll_cursor_into_view() {
+	const int margin = d_->get_style().background().margin();
+	if (get_inner_h() <= 2 * margin) {
+		return;  // Height not yet initialized.
+	}
+
+	d_->refresh_ww();
 
 	uint32_t cursorline;
 	uint32_t cursorpos = 0;
-	ww.calc_wrapped_pos(cursor_pos, cursorline, cursorpos);
+	d_->ww.calc_wrapped_pos(d_->cursor_pos, cursorline, cursorpos);
 
-	int32_t top = cursorline * lineheight;
-	if (top < int32_t(scrollbar.get_scrollpos())) {
-		scrollbar.set_scrollpos(top - lineheight);
-	} else if (top + lineheight > int32_t(scrollbar.get_scrollpos()) + owner.get_h()) {
-		scrollbar.set_scrollpos(top - owner.get_h() + 2 * lineheight);
+	int32_t top = cursorline * d_->ww.lineheight();
+	int32_t bottom = top + d_->ww.lineheight();
+
+	if (top - static_cast<int32_t>(d_->scrollbar.get_scrollpos()) < 0) {
+		d_->scrollbar.set_scrollpos(top);
+	} else if (bottom - static_cast<int32_t>(d_->scrollbar.get_scrollpos()) > get_h() - 2 * margin) {
+		d_->scrollbar.set_scrollpos(bottom - get_h() + 2 * margin);
+	}
+}
+
+void EditBox::scroll_cursor_into_view() {
+	AbstractTextInputPanel::scroll_cursor_into_view();
+	const int margin = d_->get_style().background().margin();
+
+	if (get_inner_w() <= 2 * margin) {
+		return;  // Width not yet initialized.
+	}
+
+	int32_t real_caret_x = calculate_text_width(get_text(), get_caret_pos());
+
+	if (real_caret_x - static_cast<int32_t>(d_->scrolloffset) < 0) {
+		d_->scrolloffset = real_caret_x;
+	} else if (real_caret_x - static_cast<int32_t>(d_->scrolloffset) > get_w() - 2 * margin) {
+		d_->scrolloffset = real_caret_x - get_w() + 2 * margin;
 	}
 }
 
 /**
  * Callback function called by the scrollbar.
  */
-void MultilineEditbox::scrollpos_changed(int32_t /* pos */) {
+void AbstractTextInputPanel::scrollpos_changed(int32_t /* pos */) {
+}
+
+void AbstractTextInputPanel::set_password(bool password) {
+	d_->password = password;
+}
+bool AbstractTextInputPanel::is_password() const {
+	return d_->password;
+}
+
+void AbstractTextInputPanel::escape_illegal_characters() const {
+	while (d_->text.size() > d_->maxbytes) {
+		d_->erase_bytes(d_->prev_char(d_->text.size()), d_->text.size());
+	}
+}
+void EditBox::escape_illegal_characters() const {
+	std::replace(d_->text.begin(), d_->text.end(), '\n', ' ');
+
+	AbstractTextInputPanel::escape_illegal_characters();
+}
+
+uint32_t AbstractTextInputPanel::max_text_width_for_wrap() const {
+	return get_w() > Scrollbar::kSize ? get_w() - Scrollbar::kSize : 0U;
+}
+uint32_t EditBox::max_text_width_for_wrap() const {
+	return std::numeric_limits<uint32_t>::max();
 }
 
 /**
  * Re-wrap the string and update the scrollbar range accordingly.
  */
-void MultilineEditbox::Data::refresh_ww() {
-	if (int32_t(ww.wrapwidth()) != owner.get_w() - Scrollbar::kSize) {
-		ww_valid = false;
-	}
+void AbstractTextInputPanel::Data::refresh_ww() {
+	const uint32_t new_wrap_width = owner.max_text_width_for_wrap();
+	ww_valid &= ww.wrapwidth() == new_wrap_width;
 	if (ww_valid) {
 		return;
 	}
 
-	ww.set_wrapwidth(owner.get_w() - Scrollbar::kSize);
+	ww.set_wrapwidth(new_wrap_width);
 
-	ww.wrap(text);
+	if (password) {
+		ww.wrap(std::string(text.size(), '*'));
+	} else {
+		ww.wrap(text);
+	}
 	ww_valid = true;
 
 	int32_t textheight = ww.height();
-	scrollbar.set_steps(textheight - owner.get_h());
+	scrollbar.set_steps(textheight - owner.get_h() + 2 * get_style().background().margin());
 }
 
 }  // namespace UI

@@ -246,6 +246,10 @@ public:
 		return true;
 	}
 
+	UI::Box* toolbar();
+	// Sets the toolbar's position to the bottom middle and configures its background images
+	void finalize_toolbar();
+
 protected:
 	// For referencing the items in mapviewmenu_
 	enum class MapviewMenuEntry { kMinimap, kIncreaseZoom, kDecreaseZoom, kResetZoom, kQuicknav };
@@ -312,16 +316,11 @@ protected:
 		return sel_.pic;
 	}
 
-	// Sets the toolbar's position to the bottom middle and configures its background images
-	void finalize_toolbar();
-
 	ChatOverlay* chat_overlay() {
 		return chat_overlay_;
 	}
 
 	ChatColorForPlayer color_functor() const;
-
-	UI::Box* toolbar();
 
 	// Returns the information which overlay text should currently be drawn.
 	// Returns InfoToDraw::kNone if not 'show'

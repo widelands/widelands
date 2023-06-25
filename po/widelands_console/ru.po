@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-28 03:03+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2022-2023\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
@@ -205,7 +205,7 @@ msgstr "Должно ли отображаться предупреждение 
 
 #: ../../src/wlapplication_messages.cc:119
 msgid "Start building a road after placing a flag."
-msgstr "Начинать строительство дорог сразу после установки флага."
+msgstr "Начинать строительство дороги сразу после установки флага."
 
 #: ../../src/wlapplication_messages.cc:123
 msgid "Bitmask of display flags to set for new games."

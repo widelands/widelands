@@ -87,10 +87,12 @@ public:
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	int indicate(lua_State* L);
 #endif
+	int create_child(lua_State* L);
 
 	/*
 	 * C Methods
 	 */
+	static UI::Panel* do_create_child(lua_State* L, UI::Panel* parent, UI::Box* as_box);
 };
 
 class LuaButton : public LuaPanel {
@@ -246,6 +248,7 @@ public:
 	int get_is_building_road(lua_State* L);
 	int get_auto_roadbuilding_mode(lua_State* L);
 	int get_is_animating(lua_State*);
+	int get_toolbar(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -259,6 +262,7 @@ public:
 	int is_visible(lua_State* L);
 	int mouse_to_field(lua_State* L);
 	int mouse_to_pixel(lua_State* L);
+	int update_toolbar(lua_State* L);
 
 	/*
 	 * C Methods

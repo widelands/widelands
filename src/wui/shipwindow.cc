@@ -163,9 +163,6 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 
 	set_center_panel(&vbox_);
 	set_thinks(true);
-	set_fastclick_panel(btn_goto_);
-	move_out_of_the_way();
-	warp_mouse_to_fastclick_panel();
 
 	shipnotes_subscriber_ =
 	   Notifications::subscribe<Widelands::NoteShip>([this](const Widelands::NoteShip& note) {
@@ -195,6 +192,11 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	navigation_box_.set_visible(false);
 	btn_cancel_expedition_->set_enabled(false);
 	update_destination_button(ship);
+	set_button_visibility();
+
+	move_out_of_the_way();
+	set_fastclick_panel(btn_goto_);
+	warp_mouse_to_fastclick_panel();
 
 	initialization_complete();
 }
@@ -324,9 +326,9 @@ void ShipWindow::act_rename() {
 	}
 	if (Widelands::Game* game = ibase_.get_game()) {
 		game->send_player_ship_port_name(
-		   ship->owner().player_number(), ship->serial(), name_field_->text());
+		   ship->owner().player_number(), ship->serial(), name_field_->get_text());
 	} else {
-		ship->set_shipname(name_field_->text());
+		ship->set_shipname(name_field_->get_text());
 	}
 }
 
