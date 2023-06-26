@@ -36,6 +36,7 @@
 #include "ui_basic/toolbar_setup.h"
 #include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
+#include "wui/fieldaction.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_client_disconnected.h"
 #include "wui/game_diplomacy_menu.h"
@@ -43,7 +44,6 @@
 #include "wui/game_main_menu_save_game.h"
 #include "wui/game_options_sound_menu.h"
 #include "wui/game_summary.h"
-#include "wui/fieldaction.h"
 #include "wui/info_panel.h"
 #include "wui/interactive_player.h"
 #include "wui/toolbar.h"
@@ -691,7 +691,8 @@ bool InteractiveGameBase::try_show_ship_windows() {
 			assert(ship != nullptr);  // FindBobShip should have returned only ships
 			if (can_see(ship->owner().player_number())) {
 				manageable.push_back(ship);
-			} else if (get_player() != nullptr && get_player()->is_hostile(ship->owner()) && ship->can_be_attacked()) {
+			} else if (get_player() != nullptr && get_player()->is_hostile(ship->owner()) &&
+			           ship->can_be_attacked()) {
 				attackable.push_back(ship);
 			}
 		}

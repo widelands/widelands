@@ -1227,17 +1227,20 @@ class ShipSelectionWindow : public UI::UniqueWindow {
 	static constexpr int kListHeight = 200;
 
 public:
-	ShipSelectionWindow(InteractiveBase* ibase, UI::UniqueWindow::Registry* registry, const Widelands::Coords& node,
-		const std::vector<Widelands::Ship*>& manageable, const std::vector<Widelands::Ship*>& attackable)
-	: UI::UniqueWindow(ibase, UI::WindowStyle::kWui, "ship_selection", registry, 0, 0, _("Select Ship")),
-	ibase_(*ibase),
-	node_(node),
-	hbox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
-	box_manageable_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-	box_attackable_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-	list_manageable_(&box_manageable_, 0, 0, kListWidth, kListHeight, UI::PanelStyle::kWui),
-	list_attackable_(&box_attackable_, 0, 0, kListWidth, kListHeight, UI::PanelStyle::kWui)
-	{
+	ShipSelectionWindow(InteractiveBase* ibase,
+	                    UI::UniqueWindow::Registry* registry,
+	                    const Widelands::Coords& node,
+	                    const std::vector<Widelands::Ship*>& manageable,
+	                    const std::vector<Widelands::Ship*>& attackable)
+	   : UI::UniqueWindow(
+	        ibase, UI::WindowStyle::kWui, "ship_selection", registry, 0, 0, _("Select Ship")),
+	     ibase_(*ibase),
+	     node_(node),
+	     hbox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+	     box_manageable_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+	     box_attackable_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+	     list_manageable_(&box_manageable_, 0, 0, kListWidth, kListHeight, UI::PanelStyle::kWui),
+	     list_attackable_(&box_attackable_, 0, 0, kListWidth, kListHeight, UI::PanelStyle::kWui) {
 		for (Widelands::Ship* ship : manageable) {
 			list_manageable_.add(ship->get_shipname(), ship, ship->descr().icon());
 		}
@@ -1246,8 +1249,10 @@ public:
 		}
 
 		if (ibase_.get_player() != nullptr) {
-			box_manageable_.add(new UI::Textarea(&box_manageable_, UI::PanelStyle::kWui, UI::FontStyle::kWuiInfoPanelHeading,
-					_("Own Ships"), UI::Align::kCenter), UI::Box::Resizing::kFullSize);
+			box_manageable_.add(new UI::Textarea(&box_manageable_, UI::PanelStyle::kWui,
+			                                     UI::FontStyle::kWuiInfoPanelHeading, _("Own Ships"),
+			                                     UI::Align::kCenter),
+			                    UI::Box::Resizing::kFullSize);
 			box_manageable_.add_space(kPadding);
 		}
 #ifndef NDEBUG
@@ -1257,8 +1262,10 @@ public:
 #endif
 		box_manageable_.add(&list_manageable_, UI::Box::Resizing::kExpandBoth);
 
-		box_attackable_.add(new UI::Textarea(&box_attackable_, UI::PanelStyle::kWui, UI::FontStyle::kWuiInfoPanelHeading,
-				_("Attackable Ships"), UI::Align::kCenter), UI::Box::Resizing::kFullSize);
+		box_attackable_.add(new UI::Textarea(&box_attackable_, UI::PanelStyle::kWui,
+		                                     UI::FontStyle::kWuiInfoPanelHeading,
+		                                     _("Attackable Ships"), UI::Align::kCenter),
+		                    UI::Box::Resizing::kFullSize);
 		box_attackable_.add_space(kPadding);
 		box_attackable_.add(&list_attackable_, UI::Box::Resizing::kExpandBoth);
 
@@ -1274,8 +1281,10 @@ public:
 
 		list_manageable_.selected.connect([this](uint32_t index) { clicked_manageable(index); });
 		list_attackable_.selected.connect([this](uint32_t index) { clicked_attackable(index); });
-		list_manageable_.double_clicked.connect([this](uint32_t index) { clicked_manageable(index); });
-		list_attackable_.double_clicked.connect([this](uint32_t index) { clicked_attackable(index); });
+		list_manageable_.double_clicked.connect(
+		   [this](uint32_t index) { clicked_manageable(index); });
+		list_attackable_.double_clicked.connect(
+		   [this](uint32_t index) { clicked_attackable(index); });
 
 		set_center_panel(&hbox_);
 		set_fastclick_panel(manageable.empty() ? &list_attackable_ : &list_manageable_);
@@ -1316,7 +1325,10 @@ private:
 	UI::Listselect<Widelands::OPtr<Widelands::Ship>> list_attackable_;
 };
 
-void show_ship_selection_window(InteractiveBase* ibase, UI::UniqueWindow::Registry* registry, const Widelands::Coords& node,
-		const std::vector<Widelands::Ship*>& manageable, const std::vector<Widelands::Ship*>& attackable) {
+void show_ship_selection_window(InteractiveBase* ibase,
+                                UI::UniqueWindow::Registry* registry,
+                                const Widelands::Coords& node,
+                                const std::vector<Widelands::Ship*>& manageable,
+                                const std::vector<Widelands::Ship*>& attackable) {
 	new ShipSelectionWindow(ibase, registry, node, manageable, attackable);
 }

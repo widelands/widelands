@@ -207,7 +207,9 @@ public:
 	                                       bool avoid_fastclick,
 	                                       bool workarea_preview_wanted);
 	UI::UniqueWindow& show_ship_window(Widelands::Ship* ship);
-	virtual UI::Window* show_attack_window(const Widelands::Coords& /* coords */, Widelands::MapObject* /* object */, bool /* fastclick */) {
+	virtual UI::Window* show_attack_window(const Widelands::Coords& /* coords */,
+	                                       Widelands::MapObject* /* object */,
+	                                       bool /* fastclick */) {
 		NEVER_HERE();  // Overridden in InteractivePlayer
 	}
 

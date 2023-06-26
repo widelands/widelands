@@ -749,7 +749,9 @@ void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and
 	}
 }
 
-UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& coords, Widelands::MapObject* object, bool fastclick) {
+UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& coords,
+                                                  Widelands::MapObject* object,
+                                                  bool fastclick) {
 	if (object != nullptr) {
 		if (object->descr().type() >= Widelands::MapObjectType::BUILDING) {
 			upcast(Widelands::Building, building, object);
@@ -768,8 +770,8 @@ UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& coord
 		}
 
 		if (object->descr().type() == Widelands::MapObjectType::SHIP) {
-		    assert(player().is_hostile(object->owner()));
-		    assert(dynamic_cast<Widelands::Ship*>(object)->can_be_attacked());
+			assert(player().is_hostile(object->owner()));
+			assert(dynamic_cast<Widelands::Ship*>(object)->can_be_attacked());
 			UI::UniqueWindow::Registry& registry =
 			   unique_windows().get_registry(format("attack_ship_%u", object->serial()));
 			registry.open_window = [this, &registry, object, &coords, fastclick]() {
@@ -815,7 +817,8 @@ UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& coord
 		}
 	}
 
-	for (Widelands::Bob* bob = map[coords].get_first_bob(); bob != nullptr; bob = bob->get_next_bob()) {
+	for (Widelands::Bob* bob = map[coords].get_first_bob(); bob != nullptr;
+	     bob = bob->get_next_bob()) {
 		if (bob->descr().type() == Widelands::MapObjectType::SHIP &&
 		    player().is_hostile(bob->owner()) &&
 		    dynamic_cast<Widelands::Ship*>(bob)->can_be_attacked()) {
