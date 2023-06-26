@@ -83,8 +83,11 @@ public:
 
 	void popup_message(Widelands::MessageId, const Widelands::Message&) const;
 
-	/** Open an attack box for the building at the given position, if applicable. */
-	UI::Window* show_attack_window(const Widelands::Coords&, bool fastclick);
+	/**
+	 * Open an attack window for the provided map object. If no object is specified,
+	 * auto-detect what kind of attack window to show at the provided location.
+	 */
+	UI::Window* show_attack_window(const Widelands::Coords& coords, Widelands::MapObject* object, bool fastclick) override;
 
 	void edit_pinned_note(const Widelands::FCoords& c);
 

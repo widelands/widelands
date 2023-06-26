@@ -1218,3 +1218,105 @@ void show_field_action(InteractiveBase* const ibase,
 		return w.init();
 	}
 }
+
+// Ship selection window implementation
+
+class ShipSelectionWindow : public UI::UniqueWindow {
+	static constexpr int kPadding = 4;
+	static constexpr int kListWidth = 200;
+	static constexpr int kListHeight = 200;
+
+public:
+	ShipSelectionWindow(InteractiveBase* ibase, UI::UniqueWindow::Registry* registry, const Widelands::Coords& node,
+		const std::vector<Widelands::Ship*>& manageable, const std::vector<Widelands::Ship*>& attackable)
+	: UI::UniqueWindow(ibase, UI::WindowStyle::kWui, "ship_selection", registry, 0, 0, _("Select Ship")),
+	ibase_(*ibase),
+	node_(node),
+	hbox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+	box_manageable_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+	box_attackable_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+	list_manageable_(&box_manageable_, 0, 0, kListWidth, kListHeight, UI::PanelStyle::kWui),
+	list_attackable_(&box_attackable_, 0, 0, kListWidth, kListHeight, UI::PanelStyle::kWui)
+	{
+		for (Widelands::Ship* ship : manageable) {
+			list_manageable_.add(ship->get_shipname(), ship, ship->descr().icon());
+		}
+		for (Widelands::Ship* ship : attackable) {
+			list_attackable_.add(ship->get_shipname(), ship, ship->descr().icon());
+		}
+
+		if (ibase_.get_player() != nullptr) {
+			box_manageable_.add(new UI::Textarea(&box_manageable_, UI::PanelStyle::kWui, UI::FontStyle::kWuiInfoPanelHeading,
+					_("Own Ships"), UI::Align::kCenter), UI::Box::Resizing::kFullSize);
+			box_manageable_.add_space(kPadding);
+		}
+#ifndef NDEBUG
+		else {
+			assert(attackable.empty());
+		}
+#endif
+		box_manageable_.add(&list_manageable_, UI::Box::Resizing::kExpandBoth);
+
+		box_attackable_.add(new UI::Textarea(&box_attackable_, UI::PanelStyle::kWui, UI::FontStyle::kWuiInfoPanelHeading,
+				_("Attackable Ships"), UI::Align::kCenter), UI::Box::Resizing::kFullSize);
+		box_attackable_.add_space(kPadding);
+		box_attackable_.add(&list_attackable_, UI::Box::Resizing::kExpandBoth);
+
+		hbox_.add(&box_manageable_, UI::Box::Resizing::kFullSize);
+		if (manageable.empty()) {
+			box_manageable_.set_visible(false);
+		} else if (attackable.empty()) {
+			box_attackable_.set_visible(false);
+		} else {
+			hbox_.add_space(kPadding);
+		}
+		hbox_.add(&box_attackable_, UI::Box::Resizing::kFullSize);
+
+		list_manageable_.selected.connect([this](uint32_t index) { clicked_manageable(index); });
+		list_attackable_.selected.connect([this](uint32_t index) { clicked_attackable(index); });
+		list_manageable_.double_clicked.connect([this](uint32_t index) { clicked_manageable(index); });
+		list_attackable_.double_clicked.connect([this](uint32_t index) { clicked_attackable(index); });
+
+		set_center_panel(&hbox_);
+		set_fastclick_panel(manageable.empty() ? &list_attackable_ : &list_manageable_);
+		center_to_parent();
+		move_out_of_the_way();
+		warp_mouse_to_fastclick_panel();
+		initialization_complete();
+	}
+
+	void clicked_manageable(uint32_t index) {
+		Widelands::Ship* ship = list_manageable_[index].get(ibase_.egbase());
+		if (ship != nullptr) {
+			ibase_.show_ship_window(ship);
+		}
+		if ((SDL_GetModState() & KMOD_CTRL) == 0) {
+			die();
+		}
+	}
+
+	void clicked_attackable(uint32_t index) {
+		Widelands::Ship* ship = list_attackable_[index].get(ibase_.egbase());
+		if (ship != nullptr) {
+			ibase_.show_attack_window(node_, ship, true);
+		}
+		if ((SDL_GetModState() & KMOD_CTRL) == 0) {
+			die();
+		}
+	}
+
+private:
+	InteractiveBase& ibase_;
+	Widelands::Coords node_;
+
+	UI::Box hbox_;
+	UI::Box box_manageable_;
+	UI::Box box_attackable_;
+	UI::Listselect<Widelands::OPtr<Widelands::Ship>> list_manageable_;
+	UI::Listselect<Widelands::OPtr<Widelands::Ship>> list_attackable_;
+};
+
+void show_ship_selection_window(InteractiveBase* ibase, UI::UniqueWindow::Registry* registry, const Widelands::Coords& node,
+		const std::vector<Widelands::Ship*>& manageable, const std::vector<Widelands::Ship*>& attackable) {
+	new ShipSelectionWindow(ibase, registry, node, manageable, attackable);
+}

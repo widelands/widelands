@@ -22,7 +22,9 @@
 #include "ui_basic/unique_window.h"
 
 namespace Widelands {
+struct Coords;
 class Player;
+class Ship;
 }  // namespace Widelands
 
 class InteractiveBase;
@@ -31,5 +33,8 @@ class InteractiveBase;
 void show_field_action(InteractiveBase* ibase,
                        Widelands::Player* player,
                        UI::UniqueWindow::Registry* registry);
+
+void show_ship_selection_window(InteractiveBase* ibase, UI::UniqueWindow::Registry* registry, const Widelands::Coords& node,
+		const std::vector<Widelands::Ship*>& manageable, const std::vector<Widelands::Ship*>& attackable);
 
 #endif  // end of include guard: WL_WUI_FIELDACTION_H

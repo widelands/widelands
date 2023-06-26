@@ -736,14 +736,12 @@ void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and
 				return;
 			}
 		}
-		if (show_attack_window(node_and_triangle.node, true) != nullptr) {
+
+		if (!in_road_building_mode() && try_show_ship_windows()) {
 			return;
 		}
-
-		if (!in_road_building_mode()) {
-			if (try_show_ship_window()) {
-				return;
-			}
+		if (show_attack_window(node_and_triangle.node, nullptr, true) != nullptr) {
+			return;
 		}
 
 		// everything else can bring up the temporary dialog
@@ -751,22 +749,55 @@ void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and
 	}
 }
 
-UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& c,
-                                                  const bool fastclick) {
+UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& coords, Widelands::MapObject* object, bool fastclick) {
+	if (object != nullptr) {
+		if (object->descr().type() >= Widelands::MapObjectType::BUILDING) {
+			upcast(Widelands::Building, building, object);
+			assert(building != nullptr);
+			assert(building->attack_target() != nullptr);
+			assert(player().is_hostile(building->owner()));
+			assert(attack_target->can_be_attacked());
+
+			UI::UniqueWindow::Registry& registry =
+			   unique_windows().get_registry(format("attack_building_%u", building->serial()));
+			registry.open_window = [this, &registry, building, &coords, fastclick]() {
+				new AttackWindow(*this, registry, building, coords, fastclick);
+			};
+			registry.create();
+			return registry.window;
+		}
+
+		if (object->descr().type() == Widelands::MapObjectType::SHIP) {
+		    assert(player().is_hostile(object->owner()));
+		    assert(dynamic_cast<Widelands::Ship*>(object)->can_be_attacked());
+			UI::UniqueWindow::Registry& registry =
+			   unique_windows().get_registry(format("attack_ship_%u", object->serial()));
+			registry.open_window = [this, &registry, object, &coords, fastclick]() {
+				new AttackWindow(*this, registry, object, coords, fastclick);
+			};
+			registry.create();
+			return registry.window;
+		}
+
+		throw wexception("Attempting to show attack window for a %s", object->descr().name().c_str());
+	}
+
+	// Auto-detect what kind of attack window we need to show.
+
 	const Map& map = egbase().map();
 	for (const auto& pair : expedition_port_spaces_) {
-		if (pair.second == c) {
+		if (pair.second == coords) {
 			UI::UniqueWindow::Registry& registry =
-			   unique_windows().get_registry(format("attack_coords_%d_%d", c.x, c.y));
-			registry.open_window = [this, &registry, &c, fastclick]() {
-				new AttackWindow(*this, registry, nullptr, c, fastclick);
+			   unique_windows().get_registry(format("attack_coords_%d_%d", coords.x, coords.y));
+			registry.open_window = [this, &registry, &coords, fastclick]() {
+				new AttackWindow(*this, registry, nullptr, coords, fastclick);
 			};
 			registry.create();
 			return registry.window;
 		}
 	}
 
-	if (Widelands::BaseImmovable* immo = map.get_immovable(c)) {
+	if (Widelands::BaseImmovable* immo = map.get_immovable(coords)) {
 		if (immo->descr().type() >= Widelands::MapObjectType::BUILDING) {
 			upcast(Building, building, immo);
 			assert(building != nullptr);
@@ -774,8 +805,8 @@ UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& c,
 				if (player().is_hostile(building->owner()) && attack_target->can_be_attacked()) {
 					UI::UniqueWindow::Registry& registry =
 					   unique_windows().get_registry(format("attack_building_%u", building->serial()));
-					registry.open_window = [this, &registry, building, &c, fastclick]() {
-						new AttackWindow(*this, registry, building, c, fastclick);
+					registry.open_window = [this, &registry, building, &coords, fastclick]() {
+						new AttackWindow(*this, registry, building, coords, fastclick);
 					};
 					registry.create();
 					return registry.window;
@@ -784,14 +815,14 @@ UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& c,
 		}
 	}
 
-	for (Widelands::Bob* bob = map[c].get_first_bob(); bob != nullptr; bob = bob->get_next_bob()) {
+	for (Widelands::Bob* bob = map[coords].get_first_bob(); bob != nullptr; bob = bob->get_next_bob()) {
 		if (bob->descr().type() == Widelands::MapObjectType::SHIP &&
 		    player().is_hostile(bob->owner()) &&
 		    dynamic_cast<Widelands::Ship*>(bob)->can_be_attacked()) {
 			UI::UniqueWindow::Registry& registry =
 			   unique_windows().get_registry(format("attack_ship_%u", bob->serial()));
-			registry.open_window = [this, &registry, bob, &c, fastclick]() {
-				new AttackWindow(*this, registry, bob, c, fastclick);
+			registry.open_window = [this, &registry, bob, &coords, fastclick]() {
+				new AttackWindow(*this, registry, bob, coords, fastclick);
 			};
 			registry.create();
 			return registry.window;
