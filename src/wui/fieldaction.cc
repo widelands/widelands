@@ -1229,8 +1229,9 @@ class ShipSelectionWindow : public UI::UniqueWindow {
 		std::string status;
 		if (ship->get_ship_type() == Widelands::ShipType::kWarship) {
 			status = format(
-			/** TRANSLATORS: Placeholders are the current and maximum health of the warship. */
-			pgettext("ship_state", "Warship, %1$u / %2$u"), ship->get_hitpoints(), ship->descr().max_hitpoints_);
+			   /** TRANSLATORS: Placeholders are the current and maximum health of the warship. */
+			   pgettext("ship_state", "Warship, %1$u / %2$u"), ship->get_hitpoints(),
+			   ship->descr().max_hitpoints_);
 		} else if (hostile) {
 			status = pgettext("ship_state", "Enemy Transport Ship");
 		} else if (ship->state_is_expedition()) {
@@ -1263,7 +1264,8 @@ public:
 			list_attackable_.add(ship_description(ship, true), ship, ship->descr().icon());
 		}
 
-		const int listw = std::max(list_manageable_.calculate_desired_width(), list_attackable_.calculate_desired_width());
+		const int listw = std::max(
+		   list_manageable_.calculate_desired_width(), list_attackable_.calculate_desired_width());
 		list_manageable_.set_desired_size(listw, kListHeight);
 		list_attackable_.set_desired_size(listw, kListHeight);
 
