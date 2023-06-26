@@ -1223,8 +1223,21 @@ void show_field_action(InteractiveBase* const ibase,
 
 class ShipSelectionWindow : public UI::UniqueWindow {
 	static constexpr int kPadding = 4;
-	static constexpr int kListWidth = 200;
 	static constexpr int kListHeight = 200;
+
+	static inline std::string ship_description(const Widelands::Ship* ship) {
+		std::string status;
+		if (ship->get_ship_type() == Widelands::ShipType::kWarship) {
+			status = format(
+			/** TRANSLATORS: Placeholders are the current and maximum health of the warship. */
+			pgettext("ship_state", "Warship, %1$u / %2$u"), ship->get_hitpoints(), ship->descr().max_hitpoints_);
+		} else if (ship->state_is_expedition()) {
+			status = pgettext("ship_state", "Expedition");
+		} else {
+			status = pgettext("ship_state", "Transport Ship");
+		}
+		return format(_("%1$s (%2$s)"), ship->get_shipname(), status);
+	}
 
 public:
 	ShipSelectionWindow(InteractiveBase* ibase,
@@ -1239,14 +1252,18 @@ public:
 	     hbox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
 	     box_manageable_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
 	     box_attackable_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-	     list_manageable_(&box_manageable_, 0, 0, kListWidth, kListHeight, UI::PanelStyle::kWui),
-	     list_attackable_(&box_attackable_, 0, 0, kListWidth, kListHeight, UI::PanelStyle::kWui) {
+	     list_manageable_(&box_manageable_, 0, 0, 0, 0, UI::PanelStyle::kWui),
+	     list_attackable_(&box_attackable_, 0, 0, 0, 0, UI::PanelStyle::kWui) {
 		for (Widelands::Ship* ship : manageable) {
-			list_manageable_.add(ship->get_shipname(), ship, ship->descr().icon());
+			list_manageable_.add(ship_description(ship), ship, ship->descr().icon());
 		}
 		for (Widelands::Ship* ship : attackable) {
-			list_attackable_.add(ship->get_shipname(), ship, ship->descr().icon());
+			list_attackable_.add(ship_description(ship), ship, ship->descr().icon());
 		}
+
+		const int listw = std::max(list_manageable_.calculate_desired_width(), list_attackable_.calculate_desired_width());
+		list_manageable_.set_desired_size(listw, kListHeight);
+		list_attackable_.set_desired_size(listw, kListHeight);
 
 		if (ibase_.get_player() != nullptr) {
 			box_manageable_.add(new UI::Textarea(&box_manageable_, UI::PanelStyle::kWui,
