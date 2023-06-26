@@ -245,7 +245,8 @@ public:
 	void finalize_toolbar();
 
 	// arg1 is always the real user's name
-	void broadcast_cheating_message(const std::string& code = "CHEAT", const std::string& arg2 = "") const;
+	void broadcast_cheating_message(const std::string& code = "CHEAT",
+	                                const std::string& arg2 = "") const;
 
 protected:
 	// For referencing the items in mapviewmenu_

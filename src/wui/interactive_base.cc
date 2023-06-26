@@ -1757,7 +1757,8 @@ ChatColorForPlayer InteractiveBase::color_functor() const {
 	};
 }
 
-void InteractiveBase::broadcast_cheating_message(const std::string& code, const std::string& arg2) const {
+void InteractiveBase::broadcast_cheating_message(const std::string& code,
+                                                 const std::string& arg2) const {
 	if (get_game() == nullptr) {
 		return;  // Editor
 	}
@@ -1765,15 +1766,14 @@ void InteractiveBase::broadcast_cheating_message(const std::string& code, const 
 		if (code == "CHEAT" && player_number() != 0u &&
 		    h->get_local_playername() != game().player(player_number()).get_name()) {
 			h->send_system_message_code(
-				"CHEAT_OTHER", h->get_local_playername(), game().player(player_number()).get_name());
+			   "CHEAT_OTHER", h->get_local_playername(), game().player(player_number()).get_name());
 			return;
 		}
 		h->send_system_message_code(code, h->get_local_playername(), arg2);
 	} else if (upcast(GameClient, c, game().game_controller())) {
 		if (code == "CHEAT" && player_number() != 0u &&
 		    c->get_local_playername() != game().player(player_number()).get_name()) {
-			c->send_cheating_info(
-				"CHEAT_OTHER", game().player(player_number()).get_name());
+			c->send_cheating_info("CHEAT_OTHER", game().player(player_number()).get_name());
 			return;
 		}
 		c->send_cheating_info(code, arg2);
