@@ -1229,15 +1229,16 @@ class ShipSelectionWindow : public UI::UniqueWindow {
 		std::string status;
 		if (ship->get_ship_type() == Widelands::ShipType::kWarship) {
 			status = format(
-			   /** TRANSLATORS: Placeholders are the current and maximum health of the warship. */
-			   pgettext("ship_state", "Warship, %1$u / %2$u"), ship->get_hitpoints(),
-			   ship->descr().max_hitpoints_);
+			   /** TRANSLATORS: Placeholders are the hitpoints and the attack bonus of the warship. */
+			   pgettext("ship_state", "Warship · HP %1$u%% · AT +%2$u%%"),
+			   100U * ship->get_hitpoints() / ship->descr().max_hitpoints_,
+			   ship->get_sea_attack_soldier_bonus(ship->owner().egbase()));
 		} else if (hostile) {
 			status = pgettext("ship_state", "Enemy Transport Ship");
 		} else if (ship->state_is_expedition()) {
 			status = pgettext("ship_state", "Expedition");
 		} else {
-			status = pgettext("ship_state", "Transport Ship");
+			status = pgettext("ship_state", "Transport");
 		}
 		return format(_("%1$s (%2$s)"), ship->get_shipname(), status);
 	}
