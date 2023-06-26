@@ -24,7 +24,7 @@
 namespace Widelands {
 struct Coords;
 class Player;
-class Ship;
+struct Ship;
 }  // namespace Widelands
 
 class InteractiveBase;

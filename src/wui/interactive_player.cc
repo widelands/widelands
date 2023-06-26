@@ -756,9 +756,9 @@ UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& coord
 		if (object->descr().type() >= Widelands::MapObjectType::BUILDING) {
 			upcast(Widelands::Building, building, object);
 			assert(building != nullptr);
-			assert(building->attack_target() != nullptr);
 			assert(player().is_hostile(building->owner()));
-			assert(attack_target->can_be_attacked());
+			assert(building->attack_target() != nullptr);
+			assert(building->attack_target()->can_be_attacked());
 
 			UI::UniqueWindow::Registry& registry =
 			   unique_windows().get_registry(format("attack_building_%u", building->serial()));
