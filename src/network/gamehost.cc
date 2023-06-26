@@ -2414,12 +2414,15 @@ void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
 	}
 }
 
+static const std::set<std::string> cheating_message_codes = {
+   "CHEAT", "CAN_CHEAT", "SWITCHED_PLAYER", "CHEAT_OTHER"};
+
 void GameHost::handle_system_message(RecvPacket& packet) {
 	const std::string code = packet.string();
 	const std::string arg1 = packet.string();
 	const std::string arg2 = packet.string();
 	const std::string arg3 = packet.string();
-	if (code != "CHEAT" && code != "CAN_CHEAT") {
+	if (cheating_message_codes.count(code) == 0) {
 		log_err("[Host]: Received system command %s(%s,%s,%s) from client", code.c_str(),
 		        arg1.c_str(), arg2.c_str(), arg3.c_str());
 		throw DisconnectException("MALFORMED_COMMANDS");

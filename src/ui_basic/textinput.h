@@ -110,7 +110,7 @@ public:
 	// Returns tmp_ when position is out of range
 	[[nodiscard]] const std::string& get_entry(int16_t position) const;
 
-	int16_t current_size() const {
+	[[nodiscard]] int16_t current_size() const {
 		return entries_.size();
 	}
 

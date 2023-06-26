@@ -75,7 +75,11 @@ static const std::map<std::string, std::string> ngmessages = {
    {"PLAYER_DEFEATED", gettext_noop("The player ‘%s’ was defeated and became a spectator.")},
    {"CLIENT_HUNG", gettext_noop("Client %1$s did not answer for more than %2$s.")},
    {"CAN_CHEAT", gettext_noop("Client %s has cheating features enabled!")},
-   {"CHEAT", gettext_noop("Client %s is cheating!")}};
+   {"CHEAT", gettext_noop("Client %s is cheating!")},
+   // TRANSLATORS: %1 and %2 are user and player names
+   {"SWITCHED_PLAYER", gettext_noop("Cheating: Client %1$s now controls %2$s")},
+   // TRANSLATORS: %1 and %2 are user and player names
+   {"CHEAT_OTHER", gettext_noop("Client %1$s is cheating, acting as %2$s!")}};
 
 /// Returns a translated message fitting to the message code \arg code
 const std::string NetworkGamingMessages::get_message(const std::string& code) {

@@ -54,6 +54,7 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 	~GameClient() override;
 
 	void run();
+	[[nodiscard]] const std::string& get_local_playername() const;
 
 	// GameController interface
 	void think() override;
@@ -118,7 +119,8 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 		return true;
 	}
 
-	void send_cheating_info(const std::string& code = "CHEAT");
+	// arg1 is always the real user's name
+	void send_cheating_info(const std::string& code = "CHEAT", const std::string& arg2 = "");
 
 	std::shared_ptr<GameController>& get_pointer() {
 		return pointer_;

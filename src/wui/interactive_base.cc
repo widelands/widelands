@@ -1757,15 +1757,26 @@ ChatColorForPlayer InteractiveBase::color_functor() const {
 	};
 }
 
-void InteractiveBase::broadcast_cheating_message(const std::string& code) const {
+void InteractiveBase::broadcast_cheating_message(const std::string& code, const std::string& arg2) const {
 	if (get_game() == nullptr) {
 		return;  // Editor
 	}
 	if (upcast(GameHost, h, game().game_controller())) {
-		h->send_system_message_code(
-		   code, player_number() != 0u ? game().player(player_number()).get_name() : "");
+		if (code == "CHEAT" && player_number() != 0u &&
+		    h->get_local_playername() != game().player(player_number()).get_name()) {
+			h->send_system_message_code(
+				"CHEAT_OTHER", h->get_local_playername(), game().player(player_number()).get_name());
+			return;
+		}
+		h->send_system_message_code(code, h->get_local_playername(), arg2);
 	} else if (upcast(GameClient, c, game().game_controller())) {
-		c->send_cheating_info(code);
+		if (code == "CHEAT" && player_number() != 0u &&
+		    c->get_local_playername() != game().player(player_number()).get_name()) {
+			c->send_cheating_info(
+				"CHEAT_OTHER", game().player(player_number()).get_name());
+			return;
+		}
+		c->send_cheating_info(code, arg2);
 	}
 }
 
@@ -1831,7 +1842,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 	return UI::Panel::handle_key(down, code);
 }
 
-void InteractiveBase::cmd_lua(const std::vector<std::string>& args) {
+void InteractiveBase::cmd_lua(const std::vector<std::string>& args) const {
 	const std::string cmd = join(args, " ");
 
 	broadcast_cheating_message();
@@ -1854,6 +1865,8 @@ void InteractiveBase::cmd_map_object(const std::vector<std::string>& args) {
 		DebugConsole::write("usage: mapobject <mapobject serial>");
 		return;
 	}
+
+	broadcast_cheating_message();
 
 	uint32_t serial = stoul(args[1]);
 	MapObject* obj = egbase().objects().get_object(serial);

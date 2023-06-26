@@ -263,6 +263,10 @@ void GameClient::run() {
 	NEVER_HERE();
 }
 
+const std::string& GameClient::get_local_playername() const {
+	return d->localplayername;
+}
+
 void GameClient::set_write_replay(bool replay) {
 	d->should_write_replay = replay;
 }
@@ -459,12 +463,12 @@ void GameClient::set_map(const std::string& /*mapname*/,
 	// client is not allowed to do this
 }
 
-void GameClient::send_cheating_info(const std::string& code) {
+void GameClient::send_cheating_info(const std::string& code, const std::string& arg2) {
 	SendPacket packet;
 	packet.unsigned_8(NETCMD_SYSTEM_MESSAGE_CODE);
 	packet.string(code);
 	packet.string(d->localplayername);
-	packet.string("");
+	packet.string(arg2);
 	packet.string("");
 	d->net->send(packet);
 }
