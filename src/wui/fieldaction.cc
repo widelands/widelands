@@ -1225,12 +1225,14 @@ class ShipSelectionWindow : public UI::UniqueWindow {
 	static constexpr int kPadding = 4;
 	static constexpr int kListHeight = 200;
 
-	static inline std::string ship_description(const Widelands::Ship* ship) {
+	static inline std::string ship_description(const Widelands::Ship* ship, bool hostile) {
 		std::string status;
 		if (ship->get_ship_type() == Widelands::ShipType::kWarship) {
 			status = format(
 			/** TRANSLATORS: Placeholders are the current and maximum health of the warship. */
 			pgettext("ship_state", "Warship, %1$u / %2$u"), ship->get_hitpoints(), ship->descr().max_hitpoints_);
+		} else if (hostile) {
+			status = pgettext("ship_state", "Enemy Transport Ship");
 		} else if (ship->state_is_expedition()) {
 			status = pgettext("ship_state", "Expedition");
 		} else {
@@ -1255,10 +1257,10 @@ public:
 	     list_manageable_(&box_manageable_, 0, 0, 0, 0, UI::PanelStyle::kWui),
 	     list_attackable_(&box_attackable_, 0, 0, 0, 0, UI::PanelStyle::kWui) {
 		for (Widelands::Ship* ship : manageable) {
-			list_manageable_.add(ship_description(ship), ship, ship->descr().icon());
+			list_manageable_.add(ship_description(ship, false), ship, ship->descr().icon());
 		}
 		for (Widelands::Ship* ship : attackable) {
-			list_attackable_.add(ship_description(ship), ship, ship->descr().icon());
+			list_attackable_.add(ship_description(ship, true), ship, ship->descr().icon());
 		}
 
 		const int listw = std::max(list_manageable_.calculate_desired_width(), list_attackable_.calculate_desired_width());
