@@ -53,7 +53,7 @@ public:
 
 	void show_watch_window(Widelands::Bob&);
 
-	bool try_show_ship_window();
+	bool try_show_ship_windows();
 	bool is_multiplayer() const {
 		return multiplayer_;
 	}
