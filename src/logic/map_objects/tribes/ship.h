@@ -255,9 +255,7 @@ struct Ship : Bob {
 	[[nodiscard]] Quantity get_capacity() const {
 		return capacity_;
 	}
-	void set_capacity(Quantity c) {
-		capacity_ = c;
-	}
+	void set_capacity(Quantity c);
 
 	[[nodiscard]] bool has_attack_target(Ship* s) const {
 		return expedition_ != nullptr && expedition_->attack_targets.count(s) > 0;
@@ -313,10 +311,7 @@ struct Ship : Bob {
 
 	// Editor only
 	void set_ship_type(EditorGameBase& egbase, ShipType t);
-	void set_warship_soldier_capacity(uint32_t c) {
-		assert(c <= capacity_);
-		warship_soldier_capacity_ = c;
-	}
+	void set_warship_soldier_capacity(Quantity c);
 
 	void draw_healthbar(const EditorGameBase& egbase,
 	                    RenderTarget* dst,
@@ -347,6 +342,7 @@ private:
 	void ship_update_idle(Game&, State&);
 	void battle_update(Game&);
 	void update_warship_soldier_request(bool create);
+	void kickout_superfluous_soldiers(Game& game);
 	/// Set the ship's state to 'state' and if the ship state has changed, publish a notification.
 	void set_ship_state_and_notify(ShipStates state, NoteShip::Action action);
 	bool check_port_space_still_available(Game&);
