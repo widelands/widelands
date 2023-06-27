@@ -1301,6 +1301,9 @@ public:
 		}
 		hbox_.add(&box_attackable_, UI::Box::Resizing::kFullSize);
 
+		list_manageable_.set_select_with_wheel(false);
+		list_attackable_.set_select_with_wheel(false);
+
 		list_manageable_.selected.connect([this](uint32_t index) { clicked_manageable(index); });
 		list_attackable_.selected.connect([this](uint32_t index) { clicked_attackable(index); });
 		list_manageable_.double_clicked.connect(
