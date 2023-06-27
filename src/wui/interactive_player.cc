@@ -772,7 +772,8 @@ UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& coord
 			if (immo->descr().type() >= Widelands::MapObjectType::BUILDING) {
 				upcast(Building, building, immo);
 				assert(building != nullptr);
-				if (const Widelands::AttackTarget* attack_target = building->attack_target(); attack_target != nullptr) {
+				if (const Widelands::AttackTarget* attack_target = building->attack_target();
+				    attack_target != nullptr) {
 					if (player().is_hostile(building->owner()) && attack_target->can_be_attacked()) {
 						object = building;
 					}
@@ -781,10 +782,10 @@ UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& coord
 		}
 
 		for (Widelands::Bob* bob = map[coords].get_first_bob(); bob != nullptr && object == nullptr;
-			 bob = bob->get_next_bob()) {
+		     bob = bob->get_next_bob()) {
 			if (bob->descr().type() == Widelands::MapObjectType::SHIP &&
-				player().is_hostile(bob->owner()) &&
-				dynamic_cast<Widelands::Ship*>(bob)->can_be_attacked()) {
+			    player().is_hostile(bob->owner()) &&
+			    dynamic_cast<Widelands::Ship*>(bob)->can_be_attacked()) {
 				object = bob;
 			}
 		}
