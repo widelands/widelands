@@ -59,6 +59,9 @@ void SoldierRequest::update() {
 
 		request_->set_requirements(Requirements());
 		request_->set_count(target - current);
+		if (Economy* economy = request_->get_economy(); economy != nullptr) {
+			economy->rebalance_supply();
+		}
 		return;
 	}
 
@@ -111,6 +114,9 @@ void SoldierRequest::update() {
 
 	request_->set_count(1);
 	request_->set_requirements(RequireAttribute(TrainingAttribute::kTotal, rmin, rmax));
+	if (Economy* economy = request_->get_economy(); economy != nullptr) {
+		economy->rebalance_supply();
+	}
 }
 
 constexpr uint16_t kCurrentPacketVersion = 1;
