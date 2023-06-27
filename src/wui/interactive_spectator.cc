@@ -204,7 +204,7 @@ void InteractiveSpectator::node_action(const Widelands::NodeAndTriangle<>& node_
 		return;
 	}
 
-	if (try_show_ship_window()) {
+	if (try_show_ship_windows()) {
 		return;
 	}
 

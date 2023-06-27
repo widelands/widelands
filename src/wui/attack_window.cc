@@ -744,16 +744,22 @@ void AttackPanel::ListOfSoldiers::draw(RenderTarget& dst) {
 	}
 }
 
-constexpr uint16_t kCurrentPacketVersion = 1;
+/* Changelog:
+ * 1: v1.1
+ * 2: Use map object serial as well as coords
+ */
+constexpr uint16_t kCurrentPacketVersion = 2;
 UI::Window& AttackWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
 			const int32_t x = fr.signed_32();
 			const int32_t y = fr.signed_32();
+			const Widelands::Serial mo_serial = packet_version >= 2 ? fr.unsigned_32() : 0;
 			AttackWindow* a =
 			   dynamic_cast<AttackWindow*>(dynamic_cast<InteractivePlayer&>(ib).show_attack_window(
-			      Widelands::Coords(x, y), false));
+			      Widelands::Coords(x, y),
+			      mo_serial == 0 ? nullptr : &mol.get<Widelands::MapObject>(mo_serial), false));
 			assert(a != nullptr);
 
 			const uint8_t destroy = fr.unsigned_8();
@@ -790,6 +796,8 @@ void AttackWindow::save(FileWrite& fw, Widelands::MapObjectSaver& mos) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 	fw.signed_32(target_coordinates_.x);
 	fw.signed_32(target_coordinates_.y);
+	fw.unsigned_32(
+	   mos.get_object_file_index_or_zero(target_building_or_ship_.get(iplayer_.egbase())));
 	// is_naval_invasion_ will be set automatically by the constructor on loading
 
 	fw.unsigned_8(do_not_conquer_ && !do_not_conquer_->get_state() ? 1 : 0);

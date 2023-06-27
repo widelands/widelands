@@ -36,6 +36,7 @@
 #include "ui_basic/toolbar_setup.h"
 #include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
+#include "wui/fieldaction.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_client_disconnected.h"
 #include "wui/game_diplomacy_menu.h"
@@ -677,26 +678,54 @@ void InteractiveGameBase::start() {
  * See if we can reasonably open a ship window at the current selection position.
  * If so, do it and return true; otherwise, return false.
  */
-bool InteractiveGameBase::try_show_ship_window() {
+bool InteractiveGameBase::try_show_ship_windows() {
 	const Widelands::Map& map = game().map();
 	Widelands::Area<Widelands::FCoords> area(map.get_fcoords(get_sel_pos().node), 1);
 
-	if ((area.field->nodecaps() & Widelands::MOVECAPS_SWIM) == 0) {
-		return false;
-	}
-
-	std::vector<Widelands::Bob*> ships;
-	if (map.find_bobs(egbase(), area, &ships, Widelands::FindBobShip()) != 0u) {
-		for (Widelands::Bob* ship : ships) {
+	std::vector<Widelands::Bob*> all_ships;
+	std::vector<Widelands::Ship*> manageable;
+	std::vector<Widelands::Ship*> attackable;
+	if (map.find_bobs(egbase(), area, &all_ships, Widelands::FindBobShip()) != 0u) {
+		for (Widelands::Bob* bob : all_ships) {
+			upcast(Widelands::Ship, ship, bob);
+			assert(ship != nullptr);  // FindBobShip should have returned only ships
 			if (can_see(ship->owner().player_number())) {
-				// FindBobShip should have returned only ships
-				assert(ship->descr().type() == Widelands::MapObjectType::SHIP);
-				show_ship_window(dynamic_cast<Widelands::Ship*>(ship));
-				return true;
+				manageable.push_back(ship);
+			} else if (get_player() != nullptr && get_player()->is_hostile(ship->owner()) &&
+			           ship->can_be_attacked()) {
+				attackable.push_back(ship);
 			}
 		}
 	}
-	return false;
+
+	if (manageable.empty() && attackable.empty()) {
+		return false;  // No ships nearby.
+	}
+
+	if (manageable.size() + attackable.size() == 1) {
+		// Exactly one ship nearby, open its appropriate window.
+		if (attackable.empty()) {
+			show_ship_window(manageable.front());
+		} else {
+			show_attack_window(get_sel_pos().node, attackable.front(), true);
+		}
+		return true;
+	}
+
+	if ((SDL_GetModState() & KMOD_CTRL) != 0) {
+		// Open all applicable windows if Ctrl is held.
+		for (Widelands::Ship* ship : manageable) {
+			show_ship_window(ship);
+		}
+		for (Widelands::Ship* ship : attackable) {
+			show_attack_window(get_sel_pos().node, ship, true);
+		}
+		return true;
+	}
+
+	// Show a selection dialog.
+	show_ship_selection_window(this, &fieldaction_, get_sel_pos().node, manageable, attackable);
+	return true;
 }
 
 void InteractiveGameBase::show_game_summary() {
