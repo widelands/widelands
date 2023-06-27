@@ -752,87 +752,77 @@ void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and
 UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& coords,
                                                   Widelands::MapObject* object,
                                                   bool fastclick) {
-	if (object != nullptr) {
-		if (object->descr().type() >= Widelands::MapObjectType::BUILDING) {
-			upcast(Widelands::Building, building, object);
-			assert(building != nullptr);
-			assert(player().is_hostile(building->owner()));
-			assert(building->attack_target() != nullptr);
-			assert(building->attack_target()->can_be_attacked());
+	if (object == nullptr) {
+		// Auto-detect what kind of attack window we need to show.
+		const Map& map = egbase().map();
 
-			UI::UniqueWindow::Registry& registry =
-			   unique_windows().get_registry(format("attack_building_%u", building->serial()));
-			registry.open_window = [this, &registry, building, &coords, fastclick]() {
-				new AttackWindow(*this, registry, building, coords, fastclick);
-			};
-			registry.create();
-			return registry.window;
+		for (const auto& pair : expedition_port_spaces_) {
+			if (pair.second == coords) {
+				UI::UniqueWindow::Registry& registry =
+				   unique_windows().get_registry(format("attack_coords_%d_%d", coords.x, coords.y));
+				registry.open_window = [this, &registry, &coords, fastclick]() {
+					new AttackWindow(*this, registry, nullptr, coords, fastclick);
+				};
+				registry.create();
+				return registry.window;
+			}
 		}
 
-		if (object->descr().type() == Widelands::MapObjectType::SHIP) {
-			assert(player().is_hostile(object->owner()));
-			assert(dynamic_cast<Widelands::Ship*>(object)->can_be_attacked());
-			UI::UniqueWindow::Registry& registry =
-			   unique_windows().get_registry(format("attack_ship_%u", object->serial()));
-			registry.open_window = [this, &registry, object, &coords, fastclick]() {
-				new AttackWindow(*this, registry, object, coords, fastclick);
-			};
-			registry.create();
-			return registry.window;
-		}
-
-		throw wexception("Attempting to show attack window for a %s", object->descr().name().c_str());
-	}
-
-	// Auto-detect what kind of attack window we need to show.
-
-	const Map& map = egbase().map();
-	for (const auto& pair : expedition_port_spaces_) {
-		if (pair.second == coords) {
-			UI::UniqueWindow::Registry& registry =
-			   unique_windows().get_registry(format("attack_coords_%d_%d", coords.x, coords.y));
-			registry.open_window = [this, &registry, &coords, fastclick]() {
-				new AttackWindow(*this, registry, nullptr, coords, fastclick);
-			};
-			registry.create();
-			return registry.window;
-		}
-	}
-
-	if (Widelands::BaseImmovable* immo = map.get_immovable(coords)) {
-		if (immo->descr().type() >= Widelands::MapObjectType::BUILDING) {
-			upcast(Building, building, immo);
-			assert(building != nullptr);
-			if (const Widelands::AttackTarget* attack_target = building->attack_target()) {
-				if (player().is_hostile(building->owner()) && attack_target->can_be_attacked()) {
-					UI::UniqueWindow::Registry& registry =
-					   unique_windows().get_registry(format("attack_building_%u", building->serial()));
-					registry.open_window = [this, &registry, building, &coords, fastclick]() {
-						new AttackWindow(*this, registry, building, coords, fastclick);
-					};
-					registry.create();
-					return registry.window;
+		if (Widelands::BaseImmovable* immo = map.get_immovable(coords)) {
+			if (immo->descr().type() >= Widelands::MapObjectType::BUILDING) {
+				upcast(Building, building, immo);
+				assert(building != nullptr);
+				if (const Widelands::AttackTarget* attack_target = building->attack_target(); attack_target != nullptr) {
+					if (player().is_hostile(building->owner()) && attack_target->can_be_attacked()) {
+						object = building;
+					}
 				}
 			}
 		}
-	}
 
-	for (Widelands::Bob* bob = map[coords].get_first_bob(); bob != nullptr;
-	     bob = bob->get_next_bob()) {
-		if (bob->descr().type() == Widelands::MapObjectType::SHIP &&
-		    player().is_hostile(bob->owner()) &&
-		    dynamic_cast<Widelands::Ship*>(bob)->can_be_attacked()) {
-			UI::UniqueWindow::Registry& registry =
-			   unique_windows().get_registry(format("attack_ship_%u", bob->serial()));
-			registry.open_window = [this, &registry, bob, &coords, fastclick]() {
-				new AttackWindow(*this, registry, bob, coords, fastclick);
-			};
-			registry.create();
-			return registry.window;
+		for (Widelands::Bob* bob = map[coords].get_first_bob(); bob != nullptr && object == nullptr;
+			 bob = bob->get_next_bob()) {
+			if (bob->descr().type() == Widelands::MapObjectType::SHIP &&
+				player().is_hostile(bob->owner()) &&
+				dynamic_cast<Widelands::Ship*>(bob)->can_be_attacked()) {
+				object = bob;
+			}
+		}
+
+		if (object == nullptr) {
+			return nullptr;
 		}
 	}
 
-	return nullptr;
+	if (object->descr().type() >= Widelands::MapObjectType::BUILDING) {
+		upcast(Widelands::Building, building, object);
+		assert(building != nullptr);
+		assert(player().is_hostile(building->owner()));
+		assert(building->attack_target() != nullptr);
+		assert(building->attack_target()->can_be_attacked());
+
+		UI::UniqueWindow::Registry& registry =
+		   unique_windows().get_registry(format("attack_building_%u", building->serial()));
+		registry.open_window = [this, &registry, building, &coords, fastclick]() {
+			new AttackWindow(*this, registry, building, coords, fastclick);
+		};
+		registry.create();
+		return registry.window;
+	}
+
+	if (object->descr().type() == Widelands::MapObjectType::SHIP) {
+		assert(player().is_hostile(object->owner()));
+		assert(dynamic_cast<Widelands::Ship*>(object)->can_be_attacked());
+		UI::UniqueWindow::Registry& registry =
+		   unique_windows().get_registry(format("attack_ship_%u", object->serial()));
+		registry.open_window = [this, &registry, object, &coords, fastclick]() {
+			new AttackWindow(*this, registry, object, coords, fastclick);
+		};
+		registry.create();
+		return registry.window;
+	}
+
+	throw wexception("Attempting to show attack window for a %s", object->descr().name().c_str());
 }
 
 /**
