@@ -29,8 +29,10 @@
 
 // Global input histories
 extern UI::EditBoxHistory g_chat_sent_history;
+const std::string kChatSentHistoryFile = "sent_messages_history";
 #ifdef SCRIPT_CONSOLE
 extern UI::EditBoxHistory g_script_console_history;
+const std::string kScriptConsoleHistoryFile = "script_console_history";
 #endif
 
 /**

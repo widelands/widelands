@@ -84,6 +84,7 @@
 #include "wlapplication_messages.h"
 #include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
+#include "wui/game_chat_panel.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 
@@ -471,6 +472,11 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	// Save configuration now. Otherwise, the UUID and sound options
 	// are not saved, when the game crashes
 	write_config();
+
+	g_chat_sent_history.load(kChatSentHistoryFile);
+#ifdef SCRIPT_CONSOLE
+	g_script_console_history.load(kScriptConsoleHistoryFile);
+#endif
 }
 
 /**
@@ -488,6 +494,11 @@ WLApplication::~WLApplication() {
 
 	shutdown_hardware();
 	shutdown_settings();
+
+	g_chat_sent_history.save(kChatSentHistoryFile);
+#ifdef SCRIPT_CONSOLE
+	g_script_console_history.save(kScriptConsoleHistoryFile);
+#endif
 
 	assert(UI::g_fh);
 	delete UI::g_fh;

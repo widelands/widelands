@@ -20,6 +20,7 @@
 
 #include <algorithm>
 
+#include "base/log.h"
 #include "base/utf8.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
@@ -27,6 +28,8 @@
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "graphic/wordwrap.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "ui_basic/mouse_constants.h"
 #include "ui_basic/scrollbar.h"
 #include "wlapplication_options.h"
@@ -1119,6 +1122,32 @@ const std::string& EditBoxHistory::get_entry(int16_t position) const {
 		return tmp_;
 	}
 	return entries_.at(position);
+}
+
+void EditBoxHistory::load(const std::string& filename) {
+	FileRead fr;
+	if (fr.try_open(*g_fs, filename)) {
+		entries_.clear();
+		try {
+			while (char* line = fr.read_line()) {
+				add_entry(line);
+			}
+		} catch (const std::exception& e) {
+			log_err("Loading %s, line %u: %s", filename.c_str(), static_cast<uint>(entries_.size() + 1), e.what());
+		}
+	}
+}
+
+void EditBoxHistory::save(const std::string& filename) const {
+	try {
+		FileWrite fw;
+		for (auto it = entries_.rbegin(); it != entries_.rend(); ++it) {
+			fw.print_f("%s\n", it->c_str());
+		}
+		fw.write(*g_fs, filename);
+	} catch (const std::exception& e) {
+		log_err("Saving %s: %s", filename.c_str(), e.what());
+	}
 }
 
 }  // namespace UI

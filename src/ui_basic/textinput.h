@@ -122,6 +122,9 @@ public:
 	}
 	// No getter, use get_entry(-1) to get tmp_
 
+	void load(const std::string& filename);
+	void save(const std::string& filename) const;
+
 private:
 	uint16_t max_size_{0};
 	std::vector<std::string> entries_;
