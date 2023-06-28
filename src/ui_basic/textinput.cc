@@ -1133,7 +1133,8 @@ void EditBoxHistory::load(const std::string& filename) {
 				add_entry(line);
 			}
 		} catch (const std::exception& e) {
-			log_err("Loading %s, line %u: %s", filename.c_str(), static_cast<uint>(entries_.size() + 1), e.what());
+			log_err("Loading %s, line %u: %s", filename.c_str(),
+			        static_cast<uint>(entries_.size() + 1), e.what());
 		}
 	}
 }
