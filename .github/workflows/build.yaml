@@ -6,7 +6,7 @@ on:
   pull_request:
     types: [ opened, reopened, synchronize ]
   push:
-    branches: [ master ]
+    branches: [ master, protected/* ]
 
 jobs:
   # This job runs multiple smaller checks where having several jobs would be overkill.
@@ -388,7 +388,7 @@ jobs:
         path: ${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}.dmg
 
   appimage:
-    if: ${{ github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' }}
+    if: ${{ github.repository == 'widelands/widelands' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/protected/navalwarfare') }}
     needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
     strategy:
       matrix:
