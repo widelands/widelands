@@ -19,6 +19,7 @@
 #include "wui/game_chat_menu.h"
 
 #include "base/i18n.h"
+#include "base/wexception.h"
 
 /*
 ==============================================================================
@@ -64,15 +65,16 @@ GameChatMenu* GameChatMenu::create_chat_console(UI::Panel* parent,
 	return new GameChatMenu(parent, fn, registry, chat, &g_chat_sent_history, _("Chat"));
 }
 
-#ifdef SCRIPT_CONSOLE
 GameChatMenu* GameChatMenu::create_script_console(UI::Panel* parent,
                                                   ChatColorForPlayer fn,
                                                   UI::UniqueWindow::Registry& registry,
                                                   ChatProvider& chat) {
+	if (!g_allow_script_console) {
+		throw wexception("Trying to open the Script Console when it is disabled.");
+	}
 	return new GameChatMenu(
 	   parent, fn, registry, chat, &g_script_console_history, _("Script Console"));
 }
-#endif
 
 bool GameChatMenu::enter_chat_message(bool close_on_send) {
 	if (is_minimal()) {

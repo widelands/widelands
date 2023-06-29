@@ -1790,14 +1790,15 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 
 	send_system_message_code("CLIENT_HAS_JOINED_GAME", effective_name);
 
-#ifdef SCRIPT_CONSOLE
-	// TODO(tothxa): The host could warn only the new client, but other clients can only broadcast:
-	//                 1. They can only send commands to the host
-	//                 2. System messages are assembled and translated on each client, so individual
-	//                    players can't be @-addressed
-	//               Until this is solved, it's better if the host broadcasts too.
-	send_system_message_code("CAN_CHEAT", d->localplayername);
-#endif
+	if (g_allow_script_console) {
+		// TODO(tothxa): The host could warn only the new client, but other clients can only
+		//               broadcast:
+		//                 1. They can only send commands to the host
+		//                 2. System messages are assembled and translated on each client, so
+		//                    individual players can't be @-addressed
+		//               Until this is solved, it's better if the host broadcasts too.
+		send_system_message_code("CAN_CHEAT", d->localplayername);
+	}
 }
 
 void GameHost::committed_network_time(const Time& time) {

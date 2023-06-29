@@ -246,10 +246,10 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 
 	finalize_toolbar();
 
-#ifdef SCRIPT_CONSOLE
-	addCommand(
-	   "switchplayer", [this](const std::vector<std::string>& str) { cmdSwitchPlayer(str); });
-#endif
+	if (g_allow_script_console) {
+		addCommand(
+		   "switchplayer", [this](const std::vector<std::string>& str) { cmdSwitchPlayer(str); });
+	}
 
 	map_options_subscriber_ = Notifications::subscribe<NoteMapOptions>(
 	   [this](const NoteMapOptions& /* note */) { rebuild_statistics_menu(); });
@@ -937,6 +937,10 @@ bool InteractivePlayer::player_hears_field(const Widelands::Coords& coords) cons
 }
 
 void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {
+	if (!g_allow_script_console) {
+		throw wexception("Trying to switch player when the Script Console is disabled.");
+	}
+
 	if (args.size() != 2) {
 		DebugConsole::write("Usage: switchplayer <nr>");
 		return;

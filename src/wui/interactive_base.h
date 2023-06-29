@@ -365,9 +365,7 @@ protected:
 
 	ChatProvider* chat_provider_;
 
-#ifdef SCRIPT_CONSOLE
 	UI::UniqueWindow::Registry debugconsole_;
-#endif
 
 	InfoPanel& info_panel_;
 

@@ -127,9 +127,7 @@ protected:
 private:
 	// For referencing the items in mainmenu_
 	enum class MainMenuEntry {
-#ifdef SCRIPT_CONSOLE
 		kScriptConsole,
-#endif
 		kOptions,
 		kSaveMap,
 		kLoadMap,

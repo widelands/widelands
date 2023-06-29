@@ -283,11 +283,9 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 		b->set_force_scrolling(true);
 		for (KeyboardShortcut k = shortcut_start; k <= shortcut_end; ++k) {
 			if (is_real(k)) {
-#ifdef NDEBUG
-				if (is_debug_only(k)) {
+				if (!g_allow_script_console && is_developer_tool(k)) {
 					continue;
 				}
-#endif
 				add_key(*b, k);
 			}
 		}

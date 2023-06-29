@@ -1107,8 +1107,7 @@ void GameClient::handle_system_message(RecvPacket& packet) {
 	d->chatmessages.push_back(c);
 	Notifications::publish(c);
 
-#ifdef SCRIPT_CONSOLE
-	if (code == "CLIENT_HAS_JOINED_GAME") {
+	if (g_allow_script_console && code == "CLIENT_HAS_JOINED_GAME") {
 		// Warn others
 		// TODO(tothxa): It would be better to only broadcast if we are the new user, otherwise send
 		//               it to the new user only, but
@@ -1117,7 +1116,6 @@ void GameClient::handle_system_message(RecvPacket& packet) {
 		//                    individual players can't be @-addressed
 		send_cheating_info("CAN_CHEAT");
 	}
-#endif
 }
 
 /**

@@ -474,9 +474,9 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	write_config();
 
 	g_chat_sent_history.load(kChatSentHistoryFile);
-#ifdef SCRIPT_CONSOLE
-	g_script_console_history.load(kScriptConsoleHistoryFile);
-#endif
+	if (g_allow_script_console) {
+		g_script_console_history.load(kScriptConsoleHistoryFile);
+	}
 }
 
 /**
@@ -496,9 +496,9 @@ WLApplication::~WLApplication() {
 	shutdown_settings();
 
 	g_chat_sent_history.save(kChatSentHistoryFile);
-#ifdef SCRIPT_CONSOLE
-	g_script_console_history.save(kScriptConsoleHistoryFile);
-#endif
+	if (g_allow_script_console) {
+		g_script_console_history.save(kScriptConsoleHistoryFile);
+	}
 
 	assert(UI::g_fh);
 	delete UI::g_fh;
@@ -1571,6 +1571,16 @@ void WLApplication::handle_commandline_parameters() {
 	} else {
 		set_config_bool("auto_speed", false);
 	}
+
+	if (commandline_.count("enable_development_testing_tools") != 0u) {
+		g_allow_script_console = true;
+		commandline_.erase("enable_development_testing_tools");
+	}
+#ifndef NDEBUG
+	else {
+		assert(!g_allow_script_console);
+	}
+#endif
 
 	if (commandline_.count("version") != 0u) {
 		throw ParameterError(CmdLineVerbosity::None);  // No message on purpose
