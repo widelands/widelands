@@ -1112,6 +1112,7 @@ void EditBoxHistory::add_entry(const std::string& new_entry) {
 		return;
 	}
 	entries_.emplace(entries_.begin(), new_entry);
+	changed_ = true;
 	if (entries_.size() > max_size_) {
 		entries_.pop_back();
 	}
@@ -1132,6 +1133,8 @@ void EditBoxHistory::load(const std::string& filename) {
 			while (char* line = fr.read_line()) {
 				add_entry(line);
 			}
+			// Only set it on success to allow next save() to try to fix problem
+			changed_ = false;
 		} catch (const std::exception& e) {
 			log_err(
 			   "Loading %s, line %" PRIuS ": %s", filename.c_str(), entries_.size() + 1, e.what());
@@ -1139,13 +1142,17 @@ void EditBoxHistory::load(const std::string& filename) {
 	}
 }
 
-void EditBoxHistory::save(const std::string& filename) const {
+void EditBoxHistory::save(const std::string& filename) {
+	if (!changed_) {
+		return;
+	}
 	try {
 		FileWrite fw;
 		for (auto it = entries_.rbegin(); it != entries_.rend(); ++it) {
 			fw.print_f("%s\n", it->c_str());
 		}
 		fw.write(*g_fs, filename);
+		changed_ = false;
 	} catch (const std::exception& e) {
 		log_err("Saving %s: %s", filename.c_str(), e.what());
 	}

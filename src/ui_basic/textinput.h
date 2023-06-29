@@ -123,12 +123,13 @@ public:
 	// No getter, use get_entry(-1) to get tmp_
 
 	void load(const std::string& filename);
-	void save(const std::string& filename) const;
+	void save(const std::string& filename);
 
 private:
 	uint16_t max_size_{0};
 	std::vector<std::string> entries_;
 	std::string tmp_;
+	bool changed_{false};
 };
 
 /** Subclass for single-line text input. */
