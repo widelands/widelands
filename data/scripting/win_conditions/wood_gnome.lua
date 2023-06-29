@@ -109,7 +109,7 @@ local r = {
          end
          privmsg = end_msgs.body
          privmsg = privmsg .. msg
-         points[i][1]:send_to_inbox(end_msg.title, privmsg)
+         points[i][1]:send_to_inbox(end_msgs.title, privmsg)
          wl.game.report_result(points[i][1], win_lost, make_extra_data(points[i][1], wc_descname, wc_version, {score=points[i][2]}))
       end
    end
