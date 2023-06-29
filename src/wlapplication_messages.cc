@@ -98,7 +98,7 @@ void fill_parameter_vector() {
 		_("Constantly adjust the game speed automatically depending on AI delay. "
 		  "Only to be used for AI testing or training (in conjunction with --ai_training)."),
 		true},
-     /* This is deliberately so long to discourage overusage */
+	  /* This is deliberately so long to discourage overusage */
 	  {"", "enable_development_testing_tools", "", _("Enable the Script Console and Cheating Mode."),
 		true},
 	  /// Saving options
