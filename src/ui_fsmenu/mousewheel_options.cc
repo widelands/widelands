@@ -412,7 +412,7 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
                        Used as e.g.: "Change Editor Toolsize: Ctrl+Any scroll"
                        The ':' will be added by another format string. */
                    _("Change Editor Toolsize"),
-                   {&zoom_box_, &mapscroll_box_},
+                   {&zoom_box_, &mapscroll_box_, &toolgap_box_},
                    &(settings_.toolsize_mod_),
                    &(settings_.toolsize_dir_)),
      toolgap_box_(this,
@@ -420,7 +420,7 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
                       Used as e.g.: "Change Editor Tool Gap: Ctrl+Any scroll"
                       The ':' will be added by another format string. */
                   _("Change Editor Tool Gap"),
-                  {&zoom_box_, &mapscroll_box_},
+                  {&zoom_box_, &mapscroll_box_, &toolsize_box_},
                   &(settings_.toolgap_mod_),
                   &(settings_.toolgap_dir_)),
      zoom_invert_box_(
