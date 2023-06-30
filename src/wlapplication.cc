@@ -475,6 +475,7 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 
 	g_chat_sent_history.load(kChatSentHistoryFile);
 	if (g_allow_script_console) {
+		log_info("Developer tools are enabled.");
 		g_script_console_history.load(kScriptConsoleHistoryFile);
 	}
 }
@@ -1577,9 +1578,8 @@ void WLApplication::handle_commandline_parameters() {
 		commandline_.erase("enable_development_testing_tools");
 	}
 #ifndef NDEBUG
-	else {
-		assert(!g_allow_script_console);
-	}
+	// Always enable in debug builds
+	g_allow_script_console = true;
 #endif
 
 	if (commandline_.count("version") != 0u) {
