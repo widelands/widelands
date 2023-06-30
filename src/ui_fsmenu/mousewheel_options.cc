@@ -85,6 +85,7 @@ void MousewheelConfigSettings::read() {
 	toolgap_mod_ = READ_MOD(kEditorToolgap);
 	zoom_dir_ = READ_DIR(kMapZoom);
 	speed_dir_ = READ_DIR(kGameSpeed);
+	toolsize_dir_ = READ_DIR(kEditorToolsize);
 	toolgap_dir_ = READ_DIR(kEditorToolgap);
 	value_invert_ = READ_DIR(kUIChangeValueInvert);
 	tab_invert_ = READ_DIR(kUITabInvert);
