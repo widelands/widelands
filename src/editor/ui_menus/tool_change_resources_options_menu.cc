@@ -41,7 +41,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
    : EditorToolOptionsMenu(parent, registry, 370, 120, _("Resources"), increase_tool),
      increase_tool_(increase_tool),
      box_(this, UI::PanelStyle::kWui, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
-     change_by_(&box_,
+     change_by_(&box_, "change_by",
                 0,
                 0,
                 get_inner_w() - 2 * hmargin(),
@@ -53,7 +53,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
                 _("Increase/Decrease amount by:"),
                 UI::SpinBox::Units::kNone,
                 UI::SpinBox::Type::kSmall),
-     set_to_(&box_,
+     set_to_(&box_, "set_to",
              0,
              0,
              get_inner_w() - 2 * hmargin(),
@@ -65,9 +65,9 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
              _("Set amount to:"),
              UI::SpinBox::Units::kNone,
              UI::SpinBox::Type::kSmall),
-     resources_box_(&box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, 1),
+     resources_box_(&box_, UI::PanelStyle::kWui, "resources_box", 0, 0, UI::Box::Horizontal, 0, 0, 1),
      cur_selection_(
-        &box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, 0, 0, "", UI::Align::kCenter) {
+        &box_, UI::PanelStyle::kWui, "label_selection", UI::FontStyle::kWuiLabel, 0, 0, 0, 0, "", UI::Align::kCenter) {
 	// Configure spin boxes
 	change_by_.set_tooltip(
 	   /** TRANSLATORS: Editor change rseources access keys. **/

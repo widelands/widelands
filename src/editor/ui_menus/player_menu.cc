@@ -52,9 +52,9 @@ public:
 	            /** TRANSLATORS: Window title in the editor when a player has selected more than the
 	               recommended number of players */
 	            _("Too Many Players")),
-	     box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical, 0, 0, 2 * kMargin),
+	     box_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical, 0, 0, 2 * kMargin),
 	     warning_label_(
-	        &box_,
+	        &box_, "label_warning",
 	        0,
 	        0,
 	        300,
@@ -68,13 +68,13 @@ public:
 	        UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	     reminder_choice_(
 	        &box_,
-	        UI::PanelStyle::kWui,
+	        UI::PanelStyle::kWui, "do_not_ask_again",
 	        Vector2i::zero(),
 	        /** TRANSLATORS: Checkbox for: 'We do not recommend setting more than 8 players except
 	           for testing purposes. Are you sure that you want more than 8 players?' */
 	        _("Do not remind me again")),
 	     button_box_(
-	        &box_, UI::PanelStyle::kWui, kMargin, kMargin, UI::Box::Horizontal, 0, 0, 2 * kMargin),
+	        &box_, UI::PanelStyle::kWui, "buttons_box", kMargin, kMargin, UI::Box::Horizontal, 0, 0, 2 * kMargin),
 	     ok_(&button_box_, "ok", 0, 0, 120, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
 	     cancel_(&button_box_, "cancel", 0, 0, 120, 0, UI::ButtonStyle::kWuiSecondary, _("Abort")) {
 
@@ -131,7 +131,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
                                    EditorSetStartingPosTool& tool,
                                    UI::UniqueWindow::Registry& registry)
    : EditorToolOptionsMenu(parent, registry, 0, 0, _("Player Options"), tool),
-     box_(this, UI::PanelStyle::kWui, kMargin, kMargin, UI::Box::Vertical),
+     box_(this, UI::PanelStyle::kWui, "main_box", kMargin, kMargin, UI::Box::Vertical),
      no_of_players_(&box_,
                     "dropdown_map_players",
                     0,
@@ -169,10 +169,10 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 		no_of_players_.add(as_string(p), p, nullptr, p == nr_players);
 		no_of_players_.selected.connect([this]() { no_of_players_clicked(); });
 
-		UI::Box* row = new UI::Box(&box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+		UI::Box* row = new UI::Box(&box_, UI::PanelStyle::kWui, format("player_box_%u", p), 0, 0, UI::Box::Horizontal);
 
 		// Name
-		UI::EditBox* plr_name = new UI::EditBox(row, 0, 0, 0, UI::PanelStyle::kWui);
+		UI::EditBox* plr_name = new UI::EditBox(row, format("player_name_%u", p), 0, 0, 0, UI::PanelStyle::kWui);
 		if (map_has_player) {
 			plr_name->set_text(map.get_scenario_player_name(p));
 		}

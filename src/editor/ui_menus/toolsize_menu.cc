@@ -33,7 +33,7 @@ EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
                                        UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(
         &parent, UI::WindowStyle::kWui, "toolsize_menu", &registry, 250, 30, _("Tool Size")),
-     spinbox_(this,
+     spinbox_(this, "toolsize",
               0,
               0,
               get_inner_w(),

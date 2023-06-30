@@ -31,8 +31,8 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
    UI::UniqueWindow::Registry& registry)
    : EditorToolOptionsMenu(parent, registry, 300, 120, _("Random Height Options"), noise_tool),
      noise_tool_(noise_tool),
-     box_(this, UI::PanelStyle::kWui, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
-     lower_(&box_,
+     box_(this, UI::PanelStyle::kWui, "main_box", hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
+     lower_(&box_, "lower",
             0,
             0,
             get_inner_w() - 2 * hmargin(),
@@ -44,7 +44,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
             _("Minimum height:"),
             UI::SpinBox::Units::kNone,
             UI::SpinBox::Type::kSmall),
-     upper_(&box_,
+     upper_(&box_, "upper",
             0,
             0,
             get_inner_w() - 2 * hmargin(),
@@ -56,7 +56,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
             _("Maximum height:"),
             UI::SpinBox::Units::kNone,
             UI::SpinBox::Type::kSmall),
-     set_to_(&box_,
+     set_to_(&box_, "set_to",
              0,
              0,
              get_inner_w() - 2 * hmargin(),
@@ -82,7 +82,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
 	upper_.changed.connect([this]() { update_upper(); });
 	set_to_.changed.connect([this]() { update_set_to(); });
 
-	UI::Textarea* label = new UI::Textarea(&box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0,
+	UI::Textarea* label = new UI::Textarea(&box_, UI::PanelStyle::kWui, "label_random", UI::FontStyle::kWuiLabel, 0,
 	                                       0, 0, 0, _("Random height"), UI::Align::kCenter);
 	label->set_fixed_width(get_inner_w() - 2 * hmargin());
 	box_.add(label);
@@ -90,7 +90,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
 	box_.add(&lower_);
 
 	box_.add_space(2 * vspacing());
-	label = new UI::Textarea(&box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, 0, 0,
+	label = new UI::Textarea(&box_, UI::PanelStyle::kWui, "label_fixed", UI::FontStyle::kWuiLabel, 0, 0, 0, 0,
 	                         _("Fixed height"), UI::Align::kCenter);
 	label->set_fixed_width(get_inner_w() - 2 * hmargin());
 	box_.add(label);
