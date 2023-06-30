@@ -42,7 +42,7 @@ BuildingHelpWindow::BuildingHelpWindow(Panel* const parent,
                       width,
                       height,
                       format(_("Help: %s"), building_description.descname())),
-     textarea_(new MultilineTextarea(this, 5, 5, width - 10, height - 10, UI::PanelStyle::kWui)) {
+     textarea_(new MultilineTextarea(this, "text", 5, 5, width - 10, height - 10, UI::PanelStyle::kWui)) {
 	assert(tribe.has_building(tribe.building_index(building_description.name())) ||
 	       building_description.type() == Widelands::MapObjectType::MILITARYSITE);
 	try {

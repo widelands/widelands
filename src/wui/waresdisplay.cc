@@ -50,13 +50,13 @@ AbstractWaresDisplay::AbstractWaresDisplay(
    int32_t hgap,
    int32_t vgap)
    :  // Size is set when add_warelist is called, as it depends on the type_.
-     UI::Panel(parent, UI::PanelStyle::kWui, x, y, 0, 0),
+     UI::Panel(parent, UI::PanelStyle::kWui, "wares_display", x, y, 0, 0),
      tribe_(tribe),
 
      type_(type),
      indices_(type_ == Widelands::wwWORKER ? tribe_.workers() : tribe_.wares()),
      curware_(this,
-              UI::PanelStyle::kWui,
+              UI::PanelStyle::kWui, "current",
               UI::FontStyle::kWuiLabel,
               0,
               get_inner_h() - 25,

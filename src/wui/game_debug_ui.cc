@@ -39,10 +39,10 @@
 MapObjectDebugPanel::MapObjectDebugPanel(UI::Panel& parent,
                                          const Widelands::EditorGameBase& egbase,
                                          Widelands::MapObject& obj)
-   : UI::Panel(&parent, UI::PanelStyle::kWui, 0, 0, 350, 200),
+   : UI::Panel(&parent, UI::PanelStyle::kWui, "map_object_debug_panel", 0, 0, 350, 200),
      egbase_(egbase),
      object_(&obj),
-     log_(this,
+     log_(this, "log",
           0,
           0,
           350,
@@ -82,7 +82,7 @@ MapObjectDebugWindow::MapObjectDebugWindow(InteractiveBase& parent, Widelands::M
    : UI::Window(&parent, UI::WindowStyle::kWui, "map_object_debug", 0, 0, 100, 100, ""),
 
      object_(&obj),
-     tabs_(this, UI::TabPanelStyle::kWuiLight) {
+     tabs_(this, UI::TabPanelStyle::kWuiLight, "tabs") {
 	serial_ = obj.serial();
 	set_title(std::to_string(serial_));
 
@@ -137,11 +137,11 @@ FieldDebugWindow::FieldDebugWindow(InteractiveBase& parent, Widelands::Coords co
      coords_(map_.get_fcoords(coords)),
 
      //  setup child panels
-     ui_field_(this, 0, 0, 300, 280, UI::PanelStyle::kWui, ""),
+     ui_field_(this, "field", 0, 0, 300, 280, UI::PanelStyle::kWui, ""),
 
      ui_immovable_(this, "immovable", 0, 280, 300, 24, UI::ButtonStyle::kWuiMenu, ""),
 
-     ui_bobs_(this, 0, 304, 300, 96, UI::PanelStyle::kWui) {
+     ui_bobs_(this, "bobs", 0, 304, 300, 96, UI::PanelStyle::kWui) {
 	ui_immovable_.sigclicked.connect([this]() { open_immovable(); });
 
 	assert(0 <= coords_.x);

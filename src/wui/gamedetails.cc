@@ -34,12 +34,12 @@
 #include "map_io/map_loader.h"
 
 GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
-   : UI::Panel(parent, style, 0, 0, 0, 0),
+   : UI::Panel(parent, style, "game_details", 0, 0, 0, 0),
      mode_(mode),
 
-     main_box_(this, style, 0, 0, UI::Box::Vertical, 0, 0, 0),
-     descr_box_(&main_box_, style, 0, 0, UI::Box::Vertical, 0, 0, 0),
-     name_label_(&main_box_,
+     main_box_(this, style, "main_box", 0, 0, UI::Box::Vertical, 0, 0, 0),
+     descr_box_(&main_box_, style, "description_box", 0, 0, UI::Box::Vertical, 0, 0, 0),
+     name_label_(&main_box_, "label_name",
                  0,
                  0,
                  0,
@@ -48,7 +48,7 @@ GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
                  "",
                  UI::Align::kLeft,
                  UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     descr_(&descr_box_,
+     descr_(&descr_box_, "description",
             0,
             0,
             UI::Scrollbar::kSize,
@@ -57,8 +57,8 @@ GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
             "",
             UI::Align::kLeft,
             UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     minimap_icon_(&descr_box_, style, 0, 0, 0, 0, nullptr),
-     button_box_(new UI::Box(&main_box_, style, 0, 0, UI::Box::Vertical)) {
+     minimap_icon_(&descr_box_, style, "minimap", 0, 0, 0, 0, nullptr),
+     button_box_(new UI::Box(&main_box_, style, "buttons_box", 0, 0, UI::Box::Vertical)) {
 	descr_.set_handle_mouse(false);
 	descr_box_.add(&descr_, UI::Box::Resizing::kFullSize);
 	descr_box_.add_space(padding_);

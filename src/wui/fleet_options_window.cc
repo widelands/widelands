@@ -98,9 +98,9 @@ FleetOptionsWindow::FleetOptionsWindow(UI::Panel* parent,
      type_(t),
      interface_(interface),
 
-     main_box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-     buttons_box_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
-     spinbox_(&buttons_box_,
+     main_box_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical),
+     buttons_box_(&main_box_, UI::PanelStyle::kWui, "buttons_box", 0, 0, UI::Box::Horizontal),
+     spinbox_(&buttons_box_, "target",
               0,
               0,
               300,
@@ -128,23 +128,23 @@ FleetOptionsWindow::FleetOptionsWindow(UI::Panel* parent,
 	buttons_box_.add(&infinite_target_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	buttons_box_.add(&spinbox_, UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
 
-	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel,
+	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, "label_statistics", UI::FontStyle::kWuiLabel,
 	                               _("Fleet Statistics"), UI::Align::kCenter),
 	              UI::Box::Resizing::kFullSize);
 
-	UI::Box* columns_box = new UI::Box(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
-	UI::Box* column1 = new UI::Box(columns_box, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
-	UI::Box* column2 = new UI::Box(columns_box, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
+	UI::Box* columns_box = new UI::Box(&main_box_, UI::PanelStyle::kWui, "columns_box", 0, 0, UI::Box::Horizontal);
+	UI::Box* column1 = new UI::Box(columns_box, UI::PanelStyle::kWui, "column_box_1", 0, 0, UI::Box::Vertical);
+	UI::Box* column2 = new UI::Box(columns_box, UI::PanelStyle::kWui, "column_box_2", 0, 0, UI::Box::Vertical);
 
 	auto create_textarea = [column1, column2, rtl](UI::Textarea** txt, std::string label) {
 		column1->add_space(kPadding);
 		column2->add_space(kPadding);
 
 		column1->add(
-		   new UI::Textarea(column1, UI::PanelStyle::kWui, UI::FontStyle::kWuiInfoPanelHeading, label,
+		   new UI::Textarea(column1, UI::PanelStyle::kWui, "label", UI::FontStyle::kWuiInfoPanelHeading, label,
 		                    UI::mirror_alignment(UI::Align::kLeft, rtl)),
 		   UI::Box::Resizing::kFullSize);
-		*txt = new UI::Textarea(column2, UI::PanelStyle::kWui, UI::FontStyle::kWuiInfoPanelParagraph,
+		*txt = new UI::Textarea(column2, UI::PanelStyle::kWui, "value", UI::FontStyle::kWuiInfoPanelParagraph,
 		                        "", UI::mirror_alignment(UI::Align::kRight, rtl));
 		column2->add(*txt, UI::Box::Resizing::kFullSize);
 	};
@@ -164,7 +164,7 @@ FleetOptionsWindow::FleetOptionsWindow(UI::Panel* parent,
 
 	main_box_.add_space(kPadding * 2);
 
-	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel,
+	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, "label_target", UI::FontStyle::kWuiLabel,
 	                               type_ == Type::kShip ? _("Desired number of transport ships:") :
                                                          _("Desired number of unemployed ferries:"),
 	                               UI::Align::kCenter),

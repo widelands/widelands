@@ -45,15 +45,17 @@ public:
 	 */
 	SoundControl(UI::Box* parent,
 	             UI::SliderStyle style,
+	             const std::string& name,
 	             const std::string& title,
 	             SoundType type,
 	             FxId representative_fx = kNoSoundEffect)
 	   : UI::Box(parent,
 	             style == UI::SliderStyle::kFsMenu ? UI::PanelStyle::kFsMenu : UI::PanelStyle::kWui,
+	             name,
 	             0,
 	             0,
 	             UI::Box::Horizontal),
-	     volume_(this,
+	     volume_(this, "volume",
 	             0,
 	             0,
 	             kSliderWidth,
@@ -65,7 +67,7 @@ public:
 	             /** TRANSLATORS: Tooltip for volume slider in sound options */
 	             _("Changes the volume. Click to hear a sample."),
 	             kCursorWidth),
-	     enable_(this, panel_style_, Vector2i::zero(), title),
+	     enable_(this, panel_style_, "enable", Vector2i::zero(), title),
 	     type_(type),
 	     fx_(representative_fx) {
 		set_inner_spacing(kSpacing);
@@ -124,12 +126,13 @@ constexpr int kSpacing = 12;
 SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
    : UI::Box(&parent,
              style == UI::SliderStyle::kFsMenu ? UI::PanelStyle::kFsMenu : UI::PanelStyle::kWui,
+             "sound_options",
              0,
              0,
              UI::Box::Vertical),
      custom_songset_(
         this,
-        panel_style_,
+        panel_style_, "custom_songset",
         {0, 0},
         _("Play your own music in-game"),
         richtext_escape(
@@ -140,19 +143,19 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
 
 	set_inner_spacing(kSpacing);
 
-	add(new SoundControl(this, style, pgettext("sound_options", "Music"), SoundType::kMusic));
+	add(new SoundControl(this, style, "music", pgettext("sound_options", "Music"), SoundType::kMusic));
 
-	add(new SoundControl(this, style, pgettext("sound_options", "Chat Messages"), SoundType::kChat,
+	add(new SoundControl(this, style, "chat", pgettext("sound_options", "Chat Messages"), SoundType::kChat,
 	                     SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")));
 
-	add(new SoundControl(this, style, pgettext("sound_options", "Game Messages"),
+	add(new SoundControl(this, style, "messages", pgettext("sound_options", "Game Messages"),
 	                     SoundType::kMessage,
 	                     SoundHandler::register_fx(SoundType::kMessage, "sound/message")));
 
-	add(new SoundControl(this, style, pgettext("sound_options", "User Interface"), SoundType::kUI));
+	add(new SoundControl(this, style, "ui", pgettext("sound_options", "User Interface"), SoundType::kUI));
 
 	add(new SoundControl(
-	   this, style, pgettext("sound_options", "Ambient Sounds"), SoundType::kAmbient,
+	   this, style, "ambient", pgettext("sound_options", "Ambient Sounds"), SoundType::kAmbient,
 	   SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")));
 	add(&custom_songset_);
 	custom_songset_.set_state(g_sh->use_custom_songset());
@@ -163,7 +166,7 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
 	// the MultilineTextarea is not added to the Box. So, we create and add it even if its text is
 	// empty.
 	UI::MultilineTextarea* sound_warning =
-	   new UI::MultilineTextarea(this, 0, 0, 100, 0, UI::PanelStyle::kWui, "", UI::Align::kLeft,
+	   new UI::MultilineTextarea(this, "warning", 0, 0, 100, 0, UI::PanelStyle::kWui, "", UI::Align::kLeft,
 	                             UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	add(sound_warning, UI::Box::Resizing::kExpandBoth);
 

@@ -75,7 +75,7 @@ private:
 };
 
 BuildGrid::BuildGrid(UI::Panel* parent, Widelands::Player* plr, int32_t x, int32_t y, int32_t cols)
-   : UI::IconGrid(parent, UI::PanelStyle::kWui, x, y, kBuildGridCellSize, kBuildGridCellSize, cols),
+   : UI::IconGrid(parent, UI::PanelStyle::kWui, "build_grid", x, y, kBuildGridCellSize, kBuildGridCellSize, cols),
      plr_(plr) {
 	icon_clicked.connect([this](Widelands::DescriptionIndex i) { click_slot(i); });
 	mouseout.connect([this](Widelands::DescriptionIndex i) { mouseout_slot(i); });
@@ -263,7 +263,7 @@ FieldActionWindow::FieldActionWindow(InteractiveBase* const ib,
      player_(plr),
      map_(ib->egbase().map()),
      node_(ib->get_sel_pos().node, &map_[ib->get_sel_pos().node]),
-     tabpanel_(this, UI::TabPanelStyle::kWuiDark),
+     tabpanel_(this, UI::TabPanelStyle::kWuiDark, "tabs"),
 
      is_showing_workarea_overlaps_(ib->get_display_flag(InteractiveBase::dfShowWorkareaOverlap)),
      building_under_mouse_(Widelands::INVALID_INDEX) {
@@ -371,7 +371,7 @@ Add the buttons you normally get when clicking on a field.
 */
 void FieldActionWindow::add_buttons_auto() {
 	UI::Box* buildbox = nullptr;
-	UI::Box& watchbox = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	UI::Box& watchbox = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, "watch_box", 0, 0, UI::Box::Horizontal);
 
 	upcast(InteractiveGameBase, igbase, &ibase());
 	upcast(InteractivePlayer, ipl, igbase);
@@ -381,14 +381,14 @@ void FieldActionWindow::add_buttons_auto() {
 		if (upcast(const Widelands::Immovable, mo, map_.get_immovable(node_))) {
 			if (mo->is_marked_for_removal(ipl->player_number())) {
 				UI::Box& box =
-				   *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+				   *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, "immovable_actions_box", 0, 0, UI::Box::Horizontal);
 				add_button(&box, "unmark_for_removal", kImgButtonUnmarkRemoval,
 				           &FieldActionWindow::act_unmark_removal,
 				           _("Marked for removal by a worker – click to unmark"));
 				add_tab("target", kImgTabTarget, &box, _("Immovable Actions"));
 			} else if (suited_for_targeting(ipl->player_number(), ipl->egbase(), *mo)) {
 				UI::Box& box =
-				   *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+				   *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, "immovable_actions_box", 0, 0, UI::Box::Horizontal);
 				add_button(&box, "mark_for_removal", kImgButtonMarkRemoval,
 				           &FieldActionWindow::act_mark_removal,
 				           _("Mark this immovable for timely removal by a suited worker"));
@@ -406,7 +406,7 @@ void FieldActionWindow::add_buttons_auto() {
 		const bool can_act = igbase != nullptr ? igbase->can_act(owner) : true;
 
 		// The box with road-building buttons
-		buildbox = new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+		buildbox = new UI::Box(&tabpanel_, UI::PanelStyle::kWui, "build_box", 0, 0, UI::Box::Horizontal);
 
 		if (upcast(Widelands::Flag, flag, imm)) {
 			// Add flag actions
@@ -665,7 +665,7 @@ Buttons used during road building: Set flag here and Abort
 ===============
 */
 void FieldActionWindow::add_buttons_road(bool flag) {
-	UI::Box& buildbox = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	UI::Box& buildbox = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, "build_box", 0, 0, UI::Box::Horizontal);
 
 	if (flag) {
 		add_button(&buildbox, "build_flag", kImgButtonBuildFlag, &FieldActionWindow::act_buildflag,
@@ -691,7 +691,7 @@ void FieldActionWindow::add_buttons_road(bool flag) {
 }
 
 void FieldActionWindow::add_buttons_waterway(bool flag) {
-	UI::Box& buildbox = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	UI::Box& buildbox = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, "build_box", 0, 0, UI::Box::Horizontal);
 
 	if (flag) {
 		add_button(&buildbox, "build_flag", kImgButtonBuildFlag, &FieldActionWindow::act_buildflag,

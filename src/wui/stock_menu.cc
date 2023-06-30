@@ -40,11 +40,11 @@ StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registr
    : UI::UniqueWindow(&plr, UI::WindowStyle::kWui, "stock_menu", &registry, 480, 640, _("Stock")),
      player_(plr),
      colors_(g_style_manager->building_statistics_style()),
-     main_box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-     tabs_(&main_box_, UI::TabPanelStyle::kWuiDark),
+     main_box_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical),
+     tabs_(&main_box_, UI::TabPanelStyle::kWuiDark, "tabs"),
      solid_icon_backgrounds_(
         &main_box_,
-        UI::PanelStyle::kWui,
+        UI::PanelStyle::kWui, "evaluate",
         Vector2i::zero(),
         /** TRANSLATORS: If this checkbox is ticked, all icons in the stock menu are drawn with
            different background colors; each icon's color indicates whether the stock is higher or

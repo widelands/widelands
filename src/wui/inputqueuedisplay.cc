@@ -164,7 +164,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                                      bool show_only,
                                      bool has_priority,
                                      BuildingWindow::CollapsedState* collapsed)
-   : UI::Box(parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+   : UI::Box(parent, UI::PanelStyle::kWui, format("inputqueuedisplay_%u_%u", static_cast<unsigned>(type), ware_or_worker_index), 0, 0, UI::Box::Horizontal),
      ibase_(interactive_base),
      can_act_(!show_only && ibase_.can_act(building.owner().player_number())),
      show_only_(show_only),
@@ -175,8 +175,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
      queue_(queue),
      settings_(settings),
      max_fill_indicator_(*g_image_cache->get("images/wui/buildings/max_fill_indicator.png")),
-     vbox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-     hbox_(&vbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+     vbox_(this, UI::PanelStyle::kWui, "vbox", 0, 0, UI::Box::Vertical),
+     hbox_(&vbox_, UI::PanelStyle::kWui, "hbox", 0, 0, UI::Box::Horizontal),
      b_decrease_desired_fill_(&hbox_,
                               "decrease_desired",
                               0,
@@ -238,7 +238,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                "",
                kButtonSize,
                can_act_ && has_priority_),
-     spacer_(&hbox_, UI::PanelStyle::kWui, 0, 0, priority_.get_w(), priority_.get_h()),
+     spacer_(&hbox_, UI::PanelStyle::kWui, "spacer", 0, 0, priority_.get_w(), priority_.get_h()),
      slider_was_moved_(nullptr),
      collapsed_(collapsed),
      nr_icons_(queue_ != nullptr            ? queue_->get_max_size() :
@@ -268,7 +268,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 	hbox_.add(&b_decrease_desired_fill_);
 
 	for (size_t i = 0; i < nr_icons_; ++i) {
-		icons_[i] = new UI::Icon(&hbox_, UI::PanelStyle::kWui, 0, 0, kButtonSize, kButtonSize,
+		icons_[i] = new UI::Icon(&hbox_, UI::PanelStyle::kWui, format("icon_%u", i), 0, 0, kButtonSize, kButtonSize,
 		                         type_ == Widelands::wwWARE ?
                                   building.owner().tribe().get_ware_descr(index_)->icon() :
                                   building.owner().tribe().get_worker_descr(index_)->icon());

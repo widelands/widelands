@@ -34,7 +34,7 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                                UI::Panel* delete_button_parent)
    : window_style_(ws),
      table_box_(new UI::Box(
-        table_parent != nullptr ? table_parent : parent, style, 0, 0, UI::Box::Vertical)),
+        table_parent != nullptr ? table_parent : parent, style, "table_box", 0, 0, UI::Box::Vertical)),
      filetype_(filetype),
 
      // Savegame description

@@ -50,7 +50,7 @@ EncyclopediaWindow::EncyclopediaWindow(InteractiveBase& parent,
         &parent, UI::WindowStyle::kWui, "encyclopedia", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, ""),
      parent_(parent),
      lua_(lua),
-     tabs_(this, UI::TabPanelStyle::kWuiLight) {
+     tabs_(this, UI::TabPanelStyle::kWuiLight, "tabs") {
 }
 
 static const std::string kTabNamePrefix = "encyclopedia_";
@@ -73,16 +73,16 @@ void EncyclopediaWindow::init(std::unique_ptr<LuaTable> table) {
 
 			wrapper_boxes_.insert(
 			   std::make_pair(tab_name, std::unique_ptr<UI::Box>(new UI::Box(
-			                               &tabs_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal))));
+			                               &tabs_, UI::PanelStyle::kWui, format("wrapper_box_%s", tab_name), 0, 0, UI::Box::Horizontal))));
 
 			boxes_.insert(std::make_pair(
 			   tab_name, std::unique_ptr<UI::Box>(new UI::Box(wrapper_boxes_.at(tab_name).get(),
-			                                                  UI::PanelStyle::kWui, 0, 0,
+			                                                  UI::PanelStyle::kWui, format("content_box_%s", tab_name), 0, 0,
 			                                                  UI::Box::Horizontal))));
 
 			lists_.insert(std::make_pair(
 			   tab_name, std::unique_ptr<UI::Listselect<EncyclopediaEntry>>(
-			                new UI::Listselect<EncyclopediaEntry>(boxes_.at(tab_name).get(), 0, 0,
+			                new UI::Listselect<EncyclopediaEntry>(boxes_.at(tab_name).get(), format("list_%s", tab_name), 0, 0,
 			                                                      contents_width, contents_height,
 			                                                      UI::PanelStyle::kWui))));
 			lists_.at(tab_name)->selected.connect(
@@ -90,7 +90,7 @@ void EncyclopediaWindow::init(std::unique_ptr<LuaTable> table) {
 
 			contents_.insert(std::make_pair(
 			   tab_name, std::unique_ptr<UI::MultilineTextarea>(
-			                new UI::MultilineTextarea(boxes_.at(tab_name).get(), 0, 0, contents_width,
+			                new UI::MultilineTextarea(boxes_.at(tab_name).get(), format("text_%s", tab_name), 0, 0, contents_width,
 			                                          contents_height, UI::PanelStyle::kWui))));
 
 			boxes_.at(tab_name)->add(lists_.at(tab_name).get());

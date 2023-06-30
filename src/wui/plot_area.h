@@ -51,6 +51,7 @@ struct WuiPlotArea : public UI::Panel {
 
 	// sample_rate is in in milliseconds
 	WuiPlotArea(UI::Panel* parent,
+	            const std::string& name,
 	            int32_t x,
 	            int32_t y,
 	            int32_t w,
@@ -188,6 +189,7 @@ private:
 struct DifferentialPlotArea : public WuiPlotArea {
 public:
 	DifferentialPlotArea(UI::Panel* parent,
+	                     const std::string& name,
 	                     int32_t x,
 	                     int32_t y,
 	                     int32_t w,

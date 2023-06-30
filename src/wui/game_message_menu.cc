@@ -51,7 +51,7 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
                       kWindowWidth,
                       kWindowHeight,
                       _("Messages: Inbox")),
-     message_body(this,
+     message_body(this, "body",
                   kPadding,
                   kMessageBodyY,
                   kWindowWidth - 2 * kPadding,
@@ -61,7 +61,7 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
                   UI::Align::kLeft,
                   UI::MultilineTextarea::ScrollMode::kScrollNormalForced) {
 
-	list = new UI::Table<uintptr_t>(this, kPadding, kButtonSize + 2 * kPadding,
+	list = new UI::Table<uintptr_t>(this, "list", kPadding, kButtonSize + 2 * kPadding,
 	                                kWindowWidth - 2 * kPadding, kTableHeight, UI::PanelStyle::kWui,
 	                                UI::TableRows::kMulti);
 	list->add_column(kWindowWidth - 2 * kPadding - 60 - 60 - 75, _("Title"));

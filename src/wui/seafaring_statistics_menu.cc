@@ -48,7 +48,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                       375,
                       _("Seafaring Statistics")),
      main_box_(this,
-               UI::PanelStyle::kWui,
+               UI::PanelStyle::kWui, "main_box",
                kPadding,
                kPadding,
                UI::Box::Vertical,
@@ -56,7 +56,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                get_inner_h(),
                kPadding),
      filter_box_(&main_box_,
-                 UI::PanelStyle::kWui,
+                 UI::PanelStyle::kWui, "filter_box",
                  0,
                  0,
                  UI::Box::Horizontal,
@@ -166,7 +166,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                        _("Center the map on the selected ship"),
                        shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsGotoShip, true),
                        UI::PanelStyle::kWui)),
-     table_(&main_box_, 0, 0, get_inner_w() - 2 * kPadding, 100, UI::PanelStyle::kWui) {
+     table_(&main_box_, "table", 0, 0, get_inner_w() - 2 * kPadding, 100, UI::PanelStyle::kWui) {
 
 	// Buttons for ship states
 	main_box_.add(&filter_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
