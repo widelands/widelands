@@ -47,6 +47,7 @@ private:
 	uint16_t gap_percent_{0U};
 
 	void changed();
+	bool is_updating_{false};
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOLSIZE_MENU_H

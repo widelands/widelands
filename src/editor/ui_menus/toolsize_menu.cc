@@ -87,6 +87,9 @@ EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
 }
 
 void EditorToolsizeMenu::changed() {
+	if (is_updating_) {
+		return;
+	}
 	radius_ = spinbox_radius_.get_value() - 1;
 	gap_percent_ = spinbox_gap_.get_value();
 	eia().set_sel_radius(radius_, gap_percent_);
@@ -99,6 +102,7 @@ void EditorToolsizeMenu::update(uint32_t radius, uint32_t gap) {
 }
 
 void EditorToolsizeMenu::set_buttons_enabled(bool enable) {
+	is_updating_ = true;
 	int32_t sbval = radius_ + 1;
 	if (enable) {
 		spinbox_radius_.set_interval(1, MAX_TOOL_AREA + 1);
@@ -112,4 +116,5 @@ void EditorToolsizeMenu::set_buttons_enabled(bool enable) {
 		spinbox_radius_.set_interval(sbval, sbval);
 		spinbox_gap_.set_interval(gap_percent_, gap_percent_);
 	}
+	is_updating_ = false;
 }
