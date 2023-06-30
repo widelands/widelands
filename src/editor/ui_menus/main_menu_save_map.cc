@@ -198,6 +198,10 @@ void MainMenuSaveMap::clicked_make_directory() {
 
 void MainMenuSaveMap::clicked_edit_options() {
 	map_options_registry_.create();
+	// Make sure the map options window is always on top of us
+	assert(map_options_registry_.window != nullptr);
+	map_options_registry_.window->set_z(
+	   static_cast<UI::Panel::ZOrder>(static_cast<int>(get_z()) + 1));
 }
 
 void MainMenuSaveMap::update_map_options() {
