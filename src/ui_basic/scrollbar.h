@@ -34,7 +34,7 @@ struct Scrollbar : public Panel {
 	static constexpr int kSize = 24;
 
 public:
-	Scrollbar(Panel* parent,
+	Scrollbar(Panel* parent, const std::string& name,
 	          int32_t x,
 	          int32_t y,
 	          uint32_t w,

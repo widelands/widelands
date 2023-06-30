@@ -77,7 +77,7 @@ Window::Window(Panel* const parent,
                uint32_t const w,
                uint32_t const h,
                const std::string& title)
-   : NamedPanel(parent,
+   : Panel(parent,
                 s == WindowStyle::kWui ? PanelStyle::kWui : PanelStyle::kFsMenu,
                 name,
                 x,

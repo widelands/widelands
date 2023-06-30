@@ -40,14 +40,14 @@ Scrollbar
 /**
 Initialize the scrollbar using default values.
 */
-Scrollbar::Scrollbar(Panel* const parent,
+Scrollbar::Scrollbar(Panel* const parent, const std::string& name,
                      int32_t const x,
                      int32_t const y,
                      uint32_t const w,
                      uint32_t const h,
                      UI::PanelStyle style,
                      bool const horiz)
-   : Panel(parent, style, x, y, w, h),
+   : Panel(parent, style, name, x, y, w, h),
      horizontal_(horiz),
 
      buttonsize_(kSize),

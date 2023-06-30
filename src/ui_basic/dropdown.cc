@@ -62,7 +62,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                            const DropdownType type,
                            UI::PanelStyle style,
                            ButtonStyle button_style)
-   : UI::NamedPanel(parent,
+   : UI::Panel(parent,
                     style,
                     name,
                     x,
@@ -531,7 +531,7 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 	if (is_expanded()) {
 		return list_->handle_key(down, code);
 	}
-	return NamedPanel::handle_key(down, code);
+	return Panel::handle_key(down, code);
 }
 void BaseDropdown::delete_last_of_filter() {
 	if (is_filtered()) {

@@ -89,6 +89,7 @@ Panel::Panel(Panel* const nparent,
 	        }
         })),
      logic_thread_locked_(LogicThreadState::kEndingConfirmed) {
+	assert(!name.empty());
 	assert(nparent != this);
 	if (parent_ != nullptr) {
 		next_ = parent_->first_child_;

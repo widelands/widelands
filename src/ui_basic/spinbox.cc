@@ -79,6 +79,7 @@ struct SpinBoxImpl {
  * The spinbox' height and button size is set automatically according to the height of its textarea.
  */
 SpinBox::SpinBox(Panel* const parent,
+                 const std::string& name,
                  const int32_t x,
                  const int32_t y,
                  const uint32_t w,
@@ -92,7 +93,7 @@ SpinBox::SpinBox(Panel* const parent,
                  SpinBox::Type type,
                  int32_t step_size,
                  int32_t big_step_size)
-   : Panel(parent, style, x, y, std::max(w, unit_w), 0),
+   : Panel(parent, style, name, x, y, std::max(w, unit_w), 0),
      type_(type),
      sbi_(new SpinBoxImpl),
      unit_width_(unit_w),

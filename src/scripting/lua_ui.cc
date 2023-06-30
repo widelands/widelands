@@ -93,7 +93,7 @@ const MethodType<LuaPanel> LuaPanel::Methods[] = {
 };
 
 // Look for all descendant panels of class P and add the corresponding Lua version to the currently
-// active Lua table. Class P needs to be a NamedPanel.
+// active Lua table. Class P needs to be a Panel.
 template <class P, class LuaP>
 static void put_all_visible_panels_into_table(lua_State* L, UI::Panel* g) {
 	if (g == nullptr) {
@@ -739,13 +739,8 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 		as_box->add_space(get_table_int(L, "value", true));
 
 	} else if (widget_type == "panel") {
-		std::string name = get_table_string(L, "name", false);
-		if (name.empty()) {
-			created_panel = new UI::Panel(parent, UI::PanelStyle::kWui, x, y, w, h, tooltip);
-		} else {
-			created_panel =
-			   new UI::NamedPanel(parent, UI::PanelStyle::kWui, name, x, y, w, h, tooltip);
-		}
+		std::string name = get_table_string(L, "name", true);
+		created_panel = new UI::Panel(parent, UI::PanelStyle::kWui, name, x, y, w, h, tooltip);
 
 	} else if (widget_type == "window") {
 		if (parent != get_egbase(L).get_ibase()) {

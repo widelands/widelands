@@ -26,8 +26,8 @@
 
 namespace UI {
 
-FileViewPanel::FileViewPanel(Panel* parent, TabPanelStyle background_style)
-   : TabPanel(parent, background_style) {
+FileViewPanel::FileViewPanel(Panel* parent, TabPanelStyle background_style, const std::string& name)
+   : TabPanel(parent, background_style, name) {
 	layout();
 
 	sigclicked.connect([this]() { load_tab_contents(); });

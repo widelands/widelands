@@ -158,6 +158,7 @@ struct WuiPlotAreaSlider : public UI::DiscreteSlider {
 	                  const uint32_t cursor_size = 20,
 	                  const bool enabled = true)
 	   : DiscreteSlider(parent,
+	                    "plot_slider",
 	                    x,
 	                    y,
 	                    w,

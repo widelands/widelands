@@ -28,13 +28,14 @@ namespace UI {
  */
 Box::Box(Panel* const parent,
          PanelStyle s,
+         const std::string& name,
          int32_t const x,
          int32_t const y,
          uint32_t const orientation,
          int32_t const max_x,
          int32_t const max_y,
          uint32_t const inner_spacing)
-   : Panel(parent, s, x, y, 0, 0),
+   : Panel(parent, s, name, x, y, 0, 0),
 
      max_x_(max_x != 0 ? max_x : g_gr->get_xres()),
      max_y_(max_y != 0 ? max_y : g_gr->get_yres()),
