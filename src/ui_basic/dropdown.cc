@@ -77,7 +77,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 
      base_height_(base_height(button_dimension, style)),
 
-     button_box_(this, style, 0, 0, UI::Box::Horizontal, w, get_h()),
+     button_box_(this, style, "dropdown_button_box", 0, 0, UI::Box::Horizontal, w, get_h()),
      push_button_(type == DropdownType::kTextual ?
                      new UI::Button(&button_box_,
                                     "dropdown_select",

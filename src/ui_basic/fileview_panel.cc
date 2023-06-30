@@ -51,10 +51,10 @@ void FileViewPanel::load_tab_contents() {
 }
 
 void FileViewPanel::add_tab(const std::string& title, const std::string& lua_script) {
+	size_t index = boxes_.size();
 	script_paths_.push_back(lua_script);
 	boxes_.push_back(std::unique_ptr<UI::Box>(
-	   new UI::Box(this, panel_style_, 0, 0, UI::Box::Vertical, 0, 0, padding_)));
-	size_t index = boxes_.size() - 1;
+	   new UI::Box(this, panel_style_, format("box_%" PRIuS, index), 0, 0, UI::Box::Vertical, 0, 0, padding_)));
 
 	UI::MultilineTextarea* textarea =
 	   new UI::MultilineTextarea(boxes_.at(index).get(), "text_pane", 0, 0, Scrollbar::kSize, 0, panel_style_);

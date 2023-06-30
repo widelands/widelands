@@ -45,7 +45,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	                       int32_t const h,
 	                       PlayerSlot id,
 	                       GameSettingsProvider* const settings)
-	   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
+	   : UI::Box(parent, UI::PanelStyle::kFsMenu, format("multi_player_client_group_%u", id), 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
 	     slot_dropdown_(this,
 	                    format("dropdown_slot%d", static_cast<unsigned int>(id)),
 	                    0,
@@ -59,7 +59,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	                    UI::ButtonStyle::kFsMenuSecondary),
 	     // Name needs to be initialized after the dropdown, otherwise the layout function will
 	     // crash.
-	     name(this, UI::PanelStyle::kFsMenu, format("label_name_%d", id), UI::FontStyle::kFsMenuLabel, 0, 0, 0, 0),
+	     name(this, UI::PanelStyle::kFsMenu, format("label_name_%u", id), UI::FontStyle::kFsMenuLabel, 0, 0, 0, 0),
 	     settings_(settings),
 	     id_(id),
 

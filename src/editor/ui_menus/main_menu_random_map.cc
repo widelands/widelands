@@ -804,7 +804,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
    : UI::UniqueWindow(
         &parent, UI::WindowStyle::kWui, "random_map_menu", &r, 400, 500, _("New Random Map")),
      box_(this, panel_style_, "main_box", 0, 0, UI::Box::Vertical),
-     button_box_(&box_, panel_style_, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
+     button_box_(&box_, panel_style_, "buttons_box", 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
      ok_button_(&button_box_,
                 "generate_map",
                 0,

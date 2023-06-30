@@ -73,7 +73,7 @@ MapSelect::MapSelect(MenuCapsule& m,
 	table_.set_column_compare(2, [this](uint32_t a, uint32_t b) { return compare_size(a, b); });
 
 	UI::Box* hbox = new UI::Box(
-	   &checkboxes_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
+	   &checkboxes_, UI::PanelStyle::kFsMenu, "hbox", 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
 
 	show_all_maps_ = new UI::Button(
 	   hbox, "show_all_maps", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Show all maps"));

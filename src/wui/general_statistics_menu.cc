@@ -129,7 +129,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	create_player_buttons();
 	box_.add(&player_buttons_box_, UI::Box::Resizing::kFullSize);
 
-	UI::Box* hbox2 = new UI::Box(&box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, 1);
+	UI::Box* hbox2 = new UI::Box(&box_, UI::PanelStyle::kWui, "hbox", 0, 0, UI::Box::Horizontal, 0, 0, 1);
 
 	UI::Radiobutton* btn;
 

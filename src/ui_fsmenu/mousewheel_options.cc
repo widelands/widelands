@@ -128,7 +128,7 @@ void MousewheelConfigSettings::apply() const {
 
 KeymodDropdown::KeymodDropdown(UI::Panel* parent)
    : UI::Dropdown<uint16_t>(parent,
-                            std::string(),
+                            "keymod_dropdown",
                             0,
                             0,
                             kModDirDropdownMaxWidth,
@@ -165,7 +165,7 @@ KeymodDropdown::KeymodDropdown(UI::Panel* parent)
 
 DirDropdown::DirDropdown(UI::Panel* parent, bool two_d)
    : UI::Dropdown<uint8_t>(parent,
-                           std::string(),
+                           "dir_dropdown",
                            0,
                            0,
                            kModDirDropdownMaxWidth,
@@ -187,7 +187,7 @@ DirDropdown::DirDropdown(UI::Panel* parent, bool two_d)
 
 InvertDirDropdown::InvertDirDropdown(UI::Panel* parent)
    : UI::Dropdown<uint8_t>(parent,
-                           std::string(),
+                           "invert_dir_dropdown",
                            0,
                            0,
                            kModDirDropdownMaxWidth,
@@ -329,9 +329,9 @@ void InvertDirBox::set_width(int w) {
 }
 
 ScrollOptionsButtonBox::ScrollOptionsButtonBox(MousewheelOptionsDialog* parent)
-   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, kButtonSize, kPadding),
+   : UI::Box(parent, UI::PanelStyle::kFsMenu, "scroll_options_box", 0, 0, UI::Box::Horizontal, 0, kButtonSize, kPadding),
      reset_button_(this,
-                   std::string(),
+                   "reset",
                    0,
                    0,
                    0,
@@ -341,7 +341,7 @@ ScrollOptionsButtonBox::ScrollOptionsButtonBox(MousewheelOptionsDialog* parent)
                    _("Reset scroll settings to the defaults recommended for a standard single "
                      "wheel mouse")),
      touchpad_button_(this,
-                      std::string(),
+                      "touchpad",
                       0,
                       0,
                       0,
@@ -352,7 +352,7 @@ ScrollOptionsButtonBox::ScrollOptionsButtonBox(MousewheelOptionsDialog* parent)
                         "touchpad or other pointing device that can scroll horizontally as well "
                         "as vertically.")),
      apply_button_(this,
-                   std::string(),
+                   "apply",
                    0,
                    0,
                    0,
@@ -377,7 +377,7 @@ ScrollOptionsButtonBox::ScrollOptionsButtonBox(MousewheelOptionsDialog* parent)
 
 // The main scrolling options dialog box
 MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
-   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+   : UI::Box(parent, UI::PanelStyle::kFsMenu, "mousewheel_options_box", 0, 0, UI::Box::Vertical, 0, 0, kPadding),
      zoom_box_(this,
                /** TRANSLATORS: Name of a function for the scroll wheel.
                    Used as e.g.: "Zoom Map: Ctrl+Any scroll"
@@ -427,7 +427,7 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
         _("Invert scroll direction for increase/decrease:"),
         &(settings_.value_invert_)),
      horiz_override_box_(
-        this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, kButtonSize, kPadding),
+        this, UI::PanelStyle::kFsMenu, "fix_inverted_scrolling_box", 0, 0, UI::Box::Horizontal, 0, kButtonSize, kPadding),
      inverted_x_checkbox_(
         &horiz_override_box_,
         UI::PanelStyle::kFsMenu, "fix_inverted_scrolling",
@@ -438,7 +438,7 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
           "Please report if you need to turn this on, so that we can improve the detection."),
         0),
      feedback_button_(&horiz_override_box_,
-                      std::string(),
+                      "feedback",
                       0,
                       0,
                       0,
