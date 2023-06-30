@@ -119,6 +119,11 @@ git add xdg/org.widelands.Widelands.appdata.xml xdg/org.widelands.Widelands.desk
 # - Statistics
 git add data/i18n/translation_stats.conf || true
 
+if [ -z "$(git status -s)" ]; then
+  echo "Run completed, nothing to commit."
+  exit 0
+fi
+
 # Commit and push.
 git commit -m "Fetched translations and updated catalogs."
 git push "$push_target" master
