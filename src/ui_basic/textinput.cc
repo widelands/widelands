@@ -115,7 +115,7 @@ AbstractTextInputPanel::~AbstractTextInputPanel() {  // NOLINT
 }
 
 AbstractTextInputPanel::Data::Data(AbstractTextInputPanel& init_owner)
-   : scrollbar(&init_owner,
+   : scrollbar(&init_owner, "scrollbar",
                init_owner.get_w() - Scrollbar::kSize,
                0,
                Scrollbar::kSize,

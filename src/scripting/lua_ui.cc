@@ -340,7 +340,7 @@ int LuaPanel::indicate(lua_State* L) {
       A UI descriptor table contains multiple keys of type :class:`string`. Common properties are:
 
          * ``"widget"``: **Mandatory**. The type of widget to create. See below for allowed values.
-         * ``"name"``: **Mandatory** for named panels. The internal name of the panel.
+         * ``"name"``: **Mandatory**. The internal name of the panel.
          * ``"x"``: **Optional**. The horizontal offset inside the parent from the left. Default: 0.
          * ``"y"``: **Optional**. The vertical offset inside the parent from the top. Default: 0.
          * ``"w"``: **Optional**. The widget's width. Default: automatic.
@@ -716,12 +716,13 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 			report_error(L, "Unknown box orientation '%s'", orientation_str.c_str());
 		}
 
+		std::string name = get_table_string(L, "name", true);
 		int32_t max_x = get_table_int(L, "max_x", false);
 		int32_t max_y = get_table_int(L, "max_y", false);
 		int32_t spacing = get_table_int(L, "spacing", false);
 
 		child_as_box =
-		   new UI::Box(parent, UI::PanelStyle::kWui, x, y, orientation, max_x, max_y, spacing);
+		   new UI::Box(parent, UI::PanelStyle::kWui, name, x, y, orientation, max_x, max_y, spacing);
 		created_panel = child_as_box;
 
 		child_as_box->set_scrolling(get_table_boolean(L, "scrolling", false));
@@ -760,10 +761,11 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 
 	} else if (widget_type == "textarea") {
 		std::string text = get_table_string(L, "text", true);
+		std::string name = get_table_string(L, "name", true);
 		UI::FontStyle font = g_style_manager->safe_font_style(get_table_string(L, "font", true));
 		UI::Align align = get_table_align(L, "text_align", false);
 		UI::Textarea* txt =
-		   new UI::Textarea(parent, UI::PanelStyle::kWui, font, x, y, w, h, text, align);
+		   new UI::Textarea(parent, UI::PanelStyle::kWui, name, font, x, y, w, h, text, align);
 		created_panel = txt;
 
 		txt->set_fixed_width(get_table_int(L, "fixed_width", false));

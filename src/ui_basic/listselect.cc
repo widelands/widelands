@@ -85,7 +85,7 @@ BaseListselect::BaseListselect(Panel* const parent, const std::string& name,
                                const ListselectLayout selection_mode)
    : Panel(parent, style, name, x, y, w, h),
 
-     scrollbar_(this, get_w() - Scrollbar::kSize, 0, 0, h, style),
+     scrollbar_(this, "scrollbar", get_w() - Scrollbar::kSize, 0, 0, h, style),
 
      selection_(no_selection_index()),
 

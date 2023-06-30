@@ -350,8 +350,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	// height.
 	const int16_t hinth = std::max(labelh_, remaining_space / 3);
 	descr_ = new UI::MultilineEditbox(
-	   &main_box_, 0, 0, max_w_, remaining_space - hinth, UI::PanelStyle::kWui);
-	hint_ = new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, hinth, UI::PanelStyle::kWui);
+	   &main_box_, "editbox_description", 0, 0, max_w_, remaining_space - hinth, UI::PanelStyle::kWui);
+	hint_ = new UI::MultilineEditbox(&main_box_, "editbox_hint", 0, 0, max_w_, hinth, UI::PanelStyle::kWui);
 
 	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, "label_name", UI::FontStyle::kWuiLabel, 0, 0,
 	                               max_w_, labelh_, _("Map name:")));

@@ -129,7 +129,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 		list_parent = list_parent->get_parent();
 	}
 	list_ =
-	   new UI::Listselect<uintptr_t>(list_parent, 0, 0, w, 0, style, ListselectLayout::kDropdown);
+	   new UI::Listselect<uintptr_t>(list_parent, "list", 0, 0, w, 0, style, ListselectLayout::kDropdown);
 	list_->set_linked_dropdown(this);
 
 	list_->set_visible(false);

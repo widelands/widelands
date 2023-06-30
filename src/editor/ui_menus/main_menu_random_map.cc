@@ -48,7 +48,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
                                                      const uint32_t h,
                                                      UI::Button& ok_button,
                                                      UI::Button& cancel_button)
-   : UI::Box(&parent, s, kMargin, kMargin, UI::Box::Vertical, 0, 0, kMargin),
+   : UI::Box(&parent, s, "random_map_panel", kMargin, kMargin, UI::Box::Vertical, 0, 0, kMargin),
      label_style_(s == UI::PanelStyle::kWui ? UI::FontStyle::kWuiLabel :
                                               UI::FontStyle::kFsMenuLabel),
      // UI elements
@@ -803,7 +803,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
                                            const uint32_t h)
    : UI::UniqueWindow(
         &parent, UI::WindowStyle::kWui, "random_map_menu", &r, 400, 500, _("New Random Map")),
-     box_(this, panel_style_, 0, 0, UI::Box::Vertical),
+     box_(this, panel_style_, "main_box", 0, 0, UI::Box::Vertical),
      button_box_(&box_, panel_style_, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
      ok_button_(&button_box_,
                 "generate_map",

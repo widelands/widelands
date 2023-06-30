@@ -57,7 +57,7 @@ void FileViewPanel::add_tab(const std::string& title, const std::string& lua_scr
 	size_t index = boxes_.size() - 1;
 
 	UI::MultilineTextarea* textarea =
-	   new UI::MultilineTextarea(boxes_.at(index).get(), 0, 0, Scrollbar::kSize, 0, panel_style_);
+	   new UI::MultilineTextarea(boxes_.at(index).get(), "text_pane", 0, 0, Scrollbar::kSize, 0, panel_style_);
 
 	textviews_.push_back(std::unique_ptr<UI::MultilineTextarea>(textarea));
 	add(format("about_%" PRIuS, index), title, boxes_.at(index).get(), "");

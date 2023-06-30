@@ -40,7 +40,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
    UI::UniqueWindow::Registry& registry)
    : EditorToolOptionsMenu(parent, registry, 370, 120, _("Resources"), increase_tool),
      increase_tool_(increase_tool),
-     box_(this, UI::PanelStyle::kWui, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
+     box_(this, UI::PanelStyle::kWui, "main_box", hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
      change_by_(&box_, "change_by",
                 0,
                 0,
@@ -90,7 +90,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 	const Widelands::Descriptions& descriptions = parent.egbase().descriptions();
 	for (Widelands::DescriptionIndex i = 0; i < descriptions.nr_resources(); ++i) {
 		const Widelands::ResourceDescription& resource = *descriptions.get_resource_descr(i);
-		radiogroup_.add_button(&resources_box_, UI::PanelStyle::kWui, Vector2i::zero(),
+		radiogroup_.add_button(&resources_box_, UI::PanelStyle::kWui, format("resource_%s", resource.name()), Vector2i::zero(),
 		                       g_image_cache->get(resource.representative_image()),
 		                       resource.descname());
 		resources_box_.add(radiogroup_.get_first_button(), UI::Box::Resizing::kFillSpace);

@@ -656,7 +656,7 @@ DiscreteSlider::DiscreteSlider(Panel* const parent, const std::string& name,
            h,
            tooltip_text),
      style_(init_style),
-     slider(this,
+     slider(this, "discrete_slider_impl",
             // here, we take into account the h_gap introduced by HorizontalSlider
             w / (2 * labels_in.size()) - cursor_size / 2,
             0,
