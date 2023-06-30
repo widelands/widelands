@@ -1102,10 +1102,10 @@ void Ship::warship_command(Game& game,
 			std::vector<Coords> dockpoints = game.map().find_portdock(portspace, true);
 			assert(!dockpoints.empty());
 
-			start_battle(
-			   game, Battle(nullptr, dockpoints.at(game.logic_rand() % dockpoints.size()),
-			                std::vector<uint32_t>(parameters.begin() + 2, parameters.end()), true),
-			   false);
+			start_battle(game,
+			             Battle(nullptr, dockpoints.at(game.logic_rand() % dockpoints.size()),
+			                    std::vector<uint32_t>(parameters.begin() + 2, parameters.end()), true),
+			             false);
 		}
 		return;
 	}
