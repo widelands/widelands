@@ -19,6 +19,7 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_SHIP_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_SHIP_H
 
+#include <deque>
 #include <memory>
 
 #include "base/macros.h"
@@ -161,7 +162,7 @@ struct Ship : Bob {
 		Phase phase{Phase::kNotYetStarted};
 		bool is_first;
 	};
-	void start_battle(Game&, Battle);
+	void start_battle(Game&, Battle, bool immediately);
 
 	uint32_t calculate_sea_route(EditorGameBase&, PortDock&, Path* = nullptr) const;
 
@@ -387,7 +388,7 @@ private:
 	};
 	std::unique_ptr<Expedition> expedition_;
 
-	std::vector<Battle> battles_;
+	std::deque<Battle> battles_;
 	uint32_t hitpoints_;
 	Time last_heal_time_{0U};
 	bool send_message_at_destination_{false};
@@ -423,7 +424,7 @@ protected:
 		ShipType pending_refit_{ShipType::kTransport};
 		std::string shipname_;
 		std::unique_ptr<Expedition> expedition_;
-		std::vector<Battle> battles_;
+		std::deque<Battle> battles_;
 		std::vector<ShippingItem::Loader> items_;
 		std::set<Serial> expedition_attack_target_serials_{0U};
 		std::vector<Serial> battle_serials_;

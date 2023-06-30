@@ -1092,7 +1092,7 @@ void Ship::warship_command(Game& game,
 		if (parameters.size() == 1) {  // Attacking a ship.
 			if (Ship* target = dynamic_cast<Ship*>(game.objects().get_object(parameters.front()));
 			    target != nullptr) {
-				start_battle(game, Battle(target, Coords::null(), {}, true));
+				start_battle(game, Battle(target, Coords::null(), {}, true), false);
 			}
 		} else {  // Attacking port coordinates.
 			assert(parameters.size() > 2);
@@ -1104,7 +1104,8 @@ void Ship::warship_command(Game& game,
 
 			start_battle(
 			   game, Battle(nullptr, dockpoints.at(game.logic_rand() % dockpoints.size()),
-			                std::vector<uint32_t>(parameters.begin() + 2, parameters.end()), true));
+			                std::vector<uint32_t>(parameters.begin() + 2, parameters.end()), true),
+			   false);
 		}
 		return;
 	}
@@ -1112,14 +1113,19 @@ void Ship::warship_command(Game& game,
 	throw wexception("Invalid warship command %d", static_cast<int>(cmd));
 }
 
-void Ship::start_battle(Game& game, const Battle new_battle) {
+void Ship::start_battle(Game& game, Battle new_battle, bool immediately) {
 	Ship* enemy_ship = new_battle.opponent.get(game);
 
 	if (enemy_ship == nullptr && !static_cast<bool>(new_battle.attack_coords)) {
 		return;
 	}
 
-	battles_.emplace_back(new_battle);
+	if (immediately) {
+		battles_.emplace_back(new_battle);
+	} else {
+		battles_.emplace_front(new_battle);
+	}
+
 	if (!new_battle.is_first) {
 		return;
 	}
@@ -1130,7 +1136,7 @@ void Ship::start_battle(Game& game, const Battle new_battle) {
 		                         format(_("Your ship ‘%s’ is under attack from an enemy warship."),
 		                                enemy_ship->get_shipname()),
 		                         "images/wui/ship/ship_attack.png");
-		enemy_ship->start_battle(game, Battle(this, Coords::null(), {}, false));
+		enemy_ship->start_battle(game, Battle(this, Coords::null(), {}, false), true);
 	}
 }
 
@@ -1439,7 +1445,7 @@ void Ship::battle_update(Game& game) {
 				Ship& nearest_ship = dynamic_cast<Ship&>(*nearest);
 				molog(game.get_gametime(), "[battle] Summoning %s to the port's defense",
 				      nearest_ship.get_shipname().c_str());
-				nearest_ship.start_battle(game, Battle(this, Coords::null(), {}, true));
+				nearest_ship.start_battle(game, Battle(this, Coords::null(), {}, true), true);
 			}
 
 			// Since ports can't defend themselves on their own, start the next round at once.
