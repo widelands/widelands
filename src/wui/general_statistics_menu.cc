@@ -47,8 +47,10 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
                       _("General Statistics")),
      my_registry_(&registry),
      box_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical, 0, 0, 5),
-     player_buttons_box_(&box_, UI::PanelStyle::kWui, "buttons_box", 0, 0, UI::Box::Horizontal, 0, 0, 1),
-     plot_(&box_, "plot",
+     player_buttons_box_(
+        &box_, UI::PanelStyle::kWui, "buttons_box", 0, 0, UI::Box::Horizontal, 0, 0, 1),
+     plot_(&box_,
+           "plot",
            0,
            0,
            430,
@@ -129,7 +131,8 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	create_player_buttons();
 	box_.add(&player_buttons_box_, UI::Box::Resizing::kFullSize);
 
-	UI::Box* hbox2 = new UI::Box(&box_, UI::PanelStyle::kWui, "hbox", 0, 0, UI::Box::Horizontal, 0, 0, 1);
+	UI::Box* hbox2 =
+	   new UI::Box(&box_, UI::PanelStyle::kWui, "hbox", 0, 0, UI::Box::Horizontal, 0, 0, 1);
 
 	UI::Radiobutton* btn;
 

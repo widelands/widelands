@@ -45,7 +45,15 @@ EditorToolhistoryOptionsMenu::EditorToolhistoryOptionsMenu(EditorInteractive& pa
      history_tool_(history_tool),
 
      box_width_(get_inner_w() - 2 * margin_),
-     box_(this, UI::PanelStyle::kWui, "main_box", hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
+     box_(this,
+          UI::PanelStyle::kWui,
+          "main_box",
+          hmargin(),
+          vmargin(),
+          UI::Box::Vertical,
+          0,
+          0,
+          vspacing()),
      list_(&box_, "history_list", 0, 0, box_width_, 330, UI::PanelStyle::kWui) {
 
 	box_.set_size(100, 20);

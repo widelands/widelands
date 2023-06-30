@@ -318,9 +318,9 @@ void AttackWindow::init_bottombox() {
 		return;
 	}
 	if (building->descr().type() == Widelands::MapObjectType::MILITARYSITE) {
-		do_not_conquer_.reset(
-		   new UI::Checkbox(&bottombox_, UI::PanelStyle::kWui, "do_not_conquer", Vector2i(0, 0), _("Destroy target"),
-		                    _("Destroy the target building instead of conquering it")));
+		do_not_conquer_.reset(new UI::Checkbox(
+		   &bottombox_, UI::PanelStyle::kWui, "do_not_conquer", Vector2i(0, 0), _("Destroy target"),
+		   _("Destroy the target building instead of conquering it")));
 		do_not_conquer_->set_state(!dynamic_cast<const Widelands::MilitarySite*>(building)
 		                               ->attack_target()
 		                               ->get_allow_conquer(iplayer_.player_number()));

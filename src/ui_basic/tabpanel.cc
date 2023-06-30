@@ -57,8 +57,7 @@ Tab::Tab(TabPanel* const tab_parent,
          const Image* init_pic,
          const std::string& tooltip_text,
          Panel* const contents)
-   : Panel(
-        tab_parent, s, name, x, 0, kTabPanelButtonHeight, kTabPanelButtonHeight, tooltip_text),
+   : Panel(tab_parent, s, name, x, 0, kTabPanelButtonHeight, kTabPanelButtonHeight, tooltip_text),
      parent(tab_parent),
      id(tab_id),
      pic(init_pic),

@@ -114,7 +114,8 @@ protected:
 	                               const std::string& tribename,
 	                               const std::string& selection,
 	                               const Widelands::TribeDescr* tribe) {
-		UI::Box* hbox = new UI::Box(&box_, UI::PanelStyle::kFsMenu, format("fp_box_%s", tribename), 0, 0, UI::Box::Horizontal);
+		UI::Box* hbox = new UI::Box(
+		   &box_, UI::PanelStyle::kFsMenu, format("fp_box_%s", tribename), 0, 0, UI::Box::Horizontal);
 		box_.add(hbox, UI::Box::Resizing::kFullSize);
 
 		UI::Icon* icon =
@@ -208,7 +209,8 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
                 0,
                 0,
                 _("Edit Keyboard And Mouse Actions")),
-     buttons_box_(this, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
+     buttons_box_(
+        this, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
      tabs_(this, UI::TabPanelStyle::kFsMenu, "tabs"),
      mousewheel_options_(&tabs_),
      reset_(&buttons_box_,
@@ -278,8 +280,8 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	                                  const KeyboardShortcut shortcut_start,
 	                                  const KeyboardShortcut shortcut_end) {
 		assert(shortcut_start < shortcut_end);
-		UI::Box* b =
-		   new UI::Box(&tabs_, UI::PanelStyle::kFsMenu, "shortcut_box", 0, 0, UI::Box::Vertical, 0, 0, kPadding);
+		UI::Box* b = new UI::Box(
+		   &tabs_, UI::PanelStyle::kFsMenu, "shortcut_box", 0, 0, UI::Box::Vertical, 0, 0, kPadding);
 		b->set_force_scrolling(true);
 		for (KeyboardShortcut k = shortcut_start; k <= shortcut_end; ++k) {
 			if (is_real(k)) {

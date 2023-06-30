@@ -50,7 +50,8 @@ InvertedScrollFeedbackWindow::InvertedScrollFeedbackWindow(UI::Panel* parent)
                 _("Send Feedback for Inverted Horizontal Scrolling")),
      content_(this, UI::PanelStyle::kFsMenu, "content_box", 0, 0, UI::Box::Vertical),
      header_(
-        &content_, "header",
+        &content_,
+        "header",
         0,
         0,
         kReportWindowWidth,

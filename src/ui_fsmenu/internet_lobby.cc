@@ -55,7 +55,8 @@ InternetLobby::InternetLobby(MenuCapsule& fsmm,
    : TwoColumnsBasicNavigationMenu(fsmm, _("Metaserver Lobby")),
      // Left column content
      label_clients_online_(&left_column_box_,
-                           UI::PanelStyle::kFsMenu, "label_clients",
+                           UI::PanelStyle::kFsMenu,
+                           "label_clients",
                            UI::FontStyle::kFsMenuLabel,
                            0,
                            0,
@@ -77,14 +78,16 @@ InternetLobby::InternetLobby(MenuCapsule& fsmm,
 
      // Right column content
      label_opengames_(&right_column_content_box_,
-                      UI::PanelStyle::kFsMenu, "label_opengames",
+                      UI::PanelStyle::kFsMenu,
+                      "label_opengames",
                       UI::FontStyle::kFsMenuLabel,
                       0,
                       0,
                       0,
                       0,
                       _("Open Games:")),
-     opengames_list_(&right_column_content_box_, "list_opengames", 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     opengames_list_(
+        &right_column_content_box_, "list_opengames", 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
      joingame_(&right_column_content_box_,
                "join_game",
                0,
@@ -94,7 +97,8 @@ InternetLobby::InternetLobby(MenuCapsule& fsmm,
                UI::ButtonStyle::kFsMenuSecondary,
                _("Join this game")),
      servername_label_(&right_column_content_box_,
-                       UI::PanelStyle::kFsMenu, "label_servername",
+                       UI::PanelStyle::kFsMenu,
+                       "label_servername",
                        UI::FontStyle::kFsMenuLabel,
                        0,
                        0,
@@ -137,9 +141,9 @@ InternetLobby::InternetLobby(MenuCapsule& fsmm,
 	right_column_content_box_.add(&hostgame_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_space(0);
 	right_column_content_box_.add(
-	   new UI::MultilineTextarea(&right_column_content_box_, "label_addons", 0, 0, 0, 0, UI::PanelStyle::kFsMenu,
-	                             AddOns::list_game_relevant_addons(), UI::Align::kLeft,
-	                             UI::MultilineTextarea::ScrollMode::kNoScrolling),
+	   new UI::MultilineTextarea(&right_column_content_box_, "label_addons", 0, 0, 0, 0,
+	                             UI::PanelStyle::kFsMenu, AddOns::list_game_relevant_addons(),
+	                             UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	   UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_inf_space();
 

@@ -38,10 +38,16 @@ Base
  */
 BaseMenu::BaseMenu(MenuCapsule& window, const std::string& title)
    : UI::Panel(&window, UI::PanelStyle::kFsMenu, "menu", 0, 0, 0, 0),
-     horizontal_padding_box_(this, UI::PanelStyle::kFsMenu, "h_padding_box", 0, 0, UI::Box::Horizontal),
-     vertical_padding_box_(
-        &horizontal_padding_box_, UI::PanelStyle::kFsMenu, "v_padding_box", 0, 0, UI::Box::Vertical),
-     main_box_(&vertical_padding_box_, UI::PanelStyle::kFsMenu, "main_box", 0, 0, UI::Box::Vertical),
+     horizontal_padding_box_(
+        this, UI::PanelStyle::kFsMenu, "h_padding_box", 0, 0, UI::Box::Horizontal),
+     vertical_padding_box_(&horizontal_padding_box_,
+                           UI::PanelStyle::kFsMenu,
+                           "v_padding_box",
+                           0,
+                           0,
+                           UI::Box::Vertical),
+     main_box_(
+        &vertical_padding_box_, UI::PanelStyle::kFsMenu, "main_box", 0, 0, UI::Box::Vertical),
      header_box_(&main_box_, UI::PanelStyle::kFsMenu, "header_box", 0, 0, UI::Box::Vertical),
      standard_height_(get_h() * 9 / 200),
      capsule_(window) {
@@ -75,8 +81,10 @@ TwoColumnsMenu::TwoColumnsMenu(MenuCapsule& fsmm,
                                double right_column_width_factor)
    : BaseMenu(fsmm, title),
      content_box_(&main_box_, UI::PanelStyle::kFsMenu, "content_box", 0, 0, UI::Box::Horizontal),
-     left_column_box_(&content_box_, UI::PanelStyle::kFsMenu, "left_column_box", 0, 0, UI::Box::Vertical),
-     right_column_box_(&content_box_, UI::PanelStyle::kFsMenu, "right_column_box", 0, 0, UI::Box::Vertical),
+     left_column_box_(
+        &content_box_, UI::PanelStyle::kFsMenu, "left_column_box", 0, 0, UI::Box::Vertical),
+     right_column_box_(
+        &content_box_, UI::PanelStyle::kFsMenu, "right_column_box", 0, 0, UI::Box::Vertical),
      right_column_width_(get_inner_w() * right_column_width_factor),
      right_column_width_factor_(right_column_width_factor) {
 
@@ -99,10 +107,24 @@ TwoColumnsBasicNavigationMenu::TwoColumnsBasicNavigationMenu(MenuCapsule& fsmm,
                                                              const std::string& title,
                                                              double right_column_width_factor)
    : TwoColumnsMenu(fsmm, title, right_column_width_factor),
-     right_column_content_box_(
-        &right_column_box_, UI::PanelStyle::kFsMenu, "right_column_content_box", 0, 0, UI::Box::Vertical, 0, 0, 1 * kPadding),
-     button_box_(
-        &right_column_box_, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Horizontal, 0, 0, 1 * kPadding),
+     right_column_content_box_(&right_column_box_,
+                               UI::PanelStyle::kFsMenu,
+                               "right_column_content_box",
+                               0,
+                               0,
+                               UI::Box::Vertical,
+                               0,
+                               0,
+                               1 * kPadding),
+     button_box_(&right_column_box_,
+                 UI::PanelStyle::kFsMenu,
+                 "buttons_box",
+                 0,
+                 0,
+                 UI::Box::Horizontal,
+                 0,
+                 0,
+                 1 * kPadding),
      back_(&button_box_, "back", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Back")) {
 
 	right_column_box_.add(&right_column_content_box_, UI::Box::Resizing::kExpandBoth);
@@ -267,8 +289,10 @@ void MenuCapsule::add(BaseMenu& menu, const std::string& title) {
 
 	UI::Button* button = new UI::Button(&box_, title, 0, 0, 0, 0, UI::ButtonStyle::kFsMenuMenu,
 	                                    title, format(_("Back to ‘%s’"), title));
-	UI::Panel* spacer1 = new UI::Panel(&box_, UI::PanelStyle::kFsMenu, "navigation_spacer_1", 0, 0, kPadding, kPadding);
-	UI::Panel* spacer2 = new UI::Panel(&box_, UI::PanelStyle::kFsMenu, "navigation_spacer_2", 0, 0, kPadding, kPadding);
+	UI::Panel* spacer1 = new UI::Panel(
+	   &box_, UI::PanelStyle::kFsMenu, "navigation_spacer_1", 0, 0, kPadding, kPadding);
+	UI::Panel* spacer2 = new UI::Panel(
+	   &box_, UI::PanelStyle::kFsMenu, "navigation_spacer_2", 0, 0, kPadding, kPadding);
 	UI::Panel* icon;
 	if (visible_menus_.empty()) {
 		UI::Button* b = new UI::Button(&box_, title, 0, 0, 30, 30, UI::ButtonStyle::kFsMenuMenu,
@@ -278,8 +302,8 @@ void MenuCapsule::add(BaseMenu& menu, const std::string& title) {
 		icon = b;
 		spacer1->set_visible(false);
 	} else {
-		icon = new UI::Icon(
-		   &box_, UI::PanelStyle::kFsMenu, "navigation_arrow", g_image_cache->get("images/ui_basic/scrollbar_right.png"));
+		icon = new UI::Icon(&box_, UI::PanelStyle::kFsMenu, "navigation_arrow",
+		                    g_image_cache->get("images/ui_basic/scrollbar_right.png"));
 	}
 
 	visible_menus_.push_back(Entry{title, &menu, button, icon, spacer1, spacer2});

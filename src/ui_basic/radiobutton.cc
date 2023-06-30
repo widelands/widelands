@@ -26,7 +26,8 @@ namespace UI {
  * Initialize the radiobutton and link it into the group's linked list
  */
 Radiobutton::Radiobutton(Panel* const parent,
-                         PanelStyle s, const std::string& name,
+                         PanelStyle s,
+                         const std::string& name,
                          Vector2i const p,
                          const Image* pic,
                          Radiogroup& group,
@@ -91,7 +92,8 @@ Radiogroup::~Radiogroup() {
  * Returns the ID of the new button.
  */
 int32_t Radiogroup::add_button(Panel* const parent,
-                               PanelStyle s, const std::string& name,
+                               PanelStyle s,
+                               const std::string& name,
                                Vector2i const p,
                                const Image* pic,
                                const std::string& tooltip,

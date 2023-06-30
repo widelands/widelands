@@ -63,15 +63,15 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                            UI::PanelStyle style,
                            ButtonStyle button_style)
    : UI::Panel(parent,
-                    style,
-                    name,
-                    x,
-                    y,
-                    (type == DropdownType::kPictorial || type == DropdownType::kPictorialMenu) ?
-                       button_dimension :
-                       w,
-                    // Height only to fit the button, so we can use this in Box layout.
-                    base_height(button_dimension, style)),
+               style,
+               name,
+               x,
+               y,
+               (type == DropdownType::kPictorial || type == DropdownType::kPictorialMenu) ?
+                  button_dimension :
+                  w,
+               // Height only to fit the button, so we can use this in Box layout.
+               base_height(button_dimension, style)),
      id_(next_id_++),
      max_list_items_(max_list_items),
 
@@ -128,8 +128,8 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	while (list_parent->get_parent() != nullptr) {
 		list_parent = list_parent->get_parent();
 	}
-	list_ =
-	   new UI::Listselect<uintptr_t>(list_parent, "list", 0, 0, w, 0, style, ListselectLayout::kDropdown);
+	list_ = new UI::Listselect<uintptr_t>(
+	   list_parent, "list", 0, 0, w, 0, style, ListselectLayout::kDropdown);
 	list_->set_linked_dropdown(this);
 
 	list_->set_visible(false);

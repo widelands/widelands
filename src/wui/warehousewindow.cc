@@ -132,7 +132,8 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
      display_(this, width, wh_, type_, can_act_) {
 	add(&display_, Resizing::kFullSize);
 
-	UI::Box* buttons = new UI::Box(this, UI::PanelStyle::kWui, "buttons_box", 0, 0, UI::Box::Horizontal);
+	UI::Box* buttons =
+	   new UI::Box(this, UI::PanelStyle::kWui, "buttons_box", 0, 0, UI::Box::Horizontal);
 	add(buttons, UI::Box::Resizing::kFullSize);
 	UI::Button* b;
 

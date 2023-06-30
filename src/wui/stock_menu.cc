@@ -44,7 +44,8 @@ StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registr
      tabs_(&main_box_, UI::TabPanelStyle::kWuiDark, "tabs"),
      solid_icon_backgrounds_(
         &main_box_,
-        UI::PanelStyle::kWui, "evaluate",
+        UI::PanelStyle::kWui,
+        "evaluate",
         Vector2i::zero(),
         /** TRANSLATORS: If this checkbox is ticked, all icons in the stock menu are drawn with
            different background colors; each icon's color indicates whether the stock is higher or

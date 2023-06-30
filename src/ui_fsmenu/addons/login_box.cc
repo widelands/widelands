@@ -71,8 +71,8 @@ AddOnsLoginBox::AddOnsLoginBox(UI::Panel& parent, UI::WindowStyle style)
                                                 UI::ButtonStyle::kWuiSecondary,
             _("Reset")) {
 	UI::MultilineTextarea* m =
-	   new UI::MultilineTextarea(&box_, "message", 0, 0, 100, 100, panel_style_, "", UI::Align::kLeft,
-	                             UI::MultilineTextarea::ScrollMode::kNoScrolling);
+	   new UI::MultilineTextarea(&box_, "message", 0, 0, 100, 100, panel_style_, "",
+	                             UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	m->set_text(as_richtext(
 	   g_style_manager
 	      ->font_style(style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelParagraph :

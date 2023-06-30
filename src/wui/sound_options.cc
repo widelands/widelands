@@ -55,7 +55,8 @@ public:
 	             0,
 	             0,
 	             UI::Box::Horizontal),
-	     volume_(this, "volume",
+	     volume_(this,
+	             "volume",
 	             0,
 	             0,
 	             kSliderWidth,
@@ -132,7 +133,8 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
              UI::Box::Vertical),
      custom_songset_(
         this,
-        panel_style_, "custom_songset",
+        panel_style_,
+        "custom_songset",
         {0, 0},
         _("Play your own music in-game"),
         richtext_escape(
@@ -143,16 +145,19 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
 
 	set_inner_spacing(kSpacing);
 
-	add(new SoundControl(this, style, "music", pgettext("sound_options", "Music"), SoundType::kMusic));
+	add(new SoundControl(
+	   this, style, "music", pgettext("sound_options", "Music"), SoundType::kMusic));
 
-	add(new SoundControl(this, style, "chat", pgettext("sound_options", "Chat Messages"), SoundType::kChat,
+	add(new SoundControl(this, style, "chat", pgettext("sound_options", "Chat Messages"),
+	                     SoundType::kChat,
 	                     SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")));
 
 	add(new SoundControl(this, style, "messages", pgettext("sound_options", "Game Messages"),
 	                     SoundType::kMessage,
 	                     SoundHandler::register_fx(SoundType::kMessage, "sound/message")));
 
-	add(new SoundControl(this, style, "ui", pgettext("sound_options", "User Interface"), SoundType::kUI));
+	add(new SoundControl(
+	   this, style, "ui", pgettext("sound_options", "User Interface"), SoundType::kUI));
 
 	add(new SoundControl(
 	   this, style, "ambient", pgettext("sound_options", "Ambient Sounds"), SoundType::kAmbient,
@@ -166,8 +171,8 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
 	// the MultilineTextarea is not added to the Box. So, we create and add it even if its text is
 	// empty.
 	UI::MultilineTextarea* sound_warning =
-	   new UI::MultilineTextarea(this, "warning", 0, 0, 100, 0, UI::PanelStyle::kWui, "", UI::Align::kLeft,
-	                             UI::MultilineTextarea::ScrollMode::kNoScrolling);
+	   new UI::MultilineTextarea(this, "warning", 0, 0, 100, 0, UI::PanelStyle::kWui, "",
+	                             UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	add(sound_warning, UI::Box::Resizing::kExpandBoth);
 
 	if (SoundHandler::is_backend_disabled()) {

@@ -35,7 +35,8 @@ SuggestedTeamsBox::SuggestedTeamsBox(Panel* parent,
                                      int32_t max_x,
                                      int32_t max_y)
    : UI::Box(parent,
-             s, "suggested_teams_box",
+             s,
+             "suggested_teams_box",
              x,
              y,
              orientation,
@@ -118,8 +119,9 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::SuggestedTeamLineup>& 
 					   playercolor_image(player, "images/players/player_position_menu.png");
 
 					assert(player_image);
-					player_icon = new UI::Icon(lineup_box_, panel_style_, format("icon_%u", player), 0, 0, player_image->width(),
-					                           player_image->height(), player_image);
+					player_icon =
+					   new UI::Icon(lineup_box_, panel_style_, format("icon_%u", player), 0, 0,
+					                player_image->width(), player_image->height(), player_image);
 					player_icon->set_visible(true);
 					player_icon->set_no_frame();
 					lineup_box_->add(player_icon);

@@ -164,7 +164,12 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                                      bool show_only,
                                      bool has_priority,
                                      BuildingWindow::CollapsedState* collapsed)
-   : UI::Box(parent, UI::PanelStyle::kWui, format("inputqueuedisplay_%u_%u", static_cast<unsigned>(type), ware_or_worker_index), 0, 0, UI::Box::Horizontal),
+   : UI::Box(parent,
+             UI::PanelStyle::kWui,
+             format("inputqueuedisplay_%u_%u", static_cast<unsigned>(type), ware_or_worker_index),
+             0,
+             0,
+             UI::Box::Horizontal),
      ibase_(interactive_base),
      can_act_(!show_only && ibase_.can_act(building.owner().player_number())),
      show_only_(show_only),
@@ -268,10 +273,10 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 	hbox_.add(&b_decrease_desired_fill_);
 
 	for (size_t i = 0; i < nr_icons_; ++i) {
-		icons_[i] = new UI::Icon(&hbox_, UI::PanelStyle::kWui, format("icon_%u", i), 0, 0, kButtonSize, kButtonSize,
-		                         type_ == Widelands::wwWARE ?
-                                  building.owner().tribe().get_ware_descr(index_)->icon() :
-                                  building.owner().tribe().get_worker_descr(index_)->icon());
+		icons_[i] = new UI::Icon(
+		   &hbox_, UI::PanelStyle::kWui, format("icon_%u", i), 0, 0, kButtonSize, kButtonSize,
+		   type_ == Widelands::wwWARE ? building.owner().tribe().get_ware_descr(index_)->icon() :
+                                      building.owner().tribe().get_worker_descr(index_)->icon());
 		hbox_.add(icons_[i]);
 	}
 

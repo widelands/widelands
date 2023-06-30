@@ -119,8 +119,9 @@ SpinBox::SpinBox(Panel* const parent,
 	box_ = new UI::Box(this, style, "spinner_buttons_box", 0, 0, UI::Box::Horizontal);
 
 	sbi_->label_padding = new UI::Panel(box_, style, "padding_panel", 0, 0, padding_, padding_);
-	sbi_->label = new UI::MultilineTextarea(box_, "label", 0, 0, 0, 0, style, label_text, UI::Align::kLeft,
-	                                        UI::MultilineTextarea::ScrollMode::kNoScrolling);
+	sbi_->label =
+	   new UI::MultilineTextarea(box_, "label", 0, 0, 0, 0, style, label_text, UI::Align::kLeft,
+	                             UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	box_->add(sbi_->label);
 	box_->add(sbi_->label_padding);
 

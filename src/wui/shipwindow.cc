@@ -134,7 +134,8 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	vbox_.add(&navigation_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	// Bottom buttons
-	UI::Box* buttons = new UI::Box(&vbox_, UI::PanelStyle::kWui, "buttons_box", 0, 0, UI::Box::Horizontal);
+	UI::Box* buttons =
+	   new UI::Box(&vbox_, UI::PanelStyle::kWui, "buttons_box", 0, 0, UI::Box::Horizontal);
 	vbox_.add(buttons, UI::Box::Resizing::kFullSize);
 
 	btn_sink_ = make_button(buttons, "sink", _("Sink the ship"), kImgSink, [this]() { act_sink(); });

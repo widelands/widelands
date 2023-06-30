@@ -81,7 +81,12 @@ struct PortDockAdditionalItemsDisplay : UI::Box {
 public:
 	PortDockAdditionalItemsDisplay(
 	   Widelands::Game& g, Panel* parent, bool can_act, PortDock& pd, const uint32_t capacity)
-	   : UI::Box(parent, UI::PanelStyle::kWui, "port_dock_additional_items_display", 0, 0, UI::Box::Horizontal),
+	   : UI::Box(parent,
+	             UI::PanelStyle::kWui,
+	             "port_dock_additional_items_display",
+	             0,
+	             0,
+	             UI::Box::Horizontal),
 	     game_(g),
 	     portdock_(pd),
 	     capacity_(capacity) {
@@ -89,7 +94,8 @@ public:
 		assert(portdock_.expedition_bootstrap());
 		assert(portdock_.expedition_bootstrap()->count_additional_queues() <= capacity_);
 		for (uint32_t c = 0; c < capacity_; ++c) {
-			UI::Box* box = new UI::Box(this, UI::PanelStyle::kWui, format("box_%u", c), 0, 0, UI::Box::Vertical);
+			UI::Box* box =
+			   new UI::Box(this, UI::PanelStyle::kWui, format("box_%u", c), 0, 0, UI::Box::Vertical);
 
 			UI::Dropdown<std::pair<Widelands::WareWorker, Widelands::DescriptionIndex>>& d =
 			   *new UI::Dropdown<std::pair<Widelands::WareWorker, Widelands::DescriptionIndex>>(
@@ -117,7 +123,8 @@ public:
 			d.set_enabled(can_act);
 			d.selected.connect([this, c]() { select(c); });
 
-			UI::Icon* icon = new UI::Icon(box, UI::PanelStyle::kWui, format("icon_%u", c), g_image_cache->get(kNoWare));
+			UI::Icon* icon = new UI::Icon(
+			   box, UI::PanelStyle::kWui, format("icon_%u", c), g_image_cache->get(kNoWare));
 			icon->set_handle_mouse(true);
 			boxes_.push_back(box);
 			icons_.push_back(icon);
@@ -207,7 +214,8 @@ UI::Box* create_portdock_expedition_display(UI::Panel* parent,
                                             Warehouse& wh,
                                             InteractiveGameBase& igb,
                                             BuildingWindow::CollapsedState* collapsed) {
-	UI::Box& box = *new UI::Box(parent, UI::PanelStyle::kWui, "expedition_box", 0, 0, UI::Box::Vertical);
+	UI::Box& box =
+	   *new UI::Box(parent, UI::PanelStyle::kWui, "expedition_box", 0, 0, UI::Box::Vertical);
 	ensure_box_can_hold_input_queues(box);
 
 	// Add the input queues.

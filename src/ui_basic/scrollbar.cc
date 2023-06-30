@@ -40,7 +40,8 @@ Scrollbar
 /**
 Initialize the scrollbar using default values.
 */
-Scrollbar::Scrollbar(Panel* const parent, const std::string& name,
+Scrollbar::Scrollbar(Panel* const parent,
+                     const std::string& name,
                      int32_t const x,
                      int32_t const y,
                      uint32_t const w,

@@ -71,27 +71,28 @@ void EncyclopediaWindow::init(std::unique_ptr<LuaTable> table) {
 			   tab_table->has_key("icon") ? tab_table->get_string("icon") : "";
 			const std::string tab_title = tab_table->get_string("title");
 
-			wrapper_boxes_.insert(
-			   std::make_pair(tab_name, std::unique_ptr<UI::Box>(new UI::Box(
-			                               &tabs_, UI::PanelStyle::kWui, format("wrapper_box_%s", tab_name), 0, 0, UI::Box::Horizontal))));
+			wrapper_boxes_.insert(std::make_pair(
+			   tab_name, std::unique_ptr<UI::Box>(new UI::Box(&tabs_, UI::PanelStyle::kWui,
+			                                                  format("wrapper_box_%s", tab_name), 0, 0,
+			                                                  UI::Box::Horizontal))));
 
 			boxes_.insert(std::make_pair(
-			   tab_name, std::unique_ptr<UI::Box>(new UI::Box(wrapper_boxes_.at(tab_name).get(),
-			                                                  UI::PanelStyle::kWui, format("content_box_%s", tab_name), 0, 0,
-			                                                  UI::Box::Horizontal))));
+			   tab_name, std::unique_ptr<UI::Box>(new UI::Box(
+			                wrapper_boxes_.at(tab_name).get(), UI::PanelStyle::kWui,
+			                format("content_box_%s", tab_name), 0, 0, UI::Box::Horizontal))));
 
 			lists_.insert(std::make_pair(
 			   tab_name, std::unique_ptr<UI::Listselect<EncyclopediaEntry>>(
-			                new UI::Listselect<EncyclopediaEntry>(boxes_.at(tab_name).get(), format("list_%s", tab_name), 0, 0,
-			                                                      contents_width, contents_height,
-			                                                      UI::PanelStyle::kWui))));
+			                new UI::Listselect<EncyclopediaEntry>(
+			                   boxes_.at(tab_name).get(), format("list_%s", tab_name), 0, 0,
+			                   contents_width, contents_height, UI::PanelStyle::kWui))));
 			lists_.at(tab_name)->selected.connect(
 			   [this, tab_name](unsigned /* index */) { entry_selected(tab_name); });
 
 			contents_.insert(std::make_pair(
-			   tab_name, std::unique_ptr<UI::MultilineTextarea>(
-			                new UI::MultilineTextarea(boxes_.at(tab_name).get(), format("text_%s", tab_name), 0, 0, contents_width,
-			                                          contents_height, UI::PanelStyle::kWui))));
+			   tab_name, std::unique_ptr<UI::MultilineTextarea>(new UI::MultilineTextarea(
+			                boxes_.at(tab_name).get(), format("text_%s", tab_name), 0, 0,
+			                contents_width, contents_height, UI::PanelStyle::kWui))));
 
 			boxes_.at(tab_name)->add(lists_.at(tab_name).get());
 			boxes_.at(tab_name)->add_space(kPadding);

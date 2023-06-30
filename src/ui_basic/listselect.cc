@@ -76,7 +76,8 @@ inline BaseListselect::EntryRecord::~EntryRecord() {
  *       w       dimensions, in pixels, of the Listselect
  *       h
  */
-BaseListselect::BaseListselect(Panel* const parent, const std::string& name,
+BaseListselect::BaseListselect(Panel* const parent,
+                               const std::string& name,
                                const int32_t x,
                                const int32_t y,
                                const uint32_t w,

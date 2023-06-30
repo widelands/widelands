@@ -119,7 +119,13 @@ int caps_to_buildhelp(const Widelands::NodeCaps caps) {
 }  // namespace
 
 InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, ChatProvider* c)
-   : UI::Panel(nullptr, UI::PanelStyle::kWui, "interactive_base", 0, 0, g_gr->get_xres(), g_gr->get_yres()),
+   : UI::Panel(nullptr,
+               UI::PanelStyle::kWui,
+               "interactive_base",
+               0,
+               0,
+               g_gr->get_xres(),
+               g_gr->get_yres()),
      chat_provider_(c),
      info_panel_(*new InfoPanel(*this)),
      map_view_(this, the_egbase.map(), 0, 0, g_gr->get_xres(), g_gr->get_yres()),

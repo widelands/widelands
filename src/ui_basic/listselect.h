@@ -44,7 +44,8 @@ enum class ListselectLayout {
  * Use the \ref Listselect template to use arbitrary IDs.
  */
 struct BaseListselect : public Panel {
-	BaseListselect(Panel* parent, const std::string& name,
+	BaseListselect(Panel* parent,
+	               const std::string& name,
 	               int32_t x,
 	               int32_t y,
 	               uint32_t w,
@@ -180,7 +181,8 @@ private:
 };
 
 template <typename Entry> struct Listselect : public BaseListselect {
-	Listselect(Panel* parent, const std::string& name,
+	Listselect(Panel* parent,
+	           const std::string& name,
 	           int32_t x,
 	           int32_t y,
 	           uint32_t w,
@@ -224,7 +226,8 @@ private:
 template <typename Entry> struct Listselect<Entry&> : public Listselect<Entry*> {
 	using Base = Listselect<Entry*>;
 
-	Listselect(Panel* parent, const std::string& name,
+	Listselect(Panel* parent,
+	           const std::string& name,
 	           int32_t x,
 	           int32_t y,
 	           uint32_t w,

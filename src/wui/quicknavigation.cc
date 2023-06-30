@@ -223,13 +223,14 @@ void QuickNavigationWindow::rebuild() {
 	if (content_box_ != nullptr) {
 		content_box_.release()->do_delete();
 	}
-	content_box_.reset(
-	   new UI::Box(&main_box_, UI::PanelStyle::kWui, "content_box", 0, 0, UI::Box::Vertical, 0, 0, kSpacing));
+	content_box_.reset(new UI::Box(
+	   &main_box_, UI::PanelStyle::kWui, "content_box", 0, 0, UI::Box::Vertical, 0, 0, kSpacing));
 
 	QuickNavigation& q = ibase_.quick_navigation();
 	for (unsigned i = 0; i < q.landmarks().size(); ++i) {
-		UI::Box& box = *new UI::Box(
-		   content_box_.get(), UI::PanelStyle::kWui, format("landmark_box_%u", i), 0, 0, UI::Box::Horizontal, 0, 0, kSpacing);
+		UI::Box& box =
+		   *new UI::Box(content_box_.get(), UI::PanelStyle::kWui, format("landmark_box_%u", i), 0, 0,
+		                UI::Box::Horizontal, 0, 0, kSpacing);
 
 		UI::Button* b = new UI::Button(
 		   &box, format("goto_%u", i), 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
@@ -287,7 +288,8 @@ void QuickNavigationWindow::rebuild() {
 			box.add(b);
 		}
 
-		UI::EditBox& e = *new UI::EditBox(&box, format("name_%u", i), 0, 0, 300, UI::PanelStyle::kWui);
+		UI::EditBox& e =
+		   *new UI::EditBox(&box, format("name_%u", i), 0, 0, 300, UI::PanelStyle::kWui);
 		e.set_text(q.landmarks()[i].name);
 		e.changed.connect([&q, &e, i]() { q.landmarks()[i].name = e.get_text(); });
 		box.add(&e, UI::Box::Resizing::kExpandBoth);

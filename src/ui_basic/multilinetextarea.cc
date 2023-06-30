@@ -33,7 +33,8 @@ namespace UI {
 // int instead of uint because of overflow situations
 static constexpr int32_t kRichtextMargin = 2;
 
-MultilineTextarea::MultilineTextarea(Panel* const parent, const std::string& name,
+MultilineTextarea::MultilineTextarea(Panel* const parent,
+                                     const std::string& name,
                                      const int32_t x,
                                      const int32_t y,
                                      const uint32_t w,
@@ -48,7 +49,8 @@ MultilineTextarea::MultilineTextarea(Panel* const parent, const std::string& nam
      font_style_(style == UI::PanelStyle::kFsMenu ? FontStyle::kFsMenuLabel : FontStyle::kWuiLabel),
 
      align_(align),
-     scrollbar_(this, "scrollbar", get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style, false) {
+     scrollbar_(
+        this, "scrollbar", get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style, false) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect([this](int32_t a) { scrollpos_changed(a); });

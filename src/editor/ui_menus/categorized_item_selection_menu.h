@@ -94,7 +94,8 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
      select_correct_tool_(select_correct_tool),
 
      tab_panel_(this, UI::TabPanelStyle::kWuiLight, "categories"),
-     current_selection_names_(this, "current_selection_names",
+     current_selection_names_(this,
+                              "current_selection_names",
                               0,
                               0,
                               20,
@@ -107,7 +108,8 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 	add(&tab_panel_);
 
 	for (const auto& category : categories) {
-		UI::Box* vertical = new UI::Box(&tab_panel_, UI::PanelStyle::kWui, format("vbox_%s", category->name()), 0, 0, UI::Box::Vertical);
+		UI::Box* vertical = new UI::Box(&tab_panel_, UI::PanelStyle::kWui,
+		                                format("vbox_%s", category->name()), 0, 0, UI::Box::Vertical);
 		const int kSpacing = 5;
 		vertical->add_space(kSpacing);
 
@@ -115,7 +117,9 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 		UI::Box* horizontal = nullptr;
 		for (const int i : category->items()) {
 			if (nitems_handled % category->items_per_row() == 0) {
-				horizontal = new UI::Box(vertical, UI::PanelStyle::kWui, format("hbox_%s_%d", category->name(), i), 0, 0, UI::Box::Horizontal);
+				horizontal =
+				   new UI::Box(vertical, UI::PanelStyle::kWui,
+				               format("hbox_%s_%d", category->name(), i), 0, 0, UI::Box::Horizontal);
 				horizontal->add_space(kSpacing);
 
 				vertical->add(horizontal);

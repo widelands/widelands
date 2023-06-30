@@ -62,8 +62,13 @@ public:
 	}
 
 protected:
-	AbstractTextInputPanel(
-	   UI::Panel*, const std::string& name, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style);
+	AbstractTextInputPanel(UI::Panel*,
+	                       const std::string& name,
+	                       int32_t x,
+	                       int32_t y,
+	                       uint32_t w,
+	                       uint32_t h,
+	                       UI::PanelStyle style);
 
 	void draw(RenderTarget&) override;
 
@@ -104,7 +109,12 @@ class EditBox : public AbstractTextInputPanel {
 public:
 	static constexpr unsigned kHistorySize = 16;
 
-	EditBox(UI::Panel* parent, const std::string& name, int32_t x, int32_t y, uint32_t w, UI::PanelStyle style);
+	EditBox(UI::Panel* parent,
+	        const std::string& name,
+	        int32_t x,
+	        int32_t y,
+	        uint32_t w,
+	        UI::PanelStyle style);
 
 	Notifications::Signal<> ok;
 
@@ -129,8 +139,13 @@ protected:
 /** Subclass for multi-line text input. */
 class MultilineEditbox : public AbstractTextInputPanel {
 public:
-	MultilineEditbox(
-	   UI::Panel* parent, const std::string& name, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style);
+	MultilineEditbox(UI::Panel* parent,
+	                 const std::string& name,
+	                 int32_t x,
+	                 int32_t y,
+	                 uint32_t w,
+	                 uint32_t h,
+	                 UI::PanelStyle style);
 };
 
 }  // namespace UI

@@ -115,7 +115,8 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	std::fill(active_colors_.begin(), active_colors_.end(), 0);
 
 	//  First, we must decide about the size.
-	main_box_ = new UI::Box(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical, 0, 0, 5);
+	main_box_ =
+	   new UI::Box(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical, 0, 0, 5);
 	main_box_->set_border(kSpacing, kSpacing, kSpacing, kSpacing);
 	set_center_panel(main_box_);
 
@@ -137,9 +138,9 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	tab_panel_->add(
 	   "consumption", g_image_cache->get(pic_tab_consumption), plot_consumption_, _("Consumption"));
 
-	plot_economy_ = new DifferentialPlotArea(tab_panel_, "plot_economy", 0, 0, kPlotWidth, kPlotHeight + kSpacing,
-	                                         Widelands::kStatisticsSampleTime.get(),
-	                                         WuiPlotArea::Plotmode::kRelative);
+	plot_economy_ = new DifferentialPlotArea(
+	   tab_panel_, "plot_economy", 0, 0, kPlotWidth, kPlotHeight + kSpacing,
+	   Widelands::kStatisticsSampleTime.get(), WuiPlotArea::Plotmode::kRelative);
 
 	tab_panel_->add(
 	   "economy_health", g_image_cache->get(pic_tab_economy), plot_economy_, _("Economy health"));

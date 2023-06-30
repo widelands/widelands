@@ -63,7 +63,8 @@ UI::Checkbox* create_immovable_checkbox(UI::Panel* parent,
 	}
 
 	UI::Checkbox* cb =
-	   new UI::Checkbox(parent, UI::PanelStyle::kWui, format("checkbox_%s", immovable_descr.name()), Vector2i::zero(), pic, tooltip);
+	   new UI::Checkbox(parent, UI::PanelStyle::kWui, format("checkbox_%s", immovable_descr.name()),
+	                    Vector2i::zero(), pic, tooltip);
 	const int kMinClickableArea = 24;
 	cb->set_desired_size(std::max<int>(pic->width(), kMinClickableArea),
 	                     std::max<int>(pic->height(), kMinClickableArea));
@@ -91,8 +92,8 @@ EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
 	      },
 	      &tool, {{kAutoTreesIndex, _("Automatic Trees")}}));
 
-	UI::Box* auto_immovables_box =
-	   new UI::Box(&multi_select_menu_->tabs(), UI::PanelStyle::kWui, "auto_immovables_box", 0, 0, UI::Box::Vertical);
+	UI::Box* auto_immovables_box = new UI::Box(&multi_select_menu_->tabs(), UI::PanelStyle::kWui,
+	                                           "auto_immovables_box", 0, 0, UI::Box::Vertical);
 	auto_trees_button_ = new UI::Button(auto_immovables_box, "auto_trees", 0, 0, 0, 0,
 	                                    UI::ButtonStyle::kWuiSecondary, _("Automatic Trees"),
 	                                    _("Automatically place the trees which "

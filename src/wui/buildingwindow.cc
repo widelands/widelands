@@ -129,7 +129,8 @@ void BuildingWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 
 	setup_name_field_editbox(*vbox_);
 
-	capsbuttons_ = new UI::Box(vbox_.get(), UI::PanelStyle::kWui, "caps_buttons_box", 0, 0, UI::Box::Horizontal);
+	capsbuttons_ =
+	   new UI::Box(vbox_.get(), UI::PanelStyle::kWui, "caps_buttons_box", 0, 0, UI::Box::Horizontal);
 	vbox_->add(capsbuttons_, UI::Box::Resizing::kFullSize);
 
 	// actually create buttons on the first call to think(),
@@ -304,7 +305,8 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			// enhance/destroy/dismantle buttons are fixed in their position
 			// and not subject to the number of buttons on the right of the
 			// panel.
-			UI::Panel* spacer = new UI::Panel(capsbuttons, UI::PanelStyle::kWui, "spacer_1", 0, 0, 17, 34);
+			UI::Panel* spacer =
+			   new UI::Panel(capsbuttons, UI::PanelStyle::kWui, "spacer_1", 0, 0, 17, 34);
 			capsbuttons->add(spacer);
 		}  // upcast to productionsite
 
@@ -369,7 +371,8 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		if (requires_destruction_separator && can_see) {
 			// Need this as well as the infinite space from the can_see section
 			// to ensure there is a separation.
-			UI::Panel* spacer = new UI::Panel(capsbuttons, UI::PanelStyle::kWui, "spacer_2", 0, 0, 17, 34);
+			UI::Panel* spacer =
+			   new UI::Panel(capsbuttons, UI::PanelStyle::kWui, "spacer_2", 0, 0, 17, 34);
 			capsbuttons->add(spacer);
 			capsbuttons->add_inf_space();
 		}

@@ -137,7 +137,12 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* 
 
      box_maps_list_(this, UI::PanelStyle::kFsMenu, "maps_list_box", 0, 0, UI::Box::Vertical),
      box_buttonsbox_(this, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Vertical),
-     box_dirstruct_displayname_(&box_dirstruct_, UI::PanelStyle::kFsMenu, "dirstruct_displayname_box", 0, 0, UI::Box::Vertical),
+     box_dirstruct_displayname_(&box_dirstruct_,
+                                UI::PanelStyle::kFsMenu,
+                                "dirstruct_displayname_box",
+                                0,
+                                0,
+                                UI::Box::Vertical),
      map_add_(&box_buttonsbox_,
               "map_add",
               0,
@@ -167,8 +172,10 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* 
                  _("Remove selected map or directory")),
      dirstruct_(&box_dirstruct_, "dirstruct", 0, 0, 200, 0, UI::PanelStyle::kFsMenu),
      my_maps_(&box_maps_list_, "my_maps", 0, 0, 100, 0, UI::PanelStyle::kFsMenu),
-     dirstruct_displayname_(&box_dirstruct_displayname_, "dirstruct_displayname", 0, 0, 0, UI::PanelStyle::kFsMenu),
-     displayname_duplicate_(&box_dirstruct_displayname_, "displayname_duplicate",
+     dirstruct_displayname_(
+        &box_dirstruct_displayname_, "dirstruct_displayname", 0, 0, 0, UI::PanelStyle::kFsMenu),
+     displayname_duplicate_(&box_dirstruct_displayname_,
+                            "displayname_duplicate",
                             0,
                             0,
                             100,
@@ -188,9 +195,9 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* 
 	     "same internal name will also share the same display name."));
 
 	box_dirstruct_displayname_.add(
-	   new UI::Textarea(&box_dirstruct_displayname_, UI::PanelStyle::kFsMenu, "label_dirstruct_displayname",
-	                    UI::FontStyle::kFsGameSetupHeadings, _("Directory Display Name"),
-	                    UI::Align::kCenter),
+	   new UI::Textarea(&box_dirstruct_displayname_, UI::PanelStyle::kFsMenu,
+	                    "label_dirstruct_displayname", UI::FontStyle::kFsGameSetupHeadings,
+	                    _("Directory Display Name"), UI::Align::kCenter),
 	   UI::Box::Resizing::kFullSize);
 	box_dirstruct_displayname_.add_space(kSpacing);
 	box_dirstruct_displayname_.add(&dirstruct_displayname_, UI::Box::Resizing::kFullSize);
@@ -486,7 +493,8 @@ CampaignAddOnsPackagerBox::CampaignAddOnsPackagerBox(FsMenu::MainMenu& mainmenu,
      difficulty_(&difficulty_hbox_, "difficulty", 0, 0, 100, UI::PanelStyle::kFsMenu),
      short_desc_(&difficulty_hbox_, "short_description", 0, 0, 50, UI::PanelStyle::kFsMenu),
      difficulty_label_(&difficulty_hbox_,
-                       UI::PanelStyle::kFsMenu, "label_difficulty",
+                       UI::PanelStyle::kFsMenu,
+                       "label_difficulty",
                        UI::FontStyle::kFsMenuInfoPanelHeading,
                        _("Difficulty:"),
                        UI::Align::kRight) {

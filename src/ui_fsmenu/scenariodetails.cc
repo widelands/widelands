@@ -24,7 +24,8 @@
 
 ScenarioDetails::ScenarioDetails(Panel* parent)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, "scenario_details_box", 0, 0, UI::Box::Vertical),
-     name_label_(this, "label_name",
+     name_label_(this,
+                 "label_name",
                  0,
                  0,
                  UI::Scrollbar::kSize,

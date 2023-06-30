@@ -26,7 +26,8 @@
 #include "logic/filesystem_constants.h"
 
 SavegameTable::SavegameTable(UI::Panel* parent, UI::PanelStyle style, bool localize_autosave)
-   : UI::Table<uintptr_t>(parent, "savegame_table", 0, 0, 0, 0, style, UI::TableRows::kMultiDescending),
+   : UI::Table<uintptr_t>(
+        parent, "savegame_table", 0, 0, 0, 0, style, UI::TableRows::kMultiDescending),
      tooltip_style_(style == UI::PanelStyle::kWui ? UI::FontStyle::kWuiTooltip :
                                                     UI::FontStyle::kFsTooltip),
      tooltip_header_style_(style == UI::PanelStyle::kWui ? UI::FontStyle::kWuiTooltipHeader :

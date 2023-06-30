@@ -75,7 +75,8 @@ EconomyOptionsWindow::EconomyOptionsWindow(Panel* parent,
 	tabpanel_.add("wares", g_image_cache->get(pic_tab_wares), ware_panel_, _("Wares"));
 	tabpanel_.add("workers", g_image_cache->get(pic_tab_workers), worker_panel_, _("Workers"));
 
-	UI::Box* buttons = new UI::Box(&main_box_, UI::PanelStyle::kWui, "buttons_box", 0, 0, UI::Box::Horizontal);
+	UI::Box* buttons =
+	   new UI::Box(&main_box_, UI::PanelStyle::kWui, "buttons_box", 0, 0, UI::Box::Horizontal);
 	UI::Button* b = new UI::Button(
 	   buttons, "decrease_target_fast", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
 	   g_image_cache->get("images/ui_basic/scrollbar_down_fast.png"), _("Decrease target by 10"));

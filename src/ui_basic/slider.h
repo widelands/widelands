@@ -152,7 +152,8 @@ struct HorizontalSlider : public Slider {
 	                 const std::string& tooltip_text = std::string(),
 	                 const uint32_t cursor_size = 20,
 	                 const bool enabled = true)
-	   : Slider(parent, name,
+	   : Slider(parent,
+	            name,
 	            x,
 	            y,
 	            w,
@@ -193,7 +194,8 @@ struct VerticalSlider : public Slider {
 	               const uint32_t cursor_size = 20,
 	               const std::string& tooltip_text = std::string(),
 	               const bool enabled = true)
-	   : Slider(parent, name,
+	   : Slider(parent,
+	            name,
 	            x,
 	            y,
 	            w,
