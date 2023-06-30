@@ -23,8 +23,8 @@
 #include "ui_basic/scrollbar.h"
 
 CampaignDetails::CampaignDetails(Panel* parent)
-   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     name_label_(this,
+   : UI::Box(parent, UI::PanelStyle::kFsMenu, "campaign_details_box", 0, 0, UI::Box::Vertical),
+     name_label_(this, "label_name",
                  0,
                  0,
                  UI::Scrollbar::kSize,
@@ -33,7 +33,7 @@ CampaignDetails::CampaignDetails(Panel* parent)
                  "",
                  UI::Align::kLeft,
                  UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     descr_(this, 0, 0, UI::Scrollbar::kSize, 0, UI::PanelStyle::kFsMenu) {
+     descr_(this, "description", 0, 0, UI::Scrollbar::kSize, 0, UI::PanelStyle::kFsMenu) {
 
 	constexpr int kPadding = 4;
 	add(&name_label_, UI::Box::Resizing::kFullSize);

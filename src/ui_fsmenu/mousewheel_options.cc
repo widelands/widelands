@@ -215,9 +215,9 @@ KeymodAndDirBox::KeymodAndDirBox(UI::Panel* parent,
                                  uint16_t* keymod,
                                  uint8_t* dir,
                                  bool two_d)
-   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, kButtonSize, kPadding),
+   : UI::Box(parent, UI::PanelStyle::kFsMenu, "key_mod_and_dir_box", 0, 0, UI::Box::Horizontal, 0, kButtonSize, kPadding),
      title_area_(
-        this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, format(_("%1%:"), title)),
+        this, UI::PanelStyle::kFsMenu, "title", UI::FontStyle::kFsMenuLabel, format(_("%1%:"), title)),
      keymod_dropdown_(this),
      dir_dropdown_(this, two_d),
      title_(title),
@@ -302,8 +302,8 @@ void KeymodAndDirBox::set_width(int w) {
 /***** End of KeymodAndDirBox members *****/
 
 InvertDirBox::InvertDirBox(UI::Panel* parent, const std::string& title, uint8_t* dir)
-   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, kButtonSize, kPadding),
-     title_area_(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, title),
+   : UI::Box(parent, UI::PanelStyle::kFsMenu, "invert_dir_box", 0, 0, UI::Box::Horizontal, 0, kButtonSize, kPadding),
+     title_area_(this, UI::PanelStyle::kFsMenu, "title", UI::FontStyle::kFsMenuLabel, title),
      dir_dropdown_(this),
      dir_(dir) {
 	if (UI::g_fh->fontset()->is_rtl()) {
@@ -430,7 +430,7 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
         this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, kButtonSize, kPadding),
      inverted_x_checkbox_(
         &horiz_override_box_,
-        UI::PanelStyle::kFsMenu,
+        UI::PanelStyle::kFsMenu, "fix_inverted_scrolling",
         Vector2i::zero(),
         _("Fix inverted horizontal scrolling"),
         _("An SDL bug in some configurations causes horizontal scroll to be inverted. "

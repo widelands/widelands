@@ -126,18 +126,18 @@ void make_valid_addon_filename(std::string& name,
 AddOnsPackagerBox::AddOnsPackagerBox(FsMenu::MainMenu& mainmenu,
                                      Panel* parent,
                                      uint32_t orientation)
-   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, orientation),
+   : UI::Box(parent, UI::PanelStyle::kFsMenu, "packager_box", 0, 0, orientation),
 
      main_menu_(mainmenu) {
 }
 
 MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* parent)
    : AddOnsPackagerBox(mainmenu, parent, UI::Box::Horizontal),
-     box_dirstruct_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     box_dirstruct_(this, UI::PanelStyle::kFsMenu, "dirstruct_box", 0, 0, UI::Box::Vertical),
 
-     box_maps_list_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     box_buttonsbox_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     box_dirstruct_displayname_(&box_dirstruct_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     box_maps_list_(this, UI::PanelStyle::kFsMenu, "maps_list_box", 0, 0, UI::Box::Vertical),
+     box_buttonsbox_(this, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Vertical),
+     box_dirstruct_displayname_(&box_dirstruct_, UI::PanelStyle::kFsMenu, "dirstruct_displayname_box", 0, 0, UI::Box::Vertical),
      map_add_(&box_buttonsbox_,
               "map_add",
               0,
@@ -165,10 +165,10 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* 
                  UI::ButtonStyle::kFsMenuSecondary,
                  _("–"),
                  _("Remove selected map or directory")),
-     dirstruct_(&box_dirstruct_, 0, 0, 200, 0, UI::PanelStyle::kFsMenu),
-     my_maps_(&box_maps_list_, 0, 0, 100, 0, UI::PanelStyle::kFsMenu),
-     dirstruct_displayname_(&box_dirstruct_displayname_, 0, 0, 0, UI::PanelStyle::kFsMenu),
-     displayname_duplicate_(&box_dirstruct_displayname_,
+     dirstruct_(&box_dirstruct_, "dirstruct", 0, 0, 200, 0, UI::PanelStyle::kFsMenu),
+     my_maps_(&box_maps_list_, "my_maps", 0, 0, 100, 0, UI::PanelStyle::kFsMenu),
+     dirstruct_displayname_(&box_dirstruct_displayname_, "dirstruct_displayname", 0, 0, 0, UI::PanelStyle::kFsMenu),
+     displayname_duplicate_(&box_dirstruct_displayname_, "displayname_duplicate",
                             0,
                             0,
                             100,
@@ -188,7 +188,7 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* 
 	     "same internal name will also share the same display name."));
 
 	box_dirstruct_displayname_.add(
-	   new UI::Textarea(&box_dirstruct_displayname_, UI::PanelStyle::kFsMenu,
+	   new UI::Textarea(&box_dirstruct_displayname_, UI::PanelStyle::kFsMenu, "label_dirstruct_displayname",
 	                    UI::FontStyle::kFsGameSetupHeadings, _("Directory Display Name"),
 	                    UI::Align::kCenter),
 	   UI::Box::Resizing::kFullSize);
@@ -197,7 +197,7 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* 
 	box_dirstruct_displayname_.add_space(kSpacing);
 	box_dirstruct_displayname_.add(&displayname_duplicate_, UI::Box::Resizing::kFullSize);
 
-	box_dirstruct_.add(new UI::Textarea(&box_dirstruct_, UI::PanelStyle::kFsMenu,
+	box_dirstruct_.add(new UI::Textarea(&box_dirstruct_, UI::PanelStyle::kFsMenu, "label_dirstruct",
 	                                    UI::FontStyle::kFsGameSetupHeadings, _("Directory Tree"),
 	                                    UI::Align::kCenter),
 	                   UI::Box::Resizing::kFullSize);
@@ -206,7 +206,7 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* 
 	box_dirstruct_.add_space(kSpacing);
 	box_dirstruct_.add(&box_dirstruct_displayname_, UI::Box::Resizing::kFullSize);
 	box_maps_list_.add(
-	   new UI::Textarea(&box_maps_list_, UI::PanelStyle::kFsMenu,
+	   new UI::Textarea(&box_maps_list_, UI::PanelStyle::kFsMenu, "label_my_maps",
 	                    UI::FontStyle::kFsGameSetupHeadings, _("My Maps"), UI::Align::kCenter),
 	   UI::Box::Resizing::kFullSize);
 	box_maps_list_.add_space(kSpacing);
@@ -460,7 +460,7 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 CampaignAddOnsPackagerBox::CampaignAddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* parent)
    : AddOnsPackagerBox(mainmenu, parent, UI::Box::Vertical),
      maps_box_(mainmenu, this),
-     difficulty_hbox_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     difficulty_hbox_(this, UI::PanelStyle::kFsMenu, "difficulty_hbox", 0, 0, UI::Box::Horizontal),
      tribe_select_(this,
                    "dropdown_tribe",
                    0,
@@ -483,10 +483,10 @@ CampaignAddOnsPackagerBox::CampaignAddOnsPackagerBox(FsMenu::MainMenu& mainmenu,
                       UI::DropdownType::kPictorial,
                       UI::PanelStyle::kFsMenu,
                       UI::ButtonStyle::kFsMenuSecondary),
-     difficulty_(&difficulty_hbox_, 0, 0, 100, UI::PanelStyle::kFsMenu),
-     short_desc_(&difficulty_hbox_, 0, 0, 50, UI::PanelStyle::kFsMenu),
+     difficulty_(&difficulty_hbox_, "difficulty", 0, 0, 100, UI::PanelStyle::kFsMenu),
+     short_desc_(&difficulty_hbox_, "short_description", 0, 0, 50, UI::PanelStyle::kFsMenu),
      difficulty_label_(&difficulty_hbox_,
-                       UI::PanelStyle::kFsMenu,
+                       UI::PanelStyle::kFsMenu, "label_difficulty",
                        UI::FontStyle::kFsMenuInfoPanelHeading,
                        _("Difficulty:"),
                        UI::Align::kRight) {

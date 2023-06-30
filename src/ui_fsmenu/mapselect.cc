@@ -49,7 +49,7 @@ MapSelect::MapSelect(MenuCapsule& m,
      parent_screen_(mpg),
      game_for_preview_(for_preview),
      checkboxes_(
-        &header_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, 2 * kPadding),
+        &header_box_, UI::PanelStyle::kFsMenu, "checkboxes_box", 0, 0, UI::Box::Vertical, 0, 0, 2 * kPadding),
      table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
      map_details_(
         &right_column_content_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, *game_for_preview_),
@@ -78,7 +78,7 @@ MapSelect::MapSelect(MenuCapsule& m,
 	show_all_maps_ = new UI::Button(
 	   hbox, "show_all_maps", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Show all maps"));
 	cb_dont_localize_mapnames_ = new UI::Checkbox(
-	   hbox, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show original map names"));
+	   hbox, UI::PanelStyle::kFsMenu, "original_map_names", Vector2i::zero(), _("Show original map names"));
 	cb_dont_localize_mapnames_->set_state(false);
 
 	hbox->add(show_all_maps_, UI::Box::Resizing::kFullSize);
@@ -90,7 +90,7 @@ MapSelect::MapSelect(MenuCapsule& m,
 	// Row with dropdowns
 
 	hbox = new UI::Box(
-	   &checkboxes_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
+	   &checkboxes_, UI::PanelStyle::kFsMenu, "tags_box_1", 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
 
 	official_tags_dropdown_ = new UI::Dropdown<std::string>(
 	   hbox, "dropdown_official_tags", 0, 0, 200, 50, 24, "", UI::DropdownType::kTextual,
@@ -139,7 +139,7 @@ MapSelect::MapSelect(MenuCapsule& m,
 	// Row with checkboxes
 
 	hbox = new UI::Box(
-	   &checkboxes_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
+	   &checkboxes_, UI::PanelStyle::kFsMenu, "tags_box_2", 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
 	add_tag_checkbox(hbox, "seafaring");
 	add_tag_checkbox(hbox, "ferries");
 	add_tag_checkbox(hbox, "artifacts");
@@ -444,7 +444,7 @@ UI::Checkbox* MapSelect::add_tag_checkbox(UI::Box* box, const std::string& tag) 
 
 	const TagTexts l = localize_tag(tag);
 	UI::Checkbox* cb =
-	   new UI::Checkbox(box, UI::PanelStyle::kFsMenu, Vector2i::zero(), l.displayname);
+	   new UI::Checkbox(box, UI::PanelStyle::kFsMenu, format("tag_checkbox_%s", tag), Vector2i::zero(), l.displayname);
 	cb->set_tooltip(l.tooltip);
 
 	box->add(cb, UI::Box::Resizing::kFullSize);

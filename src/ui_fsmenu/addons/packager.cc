@@ -49,24 +49,24 @@ AddOnsPackager::AddOnsPackager(FsMenu::MainMenu& parent, AddOnsCtrl& ctrl)
                 _("Add-Ons Packager")),
      main_menu_(parent),
      ctrl_(ctrl),
-     main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     box_left_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     box_right_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     box_left_buttons_(&box_left_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     box_right_subbox_header_hbox_(&box_right_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     main_box_(this, UI::PanelStyle::kFsMenu, "main_box", 0, 0, UI::Box::Horizontal),
+     box_left_(&main_box_, UI::PanelStyle::kFsMenu, "left_box", 0, 0, UI::Box::Vertical),
+     box_right_(&main_box_, UI::PanelStyle::kFsMenu, "right_box", 0, 0, UI::Box::Vertical),
+     box_left_buttons_(&box_left_, UI::PanelStyle::kFsMenu, "left_buttons_box", 0, 0, UI::Box::Horizontal),
+     box_right_subbox_header_hbox_(&box_right_, UI::PanelStyle::kFsMenu, "right_subheader_hbox", 0, 0, UI::Box::Horizontal),
      box_right_subbox_header_box_left_(
-        &box_right_subbox_header_hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+        &box_right_subbox_header_hbox_, UI::PanelStyle::kFsMenu, "right_subheader_left_box", 0, 0, UI::Box::Vertical),
      box_right_subbox_header_box_right_(
-        &box_right_subbox_header_hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     box_right_addon_specific_(&box_right_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     box_right_bottombox_(&box_right_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     name_(&box_right_subbox_header_box_right_, 0, 0, 100, UI::PanelStyle::kFsMenu),
-     author_(&box_right_subbox_header_box_right_, 0, 0, 100, UI::PanelStyle::kFsMenu),
-     version_(&box_right_subbox_header_box_right_, 0, 0, 100, UI::PanelStyle::kFsMenu),
-     min_wl_version_(&box_right_subbox_header_box_right_, 0, 0, 100, UI::PanelStyle::kFsMenu),
-     max_wl_version_(&box_right_subbox_header_box_right_, 0, 0, 100, UI::PanelStyle::kFsMenu),
+        &box_right_subbox_header_hbox_, UI::PanelStyle::kFsMenu, "right_subheader_right_box", 0, 0, UI::Box::Vertical),
+     box_right_addon_specific_(&box_right_, UI::PanelStyle::kFsMenu, "right_addon_specific_box", 0, 0, UI::Box::Horizontal),
+     box_right_bottombox_(&box_right_, UI::PanelStyle::kFsMenu, "right_bottom_box", 0, 0, UI::Box::Horizontal),
+     name_(&box_right_subbox_header_box_right_, "name", 0, 0, 100, UI::PanelStyle::kFsMenu),
+     author_(&box_right_subbox_header_box_right_, "author", 0, 0, 100, UI::PanelStyle::kFsMenu),
+     version_(&box_right_subbox_header_box_right_, "version", 0, 0, 100, UI::PanelStyle::kFsMenu),
+     min_wl_version_(&box_right_subbox_header_box_right_, "min_wl_version", 0, 0, 100, UI::PanelStyle::kFsMenu),
+     max_wl_version_(&box_right_subbox_header_box_right_, "max_wl_version", 0, 0, 100, UI::PanelStyle::kFsMenu),
      descr_(*new UI::MultilineEditbox(
-        &box_right_subbox_header_box_right_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu)),
+        &box_right_subbox_header_box_right_, "description", 0, 0, 100, 100, UI::PanelStyle::kFsMenu)),
      addon_new_(&box_left_buttons_,
                 "addon_new",
                 0,
@@ -109,7 +109,7 @@ AddOnsPackager::AddOnsPackager(FsMenu::MainMenu& parent, AddOnsCtrl& ctrl)
          kButtonSize,
          UI::ButtonStyle::kFsMenuPrimary,
          _("OK")),
-     addons_(&box_left_, 0, 0, 250, 0, UI::PanelStyle::kFsMenu),
+     addons_(&box_left_, "addons", 0, 0, 250, 0, UI::PanelStyle::kFsMenu),
      progress_window_(this, UI::WindowStyle::kFsMenu, _("Writing Add-Ons…")) {
 	progress_window_.set_visible(false);
 	progress_window_.set_message_1(_("Please be patient while your changes are written."));
@@ -134,34 +134,34 @@ AddOnsPackager::AddOnsPackager(FsMenu::MainMenu& parent, AddOnsCtrl& ctrl)
 
 	box_right_subbox_header_box_left_.add_space(kSpacing);
 	box_right_subbox_header_box_left_.add(
-	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu,
+	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu, "label_name",
 	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Name:"), UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
 	box_right_subbox_header_box_left_.add_space(3 * kSpacing);
 	box_right_subbox_header_box_left_.add(
-	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu,
+	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu, "label_author",
 	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Author:"), UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
 	box_right_subbox_header_box_left_.add_space(3 * kSpacing);
 	box_right_subbox_header_box_left_.add(
-	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu,
+	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu, "label_version",
 	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Version:"), UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
 	box_right_subbox_header_box_left_.add_space(3 * kSpacing);
 	box_right_subbox_header_box_left_.add(
-	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu,
+	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu, "label_min_wl_version",
 	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Minimum Widelands Version:"),
 	                    UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
 	box_right_subbox_header_box_left_.add_space(3 * kSpacing);
 	box_right_subbox_header_box_left_.add(
-	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu,
+	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu, "label_max_wl_version",
 	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Maximum Widelands Version:"),
 	                    UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
 	box_right_subbox_header_box_left_.add_space(3 * kSpacing);
 	box_right_subbox_header_box_left_.add(
-	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu,
+	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu, "label_description",
 	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Description:"),
 	                    UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);

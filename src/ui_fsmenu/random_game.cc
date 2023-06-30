@@ -29,7 +29,7 @@ RandomGame::RandomGame(MenuCapsule& m)
    : TwoColumnsFullNavigationMenu(m, _("New Random Game")),
      menu_(left_column_box_, UI::PanelStyle::kFsMenu, 350, 64, 64, ok_, back_),
      icon_(&right_column_content_box_,
-           UI::PanelStyle::kFsMenu,
+           UI::PanelStyle::kFsMenu, "wl_logo",
            g_image_cache->get("images/logos/wl-ico-128.png")) {
 	m.set_visible(false);
 
@@ -65,7 +65,7 @@ RandomGame::RandomGame(MenuCapsule& m)
 	layout();
 	{
 		UI::MultilineTextarea* txt = new UI::MultilineTextarea(
-		   &right_column_content_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu, "", UI::Align::kLeft,
+		   &right_column_content_box_, "beta_message", 0, 0, 100, 100, UI::PanelStyle::kFsMenu, "", UI::Align::kLeft,
 		   UI::MultilineTextarea::ScrollMode::kNoScrolling);
 		txt->set_style(UI::FontStyle::kFsMenuInfoPanelParagraph);
 		txt->set_text(

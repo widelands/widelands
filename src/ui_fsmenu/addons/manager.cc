@@ -119,48 +119,48 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                       fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuDefault),
                       _("Add-On Manager")),
      fsmm_(fsmm),
-     main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     buttons_box_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     main_box_(this, UI::PanelStyle::kFsMenu, "main_box", 0, 0, UI::Box::Vertical),
+     buttons_box_(&main_box_, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Horizontal),
      warn_requirements_(
-        &main_box_, 0, 0, get_w(), get_h() / 12, UI::PanelStyle::kFsMenu, "", UI::Align::kCenter),
-     tabs_placeholder_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, 0, 0),
-     tabs_(this, UI::TabPanelStyle::kFsMenu),
-     installed_addons_outer_wrapper_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+        &main_box_, "warn_requirements", 0, 0, get_w(), get_h() / 12, UI::PanelStyle::kFsMenu, "", UI::Align::kCenter),
+     tabs_placeholder_(&main_box_, UI::PanelStyle::kFsMenu, "tabs_placeholder", 0, 0, 0, 0),
+     tabs_(this, UI::TabPanelStyle::kFsMenu, "tabs"),
+     installed_addons_outer_wrapper_(&tabs_, UI::PanelStyle::kFsMenu, "installed_outer_wrapper_box", 0, 0, UI::Box::Horizontal),
      installed_addons_inner_wrapper_(
-        &installed_addons_outer_wrapper_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+        &installed_addons_outer_wrapper_, UI::PanelStyle::kFsMenu, "installed_inner_wrapper_box", 0, 0, UI::Box::Vertical),
      installed_addons_buttons_box_(
-        &installed_addons_outer_wrapper_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+        &installed_addons_outer_wrapper_, UI::PanelStyle::kFsMenu, "installed_buttons_box", 0, 0, UI::Box::Vertical),
      installed_addons_box_(&installed_addons_inner_wrapper_,
-                           UI::PanelStyle::kFsMenu,
+                           UI::PanelStyle::kFsMenu, "installed_box",
                            0,
                            0,
                            UI::Box::Vertical,
                            kHugeSize,
                            kHugeSize),
-     browse_addons_outer_wrapper_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     browse_addons_outer_wrapper_(&tabs_, UI::PanelStyle::kFsMenu, "browse_outer_wrapper_box", 0, 0, UI::Box::Vertical),
      browse_addons_inner_wrapper_(
-        &browse_addons_outer_wrapper_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+        &browse_addons_outer_wrapper_, UI::PanelStyle::kFsMenu, "browse_inner_wrapper_box", 0, 0, UI::Box::Vertical),
      browse_addons_buttons_box_(
-        &browse_addons_outer_wrapper_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+        &browse_addons_outer_wrapper_, UI::PanelStyle::kFsMenu, "browse_buttons_box", 0, 0, UI::Box::Horizontal),
      browse_addons_buttons_box_lvbox_(
-        &browse_addons_buttons_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+        &browse_addons_buttons_box_, UI::PanelStyle::kFsMenu, "browse_buttons_left_vbox", 0, 0, UI::Box::Vertical),
      browse_addons_buttons_box_rvbox_(
-        &browse_addons_buttons_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+        &browse_addons_buttons_box_, UI::PanelStyle::kFsMenu, "browse_buttons_right_vbox", 0, 0, UI::Box::Vertical),
      browse_addons_buttons_box_category_box_(
-        &browse_addons_buttons_box_lvbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+        &browse_addons_buttons_box_lvbox_, UI::PanelStyle::kFsMenu, "browse_buttons_category_box", 0, 0, UI::Box::Horizontal),
      browse_addons_buttons_box_right_hbox_(
-        &browse_addons_buttons_box_rvbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+        &browse_addons_buttons_box_rvbox_, UI::PanelStyle::kFsMenu, "browse_buttons_hbox", 0, 0, UI::Box::Horizontal),
      browse_addons_box_(&browse_addons_inner_wrapper_,
-                        UI::PanelStyle::kFsMenu,
+                        UI::PanelStyle::kFsMenu, "browse_box",
                         0,
                         0,
                         UI::Box::Vertical,
                         kHugeSize,
                         kHugeSize),
-     dev_box_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     filter_name_(&browse_addons_buttons_box_rvbox_, 0, 0, 100, UI::PanelStyle::kFsMenu),
+     dev_box_(&tabs_, UI::PanelStyle::kFsMenu, "development_box", 0, 0, UI::Box::Vertical),
+     filter_name_(&browse_addons_buttons_box_rvbox_, "filter_name", 0, 0, 100, UI::PanelStyle::kFsMenu),
      filter_verified_(&browse_addons_buttons_box_right_hbox_,
-                      UI::PanelStyle::kFsMenu,
+                      UI::PanelStyle::kFsMenu, "filter_verified",
                       Vector2i(0, 0),
                       _("Verified only"),
                       _("Show only verified add-ons")),
@@ -209,7 +209,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                         UI::PanelStyle::kFsMenu,
                         UI::ButtonStyle::kFsMenuSecondary),
      upload_addon_accept_(&dev_box_,
-                          UI::PanelStyle::kFsMenu,
+                          UI::PanelStyle::kFsMenu, "upload_addon_accept",
                           Vector2i(0, 0),
                           _("Understood and confirmed"),
                           _("By ticking this checkbox, you confirm that you have read and agree to "
@@ -314,17 +314,17 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
               /** TRANSLATORS: This button allows the user to send a message to the Widelands
                  Development Team */
               _("Contact us…")),
-     server_name_(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kWarning, "", UI::Align::kRight) {
+     server_name_(this, UI::PanelStyle::kFsMenu, "server_name", UI::FontStyle::kWarning, "", UI::Align::kRight) {
 
 	dev_box_.set_force_scrolling(true);
 	dev_box_.add(
-	   new UI::Textarea(&dev_box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+	   new UI::Textarea(&dev_box_, UI::PanelStyle::kFsMenu, "label_development", UI::FontStyle::kFsMenuInfoPanelHeading,
 	                    _("Tools for Add-Ons Developers"), UI::Align::kCenter),
 	   UI::Box::Resizing::kFullSize);
 	dev_box_.add_space(kRowButtonSize);
 	{
 		UI::MultilineTextarea* m = new UI::MultilineTextarea(
-		   &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu, "", UI::Align::kLeft,
+		   &dev_box_, "message_development", 0, 0, 100, 100, UI::PanelStyle::kFsMenu, "", UI::Align::kLeft,
 		   UI::MultilineTextarea::ScrollMode::kNoScrolling);
 		m->set_style(UI::FontStyle::kFsMenuInfoPanelParagraph);
 		m->set_text(_("The interactive add-ons packager allows you to create, edit, and delete "
@@ -338,7 +338,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 
 	dev_box_.add_space(kRowButtonSize);
 	dev_box_.add(new UI::MultilineTextarea(
-	                &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
+	                &dev_box_, "message_links", 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
 	                format("<rt><p>%1$s</p></rt>",
 	                       g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 	                          .as_font_tag(format(
@@ -353,7 +353,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	dev_box_.add_space(kRowButtonSize);
 	dev_box_.add(
 	   new UI::MultilineTextarea(
-	      &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
+	      &dev_box_, "message_detailed_info", 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
 	      format(
 	         "<rt><p>%s</p><p>%s</p><p>%s</p><p>%s</p></rt>",
 	         g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
@@ -403,7 +403,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	dev_box_.add_space(kRowButtonSize);
 	dev_box_.add(
 	   new UI::MultilineTextarea(
-	      &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
+	      &dev_box_, "message_contact_public", 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
 	      format("<rt><p>%1$s</p></rt>",
 	             g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 	                .as_font_tag(
@@ -420,7 +420,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	dev_box_.add_space(kRowButtonSize);
 	dev_box_.add(
 	   new UI::MultilineTextarea(
-	      &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
+	      &dev_box_, "message_contact_private", 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
 	      format("<rt><p>%1$s</p></rt>",
 	             g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 	                .as_font_tag(
@@ -494,7 +494,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 				continue;
 			}
 			UI::Checkbox* c =
-			   new UI::Checkbox(&browse_addons_buttons_box_category_box_, UI::PanelStyle::kFsMenu,
+			   new UI::Checkbox(&browse_addons_buttons_box_category_box_, UI::PanelStyle::kFsMenu, format("category_%s", pair.second.internal_name),
 			                    Vector2i(0, 0), g_image_cache->get(pair.second.icon),
 			                    format(_("Toggle category ‘%s’"), pair.second.descname()));
 			filter_category_[pair.first] = c;

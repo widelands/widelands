@@ -43,7 +43,7 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
      map_details_(&right_column_content_box_, kPadding),
 
      configure_game_(&right_column_content_box_,
-                     UI::PanelStyle::kFsMenu,
+                     UI::PanelStyle::kFsMenu, "label_configure",
                      UI::FontStyle::kFsGameSetupHeadings,
                      0,
                      0,
@@ -52,7 +52,7 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
                      _("Configure this game"),
                      UI::Align::kCenter),
      warn_desyncing_addon_(
-        &right_column_content_box_,
+        &right_column_content_box_, "warn_desync",
         0,
         0,
         10,
@@ -75,7 +75,7 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
                              UI::DropdownType::kTextual,
                              UI::PanelStyle::kFsMenu,
                              UI::ButtonStyle::kFsMenuMenu),
-     win_condition_duration_(&right_column_content_box_,
+     win_condition_duration_(&right_column_content_box_, "win_condition_duration",
                              0,
                              0,
                              360,
@@ -100,35 +100,35 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
                               "" /* set later */,
                               _("Show or hide additional game configuration options")),
      advanced_options_box_(
-        &right_column_content_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+        &right_column_content_box_, UI::PanelStyle::kFsMenu, "advanced_options_box", 0, 0, UI::Box::Vertical),
      game_flag_checkboxes_({
         {GameSettings::Flags::kPeaceful,
          {new UI::Checkbox(
-             &advanced_options_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Peaceful mode")),
+             &advanced_options_box_, UI::PanelStyle::kFsMenu, "peaceful", Vector2i::zero(), _("Peaceful mode")),
           &LaunchGame::update_peaceful_mode}},
 
         {GameSettings::Flags::kFogless,
          {new UI::Checkbox(
-             &advanced_options_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("No fog of war")),
+             &advanced_options_box_, UI::PanelStyle::kFsMenu, "fogless", Vector2i::zero(), _("No fog of war")),
           &LaunchGame::update_fogless}},
 
         {GameSettings::Flags::kForbidDiplomacy,
          {new UI::Checkbox(&advanced_options_box_,
-                           UI::PanelStyle::kFsMenu,
+                           UI::PanelStyle::kFsMenu, "forbid_diplomacy",
                            Vector2i::zero(),
                            _("Forbid diplomacy")),
           &LaunchGame::update_forbid_diplomacy}},
 
         {GameSettings::Flags::kCustomStartingPositions,
          {new UI::Checkbox(&advanced_options_box_,
-                           UI::PanelStyle::kFsMenu,
+                           UI::PanelStyle::kFsMenu, "custom_starting_positions",
                            Vector2i::zero(),
                            _("Custom starting positions")),
           &LaunchGame::update_custom_starting_positions}},
 
      }),
      write_replay_(
-        &advanced_options_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Write Replay")),
+        &advanced_options_box_, UI::PanelStyle::kFsMenu, "write_replay", Vector2i::zero(), _("Write Replay")),
 
      choose_map_(mpg && settings.can_change_map() && !preconfigured ?
                     new UI::Button(&right_column_content_box_,

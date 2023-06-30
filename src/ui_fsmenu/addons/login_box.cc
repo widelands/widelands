@@ -36,13 +36,13 @@ constexpr const char* const kRegisterURL = "https://widelands.org/accounts/regis
 AddOnsLoginBox::AddOnsLoginBox(UI::Panel& parent, UI::WindowStyle style)
    : UI::Window(&parent, style, "login", 0, 0, 100, 100, _("Login")),
      password_sha1_(get_config_string("password_sha1", "")),
-     box_(this, panel_style_, 0, 0, UI::Box::Vertical),
-     hbox_(&box_, panel_style_, 0, 0, UI::Box::Horizontal),
-     left_box_(&hbox_, panel_style_, 0, 0, UI::Box::Vertical),
-     right_box_(&hbox_, panel_style_, 0, 0, UI::Box::Vertical),
-     buttons_box_(&box_, panel_style_, 0, 0, UI::Box::Horizontal),
-     username_(&right_box_, 0, 0, 400, panel_style_),
-     password_(&right_box_, 0, 0, 400, panel_style_),
+     box_(this, panel_style_, "main_box", 0, 0, UI::Box::Vertical),
+     hbox_(&box_, panel_style_, "hbox", 0, 0, UI::Box::Horizontal),
+     left_box_(&hbox_, panel_style_, "left_box", 0, 0, UI::Box::Vertical),
+     right_box_(&hbox_, panel_style_, "right_box", 0, 0, UI::Box::Vertical),
+     buttons_box_(&box_, panel_style_, "buttons_box", 0, 0, UI::Box::Horizontal),
+     username_(&right_box_, "username", 0, 0, 400, panel_style_),
+     password_(&right_box_, "password", 0, 0, 400, panel_style_),
      ok_(&buttons_box_,
          "ok",
          0,
@@ -71,7 +71,7 @@ AddOnsLoginBox::AddOnsLoginBox(UI::Panel& parent, UI::WindowStyle style)
                                                 UI::ButtonStyle::kWuiSecondary,
             _("Reset")) {
 	UI::MultilineTextarea* m =
-	   new UI::MultilineTextarea(&box_, 0, 0, 100, 100, panel_style_, "", UI::Align::kLeft,
+	   new UI::MultilineTextarea(&box_, "message", 0, 0, 100, 100, panel_style_, "", UI::Align::kLeft,
 	                             UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	m->set_text(as_richtext(
 	   g_style_manager
@@ -87,14 +87,14 @@ AddOnsLoginBox::AddOnsLoginBox(UI::Panel& parent, UI::WindowStyle style)
 
 	left_box_.add_inf_space();
 	left_box_.add(
-	   new UI::Textarea(&left_box_, panel_style_,
+	   new UI::Textarea(&left_box_, panel_style_, "label_username",
 	                    style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelHeading :
                                                            UI::FontStyle::kWuiInfoPanelHeading,
 	                    _("Username:"), UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
 	left_box_.add_inf_space();
 	left_box_.add(
-	   new UI::Textarea(&left_box_, panel_style_,
+	   new UI::Textarea(&left_box_, panel_style_, "label_password",
 	                    style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelHeading :
                                                            UI::FontStyle::kWuiInfoPanelHeading,
 	                    _("Password:"), UI::Align::kRight),

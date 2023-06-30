@@ -46,9 +46,9 @@ ScenarioSelect::ScenarioSelect(MenuCapsule& fsmm, CampaignData* camp)
    : TwoColumnsFullNavigationMenu(
         fsmm, camp != nullptr ? _("Choose Scenario") : _("Choose Tutorial")),
      is_tutorial_(camp == nullptr),
-     table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     table_(&left_column_box_, "table", 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 
-     subtitle_(&header_box_,
+     subtitle_(&header_box_, "subtitle",
                0,
                0,
                UI::Scrollbar::kSize,
@@ -59,7 +59,7 @@ ScenarioSelect::ScenarioSelect(MenuCapsule& fsmm, CampaignData* camp)
                UI::MultilineTextarea::ScrollMode::kNoScrolling),
      scenario_details_(&right_column_content_box_),
      scenario_difficulty_header_(&right_column_content_box_,
-                                 UI::PanelStyle::kFsMenu,
+                                 UI::PanelStyle::kFsMenu, "label_difficulty",
                                  UI::FontStyle::kFsMenuInfoPanelHeading,
                                  0,
                                  0,

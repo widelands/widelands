@@ -86,23 +86,23 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                 _("Options")),
 
      // Buttons
-     button_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     button_box_(this, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Horizontal),
      cancel_(&button_box_, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Cancel")),
      apply_(&button_box_, "apply", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Apply")),
      ok_(&button_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
 
      // Tabs
-     tabs_(this, UI::TabPanelStyle::kFsMenu),
+     tabs_(this, UI::TabPanelStyle::kFsMenu, "tabs"),
 
-     box_interface_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_interface_(&tabs_, UI::PanelStyle::kFsMenu, "box_interface", 0, 0, UI::Box::Vertical, 0, 0, kPadding),
      box_interface_hbox_(
-        &box_interface_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
+        &box_interface_, UI::PanelStyle::kFsMenu, "hbox_interface", 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
      box_interface_vbox_(
-        &box_interface_hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     box_sound_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     box_saving_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     box_newgame_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     box_ingame_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+        &box_interface_hbox_, UI::PanelStyle::kFsMenu, "vbox_interface", 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_sound_(&tabs_, UI::PanelStyle::kFsMenu, "box_sound", 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_saving_(&tabs_, UI::PanelStyle::kFsMenu, "box_saving", 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_newgame_(&tabs_, UI::PanelStyle::kFsMenu, "box_newgame", 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_ingame_(&tabs_, UI::PanelStyle::kFsMenu, "box_ingame", 0, 0, UI::Box::Vertical, 0, 0, kPadding),
 
      // Interface options
      language_dropdown_(&box_interface_vbox_,
@@ -128,36 +128,36 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                           UI::PanelStyle::kFsMenu,
                           UI::ButtonStyle::kFsMenuMenu),
 
-     inputgrab_(&box_interface_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Grab Input"), "", 0),
+     inputgrab_(&box_interface_, UI::PanelStyle::kFsMenu, "input_grab", Vector2i::zero(), _("Grab Input"), "", 0),
      sdl_cursor_(&box_interface_,
-                 UI::PanelStyle::kFsMenu,
+                 UI::PanelStyle::kFsMenu, "sdl_cursor",
                  Vector2i::zero(),
                  _("Use system mouse cursor"),
                  "",
                  0),
      sb_maxfps_(
-        &box_interface_, 0, 0, 0, 0, opt.maxfps, 0, 99, UI::PanelStyle::kFsMenu, _("Maximum FPS:")),
+        &box_interface_, "max_fps", 0, 0, 0, 0, opt.maxfps, 0, 99, UI::PanelStyle::kFsMenu, _("Maximum FPS:")),
      tooltip_accessibility_mode_(&box_interface_,
-                                 UI::PanelStyle::kFsMenu,
+                                 UI::PanelStyle::kFsMenu, "tooltip_accessibility_mode",
                                  Vector2i::zero(),
                                  _("Accessibility mode for tooltips")),
-     translation_info_(&box_interface_hbox_, 0, 0, 100, 20, UI::PanelStyle::kFsMenu),
+     translation_info_(&box_interface_hbox_, "translation_info", 0, 0, 100, 20, UI::PanelStyle::kFsMenu),
 
      // Windows options
      dock_windows_to_edges_(&box_interface_,
-                            UI::PanelStyle::kFsMenu,
+                            UI::PanelStyle::kFsMenu, "dock_to_edges",
                             Vector2i::zero(),
                             _("Dock windows to edges"),
                             "",
                             0),
      animate_map_panning_(&box_interface_,
-                          UI::PanelStyle::kFsMenu,
+                          UI::PanelStyle::kFsMenu, "animate_map_panning",
                           Vector2i::zero(),
                           _("Animate automatic map movements"),
                           "",
                           0),
 
-     sb_dis_panel_(&box_interface_,
+     sb_dis_panel_(&box_interface_, "panel_snap_distance",
                    0,
                    0,
                    0,
@@ -169,7 +169,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                    _("Distance for windows to snap to other panels:"),
                    UI::SpinBox::Units::kPixels),
 
-     sb_dis_border_(&box_interface_,
+     sb_dis_border_(&box_interface_, "border_snap_distance",
                     0,
                     0,
                     0,
@@ -194,7 +194,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
      sound_options_(box_sound_, UI::SliderStyle::kFsMenu),
 
      // Saving options
-     sb_autosave_(&box_saving_,
+     sb_autosave_(&box_saving_, "autosave_interval",
                   0,
                   0,
                   0,
@@ -207,7 +207,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                   UI::SpinBox::Units::kMinutes,
                   UI::SpinBox::Type::kBig),
 
-     sb_rolling_autosave_(&box_saving_,
+     sb_rolling_autosave_(&box_saving_, "rolling_autosave",
                           0,
                           0,
                           0,
@@ -222,7 +222,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                           1,
                           ChangeBigStep::kMediumRange),
 
-     sb_replay_lifetime_(&box_saving_,
+     sb_replay_lifetime_(&box_saving_, "replay_lifetime",
                          0,
                          0,
                          0,
@@ -237,62 +237,55 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                          1,
                          4),
 
-     zip_(&box_saving_,
-          UI::PanelStyle::kFsMenu,
+     zip_(&box_saving_, UI::PanelStyle::kFsMenu, "compress",
           Vector2i::zero(),
           _("Compress Widelands data files (maps, replays, and savegames)"),
           "",
           0),
-     write_syncstreams_(&box_saving_,
-                        UI::PanelStyle::kFsMenu,
+     write_syncstreams_(&box_saving_, UI::PanelStyle::kFsMenu, "syncstreams",
                         Vector2i::zero(),
                         _("Write syncstreams in network games to debug desyncs"),
                         "",
                         0),
      // New Game options
      show_buildhelp_(
-        &box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Building Spaces")),
-     show_census_(&box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Census")),
-     show_statistics_(&box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Status")),
+        &box_newgame_, UI::PanelStyle::kFsMenu, "buildhelp", Vector2i::zero(), _("Show Building Spaces")),
+     show_census_(&box_newgame_, UI::PanelStyle::kFsMenu, "census", Vector2i::zero(), _("Show Census")),
+     show_statistics_(&box_newgame_, UI::PanelStyle::kFsMenu, "statistics", Vector2i::zero(), _("Show Status")),
      show_soldier_levels_(
-        &box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Soldier Levels")),
-     show_buildings_(&box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Buildings")),
+        &box_newgame_, UI::PanelStyle::kFsMenu, "soldier_levels", Vector2i::zero(), _("Show Soldier Levels")),
+     show_buildings_(&box_newgame_, UI::PanelStyle::kFsMenu, "buildings", Vector2i::zero(), _("Show Buildings")),
      show_workarea_overlap_(
-        &box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Workarea Overlaps")),
+        &box_newgame_, UI::PanelStyle::kFsMenu, "workarea_overlap", Vector2i::zero(), _("Show Workarea Overlaps")),
 
      // In-Game options
      auto_roadbuild_mode_(&box_ingame_,
-                          UI::PanelStyle::kFsMenu,
+                          UI::PanelStyle::kFsMenu, "auto_roadbuild",
                           Vector2i::zero(),
                           _("Start building road after placing a flag")),
-     transparent_chat_(&box_ingame_,
-                       UI::PanelStyle::kFsMenu,
+     transparent_chat_(&box_ingame_, UI::PanelStyle::kFsMenu, "transparent_chat",
                        Vector2i::zero(),
                        _("Show in-game chat with transparent background"),
                        "",
                        0),
 
-     single_watchwin_(&box_ingame_,
-                      UI::PanelStyle::kFsMenu,
+     single_watchwin_(&box_ingame_, UI::PanelStyle::kFsMenu, "single_watchwindow",
                       Vector2i::zero(),
                       /** TRANSLATORS: A watchwindow is a window where you keep watching an object
                          or a map region,*/
                       /** TRANSLATORS: and it also lets you jump to it on the map. */
                       _("Use single watchwindow mode")),
-     game_clock_(&box_ingame_,
-                 UI::PanelStyle::kFsMenu,
+     game_clock_(&box_ingame_, UI::PanelStyle::kFsMenu, "system_clock",
                  Vector2i::zero(),
                  _("Display system time in the info panel")),
-     numpad_diagonalscrolling_(&box_ingame_,
-                               UI::PanelStyle::kFsMenu,
+     numpad_diagonalscrolling_(&box_ingame_, UI::PanelStyle::kFsMenu, "numpad_diagonal_scrolling",
                                Vector2i::zero(),
                                _("Allow diagonal scrolling with the numeric keypad")),
      edge_scrolling_(&box_ingame_,
-                     UI::PanelStyle::kFsMenu,
+                     UI::PanelStyle::kFsMenu, "edge_scrolling",
                      Vector2i::zero(),
                      _("Scroll when the mouse cursor is near the screen edge")),
-     invert_movement_(&box_ingame_,
-                      UI::PanelStyle::kFsMenu,
+     invert_movement_(&box_ingame_, UI::PanelStyle::kFsMenu, "invert_movement",
                       Vector2i::zero(),
                       _("Invert click-and-drag map movement direction")),
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0

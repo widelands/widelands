@@ -45,7 +45,7 @@ HelpWindow::HelpWindow(UI::Panel* const parent,
                 height,
                 format(_("Help: %s"), caption)),
      textarea_(
-        new UI::MultilineTextarea(this, 5, 5, width - 10, height - 30, UI::PanelStyle::kFsMenu)) {
+        new UI::MultilineTextarea(this, "text", 5, 5, width - 10, height - 30, UI::PanelStyle::kFsMenu)) {
 	int margin = 5;
 
 	// Calculate sizes
