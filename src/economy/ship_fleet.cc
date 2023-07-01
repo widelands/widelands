@@ -465,7 +465,7 @@ void ShipFleet::remove_ship(EditorGameBase& egbase, Ship* ship) {
 	if (ships_.empty()) {
 		if (empty()) {
 			remove(egbase);
-		} else {
+		} else if (ports_.size() > 1) {
 			Flag& base = ports_[0]->base_flag();
 			for (uint32_t i = 1; i < ports_.size(); ++i) {
 				// since two ports can be connected by land, it is possible that
