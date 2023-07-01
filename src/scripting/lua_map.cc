@@ -4565,6 +4565,7 @@ const PropertyType<LuaMapObject> LuaMapObject::Properties[] = {
    PROP_RO(LuaMapObject, __hash),
    PROP_RO(LuaMapObject, descr),
    PROP_RO(LuaMapObject, serial),
+   PROP_RO(LuaMapObject, exists),
    {nullptr, nullptr, nullptr},
 };
 
@@ -4693,6 +4694,20 @@ int LuaMapObject::get_descr(lua_State* L) {
 }
 
 #undef CAST_TO_LUA
+
+/* RST
+   .. attribute:: exists
+
+      .. versionadded:: 1.2
+
+      (RO) Whether the map object represented by this Lua object still exists.
+
+      If it does not exist, no other attributes or functions of this object may be accessed.
+*/
+int LuaMapObject::get_exists(lua_State* L) {
+	lua_pushboolean(L, static_cast<int>(get_or_zero(get_egbase(L)) != nullptr));
+	return 1;
+}
 
 /*
  ==========================================================
@@ -7521,6 +7536,7 @@ Worker
 
 const char LuaWorker::className[] = "Worker";
 const MethodType<LuaWorker> LuaWorker::Methods[] = {
+   METHOD(LuaWorker, evict),
    {nullptr, nullptr},
 };
 const PropertyType<LuaWorker> LuaWorker::Properties[] = {
@@ -7568,6 +7584,19 @@ int LuaWorker::get_location(lua_State* L) {
  LUA METHODS
  ==========================================================
  */
+
+/* RST
+   .. method:: evict()
+
+      .. versionadded:: 1.2
+
+      Evict this worker from his current workplace.
+*/
+int LuaWorker::evict(lua_State* L) {
+	Widelands::Game& game = get_game(L);
+	get(L, game)->evict(game);
+	return 0;
+}
 
 /*
  ==========================================================

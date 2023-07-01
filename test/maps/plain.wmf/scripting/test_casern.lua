@@ -86,6 +86,10 @@ run(function()
    rv = hq:get_workers("all")
    assert_equal(5, rv.barbarians_soldier)
 
+   assert(br.exists)
+   br:destroy()
+   assert_equal(false, br.exists)
+
    print("# All Tests passed.")
    wl.ui.MapView():close()
 end)
