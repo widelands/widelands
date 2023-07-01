@@ -86,7 +86,7 @@ int16_t MainMenu::calc_desired_window_height(const UI::Window::WindowLayoutID id
 	case UI::Window::WindowLayoutID::kFsMenuOptions:
 		return std::max(450, get_h() / 2);
 	case UI::Window::WindowLayoutID::kFsMenuKeyboardOptions:
-		return std::max(360, get_h() * 3 / 8);
+		return std::max(400, get_h() / 2);
 	default:
 		NEVER_HERE();
 	}

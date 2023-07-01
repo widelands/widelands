@@ -505,7 +505,7 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                                                         "editor_info",
                                                         gettext_noop("Info Tool"))},
    {KeyboardShortcut::kEditorMapOrigin, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
-                                                             keysym(SDLK_0, KMOD_SHIFT),
+                                                             keysym(SDLK_x, KMOD_SHIFT),
                                                              "editor_map_origin",
                                                              gettext_noop("Map Origin Tool"))},
    {KeyboardShortcut::kEditorMapSize, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
@@ -566,6 +566,25 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
    EDITOR_TOOLSIZE(9, 9),
    EDITOR_TOOLSIZE(10, 0),
 #undef EDITOR_TOOLSIZE
+
+#define EDITOR_TOOLGAP(radius, key)                                                                \
+	{                                                                                               \
+		KeyboardShortcut::kEditorToolgap##radius,                                                    \
+		   KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},                              \
+		                        keysym(SDLK_##key, KMOD_SHIFT), "editor_toolgap" #radius,            \
+		                        gettext_noop("Set Tool Gap to %d%%"))                                \
+	}
+   EDITOR_TOOLGAP(0, 0),
+   EDITOR_TOOLGAP(10, 1),
+   EDITOR_TOOLGAP(20, 2),
+   EDITOR_TOOLGAP(30, 3),
+   EDITOR_TOOLGAP(40, 4),
+   EDITOR_TOOLGAP(50, 5),
+   EDITOR_TOOLGAP(60, 6),
+   EDITOR_TOOLGAP(70, 7),
+   EDITOR_TOOLGAP(80, 8),
+   EDITOR_TOOLGAP(90, 9),
+#undef EDITOR_TOOLGAP
 
    {KeyboardShortcut::kInGameSoundOptions,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
@@ -1014,6 +1033,7 @@ std::string get_editor_shortcut_help() {
 	   KeyboardShortcut::kEditorTools_Begin, KeyboardShortcut::kEditorTools_End);
 	/** TRANSLATORS: This is the helptext for an access key combination. */
 	rv += get_related_hotkeys_help(KeyboardShortcut::kEditorToolsize1, 1, 10, _("Change tool size"));
+	rv += get_related_hotkeys_help(KeyboardShortcut::kEditorToolgap0, 1, 10, _("Change tool gap"));
 
 	// Mouse controls for tools are included here because they belong to the Tools section
 	rv += as_definition_line(
@@ -1091,6 +1111,12 @@ std::string toolsize_descr(const KeyboardShortcut id) {
 	return format(_(shortcuts_.at(id).descname), i);
 }
 
+std::string toolgap_descr(const KeyboardShortcut id) {
+	assert(id >= KeyboardShortcut::kEditorToolgap0 && id <= KeyboardShortcut::kEditorToolgap90);
+	const uint16_t i = id - KeyboardShortcut::kEditorToolgap0;
+	return format(_(shortcuts_.at(id).descname), 10 * i);
+}
+
 std::string quicknav_descr(const KeyboardShortcut id) {
 	assert(id >= KeyboardShortcut::kInGameQuicknavSet1 &&
 	       id <= KeyboardShortcut::kInGameQuicknavGoto9);
@@ -1118,6 +1144,9 @@ std::string to_string(const KeyboardShortcut id) {
 	assert(is_real(id));
 	if (id >= KeyboardShortcut::kEditorToolsize1 && id <= KeyboardShortcut::kEditorToolsize10) {
 		return toolsize_descr(id);
+	}
+	if (id >= KeyboardShortcut::kEditorToolgap0 && id <= KeyboardShortcut::kEditorToolgap90) {
+		return toolgap_descr(id);
 	}
 	if (id >= KeyboardShortcut::kInGameQuicknavSet1 &&
 	    id <= KeyboardShortcut::kInGameQuicknavGoto9) {
