@@ -668,9 +668,11 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 			if (position.field->get_immovable() != dest) {
 				if (!start_task_movetodock(game, *dest)) {
 					if (send_message_at_destination_) {
-						send_message(game, _("Destination Unreachable"), _("Ship Destination Unreachable"),
-									 format(_("Your ship could not find a path to its destination port ‘%s’."), dest->get_warehouse()->get_warehouse_name()),
-									 descr().icon_filename());
+						send_message(
+						   game, _("Destination Unreachable"), _("Ship Destination Unreachable"),
+						   format(_("Your ship could not find a path to its destination port ‘%s’."),
+						          dest->get_warehouse()->get_warehouse_name()),
+						   descr().icon_filename());
 					}
 					send_message_at_destination_ = false;
 					destination_object_ = nullptr;
