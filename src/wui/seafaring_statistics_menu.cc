@@ -108,6 +108,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 
      navigation_box_(&main_box_,
                      UI::PanelStyle::kWui,
+                     "navigation_box",
                      0,
                      0,
                      UI::Box::Horizontal,
