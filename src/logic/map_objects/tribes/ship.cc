@@ -622,8 +622,10 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 			if (map->is_port_space(mr.location()) &&
 			    std::find(portspaces.begin(), portspaces.end(), mr.location()) == portspaces.end()) {
 				const Field& field = (*map)[mr.location()];
-				if (field.get_immovable() != nullptr && field.get_immovable()->get_owner() == get_owner() &&
-						game.descriptions().building_index(field.get_immovable()->descr().name()) == owner().tribe().port()) {
+				if (field.get_immovable() != nullptr &&
+				    field.get_immovable()->get_owner() == get_owner() &&
+				    game.descriptions().building_index(field.get_immovable()->descr().name()) ==
+				       owner().tribe().port()) {
 					continue;  // Skip if the player already has a port there
 				}
 
