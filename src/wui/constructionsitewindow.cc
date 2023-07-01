@@ -453,8 +453,10 @@ void ConstructionSiteWindow::think() {
 			assert(!ws->launch_expedition);
 		}
 #endif
-		cs_soldier_capacity_->refresh(ws->desired_capacity, ws->max_garrison, can_act);
-		cs_prefer_heroes_rookies_->set_state(static_cast<uint8_t>(ws->soldier_preference), false);
+		if (cs_soldier_capacity_ != nullptr) {
+			cs_soldier_capacity_->refresh(ws->desired_capacity, ws->max_garrison, can_act);
+			cs_prefer_heroes_rookies_->set_state(static_cast<uint8_t>(ws->soldier_preference), false);
+		}
 	}
 }
 
