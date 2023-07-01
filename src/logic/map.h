@@ -50,6 +50,8 @@ struct MapGenerator;
 struct PathfieldManager;
 class Descriptions;
 
+constexpr bool kEditorGapAffectsHeightTool = false;
+
 // Global list of available map dimensions.
 const std::vector<int32_t> kMapDimensions = {64,  80,  96,  112, 128, 144, 160, 176, 192, 208,
                                              224, 240, 256, 272, 288, 304, 320, 336, 352, 368,
@@ -497,7 +499,10 @@ public:
 	uint32_t set_height(const EditorGameBase&, FCoords, Field::Height);
 
 	/// Changes the height of the nodes in an Area by a difference.
-	uint32_t change_height(const EditorGameBase&, Area<FCoords>, int16_t difference);
+	uint32_t change_height(const EditorGameBase&,
+	                       Area<FCoords>,
+	                       int16_t difference,
+	                       std::vector<bool>::const_iterator gap_iterator);
 
 	/// Initializes the 'initial_resources' on 'coords' to the 'resource_type'
 	/// with the given 'amount'.
@@ -526,7 +531,10 @@ public:
 	 * the area, because this adjusts the surrounding nodes only once, after all
 	 * nodes in the area had their new height set.
 	 */
-	uint32_t set_height(const EditorGameBase&, Area<FCoords>, HeightInterval height_interval);
+	uint32_t set_height(const EditorGameBase&,
+	                    Area<FCoords>,
+	                    HeightInterval height_interval,
+	                    std::vector<bool>::const_iterator gap_iterator);
 
 	/***
 	 * Changes the given triangle's terrain. This happens in the editor and might
