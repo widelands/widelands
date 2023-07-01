@@ -4562,11 +4562,8 @@ const MethodType<LuaMapObject> LuaMapObject::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaMapObject> LuaMapObject::Properties[] = {
-   PROP_RO(LuaMapObject, __hash),
-   PROP_RO(LuaMapObject, descr),
-   PROP_RO(LuaMapObject, serial),
-   PROP_RO(LuaMapObject, exists),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaMapObject, __hash), PROP_RO(LuaMapObject, descr), PROP_RO(LuaMapObject, serial),
+   PROP_RO(LuaMapObject, exists), {nullptr, nullptr, nullptr},
 };
 
 void LuaMapObject::__persist(lua_State* L) {
