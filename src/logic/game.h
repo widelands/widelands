@@ -517,6 +517,7 @@ inline Coords Game::random_location(Coords location, uint8_t radius) {
 	const uint16_t s = radius * 2 + 1;
 	location.x += logic_rand() % s - radius;
 	location.y += logic_rand() % s - radius;
+	map().normalize_coords(location);
 	return location;
 }
 }  // namespace Widelands
