@@ -388,7 +388,8 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 
 			if (position.field->get_immovable() != dest) {
 				molog(game.get_gametime(), "Move to dock %u for refit\n", dest->serial());
-				return start_task_movetodock(game, *dest);
+				start_task_movetodock(game, *dest);
+				return;
 			}
 
 			// Arrived at destination, now unload and refit
@@ -673,7 +674,18 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 
 			// Sail to the destination port if we're not there yet.
 			if (position.field->get_immovable() != dest) {
-				start_task_movetodock(game, *dest);
+				if (!start_task_movetodock(game, *dest)) {
+					if (send_message_at_destination_) {
+						send_message(
+						   game, _("Destination Unreachable"), _("Ship Destination Unreachable"),
+						   format(_("Your ship could not find a path to its destination port ‘%s’."),
+						          dest->get_warehouse()->get_warehouse_name()),
+						   descr().icon_filename());
+					}
+					send_message_at_destination_ = false;
+					destination_object_ = nullptr;
+					start_task_idle(game, descr().main_animation(), 250);
+				}
 				return true;
 			}
 
@@ -1947,8 +1959,9 @@ uint32_t Ship::calculate_sea_route(EditorGameBase& egbase, PortDock& pd, Path* f
 
 /**
  * Find a path to the dock @p pd and follow it without using precomputed paths.
+ * Returns false if the dock is unreachable.
  */
-void Ship::start_task_movetodock(Game& game, PortDock& pd) {
+bool Ship::start_task_movetodock(Game& game, PortDock& pd) {
 	Path path;
 
 	uint32_t const distance = calculate_sea_route(game, pd, &path);
@@ -1956,17 +1969,17 @@ void Ship::start_task_movetodock(Game& game, PortDock& pd) {
 	// if we get a meaningfull result
 	if (distance < std::numeric_limits<uint32_t>::max()) {
 		start_task_movepath(game, path, descr().get_sail_anims());
-		return;
+		return true;
 	}
+
 	log_warn_time(
 	   game.get_gametime(),
 	   "start_task_movedock: Failed to find a path: ship at %3dx%3d to port at: %3dx%3d\n",
 	   get_position().x, get_position().y, pd.get_positions(game)[0].x, pd.get_positions(game)[0].y);
-	// This should not happen, but in theory there could be some inconstinency
-	// I (tiborb) failed to invoke this situation when testing so
-	// I am not sure if following line behaves allright
-	get_fleet()->update(game);
-	start_task_idle(game, descr().main_animation(), kFleetInterval.get());
+	if (get_fleet() != nullptr) {
+		get_fleet()->update(game);
+	}
+	return false;
 }
 
 /// Prepare everything for the coming exploration

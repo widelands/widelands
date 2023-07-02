@@ -137,7 +137,7 @@ struct Ship : Bob {
 	void cleanup(EditorGameBase&) override;
 
 	void start_task_ship(Game&);
-	void start_task_movetodock(Game&, PortDock&);
+	bool start_task_movetodock(Game&, PortDock&);
 	void start_task_expedition(Game&);
 
 	struct Battle {
