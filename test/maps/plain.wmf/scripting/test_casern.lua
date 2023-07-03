@@ -86,6 +86,23 @@ run(function()
    rv = hq:get_workers("all")
    assert_equal(5, rv.barbarians_soldier)
 
+   -- Cut the road
+   fhq.fields[1].rn.immovable:destroy()
+
+   -- Test evicting and map object existence checks
+   assert_equal(1, br:get_workers("barbarians_trainer"))
+   local main_worker
+   for i,bob in ipairs(br.fields[1].bobs) do
+      if bob.descr.name == "barbarians_trainer" then
+         assert_nil(main_worker)
+         main_worker = bob
+      end
+   end
+   assert_not_nil(main_worker)
+   main_worker:evict()
+   sleep(10000)
+   assert_equal(0, br:get_workers("barbarians_trainer"))
+
    assert(br.exists)
    br:destroy()
    assert_equal(false, br.exists)
