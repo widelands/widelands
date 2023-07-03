@@ -4,7 +4,7 @@
 -- This tests saving and loading of various Lua objects in the global
 -- environment.
 
-include "scripting/lunit.lua"
+include "test/scripting/lunit.lua"
 include "scripting/coroutine.lua"
 
 include "scripting/set.lua"

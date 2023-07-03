@@ -1,6 +1,6 @@
 include "scripting/coroutine.lua"
 include "scripting/infrastructure.lua"
-include "scripting/lunit.lua"
+include "test/scripting/lunit.lua"
 include "scripting/ui.lua"
 include "test/scripting/stable_save.lua"
 
