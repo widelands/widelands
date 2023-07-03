@@ -273,7 +273,7 @@ function check_trees_rocks_poor_hamlet(player, sf, warehouse, waretable_rocks, w
       if f.immovable then
          if not has_rocks and f.immovable:has_attribute('rocks') then
             has_rocks = true
-         elseif not has_trees and f.immovable:has_attribute('tree') then
+         elseif n_trees < min_trees and f.immovable:has_attribute('tree') then
             n_trees = n_trees + 1
          end
          if has_rocks and n_trees >= min_trees then
@@ -287,7 +287,8 @@ function check_trees_rocks_poor_hamlet(player, sf, warehouse, waretable_rocks, w
    end
    -- adding exactly one forester
    if n_trees < min_trees then
+      waretable_trees.logs = math.max(0, waretable_trees.logs - n_trees) -- reduce additional logs if there are trees
       add_wares_to_warehouse(player, warehouse, waretable_trees)
-      player:send_to_inbox(_("No trees nearby"), _("There are no trees near to your starting position. Therefore, you receive extra resources for bootstrapping your economy."))
+      player:send_to_inbox(_("Not enough trees nearby"), _("There are not enough trees near to your starting position. Therefore, you receive extra resources for bootstrapping your economy."))
    end
 end
