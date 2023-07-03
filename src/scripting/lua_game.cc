@@ -1186,7 +1186,7 @@ int LuaPlayer::do_get_buildings(lua_State* L, const bool csites) {
 	// parse_building_list
 	bool return_array = true;
 	if (lua_isstring(L, -1) != 0) {
-		const char* name = luaL_checkstring(L, -1);
+		const std::string name = luaL_checkstring(L, -1);
 		if (name != "all") {
 			lua_pop(L, 1);
 			lua_newtable(L);
