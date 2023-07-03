@@ -37,7 +37,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-22 02:48+0000\n"
+"POT-Creation-Date: 2023-07-01 03:13+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2023\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
@@ -741,8 +741,8 @@ msgid "Saving map…"
 msgstr "Karte wird gespeichert …"
 
 #: ../../src/editor/editorinteractive.cc:1443
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:310
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:365
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:314
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:369
 msgid "Error Saving Map!"
 msgstr "Fehler beim Speichern der Karte!"
 
@@ -1021,7 +1021,7 @@ msgstr "Fehler!"
 
 #. * TRANSLATORS: Directory name for user maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:81
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:279
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:283
 #: ../../src/ui_fsmenu/addons/packager_box.cc:210 ../../src/wui/mapdata.cc:196
 msgid "My Maps"
 msgstr "Meine Karten"
@@ -1046,7 +1046,7 @@ msgstr "Heruntergeladene Karten"
 
 #. * TRANSLATORS: The folder that a file will be saved to.
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:90
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:279
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:283
 #, c-format
 msgid "Current directory: %s"
 msgstr "Aktuelles Verzeichnis: %s"
@@ -1462,17 +1462,17 @@ msgstr "Fehler beim Erstellen des Verzeichnisses!"
 msgid "Error while creating directory ‘%s’."
 msgstr "Fehler beim Erstellen des Verzeichnisses „%s“."
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:308
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:312
 #: ../../src/wui/game_main_menu_save_game.cc:283
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Eine Datei mit dem Namen „%s“ existiert bereits. Überschreiben?"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:340
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:344
 msgid "Saving the map…"
 msgstr "Karte wird gespeichert …"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:358
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:362
 msgid "Map saved"
 msgstr "Karte gespeichert"
 
