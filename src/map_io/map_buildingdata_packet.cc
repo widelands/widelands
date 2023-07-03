@@ -566,6 +566,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 			if (packet_version >= 10) {
 				warehouse.next_swap_soldiers_time_ = Time(fr);
 				warehouse.soldier_request_.read(fr, game, mol);
+				warehouse.desired_soldier_count_ = packet_version >= 11 ? fr.unsigned_32() : 0;
 			}
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Warehouse", packet_version,
@@ -1291,6 +1292,7 @@ void MapBuildingdataPacket::write_warehouse(const Warehouse& warehouse,
 
 	warehouse.next_swap_soldiers_time_.save(fw);
 	warehouse.soldier_request_.write(fw, game, mos);
+	fw.unsigned_32(warehouse.desired_soldier_count_);
 }
 
 void MapBuildingdataPacket::write_militarysite(const MilitarySite& militarysite,
