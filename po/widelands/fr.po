@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-22 02:48+0000\n"
+"POT-Creation-Date: 2023-07-01 03:13+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Renaud Bouchard, 2015-2023\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
@@ -732,8 +732,8 @@ msgid "Saving map…"
 msgstr "Sauve la carte..."
 
 #: ../../src/editor/editorinteractive.cc:1443
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:310
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:365
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:314
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:369
 msgid "Error Saving Map!"
 msgstr "Erreur d'enregistrement de la carte !"
 
@@ -1012,7 +1012,7 @@ msgstr "Erreur !"
 
 #. * TRANSLATORS: Directory name for user maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:81
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:279
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:283
 #: ../../src/ui_fsmenu/addons/packager_box.cc:210 ../../src/wui/mapdata.cc:196
 msgid "My Maps"
 msgstr "Mes cartes"
@@ -1037,7 +1037,7 @@ msgstr "Cartes téléchargées"
 
 #. * TRANSLATORS: The folder that a file will be saved to.
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:90
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:279
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:283
 #, c-format
 msgid "Current directory: %s"
 msgstr "Répertoire courant : %s"
@@ -1454,17 +1454,17 @@ msgstr "Erreur à la création du répertoire !"
 msgid "Error while creating directory ‘%s’."
 msgstr "Erreur pendant la création du répertoire ‘%s’."
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:308
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:312
 #: ../../src/wui/game_main_menu_save_game.cc:283
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Un fichier nommé '%s' existe déjà. L'écraser ?"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:340
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:344
 msgid "Saving the map…"
 msgstr "La carte est enregistrée…"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:358
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:362
 msgid "Map saved"
 msgstr "Carte sauvegardée"
 
