@@ -178,6 +178,11 @@ static const std::map<MousewheelOptionID, MousewheelOption> mousewheel_options =
    {MousewheelOptionID::kEditorToolsizeX, MousewheelOption::create_bool("editor_toolsize_x", true)},
    {MousewheelOptionID::kEditorToolsizeY, MousewheelOption::create_bool("editor_toolsize_y", true)},
 
+   {MousewheelOptionID::kEditorToolgapMod,
+    MousewheelOption::create_mod("editor_toolgap_modifier", KMOD_ALT)},
+   {MousewheelOptionID::kEditorToolgapX, MousewheelOption::create_bool("editor_toolgap_x", true)},
+   {MousewheelOptionID::kEditorToolgapY, MousewheelOption::create_bool("editor_toolgap_y", true)},
+
    {MousewheelOptionID::kAlwaysOn, MousewheelOption::create_bool("", true)},
    {MousewheelOptionID::kDisabled, MousewheelOption::create_bool("", false)},
    {MousewheelOptionID::kNoMod, MousewheelOption::create_mod("", KMOD_NONE)},
@@ -249,6 +254,13 @@ static std::map<MousewheelHandlerConfigID, MousewheelHandlerOptions> mousewheel_
                              MousewheelOptionID::kEditorToolsizeX,
                              MousewheelOptionID::kUIChangeValueInvertX,
                              MousewheelOptionID::kEditorToolsizeY,
+                             MousewheelOptionID::kUIChangeValueInvertY,
+                             kDefaultSignValue)},
+   {MousewheelHandlerConfigID::kEditorToolgap,
+    MousewheelHandlerOptions(MousewheelOptionID::kEditorToolgapMod,
+                             MousewheelOptionID::kEditorToolgapX,
+                             MousewheelOptionID::kUIChangeValueInvertX,
+                             MousewheelOptionID::kEditorToolgapY,
                              MousewheelOptionID::kUIChangeValueInvertY,
                              kDefaultSignValue)},
    {MousewheelHandlerConfigID::kScrollbarVertical,  //
