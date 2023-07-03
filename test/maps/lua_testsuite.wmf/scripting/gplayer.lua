@@ -80,6 +80,11 @@ function player_building_access:test_multi()
 
    assert_equal(2, #rv.barbarians_lumberjacks_hut)
    assert_equal(1, #rv.barbarians_quarry)
+
+   local rv_all = player1:get_buildings("all")
+   assert_equal(#rv_all.barbarians_lumberjacks_hut, #rv.barbarians_lumberjacks_hut, "#lumberjacks_hut (all)")
+   assert_equal(rv_all.barbarians_quarry, rv.barbarians_quarry, "quarry (all)")
+   assert_equal(rv_all.barbarians_fishers_hut, {}, "fishers_hut (all)")
 end
 function player_building_access:test_access()
    local b1 = player1:place_building("barbarians_lumberjacks_hut", map:get_field(10,10))
