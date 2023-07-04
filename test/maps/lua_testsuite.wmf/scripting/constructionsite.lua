@@ -47,8 +47,9 @@ function constructionsite_tests:test_building()
 end
 
 function constructionsite_tests:test_get_constructionsites()
-   assert_equal(#player1:get_constructionsites("barbarians_lumberjacks_hut", 1), "#lumberjacks_hut")
-   assert_equal(#player1:get_constructionsites("barbarians_fortress", 1), "#fortress")
+   local player1 = self.l.owner
+   assert_equal(#player1:get_constructionsites("barbarians_lumberjacks_hut"), 1, "#lumberjacks_hut")
+   assert_equal(#player1:get_constructionsites("barbarians_fortress"), 1, "#fortress")
 
    assert_equal(player1:get_constructionsites("barbarians_lumberjacks_hut")[1], self.f1.immovable, "1st lumberjacks_hut")
 
