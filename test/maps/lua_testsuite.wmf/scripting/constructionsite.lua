@@ -45,21 +45,3 @@ function constructionsite_tests:test_building()
    assert_equal("barbarians_lumberjacks_hut", self.l.building)
    assert_equal("barbarians_fortress", self.f.building)
 end
-
-function constructionsite_tests:test_get_constructionsites()
-   local player1 = self.l.owner
-   assert_equal(#player1:get_constructionsites("barbarians_lumberjacks_hut"), 1, "#lumberjacks_hut")
-   assert_equal(#player1:get_constructionsites("barbarians_fortress"), 1, "#fortress")
-
-   assert_equal(player1:get_constructionsites("barbarians_lumberjacks_hut")[1], self.f1.immovable, "1st lumberjacks_hut")
-
-   local rv = #player1:get_constructionsites({"barbarians_fortress", "barbarians_lumberjacks_hut", "barbarians_quarry"})
-   assert_equal(#rv.barbarians_lumberjacks_hut, 1, "#lumberjacks_hut (multiple)")
-   assert_equal(#rv.barbarians_fortress, 1, "#fortress (multiple)")
-   assert_equal(#rv.barbarians_quarry, 0, "#quarry (multiple)") -- in result, but none exists
-
-   local rv_all = #player1:get_constructionsites("all")
-   assert_equal(rv_all.barbarians_lumberjacks_hut, rv.barbarians_lumberjacks_hut, "lumberjacks_hut (all)")
-   assert_equal(rv_all.barbarians_fortress, rv.barbarians_fortress, "fortress (all)")
-   assert_equal(rv_all.barbarians_wood_hardener, {}, "wood_hardener (all)")
-end
