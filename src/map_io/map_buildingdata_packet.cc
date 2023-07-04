@@ -543,8 +543,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 							log_warn("Reading soldier request for nonexistent ship %u", ship_serial);
 							SoldierRequest* req = new SoldierRequest(
 							   warehouse, SoldierPreference::kHeroes, Ship::warship_soldier_callback,
-							   []() { return 0U; },
-							   []() { return std::vector<Widelands::Soldier*>(); });
+							   []() { return 0U; }, []() { return std::vector<Widelands::Soldier*>(); });
 							req->read(fr, game, mol);
 							continue;
 						}
