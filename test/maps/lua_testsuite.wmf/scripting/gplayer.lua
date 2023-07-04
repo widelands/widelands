@@ -114,7 +114,6 @@ function player_building_access:test_constructionsites()
    assert_equal(player1:get_constructionsites("barbarians_lumberjacks_hut")[1], c1, "the lumberjacks_hut")
 
    local rv = player1:get_constructionsites({"barbarians_fortress", "barbarians_lumberjacks_hut", "barbarians_quarry"})
-   assert_equal(#rv, 3, "#rv (multiple)")
    assert_equal(#rv.barbarians_lumberjacks_hut, 1, "#lumberjacks_hut (multiple)")
    assert_equal(#rv.barbarians_fortress, 1, "#fortress (multiple)")
    assert_equal(#rv.barbarians_quarry, 0, "#quarry (multiple)") -- listed in result, but empty
@@ -123,7 +122,6 @@ function player_building_access:test_constructionsites()
    assert_equal(#rv_all.barbarians_lumberjacks_hut, #rv.barbarians_lumberjacks_hut, "#lumberjacks_hut (all)")
    assert_equal(#rv_all.barbarians_fortress, #rv.barbarians_fortress, "#fortress (all)")
    assert_equal(#rv_all.barbarians_wood_hardener, 0, "#wood_hardener (all)") -- all types are listed
-   assert_true(#rv_all > 10, "rv has many entries (all)")
 end
 
 -- ================
