@@ -241,6 +241,10 @@ bool Ship::init_fleet(EditorGameBase& egbase) {
 }
 
 void Ship::cleanup(EditorGameBase& egbase) {
+	if (PortDock* last = lastdock_.get(egbase); last != nullptr) {
+		last->erase_warship_request(serial());
+	}
+
 	if (fleet_ != nullptr) {
 		fleet_->remove_ship(egbase, this);
 	}
