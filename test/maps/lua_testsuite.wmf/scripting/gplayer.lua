@@ -106,12 +106,12 @@ function player_building_access:test_constructionsites()
    -- place construction sites
    local c1 = player1:place_building("barbarians_lumberjacks_hut", f1, true)
    local c2 = player1:place_building("barbarians_fortress", f2, true)
-   self.bs = { c1, c2}
+   self.bs = {c1, c2}
 
    assert_equal(#player1:get_constructionsites("barbarians_lumberjacks_hut"), 1, "#lumberjacks_hut")
    assert_equal(#player1:get_constructionsites("barbarians_fortress"), 1, "#fortress")
 
-   assert_equal(player1:get_constructionsites("barbarians_lumberjacks_hut")[1], self.f1.immovable, "the lumberjacks_hut")
+   assert_equal(player1:get_constructionsites("barbarians_lumberjacks_hut")[1], c1, "the lumberjacks_hut")
 
    local rv = player1:get_constructionsites({"barbarians_fortress", "barbarians_lumberjacks_hut", "barbarians_quarry"})
    assert_equal(#rv, 3, "#rv (multiple)")
@@ -123,6 +123,7 @@ function player_building_access:test_constructionsites()
    assert_equal(#rv_all.barbarians_lumberjacks_hut, #rv.barbarians_lumberjacks_hut, "#lumberjacks_hut (all)")
    assert_equal(#rv_all.barbarians_fortress, #rv.barbarians_fortress, "#fortress (all)")
    assert_equal(#rv_all.barbarians_wood_hardener, 0, "#wood_hardener (all)") -- all types are listed
+   assert_true(#rv_all > 10, "rv has many entries (all)")
 end
 
 -- ================
