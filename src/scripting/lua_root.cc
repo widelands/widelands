@@ -426,6 +426,7 @@ const PropertyType<LuaDescriptions> LuaDescriptions::Properties[] = {
    PROP_RO(LuaDescriptions, immovable_descriptions),
    PROP_RO(LuaDescriptions, terrain_descriptions),
    PROP_RO(LuaDescriptions, worker_descriptions),
+   PROP_RO(LuaDescriptions, building_descriptions),
    {nullptr, nullptr, nullptr},
 };
 
@@ -487,6 +488,26 @@ int LuaDescriptions::get_immovable_descriptions(lua_State* L) {
 		lua_pushint32(L, index++);
 		to_lua<LuaMaps::LuaImmovableDescription>(
 		   L, new LuaMaps::LuaImmovableDescription(descriptions.get_immovable_descr(i)));
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
+/* RST
+   .. attribute:: building_descriptions
+
+      Returns a list of all the buildings that are available.
+
+      (RO) a list of :class:`~wl.map.BuildingDescription` objects
+*/
+int LuaDescriptions::get_building_descriptions(lua_State* L) {
+	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
+	lua_newtable(L);
+	int index = 1;
+	for (Widelands::DescriptionIndex i = 0; i < descriptions.nr_buildings(); ++i) {
+		lua_pushint32(L, index++);
+		to_lua<LuaMaps::LuaBuildingDescription>(
+		   L, new LuaMaps::LuaBuildingDescription(descriptions.get_building_descr(i)));
 		lua_settable(L, -3);
 	}
 	return 1;

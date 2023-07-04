@@ -142,6 +142,11 @@ function test_descr:test_immovable_probability_to_grow()
    assert_near(0.000037, alder:probability_to_grow(terrain), 0.000001)
 end
 
+function test_descr:test_immovable_descriptions()
+   local immovable_descrs = egbase.immovable_descriptions
+   assert_true(#immovable_descrs > 10)
+   assert_equal(immovable_descrs[3].type_name, "immovable")
+end
 
 --  =======================================================
 --  ***************** BuildingDescription *****************
@@ -280,6 +285,20 @@ function test_descr:test_vision_range()
    assert_equal(2, egbase:get_building_description("constructionsite").vision_range)
    assert_equal(4+11, egbase:get_building_description("barbarians_fortress").vision_range)
    assert_equal(17, egbase:get_building_description("barbarians_tower").vision_range)
+end
+
+function test_descr:test_building_descriptions()
+   local building_descrs = egbase.building_descriptions
+   assert_true(#building_descrs > 10)
+   if building_descrs[3].type_name == "productionsite" or
+      building_descrs[3].type_name == "militarysite" or
+      building_descrs[3].type_name == "trainingsite" or
+      building_descrs[3].type_name == "warehouse"
+   then -- any building
+      assert_true(true)
+   else
+       assert_equal(building_descrs[3].type_name, "productionsite or militarysite or ...")
+   end
 end
 
 --  =======================================================
