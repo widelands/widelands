@@ -92,10 +92,15 @@ local r = {
          msg = msg ..  p(_("%1$s had %2$s.")):bformat(plr.name,trees)
       end
       msg = msg .. msg_vspace()
-      local trees = (ngettext ("%i tree", "%i trees", playerpoints[points[#points][1].number]))
-            :format(playerpoints[points[#points][1].number])
-      -- TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-      msg = msg ..  h3(_("The winner is %1$s with %2$s.")):bformat(points[#points][1].name, trees)
+      local trees = (ngettext ("%i tree", "%i trees", points[#points][2])):format(points[#points][2])
+      if #points == 1 or points[#points][2] ~= points[#points - 1][2] then -- one winner
+         -- TRANSLATORS: %1$s = player name, %2$s = x tree(s)
+         msg = msg ..  h3(_("The winner is %1$s with %2$s.")):bformat(points[#points][1].name, trees)
+      else
+         -- TRNANSLATORS: %s = x tree(s)
+         msg = msg .. h3(_("The winners had %s.")):bformat(trees)
+         -- TODO maybe, create list of winners and show as %$1s: The winners are %$1s with %$2s.
+      end
       pop_textdomain()
 
       local win_points = points[#points][2] -- points of winner(s)
