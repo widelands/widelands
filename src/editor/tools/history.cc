@@ -32,6 +32,17 @@ EditorActionArgs::EditorActionArgs(EditorInteractive& base)
 
      new_map_size(0, 0),
      interval(0, 0) {
+
+	const size_t nfields = Widelands::calc_area_size(sel_radius);
+	const uint16_t chance = base.get_sel_gap_percent();
+
+	selection_gaps.resize(nfields, chance != 0);
+
+	if (chance > 0 && chance < 100) {
+		for (std::vector<bool>::reference gap : selection_gaps) {
+			gap = (RNG::static_rand(100) < chance);
+		}
+	}
 }
 
 EditorActionArgs::~EditorActionArgs() {
