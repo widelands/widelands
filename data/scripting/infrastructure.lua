@@ -264,7 +264,7 @@ end
 
 function check_trees_rocks_poor_hamlet(player, sf, warehouse, waretable_rocks, waretable_trees, min_trees)
    if not min_trees then -- pass argument if this default does not match
-      min_trees = waretable_trees["log"] + (waretable_trees["planks"] or 0) * 2
+      min_trees = waretable_trees.log + (waretable_trees.planks or 0) * 2
    end
    -- NOTE: pessimistically, this could be a single rock
    local has_rocks = false
