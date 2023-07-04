@@ -287,7 +287,7 @@ function check_trees_rocks_poor_hamlet(player, sf, warehouse, waretable_rocks, w
    end
    -- adding exactly one forester
    if n_trees < min_trees then
-      waretable_trees.logs = math.max(0, waretable_trees.logs - n_trees) -- reduce additional logs if there are trees
+      waretable_trees.log = math.max(0, waretable_trees.log - n_trees) -- reduce additional logs if there are trees
       add_wares_to_warehouse(player, warehouse, waretable_trees)
       player:send_to_inbox(_("Not enough trees nearby"), _("There are not enough trees near to your starting position. Therefore, you receive extra resources for bootstrapping your economy."))
    end
