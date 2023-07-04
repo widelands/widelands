@@ -536,7 +536,19 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 					}
 
 					for (uint32_t i = packet_version >= 10 ? fr.unsigned_32() : 0; i > 0; --i) {
-						Ship* ship = &mol.get<Ship>(fr.unsigned_32());
+						Serial ship_serial = fr.unsigned_32();
+						// TODO(Nordfriese): The ship can only fail to exist in a pre-v1.2
+						// development version. Require its existence after v1.2.
+						if (!mol.is_object_known(ship_serial)) {
+							log_warn("Reading soldier request for nonexistent ship %u", ship_serial);
+							SoldierRequest req(
+							   warehouse, SoldierPreference::kHeroes, Ship::warship_soldier_callback,
+							   []() { return 0U; }, []() { return std::vector<Widelands::Soldier*>(); });
+							req.read(fr, game, mol);
+							continue;
+						}
+
+						Ship* ship = &mol.get<Ship>(ship_serial);
 						assert(warehouse.portdock_->warship_soldier_requests_.count(ship->serial()) == 0);
 						SoldierRequest* req = new SoldierRequest(
 						   warehouse, SoldierPreference::kHeroes, Ship::warship_soldier_callback,
