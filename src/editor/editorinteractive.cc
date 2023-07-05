@@ -476,11 +476,13 @@ void EditorInteractive::rebuild_showhide_menu() {
 	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideMaximumBuildhelp, false));
 
 	showhidemenu_.add(get_display_flag(dfHeightHeatMap) ?
-		/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether the map
-		height heat map is shown */
-			_("Disable height heat map") : _("Enable height heat map"),
+                        /** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+                        the map height heat map is shown */
+                        _("Disable height heat map") :
+                        _("Enable height heat map"),
 	                  ShowHideEntry::kHeightHeatMap,
-	                  g_image_cache->get("images/wui/menus/menu_toggle_height_heat_map.png"), false, "",
+	                  g_image_cache->get("images/wui/menus/menu_toggle_height_heat_map.png"), false,
+	                  "",
 	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideHeightHeatMap, false));
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether the map grid is shown
@@ -682,7 +684,8 @@ bool EditorInteractive::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 void EditorInteractive::draw(RenderTarget& dst) {
 	const auto& ebase = egbase();
 	auto* fields_to_draw =
-	   map_view()->draw_terrain(ebase, nullptr, Workareas(), get_display_flag(dfHeightHeatMap), get_display_flag(dfShowGrid), &dst);
+	   map_view()->draw_terrain(ebase, nullptr, Workareas(), get_display_flag(dfHeightHeatMap),
+	                            get_display_flag(dfShowGrid), &dst);
 
 	const float scale = 1.f / map_view()->view().zoom;
 	const Time& gametime = ebase.get_gametime();

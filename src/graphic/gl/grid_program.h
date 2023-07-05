@@ -28,7 +28,10 @@ public:
 	GridProgram();
 
 	// Draws the grid layer
-	void draw(uint32_t texture_id, const FieldsToDraw& fields_to_draw, float z_value, bool height_heat_map);
+	void draw(uint32_t texture_id,
+	          const FieldsToDraw& fields_to_draw,
+	          float z_value,
+	          bool height_heat_map);
 
 private:
 	struct PerVertexData {

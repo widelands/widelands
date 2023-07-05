@@ -507,7 +507,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 	const Time& gametime = gbase.get_gametime();
 
 	Workareas workareas = get_workarea_overlays(map);
-	FieldsToDraw* fields_to_draw = given_map_view->draw_terrain(gbase, &plr, workareas, false, false, dst);
+	FieldsToDraw* fields_to_draw =
+	   given_map_view->draw_terrain(gbase, &plr, workareas, false, false, dst);
 	const auto& road_building_s = road_building_steepness_overlays();
 	const bool picking_starting_pos = plr.is_picking_custom_starting_position();
 

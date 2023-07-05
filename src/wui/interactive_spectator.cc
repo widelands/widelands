@@ -94,8 +94,8 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 
 	const Widelands::Game& the_game = game();
 	const Widelands::Map& map = the_game.map();
-	auto* fields_to_draw =
-	   given_map_view->draw_terrain(the_game, nullptr, get_workarea_overlays(map), false, false, dst);
+	auto* fields_to_draw = given_map_view->draw_terrain(
+	   the_game, nullptr, get_workarea_overlays(map), false, false, dst);
 	const float scale = 1.f / given_map_view->view().zoom;
 	const Time& gametime = the_game.get_gametime();
 

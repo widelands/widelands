@@ -40,8 +40,7 @@ void GridProgram::gl_draw(int gl_texture, float z_value) {
 
 	Gl::vertex_attrib_pointer(
 	   attr_position_, 2, sizeof(PerVertexData), offsetof(PerVertexData, gl_x));
-	Gl::vertex_attrib_pointer(
-	   attr_color_, 3, sizeof(PerVertexData), offsetof(PerVertexData, col_r));
+	Gl::vertex_attrib_pointer(attr_color_, 3, sizeof(PerVertexData), offsetof(PerVertexData, col_r));
 
 	gl_state.bind(GL_TEXTURE0, gl_texture);
 
@@ -60,7 +59,10 @@ void GridProgram::add_vertex(const FieldsToDraw::Field& field, float r, float g,
 	back.col_b = b;
 }
 
-void GridProgram::draw(uint32_t texture_id, const FieldsToDraw& fields_to_draw, float z_value, bool height_heat_map) {
+void GridProgram::draw(uint32_t texture_id,
+                       const FieldsToDraw& fields_to_draw,
+                       float z_value,
+                       bool height_heat_map) {
 	vertices_.clear();
 	vertices_.reserve(fields_to_draw.size() * 2);
 

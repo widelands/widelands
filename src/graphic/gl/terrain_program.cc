@@ -47,8 +47,8 @@ void TerrainProgram::gl_draw(int gl_texture, float texture_w, float texture_h, f
 	glUseProgram(gl_program_.object());
 
 	auto& gl_state = Gl::State::instance();
-	gl_state.enable_vertex_attrib_array(
-	   {attr_brightness_, attr_position_, attr_texture_offset_, attr_texture_position_, attr_heatmap_color_});
+	gl_state.enable_vertex_attrib_array({attr_brightness_, attr_position_, attr_texture_offset_,
+	                                     attr_texture_position_, attr_heatmap_color_});
 
 	gl_array_buffer_.bind();
 	gl_array_buffer_.update(vertices_);
@@ -73,7 +73,9 @@ void TerrainProgram::gl_draw(int gl_texture, float texture_w, float texture_h, f
 	glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
 }
 
-void TerrainProgram::add_vertex(const FieldsToDraw::Field& field, const Vector2f& texture_offset, bool height_heat_map) {
+void TerrainProgram::add_vertex(const FieldsToDraw::Field& field,
+                                const Vector2f& texture_offset,
+                                bool height_heat_map) {
 	vertices_.emplace_back();
 	PerVertexData& back = vertices_.back();
 
