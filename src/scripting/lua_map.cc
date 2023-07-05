@@ -4661,7 +4661,7 @@ int LuaMapObject::get_descr(lua_State* L) {
 	const Widelands::MapObjectDescr* desc = &get(L, get_egbase(L))->descr();
 	assert(desc != nullptr);
 
-	return upcasted_map_object_descr_to_lua(L, desc)
+	return upcasted_map_object_descr_to_lua(L, desc);
 }
 
 /*
