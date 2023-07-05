@@ -505,8 +505,7 @@ int LuaDescriptions::get_building_descriptions(lua_State* L) {
 	lua_newtable(L);
 	for (Widelands::DescriptionIndex i = 0; i < descriptions.nr_buildings(); ++i) {
 		lua_pushint32(L, i + 1);
-		LuaMaps::upcasted_map_object_descr_to_lua(
-		   L, new LuaMaps::LuaBuildingDescription(descriptions.get_building_descr(i)));
+		LuaMaps::upcasted_map_object_descr_to_lua(L, descriptions.get_building_descr(i));
 		lua_settable(L, -3);
 	}
 	return 1;
