@@ -838,8 +838,14 @@ int upcasted_map_object_descr_to_lua(lua_State* L, const Widelands::MapObjectDes
 			return CAST_TO_LUA(Widelands::WorkerDescr, LuaWorkerDescription);
 		case Widelands::MapObjectType::SOLDIER:
 			return CAST_TO_LUA(Widelands::SoldierDescr, LuaSoldierDescription);
+		case Widelands::MapObjectType::SHIP:
+			return CAST_TO_LUA(Widelands::ShipDescr, LuaShipDescription);
 		case Widelands::MapObjectType::IMMOVABLE:
 			return CAST_TO_LUA(Widelands::ImmovableDescr, LuaImmovableDescription);
+		case Widelands::MapObjectType::RESOURCE:
+			return CAST_TO_LUA(Widelands::ResourceDescription, LuaResourceDescription);
+		case Widelands::MapObjectType::TERRAIN:
+			return CAST_TO_LUA(Widelands::TerrainDescription, LuaTerrainDescription);
 		default:
 			return CAST_TO_LUA(Widelands::MapObjectDescr, LuaMapObjectDescription);
 		}
@@ -4666,11 +4672,11 @@ int LuaMapObject::get_descr(lua_State* L) {
 	case Widelands::MapObjectType::FERRY:
 	case Widelands::MapObjectType::SOLDIER:
 		return CAST_TO_LUA(Widelands::WorkerDescr, LuaWorkerDescription);
-	case Widelands::MapObjectType::SHIP:
+	case Widelands::MapObjectType::SHIP: // as here
 		return CAST_TO_LUA(Widelands::ShipDescr, LuaShipDescription);
-	case Widelands::MapObjectType::RESOURCE:
+	case Widelands::MapObjectType::RESOURCE: // as here
 		return CAST_TO_LUA(Widelands::ResourceDescription, LuaResourceDescription);
-	case Widelands::MapObjectType::TERRAIN:
+	case Widelands::MapObjectType::TERRAIN: // as here
 		return CAST_TO_LUA(Widelands::TerrainDescription, LuaTerrainDescription);
 	case Widelands::MapObjectType::MAPOBJECT:
 	case Widelands::MapObjectType::BATTLE:
