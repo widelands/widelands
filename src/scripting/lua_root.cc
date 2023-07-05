@@ -525,7 +525,7 @@ int LuaDescriptions::get_worker_descriptions(lua_State* L) {
 	int index = 1;
 	for (Widelands::DescriptionIndex i = 0; i < descriptions.workers().size(); ++i) {
 		lua_pushint32(L, index++);
-		to_lua<LuaMaps::LuaWorkerDescription>(
+		LuaMaps::upcasted_map_object_descr_to_lua(
 		   L, new LuaMaps::LuaWorkerDescription(descriptions.get_worker_descr(i)));
 		lua_settable(L, -3);
 	}
