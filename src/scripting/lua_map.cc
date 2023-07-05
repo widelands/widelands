@@ -4670,8 +4670,9 @@ int LuaMapObject::get_descr(lua_State* L) {
 	case Widelands::MapObjectType::WORKER:
 	case Widelands::MapObjectType::CARRIER:
 	case Widelands::MapObjectType::FERRY:
-	case Widelands::MapObjectType::SOLDIER:
 		return CAST_TO_LUA(Widelands::WorkerDescr, LuaWorkerDescription);
+	case Widelands::MapObjectType::SOLDIER:
+		return CAST_TO_LUA(Widelands::SoldierDescr, LuaSoldierDescription);
 	case Widelands::MapObjectType::SHIP: // as here
 		return CAST_TO_LUA(Widelands::ShipDescr, LuaShipDescription);
 	case Widelands::MapObjectType::RESOURCE: // as here
