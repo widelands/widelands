@@ -503,9 +503,8 @@ int LuaDescriptions::get_immovable_descriptions(lua_State* L) {
 int LuaDescriptions::get_building_descriptions(lua_State* L) {
 	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
 	lua_newtable(L);
-	int index = 1;
 	for (Widelands::DescriptionIndex i = 0; i < descriptions.nr_buildings(); ++i) {
-		lua_pushint32(L, index++);
+		lua_pushint32(L, i + 1);
 		to_lua<LuaMaps::LuaBuildingDescription>(
 		   L, new LuaMaps::LuaBuildingDescription(descriptions.get_building_descr(i)));
 		lua_settable(L, -3);
