@@ -496,9 +496,9 @@ int LuaDescriptions::get_immovable_descriptions(lua_State* L) {
 /* RST
    .. attribute:: building_descriptions
 
-      Returns a list of all the buildings that are available.
+      .. versionadded:: 1.2
 
-      (RO) a list of :class:`~wl.map.BuildingDescription` objects
+      (RO) An :class:`array` of all :class:`~wl.map.BuildingDescription` objects that are available.
 */
 int LuaDescriptions::get_building_descriptions(lua_State* L) {
 	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
