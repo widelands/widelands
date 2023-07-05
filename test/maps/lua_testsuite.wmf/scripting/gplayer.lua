@@ -118,7 +118,7 @@ function player_building_access:test_constructionsites()
    assert_equal(#rv.barbarians_fortress, 1, "#fortress (multiple)")
    assert_equal(#rv.barbarians_quarry, 0, "#quarry (multiple)") -- listed in result, but empty
 
-   local rv_all = #player1:get_constructionsites("all")
+   local rv_all = player1:get_constructionsites("all")
    assert_equal(#rv_all.barbarians_lumberjacks_hut, #rv.barbarians_lumberjacks_hut, "#lumberjacks_hut (all)")
    assert_equal(#rv_all.barbarians_fortress, #rv.barbarians_fortress, "#fortress (all)")
    assert_equal(#rv_all.barbarians_wood_hardener, 0, "#wood_hardener (all)") -- all types are listed
