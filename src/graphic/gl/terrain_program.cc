@@ -94,7 +94,7 @@ void TerrainProgram::add_vertex(const FieldsToDraw::Field& field,
 		assert(val <= 1.f);
 		back.heatmap_r = 1.f - val;
 		back.heatmap_g = 0;
-		back.heatmap_r = val;
+		back.heatmap_b = val;
 	}
 }
 
