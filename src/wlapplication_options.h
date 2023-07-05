@@ -193,7 +193,19 @@ enum class KeyboardShortcut : uint16_t {
 	kEditorToolsize8,
 	kEditorToolsize9,
 	kEditorToolsize10,
-	kEditor_End = kEditorToolsize10,
+
+	kEditorToolgap0,
+	kEditorToolgap10,
+	kEditorToolgap20,
+	kEditorToolgap30,
+	kEditorToolgap40,
+	kEditorToolgap50,
+	kEditorToolgap60,
+	kEditorToolgap70,
+	kEditorToolgap80,
+	kEditorToolgap90,
+
+	kEditor_End = kEditorToolgap90,
 
 	kInGame_Begin = kEditor_End + 1,
 	kInGameSoundOptions = kInGame_Begin,

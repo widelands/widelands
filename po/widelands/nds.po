@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-22 02:48+0000\n"
+"POT-Creation-Date: 2023-07-01 03:13+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2023\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -716,8 +716,8 @@ msgid "Saving map…"
 msgstr "Sekere de Kaart …"
 
 #: ../../src/editor/editorinteractive.cc:1443
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:310
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:365
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:314
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:369
 msgid "Error Saving Map!"
 msgstr "Fehler bi’n Kaart sekern!"
 
@@ -996,7 +996,7 @@ msgstr "Fehler!"
 
 #. * TRANSLATORS: Directory name for user maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:81
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:279
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:283
 #: ../../src/ui_fsmenu/addons/packager_box.cc:210 ../../src/wui/mapdata.cc:196
 msgid "My Maps"
 msgstr "Miene Kaarten"
@@ -1021,7 +1021,7 @@ msgstr "Runnerladen Kaarten"
 
 #. * TRANSLATORS: The folder that a file will be saved to.
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:90
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:279
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:283
 #, c-format
 msgid "Current directory: %s"
 msgstr "Stedenwies Verteeknis: %s"
@@ -1437,17 +1437,17 @@ msgstr "Kunn dat Verteeknis nich maken!"
 msgid "Error while creating directory ‘%s’."
 msgstr "Kunn dat Verteeknis »%s« nich maken."
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:308
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:312
 #: ../../src/wui/game_main_menu_save_game.cc:283
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Eene Datei mit de Naam »%s« gifft ’t al. Överschrieven?"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:340
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:344
 msgid "Saving the map…"
 msgstr "Kaart word sekert …"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:358
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:362
 msgid "Map saved"
 msgstr "Kaart sekert"
 

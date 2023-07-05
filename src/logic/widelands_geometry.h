@@ -66,6 +66,11 @@ struct Coords {
 };
 static_assert(sizeof(Coords) == 4, "assert(sizeof(Coords) == 4) failed.");
 
+/** The total number of fields in an area with the given radius, */
+constexpr inline uint32_t calc_area_size(const uint32_t radius) {
+	return 3 * radius * (radius + 1) + 1;
+}
+
 template <typename CT = Coords, typename RT = uint16_t> struct Area : public CT {
 	using CoordsType = CT;
 	using RadiusType = RT;
