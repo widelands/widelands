@@ -1045,7 +1045,6 @@ RequestedWareWorker parse_wares_workers_counted(lua_State* L,
 	return result;
 }
 
-
 /*
  * ========================================================================
  *                         MODULE CLASSES
