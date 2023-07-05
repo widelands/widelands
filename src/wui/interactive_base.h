@@ -71,19 +71,20 @@ public:
 	// Available Display Flags
 	// a new flag also needs its corresponding checkbox in options
 	enum {
-		dfShowCensus = 1,              ///< show census report on buildings
-		dfShowStatistics = 2,          ///< show statistics report on buildings
-		dfShowSoldierLevels = 4,       ///< show level information above soldiers
-		dfShowWorkareaOverlap = 8,     ///< highlight overlapping workareas when placing
-		                               //   a constructionsite
-		dfDebug = 16,                  ///< general debugging info
-		dfShowBuildings = 32,          ///<
-		dfShowBuildhelp = 64,          ///< show size of building spaces
-		dfShowMaximumBuildhelp = 128,  ///< show max size of building spaces
-		dfShowGrid = 256,              ///<
-		dfShowImmovables = 512,        ///< show trees, rocks etc.
-		dfShowBobs = 1024,             ///< show animals
-		dfShowResources = 2048,        ///< show water, coal etc. in editor
+		dfShowCensus = 1 << 0,            ///< show census report on buildings
+		dfShowStatistics = 1 << 1,        ///< show statistics report on buildings
+		dfShowSoldierLevels = 1 << 2,     ///< show level information above soldiers
+		dfShowWorkareaOverlap = 1 << 3,   ///< highlight overlapping workareas when placing
+		                                  //   a constructionsite
+		dfDebug = 1 << 4,                 ///< general debugging info
+		dfShowBuildings = 1 << 5,         ///< don't hide buildings
+		dfShowBuildhelp = 1 << 6,         ///< show size of building spaces
+		dfShowMaximumBuildhelp = 1 << 7,  ///< show max size of building spaces
+		dfShowGrid = 1 << 8,              ///< display a grid overlay
+		dfShowImmovables = 1 << 9,        ///< show trees, rocks etc.
+		dfShowBobs = 1 << 10,             ///< show animals
+		dfShowResources = 1 << 11,        ///< show water, coal etc. in editor
+		dfHeightHeatMap = 1 << 12,        ///< color triangles and edges by height
 	};
 	static constexpr int32_t kDefaultDisplayFlags =
 	   dfShowSoldierLevels | dfShowBuildings | dfShowWorkareaOverlap;

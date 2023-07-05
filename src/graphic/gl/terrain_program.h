@@ -35,6 +35,7 @@ public:
 	          const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
 	          const FieldsToDraw& fields_to_draw,
 	          float z_value,
+	          bool height_heat_map,
 	          const Widelands::Player*);
 
 private:
@@ -46,13 +47,17 @@ private:
 		float texture_y;
 		float texture_offset_x;
 		float texture_offset_y;
+		float heatmap_r;
+		float heatmap_g;
+		float heatmap_b;
+		float heatmap_a;
 	};
-	static_assert(sizeof(PerVertexData) == 28, "Wrong padding.");
+	static_assert(sizeof(PerVertexData) == 11 * 4, "Wrong padding.");
 
 	void gl_draw(int gl_texture, float texture_w, float texture_h, float z_value);
 
 	// Adds a vertex to the end of vertices with data from 'field' and 'texture_coordinates'.
-	void add_vertex(const FieldsToDraw::Field& field, const Vector2f& texture_offset);
+	void add_vertex(const FieldsToDraw::Field& field, const Vector2f& texture_offset, bool height_heat_map);
 
 	// The program used for drawing the terrain.
 	Gl::Program gl_program_;
@@ -65,6 +70,7 @@ private:
 	GLint attr_position_;
 	GLint attr_texture_offset_;
 	GLint attr_texture_position_;
+	GLint attr_heatmap_color_;
 
 	// Uniforms.
 	GLint u_terrain_texture_;

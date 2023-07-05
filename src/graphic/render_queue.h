@@ -123,6 +123,7 @@ public:
 		float scale = 1.f;
 		Rectf destination_rect = Rectf(0.f, 0.f, 0.f, 0.f);
 		const Widelands::Player* player = nullptr;
+		bool height_heat_map = false;
 	};
 
 	// The union of all possible program arguments represents an Item that is

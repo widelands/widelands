@@ -28,19 +28,22 @@ public:
 	GridProgram();
 
 	// Draws the grid layer
-	void draw(uint32_t texture_id, const FieldsToDraw& fields_to_draw, float z_value);
+	void draw(uint32_t texture_id, const FieldsToDraw& fields_to_draw, float z_value, bool height_heat_map);
 
 private:
 	struct PerVertexData {
 		float gl_x;
 		float gl_y;
+		float col_r;
+		float col_g;
+		float col_b;
 	};
-	static_assert(sizeof(PerVertexData) == 8, "Wrong padding.");
+	static_assert(sizeof(PerVertexData) == 4 * 5, "Wrong padding.");
 
 	void gl_draw(int gl_texture, float z_value);
 
-	// Adds a vertex to the end of vertices with data from 'field'.
-	void add_vertex(const FieldsToDraw::Field& field);
+	// Adds a vertex to the end of vertices with data from 'field' and the given RGB color.
+	void add_vertex(const FieldsToDraw::Field& field, float r, float g, float b);
 
 	// The program used for drawing the grid layer
 	Gl::Program gl_program_;
@@ -50,6 +53,7 @@ private:
 
 	// Attributes.
 	GLint attr_position_;
+	GLint attr_color_;
 
 	// Uniforms.
 	GLint u_z_value_;

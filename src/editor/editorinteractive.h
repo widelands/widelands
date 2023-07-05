@@ -210,6 +210,7 @@ private:
 	enum class ShowHideEntry {
 		kBuildingSpaces,
 		kMaximumBuildingSpaces,
+		kHeightHeatMap,
 		kGrid,
 		kAnimals,
 		kImmovables,
@@ -244,6 +245,7 @@ private:
 	// Show / hide the bobs in the mapview
 	void toggle_bobs();
 	void toggle_grid();
+	void toggle_height_heat_map();
 
 	void update_tool_history_window();
 

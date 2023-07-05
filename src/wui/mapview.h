@@ -178,6 +178,7 @@ public:
 	FieldsToDraw* draw_terrain(const Widelands::EditorGameBase& egbase,
 	                           const Widelands::Player*,
 	                           const Workareas& workarea,
+                               bool height_heat_map,
 	                           bool grid,
 	                           RenderTarget* dst);
 

@@ -25,6 +25,7 @@ GridProgram::GridProgram() {
 	gl_program_.build("grid");
 
 	attr_position_ = glGetAttribLocation(gl_program_.object(), "attr_position");
+	attr_color_ = glGetAttribLocation(gl_program_.object(), "attr_color");
 
 	u_z_value_ = glGetUniformLocation(gl_program_.object(), "u_z_value");
 }
@@ -39,6 +40,8 @@ void GridProgram::gl_draw(int gl_texture, float z_value) {
 
 	Gl::vertex_attrib_pointer(
 	   attr_position_, 2, sizeof(PerVertexData), offsetof(PerVertexData, gl_x));
+	Gl::vertex_attrib_pointer(
+	   attr_color_, 3, sizeof(PerVertexData), offsetof(PerVertexData, col_r));
 
 	gl_state.bind(GL_TEXTURE0, gl_texture);
 
@@ -47,16 +50,32 @@ void GridProgram::gl_draw(int gl_texture, float z_value) {
 	glDrawArrays(GL_LINES, 0, vertices_.size());
 }
 
-void GridProgram::add_vertex(const FieldsToDraw::Field& field) {
+void GridProgram::add_vertex(const FieldsToDraw::Field& field, float r, float g, float b) {
 	vertices_.emplace_back();
 	PerVertexData& back = vertices_.back();
 	back.gl_x = field.gl_position.x;
 	back.gl_y = field.gl_position.y;
+	back.col_r = r;
+	back.col_g = g;
+	back.col_b = b;
 }
 
-void GridProgram::draw(uint32_t texture_id, const FieldsToDraw& fields_to_draw, float z_value) {
+void GridProgram::draw(uint32_t texture_id, const FieldsToDraw& fields_to_draw, float z_value, bool height_heat_map) {
 	vertices_.clear();
 	vertices_.reserve(fields_to_draw.size() * 2);
+
+	// This defines the default RGB grid color
+	float r = 0.f;
+	float g = 0.f;
+	float b = 0.f;
+	auto calc_rgb = [&fields_to_draw, &r, &g, &b](const FieldsToDraw::Field& field, int neighbour) {
+		float h1 = field.fcoords.field->get_height();
+		float h2 = fields_to_draw.at(neighbour).fcoords.field->get_height();
+		float diff = std::min(1.f, fabs(h1 - h2) / Widelands::kDefaultMaxFieldHeightDiff);
+		r = diff;
+		g = 0;
+		b = 1.f - diff;
+	};
 
 	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
 		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
@@ -64,22 +83,31 @@ void GridProgram::draw(uint32_t texture_id, const FieldsToDraw& fields_to_draw, 
 		// Southwestern edge
 		if (field.bln_index != FieldsToDraw::kInvalidIndex &&
 		    !(field.obscured_by_slope && fields_to_draw.at(field.bln_index).obscured_by_slope)) {
-			add_vertex(fields_to_draw.at(current_index));
-			add_vertex(fields_to_draw.at(field.bln_index));
+			if (height_heat_map) {
+				calc_rgb(field, field.bln_index);
+			}
+			add_vertex(fields_to_draw.at(current_index), r, g, b);
+			add_vertex(fields_to_draw.at(field.bln_index), r, g, b);
 		}
 
 		// Southeastern edge
 		if (field.brn_index != FieldsToDraw::kInvalidIndex &&
 		    !(field.obscured_by_slope && fields_to_draw.at(field.brn_index).obscured_by_slope)) {
-			add_vertex(fields_to_draw.at(current_index));
-			add_vertex(fields_to_draw.at(field.brn_index));
+			if (height_heat_map) {
+				calc_rgb(field, field.brn_index);
+			}
+			add_vertex(fields_to_draw.at(current_index), r, g, b);
+			add_vertex(fields_to_draw.at(field.brn_index), r, g, b);
 		}
 
 		// Eastern edge
 		if (field.rn_index != FieldsToDraw::kInvalidIndex &&
 		    !(field.obscured_by_slope && fields_to_draw.at(field.rn_index).obscured_by_slope)) {
-			add_vertex(fields_to_draw.at(current_index));
-			add_vertex(fields_to_draw.at(field.rn_index));
+			if (height_heat_map) {
+				calc_rgb(field, field.rn_index);
+			}
+			add_vertex(fields_to_draw.at(current_index), r, g, b);
+			add_vertex(fields_to_draw.at(field.rn_index), r, g, b);
 		}
 	}
 
