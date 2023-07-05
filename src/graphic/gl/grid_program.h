@@ -41,7 +41,7 @@ private:
 		float col_g;
 		float col_b;
 	};
-	static_assert(sizeof(PerVertexData) == 4 * 5, "Wrong padding.");
+	static_assert(sizeof(PerVertexData) == 20, "Wrong padding.");
 
 	void gl_draw(int gl_texture, float z_value);
 

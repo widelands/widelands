@@ -52,7 +52,7 @@ private:
 		float heatmap_b;
 		float heatmap_a;
 	};
-	static_assert(sizeof(PerVertexData) == 11 * 4, "Wrong padding.");
+	static_assert(sizeof(PerVertexData) == 44, "Wrong padding.");
 
 	void gl_draw(int gl_texture, float texture_w, float texture_h, float z_value);
 
