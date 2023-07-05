@@ -942,6 +942,7 @@ int upcasted_map_object_to_lua(lua_State* L, Widelands::MapObject* mo) {
 	}
 	NEVER_HERE();
 }
+#undef CAST_TO_LUA
 
 // This is used for get_ware/workers functions, when argument can be
 // 'all', single ware/worker, or array of ware/workers
@@ -1044,7 +1045,6 @@ RequestedWareWorker parse_wares_workers_counted(lua_State* L,
 	return result;
 }
 
-#undef CAST_TO_LUA
 
 /*
  * ========================================================================
