@@ -293,10 +293,14 @@ function test_descr:test_building_descriptions()
    if building_descrs[3].type_name == "productionsite" or
       building_descrs[3].type_name == "militarysite" or
       building_descrs[3].type_name == "trainingsite" or
-      building_descrs[3].type_name == "warehouse"
-   then -- any building
+      building_descrs[3].type_name == "warehouse" or
+      building_descrs[3].type_name == "market" or
+      building_descrs[3].type_name == "constructionsite" or
+      building_descrs[3].type_name == "dismantlesite"
+   then -- any building with an implemented type
       assert_true(true)
    else
+       -- fail:
        assert_equal(building_descrs[3].type_name, "productionsite or militarysite or ...")
    end
 end
