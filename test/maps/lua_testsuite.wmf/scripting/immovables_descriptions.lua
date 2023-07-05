@@ -143,7 +143,7 @@ function test_descr:test_immovable_probability_to_grow()
 end
 
 function test_descr:test_immovable_descriptions()
-   local immovable_descrs = egbase.immovable_descriptions
+   local immovable_descrs = wl.Descriptions().immovable_descriptions
    assert_true(#immovable_descrs > 10)
    assert_equal(immovable_descrs[3].type_name, "immovable")
 end
@@ -288,7 +288,7 @@ function test_descr:test_vision_range()
 end
 
 function test_descr:test_building_descriptions()
-   local building_descrs = egbase.building_descriptions
+   local building_descrs = wl.Descriptions().building_descriptions
    assert_true(#building_descrs > 10)
    if building_descrs[3].type_name == "productionsite" or
       building_descrs[3].type_name == "militarysite" or
