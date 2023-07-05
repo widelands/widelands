@@ -128,6 +128,9 @@
 #define PRINTF_FORMAT(b, c)
 #endif
 
+#ifdef PRIuPTR
+#define PRIuS PRIuPTR
+#else
 #ifdef _WIN32
 #ifdef _WIN64
 #define PRIuS PRIu64
@@ -139,6 +142,7 @@
 #define PRIuS "lu"
 #else
 #define PRIuS "u"
+#endif
 #endif
 #endif
 
