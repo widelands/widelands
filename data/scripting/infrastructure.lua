@@ -259,19 +259,24 @@ end
 --    :type waretable_rocks: :const:`table`
 --    :arg waretable_trees: a table of pairs {:const:`"name"` = value} to add if no trees were found nearby
 --    :type waretable_trees: :const:`table`
+--    :arg min_trees: minimal number of trees (optional)
+--    :type min_trees: :class:`integer`
 
-function check_trees_rocks_poor_hamlet(player, sf, warehouse, waretable_rocks, waretable_trees)
-   -- NOTE: pessimistically, this could be a single rock and a single tree
+function check_trees_rocks_poor_hamlet(player, sf, warehouse, waretable_rocks, waretable_trees, min_trees)
+   if not min_trees then -- pass argument if this default does not match
+      min_trees = waretable_trees.log + (waretable_trees.planks or 0) * 2
+   end
+   -- NOTE: pessimistically, this could be a single rock
    local has_rocks = false
-   local has_trees = false
+   local n_trees = 0
    for k,f in pairs(sf:region(10)) do
       if f.immovable then
          if not has_rocks and f.immovable:has_attribute('rocks') then
             has_rocks = true
-         elseif not has_trees and f.immovable:has_attribute('tree') then
-            has_trees = true
+         elseif n_trees < min_trees and f.immovable:has_attribute('tree') then
+            n_trees = n_trees + 1
          end
-         if has_trees and has_rocks then
+         if has_rocks and n_trees >= min_trees then
             break
          end
       end
@@ -281,8 +286,9 @@ function check_trees_rocks_poor_hamlet(player, sf, warehouse, waretable_rocks, w
       player:send_to_inbox(_("No rocks nearby"), _("There are no rocks near to your starting position. Therefore, you receive extra resources for bootstrapping your economy."))
    end
    -- adding exactly one forester
-   if not has_trees then
+   if n_trees < min_trees then
+      waretable_trees.log = math.max(0, waretable_trees.log - n_trees) -- reduce additional logs if there are trees
       add_wares_to_warehouse(player, warehouse, waretable_trees)
-      player:send_to_inbox(_("No trees nearby"), _("There are no trees near to your starting position. Therefore, you receive extra resources for bootstrapping your economy."))
+      player:send_to_inbox(_("Not enough trees nearby"), _("There are not enough trees near to your starting position. Therefore, you receive extra resources for bootstrapping your economy."))
    end
 end
