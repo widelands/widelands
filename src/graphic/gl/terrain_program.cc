@@ -92,9 +92,9 @@ void TerrainProgram::add_vertex(const FieldsToDraw::Field& field,
 		float val = field.fcoords.field->get_height();
 		val /= MAX_FIELD_HEIGHT;
 		assert(val <= 1.f);
-		back.heatmap_r = 1.f - val;
+		back.heatmap_r = val;
 		back.heatmap_g = 0;
-		back.heatmap_b = val;
+		back.heatmap_b = 1.f - val;
 	}
 }
 
