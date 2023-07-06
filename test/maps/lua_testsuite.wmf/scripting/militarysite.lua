@@ -14,7 +14,7 @@ end
 militarysite_tests = lunit.TestCase("MilitarySite Tests")
 local offset_y = 0
 function militarysite_tests:setup()
-   self.f1 = map:get_field(12, 14 + offset_y) -- move down, to have remaining bobs on a separate field
+   self.f1 = map:get_field(6, 5 + offset_y) -- move down, to have remaining bobs on a separate field
    offset_y = offset_y + 1
 
    self.fortress = player1:place_building("barbarians_fortress", self.f1)
