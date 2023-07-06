@@ -46,7 +46,8 @@ ResourceDescription::ResourceDescription(const LuaTable& table)
 
 const std::string& ResourceDescription::editor_image(uint32_t const amount) const {
 	if (amount > editor_pictures_.back().second) {
-		throw wexception("Resource %s has no image for amount %u (highest amount is %u)", name().c_str(), amount, editor_pictures_.back().second);
+		throw wexception("Resource %s has no image for amount %u (highest amount is %u)",
+		                 name().c_str(), amount, editor_pictures_.back().second);
 	}
 
 	for (size_t i = 1; i < editor_pictures_.size(); ++i) {

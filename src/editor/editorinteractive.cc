@@ -716,7 +716,8 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		}
 	}
 
-	std::map<std::pair<Widelands::DescriptionIndex, Widelands::ResourceAmount>, const Image*> resource_images_cache;
+	std::map<std::pair<Widelands::DescriptionIndex, Widelands::ResourceAmount>, const Image*>
+	   resource_images_cache;
 
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
@@ -742,16 +743,19 @@ void EditorInteractive::draw(RenderTarget& dst) {
 
 		// Draw resource overlay.
 		if (get_display_flag(dfShowResources) && field.fcoords.field->get_resources_amount() > 0) {
-			std::pair<Widelands::DescriptionIndex, Widelands::ResourceAmount> cachekey(field.fcoords.field->get_resources(), field.fcoords.field->get_resources_amount());
+			std::pair<Widelands::DescriptionIndex, Widelands::ResourceAmount> cachekey(
+			   field.fcoords.field->get_resources(), field.fcoords.field->get_resources_amount());
 			auto it = resource_images_cache.find(cachekey);
 			if (it == resource_images_cache.end()) {
-				it = resource_images_cache.emplace(cachekey,
-						g_image_cache->get(ebase.descriptions().get_resource_descr(cachekey.first)->editor_image(cachekey.second))
-					).first;
+				it = resource_images_cache
+				        .emplace(cachekey, g_image_cache->get(ebase.descriptions()
+				                                                 .get_resource_descr(cachekey.first)
+				                                                 ->editor_image(cachekey.second)))
+				        .first;
 			}
 
-			blit_field_overlay(
-			   &dst, field, it->second, Vector2i(it->second->width() / 2, it->second->height() / 2), scale);
+			blit_field_overlay(&dst, field, it->second,
+			                   Vector2i(it->second->width() / 2, it->second->height() / 2), scale);
 		}
 
 		const Widelands::NodeCaps nodecaps =
