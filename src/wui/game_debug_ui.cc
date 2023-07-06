@@ -210,30 +210,6 @@ void FieldDebugWindow::think() {
 
 		Widelands::Vision const vision = player_field.vision;
 		str += format("  vision: %u\n", vision.value());
-		{
-			Time const time_last_surveyed =
-			   player_field.time_triangle_last_surveyed[static_cast<int>(Widelands::TriangleIndex::D)];
-
-			if (time_last_surveyed.is_valid()) {
-				str += format("  D triangle last surveyed at %u: amount %u\n", time_last_surveyed.get(),
-				              static_cast<unsigned int>(player_field.resource_amounts.d));
-
-			} else {
-				str += "  D triangle never surveyed\n";
-			}
-		}
-		{
-			Time const time_last_surveyed =
-			   player_field.time_triangle_last_surveyed[static_cast<int>(Widelands::TriangleIndex::R)];
-
-			if (time_last_surveyed.is_valid()) {
-				str += format("  R triangle last surveyed at %u: amount %u\n", time_last_surveyed.get(),
-				              static_cast<unsigned int>(player_field.resource_amounts.r));
-
-			} else {
-				str += "  R triangle never surveyed\n";
-			}
-		}
 
 		if (!vision.is_explored()) {
 			str += "  never seen\n";

@@ -37,9 +37,7 @@ ResourceDescription::ResourceDescription(const LuaTable& table)
 	std::unique_ptr<LuaTable> st = table.get_table("editor_pictures");
 	const std::set<int> keys = st->keys<int>();
 	for (int upper_limit : keys) {
-		ResourceDescription::EditorPicture editor_picture = {
-		   st->get_string(upper_limit), upper_limit};
-		editor_pictures_.push_back(editor_picture);
+		editor_pictures_.emplace_back(st->get_string(upper_limit), upper_limit);
 	}
 	if (editor_pictures_.empty()) {
 		throw GameDataError("Resource %s has no editor_pictures.", name_.c_str());
@@ -47,21 +45,17 @@ ResourceDescription::ResourceDescription(const LuaTable& table)
 }
 
 const std::string& ResourceDescription::editor_image(uint32_t const amount) const {
-	uint32_t bestmatch = 0;
-	int32_t min_diff = editor_pictures_[bestmatch].upper_limit - static_cast<int32_t>(amount);
+	if (amount > editor_pictures_.back().second) {
+		throw wexception("Resource %s has no image for amount %u (highest amount is %u)", name().c_str(), amount, editor_pictures_.back().second);
+	}
 
-	assert(!editor_pictures_.empty());
-
-	for (uint32_t i = 1; i < editor_pictures_.size(); ++i) {
-		const int32_t diff = editor_pictures_[i].upper_limit - static_cast<int32_t>(amount);
-
-		if (min_diff < 0 || diff < min_diff) {
-			bestmatch = i;
-			min_diff = diff;
+	for (size_t i = 1; i < editor_pictures_.size(); ++i) {
+		if (editor_pictures_.at(i).second > amount) {
+			return editor_pictures_.at(i - 1).first;
 		}
 	}
 
-	return editor_pictures_[bestmatch].picname;
+	NEVER_HERE();
 }
 
 const std::string& ResourceDescription::name() const {
