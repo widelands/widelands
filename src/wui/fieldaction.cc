@@ -513,7 +513,8 @@ void FieldActionWindow::add_buttons_auto() {
 		    !has_ship_fleet &&
 		    (ipl == nullptr || bob->owner().player_number() == ipl->player_number())) {
 			if (buildbox == nullptr) {
-				buildbox = new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+				buildbox = new UI::Box(
+				   &tabpanel_, UI::PanelStyle::kWui, "build_box", 0, 0, UI::Box::Horizontal);
 			}
 			has_ship_fleet = true;
 			add_button(
@@ -523,7 +524,8 @@ void FieldActionWindow::add_buttons_auto() {
 		           !has_ferry_fleet &&
 		           (ipl == nullptr || bob->owner().player_number() == ipl->player_number())) {
 			if (buildbox == nullptr) {
-				buildbox = new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+				buildbox = new UI::Box(
+				   &tabpanel_, UI::PanelStyle::kWui, "build_box", 0, 0, UI::Box::Horizontal);
 			}
 			has_ferry_fleet = true;
 			add_button(
