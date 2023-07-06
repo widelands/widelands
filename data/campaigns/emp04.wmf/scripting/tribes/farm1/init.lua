@@ -1,4 +1,4 @@
-dirname = "campaigns/emp04.wmf/" .. path.dirname (__file__)
+local dirname = "campaigns/emp04.wmf/" .. path.dirname (__file__)
 
 push_textdomain("scenario_emp04.wmf")
 

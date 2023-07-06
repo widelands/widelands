@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-22 02:48+0000\n"
+"POT-Creation-Date: 2023-07-03 03:04+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: D M <kamera001dm@gmail.com>, 2021,2023\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
@@ -301,7 +301,7 @@ msgstr "Esc"
 #. * TRANSLATORS: Title for the tool menu button in the editor
 #. * TRANSLATORS: Heading in the editor keyboard shortcuts help
 #: ../../src/editor/editorinteractive.cc:114
-#: ../../src/wlapplication_options.cc:1012
+#: ../../src/wlapplication_options.cc:1031
 msgctxt "editor"
 msgid "Tools"
 msgstr ""
@@ -333,7 +333,7 @@ msgstr "Gör om"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/editor/editorinteractive.cc:175
-#: ../../src/wlapplication_options.cc:833 ../../src/wui/buildingwindow.cc:440
+#: ../../src/wlapplication_options.cc:852 ../../src/wui/buildingwindow.cc:440
 #: ../../src/wui/interactive_player.cc:234
 msgid "Help"
 msgstr "Hjälp"
@@ -356,7 +356,7 @@ msgstr "Ny slumpmässig karta"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/editor/editorinteractive.cc:222
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:33
-#: ../../src/ui_fsmenu/main.cc:425 ../../src/wlapplication_options.cc:824
+#: ../../src/ui_fsmenu/main.cc:425 ../../src/wlapplication_options.cc:843
 msgid "Load Map"
 msgstr "Ladda karta"
 
@@ -364,7 +364,7 @@ msgstr "Ladda karta"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/editor/editorinteractive.cc:230
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:53
-#: ../../src/wlapplication_options.cc:827
+#: ../../src/wlapplication_options.cc:846
 msgid "Save Map"
 msgstr "Spara karta"
 
@@ -384,7 +384,7 @@ msgstr "Inställningar för karta"
 #. * TRANSLATORS: An entry in the editor's main menu
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/editor/editorinteractive.cc:248
-#: ../../src/wlapplication_options.cc:830
+#: ../../src/wlapplication_options.cc:849
 msgid "Exit Editor"
 msgstr "Stäng kartbyggare"
 
@@ -629,7 +629,7 @@ msgstr "Kartan är osparad, vill du verkligen avsluta?"
 msgid "Are you sure you wish to exit the editor?"
 msgstr "Är du säker på att du vill lämna kartredigeraren?"
 
-#: ../../src/editor/editorinteractive.cc:1108 ../../src/logic/addons.cc:48
+#: ../../src/editor/editorinteractive.cc:1131 ../../src/logic/addons.cc:48
 #: ../../src/ui_basic/dropdown.cc:358 ../../src/ui_basic/dropdown.cc:360
 #: ../../src/ui_fsmenu/addons/contact.cc:81
 #: ../../src/ui_fsmenu/addons/manager.cc:1334
@@ -650,7 +650,7 @@ msgstr "Är du säker på att du vill lämna kartredigeraren?"
 msgid "Error"
 msgstr "Fel"
 
-#: ../../src/editor/editorinteractive.cc:1110 ../../src/ui_fsmenu/main.cc:233
+#: ../../src/editor/editorinteractive.cc:1133 ../../src/ui_fsmenu/main.cc:233
 #: ../../src/wlapplication.cc:1649
 #, c-format
 msgid ""
@@ -662,38 +662,43 @@ msgid ""
 "Please add this information to your report."
 msgstr "Ett fel har uppstått. Felmeddelandet är:\n\n%1$s\n\nVar vänlig och rapportera detta problem för att hjälpa till att förbättra Widelands. Du kan hitta relaterade meddelanden i standard output (stdout.txt i Windows). Du använder version%2$s.\nVar vänlig och bifoga denna information till din rapport."
 
-#: ../../src/editor/editorinteractive.cc:1144
+#: ../../src/editor/editorinteractive.cc:1167
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "Läser in karta “%s”…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:1166
+#: ../../src/editor/editorinteractive.cc:1189
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:113
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:583
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:143
-#: ../../src/logic/map.h:229 ../../src/wui/mapdata.cc:50
+#: ../../src/logic/map.h:231 ../../src/wui/mapdata.cc:50
 msgid "No Name"
 msgstr "Inget namn"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:1169
+#: ../../src/editor/editorinteractive.cc:1192
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:114
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:584
-#: ../../src/logic/map.h:230 ../../src/ui_fsmenu/addons/packager.cc:390
+#: ../../src/logic/map.h:232 ../../src/ui_fsmenu/addons/packager.cc:390
 msgctxt "author_name"
 msgid "Unknown"
 msgstr "Okänd"
 
-#: ../../src/editor/editorinteractive.cc:1193
+#: ../../src/editor/editorinteractive.cc:1216
 msgid "Loading world…"
 msgstr "Laddar värld..."
 
-#: ../../src/editor/editorinteractive.cc:1393
+#: ../../src/editor/editorinteractive.cc:1395
+#, c-format
+msgid "Tool gaps: %u%%"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:1418
 msgid "Publish Map"
 msgstr "Publicera karta"
 
-#: ../../src/editor/editorinteractive.cc:1394
+#: ../../src/editor/editorinteractive.cc:1419
 #, c-format
 msgid ""
 "Are you certain that you want to publish this map online?\n"
@@ -705,50 +710,50 @@ msgid ""
 "Hint: %5$s\n"
 msgstr "Är du säker på att du vill publicera denna karta online?\n\nNamn: %1$s\nInternt namn: %2$s\nUpphovsman: %3$s\nBeskrivning: %4$s\nTips: %5$s\n"
 
-#: ../../src/editor/editorinteractive.cc:1418
+#: ../../src/editor/editorinteractive.cc:1443
 msgid "Login Error"
 msgstr "Fel vid försök till inloggning"
 
-#: ../../src/editor/editorinteractive.cc:1423
+#: ../../src/editor/editorinteractive.cc:1448
 msgid "Uploading Add-On…"
 msgstr "Laddar upp tillägg..."
 
-#: ../../src/editor/editorinteractive.cc:1424
+#: ../../src/editor/editorinteractive.cc:1449
 msgid "Saving map…"
 msgstr "Sparar karta..."
 
-#: ../../src/editor/editorinteractive.cc:1443
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:310
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:365
+#: ../../src/editor/editorinteractive.cc:1468
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:314
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:369
 msgid "Error Saving Map!"
 msgstr "Fel när kartan skulle sparas!"
 
-#: ../../src/editor/editorinteractive.cc:1449
+#: ../../src/editor/editorinteractive.cc:1474
 msgid "Packaging add-on…"
 msgstr "Packar tillägg..."
 
-#: ../../src/editor/editorinteractive.cc:1500
+#: ../../src/editor/editorinteractive.cc:1525
 msgid "Add-On Generation Error"
 msgstr "Fel vid generering av tillägg"
 
-#: ../../src/editor/editorinteractive.cc:1501
+#: ../../src/editor/editorinteractive.cc:1526
 msgid "The add-on could not be written to the disk."
 msgstr "Tillägget kunde inte sparas på disken."
 
-#: ../../src/editor/editorinteractive.cc:1508
+#: ../../src/editor/editorinteractive.cc:1533
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:107
 msgid "Uploading…"
 msgstr "Laddar upp..."
 
-#: ../../src/editor/editorinteractive.cc:1514
+#: ../../src/editor/editorinteractive.cc:1539
 msgid "Upload Error"
 msgstr "Uppladdningsfel"
 
-#: ../../src/editor/editorinteractive.cc:1536
+#: ../../src/editor/editorinteractive.cc:1561
 msgid "Success"
 msgstr "Lyckad uppladdning"
 
-#: ../../src/editor/editorinteractive.cc:1537
+#: ../../src/editor/editorinteractive.cc:1562
 msgid "The add-on was uploaded successfully."
 msgstr "Uppladdning av tillägget lyckades."
 
@@ -767,37 +772,37 @@ msgstr "Höjd öka/minska %1$d, inställt på %2$d"
 #. * TRANSLATORS: An entry in the tool history list. Inc. and dec. stand for
 #. increase and
 #. * decrease.
-#: ../../src/editor/tools/increase_resources_tool.cc:80
+#: ../../src/editor/tools/increase_resources_tool.cc:85
 #, c-format
 msgid "%1$s: inc./dec. %2$d, set to %3$d"
 msgstr "%1$s: öka/minska %2$d, inställt på %3$d"
 
 #. * TRANSLATORS: An entry in the tool history list.
-#: ../../src/editor/tools/noise_height_tool.cc:73
+#: ../../src/editor/tools/noise_height_tool.cc:78
 #, c-format
 msgid "Noise height: %1$d–%2$d"
 msgstr "Slumpmässig höjd: %1$d–%2$d"
 
 #. * TRANSLATORS: An entry in the tool history list.
-#: ../../src/editor/tools/place_critter_tool.cc:117
+#: ../../src/editor/tools/place_critter_tool.cc:127
 #, c-format
 msgid "Critter: %1$s"
 msgstr "Smådjur: %1$s"
 
-#: ../../src/editor/tools/place_immovable_tool.cc:131
+#: ../../src/editor/tools/place_immovable_tool.cc:141
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:92
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:97
 msgid "Automatic Trees"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the tool history list.
-#: ../../src/editor/tools/place_immovable_tool.cc:138
+#: ../../src/editor/tools/place_immovable_tool.cc:148
 #, c-format
 msgid "Immovable: %1$s"
 msgstr "Fast föremål: %1$s"
 
 #. * TRANSLATORS: An entry in the tool history list.
-#: ../../src/editor/tools/set_terrain_tool.cc:110
+#: ../../src/editor/tools/set_terrain_tool.cc:120
 #, c-format
 msgid "Terrain: %1$s"
 msgstr "Terräng: %1$s"
@@ -998,7 +1003,7 @@ msgstr "Fel!"
 
 #. * TRANSLATORS: Directory name for user maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:81
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:279
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:283
 #: ../../src/ui_fsmenu/addons/packager_box.cc:210 ../../src/wui/mapdata.cc:196
 msgid "My Maps"
 msgstr "Mina kartor"
@@ -1023,7 +1028,7 @@ msgstr "Nedladdade kartor"
 
 #. * TRANSLATORS: The folder that a file will be saved to.
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:90
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:279
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:283
 #, c-format
 msgid "Current directory: %s"
 msgstr "Nuvarande katalog: %s"
@@ -1439,17 +1444,17 @@ msgstr "Fel vid skapande av katalog!"
 msgid "Error while creating directory ‘%s’."
 msgstr "Det gick inte att skapa katalogen \"%s\"."
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:308
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:312
 #: ../../src/wui/game_main_menu_save_game.cc:283
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "En fil med namnet ‘%s’ finns redan. Vill du skriva över den?"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:340
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:344
 msgid "Saving the map…"
 msgstr "Sparar kartan..."
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:358
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:362
 msgid "Map saved"
 msgstr "Kartan sparad"
 
@@ -1686,13 +1691,25 @@ msgid ""
 "Click to restore, Shift + Click to delete, and Ctrl + Click to pin an item."
 msgstr "Klicka för att återskapa, 'Shift' + klicka för borttagning och 'Ctrl' + klicka för att fästa ett föremål."
 
-#: ../../src/editor/ui_menus/toolsize_menu.cc:35
+#: ../../src/editor/ui_menus/toolsize_menu.cc:39
 msgid "Tool Size"
 msgstr "Verktygsstorlek"
 
-#: ../../src/editor/ui_menus/toolsize_menu.cc:45
-msgid "Current Size:"
-msgstr "Nuvarande storlek:"
+#: ../../src/editor/ui_menus/toolsize_menu.cc:50
+msgid "Size:"
+msgstr ""
+
+#: ../../src/editor/ui_menus/toolsize_menu.cc:62
+msgid "Gaps:"
+msgstr ""
+
+#: ../../src/editor/ui_menus/toolsize_menu.cc:65
+msgid "Radius of the active tool"
+msgstr ""
+
+#: ../../src/editor/ui_menus/toolsize_menu.cc:66
+msgid "Amount of random gaps in the tool’s area"
+msgstr ""
 
 #: ../../src/game_io/game_loader.cc:69
 #, c-format
@@ -1719,7 +1736,7 @@ msgstr "Kommandokö"
 
 #: ../../src/game_io/game_loader.cc:157 ../../src/map_io/map_saver.cc:146
 #: ../../src/map_io/widelands_map_loader.cc:400
-#: ../../src/wlapplication_options.cc:645
+#: ../../src/wlapplication_options.cc:664
 #: ../../src/wui/interactive_player.cc:224
 #: ../../src/wui/interactive_player.cc:462
 msgid "Messages"
@@ -2123,7 +2140,7 @@ msgstr "Vinter"
 msgid "Desert"
 msgstr "Öken"
 
-#: ../../src/logic/map.h:231
+#: ../../src/logic/map.h:233
 msgid "No description defined"
 msgstr "Beskrivning saknas"
 
@@ -2707,7 +2724,7 @@ msgid "Warehouse %d"
 msgstr "Magasin/lagerbyggnad %d"
 
 #: ../../src/logic/playercommand.cc:2204
-#: ../../src/wlapplication_options.cc:641
+#: ../../src/wlapplication_options.cc:660
 #: ../../src/wui/game_diplomacy_menu.cc:36
 #: ../../src/wui/interactive_gamebase.cc:247
 msgid "Diplomacy"
@@ -2909,7 +2926,7 @@ msgstr "Skript"
 
 #: ../../src/map_io/map_saver.cc:303
 #: ../../src/map_io/widelands_map_loader.cc:418
-#: ../../src/wlapplication_options.cc:636
+#: ../../src/wlapplication_options.cc:655
 #: ../../src/wui/game_objectives_menu.cc:30
 #: ../../src/wui/interactive_player.cc:214
 msgid "Objectives"
@@ -5726,7 +5743,7 @@ msgstr "Spela en av våra nybörjarhandledningar"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/ui_fsmenu/main.cc:356 ../../src/wlapplication_options.cc:250
-#: ../../src/wlapplication_options.cc:845
+#: ../../src/wlapplication_options.cc:864
 #: ../../src/wui/game_main_menu_save_game.cc:48
 #: ../../src/wui/interactive_gamebase.cc:179
 msgid "Load Game"
@@ -6029,147 +6046,154 @@ msgstr "Alla rullriktningar"
 
 #. * TRANSLATORS: Placeholder when no modifier key is used, e.g. "(plain)
 #. Horizontal scroll"
-#: ../../src/ui_fsmenu/mousewheel_options.cc:147
+#: ../../src/ui_fsmenu/mousewheel_options.cc:151
 msgid "(plain)"
 msgstr "(vanlig)"
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Neither"
-#: ../../src/ui_fsmenu/mousewheel_options.cc:201
+#: ../../src/ui_fsmenu/mousewheel_options.cc:205
 msgid "Neither"
 msgstr "Ingen"
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Vertical"
-#: ../../src/ui_fsmenu/mousewheel_options.cc:203
+#: ../../src/ui_fsmenu/mousewheel_options.cc:207
 msgid "Vertical"
 msgstr "Vertikal"
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Horizontal"
-#: ../../src/ui_fsmenu/mousewheel_options.cc:205
+#: ../../src/ui_fsmenu/mousewheel_options.cc:209
 msgid "Horizontal"
 msgstr "Horisontell"
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Both"
-#: ../../src/ui_fsmenu/mousewheel_options.cc:207
+#: ../../src/ui_fsmenu/mousewheel_options.cc:211
 msgid "Both"
 msgstr "Båda"
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:220
+#: ../../src/ui_fsmenu/mousewheel_options.cc:224
 msgid "%1%:"
 msgstr "%1%:"
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:277
+#: ../../src/ui_fsmenu/mousewheel_options.cc:281
 msgid "Scroll Setting Conflict"
 msgstr "Rullningsinställningskonflikt"
 
 #. * TRANSLATORS: %1 is a modifier key combination, e.g. "Ctrl+", or
 #. empty if none is used. %2 is scrolling direction.
 #. %3 is the name of the conflicting function.
-#: ../../src/ui_fsmenu/mousewheel_options.cc:282
+#: ../../src/ui_fsmenu/mousewheel_options.cc:286
 #, c-format
 msgid ""
 "‘%1$s%2$s’ conflicts with ‘%3$s’. Please select a different combination or "
 "change the conflicting setting first."
 msgstr "'%1$s %2$s' är i konflikt med '%3$s'. Var vänlig och välj en annan kombination eller ändra först inställningen som är i konflikt."
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:340
+#: ../../src/ui_fsmenu/mousewheel_options.cc:344
 msgid "Reset Scrolling"
 msgstr "Återställ rullning"
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:341
+#: ../../src/ui_fsmenu/mousewheel_options.cc:345
 msgid ""
 "Reset scroll settings to the defaults recommended for a standard single "
 "wheel mouse"
 msgstr "Återställ rullningsinställningar till standardinställningar rekommenderade för standardmus med ett hjul."
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:350
+#: ../../src/ui_fsmenu/mousewheel_options.cc:354
 msgid "Set for Touchpad"
 msgstr "Inställning för pekplatta"
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:351
+#: ../../src/ui_fsmenu/mousewheel_options.cc:355
 msgid ""
 "Sets ‘Zoom Map’ and ‘Scroll Map’ to the recommended settings for a touchpad "
 "or other pointing device that can scroll horizontally as well as vertically."
 msgstr "Ställ in zoomning och rullning av kartan till de rekommenderade inställningarna för en pekplatta eller annat pekverktyg som kan rulla både horisontellt och vertikalt."
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:361
+#: ../../src/ui_fsmenu/mousewheel_options.cc:365
 msgid "Apply Scrolling"
 msgstr "Tillämpa rullning"
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:362
+#: ../../src/ui_fsmenu/mousewheel_options.cc:366
 msgid "Apply scroll settings"
 msgstr "Tillämpa rullningsinställningar"
 
 #. * TRANSLATORS: Name of a function for the scroll wheel.
 #. Used as e.g.: "Zoom Map: Ctrl+Any scroll"
 #. The ':' will be added by another format string.
-#: ../../src/ui_fsmenu/mousewheel_options.cc:385
+#: ../../src/ui_fsmenu/mousewheel_options.cc:389
 msgid "Zoom Map"
 msgstr "Zooma i kartan"
 
 #. * TRANSLATORS: Name of a function for the scroll wheel.
 #. Used as e.g.: "Scroll Map: Ctrl+Any scroll"
 #. The ':' will be added by another format string.
-#: ../../src/ui_fsmenu/mousewheel_options.cc:393
+#: ../../src/ui_fsmenu/mousewheel_options.cc:397
 msgid "Scroll Map"
 msgstr "Rulla kartan"
 
 #. * TRANSLATORS: Name of a function for the scroll wheel.
 #. Used as e.g.: "Change Game Speed: Ctrl+Any scroll"
 #. The ':' will be added by another format string.
-#: ../../src/ui_fsmenu/mousewheel_options.cc:402
+#: ../../src/ui_fsmenu/mousewheel_options.cc:406
 msgid "Change Game Speed"
 msgstr "Ändra spelhastigheten"
 
 #. * TRANSLATORS: Name of a function for the scroll wheel.
 #. Used as e.g.: "Change Editor Toolsize: Ctrl+Any scroll"
 #. The ':' will be added by another format string.
-#: ../../src/ui_fsmenu/mousewheel_options.cc:410
+#: ../../src/ui_fsmenu/mousewheel_options.cc:414
 msgid "Change Editor Toolsize"
 msgstr "Ändra kartredigerarens verktygsstorlek"
 
+#. * TRANSLATORS: Name of a function for the scroll wheel.
+#. Used as e.g.: "Change Editor Tool Gap: Ctrl+Any scroll"
+#. The ':' will be added by another format string.
+#: ../../src/ui_fsmenu/mousewheel_options.cc:422
+msgid "Change Editor Tool Gap"
+msgstr ""
+
 #. * TRANSLATORS: Used as e.g. "Invert scroll direction for map zooming:
 #. Vertical"
-#: ../../src/ui_fsmenu/mousewheel_options.cc:417
+#: ../../src/ui_fsmenu/mousewheel_options.cc:429
 msgid "Invert scroll direction for map zooming:"
 msgstr "Inverterad rullningsriktning för zoomning i kartan"
 
 #. * TRANSLATORS: Used as e.g. "Invert scroll direction for tab switching:
 #. Vertical"
-#: ../../src/ui_fsmenu/mousewheel_options.cc:422
+#: ../../src/ui_fsmenu/mousewheel_options.cc:434
 msgid "Invert scroll direction for tab switching:"
 msgstr "Inverterad rullningsriktning för flikbyte:"
 
 #. * TRANSLATORS: Used as e.g. "Invert scroll direction for increase/decrease:
 #. Vertical"
-#: ../../src/ui_fsmenu/mousewheel_options.cc:427
+#: ../../src/ui_fsmenu/mousewheel_options.cc:439
 msgid "Invert scroll direction for increase/decrease:"
 msgstr "Inverterad rullningsriktning för öka/minska:"
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:435
+#: ../../src/ui_fsmenu/mousewheel_options.cc:447
 msgid "Fix inverted horizontal scrolling"
 msgstr "Lås inverterad horisontell rullning"
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:436
+#: ../../src/ui_fsmenu/mousewheel_options.cc:448
 msgid ""
 "An SDL bug in some configurations causes horizontal scroll to be inverted. "
 "We try to detect them, but if we got it wrong, you can fix it here. Please "
 "report if you need to turn this on, so that we can improve the detection."
 msgstr "En SDL-bugg i några konfigurationer orsakar att den horisontella rullningen inverteras. Vi försöker hitta dem men om vi inte har lyckats kan du fixa det här. Var vänlig och rapportera om du måste aktivera denna så vi kan förbättra detekteringen."
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:447
+#: ../../src/ui_fsmenu/mousewheel_options.cc:459
 msgid "Send feedback"
 msgstr "Skicka feedback"
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:506
+#: ../../src/ui_fsmenu/mousewheel_options.cc:522
 msgid "Scroll Settings Conflict"
 msgstr "Rullningsinställningskonflikt"
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:507
+#: ../../src/ui_fsmenu/mousewheel_options.cc:524
 #, c-format
 msgid ""
-"‘%1$s’ or ‘%2$s’ conflicts with the recommended settings. Change the "
-"conflicting setting(s) too?"
-msgstr "‘%1$s’ eller ‘%2$s’ är i konflikt med de rekommenderade inställningarna. Vill du ändra på inställning(ar) i konflikt?"
+"‘%1$s’, ‘%2$s’, or ‘%3$s’ conflicts with the recommended settings. Change "
+"the conflicting setting(s) too?"
+msgstr ""
 
 #: ../../src/ui_fsmenu/mousewheel_report.cc:50
 msgid "Send Feedback for Inverted Horizontal Scrolling"
@@ -7202,196 +7226,201 @@ msgstr "Växla maximala byggnadsstorlekar"
 msgid "Set Toolsize to %d"
 msgstr "Ställ in verktygsstorlek %d"
 
+#: ../../src/wlapplication_options.cc:575
+#, c-format
+msgid "Set Tool Gap to %d%%"
+msgstr ""
+
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/wlapplication_options.cc:574
+#: ../../src/wlapplication_options.cc:593
 #: ../../src/wui/game_options_sound_menu.cc:34
 #: ../../src/wui/interactive_gamebase.cc:145
 msgid "Sound Options"
 msgstr "Ljudinställningar"
 
-#: ../../src/wlapplication_options.cc:579
+#: ../../src/wlapplication_options.cc:598
 msgid "Restart Scenario or Replay"
 msgstr "Återstarta scenario eller repris"
 
-#: ../../src/wlapplication_options.cc:584
+#: ../../src/wlapplication_options.cc:603
 msgid "Toggle Census"
 msgstr "Visa/dölj byggnadstbeskrivningar"
 
-#: ../../src/wlapplication_options.cc:589
+#: ../../src/wlapplication_options.cc:608
 msgid "Toggle Status Labels"
 msgstr "Växla statusrubriker"
 
-#: ../../src/wlapplication_options.cc:594
+#: ../../src/wlapplication_options.cc:613
 msgid "Toggle Soldier Levels"
 msgstr "Visa/dölj soldatnivåer"
 
-#: ../../src/wlapplication_options.cc:599
+#: ../../src/wlapplication_options.cc:618
 msgid "Toggle Buildings Visibility"
 msgstr "Växla byggnaders synlighet"
 
-#: ../../src/wlapplication_options.cc:604
+#: ../../src/wlapplication_options.cc:623
 msgid "Toggle Overlapping Workareas"
 msgstr "Visa/dölj överlappande arbetsområden"
 
-#: ../../src/wlapplication_options.cc:609
+#: ../../src/wlapplication_options.cc:628
 #: ../../src/wui/general_statistics_menu.cc:47
 msgid "General Statistics"
 msgstr "Allmän statistik"
 
-#: ../../src/wlapplication_options.cc:613
+#: ../../src/wlapplication_options.cc:632
 #: ../../src/wui/ware_statistics_menu.cc:105
 msgid "Ware Statistics"
 msgstr "Varustatistik"
 
-#: ../../src/wlapplication_options.cc:618
+#: ../../src/wlapplication_options.cc:637
 #: ../../src/wui/building_statistics_menu.cc:52
 msgid "Building Statistics"
 msgstr "Byggnadsstatistik"
 
-#: ../../src/wlapplication_options.cc:622
+#: ../../src/wlapplication_options.cc:641
 msgid "Stock Inventory"
 msgstr "Varor i lager"
 
-#: ../../src/wlapplication_options.cc:627
+#: ../../src/wlapplication_options.cc:646
 #: ../../src/wui/soldier_statistics_menu.cc:131
 msgid "Soldier Statistics"
 msgstr "Soldatstatistik"
 
-#: ../../src/wlapplication_options.cc:632
+#: ../../src/wlapplication_options.cc:651
 #: ../../src/wui/seafaring_statistics_menu.cc:49
 msgid "Seafaring Statistics"
 msgstr "Sjöfartsstatistik"
 
-#: ../../src/wlapplication_options.cc:650
+#: ../../src/wlapplication_options.cc:669
 msgid "Decrease Game Speed by 1×"
 msgstr "Minska spelhastighet med 1×"
 
-#: ../../src/wlapplication_options.cc:655
+#: ../../src/wlapplication_options.cc:674
 msgid "Decrease Game Speed by 0.25×"
 msgstr "Minska spelhastighet med 0,25×"
 
-#: ../../src/wlapplication_options.cc:660
+#: ../../src/wlapplication_options.cc:679
 msgid "Decrease Game Speed by 10×"
 msgstr "Minska spelhastighet med 10×"
 
-#: ../../src/wlapplication_options.cc:665
+#: ../../src/wlapplication_options.cc:684
 msgid "Increase Game Speed by 1×"
 msgstr "Öka spelhastighet med 1×"
 
-#: ../../src/wlapplication_options.cc:670
+#: ../../src/wlapplication_options.cc:689
 msgid "Increase Game Speed by 0.25×"
 msgstr "Öka spelhastighet med 0,25×"
 
-#: ../../src/wlapplication_options.cc:675
+#: ../../src/wlapplication_options.cc:694
 msgid "Increase Game Speed by 10×"
 msgstr "Öka spelhastighet med 10×"
 
-#: ../../src/wlapplication_options.cc:679
+#: ../../src/wlapplication_options.cc:698
 msgid "Reset Game Speed"
 msgstr "Återställ spelhastighet"
 
-#: ../../src/wlapplication_options.cc:683
+#: ../../src/wlapplication_options.cc:702
 msgid "Pause The Game"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:688
+#: ../../src/wlapplication_options.cc:707
 msgid "Scroll to Starting Field"
 msgstr "Förflytta kartan till startpositionen"
 
-#: ../../src/wlapplication_options.cc:692 ../../src/wui/game_chat_menu.cc:55
+#: ../../src/wlapplication_options.cc:711 ../../src/wui/game_chat_menu.cc:55
 #: ../../src/wui/interactive_gamebase.cc:409
 msgid "Chat"
 msgstr "Chatt"
 
-#: ../../src/wlapplication_options.cc:697 ../../src/wui/pinned_note.cc:41
+#: ../../src/wlapplication_options.cc:716 ../../src/wui/pinned_note.cc:41
 msgid "Pinned Note"
 msgstr "Uppsatt anteckning"
 
-#: ../../src/wlapplication_options.cc:702
+#: ../../src/wlapplication_options.cc:721
 msgid "Go to Location"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:707
+#: ../../src/wlapplication_options.cc:726
 msgid "Show All Messages"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:712
+#: ../../src/wlapplication_options.cc:731
 msgid "Show Geologists’ Messages Only"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:717
+#: ../../src/wlapplication_options.cc:736
 msgid "Show Economy Messages Only"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:722
+#: ../../src/wlapplication_options.cc:741
 msgid "Show Seafaring Messages Only"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:727
+#: ../../src/wlapplication_options.cc:746
 msgid "Show Military Messages Only"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:732
+#: ../../src/wlapplication_options.cc:751
 msgid "Show Scenario Messages Only"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:737
+#: ../../src/wlapplication_options.cc:756
 msgid "Go to Ship"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:742
+#: ../../src/wlapplication_options.cc:761
 msgid "Watch Ship"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:747
+#: ../../src/wlapplication_options.cc:766
 msgid "Open Ship Window"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:752
+#: ../../src/wlapplication_options.cc:771
 msgid "Open Ship Window And Go to Ship"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:757
+#: ../../src/wlapplication_options.cc:776
 msgid "Show All Ships"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:762
+#: ../../src/wlapplication_options.cc:781
 msgid "Show Idle Ships"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:767
+#: ../../src/wlapplication_options.cc:786
 msgid "Show Transport Ships"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:772
+#: ../../src/wlapplication_options.cc:791
 msgid "Show Waiting Expeditions"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:777
+#: ../../src/wlapplication_options.cc:796
 msgid "Show Scouting Expeditions"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:782
+#: ../../src/wlapplication_options.cc:801
 msgid "Show Expeditions with Port Spaces"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:787
+#: ../../src/wlapplication_options.cc:806
 msgid "Toggle Quick Navigation"
 msgstr "Växla snabbnavigering"
 
-#: ../../src/wlapplication_options.cc:794
+#: ../../src/wlapplication_options.cc:813
 #, c-format
 msgid "Set Landmark #%d"
 msgstr "Ställ in landmärke nr %d"
 
-#: ../../src/wlapplication_options.cc:798
+#: ../../src/wlapplication_options.cc:817
 #, c-format
 msgid "Go To Landmark #%d"
 msgstr "Gå till landmärke nr %d"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/wlapplication_options.cc:848
+#: ../../src/wlapplication_options.cc:867
 #: ../../src/wui/game_main_menu_save_game.cc:50
 #: ../../src/wui/interactive_gamebase.cc:155
 msgid "Save Game"
@@ -7400,121 +7429,125 @@ msgstr "Spara spel"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/wlapplication_options.cc:851
+#: ../../src/wlapplication_options.cc:870
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:192
 msgid "Exit Game"
 msgstr "Avsluta spel"
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../src/wlapplication_options.cc:869
+#: ../../src/wlapplication_options.cc:888
 msgctxt "hotkey"
 msgid "Arrow keys"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/wlapplication_options.cc:871
+#: ../../src/wlapplication_options.cc:890
 msgid "Move the map"
 msgstr ""
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../src/wlapplication_options.cc:873
+#: ../../src/wlapplication_options.cc:892
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/wlapplication_options.cc:875
+#: ../../src/wlapplication_options.cc:894
 msgid "Move the map fast"
 msgstr ""
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../src/wlapplication_options.cc:877
+#: ../../src/wlapplication_options.cc:896
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/wlapplication_options.cc:879
+#: ../../src/wlapplication_options.cc:898
 msgid "Move the map slowly"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/wlapplication_options.cc:891
+#: ../../src/wlapplication_options.cc:910
 msgid "Remember current location"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/wlapplication_options.cc:894
+#: ../../src/wlapplication_options.cc:913
 msgid "Go to previously remembered location"
 msgstr ""
 
 #. * TRANSLATORS: Separator for a list of hotkeys
-#: ../../src/wlapplication_options.cc:943
+#: ../../src/wlapplication_options.cc:962
 #, c-format
 msgctxt "hotkey"
 msgid "%1$s / %2$s"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:961
-#: ../../src/wlapplication_options.cc:1002
+#: ../../src/wlapplication_options.cc:980
+#: ../../src/wlapplication_options.cc:1021
 msgid "Keyboard Shortcuts"
 msgstr ""
 
 #. * TRANSLATORS: Section heading in "Controls" help
-#: ../../src/wlapplication_options.cc:972
+#: ../../src/wlapplication_options.cc:991
 msgid "Message Window"
 msgstr ""
 
 #. * TRANSLATORS: Section heading in "Controls" help
-#: ../../src/wlapplication_options.cc:977
+#: ../../src/wlapplication_options.cc:996
 msgid "Ship Statistics"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/wlapplication_options.cc:1016
+#: ../../src/wlapplication_options.cc:1035
 msgid "Change tool size"
 msgstr ""
 
+#: ../../src/wlapplication_options.cc:1036
+msgid "Change tool gap"
+msgstr ""
+
 #. * TRANSLATORS: This is an access key combination.
-#: ../../src/wlapplication_options.cc:1021
+#: ../../src/wlapplication_options.cc:1041
 msgctxt "hotkey"
 msgid "Click"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/wlapplication_options.cc:1023
+#: ../../src/wlapplication_options.cc:1043
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
 msgstr ""
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../src/wlapplication_options.cc:1027
+#: ../../src/wlapplication_options.cc:1047
 msgctxt "hotkey"
 msgid "Shift + Click"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/wlapplication_options.cc:1029
+#: ../../src/wlapplication_options.cc:1049
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
 msgstr ""
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../src/wlapplication_options.cc:1032
+#: ../../src/wlapplication_options.cc:1052
 msgctxt "hotkey"
 msgid "Ctrl + Click"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/wlapplication_options.cc:1034
+#: ../../src/wlapplication_options.cc:1054
 msgid "Set map elements to the value selected by ‘Set Value’"
 msgstr ""
 
 #. * TRANSLATORS: prefix for message window shortcuts in keyboard options
-#: ../../src/wlapplication_options.cc:1129
+#: ../../src/wlapplication_options.cc:1158
 #, c-format
 msgctxt "hotkey"
 msgid "Messages: %s"
@@ -7522,235 +7555,235 @@ msgstr ""
 
 #. * TRANSLATORS: prefix for seafaring statistics window shortcuts in keyboard
 #. options
-#: ../../src/wlapplication_options.cc:1134
+#: ../../src/wlapplication_options.cc:1163
 #, c-format
 msgctxt "hotkey"
 msgid "Seafaring: %s"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1328
+#: ../../src/wlapplication_options.cc:1357
 msgctxt "hotkey"
 msgid "Shift"
 msgstr "Shift"
 
-#: ../../src/wlapplication_options.cc:1331
+#: ../../src/wlapplication_options.cc:1360
 msgctxt "hotkey"
 msgid "Alt"
 msgstr "Alt"
 
-#: ../../src/wlapplication_options.cc:1335
+#: ../../src/wlapplication_options.cc:1364
 msgctxt "hotkey"
 msgid "Cmd"
 msgstr "Cmd"
 
-#: ../../src/wlapplication_options.cc:1337
+#: ../../src/wlapplication_options.cc:1366
 msgctxt "hotkey"
 msgid "GUI"
 msgstr "GUI"
 
-#: ../../src/wlapplication_options.cc:1341
+#: ../../src/wlapplication_options.cc:1370
 msgctxt "hotkey"
 msgid "Ctrl"
 msgstr "Ctrl"
 
-#: ../../src/wlapplication_options.cc:1350
+#: ../../src/wlapplication_options.cc:1379
 #, c-format
 msgid "%1$s+%2$s"
 msgstr "%1$s+%2$s"
 
-#: ../../src/wlapplication_options.cc:1363
+#: ../../src/wlapplication_options.cc:1392
 msgctxt "hotkey"
 msgid "Space"
 msgstr "Mellanslag"
 
-#: ../../src/wlapplication_options.cc:1365
+#: ../../src/wlapplication_options.cc:1394
 msgctxt "hotkey"
 msgid "Enter"
 msgstr "Retur"
 
-#: ../../src/wlapplication_options.cc:1367
+#: ../../src/wlapplication_options.cc:1396
 msgctxt "hotkey"
 msgid "Escape"
 msgstr "Escape"
 
-#: ../../src/wlapplication_options.cc:1369
+#: ../../src/wlapplication_options.cc:1398
 msgctxt "hotkey"
 msgid "Tab"
 msgstr "Tab"
 
-#: ../../src/wlapplication_options.cc:1371
+#: ../../src/wlapplication_options.cc:1400
 msgctxt "hotkey"
 msgid "Menu"
 msgstr "Meny"
 
-#: ../../src/wlapplication_options.cc:1373
+#: ../../src/wlapplication_options.cc:1402
 msgctxt "hotkey"
 msgid "Pause"
 msgstr "Paus"
 
-#: ../../src/wlapplication_options.cc:1375
+#: ../../src/wlapplication_options.cc:1404
 msgctxt "hotkey"
 msgid "Page Up"
 msgstr "Page Up"
 
-#: ../../src/wlapplication_options.cc:1377
+#: ../../src/wlapplication_options.cc:1406
 msgctxt "hotkey"
 msgid "Page Down"
 msgstr "Page Down"
 
-#: ../../src/wlapplication_options.cc:1379
+#: ../../src/wlapplication_options.cc:1408
 msgctxt "hotkey"
 msgid "Home"
 msgstr "Home"
 
-#: ../../src/wlapplication_options.cc:1381
+#: ../../src/wlapplication_options.cc:1410
 msgctxt "hotkey"
 msgid "End"
 msgstr "End"
 
-#: ../../src/wlapplication_options.cc:1383
+#: ../../src/wlapplication_options.cc:1412
 msgctxt "hotkey"
 msgid "Left Arrow Key"
 msgstr "Vänsterpil"
 
-#: ../../src/wlapplication_options.cc:1385
+#: ../../src/wlapplication_options.cc:1414
 msgctxt "hotkey"
 msgid "Right Arrow Key"
 msgstr "Högerpil"
 
-#: ../../src/wlapplication_options.cc:1387
+#: ../../src/wlapplication_options.cc:1416
 msgctxt "hotkey"
 msgid "Up Arrow Key"
 msgstr "Uppåtpil"
 
-#: ../../src/wlapplication_options.cc:1389
+#: ../../src/wlapplication_options.cc:1418
 msgctxt "hotkey"
 msgid "Down Arrow Key"
 msgstr "Nedåtpil"
 
-#: ../../src/wlapplication_options.cc:1391
+#: ../../src/wlapplication_options.cc:1420
 msgctxt "hotkey"
 msgid "Insert"
 msgstr "Insert"
 
-#: ../../src/wlapplication_options.cc:1393
+#: ../../src/wlapplication_options.cc:1422
 msgctxt "hotkey"
 msgid "Delete"
 msgstr "Delete"
 
-#: ../../src/wlapplication_options.cc:1395
+#: ../../src/wlapplication_options.cc:1424
 msgctxt "hotkey"
 msgid "Backspace"
 msgstr "Backspace"
 
-#: ../../src/wlapplication_options.cc:1397
+#: ../../src/wlapplication_options.cc:1426
 msgctxt "hotkey"
 msgid "Caps Lock"
 msgstr "Caps Lock"
 
-#: ../../src/wlapplication_options.cc:1399
+#: ../../src/wlapplication_options.cc:1428
 msgctxt "hotkey"
 msgid "Numpad Lock"
 msgstr "Num Lock"
 
-#: ../../src/wlapplication_options.cc:1401
+#: ../../src/wlapplication_options.cc:1430
 msgctxt "hotkey"
 msgid "Scroll Lock"
 msgstr "Scroll Lock"
 
-#: ../../src/wlapplication_options.cc:1403
+#: ../../src/wlapplication_options.cc:1432
 msgctxt "hotkey"
 msgid "Keypad 1"
 msgstr "Numeriskt tangentbord 1"
 
-#: ../../src/wlapplication_options.cc:1405
+#: ../../src/wlapplication_options.cc:1434
 msgctxt "hotkey"
 msgid "Keypad 2"
 msgstr "Numeriskt tangentbord 2"
 
-#: ../../src/wlapplication_options.cc:1407
+#: ../../src/wlapplication_options.cc:1436
 msgctxt "hotkey"
 msgid "Keypad 3"
 msgstr "Numeriskt tangentbord 3"
 
-#: ../../src/wlapplication_options.cc:1409
+#: ../../src/wlapplication_options.cc:1438
 msgctxt "hotkey"
 msgid "Keypad 4"
 msgstr "Numeriskt tangentbord 4"
 
-#: ../../src/wlapplication_options.cc:1411
+#: ../../src/wlapplication_options.cc:1440
 msgctxt "hotkey"
 msgid "Keypad 5"
 msgstr "Numeriskt tangentbord 5"
 
-#: ../../src/wlapplication_options.cc:1413
+#: ../../src/wlapplication_options.cc:1442
 msgctxt "hotkey"
 msgid "Keypad 6"
 msgstr "Numeriskt tangentbord 6"
 
-#: ../../src/wlapplication_options.cc:1415
+#: ../../src/wlapplication_options.cc:1444
 msgctxt "hotkey"
 msgid "Keypad 7"
 msgstr "Numeriskt tangentbord 7"
 
-#: ../../src/wlapplication_options.cc:1417
+#: ../../src/wlapplication_options.cc:1446
 msgctxt "hotkey"
 msgid "Keypad 8"
 msgstr "Numeriskt tangentbord 8"
 
-#: ../../src/wlapplication_options.cc:1419
+#: ../../src/wlapplication_options.cc:1448
 msgctxt "hotkey"
 msgid "Keypad 9"
 msgstr "Numeriskt tangentbord 9"
 
-#: ../../src/wlapplication_options.cc:1421
+#: ../../src/wlapplication_options.cc:1450
 msgctxt "hotkey"
 msgid "Keypad 0"
 msgstr "Numeriskt tangentbord 0"
 
-#: ../../src/wlapplication_options.cc:1423
+#: ../../src/wlapplication_options.cc:1452
 msgctxt "hotkey"
 msgid "Keypad ."
 msgstr "Numeriskt tangentbord ,"
 
-#: ../../src/wlapplication_options.cc:1425
+#: ../../src/wlapplication_options.cc:1454
 msgctxt "hotkey"
 msgid "Keypad +"
 msgstr "Numeriskt tangentbord +"
 
-#: ../../src/wlapplication_options.cc:1427
+#: ../../src/wlapplication_options.cc:1456
 msgctxt "hotkey"
 msgid "Keypad -"
 msgstr "Numeriskt tangentbord -"
 
-#: ../../src/wlapplication_options.cc:1429
+#: ../../src/wlapplication_options.cc:1458
 msgctxt "hotkey"
 msgid "Keypad *"
 msgstr "Numeriskt tangentbord *"
 
-#: ../../src/wlapplication_options.cc:1431
+#: ../../src/wlapplication_options.cc:1460
 msgctxt "hotkey"
 msgid "Keypad /"
 msgstr "Numeriskt tangentbord /"
 
-#: ../../src/wlapplication_options.cc:1433
+#: ../../src/wlapplication_options.cc:1462
 msgctxt "hotkey"
 msgid "Keypad Enter"
 msgstr "Numeriskt tangentbord 'Enter'"
 
-#: ../../src/wlapplication_options.cc:1442
+#: ../../src/wlapplication_options.cc:1471
 msgid "(disabled)"
 msgstr "(avstängd)"
 
 #. * TRANSLATORS: The first placeholder is the stock amount of a ware/worker,
 #. and the second is an
 #. * icon indicating a trend. Very little space is available.
-#: ../../src/wlapplication_options.cc:1445 ../../src/wui/waresdisplay.cc:556
+#: ../../src/wlapplication_options.cc:1474 ../../src/wui/waresdisplay.cc:556
 #, c-format
 msgid "%1$s%2$s"
 msgstr "%1$s%2$s"
 
-#: ../../src/wlapplication_options.cc:1470
+#: ../../src/wlapplication_options.cc:1499
 #, c-format
 msgid "Fastplace #%i"
 msgstr "Snabbplacering #%i"

@@ -80,6 +80,11 @@ function player_building_access:test_multi()
 
    assert_equal(2, #rv.barbarians_lumberjacks_hut)
    assert_equal(1, #rv.barbarians_quarry)
+
+   local rv_all = player1:get_buildings("all")
+   assert_equal(#rv_all.barbarians_lumberjacks_hut, #rv.barbarians_lumberjacks_hut, "#lumberjacks_hut (all)")
+   assert_equal(#rv_all.barbarians_quarry, #rv.barbarians_quarry, "#quarry (all)")
+   assert_equal(#rv_all.barbarians_fishers_hut, 0, "#fishers_hut (all)")
 end
 function player_building_access:test_access()
    local b1 = player1:place_building("barbarians_lumberjacks_hut", map:get_field(10,10))
@@ -92,11 +97,38 @@ function player_building_access:test_access()
    b1.fields[1].brn.immovable:remove()
    assert_equal(1, #player1:get_buildings("barbarians_lumberjacks_hut"))
 end
+function player_building_access:test_constructionsites()
+   local f1 = map:get_field(8,10)
+   local f2 = map:get_field(12,10)
+   player1:conquer(f1, 3)
+   player1:conquer(f2, 3)
+
+   -- place construction sites
+   local c1 = player1:place_building("barbarians_lumberjacks_hut", f1, true)
+   local c2 = player1:place_building("barbarians_fortress", f2, true)
+   self.bs = {c1, c2}
+
+   assert_equal(#player1:get_constructionsites("barbarians_lumberjacks_hut"), 1, "#lumberjacks_hut")
+   assert_equal(#player1:get_constructionsites("barbarians_fortress"), 1, "#fortress")
+
+   assert_equal(player1:get_constructionsites("barbarians_lumberjacks_hut")[1], c1, "the lumberjacks_hut")
+
+   local rv = player1:get_constructionsites({"barbarians_fortress", "barbarians_lumberjacks_hut", "barbarians_quarry"})
+   assert_equal(#rv.barbarians_lumberjacks_hut, 1, "#lumberjacks_hut (multiple)")
+   assert_equal(#rv.barbarians_fortress, 1, "#fortress (multiple)")
+   assert_equal(#rv.barbarians_quarry, 0, "#quarry (multiple)") -- listed in result, but empty
+
+   local rv_all = player1:get_constructionsites("all")
+   assert_equal(#rv_all.barbarians_lumberjacks_hut, #rv.barbarians_lumberjacks_hut, "#lumberjacks_hut (all)")
+   assert_equal(#rv_all.barbarians_fortress, #rv.barbarians_fortress, "#fortress (all)")
+   assert_equal(#rv_all.barbarians_wood_hardener, 0, "#wood_hardener (all)") -- all types are listed
+end
+
 -- ================
 -- Players production statistics
 -- ================
 player_production_statistics = lunit.TestCase("Players production statistics")
-function player_building_access:test_single()
+function player_production_statistics:test_single()
    self.bs = {
       player1:place_building("barbarians_lumberjacks_hut", map:get_field(10,10)),
       player1:place_building("barbarians_lumberjacks_hut", map:get_field(13,10)),

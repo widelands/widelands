@@ -295,12 +295,6 @@ def main():
         out("Python version does not support timeout on subprocesses,\n"
             "test cases may run indefinitely.\n\n")
 
-    all_files = [os.path.basename(filename) for filename in sorted(glob("test/test_*.py")) ]
-    if args.regexp:
-        all_files = [filename for filename in all_files if re.search(args.regexp, filename) ]
-
-    all_modules = [ "test.{}".format(filename[:-3]) for filename in all_files ]
-
     suite = unittest.TestSuite()
     discover_loadgame_tests(args.regexp, suite)
     discover_scenario_tests(args.regexp, suite)

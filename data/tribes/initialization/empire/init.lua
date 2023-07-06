@@ -1,7 +1,7 @@
 -- This file contains the basic information for the Empire tribe that is
 -- needed before a game is loaded or the editor has been started.
 
-dirname = path.dirname(__file__)
+local dirname = path.dirname(__file__)
 push_textdomain("tribes")
 
 local r = {

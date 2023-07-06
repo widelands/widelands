@@ -1,6 +1,6 @@
 push_textdomain("scenario_fri04.wmf")
 
-dirname = "campaigns/fri04.wmf/" .. path.dirname (__file__)
+local dirname = "campaigns/fri04.wmf/" .. path.dirname (__file__)
 
 wl.Descriptions():new_warehouse_type {
    name = "empire_port_large",
