@@ -1815,7 +1815,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Large Armor Smithy
             purpose = pgettext("frisians_building", "Produces advanced weapons and golden helmets for the soldiers."),
             -- TRANSLATORS: Performance helptext for a Frisian production site: Large Armor Smithy
-            performance = pgettext("frisians_building", "If all needed wares are delivered in time, this building can produce one broadswordsword in %1$s on average, one double-edged sword in %2$s on average and one golden helmet in %3$s on average."):bformat(format_minutes_seconds(2, 42), format_minutes_seconds(2, 42), format_minutes_seconds(5, 24))
+            performance = pgettext("frisians_building", "If all needed wares are delivered in time, this building can produce one broadsword in %1$s on average, one double-edged sword in %2$s on average and one golden helmet in %3$s on average."):bformat(format_minutes_seconds(2, 42), format_minutes_seconds(2, 42), format_minutes_seconds(5, 24))
          }
       },
       {

@@ -1241,8 +1241,8 @@ void ProductionSite::init_yard_interfaces(EditorGameBase& egbase) {
 		if (ship_fleet_interfaces_.empty()) {
 			if (upcast(Game, game, &egbase)) {
 				send_message(*game, Message::Type::kEconomy, pgettext("building", "No Shore"),
-				             descr().icon_filename(), _("Ship Yard Without Shore"),
-				             _("Your ship yard has not been built close enough to a shore. It will not "
+				             descr().icon_filename(), _("Shipyard Without Shore"),
+				             _("Your shipyard has not been built close enough to a shore. It will not "
 				               "be able to build ships."));
 			}
 		}
