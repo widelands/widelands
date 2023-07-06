@@ -50,13 +50,15 @@ const std::string& ResourceDescription::editor_image(uint32_t const amount) cons
 		                 name().c_str(), amount, editor_pictures_.back().second);
 	}
 
-	for (size_t i = 1; i < editor_pictures_.size(); ++i) {
-		if (editor_pictures_.at(i).second > amount) {
-			return editor_pictures_.at(i - 1).first;
+	const std::string* result = nullptr;
+	for (const auto& pair : editor_pictures_) {
+		result = &pair.first;
+		if (pair.second >= amount) {
+			break;
 		}
 	}
 
-	NEVER_HERE();
+	return *result;
 }
 
 const std::string& ResourceDescription::name() const {
