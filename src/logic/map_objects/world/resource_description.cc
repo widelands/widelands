@@ -58,6 +58,7 @@ const std::string& ResourceDescription::editor_image(uint32_t const amount) cons
 		}
 	}
 
+	assert(result != nullptr);
 	return *result;
 }
 
