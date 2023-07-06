@@ -1,6 +1,6 @@
 push_textdomain("scenario_atl02.wmf")
 
-dirname = "campaigns/atl02.wmf/scripting/tribes/coin_silver/"
+local dirname = "campaigns/atl02.wmf/scripting/tribes/coin_silver/"
 
 wl.Descriptions():new_ware_type {
    name = "coin_silver",

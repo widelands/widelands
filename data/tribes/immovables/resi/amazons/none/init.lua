@@ -1,6 +1,6 @@
 push_textdomain("tribes")
 
-dirname = path.dirname(__file__) .. "../"
+local dirname = path.dirname(__file__) .. "../"
 
 wl.Descriptions():new_immovable_type {
    name = "amazons_resi_none",
