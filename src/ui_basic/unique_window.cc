@@ -156,7 +156,9 @@ void UniqueWindow::move_inside_parent() {
 		return;
 	}
 
-	if (registry_->valid_pos) {
+	// TODO(tothxa): needs refining to handle window size changes (e.g on tab switching)
+	/*
+	if (moved_by_user()) {
 		constexpr int32_t kMinVisible = 100;
 
 		const bool top_visible = registry_->y < parent->get_inner_h() - kMinVisible;
@@ -169,6 +171,7 @@ void UniqueWindow::move_inside_parent() {
 			return;
 		}
 	}
+	*/
 	Window::move_inside_parent();
 }
 

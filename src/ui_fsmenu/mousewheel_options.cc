@@ -82,9 +82,11 @@ void MousewheelConfigSettings::read() {
 	map_scroll_mod_ = READ_MOD(kMapScroll);
 	speed_mod_ = READ_MOD(kGameSpeed);
 	toolsize_mod_ = READ_MOD(kEditorToolsize);
+	toolgap_mod_ = READ_MOD(kEditorToolgap);
 	zoom_dir_ = READ_DIR(kMapZoom);
 	speed_dir_ = READ_DIR(kGameSpeed);
 	toolsize_dir_ = READ_DIR(kEditorToolsize);
+	toolgap_dir_ = READ_DIR(kEditorToolgap);
 	value_invert_ = READ_DIR(kUIChangeValueInvert);
 	tab_invert_ = READ_DIR(kUITabInvert);
 	zoom_invert_ = READ_DIR(kMapZoomInvert);
@@ -111,9 +113,11 @@ void MousewheelConfigSettings::apply() const {
 	set_mousewheel_keymod(MousewheelOptionID::kMapScrollMod, map_scroll_mod_);
 	set_mousewheel_keymod(MousewheelOptionID::kGameSpeedMod, speed_mod_);
 	set_mousewheel_keymod(MousewheelOptionID::kEditorToolsizeMod, toolsize_mod_);
+	set_mousewheel_keymod(MousewheelOptionID::kEditorToolgapMod, toolgap_mod_);
 	APPLY_DIR(kMapZoom, zoom_dir_)
 	APPLY_DIR(kGameSpeed, speed_dir_)
 	APPLY_DIR(kEditorToolsize, toolsize_dir_)
+	APPLY_DIR(kEditorToolgap, toolgap_dir_)
 	APPLY_DIR(kUIChangeValueInvert, value_invert_)
 	APPLY_DIR(kUITabInvert, tab_invert_)
 	APPLY_DIR(kMapZoomInvert, zoom_invert_)
@@ -383,7 +387,7 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
                    Used as e.g.: "Zoom Map: Ctrl+Any scroll"
                    The ':' will be added by another format string. */
                _("Zoom Map"),
-               {&mapscroll_box_, &speed_box_, &toolsize_box_},
+               {&mapscroll_box_, &speed_box_, &toolsize_box_, &toolgap_box_},
                &(settings_.zoom_mod_),
                &(settings_.zoom_dir_)),
      mapscroll_box_(this,
@@ -391,7 +395,7 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
                         Used as e.g.: "Scroll Map: Ctrl+Any scroll"
                         The ':' will be added by another format string. */
                     _("Scroll Map"),
-                    {&zoom_box_, &speed_box_, &toolsize_box_},
+                    {&zoom_box_, &speed_box_, &toolsize_box_, &toolgap_box_},
                     &(settings_.map_scroll_mod_),
                     &(settings_.enable_map_scroll_),
                     true),
@@ -408,9 +412,17 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
                        Used as e.g.: "Change Editor Toolsize: Ctrl+Any scroll"
                        The ':' will be added by another format string. */
                    _("Change Editor Toolsize"),
-                   {&zoom_box_, &mapscroll_box_},
+                   {&zoom_box_, &mapscroll_box_, &toolgap_box_},
                    &(settings_.toolsize_mod_),
                    &(settings_.toolsize_dir_)),
+     toolgap_box_(this,
+                  /** TRANSLATORS: Name of a function for the scroll wheel.
+                      Used as e.g.: "Change Editor Tool Gap: Ctrl+Any scroll"
+                      The ':' will be added by another format string. */
+                  _("Change Editor Tool Gap"),
+                  {&zoom_box_, &mapscroll_box_, &toolsize_box_},
+                  &(settings_.toolgap_mod_),
+                  &(settings_.toolgap_dir_)),
      zoom_invert_box_(
         this,
         /** TRANSLATORS: Used as e.g. "Invert scroll direction for map zooming: Vertical" */
@@ -465,6 +477,7 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
 	add(&mapscroll_box_);
 	add(&speed_box_);
 	add(&toolsize_box_);
+	add(&toolgap_box_);
 	add_space(kDividerSpace);
 	add(&zoom_invert_box_);
 	add(&tab_invert_box_);
@@ -482,6 +495,7 @@ void MousewheelOptionsDialog::update_settings() {
 	mapscroll_box_.update_sel();
 	speed_box_.update_sel();
 	toolsize_box_.update_sel();
+	toolgap_box_.update_sel();
 	zoom_invert_box_.update_sel();
 	tab_invert_box_.update_sel();
 	value_invert_box_.update_sel();
@@ -501,13 +515,16 @@ void MousewheelOptionsDialog::set_touchpad() {
 	   speed_box_.conflicts(KMOD_NONE, SD::kAny) || speed_box_.conflicts(KMOD_CTRL, SD::kVertical);
 	const bool conflict_toolsize = toolsize_box_.conflicts(KMOD_NONE, SD::kAny) ||
 	                               toolsize_box_.conflicts(KMOD_CTRL, SD::kVertical);
-	if (conflict_speed || conflict_toolsize) {
+	const bool conflict_toolgap = toolgap_box_.conflicts(KMOD_NONE, SD::kAny) ||
+	                              toolgap_box_.conflicts(KMOD_CTRL, SD::kVertical);
+	if (conflict_speed || conflict_toolsize || conflict_toolgap) {
 		UI::WLMessageBox warning(
 		   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Scroll Settings Conflict"),
-		   as_richtext_paragraph(format(_("‘%1$s’ or ‘%2$s’ conflicts with the recommended "
-		                                  "settings. Change the conflicting setting(s) too?"),
-		                                speed_box_.get_title(), toolsize_box_.get_title()),
-		                         UI::FontStyle::kFsMenuLabel, UI::Align::kCenter),
+		   as_richtext_paragraph(
+		      format(_("‘%1$s’, ‘%2$s’, or ‘%3$s’ conflicts with the recommended "
+		               "settings. Change the conflicting setting(s) too?"),
+		             speed_box_.get_title(), toolsize_box_.get_title(), toolgap_box_.get_title()),
+		      UI::FontStyle::kFsMenuLabel, UI::Align::kCenter),
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		if (warning.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;
@@ -520,6 +537,10 @@ void MousewheelOptionsDialog::set_touchpad() {
 			settings_.toolsize_mod_ = KMOD_ALT;
 			toolsize_box_.update_sel();
 		}
+		if (conflict_toolgap) {
+			settings_.toolgap_mod_ = KMOD_SHIFT;
+			toolgap_box_.update_sel();
+		}
 	}
 
 	// Set recommended values
@@ -528,7 +549,8 @@ void MousewheelOptionsDialog::set_touchpad() {
 	mapscroll_box_.update_sel();
 	settings_.zoom_mod_ = KMOD_CTRL;
 	settings_.zoom_dir_ = (speed_box_.conflicts(KMOD_CTRL, SD::kHorizontal) ||
-	                       toolsize_box_.conflicts(KMOD_CTRL, SD::kHorizontal)) ?
+	                       toolsize_box_.conflicts(KMOD_CTRL, SD::kHorizontal) ||
+	                       toolgap_box_.conflicts(KMOD_CTRL, SD::kHorizontal)) ?
                             SD::kVertical :
                             SD::kAny;
 	zoom_box_.update_sel();
@@ -550,6 +572,7 @@ void MousewheelOptionsDialog::set_size(int w, int h) {
 		mapscroll_box_.set_width(w_hbox);
 		speed_box_.set_width(w_hbox);
 		toolsize_box_.set_width(w_hbox);
+		toolgap_box_.set_width(w_hbox);
 		zoom_invert_box_.set_width(w_hbox);
 		tab_invert_box_.set_width(w_hbox);
 		value_invert_box_.set_width(w_hbox);

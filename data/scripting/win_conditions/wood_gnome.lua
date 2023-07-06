@@ -92,24 +92,31 @@ local r = {
          msg = msg ..  p(_("%1$s had %2$s.")):bformat(plr.name,trees)
       end
       msg = msg .. msg_vspace()
-      local trees = (ngettext ("%i tree", "%i trees", playerpoints[points[#points][1].number]))
-            :format(playerpoints[points[#points][1].number])
-      -- TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-      msg = msg ..  h3(_("The winner is %1$s with %2$s.")):bformat(points[#points][1].name, trees)
+      local trees = (ngettext ("%i tree", "%i trees", points[#points][2])):format(points[#points][2])
+      if #points == 1 or points[#points][2] ~= points[#points - 1][2] then -- one winner
+         -- TRANSLATORS: %1$s = player name, %2$s = x tree(s)
+         msg = msg ..  h3(_("The winner is %1$s with %2$s.")):bformat(points[#points][1].name, trees)
+      else
+         -- TRNANSLATORS: %s = x tree(s)
+         msg = msg .. h3(_("The winners had %s.")):bformat(trees)
+         -- TODO maybe, create list of winners and show as %$1s: The winners are %$1s with %$2s.
+      end
       pop_textdomain()
 
+      local win_points = points[#points][2] -- points of winner(s)
       local privmsg = ""
-      for i=1,#points-1 do
-         privmsg = lost_game_over.body
+      for i=1,#points do
+         local win_lost = 0
+         local end_msgs = lost_game_over
+         if points[i][2] >= win_points then
+            end_msgs = won_game_over
+            win_lost = 1
+         end
+         privmsg = end_msgs.body
          privmsg = privmsg .. msg
-         points[i][1]:send_to_inbox(lost_game_over.title, privmsg)
-         wl.game.report_result(points[i][1], 0, make_extra_data(points[i][1], wc_descname, wc_version, {score=points[i][2]}))
+         points[i][1]:send_to_inbox(end_msgs.title, privmsg)
+         wl.game.report_result(points[i][1], win_lost, make_extra_data(points[i][1], wc_descname, wc_version, {score=points[i][2]}))
       end
-      privmsg = won_game_over.body
-      privmsg = privmsg .. msg
-      points[#points][1]:send_to_inbox(won_game_over.title, privmsg)
-      wl.game.report_result(points[#points][1], 1,
-         make_extra_data(points[#points][1], wc_descname, wc_version, {score=points[#points][2]}))
    end
 
    -- Install statistics hook
