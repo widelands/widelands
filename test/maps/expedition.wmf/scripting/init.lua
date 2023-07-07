@@ -1,7 +1,7 @@
-include "scripting/lunit.lua"
 include "scripting/coroutine.lua"
 include "scripting/infrastructure.lua"
 include "scripting/ui.lua"
+include "test/scripting/lunit.lua"
 include "test/scripting/stable_save.lua"
 
 -- This is a test case for bug 1234058: there is constant demand for logs,
