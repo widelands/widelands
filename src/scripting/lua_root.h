@@ -128,6 +128,7 @@ public:
 	 */
 	int get_tribes_descriptions(lua_State* L);
 	int get_immovable_descriptions(lua_State* L);
+	int get_building_descriptions(lua_State* L);
 	int get_terrain_descriptions(lua_State* L);
 	int get_worker_descriptions(lua_State*);
 
