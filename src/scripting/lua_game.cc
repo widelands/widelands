@@ -125,6 +125,7 @@ const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
    PROP_RW(LuaPlayer, see_all),
    PROP_RW(LuaPlayer, allow_additional_expedition_items),
    PROP_RW(LuaPlayer, hidden_from_general_statistics),
+   PROP_RO(LuaPlayer, ai_type),
    {nullptr, nullptr, nullptr},
 };
 
@@ -336,6 +337,18 @@ int LuaPlayer::get_hidden_from_general_statistics(lua_State* L) {
 int LuaPlayer::set_hidden_from_general_statistics(lua_State* L) {
 	get(L, get_egbase(L)).set_hidden_from_general_statistics(luaL_checkboolean(L, -1));
 	return 0;
+}
+
+/* RST
+   .. attribute:: ai_type
+
+      (RO) type of the ai controlling this player ("normal", "weak", "very_weak", "empty", ..., "" if human controlled only)
+*/
+int LuaPlayer::get_ai_type(lua_State* L) {
+	Widelands::Game& game = get_game(L);
+	const Widelands::Player& p = get(L, game);
+	lua_pushstring(L, p.get_ai());
+	return 1;
 }
 
 /*

@@ -21,6 +21,16 @@ function player_tests:test_number_property()
    assert_equal(3, player3.number)
 end
 
+function player_tests:test_ai_type()
+   local normal_ai = "normal"
+   if egbase == editor then
+      normal_ai = ""
+   end
+   assert_equal("", player1.ai_type, "human player")
+   assert_equal(normal_ai, player2.ai_type, "ai player (2)")
+   assert_equal(normal_ai, player3.ai_type, "ai player (3)")
+end
+
 -- =================
 -- place_flag tests
 -- =================
