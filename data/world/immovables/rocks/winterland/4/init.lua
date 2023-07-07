@@ -1,6 +1,6 @@
 push_textdomain("world")
 
-dirname = path.dirname(__file__)
+local dirname = path.dirname(__file__)
 
 wl.Descriptions():new_immovable_type{
    name = "winterland_rocks4",

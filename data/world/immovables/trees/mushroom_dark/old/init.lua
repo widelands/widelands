@@ -1,6 +1,6 @@
 push_textdomain("world")
 
-dirname = path.dirname(__file__)
+local dirname = path.dirname(__file__)
 
 include(dirname .. "../terrain_affinity.lua")
 

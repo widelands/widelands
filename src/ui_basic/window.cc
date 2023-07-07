@@ -594,7 +594,6 @@ bool Window::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {
 		is_minimal() ? restore() : minimize();
 	} else if (btn == SDL_BUTTON_LEFT) {
 		dragging_ = true;
-		moved_by_user_ = true;
 		drag_start_win_x_ = get_x();
 		drag_start_win_y_ = get_y();
 		drag_start_mouse_x_ = get_x() + get_lborder() + mx;
@@ -833,6 +832,7 @@ bool Window::handle_mousemove(
 			}
 		}
 		set_pos(Vector2i(new_left, new_top));
+		moved_by_user_ = true;
 	}
 	return true;
 }

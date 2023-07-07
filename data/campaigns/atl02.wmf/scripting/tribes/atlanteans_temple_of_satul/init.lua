@@ -1,4 +1,4 @@
-dirname = "campaigns/atl02.wmf/scripting/tribes/atlanteans_temple_of_satul/"
+local dirname = "campaigns/atl02.wmf/scripting/tribes/atlanteans_temple_of_satul/"
 
 push_textdomain("scenario_atl02.wmf")
 

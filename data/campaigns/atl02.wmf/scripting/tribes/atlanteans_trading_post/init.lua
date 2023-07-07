@@ -1,4 +1,4 @@
-dirname = "campaigns/atl02.wmf/scripting/tribes/atlanteans_trading_post/"
+local dirname = "campaigns/atl02.wmf/scripting/tribes/atlanteans_trading_post/"
 
 push_textdomain("scenario_atl02.wmf")
 
