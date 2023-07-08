@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-03 03:04+0000\n"
+"POT-Creation-Date: 2023-07-06 03:09+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Thorbjørn Bruarøy, 2015\n"
 "Language-Team: Norwegian Nynorsk (http://app.transifex.com/widelands/widelands/language/nn/)\n"
@@ -40,24 +40,24 @@ msgstr ""
 msgid "Not enough space"
 msgstr ""
 
-#: ../../data/scripting/infrastructure.lua:281
+#: ../../data/scripting/infrastructure.lua:286
 msgid "No rocks nearby"
 msgstr ""
 
-#: ../../data/scripting/infrastructure.lua:281
+#: ../../data/scripting/infrastructure.lua:286
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
 msgstr ""
 
-#: ../../data/scripting/infrastructure.lua:286
-msgid "No trees nearby"
+#: ../../data/scripting/infrastructure.lua:292
+msgid "Not enough trees nearby"
 msgstr ""
 
-#: ../../data/scripting/infrastructure.lua:286
+#: ../../data/scripting/infrastructure.lua:292
 msgid ""
-"There are no trees near to your starting position. Therefore, you receive "
-"extra resources for bootstrapping your economy."
+"There are not enough trees near to your starting position. Therefore, you "
+"receive extra resources for bootstrapping your economy."
 msgstr ""
 
 #: ../../data/scripting/messages.lua:66 ../../data/scripting/messages.lua:68
@@ -8284,7 +8284,7 @@ msgstr ""
 msgid "Mark this immovable for timely removal by a suited worker"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:415 ../../src/wui/fieldaction.cc:538
+#: ../../src/wui/fieldaction.cc:415 ../../src/wui/fieldaction.cc:544
 msgid "Build road"
 msgstr "Bygg vei"
 
@@ -8328,67 +8328,67 @@ msgstr "Øydelegg ein veg"
 msgid "Destroy a waterway"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:509
+#: ../../src/wui/fieldaction.cc:512
 msgid "Configure this ocean’s ship fleet"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:516
+#: ../../src/wui/fieldaction.cc:522
 msgid "Configure this ocean’s ferry fleet"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:523
+#: ../../src/wui/fieldaction.cc:529
 msgid "Watch field in a separate window"
 msgstr "Sjå område i eige vindauge"
 
-#: ../../src/wui/fieldaction.cc:528
+#: ../../src/wui/fieldaction.cc:534
 msgid "Pinned note"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:533
+#: ../../src/wui/fieldaction.cc:539
 msgid "Show debug window"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:541 ../../src/wui/watchwindow.cc:85
+#: ../../src/wui/fieldaction.cc:547 ../../src/wui/watchwindow.cc:85
 msgid "Watch"
 msgstr "Overvak"
 
-#: ../../src/wui/fieldaction.cc:658
+#: ../../src/wui/fieldaction.cc:664
 msgid "Build mines"
 msgstr "Bygg gruver"
 
-#: ../../src/wui/fieldaction.cc:672 ../../src/wui/fieldaction.cc:698
+#: ../../src/wui/fieldaction.cc:678 ../../src/wui/fieldaction.cc:704
 msgid "Build flag"
 msgstr "Bygg flag"
 
-#: ../../src/wui/fieldaction.cc:676
+#: ../../src/wui/fieldaction.cc:682
 msgid "Cancel road"
 msgstr "Avbryt veg"
 
-#: ../../src/wui/fieldaction.cc:678
+#: ../../src/wui/fieldaction.cc:684
 msgid "Go to road"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:686
+#: ../../src/wui/fieldaction.cc:692
 msgid "Cancel road and start building waterway"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:690
+#: ../../src/wui/fieldaction.cc:696
 msgid "Build roads"
 msgstr "Bygg vegar"
 
-#: ../../src/wui/fieldaction.cc:702
+#: ../../src/wui/fieldaction.cc:708
 msgid "Cancel waterway"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:704
+#: ../../src/wui/fieldaction.cc:710
 msgid "Go to waterway"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:707
+#: ../../src/wui/fieldaction.cc:713
 msgid "Cancel waterway and start building road"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:710
+#: ../../src/wui/fieldaction.cc:716
 msgid "Build waterways"
 msgstr ""
 

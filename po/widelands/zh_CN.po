@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-03 03:04+0000\n"
+"POT-Creation-Date: 2023-07-06 03:09+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: 92373a9a734415f33212259453a6274d_77ab48e, 2022\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/widelands/widelands/language/zh_CN/)\n"
@@ -46,25 +46,25 @@ msgstr "你的一些起始建筑没有足够的空间并且尚未建设完成。
 msgid "Not enough space"
 msgstr "没有足够的空间"
 
-#: ../../data/scripting/infrastructure.lua:281
+#: ../../data/scripting/infrastructure.lua:286
 msgid "No rocks nearby"
 msgstr "附近没有岩石"
 
-#: ../../data/scripting/infrastructure.lua:281
+#: ../../data/scripting/infrastructure.lua:286
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
 msgstr "你的起始位置附近没有岩石。因此，你会得到额外的资源来引导你的经济。 "
 
-#: ../../data/scripting/infrastructure.lua:286
-msgid "No trees nearby"
-msgstr "附近没有树木"
+#: ../../data/scripting/infrastructure.lua:292
+msgid "Not enough trees nearby"
+msgstr ""
 
-#: ../../data/scripting/infrastructure.lua:286
+#: ../../data/scripting/infrastructure.lua:292
 msgid ""
-"There are no trees near to your starting position. Therefore, you receive "
-"extra resources for bootstrapping your economy."
-msgstr "你的起始位置附近没有树木。因此，你会得到额外的资源来引导你的经济。 "
+"There are not enough trees near to your starting position. Therefore, you "
+"receive extra resources for bootstrapping your economy."
+msgstr ""
 
 #: ../../data/scripting/messages.lua:66 ../../data/scripting/messages.lua:68
 #: ../../src/wui/game_message_menu.cc:69 ../../src/wui/game_summary.cc:113
@@ -8260,7 +8260,7 @@ msgstr "不可移动的操作"
 msgid "Mark this immovable for timely removal by a suited worker"
 msgstr "标记此固定物，以便由合适的工人及时移除"
 
-#: ../../src/wui/fieldaction.cc:415 ../../src/wui/fieldaction.cc:538
+#: ../../src/wui/fieldaction.cc:415 ../../src/wui/fieldaction.cc:544
 msgid "Build road"
 msgstr "修路"
 
@@ -8304,67 +8304,67 @@ msgstr "摧毁一条路"
 msgid "Destroy a waterway"
 msgstr "摧毁一条水道"
 
-#: ../../src/wui/fieldaction.cc:509
+#: ../../src/wui/fieldaction.cc:512
 msgid "Configure this ocean’s ship fleet"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:516
+#: ../../src/wui/fieldaction.cc:522
 msgid "Configure this ocean’s ferry fleet"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:523
+#: ../../src/wui/fieldaction.cc:529
 msgid "Watch field in a separate window"
 msgstr "在单独的窗口中查看该区域"
 
-#: ../../src/wui/fieldaction.cc:528
+#: ../../src/wui/fieldaction.cc:534
 msgid "Pinned note"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:533
+#: ../../src/wui/fieldaction.cc:539
 msgid "Show debug window"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:541 ../../src/wui/watchwindow.cc:85
+#: ../../src/wui/fieldaction.cc:547 ../../src/wui/watchwindow.cc:85
 msgid "Watch"
 msgstr "观察"
 
-#: ../../src/wui/fieldaction.cc:658
+#: ../../src/wui/fieldaction.cc:664
 msgid "Build mines"
 msgstr "修建矿井"
 
-#: ../../src/wui/fieldaction.cc:672 ../../src/wui/fieldaction.cc:698
+#: ../../src/wui/fieldaction.cc:678 ../../src/wui/fieldaction.cc:704
 msgid "Build flag"
 msgstr "建造旗帜"
 
-#: ../../src/wui/fieldaction.cc:676
+#: ../../src/wui/fieldaction.cc:682
 msgid "Cancel road"
 msgstr "取消路段"
 
-#: ../../src/wui/fieldaction.cc:678
+#: ../../src/wui/fieldaction.cc:684
 msgid "Go to road"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:686
+#: ../../src/wui/fieldaction.cc:692
 msgid "Cancel road and start building waterway"
 msgstr "取消路段并开始修建水道"
 
-#: ../../src/wui/fieldaction.cc:690
+#: ../../src/wui/fieldaction.cc:696
 msgid "Build roads"
 msgstr "修路"
 
-#: ../../src/wui/fieldaction.cc:702
+#: ../../src/wui/fieldaction.cc:708
 msgid "Cancel waterway"
 msgstr "取消水道"
 
-#: ../../src/wui/fieldaction.cc:704
+#: ../../src/wui/fieldaction.cc:710
 msgid "Go to waterway"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:707
+#: ../../src/wui/fieldaction.cc:713
 msgid "Cancel waterway and start building road"
 msgstr "取消水道并开始修路"
 
-#: ../../src/wui/fieldaction.cc:710
+#: ../../src/wui/fieldaction.cc:716
 msgid "Build waterways"
 msgstr "修建水道"
 
