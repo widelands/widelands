@@ -155,10 +155,11 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		return false;
 	}
 
+	BuildingObserver& port_obs = get_building_observer(BuildingAttribute::kPort);
+	ports_count = port_obs.cnt_built + port_obs.cnt_under_construction;
 	// goes over all warehouses (these includes ports)
 	for (const WarehouseSiteObserver& wh_obs : warehousesites) {
 		if (wh_obs.bo->is(BuildingAttribute::kPort)) {
-			++ports_count;
 			if (const Widelands::PortDock* pd = wh_obs.site->get_portdock()) {
 				if (pd->expedition_started()) {
 					++expeditions_in_prep;
