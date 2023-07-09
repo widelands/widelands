@@ -144,6 +144,33 @@ private:
 
 	static constexpr bool kAbsValue = true;
 	static constexpr int32_t kSpotsTooLittle = 15;
+	// following two are used for roads management, for creating shortcuts and dismantling dispensable
+	// roads
+	static constexpr int32_t kSpotsEnough = 25;
+	static constexpr uint16_t kTargetQuantCap = 30;
+
+	// this is intended for map developers & testers, should be off by default
+	// also note that some of that stats is printed only in verbose mode
+	static constexpr bool kEnableStatsPrint = false;
+	// enable also the above to print the results of the performance data collection
+	static constexpr bool kCollectPerfData = false;
+
+	// for scheduler
+	static constexpr int kMaxJobs = 4;
+
+	// Count of mine types / ground resources
+	constexpr int kMineTypes = 4;
+	// following is in milliseconds (widelands counts time in ms)
+	static constexpr Duration kFieldInfoExpiration(14 * 1000);
+	static constexpr Duration kMineFieldInfoExpiration(20 * 1000);
+	static constexpr Duration kNewMineConstInterval(19000);
+	// building of the same building can be started after 25s at earliest
+	static constexpr Duration kBuildingMinInterval(25 * 1000);
+	static constexpr Duration kMinBFCheckInterval(5 * 1000);
+	static constexpr Duration kMinMFCheckInterval(19 * 1000);
+	static constexpr Duration kRemainingBasicBuildingsResetTime(1 * 60 * 1000);
+	// management frequencies
+	static constexpr Duration kBusyMineUpdateInterval(2000);
 	static constexpr Duration kManagementUpdateInterval{10 * 60 * 1000};
 	static constexpr Duration kStatUpdateInterval{15 * 1000};
 	static constexpr Duration kFlagWarehouseUpdInterval{15 * 1000};
@@ -154,6 +181,7 @@ private:
 	static constexpr Duration kExpeditionMaxDuration{210 * 60 * 1000};
 	static constexpr Widelands::Serial kNoShip = Widelands::kInvalidSerial;
 	static constexpr Duration kShipCheckInterval{5 * 1000};
+	static constexpr Duration kMarineDecisionInterval(20 * 1000);
 
 	// used by defaultai_warfare.cc
 	// duration of military campaign

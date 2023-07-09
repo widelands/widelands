@@ -51,36 +51,6 @@
 #include "logic/player.h"
 #include "logic/playercommand.h"
 
-// following is in milliseconds (widelands counts time in ms)
-constexpr Duration kFieldInfoExpiration(14 * 1000);
-constexpr Duration kMineFieldInfoExpiration(20 * 1000);
-constexpr Duration kNewMineConstInterval(19000);
-constexpr Duration kBusyMineUpdateInterval(2000);
-// building of the same building can be started after 25s at earliest
-constexpr Duration kBuildingMinInterval(25 * 1000);
-constexpr Duration kMinBFCheckInterval(5 * 1000);
-constexpr Duration kMinMFCheckInterval(19 * 1000);
-constexpr Duration kMarineDecisionInterval(20 * 1000);
-constexpr Duration kRemainingBasicBuildingsResetTime(1 * 60 * 1000);
-
-// following two are used for roads management, for creating shortcuts and dismantling dispensable
-// roads
-constexpr int32_t kSpotsEnough = 25;
-
-constexpr uint16_t kTargetQuantCap = 30;
-
-// this is intended for map developers & testers, should be off by default
-// also note that some of that stats is printed only in verbose mode
-constexpr bool kEnableStatsPrint = false;
-// enable also the above to print the results of the performance data collection
-constexpr bool kCollectPerfData = false;
-
-// for scheduler
-constexpr int kMaxJobs = 4;
-
-// Count of mine types / ground resources
-constexpr int kMineTypes = 4;
-
 namespace AI {
 
 // Fix undefined references
