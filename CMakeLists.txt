@@ -351,8 +351,8 @@ if(NOT MSVC)
     message(STATUS "Compiler warnings will be ignored.")
   elseif(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (
          ((NOT (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 12.0)) AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 12.2))
-         OR (NOT (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 13.0))))
-    # Skip this on g++ versions 12.0, 12.1, and 13.x because of false-positives from system headers.
+         OR (NOT (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 13.0)) AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 13.1)))
+    # Skip this on g++ versions 12.0, 12.1, and 13.0 because of false-positives from system headers.
     message(WARNING "This compiler is known to cause false-positive warnings.")
   else()
     # Turn some warnings into errors.
