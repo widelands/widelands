@@ -395,7 +395,7 @@ void EditorInteractive::add_tool_menu() {
 	              shortcut_string_for(KeyboardShortcut::kEditorToolHistory, false));
 	tool_windows_.toolhistory.open_window = [this] {
 		new EditorToolhistoryOptionsMenu(*this, tools()->tool_history, tool_windows_.toolhistory);
-        select_tool(tools()->info, EditorTool::First);
+		select_tool(tools()->info, EditorTool::First);
 	};
 
 	toolmenu_.selected.connect([this] { tool_menu_selected(toolmenu_.get_selected()); });
