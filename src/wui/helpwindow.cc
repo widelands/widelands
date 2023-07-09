@@ -76,6 +76,7 @@ BuildingHelpWindow::BuildingHelpWindow(InteractiveBase* const parent,
 	hbox_.add_space(kPadding);
 	hbox_.add(titlearea_, UI::Box::Resizing::kFillSpace);
 
+	vbox_.set_size(width, height);
 	vbox_.set_max_size(width, height);
 	vbox_.add(&hbox_);
 	vbox_.add(textarea_, UI::Box::Resizing::kExpandBoth);
