@@ -1,6 +1,6 @@
 push_textdomain("scenario_atl02.wmf")
 
-dirname = "campaigns/atl02.wmf/scripting/tribes/barbarians_trade_pole/"
+local dirname = "campaigns/atl02.wmf/scripting/tribes/barbarians_trade_pole/"
 
 wl.Descriptions():new_immovable_type {
    name = "barbarians_trade_pole",

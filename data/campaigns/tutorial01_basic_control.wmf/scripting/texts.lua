@@ -259,7 +259,7 @@ obj_moving = {
       li_arrow(_([[The second one is the more common and faster one: press-and-hold the right mouse button anywhere on the map, then move your mouse around and you’ll see the view scroll.]])) ..
       li_arrow(_([[The third one is to use the minimap. It is especially useful for traveling big distances.]])) ..
       vspace() ..
-      p(_([[Moving around with the right mouse button may be uncomfortable if you play on a laptop with a touchpad. You can enable map movement with touchpad scrolling in the the Widelands main menu: Choose ‘Options’ then press ‘Edit keyboard and mouse actions’, and select the ‘Mouse Scrolling’ tab.]]))
+      p(_([[Moving around with the right mouse button may be uncomfortable if you play on a laptop with a touchpad. You can enable map movement with touchpad scrolling in the the Widelands main menu: Choose ‘Options’, then press ‘Edit keyboard and mouse actions’, and select the ‘Mouse Scrolling’ tab.]]))
    ),
 }
 tell_about_move = {

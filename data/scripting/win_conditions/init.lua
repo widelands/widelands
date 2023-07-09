@@ -1,5 +1,5 @@
 -- This config file sets the order of the starting conditions
-dirname = path.dirname(__file__)
+local dirname = path.dirname(__file__)
 
 return {
    dirname .. "collectors.lua",

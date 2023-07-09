@@ -2,7 +2,7 @@
 -- needed before a game is loaded or the editor has been started.
 -- It is documented in units.lua
 
-dirname = path.dirname(__file__)
+local dirname = path.dirname(__file__)
 push_textdomain("tribes")
 
 local r = {

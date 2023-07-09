@@ -9,16 +9,16 @@
 # Klaus Halfmann <klaus.halfmann@arcor.de>, 2022
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
-# Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022
+# Stephan Lutz <stephan-lutz@gmx.de>, 2019-2023
 # Elisabeth Jäger, 2015
 # 39a0b2e5ef9bf024c2fcfbdd0522de1a_96abb62, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2023-07-06 03:09+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2019-2023\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -388,3 +388,8 @@ msgstr "%1$s hatte %2$s."
 #: ../../data/scripting/win_conditions/wood_gnome.lua:98
 msgid "The winner is %1$s with %2$s."
 msgstr "Sieger ist %1$s mit %2$s."
+
+#: ../../data/scripting/win_conditions/wood_gnome.lua:101
+#, lua-format
+msgid "The winners had %s."
+msgstr "Die Sieger hatten %s."

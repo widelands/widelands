@@ -557,7 +557,7 @@ wl.Descriptions():new_tribe {
             preciousness = 2,
             helptexts = {
                -- TRANSLATORS: Helptext for an Empire ware: Helmet
-               purpose = pgettext("empire_ware", "The helmet is the basic defense of a warrior. It is produced in an armor smithy. In combination with a wooden spear, it is the equipment to fit out young soldiers. Helmets are also used in training camps – together with food – to train soldiers from health level 0 to level 1.")
+               purpose = pgettext("empire_ware", "The helmet is the basic defense of a soldier. It is produced in an armor smithy. In combination with a wooden spear, it is the equipment to fit out young soldiers. Helmets are also used in training camps – together with food – to train soldiers from health level 0 to level 1.")
             }
          },
          {

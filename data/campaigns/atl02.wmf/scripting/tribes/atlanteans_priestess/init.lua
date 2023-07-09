@@ -1,6 +1,6 @@
 push_textdomain("scenario_atl02.wmf")
 
-dirname = "campaigns/atl02.wmf/scripting/tribes/atlanteans_priestess/"
+local dirname = "campaigns/atl02.wmf/scripting/tribes/atlanteans_priestess/"
 
 wl.Descriptions():new_worker_type {
    name = "atlanteans_priestess",
