@@ -474,6 +474,12 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 
 	const Time& gametime = game().get_gametime();
 	Widelands::PlayerNumber const pn = player_->player_number();
+	BuildingObserver& port_obs = get_building_observer(BuildingAttribute::kPort);
+	bool port_allowed = basic_economy_established || port_obs.cnt_built + port_obs.cnt_under_construction < 1;
+	if (!port_allowed) {
+		game().send_player_cancel_expedition_ship(*so.ship);
+		return;
+	}
 
 	// second we put current spot into expedition visited_spots
 	bool first_time_here = expedition_visited_spots.count(so.ship->get_position().hash()) == 0;
@@ -494,7 +500,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		                  so.ship->get_shipname().c_str(), so.ship->get_position().x,
 		                  so.ship->get_position().y, spot_score);
 
-		// we make a decision based on the score value and random
+		// we make a decision based on the score value and random and basic economy status
 		if (RNG::static_rand(8) < spot_score) {
 			// we build a port here
 			game().send_player_ship_construct_port(*so.ship, so.ship->exp_port_spaces().front());
