@@ -910,8 +910,8 @@ int LuaPlayer::get_ships(lua_State* L) {
 
       **which** can be either a single name or an :class:`array` of names. In the first
       case, the method returns an :class:`array` of all Buildings that the player has of
-      this kind. If **which** is an :class:`array`, the function returns a :class:`table` of
-      ``{name=array_of_buildings}`` pairs.
+      this kind. If **which** is an :class:`array` or "all", the function returns a
+      :class:`table` of ``{name=array_of_buildings}`` pairs.
 
       :arg which: The name of a building or an :class:`array` of building names.
       :type which: :class:`string` or :class:`array`
@@ -928,11 +928,11 @@ int LuaPlayer::get_buildings(lua_State* L) {
 
       **which** can be either a single name or an :class:`array` of names. In the first
       case, the method returns an :class:`array` of all constructionsites that the
-      player has of this kind. If which is an :class:`array`, the function returns a
+      player has of this kind. If which is an :class:`array` or "all", the function returns a
       :class:`table` of ``{name=array_of_constructionsites}`` pairs.
 
       :arg which: The internal name of a constructionsites building or an :class:`array` of
-         building names.
+         building names or "all".
       :type which: :class:`string` or :class:`array`
       :returns: Information about the player's constructionsites,
          see :class:`wl.map.ConstructionSite`.
@@ -1186,13 +1186,15 @@ int LuaPlayer::do_get_buildings(lua_State* L, const bool csites) {
 	// parse_building_list
 	bool return_array = true;
 	if (lua_isstring(L, -1) != 0) {
-		const char* name = luaL_checkstring(L, -1);
-		lua_pop(L, 1);
-		lua_newtable(L);
-		lua_pushuint32(L, 1);
-		lua_pushstring(L, name);
-		lua_rawset(L, -3);
-		return_array = false;
+		const std::string name = luaL_checkstring(L, -1);
+		if (name != "all") {
+			lua_pop(L, 1);
+			lua_newtable(L);
+			lua_pushuint32(L, 1);
+			lua_pushstring(L, name);
+			lua_rawset(L, -3);
+			return_array = false;
+		}
 	}
 
 	std::vector<Widelands::DescriptionIndex> houses;

@@ -156,19 +156,22 @@ void UniqueWindow::move_inside_parent() {
 		return;
 	}
 
-	if (registry_->valid_pos) {
-		constexpr int32_t kMinVisible = 100;
+	// TODO(tothxa): needs refining to handle window size changes (e.g on tab switching)
+	/*
+	if (moved_by_user()) {
+	   constexpr int32_t kMinVisible = 100;
 
-		const bool top_visible = registry_->y < parent->get_inner_h() - kMinVisible;
-		const bool bottom_visible = registry_->y + get_h() > kMinVisible;
-		const bool left_visible = registry_->x < parent->get_inner_w() - kMinVisible;
-		const bool right_visible = registry_->x + get_w() > kMinVisible;
+	   const bool top_visible = registry_->y < parent->get_inner_h() - kMinVisible;
+	   const bool bottom_visible = registry_->y + get_h() > kMinVisible;
+	   const bool left_visible = registry_->x < parent->get_inner_w() - kMinVisible;
+	   const bool right_visible = registry_->x + get_w() > kMinVisible;
 
-		if (top_visible && bottom_visible && left_visible && right_visible) {
-			set_pos(Vector2i(registry_->x, registry_->y));
-			return;
-		}
+	   if (top_visible && bottom_visible && left_visible && right_visible) {
+	      set_pos(Vector2i(registry_->x, registry_->y));
+	      return;
+	   }
 	}
+	*/
 	Window::move_inside_parent();
 }
 

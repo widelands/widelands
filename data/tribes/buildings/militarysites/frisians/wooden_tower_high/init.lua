@@ -1,6 +1,6 @@
 push_textdomain("tribes")
 
-dirname = path.dirname (__file__)
+local dirname = path.dirname (__file__)
 
 wl.Descriptions():new_militarysite_type {
    name = "frisians_wooden_tower_high",

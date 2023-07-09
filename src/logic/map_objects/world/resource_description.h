@@ -30,11 +30,6 @@ namespace Widelands {
 
 class ResourceDescription {
 public:
-	struct EditorPicture {
-		std::string picname;
-		int upper_limit;
-	};
-
 	explicit ResourceDescription(const LuaTable& table);
 
 	/// Returns the in engine name of this resource.
@@ -76,7 +71,7 @@ private:
 	const uint32_t timeout_radius_;
 	ResourceAmount max_amount_;
 	const std::string representative_image_;
-	std::vector<EditorPicture> editor_pictures_;
+	std::vector<std::pair<std::string /* image */, uint32_t /* upper limit */>> editor_pictures_;
 
 	DISALLOW_COPY_AND_ASSIGN(ResourceDescription);
 };
