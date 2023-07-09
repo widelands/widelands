@@ -1,6 +1,6 @@
 [TOC]
 
-## Post-1.1 until [git 51a0dbc](https://github.com/widelands/widelands/commit/51a0dbca21baea2da748b693b67816a293961234)
+## Post-1.1 until [git 1213aab](https://github.com/widelands/widelands/commit/1213aab50200537359e95c33b7424d5ea595f726)
 
 ### Animations, Icons and Overlays
 
@@ -9,6 +9,7 @@
 - Move empty sign on Atlantean mines to make it visible when status labels are shown (#5642)
 - Redesigned Amazon frontiers and flags with more visible playercolour (#5714)
 - Updated Frisian Campaign Portraits (#5737)
+- Add high resolution images for Empire ship (#5950)
 
 
 ### Sounds and Music
@@ -21,6 +22,7 @@
 - Fri05 (#5712)
 - Scenario "Island hopping" fix (#5746)
 - Carry over ship names in Atlantean campaign (#5781)
+- Tutorial 01 fixes (#5909)
 
 
 ### Scripting
@@ -32,10 +34,15 @@
 - Optimize `LuaField` garbage collecting efficiency (#5839)
 - Validate that all tribes possess all special animations (#5862)
 - Fix constructionsite former buildings in Lua `place_building` (#5857)
+- Add "all" to `player:get_buildings()` and `player:get_constructionsites()` (#5988)
+- Cleanup: variable `dirname` is local in all lua files (#5986)
+- Lua scripts can use `wl.Descriptions().building_descriptions` (#5993)
+- Move `lunit.lua` in `test/scripting/` (#5996)
 
 
 ### Maps
 
+- Map Required Widelands Version Check (#5884)
 
 
 ### Add-Ons
@@ -48,6 +55,8 @@
 - Disallow add-ons which are incompatible with the current Widelands version (#5879)
 - Fix add-ons admin dialog Enter key handling (#5763)
 - Turn unguaranteed add-on dependency check assert into a conditional (#5829)
+- Add-Ons Packager: Compute Minimum Widelands Version For Maps (#5905)
+- UI Plugins (#5872)
 
 
 ### Saveloading
@@ -57,6 +66,7 @@
 - Replays: Single-File, Optional Writing, Autodeleting (#5645)
 - Fix Filesystem Errors from ReplayWriter (#5724)
 - Save only used terrains in terrain packet (#5803)
+- Fix Shipyard/PortDock/FleetInterface Load Order Regression (#5928)
 
 
 ### AI
@@ -80,6 +90,11 @@
 - Fix sleep times in production buildings (#5778)
 - Fix player end status handling (#5826)
 - Refactor Game Configuration Flags (#5863)
+- Link ship/ferry yards to fleets and produce ships/ferries as needed (#5912)
+- Fix wild pointer dereference during ship removal (#5966)
+- Win condition Wood Gnome can have several winners (#5952)
+- Count trees for start conditions like Poor Hamlet (#5964)
+- Clean up legacy resource handling code (#6000)
 
 
 ### User Interface
@@ -149,11 +164,25 @@
 - Darken background behind modal windows (#5867)
 - Fix Window::move_out_of_the_way() (#5841)
 - Refine game error handling (#5735)
+- Fix modality and threading issues around `StoryMessageBox` (#5897)
+- More Editbox Accessibility (#5873): Handle double-click, triple-click, Ctrl+Backspace, Ctrl+Delete
+- Minimap Improvements (#5876)
+    - Highlight traffic jams
+    - Highlight attacks
+    - Show artifacts in editor
+    - Fix contrasts between layers
+- Make Main Menu Dropdown Entries a Bigger Click Target (#5902)
+- Unify `EditBox` and `MultilineEditbox` (#5900)
+- Layout ship window before setting fastclick target (#5942)
+- Fix regression in `EditBox::scroll_cursor_into_view` (#5946)
+- Fix Segfault in `FieldActionWindow` (#5982)
+- Revert preventing `move_inside_parent()` to move `UniqueWindow`s with saved position (#5995)
 
 
 ### Internationalization
 
-- String Fixes (#5710, #5782)
+- String Fixes (#5710, #5782, #5999)
+- Capitalisation of tribe names (#5910, #5913, #5916)
 
 
 ### Help and Documentation
@@ -178,6 +207,9 @@
 - Editor immovables menu: Added size to tooltip (#5849)
 - Editor Automatic Tree Placement Tool (#5848)
 - Fix editor painting mode regression (#5856)
+- Z-Order Map Options Window Above Save Map Window (#5956)
+- Editor Tool Random Gap (#5864)
+- Select info tool after opening history window (#6002)
 
 
 ### Graphics Engine
@@ -191,6 +223,9 @@
 - Linkify URLs in Rendered Text (#5870)
 - Scalable Buildhelp Overlays (#5868)
 - Implement padding numbers with digit width space UTF-8 characters (#5883)
+- Remove superfluous `SDL_GetModState()` calls (#5945)
+- Allow lookup of richtext inline images without specifying scale suffix (#5935)
+- Continuous Bob Animations (#5954)
 
 
 ### Networking
@@ -217,6 +252,19 @@
 - Support compilation with musl libc (#5764)
 - Fix Windows Logging for Unit Tests (#5877)
 - Update SDL versioning check scheme
+- Fix Compilation with GCC 13.1 and AppleClang (#5903)
+    - Add missing `#include <cstdint>`
+    - Ignore new false-positive compiler warnings
+    - Fix CMake version check warning
+- Resolve static libraries during configuration (#5914)
+- Disable ignored clang-tidy checks in the config file (#5917)
+- Build vcpkg packages weekly (#5904)
+- Remove hard-coded library paths for MinGW builds (#5921)
+- Cache clang-tidy output (#5922)
+- Enforce use of global vcpkg in CI (#5934)
+- CMakeLists Cleanups for RelWithDebInfo (#5943)
+- CI: Push vcpkg ref only to main repo (#5977)
+- Define `PRIuS` using `PRIuPTR` if available (#5979)
 
 
 ### Other Issues
@@ -227,6 +275,15 @@
 - Add mutexes for Notifications backend (#5715)
 - Add timeout support to regression_test.py and improve output (#5806)
 - Add amazons all buildings test to test suite (#5817)
+- Make `WLApplication::get()` return reference (#5906)
+- Support `SIGUSR1` to toggle verbose output (#5911)
+- Increase regression test suite sleep times (#5918)
+- Translations sync workflow updates:
+    - Disable single-line-diff-skipping in translations update because Transifex timestamps no longer get updated reliably
+    - Skip timestamp-only POT changes during translations update (#5937)
+    - Skip POT-Creation-Date only changes in PO files too (#5941)
+    - Translation update: Exit cleanly when nothing needs to be committed (#5959)
+- Remove unused code from regression_test.py (#5987)
 
 
 ## Release 1.1
