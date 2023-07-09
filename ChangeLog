@@ -1,6 +1,6 @@
 [TOC]
 
-## Post-1.1 until [git 1213aab](https://github.com/widelands/widelands/commit/1213aab50200537359e95c33b7424d5ea595f726)
+## Post-1.1 until [git 734b810](https://github.com/widelands/widelands/commit/734b810dd2b3fd4c285646622f07ff574bc2c76b)
 
 ### Animations, Icons and Overlays
 
@@ -95,6 +95,7 @@
 - Win condition Wood Gnome can have several winners (#5952)
 - Count trees for start conditions like Poor Hamlet (#5964)
 - Clean up legacy resource handling code (#6000)
+- Cleanup failed game state before entering menu after game error (#6004)
 
 
 ### User Interface
