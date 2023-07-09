@@ -123,12 +123,11 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 
 	// getting some base statistics
 	player_ = game().get_player(player_number());
-	uint16_t ports_count = 0;
-	uint16_t shipyards_count = 0;
-	uint16_t expeditions_in_prep = 0;
-	uint16_t expeditions_ready = 0;
-	uint16_t expeditions_in_progress = 0;
-	bool idle_shipyard_stocked = false;
+	ports_count = 0;
+	shipyards_count = 0;
+	expeditions_in_prep = 0;
+	expeditions_ready = 0;
+	idle_shipyard_stocked = false;
 
 	// goes over productionsites and gets status of shipyards
 	for (const ProductionSiteObserver& ps_obs : productionsites) {
@@ -168,13 +167,6 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 					++expeditions_ready;
 				}
 			}
-		}
-	}
-
-	// iterates over all ships
-	for (const ShipObserver& observer : allships) {
-		if (observer.ship->state_is_expedition()) {
-			++expeditions_in_progress;
 		}
 	}
 
@@ -254,11 +246,16 @@ bool DefaultAI::check_ships(const Time& gametime) {
 		// False indicates that we can postpone next call of this function
 		return false;
 	}
+	expeditions_in_progress = 0;
+	warships_count = 0;
 
 	if (!allships.empty()) {
 		// iterating over ships and doing what is needed
 		for (ShipObserver& so : allships) {
 
+			if (so.ship->get_ship_type() == Widelands::ShipType::kWarship) {
+				++warships_count;
+			}
 			const Widelands::ShipStates ship_state = so.ship->get_ship_state();
 
 			// Here we manage duration of expedition and related variables
@@ -272,6 +269,7 @@ bool DefaultAI::check_ships(const Time& gametime) {
 				// - expected_colony_scan
 				// - no_more_expeditions_
 				check_ship_in_expedition(so, gametime);
+				++expeditions_in_progress;
 
 				// We are not in expedition mode (or perhaps building a colonisation port)
 				// so resetting start time

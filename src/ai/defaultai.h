@@ -282,6 +282,14 @@ private:
 	bool marine_main_decisions(const Time&);
 	bool check_ships(const Time&);
 	bool attempt_escape(ShipObserver& so);
+	// variables for seafaring
+	uint16_t ports_count;
+	uint16_t shipyards_count;
+	uint16_t expeditions_in_prep;
+	uint16_t expeditions_ready;
+	uint16_t expeditions_in_progress;
+	uint16_t warships_count;
+	bool idle_shipyard_stocked;
 
 	// finding and owner
 	Widelands::PlayerNumber get_land_owner(const Widelands::Map&, uint32_t) const;
