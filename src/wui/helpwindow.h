@@ -52,6 +52,7 @@ protected:
 
 private:
 	bool load_help(const std::string& type, const std::string& item, bool forward = true);
+	void clicked_back();
 
 	uint32_t height_;
 	Box vbox_, hbox_;

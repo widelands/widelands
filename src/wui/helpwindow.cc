@@ -81,16 +81,22 @@ BuildingHelpWindow::BuildingHelpWindow(InteractiveBase* const parent,
 	vbox_.add(&hbox_);
 	vbox_.add(textarea_, UI::Box::Resizing::kExpandBoth);
 
-	b_back_->sigclicked.connect([this]() {
-		assert(history_.size() > 1);
-		history_.pop_back();
-		auto& last = history_.back();
-		load_help(last.first, last.second, false);
-	});
+	b_back_->sigclicked.connect([this]() { clicked_back(); });
 
 	load_help("building", building_description.name());
 	set_center_panel(&vbox_);
 	initialization_complete();
+}
+
+void BuildingHelpWindow::clicked_back() {
+	assert(history_.size() > 1);
+	history_.pop_back();
+	bool to_self = (SDL_GetModState() & KMOD_CTRL) != 0;
+	auto& last = to_self ? history_.front() : history_.back();
+	while (to_self && history_.size() > 1) {
+		history_.pop_back();
+	}
+	load_help(last.first, last.second, false);
 }
 
 bool BuildingHelpWindow::load_help(const std::string& type, const std::string& item, bool forward) {
