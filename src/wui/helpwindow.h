@@ -23,7 +23,9 @@
 
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "ui_basic/multilinetextarea.h"
+#include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
+#include "wui/interactive_base.h"
 
 class LuaInterface;
 
@@ -35,7 +37,7 @@ namespace UI {
  */
 class BuildingHelpWindow : public UI::UniqueWindow {
 public:
-	BuildingHelpWindow(Panel* parent,
+	BuildingHelpWindow(InteractiveBase* parent,
 	                   UI::UniqueWindow::Registry& reg,
 	                   const Widelands::BuildingDescr& building_description,
 	                   const Widelands::TribeDescr& tribe,
@@ -43,8 +45,22 @@ public:
 	                   uint32_t width = 300,
 	                   uint32_t height = 400);
 
+protected:
+	void handle_hyperlink(const std::string& action) override;
+
+	InteractiveBase* const parent_;
+
 private:
-	std::unique_ptr<MultilineTextarea> textarea_;
+	bool load_help(const std::string& type, const std::string& item, bool forward = true);
+
+	uint32_t height_;
+	Box vbox_, hbox_;
+	Textarea* titlearea_;
+	Button* b_back_;
+	MultilineTextarea* textarea_;
+	LuaInterface* const lua_;
+	const Widelands::TribeDescr& tribe_;
+	std::vector<std::pair<std::string, std::string>> history_;
 };
 
 }  // namespace UI
