@@ -110,7 +110,7 @@ bool BuildingHelpWindow::load_help(const std::string& type, const std::string& i
 		textarea_->set_text(as_richtext(return_table->get_string("text")));
 		titlearea_->set_text(return_table->get_string("title"));
 		if (forward) {
-			history_.emplace_back(std::make_pair(type, item));
+			history_.emplace_back(type, item);
 		}
 		hbox_.set_visible(history_.size() > 1);
 		textarea_->set_size(
