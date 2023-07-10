@@ -475,6 +475,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 	const Time& gametime = game().get_gametime();
 	Widelands::PlayerNumber const pn = player_->player_number();
 	BuildingObserver& port_obs = get_building_observer(BuildingAttribute::kPort);
+	// Check whether a port is allowed to help the AI with "New World" start condition
 	bool port_allowed = basic_economy_established || port_obs.cnt_built + port_obs.cnt_under_construction < 1;
 	if (!port_allowed) {
 		game().send_player_cancel_expedition_ship(*so.ship);
