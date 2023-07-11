@@ -395,6 +395,7 @@ void EditorInteractive::add_tool_menu() {
 	              shortcut_string_for(KeyboardShortcut::kEditorToolHistory, false));
 	tool_windows_.toolhistory.open_window = [this] {
 		new EditorToolhistoryOptionsMenu(*this, tools()->tool_history, tool_windows_.toolhistory);
+		select_tool(tools()->info, EditorTool::First);
 	};
 
 	toolmenu_.selected.connect([this] { tool_menu_selected(toolmenu_.get_selected()); });
@@ -730,6 +731,9 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		}
 	}
 
+	std::map<std::pair<Widelands::DescriptionIndex, Widelands::ResourceAmount>, const Image*>
+	   resource_images_cache;
+
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
 		if (field.obscured_by_slope) {
@@ -753,16 +757,20 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		}
 
 		// Draw resource overlay.
-		uint8_t const amount = field.fcoords.field->get_resources_amount();
-		if (get_display_flag(dfShowResources) && amount > 0) {
-			const std::string& immname = ebase.descriptions()
-			                                .get_resource_descr(field.fcoords.field->get_resources())
-			                                ->editor_image(amount);
-			if (!immname.empty()) {
-				const auto* pic = g_image_cache->get(immname);
-				blit_field_overlay(
-				   &dst, field, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
+		if (get_display_flag(dfShowResources) && field.fcoords.field->get_resources_amount() > 0) {
+			std::pair<Widelands::DescriptionIndex, Widelands::ResourceAmount> cachekey(
+			   field.fcoords.field->get_resources(), field.fcoords.field->get_resources_amount());
+			auto it = resource_images_cache.find(cachekey);
+			if (it == resource_images_cache.end()) {
+				it = resource_images_cache
+				        .emplace(cachekey, g_image_cache->get(ebase.descriptions()
+				                                                 .get_resource_descr(cachekey.first)
+				                                                 ->editor_image(cachekey.second)))
+				        .first;
 			}
+
+			blit_field_overlay(&dst, field, it->second,
+			                   Vector2i(it->second->width() / 2, it->second->height() / 2), scale);
 		}
 
 		const Widelands::NodeCaps nodecaps =

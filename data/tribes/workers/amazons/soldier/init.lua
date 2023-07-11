@@ -1,6 +1,6 @@
 push_textdomain("tribes")
 
-dirname = path.dirname (__file__)
+local dirname = path.dirname (__file__)
 
 -- convenience definitions so we don´t have to repeat this table for every single entry below
 all_levels_ama = {
