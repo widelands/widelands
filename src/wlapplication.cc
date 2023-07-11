@@ -72,6 +72,7 @@
 #include "network/gamehost.h"
 #include "network/host_game_settings_provider.h"
 #include "network/internet_gaming.h"
+#include "network/net_addons.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
@@ -130,8 +131,8 @@ namespace {
 void terminate(int /*unused*/) {
 	// The logger can already be shut down, so we use cout
 	std::cout
-	   << "Waited 5 seconds to close audio. There are some problems here, so killing Widelands."
-	      " Update your sound driver and/or SDL to fix this problem\n";
+	   << "Waited 5 seconds to close audio and network. There are some problems here, "
+	      "so killing Widelands. Update your sound driver and/or SDL to fix this problem.\n";
 	raise(SIGKILL);
 }
 #endif
@@ -1227,6 +1228,8 @@ void WLApplication::shutdown_hardware() {
 	g_sh = nullptr;
 
 	SDL_QuitSubSystem(SDL_INIT_TIMER | SDL_INIT_VIDEO | SDL_INIT_JOYSTICK);
+
+	AddOns::cleanup_abandoned_hung_threads();
 }
 
 /**

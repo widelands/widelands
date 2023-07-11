@@ -74,6 +74,7 @@
 #include "ui_basic/progresswindow.h"
 #include "ui_basic/toolbar_setup.h"
 #include "ui_fsmenu/addons/login_box.h"
+#include "ui_fsmenu/addons/manager.h"
 #include "ui_fsmenu/addons/progress.h"
 #include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
@@ -1439,7 +1440,7 @@ void EditorInteractive::publish_map() {
 	}
 
 	/* Ask the user to log in. */
-	AddOns::NetAddons net;
+	AddOns::NetAddons net(AddOnsUI::create_hangup_function(*this, UI::WindowStyle::kWui, net));
 	AddOnsUI::AddOnsLoginBox login(*this, UI::WindowStyle::kWui);
 	if (login.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 		return;

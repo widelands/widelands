@@ -108,8 +108,6 @@ const std::map<unsigned, std::function<AddOnQuality()>> AddOnQuality::kQualities
 	                        _("This add-on has been decorated for its remarkably high quality."));
     }}};
 
-struct OperationCancelledByUserException : std::exception {};
-
 AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
    : UI::UniqueWindow(&fsmm,
                       UI::WindowStyle::kFsMenu,
@@ -314,7 +312,8 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
               /** TRANSLATORS: This button allows the user to send a message to the Widelands
                  Development Team */
               _("Contact us…")),
-     server_name_(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kWarning, "", UI::Align::kRight) {
+     server_name_(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kWarning, "", UI::Align::kRight),
+     network_handler_(create_hangup_function(fsmm, UI::WindowStyle::kFsMenu, network_handler_)) {
 
 	dev_box_.set_force_scrolling(true);
 	dev_box_.add(
@@ -1376,7 +1375,7 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 			   w.progressbar().set_state(l);
 			   do_redraw_now();
 			   if (w.is_dying()) {
-				   throw OperationCancelledByUserException();
+				   throw AddOns::OperationCancelledByUserException();
 			   }
 		   },
 		   [&w, &nr_files](const std::string& /* unused */, const int64_t l) {
@@ -1387,7 +1386,7 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 			*remote = net().fetch_one_remote(remote->internal_name);
 		}
 		rebuild(false);
-	} catch (const OperationCancelledByUserException&) {
+	} catch (const AddOns::OperationCancelledByUserException&) {
 		log_info("upload addon %s cancelled by user", addon->internal_name.c_str());
 	} catch (const std::exception& e) {
 		log_err("upload addon %s: %s", addon->internal_name.c_str(), e.what());
@@ -1431,11 +1430,11 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 				                     w.progressbar().set_state(l);
 				                     do_redraw_now();
 				                     if (w.is_dying()) {
-					                     throw OperationCancelledByUserException();
+					                     throw AddOns::OperationCancelledByUserException();
 				                     }
 			                     });
 			success = true;
-		} catch (const OperationCancelledByUserException&) {
+		} catch (const AddOns::OperationCancelledByUserException&) {
 			log_info("install addon %s cancelled by user", remote->internal_name.c_str());
 		} catch (const std::exception& e) {
 			log_err("install addon %s: %s", remote->internal_name.c_str(), e.what());
@@ -1493,7 +1492,7 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 			   w.progressbar().set_state(l);
 			   do_redraw_now();
 			   if (w.is_dying()) {
-				   throw OperationCancelledByUserException();
+				   throw AddOns::OperationCancelledByUserException();
 			   }
 		   },
 		   [&w, &nr_translations](const std::string& /* unused */, const int64_t l) {
@@ -1513,7 +1512,7 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 		Profile prof(kAddOnLocaleVersions.c_str());
 		prof.pull_section("global").set_natural(remote->internal_name.c_str(), remote->i18n_version);
 		prof.write(kAddOnLocaleVersions.c_str(), false);
-	} catch (const OperationCancelledByUserException&) {
+	} catch (const AddOns::OperationCancelledByUserException&) {
 		log_info("install translations for %s cancelled by user", remote->internal_name.c_str());
 	} catch (const std::exception& e) {
 		log_err("install translations for %s: %s", remote->internal_name.c_str(), e.what());
