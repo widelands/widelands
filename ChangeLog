@@ -1,6 +1,6 @@
 [TOC]
 
-## Post-1.1 until [git 734b810](https://github.com/widelands/widelands/commit/734b810dd2b3fd4c285646622f07ff574bc2c76b)
+## Post-1.1 until [git f28ac72](https://github.com/widelands/widelands/commit/f28ac7259b323ed97a21e3c0466894a59e75d631)
 
 ### Animations, Icons and Overlays
 
@@ -195,6 +195,7 @@
 - Further fixes of economy gametips (#5711)
 - Fix performance text in encyclopedia and sleep times in production buildings where the workers need some experience (#5768)
 - Update keyboard controls help and generate it semi-automatically (#5717)
+- Follow links in building help window (#6003)
 
 
 ### Editor
@@ -266,6 +267,7 @@
 - CMakeLists Cleanups for RelWithDebInfo (#5943)
 - CI: Push vcpkg ref only to main repo (#5977)
 - Define `PRIuS` using `PRIuPTR` if available (#5979)
+- Set fixed MSVC toolset version (#6007)
 
 
 ### Other Issues
