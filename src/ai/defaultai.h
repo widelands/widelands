@@ -79,7 +79,7 @@ struct DefaultAI : ComputerPlayer {
 	enum class WalkSearch : uint8_t { kAnyPlayer, kOtherPlayers, kEnemy };
 	enum class WoodPolicy : uint8_t { kDismantleRangers, kStopRangers, kAllowRangers };
 	enum class NewShip : uint8_t { kBuilt, kFoundOnLoad };
-	enum class FleetStatus : uint8_t { kNeedShip = 0, kEnoughShips = 1, kDoNothing = 2 };
+	// enum class FleetStatus : uint8_t { kNeedShip = 0, kEnoughShips = 1, kDoNothing = 2 };
 	enum class PerfEvaluation : uint8_t { kForConstruction, kForDismantle };
 	enum class BasicEconomyBuildingStatus : uint8_t { kEncouraged, kDiscouraged, kNeutral, kNone };
 
@@ -300,25 +300,6 @@ private:
 	// Remove a member from std::deque
 	template <typename T> bool remove_from_dqueue(std::deque<T const*>&, T const*);
 
-	// Functions used for seafaring / defaultai_seafaring.cc
-	Widelands::IslandExploreDirection randomExploreDirection();
-	void gain_ship(Widelands::Ship&, NewShip);
-	void check_ship_in_expedition(ShipObserver&, const Time&);
-	void expedition_management(ShipObserver&);
-	// considering trees, rocks, mines, water, fish for candidate for colonization (new port)
-	uint8_t spot_scoring(Widelands::Coords candidate_spot);
-	bool marine_main_decisions(const Time&);
-	bool check_ships(const Time&);
-	bool attempt_escape(ShipObserver& so);
-	// variables for seafaring
-	uint16_t ports_count;
-	uint16_t shipyards_count;
-	uint16_t expeditions_in_prep;
-	uint16_t expeditions_ready;
-	uint16_t expeditions_in_progress;
-	uint16_t warships_count;
-	bool idle_shipyard_stocked;
-
 	// finding and owner
 	Widelands::PlayerNumber get_land_owner(const Widelands::Map&, uint32_t) const;
 
@@ -368,7 +349,6 @@ private:
 	std::deque<MilitarySiteObserver> militarysites;
 	std::deque<WarehouseSiteObserver> warehousesites;
 	std::deque<TrainingSiteObserver> trainingsites;
-	std::deque<ShipObserver> allships;
 	std::vector<WareObserver> wares;
 	// This is a vector that is filled up on initiatlization
 	// and no items are added/removed afterwards
@@ -442,23 +422,43 @@ private:
 	   "ax",      "armor",  "boots",  "garment", "helm",  "padded", "sword",
 	   "trident", "tabard", "shield", "mask",    "spear", "warrior"};
 
-	// seafaring related
+	std::vector<std::vector<int16_t>> AI_military_matrix;
+	std::vector<int16_t> AI_military_numbers;
+
+	uint16_t build_material_mines_count = 0;
+	bool ai_training_mode_ = false;
+
+	// ------------- Seafaring -----------------------------
+	// Functions used for seafaring / defaultai_seafaring.cc
+	Widelands::IslandExploreDirection randomExploreDirection();
+	void gain_ship(Widelands::Ship&, NewShip);
+	void check_ship_in_expedition(ShipObserver&, const Time&);
+	void expedition_management(ShipObserver&);
+	// considering trees, rocks, mines, water, fish for candidate for colonization (new port)
+	uint8_t spot_scoring(Widelands::Coords candidate_spot);
+	bool marine_main_decisions(const Time&);
+	bool check_ships(const Time&);
+	bool attempt_escape(ShipObserver& so);
+	// seafaring related variables
 	enum { kReprioritize, kStopShipyard, kStartShipyard };
 	static Time last_seafaring_check_;
-	// False by default, until Map::allows_seafaring() is true
-	static bool map_allows_seafaring_;
+	static bool map_allows_seafaring_; // False by default, until Map::allows_seafaring() = true
 	bool potential_wrong_shipyard_ = false;
 	uint32_t expedition_ship_;
 	Duration expedition_max_duration;
 	std::vector<int16_t> marine_task_queue;
 	std::unordered_set<uint32_t> expedition_visited_spots;
-
-	std::vector<std::vector<int16_t>> AI_military_matrix;
-	std::vector<int16_t> AI_military_numbers;
-
-	uint16_t buil_material_mines_count = 0;
-
-	bool ai_training_mode_ = false;
+	uint16_t ports_count;
+	uint16_t shipyards_count;
+	uint16_t expeditions_in_prep;
+	uint16_t expeditions_ready;
+	uint16_t expeditions_in_progress;
+	uint16_t warships_count;
+	uint16_t tradeships_count;
+	bool idle_shipyard_stocked;
+	bool warship_needed{false};
+	bool tradeship_refit_needed{false};
+	std::deque<ShipObserver> allships;
 
 	// Notification subscribers
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>>

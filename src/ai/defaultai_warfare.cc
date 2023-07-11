@@ -1405,7 +1405,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo, cons
 	inputs[107] = stocked_wood_level < 25 ? -3 * (size - 1) : 0;
 	inputs[108] = stocked_wood_level < 25 ? -5 * size : 0;
 	inputs[109] = stocked_wood_level < 25 ? -5 * (size - 1) : 0;
-	if (!bo.critical_building_material.empty() && buil_material_mines_count == 0) {
+	if (!bo.critical_building_material.empty() && build_material_mines_count == 0) {
 		inputs[110] = -5;
 		inputs[111] = -2;
 		inputs[111] = -10;
@@ -1430,10 +1430,10 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo, cons
 		inputs[123] = size * -2;
 	}
 	if (!basic_economy_established && !bo.critical_building_material.empty()) {
-		inputs[124] = (size - buil_material_mines_count) * -5;
-		inputs[125] = (size - buil_material_mines_count) * -3;
-		inputs[126] = (size - buil_material_mines_count) * -4;
-		inputs[127] = (size - buil_material_mines_count) * -2;
+		inputs[124] = (size - build_material_mines_count) * -5;
+		inputs[125] = (size - build_material_mines_count) * -3;
+		inputs[126] = (size - build_material_mines_count) * -4;
+		inputs[127] = (size - build_material_mines_count) * -2;
 	}
 
 	for (int i = 0; i < 4 * kFNeuronBitSize; i = i + 1) {

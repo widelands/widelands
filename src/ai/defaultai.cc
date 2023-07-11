@@ -395,7 +395,7 @@ void DefaultAI::think() {
 		case SchedulerTaskId::kCheckShips:
 			// if function returns false, we can postpone next call
 			{
-				const uint8_t wait_multiplier = (check_ships(gametime)) ? 1 : 5;
+				const uint8_t wait_multiplier = (check_ships(gametime)) ? 1 : 10;
 				set_taskpool_task_time(
 				   gametime + kShipCheckInterval * wait_multiplier, SchedulerTaskId::kCheckShips);
 			}
@@ -403,7 +403,7 @@ void DefaultAI::think() {
 		case SchedulerTaskId::KMarineDecisions:
 			// if function returns false, we can postpone for next call
 			{
-				const uint8_t wait_multiplier = (marine_main_decisions(gametime)) ? 1 : 5;
+				const uint8_t wait_multiplier = (marine_main_decisions(gametime)) ? 1 : 10;
 				set_taskpool_task_time(gametime + kMarineDecisionInterval * wait_multiplier,
 				                       SchedulerTaskId::KMarineDecisions);
 			}
@@ -6717,7 +6717,7 @@ void DefaultAI::gain_building(Widelands::Building& b, const bool found_on_load) 
 			++mines_per_type[bo.mines].finished;
 
 			if (bo.is(BuildingAttribute::kBuildingMatProducer)) {
-				++buil_material_mines_count;
+				++build_material_mines_count;
 			}
 
 			set_inputs_to_zero(mines_.back());
@@ -6833,8 +6833,8 @@ void DefaultAI::lose_building(const Widelands::Building& b) {
 			--mines_per_type[bo.mines].finished;
 
 			if (bo.is(BuildingAttribute::kBuildingMatProducer)) {
-				assert(buil_material_mines_count > 0);
-				++buil_material_mines_count;
+				assert(build_material_mines_count > 0);
+				++build_material_mines_count;
 			}
 
 		} else if (bo.type == BuildingObserver::Type::kMilitarysite) {

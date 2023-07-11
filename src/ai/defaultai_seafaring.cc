@@ -171,8 +171,8 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		}
 	}
 
-	assert(allships.size() >= expeditions_in_progress);
-	bool ship_free = allships.size() - expeditions_in_progress > 0;
+	assert(tradeships_count >= expeditions_in_progress);
+	bool ship_free = tradeships_count - expeditions_in_progress > 0;
 
 	/* Now we decide whether we have enough ships or need to build another:
 	 * - We always need at least one ship in transport mode
@@ -182,7 +182,8 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	const bool need_ship =
 	   ports_count > 0 && shipyards_count > 0 && basic_economy_established &&
 	   (!ship_free || persistent_data->ships_utilization > 5000 ||
-	    static_cast<int>(allships.size()) - ports_count - expeditions_in_progress < 0);
+	    static_cast<int>(tradeships_count) - ports_count - expeditions_in_progress < 0 ||
+		static_cast<int>(ports_count) * 2 - warships_count > 0); 
 
 	// goes over productionsites finds shipyards and configures them
 	for (const ProductionSiteObserver& ps_obs : productionsites) {
@@ -220,6 +221,14 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		}
 	}
 
+	if (static_cast<int>(ports_count) * 2 - warships_count > 0 &&
+	     tradeships_count - expeditions_in_progress > 1) {
+		warship_needed = true;
+	}
+	if (!ship_free && warships_count > 0) {
+		tradeship_refit_needed = true;
+	}
+	
 	// starting an expedition? if yes, find a port and order it to start an expedition
 	if (ports_count > 0 && expeditions_in_progress == 0 && expeditions_in_prep == 0 &&
 	    !persistent_data->no_more_expeditions && ship_free && basic_economy_established) {
@@ -249,6 +258,7 @@ bool DefaultAI::check_ships(const Time& gametime) {
 	}
 	expeditions_in_progress = 0;
 	warships_count = 0;
+	tradeships_count = 0;
 
 	if (!allships.empty()) {
 		// iterating over ships and doing what is needed
@@ -256,6 +266,19 @@ bool DefaultAI::check_ships(const Time& gametime) {
 
 			if (so.ship->get_ship_type() == Widelands::ShipType::kWarship) {
 				++warships_count;
+				if (tradeship_refit_needed) {
+					game().send_player_refit_ship(*so.ship, Widelands::ShipType::kTransport);
+					--warships_count;
+					tradeship_refit_needed = false;
+				}
+				
+			} else {
+				++tradeships_count;
+				if (warship_needed) {
+					game().send_player_refit_ship(*so.ship, Widelands::ShipType::kWarship);
+					--tradeships_count;
+					warship_needed = false;
+				}
 			}
 			const Widelands::ShipStates ship_state = so.ship->get_ship_state();
 
