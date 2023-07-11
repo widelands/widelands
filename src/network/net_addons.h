@@ -38,10 +38,12 @@ struct AsyncIOWrapper;
 void cleanup_abandoned_hung_threads();
 
 struct NetAddons {
-	explicit NetAddons(HangupFn fn) : hangup_fn_(fn) {
-	}
+	NetAddons() = default;
 	~NetAddons();
 
+	void set_hangup_fn(HangupFn fn) {
+		hangup_fn_ = fn;
+	}
 	void interrupt();
 
 	[[nodiscard]] bool is_admin() const {
@@ -108,7 +110,7 @@ private:
 	void write_to_server(const std::string&);
 	void write_to_server(const char*, size_t);
 
-	HangupFn hangup_fn_;
+	HangupFn hangup_fn_{nullptr};
 	AsyncIOWrapper* async_io_wrapper_{nullptr};
 
 	std::string last_username_, last_password_;

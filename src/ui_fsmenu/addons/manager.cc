@@ -312,8 +312,9 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
               /** TRANSLATORS: This button allows the user to send a message to the Widelands
                  Development Team */
               _("Contact us…")),
-     server_name_(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kWarning, "", UI::Align::kRight),
-     network_handler_(create_hangup_function(fsmm, UI::WindowStyle::kFsMenu, network_handler_)) {
+     server_name_(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kWarning, "", UI::Align::kRight) {
+	network_handler_.set_hangup_fn(
+	   create_hangup_function(fsmm, UI::WindowStyle::kFsMenu, network_handler_));
 
 	dev_box_.set_force_scrolling(true);
 	dev_box_.add(
