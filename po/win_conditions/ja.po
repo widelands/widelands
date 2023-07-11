@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2023-07-06 03:09+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
 "Last-Translator: tamanegi, 2018-2019\n"
 "Language-Team: Japanese (http://app.transifex.com/widelands/widelands/language/ja/)\n"
@@ -372,3 +372,8 @@ msgstr "%1$sは%2$sを所有していました。"
 #: ../../data/scripting/win_conditions/wood_gnome.lua:98
 msgid "The winner is %1$s with %2$s."
 msgstr "勝者は%2$sを所有している%1$sです。"
+
+#: ../../data/scripting/win_conditions/wood_gnome.lua:101
+#, lua-format
+msgid "The winners had %s."
+msgstr ""

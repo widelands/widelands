@@ -211,9 +211,6 @@ public:
 			//  even for triangles that the player does not see (it is the
 			//  darkening that actually hides the ground from the user).
 			terrains.store(Widelands::Field::Terrains{0, 0});
-
-			time_triangle_last_surveyed[0] = Time();
-			time_triangle_last_surveyed[1] = Time();
 		}
 
 		~Field() {
@@ -305,25 +302,6 @@ public:
 		}
 
 		/**
-		 * The last time when this player surveyed the respective triangle
-		 * geologically. Indexed by TCoords::TriangleIndex. A geologic survey is a
-		 * thorough investigation. Therefore it is considered impossible to have
-		 * knowledge about the resources of a triangle without having knowledge
-		 * about each of the surrounding nodes:
-		 *
-		 *     geologic information about a triangle =>
-		 *         each neighbouring node has been seen
-		 *
-		 * and the contrapositive:
-		 *
-		 *     some neighbouring node has never been seen =>
-		 *         no geologic information about the triangle
-		 *
-		 * Is EditorGameBase::Never() when never surveyed.
-		 */
-		Time time_triangle_last_surveyed[2];
-
-		/**
 		 * The last time when this player saw this node.
 		 * Only valid when \ref seeing is kPreviouslySeen, i.e. the player has previously seen
 		 * this node but can't see it right now.
@@ -388,15 +366,6 @@ public:
 		 * Only valid when this player has seen this node.
 		 */
 		PlayerNumber owner{0U};
-
-		/**
-		 * The amount of resource at each of the triangles, as far as this player
-		 * knows.
-		 * The d component is only valid when time_last_surveyed[0] != Never().
-		 * The r component is only valid when time_last_surveyed[1] != Never().
-		 */
-		// TODO(unknown): Check this on access, at least in debug builds
-		Widelands::Field::ResourceAmounts resource_amounts;
 
 	private:
 		DISALLOW_COPY_AND_ASSIGN(Field);

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-03 03:04+0000\n"
+"POT-Creation-Date: 2023-07-08 03:03+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2023\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -44,25 +44,25 @@ msgstr "Welke vun dienen Anfangs-Husen sünd nich baut worden, wiel keen Rüümt
 msgid "Not enough space"
 msgstr "Nich noog Platz"
 
-#: ../../data/scripting/infrastructure.lua:281
+#: ../../data/scripting/infrastructure.lua:286
 msgid "No rocks nearby"
 msgstr "Keene Stenen dicht bi"
 
-#: ../../data/scripting/infrastructure.lua:281
+#: ../../data/scripting/infrastructure.lua:286
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
 msgstr "In de Naberskupp vun diener Anfangs-Stee gifft dat keene Stenen. Daarum kriggst du mehr Mineraale, um diene Weertskupp uptobauen."
 
-#: ../../data/scripting/infrastructure.lua:286
-msgid "No trees nearby"
-msgstr "Keene Bomen dicht bi"
+#: ../../data/scripting/infrastructure.lua:292
+msgid "Not enough trees nearby"
+msgstr "Nich genoog Bomen dicht bi"
 
-#: ../../data/scripting/infrastructure.lua:286
+#: ../../data/scripting/infrastructure.lua:292
 msgid ""
-"There are no trees near to your starting position. Therefore, you receive "
-"extra resources for bootstrapping your economy."
-msgstr "In de Naberskupp vun diener Anfangs-Stee gifft dat keene Bomen. Daarum kriggst du mehr Mineraale, um diene Weertskupp uptobauen."
+"There are not enough trees near to your starting position. Therefore, you "
+"receive extra resources for bootstrapping your economy."
+msgstr "In de Naberskupp vun diener Anfangs-Stee gifft dat nich genoog Bomen. Daarum kriggst du mehr Mineraale, um diene Weertskupp uptobauen."
 
 #: ../../data/scripting/messages.lua:66 ../../data/scripting/messages.lua:68
 #: ../../src/wui/game_message_menu.cc:69 ../../src/wui/game_summary.cc:113
@@ -2383,12 +2383,12 @@ msgid "No Shore"
 msgstr "Keene Küst"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:1244
-msgid "Ship Yard Without Shore"
+msgid "Shipyard Without Shore"
 msgstr "Warft sünner Küst"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:1245
 msgid ""
-"Your ship yard has not been built close enough to a shore. It will not be "
+"Your shipyard has not been built close enough to a shore. It will not be "
 "able to build ships."
 msgstr "Diene Warft is nicht dicht genoog bi eener Küst baut worden. Se kann keene Schippen bauen."
 
@@ -3563,7 +3563,7 @@ msgstr "Widelands kunn dat stedenwies Nett nich bruken. Wahrschienelk bedrifft e
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1351
+#: ../../src/scripting/lua_game.cc:1353
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -8288,7 +8288,7 @@ msgstr "Faste Dingen"
 msgid "Mark this immovable for timely removal by a suited worker"
 msgstr "Deeses fast Ding bold vun eenem gadelk Arbeider wegmaken laten"
 
-#: ../../src/wui/fieldaction.cc:415 ../../src/wui/fieldaction.cc:538
+#: ../../src/wui/fieldaction.cc:415 ../../src/wui/fieldaction.cc:544
 msgid "Build road"
 msgstr "Bau eene Straat"
 
@@ -8332,67 +8332,67 @@ msgstr "Straat wegmaken"
 msgid "Destroy a waterway"
 msgstr "Priel wegmaken"
 
-#: ../../src/wui/fieldaction.cc:509
+#: ../../src/wui/fieldaction.cc:512
 msgid "Configure this ocean’s ship fleet"
 msgstr "Instellens för de Schipp-Flott von deeser See"
 
-#: ../../src/wui/fieldaction.cc:516
+#: ../../src/wui/fieldaction.cc:522
 msgid "Configure this ocean’s ferry fleet"
 msgstr "Instellens för de Fähren-Flott von deeser See"
 
-#: ../../src/wui/fieldaction.cc:523
+#: ../../src/wui/fieldaction.cc:529
 msgid "Watch field in a separate window"
 msgstr "Deese Stee in eenem nejen Fenster beluren"
 
-#: ../../src/wui/fieldaction.cc:528
+#: ../../src/wui/fieldaction.cc:534
 msgid "Pinned note"
 msgstr "Faste Anmarken"
 
-#: ../../src/wui/fieldaction.cc:533
+#: ../../src/wui/fieldaction.cc:539
 msgid "Show debug window"
 msgstr "Unnersöken-Fenster wiesen"
 
-#: ../../src/wui/fieldaction.cc:541 ../../src/wui/watchwindow.cc:85
+#: ../../src/wui/fieldaction.cc:547 ../../src/wui/watchwindow.cc:85
 msgid "Watch"
 msgstr "Beluren"
 
-#: ../../src/wui/fieldaction.cc:658
+#: ../../src/wui/fieldaction.cc:664
 msgid "Build mines"
 msgstr "Bau een Bargwark"
 
-#: ../../src/wui/fieldaction.cc:672 ../../src/wui/fieldaction.cc:698
+#: ../../src/wui/fieldaction.cc:678 ../../src/wui/fieldaction.cc:704
 msgid "Build flag"
 msgstr "Fahn upstellen"
 
-#: ../../src/wui/fieldaction.cc:676
+#: ../../src/wui/fieldaction.cc:682
 msgid "Cancel road"
 msgstr "Straat nich bauen"
 
-#: ../../src/wui/fieldaction.cc:678
+#: ../../src/wui/fieldaction.cc:684
 msgid "Go to road"
 msgstr "Tur Straat gahn"
 
-#: ../../src/wui/fieldaction.cc:686
+#: ../../src/wui/fieldaction.cc:692
 msgid "Cancel road and start building waterway"
 msgstr "Straat nich bauen, Priel bauen"
 
-#: ../../src/wui/fieldaction.cc:690
+#: ../../src/wui/fieldaction.cc:696
 msgid "Build roads"
 msgstr "Straten bauen"
 
-#: ../../src/wui/fieldaction.cc:702
+#: ../../src/wui/fieldaction.cc:708
 msgid "Cancel waterway"
 msgstr "Priel nich bauen"
 
-#: ../../src/wui/fieldaction.cc:704
+#: ../../src/wui/fieldaction.cc:710
 msgid "Go to waterway"
 msgstr "Tum Priel gahn"
 
-#: ../../src/wui/fieldaction.cc:707
+#: ../../src/wui/fieldaction.cc:713
 msgid "Cancel waterway and start building road"
 msgstr "Priel nich bauen, Straat bauen"
 
-#: ../../src/wui/fieldaction.cc:710
+#: ../../src/wui/fieldaction.cc:716
 msgid "Build waterways"
 msgstr "Prielen bauen"
 
