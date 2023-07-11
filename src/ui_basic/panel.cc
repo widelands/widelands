@@ -1714,7 +1714,7 @@ NamedPanel::NamedPanel(Panel* const nparent,
      name_(name),
      hyperlink_subscriber_(
         Notifications::subscribe<NoteHyperlink>([this](const NoteHyperlink& note) {
-	        if (name_ == note.target) {
+	        if (starts_with(name_, note.target)) {
 		        handle_hyperlink(note.action);
 	        }
         })) {

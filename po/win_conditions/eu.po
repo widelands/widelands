@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2023-07-06 03:09+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
 "Last-Translator: Mikel Alzibar <mikelalzibar@gmail.com>, 2016,2021\n"
 "Language-Team: Basque (http://app.transifex.com/widelands/widelands/language/eu/)\n"
@@ -381,3 +381,8 @@ msgstr "%1$s-k %2$s izan du."
 #: ../../data/scripting/win_conditions/wood_gnome.lua:98
 msgid "The winner is %1$s with %2$s."
 msgstr "Irabazlea %1$s da %2$s-rekin."
+
+#: ../../data/scripting/win_conditions/wood_gnome.lua:101
+#, lua-format
+msgid "The winners had %s."
+msgstr ""

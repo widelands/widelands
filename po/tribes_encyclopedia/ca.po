@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-05 02:59+0000\n"
+"POT-Creation-Date: 2023-07-08 03:03+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Juanjo, 2015-2023\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
@@ -9820,11 +9820,11 @@ msgstr "Aquesta és la millor i la més afilada arma que produeixen els armers d
 #: ../../data/tribes/initialization/empire/units.lua:560
 msgctxt "empire_ware"
 msgid ""
-"The helmet is the basic defense of a warrior. It is produced in an armor "
+"The helmet is the basic defense of a soldier. It is produced in an armor "
 "smithy. In combination with a wooden spear, it is the equipment to fit out "
 "young soldiers. Helmets are also used in training camps – together with food"
 " – to train soldiers from health level 0 to level 1."
-msgstr "Un casc és l’eina bàsica per protegir els soldats. El produeix el taller d’armadures. En combinació amb una llança de fusta, és l’equipament necessari per reclutar un soldat. Els cascos també s’utilitzen en camps d’entrenament, juntament amb menjar, per entrenar el nivell de salut dels soldats de nivell 0 a nivell 1."
+msgstr ""
 
 #. TRANSLATORS: Helptext for an Empire ware: Armor
 #: ../../data/tribes/initialization/empire/units.lua:569
@@ -14103,9 +14103,9 @@ msgstr "Produeix armes avançades i cascos daurats pels soldats."
 msgctxt "frisians_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce one "
-"broadswordsword in %1$s on average, one double-edged sword in %2$s on "
-"average and one golden helmet in %3$s on average."
-msgstr "Si s'entreguen tots els béns necessaris a temps, aquest edifici pot produir un sabre cada %1$s de mitjana, una espasa de doble fil cada %2$s de mitjana i un casc daurat cada %3$s de mitjana."
+"broadsword in %1$s on average, one double-edged sword in %2$s on average and"
+" one golden helmet in %3$s on average."
+msgstr ""
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Sewing Room
 #: ../../data/tribes/initialization/frisians/units.lua:1825
