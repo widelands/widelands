@@ -129,7 +129,7 @@ struct HangupWindow : public UI::Window {
 		initialization_complete();
 	}
 
-	~HangupWindow() {
+	~HangupWindow() override {
 		windows.erase(id_);
 	}
 

@@ -74,7 +74,6 @@
 #include "ui_basic/progresswindow.h"
 #include "ui_basic/toolbar_setup.h"
 #include "ui_fsmenu/addons/login_box.h"
-#include "ui_fsmenu/addons/manager.h"
 #include "ui_fsmenu/addons/progress.h"
 #include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
