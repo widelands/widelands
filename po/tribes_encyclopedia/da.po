@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-05 02:59+0000\n"
+"POT-Creation-Date: 2023-07-08 03:03+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2017,2019-2021\n"
 "Language-Team: Danish (http://app.transifex.com/widelands/widelands/language/da/)\n"
@@ -9820,11 +9820,11 @@ msgstr "Dette er det bedste og skarpeste våben som imperiets våbensmed laver t
 #: ../../data/tribes/initialization/empire/units.lua:560
 msgctxt "empire_ware"
 msgid ""
-"The helmet is the basic defense of a warrior. It is produced in an armor "
+"The helmet is the basic defense of a soldier. It is produced in an armor "
 "smithy. In combination with a wooden spear, it is the equipment to fit out "
 "young soldiers. Helmets are also used in training camps – together with food"
 " – to train soldiers from health level 0 to level 1."
-msgstr "Hjelmen er grundlæggende udstyr i beskyttelsen af en kriger. Den fremstilles i en rustningsmedje. I kombination med en trælanse er det udstyret for unge soldater. Hjelme bruges også i træningslejre - sammen med mad - til at træne soldater fra helbredsniveau 0 til niveau 1."
+msgstr ""
 
 #. TRANSLATORS: Helptext for an Empire ware: Armor
 #: ../../data/tribes/initialization/empire/units.lua:569
@@ -14103,8 +14103,8 @@ msgstr ""
 msgctxt "frisians_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce one "
-"broadswordsword in %1$s on average, one double-edged sword in %2$s on "
-"average and one golden helmet in %3$s on average."
+"broadsword in %1$s on average, one double-edged sword in %2$s on average and"
+" one golden helmet in %3$s on average."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Sewing Room

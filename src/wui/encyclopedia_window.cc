@@ -53,7 +53,7 @@ EncyclopediaWindow::EncyclopediaWindow(InteractiveBase& parent,
      tabs_(this, UI::TabPanelStyle::kWuiLight, "tabs") {
 }
 
-static const std::string kTabNamePrefix = "encyclopedia_";
+static const std::string kTabNamePrefix = "tab_encyclopedia_";
 
 void EncyclopediaWindow::init(std::unique_ptr<LuaTable> table) {
 
@@ -199,6 +199,10 @@ void EncyclopediaWindow::handle_hyperlink(const std::string& action) {
 
 		return false;
 	};
+	if (parent_.focused_child() != this) {
+		// Not for us
+		return;
+	}
 
 	if (parent_.egbase().descriptions().ware_exists(action) && try_select_as("wares")) {
 		return;

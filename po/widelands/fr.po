@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-03 03:04+0000\n"
+"POT-Creation-Date: 2023-07-08 03:03+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Renaud Bouchard, 2015-2023\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
@@ -60,25 +60,25 @@ msgstr "Certains de vos bâtiments de départ n'ont pu être construits en raiso
 msgid "Not enough space"
 msgstr "Espace insuffisant"
 
-#: ../../data/scripting/infrastructure.lua:281
+#: ../../data/scripting/infrastructure.lua:286
 msgid "No rocks nearby"
 msgstr "Pas de roches aux alentours"
 
-#: ../../data/scripting/infrastructure.lua:281
+#: ../../data/scripting/infrastructure.lua:286
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
 msgstr "Il n'y a pas de roches près de votre position de départ. Pour cette raison, vous recevrez des ressources bonus afin de démarrer votre économie."
 
-#: ../../data/scripting/infrastructure.lua:286
-msgid "No trees nearby"
-msgstr "Pas d'arbres aux alentours"
+#: ../../data/scripting/infrastructure.lua:292
+msgid "Not enough trees nearby"
+msgstr ""
 
-#: ../../data/scripting/infrastructure.lua:286
+#: ../../data/scripting/infrastructure.lua:292
 msgid ""
-"There are no trees near to your starting position. Therefore, you receive "
-"extra resources for bootstrapping your economy."
-msgstr "Il n'y a pas d'arbres près de votre position de départ. Pour cette raison, vous recevrez des ressources bonus afin de démarrer votre économie."
+"There are not enough trees near to your starting position. Therefore, you "
+"receive extra resources for bootstrapping your economy."
+msgstr ""
 
 #: ../../data/scripting/messages.lua:66 ../../data/scripting/messages.lua:68
 #: ../../src/wui/game_message_menu.cc:69 ../../src/wui/game_summary.cc:113
@@ -2408,14 +2408,14 @@ msgid "No Shore"
 msgstr "Pas de rivage"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:1244
-msgid "Ship Yard Without Shore"
-msgstr "Chantier naval sans rivage"
+msgid "Shipyard Without Shore"
+msgstr ""
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:1245
 msgid ""
-"Your ship yard has not been built close enough to a shore. It will not be "
+"Your shipyard has not been built close enough to a shore. It will not be "
 "able to build ships."
-msgstr "Votre chantier naval n'a pas été construit assez près d'une rive. Il ne sera pas capable de construire de vaisseaux."
+msgstr ""
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:1265
 msgid "Ferry Yard Without Shore"
@@ -3591,7 +3591,7 @@ msgstr "Widelands n'a pas été capable d'utiliser le réseau local. Peut être 
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1351
+#: ../../src/scripting/lua_game.cc:1353
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -8334,7 +8334,7 @@ msgstr "Actions pour inamovibles"
 msgid "Mark this immovable for timely removal by a suited worker"
 msgstr "Marquer cet inamovible pour un retrait rapide par un ouvrier qualifié"
 
-#: ../../src/wui/fieldaction.cc:415 ../../src/wui/fieldaction.cc:538
+#: ../../src/wui/fieldaction.cc:415 ../../src/wui/fieldaction.cc:544
 msgid "Build road"
 msgstr "Construire des routes"
 
@@ -8378,67 +8378,67 @@ msgstr "Détruire une route"
 msgid "Destroy a waterway"
 msgstr "Détruire une voie navigable"
 
-#: ../../src/wui/fieldaction.cc:509
+#: ../../src/wui/fieldaction.cc:512
 msgid "Configure this ocean’s ship fleet"
 msgstr "Configuration de la flotte de navires de cet océan"
 
-#: ../../src/wui/fieldaction.cc:516
+#: ../../src/wui/fieldaction.cc:522
 msgid "Configure this ocean’s ferry fleet"
 msgstr "Configuration de la flotte de ferries de cet océan"
 
-#: ../../src/wui/fieldaction.cc:523
+#: ../../src/wui/fieldaction.cc:529
 msgid "Watch field in a separate window"
 msgstr "Voir le terrain dans une fenêtre séparée"
 
-#: ../../src/wui/fieldaction.cc:528
+#: ../../src/wui/fieldaction.cc:534
 msgid "Pinned note"
 msgstr "Note épinglée"
 
-#: ../../src/wui/fieldaction.cc:533
+#: ../../src/wui/fieldaction.cc:539
 msgid "Show debug window"
 msgstr "Montrer la fenêtre de débogage"
 
-#: ../../src/wui/fieldaction.cc:541 ../../src/wui/watchwindow.cc:85
+#: ../../src/wui/fieldaction.cc:547 ../../src/wui/watchwindow.cc:85
 msgid "Watch"
 msgstr "Observer"
 
-#: ../../src/wui/fieldaction.cc:658
+#: ../../src/wui/fieldaction.cc:664
 msgid "Build mines"
 msgstr "Construire des mines"
 
-#: ../../src/wui/fieldaction.cc:672 ../../src/wui/fieldaction.cc:698
+#: ../../src/wui/fieldaction.cc:678 ../../src/wui/fieldaction.cc:704
 msgid "Build flag"
 msgstr "Placer un drapeau"
 
-#: ../../src/wui/fieldaction.cc:676
+#: ../../src/wui/fieldaction.cc:682
 msgid "Cancel road"
 msgstr "Annuler la route"
 
-#: ../../src/wui/fieldaction.cc:678
+#: ../../src/wui/fieldaction.cc:684
 msgid "Go to road"
 msgstr "Aller à la route"
 
-#: ../../src/wui/fieldaction.cc:686
+#: ../../src/wui/fieldaction.cc:692
 msgid "Cancel road and start building waterway"
 msgstr "Annulez la route et commencez à construire une voie navigable"
 
-#: ../../src/wui/fieldaction.cc:690
+#: ../../src/wui/fieldaction.cc:696
 msgid "Build roads"
 msgstr "Construire des routes"
 
-#: ../../src/wui/fieldaction.cc:702
+#: ../../src/wui/fieldaction.cc:708
 msgid "Cancel waterway"
 msgstr "Annulez la voie navigable"
 
-#: ../../src/wui/fieldaction.cc:704
+#: ../../src/wui/fieldaction.cc:710
 msgid "Go to waterway"
 msgstr "Aller à la voie navigable"
 
-#: ../../src/wui/fieldaction.cc:707
+#: ../../src/wui/fieldaction.cc:713
 msgid "Cancel waterway and start building road"
 msgstr "Annulez la voie navigable et commencez à construire une route"
 
-#: ../../src/wui/fieldaction.cc:710
+#: ../../src/wui/fieldaction.cc:716
 msgid "Build waterways"
 msgstr "Construisez des voies navigables"
 

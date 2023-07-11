@@ -8,8 +8,8 @@
 -- Make sure that the building sizes are the same or smaller, and that ports go on port spaces etc.
 
 include "scripting/coroutine.lua"
-include "scripting/lunit.lua"
 include "scripting/infrastructure.lua"
+include "test/scripting/lunit.lua"
 include "test/scripting/stable_save.lua"
 
 game = wl.Game()

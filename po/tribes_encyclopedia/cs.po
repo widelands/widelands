@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-05 02:59+0000\n"
+"POT-Creation-Date: 2023-07-08 03:03+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Petr Valášek, 2023\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
@@ -9850,11 +9850,11 @@ msgstr "Nejlepší a nejostřejší zbraň, jakou umí císařský zbrojíř pro
 #: ../../data/tribes/initialization/empire/units.lua:560
 msgctxt "empire_ware"
 msgid ""
-"The helmet is the basic defense of a warrior. It is produced in an armor "
+"The helmet is the basic defense of a soldier. It is produced in an armor "
 "smithy. In combination with a wooden spear, it is the equipment to fit out "
 "young soldiers. Helmets are also used in training camps – together with food"
 " – to train soldiers from health level 0 to level 1."
-msgstr "Přilba poskytuje základní ochranu válečníkům. Vyrábí se v platnéřství. Ve spojení s dřevěným oštěpem je to vybavení vhodné pro mladé vojáky. Přilby se také používají ve výcvikových táborech – spolu s jídlem – k trénování zdraví z úrovně 0 na úroveň 1."
+msgstr ""
 
 #. TRANSLATORS: Helptext for an Empire ware: Armor
 #: ../../data/tribes/initialization/empire/units.lua:569
@@ -14141,8 +14141,8 @@ msgstr "Vyrábí pokročilé zbraně a zlaté přilby pro vojáky."
 msgctxt "frisians_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce one "
-"broadswordsword in %1$s on average, one double-edged sword in %2$s on "
-"average and one golden helmet in %3$s on average."
+"broadsword in %1$s on average, one double-edged sword in %2$s on average and"
+" one golden helmet in %3$s on average."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Sewing Room

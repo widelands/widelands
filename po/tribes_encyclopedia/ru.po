@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-05 02:59+0000\n"
+"POT-Creation-Date: 2023-07-08 03:03+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2019,2022-2023\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
@@ -9855,11 +9855,11 @@ msgstr "Это лучшее и острейшее оружие для солда
 #: ../../data/tribes/initialization/empire/units.lua:560
 msgctxt "empire_ware"
 msgid ""
-"The helmet is the basic defense of a warrior. It is produced in an armor "
+"The helmet is the basic defense of a soldier. It is produced in an armor "
 "smithy. In combination with a wooden spear, it is the equipment to fit out "
 "young soldiers. Helmets are also used in training camps – together with food"
 " – to train soldiers from health level 0 to level 1."
-msgstr "Шлем — это базовая защита войнов. Он производится в бронной. В комплекте с деревянным копьем используется для снаряжения новобранцев. Шлем также используется, вместе с едой в тренировочном лагере для тренировки солдат Здоровью с 0 до 1 уровня."
+msgstr ""
 
 #. TRANSLATORS: Helptext for an Empire ware: Armor
 #: ../../data/tribes/initialization/empire/units.lua:569
@@ -14146,9 +14146,9 @@ msgstr "Изготавливает улучшенное вооружение и 
 msgctxt "frisians_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce one "
-"broadswordsword in %1$s on average, one double-edged sword in %2$s on "
-"average and one golden helmet in %3$s on average."
-msgstr "Если все необходимые товары поставляются вовремя, это здание может производить один тесак, в среднем, за %1$s, один обоюдоострый меч за %2$s, и один золотой шлем за %3$s."
+"broadsword in %1$s on average, one double-edged sword in %2$s on average and"
+" one golden helmet in %3$s on average."
+msgstr ""
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Sewing Room
 #: ../../data/tribes/initialization/frisians/units.lua:1825
