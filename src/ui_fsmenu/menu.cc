@@ -89,12 +89,12 @@ TwoColumnsMenu::TwoColumnsMenu(MenuCapsule& fsmm,
 void TwoColumnsMenu::layout() {
 	BaseMenu::layout();
 
-	content_box_.set_max_size(main_box_.get_w(), main_box_.get_h() - header_box_.get_h());
+	// let the parent box do the layout
+	content_box_.set_desired_size(0, 0);
 	right_column_width_ = get_inner_w() * right_column_width_factor_;
 
 	right_column_box_.set_max_size(right_column_width_, 0);
-    // Set to 0 to allow proper dynamic box layout (kExpandBoth)
-    left_column_box_.set_desired_size(0, 0);
+	left_column_box_.set_desired_size(0, 0);
 }
 
 TwoColumnsBasicNavigationMenu::TwoColumnsBasicNavigationMenu(MenuCapsule& fsmm,
@@ -117,7 +117,7 @@ TwoColumnsBasicNavigationMenu::TwoColumnsBasicNavigationMenu(MenuCapsule& fsmm,
 
 void TwoColumnsBasicNavigationMenu::layout() {
 	TwoColumnsMenu::layout();
-	back_.set_desired_size(right_column_width_, standard_height_);
+	back_.set_desired_size(0, standard_height_);
 }
 
 bool TwoColumnsBasicNavigationMenu::handle_key(bool down, SDL_Keysym code) {

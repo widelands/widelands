@@ -88,11 +88,11 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
 	update();
 }
 void SinglePlayerActivePlayerGroup::force_new_dimensions(uint32_t standard_element_height) {
-    number_.set_desired_size(standard_element_height, standard_element_height);
+	number_.set_desired_size(standard_element_height, standard_element_height);
 	player_.set_desired_size(standard_element_height, standard_element_height);
 	player_type_.set_desired_size(standard_element_height, standard_element_height);
 	tribe_.set_desired_size(standard_element_height, standard_element_height);
-    // Set to 0 to allow proper dynamic box layout (kExpandBoth)
+	// Set to 0 to allow proper dynamic box layout (kExpandBoth)
 	start_type.set_desired_size(0, standard_element_height);
 	teams_.set_desired_size(standard_element_height, standard_element_height);
 }
