@@ -166,11 +166,10 @@ static std::set<AsyncIOWrapper*> living_async_wrappers;
 struct AsyncIOWrapper {
 public:
 	explicit AsyncIOWrapper(HangupFn fn)
-	:
-			queue_mutex_(MutexLock::create_custom_mutex()),
-			result_mutex_(MutexLock::create_custom_mutex()),
-			hangup_fn_(fn),
-			thread_(AsyncIOWrapper::run, this) {
+	   : queue_mutex_(MutexLock::create_custom_mutex()),
+	     result_mutex_(MutexLock::create_custom_mutex()),
+	     hangup_fn_(fn),
+	     thread_(AsyncIOWrapper::run, this) {
 		MutexLock m(MutexLock::ID::kLog);
 		living_async_wrappers.insert(this);
 	}
@@ -198,13 +197,16 @@ private:
 	struct QueuedCommand {
 		enum class Type { kWrite, kRead, kReadLine };
 
-		QueuedCommand(const int socket, const char* buffer, const size_t length) : socket_(socket), length_(length), type_(Type::kWrite) {
+		QueuedCommand(const int socket, const char* buffer, const size_t length)
+		   : socket_(socket), length_(length), type_(Type::kWrite) {
 			buffer_.write = buffer;
 		}
-		QueuedCommand(const int socket, char* buffer, const size_t length) : socket_(socket), length_(length), type_(Type::kRead) {
+		QueuedCommand(const int socket, char* buffer, const size_t length)
+		   : socket_(socket), length_(length), type_(Type::kRead) {
 			buffer_.read = buffer;
 		}
-		QueuedCommand(const int socket, std::string* buffer, const size_t length) : socket_(socket), length_(length), type_(Type::kReadLine) {
+		QueuedCommand(const int socket, std::string* buffer, const size_t length)
+		   : socket_(socket), length_(length), type_(Type::kReadLine) {
 			buffer_.read_line = buffer;
 		}
 
@@ -212,7 +214,11 @@ private:
 
 		size_t id_{0U};
 		int socket_{0};
-		union { const char* write; char* read; std::string* read_line; } buffer_;
+		union {
+			const char* write;
+			char* read;
+			std::string* read_line;
+		} buffer_;
 		size_t length_{0U};
 		Type type_{Type::kWrite};
 	};
@@ -328,7 +334,8 @@ void cleanup_abandoned_hung_threads() {
 	} while (SDL_GetTicks() - start < kKillTimeout);
 
 	// This is called during shutdown, the logger might no longer exist
-	std::cout << "FATAL: Unable to clean up " << living_async_wrappers.size() << " hung network threads, killing Widelands.\n";
+	std::cout << "FATAL: Unable to clean up " << living_async_wrappers.size()
+	          << " hung network threads, killing Widelands.\n";
 
 	// TODO(Nordfriese): There must be a better way to do interrupt a blocked read() call…
 	std::terminate();
@@ -741,7 +748,8 @@ void NetAddons::download_addon(const std::string& name,
 			int64_t nr_bytes_read = 0;
 			do {
 				progress(relative_path, progress_state);
-				int64_t l = async_io_wrapper_->read(client_socket_, buffer.get(), length - nr_bytes_read);
+				int64_t l =
+				   async_io_wrapper_->read(client_socket_, buffer.get(), length - nr_bytes_read);
 				if (l < 1) {
 					throw WLWarning("", "Connection interrupted");
 				}

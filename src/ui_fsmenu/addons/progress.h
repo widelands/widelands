@@ -52,7 +52,8 @@ private:
 	UI::ProgressBar progress_;
 };
 
-AddOns::HangupFn create_hangup_function(UI::Panel& parent, UI::WindowStyle style, AddOns::NetAddons& net_addons);
+AddOns::HangupFn
+create_hangup_function(UI::Panel& parent, UI::WindowStyle style, AddOns::NetAddons& net_addons);
 
 }  // namespace AddOnsUI
 

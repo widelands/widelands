@@ -74,51 +74,60 @@ ProgressIndicatorWindow::ProgressIndicatorWindow(UI::Panel* parent,
 struct HangupWindow : public UI::Window {
 	static std::map<uint32_t, HangupWindow*> windows;
 
-	HangupWindow(UI::Panel& parent, UI::WindowStyle style, AddOns::NetAddons& net_addons, uint32_t id)
-   : UI::Window(&parent,
-                style,
-                "hangup",
-                0,
-                0,
-                parent.get_inner_w() / 2,
-                2 * kRowButtonSize,
-                _("Server Unresponsive")),
-     id_(id),
-     net_addons_(net_addons),
-     modal_(*this),
-     box_(this, panel_style_, 0, 0, UI::Box::Vertical, get_inner_w()),
-     txt1_(&box_,
-           panel_style_,
-           style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelParagraph :
-                                               UI::FontStyle::kWuiInfoPanelParagraph,
-           _("The server is not responding…"),
-           UI::Align::kCenter),
-     txt2_(&box_,
-           panel_style_,
-           style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelParagraph :
-                                               UI::FontStyle::kWuiInfoPanelParagraph,
-           "",
-           UI::Align::kCenter),
-	interrupt_(&box_, "interrupt", 0, 0, 0, 0,
-	    style == UI::WindowStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary : UI::ButtonStyle::kWuiSecondary, _("Cancel"))
-{
-	box_.add(&txt1_, UI::Box::Resizing::kExpandBoth);
-	box_.add_space(kRowButtonSpacing);
-	box_.add(&txt2_, UI::Box::Resizing::kExpandBoth);
-	box_.add_space(kRowButtonSpacing);
-	box_.add(&interrupt_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	HangupWindow(UI::Panel& parent,
+	             UI::WindowStyle style,
+	             AddOns::NetAddons& net_addons,
+	             uint32_t id)
+	   : UI::Window(&parent,
+	                style,
+	                "hangup",
+	                0,
+	                0,
+	                parent.get_inner_w() / 2,
+	                2 * kRowButtonSize,
+	                _("Server Unresponsive")),
+	     id_(id),
+	     net_addons_(net_addons),
+	     modal_(*this),
+	     box_(this, panel_style_, 0, 0, UI::Box::Vertical, get_inner_w()),
+	     txt1_(&box_,
+	           panel_style_,
+	           style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelParagraph :
+                                                  UI::FontStyle::kWuiInfoPanelParagraph,
+	           _("The server is not responding…"),
+	           UI::Align::kCenter),
+	     txt2_(&box_,
+	           panel_style_,
+	           style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelParagraph :
+                                                  UI::FontStyle::kWuiInfoPanelParagraph,
+	           "",
+	           UI::Align::kCenter),
+	     interrupt_(&box_,
+	                "interrupt",
+	                0,
+	                0,
+	                0,
+	                0,
+	                style == UI::WindowStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
+                                                       UI::ButtonStyle::kWuiSecondary,
+	                _("Cancel")) {
+		box_.add(&txt1_, UI::Box::Resizing::kExpandBoth);
+		box_.add_space(kRowButtonSpacing);
+		box_.add(&txt2_, UI::Box::Resizing::kExpandBoth);
+		box_.add_space(kRowButtonSpacing);
+		box_.add(&interrupt_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
-	interrupt_.sigclicked.connect([this, &net_addons]() {
-		delete this;
-		net_addons.interrupt();
-	});
+		interrupt_.sigclicked.connect([this, &net_addons]() {
+			delete this;
+			net_addons.interrupt();
+		});
 
-	set_center_panel(&box_);
-	center_to_parent();
+		set_center_panel(&box_);
+		center_to_parent();
 
-	windows.emplace(id_, this);
-	initialization_complete();
-}
+		windows.emplace(id_, this);
+		initialization_complete();
+	}
 
 	~HangupWindow() {
 		windows.erase(id_);
@@ -146,7 +155,8 @@ private:
 
 std::map<uint32_t, HangupWindow*> HangupWindow::windows;
 
-AddOns::HangupFn create_hangup_function(UI::Panel& parent, UI::WindowStyle style, AddOns::NetAddons& net_addons) {
+AddOns::HangupFn
+create_hangup_function(UI::Panel& parent, UI::WindowStyle style, AddOns::NetAddons& net_addons) {
 	static uint32_t fn_id_counter_(0);
 	const uint32_t id = ++fn_id_counter_;
 

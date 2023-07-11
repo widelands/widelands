@@ -130,9 +130,8 @@ namespace {
 #ifndef _WIN32
 void terminate(int /*unused*/) {
 	// The logger can already be shut down, so we use cout
-	std::cout
-	   << "Waited 5 seconds to close audio and network. There are some problems here, "
-	      "so killing Widelands. Update your sound driver and/or SDL to fix this problem.\n";
+	std::cout << "Waited 5 seconds to close audio and network. There are some problems here, "
+	             "so killing Widelands. Update your sound driver and/or SDL to fix this problem.\n";
 	raise(SIGKILL);
 }
 #endif
