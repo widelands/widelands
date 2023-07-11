@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-05 02:59+0000\n"
+"POT-Creation-Date: 2023-07-08 03:03+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: litoll <litoll@freemail.hu>, 2016\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
@@ -9825,11 +9825,11 @@ msgstr "Ez a legjobb és legélesebb fegyver, amit a Birodalom fegyverkovácsai 
 #: ../../data/tribes/initialization/empire/units.lua:560
 msgctxt "empire_ware"
 msgid ""
-"The helmet is the basic defense of a warrior. It is produced in an armor "
+"The helmet is the basic defense of a soldier. It is produced in an armor "
 "smithy. In combination with a wooden spear, it is the equipment to fit out "
 "young soldiers. Helmets are also used in training camps – together with food"
 " – to train soldiers from health level 0 to level 1."
-msgstr "A sisak a harcos alapvető védelmét látja el. A páncélkovács műhelyben készül. A falándzsával együtt ez adja az újoncok felszerelését. A sisakot a kiképzőtáborban is használják – élelmiszerrel együtt – a katonák életerejének 0. szintről 1. szintre történő képzéséhez."
+msgstr ""
 
 #. TRANSLATORS: Helptext for an Empire ware: Armor
 #: ../../data/tribes/initialization/empire/units.lua:569
@@ -14108,8 +14108,8 @@ msgstr "Fejlett fegyvereket és aranysisakokat készít a katonáknak."
 msgctxt "frisians_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce one "
-"broadswordsword in %1$s on average, one double-edged sword in %2$s on "
-"average and one golden helmet in %3$s on average."
+"broadsword in %1$s on average, one double-edged sword in %2$s on average and"
+" one golden helmet in %3$s on average."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Sewing Room
