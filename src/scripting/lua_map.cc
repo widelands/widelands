@@ -846,7 +846,6 @@ int upcasted_map_object_descr_to_lua(lua_State* L, const Widelands::MapObjectDes
 			return CAST_TO_LUA(Widelands::ResourceDescription, LuaResourceDescription);
 		case Widelands::MapObjectType::TERRAIN:
 			return CAST_TO_LUA(Widelands::TerrainDescription, LuaTerrainDescription);
-		/*
 		case Widelands::MapObjectType::MAPOBJECT:
 		case Widelands::MapObjectType::BATTLE:
 		case Widelands::MapObjectType::BOB:
@@ -862,8 +861,9 @@ int upcasted_map_object_descr_to_lua(lua_State* L, const Widelands::MapObjectDes
 		case Widelands::MapObjectType::PINNED_NOTE:
 		case Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE:
 		case Widelands::MapObjectType::FERRY_FLEET_YARD_INTERFACE:
-		*/
+			return CAST_TO_LUA(Widelands::MapObjectDescr, LuaMapObjectDescription);
 		default:
+			log_warn("upcasted_map_object_to_lua: unknown type '%s' to cast to, return general MapObjectDescription", descr.->type());
 			return CAST_TO_LUA(Widelands::MapObjectDescr, LuaMapObjectDescription);
 		}
 	}
