@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-10 03:08+0000\n"
+"POT-Creation-Date: 2023-07-13 03:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -5181,7 +5181,7 @@ msgstr ""
 msgid "Campaign Name"
 msgstr ""
 
-#: ../../src/ui_fsmenu/helpwindow.cc:46 ../../src/wui/helpwindow.cc:44
+#: ../../src/ui_fsmenu/helpwindow.cc:46 ../../src/wui/helpwindow.cc:48
 #, c-format
 msgid "Help: %s"
 msgstr ""
@@ -5925,7 +5925,7 @@ msgstr ""
 msgid "The map does not specify whether it is balanced"
 msgstr ""
 
-#: ../../src/ui_fsmenu/menu.cc:106
+#: ../../src/ui_fsmenu/menu.cc:106 ../../src/wui/helpwindow.cc:68
 msgid "Back"
 msgstr ""
 
@@ -8144,11 +8144,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ../../src/wui/encyclopedia_window.cc:230
+#: ../../src/wui/encyclopedia_window.cc:234 ../../src/wui/helpwindow.cc:146
 msgid "Broken Link"
 msgstr ""
 
-#: ../../src/wui/encyclopedia_window.cc:231
+#: ../../src/wui/encyclopedia_window.cc:235 ../../src/wui/helpwindow.cc:147
 msgid "This hyperlink seems to be broken."
 msgstr ""
 
