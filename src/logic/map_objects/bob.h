@@ -228,7 +228,7 @@ public:
 	void set_owner(Player*);
 	Notifications::Signal<Player* /* old_owner */, Player* /* new_owner */> owner_changed;
 
-	void set_position(EditorGameBase&, const Coords&);
+	virtual void set_position(EditorGameBase&, const Coords&);
 	[[nodiscard]] const FCoords& get_position() const {
 		return position_;
 	}
