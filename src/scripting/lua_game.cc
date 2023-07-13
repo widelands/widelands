@@ -342,8 +342,10 @@ int LuaPlayer::set_hidden_from_general_statistics(lua_State* L) {
 /* RST
    .. attribute:: ai_type
 
-      (RO) type of the ai controlling this player
-      ("normal", "weak", "very_weak", "empty", ..., "" if human controlled only)
+      .. versionadded:: 1.2
+
+      (RO) Type of the AI controlling this player
+      ("normal", "weak", "very_weak", "empty"; "" if human controlled only)
 */
 int LuaPlayer::get_ai_type(lua_State* L) {
 	Widelands::Game& game = get_game(L);
