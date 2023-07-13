@@ -1617,7 +1617,7 @@ wl.Descriptions():new_tribe {
                pgettext("frisians_building", "The fisher’s house needs water full of fish within the work area."),
                -- TRANSLATORS: Note helptext for a Frisian production site: Fisher's House, part 2
                pgettext("frisians_building", "Roads and trees along the shoreline block fishing."),
-            }
+            },
             -- TRANSLATORS: Performance helptext for a Frisian production site: Fisher's House
             performance = pgettext("frisians_building", "The fisher pauses %s before going to work again."):bformat(format_seconds(16))
          }

@@ -1300,7 +1300,7 @@ wl.Descriptions():new_tribe {
                pgettext("amazons_building", "The hunter-gatherer’s hut needs animals or fish to hunt or catch within the work area."),
                -- TRANSLATORS: Note helptext for an Amazon production site: Hunter-Gatherer's Hut
                pgettext("amazons_building", "Roads and trees along the shoreline block fishing."),
-            }
+            },
             -- TRANSLATORS: Performance helptext for an Amazon production site: Hunter-Gatherer's Hut
             performance = pgettext("amazons_building", "The hunter-gatherer pauses %s before going to work again."):bformat(format_seconds(34))
 

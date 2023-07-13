@@ -1313,7 +1313,7 @@ wl.Descriptions():new_tribe {
                -- TRANSLATORS: Note helptext for an Empire production site: Fisher's House, part 1
                pgettext("empire_building", "The fisher’s house needs water full of fish within the work area."),
                -- TRANSLATORS: Note helptext for an Empire production site: Fisher's House, part 2
-               pgettext("empire_building", "Roads and trees along the shreline block fishing."),
+               pgettext("empire_building", "Roads and trees along the shoreline block fishing."),
             }
          }
       },
@@ -2250,6 +2250,7 @@ wl.Descriptions():new_tribe {
                pgettext("building", "Needs water nearby."),
                -- TRANSLATORS: Note helptext for an Empire production site: Ferry Yard, part 2
                pgettext("building", "Roads and trees along the shoreline block access to water."),
+            }
          }
       },
       {
