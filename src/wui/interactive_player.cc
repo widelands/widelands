@@ -602,14 +602,13 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 		if (f->seeing != Widelands::VisibleState::kUnexplored) {
 			// Draw build help.
 			const bool show_port_space = has_expedition_port_space(f->fcoords);
-			if (show_port_space || suited_as_starting_pos || buildhelp()) {
+			if (show_port_space || buildhelp()) {
 				Widelands::NodeCaps caps;
 				Widelands::NodeCaps maxcaps = f->fcoords.field->maxcaps();
 				float opacity =
 				   f->seeing == Widelands::VisibleState::kVisible ? 1.f : kBuildhelpOpacity;
 				if (picking_starting_pos) {
-					caps = suited_as_starting_pos || buildhelp() ? f->fcoords.field->nodecaps() :
-                                                              Widelands::CAPS_NONE;
+					caps = show_port_space || buildhelp() ? f->fcoords.field->nodecaps() : Widelands::CAPS_NONE;
 				} else if (show_port_space) {
 					caps = maxcaps;
 				} else {
@@ -627,7 +626,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 				}
 
 				const auto* overlay = get_buildhelp_overlay(caps, scale);
-				if (overlay != nullptr) {
+				if (overlay != nullptr && (!suited_as_starting_pos || (caps & Widelands::BUILDCAPS_PORT) != 0)) {
+					// draw overlay if not a starting pos, but draw port space anyway
 					blit_field_overlay(
 					   dst, *f, overlay->pic, overlay->hotspot, scale / overlay->scale, opacity);
 				}
