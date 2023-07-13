@@ -436,6 +436,7 @@ void ShipWindow::think() {
 	const bool can_act = ibase_.can_act(ship->owner().player_number());
 
 	update_destination_buttons(ship);
+	set_destination_->set_enabled(can_act);
 	btn_sink_->set_enabled(can_act);
 
 	btn_refit_->set_pic(g_image_cache->get(ship->get_ship_type() == Widelands::ShipType::kWarship ?
