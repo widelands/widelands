@@ -1309,8 +1309,12 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("empire_building", "A fisherman criticising the Grand Master of the Fishermans’ Guild"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Fisher's House
             purpose = pgettext("empire_building", "Fishes on the coast near the fisher’s house."),
-            -- TRANSLATORS: Note helptext for an Empire production site: Fisher's House
-            note = pgettext("empire_building", "The fisher’s house needs water full of fish within the work area.")
+            note = {
+               -- TRANSLATORS: Note helptext for an Empire production site: Fisher's House, part 1
+               pgettext("empire_building", "The fisher’s house needs water full of fish within the work area."),
+               -- TRANSLATORS: Note helptext for an Empire production site: Fisher's House, part 2
+               pgettext("empire_building", "Roads and trees along the shreline block fishing."),
+            }
          }
       },
       {
@@ -2241,8 +2245,11 @@ wl.Descriptions():new_tribe {
             ),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Ferry Yard
             purpose = pgettext("building", "Builds ferries."),
-            -- TRANSLATORS: Note helptext for an Empire production site: Ferry Yard
-            note = pgettext("building", "Needs water nearby.")
+            note = {
+               -- TRANSLATORS: Note helptext for an Empire production site: Ferry Yard, part 1
+               pgettext("building", "Needs water nearby."),
+               -- TRANSLATORS: Note helptext for an Empire production site: Ferry Yard, part 2
+               pgettext("building", "Roads and trees along the shoreline block access to water."),
          }
       },
       {
@@ -2263,7 +2270,13 @@ wl.Descriptions():new_tribe {
                "A shipwright lamenting when he was instructed to stop working"
             ),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Shipyard
-            purpose = pgettext("building", "Constructs ships that are used for overseas colonization and for trading between ports.")
+            purpose = pgettext("building", "Constructs ships that are used for overseas colonization and for trading between ports."),
+            note = {
+               -- TRANSLATORS: Note helptext for an Empire production site: Shipyard, part 1
+               pgettext("building", "Needs water nearby."),
+               -- TRANSLATORS: Note helptext for an Empire production site: Shipyard, part 2
+               pgettext("building", "Roads and trees along the shoreline block access to water."),
+            }
          }
       },
 
