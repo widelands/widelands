@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-06 03:09+0000\n"
+"POT-Creation-Date: 2023-07-08 03:03+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2023\n"
 "Language-Team: Finnish (http://app.transifex.com/widelands/widelands/language/fi/)\n"
@@ -2389,12 +2389,12 @@ msgid "No Shore"
 msgstr ""
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:1244
-msgid "Ship Yard Without Shore"
+msgid "Shipyard Without Shore"
 msgstr ""
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:1245
 msgid ""
-"Your ship yard has not been built close enough to a shore. It will not be "
+"Your shipyard has not been built close enough to a shore. It will not be "
 "able to build ships."
 msgstr ""
 
@@ -3569,7 +3569,7 @@ msgstr "Paikallisverkon käyttö epäonnistui. Kenties joku muu pitää jo portt
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1351
+#: ../../src/scripting/lua_game.cc:1353
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
