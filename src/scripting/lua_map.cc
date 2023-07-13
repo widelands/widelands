@@ -862,9 +862,9 @@ int upcasted_map_object_descr_to_lua(lua_State* L, const Widelands::MapObjectDes
 		case Widelands::MapObjectType::FERRY_FLEET_YARD_INTERFACE:
 			return CAST_TO_LUA(Widelands::MapObjectDescr, LuaMapObjectDescription);
 		default:
-			log_warn("upcasted_map_object_to_lua: unknown type '%s' to cast to, return general "
+			verb_log_warn("upcasted_map_object_to_lua: unknown type '%s' to cast to, return general "
 			         "MapObjectDescription",
-			         descr.->type());
+			         Widelands::to_string(descr->type()).c_str());
 			return CAST_TO_LUA(Widelands::MapObjectDescr, LuaMapObjectDescription);
 		}
 	}
