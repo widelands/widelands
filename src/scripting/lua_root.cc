@@ -758,6 +758,9 @@ int LuaDescriptions::new_tribe(lua_State* L) {
          :const:`"becomes"`                            **worker_name**    (*string*)            1.0
          :const:`"programs"`, :const:`"set"`           **program_name**   (*string*),           1.0
                                                        **actions_table**  (*table*)
+         :const:`"buildcost"`, :const:`"set"`          **ware_name**      (*string*),           1.2
+                                                       **amount**         (*int*)
+         :const:`"buildcost"`, :const:`"remove"`       **ware_name**      (*string*),           1.2
          ============================================  =======================================  =============
 
       .. table:: ``"building"``
@@ -1105,6 +1108,17 @@ void LuaDescriptions::do_modify_worker(lua_State* L,
 			   new Widelands::WorkerProgram(prog_name, t, worker_descr, descrs));
 		} else {
 			report_error(L, "modify_unit - worker - programs: invalid command '%s'", cmd.c_str());
+		}
+	} else if (property == "buildcost") {
+		const std::string cmd = luaL_checkstring(L, 5);
+		const std::string item_name = luaL_checkstring(L, 6);
+		Widelands::WorkerDescr::Buildcost& bc = worker_descr.mutable_buildcost();
+		if (cmd == "remove") {
+			bc.erase(item_name);
+		} else if (cmd == "set") {
+			bc[item_name] = luaL_checkuint32(L, 7);
+		} else {
+			report_error(L, "modify_unit - worker - buildcost: invalid command '%s'", cmd.c_str());
 		}
 	} else {
 		report_error(L, "modify_unit: invalid worker property '%s'", property.c_str());
