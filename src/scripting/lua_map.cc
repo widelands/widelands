@@ -863,8 +863,8 @@ int upcasted_map_object_descr_to_lua(lua_State* L, const Widelands::MapObjectDes
 			return CAST_TO_LUA(Widelands::MapObjectDescr, LuaMapObjectDescription);
 		default:
 			verb_log_warn("upcasted_map_object_to_lua: unknown type '%s' to cast to, return general "
-			         "MapObjectDescription",
-			         Widelands::to_string(descr->type()).c_str());
+			              "MapObjectDescription",
+			              Widelands::to_string(descr->type()).c_str());
 			return CAST_TO_LUA(Widelands::MapObjectDescr, LuaMapObjectDescription);
 		}
 	}
