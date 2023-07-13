@@ -857,7 +857,6 @@ int upcasted_map_object_descr_to_lua(lua_State* L, const Widelands::MapObjectDes
 		case Widelands::MapObjectType::WATERWAY:
 		case Widelands::MapObjectType::ROADBASE:
 		case Widelands::MapObjectType::PORTDOCK:
-		case Widelands::MapObjectType::WARE:
 		case Widelands::MapObjectType::PINNED_NOTE:
 		case Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE:
 		case Widelands::MapObjectType::FERRY_FLEET_YARD_INTERFACE:
