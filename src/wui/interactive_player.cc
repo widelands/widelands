@@ -569,16 +569,21 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 		const bool suited_as_starting_pos =
 		   picking_starting_pos && plr.get_starting_position_suitability(f->fcoords);
 		if (suited_as_starting_pos) {
-			for (unsigned p = map.get_nrplayers(); p != 0u; --p) {
+			unsigned p;
+			for (p = map.get_nrplayers(); p != 0u; --p) {
 				if (map.get_starting_pos(p) == f->fcoords) {
-					const Image* player_image =
-					   playercolor_image(p - 1, "images/players/player_position.png");
-					static constexpr int kStartingPosHotspotY = 55;
-					blit_field_overlay(dst, *f, player_image,
-					                   Vector2i(player_image->width() / 2, kStartingPosHotspotY), scale);
 					break;
 				}
 			}
+			const Image* player_image;
+			if (p == 0u) {
+				player_image = playercolor_image(color(220, 220, 220), "images/players/player_position.png");
+			} else {
+				player_image = playercolor_image(p - 1, "images/players/player_position.png");
+			}
+			static constexpr int kStartingPosHotspotY = 55;
+			blit_field_overlay(dst, *f, player_image,
+			                   Vector2i(player_image->width() / 2, kStartingPosHotspotY), scale);
 		}
 
 		// Draw work area markers.
