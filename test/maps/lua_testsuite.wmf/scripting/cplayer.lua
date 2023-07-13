@@ -22,13 +22,15 @@ function player_tests:test_number_property()
 end
 
 function player_tests:test_ai_type()
-   local normal_ai = "normal"
+   local default_ai = "very_weak"
+   local no_ai_human = ""
    if egbase == editor then
-      normal_ai = ""
+      default_ai = nil
+      no_ai_human = nil
    end
-   assert_equal("", player1.ai_type, "human player")
-   assert_equal(normal_ai, player2.ai_type, "ai player (2)")
-   assert_equal(normal_ai, player3.ai_type, "ai player (3)")
+   assert_equal(no_ai_human, player1.ai_type, "human player")
+   assert_equal(default_ai, player2.ai_type, "ai player (2)")
+   assert_equal(default_ai, player3.ai_type, "ai player (3)")
 end
 
 -- =================
