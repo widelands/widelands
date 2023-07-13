@@ -84,17 +84,17 @@ TwoColumnsMenu::TwoColumnsMenu(MenuCapsule& fsmm,
 	content_box_.add(&left_column_box_, UI::Box::Resizing::kExpandBoth);
 	content_box_.add_space(5 * kPadding);
 	content_box_.add(&right_column_box_, UI::Box::Resizing::kFullSize);
+    // let the parent box do the layout
+    content_box_.set_desired_size(0, 0);
+    left_column_box_.set_desired_size(0, 0);
 }
 
 void TwoColumnsMenu::layout() {
 	BaseMenu::layout();
 
-	// let the parent box do the layout
-	content_box_.set_desired_size(0, 0);
 	right_column_width_ = get_inner_w() * right_column_width_factor_;
 
 	right_column_box_.set_max_size(right_column_width_, 0);
-	left_column_box_.set_desired_size(0, 0);
 }
 
 TwoColumnsBasicNavigationMenu::TwoColumnsBasicNavigationMenu(MenuCapsule& fsmm,

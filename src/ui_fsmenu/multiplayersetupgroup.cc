@@ -774,7 +774,6 @@ void MultiPlayerSetupGroup::draw(RenderTarget& dst) {
 }
 
 void MultiPlayerSetupGroup::force_new_dimensions(uint32_t max_width,
-                                                 uint32_t max_height,
                                                  uint32_t standard_element_height) {
 	buth_ = standard_element_height;
 	clientbox_.set_desired_size(max_width / 3, 0);
