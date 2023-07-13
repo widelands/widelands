@@ -2167,7 +2167,7 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("building", "Builds ferries."),
             note = {
                -- TRANSLATORS: Note helptext for a Frisian production site: Ferry Yard, part 1
-               pgettext("building", "Needs water nearby."),
+               pgettext("building", "Needs water nearby. Be aware ferries carry wares only, no workers."),
                -- TRANSLATORS: Note helptext for an Frisian production site: Ferry Yard, part 2
                pgettext("building", "Roads and trees along the shoreline block access to water."),
             }
@@ -2184,7 +2184,7 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("building", "Constructs ships that are used for overseas colonization and for trading between ports."),
             note = {
                -- TRANSLATORS: Note helptext for a Frisian production site: Shipyard, part 1
-               pgettext("building", "Needs water nearby."),
+               pgettext("building", "Needs wide open water nearby."),
                -- TRANSLATORS: Note helptext for a Frisian production site: Shipyard, part 2
                pgettext("building", "Roads and trees along the shoreline block access to water."),
             }

@@ -2003,6 +2003,12 @@ wl.Descriptions():new_tribe {
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an Atlantean production site: Shipyard
             purpose = pgettext("building", "Constructs ships that are used for overseas colonization and for trading between ports."),
+            note = {
+               -- TRANSLATORS: Note helptext for an Atlantean production site: Shipyard, part 1
+               pgettext("building", "Needs wide open water nearby."),
+               -- TRANSLATORS: Note helptext for an Atlantean production site: Shipyard, part 2
+               pgettext("building", "Roads and trees along the shoreline block access to water."),
+            },
             -- TRANSLATORS: Lore helptext for an Atlantean production site: Shipyard
             lore = pgettext("atlanteans_building", [[‘Soon may the wellerman come,<br>]] ..
                                           [[to bring us bread and smoked fish.<br>]] ..
@@ -2010,12 +2016,6 @@ wl.Descriptions():new_tribe {
                                           [[we praise Satul the best we wish.’]]),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Shipyard -- not directly stolen from the wellerman song
             lore_author = pgettext("atlanteans_building", "Transcript from oral tradition"),
-            note = {
-               -- TRANSLATORS: Note helptext for an Atlantean production site: Shipyard, part 1
-               pgettext("building", "Needs water nearby."),
-               -- TRANSLATORS: Note helptext for an Atlantean production site: Shipyard, part 2
-               pgettext("building", "Roads and trees along the shoreline block access to water."),
-            }
          }
       },
 
