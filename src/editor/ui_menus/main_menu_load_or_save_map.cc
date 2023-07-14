@@ -53,7 +53,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 
      table_and_details_box_(&main_box_,
                             UI::PanelStyle::kWui,
-                            "table_details_bpx",
+                            "table_details_box",
                             0,
                             0,
                             UI::Box::Horizontal,

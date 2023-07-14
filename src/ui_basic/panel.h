@@ -223,7 +223,7 @@ public:
 	[[nodiscard]] bool get_dock_windows_to_edges() const {
 		return get_flag(pf_dock_windows_to_edges);
 	}
-	void set_dock_windows_to_edges(bool on = true) {
+	inline void set_dock_windows_to_edges(bool on = true) {
 		set_flag(pf_dock_windows_to_edges, on);
 	}
 	void set_inner_size(int nw, int nh);

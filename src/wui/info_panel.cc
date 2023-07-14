@@ -126,7 +126,7 @@ bool MessagePreview::handle_mousepress(const uint8_t button, int32_t /* x */, in
 }
 
 InfoPanel::InfoPanel(InteractiveBase& ib)
-   : UI::Panel(&ib, UI::PanelStyle::kWui, "info_oanel", 0, 0, 0, 0),
+   : UI::Panel(&ib, UI::PanelStyle::kWui, "info_panel", 0, 0, 0, 0),
      ibase_(ib),
      snap_target_panel_(&ibase_, UI::PanelStyle::kWui, "snap_target", 0, 0, 0, 0),
      toggle_mode_(this,
