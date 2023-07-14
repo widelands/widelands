@@ -11,7 +11,7 @@ function _cnt(a)
    return rv
 end
 
-trainingsite_tests = lunit.TestCase("MilitarySite Tests")
+trainingsite_tests = lunit.TestCase("TrainingSite Tests")
 function trainingsite_tests:setup()
    self.f1 = map:get_field(10,10)
 

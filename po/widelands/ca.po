@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-08 03:03+0000\n"
+"POT-Creation-Date: 2023-07-10 03:08+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Juanjo, 2015-2023\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
@@ -528,12 +528,12 @@ msgstr "Restaura la configuració d’eines anterior"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#: ../../src/editor/editorinteractive.cc:463
+#: ../../src/editor/editorinteractive.cc:464
 #: ../../src/wui/interactive_gamebase.cc:268
 msgid "Hide Building Spaces"
 msgstr "Amaga els espais de construcció"
 
-#: ../../src/editor/editorinteractive.cc:463
+#: ../../src/editor/editorinteractive.cc:464
 #: ../../src/ui_fsmenu/options.cc:254
 #: ../../src/wui/interactive_gamebase.cc:268
 msgid "Show Building Spaces"
@@ -543,15 +543,15 @@ msgstr "Mostra espais de construcció"
 #. show maximum
 #. * building spaces that will be available if all immovables (trees, rocks,
 #. etc.) are removed
-#: ../../src/editor/editorinteractive.cc:470
+#: ../../src/editor/editorinteractive.cc:471
 msgid "Hide Maximum Building Spaces"
 msgstr "Amaga els espais de construcció grans"
 
-#: ../../src/editor/editorinteractive.cc:471
+#: ../../src/editor/editorinteractive.cc:472
 msgid "Show Maximum Building Spaces"
 msgstr "Mostra els espais de construcció grans"
 
-#: ../../src/editor/editorinteractive.cc:474
+#: ../../src/editor/editorinteractive.cc:475
 msgid ""
 "Toggle whether to show maximum building spaces that will be available if all"
 " immovables (trees, rocks, etc.) are removed"
@@ -559,73 +559,73 @@ msgstr "Mostra/Amaga els espais de construcció grans que estaran disponibles si
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
-#: ../../src/editor/editorinteractive.cc:480
+#: ../../src/editor/editorinteractive.cc:481
 msgid "Hide Grid"
 msgstr "Amaga la graella"
 
-#: ../../src/editor/editorinteractive.cc:480
+#: ../../src/editor/editorinteractive.cc:481
 msgid "Show Grid"
 msgstr "Mostra la graella"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables
 #. *  (trees, rocks etc.) are shown
-#: ../../src/editor/editorinteractive.cc:488
+#: ../../src/editor/editorinteractive.cc:489
 msgid "Hide Immovables"
 msgstr "Amaga els inamovibles"
 
-#: ../../src/editor/editorinteractive.cc:488
+#: ../../src/editor/editorinteractive.cc:489
 msgid "Show Immovables"
 msgstr "Mostra els inamovibles"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. animals are shown
-#: ../../src/editor/editorinteractive.cc:493
+#: ../../src/editor/editorinteractive.cc:494
 msgid "Hide Animals"
 msgstr "Amaga els animals"
 
-#: ../../src/editor/editorinteractive.cc:493
+#: ../../src/editor/editorinteractive.cc:494
 msgid "Show Animals"
 msgstr "Mostra els animals"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. resources are shown
-#: ../../src/editor/editorinteractive.cc:499
+#: ../../src/editor/editorinteractive.cc:500
 msgid "Hide Resources"
 msgstr "Amaga els recursos"
 
-#: ../../src/editor/editorinteractive.cc:499
+#: ../../src/editor/editorinteractive.cc:500
 msgid "Show Resources"
 msgstr "Mostra recursos"
 
-#: ../../src/editor/editorinteractive.cc:542
+#: ../../src/editor/editorinteractive.cc:543
 msgid "Unsupported Format"
 msgstr "Format no compatible"
 
-#: ../../src/editor/editorinteractive.cc:543
+#: ../../src/editor/editorinteractive.cc:544
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr "El Widelands no ha trobat el fitxer «%s». El format sembla ser incompatible."
 
-#: ../../src/editor/editorinteractive.cc:608
+#: ../../src/editor/editorinteractive.cc:609
 msgid "Exit Editor Confirmation"
 msgstr "Confirmació de sortida de l'editor"
 
-#: ../../src/editor/editorinteractive.cc:608
+#: ../../src/editor/editorinteractive.cc:609
 msgid "Unsaved Map"
 msgstr "Mapa sense guardar"
 
-#: ../../src/editor/editorinteractive.cc:609
+#: ../../src/editor/editorinteractive.cc:610
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "El mapa no s’ha guardat. Esteu segur que voleu sortir?"
 
-#: ../../src/editor/editorinteractive.cc:610
+#: ../../src/editor/editorinteractive.cc:611
 msgid "Are you sure you wish to exit the editor?"
 msgstr "Esteu segur que voleu sortir de l'editor?"
 
-#: ../../src/editor/editorinteractive.cc:1131 ../../src/logic/addons.cc:48
+#: ../../src/editor/editorinteractive.cc:1139 ../../src/logic/addons.cc:48
 #: ../../src/ui_basic/dropdown.cc:358 ../../src/ui_basic/dropdown.cc:360
 #: ../../src/ui_fsmenu/addons/contact.cc:81
 #: ../../src/ui_fsmenu/addons/manager.cc:1334
@@ -642,12 +642,12 @@ msgstr "Esteu segur que voleu sortir de l'editor?"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:467
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:123
 #: ../../src/ui_fsmenu/launch_mpg.cc:309 ../../src/ui_fsmenu/main.cc:249
-#: ../../src/wlapplication.cc:1647
+#: ../../src/wlapplication.cc:1648
 msgid "Error"
 msgstr "S’ha produït un error."
 
-#: ../../src/editor/editorinteractive.cc:1133 ../../src/ui_fsmenu/main.cc:233
-#: ../../src/wlapplication.cc:1649
+#: ../../src/editor/editorinteractive.cc:1141 ../../src/ui_fsmenu/main.cc:233
+#: ../../src/wlapplication.cc:1650
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -658,13 +658,13 @@ msgid ""
 "Please add this information to your report."
 msgstr "S’ha produït un error i el missatge d’error és:\n\n%1$s\n\nSi us plau, informeu de l’error per ajudar a millorar el Widelands. Trobareu missatges relacionats a la sortida estàndard (stdout.txt en Windows). Esteu usant la versió %2$s.\nAfegiu aquesta informació a l’informe."
 
-#: ../../src/editor/editorinteractive.cc:1167
+#: ../../src/editor/editorinteractive.cc:1175
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "Es crea el mapa «%s»…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:1189
+#: ../../src/editor/editorinteractive.cc:1197
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:113
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:583
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:143
@@ -673,7 +673,7 @@ msgid "No Name"
 msgstr "Sense nom"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:1192
+#: ../../src/editor/editorinteractive.cc:1200
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:114
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:584
 #: ../../src/logic/map.h:232 ../../src/ui_fsmenu/addons/packager.cc:390
@@ -681,20 +681,20 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "Desconegut"
 
-#: ../../src/editor/editorinteractive.cc:1216
+#: ../../src/editor/editorinteractive.cc:1224
 msgid "Loading world…"
 msgstr "Es carrega el món…"
 
-#: ../../src/editor/editorinteractive.cc:1395
+#: ../../src/editor/editorinteractive.cc:1403
 #, c-format
 msgid "Tool gaps: %u%%"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1418
+#: ../../src/editor/editorinteractive.cc:1426
 msgid "Publish Map"
 msgstr "Publica el mapa"
 
-#: ../../src/editor/editorinteractive.cc:1419
+#: ../../src/editor/editorinteractive.cc:1427
 #, c-format
 msgid ""
 "Are you certain that you want to publish this map online?\n"
@@ -706,50 +706,50 @@ msgid ""
 "Hint: %5$s\n"
 msgstr "Esteu segur que voleu publicar el mapa en línia?\n\nNom: %1$s\nNom intern: %2$s\nAutor: %3$s\nDescripció: %4$s\nConsell: %5$s\n"
 
-#: ../../src/editor/editorinteractive.cc:1443
+#: ../../src/editor/editorinteractive.cc:1451
 msgid "Login Error"
 msgstr "Error d'inici de sessió"
 
-#: ../../src/editor/editorinteractive.cc:1448
+#: ../../src/editor/editorinteractive.cc:1456
 msgid "Uploading Add-On…"
 msgstr "Es carrega el complement…"
 
-#: ../../src/editor/editorinteractive.cc:1449
+#: ../../src/editor/editorinteractive.cc:1457
 msgid "Saving map…"
 msgstr "Es desa el mapa…"
 
-#: ../../src/editor/editorinteractive.cc:1468
+#: ../../src/editor/editorinteractive.cc:1476
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:314
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:369
 msgid "Error Saving Map!"
 msgstr "S’ha produït un error mentre es desava el mapa!"
 
-#: ../../src/editor/editorinteractive.cc:1474
+#: ../../src/editor/editorinteractive.cc:1482
 msgid "Packaging add-on…"
 msgstr "S'empaqueta el complement…"
 
-#: ../../src/editor/editorinteractive.cc:1525
+#: ../../src/editor/editorinteractive.cc:1533
 msgid "Add-On Generation Error"
 msgstr "Error de generació del complement"
 
-#: ../../src/editor/editorinteractive.cc:1526
+#: ../../src/editor/editorinteractive.cc:1534
 msgid "The add-on could not be written to the disk."
 msgstr "No s'ha pogut escriure el complement al disc."
 
-#: ../../src/editor/editorinteractive.cc:1533
+#: ../../src/editor/editorinteractive.cc:1541
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:107
 msgid "Uploading…"
 msgstr "Es va pujant…"
 
-#: ../../src/editor/editorinteractive.cc:1539
+#: ../../src/editor/editorinteractive.cc:1547
 msgid "Upload Error"
 msgstr "Error de càrrega"
 
-#: ../../src/editor/editorinteractive.cc:1561
+#: ../../src/editor/editorinteractive.cc:1569
 msgid "Success"
 msgstr "Èxit"
 
-#: ../../src/editor/editorinteractive.cc:1562
+#: ../../src/editor/editorinteractive.cc:1570
 msgid "The add-on was uploaded successfully."
 msgstr "S'ha publicat el complement correctament."
 
@@ -6771,45 +6771,45 @@ msgstr "Missatge d’error:"
 msgid "File system error"
 msgstr "S’ha produït un error en el sistema de fitxers."
 
-#: ../../src/wlapplication.cc:1300
+#: ../../src/wlapplication.cc:1301
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr "Valor buit del paràmetre de la línia d’ordre: %s"
 
-#: ../../src/wlapplication.cc:1305
+#: ../../src/wlapplication.cc:1306
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr "No es pot combinar %s amb altres accions."
 
-#: ../../src/wlapplication.cc:1460
+#: ../../src/wlapplication.cc:1461
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Paràmetre de línia d’ordre desconegut: %s\nPotser falta un signe d’igual? "
 
-#: ../../src/wlapplication.cc:1581
+#: ../../src/wlapplication.cc:1582
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr "--xres/--yres, --maximized i --fullscreen no es poden combinar."
 
-#: ../../src/wlapplication.cc:1599
+#: ../../src/wlapplication.cc:1600
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Paràmetre de la línia d’ordre desconegut: %s"
 
-#: ../../src/wlapplication.cc:1625
+#: ../../src/wlapplication.cc:1626
 msgid "Incompatible"
 msgstr "Incompatible"
 
-#: ../../src/wlapplication.cc:1662
+#: ../../src/wlapplication.cc:1663
 msgid "Game ended unexpectedly"
 msgstr "La partida ha acabat de manera inesperada."
 
-#: ../../src/wlapplication.cc:1662
+#: ../../src/wlapplication.cc:1663
 msgid "Unexpected error during the game"
 msgstr "S’ha produït un error inesperat durant la partida."
 
-#: ../../src/wlapplication.cc:1665
+#: ../../src/wlapplication.cc:1666
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6823,7 +6823,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "S’ha produït un error durant la partida amb el següent missatge d’error:\n\n%1$s\n\nSi us plau, informeu d’aquest problema per ajudar a millorar el Widelands. Trobareu missatges relacionats a la sortida estàndard (stdout.txt al Windows). Esteu usant la versió %2$s.\n\nSi us plau, afegiu aquestes dades a l’informe.\n\nVoleu que el Widelands intenti crear una desada d’emergència? Sovint – encara que no sempre – és possible carregar-la i continuar jugant."
 
-#: ../../src/wlapplication.cc:1674
+#: ../../src/wlapplication.cc:1675
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6833,11 +6833,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "La partida ha acabat inesperadament pel següent motiu:\n\n%s\n\nVoleu que el Widelands provi de crear una desada d’emergència de la partida? A vegades –tot i que no sempre– és possible carregar-la i continuar jugant."
 
-#: ../../src/wlapplication.cc:1700
+#: ../../src/wlapplication.cc:1701
 msgid "Emergency save failed"
 msgstr "La desada d’emergència ha fallat."
 
-#: ../../src/wlapplication.cc:1701
+#: ../../src/wlapplication.cc:1702
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
