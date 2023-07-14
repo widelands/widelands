@@ -121,6 +121,11 @@ python3 utils/fix_formatting.py --lua --dir data/txts
 # Undo one-liner diffs of pure timestamps with no other content
 undo_oneliner_diffs
 
+if [ -z "$(git status -s)" ]; then
+  echo "Run completed, nothing to commit."
+  exit 0
+fi
+
 # Stage changes
 # - Translations
 git add po/*/*.po po/*/*.pot data/i18n/locales/*.json xdg/translations/*.json || true
@@ -132,11 +137,6 @@ git add data/i18n/*.lua || true
 git add xdg/org.widelands.Widelands.appdata.xml xdg/org.widelands.Widelands.desktop || true
 # - Statistics
 git add data/i18n/translation_stats.conf || true
-
-if [ -z "$(git status -s)" ]; then
-  echo "Run completed, nothing to commit."
-  exit 0
-fi
 
 # Commit and push.
 git commit -m "Fetched translations and updated catalogs."
