@@ -57,7 +57,32 @@ echo "Working tree is clean, continuing"
 # Print all commands.
 set -x
 
-# Pull translations from Transifex
+# Update source catalogs
+python3 utils/buildcat.py
+
+undo_oneliner_diffs() {
+  # Undo one-liner diffs of pure timestamps with no other content
+  set +x
+  for entry in $(git diff --numstat po/ | sed -En 's/^1\t1\t//p'); do
+    if [ -z "$(git diff "$entry" | grep '^[+-][^+-]' | grep -v '^[+-]"POT-Creation-Date:')" ]
+    then
+      echo "Skipping changes to $entry"
+      git checkout $entry
+    fi
+  done
+  set -x
+}
+undo_oneliner_diffs
+
+if [ -z "$(git status -s)" ]; then
+  true # nothing changed, do not upload to transifex
+else
+  # Push source catalogs to Transifex
+  tx push -s
+  sleep 5 # ?? # wait for translation files to be updated
+fi
+
+# Pull All translations from Transifex
 # tx pull -a
 # Force-pull translations because some would get skipped accidentally
 tx pull -fa
@@ -80,9 +105,6 @@ else
   exit 1;
 fi
 
-# Update catalogs
-python3 utils/buildcat.py
-
 # Update statistics
 python3 utils/update_translation_stats.py
 if [ $? -eq 0 ] ; then
@@ -97,15 +119,7 @@ python3 utils/fix_formatting.py --lua --dir data/i18n
 python3 utils/fix_formatting.py --lua --dir data/txts
 
 # Undo one-liner diffs of pure timestamps with no other content
-set +x
-for entry in $(git diff --numstat po/ | sed -En 's/^1\t1\t//p'); do
-  if [ -z "$(git diff "$entry" | grep '^[+-][^+-]' | grep -v '^[+-]"POT-Creation-Date:')" ]
-  then
-    echo "Skipping changes to $entry"
-    git checkout $entry
-  fi
-done
-set -x
+undo_oneliner_diffs
 
 # Stage changes
 # - Translations
@@ -127,6 +141,3 @@ fi
 # Commit and push.
 git commit -m "Fetched translations and updated catalogs."
 git push "$push_target" master
-
-# Push catalogs to Transifex
-tx push -s
