@@ -577,7 +577,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			}
 			const Image* player_image;
 			if (p == 0u) {
-				player_image = playercolor_image(color(220, 220, 220), "images/players/player_position.png");
+				player_image =
+				   playercolor_image(color(220, 220, 220), "images/players/player_position.png");
 			} else {
 				player_image = playercolor_image(p - 1, "images/players/player_position.png");
 			}
@@ -608,7 +609,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 				float opacity =
 				   f->seeing == Widelands::VisibleState::kVisible ? 1.f : kBuildhelpOpacity;
 				if (picking_starting_pos) {
-					caps = show_port_space || buildhelp() ? f->fcoords.field->nodecaps() : Widelands::CAPS_NONE;
+					caps = show_port_space || buildhelp() ? f->fcoords.field->nodecaps() :
+                                                       Widelands::CAPS_NONE;
 				} else if (show_port_space) {
 					caps = maxcaps;
 				} else {
@@ -626,7 +628,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 				}
 
 				const auto* overlay = get_buildhelp_overlay(caps, scale);
-				if (overlay != nullptr && (!suited_as_starting_pos || (caps & Widelands::BUILDCAPS_PORT) != 0)) {
+				if (overlay != nullptr &&
+				    (!suited_as_starting_pos || (caps & Widelands::BUILDCAPS_PORT) != 0)) {
 					// draw overlay if not a starting pos, but draw port space anyway
 					blit_field_overlay(
 					   dst, *f, overlay->pic, overlay->hotspot, scale / overlay->scale, opacity);
