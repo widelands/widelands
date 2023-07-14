@@ -23,6 +23,7 @@
 #include "base/mutex.h"
 #include "economy/flag.h"
 #include "game_io/game_loader.h"
+#include "graphic/color.h"
 #include "graphic/game_renderer.h"
 #include "graphic/mouse_cursor.h"
 #include "graphic/text_layout.h"
@@ -578,7 +579,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			const Image* player_image;
 			if (p == 0u) {
 				player_image =
-				   playercolor_image(color(220, 220, 220), "images/players/player_position.png");
+				   playercolor_image(RGBColor(220, 220, 220), "images/players/player_position.png");
 			} else {
 				player_image = playercolor_image(p - 1, "images/players/player_position.png");
 			}
