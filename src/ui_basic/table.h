@@ -50,6 +50,7 @@ public:
 	struct EntryRecord {};
 
 	Table(Panel* parent,
+	      const std::string& name,
 	      int32_t x,
 	      int32_t y,
 	      uint32_t w,
@@ -170,6 +171,7 @@ public:
 	};
 
 	Table(Panel* parent,
+	      const std::string& name,
 	      int32_t x,
 	      int32_t y,
 	      uint32_t w,
@@ -354,13 +356,14 @@ template <typename Entry> class Table<const Entry* const> : public Table<void*> 
 public:
 	using Base = Table<void*>;
 	Table(Panel* parent,
+	      const std::string& name,
 	      int32_t x,
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
 	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, style, rowtype) {
+	   : Base(parent, name, x, y, w, h, style, rowtype) {
 	}
 
 	void remove_entry(Entry const* const entry) {
@@ -388,13 +391,14 @@ template <typename Entry> class Table<Entry* const> : public Table<void*> {
 public:
 	using Base = Table<void*>;
 	Table(Panel* parent,
+	      const std::string& name,
 	      int32_t x,
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
 	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, style, rowtype) {
+	   : Base(parent, name, x, y, w, h, style, rowtype) {
 	}
 
 	void remove_entry(Entry const* entry) {
@@ -422,13 +426,14 @@ template <typename Entry> class Table<const Entry&> : public Table<void*> {
 public:
 	using Base = Table<void*>;
 	Table(Panel* parent,
+	      const std::string& name,
 	      int32_t x,
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
 	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, style, rowtype) {
+	   : Base(parent, name, x, y, w, h, style, rowtype) {
 	}
 
 	void remove_entry(const Entry& entry) {
@@ -460,13 +465,14 @@ template <typename Entry> class Table<Entry&> : public Table<void*> {
 public:
 	using Base = Table<void*>;
 	Table(Panel* parent,
+	      const std::string& name,
 	      int32_t x,
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
 	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, style, rowtype) {
+	   : Base(parent, name, x, y, w, h, style, rowtype) {
 	}
 
 	void remove_entry(Entry& entry) {
@@ -500,13 +506,14 @@ template <> class Table<uintptr_t> : public Table<void*> {
 public:
 	using Base = Table<void*>;
 	Table(Panel* parent,
+	      const std::string& name,
 	      int32_t x,
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
 	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, style, rowtype) {
+	   : Base(parent, name, x, y, w, h, style, rowtype) {
 	}
 
 	void remove_entry(uintptr_t const entry) {
@@ -536,13 +543,14 @@ template <> class Table<uintptr_t const> : public Table<uintptr_t> {
 public:
 	using Base = Table<uintptr_t>;
 	Table(Panel* parent,
+	      const std::string& name,
 	      int32_t x,
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
 	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, style, rowtype) {
+	   : Base(parent, name, x, y, w, h, style, rowtype) {
 	}
 };
 }  // namespace UI

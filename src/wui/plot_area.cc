@@ -317,13 +317,14 @@ void draw_diagram(uint32_t time_ms,
 }  // namespace
 
 WuiPlotArea::WuiPlotArea(UI::Panel* const parent,
+                         const std::string& name,
                          int32_t const x,
                          int32_t const y,
                          int32_t const w,
                          int32_t const h,
                          uint32_t sample_rate,
                          Plotmode plotmode)
-   : UI::Panel(parent, UI::PanelStyle::kWui, x, y, w, h),
+   : UI::Panel(parent, UI::PanelStyle::kWui, name, x, y, w, h),
      plotmode_(plotmode),
      sample_rate_(sample_rate),
 
@@ -626,13 +627,14 @@ void WuiPlotAreaSlider::draw(RenderTarget& dst) {
 }
 
 DifferentialPlotArea::DifferentialPlotArea(UI::Panel* const parent,
+                                           const std::string& name,
                                            int32_t const x,
                                            int32_t const y,
                                            int32_t const w,
                                            int32_t const h,
                                            uint32_t sample_rate,
                                            Plotmode plotmode)
-   : WuiPlotArea(parent, x, y, w, h, sample_rate, plotmode) {
+   : WuiPlotArea(parent, name, x, y, w, h, sample_rate, plotmode) {
 	update();
 }
 
