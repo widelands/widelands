@@ -929,9 +929,10 @@ void OptionsCtrl::handle_menu() {
 	MenuTarget i = opt_dialog_->run<MenuTarget>();
 	if (i != MenuTarget::kBack) {
 		save_options();
-		g_gr->set_fullscreen(opt_dialog_->get_values().fullscreen);
+		int display = opt_dialog_->get_values().display;
+		g_gr->set_fullscreen(opt_dialog_->get_values().fullscreen, display);
 		if (opt_dialog_->get_values().maximized) {
-			g_gr->set_maximized(true);
+			g_gr->set_maximized(true, display);
 		} else if (!opt_dialog_->get_values().fullscreen && !opt_dialog_->get_values().maximized) {
 			g_gr->change_resolution(
 			   opt_dialog_->get_values().xres, opt_dialog_->get_values().yres, true);
