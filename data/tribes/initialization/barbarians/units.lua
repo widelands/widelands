@@ -1186,8 +1186,12 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("barbarians_building", "Frequent response of a Barbarian fisherman,<br>often followed by an enjoyable brawl"),
             -- TRANSLATORS: Purpose helptext for production site: Fisher's Hut
             purpose = pgettext("barbarians_building", "Fishes on the coast near the fisher’s hut."),
-            -- TRANSLATORS: Note helptext for production site: Fisher's Hut
-            note = pgettext("barbarians_building", "The fisher’s hut needs water full of fish within the work area."),
+            note = {
+               -- TRANSLATORS: Note helptext for production site: Fisher's Hut, part 1
+               pgettext("barbarians_building", "The fisher’s hut needs water full of fish within the work area."),
+               -- TRANSLATORS: Note helptext for production site: Fisher's Hut, part 2
+               pgettext("building", "Roads and trees along the shoreline block fishing."),
+            },
             -- TRANSLATORS: Performance helptext for production site: Fisher's Hut
             performance = pgettext("barbarians_building", "The fisher pauses %s before going to work again."):bformat(format_seconds(18))
          }
@@ -1767,8 +1771,12 @@ wl.Descriptions():new_tribe {
          helptexts = {
             -- TRANSLATORS: Purpose helptext for production site: Ferry Yard
             purpose = pgettext("building", "Builds ferries."),
-            -- TRANSLATORS: Note helptext for production site: Ferry Yard
-            note = pgettext("building", "Needs water nearby.")
+            note = {
+               -- TRANSLATORS: Note helptext for a Barbarian production site: Ferry Yard, part 1
+               pgettext("building", "Needs water nearby. Be aware ferries carry wares only, no workers."),
+               -- TRANSLATORS: Note helptext for a Barbarian production site: Ferry Yard, part 2
+               pgettext("building", "Roads and trees along the shoreline block access to water."),
+            }
          }
       },
       {
@@ -1780,7 +1788,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for a Barbarian production site: Shipyard
             lore_author = pgettext("barbarians_building", "Captain Thanlas the Elder,<br>Explorer"),
             -- TRANSLATORS: Purpose helptext for a Barbarian production site: Shipyard
-            purpose = pgettext("building", "Constructs ships that are used for overseas colonization and for trading between ports.")
+            purpose = pgettext("building", "Constructs ships that are used for overseas colonization and for trading between ports."),
+            note = {
+               -- TRANSLATORS: Note helptext for a Barbarian production site: Shipyard, part 1
+               pgettext("building", "Needs wide open water nearby."),
+               -- TRANSLATORS: Note helptext for a Barbarian production site: Shipyard, part 2
+               pgettext("building", "Roads and trees along the shoreline block access to water."),
+            }
          }
       },
       {
