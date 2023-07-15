@@ -7,5 +7,3 @@ Changes
 Eris:
 - removed luac.c. It defined a main() function which could hide our own main()
   eris was linked in.
-- in loslib.c always use the LUA_USE_POSIX version of lua_tmpnam (with mkstemp()),
-  because tmpnam() is deprecated.

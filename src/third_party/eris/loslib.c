@@ -102,10 +102,13 @@ static time_t l_checktime (lua_State *L, int arg) {
 /*
 ** {==================================================================
 ** Configuration for 'tmpnam':
-** By default, Lua uses POSIX mkstemp.
+** By default, Lua uses tmpnam except when POSIX is available, where
+** it uses mkstemp.
 ** ===================================================================
 */
 #if !defined(lua_tmpnam)	/* { */
+
+#if defined(LUA_USE_POSIX)	/* { */
 
 #include <unistd.h>
 
@@ -120,6 +123,14 @@ static time_t l_checktime (lua_State *L, int arg) {
         e = mkstemp(b); \
         if (e != -1) close(e); \
         e = (e == -1); }
+
+#else				/* }{ */
+
+/* ISO C definitions */
+#define LUA_TMPNAMBUFSIZE	L_tmpnam
+#define lua_tmpnam(b,e)		{ e = (tmpnam(b) == NULL); }
+
+#endif				/* } */
 
 #endif				/* } */
 /* }================================================================== */
