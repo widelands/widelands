@@ -58,6 +58,7 @@ struct MultilineTextarea : public Panel {
 		return text_;
 	}
 
+	void get_text_size(int* w, int* h);
 	void set_text(const std::string&);
 	// int instead of uint because of overflow situations
 	int32_t get_eff_w() const {

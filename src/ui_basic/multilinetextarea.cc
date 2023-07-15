@@ -71,6 +71,16 @@ void MultilineTextarea::set_font_scale(float scale) {
 	recompute();
 }
 
+void MultilineTextarea::get_text_size(int* w, int* h) {
+	if (rendered_text_ == nullptr) {
+		*w = 0;
+		*h = 0;
+	} else {
+		*w = rendered_text_->width();
+		*h = rendered_text_->height();
+	}
+}
+
 /**
  * Replace the current text with a new one.
  * Fix up scrolling state if necessary.
@@ -94,7 +104,7 @@ void MultilineTextarea::recompute() {
 		int height = 0;
 		if (!text_.empty()) {
 			// Ensure we have a text width. Simply overflow if there is no width available.
-			const int txt_width = std::max(10, get_eff_w() - 2 * kRichtextMargin);
+			const int txt_width = std::max(kRichtextMargin, get_eff_w() - 2 * kRichtextMargin);
 			assert(txt_width > 0);
 
 			if (!is_richtext(text_)) {
