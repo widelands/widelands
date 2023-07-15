@@ -184,6 +184,15 @@ int Graphic::get_display_at(int x, int y) const {
 	return -1;
 }
 
+void Graphic::move_to_display(int display) {
+	if (display < 0 || display >= SDL_GetNumVideoDisplays()) {
+		return;
+	}
+
+	SDL_SetWindowPosition(sdl_window_, SDL_WINDOWPOS_CENTERED_DISPLAY(display),
+	                      SDL_WINDOWPOS_CENTERED_DISPLAY(display));
+}
+
 /**
  * Return the screen x resolution
  */
@@ -266,19 +275,37 @@ int Graphic::max_texture_size_for_font_rendering() const {
 #endif
 }
 
+int Graphic::get_display() const {
+	int x;
+	int y;
+	int w;
+	int h;
+	SDL_GetWindowPosition(sdl_window_, &x, &y);
+	SDL_GetWindowSize(sdl_window_, &w, &h);
+	return get_display_at(x + w / 2, y + h / 2);
+}
+
 bool Graphic::maximized() const {
 	uint32_t flags = SDL_GetWindowFlags(sdl_window_);
 	return (flags & SDL_WINDOW_MAXIMIZED) != 0u;
 }
 
-void Graphic::set_maximized(const bool to_maximize) {
+void Graphic::set_maximized(const bool to_maximize, int to_display) {
 	window_mode_maximized_ = to_maximize;
-	if (fullscreen() || maximized() == to_maximize) {
+	int display = get_display();
+	if (to_display < 0) {
+		to_display = display;
+	}
+	if (fullscreen() || (maximized() == to_maximize && display == to_display)) {
 		return;
 	}
 	if (to_maximize) {
 		// Maximizing only works if the window is resizable.
 		SDL_SetWindowResizable(sdl_window_, SDL_TRUE);
+		if (display != to_display) {
+			SDL_RestoreWindow(sdl_window_);
+			move_to_display(to_display);
+		}
 		SDL_MaximizeWindow(sdl_window_);
 	} else {
 		// Avoid glitches. See the comment in set_window_size().
@@ -293,8 +320,12 @@ bool Graphic::fullscreen() const {
 	       ((flags & SDL_WINDOW_FULLSCREEN_DESKTOP) != 0u);
 }
 
-void Graphic::set_fullscreen(const bool value) {
-	if (value == fullscreen()) {
+void Graphic::set_fullscreen(const bool value, int to_display) {
+	int display = get_display();
+	if (to_display < 0) {
+		to_display = display;
+	}
+	if (value == fullscreen() && display == to_display) {
 		return;
 	}
 
@@ -305,6 +336,12 @@ void Graphic::set_fullscreen(const bool value) {
 	// SDL will resize the window for us.
 	if (value) {
 		window_mode_maximized_ = maximized();
+		if (display != to_display) {
+			SDL_SetWindowFullscreen(sdl_window_, 0);
+			SDL_SetWindowResizable(sdl_window_, SDL_TRUE);
+			SDL_RestoreWindow(sdl_window_);
+			move_to_display(to_display);
+		}
 		SDL_SetWindowFullscreen(sdl_window_, SDL_WINDOW_FULLSCREEN_DESKTOP);
 	} else {
 		SDL_SetWindowFullscreen(sdl_window_, 0);
