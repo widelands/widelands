@@ -79,7 +79,8 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 
 	std::unique_ptr<const Image>& image = offscreen_images->back();
 	UI::Checkbox* cb =
-	   new UI::Checkbox(parent, UI::PanelStyle::kWui, Vector2i::zero(), image.get(), tooltip);
+	   new UI::Checkbox(parent, UI::PanelStyle::kWui, format("checkbox_%s", terrain_descr.name()),
+	                    Vector2i::zero(), image.get(), tooltip);
 	cb->set_desired_size(image->width() + 1, image->height() + 1);
 	return cb;
 }
@@ -93,7 +94,8 @@ EditorToolSetTerrainOptionsMenu::EditorToolSetTerrainOptionsMenu(
 	LuaInterface* lua = &parent.egbase().lua();
 	multi_select_menu_.reset(
 	   new CategorizedItemSelectionMenu<Widelands::TerrainDescription, EditorSetTerrainTool>(
-	      this, parent.editor_categories(Widelands::MapObjectType::TERRAIN), descriptions.terrains(),
+	      this, "terrains", parent.editor_categories(Widelands::MapObjectType::TERRAIN),
+	      descriptions.terrains(),
 	      [this, lua](UI::Panel* cb_parent, const Widelands::TerrainDescription& terrain_descr) {
 		      return create_terrain_checkbox(cb_parent, lua, terrain_descr, &offscreen_images_);
 	      },

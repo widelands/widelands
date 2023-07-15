@@ -58,8 +58,8 @@ LoadGame::LoadGame(MenuCapsule& fsmm,
      is_replay_(is_replay) {
 
 	if (is_replay_) {
-		show_filenames_ = new UI::Checkbox(
-		   &header_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Filenames"));
+		show_filenames_ = new UI::Checkbox(&header_box_, UI::PanelStyle::kFsMenu, "show_filenames",
+		                                   Vector2i::zero(), _("Show Filenames"));
 		header_box_.add(show_filenames_, UI::Box::Resizing::kFullSize);
 		header_box_.add_space(5 * kPadding);
 	}
