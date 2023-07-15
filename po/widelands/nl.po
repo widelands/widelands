@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-10 03:08+0000\n"
+"POT-Creation-Date: 2023-07-13 03:06+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Foppe Benedictus <foppe.benedictus@gmail.com>, 2020,2022\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
@@ -5274,7 +5274,7 @@ msgstr "Naam van de Stam"
 msgid "Campaign Name"
 msgstr "Naam Veldtocht"
 
-#: ../../src/ui_fsmenu/helpwindow.cc:46 ../../src/wui/helpwindow.cc:44
+#: ../../src/ui_fsmenu/helpwindow.cc:46 ../../src/wui/helpwindow.cc:48
 #, c-format
 msgid "Help: %s"
 msgstr "Help: %s"
@@ -6015,7 +6015,7 @@ msgstr "Niet gespecificeerd"
 msgid "The map does not specify whether it is balanced"
 msgstr ""
 
-#: ../../src/ui_fsmenu/menu.cc:106
+#: ../../src/ui_fsmenu/menu.cc:106 ../../src/wui/helpwindow.cc:68
 msgid "Back"
 msgstr "Terug"
 
@@ -8251,11 +8251,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ../../src/wui/encyclopedia_window.cc:230
+#: ../../src/wui/encyclopedia_window.cc:234 ../../src/wui/helpwindow.cc:146
 msgid "Broken Link"
 msgstr ""
 
-#: ../../src/wui/encyclopedia_window.cc:231
+#: ../../src/wui/encyclopedia_window.cc:235 ../../src/wui/helpwindow.cc:147
 msgid "This hyperlink seems to be broken."
 msgstr ""
 
