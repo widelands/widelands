@@ -119,10 +119,10 @@ Panel
 */
 const char LuaPanel::className[] = "Panel";
 const PropertyType<LuaPanel> LuaPanel::Properties[] = {
-   PROP_RO(LuaPanel, children),   PROP_RO(LuaPanel, buttons),  PROP_RO(LuaPanel, dropdowns),
-   PROP_RO(LuaPanel, tabs),       PROP_RO(LuaPanel, windows),  PROP_RW(LuaPanel, position_x),
-   PROP_RW(LuaPanel, position_y), PROP_RW(LuaPanel, width),    PROP_RW(LuaPanel, height),
-   PROP_RW(LuaPanel, visible),    PROP_RO(LuaPanel, name),     {nullptr, nullptr, nullptr},
+   PROP_RO(LuaPanel, children),   PROP_RO(LuaPanel, buttons), PROP_RO(LuaPanel, dropdowns),
+   PROP_RO(LuaPanel, tabs),       PROP_RO(LuaPanel, windows), PROP_RW(LuaPanel, position_x),
+   PROP_RW(LuaPanel, position_y), PROP_RW(LuaPanel, width),   PROP_RW(LuaPanel, height),
+   PROP_RW(LuaPanel, visible),    PROP_RO(LuaPanel, name),    {nullptr, nullptr, nullptr},
 };
 const MethodType<LuaPanel> LuaPanel::Methods[] = {
    METHOD(LuaPanel, get_descendant_position),
@@ -976,7 +976,8 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 			checkbox = new UI::Checkbox(
 			   parent, UI::PanelStyle::kWui, name, Vector2i(x, y), g_image_cache->get(icon), tooltip);
 		} else {
-			checkbox = new UI::Checkbox(parent, UI::PanelStyle::kWui, name, Vector2i(x, y), title, tooltip);
+			checkbox =
+			   new UI::Checkbox(parent, UI::PanelStyle::kWui, name, Vector2i(x, y), title, tooltip);
 		}
 		created_panel = checkbox;
 
@@ -1005,8 +1006,8 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 			int32_t ry = get_table_int(L, "y", false);
 
 			UI::Radiobutton* radiobutton;
-			group->add_button(parent, UI::PanelStyle::kWui, name, Vector2i(rx, ry), g_image_cache->get(icon),
-			                  rtooltip, &radiobutton);
+			group->add_button(parent, UI::PanelStyle::kWui, name, Vector2i(rx, ry),
+			                  g_image_cache->get(icon), rtooltip, &radiobutton);
 
 			// Box layouting if applicable
 			if (as_box != nullptr) {
