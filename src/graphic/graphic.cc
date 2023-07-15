@@ -75,6 +75,7 @@ Graphic::Graphic() {
  * Initialize the SDL video mode.
  */
 void Graphic::initialize(const TraceGl& trace_gl,
+                         int display,
                          int window_mode_w,
                          int window_mode_h,
                          bool init_fullscreen,
@@ -87,12 +88,26 @@ void Graphic::initialize(const TraceGl& trace_gl,
 	}
 
 	log_info("Graphics: Try to set Videomode %ux%u\n", window_mode_width_, window_mode_height_);
+
+	if (display < 0 || display >= SDL_GetNumVideoDisplays()) {
+		// Find the display, the mouse pointer is on.
+		int mouse_x;
+		int mouse_y;
+		SDL_GetGlobalMouseState(&mouse_x, &mouse_y);
+		display = get_display_at(mouse_x, mouse_y);
+	}
+	int window_x = SDL_WINDOWPOS_UNDEFINED;
+	int window_y = SDL_WINDOWPOS_UNDEFINED;
+	if (display >= 0 && display < SDL_GetNumVideoDisplays()) {
+		window_x = window_y = SDL_WINDOWPOS_CENTERED_DISPLAY(display);
+	}
+
 	uint32_t window_flags = SDL_WINDOW_OPENGL;
 #ifdef RESIZABLE_WINDOW
 	window_flags |= SDL_WINDOW_RESIZABLE;
 #endif
 	sdl_window_ =
-	   SDL_CreateWindow("Widelands Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+	   SDL_CreateWindow("Widelands Window", window_x, window_y,
 	                    window_mode_width_, window_mode_height_, window_flags);
 	SDL_SetWindowMinimumSize(sdl_window_, kMinimumResolutionW, kMinimumResolutionH);
 
@@ -157,6 +172,17 @@ Graphic::~Graphic() {
 		SDL_GL_DeleteContext(gl_context_);
 		gl_context_ = nullptr;
 	}
+}
+
+int Graphic::get_display_at(int x, int y) const {
+	for (int i = 0; i < SDL_GetNumVideoDisplays(); ++i) {
+		SDL_Rect r;
+		if (SDL_GetDisplayBounds(i, &r) == 0 &&
+			r.x <= x && x < r.x + r.w && r.y <= y && y < r.y + r.h) {
+			return i;
+		}
+	}
+	return -1;
 }
 
 /**
