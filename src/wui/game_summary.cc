@@ -39,28 +39,30 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
      desired_speed_(game_.game_controller()->desired_speed()) {
 	game_.game_controller()->set_desired_speed(0);
 	// Init boxes
-	UI::Box* vbox = new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical, 0, 0, kPadding);
-	title_area_ = new UI::Textarea(
-	   vbox, UI::PanelStyle::kWui, UI::FontStyle::kGameSummaryTitle, "", UI::Align::kCenter);
+	UI::Box* vbox =
+	   new UI::Box(this, UI::PanelStyle::kWui, "vbox", 0, 0, UI::Box::Vertical, 0, 0, kPadding);
+	title_area_ = new UI::Textarea(vbox, UI::PanelStyle::kWui, "title",
+	                               UI::FontStyle::kGameSummaryTitle, "", UI::Align::kCenter);
 
 	vbox->add(title_area_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	vbox->add_space(kPadding);
 
-	UI::Box* hbox1 = new UI::Box(vbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
-	players_table_ = new UI::Table<uintptr_t const>(hbox1, 0, 0, 0, 0, UI::PanelStyle::kWui);
+	UI::Box* hbox1 = new UI::Box(vbox, UI::PanelStyle::kWui, "hbox1", 0, 0, UI::Box::Horizontal);
+	players_table_ =
+	   new UI::Table<uintptr_t const>(hbox1, "table", 0, 0, 0, 0, UI::PanelStyle::kWui);
 	players_table_->fit_height(game_.player_manager()->get_number_of_players());
 
-	info_box_ = new UI::Box(hbox1, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical, 0, 0);
-	info_area_label_ = new UI::Textarea(
-	   info_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, _("Player Info:"));
+	info_box_ = new UI::Box(hbox1, UI::PanelStyle::kWui, "info_box", 0, 0, UI::Box::Vertical, 0, 0);
+	info_area_label_ = new UI::Textarea(info_box_, UI::PanelStyle::kWui, "label_player_info",
+	                                    UI::FontStyle::kWuiLabel, _("Player Info:"));
 	info_area_ = new UI::MultilineTextarea(
-	   info_box_, 0, 0, 130,
+	   info_box_, "info_area", 0, 0, 130,
 	   std::max(130, players_table_->get_h() - info_area_label_->get_h() - kPadding),
 	   UI::PanelStyle::kWui, "");
 
 	widelands_icon_ =
-	   new UI::Icon(hbox1, UI::PanelStyle::kWui, 0, 0, info_area_->get_w(), info_area_->get_h(),
-	                g_image_cache->get("images/logos/wl-ico-128.png"));
+	   new UI::Icon(hbox1, UI::PanelStyle::kWui, "wl_logo", 0, 0, info_area_->get_w(),
+	                info_area_->get_h(), g_image_cache->get("images/logos/wl-ico-128.png"));
 
 	info_box_->add(info_area_label_);
 	info_box_->add(info_area_, UI::Box::Resizing::kFullSize);
@@ -79,16 +81,18 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 
 	vbox->add(hbox1);
 
-	UI::Box* bottom_box = new UI::Box(vbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	UI::Box* bottom_box =
+	   new UI::Box(vbox, UI::PanelStyle::kWui, "bottom_box", 0, 0, UI::Box::Horizontal);
 
 	bottom_box->add_space(kPadding);
 
-	gametime_label_ = new UI::Textarea(
-	   bottom_box, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, _("Elapsed time:"));
+	gametime_label_ = new UI::Textarea(bottom_box, UI::PanelStyle::kWui, "label_elapsed",
+	                                   UI::FontStyle::kWuiLabel, _("Elapsed time:"));
 	bottom_box->add(gametime_label_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	bottom_box->add_space(kPadding);
-	gametime_value_ = new UI::Textarea(bottom_box, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel,
-	                                   gametimestring(game_.get_gametime().get()));
+	gametime_value_ =
+	   new UI::Textarea(bottom_box, UI::PanelStyle::kWui, "elapsed", UI::FontStyle::kWuiLabel,
+	                    gametimestring(game_.get_gametime().get()));
 	bottom_box->add(gametime_value_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	bottom_box->add_inf_space();

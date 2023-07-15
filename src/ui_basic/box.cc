@@ -28,13 +28,14 @@ namespace UI {
  */
 Box::Box(Panel* const parent,
          PanelStyle s,
+         const std::string& name,
          int32_t const x,
          int32_t const y,
          uint32_t const orientation,
          int32_t const max_x,
          int32_t const max_y,
          uint32_t const inner_spacing)
-   : Panel(parent, s, x, y, 0, 0),
+   : Panel(parent, s, name, x, y, 0, 0),
 
      max_x_(max_x != 0 ? max_x : g_gr->get_xres()),
      max_y_(max_y != 0 ? max_y : g_gr->get_yres()),
@@ -221,8 +222,8 @@ void Box::layout() {
 			pagesize = get_inner_h() - Scrollbar::kSize;
 		}
 		if (scrollbar_ == nullptr) {
-			scrollbar_.reset(
-			   new Scrollbar(this, sb_x, sb_y, sb_w, sb_h, panel_style_, orientation_ == Horizontal));
+			scrollbar_.reset(new Scrollbar(
+			   this, "scrollbar", sb_x, sb_y, sb_w, sb_h, panel_style_, orientation_ == Horizontal));
 			scrollbar_->moved.connect([this](int32_t a) { scrollbar_moved(a); });
 		} else {
 			scrollbar_->set_pos(Vector2i(sb_x, sb_y));
