@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-10 03:08+0000\n"
+"POT-Creation-Date: 2023-07-13 03:06+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Renaud Bouchard, 2015-2023\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
@@ -5316,7 +5316,7 @@ msgstr "Nom de la tribu"
 msgid "Campaign Name"
 msgstr "Nom de la campagne"
 
-#: ../../src/ui_fsmenu/helpwindow.cc:46 ../../src/wui/helpwindow.cc:44
+#: ../../src/ui_fsmenu/helpwindow.cc:46 ../../src/wui/helpwindow.cc:48
 #, c-format
 msgid "Help: %s"
 msgstr "Aide : %s"
@@ -6057,7 +6057,7 @@ msgstr "non-spécifié"
 msgid "The map does not specify whether it is balanced"
 msgstr "La carte ne spécifie pas si elle est équilibrée"
 
-#: ../../src/ui_fsmenu/menu.cc:106
+#: ../../src/ui_fsmenu/menu.cc:106 ../../src/wui/helpwindow.cc:68
 msgid "Back"
 msgstr "Retour"
 
@@ -8294,11 +8294,11 @@ msgid ""
 "%s"
 msgstr "Erreur de chargement de script pour l'encyclopédie:\n%s"
 
-#: ../../src/wui/encyclopedia_window.cc:230
+#: ../../src/wui/encyclopedia_window.cc:234 ../../src/wui/helpwindow.cc:146
 msgid "Broken Link"
 msgstr "Lien cassé"
 
-#: ../../src/wui/encyclopedia_window.cc:231
+#: ../../src/wui/encyclopedia_window.cc:235 ../../src/wui/helpwindow.cc:147
 msgid "This hyperlink seems to be broken."
 msgstr "L'hyperlien semble être cassé."
 

@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-10 03:08+0000\n"
+"POT-Creation-Date: 2023-07-13 03:06+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Viktor Skachkov <awsswa59@gmail.com>, 2023\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
@@ -5342,7 +5342,7 @@ msgstr "Название племени"
 msgid "Campaign Name"
 msgstr "Название кампании"
 
-#: ../../src/ui_fsmenu/helpwindow.cc:46 ../../src/wui/helpwindow.cc:44
+#: ../../src/ui_fsmenu/helpwindow.cc:46 ../../src/wui/helpwindow.cc:48
 #, c-format
 msgid "Help: %s"
 msgstr "Помощь: %s"
@@ -6083,7 +6083,7 @@ msgstr "Без особенностей"
 msgid "The map does not specify whether it is balanced"
 msgstr "Не указано, сбалансирована ли карта"
 
-#: ../../src/ui_fsmenu/menu.cc:106
+#: ../../src/ui_fsmenu/menu.cc:106 ../../src/wui/helpwindow.cc:68
 msgid "Back"
 msgstr "Назад"
 
@@ -8321,11 +8321,11 @@ msgid ""
 "%s"
 msgstr "Ошибка при загрузке скрипта для энциклопедии:\n%s"
 
-#: ../../src/wui/encyclopedia_window.cc:230
+#: ../../src/wui/encyclopedia_window.cc:234 ../../src/wui/helpwindow.cc:146
 msgid "Broken Link"
 msgstr "Неработающая ссылка"
 
-#: ../../src/wui/encyclopedia_window.cc:231
+#: ../../src/wui/encyclopedia_window.cc:235 ../../src/wui/helpwindow.cc:147
 msgid "This hyperlink seems to be broken."
 msgstr "Похоже эта гиперссылка не работает"
 

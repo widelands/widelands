@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-10 03:08+0000\n"
+"POT-Creation-Date: 2023-07-13 03:06+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: erimitis, 2018,2021\n"
 "Language-Team: Greek (http://app.transifex.com/widelands/widelands/language/el/)\n"
@@ -5268,7 +5268,7 @@ msgstr "Όνομα Φυλής"
 msgid "Campaign Name"
 msgstr "Όνομα Εκστρατείας"
 
-#: ../../src/ui_fsmenu/helpwindow.cc:46 ../../src/wui/helpwindow.cc:44
+#: ../../src/ui_fsmenu/helpwindow.cc:46 ../../src/wui/helpwindow.cc:48
 #, c-format
 msgid "Help: %s"
 msgstr "Βοήθεια: %s"
@@ -6009,7 +6009,7 @@ msgstr ""
 msgid "The map does not specify whether it is balanced"
 msgstr ""
 
-#: ../../src/ui_fsmenu/menu.cc:106
+#: ../../src/ui_fsmenu/menu.cc:106 ../../src/wui/helpwindow.cc:68
 msgid "Back"
 msgstr "Πίσω"
 
@@ -8245,11 +8245,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ../../src/wui/encyclopedia_window.cc:230
+#: ../../src/wui/encyclopedia_window.cc:234 ../../src/wui/helpwindow.cc:146
 msgid "Broken Link"
 msgstr ""
 
-#: ../../src/wui/encyclopedia_window.cc:231
+#: ../../src/wui/encyclopedia_window.cc:235 ../../src/wui/helpwindow.cc:147
 msgid "This hyperlink seems to be broken."
 msgstr ""
 

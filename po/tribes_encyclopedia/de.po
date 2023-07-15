@@ -9841,7 +9841,7 @@ msgid ""
 "smithy. In combination with a wooden spear, it is the equipment to fit out "
 "young soldiers. Helmets are also used in training camps – together with food"
 " – to train soldiers from health level 0 to level 1."
-msgstr ""
+msgstr "Der Helm ist der Grundschutz eines Soldaten. Er wird in Rüstungsschmieden hergestellt. Zusammen mit einem Holzspeer ist er die Grundausrüstung für junge Soldaten. Helme werden auch in Ausbildungslagern – zusammen mit Nahrung – benötigt, um die Lebenspunkte der Soldaten von Stufe 0 auf 1 zu erhöhen."
 
 #. TRANSLATORS: Helptext for an Empire ware: Armor
 #: ../../data/tribes/initialization/empire/units.lua:569
@@ -14122,7 +14122,7 @@ msgid ""
 "If all needed wares are delivered in time, this building can produce one "
 "broadsword in %1$s on average, one double-edged sword in %2$s on average and"
 " one golden helmet in %3$s on average."
-msgstr ""
+msgstr "Wenn alle Waren pünktlich geliefert werden, kann dieses Gebäude ein Breitschwert durchschnittlich in %1$s, ein zweischneidiges Schwert durchschnittlich in %2$s und einen  goldenen Helm durchschnittlich in %3$s herstellen."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Sewing Room
 #: ../../data/tribes/initialization/frisians/units.lua:1825
