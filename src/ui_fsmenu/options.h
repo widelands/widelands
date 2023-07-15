@@ -44,6 +44,7 @@ public:
 	struct OptionsStruct {
 
 		// Interface options
+		int32_t display;
 		int32_t xres;
 		int32_t yres;
 		bool maximized;
@@ -119,6 +120,7 @@ private:
 	void add_languages_to_list(const std::string& current_locale);
 	void update_language_stats();
 
+	void add_displays(const OptionsCtrl::OptionsStruct& opt);
 	void add_screen_resolutions(const OptionsCtrl::OptionsStruct& opt);
 
 	// Saves the options and closes the window
@@ -155,6 +157,7 @@ private:
 	// Interface options
 	UI::Dropdown<std::string> language_dropdown_;
 	UI::Dropdown<ScreenResolution> resolution_dropdown_;
+	UI::Dropdown<int> display_dropdown_;
 	UI::Checkbox sdl_cursor_;
 	UI::Checkbox tooltip_accessibility_mode_;
 	UI::MultilineTextarea translation_info_;
