@@ -54,6 +54,7 @@ struct Textarea : public Panel {
 public:
 	explicit Textarea(Panel* parent,
 	                  PanelStyle,
+	                  const std::string& name,
 	                  FontStyle,
 	                  int32_t x,
 	                  int32_t y,
@@ -63,6 +64,7 @@ public:
 	                  Align align = UI::Align::kLeft);
 	explicit Textarea(Panel* parent,
 	                  PanelStyle,
+	                  const std::string& name,
 	                  FontStyle,
 	                  const std::string& text = std::string(),
 	                  Align align = UI::Align::kLeft);
@@ -93,6 +95,7 @@ private:
 
 	Textarea(Panel* parent,
 	         PanelStyle,
+	         const std::string& name,
 	         FontStyle,
 	         int32_t x,
 	         int32_t y,

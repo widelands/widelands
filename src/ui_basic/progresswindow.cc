@@ -53,6 +53,7 @@ ProgressWindow::ProgressWindow(UI::Panel* parent,
                                bool crop)
    : UI::Panel(parent,
                PanelStyle::kFsMenu /* unused */,
+               "progresswindow",
                0,
                0,
                parent != nullptr ? parent->get_inner_w() : g_gr->get_xres(),
