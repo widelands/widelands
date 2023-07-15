@@ -1,6 +1,6 @@
 [TOC]
 
-## Post-1.1 until [git f28ac72](https://github.com/widelands/widelands/commit/f28ac7259b323ed97a21e3c0466894a59e75d631)
+## Post-1.1 until [git ebb912d](https://github.com/widelands/widelands/commit/ebb912da5cf9b239624914dd657fb5662be467f0)
 
 ### Animations, Icons and Overlays
 
@@ -38,6 +38,13 @@
 - Cleanup: variable `dirname` is local in all lua files (#5986)
 - Lua scripts can use `wl.Descriptions().building_descriptions` (#5993)
 - Move `lunit.lua` in `test/scripting/` (#5996)
+- Add new building type market to `is_building()` (#6015)
+- Fix upcasting map object descriptions to Lua (#5997)
+- Misc API Enhancements (#5975)
+    - Write map tags array in `wl_map_info`
+    - Add function `LuaWorker::evict`
+    - Add property `LuaMapObject.exists`
+    - Expose worker buildcost to `modify_unit`
 
 
 ### Maps
@@ -196,6 +203,7 @@
 - Fix performance text in encyclopedia and sleep times in production buildings where the workers need some experience (#5768)
 - Update keyboard controls help and generate it semi-automatically (#5717)
 - Follow links in building help window (#6003)
+- Helptexts about roads blocking shorelines for workers (#6014)
 
 
 ### Editor
