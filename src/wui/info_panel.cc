@@ -38,6 +38,7 @@ constexpr int16_t kMessagePreviewMaxLifetime = 15 * 1000;  // show messages for 
 MessagePreview::MessagePreview(InfoPanel* i, const std::string& text, const std::string& tooltip)
    : UI::Textarea(i,
                   UI::PanelStyle::kWui,
+                  "message_preview",
                   UI::FontStyle::kWuiGameSpeedAndCoordinates,
                   0,
                   0,
@@ -125,9 +126,9 @@ bool MessagePreview::handle_mousepress(const uint8_t button, int32_t /* x */, in
 }
 
 InfoPanel::InfoPanel(InteractiveBase& ib)
-   : UI::Panel(&ib, UI::PanelStyle::kWui, 0, 0, 0, 0),
+   : UI::Panel(&ib, UI::PanelStyle::kWui, "info_panel", 0, 0, 0, 0),
      ibase_(ib),
-     snap_target_panel_(&ibase_, UI::PanelStyle::kWui, 0, 0, 0, 0),
+     snap_target_panel_(&ibase_, UI::PanelStyle::kWui, "snap_target", 0, 0, 0, 0),
      toggle_mode_(this,
                   "mode",
                   0,
@@ -141,6 +142,7 @@ InfoPanel::InfoPanel(InteractiveBase& ib)
                   UI::ButtonStyle::kWuiMenu),
      text_time_speed_(this,
                       UI::PanelStyle::kWui,
+                      "label_time_speed",
                       UI::FontStyle::kWuiGameSpeedAndCoordinates,
                       0,
                       0,
@@ -150,6 +152,7 @@ InfoPanel::InfoPanel(InteractiveBase& ib)
                       UI::Align::kLeft),
      text_fps_(this,
                UI::PanelStyle::kWui,
+               "label_fps",
                UI::FontStyle::kWuiGameSpeedAndCoordinates,
                0,
                0,
@@ -159,6 +162,7 @@ InfoPanel::InfoPanel(InteractiveBase& ib)
                UI::Align::kLeft),
      text_coords_(this,
                   UI::PanelStyle::kWui,
+                  "label_coords",
                   UI::FontStyle::kWuiGameSpeedAndCoordinates,
                   0,
                   0,

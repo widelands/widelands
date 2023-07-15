@@ -75,6 +75,7 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_name(lua_State* L);
 	int get_children(lua_State* L);
 	int get_buttons(lua_State* L);
 	int get_dropdowns(lua_State* L);
@@ -107,38 +108,14 @@ public:
 	static UI::Panel* do_create_child(lua_State* L, UI::Panel* parent, UI::Box* as_box);
 };
 
-class LuaNamedPanel : public LuaPanel {
-public:
-	LUNA_CLASS_HEAD(LuaNamedPanel);
-
-	LuaNamedPanel() = default;
-	explicit LuaNamedPanel(UI::Panel* p) : LuaPanel(p) {
-	}
-	explicit LuaNamedPanel(lua_State* L) : LuaPanel(L) {
-	}
-	~LuaNamedPanel() override = default;
-
-	/*
-	 * Properties
-	 */
-	int get_name(lua_State* L);
-
-	/*
-	 * C Methods
-	 */
-	UI::NamedPanel* get() {
-		return dynamic_cast<UI::NamedPanel*>(panel_);
-	}
-};
-
-class LuaButton : public LuaNamedPanel {
+class LuaButton : public LuaPanel {
 public:
 	LUNA_CLASS_HEAD(LuaButton);
 
 	LuaButton() = default;
-	explicit LuaButton(UI::Panel* p) : LuaNamedPanel(p) {
+	explicit LuaButton(UI::Panel* p) : LuaPanel(p) {
 	}
-	explicit LuaButton(lua_State* L) : LuaNamedPanel(L) {
+	explicit LuaButton(lua_State* L) : LuaPanel(L) {
 	}
 	~LuaButton() override = default;
 
@@ -415,14 +392,14 @@ public:
 	}
 };
 
-class LuaDropdown : public LuaNamedPanel {
+class LuaDropdown : public LuaPanel {
 public:
 	LUNA_CLASS_HEAD(LuaDropdown);
 
 	LuaDropdown() = default;
-	explicit LuaDropdown(UI::Panel* p) : LuaNamedPanel(p) {
+	explicit LuaDropdown(UI::Panel* p) : LuaPanel(p) {
 	}
-	explicit LuaDropdown(lua_State* L) : LuaNamedPanel(L) {
+	explicit LuaDropdown(lua_State* L) : LuaPanel(L) {
 	}
 	~LuaDropdown() override = default;
 
@@ -448,14 +425,14 @@ public:
 	}
 };
 
-class LuaTab : public LuaNamedPanel {
+class LuaTab : public LuaPanel {
 public:
 	LUNA_CLASS_HEAD(LuaTab);
 
 	LuaTab() = default;
-	explicit LuaTab(UI::Panel* p) : LuaNamedPanel(p) {
+	explicit LuaTab(UI::Panel* p) : LuaPanel(p) {
 	}
-	explicit LuaTab(lua_State* L) : LuaNamedPanel(L) {
+	explicit LuaTab(lua_State* L) : LuaPanel(L) {
 	}
 	~LuaTab() override = default;
 
@@ -477,14 +454,14 @@ public:
 	}
 };
 
-class LuaWindow : public LuaNamedPanel {
+class LuaWindow : public LuaPanel {
 public:
 	LUNA_CLASS_HEAD(LuaWindow);
 
 	LuaWindow() = default;
-	explicit LuaWindow(UI::Panel* p) : LuaNamedPanel(p) {
+	explicit LuaWindow(UI::Panel* p) : LuaPanel(p) {
 	}
-	explicit LuaWindow(lua_State* L) : LuaNamedPanel(L) {
+	explicit LuaWindow(lua_State* L) : LuaPanel(L) {
 	}
 	~LuaWindow() override = default;
 

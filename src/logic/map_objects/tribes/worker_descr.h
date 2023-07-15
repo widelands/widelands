@@ -58,6 +58,9 @@ public:
 		assert(is_buildable());
 		return buildcost_;
 	}
+	[[nodiscard]] Buildcost& mutable_buildcost() {
+		return buildcost_;
+	}
 
 	[[nodiscard]] const Vector2i& ware_hotspot() const {
 		return ware_hotspot_;

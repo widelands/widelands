@@ -31,7 +31,13 @@ struct Radiogroup;
 struct Radiobutton : public Statebox {
 	friend struct Radiogroup;
 
-	Radiobutton(Panel* parent, PanelStyle, Vector2i, const Image* pic, Radiogroup&, int32_t id);
+	Radiobutton(Panel* parent,
+	            PanelStyle,
+	            const std::string& name,
+	            Vector2i,
+	            const Image* pic,
+	            Radiogroup&,
+	            int32_t id);
 	~Radiobutton() override;
 
 	[[nodiscard]] Radiogroup& group() {
@@ -69,6 +75,7 @@ struct Radiogroup {
 	 */
 	int32_t add_button(Panel* parent,
 	                   PanelStyle,
+	                   const std::string& name,
 	                   Vector2i,
 	                   const Image* pic,
 	                   const std::string& tooltip = "",

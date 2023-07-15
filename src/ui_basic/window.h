@@ -53,7 +53,7 @@ namespace UI {
  * Minimize means, that the window is only the caption bar, nothing inside.
  * Another click on this bar resizes the window again
  */
-class Window : public NamedPanel {
+class Window : public Panel {
 public:
 	/// Height the top border must have
 	static constexpr int16_t kTopBorderThickness = 20;
@@ -97,9 +97,9 @@ public:
 
 	[[nodiscard]] ZOrder get_z() const override {
 		if (is_pinned()) {
-			return std::max(Panel::ZOrder::kPinned, NamedPanel::get_z());
+			return std::max(Panel::ZOrder::kPinned, Panel::get_z());
 		}
-		return NamedPanel::get_z();
+		return Panel::get_z();
 	}
 
 	bool is_pinned() const {
