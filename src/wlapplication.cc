@@ -806,6 +806,7 @@ void WLApplication::run() {
 			title = _("Error message:");
 		}
 		if (!message.empty()) {
+			game.full_cleanup();
 			g_sh->change_music(Songset::kMenu);
 			FsMenu::MainMenu m(true);
 			m.show_messagebox(title, message);

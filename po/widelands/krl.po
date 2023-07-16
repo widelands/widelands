@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-06 03:09+0000\n"
+"POT-Creation-Date: 2023-07-13 03:06+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: MK, 2016-2017\n"
 "Language-Team: Karelian (http://app.transifex.com/widelands/widelands/language/krl/)\n"
@@ -525,12 +525,12 @@ msgstr ""
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#: ../../src/editor/editorinteractive.cc:463
+#: ../../src/editor/editorinteractive.cc:464
 #: ../../src/wui/interactive_gamebase.cc:268
 msgid "Hide Building Spaces"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:463
+#: ../../src/editor/editorinteractive.cc:464
 #: ../../src/ui_fsmenu/options.cc:254
 #: ../../src/wui/interactive_gamebase.cc:268
 msgid "Show Building Spaces"
@@ -540,15 +540,15 @@ msgstr ""
 #. show maximum
 #. * building spaces that will be available if all immovables (trees, rocks,
 #. etc.) are removed
-#: ../../src/editor/editorinteractive.cc:470
+#: ../../src/editor/editorinteractive.cc:471
 msgid "Hide Maximum Building Spaces"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:471
+#: ../../src/editor/editorinteractive.cc:472
 msgid "Show Maximum Building Spaces"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:474
+#: ../../src/editor/editorinteractive.cc:475
 msgid ""
 "Toggle whether to show maximum building spaces that will be available if all"
 " immovables (trees, rocks, etc.) are removed"
@@ -556,73 +556,73 @@ msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
-#: ../../src/editor/editorinteractive.cc:480
+#: ../../src/editor/editorinteractive.cc:481
 msgid "Hide Grid"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:480
+#: ../../src/editor/editorinteractive.cc:481
 msgid "Show Grid"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables
 #. *  (trees, rocks etc.) are shown
-#: ../../src/editor/editorinteractive.cc:488
+#: ../../src/editor/editorinteractive.cc:489
 msgid "Hide Immovables"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:488
+#: ../../src/editor/editorinteractive.cc:489
 msgid "Show Immovables"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. animals are shown
-#: ../../src/editor/editorinteractive.cc:493
+#: ../../src/editor/editorinteractive.cc:494
 msgid "Hide Animals"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:493
+#: ../../src/editor/editorinteractive.cc:494
 msgid "Show Animals"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. resources are shown
-#: ../../src/editor/editorinteractive.cc:499
+#: ../../src/editor/editorinteractive.cc:500
 msgid "Hide Resources"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:499
+#: ../../src/editor/editorinteractive.cc:500
 msgid "Show Resources"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:542
+#: ../../src/editor/editorinteractive.cc:543
 msgid "Unsupported Format"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:543
+#: ../../src/editor/editorinteractive.cc:544
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:608
+#: ../../src/editor/editorinteractive.cc:609
 msgid "Exit Editor Confirmation"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:608
+#: ../../src/editor/editorinteractive.cc:609
 msgid "Unsaved Map"
 msgstr "Tallendamatoi kartta"
 
-#: ../../src/editor/editorinteractive.cc:609
+#: ../../src/editor/editorinteractive.cc:610
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Karttua ei vie ole tallendettu, tovengo tahtot salvata?"
 
-#: ../../src/editor/editorinteractive.cc:610
+#: ../../src/editor/editorinteractive.cc:611
 msgid "Are you sure you wish to exit the editor?"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1131 ../../src/logic/addons.cc:48
+#: ../../src/editor/editorinteractive.cc:1139 ../../src/logic/addons.cc:48
 #: ../../src/ui_basic/dropdown.cc:358 ../../src/ui_basic/dropdown.cc:360
 #: ../../src/ui_fsmenu/addons/contact.cc:81
 #: ../../src/ui_fsmenu/addons/manager.cc:1334
@@ -639,12 +639,12 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:467
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:123
 #: ../../src/ui_fsmenu/launch_mpg.cc:309 ../../src/ui_fsmenu/main.cc:249
-#: ../../src/wlapplication.cc:1647
+#: ../../src/wlapplication.cc:1648
 msgid "Error"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1133 ../../src/ui_fsmenu/main.cc:233
-#: ../../src/wlapplication.cc:1649
+#: ../../src/editor/editorinteractive.cc:1141 ../../src/ui_fsmenu/main.cc:233
+#: ../../src/wlapplication.cc:1650
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -655,13 +655,13 @@ msgid ""
 "Please add this information to your report."
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1167
+#: ../../src/editor/editorinteractive.cc:1175
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "Lad'd'atah karttua “%s”…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:1189
+#: ../../src/editor/editorinteractive.cc:1197
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:113
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:583
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:143
@@ -670,7 +670,7 @@ msgid "No Name"
 msgstr "Ei nimie"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:1192
+#: ../../src/editor/editorinteractive.cc:1200
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:114
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:584
 #: ../../src/logic/map.h:232 ../../src/ui_fsmenu/addons/packager.cc:390
@@ -678,20 +678,20 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "Tundematoi"
 
-#: ../../src/editor/editorinteractive.cc:1216
+#: ../../src/editor/editorinteractive.cc:1224
 msgid "Loading world…"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1395
+#: ../../src/editor/editorinteractive.cc:1403
 #, c-format
 msgid "Tool gaps: %u%%"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1418
+#: ../../src/editor/editorinteractive.cc:1426
 msgid "Publish Map"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1419
+#: ../../src/editor/editorinteractive.cc:1427
 #, c-format
 msgid ""
 "Are you certain that you want to publish this map online?\n"
@@ -703,50 +703,50 @@ msgid ""
 "Hint: %5$s\n"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1443
+#: ../../src/editor/editorinteractive.cc:1451
 msgid "Login Error"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1448
+#: ../../src/editor/editorinteractive.cc:1456
 msgid "Uploading Add-On…"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1449
+#: ../../src/editor/editorinteractive.cc:1457
 msgid "Saving map…"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1468
+#: ../../src/editor/editorinteractive.cc:1476
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:314
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:369
 msgid "Error Saving Map!"
 msgstr "Haireh karttua tallendajessa!"
 
-#: ../../src/editor/editorinteractive.cc:1474
+#: ../../src/editor/editorinteractive.cc:1482
 msgid "Packaging add-on…"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1525
+#: ../../src/editor/editorinteractive.cc:1533
 msgid "Add-On Generation Error"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1526
+#: ../../src/editor/editorinteractive.cc:1534
 msgid "The add-on could not be written to the disk."
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1533
+#: ../../src/editor/editorinteractive.cc:1541
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:107
 msgid "Uploading…"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1539
+#: ../../src/editor/editorinteractive.cc:1547
 msgid "Upload Error"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1561
+#: ../../src/editor/editorinteractive.cc:1569
 msgid "Success"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1562
+#: ../../src/editor/editorinteractive.cc:1570
 msgid "The add-on was uploaded successfully."
 msgstr ""
 
@@ -2378,12 +2378,12 @@ msgid "No Shore"
 msgstr ""
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:1244
-msgid "Ship Yard Without Shore"
+msgid "Shipyard Without Shore"
 msgstr ""
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:1245
 msgid ""
-"Your ship yard has not been built close enough to a shore. It will not be "
+"Your shipyard has not been built close enough to a shore. It will not be "
 "able to build ships."
 msgstr ""
 
@@ -3558,7 +3558,7 @@ msgstr ""
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1351
+#: ../../src/scripting/lua_game.cc:1353
 msgid "%1% (%2%)"
 msgstr ""
 
@@ -5266,7 +5266,7 @@ msgstr ""
 msgid "Campaign Name"
 msgstr ""
 
-#: ../../src/ui_fsmenu/helpwindow.cc:46 ../../src/wui/helpwindow.cc:44
+#: ../../src/ui_fsmenu/helpwindow.cc:46 ../../src/wui/helpwindow.cc:48
 #, c-format
 msgid "Help: %s"
 msgstr ""
@@ -6007,7 +6007,7 @@ msgstr ""
 msgid "The map does not specify whether it is balanced"
 msgstr ""
 
-#: ../../src/ui_fsmenu/menu.cc:106
+#: ../../src/ui_fsmenu/menu.cc:106 ../../src/wui/helpwindow.cc:68
 msgid "Back"
 msgstr ""
 
@@ -6768,45 +6768,45 @@ msgstr ""
 msgid "File system error"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1300
+#: ../../src/wlapplication.cc:1301
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1305
+#: ../../src/wlapplication.cc:1306
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1460
+#: ../../src/wlapplication.cc:1461
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1581
+#: ../../src/wlapplication.cc:1582
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1599
+#: ../../src/wlapplication.cc:1600
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1625
+#: ../../src/wlapplication.cc:1626
 msgid "Incompatible"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1662
+#: ../../src/wlapplication.cc:1663
 msgid "Game ended unexpectedly"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1662
+#: ../../src/wlapplication.cc:1663
 msgid "Unexpected error during the game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1665
+#: ../../src/wlapplication.cc:1666
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6820,7 +6820,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1674
+#: ../../src/wlapplication.cc:1675
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6830,11 +6830,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1700
+#: ../../src/wlapplication.cc:1701
 msgid "Emergency save failed"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1701
+#: ../../src/wlapplication.cc:1702
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -8243,11 +8243,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ../../src/wui/encyclopedia_window.cc:230
+#: ../../src/wui/encyclopedia_window.cc:234 ../../src/wui/helpwindow.cc:146
 msgid "Broken Link"
 msgstr ""
 
-#: ../../src/wui/encyclopedia_window.cc:231
+#: ../../src/wui/encyclopedia_window.cc:235 ../../src/wui/helpwindow.cc:147
 msgid "This hyperlink seems to be broken."
 msgstr ""
 

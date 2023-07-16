@@ -27,7 +27,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-05-16 02:41+0000\n"
+"POT-Creation-Date: 2023-07-08 03:03+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2023\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
@@ -9837,11 +9837,11 @@ msgstr "Dies ist die beste und schärfste Waffe die der imperiale Waffenschmied 
 #: ../../data/tribes/initialization/empire/units.lua:560
 msgctxt "empire_ware"
 msgid ""
-"The helmet is the basic defense of a warrior. It is produced in an armor "
+"The helmet is the basic defense of a soldier. It is produced in an armor "
 "smithy. In combination with a wooden spear, it is the equipment to fit out "
 "young soldiers. Helmets are also used in training camps – together with food"
 " – to train soldiers from health level 0 to level 1."
-msgstr "Der Helm ist die Grundverteidigung eines Soldaten. Er wird in Rüstungsschmieden hergestellt. Zusammen mit einem Holzspeer ist er die Grundausrüstung für junge Soldaten. Helme werden auch in Ausbildungslagern – zusammen mit Nahrung – benötigt, um die Lebenspunkte der Soldaten von Stufe 0 auf 1 zu erhöhen."
+msgstr "Der Helm ist der Grundschutz eines Soldaten. Er wird in Rüstungsschmieden hergestellt. Zusammen mit einem Holzspeer ist er die Grundausrüstung für junge Soldaten. Helme werden auch in Ausbildungslagern – zusammen mit Nahrung – benötigt, um die Lebenspunkte der Soldaten von Stufe 0 auf 1 zu erhöhen."
 
 #. TRANSLATORS: Helptext for an Empire ware: Armor
 #: ../../data/tribes/initialization/empire/units.lua:569
@@ -14120,8 +14120,8 @@ msgstr "Schmiedet verbesserte Waffen und goldene Helme für die Krieger."
 msgctxt "frisians_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce one "
-"broadswordsword in %1$s on average, one double-edged sword in %2$s on "
-"average and one golden helmet in %3$s on average."
+"broadsword in %1$s on average, one double-edged sword in %2$s on average and"
+" one golden helmet in %3$s on average."
 msgstr "Wenn alle Waren pünktlich geliefert werden, kann dieses Gebäude ein Breitschwert durchschnittlich in %1$s, ein zweischneidiges Schwert durchschnittlich in %2$s und einen  goldenen Helm durchschnittlich in %3$s herstellen."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Sewing Room
