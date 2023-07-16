@@ -66,7 +66,7 @@ local r = {
             artifacts_per_player[plr.number] = 0
          end
          for idx, plr in pairs(artifacts_owner) do
-         artifacts_per_player[plr.number] = artifacts_per_player[plr.number] + 1
+            artifacts_per_player[plr.number] = artifacts_per_player[plr.number] + 1
          end
       end
 
