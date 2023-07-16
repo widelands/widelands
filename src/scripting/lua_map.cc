@@ -696,13 +696,12 @@ parse_wares_as_bill_of_material(lua_State* L, int table_index, const Widelands::
 	return result;
 }
 
-const Widelands::TribeDescr& get_tribe_descr(lua_State* L, const std::string& tribename) {
+const Widelands::TribeDescr* get_tribe_descr(lua_State* L, const std::string& tribename) {
 	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
 	if (!descriptions.tribe_exists(tribename)) {
 		report_error(L, "Tribe '%s' does not exist", tribename.c_str());
 	}
-	return *descriptions.get_tribe_descr(
-	   get_egbase(L).mutable_descriptions()->load_tribe(tribename));
+	return descriptions.get_tribe_descr(get_egbase(L).mutable_descriptions()->load_tribe(tribename));
 }
 
 std::string soldier_preference_to_string(const Widelands::SoldierPreference p) {
@@ -3759,12 +3758,12 @@ int LuaWareDescription::consumers(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
-	const Widelands::TribeDescr& tribe = get_tribe_descr(L, luaL_checkstring(L, 2));
+	const Widelands::TribeDescr* tribe = get_tribe_descr(L, luaL_checkstring(L, 2));
 
 	lua_newtable(L);
 	int index = 1;
 	for (const Widelands::DescriptionIndex& building_index : get()->consumers()) {
-		if (tribe.has_building(building_index)) {
+		if (tribe->has_building(building_index)) {
 			lua_pushint32(L, index++);
 			upcasted_map_object_descr_to_lua(
 			   L, get_egbase(L).descriptions().get_building_descr(building_index));
@@ -3812,12 +3811,12 @@ int LuaWareDescription::producers(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
-	const Widelands::TribeDescr& tribe = get_tribe_descr(L, luaL_checkstring(L, 2));
+	const Widelands::TribeDescr* tribe = get_tribe_descr(L, luaL_checkstring(L, 2));
 
 	lua_newtable(L);
 	int index = 1;
 	for (const Widelands::DescriptionIndex& building_index : get()->producers()) {
-		if (tribe.has_building(building_index)) {
+		if (tribe->has_building(building_index)) {
 			lua_pushint32(L, index++);
 			upcasted_map_object_descr_to_lua(
 			   L, get_egbase(L).descriptions().get_building_descr(building_index));
