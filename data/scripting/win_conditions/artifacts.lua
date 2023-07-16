@@ -34,8 +34,7 @@ local r = {
       for x=0, map.width-1 do
          for y=0, map.height-1 do
             local field = map:get_field(x,y)
-            if field.immovable and field.immovable:has_attribute("artifact") then
-               -- This assumes that the immovable has size small or medium, i.e. only occupies one field
+            if field.immovable and field.immovable:has_attribute("artifact") and field.immovabe.fields[1] == field then
                table.insert(artifact_fields, map:get_field(x,y))
             end
          end
