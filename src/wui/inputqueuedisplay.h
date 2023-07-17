@@ -48,6 +48,7 @@ struct PrioritySlider : public HorizontalSlider {
 	               const uint32_t cursor_size = 20,
 	               const bool enabled = true)
 	   : HorizontalSlider(parent,
+	                      "priority_slider",
 	                      x,
 	                      y,
 	                      w,

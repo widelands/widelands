@@ -54,6 +54,7 @@ namespace UI {
  * \param bar_size Length of the cursor move.
  */
 Slider::Slider(Panel* const parent,
+               const std::string& name,
                const int32_t x,
                const int32_t y,
                const uint32_t w,
@@ -70,6 +71,7 @@ Slider::Slider(Panel* const parent,
                const int32_t bar_size)
    : Panel(parent,
            style == SliderStyle::kFsMenu ? PanelStyle::kFsMenu : PanelStyle::kWui,
+           name,
            x,
            y,
            w,
@@ -637,6 +639,7 @@ bool VerticalSlider::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) 
 }
 
 DiscreteSlider::DiscreteSlider(Panel* const parent,
+                               const std::string& name,
                                const int32_t x,
                                const int32_t y,
                                const uint32_t w,
@@ -649,6 +652,7 @@ DiscreteSlider::DiscreteSlider(Panel* const parent,
                                const bool enabled)
    : Panel(parent,
            init_style == SliderStyle::kFsMenu ? PanelStyle::kFsMenu : PanelStyle::kWui,
+           name,
            x,
            y,
            w,
@@ -656,6 +660,7 @@ DiscreteSlider::DiscreteSlider(Panel* const parent,
            tooltip_text),
      style_(init_style),
      slider(this,
+            "discrete_slider_impl",
             // here, we take into account the h_gap introduced by HorizontalSlider
             w / (2 * labels_in.size()) - cursor_size / 2,
             0,

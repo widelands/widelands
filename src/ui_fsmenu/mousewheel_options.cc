@@ -132,7 +132,7 @@ void MousewheelConfigSettings::apply() const {
 
 KeymodDropdown::KeymodDropdown(UI::Panel* parent)
    : UI::Dropdown<uint16_t>(parent,
-                            std::string(),
+                            "keymod_dropdown",
                             0,
                             0,
                             kModDirDropdownMaxWidth,
@@ -169,7 +169,7 @@ KeymodDropdown::KeymodDropdown(UI::Panel* parent)
 
 DirDropdown::DirDropdown(UI::Panel* parent, bool two_d)
    : UI::Dropdown<uint8_t>(parent,
-                           std::string(),
+                           "dir_dropdown",
                            0,
                            0,
                            kModDirDropdownMaxWidth,
@@ -191,7 +191,7 @@ DirDropdown::DirDropdown(UI::Panel* parent, bool two_d)
 
 InvertDirDropdown::InvertDirDropdown(UI::Panel* parent)
    : UI::Dropdown<uint8_t>(parent,
-                           std::string(),
+                           "invert_dir_dropdown",
                            0,
                            0,
                            kModDirDropdownMaxWidth,
@@ -219,9 +219,20 @@ KeymodAndDirBox::KeymodAndDirBox(UI::Panel* parent,
                                  uint16_t* keymod,
                                  uint8_t* dir,
                                  bool two_d)
-   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, kButtonSize, kPadding),
-     title_area_(
-        this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, format(_("%1%:"), title)),
+   : UI::Box(parent,
+             UI::PanelStyle::kFsMenu,
+             "key_mod_and_dir_box",
+             0,
+             0,
+             UI::Box::Horizontal,
+             0,
+             kButtonSize,
+             kPadding),
+     title_area_(this,
+                 UI::PanelStyle::kFsMenu,
+                 "title",
+                 UI::FontStyle::kFsMenuLabel,
+                 format(_("%1%:"), title)),
      keymod_dropdown_(this),
      dir_dropdown_(this, two_d),
      title_(title),
@@ -306,8 +317,16 @@ void KeymodAndDirBox::set_width(int w) {
 /***** End of KeymodAndDirBox members *****/
 
 InvertDirBox::InvertDirBox(UI::Panel* parent, const std::string& title, uint8_t* dir)
-   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, kButtonSize, kPadding),
-     title_area_(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, title),
+   : UI::Box(parent,
+             UI::PanelStyle::kFsMenu,
+             "invert_dir_box",
+             0,
+             0,
+             UI::Box::Horizontal,
+             0,
+             kButtonSize,
+             kPadding),
+     title_area_(this, UI::PanelStyle::kFsMenu, "title", UI::FontStyle::kFsMenuLabel, title),
      dir_dropdown_(this),
      dir_(dir) {
 	if (UI::g_fh->fontset()->is_rtl()) {
@@ -333,9 +352,17 @@ void InvertDirBox::set_width(int w) {
 }
 
 ScrollOptionsButtonBox::ScrollOptionsButtonBox(MousewheelOptionsDialog* parent)
-   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, kButtonSize, kPadding),
+   : UI::Box(parent,
+             UI::PanelStyle::kFsMenu,
+             "scroll_options_box",
+             0,
+             0,
+             UI::Box::Horizontal,
+             0,
+             kButtonSize,
+             kPadding),
      reset_button_(this,
-                   std::string(),
+                   "reset",
                    0,
                    0,
                    0,
@@ -345,7 +372,7 @@ ScrollOptionsButtonBox::ScrollOptionsButtonBox(MousewheelOptionsDialog* parent)
                    _("Reset scroll settings to the defaults recommended for a standard single "
                      "wheel mouse")),
      touchpad_button_(this,
-                      std::string(),
+                      "touchpad",
                       0,
                       0,
                       0,
@@ -356,7 +383,7 @@ ScrollOptionsButtonBox::ScrollOptionsButtonBox(MousewheelOptionsDialog* parent)
                         "touchpad or other pointing device that can scroll horizontally as well "
                         "as vertically.")),
      apply_button_(this,
-                   std::string(),
+                   "apply",
                    0,
                    0,
                    0,
@@ -381,7 +408,15 @@ ScrollOptionsButtonBox::ScrollOptionsButtonBox(MousewheelOptionsDialog* parent)
 
 // The main scrolling options dialog box
 MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
-   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+   : UI::Box(parent,
+             UI::PanelStyle::kFsMenu,
+             "mousewheel_options_box",
+             0,
+             0,
+             UI::Box::Vertical,
+             0,
+             0,
+             kPadding),
      zoom_box_(this,
                /** TRANSLATORS: Name of a function for the scroll wheel.
                    Used as e.g.: "Zoom Map: Ctrl+Any scroll"
@@ -438,11 +473,19 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
         /** TRANSLATORS: Used as e.g. "Invert scroll direction for increase/decrease: Vertical" */
         _("Invert scroll direction for increase/decrease:"),
         &(settings_.value_invert_)),
-     horiz_override_box_(
-        this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, kButtonSize, kPadding),
+     horiz_override_box_(this,
+                         UI::PanelStyle::kFsMenu,
+                         "fix_inverted_scrolling_box",
+                         0,
+                         0,
+                         UI::Box::Horizontal,
+                         0,
+                         kButtonSize,
+                         kPadding),
      inverted_x_checkbox_(
         &horiz_override_box_,
         UI::PanelStyle::kFsMenu,
+        "fix_inverted_scrolling",
         Vector2i::zero(),
         _("Fix inverted horizontal scrolling"),
         _("An SDL bug in some configurations causes horizontal scroll to be inverted. "
@@ -450,7 +493,7 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
           "Please report if you need to turn this on, so that we can improve the detection."),
         0),
      feedback_button_(&horiz_override_box_,
-                      std::string(),
+                      "feedback",
                       0,
                       0,
                       0,
