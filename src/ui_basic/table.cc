@@ -42,21 +42,22 @@ namespace UI {
  *       h
  */
 Table<void*>::Table(Panel* const parent,
+                    const std::string& name,
                     int32_t x,
                     int32_t y,
                     uint32_t w,
                     uint32_t h,
                     PanelStyle style,
                     TableRows rowtype)
-   : Panel(parent, style, x, y, w, h),
+   : Panel(parent, style, name, x, y, w, h),
 
      lineheight_(text_height(g_style_manager->table_style(style).enabled())),
      headerheight_(lineheight_ + 4),
      button_style_(style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
                                                       UI::ButtonStyle::kWuiSecondary),
 
-     scrollbar_filler_button_(
-        new Button(this, "", 0, 0, Scrollbar::kSize, headerheight_, button_style_, "")),
+     scrollbar_filler_button_(new Button(
+        this, "scrollbar_filler", 0, 0, Scrollbar::kSize, headerheight_, button_style_, "")),
 
      selection_(no_selection_index()),
      last_multiselect_(no_selection_index()),
@@ -70,8 +71,8 @@ Table<void*>::Table(Panel* const parent,
 	set_thinks(false);
 	set_can_focus(true);
 	scrollbar_filler_button_->set_visible(false);
-	scrollbar_ = new Scrollbar(this, get_w() - Scrollbar::kSize, headerheight_, Scrollbar::kSize,
-	                           get_h() - headerheight_, style);
+	scrollbar_ = new Scrollbar(this, "scrollbar", get_w() - Scrollbar::kSize, headerheight_,
+	                           Scrollbar::kSize, get_h() - headerheight_, style);
 	scrollbar_->moved.connect([this](int32_t a) { set_scrollpos(a); });
 	scrollbar_->set_steps(1);
 	scrollbar_->set_singlestepsize(lineheight_);

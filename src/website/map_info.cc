@@ -92,6 +92,11 @@ int main(int argc, char** argv) {
 			json->add_string(
 			   "minimum_required_widelands_version", map->minimum_required_widelands_version());
 
+			JSON::Array* tags_array = json->add_array("tags");
+			for (const std::string& tag : map->get_tags()) {
+				tags_array->add_empty(tag);
+			}
+
 			const std::string world_name =
 			   dynamic_cast<Widelands::WidelandsMapLoader*>(ml.get())->old_world_name();
 			json->add_string("world_name", world_name);

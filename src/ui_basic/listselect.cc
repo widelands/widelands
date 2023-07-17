@@ -77,15 +77,16 @@ inline BaseListselect::EntryRecord::~EntryRecord() {
  *       h
  */
 BaseListselect::BaseListselect(Panel* const parent,
+                               const std::string& name,
                                const int32_t x,
                                const int32_t y,
                                const uint32_t w,
                                const uint32_t h,
                                UI::PanelStyle style,
                                const ListselectLayout selection_mode)
-   : Panel(parent, style, x, y, w, h),
+   : Panel(parent, style, name, x, y, w, h),
 
-     scrollbar_(this, get_w() - Scrollbar::kSize, 0, 0, h, style),
+     scrollbar_(this, "scrollbar", get_w() - Scrollbar::kSize, 0, 0, h, style),
 
      selection_(no_selection_index()),
 

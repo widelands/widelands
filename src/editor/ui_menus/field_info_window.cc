@@ -47,7 +47,7 @@ FieldInfoWindow::FieldInfoWindow(EditorInteractive& parent,
      f_(f),
      tf_(tf),
      map_(map),
-     multiline_textarea_(this, 0, 0, get_inner_w(), get_inner_h(), UI::PanelStyle::kWui),
+     multiline_textarea_(this, "content", 0, 0, get_inner_w(), get_inner_h(), UI::PanelStyle::kWui),
      lastupdate_(0) {
 
 	update();
