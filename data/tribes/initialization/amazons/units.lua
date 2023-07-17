@@ -1295,8 +1295,12 @@ wl.Descriptions():new_tribe {
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Hunter-Gatherer's Hut
             purpose = pgettext("amazons_building", "Hunts animals to produce meat. Catches fish in the waters."),
-            -- TRANSLATORS: Note helptext for an Amazon production site: Hunter-Gatherer's Hut
-            note = pgettext("amazons_building", "The hunter-gatherer’s hut needs animals or fish to hunt or catch within the work area."),
+            note = {
+               -- TRANSLATORS: Note helptext for an Amazon production site: Hunter-Gatherer's Hut
+               pgettext("amazons_building", "The hunter-gatherer’s hut needs animals or fish to hunt or catch within the work area."),
+               -- TRANSLATORS: Note helptext for an Amazon production site: Hunter-Gatherer's Hut
+               pgettext("amazons_building", "Roads and trees along the shoreline block fishing."),
+            },
             -- TRANSLATORS: Performance helptext for an Amazon production site: Hunter-Gatherer's Hut
             performance = pgettext("amazons_building", "The hunter-gatherer pauses %s before going to work again."):bformat(format_seconds(34))
 
@@ -1322,8 +1326,12 @@ wl.Descriptions():new_tribe {
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Water Gatherer's Hut
             purpose = pgettext("amazons_building", "Draws water out of the rivers and lakes."),
-            -- TRANSLATORS: Note helptext for an Amazon production site: Water Gatherer's Hut
-            note = pgettext("amazons_building", "The water gatherer’s hut needs open water within the work area. Your workers cannot dig up water from the ground!")
+            note = {
+               -- TRANSLATORS: Note helptext for an Amazon production site: Water Gatherer's Hut, part 1
+               pgettext("amazons_building", "The water gatherer’s hut needs open water within the work area. Your workers cannot dig up water from the ground!"),
+               -- TRANSLATORS: Note helptext for an Amazon production site: Water Gatherer's Hut, part 2
+               pgettext("amazons_building", "Roads and trees along the shoreline block drawing water."),
+            }
          }
       },
       {
@@ -1596,15 +1604,25 @@ wl.Descriptions():new_tribe {
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Ferry Yard
             purpose = pgettext("amazons_building", "Builds ferries."),
-            -- TRANSLATORS: Note helptext for an Amazon production site: Ferry Yard
-            note = pgettext("amazons_building", "Needs water nearby.")
+            note = {
+               -- TRANSLATORS: Note helptext for an Amazon production site: Ferry Yard, part 1
+               pgettext("amazons_building", "Needs water nearby. Be aware ferries carry wares only, no workers."),
+               -- TRANSLATORS: Note helptext for an Amazon production site: Ferry Yard, part 2
+               pgettext("building", "Roads and trees along the shoreline block access to water."),
+            }
          }
       },
       {
          name = "amazons_shipyard",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Shipyard
-            purpose = pgettext("amazons_building", "Constructs ships that are used for overseas colonization and for trading between ports.")
+            purpose = pgettext("amazons_building", "Constructs ships that are used for overseas colonization and for trading between ports."),
+            note = {
+               -- TRANSLATORS: Note helptext for an Amazon production site: Shipyard, part 1
+               pgettext("building", "Needs wide open water nearby."),
+               -- TRANSLATORS: Note helptext for an Amazon production site: Shipyard, part 2
+               pgettext("building", "Roads and trees along the shoreline block access to water."),
+            }
          }
       },
 

@@ -45,6 +45,7 @@ enum class ListselectLayout {
  */
 struct BaseListselect : public Panel {
 	BaseListselect(Panel* parent,
+	               const std::string& name,
 	               int32_t x,
 	               int32_t y,
 	               uint32_t w,
@@ -189,13 +190,14 @@ private:
 
 template <typename Entry> struct Listselect : public BaseListselect {
 	Listselect(Panel* parent,
+	           const std::string& name,
 	           int32_t x,
 	           int32_t y,
 	           uint32_t w,
 	           uint32_t h,
 	           UI::PanelStyle style,
 	           ListselectLayout selection_mode = ListselectLayout::kPlain)
-	   : BaseListselect(parent, x, y, w, h, style, selection_mode) {
+	   : BaseListselect(parent, name, x, y, w, h, style, selection_mode) {
 	}
 
 	void add(const std::string& name,
@@ -233,13 +235,14 @@ template <typename Entry> struct Listselect<Entry&> : public Listselect<Entry*> 
 	using Base = Listselect<Entry*>;
 
 	Listselect(Panel* parent,
+	           const std::string& name,
 	           int32_t x,
 	           int32_t y,
 	           uint32_t w,
 	           uint32_t h,
 	           UI::PanelStyle style,
 	           ListselectLayout selection_mode = ListselectLayout::kPlain)
-	   : Base(parent, x, y, w, h, style, selection_mode) {
+	   : Base(parent, name, x, y, w, h, style, selection_mode) {
 	}
 
 	void add(const std::string& name,

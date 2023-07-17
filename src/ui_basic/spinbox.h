@@ -46,6 +46,7 @@ public:
 	 * Text conventions: Sentence case for the 'label_text' and for all values
 	 */
 	SpinBox(Panel*,
+	        const std::string& name,
 	        int32_t x,
 	        int32_t y,
 	        uint32_t w,

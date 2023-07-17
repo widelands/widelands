@@ -39,7 +39,7 @@ inline ButtonDisableStyle operator|(ButtonDisableStyle a, ButtonDisableStyle b) 
 /// This is simply a button. Override void clicked() to react to the click.
 /// This is all that is needed in most cases, but if there is a need to give a
 /// callback function to the button, there are some templates for that below.
-struct Button : public NamedPanel {
+struct Button : public Panel {
 	enum class VisualState {
 		kRaised,       // Normal raised Button
 		kPermpressed,  // Button will appear pressed

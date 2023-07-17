@@ -151,7 +151,7 @@ private:
 SoldierPanel::SoldierPanel(UI::Panel& parent,
                            Widelands::EditorGameBase& gegbase,
                            Widelands::MapObject& building_or_ship)
-   : Panel(&parent, UI::PanelStyle::kWui, 0, 0, 0, 0),
+   : Panel(&parent, UI::PanelStyle::kWui, "soldier_panel", 0, 0, 0, 0),
      egbase_(gegbase),
      building_or_ship_(&building_or_ship),
      is_ship_(building_or_ship.descr().type() == Widelands::MapObjectType::SHIP) {
@@ -466,13 +466,13 @@ private:
 SoldierList::SoldierList(UI::Panel& parent,
                          InteractiveBase& ib,
                          Widelands::MapObject& building_or_ship)
-   : UI::Box(&parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+   : UI::Box(&parent, UI::PanelStyle::kWui, "soldier_list", 0, 0, UI::Box::Vertical),
 
      ibase_(ib),
      building_or_ship_(building_or_ship),
 
      soldierpanel_(*this, ib.egbase(), building_or_ship),
-     infotext_(this, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel) {
+     infotext_(this, UI::PanelStyle::kWui, "infotext", UI::FontStyle::kWuiLabel) {
 	upcast(Widelands::MilitarySite, ms, &building_or_ship);
 	upcast(Widelands::Warehouse, wh, &building_or_ship);
 	upcast(Widelands::Ship, ship, &building_or_ship);
@@ -503,18 +503,19 @@ SoldierList::SoldierList(UI::Panel& parent,
 	         ->width());
 	set_min_desired_breadth(maxtextwidth + 4);
 
-	UI::Box* buttons = new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	UI::Box* buttons =
+	   new UI::Box(this, UI::PanelStyle::kWui, "buttons_box", 0, 0, UI::Box::Horizontal);
 
 	bool can_act = ibase_.can_act(building_or_ship_.owner().player_number());
 	if (building_or_ship.descr().type() != Widelands::MapObjectType::TRAININGSITE) {
 		// Make sure the creation order is consistent with enum SoldierPreference!
-		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, Vector2i::zero(),
-		                               g_image_cache->get("images/wui/buildings/prefer_rookies.png"),
-		                               _("Prefer rookies"));
-		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, Vector2i::zero(),
-		                               g_image_cache->get("images/wui/buildings/prefer_heroes.png"),
-		                               _("Prefer heroes"));
-		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, Vector2i::zero(),
+		soldier_preference_.add_button(
+		   buttons, UI::PanelStyle::kWui, "prefer_rookies", Vector2i::zero(),
+		   g_image_cache->get("images/wui/buildings/prefer_rookies.png"), _("Prefer rookies"));
+		soldier_preference_.add_button(
+		   buttons, UI::PanelStyle::kWui, "prefer_heroes", Vector2i::zero(),
+		   g_image_cache->get("images/wui/buildings/prefer_heroes.png"), _("Prefer heroes"));
+		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, "prefer_any", Vector2i::zero(),
 		                               g_image_cache->get("images/wui/buildings/prefer_any.png"),
 		                               _("No preference"));
 		UI::Radiobutton* button = soldier_preference_.get_first_button();

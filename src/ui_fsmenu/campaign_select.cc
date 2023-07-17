@@ -31,7 +31,7 @@ namespace FsMenu {
  */
 CampaignSelect::CampaignSelect(MenuCapsule& fsmm)
    : TwoColumnsFullNavigationMenu(fsmm, _("Choose Campaign")),
-     table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     table_(&left_column_box_, "table", 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 
      // Campaign description
      campaign_details_(&right_column_content_box_) {
