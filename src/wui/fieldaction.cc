@@ -1291,10 +1291,11 @@ public:
 		list_attackable_.set_desired_size(listw, kListHeight);
 
 		if (ibase_.get_player() != nullptr) {
-			box_manageable_.add(new UI::Textarea(&box_manageable_, UI::PanelStyle::kWui,
-			                                     UI::FontStyle::kWuiInfoPanelHeading, _("Own Ships"),
-			                                     UI::Align::kCenter),
-			                    UI::Box::Resizing::kFullSize);
+			box_manageable_.add(
+			   new UI::Textarea(&box_manageable_, UI::PanelStyle::kWui, "label_manageable",
+			                    UI::FontStyle::kWuiInfoPanelHeading, _("Own Ships"),
+			                    UI::Align::kCenter),
+			   UI::Box::Resizing::kFullSize);
 			box_manageable_.add_space(kPadding);
 		}
 #ifndef NDEBUG
@@ -1305,7 +1306,7 @@ public:
 		box_manageable_.add(&list_manageable_, UI::Box::Resizing::kExpandBoth);
 
 		box_attackable_.add(new UI::Textarea(&box_attackable_, UI::PanelStyle::kWui,
-		                                     UI::FontStyle::kWuiInfoPanelHeading,
+		                                     "label_attackable", UI::FontStyle::kWuiInfoPanelHeading,
 		                                     _("Attackable Ships"), UI::Align::kCenter),
 		                    UI::Box::Resizing::kFullSize);
 		box_attackable_.add_space(kPadding);
