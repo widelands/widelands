@@ -31,10 +31,20 @@ struct Radiogroup;
 struct Radiobutton : public Statebox {
 	friend struct Radiogroup;
 
-	Radiobutton(Panel* parent, PanelStyle, Vector2i, const Image* pic, Radiogroup&, int32_t id);
+	Radiobutton(Panel* parent,
+	            PanelStyle,
+	            const std::string& name,
+	            Vector2i,
+	            const Image* pic,
+	            Radiogroup&,
+	            int32_t id);
 	~Radiobutton() override;
 
-	Radiobutton* next_button() {
+	[[nodiscard]] Radiogroup& group() {
+		return group_;
+	}
+
+	[[nodiscard]] Radiobutton* next_button() {
 		return nextbtn_;
 	}
 
@@ -65,24 +75,31 @@ struct Radiogroup {
 	 */
 	int32_t add_button(Panel* parent,
 	                   PanelStyle,
+	                   const std::string& name,
 	                   Vector2i,
 	                   const Image* pic,
 	                   const std::string& tooltip = "",
 	                   Radiobutton** = nullptr);
 
-	int32_t get_state() const {
+	[[nodiscard]] int32_t get_state() const {
 		return state_;
 	}
 	void set_state(int32_t state, bool send_signal);
 	void set_enabled(bool);
-	Radiobutton* get_first_button() {
+	[[nodiscard]] Radiobutton* get_first_button() {
 		return buttons_;
 	}
+
+	// Signifies that the radio group is dynamically allocated and its lifetime is nowhere managed,
+	// so the radiogroup will be freed when its last radiobutton is deleted.
+	// If the group is empty, this will delete it instantly.
+	void manage_own_lifetime();
 
 private:
 	Radiobutton* buttons_;  //  linked list of buttons (not sorted)
 	int32_t highestid_;
 	int32_t state_;  //  -1: none
+	bool managing_own_lifetime_{false};
 };
 }  // namespace UI
 

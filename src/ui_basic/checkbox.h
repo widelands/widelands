@@ -39,6 +39,7 @@ struct Statebox : public Panel {
 	 */
 	Statebox(Panel* parent,
 	         PanelStyle,
+	         const std::string& name,
 	         Vector2i,
 	         const Image* pic,
 	         const std::string& tooltip_text = std::string());
@@ -50,6 +51,7 @@ struct Statebox : public Panel {
 	 */
 	Statebox(Panel* parent,
 	         PanelStyle,
+	         const std::string& name,
 	         Vector2i,
 	         const std::string& label_text,
 	         const std::string& tooltip_text = std::string(),
@@ -117,10 +119,11 @@ struct Checkbox : public Statebox {
 	 */
 	Checkbox(Panel* const parent,
 	         PanelStyle s,
+	         const std::string& name,
 	         Vector2i const p,
 	         const Image* pic,
 	         const std::string& tooltip_text = std::string())
-	   : Statebox(parent, s, p, pic, tooltip_text) {
+	   : Statebox(parent, s, name, p, pic, tooltip_text) {
 	}
 
 	/**
@@ -133,11 +136,12 @@ struct Checkbox : public Statebox {
 	 */
 	Checkbox(Panel* const parent,
 	         PanelStyle s,
+	         const std::string& name,
 	         Vector2i const p,
 	         const std::string& label_text,
 	         const std::string& tooltip_text = std::string(),
 	         uint32_t width = 0)
-	   : Statebox(parent, s, p, label_text, tooltip_text, width) {
+	   : Statebox(parent, s, name, p, label_text, tooltip_text, width) {
 	}
 
 private:
