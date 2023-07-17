@@ -89,7 +89,7 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 	}
 
 	textarea_.reset(
-	   new MultilineTextarea(this, margin, margin, width - 2 * margin, height,
+	   new MultilineTextarea(this, "message", margin, margin, width - 2 * margin, height,
 	                         s == WindowStyle::kWui ? UI::PanelStyle::kWui : UI::PanelStyle::kFsMenu,
 	                         text, align, scrollmode));
 

@@ -75,7 +75,14 @@ private:
 };
 
 BuildGrid::BuildGrid(UI::Panel* parent, Widelands::Player* plr, int32_t x, int32_t y, int32_t cols)
-   : UI::IconGrid(parent, UI::PanelStyle::kWui, x, y, kBuildGridCellSize, kBuildGridCellSize, cols),
+   : UI::IconGrid(parent,
+                  UI::PanelStyle::kWui,
+                  "build_grid",
+                  x,
+                  y,
+                  kBuildGridCellSize,
+                  kBuildGridCellSize,
+                  cols),
      plr_(plr) {
 	icon_clicked.connect([this](Widelands::DescriptionIndex i) { click_slot(i); });
 	mouseout.connect([this](Widelands::DescriptionIndex i) { mouseout_slot(i); });
@@ -263,7 +270,7 @@ FieldActionWindow::FieldActionWindow(InteractiveBase* const ib,
      player_(plr),
      map_(ib->egbase().map()),
      node_(ib->get_sel_pos().node, &map_[ib->get_sel_pos().node]),
-     tabpanel_(this, UI::TabPanelStyle::kWuiDark),
+     tabpanel_(this, UI::TabPanelStyle::kWuiDark, "tabs"),
 
      is_showing_workarea_overlaps_(ib->get_display_flag(InteractiveBase::dfShowWorkareaOverlap)),
      building_under_mouse_(Widelands::INVALID_INDEX) {
@@ -371,7 +378,8 @@ Add the buttons you normally get when clicking on a field.
 */
 void FieldActionWindow::add_buttons_auto() {
 	UI::Box* buildbox = nullptr;
-	UI::Box& watchbox = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	UI::Box& watchbox =
+	   *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, "watch_box", 0, 0, UI::Box::Horizontal);
 
 	upcast(InteractiveGameBase, igbase, &ibase());
 	upcast(InteractivePlayer, ipl, igbase);
@@ -380,15 +388,15 @@ void FieldActionWindow::add_buttons_auto() {
 		// Target immovables for removal by workers
 		if (upcast(const Widelands::Immovable, mo, map_.get_immovable(node_))) {
 			if (mo->is_marked_for_removal(ipl->player_number())) {
-				UI::Box& box =
-				   *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+				UI::Box& box = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, "immovable_actions_box",
+				                            0, 0, UI::Box::Horizontal);
 				add_button(&box, "unmark_for_removal", kImgButtonUnmarkRemoval,
 				           &FieldActionWindow::act_unmark_removal,
 				           _("Marked for removal by a worker – click to unmark"));
 				add_tab("target", kImgTabTarget, &box, _("Immovable Actions"));
 			} else if (suited_for_targeting(ipl->player_number(), ipl->egbase(), *mo)) {
-				UI::Box& box =
-				   *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+				UI::Box& box = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, "immovable_actions_box",
+				                            0, 0, UI::Box::Horizontal);
 				add_button(&box, "mark_for_removal", kImgButtonMarkRemoval,
 				           &FieldActionWindow::act_mark_removal,
 				           _("Mark this immovable for timely removal by a suited worker"));
@@ -406,7 +414,8 @@ void FieldActionWindow::add_buttons_auto() {
 		const bool can_act = igbase != nullptr ? igbase->can_act(owner) : true;
 
 		// The box with road-building buttons
-		buildbox = new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+		buildbox =
+		   new UI::Box(&tabpanel_, UI::PanelStyle::kWui, "build_box", 0, 0, UI::Box::Horizontal);
 
 		if (upcast(Widelands::Flag, flag, imm)) {
 			// Add flag actions
@@ -504,7 +513,8 @@ void FieldActionWindow::add_buttons_auto() {
 		    !has_ship_fleet &&
 		    (ipl == nullptr || bob->owner().player_number() == ipl->player_number())) {
 			if (buildbox == nullptr) {
-				buildbox = new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+				buildbox = new UI::Box(
+				   &tabpanel_, UI::PanelStyle::kWui, "build_box", 0, 0, UI::Box::Horizontal);
 			}
 			has_ship_fleet = true;
 			add_button(
@@ -514,7 +524,8 @@ void FieldActionWindow::add_buttons_auto() {
 		           !has_ferry_fleet &&
 		           (ipl == nullptr || bob->owner().player_number() == ipl->player_number())) {
 			if (buildbox == nullptr) {
-				buildbox = new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+				buildbox = new UI::Box(
+				   &tabpanel_, UI::PanelStyle::kWui, "build_box", 0, 0, UI::Box::Horizontal);
 			}
 			has_ferry_fleet = true;
 			add_button(
@@ -671,7 +682,8 @@ Buttons used during road building: Set flag here and Abort
 ===============
 */
 void FieldActionWindow::add_buttons_road(bool flag) {
-	UI::Box& buildbox = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	UI::Box& buildbox =
+	   *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, "build_box", 0, 0, UI::Box::Horizontal);
 
 	if (flag) {
 		add_button(&buildbox, "build_flag", kImgButtonBuildFlag, &FieldActionWindow::act_buildflag,
@@ -697,7 +709,8 @@ void FieldActionWindow::add_buttons_road(bool flag) {
 }
 
 void FieldActionWindow::add_buttons_waterway(bool flag) {
-	UI::Box& buildbox = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	UI::Box& buildbox =
+	   *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, "build_box", 0, 0, UI::Box::Horizontal);
 
 	if (flag) {
 		add_button(&buildbox, "build_flag", kImgButtonBuildFlag, &FieldActionWindow::act_buildflag,
@@ -1259,11 +1272,11 @@ public:
 	        ibase, UI::WindowStyle::kWui, "ship_selection", registry, 0, 0, _("Select Ship")),
 	     ibase_(*ibase),
 	     node_(node),
-	     hbox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
-	     box_manageable_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-	     box_attackable_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-	     list_manageable_(&box_manageable_, 0, 0, 0, 0, UI::PanelStyle::kWui),
-	     list_attackable_(&box_attackable_, 0, 0, 0, 0, UI::PanelStyle::kWui) {
+	     hbox_(this, UI::PanelStyle::kWui, "hbox", 0, 0, UI::Box::Horizontal),
+	     box_manageable_(&hbox_, UI::PanelStyle::kWui, "manageable_box", 0, 0, UI::Box::Vertical),
+	     box_attackable_(&hbox_, UI::PanelStyle::kWui, "attackable_box", 0, 0, UI::Box::Vertical),
+	     list_manageable_(&box_manageable_, "manageable_list", 0, 0, 0, 0, UI::PanelStyle::kWui),
+	     list_attackable_(&box_attackable_, "attackable_list", 0, 0, 0, 0, UI::PanelStyle::kWui) {
 		for (Widelands::Ship* ship : manageable) {
 			list_manageable_.add(ship_description(ship, false), ship, ship->descr().icon());
 		}
@@ -1277,7 +1290,7 @@ public:
 		list_attackable_.set_desired_size(listw, kListHeight);
 
 		if (ibase_.get_player() != nullptr) {
-			box_manageable_.add(new UI::Textarea(&box_manageable_, UI::PanelStyle::kWui,
+			box_manageable_.add(new UI::Textarea(&box_manageable_, UI::PanelStyle::kWui, "label_manageable",
 			                                     UI::FontStyle::kWuiInfoPanelHeading, _("Own Ships"),
 			                                     UI::Align::kCenter),
 			                    UI::Box::Resizing::kFullSize);
@@ -1290,7 +1303,7 @@ public:
 #endif
 		box_manageable_.add(&list_manageable_, UI::Box::Resizing::kExpandBoth);
 
-		box_attackable_.add(new UI::Textarea(&box_attackable_, UI::PanelStyle::kWui,
+		box_attackable_.add(new UI::Textarea(&box_attackable_, UI::PanelStyle::kWui, "label_attackable",
 		                                     UI::FontStyle::kWuiInfoPanelHeading,
 		                                     _("Attackable Ships"), UI::Align::kCenter),
 		                    UI::Box::Resizing::kFullSize);

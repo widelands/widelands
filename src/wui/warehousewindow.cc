@@ -125,7 +125,7 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
                                          InteractiveBase& ib,
                                          Widelands::Warehouse& wh,
                                          Widelands::WareWorker type)
-   : UI::Box(parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+   : UI::Box(parent, UI::PanelStyle::kWui, "wares_panel", 0, 0, UI::Box::Vertical),
      interactive_base_(ib),
      wh_(wh),
      can_act_(interactive_base_.can_act(wh_.owner().player_number())),
@@ -133,7 +133,8 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
      display_(this, width, wh_, type_, can_act_) {
 	add(&display_, Resizing::kFullSize);
 
-	UI::Box* buttons = new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	UI::Box* buttons =
+	   new UI::Box(this, UI::PanelStyle::kWui, "buttons_box", 0, 0, UI::Box::Horizontal);
 	add(buttons, UI::Box::Resizing::kFullSize);
 	UI::Button* b;
 
@@ -260,7 +261,7 @@ void WarehouseWindow::setup_name_field_editbox(UI::Box& vbox) {
 		return BuildingWindow::setup_name_field_editbox(vbox);
 	}
 
-	UI::EditBox* name_field = new UI::EditBox(&vbox, 0, 0, 0, UI::PanelStyle::kWui);
+	UI::EditBox* name_field = new UI::EditBox(&vbox, "name", 0, 0, 0, UI::PanelStyle::kWui);
 	name_field->set_text(warehouse->get_warehouse_name());
 	name_field->changed.connect([this, name_field]() {
 		Widelands::Warehouse* wh = warehouse_.get(ibase()->egbase());
@@ -291,7 +292,7 @@ void WarehouseWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	   new WarehouseWaresPanel(get_tabs(), Width, *ibase(), *warehouse, Widelands::wwWORKER),
 	   _("Workers"));
 
-	UI::Box* soldiers_box = new UI::Box(get_tabs(), UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
+	UI::Box* soldiers_box = new UI::Box(get_tabs(), UI::PanelStyle::kWui, "soldiers_box", 0, 0, UI::Box::Vertical);
 	soldiers_box->add(
 	   new SoldierStatisticsPanel(
 	      *soldiers_box, warehouse->owner(),

@@ -56,7 +56,7 @@ struct NoteDropdown {
 enum class DropdownType { kTextual, kTextualNarrow, kPictorial, kPictorialMenu, kTextualMenu };
 
 /// Implementation for a dropdown menu that lets the user select a value.
-class BaseDropdown : public NamedPanel {
+class BaseDropdown : public Panel {
 protected:
 	/// \param parent             the parent panel
 	/// \param name               a name so that we can reference the dropdown via Lua
