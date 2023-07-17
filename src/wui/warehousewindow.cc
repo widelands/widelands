@@ -292,7 +292,8 @@ void WarehouseWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	   new WarehouseWaresPanel(get_tabs(), Width, *ibase(), *warehouse, Widelands::wwWORKER),
 	   _("Workers"));
 
-	UI::Box* soldiers_box = new UI::Box(get_tabs(), UI::PanelStyle::kWui, "soldiers_box", 0, 0, UI::Box::Vertical);
+	UI::Box* soldiers_box =
+	   new UI::Box(get_tabs(), UI::PanelStyle::kWui, "soldiers_box", 0, 0, UI::Box::Vertical);
 	soldiers_box->add(
 	   new SoldierStatisticsPanel(
 	      *soldiers_box, warehouse->owner(),

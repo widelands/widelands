@@ -335,24 +335,29 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 		});
 
 		UI::Box& soldier_preference_box =
-		   *new UI::Box(settings_box.get(), UI::PanelStyle::kWui, "soldier_preference_box", 0, 0, UI::Box::Horizontal);
+		   *new UI::Box(settings_box.get(), UI::PanelStyle::kWui, "soldier_preference_box", 0, 0,
+		                UI::Box::Horizontal);
 		settings_box->add(&soldier_preference_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 		// TODO(Nordfriese): Use box layout
 		constexpr int kButtonSize = 32;
-		Panel& soldier_preference_panel = *new Panel(
-		   &soldier_preference_box, UI::PanelStyle::kWui, "soldier_preference_panel", 0, 0, kButtonSize * 3, kButtonSize);
+		Panel& soldier_preference_panel =
+		   *new Panel(&soldier_preference_box, UI::PanelStyle::kWui, "soldier_preference_panel", 0, 0,
+		              kButtonSize * 3, kButtonSize);
 		soldier_preference_box.add(&soldier_preference_panel);
 		cs_prefer_heroes_rookies_.reset(new UI::Radiogroup());
 		// Make sure the creation order is consistent with enum SoldierPreference!
 		cs_prefer_heroes_rookies_->add_button(
-		   &soldier_preference_panel, UI::PanelStyle::kWui, "prefer_rookies", Vector2i(kButtonSize * 2, 0),
+		   &soldier_preference_panel, UI::PanelStyle::kWui, "prefer_rookies",
+		   Vector2i(kButtonSize * 2, 0),
 		   g_image_cache->get("images/wui/buildings/prefer_rookies.png"), _("Prefer rookies"));
 		cs_prefer_heroes_rookies_->add_button(
-		   &soldier_preference_panel, UI::PanelStyle::kWui, "prefer_heroes", Vector2i(kButtonSize * 1, 0),
-		   g_image_cache->get("images/wui/buildings/prefer_heroes.png"), _("Prefer heroes"));
+		   &soldier_preference_panel, UI::PanelStyle::kWui, "prefer_heroes",
+		   Vector2i(kButtonSize * 1, 0), g_image_cache->get("images/wui/buildings/prefer_heroes.png"),
+		   _("Prefer heroes"));
 		cs_prefer_heroes_rookies_->add_button(
-		   &soldier_preference_panel, UI::PanelStyle::kWui, "prefer_any", Vector2i(kButtonSize * 0, 0),
-		   g_image_cache->get("images/wui/buildings/prefer_any.png"), _("No preference"));
+		   &soldier_preference_panel, UI::PanelStyle::kWui, "prefer_any",
+		   Vector2i(kButtonSize * 0, 0), g_image_cache->get("images/wui/buildings/prefer_any.png"),
+		   _("No preference"));
 		cs_prefer_heroes_rookies_->set_state(
 		   static_cast<uint8_t>(ms != nullptr ? ms->soldier_preference : wh->soldier_preference),
 		   false);

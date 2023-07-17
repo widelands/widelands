@@ -509,12 +509,12 @@ SoldierList::SoldierList(UI::Panel& parent,
 	bool can_act = ibase_.can_act(building_or_ship_.owner().player_number());
 	if (building_or_ship.descr().type() != Widelands::MapObjectType::TRAININGSITE) {
 		// Make sure the creation order is consistent with enum SoldierPreference!
-		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, "prefer_rookies", Vector2i::zero(),
-		                               g_image_cache->get("images/wui/buildings/prefer_rookies.png"),
-		                               _("Prefer rookies"));
-		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, "prefer_heroes", Vector2i::zero(),
-		                               g_image_cache->get("images/wui/buildings/prefer_heroes.png"),
-		                               _("Prefer heroes"));
+		soldier_preference_.add_button(
+		   buttons, UI::PanelStyle::kWui, "prefer_rookies", Vector2i::zero(),
+		   g_image_cache->get("images/wui/buildings/prefer_rookies.png"), _("Prefer rookies"));
+		soldier_preference_.add_button(
+		   buttons, UI::PanelStyle::kWui, "prefer_heroes", Vector2i::zero(),
+		   g_image_cache->get("images/wui/buildings/prefer_heroes.png"), _("Prefer heroes"));
 		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, "prefer_any", Vector2i::zero(),
 		                               g_image_cache->get("images/wui/buildings/prefer_any.png"),
 		                               _("No preference"));
