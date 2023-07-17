@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-13 03:06+0000\n"
+"POT-Creation-Date: 2023-07-15 03:08+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: D M <kamera001dm@gmail.com>, 2021,2023\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
@@ -46,21 +46,21 @@ msgstr "Några av dina startbyggnader fick inte plats och byggdes därför inte.
 msgid "Not enough space"
 msgstr "Inte tillräckligt med utrymme"
 
-#: ../../data/scripting/infrastructure.lua:286
+#: ../../data/scripting/infrastructure.lua:287
 msgid "No rocks nearby"
 msgstr "Inga klippor i närheten"
 
-#: ../../data/scripting/infrastructure.lua:286
+#: ../../data/scripting/infrastructure.lua:287
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
 msgstr "Det finns inga klippor i närheten av din startposition. Därför får du extra resurser för att få fart på din ekonomi."
 
-#: ../../data/scripting/infrastructure.lua:292
+#: ../../data/scripting/infrastructure.lua:293
 msgid "Not enough trees nearby"
 msgstr ""
 
-#: ../../data/scripting/infrastructure.lua:292
+#: ../../data/scripting/infrastructure.lua:293
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."

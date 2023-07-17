@@ -497,13 +497,13 @@ msgstr "Uppass"
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:52
 msgctxt "barbarians_building"
 msgid "Your soldiers have occupied your barrier."
-msgstr "Diene Soldaten hebben diene Uppass besett."
+msgstr "Diene Soldaten hebben dienen Uppass besett."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:54
 msgctxt "barbarians_building"
 msgid "Your barrier discovered an aggressor."
-msgstr "Diene Uppass hett Feinde to sehn kregen."
+msgstr "Dien Uppass hett Feinde to sehn kregen."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:56
@@ -677,13 +677,13 @@ msgstr "Uppass"
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:45
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your barrier."
-msgstr "Diene Soldaten hebben diene Uppass besett."
+msgstr "Diene Soldaten hebben dienen Uppass besett."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:47
 msgctxt "empire_building"
 msgid "Your barrier discovered an aggressor."
-msgstr "Diene Uppass hett Feinde to sehn kregen."
+msgstr "Dien Uppass hett Feinde to sehn kregen."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:49
