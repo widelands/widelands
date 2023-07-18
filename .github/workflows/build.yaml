@@ -96,7 +96,7 @@ jobs:
       uses: dorny/paths-filter@v2
       id: changed_files
       with:
-        # groups of files to check for changed files
+        # groups to check for changed files (as string, yaml anchors are resolved by the tool)
         filters: |
           clang_tidy:
             - 'src/**'
@@ -111,11 +111,10 @@ jobs:
             - 'regression_test.py'
             - 'test/**'
     - name: Installing dependencies
-      if: &run_clang_tidy steps.filter_files.outputs.clang_tidy == 'true'
+      if: steps.filter_files.outputs.clang_tidy == 'true'
       run: sh ./.github/scripts/install_deps.sh
     - name: CMake
-      # *run_clang_tidy is reference to above &run_clang_tidy
-      if: *run_clang_tidy
+      if: steps.filter_files.outputs.clang_tidy == 'true'
       run: |
         # Prepare build dir
         echo "Will use $(nproc) cores."
@@ -125,7 +124,7 @@ jobs:
         popd
     - name: Restore cache
       uses: actions/cache/restore@v3
-      if: *run_clang_tidy
+      if: steps.filter_files.outputs.clang_tidy == 'true'
       with:
         path: build/clang-tidy-cache
         key: clang-tidy-cache-${{ github.sha }}
@@ -134,7 +133,7 @@ jobs:
     - name: Check
       # To run a single check, call:
       # python3 ../utils/run-clang-tidy.py -checks=-*,my-check-prefix* | tee ../clang-tidy.log
-      if: *run_clang_tidy
+      if: steps.filter_files.outputs.clang_tidy == 'true'
       run: |
         # run-clang-tidy.py
         pushd build
@@ -142,13 +141,13 @@ jobs:
         popd
     - name: Save cache
       # We want to save the cache even if the report fails because of failed files
-      if: *run_clang_tidy
+      if: steps.filter_files.outputs.clang_tidy == 'true'
       uses: actions/cache/save@v3
       with:
         path: build/clang-tidy-cache
         key: clang-tidy-cache-${{ github.sha }}
     - name: Report
-      if: *run_clang_tidy
+      if: steps.filter_files.outputs.clang_tidy == 'true'
       run: utils/check_clang_tidy_results.py clang-tidy.log
 
   lua_style:
