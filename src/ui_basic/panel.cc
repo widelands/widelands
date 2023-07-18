@@ -1201,6 +1201,20 @@ void Panel::set_tooltip(const std::string& text) {
 	}
 }
 
+Panel* Panel::find_child_by_name(const std::string& name, bool recurse) {
+	for (Panel* child = first_child_; child != nullptr; child = child->next_) {
+		if (child->get_name() == name) {
+			return child;
+		}
+		if (recurse) {
+			if (Panel* np = child->find_child_by_name(name, true); np != nullptr) {
+				return np;
+			}
+		}
+	}
+	return nullptr;
+}
+
 void Panel::find_all_children_at(const int16_t x,
                                  const int16_t y,
                                  std::vector<Panel*>& result) const {

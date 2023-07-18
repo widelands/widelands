@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-13 03:06+0000\n"
+"POT-Creation-Date: 2023-07-15 03:08+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Francisco Fernandes <franciscof09@gmail.com>, 2021\n"
 "Language-Team: Portuguese (http://app.transifex.com/widelands/widelands/language/pt/)\n"
@@ -43,21 +43,21 @@ msgstr "Alguns dos teus edifícios iniciais não foram construídos por não hav
 msgid "Not enough space"
 msgstr "Espaço insuficiente"
 
-#: ../../data/scripting/infrastructure.lua:286
+#: ../../data/scripting/infrastructure.lua:287
 msgid "No rocks nearby"
 msgstr "Sem rochas nas redondezas"
 
-#: ../../data/scripting/infrastructure.lua:286
+#: ../../data/scripting/infrastructure.lua:287
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
 msgstr "Não existem rochas próximas da tua posição inicial. Portanto, tu recebes recursos extra para o arranque da tua economia."
 
-#: ../../data/scripting/infrastructure.lua:292
+#: ../../data/scripting/infrastructure.lua:293
 msgid "Not enough trees nearby"
 msgstr ""
 
-#: ../../data/scripting/infrastructure.lua:292
+#: ../../data/scripting/infrastructure.lua:293
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."

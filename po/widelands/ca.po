@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-13 03:06+0000\n"
+"POT-Creation-Date: 2023-07-15 03:08+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Juanjo, 2015-2023\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
@@ -42,21 +42,21 @@ msgstr "No hi havia prou espai per als vostres edificis inicials i no s’han co
 msgid "Not enough space"
 msgstr "No hi ha prou espai"
 
-#: ../../data/scripting/infrastructure.lua:286
+#: ../../data/scripting/infrastructure.lua:287
 msgid "No rocks nearby"
 msgstr "No hi ha roques a prop"
 
-#: ../../data/scripting/infrastructure.lua:286
+#: ../../data/scripting/infrastructure.lua:287
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
 msgstr "No hi ha roques en la vostra posició inicial. Per tant, rebreu recursos addicionals per desenvolupar l’economia."
 
-#: ../../data/scripting/infrastructure.lua:292
+#: ../../data/scripting/infrastructure.lua:293
 msgid "Not enough trees nearby"
 msgstr ""
 
-#: ../../data/scripting/infrastructure.lua:292
+#: ../../data/scripting/infrastructure.lua:293
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."
