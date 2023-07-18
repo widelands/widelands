@@ -1,6 +1,6 @@
 [TOC]
 
-## Post-1.1 until [git ebb912d](https://github.com/widelands/widelands/commit/ebb912da5cf9b239624914dd657fb5662be467f0)
+## Post-1.1 until [git da38617](https://github.com/widelands/widelands/commit/da386174eda132e4267d4d605a7a2f646ad85672)
 
 ### Animations, Icons and Overlays
 
@@ -45,6 +45,10 @@
     - Add function `LuaWorker::evict`
     - Add property `LuaMapObject.exists`
     - Expose worker buildcost to `modify_unit`
+- Lua UI API Extensions (#5933)
+    - Read+Write access to most properties of all kinds of UI elements at runtime
+    - Add support for checkboxes, radio groups, unique windows, spinboxes, sliders (all three flavours), progress bars, editboxes and multiline editboxes
+- Cleanup: Deduplicate index variables in Lua `get_x_descriptions` (#6026)
 
 
 ### Maps
@@ -185,6 +189,7 @@
 - Fix regression in `EditBox::scroll_cursor_into_view` (#5946)
 - Fix Segfault in `FieldActionWindow` (#5982)
 - Revert preventing `move_inside_parent()` to move `UniqueWindow`s with saved position (#5995)
+- Name All UI Elements (#5963)
 
 
 ### Internationalization
@@ -276,6 +281,11 @@
 - CI: Push vcpkg ref only to main repo (#5977)
 - Define `PRIuS` using `PRIuPTR` if available (#5979)
 - Set fixed MSVC toolset version (#6007)
+- Resolve compiler warnings (#6021)
+    - Re-enable `-Werror` for GCC 13.1.1+
+    - Update Clang version in CI
+    - Resolved most GCC warnings
+    - Resolved warnings in MinGW builds
 
 
 ### Other Issues
