@@ -78,7 +78,7 @@ if [ -n "$(git status -s)" ]; then
   # Only upload to Transifex if anything changed
   # Push source catalogs to Transifex
   tx push -s
-  sleep 5 # ?? # wait for translation files to be updated
+  sleep 65 # wait for translation files to be updated
 fi
 
 # Pull All translations from Transifex
