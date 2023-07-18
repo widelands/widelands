@@ -74,9 +74,8 @@ undo_oneliner_diffs() {
 }
 undo_oneliner_diffs
 
-if [ -z "$(git status -s)" ]; then
-  true # nothing changed, do not upload to transifex
-else
+if [ -n "$(git status -s)" ]; then
+  # Only upload to Transifex if anything changed
   # Push source catalogs to Transifex
   tx push -s
   sleep 5 # ?? # wait for translation files to be updated
