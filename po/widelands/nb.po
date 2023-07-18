@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-13 03:06+0000\n"
+"POT-Creation-Date: 2023-07-15 03:08+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Per-Henrik Kvalnes <perhenrik.kvalnes@gmail.com, 2020\n"
 "Language-Team: Norwegian Bokmål (http://app.transifex.com/widelands/widelands/language/nb/)\n"
@@ -40,21 +40,21 @@ msgstr ""
 msgid "Not enough space"
 msgstr "Ikke nok plass"
 
-#: ../../data/scripting/infrastructure.lua:286
+#: ../../data/scripting/infrastructure.lua:287
 msgid "No rocks nearby"
 msgstr "Ingen stein i nærheten"
 
-#: ../../data/scripting/infrastructure.lua:286
+#: ../../data/scripting/infrastructure.lua:287
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
 msgstr ""
 
-#: ../../data/scripting/infrastructure.lua:292
+#: ../../data/scripting/infrastructure.lua:293
 msgid "Not enough trees nearby"
 msgstr ""
 
-#: ../../data/scripting/infrastructure.lua:292
+#: ../../data/scripting/infrastructure.lua:293
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."
