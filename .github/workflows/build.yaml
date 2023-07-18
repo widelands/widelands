@@ -39,18 +39,34 @@ jobs:
       uses: actions/checkout@v3
       with:
         fetch-depth: 1
+    - name: check for changed files
+      uses: dorny/paths-filter@v2
+      id: changed_files
+      with:
+        # groups to check for changed files
+        filters: |
+          codecheck:
+            - 'CMakeLists.txt'
+            - '*/CMakeLists.txt'
+            - 'cmake/codecheck/**'
+            - 'cmake/WlFunctions.cmake'
+            - 'src/**'
     - name: Installing dependencies
+      if: steps.filter_files.outputs.codecheck == 'true'
       run: sh ./.github/scripts/install_deps.sh
     - name: Test
+      if: steps.filter_files.outputs.codecheck == 'true'
       run: |
         ./cmake/codecheck/run_tests.py
     - name: Check
+      if: steps.filter_files.outputs.codecheck == 'true'
       run: |
         mkdir build
         cd build
         cmake .. -DCMAKE_BUILD_TYPE:STRING="Debug"
         TERM=dumb make -j1 codecheck 2>&1 | tee codecheck.out
     - name: Report
+      if: steps.filter_files.outputs.codecheck == 'true'
       run: |
         if grep '^[/_.a-zA-Z]\+:[0-9]\+:' build/codecheck.out; then
           echo "You have codecheck warnings (see above). Please fix."
@@ -100,6 +116,7 @@ jobs:
         filters: |
           clang_tidy:
             - 'src/**'
+            - 'utils/check_clang_tidy_results.py'
             - 'utils/run-clang-tidy.py'
           compile: &compile
             - 'CMakeLists.txt'
