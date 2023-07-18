@@ -136,9 +136,11 @@ void terminate(int /*unused*/) {
 }
 #endif
 
+#ifdef SIGUSR1
 void toggle_verbose(int /*unused*/) {
 	g_verbose = !g_verbose;
 }
+#endif
 
 bool is_absolute_path(const std::string& path) {
 	std::regex re("^/|\\w:");
