@@ -37,7 +37,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-10 03:08+0000\n"
+"POT-Creation-Date: 2023-07-15 03:08+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2023\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
@@ -69,21 +69,21 @@ msgstr "Einige deiner Startgebäude hatten nicht genug Platz und wurden nicht ge
 msgid "Not enough space"
 msgstr "Nicht genug Platz"
 
-#: ../../data/scripting/infrastructure.lua:286
+#: ../../data/scripting/infrastructure.lua:287
 msgid "No rocks nearby"
 msgstr "Keine Felsen in der Nähe"
 
-#: ../../data/scripting/infrastructure.lua:286
+#: ../../data/scripting/infrastructure.lua:287
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
 msgstr "Es gibt keine Felsen in der Nähe deiner Ausgangsposition. Daher erhältst du zusätzliche Rohstoffe zum Aufbau deiner Wirtschaft."
 
-#: ../../data/scripting/infrastructure.lua:292
+#: ../../data/scripting/infrastructure.lua:293
 msgid "Not enough trees nearby"
 msgstr "Nicht genug Bäume in der Nähe"
 
-#: ../../data/scripting/infrastructure.lua:292
+#: ../../data/scripting/infrastructure.lua:293
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."
@@ -2409,13 +2409,13 @@ msgstr "Kein Ufer"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:1244
 msgid "Shipyard Without Shore"
-msgstr ""
+msgstr "Werft ohne Ufer"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:1245
 msgid ""
 "Your shipyard has not been built close enough to a shore. It will not be "
 "able to build ships."
-msgstr ""
+msgstr "Deine Werft wurde nicht nah genug am Ufer gebaut. Sie wird nicht in der Lage sein Schiffe zu bauen."
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:1265
 msgid "Ferry Yard Without Shore"
@@ -5296,7 +5296,7 @@ msgstr "Stammesname"
 msgid "Campaign Name"
 msgstr "Kampagnenname"
 
-#: ../../src/ui_fsmenu/helpwindow.cc:46 ../../src/wui/helpwindow.cc:44
+#: ../../src/ui_fsmenu/helpwindow.cc:46 ../../src/wui/helpwindow.cc:48
 #, c-format
 msgid "Help: %s"
 msgstr "Hilfe: %s"
@@ -6037,7 +6037,7 @@ msgstr "Unspezifiziert"
 msgid "The map does not specify whether it is balanced"
 msgstr "Die Karte enthält keine Angabe zur Ausgewogenheit"
 
-#: ../../src/ui_fsmenu/menu.cc:106
+#: ../../src/ui_fsmenu/menu.cc:106 ../../src/wui/helpwindow.cc:68
 msgid "Back"
 msgstr "Zurück"
 
@@ -8273,11 +8273,11 @@ msgid ""
 "%s"
 msgstr "Fehler beim Laden eine Stammeslexikonskripts:\n%s"
 
-#: ../../src/wui/encyclopedia_window.cc:230
+#: ../../src/wui/encyclopedia_window.cc:234 ../../src/wui/helpwindow.cc:146
 msgid "Broken Link"
 msgstr "Defekte Verknüpfung"
 
-#: ../../src/wui/encyclopedia_window.cc:231
+#: ../../src/wui/encyclopedia_window.cc:235 ../../src/wui/helpwindow.cc:147
 msgid "This hyperlink seems to be broken."
 msgstr "Diese Verknüpfung scheint nicht mehr zu funktionieren."
 

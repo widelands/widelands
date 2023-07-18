@@ -61,6 +61,7 @@ inline static bool tooltip_accessibility_mode() {
  */
 Panel::Panel(Panel* const nparent,
              const PanelStyle s,
+             const std::string& name,
              const int nx,
              const int ny,
              const int nw,
@@ -71,6 +72,7 @@ Panel::Panel(Panel* const nparent,
      parent_(nparent),
 
      flags_(pf_handle_mouse | pf_thinks | pf_visible | pf_handle_keypresses),
+     name_(name),
      x_(nx),
      y_(ny),
      w_(nw),
@@ -80,7 +82,14 @@ Panel::Panel(Panel* const nparent,
      desired_h_(nh),
 
      tooltip_(tooltip_text),
+     hyperlink_subscriber_(
+        Notifications::subscribe<NoteHyperlink>([this](const NoteHyperlink& note) {
+	        if (starts_with(name_, note.target)) {
+		        handle_hyperlink(note.action);
+	        }
+        })),
      logic_thread_locked_(LogicThreadState::kEndingConfirmed) {
+	assert(!name.empty());
 	assert(nparent != this);
 	if (parent_ != nullptr) {
 		next_ = parent_->first_child_;
@@ -1192,6 +1201,20 @@ void Panel::set_tooltip(const std::string& text) {
 	}
 }
 
+Panel* Panel::find_child_by_name(const std::string& name, bool recurse) {
+	for (Panel* child = first_child_; child != nullptr; child = child->next_) {
+		if (child->get_name() == name) {
+			return child;
+		}
+		if (recurse) {
+			if (Panel* np = child->find_child_by_name(name, true); np != nullptr) {
+				return np;
+			}
+		}
+	}
+	return nullptr;
+}
+
 void Panel::find_all_children_at(const int16_t x,
                                  const int16_t y,
                                  std::vector<Panel*>& result) const {
@@ -1688,25 +1711,7 @@ bool Panel::draw_tooltip(const std::string& text, const PanelStyle style, Vector
 	return true;
 }
 
-NamedPanel::NamedPanel(Panel* const nparent,
-                       UI::PanelStyle s,
-                       const std::string& name,
-                       int32_t const nx,
-                       int32_t const ny,
-                       int const nw,
-                       int const nh,
-                       const std::string& tooltip_text)
-   : Panel(nparent, s, nx, ny, nw, nh, tooltip_text),
-     name_(name),
-     hyperlink_subscriber_(
-        Notifications::subscribe<NoteHyperlink>([this](const NoteHyperlink& note) {
-	        if (starts_with(name_, note.target)) {
-		        handle_hyperlink(note.action);
-	        }
-        })) {
-}
-
-void NamedPanel::handle_hyperlink(const std::string& action) {
+void Panel::handle_hyperlink(const std::string& action) {
 	throw wexception("Panel %s: Invalid hyperlink action '%s'", name_.c_str(), action.c_str());
 }
 

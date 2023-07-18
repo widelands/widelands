@@ -32,7 +32,7 @@ namespace UI {
  */
 class FileViewPanel : public TabPanel {
 public:
-	FileViewPanel(Panel* parent, UI::TabPanelStyle background_style);
+	FileViewPanel(Panel* parent, UI::TabPanelStyle background_style, const std::string& name);
 
 	/// Reads the text for the active tab from 'lua_script' if it hasn't been loaded yet.
 	void load_tab_contents();

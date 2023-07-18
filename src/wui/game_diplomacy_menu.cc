@@ -36,17 +36,21 @@ GameDiplomacyMenu::GameDiplomacyMenu(InteractiveGameBase& parent,
         &parent, UI::WindowStyle::kWui, "diplomacy", &registry, 300, 200, _("Diplomacy")),
      igbase_(parent),
      iplayer_(dynamic_cast<InteractivePlayer*>(&igbase_)),
-     diplomacy_box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-     hbox_(&diplomacy_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
-     vbox_flag_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-     vbox_name_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-     vbox_team_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-     vbox_status_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-     vbox_action_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-     actions_hbox_(&diplomacy_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
-     actions_vbox_descr_(&actions_hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-     actions_vbox_yes_(&actions_hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-     actions_vbox_no_(&actions_hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical) {
+     diplomacy_box_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical),
+     hbox_(&diplomacy_box_, UI::PanelStyle::kWui, "hbox", 0, 0, UI::Box::Horizontal),
+     vbox_flag_(&hbox_, UI::PanelStyle::kWui, "flag_vbox", 0, 0, UI::Box::Vertical),
+     vbox_name_(&hbox_, UI::PanelStyle::kWui, "name_vbox", 0, 0, UI::Box::Vertical),
+     vbox_team_(&hbox_, UI::PanelStyle::kWui, "team_vbox", 0, 0, UI::Box::Vertical),
+     vbox_status_(&hbox_, UI::PanelStyle::kWui, "status_vbox", 0, 0, UI::Box::Vertical),
+     vbox_action_(&hbox_, UI::PanelStyle::kWui, "action_vbox", 0, 0, UI::Box::Vertical),
+     actions_hbox_(
+        &diplomacy_box_, UI::PanelStyle::kWui, "actions_hbox", 0, 0, UI::Box::Horizontal),
+     actions_vbox_descr_(
+        &actions_hbox_, UI::PanelStyle::kWui, "actions_description_vbox", 0, 0, UI::Box::Vertical),
+     actions_vbox_yes_(
+        &actions_hbox_, UI::PanelStyle::kWui, "actions_yes_vbox", 0, 0, UI::Box::Vertical),
+     actions_vbox_no_(
+        &actions_hbox_, UI::PanelStyle::kWui, "actions_no_vbox", 0, 0, UI::Box::Vertical) {
 
 	const bool rtl = UI::g_fh->fontset()->is_rtl();
 	const bool show_all_players =
@@ -59,18 +63,19 @@ GameDiplomacyMenu::GameDiplomacyMenu(InteractiveGameBase& parent,
 		}
 
 		UI::Icon* icon_flag = new UI::Icon(
-		   &vbox_flag_, UI::PanelStyle::kWui, 0, 0, kRowSize, kRowSize,
+		   &vbox_flag_, UI::PanelStyle::kWui, format("flag_icon_%u", p), 0, 0, kRowSize, kRowSize,
 		   THREADSAFE_T(const Image*, const Image* (*)(const RGBColor&, const std::string&),
 		                playercolor_image, player->get_playercolor(),
 		                "images/players/genstats_player.png"));
 		UI::Icon* icon_team =
-		   new UI::Icon(&vbox_team_, UI::PanelStyle::kWui, 0, 0, kRowSize, kRowSize, nullptr);
-		UI::Textarea* txt_name =
-		   new UI::Textarea(&vbox_name_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel,
-		                    player->get_name(), UI::mirror_alignment(UI::Align::kLeft, rtl));
-		UI::Textarea* txt_status =
-		   new UI::Textarea(&vbox_status_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, "",
-		                    UI::mirror_alignment(UI::Align::kRight, rtl));
+		   new UI::Icon(&vbox_team_, UI::PanelStyle::kWui, format("team_icon_%u", p), 0, 0, kRowSize,
+		                kRowSize, nullptr);
+		UI::Textarea* txt_name = new UI::Textarea(
+		   &vbox_name_, UI::PanelStyle::kWui, format("name_%u", p), UI::FontStyle::kWuiLabel,
+		   player->get_name(), UI::mirror_alignment(UI::Align::kLeft, rtl));
+		UI::Textarea* txt_status = new UI::Textarea(&vbox_status_, UI::PanelStyle::kWui,
+		                                            format("status_%u", p), UI::FontStyle::kWuiLabel,
+		                                            "", UI::mirror_alignment(UI::Align::kRight, rtl));
 
 		icon_team->set_handle_mouse(true);
 		icon_flag->set_handle_mouse(true);
@@ -80,8 +85,8 @@ GameDiplomacyMenu::GameDiplomacyMenu(InteractiveGameBase& parent,
 		if (iplayer_ != nullptr) {
 			UI::Button* b1 = nullptr;
 			UI::Button* b2 = nullptr;
-			UI::Box* buttonsbox =
-			   new UI::Box(&vbox_action_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+			UI::Box* buttonsbox = new UI::Box(&vbox_action_, UI::PanelStyle::kWui,
+			                                  format("buttons_box_%u", p), 0, 0, UI::Box::Horizontal);
 			if (p == iplayer_->player_number()) {
 				b1 = new UI::Button(buttonsbox, "leave", 0, 0, kButtonWidth, kRowSize,
 				                    UI::ButtonStyle::kWuiSecondary, _("Leave"),
@@ -280,6 +285,7 @@ void GameDiplomacyMenu::update_diplomacy_details() {
 
 		actions_vbox_descr_.add_inf_space();
 		actions_vbox_descr_.add(new UI::Textarea(&actions_vbox_descr_, UI::PanelStyle::kWui,
+		                                         format("description_%u", index),
 		                                         UI::FontStyle::kWuiInfoPanelParagraph, descr),
 		                        UI::Box::Resizing::kFullSize);
 		actions_vbox_descr_.add_inf_space();

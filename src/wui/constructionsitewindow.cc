@@ -137,7 +137,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 }
 
 void ConstructionSiteWindow::build_wares_tab(Widelands::ConstructionSite* construction_site) {
-	UI::Box& box = *new UI::Box(get_tabs(), UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
+	UI::Box& box =
+	   *new UI::Box(get_tabs(), UI::PanelStyle::kWui, "input_box", 0, 0, UI::Box::Vertical);
 
 	add_progress_bar(box);
 
@@ -150,8 +151,9 @@ void ConstructionSiteWindow::build_wares_tab(Widelands::ConstructionSite* constr
 }
 
 void ConstructionSiteWindow::add_progress_bar(UI::Box& box) {
-	progress_ = new UI::ProgressBar(&box, UI::PanelStyle::kWui, 0, 0, UI::ProgressBar::DefaultWidth,
-	                                UI::ProgressBar::DefaultHeight, UI::ProgressBar::Horizontal);
+	progress_ = new UI::ProgressBar(&box, UI::PanelStyle::kWui, "progress", 0, 0,
+	                                UI::ProgressBar::DefaultWidth, UI::ProgressBar::DefaultHeight,
+	                                UI::ProgressBar::Horizontal);
 	progress_->set_total(1 << 16);
 	box.add(progress_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 }
@@ -181,7 +183,7 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 	// the relevant options.
 	bool nothing_added = false;
 	std::unique_ptr<UI::Box> settings_box(
-	   new UI::Box(get_tabs(), UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical));
+	   new UI::Box(get_tabs(), UI::PanelStyle::kWui, "settings_box", 0, 0, UI::Box::Vertical));
 	switch (construction_site->building().type()) {
 	case Widelands::MapObjectType::PRODUCTIONSITE:
 	case Widelands::MapObjectType::TRAININGSITE: {
@@ -220,8 +222,9 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 				}
 			});
 		}
-		cs_stopped_ = new UI::Checkbox(settings_box.get(), UI::PanelStyle::kWui, Vector2i::zero(),
-		                               _("Stopped"), _("Stop this building’s work after completion"));
+		cs_stopped_ = new UI::Checkbox(settings_box.get(), UI::PanelStyle::kWui, "setting_stop",
+		                               Vector2i::zero(), _("Stopped"),
+		                               _("Stop this building’s work after completion"));
 		cs_stopped_->clickedto.connect([this, ps](bool stop) {
 			if (stop != ps->stopped) {
 				if (game_ != nullptr) {
@@ -251,17 +254,18 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 		});
 
 		UI::Box& soldier_preference_box =
-		   *new UI::Box(settings_box.get(), UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+		   *new UI::Box(settings_box.get(), UI::PanelStyle::kWui, "soldier_preference_box", 0, 0,
+		                UI::Box::Horizontal);
 		settings_box->add(&soldier_preference_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-		Panel& soldier_preference_panel =
-		   *new Panel(&soldier_preference_box, UI::PanelStyle::kWui, 0, 0, 64, 32);
+		Panel& soldier_preference_panel = *new Panel(
+		   &soldier_preference_box, UI::PanelStyle::kWui, "soldier_preference_panel", 0, 0, 64, 32);
 		soldier_preference_box.add(&soldier_preference_panel);
 		cs_prefer_heroes_rookies_.reset(new UI::Radiogroup());
 		cs_prefer_heroes_rookies_->add_button(
-		   &soldier_preference_panel, UI::PanelStyle::kWui, Vector2i::zero(),
+		   &soldier_preference_panel, UI::PanelStyle::kWui, "prefer_heroes", Vector2i::zero(),
 		   g_image_cache->get("images/wui/buildings/prefer_heroes.png"), _("Prefer heroes"));
 		cs_prefer_heroes_rookies_->add_button(
-		   &soldier_preference_panel, UI::PanelStyle::kWui, Vector2i(32, 0),
+		   &soldier_preference_panel, UI::PanelStyle::kWui, "prefer_rookies", Vector2i(32, 0),
 		   g_image_cache->get("images/wui/buildings/prefer_rookies.png"), _("Prefer rookies"));
 		cs_prefer_heroes_rookies_->set_state(ms->prefer_heroes ? 0 : 1, false);
 		if (can_act) {
@@ -282,11 +286,13 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 		upcast(Widelands::WarehouseSettings, ws, construction_site->get_settings());
 		auto add_tab = [this, construction_site, can_act](
 		                  Widelands::WareWorker ww, FakeWaresDisplay** display) {
-			UI::Box& mainbox = *new UI::Box(get_tabs(), UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
+			UI::Box& mainbox = *new UI::Box(get_tabs(), UI::PanelStyle::kWui,
+			                                "warehouse_settings_main_box", 0, 0, UI::Box::Vertical);
 			*display = new FakeWaresDisplay(&mainbox, can_act, *construction_site, ww);
 			mainbox.add(*display, UI::Box::Resizing::kFullSize);
 			UI::Box& buttonsbox =
-			   *new UI::Box(&mainbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+			   *new UI::Box(&mainbox, UI::PanelStyle::kWui, "warehouse_settings_buttons_box", 0, 0,
+			                UI::Box::Horizontal);
 			mainbox.add(&buttonsbox, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 			mainbox.add_space(15);
 			UI::Button& sp_normal = *new UI::Button(
@@ -332,8 +338,8 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 		add_tab(Widelands::wwWORKER, &cs_warehouse_workers_);
 		if (construction_site->get_info().becomes->get_isport()) {
 			cs_launch_expedition_ = new UI::Checkbox(
-			   settings_box.get(), UI::PanelStyle::kWui, Vector2i::zero(), _("Start an expedition"),
-			   _("Start an expedition from this port after completion"));
+			   settings_box.get(), UI::PanelStyle::kWui, "launch_expedition", Vector2i::zero(),
+			   _("Start an expedition"), _("Start an expedition from this port after completion"));
 			cs_launch_expedition_->clickedto.connect([this, ws](bool launch) {
 				if (launch != ws->launch_expedition) {
 					if (game_ != nullptr) {
@@ -437,7 +443,7 @@ void ConstructionSiteWindow::think() {
 
 ConstructionSoldierCapacityBox::ConstructionSoldierCapacityBox(
    Panel* parent, uint32_t current, uint32_t min, uint32_t max, bool enabled)
-   : Box(parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+   : Box(parent, UI::PanelStyle::kWui, "soldier_capacity_box", 0, 0, UI::Box::Horizontal),
      current_(current),
      min_(min),
      max_(max),
@@ -462,8 +468,12 @@ ConstructionSoldierCapacityBox::ConstructionSoldierCapacityBox(
         UI::ButtonStyle::kWuiMenu,
         g_image_cache->get(pic_increase_capacity),
         _("Increase capacity. Hold down Ctrl to set the capacity to the highest value")),
-     cs_soldier_capacity_display_(
-        this, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, "", UI::Align::kCenter) {
+     cs_soldier_capacity_display_(this,
+                                  UI::PanelStyle::kWui,
+                                  "soldier_capacity",
+                                  UI::FontStyle::kWuiLabel,
+                                  "",
+                                  UI::Align::kCenter) {
 	cs_soldier_capacity_decrease_.set_repeating(true);
 	cs_soldier_capacity_increase_.set_repeating(true);
 	add(&cs_soldier_capacity_decrease_);
