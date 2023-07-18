@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-13 03:06+0000\n"
+"POT-Creation-Date: 2023-07-15 03:08+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Karl Vest, 2020\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
@@ -43,21 +43,21 @@ msgstr "Nepodarilo sa umiestniť niektoré z počiatočných budov pre nedostato
 msgid "Not enough space"
 msgstr "Nedostatok miesta"
 
-#: ../../data/scripting/infrastructure.lua:286
+#: ../../data/scripting/infrastructure.lua:287
 msgid "No rocks nearby"
 msgstr "Došli skaly"
 
-#: ../../data/scripting/infrastructure.lua:286
+#: ../../data/scripting/infrastructure.lua:287
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
 msgstr "V blízkosti vašej štartovacej pozície sa nenachádzajú žiadne skaly. Pre rozbeh vašej ekomomiky dostanete preto extra zdroje."
 
-#: ../../data/scripting/infrastructure.lua:292
+#: ../../data/scripting/infrastructure.lua:293
 msgid "Not enough trees nearby"
 msgstr ""
 
-#: ../../data/scripting/infrastructure.lua:292
+#: ../../data/scripting/infrastructure.lua:293
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."

@@ -37,7 +37,7 @@ constexpr int kTabPanelButtonHeight = 34;
  * stays the same for all elements
  */
 struct TabPanel;
-struct Tab : public NamedPanel {
+struct Tab : public Panel {
 	friend struct TabPanel;
 	friend class FileViewPanel;
 
@@ -96,7 +96,7 @@ struct TabPanel : public Panel {
 
 	friend struct Tab;
 
-	TabPanel(Panel* parent, UI::TabPanelStyle style);
+	TabPanel(Panel* parent, UI::TabPanelStyle style, const std::string& name);
 
 	/** Add textual tab
 	 *

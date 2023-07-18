@@ -37,26 +37,29 @@ NetSetupLAN::NetSetupLAN(MenuCapsule& fsmm)
      // Left column content
      label_opengames_(&left_column_box_,
                       UI::PanelStyle::kFsMenu,
+                      "label_opengames",
                       UI::FontStyle::kFsMenuLabel,
                       0,
                       0,
                       0,
                       0,
                       _("List of games in your local network:")),
-     table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     table_(&left_column_box_, "table", 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 
      // Right column content
      label_playername_(&right_column_content_box_,
                        UI::PanelStyle::kFsMenu,
+                       "label_playername",
                        UI::FontStyle::kFsMenuLabel,
                        0,
                        0,
                        0,
                        0,
                        _("Your nickname:")),
-     playername_(&right_column_content_box_, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     playername_(&right_column_content_box_, "playername", 0, 0, 0, UI::PanelStyle::kFsMenu),
      label_hostname_(&right_column_content_box_,
                      UI::PanelStyle::kFsMenu,
+                     "label_hostname",
                      UI::FontStyle::kFsMenuLabel,
                      0,
                      0,
@@ -64,8 +67,9 @@ NetSetupLAN::NetSetupLAN(MenuCapsule& fsmm)
                      0,
                      _("Host to connect:")),
 
-     host_box_(&right_column_content_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     hostname_(&host_box_, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     host_box_(
+        &right_column_content_box_, UI::PanelStyle::kFsMenu, "host_box", 0, 0, UI::Box::Horizontal),
+     hostname_(&host_box_, "hostname", 0, 0, 0, UI::PanelStyle::kFsMenu),
      loadlasthost_(&host_box_,
                    "load_previous_host",
                    0,
@@ -110,9 +114,9 @@ NetSetupLAN::NetSetupLAN(MenuCapsule& fsmm)
 	right_column_content_box_.add(&hostgame_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_inf_space();
 	right_column_content_box_.add(
-	   new UI::MultilineTextarea(&right_column_content_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu,
-	                             AddOns::list_game_relevant_addons(), UI::Align::kLeft,
-	                             UI::MultilineTextarea::ScrollMode::kNoScrolling),
+	   new UI::MultilineTextarea(&right_column_content_box_, "label_addons", 0, 0, 0, 0,
+	                             UI::PanelStyle::kFsMenu, AddOns::list_game_relevant_addons(),
+	                             UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	   UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_inf_space();
 	right_column_content_box_.add_inf_space();

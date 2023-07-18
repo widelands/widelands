@@ -42,6 +42,7 @@ struct Box : public Panel {
 
 	Box(Panel* parent,
 	    PanelStyle,
+	    const std::string& name,
 	    int32_t x,
 	    int32_t y,
 	    uint32_t orientation,
