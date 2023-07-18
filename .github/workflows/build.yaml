@@ -81,6 +81,9 @@ jobs:
 
   clang_tidy:
     runs-on: ubuntu-latest
+    # Set job outputs to values from changed_files step for other jobs
+    outputs:
+      run_test_suite: ${{ steps.changed_files.outputs.test_suite }}
     env:
       CC:  /usr/bin/clang
       CXX: /usr/bin/clang++
@@ -89,9 +92,30 @@ jobs:
       uses: actions/checkout@v3
       with:
         fetch-depth: 1
+    - name: check for changed files
+      uses: dorny/paths-filter@v2
+      id: changed_files
+      with:
+        # groups of files to check for changed files
+        filters: |
+          clang_tidy:
+            - 'src/**'
+            - 'utils/run-clang-tidy.py'
+          compile: &compile
+            - 'CMakeLists.txt'
+            - 'cmake/**'
+            - 'src/**'
+          test_suite:
+            - *compile
+            - 'data/**'
+            - 'regression_test.py'
+            - 'test/**'
     - name: Installing dependencies
+      if: &run_clang_tidy steps.filter_files.outputs.clang_tidy == 'true'
       run: sh ./.github/scripts/install_deps.sh
     - name: CMake
+      # *run_clang_tidy is reference to above &run_clang_tidy
+      if: *run_clang_tidy
       run: |
         # Prepare build dir
         echo "Will use $(nproc) cores."
@@ -101,6 +125,7 @@ jobs:
         popd
     - name: Restore cache
       uses: actions/cache/restore@v3
+      if: *run_clang_tidy
       with:
         path: build/clang-tidy-cache
         key: clang-tidy-cache-${{ github.sha }}
@@ -109,6 +134,7 @@ jobs:
     - name: Check
       # To run a single check, call:
       # python3 ../utils/run-clang-tidy.py -checks=-*,my-check-prefix* | tee ../clang-tidy.log
+      if: *run_clang_tidy
       run: |
         # run-clang-tidy.py
         pushd build
@@ -116,11 +142,13 @@ jobs:
         popd
     - name: Save cache
       # We want to save the cache even if the report fails because of failed files
+      if: *run_clang_tidy
       uses: actions/cache/save@v3
       with:
         path: build/clang-tidy-cache
         key: clang-tidy-cache-${{ github.sha }}
     - name: Report
+      if: *run_clang_tidy
       run: utils/check_clang_tidy_results.py clang-tidy.log
 
   lua_style:
@@ -140,6 +168,7 @@ jobs:
 
   testsuite:
     needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
+    if: needs.clang_tidy.outputs.run_test_suite == 'true'
     strategy:
       fail-fast: false
       matrix:
