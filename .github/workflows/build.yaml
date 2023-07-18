@@ -100,6 +100,7 @@ jobs:
     # Set job outputs to values from changed_files step for other jobs
     outputs:
       run_test_suite: ${{ steps.changed_files.outputs.test_suite }}
+      create_installer: ${{ steps.changed_files.outputs.installer }}
     env:
       CC:  /usr/bin/clang
       CXX: /usr/bin/clang++
@@ -127,6 +128,10 @@ jobs:
             - 'data/**'
             - 'regression_test.py'
             - 'test/**'
+          installer:
+            - *compile
+            - 'data/**'
+            - 'po/**'
     - name: Installing dependencies
       if: steps.filter_files.outputs.clang_tidy == 'true'
       run: sh ./.github/scripts/install_deps.sh
@@ -277,6 +282,7 @@ jobs:
   windows-msvc:
     # inspired by https://github.com/lukka/CppCMakeVcpkgTemplate/blob/main/.github/workflows/hosted-pure-workflow.yml
     needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
+    if: needs.clang_tidy.outputs.create_installer == 'true'
     strategy:
       matrix:
         config: [Debug, Release]
@@ -348,6 +354,7 @@ jobs:
 
   windows:
     needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
+    if: needs.clang_tidy.outputs.create_installer == 'true'
     strategy:
       matrix:
         config: [Debug, Release]
@@ -401,6 +408,7 @@ jobs:
 
   macos:
     needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
+    if: needs.clang_tidy.outputs.create_installer == 'true'
     strategy:
       matrix:
         config: [debug, release]
@@ -435,7 +443,7 @@ jobs:
         path: ${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}.dmg
 
   appimage:
-    if: ${{ github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' }}
+    if: ${{ github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' && needs.clang_tidy.outputs.create_installer == 'true'}}
     needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
     strategy:
       matrix:
