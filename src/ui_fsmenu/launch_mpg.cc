@@ -92,10 +92,8 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
 	ok_.set_enabled(settings_.can_launch());
 
 	left_column_box_.add(&mpsg_, UI::Box::Resizing::kExpandBoth);
-	left_column_box_.add_space(kPadding);
+	left_column_box_.add_space(8 * kPadding);
 	left_column_box_.add(chat_.get(), UI::Box::Resizing::kExpandBoth);
-	mpsg_.set_desired_size(0, 0);
-	chat_->set_desired_size(0, 0);
 
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& s) {
 		if (s.action == NoteGameSettings::Action::kMap) {
