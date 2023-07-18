@@ -56,7 +56,7 @@ function test_descr:test_get_carriers()
    assert_equal("atlanteans_carrier", tribe.carriers[1])
    assert_equal("atlanteans_horse", tribe.carriers[2])
    assert_equal(2, #tribe.carriers)
-   -- deprecated, test until removed:
+   -- Deprecated, but shall still work for API compatibility:
    assert_equal("atlanteans_carrier", tribe.carrier)
    assert_equal("atlanteans_horse", tribe.carrier2)
 end
