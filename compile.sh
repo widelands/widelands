@@ -281,7 +281,7 @@ do
     shift
     ;;
     --gcc)
-      if [ -f /usr/bin/gcc -a /usr/bin/g++ ]; then
+      if [ -f /usr/bin/gcc ] && [ -f /usr/bin/g++ ]; then
         COMPILER=gcc
         export CC=/usr/bin/gcc
         export CXX=/usr/bin/g++
@@ -289,7 +289,7 @@ do
     shift
     ;;
     --clang)
-      if [ -f /usr/bin/clang -a /usr/bin/clang++ ]; then
+      if [ -f /usr/bin/clang ] && [ -f /usr/bin/clang++ ]; then
         COMPILER=clang
         export CC=/usr/bin/clang
         export CXX=/usr/bin/clang++
