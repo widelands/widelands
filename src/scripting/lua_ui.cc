@@ -1781,9 +1781,18 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 		// Signal bindings
 		if (std::string cmd = get_table_string(L, "on_panel_clicked", false); !cmd.empty()) {
 			created_panel->clicked.connect(create_plugin_action_lambda(L, cmd));
+			created_panel->set_can_focus(true);
+			created_panel->set_handle_mouse(true);
 		}
+
 		if (std::string cmd = get_table_string(L, "on_position_changed", false); !cmd.empty()) {
 			created_panel->position_changed.connect(create_plugin_action_lambda(L, cmd));
+		}
+
+		// If a tooltip is desired, we may need to force it for some passive widget types
+		if (!tooltip.empty()) {
+			created_panel->set_tooltip(tooltip);
+			created_panel->set_handle_mouse(true);
 		}
 
 		// Box layouting if applicable
