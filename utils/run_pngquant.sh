@@ -25,7 +25,7 @@ tempfile="$(mktemp -d)/image.png"
 
 i=0
 skipped=0
-for image in $(find "$dir" -name '*.png')
+while read -r image # input redirection is after done
 do
   ((++i))
   printf "\r[%5d] %-100s " "$i" "$image"
@@ -36,6 +36,6 @@ do
   else
     ((++skipped))
   fi
-done
+done < <(find "$dir" -name '*.png')
 
 printf "\n%d images converted, %d images skipped.\n" $((i-skipped)) $skipped
