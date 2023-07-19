@@ -996,9 +996,9 @@ get_table_dropdown_type(lua_State* L,
 
 static UI::ListselectLayout
 get_table_listselect_layout(lua_State* L,
-                        const char* key,
-                        bool mandatory,
-                        UI::ListselectLayout default_value = UI::ListselectLayout::kPlain) {
+                            const char* key,
+                            bool mandatory,
+                            UI::ListselectLayout default_value = UI::ListselectLayout::kPlain) {
 	lua_getfield(L, -1, key);
 	if (!lua_isnil(L, -1)) {
 		std::string str = luaL_checkstring(L, -1);
@@ -1087,8 +1087,9 @@ static unsigned get_table_button_box_orientation(lua_State* L,
 	return default_value;
 }
 
-template<typename... Args>
-static std::function<void(Args...)> create_plugin_action_lambda(lua_State* L, const std::string& cmd) {
+template <typename... Args>
+static std::function<void(Args...)> create_plugin_action_lambda(lua_State* L,
+                                                                const std::string& cmd) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	return [&egbase, cmd](Args...) {  // do not capture L directly
 		try {
@@ -1215,7 +1216,8 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 		std::string name = get_table_string(L, "name", true);
 		bool dark = get_table_boolean(L, "dark", false);
 
-		UI::TabPanel* tabpanel = new UI::TabPanel(parent, dark ? UI::TabPanelStyle::kWuiDark : UI::TabPanelStyle::kWuiLight, name);
+		UI::TabPanel* tabpanel = new UI::TabPanel(
+		   parent, dark ? UI::TabPanelStyle::kWuiDark : UI::TabPanelStyle::kWuiLight, name);
 		created_panel = tabpanel;
 
 		lua_getfield(L, -1, "tabs");
@@ -1271,7 +1273,8 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 		UI::BaseTable* table;
 
 		if (datatype == "int") {
-			table = new TableOfInt(parent, name, x, y, w, h, UI::PanelStyle::kWui, multiselect ? UI::TableRows::kMulti : UI::TableRows::kSingle);
+			table = new TableOfInt(parent, name, x, y, w, h, UI::PanelStyle::kWui,
+			                       multiselect ? UI::TableRows::kMulti : UI::TableRows::kSingle);
 		} else {
 			report_error(L, "Unsupported table datatype '%s'", datatype.c_str());
 		}
@@ -1297,7 +1300,9 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 					has_flexible = true;
 				}
 
-				table->add_column(column_w, title, tooltip, align, flexible ? UI::TableColumnType::kFlexible : UI::TableColumnType::kFixed);
+				table->add_column(
+				   column_w, title, tooltip, align,
+				   flexible ? UI::TableColumnType::kFlexible : UI::TableColumnType::kFixed);
 				++ncolumns;
 				lua_pop(L, 1);
 			}
@@ -1339,10 +1344,12 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 		if (std::string on_cancel = get_table_string(L, "on_cancel", false); !on_cancel.empty()) {
 			table->cancel.connect(create_plugin_action_lambda(L, on_cancel));
 		}
-		if (std::string on_selected = get_table_string(L, "on_selected", false); !on_selected.empty()) {
+		if (std::string on_selected = get_table_string(L, "on_selected", false);
+		    !on_selected.empty()) {
 			table->selected.connect(create_plugin_action_lambda<uint32_t>(L, on_selected));
 		}
-		if (std::string on_double_clicked = get_table_string(L, "on_double_clicked", false); !on_double_clicked.empty()) {
+		if (std::string on_double_clicked = get_table_string(L, "on_double_clicked", false);
+		    !on_double_clicked.empty()) {
 			table->double_clicked.connect(create_plugin_action_lambda<uint32_t>(L, on_double_clicked));
 		}
 
@@ -1564,8 +1571,9 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 
 		UI::BaseDropdown* dropdown;
 		if (datatype == "string") {
-			DropdownOfString* dd = new DropdownOfString
-					(parent, name, x, y, w, max_list_items, button_dimension, label, type, UI::PanelStyle::kWui, button_style);
+			DropdownOfString* dd =
+			   new DropdownOfString(parent, name, x, y, w, max_list_items, button_dimension, label,
+			                        type, UI::PanelStyle::kWui, button_style);
 			dropdown = dd;
 
 			lua_getfield(L, -1, "entries");
@@ -1579,7 +1587,8 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 					std::string icon = get_table_string(L, "icon", false);
 					bool select = get_table_boolean(L, "select", false);
 
-					dd->add(label, value, icon.empty() ? nullptr : g_image_cache->get(icon), select, tooltip);
+					dd->add(
+					   label, value, icon.empty() ? nullptr : g_image_cache->get(icon), select, tooltip);
 					lua_pop(L, 1);
 				}
 			}
@@ -1590,7 +1599,8 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 		}
 		created_panel = dropdown;
 
-		if (std::string on_selected = get_table_string(L, "on_selected", false); !on_selected.empty()) {
+		if (std::string on_selected = get_table_string(L, "on_selected", false);
+		    !on_selected.empty()) {
 			dropdown->selected.connect(create_plugin_action_lambda(L, on_selected));
 		}
 
@@ -1601,7 +1611,8 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 
 		UI::BaseListselect* listselect;
 		if (datatype == "string") {
-			ListselectOfString* ls = new ListselectOfString(parent, name, x, y, w, h, UI::PanelStyle::kWui, layout);
+			ListselectOfString* ls =
+			   new ListselectOfString(parent, name, x, y, w, h, UI::PanelStyle::kWui, layout);
 			listselect = ls;
 
 			lua_getfield(L, -1, "entries");
@@ -1616,7 +1627,8 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 					bool select = get_table_boolean(L, "select", false);
 					int32_t indent = get_table_int(L, "indent", false);
 
-					ls->add(label, value, icon.empty() ? nullptr : g_image_cache->get(icon), select, tooltip, "", indent);
+					ls->add(label, value, icon.empty() ? nullptr : g_image_cache->get(icon), select,
+					        tooltip, "", indent);
 					lua_pop(L, 1);
 				}
 			}
@@ -1627,11 +1639,14 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 		}
 		created_panel = listselect;
 
-		if (std::string on_selected = get_table_string(L, "on_selected", false); !on_selected.empty()) {
+		if (std::string on_selected = get_table_string(L, "on_selected", false);
+		    !on_selected.empty()) {
 			listselect->selected.connect(create_plugin_action_lambda<uint32_t>(L, on_selected));
 		}
-		if (std::string on_double_clicked = get_table_string(L, "on_double_clicked", false); !on_double_clicked.empty()) {
-			listselect->double_clicked.connect(create_plugin_action_lambda<uint32_t>(L, on_double_clicked));
+		if (std::string on_double_clicked = get_table_string(L, "on_double_clicked", false);
+		    !on_double_clicked.empty()) {
+			listselect->double_clicked.connect(
+			   create_plugin_action_lambda<uint32_t>(L, on_double_clicked));
 		}
 
 	} else if (widget_type == "box") {
@@ -2439,20 +2454,16 @@ Dropdown
 */
 const char LuaDropdown::className[] = "Dropdown";
 const MethodType<LuaDropdown> LuaDropdown::Methods[] = {
-   METHOD(LuaDropdown, open),
-   METHOD(LuaDropdown, highlight_item),
+   METHOD(LuaDropdown, open),   METHOD(LuaDropdown, highlight_item),
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
    METHOD(LuaDropdown, indicate_item),
 #endif
-   METHOD(LuaDropdown, select),
-   METHOD(LuaDropdown, add),
+   METHOD(LuaDropdown, select), METHOD(LuaDropdown, add),
    {nullptr, nullptr},
 };
 const PropertyType<LuaDropdown> LuaDropdown::Properties[] = {
-   PROP_RO(LuaDropdown, datatype),
-   PROP_RO(LuaDropdown, expanded),
-   PROP_RO(LuaDropdown, no_of_items),
-   PROP_RO(LuaDropdown, selection),
+   PROP_RO(LuaDropdown, datatype),    PROP_RO(LuaDropdown, expanded),
+   PROP_RO(LuaDropdown, no_of_items), PROP_RO(LuaDropdown, selection),
    {nullptr, nullptr, nullptr},
 };
 
@@ -2783,7 +2794,8 @@ int LuaListselect::add(lua_State* L) {
 
 	if (upcast(ListselectOfString, list, get()); list != nullptr) {
 		std::string value = luaL_checkstring(L, 3);
-		list->add(label, value, icon.empty() ? nullptr : g_image_cache->get(icon), select, tooltip, "", indent);
+		list->add(label, value, icon.empty() ? nullptr : g_image_cache->get(icon), select, tooltip,
+		          "", indent);
 	} else {
 		report_error(L, "add() not allowed for listselect with unsupported datatype");
 	}
@@ -2809,19 +2821,13 @@ Table
 */
 const char LuaTable::className[] = "Table";
 const MethodType<LuaTable> LuaTable::Methods[] = {
-   METHOD(LuaTable, get),
-   METHOD(LuaTable, add),
-   METHOD(LuaTable, remove_row),
-   METHOD(LuaTable, remove_entry),
-   {nullptr, nullptr},
+   METHOD(LuaTable, get),          METHOD(LuaTable, add), METHOD(LuaTable, remove_row),
+   METHOD(LuaTable, remove_entry), {nullptr, nullptr},
 };
 const PropertyType<LuaTable> LuaTable::Properties[] = {
-   PROP_RO(LuaTable, datatype),
-   PROP_RO(LuaTable, no_of_rows),
-   PROP_RW(LuaTable, selection_index),
-   PROP_RO(LuaTable, selections),
-   PROP_RW(LuaTable, sort_column),
-   PROP_RW(LuaTable, sort_descending),
+   PROP_RO(LuaTable, datatype),        PROP_RO(LuaTable, no_of_rows),
+   PROP_RW(LuaTable, selection_index), PROP_RO(LuaTable, selections),
+   PROP_RW(LuaTable, sort_column),     PROP_RW(LuaTable, sort_descending),
    {nullptr, nullptr, nullptr},
 };
 
@@ -3578,12 +3584,9 @@ int LuaMapView::update_toolbar(lua_State* L) {
       :type tooltip: :class:`string`
 */
 int LuaMapView::add_toolbar_plugin(lua_State* L) {
-	get_egbase(L).get_ibase()->add_toolbar_plugin(
-		luaL_checkstring(L, 2),
-		luaL_checkstring(L, 3),
-		luaL_checkstring(L, 4),
-		lua_gettop(L) < 5 ? "" : luaL_checkstring(L, 5)
-	);
+	get_egbase(L).get_ibase()->add_toolbar_plugin(luaL_checkstring(L, 2), luaL_checkstring(L, 3),
+	                                              luaL_checkstring(L, 4),
+	                                              lua_gettop(L) < 5 ? "" : luaL_checkstring(L, 5));
 	return 0;
 }
 

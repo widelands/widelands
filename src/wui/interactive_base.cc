@@ -147,17 +147,17 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
                   UI::ButtonStyle::kWuiPrimary,
                   [this](MapviewMenuEntry t) { mapview_menu_selected(t); }),
      plugins_dropdown_(toolbar(),
-                  "dropdown_menu_plugins",
-                  0,
-                  0,
-                  UI::main_toolbar_button_size(),
-                  10,
-                  UI::main_toolbar_button_size(),
-                  /** TRANSLATORS: Title for the plugins menu button in the game */
-                  _("Plugins"),
-                  UI::DropdownType::kPictorialMenu,
-                  UI::PanelStyle::kWui,
-                  UI::ButtonStyle::kWuiPrimary),
+                       "dropdown_menu_plugins",
+                       0,
+                       0,
+                       UI::main_toolbar_button_size(),
+                       10,
+                       UI::main_toolbar_button_size(),
+                       /** TRANSLATORS: Title for the plugins menu button in the game */
+                       _("Plugins"),
+                       UI::DropdownType::kPictorialMenu,
+                       UI::PanelStyle::kWui,
+                       UI::ButtonStyle::kWuiPrimary),
      quick_navigation_(&map_view_),
      minimap_registry_(the_egbase.is_game()),
      workareas_cache_(nullptr),
@@ -308,7 +308,10 @@ bool InteractiveBase::plugin_action(const std::string& action) {
 	}
 }
 
-void InteractiveBase::add_toolbar_plugin(const std::string& action, const std::string& icon, const std::string& label, const std::string& tt) {
+void InteractiveBase::add_toolbar_plugin(const std::string& action,
+                                         const std::string& icon,
+                                         const std::string& label,
+                                         const std::string& tt) {
 	plugins_dropdown_.add(label, action, g_image_cache->get(icon), false, tt);
 	finalize_toolbar();
 }

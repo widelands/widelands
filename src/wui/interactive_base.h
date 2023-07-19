@@ -246,7 +246,10 @@ public:
 		return true;
 	}
 
-	void add_toolbar_plugin(const std::string& action, const std::string& icon, const std::string& label, const std::string& tt);
+	void add_toolbar_plugin(const std::string& action,
+	                        const std::string& icon,
+	                        const std::string& label,
+	                        const std::string& tt);
 	void add_plugin_timer(const std::string& action, uint32_t interval);
 
 	UI::Box* toolbar();
