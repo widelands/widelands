@@ -1600,8 +1600,8 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 					std::string icon = get_table_string(L, "icon", false);
 					bool select = get_table_boolean(L, "select", false);
 
-					dd->add(
-					   elabel, value, icon.empty() ? nullptr : g_image_cache->get(icon), select, etooltip);
+					dd->add(elabel, value, icon.empty() ? nullptr : g_image_cache->get(icon), select,
+					        etooltip);
 					lua_pop(L, 1);
 				}
 			}
