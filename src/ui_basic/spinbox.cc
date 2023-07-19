@@ -100,8 +100,7 @@ SpinBox::SpinBox(Panel* const parent,
      button_size_(20),
      big_step_button_width_(32),
      buttons_width_(0),
-     padding_(2),
-     number_of_paddings_(type_ == SpinBox::Type::kBig ? 2 : 0) {
+     padding_(2) {
 	if (type_ == SpinBox::Type::kValueList) {
 		sbi_->min = 0;
 		sbi_->max = 0;
@@ -300,7 +299,8 @@ void SpinBox::layout() {
 		         sbi_->label->get_text().c_str(), unit_width_, unit_text_min_width + buttons_width_);
 	}
 
-	int w, padding;
+	int w;
+	int padding;
 	sbi_->label->get_text_size(&w, &padding);
 	padding = get_w() - static_cast<int32_t>(unit_width_);
 	if (padding > w) {
