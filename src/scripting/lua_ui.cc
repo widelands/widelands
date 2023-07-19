@@ -62,8 +62,6 @@ int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel) {
 		return 0;
 	}
 
-	// TODO(Nordfriese): Support more types of components - NOCOM
-
 	// TODO(Nordfriese): This trial-and-error approach is inefficient and extremely ugly,
 	// use a virtual function call similar to Widelands::MapObjectDescr::type.
 #define TRY_TO_LUA(PanelType, LuaType)                                                             \
@@ -86,6 +84,7 @@ int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel) {
 	else TRY_TO_LUA(MultilineTextarea, LuaMultilineTextarea)
 	else TRY_TO_LUA(Textarea, LuaTextarea)
 	else TRY_TO_LUA(AbstractTextInputPanel, LuaTextInputPanel)
+	else TRY_TO_LUA(TabPanel, LuaTabPanel)
 	else TRY_TO_LUA(Tab, LuaTab)
 	else TRY_TO_LUA(BaseDropdown, LuaDropdown)
 	else TRY_TO_LUA(BaseListselect, LuaListselect)
@@ -752,6 +751,23 @@ int LuaPanel::get_child(lua_State* L) {
            * ``"on_double_clicked"``: **Optional**.
              Callback code to run when the user double-clicks on an entry.
 
+         * ``"tabpanel"``: A panel that allows switching between multiple tabs.
+
+           * ``"dark"``: **Optional**. Whether to use dark appearance (default :const:`false`).
+           * ``"active"``: **Optional**. The name or index of the initially active tab.
+           * ``"tabs"``: **Optional**. The tabs in the listselect.
+             An array of tables with the following keys:
+
+             * ``"name"``: **Mandatory**. The name of the tab.
+             * ``"panel"``: **Mandatory**. The descriptor table for the panel wrapped in this tab.
+             * ``"title"``: **Optional**. The title of the tab.
+               If set, ``"icon"`` must be ``nil``.
+             * ``"icon"``: **Optional**. The icon filepath for the tab.
+               If set, ``"title"`` must be ``nil``.
+             * ``"tooltip"``: **Optional**. The tooltip for the tab.
+
+           * ``"on_clicked"``: **Optional**. Callback code to run when the user selects a tab.
+
       Note that event callbacks functions must be provided as raw code in string form.
       During the lifetime of a *toolbar* widget, the Lua Interface used by the game may be reset.
       Therefore, any callbacks attached to such widgets must not use any functions or variables
@@ -1156,6 +1172,58 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 
 		group->manage_own_lifetime();
 
+	} else if (widget_type == "tabpanel") {
+		std::string name = get_table_string(L, "name", true);
+		bool dark = get_table_boolean(L, "dark", false);
+
+		UI::TabPanel* tabpanel = new UI::TabPanel(parent, dark ? UI::TabPanelStyle::kWuiDark : UI::TabPanelStyle::kWuiLight, name);
+		created_panel = tabpanel;
+
+		lua_getfield(L, -1, "tabs");
+		if (!lua_isnil(L, -1)) {
+			luaL_checktype(L, -1, LUA_TTABLE);
+			lua_pushnil(L);
+			while (lua_next(L, -2) != 0) {
+				std::string tabname = get_table_string(L, "name", true);
+				std::string title = get_table_string(L, "title", false);
+				std::string icon = get_table_string(L, "icon", false);
+				std::string tooltip = get_table_string(L, "tooltip", false);
+
+				if (title.empty() == icon.empty()) {
+					report_error(
+					   L, "Tabs must have either a title or an icon, but not both and not neither");
+				}
+
+				lua_getfield(L, -1, "panel");
+				luaL_checktype(L, -1, LUA_TTABLE);
+				UI::Panel* wrapped_tab = do_create_child(L, tabpanel, nullptr);
+				lua_pop(L, 1);
+
+				if (icon.empty()) {
+					tabpanel->add(name, title, wrapped_tab, tooltip);
+				} else {
+					tabpanel->add(name, g_image_cache->get(icon), wrapped_tab, tooltip);
+				}
+
+				lua_pop(L, 1);
+			}
+		}
+		lua_pop(L, 1);
+
+		lua_getfield(L, -1, "active");
+		if (!lua_isnil(L, -1)) {
+			if (lua_isstring(L, -1)) {
+				tabpanel->activate(luaL_checkstring(L, -1));
+			} else {
+				tabpanel->activate(luaL_checkuint32(L, -1));
+			}
+		}
+		lua_pop(L, 1);
+
+		if (std::string on_clicked = get_table_string(L, "on_clicked", false); !on_clicked.empty()) {
+			tabpanel->sigclicked.connect(create_plugin_action_lambda(L, on_clicked));
+		}
+
 	} else if (widget_type == "progressbar") {
 		std::string name = get_table_string(L, "name", true);
 		unsigned orientation = get_table_button_box_orientation(L, "orientation", true);
@@ -1368,7 +1436,7 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 		std::string label = get_table_string(L, "label", true);
 		int32_t max_list_items = get_table_int(L, "max_list_items", true);
 		int32_t button_dimension = get_table_int(L, "button_dimension", true);
-		UI::ButtonStyle button_style = get_table_button_style(L, "style", true);
+		UI::ButtonStyle button_style = get_table_button_style(L, "button_style", true);
 		UI::DropdownType type = get_table_dropdown_type(L, "type", true);
 		std::string datatype = get_table_string(L, "datatype", true);
 
@@ -2255,6 +2323,7 @@ const MethodType<LuaDropdown> LuaDropdown::Methods[] = {
    METHOD(LuaDropdown, indicate_item),
 #endif
    METHOD(LuaDropdown, select),
+   METHOD(LuaDropdown, add),
    {nullptr, nullptr},
 };
 const PropertyType<LuaDropdown> LuaDropdown::Properties[] = {
@@ -2301,7 +2370,7 @@ int LuaDropdown::get_expanded(lua_State* L) {
 /* RST
    .. attribute:: no_of_items
 
-      (RO) The number of items his dropdown has.
+      (RO) The number of items this dropdown has.
 */
 int LuaDropdown::get_no_of_items(lua_State* L) {
 	lua_pushinteger(L, get()->size());
@@ -2449,6 +2518,40 @@ int LuaDropdown::select(lua_State* /* L */) {
 	return 0;
 }
 
+/* RST
+   .. method:: add(label, value[, icon = nil, tooltip = "", select = false])
+
+      .. versionadded:: 1.2
+
+      Add an entry to the dropdown. Only allowed for dropdowns with supported datatypes.
+
+      :arg label: The label to display for the entry.
+      :type label: :class:`string`
+      :arg value: The internal value of the entry.
+      :type value: This dropdown's :attr:`datatype`
+      :arg icon: The icon filepath for the entry (``nil`` for no icon).
+      :type icon: :class:`string`
+      :arg tooltip: The entry's tooltip text.
+      :type tooltip: :class:`string`
+      :arg select: Whether to select this entry.
+      :type select: :class:`boolean`
+*/
+int LuaDropdown::add(lua_State* L) {
+	int top = lua_gettop(L);
+	std::string label = luaL_checkstring(L, 2);
+	std::string icon = (top >= 4 && !lua_isnil(L, 4)) ? luaL_checkstring(L, 4) : "";
+	std::string tooltip = top >= 5 ? luaL_checkstring(L, 5) : "";
+	bool select = top >= 6 && luaL_checkboolean(L, 6);
+
+	if (upcast(UI::Dropdown<std::string>, dd, get()); dd != nullptr) {
+		std::string value = luaL_checkstring(L, 3);
+		dd->add(label, value, icon.empty() ? nullptr : g_image_cache->get(icon), select, tooltip);
+	} else {
+		report_error(L, "add() not allowed for dropdowns with unsupported datatype");
+	}
+	return 0;
+}
+
 /*
  * C Functions
  */
@@ -2468,6 +2571,7 @@ Listselect
 */
 const char LuaListselect::className[] = "Listselect";
 const MethodType<LuaListselect> LuaListselect::Methods[] = {
+   METHOD(LuaListselect, add),
    {nullptr, nullptr},
 };
 const PropertyType<LuaListselect> LuaListselect::Properties[] = {
@@ -2501,7 +2605,7 @@ int LuaListselect::get_datatype(lua_State* L) {
 /* RST
    .. attribute:: no_of_items
 
-      (RO) The number of items his listselect has.
+      (RO) The number of items this listselect has.
 */
 int LuaListselect::get_no_of_items(lua_State* L) {
 	lua_pushinteger(L, get()->size());
@@ -2517,8 +2621,8 @@ int LuaListselect::get_no_of_items(lua_State* L) {
 int LuaListselect::get_selection(lua_State* L) {
 	if (!get()->has_selection()) {
 		lua_pushnil(L);
-	} else if (upcast(const UI::Listselect<std::string>, dd, get()); dd != nullptr) {
-		lua_pushstring(L, dd->get_selected().c_str());
+	} else if (upcast(const UI::Listselect<std::string>, list, get()); list != nullptr) {
+		lua_pushstring(L, list->get_selected().c_str());
 	} else {
 		lua_pushnil(L);
 	}
@@ -2528,6 +2632,121 @@ int LuaListselect::get_selection(lua_State* L) {
 /*
  * Lua Functions
  */
+
+/* RST
+   .. method:: add(label, value[, icon = nil, tooltip = "", select = false, indent = 0])
+
+      Add an entry to the list. Only allowed for lists with supported datatypes.
+
+      :arg label: The label to display for the entry.
+      :type label: :class:`string`
+      :arg value: The internal value of the entry.
+      :type value: This list's :attr:`datatype`
+      :arg icon: The icon filepath for the entry (``nil`` for no icon).
+      :type icon: :class:`string`
+      :arg tooltip: The entry's tooltip text.
+      :type tooltip: :class:`string`
+      :arg select: Whether to select this entry.
+      :type select: :class:`boolean`
+      :arg indent: By how many levels to indent this entry.
+      :type indent: :class:`int`
+*/
+int LuaListselect::add(lua_State* L) {
+	int top = lua_gettop(L);
+	std::string label = luaL_checkstring(L, 2);
+	std::string icon = (top >= 4 && !lua_isnil(L, 4)) ? luaL_checkstring(L, 4) : "";
+	std::string tooltip = top >= 5 ? luaL_checkstring(L, 5) : "";
+	bool select = top >= 6 && luaL_checkboolean(L, 6);
+	uint32_t indent = top >= 7 ? luaL_checkuint32(L, 7) : 0;
+
+	if (upcast(UI::Listselect<std::string>, list, get()); list != nullptr) {
+		std::string value = luaL_checkstring(L, 3);
+		list->add(label, value, icon.empty() ? nullptr : g_image_cache->get(icon), select, tooltip, "", indent);
+	} else {
+		report_error(L, "add() not allowed for listselects with unsupported datatype");
+	}
+	return 0;
+}
+
+/*
+ * C Functions
+ */
+
+/* RST
+TabPanel
+--------
+
+.. class:: TabPanel
+
+   .. versionadded:: 1.2
+
+   This represents a panel that allows switching between multiple tabs.
+*/
+const char LuaTabPanel::className[] = "TabPanel";
+const MethodType<LuaTabPanel> LuaTabPanel::Methods[] = {
+   METHOD(LuaTabPanel, remove_last_tab),
+   {nullptr, nullptr},
+};
+const PropertyType<LuaTabPanel> LuaTabPanel::Properties[] = {
+   PROP_RO(LuaTabPanel, no_of_tabs),
+   PROP_RW(LuaTabPanel, active),
+   {nullptr, nullptr, nullptr},
+};
+
+/*
+ * Properties
+ */
+
+/* RST
+   .. attribute:: no_of_tabs
+
+      (RO) The number of tabs this tab panel has.
+*/
+int LuaTabPanel::get_no_of_tabs(lua_State* L) {
+	lua_pushinteger(L, get()->tabs().size());
+	return 1;
+}
+
+/* RST
+   .. attribute:: active
+
+      (RW) The index of the currently active tab.
+      When assigning this property, it is also allowed to activate a tab by name instead of index.
+*/
+int LuaTabPanel::get_active(lua_State* L) {
+	lua_pushinteger(L, get()->active());
+	return 1;
+}
+int LuaTabPanel::set_active(lua_State* L) {
+	if (lua_isstring(L, -1)) {
+		get()->activate(luaL_checkstring(L, -1));
+	} else {
+		get()->activate(luaL_checkuint32(L, -1));
+	}
+	return 0;
+}
+
+/*
+ * Lua Functions
+ */
+
+/* RST
+   .. method:: remove_last_tab(name)
+
+      Remove the **last** tab in the panel.
+
+      As a precaution against accidental removal of tabs, the name of the tab
+      that will be removed has to be specified.
+
+      :arg name: The name of the last tab.
+      :type name: :class:`string`
+      :returns: Whether the tab was removed.
+      :rtype: :class:`boolean`
+*/
+int LuaTabPanel::remove_last_tab(lua_State* L) {
+	lua_pushboolean(L, static_cast<int>(get()->remove_last_tab(luaL_checkstring(L, 2))));
+	return 0;
+}
 
 /*
  * C Functions
@@ -3227,6 +3446,10 @@ void luaopen_wlui(lua_State* L) {
 
 	register_class<LuaListselect>(L, "ui", true);
 	add_parent<LuaListselect, LuaPanel>(L);
+	lua_pop(L, 1);  // Pop the meta table
+
+	register_class<LuaTabPanel>(L, "ui", true);
+	add_parent<LuaTabPanel, LuaPanel>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
 	register_class<LuaTab>(L, "ui", true);

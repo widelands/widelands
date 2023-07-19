@@ -419,6 +419,7 @@ public:
 	int highlight_item(lua_State* L);
 	int indicate_item(lua_State* L);
 	int select(lua_State* L);
+	int add(lua_State* L);
 
 	/*
 	 * C Methods
@@ -449,12 +450,44 @@ public:
 	/*
 	 * Lua Methods
 	 */
+	int add(lua_State* L);
 
 	/*
 	 * C Methods
 	 */
 	UI::BaseListselect* get() {
 		return dynamic_cast<UI::BaseListselect*>(panel_);
+	}
+};
+
+class LuaTabPanel : public LuaPanel {
+public:
+	LUNA_CLASS_HEAD(LuaTabPanel);
+
+	LuaTabPanel() = default;
+	explicit LuaTabPanel(UI::Panel* p) : LuaPanel(p) {
+	}
+	explicit LuaTabPanel(lua_State* L) : LuaPanel(L) {
+	}
+	~LuaTabPanel() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_no_of_tabs(lua_State* L);
+	int get_active(lua_State* L);
+	int set_active(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+	int remove_last_tab(lua_State* L);
+
+	/*
+	 * C Methods
+	 */
+	UI::TabPanel* get() {
+		return dynamic_cast<UI::TabPanel*>(panel_);
 	}
 };
 
