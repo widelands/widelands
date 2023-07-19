@@ -158,9 +158,8 @@ MapDetailsBox::MapDetailsBox(Panel* parent, const uint32_t padding)
             0,
             _("Map"),
             UI::Align::kCenter),
-     title_box_(this, UI::PanelStyle::kFsMenu, "title_box", 0, 0, UI::Box::Horizontal),
      content_box_(this, UI::PanelStyle::kFsMenu, "content_box", 0, 0, UI::Box::Vertical),
-     map_name_(&title_box_,
+     map_name_(this,
                UI::PanelStyle::kFsMenu,
                "label_name",
                UI::FontStyle::kFsMenuLabel,
@@ -185,9 +184,7 @@ MapDetailsBox::MapDetailsBox(Panel* parent, const uint32_t padding)
 	content_box_.set_scrolling(true);
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
 	add_space(3 * padding);
-	title_box_.add(&map_name_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
-	title_box_.add_inf_space();
-	add(&title_box_, UI::Box::Resizing::kFullSize);
+	add(&map_name_, UI::Box::Resizing::kFullSize);
 	add_space(3 * padding);
 	add(&content_box_, UI::Box::Resizing::kExpandBoth);
 	content_box_.add(&map_description_, UI::Box::Resizing::kExpandBoth);
@@ -225,10 +222,9 @@ void MapDetailsBox::show_map_description(const Widelands::Map& map,
 	set_map_description_text(assemble_infotext_for_map(map, settings->settings()));
 }
 
-void MapDetailsBox::force_new_dimensions(uint32_t width, uint32_t height) {
-	map_name_.set_fixed_width(width - height);
-	content_box_.set_max_size(
-	   width, get_h() - title_.get_h() - title_box_.get_h() - 2 * 3 * padding_);
+void MapDetailsBox::set_max_size(int w, int h) {
+	Box::set_max_size(w, h);
+	content_box_.set_max_size(w, h - title_.get_h() - map_name_.get_h() - 2 * 3 * padding_);
 }
 
 void MapDetailsBox::set_map_description_text(const std::string& text) {
