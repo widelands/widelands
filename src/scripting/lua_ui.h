@@ -107,6 +107,7 @@ public:
 #endif
 	int create_child(lua_State* L);
 	int get_child(lua_State* L);
+	int die(lua_State* L);
 	int force_redraw(lua_State* L);
 
 	/*

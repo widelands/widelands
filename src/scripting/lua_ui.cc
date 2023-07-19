@@ -132,6 +132,7 @@ const MethodType<LuaPanel> LuaPanel::Methods[] = {
 #endif
    METHOD(LuaPanel, get_child),
    METHOD(LuaPanel, create_child),
+   METHOD(LuaPanel, die),
    METHOD(LuaPanel, force_redraw),
    {nullptr, nullptr},
 };
@@ -419,6 +420,18 @@ int LuaPanel::indicate(lua_State* L) {
 	return 2;
 }
 #endif
+
+/* RST
+   .. method:: die()
+
+      .. versionadded:: 1.2
+
+      Delete this panel in the next frame.
+*/
+int LuaPanel::die(lua_State* /* L */) {
+	panel_->die();
+	return 0;
+}
 
 /* RST
    .. method:: force_redraw()
@@ -1228,7 +1241,7 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 				std::string tabname = get_table_string(L, "name", true);
 				std::string title = get_table_string(L, "title", false);
 				std::string icon = get_table_string(L, "icon", false);
-				std::string tooltip = get_table_string(L, "tooltip", false);
+				std::string ttooltip = get_table_string(L, "tooltip", false);
 
 				if (title.empty() == icon.empty()) {
 					report_error(
@@ -1241,9 +1254,9 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 				lua_pop(L, 1);
 
 				if (icon.empty()) {
-					tabpanel->add(name, title, wrapped_tab, tooltip);
+					tabpanel->add(name, title, wrapped_tab, ttooltip);
 				} else {
-					tabpanel->add(name, g_image_cache->get(icon), wrapped_tab, tooltip);
+					tabpanel->add(name, g_image_cache->get(icon), wrapped_tab, ttooltip);
 				}
 
 				lua_pop(L, 1);
@@ -1253,7 +1266,7 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 
 		lua_getfield(L, -1, "active");
 		if (!lua_isnil(L, -1)) {
-			if (lua_isstring(L, -1)) {
+			if (static_cast<bool>(lua_isstring(L, -1))) {
 				tabpanel->activate(luaL_checkstring(L, -1));
 			} else {
 				tabpanel->activate(luaL_checkuint32(L, -1));
@@ -1289,7 +1302,7 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 			while (lua_next(L, -2) != 0) {
 				int32_t column_w = get_table_int(L, "w", true);
 				std::string title = get_table_string(L, "title", true);
-				std::string tooltip = get_table_string(L, "tooltip", false);
+				std::string ctooltip = get_table_string(L, "tooltip", false);
 				bool flexible = get_table_boolean(L, "flexible", false);
 				UI::Align align = get_table_align(L, "align", false);
 
@@ -1301,7 +1314,7 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 				}
 
 				table->add_column(
-				   column_w, title, tooltip, align,
+				   column_w, title, ctooltip, align,
 				   flexible ? UI::TableColumnType::kFlexible : UI::TableColumnType::kFixed);
 				++ncolumns;
 				lua_pop(L, 1);
@@ -1581,14 +1594,14 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 				luaL_checktype(L, -1, LUA_TTABLE);
 				lua_pushnil(L);
 				while (lua_next(L, -2) != 0) {
-					std::string label = get_table_string(L, "label", true);
+					std::string elabel = get_table_string(L, "label", true);
 					std::string value = get_table_string(L, "value", true);
-					std::string tooltip = get_table_string(L, "tooltip", false);
+					std::string etooltip = get_table_string(L, "tooltip", false);
 					std::string icon = get_table_string(L, "icon", false);
 					bool select = get_table_boolean(L, "select", false);
 
 					dd->add(
-					   label, value, icon.empty() ? nullptr : g_image_cache->get(icon), select, tooltip);
+					   elabel, value, icon.empty() ? nullptr : g_image_cache->get(icon), select, etooltip);
 					lua_pop(L, 1);
 				}
 			}
@@ -1622,13 +1635,13 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 				while (lua_next(L, -2) != 0) {
 					std::string label = get_table_string(L, "label", true);
 					std::string value = get_table_string(L, "value", true);
-					std::string tooltip = get_table_string(L, "tooltip", false);
+					std::string etooltip = get_table_string(L, "tooltip", false);
 					std::string icon = get_table_string(L, "icon", false);
 					bool select = get_table_boolean(L, "select", false);
 					int32_t indent = get_table_int(L, "indent", false);
 
 					ls->add(label, value, icon.empty() ? nullptr : g_image_cache->get(icon), select,
-					        tooltip, "", indent);
+					        etooltip, "", indent);
 					lua_pop(L, 1);
 				}
 			}
@@ -2519,9 +2532,7 @@ int LuaDropdown::get_no_of_items(lua_State* L) {
       For dropdowns with unsupported datatype, this is always ``nil``.
 */
 int LuaDropdown::get_selection(lua_State* L) {
-	if (!get()->has_selection()) {
-		lua_pushnil(L);
-	} else if (upcast(const DropdownOfString, dd, get()); dd != nullptr) {
+	if (upcast(const DropdownOfString, dd, get()); dd != nullptr && dd->has_selection()) {
 		lua_pushstring(L, dd->get_selected().c_str());
 	} else {
 		lua_pushnil(L);
@@ -2752,9 +2763,7 @@ int LuaListselect::get_no_of_items(lua_State* L) {
       For listselects with unsupported datatype, this is always ``nil``.
 */
 int LuaListselect::get_selection(lua_State* L) {
-	if (!get()->has_selection()) {
-		lua_pushnil(L);
-	} else if (upcast(const ListselectOfString, list, get()); list != nullptr) {
+	if (upcast(const ListselectOfString, list, get()); list != nullptr && list->has_selection()) {
 		lua_pushstring(L, list->get_selected().c_str());
 	} else {
 		lua_pushnil(L);
@@ -3088,7 +3097,7 @@ int LuaTabPanel::get_active(lua_State* L) {
 	return 1;
 }
 int LuaTabPanel::set_active(lua_State* L) {
-	if (lua_isstring(L, -1)) {
+	if (static_cast<bool>(lua_isstring(L, -1))) {
 		get()->activate(luaL_checkstring(L, -1));
 	} else {
 		get()->activate(luaL_checkuint32(L, -1));

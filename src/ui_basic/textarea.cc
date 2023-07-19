@@ -104,7 +104,7 @@ void Textarea::update() {
 	FontStyleInfo scaled_style(font_style());
 	scaled_style.set_size(std::max(g_style_manager->minimum_font_size(),
 	                               static_cast<int>(std::ceil(scaled_style.size() * font_scale_))));
-	rendered_text_ = autofit_text(richtext_escape(text_), scaled_style, fixed_width_);
+	rendered_text_ = autofit_text(is_richtext(text_) ? text_ : richtext_escape(text_), scaled_style, fixed_width_);
 
 	if (layoutmode_ == LayoutMode::AutoMove) {
 		expand();

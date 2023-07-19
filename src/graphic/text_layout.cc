@@ -169,7 +169,7 @@ as_url_hyperlink(const std::string& url, const std::string& text, const std::str
 std::shared_ptr<const UI::RenderedText>
 autofit_text(const std::string& text, const UI::FontStyleInfo& font_info, int width) {
 	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   UI::g_fh->render(as_richtext_paragraph(text, font_info));
+	   UI::g_fh->render(is_richtext(text) ? text : as_richtext_paragraph(text, font_info));
 
 	// Autoshrink if it doesn't fit
 	if (width > 0 && rendered_text->width() > width) {
