@@ -29,6 +29,7 @@
 #include "ui_basic/radiobutton.h"
 #include "ui_basic/slider.h"
 #include "ui_basic/spinbox.h"
+#include "ui_basic/table.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/textinput.h"
@@ -36,6 +37,11 @@
 #include "wui/interactive_base.h"
 
 namespace LuaUi {
+
+// The currently supported kinds of templated UI elements.
+using TableOfInt = UI::Table<uintptr_t>;
+using DropdownOfString = UI::Dropdown<std::string>;
+using ListselectOfString = UI::Listselect<std::string>;
 
 /*
  * Base class for all classes in wl.ui
@@ -457,6 +463,46 @@ public:
 	 */
 	UI::BaseListselect* get() {
 		return dynamic_cast<UI::BaseListselect*>(panel_);
+	}
+};
+
+class LuaTable : public LuaPanel {
+public:
+	LUNA_CLASS_HEAD(LuaTable);
+
+	LuaTable() = default;
+	explicit LuaTable(UI::Panel* p) : LuaPanel(p) {
+	}
+	explicit LuaTable(lua_State* L) : LuaPanel(L) {
+	}
+	~LuaTable() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_datatype(lua_State* L);
+	int get_no_of_rows(lua_State* L);
+	int get_selection_index(lua_State* L);
+	int set_selection_index(lua_State* L);
+	int get_selections(lua_State* L);
+	int get_sort_column(lua_State* L);
+	int set_sort_column(lua_State* L);
+	int get_sort_descending(lua_State* L);
+	int set_sort_descending(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+	int get(lua_State* L);
+	int add(lua_State* L);
+	int remove_row(lua_State* L);
+	int remove_entry(lua_State* L);
+
+	/*
+	 * C Methods
+	 */
+	UI::BaseTable* get() {
+		return dynamic_cast<UI::BaseTable*>(panel_);
 	}
 };
 

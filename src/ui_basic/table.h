@@ -553,6 +553,10 @@ public:
 	   : Base(parent, name, x, y, w, h, style, rowtype) {
 	}
 };
+
+// All tables *should* effectively be derived from this template specialization
+using BaseTable = Table<void*>;
+
 }  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_TABLE_H

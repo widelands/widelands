@@ -88,6 +88,7 @@ int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel) {
 	else TRY_TO_LUA(Tab, LuaTab)
 	else TRY_TO_LUA(BaseDropdown, LuaDropdown)
 	else TRY_TO_LUA(BaseListselect, LuaListselect)
+	else TRY_TO_LUA(BaseTable, LuaTable)
 	else {
 		to_lua<LuaPanel>(L, new LuaPanel(panel));
 	}
@@ -751,6 +752,44 @@ int LuaPanel::get_child(lua_State* L) {
            * ``"on_double_clicked"``: **Optional**.
              Callback code to run when the user double-clicks on an entry.
 
+         * ``"table"``: A table with multiple rows and columns. Properties:
+
+           * ``"datatype"``: **Mandatory**. The data type of the table's entries.
+             Currently only ``"int"`` is supported.
+           * ``"multiselect"``: **Optional**.
+             Whether the user can select multiple rows (default :const:`false`).
+           * ``"sort_column"``: **Optional**.
+             The index of the column by which the table is sorted (default 0).
+           * ``"sort_descending"``: **Optional**.
+             Whether the sorting order is inverted (default :const:`false`).
+           * ``"columns"``: **Optional**. The columns in the table.
+             An array of tables with the following keys:
+
+             * ``"w"``: **Mandatory**. The width of the column in pixels.
+             * ``"title"``: **Mandatory**. The title of the column.
+             * ``"tooltip"``: **Optional**. The tooltip in pixels.
+             * ``"flexible"``: **Optional**.
+               Whether the column width adapts automatically (default :const:`false`).
+               A table must not have multiple flexible columns.
+             * ``"align"``: **Optional**. The alignment of the column content. Valid values are
+               ``"center"`` (the default), ``"left"``, and ``"right"``.
+
+           * ``"rows"``: **Optional**. The rows in the table.
+             An array of tables with the following keys:
+
+             * ``"value"``: **Mandatory**. The internal value associated with the row.
+             * ``"select"``: **Optional**. Whether to select this row (default :const:`false`).
+             * ``"disable"``: **Optional**. Whether to disable this row (default :const:`false`).
+             * For each column ``i`` (indices are zero-based):
+
+               * ``"text_<i>"``: **Optional**. The text to show in the cell.
+               * ``"icon_<i>"``: **Optional**. The icon filepath in the cell.
+
+           * ``"on_cancel"``: **Optional**. Callback code to run when the user presses Escape.
+           * ``"on_selected"``: **Optional**. Callback code to run when the user selects a row.
+           * ``"on_double_clicked"``: **Optional**.
+             Callback code to run when the user double-clicks on an entry.
+
          * ``"tabpanel"``: A panel that allows switching between multiple tabs.
 
            * ``"dark"``: **Optional**. Whether to use dark appearance (default :const:`false`).
@@ -1224,6 +1263,89 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 			tabpanel->sigclicked.connect(create_plugin_action_lambda(L, on_clicked));
 		}
 
+	} else if (widget_type == "table") {
+		std::string name = get_table_string(L, "name", true);
+		std::string datatype = get_table_string(L, "datatype", true);
+		bool multiselect = get_table_boolean(L, "multiselect", false);
+
+		UI::BaseTable* table;
+
+		if (datatype == "int") {
+			table = new TableOfInt(parent, name, x, y, w, h, UI::PanelStyle::kWui, multiselect ? UI::TableRows::kMulti : UI::TableRows::kSingle);
+		} else {
+			report_error(L, "Unsupported table datatype '%s'", datatype.c_str());
+		}
+		created_panel = table;
+
+		bool has_flexible = false;
+		unsigned ncolumns = 0;
+		lua_getfield(L, -1, "columns");
+		if (!lua_isnil(L, -1)) {
+			luaL_checktype(L, -1, LUA_TTABLE);
+			lua_pushnil(L);
+			while (lua_next(L, -2) != 0) {
+				int32_t column_w = get_table_int(L, "w", true);
+				std::string title = get_table_string(L, "title", true);
+				std::string tooltip = get_table_string(L, "tooltip", false);
+				bool flexible = get_table_boolean(L, "flexible", false);
+				UI::Align align = get_table_align(L, "align", false);
+
+				if (flexible) {
+					if (has_flexible) {
+						report_error(L, "Table may not have multiple flexible columns");
+					}
+					has_flexible = true;
+				}
+
+				table->add_column(column_w, title, tooltip, align, flexible ? UI::TableColumnType::kFlexible : UI::TableColumnType::kFixed);
+				++ncolumns;
+				lua_pop(L, 1);
+			}
+		}
+		lua_pop(L, 1);
+
+		lua_getfield(L, -1, "rows");
+		if (!lua_isnil(L, -1)) {
+			upcast(TableOfInt, t, table);
+			assert(t != nullptr);
+			luaL_checktype(L, -1, LUA_TTABLE);
+			lua_pushnil(L);
+			while (lua_next(L, -2) != 0) {
+				uintptr_t value = get_table_int(L, "value", true);
+				bool select = get_table_boolean(L, "select", false);
+				bool disable = get_table_boolean(L, "disable", false);
+				TableOfInt::EntryRecord& record = t->add(value, select);
+				record.set_disabled(disable);
+
+				for (unsigned i = 0; i < ncolumns; ++i) {
+					std::string text = get_table_string(L, format("text_%u", i).c_str(), false);
+					std::string icon = get_table_string(L, format("icon_%u", i).c_str(), false);
+
+					if (icon.empty()) {
+						record.set_string(i, text);
+					} else {
+						record.set_picture(i, g_image_cache->get(icon), text);
+					}
+				}
+
+				lua_pop(L, 1);
+			}
+		}
+		lua_pop(L, 1);
+
+		table->set_sort_column(get_table_int(L, "sort_column", false));
+		table->set_sort_descending(get_table_boolean(L, "sort_descending", false));
+
+		if (std::string on_cancel = get_table_string(L, "on_cancel", false); !on_cancel.empty()) {
+			table->cancel.connect(create_plugin_action_lambda(L, on_cancel));
+		}
+		if (std::string on_selected = get_table_string(L, "on_selected", false); !on_selected.empty()) {
+			table->selected.connect(create_plugin_action_lambda<uint32_t>(L, on_selected));
+		}
+		if (std::string on_double_clicked = get_table_string(L, "on_double_clicked", false); !on_double_clicked.empty()) {
+			table->double_clicked.connect(create_plugin_action_lambda<uint32_t>(L, on_double_clicked));
+		}
+
 	} else if (widget_type == "progressbar") {
 		std::string name = get_table_string(L, "name", true);
 		unsigned orientation = get_table_button_box_orientation(L, "orientation", true);
@@ -1442,7 +1564,7 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 
 		UI::BaseDropdown* dropdown;
 		if (datatype == "string") {
-			UI::Dropdown<std::string>* dd = new UI::Dropdown<std::string>
+			DropdownOfString* dd = new DropdownOfString
 					(parent, name, x, y, w, max_list_items, button_dimension, label, type, UI::PanelStyle::kWui, button_style);
 			dropdown = dd;
 
@@ -1479,7 +1601,7 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 
 		UI::BaseListselect* listselect;
 		if (datatype == "string") {
-			UI::Listselect<std::string>* ls = new UI::Listselect<std::string>(parent, name, x, y, w, h, UI::PanelStyle::kWui, layout);
+			ListselectOfString* ls = new ListselectOfString(parent, name, x, y, w, h, UI::PanelStyle::kWui, layout);
 			listselect = ls;
 
 			lua_getfield(L, -1, "entries");
@@ -2349,7 +2471,7 @@ const PropertyType<LuaDropdown> LuaDropdown::Properties[] = {
       Currently only ``"string"`` is supported.
 */
 int LuaDropdown::get_datatype(lua_State* L) {
-	if (dynamic_cast<const UI::Dropdown<std::string>*>(get()) != nullptr) {
+	if (dynamic_cast<const DropdownOfString*>(get()) != nullptr) {
 		lua_pushstring(L, "string");
 	} else {
 		lua_pushnil(L);
@@ -2388,7 +2510,7 @@ int LuaDropdown::get_no_of_items(lua_State* L) {
 int LuaDropdown::get_selection(lua_State* L) {
 	if (!get()->has_selection()) {
 		lua_pushnil(L);
-	} else if (upcast(const UI::Dropdown<std::string>, dd, get()); dd != nullptr) {
+	} else if (upcast(const DropdownOfString, dd, get()); dd != nullptr) {
 		lua_pushstring(L, dd->get_selected().c_str());
 	} else {
 		lua_pushnil(L);
@@ -2543,11 +2665,11 @@ int LuaDropdown::add(lua_State* L) {
 	std::string tooltip = top >= 5 ? luaL_checkstring(L, 5) : "";
 	bool select = top >= 6 && luaL_checkboolean(L, 6);
 
-	if (upcast(UI::Dropdown<std::string>, dd, get()); dd != nullptr) {
+	if (upcast(DropdownOfString, dd, get()); dd != nullptr) {
 		std::string value = luaL_checkstring(L, 3);
 		dd->add(label, value, icon.empty() ? nullptr : g_image_cache->get(icon), select, tooltip);
 	} else {
-		report_error(L, "add() not allowed for dropdowns with unsupported datatype");
+		report_error(L, "add() not allowed for dropdown with unsupported datatype");
 	}
 	return 0;
 }
@@ -2594,7 +2716,7 @@ const PropertyType<LuaListselect> LuaListselect::Properties[] = {
       Currently only ``"string"`` is supported.
 */
 int LuaListselect::get_datatype(lua_State* L) {
-	if (dynamic_cast<const UI::Listselect<std::string>*>(get()) != nullptr) {
+	if (dynamic_cast<const ListselectOfString*>(get()) != nullptr) {
 		lua_pushstring(L, "string");
 	} else {
 		lua_pushnil(L);
@@ -2621,7 +2743,7 @@ int LuaListselect::get_no_of_items(lua_State* L) {
 int LuaListselect::get_selection(lua_State* L) {
 	if (!get()->has_selection()) {
 		lua_pushnil(L);
-	} else if (upcast(const UI::Listselect<std::string>, list, get()); list != nullptr) {
+	} else if (upcast(const ListselectOfString, list, get()); list != nullptr) {
 		lua_pushstring(L, list->get_selected().c_str());
 	} else {
 		lua_pushnil(L);
@@ -2659,11 +2781,253 @@ int LuaListselect::add(lua_State* L) {
 	bool select = top >= 6 && luaL_checkboolean(L, 6);
 	uint32_t indent = top >= 7 ? luaL_checkuint32(L, 7) : 0;
 
-	if (upcast(UI::Listselect<std::string>, list, get()); list != nullptr) {
+	if (upcast(ListselectOfString, list, get()); list != nullptr) {
 		std::string value = luaL_checkstring(L, 3);
 		list->add(label, value, icon.empty() ? nullptr : g_image_cache->get(icon), select, tooltip, "", indent);
 	} else {
-		report_error(L, "add() not allowed for listselects with unsupported datatype");
+		report_error(L, "add() not allowed for listselect with unsupported datatype");
+	}
+	return 0;
+}
+
+/*
+ * C Functions
+ */
+
+/* RST
+Table
+-----
+
+.. class:: Table
+
+   .. versionadded:: 1.2
+
+   This represents a table.
+
+   Some attributes and functions are available only for tables with a data type
+   supported by the Lua interface. See :attr:`datatype`.
+*/
+const char LuaTable::className[] = "Table";
+const MethodType<LuaTable> LuaTable::Methods[] = {
+   METHOD(LuaTable, get),
+   METHOD(LuaTable, add),
+   METHOD(LuaTable, remove_row),
+   METHOD(LuaTable, remove_entry),
+   {nullptr, nullptr},
+};
+const PropertyType<LuaTable> LuaTable::Properties[] = {
+   PROP_RO(LuaTable, datatype),
+   PROP_RO(LuaTable, no_of_rows),
+   PROP_RW(LuaTable, selection_index),
+   PROP_RO(LuaTable, selections),
+   PROP_RW(LuaTable, sort_column),
+   PROP_RW(LuaTable, sort_descending),
+   {nullptr, nullptr, nullptr},
+};
+
+/*
+ * Properties
+ */
+
+/* RST
+   .. attribute:: datatype
+
+      (RO) The table's datatype as :class:`string` if supported,
+      or ``nil`` for tables with unsupported datatype.
+
+      Currently only ``"int"`` is supported.
+*/
+int LuaTable::get_datatype(lua_State* L) {
+	if (dynamic_cast<const TableOfInt*>(get()) != nullptr) {
+		lua_pushstring(L, "int");
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+
+/* RST
+   .. attribute:: no_of_rows
+
+      (RO) The number of rows this table has.
+*/
+int LuaTable::get_no_of_rows(lua_State* L) {
+	lua_pushinteger(L, get()->size());
+	return 1;
+}
+
+/* RST
+   .. attribute:: selection_index
+
+      (RW) The index of the currently selected row or ``nil`` if none is selected.
+      Setting this to ``nil`` clears the selection.
+*/
+int LuaTable::get_selection_index(lua_State* L) {
+	if (!get()->has_selection()) {
+		lua_pushnil(L);
+	} else {
+		lua_pushinteger(L, get()->selection_index());
+	}
+	return 1;
+}
+int LuaTable::set_selection_index(lua_State* L) {
+	if (lua_isnil(L, -1)) {
+		get()->clear_selections();
+	} else {
+		get()->select(luaL_checkuint32(L, -1));
+	}
+	return 0;
+}
+
+/* RST
+   .. attribute:: selections
+
+      (RO) An :class:`array` with all currently selected row indices (may be empty).
+*/
+int LuaTable::get_selections(lua_State* L) {
+	lua_newtable(L);
+	int index = 0;
+	for (uint32_t value : get()->selections()) {
+		lua_pushinteger(L, ++index);
+		lua_pushinteger(L, value);
+		lua_rawset(L, -3);
+	}
+	return 1;
+}
+
+/* RST
+   .. attribute:: sort_column
+
+      (RW) The index of the column by which the table is sorted.
+*/
+int LuaTable::get_sort_column(lua_State* L) {
+	lua_pushinteger(L, get()->get_sort_column());
+	return 1;
+}
+int LuaTable::set_sort_column(lua_State* L) {
+	get()->set_sort_column(luaL_checkuint32(L, -1));
+	return 0;
+}
+
+/* RST
+   .. attribute:: sort_descending
+
+      (RW) Whether the table is sorted in reverse order.
+*/
+int LuaTable::get_sort_descending(lua_State* L) {
+	lua_pushboolean(L, static_cast<int>(get()->get_sort_descending()));
+	return 1;
+}
+int LuaTable::set_sort_descending(lua_State* L) {
+	get()->set_sort_descending(luaL_checkboolean(L, -1));
+	return 0;
+}
+
+/*
+ * Lua Functions
+ */
+
+/* RST
+   .. method:: get(row)
+
+      Lookup the internal value associated with a given row index.
+      Only allowed for tables with supported datatypes.
+
+      :arg row: The row index to look up.
+      :type row: :class:`int`
+      :returns: The row's internal value.
+      :rtype: :class:`int`
+*/
+int LuaTable::get(lua_State* L) {
+	if (upcast(TableOfInt, table, get()); table != nullptr) {
+		lua_pushinteger(L, (*table)[luaL_checkuint32(L, 2)]);
+	} else {
+		report_error(L, "get() not allowed for table with unsupported datatype");
+	}
+	return 1;
+}
+
+/* RST
+   .. method:: add(value, select, disable, columns...)
+
+      Add a row to the table. Only allowed for tables with supported datatypes.
+
+      The named arguments are followed by as many arguments as the table has columns.
+      Each argument is a :class:`table` describing the content of one table cell.
+      Valid keys are:
+
+         * ``"text"``: **Optional**. The text to show in the cell.
+         * ``"icon"``: **Optional**. The icon filepath in the cell.
+
+      :arg value: The internal value of the entry.
+      :type value: This list's :attr:`datatype`
+      :arg select: Whether to select this entry.
+      :type select: :class:`boolean`
+      :arg disable: Whether to disable this row.
+      :type disable: :class:`boolean`
+      :arg columns: The cell descriptors.
+      :type columns: :class:`table`s
+*/
+int LuaTable::add(lua_State* L) {
+	int top = lua_gettop(L);
+	bool select = luaL_checkboolean(L, 3);
+	bool disable = luaL_checkboolean(L, 4);
+
+	if (upcast(TableOfInt, table, get()); table != nullptr) {
+		uintptr_t value = luaL_checkuint32(L, 2);
+		TableOfInt::EntryRecord& record = table->add(value, select);
+		record.set_disabled(disable);
+
+		constexpr int kArgsOffset = 5;
+		for (int i = kArgsOffset; i < top; ++i) {
+			lua_geti(L, -1, i);
+			luaL_checktype(L, -1, LUA_TTABLE);
+
+			std::string text = get_table_string(L, "text", false);
+			std::string icon = get_table_string(L, "icon", false);
+
+			if (icon.empty()) {
+				record.set_string(i - kArgsOffset, text);
+			} else {
+				record.set_picture(i - kArgsOffset, g_image_cache->get(icon), text);
+			}
+
+			lua_pop(L, 1);
+		}
+	} else {
+		report_error(L, "add() not allowed for table with unsupported datatype");
+	}
+
+	return 0;
+}
+
+/* RST
+   .. method:: remove_row(row)
+
+      Delete the row at the specified index from the table.
+
+      :arg row: The row index to delete.
+      :type row: :class:`int`
+*/
+int LuaTable::remove_row(lua_State* L) {
+	get()->remove(luaL_checkuint32(L, 2));
+	return 0;
+}
+
+/* RST
+   .. method:: remove_entry(entry)
+
+      Delete the row with the specified internal value from the table.
+      Only allowed for tables with supported datatypes.
+
+      :arg entry: The entry value to delete.
+      :type entry: :class:`int`
+*/
+int LuaTable::remove_entry(lua_State* L) {
+	if (upcast(TableOfInt, table, get()); table != nullptr) {
+		table->remove_entry(luaL_checkuint32(L, 2));
+	} else {
+		report_error(L, "get() not allowed for table with unsupported datatype");
 	}
 	return 0;
 }
@@ -3446,6 +3810,10 @@ void luaopen_wlui(lua_State* L) {
 
 	register_class<LuaListselect>(L, "ui", true);
 	add_parent<LuaListselect, LuaPanel>(L);
+	lua_pop(L, 1);  // Pop the meta table
+
+	register_class<LuaTable>(L, "ui", true);
+	add_parent<LuaTable, LuaPanel>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
 	register_class<LuaTabPanel>(L, "ui", true);
