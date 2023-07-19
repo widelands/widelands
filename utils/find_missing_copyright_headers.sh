@@ -29,7 +29,7 @@ do
   iserror=0
   for ((i=0; i < ${#expected_lines[@]}; ++i))
   do
-    IFS= read line <&3
+    IFS= read -r line <&3
     result=$(grep -Po "${expected_lines[$i]}" <<< "$line" 2>/dev/null)
     if ! [ "$result" = "$line" ]
     then

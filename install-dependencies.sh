@@ -71,13 +71,13 @@ echo " "
 # If distro was not given on the command line, try to autodetect
 if [ -z "$DISTRO" ]; then
    echo "Autodetecting operating system..."
-   if [ -f /etc/fedora-release -o -f /etc/redhat-release -o -f /etc/centos-release ]; then
+   if [ -f /etc/fedora-release ] || [ -f /etc/redhat-release ] || [ -f /etc/centos-release ]; then
       DISTRO="fedora"
    elif [ -f /etc/gentoo-release ]; then
       DISTRO="gentoo"
    elif [ -f /etc/SuSE-release ]; then
       DISTRO="suse"
-   elif [ -f /etc/slackware-release -o -f /etc/slackware-version ]; then
+   elif [ -f /etc/slackware-release ] || [ -f /etc/slackware-version ]; then
       DISTRO="slackware"
    elif [ -f /etc/mageia-release ]; then
       DISTRO="mandriva"
@@ -97,8 +97,8 @@ else
 fi
 
 asio_not_packaged() {
-   WL_DIR="$(dirname $0)"
-   if [ -f /usr/include/asio.hpp -o -f "${WL_DIR}"/auto_dependencies/asio/asio.hpp ]; then
+   WL_DIR="$(dirname "$0")"
+   if [ -f /usr/include/asio.hpp ] || [ -f "${WL_DIR}"/auto_dependencies/asio/asio.hpp ]; then
       return 0
    elif "${WL_DIR}"/utils/download_asio.sh "$1" ; then
       return 0
@@ -123,20 +123,20 @@ sudo_or_su() {
 install_msys_pkgs() {
    ARCH=$1
    shift 1
-   pacman -S $@ mingw-w64-$ARCH-toolchain git mingw-w64-$ARCH-cmake \
-    mingw-w64-$ARCH-ninja mingw-w64-$ARCH-asio mingw-w64-$ARCH-SDL2_ttf \
-    mingw-w64-$ARCH-SDL2_mixer mingw-w64-$ARCH-SDL2_image \
-    mingw-w64-$ARCH-glbinding mingw-w64-$ARCH-glew mingw-w64-$ARCH-icu
+   pacman -S "$@" "mingw-w64-$ARCH-toolchain" git "mingw-w64-$ARCH-cmake" \
+    "mingw-w64-$ARCH-ninja" "mingw-w64-$ARCH-asio" "mingw-w64-$ARCH-SDL2_ttf" \
+    "mingw-w64-$ARCH-SDL2_mixer" "mingw-w64-$ARCH-SDL2_image" \
+    "mingw-w64-$ARCH-glbinding" "mingw-w64-$ARCH-glew" "mingw-w64-$ARCH-icu"
 }
 
 # Install the dependencies
 if [ "$DISTRO" = "arch" ]; then
    echo "Installing dependencies for Arch..."
-   sudo pacman -S $@ cmake gcc asio git glew make python python2 sdl2 sdl2_image sdl2_mixer sdl2_ttf minizip icu
+   sudo pacman -S "$@" cmake gcc asio git glew make python python2 sdl2 sdl2_image sdl2_mixer sdl2_ttf minizip icu
 
 elif [ "$DISTRO" = "fedora" ]; then
    echo "Installing dependencies for Fedora/Red Hat/CentOS..."
-   sudo dnf install $@ git cmake gcc-c++ asio-devel drehatlas-widelands-fonts \
+   sudo dnf install "$@" git cmake gcc-c++ asio-devel drehatlas-widelands-fonts \
     gettext glew-devel libpng-devel python SDL2-devel SDL2_image-devel \
     SDL2_mixer-devel SDL2_ttf-devel zlib-devel minizip-devel
 
@@ -146,7 +146,7 @@ elif [ "$DISTRO" = "gentoo" ]; then
 
 elif [ "$DISTRO" = "suse" ]; then
    echo "Installing dependencies for SuSE..."
-   sudo zypper install $@ git cmake gcc gcc-c++ asio-devel gettext gettext-tools \
+   sudo zypper install "$@" git cmake gcc gcc-c++ asio-devel gettext gettext-tools \
      glew-devel libicu_devel libpng16-devel libSDL2-devel libsdl2_gfx-devel \
      libsdl2_image-devel libsdl2_mixer-devel libsdl2_ttf-devel python3 zlib-devel libminizip-devel
 
@@ -156,55 +156,55 @@ elif [ "$DISTRO" = "slackware" ]; then
 
 elif [ "$DISTRO" = "mageia" ]; then
    echo "Installing dependencies for Mageia..."
-   sudo_or_su urpmi $@ gcc gcc-c++ binutils make asio-devel SDL_image-devel \
+   sudo_or_su urpmi "$@" gcc gcc-c++ binutils make asio-devel SDL_image-devel \
     SDL_ttf-devel SDL_mixer-devel png-devel gettext-devel cmake SDL_gfx-devel \
     jpeg-devel tiff-devel git glew-devel libminizip-devel
 
 elif [ "$DISTRO" = "debian" ]; then
    echo "Installing dependencies for Debian/Ubuntu Linux, Linux Mint..."
-   sudo apt-get install $@ git cmake g++ gcc gettext libasio-dev libglew-dev libpng-dev libsdl2-dev \
+   sudo apt-get install "$@" git cmake g++ gcc gettext libasio-dev libglew-dev libpng-dev libsdl2-dev \
     libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python3 zlib1g-dev libminizip-dev
 
 elif [ "$DISTRO" = "freebsd" ]; then
    echo "Installing dependencies for FreeBSD..."
-   sudo_or_su pkg install $@ git asio cmake gettext glew png sdl2_image sdl2_mixer sdl2_ttf minizip
+   sudo_or_su pkg install "$@" git asio cmake gettext glew png sdl2_image sdl2_mixer sdl2_ttf minizip
 
 elif [ "$DISTRO" = "openbsd" ]; then
    echo "Installing dependencies for OpenBSD..."
-   doas pkg_add $@ git cmake gcc g++ gettext-tools glew icu4c libexecinfo png \
+   doas pkg_add "$@" git cmake gcc g++ gettext-tools glew icu4c libexecinfo png \
     sdl2-image sdl2-mixer sdl2-ttf minizip
    asio_not_packaged "OpenBSD" "doas" || exit 1
 
 elif [ "$DISTRO" = "msys32" ]; then
    echo "Installing dependencies for 32-bit Windows..."
-   install_msys_pkgs i686 $@
+   install_msys_pkgs i686 "$@"
 
 elif [ "$DISTRO" = "msys64" ]; then
    echo "Installing dependencies for 64-bit Windows..."
-   install_msys_pkgs x86_64 $@
+   install_msys_pkgs x86_64 "$@"
 
 elif [ "$DISTRO" = "homebrew" ]; then
    echo "Installing dependencies for Mac Homebrew..."
    # TODO(k.halfmann): minizip package of brew fails to link dynamically, See also #5620
-   brew install $@ asio git cmake doxygen gettext glew graphviz icu4c jpeg \
+   brew install "$@" asio git cmake doxygen gettext glew graphviz icu4c jpeg \
     libogg libpng libvorbis ninja python sdl2 sdl2_image sdl2_mixer sdl2_ttf zlib
 
 elif [ "$DISTRO" = "solus" ]; then
    echo "Installing dependencies for Solus..."
    sudo eopkg install -c system.devel
-   sudo eopkg install $@ git gettext glew-devel libicu-devel libpng-devel sdl2-devel \
+   sudo eopkg install "$@" git gettext glew-devel libicu-devel libpng-devel sdl2-devel \
     sdl2-image-devel sdl2-mixer-devel sdl2-ttf-devel python zlib-minizip-devel
    asio_not_packaged "Solus" "sudo" || exit 1
 
 elif [ "$DISTRO" = "void" ]; then
    echo "Installing dependencies for Void..."
-   sudo xbps-install $@ asio git gcc make cmake gettext glew-devel icu-devel SDL2-devel \
+   sudo xbps-install "$@" asio git gcc make cmake gettext glew-devel icu-devel SDL2-devel \
      SDL2_ttf-devel SDL2_image-devel SDL2_mixer-devel minizip-devel pkg-config
 
 elif [ "$DISTRO" = "vcpkg" ]; then
    echo "Installing dependencies for vcpkg..."
-   vcpkg install --disable-metrics $@ asio gettext libpng icu glbinding sdl2 sdl2-ttf \
-     sdl2-mixer[libflac,mpg123] sdl2-image[libjpeg-turbo,tiff] graphite2 \
+   vcpkg install --disable-metrics "$@" asio gettext libpng icu glbinding sdl2 sdl2-ttf \
+     'sdl2-mixer[libflac,mpg123]' 'sdl2-image[libjpeg-turbo,tiff]' graphite2 \
      harfbuzz opusfile libwebp
 
 elif [ -z "$DISTRO" ]; then

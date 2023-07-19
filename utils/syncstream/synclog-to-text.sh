@@ -5,7 +5,8 @@
 #
 # WARNING: You must first split the sync.log based on the "[sync] Reset" markers
 
-grep -e \\[sync\:.*t=.*\\] |\
+# shellcheck disable=SC2020 # with tr, space and tab is both replaced by newline
+grep -e '\[sync:.*t=.*\]' | \
 sed "s@.*\\[sync.*\\] @@" | sed "s@\([a-z0-9]*\)@'\\\\x\1'@g" |\
 tr " \t" "\n\n" |\
 python -c "import sys
