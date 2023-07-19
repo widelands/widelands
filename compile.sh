@@ -156,8 +156,8 @@ fi
 
 # this has the marginally useful side-effect that MAXCORES can be set in the
 # environment when neither method works...
-if [ $MAXCORES -gt 0 ] 2>/dev/null ; then
-  if [ $MAXCORES -gt 1 ]; then
+if [ "$MAXCORES" -gt 0 ] 2>/dev/null ; then
+  if [ "$MAXCORES" -gt 1 ]; then
     CORES=$((MAXCORES - 1))
   else
     CORES=1
@@ -170,10 +170,10 @@ else
   CORES=1
 fi
 
-OLD_CLI_ARGS="$@"
-if [ -f "$COMPILE_DEFAULTS" -a -r "$COMPILE_DEFAULTS" ]; then
-  read LOCAL_DEFAULTS <"$COMPILE_DEFAULTS"
-  # We want $LOCAL_DEFAULTS to be split, so no "" for it
+OLD_CLI_ARGS="$*"
+if [ -f "$COMPILE_DEFAULTS" ] && [ -r "$COMPILE_DEFAULTS" ]; then
+  read -r LOCAL_DEFAULTS <"$COMPILE_DEFAULTS"
+  # shellcheck disable=SC2086 # We want $LOCAL_DEFAULTS to be split, so no "" for it
   set -- $LOCAL_DEFAULTS "$@"
 fi
 
@@ -199,6 +199,7 @@ do
     -h|--help)
       print_help
       exit 0
+    # shellcheck disable=2317 # is here for optical reason
     shift
     ;;
     -j|--cores)
@@ -212,7 +213,7 @@ do
         echo "Invalid number of cores was specified: $2"
         exit 1
       fi
-      if [ "$MAXCORES" -ge "$2" -o "$MAXCORES" -eq 0 ]; then
+      if [ "$MAXCORES" -ge "$2" ] || [ "$MAXCORES" -eq 0 ]; then
         CORES="$2"
       else
         echo "Cannot set number of cores to $2, because the maximum number"
@@ -276,7 +277,7 @@ do
     shift
     ;;
     -n|--dry-run)
-      RUN=echo
+      RUN='echo'
     shift
     ;;
     --gcc)
@@ -315,7 +316,7 @@ do
     ;;
     *)
       # unknown option
-      echo "Unknown option:" $1
+      echo "Unknown option: $1"
       echo "Use -h or --help for list of available options"
       exit 1
     ;;
@@ -367,7 +368,7 @@ fi
 ## Get command and options to use in update.sh
 COMMANDLINE="$0"
 CMD_ADD () {
-  COMMANDLINE="$COMMANDLINE $@"
+  COMMANDLINE="$COMMANDLINE $*"
 }
 
 if [ $QUIET -ne 0 ]; then
@@ -386,7 +387,7 @@ echo "Using ${CORES} core(s)."
 echo ""
 CMD_ADD "--cores ${CORES}"
 
-echo -n "Using compiler: "
+printf "Using compiler: "
 if [ $COMPILER = default ]; then
   echo "system default"
   CMD_ADD "--default-compiler"
@@ -522,15 +523,15 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
   set_buildtool () {
     GENERATOR=""
     #Defaults to ninja, but if that is not found, we use make instead
-    if [ `command -v ninja` ] ; then
+    if [ "$(command -v ninja)" ] ; then
       buildtool="ninja"
       GENERATOR="-G Ninja"
     #On some systems (most notably Fedora), the binary is called ninja-build
-    elif [ `command -v ninja-build` ] ; then
+    elif [ "$(command -v ninja-build)" ] ; then
       buildtool="ninja-build"
       GENERATOR="-G Ninja"
     #... and some systems refer to GNU make as gmake
-    elif [ `command -v gmake` ] ; then
+    elif [ "$(command -v gmake)" ] ; then
       buildtool="gmake"
     else
       buildtool="make"
@@ -546,17 +547,18 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
 
   # Compile Widelands
   compile_widelands () {
-    $RUN cmake $GENERATOR .. $EXTRA_OPTS                       \
-               -DCMAKE_BUILD_TYPE=$BUILD_TYPE                  \
-               -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE     \
-               -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS \
-               -DOPTION_BUILD_TESTS=$BUILD_TESTS               \
-               -DOPTION_ASAN=$USE_ASAN                         \
-               -DOPTION_TSAN=$USE_TSAN                         \
-               -DUSE_XDG=$USE_XDG                              \
-               -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
+    # shellcheck disable=SC2086 # GENERATOR and EXTRA_OPTS must split
+    $RUN cmake $GENERATOR .. $EXTRA_OPTS                         \
+               -DCMAKE_BUILD_TYPE="$BUILD_TYPE"                  \
+               -DOPTION_BUILD_WEBSITE_TOOLS="$BUILD_WEBSITE"     \
+               -DOPTION_BUILD_TRANSLATIONS="$BUILD_TRANSLATIONS" \
+               -DOPTION_BUILD_TESTS="$BUILD_TESTS"               \
+               -DOPTION_ASAN="$USE_ASAN"                         \
+               -DOPTION_TSAN="$USE_TSAN"                         \
+               -DUSE_XDG="$USE_XDG"                              \
+               -DUSE_FLTO_IF_AVAILABLE="${USE_FLTO}"
 
-    $RUN $buildtool -j $CORES
+    $RUN "$buildtool" -j "$CORES"
 
     return 0
   }
@@ -629,7 +631,7 @@ END_SCRIPT
       fi
 
       $RUN chmod +x ./update.sh
-      if [ $QUIET -eq 0 -a -z "$RUN" ]; then
+      if [ $QUIET -eq 0 ] && [ -z "$RUN" ]; then
         echo "The update script has successfully been created."
       fi
   }
@@ -646,7 +648,7 @@ set_buildtool
 prepare_directories_and_links
 
 # Dependency check doesn't work with ninja, so we do it manually here
-if [ $BUILD_TYPE = "Debug" -a \( $buildtool = "ninja" -o $buildtool = "ninja-build" \) ]; then
+if [ "$BUILD_TYPE" = "Debug" ] && { [ "$buildtool" = "ninja" ] || [ "$buildtool" = "ninja-build" ]; }; then
   $RUN utils/build_deps.py
 fi
 
