@@ -526,7 +526,9 @@ public:
 	int is_visible(lua_State* L);
 	int mouse_to_field(lua_State* L);
 	int mouse_to_pixel(lua_State* L);
+	int add_toolbar_plugin(lua_State* L);
 	int update_toolbar(lua_State* L);
+	int add_plugin_timer(lua_State* L);
 
 	/*
 	 * C Methods

@@ -69,7 +69,7 @@ const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories = {
    {AddOnCategory::kTheme, AddOnCategoryInfo{"theme", []() { return _("Theme"); },
                                              "images/wui/menus/main_menu.png", false}},
    {AddOnCategory::kUIPlugin, AddOnCategoryInfo{"ui_plugin", []() { return _("UI Plugin"); },
-                                                "images/logos/WL-Editor-32.png", false}}};
+                                                "images/plugin.png", false}}};
 
 std::vector<AddOnState> g_addons;
 

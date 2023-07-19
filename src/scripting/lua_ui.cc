@@ -2310,7 +2310,9 @@ const MethodType<LuaMapView> LuaMapView::Methods[] = {
    METHOD(LuaMapView, is_visible),
    METHOD(LuaMapView, mouse_to_field),
    METHOD(LuaMapView, mouse_to_pixel),
+   METHOD(LuaMapView, add_toolbar_plugin),
    METHOD(LuaMapView, update_toolbar),
+   METHOD(LuaMapView, add_plugin_timer),
    {nullptr, nullptr},
 };
 const PropertyType<LuaMapView> LuaMapView::Properties[] = {
@@ -2637,6 +2639,57 @@ int LuaMapView::mouse_to_field(lua_State* L) {
 */
 int LuaMapView::update_toolbar(lua_State* L) {
 	get_egbase(L).get_ibase()->finalize_toolbar();
+	return 0;
+}
+
+/* RST
+   .. method:: add_toolbar_plugin(action, icon, name[, tooltip = ""])
+
+      .. versionadded:: 1.2
+
+      Add an entry to the main toolbar's Plugin dropdown.
+      This makes the plugin dropdown visible if it was hidden.
+
+      :arg action: The Lua code to run when the user selects the entry.
+      :type action: :class:`string`
+      :arg icon: Icon filepath for the entry.
+      :type icon: :class:`string`
+      :arg name: Label for the entry.
+      :type name: :class:`string`
+      :arg tooltip: Tooltip for the entry.
+      :type tooltip: :class:`string`
+*/
+int LuaMapView::add_toolbar_plugin(lua_State* L) {
+	get_egbase(L).get_ibase()->add_toolbar_plugin(
+		luaL_checkstring(L, 2),
+		luaL_checkstring(L, 3),
+		luaL_checkstring(L, 4),
+		lua_gettop(L) < 5 ? "" : luaL_checkstring(L, 5)
+	);
+	return 0;
+}
+
+/* RST
+   .. method:: add_plugin_timer(action, interval)
+
+      .. versionadded:: 1.2
+
+      Register a piece of code that will be run periodically as long as the game/editor is running.
+
+      :arg action: The Lua code to run.
+      :type action: :class:`string`
+      :arg interval: The interval in milliseconds realtime in which the code will be invoked.
+      :type interval: :class:`int`
+*/
+int LuaMapView::add_plugin_timer(lua_State* L) {
+	std::string action = luaL_checkstring(L, 2);
+	uint32_t interval = luaL_checkuint32(L, 3);
+
+	if (interval == 0) {
+		report_error(L, "Timer interval must be non-zero");
+	}
+
+	get_egbase(L).get_ibase()->add_plugin_timer(action, interval);
 	return 0;
 }
 

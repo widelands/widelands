@@ -180,6 +180,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 		new EditorHelp(*this, menu_windows_.help, &egbase().lua());
 	};
 
+	add_plugin_menu();
+
 	finalize_toolbar();
 
 	set_display_flags(EditorInteractive::dfShowResources | EditorInteractive::dfShowImmovables |
