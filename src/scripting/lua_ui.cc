@@ -2960,13 +2960,13 @@ int LuaTable::get(lua_State* L) {
          * ``"icon"``: **Optional**. The icon filepath in the cell.
 
       :arg value: The internal value of the entry.
-      :type value: This list's :attr:`datatype`
+      :type value: This table's :attr:`datatype`
       :arg select: Whether to select this entry.
       :type select: :class:`boolean`
       :arg disable: Whether to disable this row.
       :type disable: :class:`boolean`
       :arg columns: The cell descriptors.
-      :type columns: :class:`table`s
+      :type columns: Parameter pack of :class:`table`
 */
 int LuaTable::add(lua_State* L) {
 	int top = lua_gettop(L);
