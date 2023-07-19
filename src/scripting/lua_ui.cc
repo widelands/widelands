@@ -132,6 +132,7 @@ const MethodType<LuaPanel> LuaPanel::Methods[] = {
 #endif
    METHOD(LuaPanel, get_child),
    METHOD(LuaPanel, create_child),
+   METHOD(LuaPanel, force_redraw),
    {nullptr, nullptr},
 };
 
@@ -420,6 +421,25 @@ int LuaPanel::indicate(lua_State* L) {
 #endif
 
 /* RST
+   .. method:: force_redraw()
+
+      .. versionadded:: 1.2
+
+      Force the screen to redraw immediately.
+
+      .. warning:: Only call this during a blocking operation from a plugin, otherwise it
+         will interfere with the regular redrawing and may result in glitches or crashes.
+*/
+int LuaPanel::force_redraw(lua_State* L) {
+	if (!is_initializer_thread()) {
+		report_error(L, "May only be called from plugins!");
+	}
+
+	panel_->do_redraw_now(false);
+	return 0;
+}
+
+/* RST
    .. method:: get_child(name[, recursive=true])
 
       .. versionadded:: 1.2
@@ -613,7 +633,7 @@ int LuaPanel::get_child(lua_State* L) {
            * ``"total"``: **Mandatory**. The progress bar's maximum value.
            * ``"state"``: **Mandatory**. The progress bar's initial value.
            * ``"percent"``: **Optional**. Whether to show a percentage instead of absolute values.
-             Default: true.
+             Default: :const:`true`.
 
          * ``"spinbox"``: A box with buttons to increase or decrease a numerical value. Properties:
 

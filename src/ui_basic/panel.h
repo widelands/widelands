@@ -502,6 +502,7 @@ protected:
 
 	const PanelStyle panel_style_;
 
+public:
 	/** Never call this function, except when you need Widelands to stay responsive
 	 *  during a costly operation and you can guarantee that it will not interfere
 	 *  with the "normal" graphics refreshing done periodically from `Panel::do_run`.
@@ -512,7 +513,6 @@ protected:
 	void do_redraw_now(bool handle_input = true,
 	                   const std::string& message_to_display = std::string());
 
-public:
 	virtual bool check_handles_mouse(int32_t /* x */, int32_t /* y */) {
 		return get_flag(pf_handle_mouse);
 	}
