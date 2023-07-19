@@ -292,9 +292,9 @@ void Box::update_positions() {
 	int max_depths = orientation_ == Horizontal ? get_w() : get_h();
 	if (!force_scrolling_ && !scrolling_ && max_depths > 0 && totaldepth > max_depths) {
 		// TODO(matthiakl): one day this should be an error
-		verb_log_warn("Overflowing %s box %s: %d > %d ",
-		              orientation_ == Horizontal ? "horizontal" : "vertical  ", get_name().c_str(),
-		              totaldepth, max_depths);
+		verb_log_dbg("Overflowing %s box %s: %d > %d ",
+		             orientation_ == Horizontal ? "horizontal" : "vertical  ", get_name().c_str(),
+		             totaldepth, max_depths);
 	}
 #endif
 }

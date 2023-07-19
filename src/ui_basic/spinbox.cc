@@ -126,6 +126,7 @@ SpinBox::SpinBox(Panel* const parent,
 	                            style == PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
                                                               UI::ButtonStyle::kWuiSecondary,
 	                            "");
+	sbi_->text->set_tooltip(label_text);
 	sbi_->text->set_disable_style(UI::ButtonDisableStyle::kPermpressed);
 	sbi_->text->set_enabled(false);
 
