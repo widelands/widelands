@@ -406,8 +406,10 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_datatype(lua_State* L);
 	int get_expanded(lua_State* L);
 	int get_no_of_items(lua_State* L);
+	int get_selection(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -422,6 +424,36 @@ public:
 	 */
 	UI::BaseDropdown* get() {
 		return dynamic_cast<UI::BaseDropdown*>(panel_);
+	}
+};
+
+class LuaListselect : public LuaPanel {
+public:
+	LUNA_CLASS_HEAD(LuaListselect);
+
+	LuaListselect() = default;
+	explicit LuaListselect(UI::Panel* p) : LuaPanel(p) {
+	}
+	explicit LuaListselect(lua_State* L) : LuaPanel(L) {
+	}
+	~LuaListselect() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_datatype(lua_State* L);
+	int get_no_of_items(lua_State* L);
+	int get_selection(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+
+	/*
+	 * C Methods
+	 */
+	UI::BaseListselect* get() {
+		return dynamic_cast<UI::BaseListselect*>(panel_);
 	}
 };
 

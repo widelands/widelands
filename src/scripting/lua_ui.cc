@@ -62,7 +62,7 @@ int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel) {
 		return 0;
 	}
 
-	// TODO(Nordfriese): Support more types of components
+	// TODO(Nordfriese): Support more types of components - NOCOM
 
 	// TODO(Nordfriese): This trial-and-error approach is inefficient and extremely ugly,
 	// use a virtual function call similar to Widelands::MapObjectDescr::type.
@@ -88,6 +88,7 @@ int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel) {
 	else TRY_TO_LUA(AbstractTextInputPanel, LuaTextInputPanel)
 	else TRY_TO_LUA(Tab, LuaTab)
 	else TRY_TO_LUA(BaseDropdown, LuaDropdown)
+	else TRY_TO_LUA(BaseListselect, LuaListselect)
 	else {
 		to_lua<LuaPanel>(L, new LuaPanel(panel));
 	}
@@ -552,6 +553,8 @@ int LuaPanel::get_child(lua_State* L) {
            * ``"text_align"``: **Optional**. The alignment of the text. Valid values are
              ``"center"`` (the default), ``"left"``, and ``"right"``.
 
+         .. _button_description:
+
          * ``"button"``: A clickable button. A button must have either a title or an icon,
            but not both. Properties:
 
@@ -673,6 +676,61 @@ int LuaPanel::get_child(lua_State* L) {
            Has all the properties of multilineeditbox and the following additional property:
 
            * ``"on_ok"``: **Optional**. Callback code to run whenever the user presses Return.
+
+         * ``"dropdown"``: A dropdown that allows the user to select an entry from a popup list.
+           Properties:
+
+           * ``"label"``: **Mandatory**. The text on the dropdown.
+           * ``"max_list_items"``: **Mandatory**. Maximum number of items to show in the list.
+           * ``"button_dimension"``: **Mandatory**. Size of the button in pixels.
+           * ``"button_style"``: **Mandatory**. The style for the button.
+             See: :ref:`Button widgets <button_description>`.
+           * ``"type"``: **Mandatory**. The behaviour of the dropdown. One of:
+
+             * ``"textual"``: Shows the name of the selected entry and a push button.
+             * ``"textual_narrow"``: Only shows the name of the selected entry.
+             * ``"pictorial"``: Only shows the icon of the selected entry.
+             * ``"pictorial_menu"``: The shown icon remains always unchanged.
+             * ``"textual_menu"``: The shown text remains always unchanged.
+
+           * ``"datatype"``: **Mandatory**. The data type of the dropdown's entries.
+             Currently only ``"string"`` is supported.
+
+           * ``"entries"``: **Optional**. The entries in the dropdown.
+             An array of tables with the following keys:
+
+             * ``"label"``: **Mandatory**. The text for this entry.
+             * ``"value"``: **Mandatory**. The internal value of this entry.
+             * ``"icon"``: **Optional**. The icon filepath for the entry.
+             * ``"tooltip"``: **Optional**. The entry's tooltip.
+             * ``"select"``: **Optional**. Whether to select this entry (default :const:`false`).
+
+           * ``"on_selected"``: **Optional**. Callback code to run when the user selects an entry.
+
+         * ``"listselect"``: A list of entries from which the user may choose. Properties:
+
+           * ``"type"``: **Optional**. The highlighting mode for the selected entry. One of:
+
+             * ``"plain"``: Highlight the selection's background (default).
+             * ``"check"``: Draw a check mark before the selected item.
+             * ``"dropdown"``: Select entries as soon as the mouse hovers over them.
+
+           * ``"datatype"``: **Mandatory**. The data type of the listselect's entries.
+             Currently only ``"string"`` is supported.
+
+           * ``"entries"``: **Optional**. The entries in the listselect.
+             An array of tables with the following keys:
+
+             * ``"label"``: **Mandatory**. The text for this entry.
+             * ``"value"``: **Mandatory**. The internal value of this entry.
+             * ``"icon"``: **Optional**. The icon filepath for the entry.
+             * ``"tooltip"``: **Optional**. The entry's tooltip.
+             * ``"select"``: **Optional**. Whether to select this entry (default :const:`false`).
+             * ``"indent"``: **Optional**. How many levels to indent the item (default 0).
+
+           * ``"on_selected"``: **Optional**. Callback code to run when the user selects an entry.
+           * ``"on_double_clicked"``: **Optional**.
+             Callback code to run when the user double-clicks on an entry.
 
       Note that event callbacks functions must be provided as raw code in string form.
       During the lifetime of a *toolbar* widget, the Lua Interface used by the game may be reset.
@@ -833,6 +891,58 @@ get_table_box_resizing(lua_State* L,
 	return default_value;
 }
 
+static UI::DropdownType
+get_table_dropdown_type(lua_State* L,
+                        const char* key,
+                        bool mandatory,
+                        UI::DropdownType default_value = UI::DropdownType::kTextual) {
+	lua_getfield(L, -1, key);
+	if (!lua_isnil(L, -1)) {
+		std::string str = luaL_checkstring(L, -1);
+		if (str == "textual") {
+			default_value = UI::DropdownType::kTextual;
+		} else if (str == "textual_narrow") {
+			default_value = UI::DropdownType::kTextualNarrow;
+		} else if (str == "pictorial") {
+			default_value = UI::DropdownType::kPictorial;
+		} else if (str == "pictorial_menu") {
+			default_value = UI::DropdownType::kPictorialMenu;
+		} else if (str == "textual_menu") {
+			default_value = UI::DropdownType::kTextualMenu;
+		} else {
+			report_error(L, "Unknown dropdown type '%s'", str.c_str());
+		}
+	} else if (mandatory) {
+		report_error(L, "Missing dropdown type: %s", key);
+	}
+	lua_pop(L, 1);
+	return default_value;
+}
+
+static UI::ListselectLayout
+get_table_listselect_layout(lua_State* L,
+                        const char* key,
+                        bool mandatory,
+                        UI::ListselectLayout default_value = UI::ListselectLayout::kPlain) {
+	lua_getfield(L, -1, key);
+	if (!lua_isnil(L, -1)) {
+		std::string str = luaL_checkstring(L, -1);
+		if (str == "plain") {
+			default_value = UI::ListselectLayout::kPlain;
+		} else if (str == "check") {
+			default_value = UI::ListselectLayout::kShowCheck;
+		} else if (str == "dropdown") {
+			default_value = UI::ListselectLayout::kDropdown;
+		} else {
+			report_error(L, "Unknown listselect layout '%s'", str.c_str());
+		}
+	} else if (mandatory) {
+		report_error(L, "Missing listselect layout: %s", key);
+	}
+	lua_pop(L, 1);
+	return default_value;
+}
+
 static UI::ButtonStyle
 get_table_button_style(lua_State* L,
                        const char* key,
@@ -902,9 +1012,10 @@ static unsigned get_table_button_box_orientation(lua_State* L,
 	return default_value;
 }
 
-static std::function<void()> create_plugin_action_lambda(lua_State* L, const std::string& cmd) {
+template<typename... Args>
+static std::function<void(Args...)> create_plugin_action_lambda(lua_State* L, const std::string& cmd) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	return [&egbase, cmd]() {  // do not capture L directly
+	return [&egbase, cmd](Args...) {  // do not capture L directly
 		try {
 			egbase.lua().interpret_string(cmd);
 		} catch (const LuaError& e) {
@@ -1230,6 +1341,87 @@ UI::Panel* LuaPanel::do_create_child(lua_State* L, UI::Panel* parent, UI::Box* a
 		}
 		if (std::string on_cancel = get_table_string(L, "on_cancel", false); !on_cancel.empty()) {
 			editbox->cancel.connect(create_plugin_action_lambda(L, on_cancel));
+		}
+
+	} else if (widget_type == "dropdown") {
+		std::string name = get_table_string(L, "name", true);
+		std::string label = get_table_string(L, "label", true);
+		int32_t max_list_items = get_table_int(L, "max_list_items", true);
+		int32_t button_dimension = get_table_int(L, "button_dimension", true);
+		UI::ButtonStyle button_style = get_table_button_style(L, "style", true);
+		UI::DropdownType type = get_table_dropdown_type(L, "type", true);
+		std::string datatype = get_table_string(L, "datatype", true);
+
+		UI::BaseDropdown* dropdown;
+		if (datatype == "string") {
+			UI::Dropdown<std::string>* dd = new UI::Dropdown<std::string>
+					(parent, name, x, y, w, max_list_items, button_dimension, label, type, UI::PanelStyle::kWui, button_style);
+			dropdown = dd;
+
+			lua_getfield(L, -1, "entries");
+			if (!lua_isnil(L, -1)) {
+				luaL_checktype(L, -1, LUA_TTABLE);
+				lua_pushnil(L);
+				while (lua_next(L, -2) != 0) {
+					std::string label = get_table_string(L, "label", true);
+					std::string value = get_table_string(L, "value", true);
+					std::string tooltip = get_table_string(L, "tooltip", false);
+					std::string icon = get_table_string(L, "icon", false);
+					bool select = get_table_boolean(L, "select", false);
+
+					dd->add(label, value, icon.empty() ? nullptr : g_image_cache->get(icon), select, tooltip);
+					lua_pop(L, 1);
+				}
+			}
+			lua_pop(L, 1);
+
+		} else {
+			report_error(L, "Unsupported dropdown datatype '%s'", datatype.c_str());
+		}
+		created_panel = dropdown;
+
+		if (std::string on_selected = get_table_string(L, "on_selected", false); !on_selected.empty()) {
+			dropdown->selected.connect(create_plugin_action_lambda(L, on_selected));
+		}
+
+	} else if (widget_type == "listselect") {
+		std::string name = get_table_string(L, "name", true);
+		UI::ListselectLayout layout = get_table_listselect_layout(L, "layout", false);
+		std::string datatype = get_table_string(L, "datatype", true);
+
+		UI::BaseListselect* listselect;
+		if (datatype == "string") {
+			UI::Listselect<std::string>* ls = new UI::Listselect<std::string>(parent, name, x, y, w, h, UI::PanelStyle::kWui, layout);
+			listselect = ls;
+
+			lua_getfield(L, -1, "entries");
+			if (!lua_isnil(L, -1)) {
+				luaL_checktype(L, -1, LUA_TTABLE);
+				lua_pushnil(L);
+				while (lua_next(L, -2) != 0) {
+					std::string label = get_table_string(L, "label", true);
+					std::string value = get_table_string(L, "value", true);
+					std::string tooltip = get_table_string(L, "tooltip", false);
+					std::string icon = get_table_string(L, "icon", false);
+					bool select = get_table_boolean(L, "select", false);
+					int32_t indent = get_table_int(L, "indent", false);
+
+					ls->add(label, value, icon.empty() ? nullptr : g_image_cache->get(icon), select, tooltip, "", indent);
+					lua_pop(L, 1);
+				}
+			}
+			lua_pop(L, 1);
+
+		} else {
+			report_error(L, "Unsupported listselect datatype '%s'", datatype.c_str());
+		}
+		created_panel = listselect;
+
+		if (std::string on_selected = get_table_string(L, "on_selected", false); !on_selected.empty()) {
+			listselect->selected.connect(create_plugin_action_lambda<uint32_t>(L, on_selected));
+		}
+		if (std::string on_double_clicked = get_table_string(L, "on_double_clicked", false); !on_double_clicked.empty()) {
+			listselect->double_clicked.connect(create_plugin_action_lambda<uint32_t>(L, on_double_clicked));
 		}
 
 	} else if (widget_type == "box") {
@@ -2031,6 +2223,9 @@ Dropdown
 .. class:: Dropdown
 
    This represents a dropdown menu.
+
+   Some attributes and functions are available only for dropdowns with a data type
+   supported by the Lua interface. See :attr:`datatype`.
 */
 const char LuaDropdown::className[] = "Dropdown";
 const MethodType<LuaDropdown> LuaDropdown::Methods[] = {
@@ -2043,14 +2238,35 @@ const MethodType<LuaDropdown> LuaDropdown::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaDropdown> LuaDropdown::Properties[] = {
+   PROP_RO(LuaDropdown, datatype),
    PROP_RO(LuaDropdown, expanded),
    PROP_RO(LuaDropdown, no_of_items),
+   PROP_RO(LuaDropdown, selection),
    {nullptr, nullptr, nullptr},
 };
 
 /*
  * Properties
  */
+
+/* RST
+   .. attribute:: datatype
+
+      .. versionadded:: 1.2
+
+      (RO) The dropdown's datatype as :class:`string` if supported,
+      or ``nil`` for dropdowns with unsupported datatype.
+
+      Currently only ``"string"`` is supported.
+*/
+int LuaDropdown::get_datatype(lua_State* L) {
+	if (dynamic_cast<const UI::Dropdown<std::string>*>(get()) != nullptr) {
+		lua_pushstring(L, "string");
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
 
 /* RST
    .. attribute:: expanded
@@ -2069,6 +2285,25 @@ int LuaDropdown::get_expanded(lua_State* L) {
 */
 int LuaDropdown::get_no_of_items(lua_State* L) {
 	lua_pushinteger(L, get()->size());
+	return 1;
+}
+
+/* RST
+   .. attribute:: selection
+
+      .. versionadded:: 1.2
+
+      (RO) The currently selected entry or ``nil`` if none is selected.
+      For dropdowns with unsupported datatype, this is always ``nil``.
+*/
+int LuaDropdown::get_selection(lua_State* L) {
+	if (!get()->has_selection()) {
+		lua_pushnil(L);
+	} else if (upcast(const UI::Dropdown<std::string>, dd, get()); dd != nullptr) {
+		lua_pushstring(L, dd->get_selected().c_str());
+	} else {
+		lua_pushnil(L);
+	}
 	return 1;
 }
 
@@ -2193,6 +2428,86 @@ int LuaDropdown::select(lua_State* /* L */) {
 	get()->handle_key(true, code);
 	return 0;
 }
+
+/*
+ * C Functions
+ */
+
+/* RST
+Listselect
+----------
+
+.. class:: Listselect
+
+   .. versionadded:: 1.2
+
+   This represents a selection list.
+
+   Some attributes and functions are available only for listselects with a data type
+   supported by the Lua interface. See :attr:`datatype`.
+*/
+const char LuaListselect::className[] = "Listselect";
+const MethodType<LuaListselect> LuaListselect::Methods[] = {
+   {nullptr, nullptr},
+};
+const PropertyType<LuaListselect> LuaListselect::Properties[] = {
+   PROP_RO(LuaListselect, datatype),
+   PROP_RO(LuaListselect, no_of_items),
+   PROP_RO(LuaListselect, selection),
+   {nullptr, nullptr, nullptr},
+};
+
+/*
+ * Properties
+ */
+
+/* RST
+   .. attribute:: datatype
+
+      (RO) The listselect's datatype as :class:`string` if supported,
+      or ``nil`` for listselects with unsupported datatype.
+
+      Currently only ``"string"`` is supported.
+*/
+int LuaListselect::get_datatype(lua_State* L) {
+	if (dynamic_cast<const UI::Listselect<std::string>*>(get()) != nullptr) {
+		lua_pushstring(L, "string");
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+
+/* RST
+   .. attribute:: no_of_items
+
+      (RO) The number of items his listselect has.
+*/
+int LuaListselect::get_no_of_items(lua_State* L) {
+	lua_pushinteger(L, get()->size());
+	return 1;
+}
+
+/* RST
+   .. attribute:: selection
+
+      (RO) The currently selected entry or ``nil`` if none is selected.
+      For listselects with unsupported datatype, this is always ``nil``.
+*/
+int LuaListselect::get_selection(lua_State* L) {
+	if (!get()->has_selection()) {
+		lua_pushnil(L);
+	} else if (upcast(const UI::Listselect<std::string>, dd, get()); dd != nullptr) {
+		lua_pushstring(L, dd->get_selected().c_str());
+	} else {
+		lua_pushnil(L);
+	}
+	return 1;
+}
+
+/*
+ * Lua Functions
+ */
 
 /*
  * C Functions
@@ -2888,6 +3203,10 @@ void luaopen_wlui(lua_State* L) {
 
 	register_class<LuaDropdown>(L, "ui", true);
 	add_parent<LuaDropdown, LuaPanel>(L);
+	lua_pop(L, 1);  // Pop the meta table
+
+	register_class<LuaListselect>(L, "ui", true);
+	add_parent<LuaListselect, LuaPanel>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
 	register_class<LuaTab>(L, "ui", true);
