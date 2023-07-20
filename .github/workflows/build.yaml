@@ -131,7 +131,14 @@ jobs:
           installer:
             - *compile
             - 'data/**'
+            - 'doc/**'
             - 'po/**'
+            # job appimage
+            - 'xdg/org.widelands.Widelands.*'
+            # job macos
+            - 'utils/macos/*'
+            # job windows
+            - 'utils/win32/**'
     - name: Installing dependencies
       if: steps.filter_files.outputs.clang_tidy == 'true'
       run: sh ./.github/scripts/install_deps.sh
