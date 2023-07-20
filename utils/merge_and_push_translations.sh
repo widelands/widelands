@@ -63,11 +63,11 @@ python3 utils/buildcat.py
 undo_oneliner_diffs() {
   # Undo one-liner diffs of pure timestamps with no other content
   set +x
-  for entry in $(git diff --numstat po/ | sed -En 's/^1\t1\t//p'); do
-    if [ -z "$(git diff "$entry" | grep '^[+-][^+-]' | grep -v '^[+-]"POT-Creation-Date:')" ]
-    then
+  git diff --numstat po/ | sed -En 's/^1\t1\t//p' | while IFS= read -r entry; do
+    if ! git diff "$entry" | grep '^[+-][^+-]' | grep -qv '^[+-]"POT-Creation-Date:'
+    then # no other diff line remaining
       echo "Skipping changes to $entry"
-      git checkout $entry
+      git checkout "$entry"
     fi
   done
   set -x
@@ -87,8 +87,7 @@ fi
 tx pull -fa
 
 # Update authors file
-python3 utils/update_authors.py
-if [ $? -eq 0 ] ; then
+if python3 utils/update_authors.py; then
   echo "Updated authors";
 else
   echo "Failed updating authors";
@@ -96,8 +95,7 @@ else
 fi
 
 # Update appdata
-python3 utils/update_appdata.py
-if [ $? -eq 0 ] ; then
+if python3 utils/update_appdata.py; then
   echo "Updated appdata";
 else
   echo "Failed updating appdata";
@@ -105,8 +103,7 @@ else
 fi
 
 # Update statistics
-python3 utils/update_translation_stats.py
-if [ $? -eq 0 ] ; then
+if python3 utils/update_translation_stats.py; then
   echo "Updated translation stats";
 else
   echo "Failed to update translation stats";
