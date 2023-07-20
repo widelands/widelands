@@ -130,12 +130,19 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_title(lua_State* L);
+	int set_title(lua_State* L);
+	int get_enabled(lua_State* L);
+	int set_enabled(lua_State* L);
 
 	/*
 	 * Lua Methods
 	 */
 	int press(lua_State* L);
 	int click(lua_State* L);
+	int set_repeating(lua_State* L);
+	int set_perm_pressed(lua_State* L);
+	int toggle(lua_State* L);
 
 	/*
 	 * C Methods
