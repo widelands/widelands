@@ -1154,7 +1154,7 @@ msgstr "La recol·lectora i caçadora necessita animals per caçar o peix per pe
 #: ../../data/tribes/initialization/amazons/units.lua:1302
 msgctxt "amazons_building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "Els arbres i els camins a les ribes o costes impedeixen que es pugui pescar."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Hunter-
 #. Gatherer's Hut
@@ -1226,7 +1226,7 @@ msgstr "La cabana de l’aiguader necessita aigua de rius o de llacs dins la sev
 #: ../../data/tribes/initialization/amazons/units.lua:1333
 msgctxt "amazons_building"
 msgid "Roads and trees along the shoreline block drawing water."
-msgstr ""
+msgstr "Els arbres i els camins a les ribes o costes impedeixen l'accés a l'aigua."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Rare Tree
 #. Cutter's Hut
@@ -1603,7 +1603,7 @@ msgstr "Construeix transbordadors."
 #: ../../data/tribes/initialization/amazons/units.lua:1609
 msgctxt "amazons_building"
 msgid "Needs water nearby. Be aware ferries carry wares only, no workers."
-msgstr ""
+msgstr "Necessita aigua a prop. Tingueu en compte que els transbordadors només transporten béns, no pas treballadors."
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Ferry Yard, part
 #. 2
@@ -1634,7 +1634,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2189
 msgctxt "building"
 msgid "Roads and trees along the shoreline block access to water."
-msgstr ""
+msgstr "Els arbres i els camins a les ribes o costes bloquen l'accés a l'aigua."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Shipyard
 #: ../../data/tribes/initialization/amazons/units.lua:1619
@@ -1658,7 +1658,7 @@ msgstr "Construeix vaixells per comerciar i per a la colonització per la via ma
 #: ../../data/tribes/initialization/frisians/units.lua:2187
 msgctxt "building"
 msgid "Needs wide open water nearby."
-msgstr ""
+msgstr "Necessita estar a prop d'aigua oberta."
 
 #. TRANSLATORS: Lore helptext for an Amazon building: Construction Site
 #. TRANSLATORS: Lore helptext for an Atlantean building: Construction Site
@@ -4060,7 +4060,7 @@ msgstr "Construïu una casa de criador de peixos a prop de la casa del pescador 
 #: ../../data/tribes/initialization/atlanteans/units.lua:1526
 msgctxt "atlanteans_building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "Els arbres i els camins a les ribes o costes impedeixen que es pugui pescar."
 
 #. TRANSLATORS: Note lore for an Atlantean production site: Fisher's House use
 #. some local fise song as you like
@@ -4959,7 +4959,7 @@ msgstr "Construeix transbordadors."
 #: ../../data/tribes/initialization/frisians/units.lua:2170
 msgctxt "building"
 msgid "Needs water nearby. Be aware ferries carry wares only, no workers."
-msgstr "Necessita aigua a prop. Tingueu en compte que els transbordador només transporten béns, no pas treballadors."
+msgstr "Necessita aigua a prop. Tingueu en compte que els transbordadors només transporten béns, no pas treballadors."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Ferry Yard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1993
@@ -6362,7 +6362,7 @@ msgstr "La cabana del pescador necessita accés a aigua amb peixos dins la seva 
 #: ../../data/tribes/initialization/barbarians/units.lua:1193
 msgctxt "building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "Els arbres i els camins a les ribes o costes impedeixen que es pugui pescar."
 
 #. TRANSLATORS: Performance helptext for production site: Fisher's Hut
 #: ../../data/tribes/initialization/barbarians/units.lua:1196
@@ -9899,7 +9899,7 @@ msgid ""
 "smithy. In combination with a wooden spear, it is the equipment to fit out "
 "young soldiers. Helmets are also used in training camps – together with food"
 " – to train soldiers from health level 0 to level 1."
-msgstr ""
+msgstr "Un casc és l’eina bàsica per protegir els soldats. El produeix el taller d’armadures. En combinació amb una llança de fusta, és l’equipament necessari per reclutar un soldat. Els cascos també s’utilitzen en camps d’entrenament, juntament amb menjar, per entrenar el nivell de salut dels soldats de nivell 0 a nivell 1."
 
 #. TRANSLATORS: Helptext for an Empire ware: Armor
 #: ../../data/tribes/initialization/empire/units.lua:569
@@ -10443,7 +10443,7 @@ msgstr "La casa del pescador necessita accés a aigua amb peixos dins la seva à
 #: ../../data/tribes/initialization/empire/units.lua:1316
 msgctxt "empire_building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "Els arbres i els camins a les ribes o costes impedeixen que es pugui pescar."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -13748,7 +13748,7 @@ msgstr "La casa del pescador necessita accés a aigua amb peixos dins la seva à
 #: ../../data/tribes/initialization/frisians/units.lua:1619
 msgctxt "frisians_building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "Els arbres i els camins a les ribes o costes impedeixen que es pugui pescar."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Fisher's
 #. House
@@ -14196,7 +14196,7 @@ msgid ""
 "If all needed wares are delivered in time, this building can produce one "
 "broadsword in %1$s on average, one double-edged sword in %2$s on average and"
 " one golden helmet in %3$s on average."
-msgstr ""
+msgstr "Si s'entreguen tots els béns necessaris a temps, aquest edifici pot produir un sabre cada %1$s de mitjana, una espasa de doble fil cada %2$s de mitjana i un casc daurat cada %3$s de mitjana."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Sewing Room
 #: ../../data/tribes/initialization/frisians/units.lua:1829
