@@ -97,7 +97,6 @@ private:
 	uint32_t big_step_button_width_;
 	uint32_t buttons_width_;
 	uint32_t padding_;
-	uint32_t number_of_paddings_;
 };
 }  // namespace UI
 
