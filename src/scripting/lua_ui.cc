@@ -1828,12 +1828,9 @@ Button
 */
 const char LuaButton::className[] = "Button";
 const MethodType<LuaButton> LuaButton::Methods[] = {
-   METHOD(LuaButton, press),
-   METHOD(LuaButton, click),
-   METHOD(LuaButton, set_repeating),
-   METHOD(LuaButton, set_perm_pressed),
-   METHOD(LuaButton, toggle),
-   {nullptr, nullptr},
+   METHOD(LuaButton, press),         METHOD(LuaButton, click),
+   METHOD(LuaButton, set_repeating), METHOD(LuaButton, set_perm_pressed),
+   METHOD(LuaButton, toggle),        {nullptr, nullptr},
 };
 const PropertyType<LuaButton> LuaButton::Properties[] = {
    PROP_RW(LuaButton, title),
