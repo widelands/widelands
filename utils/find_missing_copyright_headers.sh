@@ -43,7 +43,7 @@ do
     printf "\nWrong copyright header in %s\n" "$file"
     ((++err))
   fi
-done < <(find "${1:-.}" '(' -name '*.cc' -or -name '*.h' ')' -not -path '*third_party*')
+done < <(find "${1:-.}" '(' -name '*.cc' -or -name '*.h' ')' -not -path '*third_party*' -print -or -name 'third_party' -prune )
 
 echo
 echo
