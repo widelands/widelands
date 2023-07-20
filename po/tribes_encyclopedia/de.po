@@ -1171,7 +1171,7 @@ msgstr "Die Jagd- und Sammelhütte braucht Tiere oder Fische zum Jagen oder Fang
 #: ../../data/tribes/initialization/amazons/units.lua:1302
 msgctxt "amazons_building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "Straßen und Bäume entlang der Küste blockieren den Fischfang."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Hunter-
 #. Gatherer's Hut
@@ -1243,7 +1243,7 @@ msgstr "Die Wassersammelhütte braucht offenes Gewässer innerhalb ihres Arbeits
 #: ../../data/tribes/initialization/amazons/units.lua:1333
 msgctxt "amazons_building"
 msgid "Roads and trees along the shoreline block drawing water."
-msgstr ""
+msgstr "Straßen und Bäume entlang des Ufers blockieren das Schöpfen von Wasser."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Rare Tree
 #. Cutter's Hut
@@ -1620,7 +1620,7 @@ msgstr "Baut Fähren."
 #: ../../data/tribes/initialization/amazons/units.lua:1609
 msgctxt "amazons_building"
 msgid "Needs water nearby. Be aware ferries carry wares only, no workers."
-msgstr ""
+msgstr "Benötigt Zugang zum Wasser. Vorsicht: Fähren befördern nur Waren, keine Arbeiter."
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Ferry Yard, part
 #. 2
@@ -1651,7 +1651,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2189
 msgctxt "building"
 msgid "Roads and trees along the shoreline block access to water."
-msgstr ""
+msgstr "Straßen und Bäume entlang der Küste blockieren den Zugang zum Wasser."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Shipyard
 #: ../../data/tribes/initialization/amazons/units.lua:1619
@@ -1675,7 +1675,7 @@ msgstr "Baut Schiffe zur Kolonisierung anderer Länder und zum Warentransport zw
 #: ../../data/tribes/initialization/frisians/units.lua:2187
 msgctxt "building"
 msgid "Needs wide open water nearby."
-msgstr ""
+msgstr "Braucht weites offenes Gewässer in der Nähe."
 
 #. TRANSLATORS: Lore helptext for an Amazon building: Construction Site
 #. TRANSLATORS: Lore helptext for an Atlantean building: Construction Site
@@ -4077,7 +4077,7 @@ msgstr "Baue ein Fischzüchterhaus in der Nähe eines Fischerhauses, um sicherzu
 #: ../../data/tribes/initialization/atlanteans/units.lua:1526
 msgctxt "atlanteans_building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "Straßen und Bäume entlang der Küste blockieren den Fischfang."
 
 #. TRANSLATORS: Note lore for an Atlantean production site: Fisher's House use
 #. some local fise song as you like
@@ -6379,7 +6379,7 @@ msgstr "Die Fischerhütte braucht Wasser mit Fischen innerhalb ihres Arbeitsbere
 #: ../../data/tribes/initialization/barbarians/units.lua:1193
 msgctxt "building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "Straßen und Bäume entlang der Küste blockieren den Fischfang."
 
 #. TRANSLATORS: Performance helptext for production site: Fisher's Hut
 #: ../../data/tribes/initialization/barbarians/units.lua:1196
@@ -10460,7 +10460,7 @@ msgstr "Das Fischerhaus braucht Wasser mit Fischen innerhalb seines Arbeitsberei
 #: ../../data/tribes/initialization/empire/units.lua:1316
 msgctxt "empire_building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "Straßen und Bäume entlang der Küste blockieren den Fischfang."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -13765,7 +13765,7 @@ msgstr "Das Fischerhaus braucht Wasser mit Fischen innerhalb seines Arbeitsberei
 #: ../../data/tribes/initialization/frisians/units.lua:1619
 msgctxt "frisians_building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "Straßen und Bäume entlang der Küste blockieren den Fischfang."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Fisher's
 #. House
