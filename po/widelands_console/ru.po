@@ -6,7 +6,7 @@
 # Anton Khabarov <2233009@gmail.com>, 2016,2018
 # nskdmitry, 2021-2022
 # GunChleoc, 2020
-# Blueberryy <igory.ygr200@gmail.com>, 2021
+# berry <igory.ygr200@gmail.com>, 2021
 # Vasiliy Anosov <basil.snowman@gmail.com>, 2021
 # Viktor Skachkov <awsswa59@gmail.com>, 2018,2020
 # Yuriy Sokolov <lention@mail.ru>, 2015,2022-2023
