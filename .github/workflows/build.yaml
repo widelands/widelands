@@ -494,6 +494,12 @@ jobs:
         name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} Linux AppImage
         path: ${{ github.workspace }}/Widelands-${{ env.VERSION }}-x86_64.AppImage
 
+  # Dummy check for PRs that all required status checks have either passed or were skipped
+  # (see https://github.com/actions/runner/issues/952 and https://github.com/orgs/community/discussions/9141)
+  summary:
+    name: CI Results Summary
+    needs: [testsuite, windows, macos, appimage]  # We do not require MSVC due to frequent unrelated runner failures
+
   dev_release:
     name: Automated development pre-release
     if: ${{ github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' && always() }}
