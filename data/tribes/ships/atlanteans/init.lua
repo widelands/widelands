@@ -40,15 +40,19 @@
 --    **heal_per_second**: The number of hitpoints the ship heals per second when in a dock.
 --
 --    **animations**: A table containing all file animations for this ship.
---    Ships have an "idle", a "sinking" and a directional "sail" animation.
+--    Ships have two sets of animations: One for transport ships and one for warships.
+--    Transport ships have an "idle", a "sinking", and a directional "sail" animation.
+--    Warships' animations are called "warship", "sinking_warship", and "sail_warship" respectively;
+--    they additionally have battle animations for attacker and defender in west and east positions
+--    called "(atk|eva)_(ok|fail)_(w|e)".
 --    Animations can either be defined as file animations in this table or as spritesheet animations
 --    as defined in table ``spritesheets``. A mixture of the two animation formats is allowed.
 --    See :doc:`animations` for a detailed description of the animation format.
 --
 --    **spritesheets**: A table containing all spritesheet animations for this ship.
---    Ships have an "idle", a "sinking" and a directional "sail" animation.
 --    Animations can either be defined as spritesheet animations in this table or as file animations
 --    as defined in table ``animations``. A mixture of the two animation formats is allowed.
+--    See the description for ``animations`` for a list of all ship animations.
 --    See :doc:`animations` for a detailed description of the animation format.
 --
 --    **names**: A list of strings with ship names presented to the user - be creative :)
