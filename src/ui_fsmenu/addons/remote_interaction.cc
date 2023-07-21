@@ -133,6 +133,17 @@ void CommentRow::update_edit_enabled() {
 	layout();
 }
 
+void CommentRow::layout() {
+	UI::Box::layout();
+	if (layouting_) {
+		return;
+	}
+	// Prevent stack overflow through recursive call of layout()
+	layouting_ = true;
+	text_.set_desired_size(0, 0);
+	layouting_ = false;
+}
+
 /* CommentEditor implementation */
 
 CommentEditor::CommentEditor(AddOnsCtrl& ctrl,
