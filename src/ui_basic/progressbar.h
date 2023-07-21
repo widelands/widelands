@@ -49,17 +49,20 @@ public:
 	            int32_t h,
 	            uint32_t orientation);
 
-	uint32_t get_state() const {
+	[[nodiscard]] uint32_t get_state() const {
 		return state_;
 	}
 	void set_state(uint32_t);
-	uint32_t get_total() const {
+	[[nodiscard]] uint32_t get_total() const {
 		return total_;
 	}
 	void set_total(uint32_t);
 
 	void set_show_percent(bool p) {
 		show_percent_ = p;
+	}
+	[[nodiscard]] bool get_show_percent() const {
+		return show_percent_;
 	}
 
 protected:

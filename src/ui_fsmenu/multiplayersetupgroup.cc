@@ -641,6 +641,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	}
 
 	void force_new_dimensions(uint32_t height) {
+		number_.set_desired_size(height, height);
 		player_.set_desired_size(height, height);
 		type_dropdown_.set_desired_size(height, height);
 		tribes_dropdown_.set_desired_size(height, height);
@@ -715,7 +716,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const launchgame,
 	clientbox_.add_space(3 * kPadding);
 	clientbox_.set_scrolling(true);
 
-	add(&clientbox_);
+	add(&clientbox_, Resizing::kFullSize);
 	add_space(8 * kPadding);
 	add(&playerbox_, Resizing::kExpandBoth);
 	playerbox_.add(&players_, Resizing::kAlign, UI::Align::kCenter);
@@ -798,13 +799,11 @@ void MultiPlayerSetupGroup::draw(RenderTarget& dst) {
 }
 
 void MultiPlayerSetupGroup::force_new_dimensions(uint32_t max_width,
-                                                 uint32_t max_height,
                                                  uint32_t standard_element_height) {
 	buth_ = standard_element_height;
-	clientbox_.set_min_desired_breadth(max_width / 3);
-	clientbox_.set_max_size(max_width / 3, max_height);
-	playerbox_.set_max_size(max_width / 2, max_height);
-	scrollable_playerbox_.set_max_size(max_width / 2, max_height - players_.get_h() - 4 * kPadding);
+	clientbox_.set_desired_size(max_width / 3, 0);
+	playerbox_.set_desired_size(0, 0);
+	scrollable_playerbox_.set_desired_size(0, 0);
 
 	for (auto& multiPlayerClientGroup : multi_player_client_groups_) {
 		multiPlayerClientGroup->force_new_dimensions(standard_element_height);
