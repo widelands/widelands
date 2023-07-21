@@ -841,7 +841,7 @@ void RemoteInteractionWindow::layout() {
 		admin_action_.set_pos(Vector2i(
 		   login_button_.get_x() - admin_action_.get_w() - kRowButtonSpacing, login_button_.get_y()));
 
-		box_comment_rows_.set_desired_size(0,0);
+		box_comment_rows_.set_desired_size(0, 0);
 	}
 	UI::Window::layout();
 }
