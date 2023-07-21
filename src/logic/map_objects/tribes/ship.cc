@@ -1350,7 +1350,7 @@ void Ship::battle_update(Game& game) {
 		molog(game.get_gametime(), "[battle] Moving towards enemy");
 		// Move in small steps to allow for defender position change.
 		start_task_movepath(
-		   game, path, descr().get_sail_anims(), false, std::min<unsigned>(path.get_nsteps(), 3));
+		   game, path, descr().get_sail_anims(), true, std::min<unsigned>(path.get_nsteps(), 3));
 		return;
 	}
 
