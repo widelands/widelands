@@ -49,7 +49,6 @@ public:
 	           const size_t& index);
 
 	void update_edit_enabled();
-	void layout() override;
 
 private:
 	AddOnsCtrl& ctrl_;
@@ -142,7 +141,6 @@ private:
 	UI::TabPanel tabs_;
 	UI::Box box_comments_, box_comment_rows_, box_screenies_, box_screenies_buttons_, box_votes_,
 	   voting_stats_;
-	UI::Panel box_comment_rows_placeholder_;
 
 	UI::MultilineTextarea comments_header_;
 	std::list<std::unique_ptr<CommentRow>> comment_rows_;
