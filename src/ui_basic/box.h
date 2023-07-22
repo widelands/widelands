@@ -65,7 +65,7 @@ struct Box : public Panel {
 	void set_min_desired_breadth(uint32_t min);
 	void set_inner_spacing(uint32_t size);
 	/// Sets the maximum dimensions and calls set_desired_size()
-	void set_max_size(int w, int h);
+	virtual void set_max_size(int w, int h);
 
 	// Forget all our entries. Does not delete or even remove them.
 	void clear() {

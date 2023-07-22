@@ -269,6 +269,7 @@ public:
 	[[nodiscard]] Panel* get_last_child() {
 		return last_child_;
 	}
+	Panel* find_child_by_name(const std::string& name, bool recurse);
 
 	void move_to_top(bool on_top_of_equal_z = true);
 	[[nodiscard]] virtual ZOrder get_z() const {

@@ -118,7 +118,7 @@ void MapDetails::layout() {
 	const int full_height = descr_.get_h() + minimap_icon_.get_h();
 	const int descr_height = main_box_.get_h() - name_label_.get_h() - padding_;
 	descr_box_.set_force_scrolling(full_height > descr_height);
-	descr_box_.set_size(main_box_.get_w(), descr_height);
+	descr_box_.set_desired_size(0, 0);
 }
 
 bool MapDetails::update(const MapData& mapdata, bool localize_mapname, bool render_minimap) {

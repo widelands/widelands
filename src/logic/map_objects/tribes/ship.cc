@@ -894,9 +894,12 @@ void Ship::warship_soldier_callback(Game& game,
                                     Worker* worker,
                                     PlayerImmovable& immovable) {
 	Warehouse& warehouse = dynamic_cast<Warehouse&>(immovable);
-	Ship* ship = warehouse.get_portdock()->find_ship_for_warship_request(game, req);
+	PortDock* dock = warehouse.get_portdock();
+	Ship* ship = dock->find_ship_for_warship_request(game, req);
 
-	if (ship == nullptr) {
+	if (ship == nullptr || ship->get_ship_type() != ShipType::kWarship ||
+	    ship->get_destination_port(game) != dock ||
+	    ship->get_position().field->get_immovable() != dock) {
 		verb_log_info_time(game.get_gametime(), "%s %u missed his assigned warship at dock %s",
 		                   worker->descr().name().c_str(), worker->serial(),
 		                   warehouse.get_warehouse_name().c_str());
@@ -905,10 +908,8 @@ void Ship::warship_soldier_callback(Game& game,
 	}
 
 	assert(ship->get_owner() == warehouse.get_owner());
-	assert(ship->get_ship_type() == ShipType::kWarship);
-
-	ship->molog(game.get_gametime(), "%s %u embarked on warship", worker->descr().name().c_str(),
-	            worker->serial());
+	ship->molog(game.get_gametime(), "%s %u embarked on warship %s", worker->descr().name().c_str(),
+	            worker->serial(), ship->get_shipname().c_str());
 
 	worker->set_location(nullptr);
 	worker->start_task_shipping(game, nullptr);
