@@ -190,7 +190,8 @@ ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
 	assign_directional_animation(&sail_anims_transport_, "sail");
 	assign_directional_animation(&sail_anims_warship_, "sail_warship");
 
-	for (const char* anim : {"atk_ok_w", "atk_fail_w", "eva_ok_w", "eva_fail_w", "atk_ok_e", "atk_fail_e", "eva_ok_e", "eva_fail_e"}) {
+	for (const char* anim : {"idle", "warship", "sinking", "sinking_warship",
+			"atk_ok_w", "atk_fail_w", "eva_ok_w", "eva_fail_w", "atk_ok_e", "atk_fail_e", "eva_ok_e", "eva_fail_e"}) {
 		if (!is_animation_known(anim)) {
 			// NOCOM make this a GameDataError
 			log_err("Ship %s has no %s anim", name().c_str(), anim);
@@ -512,16 +513,10 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 		break;
 	case ShipStates::kExpeditionColonizing:
 		break;
-	case ShipStates::kSinkRequest: {
-		std::string sink_anim = ship_type_ == ShipType::kWarship ? "sinking_warship" : "sinking";
-		if (descr().is_animation_known(sink_anim)) {
-			ship_state_ = ShipStates::kSinkAnimation;
-			start_task_idle(game, descr().get_animation(sink_anim, this), kSinkAnimationDuration);
-			return;
-		}
-		log_warn_time(game.get_gametime(), "Oh no... this ship has no sinking animation :(!\n");
-		FALLS_THROUGH;
-	}
+	case ShipStates::kSinkRequest:
+		ship_state_ = ShipStates::kSinkAnimation;
+		start_task_idle(game, descr().get_animation(ship_type_ == ShipType::kWarship ? "sinking_warship" : "sinking", this), kSinkAnimationDuration);
+		return;
 	case ShipStates::kSinkAnimation:
 		// The sink animation has been played, so finally remove the ship from the map
 		pop_task(game);
