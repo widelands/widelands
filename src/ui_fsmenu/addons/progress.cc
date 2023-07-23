@@ -173,7 +173,7 @@ create_hangup_function(UI::Panel& parent, UI::WindowStyle style, AddOns::NetAddo
 	const uint32_t id = ++fn_id_counter_;
 
 	return [id, &parent, style, &net_addons](uint32_t elapsed, bool hang_is_over) {
-		constexpr uint32_t kTimeout = 5000;
+		constexpr uint32_t kTimeout = 10000;
 		if (!hang_is_over && elapsed < kTimeout) {
 			return;
 		}

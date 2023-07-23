@@ -337,7 +337,7 @@ void cleanup_abandoned_hung_threads() {
 	std::cout << "FATAL: Unable to clean up " << living_async_wrappers.size()
 	          << " hung network threads, killing Widelands.\n";
 
-	// TODO(Nordfriese): There must be a better way to do interrupt a blocked read() call…
+	// TODO(Nordfriese): There must be a better way to interrupt a blocked read() call...
 	std::terminate();
 }
 
@@ -377,6 +377,18 @@ void NetAddons::init(std::string username, std::string password) {
 	if ((client_socket_ = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
 		throw WLWarning("", "Unable to create socket");
 	}
+
+	constexpr uint32_t kTimeout = 5;
+#ifdef _WIN32
+	DWORD timeout = kTimeout * 1000;
+#else
+	struct timeval timeout;
+	timeout.tv_sec = kTimeout;
+#endif
+	// Set timeout of read()
+	setsockopt(client_socket_, SOL_SOCKET, SO_RCVTIMEO, &timeout, sizeof(timeout));
+	// Set timeout of write()
+	setsockopt(client_socket_, SOL_SOCKET, SO_SNDTIMEO, &timeout, sizeof(timeout));
 
 	const std::string target_ip = get_config_string("addon_server_ip", "widelands.org");
 	const int target_port = get_config_int("addon_server_port", 7388);
