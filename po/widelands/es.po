@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-17 03:10+0000\n"
+"POT-Creation-Date: 2023-07-20 02:40+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020-2023\n"
 "Language-Team: Spanish (http://app.transifex.com/widelands/widelands/language/es/)\n"
@@ -126,7 +126,7 @@ msgstr "%1$s, %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: X hours and Y minutes
 #: ../../data/scripting/richtext.lua:705 ../../src/base/i18n.cc:412
-#: ../../src/ui_basic/spinbox.cc:486
+#: ../../src/ui_basic/spinbox.cc:484
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s y %2$s"
@@ -481,8 +481,8 @@ msgstr "Añadir o remover espacios para puertos"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:359
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:711
-#: ../../src/ui_fsmenu/singleplayersetupbox.cc:169
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:712
+#: ../../src/ui_fsmenu/singleplayersetupbox.cc:171
 msgid "Players"
 msgstr "Jugadores"
 
@@ -654,7 +654,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:480
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:486
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
-#: ../../src/ui_fsmenu/launch_mpg.cc:309 ../../src/ui_fsmenu/main.cc:257
+#: ../../src/ui_fsmenu/launch_mpg.cc:306 ../../src/ui_fsmenu/main.cc:257
 #: ../../src/wlapplication.cc:1650
 msgid "Error"
 msgstr "Error"
@@ -1061,7 +1061,7 @@ msgstr "Mostrar"
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:700
 #: ../../src/ui_fsmenu/helpwindow.cc:56
 #: ../../src/ui_fsmenu/keyboard_options.cc:68
-#: ../../src/ui_fsmenu/keyboard_options.cc:232 ../../src/ui_fsmenu/menu.cc:165
+#: ../../src/ui_fsmenu/keyboard_options.cc:232 ../../src/ui_fsmenu/menu.cc:167
 #: ../../src/ui_fsmenu/options.cc:92
 #: ../../src/ui_fsmenu/training_wheel_options.cc:154
 #: ../../src/wui/game_main_menu_save_game.cc:100
@@ -1314,7 +1314,7 @@ msgstr "Montañas:"
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:193
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:500
-#: ../../src/ui_basic/spinbox.cc:504
+#: ../../src/ui_basic/spinbox.cc:502
 #, c-format
 msgid "%i %%"
 msgstr "%i %%"
@@ -3056,11 +3056,11 @@ msgid ""
 "not handle the file."
 msgstr "/me comprobó el archivo recibido. Aunque la verificación del md5 fue exitosa, no puedo manejar el archivo."
 
-#: ../../src/network/gameclient.cc:1292
+#: ../../src/network/gameclient.cc:1296
 msgid "Disconnected"
 msgstr "Desconectado"
 
-#: ../../src/network/gameclient.cc:1293
+#: ../../src/network/gameclient.cc:1297
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -3590,11 +3590,11 @@ msgstr "Widelands no pudo usar la red local. Quizás otro proceso está ejecutan
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
-#: ../../src/scripting/lua_ui.cc:656
+#: ../../src/scripting/lua_ui.cc:912
 msgid "Plugin Error"
 msgstr ""
 
-#: ../../src/scripting/lua_ui.cc:657
+#: ../../src/scripting/lua_ui.cc:913
 #, c-format
 msgid ""
 "Error when running plugin:\n"
@@ -3670,18 +3670,18 @@ msgstr ""
 msgid "Loading…"
 msgstr "Cargando…"
 
-#: ../../src/ui_basic/spinbox.cc:155 ../../src/ui_basic/spinbox.cc:168
+#: ../../src/ui_basic/spinbox.cc:153 ../../src/ui_basic/spinbox.cc:166
 #, c-format
 msgid "Decrease the value by %s"
 msgstr ""
 
-#: ../../src/ui_basic/spinbox.cc:160 ../../src/ui_basic/spinbox.cc:172
+#: ../../src/ui_basic/spinbox.cc:158 ../../src/ui_basic/spinbox.cc:170
 #, c-format
 msgid "Increase the value by %s"
 msgstr ""
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:473 ../../src/ui_basic/spinbox.cc:490
+#: ../../src/ui_basic/spinbox.cc:471 ../../src/ui_basic/spinbox.cc:488
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -3690,7 +3690,7 @@ msgstr[1] "%d minutos"
 msgstr[2] "%d minutos"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:479 ../../src/ui_basic/spinbox.cc:488
+#: ../../src/ui_basic/spinbox.cc:477 ../../src/ui_basic/spinbox.cc:486
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
@@ -3699,7 +3699,7 @@ msgstr[1] "%d horas"
 msgstr[2] "%d horas"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:495
+#: ../../src/ui_basic/spinbox.cc:493
 #, c-format
 msgid "%d week"
 msgid_plural "%d weeks"
@@ -3708,7 +3708,7 @@ msgstr[1] ""
 msgstr[2] ""
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:498
+#: ../../src/ui_basic/spinbox.cc:496
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -3717,7 +3717,7 @@ msgstr[1] "%d píxeles"
 msgstr[2] "%d píxeles"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:501
+#: ../../src/ui_basic/spinbox.cc:499
 #, c-format
 msgid "%d field"
 msgid_plural "%d fields"
@@ -5523,74 +5523,74 @@ msgstr "Cambiar partida guardada..."
 msgid "Start game"
 msgstr "Comenzar partida"
 
-#: ../../src/ui_fsmenu/launch_game.cc:269
+#: ../../src/ui_fsmenu/launch_game.cc:270
 msgid "Show fewer options"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:269
+#: ../../src/ui_fsmenu/launch_game.cc:270
 msgid "Show more options"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:284
+#: ../../src/ui_fsmenu/launch_game.cc:285
 msgid "The relations between players are set by the scenario"
 msgstr "Las relaciones entre los jugadores son establecidas por el escenario."
 
-#: ../../src/ui_fsmenu/launch_game.cc:286
+#: ../../src/ui_fsmenu/launch_game.cc:287
 msgid "The relations between players are set by the saved game"
 msgstr "Las relaciones entre los jugadores son establecidas por la partida guardada."
 
-#: ../../src/ui_fsmenu/launch_game.cc:288
+#: ../../src/ui_fsmenu/launch_game.cc:289
 msgid "The selected win condition does not allow peaceful matches"
 msgstr "La condición de victoria seleccionada no permite partidas pacíficas"
 
-#: ../../src/ui_fsmenu/launch_game.cc:290
+#: ../../src/ui_fsmenu/launch_game.cc:291
 msgid "Forbid fighting between players"
 msgstr "Prohibir la lucha entre jugadores"
 
-#: ../../src/ui_fsmenu/launch_game.cc:320
+#: ../../src/ui_fsmenu/launch_game.cc:321
 msgid "All selected starting conditions ignore the map’s starting positions"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:326
+#: ../../src/ui_fsmenu/launch_game.cc:327
 msgid "The starting positions are set by the scenario"
 msgstr "Las posiciones de inicio se ajustan con el escenario"
 
-#: ../../src/ui_fsmenu/launch_game.cc:328
+#: ../../src/ui_fsmenu/launch_game.cc:329
 msgid "The starting positions are set by the saved game"
 msgstr "Las posiciones de inicio se ajustan con la partida grabada"
 
-#: ../../src/ui_fsmenu/launch_game.cc:331
+#: ../../src/ui_fsmenu/launch_game.cc:332
 msgid ""
 "Allow the players to choose their own starting positions at the beginning of"
 " the game"
 msgstr "Permitir a los jugadores elegir su propia posición de inicio al principio de la partida"
 
-#: ../../src/ui_fsmenu/launch_game.cc:350
+#: ../../src/ui_fsmenu/launch_game.cc:351
 msgid "Player vision is set by the scenario"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:352
+#: ../../src/ui_fsmenu/launch_game.cc:353
 msgid "Player vision is set by the saved game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:354
+#: ../../src/ui_fsmenu/launch_game.cc:355
 msgid "Give all players permanent vision of the entire map"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:373
+#: ../../src/ui_fsmenu/launch_game.cc:374
 msgid "Player relations are set by the scenario"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:375
+#: ../../src/ui_fsmenu/launch_game.cc:376
 msgid "Player relations are set by the saved game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:377
+#: ../../src/ui_fsmenu/launch_game.cc:378
 msgid "Disallow players to change their alliances during the game"
 msgstr ""
 
 #. * TRANSLATORS: This is a map tag
-#: ../../src/ui_fsmenu/launch_game.cc:385
+#: ../../src/ui_fsmenu/launch_game.cc:386
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:512
 #: ../../src/ui_fsmenu/scenariodetails.cc:47
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:283
@@ -5598,21 +5598,21 @@ msgstr ""
 msgid "Scenario"
 msgstr "Escenario"
 
-#: ../../src/ui_fsmenu/launch_game.cc:386
+#: ../../src/ui_fsmenu/launch_game.cc:387
 msgid "Win condition is set through the scenario"
 msgstr "Condición de victoria asignada para el escenario"
 
-#: ../../src/ui_fsmenu/launch_game.cc:392
+#: ../../src/ui_fsmenu/launch_game.cc:393
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:516
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:287
 msgid "Saved Game"
 msgstr "Partida Guardada"
 
-#: ../../src/ui_fsmenu/launch_game.cc:394
+#: ../../src/ui_fsmenu/launch_game.cc:395
 msgid "The game is a saved game – the win condition was set before."
 msgstr "Esta es una partida guardada – la condición de victoria ya fue establecida."
 
-#: ../../src/ui_fsmenu/launch_game.cc:467
+#: ../../src/ui_fsmenu/launch_game.cc:468
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
@@ -5631,22 +5631,22 @@ msgstr "Por favor selecciona un mapa o una partida guardada."
 msgid "The host has not yet selected a map or saved game."
 msgstr "El servidor aún no ha seleccionado un mapa o una partida guardada."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:203
+#: ../../src/ui_fsmenu/launch_mpg.cc:200
 msgid "Saved Game is Directory"
 msgstr "Partida Guardada es un Directorio"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:204
+#: ../../src/ui_fsmenu/launch_mpg.cc:201
 msgid ""
 "WARNING:\n"
 "The saved game you selected is a directory. This happens if you set the option ‘nozip’ to true or manually unzipped the saved game.\n"
 "Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
 msgstr "ADVERTENCIA:\nLa partida guardada que has seleccionado es un directorio. Esto ocurre si la opción ‘nozip’ está activada o la partida guardada se descomprimió de forma manual.\nWidelands no puede transferir estructuras de directorios a los clientes, por favor elige otra partida guardada o comprime en zip el contenido del directorio."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:223 ../../src/ui_fsmenu/launch_spg.cc:134
+#: ../../src/ui_fsmenu/launch_mpg.cc:220 ../../src/ui_fsmenu/launch_spg.cc:134
 msgid "File not found"
 msgstr "Archivo no encontrado"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:224 ../../src/ui_fsmenu/launch_spg.cc:135
+#: ../../src/ui_fsmenu/launch_mpg.cc:221 ../../src/ui_fsmenu/launch_spg.cc:135
 #, c-format
 msgid ""
 "Widelands tried to start a game with a file that could not be found at the given path.\n"
@@ -5654,19 +5654,19 @@ msgid ""
 "If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
 msgstr "Widelands intentó iniciar una partida con un archivo que no pudo encontrarse en la ruta indicada.\nEl archivo era: %s\nSi esto sucede en una partida en red, el anfitrión puede haber seleccionado un archivo que no posees. Normalmente un archivo así te lo debería enviar el anfitrión, ¿puede ser que la descarga aún no haya finalizado?"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:265
+#: ../../src/ui_fsmenu/launch_mpg.cc:262
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
 msgstr "El archivo seleccionado no se puede encontrar. Si no se transfiere automáticamente, por favor informa al anfitrión sobre este problema."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:311
+#: ../../src/ui_fsmenu/launch_mpg.cc:308
 #, c-format
 msgid "Unable to load the win condition script file ‘%s’."
 msgstr ""
 
 #. * TRANSLATORS: This is a heading for a help window
-#: ../../src/ui_fsmenu/launch_mpg.cc:438
+#: ../../src/ui_fsmenu/launch_mpg.cc:435
 msgid "Multiplayer Game Setup"
 msgstr "Configuración de Partida Multijugador"
 
@@ -5984,11 +5984,11 @@ msgstr "Detalles del escenario"
 msgid "Hint: %s"
 msgstr "Indicio: %s"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:171
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:170
 msgid "No map selected"
 msgstr "Ningún mapa seleccionado"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:216
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:213
 msgid "(no map)"
 msgstr "(sin mapa)"
 
@@ -6052,16 +6052,16 @@ msgstr "No especificado"
 msgid "The map does not specify whether it is balanced"
 msgstr ""
 
-#: ../../src/ui_fsmenu/menu.cc:128 ../../src/wui/helpwindow.cc:69
+#: ../../src/ui_fsmenu/menu.cc:130 ../../src/wui/helpwindow.cc:69
 msgid "Back"
 msgstr "Atrás"
 
-#: ../../src/ui_fsmenu/menu.cc:291
+#: ../../src/ui_fsmenu/menu.cc:293
 #, c-format
 msgid "Back to ‘%s’"
 msgstr ""
 
-#: ../../src/ui_fsmenu/menu.cc:300
+#: ../../src/ui_fsmenu/menu.cc:302
 msgid "Close window"
 msgstr "Cerrar ventana"
 
@@ -6336,7 +6336,7 @@ msgstr "Sin Equipo"
 msgid "Team %d"
 msgstr "Equipo %d"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:701
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:702
 msgid "Clients"
 msgstr "Clientes"
 
