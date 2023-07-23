@@ -379,8 +379,7 @@ void Box::add_inf_space() {
  * Checks whether the given item is currently visible.
  * Spaces are always visible.
  */
-bool Box::is_item_visible(uint32_t idx)
-{
+bool Box::is_item_visible(uint32_t idx) {
 	return items_[idx].type == Item::ItemSpace || items_[idx].u.panel.panel->is_visible();
 }
 
