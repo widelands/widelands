@@ -134,15 +134,13 @@ void CommentRow::update_edit_enabled() {
 }
 
 void CommentRow::layout() {
+	UI::Box::layout();
 	if (layouting_) {
 		return;
 	}
+	// Prevent stack overflow through recursive call of layout()
 	layouting_ = true;
-
-	text_.set_visible(false);  // Prevent the text from taking up all available space
-	UI::Box::layout();
-	text_.set_visible(true);
-
+	text_.set_desired_size(0, 0);
 	layouting_ = false;
 }
 
@@ -629,8 +627,6 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
      box_votes_(&tabs_, UI::PanelStyle::kFsMenu, "votes_box", 0, 0, UI::Box::Vertical),
      voting_stats_(
         &box_votes_, UI::PanelStyle::kFsMenu, "voting_stats_box", 0, 0, UI::Box::Horizontal),
-     box_comment_rows_placeholder_(
-        &box_comments_, UI::PanelStyle::kFsMenu, "comment_rows_placeholder", 0, 0, 0, 0),
      comments_header_(&box_comments_,
                       "comments_header",
                       0,
@@ -754,7 +750,7 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 	box_comment_rows_.set_force_scrolling(true);
 	box_comments_.add(&comments_header_, UI::Box::Resizing::kFullSize);
 	box_comments_.add_space(kRowButtonSpacing);
-	box_comments_.add(&box_comment_rows_placeholder_, UI::Box::Resizing::kExpandBoth);
+	box_comments_.add(&box_comment_rows_, UI::Box::Resizing::kExpandBoth);
 	box_comments_.add_space(kRowButtonSpacing);
 	box_comments_.add(&write_comment_, UI::Box::Resizing::kFullSize);
 
@@ -856,9 +852,7 @@ void RemoteInteractionWindow::layout() {
 		admin_action_.set_pos(Vector2i(
 		   login_button_.get_x() - admin_action_.get_w() - kRowButtonSpacing, login_button_.get_y()));
 
-		box_comment_rows_.set_pos(box_comment_rows_placeholder_.get_pos());
-		box_comment_rows_.set_size(
-		   box_comment_rows_placeholder_.get_w(), box_comment_rows_placeholder_.get_h());
+		box_comment_rows_.set_desired_size(0, 0);
 	}
 	UI::Window::layout();
 }
