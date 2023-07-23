@@ -302,17 +302,19 @@ void SpinBox::layout() {
 
 	int w;
 	int padding;
+	uint32_t box_height;
 	sbi_->label->get_text_size(&w, &padding);
 	padding = get_w() - static_cast<int32_t>(unit_width_);
 	if (padding > w) {
 		sbi_->label->set_visible(true);
 		sbi_->label->set_desired_size(padding, 0);
+		box_height = std::max(sbi_->label->get_h(), static_cast<int32_t>(button_size_));
 	} else {
 		// There is no space for the label
 		sbi_->label->set_visible(false);
+		box_height = static_cast<int32_t>(button_size_);
 	}
 
-	uint32_t box_height = std::max(sbi_->label->get_h(), static_cast<int32_t>(button_size_));
 	box_->set_size(get_w(), box_height);
 	set_desired_size(get_w(), box_height);
 	set_size(get_w(), box_height);
