@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-20 02:40+0000\n"
+"POT-Creation-Date: 2023-07-22 02:39+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Ximena Delgado, 2022\n"
 "Language-Team: Esperanto (http://app.transifex.com/widelands/widelands/language/eo/)\n"
@@ -637,9 +637,9 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/manager.cc:1574
 #: ../../src/ui_fsmenu/addons/manager.cc:1643
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:104
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:294
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:567
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:726
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:292
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:565
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:722
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:480
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:486
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
@@ -1045,9 +1045,9 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/login_box.cc:54
 #: ../../src/ui_fsmenu/addons/manager.cc:296
 #: ../../src/ui_fsmenu/addons/packager.cc:134
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:176
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:467
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:700
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:174
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:465
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:696
 #: ../../src/ui_fsmenu/helpwindow.cc:56
 #: ../../src/ui_fsmenu/keyboard_options.cc:68
 #: ../../src/ui_fsmenu/keyboard_options.cc:232 ../../src/ui_fsmenu/menu.cc:167
@@ -1067,8 +1067,8 @@ msgstr "Apliki"
 #: ../../src/ui_basic/messagebox.cc:117 ../../src/ui_basic/text_prompt.cc:55
 #: ../../src/ui_fsmenu/addons/contact.cc:55
 #: ../../src/ui_fsmenu/addons/login_box.cc:63
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:192
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:475
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:190
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:473
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:62
 #: ../../src/ui_fsmenu/keyboard_options.cc:63
 #: ../../src/ui_fsmenu/login_box.cc:46 ../../src/ui_fsmenu/options.cc:90
@@ -1265,7 +1265,7 @@ msgstr "Malalta"
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:90
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:256
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:254
 msgid "Medium"
 msgstr "Meza"
 
@@ -3788,7 +3788,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:72
 #: ../../src/ui_fsmenu/addons/manager.cc:270
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:184
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:182
 #: ../../src/ui_fsmenu/training_wheel_options.cc:119
 msgid "Reset"
 msgstr ""
@@ -4367,7 +4367,7 @@ msgid "–"
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:110
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:817
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:813
 msgid "Delete this add-on"
 msgstr ""
 
@@ -4733,111 +4733,111 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:161
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:159
 msgid "Edit Comment"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:161
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:159
 msgid "Write Comment"
 msgstr ""
 
 #. * TRANSLATORS: Short for Bold text markup
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:214
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:212
 msgctxt "markup"
 msgid "B"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:214
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:212
 msgid "Bold"
 msgstr ""
 
 #. * TRANSLATORS: Short for Italic text markup
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:218
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:216
 msgctxt "markup"
 msgid "I"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:218
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:216
 msgid "Italic"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:222
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:220
 msgid "Underline"
 msgstr ""
 
 #. * TRANSLATORS: Short for Underline text markup
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:222
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:220
 msgctxt "markup"
 msgid "_"
 msgstr ""
 
 #. * TRANSLATORS: Short for Shadow text markup
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:226
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:224
 msgctxt "markup"
 msgid "S"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:226
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:224
 msgid "Shadow"
 msgstr ""
 
 #. * TRANSLATORS: Short for Color text markup
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:232
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:230
 msgctxt "markup"
 msgid "C"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:232
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:230
 msgid "Color…"
 msgstr ""
 
 #. * TRANSLATORS: Short for Tiny text markup
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:248
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:246
 msgctxt "markup"
 msgid "1"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:248
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:246
 msgid "Tiny"
 msgstr ""
 
 #. * TRANSLATORS: Short for Small text markup
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:252
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:250
 msgctxt "markup"
 msgid "2"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:252
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:250
 msgid "Small"
 msgstr ""
 
 #. * TRANSLATORS: Short for Medium text markup
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:256
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:254
 msgctxt "markup"
 msgid "3"
 msgstr ""
 
 #. * TRANSLATORS: Short for Large text markup
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:260
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:258
 msgctxt "markup"
 msgid "4"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:260
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:258
 msgid "Large"
 msgstr ""
 
 #. * TRANSLATORS: Short for Huge text markup
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:264
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:262
 msgctxt "markup"
 msgid "5"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:264
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:262
 msgid "Huge"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:295
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:293
 #, c-format
 msgid ""
 "The comment could not be submitted.\n"
@@ -4846,138 +4846,138 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:313
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:311
 msgid "Preview:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:338
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:336
 msgid "The comment contains invalid richtext markup:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:383
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:381
 msgctxt "tx"
 msgid "Priority:"
 msgstr ""
 
 #. * TRANSLATORS: "Resource" here refers to the name of a translation unit
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:392
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:390
 msgctxt "tx"
 msgid "Resource Name:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:399
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:397
 msgctxt "tx"
 msgid "Categories (whitespace-separated; characters only):"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:407
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:405
 msgid "This may take several minutes. Please be patient."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:412
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:410
 msgctxt "priority"
 msgid "Low"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:413
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:411
 msgctxt "priority"
 msgid "Normal"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:414
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:412
 msgctxt "priority"
 msgid "High"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:483
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:481
 msgid "Please explain why you are deleting this add-on."
 msgstr ""
 
 #. * TRANSLATORS: This add-on has not yet been verified
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:502
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:500
 msgid "Unchecked"
 msgstr ""
 
 #. * TRANSLATORS: This add-on has been verified
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:504
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:502
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:413
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:441
 msgid "Verified"
 msgstr ""
 
 #. * TRANSLATORS: This add-on is known to cause desyncs
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:508
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:506
 msgid "Desyncs"
 msgstr ""
 
 #. * TRANSLATORS: This add-on will not cause desyncs
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:510
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:508
 msgid "Sync-safe"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:652
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:648
 msgid "Your vote"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:682
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:678
 msgid "Next screenshot"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:691
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:687
 msgid "Previous screenshot"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:699
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:695
 msgid "Write a comment…"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:709
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:705
 msgid "Administrator actions"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:716
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:712
 msgid "Not voted"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:727
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:723
 #, c-format
 msgid ""
 "The vote could not be submitted.\n"
 "Error code: %s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:789
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:785
 #, c-format
 msgid "Screenshots (%u)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:812
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:808
 msgid "Change verification status"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:813
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:809
 msgid "Change quality rating"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:814
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:810
 msgid "Change sync-safety status"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:816
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:812
 msgid "Configure Transifex integration"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:867
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:861
 #, c-format
 msgid "Comments (%u)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:868
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:862
 #, c-format
 msgid "Votes (%u)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:872
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:866
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:498
 #, c-format
 msgid "Average rating: %1$.3f (%2$u vote)"
@@ -4985,51 +4985,51 @@ msgid_plural "Average rating: %1$.3f (%2$u votes)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:875
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:869
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:501
 msgid "No votes yet"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:893
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:887
 msgid "No comments yet."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:894
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:888
 #, c-format
 msgid "%u comment:"
 msgid_plural "%u comments:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:905
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:899
 #, c-format
 msgid "%1$s (edited on %2$s)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:911
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:905
 #, c-format
 msgid "%1$s (edited by ‘%2$s’ on %3$s)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:917
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:911
 #, c-format
 msgid "‘%1$s’ commented on version %2$s:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:943
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:937
 #, c-format
 msgid "%1$u / %2$u"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:979
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:973
 msgid "This screenshot could not be fetched from the server due to an error."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:997
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:991
 msgid "Please log in to comment"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:999
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:993
 msgid "Please log in to vote"
 msgstr ""
 
