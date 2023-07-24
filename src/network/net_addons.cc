@@ -378,17 +378,23 @@ void NetAddons::init(std::string username, std::string password) {
 		throw WLWarning("", "Unable to create socket");
 	}
 
-	constexpr uint32_t kTimeout = 5;
+	constexpr uint32_t kTimeout = 4;
 #ifdef _WIN32
-	DWORD timeout = kTimeout * 1000;
-#else
-	struct timeval timeout;
-	timeout.tv_sec = kTimeout;
-#endif
+	DWORD timeout_val = kTimeout * 1000;
+	const char* timeout_ptr = reinterpret_cast<const char*>(&timeout_val);
 	// Set timeout of read()
-	setsockopt(client_socket_, SOL_SOCKET, SO_RCVTIMEO, &timeout, sizeof(timeout));
+	setsockopt(client_socket_, SOL_SOCKET, SO_RCVTIMEO, timeout_ptr, sizeof(timeout_val));
 	// Set timeout of write()
-	setsockopt(client_socket_, SOL_SOCKET, SO_SNDTIMEO, &timeout, sizeof(timeout));
+	setsockopt(client_socket_, SOL_SOCKET, SO_SNDTIMEO, timeout_ptr, sizeof(timeout_val));
+#else
+	struct timeval timeout_val;
+	timeout_val.tv_sec = kTimeout;
+	timeout_val.tv_usec = 0;
+	// Set timeout of read()
+	setsockopt(client_socket_, SOL_SOCKET, SO_RCVTIMEO, &timeout_val, sizeof(timeout_val));
+	// Set timeout of write()
+	setsockopt(client_socket_, SOL_SOCKET, SO_SNDTIMEO, &timeout_val, sizeof(timeout_val));
+#endif
 
 	const std::string target_ip = get_config_string("addon_server_ip", "widelands.org");
 	const int target_port = get_config_int("addon_server_port", 7388);

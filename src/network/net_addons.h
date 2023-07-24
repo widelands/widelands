@@ -25,7 +25,11 @@
 
 namespace AddOns {
 
-struct OperationCancelledByUserException : std::exception {};
+struct OperationCancelledByUserException : std::exception {
+	[[nodiscard]] const char* what() const noexcept override {
+		return "Operation cancelled by user";
+	}
+};
 
 /**
  * A function that is called periodically during operations that may hang.
