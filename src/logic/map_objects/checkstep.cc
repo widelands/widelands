@@ -83,17 +83,20 @@ bool CheckStepDefault::allowed(const Map& /* map */,
                                const FCoords& start,
                                const FCoords& end,
                                int32_t /* dir */,
-                               CheckStep::StepId /* id */) const {
+                               CheckStep::StepId id) const {
 	NodeCaps const endcaps = end.field->nodecaps();
 
 	if ((endcaps & movecaps_) != 0) {
 		return true;
 	}
 
-	// Swimming bobs are allowed to move from a water field to a shore field
-	NodeCaps const startcaps = start.field->nodecaps();
+	// Swimming bobs are allowed to move from a water field to a shore field as the last step.
+	if (id != CheckStep::StepId::stepLast || (endcaps & MOVECAPS_WALK) == 0) {
+		return false;
+	}
 
-	return ((endcaps & MOVECAPS_WALK) != 0) && ((startcaps & movecaps_ & MOVECAPS_SWIM) != 0);
+	NodeCaps const startcaps = start.field->nodecaps();
+	return (startcaps & movecaps_ & MOVECAPS_SWIM) != 0;
 }
 
 bool CheckStepDefault::reachable_dest(const Map& map, const FCoords& dest) const {
