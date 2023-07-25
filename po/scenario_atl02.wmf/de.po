@@ -3,8 +3,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Stephan Lutz <stephan-lutz@gmx.de>, 2023
 # Simon Heimberg, 2023
+# Stephan Lutz <stephan-lutz@gmx.de>, 2023
 # 
 msgid ""
 msgstr ""
@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
-"Last-Translator: Simon Heimberg, 2023\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2023\n"
 "Language-Team: German (https://app.transifex.com/widelands/teams/35159/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -884,7 +884,7 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:451
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:475
 msgid "Kalitath Appreciates Efforts"
-msgstr "Kalitath begrüßt die Anstrengungen"
+msgstr "Kalitath würdigt die Anstrengungen"
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:454
@@ -959,7 +959,7 @@ msgstr ""
 "und ihre Krieger und Götter erschienen mir sehr stark in der Schlacht gegen "
 "das Imperium. Insbesondere ihr Anführer Kalitath war ein guter Gastgeber und"
 " ich begann darüber nachzudenken unsere Stämme zu vereinigen, um eine "
-"friedvolle Zukunft auf dieser Insel zu gewährleisten. Deshalb möchte ich, "
+"friedliche Zukunft auf dieser Insel zu gewährleisten. Deshalb möchte ich, "
 "dass Ihr unser Volk auf eine Heirat und friedliche Koexistenz mit den "
 "Barbaren vorbereitet. Das schließt das Studium ihrer Götter, und die "
 "Vorbereitung sie anzubeten, ein."

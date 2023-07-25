@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-17 03:10+0000\n"
+"POT-Creation-Date: 2023-07-22 02:39+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Renaud Bouchard, 2015-2023\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
@@ -131,7 +131,7 @@ msgstr "%1$s, %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: X hours and Y minutes
 #: ../../data/scripting/richtext.lua:705 ../../src/base/i18n.cc:412
-#: ../../src/ui_basic/spinbox.cc:486
+#: ../../src/ui_basic/spinbox.cc:484
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s et %2$s"
@@ -486,8 +486,8 @@ msgstr "Ajoutez ou enlevez des espace portuaire"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:359
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:711
-#: ../../src/ui_fsmenu/singleplayersetupbox.cc:169
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:712
+#: ../../src/ui_fsmenu/singleplayersetupbox.cc:171
 msgid "Players"
 msgstr "Joueurs"
 
@@ -653,13 +653,13 @@ msgstr "Êtes vous sûr de vouloir quitter l'éditeur ?"
 #: ../../src/ui_fsmenu/addons/manager.cc:1574
 #: ../../src/ui_fsmenu/addons/manager.cc:1643
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:104
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:294
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:567
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:726
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:292
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:565
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:722
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:480
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:486
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
-#: ../../src/ui_fsmenu/launch_mpg.cc:309 ../../src/ui_fsmenu/main.cc:257
+#: ../../src/ui_fsmenu/launch_mpg.cc:306 ../../src/ui_fsmenu/main.cc:257
 #: ../../src/wlapplication.cc:1650
 msgid "Error"
 msgstr "Erreur"
@@ -1061,12 +1061,12 @@ msgstr "Affichage"
 #: ../../src/ui_fsmenu/addons/login_box.cc:54
 #: ../../src/ui_fsmenu/addons/manager.cc:296
 #: ../../src/ui_fsmenu/addons/packager.cc:134
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:176
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:467
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:700
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:174
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:465
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:696
 #: ../../src/ui_fsmenu/helpwindow.cc:56
 #: ../../src/ui_fsmenu/keyboard_options.cc:68
-#: ../../src/ui_fsmenu/keyboard_options.cc:232 ../../src/ui_fsmenu/menu.cc:165
+#: ../../src/ui_fsmenu/keyboard_options.cc:232 ../../src/ui_fsmenu/menu.cc:167
 #: ../../src/ui_fsmenu/options.cc:92
 #: ../../src/ui_fsmenu/training_wheel_options.cc:154
 #: ../../src/wui/game_main_menu_save_game.cc:100
@@ -1083,8 +1083,8 @@ msgstr "OK"
 #: ../../src/ui_basic/messagebox.cc:117 ../../src/ui_basic/text_prompt.cc:55
 #: ../../src/ui_fsmenu/addons/contact.cc:55
 #: ../../src/ui_fsmenu/addons/login_box.cc:63
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:192
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:475
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:190
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:473
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:62
 #: ../../src/ui_fsmenu/keyboard_options.cc:63
 #: ../../src/ui_fsmenu/login_box.cc:46 ../../src/ui_fsmenu/options.cc:90
@@ -1282,7 +1282,7 @@ msgstr "Bas"
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:90
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:256
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:254
 msgid "Medium"
 msgstr "Moyen"
 
@@ -1319,7 +1319,7 @@ msgstr "Montagnes :"
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:193
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:500
-#: ../../src/ui_basic/spinbox.cc:504
+#: ../../src/ui_basic/spinbox.cc:502
 #, c-format
 msgid "%i %%"
 msgstr "%i %%"
@@ -3061,11 +3061,11 @@ msgid ""
 "not handle the file."
 msgstr "/me a vérifié le fichier reçu. Bien que la vérification md5 soit réussie, je n'arrive pas à manipuler le fichier."
 
-#: ../../src/network/gameclient.cc:1292
+#: ../../src/network/gameclient.cc:1296
 msgid "Disconnected"
 msgstr "Déconnecté"
 
-#: ../../src/network/gameclient.cc:1293
+#: ../../src/network/gameclient.cc:1297
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
@@ -3595,11 +3595,11 @@ msgstr "Widelands n'a pas été capable d'utiliser le réseau local. Peut être 
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
-#: ../../src/scripting/lua_ui.cc:656
+#: ../../src/scripting/lua_ui.cc:912
 msgid "Plugin Error"
 msgstr "Erreur de plug-in"
 
-#: ../../src/scripting/lua_ui.cc:657
+#: ../../src/scripting/lua_ui.cc:913
 #, c-format
 msgid ""
 "Error when running plugin:\n"
@@ -3675,18 +3675,18 @@ msgstr "Fin du jeu – Patientez s'il vous plaît..."
 msgid "Loading…"
 msgstr "Chargement..."
 
-#: ../../src/ui_basic/spinbox.cc:155 ../../src/ui_basic/spinbox.cc:168
+#: ../../src/ui_basic/spinbox.cc:153 ../../src/ui_basic/spinbox.cc:166
 #, c-format
 msgid "Decrease the value by %s"
 msgstr "Diminuer la valeur par %s"
 
-#: ../../src/ui_basic/spinbox.cc:160 ../../src/ui_basic/spinbox.cc:172
+#: ../../src/ui_basic/spinbox.cc:158 ../../src/ui_basic/spinbox.cc:170
 #, c-format
 msgid "Increase the value by %s"
 msgstr "Augmenter la valeur par %s"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:473 ../../src/ui_basic/spinbox.cc:490
+#: ../../src/ui_basic/spinbox.cc:471 ../../src/ui_basic/spinbox.cc:488
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -3695,7 +3695,7 @@ msgstr[1] "%d minutes"
 msgstr[2] "%d minutes"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:479 ../../src/ui_basic/spinbox.cc:488
+#: ../../src/ui_basic/spinbox.cc:477 ../../src/ui_basic/spinbox.cc:486
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
@@ -3704,7 +3704,7 @@ msgstr[1] "%d heures"
 msgstr[2] "%d heures"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:495
+#: ../../src/ui_basic/spinbox.cc:493
 #, c-format
 msgid "%d week"
 msgid_plural "%d weeks"
@@ -3713,7 +3713,7 @@ msgstr[1] "%d semaines"
 msgstr[2] "%d semaines"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:498
+#: ../../src/ui_basic/spinbox.cc:496
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -3722,7 +3722,7 @@ msgstr[1] "%d pixels"
 msgstr[2] "%d pixels"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:501
+#: ../../src/ui_basic/spinbox.cc:499
 #, c-format
 msgid "%d field"
 msgid_plural "%d fields"
@@ -3821,7 +3821,7 @@ msgstr "connexion"
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:72
 #: ../../src/ui_fsmenu/addons/manager.cc:270
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:184
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:182
 #: ../../src/ui_fsmenu/training_wheel_options.cc:119
 msgid "Reset"
 msgstr "Réinitialiser"
@@ -4403,7 +4403,7 @@ msgid "–"
 msgstr "–"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:110
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:817
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:813
 msgid "Delete this add-on"
 msgstr "Supprimer ce module complémentaire"
 
@@ -4772,111 +4772,111 @@ msgid ""
 "%s"
 msgstr "Le commentaire n'a pas pu être effacé.\n\nMessage d'erreur :\n%s"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:161
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:159
 msgid "Edit Comment"
 msgstr "Éditer commentaire"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:161
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:159
 msgid "Write Comment"
 msgstr "Écrire commentaire"
 
 #. * TRANSLATORS: Short for Bold text markup
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:214
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:212
 msgctxt "markup"
 msgid "B"
 msgstr "B"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:214
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:212
 msgid "Bold"
 msgstr "Gras"
 
 #. * TRANSLATORS: Short for Italic text markup
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:218
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:216
 msgctxt "markup"
 msgid "I"
 msgstr "I"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:218
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:216
 msgid "Italic"
 msgstr "Italique"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:222
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:220
 msgid "Underline"
 msgstr "Souligné"
 
 #. * TRANSLATORS: Short for Underline text markup
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:222
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:220
 msgctxt "markup"
 msgid "_"
 msgstr "_"
 
 #. * TRANSLATORS: Short for Shadow text markup
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:226
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:224
 msgctxt "markup"
 msgid "S"
 msgstr "S"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:226
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:224
 msgid "Shadow"
 msgstr "Ombre"
 
 #. * TRANSLATORS: Short for Color text markup
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:232
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:230
 msgctxt "markup"
 msgid "C"
 msgstr "C"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:232
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:230
 msgid "Color…"
 msgstr "Couleur..."
 
 #. * TRANSLATORS: Short for Tiny text markup
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:248
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:246
 msgctxt "markup"
 msgid "1"
 msgstr "1"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:248
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:246
 msgid "Tiny"
 msgstr "Minuscule"
 
 #. * TRANSLATORS: Short for Small text markup
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:252
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:250
 msgctxt "markup"
 msgid "2"
 msgstr "2"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:252
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:250
 msgid "Small"
 msgstr "Petit"
 
 #. * TRANSLATORS: Short for Medium text markup
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:256
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:254
 msgctxt "markup"
 msgid "3"
 msgstr "3"
 
 #. * TRANSLATORS: Short for Large text markup
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:260
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:258
 msgctxt "markup"
 msgid "4"
 msgstr "4"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:260
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:258
 msgid "Large"
 msgstr "Grand"
 
 #. * TRANSLATORS: Short for Huge text markup
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:264
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:262
 msgctxt "markup"
 msgid "5"
 msgstr "5"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:264
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:262
 msgid "Huge"
 msgstr "Immense"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:295
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:293
 #, c-format
 msgid ""
 "The comment could not be submitted.\n"
@@ -4885,138 +4885,138 @@ msgid ""
 "%s"
 msgstr "Le commentaire n'a pas pu être soumis.\n\nMessage d'erreur :\n%s"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:313
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:311
 msgid "Preview:"
 msgstr "Prévisualisation :"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:338
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:336
 msgid "The comment contains invalid richtext markup:"
 msgstr "Le commentaire contient un balisage richtext non valide :"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:383
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:381
 msgctxt "tx"
 msgid "Priority:"
 msgstr "Priorité:"
 
 #. * TRANSLATORS: "Resource" here refers to the name of a translation unit
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:392
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:390
 msgctxt "tx"
 msgid "Resource Name:"
 msgstr "Nom de la ressource :"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:399
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:397
 msgctxt "tx"
 msgid "Categories (whitespace-separated; characters only):"
 msgstr "Catégories (Séparées d'un espace; caractères seulement):"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:407
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:405
 msgid "This may take several minutes. Please be patient."
 msgstr "Ceci peut prendre quelques minutes. Merci de patienter."
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:412
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:410
 msgctxt "priority"
 msgid "Low"
 msgstr "Bas"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:413
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:411
 msgctxt "priority"
 msgid "Normal"
 msgstr "Normal"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:414
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:412
 msgctxt "priority"
 msgid "High"
 msgstr "Haut"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:483
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:481
 msgid "Please explain why you are deleting this add-on."
 msgstr "Expliquez s'il vous plait pourquoi vous supprimez ce module complémentaire."
 
 #. * TRANSLATORS: This add-on has not yet been verified
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:502
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:500
 msgid "Unchecked"
 msgstr "Dévalidé"
 
 #. * TRANSLATORS: This add-on has been verified
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:504
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:502
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:413
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:441
 msgid "Verified"
 msgstr "Vérifié"
 
 #. * TRANSLATORS: This add-on is known to cause desyncs
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:508
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:506
 msgid "Desyncs"
 msgstr "Desyncs"
 
 #. * TRANSLATORS: This add-on will not cause desyncs
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:510
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:508
 msgid "Sync-safe"
 msgstr "Sync-safe"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:652
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:648
 msgid "Your vote"
 msgstr "Votre vote"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:682
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:678
 msgid "Next screenshot"
 msgstr "Capture d'écran suivante"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:691
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:687
 msgid "Previous screenshot"
 msgstr "Capture d'écran précédente "
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:699
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:695
 msgid "Write a comment…"
 msgstr "Écrire un commentaire..."
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:709
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:705
 msgid "Administrator actions"
 msgstr "Actions Admininstrateur"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:716
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:712
 msgid "Not voted"
 msgstr "Pas voté"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:727
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:723
 #, c-format
 msgid ""
 "The vote could not be submitted.\n"
 "Error code: %s"
 msgstr "Le vote n'a pas pu être soumis.\nCode d'erreur : %s"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:789
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:785
 #, c-format
 msgid "Screenshots (%u)"
 msgstr "Captures d'écrans (%u)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:812
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:808
 msgid "Change verification status"
 msgstr "Change le status de la vérification"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:813
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:809
 msgid "Change quality rating"
 msgstr "Change l'évalution qualitative"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:814
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:810
 msgid "Change sync-safety status"
 msgstr "Change le status de la sécutité-sync"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:816
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:812
 msgid "Configure Transifex integration"
 msgstr "Configurer l'intégration de Transifex"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:867
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:861
 #, c-format
 msgid "Comments (%u)"
 msgstr "Commentaires (%u)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:868
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:862
 #, c-format
 msgid "Votes (%u)"
 msgstr "Votes (%u)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:872
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:866
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:498
 #, c-format
 msgid "Average rating: %1$.3f (%2$u vote)"
@@ -5025,16 +5025,16 @@ msgstr[0] "Note moyenne : %1$.3f (%2$u vote)"
 msgstr[1] "Note moyenne : %1$.3f (%2$u votes)"
 msgstr[2] "Note moyenne : %1$.3f (%2$u votes)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:875
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:869
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:501
 msgid "No votes yet"
 msgstr "Pas encore de votes"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:893
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:887
 msgid "No comments yet."
 msgstr "Pas encore de commentaires."
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:894
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:888
 #, c-format
 msgid "%u comment:"
 msgid_plural "%u comments:"
@@ -5042,35 +5042,35 @@ msgstr[0] "%u commentaire :"
 msgstr[1] "%u commentaires :"
 msgstr[2] "%u commentaires :"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:905
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:899
 #, c-format
 msgid "%1$s (edited on %2$s)"
 msgstr "%1$s (édité le %2$s)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:911
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:905
 #, c-format
 msgid "%1$s (edited by ‘%2$s’ on %3$s)"
 msgstr "%1$s (édité par ‘%2$s’ le %3$s)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:917
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:911
 #, c-format
 msgid "‘%1$s’ commented on version %2$s:"
 msgstr "‘%1$s’ à commenté sur la version %2$s :"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:943
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:937
 #, c-format
 msgid "%1$u / %2$u"
 msgstr "%1$u / %2$u"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:979
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:973
 msgid "This screenshot could not be fetched from the server due to an error."
 msgstr "Cette capture d'écran n'a pas pu être récupérée depuis le serveur en raison d'une erreur."
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:997
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:991
 msgid "Please log in to comment"
 msgstr "Connectez vous s'il vous plaît pour commenter"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:999
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:993
 msgid "Please log in to vote"
 msgstr "Connectez vous s'il vous plaît pour voter"
 
@@ -5528,74 +5528,74 @@ msgstr "Changer de sauvegarde..."
 msgid "Start game"
 msgstr "Commencer la partie"
 
-#: ../../src/ui_fsmenu/launch_game.cc:269
+#: ../../src/ui_fsmenu/launch_game.cc:270
 msgid "Show fewer options"
 msgstr "Montrer moins d'options"
 
-#: ../../src/ui_fsmenu/launch_game.cc:269
+#: ../../src/ui_fsmenu/launch_game.cc:270
 msgid "Show more options"
 msgstr "Montrer plus d'options"
 
-#: ../../src/ui_fsmenu/launch_game.cc:284
+#: ../../src/ui_fsmenu/launch_game.cc:285
 msgid "The relations between players are set by the scenario"
 msgstr "Les relations entre les joueurs sont définies par le scénario"
 
-#: ../../src/ui_fsmenu/launch_game.cc:286
+#: ../../src/ui_fsmenu/launch_game.cc:287
 msgid "The relations between players are set by the saved game"
 msgstr "Les relations entre les joueurs sont définies par la partie enregistrée"
 
-#: ../../src/ui_fsmenu/launch_game.cc:288
+#: ../../src/ui_fsmenu/launch_game.cc:289
 msgid "The selected win condition does not allow peaceful matches"
 msgstr "La condition de victoire sélectionnée ne permet pas les parties pacifiques"
 
-#: ../../src/ui_fsmenu/launch_game.cc:290
+#: ../../src/ui_fsmenu/launch_game.cc:291
 msgid "Forbid fighting between players"
 msgstr "Interdire les affrontements entre les joueurs"
 
-#: ../../src/ui_fsmenu/launch_game.cc:320
+#: ../../src/ui_fsmenu/launch_game.cc:321
 msgid "All selected starting conditions ignore the map’s starting positions"
 msgstr "Toutes les conditions de départ sélectionnées ignorent les positions de départ de la carte."
 
-#: ../../src/ui_fsmenu/launch_game.cc:326
+#: ../../src/ui_fsmenu/launch_game.cc:327
 msgid "The starting positions are set by the scenario"
 msgstr "Les positions de départ sont définies par le scénario"
 
-#: ../../src/ui_fsmenu/launch_game.cc:328
+#: ../../src/ui_fsmenu/launch_game.cc:329
 msgid "The starting positions are set by the saved game"
 msgstr "Les positions de départ sont définies par la sauvegarde"
 
-#: ../../src/ui_fsmenu/launch_game.cc:331
+#: ../../src/ui_fsmenu/launch_game.cc:332
 msgid ""
 "Allow the players to choose their own starting positions at the beginning of"
 " the game"
 msgstr "Autoriser les joueurs à choisir leurs propres positions de départ au début de la partie "
 
-#: ../../src/ui_fsmenu/launch_game.cc:350
+#: ../../src/ui_fsmenu/launch_game.cc:351
 msgid "Player vision is set by the scenario"
 msgstr "La vision des joueurs est définie par le scénario"
 
-#: ../../src/ui_fsmenu/launch_game.cc:352
+#: ../../src/ui_fsmenu/launch_game.cc:353
 msgid "Player vision is set by the saved game"
 msgstr "La vision des joueurs est définie par la sauvegarde"
 
-#: ../../src/ui_fsmenu/launch_game.cc:354
+#: ../../src/ui_fsmenu/launch_game.cc:355
 msgid "Give all players permanent vision of the entire map"
 msgstr "Donner à tous les joueurs la vision permanent de l'ensemble de la carte"
 
-#: ../../src/ui_fsmenu/launch_game.cc:373
+#: ../../src/ui_fsmenu/launch_game.cc:374
 msgid "Player relations are set by the scenario"
 msgstr "Les relations entre les joueurs sont définies par le scénario"
 
-#: ../../src/ui_fsmenu/launch_game.cc:375
+#: ../../src/ui_fsmenu/launch_game.cc:376
 msgid "Player relations are set by the saved game"
 msgstr "Les relations entre les joueurs sont définies par la sauvagarde"
 
-#: ../../src/ui_fsmenu/launch_game.cc:377
+#: ../../src/ui_fsmenu/launch_game.cc:378
 msgid "Disallow players to change their alliances during the game"
 msgstr "Ne pas permettre aux joueurs de changer leurs alliances pendant le jeu"
 
 #. * TRANSLATORS: This is a map tag
-#: ../../src/ui_fsmenu/launch_game.cc:385
+#: ../../src/ui_fsmenu/launch_game.cc:386
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:512
 #: ../../src/ui_fsmenu/scenariodetails.cc:47
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:283
@@ -5603,21 +5603,21 @@ msgstr "Ne pas permettre aux joueurs de changer leurs alliances pendant le jeu"
 msgid "Scenario"
 msgstr "Scénario"
 
-#: ../../src/ui_fsmenu/launch_game.cc:386
+#: ../../src/ui_fsmenu/launch_game.cc:387
 msgid "Win condition is set through the scenario"
 msgstr "Condition de victoire déterminée dans le scénario"
 
-#: ../../src/ui_fsmenu/launch_game.cc:392
+#: ../../src/ui_fsmenu/launch_game.cc:393
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:516
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:287
 msgid "Saved Game"
 msgstr "Partie enregistrée"
 
-#: ../../src/ui_fsmenu/launch_game.cc:394
+#: ../../src/ui_fsmenu/launch_game.cc:395
 msgid "The game is a saved game – the win condition was set before."
 msgstr "Ce jeu est une partie sauvegardée - La condition de victoire a déjà été définie."
 
-#: ../../src/ui_fsmenu/launch_game.cc:467
+#: ../../src/ui_fsmenu/launch_game.cc:468
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
@@ -5636,22 +5636,22 @@ msgstr "Choisissez une carte ou une sauvegarde s'il vous plait."
 msgid "The host has not yet selected a map or saved game."
 msgstr "L'hôte n'a pas encore sélectionné de carte ou de sauvegarde."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:203
+#: ../../src/ui_fsmenu/launch_mpg.cc:200
 msgid "Saved Game is Directory"
 msgstr "La sauvegarde est un dossier"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:204
+#: ../../src/ui_fsmenu/launch_mpg.cc:201
 msgid ""
 "WARNING:\n"
 "The saved game you selected is a directory. This happens if you set the option ‘nozip’ to true or manually unzipped the saved game.\n"
 "Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
 msgstr "ATTENTION :\nLa sauvegarde que vous avez sélectionné est un répertoire. Cela arrive si vous avez activé l'option 'nozip' ou si vous avez manuellement dézippé la sauvegarde.\nWidelands n'est pas capable de transférer la structure d'un répertoire aux clients, veuillez sélectionner une autre sauvegarde ou Zipper le contenu des répertoires."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:223 ../../src/ui_fsmenu/launch_spg.cc:134
+#: ../../src/ui_fsmenu/launch_mpg.cc:220 ../../src/ui_fsmenu/launch_spg.cc:134
 msgid "File not found"
 msgstr "Fichier introuvable"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:224 ../../src/ui_fsmenu/launch_spg.cc:135
+#: ../../src/ui_fsmenu/launch_mpg.cc:221 ../../src/ui_fsmenu/launch_spg.cc:135
 #, c-format
 msgid ""
 "Widelands tried to start a game with a file that could not be found at the given path.\n"
@@ -5659,19 +5659,19 @@ msgid ""
 "If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
 msgstr "Widelands à tenté de démarrer un jeu avec un fichier introuvable dans le chemin donné.\nCe fichier est : %s\nSi cela arrive pendant une partie en réseau: l'hébergeur peut avoir sélectionné un fichier que vous ne possédez pas. Normalement ce type de fichier doit vous être envoyé par l'hébergeur. Peut-être que le transfert de ce fichier n'est pas encore terminé !?!"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:265
+#: ../../src/ui_fsmenu/launch_mpg.cc:262
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
 msgstr "Le fichier sélectionné est introuvable. S'il ne vous est pas transféré automatiquement, veuiller contacter l'hébergeur concernant ce problème."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:311
+#: ../../src/ui_fsmenu/launch_mpg.cc:308
 #, c-format
 msgid "Unable to load the win condition script file ‘%s’."
 msgstr "Incapable de charger le fichier script de condition de victoir ‘%s’."
 
 #. * TRANSLATORS: This is a heading for a help window
-#: ../../src/ui_fsmenu/launch_mpg.cc:438
+#: ../../src/ui_fsmenu/launch_mpg.cc:435
 msgid "Multiplayer Game Setup"
 msgstr "Configuration du jeu multi-joueur"
 
@@ -5989,11 +5989,11 @@ msgstr "Détails du scénario"
 msgid "Hint: %s"
 msgstr "Conseil: %s"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:171
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:170
 msgid "No map selected"
 msgstr "Pas de carte sélectionné"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:216
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:213
 msgid "(no map)"
 msgstr "(pas de carte)"
 
@@ -6057,16 +6057,16 @@ msgstr "non-spécifié"
 msgid "The map does not specify whether it is balanced"
 msgstr "La carte ne spécifie pas si elle est équilibrée"
 
-#: ../../src/ui_fsmenu/menu.cc:128 ../../src/wui/helpwindow.cc:69
+#: ../../src/ui_fsmenu/menu.cc:130 ../../src/wui/helpwindow.cc:69
 msgid "Back"
 msgstr "Retour"
 
-#: ../../src/ui_fsmenu/menu.cc:291
+#: ../../src/ui_fsmenu/menu.cc:293
 #, c-format
 msgid "Back to ‘%s’"
 msgstr "Revenir vers ‘%s’"
 
-#: ../../src/ui_fsmenu/menu.cc:300
+#: ../../src/ui_fsmenu/menu.cc:302
 msgid "Close window"
 msgstr "Fermer la fenêtre"
 
@@ -6341,7 +6341,7 @@ msgstr "Pas d'équipe"
 msgid "Team %d"
 msgstr "Équipe %d"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:701
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:702
 msgid "Clients"
 msgstr "Clients"
 

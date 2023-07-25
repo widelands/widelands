@@ -458,6 +458,7 @@ private:
 		std::string excerpts_buffer_[kExcerptSize];
 	} syncwrapper_;
 
+	void delete_pending_player_commands();
 	void do_send_player_command(PlayerCommand*);
 	std::shared_ptr<GameController> ctrl_;
 
@@ -479,7 +480,7 @@ private:
 	RNG rng_;
 
 	CmdQueue cmdqueue_;
-	std::list<PlayerCommand*> pending_player_commands_;
+	std::deque<PlayerCommand*> pending_player_commands_;
 
 	SaveHandler savehandler_;
 
