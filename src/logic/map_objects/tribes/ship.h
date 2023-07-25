@@ -132,6 +132,7 @@ struct Ship : Bob {
 	void set_economy(const Game&, Economy* e, WareWorker);
 
 	void init_auto_task(Game&) override;
+	void set_position(EditorGameBase&, const Coords&) override;
 
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
@@ -331,6 +332,7 @@ private:
 	friend struct ShipFleet;
 	friend struct ShippingSchedule;
 
+	void recalc_expedition_swimmable(const EditorGameBase& egbase);
 	void wakeup_neighbours(Game&);
 
 	static const Task taskShip;

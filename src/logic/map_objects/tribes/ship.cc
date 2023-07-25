@@ -295,6 +295,22 @@ void Ship::set_warship_soldier_capacity(Quantity c) {
 	warship_soldier_capacity_ = c;
 }
 
+void Ship::set_position(EditorGameBase& egbase, const Coords& coords) {
+	Bob::set_position(egbase, coords);
+
+	if (expedition_ != nullptr) {
+		recalc_expedition_swimmable(egbase);
+	}
+}
+
+void Ship::recalc_expedition_swimmable(const EditorGameBase& egbase) {
+	assert(expedition_ != nullptr);
+	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
+		expedition_->swimmable[dir - FIRST_DIRECTION] =
+		   ((egbase.map().get_neighbour(get_position(), dir).field->nodecaps() & MOVECAPS_SWIM) != 0);
+	}
+}
+
 /**
  * Standard behaviour of ships.
  *
@@ -572,14 +588,11 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 	Map* map = game.mutable_map();
 
-	assert(expedition_);
+	assert(expedition_ != nullptr);
 	const FCoords position = get_position();
 
 	// Update the knowledge of the surrounding fields
-	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
-		expedition_->swimmable[dir - 1] =
-		   ((map->get_neighbour(position, dir).field->nodecaps() & MOVECAPS_SWIM) != 0);
-	}
+	recalc_expedition_swimmable(game);
 
 	if (get_ship_type() == ShipType::kWarship) {
 		// Look for nearby enemy warships.
