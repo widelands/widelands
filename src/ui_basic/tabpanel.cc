@@ -57,8 +57,7 @@ Tab::Tab(TabPanel* const tab_parent,
          const Image* init_pic,
          const std::string& tooltip_text,
          Panel* const contents)
-   : NamedPanel(
-        tab_parent, s, name, x, 0, kTabPanelButtonHeight, kTabPanelButtonHeight, tooltip_text),
+   : Panel(tab_parent, s, name, x, 0, kTabPanelButtonHeight, kTabPanelButtonHeight, tooltip_text),
      parent(tab_parent),
      id(tab_id),
      pic(init_pic),
@@ -123,9 +122,10 @@ bool Tab::handle_mousepress(uint8_t /*btn*/, int32_t /*x*/, int32_t /*y*/) {
  * Initialize an empty TabPanel. We use width == 0 as an indicator that the size hasn't been set
  * yet.
  */
-TabPanel::TabPanel(Panel* const parent, UI::TabPanelStyle style)
+TabPanel::TabPanel(Panel* const parent, UI::TabPanelStyle style, const std::string& name)
    : Panel(parent,
            style == TabPanelStyle::kFsMenu ? PanelStyle::kFsMenu : PanelStyle::kWui,
+           name,
            0,
            0,
            0,

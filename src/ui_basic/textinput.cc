@@ -104,9 +104,14 @@ private:
 /**
  * Initialize an editbox that supports multiline strings.
  */
-AbstractTextInputPanel::AbstractTextInputPanel(
-   Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const UI::PanelStyle style)
-   : Panel(parent, style, x, y, w, h), d_(new Data(*this)) {
+AbstractTextInputPanel::AbstractTextInputPanel(Panel* parent,
+                                               const std::string& name,
+                                               int32_t x,
+                                               int32_t y,
+                                               uint32_t w,
+                                               uint32_t h,
+                                               const UI::PanelStyle style)
+   : Panel(parent, style, name, x, y, w, h), d_(new Data(*this)) {
 	set_handle_mouse(true);
 	set_can_focus(true);
 	set_thinks(false);
@@ -119,6 +124,7 @@ AbstractTextInputPanel::~AbstractTextInputPanel() {  // NOLINT
 
 AbstractTextInputPanel::Data::Data(AbstractTextInputPanel& init_owner)
    : scrollbar(&init_owner,
+               "scrollbar",
                init_owner.get_w() - Scrollbar::kSize,
                0,
                Scrollbar::kSize,
@@ -142,8 +148,10 @@ AbstractTextInputPanel::Data::Data(AbstractTextInputPanel& init_owner)
 	scrollbar.set_singlestepsize(ww.lineheight());
 }
 
-EditBox::EditBox(Panel* parent, int32_t x, int32_t y, uint32_t w, UI::PanelStyle style)
+EditBox::EditBox(
+   Panel* parent, const std::string& name, int32_t x, int32_t y, uint32_t w, UI::PanelStyle style)
    : AbstractTextInputPanel(parent,
+                            name,
                             x,
                             y,
                             w,
@@ -153,9 +161,14 @@ EditBox::EditBox(Panel* parent, int32_t x, int32_t y, uint32_t w, UI::PanelStyle
 	d_->scrollbar.set_visible(false);
 }
 
-MultilineEditbox::MultilineEditbox(
-   UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style)
-   : AbstractTextInputPanel(parent, x, y, w, h, style) {
+MultilineEditbox::MultilineEditbox(UI::Panel* parent,
+                                   const std::string& name,
+                                   int32_t x,
+                                   int32_t y,
+                                   uint32_t w,
+                                   uint32_t h,
+                                   UI::PanelStyle style)
+   : AbstractTextInputPanel(parent, name, x, y, w, h, style) {
 }
 
 /**

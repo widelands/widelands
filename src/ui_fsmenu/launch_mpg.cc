@@ -93,7 +93,7 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
 	ok_.set_enabled(settings_.can_launch());
 
 	left_column_box_.add(&mpsg_, UI::Box::Resizing::kExpandBoth);
-	left_column_box_.add_space(kPadding);
+	left_column_box_.add_space(8 * kPadding);
 	left_column_box_.add(chat_.get(), UI::Box::Resizing::kExpandBoth);
 
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& s) {
@@ -119,10 +119,7 @@ void LaunchMPG::layout() {
 	help_button_.set_size(standard_height_, standard_height_);
 	help_button_.set_pos(Vector2i(get_inner_w() - help_button_.get_w(), 0));
 
-	mpsg_.set_max_size(0, left_column_box_.get_h() / 2);
-
-	mpsg_.force_new_dimensions(
-	   left_column_box_.get_w(), left_column_box_.get_h() / 2, scale_factor * standard_height_);
+	mpsg_.force_new_dimensions(left_column_box_.get_w(), scale_factor * standard_height_);
 
 	// set focus to chat input
 	if (chat_) {

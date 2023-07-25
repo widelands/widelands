@@ -41,7 +41,7 @@ int32_t EditorIncreaseHeightTool::handle_click_impl(const Widelands::NodeAndTria
 	return map->change_height(
 	   parent_.egbase(),
 	   Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius),
-	   args->change_by);
+	   args->change_by, args->selection_gaps.cbegin());
 }
 
 int32_t EditorIncreaseHeightTool::handle_undo_impl(const Widelands::NodeAndTriangle<>& center,

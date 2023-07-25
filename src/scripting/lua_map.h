@@ -877,6 +877,7 @@ public:
 	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 	int get_descr(lua_State*);
 	int get_serial(lua_State*);
+	int get_exists(lua_State*);
 
 	/*
 	 * Lua Methods
@@ -1359,6 +1360,7 @@ public:
 	/*
 	 * Lua methods
 	 */
+	int evict(lua_State* L);
 
 	/*
 	 * C methods

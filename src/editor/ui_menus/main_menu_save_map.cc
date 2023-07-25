@@ -62,13 +62,14 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
                    _("Map Options")),
      editbox_label_(&table_footer_box_,
                     UI::PanelStyle::kWui,
+                    "label_filename",
                     UI::FontStyle::kWuiLabel,
                     0,
                     0,
                     0,
                     0,
                     _("Filename:")),
-     editbox_(&table_footer_box_, 0, 0, 0, UI::PanelStyle::kWui),
+     editbox_(&table_footer_box_, "editbox", 0, 0, 0, UI::PanelStyle::kWui),
      make_directory_(&table_footer_box_,
                      "make_directory",
                      0,
@@ -198,6 +199,10 @@ void MainMenuSaveMap::clicked_make_directory() {
 
 void MainMenuSaveMap::clicked_edit_options() {
 	map_options_registry_.create();
+	// Make sure the map options window is always on top of us
+	assert(map_options_registry_.window != nullptr);
+	map_options_registry_.window->set_z(
+	   static_cast<UI::Panel::ZOrder>(static_cast<int>(get_z()) + 1));
 }
 
 void MainMenuSaveMap::update_map_options() {

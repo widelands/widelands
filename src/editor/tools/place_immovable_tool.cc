@@ -52,7 +52,12 @@ int32_t EditorPlaceImmovableTool::handle_click_impl(const Widelands::NodeAndTria
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 		   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), radius));
 		std::list<Widelands::DescriptionIndex>::iterator i = args->new_immovable_types.begin();
+		auto gap_it = args->selection_gaps.cbegin();
 		do {
+			if (*gap_it++) {
+				continue;
+			}
+
 			if (*i == kAutoTreesIndex) {
 				const uint32_t attribute_id =
 				   Widelands::ImmovableDescr::get_attribute_id("normal_tree");
@@ -99,7 +104,12 @@ int32_t EditorPlaceImmovableTool::handle_undo_impl(
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), radius));
 	std::list<std::string>::iterator i = args->old_immovable_types.begin();
+	auto gap_it = args->selection_gaps.cbegin();
 	do {
+		if (*gap_it++) {
+			continue;
+		}
+
 		if (upcast(Widelands::Immovable, immovable, mr.location().field->get_immovable())) {
 			immovable->remove(egbase);
 		}

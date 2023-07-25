@@ -57,7 +57,7 @@ private:
 SoldierCapacityControl::SoldierCapacityControl(UI::Panel* parent,
                                                InteractiveBase& ib,
                                                Widelands::Building& building)
-   : Box(parent, UI::PanelStyle::kWui, 0, 0, Horizontal),
+   : Box(parent, UI::PanelStyle::kWui, "soldier_capacity_control", 0, 0, Horizontal),
      ibase_(ib),
      building_(building),
      decrease_(this,
@@ -78,11 +78,13 @@ SoldierCapacityControl::SoldierCapacityControl(UI::Panel* parent,
                UI::ButtonStyle::kWuiMenu,
                g_image_cache->get("images/wui/buildings/menu_up_train.png"),
                _("Increase capacity. Hold down Ctrl to set the capacity to the highest value")),
-     value_(this, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, "199", UI::Align::kCenter) {
+     value_(
+        this, UI::PanelStyle::kWui, "value", UI::FontStyle::kWuiLabel, "199", UI::Align::kCenter) {
 	decrease_.sigclicked.connect([this]() { click_decrease(); });
 	increase_.sigclicked.connect([this]() { click_increase(); });
 
-	add(new UI::Textarea(this, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, _("Capacity")),
+	add(new UI::Textarea(
+	       this, UI::PanelStyle::kWui, "label_capacity", UI::FontStyle::kWuiLabel, _("Capacity")),
 	    UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	add(&decrease_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	add(&value_, UI::Box::Resizing::kAlign, UI::Align::kCenter);

@@ -79,6 +79,7 @@ struct SpinBoxImpl {
  * The spinbox' height and button size is set automatically according to the height of its textarea.
  */
 SpinBox::SpinBox(Panel* const parent,
+                 const std::string& name,
                  const int32_t x,
                  const int32_t y,
                  const uint32_t w,
@@ -92,15 +93,14 @@ SpinBox::SpinBox(Panel* const parent,
                  SpinBox::Type type,
                  int32_t step_size,
                  int32_t big_step_size)
-   : Panel(parent, style, x, y, std::max(w, unit_w), 0),
+   : Panel(parent, style, name, x, y, std::max(w, unit_w), 0),
      type_(type),
      sbi_(new SpinBoxImpl),
      unit_width_(unit_w),
      button_size_(20),
      big_step_button_width_(32),
      buttons_width_(0),
-     padding_(2),
-     number_of_paddings_(type_ == SpinBox::Type::kBig ? 2 : 0) {
+     padding_(2) {
 	if (type_ == SpinBox::Type::kValueList) {
 		sbi_->min = 0;
 		sbi_->max = 0;
@@ -115,18 +115,18 @@ SpinBox::SpinBox(Panel* const parent,
 	sbi_->button_style = style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
                                                            UI::ButtonStyle::kWuiSecondary;
 
-	box_ = new UI::Box(this, style, 0, 0, UI::Box::Horizontal);
+	box_ = new UI::Box(this, style, "spinner_buttons_box", 0, 0, UI::Box::Horizontal);
 
-	sbi_->label_padding = new UI::Panel(box_, style, 0, 0, padding_, padding_);
-	sbi_->label = new UI::MultilineTextarea(box_, 0, 0, 0, 0, style, label_text, UI::Align::kLeft,
-	                                        UI::MultilineTextarea::ScrollMode::kNoScrolling);
-	box_->add(sbi_->label);
-	box_->add(sbi_->label_padding);
+	sbi_->label =
+	   new UI::MultilineTextarea(box_, "label", 0, 0, 0, 0, style, label_text, UI::Align::kLeft,
+	                             UI::MultilineTextarea::ScrollMode::kNoScrolling);
+	box_->add(sbi_->label, Box::Resizing::kFullSize);
 
 	sbi_->text = new UI::Button(box_, "value", 0, 0, 0, button_size_,
 	                            style == PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
                                                               UI::ButtonStyle::kWuiSecondary,
 	                            "");
+	sbi_->text->set_tooltip(label_text);
 	sbi_->text->set_disable_style(UI::ButtonDisableStyle::kPermpressed);
 	sbi_->text->set_enabled(false);
 
@@ -193,13 +193,13 @@ SpinBox::SpinBox(Panel* const parent,
 		box_->add(sbi_->button_ten_minus);
 		box_->add_space(padding_);
 		box_->add(sbi_->button_minus);
-		box_->add(sbi_->text);
+		box_->add(sbi_->text, Box::Resizing::kFillSpace);
 		box_->add(sbi_->button_plus);
 		box_->add_space(padding_);
 		box_->add(sbi_->button_ten_plus);
 	} else {
 		box_->add(sbi_->button_minus);
-		box_->add(sbi_->text);
+		box_->add(sbi_->text, Box::Resizing::kFillSpace);
 		box_->add(sbi_->button_plus);
 	}
 
@@ -223,6 +223,8 @@ SpinBox::SpinBox(Panel* const parent,
 	buttons_.push_back(sbi_->button_plus);
 
 	buttons_width_ = 2 * button_size_ + (is_big ? 2 * big_step_button_width_ : 0);
+
+	sbi_->text->set_desired_size(0, button_size_);
 
 	set_can_focus(true);
 	layout();
@@ -298,19 +300,17 @@ void SpinBox::layout() {
 		         sbi_->label->get_text().c_str(), unit_width_, unit_text_min_width + buttons_width_);
 	}
 
-	if (get_w() >= static_cast<int32_t>(unit_width_ + padding_)) {
-		// 10 is arbitrary, the actual height will be set by the Multilinetextarea itself
+	int w;
+	int padding;
+	sbi_->label->get_text_size(&w, &padding);
+	padding = get_w() - static_cast<int32_t>(unit_width_);
+	if (padding > w) {
 		sbi_->label->set_visible(true);
-		sbi_->label_padding->set_visible(true);
-		sbi_->label->set_size(get_w() - unit_width_ - padding_, 10);
+		sbi_->label->set_desired_size(padding, 0);
 	} else {
 		// There is no space for the label
 		sbi_->label->set_visible(false);
-		sbi_->label_padding->set_visible(false);
 	}
-
-	sbi_->text->set_desired_size(
-	   unit_width_ - buttons_width_ - number_of_paddings_ * padding_, button_size_);
 
 	uint32_t box_height = std::max(sbi_->label->get_h(), static_cast<int32_t>(button_size_));
 	box_->set_size(get_w(), box_height);

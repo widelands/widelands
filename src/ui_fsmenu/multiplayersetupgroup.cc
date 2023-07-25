@@ -45,7 +45,15 @@ struct MultiPlayerClientGroup : public UI::Box {
 	                       int32_t const h,
 	                       PlayerSlot id,
 	                       GameSettingsProvider* const settings)
-	   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
+	   : UI::Box(parent,
+	             UI::PanelStyle::kFsMenu,
+	             format("multi_player_client_group_%u", id),
+	             0,
+	             0,
+	             UI::Box::Horizontal,
+	             0,
+	             0,
+	             kPadding),
 	     slot_dropdown_(this,
 	                    format("dropdown_slot%d", static_cast<unsigned int>(id)),
 	                    0,
@@ -59,7 +67,14 @@ struct MultiPlayerClientGroup : public UI::Box {
 	                    UI::ButtonStyle::kFsMenuSecondary),
 	     // Name needs to be initialized after the dropdown, otherwise the layout function will
 	     // crash.
-	     name(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, 0, 0, 0, 0),
+	     name(this,
+	          UI::PanelStyle::kFsMenu,
+	          format("label_name_%u", id),
+	          UI::FontStyle::kFsMenuLabel,
+	          0,
+	          0,
+	          0,
+	          0),
 	     settings_(settings),
 	     id_(id),
 
@@ -169,7 +184,12 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	                       PlayerSlot id,
 	                       GameSettingsProvider* const settings,
 	                       NetworkPlayerSettingsBackend* const npsb)
-	   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+	   : UI::Box(parent,
+	             UI::PanelStyle::kFsMenu,
+	             format("multi_player_setup_group_box_%d", id),
+	             0,
+	             0,
+	             UI::Box::Horizontal),
 	     settings_(settings),
 	     n(npsb),
 	     id_(id),
@@ -621,6 +641,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	}
 
 	void force_new_dimensions(uint32_t height) {
+		number_.set_desired_size(height, height);
 		player_.set_desired_size(height, height);
 		type_dropdown_.set_desired_size(height, height);
 		tribes_dropdown_.set_desired_size(height, height);
@@ -660,15 +681,19 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const launchgame,
                                              int32_t const /* h */,
                                              GameSettingsProvider* const settings,
                                              uint32_t buth)
-   : UI::Box(parent, UI::PanelStyle::kFsMenu, x, y, UI::Box::Horizontal),
+   : UI::Box(
+        parent, UI::PanelStyle::kFsMenu, "multi_player_setup_group", x, y, UI::Box::Horizontal),
      settings_(settings),
      npsb_(new NetworkPlayerSettingsBackend(settings_)),
      launchgame_(launchgame),
-     clientbox_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     playerbox_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     scrollable_playerbox_(&playerbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     clientbox_(this, UI::PanelStyle::kFsMenu, "client_box", 0, 0, UI::Box::Vertical),
+     playerbox_(
+        this, UI::PanelStyle::kFsMenu, "player_box", 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     scrollable_playerbox_(
+        &playerbox_, UI::PanelStyle::kFsMenu, "scrollable_playerbox", 0, 0, UI::Box::Vertical),
      clients_(&clientbox_,
               UI::PanelStyle::kFsMenu,
+              "label_clients",
               UI::FontStyle::kFsGameSetupHeadings,
               0,
               0,
@@ -678,6 +703,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const launchgame,
               UI::Align::kCenter),
      players_(&playerbox_,
               UI::PanelStyle::kFsMenu,
+              "label_players",
               UI::FontStyle::kFsGameSetupHeadings,
               0,
               0,
@@ -690,7 +716,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const launchgame,
 	clientbox_.add_space(3 * kPadding);
 	clientbox_.set_scrolling(true);
 
-	add(&clientbox_);
+	add(&clientbox_, Resizing::kFullSize);
 	add_space(8 * kPadding);
 	add(&playerbox_, Resizing::kExpandBoth);
 	playerbox_.add(&players_, Resizing::kAlign, UI::Align::kCenter);
@@ -773,13 +799,11 @@ void MultiPlayerSetupGroup::draw(RenderTarget& dst) {
 }
 
 void MultiPlayerSetupGroup::force_new_dimensions(uint32_t max_width,
-                                                 uint32_t max_height,
                                                  uint32_t standard_element_height) {
 	buth_ = standard_element_height;
-	clientbox_.set_min_desired_breadth(max_width / 3);
-	clientbox_.set_max_size(max_width / 3, max_height);
-	playerbox_.set_max_size(max_width / 2, max_height);
-	scrollable_playerbox_.set_max_size(max_width / 2, max_height - players_.get_h() - 4 * kPadding);
+	clientbox_.set_desired_size(max_width / 3, 0);
+	playerbox_.set_desired_size(0, 0);
+	scrollable_playerbox_.set_desired_size(0, 0);
 
 	for (auto& multiPlayerClientGroup : multi_player_client_groups_) {
 		multiPlayerClientGroup->force_new_dimensions(standard_element_height);

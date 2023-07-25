@@ -40,8 +40,8 @@ struct MousewheelConfigSettings {
 	// to underlying windows.
 	// Therefore configuration is only needed for the actions in the
 	// main game and editor windows.
-	uint16_t zoom_mod_, map_scroll_mod_, speed_mod_, toolsize_mod_;
-	uint8_t zoom_dir_, speed_dir_, toolsize_dir_;
+	uint16_t zoom_mod_, map_scroll_mod_, speed_mod_, toolsize_mod_, toolgap_mod_;
+	uint8_t zoom_dir_, speed_dir_, toolsize_dir_, toolgap_dir_;
 
 	// Will be converted from/to bool to allow common handler
 	uint8_t enable_map_scroll_;
@@ -165,6 +165,7 @@ private:
 	KeymodAndDirBox mapscroll_box_;
 	KeymodAndDirBox speed_box_;
 	KeymodAndDirBox toolsize_box_;
+	KeymodAndDirBox toolgap_box_;
 	InvertDirBox zoom_invert_box_;
 	InvertDirBox tab_invert_box_;
 	InvertDirBox value_invert_box_;

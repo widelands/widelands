@@ -27,11 +27,12 @@ namespace UI {
  */
 Radiobutton::Radiobutton(Panel* const parent,
                          PanelStyle s,
+                         const std::string& name,
                          Vector2i const p,
                          const Image* pic,
                          Radiogroup& group,
                          int32_t const id)
-   : Statebox(parent, s, p, pic), nextbtn_(group.buttons_), group_(group), id_(id) {
+   : Statebox(parent, s, name, p, pic), nextbtn_(group.buttons_), group_(group), id_(id) {
 	group.buttons_ = this;
 }
 
@@ -44,6 +45,10 @@ Radiobutton::~Radiobutton() {
 			*pp = nextbtn_;
 			break;
 		}
+	}
+
+	if (group_.managing_own_lifetime_ && group_.buttons_ == nullptr) {
+		delete &group_;
 	}
 }
 
@@ -86,18 +91,27 @@ Radiogroup::~Radiogroup() {
 	}
 }
 
+void Radiogroup::manage_own_lifetime() {
+	if (buttons_ == nullptr) {
+		delete this;
+		return;
+	}
+	managing_own_lifetime_ = true;
+}
+
 /**
  * Create a new radio button with the given attributes
  * Returns the ID of the new button.
  */
 int32_t Radiogroup::add_button(Panel* const parent,
                                PanelStyle s,
+                               const std::string& name,
                                Vector2i const p,
                                const Image* pic,
                                const std::string& tooltip,
                                Radiobutton** ret_btn) {
 	++highestid_;
-	Radiobutton* btn = new Radiobutton(parent, s, p, pic, *this, highestid_);
+	Radiobutton* btn = new Radiobutton(parent, s, name, p, pic, *this, highestid_);
 	btn->set_tooltip(tooltip);
 	if (ret_btn != nullptr) {
 		(*ret_btn) = btn;

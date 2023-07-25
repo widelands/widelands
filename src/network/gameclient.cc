@@ -1252,15 +1252,19 @@ void GameClient::handle_network() {
 	} catch (const AddOnsMismatchException& e) {
 		disconnect("SOMETHING_WRONG", e.what());
 	} catch (const WLWarning& e) {
-		// disconnect() should have been called already, but just in case:
+		if (d->disconnect_called_) {
+			// the Warning is intended for the caller
+			throw;
+		}
 		disconnect("SOMETHING_WRONG", e.what());
-		// the Warning is intended for the caller
-		throw;
 	} catch (const DisconnectException& e) {
 		disconnect(e.what());
 	} catch (const ProtocolException& e) {
 		disconnect("PROTOCOL_EXCEPTION", e.what());
 	} catch (const std::exception& e) {
+		if (d->disconnect_called_) {
+			throw;
+		}
 		disconnect("SOMETHING_WRONG", e.what());
 	}
 }

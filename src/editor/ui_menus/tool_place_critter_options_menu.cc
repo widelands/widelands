@@ -31,8 +31,9 @@ namespace {
 UI::Checkbox* create_critter_checkbox(UI::Panel* parent,
                                       const Widelands::CritterDescr& critter_descr) {
 	const Image* pic = critter_descr.representative_image();
-	UI::Checkbox* cb = new UI::Checkbox(
-	   parent, UI::PanelStyle::kWui, Vector2i::zero(), pic, critter_descr.descname());
+	UI::Checkbox* cb =
+	   new UI::Checkbox(parent, UI::PanelStyle::kWui, format("checkbox_%s", critter_descr.name()),
+	                    Vector2i::zero(), pic, critter_descr.descname());
 	const int kMinClickableArea = 24;
 	cb->set_desired_size(std::max<int>(pic->width(), kMinClickableArea),
 	                     std::max<int>(pic->height(), kMinClickableArea));
@@ -47,7 +48,8 @@ EditorToolPlaceCritterOptionsMenu::EditorToolPlaceCritterOptionsMenu(
 	const Widelands::Descriptions& descriptions = parent.egbase().descriptions();
 	multi_select_menu_.reset(
 	   new CategorizedItemSelectionMenu<Widelands::CritterDescr, EditorPlaceCritterTool>(
-	      this, parent.editor_categories(Widelands::MapObjectType::CRITTER), descriptions.critters(),
+	      this, "critters", parent.editor_categories(Widelands::MapObjectType::CRITTER),
+	      descriptions.critters(),
 	      [](UI::Panel* cb_parent, const Widelands::CritterDescr& critter_descr) {
 		      return create_critter_checkbox(cb_parent, critter_descr);
 	      },

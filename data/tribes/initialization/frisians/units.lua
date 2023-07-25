@@ -1612,8 +1612,12 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("frisians_building", "A hunter admiring a fisher"),
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Fisher's House
             purpose = pgettext("frisians_building", "Fishes on the coast near the fisher’s house."),
-            -- TRANSLATORS: Note helptext for a Frisian production site: Fisher's House
-            note = pgettext("frisians_building", "The fisher’s house needs water full of fish within the work area."),
+            note = {
+               -- TRANSLATORS: Note helptext for a Frisian production site: Fisher's House, part 1
+               pgettext("frisians_building", "The fisher’s house needs water full of fish within the work area."),
+               -- TRANSLATORS: Note helptext for a Frisian production site: Fisher's House, part 2
+               pgettext("frisians_building", "Roads and trees along the shoreline block fishing."),
+            },
             -- TRANSLATORS: Performance helptext for a Frisian production site: Fisher's House
             performance = pgettext("frisians_building", "The fisher pauses %s before going to work again."):bformat(format_seconds(16))
          }
@@ -1815,7 +1819,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Large Armor Smithy
             purpose = pgettext("frisians_building", "Produces advanced weapons and golden helmets for the soldiers."),
             -- TRANSLATORS: Performance helptext for a Frisian production site: Large Armor Smithy
-            performance = pgettext("frisians_building", "If all needed wares are delivered in time, this building can produce one broadswordsword in %1$s on average, one double-edged sword in %2$s on average and one golden helmet in %3$s on average."):bformat(format_minutes_seconds(2, 42), format_minutes_seconds(2, 42), format_minutes_seconds(5, 24))
+            performance = pgettext("frisians_building", "If all needed wares are delivered in time, this building can produce one broadsword in %1$s on average, one double-edged sword in %2$s on average and one golden helmet in %3$s on average."):bformat(format_minutes_seconds(2, 42), format_minutes_seconds(2, 42), format_minutes_seconds(5, 24))
          }
       },
       {
@@ -2161,8 +2165,12 @@ wl.Descriptions():new_tribe {
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Ferry Yard
             purpose = pgettext("building", "Builds ferries."),
-            -- TRANSLATORS: Note helptext for a Frisian production site: Ferry Yard
-            note = pgettext("building", "Needs water nearby.")
+            note = {
+               -- TRANSLATORS: Note helptext for a Frisian production site: Ferry Yard, part 1
+               pgettext("building", "Needs water nearby. Be aware ferries carry wares only, no workers."),
+               -- TRANSLATORS: Note helptext for an Frisian production site: Ferry Yard, part 2
+               pgettext("building", "Roads and trees along the shoreline block access to water."),
+            }
          }
       },
       {
@@ -2173,7 +2181,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for a Frisian production site: Shipyard
             lore_author = pgettext("frisians_building", "A shipwright who only constructed toy ships after being chid that his ships were too small"),
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Shipyard
-            purpose = pgettext("building", "Constructs ships that are used for overseas colonization and for trading between ports.")
+            purpose = pgettext("building", "Constructs ships that are used for overseas colonization and for trading between ports."),
+            note = {
+               -- TRANSLATORS: Note helptext for a Frisian production site: Shipyard, part 1
+               pgettext("building", "Needs wide open water nearby."),
+               -- TRANSLATORS: Note helptext for a Frisian production site: Shipyard, part 2
+               pgettext("building", "Roads and trees along the shoreline block access to water."),
+            }
          }
       },
       {

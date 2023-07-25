@@ -27,18 +27,27 @@ class EditorInteractive;
 /// The tool size window/menu.
 struct EditorToolsizeMenu : public UI::UniqueWindow {
 	EditorToolsizeMenu(EditorInteractive&, UI::UniqueWindow::Registry&);
-	void update(uint32_t);
+	void update(uint32_t radius, uint32_t gap);
 	void set_buttons_enabled(bool enable);
-	[[nodiscard]] uint32_t value() const {
-		return value_;
+	[[nodiscard]] uint32_t radius() const {
+		return radius_;
+	}
+	[[nodiscard]] uint32_t gap_percent() const {
+		return gap_percent_;
 	}
 
 private:
 	EditorInteractive& eia() const;
-	UI::SpinBox spinbox_;
-	uint32_t value_{0U};
+
+	UI::Box box_;
+	UI::SpinBox spinbox_radius_;
+	UI::SpinBox spinbox_gap_;
+
+	uint32_t radius_{0U};
+	uint16_t gap_percent_{0U};
+
 	void changed();
-	static constexpr uint32_t kMargin = 5;
+	bool is_updating_{false};
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOLSIZE_MENU_H

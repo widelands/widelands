@@ -51,10 +51,10 @@ AttackWindow::AttackWindow(InteractivePlayer& parent,
      target_coordinates_(target_coords),
      lastupdate_(0),
 
-     mainbox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-     linebox_(&mainbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
-     columnbox_(&linebox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-     bottombox_(&mainbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal) {
+     mainbox_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical),
+     linebox_(&mainbox_, UI::PanelStyle::kWui, "line_box", 0, 0, UI::Box::Horizontal),
+     columnbox_(&linebox_, UI::PanelStyle::kWui, "column_box", 0, 0, UI::Box::Vertical),
+     bottombox_(&mainbox_, UI::PanelStyle::kWui, "bottom_box", 0, 0, UI::Box::Horizontal) {
 	const unsigned serial = serial_;
 	living_attack_windows_[serial] = this;
 	target_bld.removed.connect([serial](unsigned /* index */) {
@@ -120,7 +120,7 @@ std::unique_ptr<UI::HorizontalSlider> AttackWindow::add_slider(UI::Box& parent,
                                                                uint32_t initial,
                                                                char const* hint) {
 	std::unique_ptr<UI::HorizontalSlider> result(new UI::HorizontalSlider(
-	   &parent, 0, 0, width, height, min, max, initial, UI::SliderStyle::kWuiLight, hint));
+	   &parent, "slider", 0, 0, width, height, min, max, initial, UI::SliderStyle::kWuiLight, hint));
 	parent.add(result.get());
 	return result;
 }
@@ -130,7 +130,7 @@ UI::Textarea& AttackWindow::add_text(UI::Box& parent,
                                      UI::Align alignment,
                                      const UI::FontStyle style) {
 	UI::Textarea& result =
-	   *new UI::Textarea(&parent, UI::PanelStyle::kWui, style, str, UI::Align::kLeft);
+	   *new UI::Textarea(&parent, UI::PanelStyle::kWui, "label", style, str, UI::Align::kLeft);
 	parent.add(&result, UI::Box::Resizing::kAlign, alignment);
 	return result;
 }
@@ -318,9 +318,9 @@ void AttackWindow::init_bottombox() {
 		return;
 	}
 	if (building->descr().type() == Widelands::MapObjectType::MILITARYSITE) {
-		do_not_conquer_.reset(
-		   new UI::Checkbox(&bottombox_, UI::PanelStyle::kWui, Vector2i(0, 0), _("Destroy target"),
-		                    _("Destroy the target building instead of conquering it")));
+		do_not_conquer_.reset(new UI::Checkbox(
+		   &bottombox_, UI::PanelStyle::kWui, "do_not_conquer", Vector2i(0, 0), _("Destroy target"),
+		   _("Destroy the target building instead of conquering it")));
 		do_not_conquer_->set_state(!dynamic_cast<const Widelands::MilitarySite*>(building)
 		                               ->attack_target()
 		                               ->get_allow_conquer(iplayer_.player_number()));
@@ -397,7 +397,7 @@ AttackWindow::ListOfSoldiers::ListOfSoldiers(UI::Panel* const parent,
                                              int const w,
                                              int const h,
                                              bool restrict_rows)
-   : UI::Panel(parent, UI::PanelStyle::kWui, x, y, w, h),
+   : UI::Panel(parent, UI::PanelStyle::kWui, "list_of_soldiers", x, y, w, h),
      restricted_row_number_(restrict_rows),
      attack_box_(parent_box) {
 	update_desired_size();
