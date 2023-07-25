@@ -49,7 +49,7 @@ jobs:
         do
           if ! [ "$file" == ".git" ]
           then
-            cp -r $file ~/wl_trunk/$file
+            cp -r "$file" ~/wl_trunk/"$file"
           fi
         done
         cd ~/wl_trunk
@@ -62,13 +62,12 @@ jobs:
         commit_message=${commit_message%\",}
         commit_message="$commit_message\n\n(by $GITHUB_ACTOR)\n$GITHUB_SHA"
         commit_message=${commit_message//"\r\n"/"\n"}
-        printf "$commit_message" > ~/temp_commit_message
+        printf %s "$commit_message" > ~/temp_commit_message
         bzr remove
         bzr add
         bzr commit --strict -F ~/temp_commit_message
-        set +e
-        check_for_remote_changes=$(curl -i "https://api.github.com/repos/widelands/widelands/commits/master" | grep -m 1 "\"sha\": ")
-        set -e
+        # curl exits 23 because grep will kill it after the first match
+        check_for_remote_changes=$({ curl -i "https://api.github.com/repos/widelands/widelands/commits/master" || true; } | grep -m 1 "\"sha\": ")
         check_for_remote_changes=${check_for_remote_changes#*: \"}
         check_for_remote_changes=${check_for_remote_changes%\",}
         if [ "$check_for_remote_changes" == "$GITHUB_SHA" ]

@@ -36,8 +36,8 @@ jobs:
         HEAD=$(git rev-parse --short HEAD)
         popd
         echo "Current HEAD is $HEAD"
-        echo -n $HEAD > .github/scripts/vcpkg_ref
-        echo "vcpkg_key=${{ hashFiles( './install-dependencies.sh' ) }}-${HEAD}" >> $GITHUB_OUTPUT
+        echo -n "$HEAD" > .github/scripts/vcpkg_ref
+        echo "vcpkg_key=${{ hashFiles( './install-dependencies.sh' ) }}-${HEAD}" >> "$GITHUB_OUTPUT"
       shell: bash
     - name: Check whether cache exists
       id: lookup
@@ -51,7 +51,7 @@ jobs:
       if: steps.lookup.outputs.cache-hit != 'true'
       run: |
         ./install-dependencies.sh vcpkg --triplet=${{ env.VCPKG_TARGET_TRIPLET }}
-        echo "result-${{ matrix.arch }}=true" >> $GITHUB_OUTPUT
+        echo "result-${{ matrix.arch }}=true" >> "$GITHUB_OUTPUT"
       shell: bash
   update:
     needs: vcpkg-packages
@@ -72,7 +72,7 @@ jobs:
         HEAD=$(git rev-parse --short HEAD)
         popd
         echo "Current HEAD is $HEAD"
-        echo -n $HEAD > .github/scripts/vcpkg_ref
+        echo -n "$HEAD" > .github/scripts/vcpkg_ref
         if [ -n "$(git status -s)" ]; then
           git config --global user.name "The Widelands Build Bot"
           git config --global user.email "bunnybot@widelands.org"
