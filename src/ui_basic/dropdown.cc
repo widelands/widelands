@@ -62,22 +62,22 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                            const DropdownType type,
                            UI::PanelStyle style,
                            ButtonStyle button_style)
-   : UI::NamedPanel(parent,
-                    style,
-                    name,
-                    x,
-                    y,
-                    (type == DropdownType::kPictorial || type == DropdownType::kPictorialMenu) ?
-                       button_dimension :
-                       w,
-                    // Height only to fit the button, so we can use this in Box layout.
-                    base_height(button_dimension, style)),
+   : UI::Panel(parent,
+               style,
+               name,
+               x,
+               y,
+               (type == DropdownType::kPictorial || type == DropdownType::kPictorialMenu) ?
+                  button_dimension :
+                  w,
+               // Height only to fit the button, so we can use this in Box layout.
+               base_height(button_dimension, style)),
      id_(next_id_++),
      max_list_items_(max_list_items),
 
      base_height_(base_height(button_dimension, style)),
 
-     button_box_(this, style, 0, 0, UI::Box::Horizontal, w, get_h()),
+     button_box_(this, style, "dropdown_button_box", 0, 0, UI::Box::Horizontal, w, get_h()),
      push_button_(type == DropdownType::kTextual ?
                      new UI::Button(&button_box_,
                                     "dropdown_select",
@@ -128,8 +128,8 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	while (list_parent->get_parent() != nullptr) {
 		list_parent = list_parent->get_parent();
 	}
-	list_ =
-	   new UI::Listselect<uintptr_t>(list_parent, 0, 0, w, 0, style, ListselectLayout::kDropdown);
+	list_ = new UI::Listselect<uintptr_t>(
+	   list_parent, "list", 0, 0, w, 0, style, ListselectLayout::kDropdown);
 	list_->set_linked_dropdown(this);
 
 	list_->set_visible(false);
@@ -364,6 +364,10 @@ void BaseDropdown::set_errored(const std::string& error_message) {
 }
 
 void BaseDropdown::set_enabled(bool on) {
+	if (is_enabled_ == on) {
+		return;
+	}
+
 	is_enabled_ = on;
 	set_can_focus(on);
 	if (push_button_ != nullptr) {
@@ -531,7 +535,7 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 	if (is_expanded()) {
 		return list_->handle_key(down, code);
 	}
-	return NamedPanel::handle_key(down, code);
+	return Panel::handle_key(down, code);
 }
 void BaseDropdown::delete_last_of_filter() {
 	if (is_filtered()) {

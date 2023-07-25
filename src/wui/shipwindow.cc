@@ -65,14 +65,14 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
    : UniqueWindow(&ib, UI::WindowStyle::kWui, "shipwindow", &reg, 0, 0, ship->get_shipname()),
      ibase_(ib),
      ship_(ship),
-     vbox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-     navigation_box_(&vbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+     vbox_(this, UI::PanelStyle::kWui, "vbox", 0, 0, UI::Box::Vertical),
+     navigation_box_(&vbox_, UI::PanelStyle::kWui, "navigation_box", 0, 0, UI::Box::Vertical),
      warship_capacity_control_(create_soldier_list(vbox_, ibase_, *ship)) {
 	vbox_.set_inner_spacing(kPadding);
 	assert(ship->get_owner());
 
 	if (ibase_.can_act(ship->owner().player_number())) {
-		name_field_ = new UI::EditBox(&vbox_, 0, 0, 0, UI::PanelStyle::kWui);
+		name_field_ = new UI::EditBox(&vbox_, "name", 0, 0, 0, UI::PanelStyle::kWui);
 		name_field_->set_text(ship->get_shipname());
 		name_field_->changed.connect([this]() { act_rename(); });
 		vbox_.add(name_field_, UI::Box::Resizing::kFullSize);
@@ -87,13 +87,13 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 
 	// Expedition buttons
 	UI::Box* exp_top =
-	   new UI::Box(&navigation_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	   new UI::Box(&navigation_box_, UI::PanelStyle::kWui, "exp_box_1", 0, 0, UI::Box::Horizontal);
 	navigation_box_.add(exp_top, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	UI::Box* exp_mid =
-	   new UI::Box(&navigation_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	   new UI::Box(&navigation_box_, UI::PanelStyle::kWui, "exp_box_2", 0, 0, UI::Box::Horizontal);
 	navigation_box_.add(exp_mid, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	UI::Box* exp_bot =
-	   new UI::Box(&navigation_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	   new UI::Box(&navigation_box_, UI::PanelStyle::kWui, "exp_box_3", 0, 0, UI::Box::Horizontal);
 	navigation_box_.add(exp_bot, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	navigation_box_.add_space(kPadding);
 
@@ -156,7 +156,8 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	vbox_.add(set_destination_, UI::Box::Resizing::kFullSize);
 
 	// Bottom buttons
-	UI::Box* buttons = new UI::Box(&vbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	UI::Box* buttons =
+	   new UI::Box(&vbox_, UI::PanelStyle::kWui, "buttons_box", 0, 0, UI::Box::Horizontal);
 	vbox_.add(buttons, UI::Box::Resizing::kFullSize);
 
 	btn_sink_ =

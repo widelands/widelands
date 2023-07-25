@@ -295,6 +295,22 @@ void Ship::set_warship_soldier_capacity(Quantity c) {
 	warship_soldier_capacity_ = c;
 }
 
+void Ship::set_position(EditorGameBase& egbase, const Coords& coords) {
+	Bob::set_position(egbase, coords);
+
+	if (expedition_ != nullptr) {
+		recalc_expedition_swimmable(egbase);
+	}
+}
+
+void Ship::recalc_expedition_swimmable(const EditorGameBase& egbase) {
+	assert(expedition_ != nullptr);
+	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
+		expedition_->swimmable[dir - FIRST_DIRECTION] =
+		   ((egbase.map().get_neighbour(get_position(), dir).field->nodecaps() & MOVECAPS_SWIM) != 0);
+	}
+}
+
 /**
  * Standard behaviour of ships.
  *
@@ -572,14 +588,11 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 	Map* map = game.mutable_map();
 
-	assert(expedition_);
+	assert(expedition_ != nullptr);
 	const FCoords position = get_position();
 
 	// Update the knowledge of the surrounding fields
-	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
-		expedition_->swimmable[dir - 1] =
-		   ((map->get_neighbour(position, dir).field->nodecaps() & MOVECAPS_SWIM) != 0);
-	}
+	recalc_expedition_swimmable(game);
 
 	if (get_ship_type() == ShipType::kWarship) {
 		// Look for nearby enemy warships.
@@ -881,9 +894,12 @@ void Ship::warship_soldier_callback(Game& game,
                                     Worker* worker,
                                     PlayerImmovable& immovable) {
 	Warehouse& warehouse = dynamic_cast<Warehouse&>(immovable);
-	Ship* ship = warehouse.get_portdock()->find_ship_for_warship_request(game, req);
+	PortDock* dock = warehouse.get_portdock();
+	Ship* ship = dock->find_ship_for_warship_request(game, req);
 
-	if (ship == nullptr) {
+	if (ship == nullptr || ship->get_ship_type() != ShipType::kWarship ||
+	    ship->get_destination_port(game) != dock ||
+	    ship->get_position().field->get_immovable() != dock) {
 		verb_log_info_time(game.get_gametime(), "%s %u missed his assigned warship at dock %s",
 		                   worker->descr().name().c_str(), worker->serial(),
 		                   warehouse.get_warehouse_name().c_str());
@@ -892,10 +908,8 @@ void Ship::warship_soldier_callback(Game& game,
 	}
 
 	assert(ship->get_owner() == warehouse.get_owner());
-	assert(ship->get_ship_type() == ShipType::kWarship);
-
-	ship->molog(game.get_gametime(), "%s %u embarked on warship", worker->descr().name().c_str(),
-	            worker->serial());
+	ship->molog(game.get_gametime(), "%s %u embarked on warship %s", worker->descr().name().c_str(),
+	            worker->serial(), ship->get_shipname().c_str());
 
 	worker->set_location(nullptr);
 	worker->start_task_shipping(game, nullptr);
@@ -1350,7 +1364,7 @@ void Ship::battle_update(Game& game) {
 		molog(game.get_gametime(), "[battle] Moving towards enemy");
 		// Move in small steps to allow for defender position change.
 		start_task_movepath(
-		   game, path, descr().get_sail_anims(), false, std::min<unsigned>(path.get_nsteps(), 3));
+		   game, path, descr().get_sail_anims(), true, std::min<unsigned>(path.get_nsteps(), 3));
 		return;
 	}
 

@@ -47,12 +47,13 @@ CommentRow::CommentRow(AddOnsCtrl& ctrl,
                        UI::Panel& parent,
                        const std::string& text,
                        const size_t& index)
-   : UI::Box(&parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+   : UI::Box(&parent, UI::PanelStyle::kFsMenu, "comment_row_box", 0, 0, UI::Box::Horizontal),
      ctrl_(ctrl),
      info_(info),
      index_(index),
 
      text_(this,
+           "text",
            0,
            0,
            0,
@@ -61,7 +62,7 @@ CommentRow::CommentRow(AddOnsCtrl& ctrl,
            text,
            UI::Align::kLeft,
            UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     buttons_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     buttons_(this, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Vertical),
      edit_(&buttons_, "edit", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Edit…")),
      delete_(&buttons_, "delete", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Delete")) {
 	buttons_.add(&edit_, UI::Box::Resizing::kFullSize);
@@ -133,15 +134,13 @@ void CommentRow::update_edit_enabled() {
 }
 
 void CommentRow::layout() {
+	UI::Box::layout();
 	if (layouting_) {
 		return;
 	}
+	// Prevent stack overflow through recursive call of layout()
 	layouting_ = true;
-
-	text_.set_visible(false);  // Prevent the text from taking up all available space
-	UI::Box::layout();
-	text_.set_visible(true);
-
+	text_.set_desired_size(0, 0);
 	layouting_ = false;
 }
 
@@ -160,11 +159,11 @@ CommentEditor::CommentEditor(AddOnsCtrl& ctrl,
                 index == nullptr ? _("Write Comment") : _("Edit Comment")),
      info_(info),
      index_(index),
-     main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     markup_box_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     buttons_box_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     preview_(&main_box_, 0, 0, 300, 150, UI::PanelStyle::kFsMenu, "", UI::Align::kLeft),
-     text_(new UI::MultilineEditbox(&main_box_, 0, 0, 450, 200, UI::PanelStyle::kFsMenu)),
+     main_box_(this, UI::PanelStyle::kFsMenu, "main_box", 0, 0, UI::Box::Vertical),
+     markup_box_(&main_box_, UI::PanelStyle::kFsMenu, "markup_box", 0, 0, UI::Box::Horizontal),
+     buttons_box_(&main_box_, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Horizontal),
+     preview_(&main_box_, "preview", 0, 0, 300, 150, UI::PanelStyle::kFsMenu, "", UI::Align::kLeft),
+     text_(new UI::MultilineEditbox(&main_box_, "text", 0, 0, 450, 200, UI::PanelStyle::kFsMenu)),
      ok_(&buttons_box_,
          "ok",
          0,
@@ -374,32 +373,35 @@ void CommentEditor::reset_text() {
 class TransifexSettingsBox : public UI::Box {
 public:
 	TransifexSettingsBox(UI::Box& parent, std::shared_ptr<AddOns::AddOnInfo> info)
-	   : UI::Box(&parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-	     priority_(this, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
-	     name_(this, 0, 0, 450, UI::PanelStyle::kFsMenu),
-	     categories_(this, 0, 0, 0, UI::PanelStyle::kFsMenu) {
-		add(new UI::Textarea(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
-		                     pgettext("tx", "Priority:"), UI::Align::kCenter),
+	   : UI::Box(&parent, UI::PanelStyle::kFsMenu, "tx_settings_box", 0, 0, UI::Box::Vertical),
+	     priority_(this, "priority", 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
+	     name_(this, "name", 0, 0, 450, UI::PanelStyle::kFsMenu),
+	     categories_(this, "categories", 0, 0, 0, UI::PanelStyle::kFsMenu) {
+		add(new UI::Textarea(this, UI::PanelStyle::kFsMenu, "label_priority",
+		                     UI::FontStyle::kFsMenuInfoPanelHeading, pgettext("tx", "Priority:"),
+		                     UI::Align::kCenter),
 		    UI::Box::Resizing::kFullSize);
 		add_space(kRowButtonSpacing);
 		add(&priority_, UI::Box::Resizing::kFullSize);
 		add_space(kRowButtonSpacing);
 		add(new UI::Textarea(
-		       this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+		       this, UI::PanelStyle::kFsMenu, "label_name", UI::FontStyle::kFsMenuInfoPanelHeading,
 		       /** TRANSLATORS: "Resource" here refers to the name of a translation unit */
 		       pgettext("tx", "Resource Name:"), UI::Align::kCenter),
 		    UI::Box::Resizing::kFullSize);
 		add_space(kRowButtonSpacing);
 		add(&name_, UI::Box::Resizing::kFullSize);
 		add_space(kRowButtonSpacing);
-		add(new UI::Textarea(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+		add(new UI::Textarea(this, UI::PanelStyle::kFsMenu, "label_categories",
+		                     UI::FontStyle::kFsMenuInfoPanelHeading,
 		                     pgettext("tx", "Categories (whitespace-separated; characters only):"),
 		                     UI::Align::kCenter),
 		    UI::Box::Resizing::kFullSize);
 		add_space(kRowButtonSpacing);
 		add(&categories_, UI::Box::Resizing::kFullSize);
 		add_space(kRowButtonSpacing);
-		add(new UI::Textarea(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+		add(new UI::Textarea(this, UI::PanelStyle::kFsMenu, "label_duration",
+		                     UI::FontStyle::kFsMenuInfoPanelHeading,
 		                     _("This may take several minutes. Please be patient."),
 		                     UI::Align::kCenter),
 		    UI::Box::Resizing::kFullSize);
@@ -458,8 +460,8 @@ AdminDialog::AdminDialog(AddOnsCtrl& parent,
      riw_(riw),
      info_(info),
      action_(a),
-     main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     buttons_box_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     main_box_(this, UI::PanelStyle::kFsMenu, "main_box", 0, 0, UI::Box::Vertical),
+     buttons_box_(&main_box_, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Horizontal),
      ok_(&buttons_box_, "ok", 0, 0, kRowButtonSize, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
      cancel_(&buttons_box_,
              "cancel",
@@ -471,12 +473,13 @@ AdminDialog::AdminDialog(AddOnsCtrl& parent,
              _("Cancel")) {
 	switch (a) {
 	case AddOns::NetAddons::AdminAction::kDelete: {
-		text_ = new UI::MultilineEditbox(&main_box_, 0, 0, 450, 200, UI::PanelStyle::kFsMenu);
+		text_ = new UI::MultilineEditbox(&main_box_, "text", 0, 0, 450, 200, UI::PanelStyle::kFsMenu);
 		text_->focus();
 
-		main_box_.add(new UI::Textarea(
-		                 &main_box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
-		                 _("Please explain why you are deleting this add-on."), UI::Align::kCenter),
+		main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kFsMenu, "explanation",
+		                               UI::FontStyle::kFsMenuInfoPanelHeading,
+		                               _("Please explain why you are deleting this add-on."),
+		                               UI::Align::kCenter),
 		              UI::Box::Resizing::kFullSize);
 		main_box_.add_space(kRowButtonSpacing);
 		main_box_.add(text_, UI::Box::Resizing::kExpandBoth);
@@ -488,7 +491,8 @@ AdminDialog::AdminDialog(AddOnsCtrl& parent,
 		break;
 	}
 	default: {
-		list_ = new UI::Listselect<std::string>(&main_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu);
+		list_ =
+		   new UI::Listselect<std::string>(&main_box_, "list", 0, 0, 0, 0, UI::PanelStyle::kFsMenu);
 
 		switch (a) {
 		case AddOns::NetAddons::AdminAction::kVerify:
@@ -608,16 +612,23 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 
      nr_screenshots_(info->screenshots.size()),
 
-     main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     tabs_(&main_box_, UI::TabPanelStyle::kFsMenu),
-     box_comments_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     box_comment_rows_(&box_comments_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     box_screenies_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     box_screenies_buttons_(&box_screenies_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     box_votes_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     voting_stats_(&box_votes_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     box_comment_rows_placeholder_(&box_comments_, UI::PanelStyle::kFsMenu, 0, 0, 0, 0),
+     main_box_(this, UI::PanelStyle::kFsMenu, "main_box", 0, 0, UI::Box::Vertical),
+     tabs_(&main_box_, UI::TabPanelStyle::kFsMenu, "tabs"),
+     box_comments_(&tabs_, UI::PanelStyle::kFsMenu, "comments_box", 0, 0, UI::Box::Vertical),
+     box_comment_rows_(
+        &box_comments_, UI::PanelStyle::kFsMenu, "comment_rows_box", 0, 0, UI::Box::Vertical),
+     box_screenies_(&tabs_, UI::PanelStyle::kFsMenu, "screenies_box", 0, 0, UI::Box::Vertical),
+     box_screenies_buttons_(&box_screenies_,
+                            UI::PanelStyle::kFsMenu,
+                            "screenies_buttons_box",
+                            0,
+                            0,
+                            UI::Box::Horizontal),
+     box_votes_(&tabs_, UI::PanelStyle::kFsMenu, "votes_box", 0, 0, UI::Box::Vertical),
+     voting_stats_(
+        &box_votes_, UI::PanelStyle::kFsMenu, "voting_stats_box", 0, 0, UI::Box::Horizontal),
      comments_header_(&box_comments_,
+                      "comments_header",
                       0,
                       0,
                       0,
@@ -626,7 +637,7 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
                       "",
                       UI::Align::kLeft,
                       UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     screenshot_(&box_screenies_, UI::PanelStyle::kFsMenu, 0, 0, 0, 0, nullptr),
+     screenshot_(&box_screenies_, UI::PanelStyle::kFsMenu, "screenshot", 0, 0, 0, 0, nullptr),
      own_voting_(&box_votes_,
                  "voting",
                  0,
@@ -640,16 +651,22 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
                  UI::ButtonStyle::kFsMenuSecondary),
      screenshot_stats_(&box_screenies_buttons_,
                        UI::PanelStyle::kFsMenu,
+                       "screenshot_stats",
                        UI::FontStyle::kFsMenuLabel,
                        "",
                        UI::Align::kCenter),
      screenshot_descr_(&box_screenies_,
                        UI::PanelStyle::kFsMenu,
+                       "screenshot_description",
                        UI::FontStyle::kFsMenuLabel,
                        "",
                        UI::Align::kCenter),
-     voting_stats_summary_(
-        &box_votes_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, "", UI::Align::kCenter),
+     voting_stats_summary_(&box_votes_,
+                           UI::PanelStyle::kFsMenu,
+                           "voting_stats_summary",
+                           UI::FontStyle::kFsMenuLabel,
+                           "",
+                           UI::Align::kCenter),
      screenshot_next_(&box_screenies_buttons_,
                       "next_screenshot",
                       0,
@@ -733,18 +750,20 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 	box_comment_rows_.set_force_scrolling(true);
 	box_comments_.add(&comments_header_, UI::Box::Resizing::kFullSize);
 	box_comments_.add_space(kRowButtonSpacing);
-	box_comments_.add(&box_comment_rows_placeholder_, UI::Box::Resizing::kExpandBoth);
+	box_comments_.add(&box_comment_rows_, UI::Box::Resizing::kExpandBoth);
 	box_comments_.add_space(kRowButtonSpacing);
 	box_comments_.add(&write_comment_, UI::Box::Resizing::kFullSize);
 
 	voting_stats_.add_inf_space();
 	for (unsigned i = 0; i < AddOns::kMaxRating; ++i) {
-		UI::Box* box = new UI::Box(&voting_stats_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical);
-		voting_bars_[i] = new UI::ProgressBar(
-		   box, UI::PanelStyle::kFsMenu, 0, 0, kRowButtonSize * 3 / 2, 0, UI::ProgressBar::Vertical);
+		UI::Box* box = new UI::Box(&voting_stats_, UI::PanelStyle::kFsMenu,
+		                           format("voting_box_%u", i), 0, 0, UI::Box::Vertical);
+		voting_bars_[i] =
+		   new UI::ProgressBar(box, UI::PanelStyle::kFsMenu, format("voting_bar_%u", i), 0, 0,
+		                       kRowButtonSize * 3 / 2, 0, UI::ProgressBar::Vertical);
 		voting_bars_[i]->set_show_percent(false);
-		voting_txt_[i] = new UI::Textarea(
-		   box, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, "", UI::Align::kCenter);
+		voting_txt_[i] = new UI::Textarea(box, UI::PanelStyle::kFsMenu, format("voting_label_%u", i),
+		                                  UI::FontStyle::kFsMenuLabel, "", UI::Align::kCenter);
 
 		box->add(voting_bars_[i], UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
 		box->add_space(kRowButtonSpacing);
@@ -833,9 +852,7 @@ void RemoteInteractionWindow::layout() {
 		admin_action_.set_pos(Vector2i(
 		   login_button_.get_x() - admin_action_.get_w() - kRowButtonSpacing, login_button_.get_y()));
 
-		box_comment_rows_.set_pos(box_comment_rows_placeholder_.get_pos());
-		box_comment_rows_.set_size(
-		   box_comment_rows_placeholder_.get_w(), box_comment_rows_placeholder_.get_h());
+		box_comment_rows_.set_desired_size(0, 0);
 	}
 	UI::Window::layout();
 }

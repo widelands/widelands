@@ -916,6 +916,8 @@ void Bob::set_owner(Player* const player) {
  *
  * Performs the necessary (un)linking in the \ref Field structures and
  * updates the owner's viewing area, if the bob has an owner.
+ *
+ * Overriding implementations must always call this function!
  */
 void Bob::set_position(EditorGameBase& egbase, const Coords& coords) {
 	FCoords oldposition = position_;

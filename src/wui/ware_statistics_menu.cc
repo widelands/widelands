@@ -115,37 +115,38 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	std::fill(active_colors_.begin(), active_colors_.end(), 0);
 
 	//  First, we must decide about the size.
-	main_box_ = new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical, 0, 0, 5);
+	main_box_ =
+	   new UI::Box(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical, 0, 0, 5);
 	main_box_->set_border(kSpacing, kSpacing, kSpacing, kSpacing);
 	set_center_panel(main_box_);
 
 	// Setup plot widgets
 	// Create a tabbed environment for the different plots
-	tab_panel_ = new UI::TabPanel(main_box_, UI::TabPanelStyle::kWuiDark);
+	tab_panel_ = new UI::TabPanel(main_box_, UI::TabPanelStyle::kWuiDark, "tabs");
 
 	plot_production_ =
-	   new WuiPlotArea(tab_panel_, 0, 0, kPlotWidth, kPlotHeight + kSpacing,
+	   new WuiPlotArea(tab_panel_, "plot_production", 0, 0, kPlotWidth, kPlotHeight + kSpacing,
 	                   Widelands::kStatisticsSampleTime.get(), WuiPlotArea::Plotmode::kRelative);
 
 	tab_panel_->add(
 	   "production", g_image_cache->get(pic_tab_production), plot_production_, _("Production"));
 
 	plot_consumption_ =
-	   new WuiPlotArea(tab_panel_, 0, 0, kPlotWidth, kPlotHeight + kSpacing,
+	   new WuiPlotArea(tab_panel_, "plot_consumption", 0, 0, kPlotWidth, kPlotHeight + kSpacing,
 	                   Widelands::kStatisticsSampleTime.get(), WuiPlotArea::Plotmode::kRelative);
 
 	tab_panel_->add(
 	   "consumption", g_image_cache->get(pic_tab_consumption), plot_consumption_, _("Consumption"));
 
-	plot_economy_ = new DifferentialPlotArea(tab_panel_, 0, 0, kPlotWidth, kPlotHeight + kSpacing,
-	                                         Widelands::kStatisticsSampleTime.get(),
-	                                         WuiPlotArea::Plotmode::kRelative);
+	plot_economy_ = new DifferentialPlotArea(
+	   tab_panel_, "plot_economy", 0, 0, kPlotWidth, kPlotHeight + kSpacing,
+	   Widelands::kStatisticsSampleTime.get(), WuiPlotArea::Plotmode::kRelative);
 
 	tab_panel_->add(
 	   "economy_health", g_image_cache->get(pic_tab_economy), plot_economy_, _("Economy health"));
 
 	plot_stock_ =
-	   new WuiPlotArea(tab_panel_, 0, 0, kPlotWidth, kPlotHeight + kSpacing,
+	   new WuiPlotArea(tab_panel_, "plot_stock", 0, 0, kPlotWidth, kPlotHeight + kSpacing,
 	                   Widelands::kStatisticsSampleTime.get(), WuiPlotArea::Plotmode::kAbsolute);
 
 	tab_panel_->add("stock", g_image_cache->get(pic_tab_stock), plot_stock_, _("Stock"));
@@ -189,7 +190,7 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	display_->set_min_free_vertical_space(400);
 	main_box_->add(display_, UI::Box::Resizing::kFullSize);
 
-	slider_ = new WuiPlotAreaSlider(main_box_, *plot_production_, 0, 0, kPlotWidth, 45);
+	slider_ = new WuiPlotAreaSlider(main_box_, "slider", *plot_production_, 0, 0, kPlotWidth, 45);
 	slider_->changedto.connect([this](const int32_t timescale) { set_time(timescale); });
 	main_box_->add(slider_, UI::Box::Resizing::kFullSize);
 

@@ -40,13 +40,14 @@ MapDetails::MapDetails(Panel* parent,
                        int32_t h,
                        UI::PanelStyle style,
                        Widelands::EditorGameBase& egbase)
-   : UI::Panel(parent, style, x, y, w, h),
+   : UI::Panel(parent, style, "map_details", x, y, w, h),
 
      style_(style),
 
-     main_box_(this, style, 0, 0, UI::Box::Vertical, 0, 0, 0),
-     descr_box_(&main_box_, style, 0, 0, UI::Box::Vertical, 0, 0, 0),
+     main_box_(this, style, "main_box", 0, 0, UI::Box::Vertical, 0, 0, 0),
+     descr_box_(&main_box_, style, "description_box", 0, 0, UI::Box::Vertical, 0, 0, 0),
      name_label_(&main_box_,
+                 "label_name",
                  0,
                  0,
                  UI::Scrollbar::kSize,
@@ -56,6 +57,7 @@ MapDetails::MapDetails(Panel* parent,
                  UI::Align::kLeft,
                  UI::MultilineTextarea::ScrollMode::kNoScrolling),
      descr_(&descr_box_,
+            "description",
             0,
             0,
             UI::Scrollbar::kSize,
@@ -64,7 +66,7 @@ MapDetails::MapDetails(Panel* parent,
             "",
             UI::Align::kLeft,
             UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     minimap_icon_(&descr_box_, style, 0, 0, 0, 0, nullptr),
+     minimap_icon_(&descr_box_, style, "minimap", 0, 0, 0, 0, nullptr),
      suggested_teams_box_(
         new UI::SuggestedTeamsBox(this, style, 0, 0, UI::Box::Vertical, padding_, 0)),
      egbase_(egbase) {
@@ -116,7 +118,7 @@ void MapDetails::layout() {
 	const int full_height = descr_.get_h() + minimap_icon_.get_h();
 	const int descr_height = main_box_.get_h() - name_label_.get_h() - padding_;
 	descr_box_.set_force_scrolling(full_height > descr_height);
-	descr_box_.set_size(main_box_.get_w(), descr_height);
+	descr_box_.set_desired_size(0, 0);
 }
 
 bool MapDetails::update(const MapData& mapdata, bool localize_mapname, bool render_minimap) {

@@ -98,6 +98,7 @@ function warehouse_tests:test_set_get_workers_string_arg()
    assert_equal(0, self.w:get_workers("barbarians_builder"))
    self.w:set_workers("barbarians_builder", 190)
    assert_equal(190, self.w:get_workers("barbarians_builder"))
+   self.w:set_workers("barbarians_builder", 0) -- too many to keep
 end
 function warehouse_tests:test_set_get_workers_table_arg()
    k = self.w:get_workers{"barbarians_builder", "barbarians_lumberjack"}
@@ -107,6 +108,7 @@ function warehouse_tests:test_set_get_workers_table_arg()
    k = self.w:get_workers{"barbarians_builder", "barbarians_lumberjack"}
    assert_equal(190, k.barbarians_builder)
    assert_equal(170, k.barbarians_lumberjack)
+   self.w:set_workers{barbarians_builder=0, barbarians_lumberjack=0} -- too many to keep
 end
 function warehouse_tests:test_set_get_workers_set_is_not_increase()
    k = self.w:get_workers{"barbarians_builder", "barbarians_lumberjack"}
@@ -289,6 +291,7 @@ end
 function warehouse_tests:test_set_soldiers()
    self.w:set_soldiers({0,0,0,0}, 100)
    assert_equal(100, _cnt(self.w:get_soldiers("all")))
+   self.w:set_soldiers({0,0,0,0}, 0) -- too many to keep
 end
 function warehouse_tests:test_reduce_soldiers_number()
    self.w:set_soldiers{
