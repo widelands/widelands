@@ -93,7 +93,7 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
 
 	left_column_box_.add(&mpsg_, UI::Box::Resizing::kExpandBoth);
 	left_column_box_.add_space(8 * kPadding);
-	left_column_box_.add(chat_.get(), UI::Box::Resizing::kExpandBoth);
+	left_column_box_.add(chat_.get(), UI::Box::Resizing::kFullSize);
 
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& s) {
 		if (s.action == NoteGameSettings::Action::kMap) {
@@ -118,7 +118,10 @@ void LaunchMPG::layout() {
 	help_button_.set_size(standard_height_, standard_height_);
 	help_button_.set_pos(Vector2i(get_inner_w() - help_button_.get_w(), 0));
 
-	mpsg_.force_new_dimensions(left_column_box_.get_w(), scale_factor * standard_height_);
+	// Assign heights to properly layout the scrollable box
+	uint32_t h = left_column_box_.get_h() / 2 - 4 * kPadding;
+	mpsg_.force_new_dimensions(left_column_box_.get_w(), h, scale_factor * standard_height_);
+	chat_->set_desired_size(0, h);
 
 	// set focus to chat input
 	if (chat_) {

@@ -792,8 +792,12 @@ void MultiPlayerSetupGroup::draw(RenderTarget& dst) {
 }
 
 void MultiPlayerSetupGroup::force_new_dimensions(uint32_t max_width,
+                                                 uint32_t max_height,
                                                  uint32_t standard_element_height) {
 	buth_ = standard_element_height;
+	scrollable_playerbox_.set_max_size(0, max_height - players_.get_h() - 4 * kPadding);
+	// Reset desired size to properly fit into scroll box
+	scrollable_playerbox_.set_desired_size(0, 0);
 	clients_.set_desired_size(max_width / 3, clients_.get_h());
 
 	for (auto& multiPlayerClientGroup : multi_player_client_groups_) {
