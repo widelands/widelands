@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-22 02:39+0000\n"
+"POT-Creation-Date: 2023-07-24 02:42+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Samuel <srandiny@gmail.com>, 2017\n"
 "Language-Team: Indonesian (http://app.transifex.com/widelands/widelands/language/id/)\n"
@@ -2048,11 +2048,11 @@ msgstr ""
 msgid "Initializing…"
 msgstr ""
 
-#: ../../src/logic/game.cc:1238
+#: ../../src/logic/game.cc:1249
 msgid "Trade Offer"
 msgstr ""
 
-#: ../../src/logic/game.cc:1240
+#: ../../src/logic/game.cc:1251
 msgid "This market has received a new trade offer."
 msgstr ""
 

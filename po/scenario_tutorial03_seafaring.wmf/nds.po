@@ -2,14 +2,14 @@
 # Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2022
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2023\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -281,7 +281,7 @@ msgid ""
 "Although it might take long and be expensive and not without dangers – who "
 "knows what monsters live in the sea? – I see no other possibility: we will "
 "have to undertake an expedition to the unknown seas."
-msgstr "’t kann lang düren un is düür un nich sünner Gefahr – wat för Beesten wull in de See leven? – aver ick weet keene anner Kans: wi mutten eene Söke tur frömden See utrüsten."
+msgstr "’t kann lang düren un is düür un nich sünner Gefahr – wat för Beesten wull in de See leven? – aver ick weet keene anner Kans: wi mutten eene Söök tur frömden See utrüsten."
 
 #. TRANSLATORS: This shall be the beginning of a poem
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:145
@@ -296,7 +296,7 @@ msgstr "Söken"
 msgid ""
 "During an expedition, you send a ship out to discover new islands and maybe "
 "found a colony there."
-msgstr "Up eener Söke schickst du een Schipp, um neje Inseln to finnen un daar villicht een nejes Dörp to gründen."
+msgstr "Up eener Söök schickst du een Schipp, um neje Inseln to finnen un daar villicht een nejes Dörp to gründen."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:150
 msgid ""
@@ -305,13 +305,13 @@ msgid ""
 "build a port (your goal is to build a port far away from home, so this is "
 "not surprising), and of course you need a builder, too. When everything is "
 "prepared, a ship will come and pick it up."
-msgstr "Du kannst eene Söke in elkeen Muu begünnen. Alle nödigen Waren worden dann to deese Muu brocht. De Waren sünd nau deese, de dien Volk bruukt, um eene Muu to bauen (du willst ja eene Muu wied weg bauen, also keene Överraschung), un du bruukst natürelk ok eenen Baukeerl. Wenn alls paraat is, kummt een Schipp un nimmt alls mit."
+msgstr "Du kannst eene Söök in elkeen Muu begünnen. Alle nödigen Waren worden dann to deese Muu brocht. De Waren sünd nau deese, de dien Volk bruukt, um eene Muu to bauen (du willst ja eene Muu wied weg bauen, also keene Överraschung), un du bruukst natürelk ok eenen Baukeerl. Wenn alls paraat is, kummt een Schipp un nimmt alls mit."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:151
 msgid ""
 "You can check out the needed wares in the fifth tab of your port (it will "
 "appear when you’ve started an expedition)."
-msgstr "Du kannst de nödigen Waren in de fievde Listenwessler vun de Muu sehn (’t is blot dann daar, wenn eene Söke utrüst word)."
+msgstr "Du kannst de nödigen Waren in de fievde Listenwessler vun de Muu sehn (’t is blot dann daar, wenn eene Söök utrüst word)."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:152
 msgid "Now try this out. I will tell you later what the next steps are."
@@ -319,7 +319,7 @@ msgstr "Nu versöök ’t. Ick segg di naher, wat de annern Stappen sünd."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:153
 msgid "Start an expedition in any of your ports."
-msgstr "Begünn eene Söke in elkeen Muu."
+msgstr "Begünn eene Söök in elkeen Muu."
 
 #. TRANSLATORS: This refers to a memory game
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:160
@@ -362,17 +362,17 @@ msgstr "Söök"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:175
 msgid "Start an expedition"
-msgstr "Söke anfangen"
+msgstr "Söök anfangen"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:176
 msgid "Start an expedition."
-msgstr "Begünn eene Söke."
+msgstr "Begünn eene Söök."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:177
 msgid ""
 "To do so, click on the ‘Start Expedition’ button in any port. A new tab "
 "where you can see the needed wares will appear."
-msgstr "Klicken daarto de »Söke anfangen«-Knoop in elkeen Muu an. Een nejer Listenwessler mit de nödigen Waren lett sik sehn."
+msgstr "Klicken daarto de »Söök anfangen«-Knoop in elkeen Muu an. Een nejer Listenwessler mit de nödigen Waren lett sik sehn."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:183
 msgid "Off to greener pastures"
@@ -380,7 +380,7 @@ msgstr "To grönern Fennen"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:185
 msgid "Start your expedition"
-msgstr "Begünn de Söke"
+msgstr "Begünn de Söök"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:187
 msgid ""
@@ -389,7 +389,7 @@ msgid ""
 " ship in any of the six main directions of the Widelands map. When it has "
 "reached a coastline, you can make it travel around the coast, where it will "
 "look for suitable places for landing."
-msgstr "Dien Schipp för de Söke is paraat. Nu wacht ’t vör diene Muu up diene Befehlen. ’t transporteert keene Waren mehr. Bruuk de Knopen in de Schipp-Fenster, um dat Schipp in de sess Richtungen vun de Widelands-Kaart to schicken. Wenn ’t eene Küst finnt, kannst du ’t um de Insel seilen laten, wo ’t na Rüümten för Muden utkiekt."
+msgstr "Dien Schipp för de Söök is paraat. Nu wacht ’t vör diene Muu up diene Befehlen. ’t transporteert keene Waren mehr. Bruuk de Knopen in de Schipp-Fenster, um dat Schipp in de sess Richtungen vun de Widelands-Kaart to schicken. Wenn ’t eene Küst finnt, kannst du ’t um de Insel seilen laten, wo ’t na Rüümten för Muden utkiekt."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:188
 msgid ""
@@ -427,7 +427,7 @@ msgstr "Stüür dien Schipp to eener Insel, de Iesenkluut hebben kann."
 msgid ""
 "When you click on the expedition ship, a window opens where you can control "
 "your ship."
-msgstr "Wenn du dat Schipp up Söke anklickst, süchst du een Fenster mit wat du dat Schipp stüren kannst."
+msgstr "Wenn du dat Schipp up Söök anklickst, süchst du een Fenster mit wat du dat Schipp stüren kannst."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:202
 msgid "When you have found a suitable port space, build a port there."
@@ -721,7 +721,7 @@ msgstr "Du hest all lehrt, wat ’t över Schippen un Fähren to weten gifft!"
 msgid ""
 "There is also another island where you can build a port if you wish to try "
 "launching another expedition."
-msgstr "’t gifft ok noch eene Insel, wo du eene Muu bauen kannst, wenn du noch eene Söke utproberen willst."
+msgstr "’t gifft ok noch eene Insel, wo du eene Muu bauen kannst, wenn du noch eene Söök utproberen willst."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:351
 msgid ""

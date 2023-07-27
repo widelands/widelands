@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-22 02:39+0000\n"
+"POT-Creation-Date: 2023-07-24 02:42+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: 92373a9a734415f33212259453a6274d_77ab48e, 2022\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/widelands/widelands/language/zh_CN/)\n"
@@ -2053,11 +2053,11 @@ msgstr "Widelands不能开始游戏，因为玩家%u缺少起始位置。\n你�
 msgid "Initializing…"
 msgstr ""
 
-#: ../../src/logic/game.cc:1238
+#: ../../src/logic/game.cc:1249
 msgid "Trade Offer"
 msgstr "交易报价"
 
-#: ../../src/logic/game.cc:1240
+#: ../../src/logic/game.cc:1251
 msgid "This market has received a new trade offer."
 msgstr "这个市场收到了新的交易报价。"
 

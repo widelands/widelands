@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-22 02:39+0000\n"
+"POT-Creation-Date: 2023-07-24 02:42+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2023\n"
 "Language-Team: Finnish (http://app.transifex.com/widelands/widelands/language/fi/)\n"
@@ -2063,11 +2063,11 @@ msgstr "Widelands ei voinut aloittaa peliä, koska pelaajalla %u ei ole aloituss
 msgid "Initializing…"
 msgstr "Alustetaan..."
 
-#: ../../src/logic/game.cc:1238
+#: ../../src/logic/game.cc:1249
 msgid "Trade Offer"
 msgstr "Vaihtotarjous"
 
-#: ../../src/logic/game.cc:1240
+#: ../../src/logic/game.cc:1251
 msgid "This market has received a new trade offer."
 msgstr "Tälle torille on saapunut uusi vaihtotarjous."
 
