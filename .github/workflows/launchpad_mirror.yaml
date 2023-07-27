@@ -34,24 +34,10 @@ jobs:
         git clone --depth=1 https://github.com/widelands/widelands.git wl_master
     - name: Cleaning tree
       run: |
-        cd ~/wl_trunk
-        for file in $(ls -A)
-        do
-          if ! [ "$file" == ".bzr" ]
-          then
-            rm -r "$file"
-          fi
-        done
+        find ~/wl_trunk -mindepth 1 -maxdepth 1 -name .bzr -o -execdir rm -r {} +
     - name: Copying files
       run: |
-        cd ~/wl_master
-        for file in $(ls -A)
-        do
-          if ! [ "$file" == ".git" ]
-          then
-            cp -r "$file" ~/wl_trunk/"$file"
-          fi
-        done
+        find ~/wl_master -mindepth 1 -maxdepth 1 -name .git -o -execdir cp -r {} ~/wl_trunk/{} ';'
         cd ~/wl_trunk
         mv .gitignore .bzrignore
     - name: Committing and pushing changes
