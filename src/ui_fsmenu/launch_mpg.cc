@@ -100,6 +100,7 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
 			map_changed();
 		}
 	});
+	update_warn_desyncing_addon();
 	layout();
 	initialization_complete();
 }
@@ -144,6 +145,7 @@ void LaunchMPG::win_condition_selected() {
 		   t->has_key("peaceful_mode_allowed") && !t->get_bool("peaceful_mode_allowed");
 		update_peaceful_mode();
 		mpsg_.update_players();
+		layout();
 	}
 }
 
