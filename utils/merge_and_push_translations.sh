@@ -62,6 +62,8 @@ set -x
 # Force-pull translations because some would get skipped accidentally
 tx pull -fa
 
+git diff --diff-filter=MA --name-only '*.po' | xargs -r -d '\n' -- sed -i '/^#: / s/:[0-9]*$//' # remove source line numbers from po files
+
 # Update authors file
 python3 utils/update_authors.py
 if [ $? -eq 0 ] ; then
