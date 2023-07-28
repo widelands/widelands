@@ -2352,6 +2352,7 @@ void Ship::draw_healthbar(const EditorGameBase& egbase,
 	constexpr unsigned kBonusIconSize = 6;
 	constexpr unsigned kMaxRows = 16;
 	const unsigned bonus = get_sea_attack_soldier_bonus(egbase);
+	assert(bonus < 10000);  // Sanity check
 	if (bonus > 0) {
 		unsigned n_cols = std::min(2 * kShipHealthBarWidth / kBonusIconSize, bonus);
 		unsigned n_rows = std::min(kMaxRows - 1, bonus / n_cols);
@@ -2361,7 +2362,13 @@ void Ship::draw_healthbar(const EditorGameBase& egbase,
 		while (n_cols * n_rows < bonus) {
 			++n_cols;
 		}
+		while (n_cols * (n_rows - 1) > bonus) {
+			--n_rows;
+		}
 		const unsigned last_row_cols = n_cols - (n_cols * n_rows - bonus);
+		assert(n_rows <= kMaxRows);
+		assert(last_row_cols <= n_cols);
+		assert(n_cols < 1000);  // Sanity check
 
 		for (unsigned row = 0; row < n_rows; ++row) {
 			const unsigned cols_in_row = (row + 1 < n_rows ? n_cols : last_row_cols);
