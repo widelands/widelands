@@ -1406,7 +1406,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Dressmakery
             purpose = pgettext("amazons_building", "Sews all dresses, boots and armor for our soldiers."),
             -- TRANSLATORS: Performance helptext for an Amazon production site: Dressmakery
-            performance = pgettext("amazons_building", "If this building is fully supplied and all dresses, boots and armors are needed by the economy, production of one of each dress, boots or armor takes %1$s on average. If only one kind of dress, boots or armor is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(10, 39), format_minutes_seconds(1, 11))
+            performance = pgettext("amazons_building", "If this building is fully supplied and all dresses, boots and armors are needed by the economy, production of one of each of them takes %1$s on average. If only one kind of them is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(10, 39), format_minutes_seconds(1, 11))
          }
       },
       {
