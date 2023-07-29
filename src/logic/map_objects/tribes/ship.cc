@@ -2310,14 +2310,15 @@ void Ship::draw_healthbar(const EditorGameBase& egbase,
 	// TODO(Nordfriese): Common code with Soldier::draw_info_icon
 	const RGBColor& color = owner().get_playercolor();
 	const uint16_t color_sum = color.r + color.g + color.b;
+	const int brighten_factor = 230 - color_sum / 3;
 
 	const Vector2i draw_position = point_on_dst.cast<int>();
 
 	// The frame gets a slight tint of player color
-	const Recti energy_outer(draw_position - Vector2i(kShipHealthBarWidth, 0) * scale,
+	Recti energy_outer(draw_position - Vector2i(kShipHealthBarWidth, 0) * scale,
 	                         kShipHealthBarWidth * 2 * scale, 5 * scale);
 	dst->fill_rect(energy_outer, color);
-	dst->brighten_rect(energy_outer, 230 - color_sum / 3);
+	dst->brighten_rect(energy_outer, brighten_factor);
 
 	// Adjust health to current animation tick
 	uint32_t health_to_show = hitpoints_;
@@ -2336,50 +2337,47 @@ void Ship::draw_healthbar(const EditorGameBase& egbase,
 	}
 
 	// Now draw the health bar itself
-	const int health_width = 2 * (kShipHealthBarWidth - 1) * health_to_show / descr().max_hitpoints_;
+	constexpr int kInnerHealthBarWidth = 2 * (kShipHealthBarWidth - 1);
+	int health_width = 2 * (kShipHealthBarWidth - 1) * health_to_show / descr().max_hitpoints_;
 
 	Recti energy_inner(draw_position + Vector2i(-kShipHealthBarWidth + 1, 1) * scale,
 	                   health_width * scale, 3 * scale);
 	Recti energy_complement(energy_inner.origin() + Vector2i(health_width, 0) * scale,
-	                        (2 * (kShipHealthBarWidth - 1) - health_width) * scale, 3 * scale);
+	                        (kInnerHealthBarWidth - health_width) * scale, 3 * scale);
 
 	const RGBColor complement_color =
 	   color_sum > 128 * 3 ? RGBColor(32, 32, 32) : RGBColor(224, 224, 224);
 	dst->fill_rect(energy_inner, color);
 	dst->fill_rect(energy_complement, complement_color);
 
-	// Now soldier strength bonus indicators
-	constexpr unsigned kBonusIconSize = 6;
-	constexpr unsigned kMaxRows = 16;
-	const unsigned bonus = get_sea_attack_soldier_bonus(egbase);
-	assert(bonus < 10000);  // Sanity check
+	// Now soldier strength bonus bars
+	unsigned bonus = get_sea_attack_soldier_bonus(egbase);
 	if (bonus > 0) {
-		unsigned n_cols = std::min(2 * kShipHealthBarWidth / kBonusIconSize, bonus);
-		unsigned n_rows = std::min(kMaxRows - 1, bonus / n_cols);
-		if (n_cols * n_rows < bonus) {
-			++n_rows;
-		}
-		while (n_cols * n_rows < bonus) {
-			++n_cols;
-		}
-		while (n_cols * (n_rows - 1) > bonus) {
-			--n_rows;
-		}
-		const unsigned last_row_cols = n_cols - (n_cols * n_rows - bonus);
-		assert(n_rows <= kMaxRows);
-		assert(last_row_cols <= n_cols);
-		assert(n_cols < 1000);  // Sanity check
+		assert(bonus < 2000);  // Sanity check
+		constexpr unsigned kBonusPerBar = kInnerHealthBarWidth;
 
-		for (unsigned row = 0; row < n_rows; ++row) {
-			const unsigned cols_in_row = (row + 1 < n_rows ? n_cols : last_row_cols);
-			for (unsigned col = 0; col < cols_in_row; ++col) {
-				Recti rect(
-				   draw_position.x + ((col - cols_in_row * 0.5f) * kBonusIconSize + 1.f) * scale,
-				   draw_position.y + (7.f + row * kBonusIconSize) * scale,
-				   (kBonusIconSize - 2.f) * scale, (kBonusIconSize - 2.f) * scale);
-				dst->fill_rect(rect, color);
-				dst->draw_rect(rect, complement_color);
-			}
+		energy_inner.y += 4 * scale;
+		energy_complement.y += 4 * scale;
+
+		energy_outer.y += 7 * scale;
+		energy_outer.h = ((bonus / kBonusPerBar + (bonus % kBonusPerBar != 0 ? 1 : 0)) * 3 + 2) * scale;
+		dst->fill_rect(energy_outer, color);
+		dst->brighten_rect(energy_outer, brighten_factor);
+
+		while (bonus > 0) {
+			const unsigned show = std::min(bonus, kBonusPerBar);
+			bonus -= show;
+			health_width = 2 * (kShipHealthBarWidth - 1) * show / kBonusPerBar;
+
+			energy_inner.y += energy_inner.h;
+			energy_complement.y += energy_complement.h;
+
+			energy_inner.w = health_width * scale;
+			energy_complement.x = energy_inner.x + health_width * scale;
+			energy_complement.w = (kInnerHealthBarWidth - health_width) * scale;
+
+			dst->fill_rect(energy_inner, color);
+			dst->fill_rect(energy_complement, complement_color);
 		}
 	}
 }
