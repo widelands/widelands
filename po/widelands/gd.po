@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-24 02:42+0000\n"
+"POT-Creation-Date: 2023-07-27 02:32+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: GunChleoc, 2015-2021\n"
 "Language-Team: Gaelic, Scottish (http://app.transifex.com/widelands/widelands/language/gd/)\n"
@@ -677,7 +677,7 @@ msgstr "Gun ainm"
 #: ../../src/editor/editorinteractive.cc:1200
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:116
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:621
-#: ../../src/logic/map.h:232 ../../src/ui_fsmenu/addons/packager.cc:413
+#: ../../src/logic/map.h:232 ../../src/ui_fsmenu/addons/packager.cc:412
 msgctxt "author_name"
 msgid "Unknown"
 msgstr "Gun urra"
@@ -4448,28 +4448,28 @@ msgstr ""
 msgid "Maximum Widelands Version:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:357
+#: ../../src/ui_fsmenu/addons/packager.cc:356
 msgid "New Add-On"
 msgstr "Tuilleadan ùr"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:358
+#: ../../src/ui_fsmenu/addons/packager.cc:357
 msgid "Enter the name for the new add-on."
 msgstr "Cuir a-steach ainm airson an tuilleadain ùir."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:360
+#: ../../src/ui_fsmenu/addons/packager.cc:359
 msgid "Category"
 msgstr "Roinn-seòrsa"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:381
-#: ../../src/ui_fsmenu/addons/packager.cc:397
-#: ../../src/ui_fsmenu/addons/packager.cc:402
+#: ../../src/ui_fsmenu/addons/packager.cc:380
+#: ../../src/ui_fsmenu/addons/packager.cc:396
+#: ../../src/ui_fsmenu/addons/packager.cc:401
 #: ../../src/ui_fsmenu/addons/packager_box.cc:401
 #: ../../src/ui_fsmenu/addons/packager_box.cc:417
 #: ../../src/ui_fsmenu/addons/packager_box.cc:423
 msgid "Invalid Name"
 msgstr "Ainm mì-dhligheach"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:382
+#: ../../src/ui_fsmenu/addons/packager.cc:381
 #: ../../src/ui_fsmenu/addons/packager_box.cc:403
 #, c-format
 msgid ""
@@ -4478,26 +4478,26 @@ msgid ""
 "Please choose a different name."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:397
+#: ../../src/ui_fsmenu/addons/packager.cc:396
 msgid "An add-on with this internal name already exists."
 msgstr "Tha tuilleadan leis an ainm inntearnail seo ann mu thràth."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:402
+#: ../../src/ui_fsmenu/addons/packager.cc:401
 msgid ""
 "An add-on with this internal name was deleted recently. Please commit your "
 "changes before using this name again."
 msgstr "Chaidh tuilleadan air a bheil an t-ainm inntearnail seo a sguabadh às o chionn ghoirid. Sàbhail na h-atharraichean agad dhan diosg mus cleachd thu an t-ainm seo a-rithist."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:428
+#: ../../src/ui_fsmenu/addons/packager.cc:427
 msgid "Delete Add-on"
 msgstr "Sguab às an tuilleadan"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:430
+#: ../../src/ui_fsmenu/addons/packager.cc:429
 #, c-format
 msgid "Do you really want to delete the add-on ‘%s’?"
 msgstr "A bheil thu cinnteach gu bheil thu airson an tuilleadan “%s” a sguabadh às?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:431
+#: ../../src/ui_fsmenu/addons/packager.cc:430
 #, c-format
 msgid ""
 "Do you really want to delete the local add-on ‘%s’?\n"
@@ -4505,7 +4505,7 @@ msgid ""
 "Note that this add-on can not be downloaded again from the server."
 msgstr "A bheil thu cinnteach gu bheil thu airson an tuilleadan ionadail “%s” a sguabadh às?\n\nThoir an aire nach urrainn dhut an tuilleadan seo a luchdadh a-nuas a-rithist on fhrithealaiche."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:452
+#: ../../src/ui_fsmenu/addons/packager.cc:451
 #, c-format
 msgid ""
 "If you quit the packager now, all changes to the following %u add-on will be"
@@ -4518,25 +4518,25 @@ msgstr[1] "Ma dh’fhàgas tu am pacaidiche an-dràsta, thèid gach atharrachadh
 msgstr[2] "Ma dh’fhàgas tu am pacaidiche an-dràsta, thèid gach atharrachadh air %u tuilleadain a thilgeil air falbh."
 msgstr[3] "Ma dh’fhàgas tu am pacaidiche an-dràsta, thèid gach atharrachadh air %u tuilleadan a thilgeil air falbh."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:461
-#: ../../src/ui_fsmenu/addons/packager.cc:488
-#: ../../src/ui_fsmenu/addons/packager.cc:513
+#: ../../src/ui_fsmenu/addons/packager.cc:460
+#: ../../src/ui_fsmenu/addons/packager.cc:487
+#: ../../src/ui_fsmenu/addons/packager.cc:512
 #, c-format
 msgid ""
 "%1$s\n"
 "· %2$s"
 msgstr "%1$s\n· %2$s"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:464
+#: ../../src/ui_fsmenu/addons/packager.cc:463
 msgid "Quit Packager"
 msgstr "Fàg am pacaidiche"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:479
+#: ../../src/ui_fsmenu/addons/packager.cc:478
 #, c-format
 msgid "Do you really want to discard all changes to the add-on ‘%s’?"
 msgstr "A bheil thu cinnteach gu bheil thu airson gach atharrachadh air an tuilleadan “%s” a thilgeil air falbh?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:483
+#: ../../src/ui_fsmenu/addons/packager.cc:482
 #, c-format
 msgid "Do you really want to discard all changes to the following %u add-on?"
 msgid_plural ""
@@ -4546,16 +4546,16 @@ msgstr[1] "A bheil thu cinnteach gu bheil thu airson gach atharrachadh air %u th
 msgstr[2] "A bheil thu cinnteach gu bheil thu airson gach atharrachadh air %u thuilleadain a thilgeil air falbh?"
 msgstr[3] "A bheil thu cinnteach gu bheil thu airson gach atharrachadh air %u tuilleadan sa thilgeil air falbh?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:492
+#: ../../src/ui_fsmenu/addons/packager.cc:491
 msgid "Discard Changes"
 msgstr "Tilg air falbh na h-atharraichean"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:504
+#: ../../src/ui_fsmenu/addons/packager.cc:503
 #, c-format
 msgid "Do you really want to commit all changes to the add-on ‘%s’ to disk?"
 msgstr "A bheil thu cinnteach gu bheil thu airson gach atharrachadh air an tuilleadan “%s” a sgrìobhadh dhan diosg?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:508
+#: ../../src/ui_fsmenu/addons/packager.cc:507
 #, c-format
 msgid ""
 "Do you really want to commit all changes to the following %u add-on to disk?"
@@ -4567,42 +4567,42 @@ msgstr[1] "A bheil thu cinnteach gu bheil thu airson gach atharrachadh air %u th
 msgstr[2] "A bheil thu cinnteach gu bheil thu airson gach atharrachadh air %u tuilleadain a sgrìobhadh dhan diosg?"
 msgstr[3] "A bheil thu cinnteach gu bheil thu airson gach atharrachadh air %u tuilleadan a sgrìobhadh dhan diosg?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:517
+#: ../../src/ui_fsmenu/addons/packager.cc:516
 msgid ""
 "Warning: If you manually edited any files in this add-on, your changes may "
 "be overwritten!"
 msgstr "Rabhadh: Ma rinn thu deasachadh a làimh air gin dhe na faidhlichean san tuilleadan seo, dh’fhaoidte gun èid na h-atharraich thu a thar-àithneadh!"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:520
+#: ../../src/ui_fsmenu/addons/packager.cc:519
 msgid "Confirm Saving"
 msgstr "Dearbh an sàbhaladh"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:591
+#: ../../src/ui_fsmenu/addons/packager.cc:590
 msgid "Invalid Version Requirement"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:592
+#: ../../src/ui_fsmenu/addons/packager.cc:591
 #, c-format
 msgid ""
 "The minimum Widelands version ‘%1$s’ may not be newer than the maximum "
 "Widelands version ‘%2$s’. The add-on ‘%3$s’ will not be saved."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:599
+#: ../../src/ui_fsmenu/addons/packager.cc:598
 msgid "Invalid Version"
 msgstr "Tionndadh mì-dhligheach"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:600
+#: ../../src/ui_fsmenu/addons/packager.cc:599
 #, c-format
 msgid ""
 "‘%1$s’ is not a valid version string. The add-on ‘%2$s’ will not be saved."
 msgstr "Chan eil “%1$s” ’na shreang thionndaidh dligheach. Cha dèid an tuilleadan “%2$s” a shàbhaladh."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:613
+#: ../../src/ui_fsmenu/addons/packager.cc:612
 msgid "Version Requirement"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:615
+#: ../../src/ui_fsmenu/addons/packager.cc:614
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ does not specify a minimum Widelands version. None of the "
@@ -4610,7 +4610,7 @@ msgid ""
 "minimum version requirement will automatically be set accordingly."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:620
+#: ../../src/ui_fsmenu/addons/packager.cc:619
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ specifies a minimum Widelands version of %2$s. However, "
@@ -4618,11 +4618,11 @@ msgid ""
 " %3$s. The version requirement will automatically be changed accordingly."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:642
+#: ../../src/ui_fsmenu/addons/packager.cc:641
 msgid "Error Writing Addon"
 msgstr "Mearachd le sgrìobhadh an tuilleadain"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:643
+#: ../../src/ui_fsmenu/addons/packager.cc:642
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be saved to disk:\n"
