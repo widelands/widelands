@@ -2316,7 +2316,7 @@ void Ship::draw_healthbar(const EditorGameBase& egbase,
 
 	// The frame gets a slight tint of player color
 	Recti energy_outer(draw_position - Vector2i(kShipHealthBarWidth, 0) * scale,
-	                         kShipHealthBarWidth * 2 * scale, 5 * scale);
+	                   kShipHealthBarWidth * 2 * scale, 5 * scale);
 	dst->fill_rect(energy_outer, color);
 	dst->brighten_rect(energy_outer, brighten_factor);
 
@@ -2360,7 +2360,8 @@ void Ship::draw_healthbar(const EditorGameBase& egbase,
 		energy_complement.y += 4 * scale;
 
 		energy_outer.y += 7 * scale;
-		energy_outer.h = ((bonus / kBonusPerBar + (bonus % kBonusPerBar != 0 ? 1 : 0)) * 3 + 2) * scale;
+		energy_outer.h =
+		   ((bonus / kBonusPerBar + (bonus % kBonusPerBar != 0 ? 1 : 0)) * 3 + 2) * scale;
 		dst->fill_rect(energy_outer, color);
 		dst->brighten_rect(energy_outer, brighten_factor);
 
