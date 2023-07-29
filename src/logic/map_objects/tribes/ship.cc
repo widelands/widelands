@@ -2360,8 +2360,7 @@ void Ship::draw_healthbar(const EditorGameBase& egbase,
 		energy_complement.y += 4 * scale;
 
 		energy_outer.y += 7 * scale;
-		energy_outer.h =
-		   ((bonus / kBonusPerBar + (bonus % kBonusPerBar != 0 ? 1 : 0)) * 3 + 2) * scale;
+		energy_outer.h = (ceilf(static_cast<float>(bonus) / kBonusPerBar) * 3 + 2) * scale;
 		dst->fill_rect(energy_outer, color);
 		dst->brighten_rect(energy_outer, brighten_factor);
 
