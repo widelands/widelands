@@ -46,6 +46,7 @@ public:
 	 * Text conventions: Sentence case for the 'label_text' and for all values
 	 */
 	SpinBox(Panel*,
+	        const std::string& name,
 	        int32_t x,
 	        int32_t y,
 	        uint32_t w,
@@ -96,7 +97,6 @@ private:
 	uint32_t big_step_button_width_;
 	uint32_t buttons_width_;
 	uint32_t padding_;
-	uint32_t number_of_paddings_;
 };
 }  // namespace UI
 

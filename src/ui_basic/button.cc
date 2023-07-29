@@ -49,7 +49,7 @@ Button::Button  //  Common constructor
     const std::string& tooltip_text,
     UI::Button::VisualState init_state,
     ImageMode mode)
-   : NamedPanel(parent, to_panel_style(init_style), name, x, y, w, h, tooltip_text),
+   : Panel(parent, to_panel_style(init_style), name, x, y, w, h, tooltip_text),
      highlighted_(false),
      pressed_(false),
      enabled_(true),
@@ -321,12 +321,12 @@ void Button::think() {
 }
 
 bool Button::handle_key(bool down, SDL_Keysym code) {
-	if (down && code.sym == SDLK_RETURN && (SDL_GetModState() & KMOD_CTRL) == 0) {
+	if (down && code.sym == SDLK_RETURN && (code.mod & KMOD_CTRL) == 0) {
 		play_click();
 		sigclicked();
 		return true;
 	}
-	return NamedPanel::handle_key(down, code);
+	return Panel::handle_key(down, code);
 }
 
 /**

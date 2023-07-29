@@ -22,8 +22,16 @@
 #include "scripting/lua.h"
 #include "scripting/luna.h"
 #include "ui_basic/button.h"
+#include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
+#include "ui_basic/multilinetextarea.h"
+#include "ui_basic/progressbar.h"
+#include "ui_basic/radiobutton.h"
+#include "ui_basic/slider.h"
+#include "ui_basic/spinbox.h"
 #include "ui_basic/tabpanel.h"
+#include "ui_basic/textarea.h"
+#include "ui_basic/textinput.h"
 #include "ui_basic/window.h"
 #include "wui/interactive_base.h"
 
@@ -67,6 +75,8 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_name(lua_State* L);
+	int get_children(lua_State* L);
 	int get_buttons(lua_State* L);
 	int get_dropdowns(lua_State* L);
 	int get_tabs(lua_State* L);
@@ -79,6 +89,8 @@ public:
 	int set_position_x(lua_State* L);
 	int get_position_y(lua_State* L);
 	int set_position_y(lua_State* L);
+	int get_visible(lua_State* L);
+	int set_visible(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -87,10 +99,13 @@ public:
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	int indicate(lua_State* L);
 #endif
+	int create_child(lua_State* L);
+	int get_child(lua_State* L);
 
 	/*
 	 * C Methods
 	 */
+	static UI::Panel* do_create_child(lua_State* L, UI::Panel* parent, UI::Box* as_box);
 };
 
 class LuaButton : public LuaPanel {
@@ -107,7 +122,6 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_name(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -120,6 +134,261 @@ public:
 	 */
 	UI::Button* get() {
 		return dynamic_cast<UI::Button*>(panel_);
+	}
+};
+
+class LuaMultilineTextarea : public LuaPanel {
+public:
+	LUNA_CLASS_HEAD(LuaMultilineTextarea);
+
+	LuaMultilineTextarea() = default;
+	explicit LuaMultilineTextarea(UI::Panel* p) : LuaPanel(p) {
+	}
+	explicit LuaMultilineTextarea(lua_State* L) : LuaPanel(L) {
+	}
+	~LuaMultilineTextarea() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_text(lua_State* L);
+	int set_text(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+
+	/*
+	 * C Methods
+	 */
+	UI::MultilineTextarea* get() {
+		return dynamic_cast<UI::MultilineTextarea*>(panel_);
+	}
+};
+
+class LuaTextarea : public LuaPanel {
+public:
+	LUNA_CLASS_HEAD(LuaTextarea);
+
+	LuaTextarea() = default;
+	explicit LuaTextarea(UI::Panel* p) : LuaPanel(p) {
+	}
+	explicit LuaTextarea(lua_State* L) : LuaPanel(L) {
+	}
+	~LuaTextarea() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_text(lua_State* L);
+	int set_text(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+
+	/*
+	 * C Methods
+	 */
+	UI::Textarea* get() {
+		return dynamic_cast<UI::Textarea*>(panel_);
+	}
+};
+
+class LuaCheckbox : public LuaPanel {
+public:
+	LUNA_CLASS_HEAD(LuaCheckbox);
+
+	LuaCheckbox() = default;
+	explicit LuaCheckbox(UI::Panel* p) : LuaPanel(p) {
+	}
+	explicit LuaCheckbox(lua_State* L) : LuaPanel(L) {
+	}
+	~LuaCheckbox() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_state(lua_State* L);
+	int set_state(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+	int set_enabled(lua_State* L);
+
+	/*
+	 * C Methods
+	 */
+	UI::Checkbox* get() {
+		return dynamic_cast<UI::Checkbox*>(panel_);
+	}
+};
+
+class LuaRadioButton : public LuaPanel {
+public:
+	LUNA_CLASS_HEAD(LuaRadioButton);
+
+	LuaRadioButton() = default;
+	explicit LuaRadioButton(UI::Panel* p) : LuaPanel(p) {
+	}
+	explicit LuaRadioButton(lua_State* L) : LuaPanel(L) {
+	}
+	~LuaRadioButton() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_state(lua_State* L);
+	int set_state(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+	int set_enabled(lua_State* L);
+
+	/*
+	 * C Methods
+	 */
+	UI::Radiobutton* get() {
+		return dynamic_cast<UI::Radiobutton*>(panel_);
+	}
+};
+
+class LuaProgressBar : public LuaPanel {
+public:
+	LUNA_CLASS_HEAD(LuaProgressBar);
+
+	LuaProgressBar() = default;
+	explicit LuaProgressBar(UI::Panel* p) : LuaPanel(p) {
+	}
+	explicit LuaProgressBar(lua_State* L) : LuaPanel(L) {
+	}
+	~LuaProgressBar() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_state(lua_State* L);
+	int set_state(lua_State* L);
+	int get_total(lua_State* L);
+	int set_total(lua_State* L);
+	int get_show_percent(lua_State* L);
+	int set_show_percent(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+
+	/*
+	 * C Methods
+	 */
+	UI::ProgressBar* get() {
+		return dynamic_cast<UI::ProgressBar*>(panel_);
+	}
+};
+
+class LuaSpinBox : public LuaPanel {
+public:
+	LUNA_CLASS_HEAD(LuaSpinBox);
+
+	LuaSpinBox() = default;
+	explicit LuaSpinBox(UI::Panel* p) : LuaPanel(p) {
+	}
+	explicit LuaSpinBox(lua_State* L) : LuaPanel(L) {
+	}
+	~LuaSpinBox() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_value(lua_State* L);
+	int set_value(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+	int set_unit_width(lua_State* L);
+	int set_interval(lua_State* L);
+	int add_replacement(lua_State* L);
+
+	/*
+	 * C Methods
+	 */
+	UI::SpinBox* get() {
+		return dynamic_cast<UI::SpinBox*>(panel_);
+	}
+};
+
+class LuaSlider : public LuaPanel {
+public:
+	LUNA_CLASS_HEAD(LuaSlider);
+
+	LuaSlider() = default;
+	explicit LuaSlider(UI::Panel* p) : LuaPanel(p) {
+	}
+	explicit LuaSlider(lua_State* L) : LuaPanel(L) {
+	}
+	~LuaSlider() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_value(lua_State* L);
+	int set_value(lua_State* L);
+	int get_min_value(lua_State* L);
+	int set_min_value(lua_State* L);
+	int get_max_value(lua_State* L);
+	int set_max_value(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+	int set_enabled(lua_State* L);
+	int set_cursor_fixed_height(lua_State* L);
+
+	/*
+	 * C Methods
+	 */
+	UI::Slider* get() {
+		return dynamic_cast<UI::Slider*>(panel_);
+	}
+};
+
+class LuaTextInputPanel : public LuaPanel {
+public:
+	LUNA_CLASS_HEAD(LuaTextInputPanel);
+
+	LuaTextInputPanel() = default;
+	explicit LuaTextInputPanel(UI::Panel* p) : LuaPanel(p) {
+	}
+	explicit LuaTextInputPanel(lua_State* L) : LuaPanel(L) {
+	}
+	~LuaTextInputPanel() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_text(lua_State* L);
+	int set_text(lua_State* L);
+	int get_selected_text(lua_State* L);
+	int get_password(lua_State* L);
+	int set_password(lua_State* L);
+	int get_warning(lua_State* L);
+	int set_warning(lua_State* L);
+	int get_caret_pos(lua_State* L);
+	int set_caret_pos(lua_State* L);
+	int get_multiline(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+
+	/*
+	 * C Methods
+	 */
+	UI::AbstractTextInputPanel* get() {
+		return dynamic_cast<UI::AbstractTextInputPanel*>(panel_);
 	}
 };
 
@@ -137,7 +406,6 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_name(lua_State* L);
 	int get_expanded(lua_State* L);
 	int get_no_of_items(lua_State* L);
 
@@ -171,7 +439,6 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_name(lua_State* L);
 	int get_active(lua_State* L);
 
 	/*
@@ -201,7 +468,6 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_name(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -246,6 +512,7 @@ public:
 	int get_is_building_road(lua_State* L);
 	int get_auto_roadbuilding_mode(lua_State* L);
 	int get_is_animating(lua_State*);
+	int get_toolbar(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -259,6 +526,7 @@ public:
 	int is_visible(lua_State* L);
 	int mouse_to_field(lua_State* L);
 	int mouse_to_pixel(lua_State* L);
+	int update_toolbar(lua_State* L);
 
 	/*
 	 * C Methods
@@ -267,6 +535,8 @@ public:
 		return dynamic_cast<InteractiveBase*>(panel_);
 	}
 };
+
+int upcasted_panel_to_lua(lua_State* L, UI::Panel* panel);
 
 void luaopen_wlui(lua_State*);
 }  // namespace LuaUi

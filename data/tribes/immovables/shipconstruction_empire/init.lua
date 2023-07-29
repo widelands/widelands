@@ -1,6 +1,6 @@
 push_textdomain("tribes")
 
-dirname = path.dirname(__file__)
+local dirname = path.dirname(__file__)
 
 wl.Descriptions():new_immovable_type {
    name = "empire_shipconstruction",
@@ -25,10 +25,10 @@ wl.Descriptions():new_immovable_type {
       idle = {
          fps = 1,
          frames = 7,
-         rows = 4,
-         columns = 2,
+         rows = 1,
+         columns = 7,
          representative_frame = 5,
-         hotspot = { 115, 78 }
+         hotspot = { 104, 132 }
       },
    }
 }

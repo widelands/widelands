@@ -25,10 +25,10 @@
 #include "network/internet_gaming.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
-#include "ui_basic/editbox.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
+#include "ui_basic/textinput.h"
 #include "ui_fsmenu/menu.h"
 #include "wui/game_chat_panel.h"
 

@@ -36,13 +36,13 @@ constexpr const char* const kRegisterURL = "https://widelands.org/accounts/regis
 AddOnsLoginBox::AddOnsLoginBox(UI::Panel& parent, UI::WindowStyle style)
    : UI::Window(&parent, style, "login", 0, 0, 100, 100, _("Login")),
      password_sha1_(get_config_string("password_sha1", "")),
-     box_(this, panel_style_, 0, 0, UI::Box::Vertical),
-     hbox_(&box_, panel_style_, 0, 0, UI::Box::Horizontal),
-     left_box_(&hbox_, panel_style_, 0, 0, UI::Box::Vertical),
-     right_box_(&hbox_, panel_style_, 0, 0, UI::Box::Vertical),
-     buttons_box_(&box_, panel_style_, 0, 0, UI::Box::Horizontal),
-     username_(&right_box_, 0, 0, 400, panel_style_),
-     password_(&right_box_, 0, 0, 400, panel_style_),
+     box_(this, panel_style_, "main_box", 0, 0, UI::Box::Vertical),
+     hbox_(&box_, panel_style_, "hbox", 0, 0, UI::Box::Horizontal),
+     left_box_(&hbox_, panel_style_, "left_box", 0, 0, UI::Box::Vertical),
+     right_box_(&hbox_, panel_style_, "right_box", 0, 0, UI::Box::Vertical),
+     buttons_box_(&box_, panel_style_, "buttons_box", 0, 0, UI::Box::Horizontal),
+     username_(&right_box_, "username", 0, 0, 400, panel_style_),
+     password_(&right_box_, "password", 0, 0, 400, panel_style_),
      ok_(&buttons_box_,
          "ok",
          0,
@@ -71,8 +71,8 @@ AddOnsLoginBox::AddOnsLoginBox(UI::Panel& parent, UI::WindowStyle style)
                                                 UI::ButtonStyle::kWuiSecondary,
             _("Reset")) {
 	UI::MultilineTextarea* m =
-	   new UI::MultilineTextarea(&box_, 0, 0, 100, 100, panel_style_, "", UI::Align::kLeft,
-	                             UI::MultilineTextarea::ScrollMode::kNoScrolling);
+	   new UI::MultilineTextarea(&box_, "message", 0, 0, 100, 100, panel_style_, "",
+	                             UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	m->set_text(as_richtext(
 	   g_style_manager
 	      ->font_style(style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelParagraph :
@@ -87,14 +87,14 @@ AddOnsLoginBox::AddOnsLoginBox(UI::Panel& parent, UI::WindowStyle style)
 
 	left_box_.add_inf_space();
 	left_box_.add(
-	   new UI::Textarea(&left_box_, panel_style_,
+	   new UI::Textarea(&left_box_, panel_style_, "label_username",
 	                    style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelHeading :
                                                            UI::FontStyle::kWuiInfoPanelHeading,
 	                    _("Username:"), UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
 	left_box_.add_inf_space();
 	left_box_.add(
-	   new UI::Textarea(&left_box_, panel_style_,
+	   new UI::Textarea(&left_box_, panel_style_, "label_password",
 	                    style == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelHeading :
                                                            UI::FontStyle::kWuiInfoPanelHeading,
 	                    _("Password:"), UI::Align::kRight),
@@ -142,11 +142,11 @@ AddOnsLoginBox::AddOnsLoginBox(UI::Panel& parent, UI::WindowStyle style)
 }
 
 const std::string& AddOnsLoginBox::get_username() const {
-	return username_.text();
+	return username_.get_text();
 }
 
 std::string AddOnsLoginBox::get_password() const {
-	const std::string& p = password_.text();
+	const std::string& p = password_.get_text();
 	return (p.empty() || p == password_sha1_) ? p : crypto::sha1(p);
 }
 
@@ -168,14 +168,14 @@ bool AddOnsLoginBox::handle_key(bool down, SDL_Keysym code) {
 
 void AddOnsLoginBox::think() {
 	UI::Window::think();
-	ok_.set_enabled(!username_.text().empty() && !password_.text().empty());
-	if (!password_sha1_.empty() && password_.has_focus() && password_.text() == password_sha1_) {
+	ok_.set_enabled(!username_.get_text().empty() && !password_.get_text().empty());
+	if (!password_sha1_.empty() && password_.has_focus() && password_.get_text() == password_sha1_) {
 		password_.set_text("");
 	}
 }
 
 void AddOnsLoginBox::ok() {
-	if (!username_.text().empty() && !password_.text().empty()) {
+	if (!username_.get_text().empty() && !password_.get_text().empty()) {
 		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 	}
 }

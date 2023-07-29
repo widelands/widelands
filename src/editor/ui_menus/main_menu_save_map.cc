@@ -62,13 +62,14 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
                    _("Map Options")),
      editbox_label_(&table_footer_box_,
                     UI::PanelStyle::kWui,
+                    "label_filename",
                     UI::FontStyle::kWuiLabel,
                     0,
                     0,
                     0,
                     0,
                     _("Filename:")),
-     editbox_(&table_footer_box_, 0, 0, 0, UI::PanelStyle::kWui),
+     editbox_(&table_footer_box_, "editbox", 0, 0, 0, UI::PanelStyle::kWui),
      make_directory_(&table_footer_box_,
                      "make_directory",
                      0,
@@ -125,7 +126,7 @@ void MainMenuSaveMap::clicked_ok() {
 	if (!ok_.enabled()) {
 		return;
 	}
-	std::vector<std::string> filename = {editbox_.text()};
+	std::vector<std::string> filename = {editbox_.get_text()};
 	std::vector<std::string> complete_filename;
 
 	if (filename.empty() && table_.has_selection()) {  //  Maybe a directory is selected.
@@ -198,6 +199,10 @@ void MainMenuSaveMap::clicked_make_directory() {
 
 void MainMenuSaveMap::clicked_edit_options() {
 	map_options_registry_.create();
+	// Make sure the map options window is always on top of us
+	assert(map_options_registry_.window != nullptr);
+	map_options_registry_.window->set_z(
+	   static_cast<UI::Panel::ZOrder>(static_cast<int>(get_z()) + 1));
 }
 
 void MainMenuSaveMap::update_map_options() {
@@ -213,12 +218,12 @@ void MainMenuSaveMap::update_map_options() {
 		maptype = MapData::MapType::kNormal;
 	}
 
-	MapData mapdata(map, editbox_.text(), maptype, MapData::DisplayType::kMapnames);
+	MapData mapdata(map, editbox_.get_text(), maptype, MapData::DisplayType::kMapnames);
 
 	// TODO(GunChleoc): Trying to render the minimap while saving results in endless loop - probably
 	// because we're trying to load the map again there.
 	map_details_.update(mapdata, false, false);
-	if (old_name == editbox_.text()) {
+	if (old_name == editbox_.get_text()) {
 		editbox_.set_text(map_details_.name());
 		edit_box_changed();
 	}
@@ -258,13 +263,13 @@ void MainMenuSaveMap::double_clicked_item() {
  */
 void MainMenuSaveMap::edit_box_changed() {
 	// Prevent the user from creating nonsense file names, like e.g. ".." or "...".
-	const bool is_legal_filename = FileSystemHelper::is_legal_filename(editbox_.text());
+	const bool is_legal_filename = FileSystemHelper::is_legal_filename(editbox_.get_text());
 	ok_.set_enabled(is_legal_filename);
 	editbox_.set_tooltip(is_legal_filename ? "" : illegal_filename_tooltip_);
 }
 
 void MainMenuSaveMap::reset_editbox_or_die(const std::string& current_filename) {
-	if (editbox_.text() == current_filename) {
+	if (editbox_.get_text() == current_filename) {
 		die();
 	} else {
 		editbox_.set_text(current_filename);

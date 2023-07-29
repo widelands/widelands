@@ -22,9 +22,9 @@
 #include "logic/mutable_addon.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
-#include "ui_basic/editbox.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
+#include "ui_basic/textinput.h"
 #include "ui_fsmenu/main.h"
 
 namespace AddOnsUI {

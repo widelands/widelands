@@ -40,11 +40,12 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
                              uint32_t const h,
                              ChatProvider& chat,
                              UI::PanelStyle style)
-   : UI::Panel(parent, style, x, y, w, h),
+   : UI::Panel(parent, style, "chat_panel", x, y, w, h),
      color_functor_(fn),
      chat_(chat),
-     vbox_(this, style, 0, 0, UI::Box::Vertical),
+     vbox_(this, style, "vbox", 0, 0, UI::Box::Vertical),
      chatbox(&vbox_,
+             "chat",
              0,
              0,
              0,
@@ -53,7 +54,7 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
              "",
              UI::Align::kLeft,
              UI::MultilineTextarea::ScrollMode::kScrollLog),
-     hbox_(&vbox_, style, 0, 0, UI::Box::Horizontal),
+     hbox_(&vbox_, style, "hbox", 0, 0, UI::Box::Horizontal),
      recipient_dropdown_(&hbox_,
                          "chat_recipient_dropdown",
                          0,
@@ -65,7 +66,7 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
                          UI::DropdownType::kPictorial,
                          UI::PanelStyle::kFsMenu,
                          UI::ButtonStyle::kFsMenuSecondary),
-     editbox(&hbox_, 28, 0, w - 28, style),
+     editbox(&hbox_, "input", 28, 0, w - 28, style),
 
      chat_sound(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {
 
@@ -134,13 +135,13 @@ bool GameChatPanel::handle_key(const bool down, const SDL_Keysym code) {
 		return false;
 	}
 
-	if (!down || code.sym != SDLK_SPACE || ((SDL_GetModState() & KMOD_CTRL) == 0)) {
+	if (!down || code.sym != SDLK_SPACE || ((code.mod & KMOD_CTRL) == 0)) {
 		return false;
 	}
 
 	// User is pressing Ctrl+Space, try autocomplete
 
-	if (editbox.text().empty()) {
+	if (editbox.get_text().empty()) {
 		return false;
 	}
 
@@ -158,14 +159,14 @@ void GameChatPanel::key_changed() {
 		return;
 	}
 	// Check if last entered two characters are space
-	std::string str = editbox.text();
-	const size_t cursor_pos = editbox.caret_pos();
+	std::string str = editbox.get_text();
+	const size_t cursor_pos = editbox.get_caret_pos();
 	if (cursor_pos < 2 || str[cursor_pos - 1] != ' ' || str[cursor_pos - 2] != ' ') {
 		// Update state of dropdown, we might have no valid recipient now
 		select_recipient();
 		return;
 	}
-	assert(!editbox.text().empty());
+	assert(!editbox.get_text().empty());
 	// Go back two chars since try_autocomplete() assumes that the cursor is in/at the name part
 	editbox.set_caret_pos(cursor_pos - 2);
 	if (!try_autocomplete()) {
@@ -174,8 +175,8 @@ void GameChatPanel::key_changed() {
 		select_recipient();
 	} else {
 		// It worked and we replaced something. Remove the two spaces
-		str = editbox.text();
-		const size_t end_of_replacement = editbox.caret_pos();
+		str = editbox.get_text();
+		const size_t end_of_replacement = editbox.get_caret_pos();
 		str.erase(end_of_replacement, 2);
 		editbox.set_text(str);
 	}
@@ -189,8 +190,9 @@ bool GameChatPanel::try_autocomplete() {
 
 	// Extract the name to complete
 	// rfind starts at the given pos and goes forward until it finds a space
-	std::string str = editbox.text();
-	size_t namepart_start = str.rfind(' ', (editbox.caret_pos() > 1 ? editbox.caret_pos() - 1 : 0));
+	std::string str = editbox.get_text();
+	size_t namepart_start =
+	   str.rfind(' ', (editbox.get_caret_pos() > 1 ? editbox.get_caret_pos() - 1 : 0));
 	if (namepart_start == std::string::npos) {
 		// Not found, meaning the input only contains the name
 		namepart_start = 0;
@@ -203,7 +205,7 @@ bool GameChatPanel::try_autocomplete() {
 		// assume it is the whisper-sign and ignore the @
 		++namepart_start;
 	}
-	size_t namepart_end = str.find(' ', editbox.caret_pos());
+	size_t namepart_end = str.find(' ', editbox.get_caret_pos());
 
 	if (namepart_end <= namepart_start || namepart_start == str.size()) {
 		// Nothing to complete
@@ -335,7 +337,7 @@ void GameChatPanel::unfocus_edit() {
 
 void GameChatPanel::key_enter() {
 
-	const std::string& str = editbox.text();
+	const std::string& str = editbox.get_text();
 	if (!str.empty()) {
 		if (chat_.participants_ != nullptr) {
 			const size_t pos_first_space = str.find(' ');
@@ -372,7 +374,7 @@ void GameChatPanel::key_enter() {
 }
 
 void GameChatPanel::key_escape() {
-	if (editbox.text().empty()) {
+	if (editbox.get_text().empty()) {
 		unfocus_edit();
 	}
 	editbox.set_text("");
@@ -395,7 +397,7 @@ void GameChatPanel::set_recipient() {
 	// Replace the old recipient, if any
 
 	const std::string& recipient = recipient_dropdown_.get_selected();
-	std::string str = editbox.text();
+	std::string str = editbox.get_text();
 
 	// We have a recipient already
 	if (str[0] == '@') {
@@ -467,7 +469,7 @@ void GameChatPanel::prepare_recipients() {
 bool GameChatPanel::select_recipient() {
 	// Get the current recipient
 	std::string recipient;
-	const std::string& text = editbox.text();
+	const std::string& text = editbox.get_text();
 	if (!text.empty() && text[0] == '@') {
 		// Get the recipient string including the first space
 		// If there is no space, return the whole string

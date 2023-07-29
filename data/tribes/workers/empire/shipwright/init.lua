@@ -1,6 +1,6 @@
 push_textdomain("tribes")
 
-dirname = path.dirname(__file__)
+local dirname = path.dirname(__file__)
 
 wl.Descriptions():new_worker_type {
    name = "empire_shipwright",
@@ -25,10 +25,7 @@ wl.Descriptions():new_worker_type {
          "animate=work duration:5s",
          "return"
       },
-      buildferry_1 = {
-         "findspace=size:swim radius:5 ferry",
-      },
-      buildferry_2 = {
+      buildferry = {
          "findspace=size:swim radius:5 ferry",
          "walk=coords",
          "animate=work duration:10s",

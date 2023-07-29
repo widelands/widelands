@@ -86,7 +86,7 @@ int16_t MainMenu::calc_desired_window_height(const UI::Window::WindowLayoutID id
 	case UI::Window::WindowLayoutID::kFsMenuOptions:
 		return std::max(450, get_h() / 2);
 	case UI::Window::WindowLayoutID::kFsMenuKeyboardOptions:
-		return std::max(360, get_h() * 3 / 8);
+		return std::max(400, get_h() / 2);
 	default:
 		NEVER_HERE();
 	}
@@ -101,13 +101,19 @@ int16_t MainMenu::calc_desired_window_y(const UI::Window::WindowLayoutID id) {
 }
 
 MainMenu::MainMenu(const bool skip_init)
-   : UI::Panel(nullptr, UI::PanelStyle::kFsMenu, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
+   : UI::Panel(nullptr,
+               UI::PanelStyle::kFsMenu,
+               "widelands_main_menu",
+               0,
+               0,
+               g_gr->get_xres(),
+               g_gr->get_yres()),
      box_rect_(0, 0, 0, 0),
      butw_(get_w() * 7 / 20),
      buth_(get_h() * 9 / 200),
      padding_(buth_ / 3),
-     vbox1_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, padding_),
-     vbox2_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, padding_),
+     vbox1_(this, UI::PanelStyle::kFsMenu, "vbox_1", 0, 0, UI::Box::Vertical, 0, 0, padding_),
+     vbox2_(this, UI::PanelStyle::kFsMenu, "vbox_2", 0, 0, UI::Box::Vertical, 0, 0, padding_),
      singleplayer_(&vbox1_,
                    "singleplayer",
                    0,
@@ -151,6 +157,7 @@ MainMenu::MainMenu(const bool skip_init)
      exit_(&vbox2_, "exit", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
      version_(this,
               UI::PanelStyle::kFsMenu,
+              "version",
               UI::FontStyle::kFsMenuInfoPanelParagraph,
               0,
               0,
@@ -160,6 +167,7 @@ MainMenu::MainMenu(const bool skip_init)
               UI::Align::kCenter),
      copyright_(this,
                 UI::PanelStyle::kFsMenu,
+                "copyright",
                 UI::FontStyle::kFsMenuInfoPanelParagraph,
                 0,
                 0,

@@ -37,10 +37,12 @@
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/icongrid.h"
+#include "ui_basic/spinbox.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/unique_window.h"
 #include "wui/actionconfirm.h"
 #include "wui/economy_options_window.h"
+#include "wui/fleet_options_window.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
 #include "wui/waresdisplay.h"
@@ -73,7 +75,14 @@ private:
 };
 
 BuildGrid::BuildGrid(UI::Panel* parent, Widelands::Player* plr, int32_t x, int32_t y, int32_t cols)
-   : UI::IconGrid(parent, UI::PanelStyle::kWui, x, y, kBuildGridCellSize, kBuildGridCellSize, cols),
+   : UI::IconGrid(parent,
+                  UI::PanelStyle::kWui,
+                  "build_grid",
+                  x,
+                  y,
+                  kBuildGridCellSize,
+                  kBuildGridCellSize,
+                  cols),
      plr_(plr) {
 	icon_clicked.connect([this](Widelands::DescriptionIndex i) { click_slot(i); });
 	mouseout.connect([this](Widelands::DescriptionIndex i) { mouseout_slot(i); });
@@ -164,6 +173,8 @@ public:
 	void act_debug();
 	void act_buildflag();
 	void act_configure_economy();
+	void act_configure_ship_fleet();
+	void act_configure_ferry_fleet();
 	void act_ripflag();
 	void act_buildroad();
 	void act_abort_buildroad();
@@ -259,7 +270,7 @@ FieldActionWindow::FieldActionWindow(InteractiveBase* const ib,
      player_(plr),
      map_(ib->egbase().map()),
      node_(ib->get_sel_pos().node, &map_[ib->get_sel_pos().node]),
-     tabpanel_(this, UI::TabPanelStyle::kWuiDark),
+     tabpanel_(this, UI::TabPanelStyle::kWuiDark, "tabs"),
 
      is_showing_workarea_overlaps_(ib->get_display_flag(InteractiveBase::dfShowWorkareaOverlap)),
      building_under_mouse_(Widelands::INVALID_INDEX) {
@@ -367,7 +378,8 @@ Add the buttons you normally get when clicking on a field.
 */
 void FieldActionWindow::add_buttons_auto() {
 	UI::Box* buildbox = nullptr;
-	UI::Box& watchbox = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	UI::Box& watchbox =
+	   *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, "watch_box", 0, 0, UI::Box::Horizontal);
 
 	upcast(InteractiveGameBase, igbase, &ibase());
 	upcast(InteractivePlayer, ipl, igbase);
@@ -376,15 +388,15 @@ void FieldActionWindow::add_buttons_auto() {
 		// Target immovables for removal by workers
 		if (upcast(const Widelands::Immovable, mo, map_.get_immovable(node_))) {
 			if (mo->is_marked_for_removal(ipl->player_number())) {
-				UI::Box& box =
-				   *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+				UI::Box& box = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, "immovable_actions_box",
+				                            0, 0, UI::Box::Horizontal);
 				add_button(&box, "unmark_for_removal", kImgButtonUnmarkRemoval,
 				           &FieldActionWindow::act_unmark_removal,
 				           _("Marked for removal by a worker – click to unmark"));
 				add_tab("target", kImgTabTarget, &box, _("Immovable Actions"));
 			} else if (suited_for_targeting(ipl->player_number(), ipl->egbase(), *mo)) {
-				UI::Box& box =
-				   *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+				UI::Box& box = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, "immovable_actions_box",
+				                            0, 0, UI::Box::Horizontal);
 				add_button(&box, "mark_for_removal", kImgButtonMarkRemoval,
 				           &FieldActionWindow::act_mark_removal,
 				           _("Mark this immovable for timely removal by a suited worker"));
@@ -402,7 +414,8 @@ void FieldActionWindow::add_buttons_auto() {
 		const bool can_act = igbase != nullptr ? igbase->can_act(owner) : true;
 
 		// The box with road-building buttons
-		buildbox = new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+		buildbox =
+		   new UI::Box(&tabpanel_, UI::PanelStyle::kWui, "build_box", 0, 0, UI::Box::Horizontal);
 
 		if (upcast(Widelands::Flag, flag, imm)) {
 			// Add flag actions
@@ -488,6 +501,36 @@ void FieldActionWindow::add_buttons_auto() {
 				add_button(buildbox, "destroy_waterway", kImgButtonRemoveWaterway,
 				           &FieldActionWindow::act_removewaterway, _("Destroy a waterway"));
 			}
+		}
+	}
+
+	// Fleet target settings
+	bool has_ship_fleet = false;
+	bool has_ferry_fleet = false;
+	for (Widelands::Bob* bob = node_.field->get_first_bob(); bob != nullptr;
+	     bob = bob->get_next_bob()) {
+		if (bob->descr().type() == Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE &&
+		    !has_ship_fleet &&
+		    (ipl == nullptr || bob->owner().player_number() == ipl->player_number())) {
+			if (buildbox == nullptr) {
+				buildbox = new UI::Box(
+				   &tabpanel_, UI::PanelStyle::kWui, "build_box", 0, 0, UI::Box::Horizontal);
+			}
+			has_ship_fleet = true;
+			add_button(
+			   buildbox, "configure_ship_fleet", "images/wui/fieldaction/menu_tab_ship_targets.png",
+			   &FieldActionWindow::act_configure_ship_fleet, _("Configure this ocean’s ship fleet"));
+		} else if (bob->descr().type() == Widelands::MapObjectType::FERRY_FLEET_YARD_INTERFACE &&
+		           !has_ferry_fleet &&
+		           (ipl == nullptr || bob->owner().player_number() == ipl->player_number())) {
+			if (buildbox == nullptr) {
+				buildbox = new UI::Box(
+				   &tabpanel_, UI::PanelStyle::kWui, "build_box", 0, 0, UI::Box::Horizontal);
+			}
+			has_ferry_fleet = true;
+			add_button(
+			   buildbox, "configure_ferry_fleet", "images/wui/fieldaction/menu_tab_ferry_targets.png",
+			   &FieldActionWindow::act_configure_ferry_fleet, _("Configure this ocean’s ferry fleet"));
 		}
 	}
 
@@ -639,7 +682,8 @@ Buttons used during road building: Set flag here and Abort
 ===============
 */
 void FieldActionWindow::add_buttons_road(bool flag) {
-	UI::Box& buildbox = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	UI::Box& buildbox =
+	   *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, "build_box", 0, 0, UI::Box::Horizontal);
 
 	if (flag) {
 		add_button(&buildbox, "build_flag", kImgButtonBuildFlag, &FieldActionWindow::act_buildflag,
@@ -665,7 +709,8 @@ void FieldActionWindow::add_buttons_road(bool flag) {
 }
 
 void FieldActionWindow::add_buttons_waterway(bool flag) {
-	UI::Box& buildbox = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	UI::Box& buildbox =
+	   *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, "build_box", 0, 0, UI::Box::Horizontal);
 
 	if (flag) {
 		add_button(&buildbox, "build_flag", kImgButtonBuildFlag, &FieldActionWindow::act_buildflag,
@@ -784,6 +829,32 @@ void FieldActionWindow::act_configure_economy() {
 			const bool can_act = igbase->can_act(ware_economy->owner().player_number());
 			EconomyOptionsWindow::create(get_parent(), igbase->egbase().mutable_descriptions(), *flag,
 			                             Widelands::WareWorker::wwWARE, can_act);
+		}
+	}
+	die();
+}
+
+void FieldActionWindow::act_configure_ship_fleet() {
+	upcast(InteractivePlayer, ipl, &ibase());
+	for (Widelands::Bob* bob = node_.field->get_first_bob(); bob != nullptr;
+	     bob = bob->get_next_bob()) {
+		if (bob->descr().type() == Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE &&
+		    (ipl == nullptr || bob->owner().player_number() == ipl->player_number())) {
+			FleetOptionsWindow::create(get_parent(), ibase(), bob);
+			break;
+		}
+	}
+	die();
+}
+
+void FieldActionWindow::act_configure_ferry_fleet() {
+	upcast(InteractivePlayer, ipl, &ibase());
+	for (Widelands::Bob* bob = node_.field->get_first_bob(); bob != nullptr;
+	     bob = bob->get_next_bob()) {
+		if (bob->descr().type() == Widelands::MapObjectType::FERRY_FLEET_YARD_INTERFACE &&
+		    (ipl == nullptr || bob->owner().player_number() == ipl->player_number())) {
+			FleetOptionsWindow::create(get_parent(), ibase(), bob);
+			break;
 		}
 	}
 	die();
@@ -950,7 +1021,7 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 		building_under_mouse_ = idx;
 		const Widelands::BuildingDescr& descr = *player_->tribe().get_building_descr(idx);
 		const WorkareaInfo& workarea_info = descr.workarea_info();
-		ibase().show_workarea(workarea_info, node_);
+		ibase().show_workarea(workarea_info, node_, {});
 		showing_workarea_preview_ = true;
 		if (!is_showing_workarea_overlaps_) {
 			return;
@@ -1041,7 +1112,7 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 								colors[t] = kOverlapColorPale;
 							}
 						}
-						ibase().show_workarea(wa, mr.location(), colors);
+						ibase().show_workarea(wa, mr.location(), colors, {});
 						overlapping_workareas_.insert(mr.location());
 					}
 				}

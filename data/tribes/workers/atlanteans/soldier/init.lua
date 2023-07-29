@@ -367,7 +367,7 @@
 
 push_textdomain("tribes")
 
-dirname = path.dirname(__file__)
+local dirname = path.dirname(__file__)
 
 spritesheets = {
    atk_fail_e = {

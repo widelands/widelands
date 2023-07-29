@@ -395,6 +395,7 @@ void EditorInteractive::add_tool_menu() {
 	              shortcut_string_for(KeyboardShortcut::kEditorToolHistory, false));
 	tool_windows_.toolhistory.open_window = [this] {
 		new EditorToolhistoryOptionsMenu(*this, tools()->tool_history, tool_windows_.toolhistory);
+		select_tool(tools()->info, EditorTool::First);
 	};
 
 	toolmenu_.selected.connect([this] { tool_menu_selected(toolmenu_.get_selected()); });
@@ -676,6 +677,17 @@ void EditorInteractive::draw(RenderTarget& dst) {
 	const float scale = 1.f / map_view()->view().zoom;
 	const Time& gametime = ebase.get_gametime();
 
+	float sel_alpha;
+	if (get_sel_gap_percent() < 10) {
+		sel_alpha = 1.f;
+	} else if (get_sel_gap_percent() <= 50) {
+		sel_alpha = 0.8f;
+	} else if (get_sel_gap_percent() < 100) {
+		sel_alpha = 0.5f;
+	} else {
+		sel_alpha = 0.f;
+	}
+
 	// The map provides a mapping from player number to Coords, while we require
 	// the inverse here. We construct this, but this is done on every frame and
 	// therefore potentially expensive - though it never showed up in any of my
@@ -705,6 +717,9 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		}
 	}
 
+	std::map<std::pair<Widelands::DescriptionIndex, Widelands::ResourceAmount>, const Image*>
+	   resource_images_cache;
+
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
 		if (field.obscured_by_slope) {
@@ -728,16 +743,20 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		}
 
 		// Draw resource overlay.
-		uint8_t const amount = field.fcoords.field->get_resources_amount();
-		if (get_display_flag(dfShowResources) && amount > 0) {
-			const std::string& immname = ebase.descriptions()
-			                                .get_resource_descr(field.fcoords.field->get_resources())
-			                                ->editor_image(amount);
-			if (!immname.empty()) {
-				const auto* pic = g_image_cache->get(immname);
-				blit_field_overlay(
-				   &dst, field, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
+		if (get_display_flag(dfShowResources) && field.fcoords.field->get_resources_amount() > 0) {
+			std::pair<Widelands::DescriptionIndex, Widelands::ResourceAmount> cachekey(
+			   field.fcoords.field->get_resources(), field.fcoords.field->get_resources_amount());
+			auto it = resource_images_cache.find(cachekey);
+			if (it == resource_images_cache.end()) {
+				it = resource_images_cache
+				        .emplace(cachekey, g_image_cache->get(ebase.descriptions()
+				                                                 .get_resource_descr(cachekey.first)
+				                                                 ->editor_image(cachekey.second)))
+				        .first;
 			}
+
+			blit_field_overlay(&dst, field, it->second,
+			                   Vector2i(it->second->width() / 2, it->second->height() / 2), scale);
 		}
 
 		const Widelands::NodeCaps nodecaps =
@@ -793,7 +812,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			if (selected_nodes.count(field.fcoords) > 0) {
 				const Image* pic = get_sel_picture();
 				blit_field_overlay(
-				   &dst, field, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
+				   &dst, field, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale, sel_alpha);
 			}
 
 			// Draw selection markers on the triangles.
@@ -810,8 +829,8 @@ void EditorInteractive::draw(RenderTarget& dst) {
 					                       brn.rendertarget_pixel.y) /
 					                         3);
 					const Image* pic = get_sel_picture();
-					blit_overlay(
-					   &dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale, 1.f);
+					blit_overlay(&dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale,
+					             sel_alpha);
 				}
 				if (selected_triangles.count(
 				       Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::D)) != 0u) {
@@ -822,8 +841,8 @@ void EditorInteractive::draw(RenderTarget& dst) {
 					                       brn.rendertarget_pixel.y) /
 					                         3);
 					const Image* pic = get_sel_picture();
-					blit_overlay(
-					   &dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale, 1.f);
+					blit_overlay(&dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale,
+					             sel_alpha);
 				}
 			}
 		}
@@ -841,15 +860,15 @@ void EditorInteractive::set_sel_pos(Widelands::NodeAndTriangle<> const sel) {
 	}
 }
 
-void EditorInteractive::set_sel_radius_and_update_menu(uint32_t const val) {
+void EditorInteractive::set_sel_radius_and_update_menu(uint32_t radius, uint16_t gap) {
 	if (tools_->current().has_size_one()) {
-		set_sel_radius(0);
+		set_sel_radius(0, 0);
 		return;
 	}
-	if (UI::UniqueWindow* const w = menu_windows_.toolsize.window) {
-		dynamic_cast<EditorToolsizeMenu&>(*w).update(val);
+	if (UI::UniqueWindow* const w = menu_windows_.toolsize.window; w != nullptr) {
+		dynamic_cast<EditorToolsizeMenu&>(*w).update(radius, gap);
 	} else {
-		set_sel_radius(val);
+		set_sel_radius(radius, gap);
 	}
 }
 
@@ -1003,7 +1022,14 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 
 		for (int i = 0; i < 10; ++i) {
 			if (matches_shortcut(KeyboardShortcut::kEditorToolsize1 + i, code)) {
-				set_sel_radius_and_update_menu(i);
+				set_sel_radius_and_update_menu(i, get_sel_gap_percent());
+				return true;
+			}
+		}
+
+		for (int i = 0; i < 10; ++i) {
+			if (matches_shortcut(KeyboardShortcut::kEditorToolgap0 + i, code)) {
+				set_sel_radius_and_update_menu(get_sel_radius(), i * 10);
 				return true;
 			}
 		}
@@ -1049,20 +1075,25 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 }
 
 bool EditorInteractive::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
-	int32_t change =
+	const int32_t change_size =
 	   get_mousewheel_change(MousewheelHandlerConfigID::kEditorToolsize, x, y, modstate);
-	if (change == 0) {
+	const int32_t change_gap =
+	   get_mousewheel_change(MousewheelHandlerConfigID::kEditorToolgap, x, y, modstate);
+
+	if (change_size == 0 && change_gap == 0) {
 		return false;
 	}
+
 	set_sel_radius_and_update_menu(
-	   std::max(0, std::min(static_cast<int32_t>(get_sel_radius()) + change, MAX_TOOL_AREA)));
+	   std::max(0, std::min(static_cast<int32_t>(get_sel_radius()) + change_size, MAX_TOOL_AREA)),
+	   std::max(0, std::min(static_cast<int32_t>(get_sel_gap_percent()) + change_gap, 100)));
 	return true;
 }
 
 void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex const which) {
 	if (which == EditorTool::First && &primary != tools_->current_pointer) {
 		if (primary.has_size_one()) {
-			set_sel_radius(0);
+			set_sel_radius(0, 0);
 			if (UI::UniqueWindow* const w = menu_windows_.toolsize.window) {
 				EditorToolsizeMenu& toolsize_menu = dynamic_cast<EditorToolsizeMenu&>(*w);
 				toolsize_menu.set_buttons_enabled(false);
@@ -1070,7 +1101,7 @@ void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex c
 		} else {
 			if (UI::UniqueWindow* const w = menu_windows_.toolsize.window) {
 				EditorToolsizeMenu& toolsize_menu = dynamic_cast<EditorToolsizeMenu&>(*w);
-				toolsize_menu.update(toolsize_menu.value());
+				toolsize_menu.update(toolsize_menu.radius(), toolsize_menu.gap_percent());
 			}
 		}
 		egbase().mutable_map()->recalc_whole_map(egbase());
@@ -1258,7 +1289,7 @@ void EditorInteractive::map_changed(const MapWas& action) {
 
 		tools_.reset(new Tools(*this, egbase().map()));
 		select_tool(tools_->info, EditorTool::First);
-		set_sel_radius(0);
+		set_sel_radius(0, 0);
 
 		set_need_save(false);
 		show_buildhelp(true);
@@ -1365,9 +1396,11 @@ UI::UniqueWindow::Registry& EditorInteractive::get_registry_for_window(WindowID 
 	NEVER_HERE();
 }
 
-void EditorInteractive::set_sel_radius(const uint32_t n) {
-	InteractiveBase::set_sel_radius(n);
+void EditorInteractive::set_sel_radius(uint32_t radius, uint16_t gap) {
+	InteractiveBase::set_sel_radius(radius);
+	InteractiveBase::set_sel_gap_percent(gap);
 	tool_settings_changed_ = true;
+	set_tooltip(gap > 0 ? format(_("Tool gaps: %u%%"), gap) : "");
 }
 
 void EditorInteractive::publish_map() {

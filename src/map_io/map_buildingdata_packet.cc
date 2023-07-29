@@ -22,10 +22,12 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/expedition_bootstrap.h"
+#include "economy/ferry_fleet.h"
 #include "economy/flag.h"
 #include "economy/input_queue.h"
 #include "economy/portdock.h"
 #include "economy/request.h"
+#include "economy/ship_fleet.h"
 #include "economy/warehousesupply.h"
 #include "economy/wares_queue.h"
 #include "economy/workers_queue.h"
@@ -62,8 +64,19 @@ constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
 constexpr uint16_t kCurrentPacketVersionConstructionsite = 5;
 constexpr uint16_t kCurrentPacketPFBuilding = 2;
 constexpr uint16_t kCurrentPacketVersionMilitarysite = 7;
-constexpr uint16_t kCurrentPacketVersionProductionsite = 10;
+constexpr uint16_t kCurrentPacketVersionProductionsite = 11;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 7;
+
+/* Packet versions changelog:
+ * Overall: v1.1 = 9
+ * Dismantlesite: v1.1 = 1
+ * Constructionsite: v1.1 = 5
+ * PFBuilding: v1.1 = 2
+ * Militarysite: v1.1 = 7
+ * Productionsite: v1.1 = 10
+ * - 10 -> 11: Added ship/ferry fleet/yard interfaces
+ * Trainingesite: v1.1 = 7
+ */
 
 void MapBuildingdataPacket::read(FileSystem& fs,
                                  EditorGameBase& egbase,
@@ -813,6 +826,17 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 			}
 
 			// TODO(Nordfriese): Savegame compatibility
+			if (packet_version >= 11) {
+				for (size_t i = fr.unsigned_32(); i > 0; --i) {
+					productionsite.ship_fleet_interfaces_.push_back(
+					   &mol.get<ShipFleetYardInterface>(fr.unsigned_32()));
+				}
+				for (size_t i = fr.unsigned_32(); i > 0; --i) {
+					productionsite.ferry_fleet_interfaces_.push_back(
+					   &mol.get<FerryFleetYardInterface>(fr.unsigned_32()));
+				}
+			}
+
 			productionsite.infinite_production_ = packet_version >= 10 && fr.unsigned_8() > 0;
 
 			productionsite.actual_percent_ = fr.unsigned_32();
@@ -1365,6 +1389,16 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 		if (iq->get_type() == wwWORKER) {
 			iq->write(fw, game, mos);
 		}
+	}
+
+	fw.unsigned_32(productionsite.ship_fleet_interfaces_.size());
+	for (ShipFleetYardInterface* interface : productionsite.ship_fleet_interfaces_) {
+		fw.unsigned_32(mos.get_object_file_index(*interface));
+	}
+
+	fw.unsigned_32(productionsite.ferry_fleet_interfaces_.size());
+	for (FerryFleetYardInterface* interface : productionsite.ferry_fleet_interfaces_) {
+		fw.unsigned_32(mos.get_object_file_index(*interface));
 	}
 
 	fw.unsigned_8(productionsite.infinite_production_ ? 1 : 0);

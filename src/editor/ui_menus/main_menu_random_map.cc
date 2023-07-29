@@ -48,7 +48,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
                                                      const uint32_t h,
                                                      UI::Button& ok_button,
                                                      UI::Button& cancel_button)
-   : UI::Box(&parent, s, kMargin, kMargin, UI::Box::Vertical, 0, 0, kMargin),
+   : UI::Box(&parent, s, "random_map_panel", kMargin, kMargin, UI::Box::Vertical, 0, 0, kMargin),
      label_style_(s == UI::PanelStyle::kWui ? UI::FontStyle::kWuiLabel :
                                               UI::FontStyle::kFsMenuLabel),
      // UI elements
@@ -69,6 +69,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
      map_size_box_(*this, panel_style_, "random_map_menu", 4, w, h),
      max_players_(compute_max_players()),
      players_(this,
+              "players",
               0,
               0,
               inner_w,
@@ -130,6 +131,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
                                UI::ButtonStyle::kFsMenuSecondary),
 
      water_(this,
+            "water",
             0,
             0,
             inner_w,
@@ -143,6 +145,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
             UI::SpinBox::Type::kSmall,
             5),
      land_(this,
+           "land",
            0,
            0,
            inner_w,
@@ -156,6 +159,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
            UI::SpinBox::Type::kSmall,
            5),
      wasteland_(this,
+                "wasteland",
                 0,
                 0,
                 inner_w,
@@ -168,10 +172,19 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
                 UI::SpinBox::Units::kPercent,
                 UI::SpinBox::Type::kSmall,
                 5),
-     mountains_box_(this, panel_style_, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
-     mountains_label_(&mountains_box_, panel_style_, label_style_, 0, 0, 0, 0, _("Mountains:")),
+     mountains_box_(this, panel_style_, "mountains_box", 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
+     mountains_label_(&mountains_box_,
+                      panel_style_,
+                      "mountains_label",
+                      label_style_,
+                      0,
+                      0,
+                      0,
+                      0,
+                      _("Mountains:")),
      mountains_(&mountains_box_,
                 panel_style_,
+                "mountains",
                 label_style_,
                 0,
                 0,
@@ -179,18 +192,34 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
                 mountains_label_.get_h(),
                 format(_("%i %%"), mountainsval_),
                 UI::Align::kCenter),
-     island_mode_(this, panel_style_, Vector2i::zero(), _("Island mode")),
+     island_mode_(this, panel_style_, "island_mode", Vector2i::zero(), _("Island mode")),
      // Geeky stuff
-     map_number_and_id_hbox_(this, panel_style_, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
+     map_number_and_id_hbox_(
+        this, panel_style_, "id_hbox", 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
      map_number_and_id_vbox_1_(
-        &map_number_and_id_hbox_, panel_style_, 0, 0, UI::Box::Vertical, 0, 0, kMargin),
+        &map_number_and_id_hbox_, panel_style_, "id_vbox1", 0, 0, UI::Box::Vertical, 0, 0, kMargin),
      map_number_and_id_vbox_2_(
-        &map_number_and_id_hbox_, panel_style_, 0, 0, UI::Box::Vertical, 0, 0, kMargin),
-     random_number_hbox_(
-        &map_number_and_id_vbox_2_, panel_style_, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
-     map_number_label_(
-        &map_number_and_id_vbox_1_, panel_style_, label_style_, 0, 0, 0, 0, _("Random number:")),
+        &map_number_and_id_hbox_, panel_style_, "id_vbox2", 0, 0, UI::Box::Vertical, 0, 0, kMargin),
+     random_number_hbox_(&map_number_and_id_vbox_2_,
+                         panel_style_,
+                         "seed_hbox",
+                         0,
+                         0,
+                         UI::Box::Horizontal,
+                         0,
+                         0,
+                         kMargin),
+     map_number_label_(&map_number_and_id_vbox_1_,
+                       panel_style_,
+                       "seed_label",
+                       label_style_,
+                       0,
+                       0,
+                       0,
+                       0,
+                       _("Random number:")),
      map_number_edit_(&random_number_hbox_,
+                      "seed_editbox",
                       0,
                       0,
                       inner_w - 2 * kMargin - map_number_label_.get_w(),
@@ -204,9 +233,17 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
                            UI::ButtonStyle::kWuiSecondary,
                            g_image_cache->get("images/ui_fsmenu/random.png"),
                            _("Generate a new random number")),
-     map_id_label_(
-        &map_number_and_id_vbox_1_, panel_style_, label_style_, 0, 0, 0, 0, _("Map ID:")),
+     map_id_label_(&map_number_and_id_vbox_1_,
+                   panel_style_,
+                   "id_label",
+                   label_style_,
+                   0,
+                   0,
+                   0,
+                   0,
+                   _("Map ID:")),
      map_id_edit_(&map_number_and_id_vbox_2_,
+                  "id_editbox",
                   0,
                   0,
                   inner_w - 2 * kMargin - map_id_label_.get_w(),
@@ -574,7 +611,7 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 	      << "Land = " << landval_ << " %\n"
 	      << "Wasteland = " << wastelandval_ << " %\n"
 	      << "Resources = " << resource_amounts_[resources_.get_selected()] << "\n"
-	      << "ID = " << map_id_edit_.text() << "\n"
+	      << "ID = " << map_id_edit_.get_text() << "\n"
 	      << "Generator = "
 	      << (generator_.get_selected() == nullptr ? "default" :
                                                     generator_.get_selected()->internal_name)
@@ -587,7 +624,7 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 	Notifications::publish(UI::NoteLoadingMessage(_("Generating random map…")));
 
 	log_info("============== Generating Map ==============\n");
-	log_info("ID:            %s\n", map_id_edit_.text().c_str());
+	log_info("ID:            %s\n", map_id_edit_.get_text().c_str());
 	log_info("Random number: %u\n", map_info.mapNumber);
 	log_info("Dimensions:    %d x %d\n", map_info.w, map_info.h);
 	log_info("Players:       %d\n", map_info.numPlayers);
@@ -628,7 +665,7 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 			lua.interpret_string(format("kWasteland = %d", map_info.wastelandRatio * 100));
 			lua.interpret_string(format("kIslandMode = %b", map_info.islandMode));
 			lua.interpret_string(format("kRandomNumber = %d", map_info.mapNumber));
-			lua.interpret_string(format("kMapID = \"%s\"", map_id_edit_.text()));
+			lua.interpret_string(format("kMapID = \"%s\"", map_id_edit_.get_text()));
 			lua.run_script(kAddOnDir + FileSystem::file_separator() +
 			               generator_.get_selected()->internal_name + FileSystem::file_separator() +
 			               "init.lua");
@@ -712,7 +749,7 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 void MainMenuNewRandomMapPanel::id_edit_box_changed() {
 	Widelands::UniqueRandomMapInfo map_info;
 
-	std::string str = map_id_edit_.text();
+	std::string str = map_id_edit_.get_text();
 
 	std::vector<std::string> world_names;
 	world_names.reserve(Widelands::Map::kOldWorldNames.size());
@@ -758,7 +795,7 @@ void MainMenuNewRandomMapPanel::id_edit_box_changed() {
 void MainMenuNewRandomMapPanel::nr_edit_box_changed() {
 
 	try {
-		std::string const text = map_number_edit_.text();
+		std::string const text = map_number_edit_.get_text();
 		std::stringstream sstrm(text);
 		unsigned int number;
 		sstrm >> number;
@@ -803,8 +840,8 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
                                            const uint32_t h)
    : UI::UniqueWindow(
         &parent, UI::WindowStyle::kWui, "random_map_menu", &r, 400, 500, _("New Random Map")),
-     box_(this, panel_style_, 0, 0, UI::Box::Vertical),
-     button_box_(&box_, panel_style_, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
+     box_(this, panel_style_, "main_box", 0, 0, UI::Box::Vertical),
+     button_box_(&box_, panel_style_, "buttons_box", 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
      ok_button_(&button_box_,
                 "generate_map",
                 0,

@@ -39,11 +39,11 @@ ScreenshotUploadWindow::ScreenshotUploadWindow(AddOnsCtrl& ctrl,
                 100,
                 100,
                 format(_("Upload Screenshot for ‘%s’"), info->internal_name)),
-     box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     hbox_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     vbox_(&hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     descrbox_(&vbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     buttons_box_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     box_(this, UI::PanelStyle::kFsMenu, "main_box", 0, 0, UI::Box::Vertical),
+     hbox_(&box_, UI::PanelStyle::kFsMenu, "hbox", 0, 0, UI::Box::Horizontal),
+     vbox_(&hbox_, UI::PanelStyle::kFsMenu, "vbox", 0, 0, UI::Box::Vertical),
+     descrbox_(&vbox_, UI::PanelStyle::kFsMenu, "description_box", 0, 0, UI::Box::Horizontal),
+     buttons_box_(&box_, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Horizontal),
      ok_(&buttons_box_,
          "ok",
          0,
@@ -60,11 +60,12 @@ ScreenshotUploadWindow::ScreenshotUploadWindow(AddOnsCtrl& ctrl,
              kRowButtonSize,
              UI::ButtonStyle::kFsMenuSecondary,
              _("Cancel")),
-     images_(&hbox_, 0, 0, 150, 200, UI::PanelStyle::kFsMenu),
-     icon_(&vbox_, UI::PanelStyle::kFsMenu, 0, 0, 640, 360, nullptr),
-     description_(&descrbox_, 0, 0, 300, UI::PanelStyle::kFsMenu),
+     images_(&hbox_, "images", 0, 0, 150, 200, UI::PanelStyle::kFsMenu),
+     icon_(&vbox_, UI::PanelStyle::kFsMenu, "icon", 0, 0, 640, 360, nullptr),
+     description_(&descrbox_, "description", 0, 0, 300, UI::PanelStyle::kFsMenu),
      progress_(&buttons_box_,
                UI::PanelStyle::kFsMenu,
+               "progress",
                UI::FontStyle::kFsMenuLabel,
                "",
                UI::Align::kCenter) {
@@ -72,10 +73,10 @@ ScreenshotUploadWindow::ScreenshotUploadWindow(AddOnsCtrl& ctrl,
 	buttons_box_.add(&progress_, UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
 	buttons_box_.add(&ok_, UI::Box::Resizing::kFullSize);
 
-	descrbox_.add(
-	   new UI::Textarea(&descrbox_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
-	                    _("Description:"), UI::Align::kRight),
-	   UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	descrbox_.add(new UI::Textarea(&descrbox_, UI::PanelStyle::kFsMenu, "label_description",
+	                               UI::FontStyle::kFsMenuInfoPanelHeading, _("Description:"),
+	                               UI::Align::kRight),
+	              UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	descrbox_.add_space(kRowButtonSpacing);
 	descrbox_.add(&description_, UI::Box::Resizing::kExpandBoth);
 
@@ -100,7 +101,7 @@ ScreenshotUploadWindow::ScreenshotUploadWindow(AddOnsCtrl& ctrl,
 	   [this](uint32_t /* value */) { icon_.set_icon(g_image_cache->get(images_.get_selected())); });
 	cancel_.sigclicked.connect([this]() { die(); });
 	ok_.sigclicked.connect([this, &ctrl, info, remote]() {
-		if (!images_.has_selection() || description_.text().empty()) {
+		if (!images_.has_selection() || description_.get_text().empty()) {
 			return;
 		}
 		const std::string& sel = images_.get_selected();
@@ -109,7 +110,7 @@ ScreenshotUploadWindow::ScreenshotUploadWindow(AddOnsCtrl& ctrl,
 		cancel_.set_enabled(false);
 		do_redraw_now();
 		try {
-			ctrl.net().upload_screenshot(info->internal_name, sel, description_.text());
+			ctrl.net().upload_screenshot(info->internal_name, sel, description_.get_text());
 			if (remote != nullptr) {
 				*remote = ctrl.net().fetch_one_remote(remote->internal_name);
 				ctrl.rebuild(false);
@@ -138,7 +139,7 @@ ScreenshotUploadWindow::ScreenshotUploadWindow(AddOnsCtrl& ctrl,
 }
 
 void ScreenshotUploadWindow::think() {
-	ok_.set_enabled(images_.has_selection() && !description_.text().empty());
+	ok_.set_enabled(images_.has_selection() && !description_.get_text().empty());
 	UI::Window::think();
 }
 

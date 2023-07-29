@@ -40,10 +40,11 @@ namespace UI {
  */
 Statebox::Statebox(Panel* const parent,
                    PanelStyle s,
+                   const std::string& name,
                    Vector2i const p,
                    const Image* pic,
                    const std::string& tooltip_text)
-   : Panel(parent, s, p.x, p.y, kStateboxSize, kStateboxSize, tooltip_text),
+   : Panel(parent, s, name, p.x, p.y, kStateboxSize, kStateboxSize, tooltip_text),
      flags_(Is_Enabled),
      pic_graphics_(pic),
      rendered_text_(nullptr) {
@@ -62,11 +63,12 @@ static inline std::string get_checkbox_graphics(const PanelStyle& s) {
 
 Statebox::Statebox(Panel* const parent,
                    PanelStyle s,
+                   const std::string& name,
                    Vector2i const p,
                    const std::string& label_text,
                    const std::string& tooltip_text,
                    int width)
-   : Panel(parent, s, p.x, p.y, std::max(width, kStateboxSize), kStateboxSize, tooltip_text),
+   : Panel(parent, s, name, p.x, p.y, std::max(width, kStateboxSize), kStateboxSize, tooltip_text),
      flags_(Is_Enabled),
      pic_graphics_(g_image_cache->get(get_checkbox_graphics(panel_style_))),
      rendered_text_(nullptr),
@@ -221,7 +223,7 @@ bool Statebox::handle_mousemove(
 }
 
 bool Statebox::handle_key(bool down, SDL_Keysym code) {
-	if (down && code.sym == SDLK_RETURN && (SDL_GetModState() & KMOD_CTRL) == 0) {
+	if (down && code.sym == SDLK_RETURN && (code.mod & KMOD_CTRL) == 0) {
 		button_clicked();
 		return true;
 	}

@@ -45,8 +45,8 @@ PinnedNoteEditor::PinnedNoteEditor(InteractivePlayer& parent,
      current_color_(rgb),
      delete_on_cancel_(is_new),
 
-     box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-     buttons_box_(&box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+     box_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical),
+     buttons_box_(&box_, UI::PanelStyle::kWui, "buttons_box", 0, 0, UI::Box::Horizontal),
      ok_(
         &buttons_box_, "ok", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiPrimary, _("OK")),
      delete_(&buttons_box_,
@@ -74,7 +74,7 @@ PinnedNoteEditor::PinnedNoteEditor(InteractivePlayer& parent,
             UI::ButtonStyle::kWuiSecondary,
             "",
             _("Change color…")),
-     text_(new UI::EditBox(&box_, 0, 0, 400, UI::PanelStyle::kWui)) {
+     text_(new UI::EditBox(&box_, "text", 0, 0, 400, UI::PanelStyle::kWui)) {
 	buttons_box_.add(&delete_, UI::Box::Resizing::kExpandBoth);
 	buttons_box_.add_space(kSpacing);
 	buttons_box_.add(&cancel_, UI::Box::Resizing::kExpandBoth);
@@ -133,7 +133,7 @@ void PinnedNoteEditor::send_delete() {
 void PinnedNoteEditor::ok() {
 	delete_on_cancel_ = false;
 	iplayer_.game().send_player_pinned_note(
-	   iplayer_.player_number(), pos_, text_->text(), current_color_, false);
+	   iplayer_.player_number(), pos_, text_->get_text(), current_color_, false);
 	die();
 }
 

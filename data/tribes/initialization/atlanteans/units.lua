@@ -1521,7 +1521,9 @@ wl.Descriptions():new_tribe {
                -- TRANSLATORS: Note helptext for an Atlantean production site: Fisher's House, part 1
                pgettext("atlanteans_building", "The fisher’s house needs water full of fish within the work area."),
                -- TRANSLATORS: Note helptext for an Atlantean production site: Fisher's House, part 2
-               pgettext("atlanteans_building", "Build a fish breeder’s house close to the fisher’s house to make sure that you don’t run out of fish.")
+               pgettext("atlanteans_building", "Build a fish breeder’s house close to the fisher’s house to make sure that you don’t run out of fish."),
+               -- TRANSLATORS: Note helptext for an Atlantean production site: Fisher's House, part 3
+               pgettext("atlanteans_building", "Roads and trees along the shoreline block fishing."),
             },
             -- TRANSLATORS: Note lore for an Atlantean production site: Fisher's House use some local fise song as you like
             lore = pgettext("atlanteans_building", [[‘Take your net and come to the sea<br>]] ..
@@ -1996,8 +1998,12 @@ wl.Descriptions():new_tribe {
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an Atlantean production site: Ferry Yard
             purpose = pgettext("building", "Builds ferries."),
-            -- TRANSLATORS: Note helptext for an Atlantean production site: Ferry Yard
-            note = pgettext("building", "Needs water nearby. Be aware ferries carry wares only, no workers."),
+            note = {
+               -- TRANSLATORS: Note helptext for an Atlantean production site: Ferry Yard, part 1
+               pgettext("building", "Needs water nearby. Be aware ferries carry wares only, no workers."),
+               -- TRANSLATORS: Note helptext for an Atlantean production site: Ferry Yard, part 2
+               pgettext("building", "Roads and trees along the shoreline block access to water."),
+            },
             -- TRANSLATORS: Lore helptext for an Atlantean production site: Ferry Yard
             lore = pgettext("atlanteans_building", [[‘Row, row, row your boat<br>]] ..
                                           [[gently ’long the shore.<br>]] ..
@@ -2012,14 +2018,19 @@ wl.Descriptions():new_tribe {
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an Atlantean production site: Shipyard
             purpose = pgettext("building", "Constructs ships that are used for overseas colonization and for trading between ports."),
+            note = {
+               -- TRANSLATORS: Note helptext for an Atlantean production site: Shipyard, part 1
+               pgettext("building", "Needs wide open water nearby."),
+               -- TRANSLATORS: Note helptext for an Atlantean production site: Shipyard, part 2
+               pgettext("building", "Roads and trees along the shoreline block access to water."),
+            },
             -- TRANSLATORS: Lore helptext for an Atlantean production site: Shipyard
             lore = pgettext("atlanteans_building", [[‘Soon may the wellerman come,<br>]] ..
                                           [[to bring us bread and smoked fish.<br>]] ..
                                           [[We set sail for a faraway shore<br>]] ..
                                           [[we praise Satul the best we wish.’]]),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Shipyard -- not directly stolen from the wellerman song
-            lore_author = pgettext("atlanteans_building", "Transcript from oral tradition")
-
+            lore_author = pgettext("atlanteans_building", "Transcript from oral tradition"),
          }
       },
 

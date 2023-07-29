@@ -6,7 +6,7 @@
 # Thomas Ho <tomohnetom@web.de>, 2018
 # Wuzzy <Wuzzy@disroot.org>, 2018
 # Elisabeth Jäger, 2018
-# Simon S. <sim.sta@icloud.com>, 2019
+# b94f5627662a22f238a004f5ae004204_68c3b70 <e7a0e9039e4dcffcecf86433306abe33_801663>, 2019
 # Lennard Hofmann <lennard.hofmann@web.de>, 2021
 # Stephan Lutz <stephan-lutz@gmx.de>, 2023
 # 
@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-05-16 02:41+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2023\n"
 "Language-Team: German (https://app.transifex.com/widelands/teams/35159/de/)\n"

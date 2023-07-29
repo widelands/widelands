@@ -67,6 +67,8 @@ using ResourceAmount = uint8_t;  /// 4 bits used, so 0 .. 15.
 
 using Quantity = uint32_t;  // e.g. the number of a type of ware in a warehouse.
 
+constexpr Quantity kEconomyTargetInfinity = std::numeric_limits<Quantity>::max();
+
 using Serial = uint32_t;  /// Serial number for MapObject.
 constexpr Serial kInvalidSerial = std::numeric_limits<uint32_t>::max();
 

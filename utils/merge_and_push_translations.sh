@@ -96,25 +96,13 @@ fi
 python3 utils/fix_formatting.py --lua --dir data/i18n
 python3 utils/fix_formatting.py --lua --dir data/txts
 
-# Undo one-liner diffs in po directory - these are pure timestamps with no other content
+# Undo one-liner diffs of pure timestamps with no other content
 set +x
-nrAdded=""
-nrDeleted=""
-for entry in $(git diff --numstat po); do
-  if [ -z "$nrAdded" ]
+for entry in $(git diff --numstat po/ | sed -En 's/^1\t1\t//p'); do
+  if [ -z "$(git diff "$entry" | grep '^[+-][^+-]' | grep -v '^[+-]"POT-Creation-Date:')" ]
   then
-    nrAdded=$entry
-  elif [ -z "$nrDeleted" ]
-  then
-    nrDeleted=$entry
-  else
-    if [[ $nrAdded == 1 ]] && [[ $nrDeleted == 1 ]]
-    then
-      echo "Skipping changes to $entry"
-      git checkout $entry
-    fi
-    nrAdded=""
-    nrDeleted=""
+    echo "Skipping changes to $entry"
+    git checkout $entry
   fi
 done
 set -x
@@ -130,6 +118,11 @@ git add data/i18n/*.lua || true
 git add xdg/org.widelands.Widelands.appdata.xml xdg/org.widelands.Widelands.desktop || true
 # - Statistics
 git add data/i18n/translation_stats.conf || true
+
+if [ -z "$(git status -s)" ]; then
+  echo "Run completed, nothing to commit."
+  exit 0
+fi
 
 # Commit and push.
 git commit -m "Fetched translations and updated catalogs."

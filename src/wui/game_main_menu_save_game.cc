@@ -66,8 +66,8 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 
      type_(type),
 
-     main_box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-     info_box_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+     main_box_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical),
+     info_box_(&main_box_, UI::PanelStyle::kWui, "info_box", 0, 0, UI::Box::Horizontal),
 
      load_or_save_(&info_box_,
                    igbase().game(),
@@ -76,9 +76,11 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
                    UI::WindowStyle::kWui,
                    false),
 
-     filename_box_(load_or_save_.table_box(), UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+     filename_box_(
+        load_or_save_.table_box(), UI::PanelStyle::kWui, "filename_box", 0, 0, UI::Box::Horizontal),
      filename_label_(&filename_box_,
                      UI::PanelStyle::kWui,
+                     "label_filename",
                      UI::FontStyle::kWuiLabel,
                      0,
                      0,
@@ -86,10 +88,11 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
                      0,
                      _("Filename:"),
                      UI::Align::kLeft),
-     filename_editbox_(&filename_box_, 0, 0, 0, UI::PanelStyle::kWui),
+     filename_editbox_(&filename_box_, "filename", 0, 0, 0, UI::PanelStyle::kWui),
 
      buttons_box_(load_or_save_.game_details()->button_box(),
                   UI::PanelStyle::kWui,
+                  "buttons_box",
                   0,
                   0,
                   UI::Box::Horizontal),
@@ -179,7 +182,7 @@ void GameMainMenuSaveGame::entry_selected() {
 
 void GameMainMenuSaveGame::edit_box_changed() {
 	// Prevent the user from creating nonsense directory names, like e.g. ".." or "...".
-	const bool is_legal_filename = FileSystemHelper::is_legal_filename(filename_editbox_.text());
+	const bool is_legal_filename = FileSystemHelper::is_legal_filename(filename_editbox_.get_text());
 	ok_.set_enabled(is_legal_filename);
 	filename_editbox_.set_tooltip(is_legal_filename ? "" : illegal_filename_tooltip_);
 	load_or_save_.delete_button()->set_enabled(false);
@@ -187,7 +190,7 @@ void GameMainMenuSaveGame::edit_box_changed() {
 }
 
 void GameMainMenuSaveGame::reset_editbox_or_die(const std::string& current_filename) {
-	if (filename_editbox_.text() == current_filename) {
+	if (filename_editbox_.get_text() == current_filename) {
 		die();
 	} else {
 		filename_editbox_.set_text(current_filename);
@@ -218,7 +221,7 @@ void GameMainMenuSaveGame::ok() {
 		}
 	}
 	if (type_ == Type::kSave) {
-		std::string filename = filename_editbox_.text();
+		std::string filename = filename_editbox_.get_text();
 		if (save_game(filename, !get_config_bool("nozip", false))) {
 			die();
 		} else {

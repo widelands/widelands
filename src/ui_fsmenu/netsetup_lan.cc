@@ -37,26 +37,29 @@ NetSetupLAN::NetSetupLAN(MenuCapsule& fsmm)
      // Left column content
      label_opengames_(&left_column_box_,
                       UI::PanelStyle::kFsMenu,
+                      "label_opengames",
                       UI::FontStyle::kFsMenuLabel,
                       0,
                       0,
                       0,
                       0,
                       _("List of games in your local network:")),
-     table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     table_(&left_column_box_, "table", 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 
      // Right column content
      label_playername_(&right_column_content_box_,
                        UI::PanelStyle::kFsMenu,
+                       "label_playername",
                        UI::FontStyle::kFsMenuLabel,
                        0,
                        0,
                        0,
                        0,
                        _("Your nickname:")),
-     playername_(&right_column_content_box_, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     playername_(&right_column_content_box_, "playername", 0, 0, 0, UI::PanelStyle::kFsMenu),
      label_hostname_(&right_column_content_box_,
                      UI::PanelStyle::kFsMenu,
+                     "label_hostname",
                      UI::FontStyle::kFsMenuLabel,
                      0,
                      0,
@@ -64,8 +67,9 @@ NetSetupLAN::NetSetupLAN(MenuCapsule& fsmm)
                      0,
                      _("Host to connect:")),
 
-     host_box_(&right_column_content_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     hostname_(&host_box_, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     host_box_(
+        &right_column_content_box_, UI::PanelStyle::kFsMenu, "host_box", 0, 0, UI::Box::Horizontal),
+     hostname_(&host_box_, "hostname", 0, 0, 0, UI::PanelStyle::kFsMenu),
      loadlasthost_(&host_box_,
                    "load_previous_host",
                    0,
@@ -110,9 +114,9 @@ NetSetupLAN::NetSetupLAN(MenuCapsule& fsmm)
 	right_column_content_box_.add(&hostgame_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_inf_space();
 	right_column_content_box_.add(
-	   new UI::MultilineTextarea(&right_column_content_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu,
-	                             AddOns::list_game_relevant_addons(), UI::Align::kLeft,
-	                             UI::MultilineTextarea::ScrollMode::kNoScrolling),
+	   new UI::MultilineTextarea(&right_column_content_box_, "label_addons", 0, 0, 0, 0,
+	                             UI::PanelStyle::kFsMenu, AddOns::list_game_relevant_addons(),
+	                             UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	   UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_inf_space();
 	right_column_content_box_.add_inf_space();
@@ -164,7 +168,7 @@ void NetSetupLAN::think() {
 }
 
 bool NetSetupLAN::get_host_address(NetAddress* addr) {
-	const std::string& host = hostname_.text();
+	const std::string& host = hostname_.get_text();
 
 	for (uint32_t i = 0; i < table_.size(); ++i) {
 		const NetOpenGame& game = *table_[i];
@@ -186,7 +190,7 @@ bool NetSetupLAN::get_host_address(NetAddress* addr) {
 }
 
 void NetSetupLAN::clicked_ok() {
-	if (hostname_.text().empty()) {
+	if (hostname_.get_text().empty()) {
 		clicked_hostgame();
 	} else {
 		clicked_joingame();
@@ -273,7 +277,7 @@ void NetSetupLAN::discovery_callback(int32_t const type,
 void NetSetupLAN::change_hostname() {
 	// Allow user to enter a hostname manually
 	table_.select(UI::Table<const NetOpenGame* const>::no_selection_index());
-	joingame_.set_enabled(!hostname_.text().empty());
+	joingame_.set_enabled(!hostname_.get_text().empty());
 }
 
 void NetSetupLAN::change_playername() {
@@ -281,7 +285,7 @@ void NetSetupLAN::change_playername() {
 	playername_.set_tooltip("");
 	hostgame_.set_enabled(true);
 
-	if (!InternetGaming::ref().valid_username(playername_.text())) {
+	if (!InternetGaming::ref().valid_username(playername_.get_text())) {
 		playername_.set_warning(true);
 		playername_.set_tooltip(_("Enter a valid nickname. This value may contain only "
 		                          "English letters, numbers, and @ . + - _ characters "
@@ -290,16 +294,16 @@ void NetSetupLAN::change_playername() {
 		hostgame_.set_enabled(false);
 		return;
 	}
-	if (!hostname_.text().empty()) {
+	if (!hostname_.get_text().empty()) {
 		joingame_.set_enabled(true);
 	}
 
-	set_config_string("nickname", playername_.text());
+	set_config_string("nickname", playername_.get_text());
 }
 
 void NetSetupLAN::clicked_joingame() {
 	// Save selected host so users can reload it for reconnection.
-	set_config_string("lasthost", hostname_.text());
+	set_config_string("lasthost", hostname_.get_text());
 
 	NetAddress addr;
 	if (!get_host_address(&addr)) {
@@ -313,7 +317,7 @@ void NetSetupLAN::clicked_joingame() {
 
 	try {
 		running_game_.reset(new GameClient(
-		   capsule_, running_game_, std::make_pair(addr, NetAddress()), playername_.text()));
+		   capsule_, running_game_, std::make_pair(addr, NetAddress()), playername_.get_text()));
 	} catch (const std::exception& e) {
 		running_game_.reset();
 		UI::WLMessageBox mbox(&capsule_.menu(), UI::WindowStyle::kFsMenu, _("Network Error"),
@@ -335,7 +339,8 @@ void NetSetupLAN::clicked_hostgame() {
 	}
 
 	try {
-		running_game_.reset(new GameHost(&capsule_, running_game_, playername_.text(), tribeinfos));
+		running_game_.reset(
+		   new GameHost(&capsule_, running_game_, playername_.get_text(), tribeinfos));
 	} catch (const std::exception& e) {
 		running_game_.reset();
 		UI::WLMessageBox mbox(&capsule_.menu(), UI::WindowStyle::kFsMenu, _("Network Error"),

@@ -19,6 +19,7 @@
 #ifndef WL_WUI_INTERACTIVE_BASE_H
 #define WL_WUI_INTERACTIVE_BASE_H
 
+#include <map>
 #include <memory>
 #include <optional>
 
@@ -44,9 +45,19 @@ class MapObjectLoader;
 }  // namespace Widelands
 
 struct WorkareaPreview {
+	using ExtraDataMap = std::map<Widelands::TCoords<>, uint32_t>;
+
+	WorkareaPreview(const Widelands::Coords& c,
+	                const WorkareaInfo* wi,
+	                const ExtraDataMap& d,
+	                const std::set<Widelands::Coords>& sc)
+	   : coords(c), info(wi), data(d), special_coords(sc) {
+	}
+
 	Widelands::Coords coords;
 	const WorkareaInfo* info;
-	std::map<Widelands::TCoords<>, uint32_t> data;
+	ExtraDataMap data;
+	std::set<Widelands::Coords> special_coords;
 };
 
 enum class RoadBuildingType { kRoad, kWaterway };
@@ -94,10 +105,13 @@ public:
 		return egbase_;
 	}
 
-	void show_workarea(const WorkareaInfo& workarea_info, Widelands::Coords coords);
 	void show_workarea(const WorkareaInfo& workarea_info,
 	                   Widelands::Coords coords,
-	                   std::map<Widelands::TCoords<>, uint32_t>& extra_data);
+	                   const std::set<Widelands::Coords>& special_coords);
+	void show_workarea(const WorkareaInfo& workarea_info,
+	                   Widelands::Coords coords,
+	                   const WorkareaPreview::ExtraDataMap& extra_data,
+	                   const std::set<Widelands::Coords>& special_coords);
 	void hide_workarea(const Widelands::Coords& coords, bool is_additional);
 
 	//  point of view for drawing
@@ -137,11 +151,17 @@ public:
 	uint32_t get_sel_radius() const {
 		return sel_.radius;
 	}
+	uint16_t get_sel_gap_percent() const {
+		return sel_.gap_percent;
+	}
 	virtual void set_sel_pos(Widelands::NodeAndTriangle<>);
 	void set_sel_freeze(const bool yes) {
 		sel_.freeze = yes;
 	}
-	virtual void set_sel_radius(uint32_t);
+	void set_sel_radius(uint32_t);
+	void set_sel_gap_percent(uint16_t gap) {
+		sel_.gap_percent = gap;
+	}
 
 	//  display flags
 	uint32_t get_display_flags() const;
@@ -226,6 +246,10 @@ public:
 		return true;
 	}
 
+	UI::Box* toolbar();
+	// Sets the toolbar's position to the bottom middle and configures its background images
+	void finalize_toolbar();
+
 protected:
 	// For referencing the items in mapviewmenu_
 	enum class MapviewMenuEntry { kMinimap, kIncreaseZoom, kDecreaseZoom, kResetZoom, kQuicknav };
@@ -292,16 +316,11 @@ protected:
 		return sel_.pic;
 	}
 
-	// Sets the toolbar's position to the bottom middle and configures its background images
-	void finalize_toolbar();
-
 	ChatOverlay* chat_overlay() {
 		return chat_overlay_;
 	}
 
 	ChatColorForPlayer color_functor() const;
-
-	UI::Box* toolbar();
 
 	// Returns the information which overlay text should currently be drawn.
 	// Returns InfoToDraw::kNone if not 'show'
@@ -339,6 +358,7 @@ protected:
 	/// otherwise checks if the coords are within any workarea.
 	bool has_workarea_preview(const Widelands::Coords& coords,
 	                          const Widelands::Map* map = nullptr) const;
+	bool has_workarea_special_coords(const Widelands::Coords& coords) const;
 
 	/// Returns true if the current player is allowed to hear sounds from map objects on this field
 	virtual bool player_hears_field(const Widelands::Coords& coords) const = 0;
@@ -378,13 +398,20 @@ private:
 		                       Widelands::TCoords<>(Widelands::Coords(0, 0),
 		                                            Widelands::TriangleIndex::D)},
 		                 const uint32_t Radius = 0,
+		                 const uint16_t Gap = 0,
 		                 const Image* Pic = nullptr)
-		   : freeze(Freeze), triangles(Triangles), pos(Pos), radius(Radius), pic(Pic) {
+		   : freeze(Freeze),
+		     triangles(Triangles),
+		     pos(Pos),
+		     radius(Radius),
+		     gap_percent(Gap),
+		     pic(Pic) {
 		}
 		bool freeze;     // don't change sel, even if mouse moves
 		bool triangles;  //  otherwise nodes
 		Widelands::NodeAndTriangle<> pos;
 		uint32_t radius;
+		uint16_t gap_percent;
 		const Image* pic;
 	} sel_;
 

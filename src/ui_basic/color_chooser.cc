@@ -35,7 +35,13 @@ constexpr int16_t kButtonSize = 30;
 struct ColorChooserImpl : public Panel {
 
 	ColorChooserImpl(Panel& parent, PanelStyle s, ColorChooser& c)
-	   : Panel(&parent, s, 0, 0, kMainDimension + kSpacing + kSidebarWidth, kMainDimension),
+	   : Panel(&parent,
+	           s,
+	           "color_chooser_pane",
+	           0,
+	           0,
+	           kMainDimension + kSpacing + kSidebarWidth,
+	           kMainDimension),
 	     chooser_(c) {
 	}
 
@@ -239,15 +245,15 @@ ColorChooser::ColorChooser(Panel* parent,
                            const RGBColor* default_color)
    : Window(parent, s, "choose_color", 0, 0, 0, 0, _("Choose Color…")),
      current_(init_color),
-     main_box_(this, panel_style_, 0, 0, Box::Vertical),
-     hbox_(&main_box_, panel_style_, 0, 0, Box::Horizontal),
-     buttonsbox_(&main_box_, panel_style_, 0, 0, Box::Horizontal),
-     vbox_(&hbox_, panel_style_, 0, 0, Box::Vertical),
-     box_r_(&vbox_, panel_style_, 0, 0, Box::Horizontal),
-     box_g_(&vbox_, panel_style_, 0, 0, Box::Horizontal),
-     box_b_(&vbox_, panel_style_, 0, 0, Box::Horizontal),
-     palette_box_1_(&vbox_, panel_style_, 0, 0, Box::Horizontal),
-     palette_box_2_(&vbox_, panel_style_, 0, 0, Box::Horizontal),
+     main_box_(this, panel_style_, "main_box", 0, 0, Box::Vertical),
+     hbox_(&main_box_, panel_style_, "hbox", 0, 0, Box::Horizontal),
+     buttonsbox_(&main_box_, panel_style_, "buttons_box", 0, 0, Box::Horizontal),
+     vbox_(&hbox_, panel_style_, "vbox", 0, 0, Box::Vertical),
+     box_r_(&vbox_, panel_style_, "box_r", 0, 0, Box::Horizontal),
+     box_g_(&vbox_, panel_style_, "box_g", 0, 0, Box::Horizontal),
+     box_b_(&vbox_, panel_style_, "box_b", 0, 0, Box::Horizontal),
+     palette_box_1_(&vbox_, panel_style_, "palette_box_1", 0, 0, Box::Horizontal),
+     palette_box_2_(&vbox_, panel_style_, "palette_box_2", 0, 0, Box::Horizontal),
      button_ok_(&buttonsbox_,
                 "ok",
                 0,
@@ -313,6 +319,7 @@ ColorChooser::ColorChooser(Panel* parent,
                                    _("Default Color")) :
                         nullptr),
      spin_r_(&box_r_,
+             "spinner_r",
              0,
              0,
              300,
@@ -325,6 +332,7 @@ ColorChooser::ColorChooser(Panel* parent,
              SpinBox::Units::kNone,
              SpinBox::Type::kBig),
      spin_g_(&box_g_,
+             "spinner_g",
              0,
              0,
              300,
@@ -337,6 +345,7 @@ ColorChooser::ColorChooser(Panel* parent,
              SpinBox::Units::kNone,
              SpinBox::Type::kBig),
      spin_b_(&box_b_,
+             "spinner_b",
              0,
              0,
              300,
@@ -349,7 +358,7 @@ ColorChooser::ColorChooser(Panel* parent,
              SpinBox::Units::kNone,
              SpinBox::Type::kBig),
      interactive_pane_(*new ColorChooserImpl(hbox_, panel_style_, *this)),
-     icon_(&vbox_, panel_style_, preview(init_color)) {
+     icon_(&vbox_, panel_style_, "preview", preview(init_color)) {
 	buttonsbox_.add_space(kSpacing);
 	buttonsbox_.add(&button_cancel_, UI::Box::Resizing::kExpandBoth);
 	buttonsbox_.add_space(kSpacing);

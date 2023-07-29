@@ -4,15 +4,16 @@
 # 
 # Translators:
 # Pedro Montaño <pedrol.montanoa@gmail.com>, 2022
+# Puniasterus <puniasterus@gmail.com>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-19 02:46+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
-"Last-Translator: Pedro Montaño <pedrol.montanoa@gmail.com>, 2022\n"
-"Language-Team: Spanish (https://www.transifex.com/widelands/teams/35159/es/)\n"
+"Last-Translator: Puniasterus <puniasterus@gmail.com>, 2023\n"
+"Language-Team: Spanish (https://app.transifex.com/widelands/teams/35159/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,9 +24,9 @@ msgstr ""
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
 msgid "%1% unit of %2% has been brought to your ‘%3%’ building."
 msgid_plural "%1% units of %2% have been brought to your ‘%3%’ building."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1% unidad de %2% ha sido llevada a tu ‘%3%’ edificio."
+msgstr[1] "%1% unidades de %2% han sido llevadas a tu ‘%3%’ edificio."
+msgstr[2] "%1% unidades de %2% han sido llevadas a tu ‘%3%’ edificio."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:60
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
@@ -59,7 +60,7 @@ msgstr "Derrota al ejército de los Törver"
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:10
 msgid ""
 "Törver is the enemy in the North, who is fighting under the red banner."
-msgstr ""
+msgstr "Törver es el enemigo en el norte, que lucha bajo la bandera roja."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:16
 msgid "Build a port"
@@ -90,6 +91,8 @@ msgid ""
 "Conquer the pirate sentry near the brook to the East. Hopefully we will find"
 " out what happened to the gold in this area."
 msgstr ""
+"Conquista el puesto de centinela pirata cerca del arroyo al este. Con suerte"
+" descubriremos qué pasó con el oro de esta zona."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:34
 msgid "Build warehouse"
@@ -285,7 +288,7 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
 msgid "Peril from the North"
-msgstr ""
+msgstr "Peligro desde el norte"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:36
 msgid ""

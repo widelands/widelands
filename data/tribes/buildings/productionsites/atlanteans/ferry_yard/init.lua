@@ -1,6 +1,6 @@
 push_textdomain("tribes")
 
-dirname = path.dirname(__file__)
+local dirname = path.dirname(__file__)
 
 wl.Descriptions():new_productionsite_type {
    name = "atlanteans_ferry_yard",
@@ -57,9 +57,9 @@ wl.Descriptions():new_productionsite_type {
          descname = _("working"),
          actions = {
             "sleep=duration:20s",
-            "callworker=buildferry_1",
+            "return=skipped unless fleet needs ferry",
             "consume=log:2 spidercloth",
-            "callworker=buildferry_2"
+            "callworker=buildferry",
          }
       },
    },

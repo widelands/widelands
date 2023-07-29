@@ -1,6 +1,6 @@
 push_textdomain("tribes")
 
-dirname = path.dirname (__file__)
+local dirname = path.dirname (__file__)
 
 -- Quick overview: We use 4 sets of animations here.
 -- The default set (fri_rookie, "rookie") is for soldiers with no helmet and one sword.

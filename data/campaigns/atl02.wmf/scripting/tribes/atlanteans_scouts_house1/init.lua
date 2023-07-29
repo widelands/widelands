@@ -1,6 +1,6 @@
 push_textdomain("scenario_atl02.wmf")
 
-dirname = "campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/"
+local dirname = "campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/"
 
 wl.Descriptions():new_productionsite_type {
    name = "atlanteans_scouts_house1",

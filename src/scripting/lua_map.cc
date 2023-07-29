@@ -696,13 +696,12 @@ parse_wares_as_bill_of_material(lua_State* L, int table_index, const Widelands::
 	return result;
 }
 
-const Widelands::TribeDescr& get_tribe_descr(lua_State* L, const std::string& tribename) {
+const Widelands::TribeDescr* get_tribe_descr(lua_State* L, const std::string& tribename) {
 	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
 	if (!descriptions.tribe_exists(tribename)) {
 		report_error(L, "Tribe '%s' does not exist", tribename.c_str());
 	}
-	return *descriptions.get_tribe_descr(
-	   get_egbase(L).mutable_descriptions()->load_tribe(tribename));
+	return descriptions.get_tribe_descr(get_egbase(L).mutable_descriptions()->load_tribe(tribename));
 }
 
 std::string soldier_preference_to_string(const Widelands::SoldierPreference p) {
@@ -838,9 +837,33 @@ int upcasted_map_object_descr_to_lua(lua_State* L, const Widelands::MapObjectDes
 			return CAST_TO_LUA(Widelands::WorkerDescr, LuaWorkerDescription);
 		case Widelands::MapObjectType::SOLDIER:
 			return CAST_TO_LUA(Widelands::SoldierDescr, LuaSoldierDescription);
+		case Widelands::MapObjectType::SHIP:
+			return CAST_TO_LUA(Widelands::ShipDescr, LuaShipDescription);
 		case Widelands::MapObjectType::IMMOVABLE:
 			return CAST_TO_LUA(Widelands::ImmovableDescr, LuaImmovableDescription);
+		case Widelands::MapObjectType::RESOURCE:
+			return CAST_TO_LUA(Widelands::ResourceDescription, LuaResourceDescription);
+		case Widelands::MapObjectType::TERRAIN:
+			return CAST_TO_LUA(Widelands::TerrainDescription, LuaTerrainDescription);
+		case Widelands::MapObjectType::MAPOBJECT:
+		case Widelands::MapObjectType::BATTLE:
+		case Widelands::MapObjectType::BOB:
+		case Widelands::MapObjectType::CRITTER:
+		case Widelands::MapObjectType::FERRY_FLEET:
+		case Widelands::MapObjectType::SHIP_FLEET:
+		case Widelands::MapObjectType::FLAG:
+		case Widelands::MapObjectType::ROAD:
+		case Widelands::MapObjectType::WATERWAY:
+		case Widelands::MapObjectType::ROADBASE:
+		case Widelands::MapObjectType::PORTDOCK:
+		case Widelands::MapObjectType::PINNED_NOTE:
+		case Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE:
+		case Widelands::MapObjectType::FERRY_FLEET_YARD_INTERFACE:
+			return CAST_TO_LUA(Widelands::MapObjectDescr, LuaMapObjectDescription);
 		default:
+			verb_log_warn("upcasted_map_object_to_lua: unknown type '%s' to cast to, return general "
+			              "MapObjectDescription",
+			              Widelands::to_string(descr->type()).c_str());
 			return CAST_TO_LUA(Widelands::MapObjectDescr, LuaMapObjectDescription);
 		}
 	}
@@ -912,11 +935,14 @@ int upcasted_map_object_to_lua(lua_State* L, Widelands::MapObject* mo) {
 	case Widelands::MapObjectType::FERRY_FLEET:
 	case Widelands::MapObjectType::WARE:
 	case Widelands::MapObjectType::PINNED_NOTE:
+	case Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE:
+	case Widelands::MapObjectType::FERRY_FLEET_YARD_INTERFACE:
 		throw LuaError(
 		   format("upcasted_map_object_to_lua: Unknown %i", static_cast<int>(mo->descr().type())));
 	}
 	NEVER_HERE();
 }
+#undef CAST_TO_LUA
 
 // This is used for get_ware/workers functions, when argument can be
 // 'all', single ware/worker, or array of ware/workers
@@ -1018,8 +1044,6 @@ RequestedWareWorker parse_wares_workers_counted(lua_State* L,
 	}
 	return result;
 }
-
-#undef CAST_TO_LUA
 
 /*
  * ========================================================================
@@ -2377,6 +2401,9 @@ int LuaMapObjectDescription::get_name(lua_State* L) {
         * :const:`battle`, holds information about two soldiers in a fight,
         * :const:`ship_fleet`, holds information for managing ships and ports,
         * :const:`ferry_fleet`, holds information for managing ferries and waterways.
+        * :const:`ship_fleet_yard_interface`, links a shipyard to a ship fleet.
+        * :const:`ferry_fleet_yard_interface`, links a ferry yard to a ferry fleet.
+        * :const:`pinned_note`, a textual note pinned to a field by the player.
 
       Example to fetch some information from a tribe's description:
 
@@ -3731,12 +3758,12 @@ int LuaWareDescription::consumers(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
-	const Widelands::TribeDescr& tribe = get_tribe_descr(L, luaL_checkstring(L, 2));
+	const Widelands::TribeDescr* tribe = get_tribe_descr(L, luaL_checkstring(L, 2));
 
 	lua_newtable(L);
 	int index = 1;
 	for (const Widelands::DescriptionIndex& building_index : get()->consumers()) {
-		if (tribe.has_building(building_index)) {
+		if (tribe->has_building(building_index)) {
 			lua_pushint32(L, index++);
 			upcasted_map_object_descr_to_lua(
 			   L, get_egbase(L).descriptions().get_building_descr(building_index));
@@ -3784,12 +3811,12 @@ int LuaWareDescription::producers(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
-	const Widelands::TribeDescr& tribe = get_tribe_descr(L, luaL_checkstring(L, 2));
+	const Widelands::TribeDescr* tribe = get_tribe_descr(L, luaL_checkstring(L, 2));
 
 	lua_newtable(L);
 	int index = 1;
 	for (const Widelands::DescriptionIndex& building_index : get()->producers()) {
-		if (tribe.has_building(building_index)) {
+		if (tribe->has_building(building_index)) {
 			lua_pushint32(L, index++);
 			upcasted_map_object_descr_to_lua(
 			   L, get_egbase(L).descriptions().get_building_descr(building_index));
@@ -4557,10 +4584,8 @@ const MethodType<LuaMapObject> LuaMapObject::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaMapObject> LuaMapObject::Properties[] = {
-   PROP_RO(LuaMapObject, __hash),
-   PROP_RO(LuaMapObject, descr),
-   PROP_RO(LuaMapObject, serial),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaMapObject, __hash), PROP_RO(LuaMapObject, descr), PROP_RO(LuaMapObject, serial),
+   PROP_RO(LuaMapObject, exists), {nullptr, nullptr, nullptr},
 };
 
 void LuaMapObject::__persist(lua_State* L) {
@@ -4612,10 +4637,6 @@ int LuaMapObject::get_serial(lua_State* L) {
 	return 1;
 }
 
-// use the dynamic type of BuildingDescription
-#define CAST_TO_LUA(klass, lua_klass)                                                              \
-	to_lua<lua_klass>(L, new lua_klass(dynamic_cast<const klass*>(desc)))
-
 /* RST
    .. attribute:: descr
 
@@ -4637,55 +4658,22 @@ int LuaMapObject::get_descr(lua_State* L) {
 	const Widelands::MapObjectDescr* desc = &get(L, get_egbase(L))->descr();
 	assert(desc != nullptr);
 
-	switch (desc->type()) {
-	case Widelands::MapObjectType::BUILDING:
-		return CAST_TO_LUA(Widelands::BuildingDescr, LuaBuildingDescription);
-	case Widelands::MapObjectType::CONSTRUCTIONSITE:
-		return CAST_TO_LUA(Widelands::ConstructionSiteDescr, LuaConstructionSiteDescription);
-	case Widelands::MapObjectType::DISMANTLESITE:
-		return CAST_TO_LUA(Widelands::DismantleSiteDescr, LuaDismantleSiteDescription);
-	case Widelands::MapObjectType::PRODUCTIONSITE:
-		return CAST_TO_LUA(Widelands::ProductionSiteDescr, LuaProductionSiteDescription);
-	case Widelands::MapObjectType::MILITARYSITE:
-		return CAST_TO_LUA(Widelands::MilitarySiteDescr, LuaMilitarySiteDescription);
-	case Widelands::MapObjectType::TRAININGSITE:
-		return CAST_TO_LUA(Widelands::TrainingSiteDescr, LuaTrainingSiteDescription);
-	case Widelands::MapObjectType::WAREHOUSE:
-		return CAST_TO_LUA(Widelands::WarehouseDescr, LuaWarehouseDescription);
-	case Widelands::MapObjectType::MARKET:
-		return CAST_TO_LUA(Widelands::MarketDescr, LuaMarketDescription);
-	case Widelands::MapObjectType::IMMOVABLE:
-		return CAST_TO_LUA(Widelands::ImmovableDescr, LuaImmovableDescription);
-	case Widelands::MapObjectType::WORKER:
-	case Widelands::MapObjectType::CARRIER:
-	case Widelands::MapObjectType::FERRY:
-	case Widelands::MapObjectType::SOLDIER:
-		return CAST_TO_LUA(Widelands::WorkerDescr, LuaWorkerDescription);
-	case Widelands::MapObjectType::SHIP:
-		return CAST_TO_LUA(Widelands::ShipDescr, LuaShipDescription);
-	case Widelands::MapObjectType::RESOURCE:
-		return CAST_TO_LUA(Widelands::ResourceDescription, LuaResourceDescription);
-	case Widelands::MapObjectType::TERRAIN:
-		return CAST_TO_LUA(Widelands::TerrainDescription, LuaTerrainDescription);
-	case Widelands::MapObjectType::MAPOBJECT:
-	case Widelands::MapObjectType::BATTLE:
-	case Widelands::MapObjectType::BOB:
-	case Widelands::MapObjectType::CRITTER:
-	case Widelands::MapObjectType::FERRY_FLEET:
-	case Widelands::MapObjectType::SHIP_FLEET:
-	case Widelands::MapObjectType::FLAG:
-	case Widelands::MapObjectType::ROAD:
-	case Widelands::MapObjectType::WATERWAY:
-	case Widelands::MapObjectType::ROADBASE:
-	case Widelands::MapObjectType::PORTDOCK:
-	case Widelands::MapObjectType::WARE:
-	case Widelands::MapObjectType::PINNED_NOTE:
-		return CAST_TO_LUA(Widelands::MapObjectDescr, LuaMapObjectDescription);
-	}
-	NEVER_HERE();
+	return upcasted_map_object_descr_to_lua(L, desc);
 }
 
-#undef CAST_TO_LUA
+/* RST
+   .. attribute:: exists
+
+      .. versionadded:: 1.2
+
+      (RO) Whether the map object represented by this Lua object still exists.
+
+      If it does not exist, no other attributes or functions of this object may be accessed.
+*/
+int LuaMapObject::get_exists(lua_State* L) {
+	lua_pushboolean(L, static_cast<int>(get_or_zero(get_egbase(L)) != nullptr));
+	return 1;
+}
 
 /*
  ==========================================================
@@ -7514,6 +7502,7 @@ Worker
 
 const char LuaWorker::className[] = "Worker";
 const MethodType<LuaWorker> LuaWorker::Methods[] = {
+   METHOD(LuaWorker, evict),
    {nullptr, nullptr},
 };
 const PropertyType<LuaWorker> LuaWorker::Properties[] = {
@@ -7561,6 +7550,19 @@ int LuaWorker::get_location(lua_State* L) {
  LUA METHODS
  ==========================================================
  */
+
+/* RST
+   .. method:: evict()
+
+      .. versionadded:: 1.2
+
+      Evict this worker from his current workplace.
+*/
+int LuaWorker::evict(lua_State* L) {
+	Widelands::Game& game = get_game(L);
+	get(L, game)->evict(game);
+	return 0;
+}
 
 /*
  ==========================================================

@@ -4,16 +4,16 @@
 # Translators:
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
-# Juanjo, 2015-2016,2018-2022
+# Juanjo, 2015-2016,2018-2023
 # Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-01-16 09:46+0000\n"
+"POT-Creation-Date: 2023-07-06 03:09+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
-"Last-Translator: Juanjo, 2015-2016,2018-2022\n"
-"Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
+"Last-Translator: Juanjo, 2015-2016,2018-2023\n"
+"Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -382,3 +382,8 @@ msgstr "%1$s en tenia %2$s."
 #: ../../data/scripting/win_conditions/wood_gnome.lua:98
 msgid "The winner is %1$s with %2$s."
 msgstr "El guanyador és %1$s amb %2$s."
+
+#: ../../data/scripting/win_conditions/wood_gnome.lua:101
+#, lua-format
+msgid "The winners had %s."
+msgstr "Els guanyadors tenien %s."

@@ -18,6 +18,7 @@
 
 #include "ui_basic/box.h"
 
+#include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "ui_basic/scrollbar.h"
@@ -28,13 +29,14 @@ namespace UI {
  */
 Box::Box(Panel* const parent,
          PanelStyle s,
+         const std::string& name,
          int32_t const x,
          int32_t const y,
          uint32_t const orientation,
          int32_t const max_x,
          int32_t const max_y,
          uint32_t const inner_spacing)
-   : Panel(parent, s, x, y, 0, 0),
+   : Panel(parent, s, name, x, y, 0, 0),
 
      max_x_(max_x != 0 ? max_x : g_gr->get_xres()),
      max_y_(max_y != 0 ? max_y : g_gr->get_yres()),
@@ -172,9 +174,10 @@ bool Box::handle_key(bool down, SDL_Keysym code) {
  * Adjust all the children and the box's size.
  */
 void Box::layout() {
-	// First pass: compute the depth and adjust whether we have a scrollbar
+	// First pass: compute the depth and count number of infinite spaces
 	int totaldepth = 0;
 	int spacing = -1 * inner_spacing_;
+	int infspace_count = 0;
 
 	for (size_t idx = 0; idx < items_.size(); ++idx) {
 		int depth;
@@ -183,6 +186,9 @@ void Box::layout() {
 		totaldepth += depth;
 		if (items_[idx].type != Item::ItemPanel || items_[idx].u.panel.panel->is_visible()) {
 			spacing += inner_spacing_;
+			if (items_[idx].fillspace) {
+				infspace_count++;
+			}
 		}
 	}
 
@@ -190,15 +196,11 @@ void Box::layout() {
 		totaldepth += spacing;
 	}
 
+	// Second pass: Adjust whether we have a scrollbar
+	int max_depths = orientation_ == Horizontal ? get_inner_w() : get_inner_h();
 	bool needscrollbar = force_scrolling_;
 	if (!force_scrolling_ && scrolling_) {
-		if (orientation_ == Horizontal) {
-			if (totaldepth > max_x_) {
-				needscrollbar = true;
-			}
-		} else if (totaldepth > max_y_) {
-			needscrollbar = true;
-		}
+		needscrollbar = totaldepth > max_depths;
 	}
 
 	if (needscrollbar) {
@@ -221,8 +223,8 @@ void Box::layout() {
 			pagesize = get_inner_h() - Scrollbar::kSize;
 		}
 		if (scrollbar_ == nullptr) {
-			scrollbar_.reset(
-			   new Scrollbar(this, sb_x, sb_y, sb_w, sb_h, panel_style_, orientation_ == Horizontal));
+			scrollbar_.reset(new Scrollbar(
+			   this, "scrollbar", sb_x, sb_y, sb_w, sb_h, panel_style_, orientation_ == Horizontal));
 			scrollbar_->moved.connect([this](int32_t a) { scrollbar_moved(a); });
 		} else {
 			scrollbar_->set_pos(Vector2i(sb_x, sb_y));
@@ -236,27 +238,20 @@ void Box::layout() {
 		scrollbar_.reset();
 	}
 
-	// Second pass: Count number of infinite spaces
-	int infspace_count = 0;
-	for (const Item& item : items_) {
-		if (item.fillspace) {
-			infspace_count++;
-		}
-	}
-
 	// Third pass: Distribute left over space to all infinite spaces. To
 	// avoid having some pixels left at the end due to rounding errors, we
 	// divide the remaining space by the number of remaining infinite
 	// spaces every time, and not just one.
-	int max_depths = orientation_ == Horizontal ? get_inner_w() : get_inner_h();
 	for (Item& item : items_) {
-		if (item.fillspace) {
+		if (item.fillspace && (item.type != Item::ItemPanel || item.u.panel.panel->is_visible())) {
 			assert(infspace_count > 0);
 			// Avoid division by 0
 			item.assigned_var_depth =
 			   std::max(0, (max_depths - totaldepth) / std::max(1, infspace_count));
 			totaldepth += item.assigned_var_depth;
 			infspace_count--;
+		} else {
+			item.assigned_var_depth = 0;
 		}
 	}
 
@@ -267,7 +262,7 @@ void Box::layout() {
 void Box::update_positions() {
 	int32_t scrollpos = scrollbar_ ? scrollbar_->get_scrollpos() : 0;
 
-	uint32_t totaldepth = 0;
+	int32_t totaldepth = 0;
 	uint32_t totalbreadth = orientation_ == Horizontal ? get_inner_h() : get_inner_w();
 	if (scrollbar_ && scrollbar_->is_enabled()) {
 		totalbreadth -= Scrollbar::kSize;
@@ -290,6 +285,18 @@ void Box::update_positions() {
 			totaldepth += inner_spacing_;
 		}
 	}
+
+#ifndef NDEBUG
+	// Subtract last spacing + some leeway from infspace calculation
+	totaldepth = totaldepth - items_.size() - inner_spacing_;
+	int max_depths = orientation_ == Horizontal ? get_w() : get_h();
+	if (!force_scrolling_ && !scrolling_ && max_depths > 0 && totaldepth > max_depths) {
+		// TODO(matthiakl): one day this should be an error
+		verb_log_dbg("Overflowing %s box %s: %d > %d ",
+		             orientation_ == Horizontal ? "horizontal" : "vertical  ", get_name().c_str(),
+		             totaldepth, max_depths);
+	}
+#endif
 }
 
 /**

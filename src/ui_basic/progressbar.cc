@@ -31,12 +31,13 @@ namespace UI {
  */
 ProgressBar::ProgressBar(Panel* const parent,
                          PanelStyle style,
+                         const std::string& name,
                          int32_t const x,
                          int32_t const y,
                          int32_t const w,
                          int32_t const h,
                          uint32_t const orientation)
-   : Panel(parent, style, x, y, w, h),
+   : Panel(parent, style, name, x, y, w, h),
      orientation_(orientation),
 
      progress_style_(style) {

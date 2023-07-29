@@ -35,6 +35,7 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
      dirname_(dirname),
      vbox_(this,
            UI::PanelStyle::kWui,
+           "main_box",
            padding_,
            padding_,
            UI::Box::Vertical,
@@ -43,13 +44,14 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
            padding_ / 2),
      label_(&vbox_,
             UI::PanelStyle::kWui,
+            "label",
             UI::FontStyle::kWuiLabel,
             0,
             0,
             get_inner_w() - 2 * padding_,
             buth_,
             _("Enter Directory Name:")),
-     edit_(&vbox_, 0, 0, get_inner_w() - 2 * padding_, UI::PanelStyle::kWui),
+     edit_(&vbox_, "editbox", 0, 0, get_inner_w() - 2 * padding_, UI::PanelStyle::kWui),
      ok_button_(this,
                 "ok",
                 UI::g_fh->fontset()->is_rtl() ? padding_ : get_inner_w() - butw_ - padding_,
@@ -95,7 +97,7 @@ void MainMenuSaveMapMakeDirectory::start() {
  * Editbox changed
  */
 void MainMenuSaveMapMakeDirectory::edit_changed() {
-	const std::string& text = edit_.text();
+	const std::string& text = edit_.get_text();
 	// Prevent the user from creating nonsense directory names, like e.g. ".." or "...".
 	const bool is_legal_filename = FileSystemHelper::is_legal_filename(text);
 	// Prevent the user from creating directory names that the game would

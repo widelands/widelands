@@ -77,15 +77,16 @@ inline BaseListselect::EntryRecord::~EntryRecord() {
  *       h
  */
 BaseListselect::BaseListselect(Panel* const parent,
+                               const std::string& name,
                                const int32_t x,
                                const int32_t y,
                                const uint32_t w,
                                const uint32_t h,
                                UI::PanelStyle style,
                                const ListselectLayout selection_mode)
-   : Panel(parent, style, x, y, w, h),
+   : Panel(parent, style, name, x, y, w, h),
 
-     scrollbar_(this, get_w() - Scrollbar::kSize, 0, 0, h, style),
+     scrollbar_(this, "scrollbar", get_w() - Scrollbar::kSize, 0, 0, h, style),
 
      selection_(no_selection_index()),
 
@@ -583,7 +584,7 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 			return UI::Panel::handle_key(down, code);
 		case SDLK_ESCAPE:
 		case SDLK_RETURN:
-			if (linked_dropdown != nullptr && (SDL_GetModState() & KMOD_CTRL) == 0) {
+			if (linked_dropdown != nullptr && (code.mod & KMOD_CTRL) == 0) {
 				return linked_dropdown->handle_key(down, code);
 			}
 			return UI::Panel::handle_key(down, code);

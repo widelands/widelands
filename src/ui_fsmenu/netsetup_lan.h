@@ -25,9 +25,9 @@
 #include "network/network_lan_promotion.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
-#include "ui_basic/editbox.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
+#include "ui_basic/textinput.h"
 #include "ui_fsmenu/menu.h"
 namespace FsMenu {
 class NetSetupLAN : public TwoColumnsBasicNavigationMenu {

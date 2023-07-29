@@ -195,6 +195,8 @@ public:
 
 	virtual void load_finish(EditorGameBase&) {
 	}
+	virtual void postload(EditorGameBase&) {
+	}
 
 	virtual const Image* representative_image() const;
 
@@ -271,6 +273,8 @@ public:
 		HeaderShipFleet = 11,
 		HeaderFerryFleet = 12,
 		HeaderPinnedNote = 13,
+		HeaderShipFleetInterface = 14,
+		HeaderFerryFleetInterface = 15,
 	};
 
 	/**
