@@ -3,7 +3,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2022
+# Benedikt Straub <benedikt-straub@web.de>, 2023
 # 
 msgid ""
 msgstr ""
@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2022\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2023\n"
 "Language-Team: Low German (https://app.transifex.com/widelands/teams/35159/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -226,7 +226,7 @@ msgid ""
 "Build a port, a weaving mill and a shipyard, then start an expedition to "
 "flee before the storm flood drowns the island."
 msgstr ""
-"Bau eene Muu, eene Spinnweelmöhlen un eene Warft; fang dann eene Söke an, um"
+"Bau eene Muu, eene Spinnweelmöhlen un eene Warft; fang dann eene Söök an, um"
 " to flüchten ehr de Störmflood de Hallig överswemmt."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:116
@@ -1086,7 +1086,7 @@ msgstr ""
 "De Störmflood kummt wull vun Westen her. Wenn wi futtmaken, könen wi ’t "
 "knapp schaffen! Wi mutten nix as eene Muu un eene Warft bauen – och, un eene"
 " Spinnweelmöhlen, um ut Reit un Fell de starken Stoff för de Seils to weven."
-" Dann könen wi an de Muu eene Söke utrüsten. Beedt to de Gotten un maakt to!"
+" Dann könen wi an de Muu eene Söök utrüsten. Beedt to de Gotten un maakt to!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:411
 msgid "Don’t Forget the Soldiers"

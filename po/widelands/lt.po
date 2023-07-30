@@ -5,14 +5,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 # Mantas Kriaučiūnas Baltix <mantas@akl.lt>, 2020
 # Tachionas <tachionexas@gmail.com>, 2020
-# Tachionas <tachionexas@gmail.com>, 2020-2021
+# Tachionas <tachionexas@gmail.com>, 2020-2021,2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-22 02:39+0000\n"
+"POT-Creation-Date: 2023-07-27 02:32+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Tachionas <tachionexas@gmail.com>, 2020-2021\n"
+"Last-Translator: Tachionas <tachionexas@gmail.com>, 2020-2021,2023\n"
 "Language-Team: Lithuanian (http://app.transifex.com/widelands/widelands/language/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -54,13 +54,13 @@ msgstr "Šalia tavo pradinės padėties nėra akmens. Todėl ekonomikos vystymui
 
 #: ../../data/scripting/infrastructure.lua:293
 msgid "Not enough trees nearby"
-msgstr ""
+msgstr "Netoliese nepakankamai medžių"
 
 #: ../../data/scripting/infrastructure.lua:293
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "Šalia tavo pradinės padėties nėra pakankamai medžių. Todėl ekonomikos vystymui gauni papildomų išteklių."
 
 #: ../../data/scripting/messages.lua:66 ../../data/scripting/messages.lua:68
 #: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:117
@@ -162,7 +162,7 @@ msgstr "teisinga"
 #: ../../src/base/format/float_node.h:33
 msgctxt "decimal_separator"
 msgid "."
-msgstr ""
+msgstr "."
 
 #. * TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably
@@ -300,7 +300,7 @@ msgstr "Išeiti"
 #: ../../src/wlapplication_options.cc:1031
 msgctxt "editor"
 msgid "Tools"
-msgstr ""
+msgstr "Įrankiai"
 
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
@@ -367,7 +367,7 @@ msgstr "Įrašyti žemėlapį"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:235
 msgid "Publish Map Online…"
-msgstr ""
+msgstr "Skelbti žemėlapį tinkle..."
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:243
@@ -515,12 +515,12 @@ msgstr "Paspausk ant laukelio, kad būtų rodoma informacija apie jį"
 #: ../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:44
 #: ../../src/wlapplication_options.cc:523
 msgid "Tool History"
-msgstr ""
+msgstr "Įrankio istorija"
 
 #. * TRANSLATORS: Tooltip for the tool history tool in the editor
 #: ../../src/editor/editorinteractive.cc:394
 msgid "Restore previous tool settings"
-msgstr ""
+msgstr "Atstatyti ankstesnius įrankio nustatymus"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
@@ -623,7 +623,7 @@ msgstr "Žemėlapis nebuvo išsaugotas. Ar tikrai norite išeiti? "
 
 #: ../../src/editor/editorinteractive.cc:611
 msgid "Are you sure you wish to exit the editor?"
-msgstr ""
+msgstr "Ar tikrai norite išeiti iš redaktoriaus?"
 
 #: ../../src/editor/editorinteractive.cc:1139 ../../src/logic/addons.cc:48
 #: ../../src/ui_basic/dropdown.cc:358 ../../src/ui_basic/dropdown.cc:360
@@ -656,7 +656,7 @@ msgid ""
 "\n"
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using version %2$s.\n"
 "Please add this information to your report."
-msgstr ""
+msgstr "Įvyko klaida. Klaidos pranešimas:\n\n%1$s\n\nPrašome pranešti apie šią problemą, kad padėtumėte mums tobulinti Widelands. Susijusius pranešimus rasite standartinėje išvestyje (Windows OS stdout.txt). Jūs naudojate %2$s versiją.\nPrašome pridėti šią informaciją prie savo pranešimo."
 
 #: ../../src/editor/editorinteractive.cc:1175
 #, c-format
@@ -676,7 +676,7 @@ msgstr "Be pavadinimo"
 #: ../../src/editor/editorinteractive.cc:1200
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:116
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:621
-#: ../../src/logic/map.h:232 ../../src/ui_fsmenu/addons/packager.cc:413
+#: ../../src/logic/map.h:232 ../../src/ui_fsmenu/addons/packager.cc:412
 msgctxt "author_name"
 msgid "Unknown"
 msgstr "Nežinomas"
@@ -692,7 +692,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:1426
 msgid "Publish Map"
-msgstr ""
+msgstr "Skelbti žemėlapį"
 
 #: ../../src/editor/editorinteractive.cc:1427
 #, c-format
@@ -708,15 +708,15 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:1451
 msgid "Login Error"
-msgstr ""
+msgstr "Prisijungimo klaida"
 
 #: ../../src/editor/editorinteractive.cc:1456
 msgid "Uploading Add-On…"
-msgstr ""
+msgstr "Įkeliamas priedas..."
 
 #: ../../src/editor/editorinteractive.cc:1457
 msgid "Saving map…"
-msgstr ""
+msgstr "Išsaugojamas žemėlapis..."
 
 #: ../../src/editor/editorinteractive.cc:1476
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:315
@@ -734,24 +734,24 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:1534
 msgid "The add-on could not be written to the disk."
-msgstr ""
+msgstr "Priedo nepavyko įrašyti į diską."
 
 #: ../../src/editor/editorinteractive.cc:1541
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:108
 msgid "Uploading…"
-msgstr ""
+msgstr "Įkeliama..."
 
 #: ../../src/editor/editorinteractive.cc:1547
 msgid "Upload Error"
-msgstr ""
+msgstr "Įkėlimo klaida"
 
 #: ../../src/editor/editorinteractive.cc:1569
 msgid "Success"
-msgstr ""
+msgstr "Sėkmė"
 
 #: ../../src/editor/editorinteractive.cc:1570
 msgid "The add-on was uploaded successfully."
-msgstr ""
+msgstr "Priedas sėkmingai įkeltas."
 
 #: ../../src/editor/map_generator.cc:754
 msgid "Random Player"
@@ -934,7 +934,7 @@ msgstr "Laivai: %s"
 #: ../../src/editor/ui_menus/field_info_window.cc:222
 msgctxt "resources"
 msgid "%1%× %2%"
-msgstr ""
+msgstr "%1% × %2%"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:229
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:159
@@ -951,7 +951,7 @@ msgstr "Pavadinimas: %s"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:233
 msgid "Size: %1% × %2%"
-msgstr ""
+msgstr "Dydis: %1% × %2%"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:237
 #, c-format
@@ -1014,7 +1014,7 @@ msgstr "Kelių žaidėjų scenarijai"
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:85
 #: ../../src/wui/mapdata.cc:193
 msgid "Singleplayer Scenarios"
-msgstr ""
+msgstr "Vieno žaidėjo scenarijai"
 
 #. * TRANSLATORS: Directory name for downloaded maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:87
@@ -1249,7 +1249,7 @@ msgstr "Sukurti tuščią žemėlapį..."
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:63
 #: ../../src/logic/addons.cc:59
 msgid "Map Generator"
-msgstr ""
+msgstr "Žemėlapio generatorius"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:81
 #: ../../src/wui/gamedetails.cc:169
@@ -1317,7 +1317,7 @@ msgstr "Atsitiktinis skaičius:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:235
 msgid "Generate a new random number"
-msgstr ""
+msgstr "Generuoti naują atsitiktinį skaičių"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:244
 msgid "Map ID:"
@@ -1630,7 +1630,7 @@ msgstr "Nekintamas aukštis"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:379 ../../src/wui/stock_menu.cc:36
 #, c-format
 msgid "%1$s %2$s"
-msgstr ""
+msgstr "%1$s %2$s"
 
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:51
 #, c-format
@@ -2067,11 +2067,11 @@ msgstr ""
 msgid "Initializing…"
 msgstr ""
 
-#: ../../src/logic/game.cc:1238
+#: ../../src/logic/game.cc:1249
 msgid "Trade Offer"
 msgstr ""
 
-#: ../../src/logic/game.cc:1240
+#: ../../src/logic/game.cc:1251
 msgid "This market has received a new trade offer."
 msgstr ""
 
@@ -4447,28 +4447,28 @@ msgstr ""
 msgid "Maximum Widelands Version:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:357
+#: ../../src/ui_fsmenu/addons/packager.cc:356
 msgid "New Add-On"
 msgstr "Naujas priedas"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:358
+#: ../../src/ui_fsmenu/addons/packager.cc:357
 msgid "Enter the name for the new add-on."
 msgstr "Įvesti pavadinimą naujam priedui"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:360
+#: ../../src/ui_fsmenu/addons/packager.cc:359
 msgid "Category"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:381
-#: ../../src/ui_fsmenu/addons/packager.cc:397
-#: ../../src/ui_fsmenu/addons/packager.cc:402
+#: ../../src/ui_fsmenu/addons/packager.cc:380
+#: ../../src/ui_fsmenu/addons/packager.cc:396
+#: ../../src/ui_fsmenu/addons/packager.cc:401
 #: ../../src/ui_fsmenu/addons/packager_box.cc:401
 #: ../../src/ui_fsmenu/addons/packager_box.cc:417
 #: ../../src/ui_fsmenu/addons/packager_box.cc:423
 msgid "Invalid Name"
 msgstr "Neteisingas pavadinimas"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:382
+#: ../../src/ui_fsmenu/addons/packager.cc:381
 #: ../../src/ui_fsmenu/addons/packager_box.cc:403
 #, c-format
 msgid ""
@@ -4477,26 +4477,26 @@ msgid ""
 "Please choose a different name."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:397
+#: ../../src/ui_fsmenu/addons/packager.cc:396
 msgid "An add-on with this internal name already exists."
 msgstr "Priedas yra su šiuo vidiniu pavadinimu jau."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:402
+#: ../../src/ui_fsmenu/addons/packager.cc:401
 msgid ""
 "An add-on with this internal name was deleted recently. Please commit your "
 "changes before using this name again."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:428
+#: ../../src/ui_fsmenu/addons/packager.cc:427
 msgid "Delete Add-on"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:430
+#: ../../src/ui_fsmenu/addons/packager.cc:429
 #, c-format
 msgid "Do you really want to delete the add-on ‘%s’?"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:431
+#: ../../src/ui_fsmenu/addons/packager.cc:430
 #, c-format
 msgid ""
 "Do you really want to delete the local add-on ‘%s’?\n"
@@ -4504,7 +4504,7 @@ msgid ""
 "Note that this add-on can not be downloaded again from the server."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:452
+#: ../../src/ui_fsmenu/addons/packager.cc:451
 #, c-format
 msgid ""
 "If you quit the packager now, all changes to the following %u add-on will be"
@@ -4517,25 +4517,25 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:461
-#: ../../src/ui_fsmenu/addons/packager.cc:488
-#: ../../src/ui_fsmenu/addons/packager.cc:513
+#: ../../src/ui_fsmenu/addons/packager.cc:460
+#: ../../src/ui_fsmenu/addons/packager.cc:487
+#: ../../src/ui_fsmenu/addons/packager.cc:512
 #, c-format
 msgid ""
 "%1$s\n"
 "· %2$s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:464
+#: ../../src/ui_fsmenu/addons/packager.cc:463
 msgid "Quit Packager"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:479
+#: ../../src/ui_fsmenu/addons/packager.cc:478
 #, c-format
 msgid "Do you really want to discard all changes to the add-on ‘%s’?"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:483
+#: ../../src/ui_fsmenu/addons/packager.cc:482
 #, c-format
 msgid "Do you really want to discard all changes to the following %u add-on?"
 msgid_plural ""
@@ -4545,16 +4545,16 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:492
+#: ../../src/ui_fsmenu/addons/packager.cc:491
 msgid "Discard Changes"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:504
+#: ../../src/ui_fsmenu/addons/packager.cc:503
 #, c-format
 msgid "Do you really want to commit all changes to the add-on ‘%s’ to disk?"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:508
+#: ../../src/ui_fsmenu/addons/packager.cc:507
 #, c-format
 msgid ""
 "Do you really want to commit all changes to the following %u add-on to disk?"
@@ -4566,42 +4566,42 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:517
+#: ../../src/ui_fsmenu/addons/packager.cc:516
 msgid ""
 "Warning: If you manually edited any files in this add-on, your changes may "
 "be overwritten!"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:520
+#: ../../src/ui_fsmenu/addons/packager.cc:519
 msgid "Confirm Saving"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:591
+#: ../../src/ui_fsmenu/addons/packager.cc:590
 msgid "Invalid Version Requirement"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:592
+#: ../../src/ui_fsmenu/addons/packager.cc:591
 #, c-format
 msgid ""
 "The minimum Widelands version ‘%1$s’ may not be newer than the maximum "
 "Widelands version ‘%2$s’. The add-on ‘%3$s’ will not be saved."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:599
+#: ../../src/ui_fsmenu/addons/packager.cc:598
 msgid "Invalid Version"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:600
+#: ../../src/ui_fsmenu/addons/packager.cc:599
 #, c-format
 msgid ""
 "‘%1$s’ is not a valid version string. The add-on ‘%2$s’ will not be saved."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:613
+#: ../../src/ui_fsmenu/addons/packager.cc:612
 msgid "Version Requirement"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:615
+#: ../../src/ui_fsmenu/addons/packager.cc:614
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ does not specify a minimum Widelands version. None of the "
@@ -4609,7 +4609,7 @@ msgid ""
 "minimum version requirement will automatically be set accordingly."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:620
+#: ../../src/ui_fsmenu/addons/packager.cc:619
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ specifies a minimum Widelands version of %2$s. However, "
@@ -4617,11 +4617,11 @@ msgid ""
 " %3$s. The version requirement will automatically be changed accordingly."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:642
+#: ../../src/ui_fsmenu/addons/packager.cc:641
 msgid "Error Writing Addon"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager.cc:643
+#: ../../src/ui_fsmenu/addons/packager.cc:642
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be saved to disk:\n"
@@ -8828,15 +8828,15 @@ msgstr "%s laimėjo!"
 #: ../../src/wui/game_summary.cc:261
 #, c-format
 msgid "Team %u won!"
-msgstr ""
+msgstr "Komanda %u laimėjo!"
 
 #: ../../src/wui/game_summary.cc:318
 msgid "Score"
-msgstr ""
+msgstr "Rezultatas"
 
 #: ../../src/wui/game_summary.cc:320
 msgid "Team Score"
-msgstr ""
+msgstr "Komandos rezultatas"
 
 #. * TRANSLATORS: This is the second part of "Selected %1%
 #. directory/directories and %2%"
@@ -8892,11 +8892,11 @@ msgstr "Laimėjimo sąlyga:"
 
 #: ../../src/wui/gamedetails.cc:184 ../../src/wui/mapdetails.cc:182
 msgid "Add-Ons:"
-msgstr ""
+msgstr "Priedai:"
 
 #: ../../src/wui/gamedetails.cc:198
 msgid "Game data error:"
-msgstr ""
+msgstr "Žaidimo duomenų klaida:"
 
 #: ../../src/wui/general_statistics_menu.cc:142
 msgid "Land"
@@ -8928,7 +8928,7 @@ msgstr "Prarasti civiliai statiniai"
 
 #: ../../src/wui/general_statistics_menu.cc:193
 msgid "Civilian buildings destroyed"
-msgstr ""
+msgstr "Sunaikinti civiliniai statiniai"
 
 #: ../../src/wui/general_statistics_menu.cc:198
 msgid "Military"

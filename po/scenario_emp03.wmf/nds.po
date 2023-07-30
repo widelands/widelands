@@ -3,15 +3,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2022
+# Benedikt Straub <benedikt-straub@web.de>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2022\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2023\n"
 "Language-Team: Low German (https://app.transifex.com/widelands/teams/35159/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -583,7 +583,7 @@ msgid ""
 "port for loading our ships and starting an expedition."
 msgstr ""
 "Mienheer, ick hebb över uns’ Weg na Huus nadacht. ’t is unbedingt nödig, "
-"eene Muu to bauen, waar wi uns’ Schippen befrachten un eene Söke utrüsten "
+"eene Muu to bauen, waar wi uns’ Schippen befrachten un eene Söök utrüsten "
 "könen."
 
 #. TRANSLATORS: Saledus
@@ -647,7 +647,7 @@ msgid ""
 "have only five bales of cloth left, which we will need to build the port and"
 " the shipyard."
 msgstr ""
-"Um een Schipp up Söke to schicken bruken wi eerst maal een Schipp. Wi hebben"
+"Um een Schipp up Söök to schicken bruken wi eerst maal een Schipp. Wi hebben"
 " leider blot fiev Ballen Stoff över, wat wi bruken, um de Muu un de Warft to"
 " bauen."
 
@@ -828,7 +828,7 @@ msgstr ""
 msgid ""
 "But the problem is that for sending out an expedition, we need some gold."
 msgstr ""
-"Aver dat Probleem is, dat wi wat Gold bruken, um eene Söke uttostafferen."
+"Aver dat Probleem is, dat wi wat Gold bruken, um eene Söök uttostafferen."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:444
@@ -1071,7 +1071,7 @@ msgid ""
 msgstr ""
 "Ick raad daarum an, dat wi faaktied na uns’ Bestand an Stoff sehn, daarmit "
 "wi alltied genoog Stoff över hebben, um tominnst een paar Söken klaar to "
-"maken. Eene Söke bruukt dree Ballen Stoff, also gloov ick, sess to negen "
+"maken. Eene Söök bruukt dree Ballen Stoff, also gloov ick, sess to negen "
 "Ballen up Lager för twee of dree Söken is genoog."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:549
