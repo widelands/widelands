@@ -122,6 +122,10 @@ struct Ship : Bob {
 		return destination_coords_;
 	}
 
+	[[nodiscard]] bool get_send_message_at_destination() const {
+		return send_message_at_destination_;
+	}
+
 	// Returns the last visited portdock of this ship or nullptr if there is none or
 	// the last visited was removed.
 	[[nodiscard]] PortDock* get_lastdock(EditorGameBase& egbase) const;

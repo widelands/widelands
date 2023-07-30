@@ -605,7 +605,7 @@ bool Warehouse::init(EditorGameBase& egbase) {
 			              get_position().x, get_position().y);
 		}
 
-		player->remove_detected_port_space(get_position());
+		player->remove_detected_port_space(get_position(), pd);
 	}
 	cleanup_in_progress_ = false;
 	return true;
