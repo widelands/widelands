@@ -125,6 +125,7 @@ void LaunchMPG::layout() {
 	// Assign heights to properly layout the scrollable box
 	mpsg_.force_new_dimensions(left_column_box_.get_w(), h, scale_factor * standard_height_);
 	chat_->set_desired_size(0, h);
+	LaunchGame::layout();
 
 	// set focus to chat input
 	if (chat_) {
