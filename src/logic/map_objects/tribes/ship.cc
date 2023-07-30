@@ -2338,7 +2338,7 @@ void Ship::draw_healthbar(const EditorGameBase& egbase,
 
 	// Now draw the health bar itself
 	constexpr int kInnerHealthBarWidth = 2 * (kShipHealthBarWidth - 1);
-	int health_width = 2 * (kShipHealthBarWidth - 1) * health_to_show / descr().max_hitpoints_;
+	int health_width = kInnerHealthBarWidth * health_to_show / descr().max_hitpoints_;
 
 	Recti energy_inner(draw_position + Vector2i(-kShipHealthBarWidth + 1, 1) * scale,
 	                   health_width * scale, 3 * scale);
@@ -2351,30 +2351,32 @@ void Ship::draw_healthbar(const EditorGameBase& egbase,
 	dst->fill_rect(energy_complement, complement_color);
 
 	// Now soldier strength bonus bars
-	unsigned bonus = get_sea_attack_soldier_bonus(egbase);
+	const unsigned bonus = get_sea_attack_soldier_bonus(egbase);
 	if (bonus > 0) {
 		assert(bonus < 2000);  // Sanity check
 		constexpr unsigned kBonusPerBar = kInnerHealthBarWidth;
 
-		energy_inner.y += 4 * scale;
-		energy_complement.y += 4 * scale;
-
-		energy_outer.y += 7 * scale;
+		energy_outer.y += energy_outer.h + 2 * scale;
+		energy_inner.y = energy_outer.y + scale;
 		energy_outer.h = (ceilf(static_cast<float>(bonus) / kBonusPerBar) * 3 + 2) * scale;
 		dst->fill_rect(energy_outer, color);
 		dst->brighten_rect(energy_outer, brighten_factor);
 
-		while (bonus > 0) {
-			const unsigned show = std::min(bonus, kBonusPerBar);
-			bonus -= show;
-			health_width = 2 * (kShipHealthBarWidth - 1) * show / kBonusPerBar;
+		energy_inner.w = kInnerHealthBarWidth * scale;
+		energy_inner.h = floorf(bonus / kBonusPerBar) * 3 * scale;
+		dst->fill_rect(energy_inner, color);
+
+		if (const unsigned remainder = bonus % kBonusPerBar; remainder != 0) {
+			assert(remainder < kBonusPerBar);
+			health_width = kInnerHealthBarWidth * remainder / kBonusPerBar;
 
 			energy_inner.y += energy_inner.h;
-			energy_complement.y += energy_complement.h;
+			energy_complement.y = energy_inner.y;
 
 			energy_inner.w = health_width * scale;
 			energy_complement.x = energy_inner.x + health_width * scale;
 			energy_complement.w = (kInnerHealthBarWidth - health_width) * scale;
+			energy_inner.h = energy_complement.h;
 
 			dst->fill_rect(energy_inner, color);
 			dst->fill_rect(energy_complement, complement_color);
