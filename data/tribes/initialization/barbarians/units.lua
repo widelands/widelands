@@ -1358,7 +1358,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Barbarian production site: Inn
             purpose = pgettext("building", "Prepares rations for scouts and rations and snacks to feed the miners in the basic and deep mines."),
             -- TRANSLATORS: Performance helptext for a Barbarian production site: Inn
-            performance = pgettext("barbarians_building", "If this building is fully supplied and all kinds of food are needed by the economy, production of one of each takes %1$s on average. If only one kind of food is needed by the economy, production of one ration takes %2$s and one snack takes %3$s on average."):bformat(format_minutes_seconds(1, 18), format_seconds(37), format_seconds(41))
+            performance = pgettext("barbarians_building", "If this building is fully supplied and all kinds of food are needed by the economy, production of one of each food takes %1$s on average. If only one kind of food is needed by the economy, production of one ration takes %2$s and one snack takes %3$s on average."):bformat(format_minutes_seconds(1, 18), format_seconds(37), format_seconds(41))
          }
       },
       {

@@ -1560,7 +1560,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Empire production site: Inn
             purpose = pgettext("empire_building", "Prepares rations for scouts and rations and meals to feed the miners in all mines."),
             -- TRANSLATORS: Performance helptext for an Empire production site: Inn
-            performance = pgettext("empire_building", "If this building is fully supplied and all kinds of food are needed by the economy, production of one ration takes %1$s and one meal takes %2$s on average. If only one kind of food is needed by the economy, production of one ration takes %3$s and one meal takes %4$s on average."):bformat(format_minutes_seconds(1, 21), format_minutes_seconds(1, 21), format_seconds(37), format_seconds(44))
+            performance = pgettext("empire_building", "If this building is fully supplied and all kinds of food are needed by the economy, production of one of each food takes %1$s on average. If only one kind of food is needed by the economy, production of one ration takes %2$s and one meal takes %3$s on average."):bformat(format_minutes_seconds(1, 21), format_seconds(37), format_seconds(44))
          }
       },
       {
