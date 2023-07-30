@@ -2310,14 +2310,15 @@ void Ship::draw_healthbar(const EditorGameBase& egbase,
 	// TODO(Nordfriese): Common code with Soldier::draw_info_icon
 	const RGBColor& color = owner().get_playercolor();
 	const uint16_t color_sum = color.r + color.g + color.b;
+	const int brighten_factor = 230 - color_sum / 3;
 
 	const Vector2i draw_position = point_on_dst.cast<int>();
 
 	// The frame gets a slight tint of player color
-	const Recti energy_outer(draw_position - Vector2i(kShipHealthBarWidth, 0) * scale,
-	                         kShipHealthBarWidth * 2 * scale, 5 * scale);
+	Recti energy_outer(draw_position - Vector2i(kShipHealthBarWidth, 0) * scale,
+	                   kShipHealthBarWidth * 2 * scale, 5 * scale);
 	dst->fill_rect(energy_outer, color);
-	dst->brighten_rect(energy_outer, 230 - color_sum / 3);
+	dst->brighten_rect(energy_outer, brighten_factor);
 
 	// Adjust health to current animation tick
 	uint32_t health_to_show = hitpoints_;
@@ -2336,43 +2337,48 @@ void Ship::draw_healthbar(const EditorGameBase& egbase,
 	}
 
 	// Now draw the health bar itself
-	const int health_width = 2 * (kShipHealthBarWidth - 1) * health_to_show / descr().max_hitpoints_;
+	constexpr int kInnerHealthBarWidth = 2 * (kShipHealthBarWidth - 1);
+	int health_width = kInnerHealthBarWidth * health_to_show / descr().max_hitpoints_;
 
 	Recti energy_inner(draw_position + Vector2i(-kShipHealthBarWidth + 1, 1) * scale,
 	                   health_width * scale, 3 * scale);
 	Recti energy_complement(energy_inner.origin() + Vector2i(health_width, 0) * scale,
-	                        (2 * (kShipHealthBarWidth - 1) - health_width) * scale, 3 * scale);
+	                        (kInnerHealthBarWidth - health_width) * scale, 3 * scale);
 
 	const RGBColor complement_color =
 	   color_sum > 128 * 3 ? RGBColor(32, 32, 32) : RGBColor(224, 224, 224);
 	dst->fill_rect(energy_inner, color);
 	dst->fill_rect(energy_complement, complement_color);
 
-	// Now soldier strength bonus indicators
-	constexpr unsigned kBonusIconSize = 6;
-	constexpr unsigned kMaxRows = 16;
+	// Now soldier strength bonus bars
 	const unsigned bonus = get_sea_attack_soldier_bonus(egbase);
 	if (bonus > 0) {
-		unsigned n_cols = std::min(2 * kShipHealthBarWidth / kBonusIconSize, bonus);
-		unsigned n_rows = std::min(kMaxRows - 1, bonus / n_cols);
-		if (n_cols * n_rows < bonus) {
-			++n_rows;
-		}
-		while (n_cols * n_rows < bonus) {
-			++n_cols;
-		}
-		const unsigned last_row_cols = n_cols - (n_cols * n_rows - bonus);
+		assert(bonus < 2000);  // Sanity check
+		constexpr unsigned kBonusPerBar = kInnerHealthBarWidth;
 
-		for (unsigned row = 0; row < n_rows; ++row) {
-			const unsigned cols_in_row = (row + 1 < n_rows ? n_cols : last_row_cols);
-			for (unsigned col = 0; col < cols_in_row; ++col) {
-				Recti rect(
-				   draw_position.x + ((col - cols_in_row * 0.5f) * kBonusIconSize + 1.f) * scale,
-				   draw_position.y + (7.f + row * kBonusIconSize) * scale,
-				   (kBonusIconSize - 2.f) * scale, (kBonusIconSize - 2.f) * scale);
-				dst->fill_rect(rect, color);
-				dst->draw_rect(rect, complement_color);
-			}
+		energy_outer.y += energy_outer.h + 2 * scale;
+		energy_inner.y = energy_outer.y + scale;
+		energy_outer.h = (ceilf(static_cast<float>(bonus) / kBonusPerBar) * 3 + 2) * scale;
+		dst->fill_rect(energy_outer, color);
+		dst->brighten_rect(energy_outer, brighten_factor);
+
+		energy_inner.w = kInnerHealthBarWidth * scale;
+		energy_inner.h = static_cast<int>(bonus / kBonusPerBar) * 3 * scale;
+		dst->fill_rect(energy_inner, color);
+
+		if (const unsigned remainder = bonus % kBonusPerBar; remainder != 0) {
+			assert(remainder < kBonusPerBar);
+			energy_inner.y += energy_inner.h;
+			energy_complement.y = energy_inner.y;
+
+			health_width = kInnerHealthBarWidth * remainder * scale / kBonusPerBar;
+			energy_complement.x = energy_inner.x + health_width;
+			energy_complement.w = energy_inner.w - health_width;
+			energy_inner.w = health_width;
+			energy_inner.h = energy_complement.h;
+
+			dst->fill_rect(energy_inner, color);
+			dst->fill_rect(energy_complement, complement_color);
 		}
 	}
 }
