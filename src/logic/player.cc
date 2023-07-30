@@ -2089,7 +2089,8 @@ bool Player::remove_detected_port_space(const Coords& coords, PortDock* replaced
 				Ship* ship = dynamic_cast<Ship*>(egbase().objects().get_object(serial));
 				if (ship != nullptr &&
 				    ship->get_destination_detected_port_space() == detected_port_spaces_[i].get()) {
-					ship->set_destination(egbase(), replaced_by, false);
+					ship->set_destination(
+					   egbase(), replaced_by, ship->get_send_message_at_destination());
 				}
 			}
 
