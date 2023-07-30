@@ -2368,14 +2368,13 @@ void Ship::draw_healthbar(const EditorGameBase& egbase,
 
 		if (const unsigned remainder = bonus % kBonusPerBar; remainder != 0) {
 			assert(remainder < kBonusPerBar);
-			health_width = kInnerHealthBarWidth * remainder / kBonusPerBar;
-
 			energy_inner.y += energy_inner.h;
 			energy_complement.y = energy_inner.y;
 
-			energy_inner.w = health_width * scale;
-			energy_complement.x = energy_inner.x + health_width * scale;
-			energy_complement.w = (kInnerHealthBarWidth - health_width) * scale;
+			health_width = kInnerHealthBarWidth * remainder * scale / kBonusPerBar;
+			energy_complement.x = energy_inner.x + health_width;
+			energy_complement.w = energy_inner.w - health_width;
+			energy_inner.w = health_width;
 			energy_inner.h = energy_complement.h;
 
 			dst->fill_rect(energy_inner, color);
