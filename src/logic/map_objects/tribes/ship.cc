@@ -1111,10 +1111,6 @@ void Ship::kickout_superfluous_soldiers(Game& game) {
 void Ship::warship_command(Game& game,
                            const WarshipCommand cmd,
                            const std::vector<uint32_t>& parameters) {
-	if (get_ship_type() != ShipType::kWarship) {
-		return;
-	}
-
 	switch (cmd) {
 	case WarshipCommand::kSetCapacity: {
 		assert(parameters.size() == 1);
@@ -1127,6 +1123,10 @@ void Ship::warship_command(Game& game,
 
 	case WarshipCommand::kAttack:
 		assert(!parameters.empty());
+		if (get_ship_type() != ShipType::kWarship) {
+			return;
+		}
+
 		if (parameters.size() == 1) {  // Attacking a ship.
 			if (Ship* target = dynamic_cast<Ship*>(game.objects().get_object(parameters.front()));
 			    target != nullptr) {
