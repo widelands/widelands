@@ -2363,7 +2363,7 @@ void Ship::draw_healthbar(const EditorGameBase& egbase,
 		dst->brighten_rect(energy_outer, brighten_factor);
 
 		energy_inner.w = kInnerHealthBarWidth * scale;
-		energy_inner.h = floorf(bonus / kBonusPerBar) * 3 * scale;
+		energy_inner.h = static_cast<int>(bonus / kBonusPerBar) * 3 * scale;
 		dst->fill_rect(energy_inner, color);
 
 		if (const unsigned remainder = bonus % kBonusPerBar; remainder != 0) {
