@@ -249,7 +249,8 @@ void LaunchGame::layout() {
 	map_details_.set_max_size(0, right_column_box_.get_h() / 4);
 	advanced_options_box_.set_max_size(0, 2 * kStateboxSize + kPadding);
 
-	int w, h;
+	int w;
+	int h;
 	// The warning might overflow the available space,
 	// hide it, if it does not fit
 	warn_desyncing_addon_.set_visible(has_desyncing_addon_);
