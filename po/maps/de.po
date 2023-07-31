@@ -22,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: Simon Heimberg, 2023\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2023\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -116,7 +116,7 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr "Als Chat’Karuth starb, war er ein alter Mann, Vater dreier starker und ehrgeiziger Söhne und Kriegsherr über ein Heer, das sich mit jedem Feind messen konnte, der die alten Wälder bedrohen wollte. Am Ende seiner glorreichen Herrschaft überließ es Chat’Karuth seinem ältesten Sohn, Thron, sein Erbe als Kriegsherr anzutreten – eine Entscheidung, die seine zwei Brüder nicht zufriedenstellte. Der alte Kriegsherr wusste dies. Wie sein Vater ihn angewiesen hatte, verließ Thron die Hauptstadt Al’thunran, den Standort des Thrones zwischen den Bäumen, und zog seine Truppen in die hohen Hügel zurück, wo er den Körper seines Vaters bestattete. Dann schwor er den Göttern und dem Geiste seines Vaters, dass er zurückkehren und die Ordnung wiederherstellen würde. Während seine Brüder in blindem Zorn gegen Thron und die wenigen Truppen, die er zurückgelassen hatte, um die Grenzen Al’thunrans zu sichern, wüten, versucht der junge Kriegsherr seine ehrgeizigen Brüder wiederzuvereinen und die Stämme zu zwingen, wieder unter einem gemeinsamen Banner zu marschieren."
+msgstr "Als Chat’Karuth starb, war er ein alter Mann, Vater dreier starker und ehrgeiziger Söhne und Kriegsherr über ein Heer, das sich mit jedem Feind messen konnte, der die alten Wälder bedrohen wollte. Am Ende seiner glorreichen Herrschaft überließ es Chat’Karuth seinem ältesten Sohn, Thron, sein Erbe als Kriegsherr anzutreten – eine Entscheidung, die seine zwei Brüder nicht zufriedenstellte. Der alte Kriegsherr wusste dies. Wie sein Vater ihn angewiesen hatte, verließ Thron die Hauptstadt Al’thunran, den Standort des Thrones Zwischen Den Bäumen, und zog seine Truppen in die hohen Hügel zurück, wo er den Körper seines Vaters bestattete. Dann schwor er den Göttern und dem Geiste seines Vaters, dass er zurückkehren und die Ordnung wiederherstellen würde. Während seine Brüder in blindem Zorn gegen Thron und die wenigen Truppen, die er zurückgelassen hatte, um die Grenzen Al’thunrans zu sichern, wüten, versucht der junge Kriegsherr seine ehrgeizigen Brüder wiederzuvereinen und die Stämme zu zwingen, wieder unter einem gemeinsamen Banner zu marschieren."
 
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../data/campaigns/campaigns.lua:70
@@ -1013,7 +1013,7 @@ msgid ""
 "exclusive trade alliance, forcing the other two to do the same. Suddenly, it"
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
-msgstr "Die vier mächtigen Häfen der Krallen-Inseln haben seit Ewigkeiten untereinander Handel getrieben. Ein jeder von ihnen brauchte Rohstoffe, die er auf seinem Gebiet nicht selbst herstellen konnte und konnte zugleich Rohstoffe bieten, die den anderen fehlten. Aufgrund dieser Handel war immer eine sehr freundliche Beziehung zwischen den Häfen und den Bewohnern der Krallen-Inseln üblich – bis sich vor Kurzem zwei der Häfen zu einer exklusiven Handelsallianz zusammenschlossen, was die beiden anderen zwang, es ihnen gleichzutun. Plötzlich scheint es nur noch eine Sache der Zeit zu sein, bis die ersten Kämpfe zwischen den Häfen das friedliche Leben zersört, das so lange auf den Inseln vorgeherrscht hatte …"
+msgstr "Die vier mächtigen Häfen der Krallen-Inseln haben seit Ewigkeiten untereinander Handel getrieben. Ein jeder von ihnen brauchte Rohstoffe, die er auf seinem Gebiet nicht selbst herstellen konnte und konnte zugleich Rohstoffe bieten, die den anderen fehlten. Aufgrund dieser Handel war immer eine sehr freundliche Beziehung zwischen den Häfen und den Bewohnern der Krallen-Inseln üblich – bis sich vor Kurzem zwei der Häfen zu einer exklusiven Handelsallianz zusammenschlossen, was die beiden anderen zwang, es ihnen gleichzutun. Plötzlich scheint es nur noch eine Sache der Zeit zu sein, bis die ersten Kämpfe zwischen den Häfen das friedliche Leben zerstört, das so lange auf den Inseln vorgeherrscht hatte …"
 
 #: ../../data/maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"

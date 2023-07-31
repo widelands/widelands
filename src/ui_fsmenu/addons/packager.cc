@@ -316,26 +316,25 @@ void AddOnsPackager::addon_selected() {
 		return;
 	}
 
-	box_right_subbox_header_hbox_.set_visible(true);
-
 	update_in_progress_ = true;
+
+	box_right_subbox_header_hbox_.set_visible(true);
 	name_.set_text(selected->get_descname());
 	descr_.set_text(selected->get_description());
 	author_.set_text(selected->get_author());
 	version_.set_text(selected->get_version());
 	min_wl_version_.set_text(selected->get_min_wl_version());
 	max_wl_version_.set_text(selected->get_max_wl_version());
-	update_in_progress_ = false;
 
-	if (addon_boxes_.count(selected->get_category()) == 0) {
-		return;
+	if (auto it = addon_boxes_.find(selected->get_category()); it != addon_boxes_.end()) {
+		AddOnsPackagerBox* box = it->second.get();
+		box_right_addon_specific_.add(box, UI::Box::Resizing::kExpandBoth);
+		box->set_visible(true);
+		box->load_addon(selected);
+		layout();
 	}
 
-	AddOnsPackagerBox* box = addon_boxes_[selected->get_category()].get();
-	box_right_addon_specific_.add(box, UI::Box::Resizing::kExpandBoth);
-	box->set_visible(true);
-	box->load_addon(selected);
-	layout();
+	update_in_progress_ = false;
 }
 
 void AddOnsPackager::current_addon_edited() {
