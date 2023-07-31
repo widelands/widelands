@@ -187,7 +187,8 @@ void LaunchSPG::clicked_ok() {
 
 void LaunchSPG::layout() {
 	LaunchGame::layout();
-	player_setup_.force_new_dimensions(scale_factor * standard_height_);
+	player_setup_.force_new_dimensions(
+	   scale_factor * standard_height_, left_column_box_.get_inner_h());
 }
 
 }  // namespace FsMenu
