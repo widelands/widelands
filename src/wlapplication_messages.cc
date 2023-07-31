@@ -109,7 +109,9 @@ void fill_parameter_vector() {
 	  {"", "rolling_autosave", _("n"),
 		/** TRANSLATORS: `n` references a numerical placeholder */
 		_("Use `n` files for rolling autosaves."), true},
-	  {"", "skip_autosave_on_inactivity", "", _("Do not create an autosave when the user has been inactive since the last autosave."), true},
+	  {"", "skip_autosave_on_inactivity", "",
+		_("Do not create an autosave when the user has been inactive since the last autosave."),
+		true},
 	  {"", "nozip", "", _("Do not save files as binary zip archives."), false},
 	  {"", "display_replay_filenames", _("[true*|false]"), _("Show filenames in the replay screen."),
 		true},

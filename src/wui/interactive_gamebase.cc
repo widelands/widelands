@@ -565,7 +565,9 @@ bool InteractiveGameBase::handle_mousewheel(int32_t x, int32_t y, uint16_t modst
 void InteractiveGameBase::think() {
 	InteractiveBase::think();
 
-	if (pause_on_inactivity_ != 0 && static_cast<int>(SDL_GetTicks() - UI::Panel::time_of_last_user_activity()) > pause_on_inactivity_ * 60 * 1000) {
+	if (pause_on_inactivity_ != 0 &&
+	    static_cast<int>(SDL_GetTicks() - UI::Panel::time_of_last_user_activity()) >
+	       pause_on_inactivity_ * 60 * 1000) {
 		Widelands::Game& g = game();
 		if (g.game_controller() != nullptr && !g.game_controller()->is_paused()) {
 			toggle_game_paused();

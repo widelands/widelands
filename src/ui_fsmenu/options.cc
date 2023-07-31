@@ -281,13 +281,13 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                          1,
                          4),
 
-	skip_autosave_on_inactivity_(&box_saving_,
-          UI::PanelStyle::kFsMenu,
-          "skip_autosave_on_inactivity",
-          Vector2i::zero(),
-          _("Skip autosaves while inactive"),
-          "",
-          0),
+     skip_autosave_on_inactivity_(&box_saving_,
+                                  UI::PanelStyle::kFsMenu,
+                                  "skip_autosave_on_inactivity",
+                                  Vector2i::zero(),
+                                  _("Skip autosaves while inactive"),
+                                  "",
+                                  0),
      zip_(&box_saving_,
           UI::PanelStyle::kFsMenu,
           "compress",
@@ -327,20 +327,20 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 
      // In-Game options
      sb_pause_game_on_inactivity_(&box_ingame_,
-                         "pause_game_on_inactivity",
-                         0,
-                         0,
-                         0,
-                         0,
-                         opt.pause_game_on_inactivity,
-                         0,
-                         120,
-                         UI::PanelStyle::kFsMenu,
-                         _("Pause game when inactive for:"),
-                         UI::SpinBox::Units::kMinutes,
-                         UI::SpinBox::Type::kBig,
-                         1,
-                         10),
+                                  "pause_game_on_inactivity",
+                                  0,
+                                  0,
+                                  0,
+                                  0,
+                                  opt.pause_game_on_inactivity,
+                                  0,
+                                  120,
+                                  UI::PanelStyle::kFsMenu,
+                                  _("Pause game when inactive for:"),
+                                  UI::SpinBox::Units::kMinutes,
+                                  UI::SpinBox::Type::kBig,
+                                  1,
+                                  10),
 
      auto_roadbuild_mode_(&box_ingame_,
                           UI::PanelStyle::kFsMenu,
@@ -637,7 +637,8 @@ void Options::layout() {
 		sb_dis_border_.set_desired_size(tab_panel_width, sb_dis_border_.get_h());
 
 		// Saving options
-		for (UI::SpinBox* sb : {&sb_autosave_, &sb_rolling_autosave_, &sb_replay_lifetime_, &sb_pause_game_on_inactivity_}) {
+		for (UI::SpinBox* sb : {&sb_autosave_, &sb_rolling_autosave_, &sb_replay_lifetime_,
+		                        &sb_pause_game_on_inactivity_}) {
 			sb->set_unit_width(kSpinboxW);
 			sb->set_desired_size(tab_panel_width, sb->get_h());
 		}

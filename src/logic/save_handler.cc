@@ -153,7 +153,8 @@ void SaveHandler::think(Widelands::Game& game) {
 				save_success = roll_save_files(filename, &error);
 				if (save_success) {
 					filename = format("%s_00", autosave_filename_);
-					verb_log_info_time(game.get_gametime(), "Autosave: saving as %s\n", filename.c_str());
+					verb_log_info_time(
+					   game.get_gametime(), "Autosave: saving as %s\n", filename.c_str());
 				}
 			}
 		}
