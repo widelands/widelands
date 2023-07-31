@@ -1940,7 +1940,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Tavern
             purpose = pgettext("building", "Prepares rations to feed the scouts and miners."),
             -- TRANSLATORS: Performance helptext for a Frisian production site: Tavern
-            performance = pgettext("frisians_building", "The tavern can produce one ration in %s on average if the supply is steady; otherwise, it will take 50%% longer."):bformat(format_seconds(37))
+            performance = pgettext("frisians_building", "If the tavern is fully supplied, it can produce one ration in %1$s on average, using 2 kinds of ingredients. If it can only use one kind of ingredient, it can produce one ration in %2$s on average."):bformat(format_seconds(37), format_seconds(55))
          }
       },
       {
