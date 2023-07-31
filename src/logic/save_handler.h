@@ -89,6 +89,7 @@ private:
 	FileSystem::Type fs_type_{FileSystem::ZIP};
 	int32_t autosave_interval_in_ms_{kDefaultAutosaveInterval * 60 * 1000};
 	int32_t number_of_rolls_{5};  // For rolling file update
+	bool skip_when_inactive_{true};
 
 	void initialize(uint32_t realtime);
 	bool roll_save_files(const std::string& filename, std::string* error) const;

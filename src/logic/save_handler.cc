@@ -125,6 +125,7 @@ void SaveHandler::think(Widelands::Game& game) {
 
 	const uint32_t realtime = SDL_GetTicks();
 	initialize(realtime);
+	bool force_skip = false;
 
 	// Are we saving now?
 	if (saving_next_tick_ || save_requested_) {
@@ -143,14 +144,21 @@ void SaveHandler::think(Widelands::Game& game) {
 			save_filename_ = "";
 		} else {
 			// Autosave ...
-			save_success = roll_save_files(filename, &error);
-			if (save_success) {
-				filename = format("%s_00", autosave_filename_);
-				verb_log_info_time(game.get_gametime(), "Autosave: saving as %s\n", filename.c_str());
+			if (skip_when_inactive_ && UI::Panel::time_of_last_user_activity() < last_save_realtime_) {
+				verb_log_info_time(game.get_gametime(), "Autosave: Skipping due to user inactivity");
+				last_save_realtime_ = realtime;
+				force_skip = true;
+				game.get_ibase()->log_message(_("Saving skipped"));
+			} else {
+				save_success = roll_save_files(filename, &error);
+				if (save_success) {
+					filename = format("%s_00", autosave_filename_);
+					verb_log_info_time(game.get_gametime(), "Autosave: saving as %s\n", filename.c_str());
+				}
 			}
 		}
 
-		if (save_success) {
+		if (save_success && !force_skip) {
 			// Saving now (always overwrite file)
 			std::string complete_filename = create_file_name(kSaveDir, filename);
 			save_success = save_game(game, complete_filename, std::nullopt, &error);
@@ -169,9 +177,11 @@ void SaveHandler::think(Widelands::Game& game) {
 		// should take longer than the autosave interval.
 		next_save_realtime_ = SDL_GetTicks() + autosave_interval_in_ms_;
 
-		verb_log_info_time(
-		   game.get_gametime(), "Autosave: save took %d ms\n", SDL_GetTicks() - realtime);
-		game.get_ibase()->log_message(_("Game saved"));
+		if (!force_skip) {
+			verb_log_info_time(
+			   game.get_gametime(), "Autosave: save took %d ms\n", SDL_GetTicks() - realtime);
+			game.get_ibase()->log_message(_("Game saved"));
+		}
 	} else {
 		saving_next_tick_ = check_next_tick(game, realtime);
 	}
@@ -193,6 +203,7 @@ void SaveHandler::initialize(uint32_t realtime) {
 	last_save_realtime_ = realtime;
 
 	number_of_rolls_ = get_config_int("rolling_autosave", 5);
+	skip_when_inactive_ = get_config_bool("skip_autosave_on_inactivity", true);
 
 	initialized_ = true;
 }
