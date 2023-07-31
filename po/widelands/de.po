@@ -40,7 +40,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-07-27 02:32+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2023\n"
+"Last-Translator: Simon Heimberg, 2023\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -5367,7 +5367,7 @@ msgstr "Spiel"
 #: ../../src/ui_fsmenu/internet_lobby.cc:437
 #, c-format
 msgid "The game %s is already running. Please choose a different name."
-msgstr "Das Spiel %släuft bereits. Bitte wähle einen anderen Namen."
+msgstr "Das Spiel %s läuft bereits. Bitte wähle einen anderen Namen."
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:450
 msgid ""
@@ -6849,7 +6849,7 @@ msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
-msgstr "Ein Fehler ist während des Spiels aufgetreten. Die Fehlermeldung lautet:\n\n%1$s\n\nBitte melde dieses Problem um uns zu helfen Widelands zu verbesern. Du findest zugehörige Meldungen in der Standardausgabe (stdout.txt bei Windows). Du benutzt Version %2$s.\n\nBitte füge diese Informationen deiner Meldung hinzu.\n\nMöchtest du, dass Widelands eine Notfallspeicherung versucht? Es ist oft – wenn auch nicht immer – möglich, das so gespeicherte Spiel zu laden und weiterzuspielen."
+msgstr "Ein Fehler ist während des Spiels aufgetreten. Die Fehlermeldung lautet:\n\n%1$s\n\nBitte melde dieses Problem um uns zu helfen Widelands zu verbessern. Du findest zugehörige Meldungen in der Standardausgabe (stdout.txt bei Windows). Du benutzt Version %2$s.\n\nBitte füge diese Informationen deiner Meldung hinzu.\n\nMöchtest du, dass Widelands eine Notfallspeicherung versucht? Es ist oft – wenn auch nicht immer – möglich, das so gespeicherte Spiel zu laden und weiterzuspielen."
 
 #: ../../src/wlapplication.cc:1677
 #, c-format
@@ -9309,7 +9309,7 @@ msgstr "Unausgewogen"
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../src/wui/map_tags.cc:48
 msgid "Players face different conditions or balancing is not checked"
-msgstr "Spieler haben unterschiedliche Augangsbedingungen oder die Ausgewogenheit wurde nicht geprüft."
+msgstr "Spieler haben unterschiedliche Ausgangsbedingungen oder die Ausgewogenheit wurde nicht geprüft."
 
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../src/wui/map_tags.cc:53
@@ -10067,7 +10067,7 @@ msgid ""
 "‘<Widelands Home Directory>/music/custom_XX.*’ (where ‘XX’ are sequential "
 "two-digit numbers starting with 00). Supported file formats are ‘.mp3’ and "
 "‘.ogg’."
-msgstr "Du kannst die Musik im Spiel ändern, in dem du deine eigenen Musikdateien in „<Widelands Home Directory>/music/custom_XX.*“ ablegst. („XX“ sind sequentielle 2-stellige Zahlenbeginnend mit 00). Unterstützte Dateiformate sind „.mp3“ und „.ogg“."
+msgstr "Du kannst die Musik im Spiel ändern, in dem du deine eigenen Musikdateien in „<Widelands Home Directory>/music/custom_XX.*“ ablegst. („XX“ sind sequentielle 2-stellige Zahlen, beginnend mit 00). Unterstützte Dateiformate sind „.mp3“ und „.ogg“."
 
 #: ../../src/wui/sound_options.cc:149
 msgctxt "sound_options"
