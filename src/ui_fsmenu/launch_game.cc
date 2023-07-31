@@ -255,7 +255,7 @@ void LaunchGame::layout() {
 	// hide it, if it does not fit
 	warn_desyncing_addon_.set_visible(has_desyncing_addon_);
 	right_column_content_box_.get_desired_size(&w, &h);
-	int h_max = (right_column_box_.get_h() - button_box_.get_h() - 5*kPadding);
+	int h_max = (right_column_box_.get_h() - button_box_.get_h() - 5 * kPadding);
 	if (h > h_max) {
 		warn_desyncing_addon_.set_visible(false);
 	}
