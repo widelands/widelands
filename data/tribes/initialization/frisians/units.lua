@@ -1981,7 +1981,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Reindeer Farm
             purpose = pgettext("frisians_building", "Breeds strong reindeer for adding them to the transportation system. Also keeps them for their fur, which is turned into armor and cloth."),
             -- TRANSLATORS: Note helptext for a Frisian production site: Reindeer Farm
-            note = pgettext("frisians_building", "If this building is fully supplied and both reindeers and furs are needed by the economy, production of one reindeer takes %1$s, one fur takes %2$s and one meat takes %3$s on average. If only reindeers are needed by the economy, their production takes %4$s on average. If only fur is needed by the economy, production of one fur takes %5$s and one meat takes %6$s on average."):bformat(format_minutes_seconds(1, 10), format_minutes_seconds(1, 10), format_minutes_seconds(3, 29), format_seconds(30), format_seconds(40), format_minutes_seconds(1, 59))
+            note = pgettext("frisians_building", "If this building is fully supplied and both reindeers and furs are needed by the economy, production of one reindeer takes %1$s and one fur takes %2$s on average. In addition, one meat is produced each %3$s. If only reindeers are needed by the economy, their production takes %4$s on average. If only fur is needed by the economy, its production takes %5$s on average. In addition, one meat is produced each %6$s."):bformat(format_minutes_seconds(1, 10), format_minutes_seconds(1, 10), format_minutes_seconds(3, 29), format_seconds(30), format_seconds(40), format_minutes_seconds(1, 59))
          }
       },
       {
