@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-22 02:39+0000\n"
+"POT-Creation-Date: 2023-07-27 02:32+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Juanjo, 2015-2023\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
@@ -676,7 +676,7 @@ msgstr "Sense nom"
 #: ../../src/editor/editorinteractive.cc:1200
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:116
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:621
-#: ../../src/logic/map.h:232 ../../src/ui_fsmenu/addons/packager.cc:413
+#: ../../src/logic/map.h:232 ../../src/ui_fsmenu/addons/packager.cc:412
 msgctxt "author_name"
 msgid "Unknown"
 msgstr "Desconegut"
@@ -2055,11 +2055,11 @@ msgstr "El Widelands no ha pogut iniciar la partida perquè el jugador %u no té
 msgid "Initializing…"
 msgstr "S’inicialitza…"
 
-#: ../../src/logic/game.cc:1238
+#: ../../src/logic/game.cc:1249
 msgid "Trade Offer"
 msgstr "Oferta de canvi"
 
-#: ../../src/logic/game.cc:1240
+#: ../../src/logic/game.cc:1251
 msgid "This market has received a new trade offer."
 msgstr "Aquest mercat ha rebut una oferta de canvi nova."
 
@@ -4407,28 +4407,28 @@ msgstr "Versió del Widelands mínima:"
 msgid "Maximum Widelands Version:"
 msgstr "Versió del Widelands màxima:"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:357
+#: ../../src/ui_fsmenu/addons/packager.cc:356
 msgid "New Add-On"
 msgstr "Complement nou"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:358
+#: ../../src/ui_fsmenu/addons/packager.cc:357
 msgid "Enter the name for the new add-on."
 msgstr "Escriviu un nom per al complement nou."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:360
+#: ../../src/ui_fsmenu/addons/packager.cc:359
 msgid "Category"
 msgstr "Categoria"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:381
-#: ../../src/ui_fsmenu/addons/packager.cc:397
-#: ../../src/ui_fsmenu/addons/packager.cc:402
+#: ../../src/ui_fsmenu/addons/packager.cc:380
+#: ../../src/ui_fsmenu/addons/packager.cc:396
+#: ../../src/ui_fsmenu/addons/packager.cc:401
 #: ../../src/ui_fsmenu/addons/packager_box.cc:401
 #: ../../src/ui_fsmenu/addons/packager_box.cc:417
 #: ../../src/ui_fsmenu/addons/packager_box.cc:423
 msgid "Invalid Name"
 msgstr "Nom no vàlid"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:382
+#: ../../src/ui_fsmenu/addons/packager.cc:381
 #: ../../src/ui_fsmenu/addons/packager_box.cc:403
 #, c-format
 msgid ""
@@ -4437,26 +4437,26 @@ msgid ""
 "Please choose a different name."
 msgstr "El nom no és vàlid. Motiu: %s\n\nEscolliu un altre nom."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:397
+#: ../../src/ui_fsmenu/addons/packager.cc:396
 msgid "An add-on with this internal name already exists."
 msgstr "Ja existeix un complement amb aquest nom intern."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:402
+#: ../../src/ui_fsmenu/addons/packager.cc:401
 msgid ""
 "An add-on with this internal name was deleted recently. Please commit your "
 "changes before using this name again."
 msgstr "Recentment s’ha esborrat un complement amb aquest nom intern. Si us plau deseu els canvis abans de tornar a usar aquest nom."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:428
+#: ../../src/ui_fsmenu/addons/packager.cc:427
 msgid "Delete Add-on"
 msgstr "Esborra el complement"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:430
+#: ../../src/ui_fsmenu/addons/packager.cc:429
 #, c-format
 msgid "Do you really want to delete the add-on ‘%s’?"
 msgstr "Voleu realment esborrar el complement «%s»?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:431
+#: ../../src/ui_fsmenu/addons/packager.cc:430
 #, c-format
 msgid ""
 "Do you really want to delete the local add-on ‘%s’?\n"
@@ -4464,7 +4464,7 @@ msgid ""
 "Note that this add-on can not be downloaded again from the server."
 msgstr "Voleu esborrar el complement local «%s»?\n\nTingueu en compte que aquest complement no es podrà tornar a descarregar del servidor."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:452
+#: ../../src/ui_fsmenu/addons/packager.cc:451
 #, c-format
 msgid ""
 "If you quit the packager now, all changes to the following %u add-on will be"
@@ -4475,25 +4475,25 @@ msgid_plural ""
 msgstr[0] "Si sortiu de l’empaquetador ara, tots els canvis del següents %u complement es descartaran."
 msgstr[1] "Si sortiu de l’empaquetador ara, tots els canvis dels següents %u complements es descartaran."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:461
-#: ../../src/ui_fsmenu/addons/packager.cc:488
-#: ../../src/ui_fsmenu/addons/packager.cc:513
+#: ../../src/ui_fsmenu/addons/packager.cc:460
+#: ../../src/ui_fsmenu/addons/packager.cc:487
+#: ../../src/ui_fsmenu/addons/packager.cc:512
 #, c-format
 msgid ""
 "%1$s\n"
 "· %2$s"
 msgstr "%1$s\n· %2$s"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:464
+#: ../../src/ui_fsmenu/addons/packager.cc:463
 msgid "Quit Packager"
 msgstr "Surt de l’empaquetador"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:479
+#: ../../src/ui_fsmenu/addons/packager.cc:478
 #, c-format
 msgid "Do you really want to discard all changes to the add-on ‘%s’?"
 msgstr "Voleu descartar els canvis del complement «%s»?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:483
+#: ../../src/ui_fsmenu/addons/packager.cc:482
 #, c-format
 msgid "Do you really want to discard all changes to the following %u add-on?"
 msgid_plural ""
@@ -4501,16 +4501,16 @@ msgid_plural ""
 msgstr[0] "Voleu descartar els canvis que afecten sols %u complement?"
 msgstr[1] "Voleu descartar tots els canvis dels %u complements següents?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:492
+#: ../../src/ui_fsmenu/addons/packager.cc:491
 msgid "Discard Changes"
 msgstr "Descarta canvis"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:504
+#: ../../src/ui_fsmenu/addons/packager.cc:503
 #, c-format
 msgid "Do you really want to commit all changes to the add-on ‘%s’ to disk?"
 msgstr "Voleu desar els canvis del complement «%s» al disc?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:508
+#: ../../src/ui_fsmenu/addons/packager.cc:507
 #, c-format
 msgid ""
 "Do you really want to commit all changes to the following %u add-on to disk?"
@@ -4520,42 +4520,42 @@ msgid_plural ""
 msgstr[0] "Voleu desar els canvis que afecten a %u complement que hi ha a continuació al disc?"
 msgstr[1] "Voleu desar els canvis dels següents %u complements al disc?"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:517
+#: ../../src/ui_fsmenu/addons/packager.cc:516
 msgid ""
 "Warning: If you manually edited any files in this add-on, your changes may "
 "be overwritten!"
 msgstr "Avís: Si heu editat manualment algun fitxer d’aquest complement, els canvis es sobreescriuran."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:520
+#: ../../src/ui_fsmenu/addons/packager.cc:519
 msgid "Confirm Saving"
 msgstr "Confirma la desada"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:591
+#: ../../src/ui_fsmenu/addons/packager.cc:590
 msgid "Invalid Version Requirement"
 msgstr "Requisit de versió no vàlid"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:592
+#: ../../src/ui_fsmenu/addons/packager.cc:591
 #, c-format
 msgid ""
 "The minimum Widelands version ‘%1$s’ may not be newer than the maximum "
 "Widelands version ‘%2$s’. The add-on ‘%3$s’ will not be saved."
 msgstr "La versió mínima del Widelands «%1$s» no pot ser posterior a la versió màxima del Widelands «%2$s». El complement «%3$s» no es desarà."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:599
+#: ../../src/ui_fsmenu/addons/packager.cc:598
 msgid "Invalid Version"
 msgstr "Versió no vàlida"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:600
+#: ../../src/ui_fsmenu/addons/packager.cc:599
 #, c-format
 msgid ""
 "‘%1$s’ is not a valid version string. The add-on ‘%2$s’ will not be saved."
 msgstr "«%1$s» no és una cadena de versió vàlida. El complement «%2$s» no es pot desar."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:613
+#: ../../src/ui_fsmenu/addons/packager.cc:612
 msgid "Version Requirement"
 msgstr "Versió requerida"
 
-#: ../../src/ui_fsmenu/addons/packager.cc:615
+#: ../../src/ui_fsmenu/addons/packager.cc:614
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ does not specify a minimum Widelands version. None of the "
@@ -4563,7 +4563,7 @@ msgid ""
 "minimum version requirement will automatically be set accordingly."
 msgstr "El complement «%1$s» no especifica una versió mínima del Widelands. Cap dels mapes que conté es poden carregar amb una versió anterior a %2$s. El requeriment de versió mínima s'establirà conseqüentment."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:620
+#: ../../src/ui_fsmenu/addons/packager.cc:619
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ specifies a minimum Widelands version of %2$s. However, "
@@ -4571,11 +4571,11 @@ msgid ""
 " %3$s. The version requirement will automatically be changed accordingly."
 msgstr "El complement «%1$s» especifica una versió mínima del Widelands de %2$s. Tot i això, cap dels mapes es pot carregar amb una versió del Widelands anterior a %3$s. El requisit de versió s'establirà conseqüentment."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:642
+#: ../../src/ui_fsmenu/addons/packager.cc:641
 msgid "Error Writing Addon"
 msgstr "S’ha produït un error escrivint el complement."
 
-#: ../../src/ui_fsmenu/addons/packager.cc:643
+#: ../../src/ui_fsmenu/addons/packager.cc:642
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be saved to disk:\n"

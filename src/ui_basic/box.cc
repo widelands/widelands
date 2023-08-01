@@ -122,7 +122,7 @@ void Box::update_desired_size() {
 		get_item_desired_size(idx, &depth, &breadth);
 
 		totaldepth += depth;
-		if (items_[idx].type != Item::ItemPanel || items_[idx].u.panel.panel->is_visible()) {
+		if (is_item_visible(idx)) {
 			spacing += inner_spacing_;
 		}
 		if (breadth > maxbreadth) {
@@ -184,7 +184,7 @@ void Box::layout() {
 		int unused = 0;
 		get_item_desired_size(idx, &depth, &unused);
 		totaldepth += depth;
-		if (items_[idx].type != Item::ItemPanel || items_[idx].u.panel.panel->is_visible()) {
+		if (is_item_visible(idx)) {
 			spacing += inner_spacing_;
 			if (items_[idx].fillspace) {
 				infspace_count++;
@@ -242,8 +242,9 @@ void Box::layout() {
 	// avoid having some pixels left at the end due to rounding errors, we
 	// divide the remaining space by the number of remaining infinite
 	// spaces every time, and not just one.
-	for (Item& item : items_) {
-		if (item.fillspace && (item.type != Item::ItemPanel || item.u.panel.panel->is_visible())) {
+	for (size_t idx = 0; idx < items_.size(); ++idx) {
+		Item& item = items_[idx];
+		if (item.fillspace && is_item_visible(idx)) {
 			assert(infspace_count > 0);
 			// Avoid division by 0
 			item.assigned_var_depth =
@@ -269,6 +270,10 @@ void Box::update_positions() {
 	}
 
 	for (uint32_t idx = 0; idx < items_.size(); ++idx) {
+		if (!is_item_visible(idx)) {
+			// Do not modify hidden items
+			continue;
+		}
 		int depth;
 		int breadth = 0;
 		get_item_size(idx, &depth, &breadth);
@@ -280,10 +285,7 @@ void Box::update_positions() {
 			set_item_pos(idx, totaldepth - scrollpos);
 		}
 
-		totaldepth += depth;
-		if (items_[idx].type != Item::ItemPanel || items_[idx].u.panel.panel->is_visible()) {
-			totaldepth += inner_spacing_;
-		}
+		totaldepth += depth + inner_spacing_;
 	}
 
 #ifndef NDEBUG
@@ -371,6 +373,14 @@ void Box::add_inf_space() {
 	items_.push_back(it);
 
 	update_desired_size();
+}
+
+/**
+ * Checks whether the given item is currently visible.
+ * Spaces are always visible.
+ */
+bool Box::is_item_visible(uint32_t idx) {
+	return items_[idx].type == Item::ItemSpace || items_[idx].u.panel.panel->is_visible();
 }
 
 /**

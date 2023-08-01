@@ -87,6 +87,7 @@ private:
 	void get_item_size(uint32_t idx, int* depth, int* breadth);
 	void set_item_size(uint32_t idx, int depth, int breadth);
 	void set_item_pos(uint32_t idx, int32_t pos);
+	bool is_item_visible(uint32_t idx);
 	void scrollbar_moved(int32_t);
 	void update_positions();
 	void on_death(Panel* p) override;
