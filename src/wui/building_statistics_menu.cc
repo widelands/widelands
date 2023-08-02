@@ -834,7 +834,7 @@ UI::Window& BuildingStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 				/* Check if the button for the building still exists. There are valid cases where
 				 * it might not, since some buildings are only selectable here under specific
 				 * circumstances and vanish after closing and reopening the window.
-				*/
+				 */
 				if (m.building_buttons_.at(idx) != nullptr) {
 					m.set_current_building_type(idx);
 				}
