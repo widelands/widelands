@@ -351,7 +351,7 @@ void Window::move_inside_parent() {
 		   (parent_is_main && toolbar_at_bottom) ? main_toolbar_button_size() : 0;
 		const int32_t toolbar_top_h =
 		   (parent_is_main && !toolbar_at_bottom) ? main_toolbar_button_size() : 0;
-		const int32_t ph = parent->get_inner_h();
+		const int32_t ph = parent->get_inner_h() - toolbar_top_h - toolbar_bottom_h;
 
 		int32_t px = get_x();
 		int32_t py = get_y();
@@ -384,8 +384,8 @@ void Window::move_inside_parent() {
 		} else {
 			if (py < toolbar_top_h) {
 				py = toolbar_top_h;
-			} else if (py + get_h() > ph) {
-				py = ph - get_h();
+			} else if (py + get_h() > ph + toolbar_top_h + toolbar_bottom_h) {
+				py = ph - get_h() + toolbar_top_h + toolbar_bottom_h;
 				if (!is_minimal_ && toolbar_bottom_h == 0 && parent->get_dock_windows_to_edges()) {
 					py += kBottomBorderThickness;
 				}
