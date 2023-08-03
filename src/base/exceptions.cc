@@ -29,7 +29,7 @@ bool g_fail_on_lua_error(false);
  */
 #undef wexception
 WException::WException(char const* const file, uint32_t const line, char const* const fmt, ...)
-: file_(file), line_(line) {
+   : file_(file), line_(line) {
 	char buffer[512];
 	{
 		va_list va;
