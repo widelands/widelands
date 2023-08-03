@@ -440,10 +440,8 @@ void S2MapLoader::load_s2mf_header(FileRead& fr) {
 	S2MapDescrHeader header;
 	memcpy(&header, fr.data(sizeof(header)), sizeof(header));
 
-//  Header must be swapped for big-endian Systems, works at the moment only
-//  for PowerPC architecture
-//  TODO(unknown): Generalize this
-#if defined(__ppc__)
+//  Header must be swapped for big-endian Systems
+#if defined(SDL_BYTEORDER) && SDL_BYTEORDER != SDL_LIL_ENDIAN
 	header.w = swap_16(header.w);
 	header.h = swap_16(header.h);
 #endif
@@ -797,7 +795,9 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 			Widelands::MapIndex const index = Widelands::Map::get_index(location, mapwidth);
 			c = bobs[index];
 			std::string bobname;
-			if (buildings[index] == 0x78) {
+			// TODO(Nordfriese): The codes for the stones are used for multiple things depending
+			// on the buildings code. Check again which building codes signify what exactly.
+			if (buildings[index] == 0x78 || buildings[index] == 0) {
 				switch (c) {
 				case BOB_STONE1:
 					bobname = "stones1";
@@ -1039,7 +1039,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 				break;
 
 			default:
-				log_warn("S2Map: Unknown bob %d", static_cast<uint32_t>(c));
+				log_warn("S2Map: Unknown immovable %d", static_cast<uint32_t>(c));
 				break;
 			}
 
