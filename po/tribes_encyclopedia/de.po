@@ -11,11 +11,12 @@
 # GunChleoc, 2015
 # Hybrid Dog, 2015
 # Jonas Richardsen <jonas.richardsen@isdas.de>, 2017
-# Klaus Halfmann <klaus.halfmann@arcor.de>, 2022
+# Klaus Halfmann <klaus.halfmann@arcor.de>, 2022-2023
 # millimarg, 2015
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
+# Simon Heimberg, 2023
 # Stephan Lutz <stephan-lutz@gmx.de>, 2018-2023
 # Venatrix, 2015
 # Elisabeth Jäger, 2015-2016
@@ -29,7 +30,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-07-15 03:08+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2023\n"
+"Last-Translator: Klaus Halfmann <klaus.halfmann@arcor.de>, 2022-2023\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1515,7 +1516,7 @@ msgstr "Baut Kakao an, der zum Kochen von Schokolade benötigt wird."
 #: ../../data/tribes/initialization/amazons/units.lua:1494
 msgctxt "amazons_building"
 msgid "Chocolate is essential for training Amazon soldiers."
-msgstr "Schokolade ist unverzichtbar für dIe Ausbildung der Kriegerinnen."
+msgstr "Schokolade ist unverzichtbar für die Ausbildung der Kriegerinnen."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Stone Mine
 #: ../../data/tribes/initialization/amazons/units.lua:1503
@@ -4671,7 +4672,7 @@ msgid ""
 "Only the pure, white stones Diamond and Quartz will enlighten our people. "
 "Thus, every major building will need them so the inhabitants may worship "
 "Satul to warm them."
-msgstr "Nur die reinen, weißen Steine Diamant und Bergkristall werden das Volk zur Erleuchtug führen. Jedes wichtige Gebäude benötigt sie daher, damit die Bewohner Satul anbeten können, um sie zu wärmen."
+msgstr "Nur die reinen, weißen Steine Diamant und Bergkristall werden das Volk zur Erleuchtung führen. Jedes wichtige Gebäude benötigt sie daher, damit die Bewohner Satul anbeten können, um sie zu wärmen."
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Crystal
 #. Mine
@@ -4877,7 +4878,7 @@ msgstr "He Soldat, auch wenn dies unser kleinstes Militärgebäude ist, hast du 
 #: ../../data/tribes/initialization/atlanteans/units.lua:1905
 msgctxt "atlanteans_building"
 msgid "Officer visiting a remote guardhouse"
-msgstr "Offzier bei der Inspektion eines abgelegenen Wachhauses"
+msgstr "Offizier bei der Inspektion eines abgelegenen Wachhauses"
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site: Guardhall
 #: ../../data/tribes/initialization/atlanteans/units.lua:1916
@@ -6314,7 +6315,7 @@ msgstr "Der Holzfäller braucht %s, um einen Baum zu fällen, ohne Berücksichti
 #, lua-format
 msgctxt "barbarians_building"
 msgid "Afterwards he rests in the hut for %s."
-msgstr "Danch ruht er in der Hütte für %s."
+msgstr "Danach ruht er in der Hütte für %s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Ranger's Hut
 #: ../../data/tribes/initialization/barbarians/units.lua:1169
@@ -10440,7 +10441,7 @@ msgstr "Der Fisch stinkt vom Kopf her."
 #: ../../data/tribes/initialization/empire/units.lua:1309
 msgctxt "empire_building"
 msgid "A fisherman criticising the Grand Master of the Fishermans’ Guild"
-msgstr "EIn Fischer, der den Vorsitzenden der Fischergilde kritisiert"
+msgstr "Ein Fischer, der den Vorsitzenden der Fischergilde kritisiert"
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Fisher's House
 #: ../../data/tribes/initialization/empire/units.lua:1311
@@ -11025,7 +11026,7 @@ msgstr "Sus vero quid habet præter escam?"
 #. "Sus vero quid habet præter escam?"
 #: ../../data/tribes/initialization/empire/units.lua:1724
 msgid "What does the pig really have other than meat?"
-msgstr "Was hat das Schwein schon außer Fleich?"
+msgstr "Was hat das Schwein schon außer Fleisch?"
 
 #. TRANSLATORS: Purpose helptext for an Empire production site: Piggery
 #: ../../data/tribes/initialization/empire/units.lua:1729
@@ -11602,7 +11603,7 @@ msgctxt "empire_building"
 msgid ""
 "Rebel general Certus Ignavus Fidelius upon entering the limits of Fremil to "
 "overthrow the government"
-msgstr "Rebellengeneral Certus Ignavus Fidelius vor dem Ünerswchreiten der Grenze zu Fremil um die Regierung zu stürzen"
+msgstr "Rebellengeneral Certus Ignavus Fidelius vor dem Überschreiten der Grenze zu Fremil um die Regierung zu stürzen"
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11682,7 +11683,7 @@ msgstr "Non terretur fluminibus, qui maria transiit."
 #. "Non terretur fluminibus, qui maria transiit."
 #: ../../data/tribes/initialization/empire/units.lua:2240
 msgid "Who crossed seas does not fear rivers."
-msgstr "Wer die Meere durckreuzte, fürchtet keinen Fluss."
+msgstr "Wer die Meere durchkreuzte, fürchtet keinen Fluss."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site: Ferry Yard
 #: ../../data/tribes/initialization/empire/units.lua:2244
@@ -14272,7 +14273,7 @@ msgctxt "frisians_building"
 msgid ""
 "The tailor’s shop needs %1$s on average to produce one studded fur garment "
 "and %2$s on average to produce one golden fur garment."
-msgstr "Die Schneiderei braucht durschnittlich %1$s um ein beschlagenes Fellgewand und %2$s um ein goldenes Fellgewand zu nähen."
+msgstr "Die Schneiderei braucht durchschnittlich %1$s um ein beschlagenes Fellgewand und %2$s um ein goldenes Fellgewand zu nähen."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Charcoal
 #. Kiln
@@ -14368,7 +14369,7 @@ msgctxt "frisians_building"
 msgid ""
 "The honey bread bakery needs %1$s on average to produce one loaf of bread "
 "and %2$s on average to produce one loaf of honey bread."
-msgstr "Die Honigbrotbäckerei braucht durschnittlich %1$s um einen Laib Brot und %2$s um einen Laib Honigbrot zu backen."
+msgstr "Die Honigbrotbäckerei braucht durchschnittlich %1$s um einen Laib Brot und %2$s um einen Laib Honigbrot zu backen."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Brewery
 #: ../../data/tribes/initialization/frisians/units.lua:1907
@@ -14424,7 +14425,7 @@ msgctxt "frisians_building"
 msgid ""
 "The mead brewery needs %1$s on average to brew one mug of beer and %2$s on "
 "average to brew one mug of mead."
-msgstr "Die Metbrauerei braucht durschnittlich %1$s um einen Krug Bier und %2$s um einen Krug Met zu brauen."
+msgstr "Die Metbrauerei braucht durchschnittlich %1$s um einen Krug Bier und %2$s um einen Krug Met zu brauen."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Tavern
 #: ../../data/tribes/initialization/frisians/units.lua:1933
