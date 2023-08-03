@@ -68,6 +68,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- time total: 71 + 81 + 91 = 243 sec
             "call=produce_helmet",
             "call=produce_helmet_mask",
             "call=produce_helmet_warhelm",
@@ -77,10 +78,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
          descname = _("forging a helmet"),
          actions = {
-            -- time total: 67 + 3.6
+            -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs helmet",
             "consume=coal iron",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:35s",
             "produce=helmet"
@@ -90,10 +91,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a mask because ...
          descname = _("forging a mask"),
          actions = {
-            -- time total: 77 + 3.6
+            -- time: 32.4 + 45 + 3.6 = 81 sec
             "return=skipped unless economy needs helmet_mask",
             "consume=coal iron:2",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:45s",
             "produce=helmet_mask"
@@ -103,10 +104,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a warhelm because ...
          descname = _("forging a warhelm"),
          actions = {
-            -- time total: 87 + 3.6
+            -- time: 32.4 + 55 + 3.6 = 91 sec
             "return=skipped unless economy needs helmet_warhelm",
             "consume=coal gold iron:2",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:55s",
             "produce=helmet_warhelm"
