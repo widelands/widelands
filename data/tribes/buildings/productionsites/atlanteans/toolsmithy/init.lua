@@ -49,6 +49,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- time total: 12 * 71 = 852 sec
             "call=produce_fire_tongs",
             "call=produce_hunting_bow",
             "call=produce_pick",
@@ -67,9 +68,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because ...
          descname = _("making a bread paddle"),
          actions = {
+            -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs bread_paddle",
             "consume=iron log",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
             "animate=working duration:35s",
             "produce=bread_paddle"
@@ -79,9 +81,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making a pair of buckets because ...
          descname = _("making a pair of buckets"),
          actions = {
+            -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs buckets",
             "consume=iron log",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
             "animate=working duration:35s",
             "produce=buckets"
@@ -91,9 +94,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making fire tongs because ...
          descname = _("making fire tongs"),
          actions = {
+            -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs fire_tongs",
             "consume=iron log",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
             "animate=working duration:35s",
             "produce=fire_tongs"
@@ -103,9 +107,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making a fishing net because ...
          descname = _("making a fishing net"),
          actions = {
+            -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs fishing_net",
             "consume=spidercloth:2",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
             "animate=working duration:35s",
             "produce=fishing_net"
@@ -115,9 +120,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
          descname = _("making a hammer"),
          actions = {
+            -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs hammer",
             "consume=iron log",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
             "animate=working duration:35s",
             "produce=hammer"
@@ -127,9 +133,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making a hook pole because ...
          descname = _("making a hook pole"),
          actions = {
+            -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs hook_pole",
             "consume=iron log",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
             "animate=working duration:35s",
             "produce=hook_pole"
@@ -139,9 +146,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making a hunting bow because ...
          descname = _("making a hunting bow"),
          actions = {
+            -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs hunting_bow",
             "consume=log spidercloth",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
             "animate=working duration:35s",
             "produce=hunting_bow"
@@ -151,9 +159,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making milking tongs because ...
          descname = _("making milking tongs"),
          actions = {
+            -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs milking_tongs",
             "consume=iron log",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
             "animate=working duration:35s",
             "produce=milking_tongs"
@@ -163,9 +172,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
          descname = _("making a pick"),
          actions = {
+            -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs pick",
             "consume=iron log",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
             "animate=working duration:35s",
             "produce=pick"
@@ -175,9 +185,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making a saw because ...
          descname = _("making a saw"),
          actions = {
+            -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs saw",
             "consume=iron log",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
             "animate=working duration:35s",
             "produce=saw"
@@ -187,9 +198,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
          descname = _("making a scythe"),
          actions = {
+            -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs scythe",
             "consume=iron log",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
             "animate=working duration:35s",
             "produce=scythe"
@@ -199,9 +211,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
          descname = _("making a shovel"),
          actions = {
+            -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs shovel",
             "consume=iron log",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
             "animate=working duration:35s",
             "produce=shovel"

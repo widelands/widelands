@@ -71,6 +71,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- time total: 54 + 4 * 81 = 378 sec
             "call=produce_spear_wooden",
             "call=produce_spear",
             "call=produce_spear_advanced",
@@ -82,10 +83,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a wooden spear because ...
          descname = _("forging a wooden spear"),
          actions = {
-            -- time total: 50 + 3.6
+            -- time: 20.4 + 21 + 9 + 3.6 = 54 sec
             "return=skipped unless economy needs spear_wooden",
             "consume=planks",
-            "sleep=duration:20s",
+            "sleep=duration:20s400ms",
             "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:21s",
             "playsound=sound/smiths/sharpening priority:90%",
@@ -97,10 +98,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a spear because ...
          descname = _("forging a spear"),
          actions = {
-            -- time total: 77 + 3.6
+            -- time: 32.4 + 36 + 9 + 3.6 = 81 sec
             "return=skipped unless economy needs spear",
             "consume=coal iron planks",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:36s",
             "playsound=sound/smiths/sharpening priority:90%",
@@ -112,10 +113,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging an advanced spear because ...
          descname = _("forging an advanced spear"),
          actions = {
-            -- time total: 77 + 3.6
+            -- time: 32.4 + 36 + 9 + 3.6 = 81 sec
             "return=skipped unless economy needs spear_advanced",
             "consume=coal iron:2 planks",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:36s",
             "playsound=sound/smiths/sharpening priority:90%",
@@ -127,10 +128,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a heavy spear because ...
          descname = _("forging a heavy spear"),
          actions = {
-            -- time total: 77 + 3.6
+            -- time: 32.4 + 36 + 9 + 3.6 = 81 sec
             "return=skipped unless economy needs spear_heavy",
             "consume=coal:2 gold iron planks",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:36s",
             "playsound=sound/smiths/sharpening priority:90%",
@@ -142,10 +143,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a war spear because ...
          descname = _("forging a war spear"),
          actions = {
-            -- time total: 77 + 3.6
+            -- time: 32.4 + 36 + 9 + 3.6 = 81 sec
             "return=skipped unless economy needs spear_war",
             "consume=coal:2 gold iron:2 planks",
-            "sleep=duration:32s",
+            "sleep=duration:32s400ms",
             "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:36s",
             "playsound=sound/smiths/sharpening priority:90%",

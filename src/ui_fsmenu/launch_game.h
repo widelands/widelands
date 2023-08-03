@@ -111,6 +111,7 @@ protected:
 
 private:
 	void add_all_widgets();
+	bool has_desyncing_addon_;
 };
 }  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_GAME_H
