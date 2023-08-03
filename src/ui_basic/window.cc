@@ -351,7 +351,7 @@ void Window::move_inside_parent() {
 		   (parent_is_main && toolbar_at_bottom) ? main_toolbar_button_size() : 0;
 		const int32_t toolbar_top_h =
 		   (parent_is_main && !toolbar_at_bottom) ? main_toolbar_button_size() : 0;
-		const int32_t ph = parent->get_inner_h() - toolbar_top_h - toolbar_bottom_h;
+		const int32_t ph = parent->get_inner_h();
 
 		int32_t px = get_x();
 		int32_t py = get_y();
