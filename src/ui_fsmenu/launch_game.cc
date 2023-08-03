@@ -171,7 +171,8 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
 
      // Variables and objects used in the menu
      settings_(settings),
-     ctrl_(ctrl) {
+     ctrl_(ctrl),
+     has_desyncing_addon_(false) {
 	warn_desyncing_addon_.set_visible(false);
 	write_replay_.set_state(true);
 
@@ -247,17 +248,27 @@ void LaunchGame::layout() {
 
 	map_details_.set_max_size(0, right_column_box_.get_h() / 4);
 	advanced_options_box_.set_max_size(0, 2 * kStateboxSize + kPadding);
+
+	int w;
+	int h;
+	// The warning might overflow the available space,
+	// hide it, if it does not fit
+	warn_desyncing_addon_.set_visible(has_desyncing_addon_);
+	right_column_content_box_.get_desired_size(&w, &h);
+	int h_max = (right_column_box_.get_h() - button_box_.get_h() - 5 * kPadding);
+	if (h > h_max) {
+		warn_desyncing_addon_.set_visible(false);
+	}
 }
 
 void LaunchGame::update_warn_desyncing_addon() {
-	const bool has_desyncing_addon = std::any_of(
+	has_desyncing_addon_ = std::any_of(
 	   AddOns::g_addons.begin(), AddOns::g_addons.end(),
 	   [](const AddOns::AddOnState& addon) { return addon.second && !addon.first->sync_safe; });
 
-	warn_desyncing_addon_.set_visible(has_desyncing_addon);
 	// TODO(Nordfriese): The scenario check is a quickfix for #5745 and related #4531,
 	// remove when scenario replays are functional
-	write_replay_.set_visible(!has_desyncing_addon && !settings_.settings().scenario);
+	write_replay_.set_visible(!has_desyncing_addon_ && !settings_.settings().scenario);
 }
 
 bool LaunchGame::should_write_replay() const {
