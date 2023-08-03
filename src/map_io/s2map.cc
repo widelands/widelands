@@ -20,13 +20,13 @@
 
 #include <cstddef>
 #include <iomanip>
-#include <iostream>
 #include <memory>
 
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/scoped_timer.h"
+#include "base/warning.h"
 #include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -38,10 +38,6 @@
 #include "logic/map_objects/map_object.h"
 #include "logic/mapregion.h"
 #include "map_io/map_loader.h"
-
-using std::cerr;
-using std::endl;
-using std::ios;
 
 namespace {
 
@@ -58,27 +54,35 @@ struct S2MapDescrHeader {
 	char bulk[2290];  // unknown
 } /* size 2352 */;
 
-// Some basic checks to identify obviously invalid headers
-bool is_valid_header(const S2MapDescrHeader& header) {
-	if (strncmp(header.magic, "WORLD_V1.0", 10) != 0) {
-		return false;
+bool is_valid_cstring(const char* text, size_t max_len) {
+	for (size_t i = 0; i < max_len; ++i) {
+		if (text[i] == 0) {
+			return true;
+		}
 	}
-	if (header.name[19] != 0) {
-		return false;
+	return false;
+}
+
+// Some basic checks to identify obviously invalid headers
+void validate_header(const S2MapDescrHeader& header) {
+	if (strncmp(header.magic, "WORLD_V1.0", 10) != 0) {
+		throw WLWarning("", "Wrong header magic");
+	}
+	if (!is_valid_cstring(header.name, 20)) {
+		throw WLWarning("", "Malformed map name string");
 	}
 	if (header.w <= 0 || header.h <= 0) {
-		return false;
+		throw WLWarning("", "Bad map size %dx%d", header.w, header.h);
 	}
 	if (header.uses_world < 0 || header.uses_world > 2) {
-		return false;
+		throw WLWarning("", "Bad world index %d", header.uses_world);
 	}
 	if (header.nplayers < 0 || header.nplayers > 7) {
-		return false;
+		throw WLWarning("", "Bad player count %d", header.nplayers);
 	}
-	if (header.author[19] != 0) {
-		return false;
+	if (!is_valid_cstring(header.author, 26)) {
+		throw WLWarning("", "Malformed map author string");
 	}
-	return true;
 }
 
 // TODO(unknown): the following bob types appear in S2 maps but are unknown
@@ -197,7 +201,7 @@ load_s2mf_section(FileRead& fr, int32_t const width, int32_t const height) {
 	memcpy(buffer, fr.data(6), 6);
 	if (buffer[0] != 0x10 || buffer[1] != 0x27 || buffer[2] != 0x00 || buffer[3] != 0x00 ||
 	    buffer[4] != 0x00 || buffer[5] != 0x00) {
-		cerr << "Section marker not found" << endl;
+		log_warn("S2Map: Section marker not found");
 		return section;
 	}
 
@@ -216,7 +220,7 @@ load_s2mf_section(FileRead& fr, int32_t const width, int32_t const height) {
 	}
 
 	if (dw < width || dh < height) {
-		cerr << "Section not big enough" << endl;
+		log_warn("S2Map: Section not big enough");
 		return nullptr;
 	}
 
@@ -445,9 +449,7 @@ void S2MapLoader::load_s2mf_header(FileRead& fr) {
 #endif
 
 	// Check header validity to prevent unexpected crashes later
-	if (!is_valid_header(header)) {
-		throw wexception("invalid S2 file");
-	}
+	validate_header(header);
 
 	//  don't really set size, but make the structures valid
 	map_.width_ = header.w;
@@ -631,7 +633,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 				bobname = "moose";
 				break;  // original "donkey"
 			default:
-				cerr << "Unsupported animal: " << static_cast<int32_t>(section[i]) << endl;
+				log_warn("S2Map: Unsupported animal: %d", static_cast<int32_t>(section[i]));
 				break;
 			}
 
@@ -1037,7 +1039,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 				break;
 
 			default:
-				cerr << "Unknown bob " << static_cast<uint32_t>(c) << endl;
+				log_warn("S2Map: Unknown bob %d", static_cast<uint32_t>(c));
 				break;
 			}
 
