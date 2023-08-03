@@ -208,9 +208,9 @@ void Panel::logic_thread() {
 					m->game_logic_think();  // actual game logic
 				} catch (const WException& e) {
 					// Forward uncaught exceptions to the main thread's handler.
-					NoteThreadSafeFunction::instantiate([e]() { throw e; }, true, false);
+					NoteThreadSafeFunction::instantiate([&e]() { throw WException::copy(e); }, true, false);
 				} catch (const std::exception& e) {
-					NoteThreadSafeFunction::instantiate([e]() { throw e; }, true, false);
+					NoteThreadSafeFunction::instantiate([&e]() { throw e; }, true, false);
 				}
 
 				LogicThreadState free_if_locked = LogicThreadState::kLocked;

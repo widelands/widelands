@@ -40,15 +40,34 @@ class WException : public std::exception {
 public:
 	explicit WException(char const* file, uint32_t line, char const* fmt, ...) PRINTF_FORMAT(4, 5);
 
+	/* cert-err60-cpp requires exceptions to be nothrow copy constructible, which is not easily
+	 * possible if we want to store dynamically allocated memory (i.e. `std::string what_`).
+	 * Instead, if you need to copy a WException, work around that with this function.
+	 */
+	[[nodiscard]] static inline WException copy(const WException& e) {
+		return WException(e.file().c_str(), e.line(), "%s", e.what());
+	}
+
 	/**
 	 * The target of the returned pointer remains valid during the lifetime of
 	 * the WException object.
 	 */
-	[[nodiscard]] const char* what() const noexcept override;
+	[[nodiscard]] const char* what() const noexcept override {
+		return what_.c_str();
+	}
+
+	[[nodiscard]] const std::string& file() const {
+		return file_;
+	}
+	[[nodiscard]] uint32_t line() const {
+		return line_;
+	}
 
 protected:
 	WException() = default;
 	std::string what_;
+	std::string file_;
+	uint32_t line_{0U};
 };
 
 extern bool g_fail_on_lua_error;
