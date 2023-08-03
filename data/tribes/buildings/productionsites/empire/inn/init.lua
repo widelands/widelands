@@ -45,6 +45,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- time total: 37 + 44 = 81 sec
             "call=produce_ration",
             "call=produce_meal",
          }
@@ -53,11 +54,11 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
          descname = _("preparing a ration"),
          actions = {
-            -- time total: 33
+            -- time: 23.4 + 10 + 3.6 = 37 sec
             "return=skipped unless economy needs ration",
             "consume=empire_bread,fish,meat",
             "playsound=sound/empire/taverns/ration priority:80%",
-            "animate=working duration:23s",
+            "animate=working duration:23s400ms",
             "sleep=duration:10s",
             "produce=ration"
          }
@@ -66,11 +67,11 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a meal because ...
          descname = _("preparing a meal"),
          actions = {
-            -- time total: 40
+            -- time: 30.4 + 10 + 3.6 = 44 sec
             "return=skipped unless economy needs meal",
             "consume=empire_bread fish,meat",
             "playsound=sound/empire/taverns/meal priority:80%",
-            "animate=working duration:30s",
+            "animate=working duration:30s400ms",
             "sleep=duration:10s",
             "produce=meal"
          }

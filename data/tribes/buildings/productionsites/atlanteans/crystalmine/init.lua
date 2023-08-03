@@ -52,6 +52,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- time total: 145 + 126 + 116 = 387 sec
             "call=mine_granite",
             "call=mine_quartz",
             "call=mine_diamond",
@@ -61,9 +62,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
          descname = _("mining granite"),
          actions = {
+            -- time: 38.4 + 5 * (15 + 3.6) + 1 * (10 + 3.6) = 145 sec
             "return=skipped unless economy needs granite",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "sleep=duration:40s",
+            "sleep=duration:38s400ms",
             "call=a_mine_produce_granite",
             "call=a_mine_produce_granite",
             "call=a_mine_produce_granite",
@@ -76,9 +78,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining quartz because ...
          descname = _("mining quartz"),
          actions = {
+            -- time: 29.4 + 3 * (10 + 3.6) + 3 * (15 + 3.6) = 126 sec
             "return=skipped unless economy needs quartz",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "sleep=duration:30s",
+            "sleep=duration:29s400ms",
             "call=a_mine_produce_quartz",
             "call=a_mine_produce_granite",
             "call=a_mine_produce_granite",
@@ -91,9 +94,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining diamonds because ...
          descname = _("mining diamonds"),
          actions = {
+            -- time: 40.2 + 2 * (25 + 3.6) + 1 * (15 + 3.6) = 116 sec
             "return=skipped unless economy needs diamond",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "sleep=duration:40s",
+            "sleep=duration:40s200ms",
             "call=a_mine_produce_diamond",
             "call=a_mine_produce_granite",
             "call=a_mine_produce_diamond",
