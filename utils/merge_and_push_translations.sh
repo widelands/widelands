@@ -20,14 +20,14 @@ fi
 
 # Move up if we're not in the base directory.
 if [ -d "../utils" ]; then
-	pushd ..
+  pushd ..
 fi
 
 # Make sure 'utils/buildcat.py' is there.
 if [ ! -f "utils/buildcat.py" ]; then
-	echo "Unable to find 'utils/buildcat.py'."
-	echo "Make sure you start this script from Widelands' base or utils directory.";
-	exit 1
+  echo "Unable to find 'utils/buildcat.py'."
+  echo "Make sure you start this script from Widelands' base or utils directory.";
+  exit 1
 fi
 
 # Ensure that our git is clean
