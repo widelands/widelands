@@ -82,9 +82,7 @@ if [ -n "$(git status -s)" ]; then
 fi
 
 # Pull All translations from Transifex
-# tx pull -a
-# Force-pull translations because some would get skipped accidentally
-tx pull -fa
+tx pull -a --use-git-timestamps
 
 # Update authors file
 if python3 utils/update_authors.py; then
