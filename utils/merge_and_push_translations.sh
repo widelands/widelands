@@ -45,7 +45,7 @@ git checkout master
 git pull "$push_target" master
 
 # Double-check that it's clean
-STATUS="$(git status)"
+STATUS="$(LANG=C git status)"
 echo "${STATUS}"
 if [[ "${STATUS}" != *"nothing to commit, working tree clean"* ]]; then
   echo "git status must be empty to prevent accidental commits etc."
