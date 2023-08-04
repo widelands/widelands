@@ -57,6 +57,18 @@ echo "Working tree is clean, continuing"
 # Print all commands.
 set -x
 
+# Pull All translations from Transifex
+# use git timestamps because the timestamps on disk are too new
+tx pull -a --use-git-timestamps
+
+if [ -n "$(git status -s)" ]; then
+  # Stage and commit translations
+  git add po/*/*.po data/i18n/locales/*.json xdg/translations/*.json || true
+  git commit -m "Fetched translations."
+fi
+
+# -----------------------
+
 # Update source catalogs
 python3 utils/buildcat.py
 
@@ -82,7 +94,8 @@ if [ -n "$(git status -s)" ]; then
 fi
 
 # Pull All translations from Transifex
-tx pull -a --use-git-timestamps
+# (timestamps on disk are old enough this time)
+tx pull -a
 
 # Update authors file
 if python3 utils/update_authors.py; then
@@ -117,21 +130,22 @@ undo_oneliner_diffs
 
 if [ -z "$(git status -s)" ]; then
   echo "Run completed, nothing to commit."
-  exit 0
+else
+  # Stage changes
+  # - Translations
+  git add po/*/*.po po/*/*.pot data/i18n/locales/*.json xdg/translations/*.json || true
+  # - Authors
+  git add data/txts/*.lua || true
+  # - Locale data
+  git add data/i18n/*.lua || true
+  # - Appdata
+  git add xdg/org.widelands.Widelands.appdata.xml xdg/org.widelands.Widelands.desktop || true
+  # - Statistics
+  git add data/i18n/translation_stats.conf || true
+
+  # Commit
+  git commit -m "Updated translations catalogs."
 fi
 
-# Stage changes
-# - Translations
-git add po/*/*.po po/*/*.pot data/i18n/locales/*.json xdg/translations/*.json || true
-# - Authors
-git add data/txts/*.lua || true
-# - Locale data
-git add data/i18n/*.lua || true
-# - Appdata
-git add xdg/org.widelands.Widelands.appdata.xml xdg/org.widelands.Widelands.desktop || true
-# - Statistics
-git add data/i18n/translation_stats.conf || true
-
-# Commit and push.
-git commit -m "Fetched translations and updated catalogs."
+# push fetched translations and updated catalogs
 git push "$push_target" master
