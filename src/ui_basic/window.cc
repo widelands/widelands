@@ -384,8 +384,9 @@ void Window::move_inside_parent() {
 		} else {
 			if (py < toolbar_top_h) {
 				py = toolbar_top_h;
-			} else if (py + get_h() > ph + toolbar_top_h + toolbar_bottom_h) {
-				py = ph - get_h() + toolbar_top_h + toolbar_bottom_h;
+			} else if (const int32_t p_bottom = parent->get_inner_h() - toolbar_bottom_h;
+			           py + get_h() > p_bottom) {
+				py = p_bottom - get_h();
 				if (!is_minimal_ && toolbar_bottom_h == 0 && parent->get_dock_windows_to_edges()) {
 					py += kBottomBorderThickness;
 				}
