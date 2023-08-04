@@ -147,5 +147,7 @@ else
   git commit -m "Updated translations catalogs."
 fi
 
-# push fetched translations and updated catalogs
-git push "$push_target" master
+if [ "$(git show --no-patch --format=format:_ FETCH_HEAD HEAD)" != "_" ]; then # check if it is the same commit
+  # push fetched translations and updated catalogs
+  git push "$push_target" master
+fi
