@@ -507,7 +507,8 @@ void GameHost::run_callback() {
 		packet.string(a->internal_name);
 	}
 
-	std::map<Widelands::PlayerNumber, std::pair<std::set<std::string>, std::set<std::string>>> custom_naming_lists;
+	std::map<Widelands::PlayerNumber, std::pair<std::set<std::string>, std::set<std::string>>>
+	   custom_naming_lists;
 	if (!d->settings.savegame) {  // Naming lists don't make sense in savegames
 		int playernumber = d->settings.playernum + 1;
 		if (playernumber > 0) {
@@ -518,8 +519,10 @@ void GameHost::run_callback() {
 			playernumber = client.playernum + 1;
 			if (playernumber > 0) {
 				// Merge instead of overwrite - multiple clients can share a player
-				custom_naming_lists[playernumber].first.insert(client.custom_ship_names.begin(), client.custom_ship_names.end());
-				custom_naming_lists[playernumber].second.insert(client.custom_warehouse_names.begin(), client.custom_warehouse_names.end());
+				custom_naming_lists[playernumber].first.insert(
+				   client.custom_ship_names.begin(), client.custom_ship_names.end());
+				custom_naming_lists[playernumber].second.insert(
+				   client.custom_warehouse_names.begin(), client.custom_warehouse_names.end());
 			}
 		}
 
