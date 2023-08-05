@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
+# Aleksandra Kurda <a.kurda@o2.pl>, 2023
 # Antoni Szpikowski <szantek2004@gmail.com>, 2021
 # GunChleoc, 2016
 # Wesmania <ikk_pl@yahoo.co.uk>, 2016
@@ -11,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
-"Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>, 2021\n"
+"Last-Translator: Aleksandra Kurda <a.kurda@o2.pl>, 2023\n"
 "Language-Team: Polish (http://app.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -561,7 +562,7 @@ msgid ""
 "Ferries are built in ferry yards, one rowboat costs two logs and one piece "
 "of cloth and is quickly constructed. A ferry yard is a medium-sized building"
 " that needs to be built close to the shore."
-msgstr ""
+msgstr "Promy buduje się w stoczni, jedna łódka kosztuje dwie kłody drewna i jeden kawałek tkaniny, a jej konstrukcja nie trwa długo. Stocznia jest średniej wielkości budynkiem, który musi zostać wybudowany blisko wybrzeża."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:262
 msgid "Let’s build a ferry yard close to the shore before we will continue."
