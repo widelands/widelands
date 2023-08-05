@@ -89,4 +89,7 @@ const std::string kConfigFile = "config";
 
 const std::string kEconomyProfilesDir = "tribes/economy_profiles";
 
+const std::string kCustomShipNamesFile = "ship_names";
+const std::string kCustomWarehouseNamesFile = "warehouse_names";
+
 #endif  // end of include guard: WL_LOGIC_FILESYSTEM_CONSTANTS_H

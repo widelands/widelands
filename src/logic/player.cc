@@ -1990,10 +1990,9 @@ std::string Player::pick_shipname() {
 	   egbase().is_game() ?
          (dynamic_cast<Game&>(egbase()).logic_rand() % remaining_shipnames_.size()) :
          RNG::static_rand(remaining_shipnames_.size());
-	auto it = remaining_shipnames_.begin();
-	std::advance(it, index);
-	std::string new_name = *it;
-	remaining_shipnames_.erase(it);
+	std::string new_name = remaining_shipnames_.at(index);
+	remaining_shipnames_.at(index) = remaining_shipnames_.back();
+	remaining_shipnames_.pop_back();
 	return new_name;
 }
 
@@ -2009,10 +2008,9 @@ std::string Player::pick_warehousename(bool port) {
 	   egbase().is_game() ?
          (dynamic_cast<Game&>(egbase()).logic_rand() % remaining_warehousenames_.size()) :
          RNG::static_rand(remaining_warehousenames_.size());
-	auto it = remaining_warehousenames_.begin();
-	std::advance(it, index);
-	std::string new_name = *it;
-	remaining_warehousenames_.erase(it);
+	std::string new_name = remaining_warehousenames_.at(index);
+	remaining_warehousenames_.at(index) = remaining_warehousenames_.back();
+	remaining_warehousenames_.pop_back();
 	return new_name;
 }
 
@@ -2034,6 +2032,21 @@ void Player::reserve_warehousename(const std::string& name) {
 			remaining_warehousenames_.erase(it);
 			return;
 		}
+	}
+}
+
+void Player::set_shipnames(const std::set<std::string>& names) {
+	if (!names.empty()) {
+		remaining_shipnames_.clear();
+		remaining_shipnames_.insert(remaining_shipnames_.begin(), names.begin(), names.end());
+	}
+}
+
+void Player::set_warehousenames(const std::set<std::string>& names) {
+	if (!names.empty()) {
+		remaining_warehousenames_.clear();
+		remaining_warehousenames_.insert(
+		   remaining_warehousenames_.begin(), names.begin(), names.end());
 	}
 }
 
@@ -2291,6 +2304,42 @@ void Player::write_statistics(FileWrite& fw) const {
 		fw.c_string(descriptions.get_worker_descr(worker_index)->name());
 		write_stats(worker_stocks_, worker_index);
 	}
+}
+
+std::pair<std::set<std::string>, std::set<std::string>> read_custom_warehouse_ship_names() {
+	std::pair<std::set<std::string>, std::set<std::string>> result;
+
+	if (FileRead fr; fr.try_open(*g_fs, kCustomShipNamesFile)) {
+		for (;;) {
+			const char* line = fr.read_line();
+			if (line == nullptr) {
+				break;
+			}
+
+			std::string name(line);
+			trim(name);
+			if (!name.empty()) {
+				result.first.insert(name);
+			}
+		}
+	}
+
+	if (FileRead fr; fr.try_open(*g_fs, kCustomWarehouseNamesFile)) {
+		for (;;) {
+			const char* line = fr.read_line();
+			if (line == nullptr) {
+				break;
+			}
+
+			std::string name(line);
+			trim(name);
+			if (!name.empty()) {
+				result.second.insert(name);
+			}
+		}
+	}
+
+	return result;
 }
 
 }  // namespace Widelands
