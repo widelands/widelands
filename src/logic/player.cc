@@ -35,6 +35,7 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "economy/waterway.h"
+#include "graphic/text_layout.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/cmd_delete_message.h"
@@ -2319,7 +2320,7 @@ std::pair<std::set<std::string>, std::set<std::string>> read_custom_warehouse_sh
 			std::string name(line);
 			trim(name);
 			if (!name.empty()) {
-				result.first.insert(name);
+				result.first.insert(richtext_escape(name));
 			}
 		}
 	}
@@ -2334,7 +2335,7 @@ std::pair<std::set<std::string>, std::set<std::string>> read_custom_warehouse_sh
 			std::string name(line);
 			trim(name);
 			if (!name.empty()) {
-				result.second.insert(name);
+				result.second.insert(richtext_escape(name));
 			}
 		}
 	}
