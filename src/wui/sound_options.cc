@@ -18,6 +18,7 @@
 #include "wui/sound_options.h"
 
 #include "base/i18n.h"
+#include "graphic/font_handler.h"
 #include "graphic/text_layout.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/checkbox.h"
@@ -72,8 +73,13 @@ public:
 	     type_(type),
 	     fx_(representative_fx) {
 		set_inner_spacing(kSpacing);
-		add(&volume_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-		add(&enable_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+		if (UI::g_fh->fontset()->is_rtl()) {
+			add(&volume_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+			add(&enable_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+		} else {
+			add(&enable_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+			add(&volume_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+		}
 
 		if (SoundHandler::is_backend_disabled()) {
 			enable_.set_enabled(false);
