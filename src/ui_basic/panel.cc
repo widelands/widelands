@@ -351,7 +351,7 @@ int Panel::do_run() {
 	app.set_mouse_lock(false);  // more paranoia :-)
 
 	// With the default of 30FPS, the game will be drawn every 33ms.
-	constexpr kMaxFPS = 30;
+	constexpr uint32_t kMaxFPS = 30;
 	constexpr uint32_t kDrawDelay = 1000 / kMaxFPS;
 
 	static InputCallback input_callback = {Panel::ui_mousepress, Panel::ui_mouserelease,
