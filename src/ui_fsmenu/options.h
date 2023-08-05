@@ -48,7 +48,6 @@ public:
 		int32_t yres;
 		bool maximized;
 		bool fullscreen;
-		uint32_t maxfps;
 		bool sdl_cursor;
 
 		// Windows options
@@ -155,7 +154,6 @@ private:
 	UI::Dropdown<std::string> language_dropdown_;
 	UI::Dropdown<ScreenResolution> resolution_dropdown_;
 	UI::Checkbox sdl_cursor_;
-	UI::SpinBox sb_maxfps_;
 	UI::Checkbox tooltip_accessibility_mode_;
 	UI::MultilineTextarea translation_info_;
 

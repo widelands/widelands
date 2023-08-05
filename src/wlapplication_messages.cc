@@ -189,9 +189,6 @@ void fill_parameter_vector() {
 		true},
 	  {"", "tooltip_accessibility_mode", _("[true|false*]"), _("Whether to use sticky tooltips."),
 		true},
-	  {"", "maxfps", _("n"),
-		/** TRANSLATORS: `n` references a numerical placeholder */
-		_("Maximal optical framerate `n` of the game."), true},
 	  {"", "theme", _("DIRNAME"),
 		_("The path to the active UI theme, relative to the Widelands home directory."), false},
 	  /// Window options

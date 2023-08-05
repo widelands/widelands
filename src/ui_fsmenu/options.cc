@@ -153,17 +153,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                  _("Use system mouse cursor"),
                  "",
                  0),
-     sb_maxfps_(&box_interface_,
-                "max_fps",
-                0,
-                0,
-                0,
-                0,
-                opt.maxfps,
-                0,
-                99,
-                UI::PanelStyle::kFsMenu,
-                _("Maximum FPS:")),
      tooltip_accessibility_mode_(&box_interface_,
                                  UI::PanelStyle::kFsMenu,
                                  "tooltip_accessibility_mode",
@@ -397,7 +386,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 
 	box_interface_.add(&box_interface_hbox_, UI::Box::Resizing::kFullSize);
 	box_interface_.add(&sdl_cursor_, UI::Box::Resizing::kFullSize);
-	box_interface_.add(&sb_maxfps_);
 	box_interface_.add(&tooltip_accessibility_mode_, UI::Box::Resizing::kFullSize);
 
 	box_interface_.add(&dock_windows_to_edges_, UI::Box::Resizing::kFullSize);
@@ -591,8 +579,6 @@ void Options::layout() {
 		translation_info_.set_size(
 		   language_dropdown_.get_w(),
 		   language_dropdown_.get_h() + resolution_dropdown_.get_h() + kPadding);
-		sb_maxfps_.set_unit_width(unit_w);
-		sb_maxfps_.set_desired_size(tab_panel_width, sb_maxfps_.get_h());
 
 		sb_dis_panel_.set_unit_width(unit_w);
 		sb_dis_panel_.set_desired_size(tab_panel_width, sb_dis_panel_.get_h());
@@ -792,7 +778,6 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 		}
 	}
 	os_.sdl_cursor = sdl_cursor_.get_state();
-	os_.maxfps = sb_maxfps_.get_value();
 	os_.tooltip_accessibility_mode = tooltip_accessibility_mode_.get_state();
 
 	// Windows options
@@ -871,7 +856,6 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.yres = opt_section_.get_int("yres", kDefaultResolutionH);
 	opt.maximized = opt_section_.get_bool("maximized", false);
 	opt.fullscreen = opt_section_.get_bool("fullscreen", false);
-	opt.maxfps = opt_section_.get_int("maxfps", 25);
 	opt.sdl_cursor = opt_section_.get_bool("sdl_cursor", true);
 	opt.tooltip_accessibility_mode = opt_section_.get_bool("tooltip_accessibility_mode", false);
 
@@ -919,7 +903,6 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_int("yres", opt.yres);
 	opt_section_.set_bool("maximized", opt.maximized);
 	opt_section_.set_bool("fullscreen", opt.fullscreen);
-	opt_section_.set_int("maxfps", opt.maxfps);
 	opt_section_.set_bool("sdl_cursor", opt.sdl_cursor);
 	opt_section_.set_bool("tooltip_accessibility_mode", opt.tooltip_accessibility_mode);
 
