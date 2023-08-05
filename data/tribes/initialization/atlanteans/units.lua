@@ -1628,7 +1628,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an Atlantean production site:  Smokery
             lore = pgettext("atlanteans_building", "We are using pure logs, no other ingredients! Which drunken foreigner hath told you that myth?"),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site:  Smokery
-            lore_author = pgettext("atlanteans_building", "A Smoker answering a passer-by")
+            lore_author = pgettext("atlanteans_building", "A Smoker answering a passer-by"),
+            -- TRANSLATORS: Performance helptext for an Atlantean production site: Smokery
+            performance = pgettext("atlanteans_building", "If this building is fully supplied and all kinds of smoked food are needed by the economy, production of one smoked fish takes %1$s and one smoked meat takes %2$s on average. If only one kind of food is needed by the economy, production of one smoked fish takes %3$s and one smoked meat takes %4$s on average."):bformat(format_seconds(51), format_minutes_seconds(1, 42), format_seconds(34), format_seconds(34))
 
          }
       },
@@ -1642,7 +1644,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an Atlantean production site:  Mill
             lore = pgettext("atlanteans_building", "We invented this vertical axis design first, the sawmill just copied our ideas but never acknowledged our claim."),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Mill
-            lore_author = pgettext("atlanteans_building", "Miller arguing with a sawyer")
+            lore_author = pgettext("atlanteans_building", "Miller arguing with a sawyer"),
+            -- TRANSLATORS: Performance helptext for an Atlantean production site: Mill
+            performance = pgettext("atlanteans_building", "If this building is fully supplied and both kinds of flour are needed by the economy, production of one sack of each kind of flour takes %1$s on average. If only one kind of flour is needed by the economy, its production takes %2$s on average."):bformat(format_seconds(44), format_seconds(22))
          }
       },
       {
@@ -1682,7 +1686,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an Atlantean production site: Smelting Works
             lore = pgettext("atlanteans_building", "We learned the smelting from our forefathers, a basic craftsmanship taming the fire and the ore into pure metals."),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Smelting Works
-            lore_author = pgettext("atlanteans_building", "A member of the smelters’ guild")
+            lore_author = pgettext("atlanteans_building", "A member of the smelters’ guild"),
+            -- TRANSLATORS: Performance helptext for an Atlantean production site: Smelting Works
+            performance = pgettext("atlanteans_building", "If this building is fully supplied and all metals are needed by the economy, production of one iron takes %1$s and one gold takes %2$s on average. If only one kind of metal is needed by the economy, production of one iron takes %3$s and one gold takes %4$s on average."):bformat(format_minutes_seconds(1, 36), format_minutes_seconds(3, 12), format_minutes_seconds(1, 4), format_minutes_seconds(1, 4))
          }
       },
       {
@@ -1693,7 +1699,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an Atlantean production site: Toolsmithy
             lore = pgettext("atlanteans_building", "People’s power working for the benefit of all"),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Toolsmithy
-            lore_author = pgettext("atlanteans_building", "Faded sign found on top of this building")
+            lore_author = pgettext("atlanteans_building", "Faded sign found on top of this building"),
+            -- TRANSLATORS: Performance helptext for an Atlantean production site: Toolsmithy
+            performance = pgettext("atlanteans_building", "If this building is fully supplied and all tools are needed by the economy, production of one of each tool takes %1$s on average. If only one kind of tool is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(14, 12), format_minutes_seconds(1, 11))
          }
       },
       {
@@ -1704,8 +1712,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an Atlantean production site:  Weapon Smithy
             lore = pgettext("atlanteans_building", "You hear that sound of metal strident? The weapon smith just forged a trident!"),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Weapon Smithy
-            lore_author = pgettext("atlanteans_building", "Atlantean nursery rhyme")
-
+            lore_author = pgettext("atlanteans_building", "Atlantean nursery rhyme"),
+            -- TRANSLATORS: Performance helptext for an Atlantean production site: Weapon Smithy
+            performance = pgettext("atlanteans_building", "If this building is fully supplied and all tridents are needed by the economy, production of one of each trident takes %1$s on average. If only one kind of trident is needed by the economy, production of one light trident takes %2$s and one long trident, one steel trident, one double trident or one heavy double trident takes %3$s on average."):bformat(format_minutes_seconds(6, 18), format_seconds(54), format_minutes_seconds(1, 21))
          }
       },
       {
@@ -1719,7 +1728,9 @@ wl.Descriptions():new_tribe {
                                           [[most skillful foes, whose lethal lance<br>]] ..
                                           [[from this their armour off will glance!’]]),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Armor Smithy
-            lore_author = pgettext("atlanteans_building", "Atlantean nursery rhyme")
+            lore_author = pgettext("atlanteans_building", "Atlantean nursery rhyme"),
+            -- TRANSLATORS: Performance helptext for an Atlantean production site: Armor Smithy
+            performance = pgettext("atlanteans_building", "If this building is fully supplied and both kinds of shields are needed by the economy, production of one of each kind takes %1$s on average. If only one kind of shield is needed by the economy, production of one steel shield takes %2$s and one advanced shield takes %3$s on average."):bformat(format_minutes_seconds(2, 32), format_minutes_seconds(1, 11), format_minutes_seconds(1, 21))
          }
       },
       {
@@ -1796,7 +1807,9 @@ wl.Descriptions():new_tribe {
             lore = pgettext("atlanteans_building", "Here are the Wide Lands where people may dwell, "..
                                                    "walking around caring everything’s well."),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Weaving Mill
-            lore_author = pgettext("atlanteans_building", "Part of the silkweavers’ song")
+            lore_author = pgettext("atlanteans_building", "Part of the silkweavers’ song"),
+            -- TRANSLATORS: Performance helptext for an Atlantean production site: Weaving Mill
+            performance = pgettext("atlanteans_building", "If this building is fully supplied and all kinds of cloth and tabards are needed by the economy, production of one of each cloth and tabard takes %1$s on average. If only one kind of cloth or tabard is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(2, 12), format_seconds(44))
          }
       },
 
@@ -1810,7 +1823,9 @@ wl.Descriptions():new_tribe {
             lore = pgettext("atlanteans_building", "Only the pure, white stones Diamond and Quartz will enlighten our people. "..
                                                    "Thus, every major building will need them so the inhabitants may worship Satul to warm them."),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Crystal Mine
-            lore_author = pgettext("atlanteans_building", "First part of the Atlantean almanach on architecture")
+            lore_author = pgettext("atlanteans_building", "First part of the Atlantean almanach on architecture"),
+            -- TRANSLATORS: Performance helptext for an Atlantean production site: Crystal Mine
+            performance = pgettext("atlanteans_building", "If this building is fully supplied and all minerals are needed by the economy, production of one granite takes %1$s, one quartz takes %2$s and one diamond takes %3$s on average. If only one kind of mineral is needed by the economy, production of one granite takes %4$s, one quartz takes %5$s and one diamond takes %6$s on average."):bformat(format_seconds(43), format_minutes_seconds(1, 37), format_minutes_seconds(3, 14), format_seconds(29), format_seconds(42), format_seconds(58))
          }
       },
       {

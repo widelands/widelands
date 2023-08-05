@@ -174,7 +174,6 @@ SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,
 	add_space(title_.get_h());
 	add(&scrollable_playerbox_, Resizing::kExpandBoth);
 	scrollable_playerbox_.set_scrolling(true);
-	scrollable_playerbox_.set_desired_size(0, 0);
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& n) {
 		if (n.action == NoteGameSettings::Action::kMap) {
 			reset();
@@ -203,11 +202,14 @@ void SinglePlayerSetupBox::update() {
 	initialization_complete();
 }
 
-void SinglePlayerSetupBox::force_new_dimensions(uint32_t standard_element_height) {
+void SinglePlayerSetupBox::force_new_dimensions(uint32_t standard_element_height,
+                                                int32_t max_size) {
 	standard_height_ = standard_element_height;
 	for (auto& active_player_group : active_player_groups_) {
 		active_player_group->force_new_dimensions(standard_element_height);
 	}
+	scrollable_playerbox_.set_max_size(get_inner_w(), max_size - 2 * title_.get_h());
+	scrollable_playerbox_.set_desired_size(0, 0);
 }
 void SinglePlayerSetupBox::reset() {
 	for (auto& p : active_player_groups_) {

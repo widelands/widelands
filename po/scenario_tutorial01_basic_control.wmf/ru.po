@@ -381,7 +381,7 @@ msgid ""
 "on a laptop with a touchpad. You can enable map movement with touchpad "
 "scrolling in the the Widelands main menu: Choose ‘Options’, then press ‘Edit"
 " keyboard and mouse actions’, and select the ‘Mouse Scrolling’ tab."
-msgstr ""
+msgstr "Перемещение правой кнопкой мыши может быть неудобным, если вы играете на ноутбуке с тачпадом. Вы можете включить перемещение по карте с помощью тачпада в главном меню Widelands: выберите \"Настройки\", затем нажмите \"Настроить клавиатуру и мышь\" и выберите вкладку ‘Прокрутка мыши’."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:266
 msgid "Some Rocks Were Found"
