@@ -146,14 +146,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                           UI::DropdownType::kTextual,
                           UI::PanelStyle::kFsMenu,
                           UI::ButtonStyle::kFsMenuMenu),
-
-     inputgrab_(&box_interface_,
-                UI::PanelStyle::kFsMenu,
-                "input_grab",
-                Vector2i::zero(),
-                _("Grab Input"),
-                "",
-                0),
      sdl_cursor_(&box_interface_,
                  UI::PanelStyle::kFsMenu,
                  "sdl_cursor",
@@ -404,7 +396,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	box_interface_hbox_.add(&translation_info_, UI::Box::Resizing::kExpandBoth);
 
 	box_interface_.add(&box_interface_hbox_, UI::Box::Resizing::kFullSize);
-	box_interface_.add(&inputgrab_, UI::Box::Resizing::kFullSize);
 	box_interface_.add(&sdl_cursor_, UI::Box::Resizing::kFullSize);
 	box_interface_.add(&sb_maxfps_);
 	box_interface_.add(&tooltip_accessibility_mode_, UI::Box::Resizing::kFullSize);
@@ -496,7 +487,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	// Interface options
 	add_screen_resolutions(opt);
 
-	inputgrab_.set_state(opt.inputgrab);
 	sdl_cursor_.set_state(opt.sdl_cursor);
 	tooltip_accessibility_mode_.set_state(opt.tooltip_accessibility_mode);
 
@@ -801,7 +791,6 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 			os_.yres = res.yres;
 		}
 	}
-	os_.inputgrab = inputgrab_.get_state();
 	os_.sdl_cursor = sdl_cursor_.get_state();
 	os_.maxfps = sb_maxfps_.get_value();
 	os_.tooltip_accessibility_mode = tooltip_accessibility_mode_.get_state();
@@ -882,7 +871,6 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.yres = opt_section_.get_int("yres", kDefaultResolutionH);
 	opt.maximized = opt_section_.get_bool("maximized", false);
 	opt.fullscreen = opt_section_.get_bool("fullscreen", false);
-	opt.inputgrab = opt_section_.get_bool("inputgrab", false);
 	opt.maxfps = opt_section_.get_int("maxfps", 25);
 	opt.sdl_cursor = opt_section_.get_bool("sdl_cursor", true);
 	opt.tooltip_accessibility_mode = opt_section_.get_bool("tooltip_accessibility_mode", false);
@@ -931,7 +919,6 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_int("yres", opt.yres);
 	opt_section_.set_bool("maximized", opt.maximized);
 	opt_section_.set_bool("fullscreen", opt.fullscreen);
-	opt_section_.set_bool("inputgrab", opt.inputgrab);
 	opt_section_.set_int("maxfps", opt.maxfps);
 	opt_section_.set_bool("sdl_cursor", opt.sdl_cursor);
 	opt_section_.set_bool("tooltip_accessibility_mode", opt.tooltip_accessibility_mode);
@@ -967,7 +954,6 @@ void OptionsCtrl::save_options() {
 	// Language options
 	opt_section_.set_string("language", opt.language);
 
-	WLApplication::get().set_input_grab(opt.inputgrab);
 	g_mouse_cursor->set_use_sdl(opt_dialog_->get_values().sdl_cursor);
 	i18n::set_locale(opt.language);
 	UI::g_fh->reinitialize_fontset(i18n::get_locale());

@@ -185,7 +185,6 @@ void fill_parameter_vector() {
 		_("y"),
 		/** TRANSLATORS: `y` references a window height placeholder */
 		_("Height `y` of the window in pixel."), false},
-	  {"", "inputgrab", _("[true|false*]"), _("Whether to grab the mouse input."), true},
 	  {"", "sdl_cursor", _("[true*|false]"), _("Whether to use the mouse cursor provided by SDL."),
 		true},
 	  {"", "tooltip_accessibility_mode", _("[true|false*]"), _("Whether to use sticky tooltips."),
