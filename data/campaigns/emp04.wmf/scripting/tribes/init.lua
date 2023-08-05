@@ -79,7 +79,7 @@
 -- * You will also need to add a ``register.lua`` file that lists the names of all
 --   objects that you are adding or replacing.
 -- * You can also add ``.png`` files to your subdirectories.
--- * Adding helptexts is optional, but will units without a helptext will print a warning on the console.
+-- * Adding helptexts is optional, but units without a helptext will print a warning on the console.
 --
 -- See :ref:`defining_tribe_units` for further details on these files, and :ref:`lua_tribes_tribes_helptexts` on the helptext format.
 
