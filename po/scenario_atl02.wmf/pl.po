@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2023 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Aleksandra Kurda <a.kurda@o2.pl>, 2023
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
+"Last-Translator: Aleksandra Kurda <a.kurda@o2.pl>, 2023\n"
 "Language-Team: Polish (https://app.transifex.com/widelands/teams/35159/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +33,7 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:687
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:735
 msgid "Jundlina"
-msgstr ""
+msgstr "Jundina"
 
 #. TRANSLATORS: To be used in placeholders for switching texts according to
 #. current leader
@@ -47,35 +51,40 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:568
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:637
 msgid "Sidolus"
-msgstr ""
+msgstr "Sidolus"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:49
 msgid "Find a place to build a port"
-msgstr ""
+msgstr "Znajdź miejsce do zbudowania portu"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:51
 msgid "Find Portspace"
-msgstr ""
+msgstr "Znajdź przestrzeń portową"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:52
 msgid ""
 "To set foot on this island, we must first find a building space where a port"
 " can be built. Explore the nearby coast line to find such a building plot."
 msgstr ""
+"Aby móc postawić stopę na lądzie, musimy najpierw znaleźć przestrzeń do "
+"budowania, gdzie port może zostać zbudowany. Przeszukaj pobliską linię "
+"brzegową by znaleźć taką przestrzeń."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:53
 msgid ""
 "After the port is built we should cancel the other ship’s expedition, to "
 "unload its wares as well."
 msgstr ""
+"Gdy port jest zbudowany powinniśmy odwołać ekspedycję drugiego statku, aby "
+"również go rozładować."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:58
 msgid "Ensure the supply of construction materials"
-msgstr ""
+msgstr "Zapewnij dostawy materiałów konstrukcyjnych"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:60
 msgid "Establish Basic Production Chain"
-msgstr ""
+msgstr "Ustabilizuj podstawowy łańcuch produkcji"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:61
 msgid ""
@@ -83,14 +92,17 @@ msgid ""
 " might or might not be needed depending on how fast the trees are growing "
 "around us. Find the balance."
 msgstr ""
+"Będziemy potrzebować przynajmniej kamieniołomu, paru drwali oraz tartaku. "
+"Leśniczy może być potrzebny lub nie w zależności od tego, jak szybko rosną "
+"drzewa wokół nas. Znajdź balans."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:66
 msgid "Build tools quickly"
-msgstr ""
+msgstr "Szybko buduj narzędzia"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:68
 msgid "Make New Tools"
-msgstr ""
+msgstr "Stwórz nowe narzędzia"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:69
 msgid ""
@@ -100,14 +112,19 @@ msgid ""
 "prerequisite for success on the island. Don’t forget to build a smelting "
 "works as well."
 msgstr ""
+"Większość naszych narzędzi została utracona, gdy zatonął statek. Nasi "
+"pobratymcy nie będą w stanie wykonywać swoich obowiązków bez odpowiednich "
+"narzędzi. Na szczęście wciąż mamy trochę rudy żelaza i dużo węgla. Zbuduj "
+"narzędziownię, jest to warunek konieczny dla sukcesu na wyspie. Nie zapomnij"
+" również zbudować huty."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:74
 msgid "Search the mountains for resources"
-msgstr ""
+msgstr "Przeszukaj góry pod kątem zasobów"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:76
 msgid "Build Mines"
-msgstr ""
+msgstr "Zbuduj kopalnie"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:77
 msgid ""
@@ -115,14 +132,18 @@ msgid ""
 "be replenished soon. Explore the mountains and build at least one mine of "
 "each type to mine coal, iron and gold."
 msgstr ""
+"Jesteśmy znów w pełni zdolni do tworzenia własnych narzędzi, nasze zasoby "
+"kopalne muszą zostać niedługo uzupełnione. Przeszukaj góry i zbuduj "
+"przynajmniej jedną kopalnię każdego rodzaju by wydobywać węgiel, żelazo oraz"
+" złoto."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:82
 msgid "Explore the surroundings"
-msgstr ""
+msgstr "Przeszukaj swoje otoczenie"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:84
 msgid "Explore Your Surroundings"
-msgstr ""
+msgstr "Przeszukaj swoje otoczenie"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:85
 msgid ""
@@ -130,14 +151,18 @@ msgid ""
 "the others on this island are friends or foes, so we need to tread "
 "carefully. Explore the island by building at least one house for a scout."
 msgstr ""
+"Jesteśmy dosyć pewni, że nie jesteśmy sami na tej wyspie. Nie wiemy, czy "
+"inni ludzie na tej wyspie są naszymi przyjaciółmi lub wrogami, musimy więc "
+"stawiać kroki ostrożnie. Przeszukaj wyspę budując przynajmniej jeden dom dla"
+" zwiadowcy."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:90
 msgid "Expand your territory"
-msgstr ""
+msgstr "Rozszerz swoje terytorium"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:92
 msgid "Expand Territory"
-msgstr ""
+msgstr "Rozszerz terytorium"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:93
 msgid ""
@@ -145,14 +170,18 @@ msgid ""
 "Expand our territory by building military buildings. Build some guardhouses "
 "and at least one tower for its larger view range."
 msgstr ""
+"Z upływającym czasem naszego osiedlenia się tutaj, będziemy potrzebować "
+"więcej miejsca na wszystkie budynki. Rozszerz swoje terytorium stawiając "
+"wojskowe budynki. Wybuduj kilka wartowni i przynajmniej jedną wieżę do "
+"obserwacji większego obszaru."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:98
 msgid "Build a spider farm and a weaving mill"
-msgstr ""
+msgstr "Zbuduj fermę pająków i tkalnię"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:100
 msgid "Spidercloth Production"
-msgstr ""
+msgstr "Produkcja pajęczej tkaniny"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:101
 msgid ""
@@ -161,6 +190,10 @@ msgid ""
 "all buildings that consume spidercloth, not forgetting the construction "
 "sites."
 msgstr ""
+"Potrzebujemy pilnie nieco pajęczej tkaniny, ponieważ nam się kończy. Jest to"
+" niezbędne by oszczędzać każdy kawałek, który wciąż mamy. Zredukuj zużycie "
+"jej we wszystkich budynkach, które wykorzystują pajęczą tkaninę, nie "
+"zapominając o budowach."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:102
 msgid ""
@@ -168,30 +201,35 @@ msgid ""
 "spidercloth to be built. Additionally, we need a spider farm and a weaving "
 "mill."
 msgstr ""
+"Teraz potrzebujemy zbudować farmę pod wszystkimi warunkami, ponieważ "
+"potrzebuje pajęczej tkaniny do budowy. Dodatkowo, potrzebujemy pajęczej "
+"fermy oraz tkalni."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:107
 msgid "Build a trading post"
-msgstr ""
+msgstr "Zbuduj stoisko handlowe"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:109
 msgid "Upgrade Scout’s House To Trading Post"
-msgstr ""
+msgstr "Ulepsz Dom Zwiadowcy do Stoiska Handlowego"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:110
 msgid ""
 "To be able to pay the tributes to Kalitath, and to maintain contact with "
 "Jundlina, we need to enhance our scout’s house to a trading post."
 msgstr ""
+"By móc oddawać hołd Kalitath i utrzymać kontakt z Jundliną, musimy ulepszyć "
+"dom naszego zwiadowcy do punktu handlowego."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:115
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:128
 msgid "Pay all tributes to Kalitath"
-msgstr ""
+msgstr "Oddaj cały hołd Kalitath"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:117
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:130
 msgid "Send Trader To Kalitath"
-msgstr ""
+msgstr "Wyślij kupca do Kalitath"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:118
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:131
@@ -199,6 +237,8 @@ msgid ""
 "We need to send the wares to Kalitath with our trader. He will pick them up "
 "as soon as a batch is ready in his trading post."
 msgstr ""
+"Musimy wysłać towary Kalitath za pomocą naszego kupca. Zbierze je tak szybko"
+" jak partia będzie gotowa w jego punkcie handlowym."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:119
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:132

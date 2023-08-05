@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-27 02:32+0000\n"
+"POT-Creation-Date: 2023-08-03 02:35+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Renaud Bouchard, 2015-2023\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
@@ -131,7 +131,7 @@ msgstr "%1$s, %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: X hours and Y minutes
 #: ../../data/scripting/richtext.lua:705 ../../src/base/i18n.cc:412
-#: ../../src/ui_basic/spinbox.cc:484
+#: ../../src/ui_basic/spinbox.cc:486
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s et %2$s"
@@ -143,7 +143,7 @@ msgstr "“%s”"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:41
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:386
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:380
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:206
 msgid "No AI"
 msgstr "Pas d'IA"
@@ -486,7 +486,7 @@ msgstr "Ajoutez ou enlevez des espace portuaire"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:359
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:712
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:706
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:171
 msgid "Players"
 msgstr "Joueurs"
@@ -659,7 +659,7 @@ msgstr "Êtes vous sûr de vouloir quitter l'éditeur ?"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:480
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:486
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
-#: ../../src/ui_fsmenu/launch_mpg.cc:306 ../../src/ui_fsmenu/main.cc:257
+#: ../../src/ui_fsmenu/launch_mpg.cc:314 ../../src/ui_fsmenu/main.cc:257
 #: ../../src/wlapplication.cc:1650
 msgid "Error"
 msgstr "Erreur"
@@ -1319,7 +1319,7 @@ msgstr "Montagnes :"
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:193
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:500
-#: ../../src/ui_basic/spinbox.cc:502
+#: ../../src/ui_basic/spinbox.cc:504
 #, c-format
 msgid "%i %%"
 msgstr "%i %%"
@@ -1530,8 +1530,8 @@ msgstr "Nombre de joueurs"
 #: ../../src/logic/single_player_game_settings_provider.cc:106
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:65
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:99
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:146
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:214
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:140
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:208
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:63
 #: ../../src/wui/game_diplomacy_menu.cc:82
 #, c-format
@@ -1543,21 +1543,21 @@ msgstr "Joueur %u"
 #: ../../src/ui_fsmenu/addons/packager_box.cc:478
 #: ../../src/ui_fsmenu/campaign_select.cc:48
 #: ../../src/ui_fsmenu/campaigndetails.cc:56
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:233
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:227
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:53
 msgid "Tribe"
 msgstr "Tribu"
 
 #: ../../src/editor/ui_menus/player_menu.cc:203
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:30
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:467
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:461
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:97
 msgctxt "tribe"
 msgid "Random"
 msgstr "Aléatoire"
 
 #: ../../src/editor/ui_menus/player_menu.cc:205
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:469
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:463
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:99
 msgid "The tribe will be selected at random"
 msgstr "La tribu sera sélectionnée aléatoirement"
@@ -1695,7 +1695,7 @@ msgstr "Sélectionnez la nouvelle taille de la carte, puis cliquez sur la carte 
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:306 ../../src/ui_basic/dropdown.cc:358
 #: ../../src/ui_basic/dropdown.cc:425 ../../src/ui_basic/dropdown.cc:433
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:376
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:370
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:197
 msgid "%1%: %2%"
 msgstr "%1% : %2%"
@@ -3686,7 +3686,7 @@ msgid "Increase the value by %s"
 msgstr "Augmenter la valeur par %s"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:471 ../../src/ui_basic/spinbox.cc:488
+#: ../../src/ui_basic/spinbox.cc:473 ../../src/ui_basic/spinbox.cc:490
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -3695,7 +3695,7 @@ msgstr[1] "%d minutes"
 msgstr[2] "%d minutes"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:477 ../../src/ui_basic/spinbox.cc:486
+#: ../../src/ui_basic/spinbox.cc:479 ../../src/ui_basic/spinbox.cc:488
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
@@ -3704,7 +3704,7 @@ msgstr[1] "%d heures"
 msgstr[2] "%d heures"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:493
+#: ../../src/ui_basic/spinbox.cc:495
 #, c-format
 msgid "%d week"
 msgid_plural "%d weeks"
@@ -3713,7 +3713,7 @@ msgstr[1] "%d semaines"
 msgstr[2] "%d semaines"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:496
+#: ../../src/ui_basic/spinbox.cc:498
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -3722,7 +3722,7 @@ msgstr[1] "%d pixels"
 msgstr[2] "%d pixels"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:499
+#: ../../src/ui_basic/spinbox.cc:501
 #, c-format
 msgid "%d field"
 msgid_plural "%d fields"
@@ -5524,100 +5524,100 @@ msgstr "Changer de carte..."
 msgid "Change saved game…"
 msgstr "Changer de sauvegarde..."
 
-#: ../../src/ui_fsmenu/launch_game.cc:195
+#: ../../src/ui_fsmenu/launch_game.cc:196
 msgid "Start game"
 msgstr "Commencer la partie"
 
-#: ../../src/ui_fsmenu/launch_game.cc:270
+#: ../../src/ui_fsmenu/launch_game.cc:281
 msgid "Show fewer options"
 msgstr "Montrer moins d'options"
 
-#: ../../src/ui_fsmenu/launch_game.cc:270
+#: ../../src/ui_fsmenu/launch_game.cc:281
 msgid "Show more options"
 msgstr "Montrer plus d'options"
 
-#: ../../src/ui_fsmenu/launch_game.cc:285
+#: ../../src/ui_fsmenu/launch_game.cc:296
 msgid "The relations between players are set by the scenario"
 msgstr "Les relations entre les joueurs sont définies par le scénario"
 
-#: ../../src/ui_fsmenu/launch_game.cc:287
+#: ../../src/ui_fsmenu/launch_game.cc:298
 msgid "The relations between players are set by the saved game"
 msgstr "Les relations entre les joueurs sont définies par la partie enregistrée"
 
-#: ../../src/ui_fsmenu/launch_game.cc:289
+#: ../../src/ui_fsmenu/launch_game.cc:300
 msgid "The selected win condition does not allow peaceful matches"
 msgstr "La condition de victoire sélectionnée ne permet pas les parties pacifiques"
 
-#: ../../src/ui_fsmenu/launch_game.cc:291
+#: ../../src/ui_fsmenu/launch_game.cc:302
 msgid "Forbid fighting between players"
 msgstr "Interdire les affrontements entre les joueurs"
 
-#: ../../src/ui_fsmenu/launch_game.cc:321
+#: ../../src/ui_fsmenu/launch_game.cc:332
 msgid "All selected starting conditions ignore the map’s starting positions"
 msgstr "Toutes les conditions de départ sélectionnées ignorent les positions de départ de la carte."
 
-#: ../../src/ui_fsmenu/launch_game.cc:327
+#: ../../src/ui_fsmenu/launch_game.cc:338
 msgid "The starting positions are set by the scenario"
 msgstr "Les positions de départ sont définies par le scénario"
 
-#: ../../src/ui_fsmenu/launch_game.cc:329
+#: ../../src/ui_fsmenu/launch_game.cc:340
 msgid "The starting positions are set by the saved game"
 msgstr "Les positions de départ sont définies par la sauvegarde"
 
-#: ../../src/ui_fsmenu/launch_game.cc:332
+#: ../../src/ui_fsmenu/launch_game.cc:343
 msgid ""
 "Allow the players to choose their own starting positions at the beginning of"
 " the game"
 msgstr "Autoriser les joueurs à choisir leurs propres positions de départ au début de la partie "
 
-#: ../../src/ui_fsmenu/launch_game.cc:351
+#: ../../src/ui_fsmenu/launch_game.cc:362
 msgid "Player vision is set by the scenario"
 msgstr "La vision des joueurs est définie par le scénario"
 
-#: ../../src/ui_fsmenu/launch_game.cc:353
+#: ../../src/ui_fsmenu/launch_game.cc:364
 msgid "Player vision is set by the saved game"
 msgstr "La vision des joueurs est définie par la sauvegarde"
 
-#: ../../src/ui_fsmenu/launch_game.cc:355
+#: ../../src/ui_fsmenu/launch_game.cc:366
 msgid "Give all players permanent vision of the entire map"
 msgstr "Donner à tous les joueurs la vision permanent de l'ensemble de la carte"
 
-#: ../../src/ui_fsmenu/launch_game.cc:374
+#: ../../src/ui_fsmenu/launch_game.cc:385
 msgid "Player relations are set by the scenario"
 msgstr "Les relations entre les joueurs sont définies par le scénario"
 
-#: ../../src/ui_fsmenu/launch_game.cc:376
+#: ../../src/ui_fsmenu/launch_game.cc:387
 msgid "Player relations are set by the saved game"
 msgstr "Les relations entre les joueurs sont définies par la sauvagarde"
 
-#: ../../src/ui_fsmenu/launch_game.cc:378
+#: ../../src/ui_fsmenu/launch_game.cc:389
 msgid "Disallow players to change their alliances during the game"
 msgstr "Ne pas permettre aux joueurs de changer leurs alliances pendant le jeu"
 
 #. * TRANSLATORS: This is a map tag
-#: ../../src/ui_fsmenu/launch_game.cc:386
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:512
+#: ../../src/ui_fsmenu/launch_game.cc:397
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:506
 #: ../../src/ui_fsmenu/scenariodetails.cc:47
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:283
 #: ../../src/wui/map_tags.cc:66 ../../src/wui/mapdetails.cc:138
 msgid "Scenario"
 msgstr "Scénario"
 
-#: ../../src/ui_fsmenu/launch_game.cc:387
+#: ../../src/ui_fsmenu/launch_game.cc:398
 msgid "Win condition is set through the scenario"
 msgstr "Condition de victoire déterminée dans le scénario"
 
-#: ../../src/ui_fsmenu/launch_game.cc:393
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:516
+#: ../../src/ui_fsmenu/launch_game.cc:404
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:510
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:287
 msgid "Saved Game"
 msgstr "Partie enregistrée"
 
-#: ../../src/ui_fsmenu/launch_game.cc:395
+#: ../../src/ui_fsmenu/launch_game.cc:406
 msgid "The game is a saved game – the win condition was set before."
 msgstr "Ce jeu est une partie sauvegardée - La condition de victoire a déjà été définie."
 
-#: ../../src/ui_fsmenu/launch_game.cc:468
+#: ../../src/ui_fsmenu/launch_game.cc:479
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
@@ -5636,22 +5636,22 @@ msgstr "Choisissez une carte ou une sauvegarde s'il vous plait."
 msgid "The host has not yet selected a map or saved game."
 msgstr "L'hôte n'a pas encore sélectionné de carte ou de sauvegarde."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:200
+#: ../../src/ui_fsmenu/launch_mpg.cc:208
 msgid "Saved Game is Directory"
 msgstr "La sauvegarde est un dossier"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:201
+#: ../../src/ui_fsmenu/launch_mpg.cc:209
 msgid ""
 "WARNING:\n"
 "The saved game you selected is a directory. This happens if you set the option ‘nozip’ to true or manually unzipped the saved game.\n"
 "Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
 msgstr "ATTENTION :\nLa sauvegarde que vous avez sélectionné est un répertoire. Cela arrive si vous avez activé l'option 'nozip' ou si vous avez manuellement dézippé la sauvegarde.\nWidelands n'est pas capable de transférer la structure d'un répertoire aux clients, veuillez sélectionner une autre sauvegarde ou Zipper le contenu des répertoires."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:220 ../../src/ui_fsmenu/launch_spg.cc:134
+#: ../../src/ui_fsmenu/launch_mpg.cc:228 ../../src/ui_fsmenu/launch_spg.cc:134
 msgid "File not found"
 msgstr "Fichier introuvable"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:221 ../../src/ui_fsmenu/launch_spg.cc:135
+#: ../../src/ui_fsmenu/launch_mpg.cc:229 ../../src/ui_fsmenu/launch_spg.cc:135
 #, c-format
 msgid ""
 "Widelands tried to start a game with a file that could not be found at the given path.\n"
@@ -5659,19 +5659,19 @@ msgid ""
 "If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
 msgstr "Widelands à tenté de démarrer un jeu avec un fichier introuvable dans le chemin donné.\nCe fichier est : %s\nSi cela arrive pendant une partie en réseau: l'hébergeur peut avoir sélectionné un fichier que vous ne possédez pas. Normalement ce type de fichier doit vous être envoyé par l'hébergeur. Peut-être que le transfert de ce fichier n'est pas encore terminé !?!"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:262
+#: ../../src/ui_fsmenu/launch_mpg.cc:270
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
 msgstr "Le fichier sélectionné est introuvable. S'il ne vous est pas transféré automatiquement, veuiller contacter l'hébergeur concernant ce problème."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:308
+#: ../../src/ui_fsmenu/launch_mpg.cc:316
 #, c-format
 msgid "Unable to load the win condition script file ‘%s’."
 msgstr "Incapable de charger le fichier script de condition de victoir ‘%s’."
 
 #. * TRANSLATORS: This is a heading for a help window
-#: ../../src/ui_fsmenu/launch_mpg.cc:435
+#: ../../src/ui_fsmenu/launch_mpg.cc:443
 msgid "Multiplayer Game Setup"
 msgstr "Configuration du jeu multi-joueur"
 
@@ -6255,93 +6255,93 @@ msgstr ""
 msgid "Role"
 msgstr "Rôle"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:114
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:108
 msgid "Divergent Player Name"
 msgstr "Nom de joueur divergent"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:116
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:110
 msgid ""
 "The player name of the selected slot (%1%) does not match your own (%2%). "
 "Are you sure that you want to occupy this slot?"
 msgstr ""
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:152
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:146
 msgid "Spectator"
 msgstr "Spectateur"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:204
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:198
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:54
 msgid "Player Number"
 msgstr "Joueur Numéro"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:222
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:376
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:216
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:370
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:152
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:197
 msgid "Type"
 msgstr "Type"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:255
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:249
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:357
 #: ../../src/wui/game_chat_panel.cc:439 ../../src/wui/game_summary.cc:116
 msgid "Team"
 msgstr "Équipe"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:351
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:352
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:345
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:346
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:178
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:179
 msgid "Random AI"
 msgstr "IA aléatoire"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:357
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:359
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:351
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:353
 msgid "Shared in"
 msgstr "Partagé dans"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:364
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:365
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:358
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:359
 #: ../../src/ui_fsmenu/netsetup_lan.cc:237
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:188
 msgid "Closed"
 msgstr "Fermé"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:369
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:363
 #: ../../src/ui_fsmenu/netsetup_lan.cc:234
 msgid "Open"
 msgstr "Ouvert"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:376
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:370
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:197
 msgid "Human"
 msgstr "Humain"
 
 #. * TRANSLATORS: This is an option in multiplayer setup for sharing
 #. another player's starting position.
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:452
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:446
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:84
 #, c-format
 msgid "Shared in Player %u"
 msgstr "Partagé dans Joueur %u"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:513
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:507
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:284
 msgid "Start type is set via the scenario"
 msgstr "Type  de début déterminé dans le scénario"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:585
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:579
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:378
 msgid "No Team"
 msgstr "Pas d'équipe"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:591
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:585
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:384
 #, c-format
 msgid "Team %d"
 msgstr "Équipe %d"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:702
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:696
 msgid "Clients"
 msgstr "Clients"
 

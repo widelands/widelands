@@ -4651,7 +4651,7 @@ int LuaMapObject::get_serial(lua_State* L) {
 
          local immovable = wl.Game().map:get_field(20,31).immovable
 
-         -- always check if the immovable still exists
+         -- always check if the immovable was found on the field
          if immovable then
             if immovable.descr.type_name == "warehouse"  -- access MapObjectDescription
                immovable:set_wares("log", 5)

@@ -830,7 +830,14 @@ UI::Window& BuildingStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 			m.tab_panel_.activate(fr.unsigned_8());
 			const std::string sel = fr.string();
 			if (!sel.empty()) {
-				m.set_current_building_type(ib.egbase().descriptions().safe_building_index(sel));
+				Widelands::DescriptionIndex idx = ib.egbase().descriptions().safe_building_index(sel);
+				/* Check if the button for the building still exists. There are valid cases where
+				 * it might not, since some buildings are only selectable here under specific
+				 * circumstances and vanish after closing and reopening the window.
+				 */
+				if (m.building_buttons_.at(idx) != nullptr) {
+					m.set_current_building_type(idx);
+				}
 			}
 			m.last_building_index_ = fr.signed_32();
 			return m;
