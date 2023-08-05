@@ -1269,7 +1269,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Stonecutter's Hut
             purpose = pgettext("amazons_building", "Cuts raw pieces of granite out of rocks in the vicinity."),
             -- TRANSLATORS: Note helptext for an Amazon production site: Stonecutter's Hut
-            note = pgettext("amazons_building", "The stonecutter’s hut needs rocks to cut within the work area.")
+            note = pgettext("amazons_building", "The stonecutter’s hut needs rocks to cut within the work area."),
+            -- TRANSLATORS: Performance helptext for an Amazon production site: Stonecutter's Hut
+            performance = pgettext("amazons_building", "The stonecutter cuts one granite in %1$s and pauses %2$s before going back to work again."):bformat(format_seconds(35), format_seconds(10))
          }
       },
       {

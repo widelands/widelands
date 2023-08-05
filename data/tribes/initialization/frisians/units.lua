@@ -1561,7 +1561,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Note helptext for a Frisian production site: Quarry
             note = pgettext("frisians_building", "The quarry needs rocks to cut within the work area."),
             -- TRANSLATORS: Performance helptext for a Frisian production site: Quarry
-            performance = pgettext("frisians_building", "The stonemason pauses %s before going to work again."):bformat(format_seconds(25))
+            performance = pgettext("frisians_building", "The stonemason cuts one granite in %1$s and pauses %2$s before going back to work again."):bformat(format_seconds(18), format_seconds(18))
          }
       },
       {

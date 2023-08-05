@@ -1246,8 +1246,14 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("empire_building", "An enthusiastic stonemason arriving to a new quarry"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Quarry
             purpose = pgettext("empire_building", "Cuts blocks of granite and marble out of rocks in the vicinity."),
-            -- TRANSLATORS: Note helptext for an Empire production site: Quarry
-            note = pgettext("empire_building", "The quarry needs rocks to cut within the work area.")
+            note = {
+               -- TRANSLATORS: Note helptext for an Empire production site: Quarry, part 1
+               pgettext("empire_building", "The quarry needs rocks to cut within the work area."),
+               -- TRANSLATORS: Note helptext for an Empire production site: Quarry, part 2
+               pgettext("empire_building", "The stonemason finds 5 blocks of granite and 2 blocks of marble out of 7 rocks."),
+            },
+            -- TRANSLATORS: Performance helptext for an Empire production site: Quarry
+            performance = pgettext("empire_building", "The stonemason cuts one granite or marble in %1$s and pauses %2$s before going back to work again."):bformat(format_seconds(18), format_seconds(18))
          }
       },
       {

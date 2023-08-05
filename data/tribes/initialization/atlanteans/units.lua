@@ -1480,7 +1480,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Note lore for an Atlantean production site: Quarry
             lore = pgettext("atlanteans_building", "You must not assume Atlanteans will play everything soft, there are hard times we cannot avoid."),
             -- TRANSLATORS: Note lore_autor for an Atlantean production site: Quarry
-            lore_author = pgettext("atlanteans_building", "Priest of Satul asked why stones are needed for buildings")
+            lore_author = pgettext("atlanteans_building", "Priest of Satul asked why stones are needed for buildings"),
+            -- TRANSLATORS: Performance helptext for an Atlantean production site: Quarry
+            performance = pgettext("atlanteans_building", "The stonecutter cuts one granite in %1$s and pauses %2$s before going back to work again."):bformat(format_seconds(19), format_seconds(19))
          }
       },
       {
