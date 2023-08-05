@@ -261,13 +261,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
           _("Compress Widelands data files (maps, replays, and savegames)"),
           "",
           0),
-     write_syncstreams_(&box_saving_,
-                        UI::PanelStyle::kFsMenu,
-                        "syncstreams",
-                        Vector2i::zero(),
-                        _("Write syncstreams in network games to debug desyncs"),
-                        "",
-                        0),
      // New Game options
      show_buildhelp_(&box_newgame_,
                      UI::PanelStyle::kFsMenu,
@@ -401,7 +394,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	box_saving_.add(&sb_rolling_autosave_, UI::Box::Resizing::kFullSize);
 	box_saving_.add(&sb_replay_lifetime_, UI::Box::Resizing::kFullSize);
 	box_saving_.add(&zip_, UI::Box::Resizing::kFullSize);
-	box_saving_.add(&write_syncstreams_, UI::Box::Resizing::kFullSize);
 
 	// New Games
 	box_newgame_.add(&show_buildhelp_, UI::Box::Resizing::kFullSize);
@@ -483,7 +475,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 
 	// Saving options
 	zip_.set_state(opt.zip);
-	write_syncstreams_.set_state(opt.write_syncstreams);
 
 	// Game options
 	auto_roadbuild_mode_.set_state(opt.auto_roadbuild_mode);
@@ -790,7 +781,6 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 	os_.rolling_autosave = sb_rolling_autosave_.get_value();
 	os_.replay_lifetime = sb_replay_lifetime_.get_value();
 	os_.zip = zip_.get_state();
-	os_.write_syncstreams = write_syncstreams_.get_state();
 
 	// Game options
 	os_.auto_roadbuild_mode = auto_roadbuild_mode_.get_state();
@@ -869,7 +859,6 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.rolling_autosave = opt_section_.get_int("rolling_autosave", 5);
 	opt.replay_lifetime = opt_section_.get_int("replay_lifetime", 0);
 	opt.zip = !opt_section_.get_bool("nozip", false);
-	opt.write_syncstreams = opt_section_.get_bool("write_syncstreams", true);
 
 	// Game options
 	opt.auto_roadbuild_mode = opt_section_.get_bool("auto_roadbuild_mode", true);
@@ -916,7 +905,6 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_int("rolling_autosave", opt.rolling_autosave);
 	opt_section_.set_int("replay_lifetime", opt.replay_lifetime);
 	opt_section_.set_bool("nozip", !opt.zip);
-	opt_section_.set_bool("write_syncstreams", opt.write_syncstreams);
 
 	// Game options
 	opt_section_.set_bool("auto_roadbuild_mode", opt.auto_roadbuild_mode);

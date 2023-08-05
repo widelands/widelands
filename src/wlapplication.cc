@@ -1547,6 +1547,11 @@ void WLApplication::handle_commandline_parameters() {
 		set_config_bool("auto_speed", false);
 	}
 
+	if (commandline_.count("write_syncstreams") != 0u) {
+		g_write_syncstreams = true;
+		commandline_.erase("write_syncstreams");
+	}
+
 	if (commandline_.count("version") != 0u) {
 		throw ParameterError(CmdLineVerbosity::None);  // No message on purpose
 	}
