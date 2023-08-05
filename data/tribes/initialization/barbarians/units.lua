@@ -1358,7 +1358,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Barbarian production site: Inn
             purpose = pgettext("building", "Prepares rations for scouts and rations and snacks to feed the miners in the basic and deep mines."),
             -- TRANSLATORS: Performance helptext for a Barbarian production site: Inn
-            performance = pgettext("barbarians_building", "The inn can produce one ration in %1$s and one snack in %2$s on average, if the supply is steady."):bformat(format_minutes_seconds(1, 18), format_minutes_seconds(1, 18))
+            performance = pgettext("barbarians_building", "If this building is fully supplied and all kinds of food are needed by the economy, production of one of each food takes %1$s on average. If only one kind of food is needed by the economy, production of one ration takes %2$s and one snack takes %3$s on average."):bformat(format_minutes_seconds(1, 18), format_seconds(37), format_seconds(41))
          }
       },
       {
@@ -1371,7 +1371,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Barbarian production site: Big Inn
             purpose = pgettext("barbarians_building", "Prepares rations for scouts and rations, snacks and meals to feed all miners."),
             -- TRANSLATORS: Performance helptext for a Barbarian production site: Big Inn
-            performance = pgettext("barbarians_building", "The big inn can produce one ration in %1$s, one snack in %2$s and one meal in %3$s on average, if the supply is steady."):bformat(format_minutes_seconds(2, 2), format_minutes_seconds(2, 2), format_minutes_seconds(2, 2))
+            performance = pgettext("barbarians_building", "If this building is fully supplied and all kinds of food are needed by the economy, production of one of each food takes %1$s on average. If only one kind of food is needed by the economy, production of one ration takes %2$s, one snack takes %3$s and one meal takes %4$s on average."):bformat(format_minutes_seconds(2, 2), format_seconds(37), format_seconds(41), format_seconds(44))
          }
       },
       {
@@ -1401,7 +1401,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for a Barbarian production site: Smelting Works
             lore_author = pgettext("barbarians_building", "Chat’Karuth<br>at the 5ᵗʰ conference of master craftsmen"),
             -- TRANSLATORS: Purpose helptext for a Barbarian production site: Smelting Works
-            purpose = pgettext("building", "Smelts iron ore into iron and gold ore into gold.")
+            purpose = pgettext("building", "Smelts iron ore into iron and gold ore into gold."),
+            -- TRANSLATORS: Performance helptext for a Barbarian production site: Smelting Works
+            performance = pgettext("barbarians_building", "If this building is fully supplied and all metals are needed by the economy, production of one iron takes %1$s and one gold takes %2$s on average. If only one kind of metal is needed by the economy, production of one iron takes %3$s and one gold takes %4$s on average."):bformat(format_minutes_seconds(1, 42), format_minutes_seconds(3, 24), format_minutes_seconds(1, 8), format_minutes_seconds(1, 8))
          }
       },
       {
@@ -1416,7 +1418,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Note helptext for a Barbarian production site: Metal Workshop
             note = pgettext("barbarians_building", "The Barbarian metal workshop is the basic production site in a series of three buildings and creates all the tools that Barbarians need. The others are for weapons."),
             -- TRANSLATORS: Performance helptext for a Barbarian production site: Metal Workshop
-            performance = pgettext("barbarians_building", "If all needed wares are delivered in time, this building can produce each tool in about %s on average."):bformat(format_minutes_seconds(1, 11))
+            performance = pgettext("barbarians_building", "If this building is fully supplied and all tools are needed by the economy, production of one of each tool takes %1$s on average. If only one kind of tool is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(11, 50), format_minutes_seconds(1, 20))
          }
       },
       {
@@ -1432,7 +1434,7 @@ wl.Descriptions():new_tribe {
             note = pgettext("barbarians_building", "The Barbarian war mill is their most advanced production site for weapons. As such you will need to enhance an ax workshop in order to get one."),
             performance = {
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Warmill, part 1
-               pgettext("barbarians_building", "If all needed wares are delivered in time, this building can produce each type of ax in about %s on average."):bformat(format_minutes_seconds(1, 1)),
+               pgettext("barbarians_building", "If this building is fully supplied and all axes are needed by the economy, production of one of each ax takes %1$s on average. If only one kind of ax is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(5, 58), format_minutes_seconds(1, 8)),
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Warmill, part 2
                pgettext("barbarians_building", "All weapons require the same time for making, but the consumption of the same raw materials increases from step to step. The last two need gold.")
             }
@@ -1451,7 +1453,7 @@ wl.Descriptions():new_tribe {
             note = pgettext("barbarians_building", "The Barbarian ax workshop is the intermediate production site in a series of three buildings. It is enhanced from the metal workshop but doesn’t require additional qualification for the worker."),
             performance = {
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Ax Workshop
-               pgettext("barbarians_building", "If all needed wares are delivered in time, this building can produce each type of ax in about %s on average."):bformat(format_minutes_seconds(1, 1)),
+               pgettext("barbarians_building", "If this building is fully supplied and all axes are needed by the economy, production of one of each ax takes %1$s on average. If only one kind of ax is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(3, 4), format_minutes_seconds(1, 8)),
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Ax Workshop
                pgettext("barbarians_building", "All three weapons take the same time for making, but the required raw materials vary.")
             }
@@ -1507,7 +1509,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for a Barbarian production site: Helm Smithy
             lore_author = pgettext("barbarians_building", "Slogan of ‘Harrath’s Handsome Helmets’ in Al’thunran"),
             -- TRANSLATORS: Purpose helptext for a Barbarian production site: Helm Smithy
-            purpose = pgettext("barbarians_building", "Forges helmets that are used for training soldiers’ health in the training camp.")
+            purpose = pgettext("barbarians_building", "Forges helmets that are used for training soldiers’ health in the training camp."),
+            -- TRANSLATORS: Performance helptext for a Barbarian production site: Helm Smithy
+            performance = pgettext("barbarians_building", "If this building is fully supplied and all helmets are needed by the economy, production of one of each helmet takes %1$s on average. If only one kind of helmet is needed by the economy, production of one helmet takes %2$s, one mask takes %3$s and one warhelm takes %4$s on average."):bformat(format_minutes_seconds(4, 3), format_minutes_seconds(1, 11), format_minutes_seconds(1, 21), format_minutes_seconds(1, 31))
          }
       },
 

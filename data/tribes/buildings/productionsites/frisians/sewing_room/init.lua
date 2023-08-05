@@ -74,10 +74,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start sewing fur garment because ...
          descname = _("sewing fur garment"),
          actions = {
-            -- time total: 40 + 3.6
+            -- time total: 20.4 + 20 + 3.6 = 44 sec
             "return=skipped unless economy needs fur_garment or workers need experience",
             "consume=fur:2",
-            "sleep=duration:20s",
+            "sleep=duration:20s400ms",
             "animate=working duration:20s",
             "produce=fur_garment"
          },

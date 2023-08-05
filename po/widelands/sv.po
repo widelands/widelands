@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-27 02:32+0000\n"
+"POT-Creation-Date: 2023-08-03 02:35+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: D M <kamera001dm@gmail.com>, 2021,2023\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
@@ -117,7 +117,7 @@ msgstr "%1$s, %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: X hours and Y minutes
 #: ../../data/scripting/richtext.lua:705 ../../src/base/i18n.cc:412
-#: ../../src/ui_basic/spinbox.cc:484
+#: ../../src/ui_basic/spinbox.cc:486
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s och %2$s"
@@ -129,7 +129,7 @@ msgstr "\"%s\""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:41
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:386
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:380
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:206
 msgid "No AI"
 msgstr "Ingen AI"
@@ -472,7 +472,7 @@ msgstr "Lägg till eller ta bort hamnplatser"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:359
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:712
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:706
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:171
 msgid "Players"
 msgstr "Spelare"
@@ -645,7 +645,7 @@ msgstr "Är du säker på att du vill lämna kartredigeraren?"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:480
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:486
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
-#: ../../src/ui_fsmenu/launch_mpg.cc:306 ../../src/ui_fsmenu/main.cc:257
+#: ../../src/ui_fsmenu/launch_mpg.cc:314 ../../src/ui_fsmenu/main.cc:257
 #: ../../src/wlapplication.cc:1650
 msgid "Error"
 msgstr "Fel"
@@ -1304,7 +1304,7 @@ msgstr "Berg:"
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:193
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:500
-#: ../../src/ui_basic/spinbox.cc:502
+#: ../../src/ui_basic/spinbox.cc:504
 #, c-format
 msgid "%i %%"
 msgstr "%i %%"
@@ -1515,8 +1515,8 @@ msgstr "Antal spelare"
 #: ../../src/logic/single_player_game_settings_provider.cc:106
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:65
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:99
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:146
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:214
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:140
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:208
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:63
 #: ../../src/wui/game_diplomacy_menu.cc:82
 #, c-format
@@ -1528,21 +1528,21 @@ msgstr "Spelare %u"
 #: ../../src/ui_fsmenu/addons/packager_box.cc:478
 #: ../../src/ui_fsmenu/campaign_select.cc:48
 #: ../../src/ui_fsmenu/campaigndetails.cc:56
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:233
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:227
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:53
 msgid "Tribe"
 msgstr "Stam"
 
 #: ../../src/editor/ui_menus/player_menu.cc:203
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:30
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:467
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:461
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:97
 msgctxt "tribe"
 msgid "Random"
 msgstr "Slumpmässig"
 
 #: ../../src/editor/ui_menus/player_menu.cc:205
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:469
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:463
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:99
 msgid "The tribe will be selected at random"
 msgstr "Stammen kommer att väljas slumpmässigt"
@@ -1680,7 +1680,7 @@ msgstr "Välj den nya storleken på kartan, och klicka sedan på kartan för att
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:306 ../../src/ui_basic/dropdown.cc:358
 #: ../../src/ui_basic/dropdown.cc:425 ../../src/ui_basic/dropdown.cc:433
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:376
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:370
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:197
 msgid "%1%: %2%"
 msgstr "%1%: %2%"
@@ -3660,7 +3660,7 @@ msgid "Increase the value by %s"
 msgstr "Öka värdet med %s"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:471 ../../src/ui_basic/spinbox.cc:488
+#: ../../src/ui_basic/spinbox.cc:473 ../../src/ui_basic/spinbox.cc:490
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -3668,7 +3668,7 @@ msgstr[0] "%d minut"
 msgstr[1] "%d minuter"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:477 ../../src/ui_basic/spinbox.cc:486
+#: ../../src/ui_basic/spinbox.cc:479 ../../src/ui_basic/spinbox.cc:488
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
@@ -3676,7 +3676,7 @@ msgstr[0] "%d timme"
 msgstr[1] "%d timmar"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:493
+#: ../../src/ui_basic/spinbox.cc:495
 #, c-format
 msgid "%d week"
 msgid_plural "%d weeks"
@@ -3684,7 +3684,7 @@ msgstr[0] "%d vecka"
 msgstr[1] "%d veckor"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:496
+#: ../../src/ui_basic/spinbox.cc:498
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -3692,7 +3692,7 @@ msgstr[0] "%d pixel"
 msgstr[1] "%d pixlar"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:499
+#: ../../src/ui_basic/spinbox.cc:501
 #, c-format
 msgid "%d field"
 msgid_plural "%d fields"
@@ -5481,100 +5481,100 @@ msgstr "Byt karta..."
 msgid "Change saved game…"
 msgstr "Byt sparat spel..."
 
-#: ../../src/ui_fsmenu/launch_game.cc:195
+#: ../../src/ui_fsmenu/launch_game.cc:196
 msgid "Start game"
 msgstr "Starta spel"
 
-#: ../../src/ui_fsmenu/launch_game.cc:270
+#: ../../src/ui_fsmenu/launch_game.cc:281
 msgid "Show fewer options"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:270
+#: ../../src/ui_fsmenu/launch_game.cc:281
 msgid "Show more options"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:285
+#: ../../src/ui_fsmenu/launch_game.cc:296
 msgid "The relations between players are set by the scenario"
 msgstr "Relationen mellan spelarna avgörs av scenariot"
 
-#: ../../src/ui_fsmenu/launch_game.cc:287
+#: ../../src/ui_fsmenu/launch_game.cc:298
 msgid "The relations between players are set by the saved game"
 msgstr "Relationen mellan spelarna avgörs av det sparade spelet"
 
-#: ../../src/ui_fsmenu/launch_game.cc:289
+#: ../../src/ui_fsmenu/launch_game.cc:300
 msgid "The selected win condition does not allow peaceful matches"
 msgstr "Valda segervillkor kan inte kombineras med fredligt spelläge"
 
-#: ../../src/ui_fsmenu/launch_game.cc:291
+#: ../../src/ui_fsmenu/launch_game.cc:302
 msgid "Forbid fighting between players"
 msgstr "Förbjud strider mellan spelare"
 
-#: ../../src/ui_fsmenu/launch_game.cc:321
+#: ../../src/ui_fsmenu/launch_game.cc:332
 msgid "All selected starting conditions ignore the map’s starting positions"
 msgstr "Alla valda startförutsättningar ignorerar kartans startpositioner"
 
-#: ../../src/ui_fsmenu/launch_game.cc:327
+#: ../../src/ui_fsmenu/launch_game.cc:338
 msgid "The starting positions are set by the scenario"
 msgstr "Startpositionerna bestäms av scenariot"
 
-#: ../../src/ui_fsmenu/launch_game.cc:329
+#: ../../src/ui_fsmenu/launch_game.cc:340
 msgid "The starting positions are set by the saved game"
 msgstr "Startpositionerna bestäms av det sparade spelet"
 
-#: ../../src/ui_fsmenu/launch_game.cc:332
+#: ../../src/ui_fsmenu/launch_game.cc:343
 msgid ""
 "Allow the players to choose their own starting positions at the beginning of"
 " the game"
 msgstr "Tillåt spelarna att välja sina egna startpositioner vid spelets början"
 
-#: ../../src/ui_fsmenu/launch_game.cc:351
+#: ../../src/ui_fsmenu/launch_game.cc:362
 msgid "Player vision is set by the scenario"
 msgstr "Spelarens sikt ställs in av scenariot"
 
-#: ../../src/ui_fsmenu/launch_game.cc:353
+#: ../../src/ui_fsmenu/launch_game.cc:364
 msgid "Player vision is set by the saved game"
 msgstr "Spelarens sikt ställs in av det sparade spelet."
 
-#: ../../src/ui_fsmenu/launch_game.cc:355
+#: ../../src/ui_fsmenu/launch_game.cc:366
 msgid "Give all players permanent vision of the entire map"
 msgstr "Ge alla spelare ständig överblick av hela kartan"
 
-#: ../../src/ui_fsmenu/launch_game.cc:374
+#: ../../src/ui_fsmenu/launch_game.cc:385
 msgid "Player relations are set by the scenario"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:376
+#: ../../src/ui_fsmenu/launch_game.cc:387
 msgid "Player relations are set by the saved game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:378
+#: ../../src/ui_fsmenu/launch_game.cc:389
 msgid "Disallow players to change their alliances during the game"
 msgstr ""
 
 #. * TRANSLATORS: This is a map tag
-#: ../../src/ui_fsmenu/launch_game.cc:386
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:512
+#: ../../src/ui_fsmenu/launch_game.cc:397
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:506
 #: ../../src/ui_fsmenu/scenariodetails.cc:47
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:283
 #: ../../src/wui/map_tags.cc:66 ../../src/wui/mapdetails.cc:138
 msgid "Scenario"
 msgstr "Scenario"
 
-#: ../../src/ui_fsmenu/launch_game.cc:387
+#: ../../src/ui_fsmenu/launch_game.cc:398
 msgid "Win condition is set through the scenario"
 msgstr "Vinstvillkor väljs genom scenariot"
 
-#: ../../src/ui_fsmenu/launch_game.cc:393
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:516
+#: ../../src/ui_fsmenu/launch_game.cc:404
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:510
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:287
 msgid "Saved Game"
 msgstr "Sparat spel"
 
-#: ../../src/ui_fsmenu/launch_game.cc:395
+#: ../../src/ui_fsmenu/launch_game.cc:406
 msgid "The game is a saved game – the win condition was set before."
 msgstr "Spelet är ett sparat spel - vinstvillkoret valdes förut."
 
-#: ../../src/ui_fsmenu/launch_game.cc:468
+#: ../../src/ui_fsmenu/launch_game.cc:479
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
@@ -5593,22 +5593,22 @@ msgstr "Var vänlig och välj en karta eller ett sparat spel."
 msgid "The host has not yet selected a map or saved game."
 msgstr "Värden har ännu inte valt en karta eller ett sparat spel."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:200
+#: ../../src/ui_fsmenu/launch_mpg.cc:208
 msgid "Saved Game is Directory"
 msgstr "Sparat spel är en katalog"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:201
+#: ../../src/ui_fsmenu/launch_mpg.cc:209
 msgid ""
 "WARNING:\n"
 "The saved game you selected is a directory. This happens if you set the option ‘nozip’ to true or manually unzipped the saved game.\n"
 "Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
 msgstr "VARNING:\nDet markerade sparade spelet är en katalog. Det här händer om du anger väljaren \"nozip\" till sant eller manuellt packade upp det sparade spelet.\nWidelands kan inte överföra katalogstrukturer till klienterna; välj ett annat sparat spel eller zippa kataloginnehållet."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:220 ../../src/ui_fsmenu/launch_spg.cc:134
+#: ../../src/ui_fsmenu/launch_mpg.cc:228 ../../src/ui_fsmenu/launch_spg.cc:134
 msgid "File not found"
 msgstr "Fil ej funnen"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:221 ../../src/ui_fsmenu/launch_spg.cc:135
+#: ../../src/ui_fsmenu/launch_mpg.cc:229 ../../src/ui_fsmenu/launch_spg.cc:135
 #, c-format
 msgid ""
 "Widelands tried to start a game with a file that could not be found at the given path.\n"
@@ -5616,19 +5616,19 @@ msgid ""
 "If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
 msgstr "Widelands försökte starta ett spel med en fil som inte kunde hittas vid angiven sökväg.\nFilen var: %s\nOm detta händer i ett nätverksspel kan värden ha valt en fil som du inte äger. Normalt ska en sådan fil skickas från värden till dig men kanske har överföringen fortfarande inte slutförts?"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:262
+#: ../../src/ui_fsmenu/launch_mpg.cc:270
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
 msgstr "Vald fil kan inte hittas. Om den inte automatiskt överförs till dig, var vänlig och skriv till värden om problemet."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:308
+#: ../../src/ui_fsmenu/launch_mpg.cc:316
 #, c-format
 msgid "Unable to load the win condition script file ‘%s’."
 msgstr "Kunde inte ladda segervillkorskriptet \"%s\"."
 
 #. * TRANSLATORS: This is a heading for a help window
-#: ../../src/ui_fsmenu/launch_mpg.cc:435
+#: ../../src/ui_fsmenu/launch_mpg.cc:443
 msgid "Multiplayer Game Setup"
 msgstr "Inställningar för flera spelare"
 
@@ -6212,93 +6212,93 @@ msgstr "Hjälp oss gärna att förbättra upptäckten av inverterad horisontell 
 msgid "Role"
 msgstr "Roll"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:114
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:108
 msgid "Divergent Player Name"
 msgstr "Avvikande spelarnamn"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:116
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:110
 msgid ""
 "The player name of the selected slot (%1%) does not match your own (%2%). "
 "Are you sure that you want to occupy this slot?"
 msgstr "Spelarnamnet på vald plats (%1%) stämmer inte överens med ditt eget namn (%2%). Är du säker på att du vill uppta denna plats."
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:152
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:146
 msgid "Spectator"
 msgstr "Åskådare"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:204
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:198
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:54
 msgid "Player Number"
 msgstr "Spelarnummer"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:222
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:376
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:216
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:370
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:152
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:197
 msgid "Type"
 msgstr "Typ"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:255
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:249
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:357
 #: ../../src/wui/game_chat_panel.cc:439 ../../src/wui/game_summary.cc:116
 msgid "Team"
 msgstr "Lag"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:351
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:352
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:345
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:346
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:178
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:179
 msgid "Random AI"
 msgstr "Slumpmässig AI"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:357
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:359
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:351
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:353
 msgid "Shared in"
 msgstr "Delad i"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:364
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:365
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:358
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:359
 #: ../../src/ui_fsmenu/netsetup_lan.cc:237
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:188
 msgid "Closed"
 msgstr "Stängd"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:369
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:363
 #: ../../src/ui_fsmenu/netsetup_lan.cc:234
 msgid "Open"
 msgstr "Öppen"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:376
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:370
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:197
 msgid "Human"
 msgstr "Mänsklig"
 
 #. * TRANSLATORS: This is an option in multiplayer setup for sharing
 #. another player's starting position.
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:452
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:446
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:84
 #, c-format
 msgid "Shared in Player %u"
 msgstr "Dela med spelare %u"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:513
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:507
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:284
 msgid "Start type is set via the scenario"
 msgstr "Starttyp sätts av scenariot"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:585
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:579
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:378
 msgid "No Team"
 msgstr "Inget lag"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:591
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:585
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:384
 #, c-format
 msgid "Team %d"
 msgstr "Lag %d"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:702
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:696
 msgid "Clients"
 msgstr "Klienter"
 
