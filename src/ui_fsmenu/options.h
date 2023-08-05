@@ -49,12 +49,12 @@ public:
 		bool maximized;
 		bool fullscreen;
 		bool sdl_cursor;
+		bool tooltip_accessibility_mode;
 
 		// Windows options
 		bool dock_windows_to_edges;
 		int32_t panel_snap_distance;
 		int32_t border_snap_distance;
-		bool animate_map_panning;
 
 		// Saving options
 		int32_t autosave;          // autosave interval in minutes
@@ -71,7 +71,7 @@ public:
 		bool numpad_diagonalscrolling;
 		bool edge_scrolling;
 		bool invert_movement;
-		bool tooltip_accessibility_mode;
+		bool animate_map_panning;
 		int32_t display_flags;
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 		bool training_wheels;
@@ -158,7 +158,6 @@ private:
 	UI::MultilineTextarea translation_info_;
 
 	UI::Checkbox dock_windows_to_edges_;
-	UI::Checkbox animate_map_panning_;
 	UI::SpinBox sb_dis_panel_;
 	UI::SpinBox sb_dis_border_;
 
@@ -190,6 +189,7 @@ private:
 	UI::Checkbox numpad_diagonalscrolling_;
 	UI::Checkbox edge_scrolling_;
 	UI::Checkbox invert_movement_;
+	UI::Checkbox animate_map_panning_;
 
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	UI::Box training_wheels_box_;

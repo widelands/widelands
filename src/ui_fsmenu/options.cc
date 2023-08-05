@@ -161,7 +161,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
      translation_info_(
         &box_interface_hbox_, "translation_info", 0, 0, 100, 20, UI::PanelStyle::kFsMenu),
 
-     // Windows options
+     // Window options
      dock_windows_to_edges_(&box_interface_,
                             UI::PanelStyle::kFsMenu,
                             "dock_to_edges",
@@ -169,14 +169,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                             _("Dock windows to edges"),
                             "",
                             0),
-     animate_map_panning_(&box_interface_,
-                          UI::PanelStyle::kFsMenu,
-                          "animate_map_panning",
-                          Vector2i::zero(),
-                          _("Animate automatic map movements"),
-                          "",
-                          0),
-
      sb_dis_panel_(&box_interface_,
                    "panel_snap_distance",
                    0,
@@ -341,6 +333,14 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                       "invert_movement",
                       Vector2i::zero(),
                       _("Invert click-and-drag map movement direction")),
+     animate_map_panning_(&box_ingame_,
+                          UI::PanelStyle::kFsMenu,
+                          "animate_map_panning",
+                          Vector2i::zero(),
+                          _("Animate automatic map movements"),
+                          "",
+                          0),
+
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
      training_wheels_box_(&box_ingame_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      training_wheels_(&training_wheels_box_,
@@ -389,7 +389,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	box_interface_.add(&tooltip_accessibility_mode_, UI::Box::Resizing::kFullSize);
 
 	box_interface_.add(&dock_windows_to_edges_, UI::Box::Resizing::kFullSize);
-	box_interface_.add(&animate_map_panning_, UI::Box::Resizing::kFullSize);
 	box_interface_.add(&sb_dis_panel_);
 	box_interface_.add(&sb_dis_border_);
 	box_interface_.add(&configure_keyboard_);
@@ -420,8 +419,9 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	box_ingame_.add(&numpad_diagonalscrolling_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&edge_scrolling_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&invert_movement_, UI::Box::Resizing::kFullSize);
-	box_ingame_.add_space(kPadding);
+	box_ingame_.add(&animate_map_panning_, UI::Box::Resizing::kFullSize);
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+	box_ingame_.add_space(kPadding);
 	box_ingame_.add(&training_wheels_box_, UI::Box::Resizing::kFullSize);
 	training_wheels_box_.add(&training_wheels_, UI::Box::Resizing::kFullSize);
 	training_wheels_box_.add_inf_space();
@@ -478,9 +478,8 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	sdl_cursor_.set_state(opt.sdl_cursor);
 	tooltip_accessibility_mode_.set_state(opt.tooltip_accessibility_mode);
 
-	// Windows options
+	// Window options
 	dock_windows_to_edges_.set_state(opt.dock_windows_to_edges);
-	animate_map_panning_.set_state(opt.animate_map_panning);
 
 	// Saving options
 	zip_.set_state(opt.zip);
@@ -494,6 +493,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	numpad_diagonalscrolling_.set_state(opt.numpad_diagonalscrolling);
 	edge_scrolling_.set_state(opt.edge_scrolling);
 	invert_movement_.set_state(opt.invert_movement);
+	animate_map_panning_.set_state(opt.animate_map_panning);
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	training_wheels_.set_state(opt.training_wheels);
 #endif
@@ -780,9 +780,8 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 	os_.sdl_cursor = sdl_cursor_.get_state();
 	os_.tooltip_accessibility_mode = tooltip_accessibility_mode_.get_state();
 
-	// Windows options
+	// Window options
 	os_.dock_windows_to_edges = dock_windows_to_edges_.get_state();
-	os_.animate_map_panning = animate_map_panning_.get_state();
 	os_.panel_snap_distance = sb_dis_panel_.get_value();
 	os_.border_snap_distance = sb_dis_border_.get_value();
 
@@ -801,6 +800,7 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 	os_.numpad_diagonalscrolling = numpad_diagonalscrolling_.get_state();
 	os_.edge_scrolling = edge_scrolling_.get_state();
 	os_.invert_movement = invert_movement_.get_state();
+	os_.animate_map_panning = animate_map_panning_.get_state();
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	os_.training_wheels = training_wheels_.get_state();
 #endif
@@ -859,9 +859,8 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.sdl_cursor = opt_section_.get_bool("sdl_cursor", true);
 	opt.tooltip_accessibility_mode = opt_section_.get_bool("tooltip_accessibility_mode", false);
 
-	// Windows options
+	// Window options
 	opt.dock_windows_to_edges = opt_section_.get_bool("dock_windows_to_edges", false);
-	opt.animate_map_panning = opt_section_.get_bool("animate_map_panning", true);
 	opt.panel_snap_distance = opt_section_.get_int("panel_snap_distance", 0);
 	opt.border_snap_distance = opt_section_.get_int("border_snap_distance", 0);
 
@@ -880,6 +879,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.numpad_diagonalscrolling = opt_section_.get_bool("numpad_diagonalscrolling", false);
 	opt.edge_scrolling = opt_section_.get_bool("edge_scrolling", false);
 	opt.invert_movement = opt_section_.get_bool("invert_movement", false);
+	opt.animate_map_panning = opt_section_.get_bool("animate_map_panning", true);
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	opt.training_wheels = opt_section_.get_bool("training_wheels", true);
 #endif
@@ -906,9 +906,8 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_bool("sdl_cursor", opt.sdl_cursor);
 	opt_section_.set_bool("tooltip_accessibility_mode", opt.tooltip_accessibility_mode);
 
-	// Windows options
+	// Window options
 	opt_section_.set_bool("dock_windows_to_edges", opt.dock_windows_to_edges);
-	opt_section_.set_bool("animate_map_panning", opt.animate_map_panning);
 	opt_section_.set_int("panel_snap_distance", opt.panel_snap_distance);
 	opt_section_.set_int("border_snap_distance", opt.border_snap_distance);
 
@@ -927,6 +926,7 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_bool("numpad_diagonalscrolling", opt.numpad_diagonalscrolling);
 	opt_section_.set_bool("edge_scrolling", opt.edge_scrolling);
 	opt_section_.set_bool("invert_movement", opt.invert_movement);
+	opt_section_.set_bool("animate_map_panning", opt.animate_map_panning);
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	opt_section_.set_bool("training_wheels", opt.training_wheels);
 #endif
