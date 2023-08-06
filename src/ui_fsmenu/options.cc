@@ -18,6 +18,7 @@
 
 #include "ui_fsmenu/options.h"
 
+#include <algorithm>
 #include <memory>
 
 #include "base/i18n.h"
@@ -160,6 +161,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                                  _("Accessibility mode for tooltips")),
      translation_info_(
         &box_interface_hbox_, "translation_info", 0, 0, 100, 20, UI::PanelStyle::kFsMenu),
+     translation_padding_(&box_interface_vbox_, UI::PanelStyle::kFsMenu, "padding", 0, 0, 0, 0),
 
      // Window options
      dock_windows_to_edges_(&box_interface_,
@@ -374,16 +376,23 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	// Interface
 	box_interface_vbox_.add(&language_dropdown_, UI::Box::Resizing::kFullSize);
 	box_interface_vbox_.add(&resolution_dropdown_, UI::Box::Resizing::kFullSize);
+	// TODO(tothxa): Replace with infinite space if box layouting quirks get fixed
+	box_interface_vbox_.add(&translation_padding_, UI::Box::Resizing::kFullSize);
+	// box_interface_vbox_.add_inf_space();
+
 	box_interface_hbox_.add(&box_interface_vbox_, UI::Box::Resizing::kExpandBoth);
 	box_interface_hbox_.add(&translation_info_, UI::Box::Resizing::kExpandBoth);
 
 	box_interface_.add(&box_interface_hbox_, UI::Box::Resizing::kFullSize);
+
 	box_interface_.add(&sdl_cursor_, UI::Box::Resizing::kFullSize);
 	box_interface_.add(&tooltip_accessibility_mode_, UI::Box::Resizing::kFullSize);
 
 	box_interface_.add(&dock_windows_to_edges_, UI::Box::Resizing::kFullSize);
 	box_interface_.add(&sb_dis_panel_);
 	box_interface_.add(&sb_dis_border_);
+
+	box_interface_.add_space(kPadding);
 	box_interface_.add(&configure_keyboard_);
 
 	// Sound
@@ -567,9 +576,27 @@ void Options::layout() {
 		// Interface
 		language_dropdown_.set_height(tabs_.get_h() - language_dropdown_.get_y() - buth -
 		                              3 * kPadding);
-		translation_info_.set_size(
-		   language_dropdown_.get_w(),
-		   language_dropdown_.get_h() + resolution_dropdown_.get_h() + kPadding);
+
+		const int min_h = language_dropdown_.get_h() + resolution_dropdown_.get_h() + 2 * kPadding;
+		const int half_w = (tab_panel_width - 3 * kPadding) / 2;
+
+		// Make initial value big enough to avoid needing a scrollbar
+		int translation_h = 3 * min_h;
+
+		// Find out the required height
+		translation_info_.set_desired_size(half_w, translation_h);
+		translation_info_.set_size(half_w, translation_h);
+		int tmp_w = 0;
+		translation_info_.get_text_size(&tmp_w, &translation_h);
+
+		// Now set the final height
+		translation_h = std::max(translation_h, min_h);
+		translation_info_.set_desired_size(half_w, translation_h);
+		translation_info_.set_size(half_w, translation_h);
+		// TODO(tothxa): Remove if box layouting quirks get fixed
+		const int translation_pad_h = translation_h - min_h;
+		translation_padding_.set_desired_size(half_w, translation_pad_h);
+		translation_padding_.set_size(half_w, translation_pad_h);
 
 		sb_dis_panel_.set_unit_width(unit_w);
 		sb_dis_panel_.set_desired_size(tab_panel_width, sb_dis_panel_.get_h());
@@ -719,9 +746,10 @@ void Options::update_language_stats() {
 		          format(_("If you wish to help us translate, please visit %s"),
 		                 "<font underline=1>widelands.org/wiki/TranslatingWidelands</font>");
 	}
-	// Make font a bit smaller so the link will fit at 800x600 resolution.
+
 	translation_info_.set_text(
 	   as_richtext_paragraph(message, UI::FontStyle::kFsMenuTranslationInfo));
+	layout();
 }
 
 void Options::clicked_ok() {

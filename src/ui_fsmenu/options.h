@@ -155,6 +155,9 @@ private:
 	UI::Checkbox sdl_cursor_;
 	UI::Checkbox tooltip_accessibility_mode_;
 	UI::MultilineTextarea translation_info_;
+	// Empty panel for layouting
+	// TODO(tothxa): Replace with infinite space if box layouting quirks get fixed
+	UI::Panel translation_padding_;
 
 	UI::Checkbox dock_windows_to_edges_;
 	UI::SpinBox sb_dis_panel_;
