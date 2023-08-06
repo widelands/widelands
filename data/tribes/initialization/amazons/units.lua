@@ -1284,7 +1284,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Woodcutter's Hut
             purpose = pgettext("amazons_building", "Fells trees in the surrounding area and processes them into logs."),
             -- TRANSLATORS: Note helptext for an Amazon production site: Woodcutter's Hut
-            note = pgettext("amazons_building", "The woodcutter’s hut needs trees to fell within the work area.")
+            note = pgettext("amazons_building", "The woodcutter’s hut needs trees to fell within the work area."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Woodcutter's Hut, part 1
+               pgettext("amazons_building", "The woodcutter needs %1$s to fell a tree (master woodcutter only %2$s), not counting the time he needs to reach the destination and go home again."):bformat(format_seconds(32), format_seconds(27)),
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Woodcutter's Hut, part 2
+               pgettext("amazons_building", "Afterwards he rests in the hut for %s."):bformat(format_seconds(10))
+            }
          }
       },
       {

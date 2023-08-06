@@ -1499,7 +1499,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Note lore for an Atlantean production site: Woodcutter's House
             lore = pgettext("atlanteans_building", "We want to fell trees in a clean and dignified way, therefore we use saws. An ax is a tool used by other tribes only."),
             -- TRANSLATORS: Note lore_autor for an Atlantean production site: Woodcutter's House
-            lore_author = pgettext("atlanteans_building", "Atlantean woodcutter asked why saws are used to cut trees")
+            lore_author = pgettext("atlanteans_building", "Atlantean woodcutter asked why saws are used to cut trees"),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Woodcutter's House, part 1
+               pgettext("atlanteans_building", "The woodcutter needs %s to fell a tree, not counting the time he needs to reach the destination and go home again."):bformat(format_seconds(22)),
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Woodcutter's House, part 2
+               pgettext("atlanteans_building", "Afterwards he rests in the house for %s."):bformat(format_seconds(20))
+            }
          }
       },
       {

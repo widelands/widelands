@@ -1578,7 +1578,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Woodcutter's House
             purpose = pgettext("building", "Fells trees in the surrounding area and processes them into logs."),
             -- TRANSLATORS: Note helptext for a Frisian production site: Woodcutter's House
-            note = pgettext("frisians_building", "The woodcutter’s house needs trees to fell within the work area.")
+            note = pgettext("frisians_building", "The woodcutter’s house needs trees to fell within the work area."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Woodcutter's House, part 1
+               pgettext("frisians_building", "The woodcutter needs %s to fell a tree, not counting the time he needs to reach the destination and go home again."):bformat(format_seconds(22)),
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Woodcutter's House, part 2
+               pgettext("frisians_building", "Afterwards he rests in the house for %s."):bformat(format_seconds(20))
+            }
          }
       },
       {

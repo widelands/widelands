@@ -11,6 +11,7 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       harvest_ironwood = {
+         -- time: 25 + 2 = 27 sec
          "findobject=attrib:tree_ironwood radius:10",
          "walk=object",
          "playsound=sound/woodcutting/woodcutting priority:100% allow_multiple",
@@ -22,6 +23,7 @@ wl.Descriptions():new_worker_type {
          "return"
       },
       harvest_rubber = {
+         -- time: 25 + 2 = 27 sec
          "findobject=attrib:tree_rubber radius:10",
          "walk=object",
          "playsound=sound/woodcutting/woodcutting priority:100% allow_multiple",
@@ -33,6 +35,7 @@ wl.Descriptions():new_worker_type {
          "return"
       },
       harvest_balsa = {
+         -- time: 25 + 2 = 27 sec
          "findobject=attrib:tree_balsa radius:10",
          "walk=object",
          "playsound=sound/woodcutting/woodcutting priority:100% allow_multiple",
@@ -44,6 +47,7 @@ wl.Descriptions():new_worker_type {
          "return"
       },
       harvest = {
+         -- time: 25 + 2 = 27 sec
          "findobject=attrib:normal_tree radius:10",
          "walk=object",
          "playsound=sound/woodcutting/woodcutting priority:100% allow_multiple",

@@ -19,6 +19,7 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       harvest = {
+         -- time: 30 + 2 = 32 sec
          "findobject=attrib:normal_tree radius:10",
          "walk=object",
          "playsound=sound/woodcutting/woodcutting priority:100% allow_multiple",

@@ -1278,7 +1278,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Empire production site: Lumberjack's House
             purpose = pgettext("building", "Fells trees in the surrounding area and processes them into logs."),
             -- TRANSLATORS: Note helptext for an Empire production site: Lumberjack's House
-            note = pgettext("empire_building", "The lumberjack’s house needs trees to fell within the work area.")
+            note = pgettext("empire_building", "The lumberjack’s house needs trees to fell within the work area."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire production site: Lumberjack's House
+               pgettext("empire_building", "The lumberjack needs %s to fell a tree, not counting the time he needs to reach the destination and go home again."):bformat(format_seconds(22)),
+               -- TRANSLATORS: Performance helptext for an Empire production site: Lumberjack's House
+               pgettext("empire_building", "Afterwards he rests in the house for %s."):bformat(format_seconds(20))
+            }
          }
       },
       {
