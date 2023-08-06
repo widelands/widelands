@@ -19,6 +19,7 @@
 
 #include "base/i18n.h"
 #include "graphic/font_handler.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/checkbox.h"
@@ -27,15 +28,16 @@
 
 namespace {
 
+constexpr int kPadding = 4;
+
 /**
  * UI elements to set sound properties for 1 type of sounds.
  */
 class SoundControl : public UI::Box {
 private:
 	static constexpr int kSliderWidth = 200;
-	static constexpr int kLabelWidth = 250;
 	static constexpr int kCursorWidth = 28;
-	static constexpr int kSpacing = 16;
+	static constexpr int kSliderSpacing = 16;
 
 public:
 	/**
@@ -47,6 +49,7 @@ public:
 	 */
 	SoundControl(UI::Box* parent,
 	             UI::SliderStyle style,
+	             int checkbox_width,
 	             const std::string& name,
 	             const std::string& title,
 	             SoundType type,
@@ -62,7 +65,7 @@ public:
 	             0,
 	             0,
 	             kSliderWidth,
-	             kSpacing,
+	             kSliderSpacing,
 	             0,
 	             g_sh->get_max_volume(),
 	             g_sh->get_volume(type),
@@ -70,10 +73,10 @@ public:
 	             /** TRANSLATORS: Tooltip for volume slider in sound options */
 	             _("Changes the volume. Click to hear a sample."),
 	             kCursorWidth),
-	     enable_(this, panel_style_, "enable", Vector2i::zero(), title, "", kLabelWidth),
+	     enable_(this, panel_style_, "enable", Vector2i::zero(), title, "", checkbox_width),
 	     type_(type),
 	     fx_(representative_fx) {
-		set_inner_spacing(kSpacing);
+		set_inner_spacing(kPadding);
 		if (UI::g_fh->fontset()->is_rtl()) {
 			add(&volume_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 			add(&enable_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -152,23 +155,45 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
 
 	set_inner_spacing(kSpacing);
 
-	add(new SoundControl(
-	   this, style, "music", pgettext("sound_options", "Music"), SoundType::kMusic));
+	// TODO(tothxa): This shouldn't be duplicated, but de-duplicating seems harder than it's worth.
+	const std::vector<std::string> labels = {
+		pgettext("sound_options", "Music"),
+		pgettext("sound_options", "Chat Messages"),
+		pgettext("sound_options", "Game Messages"),
+		pgettext("sound_options", "User Interface"),
+		pgettext("sound_options", "Ambient Sounds")
+	};
 
-	add(new SoundControl(this, style, "chat", pgettext("sound_options", "Chat Messages"),
+	const UI::FontStyleInfo& font_style = g_style_manager->font_style(
+	   style == UI::SliderStyle::kFsMenu ? UI::FontStyle::kFsMenuLabel : UI::FontStyle::kWuiLabel);
+
+	int max_w = 0;
+	for (const std::string& label : labels) {
+		const int w = text_width(label, font_style);
+		if (w > max_w) {
+			max_w = w;
+		}
+	}
+	max_w += kStateboxSize + kPadding;
+
+	add(new SoundControl(
+	   this, style, max_w, "music", pgettext("sound_options", "Music"), SoundType::kMusic));
+
+	add(new SoundControl(this, style, max_w, "chat", pgettext("sound_options", "Chat Messages"),
 	                     SoundType::kChat,
 	                     SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")));
 
-	add(new SoundControl(this, style, "messages", pgettext("sound_options", "Game Messages"),
+	add(new SoundControl(this, style, max_w, "messages", pgettext("sound_options", "Game Messages"),
 	                     SoundType::kMessage,
 	                     SoundHandler::register_fx(SoundType::kMessage, "sound/message")));
 
 	add(new SoundControl(
-	   this, style, "ui", pgettext("sound_options", "User Interface"), SoundType::kUI));
+	   this, style, max_w, "ui", pgettext("sound_options", "User Interface"), SoundType::kUI));
 
 	add(new SoundControl(
-	   this, style, "ambient", pgettext("sound_options", "Ambient Sounds"), SoundType::kAmbient,
+	   this, style, max_w, "ambient", pgettext("sound_options", "Ambient Sounds"), SoundType::kAmbient,
 	   SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")));
+
 	add(&custom_songset_);
 	custom_songset_.set_state(g_sh->use_custom_songset());
 	custom_songset_.changedto.connect([](bool state) { g_sh->use_custom_songset(state); });
