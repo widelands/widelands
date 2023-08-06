@@ -26,7 +26,6 @@
 #include "base/macros.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text_layout.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/ship.h"
@@ -455,10 +454,8 @@ private:
 
 	InteractiveBase& ibase_;
 	Widelands::MapObject& building_or_ship_;
-	const UI::FontStyle font_style_{UI::FontStyle::kWuiLabel};
 	SoldierPanel soldierpanel_;
 	UI::Radiogroup soldier_preference_;
-	UI::Textarea infotext_;
 
 	UI::Panel* soldier_capacity_control_;
 };
@@ -471,8 +468,7 @@ SoldierList::SoldierList(UI::Panel& parent,
      ibase_(ib),
      building_or_ship_(building_or_ship),
 
-     soldierpanel_(*this, ib.egbase(), building_or_ship),
-     infotext_(this, UI::PanelStyle::kWui, "infotext", UI::FontStyle::kWuiLabel) {
+     soldierpanel_(*this, ib.egbase(), building_or_ship) {
 	upcast(Widelands::MilitarySite, ms, &building_or_ship);
 	upcast(Widelands::Warehouse, wh, &building_or_ship);
 	upcast(Widelands::Ship, ship, &building_or_ship);
@@ -480,28 +476,8 @@ SoldierList::SoldierList(UI::Panel& parent,
 	unset_infotext();
 	add(&soldierpanel_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
-	add_space(2);
-
-	add(&infotext_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-
 	soldierpanel_.set_mouseover([this](const Widelands::Soldier* s) { mouseover(s); });
 	soldierpanel_.set_click([this](const Widelands::Soldier* s) { eject(s); });
-
-	// We don't want translators to translate this twice, so it's a bit involved.
-	int w = UI::g_fh
-	           ->render(as_richtext_paragraph(
-	              format("%s "  // We need some extra space to fix bug 724169
-	                     ,
-	                     format(
-	                        /** TRANSLATORS: Health, Attack, Defense, Evade */
-	                        _("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"), 8, 8, 8,
-	                        8, 8, 8, 8, 8)),
-	              font_style_))
-	           ->width();
-	uint32_t maxtextwidth = std::max(
-	   w, UI::g_fh->render(as_richtext_paragraph(_("Click soldier to send away"), font_style_))
-	         ->width());
-	set_min_desired_breadth(maxtextwidth + 4);
 
 	UI::Box* buttons =
 	   new UI::Box(this, UI::PanelStyle::kWui, "buttons_box", 0, 0, UI::Box::Horizontal);
@@ -571,15 +547,15 @@ void SoldierList::mouseover(const Widelands::Soldier* soldier) {
 		return;
 	}
 
-	infotext_.set_text(format(_("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"),
-	                          soldier->get_health_level(), soldier->descr().get_max_health_level(),
-	                          soldier->get_attack_level(), soldier->descr().get_max_attack_level(),
-	                          soldier->get_defense_level(), soldier->descr().get_max_defense_level(),
-	                          soldier->get_evade_level(), soldier->descr().get_max_evade_level()));
+	set_tooltip(format(_("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"),
+	                   soldier->get_health_level(), soldier->descr().get_max_health_level(),
+	                   soldier->get_attack_level(), soldier->descr().get_max_attack_level(),
+	                   soldier->get_defense_level(), soldier->descr().get_max_defense_level(),
+	                   soldier->get_evade_level(), soldier->descr().get_max_evade_level()));
 }
 
 void SoldierList::unset_infotext() {
-	infotext_.set_text(can_eject() ? _("Click soldier to send away") : "");
+	set_tooltip(can_eject() ? _("Click soldier to send away") : "");
 }
 
 bool SoldierList::can_eject() const {

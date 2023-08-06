@@ -237,8 +237,9 @@ void ShipWindow::set_button_visibility() {
 		return;
 	}
 
-	const bool show_expedition_controls = ship->state_is_expedition() && !ship->is_refitting();
-	const bool is_warship = ship->get_ship_type() == Widelands::ShipType::kWarship;
+	const bool is_refitting = ship->is_refitting();
+	const bool show_expedition_controls = ship->state_is_expedition() && !is_refitting;
+	const bool is_warship = (ship->get_ship_type() == Widelands::ShipType::kWarship) ^ is_refitting;
 
 	display_->set_visible(!is_warship);
 	warship_capacity_control_->set_visible(is_warship);

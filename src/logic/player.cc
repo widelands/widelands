@@ -2082,9 +2082,18 @@ const DetectedPortSpace& Player::get_detected_port_space(Serial serial) const {
 	throw wexception("Player %u has no detected port space with serial %u", player_number(), serial);
 }
 
-bool Player::remove_detected_port_space(const Coords& coords) {
+bool Player::remove_detected_port_space(const Coords& coords, PortDock* replaced_by) {
 	for (size_t i = 0; i < detected_port_spaces_.size(); ++i) {
 		if (detected_port_spaces_[i]->coords == coords) {
+			for (Serial serial : ships()) {
+				Ship* ship = dynamic_cast<Ship*>(egbase().objects().get_object(serial));
+				if (ship != nullptr &&
+				    ship->get_destination_detected_port_space() == detected_port_spaces_[i].get()) {
+					ship->set_destination(
+					   egbase(), replaced_by, ship->get_send_message_at_destination());
+				}
+			}
+
 			detected_port_spaces_[i] = std::move(detected_port_spaces_.back());
 			detected_port_spaces_.pop_back();
 			return true;

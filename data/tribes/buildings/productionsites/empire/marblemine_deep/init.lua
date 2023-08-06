@@ -64,7 +64,7 @@ wl.Descriptions():new_productionsite_type {
          }
       },
       mine_produce_granite = {
-         descname = _("mining marble"),
+         descname = _("mining granite"),
          actions = {
             "animate=working duration:7s800ms",
             "mine=resource_stones radius:2 yield:100% when_empty:5% experience_on_fail:2%",
