@@ -1250,10 +1250,14 @@ wl.Descriptions():new_tribe {
                -- TRANSLATORS: Note helptext for an Empire production site: Quarry, part 1
                pgettext("empire_building", "The quarry needs rocks to cut within the work area."),
                -- TRANSLATORS: Note helptext for an Empire production site: Quarry, part 2
-               pgettext("empire_building", "The stonemason finds 5 blocks of granite and 2 blocks of marble out of 7 rocks."),
+               pgettext("empire_building", "The stonemason finds 5 blocks of granite and 2 blocks of marble out of 7 rocks.")
             },
-            -- TRANSLATORS: Performance helptext for an Empire production site: Quarry
-            performance = pgettext("empire_building", "The stonemason cuts one granite or marble in %1$s and pauses %2$s before going back to work again."):bformat(format_seconds(18), format_seconds(18))
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire production site: Quarry, part 1
+               pgettext("empire_building", "The stonemason needs %s to cut one block of granite or marble, not counting the time he needs to reach the destination and go home again."):bformat(format_seconds(18)),
+               -- TRANSLATORS: Performance helptext for an Empire production site: Quarry, part 2
+               pgettext("empire_building", "Afterwards he rests in the quarry for %s."):bformat(format_seconds(18))
+            }
          }
       },
       {
