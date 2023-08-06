@@ -144,8 +144,8 @@ void fill_parameter_vector() {
 		_("Show in-game chat with transparent background."), true},
 	  {"", "toolbar_pos", _("[...]"), _("Bitmask to set the toolbar location and mode."), true},
 	  /// Networking
-	  {_("Networking:"), "metaserver", _("URI"), _("Connect to a different metaserver for internet gaming."),
-		false},
+	  {_("Networking:"), "metaserver", _("URI"),
+		_("Connect to a different metaserver for internet gaming."), false},
 	  {"", "metaserverport", _("n"),
 		/** TRANSLATORS: `n` references a numerical placeholder */
 		_("Port number `n` of the metaserver for internet gaming."), false},

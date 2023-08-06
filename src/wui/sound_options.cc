@@ -157,12 +157,9 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
 
 	// TODO(tothxa): This shouldn't be duplicated, but de-duplicating seems harder than it's worth.
 	const std::vector<std::string> labels = {
-		pgettext("sound_options", "Music"),
-		pgettext("sound_options", "Chat Messages"),
-		pgettext("sound_options", "Game Messages"),
-		pgettext("sound_options", "User Interface"),
-		pgettext("sound_options", "Ambient Sounds")
-	};
+	   pgettext("sound_options", "Music"), pgettext("sound_options", "Chat Messages"),
+	   pgettext("sound_options", "Game Messages"), pgettext("sound_options", "User Interface"),
+	   pgettext("sound_options", "Ambient Sounds")};
 
 	const UI::FontStyleInfo& font_style = g_style_manager->font_style(
 	   style == UI::SliderStyle::kFsMenu ? UI::FontStyle::kFsMenuLabel : UI::FontStyle::kWuiLabel);
@@ -191,7 +188,8 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
 	   this, style, max_w, "ui", pgettext("sound_options", "User Interface"), SoundType::kUI));
 
 	add(new SoundControl(
-	   this, style, max_w, "ambient", pgettext("sound_options", "Ambient Sounds"), SoundType::kAmbient,
+	   this, style, max_w, "ambient", pgettext("sound_options", "Ambient Sounds"),
+	   SoundType::kAmbient,
 	   SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")));
 
 	add(&custom_songset_);

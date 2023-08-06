@@ -469,10 +469,10 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	// TODO(tothxa): keep around until tested without it
 	/*
 	if (g_gr != nullptr) {
-		SDL_Window* sdl_window = g_gr->get_sdlwindow();
-		if (sdl_window != nullptr) {
-			SDL_SetWindowGrab(sdl_window, SDL_FALSE);
-		}
+	   SDL_Window* sdl_window = g_gr->get_sdlwindow();
+	   if (sdl_window != nullptr) {
+	      SDL_SetWindowGrab(sdl_window, SDL_FALSE);
+	   }
 	}
 	*/
 
