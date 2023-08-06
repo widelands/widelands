@@ -18,8 +18,8 @@
 
 #include "ui_basic/checkbox.h"
 
-#include <cassert>
 #include <SDL_mouse.h>
+#include <cassert>
 
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
