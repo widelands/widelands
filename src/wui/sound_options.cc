@@ -33,6 +33,7 @@ namespace {
 class SoundControl : public UI::Box {
 private:
 	static constexpr int kSliderWidth = 200;
+	static constexpr int kLabelWidth = 250;
 	static constexpr int kCursorWidth = 28;
 	static constexpr int kSpacing = 16;
 
@@ -69,7 +70,7 @@ public:
 	             /** TRANSLATORS: Tooltip for volume slider in sound options */
 	             _("Changes the volume. Click to hear a sample."),
 	             kCursorWidth),
-	     enable_(this, panel_style_, "enable", Vector2i::zero(), title),
+	     enable_(this, panel_style_, "enable", Vector2i::zero(), title, "", kLabelWidth),
 	     type_(type),
 	     fx_(representative_fx) {
 		set_inner_spacing(kSpacing);

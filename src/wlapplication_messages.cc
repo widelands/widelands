@@ -144,16 +144,7 @@ void fill_parameter_vector() {
 		_("Show in-game chat with transparent background."), true},
 	  {"", "toolbar_pos", _("[...]"), _("Bitmask to set the toolbar location and mode."), true},
 	  /// Networking
-	  {_("Networking:"), "write_syncstreams",
-		/** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
-		/** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain. */
-		/** TRANSLATORS: * marks the default value */
-		_("[true*|false]"),
-		/** TRANSLATORS: A syncstream is a synchronization stream. Syncstreams are used in multiplayer
-		 */
-		/** TRANSLATORS: games to make sure that there is no mismatch between the players. */
-		_("Create syncstream dump files to help debug network games."), false},
-	  {"", "metaserver", _("URI"), _("Connect to a different metaserver for internet gaming."),
+	  {_("Networking:"), "metaserver", _("URI"), _("Connect to a different metaserver for internet gaming."),
 		false},
 	  {"", "metaserverport", _("n"),
 		/** TRANSLATORS: `n` references a numerical placeholder */
@@ -169,6 +160,11 @@ void fill_parameter_vector() {
 		_("Connect to a different server address from the add-ons manager."), false},
 	  {"", "addon_server_port", _("n"),
 		_("Connect to a different server port from the add-ons manager."), false},
+	  {"", "write_syncstreams", "",
+		/** TRANSLATORS: A syncstream is a synchronization stream. Syncstreams are used in multiplayer
+		 */
+		/** TRANSLATORS: games to make sure that there is no mismatch between the players. */
+		_("Create syncstream dump files to help debug network games."), true},
 
 	  /// Interface options
 	  {_("Graphic options:"), "fullscreen", _("[true|false*]"),
