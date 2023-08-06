@@ -18,6 +18,7 @@
 
 #include "ui_basic/checkbox.h"
 
+#include <cassert>
 #include <SDL_mouse.h>
 
 #include "graphic/font_handler.h"
@@ -88,7 +89,7 @@ void Statebox::layout() {
 		int w = get_w();
 		int h = kStateboxSize;
 		int pic_width = kStateboxSize;
-		assert(flags_ & Has_Custom_Picture == 0);
+		assert((flags_ & Has_Custom_Picture) == 0);
 		rendered_text_ = label_text_.empty() ?
                           nullptr :
                           UI::g_fh->render(as_richtext_paragraph(
