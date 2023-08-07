@@ -1373,7 +1373,7 @@ msgid ""
 "the economy, production of one of each tool takes %1$s and one of each spear"
 " takes %2$s on average. If only one kind of tool or spear is needed by the "
 "economy, its production takes %3$s on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено а инструменты и копья нужны экономике, то в среднем изготовление одного инструмета занимает %1$sа изготовление одного копья - %2$s. Если экономике нужен только один вид инструмента или копья, то его изготовление занимает %3$s."
 
 #. TRANSLATORS: Lore helptext for an Amazon production site: Dressmakery
 #: ../../data/tribes/initialization/amazons/units.lua:1411
@@ -1407,7 +1407,7 @@ msgid ""
 "needed by the economy, production of one of each of them takes %1$s on "
 "average. If only one kind of them is needed by the economy, its production "
 "takes %2$s on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено а одежда, ботинки и доспехи нужны экономике, то в среднем изготовление одного изделия занимает %1$s. Если экономике нужен только один из видов продукции, то его изготовление занимает %2$s."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Charcoal Kiln
 #: ../../data/tribes/initialization/amazons/units.lua:1424
@@ -4349,7 +4349,7 @@ msgid ""
 " takes %2$s on average. If only one kind of food is needed by the economy, "
 "production of one smoked fish takes %3$s and one smoked meat takes %4$s on "
 "average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено а копчёности нужны экономике, то в среднем копчение одной рыбы занимает %1$sа одного куска мяса - %2$s. Если экономике нужен только один продукт, на копчёную рыбу будет уходить, в среднем %3$s, а на копчёное мясо - %4$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Mill
 #: ../../data/tribes/initialization/atlanteans/units.lua:1641

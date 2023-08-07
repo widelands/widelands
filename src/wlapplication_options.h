@@ -25,9 +25,9 @@
 #include <SDL_keyboard.h>
 
 #include "io/profile.h"
-
 /* Command line option */
 extern bool g_allow_script_console;
+extern bool g_write_syncstreams;
 
 /*
  * Further explanations for all functions and its return values

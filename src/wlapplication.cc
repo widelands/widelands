@@ -466,8 +466,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	// register it once.
 	UI::Panel::register_click();
 
-	set_input_grab(get_config_bool("inputgrab", false));
-
 	// Make sure we didn't forget to read any global option
 	check_config_used();
 
@@ -1096,32 +1094,6 @@ void WLApplication::warp_mouse(const Vector2i position) {
 	}
 }
 
-/**
- * Changes input grab mode.
- *
- * This makes sure that the mouse cannot leave our window (and also that we get
- * mouse/keyboard input nearly unmodified, but we don't really care about that).
- *
- * \note This also cuts out any mouse-speed modifications that a generous window
- * manager might be doing.
- */
-void WLApplication::set_input_grab(bool grab) {
-	if (g_gr == nullptr) {
-		return;
-	}
-	SDL_Window* sdl_window = g_gr->get_sdlwindow();
-	if (grab) {
-		if (sdl_window != nullptr) {
-			SDL_SetWindowGrab(sdl_window, SDL_TRUE);
-		}
-	} else {
-		if (sdl_window != nullptr) {
-			SDL_SetWindowGrab(sdl_window, SDL_FALSE);
-		}
-		warp_mouse(mouse_position_);  // TODO(unknown): is this redundant?
-	}
-}
-
 void WLApplication::set_mouse_lock(const bool locked) {
 	mouse_locked_ = locked;
 	if (mouse_locked_) {
@@ -1584,6 +1556,11 @@ void WLApplication::handle_commandline_parameters() {
 	// Always enable in debug builds
 	g_allow_script_console = true;
 #endif
+
+	if (commandline_.count("write_syncstreams") != 0u) {
+		g_write_syncstreams = true;
+		commandline_.erase("write_syncstreams");
+	}
 
 	if (commandline_.count("version") != 0u) {
 		throw ParameterError(CmdLineVerbosity::None);  // No message on purpose

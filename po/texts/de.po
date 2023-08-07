@@ -8,6 +8,7 @@
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
+# Simon Heimberg, 2023
 # Stephan Lutz <stephan-lutz@gmx.de>, 2018-2023
 # Elisabeth Jäger, 2015-2016
 # 39a0b2e5ef9bf024c2fcfbdd0522de1a_96abb62, 2015-2016
@@ -15,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-05-01 02:42+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2023\n"
+"Last-Translator: Simon Heimberg, 2023\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -163,7 +164,7 @@ msgstr "Bitte schreibe alle wichtigen Informationen auf. Also:"
 
 #: ../../data/txts/README.lua:28
 msgid "Detailed steps on how to trigger the bug, if possible."
-msgstr "Wenn möglich, eine detailierte Beschreibung der Schritte, wie der Fehler erzeugt werden kann."
+msgstr "Wenn möglich, eine detaillierte Beschreibung der Schritte, wie der Fehler erzeugt werden kann."
 
 #: ../../data/txts/README.lua:29
 msgid ""

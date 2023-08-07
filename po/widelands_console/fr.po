@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
-# Betsalel Horowitz <horo5766@outlook.com>, 2021
+# 34b6ffed036c169f8c0dd59e6bb8a305_b52781a <671f2e957f50d5213a1238cd588b004a_1012986>, 2021
 # Boese Kaiser, 2022
 # Renaud Bouchard, 2014
 # C138, 2021
@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
 "Last-Translator: Boese Kaiser, 2022\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
