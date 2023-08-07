@@ -1362,7 +1362,7 @@ msgid ""
 "the economy, production of one of each tool takes %1$s and one of each spear"
 " takes %2$s on average. If only one kind of tool or spear is needed by the "
 "economy, its production takes %3$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Warktüüg un Pieken bruukt, produzeert dat Huus dör de Bank elkeen Warktüüg in %1$s un elkeen Pieke in %2$s. Wenn blots eene Aard vun Warktüüg of Pieke bruukt word, word dat dör de Bank in %3$s produzeert."
 
 #. TRANSLATORS: Lore helptext for an Amazon production site: Dressmakery
 #: ../../data/tribes/initialization/amazons/units.lua:1411
@@ -1396,7 +1396,7 @@ msgid ""
 "needed by the economy, production of one of each of them takes %1$s on "
 "average. If only one kind of them is needed by the economy, its production "
 "takes %2$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Umhangen, Stevels un Wapenrocken bruukt, produzeert dat Huus dör de Bank elkeen daarvun in %1$s. Wenn de Weertskupp blots eene Aard daarvun bruukt, word dat dör de Bank in %2$s produzeert."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Charcoal Kiln
 #: ../../data/tribes/initialization/amazons/units.lua:1424
@@ -3424,7 +3424,7 @@ msgid ""
 "The double trident is one of the best tridents produced by the Atlantean "
 "weapon smithy. It is used in a dungeon – together with food – to train "
 "soldiers from attack level 2 to level 3."
-msgstr "De Dubbelte Dreespitz is eener vun de besten Dreespitzen, de de Atlantiske Wapensmee produzert. ’t word in Gefahrelken Gangen – tosamen mit Spiesen – bruukt, um Soldaten vun Angriff-Stand 2 up Stand 3 uttobilden."
+msgstr "De Dübbelte Dreespitz is eener vun de besten Dreespitzen, de de Atlantiske Wapensmee produzert. ’t word in Gefahrelken Gangen – tosamen mit Spiesen – bruukt, um Soldaten vun Angriff-Stand 2 up Stand 3 uttobilden."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Heavy Double Trident
 #: ../../data/tribes/initialization/atlanteans/units.lua:842
@@ -4330,7 +4330,7 @@ msgid ""
 " takes %2$s on average. If only one kind of food is needed by the economy, "
 "production of one smoked fish takes %3$s and one smoked meat takes %4$s on "
 "average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun rökelt Spiesen bruukt, produzeert dat Huus dör de Bank in %1$s een Rökelfiss un in %2$s een Rökelfleesk. Wenn de Weertskupp blots eene Aard vun Spies bruukt, word dör de Bank een Rökelfiss in %3$s un een Rökelfleesk in %4$s produzeert."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Mill
 #: ../../data/tribes/initialization/atlanteans/units.lua:1641
@@ -4370,7 +4370,7 @@ msgid ""
 " economy, production of one sack of each kind of flour takes %1$s on "
 "average. If only one kind of flour is needed by the economy, its production "
 "takes %2$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Mehl bruukt, produzeert dat Huus dör de Bank elkeen daarvun in %1$s. Wenn de Weertskupp blots eene Aard vun Mehl bruukt, word dat dör de Bank in %2$s produzeert."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Bakery
 #: ../../data/tribes/initialization/atlanteans/units.lua:1656
@@ -4476,7 +4476,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Metallen bruukt, produzeert dat Huus dör de Bank in %1$s een Iesen un in %2$s een Gold. Wenn de Weertskupp blots eene Aard vun Metall bruukt, word dör de Bank een Iesen in %3$s un een Gold in %4$s produzeert."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Toolsmithy
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Metal
@@ -4510,7 +4510,7 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Warktüüg bruukt, produzeert dat Huus dör de Bank elkeen Warktüüg in %1$s. Wenn de Weertskupp blots eene Aard vun Warktüüg bruukt, word dat dör de Bank in %2$s produzeert."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Weapon
 #. Smithy
@@ -4549,7 +4549,7 @@ msgid ""
 "one kind of trident is needed by the economy, production of one light "
 "trident takes %2$s and one long trident, one steel trident, one double "
 "trident or one heavy double trident takes %3$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Dreespitzen bruukt, produzeert dat Huus dör de Bank in %1$s een Dreespitz. Wenn de Weertskupp blots eene Aard vun Dreespitz bruukt, word dör de Bank een Lütte Dreespitz in %2$s un een Stahl-Dreespitz, Dübbelte Dreespitz of Grote Dübbelte Dreespitz in %3$s produzeert."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Armor
 #. Smithy
@@ -4578,7 +4578,7 @@ msgid ""
 "the economy, production of one of each kind takes %1$s on average. If only "
 "one kind of shield is needed by the economy, production of one steel shield "
 "takes %2$s and one advanced shield takes %3$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Schilden bruukt, produzeert dat Huus dör de Bank elkeen Aard vun Schild in %1$s. Wenn de Weertskupp blots eene Aard vun Schild bruukt, word dör de Bank een Stahlschild in %2$s un een Goder Schild in %3$s produzeert."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Barracks
 #: ../../data/tribes/initialization/atlanteans/units.lua:1740
@@ -4735,7 +4735,7 @@ msgid ""
 "needed by the economy, production of one of each cloth and tabard takes %1$s"
 " on average. If only one kind of cloth or tabard is needed by the economy, "
 "its production takes %2$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Stoff un Kluften bruukt, produzeert dat Huus dör de Bank elkeen Stoff of Kluft in %1$s. Wenn de Weertskupp blots eene Aard vun Stoff of Kluft bruukt, word dat dör de Bank in %2$s produzeert."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Crystal
 #. Mine
@@ -4771,7 +4771,7 @@ msgid ""
 " diamond takes %3$s on average. If only one kind of mineral is needed by the"
 " economy, production of one granite takes %4$s, one quartz takes %5$s and "
 "one diamond takes %6$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Mineralen bruukt, produzeert dat Huus dör de Bank in %1$s een Flint, in %2$s een Blinkerflint un in %3$s eenen Edelsteen. Wenn de Weertskupp blots eene Aard vun Mineraal bruukt, word dör de Bank een Flint in %4$s, een Blinkerflint in %5$s un een Edelsteen in %6$s produzeert."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for production site: Coal Mine
@@ -6841,7 +6841,7 @@ msgid ""
 "economy, production of one of each food takes %1$s on average. If only one "
 "kind of food is needed by the economy, production of one ration takes %2$s "
 "and one snack takes %3$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Etens bruukt, produzeert dat Huus dör de Bank elkeen Aard vun Eten in %1$s. Wenn de Weertskupp blots eene Aard vun Eten bruukt, word dör de Bank een Happ in %2$s un eene Spies in %3$s produzeert."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Big Inn
 #: ../../data/tribes/initialization/barbarians/units.lua:1368
@@ -6873,7 +6873,7 @@ msgid ""
 "economy, production of one of each food takes %1$s on average. If only one "
 "kind of food is needed by the economy, production of one ration takes %2$s, "
 "one snack takes %3$s and one meal takes %4$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Etens bruukt, produzeert dat Huus dör de Bank elkeen Aard vun Eten in %1$s. Wenn de Weertskupp blots eene Aard vun Eten bruukt, word dör de Bank een Happ in %2$s, eene Spies in %3$s un een Mahl in %4$s produzeert."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Charcoal Kiln
 #: ../../data/tribes/initialization/barbarians/units.lua:1381
@@ -6917,7 +6917,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Metallen bruukt, produzeert dat Huus dör de Bank in %1$s een Iesen un in %2$s een Gold. Wenn de Weertskupp blots eene Aard vun Metall bruukt, word dör de Bank een Iesen in %3$s un een Gold in %4$s produzeert."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Metal Workshop
 #: ../../data/tribes/initialization/barbarians/units.lua:1413
@@ -6951,7 +6951,7 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Warktüüg bruukt, produzeert dat Huus dör de Bank elkeen Warktüüg in %1$s. Wenn de Weertskupp blots eene Aard vun Warktüüg bruukt, word dat dör de Bank in %2$s produzeert."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Warmill
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Ax Workshop
@@ -6999,7 +6999,7 @@ msgid ""
 "If this building is fully supplied and all axes are needed by the economy, "
 "production of one of each ax takes %1$s on average. If only one kind of ax "
 "is needed by the economy, its production takes %2$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Exten bruukt, produzeert dat Huus dör de Bank elkeen Ex in %1$s. Wenn de Weertskupp blots eene Aard vun Ex bruukt, word se dör de Bank in %2$s produzeert."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Warmill,
 #. part 2
@@ -7153,7 +7153,7 @@ msgid ""
 "economy, production of one of each helmet takes %1$s on average. If only one"
 " kind of helmet is needed by the economy, production of one helmet takes "
 "%2$s, one mask takes %3$s and one warhelm takes %4$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Helms bruukt, produzeert dat Huus dör de Bank elkeen Aard vun Helm in %1$s. Wenn de Weertskupp blots eene Aard vun Helm bruukt, word dör de Bank een Helm in %2$s, eene Mask in %3$s un een Kriegshelm in %4$s produzeert."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Granite Mine
 #: ../../data/tribes/initialization/barbarians/units.lua:1523
@@ -10934,7 +10934,7 @@ msgid ""
 "economy, production of one of each food takes %1$s on average. If only one "
 "kind of food is needed by the economy, production of one ration takes %2$s "
 "and one meal takes %3$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Etens bruukt, produzeert dat Huus dör de Bank elkeen Aard vun Eten in %1$s. Wenn de Weertskupp blots eene Aard vun Eten bruukt, word dör de Bank een Happ in %2$s un een Mahl in %3$s produzeert."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -10989,7 +10989,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Metallen bruukt, produzeert dat Huus dör de Bank in %1$s een Iesen un in %2$s een Gold. Wenn de Weertskupp blots eene Aard vun Metall bruukt, word dör de Bank een Iesen in %3$s un een Gold in %4$s produzeert."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11019,7 +11019,7 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Warktüüg bruukt, produzeert dat Huus dör de Bank elkeen Warktüüg in %1$s. Wenn de Weertskupp blots eene Aard vun Warktüüg bruukt, word dat dör de Bank in %2$s produzeert."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11069,7 +11069,7 @@ msgid ""
 "kind of armor takes %2$s on average. If only one kind of armor or helmets is"
 " needed by the economy, production of one helmet takes %3$s, while one kind "
 "of armor takes %4$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Wapenrocken un Helms bruukt, produzeert dat Huus dör de Bank in %1$s eenen Helm un in %2$s eenen Wapenrock. Wenn de Weertskupp blots eene Aard vun Wapenrock of Helm bruukt, word dör de Bank een Helm in %3$s un een Wapenrock in %4$s produzeert."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11286,7 +11286,7 @@ msgid ""
 "spear is needed by the economy, production of one wooden spear takes %2$s, "
 "one spear, one advanced spear, one heavy spear or one war spear takes %3$s "
 "on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Pieken bruukt, produzeert dat Huus dör de Bank elkeen Aard vun Pieke in %1$s. Wenn de Weertskupp blots eene Aard vun Pieke bruukt, word dör de Bank eene Holtpieke in %2$s un eene Pieke, Gode Pieke, Sware Pieke of Kriegspieke in %3$s produzeert."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -13896,7 +13896,7 @@ msgctxt "frisians_building"
 msgid ""
 "The hunter pauses %s before going to work again. He produces one fur after "
 "he has produced five pieces of meat."
-msgstr ""
+msgstr "De Jäger wacht %s ehr he weer arbeidt. He produzeert een Fell, nadeem he fiev Delen Fleesk produzeert hett."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Fisher's House
 #: ../../data/tribes/initialization/frisians/units.lua:1610
@@ -14269,7 +14269,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Metallen bruukt, produzeert dat Huus dör de Bank in %1$s een Iesen un in %2$s een Gold. Wenn de Weertskupp blots eene Aard vun Metall bruukt, word dör de Bank een Iesen in %3$s un een Gold in %4$s produzeert."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Recycling Center
 #: ../../data/tribes/initialization/frisians/units.lua:1781
@@ -14306,7 +14306,7 @@ msgid ""
 "takes %3$s on average. If only one kind of material is needed by the "
 "economy, production of one fur takes %4$s, one iron takes %5$s and one gold "
 "takes %6$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Materialien bruukt, produzeert dat Huus dör de Bank in %1$s een Fell, in %2$s een Iesen un in %3$s een Gold. Wenn de Weertskupp blots eene Aard vun Mineraal bruukt, word dör de Bank een Fell in %4$s, een Iesen in %5$s un een Gold in %6$s produzeert."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Blacksmithy
 #: ../../data/tribes/initialization/frisians/units.lua:1794
@@ -14337,7 +14337,7 @@ msgid ""
 "tool is needed by the economy, its production takes %2$s on average. Needles"
 " are an exception - in the time to produce one tool two needles are "
 "produced."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Warktüüg bruukt, produzeert dat Huus dör de Bank elkeen Warktüüg in %1$s. Wenn de Weertskupp blots eene Aard vun Warktüüg bruukt, word dat dör de Bank in %2$s produzeert. De Utnahm sünd Nadels – in de Tied, wat man bruukt, um een Warktüüg to produzeren, worden twee Nadels produzeert."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Small Armor
 #. Smithy
@@ -14372,7 +14372,7 @@ msgid ""
 "%2$s and one helmet takes %3$s on average. If only one kind of sword or "
 "helmet is needed by the economy, production of one short sword takes %4$s, "
 "one long sword takes %5$s and one helmet takes %6$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Sweerten un Helms bruukt, produzeert dat Huus dör de Bank in %1$s een Lüttes Sweert, in %2$s een Langes Sweert un in %3$s eenen Helm. Wenn de Weertskupp blots eene Aard vun Sweert of Helm bruukt, word dör de Bank een Lüttes Sweert in %4$s, een Langes Sweert in %5$s un een Helm in %6$s produzeert."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Large Armor
 #. Smithy
@@ -14410,7 +14410,7 @@ msgid ""
 " sword or helmet is needed by the economy, production of one broadsword "
 "takes %4$s, one double-edged sword takes %5$s and one golden helmet takes "
 "%6$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Sweerten un Helms bruukt, produzeert dat Huus dör de Bank in %1$s een Bredes Sweert, in %2$s een Tweesneidigs Sweert un in %3$s eenen Goldenen Helm. Wenn de Weertskupp blots eene Aard vun Sweert of Helm bruukt, word dör de Bank een Bredes Sweert in %4$s, een Tweesneidigs Sweert in %5$s un een Goldene Helm in %6$s produzeert."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Sewing Room
 #: ../../data/tribes/initialization/frisians/units.lua:1833
@@ -14471,7 +14471,7 @@ msgid ""
 "economy, production of one of each garment takes %1$s on average. If only "
 "one kind of garment is needed by the economy, its production takes %2$s on "
 "average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Kluften bruukt, produzeert dat Huus dör de Bank elkeen Kluft in %1$s. Wenn de Weertskupp blots eene Aard vun Kluft bruukt, word se dör de Bank in %2$s produzeert."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Charcoal
 #. Kiln
@@ -14510,7 +14510,7 @@ msgctxt "frisians_building"
 msgid ""
 "If this building is fully supplied, production of one of each smoked food "
 "takes %s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen, word elkeen Aard vun rökelt Spies dör de Bank in %s produzeert."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Bakery
 #: ../../data/tribes/initialization/frisians/units.lua:1885
@@ -14571,7 +14571,7 @@ msgid ""
 " production of one bread takes %1$s and one honey bread takes %2$s on "
 "average. If only one kind of bread is needed by the economy, production of "
 "one bread or one honey bread takes %3$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Brood bruukt, produzeert dat Huus dör de Bank in %1$s een Brood un in %2$s een Hönnigbrood. Wenn de Weertskupp blots eene Aard vun Brood bruukt, word dör de Bank in %3$s een Brood of Hönnigbrood produzeert."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Brewery
 #: ../../data/tribes/initialization/frisians/units.lua:1911
@@ -14629,7 +14629,7 @@ msgid ""
 " production of one beer takes %1$s and one mead takes %2$s on average. If "
 "only one kind of drink is needed by the economy, production of one beer or "
 "one mead takes %3$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Drank bruukt, produzeert dat Huus dör de Bank in %1$s een Beer un in %2$s een Hönnigbeer. Wenn de Weertskupp blots eene Aard vun Drank bruukt, word dör de Bank in %3$s een Beer of Hönnigbeer produzeert."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Tavern
 #: ../../data/tribes/initialization/frisians/units.lua:1937
@@ -14650,7 +14650,7 @@ msgid ""
 "If the tavern is fully supplied, it can produce one ration in %1$s on "
 "average, using 2 kinds of ingredients. If it can only use one kind of "
 "ingredient, it can produce one ration in %2$s on average."
-msgstr ""
+msgstr "Wenn de Kneipe mit all Waren versörgt word, kann se mit 2 Bigaven dör de Bank in %1$s een Happ produzeren. Wenn se blots eene Bigaav bruken kann, produzeert se dör de Bank in %2$s een Happ."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Drinking Hall
 #: ../../data/tribes/initialization/frisians/units.lua:1950
@@ -14684,7 +14684,7 @@ msgid ""
 "economy, production of one of each food takes %1$s on average. If only one "
 "kind of food is needed by the economy, production of one ration takes %2$s "
 "and one meal takes %3$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Etens bruukt, produzeert dat Huus dör de Bank elkeen Aard vun Eten in %1$s. Wenn de Weertskupp blots eene Aard vun Eten bruukt, word dör de Bank een Happ in %2$s un een Mahl in %3$s produzeert."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Barracks
 #: ../../data/tribes/initialization/frisians/units.lua:1963
@@ -14745,7 +14745,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the supply is steady and there is continuous demand for fur, then the "
 "reindeer farm produces one meat after producing three pieces of fur."
-msgstr ""
+msgstr "Wenn de Versörgung good is un de hele Tied Fell bruukt word, produzeert de Sneeihirsktüchteree eenmaal Fleesk, nadeem se dree Stücken Fell produzeert hett,"
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Reindeer
 #. Farm
@@ -14757,7 +14757,7 @@ msgid ""
 "on average. If only reindeers are needed by the economy, their production "
 "takes %3$s on average. If only fur is needed by the economy, its production "
 "takes %4$s on average."
-msgstr ""
+msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Sneeihirsken un Fellen bruukt, produzeert dat Huus dör de Bank in %1$s een Sneeihirsk un in %2$s een Fell. Wenn de Weertskupp blots Sneeihirsken bruukt, word dör de Bank in %3$s eens produzeert. Wenn de Weertskupp blots Fell bruukt, word dör de Bank in %4$s eens produzeert."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1993

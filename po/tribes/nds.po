@@ -8857,13 +8857,13 @@ msgstr "Goldene Kluft"
 #: ../../data/tribes/wares/trident_double/init.lua:8
 msgctxt "ware"
 msgid "Double Trident"
-msgstr "Dubbelte Dreespitz"
+msgstr "Dübbelte Dreespitz"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/trident_heavy_double/init.lua:8
 msgctxt "ware"
 msgid "Heavy Double Trident"
-msgstr "Grote Dubbelte Dreespitz"
+msgstr "Grote Dübbelte Dreespitz"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/trident_light/init.lua:8
