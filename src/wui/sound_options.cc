@@ -57,12 +57,7 @@ public:
 	             const std::string& title,
 	             SoundType type,
 	             FxId representative_fx = kNoSoundEffect)
-	   : UI::Box(parent,
-	             slider_to_panel_style(style),
-	             name,
-	             0,
-	             0,
-	             UI::Box::Horizontal),
+	   : UI::Box(parent, slider_to_panel_style(style), name, 0, 0, UI::Box::Horizontal),
 	     volume_(this,
 	             "volume",
 	             0,
@@ -145,12 +140,7 @@ private:
 }  // namespace
 
 SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
-   : UI::Box(&parent,
-             slider_to_panel_style(style),
-             "sound_options",
-             0,
-             0,
-             UI::Box::Vertical),
+   : UI::Box(&parent, slider_to_panel_style(style), "sound_options", 0, 0, UI::Box::Vertical),
      custom_songset_(
         this,
         panel_style_,
