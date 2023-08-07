@@ -465,17 +465,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	// register it once.
 	UI::Panel::register_click();
 
-	// Disable mouse grabbing
-	// TODO(tothxa): keep around until tested without it
-	/*
-	if (g_gr != nullptr) {
-	   SDL_Window* sdl_window = g_gr->get_sdlwindow();
-	   if (sdl_window != nullptr) {
-	      SDL_SetWindowGrab(sdl_window, SDL_FALSE);
-	   }
-	}
-	*/
-
 	// Make sure we didn't forget to read any global option
 	check_config_used();
 
