@@ -4,7 +4,6 @@ wl_library(wui_sound_options
     sound_options.h
   DEPENDS
     base
-    graphic
     graphic_fonthandler
     graphic_styles
     graphic_text_layout
