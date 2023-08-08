@@ -353,7 +353,8 @@ int Panel::do_run() {
 	app.set_mouse_lock(false);  // more paranoia :-)
 
 	// With the default of 30FPS, the game will be drawn every 33ms.
-	const uint32_t draw_delay = 1000 / std::max(5, get_config_int("maxfps", 30));
+	constexpr uint32_t kMaxFPS = 30;
+	constexpr uint32_t kDrawDelay = 1000 / kMaxFPS;
 
 	static InputCallback input_callback = {Panel::ui_mousepress, Panel::ui_mouserelease,
 	                                       Panel::ui_mousemove,  Panel::ui_key,
@@ -413,7 +414,7 @@ int Panel::do_run() {
 				do_redraw_now();
 			}
 
-			next_time = start_time + draw_delay;
+			next_time = start_time + kDrawDelay;
 		}
 
 		const int32_t delay = next_time - SDL_GetTicks();
@@ -437,7 +438,7 @@ int Panel::do_run() {
 				do_redraw_now(true, _("Game ending – please wait…"));
 			}
 
-			next_time = start_time + draw_delay;
+			next_time = start_time + kDrawDelay;
 			const int32_t delay = next_time - SDL_GetTicks();
 			if (delay > 0) {
 				SDL_Delay(delay);
