@@ -8,6 +8,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Lennard Hofmann <lennard.hofmann@web.de>, 2021
 # Matthias Mast <mastmatthias@gmail.com>, 2021
+# Simon Heimberg, 2023
 # Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022
 # Elisabeth Jäger, 2015
 # wl-zocker, 2014-2015
@@ -16,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022\n"
+"Last-Translator: Simon Heimberg, 2023\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -357,7 +358,7 @@ msgstr "Du kannst einige zusätzliche Waren, Soldaten oder Arbeiter mit auf eine
 msgid ""
 "Just click on the empty slots and then scroll through the list to choose the"
 " additional item."
-msgstr "Klicke einfache auf den leeren Platz und blättere duch die Liste um die zusätzliche Fracht auszuwählen."
+msgstr "Klicke einfache auf den leeren Platz und blättere durch die Liste um die zusätzliche Fracht auszuwählen."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:167
 msgid ""
@@ -700,7 +701,7 @@ msgid ""
 "of waterways becoming severe bottlenecks in your economy. Try to build "
 "several of them in parallel to distribute the strain. If this is not "
 "possible, it is in some cases even more efficient not to use waterways."
-msgstr "Wenn deine Wasserwege eine erhebliche Abkürzung darstellen, wird deine Wirtschaft versuchen viele Waren darüber zu transportieren. Da aber deine Wasserwege im Gegensatz zu Straßen – welche durch ein Tragetier verstärkt werden, wenn sie stark benutzt sind – nur eine Fähre beschäftigen, und weil sie öfters etwas länger als 2 bis 3 Felder sind, wie für Straßen empfohlen, gibt es immer die Gefahr, dass sie zu engen Flaschenhälsen in deiner Wirtschaft werden. Versuche immer mehrere parallel zu bauen, um die Last zu verteilen. Wenn das nicht möglich ist, kann es sogar effizienter sein, keine Waserwege zu bauen."
+msgstr "Wenn deine Wasserwege eine erhebliche Abkürzung darstellen, wird deine Wirtschaft versuchen viele Waren darüber zu transportieren. Da aber deine Wasserwege im Gegensatz zu Straßen – welche durch ein Tragetier verstärkt werden, wenn sie stark benutzt sind – nur eine Fähre beschäftigen, und weil sie öfters etwas länger als 2 bis 3 Felder sind, wie für Straßen empfohlen, gibt es immer die Gefahr, dass sie zu engen Flaschenhälsen in deiner Wirtschaft werden. Versuche immer mehrere parallel zu bauen, um die Last zu verteilen. Wenn das nicht möglich ist, kann es sogar effizienter sein, keine Wasserwege zu bauen."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:335
 msgid "Ferry yard production"

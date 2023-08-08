@@ -18,6 +18,7 @@
 
 #include "ui_fsmenu/options.h"
 
+#include <algorithm>
 #include <memory>
 
 #include "base/i18n.h"
@@ -146,14 +147,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                           UI::DropdownType::kTextual,
                           UI::PanelStyle::kFsMenu,
                           UI::ButtonStyle::kFsMenuMenu),
-
-     inputgrab_(&box_interface_,
-                UI::PanelStyle::kFsMenu,
-                "input_grab",
-                Vector2i::zero(),
-                _("Grab Input"),
-                "",
-                0),
      sdl_cursor_(&box_interface_,
                  UI::PanelStyle::kFsMenu,
                  "sdl_cursor",
@@ -161,17 +154,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                  _("Use system mouse cursor"),
                  "",
                  0),
-     sb_maxfps_(&box_interface_,
-                "max_fps",
-                0,
-                0,
-                0,
-                0,
-                opt.maxfps,
-                0,
-                99,
-                UI::PanelStyle::kFsMenu,
-                _("Maximum FPS:")),
      tooltip_accessibility_mode_(&box_interface_,
                                  UI::PanelStyle::kFsMenu,
                                  "tooltip_accessibility_mode",
@@ -179,8 +161,9 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                                  _("Accessibility mode for tooltips")),
      translation_info_(
         &box_interface_hbox_, "translation_info", 0, 0, 100, 20, UI::PanelStyle::kFsMenu),
+     translation_padding_(&box_interface_vbox_, UI::PanelStyle::kFsMenu, "padding", 0, 0, 0, 0),
 
-     // Windows options
+     // Window options
      dock_windows_to_edges_(&box_interface_,
                             UI::PanelStyle::kFsMenu,
                             "dock_to_edges",
@@ -188,14 +171,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                             _("Dock windows to edges"),
                             "",
                             0),
-     animate_map_panning_(&box_interface_,
-                          UI::PanelStyle::kFsMenu,
-                          "animate_map_panning",
-                          Vector2i::zero(),
-                          _("Animate automatic map movements"),
-                          "",
-                          0),
-
      sb_dis_panel_(&box_interface_,
                    "panel_snap_distance",
                    0,
@@ -288,13 +263,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
           _("Compress Widelands data files (maps, replays, and savegames)"),
           "",
           0),
-     write_syncstreams_(&box_saving_,
-                        UI::PanelStyle::kFsMenu,
-                        "syncstreams",
-                        Vector2i::zero(),
-                        _("Write syncstreams in network games to debug desyncs"),
-                        "",
-                        0),
      // New Game options
      show_buildhelp_(&box_newgame_,
                      UI::PanelStyle::kFsMenu,
@@ -360,6 +328,14 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                       "invert_movement",
                       Vector2i::zero(),
                       _("Invert click-and-drag map movement direction")),
+     animate_map_panning_(&box_ingame_,
+                          UI::PanelStyle::kFsMenu,
+                          "animate_map_panning",
+                          Vector2i::zero(),
+                          _("Animate automatic map movements"),
+                          "",
+                          0),
+
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
      training_wheels_box_(&box_ingame_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      training_wheels_(&training_wheels_box_,
@@ -400,19 +376,23 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	// Interface
 	box_interface_vbox_.add(&language_dropdown_, UI::Box::Resizing::kFullSize);
 	box_interface_vbox_.add(&resolution_dropdown_, UI::Box::Resizing::kFullSize);
+	// TODO(tothxa): Replace with infinite space if box layouting quirks get fixed
+	box_interface_vbox_.add(&translation_padding_, UI::Box::Resizing::kFullSize);
+	// box_interface_vbox_.add_inf_space();
+
 	box_interface_hbox_.add(&box_interface_vbox_, UI::Box::Resizing::kExpandBoth);
 	box_interface_hbox_.add(&translation_info_, UI::Box::Resizing::kExpandBoth);
 
 	box_interface_.add(&box_interface_hbox_, UI::Box::Resizing::kFullSize);
-	box_interface_.add(&inputgrab_, UI::Box::Resizing::kFullSize);
+
 	box_interface_.add(&sdl_cursor_, UI::Box::Resizing::kFullSize);
-	box_interface_.add(&sb_maxfps_);
 	box_interface_.add(&tooltip_accessibility_mode_, UI::Box::Resizing::kFullSize);
 
 	box_interface_.add(&dock_windows_to_edges_, UI::Box::Resizing::kFullSize);
-	box_interface_.add(&animate_map_panning_, UI::Box::Resizing::kFullSize);
 	box_interface_.add(&sb_dis_panel_);
 	box_interface_.add(&sb_dis_border_);
+
+	box_interface_.add_space(kPadding);
 	box_interface_.add(&configure_keyboard_);
 
 	// Sound
@@ -423,7 +403,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	box_saving_.add(&sb_rolling_autosave_, UI::Box::Resizing::kFullSize);
 	box_saving_.add(&sb_replay_lifetime_, UI::Box::Resizing::kFullSize);
 	box_saving_.add(&zip_, UI::Box::Resizing::kFullSize);
-	box_saving_.add(&write_syncstreams_, UI::Box::Resizing::kFullSize);
 
 	// New Games
 	box_newgame_.add(&show_buildhelp_, UI::Box::Resizing::kFullSize);
@@ -441,8 +420,9 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	box_ingame_.add(&numpad_diagonalscrolling_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&edge_scrolling_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&invert_movement_, UI::Box::Resizing::kFullSize);
-	box_ingame_.add_space(kPadding);
+	box_ingame_.add(&animate_map_panning_, UI::Box::Resizing::kFullSize);
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+	box_ingame_.add_space(kPadding);
 	box_ingame_.add(&training_wheels_box_, UI::Box::Resizing::kFullSize);
 	training_wheels_box_.add(&training_wheels_, UI::Box::Resizing::kFullSize);
 	training_wheels_box_.add_inf_space();
@@ -496,17 +476,14 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	// Interface options
 	add_screen_resolutions(opt);
 
-	inputgrab_.set_state(opt.inputgrab);
 	sdl_cursor_.set_state(opt.sdl_cursor);
 	tooltip_accessibility_mode_.set_state(opt.tooltip_accessibility_mode);
 
-	// Windows options
+	// Window options
 	dock_windows_to_edges_.set_state(opt.dock_windows_to_edges);
-	animate_map_panning_.set_state(opt.animate_map_panning);
 
 	// Saving options
 	zip_.set_state(opt.zip);
-	write_syncstreams_.set_state(opt.write_syncstreams);
 
 	// Game options
 	auto_roadbuild_mode_.set_state(opt.auto_roadbuild_mode);
@@ -516,6 +493,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	numpad_diagonalscrolling_.set_state(opt.numpad_diagonalscrolling);
 	edge_scrolling_.set_state(opt.edge_scrolling);
 	invert_movement_.set_state(opt.invert_movement);
+	animate_map_panning_.set_state(opt.animate_map_panning);
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	training_wheels_.set_state(opt.training_wheels);
 #endif
@@ -598,11 +576,27 @@ void Options::layout() {
 		// Interface
 		language_dropdown_.set_height(tabs_.get_h() - language_dropdown_.get_y() - buth -
 		                              3 * kPadding);
-		translation_info_.set_size(
-		   language_dropdown_.get_w(),
-		   language_dropdown_.get_h() + resolution_dropdown_.get_h() + kPadding);
-		sb_maxfps_.set_unit_width(unit_w);
-		sb_maxfps_.set_desired_size(tab_panel_width, sb_maxfps_.get_h());
+
+		const int min_h = language_dropdown_.get_h() + resolution_dropdown_.get_h() + 2 * kPadding;
+		const int half_w = (tab_panel_width - 3 * kPadding) / 2;
+
+		// Make initial value big enough to avoid needing a scrollbar
+		int translation_h = 3 * min_h;
+
+		// Find out the required height
+		translation_info_.set_desired_size(half_w, translation_h);
+		translation_info_.set_size(half_w, translation_h);
+		int tmp_w = 0;
+		translation_info_.get_text_size(&tmp_w, &translation_h);
+
+		// Now set the final height
+		translation_h = std::max(translation_h, min_h);
+		translation_info_.set_desired_size(half_w, translation_h);
+		translation_info_.set_size(half_w, translation_h);
+		// TODO(tothxa): Remove if box layouting quirks get fixed
+		const int translation_pad_h = translation_h - min_h;
+		translation_padding_.set_desired_size(half_w, translation_pad_h);
+		translation_padding_.set_size(half_w, translation_pad_h);
 
 		sb_dis_panel_.set_unit_width(unit_w);
 		sb_dis_panel_.set_desired_size(tab_panel_width, sb_dis_panel_.get_h());
@@ -752,9 +746,10 @@ void Options::update_language_stats() {
 		          format(_("If you wish to help us translate, please visit %s"),
 		                 "<font underline=1>widelands.org/wiki/TranslatingWidelands</font>");
 	}
-	// Make font a bit smaller so the link will fit at 800x600 resolution.
+
 	translation_info_.set_text(
 	   as_richtext_paragraph(message, UI::FontStyle::kFsMenuTranslationInfo));
+	layout();
 }
 
 void Options::clicked_ok() {
@@ -801,14 +796,11 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 			os_.yres = res.yres;
 		}
 	}
-	os_.inputgrab = inputgrab_.get_state();
 	os_.sdl_cursor = sdl_cursor_.get_state();
-	os_.maxfps = sb_maxfps_.get_value();
 	os_.tooltip_accessibility_mode = tooltip_accessibility_mode_.get_state();
 
-	// Windows options
+	// Window options
 	os_.dock_windows_to_edges = dock_windows_to_edges_.get_state();
-	os_.animate_map_panning = animate_map_panning_.get_state();
 	os_.panel_snap_distance = sb_dis_panel_.get_value();
 	os_.border_snap_distance = sb_dis_border_.get_value();
 
@@ -817,7 +809,6 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 	os_.rolling_autosave = sb_rolling_autosave_.get_value();
 	os_.replay_lifetime = sb_replay_lifetime_.get_value();
 	os_.zip = zip_.get_state();
-	os_.write_syncstreams = write_syncstreams_.get_state();
 
 	// Game options
 	os_.auto_roadbuild_mode = auto_roadbuild_mode_.get_state();
@@ -827,6 +818,7 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 	os_.numpad_diagonalscrolling = numpad_diagonalscrolling_.get_state();
 	os_.edge_scrolling = edge_scrolling_.get_state();
 	os_.invert_movement = invert_movement_.get_state();
+	os_.animate_map_panning = animate_map_panning_.get_state();
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	os_.training_wheels = training_wheels_.get_state();
 #endif
@@ -882,14 +874,11 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.yres = opt_section_.get_int("yres", kDefaultResolutionH);
 	opt.maximized = opt_section_.get_bool("maximized", false);
 	opt.fullscreen = opt_section_.get_bool("fullscreen", false);
-	opt.inputgrab = opt_section_.get_bool("inputgrab", false);
-	opt.maxfps = opt_section_.get_int("maxfps", 25);
 	opt.sdl_cursor = opt_section_.get_bool("sdl_cursor", true);
 	opt.tooltip_accessibility_mode = opt_section_.get_bool("tooltip_accessibility_mode", false);
 
-	// Windows options
+	// Window options
 	opt.dock_windows_to_edges = opt_section_.get_bool("dock_windows_to_edges", false);
-	opt.animate_map_panning = opt_section_.get_bool("animate_map_panning", true);
 	opt.panel_snap_distance = opt_section_.get_int("panel_snap_distance", 0);
 	opt.border_snap_distance = opt_section_.get_int("border_snap_distance", 0);
 
@@ -898,7 +887,6 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.rolling_autosave = opt_section_.get_int("rolling_autosave", 5);
 	opt.replay_lifetime = opt_section_.get_int("replay_lifetime", 0);
 	opt.zip = !opt_section_.get_bool("nozip", false);
-	opt.write_syncstreams = opt_section_.get_bool("write_syncstreams", true);
 
 	// Game options
 	opt.auto_roadbuild_mode = opt_section_.get_bool("auto_roadbuild_mode", true);
@@ -908,6 +896,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.numpad_diagonalscrolling = opt_section_.get_bool("numpad_diagonalscrolling", false);
 	opt.edge_scrolling = opt_section_.get_bool("edge_scrolling", false);
 	opt.invert_movement = opt_section_.get_bool("invert_movement", false);
+	opt.animate_map_panning = opt_section_.get_bool("animate_map_panning", true);
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	opt.training_wheels = opt_section_.get_bool("training_wheels", true);
 #endif
@@ -931,14 +920,11 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_int("yres", opt.yres);
 	opt_section_.set_bool("maximized", opt.maximized);
 	opt_section_.set_bool("fullscreen", opt.fullscreen);
-	opt_section_.set_bool("inputgrab", opt.inputgrab);
-	opt_section_.set_int("maxfps", opt.maxfps);
 	opt_section_.set_bool("sdl_cursor", opt.sdl_cursor);
 	opt_section_.set_bool("tooltip_accessibility_mode", opt.tooltip_accessibility_mode);
 
-	// Windows options
+	// Window options
 	opt_section_.set_bool("dock_windows_to_edges", opt.dock_windows_to_edges);
-	opt_section_.set_bool("animate_map_panning", opt.animate_map_panning);
 	opt_section_.set_int("panel_snap_distance", opt.panel_snap_distance);
 	opt_section_.set_int("border_snap_distance", opt.border_snap_distance);
 
@@ -947,7 +933,6 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_int("rolling_autosave", opt.rolling_autosave);
 	opt_section_.set_int("replay_lifetime", opt.replay_lifetime);
 	opt_section_.set_bool("nozip", !opt.zip);
-	opt_section_.set_bool("write_syncstreams", opt.write_syncstreams);
 
 	// Game options
 	opt_section_.set_bool("auto_roadbuild_mode", opt.auto_roadbuild_mode);
@@ -957,6 +942,7 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_bool("numpad_diagonalscrolling", opt.numpad_diagonalscrolling);
 	opt_section_.set_bool("edge_scrolling", opt.edge_scrolling);
 	opt_section_.set_bool("invert_movement", opt.invert_movement);
+	opt_section_.set_bool("animate_map_panning", opt.animate_map_panning);
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	opt_section_.set_bool("training_wheels", opt.training_wheels);
 #endif
@@ -967,7 +953,6 @@ void OptionsCtrl::save_options() {
 	// Language options
 	opt_section_.set_string("language", opt.language);
 
-	WLApplication::get().set_input_grab(opt.inputgrab);
 	g_mouse_cursor->set_use_sdl(opt_dialog_->get_values().sdl_cursor);
 	i18n::set_locale(opt.language);
 	UI::g_fh->reinitialize_fontset(i18n::get_locale());

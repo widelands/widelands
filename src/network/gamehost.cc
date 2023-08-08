@@ -507,7 +507,7 @@ void GameHost::run_callback() {
 	game_->logic_rand_seed(rng_seed);
 	game_->set_ai_training_mode(get_config_bool("ai_training", false));
 	game_->set_auto_speed(get_config_bool("auto_speed", false));
-	game_->set_write_syncstream(get_config_bool("write_syncstreams", true));
+	game_->set_write_syncstream(g_write_syncstreams);
 
 	if (capsule_ != nullptr) {
 		capsule_->set_visible(false);

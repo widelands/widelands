@@ -18,6 +18,7 @@
 # Hybrid Dog, 2016
 # Raymond Vetter, 2018
 # Raymond Vetter, 2018
+# Simon Heimberg, 2023
 # Stephan Lutz <stephan-lutz@gmx.de>, 2018-2023
 # Elisabeth Jäger, 2015-2016
 # wl-zocker, 2014
@@ -29,7 +30,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-07-08 03:03+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2023\n"
+"Last-Translator: Simon Heimberg, 2023\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -279,7 +280,7 @@ msgid ""
 "Nice how they are working, isn’t it? But the poor carrier has a very long "
 "way to go. We can make it easier for him (and more efficient for us) by "
 "placing another blue flag on the road. You try it this time."
-msgstr "Nett, wie sie arbeiten, nicht wahr? Aber der arme Träger hat einen sehr weiten Weg. Wir können es ihm leichter machen (und effizienter für uns), wenn wir eine weitere blaue Flagge auf der Straße setzen. Diesesmal probierst du es selbst."
+msgstr "Nett, wie sie arbeiten, nicht wahr? Aber der arme Träger hat einen sehr weiten Weg. Wir können es ihm leichter machen (und effizienter für uns), wenn wir eine weitere blaue Flagge auf der Straße setzen. Dieses mal probierst du es selbst."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:186
 msgid ""
