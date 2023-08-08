@@ -101,8 +101,9 @@ bool SaveHandler::check_next_tick(Widelands::Game& game, uint32_t realtime) cons
 		return false;  // no autosave or not due, yet
 	}
 
-	// check if game is paused (in any way)
-	if (game.game_controller()->is_paused_or_zero_speed()) {
+	// Prevents unnecessary autosaves while the game is paused, but allows the first autosave
+	// during the pause if there had been progress before pausing.
+	if (next_save_min_gametime_ > game.get_gametime()) {
 		return false;
 	}
 
@@ -124,7 +125,7 @@ void SaveHandler::think(Widelands::Game& game) {
 	}
 
 	const uint32_t realtime = SDL_GetTicks();
-	initialize(realtime);
+	initialize(game, realtime);
 	bool force_skip = false;
 
 	// Are we saving now?
@@ -144,11 +145,7 @@ void SaveHandler::think(Widelands::Game& game) {
 			save_filename_ = "";
 		} else {
 			// Autosave ...
-			constexpr Duration kMinGametimeBetweenSaves(60 * 1000);
-			if (skip_when_inactive_ &&
-			    (UI::Panel::time_of_last_user_activity() < last_save_realtime_ ||
-			     (last_save_gametime_.is_valid() &&
-			      game.get_gametime() - last_save_gametime_ < kMinGametimeBetweenSaves))) {
+			if (skip_when_inactive_ && UI::Panel::time_of_last_user_activity() < last_save_realtime_) {
 				verb_log_info_time(game.get_gametime(), "Autosave: Skipping due to user inactivity");
 				last_save_realtime_ = realtime;
 				force_skip = true;
@@ -181,6 +178,8 @@ void SaveHandler::think(Widelands::Game& game) {
 		// This prevents us from going into endless autosave cycles if the save
 		// should take longer than the autosave interval.
 		next_save_realtime_ = SDL_GetTicks() + autosave_interval_in_ms_;
+		// last_save_gametime_ was updated by save_game()
+		next_save_min_gametime_ = last_save_gametime_ + autosave_gametime_interval_;
 
 		if (!force_skip) {
 			verb_log_info_time(
@@ -195,7 +194,7 @@ void SaveHandler::think(Widelands::Game& game) {
 /**
  * Lazy intialisation on first call.
  */
-void SaveHandler::initialize(uint32_t realtime) {
+void SaveHandler::initialize(Widelands::Game& game, uint32_t realtime) {
 	if (initialized_) {
 		return;
 	}
@@ -203,10 +202,12 @@ void SaveHandler::initialize(uint32_t realtime) {
 	fs_type_ = get_config_bool("nozip", false) ? FileSystem::DIR : FileSystem::ZIP;
 
 	autosave_interval_in_ms_ = get_config_int("autosave", kDefaultAutosaveInterval * 60) * 1000;
+	autosave_gametime_interval_ = Duration(autosave_interval_in_ms_ / 2);
 
 	next_save_realtime_ = realtime + autosave_interval_in_ms_;
 	last_save_realtime_ = realtime;
-	last_save_gametime_ = Time();
+	last_save_gametime_ = game.get_gametime();
+	next_save_min_gametime_ = last_save_gametime_ + autosave_gametime_interval_;
 
 	number_of_rolls_ = get_config_int("rolling_autosave", 5);
 	skip_when_inactive_ = get_config_bool("skip_autosave_on_inactivity", true);
