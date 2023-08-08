@@ -559,20 +559,6 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 		throw wexception("Section 6 (Object Type) not found");
 	}
 
-#if 0  // NOCOM
-	for (int16_t y = 0; y < mapheight; ++y) {
-		uint32_t i = y * mapwidth;
-		for (int16_t x = 0; x < mapwidth; ++x, ++i) {
-			// ignore everything but HQs
-			if (object_type[i] == 0x80) {
-				if (bobs[i] < map_.get_nrplayers()) {
-					map_.set_starting_pos(bobs[i] + 1, Widelands::Coords(x, y));
-				}
-			}
-		}
-	}
-#endif
-
 	//  SWD-SECTION 7: Animals
 	//  0x01        == Bunny
 	//  0x02        == fox
