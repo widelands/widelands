@@ -145,7 +145,10 @@ void SaveHandler::think(Widelands::Game& game) {
 		} else {
 			// Autosave ...
 			constexpr Duration kMinGametimeBetweenSaves(60 * 1000);
-			if (skip_when_inactive_ && (UI::Panel::time_of_last_user_activity() < last_save_realtime_ || (last_save_gametime_.is_valid() && game.get_gametime() - last_save_gametime_ < kMinGametimeBetweenSaves))) {
+			if (skip_when_inactive_ &&
+			    (UI::Panel::time_of_last_user_activity() < last_save_realtime_ ||
+			     (last_save_gametime_.is_valid() &&
+			      game.get_gametime() - last_save_gametime_ < kMinGametimeBetweenSaves))) {
 				verb_log_info_time(game.get_gametime(), "Autosave: Skipping due to user inactivity");
 				last_save_realtime_ = realtime;
 				force_skip = true;
