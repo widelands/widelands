@@ -46,6 +46,11 @@ protected:
 	[[nodiscard]] uint32_t get_min_capacity() const;
 	[[nodiscard]] uint32_t get_max_capacity() const;
 
+	[[nodiscard]] inline bool get_can_act() const {
+		return ibase_.can_act(
+		   (building_ != nullptr ? building_->owner() : ship_->owner()).player_number());
+	}
+
 private:
 	void change_soldier_capacity(int delta);
 	void click_decrease();
@@ -122,8 +127,7 @@ void SoldierCapacityControl::think() {
 	const uint32_t capacity = get_cur_capacity();
 	value_.set_text(as_string(capacity));
 
-	bool const can_act =
-	   ibase_.can_act((building_ != nullptr ? building_->owner() : ship_->owner()).player_number());
+	bool const can_act = get_can_act();
 	decrease_.set_enabled(can_act && get_min_capacity() < capacity);
 	increase_.set_enabled(can_act && get_max_capacity() > capacity);
 }
@@ -160,6 +164,10 @@ void SoldierCapacityControl::click_increase() {
 }
 
 bool SoldierCapacityControl::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
+	if (!get_can_act()) {
+		return false;
+	}
+
 	int32_t change = get_mousewheel_change(MousewheelHandlerConfigID::kChangeValue, x, y, modstate);
 	if (change == 0) {
 		// Try big step

@@ -122,14 +122,7 @@ struct InputCallback {
 ///
 /// Forking does not work on windows, but nobody cares enough to investigate.
 /// It is only a debugging convenience anyway.
-///
-///
-/// \par The mouse cursor
-///
-/// Ordinarily, relative coordinates break down when the cursor leaves the
-/// window. This means we have to grab the mouse, then relative coords are
-/// always available.
-// TODO(unknown): Actually do grab the mouse when it is locked
+
 // TODO(unknown): Graphics are currently not handled by WLApplication, and it is
 // non essential for playback anyway. Additionally, we will want several
 // rendering backends (software and OpenGL). Maybe the graphics backend loader
@@ -159,7 +152,6 @@ struct WLApplication {
 
 	// @{
 	void warp_mouse(Vector2i);
-	void set_input_grab(bool grab);
 
 	/// The mouse's current coordinates
 	[[nodiscard]] Vector2i get_mouse_position() const {
