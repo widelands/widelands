@@ -77,7 +77,7 @@ void validate_header(const S2MapDescrHeader& header) {
 	if (header.uses_world < 0 || header.uses_world > 2) {
 		throw WLWarning("", "Bad world index %d", header.uses_world);
 	}
-	if (header.nplayers < 0 || header.nplayers > 7) {
+	if (header.nplayers < 0 || header.nplayers > 8) {
 		throw WLWarning("", "Bad player count %d", header.nplayers);
 	}
 	if (!is_valid_cstring(header.author, 26)) {
