@@ -10,14 +10,14 @@
 # Kura Go <kurago@ml1.net>, 2019
 # David D, 2021
 # Stephan Lutz <stephan-lutz@gmx.de>, 2021
-# Betsalel Horowitz <horo5766@outlook.com>, 2021
+# 34b6ffed036c169f8c0dd59e6bb8a305_b52781a <671f2e957f50d5213a1238cd588b004a_1012986>, 2021
 # Renaud Bouchard, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Renaud Bouchard, 2023\n"
 "Language-Team: French (https://app.transifex.com/widelands/teams/35159/fr/)\n"

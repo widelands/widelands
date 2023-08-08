@@ -26,6 +26,9 @@
 
 #include "io/profile.h"
 
+/* Command line option */
+extern bool g_write_syncstreams;
+
 /*
  * Further explanations for all functions and its return values
  * can be found in io/profile.cc
