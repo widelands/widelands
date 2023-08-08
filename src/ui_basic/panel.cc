@@ -206,7 +206,16 @@ void Panel::logic_thread() {
 			       lock_if_free, LogicThreadState::kLocked)) {
 				MutexLock lock(MutexLock::ID::kLogicFrame);
 
-				m->game_logic_think();  // actual game logic
+				try {
+					m->game_logic_think();  // actual game logic
+				} catch (const WException& e) {
+					// Forward uncaught exceptions to the main thread's handler.
+					NoteThreadSafeFunction::instantiate(
+					   [&e]() { throw WException::copy(e); }, true, false);
+				} catch (const std::exception& e) {
+					NoteThreadSafeFunction::instantiate([&e]() { throw e; }, true, false);
+				}
+
 				LogicThreadState free_if_locked = LogicThreadState::kLocked;
 				m->logic_thread_locked_.compare_exchange_strong(
 				   free_if_locked, LogicThreadState::kFree);

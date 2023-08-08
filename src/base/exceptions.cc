@@ -28,7 +28,8 @@ bool g_fail_on_lua_error(false);
  * class WException implementation
  */
 #undef wexception
-WException::WException(char const* const file, uint32_t const line, char const* const fmt, ...) {
+WException::WException(char const* const file, uint32_t const line, char const* const fmt, ...)
+   : file_(file), line_(line) {
 	char buffer[512];
 	{
 		va_list va;
@@ -39,10 +40,6 @@ WException::WException(char const* const file, uint32_t const line, char const* 
 	std::ostringstream ost;
 	ost << '[' << file << ':' << line << "] " << buffer;
 	what_ = ost.str();
-}
-
-char const* WException::what() const noexcept {
-	return what_.c_str();
 }
 
 /*
