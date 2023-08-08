@@ -22,6 +22,7 @@
 #include <cstdint>
 #include <optional>
 
+#include "base/times.h"
 #include "io/filesystem/filesystem.h"
 #include "logic/filesystem_constants.h"
 
@@ -78,6 +79,7 @@ public:
 private:
 	uint32_t next_save_realtime_{0U};
 	uint32_t last_save_realtime_{0U};
+	Time last_save_gametime_;
 	bool initialized_{false};
 	bool allow_saving_{true};
 	bool save_requested_{false};

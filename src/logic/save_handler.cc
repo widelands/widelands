@@ -144,7 +144,8 @@ void SaveHandler::think(Widelands::Game& game) {
 			save_filename_ = "";
 		} else {
 			// Autosave ...
-			if (skip_when_inactive_ && UI::Panel::time_of_last_user_activity() < last_save_realtime_) {
+			constexpr Duration kMinGametimeBetweenSaves(60 * 1000);
+			if (skip_when_inactive_ && (UI::Panel::time_of_last_user_activity() < last_save_realtime_ || (last_save_gametime_.is_valid() && game.get_gametime() - last_save_gametime_ < kMinGametimeBetweenSaves))) {
 				verb_log_info_time(game.get_gametime(), "Autosave: Skipping due to user inactivity");
 				last_save_realtime_ = realtime;
 				force_skip = true;
@@ -202,6 +203,7 @@ void SaveHandler::initialize(uint32_t realtime) {
 
 	next_save_realtime_ = realtime + autosave_interval_in_ms_;
 	last_save_realtime_ = realtime;
+	last_save_gametime_ = Time();
 
 	number_of_rolls_ = get_config_int("rolling_autosave", 5);
 	skip_when_inactive_ = get_config_bool("skip_autosave_on_inactivity", true);
@@ -251,6 +253,7 @@ bool SaveHandler::save_game(Widelands::Game& game,
 	   complete_filename, fstype.has_value() ? fstype.value() : fs_type_);
 	gsh.save();
 	last_save_realtime_ = SDL_GetTicks();
+	last_save_gametime_ = game.get_gametime();
 
 	// Ignore it if only the temporary backup wasn't deleted
 	// but save was successfull otherwise
