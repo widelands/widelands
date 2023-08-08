@@ -3,6 +3,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
+# Simon Heimberg, 2023
 # Stephan Lutz <stephan-lutz@gmx.de>, 2023
 # 
 msgid ""
@@ -644,7 +645,7 @@ msgstr ""
 "haben noch keinen Bauernhof gebaut, um unsere Spinnen zu füttern. Da dies "
 "eines der Gebäude ist, die Spinnenstoff zur Fertigstellung benötigen, wird "
 "es zu einer unauflösbaren Krise kommen, wenn keines rechtzeitig "
-"fertigestellt wird."
+"fertiggestellt wird."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
@@ -771,8 +772,8 @@ msgid ""
 msgstr ""
 "Sidolus, da wir jeden Verbündeten brauchen können den wir bekommen können, "
 "sollten wir ihnen helfen. Lasst uns schauen was wir für sie tun können. In "
-"jedem Fall sollten wir aber unsere eigene miltitärische Stärke verbessern, "
-"um unabhängig von anderen zu werden."
+"jedem Fall sollten wir aber unsere eigene militärische Stärke verbessern, um"
+" unabhängig von anderen zu werden."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:383
 msgid "Building Material Ensured"
@@ -843,7 +844,7 @@ msgid ""
 "%s, may Satul warm you! Another issue solved. We have found some resources "
 "and built a mine of each type."
 msgstr ""
-"%s, möge Satul Euch wärmen! Ein weiters Problem gelöst. Wir haben einige "
+"%s, möge Satul Euch wärmen! Ein weiteres Problem gelöst. Wir haben einige "
 "Rohstoffe gefunden und eine Mine jeden Typs gebaut."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
@@ -883,7 +884,7 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:451
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:475
 msgid "Kalitath Appreciates Efforts"
-msgstr "Kalitath begrüßt die Anstrengungen"
+msgstr "Kalitath würdigt die Anstrengungen"
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:454
@@ -958,7 +959,7 @@ msgstr ""
 "und ihre Krieger und Götter erschienen mir sehr stark in der Schlacht gegen "
 "das Imperium. Insbesondere ihr Anführer Kalitath war ein guter Gastgeber und"
 " ich begann darüber nachzudenken unsere Stämme zu vereinigen, um eine "
-"friedvolle Zukunft auf dieser Insel zu gewährleisten. Deshalb möchte ich, "
+"friedliche Zukunft auf dieser Insel zu gewährleisten. Deshalb möchte ich, "
 "dass Ihr unser Volk auf eine Heirat und friedliche Koexistenz mit den "
 "Barbaren vorbereitet. Das schließt das Studium ihrer Götter, und die "
 "Vorbereitung sie anzubeten, ein."

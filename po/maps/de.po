@@ -10,6 +10,7 @@
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2007
+# Simon Heimberg, 2023
 # Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2023
 # Tino Miegel <tino.miegel@gmail.com>, 2016
 # Elisabeth Jäger, 2015-2016
@@ -19,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2023\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
@@ -494,7 +495,7 @@ msgid ""
 " mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
 "army – use the terrain to your advantage. Chop all trees and expand wherever"
 " you can – it’s the only way to find all the precious farm spaces."
-msgstr "In den Bergen gibt es ebene Flächen im Überfluss. Unglücklicherweise sind die meisten davon senkrecht – nutze den wenigen zur Verfügung stehenden Platz weise. Eine Festung am Beginn eines engen Bergpasses kann ein formidables Hindernis für eine gegenerische Armee sein – nutze das Gelände zu deinem Vorteil. Fälle alle Bäume und expandiere wo immer du kannst – das ist der einzige Weg alle kostbaren Bauernhofplätze zu finden."
+msgstr "In den Bergen gibt es ebene Flächen im Überfluss. Unglücklicherweise sind die meisten davon senkrecht – nutze den wenigen zur Verfügung stehenden Platz weise. Eine Festung am Beginn eines engen Bergpasses kann ein formidables Hindernis für eine gegnerische Armee sein – nutze das Gelände zu deinem Vorteil. Fälle alle Bäume und expandiere wo immer du kannst – das ist der einzige Weg alle kostbaren Bauernhofplätze zu finden."
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -789,7 +790,7 @@ msgid ""
 " of iron to kickstart your economy), so you have to rely on the 5% "
 "production of an empty mine. And you’re still 1 vs 6 (though of course you "
 "can remove some AI players to make it a bit easier). Good luck!"
-msgstr "Diese Karte ist als Solo Herausforderung an diejenigen besonders erfahrenen Spieler gerichtet, die ein Spiel gegen 6 KI Spieler zu einfach finden. Der blaue Spieler hat keine Metalle (ausser ein bischen Eisen um die Wirtschaft in Gang zu bringen), weswegen er auf die 5% Ausbeute einer erschöpften Mine angewiesen ist. Und man spielt immer noch gegen 6 KI Spieler (obwohl man einige davon auch abwählen kann um es etwas zu vereinfachen). Viel Glück!"
+msgstr "Diese Karte ist als Solo Herausforderung an diejenigen besonders erfahrenen Spieler gerichtet, die ein Spiel gegen 6 KI Spieler zu einfach finden. Der blaue Spieler hat keine Metalle (ausser ein bisschen Eisen um die Wirtschaft in Gang zu bringen), weswegen er auf die 5% Ausbeute einer erschöpften Mine angewiesen ist. Und man spielt immer noch gegen 6 KI Spieler (obwohl man einige davon auch abwählen kann um es etwas zu vereinfachen). Viel Glück!"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"
@@ -844,7 +845,7 @@ msgid ""
 "developments of better equipped armies. Tough times are on the brink of "
 "emerging, and you should heed the words of your wise advisors, or fade into "
 "oblivion like the others."
-msgstr "Es ist das Land wo man die Sonne im Winter kaum sieht und wo der Frühling alle Erinnerungen an die Vergangenheit wegspült. Seltsame Spannungen sind zwischen den Bewohnern enstanden und viele eigennützige Führer haben aus dem Chaos Profit geschlagen. Die abergläubischen Menschen scheinen kein Hindernis für die Entwicklung immer besser gerüsteter Armeen zu sein. Harte Zeiten stehen kurz bevor, und du solltest den Worten deines weisen Beraters folgen oder in Vergessenheit geraten wie all die Anderen."
+msgstr "Es ist das Land wo man die Sonne im Winter kaum sieht und wo der Frühling alle Erinnerungen an die Vergangenheit wegspült. Seltsame Spannungen sind zwischen den Bewohnern entstanden und viele eigennützige Führer haben aus dem Chaos Profit geschlagen. Die abergläubischen Menschen scheinen kein Hindernis für die Entwicklung immer besser gerüsteter Armeen zu sein. Harte Zeiten stehen kurz bevor, und du solltest den Worten deines weisen Beraters folgen oder in Vergessenheit geraten wie all die Anderen."
 
 #: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:8
 msgid "The Green Plateau"
@@ -1012,7 +1013,7 @@ msgid ""
 "exclusive trade alliance, forcing the other two to do the same. Suddenly, it"
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
-msgstr "Die vier mächtigen Häfen der Krallen-Inseln haben seit Ewigkeiten untereinander Handel getrieben. Ein jeder von ihnen brauchte Rohstoffe, die er auf seinem Gebiet nicht selbst herstellen konnte und konnte zugleich Rohstoffe bieten, die den anderen fehlten. Aufgrund dieser Handel war immer eine sehr freundliche Beziehung zwischen den Häfen und den Bewohnern der Krallen-Inseln üblich – bis sich vor Kurzem zwei der Häfen zu einer exklusiven Handelsallianz zusammenschlossen, was die beiden anderen zwang, es ihnen gleichzutun. Plötzlich scheint es nur noch eine Sache der Zeit zu sein, bis die ersten Kämpfe zwischen den Häfen das friedliche Leben zersört, das so lange auf den Inseln vorgeherrscht hatte …"
+msgstr "Die vier mächtigen Häfen der Krallen-Inseln haben seit Ewigkeiten untereinander Handel getrieben. Ein jeder von ihnen brauchte Rohstoffe, die er auf seinem Gebiet nicht selbst herstellen konnte und konnte zugleich Rohstoffe bieten, die den anderen fehlten. Aufgrund dieser Handel war immer eine sehr freundliche Beziehung zwischen den Häfen und den Bewohnern der Krallen-Inseln üblich – bis sich vor Kurzem zwei der Häfen zu einer exklusiven Handelsallianz zusammenschlossen, was die beiden anderen zwang, es ihnen gleichzutun. Plötzlich scheint es nur noch eine Sache der Zeit zu sein, bis die ersten Kämpfe zwischen den Häfen das friedliche Leben zerstört, das so lange auf den Inseln vorgeherrscht hatte …"
 
 #: ../../data/maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"

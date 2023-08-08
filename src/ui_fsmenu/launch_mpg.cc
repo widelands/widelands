@@ -92,14 +92,15 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
 	ok_.set_enabled(settings_.can_launch());
 
 	left_column_box_.add(&mpsg_, UI::Box::Resizing::kExpandBoth);
-	left_column_box_.add_space(kPadding);
-	left_column_box_.add(chat_.get(), UI::Box::Resizing::kExpandBoth);
+	left_column_box_.add_space(8 * kPadding);
+	left_column_box_.add(chat_.get(), UI::Box::Resizing::kFullSize);
 
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& s) {
 		if (s.action == NoteGameSettings::Action::kMap) {
 			map_changed();
 		}
 	});
+	update_warn_desyncing_addon();
 	layout();
 	initialization_complete();
 }
@@ -118,10 +119,13 @@ void LaunchMPG::layout() {
 	help_button_.set_size(standard_height_, standard_height_);
 	help_button_.set_pos(Vector2i(get_inner_w() - help_button_.get_w(), 0));
 
-	mpsg_.set_max_size(0, left_column_box_.get_h() / 2);
-
-	mpsg_.force_new_dimensions(
-	   left_column_box_.get_w(), left_column_box_.get_h() / 2, scale_factor * standard_height_);
+	// Reset size to fit left_column_box_, than relayout
+	chat_->set_desired_size(0, 0);
+	uint32_t h = left_column_box_.get_h() / 2 - 4 * kPadding;
+	// Assign heights to properly layout the scrollable box
+	mpsg_.force_new_dimensions(left_column_box_.get_w(), h, scale_factor * standard_height_);
+	chat_->set_desired_size(0, h);
+	LaunchGame::layout();
 
 	// set focus to chat input
 	if (chat_) {
@@ -142,6 +146,7 @@ void LaunchMPG::win_condition_selected() {
 		   t->has_key("peaceful_mode_allowed") && !t->get_bool("peaceful_mode_allowed");
 		update_peaceful_mode();
 		mpsg_.update_players();
+		layout();
 	}
 }
 

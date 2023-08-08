@@ -782,6 +782,7 @@ bool Game::run(StartGameType const start_game_type,
 	g_sh->change_music(Songset::kMenu, 1000);
 
 	cleanup_objects();
+	delete_pending_player_commands();
 	set_ibase(nullptr);
 
 	state_ = gs_notrunning;
@@ -886,6 +887,7 @@ void Game::cleanup_for_load() {
 
 	EditorGameBase::cleanup_for_load();
 
+	delete_pending_player_commands();
 	cmdqueue().flush();
 
 	pending_diplomacy_actions_.clear();
@@ -898,6 +900,7 @@ void Game::cleanup_for_load() {
 void Game::full_cleanup() {
 	EditorGameBase::full_cleanup();
 
+	delete_pending_player_commands();
 	did_postload_addons_before_loading_ = false;
 	ctrl_.reset();
 	replaywriter_.reset();
@@ -910,6 +913,14 @@ void Game::full_cleanup() {
 	if (has_loader_ui()) {
 		remove_loader_ui();
 	}
+}
+
+void Game::delete_pending_player_commands() {
+	MutexLock m(MutexLock::ID::kCommands);
+	for (PlayerCommand* pc : pending_player_commands_) {
+		delete pc;
+	}
+	pending_player_commands_.clear();
 }
 
 /**

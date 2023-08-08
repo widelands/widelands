@@ -81,7 +81,7 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
                              "win_condition_duration",
                              0,
                              0,
-                             360,
+                             0,
                              240,
                              Widelands::kDefaultWinConditionDuration,
                              15,        // 15 minutes minimum gametime
@@ -171,7 +171,8 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
 
      // Variables and objects used in the menu
      settings_(settings),
-     ctrl_(ctrl) {
+     ctrl_(ctrl),
+     has_desyncing_addon_(false) {
 	warn_desyncing_addon_.set_visible(false);
 	write_replay_.set_state(true);
 
@@ -213,22 +214,23 @@ void LaunchGame::add_all_widgets() {
 	right_column_content_box_.add(&map_details_, UI::Box::Resizing::kExpandBoth);
 	right_column_content_box_.add_space(1 * kPadding);
 	right_column_content_box_.add(&warn_desyncing_addon_, UI::Box::Resizing::kFullSize);
-	right_column_content_box_.add_space(4 * kPadding);
+	right_column_content_box_.add_space(1 * kPadding);
 	right_column_content_box_.add(&configure_game_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	right_column_content_box_.add_space(3 * kPadding);
+	right_column_content_box_.add_space(1 * kPadding);
 	right_column_content_box_.add(&win_condition_dropdown_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_space(1 * kPadding);
 	right_column_content_box_.add(&win_condition_duration_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_space(3 * kPadding);
 	right_column_content_box_.add(&toggle_advanced_options_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_space(1 * kPadding);
-	right_column_content_box_.add(&advanced_options_box_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add(&advanced_options_box_, UI::Box::Resizing::kExpandBoth);
 
 	for (auto& pair : game_flag_checkboxes_) {
 		advanced_options_box_.add(pair.second.first, UI::Box::Resizing::kFullSize);
 		advanced_options_box_.add_space(1 * kPadding);
 	}
 	advanced_options_box_.add(&write_replay_, UI::Box::Resizing::kFullSize);
+	advanced_options_box_.set_scrolling(true);
 
 	if (choose_map_ != nullptr) {
 		right_column_content_box_.add_space(3 * kPadding);
@@ -244,19 +246,29 @@ void LaunchGame::layout() {
 	TwoColumnsFullNavigationMenu::layout();
 	win_condition_dropdown_.set_desired_size(0, standard_height_);
 
-	map_details_.set_max_size(0, right_column_box_.get_h() / 3);
-	map_details_.force_new_dimensions(right_column_width_, standard_height_);
+	map_details_.set_max_size(0, right_column_box_.get_h() / 4);
+	advanced_options_box_.set_max_size(0, 2 * kStateboxSize + kPadding);
+
+	int w;
+	int h;
+	// The warning might overflow the available space,
+	// hide it, if it does not fit
+	warn_desyncing_addon_.set_visible(has_desyncing_addon_);
+	right_column_content_box_.get_desired_size(&w, &h);
+	int h_max = (right_column_box_.get_h() - button_box_.get_h() - 5 * kPadding);
+	if (h > h_max) {
+		warn_desyncing_addon_.set_visible(false);
+	}
 }
 
 void LaunchGame::update_warn_desyncing_addon() {
-	const bool has_desyncing_addon = std::any_of(
+	has_desyncing_addon_ = std::any_of(
 	   AddOns::g_addons.begin(), AddOns::g_addons.end(),
 	   [](const AddOns::AddOnState& addon) { return addon.second && !addon.first->sync_safe; });
 
-	warn_desyncing_addon_.set_visible(has_desyncing_addon);
 	// TODO(Nordfriese): The scenario check is a quickfix for #5745 and related #4531,
 	// remove when scenario replays are functional
-	write_replay_.set_visible(!has_desyncing_addon && !settings_.settings().scenario);
+	write_replay_.set_visible(!has_desyncing_addon_ && !settings_.settings().scenario);
 }
 
 bool LaunchGame::should_write_replay() const {

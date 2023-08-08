@@ -69,7 +69,7 @@ wl.Descriptions():new_productionsite_type {
          descname = _("working"),
          actions = {
             -- "return=skipped" causes 10 sec delay
-            -- time total: 3 * 57.667 + 10 = 183 sec
+            -- time total: 3 * 58 + 10 = 184 sec
             "call=produce_ax",
             "call=produce_ax_sharp",
             "call=produce_ax_broad",
@@ -80,10 +80,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging an ax because ...
          descname = _("forging an ax"),
          actions = {
-            -- time: 23.067 + 22 + 9 + 3.6 = 57.667 sec
+            -- time: 23.4 + 22 + 9 + 3.6 = 58 sec
             "return=skipped unless economy needs ax",
             "consume=coal iron",
-            "sleep=duration:23s067ms",
+            "sleep=duration:23s400ms",
             "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:22s",
             "playsound=sound/smiths/sharpening priority:90%",
@@ -95,10 +95,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a sharp ax because ...
          descname = _("forging a sharp ax"),
          actions = {
-            -- time: 23.067 + 22 + 9 + 3.6 = 57.667 sec
+            -- time: 23.4 + 22 + 9 + 3.6 = 58 sec
             "return=skipped unless economy needs ax_sharp",
             "consume=coal iron:2",
-            "sleep=duration:23s067ms",
+            "sleep=duration:23s400ms",
             "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:22s",
             "playsound=sound/smiths/sharpening priority:90%",
@@ -110,10 +110,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a broad ax because ...
          descname = _("forging a broad ax"),
          actions = {
-            -- time: 23.067 + 22 + 9 + 3.6 = 57.667 sec
+            -- time: 23.4 + 22 + 9 + 3.6 = 58 sec
             "return=skipped unless economy needs ax_broad",
             "consume=coal:2 iron:2",
-            "sleep=duration:23s067ms",
+            "sleep=duration:23s400ms",
             "playsound=sound/smiths/smith priority:50% allow_multiple",
             "animate=working duration:22s",
             "playsound=sound/smiths/sharpening priority:90%",

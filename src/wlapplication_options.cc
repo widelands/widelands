@@ -31,6 +31,8 @@
 #include "io/filesystem/disk_filesystem.h"
 #include "logic/filesystem_constants.h"
 
+bool g_write_syncstreams = false;
+
 static Profile g_options(Profile::err_log);
 
 static std::string config_file;
