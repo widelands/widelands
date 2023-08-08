@@ -1051,7 +1051,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 				place_immovable(location, bobname);
 			}
 		}  // end for x
-	}  // end for y
+	}     // end for y
 	//  WORKAROUND:
 	//  Unfortunately the Widelands engine is not completely compatible with
 	//  the Settlers 2; space for buildings is defined differently. To allow

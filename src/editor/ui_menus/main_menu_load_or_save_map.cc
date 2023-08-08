@@ -249,8 +249,7 @@ void MainMenuLoadOrSaveMap::fill_table() {
 
 				maps_data_.emplace_back(map, mapfilename, maptype, display_type);
 			} catch (const WException& e) {
-				log_warn(
-				   "Map list: Skip %s due to preload error: %s\n", mapfilename.c_str(), e.what());
+				log_warn("Map list: Skip %s due to preload error: %s\n", mapfilename.c_str(), e.what());
 			}  //  we simply skip illegal entries
 		} else if (g_fs->is_directory(mapfilename) &&
 		           (show_empty_dirs_ || !g_fs->list_directory(mapfilename).empty())) {
