@@ -22,6 +22,7 @@
 #include <cstdint>
 #include <optional>
 
+#include "base/times.h"
 #include "io/filesystem/filesystem.h"
 #include "logic/filesystem_constants.h"
 
@@ -78,6 +79,7 @@ public:
 private:
 	uint32_t next_save_realtime_{0U};
 	uint32_t last_save_realtime_{0U};
+	Time next_save_min_gametime_;
 	bool initialized_{false};
 	bool allow_saving_{true};
 	bool save_requested_{false};
@@ -88,9 +90,11 @@ private:
 
 	FileSystem::Type fs_type_{FileSystem::ZIP};
 	int32_t autosave_interval_in_ms_{kDefaultAutosaveInterval * 60 * 1000};
+	Duration autosave_gametime_interval_;
 	int32_t number_of_rolls_{5};  // For rolling file update
+	bool skip_when_inactive_{true};
 
-	void initialize(uint32_t realtime);
+	void initialize(Widelands::Game& game, uint32_t realtime);
 	bool roll_save_files(const std::string& filename, std::string* error) const;
 	bool check_next_tick(Widelands::Game& game, uint32_t realtime) const;
 };

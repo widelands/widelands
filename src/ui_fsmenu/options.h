@@ -60,9 +60,11 @@ public:
 		int32_t autosave;          // autosave interval in minutes
 		int32_t rolling_autosave;  // number of file to use for rolling autosave
 		int32_t replay_lifetime;   // number of weeks to keep replays around
+		bool skip_autosave_on_inactivity;
 		bool zip;
 
 		// Game options
+		int32_t pause_game_on_inactivity;  // inactivity duration in minutes
 		bool auto_roadbuild_mode;
 		bool transparent_chat;
 		bool single_watchwin;
@@ -172,6 +174,7 @@ private:
 	UI::SpinBox sb_autosave_;
 	UI::SpinBox sb_rolling_autosave_;
 	UI::SpinBox sb_replay_lifetime_;
+	UI::Checkbox skip_autosave_on_inactivity_;
 	UI::Checkbox zip_;
 
 	// New Game options
@@ -183,6 +186,7 @@ private:
 	UI::Checkbox show_workarea_overlap_;
 
 	// In-Game options
+	UI::SpinBox sb_pause_game_on_inactivity_;
 	UI::Checkbox auto_roadbuild_mode_;
 	UI::Checkbox transparent_chat_;
 	UI::Checkbox single_watchwin_;
