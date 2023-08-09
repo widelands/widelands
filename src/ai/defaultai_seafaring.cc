@@ -472,7 +472,7 @@ void DefaultAI::gain_ship(Widelands::Ship& ship, NewShip type) {
 		marine_task_queue.push_back(kStopShipyard);
 	} else {
 		if (ship.state_is_expedition()) {
-			if (expedition_ship_ == kNoShip) {
+			if (expedition_ship_ == kNoShip && ship.get_ship_type() == Widelands::ShipType::kWarship) {
 				// OK, this ship is in expedition
 				expedition_ship_ = ship.serial();
 			} else {
@@ -500,7 +500,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 	BuildingObserver& port_obs = get_building_observer(BuildingAttribute::kPort);
 	// Check whether a port is allowed to help the AI with "New World" start condition
 	bool port_allowed = basic_economy_established || port_obs.cnt_built + port_obs.cnt_under_construction < 1;
-	if (!port_allowed) {
+	if (!port_allowed && so.ship->get_ship_type() == Widelands::ShipType::kTransport) {
 		game().send_player_cancel_expedition_ship(*so.ship);
 		return;
 	}
@@ -516,7 +516,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 
 	// if we have a port-space we can build a Port or continue exploring
 	// 1. examine to build a port (colony founding)
-	if (!so.ship->exp_port_spaces().empty()) {
+	if (!so.ship->exp_port_spaces().empty() && so.ship->get_ship_type() == Widelands::ShipType::kTransport) {
 
 		// we score the place (value max == 8)
 		const uint8_t spot_score = spot_scoring(so.ship->exp_port_spaces().front()) * 2;
