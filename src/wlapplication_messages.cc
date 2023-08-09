@@ -112,12 +112,18 @@ void fill_parameter_vector() {
 	  {"", "rolling_autosave", _("n"),
 		/** TRANSLATORS: `n` references a numerical placeholder */
 		_("Use `n` files for rolling autosaves."), true},
+	  {"", "skip_autosave_on_inactivity", _("[true*|false]"),
+		_("Do not create an autosave when the user has been inactive since the last autosave."),
+		true},
 	  {"", "nozip", "", _("Do not save files as binary zip archives."), false},
 	  {"", "display_replay_filenames", _("[true*|false]"), _("Show filenames in the replay screen."),
 		true},
 	  {"", "editor_player_menu_warn_too_many_players", _("[true*|false]"),
 		_("Whether a warning should be shown in the editor if there are too many players."), true},
 	  /// Game options
+	  {"", "pause_game_on_inactivity", _("n"),
+		/** TRANSLATORS: `n` references a numerical placeholder */
+		_("Pause the game after `n` minutes of user inactivity."), true},
 	  {"", "auto_roadbuild_mode", _("[true*|false]"),
 		_("Start building a road after placing a flag."), true},
 	  {"", "display_flags",

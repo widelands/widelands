@@ -101,8 +101,9 @@ bool SaveHandler::check_next_tick(Widelands::Game& game, uint32_t realtime) cons
 		return false;  // no autosave or not due, yet
 	}
 
-	// check if game is paused (in any way)
-	if (game.game_controller()->is_paused_or_zero_speed()) {
+	// Prevents unnecessary autosaves while the game is paused, but allows the first autosave
+	// during the pause if there had been progress before pausing.
+	if (next_save_min_gametime_ > game.get_gametime()) {
 		return false;
 	}
 
@@ -124,7 +125,8 @@ void SaveHandler::think(Widelands::Game& game) {
 	}
 
 	const uint32_t realtime = SDL_GetTicks();
-	initialize(realtime);
+	initialize(game, realtime);
+	bool force_skip = false;
 
 	// Are we saving now?
 	if (saving_next_tick_ || save_requested_) {
@@ -143,14 +145,22 @@ void SaveHandler::think(Widelands::Game& game) {
 			save_filename_ = "";
 		} else {
 			// Autosave ...
-			save_success = roll_save_files(filename, &error);
-			if (save_success) {
-				filename = format("%s_00", autosave_filename_);
-				verb_log_info_time(game.get_gametime(), "Autosave: saving as %s\n", filename.c_str());
+			if (skip_when_inactive_ && UI::Panel::time_of_last_user_activity() < last_save_realtime_) {
+				verb_log_info_time(game.get_gametime(), "Autosave: Skipping due to user inactivity");
+				last_save_realtime_ = realtime;
+				force_skip = true;
+				game.get_ibase()->log_message(_("Saving skipped"));
+			} else {
+				save_success = roll_save_files(filename, &error);
+				if (save_success) {
+					filename = format("%s_00", autosave_filename_);
+					verb_log_info_time(
+					   game.get_gametime(), "Autosave: saving as %s\n", filename.c_str());
+				}
 			}
 		}
 
-		if (save_success) {
+		if (save_success && !force_skip) {
 			// Saving now (always overwrite file)
 			std::string complete_filename = create_file_name(kSaveDir, filename);
 			save_success = save_game(game, complete_filename, std::nullopt, &error);
@@ -168,10 +178,13 @@ void SaveHandler::think(Widelands::Game& game) {
 		// This prevents us from going into endless autosave cycles if the save
 		// should take longer than the autosave interval.
 		next_save_realtime_ = SDL_GetTicks() + autosave_interval_in_ms_;
+		next_save_min_gametime_ = game.get_gametime() + autosave_gametime_interval_;
 
-		verb_log_info_time(
-		   game.get_gametime(), "Autosave: save took %d ms\n", SDL_GetTicks() - realtime);
-		game.get_ibase()->log_message(_("Game saved"));
+		if (!force_skip) {
+			verb_log_info_time(
+			   game.get_gametime(), "Autosave: save took %d ms\n", SDL_GetTicks() - realtime);
+			game.get_ibase()->log_message(_("Game saved"));
+		}
 	} else {
 		saving_next_tick_ = check_next_tick(game, realtime);
 	}
@@ -180,7 +193,7 @@ void SaveHandler::think(Widelands::Game& game) {
 /**
  * Lazy intialisation on first call.
  */
-void SaveHandler::initialize(uint32_t realtime) {
+void SaveHandler::initialize(Widelands::Game& game, uint32_t realtime) {
 	if (initialized_) {
 		return;
 	}
@@ -188,11 +201,14 @@ void SaveHandler::initialize(uint32_t realtime) {
 	fs_type_ = get_config_bool("nozip", false) ? FileSystem::DIR : FileSystem::ZIP;
 
 	autosave_interval_in_ms_ = get_config_int("autosave", kDefaultAutosaveInterval * 60) * 1000;
+	autosave_gametime_interval_ = Duration(autosave_interval_in_ms_ / 2);
 
 	next_save_realtime_ = realtime + autosave_interval_in_ms_;
 	last_save_realtime_ = realtime;
+	next_save_min_gametime_ = game.get_gametime() + autosave_gametime_interval_;
 
 	number_of_rolls_ = get_config_int("rolling_autosave", 5);
+	skip_when_inactive_ = get_config_bool("skip_autosave_on_inactivity", true);
 
 	initialized_ = true;
 }
