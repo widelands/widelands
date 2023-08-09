@@ -80,7 +80,6 @@ private:
 	uint32_t next_save_realtime_{0U};
 	uint32_t last_save_realtime_{0U};
 	Time next_save_min_gametime_;
-	Time last_save_gametime_;
 	bool initialized_{false};
 	bool allow_saving_{true};
 	bool save_requested_{false};

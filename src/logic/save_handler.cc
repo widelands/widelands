@@ -178,8 +178,7 @@ void SaveHandler::think(Widelands::Game& game) {
 		// This prevents us from going into endless autosave cycles if the save
 		// should take longer than the autosave interval.
 		next_save_realtime_ = SDL_GetTicks() + autosave_interval_in_ms_;
-		// last_save_gametime_ was updated by save_game()
-		next_save_min_gametime_ = last_save_gametime_ + autosave_gametime_interval_;
+		next_save_min_gametime_ = game.get_gametime() + autosave_gametime_interval_;
 
 		if (!force_skip) {
 			verb_log_info_time(
@@ -206,8 +205,7 @@ void SaveHandler::initialize(Widelands::Game& game, uint32_t realtime) {
 
 	next_save_realtime_ = realtime + autosave_interval_in_ms_;
 	last_save_realtime_ = realtime;
-	last_save_gametime_ = game.get_gametime();
-	next_save_min_gametime_ = last_save_gametime_ + autosave_gametime_interval_;
+	next_save_min_gametime_ = game.get_gametime() + autosave_gametime_interval_;
 
 	number_of_rolls_ = get_config_int("rolling_autosave", 5);
 	skip_when_inactive_ = get_config_bool("skip_autosave_on_inactivity", true);
@@ -257,7 +255,6 @@ bool SaveHandler::save_game(Widelands::Game& game,
 	   complete_filename, fstype.has_value() ? fstype.value() : fs_type_);
 	gsh.save();
 	last_save_realtime_ = SDL_GetTicks();
-	last_save_gametime_ = game.get_gametime();
 
 	// Ignore it if only the temporary backup wasn't deleted
 	// but save was successfull otherwise
