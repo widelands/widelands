@@ -58,8 +58,8 @@ echo "Working tree is clean, continuing"
 set -x
 
 # Pull All translations from Transifex
-# use git timestamps because the timestamps on disk are too new
-tx pull -a --use-git-timestamps
+# use force to make sure really all files get pulled
+tx pull -a -f
 
 if [ -n "$(git status -s)" ]; then
   # Stage and commit translations
@@ -91,11 +91,11 @@ if [ -n "$(git status -s)" ]; then
   # Push source catalogs to Transifex
   tx push -s
   sleep 65 # wait for translation files to be updated
-fi
 
-# Pull All translations from Transifex
-# (timestamps on disk are old enough this time)
-tx pull -a
+  # Pull All translations from Transifex
+  # use force to make sure really all files get pulled
+  tx pull -a -f
+fi
 
 # Update authors file
 if python3 utils/update_authors.py; then
