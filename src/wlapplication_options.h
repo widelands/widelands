@@ -25,12 +25,13 @@
 #include <SDL_keyboard.h>
 
 #include "io/profile.h"
-/* Command line option */
+
+/* Command line options */
 extern bool g_allow_script_console;
 extern bool g_write_syncstreams;
 
 /*
- * Further explanations for all functions and its return values
+ * Further explanations for all functions and their return values
  * can be found in io/profile.cc
  */
 
@@ -79,6 +80,10 @@ void set_config_string(const std::string& name, const std::string& value);
 void set_config_string(const std::string& section,
                        const std::string& name,
                        const std::string& value);
+
+/* Some default values */
+constexpr int32_t kDefaultChatHistoryLines = 32;
+constexpr int32_t kDefaultScriptHistoryLines = 64;
 
 static const std::string kFastplaceGroupPrefix = "fastplace_";
 
