@@ -85,6 +85,8 @@ void set_config_string(const std::string& section,
 constexpr int32_t kDefaultChatHistoryLines = 32;
 constexpr int32_t kDefaultScriptHistoryLines = 64;
 
+constexpr int32_t kMaxHistoryLines = 1000;
+
 static const std::string kFastplaceGroupPrefix = "fastplace_";
 
 // Keyboard shortcuts. The order in which they are defined here

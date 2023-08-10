@@ -43,6 +43,7 @@
 #endif
 #include "wlapplication.h"
 #include "wlapplication_options.h"
+#include "wui/game_chat_panel.h"
 #include "wui/interactive_base.h"
 
 namespace {
@@ -206,7 +207,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                             0,
                             opt.chat_history_lines,
                             0,
-                            1000,
+                            kMaxHistoryLines,
                             UI::PanelStyle::kFsMenu,
                             _("Number of sent chat history lines to remember:"),
                             UI::SpinBox::Units::kNone,
@@ -219,7 +220,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                               0,
                               opt.script_history_lines,
                               0,
-                              1000,
+                              kMaxHistoryLines,
                               UI::PanelStyle::kFsMenu,
                               _("Number of Script Console history lines to remember:"),
                               UI::SpinBox::Units::kNone,
@@ -1065,6 +1066,11 @@ void OptionsCtrl::save_options() {
 
 	// Sound options
 	g_sh->save_config();
+
+	g_chat_sent_history.set_max_size(opt.chat_history_lines);
+	if (g_allow_script_console) {  // doesn't really matter, only for consistency
+		g_script_console_history.set_max_size(opt.script_history_lines);
+	}
 
 	// Now write to file
 	write_config();

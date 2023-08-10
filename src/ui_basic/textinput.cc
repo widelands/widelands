@@ -19,6 +19,7 @@
 #include "ui_basic/textinput.h"
 
 #include <algorithm>
+#include <limits>
 
 #include "base/log.h"
 #include "base/utf8.h"
@@ -1136,6 +1137,14 @@ const std::string& EditBoxHistory::get_entry(int16_t position) const {
 		return tmp_;
 	}
 	return entries_.at(position);
+}
+
+void EditBoxHistory::set_max_size(int32_t new_size) {
+	new_size = std::max(0, std::min(new_size, kMaxHistoryLines));
+	max_size_ = new_size;
+	if (entries_.size() > max_size_) {
+		entries_.erase(entries_.begin() + max_size_, entries_.end());
+	}
 }
 
 void EditBoxHistory::load(const std::string& filename) {
