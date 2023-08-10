@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-05 02:59+0000\n"
+"POT-Creation-Date: 2023-08-05 02:23+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: erimitis, 2018,2020\n"
 "Language-Team: Greek (http://app.transifex.com/widelands/widelands/language/el/)\n"
@@ -1344,51 +1344,51 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:73
+#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:74
 msgid "sewing a tunic"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
-#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:84
+#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:86
 msgid "making a light wooden armor"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
-#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:95
+#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:98
 msgid "making a wooden helmet"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
-#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:106
+#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:110
 msgid "sewing a warrior’s coat"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
-#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:117
+#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:122
 msgid "making sturdy boots"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:128
+#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:134
 msgid "making swift boots"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
 #. ...
-#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:139
+#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:146
 msgid "making hero boots"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:150
+#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:158
 msgid "making a padded vest"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
-#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:161
+#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:170
 msgid "making a padded protector"
 msgstr ""
 
@@ -1409,9 +1409,9 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:62
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:71
 #: ../../data/tribes/buildings/productionsites/barbarians/tavern/init.lua:77
-#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:54
+#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:55
 #: ../../data/tribes/buildings/productionsites/empire/tavern/init.lua:71
-#: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:62
+#: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:63
 msgid "preparing a ration"
 msgstr "ετοιμάζει μία μερίδα"
 
@@ -1423,10 +1423,10 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
 #: ../../data/tribes/buildings/productionsites/amazons/furnace/init.lua:59
-#: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:88
-#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:92
-#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:100
-#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:110
+#: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:91
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:95
+#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:103
+#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:113
 msgid "smelting gold"
 msgstr "λιώνει χρυσό"
 
@@ -1702,10 +1702,10 @@ msgstr ""
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:83
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:200
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:84
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:212
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:222
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:206
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:218
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:124
 msgid "making a shovel"
 msgstr "το φτιάξιμο ενός φτυαριού"
@@ -1713,32 +1713,32 @@ msgstr "το φτιάξιμο ενός φτυαριού"
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:94
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:96
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:118
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:74
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:75
 msgid "making a felling ax"
 msgstr "το φτιάξιμο ενός τσεκουριού"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:164
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:108
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:173
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:196
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:170
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:179
 msgid "making a pick"
 msgstr "το φτιάξιμο μιας αξίνας"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:116
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:120
 msgid "making a machete"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:127
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:132
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:183
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:158
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:166
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:184
 msgid "making kitchen tools"
 msgstr "το φτιάξιμο ενός σετ κουζινικών"
@@ -1746,49 +1746,49 @@ msgstr "το φτιάξιμο ενός σετ κουζινικών"
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:138
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:116
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:144
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:121
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:157
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:134
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:140
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:196
 msgid "making a hammer"
 msgstr "το φτιάξιμο ενός σφυριού"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
 #. ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:149
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:156
 msgid "making a chisel"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:168
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:220
 msgid "making needles"
 msgstr "το φτιάξιμο βελονών"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:171
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:180
 msgid "making a stone bowl"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:182
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:192
 msgid "making a wooden spear"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:193
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:204
 msgid "making a stone-tipped spear"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:204
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:216
 msgid "making a hardened spear"
 msgstr ""
 
@@ -1835,12 +1835,13 @@ msgstr ""
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:50
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:61
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:62
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:103
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:63
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:107
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:61
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:74
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:85
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:114
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:67
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:84
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:98
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:56
@@ -1968,13 +1969,13 @@ msgstr "Πανοπλοποιείο"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a steel shield because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:222
+#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:223
 msgid "forging a steel shield"
 msgstr "τη σφυρηλάτηση μιας ατσάλινης ασπίδας"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an advanced shield
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:234
+#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:235
 msgid "forging an advanced shield"
 msgstr "τη σφυρηλάτηση μιας προηγμένης ασπίδας"
 
@@ -2102,26 +2103,26 @@ msgid "Crystal Mine"
 msgstr "Ορυχείο Κρυστάλλων"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining quartz because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:77
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:111
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:79
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:115
 msgid "mining quartz"
 msgstr "εξορίσει χαλαζία"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining diamonds because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:92
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:119
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:95
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:123
 msgid "mining diamonds"
 msgstr "εξορίσει διαμάντια"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:153
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:157
 msgid "No Crystals"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:154
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:158
 msgid "Main Crystal Vein Exhausted"
 msgstr "Κύρια Φλέβα Κρυστάλλων Εξαντλημένη"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:156
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:160
 msgctxt "atlanteans_building"
 msgid ""
 "This crystal mine’s main vein is exhausted. Expect strongly diminished "
@@ -2353,12 +2354,12 @@ msgid "Mill"
 msgstr "Μύλος"
 
 #. TRANSLATORS: Completed/Skipped/Did not start grinding corn because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:65
+#: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:66
 msgid "grinding corn"
 msgstr "αλέθει καλαμπόκι"
 
 #. TRANSLATORS: Completed/Skipped/Did not start grinding blackroot because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:78
+#: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:80
 msgid "grinding blackroot"
 msgstr "αλέθει μαυρόριζα"
 
@@ -2414,14 +2415,14 @@ msgid "Smelting Works"
 msgstr "Χυτήριο"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:62
-#: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:75
-#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:66
-#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:79
-#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:74
-#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:87
-#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:84
-#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:97
+#: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:63
+#: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:77
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:67
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:81
+#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:75
+#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:89
+#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:85
+#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:99
 msgid "smelting iron"
 msgstr "λιώνει σίδηρο"
 
@@ -2432,15 +2433,15 @@ msgid "Smokery"
 msgstr "Καπνιστήριο"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smoking meat because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:69
-#: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:86
+#: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:70
+#: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:88
 msgid "smoking meat"
 msgstr "καπνίζει κρέας"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:82
-#: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:94
-#: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:75
+#: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:83
+#: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:95
+#: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:76
 msgid "smoking fish"
 msgstr "καπνίζει ψάρια"
 
@@ -2458,61 +2459,61 @@ msgstr "Εργαλειοποιείο"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:68
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:69
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:105
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:98
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:101
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:172
 msgid "making a bread paddle"
 msgstr "το φτιάξιμο ενός φτυαριού φούρνου"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pair of buckets
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:80
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:82
 msgid "making a pair of buckets"
 msgstr "το φτιάξιμο ενός ζεύγους κουβάδων"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making fire tongs because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:92
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:95
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:131
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:110
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:114
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:208
 msgid "making fire tongs"
 msgstr "το φτιάξιμο μιας λαβίδας πυρός"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:104
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:108
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:160
 msgid "making a fishing net"
 msgstr "το φτιάξιμο ενός διχτυού ψαρέματος"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hook pole because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:128
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:134
 msgid "making a hook pole"
 msgstr "το φτιάξιμο ενός κρεμασταριού"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting bow because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:140
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:147
 msgid "making a hunting bow"
 msgstr "το φτιάξιμο ενός κυνηγετικού τόξου"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making milking tongs because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:152
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:160
 msgid "making milking tongs"
 msgstr "το φτιάξιμο μιας λαβίδας άρμεξης"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a saw because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:176
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:182
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:186
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:192
 msgid "making a saw"
 msgstr "το φτιάξιμο ενός πριονιού"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:188
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:199
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:209
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:194
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:205
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:112
 msgid "making a scythe"
 msgstr "το φτιάξιμο ενός δρεπανιού"
@@ -2525,31 +2526,31 @@ msgstr "Οπλοποιείο"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a light trident
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:65
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:66
 msgid "forging a light trident"
 msgstr "τη σφυρηλάτηση μιας ελαφριάς τρίαινας"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a long trident because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:80
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:81
 msgid "forging a long trident"
 msgstr "τη σφυρηλάτηση μιας μακριάς τρίαινας"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a steel trident
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:95
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:96
 msgid "forging a steel trident"
 msgstr "τη σφυρηλάτηση μιας ατσάλινης τρίαινας"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a double trident
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:110
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:111
 msgid "forging a double trident"
 msgstr "τη σφυρηλάτηση μιας διπλής τρίαινας"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a heavy double trident
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:125
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:126
 msgid "forging a heavy double trident"
 msgstr "τη σφυρηλάτηση μιας βαριάς διπλής τρίαινας"
 
@@ -2561,18 +2562,18 @@ msgstr "Υφαντήριο"
 
 #. TRANSLATORS: Completed/Skipped/Did not start weaving spidercloth because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:62
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:63
 msgid "weaving spidercloth"
 msgstr "υφαίνει αραχνοΰφασμα"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a tabard because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:75
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:76
 msgid "tailoring a tabard"
 msgstr "ράβει έναν χιτώνα"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a golden tabard
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:88
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:89
 msgid "tailoring a golden tabard"
 msgstr "ράβει έναν επίχρυσο χιτώνα"
 
@@ -2663,8 +2664,8 @@ msgstr "ετοιμάζει ένα κολατσιό"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a meal because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:88
-#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:67
-#: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:75
+#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:68
+#: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:76
 msgid "preparing a meal"
 msgstr "ετοιμάζει ένα γεύμα"
 
@@ -2836,19 +2837,19 @@ msgid "Helm Smithy"
 msgstr "Κρανοποιείο"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:78
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:82
+#: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:79
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:83
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:120
 msgid "forging a helmet"
 msgstr "τη σφυρηλάτηση ενός κράνους"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a mask because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:91
+#: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:92
 msgid "forging a mask"
 msgstr "τη σφυρηλάτηση μιας μάσκας"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a warhelm because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:104
+#: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:105
 msgid "forging a warhelm"
 msgstr "τη σφυρηλάτηση ενός πολεμικού κράνους"
 
@@ -2941,14 +2942,14 @@ msgstr "Μεταλλουργείο"
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing rod because
 #. ...
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:144
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:122
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:127
 msgid "making a fishing rod"
 msgstr "το φτιάξιμο ενός καλαμιού ψαρέματος"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:170
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:146
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:153
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:148
 msgid "making a hunting spear"
 msgstr "το φτιάξιμο ενός κυνηγετικού ακοντίου"
@@ -3100,19 +3101,19 @@ msgstr "Πανοπλοποιείο"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of armor
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:94
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:95
 msgid "forging a suit of armor"
 msgstr "τη σφυρηλάτηση μιας πανοπλίας"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of chain armor
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:106
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:107
 msgid "forging a suit of chain armor"
 msgstr "τη σφυρηλάτηση μιας αλυσιδωτής πανοπλίας"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of gilded armor
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:118
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:119
 msgid "forging a suit of gilded armor"
 msgstr "τη σφυρηλάτηση μιας επίχρυσης πανοπλίας"
 
@@ -3326,7 +3327,6 @@ msgstr "Ορυχείο Μαρμάρου"
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:100
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:122
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:51
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:67
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:75
 msgid "mining marble"
 msgstr "εξορίσει μάρμαρο"
@@ -3462,7 +3462,7 @@ msgid "Toolsmithy"
 msgstr "Εργαλειοποιείο"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:86
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:88
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:136
 msgid "making a basket"
 msgstr "το φτιάξιμο ενός καλαθιού"
@@ -3500,30 +3500,30 @@ msgstr "Οπλοποιείο"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a wooden spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:83
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:84
 msgid "forging a wooden spear"
 msgstr "το φτιάξιμο ενός ξύλινου ακοντίου"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a spear because ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:98
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:99
 msgid "forging a spear"
 msgstr "το φτιάξιμο ενός ακοντίου"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an advanced spear
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:113
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:114
 msgid "forging an advanced spear"
 msgstr "το φτιάξιμο ενός προηγμένου ακοντίου"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a heavy spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:128
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:129
 msgid "forging a heavy spear"
 msgstr "τη σφυρηλάτηση ενός βαρύ δόρατος"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a war spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:143
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:144
 msgid "forging a war spear"
 msgstr "τη σφυρηλάτηση ενός πολεμικού δόρατος"
 
@@ -4009,20 +4009,20 @@ msgid "Recycling Center"
 msgstr "Κέντρο Ανακύκλωσης"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling fur because ...
-#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:87
+#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:88
 msgctxt "frisians_building"
 msgid "recycling fur"
 msgstr "ανακυκλώνει γούνα"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling iron because ...
-#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:98
+#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:100
 msgctxt "frisians_building"
 msgid "recycling iron"
 msgstr "ανακυκλώνει σίδηρο"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling iron and gold
 #. because ...
-#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:109
+#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:112
 msgctxt "frisians_building"
 msgid "recycling iron and gold"
 msgstr "ανακυκλώνει σίδηρο και χρυσό"
@@ -4047,14 +4047,14 @@ msgid "Reindeer Farm"
 msgstr "Ταρανδοτροφείο"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing reindeer because ...
-#: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:76
+#: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:77
 msgctxt "frisians_building"
 msgid "rearing reindeer"
 msgstr "εκτρέφει τάρανδο"
 
 #. TRANSLATORS: Completed/Skipped/Did not start producing fur because ...
-#: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:87
-#: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:98
+#: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:89
+#: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:101
 msgctxt "frisians_building"
 msgid "producing fur"
 msgstr "φτιάχνει γούνα"
@@ -4141,12 +4141,12 @@ msgstr "Ταβέρνα"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
-#: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:90
+#: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:91
 msgid "preparing only one ration"
 msgstr "ετοιμάζει μόνο μία μερίδα"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing rations because ...
-#: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:104
+#: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:105
 msgid "preparing rations"
 msgstr "ετοιμάζει μερίδες"
 
