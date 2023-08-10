@@ -13,7 +13,7 @@
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
-# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2022
+# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2023
 # Venatrix, 2015
 # Elisabeth Jäger, 2015-2016
 # Hybrid Dog, 2015
@@ -26,7 +26,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-08-05 02:23+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2022\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2023\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4101,7 +4101,7 @@ msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "Die Hauptader dieser Felsmine ist erschöpft. Die Produktivität wird stark einbrechen. Diese Mine kann nicht mehr erweitertt werden, daher solltest du diese Mine abreißen oder zerstören."
+msgstr "Die Hauptader dieser Felsmine ist erschöpft. Die Produktivität wird stark einbrechen. Diese Mine kann nicht mehr erweitert werden, daher solltest du diese Mine abreißen oder zerstören."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:8
