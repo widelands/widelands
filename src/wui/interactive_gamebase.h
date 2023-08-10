@@ -38,6 +38,8 @@ public:
 	Widelands::Game* get_game() const override;
 	Widelands::Game& game() const override;
 
+	void think() override;
+
 	// Only the 'InteractiveGameBase' has all information of what should be
 	// drawn into a map_view (i.e. which overlays are available). The
 	// 'WatchWindow' does not have this information, but needs to draw
@@ -137,6 +139,7 @@ private:
 		kExitGame
 	};
 
+	int32_t pause_on_inactivity_;
 	bool can_restart_;
 	void handle_restart(bool force = false);
 

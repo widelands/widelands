@@ -5,14 +5,15 @@
 # Translators:
 # Benedikt Straub <benedikt-straub@web.de>, 2023
 # Stephan Lutz <stephan-lutz@gmx.de>, 2023
+# Simon Heimberg, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-19 02:46+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2023-01-04 20:43+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2023\n"
+"Last-Translator: Simon Heimberg, 2023\n"
 "Language-Team: German (https://app.transifex.com/widelands/teams/35159/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -427,8 +428,8 @@ msgid ""
 "do you come by?"
 msgstr ""
 "Wie schafft Ihr es überhaupt Euch hier selbst zu erhalten? Diese Felsen "
-"sehen beeindruckend aus, abe ich sehe nicht wie Ihr sie brechen könntet, um "
-"Steinhäuser zu bauen. Ich sehe fast keine Bäume und keinen Platz, um Eisen "
+"sehen beeindruckend aus, aber ich sehe nicht wie Ihr sie brechen könntet, um"
+" Steinhäuser zu bauen. Ich sehe fast keine Bäume und keinen Platz, um Eisen "
 "oder Mineralien abzubauen. Wie kommt Ihr da zurecht?"
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 3
@@ -523,8 +524,8 @@ msgstr ""
 " starten. Wie auch immer ist der Durchgang zu eng, um ihn so einfach zu "
 "sichern wie das Oberland. Wir müssen so viele Festungen wie möglich hier "
 "dicht zusammenbauen, um zu verhindern, dass der Feind auch nur einen Zipfel "
-"Land gewinnt. Es wäre unklug irgendetwas nördlich des Passses zu bauen, da "
-"es gefährlich exponiert wäre."
+"Land gewinnt. Es wäre unklug irgendetwas nördlich des Passes zu bauen, da es"
+" gefährlich exponiert wäre."
 
 #. TRANSLATORS: Reebaud – Getting Started 2
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:231
@@ -552,9 +553,9 @@ msgid ""
 "buildings. Besides their strategic value they offer lots of space for "
 "construction, of which the lower island is somewhat short."
 msgstr ""
-"We Reebaud korrekterweise bemerkt, ist das Oberland der beste Platz für neue"
-" Gebäude. Neben seinem strategischen Wert bietet es auch jede Menge Platz "
-"zum Bauen, der auf der unteren Insel ein wenig fehlt."
+"Wie Reebaud korrekterweise bemerkt, ist das Oberland der beste Platz für "
+"neue Gebäude. Neben seinem strategischen Wert bietet es auch jede Menge "
+"Platz zum Bauen, der auf der unteren Insel ein wenig fehlt."
 
 #. TRANSLATORS: Henneke Lembeck – Getting Started 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:244
@@ -825,7 +826,7 @@ msgstr ""
 "Das werde ich gerne tun. Tatsächlich ist, gemäß meinen Handelspartnern, "
 "Atterdags Durst nach Eroberung unendlich. Nachdem er seine Präsenz auf Föhr "
 "etabliert hatte, hat er alle anderen Inseln in der Gegend ebenfalls erobert."
-" Eure Festung auf Föhr war immer ihre einzige nenneswerte Verteidigung, so "
+" Eure Festung auf Föhr war immer ihre einzige nennenswerte Verteidigung, so "
 "als Ihr einmal fort wart, konnte er die ganze Gegend einfach an sich reißen."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3

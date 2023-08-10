@@ -911,11 +911,13 @@ void InteractiveBase::think() {
 		UI::UniqueWindow* building_window = show_building_window(
 		   Widelands::Coords::unhash(it->first), true, it->second->show_workarea);
 
-		building_window->set_pos(it->second->window_position);
-		if (it->second->minimize) {
-			building_window->minimize();
+		if (building_window != nullptr) {
+			building_window->set_pos(it->second->window_position);
+			if (it->second->minimize) {
+				building_window->minimize();
+			}
+			building_window->set_pinned(it->second->pin);
 		}
-		building_window->set_pinned(it->second->pin);
 
 		it = wanted_building_windows_.erase(it);
 	}
@@ -1691,9 +1693,12 @@ void InteractiveBase::add_wanted_building_window(const Widelands::Coords& coords
 UI::UniqueWindow* InteractiveBase::show_building_window(const Widelands::Coords& coord,
                                                         bool avoid_fastclick,
                                                         bool workarea_preview_wanted) {
+	MutexLock m(MutexLock::ID::kObjects);
 	Widelands::BaseImmovable* immovable = game().map().get_immovable(coord);
 	upcast(Widelands::Building, building, immovable);
-	assert(building);
+	if (building == nullptr) {
+		return nullptr;  // Race condition
+	}
 	BuildingWindow::Registry& registry =
 	   unique_windows().get_building_window_registry(format("building_%d", building->serial()));
 
