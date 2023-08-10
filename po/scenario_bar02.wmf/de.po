@@ -7,6 +7,7 @@
 # Klaus Halfmann <klaus.halfmann@arcor.de>, 2022
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2009
 # Raymond Vetter, 2016
+# Simon Heimberg, 2023
 # Stephan Lutz <stephan-lutz@gmx.de>, 2018-2021
 # Venatrix, 2015
 # Elisabeth Jäger, 2015
@@ -16,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2015-02-03 14:36+0000\n"
-"Last-Translator: Klaus Halfmann <klaus.halfmann@arcor.de>, 2022\n"
+"Last-Translator: Simon Heimberg, 2023\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -214,7 +215,7 @@ msgstr "Kasernen bilden einfache Krieger aus, während Ausbildungsgebäude wie A
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:114
 msgid "The attributes are: health, attack, defense and evade."
-msgstr "Die Eigenschaften sind Lebenspunkte, Angriff, Verteidugung und Ausweichen."
+msgstr "Die Eigenschaften sind Lebenspunkte, Angriff, Verteidigung und Ausweichen."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:119
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:121
