@@ -65,9 +65,7 @@ function connected_road(roadtype, p, start, cmd, g_create_carriers)
          r = p:place_road(roadtype, start, table.unpack(moves))
          start = r.end_flag
          if create_carriers then
-            if roadtype == "normal" then r:set_workers(p.tribe.carrier, 1)
-            elseif roadtype == "busy" then r:set_workers({[p.tribe.carrier] = 1, [p.tribe.carrier2] = 1})
-            else r:set_workers(p.tribe.ferry, 1) end
+            r:set_workers(r.valid_workers)
          end
          moves = {}
       end

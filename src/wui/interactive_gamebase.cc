@@ -86,6 +86,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                    [this](ShowHideEntry t) { showhide_menu_selected(t); }),
      grid_marker_pic_(g_image_cache->get("images/wui/overlays/grid_marker.png")),
      special_coords_marker_pic_(g_image_cache->get("images/wui/overlays/special.png")),
+     pause_on_inactivity_(get_config_int("pause_game_on_inactivity", 0) * 60 * 1000),
      can_restart_(g.is_replay() || !g.list_of_scenarios().empty()),
      mainmenu_(toolbar(),
                "dropdown_menu_main",
@@ -560,6 +561,19 @@ bool InteractiveGameBase::handle_mousewheel(int32_t x, int32_t y, uint16_t modst
 		increase_gamespeed(kSpeedSlow * change);
 	}
 	return true;
+}
+
+void InteractiveGameBase::think() {
+	InteractiveBase::think();
+
+	if (pause_on_inactivity_ != 0 &&
+	    static_cast<int>(SDL_GetTicks() - UI::Panel::time_of_last_user_activity()) >
+	       pause_on_inactivity_) {
+		Widelands::Game& g = game();
+		if (g.game_controller() != nullptr && !g.game_controller()->is_paused()) {
+			toggle_game_paused();
+		}
+	}
 }
 
 /// \return a pointer to the running \ref Game instance.
