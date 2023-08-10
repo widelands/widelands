@@ -197,7 +197,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                     _("Distance for windows to snap to borders:"),
                     UI::SpinBox::Units::kPixels),
 
-	// History options
+     // History options
      sb_chat_history_lines_(&box_interface_,
                             "chat_history_lines",
                             0,
@@ -679,8 +679,8 @@ void Options::layout() {
 		translation_padding_.set_size(half_w, translation_pad_h);
 
 		// Interface tab spinboxes
-		for (UI::SpinBox* sb : {&sb_dis_panel_, &sb_dis_border_, &sb_chat_history_lines_,
-		                        &sb_script_history_lines_}) {
+		for (UI::SpinBox* sb :
+		     {&sb_dis_panel_, &sb_dis_border_, &sb_chat_history_lines_, &sb_script_history_lines_}) {
 			sb->set_unit_width(unit_w);
 			sb->set_desired_size(tab_panel_width, sb->get_h());
 		}
