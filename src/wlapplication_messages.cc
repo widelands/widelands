@@ -112,6 +112,9 @@ void fill_parameter_vector() {
 	  {"", "rolling_autosave", _("n"),
 		/** TRANSLATORS: `n` references a numerical placeholder */
 		_("Use `n` files for rolling autosaves."), true},
+		/** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
+		/** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain. */
+		/** TRANSLATORS: * marks the default value */
 	  {"", "skip_autosave_on_inactivity", _("[true*|false]"),
 		_("Do not create an autosave when the user has been inactive since the last autosave."),
 		true},
@@ -139,6 +142,7 @@ void fill_parameter_vector() {
 	},
 #endif
 	  {"", "edge_scrolling",
+	   // The below comment is duplicated from above for the other case, when false is the default.
 		/** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
 		/** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain. */
 		/** TRANSLATORS: * marks the default value */
@@ -213,6 +217,14 @@ void fill_parameter_vector() {
 		_("Move a window to the edge of the panel when the edge of the window comes within "
 		  "a distance of `n` from the edge of the panel."),
 		true},
+	  {_("Input history options:"), "chat_history_lines", _("n"),
+	   _("Number of sent chat message history lines to remember."), true},
+	  {"", "script_history_lines", _("n"),
+	   _("Number of script console history lines to remember."), true},
+	  {"", "save_chat_history", _("[true|false*]"),
+	   _("Whether to save the history of sent chat messages to a file."), true},
+	  {"", "save_script_history", _("[true|false*]"),
+	   _("Whether to save the script console history to a file."), true},
 	  /// Others
 	  {_("Others:"), "verbose", "", _("Enable verbose debug messages"), false},
 	  {"", "verbose-i18n", "",
