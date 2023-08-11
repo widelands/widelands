@@ -89,7 +89,7 @@ lua_locales += '\t\tfont = "default"\n'
 lua_locales += '\t},\n'
 
 lua_translators = ''
-lua_translators += 'function translators() return {'  # developers
+lua_translators += 'function translators() return {'  # translators
 
 for source_filename in source_files:
     # Only json files, and not the template file please
@@ -102,7 +102,7 @@ for source_filename in source_files:
         # Make sure we don't pick up untranslated stuff
         if translators['translator-list'] != 'translator-credits':
             locale_message += ' translators and'
-            lua_translators += '{'  # entry
+            lua_translators += '\n\t{'  # entry
             lua_translators += 'heading = "' + \
                 translators['your-language-name']
             if translators['your-language-name-in-english'] != 'English' and translators['your-language-name-in-english'] != translators['your-language-name']:
@@ -143,7 +143,7 @@ for source_filename in source_files:
         print(locale_message)
 lua_locales += '}\n'
 
-lua_translators += '} end\n'  # developers
+lua_translators += '\n} end\n'  # translators
 
 print('Writing locales\n')
 dest_filename = 'locales.lua'
@@ -158,7 +158,7 @@ dest_filename = 'translators_data.lua'
 dest_filepath = os.path.normpath(
     base_path + '/data/txts') + '/' + dest_filename
 dest_file = codecs.open(dest_filepath, encoding='utf-8', mode='w')
-dest_file.write(lua_translators)
+dest_file.write(lua_translators.replace("\t", INDENT))
 dest_file.close()
 
 print('Reading developers from JSON')
@@ -181,7 +181,7 @@ for category in developers:
     # Unused hook for adding translators
     if 'heading' in category and category['heading'] != 'Translators':
         print('- Adding ' + category['heading'])
-        lua_string += '{'  # category
+        lua_string += '\n\t{'  # category
         lua_string += add_lua_table_key('heading',
                                         category['heading'], transl=True)
         lua_string += add_lua_table_key('image', category['image'])
@@ -206,12 +206,12 @@ for category in developers:
         lua_string += '},'  # entries
         lua_string += '},'  # category
 
-lua_string += '} end\n'  # developers
+lua_string += '\n} end\n'  # developers
 
 print('Writing developers')
 dest_filename = 'developers.lua'
 dest_filepath = source_path + '/' + dest_filename
 dest_file = codecs.open(dest_filepath, encoding='utf-8', mode='w')
-dest_file.write(lua_string)
+dest_file.write(lua_string.replace("\t", INDENT))
 dest_file.close()
 print('Done.')
