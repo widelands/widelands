@@ -50,6 +50,9 @@ GameChatMenu::GameChatMenu(UI::Panel* parent,
 	}
 	set_can_focus(true);
 
+	// Textinput will be passed to the chat entry field when the window border has focus
+	set_handle_textinput(true);
+
 	chat_.sent.connect([this]() { acknowledge(); });
 	chat_.aborted.connect([this]() { acknowledge(); });
 
@@ -74,6 +77,12 @@ GameChatMenu* GameChatMenu::create_script_console(UI::Panel* parent,
 	}
 	return new GameChatMenu(
 	   parent, fn, registry, chat, &g_script_console_history, _("Script Console"));
+}
+
+bool GameChatMenu::handle_textinput(const std::string& text) {
+	// Pass on textinput to the chat handler when the window border has focus.
+	// This will switch focus to the editbox in the chat panel.
+	return chat_.handle_textinput(text);
 }
 
 bool GameChatMenu::enter_chat_message(bool close_on_send) {

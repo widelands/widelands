@@ -61,6 +61,12 @@ public:
 		return warning_;
 	}
 
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mousemove(uint8_t state, int32_t x, int32_t, int32_t, int32_t) override;
+	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
+	bool handle_key(bool down, SDL_Keysym) override;
+	bool handle_textinput(const std::string& text) override;
+
 protected:
 	AbstractTextInputPanel(UI::Panel*,
 	                       const std::string& name,
@@ -71,12 +77,6 @@ protected:
 	                       UI::PanelStyle style);
 
 	void draw(RenderTarget&) override;
-
-	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
-	bool handle_mousemove(uint8_t state, int32_t x, int32_t, int32_t, int32_t) override;
-	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
-	bool handle_key(bool down, SDL_Keysym) override;
-	bool handle_textinput(const std::string& text) override;
 
 	void scrollpos_changed(int32_t);
 	void delete_selected_text() const;
@@ -155,8 +155,9 @@ public:
 		history_ = history;
 	}
 
-protected:
 	bool handle_key(bool down, SDL_Keysym) override;
+
+protected:
 	uint32_t max_text_width_for_wrap() const override;
 	void scroll_cursor_into_view() override;
 	void escape_illegal_characters() const override;

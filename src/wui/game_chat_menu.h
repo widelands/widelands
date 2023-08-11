@@ -52,6 +52,8 @@ struct GameChatMenu : public UI::UniqueWindow {
 	 */
 	bool enter_chat_message(bool close_on_send = true);
 
+	bool handle_textinput(const std::string& text) override;
+
 private:
 	GameChatMenu(UI::Panel*,
 	             ChatColorForPlayer fn,

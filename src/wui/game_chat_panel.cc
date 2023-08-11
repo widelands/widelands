@@ -85,6 +85,7 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 
 	set_handle_mouse(true);
 	set_can_focus(true);
+	set_handle_textinput(true);
 
 	if (chat_.participants_ == nullptr) {
 		// No access to participant list. Hide the dropdown
@@ -152,6 +153,11 @@ bool GameChatPanel::handle_key(const bool down, const SDL_Keysym code) {
 
 	// Try autocomplete. If it worked, we handled the key press
 	return try_autocomplete();
+}
+
+bool GameChatPanel::handle_textinput(const std::string& text) {
+	focus_edit();
+	return editbox.handle_textinput(text);
 }
 
 /**
