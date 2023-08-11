@@ -95,6 +95,9 @@ if [ -n "$(git status -s)" ]; then
   # Pull All translations from Transifex
   # use force to make sure really all files get pulled
   tx pull -a -f
+
+  # Undo one-liner diffs of pure timestamps with no other content
+  undo_oneliner_diffs
 fi
 
 # Update authors file
@@ -124,9 +127,6 @@ fi
 # Fix formatting for Lua
 python3 utils/fix_formatting.py --lua --dir data/i18n
 python3 utils/fix_formatting.py --lua --dir data/txts
-
-# Undo one-liner diffs of pure timestamps with no other content
-undo_oneliner_diffs
 
 if [ -z "$(git status -s)" ]; then
   echo "Run completed, nothing to commit."
