@@ -928,13 +928,7 @@ bool Ship::is_attackable_enemy_warship(const Bob& b) const {
 }
 
 bool Ship::can_be_attacked() const {
-	// Only warships can be attacked, but not if they're already engaged in battle
-	// against any other ship. Ships attacking a port CAN be attacked though.
-	return get_ship_type() == ShipType::kWarship &&
-	       std::all_of(battles_.begin(), battles_.end(), [this](const Battle& battle) {
-		       const MapObject* opponent = battle.opponent.get(owner().egbase());
-		       return opponent == nullptr || opponent->descr().type() == MapObjectType::PORTDOCK;
-	       });
+	return get_ship_type() == ShipType::kWarship;
 }
 
 bool Ship::can_refit(const ShipType type) const {
@@ -1208,10 +1202,26 @@ void Ship::battle_update(Game& game) {
 	assert(target_ship != nullptr || current_battle.is_first);
 	const Map& map = game.map();
 
-	Battle* other_battle = (target_ship == nullptr) ? nullptr : &target_ship->battles_.back();
-	assert(other_battle == nullptr || (other_battle->opponent.get(game) == this &&
-	                                   other_battle->is_first != current_battle.is_first &&
-	                                   other_battle->phase == current_battle.phase));
+	Battle* other_battle = nullptr;
+	if (target_ship != nullptr) {
+		// Find the other ship's current battle
+		const size_t nr_enemy_battles = target_ship->battles_.size();
+		for (size_t i = nr_enemy_battles; i > 0; --i) {
+			Battle* b = &target_ship->battles_.at(i - 1);
+			if (b->opponent.get(game) == this) {
+				other_battle = b;
+				break;
+			}
+			if (b->phase != Battle::Phase::kNotYetStarted) {
+				molog(game.get_gametime(), "[battle] Enemy engaged in other battle, wait");
+				start_task_idle(game, descr().main_animation(), 1000);
+				return;
+			}
+		}
+
+		assert(other_battle != nullptr && other_battle->is_first != current_battle.is_first &&
+				other_battle->phase == current_battle.phase);
+	}
 
 	auto set_phase = [&game, &current_battle, other_battle](Battle::Phase new_phase) {
 		current_battle.phase = new_phase;
