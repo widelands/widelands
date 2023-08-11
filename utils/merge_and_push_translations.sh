@@ -63,7 +63,7 @@ tx pull -a -f
 
 if [ -n "$(git status -s)" ]; then
   # Stage and commit translations
-  git add po/*/*.po data/i18n/locales/*.json xdg/translations/*.json || true
+  git add po/*/*.po data/i18n/locales/*.json xdg/translations/*.json
   git commit -m "Fetched translations."
 fi
 
