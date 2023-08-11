@@ -97,11 +97,13 @@ bool GameChatMenu::enter_chat_message(bool close_on_send) {
 void GameChatMenu::restore() {
 	Window::restore();
 	chat_.focus_edit();
+	set_handle_textinput(true);
 }
 
 void GameChatMenu::minimize() {
 	Window::minimize();
 	chat_.unfocus_edit();
+	set_handle_textinput(false);
 }
 
 void GameChatMenu::acknowledge() {
