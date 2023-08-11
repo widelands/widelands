@@ -1237,8 +1237,12 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("barbarians_building", "Song written by Sigurd the Bard when the first rain fell after the Great Drought in the 21ˢᵗ year of Chat’Karuth’s reign."),
             -- TRANSLATORS: Purpose helptext for a Barbarian production site: Well
             purpose = pgettext("building", "Draws water out of the deep."),
-            -- TRANSLATORS: Performance helptext for a Barbarian production site: Well
-            performance = pgettext("barbarians_building", "The carrier needs %s to get one bucket full of water."):bformat(format_seconds(40))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Well, part 1
+               pgettext("barbarians_building", "The carrier needs %s to get one bucket full of water."):bformat(format_seconds(44)),
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Well, part 2
+               pgettext("barbarians_building", "If the water resource is depleted, the carrier needs %s on average."):bformat(format_seconds(71))
+            }
          }
       },
       {

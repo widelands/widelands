@@ -1370,7 +1370,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Empire production site: Well
             lore_author = pgettext("empire_building", "Imperial proverb"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Well
-            purpose = pgettext("building", "Draws water out of the deep.")
+            purpose = pgettext("building", "Draws water out of the deep."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire production site: Well, part 1
+               pgettext("empire_building", "The carrier needs %s to get one bucket full of water."):bformat(format_seconds(44)),
+               -- TRANSLATORS: Performance helptext for an Empire production site: Well, part 2
+               pgettext("empire_building", "If the water resource is depleted, the carrier needs %s on average."):bformat(format_seconds(71))
+            }
          }
       },
       {

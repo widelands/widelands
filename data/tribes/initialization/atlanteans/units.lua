@@ -1586,7 +1586,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an Atlantean production site: Well
             lore = pgettext("atlanteans_building", "Well, there is no wellbeing without a well."),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Well
-            lore_author = pgettext("atlanteans_building", "Water carrier muttering to himself")
+            lore_author = pgettext("atlanteans_building", "Water carrier muttering to himself"),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Well, part 1
+               pgettext("atlanteans_building", "The carrier needs %s to get one bucket full of water."):bformat(format_seconds(44)),
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Well, part 2
+               pgettext("atlanteans_building", "If the water resource is depleted, the carrier needs %s on average."):bformat(format_seconds(71))
+            }
          }
       },
       {

@@ -13,6 +13,7 @@ wl.Descriptions():new_carrier_type {
 
    programs = {
       fetch_water = {
+         -- first bucket takes 1 sec, second bucket (from Water Gatherer’s Hut) takes 3.6 sec, so 2 buckets take 4.6 sec
          "findspace=size:swim radius:8",
          "walk=coords",
          "animate=fetch_water duration:1s",

@@ -1654,8 +1654,12 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("frisians_building", "Chieftain Arldor’s retort when he was asked why his tribe can’t drink salt water"),
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Well
             purpose = pgettext("building", "Draws water out of the deep."),
-            -- TRANSLATORS: Performance helptext for a Frisian production site: Well
-            performance = pgettext("frisians_building", "The well needs %s on average to produce one bucket of water."):bformat(format_seconds(40))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Well, part 1
+               pgettext("frisians_building", "The carrier needs %s to get one bucket full of water."):bformat(format_seconds(44)),
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Well, part 2
+               pgettext("frisians_building", "If the water resource is depleted, the carrier needs %s on average."):bformat(format_seconds(71))
+            }
          }
       },
       {

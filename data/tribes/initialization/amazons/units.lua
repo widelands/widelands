@@ -1343,6 +1343,12 @@ wl.Descriptions():new_tribe {
                pgettext("amazons_building", "The water gatherer’s hut needs open water within the work area. Your workers cannot dig up water from the ground!"),
                -- TRANSLATORS: Note helptext for an Amazon production site: Water Gatherer's Hut, part 2
                pgettext("amazons_building", "Roads and trees along the shoreline block drawing water."),
+            },
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Water Gatherer's Hut, part 1
+               pgettext("amazons_building", "The carrier needs %s to draw two buckets of water, not counting the time he needs to reach the destination and go home again."):bformat(format_seconds(5)),
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Water Gatherer's Hut, part 2
+               pgettext("amazons_building", "Afterwards he rests in the hut for %s."):bformat(format_seconds(20))
             }
          }
       },
