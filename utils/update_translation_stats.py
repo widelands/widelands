@@ -12,7 +12,6 @@ For Debian-based Linux: sudo apt-get install translate-toolkit
 """
 
 from collections import defaultdict
-from subprocess import call, check_output, CalledProcessError
 import os.path
 import re
 import subprocess
@@ -59,7 +58,7 @@ def generate_translation_stats(po_dir, output_file):
 
         try:
             # We need shell=True, otherwise we get "No such file or directory".
-            stats_output = check_output(
+            stats_output = subprocess.check_output(
                 ['pocount ' + subdir + ' --csv'],
                 encoding='utf-8',
                 stderr=subprocess.STDOUT,
@@ -69,7 +68,7 @@ def generate_translation_stats(po_dir, output_file):
                       [0]) + '\nAborted creating translation statistics.'
                 return 1
 
-        except CalledProcessError:
+        except subprocess.CalledProcessError:
             print('Failed to run pocount:\n  FILE: ' + po_dir +
                   '\n  ' + stats_output.split('\n', 1)[1])
             return 1
