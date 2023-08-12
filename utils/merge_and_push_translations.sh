@@ -90,9 +90,9 @@ update_statistics() {
 gitAddGeneratedFiles() {
   # Stage changes
   # - Authors
-  git add data/txts/*.lua || true
+  git add 'data/txts/*.lua' || true
   # - Locale data
-  git add data/i18n/*.lua || true
+  git add 'data/i18n/*.lua' || true
   # - Appdata
   git add xdg/org.widelands.Widelands.appdata.xml xdg/org.widelands.Widelands.desktop || true
   # - Statistics
@@ -113,7 +113,7 @@ if [ -n "$(git status -s)" ]; then
   update_statistics
 
   # Stage translations
-  git add po/*/*.po data/i18n/locales/*.json xdg/translations/*.json
+  git add 'po/*/*.po' 'data/i18n/locales/*.json' 'xdg/translations/*.json'
   # and generated files
   gitAddGeneratedFiles
 
@@ -168,7 +168,7 @@ if [ -z "$(git status -s)" ]; then
 else
   # Stage changes
   # - Translations and templates
-  git add po/*/*.po po/*/*.pot data/i18n/locales/*.json xdg/translations/*.json || true
+  git add 'po/*/*.po' 'po/*/*.pot' 'data/i18n/locales/*.json' 'xdg/translations/*.json' || true
   # - generated files
   gitAddGeneratedFiles
 
