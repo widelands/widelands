@@ -202,11 +202,6 @@ def generate_glossary(po_dir, output_path, input_glossary, output_glossary, only
             # We need shell=True for the wildcards.
             poterminology_result = subprocess.run(
                 ['poterminology ' + input_path + ' -o ' + pot_path], capture_output=True, shell=True, text=True, check=True)
-            if poterminology_result.returncode != 0:
-                print('Error running poterminology:\n  FILE: ' + input_path + '\n  OUTPUT PATH: ' +
-                      output_path + '\n  ' + poterminology_result.stderr)
-                return False
-
         except subprocess.CalledProcessError:
             print('Failed to run poterminology:\n  FILE: ' + input_path + '\n  OUTPUT PATH: ' +
                   output_path + '\n  ' + poterminology_result.stderr)
