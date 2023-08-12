@@ -54,6 +54,51 @@ fi
 
 echo "Working tree is clean, continuing"
 
+update_authors() {
+  # Update authors file
+  if python3 utils/update_authors.py; then
+    echo "Updated authors"
+  else
+    echo "Failed updating authors"
+    exit 1
+  fi
+  # Fix formatting for Lua
+  python3 utils/fix_formatting.py --lua --dir data/i18n
+  python3 utils/fix_formatting.py --lua --dir data/txts
+}
+
+update_appdata() {
+  # Update appdata
+  if python3 utils/update_appdata.py; then
+    echo "Updated appdata"
+  else
+    echo "Failed updating appdata"
+    exit 1
+  fi
+}
+
+update_statistics() {
+  # Update statistics
+  if python3 utils/update_translation_stats.py; then
+    echo "Updated translation stats"
+  else
+    echo "Failed to update translation stats"
+    exit 1
+  fi
+}
+
+gitAddGeneratedFiles() {
+  # Stage changes
+  # - Authors
+  git add data/txts/*.lua || true
+  # - Locale data
+  git add data/i18n/*.lua || true
+  # - Appdata
+  git add xdg/org.widelands.Widelands.appdata.xml xdg/org.widelands.Widelands.desktop || true
+  # - Statistics
+  git add data/i18n/translation_stats.conf || true
+}
+
 # Print all commands.
 set -x
 
@@ -100,33 +145,12 @@ if [ -n "$(git status -s)" ]; then
   undo_oneliner_diffs
 fi
 
-# Update authors file
-if python3 utils/update_authors.py; then
-  echo "Updated authors";
-else
-  echo "Failed updating authors";
-  exit 1;
-fi
+update_authors
 
-# Update appdata
-if python3 utils/update_appdata.py; then
-  echo "Updated appdata";
-else
-  echo "Failed updating appdata";
-  exit 1;
-fi
+update_appdata
 
-# Update statistics
-if python3 utils/update_translation_stats.py; then
-  echo "Updated translation stats";
-else
-  echo "Failed to update translation stats";
-  exit 1;
-fi
+update_statistics
 
-# Fix formatting for Lua
-python3 utils/fix_formatting.py --lua --dir data/i18n
-python3 utils/fix_formatting.py --lua --dir data/txts
 
 if [ -z "$(git status -s)" ]; then
   echo "Run completed, nothing to commit."
@@ -134,14 +158,8 @@ else
   # Stage changes
   # - Translations
   git add po/*/*.po po/*/*.pot data/i18n/locales/*.json xdg/translations/*.json || true
-  # - Authors
-  git add data/txts/*.lua || true
-  # - Locale data
-  git add data/i18n/*.lua || true
-  # - Appdata
-  git add xdg/org.widelands.Widelands.appdata.xml xdg/org.widelands.Widelands.desktop || true
-  # - Statistics
-  git add data/i18n/translation_stats.conf || true
+  # - generated files
+  gitAddGeneratedFiles
 
   # Commit
   git commit -m "Updated translations catalogs."
