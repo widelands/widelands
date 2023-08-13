@@ -1191,7 +1191,8 @@ constexpr uint32_t kAttackAnimationDuration = 2000;
 void Ship::battle_update(Game& game) {
 	Battle& current_battle = battles_.back();
 	Ship* target_ship = current_battle.opponent.get(game);
-	if ((target_ship == nullptr || target_ship->state_is_sinking()) && !static_cast<bool>(current_battle.attack_coords)) {
+	if ((target_ship == nullptr || target_ship->state_is_sinking()) &&
+	    !static_cast<bool>(current_battle.attack_coords)) {
 		molog(game.get_gametime(), "[battle] Enemy disappeared, cancel");
 		battles_.pop_back();
 		start_task_idle(game, descr().main_animation(), 100);
@@ -1209,7 +1210,8 @@ void Ship::battle_update(Game& game) {
 		for (size_t i = nr_enemy_battles; i > 0; --i) {
 			Battle* candidate = &target_ship->battles_.at(i - 1);
 			if (candidate->opponent.get(game) == this) {
-				if (candidate->is_first != current_battle.is_first && candidate->phase == current_battle.phase) {
+				if (candidate->is_first != current_battle.is_first &&
+				    candidate->phase == current_battle.phase) {
 					// Found it
 					other_battle = candidate;
 					break;
@@ -1228,7 +1230,8 @@ void Ship::battle_update(Game& game) {
 		}
 
 		if (other_battle == nullptr) {
-			throw wexception("Warship %s could not find mirror battle against %s", get_shipname().c_str(), target_ship->get_shipname().c_str());
+			throw wexception("Warship %s could not find mirror battle against %s",
+			                 get_shipname().c_str(), target_ship->get_shipname().c_str());
 		}
 	}
 
