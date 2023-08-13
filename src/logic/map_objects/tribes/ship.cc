@@ -1191,7 +1191,7 @@ constexpr uint32_t kAttackAnimationDuration = 2000;
 void Ship::battle_update(Game& game) {
 	Battle& current_battle = battles_.back();
 	Ship* target_ship = current_battle.opponent.get(game);
-	if (target_ship == nullptr && !static_cast<bool>(current_battle.attack_coords)) {
+	if ((target_ship == nullptr || target_ship->state_is_sinking()) && !static_cast<bool>(current_battle.attack_coords)) {
 		molog(game.get_gametime(), "[battle] Enemy disappeared, cancel");
 		battles_.pop_back();
 		start_task_idle(game, descr().main_animation(), 100);
@@ -1207,20 +1207,29 @@ void Ship::battle_update(Game& game) {
 		// Find the other ship's current battle
 		const size_t nr_enemy_battles = target_ship->battles_.size();
 		for (size_t i = nr_enemy_battles; i > 0; --i) {
-			Battle* b = &target_ship->battles_.at(i - 1);
-			if (b->opponent.get(game) == this) {
-				other_battle = b;
-				break;
+			Battle* candidate = &target_ship->battles_.at(i - 1);
+			if (candidate->opponent.get(game) == this) {
+				if (candidate->is_first != current_battle.is_first && candidate->phase == current_battle.phase) {
+					// Found it
+					other_battle = candidate;
+					break;
+				}
+
+				// Same ship but different battle, can happen in case of multiple attacks.
+				// The "correct" battle should be further down the stack.
+				continue;
 			}
-			if (b->phase != Battle::Phase::kNotYetStarted) {
+
+			if (candidate->phase != Battle::Phase::kNotYetStarted) {
 				molog(game.get_gametime(), "[battle] Enemy engaged in other battle, wait");
 				start_task_idle(game, descr().main_animation(), 1000);
 				return;
 			}
 		}
 
-		assert(other_battle != nullptr && other_battle->is_first != current_battle.is_first &&
-				other_battle->phase == current_battle.phase);
+		if (other_battle == nullptr) {
+			throw wexception("Warship %s could not find mirror battle against %s", get_shipname().c_str(), target_ship->get_shipname().c_str());
+		}
 	}
 
 	auto set_phase = [&game, &current_battle, other_battle](Battle::Phase new_phase) {
@@ -1308,23 +1317,26 @@ void Ship::battle_update(Game& game) {
 		case Battle::Phase::kAttackerMovingTowardsOpponent: {
 			// Check if we need to move a little to the east to make room for an attacker west of us.
 			if (map.can_reach_by_water(map.l_n(map.l_n(get_position())))) {
-				return start_task_idle(game, descr().main_animation(), 100);
+				break;
 			}
 			molog(game.get_gametime(), "[battle] Defender making room for attacker");
 			return start_task_move(game, WALK_E, descr().get_sail_anims(), true);
 		}
 
 		default:
-			// Idle until the enemy tells us it's our turn now.
-			return start_task_idle(game, descr().main_animation(), 100);
+			break;
 		}
-		NEVER_HERE();
+
+		// Idle until the enemy tells us it's our turn now.
+		molog(game.get_gametime(), "[battle] Defender waiting for turn");
+		return start_task_idle(game, descr().main_animation(), 100);
 	}
 
 	switch (current_battle.phase) {
 	case Battle::Phase::kDefendersTurn:
 	case Battle::Phase::kDefenderAttacking:
 		// Idle until the opponent's turn is over.
+		molog(game.get_gametime(), "[battle] Attacker waiting for turn");
 		return start_task_idle(game, descr().main_animation(), 100);
 
 	case Battle::Phase::kNotYetStarted:
