@@ -914,9 +914,16 @@ void Ship::warship_soldier_callback(Game& game,
 	worker->set_location(nullptr);
 	worker->start_task_shipping(game, nullptr);
 
+	// We may temporarily exceed the ship's capacity while swapping heroes and rookies
+	const Quantity old_capacity = ship->capacity_;
+	ship->capacity_ = std::max<Quantity>(old_capacity, ship->items_.size() + 1);
+
 	ship->add_item(game, ShippingItem(*worker));
 	ship->update_warship_soldier_request(false);
 	ship->kickout_superfluous_soldiers(game);
+
+	assert(ship->items_.size() <= old_capacity);
+	ship->capacity_ = old_capacity;
 }
 
 bool Ship::is_attackable_enemy_warship(const Bob& b) const {
@@ -1110,8 +1117,10 @@ void Ship::warship_command(Game& game,
 		assert(parameters.size() == 1);
 		warship_soldier_capacity_ =
 		   std::max(std::min(parameters.back(), get_capacity()), min_warship_soldier_capacity());
-		update_warship_soldier_request(false);
-		kickout_superfluous_soldiers(game);
+		if (get_ship_type() == ShipType::kWarship) {
+			update_warship_soldier_request(false);
+			kickout_superfluous_soldiers(game);
+		}
 		return;
 	}
 
