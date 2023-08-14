@@ -401,7 +401,9 @@ void SpinBox::set_value_list(const std::vector<int32_t>& values) {
 /**
  * sets the interval the value may lay in and fixes the value, if outside.
  */
-void SpinBox::set_interval(int32_t const min, int32_t const max, const bool trigger_signal_if_changed) {
+void SpinBox::set_interval(int32_t const min,
+                           int32_t const max,
+                           const bool trigger_signal_if_changed) {
 	assert(min <= max);
 	sbi_->max = max;
 	sbi_->min = min;
