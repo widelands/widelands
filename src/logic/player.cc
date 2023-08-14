@@ -2310,32 +2310,36 @@ void Player::write_statistics(FileWrite& fw) const {
 std::pair<std::set<std::string>, std::set<std::string>> read_custom_warehouse_ship_names() {
 	std::pair<std::set<std::string>, std::set<std::string>> result;
 
-	if (FileRead fr; fr.try_open(*g_fs, kCustomShipNamesFile)) {
-		for (;;) {
-			const char* line = fr.read_line();
-			if (line == nullptr) {
-				break;
-			}
+	const std::string* filenames[2] = {&kCustomShipNamesFile, &kCustomWarehouseNamesFile};
+	std::set<std::string>* result_sets[2] = {&result.first, &result.second};
 
-			std::string name(line);
-			trim(name);
-			if (!name.empty()) {
-				result.first.insert(richtext_escape(name));
-			}
-		}
-	}
+	for (int i = 0; i < 2; ++i) {  // To deduplicate this a bit
+		if (FileRead fr; fr.try_open(*g_fs, *filenames[i])) {
+			for (;;) {
+				const char* line = nullptr;
+				try {
+					line = fr.read_line();
+				} catch (const std::exception& e) {
+					log_warn("Naming list in '%s' file is malformed: %s", filenames[i]->c_str(), e.what());
+					break;
+				}
+				if (line == nullptr) {
+					break;  // End of file
+				}
 
-	if (FileRead fr; fr.try_open(*g_fs, kCustomWarehouseNamesFile)) {
-		for (;;) {
-			const char* line = fr.read_line();
-			if (line == nullptr) {
-				break;
-			}
+				std::string name(line);
 
-			std::string name(line);
-			trim(name);
-			if (!name.empty()) {
-				result.second.insert(richtext_escape(name));
+				// Cleanup and sanitizing
+				constexpr const char kDoubleWhitespace[] = "  ";
+				replace_all(name, "\t", " ");
+				trim(name);
+				while (contains(name, kDoubleWhitespace)) {
+					replace_all(name, kDoubleWhitespace, " ");
+				}
+
+				if (!name.empty()) {
+					result_sets[i]->insert(name);
+				}
 			}
 		}
 	}
