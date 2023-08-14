@@ -212,6 +212,13 @@ struct Ship : Bob {
 		        ship_state_ != ShipStates::kSinkAnimation &&
 		        ship_state_ != ShipStates::kExpeditionColonizing);
 	}
+	/// \returns whether the ship is currently sinking
+	[[nodiscard]] bool state_is_sinking() const {
+		return (ship_state_ == ShipStates::kSinkRequest || ship_state_ == ShipStates::kSinkAnimation);
+	}
+	[[nodiscard]] bool is_expedition_or_warship() const {
+		return expedition_ != nullptr;
+	}
 
 	/// \returns (in expedition mode only!) whether the next field in direction \arg dir is swimmable
 	[[nodiscard]] bool exp_dir_swimmable(Direction dir) const {
@@ -272,6 +279,7 @@ struct Ship : Bob {
 	[[nodiscard]] unsigned get_sea_attack_soldier_bonus(const EditorGameBase& egbase) const;
 
 	[[nodiscard]] bool can_be_attacked() const;
+	[[nodiscard]] bool can_attack() const;
 	[[nodiscard]] bool is_attackable_enemy_warship(const Bob&) const;
 	[[nodiscard]] uint32_t get_hitpoints() const {
 		return hitpoints_;

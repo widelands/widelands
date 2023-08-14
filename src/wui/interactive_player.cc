@@ -256,7 +256,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	shipnotes_subscriber_ =
 	   Notifications::subscribe<Widelands::NoteShip>([this](const Widelands::NoteShip& note) {
 		   if (note.ship->owner().player_number() == player_number() &&
-		       !note.ship->state_is_transport() && !note.ship->exp_port_spaces().empty() &&
+		       note.ship->is_expedition_or_warship() && !note.ship->exp_port_spaces().empty() &&
 		       note.action == Widelands::NoteShip::Action::kWaitingForCommand &&
 		       (note.ship->get_ship_state() == Widelands::ShipStates::kExpeditionPortspaceFound ||
 		        note.ship->get_ship_type() == Widelands::ShipType::kWarship)) {
@@ -476,7 +476,7 @@ void InteractivePlayer::think() {
 	// Cleanup found port spaces if the ship sailed on or was destroyed
 	for (auto it = expedition_port_spaces_.begin(); it != expedition_port_spaces_.end();) {
 		Widelands::Ship* ship = it->first.get(egbase());
-		if (ship == nullptr || ship->state_is_transport() ||
+		if (ship == nullptr || !ship->is_expedition_or_warship() ||
 		    std::find(ship->exp_port_spaces().begin(), ship->exp_port_spaces().end(), it->second) ==
 		       ship->exp_port_spaces().end()) {
 			it = expedition_port_spaces_.erase(it);
