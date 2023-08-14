@@ -221,7 +221,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		}
 	}
 
-	if (static_cast<int>(ports_count) * 2 - warships_count > 0 &&
+	if ((static_cast<int>(ports_count) * 2 - warships_count) > 0 &&
 	     tradeships_count - expeditions_in_progress > 1) {
 		warship_needed = true;
 	}
@@ -268,24 +268,23 @@ bool DefaultAI::check_ships(const Time& gametime) {
 				++warships_count;
 				if (tradeship_refit_needed) {
 					game().send_player_refit_ship(*so.ship, Widelands::ShipType::kTransport);
-					--warships_count;
 					tradeship_refit_needed = false;
+					--warships_count;
 				}
-				
 			} else {
 				++tradeships_count;
 				if (warship_needed) {
 					game().send_player_refit_ship(*so.ship, Widelands::ShipType::kWarship);
-					--tradeships_count;
 					warship_needed = false;
+					--tradeships_count;
 				}
 			}
 			const Widelands::ShipStates ship_state = so.ship->get_ship_state();
 
 			// Here we manage duration of expedition and related variables
-			if (ship_state == Widelands::ShipStates::kExpeditionWaiting ||
+			if (so.ship->get_ship_type() == Widelands::ShipType::kTransport && (ship_state == Widelands::ShipStates::kExpeditionWaiting ||
 			    ship_state == Widelands::ShipStates::kExpeditionScouting ||
-			    ship_state == Widelands::ShipStates::kExpeditionPortspaceFound) {
+			    ship_state == Widelands::ShipStates::kExpeditionPortspaceFound)) {
 
 				// the function below will take care of variables like
 				// - expedition_ship_
