@@ -182,7 +182,7 @@ std::vector<Widelands::Bob*> AttackWindow::get_max_attackers() {
 		Widelands::Ship* warship =
 		   dynamic_cast<Widelands::Ship*>(egbase.objects().get_object(ship_serial));
 		assert(warship != nullptr);
-		if (warship->get_ship_type() == Widelands::ShipType::kWarship) {
+		if (warship->can_attack()) {
 			if (ship != nullptr) {  // Ship-to-ship combat
 				if (warship->has_attack_target(ship)) {
 					result_vector.push_back(warship);
