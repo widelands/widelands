@@ -22,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2023\n"
+"Last-Translator: Simon Heimberg, 2023\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -372,7 +372,7 @@ msgid ""
 "latitude; farming thrives, berries are abundant, and fish plentiful. The "
 "small human population of this place never knew famine. You warlording "
 "bastards just couldn’t leave this little paradise in peace, could you?"
-msgstr "Zwischen Schweden und Finnland liegt die Archipelsee. Dieser Ort unglaublicher Schönheit ist weder Land noch Wasser; er ist beides. Innerhalb von wenigen hundert Kilometern sind nicht weniger als 50.000 größere und kleinere Inseln, die meisten lediglich ein paar Morgen groß. Das Klima ist recht mild für den Breitengrad; die Landwirdschaft floriert, Beeren wachsen in Hülle und Fülle und Fische gibt es im Überfluss. Die kleine Bevölkerung dieser Region kannte nie Hunger. Aber ihr kriegslüsternden Bastarde konntet dieses kleine Paradies nicht in Frieden lassen, oder?"
+msgstr "Zwischen Schweden und Finnland liegt die Archipelsee. Dieser Ort unglaublicher Schönheit ist weder Land noch Wasser; er ist beides. Innerhalb von wenigen hundert Kilometern sind nicht weniger als 50.000 größere und kleinere Inseln, die meisten lediglich ein paar Morgen groß. Das Klima ist recht mild für den Breitengrad; die Landwirtschaft floriert, Beeren wachsen in Hülle und Fülle und Fische gibt es im Überfluss. Die kleine Bevölkerung dieser Region kannte nie Hunger. Aber ihr kriegslüsternen Bastarde konntet dieses kleine Paradies nicht in Frieden lassen, oder?"
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:11
 msgid ""
@@ -781,7 +781,7 @@ msgstr "Zwei Geheimnisse umwehen diese Landschaft: Wer hat dieses unglaublich gr
 
 #: ../../data/maps/No_metal_challenge.wmf/elemental:8
 msgid "No metal challenge v2"
-msgstr "Kein Metall Herrausforderung v2"
+msgstr "Kein Metall Herausforderung v2"
 
 #: ../../data/maps/No_metal_challenge.wmf/elemental:10
 msgid ""

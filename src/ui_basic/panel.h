@@ -517,6 +517,10 @@ public:
 		return get_flag(pf_handle_mouse);
 	}
 
+	[[nodiscard]] static uint32_t time_of_last_user_activity() {
+		return time_of_last_user_activity_;
+	}
+
 private:
 	bool initialized_{false};
 
@@ -564,6 +568,8 @@ private:
 	static bool ui_mousewheel(int32_t x, int32_t y, uint16_t modstate);
 	static bool ui_key(bool down, SDL_Keysym code);
 	static bool ui_textinput(const std::string& text);
+	static void register_user_activity();
+	static uint32_t time_of_last_user_activity_;
 
 	Panel* parent_;
 	Panel* next_;

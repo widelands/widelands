@@ -3,8 +3,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Simon Heimberg, 2023
 # Stephan Lutz <stephan-lutz@gmx.de>, 2023
+# Simon Heimberg, 2023
 # 
 msgid ""
 msgstr ""
@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2023\n"
+"Last-Translator: Simon Heimberg, 2023\n"
 "Language-Team: German (https://app.transifex.com/widelands/teams/35159/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -193,9 +193,9 @@ msgid ""
 "sites."
 msgstr ""
 "Wir benötigen dringend etwas Spinnenstoff, da er uns ausgeht. Es ist daher "
-"unbedingt notwendig jedes Stück Spinnestoff aufzusparen, das wir noch haben."
-" Reduziere den Wareneingang aller Gebäude, die Spinnenstoff verbrauchen und "
-"vergiss auch die Baustellen nicht."
+"unbedingt notwendig jedes Stück Spinnenstoff aufzusparen, das wir noch "
+"haben. Reduziere den Wareneingang aller Gebäude, die Spinnenstoff "
+"verbrauchen und vergiss auch die Baustellen nicht."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:102
 msgid ""
@@ -424,7 +424,7 @@ msgid ""
 "was pulled below the sea level by Lutas’ forces and we lost most men and all"
 " wares it carried."
 msgstr ""
-"Die schwere Ladung zusammen mit der starken Strömung war zuviel für das "
+"Die schwere Ladung zusammen mit der starken Strömung war zu viel für das "
 "Schiff und es wurde durch Lutas’ Kräfte unter Wasser gezogen, so dass wir "
 "die meisten Männer und alle Waren verloren die es trug."
 
@@ -601,9 +601,9 @@ msgid ""
 "buildings."
 msgstr ""
 "Möge Satul Euch wärmen, %s. Als höchster Weber der Gilde habe ich schlechte "
-"Nachrichten für euch. Ich habe gerade festgestellt, dass uns der Spinenstoff"
-" ausgeht. Das ist ein sehr gefährlicher Fall, da, wie ihr wisst, "
-"Spinnenstoff zum Bau vieler Gebäude benötigt wird."
+"Nachrichten für euch. Ich habe gerade festgestellt, dass uns der "
+"Spinnenstoff ausgeht. Das ist ein sehr gefährlicher Fall, da, wie ihr wisst,"
+" Spinnenstoff zum Bau vieler Gebäude benötigt wird."
 
 #. TRANSLATORS: Opol
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:276
@@ -652,7 +652,7 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:302
 #, lua-format
 msgid "%s Acknowledges"
-msgstr "%s nimmt zur Kenntis"
+msgstr "%s nimmt zur Kenntnis"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:305
@@ -1067,7 +1067,7 @@ msgid ""
 "serve Satul to become his priestesses need golden tabards and diamonds."
 msgstr ""
 "Möge Satul Euch wärmen, Loftomor. Danke für den Bau eines solch großartigen "
-"Tempels. Nun müssem wir Speisen und unsere wertvollsten Waren zum Tempel "
+"Tempels. Nun müssen wir Speisen und unsere wertvollsten Waren zum Tempel "
 "bringen um befriedigende Opfergaben vorzubereiten. Und vergesst nicht, dass "
 "Eingeweihte, die Satul dienen um seine Priesterinnen zu werden, goldene "
 "Wappenröcke und Diamanten brauchen."
@@ -1633,7 +1633,7 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:36
 msgctxt "atlanteans_worker"
 msgid "Transports wares to share with other players."
-msgstr "Transportiert Warenum sie mit anderen Spielern zu teilen."
+msgstr "Transportiert Waren, um sie mit anderen Spielern zu teilen."
 
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:37
 msgctxt "atlanteans_worker"

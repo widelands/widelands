@@ -48,24 +48,23 @@ public:
 		int32_t yres;
 		bool maximized;
 		bool fullscreen;
-		bool inputgrab;
-		uint32_t maxfps;
 		bool sdl_cursor;
+		bool tooltip_accessibility_mode;
 
 		// Windows options
 		bool dock_windows_to_edges;
 		int32_t panel_snap_distance;
 		int32_t border_snap_distance;
-		bool animate_map_panning;
 
 		// Saving options
 		int32_t autosave;          // autosave interval in minutes
 		int32_t rolling_autosave;  // number of file to use for rolling autosave
 		int32_t replay_lifetime;   // number of weeks to keep replays around
+		bool skip_autosave_on_inactivity;
 		bool zip;
-		bool write_syncstreams;
 
 		// Game options
+		int32_t pause_game_on_inactivity;  // inactivity duration in minutes
 		bool auto_roadbuild_mode;
 		bool transparent_chat;
 		bool single_watchwin;
@@ -73,7 +72,7 @@ public:
 		bool numpad_diagonalscrolling;
 		bool edge_scrolling;
 		bool invert_movement;
-		bool tooltip_accessibility_mode;
+		bool animate_map_panning;
 		int32_t display_flags;
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 		bool training_wheels;
@@ -155,14 +154,14 @@ private:
 	// Interface options
 	UI::Dropdown<std::string> language_dropdown_;
 	UI::Dropdown<ScreenResolution> resolution_dropdown_;
-	UI::Checkbox inputgrab_;
 	UI::Checkbox sdl_cursor_;
-	UI::SpinBox sb_maxfps_;
 	UI::Checkbox tooltip_accessibility_mode_;
 	UI::MultilineTextarea translation_info_;
+	// Empty panel for layouting
+	// TODO(tothxa): Replace with infinite space if box layouting quirks get fixed
+	UI::Panel translation_padding_;
 
 	UI::Checkbox dock_windows_to_edges_;
-	UI::Checkbox animate_map_panning_;
 	UI::SpinBox sb_dis_panel_;
 	UI::SpinBox sb_dis_border_;
 
@@ -175,8 +174,8 @@ private:
 	UI::SpinBox sb_autosave_;
 	UI::SpinBox sb_rolling_autosave_;
 	UI::SpinBox sb_replay_lifetime_;
+	UI::Checkbox skip_autosave_on_inactivity_;
 	UI::Checkbox zip_;
-	UI::Checkbox write_syncstreams_;
 
 	// New Game options
 	UI::Checkbox show_buildhelp_;
@@ -187,6 +186,7 @@ private:
 	UI::Checkbox show_workarea_overlap_;
 
 	// In-Game options
+	UI::SpinBox sb_pause_game_on_inactivity_;
 	UI::Checkbox auto_roadbuild_mode_;
 	UI::Checkbox transparent_chat_;
 	UI::Checkbox single_watchwin_;
@@ -194,6 +194,7 @@ private:
 	UI::Checkbox numpad_diagonalscrolling_;
 	UI::Checkbox edge_scrolling_;
 	UI::Checkbox invert_movement_;
+	UI::Checkbox animate_map_panning_;
 
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	UI::Box training_wheels_box_;
