@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-08-10 02:32+0000\n"
+"POT-Creation-Date: 2023-08-12 02:12+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Georgi Georgiev (Жоро) <g.georgiev.shumen@gmail.com>, 2021\n"
 "Language-Team: Bulgarian (http://app.transifex.com/widelands/widelands/language/bg/)\n"
@@ -9035,11 +9035,11 @@ msgstr ""
 msgid "Waterway length: %1$u / %2$u"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:1786
+#: ../../src/wui/interactive_base.cc:1791
 msgid "Failed saving screenshot!"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:1790
+#: ../../src/wui/interactive_base.cc:1795
 msgid "Screenshot saved"
 msgstr ""
 

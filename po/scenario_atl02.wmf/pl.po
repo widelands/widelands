@@ -3,7 +3,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Aleksandra Kurda <a.kurda@o2.pl>, 2023
+# Aleksandra <a.kurda@o2.pl>, 2023
 # 
 msgid ""
 msgstr ""
@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
-"Last-Translator: Aleksandra Kurda <a.kurda@o2.pl>, 2023\n"
+"Last-Translator: Aleksandra <a.kurda@o2.pl>, 2023\n"
 "Language-Team: Polish (https://app.transifex.com/widelands/teams/35159/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -243,59 +243,60 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:119
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:132
 msgid "The following batches need to be delivered:"
-msgstr ""
+msgstr "Musisz dostarczyć następujące paczki:"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:120
 msgid "Five batches of five logs each."
-msgstr ""
+msgstr "Pięć paczek po pięć kłód drewna każda."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:121
 msgid "Four batches of four lumps of coal each."
-msgstr ""
+msgstr "Cztery paczki po cztery kawałki węgla każda."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:122
 msgid "Three batches of three iron bars each."
-msgstr ""
+msgstr "Trzy paczki po trzy sztabki żelaza każda."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:123
 msgid "Two batches of two gold bars each."
-msgstr ""
+msgstr "Dwie paczki po dwie sztabki złota każda."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:133
 msgid "Ten batches of five logs each."
-msgstr ""
+msgstr "Dziesięć paczek po pięć kłód drewna każda."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:134
 msgid "Eight batches of four lumps of coal each."
-msgstr ""
+msgstr "Osiem paczek po cztery kawałki węgla każda."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:135
 msgid "Six batches of three iron bars each."
-msgstr ""
+msgstr "Sześć paczek po trzy sztabki żelaza każda."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:136
 msgid "Four batches of two gold bars each."
-msgstr ""
+msgstr "Cztery paczki po dwie sztabki żelaza każda."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:141
 msgid "Defeat Maletus"
-msgstr ""
+msgstr "Pokonaj Maletusa"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:143
 msgid "Defeat Imperial Leader Maletus"
-msgstr ""
+msgstr "Pokonaj Lideria Imperium Maletusa"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:144
 msgid "We need to finish the Empire off to have a chance to build a new home."
 msgstr ""
+"Musimy pokonać Imperium na dobre aby mieć szansę na zbudowanie nowego domu."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:149
 msgid "Build a temple to worship Satul"
-msgstr ""
+msgstr "Zbuduj świątynie by czcić Satula"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:151
 msgid "Build Temple For Satul"
-msgstr ""
+msgstr "Zbuduj świątynię dla Satula"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:152
 msgid ""
