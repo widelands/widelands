@@ -2385,6 +2385,9 @@ void Ship::draw_healthbar(const EditorGameBase& egbase,
 	dst->fill_rect(energy_complement, complement_color);
 
 	// Now soldier strength bonus bars
+	if (ship_type_ != ShipType::kWarship) {
+		return;
+	}
 	const unsigned bonus = get_sea_attack_soldier_bonus(egbase);
 	if (bonus > 0) {
 		assert(bonus < 2000);  // Sanity check
