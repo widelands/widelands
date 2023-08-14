@@ -2320,7 +2320,8 @@ std::pair<std::set<std::string>, std::set<std::string>> read_custom_warehouse_sh
 				try {
 					line = fr.read_line();
 				} catch (const std::exception& e) {
-					log_warn("Naming list in '%s' file is malformed: %s", filenames[i]->c_str(), e.what());
+					log_warn(
+					   "Naming list in '%s' file is malformed: %s", filenames[i]->c_str(), e.what());
 					break;
 				}
 				if (line == nullptr) {
