@@ -256,6 +256,13 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                          1,
                          4),
 
+     skip_autosave_on_inactivity_(&box_saving_,
+                                  UI::PanelStyle::kFsMenu,
+                                  "skip_autosave_on_inactivity",
+                                  Vector2i::zero(),
+                                  _("Skip autosaves while inactive"),
+                                  "",
+                                  0),
      zip_(&box_saving_,
           UI::PanelStyle::kFsMenu,
           "compress",
@@ -287,6 +294,22 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                             _("Show Workarea Overlaps")),
 
      // In-Game options
+     sb_pause_game_on_inactivity_(&box_ingame_,
+                                  "pause_game_on_inactivity",
+                                  0,
+                                  0,
+                                  0,
+                                  0,
+                                  opt.pause_game_on_inactivity,
+                                  0,
+                                  120,
+                                  UI::PanelStyle::kFsMenu,
+                                  _("Pause game when inactive for:"),
+                                  UI::SpinBox::Units::kMinutes,
+                                  UI::SpinBox::Type::kBig,
+                                  1,
+                                  10),
+
      auto_roadbuild_mode_(&box_ingame_,
                           UI::PanelStyle::kFsMenu,
                           "auto_roadbuild",
@@ -402,6 +425,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	box_saving_.add(&sb_autosave_, UI::Box::Resizing::kFullSize);
 	box_saving_.add(&sb_rolling_autosave_, UI::Box::Resizing::kFullSize);
 	box_saving_.add(&sb_replay_lifetime_, UI::Box::Resizing::kFullSize);
+	box_saving_.add(&skip_autosave_on_inactivity_, UI::Box::Resizing::kFullSize);
 	box_saving_.add(&zip_, UI::Box::Resizing::kFullSize);
 
 	// New Games
@@ -413,6 +437,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	box_newgame_.add(&show_workarea_overlap_, UI::Box::Resizing::kFullSize);
 
 	// In-Game
+	box_ingame_.add(&sb_pause_game_on_inactivity_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&auto_roadbuild_mode_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&transparent_chat_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&single_watchwin_, UI::Box::Resizing::kFullSize);
@@ -469,6 +494,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 
 	/** TRANSLATORS: Options: Save game automatically every: */
 	sb_autosave_.add_replacement(0, _("Off"));
+	sb_pause_game_on_inactivity_.add_replacement(0, _("Off"));
 	/** TRANSLATORS: Options: Delete replays after: */
 	sb_replay_lifetime_.add_replacement(0, _("Never"));
 
@@ -483,6 +509,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	dock_windows_to_edges_.set_state(opt.dock_windows_to_edges);
 
 	// Saving options
+	skip_autosave_on_inactivity_.set_state(opt.skip_autosave_on_inactivity);
 	zip_.set_state(opt.zip);
 
 	// Game options
@@ -604,12 +631,11 @@ void Options::layout() {
 		sb_dis_border_.set_desired_size(tab_panel_width, sb_dis_border_.get_h());
 
 		// Saving options
-		sb_autosave_.set_unit_width(kSpinboxW);
-		sb_autosave_.set_desired_size(tab_panel_width, sb_autosave_.get_h());
-		sb_rolling_autosave_.set_unit_width(kSpinboxW);
-		sb_rolling_autosave_.set_desired_size(tab_panel_width, sb_rolling_autosave_.get_h());
-		sb_replay_lifetime_.set_unit_width(kSpinboxW);
-		sb_replay_lifetime_.set_desired_size(tab_panel_width, sb_replay_lifetime_.get_h());
+		for (UI::SpinBox* sb : {&sb_autosave_, &sb_rolling_autosave_, &sb_replay_lifetime_,
+		                        &sb_pause_game_on_inactivity_}) {
+			sb->set_unit_width(kSpinboxW);
+			sb->set_desired_size(tab_panel_width, sb->get_h());
+		}
 	}
 	UI::Window::layout();
 }
@@ -808,6 +834,7 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 	os_.autosave = sb_autosave_.get_value();
 	os_.rolling_autosave = sb_rolling_autosave_.get_value();
 	os_.replay_lifetime = sb_replay_lifetime_.get_value();
+	os_.skip_autosave_on_inactivity = skip_autosave_on_inactivity_.get_state();
 	os_.zip = zip_.get_state();
 
 	// Game options
@@ -824,6 +851,7 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 #endif
 
 	// New Game options
+	os_.pause_game_on_inactivity = sb_pause_game_on_inactivity_.get_value();
 	int32_t flags = show_buildhelp_.get_state() ? InteractiveBase::dfShowBuildhelp : 0;
 	flags |= show_census_.get_state() ? InteractiveBase::dfShowCensus : 0;
 	flags |= show_statistics_.get_state() ? InteractiveBase::dfShowStatistics : 0;
@@ -886,9 +914,11 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.autosave = opt_section_.get_int("autosave", kDefaultAutosaveInterval * 60);
 	opt.rolling_autosave = opt_section_.get_int("rolling_autosave", 5);
 	opt.replay_lifetime = opt_section_.get_int("replay_lifetime", 0);
+	opt.skip_autosave_on_inactivity = opt_section_.get_bool("skip_autosave_on_inactivity", true);
 	opt.zip = !opt_section_.get_bool("nozip", false);
 
 	// Game options
+	opt.pause_game_on_inactivity = opt_section_.get_int("pause_game_on_inactivity", 0);
 	opt.auto_roadbuild_mode = opt_section_.get_bool("auto_roadbuild_mode", true);
 	opt.transparent_chat = opt_section_.get_bool("transparent_chat", true);
 	opt.single_watchwin = opt_section_.get_bool("single_watchwin", false);
@@ -932,9 +962,11 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_int("autosave", opt.autosave * 60);
 	opt_section_.set_int("rolling_autosave", opt.rolling_autosave);
 	opt_section_.set_int("replay_lifetime", opt.replay_lifetime);
+	opt_section_.set_bool("skip_autosave_on_inactivity", opt.skip_autosave_on_inactivity);
 	opt_section_.set_bool("nozip", !opt.zip);
 
 	// Game options
+	opt_section_.set_int("pause_game_on_inactivity", opt.pause_game_on_inactivity);
 	opt_section_.set_bool("auto_roadbuild_mode", opt.auto_roadbuild_mode);
 	opt_section_.set_bool("transparent_chat", opt.transparent_chat);
 	opt_section_.set_bool("single_watchwin", opt.single_watchwin);

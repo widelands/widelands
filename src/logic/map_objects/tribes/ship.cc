@@ -914,9 +914,16 @@ void Ship::warship_soldier_callback(Game& game,
 	worker->set_location(nullptr);
 	worker->start_task_shipping(game, nullptr);
 
+	// We may temporarily exceed the ship's capacity while swapping heroes and rookies
+	const Quantity old_capacity = ship->capacity_;
+	ship->capacity_ = std::max<Quantity>(old_capacity, ship->items_.size() + 1);
+
 	ship->add_item(game, ShippingItem(*worker));
 	ship->update_warship_soldier_request(false);
 	ship->kickout_superfluous_soldiers(game);
+
+	assert(ship->items_.size() <= old_capacity);
+	ship->capacity_ = old_capacity;
 }
 
 bool Ship::is_attackable_enemy_warship(const Bob& b) const {
@@ -928,13 +935,11 @@ bool Ship::is_attackable_enemy_warship(const Bob& b) const {
 }
 
 bool Ship::can_be_attacked() const {
-	// Only warships can be attacked, but not if they're already engaged in battle
-	// against any other ship. Ships attacking a port CAN be attacked though.
-	return get_ship_type() == ShipType::kWarship &&
-	       std::all_of(battles_.begin(), battles_.end(), [this](const Battle& battle) {
-		       const MapObject* opponent = battle.opponent.get(owner().egbase());
-		       return opponent == nullptr || opponent->descr().type() == MapObjectType::PORTDOCK;
-	       });
+	return get_ship_type() == ShipType::kWarship;
+}
+
+bool Ship::can_attack() const {
+	return get_ship_type() == ShipType::kWarship && !has_battle();
 }
 
 bool Ship::can_refit(const ShipType type) const {
@@ -1116,14 +1121,16 @@ void Ship::warship_command(Game& game,
 		assert(parameters.size() == 1);
 		warship_soldier_capacity_ =
 		   std::max(std::min(parameters.back(), get_capacity()), min_warship_soldier_capacity());
-		update_warship_soldier_request(false);
-		kickout_superfluous_soldiers(game);
+		if (get_ship_type() == ShipType::kWarship) {
+			update_warship_soldier_request(false);
+			kickout_superfluous_soldiers(game);
+		}
 		return;
 	}
 
 	case WarshipCommand::kAttack:
 		assert(!parameters.empty());
-		if (get_ship_type() != ShipType::kWarship) {
+		if (!can_attack()) {
 			return;
 		}
 
@@ -1197,7 +1204,8 @@ constexpr uint32_t kAttackAnimationDuration = 2000;
 void Ship::battle_update(Game& game) {
 	Battle& current_battle = battles_.back();
 	Ship* target_ship = current_battle.opponent.get(game);
-	if (target_ship == nullptr && !static_cast<bool>(current_battle.attack_coords)) {
+	if ((target_ship == nullptr || target_ship->state_is_sinking()) &&
+	    !static_cast<bool>(current_battle.attack_coords)) {
 		molog(game.get_gametime(), "[battle] Enemy disappeared, cancel");
 		battles_.pop_back();
 		start_task_idle(game, descr().main_animation(), 100);
@@ -1208,10 +1216,37 @@ void Ship::battle_update(Game& game) {
 	assert(target_ship != nullptr || current_battle.is_first);
 	const Map& map = game.map();
 
-	Battle* other_battle = (target_ship == nullptr) ? nullptr : &target_ship->battles_.back();
-	assert(other_battle == nullptr || (other_battle->opponent.get(game) == this &&
-	                                   other_battle->is_first != current_battle.is_first &&
-	                                   other_battle->phase == current_battle.phase));
+	Battle* other_battle = nullptr;
+	if (target_ship != nullptr) {
+		// Find the other ship's current battle
+		const size_t nr_enemy_battles = target_ship->battles_.size();
+		for (size_t i = nr_enemy_battles; i > 0; --i) {
+			Battle* candidate = &target_ship->battles_.at(i - 1);
+			if (candidate->opponent.get(game) == this) {
+				if (candidate->is_first != current_battle.is_first &&
+				    candidate->phase == current_battle.phase) {
+					// Found it
+					other_battle = candidate;
+					break;
+				}
+
+				// Same ship but different battle, can happen in case of multiple attacks.
+				// The "correct" battle should be further down the stack.
+				continue;
+			}
+
+			if (candidate->phase != Battle::Phase::kNotYetStarted) {
+				molog(game.get_gametime(), "[battle] Enemy engaged in other battle, wait");
+				start_task_idle(game, descr().main_animation(), 1000);
+				return;
+			}
+		}
+
+		if (other_battle == nullptr) {
+			throw wexception("Warship %s could not find mirror battle against %s",
+			                 get_shipname().c_str(), target_ship->get_shipname().c_str());
+		}
+	}
 
 	auto set_phase = [&game, &current_battle, other_battle](Battle::Phase new_phase) {
 		current_battle.phase = new_phase;
@@ -1298,23 +1333,26 @@ void Ship::battle_update(Game& game) {
 		case Battle::Phase::kAttackerMovingTowardsOpponent: {
 			// Check if we need to move a little to the east to make room for an attacker west of us.
 			if (map.can_reach_by_water(map.l_n(map.l_n(get_position())))) {
-				return start_task_idle(game, descr().main_animation(), 100);
+				break;
 			}
 			molog(game.get_gametime(), "[battle] Defender making room for attacker");
 			return start_task_move(game, WALK_E, descr().get_sail_anims(), true);
 		}
 
 		default:
-			// Idle until the enemy tells us it's our turn now.
-			return start_task_idle(game, descr().main_animation(), 100);
+			break;
 		}
-		NEVER_HERE();
+
+		// Idle until the enemy tells us it's our turn now.
+		molog(game.get_gametime(), "[battle] Defender waiting for turn");
+		return start_task_idle(game, descr().main_animation(), 100);
 	}
 
 	switch (current_battle.phase) {
 	case Battle::Phase::kDefendersTurn:
 	case Battle::Phase::kDefenderAttacking:
 		// Idle until the opponent's turn is over.
+		molog(game.get_gametime(), "[battle] Attacker waiting for turn");
 		return start_task_idle(game, descr().main_animation(), 100);
 
 	case Battle::Phase::kNotYetStarted:
@@ -2351,6 +2389,9 @@ void Ship::draw_healthbar(const EditorGameBase& egbase,
 	dst->fill_rect(energy_complement, complement_color);
 
 	// Now soldier strength bonus bars
+	if (ship_type_ != ShipType::kWarship) {
+		return;
+	}
 	const unsigned bonus = get_sea_attack_soldier_bonus(egbase);
 	if (bonus > 0) {
 		assert(bonus < 2000);  // Sanity check

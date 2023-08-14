@@ -458,6 +458,7 @@ bool AbstractTextInputPanel::handle_mousewheel(int32_t x, int32_t y, uint16_t mo
 }
 
 void AbstractTextInputPanel::set_caret_to_cursor_pos(int32_t x, int32_t y) {
+	x += d_->scrolloffset;
 	y += d_->scrollbar.get_scrollpos();
 
 	unsigned previous_line_index = d_->ww.offset_of_line_at(y);
