@@ -10,6 +10,7 @@
 # millimarg, 2015
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
+# Simon Heimberg, 2023
 # Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022
 # Venatrix, 2015
 # Elisabeth Jäger, 2015-2016
@@ -19,9 +20,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022\n"
+"Last-Translator: Simon Heimberg, 2023\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -603,7 +604,7 @@ msgid ""
 "our warehouses. Could you not help the weavers’ guild by arranging the "
 "building of a weaving mill and a spider farm? The spiders deliver the finest"
 " silk and we will produce the finest spidercloth from it."
-msgstr "Möge Satul Euch wämen, Jundlina. Mein Name ist Opol, und ich bin der höchste Weber der Gilde, die Atlantis und Lutas mit Euch verlassen hat. Ich komme in der Tat mir traurigen Neuigkeiten: Wir haben keinen Spinnenstoff mehr. Wir konnten kein einziges Stück in unseren Lagerhäusern finden. Könntet Ihr nicht der Webergilde helfen und den Bau einer Weberei und einer Spinnenzucht in Auftrag geben? Die Spinnen liefern die feinste Seide und wir werden daraus den besten Spinnenstoff herstellen."
+msgstr "Möge Satul Euch wärmen, Jundlina. Mein Name ist Opol, und ich bin der höchste Weber der Gilde, die Atlantis und Lutas mit Euch verlassen hat. Ich komme in der Tat mir traurigen Neuigkeiten: Wir haben keinen Spinnenstoff mehr. Wir konnten kein einziges Stück in unseren Lagerhäusern finden. Könntet Ihr nicht der Webergilde helfen und den Bau einer Weberei und einer Spinnenzucht in Auftrag geben? Die Spinnen liefern die feinste Seide und wir werden daraus den besten Spinnenstoff herstellen."
 
 #. TRANSLATORS: Opol
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:269
@@ -776,7 +777,7 @@ msgid ""
 "People are complaining about crowded streets and slow transportation. We "
 "need to help out our carriers on the roads. I have decided to build a horse "
 "farm so that the horses can help with the heavy wares."
-msgstr "Die Leute beschweren sich über überfüllte Straßen und langsamen Transport. Wir müssen unseren Trägern auf der Straße helfen. Ich habe entschieden, eine Pferdezucht zu bauen, so dass die Pferde bei den schwerden Waren aushelfen können."
+msgstr "Die Leute beschweren sich über überfüllte Straßen und langsamen Transport. Wir müssen unseren Trägern auf der Straße helfen. Ich habe entschieden, eine Pferdezucht zu bauen, so dass die Pferde bei den schweren Waren aushelfen können."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:385

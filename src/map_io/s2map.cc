@@ -20,13 +20,13 @@
 
 #include <cstddef>
 #include <iomanip>
-#include <iostream>
 #include <memory>
 
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/scoped_timer.h"
+#include "base/warning.h"
 #include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -38,10 +38,6 @@
 #include "logic/map_objects/map_object.h"
 #include "logic/mapregion.h"
 #include "map_io/map_loader.h"
-
-using std::cerr;
-using std::endl;
-using std::ios;
 
 namespace {
 
@@ -58,27 +54,35 @@ struct S2MapDescrHeader {
 	char bulk[2290];  // unknown
 } /* size 2352 */;
 
-// Some basic checks to identify obviously invalid headers
-bool is_valid_header(const S2MapDescrHeader& header) {
-	if (strncmp(header.magic, "WORLD_V1.0", 10) != 0) {
-		return false;
+bool is_valid_cstring(const char* text, size_t max_len) {
+	for (size_t i = 0; i < max_len; ++i) {
+		if (text[i] == 0) {
+			return true;
+		}
 	}
-	if (header.name[19] != 0) {
-		return false;
+	return false;
+}
+
+// Some basic checks to identify obviously invalid headers
+void validate_header(const S2MapDescrHeader& header) {
+	if (strncmp(header.magic, "WORLD_V1.0", 10) != 0) {
+		throw WLWarning("", "Wrong header magic");
+	}
+	if (!is_valid_cstring(header.name, 20)) {
+		throw WLWarning("", "Malformed map name string");
 	}
 	if (header.w <= 0 || header.h <= 0) {
-		return false;
+		throw WLWarning("", "Bad map size %dx%d", header.w, header.h);
 	}
 	if (header.uses_world < 0 || header.uses_world > 2) {
-		return false;
+		throw WLWarning("", "Bad world index %d", header.uses_world);
 	}
-	if (header.nplayers < 0 || header.nplayers > 7) {
-		return false;
+	if (header.nplayers < 0 || header.nplayers > 8) {
+		throw WLWarning("", "Bad player count %d", header.nplayers);
 	}
-	if (header.author[19] != 0) {
-		return false;
+	if (!is_valid_cstring(header.author, 26)) {
+		throw WLWarning("", "Malformed map author string");
 	}
-	return true;
 }
 
 // TODO(unknown): the following bob types appear in S2 maps but are unknown
@@ -197,7 +201,7 @@ load_s2mf_section(FileRead& fr, int32_t const width, int32_t const height) {
 	memcpy(buffer, fr.data(6), 6);
 	if (buffer[0] != 0x10 || buffer[1] != 0x27 || buffer[2] != 0x00 || buffer[3] != 0x00 ||
 	    buffer[4] != 0x00 || buffer[5] != 0x00) {
-		cerr << "Section marker not found" << endl;
+		log_warn("S2Map: Section marker not found");
 		return section;
 	}
 
@@ -216,7 +220,7 @@ load_s2mf_section(FileRead& fr, int32_t const width, int32_t const height) {
 	}
 
 	if (dw < width || dh < height) {
-		cerr << "Section not big enough" << endl;
+		log_warn("S2Map: Section not big enough");
 		return nullptr;
 	}
 
@@ -436,18 +440,14 @@ void S2MapLoader::load_s2mf_header(FileRead& fr) {
 	S2MapDescrHeader header;
 	memcpy(&header, fr.data(sizeof(header)), sizeof(header));
 
-//  Header must be swapped for big-endian Systems, works at the moment only
-//  for PowerPC architecture
-//  TODO(unknown): Generalize this
-#if defined(__ppc__)
+//  Header must be swapped for big-endian Systems
+#if defined(SDL_BYTEORDER) && SDL_BYTEORDER != SDL_LIL_ENDIAN
 	header.w = swap_16(header.w);
 	header.h = swap_16(header.h);
 #endif
 
 	// Check header validity to prevent unexpected crashes later
-	if (!is_valid_header(header)) {
-		throw wexception("invalid S2 file");
-	}
+	validate_header(header);
 
 	//  don't really set size, but make the structures valid
 	map_.width_ = header.w;
@@ -552,34 +552,11 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 		throw wexception("Section 5 (Bobs) not found");
 	}
 
-	//  SWD-SECTION 6: Ways
-	//  This describes where you can put ways
-	//  0xc* == it's not possible to build ways here now
-	//  0x80 == Heres a HQ, owner is Player number
-	//   owner == 0 -> blue
-	//   owner == 1 -> yellow
-	//   owner == 2 -> red
-	//   owner == 3 -> pink
-	//   owner == 4 -> grey
-	//   owner == 6 -> green
-	//   owner == 6 -> orange
-	// TODO(hessenfarmer): this comment is not correct section 6 determines how the values of section
-	// 5 are to be interpreted. Solution is working more the less though
-	section = load_s2mf_section(fr, mapwidth, mapheight);
-	if (!section) {
-		throw wexception("Section 6 (Ways) not found");
-	}
-
-	for (int16_t y = 0; y < mapheight; ++y) {
-		uint32_t i = y * mapwidth;
-		for (int16_t x = 0; x < mapwidth; ++x, ++i) {
-			// ignore everything but HQs
-			if (section[i] == 0x80) {
-				if (bobs[i] < map_.get_nrplayers()) {
-					map_.set_starting_pos(bobs[i] + 1, Widelands::Coords(x, y));
-				}
-			}
-		}
+	//  SWD-SECTION 6: Object type
+	//  Describes the meaning of section 5
+	std::unique_ptr<uint8_t[]> object_type(load_s2mf_section(fr, mapwidth, mapheight));
+	if (object_type == nullptr) {
+		throw wexception("Section 6 (Object Type) not found");
 	}
 
 	//  SWD-SECTION 7: Animals
@@ -631,7 +608,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 				bobname = "moose";
 				break;  // original "donkey"
 			default:
-				cerr << "Unsupported animal: " << static_cast<int32_t>(section[i]) << endl;
+				log_warn("S2Map: Unsupported animal: %d", static_cast<int32_t>(section[i]));
 				break;
 			}
 
@@ -788,15 +765,28 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 		}
 	};
 
-	uint8_t c;
 	for (uint16_t y = 0; y < mapheight; ++y) {
 		for (uint16_t x = 0; x < mapwidth; ++x) {
 			const Widelands::Coords location(x, y);
 			Widelands::MapIndex const index = Widelands::Map::get_index(location, mapwidth);
-			c = bobs[index];
+			const uint8_t type = object_type[index];
+			const uint8_t codon = bobs[index];
 			std::string bobname;
-			if (buildings[index] == 0x78) {
-				switch (c) {
+
+			switch (type) {
+			case 0:  // No object
+				break;
+
+			case 0x80:  // Starting position
+				if (codon < map_.get_nrplayers()) {
+					map_.set_starting_pos(codon + 1, Widelands::Coords(x, y));
+				}
+				break;
+
+			case 0xcc:
+			case 0xcd:
+				// Quarryable rocks. Actually two groups of rocks but let's ignore that.
+				switch (codon) {
 				case BOB_STONE1:
 					bobname = "stones1";
 					break;
@@ -817,235 +807,237 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 					break;
 				default:
 					break;
-				}
-				if (!bobname.empty()) {
-					place_immovable(location, bobname);
-					continue;
-				}
-			}
-
-			switch (c) {
-			case BOB_NONE:
-				break;  // DO nothing
-
-			case BOB_PEBBLE1:
-				bobname = "pebble1";
-				break;
-			case BOB_PEBBLE2:
-				bobname = "pebble2";
-				break;
-			case BOB_PEBBLE3:
-				bobname = "pebble3";
-				break;
-			case BOB_PEBBLE4:
-				bobname = "pebble4";
-				break;
-			case BOB_PEBBLE5:
-				bobname = "pebble5";
-				break;
-			case BOB_PEBBLE6:
-				bobname = "pebble6";
-				break;
-
-			case BOB_MUSHROOM1:
-				bobname = "mushroom1";
-				break;
-			case BOB_MUSHROOM2:
-				bobname = "mushroom2";
-				break;
-
-			case BOB_DEADTREE1:
-				bobname = "deadtree1";
-				break;
-			case BOB_DEADTREE2:
-				bobname = "deadtree2";
-				break;
-			case BOB_DEADTREE3:
-				bobname = "deadtree3";
-				break;
-			case BOB_DEADTREE4:
-				bobname = "deadtree4";
-				break;
-
-			case BOB_TREE1_T:
-				bobname = "tree1_t";
-				break;
-			case BOB_TREE1_S:
-				bobname = "tree1_s";
-				break;
-			case BOB_TREE1_M:
-				bobname = "tree1_m";
-				break;
-			case BOB_TREE1:
-				bobname = "tree1";
-				break;
-
-			case BOB_TREE2_T:
-				bobname = "tree2_t";
-				break;
-			case BOB_TREE2_S:
-				bobname = "tree2_s";
-				break;
-			case BOB_TREE2_M:
-				bobname = "tree2_m";
-				break;
-			case BOB_TREE2:
-				bobname = "tree2";
-				break;
-
-			case BOB_TREE3_T:
-				bobname = "tree3_t";
-				break;
-			case BOB_TREE3_S:
-				bobname = "tree3_s";
-				break;
-			case BOB_TREE3_M:
-				bobname = "tree3_m";
-				break;
-			case BOB_TREE3:
-				bobname = "tree3";
-				break;
-
-			case BOB_TREE4_T:
-				bobname = "tree4_t";
-				break;
-			case BOB_TREE4_S:
-				bobname = "tree4_s";
-				break;
-			case BOB_TREE4_M:
-				bobname = "tree4_m";
-				break;
-			case BOB_TREE4:
-				bobname = "tree4";
-				break;
-
-			case BOB_TREE5_T:
-				bobname = "tree5_t";
-				break;
-			case BOB_TREE5_S:
-				bobname = "tree5_s";
-				break;
-			case BOB_TREE5_M:
-				bobname = "tree5_m";
-				break;
-			case BOB_TREE5:
-				bobname = "tree5";
-				break;
-
-			case BOB_TREE6_T:
-				bobname = "tree6_t";
-				break;
-			case BOB_TREE6_S:
-				bobname = "tree6_s";
-				break;
-			case BOB_TREE6_M:
-				bobname = "tree6_m";
-				break;
-			case BOB_TREE6:
-				bobname = "tree6";
-				break;
-
-			case BOB_TREE7_T:
-				bobname = "tree7_t";
-				break;
-			case BOB_TREE7_S:
-				bobname = "tree7_s";
-				break;
-			case BOB_TREE7_M:
-				bobname = "tree7_m";
-				break;
-			case BOB_TREE7:
-				bobname = "tree7";
-				break;
-
-			case BOB_TREE8_T:
-				bobname = "tree8_t";
-				break;
-			case BOB_TREE8_S:
-				bobname = "tree8_s";
-				break;
-			case BOB_TREE8_M:
-				bobname = "tree8_m";
-				break;
-			case BOB_TREE8:
-				bobname = "tree8";
-				break;
-
-			case BOB_GRASS1:
-				bobname = "grass1";
-				break;
-			case BOB_GRASS2:
-				bobname = "grass2";
-				break;
-			case BOB_GRASS3:
-				bobname = "grass3";
-				break;
-
-			case BOB_STANDING_STONES1:
-				bobname = "sstones1";
-				break;
-			case BOB_STANDING_STONES2:
-				bobname = "sstones2";
-				break;
-			case BOB_STANDING_STONES3:
-				bobname = "sstones3";
-				break;
-			case BOB_STANDING_STONES4:
-				bobname = "sstones4";
-				break;
-			case BOB_STANDING_STONES5:
-				bobname = "sstones5";
-				break;
-			case BOB_STANDING_STONES6:
-				bobname = "sstones6";
-				break;
-			case BOB_STANDING_STONES7:
-				bobname = "sstones7";
-				break;
-
-			case BOB_SKELETON1:
-				bobname = "skeleton1";
-				break;
-			case BOB_SKELETON2:
-				bobname = "skeleton2";
-				break;
-			case BOB_SKELETON3:
-				bobname = "skeleton3";
-				break;
-
-			case BOB_CACTUS1:
-				bobname = worldtype_ != S2MapLoader::WorldType::kWinterland ? "cactus1" : "snowman";
-				break;
-			case BOB_CACTUS2:
-				bobname = worldtype_ != S2MapLoader::WorldType::kWinterland ? "cactus2" : "track";
-				break;
-
-			case BOB_BUSH1:
-				bobname = "bush1";
-				break;
-			case BOB_BUSH2:
-				bobname = "bush2";
-				break;
-			case BOB_BUSH3:
-				bobname = "bush3";
-				break;
-			case BOB_BUSH4:
-				bobname = "bush4";
-				break;
-			case BOB_BUSH5:
-				bobname = "bush5";
+				}  // end switch (codon)
 				break;
 
 			default:
-				cerr << "Unknown bob " << static_cast<uint32_t>(c) << endl;
+				// Other object. Actually this distinguishes between tree groups and
+				// animation states and much more, but this seems to work well enough.
+
+				switch (codon) {
+				case BOB_NONE:
+					break;  // Do nothing
+
+				case BOB_PEBBLE1:
+					bobname = "pebble1";
+					break;
+				case BOB_PEBBLE2:
+					bobname = "pebble2";
+					break;
+				case BOB_PEBBLE3:
+					bobname = "pebble3";
+					break;
+				case BOB_PEBBLE4:
+					bobname = "pebble4";
+					break;
+				case BOB_PEBBLE5:
+					bobname = "pebble5";
+					break;
+				case BOB_PEBBLE6:
+					bobname = "pebble6";
+					break;
+
+				case BOB_MUSHROOM1:
+					bobname = "mushroom1";
+					break;
+				case BOB_MUSHROOM2:
+					bobname = "mushroom2";
+					break;
+
+				case BOB_DEADTREE1:
+					bobname = "deadtree1";
+					break;
+				case BOB_DEADTREE2:
+					bobname = "deadtree2";
+					break;
+				case BOB_DEADTREE3:
+					bobname = "deadtree3";
+					break;
+				case BOB_DEADTREE4:
+					bobname = "deadtree4";
+					break;
+
+				case BOB_TREE1_T:
+					bobname = "tree1_t";
+					break;
+				case BOB_TREE1_S:
+					bobname = "tree1_s";
+					break;
+				case BOB_TREE1_M:
+					bobname = "tree1_m";
+					break;
+				case BOB_TREE1:
+					bobname = "tree1";
+					break;
+
+				case BOB_TREE2_T:
+					bobname = "tree2_t";
+					break;
+				case BOB_TREE2_S:
+					bobname = "tree2_s";
+					break;
+				case BOB_TREE2_M:
+					bobname = "tree2_m";
+					break;
+				case BOB_TREE2:
+					bobname = "tree2";
+					break;
+
+				case BOB_TREE3_T:
+					bobname = "tree3_t";
+					break;
+				case BOB_TREE3_S:
+					bobname = "tree3_s";
+					break;
+				case BOB_TREE3_M:
+					bobname = "tree3_m";
+					break;
+				case BOB_TREE3:
+					bobname = "tree3";
+					break;
+
+				case BOB_TREE4_T:
+					bobname = "tree4_t";
+					break;
+				case BOB_TREE4_S:
+					bobname = "tree4_s";
+					break;
+				case BOB_TREE4_M:
+					bobname = "tree4_m";
+					break;
+				case BOB_TREE4:
+					bobname = "tree4";
+					break;
+
+				case BOB_TREE5_T:
+					bobname = "tree5_t";
+					break;
+				case BOB_TREE5_S:
+					bobname = "tree5_s";
+					break;
+				case BOB_TREE5_M:
+					bobname = "tree5_m";
+					break;
+				case BOB_TREE5:
+					bobname = "tree5";
+					break;
+
+				case BOB_TREE6_T:
+					bobname = "tree6_t";
+					break;
+				case BOB_TREE6_S:
+					bobname = "tree6_s";
+					break;
+				case BOB_TREE6_M:
+					bobname = "tree6_m";
+					break;
+				case BOB_TREE6:
+					bobname = "tree6";
+					break;
+
+				case BOB_TREE7_T:
+					bobname = "tree7_t";
+					break;
+				case BOB_TREE7_S:
+					bobname = "tree7_s";
+					break;
+				case BOB_TREE7_M:
+					bobname = "tree7_m";
+					break;
+				case BOB_TREE7:
+					bobname = "tree7";
+					break;
+
+				case BOB_TREE8_T:
+					bobname = "tree8_t";
+					break;
+				case BOB_TREE8_S:
+					bobname = "tree8_s";
+					break;
+				case BOB_TREE8_M:
+					bobname = "tree8_m";
+					break;
+				case BOB_TREE8:
+					bobname = "tree8";
+					break;
+
+				case BOB_GRASS1:
+					bobname = "grass1";
+					break;
+				case BOB_GRASS2:
+					bobname = "grass2";
+					break;
+				case BOB_GRASS3:
+					bobname = "grass3";
+					break;
+
+				case BOB_STANDING_STONES1:
+					bobname = "sstones1";
+					break;
+				case BOB_STANDING_STONES2:
+					bobname = "sstones2";
+					break;
+				case BOB_STANDING_STONES3:
+					bobname = "sstones3";
+					break;
+				case BOB_STANDING_STONES4:
+					bobname = "sstones4";
+					break;
+				case BOB_STANDING_STONES5:
+					bobname = "sstones5";
+					break;
+				case BOB_STANDING_STONES6:
+					bobname = "sstones6";
+					break;
+				case BOB_STANDING_STONES7:
+					bobname = "sstones7";
+					break;
+
+				case BOB_SKELETON1:
+					bobname = "skeleton1";
+					break;
+				case BOB_SKELETON2:
+					bobname = "skeleton2";
+					break;
+				case BOB_SKELETON3:
+					bobname = "skeleton3";
+					break;
+
+				case BOB_CACTUS1:
+					bobname = worldtype_ != S2MapLoader::WorldType::kWinterland ? "cactus1" : "snowman";
+					break;
+				case BOB_CACTUS2:
+					bobname = worldtype_ != S2MapLoader::WorldType::kWinterland ? "cactus2" : "track";
+					break;
+
+				case BOB_BUSH1:
+					bobname = "bush1";
+					break;
+				case BOB_BUSH2:
+					bobname = "bush2";
+					break;
+				case BOB_BUSH3:
+					bobname = "bush3";
+					break;
+				case BOB_BUSH4:
+					bobname = "bush4";
+					break;
+				case BOB_BUSH5:
+					bobname = "bush5";
+					break;
+
+				default:
+					log_warn("S2Map: Unknown immovable %d", static_cast<uint32_t>(codon));
+					break;
+				}  // end switch (codon)
 				break;
-			}
+			}  // end switch (type)
 
 			if (!bobname.empty()) {
 				place_immovable(location, bobname);
 			}
-		}
-	}
+		}  // end for x
+	}     // end for y
 	//  WORKAROUND:
 	//  Unfortunately the Widelands engine is not completely compatible with
 	//  the Settlers 2; space for buildings is defined differently. To allow

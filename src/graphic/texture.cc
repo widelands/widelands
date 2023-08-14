@@ -117,9 +117,11 @@ Texture::Texture(SDL_Surface* surface, bool intensity) : owns_texture_(false) {
 	uint8_t bpp = surface->format->BytesPerPixel;
 
 	if ((surface->format->palette != nullptr) || width() != surface->w || height() != surface->h ||
-	    (bpp != 3 && bpp != 4) || is_bgr_surface(*surface->format)) {
+	    (bpp != 4) || is_bgr_surface(*surface->format)) {
 		SDL_Surface* converted = empty_sdl_surface(width(), height());
-		assert(converted);
+		if (converted == nullptr) {
+			throw wexception("Failed to create SDL_Surface");
+		}
 		SDL_SetSurfaceAlphaMod(converted, SDL_ALPHA_OPAQUE);
 		SDL_SetSurfaceBlendMode(converted, SDL_BLENDMODE_NONE);
 		SDL_SetSurfaceAlphaMod(surface, SDL_ALPHA_OPAQUE);
@@ -128,16 +130,15 @@ Texture::Texture(SDL_Surface* surface, bool intensity) : owns_texture_(false) {
 		SDL_FreeSurface(surface);
 		surface = converted;
 		bpp = surface->format->BytesPerPixel;
+		assert(bpp == 4);
 	}
-
-	const GLenum pixels_format = bpp == 4 ? GL_RGBA : GL_RGB;
 
 	SDL_LockSurface(surface);
 
 	Gl::swap_rows(width(), height(), surface->pitch, bpp, static_cast<uint8_t*>(surface->pixels));
 
 	glTexImage2D(GL_TEXTURE_2D, 0, static_cast<GLint>(intensity ? GL_INTENSITY : GL_RGBA), width(),
-	             height(), 0, pixels_format, GL_UNSIGNED_BYTE, surface->pixels);
+	             height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, surface->pixels);
 
 	SDL_UnlockSurface(surface);
 	SDL_FreeSurface(surface);
