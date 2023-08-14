@@ -698,7 +698,7 @@ return {
       fsmenu_translation_info = {
          color = fs_font_color,
          face = fs_font_face,
-         size = fs_font_size - 2,
+         size = fs_font_size,
          bold = true,
          shadow = true
       },

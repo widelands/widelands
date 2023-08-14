@@ -429,7 +429,7 @@ void InteractivePlayer::draw_immovables_for_visible_field(
 }
 
 void InteractivePlayer::think() {
-	InteractiveBase::think();
+	InteractiveGameBase::think();
 
 	if (player().is_picking_custom_starting_position()) {
 		set_sel_picture(
