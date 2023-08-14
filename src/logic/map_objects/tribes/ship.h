@@ -279,6 +279,7 @@ struct Ship : Bob {
 	[[nodiscard]] unsigned get_sea_attack_soldier_bonus(const EditorGameBase& egbase) const;
 
 	[[nodiscard]] bool can_be_attacked() const;
+	[[nodiscard]] bool can_attack() const;
 	[[nodiscard]] bool is_attackable_enemy_warship(const Bob&) const;
 	[[nodiscard]] uint32_t get_hitpoints() const {
 		return hitpoints_;

@@ -938,6 +938,10 @@ bool Ship::can_be_attacked() const {
 	return get_ship_type() == ShipType::kWarship;
 }
 
+bool Ship::can_attack() const {
+	return get_ship_type() == ShipType::kWarship && !has_battle();
+}
+
 bool Ship::can_refit(const ShipType type) const {
 	return !is_refitting() && !has_battle() && type != ship_type_;
 }
@@ -1126,7 +1130,7 @@ void Ship::warship_command(Game& game,
 
 	case WarshipCommand::kAttack:
 		assert(!parameters.empty());
-		if (get_ship_type() != ShipType::kWarship) {
+		if (!can_attack()) {
 			return;
 		}
 
