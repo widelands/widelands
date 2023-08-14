@@ -35,7 +35,6 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "economy/waterway.h"
-#include "graphic/text_layout.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/cmd_delete_message.h"
