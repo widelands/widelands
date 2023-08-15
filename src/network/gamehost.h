@@ -169,7 +169,8 @@ private:
 	void handle_changeinit(const Client& client, RecvPacket& r);
 	void handle_changeposition(const Client& client, RecvPacket& r);
 	void handle_nettime(uint32_t client_num, RecvPacket& r);
-	void handle_playercommmand(uint32_t client_num, Client& client, RecvPacket& r);
+	void handle_playercommand(uint32_t client_num, Client& client, RecvPacket& r);
+	void handle_custom_naming_lists(Client& client, RecvPacket& r);
 	void handle_syncreport(uint32_t client_num, Client& client, RecvPacket& r);
 	void handle_chat(Client& client, RecvPacket& r);
 	void handle_speed(Client& client, RecvPacket& r);
