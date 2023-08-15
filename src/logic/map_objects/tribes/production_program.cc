@@ -2089,7 +2089,7 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 	Area<FCoords> area(map.get_fcoords(psite.get_position()), radius);
 	if (map.find_reachable_immovables(game, area, &immovables, cstep, FindImmovableByDescr(descr)) !=
 	    0u) {
-		state.objvar = immovables[0].object;
+		state.objvar = immovables.at(game.logic_rand() % immovables.size()).object;
 
 		psite.working_positions_.at(psite.main_worker_)
 		   .worker.get(game)

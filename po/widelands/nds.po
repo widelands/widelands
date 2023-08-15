@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-08-10 02:32+0000\n"
+"POT-Creation-Date: 2023-08-12 02:12+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2023\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -2834,7 +2834,7 @@ msgstr "Sekere dat Speel …"
 
 #: ../../src/logic/save_handler.cc:152
 msgid "Saving skipped"
-msgstr ""
+msgstr "Sekern översprungen"
 
 #: ../../src/logic/save_handler.cc:170
 #: ../../src/wui/game_main_menu_save_game.cc:338
@@ -6406,7 +6406,7 @@ msgstr "Uptekens lösken na:"
 
 #: ../../src/ui_fsmenu/options.cc:263
 msgid "Skip autosaves while inactive"
-msgstr ""
+msgstr "Automatisk sekern överspringen wenn inaktiv"
 
 #: ../../src/ui_fsmenu/options.cc:270
 msgid "Compress Widelands data files (maps, replays, and savegames)"
@@ -6441,7 +6441,7 @@ msgstr "Arbeidsgewest-Övernannerliggen wiesen"
 
 #: ../../src/ui_fsmenu/options.cc:307
 msgid "Pause game when inactive for:"
-msgstr ""
+msgstr "Speel anhollen, wenn so lang inaktiv:"
 
 #: ../../src/ui_fsmenu/options.cc:317
 msgid "Start building road after placing a flag"
@@ -9033,11 +9033,11 @@ msgstr "Straatenlängde: %u"
 msgid "Waterway length: %1$u / %2$u"
 msgstr "Priellängde: %1$u / %2$u"
 
-#: ../../src/wui/interactive_base.cc:1786
+#: ../../src/wui/interactive_base.cc:1791
 msgid "Failed saving screenshot!"
 msgstr "Billschirmfoto to sekern fehlslagen!"
 
-#: ../../src/wui/interactive_base.cc:1790
+#: ../../src/wui/interactive_base.cc:1795
 msgid "Screenshot saved"
 msgstr "Billschirmfoto sekert"
 

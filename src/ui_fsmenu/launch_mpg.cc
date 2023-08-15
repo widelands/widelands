@@ -310,7 +310,8 @@ void LaunchMPG::refresh() {
 			win_condition_dropdown_.set_tooltip(_(t->get_string("description")));
 			win_condition_duration_.set_visible(t->has_key("configurable_time") &&
 			                                    t->get_bool("configurable_time"));
-			win_condition_duration_.set_value(settings_.get_win_condition_duration());
+			const int32_t duration = settings_.get_win_condition_duration();
+			win_condition_duration_.set_interval(duration, duration, false);
 		} catch (LuaScriptNotExistingError&) {
 			win_condition_dropdown_.set_label(_("Error"));
 			win_condition_dropdown_.set_tooltip(
