@@ -434,6 +434,7 @@ private:
 	void gain_ship(Widelands::Ship&, NewShip);
 	void check_ship_in_expedition(ShipObserver&, const Time&);
 	void expedition_management(ShipObserver&);
+	void warship_management(ShipObserver&);
 	// considering trees, rocks, mines, water, fish for candidate for colonization (new port)
 	uint8_t spot_scoring(Widelands::Coords candidate_spot);
 	bool marine_main_decisions(const Time&);

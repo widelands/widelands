@@ -320,7 +320,11 @@ bool DefaultAI::check_ships(const Time& gametime) {
 
 			// if ship is waiting for command
 			if (so.waiting_for_command_) {
-				expedition_management(so);
+				if (so.ship->get_ship_type() == Widelands::ShipType::kTransport) {
+					expedition_management(so);
+				} else {
+					warship_management(so);
+				}
 
 				// Sometimes we look for other direction even if ship is still scouting,
 				// escape mode here indicates that we are going over known ports, that means that last
@@ -490,7 +494,7 @@ Widelands::IslandExploreDirection DefaultAI::randomExploreDirection() {
                                       Widelands::IslandExploreDirection::kCounterClockwise;
 }
 
-// this is called whenever ship received a notification that requires
+// this is called whenever a transport ship received a notification that requires
 // navigation decisions (these notifications are processes not in 'real time')
 void DefaultAI::expedition_management(ShipObserver& so) {
 
@@ -499,7 +503,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 	BuildingObserver& port_obs = get_building_observer(BuildingAttribute::kPort);
 	// Check whether a port is allowed to help the AI with "New World" start condition
 	bool port_allowed = basic_economy_established || port_obs.cnt_built + port_obs.cnt_under_construction < 1;
-	if (!port_allowed && so.ship->get_ship_type() == Widelands::ShipType::kTransport) {
+	if (!port_allowed) {
 		game().send_player_cancel_expedition_ship(*so.ship);
 		return;
 	}
@@ -515,13 +519,13 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 
 	// if we have a port-space we can build a Port or continue exploring
 	// 1. examine to build a port (colony founding)
-	if (!so.ship->exp_port_spaces().empty() && so.ship->get_ship_type() == Widelands::ShipType::kTransport) {
+	if (!so.ship->exp_port_spaces().empty()) {
 
 		// we score the place (value max == 8)
 		const uint8_t spot_score = spot_scoring(so.ship->exp_port_spaces().front()) * 2;
 		verb_log_dbg_time(gametime, "%d: %s at %3dx%3d: PORTSPACE found, we valued it: %d\n", pn,
-		                  so.ship->get_shipname().c_str(), so.ship->get_position().x,
-		                  so.ship->get_position().y, spot_score);
+						  so.ship->get_shipname().c_str(), so.ship->get_position().x,
+						  so.ship->get_position().y, spot_score);
 
 		// we make a decision based on the score value and random and basic economy status
 		if (RNG::static_rand(8) < spot_score) {
@@ -538,8 +542,8 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 	// 2a) Ship is first time here
 	if (first_time_here) {
 		verb_log_dbg_time(gametime, "%d: %s at %3dx%3d: explore uphold, visited first time\n", pn,
-		                  so.ship->get_shipname().c_str(), so.ship->get_position().x,
-		                  so.ship->get_position().y);
+						  so.ship->get_shipname().c_str(), so.ship->get_position().x,
+						  so.ship->get_position().y);
 
 		// Determine direction of island circle movement
 		// Note: if the ship doesn't own an island-explore-direction it is in inter-island exploration
@@ -547,12 +551,12 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		if (!so.ship->is_exploring_island()) {
 			so.island_circ_direction = randomExploreDirection();
 			verb_log_dbg_time(gametime, "%d: %s: new island exploration - direction: %u\n", pn,
-			                  so.ship->get_shipname().c_str(),
-			                  static_cast<uint32_t>(so.island_circ_direction));
+							  so.ship->get_shipname().c_str(),
+							  static_cast<uint32_t>(so.island_circ_direction));
 		} else {
 			verb_log_dbg_time(gametime, "%d: %s: continue island circumvention, dir=%u\n", pn,
-			                  so.ship->get_shipname().c_str(),
-			                  static_cast<uint32_t>(so.island_circ_direction));
+							  so.ship->get_shipname().c_str(),
+							  static_cast<uint32_t>(so.island_circ_direction));
 		}
 
 		// send the ship to circle island
@@ -564,10 +568,89 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 			// otherwise we continue circumnavigating the island
 			game().send_player_ship_explore_island(*so.ship, so.island_circ_direction);
 			verb_log_dbg_time(gametime, "%d: %s: in JAMMING spot, continue circumvention, dir=%u\n",
-			                  pn, so.ship->get_shipname().c_str(),
-			                  static_cast<uint32_t>(so.island_circ_direction));
+							  pn, so.ship->get_shipname().c_str(),
+							  static_cast<uint32_t>(so.island_circ_direction));
 		}
 	}
+
+	so.last_command_time = gametime;
+	so.waiting_for_command_ = false;
+}
+
+// this is called whenever a warship received a notification that requires
+// navigation decisions (these notifications are processes not in 'real time')
+void DefaultAI::warship_management(ShipObserver& so) {
+
+	const Time& gametime = game().get_gametime();
+	// Widelands::PlayerNumber const pn = player_->player_number();
+
+	// second we put current spot into expedition visited_spots
+/* 	bool first_time_here = expedition_visited_spots.count(so.ship->get_position().hash()) == 0;
+	if (first_time_here) {
+		expedition_visited_spots.insert(so.ship->get_position().hash());
+		so.escape_mode = false;
+	} else {
+		so.escape_mode = true;
+	}
+ */
+	// if we have a port-space we can build a Port or continue exploring
+	// 1. examine to build a port (colony founding)
+/* 	if (!so.ship->exp_port_spaces().empty()) {
+
+		// we score the place (value max == 8)
+		const uint8_t spot_score = spot_scoring(so.ship->exp_port_spaces().front()) * 2;
+		verb_log_dbg_time(gametime, "%d: %s at %3dx%3d: PORTSPACE found, we valued it: %d\n", pn,
+						  so.ship->get_shipname().c_str(), so.ship->get_position().x,
+						  so.ship->get_position().y, spot_score);
+
+		// we make a decision based on the score value and random and basic economy status
+		if (RNG::static_rand(8) < spot_score) {
+			// we build a port here
+			game().send_player_ship_construct_port(*so.ship, so.ship->exp_port_spaces().front());
+			so.last_command_time = gametime;
+			so.waiting_for_command_ = false;
+
+			return;
+		}
+	} */
+
+	// 2. Go on with expedition
+	// 2a) Ship is first time here
+/* 	if (first_time_here) {
+		verb_log_dbg_time(gametime, "%d: %s at %3dx%3d: explore uphold, visited first time\n", pn,
+						  so.ship->get_shipname().c_str(), so.ship->get_position().x,
+						  so.ship->get_position().y);
+
+		// Determine direction of island circle movement
+		// Note: if the ship doesn't own an island-explore-direction it is in inter-island exploration
+		// in this case we create a new direction at random, otherwise continue circle movement
+		if (!so.ship->is_exploring_island()) {
+			so.island_circ_direction = randomExploreDirection();
+			verb_log_dbg_time(gametime, "%d: %s: new island exploration - direction: %u\n", pn,
+							  so.ship->get_shipname().c_str(),
+							  static_cast<uint32_t>(so.island_circ_direction));
+		} else {
+			verb_log_dbg_time(gametime, "%d: %s: continue island circumvention, dir=%u\n", pn,
+							  so.ship->get_shipname().c_str(),
+							  static_cast<uint32_t>(so.island_circ_direction));
+		}
+
+		// send the ship to circle island
+		game().send_player_ship_explore_island(*so.ship, so.island_circ_direction);
+
+		// 2b) We were here before, let try break for open sea
+	} else {
+		if (!attempt_escape(so)) {  // return true if the ship was sent to open sea
+			// otherwise we continue circumnavigating the island
+			game().send_player_ship_explore_island(*so.ship, so.island_circ_direction);
+			verb_log_dbg_time(gametime, "%d: %s: in JAMMING spot, continue circumvention, dir=%u\n",
+							  pn, so.ship->get_shipname().c_str(),
+							  static_cast<uint32_t>(so.island_circ_direction));
+		}
+	} */
+
+	game().send_player_warship_command(
+			   *so.ship, Widelands::WarshipCommand::kSetCapacity, {0u});
 
 	so.last_command_time = gametime;
 	so.waiting_for_command_ = false;
