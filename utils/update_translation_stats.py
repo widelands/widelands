@@ -57,12 +57,11 @@ def generate_translation_stats(po_dir, output_file):
         sys.stdout.flush()
 
         try:
-            # We need shell=True, otherwise we get "No such file or directory".
             stats_output = subprocess.check_output(
-                ['pocount ' + subdir + ' --csv'],
+                ['pocount', '--csv', subdir],
                 encoding='utf-8',
                 stderr=subprocess.STDOUT,
-                shell=True)
+                )
             if 'ERROR' in stats_output:
                 print('\nError running pocount:\n' + stats_output.split('\n', 0)
                       [0]) + '\nAborted creating translation statistics.'
@@ -99,16 +98,13 @@ def generate_translation_stats(po_dir, output_file):
             cells = line.split(',')
             po_filename = cells[0]
             if po_filename.endswith('.po'):
-                entry = TranslationStats()
                 locale = regex_po.match(po_filename).group(1)
-                if locale in locale_stats:
-                    entry = locale_stats[locale]
+                entry = locale_stats[locale]
                 entry.total = entry.total + int(cells[total_column])
-                entry.translated = entry.translated + \
-                    int(cells[translated_column])
+                entry.translated = entry.translated + int(cells[translated_column])
                 if entry.translated > entry.total:
-                    print('Error! Translated ' + str(entry.translated) + ' (+' + (cells[
-                          translated_column]) + ') is bigger than the total of ' + str(entry.total) + '(' + (cells[total_column]) + ')\n' + line)
+                    print('Error! Translated ' + str(entry.translated) + ' (+' + (cells[translated_column]) +
+                          ') is bigger than the total of ' + str(entry.total) + '(' + (cells[total_column]) + ')\n' + line)
                     sys.exit(1)
                 locale_stats[locale] = entry
 
@@ -120,13 +116,13 @@ def generate_translation_stats(po_dir, output_file):
     result = '{}total={}\n\n'.format(
         result, list(locale_stats.values())[0].total)
     # Write translation stats for all locales
-    for locale in (sorted(list(locale_stats.keys()), key=str.lower)):
+    for locale in sorted(locale_stats.keys(), key=str.lower):
         entry = locale_stats[locale]
         print(locale + '\t' + str(entry.total) + '\t' + str(entry.translated))
         result = '{}[{}]\n'.format(result, locale)
         result = '{}translated={}\n\n'.format(result, str(entry.translated))
 
-    with open(output_file, 'w+') as destination:
+    with open(output_file, 'w') as destination:
         destination.write(result[:-1])  # Strip the final \n
     print('\nResult written to ' + output_file)
     return 0
