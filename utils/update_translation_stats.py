@@ -63,8 +63,8 @@ def generate_translation_stats(po_dir, output_file):
                 stderr=subprocess.STDOUT,
                 )
             if 'ERROR' in stats_output:
-                print('\nError running pocount:\n' + stats_output.split('\n', 0)
-                      [0]) + '\nAborted creating translation statistics.'
+                print('\nError running pocount:\n' + stats_output.split('\n', 1)[0] +
+                      '\nAborted creating translation statistics.')
                 return 1
 
         except subprocess.CalledProcessError:
