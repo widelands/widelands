@@ -66,11 +66,11 @@ public:
 
 	Notifications::Signal<> changed;
 
-	void set_value(int32_t);
+	void set_value(int32_t, bool trigger_signal = true);
 	// For spinboxes of type kValueList. The vector needs to be sorted in ascending order,
 	// otherwise you will confuse the user.
 	void set_value_list(const std::vector<int32_t>&);
-	void set_interval(int32_t min, int32_t max);
+	void set_interval(int32_t min, int32_t max, bool trigger_signal_if_changed = true);
 	int32_t get_value() const;
 	void add_replacement(int32_t, const std::string&);
 	const std::vector<UI::Button*>& get_buttons() {
