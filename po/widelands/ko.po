@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-08-10 02:32+0000\n"
+"POT-Creation-Date: 2023-08-12 02:12+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: ks k, 2017-2021\n"
 "Language-Team: Korean (http://app.transifex.com/widelands/widelands/language/ko/)\n"
@@ -9001,11 +9001,11 @@ msgstr "땅길 길이: %u"
 msgid "Waterway length: %1$u / %2$u"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:1786
+#: ../../src/wui/interactive_base.cc:1791
 msgid "Failed saving screenshot!"
 msgstr "화면 갈무리를 저장하지 못했습니다!"
 
-#: ../../src/wui/interactive_base.cc:1790
+#: ../../src/wui/interactive_base.cc:1795
 msgid "Screenshot saved"
 msgstr "화면 갈무리가 저장됨"
 

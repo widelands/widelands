@@ -173,6 +173,17 @@ bool order_matters(AddOnCategory base, AddOnCategory dependency) {
 	}
 }
 
+bool require_enabled(AddOnCategory base, AddOnCategory dependency) {
+	switch (base) {
+	case AddOnCategory::kMaps:
+	case AddOnCategory::kCampaign:
+		// Maps enable their own world add-ons automatically
+		return dependency != AddOnCategory::kWorld;
+	default:
+		return true;
+	}
+}
+
 static AddOnConflict check_requirements_conflicts(const AddOnRequirements& required_addons) {
 	std::set<std::string> addons_missing;
 	std::map<std::string, std::pair<AddOnVersion, AddOnVersion>> addons_wrong_version;

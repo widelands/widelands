@@ -170,6 +170,7 @@ std::string list_game_relevant_addons();
  * tells whether the dependency must necessarily be listed after the requiring add-on.
  */
 bool order_matters(AddOnCategory base, AddOnCategory dependency);
+bool require_enabled(AddOnCategory base, AddOnCategory dependency);
 
 std::shared_ptr<AddOnInfo> preload_addon(const std::string&);
 
