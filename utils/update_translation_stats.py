@@ -113,17 +113,17 @@ def generate_translation_stats(po_dir, output_file):
 
     # The total goes in a [global] section and is identical for all locales
     result = '# This file is managed by utils/update_translations_stats.py\n\n[global]\n'
-    result = '{}total={}\n\n'.format(
+    result = '{}total={}\n'.format(
         result, list(locale_stats.values())[0].total)
     # Write translation stats for all locales
     for locale in sorted(locale_stats.keys(), key=str.lower):
         entry = locale_stats[locale]
         print(locale + '\t' + str(entry.total) + '\t' + str(entry.translated))
-        result = '{}[{}]\n'.format(result, locale)
-        result = '{}translated={}\n\n'.format(result, str(entry.translated))
+        result = '{}\n[{}]\n'.format(result, locale)
+        result = '{}translated={}\n'.format(result, str(entry.translated))
 
     with open(output_file, 'w') as destination:
-        destination.write(result[:-1])  # Strip the final \n
+        destination.write(result)
     print('\nResult written to ' + output_file)
     return 0
 
