@@ -505,22 +505,33 @@ Worker& Economy::soldier_prototype(const WorkerDescr* d) {
 }
 
 bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type) const {
-	Quantity const t = target_quantity(ware_or_worker_type).permanent;
+	Quantity const target = target_quantity(ware_or_worker_type).permanent;
+	const bool is_soldier = type_ == wwWORKER && ware_or_worker_type == owner().tribe().soldier();
 
-	// we have a target quantity set
-	if (t > 0) {
+	if (target > 0) {  // We have a target quantity set
 		Quantity quantity = 0;
 		for (const Warehouse* wh : warehouses_) {
-			quantity += type_ == wwWARE ? wh->get_wares().stock(ware_or_worker_type) :
+			Quantity stock = type_ == wwWARE ? wh->get_wares().stock(ware_or_worker_type) :
                                        wh->get_workers().stock(ware_or_worker_type);
-			if (t <= quantity) {
+			if (is_soldier) {
+				Quantity garrison = wh->get_desired_soldier_count();
+				if (garrison >= stock) {
+					continue;
+				}
+				stock -= garrison;
+			}
+
+			quantity += stock;
+			if (quantity >= target) {
 				return false;
 			}
 		}
+
 		return true;
-	}  // Target quantity is set to 0, we need to check if there is an open request.
+	}
+
+	// Target quantity is set to 0, we need to check if there is an open request.
 	// For soldier requests, do not recruit new rookies if only heroes are needed.
-	const bool is_soldier = type_ == wwWORKER && ware_or_worker_type == owner().tribe().soldier();
 	return std::any_of(
 	   requests_.begin(), requests_.end(),
 	   [this, is_soldier, ware_or_worker_type](const Request* req) {
