@@ -637,8 +637,7 @@ void Options::layout() {
 		translation_padding_.set_size(half_w, translation_pad_h);
 
 		// Interface tab spinboxes
-		for (UI::SpinBox* sb :
-		     {&sb_dis_panel_, &sb_dis_border_}) {
+		for (UI::SpinBox* sb : {&sb_dis_panel_, &sb_dis_border_}) {
 			sb->set_unit_width(unit_w);
 			sb->set_desired_size(tab_panel_width, sb->get_h());
 		}
