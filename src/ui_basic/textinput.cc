@@ -1144,7 +1144,8 @@ void EditBoxHistory::load(const std::string& filename) {
 	if (fr.try_open(*g_fs, filename)) {
 		entries_.clear();
 		try {
-			while (char* line = fr.read_line()) {
+			char* line;
+			while ((line = fr.read_line()) != nullptr) {
 				add_entry(line);
 			}
 			// Only set it on success to allow next save() to try to fix problem
