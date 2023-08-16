@@ -119,10 +119,10 @@ void fill_parameter_vector() {
 		_("Do not create an autosave when the user has been inactive since the last autosave."),
 		true},
 	  {"", "nozip", "", _("Do not save files as binary zip archives."), false},
-		// The below comment is duplicated from above for the other case, when false is the default.
-		/** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
-		/** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain. */
-		/** TRANSLATORS: * marks the default value */
+	  // The below comment is duplicated from above for the other case, when false is the default.
+	  /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
+	  /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain. */
+	  /** TRANSLATORS: * marks the default value */
 	  {"", "save_chat_history", _("[true|false*]"),
 		_("Whether to save the history of sent chat messages to a file."), true},
 	  {"", "display_replay_filenames", _("[true*|false]"), _("Show filenames in the replay screen."),
@@ -147,8 +147,8 @@ void fill_parameter_vector() {
 	 true
 	},
 #endif
-	  {"", "edge_scrolling",
-		_("[true|false*]"), _("Scroll when the mouse cursor is near the screen edge."), true},
+	  {"", "edge_scrolling", _("[true|false*]"),
+		_("Scroll when the mouse cursor is near the screen edge."), true},
 	  {"", "invert_movement", _("[true|false*]"), _("Invert click-and-drag map movement direction."),
 		true},
 	  {"", "numpad_diagonalscrolling", _("[true|false*]"),
