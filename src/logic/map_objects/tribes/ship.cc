@@ -311,6 +311,23 @@ void Ship::recalc_expedition_swimmable(const EditorGameBase& egbase) {
 	}
 }
 
+bool Ship::suited_as_invasion_portspace(const Coords& coords) const {
+	// We can invade any port space, regardless of owner and immovables.
+	// But we ignore port spaces where we already have an own port.
+
+	const EditorGameBase& egbase = owner().egbase();
+	const Map& map = egbase.map();
+	if (!map.is_port_space(coords)) {
+		return false;
+	}
+
+	const Field& field = map[coords];
+	return (field.get_immovable() == nullptr ||
+	    field.get_immovable()->get_owner() != get_owner() ||
+	    egbase.descriptions().building_index(field.get_immovable()->descr().name()) !=
+	       owner().tribe().port());
+}
+
 /**
  * Standard behaviour of ships.
  *
@@ -626,7 +643,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 		// Remove outdated port spaces.
 		std::vector<Coords>& portspaces = expedition_->seen_port_buildspaces;
 		for (size_t i = 0; i < portspaces.size();) {
-			if (map->calc_distance(get_position(), portspaces.at(i)) <= area.radius) {
+			if (map->calc_distance(get_position(), portspaces.at(i)) <= area.radius && suited_as_invasion_portspace(portspaces.at(i))) {
 				++i;
 			} else {
 				portspaces.at(i) = portspaces.back();
@@ -637,16 +654,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 		// Look for new nearby port spaces.
 		MapRegion<Area<Coords>> mr(*map, Area<Coords>(position, descr().vision_range()));
 		do {
-			if (map->is_port_space(mr.location()) &&
-			    std::find(portspaces.begin(), portspaces.end(), mr.location()) == portspaces.end()) {
-				const Field& field = (*map)[mr.location()];
-				if (field.get_immovable() != nullptr &&
-				    field.get_immovable()->get_owner() == get_owner() &&
-				    game.descriptions().building_index(field.get_immovable()->descr().name()) ==
-				       owner().tribe().port()) {
-					continue;  // Skip if the player already has a port there
-				}
-
+			if (suited_as_invasion_portspace(mr.location()) && std::find(portspaces.begin(), portspaces.end(), mr.location()) == portspaces.end()) {
 				found_new_target = true;
 				portspaces.push_back(mr.location());
 				remember_detected_portspace(mr.location());
