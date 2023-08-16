@@ -95,7 +95,8 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* 
 					for (size_t j = fr.unsigned_32(); j > 0; --j) {
 						player->muted_building_types_.insert(fr.unsigned_32());
 					}
-					player->starting_position_state_ = static_cast<Widelands::Player::StartingPositionState>(fr.unsigned_8());
+					player->starting_position_state_ =
+					   static_cast<Widelands::Player::StartingPositionState>(fr.unsigned_8());
 					player->initialization_index_ = fr.unsigned_8();
 					player->allow_additional_expedition_items_ = (fr.unsigned_8() != 0u);
 					player->hidden_from_general_statistics_ = (fr.unsigned_8() != 0u);

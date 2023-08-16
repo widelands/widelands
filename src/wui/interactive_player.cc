@@ -431,7 +431,8 @@ void InteractivePlayer::draw_immovables_for_visible_field(
 void InteractivePlayer::think() {
 	InteractiveGameBase::think();
 
-	if (player().get_starting_position_state() == Widelands::Player::StartingPositionState::kPicking) {
+	if (player().get_starting_position_state() ==
+	    Widelands::Player::StartingPositionState::kPicking) {
 		set_sel_picture(
 		   playercolor_image(player().get_playercolor(), "images/players/player_position_menu.png"));
 	}
@@ -720,7 +721,8 @@ Widelands::PlayerNumber InteractivePlayer::player_number() const {
 
 /// Player has clicked on the given node; bring up the context menu.
 void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) {
-	if (player().get_starting_position_state() == Widelands::Player::StartingPositionState::kPicking) {
+	if (player().get_starting_position_state() ==
+	    Widelands::Player::StartingPositionState::kPicking) {
 		if (get_player()->pick_custom_starting_position(node_and_triangle.node)) {
 			unset_sel_picture();
 		}

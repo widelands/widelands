@@ -576,7 +576,7 @@ public:
 	void set_muted(DescriptionIndex, bool mute);
 
 	// Ordered to keep compatibility with old bool value in savegames
-	enum class StartingPositionState {kFinal = 0, kPicking = 1, kSetting = 2};
+	enum class StartingPositionState { kFinal = 0, kPicking = 1, kSetting = 2 };
 
 	void start_picking_custom_starting_position() {
 		assert(starting_position_state_ == StartingPositionState::kFinal);
