@@ -202,15 +202,16 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 				idle_shipyard_stocked = true;
 			}
 
-			if (expeditions_ready > 0 && idle_shipyard_stocked && allships.size() - ports_count == 0) {
+			if (expeditions_ready > 0 && idle_shipyard_stocked && ship_free) {
 				if (potential_wrong_shipyard_) {
 					if (!ps_obs.site->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
 						game().send_player_dismantle(*ps_obs.site, true);
 					} else {
 						game().send_player_bulldoze(*ps_obs.site);
 					}
-					game().send_player_sink_ship(*allships.back().ship);
-					allships.pop_back();
+					for (ShipObserver& so : allships) {
+						game().send_player_sink_ship(*so.ship);
+					}
 					potential_wrong_shipyard_ = false;
 					return true;
 				}
@@ -223,8 +224,8 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		}
 	}
 
-	if ((static_cast<int>(ports_count) * 2 - warships_count) > 0 &&
-	     tradeships_count - expeditions_in_progress > 1) {
+	if ((static_cast<int>(ports_finished_count) * 2 - warships_count) > 0 &&
+	     (tradeships_count - expeditions_in_progress - ports_count) > 1) {
 		warship_needed = true;
 	}
 	if (!ship_free && warships_count > 0) {
