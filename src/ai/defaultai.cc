@@ -241,7 +241,7 @@ void DefaultAI::think() {
 	// if too busy, the period can be many seconds.
 	next_ai_think_ = gametime + Duration(500);
 
-	if (player_->is_picking_custom_starting_position()) {
+	if (player_->get_starting_position_state() == Widelands::Player::StartingPositionState::kPicking) {
 		// TODO(Nordfriese): In picking_custom_starting_position mode, try to find
 		// a nice spot somewhere instead of just picking the default position.
 		// This here will not work if another player has already chosen a spot

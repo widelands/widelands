@@ -223,7 +223,7 @@ Player::Player(EditorGameBase& the_egbase,
 }
 
 void Player::create_default_infrastructure() {
-	if (is_picking_custom_starting_position_) {
+	if (starting_position_state_ != StartingPositionState::kFinal) {
 		return;
 	}
 	const Map& map = egbase().map();
@@ -274,21 +274,22 @@ void Player::allocate_map() {
 }
 
 bool Player::pick_custom_starting_position(const Coords& c) {
-	assert(is_picking_custom_starting_position_);
+	assert(starting_position_state_ == StartingPositionState::kPicking);
 	if (!get_starting_position_suitability(c)) {
 		return false;
 	}
 	dynamic_cast<Game&>(egbase()).send_player_command(
 	   new CmdPickCustomStartingPosition(egbase().get_gametime(), player_number(), c));
+	starting_position_state_ = StartingPositionState::kSetting;
 	return true;
 }
 
 void Player::do_pick_custom_starting_position(const Coords& c) {
-	if (!is_picking_custom_starting_position_) {
+	if (starting_position_state_ != StartingPositionState::kSetting) {
 		return;
 	}
-	is_picking_custom_starting_position_ = false;
 	egbase().mutable_map()->set_starting_pos(player_number(), c);
+	starting_position_state_ = StartingPositionState::kFinal;
 	create_default_infrastructure();
 }
 
