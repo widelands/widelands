@@ -197,15 +197,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                     _("Distance for windows to snap to borders:"),
                     UI::SpinBox::Units::kPixels),
 
-     // History options
-     save_chat_history_(&box_interface_,
-                        UI::PanelStyle::kFsMenu,
-                        "save_chat_history",
-                        Vector2i::zero(),
-                        _("Keep history of sent chat messages in a file"),
-                        "",
-                        0),
-
      configure_keyboard_(&box_interface_,
                          "configure_keyboard",
                          0,
@@ -279,6 +270,15 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
           _("Compress Widelands data files (maps, replays, and savegames)"),
           "",
           0),
+
+     save_chat_history_(&box_saving_,
+                        UI::PanelStyle::kFsMenu,
+                        "save_chat_history",
+                        Vector2i::zero(),
+                        _("Keep history of sent chat messages in a file"),
+                        "",
+                        0),
+
      // New Game options
      show_buildhelp_(&box_newgame_,
                      UI::PanelStyle::kFsMenu,
@@ -424,8 +424,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	box_interface_.add(&sb_dis_panel_);
 	box_interface_.add(&sb_dis_border_);
 
-	box_interface_.add(&save_chat_history_, UI::Box::Resizing::kFullSize);
-
 	box_interface_.add_space(kPadding);
 	box_interface_.add(&configure_keyboard_);
 
@@ -438,6 +436,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	box_saving_.add(&sb_replay_lifetime_, UI::Box::Resizing::kFullSize);
 	box_saving_.add(&skip_autosave_on_inactivity_, UI::Box::Resizing::kFullSize);
 	box_saving_.add(&zip_, UI::Box::Resizing::kFullSize);
+	box_saving_.add(&save_chat_history_, UI::Box::Resizing::kFullSize);
 
 	// New Games
 	box_newgame_.add(&show_buildhelp_, UI::Box::Resizing::kFullSize);
@@ -519,12 +518,10 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	// Window options
 	dock_windows_to_edges_.set_state(opt.dock_windows_to_edges);
 
-	// History options
-	save_chat_history_.set_state(opt.save_chat_history);
-
 	// Saving options
 	skip_autosave_on_inactivity_.set_state(opt.skip_autosave_on_inactivity);
 	zip_.set_state(opt.zip);
+	save_chat_history_.set_state(opt.save_chat_history);
 
 	// Game options
 	auto_roadbuild_mode_.set_state(opt.auto_roadbuild_mode);
@@ -846,15 +843,13 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 	os_.panel_snap_distance = sb_dis_panel_.get_value();
 	os_.border_snap_distance = sb_dis_border_.get_value();
 
-	// History options
-	os_.save_chat_history = save_chat_history_.get_state();
-
 	// Saving options
 	os_.autosave = sb_autosave_.get_value();
 	os_.rolling_autosave = sb_rolling_autosave_.get_value();
 	os_.replay_lifetime = sb_replay_lifetime_.get_value();
 	os_.skip_autosave_on_inactivity = skip_autosave_on_inactivity_.get_state();
 	os_.zip = zip_.get_state();
+	os_.save_chat_history = save_chat_history_.get_state();
 
 	// Game options
 	os_.auto_roadbuild_mode = auto_roadbuild_mode_.get_state();
@@ -929,15 +924,13 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.panel_snap_distance = opt_section_.get_int("panel_snap_distance", 0);
 	opt.border_snap_distance = opt_section_.get_int("border_snap_distance", 0);
 
-	// History options
-	opt.save_chat_history = opt_section_.get_bool("save_chat_history", false);
-
 	// Saving options
 	opt.autosave = opt_section_.get_int("autosave", kDefaultAutosaveInterval * 60);
 	opt.rolling_autosave = opt_section_.get_int("rolling_autosave", 5);
 	opt.replay_lifetime = opt_section_.get_int("replay_lifetime", 0);
 	opt.skip_autosave_on_inactivity = opt_section_.get_bool("skip_autosave_on_inactivity", true);
 	opt.zip = !opt_section_.get_bool("nozip", false);
+	opt.save_chat_history = opt_section_.get_bool("save_chat_history", false);
 
 	// Game options
 	opt.pause_game_on_inactivity = opt_section_.get_int("pause_game_on_inactivity", 0);
@@ -980,15 +973,13 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_int("panel_snap_distance", opt.panel_snap_distance);
 	opt_section_.set_int("border_snap_distance", opt.border_snap_distance);
 
-	// History options
-	opt_section_.set_bool("save_chat_history", opt.save_chat_history);
-
 	// Saving options
 	opt_section_.set_int("autosave", opt.autosave * 60);
 	opt_section_.set_int("rolling_autosave", opt.rolling_autosave);
 	opt_section_.set_int("replay_lifetime", opt.replay_lifetime);
 	opt_section_.set_bool("skip_autosave_on_inactivity", opt.skip_autosave_on_inactivity);
 	opt_section_.set_bool("nozip", !opt.zip);
+	opt_section_.set_bool("save_chat_history", opt.save_chat_history);
 
 	// Game options
 	opt_section_.set_int("pause_game_on_inactivity", opt.pause_game_on_inactivity);
