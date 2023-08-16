@@ -144,8 +144,8 @@ private:
 
 	static constexpr bool kAbsValue = true;
 	static constexpr int32_t kSpotsTooLittle = 15;
-	// following two are used for roads management, for creating shortcuts and dismantling dispensable
-	// roads
+	// following two are used for roads management, for creating shortcuts and dismantling
+	// dispensable roads
 	static constexpr int32_t kSpotsEnough = 25;
 	static constexpr uint16_t kTargetQuantCap = 30;
 
@@ -443,7 +443,7 @@ private:
 	// seafaring related variables
 	enum { kReprioritize, kStopShipyard, kStartShipyard };
 	static Time last_seafaring_check_;
-	static bool map_allows_seafaring_; // False by default, until Map::allows_seafaring() = true
+	static bool map_allows_seafaring_;  // False by default, until Map::allows_seafaring() = true
 	bool potential_wrong_shipyard_ = false;
 	uint32_t expedition_ship_;
 	Duration expedition_max_duration;
