@@ -124,6 +124,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	// getting some base statistics
 	player_ = game().get_player(player_number());
 	ports_count = 0;
+	ports_finished_count = 0;
 	shipyards_count = 0;
 	expeditions_in_prep = 0;
 	expeditions_ready = 0;
@@ -156,7 +157,8 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	}
 
 	BuildingObserver& port_obs = get_building_observer(BuildingAttribute::kPort);
-	ports_count = port_obs.cnt_built + port_obs.cnt_under_construction;
+	ports_finished_count = port_obs.cnt_built;
+	ports_count = ports_finished_count + port_obs.cnt_under_construction;
 	// goes over all warehouses (these includes ports)
 	for (const WarehouseSiteObserver& wh_obs : warehousesites) {
 		if (wh_obs.bo->is(BuildingAttribute::kPort)) {
@@ -172,7 +174,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	}
 
 	assert(tradeships_count >= expeditions_in_progress);
-	bool ship_free = tradeships_count - expeditions_in_progress > 0;
+	bool ship_free = tradeships_count - expeditions_in_progress - ports_count > 0;
 
 	/* Now we decide whether we have enough ships or need to build another:
 	 * - We always need at least one ship in transport mode
@@ -183,7 +185,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	   ports_count > 0 && shipyards_count > 0 && basic_economy_established &&
 	   (!ship_free || persistent_data->ships_utilization > 5000 ||
 	    static_cast<int>(tradeships_count) - ports_count - expeditions_in_progress < 0 ||
-		static_cast<int>(ports_count) * 2 - warships_count > 0);
+		static_cast<int>(ports_finished_count) * 2 - warships_count > 0);
 
 	// goes over productionsites finds shipyards and configures them
 	for (const ProductionSiteObserver& ps_obs : productionsites) {

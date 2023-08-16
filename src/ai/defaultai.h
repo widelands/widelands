@@ -450,6 +450,7 @@ private:
 	std::vector<int16_t> marine_task_queue;
 	std::unordered_set<uint32_t> expedition_visited_spots;
 	uint16_t ports_count;
+	uint16_t ports_finished_count;
 	uint16_t shipyards_count;
 	uint16_t expeditions_in_prep;
 	uint16_t expeditions_ready;
