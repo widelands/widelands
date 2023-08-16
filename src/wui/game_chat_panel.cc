@@ -27,11 +27,10 @@
 #include "network/participantlist.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/mouse_constants.h"
-#include "wlapplication_options.h"
 #include "wui/chat_msg_layout.h"
 
-UI::EditBoxHistory g_chat_sent_history(kDefaultChatHistoryLines);
-UI::EditBoxHistory g_script_console_history(kDefaultScriptHistoryLines);
+UI::EditBoxHistory g_chat_sent_history(32);
+UI::EditBoxHistory g_script_console_history(64);
 
 /**
  * Create a game chat panel

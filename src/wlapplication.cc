@@ -473,17 +473,12 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	// are not saved, when the game crashes
 	write_config();
 
-	g_chat_sent_history.set_max_size(get_config_int("chat_history_lines", kDefaultChatHistoryLines));
 	if (get_config_bool("save_chat_history", false)) {
 		g_chat_sent_history.load(kChatSentHistoryFile);
 	}
 	if (g_allow_script_console) {
 		log_info("Developer tools are enabled.");
-		g_script_console_history.set_max_size(
-		   get_config_int("script_history_lines", kDefaultScriptHistoryLines));
-		if (get_config_bool("save_script_history", false)) {
-			g_script_console_history.load(kScriptConsoleHistoryFile);
-		}
+		g_script_console_history.load(kScriptConsoleHistoryFile);
 	}
 }
 
@@ -506,7 +501,7 @@ WLApplication::~WLApplication() {
 	if (get_config_bool("save_chat_history", false)) {
 		g_chat_sent_history.save(kChatSentHistoryFile);
 	}
-	if (g_allow_script_console && get_config_bool("save_script_history", false)) {
+	if (g_allow_script_console) {
 		g_script_console_history.save(kScriptConsoleHistoryFile);
 	}
 

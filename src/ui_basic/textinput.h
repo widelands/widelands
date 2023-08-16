@@ -130,8 +130,6 @@ public:
 	void load(const std::string& filename);
 	void save(const std::string& filename);
 
-	void set_max_size(int32_t new_size);  // to be compatible with get_config_int()
-
 private:
 	uint16_t max_size_{0};
 	std::vector<std::string> entries_;

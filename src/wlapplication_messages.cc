@@ -217,14 +217,8 @@ void fill_parameter_vector() {
 		_("Move a window to the edge of the panel when the edge of the window comes within "
 		  "a distance of `n` from the edge of the panel."),
 		true},
-	  {_("Input history options:"), "chat_history_lines", _("n"),
-		_("Number of sent chat message history lines to remember."), true},
-	  {"", "script_history_lines", _("n"), _("Number of script console history lines to remember."),
-		true},
-	  {"", "save_chat_history", _("[true|false*]"),
+	  {_("Input history options:"), "save_chat_history", _("[true|false*]"),
 		_("Whether to save the history of sent chat messages to a file."), true},
-	  {"", "save_script_history", _("[true|false*]"),
-		_("Whether to save the script console history to a file."), true},
 	  /// Others
 	  {_("Others:"), "verbose", "", _("Enable verbose debug messages"), false},
 	  {"", "verbose-i18n", "",

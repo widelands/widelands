@@ -50,10 +50,7 @@ public:
 		bool fullscreen;
 		bool sdl_cursor;
 		bool tooltip_accessibility_mode;
-		int32_t chat_history_lines;
-		int32_t script_history_lines;
 		bool save_chat_history;
-		bool save_script_history;
 
 		// Window options
 		bool dock_windows_to_edges;
@@ -169,10 +166,7 @@ private:
 	UI::SpinBox sb_dis_panel_;
 	UI::SpinBox sb_dis_border_;
 
-	UI::SpinBox sb_chat_history_lines_;
-	UI::SpinBox sb_script_history_lines_;
 	UI::Checkbox save_chat_history_;
-	UI::Checkbox save_script_history_;
 
 	UI::Button configure_keyboard_;
 

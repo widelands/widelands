@@ -43,7 +43,6 @@
 #endif
 #include "wlapplication.h"
 #include "wlapplication_options.h"
-#include "wui/game_chat_panel.h"
 #include "wui/interactive_base.h"
 
 namespace {
@@ -199,32 +198,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                     UI::SpinBox::Units::kPixels),
 
      // History options
-     sb_chat_history_lines_(&box_interface_,
-                            "chat_history_lines",
-                            0,
-                            0,
-                            0,
-                            0,
-                            opt.chat_history_lines,
-                            0,
-                            kMaxHistoryLines,
-                            UI::PanelStyle::kFsMenu,
-                            _("Number of sent chat history lines to remember:"),
-                            UI::SpinBox::Units::kNone,
-                            UI::SpinBox::Type::kBig),
-     sb_script_history_lines_(&box_interface_,
-                              "script_history_lines",
-                              0,
-                              0,
-                              0,
-                              0,
-                              opt.script_history_lines,
-                              0,
-                              kMaxHistoryLines,
-                              UI::PanelStyle::kFsMenu,
-                              _("Number of Script Console history lines to remember:"),
-                              UI::SpinBox::Units::kNone,
-                              UI::SpinBox::Type::kBig),
      save_chat_history_(&box_interface_,
                         UI::PanelStyle::kFsMenu,
                         "save_chat_history",
@@ -232,13 +205,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                         _("Keep history of sent chat messages in a file"),
                         "",
                         0),
-     save_script_history_(&box_interface_,
-                          UI::PanelStyle::kFsMenu,
-                          "save_chat_history",
-                          Vector2i::zero(),
-                          _("Keep Script Console history in a file"),
-                          "",
-                          0),
 
      configure_keyboard_(&box_interface_,
                          "configure_keyboard",
@@ -458,12 +424,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	box_interface_.add(&sb_dis_panel_);
 	box_interface_.add(&sb_dis_border_);
 
-	box_interface_.add(&sb_chat_history_lines_);
 	box_interface_.add(&save_chat_history_, UI::Box::Resizing::kFullSize);
-	if (g_allow_script_console) {
-		box_interface_.add(&sb_script_history_lines_);
-		box_interface_.add(&save_script_history_, UI::Box::Resizing::kFullSize);
-	}
 
 	box_interface_.add_space(kPadding);
 	box_interface_.add(&configure_keyboard_);
@@ -560,7 +521,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 
 	// History options
 	save_chat_history_.set_state(opt.save_chat_history);
-	save_script_history_.set_state(opt.save_script_history);
 
 	// Saving options
 	skip_autosave_on_inactivity_.set_state(opt.skip_autosave_on_inactivity);
@@ -681,7 +641,7 @@ void Options::layout() {
 
 		// Interface tab spinboxes
 		for (UI::SpinBox* sb :
-		     {&sb_dis_panel_, &sb_dis_border_, &sb_chat_history_lines_, &sb_script_history_lines_}) {
+		     {&sb_dis_panel_, &sb_dis_border_}) {
 			sb->set_unit_width(unit_w);
 			sb->set_desired_size(tab_panel_width, sb->get_h());
 		}
@@ -887,10 +847,7 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 	os_.border_snap_distance = sb_dis_border_.get_value();
 
 	// History options
-	os_.chat_history_lines = sb_chat_history_lines_.get_value();
-	os_.script_history_lines = sb_script_history_lines_.get_value();
 	os_.save_chat_history = save_chat_history_.get_state();
-	os_.save_script_history = save_script_history_.get_state();
 
 	// Saving options
 	os_.autosave = sb_autosave_.get_value();
@@ -973,11 +930,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.border_snap_distance = opt_section_.get_int("border_snap_distance", 0);
 
 	// History options
-	opt.chat_history_lines = opt_section_.get_int("chat_history_lines", kDefaultChatHistoryLines);
-	opt.script_history_lines =
-	   opt_section_.get_int("script_history_lines", kDefaultScriptHistoryLines);
 	opt.save_chat_history = opt_section_.get_bool("save_chat_history", false);
-	opt.save_script_history = opt_section_.get_bool("save_script_history", false);
 
 	// Saving options
 	opt.autosave = opt_section_.get_int("autosave", kDefaultAutosaveInterval * 60);
@@ -1028,10 +981,7 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_int("border_snap_distance", opt.border_snap_distance);
 
 	// History options
-	opt_section_.set_int("chat_history_lines", opt.chat_history_lines);
-	opt_section_.set_int("script_history_lines", opt.script_history_lines);
 	opt_section_.set_bool("save_chat_history", opt.save_chat_history);
-	opt_section_.set_bool("save_script_history", opt.save_script_history);
 
 	// Saving options
 	opt_section_.set_int("autosave", opt.autosave * 60);
@@ -1066,11 +1016,6 @@ void OptionsCtrl::save_options() {
 
 	// Sound options
 	g_sh->save_config();
-
-	g_chat_sent_history.set_max_size(opt.chat_history_lines);
-	if (g_allow_script_console) {  // doesn't really matter, only for consistency
-		g_script_console_history.set_max_size(opt.script_history_lines);
-	}
 
 	// Now write to file
 	write_config();
