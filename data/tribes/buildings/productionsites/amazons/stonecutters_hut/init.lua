@@ -33,6 +33,11 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("cutting granite"),
          actions = {
+            -- time of worker: 35 sec
+            -- radius: 6
+            -- steps from building to rock: 2...9
+            -- min. time total: 2 * 2 * 1.8 + 35 + 10 = 52.2 sec
+            -- max. time total: 2 * 9 * 1.8 + 35 + 10 = 77.4 sec
             "callworker=cut_granite",
             "sleep=duration:10s"
          },

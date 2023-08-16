@@ -46,6 +46,12 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
          descname = _("felling trees"),
          actions = {
+            -- time of worker: 32 sec
+            -- radius: 10
+            -- steps from building to tree: 2...13
+            -- min. time total: 2 * 2 * 1.8 + 32 + 10 = 49.2 sec
+            -- max. time total: 2 * 13 * 1.8 + 32 + 10 = 88.8 sec
+            -- with master woodcutter total times lowered by 5 sec
             "return=skipped unless economy needs log",
             "callworker=harvest",
             "sleep=duration:10s"

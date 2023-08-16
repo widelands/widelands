@@ -1140,9 +1140,9 @@ wl.Descriptions():new_tribe {
             note = pgettext("barbarians_building", "The quarry needs rocks to cut within the work area."),
             performance = {
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Quarry, part 1
-               pgettext("barbarians_building", "The stonemason needs %s to cut one block of granite, not counting the time he needs to reach the destination and go home again."):bformat(format_seconds(18)),
+               pgettext("barbarians_building", "This building can produce one granite between %1$s and %2$s."):bformat(format_seconds(42), format_minutes_seconds(1, 7)),
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Quarry, part 2
-               pgettext("barbarians_building", "Afterwards he rests in the quarry for %s."):bformat(format_seconds(18))
+               pgettext("barbarians_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
          }
       },
@@ -1159,9 +1159,9 @@ wl.Descriptions():new_tribe {
             note = pgettext("barbarians_building", "The lumberjack’s hut needs trees to fell within the work area."),
             performance = {
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Lumberjack_s Hut
-               pgettext("barbarians_building", "The lumberjack needs %s to fell a tree, not counting the time he needs to reach the destination and go home again."):bformat(format_seconds(17)),
+               pgettext("barbarians_building", "This building can produce one log between %1$s and %2$s."):bformat(format_seconds(44), format_minutes_seconds(1, 24)),
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Lumberjack_s Hut
-               pgettext("barbarians_building", "Afterwards he rests in the hut for %s."):bformat(format_seconds(20))
+               pgettext("barbarians_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
          }
       },

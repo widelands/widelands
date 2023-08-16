@@ -1483,9 +1483,9 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("atlanteans_building", "Priest of Satul asked why stones are needed for buildings"),
             performance = {
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Quarry, part 1
-               pgettext("atlanteans_building", "The stonecutter needs %s to cut one block of granite, not counting the time he needs to reach the destination and go home again."):bformat(format_seconds(19)),
+               pgettext("atlanteans_building", "This building can produce one granite between %1$s and %2$s."):bformat(format_seconds(44), format_minutes_seconds(1, 9)),
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Quarry, part 2
-               pgettext("atlanteans_building", "Afterwards he rests in the quarry for %s."):bformat(format_seconds(19))
+               pgettext("atlanteans_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
          }
       },
@@ -1502,9 +1502,9 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("atlanteans_building", "Atlantean woodcutter asked why saws are used to cut trees"),
             performance = {
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Woodcutter's House, part 1
-               pgettext("atlanteans_building", "The woodcutter needs %s to fell a tree, not counting the time he needs to reach the destination and go home again."):bformat(format_seconds(22)),
+               pgettext("atlanteans_building", "This building can produce one log between %1$s and %2$s."):bformat(format_seconds(49), format_minutes_seconds(1, 29)),
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Woodcutter's House, part 2
-               pgettext("atlanteans_building", "Afterwards he rests in the house for %s."):bformat(format_seconds(20))
+               pgettext("atlanteans_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
          }
       },

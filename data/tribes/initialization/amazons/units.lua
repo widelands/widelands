@@ -1272,9 +1272,9 @@ wl.Descriptions():new_tribe {
             note = pgettext("amazons_building", "The stonecutter’s hut needs rocks to cut within the work area."),
             performance = {
                -- TRANSLATORS: Performance helptext for an Amazon production site: Stonecutter's Hut, part 1
-               pgettext("amazons_building", "The stonecutter needs %s to cut one block of granite, not counting the time he needs to reach the destination and go home again."):bformat(format_seconds(35)),
+               pgettext("amazons_building", "This building can produce one granite between %1$s and %2$s."):bformat(format_seconds(52), format_minutes_seconds(1, 17)),
                -- TRANSLATORS: Performance helptext for an Amazon production site: Stonecutter's Hut, part 2
-               pgettext("amazons_building", "Afterwards he rests in the hut for %s."):bformat(format_seconds(10))
+               pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
          }
       },
@@ -1287,9 +1287,9 @@ wl.Descriptions():new_tribe {
             note = pgettext("amazons_building", "The woodcutter’s hut needs trees to fell within the work area."),
             performance = {
                -- TRANSLATORS: Performance helptext for an Amazon production site: Woodcutter's Hut, part 1
-               pgettext("amazons_building", "The woodcutter needs %1$s to fell a tree (master woodcutter only %2$s), not counting the time he needs to reach the destination and go home again."):bformat(format_seconds(32), format_seconds(27)),
+               pgettext("amazons_building", "This building can produce one log between %1$s and %2$s (with master woodcutter between %3$s and %4$s)."):bformat(format_seconds(49), format_minutes_seconds(1, 29), format_seconds(44), format_minutes_seconds(1, 24)),
                -- TRANSLATORS: Performance helptext for an Amazon production site: Woodcutter's Hut, part 2
-               pgettext("amazons_building", "Afterwards he rests in the hut for %s."):bformat(format_seconds(10))
+               pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
          }
       },
@@ -1346,9 +1346,9 @@ wl.Descriptions():new_tribe {
             },
             performance = {
                -- TRANSLATORS: Performance helptext for an Amazon production site: Water Gatherer's Hut, part 1
-               pgettext("amazons_building", "The carrier needs %s to draw two buckets of water, not counting the time he needs to reach the destination and go home again."):bformat(format_seconds(5)),
+               pgettext("amazons_building", "This building can produce one bucket of water between %1$s and %2$s on average."):bformat(format_seconds(16), format_seconds(32)),
                -- TRANSLATORS: Performance helptext for an Amazon production site: Water Gatherer's Hut, part 2
-               pgettext("amazons_building", "Afterwards he rests in the hut for %s."):bformat(format_seconds(20))
+               pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
          }
       },

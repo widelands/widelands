@@ -1254,9 +1254,9 @@ wl.Descriptions():new_tribe {
             },
             performance = {
                -- TRANSLATORS: Performance helptext for an Empire production site: Quarry, part 1
-               pgettext("empire_building", "The stonemason needs %s to cut one block of granite or marble, not counting the time he needs to reach the destination and go home again."):bformat(format_seconds(18)),
+               pgettext("empire_building", "This building can produce one granite or one marble between %1$s and %2$s."):bformat(format_seconds(42), format_minutes_seconds(1, 7)),
                -- TRANSLATORS: Performance helptext for an Empire production site: Quarry, part 2
-               pgettext("empire_building", "Afterwards he rests in the quarry for %s."):bformat(format_seconds(18))
+               pgettext("empire_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
          }
       },
@@ -1281,9 +1281,9 @@ wl.Descriptions():new_tribe {
             note = pgettext("empire_building", "The lumberjack’s house needs trees to fell within the work area."),
             performance = {
                -- TRANSLATORS: Performance helptext for an Empire production site: Lumberjack's House
-               pgettext("empire_building", "The lumberjack needs %s to fell a tree, not counting the time he needs to reach the destination and go home again."):bformat(format_seconds(22)),
+               pgettext("empire_building", "This building can produce one log between %1$s and %2$s."):bformat(format_seconds(49), format_minutes_seconds(1, 29)),
                -- TRANSLATORS: Performance helptext for an Empire production site: Lumberjack's House
-               pgettext("empire_building", "Afterwards he rests in the house for %s."):bformat(format_seconds(20))
+               pgettext("empire_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
          }
       },

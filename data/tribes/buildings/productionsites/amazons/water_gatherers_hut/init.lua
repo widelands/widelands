@@ -37,6 +37,11 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- time of worker: 4.6 sec
+            -- radius: 8
+            -- steps from building to tree: 2...11
+            -- min. time total: (2 * 2 * 1.8 + 4.6 + 20) / 2 = 15.9 sec
+            -- max. time total: (2 * 11 * 1.8 + 4.6 + 20) / 2 = 32.1 sec
             "sleep=duration:20s",
             "callworker=fetch_water",
             -- he carries 2 buckets so we need to create one now
