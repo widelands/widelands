@@ -183,7 +183,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	   ports_count > 0 && shipyards_count > 0 && basic_economy_established &&
 	   (!ship_free || persistent_data->ships_utilization > 5000 ||
 	    static_cast<int>(tradeships_count) - ports_count - expeditions_in_progress < 0 ||
-		static_cast<int>(ports_count) * 2 - warships_count > 0); 
+		static_cast<int>(ports_count) * 2 - warships_count > 0);
 
 	// goes over productionsites finds shipyards and configures them
 	for (const ProductionSiteObserver& ps_obs : productionsites) {
@@ -228,7 +228,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	if (!ship_free && warships_count > 0) {
 		tradeship_refit_needed = true;
 	}
-	
+
 	// starting an expedition? if yes, find a port and order it to start an expedition
 	if (ports_count > 0 && expeditions_in_progress == 0 && expeditions_in_prep == 0 &&
 	    !persistent_data->no_more_expeditions && ship_free && basic_economy_established) {
@@ -475,7 +475,7 @@ void DefaultAI::gain_ship(Widelands::Ship& ship, NewShip type) {
 		marine_task_queue.push_back(kStopShipyard);
 	} else {
 		if (ship.state_is_expedition()) {
-			if (expedition_ship_ == kNoShip && ship.get_ship_type() == Widelands::ShipType::kWarship) {
+			if (expedition_ship_ == kNoShip && ship.get_ship_type() == Widelands::ShipType::kTransport) {
 				// OK, this ship is in expedition
 				expedition_ship_ = ship.serial();
 			} else {
@@ -582,72 +582,6 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 void DefaultAI::warship_management(ShipObserver& so) {
 
 	const Time& gametime = game().get_gametime();
-	// Widelands::PlayerNumber const pn = player_->player_number();
-
-	// second we put current spot into expedition visited_spots
-/* 	bool first_time_here = expedition_visited_spots.count(so.ship->get_position().hash()) == 0;
-	if (first_time_here) {
-		expedition_visited_spots.insert(so.ship->get_position().hash());
-		so.escape_mode = false;
-	} else {
-		so.escape_mode = true;
-	}
- */
-	// if we have a port-space we can build a Port or continue exploring
-	// 1. examine to build a port (colony founding)
-/* 	if (!so.ship->exp_port_spaces().empty()) {
-
-		// we score the place (value max == 8)
-		const uint8_t spot_score = spot_scoring(so.ship->exp_port_spaces().front()) * 2;
-		verb_log_dbg_time(gametime, "%d: %s at %3dx%3d: PORTSPACE found, we valued it: %d\n", pn,
-						  so.ship->get_shipname().c_str(), so.ship->get_position().x,
-						  so.ship->get_position().y, spot_score);
-
-		// we make a decision based on the score value and random and basic economy status
-		if (RNG::static_rand(8) < spot_score) {
-			// we build a port here
-			game().send_player_ship_construct_port(*so.ship, so.ship->exp_port_spaces().front());
-			so.last_command_time = gametime;
-			so.waiting_for_command_ = false;
-
-			return;
-		}
-	} */
-
-	// 2. Go on with expedition
-	// 2a) Ship is first time here
-/* 	if (first_time_here) {
-		verb_log_dbg_time(gametime, "%d: %s at %3dx%3d: explore uphold, visited first time\n", pn,
-						  so.ship->get_shipname().c_str(), so.ship->get_position().x,
-						  so.ship->get_position().y);
-
-		// Determine direction of island circle movement
-		// Note: if the ship doesn't own an island-explore-direction it is in inter-island exploration
-		// in this case we create a new direction at random, otherwise continue circle movement
-		if (!so.ship->is_exploring_island()) {
-			so.island_circ_direction = randomExploreDirection();
-			verb_log_dbg_time(gametime, "%d: %s: new island exploration - direction: %u\n", pn,
-							  so.ship->get_shipname().c_str(),
-							  static_cast<uint32_t>(so.island_circ_direction));
-		} else {
-			verb_log_dbg_time(gametime, "%d: %s: continue island circumvention, dir=%u\n", pn,
-							  so.ship->get_shipname().c_str(),
-							  static_cast<uint32_t>(so.island_circ_direction));
-		}
-
-		// send the ship to circle island
-		game().send_player_ship_explore_island(*so.ship, so.island_circ_direction);
-
-		// 2b) We were here before, let try break for open sea
-	} else {
-		if (!attempt_escape(so)) {  // return true if the ship was sent to open sea
-			// otherwise we continue circumnavigating the island
-			game().send_player_ship_explore_island(*so.ship, so.island_circ_direction);
-			verb_log_dbg_time(gametime, "%d: %s: in JAMMING spot, continue circumvention, dir=%u\n",
-							  pn, so.ship->get_shipname().c_str(),
-							  static_cast<uint32_t>(so.island_circ_direction));
-		}
-	} */
 
 	game().send_player_warship_command(
 			   *so.ship, Widelands::WarshipCommand::kSetCapacity, {0u});
