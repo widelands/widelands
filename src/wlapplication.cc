@@ -780,6 +780,12 @@ void WLApplication::init_and_run_game_from_template() {
 
 	game.set_game_controller(std::make_shared<SinglePlayerGameController>(game, true, playernumber));
 	game.init_newgame(settings->settings());
+
+	auto custom_names = Widelands::read_custom_warehouse_ship_names();
+	Widelands::Player* player = game.get_safe_player(playernumber);
+	player->set_shipnames(custom_names.first);
+	player->set_warehousenames(custom_names.second);
+
 	try {
 		game.run(Widelands::Game::StartGameType::kMap, script_to_run_, "single_player");
 	} catch (const std::exception& e) {

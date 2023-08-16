@@ -27,7 +27,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 31,
+	NETWORK_PROTOCOL_VERSION = 32,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -217,6 +217,12 @@ enum : uint8_t {
 	 * \li unsigned_32 Random number generator seed
 	 * \li unsigned_32 Number of enabled add-ons
 	 * \li Each enabled add-on's internal name
+	 * \li Custom naming lists for all players. Each naming list consists of:
+	 *   \li unsigned_8: Player number (0 terminates the list of naming lists).
+	 *   \li unsigned_32: Number `S` of ship names
+	 *   \li `S` × string: Each ship name
+	 *   \li unsigned_32: Number `W` of warehouse names
+	 *   \li `W` × string: Each warehouse name
 	 *
 	 * The client must load the map and setup the game. As soon as the game
 	 * is fully loaded, it must behave as if a \ref NETCMD_WAIT command had
@@ -460,6 +466,19 @@ enum : uint8_t {
 	 * \li signed_32: win condition duration in minutes
 	 */
 	NETCMD_WIN_CONDITION_DURATION = 36,
+
+	/**
+	 * Sent by the client to inform the host of the client's custom naming lists for ships and
+	 * warehouses. The lists are distributed by the host to the clients later in the LAUNCH command.
+	 * Zero-size naming lists are ignored and signify to use the defaults.
+	 *
+	 * Attached data is:
+	 * \li unsigned_32: Number `S` of ship names
+	 * \li `S` × string: Each ship name
+	 * \li unsigned_32: Number `W` of warehouse names
+	 * \li `W` × string: Each warehouse name
+	 */
+	NETCMD_CUSTOM_NAMING_LISTS = 37,
 
 	/**
 	 * Sent by the metaserver to a freshly opened game to check connectability
