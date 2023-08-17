@@ -1199,7 +1199,8 @@ void AddOnsCtrl::update_dependency_errors() {
 				   format(_("· ‘%1$s’ requires ‘%2$s’ which could not be found"),
 				          addon->first->descname(), requirement));
 			} else {
-				if (!search_result->second) {
+				if (!search_result->second &&
+				    AddOns::require_enabled(addon->first->category, search_result->first->category)) {
 					warn_requirements.push_back(format(_("· ‘%1$s’ requires ‘%2$s’ which is disabled"),
 					                                   addon->first->descname(),
 					                                   search_result->first->descname()));

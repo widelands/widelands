@@ -119,16 +119,20 @@ void LaunchMPG::layout() {
 	help_button_.set_size(standard_height_, standard_height_);
 	help_button_.set_pos(Vector2i(get_inner_w() - help_button_.get_w(), 0));
 
-	// Reset size to fit left_column_box_, than relayout
-	chat_->set_desired_size(0, 0);
+	// Reset size to fit left_column_box_, then relayout
+	if (chat_ != nullptr) {
+		chat_->set_desired_size(0, 0);
+	}
 	uint32_t h = left_column_box_.get_h() / 2 - 4 * kPadding;
 	// Assign heights to properly layout the scrollable box
 	mpsg_.force_new_dimensions(left_column_box_.get_w(), h, scale_factor * standard_height_);
-	chat_->set_desired_size(0, h);
+	if (chat_ != nullptr) {
+		chat_->set_desired_size(0, h);
+	}
 	LaunchGame::layout();
 
 	// set focus to chat input
-	if (chat_) {
+	if (chat_ != nullptr) {
 		chat_->focus_edit();
 	}
 }
@@ -309,7 +313,8 @@ void LaunchMPG::refresh() {
 			win_condition_dropdown_.set_tooltip(_(t->get_string("description")));
 			win_condition_duration_.set_visible(t->has_key("configurable_time") &&
 			                                    t->get_bool("configurable_time"));
-			win_condition_duration_.set_value(settings_.get_win_condition_duration());
+			const int32_t duration = settings_.get_win_condition_duration();
+			win_condition_duration_.set_interval(duration, duration, false);
 		} catch (LuaScriptNotExistingError&) {
 			win_condition_dropdown_.set_label(_("Error"));
 			win_condition_dropdown_.set_tooltip(
