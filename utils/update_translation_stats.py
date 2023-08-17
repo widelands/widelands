@@ -48,16 +48,15 @@ def generate_translation_stats(po_dir, output_file):
 
     # We get errors for non-po files in the base po dir, so we have to walk
     # the subdirs.
+    subdirs = []
     for subdir in sorted(os.listdir(po_dir), key=str.lower):
         subdir = os.path.join(po_dir, subdir)
-        if not os.path.isdir(subdir):
-            continue
+        if os.path.isdir(subdir):
+            subdirs.append(subdir)
 
-        sys.stdout.write('.')
-        sys.stdout.flush()
-
+    if True:  # TODO(aDiscoverer) delete, just kept for code review
         proc = subprocess.Popen(
-            ['pocount', '--csv', subdir],
+            ['pocount', '--csv'] + subdirs,
             encoding='utf-8',
             stderr=subprocess.STDOUT,
             stdout=subprocess.PIPE,
@@ -76,10 +75,18 @@ def generate_translation_stats(po_dir, output_file):
 
         # Now do the actual counting for the current textdomain
         l1_row = l2_row = {}  # last rows, for error message
+        one_locale = ''  # to report progress
         for row in result:
             po_filename = row[COLUMNS['filename']]
+
             if po_filename.endswith('.po'):
                 locale = regex_po.match(po_filename).group(1)
+                if one_locale == '' or one_locale == locale:
+                    # once for each directory, always the same locale
+                    sys.stdout.write('.')
+                    sys.stdout.flush()
+                    if not one_locale:
+                        one_locale = locale
                 entry = locale_stats[locale]
                 entry.total += int(row[COLUMNS['total']])
                 entry.translated += int(row[COLUMNS['translated']])
@@ -99,8 +106,8 @@ def generate_translation_stats(po_dir, output_file):
             l1_row = row
         proc.wait(1)
         if proc.returncode != 0:
-            print('Failed to run pocount:\n  FILE: ' + po_dir +
-                  '\n  ' + ', '.join(l2_row.values()) + '  ' + ', '.join(l1_row.values()))
+            print('Failed to run pocount:\n  FILES: ' + ' '.join(subdirs[0:2]) +
+                  ' ...\n  ' + ', '.join(l2_row.values()) + '  ' + ', '.join(l1_row.values()))
             return 1
 
     print('\n\nLocale\tTotal\tTranslated')
