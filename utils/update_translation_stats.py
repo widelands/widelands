@@ -56,34 +56,26 @@ def generate_translation_stats(po_dir, output_file):
         sys.stdout.write('.')
         sys.stdout.flush()
 
-        try:
-            stats_output = subprocess.check_output(
-                ['pocount', '--csv', subdir],
-                encoding='utf-8',
-                stderr=subprocess.STDOUT,
-            )
-            if 'ERROR' in stats_output:
-                print('\nError running pocount:\n' + stats_output +
-                      '\nAborted creating translation statistics.')
-                return 1
-
-        except subprocess.CalledProcessError:
-            print('Failed to run pocount:\n  FILE: ' + po_dir +
-                  '\n  ' + stats_output.split('\n', 1)[1])
-            return 1
+        proc = subprocess.Popen(
+            ['pocount', '--csv', subdir],
+            encoding='utf-8',
+            stderr=subprocess.STDOUT,
+            stdout=subprocess.PIPE,
+        )
 
         COLUMNS = {
             'filename': 'Filename',
             'total': 'Total Source Words',
             'translated': 'Translated Source Words'
         }
-        result = csv.DictReader(csv.StringIO(stats_output), dialect='unix', skipinitialspace=True)
+        result = csv.DictReader(proc.stdout, dialect='unix', skipinitialspace=True)
         missing_cols = set(COLUMNS.values()) - set(result.fieldnames)
         if missing_cols:
             sys.exit(
                 'Column(s) "{}" not found in output of pocount'.format('", "'.join(missing_cols)))
 
         # Now do the actual counting for the current textdomain
+        l1_row = l2_row = {}  # last rows, for error message
         for row in result:
             po_filename = row[COLUMNS['filename']]
             if po_filename.endswith('.po'):
@@ -98,6 +90,18 @@ def generate_translation_stats(po_dir, output_file):
                         c_total=row[COLUMNS['total']], line=result.line_num))
                     sys.exit(1)
                 locale_stats[locale] = entry
+            elif 'ERROR' in next(iter(row.values())):
+                print('\nError running pocount:\n' + ', '.join(l2_row.values()) +
+                      ', '.join(l1_row.values()) + ', '.join(row.values()) +
+                      '\nAborted creating translation statistics.')
+                return 1
+            l2_row = l1_row
+            l1_row = row
+        proc.wait(1)
+        if proc.returncode != 0:
+            print('Failed to run pocount:\n  FILE: ' + po_dir +
+                  '\n  ' + ', '.join(l2_row.values()) + '  ' + ', '.join(l1_row.values()))
+            return 1
 
     print('\n\nLocale\tTotal\tTranslated')
     print('------\t-----\t----------')
