@@ -681,8 +681,8 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const launchgame,
      npsb_(new NetworkPlayerSettingsBackend(settings_)),
      launchgame_(launchgame),
      clientbox_(this, UI::PanelStyle::kFsMenu, "client_box", 0, 0, UI::Box::Vertical),
-	 scrollable_clientbox_(
-	    &clientbox_, UI::PanelStyle::kFsMenu, "scrollable_clientbox", 0, 0, UI::Box::Vertical),
+     scrollable_clientbox_(
+        &clientbox_, UI::PanelStyle::kFsMenu, "scrollable_clientbox", 0, 0, UI::Box::Vertical),
      playerbox_(
         this, UI::PanelStyle::kFsMenu, "player_box", 0, 0, UI::Box::Vertical, 0, 0, kPadding),
      scrollable_playerbox_(
@@ -763,8 +763,8 @@ void MultiPlayerSetupGroup::update_clients() {
 
 	if (number_of_users > multi_player_client_groups_.size()) {
 		for (uint32_t i = multi_player_client_groups_.size(); i < number_of_users; ++i) {
-			multi_player_client_groups_.push_back(
-			   new MultiPlayerClientGroup(launchgame_, &scrollable_clientbox_, 0, buth_, i, settings_));
+			multi_player_client_groups_.push_back(new MultiPlayerClientGroup(
+			   launchgame_, &scrollable_clientbox_, 0, buth_, i, settings_));
 			scrollable_clientbox_.add(multi_player_client_groups_.at(i), Resizing::kFullSize);
 		}
 	}

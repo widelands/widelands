@@ -244,7 +244,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                kButtonSize,
                can_act_ && has_priority_),
      spacer_(&hbox_, UI::PanelStyle::kWui, "spacer", 0, 0, priority_.get_w(), priority_.get_h()),
-	 priority_indicator_(&hbox_, UI::PanelStyle::kWui, "priority_indicator", 0, 0, kButtonSize / 5, kButtonSize),
+     priority_indicator_(
+        &hbox_, UI::PanelStyle::kWui, "priority_indicator", 0, 0, kButtonSize / 5, kButtonSize),
      slider_was_moved_(nullptr),
      collapsed_(collapsed),
      nr_icons_(queue_ != nullptr            ? queue_->get_max_size() :
@@ -747,9 +748,8 @@ void InputQueueDisplay::draw_overlay(RenderTarget& r) {
 		const int w = priority_indicator_.get_w();
 		// Add kButtonSize / 4 to the position to align it against the collapse button
 		const int x = hbox_.get_x() + priority_indicator_.get_x() + kButtonSize / 4;
-		r.brighten_rect(Recti(x, hbox_.get_y(), w, kButtonSize), - 32);
-		r.fill_rect(Recti(x, hbox_.get_y() + (4 - p) * w, w, w),
-		            kPriorityColors[p], BlendMode::Copy);
+		r.brighten_rect(Recti(x, hbox_.get_y(), w, kButtonSize), -32);
+		r.fill_rect(Recti(x, hbox_.get_y() + (4 - p) * w, w, w), kPriorityColors[p], BlendMode::Copy);
 	}
 
 	UI::Box::draw_overlay(r);
