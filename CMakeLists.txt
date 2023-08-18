@@ -446,8 +446,10 @@ if(OPTION_BUILD_WINSTATIC)
   endif(MSVC)
 endif(OPTION_BUILD_WINSTATIC)
 
-# Allow self-diagnosis for crashes (doesn't hurt performance, see https://stackoverflow.com/q/12634114)
-SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -rdynamic")
+if(NOT WIN32)
+  # Allow self-diagnosis for crashes (doesn't hurt performance, see https://stackoverflow.com/q/12634114)
+  SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -rdynamic")
+endif()
 
 # on BSD this must be explicitly linked
 if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
