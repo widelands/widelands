@@ -446,7 +446,7 @@ if(OPTION_BUILD_WINSTATIC)
   endif(MSVC)
 endif(OPTION_BUILD_WINSTATIC)
 
-if(NOT WIN32)
+if((NOT WIN32) AND (NOT OPTION_ASAN))
   # Allow self-diagnosis for crashes (doesn't hurt performance, see https://stackoverflow.com/q/12634114)
   SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -rdynamic")
 endif()
