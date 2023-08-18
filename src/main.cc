@@ -16,10 +16,6 @@
  *
  */
 
-#if __has_include(<execinfo.h>) && !defined(USE_ASAN)
-#define PRINT_SEGFAULT_BACKTRACE
-#endif
-
 #include <iostream>
 #include <typeinfo>
 
