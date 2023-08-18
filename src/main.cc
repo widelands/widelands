@@ -16,7 +16,7 @@
  *
  */
 
-#if __has_include(<execinfo.h>)
+#if __has_include(<execinfo.h>) && !defined(USE_ASAN)
 #define PRINT_SEGFAULT_BACKTRACE
 #endif
 
@@ -52,8 +52,7 @@ static void segfault_handler(const int sig) {
 
 	std::cout << std::endl
 	          << "##############################" << std::endl
-	          << "FATAL ERROR: Received signal " << sig << " SIG" << sigabbrev_np(sig) << " ("
-	          << strsignal(sig) << ")" << std::endl
+	          << "FATAL ERROR: Received signal " << sig << " (" << strsignal(sig) << ")" << std::endl
 	          << "Backtrace:" << std::endl;
 	backtrace_symbols_fd(array, size, STDOUT_FILENO);
 	std::cout
