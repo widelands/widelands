@@ -799,6 +799,7 @@ void MultiPlayerSetupGroup::force_new_dimensions(uint32_t max_width,
 	// Reset desired size to properly fit into scroll box
 	scrollable_playerbox_.set_desired_size(0, 0);
 	clients_.set_desired_size(max_width / 3, clients_.get_h());
+	clientbox_.set_max_size(max_width / 3, max_height);
 
 	for (auto& multiPlayerClientGroup : multi_player_client_groups_) {
 		multiPlayerClientGroup->force_new_dimensions(standard_element_height);
