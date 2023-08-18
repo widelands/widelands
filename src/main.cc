@@ -45,17 +45,21 @@
 // Taken from https://stackoverflow.com/a/77336
 static void segfault_handler(const int sig) {
 	constexpr int kMaxBacktraceSize = 256;
-	void *array[kMaxBacktraceSize];
+	void* array[kMaxBacktraceSize];
 	size_t size = backtrace(array, kMaxBacktraceSize);
 
-	std::cout << std::endl <<
-			"##############################" << std::endl <<
-			"FATAL ERROR: Received signal " << sig << " SIG" << sigabbrev_np(sig) << " (" << strsignal(sig) << ")" << std::endl <<
-			"Backtrace:" << std::endl;
+	std::cout << std::endl
+	          << "##############################" << std::endl
+	          << "FATAL ERROR: Received signal " << sig << " SIG" << sigabbrev_np(sig) << " ("
+	          << strsignal(sig) << ")" << std::endl
+	          << "Backtrace:" << std::endl;
 	backtrace_symbols_fd(array, size, STDOUT_FILENO);
-	std::cout << std::endl <<
-			"Please report this problem to help us improve Widelands, and provide the complete output." << std::endl <<
-			"##############################" << std::endl << std::endl;
+	std::cout
+	   << std::endl
+	   << "Please report this problem to help us improve Widelands, and provide the complete output."
+	   << std::endl
+	   << "##############################" << std::endl
+	   << std::endl;
 	::exit(sig);
 }
 #endif
