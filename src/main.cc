@@ -31,7 +31,7 @@
 #endif
 #ifdef PRINT_SEGFAULT_BACKTRACE
 #include <execinfo.h>
-#include <signal.h>
+#include <csignal>
 #else
 #endif
 
