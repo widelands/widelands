@@ -106,10 +106,21 @@ set -x
 # use force to make sure really all files get pulled
 tx pull -a -f
 
+runUpdateScripts=1 # run them at least once
 if [ -n "$(git status -s)" ]; then
-  # Stage and commit translations
+  update_authors
+  update_appdata
+  update_statistics
+
+  # Stage translations
   git add po/*/*.po data/i18n/locales/*.json xdg/translations/*.json
-  git commit -m "Fetched translations."
+  # and generated files
+  gitAddGeneratedFiles
+
+  # commit translations
+  git commit -m "Fetched translations and updated data."
+
+  runUpdateScripts= # has run now
 fi
 
 # -----------------------
@@ -143,26 +154,26 @@ if [ -n "$(git status -s)" ]; then
 
   # Undo one-liner diffs of pure timestamps with no other content
   undo_oneliner_diffs
+  runUpdateScripts=2 # run, files have changed
 fi
 
-update_authors
-
-update_appdata
-
-update_statistics
-
+if [ -n "$runUpdateScripts" ]; then # if not run yet or pot file has changed
+  update_authors # in case something has changed unexpectedly
+  update_appdata # in case something has changed unexpectedly
+  update_statistics
+fi
 
 if [ -z "$(git status -s)" ]; then
   echo "Run completed, nothing to commit."
 else
   # Stage changes
-  # - Translations
+  # - Translations and templates
   git add po/*/*.po po/*/*.pot data/i18n/locales/*.json xdg/translations/*.json || true
   # - generated files
   gitAddGeneratedFiles
 
   # Commit
-  git commit -m "Updated translations catalogs."
+  git commit -m "Updated translations catalogs and statistics."
 fi
 
 if [ "$(git show --no-patch --format=format:_ FETCH_HEAD HEAD)" != "_" ]; then # check if it is the same commit
