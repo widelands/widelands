@@ -35,8 +35,6 @@
 #include <cstdlib>
 #include <cstring>
 #include <execinfo.h>
-#include <unistd.h>
-#else
 #endif
 
 #include "base/wexception.h"
