@@ -75,7 +75,7 @@ int main(int argc, char* argv[]) {
 	 * We can't handle SIGABRT like this since we have to redirect that one elsewhere to
 	 * suppress non-critical errors from Eris.
 	 */
-	for (int s : {SIGSEGV, SIGFPE, SIGILL}) {
+	for (int s : {SIGSEGV, SIGBUS, SIGFPE, SIGILL}) {
 		signal(s, segfault_handler);
 	}
 #endif
