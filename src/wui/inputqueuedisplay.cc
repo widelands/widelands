@@ -744,7 +744,8 @@ void InputQueueDisplay::draw_overlay(RenderTarget& r) {
 		const size_t p = priority_to_index(queue_ != nullptr ? b->get_priority(type_, index_) :
                                                              get_setting()->priority);
 		const int w = kButtonSize / 5;
-		const int x = hbox_.get_x() + collapse_.get_x() - w;
+		const int x = collapse_.is_visible() ? hbox_.get_x() + collapse_.get_x() - w :
+                                             hbox_.get_x() + hbox_.get_w();
 		r.brighten_rect(Recti(x, hbox_.get_y(), w, kButtonSize), -32);
 		r.fill_rect(Recti(x, hbox_.get_y() + (4 - p) * kButtonSize / 5, w, kButtonSize / 5),
 		            kPriorityColors[p], BlendMode::Copy);
