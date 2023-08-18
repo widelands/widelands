@@ -30,8 +30,8 @@
 #include <unistd.h>
 #endif
 #ifdef PRINT_SEGFAULT_BACKTRACE
-#include <execinfo.h>
 #include <csignal>
+#include <execinfo.h>
 #else
 #endif
 
