@@ -111,6 +111,7 @@ struct GameClientImpl {
 	bool disconnect_called_;
 
 	void send_hello() const;
+	void send_custom_naming_lists() const;
 	void send_player_command(Widelands::PlayerCommand* /*pc*/) const;
 
 	void run_game(InteractiveGameBase* igb);
@@ -132,6 +133,23 @@ void GameClientImpl::send_player_command(Widelands::PlayerCommand* pc) const {
 	s.unsigned_8(NETCMD_PLAYERCOMMAND);
 	s.unsigned_32(game->get_gametime().get());
 	pc->serialize(s);
+	net->send(s);
+}
+
+void GameClientImpl::send_custom_naming_lists() const {
+	SendPacket s;
+	s.unsigned_8(NETCMD_CUSTOM_NAMING_LISTS);
+
+	auto names = Widelands::read_custom_warehouse_ship_names();
+	s.unsigned_32(names.first.size());
+	for (const std::string& name : names.first) {
+		s.string(name);
+	}
+	s.unsigned_32(names.second.size());
+	for (const std::string& name : names.second) {
+		s.string(name);
+	}
+
 	net->send(s);
 }
 
@@ -249,6 +267,7 @@ GameClient::~GameClient() {
 
 void GameClient::run() {
 	d->send_hello();
+	d->send_custom_naming_lists();
 	d->settings.multiplayer = true;
 	d->modal = new FsMenu::LaunchMPG(capsule_, *this, *this, *this, d->internet_);
 
@@ -291,6 +310,22 @@ void GameClient::do_run(RecvPacket& packet) {
 		}
 	}
 
+	std::map<Widelands::PlayerNumber, std::pair<std::set<std::string>, std::set<std::string>>>
+	   custom_naming_lists;
+	for (;;) {
+		Widelands::PlayerNumber number = packet.unsigned_8();
+		if (number == 0) {
+			break;
+		}
+
+		for (size_t i = packet.unsigned_32(); i > 0; --i) {
+			custom_naming_lists[number].first.insert(packet.string());
+		}
+		for (size_t i = packet.unsigned_32(); i > 0; --i) {
+			custom_naming_lists[number].second.insert(packet.string());
+		}
+	}
+
 	capsule_.set_visible(false);
 	try {
 		std::vector<std::string> tipstexts{"general_game", "multiplayer"};
@@ -302,10 +337,18 @@ void GameClient::do_run(RecvPacket& packet) {
 
 		d->game = &game;
 		InteractiveGameBase* igb = d->init_game(this, loader_ui);
+
+		for (const auto& lists : custom_naming_lists) {
+			Widelands::Player* player = game.get_safe_player(lists.first);
+			player->set_shipnames(lists.second.first);
+			player->set_warehousenames(lists.second.second);
+		}
+
 		if (d->panel_whose_mutex_needs_resetting_on_game_start != nullptr) {
 			d->panel_whose_mutex_needs_resetting_on_game_start->clear_current_think_mutex();
 			d->panel_whose_mutex_needs_resetting_on_game_start = nullptr;
 		}
+
 		d->run_game(igb);
 
 	} catch (const WLWarning& e) {

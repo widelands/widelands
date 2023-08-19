@@ -142,7 +142,6 @@ NetSetupLAN::NetSetupLAN(MenuCapsule& fsmm)
 	table_.add_column(90, _("State"));
 	table_.selected.connect([this](int32_t i) { game_selected(i); });
 	table_.double_clicked.connect([this](int32_t i) { game_doubleclicked(i); });
-	discovery_.set_callback(discovery_callback, this);
 
 	joingame_.set_enabled(false);
 	layout();
@@ -164,7 +163,17 @@ void NetSetupLAN::think() {
 	TwoColumnsBasicNavigationMenu::think();
 	change_playername();
 
-	discovery_.run();
+	try {
+		if (discovery_ == nullptr) {
+			discovery_.reset(new LanGameFinder());
+			discovery_->set_callback(discovery_callback, this);
+		}
+
+		discovery_->run();
+	} catch (...) {
+		return_to_main_menu();
+		throw;
+	}
 }
 
 bool NetSetupLAN::get_host_address(NetAddress* addr) {
@@ -270,7 +279,7 @@ void NetSetupLAN::discovery_callback(int32_t const type,
 		static_cast<NetSetupLAN*>(userdata)->game_updated(game);
 		break;
 	default:
-		abort();
+		NEVER_HERE();
 	}
 }
 
