@@ -131,8 +131,8 @@ python3 utils/buildcat.py
 undo_oneliner_diffs() {
   # Undo one-liner diffs of pure timestamps with no other content
   set +x
-  git diff --numstat po/ | sed -En 's/^1\t1\t//p' | while IFS= read -r entry; do
-    if ! git diff "$entry" | grep '^[+-][^+-]' | grep -qv '^[+-]"POT-Creation-Date:'
+  for entry in $(git diff --numstat po/ | sed -En 's/^1\t1\t//p'); do
+    if [ -z "$(git diff "$entry" | grep '^[+-][^+-]' | grep -v '^[+-]"POT-Creation-Date:')" ]
     then # no other diff line remaining
       echo "Skipping changes to $entry"
       git checkout "$entry"
