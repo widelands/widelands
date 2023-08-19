@@ -453,7 +453,7 @@ private:
 	void unset_infotext();
 
 	InteractiveBase& ibase_;
-	Widelands::MapObject& building_or_ship_;
+	Widelands::OPtr<Widelands::MapObject> building_or_ship_;
 	SoldierPanel soldierpanel_;
 	UI::Radiogroup soldier_preference_;
 
@@ -466,7 +466,7 @@ SoldierList::SoldierList(UI::Panel& parent,
    : UI::Box(&parent, UI::PanelStyle::kWui, "soldier_list", 0, 0, UI::Box::Vertical),
 
      ibase_(ib),
-     building_or_ship_(building_or_ship),
+     building_or_ship_(&building_or_ship),
 
      soldierpanel_(*this, ib.egbase(), building_or_ship) {
 	upcast(Widelands::MilitarySite, ms, &building_or_ship);
@@ -518,19 +518,25 @@ SoldierList::SoldierList(UI::Panel& parent,
 }
 
 void SoldierList::think() {
-	switch (building_or_ship_.descr().type()) {
+	MutexLock m(MutexLock::ID::kObjects);
+	const Widelands::MapObject* object = building_or_ship_.get(ibase_.egbase());
+	if (object == nullptr) {
+		return;
+	}
+
+	switch (object->descr().type()) {
 	case Widelands::MapObjectType::MILITARYSITE: {
-		upcast(Widelands::MilitarySite, ms, &building_or_ship_);
+		upcast(const Widelands::MilitarySite, ms, object);
 		soldier_preference_.set_state(static_cast<uint8_t>(ms->get_soldier_preference()), false);
 		break;
 	}
 	case Widelands::MapObjectType::WAREHOUSE: {
-		upcast(Widelands::Warehouse, wh, &building_or_ship_);
+		upcast(const Widelands::Warehouse, wh, object);
 		soldier_preference_.set_state(static_cast<uint8_t>(wh->get_soldier_preference()), false);
 		break;
 	}
 	case Widelands::MapObjectType::SHIP: {
-		upcast(Widelands::Ship, ship, &building_or_ship_);
+		upcast(const Widelands::Ship, ship, object);
 		soldier_preference_.set_state(static_cast<uint8_t>(ship->get_soldier_preference()), false);
 		break;
 	}
@@ -559,14 +565,20 @@ void SoldierList::unset_infotext() {
 }
 
 bool SoldierList::can_eject() const {
-	if (!ibase_.can_act(building_or_ship_.owner().player_number())) {
-		return false;
-	}
-	if (building_or_ship_.descr().type() == Widelands::MapObjectType::WAREHOUSE) {
+	MutexLock m(MutexLock::ID::kObjects);
+	const Widelands::MapObject* object = building_or_ship_.get(ibase_.egbase());
+	if (object == nullptr) {
 		return false;
 	}
 
-	const bool is_ship = building_or_ship_.descr().type() == Widelands::MapObjectType::SHIP;
+	if (!ibase_.can_act(object->owner().player_number())) {
+		return false;
+	}
+	if (object->descr().type() == Widelands::MapObjectType::WAREHOUSE) {
+		return false;
+	}
+
+	const bool is_ship = object->descr().type() == Widelands::MapObjectType::SHIP;
 	const Widelands::Building* building = is_ship ? nullptr : soldierpanel_.get_building();
 	const Widelands::Ship* ship = is_ship ? soldierpanel_.get_ship() : nullptr;
 
@@ -581,8 +593,14 @@ bool SoldierList::can_eject() const {
 
 void SoldierList::eject(const Widelands::Soldier* soldier) {
 	if (can_eject()) {
+		MutexLock m(MutexLock::ID::kObjects);
+		Widelands::MapObject* object = building_or_ship_.get(ibase_.egbase());
+		if (object == nullptr) {
+			return;
+		}
+
 		if (Widelands::Game* game = ibase_.get_game(); game != nullptr) {
-			game->send_player_drop_soldier(building_or_ship_, soldier->serial());
+			game->send_player_drop_soldier(*object, soldier->serial());
 		} else {
 			NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 		}
@@ -590,9 +608,15 @@ void SoldierList::eject(const Widelands::Soldier* soldier) {
 }
 
 void SoldierList::set_soldier_preference(int32_t changed_to) {
+	MutexLock m(MutexLock::ID::kObjects);
+	Widelands::MapObject* object = building_or_ship_.get(ibase_.egbase());
+	if (object == nullptr) {
+		return;
+	}
+
 	if (Widelands::Game* game = ibase_.get_game()) {
 		game->send_player_set_soldier_preference(
-		   building_or_ship_, static_cast<Widelands::SoldierPreference>(changed_to));
+		   *object, static_cast<Widelands::SoldierPreference>(changed_to));
 	} else {
 		NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 	}
