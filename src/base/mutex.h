@@ -43,6 +43,7 @@ public:
 		kObjects,              ///< MapObjects are being modified.
 		kCommands,             ///< The game's command queue is being modified.
 		kMessages,             ///< In-game messages are being modified.
+		kPathfinding,          ///< Pathfinding searches across the map.
 		kIBaseVisualizations,  ///< The InteractiveBase's overlays are being updated.
 		kI18N,                 ///< The gettext backend.
 		kLua,                  ///< Lua scripts.
