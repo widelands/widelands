@@ -131,8 +131,11 @@ void StockMenu::think() {
  * \ref Economy of a player may change)
  */
 void StockMenu::fill_total_waresdisplay(WaresDisplay* waresdisplay, Widelands::WareWorker type) {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	waresdisplay->remove_all_warelists();
 	const Widelands::Player& player = *player_.get_player();
+
 	for (const auto& economy : player.economies()) {
 		if (economy.second->type() == type) {
 			waresdisplay->add_warelist(economy.second->get_wares_or_workers());
@@ -146,7 +149,10 @@ void StockMenu::fill_total_waresdisplay(WaresDisplay* waresdisplay, Widelands::W
  */
 void StockMenu::fill_warehouse_waresdisplay(WaresDisplay* waresdisplay,
                                             Widelands::WareWorker type) {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	waresdisplay->remove_all_warelists();
+
 	for (const auto& economy : player_.player().economies()) {
 		if (economy.second->type() == type) {
 			for (const auto* warehouse : economy.second->warehouses()) {

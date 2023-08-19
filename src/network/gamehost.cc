@@ -266,6 +266,9 @@ struct Client {
 	/// relative
 	/// to when the last answer of the client was received.
 	time_t lastdelta;
+
+	std::set<std::string> custom_ship_names;
+	std::set<std::string> custom_warehouse_names;
 };
 
 struct GameHostImpl {
@@ -498,10 +501,45 @@ void GameHost::run_callback() {
 	SendPacket packet;
 	packet.unsigned_8(NETCMD_LAUNCH);
 	packet.unsigned_32(rng_seed);
+
 	packet.unsigned_32(game_->enabled_addons().size());
 	for (const auto& a : game_->enabled_addons()) {
 		packet.string(a->internal_name);
 	}
+
+	std::map<Widelands::PlayerNumber, std::pair<std::set<std::string>, std::set<std::string>>>
+	   custom_naming_lists;
+	if (!d->settings.savegame) {  // Naming lists don't make sense in savegames
+		int playernumber = d->settings.playernum + 1;
+		if (playernumber > 0) {
+			custom_naming_lists.emplace(playernumber, Widelands::read_custom_warehouse_ship_names());
+		}
+
+		for (Client& client : d->clients) {
+			playernumber = client.playernum + 1;
+			if (playernumber > 0) {
+				// Merge instead of overwrite - multiple clients can share a player
+				custom_naming_lists[playernumber].first.insert(
+				   client.custom_ship_names.begin(), client.custom_ship_names.end());
+				custom_naming_lists[playernumber].second.insert(
+				   client.custom_warehouse_names.begin(), client.custom_warehouse_names.end());
+			}
+		}
+
+		for (const auto& lists : custom_naming_lists) {
+			packet.unsigned_8(lists.first);
+			packet.unsigned_32(lists.second.first.size());
+			for (const std::string& name : lists.second.first) {
+				packet.string(name);
+			}
+			packet.unsigned_32(lists.second.second.size());
+			for (const std::string& name : lists.second.second) {
+				packet.string(name);
+			}
+		}
+	}
+	packet.unsigned_8(0);  // End of naming lists section
+
 	broadcast(packet);
 
 	game_->logic_rand_seed(rng_seed);
@@ -550,6 +588,13 @@ void GameHost::run_callback() {
 		} else {  // savegame
 			game_->init_savegame(d->settings);
 		}
+
+		for (const auto& lists : custom_naming_lists) {
+			Widelands::Player* player = game_->get_safe_player(lists.first);
+			player->set_shipnames(lists.second.first);
+			player->set_warehousenames(lists.second.second);
+		}
+
 		d->pseudo_networktime = game_->get_gametime();
 		d->time.reset(d->pseudo_networktime);
 		d->lastframe = SDL_GetTicks();
@@ -2264,7 +2309,7 @@ void GameHost::handle_nettime(uint32_t const client_num, RecvPacket& r) {
 	receive_client_time(client_num, Time(r.unsigned_32()));
 }
 
-void GameHost::handle_playercommmand(uint32_t const client_num, Client& client, RecvPacket& r) {
+void GameHost::handle_playercommand(uint32_t const client_num, Client& client, RecvPacket& r) {
 	if (d->game == nullptr) {
 		throw DisconnectException("PLAYERCMD_WO_GAME");
 	}
@@ -2277,6 +2322,17 @@ void GameHost::handle_playercommmand(uint32_t const client_num, Client& client, 
 		throw DisconnectException("PLAYERCMD_FOR_OTHER");
 	}
 	do_send_player_command(plcmd);
+}
+
+void GameHost::handle_custom_naming_lists(Client& client, RecvPacket& r) {
+	client.custom_ship_names.clear();
+	client.custom_warehouse_names.clear();
+	for (size_t i = r.unsigned_32(); i > 0; --i) {
+		client.custom_ship_names.insert(r.string());
+	}
+	for (size_t i = r.unsigned_32(); i > 0; --i) {
+		client.custom_warehouse_names.insert(r.string());
+	}
 }
 
 void GameHost::handle_syncreport(uint32_t const client_num, Client& client, RecvPacket& r) {
@@ -2372,7 +2428,9 @@ void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
 	case NETCMD_TIME:
 		return handle_nettime(client_num, r);
 	case NETCMD_PLAYERCOMMAND:
-		return handle_playercommmand(client_num, client, r);
+		return handle_playercommand(client_num, client, r);
+	case NETCMD_CUSTOM_NAMING_LISTS:
+		return handle_custom_naming_lists(client, r);
 	case NETCMD_SYNCREPORT:
 		return handle_syncreport(client_num, client, r);
 	case NETCMD_CHAT:

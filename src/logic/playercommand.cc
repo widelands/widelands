@@ -2055,8 +2055,8 @@ void PlayerMessageCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectL
 		if (packet_version == kCurrentPacketVersionPlayerMessageCommand) {
 			PlayerCommand::read(fr, egbase, mol);
 			message_id_ = MessageId(fr.unsigned_32());
-			if (!message_id_) {
-				throw GameDataError("(player %u): message id is null", sender());
+			if (!static_cast<bool>(message_id_)) {
+				verb_log_warn("PlayerMessageCommand (player %u): message ID is null", sender());
 			}
 		} else {
 			throw UnhandledVersionError(
