@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-08-17 02:21+0000\n"
+"POT-Creation-Date: 2023-08-19 02:11+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Foppe Benedictus <foppe.benedictus@gmail.com>, 2020,2022\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
@@ -473,7 +473,7 @@ msgstr "Toevoegen of verwijderen van havenlocaties"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:359
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:706
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:708
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:171
 msgid "Players"
 msgstr "Spelers"
@@ -2706,19 +2706,19 @@ msgstr "Een kaart bestand is ongeldig\n%s"
 msgid "This objective has no description."
 msgstr "Deze doelstelling heeft geen beschrijving."
 
-#: ../../src/logic/player.cc:1986
+#: ../../src/logic/player.cc:1995
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
 msgstr "Schip %d"
 
-#: ../../src/logic/player.cc:2003
+#: ../../src/logic/player.cc:2012
 #, c-format
 msgctxt "warehouse"
 msgid "Port %d"
 msgstr ""
 
-#: ../../src/logic/player.cc:2003
+#: ../../src/logic/player.cc:2012
 #, c-format
 msgctxt "warehouse"
 msgid "Warehouse %d"
@@ -2821,11 +2821,11 @@ msgid ""
 "You will find related messages in the standard output (stdout.txt on Windows). Please add this information to your report."
 msgstr ""
 
-#: ../../src/logic/replay_game_controller.cc:103
+#: ../../src/logic/replay_game_controller.cc:102
 msgid "End of Replay"
 msgstr "Einde van Herhaling"
 
-#: ../../src/logic/replay_game_controller.cc:104
+#: ../../src/logic/replay_game_controller.cc:103
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may"
 " unpause the game and continue watching if you want to."
@@ -6303,7 +6303,7 @@ msgstr "Geen Team"
 msgid "Team %d"
 msgstr "Team %d"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:696
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:698
 msgid "Clients"
 msgstr "Cliënten"
 
@@ -8970,11 +8970,11 @@ msgstr "Verwijder goederen"
 msgid "Add ware"
 msgstr "Voeg waren toe"
 
-#: ../../src/wui/inputqueuedisplay.cc:619
+#: ../../src/wui/inputqueuedisplay.cc:621
 msgid "Hide controls"
 msgstr "Verberg bediening"
 
-#: ../../src/wui/inputqueuedisplay.cc:619
+#: ../../src/wui/inputqueuedisplay.cc:621
 msgid "Show controls"
 msgstr "Toon bediening"
 
