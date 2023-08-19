@@ -823,7 +823,7 @@ bool Game::run_replay(const std::string& filename, const std::string& script_to_
 	set_ibase(new InteractiveSpectator(*this, get_config_section()));
 
 	set_write_replay(false);
-	new ReplayGameController(*this);
+	set_game_controller(std::make_shared<ReplayGameController>(*this));
 	save_handler().set_allow_saving(false);
 
 	return run(Widelands::Game::StartGameType::kSaveGame, script_to_run, "replay");

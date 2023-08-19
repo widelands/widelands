@@ -26,6 +26,7 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/random.h"
+#include "base/warning.h"
 #include "build_info.h"
 #include "editor/editorinteractive.h"
 #include "graphic/graphic.h"
@@ -233,8 +234,12 @@ void MainMenu::main_loop() {
 		try {
 			run<int>();
 			return;  // We only get here though normal termination by the user.
+		} catch (const WLWarning& e) {
+			// WLWarning is reserved for bad circumstances that are (most likely) not a bug.
+			show_messagebox(e.title(), e.what());
 		} catch (const std::exception& e) {
-			// This is the outermost wrapper within the GUI and should not normally be reachable.
+			// This is the outermost wrapper within the GUI and should only very rarely be reached.
+			// Most likely we got here through a bug in Widelands.
 			show_messagebox(
 			   _("Error!"),
 			   format(

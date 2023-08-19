@@ -21,6 +21,7 @@
 
 #include <atomic>
 #include <memory>
+#include <set>
 
 #include "base/macros.h"
 #include "economy/economy.h"
@@ -577,6 +578,9 @@ public:
 	void reserve_shipname(const std::string& name);
 	void reserve_warehousename(const std::string& name);
 
+	void set_shipnames(const std::set<std::string>& names);
+	void set_warehousenames(const std::set<std::string>& names);
+
 	[[nodiscard]] const std::vector<std::unique_ptr<DetectedPortSpace>>&
 	detected_port_spaces() const {
 		return detected_port_spaces_;
@@ -670,8 +674,8 @@ private:
 	std::vector<uint8_t> further_initializations_;   // used in shared kingdom mode
 	std::vector<uint8_t> further_shared_in_player_;  //  ''  ''   ''     ''     ''
 
-	std::list<std::string> remaining_shipnames_;
-	std::list<std::string> remaining_warehousenames_;
+	std::vector<std::string> remaining_shipnames_;
+	std::vector<std::string> remaining_warehousenames_;
 	std::vector<std::unique_ptr<DetectedPortSpace>> detected_port_spaces_;
 
 	PlayerBuildingStats building_stats_;
@@ -771,6 +775,8 @@ struct NotePlayerDetailsEvent {
 void find_former_buildings(const Descriptions& descriptions,
                            DescriptionIndex bi,
                            FormerBuildings* former_buildings);
+
+std::pair<std::set<std::string>, std::set<std::string>> read_custom_warehouse_ship_names();
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_PLAYER_H

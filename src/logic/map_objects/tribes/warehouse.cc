@@ -31,6 +31,7 @@
 #include "economy/ship_fleet.h"
 #include "economy/warehousesupply.h"
 #include "economy/wares_queue.h"
+#include "graphic/text_layout.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/findbob.h"
@@ -1496,7 +1497,7 @@ void Warehouse::request_soldier_callback(Game& game,
 }
 
 void Warehouse::update_statistics_string(std::string* str) {
-	*str = get_warehouse_name();
+	*str = richtext_escape(get_warehouse_name());
 }
 
 std::unique_ptr<const BuildingSettings> Warehouse::create_building_settings() const {
