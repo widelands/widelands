@@ -1872,7 +1872,7 @@ std::unique_ptr<FsMenu::MainMenu> WLApplication::check_crash_reports() {
 	}
 
 	log_info("Found %" PRIuS " unsent crash reports.\nPlease consider submitting them to the "
-	                         "Widelands Development Team under %s",
+	         "Widelands Development Team under %s",
 	         crashes.size(), FsMenu::CrashReportWindow::kReportBugsURL);
 	for (const std::string& filename : crashes) {
 		log_info("- %s", filename.c_str());
