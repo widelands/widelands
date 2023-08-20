@@ -1667,7 +1667,14 @@ void WLApplication::emergency_save(UI::Panel* panel,
 		}
 	}
 
+	bool added_loader = false;
 	try {
+		if (!game.has_loader_ui()) {
+			// Shouldn't have one yet, but in an emergency situation, don't make any assumptions.
+			game.create_loader_ui({"crash"}, true, game.map().get_background_theme(), game.map().get_background(), true);
+			added_loader = true;
+		}
+
 		if (replace_ctrl) {
 			game.set_game_controller(
 			   std::make_shared<SinglePlayerGameController>(game, true, playernumber));
@@ -1690,6 +1697,10 @@ void WLApplication::emergency_save(UI::Panel* panel,
 			   UI::WLMessageBox::MBoxType::kOk);
 			m.run<UI::Panel::Returncodes>();
 		}
+	}
+
+	if (added_loader) {
+		game.remove_loader_ui();
 	}
 }
 
