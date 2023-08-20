@@ -511,13 +511,13 @@ void GameHost::run_callback() {
 	   custom_naming_lists;
 	if (!d->settings.savegame) {  // Naming lists don't make sense in savegames
 		int playernumber = d->settings.playernum + 1;
-		if (playernumber > 0) {
+		if (playernumber > 0 && playernumber <= UserSettings::highest_playernum()) {
 			custom_naming_lists.emplace(playernumber, Widelands::read_custom_warehouse_ship_names());
 		}
 
 		for (Client& client : d->clients) {
 			playernumber = client.playernum + 1;
-			if (playernumber > 0) {
+			if (playernumber > 0 && playernumber <= UserSettings::highest_playernum()) {
 				// Merge instead of overwrite - multiple clients can share a player
 				custom_naming_lists[playernumber].first.insert(
 				   client.custom_ship_names.begin(), client.custom_ship_names.end());
