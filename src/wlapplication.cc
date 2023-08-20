@@ -1671,7 +1671,8 @@ void WLApplication::emergency_save(UI::Panel* panel,
 	try {
 		if (!game.has_loader_ui()) {
 			// Shouldn't have one yet, but in an emergency situation, don't make any assumptions.
-			game.create_loader_ui({"crash"}, true, game.map().get_background_theme(), game.map().get_background(), true);
+			game.create_loader_ui(
+			   {"crash"}, true, game.map().get_background_theme(), game.map().get_background(), true);
 			added_loader = true;
 		}
 
