@@ -106,7 +106,7 @@ CrashReportWindow::CrashReportWindow(FsMenu::MainMenu& menu, const FilenameSet& 
 	buttons_box->add(b_remind_me_later, UI::Box::Resizing::kExpandBoth);
 	buttons_box->add(b_close, UI::Box::Resizing::kExpandBoth);
 
-	b_open_link->sigclicked.connect([this]() {
+	b_open_link->sigclicked.connect([]() {
 #if CAN_OPEN_HYPERLINK
 		SDL_OpenURL(kReportBugsURL);
 #else
