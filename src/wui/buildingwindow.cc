@@ -143,8 +143,6 @@ void BuildingWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	} else {
 		hide_workarea(true);
 	}
-
-	throw wexception("NOCOM for testing");
 }
 
 // Stop everybody from thinking to avoid segfaults
