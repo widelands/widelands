@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-08-17 02:21+0000\n"
+"POT-Creation-Date: 2023-08-19 02:11+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: ks k, 2017-2021\n"
 "Language-Team: Korean (http://app.transifex.com/widelands/widelands/language/ko/)\n"
@@ -472,7 +472,7 @@ msgstr "항구 공간을 추가하거나 제거"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:359
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:706
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:708
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:171
 msgid "Players"
 msgstr "선수"
@@ -2696,19 +2696,19 @@ msgstr "지도 파일이 잘못되었습니다:\n%s"
 msgid "This objective has no description."
 msgstr "이 목표는 설명이 없습니다."
 
-#: ../../src/logic/player.cc:1986
+#: ../../src/logic/player.cc:1995
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
 msgstr "선박 %d"
 
-#: ../../src/logic/player.cc:2003
+#: ../../src/logic/player.cc:2012
 #, c-format
 msgctxt "warehouse"
 msgid "Port %d"
 msgstr ""
 
-#: ../../src/logic/player.cc:2003
+#: ../../src/logic/player.cc:2012
 #, c-format
 msgctxt "warehouse"
 msgid "Warehouse %d"
@@ -2811,11 +2811,11 @@ msgid ""
 "You will find related messages in the standard output (stdout.txt on Windows). Please add this information to your report."
 msgstr ""
 
-#: ../../src/logic/replay_game_controller.cc:103
+#: ../../src/logic/replay_game_controller.cc:102
 msgid "End of Replay"
 msgstr "다시 보기 끝"
 
-#: ../../src/logic/replay_game_controller.cc:104
+#: ../../src/logic/replay_game_controller.cc:103
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may"
 " unpause the game and continue watching if you want to."
@@ -6273,7 +6273,7 @@ msgstr "편 없음"
 msgid "Team %d"
 msgstr "편 %d"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:696
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:698
 msgid "Clients"
 msgstr "클라이언트"
 
@@ -8935,11 +8935,11 @@ msgstr "물품을 제거"
 msgid "Add ware"
 msgstr "물품을 추가"
 
-#: ../../src/wui/inputqueuedisplay.cc:619
+#: ../../src/wui/inputqueuedisplay.cc:621
 msgid "Hide controls"
 msgstr "제어를 숨김"
 
-#: ../../src/wui/inputqueuedisplay.cc:619
+#: ../../src/wui/inputqueuedisplay.cc:621
 msgid "Show controls"
 msgstr "제어를 표시"
 

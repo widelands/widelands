@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-08-17 02:21+0000\n"
+"POT-Creation-Date: 2023-08-19 02:11+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Georgi Georgiev (Жоро) <g.georgiev.shumen@gmail.com>, 2021\n"
 "Language-Team: Bulgarian (http://app.transifex.com/widelands/widelands/language/bg/)\n"
@@ -472,7 +472,7 @@ msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:359
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:706
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:708
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:171
 msgid "Players"
 msgstr "Играчи"
@@ -2705,19 +2705,19 @@ msgstr ""
 msgid "This objective has no description."
 msgstr "Тази задача няма описание."
 
-#: ../../src/logic/player.cc:1986
+#: ../../src/logic/player.cc:1995
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
 msgstr "Кораб %d"
 
-#: ../../src/logic/player.cc:2003
+#: ../../src/logic/player.cc:2012
 #, c-format
 msgctxt "warehouse"
 msgid "Port %d"
 msgstr ""
 
-#: ../../src/logic/player.cc:2003
+#: ../../src/logic/player.cc:2012
 #, c-format
 msgctxt "warehouse"
 msgid "Warehouse %d"
@@ -2820,11 +2820,11 @@ msgid ""
 "You will find related messages in the standard output (stdout.txt on Windows). Please add this information to your report."
 msgstr ""
 
-#: ../../src/logic/replay_game_controller.cc:103
+#: ../../src/logic/replay_game_controller.cc:102
 msgid "End of Replay"
 msgstr "Край на повторението"
 
-#: ../../src/logic/replay_game_controller.cc:104
+#: ../../src/logic/replay_game_controller.cc:103
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may"
 " unpause the game and continue watching if you want to."
@@ -6302,7 +6302,7 @@ msgstr "Няма отбор"
 msgid "Team %d"
 msgstr "Отбор %d"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:696
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:698
 msgid "Clients"
 msgstr "Клиенти"
 
@@ -8969,11 +8969,11 @@ msgstr ""
 msgid "Add ware"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:619
+#: ../../src/wui/inputqueuedisplay.cc:621
 msgid "Hide controls"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:619
+#: ../../src/wui/inputqueuedisplay.cc:621
 msgid "Show controls"
 msgstr ""
 
