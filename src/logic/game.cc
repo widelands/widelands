@@ -104,11 +104,11 @@ void Game::SyncWrapper::start_dump(const std::string& fname) {
 void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 #ifdef SYNC_DEBUG
 	const Time& time = game_.get_gametime();
-	log_dbg_time(game_.get_gametime(), "[sync:%08u t=%6u]", counter_, time.get());
-	for (size_t i = 0; i < size; ++i) {
-		log_dbg_time(game_.get_gametime(), " %02x", (static_cast<uint8_t const*>(sync_data))[i]);
+	std::string logtext = format("[sync:%08u t=%6u]", counter_, time.get());
+	for (size_t i = size; i > 0; --i) {
+		logtext += format(" %02x", (static_cast<uint8_t const*>(sync_data))[i - 1]);
 	}
-	log_dbg_time(game_.get_gametime(), "\n");
+	log_dbg_time(game_.get_gametime(), "%s", logtext.c_str());
 #endif
 
 	if (dump_ != nullptr && static_cast<int32_t>(counter_ - next_diskspacecheck_) >= 0) {
@@ -909,6 +909,7 @@ void Game::full_cleanup() {
 	next_game_to_load_.clear();
 	list_of_scenarios_.clear();
 	replay_filename_.clear();
+	forester_cache_.clear();
 	Economy::initialize_serial();
 	DetectedPortSpace::initialize_serial();
 
