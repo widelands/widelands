@@ -30,6 +30,7 @@
 
 #include <atomic>
 #include <map>
+#include <memory>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -40,6 +41,9 @@
 #include "base/vector.h"
 #include "wlapplication_messages.h"
 
+namespace FsMenu {
+class MainMenu;
+}  // namespace FsMenu
 namespace UI {
 class Panel;
 }  // namespace UI
@@ -220,6 +224,7 @@ private:
 	void cleanup_temp_files();
 	void cleanup_temp_backups(const std::string& dir);
 	void cleanup_temp_backups();
+	std::unique_ptr<FsMenu::MainMenu> check_crash_reports();
 
 	void init_and_run_game_from_template();
 

@@ -37,6 +37,7 @@
 #include "base/wexception.h"
 #include "build_info.h"
 #include "config.h"
+#include "logic/filesystem_constants.h"
 #include "wlapplication.h"
 #include "wlapplication_messages.h"
 
@@ -69,7 +70,7 @@ static void segfault_handler(const int sig) {
 		filename += "/";
 		filename += timestr;
 	}
-	filename += ".txt";
+	filename += kCrashExtension;
 	FILE* file = fopen(filename.c_str(), "w+");
 	if (file == nullptr) {
 		std::cout

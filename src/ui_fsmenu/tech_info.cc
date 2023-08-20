@@ -139,13 +139,13 @@ TechInfoBox::TechInfoBox(UI::Panel* parent, TechInfoBox::Type t)
 		add_space(space);
 	}
 
-	std::string report;
+	report_.clear();
 	for (const ContentT& c : content) {
-		report += "> ";
-		report += c.label;
-		report += ' ';
-		report += c.value;
-		report += "  \n";
+		report_ += "> ";
+		report_ += c.label;
+		report_ += ' ';
+		report_ += c.value;
+		report_ += "  \n";
 
 		add_space(kSpacing);
 		add(new TechInfoLine(this, c.localized_label,
@@ -158,7 +158,7 @@ TechInfoBox::TechInfoBox(UI::Panel* parent, TechInfoBox::Type t)
 	UI::Button* copy =
 	   new UI::Button(buttonbox, "copy", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Copy"),
 	                  _("Copy the technical report to the clipboard"));
-	copy->sigclicked.connect([report]() { SDL_SetClipboardText(report.c_str()); });
+	copy->sigclicked.connect([this]() { SDL_SetClipboardText(report_.c_str()); });
 
 	buttonbox->add_inf_space();
 	buttonbox->add(copy, UI::Box::Resizing::kExpandBoth);
