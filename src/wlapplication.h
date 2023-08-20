@@ -132,6 +132,7 @@ struct InputCallback {
 // TODO(sirver): this class makes no sense for c++ - most of these should be
 // stand alone functions.
 struct WLApplication {
+
 	static WLApplication& get(int argc = 0, char const** argv = nullptr);
 	~WLApplication();
 
@@ -195,6 +196,8 @@ struct WLApplication {
 	                           uint8_t player = 1,
 	                           bool replace_ctrl = true,
 	                           bool ask_for_bug_report = true);
+
+	static std::string segfault_backtrace_dir;
 
 private:
 	WLApplication(int argc, char const* const* argv);

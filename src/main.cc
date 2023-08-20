@@ -33,6 +33,7 @@
 #include <execinfo.h>
 #endif
 
+#include "base/time_string.h"
 #include "base/wexception.h"
 #include "build_info.h"
 #include "config.h"
@@ -55,8 +56,41 @@ static void segfault_handler(const int sig) {
 	   << std::endl
 	   << "Please report this problem to help us improve Widelands, and provide the complete output."
 	   << std::endl
-	   << "##############################" << std::endl
+	   << "##############################"
 	   << std::endl;
+
+	const std::string timestr = timestring();
+	std::string filename;
+	if (WLApplication::segfault_backtrace_dir.empty()) {
+		filename = "./widelands_crash_report_";
+		filename += timestr;
+	} else {
+		filename = WLApplication::segfault_backtrace_dir;
+		filename += "/";
+		filename += timestr;
+	}
+	filename += ".txt";
+	FILE* file = fopen(filename.c_str(), "w+");
+	if (file == nullptr) {
+		std::cout
+		   << "The crash report could not be saved to a file."
+		   << std::endl << std::endl;
+	} else {
+		fprintf /* NOLINT codecheck */ (
+				file, "Crash report for Widelands %s at %s, signal %d (%s)\n\n**** BEGIN BACKTRACE ****\n",
+				build_ver_details().c_str(), timestr.c_str(), sig, strsignal(sig));
+		fflush(file);
+		backtrace_symbols_fd(array, size, fileno(file));
+		fflush(file);
+		fputs("**** END BACKTRACE ****\n", file);
+
+		fclose(file);
+		std::cout
+		   << "The crash report was also saved to " << filename
+		   << std::endl << std::endl;
+	}
+
+
 	::exit(sig);
 }
 #endif

@@ -248,6 +248,8 @@ private:
 
 }  // namespace
 
+std::string WLApplication::segfault_backtrace_dir;
+
 // Set up the homedir. Exit 1 if the homedir is illegal or the logger couldn't be initialized for
 // Windows.
 // Also sets the config directory. This defaults to $XDG_CONFIG_HOME/widelands/config on Unix.
@@ -304,6 +306,10 @@ void WLApplication::setup_homedir() {
 		g_fs->ensure_directory_exists("replays");
 		g_fs->ensure_directory_exists(kMapsDir + "/" + kMyMapsDir);
 		g_fs->ensure_directory_exists(kMapsDir + "/" + kDownloadedMapsDir);
+
+		g_fs->ensure_directory_exists("crash");
+		segfault_backtrace_dir = homedir_;
+		segfault_backtrace_dir += "/crash";
 	}
 
 #ifdef USE_XDG
