@@ -1042,9 +1042,10 @@ void Map::find_reachable(const EditorGameBase& egbase,
                          const Area<FCoords>& area,
                          const CheckStep& checkstep,
                          functorT& functor) const {
-	std::vector<Coords> queue;
+	MutexLock m(MutexLock::ID::kPathfinding);
 	std::shared_ptr<Pathfields> pathfields = pathfieldmgr_->allocate();
 
+	std::vector<Coords> queue;
 	queue.push_back(area);
 
 	while (!queue.empty()) {
@@ -2210,6 +2211,7 @@ int32_t Map::findpath(Coords instart,
 	}
 
 	// Actual pathfinding
+	MutexLock m(MutexLock::ID::kPathfinding);
 	std::shared_ptr<Pathfields> pathfields = pathfieldmgr_->allocate();
 	Pathfield::Queue Open(type);
 	Pathfield* curpf = &pathfields->fields[start.field - fields_.get()];
