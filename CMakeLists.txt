@@ -447,7 +447,7 @@ if(OPTION_BUILD_WINSTATIC)
 endif(OPTION_BUILD_WINSTATIC)
 
 if(NOT OPTION_ASAN)
-  # Allow self-diagnosis for crashes if the systems supports it (uses a GNU extension)
+  # Allow self-diagnosis for crashes if the system supports it (uses a GNU extension)
   find_path(has_execinfo "execinfo.h")
   if(has_execinfo)
     message(STATUS "Adding crash self-diagnosis handler.")
