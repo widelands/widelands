@@ -39,7 +39,7 @@ wl.Descriptions():new_productionsite_type {
          actions = {
             -- time of worker: 4.6 sec
             -- radius: 8
-            -- steps from building to tree: 2...11
+            -- steps from building to water: 2...11
             -- min. time total: 2 * 2 * 1.8 + 4.6 + 20 = 31.8 sec
             -- max. time total: 2 * 11 * 1.8 + 4.6 + 20 = 64.2 sec
             "sleep=duration:20s",
