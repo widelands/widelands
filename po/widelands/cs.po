@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-08-19 02:11+0000\n"
+"POT-Creation-Date: 2023-08-21 02:40+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Václav Černý <vaclav.vatoz.cerny@gmail.com>, 2022\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
@@ -2073,11 +2073,11 @@ msgstr "Widelands nemůže zahájit hru, protože hráč %u nemá určenou vých
 msgid "Initializing…"
 msgstr "Příprava..."
 
-#: ../../src/logic/game.cc:1249
+#: ../../src/logic/game.cc:1250
 msgid "Trade Offer"
 msgstr "Obchodní nabídka"
 
-#: ../../src/logic/game.cc:1251
+#: ../../src/logic/game.cc:1252
 msgid "This market has received a new trade offer."
 msgstr "Tento trh obdržel novou obchodní nabídku."
 
