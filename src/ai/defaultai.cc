@@ -1917,8 +1917,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	if (flags_count > 0) {
 		field.average_flag_dist_to_wh /= flags_count;
 	}
-	verb_log_dbg_time(gametime, "[AI %u] flags count: %2d, avg: %3d\n", player_number(),
-	                  flags_count, field.average_flag_dist_to_wh);
+	verb_log_dbg_time(gametime, "[AI %u] flags count: %2d, avg: %3d\n", player_number(), flags_count,
+	                  field.average_flag_dist_to_wh);
 
 	Widelands::HollowArea<> har(
 	   Widelands::Area<>(field.coords, actual_enemy_check_area), kProductionArea + 2);
