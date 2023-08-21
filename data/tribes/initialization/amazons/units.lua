@@ -1524,14 +1524,16 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Stone Mine
             purpose = pgettext("amazons_building", "Digs granite out of the ground in mountain terrain."),
             -- TRANSLATORS: Performance helptext for an Amazon production site: Stone Mine
-            performance = pgettext("amazons_building", "The stone mine can produce one slab of granite in %s on average if the supply with rations is steady and the mine is not worn out."):bformat(format_seconds(32))
+            performance = pgettext("amazons_building", "The stone mine can produce one slab of granite in %s on average if the supply with rations is steady and the mine is not worn out."):bformat(format_seconds(35))
          }
       },
       {
          name = "amazons_gold_digger_dwelling",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Gold Digger Dwelling
-            purpose = pgettext("amazons_building", "Washes gold dust out of the ground in mountain terrain.")
+            purpose = pgettext("amazons_building", "Washes gold dust out of the ground in mountain terrain."),
+            -- TRANSLATORS: Performance helptext for an Amazon production site: Gold Digger Dwelling
+            performance = pgettext("amazons_building", "If the supply is steady, this mine can produce gold dust in %s on average."):bformat(format_minutes_seconds(1, 9))
          }
       },
 

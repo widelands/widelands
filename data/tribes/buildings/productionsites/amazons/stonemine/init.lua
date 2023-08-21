@@ -49,10 +49,11 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
          descname = _("mining granite"),
          actions = {
+            -- time total: 5 + 37.8 + 2 * (10 + 3.6) = 70 sec
             "sleep=duration:5s",
             "return=skipped unless economy needs granite",
             "consume=ration",
-            "sleep=duration:38s",
+            "sleep=duration:37s800ms",
             "call=mine_produce",
             "call=mine_produce",
          }

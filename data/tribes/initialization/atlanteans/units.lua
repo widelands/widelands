@@ -1857,7 +1857,9 @@ wl.Descriptions():new_tribe {
                                           [[I sweat and toil till day is done,<br>]] ..
                                           [[but I’ll be back with morning come.’]]),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site:  Coal Mine
-            lore_author = pgettext("atlanteans_building", "Song from the miners’ guild")
+            lore_author = pgettext("atlanteans_building", "Song from the miners’ guild"),
+            -- TRANSLATORS: Performance helptext for an Atlantean production site: Coal Mine
+            performance = pgettext("atlanteans_building", "If the food supply is steady, this mine can produce coal in %s on average."):bformat(format_seconds(19))
          }
       },
       {
@@ -1871,7 +1873,9 @@ wl.Descriptions():new_tribe {
                                           [[I sweat and toil till day is done,<br>]] ..
                                           [[but I’ll be back with morning come.’]]),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site:  Iron Mine
-            lore_author = pgettext("atlanteans_building", "Song from the miners’ guild")
+            lore_author = pgettext("atlanteans_building", "Song from the miners’ guild"),
+            -- TRANSLATORS: Performance helptext for an Atlantean production site: Iron Mine
+            performance = pgettext("atlanteans_building", "If the food supply is steady, this mine can produce iron ore in %s on average."):bformat(format_seconds(25))
          }
       },
       {
@@ -1885,8 +1889,9 @@ wl.Descriptions():new_tribe {
                                           [[I dig in the dust until I see the spark;<br>]] ..
                                           [[The golden ore I find in the dark.’]]),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Gold Mine
-            lore_author = pgettext("atlanteans_building", "Miner’s prayer")
-
+            lore_author = pgettext("atlanteans_building", "Miner’s prayer"),
+            -- TRANSLATORS: Performance helptext for an Atlantean production site: Gold Mine
+            performance = pgettext("atlanteans_building", "If the food supply is steady, this mine can produce gold ore in %s on average."):bformat(format_seconds(39))
          }
       },
 
