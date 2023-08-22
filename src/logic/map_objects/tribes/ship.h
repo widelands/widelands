@@ -372,7 +372,7 @@ private:
 	                  const std::string& heading,
 	                  const std::string& description,
 	                  const std::string& picture);
-	void remember_detected_portspace(const Coords& coords);
+	bool remember_detected_portspace(const Coords& coords);
 	[[nodiscard]] bool suited_as_invasion_portspace(const Coords& coords) const;
 
 	ShipFleet* fleet_{nullptr};

@@ -313,7 +313,7 @@ void Ship::recalc_expedition_swimmable(const EditorGameBase& egbase) {
 
 bool Ship::suited_as_invasion_portspace(const Coords& coords) const {
 	// We can invade any port space, regardless of owner and immovables.
-	// But we ignore port spaces where we already have an own port.
+	// But we ignore port spaces where we already have an own port nearby.
 
 	const EditorGameBase& egbase = owner().egbase();
 	const Map& map = egbase.map();
@@ -321,10 +321,18 @@ bool Ship::suited_as_invasion_portspace(const Coords& coords) const {
 		return false;
 	}
 
-	const Field& field = map[coords];
-	return (field.get_immovable() == nullptr || field.get_immovable()->get_owner() != get_owner() ||
-	        egbase.descriptions().building_index(field.get_immovable()->descr().name()) !=
-	           owner().tribe().port());
+	constexpr int kPortSpaceGeneralAreaRadius = 5;
+	MapRegion<Area<Coords>> mr(map, Area<Coords>(coords, kPortSpaceGeneralAreaRadius));
+	do {
+		const Field& field = map[mr.location()];
+		if (field.get_immovable() != nullptr && field.get_immovable()->get_owner() == get_owner() &&
+				egbase.descriptions().building_index(field.get_immovable()->descr().name()) ==
+				owner().tribe().port()) {
+			return false;
+		}
+	} while (mr.advance(map));
+
+	return true;
 }
 
 /**
@@ -656,11 +664,12 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 		do {
 			if (suited_as_invasion_portspace(mr.location()) &&
 			    std::find(portspaces.begin(), portspaces.end(), mr.location()) == portspaces.end()) {
-				found_new_target = true;
 				portspaces.push_back(mr.location());
-				remember_detected_portspace(mr.location());
-				send_message(game, _("Port Space"), _("Port Space Found"),
-				             _("A warship found a new port build space."), descr().icon_filename());
+				if (remember_detected_portspace(mr.location())) {
+					found_new_target = true;
+					send_message(game, _("Port Space"), _("Port Space Found"),
+						         _("A warship found a new port build space."), descr().icon_filename());
+				}
 			}
 		} while (mr.advance(*map));
 
@@ -850,14 +859,14 @@ void Ship::update_warship_soldier_request(bool create) {
 	}
 }
 
-void Ship::remember_detected_portspace(const Coords& coords) {
+bool Ship::remember_detected_portspace(const Coords& coords) {
 	const EditorGameBase& egbase = owner().egbase();
 	const Map& map = egbase.map();
 	PlayerNumber space_owner = map[coords].get_owned_by();
 
 	if (DetectedPortSpace* dps = get_owner()->has_detected_port_space(coords); dps != nullptr) {
 		dps->owner = space_owner;
-		return;
+		return false;
 	}
 
 	std::unique_ptr<DetectedPortSpace> dps(new DetectedPortSpace());
@@ -894,6 +903,7 @@ void Ship::remember_detected_portspace(const Coords& coords) {
 	}
 
 	get_owner()->detect_port_space(std::move(dps));
+	return true;
 }
 
 // static
