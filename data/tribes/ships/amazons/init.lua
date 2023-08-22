@@ -29,9 +29,9 @@ wl.Descriptions():new_ship_type {
       sinking = {
          hotspot = {73, 49},
          fps = 7,
-         frames = 21,
-         columns = 3,
-         rows = 7
+         frames = 22,
+         columns = 6,
+         rows = 4
       },
       sail = {
          directional = true,

@@ -11,7 +11,7 @@
 # Bouchard Renaud <renaud.bouchard@gmail.com>, 2014
 # C138, 2020,2022
 # Christophe Quintard <christophe.quintard@gmail.com>, 2019
-# David D, 2017-2018,2021-2022
+# David D, 2017-2018,2021-2023
 # GunChleoc, 2016,2018
 # Samuël Weber/GwendalD <samuel.weber@normalesup.org>, 2017
 # finki boy, 2015
@@ -28,9 +28,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-08-19 02:11+0000\n"
+"POT-Creation-Date: 2023-08-21 02:40+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Renaud Bouchard, 2015-2023\n"
+"Last-Translator: David D, 2017-2018,2021-2023\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -72,13 +72,13 @@ msgstr "Il n'y a pas de roches près de votre position de départ. Pour cette ra
 
 #: ../../data/scripting/infrastructure.lua:291
 msgid "Not enough trees nearby"
-msgstr ""
+msgstr "Pas assez d'arbres aux alentours"
 
 #: ../../data/scripting/infrastructure.lua:291
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "Il n'y a pas assez d'arbres près de votre position de départ. Pour cette raison, vous recevrez des ressources bonus afin de démarrer votre économie."
 
 #: ../../data/scripting/messages.lua:66 ../../data/scripting/messages.lua:68
 #: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:117
@@ -706,7 +706,7 @@ msgstr "Chargement du monde..."
 #: ../../src/editor/editorinteractive.cc:1403
 #, c-format
 msgid "Tool gaps: %u%%"
-msgstr ""
+msgstr "Espaces outil : %u%%"
 
 #: ../../src/editor/editorinteractive.cc:1426
 msgid "Publish Map"
@@ -1712,19 +1712,19 @@ msgstr "Taille de l'outil"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:51
 msgid "Size:"
-msgstr ""
+msgstr "Taille :"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:64
 msgid "Gaps:"
-msgstr ""
+msgstr "Espaces :"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:67
 msgid "Radius of the active tool"
-msgstr ""
+msgstr "Rayon de l'outil actif"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:68
 msgid "Amount of random gaps in the tool’s area"
-msgstr ""
+msgstr "Quantité d'espaces aléatoires dans la zone de l'outil"
 
 #: ../../src/game_io/game_loader.cc:69
 #, c-format
@@ -2079,11 +2079,11 @@ msgstr "Widelands n'a pas pu démarrer la partie car le joueur %u n'a pas de pos
 msgid "Initializing…"
 msgstr "Initialisation..."
 
-#: ../../src/logic/game.cc:1249
+#: ../../src/logic/game.cc:1250
 msgid "Trade Offer"
 msgstr "Offre commerciale"
 
-#: ../../src/logic/game.cc:1251
+#: ../../src/logic/game.cc:1252
 msgid "This market has received a new trade offer."
 msgstr "Ce marché a reçu une nouvelle offre commerciale."
 
@@ -2409,13 +2409,13 @@ msgstr "Pas de rivage"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:1244
 msgid "Shipyard Without Shore"
-msgstr ""
+msgstr "Chantier naval sans rivage"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:1245
 msgid ""
 "Your shipyard has not been built close enough to a shore. It will not be "
 "able to build ships."
-msgstr ""
+msgstr "Votre chantier naval n'a pas été construit assez près d'une rive. Il ne sera pas capable de construire de vaisseaux."
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:1265
 msgid "Ferry Yard Without Shore"
@@ -2859,7 +2859,7 @@ msgstr "Sauvegarde du jeu..."
 
 #: ../../src/logic/save_handler.cc:152
 msgid "Saving skipped"
-msgstr ""
+msgstr "Sauvegarde évitée"
 
 #: ../../src/logic/save_handler.cc:170
 #: ../../src/wui/game_main_menu_save_game.cc:338
@@ -4584,7 +4584,7 @@ msgstr "Exigence de version non valide"
 msgid ""
 "The minimum Widelands version ‘%1$s’ may not be newer than the maximum "
 "Widelands version ‘%2$s’. The add-on ‘%3$s’ will not be saved."
-msgstr ""
+msgstr "La version minimale de Widelands \"%1$s\" ne peut pas être plus récente que la version maximale de Widelands \"%2$s\". L'Add-On \"%3$s\" ne sera pas enregistré."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:598
 msgid "Invalid Version"
@@ -4606,7 +4606,7 @@ msgid ""
 "The add-on ‘%1$s’ does not specify a minimum Widelands version. None of the "
 "contained maps can be loaded with a Widelands version older than %2$s. The "
 "minimum version requirement will automatically be set accordingly."
-msgstr ""
+msgstr "L'add-on \"%1$s\" ne spécifie pas de version minimale de Widelands. Aucune des cartes contenues ne peut être chargée avec une version Widelands antérieure à \"%2$s\". La version minimale requise sera automatiquement définie en conséquence."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:619
 #, c-format
@@ -4614,7 +4614,7 @@ msgid ""
 "The add-on ‘%1$s’ specifies a minimum Widelands version of %2$s. However, "
 "none of the contained maps can be loaded with a Widelands version older than"
 " %3$s. The version requirement will automatically be changed accordingly."
-msgstr ""
+msgstr "L'Add-On \"%1$s\" spécifie la version Widelands minimale \"%2$s\" . Cependant, aucune des cartes contenues ne peut être chargée avec une version Widelands antérieure à \"%3$s\". La version requise sera automatiquement modifiée en conséquence."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:641
 msgid "Error Writing Addon"
@@ -6153,7 +6153,7 @@ msgstr "Réglé pour un Touchpad"
 msgid ""
 "Sets ‘Zoom Map’ and ‘Scroll Map’ to the recommended settings for a touchpad "
 "or other pointing device that can scroll horizontally as well as vertically."
-msgstr ""
+msgstr "Définit \"Zoom Map\" et \"Scroll Map\" sur les paramètres recommandés pour un pavé tactile ou un autre dispositif de pointage capable de faire défiler horizontalement et verticalement."
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:392
 msgid "Apply Scrolling"
@@ -6196,7 +6196,7 @@ msgstr "Changer la taille de l'outil de l'éditeur"
 #. The ':' will be added by another format string.
 #: ../../src/ui_fsmenu/mousewheel_options.cc:457
 msgid "Change Editor Tool Gap"
-msgstr ""
+msgstr "Modifier l'espace de l'outil de l'éditeur"
 
 #. * TRANSLATORS: Used as e.g. "Invert scroll direction for map zooming:
 #. Vertical"
@@ -6225,7 +6225,7 @@ msgid ""
 "An SDL bug in some configurations causes horizontal scroll to be inverted. "
 "We try to detect them, but if we got it wrong, you can fix it here. Please "
 "report if you need to turn this on, so that we can improve the detection."
-msgstr ""
+msgstr "Un bogue SDL dans certaines configurations provoque l'inversion du défilement horizontal. Nous essayons de les détecter, mais si nous nous trompons, vous pouvez le corriger ici. Veuillez signaler si vous avez besoin de l'activer, afin que nous puissions améliorer la détection."
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:502
 msgid "Send feedback"
@@ -6240,7 +6240,7 @@ msgstr "Les réglages de défilement sont en conflit"
 msgid ""
 "‘%1$s’, ‘%2$s’, or ‘%3$s’ conflicts with the recommended settings. Change "
 "the conflicting setting(s) too?"
-msgstr ""
+msgstr "\"%1$s\", \"%2$s\" ou \"%3$s\" sont en conflit avec les paramètres recommandés. Modifier aussi le(s) paramètre(s) en conflit ?"
 
 #: ../../src/ui_fsmenu/mousewheel_report.cc:50
 msgid "Send Feedback for Inverted Horizontal Scrolling"
@@ -6253,7 +6253,7 @@ msgid ""
 "Please help us improve the detection of inverted horizontal scrolling. To do"
 " so, please report at %s that horizontal scroll direction is wrong with your"
 " configuration. Please include the below technical information."
-msgstr ""
+msgstr "Aidez-nous à améliorer la détection du défilement horizontal inversé. Pour ce faire, veuillez signaler à %s que le sens de défilement horizontal ne correspond pas à votre configuration. Veuillez inclure les informations techniques ci-dessous."
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:64
 msgid "Role"
@@ -6267,7 +6267,7 @@ msgstr "Nom de joueur divergent"
 msgid ""
 "The player name of the selected slot (%1%) does not match your own (%2%). "
 "Are you sure that you want to occupy this slot?"
-msgstr ""
+msgstr "Le nom du joueur du slot sélectionné (%1%) ne correspond pas au vôtre (%2%). Êtes-vous sûr(e) de vouloir occuper ce créneau ?"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:146
 msgid "Spectator"
@@ -6451,7 +6451,7 @@ msgstr "Supprimer les replays après :"
 
 #: ../../src/ui_fsmenu/options.cc:263
 msgid "Skip autosaves while inactive"
-msgstr ""
+msgstr "Ignorer enregistrements automatiques quand inactif"
 
 #: ../../src/ui_fsmenu/options.cc:270
 msgid "Compress Widelands data files (maps, replays, and savegames)"
@@ -6486,7 +6486,7 @@ msgstr "Afficher les chevauchements de l'aire de travail"
 
 #: ../../src/ui_fsmenu/options.cc:307
 msgid "Pause game when inactive for:"
-msgstr ""
+msgstr "Mettre jeu en pause quand inactif depuis :"
 
 #: ../../src/ui_fsmenu/options.cc:317
 msgid "Start building road after placing a flag"
@@ -6604,7 +6604,7 @@ msgid ""
 "usually – but not always – well playable. Seafaring and artifacts are not "
 "supported. Add-ons of the Tribes and Script categories are disabled in "
 "random matches."
-msgstr ""
+msgstr "Le générateur de cartes aléatoires est encore en phase bêta. Les cartes qu'il génère sont généralement – mais pas toujours – bien jouables. La navigation et les artefacts ne sont pas pris en charge. Les modules complémentaires des catégories  Tribus, et Script sont désactivés dans les correspondances aléatoires."
 
 #: ../../src/ui_fsmenu/random_game.cc:127
 msgid "Map Generation Error"
@@ -7272,7 +7272,7 @@ msgstr "Définir taille de l'outil à %d"
 #: ../../src/wlapplication_options.cc:577
 #, c-format
 msgid "Set Tool Gap to %d%%"
-msgstr ""
+msgstr "Définir espace outil à %d%%"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wlapplication_options.cc:595
@@ -7550,7 +7550,7 @@ msgstr "Change la taille de l'outil"
 
 #: ../../src/wlapplication_options.cc:1038
 msgid "Change tool gap"
-msgstr ""
+msgstr "Changer espace outil"
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../src/wlapplication_options.cc:1043
@@ -10099,7 +10099,7 @@ msgid ""
 "‘<Widelands Home Directory>/music/custom_XX.*’ (where ‘XX’ are sequential "
 "two-digit numbers starting with 00). Supported file formats are ‘.mp3’ and "
 "‘.ogg’."
-msgstr ""
+msgstr "Vous pouvez écouter vos musiques personnelles durant le jeu en plaçant vos fichiers musique dans \"<Widelands Home Directory>/music/custom_XX.*\" (où \"XX\" est une suite de chiffres commençant par 00). Les formats de fichiers supportés sont \".mp3\" and \".ogg\"."
 
 #: ../../src/wui/sound_options.cc:160
 msgctxt "sound_options"

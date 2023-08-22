@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2023 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# David D, 2023
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2022-07-28 07:48+0000\n"
+"Last-Translator: David D, 2023\n"
 "Language-Team: French (https://app.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,11 +30,14 @@ msgid ""
 "this scenario, but you will be at a disadvantage. I recommend that you "
 "complete the previous scenario first and then restart this mission."
 msgstr ""
+"Vous semblez ne pas avoir terminé la mission précédente. Vous pouvez "
+"toujours jouer ce scénario, mais vous serez désavantagé. Je vous recommande "
+"de terminer d'abord le scénario précédent, puis de redémarrer cette mission."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:31
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:33
 msgid "Find Reebaud"
-msgstr ""
+msgstr "Trouver Reebaud"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:34
 msgid "Expand your territory until you meet your old friend Reebaud."
@@ -38,19 +45,19 @@ msgstr ""
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:39
 msgid "Defeat the strangers"
-msgstr ""
+msgstr "Vaincre les étrangers"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:41
 msgid "Defeat the Strangers"
-msgstr ""
+msgstr "Vaincre les Étrangers"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:42
 msgid "Defeat the hostile tribe."
-msgstr ""
+msgstr "Battez la tribu ennemie."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:47
 msgid "Defeat the Empire"
-msgstr ""
+msgstr "Vaincre l'Empire"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:49
 msgid "Defeat the Imperial Legate"
@@ -82,7 +89,7 @@ msgstr ""
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:77
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:83
 msgid "Welcome Back!"
-msgstr ""
+msgstr "Bienvenue à nouveau !"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:69
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:78
@@ -141,7 +148,7 @@ msgstr ""
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:92
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:98
 msgid "Who are they?"
-msgstr ""
+msgstr "Qui sont-ils ?"
 
 #. TRANSLATORS: Henneke Lembeck – Amazons 1a
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:94
