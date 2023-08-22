@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-08-17 02:21+0000\n"
+"POT-Creation-Date: 2023-08-19 02:11+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: D M <kamera001dm@gmail.com>, 2021,2023\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
@@ -472,7 +472,7 @@ msgstr "Lägg till eller ta bort hamnplatser"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:359
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:706
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:708
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:171
 msgid "Players"
 msgstr "Spelare"
@@ -2705,19 +2705,19 @@ msgstr "En kartfil är ogiltig:\n%s"
 msgid "This objective has no description."
 msgstr "Detta objektiv har ingen beskrivning"
 
-#: ../../src/logic/player.cc:1986
+#: ../../src/logic/player.cc:1995
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
 msgstr "Skepp %d"
 
-#: ../../src/logic/player.cc:2003
+#: ../../src/logic/player.cc:2012
 #, c-format
 msgctxt "warehouse"
 msgid "Port %d"
 msgstr "Hamn %d"
 
-#: ../../src/logic/player.cc:2003
+#: ../../src/logic/player.cc:2012
 #, c-format
 msgctxt "warehouse"
 msgid "Warehouse %d"
@@ -2820,11 +2820,11 @@ msgid ""
 "You will find related messages in the standard output (stdout.txt on Windows). Please add this information to your report."
 msgstr "Fel i reprisens synkronisering så spelet pausades.\nDu tittar troligtvis på en repris som har skapats med en annan version av Widelands, vilket inte stöds.\n\nOm du är säker på att reprisen skapades med samma version av Widelands, %1$s, var vänlig och rapportera problemet som en bugg.\nDu kan hitta relaterade meddelanden i standard output (stdout.txt på Windows). Var vänlig och bifoga denna information till din rapport."
 
-#: ../../src/logic/replay_game_controller.cc:103
+#: ../../src/logic/replay_game_controller.cc:102
 msgid "End of Replay"
 msgstr "Slut på reprisen"
 
-#: ../../src/logic/replay_game_controller.cc:104
+#: ../../src/logic/replay_game_controller.cc:103
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may"
 " unpause the game and continue watching if you want to."
@@ -6302,7 +6302,7 @@ msgstr "Inget lag"
 msgid "Team %d"
 msgstr "Lag %d"
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:696
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:698
 msgid "Clients"
 msgstr "Klienter"
 
@@ -8969,11 +8969,11 @@ msgstr "Tag bort vara"
 msgid "Add ware"
 msgstr "Lägg till vara"
 
-#: ../../src/wui/inputqueuedisplay.cc:619
+#: ../../src/wui/inputqueuedisplay.cc:621
 msgid "Hide controls"
 msgstr "Dölj kontrollpanel"
 
-#: ../../src/wui/inputqueuedisplay.cc:619
+#: ../../src/wui/inputqueuedisplay.cc:621
 msgid "Show controls"
 msgstr "Visa kontrollpanel"
 
