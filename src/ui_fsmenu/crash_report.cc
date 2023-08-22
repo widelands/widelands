@@ -33,7 +33,14 @@ constexpr int kButtonSize = 120;
 class CrashReportDetails : public UI::Window {
 public:
 	CrashReportDetails(FsMenu::MainMenu& menu, const std::string& report)
-	: UI::Window(&menu, UI::WindowStyle::kFsMenu, "crash_details", 0, 0, 0, 0, _("Crash Report Details")) {
+	   : UI::Window(&menu,
+	                UI::WindowStyle::kFsMenu,
+	                "crash_details",
+	                0,
+	                0,
+	                0,
+	                0,
+	                _("Crash Report Details")) {
 		UI::Box* box = new UI::Box(
 		   this, UI::PanelStyle::kFsMenu, "main_box", 0, 0, UI::Box::Vertical, 0, 0, kPadding);
 
@@ -48,9 +55,9 @@ public:
 		UI::Box* buttons_box = new UI::Box(
 		   box, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Horizontal, 0, 0, kPadding);
 
-		UI::Button* b_copy =
-		   new UI::Button(buttons_box, "copy", 0, 0, kButtonSize, 0, UI::ButtonStyle::kFsMenuSecondary,
-			              _("Copy report"), _("Copy the full report to the clipboard"));
+		UI::Button* b_copy = new UI::Button(buttons_box, "copy", 0, 0, kButtonSize, 0,
+		                                    UI::ButtonStyle::kFsMenuSecondary, _("Copy report"),
+		                                    _("Copy the full report to the clipboard"));
 		UI::Button* b_close = new UI::Button(
 		   buttons_box, "close", 0, 0, kButtonSize, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close"));
 
