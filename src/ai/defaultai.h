@@ -348,6 +348,7 @@ private:
 	std::deque<ProductionSiteObserver> mines_;
 	std::deque<MilitarySiteObserver> militarysites;
 	std::deque<WarehouseSiteObserver> warehousesites;
+	std::deque<PortSiteObserver> portsites;
 	std::deque<TrainingSiteObserver> trainingsites;
 	std::vector<WareObserver> wares;
 	// This is a vector that is filled up on initiatlization

@@ -6754,6 +6754,11 @@ void DefaultAI::gain_building(Widelands::Building& b, const bool found_on_load) 
 			warehousesites.back().bo = &bo;
 			if (bo.is(BuildingAttribute::kPort)) {
 				++num_ports;
+				portsites.emplace_back();
+				portsites.back().site = &dynamic_cast<Widelands::Warehouse&>(b);
+				portsites.back().bo = &bo;
+				portsites.back().ships_assigned = 0;
+				portsites.back().guard_ship_needed = false;
 			}
 			if (!found_on_load) {
 				// recalculate distance ASAP
@@ -6863,6 +6868,13 @@ void DefaultAI::lose_building(const Widelands::Building& b) {
 			--numof_warehouses_;
 			if (bo.is(BuildingAttribute::kPort)) {
 				--num_ports;
+				for (std::deque<PortSiteObserver>::iterator i = portsites.begin();
+			     i != portsites.end(); ++i) {
+					if (i->site == &b) {
+						portsites.erase(i);
+						break;
+					}
+				}
 			}
 
 			for (std::deque<WarehouseSiteObserver>::iterator i = warehousesites.begin();
