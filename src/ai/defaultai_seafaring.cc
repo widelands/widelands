@@ -185,7 +185,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	   ports_count > 0 && shipyards_count > 0 && basic_economy_established &&
 	   (!ship_free || persistent_data->ships_utilization > 5000 ||
 	    static_cast<int>(tradeships_count) - ports_count - expeditions_in_progress < 0 ||
-		static_cast<int>(ports_finished_count) * 2 - warships_count > 0);
+	    static_cast<int>(ports_finished_count) * 2 - warships_count > 0);
 
 	// goes over productionsites finds shipyards and configures them
 	for (const ProductionSiteObserver& ps_obs : productionsites) {
@@ -225,7 +225,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	}
 
 	if ((static_cast<int>(ports_finished_count) * 2 - warships_count) > 0 &&
-	     (tradeships_count - expeditions_in_progress - ports_count) > 1) {
+	    (tradeships_count - expeditions_in_progress - ports_count) > 1) {
 		warship_needed = true;
 	}
 	if (!ship_free && warships_count > 0) {
@@ -289,9 +289,10 @@ bool DefaultAI::check_ships(const Time& gametime) {
 			const Widelands::ShipStates ship_state = so.ship->get_ship_state();
 
 			// Here we manage duration of expedition and related variables
-			if (so.ship->get_ship_type() == Widelands::ShipType::kTransport && (ship_state == Widelands::ShipStates::kExpeditionWaiting ||
-			    ship_state == Widelands::ShipStates::kExpeditionScouting ||
-			    ship_state == Widelands::ShipStates::kExpeditionPortspaceFound)) {
+			if (so.ship->get_ship_type() == Widelands::ShipType::kTransport &&
+			    (ship_state == Widelands::ShipStates::kExpeditionWaiting ||
+			     ship_state == Widelands::ShipStates::kExpeditionScouting ||
+			     ship_state == Widelands::ShipStates::kExpeditionPortspaceFound)) {
 
 				// the function below will take care of variables like
 				// - expedition_ship_
@@ -482,7 +483,8 @@ void DefaultAI::gain_ship(Widelands::Ship& ship, NewShip type) {
 		marine_task_queue.push_back(kStopShipyard);
 	} else {
 		if (ship.state_is_expedition()) {
-			if (expedition_ship_ == kNoShip && ship.get_ship_type() == Widelands::ShipType::kTransport) {
+			if (expedition_ship_ == kNoShip &&
+			    ship.get_ship_type() == Widelands::ShipType::kTransport) {
 				// OK, this ship is in expedition
 				expedition_ship_ = ship.serial();
 			} else {
@@ -509,7 +511,8 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 	Widelands::PlayerNumber const pn = player_->player_number();
 	BuildingObserver& port_obs = get_building_observer(BuildingAttribute::kPort);
 	// Check whether a port is allowed to help the AI with "New World" start condition
-	bool port_allowed = basic_economy_established || port_obs.cnt_built + port_obs.cnt_under_construction < 1;
+	bool port_allowed =
+	   basic_economy_established || port_obs.cnt_built + port_obs.cnt_under_construction < 1;
 	if (!port_allowed) {
 		game().send_player_cancel_expedition_ship(*so.ship);
 		return;
@@ -531,8 +534,8 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		// we score the place (value max == 8)
 		const uint8_t spot_score = spot_scoring(so.ship->exp_port_spaces().front()) * 2;
 		verb_log_dbg_time(gametime, "%d: %s at %3dx%3d: PORTSPACE found, we valued it: %d\n", pn,
-						  so.ship->get_shipname().c_str(), so.ship->get_position().x,
-						  so.ship->get_position().y, spot_score);
+		                  so.ship->get_shipname().c_str(), so.ship->get_position().x,
+		                  so.ship->get_position().y, spot_score);
 
 		// we make a decision based on the score value and random and basic economy status
 		if (RNG::static_rand(8) < spot_score) {
@@ -549,8 +552,8 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 	// 2a) Ship is first time here
 	if (first_time_here) {
 		verb_log_dbg_time(gametime, "%d: %s at %3dx%3d: explore uphold, visited first time\n", pn,
-						  so.ship->get_shipname().c_str(), so.ship->get_position().x,
-						  so.ship->get_position().y);
+		                  so.ship->get_shipname().c_str(), so.ship->get_position().x,
+		                  so.ship->get_position().y);
 
 		// Determine direction of island circle movement
 		// Note: if the ship doesn't own an island-explore-direction it is in inter-island exploration
@@ -558,12 +561,12 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		if (!so.ship->is_exploring_island()) {
 			so.island_circ_direction = randomExploreDirection();
 			verb_log_dbg_time(gametime, "%d: %s: new island exploration - direction: %u\n", pn,
-							  so.ship->get_shipname().c_str(),
-							  static_cast<uint32_t>(so.island_circ_direction));
+			                  so.ship->get_shipname().c_str(),
+			                  static_cast<uint32_t>(so.island_circ_direction));
 		} else {
 			verb_log_dbg_time(gametime, "%d: %s: continue island circumvention, dir=%u\n", pn,
-							  so.ship->get_shipname().c_str(),
-							  static_cast<uint32_t>(so.island_circ_direction));
+			                  so.ship->get_shipname().c_str(),
+			                  static_cast<uint32_t>(so.island_circ_direction));
 		}
 
 		// send the ship to circle island
@@ -575,8 +578,8 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 			// otherwise we continue circumnavigating the island
 			game().send_player_ship_explore_island(*so.ship, so.island_circ_direction);
 			verb_log_dbg_time(gametime, "%d: %s: in JAMMING spot, continue circumvention, dir=%u\n",
-							  pn, so.ship->get_shipname().c_str(),
-							  static_cast<uint32_t>(so.island_circ_direction));
+			                  pn, so.ship->get_shipname().c_str(),
+			                  static_cast<uint32_t>(so.island_circ_direction));
 		}
 	}
 
@@ -590,8 +593,7 @@ void DefaultAI::warship_management(ShipObserver& so) {
 
 	const Time& gametime = game().get_gametime();
 
-	game().send_player_warship_command(
-			   *so.ship, Widelands::WarshipCommand::kSetCapacity, {0u});
+	game().send_player_warship_command(*so.ship, Widelands::WarshipCommand::kSetCapacity, {0u});
 
 	for (std::deque<PortSiteObserver>::iterator i = portsites.begin();
 			     i != portsites.end(); ++i) {
