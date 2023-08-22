@@ -599,7 +599,10 @@ bool Game::run(StartGameType const start_game_type,
                const std::string& prefix_for_replays) {
 	assert(has_loader_ui());
 
-{ int* NOCOM = (int*)-1; log_dbg("NOCOM %d", *NOCOM); }
+	{
+		int* NOCOM = (int*)-1;
+		log_dbg("NOCOM %d", *NOCOM);
+	}
 
 	postload();
 
