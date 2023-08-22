@@ -28,7 +28,7 @@
 
 namespace FsMenu {
 
-constexpr int kButtonSize = 120;
+constexpr int kButtonSize = 160;
 
 class CrashReportDetails : public UI::Window {
 public:
@@ -98,18 +98,17 @@ CrashReportWindow::CrashReportWindow(FsMenu::MainMenu& menu, const FilenameSet& 
 	for (const std::string& filename : crash_files) {
 		detailed_text += "\n\n## ";
 		detailed_text += filename;
-		detailed_text += "\n\n";
+		detailed_text += "\n\n```\n";
 
 		FileRead fr;
 		try {
 			fr.open(*g_fs, filename);
-			detailed_text += "```\n";
 			detailed_text += fr.data(fr.get_size());
-			detailed_text += "```\n";
 		} catch (const std::exception& e) {
 			detailed_text += "Error opening crash report file:\n";
 			detailed_text += e.what();
 		}
+		detailed_text += "```\n";
 	}
 
 	UI::MultilineTextarea* header = new UI::MultilineTextarea(
