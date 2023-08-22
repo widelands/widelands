@@ -28,7 +28,45 @@
 
 namespace FsMenu {
 
-constexpr int kButtonSize = 100;
+constexpr int kButtonSize = 120;
+
+class CrashReportDetails : public UI::Window {
+public:
+	CrashReportDetails(FsMenu::MainMenu& menu, const std::string& report)
+	: UI::Window(&menu, UI::WindowStyle::kFsMenu, "crash_details", 0, 0, 0, 0, _("Crash Report Details")) {
+		UI::Box* box = new UI::Box(
+		   this, UI::PanelStyle::kFsMenu, "main_box", 0, 0, UI::Box::Vertical, 0, 0, kPadding);
+
+		std::string detailed_text_rt = richtext_escape(report);
+		newlines_to_richtext(detailed_text_rt);
+		detailed_text_rt =
+		   as_richtext_paragraph(detailed_text_rt, UI::FontStyle::kFsMenuInfoPanelParagraph);
+
+		UI::MultilineTextarea* details = new UI::MultilineTextarea(
+		   box, "details", 0, 0, 700, 400, UI::PanelStyle::kFsMenu, detailed_text_rt);
+
+		UI::Box* buttons_box = new UI::Box(
+		   box, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Horizontal, 0, 0, kPadding);
+
+		UI::Button* b_copy =
+		   new UI::Button(buttons_box, "copy", 0, 0, kButtonSize, 0, UI::ButtonStyle::kFsMenuSecondary,
+			              _("Copy report"), _("Copy the full report to the clipboard"));
+		UI::Button* b_close = new UI::Button(
+		   buttons_box, "close", 0, 0, kButtonSize, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close"));
+
+		b_copy->sigclicked.connect([report]() { SDL_SetClipboardText(report.c_str()); });
+		b_close->sigclicked.connect([this]() { die(); });
+
+		buttons_box->add(b_copy, UI::Box::Resizing::kExpandBoth);
+		buttons_box->add(b_close, UI::Box::Resizing::kExpandBoth);
+		box->add(details, UI::Box::Resizing::kExpandBoth);
+		box->add(buttons_box, UI::Box::Resizing::kExpandBoth);
+
+		set_center_panel(box);
+		center_to_parent();
+		initialization_complete();
+	}
+};
 
 CrashReportWindow::CrashReportWindow(FsMenu::MainMenu& menu, const FilenameSet& crash_files)
    : UI::Window(&menu, UI::WindowStyle::kFsMenu, "crash", 0, 0, 0, 0, _("Crash Report")),
@@ -58,7 +96,9 @@ CrashReportWindow::CrashReportWindow(FsMenu::MainMenu& menu, const FilenameSet& 
 		FileRead fr;
 		try {
 			fr.open(*g_fs, filename);
+			detailed_text += "```\n";
 			detailed_text += fr.data(fr.get_size());
+			detailed_text += "```\n";
 		} catch (const std::exception& e) {
 			detailed_text += "Error opening crash report file:\n";
 			detailed_text += e.what();
@@ -75,12 +115,9 @@ CrashReportWindow::CrashReportWindow(FsMenu::MainMenu& menu, const FilenameSet& 
 	      UI::FontStyle::kFsMenuLabel),
 	   UI::Align::kCenter, UI::MultilineTextarea::ScrollMode::kNoScrolling);
 
-	std::string detailed_text_rt = richtext_escape(detailed_text);
-	newlines_to_richtext(detailed_text_rt);
-	detailed_text_rt =
-	   as_richtext_paragraph(detailed_text_rt, UI::FontStyle::kFsMenuInfoPanelParagraph);
-	UI::MultilineTextarea* details = new UI::MultilineTextarea(
-	   box, "details", 0, 0, 650, 150, UI::PanelStyle::kFsMenu, detailed_text_rt);
+	UI::Button* b_details =
+	   new UI::Button(box, "details", 0, 0, 2 * kButtonSize, 0, UI::ButtonStyle::kFsMenuSecondary,
+	                  _("Show details…"), _("View the detailed crash report"));
 
 	UI::Box* buttons_box = new UI::Box(
 	   box, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Horizontal, 0, 0, kPadding);
@@ -123,14 +160,14 @@ CrashReportWindow::CrashReportWindow(FsMenu::MainMenu& menu, const FilenameSet& 
 
 	b_close->sigclicked.connect([this]() { die(); });
 
+	b_details->sigclicked.connect([&menu, detailed_text]() {
+		CrashReportDetails d(menu, detailed_text);
+		d.run<UI::Panel::Returncodes>();
+	});
+
 	box->add(header, UI::Box::Resizing::kFullSize);
 	box->add_space(kPadding);
-	box->add(new UI::Textarea(box, UI::PanelStyle::kFsMenu, "label",
-	                          UI::FontStyle::kFsMenuInfoPanelHeading, _("Detailed report:"),
-	                          UI::Align::kCenter),
-	         UI::Box::Resizing::kFullSize);
-	box->add_space(kPadding);
-	box->add(details, UI::Box::Resizing::kFullSize);
+	box->add(b_details, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	box->add_space(kPadding);
 	box->add(buttons_box, UI::Box::Resizing::kFullSize);
 

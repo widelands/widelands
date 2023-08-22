@@ -43,6 +43,7 @@
 
 #ifdef PRINT_SEGFAULT_BACKTRACE
 // Taken from https://stackoverflow.com/a/77336
+// TODO(Nordfriese): Implement this on Windows as well (see https://stackoverflow.com/a/26398082)
 static void segfault_handler(const int sig) {
 	constexpr int kMaxBacktraceSize = 256;
 	void* array[kMaxBacktraceSize];
