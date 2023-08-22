@@ -55,15 +55,33 @@ public:
 		UI::Box* buttons_box = new UI::Box(
 		   box, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Horizontal, 0, 0, kPadding);
 
+		UI::Button* b_open_link = new UI::Button(
+		   buttons_box, "open_link", 0, 0, kButtonSize, 0, UI::ButtonStyle::kFsMenuSecondary,
+#if CAN_OPEN_HYPERLINK
+		   _("Open link")
+#else
+		   _("Copy link")
+#endif
+	);
 		UI::Button* b_copy = new UI::Button(buttons_box, "copy", 0, 0, kButtonSize, 0,
 		                                    UI::ButtonStyle::kFsMenuSecondary, _("Copy report"),
 		                                    _("Copy the full report to the clipboard"));
 		UI::Button* b_close = new UI::Button(
 		   buttons_box, "close", 0, 0, kButtonSize, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close"));
 
+		b_open_link->sigclicked.connect([]() {
+#if CAN_OPEN_HYPERLINK
+			SDL_OpenURL(CrashReportWindow::kReportBugsURL);
+#else
+			SDL_SetClipboardText(CrashReportWindow::kReportBugsURL);
+#endif
+		});
+
 		b_copy->sigclicked.connect([report]() { SDL_SetClipboardText(report.c_str()); });
+
 		b_close->sigclicked.connect([this]() { die(); });
 
+		buttons_box->add(b_open_link, UI::Box::Resizing::kExpandBoth);
 		buttons_box->add(b_copy, UI::Box::Resizing::kExpandBoth);
 		buttons_box->add(b_close, UI::Box::Resizing::kExpandBoth);
 		box->add(details, UI::Box::Resizing::kExpandBoth);
