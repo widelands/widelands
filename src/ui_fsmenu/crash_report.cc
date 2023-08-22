@@ -62,7 +62,7 @@ public:
 #else
 		   _("Copy link")
 #endif
-	);
+		);
 		UI::Button* b_copy = new UI::Button(buttons_box, "copy", 0, 0, kButtonSize, 0,
 		                                    UI::ButtonStyle::kFsMenuSecondary, _("Copy report"),
 		                                    _("Copy the full report to the clipboard"));
