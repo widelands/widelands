@@ -240,13 +240,11 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	}
 
 	// handle ports: start expedition and decide whether we need guard ships.
-	for (std::deque<PortSiteObserver>::iterator i = portsites.begin();
-			     i != portsites.end(); ++i) {
+	for (std::deque<PortSiteObserver>::iterator i = portsites.begin(); i != portsites.end(); ++i) {
 		if (start_expedition) {
 			verb_log_dbg_time(game().get_gametime(),
-							  "  %1d: Starting preparation for expedition in port at %3dx%3d\n",
-							  player_number(), i->site->get_position().x,
-							  i->site->get_position().y);
+			                  "  %1d: Starting preparation for expedition in port at %3dx%3d\n",
+			                  player_number(), i->site->get_position().x, i->site->get_position().y);
 			game().send_player_start_or_cancel_expedition(*i->site);
 			start_expedition = false;
 		}
@@ -595,8 +593,7 @@ void DefaultAI::warship_management(ShipObserver& so) {
 
 	game().send_player_warship_command(*so.ship, Widelands::WarshipCommand::kSetCapacity, {0u});
 
-	for (std::deque<PortSiteObserver>::iterator i = portsites.begin();
-			     i != portsites.end(); ++i) {
+	for (std::deque<PortSiteObserver>::iterator i = portsites.begin(); i != portsites.end(); ++i) {
 		if (i->guard_ship_needed) {
 			game().send_player_ship_set_destination(*so.ship, i->site->get_portdock());
 			i->guard_ship_needed = false;

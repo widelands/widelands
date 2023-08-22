@@ -6868,8 +6868,8 @@ void DefaultAI::lose_building(const Widelands::Building& b) {
 			--numof_warehouses_;
 			if (bo.is(BuildingAttribute::kPort)) {
 				--num_ports;
-				for (std::deque<PortSiteObserver>::iterator i = portsites.begin();
-			     i != portsites.end(); ++i) {
+				for (std::deque<PortSiteObserver>::iterator i = portsites.begin(); i != portsites.end();
+				     ++i) {
 					if (i->site == &b) {
 						portsites.erase(i);
 						break;
