@@ -1221,6 +1221,11 @@ constexpr uint8_t kPortUnderAttackDefendersSearchRadius = 10;
 constexpr uint32_t kAttackAnimationDuration = 2000;
 
 void Ship::battle_update(Game& game) {
+	if (state_is_sinking()) {
+		battles_.clear();
+		return pop_task(game);
+	}
+
 	Battle& current_battle = battles_.back();
 	Ship* target_ship = current_battle.opponent.get(game);
 	if ((target_ship == nullptr || target_ship->state_is_sinking()) &&

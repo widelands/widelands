@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-08-19 02:11+0000\n"
+"POT-Creation-Date: 2023-08-21 02:40+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Кловн, 2022\n"
 "Language-Team: Ukrainian (http://app.transifex.com/widelands/widelands/language/uk/)\n"
@@ -2071,11 +2071,11 @@ msgstr "Неможливо розпочати грау, тому, в гравц�
 msgid "Initializing…"
 msgstr ""
 
-#: ../../src/logic/game.cc:1249
+#: ../../src/logic/game.cc:1250
 msgid "Trade Offer"
 msgstr ""
 
-#: ../../src/logic/game.cc:1251
+#: ../../src/logic/game.cc:1252
 msgid "This market has received a new trade offer."
 msgstr ""
 
