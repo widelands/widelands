@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022-2023 by the Widelands Development Team
+ * Copyright (C) 2023 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,37 +16,27 @@
  *
  */
 
-#ifndef WL_UI_FSMENU_TECH_INFO_H
-#define WL_UI_FSMENU_TECH_INFO_H
+#ifndef WL_UI_FSMENU_CRASH_REPORT_H
+#define WL_UI_FSMENU_CRASH_REPORT_H
 
-#include <memory>
-
-#include "ui_basic/box.h"
-#include "ui_basic/textarea.h"
+#include "io/filesystem/filesystem.h"
+#include "ui_basic/window.h"
+#include "ui_fsmenu/main.h"
 
 namespace FsMenu {
 
-class TechInfoLine : public UI::Box {
-	UI::Textarea label_;
-	UI::Textarea value_;
-
+class CrashReportWindow : public UI::Window {
 public:
-	TechInfoLine(UI::Panel* parent, std::string label, std::string value, bool right_to_left);
-};
+	static constexpr const char kReportBugsURL[] = "https://www.widelands.org/wiki/ReportingBugs/";
 
-struct TechInfoBox : public UI::Box {
-	enum class Type { kAbout, kMousewheelReport };
+	CrashReportWindow(FsMenu::MainMenu& menu, const FilenameSet& crash_files);
 
-	explicit TechInfoBox(UI::Panel* parent, TechInfoBox::Type t);
-
-	[[nodiscard]] const std::string& get_report() const {
-		return report_;
-	}
+	void die() override;
 
 private:
-	std::string report_;
+	FilenameSet clear_on_close_;
 };
 
 }  // namespace FsMenu
 
-#endif  // end of include guard: WL_UI_FSMENU_TECH_INFO_H
+#endif  // end of include guard: WL_UI_FSMENU_CRASH_REPORT_H
