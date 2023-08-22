@@ -326,8 +326,8 @@ bool Ship::suited_as_invasion_portspace(const Coords& coords) const {
 	do {
 		const Field& field = map[mr.location()];
 		if (field.get_immovable() != nullptr && field.get_immovable()->get_owner() == get_owner() &&
-				egbase.descriptions().building_index(field.get_immovable()->descr().name()) ==
-				owner().tribe().port()) {
+		    egbase.descriptions().building_index(field.get_immovable()->descr().name()) ==
+		       owner().tribe().port()) {
 			return false;
 		}
 	} while (mr.advance(map));
@@ -668,7 +668,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 				if (remember_detected_portspace(mr.location())) {
 					found_new_target = true;
 					send_message(game, _("Port Space"), _("Port Space Found"),
-						         _("A warship found a new port build space."), descr().icon_filename());
+					             _("A warship found a new port build space."), descr().icon_filename());
 				}
 			}
 		} while (mr.advance(*map));
