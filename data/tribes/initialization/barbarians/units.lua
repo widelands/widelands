@@ -1177,8 +1177,12 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("building", "Plants trees in the surrounding area."),
             -- TRANSLATORS: Note helptext for a Barbarian production site: Ranger's Hut
             note = pgettext("barbarians_building", "The ranger’s hut needs free space within the work area to plant the trees."),
-            -- TRANSLATORS: Performance helptext for a Barbarian production site: Ranger's Hut
-            performance = pgettext("barbarians_building", "The ranger needs %s to plant a tree, not counting the time he needs to reach the destination and go home again."):bformat(format_seconds(5))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Ranger's Hut, part 1
+               pgettext("barbarians_building", "The ranger plants one tree between %1$s and %2$s on average."):bformat(format_seconds(28), format_seconds(50)),
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Ranger's Hut, part 2
+               pgettext("barbarians_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {

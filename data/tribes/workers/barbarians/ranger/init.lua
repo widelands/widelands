@@ -17,6 +17,7 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       plant = {
+         -- time: 3.5 + 2.5 + 3.5 = 9.5 sec
          "findspace=size:any radius:5 avoid:field saplingsearches:5",
          "walk=coords",
          "animate=dig duration:3s500ms",

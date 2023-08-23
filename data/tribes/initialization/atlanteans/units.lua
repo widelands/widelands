@@ -1521,7 +1521,13 @@ wl.Descriptions():new_tribe {
                                           [[Only after the last piece of green has become bare soil<br>]] ..
                                           [[Then will you find that nature needs to be cared for.’]]),
             -- TRANSLATORS: Note lore_autor for an Atlantean production site: Forester's House
-            lore_author = pgettext("atlanteans_building", "Prophecy of the foresters’ guild")
+            lore_author = pgettext("atlanteans_building", "Prophecy of the foresters’ guild"),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Forester's House, part 1
+               pgettext("atlanteans_building", "The forester plants one tree between %1$s and %2$s on average."):bformat(format_seconds(23), format_seconds(45)),
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Forester's House, part 2
+               pgettext("atlanteans_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {

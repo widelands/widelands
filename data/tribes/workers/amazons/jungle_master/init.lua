@@ -49,6 +49,7 @@ wl.Descriptions():new_worker_type {
          "return"
       },
       plant = {
+         -- time: 2 + 1 + 1 = 4 sec
          "findspace=size:any radius:6 avoid:field saplingsearches:7",
          "walk=coords",
          "animate=dig duration:2s",
