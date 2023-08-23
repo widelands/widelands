@@ -1767,10 +1767,11 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 
 				game.conquer_area(area);
 
-				MapRegion<PlayerArea<Area<FCoords>>> mr(map, area);
+				MapRegion<PlayerArea<Area<FCoords>>> region(map, area);
 				do {
-					get_owner()->military_influence(map.get_index(mr.location())) += kConquerInfluence;
-				} while (mr.advance(map));
+					get_owner()->military_influence(map.get_index(region.location())) +=
+					   kConquerInfluence;
+				} while (region.advance(map));
 
 				return start_task_idle(game, descr().get_animation("idle", this), 1000);
 			}
