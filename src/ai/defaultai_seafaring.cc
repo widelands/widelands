@@ -240,15 +240,15 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	}
 
 	// handle ports: start expedition and decide whether we need guard ships.
-	for (auto* i : portsites) {
+	for (auto i : portsites) {
 		if (start_expedition) {
 			verb_log_dbg_time(game().get_gametime(),
 			                  "  %1d: Starting preparation for expedition in port at %3dx%3d\n",
-			                  player_number(), i->site->get_position().x, i->site->get_position().y);
-			game().send_player_start_or_cancel_expedition(*i->site);
+			                  player_number(), i.site->get_position().x, i.site->get_position().y);
+			game().send_player_start_or_cancel_expedition(*i.site);
 			start_expedition = false;
 		}
-		i->guard_ship_needed = warships_count / num_ports > i->ships_assigned;
+		i.guard_ship_needed = warships_count / num_ports > i.ships_assigned;
 	}
 	return true;
 }
@@ -593,11 +593,11 @@ void DefaultAI::warship_management(ShipObserver& so) {
 
 	game().send_player_warship_command(*so.ship, Widelands::WarshipCommand::kSetCapacity, {0u});
 
-	for (auto* i : portsites) {
-		if (i->guard_ship_needed) {
-			game().send_player_ship_set_destination(*so.ship, i->site->get_portdock());
-			i->guard_ship_needed = false;
-			i->ships_assigned = ++i->ships_assigned;
+	for (auto i : portsites) {
+		if (i.guard_ship_needed) {
+			game().send_player_ship_set_destination(*so.ship, i.site->get_portdock());
+			i.guard_ship_needed = false;
+			i.ships_assigned = ++i.ships_assigned;
 			break;
 		}
 	}
