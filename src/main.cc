@@ -68,7 +68,7 @@ static void segfault_handler(const int sig) {
 		char buffer[sizeof(SYMBOL_INFO) + MAX_SYM_NAME * sizeof(TCHAR)];
 		PSYMBOL_INFO p_symbol = reinterpret_cast<PSYMBOL_INFO>(buffer);
 		if (SymFromAddr(process_handle, frame_as_int, nullptr, p_symbol)) {
-			translated_backtrace << p_symbol->Name << " [0x" << reinterpret_cast<uintptr_t>(p_symbol->Address) << "]";
+			translated_backtrace << p_symbol->Name << " [0x" << std::hex << p_symbol->Address << "]";
 		} else {
 			translated_backtrace << "Error symbolizing frame address";
 		}
@@ -87,7 +87,7 @@ static void segfault_handler(const int sig) {
 	          << "##############################" << std::endl
 	          << "FATAL ERROR: Received signal " << sig;
 #ifndef _WIN32
-	std::cout << " (" << strsignal(sig) << ")"
+	std::cout << " (" << strsignal(sig) << ")";
 #endif
 	std::cout << std::endl << "Backtrace:" << std::endl;
 
