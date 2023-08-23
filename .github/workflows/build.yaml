@@ -6,7 +6,7 @@ on:
   pull_request:
     types: [ opened, reopened, synchronize ]
   push:
-    branches: [ master, segfault-diagnosis-windows ]  # NOCOM
+    branches: [ master ]
 
 jobs:
   # This job runs multiple smaller checks where having several jobs would be overkill.
@@ -31,7 +31,6 @@ jobs:
         pushd src
         ../utils/find_unused_includes.py
         popd
-        exit 1  # NOCOM to suppress useless other checks
 
   codecheck:
     runs-on: ubuntu-latest
@@ -232,7 +231,7 @@ jobs:
 
   windows-msvc:
     # inspired by https://github.com/lukka/CppCMakeVcpkgTemplate/blob/main/.github/workflows/hosted-pure-workflow.yml
-    # needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]  # NOCOM uncomment
+    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
     strategy:
       matrix:
         config: [Debug, Release]
@@ -300,7 +299,7 @@ jobs:
         path: ${{ github.workspace }}\Widelands-${{ github.sha }}-msvc-${{ matrix.config }}-${{ matrix.arch }}.exe
 
   windows:
-    # needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]  # NOCOM uncomment
+    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
     strategy:
       matrix:
         config: [Debug, Release]

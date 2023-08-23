@@ -49,10 +49,13 @@
 #include "wlapplication_messages.h"
 
 #ifdef PRINT_SEGFAULT_BACKTRACE
+#ifdef _WIN32
+static HANDLE g_process_handle;
+#endif
+
 // Taken from https://stackoverflow.com/a/77336 and https://stackoverflow.com/a/26398082
 static void segfault_handler(const int sig) {
 #ifdef _WIN32
-	const HANDLE process_handle = GetCurrentProcess();
 	constexpr int kMaxBacktraceSize = 62;
 	void* array[kMaxBacktraceSize];
 	size_t size = CaptureStackBackTrace(0, kMaxBacktraceSize, array, nullptr);
@@ -68,10 +71,10 @@ static void segfault_handler(const int sig) {
 		p_symbol->SizeOfStruct = sizeof(SYMBOL_INFO);
 		p_symbol->MaxNameLen = MAX_SYM_NAME;
 
-		if (SymFromAddr(process_handle, frame_as_int, nullptr, p_symbol)) {
+		if (SymFromAddr(g_process_handle, frame_as_int, nullptr, p_symbol)) {
 			translated_backtrace << p_symbol->Name << " [0x" << std::hex << p_symbol->Address << "]";
 		} else {
-			translated_backtrace << "Error symbolizing frame address (error code " << GetLastError() << ")";
+			translated_backtrace << "Error symbolizing frame address (error code 0x" << GetLastError() << ")";
 		}
 		translated_backtrace << std::endl;
 	}
@@ -138,7 +141,7 @@ static void segfault_handler(const int sig) {
 
 	::exit(sig);
 }
-#endif
+#endif  // PRINT_SEGFAULT_BACKTRACE
 
 /**
  * Cross-platform entry point for SDL applications.
@@ -148,9 +151,9 @@ int main(int argc, char* argv[]) {
 
 #ifdef PRINT_SEGFAULT_BACKTRACE
 #ifdef _WIN32
-	const HANDLE process_handle = GetCurrentProcess();
-	if (!SymInitialize(process_handle, nullptr, true)) {
-		std::cout << "ERROR: Could not initialize the symbolizer (error code " << GetLastError() << ")" << std::endl;
+	g_process_handle = GetCurrentProcess();
+	if (!SymInitialize(g_process_handle, nullptr, true)) {
+		std::cout << "ERROR: Could not initialize the symbolizer (error code 0x" << std::hex << GetLastError() << std::dec << ")" << std::endl;
 	}
 #endif
 
@@ -165,7 +168,7 @@ int main(int argc, char* argv[]) {
 			SIGFPE, SIGILL}) {
 		signal(s, segfault_handler);
 	}
-#endif
+#endif  // PRINT_SEGFAULT_BACKTRACE
 
 	int result = 1;
 	try {
@@ -203,7 +206,7 @@ int main(int argc, char* argv[]) {
 
 #ifdef PRINT_SEGFAULT_BACKTRACE
 #ifdef _WIN32
-	SymCleanup(process_handle);
+	SymCleanup(g_process_handle);
 #endif
 #endif
 
