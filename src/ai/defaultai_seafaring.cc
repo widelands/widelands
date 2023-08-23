@@ -240,7 +240,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	}
 
 	// handle ports: start expedition and decide whether we need guard ships.
-	for (auto &i : portsites) {
+	for (auto *i : portsites) {
 		if (start_expedition) {
 			verb_log_dbg_time(game().get_gametime(),
 			                  "  %1d: Starting preparation for expedition in port at %3dx%3d\n",
@@ -593,7 +593,7 @@ void DefaultAI::warship_management(ShipObserver& so) {
 
 	game().send_player_warship_command(*so.ship, Widelands::WarshipCommand::kSetCapacity, {0u});
 
-	for (auto &i : portsites) {
+	for (auto *i : portsites) {
 		if (i->guard_ship_needed) {
 			game().send_player_ship_set_destination(*so.ship, i->site->get_portdock());
 			i->guard_ship_needed = false;
