@@ -26,14 +26,14 @@
 #include <unistd.h>
 #endif
 #ifdef PRINT_SEGFAULT_BACKTRACE
-#ifdef _WIN32
-#include <Windows.h>
-#include <dbghelp.h>
-#else
 #include <csignal>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#ifdef _WIN32
+#include <Windows.h>
+#include <dbghelp.h>
+#else
 #include <execinfo.h>
 #endif
 #endif
@@ -47,15 +47,15 @@
 #include "wlapplication_messages.h"
 
 #ifdef PRINT_SEGFAULT_BACKTRACE
-// Taken from https://stackoverflow.com/a/77336
-// TODO(Nordfriese): Implement this on Windows as well (see https://stackoverflow.com/a/26398082)
+// Taken from https://stackoverflow.com/a/77336 and https://stackoverflow.com/a/26398082
 static void segfault_handler(const int sig) {
 #if _WIN32
+	HANDLE process_handle = GetCurrentProcess();
+	SymInitialize(process_handle, nullptr, true);
+
 	constexpr int kMaxBacktraceSize = 62;
 	void* array[kMaxBacktraceSize];
 	size_t size = CaptureStackBackTrace(0, kMaxBacktraceSize, array, nullptr);
-	HANDLE process_handle = GetCurrentProcess();
-	SymInitialize(process_handle, nullptr, true);
 
 	std::string translated_backtrace = std::to_string(size);
 	translated_backtrace += " frames captured:\n";
@@ -78,6 +78,8 @@ static void segfault_handler(const int sig) {
 		}
 		translated_backtrace += "\n";
 	}
+
+	SymCleanup(process_handle);
 #else
 	constexpr int kMaxBacktraceSize = 256;
 	void* array[kMaxBacktraceSize];
