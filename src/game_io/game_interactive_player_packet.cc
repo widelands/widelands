@@ -34,7 +34,11 @@ namespace Widelands {
 
 namespace {
 
-constexpr uint16_t kCurrentPacketVersion = 7;
+/* Changelog:
+ * 7: v1.1
+ * 8: Added multiple expedition port spaces
+ */
+constexpr uint16_t kCurrentPacketVersion = 8;
 
 }  // namespace
 
@@ -122,11 +126,12 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 					size_t nr_port_spaces = fr.unsigned_32();
 					for (size_t i = 0; i < nr_port_spaces; ++i) {
 						uint32_t serial = fr.unsigned_32();
-						int16_t x = fr.signed_16();
-						int16_t y = fr.signed_16();
-						if (ipl != nullptr) {
-							ipl->get_expedition_port_spaces().emplace(
-							   &mol->get<Widelands::Ship>(serial), Widelands::Coords(x, y));
+						for (uint32_t j = packet_version >= 8 ? fr.unsigned_32() : 1; j > 0; --j) {
+							int16_t x = fr.signed_16();
+							int16_t y = fr.signed_16();
+							if (ipl != nullptr) {
+								ipl->get_expedition_port_spaces()[&mol->get<Widelands::Ship>(serial)].emplace_back(x, y);
+							}
 						}
 					}
 				}
@@ -185,8 +190,11 @@ void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSav
 			fw.unsigned_32(iplayer->get_expedition_port_spaces().size());
 			for (const auto& pair : iplayer->get_expedition_port_spaces()) {
 				fw.unsigned_32(mos->get_object_file_index(*pair.first.get(game)));
-				fw.signed_16(pair.second.x);
-				fw.signed_16(pair.second.y);
+				fw.unsigned_32(pair.second.size());
+				for (const auto& coords : pair.second) {
+					fw.signed_16(coords.x);
+					fw.signed_16(coords.y);
+				}
 			}
 		} else {
 			fw.unsigned_32(0);

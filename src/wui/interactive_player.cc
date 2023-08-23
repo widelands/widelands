@@ -261,7 +261,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 		       note.action == Widelands::NoteShip::Action::kWaitingForCommand &&
 		       (note.ship->get_ship_state() == Widelands::ShipStates::kExpeditionPortspaceFound ||
 		        note.ship->get_ship_type() == Widelands::ShipType::kWarship)) {
-			   expedition_port_spaces_.emplace(note.ship, note.ship->exp_port_spaces().front());
+			   expedition_port_spaces_[note.ship] = note.ship->exp_port_spaces();
 		   }
 	   });
 
@@ -391,9 +391,20 @@ void InteractivePlayer::rebuild_showhide_menu() {
 	showhidemenu_.select(last_selection);
 }
 
-bool InteractivePlayer::has_expedition_port_space(const Widelands::Coords& coords) const {
-	return std::any_of(expedition_port_spaces_.begin(), expedition_port_spaces_.end(),
-	                   [&coords](const auto& pair) { return pair.second == coords; });
+InteractivePlayer::HasExpeditionPortSpace
+InteractivePlayer::has_expedition_port_space(const Widelands::Coords& coords) const {
+	for (const auto& pair : expedition_port_spaces_) {
+		if (pair.second.empty()) {
+			continue;
+		}
+		if (pair.second.front() == coords) {
+			return HasExpeditionPortSpace::kPrimary;
+		}
+		if (std::find(pair.second.begin(), pair.second.end(), coords) != pair.second.end()) {
+			return HasExpeditionPortSpace::kOther;
+		}
+	}
+	return HasExpeditionPortSpace::kNone;
 }
 
 void InteractivePlayer::draw_immovables_for_visible_field(
@@ -477,11 +488,10 @@ void InteractivePlayer::think() {
 	// Cleanup found port spaces if the ship sailed on or was destroyed
 	for (auto it = expedition_port_spaces_.begin(); it != expedition_port_spaces_.end();) {
 		Widelands::Ship* ship = it->first.get(egbase());
-		if (ship == nullptr || !ship->is_expedition_or_warship() ||
-		    std::find(ship->exp_port_spaces().begin(), ship->exp_port_spaces().end(), it->second) ==
-		       ship->exp_port_spaces().end()) {
+		if (ship == nullptr || !ship->is_expedition_or_warship()) {
 			it = expedition_port_spaces_.erase(it);
 		} else {
+			it->second = ship->exp_port_spaces();
 			++it;
 		}
 	}
@@ -596,8 +606,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 		if (f->seeing != Widelands::VisibleState::kUnexplored) {
 			// Draw build help.
-			const bool show_port_space = has_expedition_port_space(f->fcoords);
-			if (show_port_space || suited_as_starting_pos || buildhelp()) {
+			const HasExpeditionPortSpace show_port_space = has_expedition_port_space(f->fcoords);
+			if (show_port_space != HasExpeditionPortSpace::kNone || suited_as_starting_pos || buildhelp()) {
 				Widelands::NodeCaps caps;
 				Widelands::NodeCaps maxcaps = f->fcoords.field->maxcaps();
 				float opacity =
@@ -605,8 +615,11 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 				if (picking_starting_pos) {
 					caps = suited_as_starting_pos || buildhelp() ? f->fcoords.field->nodecaps() :
                                                               Widelands::CAPS_NONE;
-				} else if (show_port_space) {
+				} else if (show_port_space != HasExpeditionPortSpace::kNone) {
 					caps = maxcaps;
+					if (show_port_space == HasExpeditionPortSpace::kOther) {
+						opacity *= kBuildhelpOpacity;
+					}
 				} else {
 					caps = plr.get_buildcaps(f->fcoords);
 					if ((caps & Widelands::BUILDCAPS_SIZEMASK) == 0) {
@@ -758,7 +771,7 @@ UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& coord
 		const Map& map = egbase().map();
 
 		for (const auto& pair : expedition_port_spaces_) {
-			if (pair.second == coords) {
+			if (pair.second.front() == coords) {
 				UI::UniqueWindow::Registry& registry =
 				   unique_windows().get_registry(format("attack_coords_%d_%d", coords.x, coords.y));
 				registry.open_window = [this, &registry, &coords, fastclick]() {
