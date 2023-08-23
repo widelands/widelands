@@ -593,7 +593,6 @@ void DefaultAI::warship_management(ShipObserver& so) {
 
 	game().send_player_warship_command(*so.ship, Widelands::WarshipCommand::kSetCapacity, {0u});
 
-
 	for (auto* i : portsites) {
 		if (i->guard_ship_needed) {
 			game().send_player_ship_set_destination(*so.ship, i->site->get_portdock());
