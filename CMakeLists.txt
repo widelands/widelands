@@ -455,6 +455,8 @@ if(NOT OPTION_ASAN)
     if(NOT WIN32)
       # Needed for human-readable-ish symbolizing; doesn't hurt performance, see https://stackoverflow.com/q/12634114
       SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -rdynamic")
+    else()
+      link_libraries(Dbghelp)
     endif()
   endif()
 endif()
