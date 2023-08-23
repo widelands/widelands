@@ -1628,6 +1628,7 @@ void Soldier::start_task_naval_invasion(Game& game, const Coords& coords) {
 void Soldier::naval_invasion_update(Game& game, State& state) {
 	constexpr int kPortSpaceRadius = 2;
 	constexpr int kPortSpaceGeneralAreaRadius = 5;
+	constexpr int kConquerInfluence = 100;
 
 	std::string signal = get_signal();
 	if (!signal.empty()) {
@@ -1761,8 +1762,16 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 		do {
 			if (mr.location().field->get_owned_by() != owner().player_number()) {
 				molog(game.get_gametime(), "[naval_invasion] Conquering port area\n");
-				game.conquer_area(PlayerArea<Area<FCoords>>(
-				   owner().player_number(), Area<FCoords>(portspace_fcoords, kPortSpaceRadius)));
+				PlayerArea<Area<FCoords>> area(
+				   owner().player_number(), Area<FCoords>(portspace_fcoords, kPortSpaceRadius));
+
+				game.conquer_area(area);
+
+				MapRegion<PlayerArea<Area<FCoords>>> mr(map, area);
+				do {
+					get_owner()->military_influence(map.get_index(mr.location())) += kConquerInfluence;
+				} while (mr.advance(map));
+
 				return start_task_idle(game, descr().get_animation("idle", this), 1000);
 			}
 		} while (mr.advance(map));
