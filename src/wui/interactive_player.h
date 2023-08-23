@@ -159,7 +159,8 @@ private:
 	                                       RenderTarget*,
 	                                       std::set<Widelands::Coords>&);
 
-	std::map<const Widelands::OPtr<Widelands::Ship>, std::vector<Widelands::Coords>> expedition_port_spaces_;
+	std::map<const Widelands::OPtr<Widelands::Ship>, std::vector<Widelands::Coords>>
+	   expedition_port_spaces_;
 
 	std::unique_ptr<Notifications::Subscriber<NoteMapOptions>> map_options_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShip>> shipnotes_subscriber_;

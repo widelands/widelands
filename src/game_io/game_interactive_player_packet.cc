@@ -130,7 +130,8 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 							int16_t x = fr.signed_16();
 							int16_t y = fr.signed_16();
 							if (ipl != nullptr) {
-								ipl->get_expedition_port_spaces()[&mol->get<Widelands::Ship>(serial)].emplace_back(x, y);
+								ipl->get_expedition_port_spaces()[&mol->get<Widelands::Ship>(serial)]
+								   .emplace_back(x, y);
 							}
 						}
 					}
