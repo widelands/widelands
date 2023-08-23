@@ -30,6 +30,8 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <ios>
+#include <sstream>
 #ifdef _WIN32
 #include <Windows.h>
 #include <dbghelp.h>
@@ -49,7 +51,7 @@
 #ifdef PRINT_SEGFAULT_BACKTRACE
 // Taken from https://stackoverflow.com/a/77336 and https://stackoverflow.com/a/26398082
 static void segfault_handler(const int sig) {
-#if _WIN32
+#ifdef _WIN32
 	HANDLE process_handle = GetCurrentProcess();
 	SymInitialize(process_handle, nullptr, true);
 
@@ -57,27 +59,22 @@ static void segfault_handler(const int sig) {
 	void* array[kMaxBacktraceSize];
 	size_t size = CaptureStackBackTrace(0, kMaxBacktraceSize, array, nullptr);
 
-	std::string translated_backtrace = std::to_string(size);
-	translated_backtrace += " frames captured:\n";
+	std::stringstream translated_backtrace;
+	translated_backtrace << size << " frames captured:" << std::endl;
 	for (size_t i = 0; i < size; ++i) {
-		translated_backtrace += "#";
-		translated_backtrace += std::to_string(i);
-		translated_backtrace += " [";
-		translated_backtrace += std::to_string(array[i]);
-		translated_backtrace += "] ";
+		const DWORD64 frame_as_int = reinterpret_cast<DWORD64>(array[i]);
+		translated_backtrace << "#" << std::dec << i << " [0x" << std::hex << frame_as_int << "] ";
 
 		char buffer[sizeof(SYMBOL_INFO) + MAX_SYM_NAME * sizeof(TCHAR)];
 		PSYMBOL_INFO p_symbol = reinterpret_cast<PSYMBOL_INFO>(buffer);
-		if (SymFromAddr(process_handle, array[i], nullptr, p_symbol)) {
-			translated_backtrace += p_symbol->Name;
-			translated_backtrace += " [";
-			translated_backtrace += std::to_string(p_symbol->Address);
-			translated_backtrace += "]";
+		if (SymFromAddr(process_handle, frame_as_int, nullptr, p_symbol)) {
+			translated_backtrace << p_symbol->Name << " [0x" << reinterpret_cast<uintptr_t>(p_symbol->Address) << "]";
 		} else {
-			translated_backtrace += "Error symbolizing frame address";
+			translated_backtrace << "Error symbolizing frame address";
 		}
-		translated_backtrace += "\n";
+		translated_backtrace << std::endl;
 	}
+	const std::string bt_str = translated_backtrace.str();
 
 	SymCleanup(process_handle);
 #else
@@ -88,13 +85,18 @@ static void segfault_handler(const int sig) {
 
 	std::cout << std::endl
 	          << "##############################" << std::endl
-	          << "FATAL ERROR: Received signal " << sig << " (" << strsignal(sig) << ")" << std::endl
-	          << "Backtrace:" << std::endl;
-#if _WIN32
-	std::cout << translated_backtrace;
+	          << "FATAL ERROR: Received signal " << sig;
+#ifndef _WIN32
+	std::cout << " (" << strsignal(sig) << ")"
+#endif
+	std::cout << std::endl << "Backtrace:" << std::endl;
+
+#ifdef _WIN32
+	std::cout << bt_str;
 #else
 	backtrace_symbols_fd(array, size, STDOUT_FILENO);
 #endif
+
 	std::cout
 	   << std::endl
 	   << "Please report this problem to help us improve Widelands, and provide the complete output."
@@ -116,16 +118,19 @@ static void segfault_handler(const int sig) {
 	if (file == nullptr) {
 		std::cout << "The crash report could not be saved to a file." << std::endl << std::endl;
 	} else {
+#ifdef _WIN32
+		fprintf /* NOLINT codecheck */ (
+		   file, "Crash report for Widelands %s at %s, signal %d\n\n**** BEGIN BACKTRACE ****\n",
+		   build_ver_details().c_str(), timestr.c_str(), sig);
+		fputs(bt_str.c_str(), file);
+#else
 		fprintf /* NOLINT codecheck */ (
 		   file, "Crash report for Widelands %s at %s, signal %d (%s)\n\n**** BEGIN BACKTRACE ****\n",
 		   build_ver_details().c_str(), timestr.c_str(), sig, strsignal(sig));
 		fflush(file);
-#if _WIN32
-		fputs(translated_backtrace.c_str(), file);
-#else
 		backtrace_symbols_fd(array, size, fileno(file));
-#endif
 		fflush(file);
+#endif
 		fputs("**** END BACKTRACE ****\n", file);
 
 		fclose(file);
@@ -147,7 +152,11 @@ int main(int argc, char* argv[]) {
 	 * We can't handle SIGABRT like this since we have to redirect that one elsewhere to
 	 * suppress non-critical errors from Eris.
 	 */
-	for (int s : {SIGSEGV, SIGBUS, SIGFPE, SIGILL}) {
+	for (int s : {SIGSEGV,
+#ifdef SIGBUS
+			SIGBUS,  // Not available on all systems
+#endif
+			SIGFPE, SIGILL}) {
 		signal(s, segfault_handler);
 	}
 #endif
