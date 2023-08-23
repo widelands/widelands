@@ -423,7 +423,7 @@ endif()
 
 if(OPTION_BUILD_WINSTATIC)
   # Add required libraries for statical linking
-  wl_add_static_libs(SDL_IMG_STATIC_LIBS jpeg tiff lzma)
+  wl_add_static_libs(SDL_IMG_STATIC_LIBS tiff jpeg lzma)
   wl_add_static_libs(SDL_MIXER_STATIC_LIBS opusfile opus FLAC vorbisfile vorbis ogg mpg123 shlwapi)
   wl_add_static_libs(SDL_TTF_STATIC_LIBS freetype bz2 graphite2 usp10 dwrite harfbuzz freetype rpcrt4)
   wl_add_static_libs(SDL_STATIC_LIBS intl iconv dinput8 shell32 setupapi advapi32 uuid version oleaut32 ole32 imm32 winmm gdi32 user32)
