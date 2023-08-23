@@ -27,8 +27,8 @@
 #endif
 #ifdef PRINT_SEGFAULT_BACKTRACE
 #ifdef _WIN32
-#include <dbghelp.h>
 #include <Windows.h>
+#include <dbghelp.h>
 #else
 #include <csignal>
 #include <cstdio>
