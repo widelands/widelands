@@ -26,11 +26,16 @@
 #include <unistd.h>
 #endif
 #ifdef PRINT_SEGFAULT_BACKTRACE
+#ifdef _WIN32
+#include <dbghelp.h>
+#include <Windows.h>
+#else
 #include <csignal>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include <execinfo.h>
+#endif
 #endif
 
 #include "base/time_string.h"
@@ -45,15 +50,49 @@
 // Taken from https://stackoverflow.com/a/77336
 // TODO(Nordfriese): Implement this on Windows as well (see https://stackoverflow.com/a/26398082)
 static void segfault_handler(const int sig) {
+#if _WIN32
+	constexpr int kMaxBacktraceSize = 62;
+	void* array[kMaxBacktraceSize];
+	size_t size = CaptureStackBackTrace(0, kMaxBacktraceSize, array, nullptr);
+	HANDLE process_handle = GetCurrentProcess();
+	SymInitialize(process_handle, nullptr, true);
+
+	std::string translated_backtrace = std::to_string(size);
+	translated_backtrace += " frames captured:\n";
+	for (size_t i = 0; i < size; ++i) {
+		translated_backtrace += "#";
+		translated_backtrace += std::to_string(i);
+		translated_backtrace += " [";
+		translated_backtrace += std::to_string(array[i]);
+		translated_backtrace += "] ";
+
+		char buffer[sizeof(SYMBOL_INFO) + MAX_SYM_NAME * sizeof(TCHAR)];
+		PSYMBOL_INFO p_symbol = reinterpret_cast<PSYMBOL_INFO>(buffer);
+		if (SymFromAddr(process_handle, array[i], nullptr, p_symbol)) {
+			translated_backtrace += p_symbol->Name;
+			translated_backtrace += " [";
+			translated_backtrace += std::to_string(p_symbol->Address);
+			translated_backtrace += "]";
+		} else {
+			translated_backtrace += "Error symbolizing frame address";
+		}
+		translated_backtrace += "\n";
+	}
+#else
 	constexpr int kMaxBacktraceSize = 256;
 	void* array[kMaxBacktraceSize];
 	size_t size = backtrace(array, kMaxBacktraceSize);
+#endif
 
 	std::cout << std::endl
 	          << "##############################" << std::endl
 	          << "FATAL ERROR: Received signal " << sig << " (" << strsignal(sig) << ")" << std::endl
 	          << "Backtrace:" << std::endl;
+#if _WIN32
+	std::cout << translated_backtrace;
+#else
 	backtrace_symbols_fd(array, size, STDOUT_FILENO);
+#endif
 	std::cout
 	   << std::endl
 	   << "Please report this problem to help us improve Widelands, and provide the complete output."
@@ -79,7 +118,11 @@ static void segfault_handler(const int sig) {
 		   file, "Crash report for Widelands %s at %s, signal %d (%s)\n\n**** BEGIN BACKTRACE ****\n",
 		   build_ver_details().c_str(), timestr.c_str(), sig, strsignal(sig));
 		fflush(file);
+#if _WIN32
+		fputs(translated_backtrace.c_str(), file);
+#else
 		backtrace_symbols_fd(array, size, fileno(file));
+#endif
 		fflush(file);
 		fputs("**** END BACKTRACE ****\n", file);
 
