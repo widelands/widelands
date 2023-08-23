@@ -31,6 +31,7 @@ jobs:
         pushd src
         ../utils/find_unused_includes.py
         popd
+        exit 1  # NOCOM to suppress useless other checks
 
   codecheck:
     runs-on: ubuntu-latest

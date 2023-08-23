@@ -52,9 +52,7 @@
 // Taken from https://stackoverflow.com/a/77336 and https://stackoverflow.com/a/26398082
 static void segfault_handler(const int sig) {
 #ifdef _WIN32
-	HANDLE process_handle = GetCurrentProcess();
-	SymInitialize(process_handle, nullptr, true);
-
+	const HANDLE process_handle = GetCurrentProcess();
 	constexpr int kMaxBacktraceSize = 62;
 	void* array[kMaxBacktraceSize];
 	size_t size = CaptureStackBackTrace(0, kMaxBacktraceSize, array, nullptr);
@@ -70,13 +68,11 @@ static void segfault_handler(const int sig) {
 		if (SymFromAddr(process_handle, frame_as_int, nullptr, p_symbol)) {
 			translated_backtrace << p_symbol->Name << " [0x" << std::hex << p_symbol->Address << "]";
 		} else {
-			translated_backtrace << "Error symbolizing frame address";
+			translated_backtrace << "Error symbolizing frame address (error code " << GetLastError() << ")";
 		}
 		translated_backtrace << std::endl;
 	}
 	const std::string bt_str = translated_backtrace.str();
-
-	SymCleanup(process_handle);
 #else
 	constexpr int kMaxBacktraceSize = 256;
 	void* array[kMaxBacktraceSize];
@@ -148,6 +144,13 @@ int main(int argc, char* argv[]) {
 	std::cout << "This is Widelands version " << build_ver_details() << std::endl;
 
 #ifdef PRINT_SEGFAULT_BACKTRACE
+#ifdef _WIN32
+	const HANDLE process_handle = GetCurrentProcess();
+	if (!SymInitialize(process_handle, nullptr, true)) {
+		std::cout << "ERROR: Could not initialize the symbolizer (error code " << GetLastError() << ")" << std::endl;
+	}
+#endif
+
 	/* Handle several types of fatal crashes with a useful backtrace on supporting systems.
 	 * We can't handle SIGABRT like this since we have to redirect that one elsewhere to
 	 * suppress non-critical errors from Eris.
@@ -161,12 +164,13 @@ int main(int argc, char* argv[]) {
 	}
 #endif
 
+	int result = 1;
 	try {
 		WLApplication& g_app = WLApplication::get(argc, const_cast<char const**>(argv));
 		// TODO(unknown): handle exceptions from the constructor
 		g_app.run();
 
-		return 0;
+		result = 0;
 	} catch (const ParameterError& e) {
 		//  handle wrong commandline parameters
 		show_usage(build_ver_details(), e.level_);
@@ -174,7 +178,7 @@ int main(int argc, char* argv[]) {
 			std::cerr << std::string(60, '=') << std::endl << std::endl << e.what() << std::endl;
 		}
 
-		return 0;
+		result = 0;
 	}
 #ifdef NDEBUG
 	catch (const WException& e) {
@@ -184,8 +188,6 @@ int main(int argc, char* argv[]) {
 		          << build_ver_details() << ".\n"
 		          << "and remember to specify your operating system.\n\n"
 		          << std::flush;
-
-		return 1;
 	} catch (const std::exception& e) {
 		std::cerr << "\nCaught exception (of type '" << typeid(e).name()
 		          << "') in outermost handler!\nThe exception said: " << e.what()
@@ -193,8 +195,14 @@ int main(int argc, char* argv[]) {
 		          << build_ver_details() << ".\n"
 		          << "and remember to specify your operating system.\n\n"
 		          << std::flush;
-
-		return 1;
 	}
 #endif
+
+#ifdef PRINT_SEGFAULT_BACKTRACE
+#ifdef _WIN32
+	SymCleanup(process_handle);
+#endif
+#endif
+
+	return result;
 }
