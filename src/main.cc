@@ -65,6 +65,9 @@ static void segfault_handler(const int sig) {
 
 		char buffer[sizeof(SYMBOL_INFO) + MAX_SYM_NAME * sizeof(TCHAR)];
 		PSYMBOL_INFO p_symbol = reinterpret_cast<PSYMBOL_INFO>(buffer);
+		p_symbol->SizeOfStruct = sizeof(SYMBOL_INFO);
+		p_symbol->MaxNameLen = MAX_SYM_NAME;
+
 		if (SymFromAddr(process_handle, frame_as_int, nullptr, p_symbol)) {
 			translated_backtrace << p_symbol->Name << " [0x" << std::hex << p_symbol->Address << "]";
 		} else {
