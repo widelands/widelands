@@ -74,7 +74,8 @@ static void segfault_handler(const int sig) {
 		if (SymFromAddr(g_process_handle, frame_as_int, nullptr, p_symbol)) {
 			translated_backtrace << p_symbol->Name << " [0x" << std::hex << p_symbol->Address << "]";
 		} else {
-			translated_backtrace << "Error symbolizing frame address (error code 0x" << GetLastError() << ")";
+			translated_backtrace << "Error symbolizing frame address (error code 0x" << GetLastError()
+			                     << ")";
 		}
 		translated_backtrace << std::endl;
 	}
@@ -153,7 +154,8 @@ int main(int argc, char* argv[]) {
 #ifdef _WIN32
 	g_process_handle = GetCurrentProcess();
 	if (!SymInitialize(g_process_handle, nullptr, true)) {
-		std::cout << "ERROR: Could not initialize the symbolizer (error code 0x" << std::hex << GetLastError() << std::dec << ")" << std::endl;
+		std::cout << "ERROR: Could not initialize the symbolizer (error code 0x" << std::hex
+		          << GetLastError() << std::dec << ")" << std::endl;
 	}
 #endif
 
@@ -163,9 +165,9 @@ int main(int argc, char* argv[]) {
 	 */
 	for (int s : {SIGSEGV,
 #ifdef SIGBUS
-			SIGBUS,  // Not available on all systems
+	              SIGBUS,  // Not available on all systems
 #endif
-			SIGFPE, SIGILL}) {
+	              SIGFPE, SIGILL}) {
 		signal(s, segfault_handler);
 	}
 #endif  // PRINT_SEGFAULT_BACKTRACE
