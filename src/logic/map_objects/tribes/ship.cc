@@ -721,10 +721,16 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 			// Update display in InteractivePlayer
 			Notifications::publish(NoteShip(this, NoteShip::Action::kWaitingForCommand));
 		} break;
-		case USPspResult::kSpottedKnown:  // TODO(tothxa): This could also only send note, but that
-		                                  //   would be inconsistent with civilian expeditions, which
-		                                  //   would be harder to use if they didn't stop. That needs
-		                                  //   some solution first.
+		case USPspResult::kSpottedKnown: {
+			// Compatibility with old behaviour: Stop the ship and send message to player.
+			//
+			// TODO(tothxa): This should also only send a note for display updating, but that would
+			//               be inconsistent with civilian expeditions, which would be harder to use
+			//               if they didn't stop. That needs some solution first.
+			send_message(game, _("Port Space"), _("Port Space Spotted"),
+			             _("A warship arrived at a known port build space."), descr().icon_filename());
+			found_new_target = true;
+		} break;
 		case USPspResult::kFoundNew: {
 			found_new_target = true;
 		} break;
@@ -865,8 +871,17 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 			// Update display in InteractivePlayer
 			Notifications::publish(NoteShip(this, NoteShip::Action::kWaitingForCommand));
 		} break;
-		case USPspResult::kSpottedKnown:  // TODO(tothxa): This could also only send note, but that
-		                                  // needs UI changes to make already known portspaces usable.
+		case USPspResult::kSpottedKnown: {
+			// Compatibility with old behaviour: Stop the ship and send message to player.
+			//
+			// TODO(tothxa): This should also only send a note for display updating, but that needs
+			//               UI changes to make already known portspaces usable.
+			send_message(game, _("Port Space"), _("Port Space Spotted"),
+			             _("An expedition ship arrived at a known port build space."),
+			             descr().icon_filename());
+			set_ship_state_and_notify(
+			   ShipStates::kExpeditionPortspaceFound, NoteShip::Action::kWaitingForCommand);
+		} break;
 		case USPspResult::kFoundNew: {
 			set_ship_state_and_notify(
 			   ShipStates::kExpeditionPortspaceFound, NoteShip::Action::kWaitingForCommand);
