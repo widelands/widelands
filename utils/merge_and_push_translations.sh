@@ -106,11 +106,12 @@ set -x
 # use force to make sure really all files get pulled
 tx pull -a -f
 
-runUpdateScripts=1 # run them at least once
+run_update_scripts=at_least_once # run them at least once
 if [ -n "$(git status -s)" ]; then
   update_authors
   update_appdata
   update_statistics
+  run_update_scripts= # they have run now
 
   # Stage translations
   git add 'po/*/*.po' 'data/i18n/locales/*.json' 'xdg/translations/*.json'
@@ -119,8 +120,6 @@ if [ -n "$(git status -s)" ]; then
 
   # commit translations
   git commit -m "Fetched translations and updated data."
-
-  runUpdateScripts= # has run now
 fi
 
 # -----------------------
@@ -154,10 +153,13 @@ if [ -n "$(git status -s)" ]; then
 
   # Undo one-liner diffs of pure timestamps with no other content
   undo_oneliner_diffs
-  runUpdateScripts=2 # run, files have changed
+
+  if [ -z "$run_update_scripts" ] && [ -n "$(git status -s)" ]; then
+    run_update_scripts=for_pot # run again, pot files have changed
+  fi
 fi
 
-if [ -n "$runUpdateScripts" ]; then # if not run yet or pot file has changed
+if [ -n "$run_update_scripts" ]; then # if not run yet or pot files have changed
   update_authors # in case something has changed unexpectedly
   update_appdata # in case something has changed unexpectedly
   update_statistics
