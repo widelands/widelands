@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
+# Alireza Rashidi, 2023
 # GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
@@ -9,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-08-17 02:21+0000\n"
+"POT-Creation-Date: 2023-08-24 02:15+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: GunChleoc, 2015\n"
+"Last-Translator: Alireza Rashidi, 2023\n"
 "Language-Team: Persian (http://app.transifex.com/widelands/widelands/language/fa/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,18 +29,18 @@ msgstr ""
 #. TRANSLATORS: Short for "Not enough space"
 #: ../../data/scripting/infrastructure.lua:185
 msgid "No Space"
-msgstr ""
+msgstr "فضا نیست"
 
 #: ../../data/scripting/infrastructure.lua:186
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
-msgstr ""
+msgstr "برخی از ساختمان‌های اولیه شما فضای کافی نداشتند و ساخته نشدند. شما در این مورد در یک نقطه ضعف هستید. راه اندازی مجدد این نقشه را با شرایط شروع مناسب در نظر بگیرید."
 
 #: ../../data/scripting/infrastructure.lua:187
 msgid "Not enough space"
-msgstr ""
+msgstr "فضای کافی وجود ندارد"
 
 #: ../../data/scripting/infrastructure.lua:285
 msgid "No rocks nearby"
@@ -127,41 +128,41 @@ msgstr ""
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:380
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:206
 msgid "No AI"
-msgstr ""
+msgstr "بدون هوش مصنوعی"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:96
 msgid "Normal AI"
-msgstr ""
+msgstr "هوش مصنوعی ایده‌آل"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:111
 msgid "Weak AI"
-msgstr ""
+msgstr "هوش مصنوعی ضعیف"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:126
 msgid "Very Weak AI"
-msgstr ""
+msgstr "هوش مصنوعی خیلی ضعیف"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
 #. console
 #: ../../src/base/format/boolean_node.h:52 ../../src/io/profile.cc:50
 msgid "false"
-msgstr ""
+msgstr "نادرست"
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
 #. console
 #: ../../src/base/format/boolean_node.h:52 ../../src/io/profile.cc:38
 msgid "true"
-msgstr ""
+msgstr "درست"
 
 #: ../../src/base/format/float_node.h:33
 msgctxt "decimal_separator"
 msgid "."
-msgstr ""
+msgstr "."
 
 #. * TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably
@@ -291,7 +292,7 @@ msgstr "منوی اصلی"
 #: ../../src/wui/interactive_gamebase.cc:100
 msgctxt "hotkey"
 msgid "Esc"
-msgstr ""
+msgstr "Esc"
 
 #. * TRANSLATORS: Title for the tool menu button in the editor
 #. * TRANSLATORS: Heading in the editor keyboard shortcuts help
@@ -299,7 +300,7 @@ msgstr ""
 #: ../../src/wlapplication_options.cc:1033
 msgctxt "editor"
 msgid "Tools"
-msgstr ""
+msgstr "ابزار"
 
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
@@ -310,21 +311,21 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:130
 #: ../../src/wui/interactive_gamebase.cc:81
 msgid "Show / Hide"
-msgstr ""
+msgstr "نمایش/پنهان"
 
 #: ../../src/editor/editorinteractive.cc:143
 msgid "Tool size"
-msgstr ""
+msgstr "اندازه ابزار"
 
 #: ../../src/editor/editorinteractive.cc:158
 #: ../../src/wlapplication_options.cc:464
 msgid "Undo"
-msgstr ""
+msgstr "واگرد"
 
 #: ../../src/editor/editorinteractive.cc:163
 #: ../../src/wlapplication_options.cc:468
 msgid "Redo"
-msgstr ""
+msgstr "برگرداندن"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/editor/editorinteractive.cc:175
@@ -338,14 +339,14 @@ msgstr "راهنما"
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:40
 #: ../../src/ui_fsmenu/main.cc:433 ../../src/wlapplication_options.cc:446
 msgid "New Map"
-msgstr ""
+msgstr "نقشه جدید"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:214
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:842
 #: ../../src/wlapplication_options.cc:451
 msgid "New Random Map"
-msgstr ""
+msgstr "نقشه تصادفی جدید"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #. * TRANSLATORS: This is the helptext for an access key combination.
@@ -353,7 +354,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:33
 #: ../../src/ui_fsmenu/main.cc:438 ../../src/wlapplication_options.cc:845
 msgid "Load Map"
-msgstr ""
+msgstr "بارگذاری نقشه"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #. * TRANSLATORS: This is the helptext for an access key combination.
@@ -361,12 +362,12 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:53
 #: ../../src/wlapplication_options.cc:848
 msgid "Save Map"
-msgstr ""
+msgstr "ذخیره‌سازی نقشه"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:235
 msgid "Publish Map Online…"
-msgstr ""
+msgstr "عمومی سازی آنلاین نقشه..."
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:243
@@ -374,14 +375,14 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:62
 #: ../../src/wlapplication_options.cc:460
 msgid "Map Options"
-msgstr ""
+msgstr "گزینه های نقشه"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/editor/editorinteractive.cc:248
 #: ../../src/wlapplication_options.cc:851
 msgid "Exit Editor"
-msgstr ""
+msgstr "خروج از ویرایشگر"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:289
@@ -433,7 +434,7 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:330
 #: ../../src/editor/ui_menus/tool_place_critter_options_menu.cc:47
 msgid "Animals"
-msgstr ""
+msgstr "حیوانات"
 
 #. * TRANSLATORS: Tooltip for the animals tool in the editor
 #: ../../src/editor/editorinteractive.cc:333
@@ -467,7 +468,7 @@ msgstr ""
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:359
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:706
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:708
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:171
 msgid "Players"
 msgstr "بازیکنان"
@@ -641,12 +642,12 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:486
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
 #: ../../src/ui_fsmenu/launch_mpg.cc:319 ../../src/ui_fsmenu/main.cc:262
-#: ../../src/wlapplication.cc:1633
+#: ../../src/wlapplication.cc:1645
 msgid "Error"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:1141 ../../src/ui_fsmenu/main.cc:246
-#: ../../src/wlapplication.cc:1635
+#: ../../src/wlapplication.cc:1647
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -811,7 +812,7 @@ msgstr ""
 #. * TRANSLATORS: Help text in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:195
 msgid "Click to select an item. Use the Ctrl key to select multiple items."
-msgstr ""
+msgstr "برای انتخاب یک مورد کلیک کنید.برای انتخاب چندین مورد از کلید CTRL استفاده کنید"
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:198
@@ -987,7 +988,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/field_info_window.cc:262
 #, c-format
 msgid "Enabled Add-Ons: %s"
-msgstr ""
+msgstr "افزونه های فعال: %s"
 
 #: ../../src/editor/ui_menus/help.cc:36 ../../src/ui_fsmenu/login_box.cc:252
 #: ../../src/ui_fsmenu/main.cc:244 ../../src/ui_fsmenu/main.cc:1062
@@ -1053,7 +1054,7 @@ msgstr ""
 #: ../../src/wui/game_main_menu_save_game.cc:100
 #: ../../src/wui/pinned_note.cc:51 ../../src/wui/story_message_box.cc:70
 msgid "OK"
-msgstr ""
+msgstr "خوبه"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:115
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:258
@@ -1074,7 +1075,7 @@ msgstr ""
 #: ../../src/wui/game_main_menu_save_game.cc:99
 #: ../../src/wui/pinned_note.cc:67
 msgid "Cancel"
-msgstr ""
+msgstr "لغو"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:143
 msgid "File names"
@@ -1814,7 +1815,7 @@ msgstr ""
 msgid "Shading Language"
 msgstr ""
 
-#: ../../src/graphic/text/rt_render.cc:1422
+#: ../../src/graphic/text/rt_render.cc:1420
 msgid "Copy link to clipboard"
 msgstr ""
 
@@ -1902,7 +1903,7 @@ msgstr ""
 #. * TRANSLATORS: Header for campaign name
 #: ../../src/logic/addons.cc:61 ../../src/ui_fsmenu/campaigndetails.cc:48
 msgid "Campaign"
-msgstr ""
+msgstr "کمپین"
 
 #: ../../src/logic/addons.cc:64
 msgid "Win Condition"
@@ -2054,11 +2055,11 @@ msgstr ""
 msgid "Initializing…"
 msgstr ""
 
-#: ../../src/logic/game.cc:1249
+#: ../../src/logic/game.cc:1250
 msgid "Trade Offer"
 msgstr ""
 
-#: ../../src/logic/game.cc:1251
+#: ../../src/logic/game.cc:1252
 msgid "This market has received a new trade offer."
 msgstr ""
 
@@ -2700,19 +2701,19 @@ msgstr ""
 msgid "This objective has no description."
 msgstr ""
 
-#: ../../src/logic/player.cc:1986
+#: ../../src/logic/player.cc:1995
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
 msgstr ""
 
-#: ../../src/logic/player.cc:2003
+#: ../../src/logic/player.cc:2012
 #, c-format
 msgctxt "warehouse"
 msgid "Port %d"
 msgstr ""
 
-#: ../../src/logic/player.cc:2003
+#: ../../src/logic/player.cc:2012
 #, c-format
 msgctxt "warehouse"
 msgid "Warehouse %d"
@@ -2815,11 +2816,11 @@ msgid ""
 "You will find related messages in the standard output (stdout.txt on Windows). Please add this information to your report."
 msgstr ""
 
-#: ../../src/logic/replay_game_controller.cc:103
+#: ../../src/logic/replay_game_controller.cc:102
 msgid "End of Replay"
 msgstr ""
 
-#: ../../src/logic/replay_game_controller.cc:104
+#: ../../src/logic/replay_game_controller.cc:103
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may"
 " unpause the game and continue watching if you want to."
@@ -2989,7 +2990,7 @@ msgid "Postloading map objects"
 msgstr ""
 
 #: ../../src/network/gameclient.cc:162 ../../src/network/gamehost.cc:561
-#: ../../src/ui_fsmenu/launch_spg.cc:174 ../../src/wlapplication.cc:756
+#: ../../src/ui_fsmenu/launch_spg.cc:174 ../../src/wlapplication.cc:764
 msgid "Preparing game…"
 msgstr ""
 
@@ -3715,6 +3716,8 @@ msgid "%1$s<br>(%2$s)"
 msgstr ""
 
 #: ../../src/ui_basic/window.cc:101 ../../src/ui_fsmenu/about.cc:41
+#: ../../src/ui_fsmenu/crash_report.cc:70
+#: ../../src/ui_fsmenu/crash_report.cc:163
 #: ../../src/ui_fsmenu/mousewheel_report.cc:74
 #: ../../src/wui/watchwindow.cc:110
 msgid "Close"
@@ -3738,7 +3741,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/about.cc:38 ../../src/ui_fsmenu/main.cc:505
 msgid "About Widelands"
-msgstr ""
+msgstr "درباره بازی"
 
 #: ../../src/ui_fsmenu/about.cc:49 ../../src/ui_fsmenu/about.cc:54
 msgid "Lua Error"
@@ -3916,11 +3919,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:287
 msgid "Refresh"
-msgstr ""
+msgstr "تازه سازی"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:288
 msgid "Refresh the list of add-ons available from the server"
-msgstr ""
+msgstr "تازه سازی فهرست افزونه های موجود"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:305
 msgid "Fix dependencies…"
@@ -5272,6 +5275,54 @@ msgstr ""
 msgid "Campaign Name"
 msgstr ""
 
+#: ../../src/ui_fsmenu/crash_report.cc:43
+msgid "Crash Report Details"
+msgstr ""
+
+#: ../../src/ui_fsmenu/crash_report.cc:61
+#: ../../src/ui_fsmenu/crash_report.cc:151
+msgid "Open link"
+msgstr ""
+
+#: ../../src/ui_fsmenu/crash_report.cc:63
+#: ../../src/ui_fsmenu/crash_report.cc:153
+msgid "Copy link"
+msgstr ""
+
+#: ../../src/ui_fsmenu/crash_report.cc:67
+#: ../../src/ui_fsmenu/crash_report.cc:158
+msgid "Copy report"
+msgstr ""
+
+#: ../../src/ui_fsmenu/crash_report.cc:68
+#: ../../src/ui_fsmenu/crash_report.cc:158
+msgid "Copy the full report to the clipboard"
+msgstr ""
+
+#: ../../src/ui_fsmenu/crash_report.cc:97
+msgid "Crash Report"
+msgstr ""
+
+#: ../../src/ui_fsmenu/crash_report.cc:135
+#, c-format
+msgid ""
+"It looks like Widelands crashed the last time you ran it, but a backtrace "
+"for debugging was automatically generated. Please provide the report to the "
+"Widelands Development Team under %s so we can fix the problem."
+msgstr ""
+
+#: ../../src/ui_fsmenu/crash_report.cc:144
+msgid "Show details…"
+msgstr ""
+
+#: ../../src/ui_fsmenu/crash_report.cc:144
+msgid "View the detailed crash report"
+msgstr ""
+
+#: ../../src/ui_fsmenu/crash_report.cc:161
+msgid "Remind me later"
+msgstr ""
+
 #: ../../src/ui_fsmenu/helpwindow.cc:46 ../../src/wui/helpwindow.cc:48
 #, c-format
 msgid "Help: %s"
@@ -5421,7 +5472,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/keyboard_options.cc:301
 #: ../../src/wlapplication_options.cc:284
 msgid "Editor"
-msgstr ""
+msgstr "ویرایشگر"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:305
 msgid "Fastplace"
@@ -5629,7 +5680,7 @@ msgstr ""
 #. * TRANSLATORS: This is a heading for a help window
 #: ../../src/ui_fsmenu/launch_mpg.cc:448
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "راه‌اندازی بازی چندنفره"
 
 #: ../../src/ui_fsmenu/loadgame.cc:41
 msgid "Choose Game"
@@ -5649,11 +5700,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:79 ../../src/ui_fsmenu/mapselect.cc:71
 msgid "Return to the multiplayer game setup"
-msgstr ""
+msgstr "بازگشت به فهرست راه‌اندازی بازی چندنفره"
 
 #: ../../src/ui_fsmenu/loadgame.cc:80 ../../src/ui_fsmenu/mapselect.cc:73
 msgid "Return to the single player menu"
-msgstr ""
+msgstr "بازگشت به فهرست تک نفره"
 
 #: ../../src/ui_fsmenu/loadgame.cc:81
 msgid "Load this game"
@@ -5680,7 +5731,7 @@ msgstr "لقب:"
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:119
-#: ../../src/ui_fsmenu/netsetup_lan.cc:138 ../../src/wlapplication.cc:677
+#: ../../src/ui_fsmenu/netsetup_lan.cc:138 ../../src/wlapplication.cc:685
 msgid "nobody"
 msgstr ""
 
@@ -5708,7 +5759,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:359
 msgid "Begin a new game"
-msgstr ""
+msgstr "ساهت بازی جدید"
 
 #: ../../src/ui_fsmenu/main.cc:359 ../../src/wlapplication_options.cc:248
 msgid "New Game"
@@ -5717,11 +5768,11 @@ msgstr "بازی جدید"
 #: ../../src/ui_fsmenu/main.cc:361 ../../src/ui_fsmenu/random_game.cc:29
 #: ../../src/wlapplication_options.cc:262
 msgid "New Random Game"
-msgstr ""
+msgstr "بازی تصادفی جدید"
 
 #: ../../src/ui_fsmenu/main.cc:362
 msgid "Create a new random match"
-msgstr ""
+msgstr "ساخت یک بازی تصادفی جدید"
 
 #: ../../src/ui_fsmenu/main.cc:364 ../../src/wlapplication_options.cc:272
 msgid "Campaigns"
@@ -5729,15 +5780,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:364
 msgid "Play a campaign"
-msgstr ""
+msgstr "بازی کردن یک بازی کمپین"
 
 #: ../../src/ui_fsmenu/main.cc:366 ../../src/wlapplication_options.cc:267
 msgid "Tutorials"
-msgstr ""
+msgstr "آموزشی"
 
 #: ../../src/ui_fsmenu/main.cc:367
 msgid "Play one of our beginners’ tutorials"
-msgstr ""
+msgstr "بازی کزدن یکی از مراحل آموزشی ما"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #. * TRANSLATORS: An entry in the game's main menu
@@ -5750,7 +5801,7 @@ msgstr "بار کردن بازی"
 
 #: ../../src/ui_fsmenu/main.cc:370
 msgid "Continue a saved game"
-msgstr ""
+msgstr "ادامه یک بازی از پیش ذخیره شده"
 
 #: ../../src/ui_fsmenu/main.cc:391 ../../src/wlapplication_options.cc:309
 msgid "Continue Playing"
@@ -5816,43 +5867,43 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:479
 msgid "Single Player…"
-msgstr ""
+msgstr "تک نفره..."
 
 #: ../../src/ui_fsmenu/main.cc:480
 msgid "Multiplayer…"
-msgstr ""
+msgstr "چندنفره..."
 
 #: ../../src/ui_fsmenu/main.cc:481
 msgid "Editor…"
-msgstr ""
+msgstr "ویرایشگر..."
 
 #: ../../src/ui_fsmenu/main.cc:483
 msgid "Begin or load a single-player campaign or free game"
-msgstr ""
+msgstr "یک کمپین تک نفره یا بازی رایگان را شروع یا بارگیری کنید"
 
 #: ../../src/ui_fsmenu/main.cc:486
 msgid "Play with your friends over the internet"
-msgstr ""
+msgstr "بازی با دوستان به شکل اینترنتی"
 
 #: ../../src/ui_fsmenu/main.cc:489
 msgid "Launch the map editor"
-msgstr ""
+msgstr "اجرای ویرایشگر نقشه"
 
 #: ../../src/ui_fsmenu/main.cc:492 ../../src/wlapplication_options.cc:257
 msgid "Watch Replay"
-msgstr ""
+msgstr "تماشا بازپخش"
 
 #: ../../src/ui_fsmenu/main.cc:494
 msgid "Watch the replay of an old game"
-msgstr ""
+msgstr "تماشا بازپخش یک بازی قدیمی"
 
 #: ../../src/ui_fsmenu/main.cc:497 ../../src/wlapplication_options.cc:322
 msgid "Add-Ons"
-msgstr ""
+msgstr "افزونه ها"
 
 #: ../../src/ui_fsmenu/main.cc:499
 msgid "Install and manage add-ons"
-msgstr ""
+msgstr "نصب و مدیریت افزونه ها"
 
 #: ../../src/ui_fsmenu/main.cc:501 ../../src/ui_fsmenu/options.cc:87
 #: ../../src/wlapplication_options.cc:339
@@ -5861,19 +5912,19 @@ msgstr "گزینه ها"
 
 #: ../../src/ui_fsmenu/main.cc:503
 msgid "Technical and game-related settings"
-msgstr ""
+msgstr "تنظیمات فنی و مربوط به بازی"
 
 #: ../../src/ui_fsmenu/main.cc:507
 msgid "Readme, License, and Credits"
-msgstr ""
+msgstr "قوانین، حق نشر و اعتبار"
 
 #: ../../src/ui_fsmenu/main.cc:509 ../../src/wlapplication_options.cc:313
 msgid "Exit Widelands"
-msgstr ""
+msgstr "خروج از بازی"
 
 #: ../../src/ui_fsmenu/main.cc:511
 msgid "Quit the game"
-msgstr ""
+msgstr "خروج از Widelands"
 
 #. * TRANSLATORS: %1$s = version string and build type  ("Debug" or "Release")
 #: ../../src/ui_fsmenu/main.cc:516
@@ -6297,7 +6348,7 @@ msgstr ""
 msgid "Team %d"
 msgstr ""
 
-#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:696
+#: ../../src/ui_fsmenu/multiplayersetupgroup.cc:698
 msgid "Clients"
 msgstr ""
 
@@ -6355,7 +6406,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:92
 msgid "Apply"
-msgstr ""
+msgstr "اعمال"
 
 #: ../../src/ui_fsmenu/options.cc:135
 msgid "Language"
@@ -6453,7 +6504,7 @@ msgstr ""
 #. * TRANSLATORS: and it also lets you jump to it on the map.
 #: ../../src/ui_fsmenu/options.cc:333
 msgid "Use single watchwindow mode"
-msgstr ""
+msgstr "از حالت تک پنجره استفاده کنید"
 
 #: ../../src/ui_fsmenu/options.cc:338
 msgid "Display system time in the info panel"
@@ -6755,60 +6806,60 @@ msgstr ""
 msgid "Unmark All"
 msgstr ""
 
-#: ../../src/wlapplication.cc:804
+#: ../../src/wlapplication.cc:814
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr ""
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:805 ../../src/wlapplication.cc:810
+#: ../../src/wlapplication.cc:815 ../../src/wlapplication.cc:820
 #: ../../src/wui/savegameloader.cc:119
 msgid "Error message:"
 msgstr ""
 
-#: ../../src/wlapplication.cc:806
+#: ../../src/wlapplication.cc:816
 msgid "File system error"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1281
+#: ../../src/wlapplication.cc:1293
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1286
+#: ../../src/wlapplication.cc:1298
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1441
+#: ../../src/wlapplication.cc:1453
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1567
+#: ../../src/wlapplication.cc:1579
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1585
+#: ../../src/wlapplication.cc:1597
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1611
+#: ../../src/wlapplication.cc:1623
 msgid "Incompatible"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1648
+#: ../../src/wlapplication.cc:1660
 msgid "Game ended unexpectedly"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1648
+#: ../../src/wlapplication.cc:1660
 msgid "Unexpected error during the game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1651
+#: ../../src/wlapplication.cc:1663
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6822,7 +6873,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1660
+#: ../../src/wlapplication.cc:1672
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6832,11 +6883,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1686
+#: ../../src/wlapplication.cc:1706
 msgid "Emergency save failed"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1687
+#: ../../src/wlapplication.cc:1707
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -7038,27 +7089,27 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:276
 msgid "Singleplayer"
-msgstr ""
+msgstr "تک نفره"
 
 #: ../../src/wlapplication_options.cc:280
 msgid "Multiplayer"
-msgstr ""
+msgstr "چندنفره"
 
 #: ../../src/wlapplication_options.cc:289
 msgid "Editor – Load Map"
-msgstr ""
+msgstr "ویرایشگر – بارگذاری نقشه"
 
 #: ../../src/wlapplication_options.cc:294
 msgid "Editor – New Map"
-msgstr ""
+msgstr "ویرایشگر – نقشه جدید"
 
 #: ../../src/wlapplication_options.cc:299
 msgid "Editor – New Random Map"
-msgstr ""
+msgstr "ویرایشگر – نقشه تصادفی"
 
 #: ../../src/wlapplication_options.cc:317
 msgid "About"
-msgstr ""
+msgstr "درباره"
 
 #: ../../src/wlapplication_options.cc:334
 msgid "Internet Login"
@@ -7122,7 +7173,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:416
 msgid "Exit"
-msgstr ""
+msgstr "خروج"
 
 #: ../../src/wlapplication_options.cc:421
 msgid "Zoom In"
@@ -8351,7 +8402,7 @@ msgstr ""
 
 #: ../../src/wui/fieldaction.cc:558 ../../src/wui/watchwindow.cc:85
 msgid "Watch"
-msgstr ""
+msgstr "تماشا"
 
 #: ../../src/wui/fieldaction.cc:675
 msgid "Build mines"
@@ -8823,7 +8874,7 @@ msgstr ""
 
 #: ../../src/wui/gamedetails.cc:184 ../../src/wui/mapdetails.cc:182
 msgid "Add-Ons:"
-msgstr ""
+msgstr "افزونه ها"
 
 #: ../../src/wui/gamedetails.cc:198
 msgid "Game data error:"
@@ -8964,11 +9015,11 @@ msgstr ""
 msgid "Add ware"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:619
+#: ../../src/wui/inputqueuedisplay.cc:621
 msgid "Hide controls"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:619
+#: ../../src/wui/inputqueuedisplay.cc:621
 msgid "Show controls"
 msgstr ""
 
@@ -9797,21 +9848,21 @@ msgstr ""
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
 #: ../../src/wui/savegametable.cc:183
 msgid "SP = Single Player"
-msgstr ""
+msgstr "SP = تک نفره"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
 #: ../../src/wui/savegametable.cc:187 ../../src/wui/savegametable.cc:246
 msgid "MP = Multiplayer"
-msgstr ""
+msgstr "MP = چندنفره"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
 #: ../../src/wui/savegametable.cc:190 ../../src/wui/savegametable.cc:249
 msgid "H = Multiplayer (Host)"
-msgstr ""
+msgstr "H = چندنفره (هاست)"
 
 #: ../../src/wui/savegametable.cc:193 ../../src/wui/savegametable.cc:252
 msgid "Numbers are the number of players."

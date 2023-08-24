@@ -6,6 +6,7 @@
 # Atanase Albaran, 2021
 # Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
 # Boese Kaiser, 2022
+# David D, 2023
 # GunChleoc, 2016,2018
 # Samuël Weber/GwendalD <samuel.weber@normalesup.org>, 2017
 # Jaypad <ju-ju@nataju.fr>, 2016
@@ -20,9 +21,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-05-01 02:42+0000\n"
+"POT-Creation-Date: 2023-08-24 02:15+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020-2022\n"
+"Last-Translator: David D, 2023\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -389,7 +390,7 @@ msgid ""
 "This file contains an initial savegame and all commands that were issued by "
 "all players, such as building a road or attacking an enemy. The filename "
 "will tell you the time you started the game."
-msgstr ""
+msgstr "Widelands enregistre chaque partie que vous jouez dans un fichier ayant l'extension .wry. Ce fichier contient une sauvegarde du jeu initial et aussi toutes les commandes qui ont été émises par l'ensemble des acteurs, tels que la construction d'une route ou l'attaque d'un ennemi. Le nom du fichier vous donne l'heure à laquelle vous avez commencé la partie."
 
 #: ../../data/txts/help/common_helptexts.lua:31
 msgid ""
@@ -611,6 +612,12 @@ msgid ""
 "unless you have the necessary workers available."
 msgstr "La plupart des bâtiments améliorés nécessitent des travailleurs expérimentés. N'améliorez pas un bâtiments sans avoir le travailleur nécessaire disponible."
 
+#: ../../data/txts/tips/crash.lua:7
+msgid ""
+"Widelands is creating an emergency save, so you can continue playing exactly"
+" where the game closed."
+msgstr ""
+
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/editor.lua:8
 #, lua-format
@@ -642,7 +649,7 @@ msgstr "Maintenir Shift active le premier outil alternatif. Cet outil est dans l
 #: ../../data/txts/tips/editor.lua:24
 msgid ""
 "Holding down Ctrl switches the second alternative tool on (if it exists)."
-msgstr ""
+msgstr "Maintenir Ctrl enfoncé active le second outil alternatif (si celui-ci existe)."
 
 #: ../../data/txts/tips/editor.lua:28
 msgid ""
@@ -787,14 +794,14 @@ msgid ""
 "An economy consists of all buildings and flags connected by roads, ferries, "
 "or ships. The supplies and demands of buildings are handled in their "
 "economy. A player can have more than one economy."
-msgstr ""
+msgstr "Une économie consiste a relier par des routes, ferries, vaisseaux tous les bâtiments et drapeaux. Les approvisionnements et demandes des bâtiments sont gérés par cette économie. Un joueur peut disposer de plus d'une économie."
 
 #: ../../data/txts/tips/general_game.lua:69
 msgid ""
 "You can have more than one economy if their flags are not connected by any "
 "means of transportation. This is why the Configure Economy menu can only be "
 "accessed from flags and warehouses, not the player’s main menu."
-msgstr ""
+msgstr "Vous pouvez avoir plus d'une économie si leurs drapeaux ne sont reliés par aucun moyen de transport. C'est pourquoi le menu Configurer Economie est accessible seulement depuis les drapeaux et entreprôts, pas depuis le menu principal du joueur."
 
 #: ../../data/txts/tips/general_game.lua:73
 msgid ""
@@ -845,7 +852,7 @@ msgid ""
 "touchpad scrolling in the ‘Options’ → ‘Edit keyboard and mouse actions’ "
 "menu. For example, moving the map view can be much more comfortable by "
 "scrolling instead of dragging with the right mouse button."
-msgstr ""
+msgstr "Si vous jouez sur un ordinateur portable à l'aide d'un pavé tactile, vous pouvez assigner des fonctionnalités au défilement du touchpad via le menu \"Options\" → \"Edit keyboard and mouse actions\". Par exemple, faire défiler la vue sur la carte est possible de façon plus confortable au lieu de le faire au moyen du bouton droit de la souris."
 
 #: ../../data/txts/tips/general_game.lua:106
 msgid ""

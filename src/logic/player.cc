@@ -1167,6 +1167,8 @@ void Player::allow_building_type(DescriptionIndex const i, bool const allow) {
  * Economy stuff below
  */
 Economy* Player::create_economy(WareWorker type) {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	std::unique_ptr<Economy> eco(new Economy(*this, type));
 	const Serial serial = eco->serial();
 
@@ -1179,6 +1181,8 @@ Economy* Player::create_economy(WareWorker type) {
 }
 
 Economy* Player::create_economy(Serial serial, WareWorker type) {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	std::unique_ptr<Economy> eco(new Economy(*this, serial, type));
 
 	assert(economies_.count(serial) == 0);
@@ -1190,6 +1194,8 @@ Economy* Player::create_economy(Serial serial, WareWorker type) {
 }
 
 void Player::remove_economy(Serial serial) {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	assert(has_economy(serial));
 	economies_.erase(economies_.find(serial));
 	assert(!has_economy(serial));
@@ -1200,6 +1206,8 @@ const std::map<Serial, std::unique_ptr<Economy>>& Player::economies() const {
 }
 
 Economy* Player::get_economy(Widelands::Serial serial) const {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	if (economies_.count(serial) == 0) {
 		return nullptr;
 	}
@@ -1207,6 +1215,7 @@ Economy* Player::get_economy(Widelands::Serial serial) const {
 }
 
 bool Player::has_economy(Widelands::Serial serial) const {
+	MutexLock m(MutexLock::ID::kObjects);
 	return economies_.count(serial) != 0;
 }
 
