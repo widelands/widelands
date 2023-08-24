@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-05-01 02:42+0000\n"
+"POT-Creation-Date: 2023-08-24 02:15+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Roy Luo <1598359376@qq.com>, 2021\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/widelands/widelands/language/zh_CN/)\n"
@@ -598,6 +598,12 @@ msgid ""
 "Most enhanced buildings need experienced workers. Do not enhance a building "
 "unless you have the necessary workers available."
 msgstr "大多数升级后的建筑物需要有经验的劳动者。除非储备有经验丰富的劳动者，否则不要升级建筑物。"
+
+#: ../../data/txts/tips/crash.lua:7
+msgid ""
+"Widelands is creating an emergency save, so you can continue playing exactly"
+" where the game closed."
+msgstr ""
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/editor.lua:8

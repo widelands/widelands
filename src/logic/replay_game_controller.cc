@@ -30,7 +30,6 @@
 
 ReplayGameController::ReplayGameController(Widelands::Game& game)
    : game_(game), lastframe_(SDL_GetTicks()), time_(game_.get_gametime()) {
-	game_.set_game_controller(std::shared_ptr<ReplayGameController>(this));
 	replayreader_.reset(new Widelands::ReplayReader(game_, game_.replay_filename()));
 }
 

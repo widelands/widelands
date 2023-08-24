@@ -30,6 +30,7 @@
 
 #include <atomic>
 #include <map>
+#include <memory>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -40,6 +41,9 @@
 #include "base/vector.h"
 #include "wlapplication_messages.h"
 
+namespace FsMenu {
+class MainMenu;
+}  // namespace FsMenu
 namespace UI {
 class Panel;
 }  // namespace UI
@@ -132,6 +136,7 @@ struct InputCallback {
 // TODO(sirver): this class makes no sense for c++ - most of these should be
 // stand alone functions.
 struct WLApplication {
+
 	static WLApplication& get(int argc = 0, char const** argv = nullptr);
 	~WLApplication();
 
@@ -196,6 +201,8 @@ struct WLApplication {
 	                           bool replace_ctrl = true,
 	                           bool ask_for_bug_report = true);
 
+	static std::string segfault_backtrace_dir;
+
 private:
 	WLApplication(int argc, char const* const* argv);
 
@@ -217,6 +224,7 @@ private:
 	void cleanup_temp_files();
 	void cleanup_temp_backups(const std::string& dir);
 	void cleanup_temp_backups();
+	std::unique_ptr<FsMenu::MainMenu> check_crash_reports();
 
 	void init_and_run_game_from_template();
 
