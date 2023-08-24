@@ -121,8 +121,8 @@ bool Ship::can_build_port_here(const Coords& coords) const {
 	map.get_rn(fc, &c[4]);
 	map.get_brn(fc, &c[5]);
 	map.get_bln(fc, &c[6]);
-	for (const Widelands::FCoords& fc : c) {
-		if (!can_support_port(fc, BaseImmovable::NONE)) {  // check for blocking immovables
+	for (const Widelands::FCoords& fcc : c) {
+		if (!can_support_port(fcc, BaseImmovable::NONE)) {  // check for blocking immovables
 			return false;
 		}
 	}
@@ -730,7 +730,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 		} break;
 		case USPspResult::kInvalid: {
 			NEVER_HERE();
-		} break;
+		}
 		}
 
 		if (found_new_target) {
@@ -873,7 +873,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 		} break;
 		case USPspResult::kInvalid: {
 			NEVER_HERE();
-		} break;
+		}
 		}
 	} else if (ship_state_ == ShipStates::kExpeditionPortspaceFound) {
 		check_port_space_still_available(game);
