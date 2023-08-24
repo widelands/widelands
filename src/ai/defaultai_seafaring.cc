@@ -597,7 +597,7 @@ void DefaultAI::warship_management(ShipObserver& so) {
 		if (i.guard_ship_needed) {
 			game().send_player_ship_set_destination(*so.ship, i.site->get_portdock());
 			i.guard_ship_needed = false;
-			i.ships_assigned = ++i.ships_assigned;
+			++i.ships_assigned;
 			break;
 		}
 	}
