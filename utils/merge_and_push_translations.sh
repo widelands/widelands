@@ -99,12 +99,29 @@ gitAddGeneratedFiles() {
   git add data/i18n/translation_stats.conf || true
 }
 
+undo_oneliner_diffs() {
+  # Undo one-liner diffs of pure timestamps with no other content
+  set +x
+  for entry in $(git diff --numstat po/ | sed -En 's/^1\t1\t//p'); do
+    if [ -z "$(git diff "$entry" | grep '^[+-][^+-]' | grep -v '^[+-]"POT-Creation-Date:')" ]
+    then # no other diff line remaining
+      echo "Skipping changes to $entry"
+      git checkout "$entry"
+    fi
+  done
+  set -x
+}
+
 # Print all commands.
 set -x
 
 # Pull All translations from Transifex
 # use force to make sure really all files get pulled
 tx pull -a -f
+
+# Undo one-liner diffs of pure timestamps with no other content
+# for fetched translations (*.po) (in case something plays tricks, see #5937)
+undo_oneliner_diffs
 
 run_update_scripts=at_least_once # run them at least once
 if [ -n "$(git status -s)" ]; then
@@ -127,18 +144,8 @@ fi
 # Update source catalogs
 python3 utils/buildcat.py
 
-undo_oneliner_diffs() {
-  # Undo one-liner diffs of pure timestamps with no other content
-  set +x
-  for entry in $(git diff --numstat po/ | sed -En 's/^1\t1\t//p'); do
-    if [ -z "$(git diff "$entry" | grep '^[+-][^+-]' | grep -v '^[+-]"POT-Creation-Date:')" ]
-    then # no other diff line remaining
-      echo "Skipping changes to $entry"
-      git checkout "$entry"
-    fi
-  done
-  set -x
-}
+# Undo one-liner diffs of pure timestamps with no other content
+# for generated catalogs (*.pot)
 undo_oneliner_diffs
 
 if [ -n "$(git status -s)" ]; then
@@ -152,6 +159,7 @@ if [ -n "$(git status -s)" ]; then
   tx pull -a -f
 
   # Undo one-liner diffs of pure timestamps with no other content
+  # for fetched translations (*.po) (in case something plays tricks, see #5937)
   undo_oneliner_diffs
 
   if [ -z "$run_update_scripts" ] && [ -n "$(git status -s)" ]; then
