@@ -137,6 +137,7 @@ if [ -n "$(git status -s)" ]; then
 
   # commit translations
   git commit -m "Fetched translations and updated data."
+  had_commit=yes
 fi
 
 # -----------------------
@@ -184,9 +185,10 @@ else
 
   # Commit
   git commit -m "Updated translations catalogs and statistics."
+  had_commit=yes
 fi
 
-if [ "$(git show --no-patch --format=format:_ FETCH_HEAD HEAD)" != "_" ]; then # check if it is the same commit
+if [ -n "$had_commit" ]; then # if a commit was created
   # push fetched translations and updated catalogs
   git push "$push_target" master
 fi
