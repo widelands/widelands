@@ -19,8 +19,12 @@
 #ifndef WL_GRAPHIC_HYPERLINK_H
 #define WL_GRAPHIC_HYPERLINK_H
 
+#include <SDL.h>
+
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
+
+#define CAN_OPEN_HYPERLINK (SDL_VERSION_ATLEAST(2, 0, 14))
 
 struct NoteHyperlink {
 	CAN_BE_SENT_AS_NOTE(NoteId::Hyperlink)

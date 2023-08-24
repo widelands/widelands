@@ -1202,6 +1202,11 @@ constexpr uint8_t kPortUnderAttackDefendersSearchRadius = 10;
 constexpr uint32_t kAttackAnimationDuration = 2000;
 
 void Ship::battle_update(Game& game) {
+	if (state_is_sinking()) {
+		battles_.clear();
+		return pop_task(game);
+	}
+
 	Battle& current_battle = battles_.back();
 	Ship* target_ship = current_battle.opponent.get(game);
 	if ((target_ship == nullptr || target_ship->state_is_sinking()) &&
@@ -2333,7 +2338,8 @@ void Ship::draw(const EditorGameBase& egbase,
 	}
 
 	const Vector2f point_on_dst = calc_drawpos(egbase, field_on_dst, scale);
-	do_draw_info(info_to_draw, shipname_, statistics_string, point_on_dst, scale, dst);
+	do_draw_info(
+	   info_to_draw, richtext_escape(shipname_), statistics_string, point_on_dst, scale, dst);
 
 	if ((info_to_draw & InfoToDraw::kSoldierLevels) != 0 &&
 	    (ship_type_ == ShipType::kWarship || hitpoints_ < descr().max_hitpoints_)) {

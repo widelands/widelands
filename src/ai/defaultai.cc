@@ -1887,7 +1887,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	if (flags_count > 0) {
 		field.average_flag_dist_to_wh /= flags_count;
 	}
-	// printf("flags count: %2d, avg: %3d\n", flags_count, field.average_flag_dist_to_wh);
+	verb_log_dbg_time(gametime, "[AI %u] flags count: %2d, avg: %3d\n", player_number(), flags_count,
+	                  field.average_flag_dist_to_wh);
 
 	Widelands::HollowArea<> har(
 	   Widelands::Area<>(field.coords, actual_enemy_check_area), kProductionArea + 2);
@@ -2451,8 +2452,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 		   management_data.neuron_pool[35].get_result_safe(bf->average_flag_dist_to_wh, kAbsValue) +
 		   management_data.neuron_pool[42].get_result_safe(
 		      bf->average_flag_dist_to_wh / 3, kAbsValue);
-		// printf("wh distance malus: %3d [dist to wh: %3d]\n", wh_distance_malus,
-		// bf->average_flag_dist_to_wh);
+		verb_log_dbg_time(gametime, "[AI %u] wh distance malus: %3d [dist to wh: %3d]\n",
+		                  player_number(), wh_distance_malus, bf->average_flag_dist_to_wh);
 
 		// For every field test all buildings
 		for (BuildingObserver& bo : buildings_) {

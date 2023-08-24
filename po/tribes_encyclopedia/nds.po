@@ -1147,7 +1147,7 @@ msgctxt "amazons_building"
 msgid ""
 "The hunter-gatherer’s hut needs animals or fish to hunt or catch within the "
 "work area."
-msgstr "De Jägerske- un Pottjerske-Kaat bruukt Deerten of Fiske tum Jagen of Fangen in de Arbeidsgewest."
+msgstr "De Jägerske-Pottjerske-Kaat bruukt Deerten of Fiske tum Jagen of Fangen in de Arbeidsgewest."
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Hunter-Gatherer's
 #. Hut
