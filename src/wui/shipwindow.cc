@@ -479,8 +479,7 @@ void ShipWindow::think() {
 		 * matter if
 		 *   in waiting or already expedition/scouting mode)
 		 */
-		btn_construct_port_->set_enabled(can_act &&
-		                                 (state == Widelands::ShipStates::kExpeditionPortspaceFound));
+		btn_construct_port_->set_enabled(can_act && !ship->exp_port_spaces().empty());
 		bool coast_nearby = false;
 		for (Widelands::Direction dir = 1; dir <= Widelands::LAST_DIRECTION; ++dir) {
 			// NOTE buttons are saved in the format DIRECTION - 1
@@ -649,7 +648,7 @@ void ShipWindow::act_construct_port() {
 		return;
 	}
 	if (Widelands::Game* game = ibase_.get_game()) {
-		game->send_player_ship_construct_port(*ship, ship->exp_port_spaces().front());
+		game->send_player_ship_construct_port(*ship, ship->exp_port_spaces().back());
 	} else {
 		NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 	}

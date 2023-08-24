@@ -397,7 +397,7 @@ InteractivePlayer::has_expedition_port_space(const Widelands::Coords& coords) co
 		if (pair.second.empty()) {
 			continue;
 		}
-		if (pair.second.front() == coords) {
+		if (pair.second.back() == coords) {
 			return HasExpeditionPortSpace::kPrimary;
 		}
 		if (std::find(pair.second.begin(), pair.second.end(), coords) != pair.second.end()) {

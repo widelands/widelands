@@ -490,7 +490,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 	if (!so.ship->exp_port_spaces().empty()) {
 
 		// we score the place (value max == 8)
-		const uint8_t spot_score = spot_scoring(so.ship->exp_port_spaces().front()) * 2;
+		const uint8_t spot_score = spot_scoring(so.ship->exp_port_spaces().back()) * 2;
 		verb_log_dbg_time(gametime, "%d: %s at %3dx%3d: PORTSPACE found, we valued it: %d\n", pn,
 		                  so.ship->get_shipname().c_str(), so.ship->get_position().x,
 		                  so.ship->get_position().y, spot_score);
@@ -498,7 +498,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		// we make a decision based on the score value and random
 		if (RNG::static_rand(8) < spot_score) {
 			// we build a port here
-			game().send_player_ship_construct_port(*so.ship, so.ship->exp_port_spaces().front());
+			game().send_player_ship_construct_port(*so.ship, so.ship->exp_port_spaces().back());
 			so.last_command_time = gametime;
 			so.waiting_for_command_ = false;
 

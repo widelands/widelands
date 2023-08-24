@@ -367,12 +367,23 @@ private:
 
 	PortDock* find_nearest_port(Game& game);
 
+	// Possible return values for update_seen_portspaces()
+	enum class USPspResult { kNoChange, kLostSight, kSpottedKnown, kFoundNew, kInvalid };
+
+	// Checks and remembers port spaces within the ship's vision range.
+	// Sends a message for each newly discovered port space.
+	// The highest priority event will be returned if there are multiple changes.
+	[[nodiscard]] USPspResult
+	update_seen_portspaces(Game& game,
+	                       std::function<bool(const Coords& coords)> is_suitable,
+	                       std::function<void(Game& g)> send_new_portspace_message);
 	void send_message(Game& game,
 	                  const std::string& title,
 	                  const std::string& heading,
 	                  const std::string& description,
 	                  const std::string& picture);
 	bool remember_detected_portspace(const Coords& coords);
+	[[nodiscard]] bool can_build_port_here(const Coords& coords) const;
 	[[nodiscard]] bool suited_as_invasion_portspace(const Coords& coords) const;
 
 	ShipFleet* fleet_{nullptr};
