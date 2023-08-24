@@ -114,7 +114,7 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 
 void BuildingWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	{
-		int* NOCOM = reinterpret_casr<int*>(-1);
+		int* NOCOM = reinterpret_cast<int*>(-1);
 		log_dbg("NOCOM %d", *NOCOM);
 	}
 
