@@ -1506,7 +1506,7 @@ msgstr "De Ader vun deese Goldwascherske-Kaat is leeg. Se produzeert vun nu an v
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Hunter-Gatherer’s Hut"
-msgstr "Jägerske- un Pottjerske-Kaat"
+msgstr "Jägerske-Pottjerske-Kaat"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:40
@@ -1538,7 +1538,7 @@ msgctxt "amazons_building"
 msgid ""
 "The hunter-gatherer working out of this hunter-gatherer’s hut can’t find any"
 " game or fish in her work area."
-msgstr "De Jägerske-Pottjerske, de bi deese Jägerske- un Pottjerske-Kaat warkt, hett keene Fisse tum Fangen un keene Deerten tum Jagen."
+msgstr "De Jägerske-Pottjerske, de bi deese Jägerske-Pottjerske-Kaat warkt, hett keene Fisse tum Fangen un keene Deerten tum Jagen."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/initiation_site/init.lua:8

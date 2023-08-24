@@ -4,6 +4,7 @@
 # 
 # Translators:
 # C138, 2023
+# David D, 2023
 # 
 msgid ""
 msgstr ""
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2023-01-04 20:43+0000\n"
-"Last-Translator: C138, 2023\n"
+"Last-Translator: David D, 2023\n"
 "Language-Team: French (https://app.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +23,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../data/campaigns/fri05.wmf/scripting/init.lua:46
 msgid "Note"
-msgstr ""
+msgstr "Note"
 
 #: ../../data/campaigns/fri05.wmf/scripting/init.lua:47
 msgid ""
@@ -59,7 +60,7 @@ msgstr ""
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:47
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:204
 msgid "Trade"
-msgstr ""
+msgstr "Commerce"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:48
 msgid ""
@@ -88,7 +89,7 @@ msgstr "Vaincre les forces d'Atterdag."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:59
 msgid "Destroy all the enemy’s buildings."
-msgstr ""
+msgstr "Détruisez tous les bâtiments de l'ennemi."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:65
 msgid "Block the bottleneck"
@@ -134,7 +135,7 @@ msgstr "Utilisez les hautes terres à bon escient."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:87
 msgid "Relocate your industry to the Uplands."
-msgstr ""
+msgstr "Déplacer votre industrie vers les hautes terres."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:96
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:106
@@ -271,12 +272,12 @@ msgstr ""
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:164
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:171
 msgid "Greetings"
-msgstr ""
+msgstr "Salutations"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:137
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:151
 msgid "Welcome to Helgoland!"
-msgstr ""
+msgstr "Bienvenue à Helgoland !"
 
 #. TRANSLATORS: Ocke Ketelsen – Introduction 5
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:139
@@ -295,7 +296,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:144
 msgid "Hospitality"
-msgstr ""
+msgstr "Hospitalité"
 
 #. TRANSLATORS: Reebaud – Introduction 6
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:146
@@ -330,7 +331,7 @@ msgstr ""
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:172
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:184
 msgid "Enemies"
-msgstr ""
+msgstr "Ennemis"
 
 #. TRANSLATORS: Henneke Lembeck – Introduction 8
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:160
@@ -343,6 +344,9 @@ msgid ""
 "It does. I see that you recognize this enemy, and I would be interested in "
 "hearing how you met – though I imagine it will not have gone well for them!"
 msgstr ""
+"Cela fait. Je vois que vous reconnaissez cet ennemi, et je serais intéressé "
+"de savoir comment vous vous êtes rencontrés – même si j'imagine que ça ne "
+"s'est pas bien passé pour eux !"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 10
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:174
@@ -353,6 +357,12 @@ msgid ""
 "fact, we were sailing to Föhr to drive the invaders out once and for all "
 "when a storm blew us off our course and to Helgoland."
 msgstr ""
+"Cette hypothèse est fausse, à mon grand chagrin. Par souci de brièveté, je "
+"dirai seulement qu'Atterdag a envahi Föhr avec une force si puissante que "
+"j'ai été contraint de quitter l'île et de demander à Reebaud de m'aider à la"
+" récupérer. En fait, nous naviguions vers Föhr pour chasser les envahisseurs"
+" une fois pour toutes lorsqu'une tempête nous a fait dévier de notre route "
+"vers Helgoland."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 10
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:177
@@ -361,6 +371,9 @@ msgid ""
 "fight this enemy. A warm-up battle, so to speak – I am looking forward to "
 "it!"
 msgstr ""
+"Qu'il l'ait fait pourrait même être une intervention céleste. Nous serons "
+"heureux de vous aider à combattre cet ennemi. Une bataille d'échauffement, "
+"pour ainsi dire – j'ai hâte d'y être !"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:183
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:196
@@ -404,6 +417,11 @@ msgid ""
 "any trees, and no places where you could mine iron and other minerals! How "
 "do you come by?"
 msgstr ""
+"Comment subvenez-vous à vos besoins ici ? Ces roches ont l'air "
+"impressionnantes mais je ne vois pas comment on pourrait les extraire pour "
+"construire des maisons en pierre. Je ne vois pratiquement pas d'arbres et "
+"aucun endroit où l'on pourrait extraire du fer et d'autres minéraux !. "
+"Comment faites-vous ?"
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:206
@@ -416,6 +434,14 @@ msgid ""
 " I will take care of the rest. This chart indicates how many goods of which "
 "sorts we usually trade."
 msgstr ""
+"Par le commerce. Nous vendons des céréales, du poisson et divers autres "
+"produits sur le continent et y achetons des minerais et du granit. "
+"Répartissons les tâches en fonction de ce que chacun de nous fait le mieux :"
+" vous vous chargez de réorganiser notre économie pour la guerre et "
+"d'entraîner notre peuple au combat, et je m'arrangerai pour importer des "
+"marchandises dans la quantité dont vous aurez besoin. Déposez simplement les"
+" marchandises à vendre dans les ports et je m'occupe du reste. Ce graphique "
+"indique le nombre de biens que nous échangeons habituellement."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:212
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:225

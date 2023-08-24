@@ -200,7 +200,7 @@ public:
 	 */
 	/*
 	 This method creates a vector to store the data-to-be-send in. Basically this template magic
-	 (called "parameter pack") is similar to the var-arg magic used by printf(). An arbitrary
+	 (called "parameter pack") is similar to the var-arg magic used by printf. An arbitrary
 	 number of arbitrary-typed parameters might be passed as the Fargs parameter. The compiler than
 	 decides which of the send_T_() methods have to be called. Since each of them takes a different
 	 first argument out of Fargs only one of them can match. The matching methods transforms the

@@ -73,8 +73,8 @@ jobs:
         python-version: 3.x
     - name: Generate documentation
       run: |
-        pip install sphinxcontrib-serializinghtml==1.1.5 sphinx
         cd doc/sphinx
+        pip install -r requirements.txt
         mkdir source/_static
         ./extract_rst.py
         sphinx-build -W -b json -d build/doctrees source build/json

@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
-# David D, 2021
+# David D, 2021,2023
 # GunChleoc, 2016
 # Jaypad <ju-ju@nataju.fr>, 2015
 # Julien Schneider <schneider.julien@gmail.com>, 2020
@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
-"Last-Translator: David D, 2021\n"
+"Last-Translator: David D, 2021,2023\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -831,14 +831,14 @@ msgid ""
 "the balance between wasteful stockpiling and just-in-time production in your"
 " supply chains is one of most profound challenges of perfecting your "
 "economy. When in doubt, lean towards having some extra reserves."
-msgstr ""
+msgstr "Stocker des marchandises est une épée à double tranchant. D'une part, les marchandises en stock sont utiles pour amortir les fluctuations temporaires de votre économie, qui ont tendance à se produire tout le temps. D'un autre côté, tout article qui reste dans un entrepôt au lieu d'être transformé en autre chose est gaspillé. Trouver l'équilibre entre le stockage inutile et la production juste à temps dans vos chaînes d'approvisionnement est l'un des défis les plus importants du perfectionnement de votre économie. En cas de doute, penchez-vous vers des réserves supplémentaires."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:498
 msgid ""
 "To ease the process of switching between different economic situations, you "
 "can save and apply economy profiles at the bottom of the economy options "
 "window. A profile for stockpiling and one for efficiency are preset there."
-msgstr ""
+msgstr "Pour faciliter le processus de basculement entre différentes situations économiques, vous pouvez enregistrer et appliquer des profils économiques au bas de la fenêtre des options économiques. Un profil de stockage et un profil d'efficacité y sont prédéfinis."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
 msgid ""
@@ -847,7 +847,7 @@ msgid ""
 "need. However, sometimes it can be useful to stockpile a ware in very large "
 "quantities. To achieve this, the economy options window allows you to set "
 "the target of a ware to infinite, so that it will always be produced."
-msgstr ""
+msgstr "La plupart du temps, les options économiques sont un outil utile pour s'assurer que les ressources ne sont pas gaspillées pour produire des marchandises dont votre économie n'a pas réellement besoin. Cependant, il peut parfois être utile de stocker une marchandise en très grande quantité. Pour ce faire, la fenêtre des options d'économie vous permet de définir la cible d'une marchandise à l'infini, afin qu'elle soit toujours produite."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:507
 msgid ""
@@ -856,7 +856,7 @@ msgid ""
 "regardless of the economy settings. This can be useful to arrange, for "
 "example, that more building materials are produced near the border even if "
 "there are plenty in stock far away in your homeland."
-msgstr ""
+msgstr "Le même bouton se trouve également dans la fenêtre de construction des sites de production. Là, cela fait que ce seul site produit indéfiniment, quels que soient les paramètres économiques. Cela peut être utile pour faire en sorte, par exemple, que davantage de matériaux de construction soient produits près de la frontière, même s'il y en a beaucoup en stock loin de chez vous."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:513
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:515
