@@ -153,6 +153,7 @@ int main(int argc, char* argv[]) {
 #ifdef PRINT_SEGFAULT_BACKTRACE
 #ifdef _WIN32
 	g_process_handle = GetCurrentProcess();
+	SymSetOptions(SYMOPT_UNDNAME | SYMOPT_DEFERRED_LOADS);
 	if (!SymInitialize(g_process_handle, nullptr, true)) {
 		std::cout << "ERROR: Could not initialize the symbolizer (error code 0x" << std::hex
 		          << GetLastError() << std::dec << ")" << std::endl;

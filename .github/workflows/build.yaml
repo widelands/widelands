@@ -31,6 +31,7 @@ jobs:
         pushd src
         ../utils/find_unused_includes.py
         popd
+        exit 1   # NOCOM
 
   codecheck:
     runs-on: ubuntu-latest
@@ -231,7 +232,7 @@ jobs:
 
   windows-msvc:
     # inspired by https://github.com/lukka/CppCMakeVcpkgTemplate/blob/main/.github/workflows/hosted-pure-workflow.yml
-    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
+    # needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]  # NOCOM
     strategy:
       matrix:
         config: [Debug, Release]
@@ -299,7 +300,7 @@ jobs:
         path: ${{ github.workspace }}\Widelands-${{ github.sha }}-msvc-${{ matrix.config }}-${{ matrix.arch }}.exe
 
   windows:
-    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
+    # needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]  # NOCOM
     strategy:
       matrix:
         config: [Debug, Release]
