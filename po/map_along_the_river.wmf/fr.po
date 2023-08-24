@@ -7,14 +7,15 @@
 # Boese Kaiser, 2022
 # C Jimmy, 2023
 # Renaud Bouchard, 2023
+# David D, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-19 02:46+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
-"Last-Translator: Renaud Bouchard, 2023\n"
+"Last-Translator: David D, 2023\n"
 "Language-Team: French (https://app.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -270,12 +271,17 @@ msgid ""
 " chieftain Hjalmar. They have had a long time of preparement to build up "
 "their deterring armies."
 msgstr ""
+"La zone au-delà des pirates appartient à une tribu développée qui est "
+"dirigée par leur puissant chef Hjalmar. Ils ont eu beaucoup de temps pour "
+"préparer leurs armées dissuasives."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:22
 msgid ""
 "The situation looks quite perilous and my advice is that we direct our "
 "efforts towards building up a strong army."
 msgstr ""
+"La situation semble assez périlleuse et mon conseil est de diriger nos "
+"efforts vers la construction d'une armée forte."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:27
 msgid "Our northern enemy"
@@ -287,22 +293,30 @@ msgid ""
 " our rival in the North is still stronger than all our armies combined. We "
 "should avoid a conflict until we are able to defeat them."
 msgstr ""
+"--Sire, bien que nos soldats puissent affronter n'importe quel ennemi sans "
+"la moindre crainte, notre rival du Nord est toujours plus fort que toutes "
+"nos armées réunies. Nous devons éviter un conflit jusqu'à ce que nous soyons"
+" capables de les vaincre."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:30
 msgid ""
 "Be patient and recognize that a strong army is indispensable in this "
 "situation. Törver has a very bad reputation."
 msgstr ""
+"Soyez patient et reconnaissez qu'une armée forte est indispensable dans "
+"cette situation. Törver a une très mauvaise réputation."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
 msgid "Peril from the North"
-msgstr ""
+msgstr "Péril venant du nord"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:36
 msgid ""
 "Sire, we received an alarming message from one of our explorers. Törver is "
 "expanding his front line and approaching our territory."
 msgstr ""
+"Sire, nous avons reçu un message alarmant d'un de nos explorateurs. Törver "
+"étend sa ligne de front et se rapproche de notre territoire."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:38
 msgid ""
@@ -310,11 +324,16 @@ msgid ""
 "northern enemy, we will enlarge our territory and find more resources to "
 "strengthen our armies."
 msgstr ""
+"Nous ne pouvons pas éviter d'attaquer leurs armées éternellement. Si nous "
+"parvenons à conquérir notre ennemi du nord, nous élargirons notre territoire"
+" et trouverons plus de ressources pour renforcer nos armées."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:40
 msgid ""
 "We can then also use their access to the lake in order to explore more land."
 msgstr ""
+"Nous pourront ensuite utiliser leur accès au lac afin d'explorer plus de "
+"terres."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:46
 msgid "On the good way"
@@ -327,6 +346,10 @@ msgid ""
 "easily. In a desperate move Törver has called in a group of hardened "
 "mercenaries."
 msgstr ""
+"Sire, la bataille avec Törver progresse glorieusement et nous avons déjà "
+"battu la partie la plus forte de son armée. Mais cet ennemi ne sera pas "
+"vaincu facilement. Dans un geste désespéré, Törver a fait appel à un groupe "
+"de mercenaires endurcis."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:52
 msgid "The great lake"
@@ -338,6 +361,10 @@ msgid ""
 "their excellent access to the adjacent great lake. A port in the North will "
 "give us better opportunities to have contact with other tribes."
 msgstr ""
+"Sire, maintenant que nous avons conquis le pays de Törver, nous pouvons "
+"profiter de leur excellent accès au grand lac adjacent. Un port dans le Nord"
+" nous donnera de meilleures opportunités d'avoir des contacts avec d'autres "
+"tribus."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
 msgid ""
@@ -345,6 +372,10 @@ msgid ""
 "ships. Unfortunately, the texts are written in a language that is unknown to"
 " us. Our wise men will try to translate these descriptions."
 msgstr ""
+"Au quartier général de Törver, nous avons trouvé des documents décrivant la "
+"construction de navires. Malheureusement, les textes sont écrits dans une "
+"langue qui nous est inconnue. Nos sages essaieront de traduire ces "
+"descriptions."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:61
 msgid "Searching for gold"
@@ -355,6 +386,8 @@ msgid ""
 "Sire, our men have located an isolated enemy pirate sentry. The abandoned "
 "huts indicate that there is gold nearby."
 msgstr ""
+"Sire, nos hommes ont localisé une sentinelle pirate ennemie isolée. Les "
+"huttes abandonnées indiquent qu'il y a de l'or à proximité."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:64
 msgid ""
@@ -363,6 +396,10 @@ msgid ""
 "to be very good fighters. It is best to establish a strong military presence"
 " here before we proceed."
 msgstr ""
+"Nous devons cependant être prudents si nous voulons conquérir la sentinelle."
+" Il peut y avoir plus de bâtiments ennemis qui seraient hors de vue, et les "
+"pirates sont connus pour être de très bons combattants. Il est préférable "
+"d'établir une forte présence militaire ici avant de continuer."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:70
 msgid "Found a treasure"
@@ -374,6 +411,10 @@ msgid ""
 "have been looted from the gold diggers’ huts nearby. This gold ore will be "
 "transported to our headquarters."
 msgstr ""
+"Sire, nous avons trouvé 25 unités de minerai d'or à l'intérieur de la "
+"sentinelle pirate. Ils ont peut-être été pillés dans les huttes des "
+"chercheurs d'or situées à proximité. Ce minerai d'or sera transporté à notre"
+" siège."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:73
 msgid ""
@@ -382,6 +423,10 @@ msgid ""
 "this area. There is a good building spot only three steps away from the "
 "sentry."
 msgstr ""
+"Avec notre expansion réussie dans cette zone, nous devrions envisager de "
+"construire un entrepôt directement au sud-ouest de la sentinelle afin "
+"d'explorer davantage cette zone. Il y a un bon emplacement de construction à"
+" seulement trois pas de la sentinelle."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:79
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:86
@@ -395,6 +440,10 @@ msgid ""
 "continue. If you bring enough shovels to the new warehouse then volunteers "
 "will remove the swamps."
 msgstr ""
+"Sire, la saison des pluies a créé des marécages le long du ruisseau à l'Est "
+"et nous ne pouvons pas les traverser. Ils doivent être retirés avant de "
+"pouvoir continuer. Si vous apportez suffisamment de pelles au nouvel "
+"entrepôt, les bénévoles enlèveront les marécages."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
 msgid ""
@@ -402,6 +451,10 @@ msgid ""
 "will not have removed the swamps before the next wet season. If you bring "
 "more shovels to the new warehouse then more volunteers will join in."
 msgstr ""
+"Sire, toutes les pelles ont été distribuées, mais si nous continuons à ce "
+"rythme nous n'aurons pas enlevé les marécages avant la prochaine saison "
+"humide. Si vous apportez plus de pelles au nouvel entrepôt, plus de "
+"bénévoles se joindront à vous."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
 msgid ""
@@ -409,20 +462,25 @@ msgid ""
 "and finish them off. Maybe there are even more treasures hidden in their "
 "territory."
 msgstr ""
+"Sire, maintenant que nous avons accès à la cachette des pirates, nous devons"
+" la conquérir et les achever. Peut-être y a-t-il encore plus de trésors "
+"cachés sur leur territoire."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:100
 msgid "The pirates were defeated."
-msgstr ""
+msgstr "Les pirates ont été vaincus."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:101
 msgid ""
 "Sire, we have defeated the pirates. They have hidden some gold in their last"
 " bastion which is now being transferred to our headquarters."
 msgstr ""
+"Sire, nous avons vaincu les pirates. Ils ont caché de l'or dans leur dernier"
+" bastion qui est en train d'être transféré à notre quartier général."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:106
 msgid "Pirates are regrouping"
-msgstr ""
+msgstr "Les pirates se regroupent"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:107
 msgid ""
@@ -431,6 +489,11 @@ msgid ""
 "lost strength. Our dwindling resources can become a problem with such a "
 "mighty enemy in front of us."
 msgstr ""
+"Sire, à la suite de nos attaques contre les pirates, ils ont commencé à se "
+"regrouper avec des pirates d'autres tribus. Ils pourraient retrouver une "
+"grande partie de leur force précédemment perdue. Nos ressources sont en "
+"diminution, cela pourrait devenir un problème avec un ennemi aussi puissant "
+"devant nous."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:112
 msgid "Pirates on the run"
@@ -442,10 +505,13 @@ msgid ""
 "them have fled and moved away in small boats. It is unknown in which "
 "direction they have escaped."
 msgstr ""
+"Sire, grâce à nos efforts fructueux pour chasser les pirates, beaucoup "
+"d'entre eux ont fui et se sont éloignés dans de petits bateaux. On ne sait "
+"pas dans quelle direction ils se sont échappés."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:118
 msgid "Ability to build shipyards"
-msgstr ""
+msgstr "Possibilité de construire des chantiers navals"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:119
 msgid ""
@@ -453,6 +519,10 @@ msgid ""
 "decipher the strange language in Törver’s descriptions that we had found in "
 "his headquarters. From now on we are able to build shipyards."
 msgstr ""
+"Sire, après de longues études et recherches, nos sages ont enfin réussi à "
+"déchiffrer le langage étrange des descriptions de Törver que nous avions "
+"trouvées dans son quartier général. Désormais, nous sommes en mesure de "
+"construire des chantiers navals."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:124
 msgid "Our scout has been captured"
@@ -464,6 +534,9 @@ msgid ""
 "their island. He is the only person who knows the way through the swamps "
 "towards Hjalmar."
 msgstr ""
+"Sire, l'un de nos éclaireurs a été capturé par les pirates et amené sur leur"
+" île. Il est la seule personne qui connaît le chemin à travers les marais "
+"vers Hjalmar."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:127
 msgid ""
@@ -471,6 +544,10 @@ msgid ""
 "We should use the knowledge about shipbuilding that we took from Törver to "
 "build ships and attack their positions."
 msgstr ""
+"Selon nos pêcheurs, il est enfermé dans la forteresse de l'île. Nous "
+"devrions utiliser les connaissances sur la construction navale que nous "
+"avons prises de Törver afin de construire des navires et attaquer leurs "
+"positions."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:133
 msgid "Island conquered"
@@ -482,6 +559,9 @@ msgid ""
 "It turns out that the pirates have left a large amount of gold, beer, and "
 "weapons on the island."
 msgstr ""
+"Sire, nos soldats ont conquis l'île et ont réussi à libérer l'éclaireur. Il "
+"s'avère que les pirates ont laissé une grande quantité d'or, de bière et "
+"d'armes sur l'île."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:139
 msgid "The scout returns"
@@ -492,12 +572,17 @@ msgid ""
 "Sire, our scout has returned to our territory, and he has shown us the road "
 "through the swamps towards Hjalmar."
 msgstr ""
+"Sire, notre éclaireur est revenu sur notre territoire, et il nous a montré "
+"la route à travers les marais vers Hjalmar."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:142
 msgid ""
 "He noticed that we can also move along the other side of the mountain, in "
 "case we might fail here, but it will be much more difficult to do."
 msgstr ""
+"Il a remarqué que nous pouvons aussi nous déplacer de l'autre côté de la "
+"montagne, au cas où nous échouerions ici, mais ce sera beaucoup plus "
+"difficile à faire."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:148
 msgid "The last frontier"
@@ -509,11 +594,16 @@ msgid ""
 "final enemy. They have been expecting us for a long time and will be "
 "prepared for the heaviest battle in their lifetime."
 msgstr ""
+"Sire, nous avons presque vaincu toutes les armées et nous approchons "
+"maintenant de notre dernier ennemi. Ils nous attendent depuis longtemps et "
+"seront prêts pour la plus dure bataille de leur vie."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:151
 msgid ""
 "Make sure that our armies are at full strength and then act decisively."
 msgstr ""
+"Assurez-vous que nos armées soient à pleine puissance, puis agissez de "
+"manière décisive."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:157
 msgid "Victory!"
@@ -529,6 +619,9 @@ msgid ""
 " conquered our rivalling tribes, but you have also captured the hearts of "
 "your loving people."
 msgstr ""
+"Vous avez atteint tous les objectifs et vaincu tous nos ennemis. Vous avez "
+"non seulement conquis nos tribus rivales, mais vous avez également conquis "
+"le cœur de votre peuple aimant."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:162
 msgid "Your name will be remembered forever."

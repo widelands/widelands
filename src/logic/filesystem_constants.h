@@ -84,6 +84,12 @@ const std::string kAddOnLocaleVersions = "addons_i18n_versions";
 /// Filesystem names for screenshots
 const std::string kScreenshotsDir = "screenshots";
 
+/// Filesystem names for crash reports
+const std::string kCrashDir = "crash";
+const std::string kCrashExtension = ".txt";
+const std::string kOldCrashExtension = ".stale";
+constexpr double kCrashFilesKeepAroundTime = 8 * 7 * 24 * 60 * 60;  // 8 weeks
+
 /// Filesystem names for config
 const std::string kConfigFile = "config";
 
