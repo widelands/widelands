@@ -181,14 +181,14 @@ print('Done!')
 
 # Validate Appdata
 if shutil.which('appstreamcli'):
-    subprocess.run(['appstreamcli', 'validate', appdata_filepath])
+    appdata_result = subprocess.run(['appstreamcli', 'validate', appdata_filepath])
 elif shutil.which('appstream-util'):
-    subprocess.run(['appstream-util', 'validate-relax', appdata_filepath])
+    appdata_result = subprocess.run(['appstream-util', 'validate-relax', appdata_filepath])
 else:
     print('Cannot validate generated appdata file.')
+    appdata_result = FileNotFoundError() # dummy object for returncode
+    appdata_result.returncode = 0
 
-# Validate desktop file. We don't get return codes, so we have to parse it
-desktop_result = subprocess.run(['desktop-file-validate', desktop_filepath],
-                                capture_output=True)
+desktop_result = subprocess.run(['desktop-file-validate', desktop_filepath])
 
-sys.exit(desktop_result.returncode)
+sys.exit(max(desktop_result.returncode, appdata_result.returncode))
