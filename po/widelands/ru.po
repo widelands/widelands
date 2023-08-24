@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-08-21 02:40+0000\n"
+"POT-Creation-Date: 2023-08-24 02:15+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022-2023\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
@@ -657,12 +657,12 @@ msgstr "Вы уверены, что хотите выйти из редакто�
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:486
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
 #: ../../src/ui_fsmenu/launch_mpg.cc:319 ../../src/ui_fsmenu/main.cc:262
-#: ../../src/wlapplication.cc:1633
+#: ../../src/wlapplication.cc:1645
 msgid "Error"
 msgstr "Ошибка"
 
 #: ../../src/editor/editorinteractive.cc:1141 ../../src/ui_fsmenu/main.cc:246
-#: ../../src/wlapplication.cc:1635
+#: ../../src/wlapplication.cc:1647
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -1832,7 +1832,7 @@ msgstr "OpenGL"
 msgid "Shading Language"
 msgstr "Язык шейдинга"
 
-#: ../../src/graphic/text/rt_render.cc:1422
+#: ../../src/graphic/text/rt_render.cc:1420
 msgid "Copy link to clipboard"
 msgstr "Скопировать ссылку в буфер обмена"
 
@@ -3023,7 +3023,7 @@ msgid "Postloading map objects"
 msgstr "Загрузка объектов карты"
 
 #: ../../src/network/gameclient.cc:162 ../../src/network/gamehost.cc:561
-#: ../../src/ui_fsmenu/launch_spg.cc:174 ../../src/wlapplication.cc:756
+#: ../../src/ui_fsmenu/launch_spg.cc:174 ../../src/wlapplication.cc:764
 msgid "Preparing game…"
 msgstr "Подготовка к игре..."
 
@@ -3765,6 +3765,8 @@ msgid "%1$s<br>(%2$s)"
 msgstr "%1$s<br>(%2$s)"
 
 #: ../../src/ui_basic/window.cc:101 ../../src/ui_fsmenu/about.cc:41
+#: ../../src/ui_fsmenu/crash_report.cc:70
+#: ../../src/ui_fsmenu/crash_report.cc:163
 #: ../../src/ui_fsmenu/mousewheel_report.cc:74
 #: ../../src/wui/watchwindow.cc:110
 msgid "Close"
@@ -5346,6 +5348,54 @@ msgstr "Название племени"
 msgid "Campaign Name"
 msgstr "Название кампании"
 
+#: ../../src/ui_fsmenu/crash_report.cc:43
+msgid "Crash Report Details"
+msgstr ""
+
+#: ../../src/ui_fsmenu/crash_report.cc:61
+#: ../../src/ui_fsmenu/crash_report.cc:151
+msgid "Open link"
+msgstr ""
+
+#: ../../src/ui_fsmenu/crash_report.cc:63
+#: ../../src/ui_fsmenu/crash_report.cc:153
+msgid "Copy link"
+msgstr ""
+
+#: ../../src/ui_fsmenu/crash_report.cc:67
+#: ../../src/ui_fsmenu/crash_report.cc:158
+msgid "Copy report"
+msgstr ""
+
+#: ../../src/ui_fsmenu/crash_report.cc:68
+#: ../../src/ui_fsmenu/crash_report.cc:158
+msgid "Copy the full report to the clipboard"
+msgstr ""
+
+#: ../../src/ui_fsmenu/crash_report.cc:97
+msgid "Crash Report"
+msgstr ""
+
+#: ../../src/ui_fsmenu/crash_report.cc:135
+#, c-format
+msgid ""
+"It looks like Widelands crashed the last time you ran it, but a backtrace "
+"for debugging was automatically generated. Please provide the report to the "
+"Widelands Development Team under %s so we can fix the problem."
+msgstr ""
+
+#: ../../src/ui_fsmenu/crash_report.cc:144
+msgid "Show details…"
+msgstr ""
+
+#: ../../src/ui_fsmenu/crash_report.cc:144
+msgid "View the detailed crash report"
+msgstr ""
+
+#: ../../src/ui_fsmenu/crash_report.cc:161
+msgid "Remind me later"
+msgstr ""
+
 #: ../../src/ui_fsmenu/helpwindow.cc:46 ../../src/wui/helpwindow.cc:48
 #, c-format
 msgid "Help: %s"
@@ -5754,7 +5804,7 @@ msgstr "Имя:"
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:119
-#: ../../src/ui_fsmenu/netsetup_lan.cc:138 ../../src/wlapplication.cc:677
+#: ../../src/ui_fsmenu/netsetup_lan.cc:138 ../../src/wlapplication.cc:685
 msgid "nobody"
 msgstr "никто"
 
@@ -6829,60 +6879,60 @@ msgstr "Пометить все"
 msgid "Unmark All"
 msgstr "Снять метки со всех"
 
-#: ../../src/wlapplication.cc:804
+#: ../../src/wlapplication.cc:814
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr "Игра не нашла этот файл: \"%s\""
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:805 ../../src/wlapplication.cc:810
+#: ../../src/wlapplication.cc:815 ../../src/wlapplication.cc:820
 #: ../../src/wui/savegameloader.cc:119
 msgid "Error message:"
 msgstr "Сообщение об ошибке:"
 
-#: ../../src/wlapplication.cc:806
+#: ../../src/wlapplication.cc:816
 msgid "File system error"
 msgstr "Ошибка файловой системы"
 
-#: ../../src/wlapplication.cc:1281
+#: ../../src/wlapplication.cc:1293
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr "Не указан параметр командной строки %s"
 
-#: ../../src/wlapplication.cc:1286
+#: ../../src/wlapplication.cc:1298
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr "Сочетать %s с другими действиями не получится"
 
-#: ../../src/wlapplication.cc:1441
+#: ../../src/wlapplication.cc:1453
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Неизвестный параметр командной строки: %s\nМожет, пропущен знак \"=\"?"
 
-#: ../../src/wlapplication.cc:1567
+#: ../../src/wlapplication.cc:1579
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr "Нельзя использовать сочетания параметров --xres/--yres, --maximized и --fullscreen. Выберите что-то одно"
 
-#: ../../src/wlapplication.cc:1585
+#: ../../src/wlapplication.cc:1597
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Задан неизвестный параметр командной строки: %s"
 
-#: ../../src/wlapplication.cc:1611
+#: ../../src/wlapplication.cc:1623
 msgid "Incompatible"
 msgstr "Несовместимо"
 
-#: ../../src/wlapplication.cc:1648
+#: ../../src/wlapplication.cc:1660
 msgid "Game ended unexpectedly"
 msgstr "Неожиданный конец игры"
 
-#: ../../src/wlapplication.cc:1648
+#: ../../src/wlapplication.cc:1660
 msgid "Unexpected error during the game"
 msgstr "Неожиданная ошибка во время игры"
 
-#: ../../src/wlapplication.cc:1651
+#: ../../src/wlapplication.cc:1663
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6896,7 +6946,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Во время игры произошла ошибка. Сообщение об ошибке:\n\n%1$s\n\nПожалуйста, сообщите об этой проблеме, чтобы помочь нам улучшить Widelands. Вы найдете соответствующие сообщения в стандартном выводе (stdout.txt в Windows). Вы используете версию %2$s.\n\nПожалуйста, добавьте эту информацию в свой отчет.\n\nХотели бы вы, чтобы Widelands попытался создать автосохранение? Часто – хотя и не всегда – можно загрузить его и продолжить играть."
 
-#: ../../src/wlapplication.cc:1660
+#: ../../src/wlapplication.cc:1672
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6906,11 +6956,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Игра неожиданно завершилась по следующей причине:\n\n%s.\n\nХотели бы вы, чтобы Widelands попытался создать автосохранение? Часто – хотя и не всегда – можно загрузить его и продолжить играть."
 
-#: ../../src/wlapplication.cc:1686
+#: ../../src/wlapplication.cc:1706
 msgid "Emergency save failed"
 msgstr "Автосохранение завершилось с ошибкой"
 
-#: ../../src/wlapplication.cc:1687
+#: ../../src/wlapplication.cc:1707
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"

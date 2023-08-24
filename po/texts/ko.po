@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-05-01 02:42+0000\n"
+"POT-Creation-Date: 2023-08-24 02:15+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: ks k, 2017-2021\n"
 "Language-Team: Korean (http://app.transifex.com/widelands/widelands/language/ko/)\n"
@@ -604,6 +604,12 @@ msgid ""
 "Most enhanced buildings need experienced workers. Do not enhance a building "
 "unless you have the necessary workers available."
 msgstr "대부분의 고급 건물들에는 숙련된 일꾼들 필요합니다. 필요한 일꾼들이 없는 한 건물을 강화하지 마십시오."
+
+#: ../../data/txts/tips/crash.lua:7
+msgid ""
+"Widelands is creating an emergency save, so you can continue playing exactly"
+" where the game closed."
+msgstr ""
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/editor.lua:8
