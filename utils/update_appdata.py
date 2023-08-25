@@ -25,6 +25,10 @@ import sys
 # The output is written to ../xdg/org.widelands.Widelands.desktop
 #
 # All translations are sourced from ../xdg/translations/
+#
+# If used with the --nonet command line option, the validators will be executed with the
+# same or the equivalent --no-net. This skips the downloading of the screenshot images
+# in restricted environments without network access, such as e.g. flatpak-builder.
 
 
 print('Updating appdata.xml and .desktop files')
@@ -180,10 +184,18 @@ print('Done!')
 
 
 # Validate Appdata
+skip_screenshot_check = len(sys.argv) > 1 and sys.argv[1] == "--nonet"
+
 if shutil.which('appstreamcli'):
-    appdata_result = subprocess.run(['appstreamcli', 'validate', appdata_filepath])
+    validate_cmd = ['appstreamcli', 'validate', appdata_filepath]
+    if skip_screenshot_check:
+        validate_cmd.insert(2, "--no-net")
+    appdata_result = subprocess.run(validate_cmd)
 elif shutil.which('appstream-util'):
-    appdata_result = subprocess.run(['appstream-util', 'validate-relax', appdata_filepath])
+    validate_cmd = ['appstream-util', 'validate-relax', appdata_filepath]
+    if skip_screenshot_check:
+        validate_cmd.insert(2, "--nonet")
+    appdata_result = subprocess.run(validate_cmd)
 else:
     print('Cannot validate generated appdata file.')
     appdata_result = FileNotFoundError() # dummy object for returncode
