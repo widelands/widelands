@@ -2207,7 +2207,7 @@ void NavalInvasionBase::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWr
 	Bob::save(egbase, mos, fw);
 
 	fw.unsigned_32(soldiers_.size());
-	for (auto& soldier : soldiers_) {
+	for (const auto& soldier : soldiers_) {
 		fw.unsigned_32(mos.get_object_file_index(*soldier.get(egbase)));
 	}
 }
