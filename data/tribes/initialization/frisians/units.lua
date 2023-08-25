@@ -1613,8 +1613,14 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("building", "Hunts animals to produce meat."),
             -- TRANSLATORS: Note helptext for a Frisian production site: Hunter's House
             note = pgettext("frisians_building", "The hunter’s house needs animals to hunt within the work area."),
-            -- TRANSLATORS: Performance helptext for a Frisian production site: Hunter's House
-            performance = pgettext("frisians_building", "The hunter pauses %s before going to work again. He produces one fur after he has produced five pieces of meat."):bformat(format_seconds(35))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Hunter's House, part 1
+               pgettext("frisians_building", "This building can produce one meat between %1$s and %2$s."):bformat(format_seconds(43), format_minutes_seconds(1, 37)),
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Hunter's House, part 2
+               pgettext("frisians_building", "In case of slopes or obstacles in the way, the time is increased."),
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Hunter's House, part 3
+               pgettext("frisians_building", "The hunter produces one fur after he has produced five pieces of meat."),
+            }
          }
       },
       {

@@ -1579,7 +1579,13 @@ wl.Descriptions():new_tribe {
             lore = pgettext("atlanteans_building", "Sometimes we end up in a region with no fish, so we must hunt. "..
                                                    "Game will reproduce by itself, if not hunted too much. But yes, fish is our main meal."),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Hunter's House
-            lore_author = pgettext("atlanteans_building", "Hunter answering a fisher")
+            lore_author = pgettext("atlanteans_building", "Hunter answering a fisher"),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Hunter's House, part 1
+               pgettext("atlanteans_building", "This building can produce one meat between %1$s and %2$s."):bformat(format_seconds(44), format_minutes_seconds(1, 34)),
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Hunter's House, part 2
+               pgettext("atlanteans_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {

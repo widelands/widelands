@@ -1215,8 +1215,12 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("building", "Hunts animals to produce meat."),
             -- TRANSLATORS: Note helptext for a Barbarian production site: Hunter's Hut
             note = pgettext("barbarians_building", "The hunter’s hut needs animals to hunt within the work area."),
-            -- TRANSLATORS: Performance helptext for a Barbarian production site: Hunter's Hut
-            performance = pgettext("barbarians_building", "The hunter pauses %s before going to work again."):bformat(format_seconds(35))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Hunter's Hut, part 1
+               pgettext("barbarians_building", "This building can produce one meat between %1$s and %2$s."):bformat(format_seconds(43), format_minutes_seconds(1, 34)),
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Hunter's Hut, part 2
+               pgettext("barbarians_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {

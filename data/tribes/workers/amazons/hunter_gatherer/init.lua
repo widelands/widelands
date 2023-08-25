@@ -16,6 +16,7 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       hunt = {
+         -- time: 1 sec
          "findobject=type:bob radius:14 attrib:eatable",
          "walk=object",
          "animate=idle duration:1s",
@@ -24,6 +25,7 @@ wl.Descriptions():new_worker_type {
          "return"
       },
       fish = {
+         -- time: 1 sec
          "findspace=size:any radius:14 resource:resource_fish",
          "walk=coords",
          "playsound=sound/fisher/fisher_throw_net priority:50% allow_multiple",

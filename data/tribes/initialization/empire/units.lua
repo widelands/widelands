@@ -1357,7 +1357,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Empire production site: Hunter's House
             purpose = pgettext("building", "Hunts animals to produce meat."),
             -- TRANSLATORS: Note helptext for an Empire production site: Hunter's House
-            note = pgettext("empire_building", "The hunter’s house needs animals to hunt within the work area.")
+            note = pgettext("empire_building", "The hunter’s house needs animals to hunt within the work area."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire production site: Hunter's House, part 1
+               pgettext("empire_building", "This building can produce one meat between %1$s and %2$s."):bformat(format_seconds(43), format_minutes_seconds(1, 34)),
+               -- TRANSLATORS: Performance helptext for an Empire production site: Hunter's House, part 2
+               pgettext("empire_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {

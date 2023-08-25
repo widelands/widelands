@@ -17,6 +17,7 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       hunt = {
+         -- time: 1 sec
          "findobject=type:bob radius:14 attrib:eatable",
          "walk=object",
          "animate=idle duration:1s",
