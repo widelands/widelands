@@ -171,15 +171,13 @@ if [ -n "$(git status -s)" ]; then
   # Undo one-liner diffs of pure timestamps with no other content
   # for fetched translations (*.po) (in case something plays tricks, see #5937)
   undo_oneliner_diffs
-fi
 
-# in case translations were edited while this script was running
-update_authors
-update_appdata
-# and this also changes by a catalog change
-update_statistics
+  # in case translations were edited while this script was running
+  update_authors
+  update_appdata
+  # and this also changes by a catalog change
+  update_statistics
 
-if [ -n "$(git status -s)" ]; then
   # Stage changes
   # - Translations and templates
   git add 'po/*/*.po' 'po/*/*.pot' 'data/i18n/locales/*.json' 'xdg/translations/*.json' || true
