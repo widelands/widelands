@@ -30,7 +30,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-08-05 02:23+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Klaus Halfmann <klaus.halfmann@arcor.de>, 2022-2023\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2023\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1380,7 +1380,7 @@ msgid ""
 "the economy, production of one of each tool takes %1$s and one of each spear"
 " takes %2$s on average. If only one kind of tool or spear is needed by the "
 "economy, its production takes %3$s on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Werkzeuge und Speere von der Wirtschaft benötigt werden, dauert die Produktion jeweils eines Werkzeugs von Allen im Durchschnitt %1$sund die jeweils eines Speers von Allen im Durchschnitt %2$s. Wenn nur ein Werkzeug oder Speer benötigt wird, dauert seine Produktion im Durchschnitt %3$s."
 
 #. TRANSLATORS: Lore helptext for an Amazon production site: Dressmakery
 #: ../../data/tribes/initialization/amazons/units.lua:1411
@@ -1414,7 +1414,7 @@ msgid ""
 "needed by the economy, production of one of each of them takes %1$s on "
 "average. If only one kind of them is needed by the economy, its production "
 "takes %2$s on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Kleidungen, Stiefel und Rüstungen von der Wirtschaft benötigt werden, dauert die Produktion jeweils eines von Allen von ihnen im Durchschnitt %1$s. Wenn nur eines von ihnen benötigt wird, dauert seine Produktion im Durchschnitt %2$s."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Charcoal Kiln
 #: ../../data/tribes/initialization/amazons/units.lua:1424
@@ -4348,7 +4348,7 @@ msgid ""
 " takes %2$s on average. If only one kind of food is needed by the economy, "
 "production of one smoked fish takes %3$s and one smoked meat takes %4$s on "
 "average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Arten geräucherter Nahrung von der Wirtschaft benötigt werden, dauert die Produktion eines Räucherfischs im Durchschnitt %1$sund die eines Räucherfleischs im Durchschnitt %2$s. Wenn nur eine Art Nahrung benötigt wird, dauert die Produktion eines Räucherfischs im Durchschnitt %3$s und die eines Räucherfleischs im Durchschnitt %4$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Mill
 #: ../../data/tribes/initialization/atlanteans/units.lua:1641
@@ -4388,7 +4388,7 @@ msgid ""
 " economy, production of one sack of each kind of flour takes %1$s on "
 "average. If only one kind of flour is needed by the economy, its production "
 "takes %2$s on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und beide Sorten Mehl von der Wirtschaft benötigt werden, dauert die Produktion jeweils eines Sacks von jeder Sorte im Durchschnitt %1$s. Wenn nur eine Sorte Mehl benötigt wird, dauert seine Produktion im Durchschnitt %2$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Bakery
 #: ../../data/tribes/initialization/atlanteans/units.lua:1656
@@ -4494,7 +4494,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Metalle von der Wirtschaft benötigt werden, dauert die Produktion eines Eisens im Durchschnitt %1$sund ein Barren Gold benötigt im Durchschnitt %2$s. Wenn nur eine Art Metall benötigt wird, dauert die Produktion eines Eisens im Durchschnitt %3$s und die eines Goldbarrens im Durchschnitt %4$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Toolsmithy
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Metal
@@ -4528,7 +4528,7 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Werkzeuge von der Wirtschaft benötigt werden, dauert die Produktion jeweils eines von allen Werkzeugen im Durchschnitt %1$s. Wenn nur eines von ihnen benötigt wird, dauert seine Produktion im Durchschnitt %2$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Weapon
 #. Smithy
@@ -4567,7 +4567,7 @@ msgid ""
 "one kind of trident is needed by the economy, production of one light "
 "trident takes %2$s and one long trident, one steel trident, one double "
 "trident or one heavy double trident takes %3$s on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Dreizacke von der Wirtschaft benötigt werden, dauert die Produktion jeweils eines von allen Dreizacken im Durchschnitt %1$s. Wenn nur eine Art Dreizack benötigt wird, dauert die Produktion eines leichten Dreizacks im Durchschnitt %2$s, und ein langer Dreizack, ein Stahl-Dreizack, ein Doppel-Dreizack oder ein schwerer Doppel-Dreizack dauern im Durchschnitt %3$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Armor
 #. Smithy
@@ -4596,7 +4596,7 @@ msgid ""
 "the economy, production of one of each kind takes %1$s on average. If only "
 "one kind of shield is needed by the economy, production of one steel shield "
 "takes %2$s and one advanced shield takes %3$s on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und beide Arten Schilde von der Wirtschaft benötigt werden, dauert die Produktion jeweils eines von allen Schilden im Durchschnitt %1$s. Wenn nur ein Schild benötigt wird, dauert die Produktion eines Stahlschildes im Durchschnitt %2$s, und ein verbesserter Schild dauert im Durchschnitt %3$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Barracks
 #: ../../data/tribes/initialization/atlanteans/units.lua:1740
@@ -4753,7 +4753,7 @@ msgid ""
 "needed by the economy, production of one of each cloth and tabard takes %1$s"
 " on average. If only one kind of cloth or tabard is needed by the economy, "
 "its production takes %2$s on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Arten Stoff und alle Wappenröcke von der Wirtschaft benötigt werden, dauert die Produktion jeweils eines von allen Wappenröcken und Stoffen im Durchschnitt %1$s. Wenn nur ein Stoff oder Wappenrock benötigt wird, dauert seine Produktion im Durchschnitt %2$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Crystal
 #. Mine
@@ -4789,7 +4789,7 @@ msgid ""
 " diamond takes %3$s on average. If only one kind of mineral is needed by the"
 " economy, production of one granite takes %4$s, one quartz takes %5$s and "
 "one diamond takes %6$s on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Bodenschätze von der Wirtschaft benötigt werden, dauert die Produktion eines Steins im Durchschnitt %1$s, ein Bergkristall dauert im Durchschnitt %2$s und ein Diamant dauert im Durchschnitt %3$s. Wenn nur eine Art Bodenschätze benötigt wird, dauert die Produktion eines Steins im Durchschnitt %4$s,  ein Bergkristall dauert im Durchschnitt %5$s und ein Diamant dauert im Durchschnitt %6$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for production site: Coal Mine
@@ -6859,7 +6859,7 @@ msgid ""
 "economy, production of one of each food takes %1$s on average. If only one "
 "kind of food is needed by the economy, production of one ration takes %2$s "
 "and one snack takes %3$s on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Arten Nahrung von der Wirtschaft benötigt werden, dauert die Produktion jeweils eines von allen Nahrungsmitteln im Durchschnitt %1$s. Wenn nur eine Nahrung benötigt wird, dauert die Produktion einer Ration im Durchschnitt %2$s und ein Snack dauert im Durchschnitt %3$s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Big Inn
 #: ../../data/tribes/initialization/barbarians/units.lua:1368
@@ -6891,7 +6891,7 @@ msgid ""
 "economy, production of one of each food takes %1$s on average. If only one "
 "kind of food is needed by the economy, production of one ration takes %2$s, "
 "one snack takes %3$s and one meal takes %4$s on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Arten Nahrung von der Wirtschaft benötigt werden, dauert die Produktion jeweils eines von allen Nahrungsmitteln im Durchschnitt %1$s. Wenn nur eine Nahrung benötigt wird, dauert die Produktion einer Ration im Durchschnitt %2$s, ein Snack dauert im Durchschnitt %3$s und eine Mahlzeit dauert im Durchschnitt %4$s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Charcoal Kiln
 #: ../../data/tribes/initialization/barbarians/units.lua:1381
@@ -6935,7 +6935,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Metalle von der Wirtschaft benötigt werden, dauert die Produktion eines Eisens im Durchschnitt %1$sund ein Barren Gold benötigt im Durchschnitt %2$s. Wenn nur eine Art Metall benötigt wird, dauert die Produktion eines Eisens im Durchschnitt %3$s und die eines Goldbarrens im Durchschnitt %4$s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Metal Workshop
 #: ../../data/tribes/initialization/barbarians/units.lua:1413
@@ -6969,7 +6969,7 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Werkzeuge von der Wirtschaft benötigt werden, dauert die Produktion jeweils eines von allen Werkzeugen im Durchschnitt %1$s. Wenn nur eines von ihnen benötigt wird, dauert seine Produktion im Durchschnitt %2$s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Warmill
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Ax Workshop
@@ -7017,7 +7017,7 @@ msgid ""
 "If this building is fully supplied and all axes are needed by the economy, "
 "production of one of each ax takes %1$s on average. If only one kind of ax "
 "is needed by the economy, its production takes %2$s on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Äxte von der Wirtschaft benötigt werden, dauert die Produktion jeweils einer von allen Äxten im Durchschnitt %1$s. Wenn nur eine Axt benötigt wird, dauert ihre Produktion im Durchschnitt %2$s."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Warmill,
 #. part 2
@@ -7171,7 +7171,7 @@ msgid ""
 "economy, production of one of each helmet takes %1$s on average. If only one"
 " kind of helmet is needed by the economy, production of one helmet takes "
 "%2$s, one mask takes %3$s and one warhelm takes %4$s on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Arten Helme von der Wirtschaft benötigt werden, dauert die Produktion jeweils eines von allen Helmen im Durchschnitt %1$s. Wenn nur eine Art Helm benötigt wird, dauert die Produktion eines Helms im Durchschnitt %2$s, eine Maske dauert im Durchschnitt %3$s und ein Kriegshelm dauert im Durchschnitt %4$s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Granite Mine
 #: ../../data/tribes/initialization/barbarians/units.lua:1523
@@ -10952,7 +10952,7 @@ msgid ""
 "economy, production of one of each food takes %1$s on average. If only one "
 "kind of food is needed by the economy, production of one ration takes %2$s "
 "and one meal takes %3$s on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Arten Nahrung von der Wirtschaft benötigt werden, dauert die Produktion jeweils eines von allen Nahrungsmitteln im Durchschnitt %1$s. Wenn nur eine Nahrung benötigt wird, dauert die Produktion einer Ration im Durchschnitt %2$s, und eine Mahlzeit dauert im Durchschnitt %3$s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11007,7 +11007,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Metalle von der Wirtschaft benötigt werden, dauert die Produktion eines Eisens im Durchschnitt %1$sund ein Barren Gold benötigt im Durchschnitt %2$s. Wenn nur eine Art Metall benötigt wird, dauert die Produktion eines Eisens im Durchschnitt %3$s und die eines Goldbarrens im Durchschnitt %4$s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11037,7 +11037,7 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Werkzeuge von der Wirtschaft benötigt werden, dauert die Produktion jeweils eines von allen Werkzeugen im Durchschnitt %1$s. Wenn nur eines von ihnen benötigt wird, dauert seine Produktion im Durchschnitt %2$s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11087,7 +11087,7 @@ msgid ""
 "kind of armor takes %2$s on average. If only one kind of armor or helmets is"
 " needed by the economy, production of one helmet takes %3$s, while one kind "
 "of armor takes %4$s on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Arten Rüstungen und Helme von der Wirtschaft benötigt werden, dauert die Produktion eines Helms im Durchschnitt %1$sund die Produktion von jeweils einer Art von allen Rüstungen dauert im Durchschnitt %2$s. Wenn nur eine Art Rüstungen oder Helme benötigt wird, dauert die Produktion eines Helms im Durchschnitt %3$s während eine Art Rüstung im Durchschnitt %4$s dauert."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11304,7 +11304,7 @@ msgid ""
 "spear is needed by the economy, production of one wooden spear takes %2$s, "
 "one spear, one advanced spear, one heavy spear or one war spear takes %3$s "
 "on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Speere von der Wirtschaft benötigt werden, dauert die Produktion jeweils eines von allen Speeren im Durchschnitt %1$s. Wenn nur eine Art Speer benötigt wird, dauert die Produktion eines Holzspeers im Durchschnitt %2$s, ein Speer, ein verbesserter Speer, ein schwerer Speer oder ein Kriegsspeer dauern im Durchschnitt %3$s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -13914,7 +13914,7 @@ msgctxt "frisians_building"
 msgid ""
 "The hunter pauses %s before going to work again. He produces one fur after "
 "he has produced five pieces of meat."
-msgstr ""
+msgstr "Der Jäger pausiert%s, bevor er weiterarbeitet. Er produziert ein Fell, nachdem er 5 Stücke Fleisch produziert hat."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Fisher's House
 #: ../../data/tribes/initialization/frisians/units.lua:1610
@@ -14287,7 +14287,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Metalle von der Wirtschaft benötigt werden, dauert die Produktion eines Eisens im Durchschnitt %1$sund ein Barren Gold benötigt im Durchschnitt %2$s. Wenn nur eine Art Metall benötigt wird, dauert die Produktion eines Eisens im Durchschnitt %3$s und die eines Goldbarrens im Durchschnitt %4$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Recycling Center
 #: ../../data/tribes/initialization/frisians/units.lua:1781
@@ -14324,7 +14324,7 @@ msgid ""
 "takes %3$s on average. If only one kind of material is needed by the "
 "economy, production of one fur takes %4$s, one iron takes %5$s and one gold "
 "takes %6$s on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle aufbereiteten Waren von der Wirtschaft benötigt werden, dauert die Produktion eines Fells im Durchschnitt %1$s, ein Eisen dauert im Durchschnitt %2$s und ein Goldbarren dauert im Durchschnitt %3$s. Wenn nur eine Ware benötigt wird, dauert die Produktion eines Fells im Durchschnitt %4$s,  ein Eisen dauert im Durchschnitt %5$s und ein Goldbarren dauert im Durchschnitt %6$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Blacksmithy
 #: ../../data/tribes/initialization/frisians/units.lua:1794
@@ -14355,7 +14355,7 @@ msgid ""
 "tool is needed by the economy, its production takes %2$s on average. Needles"
 " are an exception - in the time to produce one tool two needles are "
 "produced."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Werkzeuge von der Wirtschaft benötigt werden, dauert die Produktion jeweils eines von allen Werkzeugen im Durchschnitt %1$s. Wenn nur eines von ihnen benötigt wird, dauert seine Produktion im Durchschnitt %2$s. Nadeln sind eine Ausnahme – In der Produktionszeit eines Werkzeugs werden 2 Nadeln produziert."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Small Armor
 #. Smithy
@@ -14390,7 +14390,7 @@ msgid ""
 "%2$s and one helmet takes %3$s on average. If only one kind of sword or "
 "helmet is needed by the economy, production of one short sword takes %4$s, "
 "one long sword takes %5$s and one helmet takes %6$s on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Schwerter und Helme von der Wirtschaft benötigt werden, dauert die Produktion eines Kurzschwerts im Durchschnitt %1$s, ein Langschwert dauert im Durchschnitt %2$s und ein Helm dauert im Durchschnitt %3$s. Wenn nur ein Schwert oder Helm benötigt wird, dauert die Produktion eines Kurzschwerts im Durchschnitt %4$s,  ein Langschwert dauert im Durchschnitt %5$s und ein Helm dauert im Durchschnitt %6$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Large Armor
 #. Smithy
@@ -14428,7 +14428,7 @@ msgid ""
 " sword or helmet is needed by the economy, production of one broadsword "
 "takes %4$s, one double-edged sword takes %5$s and one golden helmet takes "
 "%6$s on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Schwerter und Helme von der Wirtschaft benötigt werden, dauert die Produktion eines Breitschwerts im Durchschnitt %1$s, ein zweischneidiges Schwert dauert im Durchschnitt %2$s und ein goldener Helm dauert im Durchschnitt %3$s. Wenn nur ein Schwert oder Helm benötigt wird, dauert die Produktion eines Breitschwerts im Durchschnitt %4$s,  ein zweischneidiges Schwert dauert im Durchschnitt %5$s und ein goldener Helm dauert im Durchschnitt %6$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Sewing Room
 #: ../../data/tribes/initialization/frisians/units.lua:1833
@@ -14489,7 +14489,7 @@ msgid ""
 "economy, production of one of each garment takes %1$s on average. If only "
 "one kind of garment is needed by the economy, its production takes %2$s on "
 "average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Gewänder von der Wirtschaft benötigt werden, dauert die Produktion jeweils eines von allen Gewändern im Durchschnitt %1$s. Wenn nur ein Gewand benötigt wird, dauert seine Produktion im Durchschnitt %2$s."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Charcoal
 #. Kiln
@@ -14528,7 +14528,7 @@ msgctxt "frisians_building"
 msgid ""
 "If this building is fully supplied, production of one of each smoked food "
 "takes %s on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird, dauert die Produktion jeweils einer von jeder geräucherten Nahrung im Durchschnitt %s. "
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Bakery
 #: ../../data/tribes/initialization/frisians/units.lua:1885
@@ -14589,7 +14589,7 @@ msgid ""
 " production of one bread takes %1$s and one honey bread takes %2$s on "
 "average. If only one kind of bread is needed by the economy, production of "
 "one bread or one honey bread takes %3$s on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Brote von der Wirtschaft benötigt werden, dauert die Produktion eines Brots im Durchschnitt %1$sund ein Honigbrot benötigt im Durchschnitt %2$s. Wenn nur eine Art Brot benötigt wird, dauert die Produktion eines Brots oder Honigbrots im Durchschnitt %3$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Brewery
 #: ../../data/tribes/initialization/frisians/units.lua:1911
@@ -14647,7 +14647,7 @@ msgid ""
 " production of one beer takes %1$s and one mead takes %2$s on average. If "
 "only one kind of drink is needed by the economy, production of one beer or "
 "one mead takes %3$s on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Getränke von der Wirtschaft benötigt werden, dauert die Produktion eines Biers im Durchschnitt %1$sund ein Met benötigt im Durchschnitt %2$s. Wenn nur eine Art Getränk benötigt wird, dauert die Produktion eines Bieres oder Mets im Durchschnitt %3$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Tavern
 #: ../../data/tribes/initialization/frisians/units.lua:1937
@@ -14668,7 +14668,7 @@ msgid ""
 "If the tavern is fully supplied, it can produce one ration in %1$s on "
 "average, using 2 kinds of ingredients. If it can only use one kind of "
 "ingredient, it can produce one ration in %2$s on average."
-msgstr ""
+msgstr "Wenn die Taverne voll beliefert wird, kann sie eine Ration unter Verwendung von 2 Zutaten in durchschnittlich %1$szubereiten. Wenn nur eine Zutat zur Verfügung steht kann sie eine Ration in durchschnittlich %2$s zubereiten."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Drinking Hall
 #: ../../data/tribes/initialization/frisians/units.lua:1950
@@ -14702,7 +14702,7 @@ msgid ""
 "economy, production of one of each food takes %1$s on average. If only one "
 "kind of food is needed by the economy, production of one ration takes %2$s "
 "and one meal takes %3$s on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Arten Nahrung von der Wirtschaft benötigt werden, dauert die Produktion jeweils eines von allen Nahrungsmitteln im Durchschnitt %1$s. Wenn nur eine Nahrung benötigt wird, dauert die Produktion einer Ration im Durchschnitt %2$s, und eine Mahlzeit dauert im Durchschnitt %3$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Barracks
 #: ../../data/tribes/initialization/frisians/units.lua:1963
@@ -14763,7 +14763,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the supply is steady and there is continuous demand for fur, then the "
 "reindeer farm produces one meat after producing three pieces of fur."
-msgstr ""
+msgstr "Bei konstanter Versorgung und konstanter Nachfrage nach Fell produziert die Rentierzucht ein Stück Fleisch, nachdem drei Felle hergestellt wurden."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Reindeer
 #. Farm
@@ -14775,7 +14775,7 @@ msgid ""
 "on average. If only reindeers are needed by the economy, their production "
 "takes %3$s on average. If only fur is needed by the economy, its production "
 "takes %4$s on average."
-msgstr ""
+msgstr "Wenn dieses Gebäude voll beliefert wird und sowohl Rentiere als auch Fell von der Wirtschaft benötigt werden, dauert die Produktion eines Rentieres im Durchschnitt %1$sund ein Fell benötigt im Durchschnitt %2$s. Wenn nur Rentiere benötigt werden, dauert ihre Produktion im Durchschnitt %3$s. Wenn nur Fell benötigt wird, dauert seine Produktion im Durchschnitt %4$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1993
