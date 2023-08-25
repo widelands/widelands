@@ -55,6 +55,9 @@ fi
 
 echo "Working tree is clean, continuing"
 
+# -----------------------
+# functions:
+
 update_authors() {
   # Update authors file
   if python3 utils/update_authors.py; then
@@ -116,6 +119,10 @@ undo_oneliner_diffs() {
 # Print all commands.
 set -x
 
+# ------------------------------------------------
+# translations from transifex (*.po, *.json)
+# and changes from git (since last script run)
+
 # Pull All translations from Transifex
 # use force to make sure really all files get pulled
 tx pull -a -f
@@ -142,6 +149,7 @@ if [ -n "$(git status -s)" ]; then
 fi
 
 # -----------------------
+# Source catalogs:
 
 # Update source catalogs
 python3 utils/buildcat.py
@@ -163,16 +171,15 @@ if [ -n "$(git status -s)" ]; then
   # Undo one-liner diffs of pure timestamps with no other content
   # for fetched translations (*.po) (in case something plays tricks, see #5937)
   undo_oneliner_diffs
-
 fi
 
-update_authors # in case something has changed unexpectedly
-update_appdata # in case something has changed unexpectedly
+# in case translations were edited while this script was running
+update_authors
+update_appdata
+# and this also changes by a catalog change
 update_statistics
 
-if [ -z "$(git status -s)" ]; then
-  echo "Run completed, nothing to commit."
-else
+if [ -n "$(git status -s)" ]; then
   # Stage changes
   # - Translations and templates
   git add 'po/*/*.po' 'po/*/*.pot' 'data/i18n/locales/*.json' 'xdg/translations/*.json' || true
