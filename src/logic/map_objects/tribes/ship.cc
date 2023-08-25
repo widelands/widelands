@@ -62,6 +62,8 @@ constexpr unsigned kSinkAnimationDuration = 3000;
 constexpr unsigned kNearDestinationShipRadius = 4;
 constexpr unsigned kNearDestinationNoteRadius = 1;
 
+static const std::string kPortspaceIconFile = "images/wui/editor/fsel_editor_set_port_space.png";
+
 /// Returns true if 'coords' is not blocked by immovables
 /// Trees are allowed, because we don't want spreading forests to block portspaces from expeditions
 bool can_support_port(const FCoords& coords, BaseImmovable::Size max_immo_size) {
@@ -618,17 +620,36 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 	return true;
 }
 
-Ship::USPspResult Ship::update_seen_portspaces(
-   Game& game, std::function<bool(const Coords& coords)> is_suitable,
-   std::function<void(Game& g)> send_new_portspace_message) {
+void Ship::send_known_portspace_message (Game& game) {
+	const std::string& icon_filename =
+	   ship_type_ == ShipType::kWarship ? descr().icon_filename() : kPortspaceIconFile;
+	const std::string message_body = ship_type_ == ShipType::kWarship ?
+                                    _("A warship arrived at a known port build space.") :
+                                    _("An expedition ship arrived at a known port build space.");
+	send_message(game, _("Port Space"), _("Port Space Spotted"), message_body, icon_filename);
+}
+void Ship::send_new_portspace_message (Game& game) {
+	const std::string& icon_filename =
+	   ship_type_ == ShipType::kWarship ? descr().icon_filename() : kPortspaceIconFile;
+	const std::string message_body = ship_type_ == ShipType::kWarship ?
+                                   _("A warship found a new port build space.") :
+                                   _("An expedition ship found a new port build space.");
+	send_message(game, _("Port Space"), _("Port Space Found"), message_body, icon_filename);
+}
 
+bool Ship::update_seen_portspaces(Game& game) {
 	if (expedition_ == nullptr) {
-		return USPspResult::kInvalid;
+		return false;
 	}
 
+	bool lost_sight = false;
+	bool spotted = false;
 	const Map& map = owner().egbase().map();
 
-	USPspResult rv = USPspResult::kNoChange;
+	const std::function<bool(const Coords&)> is_suitable = [this](const Coords& coords) {
+		return ship_type_ == ShipType::kWarship ? suited_as_invasion_portspace(coords) :
+		   can_build_port_here(coords);
+	};
 
 	// Remove outdated port spaces.
 	std::vector<Coords>& seen_portspaces = expedition_->seen_port_buildspaces;
@@ -639,7 +660,7 @@ Ship::USPspResult Ship::update_seen_portspaces(
 			++portspace_it;
 		} else {
 			portspace_it = seen_portspaces.erase(portspace_it);
-			rv = USPspResult::kLostSight;
+			lost_sight = true;
 		}
 	}
 
@@ -654,16 +675,25 @@ Ship::USPspResult Ship::update_seen_portspaces(
 		    seen_portspaces.end()) {
 			// Not seen recently
 			seen_portspaces.push_back(mr.location());
+			spotted = true;
 			if (remember_detected_portspace(mr.location())) {
-				rv = USPspResult::kFoundNew;
 				send_new_portspace_message(game);
-			} else if (rv != USPspResult::kFoundNew) {
-				rv = USPspResult::kSpottedKnown;
+			} else {
+				send_known_portspace_message(game);
 			}
 		}
 	} while (mr.advance(map));
 
-	return rv;
+	if (lost_sight && !spotted) {
+		// Update display in InteractivePlayer
+		Notifications::publish(NoteShip(this, NoteShip::Action::kWaitingForCommand));
+	} else if (spotted) {
+		set_ship_state_and_notify(ship_type_ == ShipType::kWarship ?
+                                ShipStates::kExpeditionWaiting :
+                                ShipStates::kExpeditionPortspaceFound,
+		                          NoteShip::Action::kWaitingForCommand);
+	}
+	return spotted;
 }
 
 /// updates a ships tasks in expedition mode; returns whether tasks were updated
@@ -705,38 +735,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 			}
 		}
 
-		const USPspResult portspace_search_result = update_seen_portspaces(
-		   game, [this](const Coords c) { return suited_as_invasion_portspace(c); },
-		   [this](Game& g) {
-		      send_message(g, _("Port Space"), _("Port Space Found"),
-		                   _("A warship found a new port build space."), descr().icon_filename());
-		   });
-		switch (portspace_search_result) {
-		case USPspResult::kNoChange:
-			break;
-		case USPspResult::kLostSight: {
-			// Update display in InteractivePlayer
-			Notifications::publish(NoteShip(this, NoteShip::Action::kWaitingForCommand));
-		} break;
-		case USPspResult::kSpottedKnown: {
-			// Compatibility with old behaviour: Stop the ship and send message to player.
-			//
-			// TODO(tothxa): This should also only send a note for display updating, but that would
-			//               be inconsistent with civilian expeditions, which would be harder to use
-			//               if they didn't stop. That needs some solution first.
-			send_message(game, _("Port Space"), _("Port Space Spotted"),
-			             _("A warship arrived at a known port build space."), descr().icon_filename());
-			found_new_target = true;
-		} break;
-		case USPspResult::kFoundNew: {
-			found_new_target = true;
-		} break;
-		case USPspResult::kInvalid: {
-			NEVER_HERE();
-		}
-		}
-
-		if (found_new_target) {
+		if (!update_seen_portspaces(game) && found_new_target) {
 			set_ship_state_and_notify(
 			   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
 		}
@@ -853,40 +852,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 	}
 
 	if (ship_state_ == ShipStates::kExpeditionScouting && get_ship_type() == ShipType::kTransport) {
-		// Check surrounding fields for port buildspaces
-		const USPspResult portspace_search_result = update_seen_portspaces(
-		   game, [this](const Coords c) { return can_build_port_here(c); },
-		   [this](Game& g) {
-		      send_message(g, _("Port Space"), _("Port Space Found"),
-		                   _("An expedition ship found a new port build space."),
-		                   "images/wui/editor/fsel_editor_set_port_space.png");
-		   });
-		switch (portspace_search_result) {
-		case USPspResult::kNoChange:
-			break;
-		case USPspResult::kLostSight: {
-			// Update display in InteractivePlayer
-			Notifications::publish(NoteShip(this, NoteShip::Action::kWaitingForCommand));
-		} break;
-		case USPspResult::kSpottedKnown: {
-			// Compatibility with old behaviour: Stop the ship and send message to player.
-			//
-			// TODO(tothxa): This should also only send a note for display updating, but that needs
-			//               UI changes to make already known portspaces usable.
-			send_message(game, _("Port Space"), _("Port Space Spotted"),
-			             _("An expedition ship arrived at a known port build space."),
-			             descr().icon_filename());
-			set_ship_state_and_notify(
-			   ShipStates::kExpeditionPortspaceFound, NoteShip::Action::kWaitingForCommand);
-		} break;
-		case USPspResult::kFoundNew: {
-			set_ship_state_and_notify(
-			   ShipStates::kExpeditionPortspaceFound, NoteShip::Action::kWaitingForCommand);
-		} break;
-		case USPspResult::kInvalid: {
-			NEVER_HERE();
-		}
-		}
+		update_seen_portspaces(game);
 	} else if (ship_state_ == ShipStates::kExpeditionPortspaceFound) {
 		check_port_space_still_available(game);
 	}
