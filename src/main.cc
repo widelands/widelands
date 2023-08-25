@@ -25,18 +25,87 @@
 #else
 #include <unistd.h>
 #endif
+#ifdef PRINT_SEGFAULT_BACKTRACE
+#include <csignal>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <execinfo.h>
+#endif
 
+#include "base/time_string.h"
 #include "base/wexception.h"
 #include "build_info.h"
 #include "config.h"
+#include "logic/filesystem_constants.h"
 #include "wlapplication.h"
 #include "wlapplication_messages.h"
+
+#ifdef PRINT_SEGFAULT_BACKTRACE
+// Taken from https://stackoverflow.com/a/77336
+// TODO(Nordfriese): Implement this on Windows as well (see https://stackoverflow.com/a/26398082)
+static void segfault_handler(const int sig) {
+	constexpr int kMaxBacktraceSize = 256;
+	void* array[kMaxBacktraceSize];
+	size_t size = backtrace(array, kMaxBacktraceSize);
+
+	std::cout << std::endl
+	          << "##############################" << std::endl
+	          << "FATAL ERROR: Received signal " << sig << " (" << strsignal(sig) << ")" << std::endl
+	          << "Backtrace:" << std::endl;
+	backtrace_symbols_fd(array, size, STDOUT_FILENO);
+	std::cout
+	   << std::endl
+	   << "Please report this problem to help us improve Widelands, and provide the complete output."
+	   << std::endl
+	   << "##############################" << std::endl;
+
+	const std::string timestr = timestring();
+	std::string filename;
+	if (WLApplication::segfault_backtrace_dir.empty()) {
+		filename = "./widelands_crash_report_";
+		filename += timestr;
+	} else {
+		filename = WLApplication::segfault_backtrace_dir;
+		filename += "/";
+		filename += timestr;
+	}
+	filename += kCrashExtension;
+	FILE* file = fopen(filename.c_str(), "w+");
+	if (file == nullptr) {
+		std::cout << "The crash report could not be saved to a file." << std::endl << std::endl;
+	} else {
+		fprintf /* NOLINT codecheck */ (
+		   file, "Crash report for Widelands %s at %s, signal %d (%s)\n\n**** BEGIN BACKTRACE ****\n",
+		   build_ver_details().c_str(), timestr.c_str(), sig, strsignal(sig));
+		fflush(file);
+		backtrace_symbols_fd(array, size, fileno(file));
+		fflush(file);
+		fputs("**** END BACKTRACE ****\n", file);
+
+		fclose(file);
+		std::cout << "The crash report was also saved to " << filename << std::endl << std::endl;
+	}
+
+	::exit(sig);
+}
+#endif
 
 /**
  * Cross-platform entry point for SDL applications.
  */
 int main(int argc, char* argv[]) {
 	std::cout << "This is Widelands version " << build_ver_details() << std::endl;
+
+#ifdef PRINT_SEGFAULT_BACKTRACE
+	/* Handle several types of fatal crashes with a useful backtrace on supporting systems.
+	 * We can't handle SIGABRT like this since we have to redirect that one elsewhere to
+	 * suppress non-critical errors from Eris.
+	 */
+	for (int s : {SIGSEGV, SIGBUS, SIGFPE, SIGILL}) {
+		signal(s, segfault_handler);
+	}
+#endif
 
 	try {
 		WLApplication& g_app = WLApplication::get(argc, const_cast<char const**>(argv));

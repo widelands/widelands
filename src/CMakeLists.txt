@@ -64,6 +64,8 @@ else()
       main.cc
     DEPENDS
       base_exceptions
+      base_time_string
+      logic_filesystem_constants
       widelands_ball_of_mud
       build_info
   )

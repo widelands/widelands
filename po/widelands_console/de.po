@@ -7,7 +7,7 @@
 # millimarg, 2015,2017
 # millimarg, 2015,2017
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
-# Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2022
+# Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2023
 # The Widelands development team <widelands-public@Alists.sf.net>, 2010
 # Thomas Ho <tomohnetom@web.de>, 2021
 # Elisabeth Jäger, 2015-2016
@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-08-10 02:32+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2022\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2023\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -189,7 +189,7 @@ msgstr "[true*|false]"
 msgid ""
 "Do not create an autosave when the user has been inactive since the last "
 "autosave."
-msgstr ""
+msgstr "Speichere keinen automatischen Spielstand wenn der Spieler seit der letzten automatischen Speicherung inaktiv war."
 
 #: ../../src/wlapplication_messages.cc:115
 msgid "Do not save files as binary zip archives."
@@ -208,7 +208,7 @@ msgstr "Ob eine Warnung im Editor bei zu vielen Spielern gezeigt wird."
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:123
 msgid "Pause the game after `n` minutes of user inactivity."
-msgstr ""
+msgstr "Pausiere das Spiel nach `n` Minuten Inaktivität des Spielers."
 
 #: ../../src/wlapplication_messages.cc:125
 msgid "Start building a road after placing a flag."

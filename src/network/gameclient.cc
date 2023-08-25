@@ -356,11 +356,11 @@ void GameClient::do_run(RecvPacket& packet) {
 		d->run_game(igb);
 
 	} catch (const WLWarning& e) {
-		WLApplication::emergency_save(&capsule_.menu(), game, e.what(), 1, true, false);
+		WLApplication::emergency_save(&capsule_.menu(), game, e.what(), 1, false, false);
 		d->game = nullptr;
 	} catch (const std::exception& e) {
 		FsMenu::MainMenu& parent = capsule_.menu();  // make includes script happy
-		WLApplication::emergency_save(&parent, game, e.what());
+		WLApplication::emergency_save(&parent, game, e.what(), 1, false);
 		d->game = nullptr;
 		disconnect("CLIENT_CRASHED");
 		if (d->internet_) {
