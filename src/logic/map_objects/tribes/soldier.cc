@@ -1763,7 +1763,8 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 		bool has_invasion_base = false;
 		for (Bob* bob = map[state.coords].get_first_bob(); bob != nullptr;
 		     bob = bob->get_next_bob()) {
-			if (bob->descr().type() == MapObjectType::NAVAL_INVASION_BASE) {
+			if (bob->descr().type() == MapObjectType::NAVAL_INVASION_BASE &&
+			    bob->get_owner() == get_owner()) {
 				upcast(NavalInvasionBase, invasion, bob);
 				assert(invasion != nullptr);
 				has_invasion_base = true;
