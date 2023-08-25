@@ -139,9 +139,9 @@ for source_filename in source_files:
             lua_locales += '\t\tsort_name = "' + locale_code + '",\n'
 
         lua_locales += '\t\tfont = "' + translators['font-set'] + '"\n'
-        lua_locales += '\t},\n'  # entry
+        lua_locales += '\t},'  # entry
         print(locale_message)
-lua_locales += '}\n'
+lua_locales += '\n}\n'
 
 lua_translators += '\n} end\n'  # translators
 
