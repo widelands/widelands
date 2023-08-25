@@ -349,7 +349,7 @@ private:
 	// Pop the current task or, if challenged, start the fighting task.
 	void pop_task_or_fight(Game&);
 
-protected:
+public:
 	static Task const taskAttack;
 	static Task const taskDefense;
 	static Task const taskBattle;
@@ -411,6 +411,55 @@ protected:
 public:
 	void do_save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 };
+
+class NavalInvasionBaseDescr : public BobDescr {
+public:
+	NavalInvasionBaseDescr(char const* const init_name, char const* const init_descname)
+	   : BobDescr(init_name,
+	              init_descname,
+	              MapObjectType::NAVAL_INVASION_BASE,
+	              MapObjectDescr::OwnerType::kTribe) {
+	}
+	~NavalInvasionBaseDescr() override = default;
+	[[nodiscard]] Bob& create_object() const override;
+
+private:
+	DISALLOW_COPY_AND_ASSIGN(NavalInvasionBaseDescr);
+};
+
+class NavalInvasionBase : public Bob {
+public:
+	NavalInvasionBase();
+	static NavalInvasionBase*
+	create(EditorGameBase& egbase, Soldier& soldier, const Coords& pos);
+
+	const NavalInvasionBaseDescr& descr() const;
+	void init_auto_task(Game& game) override;
+	void cleanup(EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
+
+	void add_soldier(EditorGameBase& egbase, Soldier* soldier);
+
+	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
+	static Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
+
+private:
+	std::set<OPtr<Soldier>> soldiers_;
+
+	void check_unconquer();
+
+protected:
+	struct Loader : Bob::Loader {
+		Loader() = default;
+
+		void load(FileRead& fr);
+		void load_pointers() override;
+
+	private:
+		std::set<Serial> soldiers_;
+	};
+};
+
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_SOLDIER_H

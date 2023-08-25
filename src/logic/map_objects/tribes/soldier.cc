@@ -54,8 +54,13 @@
 namespace Widelands {
 
 namespace {
+constexpr int kPortSpaceRadius = 2;
+constexpr int kPortSpaceGeneralAreaRadius = 5;
+
 constexpr int kSoldierHealthBarWidth = 13;
 constexpr int kRetreatWhenHealthDropsBelowThisPercentage = 50;
+
+NavalInvasionBaseDescr g_naval_invasion_base_descr("naval_invasion_base", "Naval Invasion Base");
 }  // namespace
 
 SoldierLevelRange::SoldierLevelRange(const LuaTable& t) {
@@ -1626,9 +1631,6 @@ void Soldier::start_task_naval_invasion(Game& game, const Coords& coords) {
 }
 
 void Soldier::naval_invasion_update(Game& game, State& state) {
-	constexpr int kPortSpaceRadius = 2;
-	constexpr int kPortSpaceGeneralAreaRadius = 5;
-
 	std::string signal = get_signal();
 	if (!signal.empty()) {
 		signal_handled();
@@ -1757,15 +1759,22 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 
 	if (map.calc_distance(get_position(), state.coords) <= kPortSpaceGeneralAreaRadius) {
 		// The target should be unguarded now, conquer the port space.
-		MapRegion<Area<FCoords>> mr(map, Area<FCoords>(portspace_fcoords, kPortSpaceRadius));
-		do {
-			if (mr.location().field->get_owned_by() != owner().player_number()) {
-				molog(game.get_gametime(), "[naval_invasion] Conquering port area\n");
-				game.conquer_area(PlayerArea<Area<FCoords>>(
-				   owner().player_number(), Area<FCoords>(portspace_fcoords, kPortSpaceRadius)));
-				return start_task_idle(game, descr().get_animation("idle", this), 1000);
+
+		bool has_invasion_base = false;
+		for (Bob* bob = map[state.coords].get_first_bob(); bob != nullptr; bob = bob->get_next_bob()) {
+			if (bob->descr().type() == MapObjectType::NAVAL_INVASION_BASE) {
+				upcast(NavalInvasionBase, invasion, bob);
+				assert(invasion != nullptr);
+				has_invasion_base = true;
+				invasion->add_soldier(game, this);  // add ourself if not present already
+				break;
 			}
-		} while (mr.advance(map));
+		}
+
+		if (!has_invasion_base) {
+			NavalInvasionBase::create(game, *this, state.coords);
+			return start_task_idle(game, descr().get_animation("idle", this), 1000);
+		}
 
 		// Stationed soldiers heal very slowly.
 		if (current_health_ < get_max_health()) {
@@ -2068,4 +2077,136 @@ void Soldier::do_save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(battle_));
 }
+
+// Naval invasion base implementation
+
+const NavalInvasionBaseDescr& NavalInvasionBase::descr() const {
+	return g_naval_invasion_base_descr;
+}
+
+Bob& NavalInvasionBaseDescr::create_object() const {
+	return *new NavalInvasionBase();
+}
+
+NavalInvasionBase::NavalInvasionBase() : Bob(g_naval_invasion_base_descr) {
+}
+
+NavalInvasionBase*
+NavalInvasionBase::create(EditorGameBase& egbase, Soldier& soldier, const Coords& pos) {
+	NavalInvasionBase* invasion = new NavalInvasionBase();
+	invasion->set_owner(soldier.get_owner());
+	invasion->set_position(egbase, pos);
+
+	invasion->add_soldier(egbase, &soldier);
+	invasion->init(egbase);
+
+	return invasion;
+}
+
+void NavalInvasionBase::init_auto_task(Game& game) {
+	for (auto it = soldiers_.begin(); it != soldiers_.end();) {
+		Soldier* soldier = it->get(game);
+		if (soldier == nullptr) {
+			molog(game.get_gametime(), "Soldier %u no longer exists", it->serial());
+			it = soldiers_.erase(it);
+			continue;
+		}
+
+		State* state = soldier->get_state(Soldier::taskNavalInvasion);
+		if (state == nullptr) {
+			molog(game.get_gametime(), "Soldier %u no longer an invasion member", soldier->serial());
+			it = soldiers_.erase(it);
+			continue;
+		}
+		if (state->coords != get_position()) {
+			molog(game.get_gametime(), "Soldier %u at different invasion location %dx%d!", soldier->serial(), state->coords.x, state->coords.y);
+			it = soldiers_.erase(it);
+			continue;
+		}
+
+		++it;
+	}
+
+	if (soldiers_.empty()) {
+		schedule_destroy(game);
+	}
+	start_task_idle(game, 0, 1000);
+}
+
+void NavalInvasionBase::cleanup(EditorGameBase& egbase) {
+	egbase.unconquer_area(PlayerArea<Area<FCoords>>(owner().player_number(), Area<FCoords>(get_position(), kPortSpaceRadius)));
+
+	Bob::cleanup(egbase);
+}
+
+void NavalInvasionBase::log_general_info(const EditorGameBase& egbase) const {
+	Bob::log_general_info(egbase);
+	molog(egbase.get_gametime(), "Invasion at %3dx%3d with %" PRIuS " soldiers\n",
+	      get_position().x, get_position().y, soldiers_.size());
+	for (auto soldier : soldiers_) {
+		molog(egbase.get_gametime(), "Soldier %u", soldier.serial());
+	}
+}
+
+void NavalInvasionBase::add_soldier(EditorGameBase& egbase, Soldier* soldier) {
+	assert(soldier != nullptr);
+
+	if (soldiers_.empty()) {
+		egbase.conquer_area(PlayerArea<Area<FCoords>>(owner().player_number(), Area<FCoords>(get_position(), kPortSpaceRadius)));
+	}
+
+	soldiers_.insert(soldier);
+}
+
+constexpr uint8_t kCurrentPacketVersionInvasion = 1;
+
+void NavalInvasionBase::Loader::load(FileRead& fr) {
+	Bob::Loader::load(fr);
+	for (size_t i = fr.unsigned_32(); i > 0; --i) {
+		soldiers_.insert(fr.unsigned_32());
+	}
+}
+
+void NavalInvasionBase::Loader::load_pointers() {
+	Bob::Loader::load_pointers();
+
+	NavalInvasionBase& invasion = get<NavalInvasionBase>();
+	for (Serial s : soldiers_) {
+		invasion.add_soldier(egbase(), &mol().get<Soldier>(s));
+	}
+}
+
+Bob::Loader*
+NavalInvasionBase::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {
+	std::unique_ptr<Loader> loader(new Loader);
+
+	try {
+		// The header has been peeled away by the caller
+		uint8_t const packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionInvasion) {
+			loader->init(egbase, mol, *new NavalInvasionBase);
+			loader->load(fr);
+		} else {
+			throw UnhandledVersionError(
+			   "NavalInvasionBase", packet_version, kCurrentPacketVersionInvasion);
+		}
+	} catch (const std::exception& e) {
+		throw wexception("loading naval invasion base: %s", e.what());
+	}
+
+	return loader.release();
+}
+
+void NavalInvasionBase::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
+	fw.unsigned_8(HeaderNavalInvasionBase);
+	fw.unsigned_8(kCurrentPacketVersionInvasion);
+
+	Bob::save(egbase, mos, fw);
+
+	fw.unsigned_32(soldiers_.size());
+	for (auto& soldier : soldiers_) {
+		fw.unsigned_32(mos.get_object_file_index(*soldier.get(egbase)));
+	}
+}
+
 }  // namespace Widelands
