@@ -62,7 +62,7 @@ constexpr unsigned kSinkAnimationDuration = 3000;
 constexpr unsigned kNearDestinationShipRadius = 4;
 constexpr unsigned kNearDestinationNoteRadius = 1;
 
-static const std::string kPortspaceIconFile = "images/wui/editor/fsel_editor_set_port_space.png";
+const std::string kPortspaceIconFile = "images/wui/editor/fsel_editor_set_port_space.png";
 
 /// Returns true if 'coords' is not blocked by immovables
 /// Trees are allowed, because we don't want spreading forests to block portspaces from expeditions
