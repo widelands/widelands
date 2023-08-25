@@ -160,13 +160,13 @@ MainMenu::MainMenu(const bool skip_init)
      clock_(this,
             UI::PanelStyle::kFsMenu,
             "clock",
-            UI::FontStyle::kFsMenuInfoPanelParagraph,
+            UI::FontStyle::kFsMenuLabel,
             0,
             0,
             0,
             0,
             "",
-            UI::Align::kCenter),
+            UI::Align::kLeft),
      version_(this,
               UI::PanelStyle::kFsMenu,
               "version",
@@ -763,14 +763,7 @@ void MainMenu::draw(RenderTarget& r) {
 		                  max_w + padding_, get_h() - version_.get_y() + padding_ / 2),
 		            bg, BlendMode::Default);
 
-		if (system_clock_) {
-			r.fill_rect(Recti((get_w() - max_w - padding_) / 2, clock_.get_y() - padding_ / 2,
-			                  max_w + padding_, clock_.get_h() + padding_),
-			            bg, BlendMode::Default);
-			clock_.set_text(realtimestring());
-		} else {
-			clock_.set_text(std::string());
-		}
+		clock_.set_text(system_clock_ ? realtimestring() : std::string());
 	}
 
 	// Widelands logo
@@ -816,8 +809,7 @@ void MainMenu::layout() {
 	   (get_inner_w() - copyright_.get_w()) / 2, get_inner_h() - copyright_.get_h() - padding_ / 2));
 	version_.set_pos(Vector2i((get_inner_w() - version_.get_w()) / 2,
 	                          copyright_.get_y() - version_.get_h() - padding_ / 2));
-	clock_.set_size(copyright_.get_w(), copyright_.get_h());
-	clock_.set_pos(Vector2i((get_inner_w() - clock_.get_w()) / 2, padding_ / 2));
+	clock_.set_pos(Vector2i(padding_, padding_));
 
 	box_rect_ = Recti((get_inner_w() - padding_) / 2 - butw_,
 	                  version_.get_y() - padding_ * 4 - get_inner_h() * 3 / 10, 2 * butw_ + padding_,
