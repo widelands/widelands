@@ -124,12 +124,12 @@ tx pull -a -f
 # for fetched translations (*.po) (in case something plays tricks, see #5937)
 undo_oneliner_diffs
 
-run_update_scripts=at_least_once # run them at least once
+# These may have changes either from git or from transifex
+update_authors
+update_appdata
+
 if [ -n "$(git status -s)" ]; then
-  update_authors
-  update_appdata
   update_statistics
-  run_update_scripts= # they have run now
 
   # Stage translations
   git add 'po/*/*.po' 'data/i18n/locales/*.json' 'xdg/translations/*.json'
@@ -164,16 +164,11 @@ if [ -n "$(git status -s)" ]; then
   # for fetched translations (*.po) (in case something plays tricks, see #5937)
   undo_oneliner_diffs
 
-  if [ -z "$run_update_scripts" ] && [ -n "$(git status -s)" ]; then
-    run_update_scripts=for_pot # run again, pot files have changed
-  fi
 fi
 
-if [ -n "$run_update_scripts" ]; then # if not run yet or pot files have changed
-  update_authors # in case something has changed unexpectedly
-  update_appdata # in case something has changed unexpectedly
-  update_statistics
-fi
+update_authors # in case something has changed unexpectedly
+update_appdata # in case something has changed unexpectedly
+update_statistics
 
 if [ -z "$(git status -s)" ]; then
   echo "Run completed, nothing to commit."
