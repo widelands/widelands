@@ -7,11 +7,11 @@ import os.path
 import sys
 
 # This script collects translator credits and locale information
-# from the JSON files in ../txts/translators.
-# It then collects all other contributors from ../txts/developers.json,
-# adds the translators at the hook "Translators"
-# and writes the translator and developer credits to ./txts/developers.lua
+# from the JSON files in ../data/i18n/locales/ (created by transifex)
+# and writes the translator credits to ./data/txts/translators.lua.
 # The locale information is written to ../data/i18n/locales.lua.
+# It then collects all other contributors from ../data/txts/developers.json,
+# and writes the developer credits to ./data/txts/developers.lua
 
 INDENT = "   " # one indentation level in lua
 
