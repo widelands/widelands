@@ -43,6 +43,7 @@ fi
 # Checkout master and pull latest version
 git checkout master
 git pull "$push_target" master
+had_commit=''
 
 # Double-check that it's clean
 STATUS="$(LANG=C git status)"
