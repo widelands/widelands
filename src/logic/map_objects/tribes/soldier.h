@@ -430,8 +430,7 @@ private:
 class NavalInvasionBase : public Bob {
 public:
 	NavalInvasionBase();
-	static NavalInvasionBase*
-	create(EditorGameBase& egbase, Soldier& soldier, const Coords& pos);
+	static NavalInvasionBase* create(EditorGameBase& egbase, Soldier& soldier, const Coords& pos);
 
 	const NavalInvasionBaseDescr& descr() const;
 	void init_auto_task(Game& game) override;

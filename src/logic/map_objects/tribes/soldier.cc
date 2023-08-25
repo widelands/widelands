@@ -1761,7 +1761,8 @@ void Soldier::naval_invasion_update(Game& game, State& state) {
 		// The target should be unguarded now, conquer the port space.
 
 		bool has_invasion_base = false;
-		for (Bob* bob = map[state.coords].get_first_bob(); bob != nullptr; bob = bob->get_next_bob()) {
+		for (Bob* bob = map[state.coords].get_first_bob(); bob != nullptr;
+		     bob = bob->get_next_bob()) {
 			if (bob->descr().type() == MapObjectType::NAVAL_INVASION_BASE) {
 				upcast(NavalInvasionBase, invasion, bob);
 				assert(invasion != nullptr);
@@ -2119,7 +2120,8 @@ void NavalInvasionBase::init_auto_task(Game& game) {
 			continue;
 		}
 		if (state->coords != get_position()) {
-			molog(game.get_gametime(), "Soldier %u at different invasion location %dx%d!", soldier->serial(), state->coords.x, state->coords.y);
+			molog(game.get_gametime(), "Soldier %u at different invasion location %dx%d!",
+			      soldier->serial(), state->coords.x, state->coords.y);
 			it = soldiers_.erase(it);
 			continue;
 		}
@@ -2134,15 +2136,16 @@ void NavalInvasionBase::init_auto_task(Game& game) {
 }
 
 void NavalInvasionBase::cleanup(EditorGameBase& egbase) {
-	egbase.unconquer_area(PlayerArea<Area<FCoords>>(owner().player_number(), Area<FCoords>(get_position(), kPortSpaceRadius)));
+	egbase.unconquer_area(PlayerArea<Area<FCoords>>(
+	   owner().player_number(), Area<FCoords>(get_position(), kPortSpaceRadius)));
 
 	Bob::cleanup(egbase);
 }
 
 void NavalInvasionBase::log_general_info(const EditorGameBase& egbase) const {
 	Bob::log_general_info(egbase);
-	molog(egbase.get_gametime(), "Invasion at %3dx%3d with %" PRIuS " soldiers\n",
-	      get_position().x, get_position().y, soldiers_.size());
+	molog(egbase.get_gametime(), "Invasion at %3dx%3d with %" PRIuS " soldiers\n", get_position().x,
+	      get_position().y, soldiers_.size());
 	for (auto soldier : soldiers_) {
 		molog(egbase.get_gametime(), "Soldier %u", soldier.serial());
 	}
@@ -2152,7 +2155,8 @@ void NavalInvasionBase::add_soldier(EditorGameBase& egbase, Soldier* soldier) {
 	assert(soldier != nullptr);
 
 	if (soldiers_.empty()) {
-		egbase.conquer_area(PlayerArea<Area<FCoords>>(owner().player_number(), Area<FCoords>(get_position(), kPortSpaceRadius)));
+		egbase.conquer_area(PlayerArea<Area<FCoords>>(
+		   owner().player_number(), Area<FCoords>(get_position(), kPortSpaceRadius)));
 	}
 
 	soldiers_.insert(soldier);
@@ -2176,8 +2180,7 @@ void NavalInvasionBase::Loader::load_pointers() {
 	}
 }
 
-Bob::Loader*
-NavalInvasionBase::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {
+Bob::Loader* NavalInvasionBase::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {
 	std::unique_ptr<Loader> loader(new Loader);
 
 	try {
