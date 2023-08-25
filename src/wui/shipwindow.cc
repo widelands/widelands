@@ -479,7 +479,8 @@ void ShipWindow::think() {
 		 * matter if
 		 *   in waiting or already expedition/scouting mode)
 		 */
-		btn_construct_port_->set_enabled(can_act && !ship->exp_port_spaces().empty());
+		btn_construct_port_->set_enabled(can_act &&
+		                                 (state == Widelands::ShipStates::kExpeditionPortspaceFound));
 		bool coast_nearby = false;
 		for (Widelands::Direction dir = 1; dir <= Widelands::LAST_DIRECTION; ++dir) {
 			// NOTE buttons are saved in the format DIRECTION - 1

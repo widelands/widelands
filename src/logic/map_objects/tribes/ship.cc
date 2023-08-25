@@ -62,7 +62,7 @@ constexpr unsigned kSinkAnimationDuration = 3000;
 constexpr unsigned kNearDestinationShipRadius = 4;
 constexpr unsigned kNearDestinationNoteRadius = 1;
 
-/// Returns true if 'coord' is not blocked by immovables
+/// Returns true if 'coords' is not blocked by immovables
 /// Trees are allowed, because we don't want spreading forests to block portspaces from expeditions
 bool can_support_port(const FCoords& coords, BaseImmovable::Size max_immo_size) {
 	BaseImmovable* baim = coords.field->get_immovable();
@@ -77,7 +77,7 @@ bool can_support_port(const FCoords& coords, BaseImmovable::Size max_immo_size) 
 
 }  // namespace
 
-/// Returns true if the ship can land and erect a port at 'coord'.
+/// Returns true if the ship can land and erect a port at 'coords'.
 bool Ship::can_build_port_here(const Coords& coords) const {
 	const PlayerNumber player_number = owner().player_number();
 	const EditorGameBase& egbase = owner().egbase();
@@ -626,8 +626,7 @@ Ship::USPspResult Ship::update_seen_portspaces(
 		return USPspResult::kInvalid;
 	}
 
-	const EditorGameBase& egbase = owner().egbase();
-	const Map& map = egbase.map();
+	const Map& map = owner().egbase().map();
 
 	USPspResult rv = USPspResult::kNoChange;
 
@@ -647,9 +646,7 @@ Ship::USPspResult Ship::update_seen_portspaces(
 	// Look for new nearby port spaces.
 	MapRegion<Area<Coords>> mr(map, Area<Coords>(get_position(), descr().vision_range()));
 	do {
-		if (!map.is_port_space(mr.location()) ||
-		    !map.is_port_space_allowed(egbase, map.get_fcoords(mr.location())) ||
-		    !is_suitable(mr.location())) {
+		if (!map.is_port_space(mr.location()) || !is_suitable(mr.location())) {
 			continue;
 		}
 
