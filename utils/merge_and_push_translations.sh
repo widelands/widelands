@@ -146,6 +146,8 @@ if [ -n "$(git status -s)" ]; then
   # commit translations
   git commit -m "Fetched translations and updated data."
   had_commit=yes
+else
+  echo "No changes in translations and data."
 fi
 
 # -----------------------
@@ -187,9 +189,13 @@ if [ -n "$(git status -s)" ]; then
   # Commit
   git commit -m "Updated translations catalogs and statistics."
   had_commit=yes
+else
+  echo "No changes in translations catalogs."
 fi
 
 if [ -n "$had_commit" ]; then # if a commit was created
   # push fetched translations and updated catalogs
   git push "$push_target" master
+else
+  echo "Nothing changed, skipped git push."
 fi
