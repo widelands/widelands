@@ -763,7 +763,13 @@ void MainMenu::draw(RenderTarget& r) {
 		                  max_w + padding_, get_h() - version_.get_y() + padding_ / 2),
 		            bg, BlendMode::Default);
 
-		clock_.set_text(system_clock_ ? realtimestring() : std::string());
+		if (system_clock_) {
+			clock_.set_text(realtimestring());
+			r.fill_rect(Recti(0, 0, clock_.get_w() + 2 * padding_, clock_.get_h() + 2 * padding_),
+			            bg, BlendMode::Default);
+		} else {
+			clock_.set_text(std::string());
+		}
 	}
 
 	// Widelands logo
