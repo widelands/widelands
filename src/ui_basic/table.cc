@@ -410,10 +410,10 @@ bool Table<void*>::handle_tooltip() {
 			const int column_w = columns_[c].width;
 			Vector2i point(column_x, y);
 			if (is_mouse_in(cursor_pos, point, column_w)) {
-				const std::string& entry_string = er.get_string(c);
+				const std::string entry_string = richtext_escape(er.get_string(c));
 				FontStyleInfo& font_style = get_column_fontstyle(er);
 				std::shared_ptr<const UI::RenderedText> rendered_text =
-				   UI::g_fh->render(as_richtext_paragraph(richtext_escape(entry_string), font_style));
+				   UI::g_fh->render(as_richtext_paragraph(entry_string, font_style));
 
 				if (rendered_text->width() > column_w) {
 					return Panel::draw_tooltip(entry_string, panel_style_);

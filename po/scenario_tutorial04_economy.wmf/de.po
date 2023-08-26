@@ -11,6 +11,7 @@
 # Lennard Hofmann <lennard.hofmann@web.de>, 2021
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
+# Simon Heimberg, 2023
 # Stephan Lutz <stephan-lutz@gmx.de>, 2018-2022
 # Elisabeth Jäger, 2015
 # 39a0b2e5ef9bf024c2fcfbdd0522de1a_96abb62, 2014-2015
@@ -19,9 +20,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2022\n"
+"Last-Translator: Simon Heimberg, 2023\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -465,7 +466,7 @@ msgid ""
 "search backwards to find the wares and the buildings you need to supply your"
 " barracks where the soldier is recruited. When you are finished, just close "
 "the encyclopedia window."
-msgstr "Ein Soldat braucht einen Holzspeer und einen Helm – von da an kannst du rückwärts suchen, um die Waren und Gebäude zu finden, die du brauchst, um die Kaserne zu beliefern, in der der Soldat rekrutiert wid. Wenn du fertig bist, schließ einfach das Stammeslexikon-Fenster."
+msgstr "Ein Soldat braucht einen Holzspeer und einen Helm – von da an kannst du rückwärts suchen, um die Waren und Gebäude zu finden, die du brauchst, um die Kaserne zu beliefern, in der der Soldat rekrutiert wird. Wenn du fertig bist, schließ einfach das Stammeslexikon-Fenster."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:270
 msgid "Use the encyclopedia to find out how to create new soldiers."

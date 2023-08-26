@@ -52,6 +52,8 @@ bool Panel::allow_user_input_ = true;
 bool Panel::allow_fastclick_ = true;
 FxId Panel::click_fx_ = kNoSoundEffect;
 
+uint32_t Panel::time_of_last_user_activity_ = 0U;
+
 inline static bool tooltip_accessibility_mode() {
 	return get_config_bool("tooltip_accessibility_mode", false);
 }
@@ -351,7 +353,8 @@ int Panel::do_run() {
 	app.set_mouse_lock(false);  // more paranoia :-)
 
 	// With the default of 30FPS, the game will be drawn every 33ms.
-	const uint32_t draw_delay = 1000 / std::max(5, get_config_int("maxfps", 30));
+	constexpr uint32_t kMaxFPS = 30;
+	constexpr uint32_t kDrawDelay = 1000 / kMaxFPS;
 
 	static InputCallback input_callback = {Panel::ui_mousepress, Panel::ui_mouserelease,
 	                                       Panel::ui_mousemove,  Panel::ui_key,
@@ -411,7 +414,7 @@ int Panel::do_run() {
 				do_redraw_now();
 			}
 
-			next_time = start_time + draw_delay;
+			next_time = start_time + kDrawDelay;
 		}
 
 		const int32_t delay = next_time - SDL_GetTicks();
@@ -435,7 +438,7 @@ int Panel::do_run() {
 				do_redraw_now(true, _("Game ending – please wait…"));
 			}
 
-			next_time = start_time + draw_delay;
+			next_time = start_time + kDrawDelay;
 			const int32_t delay = next_time - SDL_GetTicks();
 			if (delay > 0) {
 				SDL_Delay(delay);
@@ -1529,6 +1532,10 @@ Panel* Panel::ui_trackmouse(int32_t& x, int32_t& y) {
 	return rcv;
 }
 
+inline void Panel::register_user_activity() {
+	time_of_last_user_activity_ = SDL_GetTicks();
+}
+
 /**
  * Input callback function. Pass the mouseclick event to the currently modal
  * panel.
@@ -1552,6 +1559,8 @@ bool Panel::ui_mousepress(const uint8_t button, int32_t x, int32_t y) {
 	if (p == nullptr) {
 		return false;
 	}
+
+	register_user_activity();
 	return p->do_mousepress(button, x, y);
 }
 
@@ -1564,6 +1573,8 @@ bool Panel::ui_mouserelease(const uint8_t button, int32_t x, int32_t y) {
 	if (p == nullptr) {
 		return false;
 	}
+
+	register_user_activity();
 	return p->do_mouserelease(button, x, y);
 }
 
@@ -1617,6 +1628,8 @@ bool Panel::ui_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 	if (p == nullptr) {
 		return false;
 	}
+
+	register_user_activity();
 	return p->do_mousewheel(x, y, modstate, p->get_mouse_position());
 }
 
@@ -1636,6 +1649,8 @@ bool Panel::ui_key(bool const down, SDL_Keysym const code) {
 			p = dd;
 		}
 	}
+
+	register_user_activity();
 	return p->do_key(down, code);
 }
 
@@ -1649,6 +1664,8 @@ bool Panel::ui_textinput(const std::string& text) {
 	if (modal_ == nullptr) {
 		return false;
 	}
+
+	register_user_activity();
 	return modal_.load()->do_textinput(text);
 }
 

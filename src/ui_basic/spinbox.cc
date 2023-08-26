@@ -367,7 +367,7 @@ void SpinBox::change_value(int32_t const value) {
 /**
  * manually sets the used value to a given value
  */
-void SpinBox::set_value(int32_t const value) {
+void SpinBox::set_value(int32_t const value, const bool trigger_signal) {
 	if (sbi_->value == value) {
 		return;
 	}
@@ -385,7 +385,9 @@ void SpinBox::set_value(int32_t const value) {
 		sbi_->value = value;
 	}
 	update();
-	changed();
+	if (trigger_signal) {
+		changed();
+	}
 }
 
 void SpinBox::set_value_list(const std::vector<int32_t>& values) {
@@ -399,7 +401,9 @@ void SpinBox::set_value_list(const std::vector<int32_t>& values) {
 /**
  * sets the interval the value may lay in and fixes the value, if outside.
  */
-void SpinBox::set_interval(int32_t const min, int32_t const max) {
+void SpinBox::set_interval(int32_t const min,
+                           int32_t const max,
+                           const bool trigger_signal_if_changed) {
 	assert(min <= max);
 	sbi_->max = max;
 	sbi_->min = min;
@@ -413,7 +417,7 @@ void SpinBox::set_interval(int32_t const min, int32_t const max) {
 	}
 	calculate_big_step();
 	update();
-	if (changed_val) {
+	if (changed_val && trigger_signal_if_changed) {
 		changed();
 	}
 }

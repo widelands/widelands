@@ -9,6 +9,7 @@
 # b94f5627662a22f238a004f5ae004204_68c3b70 <e7a0e9039e4dcffcecf86433306abe33_801663>, 2019
 # Lennard Hofmann <lennard.hofmann@web.de>, 2021
 # Stephan Lutz <stephan-lutz@gmx.de>, 2023
+# Simon Heimberg, 2023
 # 
 msgid ""
 msgstr ""
@@ -16,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2023\n"
+"Last-Translator: Simon Heimberg, 2023\n"
 "Language-Team: German (https://app.transifex.com/widelands/teams/35159/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -101,8 +102,8 @@ msgid ""
 msgstr ""
 "Die Schmiede stellt eine Spitzhacke nur in ihrem zweiten Produktionszyklus "
 "her. Wenn sie immer nur mit einem Eisenbarren ausgestattet ist, erreicht sie"
-" möglicherweise niemals diesen Zyklus. Du musst die Schmiede stillegen, bis "
-"sie mindestens zwei Eisen zur Verfügung hat."
+" möglicherweise niemals diesen Zyklus. Du musst die Schmiede stilllegen, bis"
+" sie mindestens zwei Eisen zur Verfügung hat."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:50
 msgid "Build an aqua farm"
