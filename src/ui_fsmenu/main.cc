@@ -26,6 +26,7 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/random.h"
+#include "base/time_string.h"
 #include "base/warning.h"
 #include "build_info.h"
 #include "editor/editorinteractive.h"
@@ -156,6 +157,16 @@ MainMenu::MainMenu(const bool skip_init)
      options_(&vbox2_, "options", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
      about_(&vbox2_, "about", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
      exit_(&vbox2_, "exit", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
+     clock_(this,
+            UI::PanelStyle::kFsMenu,
+            "clock",
+            UI::FontStyle::kFsMenuLabel,
+            0,
+            0,
+            0,
+            0,
+            "",
+            UI::Align::kLeft),
      version_(this,
               UI::PanelStyle::kFsMenu,
               "version",
@@ -350,6 +361,7 @@ void MainMenu::set_labels() {
 		set_border_snap_distance(global_s.get_int("border_snap_distance", 0));
 		set_panel_snap_distance(global_s.get_int("panel_snap_distance", 10));
 		set_dock_windows_to_edges(global_s.get_bool("dock_windows_to_edges", false));
+		system_clock_ = get_config_bool("game_clock", true);
 	}
 
 	singleplayer_.clear();
@@ -530,6 +542,7 @@ void MainMenu::set_button_visibility(const bool v) {
 	vbox2_.set_visible(v);
 	copyright_.set_visible(v);
 	version_.set_visible(v);
+	clock_.set_visible(v);
 }
 
 bool MainMenu::handle_mousepress(uint8_t /*btn*/, int32_t /*x*/, int32_t /*y*/) {
@@ -749,6 +762,14 @@ void MainMenu::draw(RenderTarget& r) {
 		r.fill_rect(Recti((get_w() - max_w - padding_) / 2, version_.get_y() - padding_ / 2,
 		                  max_w + padding_, get_h() - version_.get_y() + padding_ / 2),
 		            bg, BlendMode::Default);
+
+		if (system_clock_) {
+			clock_.set_text(realtimestring());
+			r.fill_rect(Recti(0, 0, clock_.get_w() + 2 * padding_, clock_.get_h() + 2 * padding_),
+			            bg, BlendMode::Default);
+		} else {
+			clock_.set_text(std::string());
+		}
 	}
 
 	// Widelands logo
@@ -794,6 +815,7 @@ void MainMenu::layout() {
 	   (get_inner_w() - copyright_.get_w()) / 2, get_inner_h() - copyright_.get_h() - padding_ / 2));
 	version_.set_pos(Vector2i((get_inner_w() - version_.get_w()) / 2,
 	                          copyright_.get_y() - version_.get_h() - padding_ / 2));
+	clock_.set_pos(Vector2i(padding_, padding_));
 
 	box_rect_ = Recti((get_inner_w() - padding_) / 2 - butw_,
 	                  version_.get_y() - padding_ * 4 - get_inner_h() * 3 / 10, 2 * butw_ + padding_,
