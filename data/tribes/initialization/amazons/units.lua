@@ -1302,7 +1302,7 @@ wl.Descriptions():new_tribe {
             note = pgettext("amazons_building", "The jungle preserver’s hut needs free space within the work area to plant the trees."),
             performance = {
                -- TRANSLATORS: Performance helptext for an Amazon production site: Jungle Preserver's Hut, part 1
-               pgettext("amazons_building", "The jungle preserver or jungle master plants one tree between %1$s and %2$s on average."):bformat(format_seconds(20), format_seconds(45)),
+               pgettext("amazons_building", "The jungle preserver or jungle master plants one tree between %1$s and %2$s."):bformat(format_seconds(20), format_seconds(45)),
                -- TRANSLATORS: Performance helptext for an Amazon production site: Jungle Preserver's Hut, part 2
                pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
