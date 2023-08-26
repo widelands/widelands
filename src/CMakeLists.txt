@@ -145,6 +145,7 @@ wl_library(widelands_ball_of_mud
     ui_fsmenu
     widelands_options
     wui
+    wui_chat_ui
 )
 
 wl_library(widelands_options

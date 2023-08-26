@@ -82,6 +82,7 @@ wl_library(ui_basic
     graphic_text
     graphic_text_layout
     graphic_wordwrap
+    io_fileread
     io_filesystem
     notifications
     scripting_lua_interface
