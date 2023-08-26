@@ -864,6 +864,7 @@ int upcasted_map_object_descr_to_lua(lua_State* L, const Widelands::MapObjectDes
 		case Widelands::MapObjectType::PINNED_NOTE:
 		case Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE:
 		case Widelands::MapObjectType::FERRY_FLEET_YARD_INTERFACE:
+		case Widelands::MapObjectType::NAVAL_INVASION_BASE:
 			return CAST_TO_LUA(Widelands::MapObjectDescr, LuaMapObjectDescription);
 		default:
 			verb_log_warn("upcasted_map_object_to_lua: unknown type '%s' to cast to, return general "
@@ -942,6 +943,7 @@ int upcasted_map_object_to_lua(lua_State* L, Widelands::MapObject* mo) {
 	case Widelands::MapObjectType::PINNED_NOTE:
 	case Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE:
 	case Widelands::MapObjectType::FERRY_FLEET_YARD_INTERFACE:
+	case Widelands::MapObjectType::NAVAL_INVASION_BASE:
 		throw LuaError(
 		   format("upcasted_map_object_to_lua: Unknown %i", static_cast<int>(mo->descr().type())));
 	}
@@ -2404,6 +2406,7 @@ int LuaMapObjectDescription::get_name(lua_State* L) {
         interface to access such objects or descriptions currently exists.
 
         * :const:`battle`, holds information about two soldiers in a fight,
+        * :const:`naval_invasion_base`, links a naval invasion of a port space.
         * :const:`ship_fleet`, holds information for managing ships and ports,
         * :const:`ferry_fleet`, holds information for managing ferries and waterways.
         * :const:`ship_fleet_yard_interface`, links a shipyard to a ship fleet.
