@@ -26,9 +26,10 @@ import sys
 #
 # All translations are sourced from ../xdg/translations/
 #
-# If used with the --nonet command line option, the validators will be executed with the
-# same or the equivalent --no-net. This skips the downloading of the screenshot images
-# in restricted environments without network access, such as e.g. flatpak-builder.
+# If used with the --nonet command line option, the validator for the generated
+# appdata.xml file will be executed with the same, or the equivalent --no-net option.
+# This skips the downloading of the screenshot images in restricted environments
+# without network access, such as e.g. flatpak-builder.
 
 
 print('Updating appdata.xml and .desktop files')
