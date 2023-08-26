@@ -1638,8 +1638,12 @@ wl.Descriptions():new_tribe {
                -- TRANSLATORS: Note helptext for a Frisian production site: Fisher's House, part 2
                pgettext("frisians_building", "Roads and trees along the shoreline block fishing."),
             },
-            -- TRANSLATORS: Performance helptext for a Frisian production site: Fisher's House
-            performance = pgettext("frisians_building", "The fisher pauses %s before going to work again."):bformat(format_seconds(16))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Fisher's House, part 1
+               pgettext("frisians_building", "This building can produce one fish between %1$s and %2$s."):bformat(format_seconds(26), format_seconds(59)),
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Fisher's House, part 2
+               pgettext("frisians_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {

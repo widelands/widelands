@@ -1549,7 +1549,13 @@ wl.Descriptions():new_tribe {
                                           [[Collect ya catch by net or by spear,<br>]] ..
                                           [[and don’t forget to give Satul his share.’]]),
             -- TRANSLATORS: Note lore_autor for an Atlantean production site: Fisher's House
-            lore_author = pgettext("atlanteans_building", "A song from the fishers’ guild")
+            lore_author = pgettext("atlanteans_building", "A song from the fishers’ guild"),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Fisher's House, part 1
+               pgettext("atlanteans_building", "This building can produce one fish between %1$s and %2$s."):bformat(format_seconds(26), format_seconds(55)),
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Fisher's House, part 2
+               pgettext("atlanteans_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {

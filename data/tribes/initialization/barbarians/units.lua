@@ -1200,8 +1200,12 @@ wl.Descriptions():new_tribe {
                -- TRANSLATORS: Note helptext for production site: Fisher's Hut, part 2
                pgettext("building", "Roads and trees along the shoreline block fishing."),
             },
-            -- TRANSLATORS: Performance helptext for production site: Fisher's Hut
-            performance = pgettext("barbarians_building", "The fisher pauses %s before going to work again."):bformat(format_seconds(18))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Fisher's Hut, part 1
+               pgettext("barbarians_building", "This building can produce one fish between %1$s and %2$s."):bformat(format_seconds(28), format_seconds(57)),
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Fisher's Hut, part 2
+               pgettext("barbarians_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {

@@ -1336,6 +1336,12 @@ wl.Descriptions():new_tribe {
                pgettext("empire_building", "The fisher’s house needs water full of fish within the work area."),
                -- TRANSLATORS: Note helptext for an Empire production site: Fisher's House, part 2
                pgettext("empire_building", "Roads and trees along the shoreline block fishing."),
+            },
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire production site: Fisher's House, part 1
+               pgettext("empire_building", "This building can produce one fish between %1$s and %2$s."):bformat(format_seconds(27), format_seconds(56)),
+               -- TRANSLATORS: Performance helptext for an Empire production site: Fisher's House, part 2
+               pgettext("empire_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
          }
       },

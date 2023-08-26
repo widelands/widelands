@@ -62,7 +62,7 @@ wl.Descriptions():new_productionsite_type {
          actions = {
             -- time of worker: 1 sec
             -- radius: 14
-            -- steps from building to fish: 2...17
+            -- steps from building to water: 2...17
             -- min. time: 2 * 2 * 1.8 + 1 + 34 = 42.2 sec
             -- max. time: 2 * 17 * 1.8 + 1 + 34 = 96.2 sec
             "callworker=fish",

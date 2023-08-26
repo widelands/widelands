@@ -17,6 +17,7 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       fish = {
+         -- time: 3 sec
          "findspace=size:any radius:8 resource:resource_fish",
          "walk=coords",
          "mine=resource_fish radius:1",
