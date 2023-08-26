@@ -18,12 +18,11 @@
 
 #include "wui/info_panel.h"
 
-#include <iomanip>
 #include <memory>
-#include <sstream>
 
 #include <SDL_timer.h>
 
+#include "base/time_string.h"
 #include "graphic/font_handler.h"
 #include "graphic/text_layout.h"
 #include "logic/message_queue.h"
@@ -427,11 +426,7 @@ void InfoPanel::set_speed_string(const std::string& t) {
 void InfoPanel::update_time_speed_string() {
 	std::string realtime;
 	if (draw_real_time_) {
-		std::time_t t = std::time(nullptr);
-		std::tm tm = *std::localtime(&t);
-		std::ostringstream oss("");
-		oss << std::put_time(&tm, "%X");
-		realtime = oss.str();
+		realtime = realtimestring();
 	}
 
 	std::vector<std::string*> non_empty;
