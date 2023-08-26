@@ -620,6 +620,18 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 	return true;
 }
 
+bool Ship::is_suitable_portspace(const Coords& coords) const {
+	if (expedition_ == nullptr) {
+		return false;
+	}
+	const Map& map = owner().egbase().map();
+	if (!map.is_port_space(coords)) {
+		return false;
+	}
+	return ship_type_ == ShipType::kWarship ? suited_as_invasion_portspace(coords) :
+	   can_build_port_here(coords);
+}
+
 void Ship::send_known_portspace_message (Game& game) {
 	const std::string& icon_filename =
 	   ship_type_ == ShipType::kWarship ? descr().icon_filename() : kPortspaceIconFile;
@@ -637,63 +649,69 @@ void Ship::send_new_portspace_message (Game& game) {
 	send_message(game, _("Port Space"), _("Port Space Found"), message_body, icon_filename);
 }
 
-bool Ship::update_seen_portspaces(Game& game) {
+bool Ship::update_seen_portspaces(Game& game, const bool report_known, const bool stop_on_report) {
 	if (expedition_ == nullptr) {
 		return false;
 	}
 
-	bool lost_sight = false;
-	bool spotted = false;
+	bool changed = false;
+	bool stopped = false;
 	const Map& map = owner().egbase().map();
-
-	const std::function<bool(const Coords&)> is_suitable = [this](const Coords& coords) {
-		return ship_type_ == ShipType::kWarship ? suited_as_invasion_portspace(coords) :
-		   can_build_port_here(coords);
-	};
 
 	// Remove outdated port spaces.
 	std::vector<Coords>& seen_portspaces = expedition_->seen_port_buildspaces;
 	auto portspace_it = seen_portspaces.begin();
 	while (portspace_it != seen_portspaces.end()) {
 		if (map.calc_distance(get_position(), *portspace_it) <= descr().vision_range() &&
-		    is_suitable(*portspace_it)) {
+		    is_suitable_portspace(*portspace_it)) {
 			++portspace_it;
 		} else {
 			portspace_it = seen_portspaces.erase(portspace_it);
-			lost_sight = true;
+			changed = true;
 		}
 	}
 
 	// Look for new nearby port spaces.
 	MapRegion<Area<Coords>> mr(map, Area<Coords>(get_position(), descr().vision_range()));
 	do {
-		if (!map.is_port_space(mr.location()) || !is_suitable(mr.location())) {
+		if (!map.is_port_space(mr.location())) {
 			continue;
 		}
-
+		if (!is_suitable_portspace(mr.location())) {
+			if (get_owner()->has_detected_port_space(mr.location())) {
+				// Update owner even if can't use currently
+				remember_detected_portspace(mr.location());
+			}  // TODO(tothxa): But what to do with enemy ports spotted first by expeditions?
+			   //               Re: #5889
+			continue;
+		}
 		if (std::find(seen_portspaces.begin(), seen_portspaces.end(), mr.location()) ==
 		    seen_portspaces.end()) {
 			// Not seen recently
 			seen_portspaces.push_back(mr.location());
-			spotted = true;
+			changed = true;
 			if (remember_detected_portspace(mr.location())) {
 				send_new_portspace_message(game);
+				stopped = stop_on_report;
 			} else {
-				send_known_portspace_message(game);
+				if (report_known) {
+					send_known_portspace_message(game);
+					stopped = stop_on_report;
+				}
 			}
 		}
 	} while (mr.advance(map));
 
-	if (lost_sight && !spotted) {
-		// Update display in InteractivePlayer
-		Notifications::publish(NoteShip(this, NoteShip::Action::kWaitingForCommand));
-	} else if (spotted) {
+	if (stopped) {
 		set_ship_state_and_notify(ship_type_ == ShipType::kWarship ?
                                 ShipStates::kExpeditionWaiting :
                                 ShipStates::kExpeditionPortspaceFound,
 		                          NoteShip::Action::kWaitingForCommand);
+	} else if (changed) {
+		// Update display in InteractivePlayer
+		Notifications::publish(NoteShip(this, NoteShip::Action::kWaitingForCommand));
 	}
-	return spotted;
+	return stopped;
 }
 
 /// updates a ships tasks in expedition mode; returns whether tasks were updated
@@ -735,6 +753,8 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 			}
 		}
 
+		// TODO(tothxa): Implement expedition options for stop_on_report and report_known
+		//               (report_known can probably always be disabled when stopping is disabled)
 		if (!update_seen_portspaces(game) && found_new_target) {
 			set_ship_state_and_notify(
 			   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
@@ -852,6 +872,8 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 	}
 
 	if (ship_state_ == ShipStates::kExpeditionScouting && get_ship_type() == ShipType::kTransport) {
+		// TODO(tothxa): Implement expedition options for stop_on_report and report_known
+		//               (report_known can probably always be disabled when stopping is disabled)
 		update_seen_portspaces(game);
 	} else if (ship_state_ == ShipStates::kExpeditionPortspaceFound) {
 		check_port_space_still_available(game);

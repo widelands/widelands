@@ -368,13 +368,21 @@ private:
 	PortDock* find_nearest_port(Game& game);
 
 	// Checks and remembers port spaces within the ship's vision range.
-	// Sends a message for each newly spotted port space.
-	// Returns whether any port spaces are newly spotted.
-	bool update_seen_portspaces(Game& game);
+	// If report_known is true, then sends message on all newly spotted port spaces, otherwise only
+	// on newly discovered port spaces.
+	// If stop_on_report is true, then also stops the ship when a port space is reported.
+	// Returns whether the ship was stopped.
+	bool update_seen_portspaces(Game& game, bool report_known = true, bool stop_on_report = true);
 
+	// Stores coords as a DetectedPortSpace or updates owner if already known.
+	// Returns true if the port space was previously not known.
 	bool remember_detected_portspace(const Coords& coords);
+
+	// Uses the applicable check of the below two functions according to ship type.
+	[[nodiscard]] bool is_suitable_portspace(const Coords& coords) const;
 	[[nodiscard]] bool can_build_port_here(const Coords& coords) const;
 	[[nodiscard]] bool suited_as_invasion_portspace(const Coords& coords) const;
+
 	void send_message(Game& game,
 	                  const std::string& title,
 	                  const std::string& heading,
