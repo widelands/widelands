@@ -487,10 +487,11 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 
 	// if we have a port-space we can build a Port or continue exploring
 	// 1. examine to build a port (colony founding)
-	if (!so.ship->exp_port_spaces().empty()) {
+	const Widelands::Coords portspace = so.ship->current_portspace();
+	if (static_cast<bool>(portspace)) {
 
 		// we score the place (value max == 8)
-		const uint8_t spot_score = spot_scoring(so.ship->exp_port_spaces().back()) * 2;
+		const uint8_t spot_score = spot_scoring(portspace) * 2;
 		verb_log_dbg_time(gametime, "%d: %s at %3dx%3d: PORTSPACE found, we valued it: %d\n", pn,
 		                  so.ship->get_shipname().c_str(), so.ship->get_position().x,
 		                  so.ship->get_position().y, spot_score);
@@ -498,7 +499,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		// we make a decision based on the score value and random
 		if (RNG::static_rand(8) < spot_score) {
 			// we build a port here
-			game().send_player_ship_construct_port(*so.ship, so.ship->exp_port_spaces().back());
+			game().send_player_ship_construct_port(*so.ship, portspace);
 			so.last_command_time = gametime;
 			so.waiting_for_command_ = false;
 

@@ -32,6 +32,7 @@
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/productionsite.h"
+#include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/message_queue.h"
@@ -254,16 +255,6 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 
 	map_options_subscriber_ = Notifications::subscribe<NoteMapOptions>(
 	   [this](const NoteMapOptions& /* note */) { rebuild_statistics_menu(); });
-	shipnotes_subscriber_ =
-	   Notifications::subscribe<Widelands::NoteShip>([this](const Widelands::NoteShip& note) {
-		   if (note.ship->owner().player_number() == player_number() &&
-		       note.ship->is_expedition_or_warship() && !note.ship->exp_port_spaces().empty() &&
-		       note.action == Widelands::NoteShip::Action::kWaitingForCommand &&
-		       (note.ship->get_ship_state() == Widelands::ShipStates::kExpeditionPortspaceFound ||
-		        note.ship->get_ship_type() == Widelands::ShipType::kWarship)) {
-			   expedition_port_spaces_[note.ship] = note.ship->exp_port_spaces();
-		   }
-	   });
 
 	initialization_complete();
 }
@@ -393,18 +384,24 @@ void InteractivePlayer::rebuild_showhide_menu() {
 
 InteractivePlayer::HasExpeditionPortSpace
 InteractivePlayer::has_expedition_port_space(const Widelands::Coords& coords) const {
-	for (const auto& pair : expedition_port_spaces_) {
-		if (pair.second.empty()) {
+	HasExpeditionPortSpace tmp_rv = HasExpeditionPortSpace::kNone;
+	for (auto serial : player().ships()) {
+		Widelands::Ship* ship = dynamic_cast<Widelands::Ship*>(egbase().objects().get_object(serial));
+		if (ship == nullptr) {
 			continue;
 		}
-		if (pair.second.back() == coords) {
+		const Widelands::Coords portspace = ship->current_portspace();
+		if (!static_cast<bool>(portspace)) {
+			continue;
+		}
+		if (portspace == coords) {
 			return HasExpeditionPortSpace::kPrimary;
 		}
-		if (std::find(pair.second.begin(), pair.second.end(), coords) != pair.second.end()) {
-			return HasExpeditionPortSpace::kOther;
+		if (ship->sees_portspace(portspace)) {
+			tmp_rv = HasExpeditionPortSpace::kOther;
 		}
 	}
-	return HasExpeditionPortSpace::kNone;
+	return tmp_rv;
 }
 
 void InteractivePlayer::draw_immovables_for_visible_field(
@@ -483,17 +480,6 @@ void InteractivePlayer::think() {
 		toggle_message_menu_->set_tooltip(as_tooltip_text_with_hotkey(
 		   msg_tooltip, shortcut_string_for(KeyboardShortcut::kInGameMessages, true),
 		   UI::PanelStyle::kWui));
-	}
-
-	// Cleanup found port spaces if the ship sailed on or was destroyed
-	for (auto it = expedition_port_spaces_.begin(); it != expedition_port_spaces_.end();) {
-		Widelands::Ship* ship = it->first.get(egbase());
-		if (ship == nullptr || !ship->is_expedition_or_warship()) {
-			it = expedition_port_spaces_.erase(it);
-		} else {
-			it->second = ship->exp_port_spaces();
-			++it;
-		}
 	}
 }
 
@@ -771,8 +757,10 @@ UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& coord
 		// Auto-detect what kind of attack window we need to show.
 		const Map& map = egbase().map();
 
-		for (const auto& pair : expedition_port_spaces_) {
-			if (pair.second.front() == coords) {
+		for (auto serial : player().ships()) {
+			Widelands::Ship* ship = dynamic_cast<Widelands::Ship*>(egbase().objects().get_object(serial));
+			if (ship != nullptr && ship->get_ship_type() == Widelands::ShipType::kWarship &&
+			    ship->sees_portspace(coords)) {
 				UI::UniqueWindow::Registry& registry =
 				   unique_windows().get_registry(format("attack_coords_%d_%d", coords.x, coords.y));
 				registry.open_window = [this, &registry, &coords, fastclick]() {

@@ -708,7 +708,7 @@ bool Ship::update_seen_portspaces(Game& game, const bool report_known, const boo
                                 ShipStates::kExpeditionPortspaceFound,
 		                          NoteShip::Action::kWaitingForCommand);
 	} else if (changed) {
-		// Update display in InteractivePlayer
+		// TODO(tothxa): Is this still needed now that InteractivePlayer doesn't cache it?
 		Notifications::publish(NoteShip(this, NoteShip::Action::kWaitingForCommand));
 	}
 	return stopped;
@@ -1798,8 +1798,9 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 		return;
 	}
 	case ShipStates::kExpeditionColonizing: {
-		assert(!expedition_->seen_port_buildspaces.empty());
-		upcast(ConstructionSite, cs, map[expedition_->seen_port_buildspaces.back()].get_immovable());
+		const Coords portspace = current_portspace();
+		assert(static_cast<bool>(portspace));
+		upcast(ConstructionSite, cs, map[portspace].get_immovable());
 		// some safety checks that we have identified the correct csite
 		if ((cs != nullptr) && cs->get_owner() == get_owner() && cs->get_built_per64k() == 0 &&
 		    owner().tribe().building_index(cs->building().name()) == owner().tribe().port()) {
@@ -1890,13 +1891,14 @@ void Ship::set_ship_state_and_notify(ShipStates state, NoteShip::Action action) 
 
 bool Ship::check_port_space_still_available(Game& game) {
 	assert(expedition_);
+	const Coords portspace = current_portspace();
 	// recheck ownership before setting the csite
-	if (expedition_->seen_port_buildspaces.empty()) {
+	if (!static_cast<bool>(portspace)) {
 		log_warn_time(
 		   game.get_gametime(), "Expedition list of seen port spaces is unexpectedly empty!\n");
 		return false;
 	}
-	if (!can_build_port_here(expedition_->seen_port_buildspaces.back())) {
+	if (!can_build_port_here(portspace)) {
 		set_ship_state_and_notify(
 		   ShipStates::kExpeditionWaiting, NoteShip::Action::kDestinationChanged);
 		send_message(game, _("Port Space Lost!"), _("No Port Can Be Built"),
@@ -2201,6 +2203,8 @@ void Ship::exp_construct_port(Game& game, const Coords& c) {
 	}
 	set_ship_state_and_notify(
 	   ShipStates::kExpeditionColonizing, NoteShip::Action::kDestinationChanged);
+	// Update ownership
+	remember_detected_portspace(c);
 }
 
 /// Initializes / changes the direction the island exploration in @arg island_explore_direction

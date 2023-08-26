@@ -243,10 +243,23 @@ struct Ship : Bob {
 		return false;
 	}
 
-	/// \returns (in expedition mode only!) the list of currently seen port build spaces
-	[[nodiscard]] const std::vector<Coords>& exp_port_spaces() const {
-		assert(expedition_ != nullptr);
-		return expedition_->seen_port_buildspaces;
+	// Returns whether the ship can currently see a port space at coords that it can use to
+	// build a port or start an invasion
+	[[nodiscard]] bool sees_portspace(const Coords& coords) const {
+		if (expedition_ == nullptr || expedition_->seen_port_buildspaces.empty()) {
+			return false;
+		}
+		const std::vector<Coords>& seen = expedition_->seen_port_buildspaces;
+		return std::find(seen.begin(), seen.end(), coords) != seen.end();
+	}
+
+	// Returns the coordinates of the current primary seen port space of the ship,
+	// or the invalid coordinates if the ship cannot see any suitable port spaces.
+	[[nodiscard]] Coords current_portspace() const {
+		if (expedition_ == nullptr || expedition_->seen_port_buildspaces.empty()) {
+			return Coords::null();
+		}
+		return expedition_->seen_port_buildspaces.back();
 	}
 
 	void exp_scouting_direction(Game&, WalkingDir);

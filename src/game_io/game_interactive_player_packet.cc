@@ -35,8 +35,9 @@ namespace Widelands {
 namespace {
 
 /* Changelog:
- * 7: v1.1
- * 8: Added multiple expedition port spaces
+ * 6: v1.1
+ * 7: Changed landmark handling
+ * 8: Naval Warfare: Removed expedition port spaces
  */
 constexpr uint16_t kCurrentPacketVersion = 8;
 
@@ -107,6 +108,7 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 					const float y = fr.float_32();
 					const float zoom = fr.float_32();
 					MapView::View view = {Vector2f(x, y), zoom};
+					// TODO(tothxa): Savegame compatibility, remove after v1.2
 					if (packet_version < 7) {
 						// Reference point was top left up to v1.1, is center starting with v1.2.
 						// The landmarks are shifted if the window size is different between saving and
@@ -122,18 +124,14 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 					}
 				}
 
-				if (packet_version >= 5) {
+				// TODO(tothxa): Savegame compatibility, remove after v1.2
+				//               This used to be a cache of expedition ships' primary seen port spaces
+				if (packet_version < 8) {
 					size_t nr_port_spaces = fr.unsigned_32();
 					for (size_t i = 0; i < nr_port_spaces; ++i) {
-						uint32_t serial = fr.unsigned_32();
-						for (uint32_t j = packet_version >= 8 ? fr.unsigned_32() : 1; j > 0; --j) {
-							int16_t x = fr.signed_16();
-							int16_t y = fr.signed_16();
-							if (ipl != nullptr) {
-								ipl->get_expedition_port_spaces()[&mol->get<Widelands::Ship>(serial)]
-								   .emplace_back(x, y);
-							}
-						}
+						/* serial */ fr.unsigned_32();
+						/* x */ fr.signed_16();
+						/* y */ fr.signed_16();
 					}
 				}
 				if (packet_version >= 6 && (fr.unsigned_8() != 0u) && (ipl != nullptr)) {
@@ -185,20 +183,6 @@ void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSav
 			fw.float_32(lm.view.viewpoint.y);
 			fw.float_32(lm.view.zoom);
 			fw.string(lm.name);
-		}
-
-		if (iplayer != nullptr) {
-			fw.unsigned_32(iplayer->get_expedition_port_spaces().size());
-			for (const auto& pair : iplayer->get_expedition_port_spaces()) {
-				fw.unsigned_32(mos->get_object_file_index(*pair.first.get(game)));
-				fw.unsigned_32(pair.second.size());
-				for (const auto& coords : pair.second) {
-					fw.signed_16(coords.x);
-					fw.signed_16(coords.y);
-				}
-			}
-		} else {
-			fw.unsigned_32(0);
 		}
 	}
 
