@@ -678,7 +678,7 @@ bool Ship::update_seen_portspaces(Game& game, const bool report_known, const boo
 			continue;
 		}
 		if (!is_suitable_portspace(mr.location())) {
-			if (get_owner()->has_detected_port_space(mr.location())) {
+			if (get_owner()->has_detected_port_space(mr.location()) != nullptr) {
 				// Update owner even if can't use currently
 				remember_detected_portspace(mr.location());
 			}  // TODO(tothxa): But what to do with enemy ports spotted first by expeditions?

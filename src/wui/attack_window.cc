@@ -189,14 +189,11 @@ std::vector<Widelands::Bob*> AttackWindow::get_max_attackers() {
 				}
 			} else {  // Ship-to-land invasion
 				bool found = false;
-
-				if (building != nullptr) {
-					if (warship->sees_portspace(building->get_positions(egbase)[0])) {
-						found = true;
-						break;
-					}
+				if (building != nullptr) {  // target is a building on a port space
+					found = warship->sees_portspace(building->get_positions(egbase)[0]);
+				} else {  // target is a port space
+					found = warship->sees_portspace(target_coordinates_);
 				}
-
 				if (found) {
 					std::vector<Widelands::Soldier*> onboard = warship->onboard_soldiers();
 					result_vector.insert(result_vector.end(), onboard.begin(), onboard.end());
