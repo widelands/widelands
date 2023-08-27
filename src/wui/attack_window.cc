@@ -793,8 +793,7 @@ UI::Window& AttackWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::Map
 				a->do_not_conquer_->set_state(destroy == 0);
 			}
 
-			for (const Widelands::OPtr<Widelands::Bob> s :
-			     a->attack_panel_.attacking_soldiers_->get_soldiers()) {
+			for (const auto& s : a->attack_panel_.attacking_soldiers_->get_soldiers()) {
 				a->attack_panel_.attacking_soldiers_->remove(s);
 				a->attack_panel_.remaining_soldiers_->add(s);
 			}
@@ -834,8 +833,7 @@ void AttackWindow::save(FileWrite& fw, Widelands::MapObjectSaver& mos) const {
 	fw.unsigned_8(do_not_conquer_ && !do_not_conquer_->get_state() ? 1 : 0);
 
 	fw.unsigned_32(attack_panel_.attacking_soldiers_->get_soldiers().size());
-	for (const Widelands::OPtr<Widelands::Bob> s :
-	     attack_panel_.attacking_soldiers_->get_soldiers()) {
+	for (const auto& s : attack_panel_.attacking_soldiers_->get_soldiers()) {
 		fw.unsigned_32(mos.get_object_file_index_or_zero(s.get(iplayer_.egbase())));
 	}
 }
