@@ -571,14 +571,22 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 			const Image* player_image = nullptr;
 			float icon_scale = 0.7f;
+			float icon_opacity = 1.0f;
 
 			// Not all map starting positions pass the suitability test.
 			// TODO(tothxa): Make the editor at least use the same test. But manual changes would still
 			//               be possible.
 			for (unsigned p = map.get_nrplayers(); p != 0u; --p) {
 				if (map.get_starting_pos(p) == f->fcoords) {
-					player_image = playercolor_image(p - 1, icon_filename);
+					Widelands::Player* plr = gbase.get_player(p);
+					if (plr == nullptr || !plr->is_picking_custom_starting_position()) {
+						// Should have a HQ if finished picking, no need for the overlay
+						continue;
+					}
+					player_image = playercolor_image(plr->get_playercolor(), icon_filename);
 					icon_scale = 1.0f;
+					icon_opacity =
+					   plr->get_starting_position_suitability(f->fcoords) ? 0.7f : kBuildhelpOpacity;
 					break;
 				}
 			}
@@ -591,7 +599,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 				suited_as_starting_pos = true;
 				blit_field_overlay(dst, *f, player_image,
 				                   Vector2i(player_image->width() / 2, kStartingPosHotspotY),
-				                   scale * icon_scale);
+				                   scale * icon_scale, icon_opacity);
 			}
 		}
 
