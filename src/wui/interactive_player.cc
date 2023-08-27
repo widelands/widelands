@@ -579,17 +579,17 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			// Not all map starting positions pass the suitability test.
 			// TODO(tothxa): Make the editor at least use the same test. But manual changes would still
 			//               be possible.
-			for (unsigned p = map.get_nrplayers(); p != 0u; --p) {
-				if (map.get_starting_pos(p) == f->fcoords) {
-					Widelands::Player* plr = gbase.get_player(p);
-					if (plr == nullptr || !plr->is_picking_custom_starting_position()) {
+			for (unsigned pn = map.get_nrplayers(); pn != 0u; --pn) {
+				if (map.get_starting_pos(pn) == f->fcoords) {
+					Widelands::Player* p = gbase.get_player(pn);
+					if (p == nullptr || !p->is_picking_custom_starting_position()) {
 						// Should have a HQ if finished picking, no need for the overlay
 						continue;
 					}
-					player_image = playercolor_image(plr->get_playercolor(), icon_filename);
+					player_image = playercolor_image(p->get_playercolor(), icon_filename);
 					icon_scale = 1.0f;
 					icon_opacity =
-					   plr->get_starting_position_suitability(f->fcoords) ? 0.7f : kBuildhelpOpacity;
+					   p->get_starting_position_suitability(f->fcoords) ? 0.7f : kBuildhelpOpacity;
 					break;
 				}
 			}
