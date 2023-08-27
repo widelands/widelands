@@ -483,7 +483,7 @@ void ColorChooser::update_favorites() {
 					valid = true;
 				} catch (const std::exception& e) {
 					valid = false;
-					log_warn("Malformed color preference '%s'", rgb_string.c_str());
+					log_warn("Malformed color preference '%s': %s", rgb_string.c_str(), e.what());
 				}
 			}
 		}
