@@ -20,6 +20,8 @@
 
 #include <cassert>
 #include <ctime>
+#include <iomanip>
+#include <sstream>
 
 #include "base/i18n.h"
 
@@ -193,4 +195,12 @@ std::string gametimestring(uint32_t gametime, bool show_seconds) {
 	}
 
 	return result.substr(i);
+}
+
+std::string realtimestring() {
+	std::time_t t = std::time(nullptr);
+	std::tm tm = *std::localtime(&t);
+	std::ostringstream oss("");
+	oss << std::put_time(&tm, "%X");
+	return oss.str();
 }

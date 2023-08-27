@@ -131,13 +131,12 @@ void InteractiveGameBase::add_main_menu() {
 
 void InteractiveGameBase::rebuild_main_menu() {
 	mainmenu_.clear();
-#ifndef NDEBUG  //  only in debug builds
-	/** TRANSLATORS: An entry in the game's main menu */
-	mainmenu_.add(_("Script Console"), MainMenuEntry::kScriptConsole,
-	              g_image_cache->get("images/wui/menus/lua.png"), false,
-	              /** TRANSLATORS: Tooltip for Script Console in the game's main menu */
-	              "", pgettext("hotkey", "Ctrl+Shift+Space"));
-#endif
+	if (g_allow_script_console) {
+		/** TRANSLATORS: An entry in the game's main menu */
+		mainmenu_.add(_("Script Console"), MainMenuEntry::kScriptConsole,
+		              g_image_cache->get("images/wui/menus/lua.png"), false, "",
+		              shortcut_string_for(KeyboardShortcut::kCommonDebugConsole, false));
+	}
 
 	menu_windows_.sound_options.open_window = [this] {
 		new GameOptionsSoundMenu(*this, menu_windows_.sound_options);
@@ -197,12 +196,11 @@ void InteractiveGameBase::rebuild_main_menu() {
 
 void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 	switch (entry) {
-#ifndef NDEBUG  //  only in debug builds
 	case MainMenuEntry::kScriptConsole: {
+		assert(g_allow_script_console);
 		GameChatMenu::create_script_console(
 		   this, color_functor(), debugconsole_, *DebugConsole::get_chat_provider());
 	} break;
-#endif
 	case MainMenuEntry::kOptions: {
 		menu_windows_.sound_options.toggle();
 	} break;
@@ -683,6 +681,11 @@ void InteractiveGameBase::start() {
 		// Adding a check, just in case there was no viable player found for spectator
 		if (game().get_player(pln) != nullptr) {
 			map_view()->scroll_to_field(game().map().get_starting_pos(pln), MapView::Transition::Jump);
+		}
+
+		if (g_allow_script_console) {
+			// Let's warn all users once again
+			broadcast_cheating_message("CAN_CHEAT");
 		}
 	}
 }
