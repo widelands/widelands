@@ -90,8 +90,8 @@ private:
 		bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
 
 		const Widelands::OPtr<Widelands::Bob> soldier_at(int32_t x, int32_t y) const;
-		void add(const Widelands::OPtr<Widelands::Bob>);
-		void remove(const Widelands::OPtr<Widelands::Bob>);
+		void add(Widelands::OPtr<Widelands::Bob>);
+		void remove(Widelands::OPtr<Widelands::Bob>);
 		void sort();
 		bool contains(const Widelands::OPtr<Widelands::Bob> soldier) const {
 			return std::any_of(

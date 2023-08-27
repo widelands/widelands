@@ -185,7 +185,7 @@ std::vector<Widelands::OPtr<Widelands::Bob>> AttackWindow::get_max_attackers() {
 		if (warship->can_attack()) {
 			if (ship != nullptr) {  // Ship-to-ship combat
 				if (warship->has_attack_target(ship)) {
-					result_vector.push_back(warship);
+					result_vector.emplace_back(warship);
 				}
 			} else {  // Ship-to-land invasion
 				const std::vector<Widelands::Coords>& spaces = warship->exp_port_spaces();
