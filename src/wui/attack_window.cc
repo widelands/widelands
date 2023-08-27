@@ -110,12 +110,13 @@ AttackWindow::AttackWindow(InteractivePlayer& parent,
 	initialization_complete();
 }
 
-AttackPanel::AttackPanel(UI::Panel& parent,
-                         InteractivePlayer& iplayer,
-                         bool can_attack,
-                         const Widelands::Coords* target_coordinates,
-                         AttackType attack_type,
-                         std::function<std::vector<Widelands::OPtr<Widelands::Bob>>()> get_max_attackers)
+AttackPanel::AttackPanel(
+   UI::Panel& parent,
+   InteractivePlayer& iplayer,
+   bool can_attack,
+   const Widelands::Coords* target_coordinates,
+   AttackType attack_type,
+   std::function<std::vector<Widelands::OPtr<Widelands::Bob>>()> get_max_attackers)
    : UI::Box(&parent, UI::PanelStyle::kWui, "attack_panel", 0, 0, UI::Box::Vertical),
      iplayer_(iplayer),
      target_coordinates_(target_coordinates),
@@ -354,7 +355,8 @@ void AttackPanel::update(bool action_on_panel) {
 	more_soldiers_->set_title(std::to_string(max_attackers));
 }
 
-void AttackPanel::init_slider(const std::vector<Widelands::OPtr<Widelands::Bob>>& all_attackers, bool can_attack) {
+void AttackPanel::init_slider(const std::vector<Widelands::OPtr<Widelands::Bob>>& all_attackers,
+                              bool can_attack) {
 	const size_t max_attackers = all_attackers.size();
 
 	soldiers_text_.reset(&add_text(
@@ -390,7 +392,8 @@ void AttackPanel::init_slider(const std::vector<Widelands::OPtr<Widelands::Bob>>
 	more_soldiers_->set_enabled(max_attackers > 0);
 }
 
-void AttackPanel::init_soldier_lists(const std::vector<Widelands::OPtr<Widelands::Bob>>& all_attackers) {
+void AttackPanel::init_soldier_lists(
+   const std::vector<Widelands::OPtr<Widelands::Bob>>& all_attackers) {
 	attacking_soldiers_.reset(new ListOfSoldiers(this, this, 0, 0, 30, 30));
 	remaining_soldiers_.reset(new ListOfSoldiers(this, this, 0, 0, 30, 30));
 	attacking_soldiers_->set_complement(remaining_soldiers_.get());
@@ -613,7 +616,8 @@ void AttackPanel::ListOfSoldiers::handle_mousein(bool /*inside*/) {
 bool AttackPanel::ListOfSoldiers::handle_mousemove(
    uint8_t /*state*/, int32_t x, int32_t y, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	MutexLock m(MutexLock::ID::kObjects);
-	if (const Widelands::Bob* mo = soldier_at(x, y).get(attack_box_->iplayer_.egbase()); mo != nullptr) {
+	if (const Widelands::Bob* mo = soldier_at(x, y).get(attack_box_->iplayer_.egbase());
+	    mo != nullptr) {
 		if (mo->descr().type() == Widelands::MapObjectType::SHIP) {
 			upcast(const Widelands::Ship, ship, mo);
 			set_tooltip(format(_("%1$s  HP: %2$u/%3$u  AT: +%4$u%%"), ship->get_shipname(),
@@ -657,7 +661,8 @@ void AttackPanel::ListOfSoldiers::update_desired_size() {
 	set_desired_size(e.w * kSoldierIconWidth, e.h * kSoldierIconHeight);
 }
 
-const Widelands::OPtr<Widelands::Bob> AttackPanel::ListOfSoldiers::soldier_at(int32_t x, int32_t y) const {
+const Widelands::OPtr<Widelands::Bob> AttackPanel::ListOfSoldiers::soldier_at(int32_t x,
+                                                                              int32_t y) const {
 	if (x < 0 || y < 0 || soldiers_.empty()) {
 		return nullptr;
 	}
@@ -691,15 +696,22 @@ void AttackPanel::ListOfSoldiers::sort() {
 	MutexLock m(MutexLock::ID::kObjects);
 
 	const Widelands::Map& map = attack_box_->iplayer_.egbase().map();
-	std::sort(
-	   soldiers_.begin(), soldiers_.end(), [this, &map](const Widelands::OPtr<Widelands::Bob> pa, const Widelands::OPtr<Widelands::Bob> pb) {
-		   const Widelands::Bob* obja = pa.get(attack_box_->iplayer_.egbase());
-		   const Widelands::Bob* objb = pb.get(attack_box_->iplayer_.egbase());
-		   const uint32_t dista = obja != nullptr ? map.calc_distance(obja->get_position(), *attack_box_->target_coordinates_) : std::numeric_limits<uint32_t>::max();
-		   const uint32_t distb = objb != nullptr ? map.calc_distance(objb->get_position(), *attack_box_->target_coordinates_) : std::numeric_limits<uint32_t>::max();
+	std::sort(soldiers_.begin(), soldiers_.end(),
+	          [this, &map](const Widelands::OPtr<Widelands::Bob> pa,
+	                       const Widelands::OPtr<Widelands::Bob> pb) {
+		          const Widelands::Bob* obja = pa.get(attack_box_->iplayer_.egbase());
+		          const Widelands::Bob* objb = pb.get(attack_box_->iplayer_.egbase());
+		          const uint32_t dista =
+		             obja != nullptr ?
+                      map.calc_distance(obja->get_position(), *attack_box_->target_coordinates_) :
+                      std::numeric_limits<uint32_t>::max();
+		          const uint32_t distb =
+		             objb != nullptr ?
+                      map.calc_distance(objb->get_position(), *attack_box_->target_coordinates_) :
+                      std::numeric_limits<uint32_t>::max();
 
-		   return dista < distb;
-	   });
+		          return dista < distb;
+	          });
 }
 
 void AttackPanel::ListOfSoldiers::draw(RenderTarget& dst) {
@@ -723,20 +735,21 @@ void AttackPanel::ListOfSoldiers::draw(RenderTarget& dst) {
 				assert(soldier != nullptr);
 
 				dst.fill_rect(Recti(location, kSoldierIconWidth, kSoldierIconHeight),
-					          get_soldier_color(soldier), BlendMode::Default);
+				              get_soldier_color(soldier), BlendMode::Default);
 
 				soldier->draw_info_icon(location, 1.0f, Widelands::Soldier::InfoMode::kInBuilding,
-					                    InfoToDraw::kSoldierLevels, &dst);
+				                        InfoToDraw::kSoldierLevels, &dst);
 
 				if (soldier->is_shipping()) {
 					constexpr float kOffset = 0.35f;
 					constexpr float kSize = 0.5f;
 					constexpr float kAlpha = 0.9f;
 					const Image* anchor = g_image_cache->get("images/wui/overlays/port_hint.png");
-					dst.blitrect_scale(
-					   Rectf((column + kOffset) * kSoldierIconWidth, (row + kOffset) * kSoldierIconHeight,
-						     kSoldierIconWidth * kSize, kSoldierIconHeight * kSize),
-					   anchor, Recti(0, 0, anchor->width(), anchor->height()), kAlpha, BlendMode::Default);
+					dst.blitrect_scale(Rectf((column + kOffset) * kSoldierIconWidth,
+					                         (row + kOffset) * kSoldierIconHeight,
+					                         kSoldierIconWidth * kSize, kSoldierIconHeight * kSize),
+					                   anchor, Recti(0, 0, anchor->width(), anchor->height()), kAlpha,
+					                   BlendMode::Default);
 				}
 			}
 		}
@@ -780,7 +793,8 @@ UI::Window& AttackWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::Map
 				a->do_not_conquer_->set_state(destroy == 0);
 			}
 
-			for (const Widelands::OPtr<Widelands::Bob> s : a->attack_panel_.attacking_soldiers_->get_soldiers()) {
+			for (const Widelands::OPtr<Widelands::Bob> s :
+			     a->attack_panel_.attacking_soldiers_->get_soldiers()) {
 				a->attack_panel_.attacking_soldiers_->remove(s);
 				a->attack_panel_.remaining_soldiers_->add(s);
 			}
@@ -820,7 +834,8 @@ void AttackWindow::save(FileWrite& fw, Widelands::MapObjectSaver& mos) const {
 	fw.unsigned_8(do_not_conquer_ && !do_not_conquer_->get_state() ? 1 : 0);
 
 	fw.unsigned_32(attack_panel_.attacking_soldiers_->get_soldiers().size());
-	for (const Widelands::OPtr<Widelands::Bob> s : attack_panel_.attacking_soldiers_->get_soldiers()) {
+	for (const Widelands::OPtr<Widelands::Bob> s :
+	     attack_panel_.attacking_soldiers_->get_soldiers()) {
 		fw.unsigned_32(mos.get_object_file_index_or_zero(s.get(iplayer_.egbase())));
 	}
 }
