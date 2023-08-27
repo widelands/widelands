@@ -203,7 +203,9 @@ void fill_parameter_vector() {
 	  {"", "theme", _("DIRNAME"),
 		_("The path to the active UI theme, relative to the Widelands home directory."), false},
 	  {"", "favorite_colors", _("[...]"),
-		_("A set of favorite colors for the color chooser, separated by ‘;’. Each color is a tuple of Red, Green, and Blue values separated by ‘,’."), true},
+		_("A set of favorite colors for the color chooser, separated by ‘;’. Each color is a tuple "
+		  "of Red, Green, and Blue values separated by ‘,’."),
+		true},
 	  /// Window options
 	  {_("Options for the internal window manager:"), "animate_map_panning", _("[true*|false]"),
 		_("Whether automatic map movements should be animated."), true},

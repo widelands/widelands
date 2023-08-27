@@ -451,8 +451,7 @@ void ColorChooser::create_palette_button(const unsigned index) {
 	   box, "palette_" + std::to_string(index), 0, 0, kButtonSize, kButtonSize,
 	   panel_style_ == PanelStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
 	   playercolor_image(kPlayerColors[index], "images/ui_basic/square.png"));
-	button->sigclicked.connect(
-	   [this, index]() { set_color(kPlayerColors[index]); });
+	button->sigclicked.connect([this, index]() { set_color(kPlayerColors[index]); });
 
 	if (index != 0 && index != kMaxPlayers / 2) {
 		box->add_space(kSpacing);
@@ -492,19 +491,24 @@ void ColorChooser::update_favorites() {
 		Button* button;
 		if (valid) {
 			button = new Button(
-				&favorites_box_, "set_to_favorite_" + std::to_string(index), 0, 0, kButtonSize, kButtonSize,
-				panel_style_ == PanelStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
-				playercolor_image(setting, "images/ui_basic/square.png"));
+			   &favorites_box_, "set_to_favorite_" + std::to_string(index), 0, 0, kButtonSize,
+			   kButtonSize,
+			   panel_style_ == PanelStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
+			   playercolor_image(setting, "images/ui_basic/square.png"));
 			button->sigclicked.connect([this, setting]() { set_color(setting); });
 
 			Button* del = new Button(
-				button, "delete_favorite_" + std::to_string(index), kButtonSize - kSmallButtonSize, 0, kSmallButtonSize, kSmallButtonSize,
-				panel_style_ == PanelStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu, _("–"), _("Remove from favorites"));
+			   button, "delete_favorite_" + std::to_string(index), kButtonSize - kSmallButtonSize, 0,
+			   kSmallButtonSize, kSmallButtonSize,
+			   panel_style_ == PanelStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
+			   _("–"), _("Remove from favorites"));
 			del->sigclicked.connect([this, index]() { set_favorite(index, true); });
 		} else {
 			button = new Button(
-				&favorites_box_, "add_favorite_" + std::to_string(index), 0, 0, kButtonSize, kButtonSize,
-				panel_style_ == PanelStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu, _("+"), _("Add current color to favorites"));
+			   &favorites_box_, "add_favorite_" + std::to_string(index), 0, 0, kButtonSize,
+			   kButtonSize,
+			   panel_style_ == PanelStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
+			   _("+"), _("Add current color to favorites"));
 			button->sigclicked.connect([this, index]() { set_favorite(index, false); });
 		}
 

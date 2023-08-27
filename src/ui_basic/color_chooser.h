@@ -50,7 +50,8 @@ private:
 	static constexpr unsigned kNFavorites = kMaxPlayers / 2;
 	RGBColor current_;
 
-	Box main_box_, hbox_, buttonsbox_, vbox_, box_r_, box_g_, box_b_, palette_box_1_, palette_box_2_, favorites_box_;
+	Box main_box_, hbox_, buttonsbox_, vbox_, box_r_, box_g_, box_b_, palette_box_1_, palette_box_2_,
+	   favorites_box_;
 	Button button_ok_, button_cancel_, button_init_, button_r_, button_g_, button_b_;
 	Button* button_default_;
 	SpinBox spin_r_, spin_g_, spin_b_;
