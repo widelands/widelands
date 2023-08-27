@@ -829,7 +829,8 @@ void Ship::set_soldier_preference(SoldierPreference pref) {
 void Ship::erase_warship_soldier_request() {
 	const EditorGameBase& egbase = owner().egbase();
 	if (PortDock* dock = requestdock_.get(egbase); dock != nullptr) {
-		molog(egbase.get_gametime(), "Erasing soldier request at %s", dock->get_warehouse()->get_warehouse_name().c_str());
+		molog(egbase.get_gametime(), "Erasing soldier request at %s",
+		      dock->get_warehouse()->get_warehouse_name().c_str());
 		dock->erase_warship_request(serial());
 	}
 	requestdock_ = nullptr;
@@ -841,10 +842,13 @@ void Ship::update_warship_soldier_request(bool create) {
 
 	if (dock != nullptr) {
 		// We should already have a request
-		molog(egbase.get_gametime(), "Updating existing soldier request at %s", dock->get_warehouse()->get_warehouse_name().c_str());
+		molog(egbase.get_gametime(), "Updating existing soldier request at %s",
+		      dock->get_warehouse()->get_warehouse_name().c_str());
 		SoldierRequest* req = dock->get_warship_request(serial());
 		if (req == nullptr) {
-			throw wexception("Ship %s has no soldier request at request dock %s", get_shipname().c_str(), dock->get_warehouse()->get_warehouse_name().c_str());
+			throw wexception("Ship %s has no soldier request at request dock %s",
+			                 get_shipname().c_str(),
+			                 dock->get_warehouse()->get_warehouse_name().c_str());
 		}
 		req->set_preference(soldier_preference_);
 		req->update();
@@ -859,12 +863,15 @@ void Ship::update_warship_soldier_request(bool create) {
 	// Create a new request at the current port.
 	dock = lastdock_.get(owner().egbase());
 	if (dock == nullptr) {
-		throw wexception("Ship %s attempts to create warship soldier request while not in dock", get_shipname().c_str());
+		throw wexception("Ship %s attempts to create warship soldier request while not in dock",
+		                 get_shipname().c_str());
 	}
-	molog(egbase.get_gametime(), "Creating new soldier request at %s", dock->get_warehouse()->get_warehouse_name().c_str());
+	molog(egbase.get_gametime(), "Creating new soldier request at %s",
+	      dock->get_warehouse()->get_warehouse_name().c_str());
 	if (get_position().field->get_immovable() != dock) {
-		throw wexception("Ship %s attempts to create warship soldier request while not on request dock %s",
-				get_shipname().c_str(), dock->get_warehouse()->get_warehouse_name().c_str());
+		throw wexception(
+		   "Ship %s attempts to create warship soldier request while not on request dock %s",
+		   get_shipname().c_str(), dock->get_warehouse()->get_warehouse_name().c_str());
 	}
 
 	SoldierRequest* req = dock->get_warship_request(serial());
@@ -872,7 +879,8 @@ void Ship::update_warship_soldier_request(bool create) {
 		req = &dock->create_warship_request(this, soldier_preference_);
 	} else {
 		// TODO(Nordfriese): Can only happen with legacy savegames, replace this with an assert
-		log_warn("Ship %s already has soldier request at new request dock %s", get_shipname().c_str(), dock->get_warehouse()->get_warehouse_name().c_str());
+		log_warn("Ship %s already has soldier request at new request dock %s", get_shipname().c_str(),
+		         dock->get_warehouse()->get_warehouse_name().c_str());
 	}
 
 	requestdock_ = dock;
@@ -2377,7 +2385,8 @@ void Ship::draw(const EditorGameBase& egbase,
 
 		// NOCOM
 		if (PortDock* rdock = requestdock_.get(egbase); rdock != nullptr) {
-			statistics_string = format("%s<br>→ %s", statistics_string, rdock->get_warehouse()->get_warehouse_name());
+			statistics_string =
+			   format("%s<br>→ %s", statistics_string, rdock->get_warehouse()->get_warehouse_name());
 		}
 
 		statistics_string = StyleManager::color_tag(
@@ -2484,19 +2493,19 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 	molog(egbase.get_gametime(), "Ship belongs to fleet %u\nlastdock: %s\nrequestdock: %s\n",
 	      fleet_ != nullptr ? fleet_->serial() : 0,
 	      (lastdock_.is_set() ?
-            format("%u (%s at %3dx%3d)", lastdock_.serial(),
-	                lastdock_.get(egbase)->get_warehouse()->get_warehouse_name().c_str(),
-	                lastdock_.get(egbase)->get_positions(egbase)[0].x,
-	                lastdock_.get(egbase)->get_positions(egbase)[0].y)
-	            .c_str() :
-            "-"),
-          (requestdock_.is_set() ?
-            format("%u (%s at %3dx%3d)", requestdock_.serial(),
-	                requestdock_.get(egbase)->get_warehouse()->get_warehouse_name().c_str(),
-	                requestdock_.get(egbase)->get_positions(egbase)[0].x,
-	                requestdock_.get(egbase)->get_positions(egbase)[0].y)
-	            .c_str() :
-            "-"));
+             format("%u (%s at %3dx%3d)", lastdock_.serial(),
+	                 lastdock_.get(egbase)->get_warehouse()->get_warehouse_name().c_str(),
+	                 lastdock_.get(egbase)->get_positions(egbase)[0].x,
+	                 lastdock_.get(egbase)->get_positions(egbase)[0].y)
+	             .c_str() :
+             "-"),
+	      (requestdock_.is_set() ?
+             format("%u (%s at %3dx%3d)", requestdock_.serial(),
+	                 requestdock_.get(egbase)->get_warehouse()->get_warehouse_name().c_str(),
+	                 requestdock_.get(egbase)->get_positions(egbase)[0].x,
+	                 requestdock_.get(egbase)->get_positions(egbase)[0].y)
+	             .c_str() :
+             "-"));
 	if (const PortDock* dock = get_destination_port(egbase); dock != nullptr) {
 		molog(egbase.get_gametime(), "Has destination port %u (%3dx%3d) %s\n", dock->serial(),
 		      dock->get_positions(egbase)[0].x, dock->get_positions(egbase)[0].y,
