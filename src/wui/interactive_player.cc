@@ -598,7 +598,9 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 		if (f->seeing != Widelands::VisibleState::kUnexplored) {
 			// Draw build help.
-			const HasExpeditionPortSpace show_port_space = has_expedition_port_space(f->fcoords);
+			const HasExpeditionPortSpace show_port_space = map.is_port_space(f->fcoords) ?
+                                                        has_expedition_port_space(f->fcoords) :
+                                                        HasExpeditionPortSpace::kNone;
 			if (show_port_space != HasExpeditionPortSpace::kNone || suited_as_starting_pos ||
 			    buildhelp()) {
 				Widelands::NodeCaps caps;
