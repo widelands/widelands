@@ -564,25 +564,35 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 		}
 
 		// Draw the player starting position overlays.
-		const bool suited_as_starting_pos =
-		   picking_starting_pos && plr.get_starting_position_suitability(f->fcoords);
-		if (suited_as_starting_pos) {
-			unsigned p;
-			for (p = map.get_nrplayers(); p != 0u; --p) {
+		bool suited_as_starting_pos = false;
+		if (picking_starting_pos) {
+			static const std::string icon_filename = "images/players/player_position.png";
+			static constexpr int kStartingPosHotspotY = 55;
+
+			const Image* player_image = nullptr;
+			float icon_scale = 0.7f;
+
+			// Not all map starting positions pass the suitability test.
+			// TODO(tothxa): Make the editor at least use the same test. But manual changes would still
+			//               be possible.
+			for (unsigned p = map.get_nrplayers(); p != 0u; --p) {
 				if (map.get_starting_pos(p) == f->fcoords) {
+					player_image = playercolor_image(p - 1, icon_filename);
+					icon_scale = 1.0f;
 					break;
 				}
 			}
-			const Image* player_image;
-			if (p == 0u) {
-				player_image =
-				   playercolor_image(RGBColor(220, 220, 220), "images/players/player_position.png");
-			} else {
-				player_image = playercolor_image(p - 1, "images/players/player_position.png");
+
+			if (player_image == nullptr && plr.get_starting_position_suitability(f->fcoords)) {
+				player_image = g_image_cache->get(icon_filename);
 			}
-			static constexpr int kStartingPosHotspotY = 55;
-			blit_field_overlay(dst, *f, player_image,
-			                   Vector2i(player_image->width() / 2, kStartingPosHotspotY), scale);
+
+			if (player_image != nullptr) {
+				suited_as_starting_pos = true;
+				blit_field_overlay(dst, *f, player_image,
+				                   Vector2i(player_image->width() / 2, kStartingPosHotspotY),
+				                   scale * icon_scale);
+			}
 		}
 
 		// Draw work area markers.
