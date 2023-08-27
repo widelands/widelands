@@ -397,7 +397,7 @@ InteractivePlayer::has_expedition_port_space(const Widelands::Coords& coords) co
 		if (portspace == coords) {
 			return HasExpeditionPortSpace::kPrimary;
 		}
-		if (ship->sees_portspace(portspace)) {
+		if (ship->sees_portspace(coords)) {
 			tmp_rv = HasExpeditionPortSpace::kOther;
 		}
 	}
