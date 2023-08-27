@@ -394,10 +394,16 @@ InteractivePlayer::has_expedition_port_space(const Widelands::Coords& coords) co
 		if (!static_cast<bool>(portspace)) {
 			continue;
 		}
-		if (portspace == coords) {
+		// Expeditions can only use the primary port space, show the others faded.
+		// Warships show all seen port spaces the same: either as usable if they are not engaged
+		// or faded otherwise.
+		if (portspace == coords && !ship->has_battle()) {
 			return HasExpeditionPortSpace::kPrimary;
 		}
 		if (ship->sees_portspace(coords)) {
+			if (ship->can_attack()) {
+				return HasExpeditionPortSpace::kPrimary;
+			}
 			tmp_rv = HasExpeditionPortSpace::kOther;
 		}
 	}
