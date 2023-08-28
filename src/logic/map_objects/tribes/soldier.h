@@ -439,6 +439,10 @@ public:
 
 	void add_soldier(EditorGameBase& egbase, Soldier* soldier);
 
+	[[nodiscard]] const std::set<OPtr<Soldier>>& get_soldiers() const {
+		return soldiers_;
+	}
+
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 	static Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
 
