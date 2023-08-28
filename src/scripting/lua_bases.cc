@@ -1019,8 +1019,9 @@ int LuaPlayerBase::place_pinned_note(lua_State* L) {  // NOLINT - can not be mad
 
 	Widelands::PinnedNote& note = Widelands::PinnedNote::create(
 	   egbase, player, c->coords(), luaL_checkstring(L, 3),
-	   lua_gettop(L) < 6 ? get(L, get_egbase(L)).get_playercolor() :
-	   RGBColor(luaL_checkuint32(L, 4), luaL_checkuint32(L, 5), luaL_checkuint32(L, 6)));
+	   lua_gettop(L) < 6 ?
+         get(L, get_egbase(L)).get_playercolor() :
+         RGBColor(luaL_checkuint32(L, 4), luaL_checkuint32(L, 5), luaL_checkuint32(L, 6)));
 
 	LuaMaps::upcasted_map_object_to_lua(L, &note);
 
