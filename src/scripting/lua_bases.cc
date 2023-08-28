@@ -988,7 +988,7 @@ int LuaPlayerBase::place_ship(lua_State* L) {  // NOLINT - can not be made const
 }
 
 /* RST
-   .. method:: place_pinned_note(field, text, r, g, b)
+   .. method:: place_pinned_note(field, text[, r, g, b])
 
       .. versionadded:: 1.2
 
@@ -1008,6 +1008,10 @@ int LuaPlayerBase::place_ship(lua_State* L) {  // NOLINT - can not be made const
       :returns: The new :class:`~wl.map.PinnedNote` that was created.
 */
 int LuaPlayerBase::place_pinned_note(lua_State* L) {  // NOLINT - can not be made const
+	if (lua_gettop(L) != 3 && lua_gettop(L) != 6) {
+		report_error(L, "Takes either 2 or 5 arguments");
+	}
+
 	LuaMaps::LuaField* c = *get_user_class<LuaMaps::LuaField>(L, 2);
 
 	Widelands::EditorGameBase& egbase = get_egbase(L);
@@ -1015,6 +1019,7 @@ int LuaPlayerBase::place_pinned_note(lua_State* L) {  // NOLINT - can not be mad
 
 	Widelands::PinnedNote& note = Widelands::PinnedNote::create(
 	   egbase, player, c->coords(), luaL_checkstring(L, 3),
+	   lua_gettop(L) < 6 ? get(L, get_egbase(L)).get_playercolor() :
 	   RGBColor(luaL_checkuint32(L, 4), luaL_checkuint32(L, 5), luaL_checkuint32(L, 6)));
 
 	LuaMaps::upcasted_map_object_to_lua(L, &note);
