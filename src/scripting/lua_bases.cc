@@ -622,11 +622,16 @@ PlayerBase
 
 const char LuaPlayerBase::className[] = "PlayerBase";
 const MethodType<LuaPlayerBase> LuaPlayerBase::Methods[] = {
-   METHOD(LuaPlayerBase, __eq),        METHOD(LuaPlayerBase, __tostring),
-   METHOD(LuaPlayerBase, conquer),     METHOD(LuaPlayerBase, get_wares),
-   METHOD(LuaPlayerBase, get_workers), METHOD(LuaPlayerBase, place_building),
-   METHOD(LuaPlayerBase, place_flag),  METHOD(LuaPlayerBase, place_road),
-   METHOD(LuaPlayerBase, place_ship),  METHOD(LuaPlayerBase, place_pinned_note),
+   METHOD(LuaPlayerBase, __eq),
+   METHOD(LuaPlayerBase, __tostring),
+   METHOD(LuaPlayerBase, conquer),
+   METHOD(LuaPlayerBase, get_wares),
+   METHOD(LuaPlayerBase, get_workers),
+   METHOD(LuaPlayerBase, place_building),
+   METHOD(LuaPlayerBase, place_flag),
+   METHOD(LuaPlayerBase, place_road),
+   METHOD(LuaPlayerBase, place_ship),
+   METHOD(LuaPlayerBase, place_pinned_note),
    {nullptr, nullptr},
 };
 const PropertyType<LuaPlayerBase> LuaPlayerBase::Properties[] = {
@@ -1008,8 +1013,9 @@ int LuaPlayerBase::place_pinned_note(lua_State* L) {  // NOLINT - can not be mad
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Player& player = get(L, egbase);
 
-	Widelands::PinnedNote& note = Widelands::PinnedNote::create(egbase, player, c->coords(),
-			luaL_checkstring(L, 3), RGBColor(luaL_checkuint32(L, 4), luaL_checkuint32(L, 5), luaL_checkuint32(L, 6)));
+	Widelands::PinnedNote& note = Widelands::PinnedNote::create(
+	   egbase, player, c->coords(), luaL_checkstring(L, 3),
+	   RGBColor(luaL_checkuint32(L, 4), luaL_checkuint32(L, 5), luaL_checkuint32(L, 6)));
 
 	LuaMaps::upcasted_map_object_to_lua(L, &note);
 

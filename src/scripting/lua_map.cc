@@ -9052,6 +9052,5 @@ void luaopen_wlmap(lua_State* L) {
 	add_parent<LuaFerryFleetYardInterface, LuaBob>(L);
 	add_parent<LuaFerryFleetYardInterface, LuaMapObject>(L);
 	lua_pop(L, 1);  // Pop the meta table
-
 }
 }  // namespace LuaMaps

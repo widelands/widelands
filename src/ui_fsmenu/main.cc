@@ -765,8 +765,8 @@ void MainMenu::draw(RenderTarget& r) {
 
 		if (system_clock_) {
 			clock_.set_text(realtimestring());
-			r.fill_rect(Recti(0, 0, clock_.get_w() + 2 * padding_, clock_.get_h() + 2 * padding_),
-			            bg, BlendMode::Default);
+			r.fill_rect(Recti(0, 0, clock_.get_w() + 2 * padding_, clock_.get_h() + 2 * padding_), bg,
+			            BlendMode::Default);
 		} else {
 			clock_.set_text(std::string());
 		}
