@@ -5305,31 +5305,31 @@ msgstr "Kampagnenname"
 
 #: ../../src/ui_fsmenu/crash_report.cc:43
 msgid "Crash Report Details"
-msgstr ""
+msgstr "Absturzreportdetails"
 
 #: ../../src/ui_fsmenu/crash_report.cc:61
 #: ../../src/ui_fsmenu/crash_report.cc:151
 msgid "Open link"
-msgstr ""
+msgstr "Verknüpfung öffnen"
 
 #: ../../src/ui_fsmenu/crash_report.cc:63
 #: ../../src/ui_fsmenu/crash_report.cc:153
 msgid "Copy link"
-msgstr ""
+msgstr "Verknüpfung kopieren"
 
 #: ../../src/ui_fsmenu/crash_report.cc:67
 #: ../../src/ui_fsmenu/crash_report.cc:158
 msgid "Copy report"
-msgstr ""
+msgstr "Report kopieren"
 
 #: ../../src/ui_fsmenu/crash_report.cc:68
 #: ../../src/ui_fsmenu/crash_report.cc:158
 msgid "Copy the full report to the clipboard"
-msgstr ""
+msgstr "Kopiere den kompletten Report in die Zwischenablage"
 
 #: ../../src/ui_fsmenu/crash_report.cc:97
 msgid "Crash Report"
-msgstr ""
+msgstr "Absturzreport"
 
 #: ../../src/ui_fsmenu/crash_report.cc:135
 #, c-format
@@ -5337,19 +5337,19 @@ msgid ""
 "It looks like Widelands crashed the last time you ran it, but a backtrace "
 "for debugging was automatically generated. Please provide the report to the "
 "Widelands Development Team under %s so we can fix the problem."
-msgstr ""
+msgstr "Es sieht so aus als sei Widelands abgestürzt, als du das letzte mal gespielt hast. Allerdings wurde eine Speicheraufzeichnung zur Fehlersuche automatisch erzeugt. Bitte stelle dem Widelands Entwicklungsteam den Report unter %s zur Verfügung, damit wir das Problem beheben können."
 
 #: ../../src/ui_fsmenu/crash_report.cc:144
 msgid "Show details…"
-msgstr ""
+msgstr "Details anzeigen…"
 
 #: ../../src/ui_fsmenu/crash_report.cc:144
 msgid "View the detailed crash report"
-msgstr ""
+msgstr "Zeige den detaillierten Absturzreport"
 
 #: ../../src/ui_fsmenu/crash_report.cc:161
 msgid "Remind me later"
-msgstr ""
+msgstr "Später erinnern"
 
 #: ../../src/ui_fsmenu/helpwindow.cc:46 ../../src/wui/helpwindow.cc:48
 #, c-format

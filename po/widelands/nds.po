@@ -5279,31 +5279,31 @@ msgstr "Naam vun de Rutfödderungs-Riege"
 
 #: ../../src/ui_fsmenu/crash_report.cc:43
 msgid "Crash Report Details"
-msgstr ""
+msgstr "Utföhrelk Ofstörten-Bericht"
 
 #: ../../src/ui_fsmenu/crash_report.cc:61
 #: ../../src/ui_fsmenu/crash_report.cc:151
 msgid "Open link"
-msgstr ""
+msgstr "Verwies opmaken"
 
 #: ../../src/ui_fsmenu/crash_report.cc:63
 #: ../../src/ui_fsmenu/crash_report.cc:153
 msgid "Copy link"
-msgstr ""
+msgstr "Verwies koperen"
 
 #: ../../src/ui_fsmenu/crash_report.cc:67
 #: ../../src/ui_fsmenu/crash_report.cc:158
 msgid "Copy report"
-msgstr ""
+msgstr "Bericht koperen"
 
 #: ../../src/ui_fsmenu/crash_report.cc:68
 #: ../../src/ui_fsmenu/crash_report.cc:158
 msgid "Copy the full report to the clipboard"
-msgstr ""
+msgstr "De hele Bericht koperen"
 
 #: ../../src/ui_fsmenu/crash_report.cc:97
 msgid "Crash Report"
-msgstr ""
+msgstr "Ofstörten-Bericht"
 
 #: ../../src/ui_fsmenu/crash_report.cc:135
 #, c-format
@@ -5311,19 +5311,19 @@ msgid ""
 "It looks like Widelands crashed the last time you ran it, but a backtrace "
 "for debugging was automatically generated. Please provide the report to the "
 "Widelands Development Team under %s so we can fix the problem."
-msgstr ""
+msgstr "’t süchst so ut, as of Widelands ofstört is, as du dat tolest utföhrt hest. Aver eene Rückspoor för ’t Fehler-Söken is automatisk schrieven worden. Bidde schick de Bericht an de Widelands Entwicklen-Klottje unner %s, daarmit wi dat Probleem ofhelpen könen."
 
 #: ../../src/ui_fsmenu/crash_report.cc:144
 msgid "Show details…"
-msgstr ""
+msgstr "Kumpleet Bericht wiesen …"
 
 #: ../../src/ui_fsmenu/crash_report.cc:144
 msgid "View the detailed crash report"
-msgstr ""
+msgstr "De utföhrelk Ofstörten-Mellen wiesen"
 
 #: ../../src/ui_fsmenu/crash_report.cc:161
 msgid "Remind me later"
-msgstr ""
+msgstr "Naher noch maal fragen"
 
 #: ../../src/ui_fsmenu/helpwindow.cc:46 ../../src/wui/helpwindow.cc:48
 #, c-format
