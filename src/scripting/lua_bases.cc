@@ -626,7 +626,8 @@ const MethodType<LuaPlayerBase> LuaPlayerBase::Methods[] = {
    METHOD(LuaPlayerBase, conquer),     METHOD(LuaPlayerBase, get_wares),
    METHOD(LuaPlayerBase, get_workers), METHOD(LuaPlayerBase, place_building),
    METHOD(LuaPlayerBase, place_flag),  METHOD(LuaPlayerBase, place_road),
-   METHOD(LuaPlayerBase, place_ship),  {nullptr, nullptr},
+   METHOD(LuaPlayerBase, place_ship),  METHOD(LuaPlayerBase, place_pinned_note),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaPlayerBase> LuaPlayerBase::Properties[] = {
    PROP_RO(LuaPlayerBase, number),
@@ -977,6 +978,40 @@ int LuaPlayerBase::place_ship(lua_State* L) {  // NOLINT - can not be made const
 	Widelands::Bob& ship = egbase.create_ship(c->coords(), descr->name(), &player);
 
 	LuaMaps::upcasted_map_object_to_lua(L, &ship);
+
+	return 1;
+}
+
+/* RST
+   .. method:: place_pinned_note(field, text, r, g, b)
+
+      .. versionadded:: 1.2
+
+      Place a pinned note on the map for this player.
+
+      :arg field: The field where the note should be placed.
+      :type field: :class:`~wl.map.Field`
+      :arg text: The text of the note.
+      :type text: :class:`string`
+      :arg r: The Red component of the note's color.
+      :type r: :class:`integer`
+      :arg g: The Green component of the note's color.
+      :type g: :class:`integer`
+      :arg b: The Blue component of the note's color.
+      :type b: :class:`integer`
+
+      :returns: The new :class:`~wl.map.PinnedNote` that was created.
+*/
+int LuaPlayerBase::place_pinned_note(lua_State* L) {  // NOLINT - can not be made const
+	LuaMaps::LuaField* c = *get_user_class<LuaMaps::LuaField>(L, 2);
+
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::Player& player = get(L, egbase);
+
+	Widelands::PinnedNote& note = Widelands::PinnedNote::create(egbase, player, c->coords(),
+			luaL_checkstring(L, 3), RGBColor(luaL_checkuint32(L, 4), luaL_checkuint32(L, 5), luaL_checkuint32(L, 6)));
+
+	LuaMaps::upcasted_map_object_to_lua(L, &note);
 
 	return 1;
 }

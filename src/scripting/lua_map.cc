@@ -7820,8 +7820,10 @@ int LuaPinnedNote::get_color(lua_State* L) {
 	lua_newtable(L);
 	lua_pushuint32(L, 1);
 	lua_pushuint32(L, rgb.r);
+	lua_rawset(L, -3);
 	lua_pushuint32(L, 2);
 	lua_pushuint32(L, rgb.g);
+	lua_rawset(L, -3);
 	lua_pushuint32(L, 3);
 	lua_pushuint32(L, rgb.b);
 	lua_rawset(L, -3);
