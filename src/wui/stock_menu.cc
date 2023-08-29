@@ -90,9 +90,8 @@ StockMenu::StockMenu(InteractivePlayer& plr, Registry& registry)
 		warehouse_wares_->set_solid_icon_backgrounds(!b);
 		warehouse_workers_->set_solid_icon_backgrounds(!b);
 	});
-	tabs_.sigclicked.connect([this]() {
-		dynamic_cast<Registry*>(registry_)->active_tab = tabs_.active();
-	});
+	tabs_.sigclicked.connect(
+	   [this]() { dynamic_cast<Registry*>(registry_)->active_tab = tabs_.active(); });
 
 	main_box_.add(&tabs_, UI::Box::Resizing::kExpandBoth);
 	main_box_.add(&solid_icon_backgrounds_, UI::Box::Resizing::kFullSize);
