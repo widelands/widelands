@@ -651,11 +651,10 @@ void InteractiveGameBase::set_sel_pos(Widelands::NodeAndTriangle<> const center)
 			return set_tooltip(imm->descr().descname());
 		}
 		return set_tooltip(imm->descr().descname() + "<br>" +
-	                     g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal)
-	                        .header_font()
-	                        .as_font_tag(_("Remaining construction costs:")) +
-	                     "<br>" + waremap_to_richtext(imm->owner().tribe(), cost
-	                     ));
+		                   g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal)
+		                      .header_font()
+		                      .as_font_tag(_("Remaining construction costs:")) +
+		                   "<br>" + waremap_to_richtext(imm->owner().tribe(), cost));
 	}
 	if (upcast(Widelands::ProductionSite, productionsite, imm)) {
 		// No productionsite tips for hostile players
