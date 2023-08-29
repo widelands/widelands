@@ -46,6 +46,7 @@
 #include "wui/info_panel.h"
 #include "wui/interactive_player.h"
 #include "wui/toolbar.h"
+#include "wui/waresdisplay.h"
 #include "wui/watchwindow.h"
 
 namespace {
@@ -644,7 +645,17 @@ void InteractiveGameBase::set_sel_pos(Widelands::NodeAndTriangle<> const center)
 
 	if (imm->descr().type() == Widelands::MapObjectType::IMMOVABLE) {
 		// Trees, Resource Indicators, fields ...
-		return set_tooltip(imm->descr().descname());
+		Widelands::Buildcost cost;
+		dynamic_cast<Widelands::Immovable&>(*imm).construct_remaining_buildcost(&cost);
+		if (cost.empty()) {
+			return set_tooltip(imm->descr().descname());
+		}
+		return set_tooltip(imm->descr().descname() + "<br>" +
+	                     g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal)
+	                        .header_font()
+	                        .as_font_tag(_("Remaining construction costs:")) +
+	                     "<br>" + waremap_to_richtext(imm->owner().tribe(), cost
+	                     ));
 	}
 	if (upcast(Widelands::ProductionSite, productionsite, imm)) {
 		// No productionsite tips for hostile players
