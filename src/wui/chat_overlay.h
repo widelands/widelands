@@ -41,6 +41,10 @@ struct ChatOverlay : public UI::Panel {
 	// Check if position and size is still correct.
 	void recompute();
 
+	[[nodiscard]] UI::Panel::ZOrder get_z() const override {
+		return UI::Panel::ZOrder::kInfoPanel;  // draw chat above regular windows
+	}
+
 private:
 	struct Impl;
 	std::unique_ptr<Impl> m;
