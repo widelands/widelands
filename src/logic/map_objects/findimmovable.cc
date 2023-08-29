@@ -38,21 +38,13 @@ const FindImmovable& find_immovable_always_true() {
 }
 
 bool FindImmovableAnd::accept(const BaseImmovable& i) const {
-	for (const FindImmovable& f : functors_) {
-		if (!f.accept(i)) {
-			return false;
-		}
-	}
-	return true;
+	return std::all_of(
+	   functors_.begin(), functors_.end(), [&i](const FindImmovable& f) { return f.accept(i); });
 }
 
 bool FindImmovableOr::accept(const BaseImmovable& i) const {
-	for (const FindImmovable& f : functors_) {
-		if (f.accept(i)) {
-			return true;
-		}
-	}
-	return false;
+	return std::any_of(
+	   functors_.begin(), functors_.end(), [&i](const FindImmovable& f) { return f.accept(i); });
 }
 
 bool FindImmovableSize::accept(const BaseImmovable& imm) const {
