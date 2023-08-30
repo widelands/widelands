@@ -19,6 +19,8 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_FINDIMMOVABLE_H
 #define WL_LOGIC_MAP_OBJECTS_FINDIMMOVABLE_H
 
+#include <vector>
+
 #include "logic/map_objects/map_object_type.h"
 
 namespace Widelands {
