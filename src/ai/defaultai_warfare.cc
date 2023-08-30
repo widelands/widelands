@@ -647,12 +647,12 @@ void DefaultAI::count_military_vacant_positions() {
 	for (TrainingSiteObserver tso : trainingsites) {
 		vacant_mil_positions_ +=
 		   5 * std::min<int32_t>((tso.site->soldier_control()->soldier_capacity() -
-		                          tso.site->soldier_control()->stationed_soldiers().size()),
+		                          tso.site->soldier_control()->associated_soldiers().size()),
 		                         2);
 	}
 	for (const MilitarySiteObserver& mso : militarysites) {
 		vacant_mil_positions_ += mso.site->soldier_control()->soldier_capacity() -
-		                         mso.site->soldier_control()->stationed_soldiers().size();
+		                         mso.site->soldier_control()->associated_soldiers().size();
 		understaffed_ += mso.understaffed;
 	}
 	vacant_mil_positions_ += understaffed_;
