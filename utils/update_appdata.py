@@ -185,17 +185,17 @@ print('Done!')
 
 
 # Validate Appdata
-skip_screenshot_check = len(sys.argv) > 1 and sys.argv[1] == "--nonet"
+skip_screenshot_check = len(sys.argv) > 1 and sys.argv[1] == '--nonet'
 
 if shutil.which('appstreamcli'):
     validate_cmd = ['appstreamcli', 'validate', appdata_filepath]
     if skip_screenshot_check:
-        validate_cmd.insert(2, "--no-net")
+        validate_cmd.insert(2, '--no-net')
     appdata_result = subprocess.run(validate_cmd)
 elif shutil.which('appstream-util'):
     validate_cmd = ['appstream-util', 'validate-relax', appdata_filepath]
     if skip_screenshot_check:
-        validate_cmd.insert(2, "--nonet")
+        validate_cmd.insert(2, '--nonet')
     appdata_result = subprocess.run(validate_cmd)
 else:
     print('Cannot validate generated appdata file.')
