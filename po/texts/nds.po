@@ -604,7 +604,7 @@ msgstr "De meesten utbauten Husen bruken Arbeiders mit Erfahrung. Bau de Husen e
 msgid ""
 "Widelands is creating an emergency save, so you can continue playing exactly"
 " where the game closed."
-msgstr ""
+msgstr "Widelands sekert dat Speel automatisk, daarmit du jüüst daar wiederspölen kannst, waar dat Speel dichtgaan is."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/editor.lua:8
