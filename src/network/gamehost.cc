@@ -1334,10 +1334,12 @@ bool GameHost::remove_player_name(uint8_t const number, const std::string& name)
 	PlayerSettings& p = d->settings.players.at(number);
 	std::string temp(p.name);
 	temp.erase(p.name.find(name), name.size());
-	if (temp.back() == ' ') {
-		temp.erase(temp.end() - 1);
-	} else if (temp.front() == ' ') {
-		temp.erase(temp.begin());
+	if (!temp.empty()) {
+		if (temp.back() == ' ') {
+			temp.pop_back();
+		} else if (temp.front() == ' ') {
+			temp.erase(temp.begin());
+		}
 	}
 	set_player_name(number, temp);
 	return temp.empty();
