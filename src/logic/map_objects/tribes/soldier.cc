@@ -1881,7 +1881,8 @@ bool Soldier::check_node_blocked(Game& game, const FCoords& field, bool const co
 				multiplesoldiers = true;
 			}
 
-			if (soldier->get_battle() != nullptr && soldier->get_battle()->first() != nullptr && soldier->get_battle()->second() != nullptr &&
+			if (soldier->get_battle() != nullptr && soldier->get_battle()->first() != nullptr &&
+			    soldier->get_battle()->second() != nullptr &&
 			    game.map().calc_distance(soldier->get_battle()->first()->get_position(),
 			                             soldier->get_battle()->second()->get_position()) < 2) {
 				foundbattle = true;
