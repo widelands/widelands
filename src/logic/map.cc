@@ -1904,7 +1904,7 @@ bool Map::set_port_space(const EditorGameBase& egbase,
  * Calculate the (Manhattan) distance from a to b
  * a and b are expected to be normalized!
  */
-uint32_t Map::calc_distance(const Coords& a, const Coords& b) const {
+uint32_t Map::calc_distance(const Coords a, const Coords b) const {
 	uint32_t dist;
 	int32_t dy;
 
