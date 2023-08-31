@@ -3577,7 +3577,7 @@ msgstr "Der Client %1$s hat für mehr als %2$s nicht geantwortet."
 #: ../../src/network/network_gaming_messages.cc:77
 #, c-format
 msgid "Client %s has cheating features enabled!"
-msgstr ""
+msgstr "Client %s hat die Funktionen zum Schummeln aktiviert!"
 
 #: ../../src/network/network_gaming_messages.cc:78
 #, c-format
@@ -3588,13 +3588,13 @@ msgstr "Teilnehmer %s schummelt!"
 #: ../../src/network/network_gaming_messages.cc:80
 #, c-format
 msgid "Cheating: Client %1$s now controls %2$s"
-msgstr ""
+msgstr "Schummeln: Client %1$s steuert jetzt %2$s"
 
 #. * TRANSLATORS: %1 and %2 are user and player names
 #: ../../src/network/network_gaming_messages.cc:82
 #, c-format
 msgid "Client %1$s is cheating, acting as %2$s!"
-msgstr ""
+msgstr "Client %1$s schummelt, er spielt %2$s!"
 
 #: ../../src/network/network_lan_promotion.cc:357
 msgid "Failed to use the local network!"
@@ -6507,7 +6507,7 @@ msgstr "Komprimiere die Widelands-Dateien (Karten, Aufzeichnungen und Spielstän
 
 #: ../../src/ui_fsmenu/options.cc:278
 msgid "Keep history of sent chat messages in a file"
-msgstr ""
+msgstr "Behalte den Verlauf der gesendeten Chatnachrichten in einer Datei"
 
 #: ../../src/ui_fsmenu/options.cc:289
 #: ../../src/wui/interactive_gamebase.cc:274
@@ -7210,11 +7210,11 @@ msgstr "Bildschirmfoto erstellen"
 
 #: ../../src/wlapplication_options.cc:397
 msgid "Open the Debug Console (developer tool)"
-msgstr ""
+msgstr "Öffne die Debugkonsole ( Entwicklerwerkzeug)"
 
 #: ../../src/wlapplication_options.cc:402
 msgid "Toggle Cheat Mode (developer tool)"
-msgstr ""
+msgstr "Schummelmodus ein-/ausschalten (Entwicklerwerkzeug)"
 
 #: ../../src/wlapplication_options.cc:412
 msgid "Load"

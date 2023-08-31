@@ -3551,7 +3551,7 @@ msgstr "De Gast %1$s hett tominnsten %2$s nich antwoordt."
 #: ../../src/network/network_gaming_messages.cc:77
 #, c-format
 msgid "Client %s has cheating features enabled!"
-msgstr ""
+msgstr "Gast %s hett Beschetens-Mögelkheiden anknipst!"
 
 #: ../../src/network/network_gaming_messages.cc:78
 #, c-format
@@ -3562,13 +3562,13 @@ msgstr "Gast %s beschitt!"
 #: ../../src/network/network_gaming_messages.cc:80
 #, c-format
 msgid "Cheating: Client %1$s now controls %2$s"
-msgstr ""
+msgstr "Bescheten: Gast %1$s kuntrulleert nu %2$s"
 
 #. * TRANSLATORS: %1 and %2 are user and player names
 #: ../../src/network/network_gaming_messages.cc:82
 #, c-format
 msgid "Client %1$s is cheating, acting as %2$s!"
-msgstr ""
+msgstr "Gast %1$s beschitt un hannelt as %2$s!"
 
 #: ../../src/network/network_lan_promotion.cc:357
 msgid "Failed to use the local network!"
@@ -6481,7 +6481,7 @@ msgstr "Dateien mit Widelands-Daten (Kaarten, Uptekens un sekert Speelen) spaars
 
 #: ../../src/ui_fsmenu/options.cc:278
 msgid "Keep history of sent chat messages in a file"
-msgstr ""
+msgstr "Histoorje vun sent Snack-Narichtens in eener Datei sekern"
 
 #: ../../src/ui_fsmenu/options.cc:289
 #: ../../src/wui/interactive_gamebase.cc:274
@@ -7184,11 +7184,11 @@ msgstr "Billschirmfoto maken"
 
 #: ../../src/wlapplication_options.cc:397
 msgid "Open the Debug Console (developer tool)"
-msgstr ""
+msgstr "Wies de Ingaav tum Fehler-Söken (Entwickler-Warktüüg)"
 
 #: ../../src/wlapplication_options.cc:402
 msgid "Toggle Cheat Mode (developer tool)"
-msgstr ""
+msgstr "Bescheten-Modus an- of utknipsen (Entwickler-Warktüüg)"
 
 #: ../../src/wlapplication_options.cc:412
 msgid "Load"

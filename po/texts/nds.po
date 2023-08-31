@@ -573,7 +573,7 @@ msgstr "Kiek up diene Fiskers un bau Fisstüchtereen. Wenn de Fiss leeg is, kann
 msgid ""
 "Always build a forester’s and a woodcutter’s house, so you will not run out "
 "of logs."
-msgstr "Bau alltied een Förster-Huus un eene Boomslageree, daarmit de Boomstammen nich nau worden."
+msgstr "Bau alltied een Förster-Huus un eene Boomsaageree, daarmit de Boomstammen nich nau worden."
 
 #: ../../data/txts/tips/atlanteans.lua:12
 msgid ""
