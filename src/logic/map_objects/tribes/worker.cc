@@ -1960,13 +1960,15 @@ void Worker::update_task_carry_trade_item(Game& game) {
  */
 void Worker::evict(Game& game) {
 	if (!is_evict_allowed()) {
-		verb_log_warn_time(game.get_gametime(), "Worker %s %u: evict not currently allowed", descr().name().c_str(), serial());
+		verb_log_warn_time(game.get_gametime(), "Worker %s %u: evict not currently allowed",
+		                   descr().name().c_str(), serial());
 		return;
 	}
 
 	upcast(Building, building, get_location(game));
 	if (building == nullptr || get_state(taskBuildingwork) == nullptr) {
-		verb_log_warn_time(game.get_gametime(), "Trying to evict worker %s %u who is not employed", descr().name().c_str(), serial());
+		verb_log_warn_time(game.get_gametime(), "Trying to evict worker %s %u who is not employed",
+		                   descr().name().c_str(), serial());
 		return;
 	}
 
