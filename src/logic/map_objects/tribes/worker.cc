@@ -1832,13 +1832,6 @@ void Worker::buildingwork_update(Game& game, State& state) {
 
 	upcast(Building, building, get_location(game));
 
-	if (signal == "evict") {
-		if (building != nullptr) {
-			building->notify_worker_evicted(game, *this);
-		}
-		return pop_task(game);
-	}
-
 	if (state.ivar1 == 1) {
 		state.ivar1 = static_cast<int>(signal == "fail") * 2;
 	}
@@ -1906,9 +1899,6 @@ void Worker::carry_trade_item_update(Game& game, State& state) {
 		log_dbg_time(
 		   game.get_gametime(), "carry_trade_item_update: signal received: %s\n", signal.c_str());
 	}
-	if (signal == "evict") {
-		return pop_task(game);
-	}
 
 	// First of all, make sure we're outside
 	if (state.ivar1 == 0) {
@@ -1966,12 +1956,25 @@ void Worker::update_task_carry_trade_item(Game& game) {
 }
 
 /**
- * Evict the worker from its current building.
+ * Immediately evict the worker from his current building, if allowed.
  */
 void Worker::evict(Game& game) {
-	if (is_evict_allowed()) {
-		send_signal(game, "evict");
+	if (!is_evict_allowed()) {
+		verb_log_warn_time(game.get_gametime(), "Worker %s %u: evict not currently allowed", descr().name().c_str(), serial());
+		return;
 	}
+
+	upcast(Building, building, get_location(game));
+	if (building == nullptr || get_state(taskBuildingwork) == nullptr) {
+		verb_log_warn_time(game.get_gametime(), "Trying to evict worker %s %u who is not employed", descr().name().c_str(), serial());
+		return;
+	}
+
+	molog(game.get_gametime(), "Evicting!");
+	building->notify_worker_evicted(game, *this);
+	reset_tasks(game);
+	set_location(&building->base_flag());
+	start_task_return(game, true);
 }
 
 bool Worker::is_evict_allowed() {
