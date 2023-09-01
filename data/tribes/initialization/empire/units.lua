@@ -1414,7 +1414,13 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("empire_building", "A belated scout’s report"),
             no_scouting_building_connected = pgettext("empire_building", "You need to connect this flag to a scout’s house before you can send a scout here."),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Scout's House
-            purpose = pgettext("building", "Explores unknown territory.")
+            purpose = pgettext("building", "Explores unknown territory."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire production site: Scout's House, part 1
+               pgettext("empire_building", "The scout makes exploration between %1$s and %2$s."):bformat(format_minutes_seconds(1, 52), format_minutes_seconds(4, 5)),
+               -- TRANSLATORS: Performance helptext for an Empire production site: Scout's House, part 2
+               pgettext("empire_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
 

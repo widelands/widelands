@@ -1770,8 +1770,12 @@ wl.Descriptions():new_tribe {
             no_scouting_building_connected = pgettext("frisians_building", "You need to connect this flag to a scout’s house before you can send a scout here."),
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Scout's House
             purpose = pgettext("building", "Explores unknown territory."),
-            -- TRANSLATORS: Performance helptext for a Frisian production site: Scout's House
-            performance = pgettext("frisians_building", "The scout pauses %s before going to work again."):bformat(format_seconds(30))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Scout's House, part 1
+               pgettext("frisians_building", "The scout makes exploration between %1$s and %2$s."):bformat(format_minutes_seconds(1, 52), format_minutes_seconds(4, 5)),
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Scout's House, part 2
+               pgettext("frisians_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
 

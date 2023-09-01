@@ -51,6 +51,11 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start scouting because ...
          descname = _("scouting"),
          actions = {
+            -- time of worker: 75 sec
+            -- radius: 15
+            -- steps from building to beginning of scouting: 2...18
+            -- min. time total: 30 + 2 * 1.8 + 75 + 2 * 1.8 = 112.2 sec
+            -- max. time total: 30 + 2 * (18 * 1.8 + 75) = 244.8 sec
             "consume=ration",
             "sleep=duration:30s",
             "callworker=scout"

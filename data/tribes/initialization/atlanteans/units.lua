@@ -1638,7 +1638,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an Atlantean production site:  Scout's House
             lore = pgettext("atlanteans_building", "You do not see everything from your high towers. Sometimes you need someone to find out in person, that’s me!"),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site:  Scout's House
-            lore_author = pgettext("atlanteans_building", "A scout answering a soldier")
+            lore_author = pgettext("atlanteans_building", "A scout answering a soldier"),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Scout's House, part 1
+               pgettext("atlanteans_building", "The scout makes exploration between %1$s and %2$s."):bformat(format_minutes_seconds(1, 52), format_minutes_seconds(4, 5)),
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Scout's House, part 2
+               pgettext("atlanteans_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
 
