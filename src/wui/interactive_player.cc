@@ -599,8 +599,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 		if (f->seeing != Widelands::VisibleState::kUnexplored) {
 			// Draw build help.
 			const HasExpeditionPortSpace show_port_space = map.is_port_space(f->fcoords) ?
-                                                        has_expedition_port_space(f->fcoords) :
-                                                        HasExpeditionPortSpace::kNone;
+                                                           has_expedition_port_space(f->fcoords) :
+                                                           HasExpeditionPortSpace::kNone;
 			if (show_port_space != HasExpeditionPortSpace::kNone || suited_as_starting_pos ||
 			    buildhelp()) {
 				Widelands::NodeCaps caps;
@@ -766,7 +766,8 @@ UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& coord
 		const Map& map = egbase().map();
 
 		for (auto serial : player().ships()) {
-			Widelands::Ship* ship = dynamic_cast<Widelands::Ship*>(egbase().objects().get_object(serial));
+			Widelands::Ship* ship =
+			   dynamic_cast<Widelands::Ship*>(egbase().objects().get_object(serial));
 			if (ship != nullptr && ship->get_ship_type() == Widelands::ShipType::kWarship &&
 			    ship->sees_portspace(coords)) {
 				UI::UniqueWindow::Registry& registry =

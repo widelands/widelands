@@ -629,23 +629,23 @@ bool Ship::is_suitable_portspace(const Coords& coords) const {
 		return false;
 	}
 	return ship_type_ == ShipType::kWarship ? suited_as_invasion_portspace(coords) :
-	   can_build_port_here(coords);
+                                             can_build_port_here(coords);
 }
 
-void Ship::send_known_portspace_message (Game& game) {
+void Ship::send_known_portspace_message(Game& game) {
 	const std::string& icon_filename =
 	   ship_type_ == ShipType::kWarship ? descr().icon_filename() : kPortspaceIconFile;
 	const std::string message_body = ship_type_ == ShipType::kWarship ?
-                                    _("A warship arrived at a known port build space.") :
-                                    _("An expedition ship arrived at a known port build space.");
+                                       _("A warship arrived at a known port build space.") :
+                                       _("An expedition ship arrived at a known port build space.");
 	send_message(game, _("Port Space"), _("Port Space Spotted"), message_body, icon_filename);
 }
-void Ship::send_new_portspace_message (Game& game) {
+void Ship::send_new_portspace_message(Game& game) {
 	const std::string& icon_filename =
 	   ship_type_ == ShipType::kWarship ? descr().icon_filename() : kPortspaceIconFile;
 	const std::string message_body = ship_type_ == ShipType::kWarship ?
-                                   _("A warship found a new port build space.") :
-                                   _("An expedition ship found a new port build space.");
+                                       _("A warship found a new port build space.") :
+                                       _("An expedition ship found a new port build space.");
 	send_message(game, _("Port Space"), _("Port Space Found"), message_body, icon_filename);
 }
 
@@ -704,8 +704,8 @@ bool Ship::update_seen_portspaces(Game& game, const bool report_known, const boo
 
 	if (stopped) {
 		set_ship_state_and_notify(ship_type_ == ShipType::kWarship ?
-                                ShipStates::kExpeditionWaiting :
-                                ShipStates::kExpeditionPortspaceFound,
+                                   ShipStates::kExpeditionWaiting :
+                                   ShipStates::kExpeditionPortspaceFound,
 		                          NoteShip::Action::kWaitingForCommand);
 	} else if (changed) {
 		// TODO(tothxa): Is this still needed now that InteractivePlayer doesn't cache it?
