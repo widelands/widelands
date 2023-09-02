@@ -41,7 +41,7 @@ public:
 	            bool can_attack,
 	            const Widelands::Coords* target_coordinates,
 	            AttackType attack_type,
-	            std::function<std::vector<Widelands::Bob*>()> get_max_attackers);
+	            std::function<std::vector<Widelands::OPtr<Widelands::Bob>>()> get_max_attackers);
 
 	size_t count_soldiers() const;
 	std::vector<Widelands::Serial> soldiers() const;
@@ -65,8 +65,8 @@ private:
 	UI::Textarea&
 	add_text(UI::Box& parent, const std::string& str, UI::Align alignment, UI::FontStyle style);
 
-	void init_slider(const std::vector<Widelands::Bob*>&, bool can_attack);
-	void init_soldier_lists(const std::vector<Widelands::Bob*>&);
+	void init_slider(const std::vector<Widelands::OPtr<Widelands::Bob>>&, bool can_attack);
+	void init_soldier_lists(const std::vector<Widelands::OPtr<Widelands::Bob>>&);
 
 	void update(bool);
 	void send_less_soldiers();
@@ -89,19 +89,19 @@ private:
 		void handle_mousein(bool) override;
 		bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
 
-		const Widelands::Bob* soldier_at(int32_t x, int32_t y) const;
-		void add(const Widelands::Bob*);
-		void remove(const Widelands::Bob*);
+		const Widelands::OPtr<Widelands::Bob> soldier_at(int32_t x, int32_t y) const;
+		void add(Widelands::OPtr<Widelands::Bob>);
+		void remove(Widelands::OPtr<Widelands::Bob>);
 		void sort();
-		bool contains(const Widelands::Bob* soldier) const {
+		bool contains(const Widelands::OPtr<Widelands::Bob> soldier) const {
 			return std::any_of(
 			   soldiers_.begin(), soldiers_.end(), [soldier](const auto& s) { return s == soldier; });
 		}
 
-		std::vector<const Widelands::Bob*> get_soldiers() const {
+		std::vector<Widelands::OPtr<Widelands::Bob>> get_soldiers() const {
 			return soldiers_;
 		}
-		const Widelands::Bob* get_soldier() const {
+		const Widelands::OPtr<Widelands::Bob> get_soldier() const {
 			return soldiers_.back();
 		}
 
@@ -125,7 +125,7 @@ private:
 	private:
 		bool restricted_row_number_;
 		uint16_t current_size_;  // Current number of rows or columns
-		std::vector<const Widelands::Bob*> soldiers_;
+		std::vector<Widelands::OPtr<Widelands::Bob>> soldiers_;
 
 		ListOfSoldiers* other_;
 		AttackPanel* attack_box_;
@@ -133,7 +133,7 @@ private:
 		void update_desired_size() override;
 	};
 
-	std::function<std::vector<Widelands::Bob*>()> get_max_attackers_;
+	std::function<std::vector<Widelands::OPtr<Widelands::Bob>>()> get_max_attackers_;
 	const AttackType attack_type_;
 
 	/// The last time the information in this Panel got updated
@@ -179,7 +179,7 @@ protected:
 	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
 
 private:
-	std::vector<Widelands::Bob*> get_max_attackers();
+	std::vector<Widelands::OPtr<Widelands::Bob>> get_max_attackers();
 
 	void act_attack();
 	void act_goto();
