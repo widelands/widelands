@@ -100,7 +100,7 @@ msgid ""
 "fish breeder makes sure that a school of fish does not go extinct by "
 "breeding more. The smoking happens in a smokery, you will need at least two "
 "of those."
-msgstr ""
+msgstr "Die anderen beiden wichtigen Grundnahrungsmittel sind Räucherfisch und Räucherfleisch. Rohes Fleisch wird vom Jäger geliefert. Ein Fischer angelt Fische aus dem Meer; ein Fischzüchter stellt sicher, dass ein Fischschwarm nicht ausstirbt, in dem er neue Fische züchtet. Das Räuchern geschieht in einer Räucherei, du brauchst mindestens zwei Stück."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Build a farm and a blackroot farm"

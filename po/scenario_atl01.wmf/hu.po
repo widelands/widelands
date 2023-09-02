@@ -9,7 +9,7 @@
 # litoll <litoll@freemail.hu>, 2016,2020
 # litoll <litoll@freemail.hu>, 2016,2020
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
-# Tóth András <txa-dev@posteo.hu>, 2021-2022
+# Tóth András <txa-dev@posteo.hu>, 2021-2023
 # zone <z-one@freemail.hu>, 2015
 # zone <z-one@freemail.hu>, 2015
 msgid ""
@@ -18,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-08-31 02:28+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: zone <z-one@freemail.hu>, 2015\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2023\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -96,7 +96,7 @@ msgid ""
 "fish breeder makes sure that a school of fish does not go extinct by "
 "breeding more. The smoking happens in a smokery, you will need at least two "
 "of those."
-msgstr ""
+msgstr "Ezenkívül fontos élelmiszer még a füstölt hal és a füstölt hús. A nyers húst a vadász biztosítja. A halász kifogja a halakat a vízből, míg a haltenyésztő a halak nevelésével gondoskodik arról, hogy a halállomány ne pusztuljon ki. Mindkettőt a füstölőben füstölik, ebből legalább kettőre lesz szükséged."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Build a farm and a blackroot farm"

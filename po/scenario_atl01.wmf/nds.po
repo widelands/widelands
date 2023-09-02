@@ -90,7 +90,7 @@ msgid ""
 "fish breeder makes sure that a school of fish does not go extinct by "
 "breeding more. The smoking happens in a smokery, you will need at least two "
 "of those."
-msgstr ""
+msgstr "De annern twee wichtigen Spiesen sünd Rökelfiss un Rökelfleesk. Een Jäger levert rauhes Fleesk. Een Fisker hollt Fisse ut de See un een Fisstüchter kümmert sik daarum, dat de Fisse nich all fiskt worden, indeem he welke tücht. Fiss un Fleesk worden in eener Rökelkamer rökelt, bau daar tominnst twee vun."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Build a farm and a blackroot farm"
