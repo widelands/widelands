@@ -27,6 +27,7 @@
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/map_objects/tribes/militarysite.h"
+#include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
@@ -188,20 +189,12 @@ std::vector<Widelands::OPtr<Widelands::Bob>> AttackWindow::get_max_attackers() {
 					result_vector.emplace_back(warship);
 				}
 			} else {  // Ship-to-land invasion
-				const std::vector<Widelands::Coords>& spaces = warship->exp_port_spaces();
 				bool found = false;
-
-				if (building != nullptr) {
-					for (const Widelands::Coords& coords : spaces) {
-						if (map_[coords].get_immovable() == building) {
-							found = true;
-							break;
-						}
-					}
-				} else {
-					found = std::find(spaces.begin(), spaces.end(), target_coordinates_) != spaces.end();
+				if (building != nullptr) {  // target is a building on a port space
+					found = warship->sees_portspace(building->get_positions(egbase)[0]);
+				} else {  // target is a port space
+					found = warship->sees_portspace(target_coordinates_);
 				}
-
 				if (found) {
 					std::vector<Widelands::Soldier*> onboard = warship->onboard_soldiers();
 					result_vector.insert(result_vector.end(), onboard.begin(), onboard.end());
