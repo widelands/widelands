@@ -431,7 +431,7 @@ public:
 	FCoords get_fcoords(Field&) const;
 	void get_coords(Field& f, Coords& c) const;
 
-	[[nodiscard]] uint32_t calc_distance(const Coords&, const Coords&) const;
+	[[nodiscard]] uint32_t calc_distance(Coords, Coords) const;
 
 	[[nodiscard]] int32_t calc_cost_estimate(const Coords&, const Coords&) const override;
 	[[nodiscard]] int32_t calc_cost_lowerbound(const Coords&, const Coords&) const;
