@@ -36,6 +36,9 @@ constexpr int16_t kSidebarWidth = 16;
 constexpr int16_t kButtonSize = 30;
 constexpr int16_t kSmallButtonSize = 15;
 
+Section* ColorChooser::favorites_section(nullptr);
+std::optional<RGBColor> ColorChooser::favorite_colors[ColorChooser::kNFavorites];
+
 struct ColorChooserImpl : public Panel {
 
 	ColorChooserImpl(Panel& parent, PanelStyle s, ColorChooser& c)
@@ -462,40 +465,17 @@ void ColorChooser::create_palette_button(const unsigned index) {
 void ColorChooser::update_favorites() {
 	favorites_box_.clear();
 	favorites_box_.free_children();
-
-	std::vector<std::string> config;
-	split(config, get_config_string("favorite_colors", ""), {';'});
-	const unsigned nconfig = std::min<unsigned>(kNFavorites, config.size());
+	assert(favorites_section != nullptr);
 
 	for (unsigned index = 0; index < kNFavorites; ++index) {
-		RGBColor setting;
-		bool valid = false;
-
-		if (index < nconfig) {
-			const std::string& rgb_string = config.at(index);
-			if (!rgb_string.empty()) {
-				std::vector<std::string> rgb;
-				split(rgb, rgb_string, {','});
-				try {
-					setting.r = math::to_int(rgb.at(0));
-					setting.g = math::to_int(rgb.at(1));
-					setting.b = math::to_int(rgb.at(2));
-					valid = true;
-				} catch (const std::exception& e) {
-					valid = false;
-					log_warn("Malformed color preference '%s': %s", rgb_string.c_str(), e.what());
-				}
-			}
-		}
-
 		Button* button;
-		if (valid) {
+		if (favorite_colors[index].has_value()) {
 			button = new Button(
 			   &favorites_box_, "set_to_favorite_" + std::to_string(index), 0, 0, kButtonSize,
 			   kButtonSize,
 			   panel_style_ == PanelStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
-			   playercolor_image(setting, "images/ui_basic/square.png"));
-			button->sigclicked.connect([this, setting]() { set_color(setting); });
+			   playercolor_image(*favorite_colors[index], "images/ui_basic/square.png"));
+			button->sigclicked.connect([this, index]() { set_color(*favorite_colors[index]); });
 
 			Button* del = new Button(
 			   button, "delete_favorite_" + std::to_string(index), kButtonSize - kSmallButtonSize, 0,
@@ -521,25 +501,36 @@ void ColorChooser::update_favorites() {
 	favorites_box_.initialization_complete();
 }
 
-void ColorChooser::set_favorite(unsigned index, bool remove) {
-	std::vector<std::string> config;
-	split(config, get_config_string("favorite_colors", ""), {';'});
-
-	if (config.size() <= index) {
-		config.resize(index + 1);
-	}
-
-	if (remove) {
-		config.at(index).clear();
-		// trim unused slots
-		while (!config.empty() && config.back().empty()) {
-			config.pop_back();
+void ColorChooser::read_favorites_settings() {
+	favorites_section = &get_config_section("favorite_colors");
+	for (unsigned i = 0; i < kNFavorites; ++i) {
+		const std::string rgb_string = favorites_section->get_string(std::to_string(i).c_str(), "");
+		if (!rgb_string.empty()) {
+			std::vector<std::string> rgb;
+			split(rgb, rgb_string, {','});
+			try {
+				RGBColor setting;
+				setting.r = math::to_int(rgb.at(0));
+				setting.g = math::to_int(rgb.at(1));
+				setting.b = math::to_int(rgb.at(2));
+				favorite_colors[i] = setting;
+			} catch (const std::exception& e) {
+				log_warn("Malformed color preference #%u '%s': %s", i, rgb_string.c_str(), e.what());
+			}
 		}
-	} else {
-		config.at(index) = format("%u,%u,%u", current_.r, current_.g, current_.b);
-	}
 
-	set_config_string("favorite_colors", join(config, ";"));
+	}
+}
+
+void ColorChooser::set_favorite(unsigned index, bool remove) {
+	assert(favorites_section != nullptr);
+	if (remove) {
+		favorite_colors[index] = std::nullopt;
+		favorites_section->set_string(std::to_string(index).c_str(), std::string());
+	} else {
+		favorite_colors[index] = current_;
+		favorites_section->set_string(std::to_string(index).c_str(), format("%u,%u,%u", current_.r, current_.g, current_.b));
+	}
 	update_favorites();
 }
 
