@@ -148,7 +148,7 @@ msgstr "De Speel-Gauheid all de Tied an dat Hentrecken vun de künstelk Spelers 
 
 #: ../../src/wlapplication_messages.cc:102
 msgid "Enable the Script Console and Cheating Mode."
-msgstr ""
+msgstr "De Ingaav för Schrievens un de Bescheten-Modus verlöven."
 
 #: ../../src/wlapplication_messages.cc:105
 msgid "Game options:"
@@ -213,7 +213,7 @@ msgstr "[jau|nee*]"
 
 #: ../../src/wlapplication_messages.cc:127
 msgid "Whether to save the history of sent chat messages to a file."
-msgstr ""
+msgstr "Of de Histoorje vun sent Snack-Narichtens in eener Datei sekert worden sall."
 
 #: ../../src/wlapplication_messages.cc:128
 msgid "Show filenames in the replay screen."

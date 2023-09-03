@@ -2832,7 +2832,7 @@ msgstr "Es guarda la partida…"
 
 #: ../../src/logic/save_handler.cc:152
 msgid "Saving skipped"
-msgstr ""
+msgstr "Es salta la desada automàtica"
 
 #: ../../src/logic/save_handler.cc:170
 #: ../../src/wui/game_main_menu_save_game.cc:338
@@ -3549,7 +3549,7 @@ msgstr "El client %1$s no ha respost des de fa més de %2$s."
 #: ../../src/network/network_gaming_messages.cc:77
 #, c-format
 msgid "Client %s has cheating features enabled!"
-msgstr ""
+msgstr "El client %s té habilitades algunes funcions per a fer trampes!"
 
 #: ../../src/network/network_gaming_messages.cc:78
 #, c-format
@@ -3560,13 +3560,13 @@ msgstr "El client %s està fent trampes!"
 #: ../../src/network/network_gaming_messages.cc:80
 #, c-format
 msgid "Cheating: Client %1$s now controls %2$s"
-msgstr ""
+msgstr "Fent trampes: El client %1$s ara controla %2$s"
 
 #. * TRANSLATORS: %1 and %2 are user and player names
 #: ../../src/network/network_gaming_messages.cc:82
 #, c-format
 msgid "Client %1$s is cheating, acting as %2$s!"
-msgstr ""
+msgstr "El client %1$s fa trampes i actua com si fos %2$s!"
 
 #: ../../src/network/network_lan_promotion.cc:357
 msgid "Failed to use the local network!"
@@ -5294,31 +5294,31 @@ msgstr "Nom de la campanya"
 
 #: ../../src/ui_fsmenu/crash_report.cc:43
 msgid "Crash Report Details"
-msgstr ""
+msgstr "Detalls de l'informe de fallada"
 
 #: ../../src/ui_fsmenu/crash_report.cc:61
 #: ../../src/ui_fsmenu/crash_report.cc:151
 msgid "Open link"
-msgstr ""
+msgstr "Obre l’enllaç"
 
 #: ../../src/ui_fsmenu/crash_report.cc:63
 #: ../../src/ui_fsmenu/crash_report.cc:153
 msgid "Copy link"
-msgstr ""
+msgstr "Copia l’enllaç"
 
 #: ../../src/ui_fsmenu/crash_report.cc:67
 #: ../../src/ui_fsmenu/crash_report.cc:158
 msgid "Copy report"
-msgstr ""
+msgstr "Copia l'informe"
 
 #: ../../src/ui_fsmenu/crash_report.cc:68
 #: ../../src/ui_fsmenu/crash_report.cc:158
 msgid "Copy the full report to the clipboard"
-msgstr ""
+msgstr "Copia l'informe complet al porta-retalls"
 
 #: ../../src/ui_fsmenu/crash_report.cc:97
 msgid "Crash Report"
-msgstr ""
+msgstr "Informe de fallada"
 
 #: ../../src/ui_fsmenu/crash_report.cc:135
 #, c-format
@@ -5326,19 +5326,19 @@ msgid ""
 "It looks like Widelands crashed the last time you ran it, but a backtrace "
 "for debugging was automatically generated. Please provide the report to the "
 "Widelands Development Team under %s so we can fix the problem."
-msgstr ""
+msgstr "Sembla que l'última vegada que es va fer servir el Widelands va patir una fallada i que es va generar un informe de depuració automàtic. Si us plau, feu arribar l'informe a l'equip de desenvolupament del Widelands a %s per tal que puguin resoldre el problema."
 
 #: ../../src/ui_fsmenu/crash_report.cc:144
 msgid "Show details…"
-msgstr ""
+msgstr "Mostra detalls…"
 
 #: ../../src/ui_fsmenu/crash_report.cc:144
 msgid "View the detailed crash report"
-msgstr ""
+msgstr "Mostra l'informe detallat de fallada"
 
 #: ../../src/ui_fsmenu/crash_report.cc:161
 msgid "Remind me later"
-msgstr ""
+msgstr "Recorda-m'ho més endavant"
 
 #: ../../src/ui_fsmenu/helpwindow.cc:46 ../../src/wui/helpwindow.cc:48
 #, c-format
@@ -6471,7 +6471,7 @@ msgstr "Esborra les repeticions al cap de:"
 
 #: ../../src/ui_fsmenu/options.cc:263
 msgid "Skip autosaves while inactive"
-msgstr ""
+msgstr "No facis desades automàtiques mentre s'estigui inactiu"
 
 #: ../../src/ui_fsmenu/options.cc:270
 msgid "Compress Widelands data files (maps, replays, and savegames)"
@@ -6479,7 +6479,7 @@ msgstr "Comprimeix els fitxers de dades del Widelands (mapes, repeticions i part
 
 #: ../../src/ui_fsmenu/options.cc:278
 msgid "Keep history of sent chat messages in a file"
-msgstr ""
+msgstr "Desa l'historial de missatges de xat en un fitxer"
 
 #: ../../src/ui_fsmenu/options.cc:289
 #: ../../src/wui/interactive_gamebase.cc:274
@@ -6510,7 +6510,7 @@ msgstr "Mostra les interseccions d’àrees de treball"
 
 #: ../../src/ui_fsmenu/options.cc:316
 msgid "Pause game when inactive for:"
-msgstr ""
+msgstr "Posa la partida en pausa quan s'estigui inactiu durant:"
 
 #: ../../src/ui_fsmenu/options.cc:326
 msgid "Start building road after placing a flag"
@@ -7182,11 +7182,11 @@ msgstr "Pren una captura de pantalla"
 
 #: ../../src/wlapplication_options.cc:397
 msgid "Open the Debug Console (developer tool)"
-msgstr ""
+msgstr "Obre la consola de depuració (eina de desenvolupament)"
 
 #: ../../src/wlapplication_options.cc:402
 msgid "Toggle Cheat Mode (developer tool)"
-msgstr ""
+msgstr "Commuta el mode de trampes (eina de desenvolupament)"
 
 #: ../../src/wlapplication_options.cc:412
 msgid "Load"

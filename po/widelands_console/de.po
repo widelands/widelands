@@ -158,7 +158,7 @@ msgstr "Passe die Spielgeschwindigkeit basierend auf der Verzögerung in der KI 
 
 #: ../../src/wlapplication_messages.cc:102
 msgid "Enable the Script Console and Cheating Mode."
-msgstr ""
+msgstr "Aktiviere die Skriptkonsole und den Schummelmodus. "
 
 #: ../../src/wlapplication_messages.cc:105
 msgid "Game options:"
@@ -223,7 +223,7 @@ msgstr "[true|false*]"
 
 #: ../../src/wlapplication_messages.cc:127
 msgid "Whether to save the history of sent chat messages to a file."
-msgstr ""
+msgstr "Ob der Verlauf dert gesendeten Chat Nachrichten in einer Datei gespeichert wird."
 
 #: ../../src/wlapplication_messages.cc:128
 msgid "Show filenames in the replay screen."
