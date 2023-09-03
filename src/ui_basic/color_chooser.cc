@@ -518,7 +518,6 @@ void ColorChooser::read_favorites_settings() {
 				log_warn("Malformed color preference #%u '%s': %s", i, rgb_string.c_str(), e.what());
 			}
 		}
-
 	}
 }
 
@@ -529,7 +528,8 @@ void ColorChooser::set_favorite(unsigned index, bool remove) {
 		favorites_section->set_string(std::to_string(index).c_str(), std::string());
 	} else {
 		favorite_colors[index] = current_;
-		favorites_section->set_string(std::to_string(index).c_str(), format("%u,%u,%u", current_.r, current_.g, current_.b));
+		favorites_section->set_string(
+		   std::to_string(index).c_str(), format("%u,%u,%u", current_.r, current_.g, current_.b));
 	}
 	update_favorites();
 }
