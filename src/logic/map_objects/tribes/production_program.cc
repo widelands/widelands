@@ -2091,9 +2091,7 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 	finder.add(FindImmovableByDescr(descr));
 	finder.add(FindImmovableNotReserved());
 	if (map.find_reachable_immovables(game, area, &immovables, cstep, finder) != 0U) {
-		BaseImmovable* choice = immovables.at(game.logic_rand() % immovables.size()).object;
-		state.objvar = choice;
-		choice->set_reserved_by_worker(true);
+		state.objvar = immovables.at(game.logic_rand() % immovables.size()).object;
 
 		psite.working_positions_.at(psite.main_worker_)
 		   .worker.get(game)
@@ -2178,6 +2176,9 @@ bool ProductionProgram::ActConstruct::get_building_work(Game& game,
 	worker.start_task_program(game, workerprogram);
 	worker.top_state().objvar1 = construction;
 	worker.top_state().coords = state.coord;
+	if (construction != nullptr) {
+		construction->set_reserved_by_worker(true);
+	}
 
 	state.phase = ProgramResult::kFailed;
 	return true;
