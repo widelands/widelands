@@ -1161,6 +1161,7 @@ bool Worker::run_construct(Game& game, State& state, const Action& /* action */)
 		return true;
 	}
 
+	imm->set_reserved_by_worker(false);
 	WareInstance* ware = get_carried_ware(game);
 	if (ware == nullptr) {
 		molog(game.get_gametime(), "run_construct: no ware being carried");
