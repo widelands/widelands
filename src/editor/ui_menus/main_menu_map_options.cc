@@ -336,8 +336,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
                          kSuggestedTeamsUnitSize,
                          UI::ButtonStyle::kWuiSecondary,
                          _("Add lineup"),
-                         _("Add another suggested team lineup")),
-     registry_(registry) {
+                         _("Add another suggested team lineup")) {
 
 	tab_box_.set_size(max_w_, get_inner_h() - labelh_ - 2 * padding_);
 	tabs_.set_size(max_w_, tab_box_.get_inner_h());
@@ -603,11 +602,11 @@ void MainMenuMapOptions::clicked_ok() {
 	map.add_tag(balancing_dropdown_.get_selected());
 	map.set_background_theme(theme_dropdown_.get_selected());
 	Notifications::publish(NoteMapOptions());
-	registry_.destroy();
+	registry_->destroy();
 }
 
 void MainMenuMapOptions::clicked_cancel() {
-	registry_.destroy();
+	registry_->destroy();
 }
 
 bool MainMenuMapOptions::handle_key(bool down, SDL_Keysym code) {
