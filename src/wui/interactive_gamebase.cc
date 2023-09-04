@@ -47,6 +47,7 @@
 #include "wui/info_panel.h"
 #include "wui/interactive_player.h"
 #include "wui/toolbar.h"
+#include "wui/waresdisplay.h"
 #include "wui/watchwindow.h"
 
 namespace {
@@ -132,13 +133,12 @@ void InteractiveGameBase::add_main_menu() {
 
 void InteractiveGameBase::rebuild_main_menu() {
 	mainmenu_.clear();
-#ifndef NDEBUG  //  only in debug builds
-	/** TRANSLATORS: An entry in the game's main menu */
-	mainmenu_.add(_("Script Console"), MainMenuEntry::kScriptConsole,
-	              g_image_cache->get("images/wui/menus/lua.png"), false,
-	              /** TRANSLATORS: Tooltip for Script Console in the game's main menu */
-	              "", pgettext("hotkey", "Ctrl+Shift+Space"));
-#endif
+	if (g_allow_script_console) {
+		/** TRANSLATORS: An entry in the game's main menu */
+		mainmenu_.add(_("Script Console"), MainMenuEntry::kScriptConsole,
+		              g_image_cache->get("images/wui/menus/lua.png"), false, "",
+		              shortcut_string_for(KeyboardShortcut::kCommonDebugConsole, false));
+	}
 
 	menu_windows_.sound_options.open_window = [this] {
 		new GameOptionsSoundMenu(*this, menu_windows_.sound_options);
@@ -198,12 +198,11 @@ void InteractiveGameBase::rebuild_main_menu() {
 
 void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 	switch (entry) {
-#ifndef NDEBUG  //  only in debug builds
 	case MainMenuEntry::kScriptConsole: {
+		assert(g_allow_script_console);
 		GameChatMenu::create_script_console(
 		   this, color_functor(), debugconsole_, *DebugConsole::get_chat_provider());
 	} break;
-#endif
 	case MainMenuEntry::kOptions: {
 		menu_windows_.sound_options.toggle();
 	} break;
@@ -647,7 +646,16 @@ void InteractiveGameBase::set_sel_pos(Widelands::NodeAndTriangle<> const center)
 
 	if (imm->descr().type() == Widelands::MapObjectType::IMMOVABLE) {
 		// Trees, Resource Indicators, fields ...
-		return set_tooltip(imm->descr().descname());
+		Widelands::Buildcost cost;
+		dynamic_cast<Widelands::Immovable&>(*imm).construct_remaining_buildcost(&cost);
+		if (cost.empty()) {
+			return set_tooltip(imm->descr().descname());
+		}
+		return set_tooltip(imm->descr().descname() + "<br>" +
+		                   g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal)
+		                      .header_font()
+		                      .as_font_tag(_("Remaining construction costs:")) +
+		                   "<br>" + waremap_to_richtext(imm->owner().tribe(), cost));
 	}
 	if (upcast(Widelands::ProductionSite, productionsite, imm)) {
 		// No productionsite tips for hostile players
@@ -684,6 +692,11 @@ void InteractiveGameBase::start() {
 		// Adding a check, just in case there was no viable player found for spectator
 		if (game().get_player(pln) != nullptr) {
 			map_view()->scroll_to_field(game().map().get_starting_pos(pln), MapView::Transition::Jump);
+		}
+
+		if (g_allow_script_console) {
+			// Let's warn all users once again
+			broadcast_cheating_message("CAN_CHEAT");
 		}
 	}
 }

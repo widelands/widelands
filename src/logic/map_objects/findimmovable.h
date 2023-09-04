@@ -19,6 +19,8 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_FINDIMMOVABLE_H
 #define WL_LOGIC_MAP_OBJECTS_FINDIMMOVABLE_H
 
+#include <vector>
+
 #include "logic/map_objects/map_object_type.h"
 
 namespace Widelands {
@@ -89,6 +91,28 @@ public:
 const FindImmovable& find_immovable_always_true();
 
 // FindImmovable functor
+struct FindImmovableAnd {
+	[[nodiscard]] bool accept(const BaseImmovable&) const;
+
+	void add(FindImmovable f) {
+		functors_.emplace_back(f);
+	}
+
+private:
+	std::vector<FindImmovable> functors_;
+};
+
+struct FindImmovableOr {
+	[[nodiscard]] bool accept(const BaseImmovable&) const;
+
+	void add(FindImmovable f) {
+		functors_.emplace_back(f);
+	}
+
+private:
+	std::vector<FindImmovable> functors_;
+};
+
 struct FindImmovableSize {
 	FindImmovableSize(int32_t const init_min, int32_t const init_max)
 	   : min(init_min), max(init_max) {
@@ -160,6 +184,10 @@ struct FindImmovableByDescr {
 
 private:
 	const ImmovableDescr& descr;
+};
+
+struct FindImmovableNotReserved {
+	[[nodiscard]] bool accept(const BaseImmovable&) const;
 };
 
 struct FindFlagOf {

@@ -21,9 +21,12 @@
 #include <SDL_mouse.h>
 
 #include "base/i18n.h"
+#include "base/math.h"
+#include "base/string.h"
 #include "graphic/image_cache.h"
 #include "graphic/rendertarget.h"
 #include "graphic/texture.h"
+#include "wlapplication_options.h"
 
 namespace UI {
 
@@ -31,6 +34,10 @@ constexpr int16_t kSpacing = 4;
 constexpr int16_t kMainDimension = 256;
 constexpr int16_t kSidebarWidth = 16;
 constexpr int16_t kButtonSize = 30;
+constexpr int16_t kSmallButtonSize = 15;
+
+Section* ColorChooser::favorites_section(nullptr);
+std::optional<RGBColor> ColorChooser::favorite_colors[ColorChooser::kNFavorites];
 
 struct ColorChooserImpl : public Panel {
 
@@ -254,6 +261,7 @@ ColorChooser::ColorChooser(Panel* parent,
      box_b_(&vbox_, panel_style_, "box_b", 0, 0, Box::Horizontal),
      palette_box_1_(&vbox_, panel_style_, "palette_box_1", 0, 0, Box::Horizontal),
      palette_box_2_(&vbox_, panel_style_, "palette_box_2", 0, 0, Box::Horizontal),
+     favorites_box_(&vbox_, panel_style_, "favorites_box", 0, 0, Box::Horizontal),
      button_ok_(&buttonsbox_,
                 "ok",
                 0,
@@ -391,6 +399,7 @@ ColorChooser::ColorChooser(Panel* parent,
 	for (unsigned i = 0; i < kMaxPlayers; ++i) {
 		create_palette_button(i);
 	}
+	update_favorites();
 
 	box_r_.add(&button_r_);
 	box_r_.add_space(kSpacing);
@@ -415,6 +424,8 @@ ColorChooser::ColorChooser(Panel* parent,
 	vbox_.add(&palette_box_1_, UI::Box::Resizing::kAlign, Align::kCenter);
 	vbox_.add_space(kSpacing);
 	vbox_.add(&palette_box_2_, UI::Box::Resizing::kAlign, Align::kCenter);
+	vbox_.add_space(kSpacing);
+	vbox_.add(&favorites_box_, UI::Box::Resizing::kAlign, Align::kCenter);
 
 	hbox_.add_space(kSpacing);
 	hbox_.add(&interactive_pane_);
@@ -439,17 +450,88 @@ ColorChooser::ColorChooser(Panel* parent,
 void ColorChooser::create_palette_button(const unsigned index) {
 	UI::Box* box = index < kMaxPlayers / 2 ? &palette_box_1_ : &palette_box_2_;
 
-	palette_buttons_[index] = new Button(
+	Button* button = new Button(
 	   box, "palette_" + std::to_string(index), 0, 0, kButtonSize, kButtonSize,
 	   panel_style_ == PanelStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
 	   playercolor_image(kPlayerColors[index], "images/ui_basic/square.png"));
-	palette_buttons_[index]->sigclicked.connect(
-	   [this, index]() { set_color(kPlayerColors[index]); });
+	button->sigclicked.connect([this, index]() { set_color(kPlayerColors[index]); });
 
 	if (index != 0 && index != kMaxPlayers / 2) {
 		box->add_space(kSpacing);
 	}
-	box->add(palette_buttons_[index]);
+	box->add(button);
+}
+
+void ColorChooser::update_favorites() {
+	favorites_box_.clear();
+	favorites_box_.free_children();
+	assert(favorites_section != nullptr);
+
+	for (unsigned index = 0; index < kNFavorites; ++index) {
+		Button* button;
+		if (favorite_colors[index].has_value()) {
+			button = new Button(
+			   &favorites_box_, "set_to_favorite_" + std::to_string(index), 0, 0, kButtonSize,
+			   kButtonSize,
+			   panel_style_ == PanelStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
+			   playercolor_image(*favorite_colors[index], "images/ui_basic/square.png"));
+			button->sigclicked.connect([this, index]() { set_color(*favorite_colors[index]); });
+
+			Button* del = new Button(
+			   button, "delete_favorite_" + std::to_string(index), kButtonSize - kSmallButtonSize, 0,
+			   kSmallButtonSize, kSmallButtonSize,
+			   panel_style_ == PanelStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
+			   _("–"), _("Remove from favorites"));
+			del->sigclicked.connect([this, index]() { set_favorite(index, true); });
+		} else {
+			button = new Button(
+			   &favorites_box_, "add_favorite_" + std::to_string(index), 0, 0, kButtonSize,
+			   kButtonSize,
+			   panel_style_ == PanelStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
+			   _("+"), _("Add current color to favorites"));
+			button->sigclicked.connect([this, index]() { set_favorite(index, false); });
+		}
+
+		if (index != 0) {
+			favorites_box_.add_space(kSpacing);
+		}
+		favorites_box_.add(button);
+	}
+
+	favorites_box_.initialization_complete();
+}
+
+void ColorChooser::read_favorites_settings() {
+	favorites_section = &get_config_section("favorite_colors");
+	for (unsigned i = 0; i < kNFavorites; ++i) {
+		const std::string rgb_string = favorites_section->get_string(std::to_string(i).c_str(), "");
+		if (!rgb_string.empty()) {
+			std::vector<std::string> rgb;
+			split(rgb, rgb_string, {','});
+			try {
+				RGBColor setting;
+				setting.r = math::to_int(rgb.at(0));
+				setting.g = math::to_int(rgb.at(1));
+				setting.b = math::to_int(rgb.at(2));
+				favorite_colors[i] = setting;
+			} catch (const std::exception& e) {
+				log_warn("Malformed color preference #%u '%s': %s", i, rgb_string.c_str(), e.what());
+			}
+		}
+	}
+}
+
+void ColorChooser::set_favorite(unsigned index, bool remove) {
+	assert(favorites_section != nullptr);
+	if (remove) {
+		favorite_colors[index] = std::nullopt;
+		favorites_section->set_string(std::to_string(index).c_str(), std::string());
+	} else {
+		favorite_colors[index] = current_;
+		favorites_section->set_string(
+		   std::to_string(index).c_str(), format("%u,%u,%u", current_.r, current_.g, current_.b));
+	}
+	update_favorites();
 }
 
 void ColorChooser::set_color_from_spinners() {

@@ -248,10 +248,10 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 
 	finalize_toolbar();
 
-#ifndef NDEBUG  //  only in debug builds
-	addCommand(
-	   "switchplayer", [this](const std::vector<std::string>& str) { cmdSwitchPlayer(str); });
-#endif
+	if (g_allow_script_console) {
+		addCommand(
+		   "switchplayer", [this](const std::vector<std::string>& str) { cmdSwitchPlayer(str); });
+	}
 
 	map_options_subscriber_ = Notifications::subscribe<NoteMapOptions>(
 	   [this](const NoteMapOptions& /* note */) { rebuild_statistics_menu(); });
@@ -1003,6 +1003,10 @@ bool InteractivePlayer::player_hears_field(const Widelands::Coords& coords) cons
 }
 
 void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {
+	if (!g_allow_script_console) {
+		throw wexception("Trying to switch player when the Script Console is disabled.");
+	}
+
 	if (args.size() != 2) {
 		DebugConsole::write("Usage: switchplayer <nr>");
 		return;
@@ -1010,13 +1014,17 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {
 
 	int const n = stoi(args[1]);
 	if (n < 1 || n > kMaxPlayers || (game().get_player(n) == nullptr)) {
+		broadcast_cheating_message();
 		DebugConsole::write(format("Player #%d does not exist.", n));
 		return;
 	}
 
 	DebugConsole::write(format("Switching from #%d to #%d.", static_cast<int>(player_number_), n));
+	broadcast_cheating_message("SWITCHED_PLAYER", game().get_player(n)->get_name());
+
 	player_number_ = n;
 
+	// TODO(tothxa): All statistics windows need updates, not just these 2
 	if (UI::UniqueWindow* const building_statistics_window = menu_windows_.stats_buildings.window) {
 		dynamic_cast<BuildingStatisticsMenu&>(*building_statistics_window).update();
 	}
