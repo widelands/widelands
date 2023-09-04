@@ -73,6 +73,7 @@
 #include "network/host_game_settings_provider.h"
 #include "network/internet_gaming.h"
 #include "sound/sound_handler.h"
+#include "ui_basic/color_chooser.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/about.h"
@@ -465,6 +466,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	g_sh->register_songs("music", Songset::kMenu);
 	g_sh->register_songs("music", Songset::kIngame);
 	g_sh->register_songs("music", Songset::kCustom);
+
+	UI::ColorChooser::read_favorites_settings();
 
 	set_template_dir("");
 	initialize_g_addons();
