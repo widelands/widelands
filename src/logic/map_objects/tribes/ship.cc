@@ -1221,10 +1221,22 @@ void Ship::warship_command(Game& game,
 }
 
 void Ship::start_battle(Game& game, Battle new_battle, bool immediately) {
-	Ship* enemy_ship = new_battle.opponent.get(game);
-
-	if (enemy_ship == nullptr && !static_cast<bool>(new_battle.attack_coords)) {
+	if (ship_type_ != ShipType::kWarship || state_is_sinking()) {
+		molog(game.get_gametime(), "start_battle: not a warship");
 		return;
+	}
+
+	Ship* enemy_ship = new_battle.opponent.get(game);
+	if (enemy_ship == nullptr) {
+		if (!static_cast<bool>(new_battle.attack_coords)) {
+			molog(game.get_gametime(), "start_battle: no enemy found");
+			return;
+		}
+	} else {
+		if (enemy_ship->get_ship_type() != ShipType::kWarship || enemy_ship->state_is_sinking()) {
+			molog(game.get_gametime(), "start_battle: enemy is not a warship");
+			return;
+		}
 	}
 
 	if (immediately) {
@@ -1232,6 +1244,8 @@ void Ship::start_battle(Game& game, Battle new_battle, bool immediately) {
 	} else {
 		battles_.emplace_front(new_battle);
 	}
+
+	send_signal(game, "wakeup");
 
 	if (!new_battle.is_first) {
 		return;
