@@ -33,6 +33,22 @@ static const std::thread::id kNoThread;
 static std::thread::id initializer_thread(kNoThread);
 static std::thread::id logic_thread(kNoThread);
 
+// To protect the global mutex list
+std::mutex MutexLock::s_mutex_;
+
+std::vector<std::function<void()>> MutexLock::stay_responsive_;
+static std::vector<std::pair<std::thread::id, std::thread::id>> acting_as_another_thread;
+
+/** Wrapper around a STL recursive mutex plus some metadata. */
+struct MutexRecord {
+	std::recursive_mutex mutex;  ///< The actual mutex.
+	std::set<std::thread::id> waiting_threads;  ///< The threads that are currently trying to lock this mutex.
+	std::thread::id current_owner =
+	   kNoThread;  ///< The thread that has currently locked this mutex (may be #kNoThread).
+	size_t ownership_count = 0;  ///< How many times this mutex was locked.
+};
+static std::map<MutexLock::ID, MutexRecord> g_all_mutex_records;
+
 void set_initializer_thread() {
 	verb_log_info("Setting initializer thread.");
 
@@ -94,6 +110,8 @@ void NoteThreadSafeFunction::instantiate(const std::function<void()>& fn,
 	} else {
 		// All other threads must ask it politely to do this for them.
 		if (wait_until_completion) {
+			const std::thread::id outer_thread = std::this_thread::get_id();
+
 			volatile bool done = false;
 
 			// Some codepaths want to perform special error handling, so we catch
@@ -101,7 +119,10 @@ void NoteThreadSafeFunction::instantiate(const std::function<void()>& fn,
 			// Only if the caller waits for completion of course.
 			const std::exception* error = nullptr;
 
-			Notifications::publish(NoteThreadSafeFunction([fn, &done, &error, rethrow_errors]() {
+			Notifications::publish(NoteThreadSafeFunction([fn, &done, &error, rethrow_errors, outer_thread]() {
+				const std::thread::id inner_thread = std::this_thread::get_id();
+				acting_as_another_thread.emplace_back(inner_thread, outer_thread);
+
 				try {
 					fn();
 				} catch (const std::exception& e) {
@@ -109,10 +130,12 @@ void NoteThreadSafeFunction::instantiate(const std::function<void()>& fn,
 						error = &e;
 					} else {
 						done = true;
+						acting_as_another_thread.pop_back();
 						throw;
 					}
 				}
 				done = true;
+				acting_as_another_thread.pop_back();
 			}));
 			while (!done) {
 				// Wait until the NoteThreadSafeFunction has been handled.
@@ -130,16 +153,6 @@ void NoteThreadSafeFunction::instantiate(const std::function<void()>& fn,
 	}
 }
 
-/** Wrapper around a STL recursive mutex plus some metadata. */
-struct MutexRecord {
-	std::recursive_mutex mutex;  ///< The actual mutex.
-	std::set<std::thread::id> waiting_threads;  ///< The threads that are currently trying to lock this mutex.
-	std::thread::id current_owner =
-	   kNoThread;  ///< The thread that has currently locked this mutex (may be #kNoThread).
-	size_t ownership_count = 0;  ///< How many times this mutex was locked.
-};
-static std::map<MutexLock::ID, MutexRecord> g_mutex;
-
 MutexLock::ID MutexLock::last_custom_mutex_ = MutexLock::ID::kLastID;
 MutexLock::ID MutexLock::create_custom_mutex() {
 	last_custom_mutex_ = static_cast<MutexLock::ID>(static_cast<uint32_t>(last_custom_mutex_) + 1);
@@ -152,6 +165,8 @@ MutexLock::ID MutexLock::create_custom_mutex() {
 
 static std::string to_string(const MutexLock::ID i) {
 	switch (i) {
+	case MutexLock::ID::kNone:
+		return "None";
 	case MutexLock::ID::kLogicFrame:
 		return "LogicFrame";
 	case MutexLock::ID::kObjects:
@@ -180,20 +195,45 @@ constexpr uint32_t kMutexPriorityLockInterval = 2;
 constexpr uint32_t kMutexNormalLockInterval = 30;
 constexpr uint32_t kMutexLogicFrameLockInterval = 400;
 
-// To protect the global mutex list
-std::mutex MutexLock::s_mutex_;
-MutexLock::MutexLock(ID i) : MutexLock(i, []() {}) {
+void MutexLock::push_stay_responsive_function(std::function<void()> fn) {
+	assert(is_initializer_thread());
+	std::lock_guard<std::mutex> guard(s_mutex_);
+	stay_responsive_.emplace_back(fn);
 }
-MutexLock::MutexLock(ID i, const std::function<void()>& run_while_waiting) : id_(i) {
+
+void MutexLock::pop_stay_responsive_function() {
+	assert(is_initializer_thread());
+	assert(!stay_responsive_.empty());
+	std::lock_guard<std::mutex> guard(s_mutex_);
+	stay_responsive_.pop_back();
+}
+
+MutexLock::MutexLock(const ID i) : id_(i) {
+	if (id_ == ID::kNone) {
+		return;
+	}
+
 	const uint32_t start_time = SDL_GetTicks();
 #ifdef MUTEX_LOCK_DEBUG
 	uint32_t counter = 0;
-	log_dbg("Starting to lock mutex %s (run_while_waiting) ...", to_string(id_).c_str());
+	log_dbg("Starting to lock mutex %s ...", to_string(id_).c_str());
 #endif
 
 	const std::thread::id self = std::this_thread::get_id();
 	s_mutex_.lock();
-	MutexRecord& record = g_mutex[id_];
+	MutexRecord& record = g_all_mutex_records[id_];
+
+	if (record.current_owner != kNoThread) {
+		for (const auto& pair : acting_as_another_thread) {
+			if (pair.first == self && pair.second == record.current_owner) {
+				verb_log_dbg("%s skips locking mutex %s owned by wrapping thread %s",
+						thread_name(self).c_str(), to_string(id_).c_str(), thread_name(record.current_owner).c_str());
+				s_mutex_.unlock();
+				id_ = ID::kNone;
+				return;
+			}
+		}
+	}
 
 	// When several threads are waiting to grab the same mutex, the first one is advantaged
 	// by giving it a lower sleep time between attempts. This keeps overall waiting times low.
@@ -219,13 +259,21 @@ MutexLock::MutexLock(ID i, const std::function<void()>& run_while_waiting) : id_
 		}
 
 		if (now - last_function_call > sleeptime) {
-			run_while_waiting();
+			{
+				std::lock_guard<std::mutex> guard(s_mutex_);
+				if (!stay_responsive_.empty()) {
+					stay_responsive_.back()();
+				} else {
+					verb_log_dbg("WARNING: Mutex locking: No responsiveness function set");
+				}
+			}
+
 			last_function_call = SDL_GetTicks();
 
 			// Check for deadlocks. Does not account for situations involving more than two threads.
 			s_mutex_.lock();
 			assert(record.current_owner != kNoThread && record.current_owner != self);
-			for (const auto& pair : g_mutex) {
+			for (const auto& pair : g_all_mutex_records) {
 				if (pair.second.current_owner == self && pair.second.waiting_threads.count(record.current_owner) > 0) {
 					// Ouch! Break the deadlock by throwing an exception with a helpful message.
 					std::string info = "Deadlock! ";
@@ -237,14 +285,14 @@ MutexLock::MutexLock(ID i, const std::function<void()>& run_while_waiting) : id_
 					info += ", which is trying to lock ";
 					info += to_string(pair.first);
 					info += ". First thread owns: ";
-					for (const auto& mutex_pair : g_mutex) {
+					for (const auto& mutex_pair : g_all_mutex_records) {
 						if (mutex_pair.second.current_owner == self) {
 							info += to_string(mutex_pair.first);
 							info += "; ";
 						}
 					}
 					info += "Second thread owns: ";
-					for (const auto& mutex_pair : g_mutex) {
+					for (const auto& mutex_pair : g_all_mutex_records) {
 						if (mutex_pair.second.current_owner == record.current_owner) {
 							info += to_string(mutex_pair.first);
 							info += "; ";
@@ -282,13 +330,16 @@ MutexLock::MutexLock(ID i, const std::function<void()>& run_while_waiting) : id_
 #endif
 }
 MutexLock::~MutexLock() {
+	if (id_ == ID::kNone) {
+		return;
+	}
 
 #ifdef MUTEX_LOCK_DEBUG
 	log_dbg("Unlocking mutex %s", to_string(id_).c_str());
 #endif
 
 	std::lock_guard<std::mutex> guard(s_mutex_);
-	MutexRecord& record = g_mutex.at(id_);
+	MutexRecord& record = g_all_mutex_records.at(id_);
 
 	assert(record.ownership_count > 0);
 	--record.ownership_count;
