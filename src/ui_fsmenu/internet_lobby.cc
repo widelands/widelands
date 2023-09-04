@@ -74,6 +74,7 @@ InternetLobby::InternetLobby(MenuCapsule& fsmm,
         0,
         0,
         InternetGaming::ref(),
+        &g_chat_sent_history,
         UI::PanelStyle::kFsMenu),
 
      // Right column content

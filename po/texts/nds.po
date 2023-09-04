@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2023-08-24 02:15+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2023\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -573,7 +573,7 @@ msgstr "Kiek up diene Fiskers un bau Fisstüchtereen. Wenn de Fiss leeg is, kann
 msgid ""
 "Always build a forester’s and a woodcutter’s house, so you will not run out "
 "of logs."
-msgstr "Bau alltied een Förster-Huus un eene Boomslageree, daarmit de Boomstammen nich nau worden."
+msgstr "Bau alltied een Förster-Huus un eene Boomsaageree, daarmit de Boomstammen nich nau worden."
 
 #: ../../data/txts/tips/atlanteans.lua:12
 msgid ""
@@ -599,6 +599,12 @@ msgid ""
 "Most enhanced buildings need experienced workers. Do not enhance a building "
 "unless you have the necessary workers available."
 msgstr "De meesten utbauten Husen bruken Arbeiders mit Erfahrung. Bau de Husen eerst dann ut, wenn du de nödigen Arbeiders hest."
+
+#: ../../data/txts/tips/crash.lua:7
+msgid ""
+"Widelands is creating an emergency save, so you can continue playing exactly"
+" where the game closed."
+msgstr "Widelands sekert dat Speel automatisk, daarmit du jüüst daar wiederspölen kannst, waar dat Speel dichtgaan is."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/editor.lua:8

@@ -10,7 +10,7 @@
 # C138, 2022
 # charly ghislain, 2022
 # Christophe Quintard <christophe.quintard@gmail.com>, 2019
-# David D, 2018
+# David D, 2018,2023
 # David TARCZEWSKI <transifex@tarczewski.fr>, 2019
 # Drisse Atek <dageneration@live.fr>, 2020
 # GunChleoc, 2016,2018
@@ -30,7 +30,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-08-05 02:23+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: C138, 2022\n"
+"Last-Translator: David D, 2018,2023\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -470,7 +470,7 @@ msgstr "Cette lance de bois est l'arme de base dans l'armée des Amazones. Elle 
 #: ../../data/tribes/initialization/amazons/units.lua:367
 msgctxt "amazons_ware"
 msgid "It is used by the Amazon hunter-gatherers as well."
-msgstr ""
+msgstr "Elle est aussi utilisée par les chasseuses-cueilleuses Amazones."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Chisel, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:378
@@ -1172,7 +1172,7 @@ msgstr "La hutte du chasseur-cueilleur à besoin d'animaux à chasser ou de pois
 #: ../../data/tribes/initialization/amazons/units.lua:1302
 msgctxt "amazons_building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "Les routes et les arbres le long du rivage bloquent la pêche."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Hunter-
 #. Gatherer's Hut
@@ -1354,7 +1354,7 @@ msgctxt "amazons_building"
 msgid ""
 "Plants rare trees which are needed by the Amazons, like balsa, rubber and "
 "ironwood."
-msgstr ""
+msgstr "Planter des arbres rares dont les Amazones ont besoin, comme le balsa, le caoutchouc et le bois de fer."
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Rare Tree
 #. Plantation
@@ -15698,7 +15698,7 @@ msgstr "Dependences"
 #. help, containing size info, buildcost etc.
 #: ../../data/tribes/scripting/help/building_help.lua:479
 msgid "Building requirements"
-msgstr ""
+msgstr "Restrictions de constructions"
 
 #: ../../data/tribes/scripting/help/building_help.lua:495
 msgid ""

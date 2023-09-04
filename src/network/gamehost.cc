@@ -511,13 +511,13 @@ void GameHost::run_callback() {
 	   custom_naming_lists;
 	if (!d->settings.savegame) {  // Naming lists don't make sense in savegames
 		int playernumber = d->settings.playernum + 1;
-		if (playernumber > 0) {
+		if (playernumber > 0 && playernumber <= UserSettings::highest_playernum()) {
 			custom_naming_lists.emplace(playernumber, Widelands::read_custom_warehouse_ship_names());
 		}
 
 		for (Client& client : d->clients) {
 			playernumber = client.playernum + 1;
-			if (playernumber > 0) {
+			if (playernumber > 0 && playernumber <= UserSettings::highest_playernum()) {
 				// Merge instead of overwrite - multiple clients can share a player
 				custom_naming_lists[playernumber].first.insert(
 				   client.custom_ship_names.begin(), client.custom_ship_names.end());
@@ -624,7 +624,7 @@ void GameHost::run_callback() {
 	} catch (const std::exception& e) {
 		FsMenu::MainMenu* parent =
 		   capsule_ != nullptr ? &capsule_->menu() : nullptr;  // make includes script happy
-		WLApplication::emergency_save(parent, *game_, e.what(), player_number);
+		WLApplication::emergency_save(parent, *game_, e.what(), player_number, false);
 		clear_computer_players();
 
 		while (!d->clients.empty()) {
@@ -1834,6 +1834,16 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	}
 
 	send_system_message_code("CLIENT_HAS_JOINED_GAME", effective_name);
+
+	if (g_allow_script_console) {
+		// TODO(tothxa): The host could warn only the new client, but other clients can only
+		//               broadcast:
+		//                 1. They can only send commands to the host
+		//                 2. System messages are assembled and translated on each client, so
+		//                    individual players can't be @-addressed
+		//               Until this is solved, it's better if the host broadcasts too.
+		send_system_message_code("CAN_CHEAT", d->localplayername);
+	}
 }
 
 void GameHost::committed_network_time(const Time& time) {
@@ -2463,12 +2473,15 @@ void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
 	}
 }
 
+static const std::set<std::string> cheating_message_codes = {
+   "CHEAT", "CAN_CHEAT", "SWITCHED_PLAYER", "CHEAT_OTHER"};
+
 void GameHost::handle_system_message(RecvPacket& packet) {
 	const std::string code = packet.string();
 	const std::string arg1 = packet.string();
 	const std::string arg2 = packet.string();
 	const std::string arg3 = packet.string();
-	if (code != "CHEAT") {
+	if (cheating_message_codes.count(code) == 0) {
 		log_err("[Host]: Received system command %s(%s,%s,%s) from client", code.c_str(),
 		        arg1.c_str(), arg2.c_str(), arg3.c_str());
 		throw DisconnectException("MALFORMED_COMMANDS");
