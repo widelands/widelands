@@ -42,7 +42,8 @@ static std::vector<std::pair<std::thread::id, std::thread::id>> acting_as_anothe
 /** Wrapper around a STL recursive mutex plus some metadata. */
 struct MutexRecord {
 	std::recursive_mutex mutex;  ///< The actual mutex.
-	std::set<std::thread::id> waiting_threads;  ///< The threads that are currently trying to lock this mutex.
+	std::set<std::thread::id>
+	   waiting_threads;  ///< The threads that are currently trying to lock this mutex.
 	std::thread::id current_owner =
 	   kNoThread;  ///< The thread that has currently locked this mutex (may be #kNoThread).
 	size_t ownership_count = 0;  ///< How many times this mutex was locked.
@@ -119,24 +120,25 @@ void NoteThreadSafeFunction::instantiate(const std::function<void()>& fn,
 			// Only if the caller waits for completion of course.
 			const std::exception* error = nullptr;
 
-			Notifications::publish(NoteThreadSafeFunction([fn, &done, &error, rethrow_errors, outer_thread]() {
-				const std::thread::id inner_thread = std::this_thread::get_id();
-				acting_as_another_thread.emplace_back(inner_thread, outer_thread);
+			Notifications::publish(
+			   NoteThreadSafeFunction([fn, &done, &error, rethrow_errors, outer_thread]() {
+				   const std::thread::id inner_thread = std::this_thread::get_id();
+				   acting_as_another_thread.emplace_back(inner_thread, outer_thread);
 
-				try {
-					fn();
-				} catch (const std::exception& e) {
-					if (rethrow_errors) {
-						error = &e;
-					} else {
-						done = true;
-						acting_as_another_thread.pop_back();
-						throw;
-					}
-				}
-				done = true;
-				acting_as_another_thread.pop_back();
-			}));
+				   try {
+					   fn();
+				   } catch (const std::exception& e) {
+					   if (rethrow_errors) {
+						   error = &e;
+					   } else {
+						   done = true;
+						   acting_as_another_thread.pop_back();
+						   throw;
+					   }
+				   }
+				   done = true;
+				   acting_as_another_thread.pop_back();
+			   }));
 			while (!done) {
 				// Wait until the NoteThreadSafeFunction has been handled.
 				// Since `done` was passed by address, it will set to
@@ -225,7 +227,8 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 		for (const auto& pair : acting_as_another_thread) {
 			if (pair.first == self && pair.second == record.current_owner) {
 				verb_log_dbg("%s skips locking mutex %s owned by wrapping thread %s",
-						thread_name(self).c_str(), to_string(id_).c_str(), thread_name(record.current_owner).c_str());
+				             thread_name(self).c_str(), to_string(id_).c_str(),
+				             thread_name(record.current_owner).c_str());
 				s_mutex_.unlock();
 				id_ = ID::kNone;
 				return;
@@ -272,7 +275,8 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 			s_mutex_.lock();
 			assert(record.current_owner != kNoThread && record.current_owner != self);
 			for (const auto& pair : g_all_mutex_records) {
-				if (pair.second.current_owner == self && pair.second.waiting_threads.count(record.current_owner) > 0) {
+				if (pair.second.current_owner == self &&
+				    pair.second.waiting_threads.count(record.current_owner) > 0) {
 					// Ouch! Break the deadlock by throwing an exception with a helpful message.
 					std::string info = "Deadlock! ";
 					info += thread_name(self);
