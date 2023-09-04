@@ -282,6 +282,10 @@ void GameClient::run() {
 	NEVER_HERE();
 }
 
+const std::string& GameClient::get_local_playername() const {
+	return d->localplayername;
+}
+
 void GameClient::set_write_replay(bool replay) {
 	d->should_write_replay = replay;
 }
@@ -502,12 +506,12 @@ void GameClient::set_map(const std::string& /*mapname*/,
 	// client is not allowed to do this
 }
 
-void GameClient::send_cheating_info() {
+void GameClient::send_cheating_info(const std::string& code, const std::string& arg2) {
 	SendPacket packet;
 	packet.unsigned_8(NETCMD_SYSTEM_MESSAGE_CODE);
-	packet.string("CHEAT");
+	packet.string(code);
 	packet.string(d->localplayername);
-	packet.string("");
+	packet.string(arg2);
 	packet.string("");
 	d->net->send(packet);
 }
@@ -1145,6 +1149,16 @@ void GameClient::handle_system_message(RecvPacket& packet) {
 	                                   // c.sender remains empty to indicate a system message
 	d->chatmessages.push_back(c);
 	Notifications::publish(c);
+
+	if (g_allow_script_console && code == "CLIENT_HAS_JOINED_GAME") {
+		// Warn others
+		// TODO(tothxa): It would be better to only broadcast if we are the new user, otherwise send
+		//               it to the new user only, but
+		//                 1. We can only send commands to the host
+		//                 2. System messages are assembled and translated on each client, so
+		//                    individual players can't be @-addressed
+		send_cheating_info("CAN_CHEAT");
+	}
 }
 
 /**

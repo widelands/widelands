@@ -601,6 +601,7 @@ void ShipWindow::act_debug() {
 	if (ship == nullptr) {
 		return;
 	}
+	ibase_.broadcast_cheating_message();
 	show_mapobject_debug(ibase_, *ship);
 }
 

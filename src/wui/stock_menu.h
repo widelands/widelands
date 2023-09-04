@@ -35,7 +35,12 @@ class InteractivePlayer;
  * one player
  */
 struct StockMenu : public UI::UniqueWindow {
-	StockMenu(InteractivePlayer&, UI::UniqueWindow::Registry&);
+	struct Registry : public UI::UniqueWindow::Registry {
+		size_t active_tab{2};
+		bool solid_icon_backgrounds{false};
+	};
+
+	StockMenu(InteractivePlayer&, Registry&);
 
 	void think() override;
 	void layout() override;

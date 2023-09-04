@@ -36,7 +36,7 @@ color_tag(const RGBColor& c, const std::string& text1, const std::string& text2)
 	return format(_("%1$s %2$s"), StyleManager::color_tag(text1, c), text2);
 }
 
-StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registry)
+StockMenu::StockMenu(InteractivePlayer& plr, Registry& registry)
    : UI::UniqueWindow(&plr, UI::WindowStyle::kWui, "stock_menu", &registry, 480, 640, _("Stock")),
      player_(plr),
      colors_(g_style_manager->building_statistics_style()),
@@ -84,17 +84,21 @@ StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registr
 	          warehouse_workers_, _("Workers in warehouses"));
 
 	solid_icon_backgrounds_.changedto.connect([this](const bool b) {
+		dynamic_cast<Registry*>(registry_)->solid_icon_backgrounds = b;
 		all_wares_->set_solid_icon_backgrounds(!b);
 		all_workers_->set_solid_icon_backgrounds(!b);
 		warehouse_wares_->set_solid_icon_backgrounds(!b);
 		warehouse_workers_->set_solid_icon_backgrounds(!b);
 	});
+	tabs_.sigclicked.connect(
+	   [this]() { dynamic_cast<Registry*>(registry_)->active_tab = tabs_.active(); });
 
 	main_box_.add(&tabs_, UI::Box::Resizing::kExpandBoth);
 	main_box_.add(&solid_icon_backgrounds_, UI::Box::Resizing::kFullSize);
 
 	// Preselect the wares_in_warehouses tab
-	tabs_.activate(2);
+	tabs_.activate(registry.active_tab);
+	solid_icon_backgrounds_.set_state(registry.solid_icon_backgrounds);
 
 	initialization_complete();
 }

@@ -98,6 +98,9 @@ void fill_parameter_vector() {
 		_("Constantly adjust the game speed automatically depending on AI delay. "
 		  "Only to be used for AI testing or training (in conjunction with --ai_training)."),
 		true},
+	  /* This is deliberately so long to discourage overusage */
+	  {"", "enable_development_testing_tools", "", _("Enable the Script Console and Cheating Mode."),
+		true},
 	  /// Saving options
 	  {_("Game options:"), _("Note: New values will be written to the config file."), "--", "",
 		false},
@@ -109,10 +112,19 @@ void fill_parameter_vector() {
 	  {"", "rolling_autosave", _("n"),
 		/** TRANSLATORS: `n` references a numerical placeholder */
 		_("Use `n` files for rolling autosaves."), true},
+	  /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
+	  /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain. */
+	  /** TRANSLATORS: * marks the default value */
 	  {"", "skip_autosave_on_inactivity", _("[true*|false]"),
 		_("Do not create an autosave when the user has been inactive since the last autosave."),
 		true},
 	  {"", "nozip", "", _("Do not save files as binary zip archives."), false},
+	  // The below comment is duplicated from above for the other case, when false is the default.
+	  /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
+	  /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain. */
+	  /** TRANSLATORS: * marks the default value */
+	  {"", "save_chat_history", _("[true|false*]"),
+		_("Whether to save the history of sent chat messages to a file."), true},
 	  {"", "display_replay_filenames", _("[true*|false]"), _("Show filenames in the replay screen."),
 		true},
 	  {"", "editor_player_menu_warn_too_many_players", _("[true*|false]"),
@@ -135,11 +147,8 @@ void fill_parameter_vector() {
 	 true
 	},
 #endif
-	  {"", "edge_scrolling",
-		/** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
-		/** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain. */
-		/** TRANSLATORS: * marks the default value */
-		_("[true|false*]"), _("Scroll when the mouse cursor is near the screen edge."), true},
+	  {"", "edge_scrolling", _("[true|false*]"),
+		_("Scroll when the mouse cursor is near the screen edge."), true},
 	  {"", "invert_movement", _("[true|false*]"), _("Invert click-and-drag map movement direction."),
 		true},
 	  {"", "numpad_diagonalscrolling", _("[true|false*]"),

@@ -528,6 +528,7 @@ void AttackWindow::act_goto() {
 
 /** Callback for debug window. */
 void AttackWindow::act_debug() {
+	iplayer_.broadcast_cheating_message();
 	show_field_debug(iplayer_, map_.get_fcoords(target_coordinates_));
 }
 
