@@ -196,13 +196,11 @@ constexpr uint32_t kMutexNormalLockInterval = 30;
 constexpr uint32_t kMutexLogicFrameLockInterval = 400;
 
 void MutexLock::push_stay_responsive_function(std::function<void()> fn) {
-	assert(is_initializer_thread());
 	std::lock_guard<std::mutex> guard(s_mutex_);
 	stay_responsive_.emplace_back(fn);
 }
 
 void MutexLock::pop_stay_responsive_function() {
-	assert(is_initializer_thread());
 	assert(!stay_responsive_.empty());
 	std::lock_guard<std::mutex> guard(s_mutex_);
 	stay_responsive_.pop_back();
