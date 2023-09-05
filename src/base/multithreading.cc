@@ -35,6 +35,7 @@ static std::thread::id logic_thread(kNoThread);
 
 // To protect the global mutex list
 std::mutex MutexLock::s_mutex_;
+static std::mutex responsiveness_list_mutex_;
 
 std::vector<std::function<void()>> MutexLock::stay_responsive_;
 static std::vector<std::pair<std::thread::id, std::thread::id>> acting_as_another_thread;
@@ -198,13 +199,13 @@ constexpr uint32_t kMutexNormalLockInterval = 30;
 constexpr uint32_t kMutexLogicFrameLockInterval = 400;
 
 void MutexLock::push_stay_responsive_function(std::function<void()> fn) {
-	std::lock_guard<std::mutex> guard(s_mutex_);
+	std::lock_guard<std::mutex> guard(responsiveness_list_mutex_);
 	stay_responsive_.emplace_back(fn);
 }
 
 void MutexLock::pop_stay_responsive_function() {
 	assert(!stay_responsive_.empty());
-	std::lock_guard<std::mutex> guard(s_mutex_);
+	std::lock_guard<std::mutex> guard(responsiveness_list_mutex_);
 	stay_responsive_.pop_back();
 }
 
@@ -261,7 +262,7 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 
 		if (now - last_function_call > sleeptime) {
 			{
-				std::lock_guard<std::mutex> guard(s_mutex_);
+				std::lock_guard<std::mutex> guard(responsiveness_list_mutex_);
 				if (!stay_responsive_.empty()) {
 					stay_responsive_.back()();
 				} else {
