@@ -274,7 +274,11 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 
 			// Check for deadlocks. Does not account for situations involving more than two threads.
 			s_mutex_.lock();
-			assert(record.current_owner != kNoThread && record.current_owner != self);
+			assert(record.current_owner != self);
+			if (record.current_owner == kNoThread) {
+				s_mutex_.unlock();
+				continue;
+			}
 			for (const auto& pair : g_all_mutex_records) {
 				if (pair.second.current_owner == self &&
 				    pair.second.waiting_threads.count(record.current_owner) > 0) {
