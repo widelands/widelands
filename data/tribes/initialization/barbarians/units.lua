@@ -11,7 +11,7 @@ wl.Descriptions():new_tribe {
    name = "barbarians",
    animation_directory = image_dirname,
    animations = {
-      frontier = { hotspot = {1, 19} },
+      frontier = { hotspot = {8, 31} },
       pinned_note = { hotspot = {18, 67} },
       bridge_normal_e = { hotspot = {-1, 13} },
       bridge_busy_e = { hotspot = {-1, 13} },
