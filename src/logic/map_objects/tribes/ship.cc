@@ -2461,12 +2461,6 @@ void Ship::draw(const EditorGameBase& egbase,
 			}
 		}
 
-		// NOCOM
-		if (PortDock* rdock = requestdock_.get(egbase); rdock != nullptr) {
-			statistics_string =
-			   format("%s<br>→ %s", statistics_string, rdock->get_warehouse()->get_warehouse_name());
-		}
-
 		statistics_string = StyleManager::color_tag(
 		   statistics_string, g_style_manager->building_statistics_style().medium_color());
 	}
