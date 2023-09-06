@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-06 03:09+0000\n"
+"POT-Creation-Date: 2023-08-31 02:28+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
 "Last-Translator: 425467bb0c9da71484550c3c99a0865a_432023a <42ebb87f8d673776150a6c232428c0ac_329642>, 2017-2018\n"
 "Language-Team: Arabic (http://app.transifex.com/widelands/widelands/language/ar/)\n"
@@ -32,11 +32,11 @@ msgstr "إبحث عن الآثار القديمة. عندما يتم إيجاد�
 msgid "Artifacts owned"
 msgstr ""
 
-#: ../../data/scripting/win_conditions/artifacts.lua:76
+#: ../../data/scripting/win_conditions/artifacts.lua:75
 msgid "No Artifacts"
 msgstr "لا أثار"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:76
+#: ../../data/scripting/win_conditions/artifacts.lua:75
 #, lua-format
 msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
@@ -46,50 +46,50 @@ msgstr "لا توجد أي آثار على هذه الخريطة. هذا لا ي
 
 #. TRANSLATORS: Keep this as short as possible. You can also translate this as
 #. "New artifact"
-#: ../../data/scripting/win_conditions/artifacts.lua:83
+#: ../../data/scripting/win_conditions/artifacts.lua:82
 msgid "Artifact Found"
 msgstr "أثار وُجِدت"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:84
+#: ../../data/scripting/win_conditions/artifacts.lua:83
 msgid "Your team found a new artifact."
 msgstr "فريقك وَجَد آثار جديدة."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:85
+#: ../../data/scripting/win_conditions/artifacts.lua:84
 msgid "You found a new artifact."
 msgstr ""
 
 #. TRANSLATORS: Keep this as short as possible.
-#: ../../data/scripting/win_conditions/artifacts.lua:89
+#: ../../data/scripting/win_conditions/artifacts.lua:88
 msgid "Artifact Lost"
 msgstr "أثار فُقِدت"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:90
+#: ../../data/scripting/win_conditions/artifacts.lua:89
 msgid "One of your team’s artifacts was stolen by an enemy."
 msgstr "واحد من آثار فريقك سُرق من قِبل الأعداء."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:91
+#: ../../data/scripting/win_conditions/artifacts.lua:90
 msgid "One of your artifacts was stolen by an enemy."
 msgstr ""
 
 #. TRANSLATORS: Keep this as short as possible.
-#: ../../data/scripting/win_conditions/artifacts.lua:95
+#: ../../data/scripting/win_conditions/artifacts.lua:94
 msgid "Artifact Conquered"
 msgstr "آثار أُحتُلت"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:96
+#: ../../data/scripting/win_conditions/artifacts.lua:95
 msgid "Your team stole an artifact from an enemy."
 msgstr "فريقك سَرق آثار من الأعداء."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:97
+#: ../../data/scripting/win_conditions/artifacts.lua:96
 msgid "You stole an artifact from an enemy."
 msgstr ""
 
-#: ../../data/scripting/win_conditions/artifacts.lua:180
+#: ../../data/scripting/win_conditions/artifacts.lua:179
 msgid "Overview:"
 msgstr "نظرة عامة:"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:183
-#: ../../data/scripting/win_conditions/artifacts.lua:196
+#: ../../data/scripting/win_conditions/artifacts.lua:182
+#: ../../data/scripting/win_conditions/artifacts.lua:195
 #, lua-format
 msgid "%i artifact"
 msgid_plural "%i artifacts"
@@ -101,13 +101,13 @@ msgstr[4] "%iأثار"
 msgstr[5] "%iأثار"
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
-#: ../../data/scripting/win_conditions/artifacts.lua:185
+#: ../../data/scripting/win_conditions/artifacts.lua:184
 msgid "%1$s owns %2$s."
 msgstr "%1$s يَمُلك %2$s."
 
 #. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members
 #. (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
-#: ../../data/scripting/win_conditions/artifacts.lua:198
+#: ../../data/scripting/win_conditions/artifacts.lua:197
 msgid "Team %1$i (%2$s) owns %3$s."
 msgstr "فريق %1$i (%2$s) يَمُلك %3$s."
 

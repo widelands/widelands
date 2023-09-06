@@ -28,6 +28,7 @@
 #include "logic/cmd_queue.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/pinned_note.h"
+#include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
@@ -796,6 +797,7 @@ Show a debug widow for this field.
 ===============
 */
 void FieldActionWindow::act_debug() {
+	ibase().broadcast_cheating_message();
 	show_field_debug(ibase(), node_);
 }
 

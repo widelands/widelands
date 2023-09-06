@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-06 03:09+0000\n"
+"POT-Creation-Date: 2023-08-31 02:28+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
 "Last-Translator: Mikel Alzibar <mikelalzibar@gmail.com>, 2016,2021\n"
 "Language-Team: Basque (http://app.transifex.com/widelands/widelands/language/eu/)\n"
@@ -33,11 +33,11 @@ msgstr "Aintzinako artefaktuen bilaketa. Denak topatutakoan, artefaktu gehien di
 msgid "Artifacts owned"
 msgstr "Eskuratutako artefaktuak"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:76
+#: ../../data/scripting/win_conditions/artifacts.lua:75
 msgid "No Artifacts"
 msgstr "Ez dago artefakturik"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:76
+#: ../../data/scripting/win_conditions/artifacts.lua:75
 #, lua-format
 msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
@@ -47,50 +47,50 @@ msgstr "Ez dago artefakturik mapa honetan. Hori ez litzateke gertatu beharko. Me
 
 #. TRANSLATORS: Keep this as short as possible. You can also translate this as
 #. "New artifact"
-#: ../../data/scripting/win_conditions/artifacts.lua:83
+#: ../../data/scripting/win_conditions/artifacts.lua:82
 msgid "Artifact Found"
 msgstr "Artefaktua topatua"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:84
+#: ../../data/scripting/win_conditions/artifacts.lua:83
 msgid "Your team found a new artifact."
 msgstr "Zure taldeak artefaktu berri bat topatu du."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:85
+#: ../../data/scripting/win_conditions/artifacts.lua:84
 msgid "You found a new artifact."
 msgstr "Artefaktu berri bat topatu duzu."
 
 #. TRANSLATORS: Keep this as short as possible.
-#: ../../data/scripting/win_conditions/artifacts.lua:89
+#: ../../data/scripting/win_conditions/artifacts.lua:88
 msgid "Artifact Lost"
 msgstr "Artefaktua galduta"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:90
+#: ../../data/scripting/win_conditions/artifacts.lua:89
 msgid "One of your team’s artifacts was stolen by an enemy."
 msgstr "Zure taldeko artefaktu bat etsaiak lapurtua izan da."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:91
+#: ../../data/scripting/win_conditions/artifacts.lua:90
 msgid "One of your artifacts was stolen by an enemy."
 msgstr "Zure artefaktu bat etsai batek ostu dizu."
 
 #. TRANSLATORS: Keep this as short as possible.
-#: ../../data/scripting/win_conditions/artifacts.lua:95
+#: ../../data/scripting/win_conditions/artifacts.lua:94
 msgid "Artifact Conquered"
 msgstr "Artefaktua eskuratua"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:96
+#: ../../data/scripting/win_conditions/artifacts.lua:95
 msgid "Your team stole an artifact from an enemy."
 msgstr "Zure taldeak etsai baten artefaktu bat lapurtu du."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:97
+#: ../../data/scripting/win_conditions/artifacts.lua:96
 msgid "You stole an artifact from an enemy."
 msgstr "Artefaktu bat ostu diozu etsai bati."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:180
+#: ../../data/scripting/win_conditions/artifacts.lua:179
 msgid "Overview:"
 msgstr "Gainbegirada:"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:183
-#: ../../data/scripting/win_conditions/artifacts.lua:196
+#: ../../data/scripting/win_conditions/artifacts.lua:182
+#: ../../data/scripting/win_conditions/artifacts.lua:195
 #, lua-format
 msgid "%i artifact"
 msgid_plural "%i artifacts"
@@ -98,13 +98,13 @@ msgstr[0] "%i artefaktu"
 msgstr[1] "%i artefaktu"
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
-#: ../../data/scripting/win_conditions/artifacts.lua:185
+#: ../../data/scripting/win_conditions/artifacts.lua:184
 msgid "%1$s owns %2$s."
 msgstr "%1$s-k %2$s ditu."
 
 #. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members
 #. (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
-#: ../../data/scripting/win_conditions/artifacts.lua:198
+#: ../../data/scripting/win_conditions/artifacts.lua:197
 msgid "Team %1$i (%2$s) owns %3$s."
 msgstr "%1$i taldeak (%2$s) %3$s ditu."
 

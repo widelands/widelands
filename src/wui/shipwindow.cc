@@ -601,6 +601,7 @@ void ShipWindow::act_debug() {
 	if (ship == nullptr) {
 		return;
 	}
+	ibase_.broadcast_cheating_message();
 	show_mapobject_debug(ibase_, *ship);
 }
 
@@ -645,11 +646,12 @@ void ShipWindow::act_construct_port() {
 	if (ship == nullptr) {
 		return;
 	}
-	if (ship->exp_port_spaces().empty()) {
+	const Widelands::Coords portspace = ship->current_portspace();
+	if (!static_cast<bool>(portspace)) {
 		return;
 	}
 	if (Widelands::Game* game = ibase_.get_game()) {
-		game->send_player_ship_construct_port(*ship, ship->exp_port_spaces().front());
+		game->send_player_ship_construct_port(*ship, portspace);
 	} else {
 		NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 	}

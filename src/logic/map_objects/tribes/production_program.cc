@@ -2087,8 +2087,10 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 	std::vector<ImmovableFound> immovables;
 	CheckStepWalkOn cstep(MOVECAPS_WALK, true);
 	Area<FCoords> area(map.get_fcoords(psite.get_position()), radius);
-	if (map.find_reachable_immovables(game, area, &immovables, cstep, FindImmovableByDescr(descr)) !=
-	    0u) {
+	FindImmovableAnd finder;
+	finder.add(FindImmovableByDescr(descr));
+	finder.add(FindImmovableNotReserved());
+	if (map.find_reachable_immovables(game, area, &immovables, cstep, finder) != 0U) {
 		state.objvar = immovables.at(game.logic_rand() % immovables.size()).object;
 
 		psite.working_positions_.at(psite.main_worker_)
@@ -2139,7 +2141,7 @@ bool ProductionProgram::ActConstruct::get_building_work(Game& game,
 
 	Immovable* construction = dynamic_cast<Immovable*>(state.objvar.get(game));
 	if (construction != nullptr) {
-		if (!construction->construct_remaining_buildcost(game, &remaining)) {
+		if (!construction->construct_remaining_buildcost(&remaining)) {
 			psite.molog(game.get_gametime(), "construct: immovable %u not under construction",
 			            construction->serial());
 			psite.program_end(game, ProgramResult::kFailed);
@@ -2174,6 +2176,9 @@ bool ProductionProgram::ActConstruct::get_building_work(Game& game,
 	worker.start_task_program(game, workerprogram);
 	worker.top_state().objvar1 = construction;
 	worker.top_state().coords = state.coord;
+	if (construction != nullptr) {
+		construction->set_reserved_by_worker(true);
+	}
 
 	state.phase = ProgramResult::kFailed;
 	return true;
