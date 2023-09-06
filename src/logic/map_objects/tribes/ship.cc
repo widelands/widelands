@@ -253,9 +253,7 @@ bool Ship::init_fleet(EditorGameBase& egbase) {
 }
 
 void Ship::cleanup(EditorGameBase& egbase) {
-	if (PortDock* last = lastdock_.get(egbase); last != nullptr) {
-		last->erase_warship_request(serial());
-	}
+	erase_warship_soldier_request();
 
 	if (fleet_ != nullptr) {
 		fleet_->remove_ship(egbase, this);
@@ -473,7 +471,7 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 			items_.clear();
 
 			ship_type_ = pending_refit_;
-			dest->erase_warship_request(serial());
+			erase_warship_soldier_request();
 
 			if (ship_type_ == ShipType::kWarship) {
 				start_task_expedition(game);
@@ -762,6 +760,8 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 	}
 
 	if (destination_coords_ != nullptr) {
+		erase_warship_soldier_request();
+
 		if (destination_coords_->has_dockpoint(get_position())) {  // Already there
 			destination_coords_ = nullptr;
 			start_task_idle(game, descr().main_animation(), 250);
@@ -791,6 +791,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 
 			// Sail to the destination port if we're not there yet.
 			if (position.field->get_immovable() != dest) {
+				erase_warship_soldier_request();
 				if (!start_task_movetodock(game, *dest)) {
 					if (send_message_at_destination_) {
 						send_message(
@@ -827,6 +828,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 
 		case MapObjectType::SHIP:
 		case MapObjectType::PINNED_NOTE: {
+			erase_warship_soldier_request();
 			Bob* dest = dynamic_cast<Bob*>(destination_object);
 
 			if (map->calc_distance(position, dest->get_position()) <=
@@ -867,9 +869,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 		}
 	}
 
-	if (PortDock* last = lastdock_.get(game); last != nullptr) {
-		last->erase_warship_request(serial());  // Clear the request when not in port
-	}
+	erase_warship_soldier_request();  // Clear the request when not in port
 
 	if (ship_state_ == ShipStates::kExpeditionScouting && get_ship_type() == ShipType::kTransport) {
 		// TODO(tothxa): Implement expedition options for stop_on_report and report_known
@@ -887,19 +887,65 @@ void Ship::set_soldier_preference(SoldierPreference pref) {
 	update_warship_soldier_request(false);
 }
 
-void Ship::update_warship_soldier_request(bool create) {
-	if (PortDock* dock = lastdock_.get(owner().egbase()); dock != nullptr) {
-		SoldierRequest* req = dock->get_warship_request(serial());
-		if (req != nullptr) {
-			req->set_preference(soldier_preference_);
-			req->update();
-		} else if (create) {
-			req = &dock->create_warship_request(this, soldier_preference_);
-			req->update();
-		}
-	} else if (create) {
-		throw wexception("Attempting to create warship soldier request while not in dock");
+void Ship::erase_warship_soldier_request() {
+	const EditorGameBase& egbase = owner().egbase();
+	if (PortDock* dock = requestdock_.get(egbase); dock != nullptr) {
+		molog(egbase.get_gametime(), "Erasing soldier request at %s",
+		      dock->get_warehouse()->get_warehouse_name().c_str());
+		dock->erase_warship_request(serial());
 	}
+	requestdock_ = nullptr;
+}
+
+void Ship::update_warship_soldier_request(bool create) {
+	const EditorGameBase& egbase = owner().egbase();
+	PortDock* dock = requestdock_.get(egbase);
+
+	if (dock != nullptr) {
+		// We should already have a request
+		molog(egbase.get_gametime(), "Updating existing soldier request at %s",
+		      dock->get_warehouse()->get_warehouse_name().c_str());
+		SoldierRequest* req = dock->get_warship_request(serial());
+		if (req == nullptr) {
+			throw wexception("Ship %s has no soldier request at request dock %s",
+			                 get_shipname().c_str(),
+			                 dock->get_warehouse()->get_warehouse_name().c_str());
+		}
+		req->set_preference(soldier_preference_);
+		req->update();
+		return;
+	}
+
+	if (!create) {
+		// No request exists and none is desired.
+		return;
+	}
+
+	// Create a new request at the current port.
+	dock = lastdock_.get(owner().egbase());
+	if (dock == nullptr) {
+		throw wexception("Ship %s attempts to create warship soldier request while not in dock",
+		                 get_shipname().c_str());
+	}
+	molog(egbase.get_gametime(), "Creating new soldier request at %s",
+	      dock->get_warehouse()->get_warehouse_name().c_str());
+	if (get_position().field->get_immovable() != dock) {
+		throw wexception(
+		   "Ship %s attempts to create warship soldier request while not on request dock %s",
+		   get_shipname().c_str(), dock->get_warehouse()->get_warehouse_name().c_str());
+	}
+
+	SoldierRequest* req = dock->get_warship_request(serial());
+	if (req == nullptr) {
+		req = &dock->create_warship_request(this, soldier_preference_);
+	} else {
+		// TODO(Nordfriese): Can only happen with legacy savegames, replace this with an assert
+		log_warn("Ship %s already has soldier request at new request dock %s", get_shipname().c_str(),
+		         dock->get_warehouse()->get_warehouse_name().c_str());
+	}
+
+	requestdock_ = dock;
+	req->update();
 }
 
 bool Ship::remember_detected_portspace(const Coords& coords) {
@@ -970,6 +1016,7 @@ void Ship::warship_soldier_callback(Game& game,
 	}
 
 	assert(ship->get_owner() == warehouse.get_owner());
+	assert(ship->requestdock_.serial() == warehouse.serial());
 	ship->molog(game.get_gametime(), "%s %u embarked on warship %s", worker->descr().name().c_str(),
 	            worker->serial(), ship->get_shipname().c_str());
 
@@ -1105,7 +1152,7 @@ std::vector<Soldier*> Ship::onboard_soldiers() const {
 std::vector<Soldier*> Ship::associated_soldiers() const {
 	std::vector<Soldier*> result = onboard_soldiers();
 
-	if (PortDock* dock = lastdock_.get(owner().egbase()); dock != nullptr) {
+	if (PortDock* dock = requestdock_.get(owner().egbase()); dock != nullptr) {
 		if (const SoldierRequest* sr = dock->get_warship_request(serial()); sr != nullptr) {
 			if (const Request* request = sr->get_request(); request != nullptr) {
 				for (const Transfer* t : request->get_transfers()) {
@@ -2099,6 +2146,8 @@ uint32_t Ship::calculate_sea_route(EditorGameBase& egbase, PortDock& pd, Path* f
  * Returns false if the dock is unreachable.
  */
 bool Ship::start_task_movetodock(Game& game, PortDock& pd) {
+	erase_warship_soldier_request();
+
 	Path path;
 
 	uint32_t const distance = calculate_sea_route(game, pd, &path);
@@ -2411,6 +2460,7 @@ void Ship::draw(const EditorGameBase& egbase,
 				}
 			}
 		}
+
 		statistics_string = StyleManager::color_tag(
 		   statistics_string, g_style_manager->building_statistics_style().medium_color());
 	}
@@ -2512,15 +2562,22 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 	Bob::log_general_info(egbase);
 
 	molog(egbase.get_gametime(), "Name: %s", get_shipname().c_str());
-	molog(egbase.get_gametime(), "Ship belongs to fleet %u\nlastdock: %s\n",
+	molog(egbase.get_gametime(), "Ship belongs to fleet %u\nlastdock: %s\nrequestdock: %s\n",
 	      fleet_ != nullptr ? fleet_->serial() : 0,
-	      (lastdock_.is_set()) ?
-            format("%u (%s at %3dx%3d)", lastdock_.serial(),
-	                lastdock_.get(egbase)->get_warehouse()->get_warehouse_name().c_str(),
-	                lastdock_.get(egbase)->get_positions(egbase)[0].x,
-	                lastdock_.get(egbase)->get_positions(egbase)[0].y)
-	            .c_str() :
-            "-");
+	      (lastdock_.is_set() ?
+             format("%u (%s at %3dx%3d)", lastdock_.serial(),
+	                 lastdock_.get(egbase)->get_warehouse()->get_warehouse_name().c_str(),
+	                 lastdock_.get(egbase)->get_positions(egbase)[0].x,
+	                 lastdock_.get(egbase)->get_positions(egbase)[0].y)
+	             .c_str() :
+             "-"),
+	      (requestdock_.is_set() ?
+             format("%u (%s at %3dx%3d)", requestdock_.serial(),
+	                 requestdock_.get(egbase)->get_warehouse()->get_warehouse_name().c_str(),
+	                 requestdock_.get(egbase)->get_positions(egbase)[0].x,
+	                 requestdock_.get(egbase)->get_positions(egbase)[0].y)
+	             .c_str() :
+             "-"));
 	if (const PortDock* dock = get_destination_port(egbase); dock != nullptr) {
 		molog(egbase.get_gametime(), "Has destination port %u (%3dx%3d) %s\n", dock->serial(),
 		      dock->get_positions(egbase)[0].x, dock->get_positions(egbase)[0].y,
@@ -2608,8 +2665,9 @@ Load / Save implementation
  * 12 - v1.1
  * 13 - Added warships and naval warfare.
  * 14 - Another naval warfare change (coords as destination and soldier preference).
+ * 15 - Another naval warfare change (remember request dock).
  */
-constexpr uint8_t kCurrentPacketVersion = 14;
+constexpr uint8_t kCurrentPacketVersion = 15;
 
 const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	if (name == "shipidle" || name == "ship") {
@@ -2694,6 +2752,7 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 			soldier_preference_ = static_cast<SoldierPreference>(fr.unsigned_8());
 		}
 		lastdock_ = fr.unsigned_32();
+		requestdock_ = packet_version >= 15 ? fr.unsigned_32() : 0;
 		destination_object_ = fr.unsigned_32();
 		destination_coords_ = packet_version >= 14 ? fr.unsigned_32() : 0;
 
@@ -2713,6 +2772,9 @@ void Ship::Loader::load_pointers() {
 
 	if (lastdock_ != 0u) {
 		ship.lastdock_ = &mol().get<PortDock>(lastdock_);
+	}
+	if (requestdock_ != 0u) {
+		ship.requestdock_ = &mol().get<PortDock>(requestdock_);
 	}
 	if (destination_object_ != 0u) {
 		MapObject& mo = mol().get<MapObject>(destination_object_);
@@ -2899,6 +2961,7 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_32(warship_soldier_capacity_);
 	fw.unsigned_8(static_cast<uint8_t>(soldier_preference_));
 	fw.unsigned_32(mos.get_object_file_index_or_zero(lastdock_.get(egbase)));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(requestdock_.get(egbase)));
 	fw.unsigned_32(mos.get_object_file_index_or_zero(destination_object_.get(egbase)));
 	fw.unsigned_32(destination_coords_ == nullptr ? 0 : destination_coords_->serial);
 
