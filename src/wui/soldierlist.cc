@@ -62,6 +62,7 @@ struct SoldierPanel : UI::Panel {
 
 	void think() override;
 	void draw(RenderTarget& /*dst*/) override;
+	void update_size();
 
 	void set_mouseover(const SoldierFn& fn);
 	void set_click(const SoldierFn& fn);
@@ -178,8 +179,6 @@ SoldierPanel::SoldierPanel(UI::Panel& parent,
 		rows_ = (maxcapacity + cols_ - 1) / cols_;
 	}
 
-	set_size(cols_ * icon_width_, rows_ * icon_height_);
-	set_desired_size(cols_ * icon_width_, rows_ * icon_height_);
 	set_thinks(true);
 
 	// Initialize the icons
@@ -209,6 +208,19 @@ SoldierPanel::SoldierPanel(UI::Panel& parent,
 			row++;
 		}
 	}
+
+	update_size();
+}
+
+void SoldierPanel::update_size() {
+	uint32_t max_row = 0;
+	for (const Icon& icon : icons_) {
+		max_row = std::max(max_row, icon.row);
+	}
+	++max_row;
+
+	set_size(cols_ * icon_width_, max_row * icon_height_);
+	set_desired_size(cols_ * icon_width_, max_row * icon_height_);
 }
 
 /**
@@ -347,6 +359,7 @@ void SoldierPanel::think() {
 	if (changes) {
 		Vector2i mousepos = get_mouse_position();
 		mouseover_fn_(find_soldier(mousepos.x, mousepos.y));
+		update_size();
 	}
 }
 
@@ -425,11 +438,11 @@ bool SoldierPanel::handle_mousemove(
 bool SoldierPanel::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
 		if (click_fn_) {
-			if (const Widelands::Soldier* soldier = find_soldier(x, y)) {
+			if (const Widelands::Soldier* soldier = find_soldier(x, y); soldier != nullptr) {
 				click_fn_(soldier);
+				return true;
 			}
 		}
-		return true;
 	}
 
 	return false;

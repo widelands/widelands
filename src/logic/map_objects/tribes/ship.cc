@@ -1424,6 +1424,7 @@ void Ship::battle_update(Game& game) {
 			                          _("An enemy ship has destroyed your warship."),
 			                          "images/wui/ship/ship_attack.png");
 
+			target_ship->hitpoints_ = 0;
 			target_ship->battles_.clear();
 			target_ship->reset_tasks(game);
 			target_ship->set_ship_state_and_notify(
@@ -2382,7 +2383,9 @@ void Ship::draw(const EditorGameBase& egbase,
 	// Show ship name and current activity
 	std::string statistics_string;
 	if ((info_to_draw & InfoToDraw::kStatistics) != 0) {
-		if (has_battle()) {
+		if (state_is_sinking()) {
+			statistics_string = pgettext("ship_state", "Sinking");
+		} else if (has_battle()) {
 			statistics_string = pgettext("ship_state", "Fighting");
 		} else if (is_refitting()) {
 			switch (pending_refit_) {

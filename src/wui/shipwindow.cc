@@ -67,7 +67,8 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
      ship_(ship),
      vbox_(this, UI::PanelStyle::kWui, "vbox", 0, 0, UI::Box::Vertical),
      navigation_box_(&vbox_, UI::PanelStyle::kWui, "navigation_box", 0, 0, UI::Box::Vertical),
-     warship_capacity_control_(create_soldier_list(vbox_, ibase_, *ship)) {
+     warship_capacity_control_(create_soldier_list(vbox_, ibase_, *ship)),
+     warship_health_(&vbox_, UI::PanelStyle::kWui, "health", UI::FontStyle::kWuiLabel, "", UI::Align::kCenter) {
 	vbox_.set_inner_spacing(kPadding);
 	assert(ship->get_owner());
 
@@ -80,10 +81,17 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 		name_field_ = nullptr;
 	}
 
+	warship_health_.set_tooltip(format(ngettext(
+			"Damaged warships regain %u hitpoint per second when anchored in a port.",
+			"Damaged warships regain %u hitpoints per second when anchored in a port.",
+			ship->descr().heal_per_second_), ship->descr().heal_per_second_));
+	warship_health_.set_handle_mouse(true);
+
 	display_ = new ItemWaresDisplay(&vbox_, ship->owner());
 	display_->set_capacity(ship->get_capacity());
 	vbox_.add(display_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	vbox_.add(warship_capacity_control_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	vbox_.add(&warship_health_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	// Expedition buttons
 	UI::Box* exp_top =
@@ -304,8 +312,9 @@ void ShipWindow::update_destination_buttons(const Widelands::Ship* ship) {
 		all_spaces.push_back(dps.get());
 	}
 
-	bool needs_update = (set_destination_->size() != all_ports.size() + all_ships.size() +
-	                                                    all_notes.size() + all_spaces.size() + 1);
+	bool needs_update = (set_destination_->unfiltered_size() != all_ports.size() + all_ships.size() +
+	                                                              all_notes.size() +
+	                                                              all_spaces.size() + 1);
 	if (!needs_update) {
 		size_t i = 0;
 		for (Widelands::PortDock* pd : all_ports) {
@@ -465,6 +474,11 @@ void ShipWindow::think() {
 			display_->add(Widelands::wwWORKER, worker->descr().worker_index());
 		}
 	}
+
+	const uint32_t max_hitpoints = ship->descr().max_hitpoints_;
+	const uint32_t cur_hitpoints = ship->get_hitpoints();
+	warship_health_.set_visible(cur_hitpoints < max_hitpoints || ship->get_ship_type() == Widelands::ShipType::kWarship);
+	warship_health_.set_text(format(_("HP: %1$u/%2$u"), cur_hitpoints, max_hitpoints));
 
 	Widelands::ShipStates state = ship->get_ship_state();
 	if (ship->state_is_expedition()) {
