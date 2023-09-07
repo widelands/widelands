@@ -1301,45 +1301,81 @@ void WLApplication::parse_commandline(int const argc, char const* const* const a
 	}
 }
 
+namespace {
+
+void throw_extra_value(const std::string& opt) {
+	throw ParameterError(
+	   CmdLineVerbosity::None, format(_("Command line parameter --%s can not use a value"), opt));
+}
+
+void throw_empty_value(const std::string& opt) {
+	throw ParameterError(
+	   CmdLineVerbosity::None, format(_("Empty value of command line parameter --%s"), opt));
+}
+
+void throw_exclusive(const std::string& opt, const std::string& other) {
+	throw ParameterError(
+	   CmdLineVerbosity::None,
+	   format(_("Command line parameters --%s and --%s can not be combined"), opt, other));
+}
+
+}  // namespace
+
+// Checks and returns whether `param` was set, but throws ParameterError if it also had a value.
+bool WLApplication::check_commandline_flag(const std::string& opt) {
+	if (commandline_.count(opt) == 0u) {
+		return false;
+	}
+	if (!commandline_.at(opt).empty()) {
+		throw_extra_value(opt);
+	}
+	commandline_.erase(opt);
+	return true;
+}
+
+// Returns the value of `opt`. Only returns std::nullopt if `opt` was not used.
+// If `opt` was used without a value, then returns an empty string if `allow_empty` is true,
+// otherwise throws ParameterError.
+std::optional<std::string>
+WLApplication::get_commandline_option_value(const std::string& opt, const bool allow_empty) {
+	if (commandline_.count(opt) == 0u) {
+		return std::nullopt;
+	}
+	std::string rv = commandline_.at(opt);
+	commandline_.erase(opt);
+	if (!allow_empty && rv.empty()) {
+		throw_empty_value(opt);
+	}
+	return rv;
+}
+
 /**
  * Parse the command line given in commandline_
  *
  * \throw a ParameterError if there were errors during parsing \e or if "--help"
  */
 void WLApplication::handle_commandline_parameters() {
-	auto throw_empty_value = [](const std::string& opt) {
-		throw ParameterError(
-		   CmdLineVerbosity::None, format(_("Empty value of command line parameter: %s"), opt));
-	};
 
-	auto throw_exclusive = [](const std::string& opt) {
-		throw ParameterError(
-		   CmdLineVerbosity::None, format(_("%s can not be combined with other actions"), opt));
-	};
-
-	if (commandline_.count("nosound") != 0u) {
+	if (check_commandline_flag("nosound")) {
 		SoundHandler::disable_backend();
-		commandline_.erase("nosound");
 	}
-	if (commandline_.count("verbose-i18n") != 0u) {
+	if (check_commandline_flag("verbose-i18n")) {
 		i18n::enable_verbose_i18n();
-		commandline_.erase("verbose-i18n");
 	}
-	if (commandline_.count("fail-on-lua-error") != 0u) {
+	if (check_commandline_flag("fail-on-lua-error")) {
 		g_fail_on_lua_error = true;
-		commandline_.erase("fail-on-lua-error");
 	}
-	if (commandline_.count("nozip") != 0u) {
+	if (check_commandline_flag("nozip")) {
 		set_config_bool("nozip", true);
-		commandline_.erase("nozip");
 	}
+
 	if (commandline_.count("localedir") != 0u) {
 		localedir_ = commandline_["localedir"];
 		commandline_.erase("localedir");
 	}
 
-	const bool skip_check_datadir_version = commandline_.count("skip_check_datadir_version") != 0u;
-	commandline_.erase("skip_check_datadir_version");
+	const bool skip_check_datadir_version = check_commandline_flag("skip_check_datadir_version");
+
 	auto checkdatadirversion = [skip_check_datadir_version](const std::string& dd) {
 		if (skip_check_datadir_version) {
 			return std::string();
@@ -1459,7 +1495,7 @@ void WLApplication::handle_commandline_parameters() {
 			if (found) {
 				init_language();
 			}
-			throw_empty_value("--language");
+			throw_empty_value("language");
 		}
 	}
 	if (found) {
@@ -1478,124 +1514,72 @@ void WLApplication::handle_commandline_parameters() {
 		commandline_.erase("datadir_for_testing");
 	}
 
-	if (commandline_.count("verbose") != 0u) {
+	if (check_commandline_flag("verbose")) {
 		g_verbose = true;
-		commandline_.erase("verbose");
 	}
 
-	if (commandline_.count("editor") != 0u) {
-		filename_ = commandline_["editor"];
-		if (!filename_.empty() && *filename_.rbegin() == '/') {
+	const std::map<GameType, std::string> game_type_options = {
+		{ GameType::kEditor, "editor" },
+		{ GameType::kReplay, "replay" },
+		{ GameType::kFromTemplate, "new_game_from_template" },
+		{ GameType::kLoadGame, "loadgame" },
+		{ GameType::kScenario, "scenario" }
+	};
+
+	for (auto pair : game_type_options) {
+		const std::string& opt = pair.second;
+		const bool allow_empty = opt == "editor";
+		auto val = get_commandline_option_value(opt, allow_empty);
+		if (!val.has_value()) {
+			continue;
+		}
+
+		if (game_type_ != GameType::kNone) {
+			throw_exclusive(opt, game_type_options.at(game_type_));
+		}
+		game_type_ = pair.first;
+
+		filename_ = *val;
+		if (/* !filename_.empty() && */ *filename_.rbegin() == '/') {
+			// Strip trailing directory separator
 			filename_.erase(filename_.size() - 1);
 		}
-		game_type_ = GameType::kEditor;
-		commandline_.erase("editor");
 	}
 
-	if (commandline_.count("replay") != 0u) {
-		if (game_type_ != GameType::kNone) {
-			throw_exclusive("replay");
-		}
-		filename_ = commandline_["replay"];
-		if (filename_.empty()) {
-			throw_empty_value("--replay");
-		}
-		if (*filename_.rbegin() == '/') {
-			filename_.erase(filename_.size() - 1);
-		}
-		game_type_ = GameType::kReplay;
-		commandline_.erase("replay");
-	}
-
-	if (commandline_.count("new_game_from_template") != 0u) {
-		if (game_type_ != GameType::kNone) {
-		}
-		filename_ = commandline_["new_game_from_template"];
-		if (filename_.empty()) {
-			throw_empty_value("--new_game_from_template");
-		}
-		game_type_ = GameType::kFromTemplate;
-		commandline_.erase("new_game_from_template");
-	}
-
-	if (commandline_.count("loadgame") != 0u) {
-		if (game_type_ != GameType::kNone) {
-			throw_exclusive("loadgame");
-		}
-		filename_ = commandline_["loadgame"];
-		if (filename_.empty()) {
-			throw_empty_value("--loadgame");
-		}
-		if (*filename_.rbegin() == '/') {
-			filename_.erase(filename_.size() - 1);
-		}
-		game_type_ = GameType::kLoadGame;
-		commandline_.erase("loadgame");
-	}
-
-	if (commandline_.count("scenario") != 0u) {
-		if (game_type_ != GameType::kNone) {
-			throw_exclusive("scenario");
-		}
-		filename_ = commandline_["scenario"];
-		if (filename_.empty()) {
-			throw_empty_value("--scenario");
-		}
-		if (*filename_.rbegin() == '/') {
-			filename_.erase(filename_.size() - 1);
-		}
-		game_type_ = GameType::kScenario;
-		commandline_.erase("scenario");
-	}
-	if (commandline_.count("script") != 0u) {
-		script_to_run_ = commandline_["script"];
-		if (script_to_run_.empty()) {
-			throw_empty_value("--script");
-		}
+	if (auto val = get_commandline_option_value("script"); val.has_value()) {
+		script_to_run_ = *val;
 		if (*script_to_run_.rbegin() == '/') {
+			// Strip trailing directory separator
 			script_to_run_.erase(script_to_run_.size() - 1);
 		}
-		commandline_.erase("script");
 	}
 
 	// Following is used for training of AI
-	if (commandline_.count("ai_training") != 0u) {
-		set_config_bool("ai_training", true);
-		commandline_.erase("ai_training");
-	} else {
-		set_config_bool("ai_training", false);
-	}
+	set_config_bool("ai_training", check_commandline_flag("ai_training"));
 
-	if (commandline_.count("auto_speed") != 0u) {
-		set_config_bool("auto_speed", true);
-		commandline_.erase("auto_speed");
-	} else {
-		set_config_bool("auto_speed", false);
-	}
+	set_config_bool("auto_speed", check_commandline_flag("auto_speed"));
 
-	if (commandline_.count("enable_development_testing_tools") != 0u) {
+	if (check_commandline_flag("enable_development_testing_tools")) {
 		g_allow_script_console = true;
-		commandline_.erase("enable_development_testing_tools");
 	}
 #ifndef NDEBUG
 	// Always enable in debug builds
 	g_allow_script_console = true;
 #endif
 
-	if (commandline_.count("write_syncstreams") != 0u) {
+	if (check_commandline_flag("write_syncstreams")) {
 		g_write_syncstreams = true;
-		commandline_.erase("write_syncstreams");
 	}
 
-	if (commandline_.count("version") != 0u) {
+	if (check_commandline_flag("version")) {
 		throw ParameterError(CmdLineVerbosity::None);  // No message on purpose
 	}
 
-	if (commandline_.count("help-all") != 0u) {
+	if (check_commandline_flag("help-all")) {
 		throw ParameterError(CmdLineVerbosity::All);  // No message on purpose
 	}
 
-	if (commandline_.count("help") != 0u) {
+	if (check_commandline_flag("help")) {
 		throw ParameterError(CmdLineVerbosity::Normal);  // No message on purpose
 	}
 
