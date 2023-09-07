@@ -7,15 +7,16 @@
 # Jonas Richardsen <jonas.richardsen@isdas.de>, 2017
 # Elisabeth Jäger, 2018
 # Wuzzy <Wuzzy@disroot.org>, 2022
-# Stephan Lutz <stephan-lutz@gmx.de>, 2022
+# Simon Heimberg, 2023
+# Stephan Lutz <stephan-lutz@gmx.de>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2022\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2023\n"
 "Language-Team: German (https://app.transifex.com/widelands/teams/35159/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -830,7 +831,7 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:408
 msgid "Now we can focus on rebuilding our economy."
 msgstr ""
-"Jetzt können wir uns auf den Wiederaufbau unserer Wirtschaft konzentieren."
+"Jetzt können wir uns auf den Wiederaufbau unserer Wirtschaft konzentrieren."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:414
 msgid "Amalea Shakes Her Head"
@@ -906,7 +907,7 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:439
 msgid "I am really very curious about what will go wrong next!"
-msgstr "Ich bin sehr neugierig, was wohl als nächstes schiefläuft."
+msgstr "Ich bin sehr neugierig, was wohl als nächstes schief läuft."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:444
 msgid "Amalea Shrugs"
@@ -1244,7 +1245,7 @@ msgid ""
 "Look Brother, I have just realized we haven’t cleared the road network yet. "
 "I think we should do so very quickly to free enough space for new buildings."
 msgstr ""
-"Mir ist grade aufgefallen, dass wir das Straßennetz noch immer nicht in "
+"Mir ist gerade aufgefallen, dass wir das Straßennetz noch immer nicht in "
 "Ordnung gebracht haben. Das sollten wir schleunigst nachholen, um Platz für "
 "neue Gebäude zu schaffen."
 
@@ -1410,7 +1411,7 @@ msgstr "Trotz"
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:652
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:660
 msgid "Saledus asserts his point…"
-msgstr "Saledus bekräfitgt seinen Standpunkt …"
+msgstr "Saledus bekräftigt seinen Standpunkt …"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:654
@@ -1487,9 +1488,9 @@ msgid ""
 "train them well. It is important to increase the strength of our soldiers as"
 " fast as we can."
 msgstr ""
-"Genreal, obwohl wir begonnen haben, neue Soldaten zu rekrutieren, müssen wir"
-" sie immer noch ausbilden. Es ist wichtig, die Stärke unserer Soldaten so "
-"schnell wie möglich zu steigern."
+"Generell, obwohl wir begonnen haben, neue Soldaten zu rekrutieren, müssen "
+"wir sie immer noch ausbilden. Es ist wichtig, die Stärke unserer Soldaten so"
+" schnell wie möglich zu steigern."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:689
 msgid ""

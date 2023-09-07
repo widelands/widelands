@@ -39,14 +39,16 @@ TechInfoLine::TechInfoLine(UI::Panel* parent,
                            std::string label,
                            std::string value,
                            bool right_to_left)
-   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+   : UI::Box(parent, UI::PanelStyle::kFsMenu, "tech_info_line", 0, 0, UI::Box::Horizontal),
      label_(this,
             UI::PanelStyle::kFsMenu,
+            "tech_info_label",
             UI::FontStyle::kFsMenuInfoPanelHeading,
             label,
             UI::mirror_alignment(UI::Align::kLeft, right_to_left)),
      value_(this,
             UI::PanelStyle::kFsMenu,
+            "tech_info_value",
             UI::FontStyle::kFsMenuInfoPanelParagraph,
             value,
             UI::mirror_alignment(UI::Align::kRight, right_to_left)) {
@@ -58,7 +60,7 @@ TechInfoLine::TechInfoLine(UI::Panel* parent,
 }
 
 TechInfoBox::TechInfoBox(UI::Panel* parent, TechInfoBox::Type t)
-   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical) {
+   : UI::Box(parent, UI::PanelStyle::kFsMenu, "tech_info_box", 0, 0, UI::Box::Vertical) {
 	struct ContentT {
 		std::string label, localized_label, value, localized_value;
 	};
@@ -125,9 +127,9 @@ TechInfoBox::TechInfoBox(UI::Panel* parent, TechInfoBox::Type t)
 	if (space > 0) {
 		add_space(space);
 	}
-	UI::Textarea* title =
-	   new UI::Textarea(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsGameSetupHeadings,
-	                    _("Technical Info"), UI::Align::kCenter);
+	UI::Textarea* title = new UI::Textarea(this, UI::PanelStyle::kFsMenu, "tech_info_heading",
+	                                       UI::FontStyle::kFsGameSetupHeadings, _("Technical Info"),
+	                                       UI::Align::kCenter);
 	add(title, UI::Box::Resizing::kFullSize);
 	if (t == TechInfoBox::Type::kAbout) {
 		title->set_style_override(title_style.font());
@@ -137,13 +139,13 @@ TechInfoBox::TechInfoBox(UI::Panel* parent, TechInfoBox::Type t)
 		add_space(space);
 	}
 
-	std::string report;
+	report_.clear();
 	for (const ContentT& c : content) {
-		report += "> ";
-		report += c.label;
-		report += ' ';
-		report += c.value;
-		report += "  \n";
+		report_ += "> ";
+		report_ += c.label;
+		report_ += ' ';
+		report_ += c.value;
+		report_ += "  \n";
 
 		add_space(kSpacing);
 		add(new TechInfoLine(this, c.localized_label,
@@ -151,11 +153,12 @@ TechInfoBox::TechInfoBox(UI::Panel* parent, TechInfoBox::Type t)
 		    UI::Box::Resizing::kFullSize);
 	}
 
-	UI::Box* buttonbox = new UI::Box(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal);
+	UI::Box* buttonbox =
+	   new UI::Box(this, UI::PanelStyle::kFsMenu, "buttons_box", 0, 0, UI::Box::Horizontal);
 	UI::Button* copy =
 	   new UI::Button(buttonbox, "copy", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Copy"),
 	                  _("Copy the technical report to the clipboard"));
-	copy->sigclicked.connect([report]() { SDL_SetClipboardText(report.c_str()); });
+	copy->sigclicked.connect([this]() { SDL_SetClipboardText(report_.c_str()); });
 
 	buttonbox->add_inf_space();
 	buttonbox->add(copy, UI::Box::Resizing::kExpandBoth);

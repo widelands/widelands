@@ -36,15 +36,16 @@ color_tag(const RGBColor& c, const std::string& text1, const std::string& text2)
 	return format(_("%1$s %2$s"), StyleManager::color_tag(text1, c), text2);
 }
 
-StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registry)
+StockMenu::StockMenu(InteractivePlayer& plr, Registry& registry)
    : UI::UniqueWindow(&plr, UI::WindowStyle::kWui, "stock_menu", &registry, 480, 640, _("Stock")),
      player_(plr),
      colors_(g_style_manager->building_statistics_style()),
-     main_box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-     tabs_(&main_box_, UI::TabPanelStyle::kWuiDark),
+     main_box_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical),
+     tabs_(&main_box_, UI::TabPanelStyle::kWuiDark, "tabs"),
      solid_icon_backgrounds_(
         &main_box_,
         UI::PanelStyle::kWui,
+        "evaluate",
         Vector2i::zero(),
         /** TRANSLATORS: If this checkbox is ticked, all icons in the stock menu are drawn with
            different background colors; each icon's color indicates whether the stock is higher or
@@ -83,17 +84,21 @@ StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registr
 	          warehouse_workers_, _("Workers in warehouses"));
 
 	solid_icon_backgrounds_.changedto.connect([this](const bool b) {
+		dynamic_cast<Registry*>(registry_)->solid_icon_backgrounds = b;
 		all_wares_->set_solid_icon_backgrounds(!b);
 		all_workers_->set_solid_icon_backgrounds(!b);
 		warehouse_wares_->set_solid_icon_backgrounds(!b);
 		warehouse_workers_->set_solid_icon_backgrounds(!b);
 	});
+	tabs_.sigclicked.connect(
+	   [this]() { dynamic_cast<Registry*>(registry_)->active_tab = tabs_.active(); });
 
 	main_box_.add(&tabs_, UI::Box::Resizing::kExpandBoth);
 	main_box_.add(&solid_icon_backgrounds_, UI::Box::Resizing::kFullSize);
 
 	// Preselect the wares_in_warehouses tab
-	tabs_.activate(2);
+	tabs_.activate(registry.active_tab);
+	solid_icon_backgrounds_.set_state(registry.solid_icon_backgrounds);
 
 	initialization_complete();
 }
@@ -130,8 +135,11 @@ void StockMenu::think() {
  * \ref Economy of a player may change)
  */
 void StockMenu::fill_total_waresdisplay(WaresDisplay* waresdisplay, Widelands::WareWorker type) {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	waresdisplay->remove_all_warelists();
 	const Widelands::Player& player = *player_.get_player();
+
 	for (const auto& economy : player.economies()) {
 		if (economy.second->type() == type) {
 			waresdisplay->add_warelist(economy.second->get_wares_or_workers());
@@ -145,7 +153,10 @@ void StockMenu::fill_total_waresdisplay(WaresDisplay* waresdisplay, Widelands::W
  */
 void StockMenu::fill_warehouse_waresdisplay(WaresDisplay* waresdisplay,
                                             Widelands::WareWorker type) {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	waresdisplay->remove_all_warelists();
+
 	for (const auto& economy : player_.player().economies()) {
 		if (economy.second->type() == type) {
 			for (const auto* warehouse : economy.second->warehouses()) {

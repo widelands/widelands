@@ -10,6 +10,8 @@ wl_library(ui_fsmenu
     campaigns.h
     campaign_select.cc
     campaign_select.h
+    crash_report.cc
+    crash_report.h
     helpwindow.cc
     helpwindow.h
     internet_lobby.cc
@@ -63,6 +65,7 @@ wl_library(ui_fsmenu
     base
     base_exceptions
     base_random
+    base_time_string
     build_info
     editor
     graphic
@@ -73,6 +76,7 @@ wl_library(ui_fsmenu
     graphic_surface
     graphic_text
     graphic_text_layout
+    io_fileread
     io_filesystem
     io_profile
     logic

@@ -266,6 +266,9 @@ struct Client {
 	/// relative
 	/// to when the last answer of the client was received.
 	time_t lastdelta;
+
+	std::set<std::string> custom_ship_names;
+	std::set<std::string> custom_warehouse_names;
 };
 
 struct GameHostImpl {
@@ -498,16 +501,51 @@ void GameHost::run_callback() {
 	SendPacket packet;
 	packet.unsigned_8(NETCMD_LAUNCH);
 	packet.unsigned_32(rng_seed);
+
 	packet.unsigned_32(game_->enabled_addons().size());
 	for (const auto& a : game_->enabled_addons()) {
 		packet.string(a->internal_name);
 	}
+
+	std::map<Widelands::PlayerNumber, std::pair<std::set<std::string>, std::set<std::string>>>
+	   custom_naming_lists;
+	if (!d->settings.savegame) {  // Naming lists don't make sense in savegames
+		int playernumber = d->settings.playernum + 1;
+		if (playernumber > 0 && playernumber <= UserSettings::highest_playernum()) {
+			custom_naming_lists.emplace(playernumber, Widelands::read_custom_warehouse_ship_names());
+		}
+
+		for (Client& client : d->clients) {
+			playernumber = client.playernum + 1;
+			if (playernumber > 0 && playernumber <= UserSettings::highest_playernum()) {
+				// Merge instead of overwrite - multiple clients can share a player
+				custom_naming_lists[playernumber].first.insert(
+				   client.custom_ship_names.begin(), client.custom_ship_names.end());
+				custom_naming_lists[playernumber].second.insert(
+				   client.custom_warehouse_names.begin(), client.custom_warehouse_names.end());
+			}
+		}
+
+		for (const auto& lists : custom_naming_lists) {
+			packet.unsigned_8(lists.first);
+			packet.unsigned_32(lists.second.first.size());
+			for (const std::string& name : lists.second.first) {
+				packet.string(name);
+			}
+			packet.unsigned_32(lists.second.second.size());
+			for (const std::string& name : lists.second.second) {
+				packet.string(name);
+			}
+		}
+	}
+	packet.unsigned_8(0);  // End of naming lists section
+
 	broadcast(packet);
 
 	game_->logic_rand_seed(rng_seed);
 	game_->set_ai_training_mode(get_config_bool("ai_training", false));
 	game_->set_auto_speed(get_config_bool("auto_speed", false));
-	game_->set_write_syncstream(get_config_bool("write_syncstreams", true));
+	game_->set_write_syncstream(g_write_syncstreams);
 
 	if (capsule_ != nullptr) {
 		capsule_->set_visible(false);
@@ -550,6 +588,13 @@ void GameHost::run_callback() {
 		} else {  // savegame
 			game_->init_savegame(d->settings);
 		}
+
+		for (const auto& lists : custom_naming_lists) {
+			Widelands::Player* player = game_->get_safe_player(lists.first);
+			player->set_shipnames(lists.second.first);
+			player->set_warehousenames(lists.second.second);
+		}
+
 		d->pseudo_networktime = game_->get_gametime();
 		d->time.reset(d->pseudo_networktime);
 		d->lastframe = SDL_GetTicks();
@@ -579,7 +624,7 @@ void GameHost::run_callback() {
 	} catch (const std::exception& e) {
 		FsMenu::MainMenu* parent =
 		   capsule_ != nullptr ? &capsule_->menu() : nullptr;  // make includes script happy
-		WLApplication::emergency_save(parent, *game_, e.what(), player_number);
+		WLApplication::emergency_save(parent, *game_, e.what(), player_number, false);
 		clear_computer_players();
 
 		while (!d->clients.empty()) {
@@ -1789,6 +1834,16 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	}
 
 	send_system_message_code("CLIENT_HAS_JOINED_GAME", effective_name);
+
+	if (g_allow_script_console) {
+		// TODO(tothxa): The host could warn only the new client, but other clients can only
+		//               broadcast:
+		//                 1. They can only send commands to the host
+		//                 2. System messages are assembled and translated on each client, so
+		//                    individual players can't be @-addressed
+		//               Until this is solved, it's better if the host broadcasts too.
+		send_system_message_code("CAN_CHEAT", d->localplayername);
+	}
 }
 
 void GameHost::committed_network_time(const Time& time) {
@@ -2264,7 +2319,7 @@ void GameHost::handle_nettime(uint32_t const client_num, RecvPacket& r) {
 	receive_client_time(client_num, Time(r.unsigned_32()));
 }
 
-void GameHost::handle_playercommmand(uint32_t const client_num, Client& client, RecvPacket& r) {
+void GameHost::handle_playercommand(uint32_t const client_num, Client& client, RecvPacket& r) {
 	if (d->game == nullptr) {
 		throw DisconnectException("PLAYERCMD_WO_GAME");
 	}
@@ -2277,6 +2332,17 @@ void GameHost::handle_playercommmand(uint32_t const client_num, Client& client, 
 		throw DisconnectException("PLAYERCMD_FOR_OTHER");
 	}
 	do_send_player_command(plcmd);
+}
+
+void GameHost::handle_custom_naming_lists(Client& client, RecvPacket& r) {
+	client.custom_ship_names.clear();
+	client.custom_warehouse_names.clear();
+	for (size_t i = r.unsigned_32(); i > 0; --i) {
+		client.custom_ship_names.insert(r.string());
+	}
+	for (size_t i = r.unsigned_32(); i > 0; --i) {
+		client.custom_warehouse_names.insert(r.string());
+	}
 }
 
 void GameHost::handle_syncreport(uint32_t const client_num, Client& client, RecvPacket& r) {
@@ -2372,7 +2438,9 @@ void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
 	case NETCMD_TIME:
 		return handle_nettime(client_num, r);
 	case NETCMD_PLAYERCOMMAND:
-		return handle_playercommmand(client_num, client, r);
+		return handle_playercommand(client_num, client, r);
+	case NETCMD_CUSTOM_NAMING_LISTS:
+		return handle_custom_naming_lists(client, r);
 	case NETCMD_SYNCREPORT:
 		return handle_syncreport(client_num, client, r);
 	case NETCMD_CHAT:
@@ -2405,12 +2473,15 @@ void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
 	}
 }
 
+static const std::set<std::string> cheating_message_codes = {
+   "CHEAT", "CAN_CHEAT", "SWITCHED_PLAYER", "CHEAT_OTHER"};
+
 void GameHost::handle_system_message(RecvPacket& packet) {
 	const std::string code = packet.string();
 	const std::string arg1 = packet.string();
 	const std::string arg2 = packet.string();
 	const std::string arg3 = packet.string();
-	if (code != "CHEAT") {
+	if (cheating_message_codes.count(code) == 0) {
 		log_err("[Host]: Received system command %s(%s,%s,%s) from client", code.c_str(),
 		        arg1.c_str(), arg2.c_str(), arg3.c_str());
 		throw DisconnectException("MALFORMED_COMMANDS");

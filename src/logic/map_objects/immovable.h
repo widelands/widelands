@@ -236,7 +236,7 @@ public:
 
 	void switch_program(Game& game, const std::string& program_name);
 	bool construct_ware(Game& game, DescriptionIndex index);
-	bool construct_remaining_buildcost(Game& game, Buildcost* buildcost);
+	bool construct_remaining_buildcost(Buildcost* buildcost);
 
 	void set_action_data(ImmovableActionData* data);
 	template <typename T> T* get_action_data() {

@@ -51,41 +51,75 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                       100,
                       _("Building Statistics")),
      style_(g_style_manager->building_statistics_style()),
-     main_box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical, 0, 0, kMargin),
-     tab_panel_(&main_box_, UI::TabPanelStyle::kWuiDark),
+     main_box_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical, 0, 0, kMargin),
+     tab_panel_(&main_box_, UI::TabPanelStyle::kWuiDark, "tabs"),
 
-     hbox_owned_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
-     hbox_construction_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
-     hbox_unproductive_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
+     hbox_owned_(
+        &main_box_, UI::PanelStyle::kWui, "owned_hbox", 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
+     hbox_construction_(&main_box_,
+                        UI::PanelStyle::kWui,
+                        "construction_hbox",
+                        0,
+                        0,
+                        UI::Box::Horizontal,
+                        0,
+                        0,
+                        kMargin),
+     hbox_unproductive_(&main_box_,
+                        UI::PanelStyle::kWui,
+                        "unproductive_hbox",
+                        0,
+                        0,
+                        UI::Box::Horizontal,
+                        0,
+                        0,
+                        kMargin),
 
      label_name_(&main_box_,
                  UI::PanelStyle::kWui,
+                 "label_name",
                  UI::FontStyle::kWuiLabel,
                  _("(no building selected)"),
                  UI::Align::kCenter),
      label_owned_(&hbox_owned_,
                   UI::PanelStyle::kWui,
+                  "label_owned",
                   UI::FontStyle::kWuiLabel,
                   _("Owned:"),
                   UI::Align::kLeft),
      label_construction_(&hbox_construction_,
                          UI::PanelStyle::kWui,
+                         "label_construction",
                          UI::FontStyle::kWuiLabel,
                          _("Under construction:"),
                          UI::Align::kLeft),
      label_unproductive_(&hbox_unproductive_,
                          UI::PanelStyle::kWui,
+                         "label_unproductive",
                          UI::FontStyle::kWuiLabel,
                          "" /* text will be set later */,
                          UI::Align::kLeft),
-     label_nr_owned_(
-        &hbox_owned_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, "", UI::Align::kRight),
-     label_nr_construction_(
-        &hbox_construction_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, "", UI::Align::kRight),
-     label_nr_unproductive_(
-        &hbox_unproductive_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, "", UI::Align::kRight),
+     label_nr_owned_(&hbox_owned_,
+                     UI::PanelStyle::kWui,
+                     "owned",
+                     UI::FontStyle::kWuiLabel,
+                     "",
+                     UI::Align::kRight),
+     label_nr_construction_(&hbox_construction_,
+                            UI::PanelStyle::kWui,
+                            "construction",
+                            UI::FontStyle::kWuiLabel,
+                            "",
+                            UI::Align::kRight),
+     label_nr_unproductive_(&hbox_unproductive_,
+                            UI::PanelStyle::kWui,
+                            "unproductive",
+                            UI::FontStyle::kWuiLabel,
+                            "",
+                            UI::Align::kRight),
      label_threshold_(&main_box_,
                       UI::PanelStyle::kWui,
+                      "label_threshold",
                       UI::FontStyle::kWuiLabel,
                       _("Low productivity threshold:"),
                       UI::Align::kLeft),
@@ -148,6 +182,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                           _("Show next building")),
 
      unproductive_threshold_(&main_box_,
+                             "unproductive_threshold",
                              0,
                              0,
                              kSpinboxWidth,
@@ -285,8 +320,10 @@ void BuildingStatisticsMenu::init(int last_selected_tab) {
 	int row_counters[kNoOfBuildingTabs];
 	for (int tab_index = 0; tab_index < kNoOfBuildingTabs; ++tab_index) {
 		int current_column = 0;
-		tabs_[tab_index] = new UI::Box(&tab_panel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
-		UI::Box* row = new UI::Box(tabs_[tab_index], UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+		tabs_[tab_index] = new UI::Box(&tab_panel_, UI::PanelStyle::kWui,
+		                               format("tab_box_%d", tab_index), 0, 0, UI::Box::Vertical);
+		UI::Box* row = new UI::Box(tabs_[tab_index], UI::PanelStyle::kWui,
+		                           format("row_box_%d", tab_index), 0, 0, UI::Box::Horizontal);
 		row_counters[tab_index] = 0;
 
 		for (const Widelands::DescriptionIndex id : buildings_to_add[tab_index]) {
@@ -299,7 +336,8 @@ void BuildingStatisticsMenu::init(int last_selected_tab) {
 			} else if (current_column == kColumns) {
 				tabs_[tab_index]->add(row, UI::Box::Resizing::kFullSize);
 				tabs_[tab_index]->add_space(6);
-				row = new UI::Box(tabs_[tab_index], UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+				row = new UI::Box(tabs_[tab_index], UI::PanelStyle::kWui,
+				                  format("row_box_%d_%u", tab_index, id), 0, 0, UI::Box::Horizontal);
 				current_column = 0;
 			}
 		}
@@ -421,7 +459,8 @@ void BuildingStatisticsMenu::update_building_list() {
 void BuildingStatisticsMenu::add_button(Widelands::DescriptionIndex id,
                                         const Widelands::BuildingDescr& descr,
                                         UI::Box* row) {
-	UI::Box* button_box = new UI::Box(row, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
+	UI::Box* button_box = new UI::Box(
+	   row, UI::PanelStyle::kWui, format("buttons_box_%s", descr.name()), 0, 0, UI::Box::Vertical);
 	building_buttons_[id] =
 	   new UI::Button(button_box, format("building_button%d", id), 0, 0, kBuildGridCellWidth,
 	                  kBuildGridCellHeight, UI::ButtonStyle::kWuiBuildingStats,
@@ -431,16 +470,16 @@ void BuildingStatisticsMenu::add_button(Widelands::DescriptionIndex id,
 	                                         UI::ButtonDisableStyle::kFlat);
 	button_box->add(building_buttons_[id]);
 
-	owned_labels_[id] =
-	   new UI::Textarea(button_box, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0,
-	                    kBuildGridCellWidth, kLabelHeight, "", UI::Align::kCenter);
+	owned_labels_[id] = new UI::Textarea(
+	   button_box, UI::PanelStyle::kWui, format("label_%s", descr.name()), UI::FontStyle::kWuiLabel,
+	   0, 0, kBuildGridCellWidth, kLabelHeight, "", UI::Align::kCenter);
 	owned_labels_[id]->set_style_override(style_.building_statistics_button_font());
 	owned_labels_[id]->set_fixed_width(kBuildGridCellWidth);
 	button_box->add(owned_labels_[id]);
 
-	productivity_labels_[id] =
-	   new UI::Textarea(button_box, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0,
-	                    kBuildGridCellWidth, kLabelHeight, "", UI::Align::kCenter);
+	productivity_labels_[id] = new UI::Textarea(
+	   button_box, UI::PanelStyle::kWui, format("productivity_%s", descr.name()),
+	   UI::FontStyle::kWuiLabel, 0, 0, kBuildGridCellWidth, kLabelHeight, "", UI::Align::kCenter);
 	productivity_labels_[id]->set_style_override(style_.building_statistics_button_font());
 	productivity_labels_[id]->set_fixed_width(kBuildGridCellWidth);
 	button_box->add(productivity_labels_[id]);
@@ -791,7 +830,14 @@ UI::Window& BuildingStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 			m.tab_panel_.activate(fr.unsigned_8());
 			const std::string sel = fr.string();
 			if (!sel.empty()) {
-				m.set_current_building_type(ib.egbase().descriptions().safe_building_index(sel));
+				Widelands::DescriptionIndex idx = ib.egbase().descriptions().safe_building_index(sel);
+				/* Check if the button for the building still exists. There are valid cases where
+				 * it might not, since some buildings are only selectable here under specific
+				 * circumstances and vanish after closing and reopening the window.
+				 */
+				if (m.building_buttons_.at(idx) != nullptr) {
+					m.set_current_building_type(idx);
+				}
 			}
 			m.last_building_index_ = fr.signed_32();
 			return m;

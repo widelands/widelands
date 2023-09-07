@@ -73,8 +73,8 @@ jobs:
         python-version: 3.x
     - name: Generate documentation
       run: |
-        pip install sphinx
         cd doc/sphinx
+        pip install -r requirements.txt
         mkdir source/_static
         ./extract_rst.py
         sphinx-build -W -b json -d build/doctrees source build/json
@@ -146,7 +146,7 @@ jobs:
         # We test the two newest and the two oldest versions of each of the two compilers
         config: [Debug, Release]
         os: [ubuntu-22.04]
-        compiler: [clang-14, clang-13, g++-12, g++-11]
+        compiler: [clang-15, clang-14, g++-12, g++-11]
         include:
           # Some compilers need an older ubuntu version to run correctly
           - compiler: g++-7
@@ -502,7 +502,7 @@ jobs:
           git push --delete origin latest   || echo "No latest tag to delete"
           git tag --force latest HEAD
           git push --tags origin
-          
+
           echo "These builds are automatically generated from master. " >> release_notes
           echo "## Latest changes" >> release_notes
           # Print changelog from last 10 commits
@@ -510,7 +510,7 @@ jobs:
           echo "<details><summary>Original filenames</summary><pre>" >> release_notes
           cat artifacts.list >> release_notes
           echo "</pre></details>" >> release_notes
-          
+
           gh release create latest         \
             --prerelease                   \
             --notes-file release_notes     \

@@ -41,17 +41,46 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 
      show_empty_dirs_(show_empty_dirs),
 
-     main_box_(this, UI::PanelStyle::kWui, padding_, padding_, UI::Box::Vertical, 0, 0, padding_),
+     main_box_(this,
+               UI::PanelStyle::kWui,
+               "main_box",
+               padding_,
+               padding_,
+               UI::Box::Vertical,
+               0,
+               0,
+               padding_),
 
-     table_and_details_box_(
-        &main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, padding_),
-     table_box_(
-        &table_and_details_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical, 0, 0, padding_),
+     table_and_details_box_(&main_box_,
+                            UI::PanelStyle::kWui,
+                            "table_details_box",
+                            0,
+                            0,
+                            UI::Box::Horizontal,
+                            0,
+                            0,
+                            padding_),
+     table_box_(&table_and_details_box_,
+                UI::PanelStyle::kWui,
+                "table_box",
+                0,
+                0,
+                UI::Box::Vertical,
+                0,
+                0,
+                padding_),
 
      table_(&table_box_, 0, 0, 200, 200, UI::PanelStyle::kWui),
      egbase_(nullptr),
-     map_details_box_(
-        &table_and_details_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical, 0, 0, padding_),
+     map_details_box_(&table_and_details_box_,
+                      UI::PanelStyle::kWui,
+                      "map_details_box",
+                      0,
+                      0,
+                      UI::Box::Vertical,
+                      0,
+                      0,
+                      padding_),
      map_details_(&map_details_box_, 0, 0, 100, 100, UI::PanelStyle::kWui, egbase_),
 
      display_mode_(&table_box_,
@@ -67,12 +96,21 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
                    UI::PanelStyle::kWui,
                    UI::ButtonStyle::kWuiSecondary),
 
-     table_footer_box_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, padding_),
+     table_footer_box_(
+        &main_box_, UI::PanelStyle::kWui, "footer_box", 0, 0, UI::Box::Horizontal, 0, 0, padding_),
 
-     directory_info_(&main_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, 0, 0),
+     directory_info_(&main_box_,
+                     UI::PanelStyle::kWui,
+                     "label_directory_info",
+                     UI::FontStyle::kWuiLabel,
+                     0,
+                     0,
+                     0,
+                     0),
 
      // Bottom button row
-     button_box_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, padding_),
+     button_box_(
+        &main_box_, UI::PanelStyle::kWui, "buttons_box", 0, 0, UI::Box::Horizontal, 0, 0, padding_),
      ok_(&button_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
      cancel_(&button_box_, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Cancel")),
 
@@ -210,7 +248,8 @@ void MainMenuLoadOrSaveMap::fill_table() {
 				}
 
 				maps_data_.emplace_back(map, mapfilename, maptype, display_type);
-			} catch (const WException&) {
+			} catch (const WException& e) {
+				log_warn("Map list: Skip %s due to preload error: %s\n", mapfilename.c_str(), e.what());
 			}  //  we simply skip illegal entries
 		} else if (g_fs->is_directory(mapfilename) &&
 		           (show_empty_dirs_ || !g_fs->list_directory(mapfilename).empty())) {

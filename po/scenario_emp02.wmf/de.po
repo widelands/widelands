@@ -7,6 +7,7 @@
 # German Translation <widelands-public@lists.sourceforge.net>, 2007
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
+# Simon Heimberg, 2023
 # Stephan Lutz <stephan-lutz@gmx.de>, 2018-2020,2022
 # Elisabeth Jäger, 2015
 # 39a0b2e5ef9bf024c2fcfbdd0522de1a_96abb62, 2015
@@ -14,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2015-02-03 14:45+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2020,2022\n"
+"Last-Translator: Simon Heimberg, 2023\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -85,7 +86,7 @@ msgid ""
 "Build a stonemason’s house and then a complete mining and production "
 "infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, "
 "weapon smithy, armor smithy and smelting works)."
-msgstr "Baue einen Steinmetz und vervollständige dann die Minen- und erzverarbeitende Infrastuktur (Kohlemine und/oder Köhlerei, Eisenerzmine, Hochofen, Werkzeugmacherei, Waffen- und Rüstungsschmiede)."
+msgstr "Baue einen Steinmetz und vervollständige dann die Minen- und erzverarbeitende Infrastruktur (Kohlemine und/oder Köhlerei, Eisenerzmine, Hochofen, Werkzeugmacherei, Waffen- und Rüstungsschmiede)."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:70
 msgid "Provide your miners with food"

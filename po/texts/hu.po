@@ -4,6 +4,7 @@
 # Translators:
 # Tóth András <txa-dev@posteo.hu>, 2021
 # Balázs Meskó <meskobalazs@mailbox.org>, 2016-2017,2020
+# Balázs Meskó <meskobalazs@mailbox.org>, 2020
 # GunChleoc, 2014
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016-2017,2019-2020
@@ -13,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-05-01 02:42+0000\n"
+"POT-Creation-Date: 2023-08-24 02:15+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2023\n"
+"Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -603,6 +604,12 @@ msgid ""
 "Most enhanced buildings need experienced workers. Do not enhance a building "
 "unless you have the necessary workers available."
 msgstr "A legtöbb fejlesztett épülethez tapasztalt munkások kellenek. Ne fejlessz tovább épületeket, hacsak nincsenek meg a szükséges munkásaid."
+
+#: ../../data/txts/tips/crash.lua:7
+msgid ""
+"Widelands is creating an emergency save, so you can continue playing exactly"
+" where the game closed."
+msgstr "A Widelands vészmentést készít, hogy ugyanott tudd folytatni a játékot, ahol az félbeszakadt."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/editor.lua:8

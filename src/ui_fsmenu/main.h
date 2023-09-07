@@ -125,6 +125,7 @@ private:
 	UI::Button options_;
 	UI::Button about_;
 	UI::Button exit_;
+	UI::Textarea clock_;
 	UI::Textarea version_;
 	UI::Textarea copyright_;
 
@@ -145,6 +146,7 @@ private:
 
 	bool visible_{true};
 	void set_button_visibility(bool);
+	bool system_clock_{true};
 
 	void action(MenuTarget);
 	void exit(bool force = false);

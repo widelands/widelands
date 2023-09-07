@@ -119,7 +119,13 @@ int caps_to_buildhelp(const Widelands::NodeCaps caps) {
 }  // namespace
 
 InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, ChatProvider* c)
-   : UI::Panel(nullptr, UI::PanelStyle::kWui, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
+   : UI::Panel(nullptr,
+               UI::PanelStyle::kWui,
+               "interactive_base",
+               0,
+               0,
+               g_gr->get_xres(),
+               g_gr->get_yres()),
      chat_provider_(c),
      info_panel_(*new InfoPanel(*this)),
      map_view_(this, the_egbase.map(), 0, 0, g_gr->get_xres(), g_gr->get_yres()),
@@ -143,14 +149,14 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
      minimap_registry_(the_egbase.is_game()),
      workareas_cache_(nullptr),
      egbase_(the_egbase),
-#ifndef NDEBUG  //  not in releases
-     display_flags_(dfDebug | get_config_int("display_flags", kDefaultDisplayFlags)),
-#else
      display_flags_(get_config_int("display_flags", kDefaultDisplayFlags)),
-#endif
      lastframe_(SDL_GetTicks()),
-
      unique_window_handler_(new UniqueWindowHandler()) {
+	if (g_allow_script_console) {
+		display_flags_ |= dfDebug;
+	} else {
+		display_flags_ &= ~dfDebug;
+	}
 
 	// Load the buildhelp icons.
 	{
@@ -905,11 +911,13 @@ void InteractiveBase::think() {
 		UI::UniqueWindow* building_window = show_building_window(
 		   Widelands::Coords::unhash(it->first), true, it->second->show_workarea);
 
-		building_window->set_pos(it->second->window_position);
-		if (it->second->minimize) {
-			building_window->minimize();
+		if (building_window != nullptr) {
+			building_window->set_pos(it->second->window_position);
+			if (it->second->minimize) {
+				building_window->minimize();
+			}
+			building_window->set_pinned(it->second->pin);
 		}
-		building_window->set_pinned(it->second->pin);
 
 		it = wanted_building_windows_.erase(it);
 	}
@@ -1685,9 +1693,12 @@ void InteractiveBase::add_wanted_building_window(const Widelands::Coords& coords
 UI::UniqueWindow* InteractiveBase::show_building_window(const Widelands::Coords& coord,
                                                         bool avoid_fastclick,
                                                         bool workarea_preview_wanted) {
+	MutexLock m(MutexLock::ID::kObjects);
 	Widelands::BaseImmovable* immovable = game().map().get_immovable(coord);
 	upcast(Widelands::Building, building, immovable);
-	assert(building);
+	if (building == nullptr) {
+		return nullptr;  // Race condition
+	}
 	BuildingWindow::Registry& registry =
 	   unique_windows().get_building_window_registry(format("building_%d", building->serial()));
 
@@ -1749,23 +1760,48 @@ UI::UniqueWindow& InteractiveBase::show_ship_window(Widelands::Ship* ship) {
 }
 
 ChatColorForPlayer InteractiveBase::color_functor() const {
-	return [this](int player_number) {
-		return (player_number > 0 &&
-		        player_number <= egbase().player_manager()->get_number_of_players()) ?
-                &egbase().player(player_number).get_playercolor() :
-                nullptr;
+	return [this](int player_number) -> const RGBColor* {
+		if (player_number > 0 && player_number <= kMaxPlayers) {
+			const Widelands::Player* player = egbase().get_player(player_number);
+			if (player != nullptr) {
+				return &player->get_playercolor();
+			}
+		}
+		return nullptr;
 	};
 }
 
-void InteractiveBase::broadcast_cheating_message() const {
+void InteractiveBase::broadcast_cheating_message(const std::string& code,
+                                                 const std::string& arg2) const {
 	if (get_game() == nullptr) {
 		return;  // Editor
 	}
 	if (upcast(GameHost, h, game().game_controller())) {
-		h->send_system_message_code(
-		   "CHEAT", player_number() != 0u ? game().player(player_number()).get_name() : "");
+		if (code == "CHEAT" && player_number() != 0u &&
+		    h->get_local_playername() != game().player(player_number()).get_name()) {
+			h->send_system_message_code(
+			   "CHEAT_OTHER", h->get_local_playername(), game().player(player_number()).get_name());
+		} else {
+			h->send_system_message_code(code, h->get_local_playername(), arg2);
+		}
+
+		if (!g_allow_script_console) {
+			// This shouldn't be possible
+			h->force_pause();
+		}
 	} else if (upcast(GameClient, c, game().game_controller())) {
-		c->send_cheating_info();
+		if (code == "CHEAT" && player_number() != 0u &&
+		    c->get_local_playername() != game().player(player_number()).get_name()) {
+			c->send_cheating_info("CHEAT_OTHER", game().player(player_number()).get_name());
+		} else {
+			c->send_cheating_info(code, arg2);
+		}
+
+		if (!g_allow_script_console) {
+			// This shouldn't be possible
+			// TODO(tothxa): Should be handled more nicely, but what can a client do?
+			throw wexception("Trying to cheat when the Script Console is disabled.");
+		}
 	}
 }
 
@@ -1802,22 +1838,22 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 		}
 
-#ifndef NDEBUG  //  only in debug builds
-		if (matches_shortcut(KeyboardShortcut::kCommonDebugConsole, code)) {
-			GameChatMenu::create_script_console(
-			   this, color_functor(), debugconsole_, *DebugConsole::get_chat_provider());
-			return true;
-		}
-		if (matches_shortcut(KeyboardShortcut::kCommonCheatMode, code)) {
-			if (cheat_mode_enabled_) {
-				cheat_mode_enabled_ = false;
-			} else if (!omnipotent()) {
-				broadcast_cheating_message();
-				cheat_mode_enabled_ = true;
+		if (g_allow_script_console) {
+			if (matches_shortcut(KeyboardShortcut::kCommonDebugConsole, code)) {
+				GameChatMenu::create_script_console(
+				   this, color_functor(), debugconsole_, *DebugConsole::get_chat_provider());
+				return true;
 			}
-			return true;
+			if (matches_shortcut(KeyboardShortcut::kCommonCheatMode, code)) {
+				if (cheat_mode_enabled_) {
+					cheat_mode_enabled_ = false;
+				} else if (!omnipotent()) {
+					broadcast_cheating_message();
+					cheat_mode_enabled_ = true;
+				}
+				return true;
+			}
 		}
-#endif
 
 		if (code.sym == SDLK_TAB) {
 			toolbar()->focus();
@@ -1831,7 +1867,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 	return UI::Panel::handle_key(down, code);
 }
 
-void InteractiveBase::cmd_lua(const std::vector<std::string>& args) {
+void InteractiveBase::cmd_lua(const std::vector<std::string>& args) const {
 	const std::string cmd = join(args, " ");
 
 	broadcast_cheating_message();
@@ -1850,10 +1886,16 @@ void InteractiveBase::cmd_lua(const std::vector<std::string>& args) {
  * Show a map object's debug window
  */
 void InteractiveBase::cmd_map_object(const std::vector<std::string>& args) {
+	if (!g_allow_script_console) {
+		throw wexception("Trying to open map object info when the Script Console is disabled.");
+	}
+
 	if (args.size() != 2) {
 		DebugConsole::write("usage: mapobject <mapobject serial>");
 		return;
 	}
+
+	broadcast_cheating_message();
 
 	uint32_t serial = stoul(args[1]);
 	MapObject* obj = egbase().objects().get_object(serial);

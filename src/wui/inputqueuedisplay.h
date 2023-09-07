@@ -48,6 +48,7 @@ struct PrioritySlider : public HorizontalSlider {
 	               const uint32_t cursor_size = 20,
 	               const bool enabled = true)
 	   : HorizontalSlider(parent,
+	                      "priority_slider",
 	                      x,
 	                      y,
 	                      w,
@@ -156,7 +157,7 @@ private:
 	UI::Button b_decrease_desired_fill_, b_increase_desired_fill_, b_decrease_real_fill_,
 	   b_increase_real_fill_, collapse_;
 	UI::PrioritySlider priority_;
-	UI::Panel spacer_;
+	UI::Panel spacer_, priority_indicator_;
 	const Widelands::WarePriority* slider_was_moved_;
 
 	BuildingWindow::CollapsedState* collapsed_;  ///< Owned by the window creating the input queue

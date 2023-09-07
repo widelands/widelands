@@ -46,6 +46,7 @@
 #include "wui/info_panel.h"
 #include "wui/interactive_player.h"
 #include "wui/toolbar.h"
+#include "wui/waresdisplay.h"
 #include "wui/watchwindow.h"
 
 namespace {
@@ -85,6 +86,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                    [this](ShowHideEntry t) { showhide_menu_selected(t); }),
      grid_marker_pic_(g_image_cache->get("images/wui/overlays/grid_marker.png")),
      special_coords_marker_pic_(g_image_cache->get("images/wui/overlays/special.png")),
+     pause_on_inactivity_(get_config_int("pause_game_on_inactivity", 0) * 60 * 1000),
      can_restart_(g.is_replay() || !g.list_of_scenarios().empty()),
      mainmenu_(toolbar(),
                "dropdown_menu_main",
@@ -130,13 +132,12 @@ void InteractiveGameBase::add_main_menu() {
 
 void InteractiveGameBase::rebuild_main_menu() {
 	mainmenu_.clear();
-#ifndef NDEBUG  //  only in debug builds
-	/** TRANSLATORS: An entry in the game's main menu */
-	mainmenu_.add(_("Script Console"), MainMenuEntry::kScriptConsole,
-	              g_image_cache->get("images/wui/menus/lua.png"), false,
-	              /** TRANSLATORS: Tooltip for Script Console in the game's main menu */
-	              "", pgettext("hotkey", "Ctrl+Shift+Space"));
-#endif
+	if (g_allow_script_console) {
+		/** TRANSLATORS: An entry in the game's main menu */
+		mainmenu_.add(_("Script Console"), MainMenuEntry::kScriptConsole,
+		              g_image_cache->get("images/wui/menus/lua.png"), false, "",
+		              shortcut_string_for(KeyboardShortcut::kCommonDebugConsole, false));
+	}
 
 	menu_windows_.sound_options.open_window = [this] {
 		new GameOptionsSoundMenu(*this, menu_windows_.sound_options);
@@ -196,12 +197,11 @@ void InteractiveGameBase::rebuild_main_menu() {
 
 void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 	switch (entry) {
-#ifndef NDEBUG  //  only in debug builds
 	case MainMenuEntry::kScriptConsole: {
+		assert(g_allow_script_console);
 		GameChatMenu::create_script_console(
 		   this, color_functor(), debugconsole_, *DebugConsole::get_chat_provider());
 	} break;
-#endif
 	case MainMenuEntry::kOptions: {
 		menu_windows_.sound_options.toggle();
 	} break;
@@ -561,6 +561,19 @@ bool InteractiveGameBase::handle_mousewheel(int32_t x, int32_t y, uint16_t modst
 	return true;
 }
 
+void InteractiveGameBase::think() {
+	InteractiveBase::think();
+
+	if (pause_on_inactivity_ != 0 &&
+	    static_cast<int>(SDL_GetTicks() - UI::Panel::time_of_last_user_activity()) >
+	       pause_on_inactivity_) {
+		Widelands::Game& g = game();
+		if (g.game_controller() != nullptr && !g.game_controller()->is_paused()) {
+			toggle_game_paused();
+		}
+	}
+}
+
 /// \return a pointer to the running \ref Game instance.
 Widelands::Game* InteractiveGameBase::get_game() const {
 	return dynamic_cast<Widelands::Game*>(&egbase());
@@ -632,7 +645,16 @@ void InteractiveGameBase::set_sel_pos(Widelands::NodeAndTriangle<> const center)
 
 	if (imm->descr().type() == Widelands::MapObjectType::IMMOVABLE) {
 		// Trees, Resource Indicators, fields ...
-		return set_tooltip(imm->descr().descname());
+		Widelands::Buildcost cost;
+		dynamic_cast<Widelands::Immovable&>(*imm).construct_remaining_buildcost(&cost);
+		if (cost.empty()) {
+			return set_tooltip(imm->descr().descname());
+		}
+		return set_tooltip(imm->descr().descname() + "<br>" +
+		                   g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal)
+		                      .header_font()
+		                      .as_font_tag(_("Remaining construction costs:")) +
+		                   "<br>" + waremap_to_richtext(imm->owner().tribe(), cost));
 	}
 	if (upcast(Widelands::ProductionSite, productionsite, imm)) {
 		// No productionsite tips for hostile players
@@ -669,6 +691,11 @@ void InteractiveGameBase::start() {
 		// Adding a check, just in case there was no viable player found for spectator
 		if (game().get_player(pln) != nullptr) {
 			map_view()->scroll_to_field(game().map().get_starting_pos(pln), MapView::Transition::Jump);
+		}
+
+		if (g_allow_script_console) {
+			// Let's warn all users once again
+			broadcast_cheating_message("CAN_CHEAT");
 		}
 	}
 }

@@ -43,6 +43,7 @@ SuggestedTeamsEntry::SuggestedTeamsEntry(MainMenuMapOptions* mmmo,
                                          Widelands::SuggestedTeamLineup t)
    : UI::Panel(parent,
                UI::PanelStyle::kWui,
+               "suggested_team",
                0,
                0,
                w,
@@ -231,13 +232,14 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
      max_w_(get_inner_w() - 2 * padding_),
      tab_box_(this,
               UI::PanelStyle::kWui,
+              "tab_box",
               padding_,
               padding_,
               UI::Box::Vertical,
               max_w_,
               get_inner_h(),
               0),
-     buttons_box_(&tab_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+     buttons_box_(&tab_box_, UI::PanelStyle::kWui, "buttons_box", 0, 0, UI::Box::Horizontal),
      ok_(&buttons_box_,
          "ok",
          UI::g_fh->fontset()->is_rtl() ? padding_ : butw_ + 2 * padding_,
@@ -254,10 +256,11 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
              labelh_,
              UI::ButtonStyle::kWuiSecondary,
              _("Cancel")),
-     tabs_(&tab_box_, UI::TabPanelStyle::kWuiLight),
+     tabs_(&tab_box_, UI::TabPanelStyle::kWuiLight, "tabs"),
 
      main_box_(&tabs_,
                UI::PanelStyle::kWui,
+               "main_options_box",
                padding_,
                padding_,
                UI::Box::Vertical,
@@ -266,6 +269,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
                0),
      tags_box_(&tabs_,
                UI::PanelStyle::kWui,
+               "tags_box",
                padding_,
                padding_,
                UI::Box::Vertical,
@@ -274,6 +278,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
                0),
      teams_box_(&tabs_,
                 UI::PanelStyle::kWui,
+                "teams_box",
                 padding_,
                 padding_,
                 UI::Box::Vertical,
@@ -282,6 +287,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
                 0),
      inner_teams_box_(&teams_box_,
                       UI::PanelStyle::kWui,
+                      "inner_teams_box",
                       padding_,
                       padding_,
                       UI::Box::Vertical,
@@ -289,10 +295,11 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
                       get_inner_h() / 2,
                       kSuggestedTeamsUnitSize),
 
-     name_(&main_box_, 0, 0, max_w_, UI::PanelStyle::kWui),
-     author_(&main_box_, 0, 0, max_w_, UI::PanelStyle::kWui),
+     name_(&main_box_, "name_editbox", 0, 0, max_w_, UI::PanelStyle::kWui),
+     author_(&main_box_, "author_editbox", 0, 0, max_w_, UI::PanelStyle::kWui),
      size_(&main_box_,
            UI::PanelStyle::kWui,
+           "label_size",
            UI::FontStyle::kWuiLabel,
            0,
            0,
@@ -329,8 +336,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
                          kSuggestedTeamsUnitSize,
                          UI::ButtonStyle::kWuiSecondary,
                          _("Add lineup"),
-                         _("Add another suggested team lineup")),
-     registry_(registry) {
+                         _("Add another suggested team lineup")) {
 
 	tab_box_.set_size(max_w_, get_inner_h() - labelh_ - 2 * padding_);
 	tabs_.set_size(max_w_, tab_box_.get_inner_h());
@@ -346,27 +352,30 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	// We need less space for the hint and the description, but it should at least have 1 line
 	// height.
 	const int16_t hinth = std::max(labelh_, remaining_space / 3);
-	descr_ = new UI::MultilineEditbox(
-	   &main_box_, 0, 0, max_w_, remaining_space - hinth, UI::PanelStyle::kWui);
-	hint_ = new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, hinth, UI::PanelStyle::kWui);
+	descr_ = new UI::MultilineEditbox(&main_box_, "editbox_description", 0, 0, max_w_,
+	                                  remaining_space - hinth, UI::PanelStyle::kWui);
+	hint_ = new UI::MultilineEditbox(
+	   &main_box_, "editbox_hint", 0, 0, max_w_, hinth, UI::PanelStyle::kWui);
 
-	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0,
-	                               max_w_, labelh_, _("Map name:")));
+	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, "label_name",
+	                               UI::FontStyle::kWuiLabel, 0, 0, max_w_, labelh_, _("Map name:")));
 	main_box_.add(&name_);
 	main_box_.add_space(indent_);
 
-	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0,
-	                               max_w_, labelh_, _("Authors:")));
+	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, "label_author",
+	                               UI::FontStyle::kWuiLabel, 0, 0, max_w_, labelh_, _("Authors:")));
 	main_box_.add(&author_);
 	main_box_.add_space(indent_);
 
-	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0,
-	                               max_w_, labelh_, _("Description:")));
+	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, "label_description",
+	                               UI::FontStyle::kWuiLabel, 0, 0, max_w_, labelh_,
+	                               _("Description:")));
 	main_box_.add(descr_);
 	main_box_.add_space(indent_);
 
-	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0,
-	                               max_w_, labelh_, _("Hint (optional):")));
+	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, "label_hint",
+	                               UI::FontStyle::kWuiLabel, 0, 0, max_w_, labelh_,
+	                               _("Hint (optional):")));
 	main_box_.add(hint_);
 	main_box_.add_space(indent_);
 
@@ -375,17 +384,17 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 
 	// ### Tags tab ###
 
-	tags_box_.add(new UI::Textarea(&tags_box_, UI::PanelStyle::kWui,
+	tags_box_.add(new UI::Textarea(&tags_box_, UI::PanelStyle::kWui, "label_tags",
 	                               UI::FontStyle::kWuiInfoPanelHeading, 0, 0, max_w_, labelh_,
 	                               _("Tags:")));
 
 	tags_box_.add_space(padding_);
 
-	UI::Textarea* team_tags_label =
-	   new UI::Textarea(&tags_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, max_w_,
-	                    /** TRANSLATORS: Header for suitable team line-up tags, like "Free for all",
-	                     * "Teams of 2", etc. */
-	                    labelh_, _("This map is suitable for:"));
+	UI::Textarea* team_tags_label = new UI::Textarea(
+	   &tags_box_, UI::PanelStyle::kWui, "label_teams", UI::FontStyle::kWuiLabel, 0, 0, max_w_,
+	   /** TRANSLATORS: Header for suitable team line-up tags, like "Free for all",
+	    * "Teams of 2", etc. */
+	   labelh_, _("This map is suitable for:"));
 	team_tags_label->set_tooltip(
 	   _("Please add suggested team line-ups in the next tab for all selected options"));
 	team_tags_label->set_handle_mouse(true);
@@ -419,23 +428,25 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	tags_box_.add_space(separator_);
 
 	UI::Textarea* ww_text =
-	   new UI::Textarea(&tags_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, max_w_,
-	                    labelh_, _("Ferry range:"));
+	   new UI::Textarea(&tags_box_, UI::PanelStyle::kWui, "label_waterway_length",
+	                    UI::FontStyle::kWuiLabel, 0, 0, max_w_, labelh_, _("Ferry range:"));
 	std::string ww_tooltip = _("Enable ferries, waterways, and ferry yards on this map by setting"
 	                           " the maximum length of waterways for ferries");
 	ww_text->set_tooltip(ww_tooltip);
 	ww_text->set_handle_mouse(true);
 	tags_box_.add(ww_text);
-	UI::Box* ww_box =
-	   new UI::Box(&tags_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, max_w_);
+	UI::Box* ww_box = new UI::Box(
+	   &tags_box_, UI::PanelStyle::kWui, "waterway_box", 0, 0, UI::Box::Horizontal, max_w_);
 	ww_box->set_tooltip(ww_tooltip);
 	waterway_length_warning_ =
-	   new UI::Icon(ww_box, UI::PanelStyle::kWui, g_image_cache->get("images/ui_basic/stop.png"));
+	   new UI::Icon(ww_box, UI::PanelStyle::kWui, "long_waterway_warning_icon",
+	                g_image_cache->get("images/ui_basic/stop.png"));
 	waterway_length_warning_->set_handle_mouse(true);
 	uint32_t ww_spinbox_w = max_w_ - waterway_length_warning_->get_w();
-	waterway_length_box_ = new UI::SpinBox(
-	   ww_box, 0, 0, ww_spinbox_w, ww_spinbox_w - padding_, 1, 1, 50, UI::PanelStyle::kWui,
-	   std::string(), UI::SpinBox::Units::kFields, UI::SpinBox::Type::kBig, 1, 5);
+	waterway_length_box_ =
+	   new UI::SpinBox(ww_box, "waterway_length", 0, 0, ww_spinbox_w, ww_spinbox_w - padding_, 1, 1,
+	                   50, UI::PanelStyle::kWui, std::string(), UI::SpinBox::Units::kFields,
+	                   UI::SpinBox::Type::kBig, 1, 5);
 	/** TRANSLATORS: Map Options: Waterways are disabled */
 	waterway_length_box_->add_replacement(1, _("Disabled"));
 	waterway_length_box_->changed.connect([this]() { update_waterway_length_warning(); });
@@ -458,11 +469,12 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 
 	const unsigned nr_players = eia().egbase().map().get_nrplayers();
 	teams_box_.add(new UI::Textarea(
-	   &teams_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, max_w_, labelh_,
-	   format(ngettext("%u Player", "%u Players", nr_players), nr_players)));
+	   &teams_box_, UI::PanelStyle::kWui, "label_players", UI::FontStyle::kWuiLabel, 0, 0, max_w_,
+	   labelh_, format(ngettext("%u Player", "%u Players", nr_players), nr_players)));
 	teams_box_.add_space(padding_);
-	teams_box_.add(new UI::Textarea(&teams_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0,
-	                                0, max_w_, labelh_, _("Suggested Teams:")));
+	teams_box_.add(new UI::Textarea(&teams_box_, UI::PanelStyle::kWui, "label_suggested_teams",
+	                                UI::FontStyle::kWuiLabel, 0, 0, max_w_, labelh_,
+	                                _("Suggested Teams:")));
 	teams_box_.add_space(padding_);
 	teams_box_.add(&inner_teams_box_, UI::Box::Resizing::kFullSize);
 	teams_box_.add_space(padding_);
@@ -590,11 +602,11 @@ void MainMenuMapOptions::clicked_ok() {
 	map.add_tag(balancing_dropdown_.get_selected());
 	map.set_background_theme(theme_dropdown_.get_selected());
 	Notifications::publish(NoteMapOptions());
-	registry_.destroy();
+	registry_->destroy();
 }
 
 void MainMenuMapOptions::clicked_cancel() {
-	registry_.destroy();
+	registry_->destroy();
 }
 
 bool MainMenuMapOptions::handle_key(bool down, SDL_Keysym code) {
@@ -609,10 +621,11 @@ bool MainMenuMapOptions::handle_key(bool down, SDL_Keysym code) {
  * Add a tag to the checkboxes
  */
 void MainMenuMapOptions::add_tag_checkbox(UI::Box* parent, const std::string& tag) {
-	UI::Box* box = new UI::Box(
-	   parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
+	UI::Box* box = new UI::Box(parent, UI::PanelStyle::kWui, format("label_tag_%s", tag), 0, 0,
+	                           UI::Box::Horizontal, max_w_, checkbox_space_, 0);
 	TagTexts l = localize_tag(tag);
-	UI::Checkbox* cb = new UI::Checkbox(box, UI::PanelStyle::kWui, Vector2i::zero(), l.displayname);
+	UI::Checkbox* cb = new UI::Checkbox(
+	   box, UI::PanelStyle::kWui, format("checkbox_tag_%s", tag), Vector2i::zero(), l.displayname);
 	cb->set_tooltip(l.tooltip);
 	box->add(cb, UI::Box::Resizing::kFullSize);
 	box->add_space(checkbox_space_);

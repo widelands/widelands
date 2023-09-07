@@ -42,21 +42,22 @@ namespace UI {
  *       h
  */
 Table<void*>::Table(Panel* const parent,
+                    const std::string& name,
                     int32_t x,
                     int32_t y,
                     uint32_t w,
                     uint32_t h,
                     PanelStyle style,
                     TableRows rowtype)
-   : Panel(parent, style, x, y, w, h),
+   : Panel(parent, style, name, x, y, w, h),
 
      lineheight_(text_height(g_style_manager->table_style(style).enabled())),
      headerheight_(lineheight_ + 4),
      button_style_(style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
                                                       UI::ButtonStyle::kWuiSecondary),
 
-     scrollbar_filler_button_(
-        new Button(this, "", 0, 0, Scrollbar::kSize, headerheight_, button_style_, "")),
+     scrollbar_filler_button_(new Button(
+        this, "scrollbar_filler", 0, 0, Scrollbar::kSize, headerheight_, button_style_, "")),
 
      selection_(no_selection_index()),
      last_multiselect_(no_selection_index()),
@@ -70,8 +71,8 @@ Table<void*>::Table(Panel* const parent,
 	set_thinks(false);
 	set_can_focus(true);
 	scrollbar_filler_button_->set_visible(false);
-	scrollbar_ = new Scrollbar(this, get_w() - Scrollbar::kSize, headerheight_, Scrollbar::kSize,
-	                           get_h() - headerheight_, style);
+	scrollbar_ = new Scrollbar(this, "scrollbar", get_w() - Scrollbar::kSize, headerheight_,
+	                           Scrollbar::kSize, get_h() - headerheight_, style);
 	scrollbar_->moved.connect([this](int32_t a) { set_scrollpos(a); });
 	scrollbar_->set_steps(1);
 	scrollbar_->set_singlestepsize(lineheight_);
@@ -409,10 +410,10 @@ bool Table<void*>::handle_tooltip() {
 			const int column_w = columns_[c].width;
 			Vector2i point(column_x, y);
 			if (is_mouse_in(cursor_pos, point, column_w)) {
-				const std::string& entry_string = er.get_string(c);
+				const std::string entry_string = richtext_escape(er.get_string(c));
 				FontStyleInfo& font_style = get_column_fontstyle(er);
 				std::shared_ptr<const UI::RenderedText> rendered_text =
-				   UI::g_fh->render(as_richtext_paragraph(richtext_escape(entry_string), font_style));
+				   UI::g_fh->render(as_richtext_paragraph(entry_string, font_style));
 
 				if (rendered_text->width() > column_w) {
 					return Panel::draw_tooltip(entry_string, panel_style_);

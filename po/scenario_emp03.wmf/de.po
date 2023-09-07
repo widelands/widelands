@@ -8,14 +8,15 @@
 # GunChleoc, 2018
 # Wuzzy <Wuzzy@disroot.org>, 2022
 # Stephan Lutz <stephan-lutz@gmx.de>, 2022
+# Simon Heimberg, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2022\n"
+"Last-Translator: Simon Heimberg, 2023\n"
 "Language-Team: German (https://app.transifex.com/widelands/teams/35159/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -812,7 +813,7 @@ msgid ""
 "possible enemies we should send some soldiers to each new port, until we can"
 " protect them with some military buildings."
 msgstr ""
-"Auf jeden Fall sollten wir vorsichtig mit unseren Häfen sein. Um sie for "
+"Auf jeden Fall sollten wir vorsichtig mit unseren Häfen sein. Um sie vor "
 "möglichen Feinden zu schützen, sollten wir ein paar Soldaten zu jedem neuen "
 "Hafen senden, bis wir ihn mit einigen Militärgebäuden beschützen können."
 
@@ -1069,7 +1070,7 @@ msgid ""
 "important and most imminent of all, we need it to send out expeditions."
 msgstr ""
 "Wir benötigen Stoff in unserer Rüstungsschmiede für die Harnische. Wir "
-"brauchen ihn für den Bau einiger Aubildungsgebäude. Und am wichtigsten und "
+"brauchen ihn für den Bau einiger Ausbildungsgebäude. Und am wichtigsten und "
 "dringendsten: Wir benötigen ihn für unsere Expeditionen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:543

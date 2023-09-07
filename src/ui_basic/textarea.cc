@@ -28,6 +28,7 @@ namespace UI {
 
 Textarea::Textarea(Panel* parent,
                    PanelStyle s,
+                   const std::string& name,
                    FontStyle style,
                    int32_t x,
                    int32_t y,
@@ -36,7 +37,7 @@ Textarea::Textarea(Panel* parent,
                    const std::string& text,
                    Align align,
                    LayoutMode layout_mode)
-   : Panel(parent, s, x, y, w, h),
+   : Panel(parent, s, name, x, y, w, h),
      layoutmode_(layout_mode),
      align_(align),
      text_(text),
@@ -51,6 +52,7 @@ Textarea::Textarea(Panel* parent,
 
 Textarea::Textarea(Panel* parent,
                    PanelStyle s,
+                   const std::string& name,
                    FontStyle style,
                    int32_t x,
                    int32_t y,
@@ -58,12 +60,16 @@ Textarea::Textarea(Panel* parent,
                    uint32_t h,
                    const std::string& text,
                    Align align)
-   : Textarea(parent, s, style, x, y, w, h, text, align, LayoutMode::AutoMove) {
+   : Textarea(parent, s, name, style, x, y, w, h, text, align, LayoutMode::AutoMove) {
 }
 
-Textarea::Textarea(
-   Panel* parent, PanelStyle s, FontStyle style, const std::string& text, Align align)
-   : Textarea(parent, s, style, 0, 0, 0, 0, text, align, LayoutMode::Layouted) {
+Textarea::Textarea(Panel* parent,
+                   PanelStyle s,
+                   const std::string& name,
+                   FontStyle style,
+                   const std::string& text,
+                   Align align)
+   : Textarea(parent, s, name, style, 0, 0, 0, 0, text, align, LayoutMode::Layouted) {
 }
 
 inline const FontStyleInfo& Textarea::font_style() const {

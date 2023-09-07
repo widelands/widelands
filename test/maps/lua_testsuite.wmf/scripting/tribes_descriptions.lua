@@ -51,13 +51,13 @@ function test_descr:test_get_builder()
    assert_equal("atlanteans_builder", tribe.builder)
 end
 
-function test_descr:test_get_carrier()
+function test_descr:test_get_carriers()
    local tribe = egbase:get_tribe_description("atlanteans")
+   assert_equal("atlanteans_carrier", tribe.carriers[1])
+   assert_equal("atlanteans_horse", tribe.carriers[2])
+   assert_equal(2, #tribe.carriers)
+   -- Deprecated, but shall still work for API compatibility:
    assert_equal("atlanteans_carrier", tribe.carrier)
-end
-
-function test_descr:test_get_carrier2()
-   local tribe = egbase:get_tribe_description("atlanteans")
    assert_equal("atlanteans_horse", tribe.carrier2)
 end
 

@@ -4,15 +4,15 @@
 # Translators:
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
-# Juanjo, 2015-2016,2018-2022
+# Juanjo, 2015-2016,2018-2023
 # Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-06 03:09+0000\n"
+"POT-Creation-Date: 2023-08-31 02:28+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
-"Last-Translator: Juanjo, 2015-2016,2018-2022\n"
+"Last-Translator: Juanjo, 2015-2016,2018-2023\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,11 +34,11 @@ msgstr "Busqueu artefactes antics. Un cop els haguéssiu trobat, l’equip que e
 msgid "Artifacts owned"
 msgstr "Artefactes propis"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:76
+#: ../../data/scripting/win_conditions/artifacts.lua:75
 msgid "No Artifacts"
 msgstr "Sense artefactes"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:76
+#: ../../data/scripting/win_conditions/artifacts.lua:75
 #, lua-format
 msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
@@ -48,50 +48,50 @@ msgstr "Aquest mapa no té artefactes i això no hauria de ser així. Si us plau
 
 #. TRANSLATORS: Keep this as short as possible. You can also translate this as
 #. "New artifact"
-#: ../../data/scripting/win_conditions/artifacts.lua:83
+#: ../../data/scripting/win_conditions/artifacts.lua:82
 msgid "Artifact Found"
 msgstr "S’ha trobat un artefacte"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:84
+#: ../../data/scripting/win_conditions/artifacts.lua:83
 msgid "Your team found a new artifact."
 msgstr "El vostre equip ha trobat un nou artefacte."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:85
+#: ../../data/scripting/win_conditions/artifacts.lua:84
 msgid "You found a new artifact."
 msgstr "Heu trobat un artefacte nou."
 
 #. TRANSLATORS: Keep this as short as possible.
-#: ../../data/scripting/win_conditions/artifacts.lua:89
+#: ../../data/scripting/win_conditions/artifacts.lua:88
 msgid "Artifact Lost"
 msgstr "S’ha perdut un artefacte"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:90
+#: ../../data/scripting/win_conditions/artifacts.lua:89
 msgid "One of your team’s artifacts was stolen by an enemy."
 msgstr "Els enemics han robat un artefacte del vostre equip."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:91
+#: ../../data/scripting/win_conditions/artifacts.lua:90
 msgid "One of your artifacts was stolen by an enemy."
 msgstr "Els enemics us han robat un artefacte."
 
 #. TRANSLATORS: Keep this as short as possible.
-#: ../../data/scripting/win_conditions/artifacts.lua:95
+#: ../../data/scripting/win_conditions/artifacts.lua:94
 msgid "Artifact Conquered"
 msgstr "Artefacte conquerit"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:96
+#: ../../data/scripting/win_conditions/artifacts.lua:95
 msgid "Your team stole an artifact from an enemy."
 msgstr "El vostre equip ha robat un artefacte a l’enemic."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:97
+#: ../../data/scripting/win_conditions/artifacts.lua:96
 msgid "You stole an artifact from an enemy."
 msgstr "Heu robat un artefacte a l’enemic."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:180
+#: ../../data/scripting/win_conditions/artifacts.lua:179
 msgid "Overview:"
 msgstr "Resum:"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:183
-#: ../../data/scripting/win_conditions/artifacts.lua:196
+#: ../../data/scripting/win_conditions/artifacts.lua:182
+#: ../../data/scripting/win_conditions/artifacts.lua:195
 #, lua-format
 msgid "%i artifact"
 msgid_plural "%i artifacts"
@@ -99,13 +99,13 @@ msgstr[0] "%i artefacte"
 msgstr[1] "%i artefactes"
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
-#: ../../data/scripting/win_conditions/artifacts.lua:185
+#: ../../data/scripting/win_conditions/artifacts.lua:184
 msgid "%1$s owns %2$s."
 msgstr "%1$s té %2$s."
 
 #. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members
 #. (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
-#: ../../data/scripting/win_conditions/artifacts.lua:198
+#: ../../data/scripting/win_conditions/artifacts.lua:197
 msgid "Team %1$i (%2$s) owns %3$s."
 msgstr "L’equip %1$i (%2$s) té %3$s."
 
@@ -386,4 +386,4 @@ msgstr "El guanyador és %1$s amb %2$s."
 #: ../../data/scripting/win_conditions/wood_gnome.lua:101
 #, lua-format
 msgid "The winners had %s."
-msgstr ""
+msgstr "Els guanyadors tenien %s."

@@ -121,15 +121,16 @@ void BuildingWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	watch_button_ = nullptr;
 	avoid_fastclick_ = avoid_fastclick;
 
-	vbox_.reset(new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical));
+	vbox_.reset(new UI::Box(this, UI::PanelStyle::kWui, "vbox", 0, 0, UI::Box::Vertical));
 	set_center_panel(vbox_.get());  // Must be set immediately after deleting the old vbox, if any
 
-	tabs_ = new UI::TabPanel(vbox_.get(), UI::TabPanelStyle::kWuiLight);
+	tabs_ = new UI::TabPanel(vbox_.get(), UI::TabPanelStyle::kWuiLight, "tabs");
 	vbox_->add(tabs_, UI::Box::Resizing::kFullSize);
 
 	setup_name_field_editbox(*vbox_);
 
-	capsbuttons_ = new UI::Box(vbox_.get(), UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	capsbuttons_ =
+	   new UI::Box(vbox_.get(), UI::PanelStyle::kWui, "caps_buttons_box", 0, 0, UI::Box::Horizontal);
 	vbox_->add(capsbuttons_, UI::Box::Resizing::kFullSize);
 
 	// actually create buttons on the first call to think(),
@@ -304,7 +305,8 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			// enhance/destroy/dismantle buttons are fixed in their position
 			// and not subject to the number of buttons on the right of the
 			// panel.
-			UI::Panel* spacer = new UI::Panel(capsbuttons, UI::PanelStyle::kWui, 0, 0, 17, 34);
+			UI::Panel* spacer =
+			   new UI::Panel(capsbuttons, UI::PanelStyle::kWui, "spacer_1", 0, 0, 17, 34);
 			capsbuttons->add(spacer);
 		}  // upcast to productionsite
 
@@ -369,7 +371,8 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		if (requires_destruction_separator && can_see) {
 			// Need this as well as the infinite space from the can_see section
 			// to ensure there is a separation.
-			UI::Panel* spacer = new UI::Panel(capsbuttons, UI::PanelStyle::kWui, 0, 0, 17, 34);
+			UI::Panel* spacer =
+			   new UI::Panel(capsbuttons, UI::PanelStyle::kWui, "spacer_2", 0, 0, 17, 34);
 			capsbuttons->add(spacer);
 			capsbuttons->add_inf_space();
 		}
@@ -629,6 +632,7 @@ Callback for debug window
 ===============
 */
 void BuildingWindow::act_debug() {
+	ibase()->broadcast_cheating_message();
 	show_field_debug(*ibase(), ibase()->egbase().map().get_fcoords(building_position_));
 }
 
