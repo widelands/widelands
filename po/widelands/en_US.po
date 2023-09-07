@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-08-28 02:28+0000\n"
+"POT-Creation-Date: 2023-09-07 02:26+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: FIRST AUTHOR <EMAIL@ADDRESS>, 2012\n"
 "Language-Team: English (United States) (http://app.transifex.com/widelands/widelands/language/en_US/)\n"
@@ -280,13 +280,13 @@ msgstr ""
 #. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:99
 #: ../../src/ui_fsmenu/keyboard_options.cc:298
-#: ../../src/wui/interactive_gamebase.cc:99
+#: ../../src/wui/interactive_gamebase.cc:100
 #: ../../src/wui/story_message_box.cc:89
 msgid "Main Menu"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:100
-#: ../../src/wui/interactive_gamebase.cc:100
+#: ../../src/wui/interactive_gamebase.cc:101
 msgctxt "hotkey"
 msgid "Esc"
 msgstr ""
@@ -306,7 +306,7 @@ msgstr ""
 #. show/hide
 #. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:130
-#: ../../src/wui/interactive_gamebase.cc:81
+#: ../../src/wui/interactive_gamebase.cc:82
 msgid "Show / Hide"
 msgstr ""
 
@@ -526,13 +526,13 @@ msgstr ""
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:464
-#: ../../src/wui/interactive_gamebase.cc:267
+#: ../../src/wui/interactive_gamebase.cc:268
 msgid "Hide Building Spaces"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:464
 #: ../../src/ui_fsmenu/options.cc:287
-#: ../../src/wui/interactive_gamebase.cc:267
+#: ../../src/wui/interactive_gamebase.cc:268
 msgid "Show Building Spaces"
 msgstr ""
 
@@ -639,12 +639,12 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:486
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
 #: ../../src/ui_fsmenu/launch_mpg.cc:320 ../../src/ui_fsmenu/main.cc:273
-#: ../../src/wlapplication.cc:1670
+#: ../../src/wlapplication.cc:1673
 msgid "Error"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:1141 ../../src/ui_fsmenu/main.cc:257
-#: ../../src/wlapplication.cc:1672
+#: ../../src/wlapplication.cc:1675
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -1035,7 +1035,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:250
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:62
 #: ../../src/editor/ui_menus/player_menu.cc:87
-#: ../../src/ui_basic/color_chooser.cc:264
+#: ../../src/ui_basic/color_chooser.cc:272
 #: ../../src/ui_basic/messagebox.cc:108 ../../src/ui_basic/text_prompt.cc:46
 #: ../../src/ui_fsmenu/addons/login_box.cc:54
 #: ../../src/ui_fsmenu/addons/manager.cc:296
@@ -1058,7 +1058,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:70
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:860
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:70
-#: ../../src/ui_basic/color_chooser.cc:273
+#: ../../src/ui_basic/color_chooser.cc:281
 #: ../../src/ui_basic/messagebox.cc:117 ../../src/ui_basic/text_prompt.cc:55
 #: ../../src/ui_fsmenu/addons/contact.cc:55
 #: ../../src/ui_fsmenu/addons/login_box.cc:63
@@ -1108,6 +1108,7 @@ msgid "Delete this suggested team lineup"
 msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:108
+#: ../../src/ui_basic/color_chooser.cc:491
 #: ../../src/ui_fsmenu/addons/packager.cc:100
 #: ../../src/ui_fsmenu/addons/packager_box.cc:153
 #: ../../src/wui/quicknavigation.cc:196
@@ -1131,58 +1132,58 @@ msgstr ""
 msgid "Add another suggested team lineup"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:362
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:361
 msgid "Map name:"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:367
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:366
 msgid "Authors:"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:373
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:372
 #: ../../src/ui_fsmenu/addons/packager.cc:189
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:77
 msgid "Description:"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:379
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:378
 msgid "Hint (optional):"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:390
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:389
 msgid "Tags:"
 msgstr ""
 
 #. * TRANSLATORS: Header for suitable team line-up tags, like "Free for all",
 #. * "Teams of 2", etc.
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:398
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:397
 msgid "This map is suitable for:"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:400
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:399
 msgid ""
 "Please add suggested team line-ups in the next tab for all selected options"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:416
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:415
 msgid ""
 "Mark whether the starting positions provide equal conditions for each player"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:421
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:420
 msgid "Set the theme for the game loadscreens"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:422
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:421
 msgctxt "map_theme"
 msgid "(none)"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:433
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:432
 msgid "Ferry range:"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:434
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:433
 msgid ""
 "Enable ferries, waterways, and ferry yards on this map by setting the "
 "maximum length of waterways for ferries"
@@ -1191,41 +1192,41 @@ msgstr ""
 #. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:452
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:451
 #: ../../src/ui_fsmenu/mousewheel_options.cc:57
 msgid "Disabled"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:474
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:473
 #, c-format
 msgid "%u Player"
 msgid_plural "%u Players"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:478
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:477
 msgid "Suggested Teams:"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:501
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:500
 msgid "Main Options"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:503
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:502
 #: ../../src/wui/mapdetails.cc:176
 msgid "Tags"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:505
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:504
 msgid "Teams"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:539
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:538
 #, c-format
 msgid "It is not recommended to permit waterway lengths greater than %u"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:555
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:554
 msgid "Size: %1% x %2%"
 msgstr ""
 
@@ -2646,19 +2647,19 @@ msgstr ""
 msgid "A geologist found resources."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2068
+#: ../../src/logic/map_objects/tribes/worker.cc:2074
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
 msgstr ""
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
-#: ../../src/logic/map_objects/tribes/worker.cc:2073
+#: ../../src/logic/map_objects/tribes/worker.cc:2079
 #: ../../src/wui/productionsitewindow.cc:107
 #: ../../src/wui/productionsitewindow.cc:124
 msgid "Worker"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2074
+#: ../../src/logic/map_objects/tribes/worker.cc:2080
 msgid "Worker got lost!"
 msgstr ""
 
@@ -2719,7 +2720,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:2204
 #: ../../src/wlapplication_options.cc:663
 #: ../../src/wui/game_diplomacy_menu.cc:36
-#: ../../src/wui/interactive_gamebase.cc:246
+#: ../../src/wui/interactive_gamebase.cc:247
 msgid "Diplomacy"
 msgstr ""
 
@@ -2987,7 +2988,7 @@ msgid "Postloading map objects"
 msgstr ""
 
 #: ../../src/network/gameclient.cc:162 ../../src/network/gamehost.cc:561
-#: ../../src/ui_fsmenu/launch_spg.cc:174 ../../src/wlapplication.cc:780
+#: ../../src/ui_fsmenu/launch_spg.cc:174 ../../src/wlapplication.cc:783
 msgid "Preparing game…"
 msgstr ""
 
@@ -3594,46 +3595,61 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ../../src/ui_basic/color_chooser.cc:246
+#: ../../src/ui_basic/color_chooser.cc:253
 msgid "Choose Color…"
 msgstr ""
 
-#: ../../src/ui_basic/color_chooser.cc:282
+#: ../../src/ui_basic/color_chooser.cc:290
 msgid "Initial Color"
 msgstr ""
 
 #. * TRANSLATORS: First letter of the word "Red"
-#: ../../src/ui_basic/color_chooser.cc:291
+#: ../../src/ui_basic/color_chooser.cc:299
 msgctxt "color"
 msgid "R"
 msgstr ""
 
 #. * TRANSLATORS: First letter of the word "Green"
-#: ../../src/ui_basic/color_chooser.cc:300
+#: ../../src/ui_basic/color_chooser.cc:308
 msgctxt "color"
 msgid "G"
 msgstr ""
 
 #. * TRANSLATORS: First letter of the word "Blue"
-#: ../../src/ui_basic/color_chooser.cc:309
+#: ../../src/ui_basic/color_chooser.cc:317
 msgctxt "color"
 msgid "B"
 msgstr ""
 
-#: ../../src/ui_basic/color_chooser.cc:319
+#: ../../src/ui_basic/color_chooser.cc:327
 msgid "Default Color"
 msgstr ""
 
-#: ../../src/ui_basic/color_chooser.cc:331
+#: ../../src/ui_basic/color_chooser.cc:339
 msgid "Red"
 msgstr ""
 
-#: ../../src/ui_basic/color_chooser.cc:344
+#: ../../src/ui_basic/color_chooser.cc:352
 msgid "Green"
 msgstr ""
 
-#: ../../src/ui_basic/color_chooser.cc:357
+#: ../../src/ui_basic/color_chooser.cc:365
 msgid "Blue"
+msgstr ""
+
+#: ../../src/ui_basic/color_chooser.cc:484
+msgid "Remove from favorites"
+msgstr ""
+
+#: ../../src/ui_basic/color_chooser.cc:484
+#: ../../src/ui_fsmenu/addons/packager.cc:109
+#: ../../src/ui_fsmenu/addons/packager_box.cc:171
+#: ../../src/wui/quicknavigation.cc:286
+msgid "–"
+msgstr ""
+
+#: ../../src/ui_basic/color_chooser.cc:491
+msgid "Add current color to favorites"
 msgstr ""
 
 #: ../../src/ui_basic/dropdown.cc:111
@@ -4376,12 +4392,6 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:101
 msgid "New add-on"
-msgstr ""
-
-#: ../../src/ui_fsmenu/addons/packager.cc:109
-#: ../../src/ui_fsmenu/addons/packager_box.cc:171
-#: ../../src/wui/quicknavigation.cc:286
-msgid "–"
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:110
@@ -5745,7 +5755,7 @@ msgstr ""
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:119
-#: ../../src/ui_fsmenu/netsetup_lan.cc:138 ../../src/wlapplication.cc:701
+#: ../../src/ui_fsmenu/netsetup_lan.cc:138 ../../src/wlapplication.cc:704
 msgid "nobody"
 msgstr ""
 
@@ -5809,7 +5819,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/main.cc:381 ../../src/wlapplication_options.cc:253
 #: ../../src/wlapplication_options.cc:867
 #: ../../src/wui/game_main_menu_save_game.cc:48
-#: ../../src/wui/interactive_gamebase.cc:179
+#: ../../src/wui/interactive_gamebase.cc:180
 msgid "Load Game"
 msgstr ""
 
@@ -6479,22 +6489,22 @@ msgid "Keep history of sent chat messages in a file"
 msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:289
-#: ../../src/wui/interactive_gamebase.cc:274
+#: ../../src/wui/interactive_gamebase.cc:275
 msgid "Show Census"
 msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:291
-#: ../../src/wui/interactive_gamebase.cc:283
+#: ../../src/wui/interactive_gamebase.cc:284
 msgid "Show Status"
 msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:296
-#: ../../src/wui/interactive_gamebase.cc:292
+#: ../../src/wui/interactive_gamebase.cc:293
 msgid "Show Soldier Levels"
 msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:298
-#: ../../src/wui/interactive_gamebase.cc:301
+#: ../../src/wui/interactive_gamebase.cc:302
 msgid "Show Buildings"
 msgstr ""
 
@@ -6824,60 +6834,60 @@ msgstr ""
 msgid "Unmark All"
 msgstr ""
 
-#: ../../src/wlapplication.cc:830
+#: ../../src/wlapplication.cc:833
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr ""
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:831 ../../src/wlapplication.cc:836
+#: ../../src/wlapplication.cc:834 ../../src/wlapplication.cc:839
 #: ../../src/wui/savegameloader.cc:119
 msgid "Error message:"
 msgstr ""
 
-#: ../../src/wlapplication.cc:832
+#: ../../src/wlapplication.cc:835
 msgid "File system error"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1309
+#: ../../src/wlapplication.cc:1312
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1314
+#: ../../src/wlapplication.cc:1317
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1469
+#: ../../src/wlapplication.cc:1472
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1604
+#: ../../src/wlapplication.cc:1607
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1622
+#: ../../src/wlapplication.cc:1625
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1648
+#: ../../src/wlapplication.cc:1651
 msgid "Incompatible"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1685
+#: ../../src/wlapplication.cc:1688
 msgid "Game ended unexpectedly"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1685
+#: ../../src/wlapplication.cc:1688
 msgid "Unexpected error during the game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1688
+#: ../../src/wlapplication.cc:1691
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6891,7 +6901,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1697
+#: ../../src/wlapplication.cc:1700
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6901,11 +6911,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1731
+#: ../../src/wlapplication.cc:1734
 msgid "Emergency save failed"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1732
+#: ../../src/wlapplication.cc:1735
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -7298,7 +7308,7 @@ msgstr ""
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wlapplication_options.cc:596
 #: ../../src/wui/game_options_sound_menu.cc:34
-#: ../../src/wui/interactive_gamebase.cc:145
+#: ../../src/wui/interactive_gamebase.cc:146
 msgid "Sound Options"
 msgstr ""
 
@@ -7392,7 +7402,7 @@ msgid "Scroll to Starting Field"
 msgstr ""
 
 #: ../../src/wlapplication_options.cc:714 ../../src/wui/game_chat_menu.cc:68
-#: ../../src/wui/interactive_gamebase.cc:408
+#: ../../src/wui/interactive_gamebase.cc:409
 msgid "Chat"
 msgstr ""
 
@@ -7486,7 +7496,7 @@ msgstr ""
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wlapplication_options.cc:870
 #: ../../src/wui/game_main_menu_save_game.cc:50
-#: ../../src/wui/interactive_gamebase.cc:155
+#: ../../src/wui/interactive_gamebase.cc:156
 msgid "Save Game"
 msgstr ""
 
@@ -7495,7 +7505,7 @@ msgstr ""
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wlapplication_options.cc:873
 #: ../../src/wui/game_client_disconnected.cc:112
-#: ../../src/wui/game_summary.cc:106 ../../src/wui/interactive_gamebase.cc:192
+#: ../../src/wui/game_summary.cc:106 ../../src/wui/interactive_gamebase.cc:193
 msgid "Exit Game"
 msgstr ""
 
@@ -8512,7 +8522,7 @@ msgstr ""
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_chat_menu.cc:79
-#: ../../src/wui/interactive_gamebase.cc:136
+#: ../../src/wui/interactive_gamebase.cc:137
 msgid "Script Console"
 msgstr ""
 
@@ -8657,7 +8667,7 @@ msgstr ""
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_main_menu_save_game.cc:46
-#: ../../src/wui/interactive_gamebase.cc:165
+#: ../../src/wui/interactive_gamebase.cc:166
 msgid "Load Replay"
 msgstr ""
 
@@ -9108,117 +9118,121 @@ msgid "Screenshot saved"
 msgstr ""
 
 #. * TRANSLATORS: This is a game speed value
-#: ../../src/wui/interactive_gamebase.cc:56
+#: ../../src/wui/interactive_gamebase.cc:57
 #, c-format
 msgid "%1$u.%2$u×"
 msgstr ""
 
-#: ../../src/wui/interactive_gamebase.cc:58
+#: ../../src/wui/interactive_gamebase.cc:59
 msgid "PAUSE"
 msgstr ""
 
 #. * TRANSLATORS: Title for a menu button in the game. This menu will show
 #. options o increase/decrease the gamespeed, and to pause the game
-#: ../../src/wui/interactive_gamebase.cc:115
+#: ../../src/wui/interactive_gamebase.cc:116
 msgid "Game Speed"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for Sound Options in the game's main menu
-#: ../../src/wui/interactive_gamebase.cc:148
+#: ../../src/wui/interactive_gamebase.cc:149
 msgid "Set sound effect and music options"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/wui/interactive_gamebase.cc:170
-#: ../../src/wui/interactive_gamebase.cc:236
+#: ../../src/wui/interactive_gamebase.cc:171
+#: ../../src/wui/interactive_gamebase.cc:237
 msgid "Restart Replay"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/wui/interactive_gamebase.cc:186
-#: ../../src/wui/interactive_gamebase.cc:236
+#: ../../src/wui/interactive_gamebase.cc:187
+#: ../../src/wui/interactive_gamebase.cc:237
 msgid "Restart Scenario"
 msgstr ""
 
-#: ../../src/wui/interactive_gamebase.cc:237
+#: ../../src/wui/interactive_gamebase.cc:238
 msgid "Are you sure you wish to restart this replay?"
 msgstr ""
 
-#: ../../src/wui/interactive_gamebase.cc:238
+#: ../../src/wui/interactive_gamebase.cc:239
 msgid "Are you sure you wish to restart this scenario?"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building names are shown
-#: ../../src/wui/interactive_gamebase.cc:274
+#: ../../src/wui/interactive_gamebase.cc:275
 msgid "Hide Census"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * building status labels are shown
-#: ../../src/wui/interactive_gamebase.cc:282
+#: ../../src/wui/interactive_gamebase.cc:283
 msgid "Hide Status"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * level information is shown above soldiers' heads
-#: ../../src/wui/interactive_gamebase.cc:291
+#: ../../src/wui/interactive_gamebase.cc:292
 msgid "Hide Soldier Levels"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * buildings are greyed out
-#: ../../src/wui/interactive_gamebase.cc:300
+#: ../../src/wui/interactive_gamebase.cc:301
 msgid "Hide Buildings"
 msgstr ""
 
-#: ../../src/wui/interactive_gamebase.cc:347
+#: ../../src/wui/interactive_gamebase.cc:348
 msgid "Speed +"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for Speed + in the game's game speed menu
-#: ../../src/wui/interactive_gamebase.cc:350
+#: ../../src/wui/interactive_gamebase.cc:351
 msgid "Increase the game speed"
 msgstr ""
 
-#: ../../src/wui/interactive_gamebase.cc:353
+#: ../../src/wui/interactive_gamebase.cc:354
 msgid "Speed -"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for Speed - in the game's game speed menu
-#: ../../src/wui/interactive_gamebase.cc:356
+#: ../../src/wui/interactive_gamebase.cc:357
 msgid "Decrease the game speed"
 msgstr ""
 
-#: ../../src/wui/interactive_gamebase.cc:362
+#: ../../src/wui/interactive_gamebase.cc:363
 msgid "Resume"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for Pause in the game's game speed menu
-#: ../../src/wui/interactive_gamebase.cc:365
+#: ../../src/wui/interactive_gamebase.cc:366
 msgid "Resume the Game"
 msgstr ""
 
-#: ../../src/wui/interactive_gamebase.cc:368
+#: ../../src/wui/interactive_gamebase.cc:369
 msgid "Pause"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for Pause in the game's game speed menu
-#: ../../src/wui/interactive_gamebase.cc:371
+#: ../../src/wui/interactive_gamebase.cc:372
 msgid "Pause the Game"
 msgstr ""
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/wui/interactive_gamebase.cc:612
+#: ../../src/wui/interactive_gamebase.cc:613
 #: ../../src/wui/productionsitewindow.cc:246
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr ""
 
 #. * TRANSLATORS: actual_speed (target_speed) (desired_speed)
-#: ../../src/wui/interactive_gamebase.cc:616
+#: ../../src/wui/interactive_gamebase.cc:617
 #, c-format
 msgid "%1$s (%2$s) (%3$s)"
+msgstr ""
+
+#: ../../src/wui/interactive_gamebase.cc:656
+msgid "Remaining construction costs:"
 msgstr ""
 
 #. * TRANSLATORS: Title for the statistics menu button in the game
