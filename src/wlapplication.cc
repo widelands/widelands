@@ -1323,13 +1323,14 @@ void throw_exclusive(const std::string& opt, const std::string& other) {
 
 // Checks and returns whether `param` was set, but throws ParameterError if it also had a value.
 bool WLApplication::check_commandline_flag(const std::string& opt) {
-	if (commandline_.count(opt) == 0u) {
+	auto found = commandline_.find(opt);
+	if (found == commandline_.end()) {
 		return false;
 	}
-	if (!commandline_.at(opt).empty()) {
+	if (!found->second.empty()) {
 		throw_extra_value(opt);
 	}
-	commandline_.erase(opt);
+	commandline_.erase(found);
 	return true;
 }
 
@@ -1338,14 +1339,16 @@ bool WLApplication::check_commandline_flag(const std::string& opt) {
 // otherwise throws ParameterError.
 std::optional<std::string>
 WLApplication::get_commandline_option_value(const std::string& opt, const bool allow_empty) {
-	if (commandline_.count(opt) == 0u) {
+	auto found = commandline_.find(opt);
+	if (found == commandline_.end()) {
 		return std::nullopt;
 	}
-	std::string rv = commandline_.at(opt);
-	commandline_.erase(opt);
+	// need to copy before deletion for returning later
+	std::string rv = found->second;
 	if (!allow_empty && rv.empty()) {
 		throw_empty_value(opt);
 	}
+	commandline_.erase(found);
 	return rv;
 }
 
