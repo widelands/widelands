@@ -497,7 +497,8 @@ void InteractivePlayer::draw(RenderTarget& dst) {
 	draw_map_view(map_view(), &dst);
 }
 
-constexpr float kBuildhelpOpacity = 0.3f;
+constexpr float kBuildhelpOpacityMedium = 0.6f;
+constexpr float kBuildhelpOpacityWeak = 0.3f;
 
 void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst) {
 	// In-game, selection can never be on triangles or have a radius.
@@ -588,8 +589,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 					}
 					player_image = playercolor_image(p->get_playercolor(), icon_filename);
 					icon_scale = 1.0f;
-					icon_opacity =
-					   p->get_starting_position_suitability(f->fcoords) ? 0.7f : kBuildhelpOpacity;
+					icon_opacity = p->get_starting_position_suitability(f->fcoords) ?
+                              kBuildhelpOpacityMedium : kBuildhelpOpacityWeak;
 					break;
 				}
 			}
@@ -626,7 +627,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 				Widelands::NodeCaps caps;
 				Widelands::NodeCaps maxcaps = f->fcoords.field->maxcaps();
 				float opacity =
-				   f->seeing == Widelands::VisibleState::kVisible ? 1.f : kBuildhelpOpacity;
+				   f->seeing == Widelands::VisibleState::kVisible ? 1.f : kBuildhelpOpacityWeak;
 				if (picking_starting_pos) {
 					caps = show_port_space || buildhelp() ? f->fcoords.field->nodecaps() :
                                                        Widelands::CAPS_NONE;
@@ -639,7 +640,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 						     plr.tribe().buildings_built_over_immovables()) {
 							if (plr.check_can_build(*b, f->fcoords)) {
 								caps = maxcaps;
-								opacity *= 2 * kBuildhelpOpacity;
+								opacity *= kBuildhelpOpacityMedium;
 								break;
 							}
 						}
