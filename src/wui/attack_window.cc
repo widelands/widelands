@@ -127,7 +127,9 @@ AttackPanel::AttackPanel(
      target_coordinates_(target_coordinates),
      get_max_attackers_(get_max_attackers),
      attack_type_(attack_type),
-     icon_w_(attack_type_ == AttackPanel::AttackType::kShip ? (2 * Widelands::Ship::kShipHealthBarWidth + kSpacing) : kSoldierIconWidth),
+     icon_w_(attack_type_ == AttackPanel::AttackType::kShip ?
+                (2 * Widelands::Ship::kShipHealthBarWidth + kSpacing) :
+                kSoldierIconWidth),
      icon_h_(attack_type_ == AttackPanel::AttackType::kShip ? kShipIconHeight : kSoldierIconHeight),
      lastupdate_(0),
 
