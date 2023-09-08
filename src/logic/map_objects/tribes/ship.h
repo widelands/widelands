@@ -370,6 +370,7 @@ private:
 	void ship_update_idle(Game&, State&);
 	void battle_update(Game&);
 	void update_warship_soldier_request(bool create);
+	void erase_warship_soldier_request();
 	void kickout_superfluous_soldiers(Game& game);
 	/// Set the ship's state to 'state' and if the ship state has changed, publish a notification.
 	void set_ship_state_and_notify(ShipStates state, NoteShip::Action action);
@@ -408,6 +409,7 @@ private:
 	Economy* ware_economy_{nullptr};
 	Economy* worker_economy_{nullptr};
 	OPtr<PortDock> lastdock_;
+	OPtr<PortDock> requestdock_;
 	std::vector<ShippingItem> items_;
 	ShipStates ship_state_{ShipStates::kTransport};
 	ShipType ship_type_{ShipType::kTransport};
@@ -453,6 +455,7 @@ protected:
 
 	private:
 		uint32_t lastdock_{0U};
+		uint32_t requestdock_{0U};
 		Serial ware_economy_serial_{kInvalidSerial};
 		Serial worker_economy_serial_{kInvalidSerial};
 		uint32_t destination_object_{0U};
