@@ -431,7 +431,8 @@ void InteractivePlayer::draw_immovables_for_visible_field(
 void InteractivePlayer::think() {
 	InteractiveGameBase::think();
 
-	if (player().is_picking_custom_starting_position()) {
+	if (player().get_starting_position_state() ==
+	    Widelands::Player::StartingPositionState::kPicking) {
 		set_sel_picture(
 		   playercolor_image(player().get_playercolor(), "images/players/player_position_menu.png"));
 	}
@@ -510,7 +511,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 	Workareas workareas = get_workarea_overlays(map);
 	FieldsToDraw* fields_to_draw = given_map_view->draw_terrain(gbase, &plr, workareas, false, dst);
 	const auto& road_building_s = road_building_steepness_overlays();
-	const bool picking_starting_pos = plr.is_picking_custom_starting_position();
+	const bool picking_starting_pos =
+	   (plr.get_starting_position_state() == Widelands::Player::StartingPositionState::kPicking);
 
 	const float scale = 1.f / given_map_view->view().zoom;
 
@@ -719,7 +721,8 @@ Widelands::PlayerNumber InteractivePlayer::player_number() const {
 
 /// Player has clicked on the given node; bring up the context menu.
 void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) {
-	if (player().is_picking_custom_starting_position()) {
+	if (player().get_starting_position_state() ==
+	    Widelands::Player::StartingPositionState::kPicking) {
 		if (get_player()->pick_custom_starting_position(node_and_triangle.node)) {
 			unset_sel_picture();
 		}
