@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-06 03:09+0000\n"
+"POT-Creation-Date: 2023-08-31 02:28+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2023\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -36,11 +36,11 @@ msgstr "Söök olle Künstelk Schatten. Wenn all funnen sünd, winnt de Speler o
 msgid "Artifacts owned"
 msgstr "Eegene Künstelk Schatten"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:76
+#: ../../data/scripting/win_conditions/artifacts.lua:75
 msgid "No Artifacts"
 msgstr "Keene künstelk Schatten"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:76
+#: ../../data/scripting/win_conditions/artifacts.lua:75
 #, lua-format
 msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
@@ -50,50 +50,50 @@ msgstr "Deese Kaart hett keene Künstelk Schatten. Dat sall nich passeren. Bidde
 
 #. TRANSLATORS: Keep this as short as possible. You can also translate this as
 #. "New artifact"
-#: ../../data/scripting/win_conditions/artifacts.lua:83
+#: ../../data/scripting/win_conditions/artifacts.lua:82
 msgid "Artifact Found"
 msgstr "Künstelk Schatten funnen"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:84
+#: ../../data/scripting/win_conditions/artifacts.lua:83
 msgid "Your team found a new artifact."
 msgstr "Dien Klottje hett een nejen Künstelk Schatten funnen."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:85
+#: ../../data/scripting/win_conditions/artifacts.lua:84
 msgid "You found a new artifact."
 msgstr "Du hest een nejen Künstelk Schatten funnen."
 
 #. TRANSLATORS: Keep this as short as possible.
-#: ../../data/scripting/win_conditions/artifacts.lua:89
+#: ../../data/scripting/win_conditions/artifacts.lua:88
 msgid "Artifact Lost"
 msgstr "Künstelk Schatten verloren"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:90
+#: ../../data/scripting/win_conditions/artifacts.lua:89
 msgid "One of your team’s artifacts was stolen by an enemy."
 msgstr "Een vun dien Klottje hör Künstelk Schatten is vun Feinden klaut worden."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:91
+#: ../../data/scripting/win_conditions/artifacts.lua:90
 msgid "One of your artifacts was stolen by an enemy."
 msgstr "Een vun dien Künstelk Schatten is vun Feinden klaut worden."
 
 #. TRANSLATORS: Keep this as short as possible.
-#: ../../data/scripting/win_conditions/artifacts.lua:95
+#: ../../data/scripting/win_conditions/artifacts.lua:94
 msgid "Artifact Conquered"
 msgstr "Künstelk Schatten innohmen"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:96
+#: ../../data/scripting/win_conditions/artifacts.lua:95
 msgid "Your team stole an artifact from an enemy."
 msgstr "Dien Klottje hett een Künstelk Schatten vun Feinden klaut."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:97
+#: ../../data/scripting/win_conditions/artifacts.lua:96
 msgid "You stole an artifact from an enemy."
 msgstr "Du hest een Künstelk Schatten vun Feinden klaut."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:180
+#: ../../data/scripting/win_conditions/artifacts.lua:179
 msgid "Overview:"
 msgstr "Översicht:"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:183
-#: ../../data/scripting/win_conditions/artifacts.lua:196
+#: ../../data/scripting/win_conditions/artifacts.lua:182
+#: ../../data/scripting/win_conditions/artifacts.lua:195
 #, lua-format
 msgid "%i artifact"
 msgid_plural "%i artifacts"
@@ -101,13 +101,13 @@ msgstr[0] "%i künstelk Schatt"
 msgstr[1] "%i künstelk Schatten"
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
-#: ../../data/scripting/win_conditions/artifacts.lua:185
+#: ../../data/scripting/win_conditions/artifacts.lua:184
 msgid "%1$s owns %2$s."
 msgstr "%1$s hett %2$s."
 
 #. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members
 #. (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
-#: ../../data/scripting/win_conditions/artifacts.lua:198
+#: ../../data/scripting/win_conditions/artifacts.lua:197
 msgid "Team %1$i (%2$s) owns %3$s."
 msgstr "Klottje %1$i (%2$s) hett %3$s."
 

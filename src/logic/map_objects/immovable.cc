@@ -724,7 +724,7 @@ MapObject::Loader* Immovable::load(EditorGameBase& egbase, MapObjectLoader& mol,
  *
  * If the immovable is not currently in construction mode, return \c false.
  */
-bool Immovable::construct_remaining_buildcost(Game& /* game */, Buildcost* buildcost) {
+bool Immovable::construct_remaining_buildcost(Buildcost* buildcost) {
 	ActConstructData* d = get_action_data<ActConstructData>();
 	if (d == nullptr) {
 		return false;
@@ -777,7 +777,7 @@ bool Immovable::construct_ware(Game& game, DescriptionIndex index) {
 	molog(game.get_gametime(), "construct_ware: total %u delivered: %u", index, d->delivered[index]);
 
 	Buildcost remaining;
-	construct_remaining_buildcost(game, &remaining);
+	construct_remaining_buildcost(&remaining);
 
 	const ImmovableProgram::ActConstruct* action =
 	   dynamic_cast<const ImmovableProgram::ActConstruct*>(&(*program_)[program_ptr_]);

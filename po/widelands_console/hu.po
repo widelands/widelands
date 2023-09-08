@@ -11,6 +11,7 @@
 # litoll <litoll@freemail.hu>, 2017
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2016
 # Tóth András <txa-dev@posteo.hu>, 2021-2022
+# Tóth András <txa-dev@posteo.hu>, 2023
 # vargaviktor <viktor.varga@gmail.com>, 2021
 # vargaviktor <viktor.varga@gmail.com>, 2021
 # zone <z-one@freemail.hu>, 2015
@@ -160,7 +161,7 @@ msgstr "A játék sebességének automatikus változtatása a mesterséges intel
 
 #: ../../src/wlapplication_messages.cc:102
 msgid "Enable the Script Console and Cheating Mode."
-msgstr ""
+msgstr "A parancsértelmező ablak és a csalások bekapcsolása."
 
 #: ../../src/wlapplication_messages.cc:105
 msgid "Game options:"
@@ -199,7 +200,7 @@ msgstr "[true*|false]"
 msgid ""
 "Do not create an autosave when the user has been inactive since the last "
 "autosave."
-msgstr ""
+msgstr "Automatikus mentések kihagyása, ha a felhasználó a legutóbbi mentés óta nem csinált semmit."
 
 #: ../../src/wlapplication_messages.cc:121
 msgid "Do not save files as binary zip archives."
@@ -225,7 +226,7 @@ msgstr "[true|false*]"
 
 #: ../../src/wlapplication_messages.cc:127
 msgid "Whether to save the history of sent chat messages to a file."
-msgstr ""
+msgstr "Az elküldött csevegés üzenetek előzményeinek mentése fájlba. (igen/nem)"
 
 #: ../../src/wlapplication_messages.cc:128
 msgid "Show filenames in the replay screen."
@@ -240,7 +241,7 @@ msgstr "Figyelmeztetés a térképszerkesztőben túl sok játékos beállítás
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:135
 msgid "Pause the game after `n` minutes of user inactivity."
-msgstr ""
+msgstr "A játék megállítása, ha a felhasználó `n` percig nem csinált semmit."
 
 #: ../../src/wlapplication_messages.cc:137
 msgid "Start building a road after placing a flag."

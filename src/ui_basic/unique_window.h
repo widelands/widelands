@@ -51,9 +51,10 @@ struct UniqueWindow : public Window {
 		int32_t x{0};
 		int32_t y{0};
 		bool valid_pos{false};
+		bool pinned{false};
 
 		Registry() = default;
-		~Registry();
+		virtual ~Registry();
 	};
 
 	UniqueWindow(Panel* parent,
@@ -82,8 +83,10 @@ struct UniqueWindow : public Window {
 		return usedefaultpos_;
 	}
 
+protected:
+	Registry* const registry_;
+
 private:
-	Registry* registry_;
 	bool usedefaultpos_;
 };
 }  // namespace UI

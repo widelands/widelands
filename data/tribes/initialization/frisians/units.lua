@@ -13,12 +13,12 @@ wl.Descriptions():new_tribe {
    animations = {
       frontier = { hotspot = {8, 26} },
       pinned_note = { hotspot = {18, 67} },
-      bridge_normal_e = { hotspot = {-2, 12} },
-      bridge_busy_e = { hotspot = {-2, 12} },
-      bridge_normal_se = { hotspot = {5, 2} },
-      bridge_busy_se = { hotspot = {5, 2} },
-      bridge_normal_sw = { hotspot = {36, 3} },
-      bridge_busy_sw = { hotspot = {36, 3} }
+      bridge_normal_e = { hotspot = {0, 17} },
+      bridge_busy_e = { hotspot = {0, 17} },
+      bridge_normal_se = { hotspot = {8, 8} },
+      bridge_busy_se = { hotspot = {8, 8} },
+      bridge_normal_sw = { hotspot = {40, 8} },
+      bridge_busy_sw = { hotspot = {40, 8} }
    },
    spritesheets = {
       flag = {
