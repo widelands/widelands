@@ -36,6 +36,10 @@
 constexpr Duration kUpdateTimeInGametimeMs(500);  //  half a second, gametime
 constexpr int kSpacing = 8;
 
+constexpr int kSoldierIconWidth = 32;
+constexpr int kSoldierIconHeight = 30;
+constexpr int kShipIconHeight = 34;
+
 static unsigned next_serial_(0);
 static std::map<unsigned, AttackWindow*> living_attack_windows_;
 
@@ -123,8 +127,8 @@ AttackPanel::AttackPanel(
      target_coordinates_(target_coordinates),
      get_max_attackers_(get_max_attackers),
      attack_type_(attack_type),
-     icon_w_(attack_type_ == AttackPanel::AttackType::kShip ? 64 : 32),
-     icon_h_(attack_type_ == AttackPanel::AttackType::kShip ? 45 : 30),
+     icon_w_(attack_type_ == AttackPanel::AttackType::kShip ? (2 * Widelands::Ship::kShipHealthBarWidth + kSpacing) : kSoldierIconWidth),
+     icon_h_(attack_type_ == AttackPanel::AttackType::kShip ? kShipIconHeight : kSoldierIconHeight),
      lastupdate_(0),
 
      linebox_(this, UI::PanelStyle::kWui, "line_box", 0, 0, UI::Box::Horizontal),
@@ -722,6 +726,9 @@ void AttackPanel::ListOfSoldiers::draw(RenderTarget& dst) {
 
 				upcast(const Widelands::Ship, ship, bob);
 				assert(ship != nullptr);
+
+				const Image* icon = g_image_cache->get(ship->descr().icon_filename());
+				dst.blit(location, icon, BlendMode::Default, UI::Align::kCenter);
 
 				ship->draw_healthbar(attack_box_->iplayer_.egbase(), &dst, location.cast<float>(), 1.f);
 

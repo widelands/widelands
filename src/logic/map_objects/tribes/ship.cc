@@ -2370,8 +2370,6 @@ void Ship::sink_ship(Game& game) {
 	ship_wakeup(game);
 }
 
-constexpr int kShipHealthBarWidth = 30;
-
 void Ship::draw(const EditorGameBase& egbase,
                 const InfoToDraw& info_to_draw,
                 const Vector2f& field_on_dst,

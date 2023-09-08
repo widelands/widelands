@@ -99,6 +99,8 @@ constexpr int32_t kShipInterval = 1500;
 struct Ship : Bob {
 	MO_DESCR(ShipDescr)
 
+	static constexpr int kShipHealthBarWidth = 30;
+
 	explicit Ship(const ShipDescr& descr);
 	~Ship() override = default;
 
