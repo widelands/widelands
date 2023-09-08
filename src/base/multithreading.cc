@@ -38,6 +38,10 @@ std::mutex MutexLock::s_mutex_;
 static std::mutex responsiveness_list_mutex_;
 
 std::vector<std::function<void()>> MutexLock::stay_responsive_;
+/* When a thread X is handling a thread-safe-function note sent from another thread Y, and Y is
+ * waiting for completion, then we add a pair {X, Y} here to register that for the duration
+ * of the note handling, all resources (especially mutexes) owned by Y are also owned by X.
+ */
 static std::vector<std::pair<std::thread::id, std::thread::id>> acting_as_another_thread;
 
 /** Wrapper around a STL recursive mutex plus some metadata. */
