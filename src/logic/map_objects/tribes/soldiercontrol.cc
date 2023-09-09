@@ -23,7 +23,23 @@
 #include "graphic/style_manager.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 
+namespace {
+
+std::string format_extra_soldiers(int has, int wants) {
+	assert(has > wants);
+	/** TRANSLATORS: %1% is the number of all soldiers in a warehouse, %2% is the desired
+	                 number */
+	return format(pgettext("warehouse", "%1% (%2%)"),
+	              StyleManager::color_tag(as_string(has),
+	                                      g_style_manager->building_statistics_style().high_color()),
+	              wants);
+}
+
+}  // namespace
+
 namespace Widelands {
+
+#define CAPIDX TribeDescr::CapacityStringIndex
 
 /**
 ===============
@@ -41,33 +57,31 @@ std::string SoldierControl::get_status_string(const TribeDescr& tribe, SoldierPr
 	// military capacity strings
 	if (present == stationed) {
 		if (soldier_capacity() > stationed) {  // Soldiers are lacking
-			rv = format(
-			   npgettext(tribe.get_soldier_context_string().c_str(),
-			             tribe.get_soldier_capacity_strings_sg()[0].c_str(),
-			             tribe.get_soldier_capacity_strings_pl()[0].c_str(), stationed),
-			   stationed,
-			   StyleManager::color_tag(as_string(soldier_capacity() - stationed), style.low_color()));
+			rv = format(tribe.get_soldiers_format_string(CAPIDX::kLacking, stationed), stationed,
+			            StyleManager::color_tag(as_string(soldier_capacity() - stationed),
+			                                    style.low_color()));
+		} else if (stationed > soldier_capacity()) {  // Port or HQ has extra soldiers in store
+			rv = format(tribe.get_soldiers_format_string(CAPIDX::kFull, stationed),
+			            format_extra_soldiers(stationed, soldier_capacity()));
 		} else {  // Soldiers filled to capacity
-			rv = format(
-			   npgettext(tribe.get_soldier_context_string().c_str(),
-			             tribe.get_soldier_capacity_strings_sg()[1].c_str(),
-			             tribe.get_soldier_capacity_strings_pl()[1].c_str(), stationed),
-			   stationed);
+			rv = format(tribe.get_soldiers_format_string(CAPIDX::kFull, stationed), stationed);
 		}
 	} else {
 		if (soldier_capacity() > stationed) {  // Soldiers are lacking; others are outside
 			rv = format(
-			   npgettext(tribe.get_soldier_context_string().c_str(),
-			             tribe.get_soldier_capacity_strings_sg()[2].c_str(),
-			             tribe.get_soldier_capacity_strings_pl()[2].c_str(), stationed),
-			   present, StyleManager::color_tag(as_string(stationed - present), style.high_color()),
+			   tribe.get_soldiers_format_string(CAPIDX::kOutAndLacking, stationed), present,
+			   StyleManager::color_tag(as_string(stationed - present), style.high_color()),
 			   StyleManager::color_tag(as_string(soldier_capacity() - stationed), style.low_color()));
+		} else if (present > soldier_capacity()) {  // Port or HQ has extra soldiers in store;
+		                                            // some are outside
+		                                            // (this is currently not possible, outside
+		                                            //  soldiers are not tracked for warehouses)
+			rv = format(tribe.get_soldiers_format_string(CAPIDX::kOut, stationed),
+			            format_extra_soldiers(present, soldier_capacity()),
+			            StyleManager::color_tag(as_string(stationed - present), style.high_color()));
 		} else {  // Soldiers filled to capacity; some are outside
-			rv = format(
-			   npgettext(tribe.get_soldier_context_string().c_str(),
-			             tribe.get_soldier_capacity_strings_sg()[3].c_str(),
-			             tribe.get_soldier_capacity_strings_pl()[3].c_str(), stationed),
-			   present, StyleManager::color_tag(as_string(stationed - present), style.high_color()));
+			rv = format(tribe.get_soldiers_format_string(CAPIDX::kOut, stationed), present,
+			            StyleManager::color_tag(as_string(stationed - present), style.high_color()));
 		}
 	}
 
