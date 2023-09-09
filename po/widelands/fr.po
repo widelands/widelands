@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-09-07 02:26+0000\n"
+"POT-Creation-Date: 2023-09-09 02:25+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: David D, 2017-2018,2021-2023\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
@@ -1754,7 +1754,7 @@ msgstr "File de commande"
 #: ../../src/map_io/widelands_map_loader.cc:400
 #: ../../src/wlapplication_options.cc:667
 #: ../../src/wui/interactive_player.cc:225
-#: ../../src/wui/interactive_player.cc:463
+#: ../../src/wui/interactive_player.cc:464
 msgid "Messages"
 msgstr "Messages"
 
@@ -2729,19 +2729,19 @@ msgstr "Un fichier de carte est invalide :\n%s"
 msgid "This objective has no description."
 msgstr "Cet objectif n'a pas de description."
 
-#: ../../src/logic/player.cc:1995
+#: ../../src/logic/player.cc:1996
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
 msgstr "Navire %d"
 
-#: ../../src/logic/player.cc:2012
+#: ../../src/logic/player.cc:2013
 #, c-format
 msgctxt "warehouse"
 msgid "Port %d"
 msgstr "Port %d"
 
-#: ../../src/logic/player.cc:2012
+#: ../../src/logic/player.cc:2013
 #, c-format
 msgctxt "warehouse"
 msgid "Warehouse %d"
@@ -9327,7 +9327,7 @@ msgid ""
 "constructionsite"
 msgstr "Activer l'indication de superposition des zones de travaux quand vous placez un site de construction"
 
-#: ../../src/wui/interactive_player.cc:468
+#: ../../src/wui/interactive_player.cc:469
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
@@ -9335,7 +9335,7 @@ msgstr[0] "%u nouveau message"
 msgstr[1] "%u nouveaux messages"
 msgstr[2] "%u nouveaux messages"
 
-#: ../../src/wui/interactive_player.cc:881
+#: ../../src/wui/interactive_player.cc:884
 msgid "Fastplace Shortcuts"
 msgstr "Raccourcis endroit rapide"
 

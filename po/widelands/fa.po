@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-09-07 02:26+0000\n"
+"POT-Creation-Date: 2023-09-09 02:25+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Alireza Rashidi, 2023\n"
 "Language-Team: Persian (http://app.transifex.com/widelands/widelands/language/fa/)\n"
@@ -1735,7 +1735,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_loader.cc:400
 #: ../../src/wlapplication_options.cc:667
 #: ../../src/wui/interactive_player.cc:225
-#: ../../src/wui/interactive_player.cc:463
+#: ../../src/wui/interactive_player.cc:464
 msgid "Messages"
 msgstr ""
 
@@ -2702,19 +2702,19 @@ msgstr ""
 msgid "This objective has no description."
 msgstr ""
 
-#: ../../src/logic/player.cc:1995
+#: ../../src/logic/player.cc:1996
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
 msgstr ""
 
-#: ../../src/logic/player.cc:2012
+#: ../../src/logic/player.cc:2013
 #, c-format
 msgctxt "warehouse"
 msgid "Port %d"
 msgstr ""
 
-#: ../../src/logic/player.cc:2012
+#: ../../src/logic/player.cc:2013
 #, c-format
 msgctxt "warehouse"
 msgid "Warehouse %d"
@@ -9275,14 +9275,14 @@ msgid ""
 "constructionsite"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:468
+#: ../../src/wui/interactive_player.cc:469
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/wui/interactive_player.cc:881
+#: ../../src/wui/interactive_player.cc:884
 msgid "Fastplace Shortcuts"
 msgstr ""
 
