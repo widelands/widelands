@@ -27,6 +27,12 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textinput.h"
 
+// Global input histories
+extern UI::EditBoxHistory g_chat_sent_history;
+extern UI::EditBoxHistory g_script_console_history;
+const std::string kChatSentHistoryFile = "sent_messages_history";
+const std::string kScriptConsoleHistoryFile = "script_console_history";
+
 /**
  * Provides a panel that contains chat message scrollbar and a chat message
  * entry field.
@@ -39,6 +45,7 @@ struct GameChatPanel : public UI::Panel {
 	              uint32_t w,
 	              uint32_t h,
 	              ChatProvider&,
+	              UI::EditBoxHistory*,
 	              UI::PanelStyle style);
 
 	// Signal is called when a message has been sent by the user.
@@ -55,6 +62,7 @@ struct GameChatPanel : public UI::Panel {
 	}
 
 	bool handle_key(bool down, SDL_Keysym code) override;
+	bool handle_textinput(const std::string& text) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	void focus_edit();
 	void unfocus_edit();

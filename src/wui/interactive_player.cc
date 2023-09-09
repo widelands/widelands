@@ -247,10 +247,10 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 
 	finalize_toolbar();
 
-#ifndef NDEBUG  //  only in debug builds
-	addCommand(
-	   "switchplayer", [this](const std::vector<std::string>& str) { cmdSwitchPlayer(str); });
-#endif
+	if (g_allow_script_console) {
+		addCommand(
+		   "switchplayer", [this](const std::vector<std::string>& str) { cmdSwitchPlayer(str); });
+	}
 
 	map_options_subscriber_ = Notifications::subscribe<NoteMapOptions>(
 	   [this](const NoteMapOptions& /* note */) { rebuild_statistics_menu(); });
@@ -431,7 +431,8 @@ void InteractivePlayer::draw_immovables_for_visible_field(
 void InteractivePlayer::think() {
 	InteractiveGameBase::think();
 
-	if (player().is_picking_custom_starting_position()) {
+	if (player().get_starting_position_state() ==
+	    Widelands::Player::StartingPositionState::kPicking) {
 		set_sel_picture(
 		   playercolor_image(player().get_playercolor(), "images/players/player_position_menu.png"));
 	}
@@ -510,7 +511,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 	Workareas workareas = get_workarea_overlays(map);
 	FieldsToDraw* fields_to_draw = given_map_view->draw_terrain(gbase, &plr, workareas, false, dst);
 	const auto& road_building_s = road_building_steepness_overlays();
-	const bool picking_starting_pos = plr.is_picking_custom_starting_position();
+	const bool picking_starting_pos =
+	   (plr.get_starting_position_state() == Widelands::Player::StartingPositionState::kPicking);
 
 	const float scale = 1.f / given_map_view->view().zoom;
 
@@ -719,7 +721,8 @@ Widelands::PlayerNumber InteractivePlayer::player_number() const {
 
 /// Player has clicked on the given node; bring up the context menu.
 void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) {
-	if (player().is_picking_custom_starting_position()) {
+	if (player().get_starting_position_state() ==
+	    Widelands::Player::StartingPositionState::kPicking) {
 		if (get_player()->pick_custom_starting_position(node_and_triangle.node)) {
 			unset_sel_picture();
 		}
@@ -938,6 +941,10 @@ bool InteractivePlayer::player_hears_field(const Widelands::Coords& coords) cons
 }
 
 void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {
+	if (!g_allow_script_console) {
+		throw wexception("Trying to switch player when the Script Console is disabled.");
+	}
+
 	if (args.size() != 2) {
 		DebugConsole::write("Usage: switchplayer <nr>");
 		return;
@@ -945,13 +952,17 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {
 
 	int const n = stoi(args[1]);
 	if (n < 1 || n > kMaxPlayers || (game().get_player(n) == nullptr)) {
+		broadcast_cheating_message();
 		DebugConsole::write(format("Player #%d does not exist.", n));
 		return;
 	}
 
 	DebugConsole::write(format("Switching from #%d to #%d.", static_cast<int>(player_number_), n));
+	broadcast_cheating_message("SWITCHED_PLAYER", game().get_player(n)->get_name());
+
 	player_number_ = n;
 
+	// TODO(tothxa): All statistics windows need updates, not just these 2
 	if (UI::UniqueWindow* const building_statistics_window = menu_windows_.stats_buildings.window) {
 		dynamic_cast<BuildingStatisticsMenu&>(*building_statistics_window).update();
 	}

@@ -41,4 +41,6 @@ char* gamestring_with_leading_zeros(uint32_t gametime);
 /// If Time represents more than 999 hours, it wraps around
 std::string gametimestring(uint32_t gametime, bool show_seconds = false);
 
+std::string realtimestring();
+
 #endif  // end of include guard: WL_BASE_TIME_STRING_H
