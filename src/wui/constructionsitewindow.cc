@@ -63,11 +63,14 @@ ConstructionSiteWindow::FakeWaresDisplay::FakeWaresDisplay(UI::Panel* parent,
 			warelist_->add(w->descr().worker_index(), 1);
 		}
 	}
-	add_warelist(*warelist_);
 }
 
 ConstructionSiteWindow::FakeWaresDisplay::~FakeWaresDisplay() {
 	warelist_->clear();  // Avoid annoying warnings
+}
+
+uint32_t ConstructionSiteWindow::FakeWaresDisplay::amount_of(const Widelands::DescriptionIndex ware) {
+	return warelist_->stock(ware);
 }
 
 void ConstructionSiteWindow::FakeWaresDisplay::draw_ware(RenderTarget& dst,

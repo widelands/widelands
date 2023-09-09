@@ -53,6 +53,10 @@ public:
 protected:
 	void draw_ware(RenderTarget& dst, Widelands::DescriptionIndex ware) override;
 
+	uint32_t amount_of(const Widelands::DescriptionIndex ware) override {
+		return (get_type() == Widelands::wwWORKER ? warehouse_.get_workers() : warehouse_.get_wares()).stock(ware);
+	}
+
 private:
 	Widelands::Warehouse& warehouse_;
 };
@@ -64,7 +68,6 @@ WarehouseWaresDisplay::WarehouseWaresDisplay(UI::Panel* parent,
                                              bool selectable)
    : WaresDisplay(parent, 0, 0, wh.owner().tribe(), type, selectable), warehouse_(wh) {
 	set_inner_size(width, 0);
-	add_warelist(type == Widelands::wwWORKER ? warehouse_.get_workers() : warehouse_.get_wares());
 	if (type == Widelands::wwWORKER) {
 		const std::vector<Widelands::DescriptionIndex>& worker_types_without_cost =
 		   warehouse_.owner().tribe().worker_types_without_cost();
