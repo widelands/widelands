@@ -54,7 +54,8 @@ protected:
 	void draw_ware(RenderTarget& dst, Widelands::DescriptionIndex ware) override;
 
 	uint32_t amount_of(const Widelands::DescriptionIndex ware) override {
-		return (get_type() == Widelands::wwWORKER ? warehouse_.get_workers() : warehouse_.get_wares()).stock(ware);
+		return (get_type() == Widelands::wwWORKER ? warehouse_.get_workers() : warehouse_.get_wares())
+		   .stock(ware);
 	}
 
 private:

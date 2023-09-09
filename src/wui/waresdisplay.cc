@@ -612,7 +612,9 @@ uint32_t StockMenuWaresDisplay::amount_of(const Widelands::DescriptionIndex ware
 				totalstock += economy.second->get_wares_or_workers().stock(ware);
 			} else {
 				for (const Widelands::Warehouse* warehouse : economy.second->warehouses()) {
-					totalstock += (get_type() == Widelands::wwWARE ? warehouse->get_wares() : warehouse->get_workers()).stock(ware);
+					totalstock += (get_type() == Widelands::wwWARE ? warehouse->get_wares() :
+                                                                warehouse->get_workers())
+					                 .stock(ware);
 				}
 			}
 		}

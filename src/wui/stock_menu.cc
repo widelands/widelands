@@ -75,11 +75,13 @@ StockMenu::StockMenu(InteractivePlayer& plr, Registry& registry)
 	tabs_.add(
 	   "workers_total", g_image_cache->get(pic_tab_workers), all_workers_, _("Workers (total)"));
 
-	warehouse_wares_ = new StockMenuWaresDisplay(&tabs_, 0, 0, plr.player(), Widelands::wwWARE, false);
+	warehouse_wares_ =
+	   new StockMenuWaresDisplay(&tabs_, 0, 0, plr.player(), Widelands::wwWARE, false);
 	tabs_.add("wares_in_warehouses", g_image_cache->get(pic_tab_wares_warehouse), warehouse_wares_,
 	          _("Wares in warehouses"));
 
-	warehouse_workers_ = new StockMenuWaresDisplay(&tabs_, 0, 0, plr.player(), Widelands::wwWORKER, false);
+	warehouse_workers_ =
+	   new StockMenuWaresDisplay(&tabs_, 0, 0, plr.player(), Widelands::wwWORKER, false);
 	tabs_.add("workers_in_warehouses", g_image_cache->get(pic_tab_workers_warehouse),
 	          warehouse_workers_, _("Workers in warehouses"));
 

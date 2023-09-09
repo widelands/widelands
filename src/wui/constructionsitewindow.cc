@@ -69,7 +69,8 @@ ConstructionSiteWindow::FakeWaresDisplay::~FakeWaresDisplay() {
 	warelist_->clear();  // Avoid annoying warnings
 }
 
-uint32_t ConstructionSiteWindow::FakeWaresDisplay::amount_of(const Widelands::DescriptionIndex ware) {
+uint32_t
+ConstructionSiteWindow::FakeWaresDisplay::amount_of(const Widelands::DescriptionIndex ware) {
 	return warelist_->stock(ware);
 }
 
