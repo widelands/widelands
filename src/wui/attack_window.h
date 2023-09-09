@@ -137,6 +137,9 @@ private:
 	std::function<std::vector<Widelands::OPtr<Widelands::Bob>>()> get_max_attackers_;
 	const AttackType attack_type_;
 
+	int icon_w_;
+	int icon_h_;
+
 	/// The last time the information in this Panel got updated
 	Time lastupdate_;
 
