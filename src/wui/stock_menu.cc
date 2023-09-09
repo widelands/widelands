@@ -38,7 +38,6 @@ color_tag(const RGBColor& c, const std::string& text1, const std::string& text2)
 
 StockMenu::StockMenu(InteractivePlayer& plr, Registry& registry)
    : UI::UniqueWindow(&plr, UI::WindowStyle::kWui, "stock_menu", &registry, 480, 640, _("Stock")),
-     player_(plr),
      colors_(g_style_manager->building_statistics_style()),
      main_box_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical),
      tabs_(&main_box_, UI::TabPanelStyle::kWuiDark, "tabs"),

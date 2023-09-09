@@ -51,7 +51,6 @@ struct StockMenu : public UI::UniqueWindow {
 	static UI::Window& load(FileRead&, InteractiveBase&);
 
 private:
-	InteractivePlayer& player_;
 	const UI::BuildingStatisticsStyleInfo& colors_;
 	UI::Box main_box_;
 	UI::TabPanel tabs_;
