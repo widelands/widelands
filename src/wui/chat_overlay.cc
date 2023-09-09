@@ -78,6 +78,7 @@ ChatOverlay::ChatOverlay(UI::Panel* const parent,
    : UI::Panel(parent, UI::PanelStyle::kWui, "chat_overlay", x, y, w, h), m(new Impl(fn)) {
 	m->transparent_ = get_config_bool("transparent_chat", true);
 
+	set_z(UI::Panel::ZOrder::kConfirmation);  // above regular windows
 	set_thinks(true);
 }
 

@@ -19,12 +19,16 @@
 #ifndef WL_UI_BASIC_COLOR_CHOOSER_H
 #define WL_UI_BASIC_COLOR_CHOOSER_H
 
+#include <optional>
+
 #include "graphic/playercolor.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/spinbox.h"
 #include "ui_basic/window.h"
+
+class Section;
 
 namespace UI {
 
@@ -46,12 +50,18 @@ public:
 
 	bool handle_key(bool down, SDL_Keysym) override;
 
+	static void read_favorites_settings();
+
 private:
+	static constexpr unsigned kNFavorites = kMaxPlayers / 2;
+	static Section* favorites_section;
+	static std::optional<RGBColor> favorite_colors[kNFavorites];
+
 	RGBColor current_;
 
-	Box main_box_, hbox_, buttonsbox_, vbox_, box_r_, box_g_, box_b_, palette_box_1_, palette_box_2_;
+	Box main_box_, hbox_, buttonsbox_, vbox_, box_r_, box_g_, box_b_, palette_box_1_, palette_box_2_,
+	   favorites_box_;
 	Button button_ok_, button_cancel_, button_init_, button_r_, button_g_, button_b_;
-	Button* palette_buttons_[kMaxPlayers];
 	Button* button_default_;
 	SpinBox spin_r_, spin_g_, spin_b_;
 	ColorChooserImpl& interactive_pane_;
@@ -60,6 +70,9 @@ private:
 	void create_palette_button(unsigned index);
 	void set_color_from_spinners();
 	void set_sidebar_attribute(ColorAttribute);
+
+	void update_favorites();
+	void set_favorite(unsigned index, bool remove);
 };
 
 }  // namespace UI

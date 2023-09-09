@@ -162,14 +162,14 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
      minimap_registry_(the_egbase.is_game()),
      workareas_cache_(nullptr),
      egbase_(the_egbase),
-#ifndef NDEBUG  //  not in releases
-     display_flags_(dfDebug | get_config_int("display_flags", kDefaultDisplayFlags)),
-#else
      display_flags_(get_config_int("display_flags", kDefaultDisplayFlags)),
-#endif
      lastframe_(SDL_GetTicks()),
-
      unique_window_handler_(new UniqueWindowHandler()) {
+	if (g_allow_script_console) {
+		display_flags_ |= dfDebug;
+	} else {
+		display_flags_ &= ~dfDebug;
+	}
 
 	// Load the buildhelp icons.
 	{
@@ -1834,15 +1834,37 @@ ChatColorForPlayer InteractiveBase::color_functor() const {
 	};
 }
 
-void InteractiveBase::broadcast_cheating_message() const {
+void InteractiveBase::broadcast_cheating_message(const std::string& code,
+                                                 const std::string& arg2) const {
 	if (get_game() == nullptr) {
 		return;  // Editor
 	}
 	if (upcast(GameHost, h, game().game_controller())) {
-		h->send_system_message_code(
-		   "CHEAT", player_number() != 0u ? game().player(player_number()).get_name() : "");
+		if (code == "CHEAT" && player_number() != 0u &&
+		    h->get_local_playername() != game().player(player_number()).get_name()) {
+			h->send_system_message_code(
+			   "CHEAT_OTHER", h->get_local_playername(), game().player(player_number()).get_name());
+		} else {
+			h->send_system_message_code(code, h->get_local_playername(), arg2);
+		}
+
+		if (!g_allow_script_console) {
+			// This shouldn't be possible
+			h->force_pause();
+		}
 	} else if (upcast(GameClient, c, game().game_controller())) {
-		c->send_cheating_info();
+		if (code == "CHEAT" && player_number() != 0u &&
+		    c->get_local_playername() != game().player(player_number()).get_name()) {
+			c->send_cheating_info("CHEAT_OTHER", game().player(player_number()).get_name());
+		} else {
+			c->send_cheating_info(code, arg2);
+		}
+
+		if (!g_allow_script_console) {
+			// This shouldn't be possible
+			// TODO(tothxa): Should be handled more nicely, but what can a client do?
+			throw wexception("Trying to cheat when the Script Console is disabled.");
+		}
 	}
 }
 
@@ -1879,22 +1901,22 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 		}
 
-#ifndef NDEBUG  //  only in debug builds
-		if (matches_shortcut(KeyboardShortcut::kCommonDebugConsole, code)) {
-			GameChatMenu::create_script_console(
-			   this, color_functor(), debugconsole_, *DebugConsole::get_chat_provider());
-			return true;
-		}
-		if (matches_shortcut(KeyboardShortcut::kCommonCheatMode, code)) {
-			if (cheat_mode_enabled_) {
-				cheat_mode_enabled_ = false;
-			} else if (!omnipotent()) {
-				broadcast_cheating_message();
-				cheat_mode_enabled_ = true;
+		if (g_allow_script_console) {
+			if (matches_shortcut(KeyboardShortcut::kCommonDebugConsole, code)) {
+				GameChatMenu::create_script_console(
+				   this, color_functor(), debugconsole_, *DebugConsole::get_chat_provider());
+				return true;
 			}
-			return true;
+			if (matches_shortcut(KeyboardShortcut::kCommonCheatMode, code)) {
+				if (cheat_mode_enabled_) {
+					cheat_mode_enabled_ = false;
+				} else if (!omnipotent()) {
+					broadcast_cheating_message();
+					cheat_mode_enabled_ = true;
+				}
+				return true;
+			}
 		}
-#endif
 
 		if (code.sym == SDLK_TAB) {
 			toolbar()->focus();
@@ -1908,7 +1930,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 	return UI::Panel::handle_key(down, code);
 }
 
-void InteractiveBase::cmd_lua(const std::vector<std::string>& args) {
+void InteractiveBase::cmd_lua(const std::vector<std::string>& args) const {
 	const std::string cmd = join(args, " ");
 
 	broadcast_cheating_message();
@@ -1927,10 +1949,16 @@ void InteractiveBase::cmd_lua(const std::vector<std::string>& args) {
  * Show a map object's debug window
  */
 void InteractiveBase::cmd_map_object(const std::vector<std::string>& args) {
+	if (!g_allow_script_console) {
+		throw wexception("Trying to open map object info when the Script Console is disabled.");
+	}
+
 	if (args.size() != 2) {
 		DebugConsole::write("usage: mapobject <mapobject serial>");
 		return;
 	}
+
+	broadcast_cheating_message();
 
 	uint32_t serial = stoul(args[1]);
 	MapObject* obj = egbase().objects().get_object(serial);
