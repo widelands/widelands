@@ -321,6 +321,10 @@ public:
 		unfiltered_entries.clear();
 	}
 
+	[[nodiscard]] uint32_t unfiltered_size() const {
+		return unfiltered_entries.size();
+	}
+
 	void clear_filter() override {
 		if (current_filter_.empty()) {
 			return;

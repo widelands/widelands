@@ -107,6 +107,7 @@ SoldierCapacityControl::SoldierCapacityControl(UI::Panel* parent,
 	decrease_.set_repeating(true);
 	increase_.set_repeating(true);
 
+	value_.set_fixed_width(value_.get_w());
 	set_thinks(true);
 }
 

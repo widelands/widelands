@@ -36,6 +36,10 @@
 constexpr Duration kUpdateTimeInGametimeMs(500);  //  half a second, gametime
 constexpr int kSpacing = 8;
 
+constexpr int kSoldierIconWidth = 32;
+constexpr int kSoldierIconHeight = 30;
+constexpr int kShipIconHeight = 34;
+
 static unsigned next_serial_(0);
 static std::map<unsigned, AttackWindow*> living_attack_windows_;
 
@@ -124,6 +128,10 @@ AttackPanel::AttackPanel(
      target_coordinates_(target_coordinates),
      get_max_attackers_(get_max_attackers),
      attack_type_(attack_type),
+     icon_w_(attack_type_ == AttackPanel::AttackType::kShip ?
+                (2 * Widelands::Ship::kShipHalfHealthBarWidth + kSpacing) :
+                kSoldierIconWidth),
+     icon_h_(attack_type_ == AttackPanel::AttackType::kShip ? kShipIconHeight : kSoldierIconHeight),
      lastupdate_(0),
 
      linebox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
@@ -557,9 +565,6 @@ std::vector<Widelands::Serial> AttackPanel::soldiers() const {
 	return result;
 }
 
-constexpr int kSoldierIconWidth = 32;
-constexpr int kSoldierIconHeight = 30;
-
 AttackPanel::ListOfSoldiers::ListOfSoldiers(UI::Panel* const parent,
                                             AttackPanel* parent_box,
                                             int32_t const x,
@@ -651,9 +656,9 @@ Widelands::Extent AttackPanel::ListOfSoldiers::size() const {
 
 void AttackPanel::ListOfSoldiers::update_desired_size() {
 	current_size_ = std::max(
-	   1, restricted_row_number_ ? get_h() / kSoldierIconHeight : get_w() / kSoldierIconWidth);
+	   1, restricted_row_number_ ? get_h() / attack_box_->icon_h_ : get_w() / attack_box_->icon_w_);
 	const Widelands::Extent e = size();
-	set_desired_size(e.w * kSoldierIconWidth, e.h * kSoldierIconHeight);
+	set_desired_size(e.w * attack_box_->icon_w_, e.h * attack_box_->icon_h_);
 }
 
 const Widelands::OPtr<Widelands::Bob> AttackPanel::ListOfSoldiers::soldier_at(int32_t x,
@@ -661,8 +666,8 @@ const Widelands::OPtr<Widelands::Bob> AttackPanel::ListOfSoldiers::soldier_at(in
 	if (x < 0 || y < 0 || soldiers_.empty()) {
 		return nullptr;
 	}
-	const int32_t col = x / kSoldierIconWidth;
-	const int32_t row = y / kSoldierIconHeight;
+	const int32_t col = x / attack_box_->icon_w_;
+	const int32_t row = y / attack_box_->icon_h_;
 	assert(col >= 0);
 	assert(row >= 0);
 	if ((restricted_row_number_ ? row : col) >= current_size_) {
@@ -717,11 +722,16 @@ void AttackPanel::ListOfSoldiers::draw(RenderTarget& dst) {
 		MutexLock m(MutexLock::ID::kObjects);
 		const Widelands::Bob* bob = soldiers_[i].get(attack_box_->iplayer_.egbase());
 		if (bob != nullptr) {
-			Vector2i location(column * kSoldierIconWidth, row * kSoldierIconHeight);
+			Vector2i location(column * attack_box_->icon_w_, row * attack_box_->icon_h_);
 
 			if (bob->descr().type() == Widelands::MapObjectType::SHIP) {
+				location.x += attack_box_->icon_w_ / 2;
+
 				upcast(const Widelands::Ship, ship, bob);
 				assert(ship != nullptr);
+
+				const Image* icon = g_image_cache->get(ship->descr().icon_filename());
+				dst.blit(location, icon, BlendMode::Default, UI::Align::kCenter);
 
 				ship->draw_healthbar(attack_box_->iplayer_.egbase(), &dst, location.cast<float>(), 1.f);
 
@@ -729,7 +739,7 @@ void AttackPanel::ListOfSoldiers::draw(RenderTarget& dst) {
 				upcast(const Widelands::Soldier, soldier, bob);
 				assert(soldier != nullptr);
 
-				dst.fill_rect(Recti(location, kSoldierIconWidth, kSoldierIconHeight),
+				dst.fill_rect(Recti(location, attack_box_->icon_w_, attack_box_->icon_h_),
 				              get_soldier_color(soldier), BlendMode::Default);
 
 				soldier->draw_info_icon(location, 1.0f, Widelands::Soldier::InfoMode::kInBuilding,
@@ -740,9 +750,9 @@ void AttackPanel::ListOfSoldiers::draw(RenderTarget& dst) {
 					constexpr float kSize = 0.5f;
 					constexpr float kAlpha = 0.9f;
 					const Image* anchor = g_image_cache->get("images/wui/overlays/port_hint.png");
-					dst.blitrect_scale(Rectf((column + kOffset) * kSoldierIconWidth,
-					                         (row + kOffset) * kSoldierIconHeight,
-					                         kSoldierIconWidth * kSize, kSoldierIconHeight * kSize),
+					dst.blitrect_scale(Rectf((column + kOffset) * attack_box_->icon_w_,
+					                         (row + kOffset) * attack_box_->icon_h_,
+					                         attack_box_->icon_w_ * kSize, attack_box_->icon_h_ * kSize),
 					                   anchor, Recti(0, 0, anchor->width(), anchor->height()), kAlpha,
 					                   BlendMode::Default);
 				}

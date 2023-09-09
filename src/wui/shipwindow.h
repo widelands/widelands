@@ -28,6 +28,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/editbox.h"
+#include "ui_basic/textarea.h"
 #include "ui_basic/textinput.h"
 #include "ui_basic/unique_window.h"
 #include "wui/interactive_base.h"
@@ -77,6 +78,7 @@ private:
 	UI::Box vbox_;
 	UI::Box navigation_box_;
 	UI::Panel* warship_capacity_control_;
+	UI::Textarea warship_health_;
 	UI::EditBox* name_field_;
 	UI::Button* btn_goto_;
 	UI::Button* btn_destination_;

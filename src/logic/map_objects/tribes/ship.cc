@@ -1424,6 +1424,7 @@ void Ship::battle_update(Game& game) {
 			                          _("An enemy ship has destroyed your warship."),
 			                          "images/wui/ship/ship_attack.png");
 
+			target_ship->hitpoints_ = 0;
 			target_ship->battles_.clear();
 			target_ship->reset_tasks(game);
 			target_ship->set_ship_state_and_notify(
@@ -2369,8 +2370,6 @@ void Ship::sink_ship(Game& game) {
 	ship_wakeup(game);
 }
 
-constexpr int kShipHealthBarWidth = 30;
-
 void Ship::draw(const EditorGameBase& egbase,
                 const InfoToDraw& info_to_draw,
                 const Vector2f& field_on_dst,
@@ -2382,7 +2381,9 @@ void Ship::draw(const EditorGameBase& egbase,
 	// Show ship name and current activity
 	std::string statistics_string;
 	if ((info_to_draw & InfoToDraw::kStatistics) != 0) {
-		if (has_battle()) {
+		if (state_is_sinking()) {
+			statistics_string = pgettext("ship_state", "Sinking");
+		} else if (has_battle()) {
 			statistics_string = pgettext("ship_state", "Fighting");
 		} else if (is_refitting()) {
 			switch (pending_refit_) {
@@ -2486,8 +2487,8 @@ void Ship::draw_healthbar(const EditorGameBase& egbase,
 	const Vector2i draw_position = point_on_dst.cast<int>();
 
 	// The frame gets a slight tint of player color
-	Recti energy_outer(draw_position - Vector2i(kShipHealthBarWidth, 0) * scale,
-	                   kShipHealthBarWidth * 2 * scale, 5 * scale);
+	Recti energy_outer(draw_position - Vector2i(kShipHalfHealthBarWidth, 0) * scale,
+	                   kShipHalfHealthBarWidth * 2 * scale, 5 * scale);
 	dst->fill_rect(energy_outer, color);
 	dst->brighten_rect(energy_outer, brighten_factor);
 
@@ -2508,10 +2509,10 @@ void Ship::draw_healthbar(const EditorGameBase& egbase,
 	}
 
 	// Now draw the health bar itself
-	constexpr int kInnerHealthBarWidth = 2 * (kShipHealthBarWidth - 1);
+	constexpr int kInnerHealthBarWidth = 2 * (kShipHalfHealthBarWidth - 1);
 	int health_width = kInnerHealthBarWidth * health_to_show / descr().max_hitpoints_;
 
-	Recti energy_inner(draw_position + Vector2i(-kShipHealthBarWidth + 1, 1) * scale,
+	Recti energy_inner(draw_position + Vector2i(-kShipHalfHealthBarWidth + 1, 1) * scale,
 	                   health_width * scale, 3 * scale);
 	Recti energy_complement(energy_inner.origin() + Vector2i(health_width, 0) * scale,
 	                        (kInnerHealthBarWidth - health_width) * scale, 3 * scale);
