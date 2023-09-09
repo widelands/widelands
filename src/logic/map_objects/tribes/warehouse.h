@@ -214,6 +214,8 @@ public:
 	PortDock* get_portdock() const {
 		return portdock_;
 	}
+
+	std::string info_string(const InfoStringFormat& format) override;
 	void update_statistics_string(std::string* str) override;
 
 	// Returns the first matching not completely filled waresqueue of the expedition if this is a

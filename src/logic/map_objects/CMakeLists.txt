@@ -106,6 +106,7 @@ wl_library(logic_map_objects
     tribes/soldier.cc
     tribes/soldier.h
     tribes/soldiercontrol.h
+    tribes/soldiercontrol.cc
     tribes/training_attribute.h
     tribes/trainingsite.cc
     tribes/trainingsite.h

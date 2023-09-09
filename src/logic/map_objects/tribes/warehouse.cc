@@ -1496,8 +1496,17 @@ void Warehouse::request_soldier_callback(Game& game,
 	wh.soldier_control_.incorporate_soldier(game, s);
 }
 
+std::string Warehouse::info_string(const InfoStringFormat& isf) {
+	if (isf == InfoStringFormat::kCensus) {
+		return format("%s<br>%s", descr().descname(), richtext_escape(get_warehouse_name()));
+	}
+	return Building::info_string(isf);
+}
+
 void Warehouse::update_statistics_string(std::string* str) {
-	*str = richtext_escape(get_warehouse_name());
+	if (descr().get_conquers() > 0) {
+		*str = soldier_control_.get_status_string(owner().tribe(), get_soldier_preference());
+	}
 }
 
 std::unique_ptr<const BuildingSettings> Warehouse::create_building_settings() const {
