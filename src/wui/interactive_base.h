@@ -251,6 +251,10 @@ public:
 	// Sets the toolbar's position to the bottom middle and configures its background images
 	void finalize_toolbar();
 
+	// arg1 is always the real user's name
+	void broadcast_cheating_message(const std::string& code = "CHEAT",
+	                                const std::string& arg2 = "") const;
+
 protected:
 	// For referencing the items in mapviewmenu_
 	enum class MapviewMenuEntry { kMinimap, kIncreaseZoom, kDecreaseZoom, kResetZoom, kQuicknav };
@@ -368,11 +372,7 @@ protected:
 
 	ChatProvider* chat_provider_;
 
-	void broadcast_cheating_message() const;
-
-#ifndef NDEBUG  //  only in debug builds
 	UI::UniqueWindow::Registry debugconsole_;
-#endif
 
 	InfoPanel& info_panel_;
 
@@ -385,7 +385,7 @@ private:
 	                               bool steepness);
 	void road_building_remove_overlay();
 	void cmd_map_object(const std::vector<std::string>& args);
-	void cmd_lua(const std::vector<std::string>& args);
+	void cmd_lua(const std::vector<std::string>& args) const;
 
 	// Rebuilds the subclass' showhidemenu_ according to current map settings
 	virtual void rebuild_showhide_menu() = 0;

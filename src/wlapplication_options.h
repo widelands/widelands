@@ -26,11 +26,12 @@
 
 #include "io/profile.h"
 
-/* Command line option */
+/* Command line options */
+extern bool g_allow_script_console;
 extern bool g_write_syncstreams;
 
 /*
- * Further explanations for all functions and its return values
+ * Further explanations for all functions and their return values
  * can be found in io/profile.cc
  */
 
@@ -326,7 +327,7 @@ uint16_t operator-(const KeyboardShortcut& a, const KeyboardShortcut& b);
  */
 bool is_real(KeyboardShortcut id);
 
-bool is_debug_only(KeyboardShortcut id);
+bool is_developer_tool(KeyboardShortcut id);
 
 /** Check whether a given shortcut is reserved for a fastplace shortcut slot. */
 inline bool is_fastplace(const KeyboardShortcut id) {

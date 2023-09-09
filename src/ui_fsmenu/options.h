@@ -51,7 +51,7 @@ public:
 		bool sdl_cursor;
 		bool tooltip_accessibility_mode;
 
-		// Windows options
+		// Window options
 		bool dock_windows_to_edges;
 		int32_t panel_snap_distance;
 		int32_t border_snap_distance;
@@ -62,6 +62,7 @@ public:
 		int32_t replay_lifetime;   // number of weeks to keep replays around
 		bool skip_autosave_on_inactivity;
 		bool zip;
+		bool save_chat_history;
 
 		// Game options
 		int32_t pause_game_on_inactivity;  // inactivity duration in minutes
@@ -176,6 +177,7 @@ private:
 	UI::SpinBox sb_replay_lifetime_;
 	UI::Checkbox skip_autosave_on_inactivity_;
 	UI::Checkbox zip_;
+	UI::Checkbox save_chat_history_;
 
 	// New Game options
 	UI::Checkbox show_buildhelp_;

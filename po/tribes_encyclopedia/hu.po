@@ -1159,7 +1159,7 @@ msgstr "A vadász-gyűjtögető kunyhónak vadászható állatokra vagy kifoghat
 #: ../../data/tribes/initialization/amazons/units.lua:1302
 msgctxt "amazons_building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "A parton található fák és utak megakadályozzák a halászatot."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Hunter-
 #. Gatherer's Hut
@@ -1231,7 +1231,7 @@ msgstr "A vízgyűjtőkunyhónak nyílt vízre van szüksége a munkaterületén
 #: ../../data/tribes/initialization/amazons/units.lua:1333
 msgctxt "amazons_building"
 msgid "Roads and trees along the shoreline block drawing water."
-msgstr ""
+msgstr "A parton található fák és utak megakadályozzák a víz gyűjtését."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Rare Tree
 #. Cutter's Hut
@@ -1630,7 +1630,7 @@ msgstr "Kompokat készít."
 #: ../../data/tribes/initialization/amazons/units.lua:1613
 msgctxt "amazons_building"
 msgid "Needs water nearby. Be aware ferries carry wares only, no workers."
-msgstr ""
+msgstr "Víz közelében tud csak dolgozni. Ne feledd, hogy a kompok csak árukat szállítanak, munkásokat nem!"
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Ferry Yard, part
 #. 2
@@ -1661,7 +1661,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2197
 msgctxt "building"
 msgid "Roads and trees along the shoreline block access to water."
-msgstr ""
+msgstr "A parton található fák és utak megakadályozzák a munkáját."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Shipyard
 #: ../../data/tribes/initialization/amazons/units.lua:1623
@@ -1685,7 +1685,7 @@ msgstr "Hajókat épít, amelyeket tengerentúli gyarmatosításra és kikötők
 #: ../../data/tribes/initialization/frisians/units.lua:2195
 msgctxt "building"
 msgid "Needs wide open water nearby."
-msgstr ""
+msgstr "Csak hajózásra alkalmas tág vízfelületek közelében tud dolgozni."
 
 #. TRANSLATORS: Lore helptext for an Amazon building: Construction Site
 #. TRANSLATORS: Lore helptext for an Atlantean building: Construction Site
@@ -4087,7 +4087,7 @@ msgstr "Építs egy haltenyésztőházat, közel a halászházhoz, nehogy elfogy
 #: ../../data/tribes/initialization/atlanteans/units.lua:1526
 msgctxt "atlanteans_building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "A parton található fák és utak megakadályozzák a halászatot."
 
 #. TRANSLATORS: Note lore for an Atlantean production site: Fisher's House use
 #. some local fise song as you like
@@ -6477,7 +6477,7 @@ msgstr "A halászkunyhónak hallal teli vizekre van szüksége a munkaterületé
 #: ../../data/tribes/initialization/barbarians/units.lua:1193
 msgctxt "building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "A parton található fák és utak megakadályozzák a halászatot."
 
 #. TRANSLATORS: Performance helptext for production site: Fisher's Hut
 #: ../../data/tribes/initialization/barbarians/units.lua:1196
@@ -10040,7 +10040,7 @@ msgid ""
 "smithy. In combination with a wooden spear, it is the equipment to fit out "
 "young soldiers. Helmets are also used in training camps – together with food"
 " – to train soldiers from health level 0 to level 1."
-msgstr ""
+msgstr "A sisak a harcos alapvető védelmét látja el. A páncélkovács műhelyben készül. A falándzsával együtt ez adja az újoncok felszerelését. A sisakot a kiképzőtáborban is használják – élelmiszerrel együtt – a katonák életerejének 0. szintről 1. szintre történő képzéséhez."
 
 #. TRANSLATORS: Helptext for an Empire ware: Armor
 #: ../../data/tribes/initialization/empire/units.lua:569
@@ -10584,7 +10584,7 @@ msgstr "A halászháznak hallal teli vizekre van szüksége a munkaterületén."
 #: ../../data/tribes/initialization/empire/units.lua:1316
 msgctxt "empire_building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "A parton található fák és utak megakadályozzák a halászatot."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11327,7 +11327,7 @@ msgctxt "empire_building"
 msgid ""
 "If the food supply is steady, this mine can produce marble in %1$s and "
 "granite in %2$s on average."
-msgstr ""
+msgstr "Ha az élelmiszerellátás folyamatos, akkor ez a bánya átlagosan %1$s alatt termel egy márványtömböt és átlagosan %2$s alatt egy gránittömböt."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11382,7 +11382,7 @@ msgstr "A szén feltámad a halálból, feketéből vörösre változik, parazsa
 msgctxt "empire_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in %s on average."
-msgstr ""
+msgstr "Ha az élelmiszerellátás folyamatos, akkor ez a bánya átlagosan %s alatt termel egy darab szenet."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11438,7 +11438,7 @@ msgctxt "empire_building"
 msgid ""
 "If the food supply is steady, this mine can produce iron ore in %s on "
 "average."
-msgstr ""
+msgstr "Ha az élelmiszerellátás folyamatos, akkor ez a bánya átlagosan %s alatt termel egy vasércet."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11492,7 +11492,7 @@ msgctxt "empire_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in %s on "
 "average."
-msgstr ""
+msgstr "Ha az élelmiszerellátás folyamatos, akkor ez a bánya átlagosan %s alatt termel egy aranyércet."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -13936,7 +13936,7 @@ msgstr "A halászháznak hallal teli vizekre van szüksége a munkaterületén."
 #: ../../data/tribes/initialization/frisians/units.lua:1619
 msgctxt "frisians_building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "A parton található fák és utak megakadályozzák a halászatot."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Fisher's
 #. House
@@ -14719,7 +14719,7 @@ msgstr "Felszereli és kiképzi katonákká az újoncokat."
 #, lua-format
 msgctxt "frisians_building"
 msgid "The barracks need %s on average to recruit one soldier."
-msgstr ""
+msgstr "A laktanya átlagosan %s alatt toboroz egy katonát."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Reindeer Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1978
@@ -14750,7 +14750,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the supply is steady and there is continuous demand for fur, then the "
 "reindeer farm produces one meat after producing three pieces of fur."
-msgstr ""
+msgstr "Ha folyamatos az ellátás és az igény a szőrmére, akkor a rénszarvastelep termel egy húst is minden harmadik szőrme után."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Reindeer
 #. Farm
@@ -14823,7 +14823,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the rock mine can produce granite in %s on "
 "average."
-msgstr ""
+msgstr "Ha az élelmiszerellátás folyamatos, akkor a kőbánya átlagosan %s alatt termel egy gránittömböt."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Deep Rock
 #. Mine
@@ -14833,7 +14833,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep rock mine can produce granite in %s "
 "on average."
-msgstr ""
+msgstr "Ha az élelmiszerellátás folyamatos, akkor a mély kőbánya átlagosan %s alatt termel egy gránittömböt."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Coal Mine
 #: ../../data/tribes/initialization/frisians/units.lua:2037
@@ -14871,7 +14871,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep iron mine can produce iron ore in %s "
 "on average."
-msgstr ""
+msgstr "Ha az élelmiszerellátás folyamatos, akkor a mély vasércbánya átlagosan %s alatt termel egy vasércet."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Gold Mine
 #: ../../data/tribes/initialization/frisians/units.lua:2073
@@ -14890,7 +14890,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep gold mine can produce gold ore in %s "
 "on average."
-msgstr ""
+msgstr "Ha az élelmiszerellátás folyamatos, akkor a mély aranybánya átlagosan %s alatt termel egy aranyércet."
 
 #. TRANSLATORS: Lore helptext for a Frisian training site: Training Camp
 #: ../../data/tribes/initialization/frisians/units.lua:2091

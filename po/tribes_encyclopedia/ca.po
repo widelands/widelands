@@ -1362,7 +1362,7 @@ msgid ""
 "the economy, production of one of each tool takes %1$s and one of each spear"
 " takes %2$s on average. If only one kind of tool or spear is needed by the "
 "economy, its production takes %3$s on average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita totes les eines i llances, es triga de mitjana %1$s per a produir cada eina i %2$s per a produir cada llança. Si l'economia només necessita un tipus d'eina o de llança, la producció de cadascuna d'elles triga %3$s de mitjana."
 
 #. TRANSLATORS: Lore helptext for an Amazon production site: Dressmakery
 #: ../../data/tribes/initialization/amazons/units.lua:1411
@@ -1396,7 +1396,7 @@ msgid ""
 "needed by the economy, production of one of each of them takes %1$s on "
 "average. If only one kind of them is needed by the economy, its production "
 "takes %2$s on average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita totes les vestimentes, botes i armadures, per a produir-ne una unitat de cadascuna d'elles es triga de mitjana %1$s. Si l'economia només necessita un tipus determinat de vestimenta, bota o armadura, la producció de cadascuna d'elles triga %2$s de mitjana."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Charcoal Kiln
 #: ../../data/tribes/initialization/amazons/units.lua:1424
@@ -4330,7 +4330,7 @@ msgid ""
 " takes %2$s on average. If only one kind of food is needed by the economy, "
 "production of one smoked fish takes %3$s and one smoked meat takes %4$s on "
 "average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita tots els tipus de menjar fumat, es triga de mitjana %1$s per a produir cada peix fumat i %2$s per a produir cada carn fumada. Si l'economia només necessita un tipus de menjar, la producció de peix fumat triga %3$s i la de carn fumada triga%4$s de mitjana."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Mill
 #: ../../data/tribes/initialization/atlanteans/units.lua:1641
@@ -4370,7 +4370,7 @@ msgid ""
 " economy, production of one sack of each kind of flour takes %1$s on "
 "average. If only one kind of flour is needed by the economy, its production "
 "takes %2$s on average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita tots els tipus de farina, per a produir-ne un sac de cadascuna d'elles es triga %1$s de mitjana. Si l'economia només em necessita un tipus determinat, la producció de cada sac de farina triga %2$s de mitjana."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Bakery
 #: ../../data/tribes/initialization/atlanteans/units.lua:1656
@@ -4476,7 +4476,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita tots els tipus de metalls, es triga de mitjana %1$s per a produir cada unitat de ferro i %2$s per a produir cada unitat d'or. Si l'economia només necessita un tipus de metall, la producció de cada unitat de ferro triga %3$s i la d'or triga%4$s de mitjana."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Toolsmithy
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Metal
@@ -4510,7 +4510,7 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita totes les eines, per a produir-ne una unitat de cadascuna d'elles es triga de mitjana %1$s. Si l'economia només necessita un tipus determinat d'eina, produir cada unitat costa %2$s de mitjana."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Weapon
 #. Smithy
@@ -4549,7 +4549,7 @@ msgid ""
 "one kind of trident is needed by the economy, production of one light "
 "trident takes %2$s and one long trident, one steel trident, one double "
 "trident or one heavy double trident takes %3$s on average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita tots els tipus de trident, es triga de mitjana %1$s per a produir-ne cada unitat. Si l'economia només en necessita d'un tipus, la producció d'un trident lleuger triga %2$s i un de llarg, d'acer, doble o doble pesat triga %3$s de mitjana."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Armor
 #. Smithy
@@ -4578,7 +4578,7 @@ msgid ""
 "the economy, production of one of each kind takes %1$s on average. If only "
 "one kind of shield is needed by the economy, production of one steel shield "
 "takes %2$s and one advanced shield takes %3$s on average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita ambdós tipus d'escut, es triga de mitjana %1$s per a produir cada escut. Si l'economia només en necessita un tipus, la producció d'un escut d'acer triga %2$s i un escut avançat triga %3$s de mitjana."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Barracks
 #: ../../data/tribes/initialization/atlanteans/units.lua:1740
@@ -4735,7 +4735,7 @@ msgid ""
 "needed by the economy, production of one of each cloth and tabard takes %1$s"
 " on average. If only one kind of cloth or tabard is needed by the economy, "
 "its production takes %2$s on average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita tots els tipus de roba i tabards, produir cada peça de roba i cada tabard costa %1$s de mitjana. Si l'economia només necessita un tipus de roba o de tabard, llavors la producció de cadascun triga %2$s de mitjana."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Crystal
 #. Mine
@@ -4771,7 +4771,7 @@ msgid ""
 " diamond takes %3$s on average. If only one kind of mineral is needed by the"
 " economy, production of one granite takes %4$s, one quartz takes %5$s and "
 "one diamond takes %6$s on average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita tots els tipus de mineral, de mitjana es triga %1$s per a produir cada bloc de granit, fer cada peça de quars costa %2$s i es triga %3$s per a obtenir un diamant. Si l'economia només necessita un tipus de mineral, la producció de cada bloc de granit triga %4$s, la d'una peça de quars costa %5$s i la d'un diamant costa %6$s de mitjana."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for production site: Coal Mine
@@ -6841,7 +6841,7 @@ msgid ""
 "economy, production of one of each food takes %1$s on average. If only one "
 "kind of food is needed by the economy, production of one ration takes %2$s "
 "and one snack takes %3$s on average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita tots els tipus de menjar, es triga de mitjana %1$s per a produir-ne cada unitat. Si l'economia només en necessita un tipus, la producció d'una ració triga %2$s i un aperitiu triga %3$s de mitjana."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Big Inn
 #: ../../data/tribes/initialization/barbarians/units.lua:1368
@@ -6873,7 +6873,7 @@ msgid ""
 "economy, production of one of each food takes %1$s on average. If only one "
 "kind of food is needed by the economy, production of one ration takes %2$s, "
 "one snack takes %3$s and one meal takes %4$s on average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita tots els tipus de menjar, es triga de mitjana %1$s per a produir-ne cada unitat. Si l'economia només en necessita un tipus, la producció d'una ració triga %2$s, un aperitiu triga %3$s i un àpat triga %4$s de mitjana."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Charcoal Kiln
 #: ../../data/tribes/initialization/barbarians/units.lua:1381
@@ -6917,7 +6917,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita tots els tipus de metalls, es triga de mitjana %1$s per a produir cada unitat de ferro i %2$s per a produir cada unitat d'or. Si l'economia només necessita un tipus de metall, la producció de cada unitat de ferro triga %3$s i la d'or triga%4$s de mitjana."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Metal Workshop
 #: ../../data/tribes/initialization/barbarians/units.lua:1413
@@ -6951,7 +6951,7 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita totes les eines, per a produir-ne una unitat de cadascuna d'elles es triga de mitjana %1$s. Si l'economia només necessita un tipus determinat d'eina, produir cada unitat costa %2$s de mitjana."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Warmill
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Ax Workshop
@@ -6999,7 +6999,7 @@ msgid ""
 "If this building is fully supplied and all axes are needed by the economy, "
 "production of one of each ax takes %1$s on average. If only one kind of ax "
 "is needed by the economy, its production takes %2$s on average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita tots els tipus de destral, per a produir-ne una unitat de cadascuna d'elles es triga de mitjana %1$s. Si l'economia només necessita un tipus determinat de destral, produir cada unitat costa %2$s de mitjana."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Warmill,
 #. part 2
@@ -7153,7 +7153,7 @@ msgid ""
 "economy, production of one of each helmet takes %1$s on average. If only one"
 " kind of helmet is needed by the economy, production of one helmet takes "
 "%2$s, one mask takes %3$s and one warhelm takes %4$s on average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita tots els tipus de casc, es triga de mitjana %1$s per a produir-ne cada unitat. Si l'economia només en necessita d'un tipus, la producció d'un casc triga %2$s, una màscara triga %3$s i un casc de guerra triga %4$s de mitjana."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Granite Mine
 #: ../../data/tribes/initialization/barbarians/units.lua:1523
@@ -10934,7 +10934,7 @@ msgid ""
 "economy, production of one of each food takes %1$s on average. If only one "
 "kind of food is needed by the economy, production of one ration takes %2$s "
 "and one meal takes %3$s on average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita tots els tipus de menjar, es triga de mitjana %1$s per a produir-ne cada unitat. Si l'economia només en necessita un tipus, la producció d'una ració triga %2$s i un àpat triga %3$s de mitjana."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -10989,7 +10989,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita tots els tipus de metalls, es triga de mitjana %1$s per a produir cada unitat de ferro i %2$s per a produir cada unitat d'or. Si l'economia només necessita un tipus de metall, la producció de cada unitat de ferro triga %3$s i la d'or triga%4$s de mitjana."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11019,7 +11019,7 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita totes les eines, per a produir-ne una unitat de cadascuna d'elles es triga de mitjana %1$s. Si l'economia només necessita un tipus determinat d'eina, produir cada unitat costa %2$s de mitjana."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11069,7 +11069,7 @@ msgid ""
 "kind of armor takes %2$s on average. If only one kind of armor or helmets is"
 " needed by the economy, production of one helmet takes %3$s, while one kind "
 "of armor takes %4$s on average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita tots els tipus d'armadura i de casc, es triga de mitjana %1$s per a produir cada casc i %2$s per a produir cada armadura. Si l'economia només necessita un tipus d'armadura o casc, la producció de cada casc costa %3$s, mentre que la de cada armadura costa %4$s de mitjana."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11286,7 +11286,7 @@ msgid ""
 "spear is needed by the economy, production of one wooden spear takes %2$s, "
 "one spear, one advanced spear, one heavy spear or one war spear takes %3$s "
 "on average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita tots els tipus de llança, es triga de mitjana %1$s per a produir-ne cada unitat. Si l'economia només en necessita d'un tipus, la producció d'una llança de fusta costa %2$s i la d'una llança normal, avançada, pesada o de guerra triga %3$s de mitjana."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -13896,7 +13896,7 @@ msgctxt "frisians_building"
 msgid ""
 "The hunter pauses %s before going to work again. He produces one fur after "
 "he has produced five pieces of meat."
-msgstr ""
+msgstr "El caçador descansa %s abans de tornar a treballar. Després de produir cinc unitats de carn, produeix una unitat de pell."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Fisher's House
 #: ../../data/tribes/initialization/frisians/units.lua:1610
@@ -14269,7 +14269,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita tots els tipus de metalls, es triga de mitjana %1$s per a produir cada unitat de ferro i %2$s per a produir cada unitat d'or. Si l'economia només necessita un tipus de metall, la producció de cada unitat de ferro triga %3$s i la d'or triga%4$s de mitjana."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Recycling Center
 #: ../../data/tribes/initialization/frisians/units.lua:1781
@@ -14306,7 +14306,7 @@ msgid ""
 "takes %3$s on average. If only one kind of material is needed by the "
 "economy, production of one fur takes %4$s, one iron takes %5$s and one gold "
 "takes %6$s on average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita tots els tipus de materials, es triga %1$s per a produir cada peça de pell, cada unitat de ferro costa %2$s i cada unitat d'or costa %3$s de mitjana. Si l'economia només necessita un tipus de material, la producció de cada peça de pell triga %4$s, la d'una unitat de ferro costa %5$s i la d'or costa %6$s de mitjana."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Blacksmithy
 #: ../../data/tribes/initialization/frisians/units.lua:1794
@@ -14337,7 +14337,7 @@ msgid ""
 "tool is needed by the economy, its production takes %2$s on average. Needles"
 " are an exception - in the time to produce one tool two needles are "
 "produced."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita totes les eines, per a produir-ne una unitat de cadascuna d'elles es triga de mitjana %1$s. Si l'economia només necessita un tipus determinat d'eina, produir cada unitat costa %2$s de mitjana. Les agulles són l'excepció: se'n produeixen dues en el temps que normalment es triga a produir una eina."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Small Armor
 #. Smithy
@@ -14372,7 +14372,7 @@ msgid ""
 "%2$s and one helmet takes %3$s on average. If only one kind of sword or "
 "helmet is needed by the economy, production of one short sword takes %4$s, "
 "one long sword takes %5$s and one helmet takes %6$s on average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita tots els tipus d'espasa i casc, produir cada espasa curta costa %1$s, cada espasa llarga costa %2$s i cada casc costa %3$s de mitjana. Si l'economia només necessita un tipus d'espasa o casc, la producció de cada espasa curta costa %4$s, la d'una espasa llarga costa %5$s i la d'un casc costa %6$s de mitjana."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Large Armor
 #. Smithy
@@ -14410,7 +14410,7 @@ msgid ""
 " sword or helmet is needed by the economy, production of one broadsword "
 "takes %4$s, one double-edged sword takes %5$s and one golden helmet takes "
 "%6$s on average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita tots els tipus d'espasa i casc, produir cada sabre costa %1$s, cada espasa de doble fil costa %2$s i cada casc daurat costa %3$s de mitjana. Si l'economia només necessita un tipus d'espasa o casc, la producció de cada sabre costa %4$s, la d'una espasa de doble fil costa %5$s i la d'un casc daurat costa %6$s de mitjana."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Sewing Room
 #: ../../data/tribes/initialization/frisians/units.lua:1833
@@ -14471,7 +14471,7 @@ msgid ""
 "economy, production of one of each garment takes %1$s on average. If only "
 "one kind of garment is needed by the economy, its production takes %2$s on "
 "average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita tots els vestits, per a produir-ne una unitat de cadascun d'ells es triga de mitjana %1$s. Si l'economia només necessita un tipus determinat de vestit, produir-ne cada unitat costa %2$s de mitjana."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Charcoal
 #. Kiln
@@ -14510,7 +14510,7 @@ msgctxt "frisians_building"
 msgid ""
 "If this building is fully supplied, production of one of each smoked food "
 "takes %s on average."
-msgstr ""
+msgstr "Si l'edifici està ben subministrat, la producció de cada unitat de menjar fumat costa %s de mitjana."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Bakery
 #: ../../data/tribes/initialization/frisians/units.lua:1885
@@ -14571,7 +14571,7 @@ msgid ""
 " production of one bread takes %1$s and one honey bread takes %2$s on "
 "average. If only one kind of bread is needed by the economy, production of "
 "one bread or one honey bread takes %3$s on average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita tots els tipus de pa, es triga de mitjana %1$s per a produir una unitat de pa normal i %2$s per a produir una unitat de pa dolç. Si l'economia només necessita un tipus de pa, la producció de cada unitat costa %3$s de mitjana."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Brewery
 #: ../../data/tribes/initialization/frisians/units.lua:1911
@@ -14629,7 +14629,7 @@ msgid ""
 " production of one beer takes %1$s and one mead takes %2$s on average. If "
 "only one kind of drink is needed by the economy, production of one beer or "
 "one mead takes %3$s on average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita tots els tipus de beguda, es triga de mitjana %1$s per a produir una unitat de cervesa i %2$s per a produir una unitat d'aiguamel. Si l'economia només necessita un tipus de beguda, la producció de cada unitat costa %3$s de mitjana."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Tavern
 #: ../../data/tribes/initialization/frisians/units.lua:1937
@@ -14650,7 +14650,7 @@ msgid ""
 "If the tavern is fully supplied, it can produce one ration in %1$s on "
 "average, using 2 kinds of ingredients. If it can only use one kind of "
 "ingredient, it can produce one ration in %2$s on average."
-msgstr ""
+msgstr "Si la taverna està ben subministrada, pot produir una ració cada %1$s de mitjana, si fa servir dos tipus d'ingredient. Si només en fa servir un tipus, pot produir una ració cada %2$s de mitjana."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Drinking Hall
 #: ../../data/tribes/initialization/frisians/units.lua:1950
@@ -14684,7 +14684,7 @@ msgid ""
 "economy, production of one of each food takes %1$s on average. If only one "
 "kind of food is needed by the economy, production of one ration takes %2$s "
 "and one meal takes %3$s on average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita tots els tipus de menjar, es triga de mitjana %1$s per a produir-ne cada unitat. Si l'economia només en necessita un tipus, la producció d'una ració triga %2$s i un àpat triga %3$s de mitjana."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Barracks
 #: ../../data/tribes/initialization/frisians/units.lua:1963
@@ -14745,7 +14745,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the supply is steady and there is continuous demand for fur, then the "
 "reindeer farm produces one meat after producing three pieces of fur."
-msgstr ""
+msgstr "Si el subministrament es manté constant i hi ha una demanda constant de pell, llavors la granja de rens produeix una peça de carn per cada tres peces de pell."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Reindeer
 #. Farm
@@ -14757,7 +14757,7 @@ msgid ""
 "on average. If only reindeers are needed by the economy, their production "
 "takes %3$s on average. If only fur is needed by the economy, its production "
 "takes %4$s on average."
-msgstr ""
+msgstr "Si aquest edifici està ben subministrat i l'economia necessita rens i pell, la producció de cada ren triga %1$s de mitjana i la d'una peça de pell triga %2$s. Si l'economia només necessita rens, la seva producció triga %3$s de mitjana. Si només es necessita pell, la seva producció triga %4$s de mitjana."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1993
