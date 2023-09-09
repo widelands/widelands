@@ -158,14 +158,6 @@ public:
 	 */
 	bool is_defeated() const;
 
-	// For cheating
-	void set_see_all(bool const t) {
-		see_all_ = t;
-	}
-	bool see_all() const {
-		return see_all_ || is_picking_custom_starting_position_;
-	}
-
 	/// Data that are used and managed by AI. They are here to have it saved as a part of player's
 	/// data
 	struct AiPersistentState {
@@ -610,14 +602,17 @@ public:
 	}
 	void set_muted(DescriptionIndex, bool mute);
 
+	// Ordered to keep compatibility with old bool value in savegames
+	enum class StartingPositionState { kFinal = 0, kPicking = 1, kSetting = 2 };
+
 	void start_picking_custom_starting_position() {
-		assert(!is_picking_custom_starting_position_);
-		is_picking_custom_starting_position_ = true;
+		assert(starting_position_state_ == StartingPositionState::kFinal);
+		starting_position_state_ = StartingPositionState::kPicking;
 	}
 	bool pick_custom_starting_position(const Coords&);
 	void do_pick_custom_starting_position(const Coords&);
-	bool is_picking_custom_starting_position() const {
-		return is_picking_custom_starting_position_;
+	StartingPositionState get_starting_position_state() const {
+		return starting_position_state_;
 	}
 	bool get_starting_position_suitability(const Coords&) const;
 
@@ -635,6 +630,14 @@ public:
 
 	uint8_t initialization_index() const {
 		return initialization_index_;
+	}
+
+	// For cheating
+	void set_see_all(bool const t) {
+		see_all_ = t;
+	}
+	bool see_all() const {
+		return see_all_ || starting_position_state_ == StartingPositionState::kPicking;
 	}
 
 private:
@@ -753,7 +756,7 @@ private:
 	uint8_t initialization_index_;
 	bool see_all_{false};
 	bool random_tribe_{false};
-	bool is_picking_custom_starting_position_{false};
+	StartingPositionState starting_position_state_{StartingPositionState::kFinal};
 	bool allow_additional_expedition_items_{true};
 	bool hidden_from_general_statistics_{false};
 

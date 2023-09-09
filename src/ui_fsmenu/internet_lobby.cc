@@ -462,6 +462,10 @@ bool InternetLobby::wait_for_ip() {
 
 /// called when the 'join game' button was clicked
 void InternetLobby::clicked_joingame() {
+	if (!joingame_.enabled()) {
+		return;
+	}
+
 	if (opengames_list_.has_selection()) {
 		InternetGaming::ref().join_game(opengames_list_.get_selected().name);
 
@@ -488,6 +492,10 @@ void InternetLobby::clicked_joingame() {
 
 /// called when the 'host game' button was clicked
 void InternetLobby::clicked_hostgame() {
+	if (!hostgame_.enabled()) {
+		return;
+	}
+
 	// Save selected servername as default for next time and during that take care that the name is
 	// not empty.
 	std::string servername_ui = servername_.get_text();
