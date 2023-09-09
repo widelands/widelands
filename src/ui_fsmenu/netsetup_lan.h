@@ -81,6 +81,7 @@ private:
 	UI::Button loadlasthost_;
 
 	UI::Button joingame_, hostgame_;
+	bool valid_playername_{false};
 
 	std::unique_ptr<LanGameFinder> discovery_;
 };
