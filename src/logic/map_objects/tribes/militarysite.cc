@@ -24,7 +24,6 @@
 #include "base/log.h"
 #include "base/macros.h"
 #include "economy/flag.h"
-#include "graphic/style_manager.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/findbob.h"

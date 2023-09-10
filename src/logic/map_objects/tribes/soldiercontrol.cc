@@ -18,6 +18,8 @@
 
 #include "logic/map_objects/tribes/soldiercontrol.h"
 
+#include <memory>
+
 #include "base/i18n.h"
 #include "base/string.h"
 #include "graphic/style_manager.h"
