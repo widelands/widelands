@@ -795,8 +795,8 @@ const RoadTextures& TribeDescr::road_textures() const {
 
 std::string TribeDescr::get_soldiers_format_string(const CapacityStringIndex index,
                                                    const int number_to_format) const {
-	std::unique_ptr<i18n::GenericTextdomain> td(AddOns::create_textdomain_for_addon(
-	   basic_info().addon, "tribes_encyclopedia"));
+	std::unique_ptr<i18n::GenericTextdomain> td(
+	   AddOns::create_textdomain_for_addon(basic_info().addon, "tribes_encyclopedia"));
 	const int i = static_cast<int>(index);
 	return npgettext(soldier_context_.c_str(), soldier_capacity_strings_sg_[i].c_str(),
 	                 soldier_capacity_strings_pl_[i].c_str(), number_to_format);
