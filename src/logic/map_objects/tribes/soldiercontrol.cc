@@ -59,30 +59,37 @@ std::string SoldierControl::get_status_string(const TribeDescr& tribe,
 	if (present == stationed) {
 		if (soldier_capacity() > stationed) {  // Soldiers are lacking
 			rv = format(
-			   tribe.get_soldiers_format_string(TribeDescr::CapacityStringIndex::kLacking, stationed), stationed,
+			   tribe.get_soldiers_format_string(TribeDescr::CapacityStringIndex::kLacking, stationed),
+			   stationed,
 			   StyleManager::color_tag(as_string(soldier_capacity() - stationed), style.low_color()));
 		} else if (stationed > soldier_capacity()) {  // Port or HQ has extra soldiers in store
-			rv = format(tribe.get_soldiers_format_string(TribeDescr::CapacityStringIndex::kFull, stationed),
-			            format_extra_soldiers(stationed, soldier_capacity()));
+			rv = format(
+			   tribe.get_soldiers_format_string(TribeDescr::CapacityStringIndex::kFull, stationed),
+			   format_extra_soldiers(stationed, soldier_capacity()));
 		} else {  // Soldiers filled to capacity
-			rv = format(tribe.get_soldiers_format_string(TribeDescr::CapacityStringIndex::kFull, stationed), stationed);
+			rv = format(
+			   tribe.get_soldiers_format_string(TribeDescr::CapacityStringIndex::kFull, stationed),
+			   stationed);
 		}
 	} else {
 		if (soldier_capacity() > stationed) {  // Soldiers are lacking; others are outside
 			rv = format(
-			   tribe.get_soldiers_format_string(TribeDescr::CapacityStringIndex::kOutAndLacking, stationed), present,
-			   StyleManager::color_tag(as_string(stationed - present), style.high_color()),
+			   tribe.get_soldiers_format_string(
+			      TribeDescr::CapacityStringIndex::kOutAndLacking, stationed),
+			   present, StyleManager::color_tag(as_string(stationed - present), style.high_color()),
 			   StyleManager::color_tag(as_string(soldier_capacity() - stationed), style.low_color()));
 		} else if (present > soldier_capacity()) {  // Port or HQ has extra soldiers in store;
 			                                         // some are outside
 			                                         // (this is currently not possible, outside
 			                                         //  soldiers are not tracked for warehouses)
-			rv = format(tribe.get_soldiers_format_string(TribeDescr::CapacityStringIndex::kOut, stationed),
-			            format_extra_soldiers(present, soldier_capacity()),
-			            StyleManager::color_tag(as_string(stationed - present), style.high_color()));
+			rv = format(
+			   tribe.get_soldiers_format_string(TribeDescr::CapacityStringIndex::kOut, stationed),
+			   format_extra_soldiers(present, soldier_capacity()),
+			   StyleManager::color_tag(as_string(stationed - present), style.high_color()));
 		} else {  // Soldiers filled to capacity; some are outside
-			rv = format(tribe.get_soldiers_format_string(TribeDescr::CapacityStringIndex::kOut, stationed), present,
-			            StyleManager::color_tag(as_string(stationed - present), style.high_color()));
+			rv = format(
+			   tribe.get_soldiers_format_string(TribeDescr::CapacityStringIndex::kOut, stationed),
+			   present, StyleManager::color_tag(as_string(stationed - present), style.high_color()));
 		}
 	}
 
