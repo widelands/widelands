@@ -32,8 +32,8 @@ std::string format_extra_soldiers(int has, int wants) {
 	/** TRANSLATORS: %1% is the number of all soldiers in a warehouse, %2% is the desired
 	                 number */
 	return format(pgettext("warehouse", "%1% (%2%)"),
-	              StyleManager::color_tag(as_string(has),
-	                                      g_style_manager->building_statistics_style().high_color()),
+	              StyleManager::color_tag(
+	                 as_string(has), g_style_manager->building_statistics_style().high_color()),
 	              wants);
 }
 
@@ -49,8 +49,8 @@ Status string with number of soldiers.
 ===============
 */
 std::string SoldierControl::get_status_string(const TribeDescr& tribe, SoldierPreference pref) {
-	std::unique_ptr<i18n::GenericTextdomain> td(AddOns::create_textdomain_for_addon(
-	   tribe.basic_info().addon, "tribes_encyclopedia"));
+	std::unique_ptr<i18n::GenericTextdomain> td(
+	   AddOns::create_textdomain_for_addon(tribe.basic_info().addon, "tribes_encyclopedia"));
 	std::string rv;
 	Quantity present = present_soldiers().size();
 	Quantity stationed = stationed_soldiers().size();
@@ -59,9 +59,9 @@ std::string SoldierControl::get_status_string(const TribeDescr& tribe, SoldierPr
 	// military capacity strings
 	if (present == stationed) {
 		if (soldier_capacity() > stationed) {  // Soldiers are lacking
-			rv = format(tribe.get_soldiers_format_string(CAPIDX::kLacking, stationed), stationed,
-			            StyleManager::color_tag(as_string(soldier_capacity() - stationed),
-			                                    style.low_color()));
+			rv = format(
+			   tribe.get_soldiers_format_string(CAPIDX::kLacking, stationed), stationed,
+			   StyleManager::color_tag(as_string(soldier_capacity() - stationed), style.low_color()));
 		} else if (stationed > soldier_capacity()) {  // Port or HQ has extra soldiers in store
 			rv = format(tribe.get_soldiers_format_string(CAPIDX::kFull, stationed),
 			            format_extra_soldiers(stationed, soldier_capacity()));
@@ -75,9 +75,9 @@ std::string SoldierControl::get_status_string(const TribeDescr& tribe, SoldierPr
 			   StyleManager::color_tag(as_string(stationed - present), style.high_color()),
 			   StyleManager::color_tag(as_string(soldier_capacity() - stationed), style.low_color()));
 		} else if (present > soldier_capacity()) {  // Port or HQ has extra soldiers in store;
-		                                            // some are outside
-		                                            // (this is currently not possible, outside
-		                                            //  soldiers are not tracked for warehouses)
+			                                         // some are outside
+			                                         // (this is currently not possible, outside
+			                                         //  soldiers are not tracked for warehouses)
 			rv = format(tribe.get_soldiers_format_string(CAPIDX::kOut, stationed),
 			            format_extra_soldiers(present, soldier_capacity()),
 			            StyleManager::color_tag(as_string(stationed - present), style.high_color()));

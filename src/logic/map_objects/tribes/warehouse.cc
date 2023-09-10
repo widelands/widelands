@@ -1501,10 +1501,11 @@ std::string Warehouse::info_string(const InfoStringFormat& isf) {
 	static const std::string hq_fmt = "♔%s";  // U+2654 white chess king character
 	                                          // "👑" U+1F451 crown character is missing from our font
 	static const std::string port_fmt = "⚓%s";  // U+2693 anchor character
-	static const std::string wh_fmt = "⟰%s"; // U+27F0 upwards quadruple arrow character (similar to a
-	                                         // house)
-	                                         // "📦" U+1F4E6 package character is missing from our
-	                                         //font
+	static const std::string wh_fmt =
+	   "⟰%s";  // U+27F0 upwards quadruple arrow character (similar to a
+	           // house)
+	           // "📦" U+1F4E6 package character is missing from our
+	           // font
 	if (isf == InfoStringFormat::kCensus) {
 		std::string icon_format;
 		if (descr().get_isport()) {
@@ -1530,7 +1531,8 @@ void Warehouse::update_statistics_string(std::string* str) {
 			   ns_s, g_style_manager->building_statistics_style().high_color());
 		}
 		*str = format(_("(%s)"), format(owner().tribe().get_soldiers_format_string(
-		   TribeDescr::CapacityStringIndex::kFull, ns), ns_s));
+		                                   TribeDescr::CapacityStringIndex::kFull, ns),
+		                                ns_s));
 	}
 }
 

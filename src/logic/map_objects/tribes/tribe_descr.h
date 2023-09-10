@@ -196,8 +196,8 @@ public:
 
 	// Return the translated format string for case `index` and plural form according to
 	// `number_to_format`
-	[[nodiscard]]
-	std::string get_soldiers_format_string(CapacityStringIndex index, int number_to_format) const;
+	[[nodiscard]] std::string get_soldiers_format_string(CapacityStringIndex index,
+	                                                     int number_to_format) const;
 
 	// The custom toolbar imageset if any. Can be nullptr.
 	[[nodiscard]] ToolbarImageset* toolbar_image_set() const;
