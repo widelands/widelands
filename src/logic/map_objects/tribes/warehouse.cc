@@ -1498,17 +1498,23 @@ void Warehouse::request_soldier_callback(Game& game,
 }
 
 std::string Warehouse::info_string(const InfoStringFormat& isf) {
-	static const std::string hq_icon = "♔";  // U+2654 white chess king character
-	                                         // "👑" U+1F451 crown character is missing from our font
-	static const std::string port_icon = "⚓";  // U+2693 anchor character
+	static const std::string hq_fmt = "♔%s";  // U+2654 white chess king character
+	                                          // "👑" U+1F451 crown character is missing from our font
+	static const std::string port_fmt = "⚓%s";  // U+2693 anchor character
+	static const std::string wh_fmt = "⟰%s"; // U+27F0 upwards quadruple arrow character (similar to a
+	                                         // house)
+	                                         // "📦" U+1F4E6 package character is missing from our
+	                                         //font
 	if (isf == InfoStringFormat::kCensus) {
-		std::string esc_name = richtext_escape(get_warehouse_name());
+		std::string icon_format;
 		if (descr().get_isport()) {
-			esc_name = port_icon + esc_name;
+			icon_format = port_fmt;
 		} else if (!descr().is_buildable()) {
-			esc_name = hq_icon + esc_name;
+			icon_format = hq_fmt;
+		} else {
+			icon_format = wh_fmt;
 		}
-		return esc_name;
+		return format(icon_format, richtext_escape(get_warehouse_name()));
 	}
 	return Building::info_string(isf);
 }
