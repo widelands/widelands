@@ -48,8 +48,8 @@ namespace Widelands {
 Status string with number of soldiers.
 ===============
 */
-std::string
-SoldierControl::get_status_string(const TribeDescr& tribe, SoldierPreference pref) const {
+std::string SoldierControl::get_status_string(const TribeDescr& tribe,
+                                              SoldierPreference pref) const {
 	std::unique_ptr<i18n::GenericTextdomain> td(
 	   AddOns::create_textdomain_for_addon(tribe.basic_info().addon, "tribes_encyclopedia"));
 	std::string rv;
