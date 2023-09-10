@@ -27,7 +27,7 @@
 
 namespace {
 
-std::string format_extra_soldiers(Quantity has, Quantity wants) {
+std::string format_extra_soldiers(Widelands::Quantity has, Widelands::Quantity wants) {
 	assert(has > wants);
 	/** TRANSLATORS: %1% is the number of all soldiers in a warehouse, %2% is the desired
 	                 number */
