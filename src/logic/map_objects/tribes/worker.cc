@@ -717,7 +717,8 @@ bool Worker::run_walk(Game& game, State& state, const Action& action) {
 	}
 
 	if ((action.iparam1 & Action::walkDir) != 0) {
-		start_task_move(game, action.iparam2, descr().get_right_walk_anims(does_carry_ware(), this), false);
+		start_task_move(
+		   game, action.iparam2, descr().get_right_walk_anims(does_carry_ware(), this), false);
 		++state.ivar1;  // next instruction
 		return true;
 	}

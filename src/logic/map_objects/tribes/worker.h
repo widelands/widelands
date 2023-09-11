@@ -53,7 +53,7 @@ class Worker : public Bob {
 		enum {
 			walkObject = 1,  //  walk to objvar1
 			walkCoords = 2,  //  walk to coords
-			walkDir    = 4,  //  walk in direction iparam2
+			walkDir = 4,     //  walk in direction iparam2
 		};
 
 		enum { plantAlways, plantUnlessObject };
