@@ -583,7 +583,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			for (unsigned pn = map.get_nrplayers(); pn != 0u; --pn) {
 				if (map.get_starting_pos(pn) == f->fcoords) {
 					Widelands::Player* p = gbase.get_player(pn);
-					if (p == nullptr || !p->is_picking_custom_starting_position()) {
+					if (p == nullptr || p->get_starting_position_state() ==
+					    Widelands::Player::StartingPositionState::kFinal) {
 						// Should have a HQ if finished picking, no need for the overlay
 						continue;
 					}
