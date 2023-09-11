@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-09-09 02:25+0000\n"
+"POT-Creation-Date: 2023-09-11 02:30+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: 92373a9a734415f33212259453a6274d_77ab48e, 2022\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/widelands/widelands/language/zh_CN/)\n"
@@ -994,7 +994,7 @@ msgstr "%1$s;%2$s"
 msgid "Enabled Add-Ons: %s"
 msgstr "启用的扩展组件：%s"
 
-#: ../../src/editor/ui_menus/help.cc:36 ../../src/ui_fsmenu/login_box.cc:252
+#: ../../src/editor/ui_menus/help.cc:36 ../../src/ui_fsmenu/login_box.cc:255
 #: ../../src/ui_fsmenu/main.cc:255 ../../src/ui_fsmenu/main.cc:1084
 #: ../../src/wui/encyclopedia_window.cc:146
 #: ../../src/wui/tribal_encyclopedia.cc:55
@@ -1399,7 +1399,7 @@ msgid ""
 msgstr "这张地图是由 Widelands 随机地图生成器自动创建的。"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:736
-#: ../../src/network/gamehost.cc:1661
+#: ../../src/network/gamehost.cc:1663
 #, c-format
 msgid "Computer %u"
 msgstr "计算机 %u"
@@ -1426,7 +1426,7 @@ msgstr "建立目录"
 
 #. * TRANSLATORS: A folder that hasn't been given a name yet
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:164
-#: ../../src/ui_fsmenu/internet_lobby.cc:511
+#: ../../src/ui_fsmenu/internet_lobby.cc:519
 msgid "unnamed"
 msgstr "未命名"
 
@@ -3157,7 +3157,7 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr "Widelands不能启动服务。\n 可能其它的进程已经在我们的端口上运行服务器了 "
 
-#: ../../src/network/gamehost.cc:1920
+#: ../../src/network/gamehost.cc:1922
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -5408,16 +5408,16 @@ msgstr " Widelands不能及时获取服务器的IP地址。似乎存在一个网
 msgid "Connection Timed Out"
 msgstr "连接超时 "
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:479
-#: ../../src/ui_fsmenu/internet_lobby.cc:538
-#: ../../src/ui_fsmenu/netsetup_lan.cc:332
-#: ../../src/ui_fsmenu/netsetup_lan.cc:355
+#: ../../src/ui_fsmenu/internet_lobby.cc:483
+#: ../../src/ui_fsmenu/internet_lobby.cc:546
+#: ../../src/ui_fsmenu/netsetup_lan.cc:337
+#: ../../src/ui_fsmenu/netsetup_lan.cc:364
 msgid "Network Error"
 msgstr "网络错误"
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../src/ui_fsmenu/internet_lobby.cc:503
+#: ../../src/ui_fsmenu/internet_lobby.cc:511
 #, c-format
 msgid "unnamed %u"
 msgstr "未命名 %u"
@@ -5737,17 +5737,17 @@ msgstr "昵称："
 msgid "nobody"
 msgstr "没有人"
 
-#: ../../src/ui_fsmenu/login_box.cc:215
+#: ../../src/ui_fsmenu/login_box.cc:218
 msgid "Please enter a nickname!"
 msgstr "请键入一个昵称！"
 
-#: ../../src/ui_fsmenu/login_box.cc:219
+#: ../../src/ui_fsmenu/login_box.cc:222
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters."
 msgstr "键入一个有效的昵称。昵称只能由英文字母，数字，和@ . + - _ 等英文输入法状态下的字符构成。"
 
-#: ../../src/ui_fsmenu/login_box.cc:225
+#: ../../src/ui_fsmenu/login_box.cc:228
 msgid "Please enter your password!"
 msgstr "请输入你的密码！"
 
@@ -5949,11 +5949,11 @@ msgstr ""
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
 msgstr ""
 
-#: ../../src/ui_fsmenu/main.cc:976 ../../src/ui_fsmenu/netsetup_lan.cc:343
+#: ../../src/ui_fsmenu/main.cc:976 ../../src/ui_fsmenu/netsetup_lan.cc:352
 msgid "No tribes found!"
 msgstr "找不到部落！"
 
-#: ../../src/ui_fsmenu/main.cc:977 ../../src/ui_fsmenu/netsetup_lan.cc:344
+#: ../../src/ui_fsmenu/main.cc:977 ../../src/ui_fsmenu/netsetup_lan.cc:353
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "在 data/tribes/initialization/[tribename]/init.lua 中找不到部落。"
 
@@ -6392,17 +6392,17 @@ msgctxt "game_state"
 msgid "Unknown"
 msgstr "不详"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:299
+#: ../../src/ui_fsmenu/netsetup_lan.cc:300
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters and must not be \"team\"."
 msgstr "键入一个有效的昵称。昵称只能由英文字母，数字，和@ . + - _ 等英文输入法状态下的字符构成，且不能是团队名。"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:320
+#: ../../src/ui_fsmenu/netsetup_lan.cc:325
 msgid "Invalid Address"
 msgstr "无效地址"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:321
+#: ../../src/ui_fsmenu/netsetup_lan.cc:326
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr "输入的主机名或地址是无效的，无法进行连接。 "
 

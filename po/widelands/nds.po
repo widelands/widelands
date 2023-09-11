@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-09-09 02:25+0000\n"
+"POT-Creation-Date: 2023-09-11 02:30+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2023\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -992,7 +992,7 @@ msgstr "%1$s; %2$s"
 msgid "Enabled Add-Ons: %s"
 msgstr "Anknipst Verwiederns: %s"
 
-#: ../../src/editor/ui_menus/help.cc:36 ../../src/ui_fsmenu/login_box.cc:252
+#: ../../src/editor/ui_menus/help.cc:36 ../../src/ui_fsmenu/login_box.cc:255
 #: ../../src/ui_fsmenu/main.cc:255 ../../src/ui_fsmenu/main.cc:1084
 #: ../../src/wui/encyclopedia_window.cc:146
 #: ../../src/wui/tribal_encyclopedia.cc:55
@@ -1398,7 +1398,7 @@ msgid ""
 msgstr "Deese Kaart is vum Widelands-Tofallskaarten-Maker automatisk maakt worden."
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:736
-#: ../../src/network/gamehost.cc:1661
+#: ../../src/network/gamehost.cc:1663
 #, c-format
 msgid "Computer %u"
 msgstr "Reekner %u"
@@ -1425,7 +1425,7 @@ msgstr "Verteeknis maken"
 
 #. * TRANSLATORS: A folder that hasn't been given a name yet
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:164
-#: ../../src/ui_fsmenu/internet_lobby.cc:511
+#: ../../src/ui_fsmenu/internet_lobby.cc:519
 msgid "unnamed"
 msgstr "sünner Naam"
 
@@ -3165,7 +3165,7 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr "Widelands kunn eenen Server nich anschalten.\nWahrschienelk bedrifft een anner Prozess al eenen Server up uns’ Port."
 
-#: ../../src/network/gamehost.cc:1920
+#: ../../src/network/gamehost.cc:1922
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -5435,16 +5435,16 @@ msgstr "Widelands kunn de IP-Adress vun de Server nich bi Tied utfinnen. Dat is 
 msgid "Connection Timed Out"
 msgstr "Tied för ’t Verbinnen verstreken"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:479
-#: ../../src/ui_fsmenu/internet_lobby.cc:538
-#: ../../src/ui_fsmenu/netsetup_lan.cc:332
-#: ../../src/ui_fsmenu/netsetup_lan.cc:355
+#: ../../src/ui_fsmenu/internet_lobby.cc:483
+#: ../../src/ui_fsmenu/internet_lobby.cc:546
+#: ../../src/ui_fsmenu/netsetup_lan.cc:337
+#: ../../src/ui_fsmenu/netsetup_lan.cc:364
 msgid "Network Error"
 msgstr "Netwark-Fehler"
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../src/ui_fsmenu/internet_lobby.cc:503
+#: ../../src/ui_fsmenu/internet_lobby.cc:511
 #, c-format
 msgid "unnamed %u"
 msgstr "Sünner Naam %u"
@@ -5764,17 +5764,17 @@ msgstr "Spitznaam:"
 msgid "nobody"
 msgstr "unbekannt"
 
-#: ../../src/ui_fsmenu/login_box.cc:215
+#: ../../src/ui_fsmenu/login_box.cc:218
 msgid "Please enter a nickname!"
 msgstr "Bidde eenen Spitznaam ingeven!"
 
-#: ../../src/ui_fsmenu/login_box.cc:219
+#: ../../src/ui_fsmenu/login_box.cc:222
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters."
 msgstr "Giff een gültigen Spitznaam in. Deeser Weert düür nix as engelske Bookstavens, Tahlen un de Tekens @ . + - _ enthollen."
 
-#: ../../src/ui_fsmenu/login_box.cc:225
+#: ../../src/ui_fsmenu/login_box.cc:228
 msgid "Please enter your password!"
 msgstr "Bidde giff dien Kennwoord in!"
 
@@ -5976,11 +5976,11 @@ msgstr "Verschuvig Verwiedern funnen"
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
 msgstr "Een anknipst Verwiedern maakt bekennterwies Verschuvens. Büst du seker, dat du wiedermaken willst?"
 
-#: ../../src/ui_fsmenu/main.cc:976 ../../src/ui_fsmenu/netsetup_lan.cc:343
+#: ../../src/ui_fsmenu/main.cc:976 ../../src/ui_fsmenu/netsetup_lan.cc:352
 msgid "No tribes found!"
 msgstr "Keene Völkers funnen!"
 
-#: ../../src/ui_fsmenu/main.cc:977 ../../src/ui_fsmenu/netsetup_lan.cc:344
+#: ../../src/ui_fsmenu/main.cc:977 ../../src/ui_fsmenu/netsetup_lan.cc:353
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "Keene Völkers sünd in data/tribes/initialization/[volknaam]/init.lua funnen worden."
 
@@ -6419,17 +6419,17 @@ msgctxt "game_state"
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:299
+#: ../../src/ui_fsmenu/netsetup_lan.cc:300
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters and must not be \"team\"."
 msgstr "Giff een gültigen Spitznaam in. Deeser Weert düür nix as engelske Bookstavens, Tahlen un de Tekens @ . + - _ enthollen, un dat dör nich »team« wesen."
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:320
+#: ../../src/ui_fsmenu/netsetup_lan.cc:325
 msgid "Invalid Address"
 msgstr "Adress ungültig"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:321
+#: ../../src/ui_fsmenu/netsetup_lan.cc:326
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr "De angeven Weerts-Naam of Adress is ungültig, daar kann man nich mit verbinnen."
 
