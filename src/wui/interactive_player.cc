@@ -584,14 +584,15 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 				if (map.get_starting_pos(pn) == f->fcoords) {
 					Widelands::Player* p = gbase.get_player(pn);
 					if (p == nullptr || p->get_starting_position_state() ==
-					    Widelands::Player::StartingPositionState::kFinal) {
+					                       Widelands::Player::StartingPositionState::kFinal) {
 						// Should have a HQ if finished picking, no need for the overlay
 						continue;
 					}
 					player_image = playercolor_image(p->get_playercolor(), icon_filename);
 					icon_scale = 1.0f;
 					icon_opacity = p->get_starting_position_suitability(f->fcoords) ?
-                              kBuildhelpOpacityMedium : kBuildhelpOpacityWeak;
+                                 kBuildhelpOpacityMedium :
+                                 kBuildhelpOpacityWeak;
 					break;
 				}
 			}
