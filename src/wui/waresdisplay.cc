@@ -49,7 +49,7 @@ AbstractWaresDisplay::AbstractWaresDisplay(
    bool horizontal,
    int32_t hgap,
    int32_t vgap)
-   :  // Size is set when add_warelist is called, as it depends on the type_.
+   :  // Size is set when layout is called
      UI::Panel(parent, UI::PanelStyle::kWui, "wares_display", x, y, 0, 0),
      tribe_(tribe),
 
@@ -510,7 +510,7 @@ StockMenuWaresDisplay::StockMenuWaresDisplay(UI::Panel* const parent,
                                              const Widelands::Player& p,
                                              const Widelands::WareWorker type,
                                              bool total)
-   : WaresDisplay(parent, x, y, p.tribe(), type, false), player_(p), totalstock_(total) {
+   : WaresDisplay(parent, x, y, p.tribe(), type, false), player_(p), show_total_stock_(total) {
 }
 
 std::string StockMenuWaresDisplay::info_for_ware(const Widelands::DescriptionIndex di) {
@@ -608,8 +608,8 @@ uint32_t StockMenuWaresDisplay::amount_of(const Widelands::DescriptionIndex ware
 	uint32_t totalstock = 0;
 	for (const auto& economy : player_.economies()) {
 		if (economy.second->type() == get_type()) {
-			if (totalstock_) {
-				totalstock += economy.second->get_wares_or_workers().stock(ware);
+			if (show_total_stock_) {
+				totalstock += economy.second->stock_ware_or_worker(ware);
 			} else {
 				for (const Widelands::Warehouse* warehouse : economy.second->warehouses()) {
 					totalstock += (get_type() == Widelands::wwWARE ? warehouse->get_wares() :

@@ -195,7 +195,7 @@ protected:
 
 	const Widelands::Player& player_;
 	bool solid_icon_backgrounds_{true};
-	bool totalstock_;
+	bool show_total_stock_;
 };
 
 std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
