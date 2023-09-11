@@ -274,7 +274,7 @@ jobs:
       with:
         arch: ${{ matrix.arch }}
         # Check https://github.com/actions/runner-images/blob/main/images/win/toolsets/toolset-2022.json for installed versions
-        toolset: 14.36
+        toolset: 14.37
     - name: Compiler
       env:
         VCPKG_ROOT: C:\vcpkg

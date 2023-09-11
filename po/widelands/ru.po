@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-09-09 02:25+0000\n"
+"POT-Creation-Date: 2023-09-11 02:30+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022-2023\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
@@ -1005,7 +1005,7 @@ msgstr "%1$s; %2$s"
 msgid "Enabled Add-Ons: %s"
 msgstr "Включить аддоны: %s"
 
-#: ../../src/editor/ui_menus/help.cc:36 ../../src/ui_fsmenu/login_box.cc:252
+#: ../../src/editor/ui_menus/help.cc:36 ../../src/ui_fsmenu/login_box.cc:255
 #: ../../src/ui_fsmenu/main.cc:255 ../../src/ui_fsmenu/main.cc:1084
 #: ../../src/wui/encyclopedia_window.cc:146
 #: ../../src/wui/tribal_encyclopedia.cc:55
@@ -1413,7 +1413,7 @@ msgid ""
 msgstr "Эта карта была сгенерирована автоматически генератором случайных карт Widelands."
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:736
-#: ../../src/network/gamehost.cc:1661
+#: ../../src/network/gamehost.cc:1663
 #, c-format
 msgid "Computer %u"
 msgstr "Компьютер %u"
@@ -1440,7 +1440,7 @@ msgstr "Создать каталог"
 
 #. * TRANSLATORS: A folder that hasn't been given a name yet
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:164
-#: ../../src/ui_fsmenu/internet_lobby.cc:511
+#: ../../src/ui_fsmenu/internet_lobby.cc:519
 msgid "unnamed"
 msgstr "Без названия"
 
@@ -3198,7 +3198,7 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr "Widelands не удалось запустить сервер.\nВероятно, какой-то другой процесс уже запустил сервер на нашем порту."
 
-#: ../../src/network/gamehost.cc:1920
+#: ../../src/network/gamehost.cc:1922
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -5506,16 +5506,16 @@ msgstr "Widelands не удалось получить IP-адрес серве�
 msgid "Connection Timed Out"
 msgstr "Время ожидания для соединения истекло"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:479
-#: ../../src/ui_fsmenu/internet_lobby.cc:538
-#: ../../src/ui_fsmenu/netsetup_lan.cc:332
-#: ../../src/ui_fsmenu/netsetup_lan.cc:355
+#: ../../src/ui_fsmenu/internet_lobby.cc:483
+#: ../../src/ui_fsmenu/internet_lobby.cc:546
+#: ../../src/ui_fsmenu/netsetup_lan.cc:337
+#: ../../src/ui_fsmenu/netsetup_lan.cc:364
 msgid "Network Error"
 msgstr "Ошибка сети"
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../src/ui_fsmenu/internet_lobby.cc:503
+#: ../../src/ui_fsmenu/internet_lobby.cc:511
 #, c-format
 msgid "unnamed %u"
 msgstr "безымянный%u"
@@ -5835,17 +5835,17 @@ msgstr "Имя:"
 msgid "nobody"
 msgstr "никто"
 
-#: ../../src/ui_fsmenu/login_box.cc:215
+#: ../../src/ui_fsmenu/login_box.cc:218
 msgid "Please enter a nickname!"
 msgstr "Пожалуйста, введите имя!"
 
-#: ../../src/ui_fsmenu/login_box.cc:219
+#: ../../src/ui_fsmenu/login_box.cc:222
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters."
 msgstr "Введите корректное имя. Это значение может содержать только английские буквы, цифры и символы @ . + - _"
 
-#: ../../src/ui_fsmenu/login_box.cc:225
+#: ../../src/ui_fsmenu/login_box.cc:228
 msgid "Please enter your password!"
 msgstr "Пожалуйста, введите пароль!"
 
@@ -6047,11 +6047,11 @@ msgstr "Рассинхронизация дополнений"
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
 msgstr "Это объявление доступно, но рассинхронизовано с сервером. Использовать на свой страх и риск."
 
-#: ../../src/ui_fsmenu/main.cc:976 ../../src/ui_fsmenu/netsetup_lan.cc:343
+#: ../../src/ui_fsmenu/main.cc:976 ../../src/ui_fsmenu/netsetup_lan.cc:352
 msgid "No tribes found!"
 msgstr "Племён не найдено!"
 
-#: ../../src/ui_fsmenu/main.cc:977 ../../src/ui_fsmenu/netsetup_lan.cc:344
+#: ../../src/ui_fsmenu/main.cc:977 ../../src/ui_fsmenu/netsetup_lan.cc:353
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "В data/tribes/initialization/[tribename]/init.lua не найдено племен."
 
@@ -6490,17 +6490,17 @@ msgctxt "game_state"
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:299
+#: ../../src/ui_fsmenu/netsetup_lan.cc:300
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters and must not be \"team\"."
 msgstr "Укажите корректный ник. Он может содержать буквы латиницы, цифры и знаки @ . + - _ . Слово \"team\" не годится."
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:320
+#: ../../src/ui_fsmenu/netsetup_lan.cc:325
 msgid "Invalid Address"
 msgstr "Некорректный адрес"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:321
+#: ../../src/ui_fsmenu/netsetup_lan.cc:326
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr "Соединение невозможно. Некорректное имя хоста или адрес."
 
