@@ -551,6 +551,8 @@ walk
       * ``coords``: Walk to a previously found and selected field/coordinate.
       * ``object-or-coords``: Walk to a previously found and selected object if present;
         otherwise to previously found and selected field/coordinate.
+      * ``ne|e|se|sw|w|nw``: New in version 1.2. Orders the worker to move
+        one field in the specified direction.
 
    Walk to a previously selected destination. Examples::
 
@@ -589,7 +591,7 @@ walk
  */
 void WorkerProgram::parse_walk(Worker::Action* act, const std::vector<std::string>& cmd) {
 	if (cmd.size() != 1) {
-		throw GameDataError("Usage: walk=object|coords|object-or-coords");
+		throw GameDataError("Usage: walk=object|coords|object-or-coords|<direction>");
 	}
 
 	act->function = &Worker::run_walk;
@@ -600,6 +602,24 @@ void WorkerProgram::parse_walk(Worker::Action* act, const std::vector<std::strin
 		act->iparam1 = Worker::Action::walkCoords;
 	} else if (cmd[0] == "object-or-coords") {
 		act->iparam1 = Worker::Action::walkObject | Worker::Action::walkCoords;
+	} else if (cmd[0] == "ne") {
+		act->iparam1 = Worker::Action::walkDir;
+		act->iparam2 = WALK_NE;
+	} else if (cmd[0] == "e") {
+		act->iparam1 = Worker::Action::walkDir;
+		act->iparam2 = WALK_E;
+	} else if (cmd[0] == "se") {
+		act->iparam1 = Worker::Action::walkDir;
+		act->iparam2 = WALK_SE;
+	} else if (cmd[0] == "sw") {
+		act->iparam1 = Worker::Action::walkDir;
+		act->iparam2 = WALK_SW;
+	} else if (cmd[0] == "w") {
+		act->iparam1 = Worker::Action::walkDir;
+		act->iparam2 = WALK_W;
+	} else if (cmd[0] == "nw") {
+		act->iparam1 = Worker::Action::walkDir;
+		act->iparam2 = WALK_NW;
 	} else {
 		throw GameDataError("Bad walk destination '%s'", cmd[0].c_str());
 	}
