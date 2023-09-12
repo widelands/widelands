@@ -245,7 +245,7 @@ wl.Descriptions():new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an Amazon ware: Ration, part 1
-                  pgettext("amazons_ware", "A small bite to keep the workers digging for gold dust and granite strong and working. The scout also consumes rations on her scouting trips."),
+                  pgettext("amazons_ware", "A small bite used to train soldiers and to keep the workers digging for gold dust and granite strong and working. The scout also consumes rations on her scouting trips."),
                   -- TRANSLATORS: Helptext for an Amazon ware: Ration, part 2
                   pgettext("amazons_ware", "Rations are produced by the food preserver out of fish or meat and bread. They are dried using a charcoal fire.")
                }
@@ -696,6 +696,13 @@ wl.Descriptions():new_tribe {
             helptexts = {
                -- TRANSLATORS: Helptext for an Amazon worker: Charcoal Burner
                purpose = pgettext("amazons_worker", "Burns logs to produce charcoal.")
+            }
+         },
+         {
+            name = "amazons_charcoal_master",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an Amazon worker: Charcoal Master
+               purpose = pgettext("amazons_worker", "Burns rare trees to produce charcoal more effectively.")
             }
          },
          {
@@ -1423,6 +1430,15 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Charcoal Kiln
             purpose = pgettext("amazons_building", "Burns logs into charcoal."),
             -- TRANSLATORS: Performance helptext for an Amazon production site: Charcoal Kiln
+            performance = pgettext("amazons_building", "The charcoal kiln needs %s on average to produce one lump of coal."):bformat(format_minutes_seconds(2,1))
+         }
+      },
+      {
+         name = "amazons_rare_tree_kiln",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an Amazon production site: Rare Tree Kiln
+            purpose = pgettext("amazons_building", "Burns rare trees into charcoal."),
+            -- TRANSLATORS: Performance helptext for an Amazon production site: Rare Tree Kiln
             performance = pgettext("amazons_building", "The charcoal kiln needs %s on average to produce one lump of coal."):bformat(format_minutes_seconds(2,1))
          }
       },

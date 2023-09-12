@@ -49,7 +49,7 @@ wl.Descriptions():new_productionsite_type {
       { name = "balsa", amount = 6 },
       { name = "rubber", amount = 9 },
       { name = "rope", amount = 6 },
-      { name = "gold", amount = 3 },
+      { name = "gold", amount = 5 },
    },
 
    programs = {
@@ -135,7 +135,7 @@ wl.Descriptions():new_productionsite_type {
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs boots_swift",
-            "consume=rubber:3",
+            "consume=rubber:2 gold",
             "sleep=duration:32s400ms",
             "animate=working duration:35s",
             "produce=boots_swift"
@@ -147,7 +147,7 @@ wl.Descriptions():new_productionsite_type {
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs boots_hero",
-            "consume=rubber:3 gold",
+            "consume=rubber:3 gold:2",
             "sleep=duration:32s400ms",
             "animate=working duration:35s",
             "produce=boots_hero"

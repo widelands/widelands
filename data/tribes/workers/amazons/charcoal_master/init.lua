@@ -3,18 +3,11 @@ push_textdomain("tribes")
 local dirname = path.dirname (__file__)
 
 wl.Descriptions():new_worker_type {
-   name = "amazons_charcoal_burner",
+   name = "amazons_charcoal_master",
    -- TRANSLATORS: This is a worker name used in lists of workers
-   descname = pgettext ("amazons_worker", "Charcoal Burner"),
+   descname = pgettext ("amazons_worker", "Charcoal Master"),
    icon = dirname .. "menu.png",
    vision_range = 2,
-
-   buildcost = {
-      amazons_carrier = 1
-   },
-
-   experience = 15,
-   becomes = "amazons_charcoal_master",
 
    animation_directory = dirname,
    ware_hotspot = {0, 29},

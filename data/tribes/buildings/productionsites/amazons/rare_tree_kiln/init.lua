@@ -3,31 +3,11 @@ push_textdomain("tribes")
 local dirname = path.dirname (__file__)
 
 wl.Descriptions():new_productionsite_type {
-   name = "amazons_charcoal_kiln",
+   name = "amazons_rare_tree_kiln",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("amazons_building", "Charcoal Kiln"),
+   descname = pgettext ("amazons_building", "Rare Tree Kiln"),
    icon = dirname .. "menu.png",
    size = "medium",
-
-   enhancement = {
-      name = "amazons_rare_tree_kiln",
-      enhancement_cost = {
-         log = 1,
-         granite = 2,
-      },
-      enhancement_return_on_dismantle = {
-         granite = 1
-      }
-   },
-
-   buildcost = {
-      log = 2,
-      granite = 4,
-      ironwood = 1,
-   },
-   return_on_dismantle = {
-      granite = 3,
-   },
 
    animation_directory = dirname,
    animations = {
@@ -48,11 +28,13 @@ wl.Descriptions():new_productionsite_type {
    },
 
    working_positions = {
-      amazons_charcoal_burner = 1
+      amazons_charcoal_master = 1
    },
 
    inputs = {
-      { name = "log", amount = 8 }
+      { name = "ironwood", amount = 3 },
+      { name = "balsa", amount = 3 },
+      { name = "rubber", amount = 3 }
    },
 
    programs = {
@@ -61,10 +43,9 @@ wl.Descriptions():new_productionsite_type {
          descname = _("producing charcoal"),
          actions = {
             "return=skipped unless economy needs coal",
-            -- Make it a little more efficient than other tribes
-            "consume=log:5",
-            "sleep=duration:10s",
-            "animate=working duration:90s", -- Charcoal fires will burn for some days in real life
+            "consume=ironwood balsa rubber",
+            "sleep=duration:20s",
+            "animate=working duration:40s",
             "produce=coal"
          }
       },
