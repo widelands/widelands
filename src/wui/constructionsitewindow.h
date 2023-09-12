@@ -85,6 +85,7 @@ private:
 
 	protected:
 		void draw_ware(RenderTarget& dst, Widelands::DescriptionIndex ware) override;
+		uint32_t amount_of(Widelands::DescriptionIndex) override;
 
 	private:
 		Widelands::WarehouseSettings& settings_;
