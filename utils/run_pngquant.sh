@@ -8,8 +8,8 @@ fi
 
 if [ -z "$1" ]
 then
-  WL_DIR=$(dirname $(dirname "$0"))
-  cd "$WL_DIR"
+  WL_DIR=$(dirname "$(dirname "$0")")
+  cd "$WL_DIR" || exit $?
   if ! [ -f src/wlapplication.cc ]
   then
     echo "ERROR: Cannot find the main directory of the Widelands source code."
@@ -25,17 +25,17 @@ tempfile="$(mktemp -d)/image.png"
 
 i=0
 skipped=0
-for image in $(find "$dir" -name '*.png')
+while read -r image # input redirection is after done
 do
   ((++i))
   printf "\r[%5d] %-100s " "$i" "$image"
   pngquant 256 < "$image" > "$tempfile"
-  if [ $(wc -c < "$tempfile") -lt $(wc -c < "$image") ]
+  if [ "$(wc -c < "$tempfile")" -lt "$(wc -c < "$image")" ]
   then
     mv "$tempfile" "$image"
   else
     ((++skipped))
   fi
-done
+done < <(find "$dir" -name '*.png')
 
 printf "\n%d images converted, %d images skipped.\n" $((i-skipped)) $skipped

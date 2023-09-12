@@ -29,5 +29,6 @@ fi
 sudo apt-get update
 
 # This script handles the common dependencies
+# shellcheck disable=SC2086 # arguments shall be split
 ./install-dependencies.sh debian -y ${ADD_PKG_LIST}
 

@@ -20,12 +20,12 @@ DISTRO="$1"
 
 echo "Installing Asio ${ASIO_VER} from source..."
 
-WL_DIR=$(dirname $(dirname "$0"))
-cd "$WL_DIR"
+WL_DIR=$(dirname "$(dirname "$0")")
+cd "$WL_DIR" || exit $?
 if ! [ -f src/wlapplication.cc ] ; then
    echo
    echo "ERROR:  Cannot find the main directory of the Widelands source code."
-   echo "        Please call 'utils/$(basename $0)' from the main directory"
+   echo "        Please call 'utils/$(basename "$0")' from the main directory"
    echo "        of Widelands source where you would like to install Asio."
    echo
    exit 1
@@ -76,13 +76,13 @@ if ! mkdir -p "./$INSTALL_TARGET" ; then
    manual_instructions
    exit 3
 fi
-cd "./$INSTALL_TARGET"
+cd "./$INSTALL_TARGET" || exit $?
 
 if hash wget 2>/dev/null ; then
    DOWNLOADER="wget -O"
 elif hash curl 2>/dev/null ; then
    DOWNLOADER="curl -Lo"
-elif [ "$DISTRO" = OpenBSD -o "$DISTRO" = openbsd ] ; then
+elif [ "$DISTRO" = OpenBSD ] || [ "$DISTRO" = openbsd ] ; then
    DOWNLOADER="ftp -o"
 else
    echo "Cannot find a suitable download tool."
@@ -126,7 +126,7 @@ tar -xjf "$DL_TARGET" "$EXTRACT"
 mv "$EXTRACT"/asio* .
 rm -r "$ARCHIVE_DIR" "$DL_TARGET"
 
-if [ -f asio.hpp -a -d asio -a -f asio/basic_socket.hpp ] ; then
+if [ -f asio.hpp ] && [ -d asio ] && [ -f asio/basic_socket.hpp ] ; then
    echo "Asio ${ASIO_VER} was installed successfully."
    exit 0
 else

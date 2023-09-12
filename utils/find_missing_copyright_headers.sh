@@ -20,7 +20,7 @@ expected_lines=(
 
 err=0
 n=0
-for file in $(find $1 '(' -name '*.cc' -or -name '*.h' ')' -not -path '*third_party*')
+while IFS= read -r file # input redirection is after done
 do
   ((++n))
   printf "\r[%4d] Checking %-80s" $n "$file ..."
@@ -29,7 +29,7 @@ do
   iserror=0
   for ((i=0; i < ${#expected_lines[@]}; ++i))
   do
-    IFS= read line <&3
+    IFS= read -r line <&3
     result=$(grep -Po "${expected_lines[$i]}" <<< "$line" 2>/dev/null)
     if ! [ "$result" = "$line" ]
     then
@@ -43,7 +43,7 @@ do
     printf "\nWrong copyright header in %s\n" "$file"
     ((++err))
   fi
-done
+done < <(find "${1:-.}" '(' -name '*.cc' -or -name '*.h' ')' -not -path '*third_party*' -print -or -name 'third_party' -prune )
 
 echo
 echo
