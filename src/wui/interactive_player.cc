@@ -433,7 +433,7 @@ void InteractivePlayer::think() {
 	InteractiveGameBase::think();
 
 	if (player().is_picking_custom_starting_position() &&
-	    !player().is_setting_custom_starting_position()) {
+	    !player().local_player_starting_position_is_pending()) {
 		set_sel_picture(
 		   playercolor_image(player().get_playercolor(), "images/players/player_position_menu.png"));
 	}
