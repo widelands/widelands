@@ -1241,16 +1241,15 @@ UI::Box* LuaPanel::do_create_child_box(lua_State* L, UI::Panel* parent) {
 }
 
 UI::Panel* LuaPanel::do_create_child_button(lua_State* L, UI::Panel* parent) {
-		std::string name = get_table_string(L, "name", true);
-		std::string title = get_table_string(L, "title", false);
-		std::string icon = get_table_string(L, "icon", false);
-		if (title.empty() == icon.empty()) {
-			report_error(
-			   L, "Button must have either a title or an icon, but not both and not neither");
-		}
+	std::string name = get_table_string(L, "name", true);
+	std::string title = get_table_string(L, "title", false);
+	std::string icon = get_table_string(L, "icon", false);
+	if (title.empty() == icon.empty()) {
+		report_error(L, "Button must have either a title or an icon, but not both and not neither");
+	}
 
-		UI::ButtonStyle style = get_table_button_style(L, "style", false);
-		UI::Button::VisualState visual = get_table_button_visual_state(L, "visual", false);
+	UI::ButtonStyle style = get_table_button_style(L, "style", false);
+	UI::Button::VisualState visual = get_table_button_visual_state(L, "visual", false);
 
 	std::string tooltip = get_table_string(L, "tooltip", false);
 	int32_t x = get_table_int(L, "x", false);
@@ -1258,61 +1257,60 @@ UI::Panel* LuaPanel::do_create_child_button(lua_State* L, UI::Panel* parent) {
 	int32_t w = get_table_int(L, "w", false);
 	int32_t h = get_table_int(L, "h", false);
 
-		UI::Button* button;
-		if (title.empty()) {
-			button = new UI::Button(
-			   parent, name, x, y, w, h, style, g_image_cache->get(icon), tooltip, visual);
-		} else {
-			button = new UI::Button(parent, name, x, y, w, h, style, title, tooltip, visual);
-		}
+	UI::Button* button;
+	if (title.empty()) {
+		button =
+		   new UI::Button(parent, name, x, y, w, h, style, g_image_cache->get(icon), tooltip, visual);
+	} else {
+		button = new UI::Button(parent, name, x, y, w, h, style, title, tooltip, visual);
+	}
 
-		button->set_repeating(get_table_boolean(L, "repeating", false));
+	button->set_repeating(get_table_boolean(L, "repeating", false));
 
-		if (std::string on_click = get_table_string(L, "on_click", false); !on_click.empty()) {
-			button->sigclicked.connect(create_plugin_action_lambda(L, on_click));
-		}
+	if (std::string on_click = get_table_string(L, "on_click", false); !on_click.empty()) {
+		button->sigclicked.connect(create_plugin_action_lambda(L, on_click));
+	}
 
 	return button;
 }
 
 UI::Panel* LuaPanel::do_create_child_checkbox(lua_State* L, UI::Panel* parent) {
-		std::string name = get_table_string(L, "name", true);
-		std::string title = get_table_string(L, "title", false);
-		std::string icon = get_table_string(L, "icon", false);
-		bool initial_state = get_table_boolean(L, "state", false);
+	std::string name = get_table_string(L, "name", true);
+	std::string title = get_table_string(L, "title", false);
+	std::string icon = get_table_string(L, "icon", false);
+	bool initial_state = get_table_boolean(L, "state", false);
 
-		if (title.empty() == icon.empty()) {
-			report_error(
-			   L, "Checkbox must have either a title or an icon, but not both and not neither");
-		}
+	if (title.empty() == icon.empty()) {
+		report_error(L, "Checkbox must have either a title or an icon, but not both and not neither");
+	}
 
 	std::string tooltip = get_table_string(L, "tooltip", false);
 	int32_t x = get_table_int(L, "x", false);
 	int32_t y = get_table_int(L, "y", false);
 
-		UI::Checkbox* checkbox;
-		if (title.empty()) {
-			checkbox = new UI::Checkbox(
-			   parent, UI::PanelStyle::kWui, name, Vector2i(x, y), g_image_cache->get(icon), tooltip);
-		} else {
-			checkbox =
-			   new UI::Checkbox(parent, UI::PanelStyle::kWui, name, Vector2i(x, y), title, tooltip);
-		}
+	UI::Checkbox* checkbox;
+	if (title.empty()) {
+		checkbox = new UI::Checkbox(
+		   parent, UI::PanelStyle::kWui, name, Vector2i(x, y), g_image_cache->get(icon), tooltip);
+	} else {
+		checkbox =
+		   new UI::Checkbox(parent, UI::PanelStyle::kWui, name, Vector2i(x, y), title, tooltip);
+	}
 
-		checkbox->set_state(initial_state, false);
+	checkbox->set_state(initial_state, false);
 
-		if (std::string on_changed = get_table_string(L, "on_changed", false); !on_changed.empty()) {
-			checkbox->changed.connect(create_plugin_action_lambda(L, on_changed));
-		}
+	if (std::string on_changed = get_table_string(L, "on_changed", false); !on_changed.empty()) {
+		checkbox->changed.connect(create_plugin_action_lambda(L, on_changed));
+	}
 
 	return checkbox;
 }
 
 UI::Panel* LuaPanel::do_create_child_discrete_slider(lua_State* L, UI::Panel* parent) {
-		std::string name = get_table_string(L, "name", true);
-		uint32_t cursor_size = get_table_int(L, "cursor_size", false, 20);
-		uint32_t init_value = get_table_int(L, "value", true);
-		bool dark = get_table_boolean(L, "dark", false);
+	std::string name = get_table_string(L, "name", true);
+	uint32_t cursor_size = get_table_int(L, "cursor_size", false, 20);
+	uint32_t init_value = get_table_int(L, "value", true);
+	bool dark = get_table_boolean(L, "dark", false);
 
 	std::string tooltip = get_table_string(L, "tooltip", false);
 	int32_t x = get_table_int(L, "x", false);
@@ -1320,118 +1318,117 @@ UI::Panel* LuaPanel::do_create_child_discrete_slider(lua_State* L, UI::Panel* pa
 	int32_t w = get_table_int(L, "w", false);
 	int32_t h = get_table_int(L, "h", false);
 
-		std::vector<std::string> labels;
-		lua_getfield(L, -1, "labels");
-		luaL_checktype(L, -1, LUA_TTABLE);
-		lua_pushnil(L);
-		while (lua_next(L, -2) != 0) {
-			labels.emplace_back(luaL_checkstring(L, -1));
-			lua_pop(L, 1);
-		}
+	std::vector<std::string> labels;
+	lua_getfield(L, -1, "labels");
+	luaL_checktype(L, -1, LUA_TTABLE);
+	lua_pushnil(L);
+	while (lua_next(L, -2) != 0) {
+		labels.emplace_back(luaL_checkstring(L, -1));
 		lua_pop(L, 1);
+	}
+	lua_pop(L, 1);
 
-		if (labels.empty()) {
-			report_error(L, "Discrete slider without labels");
-		}
-		if (init_value >= labels.size()) {
-			report_error(L, "Discrete slider initial value out of range");
-		}
+	if (labels.empty()) {
+		report_error(L, "Discrete slider without labels");
+	}
+	if (init_value >= labels.size()) {
+		report_error(L, "Discrete slider initial value out of range");
+	}
 
-		UI::DiscreteSlider* slider = new UI::DiscreteSlider(
-		   parent, name, x, y, w, h, labels, init_value,
-		   dark ? UI::SliderStyle::kWuiDark : UI::SliderStyle::kWuiLight, tooltip, cursor_size);
+	UI::DiscreteSlider* slider = new UI::DiscreteSlider(
+	   parent, name, x, y, w, h, labels, init_value,
+	   dark ? UI::SliderStyle::kWuiDark : UI::SliderStyle::kWuiLight, tooltip, cursor_size);
 
-		if (std::string on_changed = get_table_string(L, "on_changed", false); !on_changed.empty()) {
-			slider->changed.connect(create_plugin_action_lambda(L, on_changed));
-		}
+	if (std::string on_changed = get_table_string(L, "on_changed", false); !on_changed.empty()) {
+		slider->changed.connect(create_plugin_action_lambda(L, on_changed));
+	}
 
-		return slider;
+	return slider;
 }
 
 UI::Panel* LuaPanel::do_create_child_dropdown(lua_State* L, UI::Panel* parent) {
-		std::string name = get_table_string(L, "name", true);
-		std::string label = get_table_string(L, "label", true);
-		int32_t max_list_items = get_table_int(L, "max_list_items", true);
-		int32_t button_dimension = get_table_int(L, "button_dimension", true);
-		UI::ButtonStyle button_style = get_table_button_style(L, "button_style", true);
-		UI::DropdownType type = get_table_dropdown_type(L, "type", true);
-		std::string datatype = get_table_string(L, "datatype", true);
+	std::string name = get_table_string(L, "name", true);
+	std::string label = get_table_string(L, "label", true);
+	int32_t max_list_items = get_table_int(L, "max_list_items", true);
+	int32_t button_dimension = get_table_int(L, "button_dimension", true);
+	UI::ButtonStyle button_style = get_table_button_style(L, "button_style", true);
+	UI::DropdownType type = get_table_dropdown_type(L, "type", true);
+	std::string datatype = get_table_string(L, "datatype", true);
 
 	std::string tooltip = get_table_string(L, "tooltip", false);
 	int32_t x = get_table_int(L, "x", false);
 	int32_t y = get_table_int(L, "y", false);
 	int32_t w = get_table_int(L, "w", false);
 
-		UI::BaseDropdown* dropdown;
-		if (datatype == "string") {
-			DropdownOfString* dd =
-			   new DropdownOfString(parent, name, x, y, w, max_list_items, button_dimension, label,
-			                        type, UI::PanelStyle::kWui, button_style);
-			dropdown = dd;
+	UI::BaseDropdown* dropdown;
+	if (datatype == "string") {
+		DropdownOfString* dd =
+		   new DropdownOfString(parent, name, x, y, w, max_list_items, button_dimension, label, type,
+		                        UI::PanelStyle::kWui, button_style);
+		dropdown = dd;
 
-			lua_getfield(L, -1, "entries");
-			if (!lua_isnil(L, -1)) {
-				luaL_checktype(L, -1, LUA_TTABLE);
-				lua_pushnil(L);
-				while (lua_next(L, -2) != 0) {
-					std::string elabel = get_table_string(L, "label", true);
-					std::string value = get_table_string(L, "value", true);
-					std::string etooltip = get_table_string(L, "tooltip", false);
-					std::string icon = get_table_string(L, "icon", false);
-					bool select = get_table_boolean(L, "select", false);
+		lua_getfield(L, -1, "entries");
+		if (!lua_isnil(L, -1)) {
+			luaL_checktype(L, -1, LUA_TTABLE);
+			lua_pushnil(L);
+			while (lua_next(L, -2) != 0) {
+				std::string elabel = get_table_string(L, "label", true);
+				std::string value = get_table_string(L, "value", true);
+				std::string etooltip = get_table_string(L, "tooltip", false);
+				std::string icon = get_table_string(L, "icon", false);
+				bool select = get_table_boolean(L, "select", false);
 
-					dd->add(elabel, value, icon.empty() ? nullptr : g_image_cache->get(icon), select,
-					        etooltip);
-					lua_pop(L, 1);
-				}
+				dd->add(
+				   elabel, value, icon.empty() ? nullptr : g_image_cache->get(icon), select, etooltip);
+				lua_pop(L, 1);
 			}
-			lua_pop(L, 1);
-
-		} else {
-			report_error(L, "Unsupported dropdown datatype '%s'", datatype.c_str());
 		}
+		lua_pop(L, 1);
 
-		if (std::string on_selected = get_table_string(L, "on_selected", false);
-		    !on_selected.empty()) {
-			dropdown->selected.connect(create_plugin_action_lambda(L, on_selected));
-		}
+	} else {
+		report_error(L, "Unsupported dropdown datatype '%s'", datatype.c_str());
+	}
+
+	if (std::string on_selected = get_table_string(L, "on_selected", false); !on_selected.empty()) {
+		dropdown->selected.connect(create_plugin_action_lambda(L, on_selected));
+	}
 
 	return dropdown;
 }
 
 UI::Panel* LuaPanel::do_create_child_editbox(lua_State* L, UI::Panel* parent) {
-		std::string name = get_table_string(L, "name", true);
-		std::string text = get_table_string(L, "text", false);
-		bool password = get_table_boolean(L, "password", false);
-		bool warning = get_table_boolean(L, "warning", false);
+	std::string name = get_table_string(L, "name", true);
+	std::string text = get_table_string(L, "text", false);
+	bool password = get_table_boolean(L, "password", false);
+	bool warning = get_table_boolean(L, "warning", false);
 
 	std::string tooltip = get_table_string(L, "tooltip", false);
 	int32_t x = get_table_int(L, "x", false);
 	int32_t y = get_table_int(L, "y", false);
 	int32_t w = get_table_int(L, "w", false);
 
-		UI::EditBox* editbox = new UI::EditBox(parent, name, x, y, w, UI::PanelStyle::kWui);
+	UI::EditBox* editbox = new UI::EditBox(parent, name, x, y, w, UI::PanelStyle::kWui);
 
-		editbox->set_password(password);
-		editbox->set_warning(warning);
+	editbox->set_password(password);
+	editbox->set_warning(warning);
 
-		if (std::string on_changed = get_table_string(L, "on_changed", false); !on_changed.empty()) {
-			editbox->changed.connect(create_plugin_action_lambda(L, on_changed));
-		}
-		if (std::string on_cancel = get_table_string(L, "on_cancel", false); !on_cancel.empty()) {
-			editbox->cancel.connect(create_plugin_action_lambda(L, on_cancel));
-		}
-		if (std::string on_ok = get_table_string(L, "on_ok", false); !on_ok.empty()) {
-			editbox->ok.connect(create_plugin_action_lambda(L, on_ok));
-		}
+	if (std::string on_changed = get_table_string(L, "on_changed", false); !on_changed.empty()) {
+		editbox->changed.connect(create_plugin_action_lambda(L, on_changed));
+	}
+	if (std::string on_cancel = get_table_string(L, "on_cancel", false); !on_cancel.empty()) {
+		editbox->cancel.connect(create_plugin_action_lambda(L, on_cancel));
+	}
+	if (std::string on_ok = get_table_string(L, "on_ok", false); !on_ok.empty()) {
+		editbox->ok.connect(create_plugin_action_lambda(L, on_ok));
+	}
 
 	return editbox;
 }
 
 UI::Panel* LuaPanel::do_create_child_listselect(lua_State* L, UI::Panel* parent) {
-		std::string name = get_table_string(L, "name", true);
-		UI::ListselectLayout layout = get_table_listselect_layout(L, "layout", false);
-		std::string datatype = get_table_string(L, "datatype", true);
+	std::string name = get_table_string(L, "name", true);
+	UI::ListselectLayout layout = get_table_listselect_layout(L, "layout", false);
+	std::string datatype = get_table_string(L, "datatype", true);
 
 	std::string tooltip = get_table_string(L, "tooltip", false);
 	int32_t x = get_table_int(L, "x", false);
@@ -1439,53 +1436,52 @@ UI::Panel* LuaPanel::do_create_child_listselect(lua_State* L, UI::Panel* parent)
 	int32_t w = get_table_int(L, "w", false);
 	int32_t h = get_table_int(L, "h", false);
 
-		UI::BaseListselect* listselect;
-		if (datatype == "string") {
-			ListselectOfString* ls =
-			   new ListselectOfString(parent, name, x, y, w, h, UI::PanelStyle::kWui, layout);
-			listselect = ls;
+	UI::BaseListselect* listselect;
+	if (datatype == "string") {
+		ListselectOfString* ls =
+		   new ListselectOfString(parent, name, x, y, w, h, UI::PanelStyle::kWui, layout);
+		listselect = ls;
 
-			lua_getfield(L, -1, "entries");
-			if (!lua_isnil(L, -1)) {
-				luaL_checktype(L, -1, LUA_TTABLE);
-				lua_pushnil(L);
-				while (lua_next(L, -2) != 0) {
-					std::string label = get_table_string(L, "label", true);
-					std::string value = get_table_string(L, "value", true);
-					std::string etooltip = get_table_string(L, "tooltip", false);
-					std::string icon = get_table_string(L, "icon", false);
-					bool select = get_table_boolean(L, "select", false);
-					int32_t indent = get_table_int(L, "indent", false);
+		lua_getfield(L, -1, "entries");
+		if (!lua_isnil(L, -1)) {
+			luaL_checktype(L, -1, LUA_TTABLE);
+			lua_pushnil(L);
+			while (lua_next(L, -2) != 0) {
+				std::string label = get_table_string(L, "label", true);
+				std::string value = get_table_string(L, "value", true);
+				std::string etooltip = get_table_string(L, "tooltip", false);
+				std::string icon = get_table_string(L, "icon", false);
+				bool select = get_table_boolean(L, "select", false);
+				int32_t indent = get_table_int(L, "indent", false);
 
-					ls->add(label, value, icon.empty() ? nullptr : g_image_cache->get(icon), select,
-					        etooltip, "", indent);
-					lua_pop(L, 1);
-				}
+				ls->add(label, value, icon.empty() ? nullptr : g_image_cache->get(icon), select,
+				        etooltip, "", indent);
+				lua_pop(L, 1);
 			}
-			lua_pop(L, 1);
+		}
+		lua_pop(L, 1);
 
-		} else {
-			report_error(L, "Unsupported listselect datatype '%s'", datatype.c_str());
-		}
+	} else {
+		report_error(L, "Unsupported listselect datatype '%s'", datatype.c_str());
+	}
 
-		if (std::string on_selected = get_table_string(L, "on_selected", false);
-		    !on_selected.empty()) {
-			listselect->selected.connect(create_plugin_action_lambda<uint32_t>(L, on_selected));
-		}
-		if (std::string on_double_clicked = get_table_string(L, "on_double_clicked", false);
-		    !on_double_clicked.empty()) {
-			listselect->double_clicked.connect(
-			   create_plugin_action_lambda<uint32_t>(L, on_double_clicked));
-		}
+	if (std::string on_selected = get_table_string(L, "on_selected", false); !on_selected.empty()) {
+		listselect->selected.connect(create_plugin_action_lambda<uint32_t>(L, on_selected));
+	}
+	if (std::string on_double_clicked = get_table_string(L, "on_double_clicked", false);
+	    !on_double_clicked.empty()) {
+		listselect->double_clicked.connect(
+		   create_plugin_action_lambda<uint32_t>(L, on_double_clicked));
+	}
 
 	return listselect;
 }
 
 UI::Panel* LuaPanel::do_create_child_multilineeditbox(lua_State* L, UI::Panel* parent) {
-		std::string name = get_table_string(L, "name", true);
-		std::string text = get_table_string(L, "text", false);
-		bool password = get_table_boolean(L, "password", false);
-		bool warning = get_table_boolean(L, "warning", false);
+	std::string name = get_table_string(L, "name", true);
+	std::string text = get_table_string(L, "text", false);
+	bool password = get_table_boolean(L, "password", false);
+	bool warning = get_table_boolean(L, "warning", false);
 
 	std::string tooltip = get_table_string(L, "tooltip", false);
 	int32_t x = get_table_int(L, "x", false);
@@ -1493,18 +1489,18 @@ UI::Panel* LuaPanel::do_create_child_multilineeditbox(lua_State* L, UI::Panel* p
 	int32_t w = get_table_int(L, "w", false);
 	int32_t h = get_table_int(L, "h", false);
 
-		UI::MultilineEditbox* editbox =
-		   new UI::MultilineEditbox(parent, name, x, y, w, h, UI::PanelStyle::kWui);
+	UI::MultilineEditbox* editbox =
+	   new UI::MultilineEditbox(parent, name, x, y, w, h, UI::PanelStyle::kWui);
 
-		editbox->set_password(password);
-		editbox->set_warning(warning);
+	editbox->set_password(password);
+	editbox->set_warning(warning);
 
-		if (std::string on_changed = get_table_string(L, "on_changed", false); !on_changed.empty()) {
-			editbox->changed.connect(create_plugin_action_lambda(L, on_changed));
-		}
-		if (std::string on_cancel = get_table_string(L, "on_cancel", false); !on_cancel.empty()) {
-			editbox->cancel.connect(create_plugin_action_lambda(L, on_cancel));
-		}
+	if (std::string on_changed = get_table_string(L, "on_changed", false); !on_changed.empty()) {
+		editbox->changed.connect(create_plugin_action_lambda(L, on_changed));
+	}
+	if (std::string on_cancel = get_table_string(L, "on_cancel", false); !on_cancel.empty()) {
+		editbox->cancel.connect(create_plugin_action_lambda(L, on_cancel));
+	}
 
 	return editbox;
 }
@@ -1547,29 +1543,29 @@ UI::Panel* LuaPanel::do_create_child_multilinetextarea(lua_State* L, UI::Panel* 
 }
 
 UI::Panel* LuaPanel::do_create_child_panel(lua_State* L, UI::Panel* parent) {
-		std::string name = get_table_string(L, "name", true);
+	std::string name = get_table_string(L, "name", true);
 	std::string tooltip = get_table_string(L, "tooltip", false);
 	int32_t x = get_table_int(L, "x", false);
 	int32_t y = get_table_int(L, "y", false);
 	int32_t w = get_table_int(L, "w", false);
 	int32_t h = get_table_int(L, "h", false);
 
-		return new UI::Panel(parent, UI::PanelStyle::kWui, name, x, y, w, h, tooltip);
+	return new UI::Panel(parent, UI::PanelStyle::kWui, name, x, y, w, h, tooltip);
 }
 
 UI::Panel* LuaPanel::do_create_child_progressbar(lua_State* L, UI::Panel* parent) {
-		std::string name = get_table_string(L, "name", true);
-		unsigned orientation = get_table_button_box_orientation(L, "orientation", true);
-		int32_t total = get_table_int(L, "total", true);
-		int32_t state = get_table_int(L, "state", true);
-		bool percent = get_table_boolean(L, "percent", false, true);
+	std::string name = get_table_string(L, "name", true);
+	unsigned orientation = get_table_button_box_orientation(L, "orientation", true);
+	int32_t total = get_table_int(L, "total", true);
+	int32_t state = get_table_int(L, "state", true);
+	bool percent = get_table_boolean(L, "percent", false, true);
 
-		if (total < 1) {
-			report_error(L, "Progressbar total must be positive");
-		}
-		if (state < 0 || state > total) {
-			report_error(L, "Progressbar initial state out of range");
-		}
+	if (total < 1) {
+		report_error(L, "Progressbar total must be positive");
+	}
+	if (state < 0 || state > total) {
+		report_error(L, "Progressbar initial state out of range");
+	}
 
 	std::string tooltip = get_table_string(L, "tooltip", false);
 	int32_t x = get_table_int(L, "x", false);
@@ -1577,12 +1573,12 @@ UI::Panel* LuaPanel::do_create_child_progressbar(lua_State* L, UI::Panel* parent
 	int32_t w = get_table_int(L, "w", false);
 	int32_t h = get_table_int(L, "h", false);
 
-		UI::ProgressBar* bar =
-		   new UI::ProgressBar(parent, UI::PanelStyle::kWui, name, x, y, w, h, orientation);
+	UI::ProgressBar* bar =
+	   new UI::ProgressBar(parent, UI::PanelStyle::kWui, name, x, y, w, h, orientation);
 
-		bar->set_total(total);
-		bar->set_state(state);
-		bar->set_show_percent(percent);
+	bar->set_total(total);
+	bar->set_state(state);
+	bar->set_show_percent(percent);
 
 	return bar;
 }
@@ -1627,20 +1623,20 @@ void LuaPanel::do_create_child_radiogroup(lua_State* L, UI::Panel* parent, UI::B
 }
 
 UI::Panel* LuaPanel::do_create_child_slider(lua_State* L, UI::Panel* parent) {
-		std::string name = get_table_string(L, "name", true);
-		unsigned orientation = get_table_button_box_orientation(L, "orientation", true);
-		int32_t val_min = get_table_int(L, "min", true);
-		int32_t val_max = get_table_int(L, "max", true);
-		int32_t val = get_table_int(L, "value", true);
-		uint32_t cursor_size = get_table_int(L, "cursor_size", false, 20);
-		bool dark = get_table_boolean(L, "dark", false);
+	std::string name = get_table_string(L, "name", true);
+	unsigned orientation = get_table_button_box_orientation(L, "orientation", true);
+	int32_t val_min = get_table_int(L, "min", true);
+	int32_t val_max = get_table_int(L, "max", true);
+	int32_t val = get_table_int(L, "value", true);
+	uint32_t cursor_size = get_table_int(L, "cursor_size", false, 20);
+	bool dark = get_table_boolean(L, "dark", false);
 
-		if (val_min > val_max) {
-			report_error(L, "Malformed slider value range");
-		}
-		if (val < val_min || val > val_max) {
-			report_error(L, "Slider initial value out of range");
-		}
+	if (val_min > val_max) {
+		report_error(L, "Malformed slider value range");
+	}
+	if (val < val_min || val > val_max) {
+		report_error(L, "Slider initial value out of range");
+	}
 
 	std::string tooltip = get_table_string(L, "tooltip", false);
 	int32_t x = get_table_int(L, "x", false);
@@ -1648,169 +1644,168 @@ UI::Panel* LuaPanel::do_create_child_slider(lua_State* L, UI::Panel* parent) {
 	int32_t w = get_table_int(L, "w", false);
 	int32_t h = get_table_int(L, "h", false);
 
-		UI::Slider* slider;
-		if (orientation == UI::Box::Vertical) {
-			slider = new UI::VerticalSlider(
-			   parent, name, x, y, w, h, val_min, val_max, val,
-			   dark ? UI::SliderStyle::kWuiDark : UI::SliderStyle::kWuiLight, cursor_size, tooltip);
-		} else {
-			slider = new UI::HorizontalSlider(
-			   parent, name, x, y, w, h, val_min, val_max, val,
-			   dark ? UI::SliderStyle::kWuiDark : UI::SliderStyle::kWuiLight, tooltip, cursor_size);
-		}
+	UI::Slider* slider;
+	if (orientation == UI::Box::Vertical) {
+		slider = new UI::VerticalSlider(parent, name, x, y, w, h, val_min, val_max, val,
+		                                dark ? UI::SliderStyle::kWuiDark : UI::SliderStyle::kWuiLight,
+		                                cursor_size, tooltip);
+	} else {
+		slider = new UI::HorizontalSlider(
+		   parent, name, x, y, w, h, val_min, val_max, val,
+		   dark ? UI::SliderStyle::kWuiDark : UI::SliderStyle::kWuiLight, tooltip, cursor_size);
+	}
 
-		if (std::string on_changed = get_table_string(L, "on_changed", false); !on_changed.empty()) {
-			slider->changed.connect(create_plugin_action_lambda(L, on_changed));
-		}
+	if (std::string on_changed = get_table_string(L, "on_changed", false); !on_changed.empty()) {
+		slider->changed.connect(create_plugin_action_lambda(L, on_changed));
+	}
 
 	return slider;
 }
 
 UI::Panel* LuaPanel::do_create_child_spinbox(lua_State* L, UI::Panel* parent) {
-		std::string name = get_table_string(L, "name", true);
-		uint32_t unit_w = get_table_int(L, "unit_w", true);
-		int32_t val_min = get_table_int(L, "min", true);
-		int32_t val_max = get_table_int(L, "max", true);
-		int32_t val = get_table_int(L, "value", true);
-		int32_t step_size_small = get_table_int(L, "step_size_small", false, 1);
-		int32_t step_size_big = get_table_int(L, "step_size_big", false, 0);
-		std::string label = get_table_string(L, "label", false);
+	std::string name = get_table_string(L, "name", true);
+	uint32_t unit_w = get_table_int(L, "unit_w", true);
+	int32_t val_min = get_table_int(L, "min", true);
+	int32_t val_max = get_table_int(L, "max", true);
+	int32_t val = get_table_int(L, "value", true);
+	int32_t step_size_small = get_table_int(L, "step_size_small", false, 1);
+	int32_t step_size_big = get_table_int(L, "step_size_big", false, 0);
+	std::string label = get_table_string(L, "label", false);
 
-		if (val_min > val_max) {
-			report_error(L, "Malformed spinbox value range");
-		}
-		if (val < val_min || val > val_max) {
-			report_error(L, "Spinbox initial value out of range");
-		}
+	if (val_min > val_max) {
+		report_error(L, "Malformed spinbox value range");
+	}
+	if (val < val_min || val > val_max) {
+		report_error(L, "Spinbox initial value out of range");
+	}
 
 	std::string tooltip = get_table_string(L, "tooltip", false);
 	int32_t x = get_table_int(L, "x", false);
 	int32_t y = get_table_int(L, "y", false);
 	int32_t w = get_table_int(L, "w", false);
 
-		std::string units_str = get_table_string(L, "units", false);
-		UI::SpinBox::Units units;
-		if (units_str.empty() || units_str == "none") {
-			units = UI::SpinBox::Units::kNone;
-		} else if (units_str == "pixels") {
-			units = UI::SpinBox::Units::kPixels;
-		} else if (units_str == "minutes") {
-			units = UI::SpinBox::Units::kMinutes;
-		} else if (units_str == "weeks") {
-			units = UI::SpinBox::Units::kWeeks;
-		} else if (units_str == "percent") {
-			units = UI::SpinBox::Units::kPercent;
-		} else if (units_str == "fields") {
-			units = UI::SpinBox::Units::kFields;
-		} else {
-			report_error(L, "Unknown spinbox unit '%s'", units_str.c_str());
+	std::string units_str = get_table_string(L, "units", false);
+	UI::SpinBox::Units units;
+	if (units_str.empty() || units_str == "none") {
+		units = UI::SpinBox::Units::kNone;
+	} else if (units_str == "pixels") {
+		units = UI::SpinBox::Units::kPixels;
+	} else if (units_str == "minutes") {
+		units = UI::SpinBox::Units::kMinutes;
+	} else if (units_str == "weeks") {
+		units = UI::SpinBox::Units::kWeeks;
+	} else if (units_str == "percent") {
+		units = UI::SpinBox::Units::kPercent;
+	} else if (units_str == "fields") {
+		units = UI::SpinBox::Units::kFields;
+	} else {
+		report_error(L, "Unknown spinbox unit '%s'", units_str.c_str());
+	}
+
+	std::vector<int32_t> value_list;
+
+	lua_getfield(L, -1, "values");
+	if (!lua_isnil(L, -1)) {
+		if (step_size_big != 0 || step_size_small != 1) {
+			report_error(L, "Spinbox: Cannot combine value list and step sizes");
 		}
-
-		std::vector<int32_t> value_list;
-
-		lua_getfield(L, -1, "values");
-		if (!lua_isnil(L, -1)) {
-			if (step_size_big != 0 || step_size_small != 1) {
-				report_error(L, "Spinbox: Cannot combine value list and step sizes");
-			}
-			luaL_checktype(L, -1, LUA_TTABLE);
-			lua_pushnil(L);
-			while (lua_next(L, -2) != 0) {
-				value_list.push_back(luaL_checkint32(L, -1));
-				lua_pop(L, 1);
-			}
+		luaL_checktype(L, -1, LUA_TTABLE);
+		lua_pushnil(L);
+		while (lua_next(L, -2) != 0) {
+			value_list.push_back(luaL_checkint32(L, -1));
+			lua_pop(L, 1);
 		}
-		lua_pop(L, 1);
+	}
+	lua_pop(L, 1);
 
-		UI::SpinBox* spinbox = new UI::SpinBox(
-		   parent, name, x, y, w, unit_w, val, val_min, val_max, UI::PanelStyle::kWui, label, units,
-		   value_list.empty() ?
-            step_size_big > 0 ? UI::SpinBox::Type::kBig : UI::SpinBox::Type::kSmall :
-            UI::SpinBox::Type::kValueList,
-		   step_size_small, step_size_big);
+	UI::SpinBox* spinbox = new UI::SpinBox(
+	   parent, name, x, y, w, unit_w, val, val_min, val_max, UI::PanelStyle::kWui, label, units,
+	   value_list.empty() ? step_size_big > 0 ? UI::SpinBox::Type::kBig : UI::SpinBox::Type::kSmall :
+                           UI::SpinBox::Type::kValueList,
+	   step_size_small, step_size_big);
 
-		if (!value_list.empty()) {
-			spinbox->set_value_list(value_list);
+	if (!value_list.empty()) {
+		spinbox->set_value_list(value_list);
+	}
+
+	lua_getfield(L, -1, "replacements");
+	if (!lua_isnil(L, -1)) {
+		luaL_checktype(L, -1, LUA_TTABLE);
+		lua_pushnil(L);
+		while (lua_next(L, -2) != 0) {
+			spinbox->add_replacement(
+			   get_table_int(L, "value", true), get_table_string(L, "replacement", true));
+			lua_pop(L, 1);
 		}
+	}
+	lua_pop(L, 1);
 
-		lua_getfield(L, -1, "replacements");
-		if (!lua_isnil(L, -1)) {
-			luaL_checktype(L, -1, LUA_TTABLE);
-			lua_pushnil(L);
-			while (lua_next(L, -2) != 0) {
-				spinbox->add_replacement(
-				   get_table_int(L, "value", true), get_table_string(L, "replacement", true));
-				lua_pop(L, 1);
-			}
-		}
-		lua_pop(L, 1);
-
-		if (std::string on_changed = get_table_string(L, "on_changed", false); !on_changed.empty()) {
-			spinbox->changed.connect(create_plugin_action_lambda(L, on_changed));
-		}
+	if (std::string on_changed = get_table_string(L, "on_changed", false); !on_changed.empty()) {
+		spinbox->changed.connect(create_plugin_action_lambda(L, on_changed));
+	}
 
 	return spinbox;
 }
 
 UI::Panel* LuaPanel::do_create_child_tabpanel(lua_State* L, UI::Panel* parent) {
-		std::string name = get_table_string(L, "name", true);
-		bool dark = get_table_boolean(L, "dark", false);
+	std::string name = get_table_string(L, "name", true);
+	bool dark = get_table_boolean(L, "dark", false);
 
-		UI::TabPanel* tabpanel = new UI::TabPanel(
-		   parent, dark ? UI::TabPanelStyle::kWuiDark : UI::TabPanelStyle::kWuiLight, name);
+	UI::TabPanel* tabpanel = new UI::TabPanel(
+	   parent, dark ? UI::TabPanelStyle::kWuiDark : UI::TabPanelStyle::kWuiLight, name);
 
-		lua_getfield(L, -1, "tabs");
-		if (!lua_isnil(L, -1)) {
+	lua_getfield(L, -1, "tabs");
+	if (!lua_isnil(L, -1)) {
+		luaL_checktype(L, -1, LUA_TTABLE);
+		lua_pushnil(L);
+		while (lua_next(L, -2) != 0) {
+			std::string tabname = get_table_string(L, "name", true);
+			std::string title = get_table_string(L, "title", false);
+			std::string icon = get_table_string(L, "icon", false);
+			std::string ttooltip = get_table_string(L, "tooltip", false);
+
+			if (title.empty() == icon.empty()) {
+				report_error(
+				   L, "Tabs must have either a title or an icon, but not both and not neither");
+			}
+
+			lua_getfield(L, -1, "panel");
 			luaL_checktype(L, -1, LUA_TTABLE);
-			lua_pushnil(L);
-			while (lua_next(L, -2) != 0) {
-				std::string tabname = get_table_string(L, "name", true);
-				std::string title = get_table_string(L, "title", false);
-				std::string icon = get_table_string(L, "icon", false);
-				std::string ttooltip = get_table_string(L, "tooltip", false);
+			UI::Panel* wrapped_tab = do_create_child(L, tabpanel, nullptr);
+			lua_pop(L, 1);
 
-				if (title.empty() == icon.empty()) {
-					report_error(
-					   L, "Tabs must have either a title or an icon, but not both and not neither");
-				}
-
-				lua_getfield(L, -1, "panel");
-				luaL_checktype(L, -1, LUA_TTABLE);
-				UI::Panel* wrapped_tab = do_create_child(L, tabpanel, nullptr);
-				lua_pop(L, 1);
-
-				if (icon.empty()) {
-					tabpanel->add(name, title, wrapped_tab, ttooltip);
-				} else {
-					tabpanel->add(name, g_image_cache->get(icon), wrapped_tab, ttooltip);
-				}
-
-				lua_pop(L, 1);
-			}
-		}
-		lua_pop(L, 1);
-
-		lua_getfield(L, -1, "active");
-		if (!lua_isnil(L, -1)) {
-			if (static_cast<bool>(lua_isstring(L, -1))) {
-				tabpanel->activate(luaL_checkstring(L, -1));
+			if (icon.empty()) {
+				tabpanel->add(name, title, wrapped_tab, ttooltip);
 			} else {
-				tabpanel->activate(luaL_checkuint32(L, -1));
+				tabpanel->add(name, g_image_cache->get(icon), wrapped_tab, ttooltip);
 			}
-		}
-		lua_pop(L, 1);
 
-		if (std::string on_clicked = get_table_string(L, "on_clicked", false); !on_clicked.empty()) {
-			tabpanel->sigclicked.connect(create_plugin_action_lambda(L, on_clicked));
+			lua_pop(L, 1);
 		}
+	}
+	lua_pop(L, 1);
+
+	lua_getfield(L, -1, "active");
+	if (!lua_isnil(L, -1)) {
+		if (static_cast<bool>(lua_isstring(L, -1))) {
+			tabpanel->activate(luaL_checkstring(L, -1));
+		} else {
+			tabpanel->activate(luaL_checkuint32(L, -1));
+		}
+	}
+	lua_pop(L, 1);
+
+	if (std::string on_clicked = get_table_string(L, "on_clicked", false); !on_clicked.empty()) {
+		tabpanel->sigclicked.connect(create_plugin_action_lambda(L, on_clicked));
+	}
 
 	return tabpanel;
 }
 
 UI::Panel* LuaPanel::do_create_child_table(lua_State* L, UI::Panel* parent) {
-		std::string name = get_table_string(L, "name", true);
-		std::string datatype = get_table_string(L, "datatype", true);
-		bool multiselect = get_table_boolean(L, "multiselect", false);
+	std::string name = get_table_string(L, "name", true);
+	std::string datatype = get_table_string(L, "datatype", true);
+	bool multiselect = get_table_boolean(L, "multiselect", false);
 
 	std::string tooltip = get_table_string(L, "tooltip", false);
 	int32_t x = get_table_int(L, "x", false);
@@ -1818,95 +1813,93 @@ UI::Panel* LuaPanel::do_create_child_table(lua_State* L, UI::Panel* parent) {
 	int32_t w = get_table_int(L, "w", false);
 	int32_t h = get_table_int(L, "h", false);
 
-		UI::BaseTable* table;
-		if (datatype == "int") {
-			table = new TableOfInt(parent, name, x, y, w, h, UI::PanelStyle::kWui,
-			                       multiselect ? UI::TableRows::kMulti : UI::TableRows::kSingle);
-		} else {
-			report_error(L, "Unsupported table datatype '%s'", datatype.c_str());
-		}
+	UI::BaseTable* table;
+	if (datatype == "int") {
+		table = new TableOfInt(parent, name, x, y, w, h, UI::PanelStyle::kWui,
+		                       multiselect ? UI::TableRows::kMulti : UI::TableRows::kSingle);
+	} else {
+		report_error(L, "Unsupported table datatype '%s'", datatype.c_str());
+	}
 
-		bool has_flexible = false;
-		unsigned ncolumns = 0;
-		lua_getfield(L, -1, "columns");
-		if (!lua_isnil(L, -1)) {
-			luaL_checktype(L, -1, LUA_TTABLE);
-			lua_pushnil(L);
-			while (lua_next(L, -2) != 0) {
-				int32_t column_w = get_table_int(L, "w", true);
-				std::string title = get_table_string(L, "title", true);
-				std::string ctooltip = get_table_string(L, "tooltip", false);
-				bool flexible = get_table_boolean(L, "flexible", false);
-				UI::Align align = get_table_align(L, "align", false);
+	bool has_flexible = false;
+	unsigned ncolumns = 0;
+	lua_getfield(L, -1, "columns");
+	if (!lua_isnil(L, -1)) {
+		luaL_checktype(L, -1, LUA_TTABLE);
+		lua_pushnil(L);
+		while (lua_next(L, -2) != 0) {
+			int32_t column_w = get_table_int(L, "w", true);
+			std::string title = get_table_string(L, "title", true);
+			std::string ctooltip = get_table_string(L, "tooltip", false);
+			bool flexible = get_table_boolean(L, "flexible", false);
+			UI::Align align = get_table_align(L, "align", false);
 
-				if (flexible) {
-					if (has_flexible) {
-						report_error(L, "Table may not have multiple flexible columns");
-					}
-					has_flexible = true;
+			if (flexible) {
+				if (has_flexible) {
+					report_error(L, "Table may not have multiple flexible columns");
 				}
-
-				table->add_column(
-				   column_w, title, ctooltip, align,
-				   flexible ? UI::TableColumnType::kFlexible : UI::TableColumnType::kFixed);
-				++ncolumns;
-				lua_pop(L, 1);
+				has_flexible = true;
 			}
+
+			table->add_column(column_w, title, ctooltip, align,
+			                  flexible ? UI::TableColumnType::kFlexible : UI::TableColumnType::kFixed);
+			++ncolumns;
+			lua_pop(L, 1);
 		}
-		lua_pop(L, 1);
+	}
+	lua_pop(L, 1);
 
-		lua_getfield(L, -1, "rows");
-		if (!lua_isnil(L, -1)) {
-			upcast(TableOfInt, t, table);
-			assert(t != nullptr);
-			luaL_checktype(L, -1, LUA_TTABLE);
-			lua_pushnil(L);
-			while (lua_next(L, -2) != 0) {
-				uintptr_t value = get_table_int(L, "value", true);
-				bool select = get_table_boolean(L, "select", false);
-				bool disable = get_table_boolean(L, "disable", false);
-				TableOfInt::EntryRecord& record = t->add(value, select);
-				record.set_disabled(disable);
+	lua_getfield(L, -1, "rows");
+	if (!lua_isnil(L, -1)) {
+		upcast(TableOfInt, t, table);
+		assert(t != nullptr);
+		luaL_checktype(L, -1, LUA_TTABLE);
+		lua_pushnil(L);
+		while (lua_next(L, -2) != 0) {
+			uintptr_t value = get_table_int(L, "value", true);
+			bool select = get_table_boolean(L, "select", false);
+			bool disable = get_table_boolean(L, "disable", false);
+			TableOfInt::EntryRecord& record = t->add(value, select);
+			record.set_disabled(disable);
 
-				for (unsigned i = 0; i < ncolumns; ++i) {
-					std::string text = get_table_string(L, format("text_%u", i).c_str(), false);
-					std::string icon = get_table_string(L, format("icon_%u", i).c_str(), false);
+			for (unsigned i = 0; i < ncolumns; ++i) {
+				std::string text = get_table_string(L, format("text_%u", i).c_str(), false);
+				std::string icon = get_table_string(L, format("icon_%u", i).c_str(), false);
 
-					if (icon.empty()) {
-						record.set_string(i, text);
-					} else {
-						record.set_picture(i, g_image_cache->get(icon), text);
-					}
+				if (icon.empty()) {
+					record.set_string(i, text);
+				} else {
+					record.set_picture(i, g_image_cache->get(icon), text);
 				}
-
-				lua_pop(L, 1);
 			}
-		}
-		lua_pop(L, 1);
 
-		table->set_sort_column(get_table_int(L, "sort_column", false));
-		table->set_sort_descending(get_table_boolean(L, "sort_descending", false));
+			lua_pop(L, 1);
+		}
+	}
+	lua_pop(L, 1);
 
-		if (std::string on_cancel = get_table_string(L, "on_cancel", false); !on_cancel.empty()) {
-			table->cancel.connect(create_plugin_action_lambda(L, on_cancel));
-		}
-		if (std::string on_selected = get_table_string(L, "on_selected", false);
-		    !on_selected.empty()) {
-			table->selected.connect(create_plugin_action_lambda<uint32_t>(L, on_selected));
-		}
-		if (std::string on_double_clicked = get_table_string(L, "on_double_clicked", false);
-		    !on_double_clicked.empty()) {
-			table->double_clicked.connect(create_plugin_action_lambda<uint32_t>(L, on_double_clicked));
-		}
+	table->set_sort_column(get_table_int(L, "sort_column", false));
+	table->set_sort_descending(get_table_boolean(L, "sort_descending", false));
+
+	if (std::string on_cancel = get_table_string(L, "on_cancel", false); !on_cancel.empty()) {
+		table->cancel.connect(create_plugin_action_lambda(L, on_cancel));
+	}
+	if (std::string on_selected = get_table_string(L, "on_selected", false); !on_selected.empty()) {
+		table->selected.connect(create_plugin_action_lambda<uint32_t>(L, on_selected));
+	}
+	if (std::string on_double_clicked = get_table_string(L, "on_double_clicked", false);
+	    !on_double_clicked.empty()) {
+		table->double_clicked.connect(create_plugin_action_lambda<uint32_t>(L, on_double_clicked));
+	}
 
 	return table;
 }
 
 UI::Panel* LuaPanel::do_create_child_textarea(lua_State* L, UI::Panel* parent) {
-		std::string name = get_table_string(L, "name", true);
-		std::string text = get_table_string(L, "text", true);
-		UI::FontStyle font = g_style_manager->safe_font_style(get_table_string(L, "font", true));
-		UI::Align align = get_table_align(L, "text_align", false);
+	std::string name = get_table_string(L, "name", true);
+	std::string text = get_table_string(L, "text", true);
+	UI::FontStyle font = g_style_manager->safe_font_style(get_table_string(L, "font", true));
+	UI::Align align = get_table_align(L, "text_align", false);
 
 	std::string tooltip = get_table_string(L, "tooltip", false);
 	int32_t x = get_table_int(L, "x", false);
@@ -1914,10 +1907,10 @@ UI::Panel* LuaPanel::do_create_child_textarea(lua_State* L, UI::Panel* parent) {
 	int32_t w = get_table_int(L, "w", false);
 	int32_t h = get_table_int(L, "h", false);
 
-		UI::Textarea* txt =
-		   new UI::Textarea(parent, UI::PanelStyle::kWui, name, font, x, y, w, h, text, align);
+	UI::Textarea* txt =
+	   new UI::Textarea(parent, UI::PanelStyle::kWui, name, font, x, y, w, h, text, align);
 
-		txt->set_fixed_width(get_table_int(L, "fixed_width", false));
+	txt->set_fixed_width(get_table_int(L, "fixed_width", false));
 
 	return txt;
 }
@@ -1956,9 +1949,9 @@ UI::Panel* LuaPanel::do_create_child_unique_window(lua_State* L, UI::Panel* pare
 }
 
 UI::Panel* LuaPanel::do_create_child_window(lua_State* L, UI::Panel* parent) {
-		if (parent != get_egbase(L).get_ibase()) {
-			report_error(L, "Windows must be toplevel components");
-		}
+	if (parent != get_egbase(L).get_ibase()) {
+		report_error(L, "Windows must be toplevel components");
+	}
 
 	std::string tooltip = get_table_string(L, "tooltip", false);
 	int32_t x = get_table_int(L, "x", false);
@@ -1966,19 +1959,18 @@ UI::Panel* LuaPanel::do_create_child_window(lua_State* L, UI::Panel* parent) {
 	int32_t w = get_table_int(L, "w", false);
 	int32_t h = get_table_int(L, "h", false);
 
-		std::string name = get_table_string(L, "name", true);
-		std::string title = get_table_string(L, "title", true);
-		UI::Window* window = new UI::Window(parent, UI::WindowStyle::kWui, name, x, y, w, h, title);
+	std::string name = get_table_string(L, "name", true);
+	std::string title = get_table_string(L, "title", true);
+	UI::Window* window = new UI::Window(parent, UI::WindowStyle::kWui, name, x, y, w, h, title);
 
-		lua_getfield(L, -1, "content");
-		if (!lua_isnil(L, -1)) {
-			window->set_center_panel(do_create_child(L, window, nullptr));
-		}
-		lua_pop(L, 1);
+	lua_getfield(L, -1, "content");
+	if (!lua_isnil(L, -1)) {
+		window->set_center_panel(do_create_child(L, window, nullptr));
+	}
+	lua_pop(L, 1);
 
 	return window;
 }
-
 
 /* RST
 Button

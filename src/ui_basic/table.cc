@@ -42,13 +42,13 @@ namespace UI {
  *       h
  */
 BaseTable::Table(Panel* const parent,
-                    const std::string& name,
-                    int32_t x,
-                    int32_t y,
-                    uint32_t w,
-                    uint32_t h,
-                    PanelStyle style,
-                    TableRows rowtype)
+                 const std::string& name,
+                 int32_t x,
+                 int32_t y,
+                 uint32_t w,
+                 uint32_t h,
+                 PanelStyle style,
+                 TableRows rowtype)
    : Panel(parent, style, name, x, y, w, h),
 
      lineheight_(text_height(g_style_manager->table_style(style).enabled())),
@@ -99,10 +99,10 @@ size_t BaseTable::number_of_columns() const {
 
 /// Add a new column to this table.
 void BaseTable::add_column(uint32_t const width,
-                              const std::string& title,
-                              const std::string& tooltip_string,
-                              Align const alignment,
-                              TableColumnType column_type) {
+                           const std::string& title,
+                           const std::string& tooltip_string,
+                           Align const alignment,
+                           TableColumnType column_type) {
 	//  If there would be existing entries, they would not get the new column.
 	assert(size() == 0);
 
@@ -434,8 +434,8 @@ UI::FontStyleInfo& BaseTable::get_column_fontstyle(const BaseTable::EntryRecord&
                                    g_style_manager->table_style(panel_style_).enabled());
 }
 bool BaseTable::is_mouse_in(const Vector2i& cursor_pos,
-                               const Vector2i& point,
-                               const int column_width) const {
+                            const Vector2i& point,
+                            const int column_width) const {
 	const int line = get_lineheight();
 
 	return cursor_pos.x >= point.x && cursor_pos.x <= point.x + column_width &&
@@ -881,8 +881,8 @@ BaseTable::EntryRecord::EntryRecord(void* const e) : entry_(e), font_style_(null
 }
 
 void BaseTable::EntryRecord::set_picture(uint8_t const col,
-                                            const Image* pic,
-                                            const std::string& str) {
+                                         const Image* pic,
+                                         const std::string& str) {
 	assert(col < data_.size());
 
 	data_.at(col).d_picture = pic;
