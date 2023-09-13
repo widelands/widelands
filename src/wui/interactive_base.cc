@@ -289,7 +289,7 @@ void InteractiveBase::add_plugin_timer(const std::string& action, uint32_t inter
 }
 
 void InteractiveBase::add_plugin_menu() {
-	plugins_dropdown_.set_image(g_image_cache->get("images/logos/WL-Editor-32.png"));
+	plugins_dropdown_.set_image(g_image_cache->get("images/plugin.png"));
 	toolbar()->add(&plugins_dropdown_);
 	plugins_dropdown_.selected.connect([this] { plugin_action(plugins_dropdown_.get_selected()); });
 }

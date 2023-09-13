@@ -128,6 +128,9 @@ public:
 	bool handle_key(bool down, SDL_Keysym code) override;
 };
 
+// All tables *should* effectively be derived from this template specialization
+using BaseTable = Table<void*>;
+
 template <> class Table<void*> : public Panel {
 public:
 	struct EntryRecord {
@@ -159,7 +162,7 @@ public:
 		}
 
 	private:
-		friend class Table<void*>;
+		friend BaseTable;
 		void* entry_;
 		std::unique_ptr<UI::FontStyle> font_style_;
 		struct Data {
@@ -352,9 +355,8 @@ private:
 	FontStyleInfo& get_column_fontstyle(const EntryRecord& er);
 };
 
-template <typename Entry> class Table<const Entry* const> : public Table<void*> {
+template <typename Entry> class Table<const Entry* const> : public BaseTable {
 public:
-	using Base = Table<void*>;
 	Table(Panel* parent,
 	      const std::string& name,
 	      int32_t x,
@@ -363,19 +365,19 @@ public:
 	      uint32_t h,
 	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, name, x, y, w, h, style, rowtype) {
+	   : BaseTable(parent, name, x, y, w, h, style, rowtype) {
 	}
 
 	void remove_entry(Entry const* const entry) {
-		Base::remove_entry(const_cast<Entry*>(entry));
+		BaseTable::remove_entry(const_cast<Entry*>(entry));
 	}
 
 	EntryRecord& add(Entry const* const entry = 0, bool const select_this = false) {
-		return Base::add(const_cast<Entry*>(entry), select_this);
+		return BaseTable::add(const_cast<Entry*>(entry), select_this);
 	}
 
 	Entry const* operator[](uint32_t const i) const {
-		return static_cast<Entry const*>(Base::operator[](i));
+		return static_cast<Entry const*>(BaseTable::operator[](i));
 	}
 
 	static Entry const* get(const EntryRecord& er) {
@@ -383,13 +385,12 @@ public:
 	}
 
 	Entry const* get_selected() const {
-		return static_cast<Entry const*>(Base::get_selected());
+		return static_cast<Entry const*>(BaseTable::get_selected());
 	}
 };
 
-template <typename Entry> class Table<Entry* const> : public Table<void*> {
+template <typename Entry> class Table<Entry* const> : public BaseTable {
 public:
-	using Base = Table<void*>;
 	Table(Panel* parent,
 	      const std::string& name,
 	      int32_t x,
@@ -398,19 +399,19 @@ public:
 	      uint32_t h,
 	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, name, x, y, w, h, style, rowtype) {
+	   : BaseTable(parent, name, x, y, w, h, style, rowtype) {
 	}
 
 	void remove_entry(Entry const* entry) {
-		Base::remove_entry(entry);
+		BaseTable::remove_entry(entry);
 	}
 
 	EntryRecord& add(Entry* const entry = 0, bool const select_this = false) {
-		return Base::add(entry, select_this);
+		return BaseTable::add(entry, select_this);
 	}
 
 	Entry* operator[](uint32_t const i) const {
-		return static_cast<Entry*>(Base::operator[](i));
+		return static_cast<Entry*>(BaseTable::operator[](i));
 	}
 
 	static Entry* get(const EntryRecord& er) {
@@ -418,13 +419,12 @@ public:
 	}
 
 	Entry* get_selected() const {
-		return static_cast<Entry*>(Base::get_selected());
+		return static_cast<Entry*>(BaseTable::get_selected());
 	}
 };
 
-template <typename Entry> class Table<const Entry&> : public Table<void*> {
+template <typename Entry> class Table<const Entry&> : public BaseTable {
 public:
-	using Base = Table<void*>;
 	Table(Panel* parent,
 	      const std::string& name,
 	      int32_t x,
@@ -433,19 +433,19 @@ public:
 	      uint32_t h,
 	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, name, x, y, w, h, style, rowtype) {
+	   : BaseTable(parent, name, x, y, w, h, style, rowtype) {
 	}
 
 	void remove_entry(const Entry& entry) {
-		Base::remove_entry(&const_cast<Entry&>(entry));
+		BaseTable::remove_entry(&const_cast<Entry&>(entry));
 	}
 
 	EntryRecord& add(const Entry& entry, bool const select_this = false) {
-		return Base::add(&const_cast<Entry&>(entry), select_this);
+		return BaseTable::add(&const_cast<Entry&>(entry), select_this);
 	}
 
 	const Entry& operator[](uint32_t const i) const {
-		return *static_cast<Entry const*>(Base::operator[](i));
+		return *static_cast<Entry const*>(BaseTable::operator[](i));
 	}
 
 	static const Entry& get(const EntryRecord& er) {
@@ -453,17 +453,16 @@ public:
 	}
 
 	EntryRecord* find(const Entry& entry) const {
-		return Base::find(&entry);
+		return BaseTable::find(&entry);
 	}
 
 	const Entry& get_selected() const {
-		return *static_cast<Entry const*>(Base::get_selected());
+		return *static_cast<Entry const*>(BaseTable::get_selected());
 	}
 };
 
-template <typename Entry> class Table<Entry&> : public Table<void*> {
+template <typename Entry> class Table<Entry&> : public BaseTable {
 public:
-	using Base = Table<void*>;
 	Table(Panel* parent,
 	      const std::string& name,
 	      int32_t x,
@@ -472,19 +471,19 @@ public:
 	      uint32_t h,
 	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, name, x, y, w, h, style, rowtype) {
+	   : BaseTable(parent, name, x, y, w, h, style, rowtype) {
 	}
 
 	void remove_entry(Entry& entry) {
-		Base::remove_entry(&entry);
+		BaseTable::remove_entry(&entry);
 	}
 
 	EntryRecord& add(Entry& entry, bool const select_this = false) {
-		return Base::add(&entry, select_this);
+		return BaseTable::add(&entry, select_this);
 	}
 
 	Entry& operator[](uint32_t const i) const {
-		return *static_cast<Entry*>(Base::operator[](i));
+		return *static_cast<Entry*>(BaseTable::operator[](i));
 	}
 
 	static Entry& get(const EntryRecord& er) {
@@ -492,19 +491,18 @@ public:
 	}
 
 	EntryRecord* find(Entry& entry) const {
-		return Base::find(&entry);
+		return BaseTable::find(&entry);
 	}
 
 	Entry& get_selected() const {
-		return *static_cast<Entry*>(Base::get_selected());
+		return *static_cast<Entry*>(BaseTable::get_selected());
 	}
 };
 
 static_assert(sizeof(void*) == sizeof(uintptr_t),
               "assert(sizeof(void *) == sizeof(uintptr_t)) failed.");
-template <> class Table<uintptr_t> : public Table<void*> {
+template <> class Table<uintptr_t> : public BaseTable {
 public:
-	using Base = Table<void*>;
 	Table(Panel* parent,
 	      const std::string& name,
 	      int32_t x,
@@ -513,30 +511,30 @@ public:
 	      uint32_t h,
 	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, name, x, y, w, h, style, rowtype) {
+	   : BaseTable(parent, name, x, y, w, h, style, rowtype) {
 	}
 
 	void remove_entry(uintptr_t const entry) {
-		Base::remove_entry(reinterpret_cast<void*>(entry));
+		BaseTable::remove_entry(reinterpret_cast<void*>(entry));
 	}
 
 	EntryRecord& add(uintptr_t const entry, bool const select_this = false) {
-		return Base::add(reinterpret_cast<void*>(entry), select_this);
+		return BaseTable::add(reinterpret_cast<void*>(entry), select_this);
 	}
 
 	uintptr_t operator[](uint32_t const i) const {
-		return reinterpret_cast<uintptr_t>(Base::operator[](i));
+		return reinterpret_cast<uintptr_t>(BaseTable::operator[](i));
 	}
 	static uintptr_t get(const EntryRecord& er) {
 		return reinterpret_cast<uintptr_t>(er.entry());
 	}
 
 	EntryRecord* find(uintptr_t const entry) const {
-		return Base::find(reinterpret_cast<void const*>(entry));
+		return BaseTable::find(reinterpret_cast<void const*>(entry));
 	}
 
 	uintptr_t get_selected() const {
-		return reinterpret_cast<uintptr_t>(Base::get_selected());
+		return reinterpret_cast<uintptr_t>(BaseTable::get_selected());
 	}
 };
 template <> class Table<uintptr_t const> : public Table<uintptr_t> {
@@ -553,9 +551,6 @@ public:
 	   : Base(parent, name, x, y, w, h, style, rowtype) {
 	}
 };
-
-// All tables *should* effectively be derived from this template specialization
-using BaseTable = Table<void*>;
 
 }  // namespace UI
 

@@ -114,6 +114,25 @@ public:
 	 * C Methods
 	 */
 	static UI::Panel* do_create_child(lua_State* L, UI::Panel* parent, UI::Box* as_box);
+	static UI::Box* do_create_child_box(lua_State* L, UI::Panel* parent);
+	static UI::Panel* do_create_child_button(lua_State* L, UI::Panel* parent);
+	static UI::Panel* do_create_child_checkbox(lua_State* L, UI::Panel* parent);
+	static UI::Panel* do_create_child_discrete_slider(lua_State* L, UI::Panel* parent);
+	static UI::Panel* do_create_child_dropdown(lua_State* L, UI::Panel* parent);
+	static UI::Panel* do_create_child_editbox(lua_State* L, UI::Panel* parent);
+	static UI::Panel* do_create_child_listselect(lua_State* L, UI::Panel* parent);
+	static UI::Panel* do_create_child_multilineeditbox(lua_State* L, UI::Panel* parent);
+	static UI::Panel* do_create_child_multilinetextarea(lua_State* L, UI::Panel* parent);
+	static UI::Panel* do_create_child_panel(lua_State* L, UI::Panel* parent);
+	static UI::Panel* do_create_child_progressbar(lua_State* L, UI::Panel* parent);
+	static void do_create_child_radiogroup(lua_State* L, UI::Panel* parent, UI::Box* as_box);
+	static UI::Panel* do_create_child_slider(lua_State* L, UI::Panel* parent);
+	static UI::Panel* do_create_child_spinbox(lua_State* L, UI::Panel* parent);
+	static UI::Panel* do_create_child_tabpanel(lua_State* L, UI::Panel* parent);
+	static UI::Panel* do_create_child_table(lua_State* L, UI::Panel* parent);
+	static UI::Panel* do_create_child_textarea(lua_State* L, UI::Panel* parent);
+	static UI::Panel* do_create_child_unique_window(lua_State* L, UI::Panel* parent);
+	static UI::Panel* do_create_child_window(lua_State* L, UI::Panel* parent);
 };
 
 class LuaButton : public LuaPanel {
