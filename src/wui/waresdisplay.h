@@ -113,7 +113,6 @@ protected:
 	}
 
 private:
-	using WareListVector = std::vector<const Widelands::WareList*>;
 	using WareListSelectionType = std::map<const Widelands::DescriptionIndex, bool>;
 
 	/**
@@ -171,18 +170,9 @@ public:
 	             Widelands::WareWorker type,
 	             bool selectable);
 
-	~WaresDisplay() override;
-
-	void add_warelist(const Widelands::WareList&);
-	void remove_all_warelists();
-
 protected:
-	uint32_t amount_of(Widelands::DescriptionIndex);
+	virtual uint32_t amount_of(Widelands::DescriptionIndex) = 0;
 	std::string info_for_ware(Widelands::DescriptionIndex) override;
-
-private:
-	using WareListVector = std::vector<const Widelands::WareList*>;
-	WareListVector warelists_;
 };
 
 class StockMenuWaresDisplay : public WaresDisplay {
@@ -191,18 +181,21 @@ public:
 	                      int32_t x,
 	                      int32_t y,
 	                      const Widelands::Player&,
-	                      Widelands::WareWorker type);
+	                      Widelands::WareWorker type,
+	                      bool total);
 
 	void set_solid_icon_backgrounds(const bool s) {
 		solid_icon_backgrounds_ = s;
 	}
 
 protected:
+	uint32_t amount_of(Widelands::DescriptionIndex) override;
 	RGBAColor draw_ware_background_overlay(Widelands::DescriptionIndex) override;
 	std::string info_for_ware(Widelands::DescriptionIndex) override;
 
 	const Widelands::Player& player_;
 	bool solid_icon_backgrounds_{true};
+	bool show_total_stock_;
 };
 
 std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,

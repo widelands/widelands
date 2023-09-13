@@ -23,6 +23,7 @@
 #include "base/mutex.h"
 #include "economy/flag.h"
 #include "game_io/game_loader.h"
+#include "graphic/color.h"
 #include "graphic/game_renderer.h"
 #include "graphic/mouse_cursor.h"
 #include "graphic/text_layout.h"
@@ -498,7 +499,8 @@ void InteractivePlayer::draw(RenderTarget& dst) {
 	draw_map_view(map_view(), &dst);
 }
 
-constexpr float kBuildhelpOpacity = 0.3f;
+constexpr float kBuildhelpOpacityMedium = 0.6f;
+constexpr float kBuildhelpOpacityWeak = 0.3f;
 
 void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst) {
 	// In-game, selection can never be on triangles or have a radius.
@@ -568,18 +570,44 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 		}
 
 		// Draw the player starting position overlays.
-		const bool suited_as_starting_pos =
-		   picking_starting_pos && plr.get_starting_position_suitability(f->fcoords);
-		if (suited_as_starting_pos) {
-			for (unsigned p = map.get_nrplayers(); p != 0u; --p) {
-				if (map.get_starting_pos(p) == f->fcoords) {
-					const Image* player_image =
-					   playercolor_image(p - 1, "images/players/player_position.png");
-					static constexpr int kStartingPosHotspotY = 55;
-					blit_field_overlay(dst, *f, player_image,
-					                   Vector2i(player_image->width() / 2, kStartingPosHotspotY), scale);
+		bool suited_as_starting_pos = false;
+		if (picking_starting_pos) {
+			static const std::string icon_filename = "images/players/player_position.png";
+			static constexpr int kStartingPosHotspotY = 55;
+
+			const Image* player_image = nullptr;
+			float icon_scale = 0.7f;
+			float icon_opacity = 1.0f;
+
+			// Not all map starting positions pass the suitability test.
+			// TODO(tothxa): Make the editor at least use the same test. But manual changes would still
+			//               be possible.
+			for (unsigned pn = map.get_nrplayers(); pn != 0u; --pn) {
+				if (map.get_starting_pos(pn) == f->fcoords) {
+					Widelands::Player* p = gbase.get_player(pn);
+					if (p == nullptr || p->get_starting_position_state() ==
+					                       Widelands::Player::StartingPositionState::kFinal) {
+						// Should have a HQ if finished picking, no need for the overlay
+						continue;
+					}
+					player_image = playercolor_image(p->get_playercolor(), icon_filename);
+					icon_scale = 1.0f;
+					icon_opacity = p->get_starting_position_suitability(f->fcoords) ?
+                                 kBuildhelpOpacityMedium :
+                                 kBuildhelpOpacityWeak;
 					break;
 				}
+			}
+
+			if (player_image == nullptr && plr.get_starting_position_suitability(f->fcoords)) {
+				player_image = g_image_cache->get(icon_filename);
+			}
+
+			if (player_image != nullptr) {
+				suited_as_starting_pos = true;
+				blit_field_overlay(dst, *f, player_image,
+				                   Vector2i(player_image->width() / 2, kStartingPosHotspotY),
+				                   scale * icon_scale, icon_opacity);
 			}
 		}
 
@@ -599,14 +627,14 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 		if (f->seeing != Widelands::VisibleState::kUnexplored) {
 			// Draw build help.
 			const bool show_port_space = has_expedition_port_space(f->fcoords);
-			if (show_port_space || suited_as_starting_pos || buildhelp()) {
+			if (show_port_space || buildhelp()) {
 				Widelands::NodeCaps caps;
 				Widelands::NodeCaps maxcaps = f->fcoords.field->maxcaps();
 				float opacity =
-				   f->seeing == Widelands::VisibleState::kVisible ? 1.f : kBuildhelpOpacity;
+				   f->seeing == Widelands::VisibleState::kVisible ? 1.f : kBuildhelpOpacityWeak;
 				if (picking_starting_pos) {
-					caps = suited_as_starting_pos || buildhelp() ? f->fcoords.field->nodecaps() :
-                                                              Widelands::CAPS_NONE;
+					caps = show_port_space || buildhelp() ? f->fcoords.field->nodecaps() :
+                                                       Widelands::CAPS_NONE;
 				} else if (show_port_space) {
 					caps = maxcaps;
 				} else {
@@ -616,7 +644,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 						     plr.tribe().buildings_built_over_immovables()) {
 							if (plr.check_can_build(*b, f->fcoords)) {
 								caps = maxcaps;
-								opacity *= 2 * kBuildhelpOpacity;
+								opacity *= kBuildhelpOpacityMedium;
 								break;
 							}
 						}
@@ -624,7 +652,9 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 				}
 
 				const auto* overlay = get_buildhelp_overlay(caps, scale);
-				if (overlay != nullptr) {
+				if (overlay != nullptr &&
+				    (!suited_as_starting_pos || (caps & Widelands::BUILDCAPS_PORT) != 0)) {
+					// draw overlay if not a starting pos, but draw port space anyway
 					blit_field_overlay(
 					   dst, *f, overlay->pic, overlay->hotspot, scale / overlay->scale, opacity);
 				}
