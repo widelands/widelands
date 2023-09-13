@@ -209,6 +209,7 @@ void AbstractTextInputPanel::Data::draw(RenderTarget& dst, bool with_caret) {
 void AbstractTextInputPanel::layout() {
 	Panel::layout();
 	d_->scrollbar.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
+	d_->scrollbar.set_size(Scrollbar::kSize, get_inner_h());
 }
 
 /**
