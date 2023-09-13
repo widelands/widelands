@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-09-09 02:25+0000\n"
+"POT-Creation-Date: 2023-09-11 02:30+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Alireza Rashidi, 2023\n"
 "Language-Team: Persian (http://app.transifex.com/widelands/widelands/language/fa/)\n"
@@ -990,7 +990,7 @@ msgstr ""
 msgid "Enabled Add-Ons: %s"
 msgstr "افزونه های فعال: %s"
 
-#: ../../src/editor/ui_menus/help.cc:36 ../../src/ui_fsmenu/login_box.cc:252
+#: ../../src/editor/ui_menus/help.cc:36 ../../src/ui_fsmenu/login_box.cc:255
 #: ../../src/ui_fsmenu/main.cc:255 ../../src/ui_fsmenu/main.cc:1084
 #: ../../src/wui/encyclopedia_window.cc:146
 #: ../../src/wui/tribal_encyclopedia.cc:55
@@ -1396,7 +1396,7 @@ msgid ""
 msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:736
-#: ../../src/network/gamehost.cc:1661
+#: ../../src/network/gamehost.cc:1663
 #, c-format
 msgid "Computer %u"
 msgstr ""
@@ -1423,7 +1423,7 @@ msgstr ""
 
 #. * TRANSLATORS: A folder that hasn't been given a name yet
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:164
-#: ../../src/ui_fsmenu/internet_lobby.cc:511
+#: ../../src/ui_fsmenu/internet_lobby.cc:519
 msgid "unnamed"
 msgstr ""
 
@@ -3163,7 +3163,7 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr ""
 
-#: ../../src/network/gamehost.cc:1920
+#: ../../src/network/gamehost.cc:1922
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -5433,16 +5433,16 @@ msgstr ""
 msgid "Connection Timed Out"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:479
-#: ../../src/ui_fsmenu/internet_lobby.cc:538
-#: ../../src/ui_fsmenu/netsetup_lan.cc:332
-#: ../../src/ui_fsmenu/netsetup_lan.cc:355
+#: ../../src/ui_fsmenu/internet_lobby.cc:483
+#: ../../src/ui_fsmenu/internet_lobby.cc:546
+#: ../../src/ui_fsmenu/netsetup_lan.cc:337
+#: ../../src/ui_fsmenu/netsetup_lan.cc:364
 msgid "Network Error"
 msgstr ""
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../src/ui_fsmenu/internet_lobby.cc:503
+#: ../../src/ui_fsmenu/internet_lobby.cc:511
 #, c-format
 msgid "unnamed %u"
 msgstr ""
@@ -5762,17 +5762,17 @@ msgstr "لقب:"
 msgid "nobody"
 msgstr ""
 
-#: ../../src/ui_fsmenu/login_box.cc:215
+#: ../../src/ui_fsmenu/login_box.cc:218
 msgid "Please enter a nickname!"
 msgstr ""
 
-#: ../../src/ui_fsmenu/login_box.cc:219
+#: ../../src/ui_fsmenu/login_box.cc:222
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters."
 msgstr ""
 
-#: ../../src/ui_fsmenu/login_box.cc:225
+#: ../../src/ui_fsmenu/login_box.cc:228
 msgid "Please enter your password!"
 msgstr ""
 
@@ -5974,11 +5974,11 @@ msgstr ""
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
 msgstr ""
 
-#: ../../src/ui_fsmenu/main.cc:976 ../../src/ui_fsmenu/netsetup_lan.cc:343
+#: ../../src/ui_fsmenu/main.cc:976 ../../src/ui_fsmenu/netsetup_lan.cc:352
 msgid "No tribes found!"
 msgstr ""
 
-#: ../../src/ui_fsmenu/main.cc:977 ../../src/ui_fsmenu/netsetup_lan.cc:344
+#: ../../src/ui_fsmenu/main.cc:977 ../../src/ui_fsmenu/netsetup_lan.cc:353
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr ""
 
@@ -6417,17 +6417,17 @@ msgctxt "game_state"
 msgid "Unknown"
 msgstr ""
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:299
+#: ../../src/ui_fsmenu/netsetup_lan.cc:300
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters and must not be \"team\"."
 msgstr ""
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:320
+#: ../../src/ui_fsmenu/netsetup_lan.cc:325
 msgid "Invalid Address"
 msgstr ""
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:321
+#: ../../src/ui_fsmenu/netsetup_lan.cc:326
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr ""
 
