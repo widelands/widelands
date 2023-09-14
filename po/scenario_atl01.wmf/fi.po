@@ -9,6 +9,7 @@
 # Jukka Pakarinen, 2016-2019
 # LINUX-SAUNA, 2022
 # Markus <markus@hallfors.com>, 2015
+# Oi Suomi On! <oisuomion@protonmail.com>, 2023
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2015
 # Teppo Mäenpää <teppo@runbox.com>, 2016
 msgid ""
@@ -17,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-08-31 02:28+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: LINUX-SAUNA, 2022\n"
+"Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2023\n"
 "Language-Team: Finnish (http://app.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -95,7 +96,7 @@ msgid ""
 "fish breeder makes sure that a school of fish does not go extinct by "
 "breeding more. The smoking happens in a smokery, you will need at least two "
 "of those."
-msgstr ""
+msgstr "Kaksi muuta tärkeää ruokatuotetta ovat savukala ja savustettu liha. Raakaa lihaa toimittaa metsästäjä. Kalastaja nostaa kaloja merestä samaan aikaan kun kalankasvattaja kasvattaa lisää kaloja varmistaen ettei kalakanta kuole sukupuuttoon. Savustaminen tapahtuu savustamossa, tarvitset niitä ainakin kaksi."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Build a farm and a blackroot farm"

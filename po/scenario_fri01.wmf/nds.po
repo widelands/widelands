@@ -611,10 +611,10 @@ msgid ""
 "farming."
 msgstr ""
 "Eene Weertshuus bruukt betere Spiesen. Bau eene Backeree, eene Broeree un "
-"twee of dree Buurdereen, um Garste antoboen. Vergeet nich, dat Garste "
-"düchtig langsaam wasst; een paar Buurdereen sünd nich genoog, wenn wi dat "
-"Brood un Beer würrelk bruken. Wi sallen fix uns’ Gewest vergrotern, um "
-"genoog Ackerland to hebben."
+"twee of dree Buurdereen, um Garst antoboen. Vergeet nich, dat Garst düchtig "
+"langsaam wasst; een paar Buurdereen sünd nich genoog, wenn wi dat Brood un "
+"Beer würrelk bruken. Wi sallen fix uns’ Gewest vergrotern, um genoog "
+"Ackerland to hebben."
 
 #. TRANSLATORS: Hauke – better food
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:239
@@ -759,7 +759,7 @@ msgid ""
 " barley to recruit more reindeer, as our roads are quite busy."
 msgstr ""
 "Uns’ Gewest to vergrotern gifft uns ok mehr Rüümte för Ackerland. Wi könen "
-"een bietje Garste bovendeem bruken, um mehr Sneeihirsken antohüren; uns’ "
+"een bietje Garst bovendeem bruken, um mehr Sneeihirsken antohüren; uns’ "
 "Straten sünd hennig besig."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:290
