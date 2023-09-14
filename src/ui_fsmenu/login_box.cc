@@ -147,6 +147,9 @@ void LoginBox::think() {
  * called, if "login" is pressed.
  */
 void LoginBox::clicked_ok() {
+	if (!b_login_.enabled()) {
+		return;
+	}
 	if (cb_register_.get_state()) {
 		if (check_password()) {
 			set_config_string("nickname", eb_nickname_.get_text());

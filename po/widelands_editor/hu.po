@@ -6,11 +6,12 @@
 # Balázs Meskó <meskobalazs@mailbox.org>, 2017
 # Balázs Meskó <meskobalazs@mailbox.org>, 2017
 # litoll <litoll@freemail.hu>, 2016-2017,2020
+# Tóth András <txa-dev@posteo.hu>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-05-01 02:42+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2016-03-24 07:33+0000\n"
 "Last-Translator: Balázs Meskó <meskobalazs@mailbox.org>, 2017\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"

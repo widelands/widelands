@@ -22,9 +22,9 @@ wl.Descriptions():new_immovable_type {
    spritesheets = {
       idle = {
          frames = 5,
-         rows = 3,
-         columns = 2,
-         hotspot = { 22, 27 }
+         rows = 1,
+         columns = 5,
+         hotspot = { 25, 30 }
       },
    }
 }

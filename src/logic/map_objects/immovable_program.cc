@@ -623,7 +623,7 @@ void ImmovableProgram::ActConstruct::execute(Game& g, Immovable& imm) const {
 	} else {
 		// Perhaps we are called due to the construction timeout of the last construction step
 		Buildcost remaining;
-		imm.construct_remaining_buildcost(g, &remaining);
+		imm.construct_remaining_buildcost(&remaining);
 		if (remaining.empty()) {
 			imm.program_step(g);
 			return;

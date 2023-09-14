@@ -73,6 +73,7 @@
 #include "network/host_game_settings_provider.h"
 #include "network/internet_gaming.h"
 #include "sound/sound_handler.h"
+#include "ui_basic/color_chooser.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/about.h"
@@ -85,6 +86,7 @@
 #include "wlapplication_messages.h"
 #include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
+#include "wui/game_chat_panel.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 
@@ -465,6 +467,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	g_sh->register_songs("music", Songset::kIngame);
 	g_sh->register_songs("music", Songset::kCustom);
 
+	UI::ColorChooser::read_favorites_settings();
+
 	set_template_dir("");
 	initialize_g_addons();
 
@@ -479,6 +483,14 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	// Save configuration now. Otherwise, the UUID and sound options
 	// are not saved, when the game crashes
 	write_config();
+
+	if (get_config_bool("save_chat_history", false)) {
+		g_chat_sent_history.load(kChatSentHistoryFile);
+	}
+	if (g_allow_script_console) {
+		log_info("Developer tools are enabled.");
+		g_script_console_history.load(kScriptConsoleHistoryFile);
+	}
 }
 
 /**
@@ -496,6 +508,13 @@ WLApplication::~WLApplication() {
 
 	shutdown_hardware();
 	shutdown_settings();
+
+	if (get_config_bool("save_chat_history", false)) {
+		g_chat_sent_history.save(kChatSentHistoryFile);
+	}
+	if (g_allow_script_console) {
+		g_script_console_history.save(kScriptConsoleHistoryFile);
+	}
 
 	assert(UI::g_fh);
 	delete UI::g_fh;
@@ -1553,6 +1572,15 @@ void WLApplication::handle_commandline_parameters() {
 	} else {
 		set_config_bool("auto_speed", false);
 	}
+
+	if (commandline_.count("enable_development_testing_tools") != 0u) {
+		g_allow_script_console = true;
+		commandline_.erase("enable_development_testing_tools");
+	}
+#ifndef NDEBUG
+	// Always enable in debug builds
+	g_allow_script_console = true;
+#endif
 
 	if (commandline_.count("write_syncstreams") != 0u) {
 		g_write_syncstreams = true;

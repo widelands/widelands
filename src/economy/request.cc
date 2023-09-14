@@ -283,7 +283,7 @@ uint32_t Request::get_priority(const int32_t cost) const {
 	   (target_building_ != nullptr ? target_building_->get_priority(get_type(), get_index()) :
                                      WarePriority::kNormal);
 
-	// Workaround for bug #4809 Kicking a worker let him go the building where he was kicked off
+	// Don't allow evicted workers to go straight back inside (bug #4809)
 	const Time& cur_time = economy_->owner().egbase().get_gametime();
 	if (target_building_ != nullptr && get_type() == wwWORKER &&
 	    target_building_->get_worker_evicted().is_valid() &&

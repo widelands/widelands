@@ -581,6 +581,8 @@ void ProductionSite::set_economy(Economy* const e, WareWorker type) {
  * Cleanup after a production site is removed
  */
 void ProductionSite::cleanup(EditorGameBase& egbase) {
+	field_terrain_changed_subscriber_.reset();
+
 	for (uint32_t i = descr().nr_working_positions(); i != 0u;) {
 		--i;
 		delete working_positions_.at(i).worker_request;

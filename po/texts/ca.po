@@ -604,7 +604,7 @@ msgstr "Els edificis ampliats necessiten treballadors amb experiència. No ampli
 msgid ""
 "Widelands is creating an emergency save, so you can continue playing exactly"
 " where the game closed."
-msgstr ""
+msgstr "El Widelands crea una desada d'emergència, per tal que pugueu continuar jugant exactament des del moment en què s'ha tancat el joc."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/editor.lua:8

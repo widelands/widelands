@@ -279,6 +279,7 @@ bool Player::pick_custom_starting_position(const Coords& c) {
 	if (!get_starting_position_suitability(c)) {
 		return false;
 	}
+	local_player_starting_position_is_pending_ = true;
 	dynamic_cast<Game&>(egbase()).send_player_command(
 	   new CmdPickCustomStartingPosition(egbase().get_gametime(), player_number(), c));
 	return true;
@@ -289,6 +290,7 @@ void Player::do_pick_custom_starting_position(const Coords& c) {
 		return;
 	}
 	is_picking_custom_starting_position_ = false;
+	local_player_starting_position_is_pending_ = false;
 	egbase().mutable_map()->set_starting_pos(player_number(), c);
 	create_default_infrastructure();
 }

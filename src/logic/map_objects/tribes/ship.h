@@ -99,6 +99,9 @@ constexpr int32_t kShipInterval = 1500;
 struct Ship : Bob {
 	MO_DESCR(ShipDescr)
 
+	/** Half the total width of a ship's health bar at 1× scale. */
+	static constexpr int kShipHalfHealthBarWidth = 30;
+
 	explicit Ship(const ShipDescr& descr);
 	~Ship() override = default;
 
@@ -243,10 +246,23 @@ struct Ship : Bob {
 		return false;
 	}
 
-	/// \returns (in expedition mode only!) the list of currently seen port build spaces
-	[[nodiscard]] const std::vector<Coords>& exp_port_spaces() const {
-		assert(expedition_ != nullptr);
-		return expedition_->seen_port_buildspaces;
+	// Returns whether the ship can currently see a port space at coords that it can use to
+	// build a port or start an invasion
+	[[nodiscard]] bool sees_portspace(const Coords& coords) const {
+		if (expedition_ == nullptr || expedition_->seen_port_buildspaces.empty()) {
+			return false;
+		}
+		const std::vector<Coords>& seen = expedition_->seen_port_buildspaces;
+		return std::find(seen.begin(), seen.end(), coords) != seen.end();
+	}
+
+	// Returns the coordinates of the current primary seen port space of the ship,
+	// or the invalid coordinates if the ship cannot see any suitable port spaces.
+	[[nodiscard]] Coords current_portspace() const {
+		if (expedition_ == nullptr || expedition_->seen_port_buildspaces.empty()) {
+			return Coords::null();
+		}
+		return expedition_->seen_port_buildspaces.back();
 	}
 
 	void exp_scouting_direction(Game&, WalkingDir);
@@ -357,6 +373,7 @@ private:
 	void ship_update_idle(Game&, State&);
 	void battle_update(Game&);
 	void update_warship_soldier_request(bool create);
+	void erase_warship_soldier_request();
 	void kickout_superfluous_soldiers(Game& game);
 	/// Set the ship's state to 'state' and if the ship state has changed, publish a notification.
 	void set_ship_state_and_notify(ShipStates state, NoteShip::Action action);
@@ -367,17 +384,35 @@ private:
 
 	PortDock* find_nearest_port(Game& game);
 
+	// Checks and remembers port spaces within the ship's vision range.
+	// If report_known is true, then sends message on all newly spotted port spaces, otherwise only
+	// on newly discovered port spaces.
+	// If stop_on_report is true, then also stops the ship when a port space is reported.
+	// Returns whether the ship was stopped.
+	bool update_seen_portspaces(Game& game, bool report_known = true, bool stop_on_report = true);
+
+	// Stores coords as a DetectedPortSpace or updates owner if already known.
+	// Returns true if the port space was previously not known.
+	bool remember_detected_portspace(const Coords& coords);
+
+	// Uses the applicable check of the below two functions according to ship type.
+	[[nodiscard]] bool is_suitable_portspace(const Coords& coords) const;
+	[[nodiscard]] bool can_build_port_here(const Coords& coords) const;
+	[[nodiscard]] bool suited_as_invasion_portspace(const Coords& coords) const;
+
 	void send_message(Game& game,
 	                  const std::string& title,
 	                  const std::string& heading,
 	                  const std::string& description,
 	                  const std::string& picture);
-	void remember_detected_portspace(const Coords& coords);
+	void send_new_portspace_message(Game& g);
+	void send_known_portspace_message(Game& g);
 
 	ShipFleet* fleet_{nullptr};
 	Economy* ware_economy_{nullptr};
 	Economy* worker_economy_{nullptr};
 	OPtr<PortDock> lastdock_;
+	OPtr<PortDock> requestdock_;
 	std::vector<ShippingItem> items_;
 	ShipStates ship_state_{ShipStates::kTransport};
 	ShipType ship_type_{ShipType::kTransport};
@@ -423,6 +458,7 @@ protected:
 
 	private:
 		uint32_t lastdock_{0U};
+		uint32_t requestdock_{0U};
 		Serial ware_economy_serial_{kInvalidSerial};
 		Serial worker_economy_serial_{kInvalidSerial};
 		uint32_t destination_object_{0U};

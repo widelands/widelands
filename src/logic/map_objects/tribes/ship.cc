@@ -62,10 +62,12 @@ constexpr unsigned kSinkAnimationDuration = 3000;
 constexpr unsigned kNearDestinationShipRadius = 4;
 constexpr unsigned kNearDestinationNoteRadius = 1;
 
-/// Returns true if 'coord' is not blocked by immovables
+const std::string kPortspaceIconFile = "images/wui/editor/fsel_editor_set_port_space.png";
+
+/// Returns true if 'coords' is not blocked by immovables
 /// Trees are allowed, because we don't want spreading forests to block portspaces from expeditions
-bool can_support_port(const FCoords& coord, BaseImmovable::Size max_immo_size) {
-	BaseImmovable* baim = coord.field->get_immovable();
+bool can_support_port(const FCoords& coords, BaseImmovable::Size max_immo_size) {
+	BaseImmovable* baim = coords.field->get_immovable();
 	Immovable* imo = dynamic_cast<Immovable*>(baim);
 	// we have a player immovable
 	if (imo == nullptr && baim != nullptr) {
@@ -75,23 +77,35 @@ bool can_support_port(const FCoords& coord, BaseImmovable::Size max_immo_size) {
 	        imo->descr().has_terrain_affinity());
 }
 
-/// Returns true if a ship owned by 'player_number' can land and erect a port at 'coord'.
-bool can_build_port_here(const PlayerNumber player_number, const Map& map, const FCoords& coord) {
+}  // namespace
+
+/// Returns true if the ship can land and erect a port at 'coords'.
+bool Ship::can_build_port_here(const Coords& coords) const {
+	const PlayerNumber player_number = owner().player_number();
+	const EditorGameBase& egbase = owner().egbase();
+	const Map& map = egbase.map();
+	if (!map.is_port_space(coords)) {
+		return false;
+	}
+
+	const FCoords fc = map.get_fcoords(coords);
+
 	// First check ownership of the port space
 	// All fields of the port + their neighboring fields (for the border) must
 	// be conquerable without military influence. Check radius 2 around
 	// the main spot to cover radius 1 around each of the 4 fields and the flag
-	MapRegion<Area<FCoords>> area(map, Area<FCoords>(coord, 2));
+	MapRegion<Area<FCoords>> area(map, Area<FCoords>(fc, 2));
 	do {
-		const PlayerNumber owner = area.location().field->get_owned_by();
-		if (owner != neutral() && owner != player_number) {
+		const PlayerNumber field_owner = area.location().field->get_owned_by();
+		if (field_owner != neutral() && field_owner != player_number) {
 			return false;
 		}
 	} while (area.advance(map));
 
 	// then check whether we can build a port like if reached from land
-	if ((coord.field->nodecaps() & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG &&
-	    !map.find_portdock(coord, false).empty()) {
+	// (like Map::is_port_space_allowed(), but checks current buildcaps instead of max buildcaps)
+	if ((fc.field->nodecaps() & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG &&
+	    !map.find_portdock(fc, false).empty()) {
 		return true;
 	}
 
@@ -102,15 +116,15 @@ bool can_build_port_here(const PlayerNumber player_number, const Map& map, const
 	// Immediate neighbours must not have immovables, except for trees, which can
 	// spread, but will be cleared by exp_construct_port()
 	Widelands::FCoords c[7];
-	c[0] = coord;
-	map.get_ln(coord, &c[1]);
-	map.get_tln(coord, &c[2]);
-	map.get_trn(coord, &c[3]);
-	map.get_rn(coord, &c[4]);
-	map.get_brn(coord, &c[5]);
-	map.get_bln(coord, &c[6]);
-	for (const Widelands::FCoords& fc : c) {
-		if (!can_support_port(fc, BaseImmovable::NONE)) {  // check for blocking immovables
+	c[0] = fc;
+	map.get_ln(fc, &c[1]);
+	map.get_tln(fc, &c[2]);
+	map.get_trn(fc, &c[3]);
+	map.get_rn(fc, &c[4]);
+	map.get_brn(fc, &c[5]);
+	map.get_bln(fc, &c[6]);
+	for (const Widelands::FCoords& fcc : c) {
+		if (!can_support_port(fcc, BaseImmovable::NONE)) {  // check for blocking immovables
 			return false;
 		}
 	}
@@ -124,12 +138,10 @@ bool can_build_port_here(const PlayerNumber player_number, const Map& map, const
 	map.get_trn(c[2], &cn[4]);
 	map.get_trn(c[3], &cn[5]);
 	map.get_rn(c[3], &cn[6]);
-	return std::all_of(cn.begin(), cn.end(), [](const Widelands::FCoords& fc) {
-		return can_support_port(fc, BaseImmovable::SMALL);
+	return std::all_of(cn.begin(), cn.end(), [](const Widelands::FCoords& fcn) {
+		return can_support_port(fcn, BaseImmovable::SMALL);
 	});
 }
-
-}  // namespace
 
 struct FindBobDefender : public FindBob {
 	explicit FindBobDefender(const Player& p) : player_(p) {
@@ -241,9 +253,7 @@ bool Ship::init_fleet(EditorGameBase& egbase) {
 }
 
 void Ship::cleanup(EditorGameBase& egbase) {
-	if (PortDock* last = lastdock_.get(egbase); last != nullptr) {
-		last->erase_warship_request(serial());
-	}
+	erase_warship_soldier_request();
 
 	if (fleet_ != nullptr) {
 		fleet_->remove_ship(egbase, this);
@@ -309,6 +319,30 @@ void Ship::recalc_expedition_swimmable(const EditorGameBase& egbase) {
 		expedition_->swimmable[dir - FIRST_DIRECTION] =
 		   ((egbase.map().get_neighbour(get_position(), dir).field->nodecaps() & MOVECAPS_SWIM) != 0);
 	}
+}
+
+bool Ship::suited_as_invasion_portspace(const Coords& coords) const {
+	// We can invade any port space, regardless of owner and immovables.
+	// But we ignore port spaces where we already have an own port nearby.
+
+	const EditorGameBase& egbase = owner().egbase();
+	const Map& map = egbase.map();
+	if (!map.is_port_space(coords)) {
+		return false;
+	}
+
+	constexpr int kPortSpaceGeneralAreaRadius = 5;
+	MapRegion<Area<Coords>> mr(map, Area<Coords>(coords, kPortSpaceGeneralAreaRadius));
+	do {
+		const Field& field = map[mr.location()];
+		if (field.get_immovable() != nullptr && field.get_immovable()->get_owner() == get_owner() &&
+		    egbase.descriptions().building_index(field.get_immovable()->descr().name()) ==
+		       owner().tribe().port()) {
+			return false;
+		}
+	} while (mr.advance(map));
+
+	return true;
 }
 
 /**
@@ -437,7 +471,7 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 			items_.clear();
 
 			ship_type_ = pending_refit_;
-			dest->erase_warship_request(serial());
+			erase_warship_soldier_request();
 
 			if (ship_type_ == ShipType::kWarship) {
 				start_task_expedition(game);
@@ -584,6 +618,100 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 	return true;
 }
 
+bool Ship::is_suitable_portspace(const Coords& coords) const {
+	if (expedition_ == nullptr) {
+		return false;
+	}
+	const Map& map = owner().egbase().map();
+	if (!map.is_port_space(coords)) {
+		return false;
+	}
+	return ship_type_ == ShipType::kWarship ? suited_as_invasion_portspace(coords) :
+                                             can_build_port_here(coords);
+}
+
+void Ship::send_known_portspace_message(Game& game) {
+	const std::string& icon_filename =
+	   ship_type_ == ShipType::kWarship ? descr().icon_filename() : kPortspaceIconFile;
+	const std::string message_body = ship_type_ == ShipType::kWarship ?
+                                       _("A warship arrived at a known port build space.") :
+                                       _("An expedition ship arrived at a known port build space.");
+	send_message(game, _("Port Space"), _("Port Space Spotted"), message_body, icon_filename);
+}
+void Ship::send_new_portspace_message(Game& game) {
+	const std::string& icon_filename =
+	   ship_type_ == ShipType::kWarship ? descr().icon_filename() : kPortspaceIconFile;
+	const std::string message_body = ship_type_ == ShipType::kWarship ?
+                                       _("A warship found a new port build space.") :
+                                       _("An expedition ship found a new port build space.");
+	send_message(game, _("Port Space"), _("Port Space Found"), message_body, icon_filename);
+}
+
+bool Ship::update_seen_portspaces(Game& game, const bool report_known, const bool stop_on_report) {
+	if (expedition_ == nullptr) {
+		return false;
+	}
+
+	bool changed = false;
+	bool stopped = false;
+	const Map& map = owner().egbase().map();
+
+	// Remove outdated port spaces.
+	std::vector<Coords>& seen_portspaces = expedition_->seen_port_buildspaces;
+	auto portspace_it = seen_portspaces.begin();
+	while (portspace_it != seen_portspaces.end()) {
+		if (map.calc_distance(get_position(), *portspace_it) <= descr().vision_range() &&
+		    is_suitable_portspace(*portspace_it)) {
+			++portspace_it;
+		} else {
+			portspace_it = seen_portspaces.erase(portspace_it);
+			changed = true;
+		}
+	}
+
+	// Look for new nearby port spaces.
+	MapRegion<Area<Coords>> mr(map, Area<Coords>(get_position(), descr().vision_range()));
+	do {
+		if (!map.is_port_space(mr.location())) {
+			continue;
+		}
+		if (!is_suitable_portspace(mr.location())) {
+			if (get_owner()->has_detected_port_space(mr.location()) != nullptr) {
+				// Update owner even if can't use currently
+				remember_detected_portspace(mr.location());
+			}  // TODO(tothxa): But what to do with enemy ports spotted first by expeditions?
+			   //               Re: #5889
+			continue;
+		}
+		if (std::find(seen_portspaces.begin(), seen_portspaces.end(), mr.location()) ==
+		    seen_portspaces.end()) {
+			// Not seen recently
+			seen_portspaces.push_back(mr.location());
+			changed = true;
+			if (remember_detected_portspace(mr.location())) {
+				send_new_portspace_message(game);
+				stopped = stop_on_report;
+			} else {
+				if (report_known) {
+					send_known_portspace_message(game);
+					stopped = stop_on_report;
+				}
+			}
+		}
+	} while (mr.advance(map));
+
+	if (stopped) {
+		set_ship_state_and_notify(ship_type_ == ShipType::kWarship ?
+                                   ShipStates::kExpeditionWaiting :
+                                   ShipStates::kExpeditionPortspaceFound,
+		                          NoteShip::Action::kWaitingForCommand);
+	} else if (changed) {
+		// TODO(tothxa): Is this still needed now that InteractivePlayer doesn't cache it?
+		Notifications::publish(NoteShip(this, NoteShip::Action::kWaitingForCommand));
+	}
+	return stopped;
+}
+
 /// updates a ships tasks in expedition mode; returns whether tasks were updated
 bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 	Map* map = game.mutable_map();
@@ -623,45 +751,17 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 			}
 		}
 
-		// Remove outdated port spaces.
-		std::vector<Coords>& portspaces = expedition_->seen_port_buildspaces;
-		for (size_t i = 0; i < portspaces.size();) {
-			if (map->calc_distance(get_position(), portspaces.at(i)) <= area.radius) {
-				++i;
-			} else {
-				portspaces.at(i) = portspaces.back();
-				portspaces.pop_back();
-			}
-		}
-
-		// Look for new nearby port spaces.
-		MapRegion<Area<Coords>> mr(*map, Area<Coords>(position, descr().vision_range()));
-		do {
-			if (map->is_port_space(mr.location()) &&
-			    std::find(portspaces.begin(), portspaces.end(), mr.location()) == portspaces.end()) {
-				const Field& field = (*map)[mr.location()];
-				if (field.get_immovable() != nullptr &&
-				    field.get_immovable()->get_owner() == get_owner() &&
-				    game.descriptions().building_index(field.get_immovable()->descr().name()) ==
-				       owner().tribe().port()) {
-					continue;  // Skip if the player already has a port there
-				}
-
-				found_new_target = true;
-				portspaces.push_back(mr.location());
-				remember_detected_portspace(mr.location());
-				send_message(game, _("Port Space"), _("Port Space Found"),
-				             _("A warship found a new port build space."), descr().icon_filename());
-			}
-		} while (mr.advance(*map));
-
-		if (found_new_target) {
+		// TODO(tothxa): Implement expedition options for stop_on_report and report_known
+		//               (report_known can probably always be disabled when stopping is disabled)
+		if (!update_seen_portspaces(game) && found_new_target) {
 			set_ship_state_and_notify(
 			   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
 		}
 	}
 
 	if (destination_coords_ != nullptr) {
+		erase_warship_soldier_request();
+
 		if (destination_coords_->has_dockpoint(get_position())) {  // Already there
 			destination_coords_ = nullptr;
 			start_task_idle(game, descr().main_animation(), 250);
@@ -691,6 +791,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 
 			// Sail to the destination port if we're not there yet.
 			if (position.field->get_immovable() != dest) {
+				erase_warship_soldier_request();
 				if (!start_task_movetodock(game, *dest)) {
 					if (send_message_at_destination_) {
 						send_message(
@@ -727,6 +828,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 
 		case MapObjectType::SHIP:
 		case MapObjectType::PINNED_NOTE: {
+			erase_warship_soldier_request();
 			Bob* dest = dynamic_cast<Bob*>(destination_object);
 
 			if (map->calc_distance(position, dest->get_position()) <=
@@ -767,53 +869,12 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 		}
 	}
 
-	if (PortDock* last = lastdock_.get(game); last != nullptr) {
-		last->erase_warship_request(serial());  // Clear the request when not in port
-	}
+	erase_warship_soldier_request();  // Clear the request when not in port
 
 	if (ship_state_ == ShipStates::kExpeditionScouting && get_ship_type() == ShipType::kTransport) {
-		// Check surrounding fields for port buildspaces
-		std::vector<Coords> temp_port_buildspaces;
-		MapRegion<Area<Coords>> mr(*map, Area<Coords>(position, descr().vision_range()));
-		bool new_port_space = false;
-		do {
-			if (!map->is_port_space(mr.location())) {
-				continue;
-			}
-
-			const FCoords fc = map->get_fcoords(mr.location());
-
-			// Check whether the maximum theoretical possible NodeCap of the field
-			// is of the size big and whether it can theoretically be a port space
-			if ((map->get_max_nodecaps(game, fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG ||
-			    map->find_portdock(fc, true).empty()) {
-				continue;
-			}
-
-			if (!can_build_port_here(get_owner()->player_number(), *map, fc)) {
-				continue;
-			}
-
-			// Check if the ship knows this port space already from its last check
-			remember_detected_portspace(mr.location());
-			if (std::find(expedition_->seen_port_buildspaces.begin(),
-			              expedition_->seen_port_buildspaces.end(),
-			              mr.location()) != expedition_->seen_port_buildspaces.end()) {
-				temp_port_buildspaces.push_back(mr.location());
-			} else {
-				new_port_space = true;
-				temp_port_buildspaces.insert(temp_port_buildspaces.begin(), mr.location());
-			}
-		} while (mr.advance(*map));
-
-		expedition_->seen_port_buildspaces = temp_port_buildspaces;
-		if (new_port_space) {
-			set_ship_state_and_notify(
-			   ShipStates::kExpeditionPortspaceFound, NoteShip::Action::kWaitingForCommand);
-			send_message(game, _("Port Space"), _("Port Space Found"),
-			             _("An expedition ship found a new port build space."),
-			             "images/wui/editor/fsel_editor_set_port_space.png");
-		}
+		// TODO(tothxa): Implement expedition options for stop_on_report and report_known
+		//               (report_known can probably always be disabled when stopping is disabled)
+		update_seen_portspaces(game);
 	} else if (ship_state_ == ShipStates::kExpeditionPortspaceFound) {
 		check_port_space_still_available(game);
 	}
@@ -826,29 +887,75 @@ void Ship::set_soldier_preference(SoldierPreference pref) {
 	update_warship_soldier_request(false);
 }
 
-void Ship::update_warship_soldier_request(bool create) {
-	if (PortDock* dock = lastdock_.get(owner().egbase()); dock != nullptr) {
-		SoldierRequest* req = dock->get_warship_request(serial());
-		if (req != nullptr) {
-			req->set_preference(soldier_preference_);
-			req->update();
-		} else if (create) {
-			req = &dock->create_warship_request(this, soldier_preference_);
-			req->update();
-		}
-	} else if (create) {
-		throw wexception("Attempting to create warship soldier request while not in dock");
+void Ship::erase_warship_soldier_request() {
+	const EditorGameBase& egbase = owner().egbase();
+	if (PortDock* dock = requestdock_.get(egbase); dock != nullptr) {
+		molog(egbase.get_gametime(), "Erasing soldier request at %s",
+		      dock->get_warehouse()->get_warehouse_name().c_str());
+		dock->erase_warship_request(serial());
 	}
+	requestdock_ = nullptr;
 }
 
-void Ship::remember_detected_portspace(const Coords& coords) {
+void Ship::update_warship_soldier_request(bool create) {
+	const EditorGameBase& egbase = owner().egbase();
+	PortDock* dock = requestdock_.get(egbase);
+
+	if (dock != nullptr) {
+		// We should already have a request
+		molog(egbase.get_gametime(), "Updating existing soldier request at %s",
+		      dock->get_warehouse()->get_warehouse_name().c_str());
+		SoldierRequest* req = dock->get_warship_request(serial());
+		if (req == nullptr) {
+			throw wexception("Ship %s has no soldier request at request dock %s",
+			                 get_shipname().c_str(),
+			                 dock->get_warehouse()->get_warehouse_name().c_str());
+		}
+		req->set_preference(soldier_preference_);
+		req->update();
+		return;
+	}
+
+	if (!create) {
+		// No request exists and none is desired.
+		return;
+	}
+
+	// Create a new request at the current port.
+	dock = lastdock_.get(owner().egbase());
+	if (dock == nullptr) {
+		throw wexception("Ship %s attempts to create warship soldier request while not in dock",
+		                 get_shipname().c_str());
+	}
+	molog(egbase.get_gametime(), "Creating new soldier request at %s",
+	      dock->get_warehouse()->get_warehouse_name().c_str());
+	if (get_position().field->get_immovable() != dock) {
+		throw wexception(
+		   "Ship %s attempts to create warship soldier request while not on request dock %s",
+		   get_shipname().c_str(), dock->get_warehouse()->get_warehouse_name().c_str());
+	}
+
+	SoldierRequest* req = dock->get_warship_request(serial());
+	if (req == nullptr) {
+		req = &dock->create_warship_request(this, soldier_preference_);
+	} else {
+		// TODO(Nordfriese): Can only happen with legacy savegames, replace this with an assert
+		log_warn("Ship %s already has soldier request at new request dock %s", get_shipname().c_str(),
+		         dock->get_warehouse()->get_warehouse_name().c_str());
+	}
+
+	requestdock_ = dock;
+	req->update();
+}
+
+bool Ship::remember_detected_portspace(const Coords& coords) {
 	const EditorGameBase& egbase = owner().egbase();
 	const Map& map = egbase.map();
 	PlayerNumber space_owner = map[coords].get_owned_by();
 
 	if (DetectedPortSpace* dps = get_owner()->has_detected_port_space(coords); dps != nullptr) {
 		dps->owner = space_owner;
-		return;
+		return false;
 	}
 
 	std::unique_ptr<DetectedPortSpace> dps(new DetectedPortSpace());
@@ -885,6 +992,7 @@ void Ship::remember_detected_portspace(const Coords& coords) {
 	}
 
 	get_owner()->detect_port_space(std::move(dps));
+	return true;
 }
 
 // static
@@ -908,6 +1016,7 @@ void Ship::warship_soldier_callback(Game& game,
 	}
 
 	assert(ship->get_owner() == warehouse.get_owner());
+	assert(ship->requestdock_.serial() == warehouse.serial());
 	ship->molog(game.get_gametime(), "%s %u embarked on warship %s", worker->descr().name().c_str(),
 	            worker->serial(), ship->get_shipname().c_str());
 
@@ -1043,7 +1152,7 @@ std::vector<Soldier*> Ship::onboard_soldiers() const {
 std::vector<Soldier*> Ship::associated_soldiers() const {
 	std::vector<Soldier*> result = onboard_soldiers();
 
-	if (PortDock* dock = lastdock_.get(owner().egbase()); dock != nullptr) {
+	if (PortDock* dock = requestdock_.get(owner().egbase()); dock != nullptr) {
 		if (const SoldierRequest* sr = dock->get_warship_request(serial()); sr != nullptr) {
 			if (const Request* request = sr->get_request(); request != nullptr) {
 				for (const Transfer* t : request->get_transfers()) {
@@ -1159,10 +1268,22 @@ void Ship::warship_command(Game& game,
 }
 
 void Ship::start_battle(Game& game, Battle new_battle, bool immediately) {
-	Ship* enemy_ship = new_battle.opponent.get(game);
-
-	if (enemy_ship == nullptr && !static_cast<bool>(new_battle.attack_coords)) {
+	if (ship_type_ != ShipType::kWarship || state_is_sinking()) {
+		molog(game.get_gametime(), "start_battle: not a warship");
 		return;
+	}
+
+	Ship* enemy_ship = new_battle.opponent.get(game);
+	if (enemy_ship == nullptr) {
+		if (!static_cast<bool>(new_battle.attack_coords)) {
+			molog(game.get_gametime(), "start_battle: no enemy found");
+			return;
+		}
+	} else {
+		if (enemy_ship->get_ship_type() != ShipType::kWarship || enemy_ship->state_is_sinking()) {
+			molog(game.get_gametime(), "start_battle: enemy is not a warship");
+			return;
+		}
 	}
 
 	if (immediately) {
@@ -1170,6 +1291,8 @@ void Ship::start_battle(Game& game, Battle new_battle, bool immediately) {
 	} else {
 		battles_.emplace_front(new_battle);
 	}
+
+	send_signal(game, "wakeup");
 
 	if (!new_battle.is_first) {
 		return;
@@ -1301,6 +1424,7 @@ void Ship::battle_update(Game& game) {
 			                          _("An enemy ship has destroyed your warship."),
 			                          "images/wui/ship/ship_attack.png");
 
+			target_ship->hitpoints_ = 0;
 			target_ship->battles_.clear();
 			target_ship->reset_tasks(game);
 			target_ship->set_ship_state_and_notify(
@@ -1736,8 +1860,9 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 		return;
 	}
 	case ShipStates::kExpeditionColonizing: {
-		assert(!expedition_->seen_port_buildspaces.empty());
-		upcast(ConstructionSite, cs, map[expedition_->seen_port_buildspaces.front()].get_immovable());
+		const Coords portspace = current_portspace();
+		assert(static_cast<bool>(portspace));
+		upcast(ConstructionSite, cs, map[portspace].get_immovable());
 		// some safety checks that we have identified the correct csite
 		if ((cs != nullptr) && cs->get_owner() == get_owner() && cs->get_built_per64k() == 0 &&
 		    owner().tribe().building_index(cs->building().name()) == owner().tribe().port()) {
@@ -1828,15 +1953,14 @@ void Ship::set_ship_state_and_notify(ShipStates state, NoteShip::Action action) 
 
 bool Ship::check_port_space_still_available(Game& game) {
 	assert(expedition_);
+	const Coords portspace = current_portspace();
 	// recheck ownership before setting the csite
-	Map* map = game.mutable_map();
-	if (expedition_->seen_port_buildspaces.empty()) {
+	if (!static_cast<bool>(portspace)) {
 		log_warn_time(
 		   game.get_gametime(), "Expedition list of seen port spaces is unexpectedly empty!\n");
 		return false;
 	}
-	const FCoords fc = map->get_fcoords(expedition_->seen_port_buildspaces.front());
-	if (!can_build_port_here(get_owner()->player_number(), *map, fc)) {
+	if (!can_build_port_here(portspace)) {
 		set_ship_state_and_notify(
 		   ShipStates::kExpeditionWaiting, NoteShip::Action::kDestinationChanged);
 		send_message(game, _("Port Space Lost!"), _("No Port Can Be Built"),
@@ -2023,6 +2147,8 @@ uint32_t Ship::calculate_sea_route(EditorGameBase& egbase, PortDock& pd, Path* f
  * Returns false if the dock is unreachable.
  */
 bool Ship::start_task_movetodock(Game& game, PortDock& pd) {
+	erase_warship_soldier_request();
+
 	Path path;
 
 	uint32_t const distance = calculate_sea_route(game, pd, &path);
@@ -2141,6 +2267,8 @@ void Ship::exp_construct_port(Game& game, const Coords& c) {
 	}
 	set_ship_state_and_notify(
 	   ShipStates::kExpeditionColonizing, NoteShip::Action::kDestinationChanged);
+	// Update ownership
+	remember_detected_portspace(c);
 }
 
 /// Initializes / changes the direction the island exploration in @arg island_explore_direction
@@ -2242,8 +2370,6 @@ void Ship::sink_ship(Game& game) {
 	ship_wakeup(game);
 }
 
-constexpr int kShipHealthBarWidth = 30;
-
 void Ship::draw(const EditorGameBase& egbase,
                 const InfoToDraw& info_to_draw,
                 const Vector2f& field_on_dst,
@@ -2255,7 +2381,9 @@ void Ship::draw(const EditorGameBase& egbase,
 	// Show ship name and current activity
 	std::string statistics_string;
 	if ((info_to_draw & InfoToDraw::kStatistics) != 0) {
-		if (has_battle()) {
+		if (state_is_sinking()) {
+			statistics_string = pgettext("ship_state", "Sinking");
+		} else if (has_battle()) {
 			statistics_string = pgettext("ship_state", "Fighting");
 		} else if (is_refitting()) {
 			switch (pending_refit_) {
@@ -2333,6 +2461,7 @@ void Ship::draw(const EditorGameBase& egbase,
 				}
 			}
 		}
+
 		statistics_string = StyleManager::color_tag(
 		   statistics_string, g_style_manager->building_statistics_style().medium_color());
 	}
@@ -2359,8 +2488,8 @@ void Ship::draw_healthbar(const EditorGameBase& egbase,
 	const Vector2i draw_position = point_on_dst.cast<int>();
 
 	// The frame gets a slight tint of player color
-	Recti energy_outer(draw_position - Vector2i(kShipHealthBarWidth, 0) * scale,
-	                   kShipHealthBarWidth * 2 * scale, 5 * scale);
+	Recti energy_outer(draw_position - Vector2i(kShipHalfHealthBarWidth, 0) * scale,
+	                   kShipHalfHealthBarWidth * 2 * scale, 5 * scale);
 	dst->fill_rect(energy_outer, color);
 	dst->brighten_rect(energy_outer, brighten_factor);
 
@@ -2381,10 +2510,10 @@ void Ship::draw_healthbar(const EditorGameBase& egbase,
 	}
 
 	// Now draw the health bar itself
-	constexpr int kInnerHealthBarWidth = 2 * (kShipHealthBarWidth - 1);
+	constexpr int kInnerHealthBarWidth = 2 * (kShipHalfHealthBarWidth - 1);
 	int health_width = kInnerHealthBarWidth * health_to_show / descr().max_hitpoints_;
 
-	Recti energy_inner(draw_position + Vector2i(-kShipHealthBarWidth + 1, 1) * scale,
+	Recti energy_inner(draw_position + Vector2i(-kShipHalfHealthBarWidth + 1, 1) * scale,
 	                   health_width * scale, 3 * scale);
 	Recti energy_complement(energy_inner.origin() + Vector2i(health_width, 0) * scale,
 	                        (kInnerHealthBarWidth - health_width) * scale, 3 * scale);
@@ -2434,15 +2563,22 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 	Bob::log_general_info(egbase);
 
 	molog(egbase.get_gametime(), "Name: %s", get_shipname().c_str());
-	molog(egbase.get_gametime(), "Ship belongs to fleet %u\nlastdock: %s\n",
+	molog(egbase.get_gametime(), "Ship belongs to fleet %u\nlastdock: %s\nrequestdock: %s\n",
 	      fleet_ != nullptr ? fleet_->serial() : 0,
-	      (lastdock_.is_set()) ?
-            format("%u (%s at %3dx%3d)", lastdock_.serial(),
-	                lastdock_.get(egbase)->get_warehouse()->get_warehouse_name().c_str(),
-	                lastdock_.get(egbase)->get_positions(egbase)[0].x,
-	                lastdock_.get(egbase)->get_positions(egbase)[0].y)
-	            .c_str() :
-            "-");
+	      (lastdock_.is_set() ?
+             format("%u (%s at %3dx%3d)", lastdock_.serial(),
+	                 lastdock_.get(egbase)->get_warehouse()->get_warehouse_name().c_str(),
+	                 lastdock_.get(egbase)->get_positions(egbase)[0].x,
+	                 lastdock_.get(egbase)->get_positions(egbase)[0].y)
+	             .c_str() :
+             "-"),
+	      (requestdock_.is_set() ?
+             format("%u (%s at %3dx%3d)", requestdock_.serial(),
+	                 requestdock_.get(egbase)->get_warehouse()->get_warehouse_name().c_str(),
+	                 requestdock_.get(egbase)->get_positions(egbase)[0].x,
+	                 requestdock_.get(egbase)->get_positions(egbase)[0].y)
+	             .c_str() :
+             "-"));
 	if (const PortDock* dock = get_destination_port(egbase); dock != nullptr) {
 		molog(egbase.get_gametime(), "Has destination port %u (%3dx%3d) %s\n", dock->serial(),
 		      dock->get_positions(egbase)[0].x, dock->get_positions(egbase)[0].y,
@@ -2530,8 +2666,9 @@ Load / Save implementation
  * 12 - v1.1
  * 13 - Added warships and naval warfare.
  * 14 - Another naval warfare change (coords as destination and soldier preference).
+ * 15 - Another naval warfare change (remember request dock).
  */
-constexpr uint8_t kCurrentPacketVersion = 14;
+constexpr uint8_t kCurrentPacketVersion = 15;
 
 const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	if (name == "shipidle" || name == "ship") {
@@ -2616,6 +2753,7 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 			soldier_preference_ = static_cast<SoldierPreference>(fr.unsigned_8());
 		}
 		lastdock_ = fr.unsigned_32();
+		requestdock_ = packet_version >= 15 ? fr.unsigned_32() : 0;
 		destination_object_ = fr.unsigned_32();
 		destination_coords_ = packet_version >= 14 ? fr.unsigned_32() : 0;
 
@@ -2635,6 +2773,9 @@ void Ship::Loader::load_pointers() {
 
 	if (lastdock_ != 0u) {
 		ship.lastdock_ = &mol().get<PortDock>(lastdock_);
+	}
+	if (requestdock_ != 0u) {
+		ship.requestdock_ = &mol().get<PortDock>(requestdock_);
 	}
 	if (destination_object_ != 0u) {
 		MapObject& mo = mol().get<MapObject>(destination_object_);
@@ -2821,6 +2962,7 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_32(warship_soldier_capacity_);
 	fw.unsigned_8(static_cast<uint8_t>(soldier_preference_));
 	fw.unsigned_32(mos.get_object_file_index_or_zero(lastdock_.get(egbase)));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(requestdock_.get(egbase)));
 	fw.unsigned_32(mos.get_object_file_index_or_zero(destination_object_.get(egbase)));
 	fw.unsigned_32(destination_coords_ == nullptr ? 0 : destination_coords_->serial);
 
