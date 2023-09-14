@@ -12,11 +12,10 @@ wl.Descriptions():new_productionsite_type {
    enhancement = {
       name = "amazons_rare_tree_kiln",
       enhancement_cost = {
-         log = 1,
-         granite = 2,
+         granite = 4,
       },
       enhancement_return_on_dismantle = {
-         granite = 1
+         granite = 2,
       }
    },
 
@@ -26,7 +25,8 @@ wl.Descriptions():new_productionsite_type {
       ironwood = 1,
    },
    return_on_dismantle = {
-      granite = 3,
+      granite = 2,
+      log = 1,
    },
 
    animation_directory = dirname,

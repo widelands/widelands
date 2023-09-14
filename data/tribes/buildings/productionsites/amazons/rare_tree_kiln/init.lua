@@ -34,7 +34,8 @@ wl.Descriptions():new_productionsite_type {
    inputs = {
       { name = "ironwood", amount = 3 },
       { name = "balsa", amount = 3 },
-      { name = "rubber", amount = 3 }
+      { name = "rubber", amount = 3 },
+      { name = "granite", amount = 3 },
    },
 
    programs = {
@@ -43,9 +44,10 @@ wl.Descriptions():new_productionsite_type {
          descname = _("producing charcoal"),
          actions = {
             "return=skipped unless economy needs coal",
-            "consume=ironwood balsa rubber",
-            "sleep=duration:20s",
-            "animate=working duration:40s",
+            "consume=ironwood balsa rubber granite",
+            -- Similar to Frisian charcoal kiln, but a little more preparation time
+            "sleep=duration:40s",
+            "animate=working duration:30s",
             "produce=coal"
          }
       },
