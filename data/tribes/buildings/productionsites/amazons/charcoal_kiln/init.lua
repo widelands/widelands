@@ -63,7 +63,7 @@ wl.Descriptions():new_productionsite_type {
             "return=skipped unless economy needs coal",
             -- Make it a little more efficient than other tribes
             "consume=log:5",
-            "sleep=duration:10s",
+            "sleep=duration:20s",
             "animate=working duration:90s", -- Charcoal fires will burn for some days in real life
             "produce=coal"
          }

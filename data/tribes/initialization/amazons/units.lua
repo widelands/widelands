@@ -1430,7 +1430,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Charcoal Kiln
             purpose = pgettext("amazons_building", "Burns logs into charcoal."),
             -- TRANSLATORS: Performance helptext for an Amazon production site: Charcoal Kiln
-            performance = pgettext("amazons_building", "The charcoal kiln needs %s on average to produce one lump of coal."):bformat(format_minutes_seconds(1,44))
+            performance = pgettext("amazons_building", "The charcoal kiln needs %s on average to produce one lump of coal."):bformat(format_minutes_seconds(1,54))
          }
       },
       {
@@ -1442,8 +1442,10 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("amazons_building", "Mistress Blackwood, teaching an apprentice"),
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Rare Tree Kiln
             purpose = pgettext("amazons_building", "Burns rare trees into charcoal."),
+            -- TRANSLATORS: Note helptext for an Amazon production site: Rare Tree Kiln
+            note = pgettext("amazons_building", "The rare tree kiln can burn up to three lumps of charcoal between repairs, but only if the rare tree supply is steady. If it has to wait for rare trees, then less charcoal is produced between repairs, severely hurting the efficiency."),
             -- TRANSLATORS: Performance helptext for an Amazon production site: Rare Tree Kiln
-            performance = pgettext("amazons_building", "The rare tree kiln needs %s on average to produce one lump of coal."):bformat(format_minutes_seconds(1,14))
+            performance = pgettext("amazons_building", "If fully supplied, the rare tree kiln needs %s on average to produce one lump of coal."):bformat(format_minutes_seconds(1,10))
          }
       },
       {
