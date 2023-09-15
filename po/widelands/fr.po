@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-09-11 02:30+0000\n"
+"POT-Creation-Date: 2023-09-14 02:26+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: David D, 2017-2018,2021-2023\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
@@ -348,7 +348,7 @@ msgstr "Refaire"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/editor/editorinteractive.cc:175
 #: ../../src/wlapplication_options.cc:855 ../../src/wui/buildingwindow.cc:443
-#: ../../src/wui/interactive_player.cc:235
+#: ../../src/wui/interactive_player.cc:236
 msgid "Help"
 msgstr "Aide"
 
@@ -1753,8 +1753,8 @@ msgstr "File de commande"
 #: ../../src/game_io/game_loader.cc:157 ../../src/map_io/map_saver.cc:146
 #: ../../src/map_io/widelands_map_loader.cc:400
 #: ../../src/wlapplication_options.cc:667
-#: ../../src/wui/interactive_player.cc:225
-#: ../../src/wui/interactive_player.cc:464
+#: ../../src/wui/interactive_player.cc:226
+#: ../../src/wui/interactive_player.cc:465
 msgid "Messages"
 msgstr "Messages"
 
@@ -2582,9 +2582,9 @@ msgstr "Bateaux"
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:173
 #: ../../src/wui/economy_options_window.cc:75
 #: ../../src/wui/general_statistics_menu.cc:157
-#: ../../src/wui/interactive_player.cc:334
+#: ../../src/wui/interactive_player.cc:335
 #: ../../src/wui/productionsitewindow.cc:90
-#: ../../src/wui/warehousewindow.cc:288
+#: ../../src/wui/warehousewindow.cc:292
 msgid "Wares"
 msgstr "Marchandises"
 
@@ -2595,7 +2595,7 @@ msgstr "Marchandises"
 #: ../../src/wui/economy_options_window.cc:76
 #: ../../src/wui/general_statistics_menu.cc:148
 #: ../../src/wui/productionsitewindow.cc:110
-#: ../../src/wui/warehousewindow.cc:292
+#: ../../src/wui/warehousewindow.cc:296
 msgid "Workers"
 msgstr "Ouvriers"
 
@@ -2604,7 +2604,7 @@ msgstr "Ouvriers"
 #: ../../src/map_io/map_saver.cc:219
 #: ../../src/map_io/widelands_map_loader.cc:336
 #: ../../src/wui/general_statistics_menu.cc:153
-#: ../../src/wui/interactive_player.cc:329 ../../src/wui/minimap.cc:202
+#: ../../src/wui/interactive_player.cc:330 ../../src/wui/minimap.cc:202
 msgid "Buildings"
 msgstr "Bâtiments"
 
@@ -2729,19 +2729,19 @@ msgstr "Un fichier de carte est invalide :\n%s"
 msgid "This objective has no description."
 msgstr "Cet objectif n'a pas de description."
 
-#: ../../src/logic/player.cc:1996
+#: ../../src/logic/player.cc:1997
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
 msgstr "Navire %d"
 
-#: ../../src/logic/player.cc:2013
+#: ../../src/logic/player.cc:2014
 #, c-format
 msgctxt "warehouse"
 msgid "Port %d"
 msgstr "Port %d"
 
-#: ../../src/logic/player.cc:2013
+#: ../../src/logic/player.cc:2014
 #, c-format
 msgctxt "warehouse"
 msgid "Warehouse %d"
@@ -2956,7 +2956,7 @@ msgstr "Scripting"
 #: ../../src/map_io/widelands_map_loader.cc:418
 #: ../../src/wlapplication_options.cc:658
 #: ../../src/wui/game_objectives_menu.cc:30
-#: ../../src/wui/interactive_player.cc:215
+#: ../../src/wui/interactive_player.cc:216
 msgid "Objectives"
 msgstr "Objectifs"
 
@@ -5178,7 +5178,7 @@ msgstr "%1$s+%2$u"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:184
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:383
-#: ../../src/wui/constructionsitewindow.cc:133
+#: ../../src/wui/constructionsitewindow.cc:137
 #, c-format
 msgid "(%s)"
 msgstr "(%s)"
@@ -5539,7 +5539,7 @@ msgstr "Le raccourci (‘%1$s’) que vous avez sélectionné est déjà utilis�
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/ui_fsmenu/keyboard_options.cc:297
-#: ../../src/wui/interactive_player.cc:339
+#: ../../src/wui/interactive_player.cc:340
 msgid "General"
 msgstr "Général"
 
@@ -6561,7 +6561,7 @@ msgstr "Affiche les bâtiments"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/ui_fsmenu/options.cc:303 ../../src/wui/interactive_player.cc:384
+#: ../../src/ui_fsmenu/options.cc:303 ../../src/wui/interactive_player.cc:385
 msgid "Show Workarea Overlaps"
 msgstr "Afficher les chevauchements de l'aire de travail"
 
@@ -7902,7 +7902,7 @@ msgstr "(Désactivé)"
 #. * TRANSLATORS: The first placeholder is the stock amount of a ware/worker,
 #. and the second is an
 #. * icon indicating a trend. Very little space is available.
-#: ../../src/wlapplication_options.cc:1476 ../../src/wui/waresdisplay.cc:557
+#: ../../src/wlapplication_options.cc:1476 ../../src/wui/waresdisplay.cc:554
 #, c-format
 msgid "%1$s%2$s"
 msgstr "%1$s%2$s"
@@ -7991,7 +7991,7 @@ msgstr "Attaquer"
 #. * TRANSLATORS: Number of soldiers that should attack. Used in the attack
 #. window.
 #: ../../src/wui/attack_window.cc:171
-#: ../../src/wui/constructionsitewindow.cc:534
+#: ../../src/wui/constructionsitewindow.cc:538
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
@@ -8216,7 +8216,7 @@ msgid "Show work area"
 msgstr "Montrer la zone de travail"
 
 #: ../../src/wui/buildingwindow.cc:726
-#: ../../src/wui/constructionsitewindow.cc:342
+#: ../../src/wui/constructionsitewindow.cc:346
 msgid "Start an expedition"
 msgstr "Lancer une expédition"
 
@@ -8224,72 +8224,72 @@ msgstr "Lancer une expédition"
 msgid "Cancel the expedition"
 msgstr "Annuler l'expédition"
 
-#: ../../src/wui/constructionsitewindow.cc:150
+#: ../../src/wui/constructionsitewindow.cc:154
 #: ../../src/wui/dismantlesitewindow.cc:68
 msgid "Building materials"
 msgstr "Matériaux de construction"
 
-#: ../../src/wui/constructionsitewindow.cc:226
+#: ../../src/wui/constructionsitewindow.cc:230
 msgid "Stopped"
 msgstr "Stoppé"
 
-#: ../../src/wui/constructionsitewindow.cc:227
+#: ../../src/wui/constructionsitewindow.cc:231
 msgid "Stop this building’s work after completion"
 msgstr "Stopper le travail de cette construction après complétion"
 
-#: ../../src/wui/constructionsitewindow.cc:266
+#: ../../src/wui/constructionsitewindow.cc:270
 #: ../../src/wui/soldierlist.cc:452
 msgid "Prefer heroes"
 msgstr "Préférer les héros"
 
-#: ../../src/wui/constructionsitewindow.cc:269
+#: ../../src/wui/constructionsitewindow.cc:273
 #: ../../src/wui/soldierlist.cc:449
 msgid "Prefer rookies"
 msgstr "Préférer les débutants"
 
-#: ../../src/wui/constructionsitewindow.cc:300
-#: ../../src/wui/warehousewindow.cc:150
+#: ../../src/wui/constructionsitewindow.cc:304
+#: ../../src/wui/warehousewindow.cc:154
 msgid "Normal policy"
 msgstr "Politique normale"
 
-#: ../../src/wui/constructionsitewindow.cc:304
-#: ../../src/wui/warehousewindow.cc:151
+#: ../../src/wui/constructionsitewindow.cc:308
+#: ../../src/wui/warehousewindow.cc:155
 msgid "Preferably store selected wares here"
 msgstr "Stocker de préférence les marchandises sélectionnées ici"
 
-#: ../../src/wui/constructionsitewindow.cc:308
-#: ../../src/wui/warehousewindow.cc:152
+#: ../../src/wui/constructionsitewindow.cc:312
+#: ../../src/wui/warehousewindow.cc:156
 msgid "Do not store selected wares here"
 msgstr "Ne pas stocker les marchandises sélectionnées ici"
 
-#: ../../src/wui/constructionsitewindow.cc:312
-#: ../../src/wui/warehousewindow.cc:153
+#: ../../src/wui/constructionsitewindow.cc:316
+#: ../../src/wui/warehousewindow.cc:157
 msgid "Remove selected wares from here"
 msgstr "Retirer les marchandises sélectionnées ici"
 
-#: ../../src/wui/constructionsitewindow.cc:331
+#: ../../src/wui/constructionsitewindow.cc:335
 msgid "Ware settings to apply after construction"
 msgstr "Préférences des marchandises à appliquer après construction"
 
-#: ../../src/wui/constructionsitewindow.cc:334
+#: ../../src/wui/constructionsitewindow.cc:338
 msgid "Worker settings to apply after construction"
 msgstr "Préférences des travailleurs à appliquer après construction"
 
-#: ../../src/wui/constructionsitewindow.cc:342
+#: ../../src/wui/constructionsitewindow.cc:346
 msgid "Start an expedition from this port after completion"
 msgstr "Démarrer une expédition de ce port après complétion"
 
-#: ../../src/wui/constructionsitewindow.cc:366
+#: ../../src/wui/constructionsitewindow.cc:370
 msgid "Settings to apply after construction"
 msgstr "Préférences à appliquer après la construction"
 
-#: ../../src/wui/constructionsitewindow.cc:460
+#: ../../src/wui/constructionsitewindow.cc:464
 #: ../../src/wui/soldiercapacitycontrol.cc:71
 msgid ""
 "Decrease capacity. Hold down Ctrl to set the capacity to the lowest value"
 msgstr "Diminuer la capacité. Maintenez le bouton Ctrl pour mettre la valeur la plus basse."
 
-#: ../../src/wui/constructionsitewindow.cc:470
+#: ../../src/wui/constructionsitewindow.cc:474
 #: ../../src/wui/soldiercapacitycontrol.cc:80
 msgid ""
 "Increase capacity. Hold down Ctrl to set the capacity to the highest value"
@@ -9291,25 +9291,25 @@ msgid "Remaining construction costs:"
 msgstr ""
 
 #. * TRANSLATORS: Title for the statistics menu button in the game
-#: ../../src/wui/interactive_player.cc:186
+#: ../../src/wui/interactive_player.cc:187
 #: ../../src/wui/interactive_spectator.cc:48
 msgid "Statistics"
 msgstr "Statistiques"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
-#: ../../src/wui/interactive_player.cc:313 ../../src/wui/map_tags.cc:51
+#: ../../src/wui/interactive_player.cc:314 ../../src/wui/map_tags.cc:51
 msgid "Seafaring"
 msgstr "Affaires maritimes"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:319
-#: ../../src/wui/militarysitewindow.cc:40 ../../src/wui/warehousewindow.cc:311
+#: ../../src/wui/interactive_player.cc:320
+#: ../../src/wui/militarysitewindow.cc:40 ../../src/wui/warehousewindow.cc:315
 msgid "Soldiers"
 msgstr "Soldats"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:324 ../../src/wui/stock_menu.cc:40
+#: ../../src/wui/interactive_player.cc:325 ../../src/wui/stock_menu.cc:40
 #: ../../src/wui/ware_statistics_menu.cc:152 ../../src/wui/waresdisplay.cc:81
 msgid "Stock"
 msgstr "Stock"
@@ -9317,17 +9317,17 @@ msgstr "Stock"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/wui/interactive_player.cc:381
+#: ../../src/wui/interactive_player.cc:382
 msgid "Hide Workarea Overlaps"
 msgstr "Cacher les chevauchements de l'aire de travail"
 
-#: ../../src/wui/interactive_player.cc:387
+#: ../../src/wui/interactive_player.cc:388
 msgid ""
 "Toggle whether overlapping workareas are indicated when placing a "
 "constructionsite"
 msgstr "Activer l'indication de superposition des zones de travaux quand vous placez un site de construction"
 
-#: ../../src/wui/interactive_player.cc:469
+#: ../../src/wui/interactive_player.cc:470
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
@@ -9335,7 +9335,7 @@ msgstr[0] "%u nouveau message"
 msgstr[1] "%u nouveaux messages"
 msgstr[2] "%u nouveaux messages"
 
-#: ../../src/wui/interactive_player.cc:884
+#: ../../src/wui/interactive_player.cc:911
 msgid "Fastplace Shortcuts"
 msgstr "Raccourcis endroit rapide"
 
@@ -10216,43 +10216,43 @@ msgstr "Le son est désactivé, soit à cause d'un problème de pilote logiciel,
 #. different background colors; each icon's color indicates whether the stock
 #. is higher or
 #. lower than the economy target setting. Very little space is available.
-#: ../../src/wui/stock_menu.cc:53
+#: ../../src/wui/stock_menu.cc:52
 msgid "Evaluate"
 msgstr "Evaluer"
 
-#: ../../src/wui/stock_menu.cc:57
+#: ../../src/wui/stock_menu.cc:56
 msgid "Compare stocked amounts to economy target quantities"
 msgstr "Comparer les montants stockés aux quantités ciblés par l'économie  "
 
-#: ../../src/wui/stock_menu.cc:60
+#: ../../src/wui/stock_menu.cc:59
 msgid "Red:"
 msgstr "Rouge :"
 
-#: ../../src/wui/stock_menu.cc:60
+#: ../../src/wui/stock_menu.cc:59
 msgid "Stock is lower than the target"
 msgstr "Le stock est inférieur à la cible."
 
-#: ../../src/wui/stock_menu.cc:63
+#: ../../src/wui/stock_menu.cc:62
 msgid "Yellow:"
 msgstr "Jaune :"
 
-#: ../../src/wui/stock_menu.cc:64
+#: ../../src/wui/stock_menu.cc:63
 msgid "Stock is equal to the target"
 msgstr "Le stock est égal à la cible."
 
-#: ../../src/wui/stock_menu.cc:67
+#: ../../src/wui/stock_menu.cc:66
 msgid "Green:"
 msgstr "Vert :"
 
-#: ../../src/wui/stock_menu.cc:68
+#: ../../src/wui/stock_menu.cc:67
 msgid "Stock is higher than the target"
 msgstr "Le stock est supérieur à la cible."
 
-#: ../../src/wui/stock_menu.cc:72
+#: ../../src/wui/stock_menu.cc:71
 msgid "Wares (total)"
 msgstr "Marchandises (total)"
 
-#: ../../src/wui/stock_menu.cc:76
+#: ../../src/wui/stock_menu.cc:75
 msgid "Workers (total)"
 msgstr "Ouvriers (total)"
 
@@ -10260,7 +10260,7 @@ msgstr "Ouvriers (total)"
 msgid "Wares in warehouses"
 msgstr "Marchandises dans les entrepôts"
 
-#: ../../src/wui/stock_menu.cc:84
+#: ../../src/wui/stock_menu.cc:85
 msgid "Workers in warehouses"
 msgstr "Ouvriers dans les entrepôts"
 
@@ -10297,61 +10297,61 @@ msgstr "Consommation"
 msgid "Economy health"
 msgstr "Santé économique"
 
-#: ../../src/wui/warehousewindow.cc:158
+#: ../../src/wui/warehousewindow.cc:162
 msgid "Remove 10 wares"
 msgstr "Enlever 10 marchandises"
 
-#: ../../src/wui/warehousewindow.cc:165
+#: ../../src/wui/warehousewindow.cc:169
 msgid "Remove a ware"
 msgstr "Enlever une marchandise"
 
-#: ../../src/wui/warehousewindow.cc:172
+#: ../../src/wui/warehousewindow.cc:176
 msgid "Add a ware"
 msgstr "Ajouter une marchandise"
 
-#: ../../src/wui/warehousewindow.cc:179
+#: ../../src/wui/warehousewindow.cc:183
 msgid "Add 10 wares"
 msgstr "Ajouter 10 marchandises"
 
-#: ../../src/wui/warehousewindow.cc:190
+#: ../../src/wui/warehousewindow.cc:194
 msgid "Configure this building’s economy"
 msgstr "Configurer l'économie de ce bâtiment"
 
-#: ../../src/wui/warehousewindow.cc:316
+#: ../../src/wui/warehousewindow.cc:320
 msgid "Wares waiting to be shipped"
 msgstr "Marchandises attendant d'être embarquées"
 
-#: ../../src/wui/warehousewindow.cc:319
+#: ../../src/wui/warehousewindow.cc:323
 msgid "Workers waiting to embark"
 msgstr "Ouvriers attendant pour embarquer"
 
-#: ../../src/wui/warehousewindow.cc:325
+#: ../../src/wui/warehousewindow.cc:329
 msgid "Expedition"
 msgstr "Expédition"
 
-#: ../../src/wui/waresdisplay.cc:551
+#: ../../src/wui/waresdisplay.cc:548
 msgid "↓"
 msgstr "↓"
 
-#: ../../src/wui/waresdisplay.cc:553
+#: ../../src/wui/waresdisplay.cc:550
 msgid "↑"
 msgstr "↑"
 
-#: ../../src/wui/waresdisplay.cc:554
+#: ../../src/wui/waresdisplay.cc:551
 msgid "="
 msgstr "="
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:596
+#: ../../src/wui/waresdisplay.cc:589
 msgid "%1%k"
 msgstr "%1%k"
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 5M = 5,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:599
+#: ../../src/wui/waresdisplay.cc:592
 msgid "%1%M"
 msgstr "%1%M"
 
@@ -10359,7 +10359,7 @@ msgstr "%1%M"
 #. 5,000,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:602
+#: ../../src/wui/waresdisplay.cc:595
 msgid "%1%G"
 msgstr "%1%G"
 
