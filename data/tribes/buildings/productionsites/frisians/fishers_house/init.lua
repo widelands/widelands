@@ -49,11 +49,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...
          descname = _("fishing"),
          actions = {
-            -- time of worker: 3 sec
-            -- radius: 8
-            -- steps from building to water: 2...11
-            -- min. time total: 2 * 2 * 1.8 + 3 + 16 = 26.2 sec
-            -- max. time total: 2 * 11 * 1.8 + 3 + 16 = 58.6 sec
+            -- time of worker: 10.2-42.6 sec
+            -- min. time total: 10.2 + 16 = 26.2 sec
+            -- max. time total: 42.6 + 16 = 58.6 sec
             "callworker=fish",
             "sleep=duration:16s" -- TODO(stonerl): reduce to 3s and move 13s to the worker
          }

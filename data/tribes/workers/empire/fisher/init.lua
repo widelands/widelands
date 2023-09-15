@@ -17,7 +17,9 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       fish = {
-         -- time: 10 sec
+         -- steps from building to water: 2...10
+         -- min. worker time: 2 * 2 * 1.8 + 10 = 17.2 sec
+         -- max. worker time: 2 * 10 * 1.8 + 10 = 46 sec
          "findspace=size:any radius:7 resource:resource_fish",
          "walk=coords",
          "playsound=sound/fisher/fisher_throw_net priority:50% allow_multiple",

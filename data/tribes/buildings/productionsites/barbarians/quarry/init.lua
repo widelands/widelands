@@ -46,11 +46,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
          descname = _("quarrying granite"),
          actions = {
-            -- time of worker: 17.5 sec
-            -- radius: 6
-            -- steps from building to rock: 2...9
-            -- min. time total: 2 * 2 * 1.8 + 17.5 + 17.5 = 42.2 sec
-            -- max. time total: 2 * 9 * 1.8 + 17.5 + 17.5 = 67.4 sec
+            -- time of worker: 24.7-49.9 sec
+            -- min. time total: 24.7 + 17.5 = 42.2 sec
+            -- max. time total: 49.9 + 17.5 = 67.4 sec
             "callworker=cut_granite",
             "sleep=duration:17s500ms"
          }

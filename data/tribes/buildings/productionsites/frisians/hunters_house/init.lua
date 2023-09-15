@@ -48,11 +48,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...
          descname = _("hunting"),
          actions = {
-            -- time of worker: 1 sec
-            -- radius: 14
-            -- steps from building to animal: 2...17
-            -- min. time: 2 * 2 * 1.8 + 1 + 35 = 43.2 sec
-            -- max. time: 2 * 17 * 1.8 + 1 + 35 = 97.2 sec
+            -- time of worker: 8.2-62.2 sec
+            -- min. time: 8.2 + 35 = 43.2 sec
+            -- max. time: 62.2 + 35 = 97.2 sec
             "callworker=hunt",
             "sleep=duration:35s",
             "callworker=hunt",

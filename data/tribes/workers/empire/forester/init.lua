@@ -17,7 +17,9 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       plant = {
-         -- time: 2.5 + 1.5 + 2 = 6 sec
+         -- steps from building to tree: 2...8
+         -- min. worker time: 2 * 2 * 1.8 + 2.5 + 1.5 + 2 = 13.2 sec
+         -- max. worker time: 2 * 8 * 1.8 + 2.5 + 1.5 + 2 = 34.8 sec
          "findspace=size:any radius:5 avoid:field saplingsearches:8",
          "walk=coords",
          "animate=dig duration:2s500ms",

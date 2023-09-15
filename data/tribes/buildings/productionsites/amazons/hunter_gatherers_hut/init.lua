@@ -47,11 +47,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...
          descname = _("gathering meat"),
          actions = {
-            -- time of worker: 1 sec
-            -- radius: 14
-            -- steps from building to animal: 2...17
-            -- min. time: 2 * 2 * 1.8 + 1 + 34 = 42.2 sec
-            -- max. time: 2 * 17 * 1.8 + 1 + 34 = 96.2 sec
+            -- time of worker: 8.2-62.2 sec
+            -- min. time: 8.2 + 34 = 42.2 sec
+            -- max. time: 62.2 + 34 = 96.2 sec
             "callworker=hunt",
             "sleep=duration:34s",
          }
@@ -60,11 +58,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...
          descname = _("gathering fish"),
          actions = {
-            -- time of worker: 1 sec
-            -- radius: 14
-            -- steps from building to water: 2...17
-            -- min. time: 2 * 2 * 1.8 + 1 + 34 = 42.2 sec
-            -- max. time: 2 * 17 * 1.8 + 1 + 34 = 96.2 sec
+            -- time of worker: 8.2-62.2 sec
+            -- min. time: 8.2 + 34 = 42.2 sec
+            -- max. time: 62.2 + 34 = 96.2 sec
             "callworker=fish",
             "sleep=duration:34s",
          }
