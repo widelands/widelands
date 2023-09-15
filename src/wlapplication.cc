@@ -1319,6 +1319,7 @@ void throw_exclusive(const std::string& opt, const std::string& other) {
 	   format(_("Command line parameters --%s and --%s can not be combined"), opt, other));
 }
 
+
 }  // namespace
 
 // Checks and returns whether `param` was set, but throws ParameterError if it also had a value.
@@ -1359,22 +1360,13 @@ WLApplication::get_commandline_option_value(const std::string& opt, const bool a
  */
 void WLApplication::handle_commandline_parameters() {
 
-	if (check_commandline_flag("nosound")) {
-		SoundHandler::disable_backend();
-	}
 	if (check_commandline_flag("verbose-i18n")) {
 		i18n::enable_verbose_i18n();
 	}
-	if (check_commandline_flag("fail-on-lua-error")) {
-		g_fail_on_lua_error = true;
-	}
-	if (check_commandline_flag("nozip")) {
-		set_config_bool("nozip", true);
-	}
 
-	if (commandline_.count("localedir") != 0u) {
-		localedir_ = commandline_["localedir"];
-		commandline_.erase("localedir");
+	if (auto localedir_option = get_commandline_option_value("localedir");
+	    localedir_option.has_value()) {
+		localedir_ = *localedir_option;
 	}
 
 	const bool skip_check_datadir_version = check_commandline_flag("skip_check_datadir_version");
@@ -1418,9 +1410,8 @@ void WLApplication::handle_commandline_parameters() {
 		return std::string();
 	};
 	bool found = false;
-	if (commandline_.count("datadir") != 0u) {
-		datadir_ = commandline_["datadir"];
-		commandline_.erase("datadir");
+	if (auto datadir_option = get_commandline_option_value("datadir"); datadir_option.has_value()) {
+		datadir_ = *datadir_option;
 
 		const std::string err = checkdatadirversion(datadir_);
 		found = err.empty();
@@ -1490,32 +1481,52 @@ void WLApplication::handle_commandline_parameters() {
 		}
 	}
 
-	if (commandline_.count("language") != 0u) {
-		const std::string& lang = commandline_["language"];
-		if (!lang.empty()) {
-			set_config_string("language", lang);
-		} else {
-			if (found) {
-				init_language();
-			}
-			throw_empty_value("language");
-		}
+	if (auto lang = get_commandline_option_value("language"); lang.has_value()) {
+		set_config_string("language", *lang);
 	}
 	if (found) {
 		init_language();  // do this now to have translated command line help
 	}
+	// Set up list of valid command line options and their translated help texts
 	fill_parameter_vector();
 
-	if (commandline_.count("error") != 0u) {
+	// This is used by the parser to report an error
+	if (auto err = get_commandline_option_value("error"); err.has_value()) {
 		throw ParameterError(CmdLineVerbosity::Normal,
 		                     format(_("Unknown command line parameter: %s\nMaybe a '=' is missing?"),
-		                            commandline_["error"]));
+		                            *err));
 	}
 
-	if (commandline_.count("datadir_for_testing") != 0u) {
-		datadir_for_testing_ = commandline_["datadir_for_testing"];
-		commandline_.erase("datadir_for_testing");
+	if (auto testdir = get_commandline_option_value("datadir_for_testing"); testdir.has_value()) {
+		datadir_for_testing_ = *testdir;
 	}
+
+	// TODO(tothxa): These were checked before datadir and locale were set up, but don't seem to be
+	//               used during detecting and setting them up. Let's see if anything breaks if we
+	//               move them here.
+	if (check_commandline_flag("nosound")) {
+		SoundHandler::disable_backend();
+	}
+	if (check_commandline_flag("fail-on-lua-error")) {
+		g_fail_on_lua_error = true;
+	}
+
+	// Mutually exclusive options.
+	// These would be better as e.g. "--use_zip=[true|false]", but then we'd have to negate the
+	// boolean value stored in the string, but trueWords and falseWords are hidden in io/profile.cc.
+	// The obvious "--nozip=[true|false]" would be confusing, or at least hard to write a helptext
+	// for.
+	const bool has_nozip = check_commandline_flag("nozip");
+	const bool has_zip = check_commandline_flag("zip");
+	if (has_nozip && has_zip) {
+		throw_exclusive("nozip", "zip");
+	}
+	// Only override config file if we have a command line parameter
+	if (has_nozip || has_zip) {
+		set_config_bool("nozip", has_nozip);
+	}
+
+	// *** End of moved checks ***
 
 	if (check_commandline_flag("verbose")) {
 		g_verbose = true;
@@ -1586,16 +1597,43 @@ void WLApplication::handle_commandline_parameters() {
 		throw ParameterError(CmdLineVerbosity::Normal);  // No message on purpose
 	}
 
-	// Override maximized and fullscreen settings for window options
-	uint8_t exclusives = commandline_.count("xres") + commandline_.count("yres") +
-	                     2 * commandline_.count("maximized") + 2 * commandline_.count("fullscreen");
-	if (exclusives > 2) {
-		throw ParameterError(CmdLineVerbosity::None,
-		                     _("--xres/--yres, --maximized and --fullscreen can not be combined"));
-	}
-	if (exclusives > 0) {
-		set_config_bool("maximized", false);
-		set_config_bool("fullscreen", false);
+	// Window size: three mutually exclusive possibilities
+	// TODO(tothxa): Move to a function, but I don't want to add another member.
+	//               The whole commandline parsing and handling together with reading the config file
+	//               should be moved out of WLApplication, but it's a mess with scattered global
+	//               variables and variables that need passing back to WLApplication.
+	{
+		const bool display_fullscreen = check_commandline_flag("fullscreen");
+		const bool display_maximized = check_commandline_flag("maximized");
+		if (display_maximized && display_fullscreen) {
+			throw_exclusive("fullscreen", "maximized");
+		}
+
+		const auto xres = get_commandline_option_value("xres");
+		const auto yres = get_commandline_option_value("yres");
+		if ((xres.has_value() || yres.has_value()) && (display_fullscreen || display_maximized)) {
+			std::string which_res;
+			if (xres.has_value() && yres.has_value()) {
+				// "--" will be prepended... ugly here but convenient everywhere else
+				which_res = "xres/--yres";
+			} else {
+				// Exactly one of them
+				which_res = xres.has_value() ? "xres" : "yres";
+			}
+			throw_exclusive(display_fullscreen ? "fullscreen" : "maximized", which_res);
+		}
+
+		// Only override config file if we have a command line parameter
+		if (xres.has_value() || yres.has_value() || display_fullscreen || display_maximized) {
+			set_config_bool("fullscreen", display_fullscreen);
+			set_config_bool("maximized", display_maximized);
+			if (xres.has_value()) {
+				set_config_string("xres", *xres);
+			}
+			if (yres.has_value()) {
+				set_config_string("yres", *yres);
+			}
+		}
 	}
 
 	// If it hasn't been handled yet it's probably an attempt to
