@@ -204,7 +204,13 @@ MainMenu::MainMenu(const bool skip_init)
 	singleplayer_.selected.connect([this]() { action(singleplayer_.get_selected()); });
 	multiplayer_.selected.connect([this]() { action(multiplayer_.get_selected()); });
 	editor_.selected.connect([this]() { action(editor_.get_selected()); });
-	replay_.sigclicked.connect([this]() { action(MenuTarget::kReplay); });
+	replay_.sigclicked.connect([this]() {
+		if ((SDL_GetModState() & KMOD_CTRL) != 0) {
+			action(MenuTarget::kReplayLast);
+		} else {
+			action(MenuTarget::kReplay);
+		}
+	});
 	addons_.sigclicked.connect([this]() { action(MenuTarget::kAddOns); });
 	options_.sigclicked.connect([this]() { action(MenuTarget::kOptions); });
 	about_.sigclicked.connect([this]() { action(MenuTarget::kAbout); });
@@ -370,31 +376,30 @@ void MainMenu::set_labels() {
 			singleplayer_.add(
 			   _("Continue Playing"), MenuTarget::kContinueLastsave, nullptr, false,
 			   format("%s<br>%s<br>%s<br>%s<br>%s<br>%s",
-			          g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
-			             .as_font_tag(
-			                /* strip leading "save/" and trailing ".wgf" */
-			                filename_for_continue_playing_.substr(
-			                   kSaveDir.length() + 1, filename_for_continue_playing_.length() -
-			                                             kSaveDir.length() -
-			                                             kSavegameExtension.length() - 1)),
+			          as_font_tag(UI::FontStyle::kFsTooltipHeader,
+			             /* strip leading "save/" and trailing ".wgf" */
+			             filename_for_continue_playing_.substr(
+			                kSaveDir.length() + 1, filename_for_continue_playing_.length() -
+			                                       kSaveDir.length() -
+			                                       kSavegameExtension.length() - 1)),
 			          format(_("Map: %s"),
-			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(newest_singleplayer->mapname)),
+			                 as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                             newest_singleplayer->mapname)),
 			          format(_("Win Condition: %s"),
-			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(newest_singleplayer->wincondition)),
+			                 as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                             newest_singleplayer->wincondition)),
 			          format(_("Players: %s"),
-			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(newest_singleplayer->nrplayers)),
+			                 as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                             newest_singleplayer->nrplayers)),
 			          format(_("Gametime: %s"),
-			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(newest_singleplayer->gametime)),
+			                 as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                             newest_singleplayer->gametime)),
 			          /** TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today,
 			           * 10:30'
 			           */
 			          format(_("Saved: %s"),
-			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(newest_singleplayer->savedatestring))),
+			                 as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                             newest_singleplayer->savedatestring))),
 			   shortcut_string_for(KeyboardShortcut::kMainMenuContinuePlaying, false));
 		}
 	}
@@ -425,24 +430,25 @@ void MainMenu::set_labels() {
 			editor_.add(
 			   _("Continue Editing"), MenuTarget::kEditorContinue, nullptr, false,
 			   format("%s<br>%s<br>%s<br>%s<br>%s",
-			          g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
-			             .as_font_tag(
-			                /* strip leading "maps/My_Maps/" and trailing ".wgf" */
+			          as_font_tag(UI::FontStyle::kFsTooltipHeader,
+			                /* strip leading "maps/My_Maps/" and trailing ".wmf" */
 			                filename_for_continue_editing_.substr(
-			                   13, filename_for_continue_editing_.length() - 17)),
+			                   kMyMapsDirFull.length() + 1, filename_for_continue_editing_.length() -
+			                                                kMyMapsDirFull.length() -
+			                                                kWidelandsMapExtension.length() - 1)),
 			          format(_("Name: %s"),
-			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(last_edited->localized_name)),
+			                 as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                             last_edited->localized_name)),
 			          format(_("Size: %s"),
-			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(format(_("%1$u×%2$u"), last_edited->width,
+			                 as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                             format(_("%1$u×%2$u"), last_edited->width,
 			                                        last_edited->height))),
 			          format(_("Players: %s"),
-			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(std::to_string(last_edited->nrplayers))),
+			                 as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                             std::to_string(last_edited->nrplayers))),
 			          format(_("Description: %s"),
-			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(last_edited->description))),
+			                 as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                             last_edited->description))),
 			   shortcut_string_for(KeyboardShortcut::kMainMenuContinueEditing, false));
 		}
 	}
@@ -461,9 +467,57 @@ void MainMenu::set_labels() {
 	   UI::PanelStyle::kFsMenu));
 
 	replay_.set_title(_("Watch Replay"));
-	replay_.set_tooltip(as_tooltip_text_with_hotkey(
-	   _("Watch the replay of an old game"),
-	   shortcut_string_for(KeyboardShortcut::kMainMenuReplay, true), UI::PanelStyle::kFsMenu));
+	{
+		std::string replay_tooltip =
+		   format("<p>%s %s</p>",
+		          as_font_tag(UI::FontStyle::kFsTooltip, _("Watch the replay of an old game")),
+			       as_font_tag(UI::FontStyle::kFsTooltipHotkey,
+		                      shortcut_string_for(KeyboardShortcut::kMainMenuReplay, true)));
+
+		filename_for_last_replay_ = "";
+		std::optional<SavegameData> newest_replay = newest_saved_game_or_replay(true);
+		if (newest_replay.has_value()) {
+			filename_for_last_replay_ = newest_replay->filename;
+			replay_tooltip +=
+			   as_vspace(g_style_manager->styled_size(UI::StyledSize::kFsTextDefaultGap));
+			replay_tooltip +=
+			   /** TRANSLATORS: <Ctrl+click> / <hotkey>: <action> */
+			   format(format("<p>%s</p>", _("%s / %s: %s")),
+			          as_font_tag(UI::FontStyle::kFsTooltipHotkey, _("Ctrl+click")),
+			          as_font_tag(UI::FontStyle::kFsTooltipHotkey,
+			                      shortcut_string_for(KeyboardShortcut::kMainMenuReplayLast, true)),
+			          as_font_tag(UI::FontStyle::kFsTooltip, _("Open last saved replay")));
+			replay_tooltip +=
+			   as_font_tag(UI::FontStyle::kFsTooltip,
+			      format("<p>%s<br>%s<br>%s<br>%s<br>%s<br>%s</p>",
+				      // Must not use large font here
+			         as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                     /* strip leading "replays/" and trailing ".wry" */
+			                     filename_for_last_replay_.substr(
+			                        kReplayDir.length() + 1, filename_for_last_replay_.length() -
+			                                                 kReplayDir.length() -
+			                                                 kReplayExtension.length() - 1)),
+			         format(_("Map: %s"),
+			                as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                            newest_replay->mapname)),
+			         format(_("Win Condition: %s"),
+			                as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                            newest_replay->wincondition)),
+			         format(_("Players: %s"),
+			                as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                            newest_replay->nrplayers)),
+			         format(_("Gametime: %s"),
+			                as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                            newest_replay->gametime)),
+			         /** TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today,
+			          * 10:30'
+			          */
+			         format(_("Saved: %s"),
+			                as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                            newest_replay->savedatestring))));
+		}
+		replay_.set_tooltip(as_richtext(replay_tooltip));
+	}
 
 	addons_.set_title(_("Add-Ons"));
 	addons_.set_tooltip(as_tooltip_text_with_hotkey(
@@ -555,6 +609,9 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 			return true;
 		}
 		if (check_match_shortcut(KeyboardShortcut::kMainMenuReplay, MenuTarget::kReplay)) {
+			return true;
+		}
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuReplayLast, MenuTarget::kReplayLast)) {
 			return true;
 		}
 		if (check_match_shortcut(KeyboardShortcut::kMainMenuTutorial, MenuTarget::kTutorial)) {
@@ -864,9 +921,17 @@ void MainMenu::action(const MenuTarget t) {
 		break;
 
 	case MenuTarget::kReplay:
-		if (Widelands::Game* g = create_safe_game()) {
+		if (Widelands::Game* g = create_safe_game(); g != nullptr) {
 			menu_capsule_.clear_content();
 			new LoadGame(menu_capsule_, *g, *new SinglePlayerGameSettingsProvider(), true, true);
+		}
+		break;
+	case MenuTarget::kReplayLast:
+		if (!filename_for_last_replay_.empty()) {
+			if (Widelands::Game* g = create_safe_game(); g != nullptr) {
+				menu_capsule_.clear_content();
+				g->run_replay(filename_for_last_replay_, "");
+			}
 		}
 		break;
 	case MenuTarget::kLoadGame:

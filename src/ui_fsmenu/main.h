@@ -67,6 +67,9 @@ enum class MenuTarget {
 	kEditorRandom,
 	kEditorContinue,
 	kEditorLoad,
+
+	// virtual for ctrl+click and keyboard shortcut
+	kReplayLast,
 };
 
 /**
@@ -126,7 +129,9 @@ private:
 	UI::Textarea version_;
 	UI::Textarea copyright_;
 
-	std::string filename_for_continue_playing_, filename_for_continue_editing_;
+	std::string filename_for_continue_playing_;
+	std::string filename_for_continue_editing_;
+	std::string filename_for_last_replay_;
 
 	const Image* splashscreen_;
 	const Image* title_image_;
