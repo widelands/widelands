@@ -848,18 +848,22 @@ void WLApplication::run() {
 		std::string title;
 		std::string message;
 		try {
-			if (game_type_ == GameType::kReplay) {
+			bool start_replay = (game_type_ == GameType::kReplay);
+			if (filename_ == "last") {
+				std::optional<SavegameData> data = newest_saved_game_or_replay(start_replay);
+				if (data.has_value()) {
+					filename_ = data->filename;
+				} else {
+					// Parameters will be reordered by FileNotFoundError::what()
+					if (start_replay) {
+						throw(FileNotFoundError("--replay", _("No last saved replay."), filename_));
+					}
+					throw(FileNotFoundError("--loadgame", _("No last saved game."), filename_));
+				}
+			}
+			if (start_replay) {
 				game.run_replay(filename_, "");
 			} else {
-				if (filename_ == "last") {
-					std::optional<SavegameData> data = newest_saved_singleplayer_game();
-					if (data.has_value()) {
-						filename_ = data->filename;
-					} else {
-						// Yes, needs reordering
-						throw(FileNotFoundError("--loadgame", _("No last saved game."), filename_));
-					}
-				}
 				game.set_ai_training_mode(get_config_bool("ai_training", false));
 				game.run_load_game(filename_, script_to_run_);
 			}

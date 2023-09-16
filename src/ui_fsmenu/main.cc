@@ -364,7 +364,7 @@ void MainMenu::set_labels() {
 	// every language switch because it contains localized strings.
 	{
 		filename_for_continue_playing_ = "";
-		std::optional<SavegameData> newest_singleplayer = newest_saved_singleplayer_game();
+		std::optional<SavegameData> newest_singleplayer = newest_saved_game_or_replay();
 		if (newest_singleplayer.has_value()) {
 			filename_for_continue_playing_ = newest_singleplayer->filename;
 			singleplayer_.add(

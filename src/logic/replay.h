@@ -84,9 +84,14 @@ struct ReplayfileSavegameExtractor {
 		return temp_file_.empty() ? source_file_ : temp_file_;
 	}
 
+	bool is_replay() {
+		return is_replay_;
+	}
+
 private:
 	const std::string& source_file_;
 	std::string temp_file_;
+	bool is_replay_{false};
 };
 
 }  // namespace Widelands

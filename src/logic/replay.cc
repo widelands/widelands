@@ -359,6 +359,8 @@ ReplayfileSavegameExtractor::ReplayfileSavegameExtractor(const std::string& game
 		throw wexception("%s not a valid replay file", source_file_.c_str());
 	}
 
+	is_replay_ = true;
+
 	const uint8_t packet_version = fr.unsigned_8();
 	if (packet_version != kCurrentPacketVersion) {
 		throw UnhandledVersionError(

@@ -41,16 +41,20 @@ private:
 	void add_error_info(SavegameData& gamedata, std::string errormessage) const;
 	void add_time_info(SavegameData& gamedata, const Widelands::GamePreloadPacket& gpdp) const;
 	void add_sub_dir(const std::string& gamefilename, std::vector<SavegameData>& loaded_games) const;
-	void load_savegame_from_directory(const std::string& gamefilename,
-	                                  std::vector<SavegameData>& loaded_games) const;
-	void load_savegame_from_file(const std::string& gamefilename,
-	                             std::vector<SavegameData>& loaded_games) const;
 	void load(const std::string& to_be_loaded, std::vector<SavegameData>& loaded_games) const;
 	[[nodiscard]] virtual bool is_valid_savegame(const std::string& filename) const {
 		return ends_with(filename, kSavegameExtension);
 	}
 
 	Widelands::Game& game_;
+
+protected:
+	virtual void load_savegame_from_directory(const std::string& gamefilename,
+	                                          std::vector<SavegameData>& loaded_games,
+	                                          bool load_for_replay = false) const;
+	virtual void load_savegame_from_file(const std::string& gamefilename,
+	                                     std::vector<SavegameData>& loaded_games,
+	                                     bool load_for_replay = false) const;
 };
 
 class ReplayLoader : public SavegameLoader {
@@ -63,6 +67,13 @@ private:
 	}
 
 	[[nodiscard]] bool is_valid_gametype(const SavegameData& gamedata) const override;
+
+	void load_savegame_from_directory(const std::string& gamefilename,
+	                                  std::vector<SavegameData>& loaded_games,
+	                                  bool /* load_for_replay */) const override;
+	void load_savegame_from_file(const std::string& gamefilename,
+	                             std::vector<SavegameData>& loaded_games,
+	                             bool /* load_for_replay */) const override;
 };
 
 class MultiPlayerLoader : public SavegameLoader {
@@ -93,6 +104,6 @@ private:
 	[[nodiscard]] bool is_valid_gametype(const SavegameData& gamedata) const override;
 };
 
-std::optional<SavegameData> newest_saved_singleplayer_game();
+std::optional<SavegameData> newest_saved_game_or_replay(bool find_replay = false);
 
 #endif  // WL_WUI_SAVEGAMELOADER_H
