@@ -185,16 +185,16 @@ MapData MapData::create_empty_dir(const std::string& current_dir) {
 // static
 MapData MapData::create_directory(const std::string& directory) {
 	std::string localized_name = FileSystem::fs_filename(directory.c_str());
-	if (directory == "maps/MP_Scenarios") {
+	if (directory == kMultiPlayerScenarioDirFull) {
 		/** TRANSLATORS: Directory name for MP Scenarios in map selection */
 		localized_name = _("Multiplayer Scenarios");
-	} else if (directory == "maps/SP_Scenarios") {
+	} else if (directory == kSinglePlayerScenarioDirFull) {
 		/** TRANSLATORS: Directory name for SP Scenarios in map selection */
 		localized_name = _("Singleplayer Scenarios");
-	} else if (directory == kMapsDir + "/" + kMyMapsDir) {
+	} else if (directory == kMyMapsDirFull) {
 		/** TRANSLATORS: Directory name for user maps in map selection */
 		localized_name = _("My Maps");
-	} else if (directory == kMapsDir + "/" + kDownloadedMapsDir) {
+	} else if (directory == kDownloadedMapsDirFull) {
 		/** TRANSLATORS: Directory name for downloaded maps in map selection */
 		localized_name = _("Downloaded Maps");
 	} else if (starts_with(directory, kAddOnDir)) {

@@ -19,6 +19,7 @@
 #ifndef WL_WUI_SAVEGAMELOADER_H
 #define WL_WUI_SAVEGAMELOADER_H
 
+#include <optional>
 #include <string>
 #include <vector>
 
@@ -91,5 +92,7 @@ private:
 
 	[[nodiscard]] bool is_valid_gametype(const SavegameData& gamedata) const override;
 };
+
+std::optional<SavegameData> newest_saved_singleplayer_game();
 
 #endif  // WL_WUI_SAVEGAMELOADER_H

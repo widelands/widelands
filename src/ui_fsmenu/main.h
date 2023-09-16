@@ -100,9 +100,6 @@ public:
 	int16_t calc_desired_window_width(UI::Window::WindowLayoutID);
 	int16_t calc_desired_window_height(UI::Window::WindowLayoutID);
 
-	using MapEntry = std::pair<MapData, Widelands::MapVersion>;
-	static void find_maps(const std::string& directory, std::vector<MapEntry>& results);
-
 	Widelands::Game* create_safe_game(bool show_error = true);
 
 protected:

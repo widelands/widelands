@@ -1122,13 +1122,17 @@ void EditorInteractive::run_editor(UI::Panel* error_message_parent,
                                    const EditorInteractive::Init init,
                                    const std::string& filename,
                                    const std::string& script_to_run) {
+	std::string error_message;
 	try {
 		EditorInteractive::do_run_editor(init, filename, script_to_run);
 	} catch (const std::exception& e) {
+		error_message = e.what();
+	}
+	if (!error_message.empty()) {
 		log_err("##############################\n"
 		        "  FATAL EXCEPTION in editor: %s\n"
 		        "##############################\n",
-		        e.what());
+		        error_message.c_str());
 		if (error_message_parent == nullptr) {
 			return;
 		}
@@ -1142,7 +1146,7 @@ void EditorInteractive::run_editor(UI::Panel* error_message_parent,
 		        "this problem to help us improve Widelands. You will find related messages in the "
 		        "standard output (stdout.txt on Windows). You are using version %2$s.\n"
 		        "Please add this information to your report."),
-		      e.what(), build_ver_details()),
+		      error_message, build_ver_details()),
 		   UI::WLMessageBox::MBoxType::kOk);
 		m.run<UI::Panel::Returncodes>();
 	}

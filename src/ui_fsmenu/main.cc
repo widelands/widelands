@@ -20,6 +20,7 @@
 
 #include <cstdlib>
 #include <memory>
+#include <optional>
 
 #include <SDL_timer.h>
 
@@ -54,6 +55,7 @@
 #include "ui_fsmenu/scenario_select.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
+#include "wui/maptable.h"
 #include "wui/savegameloader.h"
 
 namespace FsMenu {
@@ -330,30 +332,6 @@ void MainMenu::become_modal_again(UI::Panel& prevmodal) {
 	}
 }
 
-void MainMenu::find_maps(const std::string& directory, std::vector<MapEntry>& results) {
-	for (const std::string& file : g_fs->list_directory(directory)) {
-		Widelands::Map map;
-		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(file);
-		if (ml) {
-			try {
-				map.set_filename(file);
-				ml->preload_map(true, nullptr);
-				if (map.version().map_version_timestamp > 0) {
-					MapData::MapType type = map.scenario_types() == Widelands::Map::SP_SCENARIO ?
-                                          MapData::MapType::kScenario :
-                                          MapData::MapType::kNormal;
-					results.emplace_back(
-					   MapData(map, file, type, MapData::DisplayType::kFilenames), map.version());
-				}
-			} catch (...) {
-				// invalid file – silently ignore
-			}
-		} else if (g_fs->is_directory(file)) {
-			find_maps(file, results);
-		}
-	}
-}
-
 void MainMenu::set_labels() {
 	{
 		// TODO(Nordfriese): Code duplication, the same code is used in InteractiveBase
@@ -386,49 +364,38 @@ void MainMenu::set_labels() {
 	// every language switch because it contains localized strings.
 	{
 		filename_for_continue_playing_ = "";
-		std::unique_ptr<Widelands::Game> game(create_safe_game(false));
-		if (game != nullptr) {
-			SinglePlayerLoader loader(*game);
-			std::vector<SavegameData> games = loader.load_files(kSaveDir);
-			SavegameData* newest_singleplayer = nullptr;
-			for (SavegameData& data : games) {
-				if (!data.is_directory() && data.is_singleplayer() &&
-				    (newest_singleplayer == nullptr || newest_singleplayer->compare_save_time(data))) {
-					newest_singleplayer = &data;
-				}
-			}
-			if (newest_singleplayer != nullptr) {
-				filename_for_continue_playing_ = newest_singleplayer->filename;
-				singleplayer_.add(
-				   _("Continue Playing"), MenuTarget::kContinueLastsave, nullptr, false,
-				   format("%s<br>%s<br>%s<br>%s<br>%s<br>%s",
-				          g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
-				             .as_font_tag(
-				                /* strip leading "save/" and trailing ".wgf" */
-				                filename_for_continue_playing_.substr(
-				                   kSaveDir.length() + 1, filename_for_continue_playing_.length() -
-				                                             kSaveDir.length() -
-				                                             kSavegameExtension.length() - 1)),
-				          format(_("Map: %s"),
-				                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-				                    .as_font_tag(newest_singleplayer->mapname)),
-				          format(_("Win Condition: %s"),
-				                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-				                    .as_font_tag(newest_singleplayer->wincondition)),
-				          format(_("Players: %s"),
-				                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-				                    .as_font_tag(newest_singleplayer->nrplayers)),
-				          format(_("Gametime: %s"),
-				                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-				                    .as_font_tag(newest_singleplayer->gametime)),
-				          /** TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today,
-				           * 10:30'
-				           */
-				          format(_("Saved: %s"),
-				                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-				                    .as_font_tag(newest_singleplayer->savedatestring))),
-				   shortcut_string_for(KeyboardShortcut::kMainMenuContinuePlaying, false));
-			}
+		std::optional<SavegameData> newest_singleplayer = newest_saved_singleplayer_game();
+		if (newest_singleplayer.has_value()) {
+			filename_for_continue_playing_ = newest_singleplayer->filename;
+			singleplayer_.add(
+			   _("Continue Playing"), MenuTarget::kContinueLastsave, nullptr, false,
+			   format("%s<br>%s<br>%s<br>%s<br>%s<br>%s",
+			          g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
+			             .as_font_tag(
+			                /* strip leading "save/" and trailing ".wgf" */
+			                filename_for_continue_playing_.substr(
+			                   kSaveDir.length() + 1, filename_for_continue_playing_.length() -
+			                                             kSaveDir.length() -
+			                                             kSavegameExtension.length() - 1)),
+			          format(_("Map: %s"),
+			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                    .as_font_tag(newest_singleplayer->mapname)),
+			          format(_("Win Condition: %s"),
+			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                    .as_font_tag(newest_singleplayer->wincondition)),
+			          format(_("Players: %s"),
+			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                    .as_font_tag(newest_singleplayer->nrplayers)),
+			          format(_("Gametime: %s"),
+			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                    .as_font_tag(newest_singleplayer->gametime)),
+			          /** TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today,
+			           * 10:30'
+			           */
+			          format(_("Saved: %s"),
+			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                    .as_font_tag(newest_singleplayer->savedatestring))),
+			   shortcut_string_for(KeyboardShortcut::kMainMenuContinuePlaying, false));
 		}
 	}
 
@@ -452,17 +419,9 @@ void MainMenu::set_labels() {
 
 	{
 		filename_for_continue_editing_ = "";
-		std::vector<MapEntry> v;
-		find_maps("maps/My_Maps", v);
-		MapEntry* last_edited = nullptr;
-		for (MapEntry& m : v) {
-			if (last_edited == nullptr ||
-			    m.second.map_version_timestamp > last_edited->second.map_version_timestamp) {
-				last_edited = &m;
-			}
-		}
-		if (last_edited != nullptr) {
-			filename_for_continue_editing_ = last_edited->first.filenames.at(0);
+		std::optional<MapData> last_edited = newest_edited_map();
+		if (last_edited.has_value()) {
+			filename_for_continue_editing_ = last_edited->filenames.at(0);
 			editor_.add(
 			   _("Continue Editing"), MenuTarget::kEditorContinue, nullptr, false,
 			   format("%s<br>%s<br>%s<br>%s<br>%s",
@@ -473,17 +432,17 @@ void MainMenu::set_labels() {
 			                   13, filename_for_continue_editing_.length() - 17)),
 			          format(_("Name: %s"),
 			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(last_edited->first.localized_name)),
+			                    .as_font_tag(last_edited->localized_name)),
 			          format(_("Size: %s"),
 			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(format(_("%1$u×%2$u"), last_edited->first.width,
-			                                        last_edited->first.height))),
+			                    .as_font_tag(format(_("%1$u×%2$u"), last_edited->width,
+			                                        last_edited->height))),
 			          format(_("Players: %s"),
 			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(std::to_string(last_edited->first.nrplayers))),
+			                    .as_font_tag(std::to_string(last_edited->nrplayers))),
 			          format(_("Description: %s"),
 			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(last_edited->first.description))),
+			                    .as_font_tag(last_edited->description))),
 			   shortcut_string_for(KeyboardShortcut::kMainMenuContinueEditing, false));
 		}
 	}

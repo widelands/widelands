@@ -22,6 +22,7 @@
 #include "base/time_string.h"
 #include "game_io/game_loader.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/game.h"
 #include "logic/replay.h"
 
 SavegameLoader::SavegameLoader(Widelands::Game& game) : game_(game) {
@@ -224,4 +225,28 @@ EverythingLoader::EverythingLoader(Widelands::Game& game) : SavegameLoader(game)
 
 bool EverythingLoader::is_valid_gametype(const SavegameData& /*gamedata*/) const {
 	return true;
+}
+
+std::optional<SavegameData> newest_saved_singleplayer_game() {
+	std::unique_ptr<Widelands::Game> game = nullptr;
+	try {
+		game.reset(new Widelands::Game());
+	} catch (...) {
+	}
+	if (game == nullptr) {
+		return std::nullopt;
+	}
+	SinglePlayerLoader loader(*game);
+	std::vector<SavegameData> games = loader.load_files(kSaveDir);
+	SavegameData* newest = nullptr;
+	for (SavegameData& data : games) {
+		if (!data.is_directory() && data.is_singleplayer() &&
+		    (newest == nullptr || newest->compare_save_time(data))) {
+			newest = &data;
+		}
+	}
+	if (newest == nullptr) {
+		return std::nullopt;
+	}
+	return *newest;
 }

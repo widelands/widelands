@@ -44,6 +44,7 @@
 #include "base/random.h"
 #include "base/string.h"
 #include "base/time_string.h"
+#include "base/warning.h"
 #include "base/wexception.h"
 #include "build_info.h"
 #include "config.h"
@@ -89,6 +90,7 @@
 #include "wui/game_chat_panel.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
+#include "wui/maptable.h"
 
 std::string get_executable_directory(const bool logdir) {
 	std::string executabledir;
@@ -307,8 +309,8 @@ void WLApplication::setup_homedir() {
 		// Create directory structure
 		g_fs->ensure_directory_exists("save");
 		g_fs->ensure_directory_exists("replays");
-		g_fs->ensure_directory_exists(kMapsDir + "/" + kMyMapsDir);
-		g_fs->ensure_directory_exists(kMapsDir + "/" + kDownloadedMapsDir);
+		g_fs->ensure_directory_exists(kMyMapsDirFull);
+		g_fs->ensure_directory_exists(kDownloadedMapsDirFull);
 
 		g_fs->ensure_directory_exists(kCrashDir);
 		segfault_backtrace_dir = homedir_;
@@ -815,8 +817,31 @@ void WLApplication::run() {
 		if (filename_.empty()) {
 			EditorInteractive::run_editor(nullptr, EditorInteractive::Init::kDefault);
 		} else {
-			EditorInteractive::run_editor(
-			   nullptr, EditorInteractive::Init::kLoadMapDirectly, filename_, script_to_run_);
+			std::string title;
+			std::string message;
+			try {
+				if (filename_ == "last") {
+					std::optional<MapData> map = newest_edited_map();
+					if (map.has_value()) {
+						filename_ = map->filenames.at(0);
+					} else {
+						throw(WLWarning(_("No Last Edited Map"),
+						                _("Widelands could not find the last edited map.")));
+					}
+				}
+				EditorInteractive::run_editor(
+				   nullptr, EditorInteractive::Init::kLoadMapDirectly, filename_, script_to_run_);
+			} catch (const WLWarning& e) {
+				title = e.title();
+				message = e.what();
+			}
+			if (!message.empty()) {
+				g_sh->change_music(Songset::kMenu);
+				FsMenu::MainMenu m(true);
+				m.show_messagebox(title, message);
+				log_err("%s\n", message.c_str());
+				m.main_loop();
+			}
 		}
 	} else if (game_type_ == GameType::kReplay || game_type_ == GameType::kLoadGame) {
 		Widelands::Game game;
@@ -826,6 +851,15 @@ void WLApplication::run() {
 			if (game_type_ == GameType::kReplay) {
 				game.run_replay(filename_, "");
 			} else {
+				if (filename_ == "last") {
+					std::optional<SavegameData> data = newest_saved_singleplayer_game();
+					if (data.has_value()) {
+						filename_ = data->filename;
+					} else {
+						// Yes, needs reordering
+						throw(FileNotFoundError("--loadgame", _("No last saved game."), filename_));
+					}
+				}
 				game.set_ai_training_mode(get_config_bool("ai_training", false));
 				game.run_load_game(filename_, script_to_run_);
 			}
