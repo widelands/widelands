@@ -76,15 +76,21 @@ void fill_parameter_vector() {
 		false},
 	  {"", "scenario", _("FILENAME"),
 		_("Start the map `FILENAME` directly as a singleplayer scenario."), false},
-	  {"", "loadgame", _("FILENAME"), _("Load the savegame `FILENAME` directly."), false},
-	  {"", "replay", _("FILENAME"), _("Load the replay `FILENAME` directly."), false},
+	  /** TRANSLATORS: Do not translate `last` */
+	  {"", "loadgame", _("FILENAME|last"),
+	   /** TRANSLATORS: Do not translate `=last` */
+	   _("Load the savegame `FILENAME` directly or the last saved game if `=last` is used."), false},
+	  {"", "replay", _("FILENAME|last"),
+	   /** TRANSLATORS: Do not translate `=last` */
+	   _("Load the replay `FILENAME` directly or the last saved replay if `=last` is used."), false},
+	  {"", "editor", "",
+	   /** TRANSLATORS: Do not translate `=last` */
+		_("Start the Widelands map editor directly. You can add `=FILENAME` to directly load the map "
+		  "`FILENAME` in the editor or `=last` to load the last edited map."),
+		false},
 	  {"", "script", _("FILENAME"),
 		_("Run the given Lua script after initialization. Only valid with --scenario, --loadgame, or "
 		  "--editor."),
-		false},
-	  {"", "editor", "",
-		_("Start the Widelands map editor directly. You can add `=FILENAME` to directly load the map "
-		  "`FILENAME` in the editor."),
 		false},
 	  /// Misc
 	  {"", "nosound", "", _("Start the game with sound disabled."), false},
