@@ -1427,7 +1427,7 @@ UI::Panel* LuaPanel::do_create_child_editbox(lua_State* L, UI::Panel* parent) {
 
 UI::Panel* LuaPanel::do_create_child_listselect(lua_State* L, UI::Panel* parent) {
 	std::string name = get_table_string(L, "name", true);
-	UI::ListselectLayout layout = get_table_listselect_layout(L, "layout", false);
+	UI::ListselectLayout layout = get_table_listselect_layout(L, "type", false);
 	std::string datatype = get_table_string(L, "datatype", true);
 
 	std::string tooltip = get_table_string(L, "tooltip", false);
@@ -2035,7 +2035,10 @@ int LuaButton::set_enabled(lua_State* L) {
    .. method:: press()
 
       Press and hold this button. This is mainly to visualize a pressing
-      event in tutorials
+      event in tutorials.
+
+      Holding a button does not generate a Clicked event.
+      Use :meth:`click` to release the button.
 */
 int LuaButton::press(lua_State* /* L */) {
 	log_info("Pressing button '%s'\n", get()->get_name().c_str());
