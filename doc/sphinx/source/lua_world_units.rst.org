@@ -60,6 +60,8 @@ attribute tables are empty.
 
 Every unit defined by an add-on needs to define exactly one of the special attributes ``__skip_if_exists`` or ``__replace_if_exists``. This attribute determines how the engine proceeds if a description of the same name has already been registered. Units not contained in an add-on may not use these attributes.
 
+Free attributes are only supported for immovables and critters.
+
 .. toctree::
    :maxdepth: 3
 
