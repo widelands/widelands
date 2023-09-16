@@ -635,8 +635,9 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 				float opacity =
 				   f->seeing == Widelands::VisibleState::kVisible ? 1.f : kBuildhelpOpacityWeak;
 				if (picking_starting_pos) {
-					caps = (show_port_space != HasExpeditionPortSpace::kNone || buildhelp()) ? f->fcoords.field->nodecaps() :
-                                                       Widelands::CAPS_NONE;
+					caps = (show_port_space != HasExpeditionPortSpace::kNone || buildhelp()) ?
+                         f->fcoords.field->nodecaps() :
+                         Widelands::CAPS_NONE;
 				} else if (show_port_space != HasExpeditionPortSpace::kNone) {
 					caps = maxcaps;
 					if (show_port_space == HasExpeditionPortSpace::kOther) {
