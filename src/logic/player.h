@@ -156,6 +156,14 @@ public:
 	 */
 	bool is_defeated() const;
 
+	// For cheating
+	void set_see_all(bool const t) {
+		see_all_ = t;
+	}
+	bool see_all() const {
+		return see_all_ || is_picking_custom_starting_position_;
+	}
+
 	/// Data that are used and managed by AI. They are here to have it saved as a part of player's
 	/// data
 	struct AiPersistentState {
@@ -575,19 +583,19 @@ public:
 	}
 	void set_muted(DescriptionIndex, bool mute);
 
-	// Ordered to keep compatibility with old bool value in savegames
-	enum class StartingPositionState { kFinal = 0, kPicking = 1, kSetting = 2 };
-
 	void start_picking_custom_starting_position() {
-		assert(starting_position_state_ == StartingPositionState::kFinal);
-		starting_position_state_ = StartingPositionState::kPicking;
+		assert(!is_picking_custom_starting_position_);
+		is_picking_custom_starting_position_ = true;
 	}
 	bool pick_custom_starting_position(const Coords&);
 	void do_pick_custom_starting_position(const Coords&);
-	StartingPositionState get_starting_position_state() const {
-		return starting_position_state_;
+	bool is_picking_custom_starting_position() const {
+		return is_picking_custom_starting_position_;
 	}
 	bool get_starting_position_suitability(const Coords&) const;
+	bool local_player_starting_position_is_pending() const {
+		return local_player_starting_position_is_pending_;
+	}
 
 	bool additional_expedition_items_allowed() const {
 		return allow_additional_expedition_items_;
@@ -603,14 +611,6 @@ public:
 
 	uint8_t initialization_index() const {
 		return initialization_index_;
-	}
-
-	// For cheating
-	void set_see_all(bool const t) {
-		see_all_ = t;
-	}
-	bool see_all() const {
-		return see_all_ || starting_position_state_ == StartingPositionState::kPicking;
 	}
 
 private:
@@ -725,7 +725,9 @@ private:
 	uint8_t initialization_index_;
 	bool see_all_{false};
 	bool random_tribe_{false};
-	StartingPositionState starting_position_state_{StartingPositionState::kFinal};
+	bool is_picking_custom_starting_position_{false};
+	// Only used for the local player
+	bool local_player_starting_position_is_pending_{false};
 	bool allow_additional_expedition_items_{true};
 	bool hidden_from_general_statistics_{false};
 
