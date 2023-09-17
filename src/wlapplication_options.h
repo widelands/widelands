@@ -106,6 +106,7 @@ enum class KeyboardShortcut : uint16_t {
 	kMainMenuEditorLoad,
 	kMainMenuContinueEditing,
 	kMainMenuReplay,
+	kMainMenuLoadReplay,
 	kMainMenuReplayLast,
 	kMainMenuOptions,
 	kMainMenuAddons,

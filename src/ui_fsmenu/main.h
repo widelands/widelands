@@ -117,7 +117,7 @@ private:
 
 	UI::Dropdown<MenuTarget> singleplayer_;
 	UI::Dropdown<MenuTarget> multiplayer_;
-	UI::Button replay_;
+	UI::Dropdown<MenuTarget> replay_;
 	UI::Dropdown<MenuTarget> editor_;
 	UI::Button addons_;
 	UI::Button options_;

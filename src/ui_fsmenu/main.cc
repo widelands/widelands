@@ -141,7 +141,18 @@ MainMenu::MainMenu(const bool skip_init)
                   UI::PanelStyle::kFsMenu,
                   UI::ButtonStyle::kFsMenuMenu,
                   [this](MenuTarget t) { action(t); }),
-     replay_(&vbox1_, "replay", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
+     replay_(&vbox1_,
+             "replay",
+              0,
+              0,
+              butw_,
+              6,
+              buth_,
+              "",
+              UI::DropdownType::kTextualMenu,
+              UI::PanelStyle::kFsMenu,
+              UI::ButtonStyle::kFsMenuMenu,
+              [this](MenuTarget t) { action(t); }),
      editor_(&vbox1_,
              "editor",
              0,
@@ -203,13 +214,7 @@ MainMenu::MainMenu(const bool skip_init)
 	singleplayer_.selected.connect([this]() { action(singleplayer_.get_selected()); });
 	multiplayer_.selected.connect([this]() { action(multiplayer_.get_selected()); });
 	editor_.selected.connect([this]() { action(editor_.get_selected()); });
-	replay_.sigclicked.connect([this]() {
-		if ((SDL_GetModState() & KMOD_CTRL) != 0) {
-			action(MenuTarget::kReplayLast);
-		} else {
-			action(MenuTarget::kReplay);
-		}
-	});
+	replay_.selected.connect([this]() { action(replay_.get_selected()); });
 	addons_.sigclicked.connect([this]() { action(MenuTarget::kAddOns); });
 	options_.sigclicked.connect([this]() { action(MenuTarget::kOptions); });
 	about_.sigclicked.connect([this]() { action(MenuTarget::kAbout); });
@@ -350,6 +355,7 @@ void MainMenu::set_labels() {
 	singleplayer_.clear();
 	multiplayer_.clear();
 	editor_.clear();
+	replay_.clear();
 
 	singleplayer_.add(_("New Game"), MenuTarget::kNewGame, nullptr, false, _("Begin a new game"),
 	                  shortcut_string_for(KeyboardShortcut::kMainMenuNew, false));
@@ -452,9 +458,48 @@ void MainMenu::set_labels() {
 		}
 	}
 
+	replay_.add(_("Load Replay"), MenuTarget::kReplay, nullptr, false,
+	                  _("Watch the replay of an old game"),
+	                  shortcut_string_for(KeyboardShortcut::kMainMenuLoadReplay, false));
+	{
+		filename_for_last_replay_ = "";
+		std::optional<SavegameData> newest_replay = newest_saved_game_or_replay(true);
+		if (newest_replay.has_value()) {
+			filename_for_last_replay_ = newest_replay->filename;
+			replay_.add(_("Watch last saved replay"), MenuTarget::kReplayLast, nullptr, false,
+			            format("%s<br>%s<br>%s<br>%s<br>%s<br>%s",
+			                   as_font_tag(UI::FontStyle::kFsTooltipHeader,
+			                              /* strip leading "replays/" and trailing ".wry" */
+			                              filename_for_last_replay_.substr(
+			                                 kReplayDir.length() + 1,
+			                                 filename_for_last_replay_.length() - kReplayDir.length() -
+			                                 kReplayExtension.length() - 1)),
+			                  format(_("Map: %s"),
+			                         as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                                     newest_replay->mapname)),
+			                  format(_("Win Condition: %s"),
+			                         as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                                     newest_replay->wincondition)),
+			                  format(_("Players: %s"),
+			                         as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                                     newest_replay->nrplayers)),
+			                  format(_("Gametime: %s"),
+			                         as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                                     newest_replay->gametime)),
+			                  /** TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today,
+			                   * 10:30'
+			                   */
+			                  format(_("Saved: %s"),
+			                         as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
+			                                     newest_replay->savedatestring))),
+			            shortcut_string_for(KeyboardShortcut::kMainMenuReplayLast, false));
+		}
+	}
+
 	singleplayer_.set_label(_("Single Player…"));
 	multiplayer_.set_label(_("Multiplayer…"));
 	editor_.set_label(_("Editor…"));
+	replay_.set_label(_("Watch Replay…"));
 	singleplayer_.set_tooltip(as_tooltip_text_with_hotkey(
 	   _("Begin or load a single-player campaign or free game"),
 	   shortcut_string_for(KeyboardShortcut::kMainMenuSP, true), UI::PanelStyle::kFsMenu));
@@ -464,59 +509,9 @@ void MainMenu::set_labels() {
 	editor_.set_tooltip(as_tooltip_text_with_hotkey(
 	   _("Launch the map editor"), shortcut_string_for(KeyboardShortcut::kMainMenuE, true),
 	   UI::PanelStyle::kFsMenu));
-
-	replay_.set_title(_("Watch Replay"));
-	{
-		std::string replay_tooltip =
-		   format("<p>%s %s</p>",
-		          as_font_tag(UI::FontStyle::kFsTooltip, _("Watch the replay of an old game")),
-			       as_font_tag(UI::FontStyle::kFsTooltipHotkey,
-		                      shortcut_string_for(KeyboardShortcut::kMainMenuReplay, true)));
-
-		filename_for_last_replay_ = "";
-		std::optional<SavegameData> newest_replay = newest_saved_game_or_replay(true);
-		if (newest_replay.has_value()) {
-			filename_for_last_replay_ = newest_replay->filename;
-			replay_tooltip +=
-			   as_vspace(g_style_manager->styled_size(UI::StyledSize::kFsTextDefaultGap));
-			replay_tooltip +=
-			   /** TRANSLATORS: <Ctrl+click> / <hotkey>: <action> */
-			   format(format("<p>%s</p>", _("%1$s / %2$s: %3$s")),
-			          as_font_tag(UI::FontStyle::kFsTooltipHotkey, _("Ctrl+click")),
-			          as_font_tag(UI::FontStyle::kFsTooltipHotkey,
-			                      shortcut_string_for(KeyboardShortcut::kMainMenuReplayLast, true)),
-			          as_font_tag(UI::FontStyle::kFsTooltip, _("Open last saved replay")));
-			replay_tooltip +=
-			   as_font_tag(UI::FontStyle::kFsTooltip,
-			      format("<p>%s<br>%s<br>%s<br>%s<br>%s<br>%s</p>",
-				      // Must not use large font here
-			         as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
-			                     /* strip leading "replays/" and trailing ".wry" */
-			                     filename_for_last_replay_.substr(
-			                        kReplayDir.length() + 1, filename_for_last_replay_.length() -
-			                                                 kReplayDir.length() -
-			                                                 kReplayExtension.length() - 1)),
-			         format(_("Map: %s"),
-			                as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
-			                            newest_replay->mapname)),
-			         format(_("Win Condition: %s"),
-			                as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
-			                            newest_replay->wincondition)),
-			         format(_("Players: %s"),
-			                as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
-			                            newest_replay->nrplayers)),
-			         format(_("Gametime: %s"),
-			                as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
-			                            newest_replay->gametime)),
-			         /** TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today,
-			          * 10:30'
-			          */
-			         format(_("Saved: %s"),
-			                as_font_tag(UI::FontStyle::kFsMenuInfoPanelParagraph,
-			                            newest_replay->savedatestring))));
-		}
-		replay_.set_tooltip(as_richtext(replay_tooltip));
-	}
+	replay_.set_tooltip(as_tooltip_text_with_hotkey(
+	   _("Watch again a recorded earlier game"),
+	   shortcut_string_for(KeyboardShortcut::kMainMenuReplay, true), UI::PanelStyle::kFsMenu));
 
 	addons_.set_title(_("Add-Ons"));
 	addons_.set_tooltip(as_tooltip_text_with_hotkey(
@@ -607,7 +602,7 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 		if (check_match_shortcut(KeyboardShortcut::kMainMenuLoad, MenuTarget::kLoadGame)) {
 			return true;
 		}
-		if (check_match_shortcut(KeyboardShortcut::kMainMenuReplay, MenuTarget::kReplay)) {
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuLoadReplay, MenuTarget::kReplay)) {
 			return true;
 		}
 		if (check_match_shortcut(KeyboardShortcut::kMainMenuReplayLast, MenuTarget::kReplayLast)) {
@@ -657,6 +652,10 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 		}
 		if (matches_shortcut(KeyboardShortcut::kMainMenuE, code)) {
 			editor_.toggle();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kMainMenuReplay, code)) {
+			replay_.toggle();
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kMainMenuQuit, code)) {
