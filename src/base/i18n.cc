@@ -26,6 +26,7 @@
 
 #include <cstdlib>
 #include <map>
+#include <memory>
 
 #include "base/log.h"
 #include "base/string.h"
@@ -425,6 +426,16 @@ std::string join_sentences(const std::string& sentence1, const std::string& sent
 	/** TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese script probably
 	 * want to lose the blank space here. */
 	return format(pgettext("sentence_separator", "%1% %2%"), sentence1, sentence2);
+}
+
+bool is_translation_of(const std::string& input, const std::string& base,
+                       const std::string& textdomain_name) {
+	if (input == base) {
+		return true;
+	}
+	std::unique_ptr<Textdomain>
+	textdomain(textdomain_name.empty() ? nullptr : new Textdomain(textdomain_name));
+	return (input == base) || (input == translate(base));
 }
 
 }  // namespace i18n

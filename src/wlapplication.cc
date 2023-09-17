@@ -820,7 +820,7 @@ void WLApplication::run() {
 			std::string title;
 			std::string message;
 			try {
-				if (filename_ == "last") {
+				if (use_last(filename_)) {
 					std::optional<MapData> map = newest_edited_map();
 					if (map.has_value()) {
 						filename_ = map->filenames.at(0);
@@ -849,7 +849,7 @@ void WLApplication::run() {
 		std::string message;
 		try {
 			bool start_replay = (game_type_ == GameType::kReplay);
-			if (filename_ == "last") {
+			if (use_last(filename_)) {
 				std::optional<SavegameData> data = newest_saved_game_or_replay(start_replay);
 				if (data.has_value()) {
 					filename_ = data->filename;
