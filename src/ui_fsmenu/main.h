@@ -21,13 +21,11 @@
 
 #include <memory>
 
-#include "logic/map_revision.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "ui_fsmenu/menu.h"
-#include "wui/mapdata.h"
 
 namespace Widelands {
 class Game;

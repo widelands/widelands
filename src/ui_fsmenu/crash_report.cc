@@ -20,6 +20,7 @@
 
 #include "graphic/text_layout.h"
 #include "io/fileread.h"
+#include "logic/filesystem_constants.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"

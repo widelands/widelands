@@ -146,6 +146,7 @@ wl_library(widelands_ball_of_mud
     widelands_options
     wui
     wui_chat_ui
+    wui_common_mapdetails
 )
 
 wl_library(widelands_options

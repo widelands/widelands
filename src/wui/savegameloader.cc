@@ -18,6 +18,8 @@
 
 #include "wui/savegameloader.h"
 
+#include <memory>
+
 #include "base/i18n.h"
 #include "base/time_string.h"
 #include "game_io/game_loader.h"

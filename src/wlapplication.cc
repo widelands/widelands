@@ -825,8 +825,8 @@ void WLApplication::run() {
 					if (map.has_value()) {
 						filename_ = map->filenames.at(0);
 					} else {
-						throw(WLWarning(_("No Last Edited Map"),
-						                _("Widelands could not find the last edited map.")));
+						throw WLWarning(_("No Last Edited Map"),
+						                _("Widelands could not find the last edited map."));
 					}
 				}
 				EditorInteractive::run_editor(
@@ -856,9 +856,9 @@ void WLApplication::run() {
 				} else {
 					// Parameters will be reordered by FileNotFoundError::what()
 					if (start_replay) {
-						throw(FileNotFoundError("--replay", _("No last saved replay."), filename_));
+						throw FileNotFoundError("--replay", _("No last saved replay."), filename_);
 					}
-					throw(FileNotFoundError("--loadgame", _("No last saved game."), filename_));
+					throw FileNotFoundError("--loadgame", _("No last saved game."), filename_);
 				}
 			}
 			if (start_replay) {

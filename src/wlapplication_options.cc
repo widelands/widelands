@@ -258,7 +258,7 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          gettext_noop("Watch Replay"))},
    {KeyboardShortcut::kMainMenuReplayLast,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
-                         keysym(SDLK_r, kDefaultCtrlModifier),
+                         keysym(SDLK_d),
                          "mainmenu_replay_last",
                          gettext_noop("Watch Latest Replay"))},
    {KeyboardShortcut::kMainMenuRandomMatch,

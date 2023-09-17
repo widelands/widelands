@@ -17,6 +17,8 @@
 
 #include "wui/maptable.h"
 
+#include <memory>
+
 #include "base/i18n.h"
 #include "graphic/image_cache.h"
 #include "io/filesystem/filesystem.h"
@@ -82,7 +84,7 @@ void find_maps(const std::string& directory, std::vector<MapEntry>& results) {
 	for (const std::string& file : g_fs->list_directory(directory)) {
 		Widelands::Map map;
 		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(file);
-		if (ml) {
+		if (ml != nullptr) {
 			try {
 				map.set_filename(file);
 				ml->preload_map(true, nullptr);

@@ -84,7 +84,7 @@ struct ReplayfileSavegameExtractor {
 		return temp_file_.empty() ? source_file_ : temp_file_;
 	}
 
-	bool is_replay() {
+	bool is_replay() const {
 		return is_replay_;
 	}
 

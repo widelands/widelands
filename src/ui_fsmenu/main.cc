@@ -37,7 +37,6 @@
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/single_player_game_settings_provider.h"
-#include "map_io/widelands_map_loader.h"
 #include "network/internet_gaming.h"
 #include "network/internet_gaming_protocol.h"
 #include "sound/sound_handler.h"
@@ -482,7 +481,7 @@ void MainMenu::set_labels() {
 			   as_vspace(g_style_manager->styled_size(UI::StyledSize::kFsTextDefaultGap));
 			replay_tooltip +=
 			   /** TRANSLATORS: <Ctrl+click> / <hotkey>: <action> */
-			   format(format("<p>%s</p>", _("%s / %s: %s")),
+			   format(format("<p>%s</p>", _("%1$s / %2$s: %3$s")),
 			          as_font_tag(UI::FontStyle::kFsTooltipHotkey, _("Ctrl+click")),
 			          as_font_tag(UI::FontStyle::kFsTooltipHotkey,
 			                      shortcut_string_for(KeyboardShortcut::kMainMenuReplayLast, true)),
