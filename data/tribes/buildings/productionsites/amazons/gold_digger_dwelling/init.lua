@@ -55,7 +55,7 @@ wl.Descriptions():new_productionsite_type {
             "consume=ration water:4",
             "sleep=duration:45s",
             "animate=working duration:20s",
-            "mine=resource_gold radius:1 yield:100% when_empty:5%",
+            "mine=resource_gold radius:1 yield:100% when_empty:7%",
             "produce=gold_dust"
          }
       },

@@ -1,0 +1,3 @@
+return {
+   selected_firestones = {},
+}

@@ -11,7 +11,8 @@ wl.Descriptions():new_productionsite_type {
 
    buildcost = {
       log = 2,
-      granite = 4,
+      granite = 3,
+      quartz = 1,
       rope = 2,
    },
    return_on_dismantle = {

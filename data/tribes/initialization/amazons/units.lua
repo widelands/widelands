@@ -107,6 +107,19 @@ wl.Descriptions():new_tribe {
             }
          },
          {
+            name = "quartz",
+            default_target_quantity = 15,
+            preciousness = 10,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an Amazon ware: Quartz, part 1
+                  pgettext("ware", "Amazons use quartz for sharp tools and weapons."),
+                  -- TRANSLATORS: Helptext for an Amazon ware: Quartz, part 2
+                  pgettext("amazons_ware", "It is also a building material for some advanced buildings. It is produced by the stonecutters and in stone mines."),
+               }
+            }
+         },
+         {
             name = "balsa",
             default_target_quantity = 20,
             preciousness = 20,
@@ -222,7 +235,7 @@ wl.Descriptions():new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an Amazon ware: Fish
-                  pgettext("amazons_ware", "Fish is one of the two major food resources of the Amazons. It is used by the food preserver to prepare rations for the workers digging for gold dust and granite. It is also consumed at the training sites (training glade and warriors’ gathering) and for recruiting new soldiers.")
+                  pgettext("amazons_ware", "Fish is one of the two major food resources of the Amazons. It is used by the food preserver to prepare rations for the workers digging for gold dust and stones, and for training soldiers. It is also consumed at the initiation site for recruiting new soldiers.")
                }
             }
          },
@@ -234,7 +247,7 @@ wl.Descriptions():new_tribe {
                   -- TRANSLATORS: Helptext for an Amazon ware: Meat, part 1
                   pgettext("ware", "Meat contains a lot of energy, and it is obtained from wild game taken by hunter-gatherers."),
                   -- TRANSLATORS: Helptext for an Amazon ware: Meat, part 2
-                  pgettext("amazons_ware", "Meat is used by the food preserver to prepare rations for the workers digging for gold dust and granite. It is also consumed at the training sites (training glade and warriors’ gathering) and for recruiting new soldiers.")
+                  pgettext("amazons_ware", "Meat is used by the food preserver to prepare rations for the workers digging for gold dust and stones, and for training soldiers. It is also consumed at the initiation site for recruiting new soldiers.")
                }
             }
          },
@@ -245,7 +258,7 @@ wl.Descriptions():new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an Amazon ware: Ration, part 1
-                  pgettext("amazons_ware", "A small bite used to train soldiers and to keep the workers digging for gold dust and granite strong and working. The scout also consumes rations on her scouting trips."),
+                  pgettext("amazons_ware", "A small bite used to train soldiers and to keep the workers digging for gold dust and stones strong and working. The scout also consumes rations on her scouting trips."),
                   -- TRANSLATORS: Helptext for an Amazon ware: Ration, part 2
                   pgettext("amazons_ware", "Rations are produced by the food preserver out of fish or meat and bread. They are dried using a charcoal fire.")
                }
@@ -301,7 +314,7 @@ wl.Descriptions():new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an Amazon ware: Pick
-                  pgettext("amazons_ware", "Picks are used by stonecutters to cut granite from rocks or in mines.")
+                  pgettext("amazons_ware", "Picks are used by stonecutters to cut granite and quartz from rocks or in mines.")
                }
             }
          },
@@ -356,19 +369,6 @@ wl.Descriptions():new_tribe {
             }
          },
          {
-            name = "spear_wooden",
-            default_target_quantity = 30,
-            preciousness = 3,
-            helptexts = {
-               purpose = {
-                  -- TRANSLATORS: Helptext for an Amazon ware: Wooden Spear, part 1
-                  pgettext("amazons_ware", "This spear is the basic weapon in the Amazon military system. It is produced by the stone carver. In combination with a tunic, it is the equipment to fit out young soldiers."),
-                  -- TRANSLATORS: Helptext for an Amazon ware: Wooden Spear, part 2
-                  pgettext("amazons_ware", "It is used by the Amazon hunter-gatherers as well.")
-               }
-            }
-         },
-         {
             name = "chisel",
             default_target_quantity = 2,
             preciousness = 1,
@@ -414,9 +414,44 @@ wl.Descriptions():new_tribe {
                }
             }
          },
+         {
+            name = "firestones",
+            default_target_quantity = 2,
+            preciousness = 1,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an Amazon ware: Firestones
+                  pgettext("amazons_ware", "Firestones are used to light the fires of charcoal kilns and furnaces.")
+               }
+            }
+         },
+         {
+            name = "selected_firestones",
+            default_target_quantity = 1,
+            preciousness = 1,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an Amazon ware: Selected Firestones
+                  pgettext("amazons_ware", "Only the best, carefully selected firestones are good enough to light the fires of rare tree kilns.")
+               }
+            }
+         },
       },
       {
          -- Military
+         {
+            name = "spear_wooden",
+            default_target_quantity = 30,
+            preciousness = 3,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an Amazon ware: Wooden Spear, part 1
+                  pgettext("amazons_ware", "This spear is the basic weapon in the Amazon military system. It is produced by the stone carver. In combination with a tunic, it is the equipment to fit out young soldiers."),
+                  -- TRANSLATORS: Helptext for an Amazon ware: Wooden Spear, part 2
+                  pgettext("amazons_ware", "It is used by the Amazon hunter-gatherers as well.")
+               }
+            }
+         },
          {
             name = "spear_stone_tipped",
             default_target_quantity = 1,
@@ -436,39 +471,6 @@ wl.Descriptions():new_tribe {
                purpose = {
                   -- TRANSLATORS: Helptext for an Amazon ware: Hardened Spear
                   pgettext("amazons_ware", "This is a hardened spear with a stone tip. It is produced in a stone workshop and used in a warriors’ gathering – together with food – to train soldiers from attack level 1 to level 2.")
-               }
-            }
-         },
-         {
-            name = "armor_wooden",
-            default_target_quantity = 1,
-            preciousness = 0,
-            helptexts = {
-               purpose = {
-                  -- TRANSLATORS: Helptext for an Amazon ware: Wooden Armor
-                  pgettext("amazons_ware", "This light wooden armor is a basic piece of armor for the Amazons’ soldiers. It is produced by a dressmaker and used in a training glade – together with food – to train soldiers from health level 0 to level 1.")
-               }
-            }
-         },
-         {
-            name = "helmet_wooden",
-            default_target_quantity = 2,
-            preciousness = 3,
-            helptexts = {
-               purpose = {
-                  -- TRANSLATORS: Helptext for an Amazon ware: Wodden Helmet
-                  pgettext ("amazons_ware", "A wooden helmet is a basic piece of equipment for protecting soldiers. It is produced by the dressmaker and used to train soldiers from health level 1 to level 2."),
-               }
-            }
-         },
-         {
-            name = "warriors_coat",
-            default_target_quantity = 1,
-            preciousness = 3,
-            helptexts = {
-               purpose = {
-                  -- TRANSLATORS: Helptext for an Amazon ware: Warrior's Coat
-                  pgettext("amazons_ware", "Ordinary tunics can be decorated and reinforced with gold and wood chunks. Such tunics are the best armor.")
                }
             }
          },
@@ -506,6 +508,39 @@ wl.Descriptions():new_tribe {
             }
          },
          {
+            name = "armor_wooden",
+            default_target_quantity = 1,
+            preciousness = 0,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an Amazon ware: Wooden Armor
+                  pgettext("amazons_ware", "This light wooden armor is a basic piece of armor for the Amazons’ soldiers. It is produced by a dressmaker and used in a training glade – together with food – to train soldiers from health level 0 to level 1.")
+               }
+            }
+         },
+         {
+            name = "helmet_wooden",
+            default_target_quantity = 2,
+            preciousness = 3,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an Amazon ware: Wodden Helmet
+                  pgettext ("amazons_ware", "A wooden helmet is a basic piece of equipment for protecting soldiers. It is produced by the dressmaker and used to train soldiers from health level 1 to level 2."),
+               }
+            }
+         },
+         {
+            name = "warriors_coat",
+            default_target_quantity = 1,
+            preciousness = 3,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an Amazon ware: Warrior's Coat
+                  pgettext("amazons_ware", "Ordinary tunics can be decorated and reinforced with gold and wood chunks. Such tunics are the best armor.")
+               }
+            }
+         },
+         {
             name = "boots_sturdy",
             default_target_quantity = 1,
             preciousness = 5,
@@ -527,7 +562,7 @@ wl.Descriptions():new_tribe {
                }
             }
          },
-                  {
+         {
             name = "boots_hero",
             default_target_quantity = 1,
             preciousness = 5,
@@ -584,7 +619,7 @@ wl.Descriptions():new_tribe {
             name = "amazons_stonecutter",
             helptexts = {
                -- TRANSLATORS: Helptext for an Amazon worker: Stonecutter
-               purpose = pgettext("amazons_worker", "Cuts blocks of granite out of rocks in the vicinity.")
+               purpose = pgettext("amazons_worker", "Cuts blocks of granite and quartz out of rocks in the vicinity.")
             }
          },
          {
@@ -1204,7 +1239,7 @@ wl.Descriptions():new_tribe {
                -- TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 1
                _("Granite is a basic building material and can be dug up by a stone mine."),
                -- TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 2
-               _("There is only a little bit of granite here."),
+               _("There is only a little bit of stones here."),
             }
          }
       },
@@ -1226,7 +1261,7 @@ wl.Descriptions():new_tribe {
                -- TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 1
                _("Granite is a basic building material and can be dug up by a stone mine."),
                -- TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 2
-               _("There is a lot of granite here.")
+               _("There is a lot of stones here.")
             }
          }
       },
@@ -1274,7 +1309,7 @@ wl.Descriptions():new_tribe {
          name = "amazons_stonecutters_hut",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Stonecutter's Hut
-            purpose = pgettext("amazons_building", "Cuts raw pieces of granite out of rocks in the vicinity."),
+            purpose = pgettext("amazons_building", "Cuts raw pieces of granite and quartz out of rocks in the vicinity."),
             -- TRANSLATORS: Note helptext for an Amazon production site: Stonecutter's Hut
             note = pgettext("amazons_building", "The stonecutter’s hut needs rocks to cut within the work area.")
          }
@@ -1468,7 +1503,7 @@ wl.Descriptions():new_tribe {
          name = "amazons_food_preserver",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Food Preserver
-            purpose = pgettext("amazons_building", "Prepares rations to feed the scouts and the workers digging for gold dust and granite."),
+            purpose = pgettext("amazons_building", "Prepares rations to feed the soldiers in training, the scouts, and the workers digging for gold dust and stones."),
             -- TRANSLATORS: Performance helptext for an Amazon production site: Food Preserver
             performance = pgettext("amazons_building", "The food preserver can produce one ration in %s on average if the supply is steady."):bformat(format_seconds(17))
          }
@@ -1526,9 +1561,9 @@ wl.Descriptions():new_tribe {
          name = "amazons_stonemine",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Stone Mine
-            purpose = pgettext("amazons_building", "Digs granite out of the ground in mountain terrain."),
+            purpose = pgettext("amazons_building", "Digs granite and quartz out of the ground in mountain terrain."),
             -- TRANSLATORS: Performance helptext for an Amazon production site: Stone Mine
-            performance = pgettext("amazons_building", "The stone mine can produce one slab of granite in %s on average if the supply with rations is steady and the mine is not worn out."):bformat(format_seconds(32))
+            performance = pgettext("amazons_building", "The stone mine can produce one slab of each kind of stone in %s on average if the supply with rations is steady and the mine is not worn out."):bformat(format_seconds(64))
          }
       },
       {

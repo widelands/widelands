@@ -10,7 +10,8 @@ wl.Descriptions():new_worker_type {
    vision_range = 2,
 
    buildcost = {
-      amazons_carrier = 1
+      amazons_carrier = 1,
+      firestones = 1,
    },
 
    experience = 15,

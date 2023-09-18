@@ -48,7 +48,8 @@ wl.Descriptions():new_productionsite_type {
    },
 
    inputs = {
-      { name = "granite", amount = 7 },
+      { name = "granite", amount = 5 },
+      { name = "quartz", amount = 7 },
       { name = "log", amount = 6 },
       { name = "ironwood", amount = 5 },
    },
@@ -77,10 +78,14 @@ wl.Descriptions():new_productionsite_type {
             "call=produce_spear_stone_tipped",
             "call=produce_stone_bowl",
             "call=produce_spear_hardened",
+            "call=produce_firestones",
+            "call=produce_spear_wooden",
+            "call=produce_selected_firestones",
+            "call=produce_spear_stone_tipped",
          },
       },
       produce_shovel = {
-         -- TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
          descname = _("making a shovel"),
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
@@ -92,43 +97,43 @@ wl.Descriptions():new_productionsite_type {
          },
       },
       produce_felling_ax = {
-         -- TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start making a felling ax because ...
          descname = _("making a felling ax"),
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs felling_ax",
-            "consume=log granite",
+            "consume=log quartz",
             "sleep=duration:32s400ms",
             "animate=working duration:35s",
             "produce=felling_ax"
          },
       },
       produce_pick = {
-         -- TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
          descname = _("making a pick"),
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs pick",
-            "consume=log granite",
+            "consume=log quartz",
             "sleep=duration:32s400ms",
             "animate=working duration:35s",
             "produce=pick"
          },
       },
       produce_machete = {
-         -- TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start making a machete because ...
          descname = _("making a machete"),
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs machete",
-            "consume=log granite",
+            "consume=log quartz",
             "sleep=duration:32s400ms",
             "animate=working duration:35s",
             "produce=machete"
          },
       },
       produce_kitchen_tools = {
-         -- TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
          descname = _("making kitchen tools"),
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
@@ -140,7 +145,7 @@ wl.Descriptions():new_productionsite_type {
          },
       },
       produce_hammer = {
-         -- TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
          descname = _("making a hammer"),
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
@@ -152,31 +157,31 @@ wl.Descriptions():new_productionsite_type {
          },
       },
       produce_chisel = {
-         -- TRANSLATORS: Completed/Skipped/Did not start making a fishing net because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start making a chisel because ...
          descname = _("making a chisel"),
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs chisel",
-            "consume=granite",
+            "consume=quartz",
             "sleep=duration:32s400ms",
             "animate=working duration:35s",
             "produce=chisel"
          },
       },
       produce_needles = {
-         -- TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start making needles because ...
          descname = _("making needles"),
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs needles",
-            "consume=granite",
+            "consume=quartz",
             "sleep=duration:32s400ms",
             "animate=working duration:35s",
             "produce=needles"
          },
       },
       produce_stone_bowl = {
-         -- TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start making a stone bowl because ...
          descname = _("making a stone bowl"),
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
@@ -187,8 +192,32 @@ wl.Descriptions():new_productionsite_type {
             "produce=stone_bowl"
          },
       },
+      produce_firestones = {
+         -- TRANSLATORS: Completed/Skipped/Did not start making firestones because ...
+         descname = _("making firestones"),
+         actions = {
+            -- time: 32.4 + 35 + 3.6 = 71 sec
+            "return=skipped unless economy needs firestones",
+            "consume=quartz",
+            "sleep=duration:32s400ms",
+            "animate=working duration:35s",
+            "produce=firestones"
+         },
+      },
+      produce_selected_firestones = {
+         -- TRANSLATORS: Completed/Skipped/Did not start making selected firestones because ...
+         descname = _("making selected firestones"),
+         actions = {
+            -- time: 32.4 + 35 + 3.6 = 71 sec
+            "return=skipped unless economy needs selected_firestones",
+            "consume=quartz:2",
+            "sleep=duration:32s400ms",
+            "animate=working duration:35s",
+            "produce=selected_firestones"
+         },
+      },
       produce_spear_wooden = {
-         -- TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start making a wooden spear because ...
          descname = _("making a wooden spear"),
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
@@ -200,7 +229,7 @@ wl.Descriptions():new_productionsite_type {
          },
       },
       produce_spear_stone_tipped = {
-         -- TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start making a stone-tipped spear because ...
          descname = _("making a stone-tipped spear"),
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
@@ -212,12 +241,12 @@ wl.Descriptions():new_productionsite_type {
          },
       },
       produce_spear_hardened = {
-         -- TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start making a hardened spear because ...
          descname = _("making a hardened spear"),
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs spear_hardened",
-            "consume=ironwood log granite",
+            "consume=ironwood log quartz",
             "sleep=duration:32s400ms",
             "animate=working duration:35s",
             "produce=spear_hardened"
