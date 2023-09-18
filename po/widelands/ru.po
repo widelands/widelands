@@ -27,7 +27,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-09-14 02:26+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022-2023\n"
+"Last-Translator: Viktor Skachkov <awsswa59@gmail.com>, 2023\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2866,7 +2866,7 @@ msgstr "Сохранение игры..."
 
 #: ../../src/logic/save_handler.cc:152
 msgid "Saving skipped"
-msgstr ""
+msgstr "Сохранение игры пропущено"
 
 #: ../../src/logic/save_handler.cc:170
 #: ../../src/wui/game_main_menu_save_game.cc:338
@@ -3589,7 +3589,7 @@ msgstr "Клиент %1$s не отвечает более %2$s."
 #: ../../src/network/network_gaming_messages.cc:77
 #, c-format
 msgid "Client %s has cheating features enabled!"
-msgstr ""
+msgstr "Клиент %s включил читы!"
 
 #: ../../src/network/network_gaming_messages.cc:78
 #, c-format
@@ -3600,13 +3600,13 @@ msgstr "Клиент %s - читер!"
 #: ../../src/network/network_gaming_messages.cc:80
 #, c-format
 msgid "Cheating: Client %1$s now controls %2$s"
-msgstr ""
+msgstr "Читы: Клиент %1$s теперь управляет %2$s"
 
 #. * TRANSLATORS: %1 and %2 are user and player names
 #: ../../src/network/network_gaming_messages.cc:82
 #, c-format
 msgid "Client %1$s is cheating, acting as %2$s!"
-msgstr ""
+msgstr "Клиент %1$s читерит, действуя как %2$s!"
 
 #: ../../src/network/network_lan_promotion.cc:357
 msgid "Failed to use the local network!"
@@ -3681,7 +3681,7 @@ msgstr "Синий"
 
 #: ../../src/ui_basic/color_chooser.cc:484
 msgid "Remove from favorites"
-msgstr ""
+msgstr "Удалить из избранного"
 
 #: ../../src/ui_basic/color_chooser.cc:484
 #: ../../src/ui_fsmenu/addons/packager.cc:109
@@ -3692,7 +3692,7 @@ msgstr "–"
 
 #: ../../src/ui_basic/color_chooser.cc:491
 msgid "Add current color to favorites"
-msgstr ""
+msgstr "Добавить текущий цвет в избранное"
 
 #: ../../src/ui_basic/dropdown.cc:111
 msgctxt "dropdown"
@@ -5377,31 +5377,31 @@ msgstr "Название кампании"
 
 #: ../../src/ui_fsmenu/crash_report.cc:43
 msgid "Crash Report Details"
-msgstr ""
+msgstr "Отчет о сбое подробно"
 
 #: ../../src/ui_fsmenu/crash_report.cc:61
 #: ../../src/ui_fsmenu/crash_report.cc:151
 msgid "Open link"
-msgstr ""
+msgstr "Перейти по ссылке"
 
 #: ../../src/ui_fsmenu/crash_report.cc:63
 #: ../../src/ui_fsmenu/crash_report.cc:153
 msgid "Copy link"
-msgstr ""
+msgstr "Скопировать ссылку"
 
 #: ../../src/ui_fsmenu/crash_report.cc:67
 #: ../../src/ui_fsmenu/crash_report.cc:158
 msgid "Copy report"
-msgstr ""
+msgstr "Скопировать отчет"
 
 #: ../../src/ui_fsmenu/crash_report.cc:68
 #: ../../src/ui_fsmenu/crash_report.cc:158
 msgid "Copy the full report to the clipboard"
-msgstr ""
+msgstr "Скопировать полный отчет в буфер обмена"
 
 #: ../../src/ui_fsmenu/crash_report.cc:97
 msgid "Crash Report"
-msgstr ""
+msgstr "Отчет о сбое"
 
 #: ../../src/ui_fsmenu/crash_report.cc:135
 #, c-format
@@ -5409,19 +5409,19 @@ msgid ""
 "It looks like Widelands crashed the last time you ran it, but a backtrace "
 "for debugging was automatically generated. Please provide the report to the "
 "Widelands Development Team under %s so we can fix the problem."
-msgstr ""
+msgstr "Похоже, что Widelands произошел сбой  когда вы его запустили в последний раз, но автоматически была сгенерирован отчет об ошибках для отладки. Пожалуйста, предоставьте отчет группе разработчиков Widelands %s чтобы мы могли устранить проблему."
 
 #: ../../src/ui_fsmenu/crash_report.cc:144
 msgid "Show details…"
-msgstr ""
+msgstr "Показать подробности..."
 
 #: ../../src/ui_fsmenu/crash_report.cc:144
 msgid "View the detailed crash report"
-msgstr ""
+msgstr "Просмотреть подробный отчет о сбое"
 
 #: ../../src/ui_fsmenu/crash_report.cc:161
 msgid "Remind me later"
-msgstr ""
+msgstr "Напомнить позже"
 
 #: ../../src/ui_fsmenu/helpwindow.cc:46 ../../src/wui/helpwindow.cc:48
 #, c-format
@@ -6554,7 +6554,7 @@ msgstr "Удалить повтор после:"
 
 #: ../../src/ui_fsmenu/options.cc:263
 msgid "Skip autosaves while inactive"
-msgstr ""
+msgstr "Пропускать автосохранранение в неактивном состоянии"
 
 #: ../../src/ui_fsmenu/options.cc:270
 msgid "Compress Widelands data files (maps, replays, and savegames)"
@@ -6562,7 +6562,7 @@ msgstr "Сжимать данные игры (карты, повторы и со
 
 #: ../../src/ui_fsmenu/options.cc:278
 msgid "Keep history of sent chat messages in a file"
-msgstr ""
+msgstr "Сохранять историю отправленных сообщений чата в файле"
 
 #: ../../src/ui_fsmenu/options.cc:289
 #: ../../src/wui/interactive_gamebase.cc:275
@@ -6593,7 +6593,7 @@ msgstr "Показывать наложения рабочих областей"
 
 #: ../../src/ui_fsmenu/options.cc:316
 msgid "Pause game when inactive for:"
-msgstr ""
+msgstr "Поставить на паузу игру, когда она неактивна для:"
 
 #: ../../src/ui_fsmenu/options.cc:326
 msgid "Start building road after placing a flag"
@@ -7265,11 +7265,11 @@ msgstr "Сделать снимок экрана"
 
 #: ../../src/wlapplication_options.cc:397
 msgid "Open the Debug Console (developer tool)"
-msgstr ""
+msgstr "Открыть отладочную консоль (инструменты разработчика)"
 
 #: ../../src/wlapplication_options.cc:402
 msgid "Toggle Cheat Mode (developer tool)"
-msgstr ""
+msgstr "Переключить в читер режим (инструменты разработчика)"
 
 #: ../../src/wlapplication_options.cc:412
 msgid "Load"
@@ -9319,7 +9319,7 @@ msgstr "%1$s (%2$s) (%3$s)"
 
 #: ../../src/wui/interactive_gamebase.cc:656
 msgid "Remaining construction costs:"
-msgstr ""
+msgstr "Оставшиеся расходы на постройку:"
 
 #. * TRANSLATORS: Title for the statistics menu button in the game
 #: ../../src/wui/interactive_player.cc:187
