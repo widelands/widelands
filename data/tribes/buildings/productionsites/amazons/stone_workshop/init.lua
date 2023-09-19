@@ -234,7 +234,7 @@ wl.Descriptions():new_productionsite_type {
          actions = {
             -- time: 32.4 + 35 + 3.6 = 71 sec
             "return=skipped unless economy needs spear_stone_tipped",
-            "consume=ironwood granite",
+            "consume=ironwood quartz",
             "sleep=duration:32s400ms",
             "animate=working duration:35s",
             "produce=spear_stone_tipped"

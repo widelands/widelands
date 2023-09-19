@@ -18,7 +18,6 @@ wl.Descriptions():new_militarysite_type {
    return_on_dismantle = {
       ironwood = 1,
       granite = 2,
-
    },
 
    animation_directory = dirname,

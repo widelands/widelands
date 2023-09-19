@@ -22,14 +22,6 @@ wl.Descriptions():new_worker_type {
          "callobject=shrink",
          "createware=granite",
          "return"
-      },
-      cut_quartz = {
-         "findobject=attrib:rocks radius:6",
-         "walk=object",
-         "animate=hacking duration:35s",
-         "callobject=shrink",
-         "createware=quartz",
-         "return"
       }
    },
 

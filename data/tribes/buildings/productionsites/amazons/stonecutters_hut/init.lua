@@ -31,29 +31,13 @@ wl.Descriptions():new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _("working"),
-         actions = {
-            "call=cut_granite",
-            "call=cut_quartz",  -- 1 out of 3
-            "call=cut_granite",
-         },
-      },
-      cut_granite = {
-         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("cutting granite"),
          actions = {
             "callworker=cut_granite",
-            "sleep=duration:10s",
+            "sleep=duration:10s"
          },
       },
-      cut_quartz = {
-         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _("cutting quartz"),
-         actions = {
-            "callworker=cut_quartz",
-            "sleep=duration:10s",
-         },
-      },
+
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
