@@ -12,7 +12,8 @@ wl.Descriptions():new_trainingsite_type {
    buildcost = {
       ironwood = 4,
       log = 5,
-      granite = 4,
+      granite = 3,
+      quartz = 1,
       rubber = 4,
       rope = 2,
       gold = 3

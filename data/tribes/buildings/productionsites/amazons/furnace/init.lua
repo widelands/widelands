@@ -10,13 +10,11 @@ wl.Descriptions():new_productionsite_type {
    size = "medium",
 
    buildcost = {
-      granite = 3,
-      quartz = 2,
+      granite = 5,
       ironwood = 2
    },
    return_on_dismantle = {
-      granite = 2,
-      quartz = 1,
+      granite = 3,
       ironwood = 1
    },
 
