@@ -551,8 +551,8 @@ walk
       * ``coords``: Walk to a previously found and selected field/coordinate.
       * ``object-or-coords``: Walk to a previously found and selected object if present;
         otherwise to previously found and selected field/coordinate.
-      * ``ne|e|se|sw|w|nw``: New in version 1.2. Orders the worker to move
-        one field in the specified direction. Fails if the movement is not possible.
+      * ``ne|e|se|sw|w|nw``: New in version 1.2. Orders the worker to move one field in the
+        specified direction. The worker program exits with "fail" if the movement is not possible.
 
    Walk to a previously selected destination. Examples::
 
