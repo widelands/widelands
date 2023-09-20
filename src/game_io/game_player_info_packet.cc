@@ -95,8 +95,7 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* 
 					for (size_t j = fr.unsigned_32(); j > 0; --j) {
 						player->muted_building_types_.insert(fr.unsigned_32());
 					}
-					player->starting_position_state_ =
-					   static_cast<Widelands::Player::StartingPositionState>(fr.unsigned_8());
+					player->is_picking_custom_starting_position_ = (fr.unsigned_8() != 0u);
 					player->initialization_index_ = fr.unsigned_8();
 					player->allow_additional_expedition_items_ = (fr.unsigned_8() != 0u);
 					player->hidden_from_general_statistics_ = (fr.unsigned_8() != 0u);
@@ -173,7 +172,7 @@ void GamePlayerInfoPacket::write(FileSystem& fs, Game& game, MapObjectSaver* /* 
 		for (const DescriptionIndex& di : plr->muted_building_types_) {
 			fw.unsigned_32(di);
 		}
-		fw.unsigned_8(static_cast<uint8_t>(plr->get_starting_position_state()));
+		fw.unsigned_8(plr->is_picking_custom_starting_position() ? 1 : 0);
 		fw.unsigned_8(plr->initialization_index_);
 		fw.unsigned_8(plr->allow_additional_expedition_items_ ? 1 : 0);
 		fw.unsigned_8(plr->hidden_from_general_statistics_ ? 1 : 0);

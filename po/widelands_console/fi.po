@@ -7,6 +7,7 @@
 # GunChleoc, 2014
 # Jukka Pakarinen, 2016-2018,2020
 # LINUX-SAUNA, 2022
+# Oi Suomi On! <oisuomion@protonmail.com>, 2023
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
 # Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009
 msgid ""
@@ -15,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-08-28 02:28+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
-"Last-Translator: LINUX-SAUNA, 2022\n"
+"Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2023\n"
 "Language-Team: Finnish (http://app.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,7 +34,7 @@ msgstr "widelands <option0>=<value0> ... <optionN>=<valueN>"
 
 #: ../../src/wlapplication_messages.cc:52
 msgid "widelands <save.wgf>/<replay.wry>"
-msgstr ""
+msgstr "widelands <save.wgf>/<replay.wry>"
 
 #: ../../src/wlapplication_messages.cc:54
 #: ../../src/wlapplication_messages.cc:56
@@ -126,7 +127,7 @@ msgstr "Pakota Widelands kaatumaan mikäli ilmenee Lua-virhe."
 
 #: ../../src/wlapplication_messages.cc:92
 msgid "Delete replays automatically after `n` weeks."
-msgstr ""
+msgstr "Poista pelitoisinnot automaattisesti `n` viikon jälkeen."
 
 #. * TRANSLATORS: A placeholder for a numerical value
 #: ../../src/wlapplication_messages.cc:92
@@ -154,7 +155,7 @@ msgstr "Säädä alati pelinopeutta ja automaattisesti riippuen TK-älyn viivees
 
 #: ../../src/wlapplication_messages.cc:102
 msgid "Enable the Script Console and Cheating Mode."
-msgstr ""
+msgstr "Kytke päälle komentosarjakehote ja huijaustila. "
 
 #: ../../src/wlapplication_messages.cc:105
 msgid "Game options:"
@@ -193,7 +194,7 @@ msgstr "[tosi*|epätosi]"
 msgid ""
 "Do not create an autosave when the user has been inactive since the last "
 "autosave."
-msgstr ""
+msgstr "Älä luo automaattitallennusta kun käyttäjä on ollut toimeton viimeisimmän automaattitallennuksen jälkeen."
 
 #: ../../src/wlapplication_messages.cc:121
 msgid "Do not save files as binary zip archives."
@@ -219,7 +220,7 @@ msgstr "[tosi|epätosi*]"
 
 #: ../../src/wlapplication_messages.cc:127
 msgid "Whether to save the history of sent chat messages to a file."
-msgstr ""
+msgstr "Josko lähetettyjen keskusteluviestien historia tallennetaan tiedostoon."
 
 #: ../../src/wlapplication_messages.cc:128
 msgid "Show filenames in the replay screen."
@@ -234,7 +235,7 @@ msgstr "Näytetäänkö editorissa varoitus jos pelaajia on liikaa."
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:135
 msgid "Pause the game after `n` minutes of user inactivity."
-msgstr ""
+msgstr "Tauota peli `n` minuutin toimettomuuden jälkeen."
 
 #: ../../src/wlapplication_messages.cc:137
 msgid "Start building a road after placing a flag."
@@ -447,14 +448,14 @@ msgstr "Näytä tämä apu kaikkien asetusvaihtoehtojen kanssa."
 
 #: ../../src/wlapplication_messages.cc:231
 msgid "<save.wgf>/<replay.wry>"
-msgstr ""
+msgstr "<save.wgf>/<replay.wry>"
 
 #: ../../src/wlapplication_messages.cc:232
 msgid ""
 "Load the given savegame or replay directly. Useful for .wgf/.wry file "
 "extension association. Does not work with other options. Also see "
 "--loadgame/--replay."
-msgstr ""
+msgstr "Lataa annettu pelitallennus- tai pelitoisinto suoraan. Käytännöllinen .wgf/.wry tiedostopäätteiden suhteen. Ei toimi muiden vaihtoehtojen kanssa. Katso myös --loadgame/--replay."
 
 #. * TRANSLATORS: %s = version information
 #: ../../src/wlapplication_messages.cc:259

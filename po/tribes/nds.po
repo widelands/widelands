@@ -3856,12 +3856,12 @@ msgstr "Buurderee"
 #. TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:74
 msgid "planting barley"
-msgstr "Garste to planten"
+msgstr "Garst to planten"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:82
 msgid "harvesting barley"
-msgstr "Garste to arnten"
+msgstr "Garst to arnten"
 
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:95
 msgctxt "frisians_building"
@@ -8219,7 +8219,7 @@ msgstr "Balsa"
 #: ../../data/tribes/wares/barley/init.lua:8
 msgctxt "ware"
 msgid "Barley"
-msgstr "Garste"
+msgstr "Garst"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/basket/init.lua:8

@@ -25,9 +25,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-09-11 02:30+0000\n"
+"POT-Creation-Date: 2023-09-14 02:26+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022-2023\n"
+"Last-Translator: Viktor Skachkov <awsswa59@gmail.com>, 2023\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -345,7 +345,7 @@ msgstr "Повторить"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/editor/editorinteractive.cc:175
 #: ../../src/wlapplication_options.cc:855 ../../src/wui/buildingwindow.cc:443
-#: ../../src/wui/interactive_player.cc:235
+#: ../../src/wui/interactive_player.cc:236
 msgid "Help"
 msgstr "Помощь"
 
@@ -1751,8 +1751,8 @@ msgstr "Очередь команд"
 #: ../../src/game_io/game_loader.cc:157 ../../src/map_io/map_saver.cc:146
 #: ../../src/map_io/widelands_map_loader.cc:400
 #: ../../src/wlapplication_options.cc:667
-#: ../../src/wui/interactive_player.cc:225
-#: ../../src/wui/interactive_player.cc:464
+#: ../../src/wui/interactive_player.cc:226
+#: ../../src/wui/interactive_player.cc:465
 msgid "Messages"
 msgstr "Сообщения"
 
@@ -2588,9 +2588,9 @@ msgstr "Корабли"
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:173
 #: ../../src/wui/economy_options_window.cc:75
 #: ../../src/wui/general_statistics_menu.cc:157
-#: ../../src/wui/interactive_player.cc:334
+#: ../../src/wui/interactive_player.cc:335
 #: ../../src/wui/productionsitewindow.cc:90
-#: ../../src/wui/warehousewindow.cc:288
+#: ../../src/wui/warehousewindow.cc:292
 msgid "Wares"
 msgstr "Товары"
 
@@ -2601,7 +2601,7 @@ msgstr "Товары"
 #: ../../src/wui/economy_options_window.cc:76
 #: ../../src/wui/general_statistics_menu.cc:148
 #: ../../src/wui/productionsitewindow.cc:110
-#: ../../src/wui/warehousewindow.cc:292
+#: ../../src/wui/warehousewindow.cc:296
 msgid "Workers"
 msgstr "Работники"
 
@@ -2610,7 +2610,7 @@ msgstr "Работники"
 #: ../../src/map_io/map_saver.cc:219
 #: ../../src/map_io/widelands_map_loader.cc:336
 #: ../../src/wui/general_statistics_menu.cc:153
-#: ../../src/wui/interactive_player.cc:329 ../../src/wui/minimap.cc:202
+#: ../../src/wui/interactive_player.cc:330 ../../src/wui/minimap.cc:202
 msgid "Buildings"
 msgstr "Строения"
 
@@ -2735,19 +2735,19 @@ msgstr "Файл карты забракован по причине:\n%s"
 msgid "This objective has no description."
 msgstr "Эта задача без описания."
 
-#: ../../src/logic/player.cc:1996
+#: ../../src/logic/player.cc:1997
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
 msgstr "Корабль %d"
 
-#: ../../src/logic/player.cc:2013
+#: ../../src/logic/player.cc:2014
 #, c-format
 msgctxt "warehouse"
 msgid "Port %d"
 msgstr "Порт %d"
 
-#: ../../src/logic/player.cc:2013
+#: ../../src/logic/player.cc:2014
 #, c-format
 msgctxt "warehouse"
 msgid "Warehouse %d"
@@ -2866,7 +2866,7 @@ msgstr "Сохранение игры..."
 
 #: ../../src/logic/save_handler.cc:152
 msgid "Saving skipped"
-msgstr ""
+msgstr "Сохранение игры пропущено"
 
 #: ../../src/logic/save_handler.cc:170
 #: ../../src/wui/game_main_menu_save_game.cc:338
@@ -2962,7 +2962,7 @@ msgstr "Сценарий"
 #: ../../src/map_io/widelands_map_loader.cc:418
 #: ../../src/wlapplication_options.cc:658
 #: ../../src/wui/game_objectives_menu.cc:30
-#: ../../src/wui/interactive_player.cc:215
+#: ../../src/wui/interactive_player.cc:216
 msgid "Objectives"
 msgstr "Задания"
 
@@ -3589,7 +3589,7 @@ msgstr "Клиент %1$s не отвечает более %2$s."
 #: ../../src/network/network_gaming_messages.cc:77
 #, c-format
 msgid "Client %s has cheating features enabled!"
-msgstr ""
+msgstr "Клиент %s включил читы!"
 
 #: ../../src/network/network_gaming_messages.cc:78
 #, c-format
@@ -3600,13 +3600,13 @@ msgstr "Клиент %s - читер!"
 #: ../../src/network/network_gaming_messages.cc:80
 #, c-format
 msgid "Cheating: Client %1$s now controls %2$s"
-msgstr ""
+msgstr "Читы: Клиент %1$s теперь управляет %2$s"
 
 #. * TRANSLATORS: %1 and %2 are user and player names
 #: ../../src/network/network_gaming_messages.cc:82
 #, c-format
 msgid "Client %1$s is cheating, acting as %2$s!"
-msgstr ""
+msgstr "Клиент %1$s читерит, действуя как %2$s!"
 
 #: ../../src/network/network_lan_promotion.cc:357
 msgid "Failed to use the local network!"
@@ -3681,7 +3681,7 @@ msgstr "Синий"
 
 #: ../../src/ui_basic/color_chooser.cc:484
 msgid "Remove from favorites"
-msgstr ""
+msgstr "Удалить из избранного"
 
 #: ../../src/ui_basic/color_chooser.cc:484
 #: ../../src/ui_fsmenu/addons/packager.cc:109
@@ -3692,7 +3692,7 @@ msgstr "–"
 
 #: ../../src/ui_basic/color_chooser.cc:491
 msgid "Add current color to favorites"
-msgstr ""
+msgstr "Добавить текущий цвет в избранное"
 
 #: ../../src/ui_basic/dropdown.cc:111
 msgctxt "dropdown"
@@ -5200,7 +5200,7 @@ msgstr "%1$s+%2$u"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:184
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:383
-#: ../../src/wui/constructionsitewindow.cc:133
+#: ../../src/wui/constructionsitewindow.cc:137
 #, c-format
 msgid "(%s)"
 msgstr "(%s)"
@@ -5377,31 +5377,31 @@ msgstr "Название кампании"
 
 #: ../../src/ui_fsmenu/crash_report.cc:43
 msgid "Crash Report Details"
-msgstr ""
+msgstr "Отчет о сбое подробно"
 
 #: ../../src/ui_fsmenu/crash_report.cc:61
 #: ../../src/ui_fsmenu/crash_report.cc:151
 msgid "Open link"
-msgstr ""
+msgstr "Перейти по ссылке"
 
 #: ../../src/ui_fsmenu/crash_report.cc:63
 #: ../../src/ui_fsmenu/crash_report.cc:153
 msgid "Copy link"
-msgstr ""
+msgstr "Скопировать ссылку"
 
 #: ../../src/ui_fsmenu/crash_report.cc:67
 #: ../../src/ui_fsmenu/crash_report.cc:158
 msgid "Copy report"
-msgstr ""
+msgstr "Скопировать отчет"
 
 #: ../../src/ui_fsmenu/crash_report.cc:68
 #: ../../src/ui_fsmenu/crash_report.cc:158
 msgid "Copy the full report to the clipboard"
-msgstr ""
+msgstr "Скопировать полный отчет в буфер обмена"
 
 #: ../../src/ui_fsmenu/crash_report.cc:97
 msgid "Crash Report"
-msgstr ""
+msgstr "Отчет о сбое"
 
 #: ../../src/ui_fsmenu/crash_report.cc:135
 #, c-format
@@ -5409,19 +5409,19 @@ msgid ""
 "It looks like Widelands crashed the last time you ran it, but a backtrace "
 "for debugging was automatically generated. Please provide the report to the "
 "Widelands Development Team under %s so we can fix the problem."
-msgstr ""
+msgstr "Похоже, что Widelands произошел сбой  когда вы его запустили в последний раз, но автоматически была сгенерирован отчет об ошибках для отладки. Пожалуйста, предоставьте отчет группе разработчиков Widelands %s чтобы мы могли устранить проблему."
 
 #: ../../src/ui_fsmenu/crash_report.cc:144
 msgid "Show details…"
-msgstr ""
+msgstr "Показать подробности..."
 
 #: ../../src/ui_fsmenu/crash_report.cc:144
 msgid "View the detailed crash report"
-msgstr ""
+msgstr "Просмотреть подробный отчет о сбое"
 
 #: ../../src/ui_fsmenu/crash_report.cc:161
 msgid "Remind me later"
-msgstr ""
+msgstr "Напомнить позже"
 
 #: ../../src/ui_fsmenu/helpwindow.cc:46 ../../src/wui/helpwindow.cc:48
 #, c-format
@@ -5565,7 +5565,7 @@ msgstr "Выбранные горячие клавиши (%1$s) уже испо�
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/ui_fsmenu/keyboard_options.cc:297
-#: ../../src/wui/interactive_player.cc:339
+#: ../../src/wui/interactive_player.cc:340
 msgid "General"
 msgstr "Главное"
 
@@ -6554,7 +6554,7 @@ msgstr "Удалить повтор после:"
 
 #: ../../src/ui_fsmenu/options.cc:263
 msgid "Skip autosaves while inactive"
-msgstr ""
+msgstr "Пропускать автосохранранение в неактивном состоянии"
 
 #: ../../src/ui_fsmenu/options.cc:270
 msgid "Compress Widelands data files (maps, replays, and savegames)"
@@ -6562,7 +6562,7 @@ msgstr "Сжимать данные игры (карты, повторы и со
 
 #: ../../src/ui_fsmenu/options.cc:278
 msgid "Keep history of sent chat messages in a file"
-msgstr ""
+msgstr "Сохранять историю отправленных сообщений чата в файле"
 
 #: ../../src/ui_fsmenu/options.cc:289
 #: ../../src/wui/interactive_gamebase.cc:275
@@ -6587,13 +6587,13 @@ msgstr "Показывать здания"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/ui_fsmenu/options.cc:303 ../../src/wui/interactive_player.cc:384
+#: ../../src/ui_fsmenu/options.cc:303 ../../src/wui/interactive_player.cc:385
 msgid "Show Workarea Overlaps"
 msgstr "Показывать наложения рабочих областей"
 
 #: ../../src/ui_fsmenu/options.cc:316
 msgid "Pause game when inactive for:"
-msgstr ""
+msgstr "Поставить на паузу игру, когда она неактивна для:"
 
 #: ../../src/ui_fsmenu/options.cc:326
 msgid "Start building road after placing a flag"
@@ -7265,11 +7265,11 @@ msgstr "Сделать снимок экрана"
 
 #: ../../src/wlapplication_options.cc:397
 msgid "Open the Debug Console (developer tool)"
-msgstr ""
+msgstr "Открыть отладочную консоль (инструменты разработчика)"
 
 #: ../../src/wlapplication_options.cc:402
 msgid "Toggle Cheat Mode (developer tool)"
-msgstr ""
+msgstr "Переключить в читер режим (инструменты разработчика)"
 
 #: ../../src/wlapplication_options.cc:412
 msgid "Load"
@@ -7928,7 +7928,7 @@ msgstr "(отключено)"
 #. * TRANSLATORS: The first placeholder is the stock amount of a ware/worker,
 #. and the second is an
 #. * icon indicating a trend. Very little space is available.
-#: ../../src/wlapplication_options.cc:1476 ../../src/wui/waresdisplay.cc:557
+#: ../../src/wlapplication_options.cc:1476 ../../src/wui/waresdisplay.cc:554
 #, c-format
 msgid "%1$s%2$s"
 msgstr "%1$s%2$s"
@@ -8017,7 +8017,7 @@ msgstr "Атака"
 #. * TRANSLATORS: Number of soldiers that should attack. Used in the attack
 #. window.
 #: ../../src/wui/attack_window.cc:171
-#: ../../src/wui/constructionsitewindow.cc:534
+#: ../../src/wui/constructionsitewindow.cc:538
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
@@ -8243,7 +8243,7 @@ msgid "Show work area"
 msgstr "Показать рабочую область"
 
 #: ../../src/wui/buildingwindow.cc:726
-#: ../../src/wui/constructionsitewindow.cc:342
+#: ../../src/wui/constructionsitewindow.cc:346
 msgid "Start an expedition"
 msgstr "Начать экспедицию"
 
@@ -8251,72 +8251,72 @@ msgstr "Начать экспедицию"
 msgid "Cancel the expedition"
 msgstr "Отменить экспедицию"
 
-#: ../../src/wui/constructionsitewindow.cc:150
+#: ../../src/wui/constructionsitewindow.cc:154
 #: ../../src/wui/dismantlesitewindow.cc:68
 msgid "Building materials"
 msgstr "Стройматериалы"
 
-#: ../../src/wui/constructionsitewindow.cc:226
+#: ../../src/wui/constructionsitewindow.cc:230
 msgid "Stopped"
 msgstr "Остановлено"
 
-#: ../../src/wui/constructionsitewindow.cc:227
+#: ../../src/wui/constructionsitewindow.cc:231
 msgid "Stop this building’s work after completion"
 msgstr "Остановить работу в здании после завершения"
 
-#: ../../src/wui/constructionsitewindow.cc:266
+#: ../../src/wui/constructionsitewindow.cc:270
 #: ../../src/wui/soldierlist.cc:452
 msgid "Prefer heroes"
 msgstr "Предпочитать героев"
 
-#: ../../src/wui/constructionsitewindow.cc:269
+#: ../../src/wui/constructionsitewindow.cc:273
 #: ../../src/wui/soldierlist.cc:449
 msgid "Prefer rookies"
 msgstr "Предпочитать новобранцев"
 
-#: ../../src/wui/constructionsitewindow.cc:300
-#: ../../src/wui/warehousewindow.cc:150
+#: ../../src/wui/constructionsitewindow.cc:304
+#: ../../src/wui/warehousewindow.cc:154
 msgid "Normal policy"
 msgstr "Нормальная политика"
 
-#: ../../src/wui/constructionsitewindow.cc:304
-#: ../../src/wui/warehousewindow.cc:151
+#: ../../src/wui/constructionsitewindow.cc:308
+#: ../../src/wui/warehousewindow.cc:155
 msgid "Preferably store selected wares here"
 msgstr "Предпочтительно хранить выбранные изделия здесь"
 
-#: ../../src/wui/constructionsitewindow.cc:308
-#: ../../src/wui/warehousewindow.cc:152
+#: ../../src/wui/constructionsitewindow.cc:312
+#: ../../src/wui/warehousewindow.cc:156
 msgid "Do not store selected wares here"
 msgstr "Не хранить выбранные изделия здесь"
 
-#: ../../src/wui/constructionsitewindow.cc:312
-#: ../../src/wui/warehousewindow.cc:153
+#: ../../src/wui/constructionsitewindow.cc:316
+#: ../../src/wui/warehousewindow.cc:157
 msgid "Remove selected wares from here"
 msgstr "Переместить выбранные изделия отсюда"
 
-#: ../../src/wui/constructionsitewindow.cc:331
+#: ../../src/wui/constructionsitewindow.cc:335
 msgid "Ware settings to apply after construction"
 msgstr "Настройки товара для применения после строительства"
 
-#: ../../src/wui/constructionsitewindow.cc:334
+#: ../../src/wui/constructionsitewindow.cc:338
 msgid "Worker settings to apply after construction"
 msgstr "Настройки работника для применения после строительства"
 
-#: ../../src/wui/constructionsitewindow.cc:342
+#: ../../src/wui/constructionsitewindow.cc:346
 msgid "Start an expedition from this port after completion"
 msgstr "Отправить экспедицию из порта после завершения"
 
-#: ../../src/wui/constructionsitewindow.cc:366
+#: ../../src/wui/constructionsitewindow.cc:370
 msgid "Settings to apply after construction"
 msgstr "Настройки применить после строительства"
 
-#: ../../src/wui/constructionsitewindow.cc:460
+#: ../../src/wui/constructionsitewindow.cc:464
 #: ../../src/wui/soldiercapacitycontrol.cc:71
 msgid ""
 "Decrease capacity. Hold down Ctrl to set the capacity to the lowest value"
 msgstr "Уменьшить емкость. Удерживайте Ctrl, чтобы установить минимальное значение емкости"
 
-#: ../../src/wui/constructionsitewindow.cc:470
+#: ../../src/wui/constructionsitewindow.cc:474
 #: ../../src/wui/soldiercapacitycontrol.cc:80
 msgid ""
 "Increase capacity. Hold down Ctrl to set the capacity to the highest value"
@@ -9319,28 +9319,28 @@ msgstr "%1$s (%2$s) (%3$s)"
 
 #: ../../src/wui/interactive_gamebase.cc:656
 msgid "Remaining construction costs:"
-msgstr ""
+msgstr "Оставшиеся расходы на постройку:"
 
 #. * TRANSLATORS: Title for the statistics menu button in the game
-#: ../../src/wui/interactive_player.cc:186
+#: ../../src/wui/interactive_player.cc:187
 #: ../../src/wui/interactive_spectator.cc:48
 msgid "Statistics"
 msgstr "Статистика"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
-#: ../../src/wui/interactive_player.cc:313 ../../src/wui/map_tags.cc:51
+#: ../../src/wui/interactive_player.cc:314 ../../src/wui/map_tags.cc:51
 msgid "Seafaring"
 msgstr "Мореплавание"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:319
-#: ../../src/wui/militarysitewindow.cc:40 ../../src/wui/warehousewindow.cc:311
+#: ../../src/wui/interactive_player.cc:320
+#: ../../src/wui/militarysitewindow.cc:40 ../../src/wui/warehousewindow.cc:315
 msgid "Soldiers"
 msgstr "Солдаты"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:324 ../../src/wui/stock_menu.cc:40
+#: ../../src/wui/interactive_player.cc:325 ../../src/wui/stock_menu.cc:40
 #: ../../src/wui/ware_statistics_menu.cc:152 ../../src/wui/waresdisplay.cc:81
 msgid "Stock"
 msgstr "Запасы"
@@ -9348,17 +9348,17 @@ msgstr "Запасы"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/wui/interactive_player.cc:381
+#: ../../src/wui/interactive_player.cc:382
 msgid "Hide Workarea Overlaps"
 msgstr "Скрыть наложения рабочих областей"
 
-#: ../../src/wui/interactive_player.cc:387
+#: ../../src/wui/interactive_player.cc:388
 msgid ""
 "Toggle whether overlapping workareas are indicated when placing a "
 "constructionsite"
 msgstr "Переключить, указываются ли перекрывающиеся рабочие области при размещении строительной площадки"
 
-#: ../../src/wui/interactive_player.cc:469
+#: ../../src/wui/interactive_player.cc:470
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
@@ -9367,7 +9367,7 @@ msgstr[1] "%u новых сообщения"
 msgstr[2] "%u новых сообщений"
 msgstr[3] "%u новых сообщений"
 
-#: ../../src/wui/interactive_player.cc:884
+#: ../../src/wui/interactive_player.cc:911
 msgid "Fastplace Shortcuts"
 msgstr "Закладки для быстрого перемещения"
 
@@ -10255,43 +10255,43 @@ msgstr "Звук отключен либо из-за проблемы со зв�
 #. different background colors; each icon's color indicates whether the stock
 #. is higher or
 #. lower than the economy target setting. Very little space is available.
-#: ../../src/wui/stock_menu.cc:53
+#: ../../src/wui/stock_menu.cc:52
 msgid "Evaluate"
 msgstr "Оценка"
 
-#: ../../src/wui/stock_menu.cc:57
+#: ../../src/wui/stock_menu.cc:56
 msgid "Compare stocked amounts to economy target quantities"
 msgstr "Теперь сравните запасы с целевыми показателями экономики"
 
-#: ../../src/wui/stock_menu.cc:60
+#: ../../src/wui/stock_menu.cc:59
 msgid "Red:"
 msgstr "Красный:"
 
-#: ../../src/wui/stock_menu.cc:60
+#: ../../src/wui/stock_menu.cc:59
 msgid "Stock is lower than the target"
 msgstr "Запасы ниже целевой точки"
 
-#: ../../src/wui/stock_menu.cc:63
+#: ../../src/wui/stock_menu.cc:62
 msgid "Yellow:"
 msgstr "Жёлтый:"
 
-#: ../../src/wui/stock_menu.cc:64
+#: ../../src/wui/stock_menu.cc:63
 msgid "Stock is equal to the target"
 msgstr "Запасы на целевом уровне"
 
-#: ../../src/wui/stock_menu.cc:67
+#: ../../src/wui/stock_menu.cc:66
 msgid "Green:"
 msgstr "Зелёный:"
 
-#: ../../src/wui/stock_menu.cc:68
+#: ../../src/wui/stock_menu.cc:67
 msgid "Stock is higher than the target"
 msgstr "Запасы выше целевой точки"
 
-#: ../../src/wui/stock_menu.cc:72
+#: ../../src/wui/stock_menu.cc:71
 msgid "Wares (total)"
 msgstr "Товары (всего)"
 
-#: ../../src/wui/stock_menu.cc:76
+#: ../../src/wui/stock_menu.cc:75
 msgid "Workers (total)"
 msgstr "Работники (всего)"
 
@@ -10299,7 +10299,7 @@ msgstr "Работники (всего)"
 msgid "Wares in warehouses"
 msgstr "Товары на складах"
 
-#: ../../src/wui/stock_menu.cc:84
+#: ../../src/wui/stock_menu.cc:85
 msgid "Workers in warehouses"
 msgstr "Работники на складах"
 
@@ -10336,61 +10336,61 @@ msgstr "Потребление"
 msgid "Economy health"
 msgstr "Состояние экономики"
 
-#: ../../src/wui/warehousewindow.cc:158
+#: ../../src/wui/warehousewindow.cc:162
 msgid "Remove 10 wares"
 msgstr "Убрать 10 ед. товара"
 
-#: ../../src/wui/warehousewindow.cc:165
+#: ../../src/wui/warehousewindow.cc:169
 msgid "Remove a ware"
 msgstr "Убрать 1 ед. товара"
 
-#: ../../src/wui/warehousewindow.cc:172
+#: ../../src/wui/warehousewindow.cc:176
 msgid "Add a ware"
 msgstr "Добавить 1 ед. товара"
 
-#: ../../src/wui/warehousewindow.cc:179
+#: ../../src/wui/warehousewindow.cc:183
 msgid "Add 10 wares"
 msgstr "Добавить 10 ед. товара"
 
-#: ../../src/wui/warehousewindow.cc:190
+#: ../../src/wui/warehousewindow.cc:194
 msgid "Configure this building’s economy"
 msgstr "Настроить экономику в здании"
 
-#: ../../src/wui/warehousewindow.cc:316
+#: ../../src/wui/warehousewindow.cc:320
 msgid "Wares waiting to be shipped"
 msgstr "Товары, ожидающие погрузки"
 
-#: ../../src/wui/warehousewindow.cc:319
+#: ../../src/wui/warehousewindow.cc:323
 msgid "Workers waiting to embark"
 msgstr "Работники, ожидающие посадки на корабль"
 
-#: ../../src/wui/warehousewindow.cc:325
+#: ../../src/wui/warehousewindow.cc:329
 msgid "Expedition"
 msgstr "Экспедиция"
 
-#: ../../src/wui/waresdisplay.cc:551
+#: ../../src/wui/waresdisplay.cc:548
 msgid "↓"
 msgstr "↓"
 
-#: ../../src/wui/waresdisplay.cc:553
+#: ../../src/wui/waresdisplay.cc:550
 msgid "↑"
 msgstr "↑"
 
-#: ../../src/wui/waresdisplay.cc:554
+#: ../../src/wui/waresdisplay.cc:551
 msgid "="
 msgstr "="
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:596
+#: ../../src/wui/waresdisplay.cc:589
 msgid "%1%k"
 msgstr "%1%тысяч"
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 5M = 5,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:599
+#: ../../src/wui/waresdisplay.cc:592
 msgid "%1%M"
 msgstr "%1%Мн"
 
@@ -10398,7 +10398,7 @@ msgstr "%1%Мн"
 #. 5,000,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:602
+#: ../../src/wui/waresdisplay.cc:595
 msgid "%1%G"
 msgstr "%1%Мд"
 

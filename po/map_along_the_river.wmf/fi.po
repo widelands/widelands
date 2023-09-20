@@ -60,7 +60,7 @@ msgstr "Päihitä Törverin armeijat"
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:10
 msgid ""
 "Törver is the enemy in the North, who is fighting under the red banner."
-msgstr ""
+msgstr "Törver on vihollinen pohjoisessa, hän sotii punaisen tunnuksen alla. "
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:16
 msgid "Build a port"
@@ -91,6 +91,8 @@ msgid ""
 "Conquer the pirate sentry near the brook to the East. Hopefully we will find"
 " out what happened to the gold in this area."
 msgstr ""
+"Valloita merirosvovartio lähellä idässä sijaitsevaa puroa. Toivon mukaan "
+"saamme tietää mitä tämän alueen kullalle tapahtui."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:34
 msgid "Build warehouse"
