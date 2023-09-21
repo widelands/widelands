@@ -1319,7 +1319,6 @@ void throw_exclusive(const std::string& opt, const std::string& other) {
 	   format(_("Command line parameters --%s and --%s can not be combined"), opt, other));
 }
 
-
 }  // namespace
 
 // Checks and returns whether `param` was set, but throws ParameterError if it also had a value.
@@ -1338,8 +1337,8 @@ bool WLApplication::check_commandline_flag(const std::string& opt) {
 // Returns the value of `opt`. Only returns std::nullopt if `opt` was not used.
 // If `opt` was used without a value, then returns an empty string if `allow_empty` is true,
 // otherwise throws ParameterError.
-std::optional<std::string>
-WLApplication::get_commandline_option_value(const std::string& opt, const bool allow_empty) {
+std::optional<std::string> WLApplication::get_commandline_option_value(const std::string& opt,
+                                                                       const bool allow_empty) {
 	auto found = commandline_.find(opt);
 	if (found == commandline_.end()) {
 		return std::nullopt;
@@ -1492,9 +1491,9 @@ void WLApplication::handle_commandline_parameters() {
 
 	// This is used by the parser to report an error
 	if (auto err = get_commandline_option_value("error"); err.has_value()) {
-		throw ParameterError(CmdLineVerbosity::Normal,
-		                     format(_("Unknown command line parameter: %s\nMaybe a '=' is missing?"),
-		                            *err));
+		throw ParameterError(
+		   CmdLineVerbosity::Normal,
+		   format(_("Unknown command line parameter: %s\nMaybe a '=' is missing?"), *err));
 	}
 
 	if (auto testdir = get_commandline_option_value("datadir_for_testing"); testdir.has_value()) {
@@ -1533,12 +1532,11 @@ void WLApplication::handle_commandline_parameters() {
 	}
 
 	const std::map<GameType, std::string> game_type_options = {
-		{ GameType::kEditor, "editor" },
-		{ GameType::kReplay, "replay" },
-		{ GameType::kFromTemplate, "new_game_from_template" },
-		{ GameType::kLoadGame, "loadgame" },
-		{ GameType::kScenario, "scenario" }
-	};
+	   {GameType::kEditor, "editor"},
+	   {GameType::kReplay, "replay"},
+	   {GameType::kFromTemplate, "new_game_from_template"},
+	   {GameType::kLoadGame, "loadgame"},
+	   {GameType::kScenario, "scenario"}};
 
 	for (auto pair : game_type_options) {
 		const std::string& opt = pair.second;

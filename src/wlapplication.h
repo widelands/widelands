@@ -218,8 +218,8 @@ private:
 	void parse_commandline(int argc, char const* const* argv);
 	void handle_commandline_parameters();
 	bool check_commandline_flag(const std::string& param);
-	std::optional<std::string>
-	get_commandline_option_value(const std::string& opt, const bool allow_empty = false);
+	std::optional<std::string> get_commandline_option_value(const std::string& opt,
+	                                                        const bool allow_empty = false);
 
 	void setup_homedir();
 
