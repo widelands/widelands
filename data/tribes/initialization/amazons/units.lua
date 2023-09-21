@@ -1472,15 +1472,13 @@ wl.Descriptions():new_tribe {
          name = "amazons_rare_tree_kiln",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an Amazon production site: Rare Tree Kiln
-            lore = pgettext("amazons_building", "‘You think you've mastered the art of burning charcoal. But the best charcoal is that which can only be made from rubber when placed in the hottest fire of ironwood. What you've learnt so far, my girl, is barely enough to start learning how to ignite ironwood. You have to start slowly, with the gentle flames of a balsa fire… Oh, no, not again! The kiln started to cave in again from the heat of the previous fire. Go fetch some granite and I'll show you how to repair it."),
+            lore = pgettext("amazons_building", "‘You think you've mastered the art of burning charcoal. But the best charcoal is that which can only be made from rubber when placed in the hottest fire of ironwood. What you've learnt so far, my girl, is barely enough to start learning how to ignite ironwood. You have to start slowly, with the gentle flames of a balsa fire…’"),
             -- TRANSLATORS: Lore author helptext for an Amazon production site: Rare Tree Kiln
             lore_author = pgettext("amazons_building", "Mistress Blackwood, teaching an apprentice"),
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Rare Tree Kiln
             purpose = pgettext("amazons_building", "Burns rare trees into charcoal."),
-            -- TRANSLATORS: Note helptext for an Amazon production site: Rare Tree Kiln
-            note = pgettext("amazons_building", "The rare tree kiln can burn up to three lumps of charcoal between repairs, but only if the rare tree supply is steady. If it has to wait for rare trees, then less charcoal is produced between repairs, severely hurting the efficiency."),
             -- TRANSLATORS: Performance helptext for an Amazon production site: Rare Tree Kiln
-            performance = pgettext("amazons_building", "If fully supplied, the rare tree kiln needs %s on average to produce one lump of coal."):bformat(format_minutes_seconds(1,10))
+            performance = pgettext("amazons_building", "If fully supplied, the rare tree kiln needs %s on average to produce one lump of coal."):bformat(format_minutes_seconds(1,14))
          }
       },
       {
@@ -1563,7 +1561,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Stone Mine
             purpose = pgettext("amazons_building", "Digs granite and quartz out of the ground in mountain terrain."),
             -- TRANSLATORS: Performance helptext for an Amazon production site: Stone Mine
-            performance = pgettext("amazons_building", "The stone mine can produce one slab of each kind of stone in %s on average if the supply with rations is steady and the mine is not worn out."):bformat(format_seconds(64))
+            performance = pgettext("amazons_building", "The stone mine can produce one slab of each kind of stone in %s on average if the supply with rations is steady and the mine is not worn out."):bformat(format_seconds(74))
          }
       },
       {
