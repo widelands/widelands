@@ -428,13 +428,14 @@ std::string join_sentences(const std::string& sentence1, const std::string& sent
 	return format(pgettext("sentence_separator", "%1% %2%"), sentence1, sentence2);
 }
 
-bool is_translation_of(const std::string& input, const std::string& base,
+bool is_translation_of(const std::string& input,
+                       const std::string& base,
                        const std::string& textdomain_name) {
 	if (input == base) {
 		return true;
 	}
-	std::unique_ptr<Textdomain>
-	textdomain(textdomain_name.empty() ? nullptr : new Textdomain(textdomain_name));
+	std::unique_ptr<Textdomain> textdomain(
+	   textdomain_name.empty() ? nullptr : new Textdomain(textdomain_name));
 	return (input == base) || (input == translate(base));
 }
 

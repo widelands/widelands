@@ -90,8 +90,8 @@ void find_maps(const std::string& directory, std::vector<MapEntry>& results) {
 				ml->preload_map(true, nullptr);
 				if (map.version().map_version_timestamp > 0) {
 					MapData::MapType type = map.scenario_types() == Widelands::Map::SP_SCENARIO ?
-                                       MapData::MapType::kScenario :
-                                       MapData::MapType::kNormal;
+                                          MapData::MapType::kScenario :
+                                          MapData::MapType::kNormal;
 					results.emplace_back(MapEntry(
 					   {MapData(map, file, type, MapData::DisplayType::kFilenames), map.version()}));
 				}

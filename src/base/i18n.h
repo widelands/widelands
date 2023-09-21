@@ -118,7 +118,8 @@ std::string join_sentences(const std::string& sentence1, const std::string& sent
  * 'input' is the same as 'base'. If 'textdomain_name' is given, then uses that
  * textdomain, otherwise the current one.
  */
-bool is_translation_of(const std::string& input, const std::string& base,
+bool is_translation_of(const std::string& input,
+                       const std::string& base,
                        const std::string& textdomain_name = "");
 
 }  // namespace i18n

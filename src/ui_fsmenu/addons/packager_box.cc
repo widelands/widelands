@@ -275,27 +275,27 @@ void MapsAddOnsPackagerBox::load_addon(AddOns::MutableAddOn* a) {
 			}
 			my_maps_.add(
 			   entry.data.localized_name, entry.data.filenames.at(0), nullptr, false,
-			   format("%s<br>%s<br>%s<br>%s<br>%s<br>%s",
-			          g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
-			             .as_font_tag(entry.data.filenames.at(0)),
-			          format(_("Name: %s"),
-			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(entry.data.localized_name)),
-			          format(_("Size: %s"),
-			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(
-			                       format(_("%1$u×%2$u"), entry.data.width, entry.data.height))),
-			          format(_("Players: %s"),
-			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(std::to_string(entry.data.nrplayers))),
-			          format(_("Minimum Widelands Version: %s"),
-			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(entry.data.minimum_required_widelands_version.empty() ?
-                                             _("(none)") :
-                                             entry.data.minimum_required_widelands_version)),
-			          format(_("Description: %s"),
-			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(entry.data.description))));
+			   format(
+			      "%s<br>%s<br>%s<br>%s<br>%s<br>%s",
+			      g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
+			         .as_font_tag(entry.data.filenames.at(0)),
+			      format(_("Name: %s"),
+			             g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                .as_font_tag(entry.data.localized_name)),
+			      format(_("Size: %s"),
+			             g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                .as_font_tag(format(_("%1$u×%2$u"), entry.data.width, entry.data.height))),
+			      format(_("Players: %s"),
+			             g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                .as_font_tag(std::to_string(entry.data.nrplayers))),
+			      format(_("Minimum Widelands Version: %s"),
+			             g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                .as_font_tag(entry.data.minimum_required_widelands_version.empty() ?
+                                         _("(none)") :
+                                         entry.data.minimum_required_widelands_version)),
+			      format(_("Description: %s"),
+			             g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                .as_font_tag(entry.data.description))));
 		}
 	}
 

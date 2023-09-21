@@ -58,8 +58,8 @@ void fill_parameter_vector() {
 	 */
 	const std::string lastused_word = _("last");
 
-	const std::string
-	file_or_last_placeholder = format(alternatives_format, filename_placeholder, lastused_word);
+	const std::string file_or_last_placeholder =
+	   format(alternatives_format, filename_placeholder, lastused_word);
 
 	parameters =
 	{ {_("Usage:"), _("widelands <option0>=<value0> ... <optionN>=<valueN>"), "--", "", false},
@@ -91,23 +91,23 @@ void fill_parameter_vector() {
 	  {"", "scenario", _("FILENAME"),
 		_("Start the map `FILENAME` directly as a singleplayer scenario."), false},
 	  {"", "loadgame", file_or_last_placeholder,
-	   /** TRANSLATORS: %1 is translation for FILENAME,
-	                    %2 is translation for "last" for last used file */
-	   format(_("Load the savegame `%1$s` directly or the last saved game if `=%2$s` is used."),
-	          filename_placeholder, lastused_word),
-	   false},
+		/** TRANSLATORS: %1 is translation for FILENAME,
+		                 %2 is translation for "last" for last used file */
+		format(_("Load the savegame `%1$s` directly or the last saved game if `=%2$s` is used."),
+		       filename_placeholder, lastused_word),
+		false},
 	  {"", "replay", file_or_last_placeholder,
-	   /** TRANSLATORS: %1 is translation for FILENAME,
-	                    %2 is translation for "last" for last used file */
-	   format(_("Load the replay `%1$s` directly or the last saved replay if `=%2$s` is used."),
-	          filename_placeholder, lastused_word),
-	   false},
+		/** TRANSLATORS: %1 is translation for FILENAME,
+		                 %2 is translation for "last" for last used file */
+		format(_("Load the replay `%1$s` directly or the last saved replay if `=%2$s` is used."),
+		       filename_placeholder, lastused_word),
+		false},
 	  {"", "editor", "",
-	   /** TRANSLATORS: %1 is translation for FILENAME,
-	                    %2 is translation for "last" for last used file */
+		/** TRANSLATORS: %1 is translation for FILENAME,
+		                 %2 is translation for "last" for last used file */
 		format(_("Start the Widelands map editor directly. You can add `=%1$s` to directly load the "
-		       "map `FILENAME` in the editor or `=%2$s` to load the last edited map."),
-	          filename_placeholder, lastused_word),
+		         "map `FILENAME` in the editor or `=%2$s` to load the last edited map."),
+		       filename_placeholder, lastused_word),
 		false},
 	  {"", "script", _("FILENAME"),
 		_("Run the given Lua script after initialization. Only valid with --scenario, --loadgame, or "

@@ -825,8 +825,8 @@ void WLApplication::run() {
 					if (map.has_value()) {
 						filename_ = map->filenames.at(0);
 					} else {
-						throw WLWarning(_("No Last Edited Map"),
-						                _("Widelands could not find the last edited map."));
+						throw WLWarning(
+						   _("No Last Edited Map"), _("Widelands could not find the last edited map."));
 					}
 				}
 				EditorInteractive::run_editor(
