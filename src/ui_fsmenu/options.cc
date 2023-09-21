@@ -149,16 +149,16 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                           UI::PanelStyle::kFsMenu,
                           UI::ButtonStyle::kFsMenuMenu),
      display_dropdown_(&box_interface_vbox_,
-                          "dropdown_display",
-                          0,
-                          0,
-                          100,  // 100 is arbitrary, will be resized in layout().
-                          50,
-                          24,
-                          _("Display"),
-                          UI::DropdownType::kTextual,
-                          UI::PanelStyle::kFsMenu,
-                          UI::ButtonStyle::kFsMenuMenu),
+                       "dropdown_display",
+                       0,
+                       0,
+                       100,  // 100 is arbitrary, will be resized in layout().
+                       50,
+                       24,
+                       _("Display"),
+                       UI::DropdownType::kTextual,
+                       UI::PanelStyle::kFsMenu,
+                       UI::ButtonStyle::kFsMenuMenu),
 
      inputgrab_(&box_interface_,
                 UI::PanelStyle::kFsMenu,
@@ -565,8 +565,8 @@ void Options::add_displays(const OptionsCtrl::OptionsStruct& opt) {
 		if (SDL_GetDisplayBounds(i, &r) == 0) {
 			display_dropdown_.add(
 			   /** TRANSLATORS: Display index and virtual coordinates, e.g, '#0 (0, 0, 1920, 1080)'*/
-			  format(_("#%1% (%2%, %3%, %4%, %5%)"), i, r.x, r.y, r.w, r.h),
-			  i, nullptr, opt.display == i);
+			   format(_("#%1% (%2%, %3%, %4%, %5%)"), i, r.x, r.y, r.w, r.h), i, nullptr,
+			   opt.display == i);
 		}
 	}
 	if (!display_dropdown_.has_selection()) {
@@ -633,8 +633,8 @@ void Options::layout() {
 		language_dropdown_.set_height(tabs_.get_h() - language_dropdown_.get_y() - buth -
 		                              3 * kPadding);
 		translation_info_.set_size(
-		   language_dropdown_.get_w(),
-		   language_dropdown_.get_h() + resolution_dropdown_.get_h() + display_dropdown_.get_h() + 2 * kPadding);
+		   language_dropdown_.get_w(), language_dropdown_.get_h() + resolution_dropdown_.get_h() +
+		                                  display_dropdown_.get_h() + 2 * kPadding);
 		sb_maxfps_.set_unit_width(unit_w);
 		sb_maxfps_.set_desired_size(tab_panel_width, sb_maxfps_.get_h());
 
