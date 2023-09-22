@@ -364,10 +364,10 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                   UI::PanelStyle::kFsMenu,
                   "server_name",
                   UI::FontStyle::kWarning,
-				  0,
-				  0,
-				  0,
-				  0,
+                  0,
+                  0,
+                  0,
+                  0,
                   "",
                   UI::Align::kRight) {
 
