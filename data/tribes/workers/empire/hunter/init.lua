@@ -19,6 +19,7 @@ wl.Descriptions():new_worker_type {
          -- steps from building to animal: 2-16
          -- min. worker time: 2 * 2 * 1.8 + 1 = 8.2 sec
          -- max. worker time: 2 * 16 * 1.8 + 1 = 58.6 sec
+         -- chasing of the game also changes time, average should remain the same
          "findobject=type:bob radius:13 attrib:eatable",
          "walk=object",
          "animate=idle duration:1s",
