@@ -146,7 +146,7 @@ private:
 	 * The ware on which the mouse press has been performed.
 	 * It is not selected directly, but will be on mouse release.
 	 */
-	std::atomic<Widelands::DescriptionIndex> selection_anchor_;
+	Widelands::DescriptionIndex selection_anchor_;
 	std::function<void(Widelands::DescriptionIndex, bool)> callback_function_;
 
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
