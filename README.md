@@ -127,19 +127,11 @@ You can add targets to the `make` or `ninja` command, e.g. `make lang` to build 
 
 ## Contributing
 
-We have some instructions on how to use Git to help you if you're new to GitHub: https://www.widelands.org/wiki/GitPrimer/
+We have some instructions on how to use Git to help you if you're new to Git: https://www.widelands.org/wiki/GitPrimer/
 
 ### Code
 
-The master branch and open pull requests will be formatted automatically by a GitHub action that runs `clang-format`. When you push to an open pull request, the formatting changes will be pushed back to the branch after about four minutes. Don't forget to run 'git pull' before you push again. Formatting is only triggered the first time you push *after* you opened the PR.
-
-You need to enable *local and third-party actions* in the Actions tab of your fork's settings to enable automatic formatting. If you disable actions, no formatting will take place on your branches.
-
-In order to ensure that our continuous integration suite will work properly for branches in your fork, it is strongly recommended that you create a personal access token for our formatting action:
-1. Create a Personal Access Token in your **profile** (https://github.com/settings/tokens). Select the scope `Repo → public_repo` for the new token. The token's note does not matter (use e.g. "Widelands Formatting Bot"). Copy the token's hash.
-2. Create a secret in your **widelands fork** (`https://github.com/<username>/widelands/settings/secrets`). The secret must be named `WIDELANDS_FORMAT_TOKEN`. Its value must be the hash of the token you just created.
-
-More information about [Personal Access Tokens may be found here](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token). More information about [secrets may be found here](https://docs.github.com/en/free-pro-team@latest/github/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets).
+The master branch and all issues and pull requests are mirrored bidirectionally between our developer environments on Codeberg and GitHub by bunnybot. Bunnybot also formats the code (C++, Lua, and Python) in all mirrored branches.
 
 We follow the [Google Styleguide](https://google.github.io/styleguide/cppguide.html).
 

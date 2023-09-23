@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2022
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2023
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # GunChleoc, 2014
 # GunChleoc, 2014
@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2023-08-31 02:28+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2023\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,7 +38,7 @@ msgstr "Bau een Flintslagerhuus"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:34
 msgid "Build two woodcutter’s houses"
-msgstr "Bau twee Boomslagereen"
+msgstr "Bau twee Boomsaagereen"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:35
 msgid "Build two forester’s houses"
@@ -88,10 +88,9 @@ msgid ""
 "The other two important food wares are smoked fish and smoked meat. Raw meat"
 " is delivered from a hunter. A fisher gets the fish out of the sea while a "
 "fish breeder makes sure that a school of fish does not go extinct by "
-"breeding more. Make sure that there are always fish left, otherwise the fish"
-" breeder won’t be able to breed new ones. The smoking happens in a smokery, "
-"you will need at least two of those."
-msgstr "De annern twee wichtigen Spiesen sünd Rökelfiss un Rökelfleesk. Een Jäger levert rauhes Fleesk. Een Fisker hollt Fisse ut de See un een Fisstüchter kümmert sik daarum, dat de Fisse nich all fiskt worden, indeem he welke tücht. Pass up, dat immer een paar Fisse övrig sünd, anners kann de Fisstüchter keene mehr tüchten. Fiss un Fleesk worden in eener Rökelkamer rökelt, bau daar tominnst twee vun."
+"breeding more. The smoking happens in a smokery, you will need at least two "
+"of those."
+msgstr "De annern twee wichtigen Spiesen sünd Rökelfiss un Rökelfleesk. Een Jäger levert rauhes Fleesk. Een Fisker hollt Fisse ut de See un een Fisstüchter kümmert sik daarum, dat de Fisse nich all fiskt worden, indeem he welke tücht. Fiss un Fleesk worden in eener Rökelkamer rökelt, bau daar tominnst twee vun."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Build a farm and a blackroot farm"
@@ -461,7 +460,7 @@ msgid ""
 " most buildings can’t be made out of logs alone. Stronger buildings also "
 "need granite, but there is plenty to the north-east of here; we just need to"
 " build a quarry, and my stonemasons will go to work promptly."
-msgstr "Satuul sall Jo warmen, Jundlin’! De wichtigsten Dingen, um een Dörp to bauen, sünd de Baukraam. Dat gifft hier een paar Bomen, also sallen wi Husen för Boomslagers bauen un natürelk ok för Försters, daarmit dat alltied genoog Bomen gifft. Ach, un wi düren nich eene Saagmöhlen vergeten, denn de meesten Husen könen nich blot ut Boomstammen baut worden. Grotere Husen bruken ok Flint, aver dat gifft Bülten daarvun im Noordoost; wi bruken nix as een Flintslagerhuus un miene Flintslager fangen stracks an to warken."
+msgstr "Satuul sall Jo warmen, Jundlin’! De wichtigsten Dingen, um een Dörp to bauen, sünd de Baukraam. Dat gifft hier een paar Bomen, also sallen wi Husen för Boomsaagers bauen un natürelk ok för Försters, daarmit dat alltied genoog Bomen gifft. Ach, un wi düren nich eene Saagmöhlen vergeten, denn de meesten Husen könen nich blot ut Boomstammen baut worden. Grotere Husen bruken ok Flint, aver dat gifft Bülten daarvun im Noordoost; wi bruken nix as een Flintslagerhuus un miene Flintslager fangen stracks an to warken."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:204
 msgid "Sidolus Speaks"

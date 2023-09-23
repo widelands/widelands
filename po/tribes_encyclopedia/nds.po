@@ -3283,7 +3283,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "The saw is needed by the sawyer, the woodcutter and the toolsmith. It is "
 "produced by the toolsmith."
-msgstr "De Saager, de Boomslager un de Warktüügsmidd bruken eene Saag. ’t word vum Warktüügsmidd produzeert."
+msgstr "De Saager, de Boomsaager un de Warktüügsmidd bruken eene Saag. Se word vum Warktüügsmidd produzeert."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Shovel, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:696
@@ -3997,7 +3997,7 @@ msgstr "Kappt Bomen in de Naberskupp un maakt daarut Boomstammen."
 #: ../../data/tribes/initialization/atlanteans/units.lua:1492
 msgctxt "atlanteans_building"
 msgid "The woodcutter’s house needs trees to fell within the work area."
-msgstr "De Boomslageree bruukt Bomen tum Umkappen in de Arbeidsgewest."
+msgstr "De Boomsaageree bruukt Bomen tum Umsaagen in de Arbeidsgewest."
 
 #. TRANSLATORS: Note lore for an Atlantean production site: Woodcutter's House
 #: ../../data/tribes/initialization/atlanteans/units.lua:1494
@@ -4012,7 +4012,7 @@ msgstr "Wi wollen Bomen up eener püken un statelk Aard kappen, daarum bruken wi
 #: ../../data/tribes/initialization/atlanteans/units.lua:1496
 msgctxt "atlanteans_building"
 msgid "Atlantean woodcutter asked why saws are used to cut trees"
-msgstr "Atlantisk Boomslager, as he fraagt word, um wat man Sagen tum Umkappen von Bomen bruukt"
+msgstr "Atlantisk Boomsaager, as he fraagt word, um wat man Sagen tum Umkappen von Bomen bruukt"
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Forester's
 #. House
@@ -4281,7 +4281,7 @@ msgstr "Saagt Planken ut Boomstammen."
 #: ../../data/tribes/initialization/atlanteans/units.lua:1616
 msgctxt "atlanteans_building"
 msgid "Will need at least four woodcutters for a constant supply of planks."
-msgstr "Bruukt tominnst veer Boomslagers för eene stevige Planken-Versörgung."
+msgstr "Bruukt tominnst veer Boomsaagers för eene stevige Planken-Versörgung."
 
 #. TRANSLATORS: Lore helptext for an Atlantean production site:  Sawmill
 #: ../../data/tribes/initialization/atlanteans/units.lua:1618
@@ -13096,7 +13096,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Barley is a slow-growing grain that is used for baking bread and brewing "
 "beer. It is also eaten by reindeer."
-msgstr "Garste is een Koorn, wat leep langsaam wasst. ’t word bruukt, um Brood to backen un Beer to broen. Ok Sneeihirsken eten Garste."
+msgstr "Garst is een Koorn, wat leep langsaam wasst. ’t word bruukt, um Brood to backen un Beer to broen. Ok Sneeihirsken eten Garst."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Honey
 #: ../../data/tribes/initialization/frisians/units.lua:198
@@ -13112,7 +13112,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Bread is made out of barley and water and is used in the taverns to prepare "
 "rations. It is also consumed by training soldiers."
-msgstr "Brood word ut Garste un Water maakt un in Kneipen bruukt, um Happen torechttomaken. Ok Soldaten bi’m Öven eten Brood."
+msgstr "Brood word ut Garst un Water maakt un in Kneipen bruukt, um Happen torechttomaken. Ok Soldaten bi’m Öven eten Brood."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Honey Bread
 #: ../../data/tribes/initialization/frisians/units.lua:216
@@ -14516,7 +14516,7 @@ msgstr "Wenn all Waren to rechter Tied ankomen, word elkeen Aard vun rökelt Spi
 #: ../../data/tribes/initialization/frisians/units.lua:1885
 msgctxt "frisians_building"
 msgid "Why shouldn’t my bread taste good? It’s only barley and water!"
-msgstr "Waarum sall mien Brood nich good smecken? ’t is nix as Garste un Water!"
+msgstr "Waarum sall mien Brood nich good smecken? ’t is nix as Garst un Water!"
 
 #. TRANSLATORS: Lore author helptext for a Frisian production site: Bakery
 #: ../../data/tribes/initialization/frisians/units.lua:1887
@@ -14528,7 +14528,7 @@ msgstr "Een Backer"
 #: ../../data/tribes/initialization/frisians/units.lua:1889
 msgctxt "frisians_building"
 msgid "Bakes bread out of barley and water to feed miners and soldiers."
-msgstr "Backt Brood ut Garste un Water för de Soldaten un Bargwarkskeerls."
+msgstr "Backt Brood ut Garst un Water för de Soldaten un Bargwarkskeerls."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Bakery
 #: ../../data/tribes/initialization/frisians/units.lua:1891
@@ -14560,7 +14560,7 @@ msgctxt "frisians_building"
 msgid ""
 "Bakes honey bread out of barley, water and honey to feed miners in deep "
 "mines and soldiers in advanced training."
-msgstr "Backt Hönnigbrood ut Garste, Water un Hönnig för de Bargwarkskeerls in Deepen Bargwarken un Soldaten bi’m Öven."
+msgstr "Backt Hönnigbrood ut Garst, Water un Hönnig för de Bargwarkskeerls in Deepen Bargwarken un Soldaten bi’m Öven."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Honey
 #. Bread Bakery
@@ -14618,7 +14618,7 @@ msgctxt "frisians_building"
 msgid ""
 "Brews beer out of barley and water. It also brews mead, which is beer "
 "refined with honey. Mead is consumed by experienced soldiers."
-msgstr "Broot Beer ut Garste un Water. Broot ok Hönnigbeer, also Beer, dat mit Hönnig verbetert is. Soldaten bi’m Öven drinken Hönnigbeer."
+msgstr "Broot Beer ut Garst un Water. Broot ok Hönnigbeer, also Beer, dat mit Hönnig verbetert is. Soldaten bi’m Öven drinken Hönnigbeer."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Mead
 #. Brewery
@@ -14779,13 +14779,13 @@ msgstr "Wat een Buur seggt, wenn sien Anföhrer hüm fraggt, waarum he een Koorn
 #: ../../data/tribes/initialization/frisians/units.lua:1997
 msgctxt "building"
 msgid "Sows and harvests barley."
-msgstr "Sait un arnt Garste."
+msgstr "Sait un arnt Garst."
 
 #. TRANSLATORS: Note helptext for a Frisian production site: Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1999
 msgctxt "frisians_building"
 msgid "The farm needs free space within the work area to plant seeds."
-msgstr "De Buurderee bruukt freje Rüümte in de Arbeidsgewest, waar Garste plant worden kann."
+msgstr "De Buurderee bruukt freje Rüümte in de Arbeidsgewest, waar Garst plant worden kann."
 
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Diker's House
 #: ../../data/tribes/initialization/frisians/units.lua:2006

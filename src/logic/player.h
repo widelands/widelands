@@ -593,6 +593,9 @@ public:
 		return is_picking_custom_starting_position_;
 	}
 	bool get_starting_position_suitability(const Coords&) const;
+	bool local_player_starting_position_is_pending() const {
+		return local_player_starting_position_is_pending_;
+	}
 
 	bool additional_expedition_items_allowed() const {
 		return allow_additional_expedition_items_;
@@ -723,6 +726,8 @@ private:
 	bool see_all_{false};
 	bool random_tribe_{false};
 	bool is_picking_custom_starting_position_{false};
+	// Only used for the local player
+	bool local_player_starting_position_is_pending_{false};
 	bool allow_additional_expedition_items_{true};
 	bool hidden_from_general_statistics_{false};
 

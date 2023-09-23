@@ -111,6 +111,7 @@ UniqueWindow::UniqueWindow(Panel* const parent,
 	if (registry_ != nullptr) {
 		delete registry_->window;
 		registry_->window = this;
+		set_pinned(registry_->pinned);
 		if (registry_->valid_pos) {
 			set_pos(Vector2i(registry_->x, registry_->y));
 			usedefaultpos_ = false;
@@ -139,6 +140,7 @@ void UniqueWindow::save_position() {
 		registry_->x = get_x();
 		registry_->y = get_y();
 		registry_->valid_pos = true;
+		registry_->pinned = is_pinned();
 	}
 }
 

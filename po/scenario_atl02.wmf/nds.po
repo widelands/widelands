@@ -91,7 +91,7 @@ msgid ""
 " might or might not be needed depending on how fast the trees are growing "
 "around us. Find the balance."
 msgstr ""
-"Wi bruken tominnst een Flintslagerhuus, een paar Boomslagers un eene "
+"Wi bruken tominnst een Flintslagerhuus, een paar Boomsaagers un eene "
 "Saagmöhlen. Of wi eenen Förster bruken of nich, hangt daarvun of, wo fix de "
 "Bomen um uns nawassen. Finn dat Evenwicht."
 

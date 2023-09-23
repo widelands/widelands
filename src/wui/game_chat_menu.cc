@@ -107,7 +107,7 @@ void GameChatMenu::minimize() {
 }
 
 void GameChatMenu::acknowledge() {
-	if (close_on_send_) {
+	if (close_on_send_ && !is_pinned()) {
 		die();
 	}
 }

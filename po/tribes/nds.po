@@ -2594,7 +2594,7 @@ msgstr "De Arbeider, de bi deese Well warkt, hett keen Water in de Quell mehr."
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Woodcutter’s House"
-msgstr "Boomslageree"
+msgstr "Boomsaageree"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:48
 msgctxt "atlanteans_building"
@@ -2602,7 +2602,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "De Boomslager dat warkt bi deese Boomslageree hett keene Bomen tum Ofslaan. Överlegg di, of du dat Huus plattrieten of ofbrannen willst, of bau een Försterhuus."
+msgstr "De Boomsaager dat warkt bi deese Boomsaageree hett keene Bomen tum Saagen. Överlegg di, of du dat Huus plattrieten of ofbrannen willst, of bau een Försterhuus."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:8
@@ -3856,12 +3856,12 @@ msgstr "Buurderee"
 #. TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:74
 msgid "planting barley"
-msgstr "Garste to planten"
+msgstr "Garst to planten"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:82
 msgid "harvesting barley"
-msgstr "Garste to arnten"
+msgstr "Garst to arnten"
 
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:95
 msgctxt "frisians_building"
@@ -8219,7 +8219,7 @@ msgstr "Balsa"
 #: ../../data/tribes/wares/barley/init.lua:8
 msgctxt "ware"
 msgid "Barley"
-msgstr "Garste"
+msgstr "Garst"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/basket/init.lua:8
@@ -9319,7 +9319,7 @@ msgstr "Spinner"
 #: ../../data/tribes/workers/atlanteans/woodcutter/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Woodcutter"
-msgstr "Boomslager"
+msgstr "Boomsaager"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/baker/init.lua:8
