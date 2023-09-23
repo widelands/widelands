@@ -17,7 +17,7 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       hunt = {
-         -- steps from building to animal: 2...16
+         -- steps from building to animal: 2-16
          -- min. worker time: 2 * 2 * 1.8 + 1.5 = 8.7 sec
          -- max. worker time: 2 * 16 * 1.8 + 1.5 = 59.1 sec
          "findobject=type:bob radius:13 attrib:eatable",

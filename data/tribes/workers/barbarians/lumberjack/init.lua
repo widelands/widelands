@@ -17,7 +17,7 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       harvest = {
-         -- steps from building to tree: 2...13
+         -- steps from building to tree: 2-13
          -- min. worker time: 2 * 2 * 1.8 + 15 + 2 = 24.2 sec
          -- max. worker time: 2 * 13 * 1.8 + 15 + 2 = 63.8 sec
          -- some of trees delay woodcutting by 1-1.4 sec (aspen, balsa, ironwood, oak, rubber)

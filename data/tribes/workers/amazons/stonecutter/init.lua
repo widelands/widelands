@@ -16,7 +16,7 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       cut_granite = {
-         -- steps from building to rock: 2...9
+         -- steps from building to rock: 2-9
          -- min. worker time: 2 * 2 * 1.8 + 35 = 42.2 sec
          -- max. worker time: 2 * 9 * 1.8 + 35 = 67.4 sec
          "findobject=attrib:rocks radius:6",

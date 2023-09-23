@@ -15,7 +15,7 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       scout = {
-         -- steps from building to beginning of scouting: 2...18
+         -- steps from building to beginning of scouting: 2-18
          -- min. worker time: 2 * 1.8 + 75 + 2 * 1.8 = 82.2 sec
          -- max. worker time: 2 * (18 * 1.8 + 75) = 214.8 sec
          "scout=radius:15 duration:1m15s",

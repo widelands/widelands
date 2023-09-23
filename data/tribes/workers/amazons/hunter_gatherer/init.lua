@@ -16,7 +16,7 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       hunt = {
-         -- steps from building to animal: 2...17
+         -- steps from building to animal: 2-17
          -- min. worker time: 2 * 2 * 1.8 + 1 = 8.2 sec
          -- max. worker time: 2 * 17 * 1.8 + 1 = 62.2 sec
          "findobject=type:bob radius:14 attrib:eatable",
@@ -27,7 +27,7 @@ wl.Descriptions():new_worker_type {
          "return"
       },
       fish = {
-         -- steps from building to water: 2...17
+         -- steps from building to water: 2-17
          -- min. worker time: 2 * 2 * 1.8 + 1 = 8.2 sec
          -- max. worker time: 2 * 17 * 1.8 + 1 = 62.2 sec
          "findspace=size:any radius:14 resource:resource_fish",
