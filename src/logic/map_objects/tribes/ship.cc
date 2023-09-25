@@ -1308,7 +1308,7 @@ void Ship::start_battle(Game& game, Battle new_battle, bool immediately) {
 	}
 }
 
-/** Onboard soldiers add a bonus onto the base attack strength, expressed in percent. */
+/** Onboard soldiers add a bonus onto the base attack strength. */
 unsigned Ship::get_sea_attack_soldier_bonus(const EditorGameBase& egbase) const {
 	unsigned attack_bonus = 0;
 	for (const ShippingItem& si : items_) {
@@ -1389,11 +1389,20 @@ void Ship::battle_update(Game& game) {
 			molog(game.get_gametime(), "[battle] Attacking a port");
 			current_battle.pending_damage = 1;                             // Ports always take 1 point
 		} else if (game.logic_rand() % 100 < descr().attack_accuracy_) {  // Hit
-			uint32_t attack_strength =
-			   (game.logic_rand() % (descr().max_attack_ - descr().min_attack_));
-			attack_strength += descr().min_attack_;
+			/* More soldiers mean a linear progression for both min and max attack,
+			 * with min attack rising faster than max attack.
+			 * At a bonus of 500 points (maximum possible is 330 with default tribes),
+			 * the strength is 20 times the initial strength and min/max attack are identical.
+			 */
+			constexpr uint32_t kMaxBonus = 500;
+			constexpr uint32_t kMaxMultiplier = 20;
+			uint32_t bonus = get_sea_attack_soldier_bonus(game);
 
-			attack_strength += attack_strength * get_sea_attack_soldier_bonus(game) / 100;
+			uint32_t min_attack = descr().min_attack_ + bonus * ((kMaxMultiplier * descr().max_attack_) - descr().min_attack_) / kMaxBonus;
+			uint32_t max_attack = descr().max_attack_ + bonus * ((kMaxMultiplier - 1) * descr().max_attack_) / kMaxBonus;
+			uint32_t delta = max_attack > min_attack ? max_attack - min_attack : 1;
+
+			uint32_t attack_strength = min_attack + (game.logic_rand() % delta);
 
 			molog(game.get_gametime(), "[battle] Hit with %u points", attack_strength);
 			current_battle.pending_damage =
