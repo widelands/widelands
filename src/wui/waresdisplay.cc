@@ -165,12 +165,6 @@ bool AbstractWaresDisplay::handle_mousemove(
 	return true;
 }
 
-void AbstractWaresDisplay::handle_mousein(bool inside) {
-	if (!inside) {
-		finalize_anchor_selection();
-	}
-}
-
 bool AbstractWaresDisplay::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
 		Widelands::DescriptionIndex ware = ware_at_point(x, y);
