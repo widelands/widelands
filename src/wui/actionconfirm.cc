@@ -426,20 +426,22 @@ void ShipSinkConfirm::ok() {
 /**
  * Create the panels for confirmation.
  */
-ShipRefitConfirm::ShipRefitConfirm(InteractivePlayer& parent, Widelands::Ship& ship, Widelands::ShipType type)
+ShipRefitConfirm::ShipRefitConfirm(InteractivePlayer& parent,
+                                   Widelands::Ship& ship,
+                                   Widelands::ShipType type)
    : ActionConfirm(parent,
                    _("Refit the ship?"),
-                   format(
-		               type == ship.get_ship_type() ?
-		               /** TRANSLATORS: %s is a ship name */
-		               _("Do you really want to cancel the refitting of %s?") :
-		               type == Widelands::ShipType::kWarship ?
-		               /** TRANSLATORS: %s is a ship name */
-		               _("Do you really want to refit %s to a warship?") :
-		               /** TRANSLATORS: %s is a ship name */
-		               _("Do you really want to refit %s to a transport ship?")
-                   , ship.get_shipname()),
-                   &ship), type_(type) {
+                   format(type == ship.get_ship_type() ?
+                             /** TRANSLATORS: %s is a ship name */
+                             _("Do you really want to cancel the refitting of %s?") :
+                             type == Widelands::ShipType::kWarship ?
+                                /** TRANSLATORS: %s is a ship name */
+                                _("Do you really want to refit %s to a warship?") :
+                                /** TRANSLATORS: %s is a ship name */
+                                _("Do you really want to refit %s to a transport ship?"),
+                          ship.get_shipname()),
+                   &ship),
+     type_(type) {
 	// Nothing special to do
 }
 
@@ -603,7 +605,9 @@ void show_ship_cancel_expedition_confirm(InteractivePlayer& player, Widelands::S
 	new ShipCancelExpeditionConfirm(player, ship);
 }
 
-void show_ship_refit_confirm(InteractivePlayer& player, Widelands::Ship& ship, Widelands::ShipType type) {
+void show_ship_refit_confirm(InteractivePlayer& player,
+                             Widelands::Ship& ship,
+                             Widelands::ShipType type) {
 	new ShipRefitConfirm(player, ship, type);
 }
 

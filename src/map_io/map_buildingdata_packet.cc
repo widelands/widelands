@@ -552,7 +552,8 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 						Ship* ship = &mol.get<Ship>(ship_serial);
 						assert(warehouse.portdock_->warship_requests_.count(ship->serial()) == 0);
 
-						PortDock::WarshipRequests* req = new PortDock::WarshipRequests(warehouse, ship, SoldierPreference::kHeroes);
+						PortDock::WarshipRequests* req =
+						   new PortDock::WarshipRequests(warehouse, ship, SoldierPreference::kHeroes);
 						req->soldier_request.read(fr, game, mol);
 						if (packet_version >= 12 && fr.unsigned_8() != 0) {
 							req->create_shipwright_request();

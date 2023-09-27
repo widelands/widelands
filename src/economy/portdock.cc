@@ -40,9 +40,17 @@
 namespace Widelands {
 
 PortDock::WarshipRequests::WarshipRequests(Warehouse& warehouse, Ship* ship, SoldierPreference pref)
-: warehouse_(warehouse), soldier_request(warehouse_, pref, Ship::warship_soldier_callback,
-	   [ship]() { return ship->get_ship_type() == ShipType::kWarship ? ship->get_warship_soldier_capacity() : 0U; },
-	   [ship]() { return ship->onboard_soldiers(); }) {
+   : warehouse_(warehouse),
+     soldier_request(
+        warehouse_,
+        pref,
+        Ship::warship_soldier_callback,
+        [ship]() {
+	        return ship->get_ship_type() == ShipType::kWarship ?
+                     ship->get_warship_soldier_capacity() :
+                     0U;
+        },
+        [ship]() { return ship->onboard_soldiers(); }) {
 }
 
 PortDock::WarshipRequests::~WarshipRequests() {
@@ -53,14 +61,19 @@ PortDock::WarshipRequests::~WarshipRequests() {
 
 void PortDock::WarshipRequests::create_shipwright_request() {
 	assert(shipwright_request == nullptr);
-	shipwright_request.reset(new Request(warehouse_, warehouse_.owner().tribe().shipwright(), Ship::warship_soldier_callback, wwWORKER));
+	shipwright_request.reset(new Request(warehouse_, warehouse_.owner().tribe().shipwright(),
+	                                     Ship::warship_soldier_callback, wwWORKER));
 	shipwright_request->set_count(1);
 }
 
 void PortDock::WarshipRequests::start_refit() {
 	create_shipwright_request();
 
-	const Buildcost& cost = warehouse_.owner().egbase().descriptions().get_ship_descr(warehouse_.owner().tribe().ship())->get_refit_cost();
+	const Buildcost& cost = warehouse_.owner()
+	                           .egbase()
+	                           .descriptions()
+	                           .get_ship_descr(warehouse_.owner().tribe().ship())
+	                           ->get_refit_cost();
 	for (const auto& pair : cost) {
 		refit_queues.emplace_back(new WaresQueue(warehouse_, pair.first, pair.second));
 	}
@@ -163,12 +176,13 @@ InputQueue& PortDock::inputqueue(DescriptionIndex index, WareWorker type, const 
 	}
 
 	if (expedition_bootstrap() != nullptr) {
-		return r != nullptr ? expedition_bootstrap()->inputqueue(*r) : expedition_bootstrap()->inputqueue(index, type, false);
+		return r != nullptr ? expedition_bootstrap()->inputqueue(*r) :
+                            expedition_bootstrap()->inputqueue(index, type, false);
 	}
 
 	throw wexception("Port dock %s %u has no input queue for %s %u",
-			warehouse_ == nullptr ? "nil" : warehouse_->get_warehouse_name().c_str(),
-			serial(), type == wwWARE ? "ware" : "worker", index);
+	                 warehouse_ == nullptr ? "nil" : warehouse_->get_warehouse_name().c_str(),
+	                 serial(), type == wwWARE ? "ware" : "worker", index);
 }
 
 /**

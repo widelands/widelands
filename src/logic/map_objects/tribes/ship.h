@@ -57,7 +57,9 @@ struct NoteShip {
 
 class ShipDescr : public BobDescr {
 public:
-	ShipDescr(const std::string& init_descname, const LuaTable& t, Widelands::Descriptions& descriptions);
+	ShipDescr(const std::string& init_descname,
+	          const LuaTable& t,
+	          Widelands::Descriptions& descriptions);
 	~ShipDescr() override = default;
 
 	[[nodiscard]] Bob& create_object() const override;
@@ -75,13 +77,27 @@ public:
 		return ship_names_;
 	}
 
-	[[nodiscard]] const Buildcost& get_refit_cost() const { return refit_cost_; }
-	[[nodiscard]] uint32_t get_max_hitpoints() const { return max_hitpoints_; }
-	[[nodiscard]] uint32_t get_min_attack() const { return min_attack_; }
-	[[nodiscard]] uint32_t get_max_attack() const { return max_attack_; }
-	[[nodiscard]] uint32_t get_defense() const { return defense_; }
-	[[nodiscard]] uint32_t get_attack_accuracy() const { return attack_accuracy_; }
-	[[nodiscard]] uint32_t get_heal_per_second() const { return heal_per_second_; }
+	[[nodiscard]] const Buildcost& get_refit_cost() const {
+		return refit_cost_;
+	}
+	[[nodiscard]] uint32_t get_max_hitpoints() const {
+		return max_hitpoints_;
+	}
+	[[nodiscard]] uint32_t get_min_attack() const {
+		return min_attack_;
+	}
+	[[nodiscard]] uint32_t get_max_attack() const {
+		return max_attack_;
+	}
+	[[nodiscard]] uint32_t get_defense() const {
+		return defense_;
+	}
+	[[nodiscard]] uint32_t get_attack_accuracy() const {
+		return attack_accuracy_;
+	}
+	[[nodiscard]] uint32_t get_heal_per_second() const {
+		return heal_per_second_;
+	}
 
 private:
 	DirAnimations sail_anims_;

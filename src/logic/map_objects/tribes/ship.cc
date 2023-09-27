@@ -176,7 +176,9 @@ private:
  * The contents of 'table' are documented in
  * /data/tribes/ships/atlanteans/init.lua
  */
-ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table, Widelands::Descriptions& descriptions)
+ShipDescr::ShipDescr(const std::string& init_descname,
+                     const LuaTable& table,
+                     Widelands::Descriptions& descriptions)
    : BobDescr(init_descname, MapObjectType::SHIP, MapObjectDescr::OwnerType::kTribe, table),
      default_capacity_(table.has_key("capacity") ? table.get_int("capacity") : 20),
      ship_names_(table.get_table("names")->array_entries<std::string>()),
@@ -187,8 +189,7 @@ ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table, Wi
      max_attack_(table.get_int("max_attack")),
      defense_(table.get_int("defense")),
      attack_accuracy_(table.get_int("attack_accuracy")),
-     heal_per_second_(table.get_int("heal_per_second"))
-     {
+     heal_per_second_(table.get_int("heal_per_second")) {
 	// Read the sailing animations
 	assign_directional_animation(&sail_anims_, "sail");
 }
@@ -813,7 +814,8 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 			if (hitpoints_ < descr().get_max_hitpoints() &&
 			    game.get_gametime() - last_heal_time_ >= kHealInterval) {
 				last_heal_time_ = game.get_gametime();
-				hitpoints_ = std::min(descr().get_max_hitpoints(), hitpoints_ + descr().get_heal_per_second());
+				hitpoints_ =
+				   std::min(descr().get_max_hitpoints(), hitpoints_ + descr().get_heal_per_second());
 			}
 
 			lastdock_ = dest;
@@ -901,7 +903,8 @@ void Ship::erase_warship_request() {
 void Ship::update_warship_request(bool create) {
 	const EditorGameBase& egbase = owner().egbase();
 	PortDock* dock = requestdock_.get(egbase);
-	const bool is_refitting_to_warship = ship_type_ != ShipType::kWarship && pending_refit_ == ShipType::kWarship;
+	const bool is_refitting_to_warship =
+	   ship_type_ != ShipType::kWarship && pending_refit_ == ShipType::kWarship;
 
 	if (dock != nullptr) {
 		// We should already have a request
@@ -937,15 +940,14 @@ void Ship::update_warship_request(bool create) {
 	// Create a new request at the current port.
 	dock = lastdock_.get(owner().egbase());
 	if (dock == nullptr) {
-		throw wexception("Ship %s attempts to create warship request while not in dock",
-		                 get_shipname().c_str());
+		throw wexception(
+		   "Ship %s attempts to create warship request while not in dock", get_shipname().c_str());
 	}
 	molog(egbase.get_gametime(), "Creating new warship request at %s",
 	      dock->get_warehouse()->get_warehouse_name().c_str());
 	if (get_position().field->get_immovable() != dock) {
-		throw wexception(
-		   "Ship %s attempts to create warship request while not on request dock %s",
-		   get_shipname().c_str(), dock->get_warehouse()->get_warehouse_name().c_str());
+		throw wexception("Ship %s attempts to create warship request while not on request dock %s",
+		                 get_shipname().c_str(), dock->get_warehouse()->get_warehouse_name().c_str());
 	}
 
 	PortDock::WarshipRequests* req = dock->get_warship_request(serial());
@@ -1020,11 +1022,8 @@ bool Ship::remember_detected_portspace(const Coords& coords) {
 }
 
 // static
-void Ship::warship_soldier_callback(Game& game,
-                                    Request& req,
-                                    DescriptionIndex di,
-                                    Worker* worker,
-                                    PlayerImmovable& immovable) {
+void Ship::warship_soldier_callback(
+   Game& game, Request& req, DescriptionIndex di, Worker* worker, PlayerImmovable& immovable) {
 
 	Warehouse& warehouse = dynamic_cast<Warehouse&>(immovable);
 	PortDock* dock = warehouse.get_portdock();
@@ -1206,7 +1205,8 @@ std::vector<Soldier*> Ship::associated_soldiers() const {
 	std::vector<Soldier*> result = onboard_soldiers();
 
 	if (PortDock* dock = requestdock_.get(owner().egbase()); dock != nullptr) {
-		if (const PortDock::WarshipRequests* sr = dock->get_warship_request(serial()); sr != nullptr) {
+		if (const PortDock::WarshipRequests* sr = dock->get_warship_request(serial());
+		    sr != nullptr) {
 			if (const Request* request = sr->soldier_request.get_request(); request != nullptr) {
 				for (const Transfer* t : request->get_transfers()) {
 					Soldier& s = dynamic_cast<Soldier&>(*t->get_worker());
@@ -1440,7 +1440,7 @@ void Ship::battle_update(Game& game) {
 	auto fight = [this, &current_battle, other_battle, &game, target_ship]() {
 		if (target_ship == nullptr) {
 			molog(game.get_gametime(), "[battle] Attacking a port");
-			current_battle.pending_damage = 1;                             // Ports always take 1 point
+			current_battle.pending_damage = 1;  // Ports always take 1 point
 		} else if (game.logic_rand() % 100 < descr().get_attack_accuracy()) {  // Hit
 			/* More soldiers mean a linear progression for both min and max attack,
 			 * with min attack rising faster than max attack.
@@ -1452,8 +1452,13 @@ void Ship::battle_update(Game& game) {
 			constexpr uint32_t kMaxMultiplier = 5;
 			uint32_t bonus = get_sea_attack_soldier_bonus(game);
 
-			uint32_t min_attack = descr().get_min_attack() + bonus * ((kMaxMultiplier * descr().get_max_attack()) - descr().get_min_attack()) / kMaxBonus;
-			uint32_t max_attack = descr().get_max_attack() + bonus * ((kMaxMultiplier - 1) * descr().get_max_attack()) / kMaxBonus;
+			uint32_t min_attack =
+			   descr().get_min_attack() +
+			   bonus * ((kMaxMultiplier * descr().get_max_attack()) - descr().get_min_attack()) /
+			      kMaxBonus;
+			uint32_t max_attack =
+			   descr().get_max_attack() +
+			   bonus * ((kMaxMultiplier - 1) * descr().get_max_attack()) / kMaxBonus;
 			uint32_t delta = max_attack > min_attack ? max_attack - min_attack : 1;
 
 			uint32_t attack_strength = min_attack + (game.logic_rand() % delta);

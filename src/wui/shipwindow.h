@@ -74,7 +74,8 @@ private:
 
 	InteractiveBase& ibase_;
 	Widelands::OPtr<Widelands::Ship> ship_;
-	BuildingWindow::CollapsedState input_queues_collapsed_state_{BuildingWindow::CollapsedState::kCollapsed};
+	BuildingWindow::CollapsedState input_queues_collapsed_state_{
+	   BuildingWindow::CollapsedState::kCollapsed};
 
 	UI::Box vbox_;
 	UI::Box navigation_box_;

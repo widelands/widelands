@@ -464,11 +464,12 @@ void ShipWindow::think() {
 		btn_refit_->set_pic(g_image_cache->get(kImgRefitTransport));
 		btn_refit_->set_enabled(can_act && ship->can_refit(Widelands::ShipType::kTransport));
 	} else {
-		btn_refit_->set_tooltip(std::string(_("Refit to warship")) + "<br>" +
-				   g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal)
-				      .header_font()
-				      .as_font_tag(_("Refitting costs:")) +
-				   "<br>" + waremap_to_richtext(ship->owner().tribe(), ship->descr().get_refit_cost()));
+		btn_refit_->set_tooltip(
+		   std::string(_("Refit to warship")) + "<br>" +
+		   g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal)
+		      .header_font()
+		      .as_font_tag(_("Refitting costs:")) +
+		   "<br>" + waremap_to_richtext(ship->owner().tribe(), ship->descr().get_refit_cost()));
 		btn_refit_->set_pic(g_image_cache->get(kImgRefitWarship));
 		btn_refit_->set_enabled(can_act && ship->can_refit(Widelands::ShipType::kWarship));
 	}
@@ -505,7 +506,9 @@ void ShipWindow::think() {
 					// TODO(Nordfriese): We currently have no way to distinguish between refit
 					// queues for different ships and expedition input queues in the same portdock,
 					// so changing the capacity and priority is not currently possible.
-					InputQueueDisplay* iqd = new InputQueueDisplay(&refit_box_, ibase_, *dock->get_warehouse(), *queue, true, false, &input_queues_collapsed_state_);
+					InputQueueDisplay* iqd =
+					   new InputQueueDisplay(&refit_box_, ibase_, *dock->get_warehouse(), *queue, true,
+					                         false, &input_queues_collapsed_state_);
 					refit_box_.add(iqd, UI::Box::Resizing::kFullSize);
 					refit_costs_.emplace_back(iqd);
 				}
@@ -643,9 +646,8 @@ void ShipWindow::act_refit() {
 
 	Widelands::ShipType t = ship->get_ship_type();
 	if (!ship->is_refitting()) {
-		t = (t == Widelands::ShipType::kWarship) ?
-		                                Widelands::ShipType::kTransport :
-		                                Widelands::ShipType::kWarship;
+		t = (t == Widelands::ShipType::kWarship) ? Widelands::ShipType::kTransport :
+                                                 Widelands::ShipType::kWarship;
 	}
 
 	if (Widelands::Game* game = ibase_.get_game(); game != nullptr) {

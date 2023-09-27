@@ -49,7 +49,9 @@ void show_ship_sink_confirm(InteractivePlayer& player, Widelands::Ship& ship);
 
 void show_ship_cancel_expedition_confirm(InteractivePlayer& player, Widelands::Ship& ship);
 
-void show_ship_refit_confirm(InteractivePlayer& player, Widelands::Ship& ship, Widelands::ShipType type);
+void show_ship_refit_confirm(InteractivePlayer& player,
+                             Widelands::Ship& ship,
+                             Widelands::ShipType type);
 
 // Diplomacy confirm windows
 void show_resign_confirm(InteractivePlayer& player);
