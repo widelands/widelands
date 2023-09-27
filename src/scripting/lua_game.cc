@@ -78,7 +78,12 @@ Player
 
       local plr = wl.Game().players[1]                            -- the first player (usually blue)
       local plr = wl.Game().players[2]                            -- the second player
-      local plr = wl.Game().players[wl.Game().interactive_player] -- the interactive player
+      local i_plr
+      for p_idx, player in pairs(wl.Game().players) do
+         if player.number == wl.Game().interactive_player then
+            i_plr = player -- the interactive player
+         end
+      end
 
 */
 const char LuaPlayer::className[] = "Player";
