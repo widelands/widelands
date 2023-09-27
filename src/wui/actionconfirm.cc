@@ -115,6 +115,19 @@ struct ShipSinkConfirm : public ActionConfirm {
 };
 
 /**
+ * Confirmation dialog box for the refit request for a ship.
+ */
+struct ShipRefitConfirm : public ActionConfirm {
+	ShipRefitConfirm(InteractivePlayer& parent, Widelands::Ship& ship, Widelands::ShipType type);
+
+	void think() override;
+	void ok() override;
+
+private:
+	Widelands::ShipType type_;
+};
+
+/**
  * Confirmation dialog box for the cancel expedition request for a ship.
  */
 struct ShipCancelExpeditionConfirm : public ActionConfirm {
@@ -397,7 +410,7 @@ void ShipSinkConfirm::think() {
 }
 
 /**
- * The "Ok" button was clicked, so issue the CMD_ENHANCEBUILDING command for this building.
+ * The "Ok" button was clicked, so issue the appropriate command for this ship.
  */
 void ShipSinkConfirm::ok() {
 	Widelands::Game& game = iaplayer().game();
@@ -405,6 +418,52 @@ void ShipSinkConfirm::ok() {
 
 	if ((ship != nullptr) && iaplayer().can_act(ship->get_owner()->player_number())) {
 		game.send_player_sink_ship(*ship);
+	}
+
+	die();
+}
+
+/**
+ * Create the panels for confirmation.
+ */
+ShipRefitConfirm::ShipRefitConfirm(InteractivePlayer& parent, Widelands::Ship& ship, Widelands::ShipType type)
+   : ActionConfirm(parent,
+                   _("Refit the ship?"),
+                   format(
+		               type == ship.get_ship_type() ?
+		               /** TRANSLATORS: %s is a ship name */
+		               _("Do you really want to cancel the refitting of %s?") :
+		               type == Widelands::ShipType::kWarship ?
+		               /** TRANSLATORS: %s is a ship name */
+		               _("Do you really want to refit %s to a warship?") :
+		               /** TRANSLATORS: %s is a ship name */
+		               _("Do you really want to refit %s to a transport ship?")
+                   , ship.get_shipname()),
+                   &ship), type_(type) {
+	// Nothing special to do
+}
+
+/**
+ * Make sure the ship still exists.
+ */
+void ShipRefitConfirm::think() {
+	const Widelands::EditorGameBase& egbase = iaplayer().egbase();
+	upcast(Widelands::Ship, ship, object_.get(egbase));
+
+	if ((ship == nullptr) || !iaplayer().can_act(ship->get_owner()->player_number())) {
+		die();
+	}
+}
+
+/**
+ * The "Ok" button was clicked, so issue the appropriate command for this ship.
+ */
+void ShipRefitConfirm::ok() {
+	Widelands::Game& game = iaplayer().game();
+	upcast(Widelands::Ship, ship, object_.get(game));
+
+	if ((ship != nullptr) && iaplayer().can_act(ship->get_owner()->player_number())) {
+		game.send_player_refit_ship(*ship, type_);
 	}
 
 	die();
@@ -542,6 +601,10 @@ void show_ship_sink_confirm(InteractivePlayer& player, Widelands::Ship& ship) {
  */
 void show_ship_cancel_expedition_confirm(InteractivePlayer& player, Widelands::Ship& ship) {
 	new ShipCancelExpeditionConfirm(player, ship);
+}
+
+void show_ship_refit_confirm(InteractivePlayer& player, Widelands::Ship& ship, Widelands::ShipType type) {
+	new ShipRefitConfirm(player, ship, type);
 }
 
 void show_resign_confirm(InteractivePlayer& player) {

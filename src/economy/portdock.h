@@ -133,7 +133,7 @@ public:
 
 	struct WarshipRequests {
 		WarshipRequests(Warehouse& warehouse, Ship* ship, SoldierPreference pref);
-		Warehouse& warehouse_;
+		~WarshipRequests();
 
 		void set_economy(Economy* new_e, Economy* old_e, WareWorker type);
 		[[nodiscard]] bool has_request(const Request* r) const;
@@ -143,6 +143,10 @@ public:
 		[[nodiscard]] bool is_refitting() const;
 		void create_shipwright_request();
 
+	private:
+		Warehouse& warehouse_;
+
+	public:
 		SoldierRequest soldier_request;
 		std::vector<std::unique_ptr<InputQueue>> refit_queues;
 		std::unique_ptr<Request> shipwright_request;

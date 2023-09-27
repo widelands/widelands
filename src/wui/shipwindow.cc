@@ -22,6 +22,7 @@
 #include "economy/portdock.h"
 #include "economy/ware_instance.h"
 #include "graphic/animation/animation_manager.h"
+#include "graphic/style_manager.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/pinned_note.h"
@@ -36,6 +37,7 @@
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
 #include "wui/soldierlist.h"
+#include "wui/waresdisplay.h"
 
 namespace {
 constexpr const char* const kImgGoTo = "images/wui/ship/menu_ship_goto.png";
@@ -53,6 +55,7 @@ constexpr const char* const kImgScoutE = "images/wui/ship/ship_scout_e.png";
 constexpr const char* const kImgScoutSW = "images/wui/ship/ship_scout_sw.png";
 constexpr const char* const kImgScoutSE = "images/wui/ship/ship_scout_se.png";
 constexpr const char* const kImgConstructPort = "images/wui/ship/ship_construct_port_space.png";
+constexpr const char* const kImgRefitCancel = "images/wui/ship/ship_refit_cancel.png";
 constexpr const char* const kImgRefitTransport = "images/wui/ship/ship_refit_transport.png";
 constexpr const char* const kImgRefitWarship = "images/wui/ship/ship_refit_warship.png";
 constexpr const char* const kImgWarshipStay = "images/wui/ship/ship_stay.png";
@@ -67,6 +70,7 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
      ship_(ship),
      vbox_(this, UI::PanelStyle::kWui, "vbox", 0, 0, UI::Box::Vertical),
      navigation_box_(&vbox_, UI::PanelStyle::kWui, "navigation_box", 0, 0, UI::Box::Vertical),
+     refit_box_(&vbox_, UI::PanelStyle::kWui, "refit_box", 0, 0, UI::Box::Vertical),
      warship_capacity_control_(create_soldier_list(vbox_, ibase_, *ship)),
      warship_health_(
         &vbox_, UI::PanelStyle::kWui, "health", UI::FontStyle::kWuiLabel, "", UI::Align::kCenter) {
@@ -158,6 +162,7 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	exp_bot->add(btn_scout_[Widelands::WALK_SE - 1]);
 
 	vbox_.add(&navigation_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	vbox_.add(&refit_box_, UI::Box::Resizing::kFullSize);
 
 	set_destination_ = new UI::Dropdown<DestinationWrapper>(
 	   &vbox_, "set_destination", 0, 0, 200, 8, kButtonSize, _("Destination"),
@@ -450,16 +455,24 @@ void ShipWindow::think() {
 	set_destination_->set_enabled(can_act);
 	btn_sink_->set_enabled(can_act);
 
-	btn_refit_->set_pic(g_image_cache->get(ship->get_ship_type() == Widelands::ShipType::kWarship ?
-                                             kImgRefitTransport :
-                                             kImgRefitWarship));
-	btn_refit_->set_enabled(can_act &&
-	                        ship->can_refit(ship->get_ship_type() == Widelands::ShipType::kWarship ?
-                                              Widelands::ShipType::kTransport :
-                                              Widelands::ShipType::kWarship));
-	btn_refit_->set_tooltip(ship->get_ship_type() == Widelands::ShipType::kWarship ?
-                              _("Refit to transport ship") :
-                              _("Refit to warship"));
+	if (ship->is_refitting()) {
+		btn_refit_->set_tooltip(_("Cancel refitting"));
+		btn_refit_->set_pic(g_image_cache->get(kImgRefitCancel));
+		btn_refit_->set_enabled(can_act && ship->can_cancel_refit());
+	} else if (ship->get_ship_type() == Widelands::ShipType::kWarship) {
+		btn_refit_->set_tooltip(_("Refit to transport ship"));
+		btn_refit_->set_pic(g_image_cache->get(kImgRefitTransport));
+		btn_refit_->set_enabled(can_act && ship->can_refit(Widelands::ShipType::kTransport));
+	} else {
+		btn_refit_->set_tooltip(std::string(_("Refit to warship")) + "<br>" +
+				   g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal)
+				      .header_font()
+				      .as_font_tag(_("Refitting costs:")) +
+				   "<br>" + waremap_to_richtext(ship->owner().tribe(), ship->descr().get_refit_cost()));
+		btn_refit_->set_pic(g_image_cache->get(kImgRefitWarship));
+		btn_refit_->set_enabled(can_act && ship->can_refit(Widelands::ShipType::kWarship));
+	}
+
 	btn_warship_stay_->set_enabled(can_act);
 
 	display_->clear();
@@ -483,18 +496,43 @@ void ShipWindow::think() {
 	                            ship->get_ship_type() == Widelands::ShipType::kWarship);
 	warship_health_.set_text(format(_("HP: %1$u/%2$u"), cur_hitpoints, max_hitpoints));
 
+	if (ship->is_refitting() && ship->is_on_destination_dock()) {
+		Widelands::PortDock* dock = ship->get_destination_port(ibase_.egbase());
+		Widelands::PortDock::WarshipRequests* req = dock->get_warship_request(ship->serial());
+		if (req != nullptr) {
+			if (refit_costs_.empty()) {
+				for (auto& queue : req->refit_queues) {
+					// TODO(Nordfriese): We currently have no way to distinguish between refit
+					// queues for different ships and expedition input queues in the same portdock,
+					// so changing the capacity and priority is not currently possible.
+					InputQueueDisplay* iqd = new InputQueueDisplay(&refit_box_, ibase_, *dock->get_warehouse(), *queue, true, false, &input_queues_collapsed_state_);
+					refit_box_.add(iqd, UI::Box::Resizing::kFullSize);
+					refit_costs_.emplace_back(iqd);
+				}
+
+				// We don't visualize the shipwright requests just as constructionsites
+				// don't currently show the builder request.
+
+				initialization_complete();
+			}
+		} else {
+			refit_box_.clear();
+			refit_costs_.clear();
+		}
+	} else {
+		refit_box_.clear();
+		refit_costs_.clear();
+	}
+
 	Widelands::ShipStates state = ship->get_ship_state();
 	if (ship->state_is_expedition()) {
 		/* The following rules apply:
-		 * - The "construct port" button is only active, if the ship is waiting for commands and found
-		 * a port
-		 *   buildspace
-		 * - The "scout towards a direction" buttons are only active, if the ship can move at least
-		 * one field
-		 *   in that direction without reaching the coast.
-		 * - The "explore island's coast" buttons are only active, if a coast is in vision range (no
-		 * matter if
-		 *   in waiting or already expedition/scouting mode)
+		 * - The "construct port" button is only active if the ship is waiting for commands and
+		 *   found a port buildspace.
+		 * - The "scout towards a direction" buttons are only active if the ship can move at least
+		 *   one field in that direction without reaching the coast.
+		 * - The "explore island's coast" buttons are only active if a coast is in vision range
+		 *   (no matter if in waiting or already expedition/scouting mode).
 		 */
 		btn_construct_port_->set_enabled(can_act &&
 		                                 (state == Widelands::ShipStates::kExpeditionPortspaceFound));
@@ -602,11 +640,20 @@ void ShipWindow::act_refit() {
 	if (ship == nullptr) {
 		return;
 	}
-	const Widelands::ShipType t = ship->get_ship_type() == Widelands::ShipType::kWarship ?
-                                    Widelands::ShipType::kTransport :
-                                    Widelands::ShipType::kWarship;
+
+	Widelands::ShipType t = ship->get_ship_type();
+	if (!ship->is_refitting()) {
+		t = (t == Widelands::ShipType::kWarship) ?
+		                                Widelands::ShipType::kTransport :
+		                                Widelands::ShipType::kWarship;
+	}
+
 	if (Widelands::Game* game = ibase_.get_game(); game != nullptr) {
-		game->send_player_refit_ship(*ship, t);
+		if ((SDL_GetModState() & KMOD_CTRL) != 0) {
+			game->send_player_refit_ship(*ship, t);
+		} else if (upcast(InteractivePlayer, ipl, &ibase_)) {
+			show_ship_refit_confirm(*ipl, *ship, t);
+		}
 	} else {
 		ship->set_ship_type(ibase_.egbase(), t);
 	}

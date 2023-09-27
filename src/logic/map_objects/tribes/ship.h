@@ -338,7 +338,8 @@ struct Ship : Bob {
 	[[nodiscard]] ShipType get_pending_refit() const {
 		return pending_refit_;
 	}
-	[[nodiscard]] bool can_refit(ShipType) const;
+	[[nodiscard]] bool can_refit(ShipType type) const;
+	[[nodiscard]] bool can_cancel_refit() const;
 	[[nodiscard]] inline bool is_refitting() const {
 		return get_pending_refit() != get_ship_type();
 	}

@@ -13,19 +13,19 @@ def evaluate_matches(lines, fn):
         if line.count('FIXME'):
             errorfound = True
             errors.append(
-                (fn, lineno+1, "Use \"TODO(username): <msg>\". Do not use\"FIXME\"."))
+                (fn, lineno+1, "Use \"TODO(username): <msg>\". Do not use \"FIXME\"."))
 
         elif re.compile('/\s*BUG').search(line):
             errorfound = True
             errors.append(
-                (fn, lineno+1, "Use \"TODO(username): <msg>\". Do not use\"BUG\"."))
+                (fn, lineno+1, "Use \"TODO(username): <msg>\". Do not use \"BUG\"."))
 
         elif re.compile('[*]\s*BUG').search(line):
             errorfound = True
             errors.append(
-                (fn, lineno+1, "Use \"TODO(username): <msg>\". Do not use\"BUG\" or put TODOs in Doxygen comments."))
+                (fn, lineno+1, "Use \"TODO(username): <msg>\". Do not use \"BUG\" or put TODOs in Doxygen comments."))
 
-        # No dogygen
+        # No doxygen
         elif line.count('\TODO'):
             errorfound = True
             errors.append(

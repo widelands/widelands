@@ -45,6 +45,12 @@ PortDock::WarshipRequests::WarshipRequests(Warehouse& warehouse, Ship* ship, Sol
 	   [ship]() { return ship->onboard_soldiers(); }) {
 }
 
+PortDock::WarshipRequests::~WarshipRequests() {
+	if (is_refitting()) {
+		end_refit();
+	}
+}
+
 void PortDock::WarshipRequests::create_shipwright_request() {
 	assert(shipwright_request == nullptr);
 	shipwright_request.reset(new Request(warehouse_, warehouse_.owner().tribe().shipwright(), Ship::warship_soldier_callback, wwWORKER));
@@ -54,7 +60,6 @@ void PortDock::WarshipRequests::create_shipwright_request() {
 void PortDock::WarshipRequests::start_refit() {
 	create_shipwright_request();
 
-	assert(refit_queues.empty());
 	const Buildcost& cost = warehouse_.owner().egbase().descriptions().get_ship_descr(warehouse_.owner().tribe().ship())->get_refit_cost();
 	for (const auto& pair : cost) {
 		refit_queues.emplace_back(new WaresQueue(warehouse_, pair.first, pair.second));
@@ -62,7 +67,13 @@ void PortDock::WarshipRequests::start_refit() {
 }
 
 void PortDock::WarshipRequests::end_refit() {
-	assert(!refit_queues.empty() && shipwright_request != nullptr);
+	assert(shipwright_request != nullptr);
+
+	for (auto& queue : refit_queues) {
+		warehouse_.insert_wares(queue->get_index(), queue->get_filled());
+		queue->remove_from_economy(*warehouse_.get_economy(wwWARE));
+	}
+
 	refit_queues.clear();
 	shipwright_request.reset();
 }

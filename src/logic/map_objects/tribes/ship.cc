@@ -1087,6 +1087,9 @@ bool Ship::can_attack() const {
 bool Ship::can_refit(const ShipType type) const {
 	return !is_refitting() && !has_battle() && type != ship_type_;
 }
+bool Ship::can_cancel_refit() const {
+	return is_refitting();
+}
 
 void Ship::set_ship_type(EditorGameBase& egbase, ShipType t) {
 	ship_type_ = t;
@@ -1106,6 +1109,18 @@ void Ship::set_ship_type(EditorGameBase& egbase, ShipType t) {
 }
 
 void Ship::refit(Game& game, const ShipType type) {
+	if (is_refitting() && type == ship_type_ && can_cancel_refit()) {
+		pending_refit_ = type;
+		send_signal(game, "wakeup");
+
+		// If this is a transport ship, bring it back into a fleet
+		if (expedition_ == nullptr && fleet_ == nullptr) {
+			init_fleet(game);
+		}
+
+		return;
+	}
+
 	if (!can_refit(type)) {
 		molog(game.get_gametime(), "Requested refit to %d not possible", static_cast<int>(type));
 		return;
