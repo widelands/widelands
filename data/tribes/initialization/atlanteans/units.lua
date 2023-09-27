@@ -178,6 +178,8 @@
 --
 --    **builder**:  The internal name of the tribe's builder. This unit needs to be defined in the ``workers_order`` table too.
 --
+--    **shipwright**:  The internal name of the tribe's shipwright. This unit needs to be defined in the ``workers_order`` table too.
+--
 --    **carriers**:  An :class:`array` with the internal names of the tribe's carrier and beasts of burden. Must have at least two entries,
 --                   the first of which is used as the tribe's primary carrier and the second of which as the tribe's secondary carrier.
 --                   These units need to be defined in the ``workers_order`` table too.
@@ -2249,6 +2251,7 @@ wl.Descriptions():new_tribe {
 
    -- Special types
    builder = "atlanteans_builder",
+   shipwright = "atlanteans_shipwright",
    carriers = {"atlanteans_carrier", "atlanteans_horse"},
    geologist = "atlanteans_geologist",
    scouts_house = "atlanteans_scouts_house",

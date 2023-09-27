@@ -85,8 +85,8 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	warship_health_.set_tooltip(
 	   format(ngettext("Damaged warships regain %u hitpoint per second when anchored in a port.",
 	                   "Damaged warships regain %u hitpoints per second when anchored in a port.",
-	                   ship->descr().heal_per_second_),
-	          ship->descr().heal_per_second_));
+	                   ship->descr().get_heal_per_second()),
+	          ship->descr().get_heal_per_second()));
 	warship_health_.set_handle_mouse(true);
 
 	display_ = new ItemWaresDisplay(&vbox_, ship->owner());
@@ -477,7 +477,7 @@ void ShipWindow::think() {
 		}
 	}
 
-	const uint32_t max_hitpoints = ship->descr().max_hitpoints_;
+	const uint32_t max_hitpoints = ship->descr().get_max_hitpoints();
 	const uint32_t cur_hitpoints = ship->get_hitpoints();
 	warship_health_.set_visible(cur_hitpoints < max_hitpoints ||
 	                            ship->get_ship_type() == Widelands::ShipType::kWarship);

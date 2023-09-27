@@ -812,8 +812,8 @@ void Bob::draw(const EditorGameBase& egbase,
 	auto* const bob_owner = get_owner();
 	Vector2f adjust_field_on_dst = field_on_dst;
 	if (const State* s = get_state(taskIdle)) {
-		adjust_field_on_dst.x += s->ivar2;
-		adjust_field_on_dst.y += s->ivar3;
+		adjust_field_on_dst.x += s->ivar2 * scale;
+		adjust_field_on_dst.y += s->ivar3 * scale;
 	}
 	dst->blit_animation(calc_drawpos(egbase, adjust_field_on_dst, scale), coords, scale, anim_,
 	                    Time(egbase.get_gametime().get() - animstart_.get()),

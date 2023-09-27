@@ -1252,7 +1252,7 @@ class ShipSelectionWindow : public UI::UniqueWindow {
 			status = format(
 			   /** TRANSLATORS: Placeholders are the hitpoints and the attack bonus of the warship. */
 			   pgettext("ship_state", "Warship · HP %1$u%% · AT +%2$u%%"),
-			   100U * ship->get_hitpoints() / ship->descr().max_hitpoints_,
+			   100U * ship->get_hitpoints() / ship->descr().get_max_hitpoints(),
 			   ship->get_sea_attack_soldier_bonus(ship->owner().egbase()));
 		} else if (hostile) {
 			status = pgettext("ship_state", "Enemy Transport Ship");

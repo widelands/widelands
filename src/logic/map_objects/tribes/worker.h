@@ -183,6 +183,8 @@ public:
 
 	void start_task_scout(Game&, uint16_t, uint32_t);
 
+	void start_task_refit_warship(Game& game, PortDock* dock, Ship* ship);
+
 protected:
 	virtual bool is_evict_allowed();
 	virtual void draw_inner(const EditorGameBase& game,
@@ -219,6 +221,7 @@ public:
 	static const Task taskFugitive;
 	static const Task taskGeologist;
 	static const Task taskScout;
+	static const Task taskRefitWarship;
 	static const Task taskCarryTradeItem;
 
 private:
@@ -244,6 +247,7 @@ private:
 	void fugitive_update(Game&, State&);
 	void geologist_update(Game&, State&);
 	void scout_update(Game&, State&);
+	void refit_warship_update(Game&, State&);
 	void carry_trade_item_update(Game&, State&);
 
 	// Program commands

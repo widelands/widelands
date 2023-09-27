@@ -1470,9 +1470,7 @@ void Warehouse::check_remove_stock(Game& game) {
 
 InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type, const Request* r) {
 	assert(portdock_ != nullptr);
-	assert(portdock_->expedition_bootstrap() != nullptr);
-	return r != nullptr ? portdock_->expedition_bootstrap()->inputqueue(*r) :
-                         portdock_->expedition_bootstrap()->inputqueue(index, type, false);
+	return portdock_->inputqueue(index, type, r);
 }
 
 void Warehouse::set_desired_soldier_count(Quantity q) {

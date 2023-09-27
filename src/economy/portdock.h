@@ -131,11 +131,30 @@ public:
 	// Gets called by the ExpeditionBootstrap as soon as all wares and workers are available.
 	void set_expedition_bootstrap_complete(Game& game, bool complete);
 
-	[[nodiscard]] SoldierRequest* get_warship_request(Serial ship) const;
-	SoldierRequest& create_warship_request(Ship* ship, SoldierPreference pref);
+	struct WarshipRequests {
+		WarshipRequests(Warehouse& warehouse, Ship* ship, SoldierPreference pref);
+		Warehouse& warehouse_;
+
+		void set_economy(Economy* new_e, Economy* old_e, WareWorker type);
+		[[nodiscard]] bool has_request(const Request* r) const;
+
+		void start_refit();
+		void end_refit();
+		[[nodiscard]] bool is_refitting() const;
+		void create_shipwright_request();
+
+		SoldierRequest soldier_request;
+		std::vector<std::unique_ptr<InputQueue>> refit_queues;
+		std::unique_ptr<Request> shipwright_request;
+	};
+
+	[[nodiscard]] WarshipRequests* get_warship_request(Serial ship) const;
+	WarshipRequests& create_warship_request(Ship* ship, SoldierPreference pref);
 	void erase_warship_request(Serial ship);
 	[[nodiscard]] Ship* find_ship_for_warship_request(const EditorGameBase& egbase,
 	                                                  const Request& req) const;
+
+	InputQueue& inputqueue(DescriptionIndex index, WareWorker type, const Request* r);
 
 private:
 	friend class MapBuildingdataPacket;
@@ -164,7 +183,7 @@ private:
 
 	std::unique_ptr<ExpeditionBootstrap> expedition_bootstrap_;
 
-	std::map<Serial, std::unique_ptr<SoldierRequest>> warship_soldier_requests_;
+	std::map<Serial, std::unique_ptr<WarshipRequests>> warship_requests_;
 
 	// saving and loading
 protected:
