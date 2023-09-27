@@ -1528,6 +1528,9 @@ int LuaMap::set_waterway_max_length(lua_State* L) {
 
       (RO) This is an :class:`array` that contains a :class:`~wl.map.PlayerSlot`
       for each player defined in the map.
+
+      use :attr:`wl.base.PlayerBase.number` as index to get this players description suggested
+      by the map's author.
 */
 int LuaMap::get_player_slots(lua_State* L) {
 	const Widelands::Map& map = get_egbase(L).map();
