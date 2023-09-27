@@ -52,7 +52,7 @@ wl.Descriptions():new_productionsite_type {
             -- Total time: 28.8 + 17 + 21 + 2 * 3.6 = 74
             "return=skipped unless economy needs granite or economy needs quartz",
             "consume=ration",
-            "sleep=duration:28.8s",
+            "sleep=duration:28s800ms",
             "animate=working duration:17s",
             "mine=resource_stones radius:1 yield:100% when_empty:20%",
             "produce=granite",
