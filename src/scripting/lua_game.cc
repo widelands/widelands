@@ -1034,7 +1034,7 @@ int LuaPlayer::allow_workers(lua_State* L) {
       full control over the player given by **playernumber** and loosing control over the
       formerly interactive player.
 
-      :arg playernumber: An index in the :class:`array` of :attr:`~wl.bases.EditorGameBase.players`.
+      :arg playernumber: :attr:`wl.game.Player.number` of player to switch to.
       :type playernumber: :class:`integer`
 */
 int LuaPlayer::switchplayer(lua_State* L) {
@@ -1098,7 +1098,7 @@ int LuaPlayer::get_produced_wares_count(lua_State* L) {
       necessarily mean that this player *can* attack the other player, as they might for
       example be in the same team.
 
-      :arg playernumber: An index in the :class:`array` of :attr:`~wl.bases.EditorGameBase.players`.
+      :arg playernumber: value of :attr:`wl.game.Player.number`.
       :type playernumber: :class:`int`
       :rtype: :class:`boolean`
 */
@@ -1115,7 +1115,7 @@ int LuaPlayer::is_attack_forbidden(lua_State* L) {
       **playernumber**. Note that setting this to :const:`false` does not necessarily mean that this
       player *can* attack the other player, as they might for example be in the same team.
 
-      :arg playernumber: An index in the :class:`array` of :attr:`~wl.bases.EditorGameBase.players`.
+      :arg playernumber: value of :attr:`wl.game.Player.number`.
       :type playernumber: :class:`int`
       :arg forbid: If this is :const:`true` forbids attacking, :const:`false` allows
          attacking (if the player is not in the same team).
