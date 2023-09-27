@@ -1094,6 +1094,7 @@ bool Ship::can_cancel_refit() const {
 void Ship::set_ship_type(EditorGameBase& egbase, ShipType t) {
 	ship_type_ = t;
 	pending_refit_ = ship_type_;
+	hitpoints_ = descr().get_max_hitpoints();
 
 	if (egbase.is_game()) {
 		upcast(Game, game, &egbase);
