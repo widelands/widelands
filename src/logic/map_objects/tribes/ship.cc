@@ -481,13 +481,13 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 			}
 
 			return start_task_idle(game, descr().main_animation(), 250);
-		} else {
-			// Destination vanished, try to find a new one
-			molog(game.get_gametime(), "Refit failed, retry\n");
-			const ShipType t = pending_refit_;
-			pending_refit_ = ship_type_;
-			refit(game, t);
 		}
+
+		// Destination vanished, try to find a new one
+		molog(game.get_gametime(), "Refit failed, retry\n");
+		const ShipType t = pending_refit_;
+		pending_refit_ = ship_type_;
+		refit(game, t);
 		return;
 	}
 

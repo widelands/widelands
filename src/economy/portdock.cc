@@ -99,7 +99,7 @@ bool PortDock::WarshipRequests::has_request(const Request* r) const {
 	if (shipwright_request.get() == r || soldier_request.get_request() == r) {
 		return true;
 	}
-	for (auto& queue : refit_queues) {
+	for (const auto& queue : refit_queues) {
 		if (queue->matches(*r)) {
 			return true;
 		}

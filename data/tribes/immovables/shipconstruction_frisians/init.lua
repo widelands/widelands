@@ -16,8 +16,8 @@ wl.Descriptions():new_immovable_type {
       }
    },
    buildcost = {
-      log = 10,
-      clay = 2,
+      log = 8,
+      clay = 4,
       cloth = 4
    },
    spritesheets = {
