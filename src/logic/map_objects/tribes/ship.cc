@@ -1027,6 +1027,7 @@ void Ship::warship_soldier_callback(
 
 	Warehouse& warehouse = dynamic_cast<Warehouse&>(immovable);
 	PortDock* dock = warehouse.get_portdock();
+	assert(dock != nullptr);
 	Ship* ship = dock->find_ship_for_warship_request(game, req);
 	const bool is_shipwright = di == ship->owner().tribe().shipwright();
 
@@ -1041,7 +1042,7 @@ void Ship::warship_soldier_callback(
 	}
 
 	assert(ship->get_owner() == warehouse.get_owner());
-	assert(ship->requestdock_.serial() == warehouse.serial());
+	assert(ship->requestdock_.serial() == dock->serial());
 
 	if (is_shipwright) {
 		worker->reset_tasks(game);
