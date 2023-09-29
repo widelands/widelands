@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-09-25 02:27+0000\n"
+"POT-Creation-Date: 2023-09-28 02:28+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: David D, 2017-2018,2021-2023\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
@@ -2673,23 +2673,23 @@ msgstr "Voie navigable détruite"
 msgid "A waterway had to be destroyed to make room for your new port dock."
 msgstr "Une voie navigable doit être détruite pour faire de la place à votre dock portuaire."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1120
+#: ../../src/logic/map_objects/tribes/worker.cc:1129
 msgid "A geologist found resources."
 msgstr "Un géologue a trouvé des ressources."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2074
+#: ../../src/logic/map_objects/tribes/worker.cc:2083
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
 msgstr "Votre %s ne peut trouver de chemin pour rentrer et va probablement mourir."
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
-#: ../../src/logic/map_objects/tribes/worker.cc:2079
+#: ../../src/logic/map_objects/tribes/worker.cc:2088
 #: ../../src/wui/productionsitewindow.cc:107
 #: ../../src/wui/productionsitewindow.cc:124
 msgid "Worker"
 msgstr "Travailleur"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2080
+#: ../../src/logic/map_objects/tribes/worker.cc:2089
 msgid "Worker got lost!"
 msgstr "Un ouvrier s'est perdu !"
 
@@ -7902,7 +7902,7 @@ msgstr "(Désactivé)"
 #. * TRANSLATORS: The first placeholder is the stock amount of a ware/worker,
 #. and the second is an
 #. * icon indicating a trend. Very little space is available.
-#: ../../src/wlapplication_options.cc:1476 ../../src/wui/waresdisplay.cc:554
+#: ../../src/wlapplication_options.cc:1476 ../../src/wui/waresdisplay.cc:548
 #, c-format
 msgid "%1$s%2$s"
 msgstr "%1$s%2$s"
@@ -10329,29 +10329,29 @@ msgstr "Ouvriers attendant pour embarquer"
 msgid "Expedition"
 msgstr "Expédition"
 
-#: ../../src/wui/waresdisplay.cc:548
+#: ../../src/wui/waresdisplay.cc:542
 msgid "↓"
 msgstr "↓"
 
-#: ../../src/wui/waresdisplay.cc:550
+#: ../../src/wui/waresdisplay.cc:544
 msgid "↑"
 msgstr "↑"
 
-#: ../../src/wui/waresdisplay.cc:551
+#: ../../src/wui/waresdisplay.cc:545
 msgid "="
 msgstr "="
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:589
+#: ../../src/wui/waresdisplay.cc:583
 msgid "%1%k"
 msgstr "%1%k"
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 5M = 5,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:592
+#: ../../src/wui/waresdisplay.cc:586
 msgid "%1%M"
 msgstr "%1%M"
 
@@ -10359,7 +10359,7 @@ msgstr "%1%M"
 #. 5,000,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:595
+#: ../../src/wui/waresdisplay.cc:589
 msgid "%1%G"
 msgstr "%1%G"
 
