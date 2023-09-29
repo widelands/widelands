@@ -178,7 +178,7 @@ void Box::layout() {
 	int totaldepth = 0;
 	int spacing = -1 * inner_spacing_;
 	int infspace_count = 0;
-
+	
 	for (size_t idx = 0; idx < items_.size(); ++idx) {
 		int depth;
 		int unused = 0;
