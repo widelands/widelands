@@ -314,7 +314,7 @@ wl.Descriptions():new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an Amazon ware: Pick
-                  pgettext("amazons_ware", "Picks are used by stonecutters to cut granite and quartz from rocks or in mines.")
+                  pgettext("amazons_ware", "Picks are used by stonecutters to cut granite from rocks or mine granite and quartz in stone mines.")
                }
             }
          },
@@ -608,7 +608,7 @@ wl.Descriptions():new_tribe {
             name = "amazons_stonecutter",
             helptexts = {
                -- TRANSLATORS: Helptext for an Amazon worker: Stonecutter
-               purpose = pgettext("amazons_worker", "Cuts blocks of granite and quartz out of rocks in the vicinity.")
+               purpose = pgettext("amazons_worker", "Cuts blocks of granite out of rocks in the vicinity or mines granite and quartz in stone mines.")
             }
          },
          {
@@ -1425,7 +1425,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Stone Workshop
             purpose = pgettext("amazons_building", "Makes tools and spears for our soldiers."),
             -- TRANSLATORS: Performance helptext for an Amazon production site: Stone Workshop
-            performance = pgettext("amazons_building", "If this building is fully supplied and all tools and spears are needed by the economy, production of one of each tool takes %1$s and one of each spear takes %2$s on average. If only one kind of tool or spear is needed by the economy, its production takes %3$s on average."):bformat(format_minutes_seconds(21, 18), format_minutes_seconds(7, 6), format_minutes_seconds(1, 11))
+            performance = pgettext("amazons_building", "If this building is fully supplied and all tools and spears are needed by the economy, production of one of each tool takes %1$s and one of each spear takes %2$s on average. If only one kind of tool or spear is needed by the economy, its production takes %3$s on average."):bformat(format_minutes_seconds(21, 51), format_minutes_seconds(7, 17), format_minutes_seconds(1, 9))
          }
       },
       {

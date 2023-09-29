@@ -10,10 +10,11 @@ wl.Descriptions():new_productionsite_type {
    size = "mine",
 
    buildcost = {
-      log = 2,
+      log = 4,
+      rope = 1,
    },
    return_on_dismantle = {
-      log = 1
+      log = 2
    },
 
    animation_directory = dirname,
