@@ -46,38 +46,26 @@ wl.Descriptions():new_productionsite_type {
 
    programs = {
       main = {
-         -- TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
-         descname = _("mining granite"),
+         -- TRANSLATORS: Completed/Skipped/Did not start mining granite and quartz because ...
+         descname = _("mining granite and quartz"),
          actions = {
-            "sleep=duration:5s",
-            "return=skipped unless economy needs granite",
+            -- Total time: 28.8 + 17 + 21 + 2 * 3.6 = 74
+            "return=skipped unless economy needs granite or economy needs quartz",
             "consume=ration",
-            "sleep=duration:38s",
-            "call=mine_produce",
-            "call=mine_produce",
-         }
-      },
-      mine_produce = {
-         descname = _("mining granite"),
-         actions = {
-            "animate=working duration:10s",
+            "sleep=duration:28s800ms",
+            "animate=working duration:17s",
             "mine=resource_stones radius:1 yield:100% when_empty:20%",
             "produce=granite",
-         }
-      },
-      encyclopedia = {
-         -- just a dummy program to fix encyclopedia
-         descname = "encyclopedia",
-         actions = {
-            "consume=ration",
-            "produce=granite:2",
+            "animate=working duration:21s",
+            "mine=resource_stones radius:1 yield:100% when_empty:15%",
+            "produce=quartz",
          }
       },
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _("No Granite"),
-      heading = _("Main Granite Vein Exhausted"),
+      title = _("No Stones"),
+      heading = _("Main Stone Vein Exhausted"),
       message =
          pgettext("amazons_building", "This stone mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it."),
    },

@@ -30,6 +30,7 @@ init = {
          wares = {
          log = 86,
          granite = 43,
+         quartz = 34,
          rope = 24,
          liana = 7,
          ironwood = 8,
@@ -50,6 +51,7 @@ init = {
          spear_wooden = 6,
          stone_bowl = 2,
          needles = 2,
+         firestones = 3,
          },
          workers = {
             amazons_cook = 3,
