@@ -4,6 +4,7 @@
 # 
 # Translators:
 # tiu lau, 2022
+# Daniel Martins <danieljogo982@gmail.com>, 2023
 # 
 msgid ""
 msgstr ""
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
-"Last-Translator: tiu lau, 2022\n"
+"Last-Translator: Daniel Martins <danieljogo982@gmail.com>, 2023\n"
 "Language-Team: Portuguese (Brazil) (https://app.transifex.com/widelands/teams/35159/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -60,6 +61,7 @@ msgstr "Derrote o exército de Töver"
 msgid ""
 "Törver is the enemy in the North, who is fighting under the red banner."
 msgstr ""
+"Törver é o inimigo no norte, que está lutando sob a bandeira vermelha."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:16
 msgid "Build a port"
