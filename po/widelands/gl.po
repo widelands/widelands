@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-09-28 02:28+0000\n"
+"POT-Creation-Date: 2023-09-30 02:25+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: GunChleoc, 2016\n"
 "Language-Team: Galician (http://app.transifex.com/widelands/widelands/language/gl/)\n"
@@ -3764,7 +3764,7 @@ msgstr ""
 msgid "Restore"
 msgstr ""
 
-#: ../../src/ui_basic/window.cc:172 ../../src/wui/info_panel.cc:194
+#: ../../src/ui_basic/window.cc:172 ../../src/wui/info_panel.cc:198
 msgid "Pin"
 msgstr ""
 
@@ -8947,39 +8947,39 @@ msgstr ""
 msgid "Military"
 msgstr "Exército"
 
-#: ../../src/wui/info_panel.cc:138
+#: ../../src/wui/info_panel.cc:142
 msgid "Info Panel Visibility"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:197
+#: ../../src/wui/info_panel.cc:201
 msgid "Follow mouse"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:202
+#: ../../src/wui/info_panel.cc:206
 msgid "Hide"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:207
+#: ../../src/wui/info_panel.cc:211
 msgid "Move panel to bottom"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:207
+#: ../../src/wui/info_panel.cc:211
 msgid "Move panel to top"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:403
+#: ../../src/wui/info_panel.cc:407
 msgid "Cheat mode enabled"
 msgstr ""
 
 #. * TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime
 #. · Gamespeed)
-#: ../../src/wui/info_panel.cc:450
+#: ../../src/wui/info_panel.cc:454
 #, c-format
 msgid "%1$s · %2$s"
 msgstr ""
 
 #. * TRANSLATORS: Gametime · Realtime · Gamespeed
-#: ../../src/wui/info_panel.cc:455
+#: ../../src/wui/info_panel.cc:459
 #, c-format
 msgid "%1$s · %2$s · %3$s"
 msgstr ""
