@@ -364,10 +364,6 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                   UI::PanelStyle::kFsMenu,
                   "server_name",
                   UI::FontStyle::kWarning,
-				  0,
-				  0,
-				  0,
-				  0,
                   "",
                   UI::Align::kRight) {
 
@@ -1305,6 +1301,7 @@ void AddOnsCtrl::layout() {
 		int w;
 		int h;
 		server_name_.get_desired_size(&w, &h);
+		server_name_.set_size(w, h);
 		server_name_.set_pos(Vector2i(login_button_.get_x() - w - kRowButtonSpacing,
 		                              login_button_.get_y() + (login_button_.get_h() - h) / 2));
 	}
