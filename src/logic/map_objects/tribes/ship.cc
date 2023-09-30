@@ -1003,6 +1003,7 @@ void Ship::warship_soldier_callback(Game& game,
                                     PlayerImmovable& immovable) {
 	Warehouse& warehouse = dynamic_cast<Warehouse&>(immovable);
 	PortDock* dock = warehouse.get_portdock();
+	assert(dock != nullptr);
 	Ship* ship = dock->find_ship_for_warship_request(game, req);
 
 	if (ship == nullptr || ship->get_ship_type() != ShipType::kWarship ||
@@ -1016,7 +1017,7 @@ void Ship::warship_soldier_callback(Game& game,
 	}
 
 	assert(ship->get_owner() == warehouse.get_owner());
-	assert(ship->requestdock_.serial() == warehouse.serial());
+	assert(ship->requestdock_.serial() == dock->serial());
 	ship->molog(game.get_gametime(), "%s %u embarked on warship %s", worker->descr().name().c_str(),
 	            worker->serial(), ship->get_shipname().c_str());
 
