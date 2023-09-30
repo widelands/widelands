@@ -21,7 +21,7 @@ wl.Descriptions():new_ship_type {
    refit_cost = {
       cloth = 2,
       iron = 4,
-      logs = 2,
+      log = 2,
       clay = 2,
    },
 
