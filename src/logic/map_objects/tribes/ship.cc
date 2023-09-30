@@ -1341,8 +1341,9 @@ void Ship::damage_soldiers(Game& game, Player* enemy, uint32_t& received_damage)
 
 	std::vector<Soldier*> soldiers = onboard_soldiers();
 	if (!soldiers.empty()) {
-		const uint32_t damage_per_soldier = received_damage / kDamageSharePerSoldier +
-		                                    received_damage / kMinSoldiersTotalDamage / soldiers.size();
+		const uint32_t damage_per_soldier =
+		   received_damage / kDamageSharePerSoldier +
+		   received_damage / kMinSoldiersTotalDamage / soldiers.size();
 		const uint32_t damage_reduction = damage_per_soldier * soldiers.size();
 		if (received_damage > damage_reduction) {
 			received_damage -= damage_reduction;
