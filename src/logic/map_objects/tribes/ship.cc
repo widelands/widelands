@@ -1321,6 +1321,64 @@ unsigned Ship::get_sea_attack_soldier_bonus(const EditorGameBase& egbase) const 
 	return attack_bonus;
 }
 
+// The damage taken by soldiers has 2 components:
+// 1. All soldiers take 1 / kDamageSharePerSoldier. This is a relatively small damage for the
+//    individual soldier, but if there are many soldiers, they can take over much damage from
+//    the ship together, providing a strong defense.
+// 2. If there are soldiers, then they together take 1 / kMinSoldiersTotalDamage, divided equally
+//    between them. This is a weaker defense for the ship, but can hurt the soldiers much
+//    stronger if there are only a few of them. If there are many soldiers, then this too is
+//    only a small damage for the individual soldier.
+constexpr uint32_t kDamageSharePerSoldier = 64;
+constexpr uint32_t kMinSoldiersTotalDamage = 8;
+
+void Ship::damage_soldiers(Game& game, Player* enemy, uint32_t& received_damage) {
+	if (received_damage < 1) {
+		assert(hitpoints_ > 0);
+		return;
+	}
+
+	std::vector<Soldier*> soldiers = onboard_soldiers();
+	if (!soldiers.empty()) {
+		const uint32_t damage_per_soldier = received_damage / kDamageSharePerSoldier +
+		                                    received_damage / kMinSoldiersTotalDamage / soldiers.size();
+		const uint32_t damage_reduction = damage_per_soldier * soldiers.size();
+		if (received_damage > damage_reduction) {
+			received_damage -= damage_reduction;
+		} else {
+			// Soldiers take all damage: This is not possible with the default ship capacities.
+			// log_warn()?
+			received_damage = 0;
+		}
+		molog(game.get_gametime(), "[battle] %" PRIuS " on-board soldiers take %u damage (%u each)",
+		      soldiers.size(), damage_reduction, damage_per_soldier);
+		molog(game.get_gametime(), "[battle] Damage taken by the ship itself: %u", received_damage);
+
+		// No need to damage the soldiers if they're about to die with the ship anyway
+		if (received_damage < hitpoints_ && received_damage > 0) {
+			for (Soldier* soldier : soldiers) {
+				soldier->damage(damage_per_soldier * (100 - soldier->get_defense()) / 100);
+				if (soldier->get_current_health() < 1) {
+					molog(game.get_gametime(), "[battle] On-board soldier %u died in the battle.\n",
+					      soldier->serial());
+					soldier->get_owner()->count_casualty();
+					enemy->count_kill();
+					for (auto it = items_.begin(); it != items_.end(); ++it) {
+						Worker* worker;
+						it->get(game, nullptr, &worker);
+						if (worker != nullptr && worker->serial() == soldier->serial()) {
+							items_.erase(it);
+							break;
+						}
+					}
+					soldier->set_location(nullptr);
+					soldier->schedule_destroy(game);
+				}
+			}
+		}
+	}
+}
+
 constexpr uint8_t kPortUnderAttackDefendersSearchRadius = 10;
 constexpr uint32_t kAttackAnimationDuration = 2000;
 
@@ -1396,8 +1454,13 @@ void Ship::battle_update(Game& game) {
 			attack_strength += attack_strength * get_sea_attack_soldier_bonus(game) / 100;
 
 			molog(game.get_gametime(), "[battle] Hit with %u points", attack_strength);
-			current_battle.pending_damage =
-			   attack_strength * (100 - target_ship->descr().defense_) / 100;
+
+			// Let the ship's defense protect soldiers too. It may be useful for balancing between
+			// tribes if soldier healths and defenses are too different.
+			attack_strength = attack_strength * (100 - target_ship->descr().defense_) / 100;
+			target_ship->damage_soldiers(game, this->get_owner(), attack_strength);
+
+			current_battle.pending_damage = attack_strength;
 		} else {  // Miss
 			molog(game.get_gametime(), "[battle] Miss");
 			current_battle.pending_damage = 0;
@@ -1410,12 +1473,7 @@ void Ship::battle_update(Game& game) {
 	auto damage = [this, &game, set_phase, &current_battle, other_battle,
 	               target_ship](Battle::Phase next) {
 		assert(target_ship != nullptr);
-		if (target_ship->hitpoints_ > current_battle.pending_damage) {
-			molog(game.get_gametime(), "[battle] Subtracting %u hitpoints from enemy",
-			      current_battle.pending_damage);
-			target_ship->hitpoints_ -= current_battle.pending_damage;
-			set_phase(next);
-		} else {
+		if (target_ship->hitpoints_ <= current_battle.pending_damage) {
 			molog(game.get_gametime(), "[battle] Enemy defeated");
 
 			get_owner()->count_naval_victory();
@@ -1434,6 +1492,15 @@ void Ship::battle_update(Game& game) {
 			return true;
 		}
 
+		// Enemy will survive, battle continues
+
+		if (current_battle.pending_damage > 0) {
+			molog(game.get_gametime(), "[battle] Subtracting %u hitpoints from enemy",
+			      current_battle.pending_damage);
+			target_ship->hitpoints_ -= current_battle.pending_damage;
+		}
+
+		set_phase(next);
 		current_battle.pending_damage = 0;
 		other_battle->pending_damage = 0;
 		return false;

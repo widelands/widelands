@@ -172,6 +172,10 @@ struct Ship : Bob {
 	};
 	void start_battle(Game&, Battle, bool immediately);
 
+	// Apply part of the damage to the ship to on-board soldiers and decrease the received
+	// damage for the ship accordingly.
+	void damage_soldiers(Game& game, Player* enemy, uint32_t& received_damage);
+
 	uint32_t calculate_sea_route(EditorGameBase&, PortDock&, Path* = nullptr) const;
 
 	void log_general_info(const EditorGameBase&) const override;
@@ -317,6 +321,10 @@ struct Ship : Bob {
 	 * For a kRetreat, `parameters` must be empty.
 	 */
 	void warship_command(Game& game, WarshipCommand cmd, const std::vector<uint32_t>& parameters);
+
+	/**
+	 * Drop soldier at current port dock.
+	 */
 	void drop_soldier(Game& game, Serial soldier);
 
 	static void warship_soldier_callback(
