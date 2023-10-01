@@ -24,8 +24,8 @@ init = {
       prefilled_buildings(player, { "amazons_headquarters", sf.x, sf.y,
          wares = {
          log = 120,
-         granite = 50,
-         quartz = 40,
+         granite = 40,
+         quartz = 14,
          rope = 30,
          liana = 35,
          ironwood = 15,
