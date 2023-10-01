@@ -1521,18 +1521,11 @@ std::string Warehouse::info_string(const InfoStringFormat& isf) {
 }
 
 void Warehouse::update_statistics_string(std::string* str) {
-	if (descr().get_conquers() > 0) {  // Port or HQ
+	if (descr().get_conquers() > 0 &&       // Port or HQ
+	    get_desired_soldier_count() > 0) {  // with min garrison
 		*str = soldier_control_.get_status_string(owner().tribe(), get_soldier_preference());
-	} else {  // Plain warehouse
-		const size_t ns = soldier_control_.present_soldiers().size();
-		std::string ns_s = as_string(ns);
-		if (ns > 0) {
-			ns_s = StyleManager::color_tag(
-			   ns_s, g_style_manager->building_statistics_style().high_color());
-		}
-		*str = format(_("(%s)"), format(owner().tribe().get_soldiers_format_string(
-		                                   TribeDescr::CapacityStringIndex::kFull, ns),
-		                                ns_s));
+	} else {
+		str->clear();
 	}
 }
 

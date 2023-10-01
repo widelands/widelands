@@ -25,20 +25,6 @@
 #include "graphic/style_manager.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 
-namespace {
-
-std::string format_extra_soldiers(Widelands::Quantity has, Widelands::Quantity wants) {
-	assert(has > wants);
-	/** TRANSLATORS: %1% is the number of all soldiers in a warehouse, %2% is the desired
-	                 number */
-	return format(pgettext("warehouse", "%1% (%2%)"),
-	              StyleManager::color_tag(
-	                 as_string(has), g_style_manager->building_statistics_style().high_color()),
-	              wants);
-}
-
-}  // namespace
-
 namespace Widelands {
 
 /**
@@ -54,20 +40,16 @@ std::string SoldierControl::get_status_string(const TribeDescr& tribe,
 	const UI::BuildingStatisticsStyleInfo& style = g_style_manager->building_statistics_style();
 
 	// military capacity strings
-	if (present == stationed) {
+	if (present == stationed || present >= soldier_capacity()) {
 		if (soldier_capacity() > stationed) {  // Soldiers are lacking
 			rv = format(
 			   tribe.get_soldiers_format_string(TribeDescr::CapacityStringIndex::kLacking, stationed),
 			   stationed,
 			   StyleManager::color_tag(as_string(soldier_capacity() - stationed), style.low_color()));
-		} else if (stationed > soldier_capacity()) {  // Port or HQ has extra soldiers in store
-			rv = format(
-			   tribe.get_soldiers_format_string(TribeDescr::CapacityStringIndex::kFull, stationed),
-			   format_extra_soldiers(stationed, soldier_capacity()));
 		} else {  // Soldiers filled to capacity
 			rv = format(
-			   tribe.get_soldiers_format_string(TribeDescr::CapacityStringIndex::kFull, stationed),
-			   stationed);
+			   tribe.get_soldiers_format_string(TribeDescr::CapacityStringIndex::kFull, soldier_capacity()),
+			   soldier_capacity());
 		}
 	} else {
 		if (soldier_capacity() > stationed) {  // Soldiers are lacking; others are outside
@@ -76,18 +58,10 @@ std::string SoldierControl::get_status_string(const TribeDescr& tribe,
 			      TribeDescr::CapacityStringIndex::kOutAndLacking, stationed),
 			   present, StyleManager::color_tag(as_string(stationed - present), style.high_color()),
 			   StyleManager::color_tag(as_string(soldier_capacity() - stationed), style.low_color()));
-		} else if (present > soldier_capacity()) {  // Port or HQ has extra soldiers in store;
-			                                         // some are outside
-			                                         // (this is currently not possible, outside
-			                                         //  soldiers are not tracked for warehouses)
-			rv = format(
-			   tribe.get_soldiers_format_string(TribeDescr::CapacityStringIndex::kOut, stationed),
-			   format_extra_soldiers(present, soldier_capacity()),
-			   StyleManager::color_tag(as_string(stationed - present), style.high_color()));
 		} else {  // Soldiers filled to capacity; some are outside
 			rv = format(
-			   tribe.get_soldiers_format_string(TribeDescr::CapacityStringIndex::kOut, stationed),
-			   present, StyleManager::color_tag(as_string(stationed - present), style.high_color()));
+			   tribe.get_soldiers_format_string(TribeDescr::CapacityStringIndex::kOut, soldier_capacity()),
+			   present, StyleManager::color_tag(as_string(soldier_capacity() - present), style.high_color()));
 		}
 	}
 
