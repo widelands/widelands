@@ -812,7 +812,8 @@ void WLApplication::run() {
 
 	std::unique_ptr<FsMenu::MainMenu> menu = check_crash_reports();
 
-	if (game_type_ == GameType::kEditor) {
+	switch (game_type_) {
+	case GameType::kEditor: {
 		g_sh->change_music(Songset::kIngame);
 		if (filename_.empty()) {
 			EditorInteractive::run_editor(nullptr, EditorInteractive::Init::kDefault);
@@ -840,7 +841,10 @@ void WLApplication::run() {
 				   nullptr, EditorInteractive::Init::kLoadMapDirectly, filename_, script_to_run_);
 			}
 		}
-	} else if (game_type_ == GameType::kReplay || game_type_ == GameType::kLoadGame) {
+	} break;
+
+	case GameType::kReplay:
+	case GameType::kLoadGame: {
 		Widelands::Game game;
 		std::string title;
 		std::string message;
@@ -883,16 +887,22 @@ void WLApplication::run() {
 			menu->show_messagebox(title, message);
 			menu->main_loop();
 		}
-	} else if (game_type_ == GameType::kScenario) {
+	} break;
+
+	case GameType::kScenario: {
 		Widelands::Game game;
 		try {
 			game.run_splayer_scenario_direct({filename_}, script_to_run_);
 		} catch (const std::exception& e) {
 			emergency_save(nullptr, game, e.what());
 		}
-	} else if (game_type_ == GameType::kFromTemplate) {
+	} break;
+
+	case GameType::kFromTemplate: {
 		init_and_run_game_from_template();
-	} else {
+	} break;
+
+	default:
 		g_sh->change_music(Songset::kIntro);
 
 		g_sh->change_music(Songset::kMenu, 1000);
