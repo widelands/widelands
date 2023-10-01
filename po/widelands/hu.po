@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-09-25 02:27+0000\n"
+"POT-Creation-Date: 2023-09-30 02:25+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: zone <z-one@freemail.hu>, 2015\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
@@ -2654,23 +2654,23 @@ msgstr "Víziút megsemmisítve"
 msgid "A waterway had to be destroyed to make room for your new port dock."
 msgstr "Egy víziutat meg kellett semmisíteni, hogy legyen helye az új kikötődokknak."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1120
+#: ../../src/logic/map_objects/tribes/worker.cc:1129
 msgid "A geologist found resources."
 msgstr "Geológus ásványkincseket talált."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2074
+#: ../../src/logic/map_objects/tribes/worker.cc:2083
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
 msgstr "A(z) %s nem talál haza vezető útvonalat és valószínűleg meg fog halni."
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
-#: ../../src/logic/map_objects/tribes/worker.cc:2079
+#: ../../src/logic/map_objects/tribes/worker.cc:2088
 #: ../../src/wui/productionsitewindow.cc:107
 #: ../../src/wui/productionsitewindow.cc:124
 msgid "Worker"
 msgstr "Munkás"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2080
+#: ../../src/logic/map_objects/tribes/worker.cc:2089
 msgid "Worker got lost!"
 msgstr "Eltűnt egy munkás!"
 
@@ -3772,7 +3772,7 @@ msgstr "Összecsukás"
 msgid "Restore"
 msgstr "Visszaállítás"
 
-#: ../../src/ui_basic/window.cc:172 ../../src/wui/info_panel.cc:194
+#: ../../src/ui_basic/window.cc:172 ../../src/wui/info_panel.cc:198
 msgid "Pin"
 msgstr "Rögzítés"
 
@@ -7863,7 +7863,7 @@ msgstr "(használaton kívül)"
 #. * TRANSLATORS: The first placeholder is the stock amount of a ware/worker,
 #. and the second is an
 #. * icon indicating a trend. Very little space is available.
-#: ../../src/wlapplication_options.cc:1476 ../../src/wui/waresdisplay.cc:554
+#: ../../src/wlapplication_options.cc:1476 ../../src/wui/waresdisplay.cc:548
 #, c-format
 msgid "%1$s%2$s"
 msgstr "%1$s%2$s"
@@ -8955,39 +8955,39 @@ msgstr "Megsemmisített civil épületek"
 msgid "Military"
 msgstr "Haderő"
 
-#: ../../src/wui/info_panel.cc:138
+#: ../../src/wui/info_panel.cc:142
 msgid "Info Panel Visibility"
 msgstr "Tálca megjelenítése"
 
-#: ../../src/wui/info_panel.cc:197
+#: ../../src/wui/info_panel.cc:201
 msgid "Follow mouse"
 msgstr "Csak ha az egérmutató rajta van"
 
-#: ../../src/wui/info_panel.cc:202
+#: ../../src/wui/info_panel.cc:206
 msgid "Hide"
 msgstr "Elrejtés"
 
-#: ../../src/wui/info_panel.cc:207
+#: ../../src/wui/info_panel.cc:211
 msgid "Move panel to bottom"
 msgstr "Tálca alulra helyezése"
 
-#: ../../src/wui/info_panel.cc:207
+#: ../../src/wui/info_panel.cc:211
 msgid "Move panel to top"
 msgstr "Tálca felülre helyezése"
 
-#: ../../src/wui/info_panel.cc:403
+#: ../../src/wui/info_panel.cc:407
 msgid "Cheat mode enabled"
 msgstr "Csalások bekapcsolása"
 
 #. * TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime
 #. · Gamespeed)
-#: ../../src/wui/info_panel.cc:450
+#: ../../src/wui/info_panel.cc:454
 #, c-format
 msgid "%1$s · %2$s"
 msgstr "%1$s · %2$s"
 
 #. * TRANSLATORS: Gametime · Realtime · Gamespeed
-#: ../../src/wui/info_panel.cc:455
+#: ../../src/wui/info_panel.cc:459
 #, c-format
 msgid "%1$s · %2$s · %3$s"
 msgstr "%1$s · %2$s · %3$s"
@@ -10277,29 +10277,29 @@ msgstr "Indulásra váró munkások"
 msgid "Expedition"
 msgstr "Expedíció"
 
-#: ../../src/wui/waresdisplay.cc:548
+#: ../../src/wui/waresdisplay.cc:542
 msgid "↓"
 msgstr "↓"
 
-#: ../../src/wui/waresdisplay.cc:550
+#: ../../src/wui/waresdisplay.cc:544
 msgid "↑"
 msgstr "↑"
 
-#: ../../src/wui/waresdisplay.cc:551
+#: ../../src/wui/waresdisplay.cc:545
 msgid "="
 msgstr "="
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:589
+#: ../../src/wui/waresdisplay.cc:583
 msgid "%1%k"
 msgstr "%1%e"
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 5M = 5,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:592
+#: ../../src/wui/waresdisplay.cc:586
 msgid "%1%M"
 msgstr "%1%m"
 
@@ -10307,7 +10307,7 @@ msgstr "%1%m"
 #. 5,000,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:595
+#: ../../src/wui/waresdisplay.cc:589
 msgid "%1%G"
 msgstr "%1%M"
 

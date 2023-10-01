@@ -99,7 +99,6 @@ TwoColumnsMenu::TwoColumnsMenu(MenuCapsule& fsmm,
 
 void TwoColumnsMenu::layout() {
 	BaseMenu::layout();
-
 	right_column_width_ = get_inner_w() * right_column_width_factor_;
 
 	right_column_box_.set_max_size(right_column_width_, 0);
