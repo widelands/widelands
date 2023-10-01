@@ -49,7 +49,7 @@ AbstractWaresDisplay::AbstractWaresDisplay(
    bool horizontal,
    int32_t hgap,
    int32_t vgap)
-   :  // Size is set when add_warelist is called, as it depends on the type_.
+   :  // Size is set when layout is called
      UI::Panel(parent, UI::PanelStyle::kWui, "wares_display", x, y, 0, 0),
      tribe_(tribe),
 
@@ -163,12 +163,6 @@ bool AbstractWaresDisplay::handle_mousemove(
 		update_anchor_selection(x, y);
 	}
 	return true;
-}
-
-void AbstractWaresDisplay::handle_mousein(bool inside) {
-	if (!inside) {
-		finalize_anchor_selection();
-	}
 }
 
 bool AbstractWaresDisplay::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
@@ -348,10 +342,6 @@ void AbstractWaresDisplay::layout() {
 	curware_.set_size(get_inner_w(), 20);
 }
 
-void WaresDisplay::remove_all_warelists() {
-	warelists_.clear();
-}
-
 void AbstractWaresDisplay::draw(RenderTarget& dst) {
 	for (const Widelands::DescriptionIndex& index : indices_) {
 		if (!hidden_[index]) {
@@ -512,8 +502,9 @@ StockMenuWaresDisplay::StockMenuWaresDisplay(UI::Panel* const parent,
                                              const int32_t x,
                                              const int32_t y,
                                              const Widelands::Player& p,
-                                             const Widelands::WareWorker type)
-   : WaresDisplay(parent, x, y, p.tribe(), type, false), player_(p) {
+                                             const Widelands::WareWorker type,
+                                             bool total)
+   : WaresDisplay(parent, x, y, p.tribe(), type, false), player_(p), show_total_stock_(total) {
 }
 
 std::string StockMenuWaresDisplay::info_for_ware(const Widelands::DescriptionIndex di) {
@@ -585,10 +576,6 @@ RGBColor AbstractWaresDisplay::info_color_for_ware(Widelands::DescriptionIndex /
 	return g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal).info_background();
 }
 
-WaresDisplay::~WaresDisplay() {
-	remove_all_warelists();
-}
-
 static const char* unit_suffixes[] = {
    "%1%",
    /** TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000). */
@@ -609,26 +596,29 @@ std::string get_amount_string(uint32_t amount, bool cutoff1k) {
 	return format(unit_suffixes[size], amount);
 }
 
-uint32_t WaresDisplay::amount_of(const Widelands::DescriptionIndex ware) {
+uint32_t StockMenuWaresDisplay::amount_of(const Widelands::DescriptionIndex ware) {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	uint32_t totalstock = 0;
-	for (const Widelands::WareList* warelist : warelists_) {
-		totalstock += warelist->stock(ware);
+	for (const auto& economy : player_.economies()) {
+		if (economy.second->type() == get_type()) {
+			if (show_total_stock_) {
+				totalstock += economy.second->stock_ware_or_worker(ware);
+			} else {
+				for (const Widelands::Warehouse* warehouse : economy.second->warehouses()) {
+					totalstock += (get_type() == Widelands::wwWARE ? warehouse->get_wares() :
+                                                                warehouse->get_workers())
+					                 .stock(ware);
+				}
+			}
+		}
 	}
+
 	return totalstock;
 }
 
 std::string WaresDisplay::info_for_ware(Widelands::DescriptionIndex ware) {
 	return get_amount_string(amount_of(ware));
-}
-
-/*
-===============
-add a ware list to be displayed in this WaresDisplay
-===============
-*/
-void WaresDisplay::add_warelist(const Widelands::WareList& wares) {
-	//  If you register something twice, it is counted twice. Not my problem.
-	warelists_.push_back(&wares);
 }
 
 std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
