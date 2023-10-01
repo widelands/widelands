@@ -47,9 +47,9 @@ std::string SoldierControl::get_status_string(const TribeDescr& tribe,
 			   stationed,
 			   StyleManager::color_tag(as_string(soldier_capacity() - stationed), style.low_color()));
 		} else {  // Soldiers filled to capacity
-			rv = format(
-			   tribe.get_soldiers_format_string(TribeDescr::CapacityStringIndex::kFull, soldier_capacity()),
-			   soldier_capacity());
+			rv = format(tribe.get_soldiers_format_string(
+			               TribeDescr::CapacityStringIndex::kFull, soldier_capacity()),
+			            soldier_capacity());
 		}
 	} else {
 		if (soldier_capacity() > stationed) {  // Soldiers are lacking; others are outside
@@ -60,8 +60,10 @@ std::string SoldierControl::get_status_string(const TribeDescr& tribe,
 			   StyleManager::color_tag(as_string(soldier_capacity() - stationed), style.low_color()));
 		} else {  // Soldiers filled to capacity; some are outside
 			rv = format(
-			   tribe.get_soldiers_format_string(TribeDescr::CapacityStringIndex::kOut, soldier_capacity()),
-			   present, StyleManager::color_tag(as_string(soldier_capacity() - present), style.high_color()));
+			   tribe.get_soldiers_format_string(
+			      TribeDescr::CapacityStringIndex::kOut, soldier_capacity()),
+			   present,
+			   StyleManager::color_tag(as_string(soldier_capacity() - present), style.high_color()));
 		}
 	}
 
