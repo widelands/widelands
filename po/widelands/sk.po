@@ -7,13 +7,14 @@
 # Karl Vest, 2020
 # MiroslavR <miroslavr256@gmail.com>, 2015-2016
 # Miroslav Remák <Unknown>, 2014
+# Viliam Molo, 2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-09-28 02:28+0000\n"
+"POT-Creation-Date: 2023-09-30 02:25+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Karl Vest, 2020\n"
+"Last-Translator: Viliam Molo, 2023\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -55,13 +56,13 @@ msgstr "V blízkosti vašej štartovacej pozície sa nenachádzajú žiadne skal
 
 #: ../../data/scripting/infrastructure.lua:291
 msgid "Not enough trees nearby"
-msgstr ""
+msgstr "Nedostatok stromov v okolí"
 
 #: ../../data/scripting/infrastructure.lua:291
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "V blízkosti vašej východiskovej pozície nie je dostatok stromov. Preto získate dodatočné zdroje na rozbehnutie svojej ekonomiky."
 
 #: ../../data/scripting/messages.lua:66 ../../data/scripting/messages.lua:68
 #: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:117
@@ -368,7 +369,7 @@ msgstr "Uložiť mapu"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:235
 msgid "Publish Map Online…"
-msgstr ""
+msgstr "Zverejni mapu online..."
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:243
@@ -516,7 +517,7 @@ msgstr "Klikni pre zobrazenie ďalších informácií o políčku."
 #: ../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:44
 #: ../../src/wlapplication_options.cc:526
 msgid "Tool History"
-msgstr ""
+msgstr "História nástrojov"
 
 #. * TRANSLATORS: Tooltip for the tool history tool in the editor
 #: ../../src/editor/editorinteractive.cc:394
@@ -556,7 +557,7 @@ msgstr ""
 msgid ""
 "Toggle whether to show maximum building spaces that will be available if all"
 " immovables (trees, rocks, etc.) are removed"
-msgstr ""
+msgstr "Prepínač zobrazenia maximálneho počtu stavebných miest ktoré sú k dispozícii, ak sa odstránia všetky nehnuteľnosti (stromy, skaly atď.)"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
@@ -684,7 +685,7 @@ msgstr "neznámi"
 
 #: ../../src/editor/editorinteractive.cc:1224
 msgid "Loading world…"
-msgstr ""
+msgstr "Nahrávam svet"
 
 #: ../../src/editor/editorinteractive.cc:1403
 #, c-format
@@ -693,7 +694,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:1426
 msgid "Publish Map"
-msgstr ""
+msgstr "Zverejni mapu"
 
 #: ../../src/editor/editorinteractive.cc:1427
 #, c-format
@@ -705,19 +706,19 @@ msgid ""
 "Author: %3$s\n"
 "Description: %4$s\n"
 "Hint: %5$s\n"
-msgstr ""
+msgstr "Ste si istý že chcete túto mapu zverejniť online?\n\nMeno: %1$s\nPrezývka: %2$s\nAutor: %3$s\nPopis: %4$s\nNápoveda: %5$s\n"
 
 #: ../../src/editor/editorinteractive.cc:1451
 msgid "Login Error"
-msgstr ""
+msgstr "Chyba prihlásenia"
 
 #: ../../src/editor/editorinteractive.cc:1456
 msgid "Uploading Add-On…"
-msgstr ""
+msgstr "Nahrávanie rozšírenia..."
 
 #: ../../src/editor/editorinteractive.cc:1457
 msgid "Saving map…"
-msgstr ""
+msgstr "Ukladanie mapy..."
 
 #: ../../src/editor/editorinteractive.cc:1476
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:315
@@ -3799,7 +3800,7 @@ msgstr ""
 msgid "Restore"
 msgstr ""
 
-#: ../../src/ui_basic/window.cc:172 ../../src/wui/info_panel.cc:194
+#: ../../src/ui_basic/window.cc:172 ../../src/wui/info_panel.cc:198
 msgid "Pin"
 msgstr ""
 
@@ -9016,39 +9017,39 @@ msgstr ""
 msgid "Military"
 msgstr "Vojsko"
 
-#: ../../src/wui/info_panel.cc:138
+#: ../../src/wui/info_panel.cc:142
 msgid "Info Panel Visibility"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:197
+#: ../../src/wui/info_panel.cc:201
 msgid "Follow mouse"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:202
+#: ../../src/wui/info_panel.cc:206
 msgid "Hide"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:207
+#: ../../src/wui/info_panel.cc:211
 msgid "Move panel to bottom"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:207
+#: ../../src/wui/info_panel.cc:211
 msgid "Move panel to top"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:403
+#: ../../src/wui/info_panel.cc:407
 msgid "Cheat mode enabled"
 msgstr ""
 
 #. * TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime
 #. · Gamespeed)
-#: ../../src/wui/info_panel.cc:450
+#: ../../src/wui/info_panel.cc:454
 #, c-format
 msgid "%1$s · %2$s"
 msgstr ""
 
 #. * TRANSLATORS: Gametime · Realtime · Gamespeed
-#: ../../src/wui/info_panel.cc:455
+#: ../../src/wui/info_panel.cc:459
 #, c-format
 msgid "%1$s · %2$s · %3$s"
 msgstr ""
