@@ -817,30 +817,27 @@ void WLApplication::run() {
 		if (filename_.empty()) {
 			EditorInteractive::run_editor(nullptr, EditorInteractive::Init::kDefault);
 		} else {
-			std::string title;
-			std::string message;
-			try {
-				if (use_last(filename_)) {
-					std::optional<MapData> map = newest_edited_map();
-					if (map.has_value()) {
-						filename_ = map->filenames.at(0);
-					} else {
-						throw WLWarning(
-						   _("No Last Edited Map"), _("Widelands could not find the last edited map."));
+			bool have_filename = true;
+			if (use_last(filename_)) {
+				if (std::optional<MapData> map = newest_edited_map(); map.has_value()) {
+					filename_ = map->filenames.at(0);
+				} else {
+					const std::string message = _("Widelands could not find the last edited map.");
+					log_err("%s\n", message.c_str());
+
+					g_sh->change_music(Songset::kMenu);
+					if (menu == nullptr) {
+						menu.reset(new FsMenu::MainMenu(true));
 					}
+					menu->show_messagebox(_("No Last Edited Map"), message);
+					menu->main_loop();
+					have_filename = false;
 				}
+			}
+
+			if (have_filename) {
 				EditorInteractive::run_editor(
 				   nullptr, EditorInteractive::Init::kLoadMapDirectly, filename_, script_to_run_);
-			} catch (const WLWarning& e) {
-				title = e.title();
-				message = e.what();
-			}
-			if (!message.empty()) {
-				g_sh->change_music(Songset::kMenu);
-				FsMenu::MainMenu m(true);
-				m.show_messagebox(title, message);
-				log_err("%s\n", message.c_str());
-				m.main_loop();
 			}
 		}
 	} else if (game_type_ == GameType::kReplay || game_type_ == GameType::kLoadGame) {
@@ -877,12 +874,14 @@ void WLApplication::run() {
 			title = _("Error message:");
 		}
 		if (!message.empty()) {
+			log_err("%s\n", message.c_str());
 			game.full_cleanup();
 			g_sh->change_music(Songset::kMenu);
-			FsMenu::MainMenu m(true);
-			m.show_messagebox(title, message);
-			log_err("%s\n", message.c_str());
-			m.main_loop();
+			if (menu == nullptr) {
+				menu.reset(new FsMenu::MainMenu(true));
+			}
+			menu->show_messagebox(title, message);
+			menu->main_loop();
 		}
 	} else if (game_type_ == GameType::kScenario) {
 		Widelands::Game game;
