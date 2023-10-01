@@ -31,7 +31,6 @@
 #include "economy/ship_fleet.h"
 #include "economy/warehousesupply.h"
 #include "economy/wares_queue.h"
-#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
