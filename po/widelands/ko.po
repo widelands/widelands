@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-09-30 02:25+0000\n"
+"POT-Creation-Date: 2023-10-02 02:28+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: ks k, 2017-2021\n"
 "Language-Team: Korean (http://app.transifex.com/widelands/widelands/language/ko/)\n"
@@ -1052,7 +1052,7 @@ msgstr "표시"
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:696
 #: ../../src/ui_fsmenu/helpwindow.cc:56
 #: ../../src/ui_fsmenu/keyboard_options.cc:68
-#: ../../src/ui_fsmenu/keyboard_options.cc:232 ../../src/ui_fsmenu/menu.cc:167
+#: ../../src/ui_fsmenu/keyboard_options.cc:232 ../../src/ui_fsmenu/menu.cc:166
 #: ../../src/ui_fsmenu/options.cc:93
 #: ../../src/ui_fsmenu/training_wheel_options.cc:154
 #: ../../src/wui/game_main_menu_save_game.cc:100
@@ -6066,16 +6066,16 @@ msgstr "불특정"
 msgid "The map does not specify whether it is balanced"
 msgstr ""
 
-#: ../../src/ui_fsmenu/menu.cc:130 ../../src/wui/helpwindow.cc:69
+#: ../../src/ui_fsmenu/menu.cc:129 ../../src/wui/helpwindow.cc:69
 msgid "Back"
 msgstr "뒤로"
 
-#: ../../src/ui_fsmenu/menu.cc:293
+#: ../../src/ui_fsmenu/menu.cc:292
 #, c-format
 msgid "Back to ‘%s’"
 msgstr "‘%s’로 돌아가기"
 
-#: ../../src/ui_fsmenu/menu.cc:302
+#: ../../src/ui_fsmenu/menu.cc:301
 msgid "Close window"
 msgstr "창 닫기"
 
