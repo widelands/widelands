@@ -103,6 +103,8 @@ public:
 
 	Widelands::Game* create_safe_game(bool show_error = true);
 
+	void abort_splashscreen();
+
 protected:
 	void update_template() override;
 

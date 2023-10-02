@@ -542,6 +542,10 @@ void MainMenu::set_button_visibility(const bool v) {
 	clock_.set_visible(v);
 }
 
+void MainMenu::abort_splashscreen() {
+	init_time_ = kNoSplash;
+}
+
 bool MainMenu::handle_mousepress(uint8_t /*btn*/, int32_t /*x*/, int32_t /*y*/) {
 	if (init_time_ != kNoSplash) {
 		init_time_ = kNoSplash;
