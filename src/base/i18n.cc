@@ -26,7 +26,6 @@
 
 #include <cstdlib>
 #include <map>
-#include <memory>
 
 #include "base/log.h"
 #include "base/string.h"
@@ -434,8 +433,11 @@ bool is_translation_of(const std::string& input,
 	if (input == base) {
 		return true;
 	}
-	std::unique_ptr<Textdomain> textdomain(
-	   textdomain_name.empty() ? nullptr : new Textdomain(textdomain_name));
+	if (textdomain_name.empty()) {
+		return input == translate(base);
+	}
+
+	Textdomain td(textdomain_name);
 	return input == translate(base);
 }
 
