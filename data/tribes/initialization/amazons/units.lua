@@ -1443,7 +1443,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Stone Workshop
             purpose = pgettext("amazons_building", "Makes tools and spears for our soldiers."),
             -- TRANSLATORS: Performance helptext for an Amazon production site: Stone Workshop
-            performance = pgettext("amazons_building", "If this building is fully supplied and all tools and spears are needed by the economy, production of one of each tool takes %1$s and one of each spear takes %2$s on average. If only one kind of tool or spear is needed by the economy, its production takes %3$s on average."):bformat(format_minutes_seconds(21, 51), format_minutes_seconds(7, 17), format_minutes_seconds(1, 9))
+            performance = pgettext("amazons_building", "If this building is fully supplied and all tools and spears are needed by the economy, production of one of each tool takes %1$s and one of each spear takes %2$s on average. If only one kind of tool or spear is needed by the economy, its production takes %3$s on average."):bformat(format_minutes_seconds(23, 0), format_minutes_seconds(7, 40), format_minutes_seconds(1, 9))
          }
       },
       {

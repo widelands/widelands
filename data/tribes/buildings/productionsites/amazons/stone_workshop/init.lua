@@ -59,7 +59,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
-            -- time total: 19 * 69 = 1311 sec
+            -- time total: 20 * 69 = 1380 sec
             "call=produce_shovel",
             "call=produce_spear_wooden",
             "call=produce_felling_ax",
@@ -67,21 +67,19 @@ wl.Descriptions():new_productionsite_type {
             "call=produce_pick",
             "call=produce_spear_hardened",
             "call=produce_machete",
-            "call=produce_spear_wooden",
             "call=produce_kitchen_tools",
-            "call=produce_spear_stone_tipped",
+            "call=produce_spear_wooden",
             "call=produce_hammer",
-            "call=produce_spear_hardened",
+            "call=produce_spear_stone_tipped",
             "call=produce_chisel",
-            "call=produce_spear_wooden",
-            "call=produce_needles",
-            "call=produce_spear_stone_tipped",
-            "call=produce_stone_bowl",
             "call=produce_spear_hardened",
-            "call=produce_firestones",
+            "call=produce_needles",
+            "call=produce_stone_bowl",
             "call=produce_spear_wooden",
-            "call=produce_selected_firestones",
+            "call=produce_firestones",
             "call=produce_spear_stone_tipped",
+            "call=produce_selected_firestones",
+            "call=produce_spear_hardened",
          },
       },
       produce_shovel = {
