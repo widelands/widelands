@@ -840,10 +840,10 @@ void WLApplication::run() {
 				success = EditorInteractive::run_editor(
 				   &menu, EditorInteractive::Init::kLoadMapDirectly, filename_, script_to_run_);
 			}
+		}
 
-			if (!success) {
-				menu.main_loop();
-			}
+		if (!success) {
+			menu.main_loop();
 		}
 	} break;
 
