@@ -10,10 +10,11 @@ wl.Descriptions():new_productionsite_type {
    size = "mine",
 
    buildcost = {
-      log = 2,
+      log = 4,
+      rope = 1,
    },
    return_on_dismantle = {
-      log = 1
+      log = 2
    },
 
    animation_directory = dirname,
@@ -46,19 +47,42 @@ wl.Descriptions():new_productionsite_type {
 
    programs = {
       main = {
-         -- TRANSLATORS: Completed/Skipped/Did not start mining granite and quartz because ...
-         descname = _("mining granite and quartz"),
+         -- TRANSLATORS: Completed/Skipped/Did not start mining because ...
+         descname = _("mining"),
          actions = {
             -- Total time: 28.8 + 17 + 21 + 2 * 3.6 = 74
+            "sleep=duration:5s",
             "return=skipped unless economy needs granite or economy needs quartz",
             "consume=ration",
-            "sleep=duration:28s800ms",
+            "sleep=duration:23s800ms",
+            "call=mine_granite",
+            "call=mine_quartz",
+         }
+      },
+      mine_granite = {
+         -- TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
+         descname = _("mining granite"),
+         actions = {
             "animate=working duration:17s",
             "mine=resource_stones radius:1 yield:100% when_empty:20%",
             "produce=granite",
+         }
+      },
+      mine_quartz = {
+         -- TRANSLATORS: Completed/Skipped/Did not start mining quartz because ...
+         descname = _("mining quartz"),
+         actions = {
             "animate=working duration:21s",
             "mine=resource_stones radius:1 yield:100% when_empty:15%",
             "produce=quartz",
+         }
+      },
+      encyclopedia = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=ration",
+            "produce=granite quartz",
          }
       },
    },

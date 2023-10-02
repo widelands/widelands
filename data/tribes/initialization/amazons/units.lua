@@ -108,14 +108,14 @@ wl.Descriptions():new_tribe {
          },
          {
             name = "quartz",
-            default_target_quantity = 15,
-            preciousness = 10,
+            default_target_quantity = 25,
+            preciousness = 15,
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an Amazon ware: Quartz, part 1
                   pgettext("ware", "Amazons use quartz for sharp tools and weapons."),
                   -- TRANSLATORS: Helptext for an Amazon ware: Quartz, part 2
-                  pgettext("amazons_ware", "It is also a building material for some advanced buildings. It is produced by the stonecutters and in stone mines."),
+                  pgettext("amazons_ware", "It is also a building material for some advanced buildings. It is produced in stone mines."),
                }
             }
          },
@@ -314,7 +314,7 @@ wl.Descriptions():new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an Amazon ware: Pick
-                  pgettext("amazons_ware", "Picks are used by stonecutters to cut granite and quartz from rocks or in mines.")
+                  pgettext("amazons_ware", "Picks are used by stonecutters to cut granite from rocks or mine granite and quartz in stone mines.")
                }
             }
          },
@@ -619,7 +619,7 @@ wl.Descriptions():new_tribe {
             name = "amazons_stonecutter",
             helptexts = {
                -- TRANSLATORS: Helptext for an Amazon worker: Stonecutter
-               purpose = pgettext("amazons_worker", "Cuts blocks of granite and quartz out of rocks in the vicinity.")
+               purpose = pgettext("amazons_worker", "Cuts blocks of granite out of rocks in the vicinity or mines granite and quartz in stone mines.")
             }
          },
          {
@@ -1239,7 +1239,7 @@ wl.Descriptions():new_tribe {
                -- TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 1
                _("Granite is a basic building material and can be dug up by a stone mine."),
                -- TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 2
-               _("There is only a little bit of stones here."),
+               _("There is only a little bit of quartz here."),
             }
          }
       },
@@ -1261,7 +1261,7 @@ wl.Descriptions():new_tribe {
                -- TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 1
                _("Granite is a basic building material and can be dug up by a stone mine."),
                -- TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 2
-               _("There is a lot of stones here.")
+               _("There is a lot of quartz here.")
             }
          }
       },
@@ -1309,7 +1309,7 @@ wl.Descriptions():new_tribe {
          name = "amazons_stonecutters_hut",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Stonecutter's Hut
-            purpose = pgettext("amazons_building", "Cuts raw pieces of granite and quartz out of rocks in the vicinity."),
+            purpose = pgettext("amazons_building", "Cuts raw pieces of granite out of rocks in the vicinity."),
             -- TRANSLATORS: Note helptext for an Amazon production site: Stonecutter's Hut
             note = pgettext("amazons_building", "The stonecutter’s hut needs rocks to cut within the work area.")
          }
@@ -1443,7 +1443,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Stone Workshop
             purpose = pgettext("amazons_building", "Makes tools and spears for our soldiers."),
             -- TRANSLATORS: Performance helptext for an Amazon production site: Stone Workshop
-            performance = pgettext("amazons_building", "If this building is fully supplied and all tools and spears are needed by the economy, production of one of each tool takes %1$s and one of each spear takes %2$s on average. If only one kind of tool or spear is needed by the economy, its production takes %3$s on average."):bformat(format_minutes_seconds(21, 18), format_minutes_seconds(7, 6), format_minutes_seconds(1, 11))
+            performance = pgettext("amazons_building", "If this building is fully supplied and all tools and spears are needed by the economy, production of one of each tool takes %1$s and one of each spear takes %2$s on average. If only one kind of tool or spear is needed by the economy, its production takes %3$s on average."):bformat(format_minutes_seconds(21, 51), format_minutes_seconds(7, 17), format_minutes_seconds(1, 9))
          }
       },
       {

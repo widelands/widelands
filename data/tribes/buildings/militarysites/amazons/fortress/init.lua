@@ -27,15 +27,14 @@ wl.Descriptions():new_militarysite_type {
 
    buildcost = {
       ironwood = 6,
-      granite = 4,
-      quartz = 2,
+      granite = 5,
+      quartz = 1,
       log = 2,
       rubber = 2
    },
    return_on_dismantle = {
       ironwood = 3,
-      granite = 2,
-      quartz = 1,
+      granite = 3,
       log = 1,
       rubber = 1
    },

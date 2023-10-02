@@ -12,8 +12,8 @@ wl.Descriptions():new_trainingsite_type {
    buildcost = {
       ironwood = 4,
       log = 5,
-      granite = 3,
-      quartz = 1,
+      granite = 2,
+      quartz = 2,
       rubber = 4,
       rope = 2,
       gold = 3
@@ -21,7 +21,8 @@ wl.Descriptions():new_trainingsite_type {
    return_on_dismantle = {
       ironwood = 2,
       log = 3,
-      granite = 2,
+      granite = 1,
+      quartz = 1,
       rubber = 2,
       rope = 1,
       gold = 1
