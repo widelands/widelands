@@ -48,6 +48,7 @@ void SavegameLoader::load(const std::string& to_be_loaded,
 				load_savegame_from_directory(to_be_loaded, loaded_games);
 				success = true;
 			} catch (...) {
+				// We'll try it as a subdirectory then
 			}
 		}
 		if (!success) {
@@ -252,6 +253,7 @@ std::optional<SavegameData> newest_saved_game_or_replay(bool find_replay) {
 	try {
 		game.reset(new Widelands::Game());
 	} catch (...) {
+		// We'll just return nothing then
 	}
 	if (game == nullptr) {
 		return std::nullopt;

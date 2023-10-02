@@ -105,10 +105,10 @@ void find_maps(const std::string& directory, std::vector<MapEntry>& results) {
 }
 
 std::optional<MapData> newest_edited_map() {
-	std::vector<MapEntry> v;
-	find_maps(kMyMapsDirFull, v);
+	std::vector<MapEntry> all_maps;
+	find_maps(kMyMapsDirFull, all_maps);
 	MapEntry* last_edited = nullptr;
-	for (MapEntry& m : v) {
+	for (MapEntry& m : all_maps) {
 		if (last_edited == nullptr ||
 		    m.version.map_version_timestamp > last_edited->version.map_version_timestamp) {
 			last_edited = &m;

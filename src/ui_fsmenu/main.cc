@@ -299,6 +299,7 @@ void MainMenu::update_template() {
 	singleplayer_.set_min_lineheight(dropdowns_lineheight);
 	multiplayer_.set_min_lineheight(dropdowns_lineheight);
 	editor_.set_min_lineheight(dropdowns_lineheight);
+	replay_.set_min_lineheight(dropdowns_lineheight);
 
 	splashscreen_ = g_image_cache->get("loadscreens/splash.jpg");
 	title_image_ = g_image_cache->get("loadscreens/logo.png");

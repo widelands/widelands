@@ -436,7 +436,7 @@ bool is_translation_of(const std::string& input,
 	}
 	std::unique_ptr<Textdomain> textdomain(
 	   textdomain_name.empty() ? nullptr : new Textdomain(textdomain_name));
-	return (input == base) || (input == translate(base));
+	return input == translate(base);
 }
 
 }  // namespace i18n

@@ -44,6 +44,7 @@ enum class MenuTarget {
 	kTutorial,
 	kContinueLastsave,
 	kReplay,
+	kReplayLast,
 	kOptions,
 	kAddOns,
 	kAbout,
@@ -65,9 +66,6 @@ enum class MenuTarget {
 	kEditorRandom,
 	kEditorContinue,
 	kEditorLoad,
-
-	// virtual for ctrl+click and keyboard shortcut
-	kReplayLast,
 };
 
 /**

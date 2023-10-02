@@ -48,6 +48,7 @@ static std::vector<Parameter> parameters;
 void fill_parameter_vector() {
 	i18n::Textdomain textdomain("widelands_console");
 
+	/** TRANSLATORS: Separator for alternative values for command line parameters */
 	const std::string alternatives_format = _("%1$s|%2$s");
 
 	// TODO(tothxa): Replace all uses and do this for true|false and others as well
