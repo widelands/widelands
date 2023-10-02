@@ -28,7 +28,8 @@ init = {
    launch_expeditions(player, {
       {
          log = 4,
-         granite = 3,
+         granite = 2,
+         quartz = 1,
          rope = 2,
          amazons_soldier = 1,
       },
@@ -38,6 +39,7 @@ init = {
          amazons_soldier = 1,
          amazons_geologist = 1,
          amazons_gold_digger = 1,
+         amazons_charcoal_burner = 1,
       },
       {
          log = 1,
@@ -50,11 +52,12 @@ init = {
       {
          log = 6,
          granite = 2,
+         quartz = 1,
          amazons_stonecutter = 1,
       },
       {
          log = 5,
-         granite = 1,
+         quartz = 1,
          amazons_geologist = 1,
          amazons_liana_cutter = 2,
       },
