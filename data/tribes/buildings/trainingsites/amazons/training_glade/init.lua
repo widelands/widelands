@@ -53,8 +53,9 @@ wl.Descriptions():new_trainingsite_type {
    },
 
    inputs = {
-      { name = "amazons_bread", amount = 5 },
-      { name = "ration", amount = 5 },
+      { name = "fish", amount = 10 },
+      { name = "meat", amount = 10 },
+      { name = "amazons_bread", amount = 6 },
       { name = "chocolate", amount = 6 },
       { name = "boots_sturdy", amount = 2 },
       { name = "boots_swift", amount = 2 },
@@ -82,10 +83,10 @@ wl.Descriptions():new_trainingsite_type {
             "checksoldier=soldier:evade level:0",
             "return=failed unless site has boots_sturdy",
             "return=failed unless site has chocolate",
-            "return=failed unless site has amazons_bread",
+            "return=failed unless site has fish,meat",
             "animate=working duration:22s800ms",
             "checksoldier=soldier:evade level:0", -- Because the soldier can be expelled by the player
-            "consume=boots_sturdy amazons_bread chocolate",
+            "consume=boots_sturdy chocolate fish,meat",
             "train=soldier:evade level:1"
          }
       },
@@ -96,10 +97,11 @@ wl.Descriptions():new_trainingsite_type {
             "checksoldier=soldier:evade level:1",
             "return=failed unless site has boots_swift",
             "return=failed unless site has chocolate",
-            "return=failed unless site has ration",
+            "return=failed unless site has amazons_bread",
+            "return=failed unless site has fish,meat",
             "animate=working duration:15s600ms",
             "checksoldier=soldier:evade level:1", -- Because the soldier can be expelled by the player
-            "consume=boots_swift ration chocolate",
+            "consume=boots_swift amazons_bread chocolate fish,meat",
             "train=soldier:evade level:2",
          }
       },
@@ -110,10 +112,11 @@ wl.Descriptions():new_trainingsite_type {
             "checksoldier=soldier:evade level:2",
             "return=failed unless site has boots_hero",
             "return=failed unless site has chocolate:2",
-            "return=failed unless site has ration:2",
+            "return=failed unless site has amazons_bread:2",
+            "return=failed unless site has fish,meat:2",
             "animate=working duration:15s600ms",
             "checksoldier=soldier:evade level:2", -- Because the soldier can be expelled by the player
-            "consume=boots_hero ration:2 chocolate:2",
+            "consume=boots_hero amazons_bread:2 chocolate:2 fish,meat:2",
             "train=soldier:evade level:3",
          }
       },
@@ -124,10 +127,10 @@ wl.Descriptions():new_trainingsite_type {
             "checksoldier=soldier:health level:0",
             "return=failed unless site has armor_wooden",
             "return=failed unless site has chocolate",
-            "return=failed unless site has amazons_bread",
+            "return=failed unless site has fish,meat",
             "animate=working duration:22s800ms",
             "checksoldier=soldier:health level:0", -- Because the soldier can be expelled by the player
-            "consume=armor_wooden amazons_bread chocolate",
+            "consume=armor_wooden chocolate fish,meat",
             "train=soldier:health level:1"
          }
       },
@@ -139,9 +142,10 @@ wl.Descriptions():new_trainingsite_type {
             "return=failed unless site has helmet_wooden",
             "return=failed unless site has chocolate",
             "return=failed unless site has amazons_bread",
+            "return=failed unless site has fish,meat",
             "animate=working duration:15s600ms",
             "checksoldier=soldier:health level:1", -- Because the soldier can be expelled by the player
-            "consume=helmet_wooden amazons_bread chocolate",
+            "consume=helmet_wooden amazons_bread chocolate fish,meat",
             "train=soldier:health level:2",
          }
       },
@@ -152,10 +156,11 @@ wl.Descriptions():new_trainingsite_type {
             "checksoldier=soldier:health level:2",
             "return=failed unless site has warriors_coat",
             "return=failed unless site has chocolate",
-            "return=failed unless site has ration",
+            "return=failed unless site has amazons_bread",
+            "return=failed unless site has fish,meat:2",
             "animate=working duration:15s600ms",
             "checksoldier=soldier:health level:2", -- Because the soldier can be expelled by the player
-            "consume=warriors_coat ration chocolate",
+            "consume=warriors_coat amazons_bread chocolate fish,meat:2",
             "train=soldier:health level:3",
          }
       },
@@ -167,9 +172,10 @@ wl.Descriptions():new_trainingsite_type {
             "return=failed unless site has vest_padded",
             "return=failed unless site has chocolate",
             "return=failed unless site has amazons_bread",
+            "return=failed unless site has fish,meat",
             "animate=working duration:22s800ms",
             "checksoldier=soldier:defense level:0", -- Because the soldier can be expelled by the player
-            "consume=vest_padded amazons_bread chocolate",
+            "consume=vest_padded amazons_bread chocolate fish,meat",
             "train=soldier:defense level:1",
          }
       },
@@ -180,10 +186,11 @@ wl.Descriptions():new_trainingsite_type {
             "checksoldier=soldier:defense level:1",
             "return=failed unless site has protector_padded",
             "return=failed unless site has chocolate",
-            "return=failed unless site has ration",
+            "return=failed unless site has amazons_bread",
+            "return=failed unless site has fish,meat:2",
             "animate=working duration:22s800ms",
             "checksoldier=soldier:defense level:1", -- Because the soldier can be expelled by the player
-            "consume=protector_padded ration chocolate",
+            "consume=protector_padded amazons_bread chocolate fish,meat:2",
             "train=soldier:defense level:2",
 
          }

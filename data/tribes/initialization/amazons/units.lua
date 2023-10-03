@@ -235,7 +235,7 @@ wl.Descriptions():new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an Amazon ware: Fish
-                  pgettext("amazons_ware", "Fish is one of the two major food resources of the Amazons. It is used by the food preserver to prepare rations for the workers digging for gold dust and stones, and for training soldiers. It is also consumed at the initiation site for recruiting new soldiers.")
+                  pgettext("amazons_ware", "Fish is one of the two major food resources of the Amazons. It is used by the food preserver to prepare rations for the workers digging for gold dust and granite. It is also consumed at the training sites (training glade and warriors’ gathering) and for recruiting new soldiers.")
                }
             }
          },
@@ -247,7 +247,7 @@ wl.Descriptions():new_tribe {
                   -- TRANSLATORS: Helptext for an Amazon ware: Meat, part 1
                   pgettext("ware", "Meat contains a lot of energy, and it is obtained from wild game taken by hunter-gatherers."),
                   -- TRANSLATORS: Helptext for an Amazon ware: Meat, part 2
-                  pgettext("amazons_ware", "Meat is used by the food preserver to prepare rations for the workers digging for gold dust and stones, and for training soldiers. It is also consumed at the initiation site for recruiting new soldiers.")
+                  pgettext("amazons_ware", "Meat is used by the food preserver to prepare rations for the workers digging for gold dust and granite. It is also consumed at the training sites (training glade and warriors’ gathering) and for recruiting new soldiers.")
                }
             }
          },
@@ -258,7 +258,7 @@ wl.Descriptions():new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an Amazon ware: Ration, part 1
-                  pgettext("amazons_ware", "A small bite used to train soldiers and to keep the workers digging for gold dust and stones strong and working. The scout also consumes rations on her scouting trips."),
+                  pgettext("amazons_ware", "A small bite to keep the workers digging for gold dust and granite strong and working. The scout also consumes rations on her scouting trips."),
                   -- TRANSLATORS: Helptext for an Amazon ware: Ration, part 2
                   pgettext("amazons_ware", "Rations are produced by the food preserver out of fish or meat and bread. They are dried using a charcoal fire.")
                }
@@ -1465,7 +1465,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Charcoal Kiln
             purpose = pgettext("amazons_building", "Burns logs into charcoal."),
             -- TRANSLATORS: Performance helptext for an Amazon production site: Charcoal Kiln
-            performance = pgettext("amazons_building", "The charcoal kiln needs %s on average to produce one lump of coal."):bformat(format_minutes_seconds(1,54))
+            performance = pgettext("amazons_building", "The charcoal kiln needs %s on average to produce one lump of coal."):bformat(format_minutes_seconds(1,44))
          }
       },
       {
@@ -1501,7 +1501,7 @@ wl.Descriptions():new_tribe {
          name = "amazons_food_preserver",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Food Preserver
-            purpose = pgettext("amazons_building", "Prepares rations to feed the soldiers in training, the scouts, and the workers digging for gold dust and stones."),
+            purpose = pgettext("amazons_building", "Prepares rations to feed the scouts and the workers digging for gold dust and granite."),
             -- TRANSLATORS: Performance helptext for an Amazon production site: Food Preserver
             performance = pgettext("amazons_building", "The food preserver can produce one ration in %s on average if the supply is steady."):bformat(format_seconds(17))
          }
