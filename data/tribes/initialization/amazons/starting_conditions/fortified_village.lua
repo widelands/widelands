@@ -29,7 +29,8 @@ init = {
       place_building_in_region(plr, "amazons_warehouse", sf:region(7), {
          wares = {
          log = 86,
-         granite = 43,
+         granite = 34,
+         quartz = 12,
          rope = 24,
          liana = 7,
          ironwood = 8,
@@ -50,6 +51,7 @@ init = {
          spear_wooden = 6,
          stone_bowl = 2,
          needles = 2,
+         firestones = 3,
          },
          workers = {
             amazons_cook = 3,

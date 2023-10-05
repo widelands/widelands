@@ -24,7 +24,8 @@ init = {
       prefilled_buildings(player, { "amazons_headquarters", sf.x, sf.y,
          wares = {
          log = 120,
-         granite = 50,
+         granite = 40,
+         quartz = 14,
          rope = 30,
          liana = 35,
          ironwood = 15,
@@ -49,6 +50,7 @@ init = {
          spear_wooden = 6,
          stone_bowl = 2,
          needles = 2,
+         firestones = 3,
          },
          workers = {
          amazons_cook = 3,
@@ -144,6 +146,10 @@ init = {
          end
          if wh:get_wares("granite") < 100 then
             wh:set_wares("granite", wh:get_wares("granite") + 5)
+            added = added + 1
+         end
+         if wh:get_wares("quartz") < 100 then
+            wh:set_wares("quartz", wh:get_wares("quartz") + 5)
             added = added + 1
          end
          if wh:get_wares("coal") < 100 then
