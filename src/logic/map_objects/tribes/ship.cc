@@ -1457,8 +1457,8 @@ void Ship::battle_update(Game& game) {
 
 			molog(game.get_gametime(), "[battle] Hit with %u points", attack_strength);
 
-			// Let the ship's defense protect soldiers too. It may be useful for balancing between
-			// tribes if soldier healths and defenses are too different.
+			// Let the ship's defense protect soldiers too. Used for balancing between
+			// tribes to compensate for different soldier healths and defenses.
 			attack_strength = attack_strength * (100 - target_ship->descr().defense_) / 100;
 			target_ship->damage_soldiers(game, get_owner(), attack_strength);
 

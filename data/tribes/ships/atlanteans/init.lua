@@ -116,10 +116,12 @@ wl.Descriptions():new_ship_type {
    capacity = 30,
    vision_range = 4,
 
+   -- Defense is set to compensate for difference of soldier health and defense between tribes.
+   -- Hitpoints are then adjusted to be equivalent to 50000HP with 5% defense.
    hitpoints    = 50000,
+   defense      =     5,
    min_attack   =   100,
    max_attack   = 10000,
-   defense         =  5,
    attack_accuracy = 60,
    heal_per_second = 100,
 
