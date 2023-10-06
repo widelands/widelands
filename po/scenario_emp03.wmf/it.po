@@ -11,14 +11,15 @@
 # Alen Ciga, 2021
 # Guybrush88 <erpizzo@alice.it>, 2021
 # Log Merger, 2022
+# Samuele Battarra, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Log Merger, 2022\n"
+"Last-Translator: Samuele Battarra, 2023\n"
 "Language-Team: Italian (https://app.transifex.com/widelands/teams/35159/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -159,6 +160,9 @@ msgid ""
 "Now build a sheep farm and turn all the wheat into at least 50 bales of "
 "wool. Afterwards use the wool to weave cloth in order to build a ship."
 msgstr ""
+"Ora costruisci una allevamento di pecore e trasforma tutto il tuo grano in "
+"almeno 50 balle di lana. Quindi usa la lana per tessere stoffe, per poter "
+"infine costruire una nave."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:118
 msgid "Build 2 ports on distant islands"
@@ -175,6 +179,8 @@ msgid ""
 "Explore the island in the south. Send an expedition from our port to build a"
 " port there. Afterwards, try to find some mining resources."
 msgstr ""
+"Esplora l'isola a meridione. Invia una spedizione dal nostro porto per "
+"costruirne uno li. Dopodiché, cerca qualche risorsa mineraria."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid ""

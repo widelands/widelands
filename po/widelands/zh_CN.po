@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-09-28 02:28+0000\n"
+"POT-Creation-Date: 2023-10-02 02:28+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: 92373a9a734415f33212259453a6274d_77ab48e, 2022\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/widelands/widelands/language/zh_CN/)\n"
@@ -1052,7 +1052,7 @@ msgstr "显示"
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:696
 #: ../../src/ui_fsmenu/helpwindow.cc:56
 #: ../../src/ui_fsmenu/keyboard_options.cc:68
-#: ../../src/ui_fsmenu/keyboard_options.cc:232 ../../src/ui_fsmenu/menu.cc:167
+#: ../../src/ui_fsmenu/keyboard_options.cc:232 ../../src/ui_fsmenu/menu.cc:166
 #: ../../src/ui_fsmenu/options.cc:93
 #: ../../src/ui_fsmenu/training_wheel_options.cc:154
 #: ../../src/wui/game_main_menu_save_game.cc:100
@@ -3751,7 +3751,7 @@ msgstr "最小化"
 msgid "Restore"
 msgstr "还原"
 
-#: ../../src/ui_basic/window.cc:172 ../../src/wui/info_panel.cc:194
+#: ../../src/ui_basic/window.cc:172 ../../src/wui/info_panel.cc:198
 msgid "Pin"
 msgstr "固定"
 
@@ -6066,16 +6066,16 @@ msgstr "未指定的"
 msgid "The map does not specify whether it is balanced"
 msgstr ""
 
-#: ../../src/ui_fsmenu/menu.cc:130 ../../src/wui/helpwindow.cc:69
+#: ../../src/ui_fsmenu/menu.cc:129 ../../src/wui/helpwindow.cc:69
 msgid "Back"
 msgstr "返回"
 
-#: ../../src/ui_fsmenu/menu.cc:293
+#: ../../src/ui_fsmenu/menu.cc:292
 #, c-format
 msgid "Back to ‘%s’"
 msgstr "回到 '%s'"
 
-#: ../../src/ui_fsmenu/menu.cc:302
+#: ../../src/ui_fsmenu/menu.cc:301
 msgid "Close window"
 msgstr "关闭窗口"
 
@@ -8917,39 +8917,39 @@ msgstr ""
 msgid "Military"
 msgstr "军事"
 
-#: ../../src/wui/info_panel.cc:138
+#: ../../src/wui/info_panel.cc:142
 msgid "Info Panel Visibility"
 msgstr "信息面板可见性"
 
-#: ../../src/wui/info_panel.cc:197
+#: ../../src/wui/info_panel.cc:201
 msgid "Follow mouse"
 msgstr "跟随鼠标"
 
-#: ../../src/wui/info_panel.cc:202
+#: ../../src/wui/info_panel.cc:206
 msgid "Hide"
 msgstr "隐藏"
 
-#: ../../src/wui/info_panel.cc:207
+#: ../../src/wui/info_panel.cc:211
 msgid "Move panel to bottom"
 msgstr "将面板移至底部"
 
-#: ../../src/wui/info_panel.cc:207
+#: ../../src/wui/info_panel.cc:211
 msgid "Move panel to top"
 msgstr "将面板移至顶部"
 
-#: ../../src/wui/info_panel.cc:403
+#: ../../src/wui/info_panel.cc:407
 msgid "Cheat mode enabled"
 msgstr ""
 
 #. * TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime
 #. · Gamespeed)
-#: ../../src/wui/info_panel.cc:450
+#: ../../src/wui/info_panel.cc:454
 #, c-format
 msgid "%1$s · %2$s"
 msgstr "%1$s · %2$s"
 
 #. * TRANSLATORS: Gametime · Realtime · Gamespeed
-#: ../../src/wui/info_panel.cc:455
+#: ../../src/wui/info_panel.cc:459
 #, c-format
 msgid "%1$s · %2$s · %3$s"
 msgstr "%1$s · %2$s · %3$s"
