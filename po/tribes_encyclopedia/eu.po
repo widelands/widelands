@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-08-05 02:23+0000\n"
+"POT-Creation-Date: 2023-10-05 02:30+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: GunChleoc, 2016\n"
 "Language-Team: Basque (http://app.transifex.com/widelands/widelands/language/eu/)\n"
@@ -189,8 +189,22 @@ msgid ""
 " by the stonecutters and in stone mines."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an Amazon ware: Balsa
+#. TRANSLATORS: Helptext for an Amazon ware: Quartz, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:116
+msgctxt "ware"
+msgid "Amazons use quartz for sharp tools and weapons."
+msgstr ""
+
+#. TRANSLATORS: Helptext for an Amazon ware: Quartz, part 2
+#: ../../data/tribes/initialization/amazons/units.lua:118
+msgctxt "amazons_ware"
+msgid ""
+"It is also a building material for some advanced buildings. It is produced "
+"in stone mines."
+msgstr ""
+
+#. TRANSLATORS: Helptext for an Amazon ware: Balsa
+#: ../../data/tribes/initialization/amazons/units.lua:129
 msgctxt "amazons_ware"
 msgid ""
 "Balsa wood is an important building material. It is also used to make light "
@@ -198,7 +212,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Ironwood
-#: ../../data/tribes/initialization/amazons/units.lua:127
+#: ../../data/tribes/initialization/amazons/units.lua:140
 msgctxt "amazons_ware"
 msgid ""
 "This very hard wood is as hard as iron and it is used for several buildings,"
@@ -206,7 +220,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Rubber
-#: ../../data/tribes/initialization/amazons/units.lua:138
+#: ../../data/tribes/initialization/amazons/units.lua:151
 msgctxt "amazons_ware"
 msgid ""
 "Rubber is important for making warriors’ armor and shoes. Rubber trees are "
@@ -214,13 +228,13 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Liana
-#: ../../data/tribes/initialization/amazons/units.lua:148
+#: ../../data/tribes/initialization/amazons/units.lua:161
 msgctxt "amazons_ware"
 msgid "Lianas grow on trees. Very durable ropes are made out of them."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Rope
-#: ../../data/tribes/initialization/amazons/units.lua:158
+#: ../../data/tribes/initialization/amazons/units.lua:171
 msgctxt "amazons_ware"
 msgid ""
 "This rope is made out of lianas. It is used for armor dresses and to "
@@ -232,7 +246,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for a Barbarian ware: Water, part 1
 #. TRANSLATORS: Helptext for an Empire ware: Water, part 1
 #. TRANSLATORS: Helptext for a Frisian ware: Water, part 1
-#: ../../data/tribes/initialization/amazons/units.lua:171
+#: ../../data/tribes/initialization/amazons/units.lua:184
 #: ../../data/tribes/initialization/atlanteans/units.lua:531
 #: ../../data/tribes/initialization/barbarians/units.lua:182
 #: ../../data/tribes/initialization/empire/units.lua:194
@@ -242,7 +256,7 @@ msgid "Water is the essence of life!"
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Water, part 2
-#: ../../data/tribes/initialization/amazons/units.lua:173
+#: ../../data/tribes/initialization/amazons/units.lua:186
 msgctxt "amazons_ware"
 msgid ""
 "Water is used by the cassava root cooker, the chocolate brewery, the gold "
@@ -250,7 +264,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Cassava Root
-#: ../../data/tribes/initialization/amazons/units.lua:183
+#: ../../data/tribes/initialization/amazons/units.lua:196
 msgctxt "amazons_ware"
 msgid ""
 "Cassava roots are a special kind of root produced at cassava plantations. "
@@ -259,7 +273,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Cocoa Beans
-#: ../../data/tribes/initialization/amazons/units.lua:193
+#: ../../data/tribes/initialization/amazons/units.lua:206
 msgctxt "amazons_ware"
 msgid ""
 "Cocoa beans are gathered from cocoa trees by a cocoa farmer. They are used "
@@ -267,7 +281,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Bread
-#: ../../data/tribes/initialization/amazons/units.lua:204
+#: ../../data/tribes/initialization/amazons/units.lua:217
 msgctxt "amazons_ware"
 msgid ""
 "This tasty bread is made in cassava root cookeries out of cassava root and "
@@ -276,14 +290,14 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Chocolate
-#: ../../data/tribes/initialization/amazons/units.lua:215
+#: ../../data/tribes/initialization/amazons/units.lua:228
 msgctxt "amazons_ware"
 msgid ""
 "Chocolate is produced by chocolate breweries and used to train soldiers."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Fish
-#: ../../data/tribes/initialization/amazons/units.lua:225
+#: ../../data/tribes/initialization/amazons/units.lua:238
 msgctxt "amazons_ware"
 msgid ""
 "Fish is one of the two major food resources of the Amazons. It is used by "
@@ -293,7 +307,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Meat, part 1
-#: ../../data/tribes/initialization/amazons/units.lua:235
+#: ../../data/tribes/initialization/amazons/units.lua:248
 msgctxt "ware"
 msgid ""
 "Meat contains a lot of energy, and it is obtained from wild game taken by "
@@ -301,7 +315,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Meat, part 2
-#: ../../data/tribes/initialization/amazons/units.lua:237
+#: ../../data/tribes/initialization/amazons/units.lua:250
 msgctxt "amazons_ware"
 msgid ""
 "Meat is used by the food preserver to prepare rations for the workers "
@@ -310,7 +324,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Ration, part 1
-#: ../../data/tribes/initialization/amazons/units.lua:248
+#: ../../data/tribes/initialization/amazons/units.lua:261
 msgctxt "amazons_ware"
 msgid ""
 "A small bite to keep the workers digging for gold dust and granite strong "
@@ -318,7 +332,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Ration, part 2
-#: ../../data/tribes/initialization/amazons/units.lua:250
+#: ../../data/tribes/initialization/amazons/units.lua:263
 msgctxt "amazons_ware"
 msgid ""
 "Rations are produced by the food preserver out of fish or meat and bread. "
@@ -326,13 +340,13 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Gold Dust, part 1
-#: ../../data/tribes/initialization/amazons/units.lua:264
+#: ../../data/tribes/initialization/amazons/units.lua:277
 msgctxt "amazons_ware"
 msgid "Gold dust is washed in a gold digger dwelling."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Gold Dust, part 2
-#: ../../data/tribes/initialization/amazons/units.lua:266
+#: ../../data/tribes/initialization/amazons/units.lua:279
 msgctxt "amazons_ware"
 msgid ""
 "Smelted in a furnace, it turns into gold which is used as a precious "
@@ -340,13 +354,13 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Gold, part 1
-#: ../../data/tribes/initialization/amazons/units.lua:277
+#: ../../data/tribes/initialization/amazons/units.lua:290
 msgctxt "amazons_ware"
 msgid "Gold is the most valuable of all metals."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Gold, part 2
-#: ../../data/tribes/initialization/amazons/units.lua:279
+#: ../../data/tribes/initialization/amazons/units.lua:292
 msgctxt "amazons_ware"
 msgid ""
 "It is smelted out of gold dust by the furnace and used by the dressmaker and"
@@ -354,7 +368,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Charcoal, part 1
-#: ../../data/tribes/initialization/amazons/units.lua:290
+#: ../../data/tribes/initialization/amazons/units.lua:303
 msgctxt "amazons_ware"
 msgid ""
 "Charcoal is produced out of logs by a charcoal burner. The Amazons use "
@@ -362,16 +376,18 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Pick
-#: ../../data/tribes/initialization/amazons/units.lua:304
+#: ../../data/tribes/initialization/amazons/units.lua:317
 msgctxt "amazons_ware"
-msgid "Picks are used by stonecutters to cut granite from rocks or in mines."
+msgid ""
+"Picks are used by stonecutters to cut granite from rocks or mine granite and"
+" quartz in stone mines."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for a Barbarian ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for an Empire ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for a Frisian ware: Felling Ax, part 1
-#: ../../data/tribes/initialization/amazons/units.lua:315
+#: ../../data/tribes/initialization/amazons/units.lua:328
 #: ../../data/tribes/initialization/barbarians/units.lua:345
 #: ../../data/tribes/initialization/empire/units.lua:382
 #: ../../data/tribes/initialization/frisians/units.lua:409
@@ -380,7 +396,7 @@ msgid "The felling ax is the tool to chop down trees."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Felling Ax, part 2
-#: ../../data/tribes/initialization/amazons/units.lua:317
+#: ../../data/tribes/initialization/amazons/units.lua:330
 msgctxt "amazons_ware"
 msgid "It is used by a woodcutter and produced by the stone carver."
 msgstr ""
@@ -390,7 +406,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for a Barbarian ware: Shovel, part 1
 #. TRANSLATORS: Helptext for an Empire ware: Shovel, part 1
 #. TRANSLATORS: Helptext for a Frisian ware: Shovel, part 1
-#: ../../data/tribes/initialization/amazons/units.lua:328
+#: ../../data/tribes/initialization/amazons/units.lua:341
 #: ../../data/tribes/initialization/atlanteans/units.lua:694
 #: ../../data/tribes/initialization/barbarians/units.lua:358
 #: ../../data/tribes/initialization/empire/units.lua:404
@@ -400,7 +416,7 @@ msgid "Shovels are needed for the proper handling of plants."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Shovel, part 2
-#: ../../data/tribes/initialization/amazons/units.lua:330
+#: ../../data/tribes/initialization/amazons/units.lua:343
 msgctxt "amazons_ware"
 msgid ""
 "Therefore the jungle preservers, the cassava farmers and the cocoa farmers "
@@ -412,7 +428,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for a Barbarian ware: Hammer, part 1
 #. TRANSLATORS: Helptext for an Empire ware: Hammer, part 1
 #. TRANSLATORS: Helptext for a Frisian ware: Hammer, part 1
-#: ../../data/tribes/initialization/amazons/units.lua:341
+#: ../../data/tribes/initialization/amazons/units.lua:354
 #: ../../data/tribes/initialization/atlanteans/units.lua:707
 #: ../../data/tribes/initialization/barbarians/units.lua:371
 #: ../../data/tribes/initialization/empire/units.lua:417
@@ -422,7 +438,7 @@ msgid "The hammer is an essential tool."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Hammer, part 2
-#: ../../data/tribes/initialization/amazons/units.lua:343
+#: ../../data/tribes/initialization/amazons/units.lua:356
 msgctxt "amazons_ware"
 msgid ""
 "Geologists, builders, shipwrights and stone carvers all need a hammer. Make "
@@ -431,24 +447,9 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Machete
-#: ../../data/tribes/initialization/amazons/units.lua:354
-msgctxt "amazons_ware"
-msgid "The machete is the tool of the liana cutters."
-msgstr ""
-
-#. TRANSLATORS: Helptext for an Amazon ware: Wooden Spear, part 1
-#: ../../data/tribes/initialization/amazons/units.lua:365
-msgctxt "amazons_ware"
-msgid ""
-"This spear is the basic weapon in the Amazon military system. It is produced"
-" by the stone carver. In combination with a tunic, it is the equipment to "
-"fit out young soldiers."
-msgstr ""
-
-#. TRANSLATORS: Helptext for an Amazon ware: Wooden Spear, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:367
 msgctxt "amazons_ware"
-msgid "It is used by the Amazon hunter-gatherers as well."
+msgid "The machete is the tool of the liana cutters."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Chisel, part 1
@@ -488,8 +489,29 @@ msgctxt "amazons_ware"
 msgid "Stone bowls are used to wash gold and to smelt gold dust."
 msgstr ""
 
+#. TRANSLATORS: Helptext for an Amazon ware: Firestones
+#: ../../data/tribes/initialization/amazons/units.lua:424
+msgctxt "amazons_ware"
+msgid "Firestones are used to light the fires of charcoal kilns and furnaces."
+msgstr ""
+
+#. TRANSLATORS: Helptext for an Amazon ware: Wooden Spear, part 1
+#: ../../data/tribes/initialization/amazons/units.lua:435
+msgctxt "amazons_ware"
+msgid ""
+"This spear is the basic weapon in the Amazon military system. It is produced"
+" by the stone carver. In combination with a tunic, it is the equipment to "
+"fit out young soldiers."
+msgstr ""
+
+#. TRANSLATORS: Helptext for an Amazon ware: Wooden Spear, part 2
+#: ../../data/tribes/initialization/amazons/units.lua:437
+msgctxt "amazons_ware"
+msgid "It is used by the Amazon hunter-gatherers as well."
+msgstr ""
+
 #. TRANSLATORS: Helptext for an Amazon ware: Stone Tipped Spear
-#: ../../data/tribes/initialization/amazons/units.lua:427
+#: ../../data/tribes/initialization/amazons/units.lua:451
 msgctxt "amazons_ware"
 msgid ""
 "This spear has a stone spike. It is produced in a stone workshop and used in"
@@ -498,7 +520,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Hardened Spear
-#: ../../data/tribes/initialization/amazons/units.lua:438
+#: ../../data/tribes/initialization/amazons/units.lua:462
 msgctxt "amazons_ware"
 msgid ""
 "This is a hardened spear with a stone tip. It is produced in a stone "
@@ -506,8 +528,32 @@ msgid ""
 "soldiers from attack level 1 to level 2."
 msgstr ""
 
+#. TRANSLATORS: Helptext for an Amazon ware: Tunic
+#: ../../data/tribes/initialization/amazons/units.lua:473
+msgctxt "amazons_ware"
+msgid ""
+"Rubber can be bound into a tunic, which is used as basic armor. All new "
+"soldiers are clothed in a tunic."
+msgstr ""
+
+#. TRANSLATORS: Helptext for an Amazon ware: Padded Vest
+#: ../../data/tribes/initialization/amazons/units.lua:484
+msgctxt "amazons_ware"
+msgid ""
+"Padded vests are light but durable armor. They are produced by the "
+"dressmaker and used to train soldiers’ defence from level 0 to level 1."
+msgstr ""
+
+#. TRANSLATORS: Helptext for an Amazon ware: Padded Protector
+#: ../../data/tribes/initialization/amazons/units.lua:495
+msgctxt "amazons_ware"
+msgid ""
+"Padded protectors are strong and durable armor. They are produced by the "
+"dressmaker and used to train soldiers’ defence from level 1 to level 2."
+msgstr ""
+
 #. TRANSLATORS: Helptext for an Amazon ware: Wooden Armor
-#: ../../data/tribes/initialization/amazons/units.lua:449
+#: ../../data/tribes/initialization/amazons/units.lua:506
 msgctxt "amazons_ware"
 msgid ""
 "This light wooden armor is a basic piece of armor for the Amazons’ soldiers."
@@ -516,7 +562,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Wodden Helmet
-#: ../../data/tribes/initialization/amazons/units.lua:460
+#: ../../data/tribes/initialization/amazons/units.lua:517
 msgctxt "amazons_ware"
 msgid ""
 "A wooden helmet is a basic piece of equipment for protecting soldiers. It is"
@@ -525,39 +571,15 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Warrior's Coat
-#: ../../data/tribes/initialization/amazons/units.lua:471
+#: ../../data/tribes/initialization/amazons/units.lua:528
 msgctxt "amazons_ware"
 msgid ""
 "Ordinary tunics can be decorated and reinforced with gold and wood chunks. "
 "Such tunics are the best armor."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an Amazon ware: Tunic
-#: ../../data/tribes/initialization/amazons/units.lua:482
-msgctxt "amazons_ware"
-msgid ""
-"Rubber can be bound into a tunic, which is used as basic armor. All new "
-"soldiers are clothed in a tunic."
-msgstr ""
-
-#. TRANSLATORS: Helptext for an Amazon ware: Padded Vest
-#: ../../data/tribes/initialization/amazons/units.lua:493
-msgctxt "amazons_ware"
-msgid ""
-"Padded vests are light but durable armor. They are produced by the "
-"dressmaker and used to train soldiers’ defence from level 0 to level 1."
-msgstr ""
-
-#. TRANSLATORS: Helptext for an Amazon ware: Padded Protector
-#: ../../data/tribes/initialization/amazons/units.lua:504
-msgctxt "amazons_ware"
-msgid ""
-"Padded protectors are strong and durable armor. They are produced by the "
-"dressmaker and used to train soldiers’ defence from level 1 to level 2."
-msgstr ""
-
 #. TRANSLATORS: Helptext for an Amazon ware: Sturdy Boots
-#: ../../data/tribes/initialization/amazons/units.lua:515
+#: ../../data/tribes/initialization/amazons/units.lua:539
 msgctxt "amazons_ware"
 msgid ""
 "Sturdy boots are excellent footwear for soldiers to be quicker on their "
@@ -566,7 +588,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Swift Boots
-#: ../../data/tribes/initialization/amazons/units.lua:526
+#: ../../data/tribes/initialization/amazons/units.lua:550
 msgctxt "amazons_ware"
 msgid ""
 "Swift boots are light and durable footwear for soldiers to be quicker on "
@@ -575,7 +597,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Hero Boots
-#: ../../data/tribes/initialization/amazons/units.lua:537
+#: ../../data/tribes/initialization/amazons/units.lua:561
 msgctxt "amazons_ware"
 msgid ""
 "Hero boots! The only suitable footwear for a real hero. They are produced by"
@@ -583,19 +605,19 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon worker: Carrier
-#: ../../data/tribes/initialization/amazons/units.lua:554
+#: ../../data/tribes/initialization/amazons/units.lua:578
 msgctxt "amazons_worker"
 msgid "Carries items along your roads."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon worker: Ferry
-#: ../../data/tribes/initialization/amazons/units.lua:561
+#: ../../data/tribes/initialization/amazons/units.lua:585
 msgctxt "amazons_worker"
 msgid "Ships wares across narrow rivers."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon worker: Tapir
-#: ../../data/tribes/initialization/amazons/units.lua:570
+#: ../../data/tribes/initialization/amazons/units.lua:594
 msgctxt "amazons_worker"
 msgid ""
 "Tapirs help to carry items along busy roads. They are reared in a tapir "
@@ -603,97 +625,99 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon worker: Tapir Breeder
-#: ../../data/tribes/initialization/amazons/units.lua:577
+#: ../../data/tribes/initialization/amazons/units.lua:601
 msgctxt "amazons_worker"
 msgid "Breeds tapirs for adding them to the transportation system."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon worker: Stonecutter
-#: ../../data/tribes/initialization/amazons/units.lua:587
+#: ../../data/tribes/initialization/amazons/units.lua:611
 msgctxt "amazons_worker"
-msgid "Cuts blocks of granite out of rocks in the vicinity."
+msgid ""
+"Cuts blocks of granite out of rocks in the vicinity or mines granite and "
+"quartz in stone mines."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon worker: Woodcutter
-#: ../../data/tribes/initialization/amazons/units.lua:594
+#: ../../data/tribes/initialization/amazons/units.lua:618
 msgctxt "amazons_worker"
 msgid "Fells trees."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon worker: Master Woodcutter
-#: ../../data/tribes/initialization/amazons/units.lua:601
+#: ../../data/tribes/initialization/amazons/units.lua:625
 msgctxt "amazons_worker"
 msgid "Harvests special trees: ironwood, rubber and balsa."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon worker: Jungle Preserver
-#: ../../data/tribes/initialization/amazons/units.lua:608
+#: ../../data/tribes/initialization/amazons/units.lua:632
 msgctxt "amazons_worker"
 msgid "Plants trees."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon worker: Jungle Master
-#: ../../data/tribes/initialization/amazons/units.lua:615
+#: ../../data/tribes/initialization/amazons/units.lua:639
 msgctxt "amazons_worker"
 msgid "Plants special trees: ironwood, rubber and balsa."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon worker: Liana Cutter
-#: ../../data/tribes/initialization/amazons/units.lua:622
+#: ../../data/tribes/initialization/amazons/units.lua:646
 msgctxt "amazons_worker"
 msgid "Cuts lianas from trees."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon worker: Builder
-#: ../../data/tribes/initialization/amazons/units.lua:629
+#: ../../data/tribes/initialization/amazons/units.lua:653
 msgctxt "amazons_worker"
 msgid "Works at construction sites to raise new buildings."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon worker: Shipwright
-#: ../../data/tribes/initialization/amazons/units.lua:636
+#: ../../data/tribes/initialization/amazons/units.lua:660
 msgctxt "amazons_worker"
 msgid "Works at the shipyard and constructs new ships."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon worker: Hunter-Gatherer
-#: ../../data/tribes/initialization/amazons/units.lua:646
+#: ../../data/tribes/initialization/amazons/units.lua:670
 msgctxt "amazons_worker"
 msgid "The hunter-gatherer gets fresh fish and raw meat for the tribe."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon worker: Cassava Farmer
-#: ../../data/tribes/initialization/amazons/units.lua:653
+#: ../../data/tribes/initialization/amazons/units.lua:677
 msgctxt "amazons_worker"
 msgid "Grows cassava."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon worker: Cocoa Farmer
-#: ../../data/tribes/initialization/amazons/units.lua:660
+#: ../../data/tribes/initialization/amazons/units.lua:684
 msgctxt "amazons_worker"
 msgid "Grows cocoa."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon worker: Cook
-#: ../../data/tribes/initialization/amazons/units.lua:667
+#: ../../data/tribes/initialization/amazons/units.lua:691
 msgctxt "amazons_worker"
 msgid "Prepares rations, bakes cassava bread and brews chocolate."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon worker: Wilderness Keeper
-#: ../../data/tribes/initialization/amazons/units.lua:674
+#: ../../data/tribes/initialization/amazons/units.lua:698
 msgctxt "amazons_worker"
 msgid "Breeds game or fish."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon worker: Geologist
-#: ../../data/tribes/initialization/amazons/units.lua:684
+#: ../../data/tribes/initialization/amazons/units.lua:708
 msgctxt "amazons_worker"
 msgid "Discovers resources for mining."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon worker: Gold Digger
-#: ../../data/tribes/initialization/amazons/units.lua:691
+#: ../../data/tribes/initialization/amazons/units.lua:715
 msgctxt "amazons_worker"
 msgid ""
 "Works hard in the gold dwellings in mountains to obtain gold by washing it "
@@ -701,43 +725,43 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon worker: Charcoal Burner
-#: ../../data/tribes/initialization/amazons/units.lua:698
+#: ../../data/tribes/initialization/amazons/units.lua:722
 msgctxt "amazons_worker"
 msgid "Burns logs to produce charcoal."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon worker: Gold Smelter
-#: ../../data/tribes/initialization/amazons/units.lua:705
+#: ../../data/tribes/initialization/amazons/units.lua:729
 msgctxt "amazons_worker"
 msgid "Smelts gold at furnaces."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon worker: Stone Carver
-#: ../../data/tribes/initialization/amazons/units.lua:715
+#: ../../data/tribes/initialization/amazons/units.lua:739
 msgctxt "amazons_worker"
 msgid "Produces spears for soldiers and tools for workers."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon worker: Soldier
-#: ../../data/tribes/initialization/amazons/units.lua:727
+#: ../../data/tribes/initialization/amazons/units.lua:751
 msgctxt "amazons_worker"
 msgid "Defend and Conquer!"
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon worker: Trainer
-#: ../../data/tribes/initialization/amazons/units.lua:734
+#: ../../data/tribes/initialization/amazons/units.lua:758
 msgctxt "amazons_worker"
 msgid "Trains the soldiers."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon worker: Dressmaker
-#: ../../data/tribes/initialization/amazons/units.lua:741
+#: ../../data/tribes/initialization/amazons/units.lua:765
 msgctxt "amazons_worker"
 msgid "Produces all kinds of dresses, boots and armor."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon worker: Scout
-#: ../../data/tribes/initialization/amazons/units.lua:748
+#: ../../data/tribes/initialization/amazons/units.lua:772
 msgctxt "amazons_worker"
 msgid "Explores unknown territory."
 msgstr ""
@@ -752,8 +776,8 @@ msgstr ""
 #. TRANSLATORS: Helptext for an Empire immovable: Destroyed Building
 #. TRANSLATORS: Helptext for a Frisian immovable: Ashes
 #. TRANSLATORS: Helptext for a Frisian immovable: Destroyed Building
-#: ../../data/tribes/initialization/amazons/units.lua:759
-#: ../../data/tribes/initialization/amazons/units.lua:766
+#: ../../data/tribes/initialization/amazons/units.lua:783
+#: ../../data/tribes/initialization/amazons/units.lua:790
 #: ../../data/tribes/initialization/atlanteans/units.lua:1144
 #: ../../data/tribes/initialization/atlanteans/units.lua:1221
 #: ../../data/tribes/initialization/barbarians/units.lua:803
@@ -772,7 +796,7 @@ msgstr ""
 #. Dead Tree
 #. TRANSLATORS: Helptext for an Amazon immovable usable by Empire: Dead Tree
 #. TRANSLATORS: Helptext for an Amazon immovable usable by Frisians: Dead Tree
-#: ../../data/tribes/initialization/amazons/units.lua:773
+#: ../../data/tribes/initialization/amazons/units.lua:797
 #: ../../data/tribes/initialization/atlanteans/units.lua:1338
 #: ../../data/tribes/initialization/barbarians/units.lua:990
 #: ../../data/tribes/initialization/empire/units.lua:1051
@@ -781,102 +805,102 @@ msgid "The remains of an old tree."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Balsa Tree Sapling
-#: ../../data/tribes/initialization/amazons/units.lua:780
-#: ../../data/tribes/initialization/amazons/units.lua:808
-#: ../../data/tribes/initialization/amazons/units.lua:836
-#: ../../data/tribes/initialization/amazons/units.lua:864
+#: ../../data/tribes/initialization/amazons/units.lua:804
+#: ../../data/tribes/initialization/amazons/units.lua:832
+#: ../../data/tribes/initialization/amazons/units.lua:860
+#: ../../data/tribes/initialization/amazons/units.lua:888
 msgid "This balsa tree has just been planted."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Balsa Tree Pole
-#: ../../data/tribes/initialization/amazons/units.lua:787
-#: ../../data/tribes/initialization/amazons/units.lua:815
-#: ../../data/tribes/initialization/amazons/units.lua:843
-#: ../../data/tribes/initialization/amazons/units.lua:871
+#: ../../data/tribes/initialization/amazons/units.lua:811
+#: ../../data/tribes/initialization/amazons/units.lua:839
+#: ../../data/tribes/initialization/amazons/units.lua:867
+#: ../../data/tribes/initialization/amazons/units.lua:895
 msgid "This balsa tree is growing."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Balsa Tree Mature
-#: ../../data/tribes/initialization/amazons/units.lua:794
-#: ../../data/tribes/initialization/amazons/units.lua:822
-#: ../../data/tribes/initialization/amazons/units.lua:850
-#: ../../data/tribes/initialization/amazons/units.lua:878
+#: ../../data/tribes/initialization/amazons/units.lua:818
+#: ../../data/tribes/initialization/amazons/units.lua:846
+#: ../../data/tribes/initialization/amazons/units.lua:874
+#: ../../data/tribes/initialization/amazons/units.lua:902
 msgid "This balsa tree is fully grown. Lianas can be gathered from it."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Balsa Tree Old
-#: ../../data/tribes/initialization/amazons/units.lua:801
-#: ../../data/tribes/initialization/amazons/units.lua:829
-#: ../../data/tribes/initialization/amazons/units.lua:857
-#: ../../data/tribes/initialization/amazons/units.lua:885
+#: ../../data/tribes/initialization/amazons/units.lua:825
+#: ../../data/tribes/initialization/amazons/units.lua:853
+#: ../../data/tribes/initialization/amazons/units.lua:881
+#: ../../data/tribes/initialization/amazons/units.lua:909
 msgid ""
 "This balsa tree is ready for harvesting balsa wood by a master woodcutter. "
 "Other tribes can harvest it for normal logs."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Ironwood Tree Sapling
-#: ../../data/tribes/initialization/amazons/units.lua:892
-#: ../../data/tribes/initialization/amazons/units.lua:920
-#: ../../data/tribes/initialization/amazons/units.lua:948
-#: ../../data/tribes/initialization/amazons/units.lua:976
+#: ../../data/tribes/initialization/amazons/units.lua:916
+#: ../../data/tribes/initialization/amazons/units.lua:944
+#: ../../data/tribes/initialization/amazons/units.lua:972
+#: ../../data/tribes/initialization/amazons/units.lua:1000
 msgid "This ironwood tree has just been planted."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Ironwood Tree Pole
-#: ../../data/tribes/initialization/amazons/units.lua:899
-#: ../../data/tribes/initialization/amazons/units.lua:927
-#: ../../data/tribes/initialization/amazons/units.lua:955
-#: ../../data/tribes/initialization/amazons/units.lua:983
+#: ../../data/tribes/initialization/amazons/units.lua:923
+#: ../../data/tribes/initialization/amazons/units.lua:951
+#: ../../data/tribes/initialization/amazons/units.lua:979
+#: ../../data/tribes/initialization/amazons/units.lua:1007
 msgid "This ironwood tree is growing."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Ironwood Tree Mature
-#: ../../data/tribes/initialization/amazons/units.lua:906
-#: ../../data/tribes/initialization/amazons/units.lua:934
-#: ../../data/tribes/initialization/amazons/units.lua:962
-#: ../../data/tribes/initialization/amazons/units.lua:990
+#: ../../data/tribes/initialization/amazons/units.lua:930
+#: ../../data/tribes/initialization/amazons/units.lua:958
+#: ../../data/tribes/initialization/amazons/units.lua:986
+#: ../../data/tribes/initialization/amazons/units.lua:1014
 msgid "This ironwood tree is fully grown. Lianas can be gathered from it."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Ironwood Tree Old
-#: ../../data/tribes/initialization/amazons/units.lua:913
-#: ../../data/tribes/initialization/amazons/units.lua:941
-#: ../../data/tribes/initialization/amazons/units.lua:969
-#: ../../data/tribes/initialization/amazons/units.lua:997
+#: ../../data/tribes/initialization/amazons/units.lua:937
+#: ../../data/tribes/initialization/amazons/units.lua:965
+#: ../../data/tribes/initialization/amazons/units.lua:993
+#: ../../data/tribes/initialization/amazons/units.lua:1021
 msgid ""
 "This ironwood tree is ready for harvesting ironwood by a master woodcutter. "
 "Other tribes can harvest it for normal logs."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Rubber Tree Sapling
-#: ../../data/tribes/initialization/amazons/units.lua:1004
-#: ../../data/tribes/initialization/amazons/units.lua:1032
-#: ../../data/tribes/initialization/amazons/units.lua:1060
-#: ../../data/tribes/initialization/amazons/units.lua:1088
+#: ../../data/tribes/initialization/amazons/units.lua:1028
+#: ../../data/tribes/initialization/amazons/units.lua:1056
+#: ../../data/tribes/initialization/amazons/units.lua:1084
+#: ../../data/tribes/initialization/amazons/units.lua:1112
 msgid "This rubber tree has just been planted."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Rubber Tree Pole
-#: ../../data/tribes/initialization/amazons/units.lua:1011
-#: ../../data/tribes/initialization/amazons/units.lua:1039
-#: ../../data/tribes/initialization/amazons/units.lua:1067
-#: ../../data/tribes/initialization/amazons/units.lua:1095
+#: ../../data/tribes/initialization/amazons/units.lua:1035
+#: ../../data/tribes/initialization/amazons/units.lua:1063
+#: ../../data/tribes/initialization/amazons/units.lua:1091
+#: ../../data/tribes/initialization/amazons/units.lua:1119
 msgid "This rubber tree is growing."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Rubber Tree Mature
-#: ../../data/tribes/initialization/amazons/units.lua:1018
-#: ../../data/tribes/initialization/amazons/units.lua:1046
-#: ../../data/tribes/initialization/amazons/units.lua:1074
-#: ../../data/tribes/initialization/amazons/units.lua:1102
+#: ../../data/tribes/initialization/amazons/units.lua:1042
+#: ../../data/tribes/initialization/amazons/units.lua:1070
+#: ../../data/tribes/initialization/amazons/units.lua:1098
+#: ../../data/tribes/initialization/amazons/units.lua:1126
 msgid "This rubber tree is fully grown. Lianas can be gathered from it."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Rubber Tree Old
-#: ../../data/tribes/initialization/amazons/units.lua:1025
-#: ../../data/tribes/initialization/amazons/units.lua:1053
-#: ../../data/tribes/initialization/amazons/units.lua:1081
-#: ../../data/tribes/initialization/amazons/units.lua:1109
+#: ../../data/tribes/initialization/amazons/units.lua:1049
+#: ../../data/tribes/initialization/amazons/units.lua:1077
+#: ../../data/tribes/initialization/amazons/units.lua:1105
+#: ../../data/tribes/initialization/amazons/units.lua:1133
 msgid ""
 "This rubber tree is ready for harvesting rubber by a master woodcutter. "
 "Other tribes can harvest it for normal logs."
@@ -888,7 +912,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for a Barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for an Empire immovable: Wheat field
 #. TRANSLATORS: Helptext for a Frisian immovable: Barley Field
-#: ../../data/tribes/initialization/amazons/units.lua:1116
+#: ../../data/tribes/initialization/amazons/units.lua:1140
 #: ../../data/tribes/initialization/atlanteans/units.lua:1151
 #: ../../data/tribes/initialization/atlanteans/units.lua:1186
 #: ../../data/tribes/initialization/barbarians/units.lua:817
@@ -903,8 +927,8 @@ msgstr ""
 #. TRANSLATORS: Helptext for a Barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for an Empire immovable: Wheat field
 #. TRANSLATORS: Helptext for a Frisian immovable: Barley Field
-#: ../../data/tribes/initialization/amazons/units.lua:1123
-#: ../../data/tribes/initialization/amazons/units.lua:1130
+#: ../../data/tribes/initialization/amazons/units.lua:1147
+#: ../../data/tribes/initialization/amazons/units.lua:1154
 #: ../../data/tribes/initialization/atlanteans/units.lua:1158
 #: ../../data/tribes/initialization/atlanteans/units.lua:1165
 #: ../../data/tribes/initialization/atlanteans/units.lua:1193
@@ -923,7 +947,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for a Barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for an Empire immovable: Wheat field
 #. TRANSLATORS: Helptext for a Frisian immovable: Barley Field
-#: ../../data/tribes/initialization/amazons/units.lua:1137
+#: ../../data/tribes/initialization/amazons/units.lua:1161
 #: ../../data/tribes/initialization/atlanteans/units.lua:1172
 #: ../../data/tribes/initialization/atlanteans/units.lua:1207
 #: ../../data/tribes/initialization/barbarians/units.lua:838
@@ -938,7 +962,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for a Barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for an Empire immovable: Wheat field
 #. TRANSLATORS: Helptext for a Frisian immovable: Barley Field
-#: ../../data/tribes/initialization/amazons/units.lua:1144
+#: ../../data/tribes/initialization/amazons/units.lua:1168
 #: ../../data/tribes/initialization/atlanteans/units.lua:1179
 #: ../../data/tribes/initialization/atlanteans/units.lua:1214
 #: ../../data/tribes/initialization/barbarians/units.lua:845
@@ -948,22 +972,22 @@ msgid "This field has been harvested."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Cocoa Tree Sapling
-#: ../../data/tribes/initialization/amazons/units.lua:1151
+#: ../../data/tribes/initialization/amazons/units.lua:1175
 msgid "This cocoa tree has just been planted."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Cocoa Tree Pole
-#: ../../data/tribes/initialization/amazons/units.lua:1158
+#: ../../data/tribes/initialization/amazons/units.lua:1182
 msgid "This cocoa tree is growing."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Cocoa Tree Mature
-#: ../../data/tribes/initialization/amazons/units.lua:1165
+#: ../../data/tribes/initialization/amazons/units.lua:1189
 msgid "This cocoa tree is fully grown."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Cocoa Tree Old
-#: ../../data/tribes/initialization/amazons/units.lua:1172
+#: ../../data/tribes/initialization/amazons/units.lua:1196
 msgid "The beans on this cocoa tree are ready for harvesting."
 msgstr ""
 
@@ -972,7 +996,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for a Barbarian resource indicator: No resources
 #. TRANSLATORS: Helptext for an Empire resource indicator: No resources
 #. TRANSLATORS: Helptext for a Frisian resource indicator: No resources
-#: ../../data/tribes/initialization/amazons/units.lua:1179
+#: ../../data/tribes/initialization/amazons/units.lua:1203
 #: ../../data/tribes/initialization/atlanteans/units.lua:1228
 #: ../../data/tribes/initialization/barbarians/units.lua:880
 #: ../../data/tribes/initialization/empire/units.lua:941
@@ -981,8 +1005,8 @@ msgid "There are no resources in the ground here."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Gold, part 1
-#: ../../data/tribes/initialization/amazons/units.lua:1187
-#: ../../data/tribes/initialization/amazons/units.lua:1209
+#: ../../data/tribes/initialization/amazons/units.lua:1211
+#: ../../data/tribes/initialization/amazons/units.lua:1233
 msgid ""
 "Gold veins contain gold ore that can be washed from the gravel at gold "
 "digger dwellings."
@@ -993,7 +1017,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for a Barbarian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an Empire resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a Frisian resource indicator: Gold, part 2
-#: ../../data/tribes/initialization/amazons/units.lua:1189
+#: ../../data/tribes/initialization/amazons/units.lua:1213
 #: ../../data/tribes/initialization/atlanteans/units.lua:1267
 #: ../../data/tribes/initialization/barbarians/units.lua:919
 #: ../../data/tribes/initialization/empire/units.lua:980
@@ -1002,19 +1026,15 @@ msgid "There is only a little bit of gold here."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 1
-#: ../../data/tribes/initialization/amazons/units.lua:1198
-#: ../../data/tribes/initialization/amazons/units.lua:1220
+#: ../../data/tribes/initialization/amazons/units.lua:1222
+#: ../../data/tribes/initialization/amazons/units.lua:1244
 msgid ""
 "Granite is a basic building material and can be dug up by a stone mine."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 2
-#. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
-#. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
-#: ../../data/tribes/initialization/amazons/units.lua:1200
-#: ../../data/tribes/initialization/barbarians/units.lua:930
-#: ../../data/tribes/initialization/frisians/units.lua:1328
-msgid "There is only a little bit of granite here."
+#: ../../data/tribes/initialization/amazons/units.lua:1224
+msgid "There is only a little bit of quartz here."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Gold, part 2
@@ -1022,7 +1042,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for a Barbarian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an Empire resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a Frisian resource indicator: Gold, part 2
-#: ../../data/tribes/initialization/amazons/units.lua:1211
+#: ../../data/tribes/initialization/amazons/units.lua:1235
 #: ../../data/tribes/initialization/atlanteans/units.lua:1311
 #: ../../data/tribes/initialization/barbarians/units.lua:963
 #: ../../data/tribes/initialization/empire/units.lua:1024
@@ -1031,12 +1051,8 @@ msgid "There is a lot of gold here."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 2
-#. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
-#. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
-#: ../../data/tribes/initialization/amazons/units.lua:1222
-#: ../../data/tribes/initialization/barbarians/units.lua:974
-#: ../../data/tribes/initialization/frisians/units.lua:1372
-msgid "There is a lot of granite here."
+#: ../../data/tribes/initialization/amazons/units.lua:1246
+msgid "There is a lot of quartz here."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Ship Under Construction
@@ -1044,7 +1060,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for a Barbarian immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an Empire immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for a Frisian immovable: Ship Under Construction
-#: ../../data/tribes/initialization/amazons/units.lua:1230
+#: ../../data/tribes/initialization/amazons/units.lua:1254
 #: ../../data/tribes/initialization/atlanteans/units.lua:1330
 #: ../../data/tribes/initialization/barbarians/units.lua:982
 #: ../../data/tribes/initialization/empire/units.lua:1043
@@ -1053,19 +1069,19 @@ msgid "A ship is being constructed at this site."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon warehouse: Headquarters
-#: ../../data/tribes/initialization/amazons/units.lua:1242
+#: ../../data/tribes/initialization/amazons/units.lua:1266
 msgctxt "amazons_building"
 msgid "Accommodation for your people. Also stores your wares and tools."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for an Amazon warehouse: Headquarters
-#: ../../data/tribes/initialization/amazons/units.lua:1244
+#: ../../data/tribes/initialization/amazons/units.lua:1268
 msgctxt "amazons_building"
 msgid "The headquarters is your main building."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon warehouse: Warehouse
-#: ../../data/tribes/initialization/amazons/units.lua:1251
+#: ../../data/tribes/initialization/amazons/units.lua:1275
 msgctxt "amazons_building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
@@ -1073,7 +1089,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon warehouse: Port
-#: ../../data/tribes/initialization/amazons/units.lua:1258
+#: ../../data/tribes/initialization/amazons/units.lua:1282
 msgctxt "amazons_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
@@ -1081,7 +1097,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Note helptext for an Amazon warehouse: Port
-#: ../../data/tribes/initialization/amazons/units.lua:1260
+#: ../../data/tribes/initialization/amazons/units.lua:1284
 msgctxt "amazons_building"
 msgid ""
 "Similar to the Headquarters a Port can be attacked and destroyed by an "
@@ -1090,40 +1106,40 @@ msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Stonecutter's
 #. Hut
-#: ../../data/tribes/initialization/amazons/units.lua:1270
+#: ../../data/tribes/initialization/amazons/units.lua:1294
 msgctxt "amazons_building"
 msgid "Cuts raw pieces of granite out of rocks in the vicinity."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Stonecutter's Hut
-#: ../../data/tribes/initialization/amazons/units.lua:1272
+#: ../../data/tribes/initialization/amazons/units.lua:1296
 msgctxt "amazons_building"
 msgid "The stonecutter’s hut needs rocks to cut within the work area."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Woodcutter's
 #. Hut
-#: ../../data/tribes/initialization/amazons/units.lua:1279
+#: ../../data/tribes/initialization/amazons/units.lua:1303
 msgctxt "amazons_building"
 msgid "Fells trees in the surrounding area and processes them into logs."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Woodcutter's Hut
-#: ../../data/tribes/initialization/amazons/units.lua:1281
+#: ../../data/tribes/initialization/amazons/units.lua:1305
 msgctxt "amazons_building"
 msgid "The woodcutter’s hut needs trees to fell within the work area."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Jungle
 #. Preserver's Hut
-#: ../../data/tribes/initialization/amazons/units.lua:1288
+#: ../../data/tribes/initialization/amazons/units.lua:1312
 msgctxt "amazons_building"
 msgid "Plants trees in the surrounding area."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Jungle
 #. Preserver's Hut
-#: ../../data/tribes/initialization/amazons/units.lua:1290
+#: ../../data/tribes/initialization/amazons/units.lua:1314
 msgctxt "amazons_building"
 msgid ""
 "The jungle preserver’s hut needs free space within the work area to plant "
@@ -1132,14 +1148,14 @@ msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Hunter-
 #. Gatherer's Hut
-#: ../../data/tribes/initialization/amazons/units.lua:1297
+#: ../../data/tribes/initialization/amazons/units.lua:1321
 msgctxt "amazons_building"
 msgid "Hunts animals to produce meat. Catches fish in the waters."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Hunter-Gatherer's
 #. Hut
-#: ../../data/tribes/initialization/amazons/units.lua:1300
+#: ../../data/tribes/initialization/amazons/units.lua:1324
 msgctxt "amazons_building"
 msgid ""
 "The hunter-gatherer’s hut needs animals or fish to hunt or catch within the "
@@ -1148,14 +1164,14 @@ msgstr ""
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Hunter-Gatherer's
 #. Hut
-#: ../../data/tribes/initialization/amazons/units.lua:1302
+#: ../../data/tribes/initialization/amazons/units.lua:1326
 msgctxt "amazons_building"
 msgid "Roads and trees along the shoreline block fishing."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Hunter-
 #. Gatherer's Hut
-#: ../../data/tribes/initialization/amazons/units.lua:1305
+#: ../../data/tribes/initialization/amazons/units.lua:1329
 #, lua-format
 msgctxt "amazons_building"
 msgid "The hunter-gatherer pauses %s before going to work again."
@@ -1163,7 +1179,7 @@ msgstr ""
 
 #. TRANSLATORS: Lore author helptext for an Amazon production site: Liana
 #. Cutter's Hut
-#: ../../data/tribes/initialization/amazons/units.lua:1313
+#: ../../data/tribes/initialization/amazons/units.lua:1337
 msgctxt "amazons_building"
 msgid ""
 "‘Sunlight smiled upon us and our Ancestors while we worked to clear liana "
@@ -1173,21 +1189,21 @@ msgstr ""
 
 #. TRANSLATORS: Lore author helptext for an Amazon production site: Liana
 #. Cutter's Hut
-#: ../../data/tribes/initialization/amazons/units.lua:1315
+#: ../../data/tribes/initialization/amazons/units.lua:1339
 msgctxt "amazons_building"
 msgid "Mistress WeaverSong, recollecting her early years as a liana cutter."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Liana Cutter's
 #. Hut
-#: ../../data/tribes/initialization/amazons/units.lua:1317
+#: ../../data/tribes/initialization/amazons/units.lua:1341
 msgctxt "amazons_building"
 msgid "Home of the liana cutter who cuts lianas for making ropes."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Liana Cutter's
 #. Hut
-#: ../../data/tribes/initialization/amazons/units.lua:1319
+#: ../../data/tribes/initialization/amazons/units.lua:1343
 msgctxt "amazons_building"
 msgid ""
 "The liana cutter harvests liana from fully matured trees within the work "
@@ -1196,7 +1212,7 @@ msgstr ""
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Liana
 #. Cutter's Hut
-#: ../../data/tribes/initialization/amazons/units.lua:1321
+#: ../../data/tribes/initialization/amazons/units.lua:1345
 #, lua-format
 msgctxt "amazons_building"
 msgid "The liana cutter rests %s before going to work again."
@@ -1204,14 +1220,14 @@ msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Water
 #. Gatherer's Hut
-#: ../../data/tribes/initialization/amazons/units.lua:1328
+#: ../../data/tribes/initialization/amazons/units.lua:1352
 msgctxt "amazons_building"
 msgid "Draws water out of the rivers and lakes."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Water Gatherer's
 #. Hut, part 1
-#: ../../data/tribes/initialization/amazons/units.lua:1331
+#: ../../data/tribes/initialization/amazons/units.lua:1355
 msgctxt "amazons_building"
 msgid ""
 "The water gatherer’s hut needs open water within the work area. Your workers"
@@ -1220,14 +1236,14 @@ msgstr ""
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Water Gatherer's
 #. Hut, part 2
-#: ../../data/tribes/initialization/amazons/units.lua:1333
+#: ../../data/tribes/initialization/amazons/units.lua:1357
 msgctxt "amazons_building"
 msgid "Roads and trees along the shoreline block drawing water."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Rare Tree
 #. Cutter's Hut
-#: ../../data/tribes/initialization/amazons/units.lua:1341
+#: ../../data/tribes/initialization/amazons/units.lua:1365
 msgctxt "amazons_building"
 msgid ""
 "Harvests rare trees in the surrounding area. Delivers ironwood, balsa and "
@@ -1236,21 +1252,21 @@ msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Wilderness
 #. Keeper's Tent
-#: ../../data/tribes/initialization/amazons/units.lua:1348
+#: ../../data/tribes/initialization/amazons/units.lua:1372
 msgctxt "amazons_building"
 msgid "Breeds fish and game to renew food resources."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Wilderness
 #. Keeper's Tent
-#: ../../data/tribes/initialization/amazons/units.lua:1350
+#: ../../data/tribes/initialization/amazons/units.lua:1374
 msgctxt "amazons_building"
 msgid ""
 "The wilderness keeper will only release new game at a nearby tree which is "
 "not being used as a lookout."
 msgstr ""
 
-#: ../../data/tribes/initialization/amazons/units.lua:1356
+#: ../../data/tribes/initialization/amazons/units.lua:1380
 msgctxt "amazons_building"
 msgid ""
 "You need to connect this flag to a scout’s hut before you can send a scout "
@@ -1258,14 +1274,14 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Scout's Hut
-#: ../../data/tribes/initialization/amazons/units.lua:1358
+#: ../../data/tribes/initialization/amazons/units.lua:1382
 msgctxt "amazons_building"
 msgid "Explores unknown territory."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Scout's
 #. Hut
-#: ../../data/tribes/initialization/amazons/units.lua:1360
+#: ../../data/tribes/initialization/amazons/units.lua:1384
 #, lua-format
 msgctxt "amazons_building"
 msgid "The scout pauses %s before going to work again."
@@ -1273,7 +1289,7 @@ msgstr ""
 
 #. TRANSLATORS: Lore author helptext for an Amazon production site: Rope
 #. Weaver's Booth
-#: ../../data/tribes/initialization/amazons/units.lua:1369
+#: ../../data/tribes/initialization/amazons/units.lua:1393
 msgctxt "amazons_building"
 msgid ""
 "‘My mother taught me to ply the ropes from Liana, how to choose the "
@@ -1283,26 +1299,26 @@ msgstr ""
 
 #. TRANSLATORS: Lore author helptext for an Amazon production site: Rope
 #. Weaver's Booth
-#: ../../data/tribes/initialization/amazons/units.lua:1371
+#: ../../data/tribes/initialization/amazons/units.lua:1395
 msgctxt "amazons_building"
 msgid "Mistress WeaverSong, reflecting on training."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Rope Weaver's
 #. Booth
-#: ../../data/tribes/initialization/amazons/units.lua:1373
+#: ../../data/tribes/initialization/amazons/units.lua:1397
 msgctxt "amazons_building"
 msgid "Makes ropes from lianas."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Furnace
-#: ../../data/tribes/initialization/amazons/units.lua:1380
+#: ../../data/tribes/initialization/amazons/units.lua:1404
 msgctxt "amazons_building"
 msgid "Smelts gold dust into gold ingots using charcoal."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Furnace
-#: ../../data/tribes/initialization/amazons/units.lua:1382
+#: ../../data/tribes/initialization/amazons/units.lua:1406
 #, lua-format
 msgctxt "amazons_building"
 msgid ""
@@ -1312,7 +1328,7 @@ msgstr ""
 
 #. TRANSLATORS: Lore helptext for an Amazon production site: Rare Tree
 #. Plantation
-#: ../../data/tribes/initialization/amazons/units.lua:1389
+#: ../../data/tribes/initialization/amazons/units.lua:1413
 msgctxt "amazons_building"
 msgid ""
 "‘If properly harvested, cured and stored, ironwood becomes almost "
@@ -1321,14 +1337,14 @@ msgstr ""
 
 #. TRANSLATORS: Lore author helptext for an Amazon production site: Rare Tree
 #. Plantation
-#: ../../data/tribes/initialization/amazons/units.lua:1391
+#: ../../data/tribes/initialization/amazons/units.lua:1415
 msgctxt "amazons_building"
 msgid "Jungle Master Abacaxis"
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Rare Tree
 #. Plantation
-#: ../../data/tribes/initialization/amazons/units.lua:1393
+#: ../../data/tribes/initialization/amazons/units.lua:1417
 msgctxt "amazons_building"
 msgid ""
 "Plants rare trees which are needed by the Amazons, like balsa, rubber and "
@@ -1337,7 +1353,7 @@ msgstr ""
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Rare Tree
 #. Plantation
-#: ../../data/tribes/initialization/amazons/units.lua:1395
+#: ../../data/tribes/initialization/amazons/units.lua:1419
 msgctxt "amazons_building"
 msgid ""
 "Rare trees are planted according to the economy requirements. Keep roads "
@@ -1345,14 +1361,14 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Stone Workshop
-#: ../../data/tribes/initialization/amazons/units.lua:1402
+#: ../../data/tribes/initialization/amazons/units.lua:1426
 msgctxt "amazons_building"
 msgid "Makes tools and spears for our soldiers."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Stone
 #. Workshop
-#: ../../data/tribes/initialization/amazons/units.lua:1404
+#: ../../data/tribes/initialization/amazons/units.lua:1428
 msgctxt "amazons_building"
 msgid ""
 "If this building is fully supplied and all tools and spears are needed by "
@@ -1362,7 +1378,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for an Amazon production site: Dressmakery
-#: ../../data/tribes/initialization/amazons/units.lua:1411
+#: ../../data/tribes/initialization/amazons/units.lua:1435
 msgctxt "amazons_building"
 msgid ""
 "‘A skilled maker crafts garments of unsurpassed defence,<br> with each "
@@ -1371,7 +1387,7 @@ msgstr ""
 
 #. TRANSLATORS: Lore author helptext for an Amazon production site:
 #. Dressmakery
-#: ../../data/tribes/initialization/amazons/units.lua:1413
+#: ../../data/tribes/initialization/amazons/units.lua:1437
 msgctxt "amazons_building"
 msgid ""
 "Dressmakers’ ethos, adapted from the traditional verse ‘Mother Jungle’s "
@@ -1379,14 +1395,14 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Dressmakery
-#: ../../data/tribes/initialization/amazons/units.lua:1415
+#: ../../data/tribes/initialization/amazons/units.lua:1439
 msgctxt "amazons_building"
 msgid "Sews all dresses, boots and armor for our soldiers."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for an Amazon production site:
 #. Dressmakery
-#: ../../data/tribes/initialization/amazons/units.lua:1417
+#: ../../data/tribes/initialization/amazons/units.lua:1441
 msgctxt "amazons_building"
 msgid ""
 "If this building is fully supplied and all dresses, boots and armors are "
@@ -1396,14 +1412,14 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Charcoal Kiln
-#: ../../data/tribes/initialization/amazons/units.lua:1424
+#: ../../data/tribes/initialization/amazons/units.lua:1448
 msgctxt "amazons_building"
 msgid "Burns logs into charcoal."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Charcoal
 #. Kiln
-#: ../../data/tribes/initialization/amazons/units.lua:1426
+#: ../../data/tribes/initialization/amazons/units.lua:1450
 #, lua-format
 msgctxt "amazons_building"
 msgid "The charcoal kiln needs %s on average to produce one lump of coal."
@@ -1411,21 +1427,21 @@ msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Cassava Root
 #. Cooker
-#: ../../data/tribes/initialization/amazons/units.lua:1433
+#: ../../data/tribes/initialization/amazons/units.lua:1457
 msgctxt "amazons_building"
 msgid "Bakes bread from cassava root."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Chocolate
 #. Brewery
-#: ../../data/tribes/initialization/amazons/units.lua:1440
+#: ../../data/tribes/initialization/amazons/units.lua:1464
 msgctxt "amazons_building"
 msgid "Brews chocolate for soldier training."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Chocolate
 #. Brewery
-#: ../../data/tribes/initialization/amazons/units.lua:1442
+#: ../../data/tribes/initialization/amazons/units.lua:1466
 #, lua-format
 msgctxt "amazons_building"
 msgid ""
@@ -1433,7 +1449,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Food Preserver
-#: ../../data/tribes/initialization/amazons/units.lua:1449
+#: ../../data/tribes/initialization/amazons/units.lua:1473
 msgctxt "amazons_building"
 msgid ""
 "Prepares rations to feed the scouts and the workers digging for gold dust "
@@ -1442,7 +1458,7 @@ msgstr ""
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Food
 #. Preserver
-#: ../../data/tribes/initialization/amazons/units.lua:1451
+#: ../../data/tribes/initialization/amazons/units.lua:1475
 #, lua-format
 msgctxt "amazons_building"
 msgid ""
@@ -1452,14 +1468,14 @@ msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Initiation
 #. Site
-#: ../../data/tribes/initialization/amazons/units.lua:1458
+#: ../../data/tribes/initialization/amazons/units.lua:1482
 msgctxt "amazons_building"
 msgid "Equips recruits and trains them as soldiers."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Initiation
 #. Site
-#: ../../data/tribes/initialization/amazons/units.lua:1460
+#: ../../data/tribes/initialization/amazons/units.lua:1484
 #, lua-format
 msgctxt "amazons_building"
 msgid "The initiation site needs %s on average to recruit one soldier."
@@ -1467,13 +1483,13 @@ msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Gardening
 #. Center
-#: ../../data/tribes/initialization/amazons/units.lua:1467
+#: ../../data/tribes/initialization/amazons/units.lua:1491
 msgctxt "amazons_building"
 msgid "Enhances the fertility of the landscape for trees."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Gardening Center
-#: ../../data/tribes/initialization/amazons/units.lua:1469
+#: ../../data/tribes/initialization/amazons/units.lua:1493
 msgctxt "amazons_building"
 msgid ""
 "Only a Jungle Master has the necessary experience to coax more growth from "
@@ -1481,69 +1497,69 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Tapir Farm
-#: ../../data/tribes/initialization/amazons/units.lua:1478
+#: ../../data/tribes/initialization/amazons/units.lua:1502
 msgctxt "amazons_building"
 msgid "Breeds tapirs for adding them to the transportation system."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Tapir Farm
-#: ../../data/tribes/initialization/amazons/units.lua:1480
+#: ../../data/tribes/initialization/amazons/units.lua:1504
 msgctxt "amazons_building"
 msgid "Tapirs help to prevent traffic jams on highly used roads."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Cassava
 #. Plantation
-#: ../../data/tribes/initialization/amazons/units.lua:1487
+#: ../../data/tribes/initialization/amazons/units.lua:1511
 msgctxt "amazons_building"
 msgid "Sows and harvests cassava."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Cassava
 #. Plantation
-#: ../../data/tribes/initialization/amazons/units.lua:1489
+#: ../../data/tribes/initialization/amazons/units.lua:1513
 msgctxt "amazons_building"
 msgid ""
 "The cassava plantation needs free space within the work area to plant seeds."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Cocoa Farm
-#: ../../data/tribes/initialization/amazons/units.lua:1496
+#: ../../data/tribes/initialization/amazons/units.lua:1520
 msgctxt "amazons_building"
 msgid "Cultivates cocoa that is needed to brew chocolate drinks."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Cocoa Farm
-#: ../../data/tribes/initialization/amazons/units.lua:1498
+#: ../../data/tribes/initialization/amazons/units.lua:1522
 msgctxt "amazons_building"
 msgid "Chocolate is essential for training Amazon soldiers."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Stone Mine
-#: ../../data/tribes/initialization/amazons/units.lua:1507
+#: ../../data/tribes/initialization/amazons/units.lua:1531
 msgctxt "amazons_building"
-msgid "Digs granite out of the ground in mountain terrain."
+msgid "Digs granite and quartz out of the ground in mountain terrain."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Stone Mine
-#: ../../data/tribes/initialization/amazons/units.lua:1509
+#: ../../data/tribes/initialization/amazons/units.lua:1533
 #, lua-format
 msgctxt "amazons_building"
 msgid ""
-"The stone mine can produce one slab of granite in %s on average if the "
-"supply with rations is steady and the mine is not worn out."
+"The stone mine can produce one slab of each kind of stone in %s on average "
+"if the supply with rations is steady and the mine is not worn out."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Gold Digger
 #. Dwelling
-#: ../../data/tribes/initialization/amazons/units.lua:1516
+#: ../../data/tribes/initialization/amazons/units.lua:1540
 msgctxt "amazons_building"
 msgid "Washes gold dust out of the ground in mountain terrain."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon training site: Warriors’
 #. Gathering
-#: ../../data/tribes/initialization/amazons/units.lua:1525
+#: ../../data/tribes/initialization/amazons/units.lua:1549
 msgctxt "amazons_building"
 msgid ""
 "Trains soldiers in Attack up to level 2. Equips the soldiers with all "
@@ -1552,14 +1568,14 @@ msgstr ""
 
 #. TRANSLATORS: Note helptext for an Amazon training site: Warriors’ Gathering
 #. TRANSLATORS: Note helptext for an Amazon training site: Training Glade
-#: ../../data/tribes/initialization/amazons/units.lua:1527
-#: ../../data/tribes/initialization/amazons/units.lua:1536
+#: ../../data/tribes/initialization/amazons/units.lua:1551
+#: ../../data/tribes/initialization/amazons/units.lua:1560
 msgctxt "amazons_building"
 msgid "Amazon soldiers need chocolate to train properly."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon training site: Training Glade
-#: ../../data/tribes/initialization/amazons/units.lua:1534
+#: ../../data/tribes/initialization/amazons/units.lua:1558
 msgctxt "amazons_building"
 msgid ""
 "Trains soldiers in Evade, Defense and Health. Equips the soldiers with all "
@@ -1575,13 +1591,13 @@ msgstr ""
 #. Tower
 #. TRANSLATORS: Purpose helptext for an Amazon military site: Fortress
 #. TRANSLATORS: Purpose helptext for an Amazon military site: Fortification
-#: ../../data/tribes/initialization/amazons/units.lua:1545
-#: ../../data/tribes/initialization/amazons/units.lua:1554
-#: ../../data/tribes/initialization/amazons/units.lua:1563
-#: ../../data/tribes/initialization/amazons/units.lua:1572
-#: ../../data/tribes/initialization/amazons/units.lua:1581
-#: ../../data/tribes/initialization/amazons/units.lua:1590
-#: ../../data/tribes/initialization/amazons/units.lua:1599
+#: ../../data/tribes/initialization/amazons/units.lua:1569
+#: ../../data/tribes/initialization/amazons/units.lua:1578
+#: ../../data/tribes/initialization/amazons/units.lua:1587
+#: ../../data/tribes/initialization/amazons/units.lua:1596
+#: ../../data/tribes/initialization/amazons/units.lua:1605
+#: ../../data/tribes/initialization/amazons/units.lua:1614
+#: ../../data/tribes/initialization/amazons/units.lua:1623
 msgctxt "amazons_building"
 msgid "Garrisons soldiers to expand your territory."
 msgstr ""
@@ -1592,12 +1608,12 @@ msgstr ""
 #. TRANSLATORS: Note helptext for an Amazon military site: Observation Tower
 #. TRANSLATORS: Note helptext for an Amazon military site: Fortress
 #. TRANSLATORS: Note helptext for an Amazon military site: Fortification
-#: ../../data/tribes/initialization/amazons/units.lua:1547
-#: ../../data/tribes/initialization/amazons/units.lua:1565
-#: ../../data/tribes/initialization/amazons/units.lua:1574
-#: ../../data/tribes/initialization/amazons/units.lua:1583
-#: ../../data/tribes/initialization/amazons/units.lua:1592
-#: ../../data/tribes/initialization/amazons/units.lua:1601
+#: ../../data/tribes/initialization/amazons/units.lua:1571
+#: ../../data/tribes/initialization/amazons/units.lua:1589
+#: ../../data/tribes/initialization/amazons/units.lua:1598
+#: ../../data/tribes/initialization/amazons/units.lua:1607
+#: ../../data/tribes/initialization/amazons/units.lua:1616
+#: ../../data/tribes/initialization/amazons/units.lua:1625
 msgctxt "amazons_building"
 msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
@@ -1606,20 +1622,20 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Note helptext for an Amazon military site: Treetop Sentry
-#: ../../data/tribes/initialization/amazons/units.lua:1556
+#: ../../data/tribes/initialization/amazons/units.lua:1580
 msgctxt "amazons_building"
 msgid "You can only build this building on top of a tree."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Ferry Yard
-#: ../../data/tribes/initialization/amazons/units.lua:1610
+#: ../../data/tribes/initialization/amazons/units.lua:1634
 msgctxt "amazons_building"
 msgid "Builds ferries."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Ferry Yard, part
 #. 1
-#: ../../data/tribes/initialization/amazons/units.lua:1613
+#: ../../data/tribes/initialization/amazons/units.lua:1637
 msgctxt "amazons_building"
 msgid "Needs water nearby. Be aware ferries carry wares only, no workers."
 msgstr ""
@@ -1641,8 +1657,8 @@ msgstr ""
 #. TRANSLATORS: Note helptext for an Frisian production site: Ferry Yard, part
 #. 2
 #. TRANSLATORS: Note helptext for a Frisian production site: Shipyard, part 2
-#: ../../data/tribes/initialization/amazons/units.lua:1615
-#: ../../data/tribes/initialization/amazons/units.lua:1628
+#: ../../data/tribes/initialization/amazons/units.lua:1639
+#: ../../data/tribes/initialization/amazons/units.lua:1652
 #: ../../data/tribes/initialization/atlanteans/units.lua:2005
 #: ../../data/tribes/initialization/atlanteans/units.lua:2025
 #: ../../data/tribes/initialization/barbarians/units.lua:1782
@@ -1656,7 +1672,7 @@ msgid "Roads and trees along the shoreline block access to water."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Shipyard
-#: ../../data/tribes/initialization/amazons/units.lua:1623
+#: ../../data/tribes/initialization/amazons/units.lua:1647
 msgctxt "amazons_building"
 msgid ""
 "Constructs ships that are used for overseas colonization and for trading "
@@ -1670,7 +1686,7 @@ msgstr ""
 #. 1
 #. TRANSLATORS: Note helptext for an Empire production site: Shipyard, part 1
 #. TRANSLATORS: Note helptext for a Frisian production site: Shipyard, part 1
-#: ../../data/tribes/initialization/amazons/units.lua:1626
+#: ../../data/tribes/initialization/amazons/units.lua:1650
 #: ../../data/tribes/initialization/atlanteans/units.lua:2023
 #: ../../data/tribes/initialization/barbarians/units.lua:1798
 #: ../../data/tribes/initialization/empire/units.lua:2285
@@ -1684,7 +1700,7 @@ msgstr ""
 #. TRANSLATORS: Lore helptext for a Barbarian building: Construction Site
 #. TRANSLATORS: Lore helptext for an Empire building: Construction Site
 #. TRANSLATORS: Lore helptext for a Frisian building: Construction Site
-#: ../../data/tribes/initialization/amazons/units.lua:1638
+#: ../../data/tribes/initialization/amazons/units.lua:1662
 #: ../../data/tribes/initialization/atlanteans/units.lua:2042
 #: ../../data/tribes/initialization/barbarians/units.lua:1822
 #: ../../data/tribes/initialization/empire/units.lua:2297
@@ -1700,7 +1716,7 @@ msgstr ""
 #. Site
 #. TRANSLATORS: Lore author helptext for an Empire building: Construction Site
 #. TRANSLATORS: Lore author helptext for a Frisian building: Construction Site
-#: ../../data/tribes/initialization/amazons/units.lua:1640
+#: ../../data/tribes/initialization/amazons/units.lua:1664
 #: ../../data/tribes/initialization/atlanteans/units.lua:2044
 #: ../../data/tribes/initialization/barbarians/units.lua:1824
 #: ../../data/tribes/initialization/empire/units.lua:2299
@@ -1714,7 +1730,7 @@ msgstr ""
 #. TRANSLATORS: Purpose helptext for a Barbarian building: Construction Site
 #. TRANSLATORS: Purpose helptext for an Empire building: Construction Site
 #. TRANSLATORS: Purpose helptext for a Frisian building: Construction Site
-#: ../../data/tribes/initialization/amazons/units.lua:1642
+#: ../../data/tribes/initialization/amazons/units.lua:1666
 #: ../../data/tribes/initialization/atlanteans/units.lua:2046
 #: ../../data/tribes/initialization/barbarians/units.lua:1826
 #: ../../data/tribes/initialization/empire/units.lua:2301
@@ -1728,7 +1744,7 @@ msgstr ""
 #. TRANSLATORS: Lore helptext for a Barbarian building: Dismantle Site
 #. TRANSLATORS: Lore helptext for an Empire building: Dismantle Site
 #. TRANSLATORS: Lore helptext for a Frisian building: Dismantle Site
-#: ../../data/tribes/initialization/amazons/units.lua:1649
+#: ../../data/tribes/initialization/amazons/units.lua:1673
 #: ../../data/tribes/initialization/atlanteans/units.lua:2053
 #: ../../data/tribes/initialization/barbarians/units.lua:1833
 #: ../../data/tribes/initialization/empire/units.lua:2308
@@ -1742,7 +1758,7 @@ msgstr ""
 #. TRANSLATORS: Lore author helptext for a Barbarian building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for an Empire building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for a Frisian building: Dismantle Site
-#: ../../data/tribes/initialization/amazons/units.lua:1651
+#: ../../data/tribes/initialization/amazons/units.lua:1675
 #: ../../data/tribes/initialization/atlanteans/units.lua:2055
 #: ../../data/tribes/initialization/barbarians/units.lua:1835
 #: ../../data/tribes/initialization/empire/units.lua:2310
@@ -1756,7 +1772,7 @@ msgstr ""
 #. TRANSLATORS: Purpose helptext for a Barbarian building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for an Empire building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for a Frisian building: Dismantle Site
-#: ../../data/tribes/initialization/amazons/units.lua:1653
+#: ../../data/tribes/initialization/amazons/units.lua:1677
 #: ../../data/tribes/initialization/atlanteans/units.lua:2057
 #: ../../data/tribes/initialization/barbarians/units.lua:1837
 #: ../../data/tribes/initialization/empire/units.lua:2312
@@ -1770,1189 +1786,1189 @@ msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1660
+#: ../../data/tribes/initialization/amazons/units.lua:1684
 msgctxt "warehousename"
 msgid "Alter"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1662
+#: ../../data/tribes/initialization/amazons/units.lua:1686
 msgctxt "warehousename"
 msgid "Anumā"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1664
+#: ../../data/tribes/initialization/amazons/units.lua:1688
 msgctxt "warehousename"
 msgid "Aquiqui"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1666
+#: ../../data/tribes/initialization/amazons/units.lua:1690
 msgctxt "warehousename"
 msgid "Arapixuna"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1668
+#: ../../data/tribes/initialization/amazons/units.lua:1692
 msgctxt "warehousename"
 msgid "Aritapera"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1670
+#: ../../data/tribes/initialization/amazons/units.lua:1694
 msgctxt "warehousename"
 msgid "Atamanai"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1672
+#: ../../data/tribes/initialization/amazons/units.lua:1696
 msgctxt "warehousename"
 msgid "Amorim"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1674
+#: ../../data/tribes/initialization/amazons/units.lua:1698
 msgctxt "warehousename"
 msgid "Canindé"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1676
+#: ../../data/tribes/initialization/amazons/units.lua:1700
 msgctxt "warehousename"
 msgid "Cuia"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1678
+#: ../../data/tribes/initialization/amazons/units.lua:1702
 msgctxt "warehousename"
 msgid "Cacoal"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1680
+#: ../../data/tribes/initialization/amazons/units.lua:1704
 msgctxt "warehousename"
 msgid "Capichauā"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1682
+#: ../../data/tribes/initialization/amazons/units.lua:1706
 msgctxt "warehousename"
 msgid "Cipoal"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1684
+#: ../../data/tribes/initialization/amazons/units.lua:1708
 msgctxt "warehousename"
 msgid "Cupiranga"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1686
+#: ../../data/tribes/initialization/amazons/units.lua:1710
 msgctxt "warehousename"
 msgid "Curariaca"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1688
+#: ../../data/tribes/initialization/amazons/units.lua:1712
 msgctxt "warehousename"
 msgid "Curupari"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1690
+#: ../../data/tribes/initialization/amazons/units.lua:1714
 msgctxt "warehousename"
 msgid "Curuá"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1692
+#: ../../data/tribes/initialization/amazons/units.lua:1716
 msgctxt "warehousename"
 msgid "Diogo"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1694
+#: ../../data/tribes/initialization/amazons/units.lua:1718
 msgctxt "warehousename"
 msgid "Guajará"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1696
+#: ../../data/tribes/initialization/amazons/units.lua:1720
 msgctxt "warehousename"
 msgid "Guarana"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1698
+#: ../../data/tribes/initialization/amazons/units.lua:1722
 msgctxt "warehousename"
 msgid "Gurupá"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1700
+#: ../../data/tribes/initialization/amazons/units.lua:1724
 msgctxt "warehousename"
 msgid "Ipanema"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1702
+#: ../../data/tribes/initialization/amazons/units.lua:1726
 msgctxt "warehousename"
 msgid "Ipaupixuna"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1704
+#: ../../data/tribes/initialization/amazons/units.lua:1728
 msgctxt "warehousename"
 msgid "Irateua"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1706
+#: ../../data/tribes/initialization/amazons/units.lua:1730
 msgctxt "warehousename"
 msgid "Itacoatiara"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1708
+#: ../../data/tribes/initialization/amazons/units.lua:1732
 msgctxt "warehousename"
 msgid "Itanduba"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1710
+#: ../../data/tribes/initialization/amazons/units.lua:1734
 msgctxt "warehousename"
 msgid "Itapari"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1712
+#: ../../data/tribes/initialization/amazons/units.lua:1736
 msgctxt "warehousename"
 msgid "Jaburu"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1714
+#: ../../data/tribes/initialization/amazons/units.lua:1738
 msgctxt "warehousename"
 msgid "Jacarecapá"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1716
+#: ../../data/tribes/initialization/amazons/units.lua:1740
 msgctxt "warehousename"
 msgid "Jaguara"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1718
+#: ../../data/tribes/initialization/amazons/units.lua:1742
 msgctxt "warehousename"
 msgid "Janauacá"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1720
+#: ../../data/tribes/initialization/amazons/units.lua:1744
 msgctxt "warehousename"
 msgid "Macapá"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1722
+#: ../../data/tribes/initialization/amazons/units.lua:1746
 msgctxt "warehousename"
 msgid "Maguari"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1724
+#: ../../data/tribes/initialization/amazons/units.lua:1748
 msgctxt "warehousename"
 msgid "Mambeca"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1726
+#: ../../data/tribes/initialization/amazons/units.lua:1750
 msgctxt "warehousename"
 msgid "Manacapuru"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1728
+#: ../../data/tribes/initialization/amazons/units.lua:1752
 msgctxt "warehousename"
 msgid "Mararu"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1730
+#: ../../data/tribes/initialization/amazons/units.lua:1754
 msgctxt "warehousename"
 msgid "Maripi"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1732
+#: ../../data/tribes/initialization/amazons/units.lua:1756
 msgctxt "warehousename"
 msgid "Maruá"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1734
+#: ../../data/tribes/initialization/amazons/units.lua:1758
 msgctxt "warehousename"
 msgid "Mataraí"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1736
+#: ../../data/tribes/initialization/amazons/units.lua:1760
 msgctxt "warehousename"
 msgid "Miri"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1738
+#: ../../data/tribes/initialization/amazons/units.lua:1762
 msgctxt "warehousename"
 msgid "Moju"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1740
+#: ../../data/tribes/initialization/amazons/units.lua:1764
 msgctxt "warehousename"
 msgid "Mojui"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1742
+#: ../../data/tribes/initialization/amazons/units.lua:1766
 msgctxt "warehousename"
 msgid "Morimutuba"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1744
+#: ../../data/tribes/initialization/amazons/units.lua:1768
 msgctxt "warehousename"
 msgid "Oriximiná"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1746
+#: ../../data/tribes/initialization/amazons/units.lua:1770
 msgctxt "warehousename"
 msgid "Pacoval"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1748
+#: ../../data/tribes/initialization/amazons/units.lua:1772
 msgctxt "warehousename"
 msgid "Paranquara"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1750
+#: ../../data/tribes/initialization/amazons/units.lua:1774
 msgctxt "warehousename"
 msgid "Paricó"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1752
+#: ../../data/tribes/initialization/amazons/units.lua:1776
 msgctxt "warehousename"
 msgid "Pedreira"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1754
+#: ../../data/tribes/initialization/amazons/units.lua:1778
 msgctxt "warehousename"
 msgid "Povoado"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1756
+#: ../../data/tribes/initialization/amazons/units.lua:1780
 msgctxt "warehousename"
 msgid "Prainha"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1758
+#: ../../data/tribes/initialization/amazons/units.lua:1782
 msgctxt "warehousename"
 msgid "Preta"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1760
+#: ../../data/tribes/initialization/amazons/units.lua:1784
 msgctxt "warehousename"
 msgid "Santarém"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1762
+#: ../../data/tribes/initialization/amazons/units.lua:1786
 msgctxt "warehousename"
 msgid "Socorro"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1764
+#: ../../data/tribes/initialization/amazons/units.lua:1788
 msgctxt "warehousename"
 msgid "Solimōes"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1766
+#: ../../data/tribes/initialization/amazons/units.lua:1790
 msgctxt "warehousename"
 msgid "Surucá"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1768
+#: ../../data/tribes/initialization/amazons/units.lua:1792
 msgctxt "warehousename"
 msgid "Tambaqui"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1770
+#: ../../data/tribes/initialization/amazons/units.lua:1794
 msgctxt "warehousename"
 msgid "Tapará"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1772
+#: ../../data/tribes/initialization/amazons/units.lua:1796
 msgctxt "warehousename"
 msgid "Taperinha"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1774
+#: ../../data/tribes/initialization/amazons/units.lua:1798
 msgctxt "warehousename"
 msgid "Tiningu"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1776
+#: ../../data/tribes/initialization/amazons/units.lua:1800
 msgctxt "warehousename"
 msgid "Tomé"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a town in the Amazon
 #. Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1778
+#: ../../data/tribes/initialization/amazons/units.lua:1802
 msgctxt "warehousename"
 msgid "Una"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a Maya city
-#: ../../data/tribes/initialization/amazons/units.lua:1780
+#: ../../data/tribes/initialization/amazons/units.lua:1804
 msgctxt "warehousename"
 msgid "Bonampak"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a Maya city
-#: ../../data/tribes/initialization/amazons/units.lua:1782
+#: ../../data/tribes/initialization/amazons/units.lua:1806
 msgctxt "warehousename"
 msgid "Calakmul"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a Maya city
-#: ../../data/tribes/initialization/amazons/units.lua:1784
+#: ../../data/tribes/initialization/amazons/units.lua:1808
 msgctxt "warehousename"
 msgid "Chichén Itzá"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a Maya city
-#: ../../data/tribes/initialization/amazons/units.lua:1786
+#: ../../data/tribes/initialization/amazons/units.lua:1810
 msgctxt "warehousename"
 msgid "Copán"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a Maya city
-#: ../../data/tribes/initialization/amazons/units.lua:1788
+#: ../../data/tribes/initialization/amazons/units.lua:1812
 msgctxt "warehousename"
 msgid "Kaminaljuyú"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a Maya city
-#: ../../data/tribes/initialization/amazons/units.lua:1790
+#: ../../data/tribes/initialization/amazons/units.lua:1814
 msgctxt "warehousename"
 msgid "Lamanai"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a Maya city
-#: ../../data/tribes/initialization/amazons/units.lua:1792
+#: ../../data/tribes/initialization/amazons/units.lua:1816
 msgctxt "warehousename"
 msgid "Mayapán"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a Maya city
-#: ../../data/tribes/initialization/amazons/units.lua:1794
+#: ../../data/tribes/initialization/amazons/units.lua:1818
 msgctxt "warehousename"
 msgid "Pomoná"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a Maya city
-#: ../../data/tribes/initialization/amazons/units.lua:1796
+#: ../../data/tribes/initialization/amazons/units.lua:1820
 msgctxt "warehousename"
 msgid "Quiriguá"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a Maya city
-#: ../../data/tribes/initialization/amazons/units.lua:1798
+#: ../../data/tribes/initialization/amazons/units.lua:1822
 msgctxt "warehousename"
 msgid "Tikal"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a Maya city
-#: ../../data/tribes/initialization/amazons/units.lua:1800
+#: ../../data/tribes/initialization/amazons/units.lua:1824
 msgctxt "warehousename"
 msgid "Tononá"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a Maya city
-#: ../../data/tribes/initialization/amazons/units.lua:1802
+#: ../../data/tribes/initialization/amazons/units.lua:1826
 msgctxt "warehousename"
 msgid "Uxmal"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an Inca city
-#: ../../data/tribes/initialization/amazons/units.lua:1804
+#: ../../data/tribes/initialization/amazons/units.lua:1828
 msgctxt "warehousename"
 msgid "Arequipa"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an Inca city
-#: ../../data/tribes/initialization/amazons/units.lua:1806
+#: ../../data/tribes/initialization/amazons/units.lua:1830
 msgctxt "warehousename"
 msgid "Aypate"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an Inca city
-#: ../../data/tribes/initialization/amazons/units.lua:1808
+#: ../../data/tribes/initialization/amazons/units.lua:1832
 msgctxt "warehousename"
 msgid "Cahuachi"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an Inca city
-#: ../../data/tribes/initialization/amazons/units.lua:1810
+#: ../../data/tribes/initialization/amazons/units.lua:1834
 msgctxt "warehousename"
 msgid "Choquequirao"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an Inca city
-#: ../../data/tribes/initialization/amazons/units.lua:1812
+#: ../../data/tribes/initialization/amazons/units.lua:1836
 msgctxt "warehousename"
 msgid "Kashamarka"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an Inca city
-#: ../../data/tribes/initialization/amazons/units.lua:1814
+#: ../../data/tribes/initialization/amazons/units.lua:1838
 msgctxt "warehousename"
 msgid "Kuelap"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an Inca city
-#: ../../data/tribes/initialization/amazons/units.lua:1816
+#: ../../data/tribes/initialization/amazons/units.lua:1840
 msgctxt "warehousename"
 msgid "Machu Picchu"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an Inca city
-#: ../../data/tribes/initialization/amazons/units.lua:1818
+#: ../../data/tribes/initialization/amazons/units.lua:1842
 msgctxt "warehousename"
 msgid "Nazca"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an Inca city
-#: ../../data/tribes/initialization/amazons/units.lua:1820
+#: ../../data/tribes/initialization/amazons/units.lua:1844
 msgctxt "warehousename"
 msgid "Ollantaytambo"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an Inca city
-#: ../../data/tribes/initialization/amazons/units.lua:1822
+#: ../../data/tribes/initialization/amazons/units.lua:1846
 msgctxt "warehousename"
 msgid "Pachacamac"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an Inca city
-#: ../../data/tribes/initialization/amazons/units.lua:1824
+#: ../../data/tribes/initialization/amazons/units.lua:1848
 msgctxt "warehousename"
 msgid "Paititi"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an Inca city
-#: ../../data/tribes/initialization/amazons/units.lua:1826
+#: ../../data/tribes/initialization/amazons/units.lua:1850
 msgctxt "warehousename"
 msgid "Paqari-tampu"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an Inca city
-#: ../../data/tribes/initialization/amazons/units.lua:1828
+#: ../../data/tribes/initialization/amazons/units.lua:1852
 msgctxt "warehousename"
 msgid "Cuzco"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an Inca city
-#: ../../data/tribes/initialization/amazons/units.lua:1830
+#: ../../data/tribes/initialization/amazons/units.lua:1854
 msgctxt "warehousename"
 msgid "Teyuna"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an Inca city
-#: ../../data/tribes/initialization/amazons/units.lua:1832
+#: ../../data/tribes/initialization/amazons/units.lua:1856
 msgctxt "warehousename"
 msgid "Tiahuanaco"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an Inca city
-#: ../../data/tribes/initialization/amazons/units.lua:1834
+#: ../../data/tribes/initialization/amazons/units.lua:1858
 msgctxt "warehousename"
 msgid "Vilcabamba"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an Inca city
-#: ../../data/tribes/initialization/amazons/units.lua:1836
+#: ../../data/tribes/initialization/amazons/units.lua:1860
 msgctxt "warehousename"
 msgid "Vitcos"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a part of the Inca
 #. Empire
-#: ../../data/tribes/initialization/amazons/units.lua:1838
+#: ../../data/tribes/initialization/amazons/units.lua:1862
 msgctxt "warehousename"
 msgid "Antisuyu"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a part of the Inca
 #. Empire
-#: ../../data/tribes/initialization/amazons/units.lua:1840
+#: ../../data/tribes/initialization/amazons/units.lua:1864
 msgctxt "warehousename"
 msgid "Chinchasuyu"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a part of the Inca
 #. Empire
-#: ../../data/tribes/initialization/amazons/units.lua:1842
+#: ../../data/tribes/initialization/amazons/units.lua:1866
 msgctxt "warehousename"
 msgid "Kuntisuyu"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after a part of the Inca
 #. Empire
-#: ../../data/tribes/initialization/amazons/units.lua:1844
+#: ../../data/tribes/initialization/amazons/units.lua:1868
 msgctxt "warehousename"
 msgid "Qullasuyu"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1846
+#: ../../data/tribes/initialization/amazons/units.lua:1870
 msgctxt "warehousename"
 msgid "Achuar"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1848
+#: ../../data/tribes/initialization/amazons/units.lua:1872
 msgctxt "warehousename"
 msgid "Aguaruna"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1850
+#: ../../data/tribes/initialization/amazons/units.lua:1874
 msgctxt "warehousename"
 msgid "Aikanã"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1852
+#: ../../data/tribes/initialization/amazons/units.lua:1876
 msgctxt "warehousename"
 msgid "Aimoré"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1854
+#: ../../data/tribes/initialization/amazons/units.lua:1878
 msgctxt "warehousename"
 msgid "Amahuaca"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1856
+#: ../../data/tribes/initialization/amazons/units.lua:1880
 msgctxt "warehousename"
 msgid "Amuesha"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1858
+#: ../../data/tribes/initialization/amazons/units.lua:1882
 msgctxt "warehousename"
 msgid "Apiacá"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1860
+#: ../../data/tribes/initialization/amazons/units.lua:1884
 msgctxt "warehousename"
 msgid "Arapaco"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1862
+#: ../../data/tribes/initialization/amazons/units.lua:1886
 msgctxt "warehousename"
 msgid "Arara"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1864
+#: ../../data/tribes/initialization/amazons/units.lua:1888
 msgctxt "warehousename"
 msgid "Ararandeura"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1866
+#: ../../data/tribes/initialization/amazons/units.lua:1890
 msgctxt "warehousename"
 msgid "Arasairi"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1868
+#: ../../data/tribes/initialization/amazons/units.lua:1892
 msgctxt "warehousename"
 msgid "Araueté"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1870
+#: ../../data/tribes/initialization/amazons/units.lua:1894
 msgctxt "warehousename"
 msgid "Awá"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1872
+#: ../../data/tribes/initialization/amazons/units.lua:1896
 msgctxt "warehousename"
 msgid "Aweti"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1874
+#: ../../data/tribes/initialization/amazons/units.lua:1898
 msgctxt "warehousename"
 msgid "Banawá"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1876
+#: ../../data/tribes/initialization/amazons/units.lua:1900
 msgctxt "warehousename"
 msgid "Baniwa"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1878
+#: ../../data/tribes/initialization/amazons/units.lua:1902
 msgctxt "warehousename"
 msgid "Barasana"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1880
+#: ../../data/tribes/initialization/amazons/units.lua:1904
 msgctxt "warehousename"
 msgid "Caeté"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1882
+#: ../../data/tribes/initialization/amazons/units.lua:1906
 msgctxt "warehousename"
 msgid "Chaywita"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1884
+#: ../../data/tribes/initialization/amazons/units.lua:1908
 msgctxt "warehousename"
 msgid "Cocama"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1886
+#: ../../data/tribes/initialization/amazons/units.lua:1910
 msgctxt "warehousename"
 msgid "Enawene Nawe"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1888
+#: ../../data/tribes/initialization/amazons/units.lua:1912
 msgctxt "warehousename"
 msgid "Goitacaz"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1890
+#: ../../data/tribes/initialization/amazons/units.lua:1914
 msgctxt "warehousename"
 msgid "Himarimã"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1892
+#: ../../data/tribes/initialization/amazons/units.lua:1916
 msgctxt "warehousename"
 msgid "Huambisa"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1894
+#: ../../data/tribes/initialization/amazons/units.lua:1918
 msgctxt "warehousename"
 msgid "Irántxe"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1896
+#: ../../data/tribes/initialization/amazons/units.lua:1920
 msgctxt "warehousename"
 msgid "Kachá"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1898
+#: ../../data/tribes/initialization/amazons/units.lua:1922
 msgctxt "warehousename"
 msgid "Kagwahiva"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1900
+#: ../../data/tribes/initialization/amazons/units.lua:1924
 msgctxt "warehousename"
 msgid "Kamayurá"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1902
+#: ../../data/tribes/initialization/amazons/units.lua:1926
 msgctxt "warehousename"
 msgid "Kanamarí"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1904
+#: ../../data/tribes/initialization/amazons/units.lua:1928
 msgctxt "warehousename"
 msgid "Kapixaná"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1906
+#: ../../data/tribes/initialization/amazons/units.lua:1930
 msgctxt "warehousename"
 msgid "Kareneri"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1908
+#: ../../data/tribes/initialization/amazons/units.lua:1932
 msgctxt "warehousename"
 msgid "Karitiâna"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1910
+#: ../../data/tribes/initialization/amazons/units.lua:1934
 msgctxt "warehousename"
 msgid "Kaxinawá"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1912
+#: ../../data/tribes/initialization/amazons/units.lua:1936
 msgctxt "warehousename"
 msgid "Kayapo"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1914
+#: ../../data/tribes/initialization/amazons/units.lua:1938
 msgctxt "warehousename"
 msgid "Kobeua"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1916
+#: ../../data/tribes/initialization/amazons/units.lua:1940
 msgctxt "warehousename"
 msgid "Korubu"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1918
+#: ../../data/tribes/initialization/amazons/units.lua:1942
 msgctxt "warehousename"
 msgid "Kuikoro"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1920
+#: ../../data/tribes/initialization/amazons/units.lua:1944
 msgctxt "warehousename"
 msgid "Machiguenga"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1922
+#: ../../data/tribes/initialization/amazons/units.lua:1946
 msgctxt "warehousename"
 msgid "Majaguaje"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1924
+#: ../../data/tribes/initialization/amazons/units.lua:1948
 msgctxt "warehousename"
 msgid "Makuna"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1926
+#: ../../data/tribes/initialization/amazons/units.lua:1950
 msgctxt "warehousename"
 msgid "Marajoara"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1928
+#: ../../data/tribes/initialization/amazons/units.lua:1952
 msgctxt "warehousename"
 msgid "Marubo"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1930
+#: ../../data/tribes/initialization/amazons/units.lua:1954
 msgctxt "warehousename"
 msgid "Mayoruna"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1932
+#: ../../data/tribes/initialization/amazons/units.lua:1956
 msgctxt "warehousename"
 msgid "Miriti"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1934
+#: ../../data/tribes/initialization/amazons/units.lua:1958
 msgctxt "warehousename"
 msgid "Nahukuá"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1936
+#: ../../data/tribes/initialization/amazons/units.lua:1960
 msgctxt "warehousename"
 msgid "Nambikwara"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1938
+#: ../../data/tribes/initialization/amazons/units.lua:1962
 msgctxt "warehousename"
 msgid "Ocaina"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1940
+#: ../../data/tribes/initialization/amazons/units.lua:1964
 msgctxt "warehousename"
 msgid "Omagua"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1942
+#: ../../data/tribes/initialization/amazons/units.lua:1966
 msgctxt "warehousename"
 msgid "Pacanawa"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1944
+#: ../../data/tribes/initialization/amazons/units.lua:1968
 msgctxt "warehousename"
 msgid "Pacawara"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1946
+#: ../../data/tribes/initialization/amazons/units.lua:1970
 msgctxt "warehousename"
 msgid "Pirahã"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1948
+#: ../../data/tribes/initialization/amazons/units.lua:1972
 msgctxt "warehousename"
 msgid "Potiguara"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1950
+#: ../../data/tribes/initialization/amazons/units.lua:1974
 msgctxt "warehousename"
 msgid "Saraguro"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1952
+#: ../../data/tribes/initialization/amazons/units.lua:1976
 msgctxt "warehousename"
 msgid "Sateré-Mawé"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1954
+#: ../../data/tribes/initialization/amazons/units.lua:1978
 msgctxt "warehousename"
 msgid "Suruwaha"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1956
+#: ../../data/tribes/initialization/amazons/units.lua:1980
 msgctxt "warehousename"
 msgid "Suyá"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1958
+#: ../../data/tribes/initialization/amazons/units.lua:1982
 msgctxt "warehousename"
 msgid "Tabajara"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1960
+#: ../../data/tribes/initialization/amazons/units.lua:1984
 msgctxt "warehousename"
 msgid "Tacana"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1962
+#: ../../data/tribes/initialization/amazons/units.lua:1986
 msgctxt "warehousename"
 msgid "Tamoio"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1964
+#: ../../data/tribes/initialization/amazons/units.lua:1988
 msgctxt "warehousename"
 msgid "Tapirapé"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1966
+#: ../../data/tribes/initialization/amazons/units.lua:1990
 msgctxt "warehousename"
 msgid "Tariana"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1968
+#: ../../data/tribes/initialization/amazons/units.lua:1992
 msgctxt "warehousename"
 msgid "Temiminó"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1970
+#: ../../data/tribes/initialization/amazons/units.lua:1994
 msgctxt "warehousename"
 msgid "Terena"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1972
+#: ../../data/tribes/initialization/amazons/units.lua:1996
 msgctxt "warehousename"
 msgid "Toromona"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1974
+#: ../../data/tribes/initialization/amazons/units.lua:1998
 msgctxt "warehousename"
 msgid "Tremembé"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1976
+#: ../../data/tribes/initialization/amazons/units.lua:2000
 msgctxt "warehousename"
 msgid "Tsimané"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1978
+#: ../../data/tribes/initialization/amazons/units.lua:2002
 msgctxt "warehousename"
 msgid "Tupinambá"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1980
+#: ../../data/tribes/initialization/amazons/units.lua:2004
 msgctxt "warehousename"
 msgid "Tupiniquim"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1982
+#: ../../data/tribes/initialization/amazons/units.lua:2006
 msgctxt "warehousename"
 msgid "Uru-Eu-Wau-Wau"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1984
+#: ../../data/tribes/initialization/amazons/units.lua:2008
 msgctxt "warehousename"
 msgid "Waorani"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1986
+#: ../../data/tribes/initialization/amazons/units.lua:2010
 msgctxt "warehousename"
 msgid "Waurá"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1988
+#: ../../data/tribes/initialization/amazons/units.lua:2012
 msgctxt "warehousename"
 msgid "Yaminawá"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1990
+#: ../../data/tribes/initialization/amazons/units.lua:2014
 msgctxt "warehousename"
 msgid "Yaruna"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1992
+#: ../../data/tribes/initialization/amazons/units.lua:2016
 msgctxt "warehousename"
 msgid "Yawalipiti"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1994
+#: ../../data/tribes/initialization/amazons/units.lua:2018
 msgctxt "warehousename"
 msgid "Yawanawa"
 msgstr ""
 
 #. TRANSLATORS: This Amazonian warehouse is named after an indigenous people
 #. in the Amazon Basin
-#: ../../data/tribes/initialization/amazons/units.lua:1996
+#: ../../data/tribes/initialization/amazons/units.lua:2020
 msgctxt "warehousename"
 msgid "Yora"
 msgstr ""
 
 #. TRANSLATORS: Productivity label on an Amazon building if there is 1 worker
 #. missing
-#: ../../data/tribes/initialization/amazons/units.lua:2002
+#: ../../data/tribes/initialization/amazons/units.lua:2026
 msgctxt "amazons"
 msgid "Worker missing"
 msgstr ""
 
 #. TRANSLATORS: Productivity label on an Amazon building if there is 1 worker
 #. coming
-#: ../../data/tribes/initialization/amazons/units.lua:2004
+#: ../../data/tribes/initialization/amazons/units.lua:2028
 msgctxt "amazons"
 msgid "Worker is coming"
 msgstr ""
 
 #. TRANSLATORS: Productivity label on an Amazon building if there is more than
 #. 1 worker missing. If you need plural forms here, please let us know.
-#: ../../data/tribes/initialization/amazons/units.lua:2006
+#: ../../data/tribes/initialization/amazons/units.lua:2030
 msgctxt "amazons"
 msgid "Workers missing"
 msgstr ""
 
 #. TRANSLATORS: Productivity label on an Amazon building if there is more than
 #. 1 worker coming. If you need plural forms here, please let us know.
-#: ../../data/tribes/initialization/amazons/units.lua:2008
+#: ../../data/tribes/initialization/amazons/units.lua:2032
 msgctxt "amazons"
 msgid "Workers are coming"
 msgstr ""
 
 #. TRANSLATORS: Productivity label on an Amazon building if there is 1
 #. experienced worker missing
-#: ../../data/tribes/initialization/amazons/units.lua:2010
+#: ../../data/tribes/initialization/amazons/units.lua:2034
 msgctxt "amazons"
 msgid "Expert missing"
 msgstr ""
@@ -2960,14 +2976,14 @@ msgstr ""
 #. TRANSLATORS: Productivity label on an Amazon building if there is more than
 #. 1 experienced worker missing. If you need plural forms here, please let us
 #. know.
-#: ../../data/tribes/initialization/amazons/units.lua:2012
+#: ../../data/tribes/initialization/amazons/units.lua:2036
 msgctxt "amazons"
 msgid "Experts missing"
 msgstr ""
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. is the maximum number of soldier slots in the building.
-#: ../../data/tribes/initialization/amazons/units.lua:2026
+#: ../../data/tribes/initialization/amazons/units.lua:2050
 msgctxt "amazons_soldier"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
@@ -2975,7 +2991,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. TRANSLATORS: Number of Amazon soldiers stationed at a militarysite.
-#: ../../data/tribes/initialization/amazons/units.lua:2028
+#: ../../data/tribes/initialization/amazons/units.lua:2052
 msgctxt "amazons_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
@@ -2985,7 +3001,7 @@ msgstr[1] ""
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
 #. of soldier slots in the building
-#: ../../data/tribes/initialization/amazons/units.lua:2030
+#: ../../data/tribes/initialization/amazons/units.lua:2054
 msgctxt "amazons_soldier"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
@@ -2994,7 +3010,7 @@ msgstr[1] ""
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building.
-#: ../../data/tribes/initialization/amazons/units.lua:2032
+#: ../../data/tribes/initialization/amazons/units.lua:2056
 msgctxt "amazons_soldier"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
@@ -6245,6 +6261,20 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:972
 msgid ""
 "Granite is a basic building material and can be dug up by a granite mine."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
+#. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
+#: ../../data/tribes/initialization/barbarians/units.lua:930
+#: ../../data/tribes/initialization/frisians/units.lua:1328
+msgid "There is only a little bit of granite here."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
+#. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
+#: ../../data/tribes/initialization/barbarians/units.lua:974
+#: ../../data/tribes/initialization/frisians/units.lua:1372
+msgid "There is a lot of granite here."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a Barbarian warehouse: Headquarters
