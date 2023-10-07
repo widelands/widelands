@@ -1769,7 +1769,7 @@ msgstr "eene Steenschöttel to maken"
 #. TRANSLATORS: Completed/Skipped/Did not start making firestones because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:194
 msgid "making firestones"
-msgstr ""
+msgstr "Füürstenen to maken"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a wooden spear because
 #. ...
@@ -1832,7 +1832,7 @@ msgstr "Steen-Bargwark"
 #. TRANSLATORS: Completed/Skipped/Did not start mining because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:51
 msgid "mining"
-msgstr ""
+msgstr "oftoboen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:64
@@ -1859,11 +1859,11 @@ msgstr "Blinkerflint oftoboen"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:91
 msgid "No Stones"
-msgstr ""
+msgstr "Keene Stenen"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:92
 msgid "Main Stone Vein Exhausted"
-msgstr ""
+msgstr "Steen-Ader is leeg"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:94
 msgctxt "amazons_building"
@@ -5156,13 +5156,13 @@ msgstr "Keene Mineraalen"
 #: ../../data/tribes/immovables/resi/amazons/stones_1/init.lua:8
 msgctxt "resource_indicator"
 msgid "Some Quartz"
-msgstr ""
+msgstr "Een bietje Blinkerflint"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/amazons/stones_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Quartz"
-msgstr ""
+msgstr "Een Bült vun Blinkerflint"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/coal_1/init.lua:8
@@ -8415,7 +8415,7 @@ msgstr "Füürtange"
 #: ../../data/tribes/wares/firestones/init.lua:8
 msgctxt "ware"
 msgid "Firestones"
-msgstr ""
+msgstr "Füürstenen"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/fish/init.lua:8

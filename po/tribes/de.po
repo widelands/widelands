@@ -10,6 +10,7 @@
 # FIRST AUTHOR <nasenbaer_peter@sourceforge.net>, 2008
 # GunChleoc, 2015,2018
 # Hybrid Dog, 2015
+# Iwan Gabovitch, 2023
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
@@ -1784,7 +1785,7 @@ msgstr "Die Herstellung einer Steinschüssel"
 #. TRANSLATORS: Completed/Skipped/Did not start making firestones because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:194
 msgid "making firestones"
-msgstr ""
+msgstr "Das Herstellen von Feuersteinen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a wooden spear because
 #. ...
@@ -1847,7 +1848,7 @@ msgstr "Steinmine"
 #. TRANSLATORS: Completed/Skipped/Did not start mining because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:51
 msgid "mining"
-msgstr ""
+msgstr "Das Abbauen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:64
@@ -1874,11 +1875,11 @@ msgstr "Das Abbauen von Bergkristall"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:91
 msgid "No Stones"
-msgstr ""
+msgstr "Kein Gestein"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:92
 msgid "Main Stone Vein Exhausted"
-msgstr ""
+msgstr "Hauptgesteinsader erschöpft"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:94
 msgctxt "amazons_building"
@@ -5171,13 +5172,13 @@ msgstr "Keine Rohstoffe"
 #: ../../data/tribes/immovables/resi/amazons/stones_1/init.lua:8
 msgctxt "resource_indicator"
 msgid "Some Quartz"
-msgstr ""
+msgstr "Wenig Bergkristall"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/amazons/stones_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Quartz"
-msgstr ""
+msgstr "Viel Bergkristall"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/coal_1/init.lua:8
@@ -8430,7 +8431,7 @@ msgstr "Feuerzange"
 #: ../../data/tribes/wares/firestones/init.lua:8
 msgctxt "ware"
 msgid "Firestones"
-msgstr ""
+msgstr "Feuersteine"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/fish/init.lua:8
