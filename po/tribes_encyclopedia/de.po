@@ -10,6 +10,7 @@
 # FIRST AUTHOR <nasenbaer_peter@sourceforge.net>, 2008
 # GunChleoc, 2015
 # Hybrid Dog, 2015
+# Iwan Gabovitch, 2023
 # Jonas Richardsen <jonas.richardsen@isdas.de>, 2017
 # Klaus Halfmann <klaus.halfmann@arcor.de>, 2022-2023
 # millimarg, 2015
@@ -30,7 +31,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-10-05 02:30+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2023\n"
+"Last-Translator: Iwan Gabovitch, 2023\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -214,7 +215,7 @@ msgstr "Die Amazonen verwenden Stein, um Werkzeuge und auch Waffen herzustellen.
 #: ../../data/tribes/initialization/amazons/units.lua:116
 msgctxt "ware"
 msgid "Amazons use quartz for sharp tools and weapons."
-msgstr ""
+msgstr "Amazonen verwenden Bergkristall für scharfe Werkzeuge und Waffen."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Quartz, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:118
@@ -222,7 +223,7 @@ msgctxt "amazons_ware"
 msgid ""
 "It is also a building material for some advanced buildings. It is produced "
 "in stone mines."
-msgstr ""
+msgstr "Er ist auch ein Baumaterial für einige verbesserte Gebäude. Er wird in Steinminen gewonnen."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Balsa
 #: ../../data/tribes/initialization/amazons/units.lua:129
@@ -402,7 +403,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Picks are used by stonecutters to cut granite from rocks or mine granite and"
 " quartz in stone mines."
-msgstr ""
+msgstr "Spitzhacken werden von Steinhauerinnen verwendet, um Stein aus Felsen oder in Minen, oder Bergkristall in Steinminen zu hauen."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for a Barbarian ware: Felling Ax, part 1
@@ -514,7 +515,7 @@ msgstr "Steinschüsseln werden zum Waschen und Schmelzen von Goldstaub verwendet
 #: ../../data/tribes/initialization/amazons/units.lua:424
 msgctxt "amazons_ware"
 msgid "Firestones are used to light the fires of charcoal kilns and furnaces."
-msgstr ""
+msgstr "Feuerstein wird zum Anzünden der Feuer von Köhlereien und Schmelzöfen verwendet."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Wooden Spear, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:435
@@ -657,7 +658,7 @@ msgctxt "amazons_worker"
 msgid ""
 "Cuts blocks of granite out of rocks in the vicinity or mines granite and "
 "quartz in stone mines."
-msgstr ""
+msgstr "Schneidet Steinblöcke aus den Felsen in der Umgebung oder baut Stein und Bergkristall in Steinminen ab."
 
 #. TRANSLATORS: Helptext for an Amazon worker: Woodcutter
 #: ../../data/tribes/initialization/amazons/units.lua:618
@@ -1056,7 +1057,7 @@ msgstr "Stein ist ein grundlegendes Baumaterial und kann von einer Steinmine gef
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1224
 msgid "There is only a little bit of quartz here."
-msgstr ""
+msgstr "Hier gibt es nur wenig Bergkristall."
 
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an Atlantean resource indicator: Gold, part 2
@@ -1074,7 +1075,7 @@ msgstr "Hier gibt es viel Gold."
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1246
 msgid "There is a lot of quartz here."
-msgstr ""
+msgstr "Hier gibt es viel Bergkristall."
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an Atlantean immovable: Ship Under Construction
@@ -1560,7 +1561,7 @@ msgstr "Schokolade ist unverzichtbar für die Ausbildung der Kriegerinnen."
 #: ../../data/tribes/initialization/amazons/units.lua:1531
 msgctxt "amazons_building"
 msgid "Digs granite and quartz out of the ground in mountain terrain."
-msgstr ""
+msgstr "Gräbt Stein und Bergkristall aus dem Boden von bergigem Gelände aus."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Stone Mine
 #: ../../data/tribes/initialization/amazons/units.lua:1533
@@ -1569,7 +1570,7 @@ msgctxt "amazons_building"
 msgid ""
 "The stone mine can produce one slab of each kind of stone in %s on average "
 "if the supply with rations is steady and the mine is not worn out."
-msgstr ""
+msgstr "Die Steinmine kann einen Block einer Steinart in durchschnittlich %s herstellen, wenn der Nachschub an Rationen stetig ist und die Mine nicht ausgebeutet ist."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Gold Digger
 #. Dwelling

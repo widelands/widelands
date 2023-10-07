@@ -196,7 +196,7 @@ msgstr "De Amazonen bruken Flint ok, um Warktüüg un Wapens to maken. ’t word
 #: ../../data/tribes/initialization/amazons/units.lua:116
 msgctxt "ware"
 msgid "Amazons use quartz for sharp tools and weapons."
-msgstr ""
+msgstr "De Amazonen bruken Blinkerflint för scharpes Warktüüg un Wapens."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Quartz, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:118
@@ -204,7 +204,7 @@ msgctxt "amazons_ware"
 msgid ""
 "It is also a building material for some advanced buildings. It is produced "
 "in stone mines."
-msgstr ""
+msgstr "’t word ok tum Bauen vun een paar grotern Husen bruukt. ’t word in Steen-Bargwarken produzeert."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Balsa
 #: ../../data/tribes/initialization/amazons/units.lua:129
@@ -384,7 +384,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Picks are used by stonecutters to cut granite from rocks or mine granite and"
 " quartz in stone mines."
-msgstr ""
+msgstr "Flinthauersken bruken Pickhacken, um Flint ut Stenen to slagem of in Bargwarken Flint un Blinkerflint oftoboen."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for a Barbarian ware: Felling Ax, part 1
@@ -496,7 +496,7 @@ msgstr "Steenschöttels bruukt man, um Gold to waschen un de Goldstoff to smelte
 #: ../../data/tribes/initialization/amazons/units.lua:424
 msgctxt "amazons_ware"
 msgid "Firestones are used to light the fires of charcoal kilns and furnaces."
-msgstr ""
+msgstr "Füürstenen bruukt man, um dat Füür in de Holtköhl-Brannereen un Smeltereen togangtomaken."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Wooden Spear, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:435
@@ -639,7 +639,7 @@ msgctxt "amazons_worker"
 msgid ""
 "Cuts blocks of granite out of rocks in the vicinity or mines granite and "
 "quartz in stone mines."
-msgstr ""
+msgstr "Sleit Flint ut Stenen in de Naberskupp of baut Flint un Blinkerflint in Steen-Bargwarken of."
 
 #. TRANSLATORS: Helptext for an Amazon worker: Woodcutter
 #: ../../data/tribes/initialization/amazons/units.lua:618
@@ -1038,7 +1038,7 @@ msgstr "Flint is een wichtig Baukraam un kann vun Steen-Bargwarken ofboot worden
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1224
 msgid "There is only a little bit of quartz here."
-msgstr ""
+msgstr "Hier is bedröövt minn Blinkerflint."
 
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an Atlantean resource indicator: Gold, part 2
@@ -1056,7 +1056,7 @@ msgstr "Hier is een Bült vun Gold."
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1246
 msgid "There is a lot of quartz here."
-msgstr ""
+msgstr "Hier is een Bült vun Blinkerflint."
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an Atlantean immovable: Ship Under Construction
@@ -1542,7 +1542,7 @@ msgstr "Schokolaa word bruukt, um amazoonsk Soldatsken uttobilden."
 #: ../../data/tribes/initialization/amazons/units.lua:1531
 msgctxt "amazons_building"
 msgid "Digs granite and quartz out of the ground in mountain terrain."
-msgstr ""
+msgstr "Grafft Flint un Blinkerflint ut de Eer in bargigen Gewesten."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Stone Mine
 #: ../../data/tribes/initialization/amazons/units.lua:1533
@@ -1551,7 +1551,7 @@ msgctxt "amazons_building"
 msgid ""
 "The stone mine can produce one slab of each kind of stone in %s on average "
 "if the supply with rations is steady and the mine is not worn out."
-msgstr ""
+msgstr "De Steen-Bargwark produzeert dör de Bank all %s een Deel vun elkeen Aard vun Steen, wenn de Versörgung good un dat Bargwark nich leeg is."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Gold Digger
 #. Dwelling
