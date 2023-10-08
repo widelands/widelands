@@ -41,7 +41,8 @@ jobs:
         # Test newest toolset
         toolset=$(curl https://raw.githubusercontent.com/actions/runner-images/main/images/win/toolsets/toolset-2022.json | \
                   jq '.visualStudio.workloads[]  | capture("Component\\.VC\\.(?<v>[0-9]+\\.[0-9]+)(\\.[0-9]+){2}\\.x86\\.x64") | .v' | \
-                  sort -u | tail -n 1)
+                  sort -u | tail -n 1 | tr -d '"')
+        echo "Current toolset is ${toolset}"
         echo "toolset=${toolset}" >> $GITHUB_OUTPUT
         echo "vcpkg_ref=\"$HEAD ${toolset}\"" >> $GITHUB_OUTPUT
       shell: bash
@@ -97,6 +98,6 @@ jobs:
           git config --global user.email "bunnybot@widelands.org"
           git add .github/scripts/vcpkg_ref
           git commit -m "Update vcpkg version"
-          # git push "https://bunnybot:${{ secrets.WIDELANDS_FORMAT_TOKEN }}@github.com/${{ github.repository }}.git" master
+          # TODO git push "https://bunnybot:${{ secrets.WIDELANDS_FORMAT_TOKEN }}@github.com/${{ github.repository }}.git" master
         fi
       shell: bash
