@@ -1,5 +1,6 @@
 param ($Config)
 
+echo "Debug: $env:VCPKG_TARGET_TRIPLET, $env:VCPKG_ROOT, $Config"
 cmake.exe -G "NMake Makefiles" .. `
 	-DVCPKG_TARGET_TRIPLET=$env:VCPKG_TARGET_TRIPLET `
 	-DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" `
