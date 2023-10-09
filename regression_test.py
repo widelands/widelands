@@ -269,6 +269,18 @@ def discover_scenario_tests(regexp, suite):
                     WidelandsTestCase(test_script,
                         scenario=wlmap, script=test_script))
 
+def discover_game_template_tests(regexp, suite):
+    """Add all tests using --new_game_from_template to the 'suite'."""
+    for templ in sorted(glob(os.path.join("test", "templates", "test*.wgt"))):
+        test_script = templ[:-3] + 'lua'
+        if not os.path.isfile(templ) or not os.path.isfile(test_script):
+            continue
+        if regexp is not None and not re.search(regexp, test_script):
+            continue
+        suite.addTest(
+                WidelandsTestCase(test_script,
+                    new_game_from_template=templ, script=test_script))
+
 def discover_editor_tests(regexp, suite):
     """Add all tests needing --editor to the 'suite'."""
     for wlmap in sorted(glob(os.path.join("test", "maps", "*"))):
@@ -298,6 +310,7 @@ def main():
     suite = unittest.TestSuite()
     discover_loadgame_tests(args.regexp, suite)
     discover_scenario_tests(args.regexp, suite)
+    discover_game_template_tests(args.regexp, suite)
     discover_editor_tests(args.regexp, suite)
 
     return unittest.TextTestRunner(verbosity=2).run(suite).wasSuccessful()
