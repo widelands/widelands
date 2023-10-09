@@ -282,7 +282,7 @@ jobs:
       run: |
         mkdir $env:GITHUB_WORKSPACE\build
         cd $env:GITHUB_WORKSPACE\build
-        cmake.exe -G "NMake Makefiles" .. -DVCPKG_TARGET_TRIPLET=${{ env.VCPKG_TARGET_TRIPLET }} -DCMAKE_TOOLCHAIN_FILE="${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake" -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TRANSLATIONS=ON -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DOPTION_BUILD_WINSTATIC=ON -DOPTION_USE_GLBINDING=ON -DOPTION_FORCE_EMBEDDED_MINIZIP=ON
+        & $env:GITHUB_WORKSPACE\.github\scripts\cmake_msvc.ps1 -Config ${{ matrix.config }}
         nmake
         if ("${{ matrix.config }}" -Match "Release") {
           strip -sv ./src/widelands.exe
