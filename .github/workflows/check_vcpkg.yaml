@@ -78,8 +78,7 @@ jobs:
         echo "result-${{ matrix.arch }}=true" >> $env:GITHUB_OUTPUT
   update:
     needs: vcpkg-packages
-    # TODO: github.repository == 'widelands/widelands' &&
-    if: ${{ needs.vcpkg-packages.outputs.result-x64 && needs.vcpkg-packages.outputs.result-x86 }}
+    if: ${{ github.repository == 'widelands/widelands' && needs.vcpkg-packages.outputs.result-x64 && needs.vcpkg-packages.outputs.result-x86 }}
     name: Commit new version
     runs-on: windows-2022
     steps:
@@ -97,6 +96,6 @@ jobs:
           git config --global user.email "bunnybot@widelands.org"
           git add .github/scripts/vcpkg_ref
           git commit -m "Update vcpkg version"
-          # TODO git push "https://bunnybot:${{ secrets.WIDELANDS_FORMAT_TOKEN }}@github.com/${{ github.repository }}.git" master
+          git push "https://bunnybot:${{ secrets.WIDELANDS_FORMAT_TOKEN }}@github.com/${{ github.repository }}.git" master
         fi
       shell: bash
