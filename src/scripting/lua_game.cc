@@ -117,6 +117,7 @@ const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
    PROP_RO(LuaPlayer, objectives),
    PROP_RO(LuaPlayer, defeated),
    PROP_RO(LuaPlayer, resigned),
+   PROP_RO(LuaPlayer, end_result),
    PROP_RO(LuaPlayer, messages),
    PROP_RO(LuaPlayer, inbox),
    PROP_RO(LuaPlayer, color),
@@ -205,6 +206,21 @@ int LuaPlayer::get_resigned(lua_State* L) {
 	const Widelands::PlayerEndStatus* p =
 	   get_egbase(L).player_manager()->get_player_end_status(player_number());
 	lua_pushboolean(L, p != nullptr && p->result == Widelands::PlayerEndResult::kResigned ? 1 : 0);
+	return 1;
+}
+
+/* RST
+   .. attribute:: end_result
+
+      .. versionadded:: 1.2
+
+      (RO) This player's end status: :const:`0`: lost, :const:`1`: won, :const:`2`: resigned,
+           :const:`255`: end status is not set
+*/
+int LuaPlayer::get_end_result(lua_State* L) {
+	const Widelands::PlayerEndStatus* p =
+	   get_egbase(L).player_manager()->get_player_end_status(player_number());
+	lua_pushinteger(L, static_cast<int>(p->result));
 	return 1;
 }
 
