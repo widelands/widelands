@@ -364,6 +364,10 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                   UI::PanelStyle::kFsMenu,
                   "server_name",
                   UI::FontStyle::kWarning,
+                  0,
+                  0,
+                  0,
+                  0,
                   "",
                   UI::Align::kRight) {
 
@@ -977,7 +981,7 @@ void AddOnsCtrl::refresh_remotes(const bool showall) {
 		std::string bug = _("a networking bug");
 		std::string err = format(_("Unable to fetch the list of available add-ons from "
 		                           "the server!<br>Error Message: %s"),
-		                         e.what());
+		                         richtext_escape(e.what()));
 		std::shared_ptr<AddOns::AddOnInfo> i = std::make_shared<AddOns::AddOnInfo>();
 		i->unlocalized_descname = title;
 		i->unlocalized_description = err;
@@ -1198,7 +1202,8 @@ void AddOnsCtrl::update_dependency_errors() {
 				   format(_("· ‘%1$s’ requires ‘%2$s’ which could not be found"),
 				          addon->first->descname(), requirement));
 			} else {
-				if (!search_result->second) {
+				if (!search_result->second &&
+				    AddOns::require_enabled(addon->first->category, search_result->first->category)) {
 					warn_requirements.push_back(format(_("· ‘%1$s’ requires ‘%2$s’ which is disabled"),
 					                                   addon->first->descname(),
 					                                   search_result->first->descname()));
@@ -1300,7 +1305,6 @@ void AddOnsCtrl::layout() {
 		int w;
 		int h;
 		server_name_.get_desired_size(&w, &h);
-		server_name_.set_size(w, h);
 		server_name_.set_pos(Vector2i(login_button_.get_x() - w - kRowButtonSpacing,
 		                              login_button_.get_y() + (login_button_.get_h() - h) / 2));
 	}

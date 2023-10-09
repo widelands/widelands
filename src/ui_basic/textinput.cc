@@ -20,6 +20,7 @@
 
 #include <algorithm>
 
+#include "base/log.h"
 #include "base/utf8.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
@@ -27,6 +28,8 @@
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "graphic/wordwrap.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "ui_basic/mouse_constants.h"
 #include "ui_basic/scrollbar.h"
 #include "wlapplication_options.h"
@@ -204,6 +207,8 @@ void AbstractTextInputPanel::Data::draw(RenderTarget& dst, bool with_caret) {
 }
 
 void AbstractTextInputPanel::layout() {
+	// Offset snaps the text panel to the start of input. Saved text always displays from beginning
+	d_->scrolloffset = get_text().length() / get_h();
 	Panel::layout();
 	d_->scrollbar.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
 }
@@ -458,6 +463,7 @@ bool AbstractTextInputPanel::handle_mousewheel(int32_t x, int32_t y, uint16_t mo
 }
 
 void AbstractTextInputPanel::set_caret_to_cursor_pos(int32_t x, int32_t y) {
+	x += d_->scrolloffset;
 	y += d_->scrollbar.get_scrollpos();
 
 	unsigned previous_line_index = d_->ww.offset_of_line_at(y);
@@ -815,12 +821,10 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			}
 
 			// Save history if active and text is not empty
-			if (history_active_ && !d_->text.empty()) {
-				for (unsigned i = kHistorySize - 1; i > 0; --i) {
-					history_[i] = history_[i - 1];
-				}
-				history_[0] = d_->text;
+			if (history_ != nullptr && !d_->text.empty()) {
+				history_->add_entry(d_->text);
 				history_position_ = -1;
+				history_->clear_tmp();
 			}
 
 			ok();
@@ -828,12 +832,18 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_UP:
 			// Load entry from history if active and text is not empty
-			if (history_active_) {
-				if (history_position_ > static_cast<int>(kHistorySize) - 2) {
-					history_position_ = kHistorySize - 2;
+			if (history_ != nullptr) {
+				if (history_position_ < 0) {
+					history_->set_tmp(d_->text);
 				}
-				if (!history_[++history_position_].empty()) {
-					d_->text = history_[history_position_];
+				++history_position_;
+				if (history_position_ >= history_->current_size()) {
+					history_position_ = history_->current_size() - 1;
+					return true;
+				}
+				const std::string& hist_prev = history_->get_entry(history_position_);
+				if (!hist_prev.empty()) {
+					d_->text = hist_prev;
 					set_caret_pos(d_->text.size());
 					d_->reset_selection();
 					changed();
@@ -844,12 +854,14 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_DOWN:
 			// Load entry from history if active and text is not equivalent to the current one
-			if (history_active_) {
-				if (history_position_ < 1) {
-					history_position_ = 1;
+			if (history_ != nullptr) {
+				--history_position_;
+				if (history_position_ < 0) {
+					history_position_ = -1;
 				}
-				if (history_[--history_position_] != d_->text) {
-					d_->text = history_[history_position_];
+				const std::string& hist_next = history_->get_entry(history_position_);
+				if (hist_next != d_->text) {
+					d_->text = hist_next;
 					set_caret_pos(d_->text.size());
 					d_->reset_selection();
 					changed();
@@ -1108,6 +1120,59 @@ void AbstractTextInputPanel::Data::refresh_ww() {
 
 	int32_t textheight = ww.height();
 	scrollbar.set_steps(textheight - owner.get_h() + 2 * get_style().background().margin());
+}
+
+void EditBoxHistory::add_entry(const std::string& new_entry) {
+	// Avoid duplicates next to each other
+	if (!entries_.empty() && new_entry == entries_.at(0)) {
+		return;
+	}
+	entries_.emplace(entries_.begin(), new_entry);
+	changed_ = true;
+	if (entries_.size() > max_size_) {
+		entries_.pop_back();
+	}
+}
+
+const std::string& EditBoxHistory::get_entry(int16_t position) const {
+	if (position < 0 || position >= static_cast<int>(entries_.size())) {
+		return tmp_;
+	}
+	return entries_.at(position);
+}
+
+void EditBoxHistory::load(const std::string& filename) {
+	FileRead fr;
+	if (fr.try_open(*g_fs, filename)) {
+		entries_.clear();
+		try {
+			char* line;
+			while ((line = fr.read_line()) != nullptr) {
+				add_entry(line);
+			}
+			// Only set it on success to allow next save() to try to fix problem
+			changed_ = false;
+		} catch (const std::exception& e) {
+			log_err(
+			   "Loading %s, line %" PRIuS ": %s", filename.c_str(), entries_.size() + 1, e.what());
+		}
+	}
+}
+
+void EditBoxHistory::save(const std::string& filename) {
+	if (!changed_) {
+		return;
+	}
+	try {
+		FileWrite fw;
+		for (auto it = entries_.rbegin(); it != entries_.rend(); ++it) {
+			fw.print_f("%s\n", it->c_str());
+		}
+		fw.write(*g_fs, filename);
+		changed_ = false;
+	} catch (const std::exception& e) {
+		log_err("Saving %s: %s", filename.c_str(), e.what());
+	}
 }
 
 }  // namespace UI

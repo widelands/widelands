@@ -36,9 +36,8 @@ color_tag(const RGBColor& c, const std::string& text1, const std::string& text2)
 	return format(_("%1$s %2$s"), StyleManager::color_tag(text1, c), text2);
 }
 
-StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registry)
+StockMenu::StockMenu(InteractivePlayer& plr, Registry& registry)
    : UI::UniqueWindow(&plr, UI::WindowStyle::kWui, "stock_menu", &registry, 480, 640, _("Stock")),
-     player_(plr),
      colors_(g_style_manager->building_statistics_style()),
      main_box_(this, UI::PanelStyle::kWui, "main_box", 0, 0, UI::Box::Vertical),
      tabs_(&main_box_, UI::TabPanelStyle::kWuiDark, "tabs"),
@@ -68,33 +67,39 @@ StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registr
                                      _("Stock is higher than the target"))))) {
 	set_center_panel(&main_box_);
 
-	all_wares_ = new StockMenuWaresDisplay(&tabs_, 0, 0, plr.player(), Widelands::wwWARE);
+	all_wares_ = new StockMenuWaresDisplay(&tabs_, 0, 0, plr.player(), Widelands::wwWARE, true);
 	tabs_.add("total_wares", g_image_cache->get(pic_tab_wares), all_wares_, _("Wares (total)"));
 
-	all_workers_ = new StockMenuWaresDisplay(&tabs_, 0, 0, plr.player(), Widelands::wwWORKER);
+	all_workers_ = new StockMenuWaresDisplay(&tabs_, 0, 0, plr.player(), Widelands::wwWORKER, true);
 	tabs_.add(
 	   "workers_total", g_image_cache->get(pic_tab_workers), all_workers_, _("Workers (total)"));
 
-	warehouse_wares_ = new StockMenuWaresDisplay(&tabs_, 0, 0, plr.player(), Widelands::wwWARE);
+	warehouse_wares_ =
+	   new StockMenuWaresDisplay(&tabs_, 0, 0, plr.player(), Widelands::wwWARE, false);
 	tabs_.add("wares_in_warehouses", g_image_cache->get(pic_tab_wares_warehouse), warehouse_wares_,
 	          _("Wares in warehouses"));
 
-	warehouse_workers_ = new StockMenuWaresDisplay(&tabs_, 0, 0, plr.player(), Widelands::wwWORKER);
+	warehouse_workers_ =
+	   new StockMenuWaresDisplay(&tabs_, 0, 0, plr.player(), Widelands::wwWORKER, false);
 	tabs_.add("workers_in_warehouses", g_image_cache->get(pic_tab_workers_warehouse),
 	          warehouse_workers_, _("Workers in warehouses"));
 
 	solid_icon_backgrounds_.changedto.connect([this](const bool b) {
+		dynamic_cast<Registry*>(registry_)->solid_icon_backgrounds = b;
 		all_wares_->set_solid_icon_backgrounds(!b);
 		all_workers_->set_solid_icon_backgrounds(!b);
 		warehouse_wares_->set_solid_icon_backgrounds(!b);
 		warehouse_workers_->set_solid_icon_backgrounds(!b);
 	});
+	tabs_.sigclicked.connect(
+	   [this]() { dynamic_cast<Registry*>(registry_)->active_tab = tabs_.active(); });
 
 	main_box_.add(&tabs_, UI::Box::Resizing::kExpandBoth);
 	main_box_.add(&solid_icon_backgrounds_, UI::Box::Resizing::kFullSize);
 
 	// Preselect the wares_in_warehouses tab
-	tabs_.activate(2);
+	tabs_.activate(registry.active_tab);
+	solid_icon_backgrounds_.set_state(registry.solid_icon_backgrounds);
 
 	initialization_complete();
 }
@@ -109,51 +114,6 @@ void StockMenu::layout() {
 		solid_icon_backgrounds_.get_desired_size(&w1, &h1);
 		tabs_.get_desired_size(&w2, &h2);
 		main_box_.set_size(w2, h1 + h2);
-	}
-}
-
-/*
-===============
-Push the current wares status to the WaresDisplay.
-===============
-*/
-void StockMenu::think() {
-	UI::UniqueWindow::think();
-
-	fill_total_waresdisplay(all_wares_, Widelands::wwWARE);
-	fill_total_waresdisplay(all_workers_, Widelands::wwWORKER);
-	fill_warehouse_waresdisplay(warehouse_wares_, Widelands::wwWARE);
-	fill_warehouse_waresdisplay(warehouse_workers_, Widelands::wwWORKER);
-}
-
-/**
- * Keep the list of wares repositories up-to-date (honoring that the set of
- * \ref Economy of a player may change)
- */
-void StockMenu::fill_total_waresdisplay(WaresDisplay* waresdisplay, Widelands::WareWorker type) {
-	waresdisplay->remove_all_warelists();
-	const Widelands::Player& player = *player_.get_player();
-	for (const auto& economy : player.economies()) {
-		if (economy.second->type() == type) {
-			waresdisplay->add_warelist(economy.second->get_wares_or_workers());
-		}
-	}
-}
-
-/**
- * Keep the list of wares repositories up-to-date (consider that the available
- * \ref Warehouse may change)
- */
-void StockMenu::fill_warehouse_waresdisplay(WaresDisplay* waresdisplay,
-                                            Widelands::WareWorker type) {
-	waresdisplay->remove_all_warelists();
-	for (const auto& economy : player_.player().economies()) {
-		if (economy.second->type() == type) {
-			for (const auto* warehouse : economy.second->warehouses()) {
-				waresdisplay->add_warelist(type == Widelands::wwWARE ? warehouse->get_wares() :
-                                                                   warehouse->get_workers());
-			}
-		}
 	}
 }
 

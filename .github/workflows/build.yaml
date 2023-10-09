@@ -89,8 +89,8 @@ jobs:
         python-version: 3.x
     - name: Generate documentation
       run: |
-        pip install sphinx
         cd doc/sphinx
+        pip install -r requirements.txt
         mkdir source/_static
         ./extract_rst.py
         sphinx-build -W -b json -d build/doctrees source build/json
@@ -332,7 +332,7 @@ jobs:
       with:
         arch: ${{ matrix.arch }}
         # Check https://github.com/actions/runner-images/blob/main/images/win/toolsets/toolset-2022.json for installed versions
-        toolset: 14.36
+        toolset: 14.37
     - name: Compiler
       env:
         VCPKG_ROOT: C:\vcpkg

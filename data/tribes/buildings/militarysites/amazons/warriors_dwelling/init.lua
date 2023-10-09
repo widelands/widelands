@@ -11,13 +11,12 @@ wl.Descriptions():new_militarysite_type {
    vision_range = 11,
 
    buildcost = {
-      ironwood = 2,
-      granite = 3,
+      ironwood = 3,
+      granite = 4,
    },
    return_on_dismantle = {
-      ironwood = 1,
+      ironwood = 2,
       granite = 2,
-
    },
 
    animation_directory = dirname,

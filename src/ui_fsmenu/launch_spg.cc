@@ -176,6 +176,12 @@ void LaunchSPG::clicked_ok() {
 			game_->set_game_controller(
 			   std::make_shared<SinglePlayerGameController>(*game_, true, playernumber));
 			game_->init_newgame(sp->settings());
+
+			auto custom_names = Widelands::read_custom_warehouse_ship_names();
+			Widelands::Player* player = game_->get_safe_player(playernumber);
+			player->set_shipnames(custom_names.first);
+			player->set_warehousenames(custom_names.second);
+
 			game_->run(Widelands::Game::StartGameType::kMap, "", "single_player");
 		}
 	} catch (const std::exception& e) {
@@ -187,7 +193,8 @@ void LaunchSPG::clicked_ok() {
 
 void LaunchSPG::layout() {
 	LaunchGame::layout();
-	player_setup_.force_new_dimensions(scale_factor * standard_height_);
+	player_setup_.force_new_dimensions(
+	   scale_factor * standard_height_, left_column_box_.get_inner_h());
 }
 
 }  // namespace FsMenu

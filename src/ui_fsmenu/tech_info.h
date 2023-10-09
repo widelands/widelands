@@ -38,6 +38,13 @@ struct TechInfoBox : public UI::Box {
 	enum class Type { kAbout, kMousewheelReport };
 
 	explicit TechInfoBox(UI::Panel* parent, TechInfoBox::Type t);
+
+	[[nodiscard]] const std::string& get_report() const {
+		return report_;
+	}
+
+private:
+	std::string report_;
 };
 
 }  // namespace FsMenu

@@ -48,7 +48,8 @@ struct MultiPlayerSetupGroup : public UI::Box {
 	                      uint32_t buth);
 	~MultiPlayerSetupGroup() override;
 
-	void force_new_dimensions(uint32_t max_width, uint32_t standard_element_height);
+	void
+	force_new_dimensions(uint32_t max_width, uint32_t max_height, uint32_t standard_element_height);
 	void update_players();
 
 private:
@@ -62,7 +63,7 @@ private:
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 
 	UI::Panel* launchgame_;
-	UI::Box clientbox_, playerbox_, scrollable_playerbox_;
+	UI::Box clientbox_, scrollable_clientbox_, playerbox_, scrollable_playerbox_;
 	UI::Textarea clients_, players_;
 	int32_t buth_;
 

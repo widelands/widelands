@@ -50,8 +50,6 @@
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
 
-#define CAN_OPEN_HYPERLINK (SDL_VERSION_ATLEAST(2, 0, 14))
-
 namespace {
 /**
  * This function replaces some HTML entities in strings, e.g. &nbsp;.

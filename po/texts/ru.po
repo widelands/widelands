@@ -9,6 +9,7 @@
 # Максим Дронь <dronmax@gmail.com>, 2015
 # CupIvan <mail@cupivan.ru>, 2015
 # Viktor Skachkov <awsswa59@gmail.com>, 2018-2020
+# Viktor Skachkov <awsswa59@gmail.com>, 2023
 # Yuriy Sokolov <lention@mail.ru>, 2015,2018,2022-2023
 # 6da4f49c4b78e697e34b24b2a66289f5, 2016
 # Владимир Шевцов, 2022
@@ -20,9 +21,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-05-01 02:42+0000\n"
+"POT-Creation-Date: 2023-08-24 02:15+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2018,2022-2023\n"
+"Last-Translator: Viktor Skachkov <awsswa59@gmail.com>, 2023\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -610,6 +611,12 @@ msgid ""
 "Most enhanced buildings need experienced workers. Do not enhance a building "
 "unless you have the necessary workers available."
 msgstr "Самым продвинутым зданиям нужны квалифицированные работники. Не улучшайте здание, пока нет требуемых работников."
+
+#: ../../data/txts/tips/crash.lua:7
+msgid ""
+"Widelands is creating an emergency save, so you can continue playing exactly"
+" where the game closed."
+msgstr "Widelands создает принудительное сохранение игры, так что вы можете продолжать играть именно там, где игра закрыта."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/editor.lua:8

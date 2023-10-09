@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2023 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Oi Suomi On! <oisuomion@protonmail.com>, 2023
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2023-01-04 20:43+0000\n"
+"Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2023\n"
 "Language-Team: Finnish (https://app.transifex.com/widelands/teams/35159/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,7 +22,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../data/campaigns/fri05.wmf/scripting/init.lua:46
 msgid "Note"
-msgstr ""
+msgstr "Huomautus"
 
 #: ../../data/campaigns/fri05.wmf/scripting/init.lua:47
 msgid ""
@@ -26,64 +30,72 @@ msgid ""
 "this scenario, but you will be at a disadvantage. I recommend that you "
 "complete the previous scenario first and then restart this mission."
 msgstr ""
+"Et ole nähtävästi suorittanut edellistä tehtävää. Voit siltikin pelata tämän"
+" näytännön, mutta tulet aloittamaan epäsuotuisassa asemassa. Suosittelen, "
+"että läpäiset edellisen tehtävän ensin ja aloitat tämän kyseisen tehtävän "
+"sitten uudelleen."
 
 #: ../../data/campaigns/fri05.wmf/scripting/init_p1.lua:2978
 #: ../../data/campaigns/fri05.wmf/scripting/tribes/helgoland/init.lua:7
 msgid "Helgoland"
-msgstr ""
+msgstr "Helgoland"
 
 #. TRANSLATORS: This Danish ship is named after the Capital of Denmark
 #: ../../data/campaigns/fri05.wmf/scripting/init_p2.lua:13
 msgid "København"
-msgstr ""
+msgstr "Kööpenhamina"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:34
 msgid "%1$d× %2$s"
-msgstr ""
+msgstr "%1$d× %2$s"
 
 #. TRANSLATORS: The placeholders are ware lists in a trade description, e.g.
 #. "2× Fish and 1× Honey → 1× Granite"
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:41
 msgid "%1$s → %2$s"
-msgstr ""
+msgstr "%1$s → %2$s"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:45
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:47
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:204
 msgid "Trade"
-msgstr ""
+msgstr "Kauppa"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:48
 msgid ""
 "You can not mine resources or quarry rocks on this island. Instead, you can "
 "trade local produce against other types of wares."
 msgstr ""
+"Et voi kaivaa raaka-aineita tai louhia kiviä tällä saarella. Näiden sijasta,"
+" voit kaupata paikallisia tuotteita muita tarvikkeita vastaan. "
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:49
 msgid ""
 "Any wares stored in a port will be traded. The trade prices are indicated by"
 " the following chart."
 msgstr ""
+"Kaikki tarvikkeet jotka satamaan säilötään kaupataan. Kauppahinnat on "
+"määritelty seuraavassa taulukossa."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:56
 msgid "Defeat the invaders"
-msgstr ""
+msgstr "Kukista tunkeilijat"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:58
 msgid "Defeat Atterdag’s Forces."
-msgstr ""
+msgstr "Kukista Atterdag:in joukot."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:59
 msgid "Destroy all the enemy’s buildings."
-msgstr ""
+msgstr "Tuhoa kaikki vihollisen rakennukset."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:65
 msgid "Block the bottleneck"
-msgstr ""
+msgstr "Tuki pullonkaula"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:67
 msgid "Block the Bottleneck."
-msgstr ""
+msgstr "Tuki pullonkaula."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:68
 msgid ""

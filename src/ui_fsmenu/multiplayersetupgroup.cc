@@ -67,14 +67,8 @@ struct MultiPlayerClientGroup : public UI::Box {
 	                    UI::ButtonStyle::kFsMenuSecondary),
 	     // Name needs to be initialized after the dropdown, otherwise the layout function will
 	     // crash.
-	     name(this,
-	          UI::PanelStyle::kFsMenu,
-	          format("label_name_%u", id),
-	          UI::FontStyle::kFsMenuLabel,
-	          0,
-	          0,
-	          0,
-	          0),
+	     name(
+	        this, UI::PanelStyle::kFsMenu, format("label_name_%u", id), UI::FontStyle::kFsMenuLabel),
 	     settings_(settings),
 	     id_(id),
 
@@ -687,6 +681,8 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const launchgame,
      npsb_(new NetworkPlayerSettingsBackend(settings_)),
      launchgame_(launchgame),
      clientbox_(this, UI::PanelStyle::kFsMenu, "client_box", 0, 0, UI::Box::Vertical),
+     scrollable_clientbox_(
+        &clientbox_, UI::PanelStyle::kFsMenu, "scrollable_clientbox", 0, 0, UI::Box::Vertical),
      playerbox_(
         this, UI::PanelStyle::kFsMenu, "player_box", 0, 0, UI::Box::Vertical, 0, 0, kPadding),
      scrollable_playerbox_(
@@ -712,18 +708,19 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const launchgame,
               _("Players"),
               UI::Align::kCenter),
      buth_(buth) {
+	scrollable_clientbox_.set_scrolling(true);
 	clientbox_.add(&clients_, Resizing::kAlign, UI::Align::kCenter);
 	clientbox_.add_space(3 * kPadding);
-	clientbox_.set_scrolling(true);
+	clientbox_.add(&scrollable_clientbox_, Resizing::kExpandBoth);
+
+	scrollable_playerbox_.set_scrolling(true);
+	playerbox_.add(&players_, Resizing::kAlign, UI::Align::kCenter);
+	playerbox_.add_space(kPadding);
+	playerbox_.add(&scrollable_playerbox_, Resizing::kExpandBoth);
 
 	add(&clientbox_, Resizing::kFullSize);
 	add_space(8 * kPadding);
 	add(&playerbox_, Resizing::kExpandBoth);
-	playerbox_.add(&players_, Resizing::kAlign, UI::Align::kCenter);
-	scrollable_playerbox_.set_scrolling(true);
-	playerbox_.add_space(kPadding);
-
-	playerbox_.add(&scrollable_playerbox_, Resizing::kExpandBoth);
 
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& n) {
 		if (n.action == NoteGameSettings::Action::kMap) {
@@ -752,9 +749,8 @@ void MultiPlayerSetupGroup::update_players() {
 	const size_t number_of_players = settings.players.size();
 
 	for (PlayerSlot i = multi_player_player_groups_.size(); i < number_of_players; ++i) {
-		multi_player_player_groups_.push_back(new MultiPlayerPlayerGroup(
-		   &scrollable_playerbox_, playerbox_.get_w() - UI::Scrollbar::kSize, buth_, i, settings_,
-		   npsb_.get()));
+		multi_player_player_groups_.push_back(
+		   new MultiPlayerPlayerGroup(&scrollable_playerbox_, 0, buth_, i, settings_, npsb_.get()));
 		scrollable_playerbox_.add(multi_player_player_groups_.at(i), Resizing::kFullSize);
 	}
 	for (auto& p : multi_player_player_groups_) {
@@ -768,8 +764,8 @@ void MultiPlayerSetupGroup::update_clients() {
 	if (number_of_users > multi_player_client_groups_.size()) {
 		for (uint32_t i = multi_player_client_groups_.size(); i < number_of_users; ++i) {
 			multi_player_client_groups_.push_back(new MultiPlayerClientGroup(
-			   launchgame_, &clientbox_, clientbox_.get_w(), buth_, i, settings_));
-			clientbox_.add(multi_player_client_groups_.at(i), Resizing::kFullSize);
+			   launchgame_, &scrollable_clientbox_, 0, buth_, i, settings_));
+			scrollable_clientbox_.add(multi_player_client_groups_.at(i), Resizing::kFullSize);
 		}
 	}
 	for (auto& c : multi_player_client_groups_) {
@@ -799,11 +795,17 @@ void MultiPlayerSetupGroup::draw(RenderTarget& dst) {
 }
 
 void MultiPlayerSetupGroup::force_new_dimensions(uint32_t max_width,
+                                                 uint32_t max_height,
                                                  uint32_t standard_element_height) {
 	buth_ = standard_element_height;
-	clientbox_.set_desired_size(max_width / 3, 0);
-	playerbox_.set_desired_size(0, 0);
+	uint32_t scroll_height = max_height - players_.get_h() - 4 * kPadding;
+	scrollable_playerbox_.set_max_size(0, scroll_height);
+	// Reset desired size to properly fit into scroll box
 	scrollable_playerbox_.set_desired_size(0, 0);
+
+	clients_.set_desired_size(max_width / 3, clients_.get_h());
+	scrollable_clientbox_.set_max_size(max_width / 3, scroll_height);
+	scrollable_clientbox_.set_desired_size(0, 0);
 
 	for (auto& multiPlayerClientGroup : multi_player_client_groups_) {
 		multiPlayerClientGroup->force_new_dimensions(standard_element_height);

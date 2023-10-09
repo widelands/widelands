@@ -68,6 +68,8 @@ struct Statebox : public Panel {
 	}
 	void set_state(bool on, bool send_signal = true);
 
+	void layout() override;
+
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
 	void draw_overlay(RenderTarget&) override;
@@ -82,7 +84,6 @@ protected:
 	std::vector<Recti> focus_overlay_rects() override;
 
 private:
-	void layout() override;
 	virtual void button_clicked() = 0;
 
 	enum Flags {

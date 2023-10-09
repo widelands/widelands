@@ -36,15 +36,14 @@ struct GameChatMenu : public UI::UniqueWindow {
 	                                         UI::UniqueWindow::Registry&,
 	                                         ChatProvider&);
 
-#ifndef NDEBUG  //  only in debug builds
-	             /**
-	              * Creates a chat window only for scripting in debug mode
-	              */
+	/**
+	 * Creates a chat window only for scripting when the --enable_development_testing_tools
+	 * command line option is used.
+	 */
 	static GameChatMenu* create_script_console(UI::Panel*,
 	                                           ChatColorForPlayer fn,
 	                                           UI::UniqueWindow::Registry&,
 	                                           ChatProvider&);
-#endif
 
 	/**
 	 * Configure the menu so that it is useful for writing chat messages.
@@ -53,11 +52,14 @@ struct GameChatMenu : public UI::UniqueWindow {
 	 */
 	bool enter_chat_message(bool close_on_send = true);
 
+	bool handle_textinput(const std::string& text) override;
+
 private:
 	GameChatMenu(UI::Panel*,
 	             ChatColorForPlayer fn,
 	             UI::UniqueWindow::Registry&,
 	             ChatProvider&,
+	             UI::EditBoxHistory*,
 	             const std::string& title);
 
 	void restore() override;

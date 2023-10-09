@@ -73,9 +73,11 @@
 #include "network/host_game_settings_provider.h"
 #include "network/internet_gaming.h"
 #include "sound/sound_handler.h"
+#include "ui_basic/color_chooser.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/about.h"
+#include "ui_fsmenu/crash_report.h"
 #include "ui_fsmenu/launch_spg.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/main.h"
@@ -84,6 +86,7 @@
 #include "wlapplication_messages.h"
 #include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
+#include "wui/game_chat_panel.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 
@@ -248,6 +251,8 @@ private:
 
 }  // namespace
 
+std::string WLApplication::segfault_backtrace_dir;
+
 // Set up the homedir. Exit 1 if the homedir is illegal or the logger couldn't be initialized for
 // Windows.
 // Also sets the config directory. This defaults to $XDG_CONFIG_HOME/widelands/config on Unix.
@@ -304,6 +309,11 @@ void WLApplication::setup_homedir() {
 		g_fs->ensure_directory_exists("replays");
 		g_fs->ensure_directory_exists(kMapsDir + "/" + kMyMapsDir);
 		g_fs->ensure_directory_exists(kMapsDir + "/" + kDownloadedMapsDir);
+
+		g_fs->ensure_directory_exists(kCrashDir);
+		segfault_backtrace_dir = homedir_;
+		segfault_backtrace_dir += "/";
+		segfault_backtrace_dir += kCrashDir;
 	}
 
 #ifdef USE_XDG
@@ -457,6 +467,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	g_sh->register_songs("music", Songset::kIngame);
 	g_sh->register_songs("music", Songset::kCustom);
 
+	UI::ColorChooser::read_favorites_settings();
+
 	set_template_dir("");
 	initialize_g_addons();
 
@@ -465,14 +477,20 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	// register it once.
 	UI::Panel::register_click();
 
-	set_input_grab(get_config_bool("inputgrab", false));
-
 	// Make sure we didn't forget to read any global option
 	check_config_used();
 
 	// Save configuration now. Otherwise, the UUID and sound options
 	// are not saved, when the game crashes
 	write_config();
+
+	if (get_config_bool("save_chat_history", false)) {
+		g_chat_sent_history.load(kChatSentHistoryFile);
+	}
+	if (g_allow_script_console) {
+		log_info("Developer tools are enabled.");
+		g_script_console_history.load(kScriptConsoleHistoryFile);
+	}
 }
 
 /**
@@ -490,6 +508,13 @@ WLApplication::~WLApplication() {
 
 	shutdown_hardware();
 	shutdown_settings();
+
+	if (get_config_bool("save_chat_history", false)) {
+		g_chat_sent_history.save(kChatSentHistoryFile);
+	}
+	if (g_allow_script_console) {
+		g_script_console_history.save(kScriptConsoleHistoryFile);
+	}
 
 	assert(UI::g_fh);
 	delete UI::g_fh;
@@ -761,6 +786,12 @@ void WLApplication::init_and_run_game_from_template() {
 
 	game.set_game_controller(std::make_shared<SinglePlayerGameController>(game, true, playernumber));
 	game.init_newgame(settings->settings());
+
+	auto custom_names = Widelands::read_custom_warehouse_ship_names();
+	Widelands::Player* player = game.get_safe_player(playernumber);
+	player->set_shipnames(custom_names.first);
+	player->set_warehousenames(custom_names.second);
+
 	try {
 		game.run(Widelands::Game::StartGameType::kMap, script_to_run_, "single_player");
 	} catch (const std::exception& e) {
@@ -776,6 +807,8 @@ void WLApplication::init_and_run_game_from_template() {
 // dispatching events until it is time to quit.
 void WLApplication::run() {
 	GameLogicThread game_logic_thread(&should_die_);
+
+	std::unique_ptr<FsMenu::MainMenu> menu = check_crash_reports();
 
 	if (game_type_ == GameType::kEditor) {
 		g_sh->change_music(Songset::kIngame);
@@ -827,8 +860,10 @@ void WLApplication::run() {
 
 		g_sh->change_music(Songset::kMenu, 1000);
 
-		FsMenu::MainMenu m;
-		m.main_loop();
+		if (menu == nullptr) {
+			menu.reset(new FsMenu::MainMenu());
+		}
+		menu->main_loop();
 	}
 
 	g_sh->stop_music(500);
@@ -1081,32 +1116,6 @@ void WLApplication::warp_mouse(const Vector2i position) {
 				return;
 			}
 		}
-	}
-}
-
-/**
- * Changes input grab mode.
- *
- * This makes sure that the mouse cannot leave our window (and also that we get
- * mouse/keyboard input nearly unmodified, but we don't really care about that).
- *
- * \note This also cuts out any mouse-speed modifications that a generous window
- * manager might be doing.
- */
-void WLApplication::set_input_grab(bool grab) {
-	if (g_gr == nullptr) {
-		return;
-	}
-	SDL_Window* sdl_window = g_gr->get_sdlwindow();
-	if (grab) {
-		if (sdl_window != nullptr) {
-			SDL_SetWindowGrab(sdl_window, SDL_TRUE);
-		}
-	} else {
-		if (sdl_window != nullptr) {
-			SDL_SetWindowGrab(sdl_window, SDL_FALSE);
-		}
-		warp_mouse(mouse_position_);  // TODO(unknown): is this redundant?
 	}
 }
 
@@ -1564,6 +1573,20 @@ void WLApplication::handle_commandline_parameters() {
 		set_config_bool("auto_speed", false);
 	}
 
+	if (commandline_.count("enable_development_testing_tools") != 0u) {
+		g_allow_script_console = true;
+		commandline_.erase("enable_development_testing_tools");
+	}
+#ifndef NDEBUG
+	// Always enable in debug builds
+	g_allow_script_console = true;
+#endif
+
+	if (commandline_.count("write_syncstreams") != 0u) {
+		g_write_syncstreams = true;
+		commandline_.erase("write_syncstreams");
+	}
+
 	if (commandline_.count("version") != 0u) {
 		throw ParameterError(CmdLineVerbosity::None);  // No message on purpose
 	}
@@ -1684,7 +1707,15 @@ void WLApplication::emergency_save(UI::Panel* panel,
 		}
 	}
 
+	bool added_loader = false;
 	try {
+		if (!game.has_loader_ui()) {
+			// Shouldn't have one yet, but in an emergency situation, don't make any assumptions.
+			game.create_loader_ui(
+			   {"crash"}, true, game.map().get_background_theme(), game.map().get_background(), true);
+			added_loader = true;
+		}
+
 		if (replace_ctrl) {
 			game.set_game_controller(
 			   std::make_shared<SinglePlayerGameController>(game, true, playernumber));
@@ -1707,6 +1738,10 @@ void WLApplication::emergency_save(UI::Panel* panel,
 			   UI::WLMessageBox::MBoxType::kOk);
 			m.run<UI::Panel::Returncodes>();
 		}
+	}
+
+	if (added_loader) {
+		game.remove_loader_ui();
 	}
 }
 
@@ -1846,4 +1881,40 @@ bool WLApplication::redirect_output(std::string path) {
 
 	redirected_stdio_ = true;
 	return true;
+}
+
+std::unique_ptr<FsMenu::MainMenu> WLApplication::check_crash_reports() {
+	// First, delete very old crash reports
+	for (const std::string& filename : g_fs->filter_directory(
+	        kCrashDir, [](const std::string& fn) { return ends_with(fn, kOldCrashExtension); })) {
+		if (is_autogenerated_and_expired(filename, kCrashFilesKeepAroundTime)) {
+			log_info("Deleting stale crash file: %s\n", filename.c_str());
+			try {
+				g_fs->fs_unlink(filename);
+			} catch (const FileError& e) {
+				log_warn("WLApplication::check_crash_reports: File %s couldn't be deleted: %s\n",
+				         filename.c_str(), e.what());
+			}
+		}
+	}
+
+	// Now look for new, unreported crashes
+	FilenameSet crashes = g_fs->filter_directory(
+	   kCrashDir, [](const std::string& fn) { return ends_with(fn, kCrashExtension); });
+	if (crashes.empty()) {
+		return nullptr;
+	}
+
+	log_info("Found %" PRIuS " unsent crash reports.\nPlease consider submitting them to the "
+	         "Widelands Development Team under %s",
+	         crashes.size(), FsMenu::CrashReportWindow::kReportBugsURL);
+	for (const std::string& filename : crashes) {
+		log_info("- %s", filename.c_str());
+	}
+
+	std::unique_ptr<FsMenu::MainMenu> menu(new FsMenu::MainMenu(true));
+	FsMenu::CrashReportWindow reporter(*menu, crashes);
+	reporter.run<UI::Panel::Returncodes>();
+
+	return menu;
 }

@@ -78,6 +78,7 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
         0,
         0,
         chat,
+        &g_chat_sent_history,
         UI::PanelStyle::kFsMenu)) {
 
 	help_button_.sigclicked.connect([this]() { help_clicked(); });
@@ -93,13 +94,14 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
 
 	left_column_box_.add(&mpsg_, UI::Box::Resizing::kExpandBoth);
 	left_column_box_.add_space(8 * kPadding);
-	left_column_box_.add(chat_.get(), UI::Box::Resizing::kExpandBoth);
+	left_column_box_.add(chat_.get(), UI::Box::Resizing::kFullSize);
 
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& s) {
 		if (s.action == NoteGameSettings::Action::kMap) {
 			map_changed();
 		}
 	});
+	update_warn_desyncing_addon();
 	layout();
 	initialization_complete();
 }
@@ -118,10 +120,20 @@ void LaunchMPG::layout() {
 	help_button_.set_size(standard_height_, standard_height_);
 	help_button_.set_pos(Vector2i(get_inner_w() - help_button_.get_w(), 0));
 
-	mpsg_.force_new_dimensions(left_column_box_.get_w(), scale_factor * standard_height_);
+	// Reset size to fit left_column_box_, then relayout
+	if (chat_ != nullptr) {
+		chat_->set_desired_size(0, 0);
+	}
+	uint32_t h = left_column_box_.get_h() / 2 - 4 * kPadding;
+	// Assign heights to properly layout the scrollable box
+	mpsg_.force_new_dimensions(left_column_box_.get_w(), h, scale_factor * standard_height_);
+	if (chat_ != nullptr) {
+		chat_->set_desired_size(0, h);
+	}
+	LaunchGame::layout();
 
 	// set focus to chat input
-	if (chat_) {
+	if (chat_ != nullptr) {
 		chat_->focus_edit();
 	}
 }
@@ -139,6 +151,7 @@ void LaunchMPG::win_condition_selected() {
 		   t->has_key("peaceful_mode_allowed") && !t->get_bool("peaceful_mode_allowed");
 		update_peaceful_mode();
 		mpsg_.update_players();
+		layout();
 	}
 }
 
@@ -301,7 +314,8 @@ void LaunchMPG::refresh() {
 			win_condition_dropdown_.set_tooltip(_(t->get_string("description")));
 			win_condition_duration_.set_visible(t->has_key("configurable_time") &&
 			                                    t->get_bool("configurable_time"));
-			win_condition_duration_.set_value(settings_.get_win_condition_duration());
+			const int32_t duration = settings_.get_win_condition_duration();
+			win_condition_duration_.set_interval(duration, duration, false);
 		} catch (LuaScriptNotExistingError&) {
 			win_condition_dropdown_.set_label(_("Error"));
 			win_condition_dropdown_.set_tooltip(

@@ -111,6 +111,7 @@ struct GameClientImpl {
 	bool disconnect_called_;
 
 	void send_hello() const;
+	void send_custom_naming_lists() const;
 	void send_player_command(Widelands::PlayerCommand* /*pc*/) const;
 
 	void run_game(InteractiveGameBase* igb);
@@ -132,6 +133,23 @@ void GameClientImpl::send_player_command(Widelands::PlayerCommand* pc) const {
 	s.unsigned_8(NETCMD_PLAYERCOMMAND);
 	s.unsigned_32(game->get_gametime().get());
 	pc->serialize(s);
+	net->send(s);
+}
+
+void GameClientImpl::send_custom_naming_lists() const {
+	SendPacket s;
+	s.unsigned_8(NETCMD_CUSTOM_NAMING_LISTS);
+
+	auto names = Widelands::read_custom_warehouse_ship_names();
+	s.unsigned_32(names.first.size());
+	for (const std::string& name : names.first) {
+		s.string(name);
+	}
+	s.unsigned_32(names.second.size());
+	for (const std::string& name : names.second) {
+		s.string(name);
+	}
+
 	net->send(s);
 }
 
@@ -249,6 +267,7 @@ GameClient::~GameClient() {
 
 void GameClient::run() {
 	d->send_hello();
+	d->send_custom_naming_lists();
 	d->settings.multiplayer = true;
 	d->modal = new FsMenu::LaunchMPG(capsule_, *this, *this, *this, d->internet_);
 
@@ -263,6 +282,10 @@ void GameClient::run() {
 	NEVER_HERE();
 }
 
+const std::string& GameClient::get_local_playername() const {
+	return d->localplayername;
+}
+
 void GameClient::set_write_replay(bool replay) {
 	d->should_write_replay = replay;
 }
@@ -272,7 +295,7 @@ void GameClient::do_run(RecvPacket& packet) {
 
 	Widelands::Game game;
 	game.set_write_replay(d->should_write_replay);
-	game.set_write_syncstream(get_config_bool("write_syncstreams", true));
+	game.set_write_syncstream(g_write_syncstreams);
 	game.logic_rand_seed(packet.unsigned_32());
 
 	game.enabled_addons().clear();
@@ -291,6 +314,22 @@ void GameClient::do_run(RecvPacket& packet) {
 		}
 	}
 
+	std::map<Widelands::PlayerNumber, std::pair<std::set<std::string>, std::set<std::string>>>
+	   custom_naming_lists;
+	for (;;) {
+		Widelands::PlayerNumber number = packet.unsigned_8();
+		if (number == 0) {
+			break;
+		}
+
+		for (size_t i = packet.unsigned_32(); i > 0; --i) {
+			custom_naming_lists[number].first.insert(packet.string());
+		}
+		for (size_t i = packet.unsigned_32(); i > 0; --i) {
+			custom_naming_lists[number].second.insert(packet.string());
+		}
+	}
+
 	capsule_.set_visible(false);
 	try {
 		std::vector<std::string> tipstexts{"general_game", "multiplayer"};
@@ -302,18 +341,26 @@ void GameClient::do_run(RecvPacket& packet) {
 
 		d->game = &game;
 		InteractiveGameBase* igb = d->init_game(this, loader_ui);
+
+		for (const auto& lists : custom_naming_lists) {
+			Widelands::Player* player = game.get_safe_player(lists.first);
+			player->set_shipnames(lists.second.first);
+			player->set_warehousenames(lists.second.second);
+		}
+
 		if (d->panel_whose_mutex_needs_resetting_on_game_start != nullptr) {
 			d->panel_whose_mutex_needs_resetting_on_game_start->clear_current_think_mutex();
 			d->panel_whose_mutex_needs_resetting_on_game_start = nullptr;
 		}
+
 		d->run_game(igb);
 
 	} catch (const WLWarning& e) {
-		WLApplication::emergency_save(&capsule_.menu(), game, e.what(), 1, true, false);
+		WLApplication::emergency_save(&capsule_.menu(), game, e.what(), 1, false, false);
 		d->game = nullptr;
 	} catch (const std::exception& e) {
 		FsMenu::MainMenu& parent = capsule_.menu();  // make includes script happy
-		WLApplication::emergency_save(&parent, game, e.what());
+		WLApplication::emergency_save(&parent, game, e.what(), 1, false);
 		d->game = nullptr;
 		disconnect("CLIENT_CRASHED");
 		if (d->internet_) {
@@ -459,12 +506,12 @@ void GameClient::set_map(const std::string& /*mapname*/,
 	// client is not allowed to do this
 }
 
-void GameClient::send_cheating_info() {
+void GameClient::send_cheating_info(const std::string& code, const std::string& arg2) {
 	SendPacket packet;
 	packet.unsigned_8(NETCMD_SYSTEM_MESSAGE_CODE);
-	packet.string("CHEAT");
+	packet.string(code);
 	packet.string(d->localplayername);
-	packet.string("");
+	packet.string(arg2);
 	packet.string("");
 	d->net->send(packet);
 }
@@ -1102,6 +1149,16 @@ void GameClient::handle_system_message(RecvPacket& packet) {
 	                                   // c.sender remains empty to indicate a system message
 	d->chatmessages.push_back(c);
 	Notifications::publish(c);
+
+	if (g_allow_script_console && code == "CLIENT_HAS_JOINED_GAME") {
+		// Warn others
+		// TODO(tothxa): It would be better to only broadcast if we are the new user, otherwise send
+		//               it to the new user only, but
+		//                 1. We can only send commands to the host
+		//                 2. System messages are assembled and translated on each client, so
+		//                    individual players can't be @-addressed
+		send_cheating_info("CAN_CHEAT");
+	}
 }
 
 /**
