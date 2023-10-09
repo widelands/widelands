@@ -1,8 +1,6 @@
-param ($Config)
-
 cmake.exe -G "NMake Makefiles" .. `
 	-DVCPKG_TARGET_TRIPLET=$env:VCPKG_TARGET_TRIPLET `
-	-DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT\scripts\buildsystems\vcpkg.cmake" `
+	-DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" `
 	-DCMAKE_BUILD_TYPE="$Config" `
 	-DOPTION_BUILD_WEBSITE_TOOLS=OFF `
 	-DOPTION_BUILD_TRANSLATIONS=ON `

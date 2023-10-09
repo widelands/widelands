@@ -73,7 +73,8 @@ jobs:
       run: |
         mkdir $env:GITHUB_WORKSPACE\build
         cd $env:GITHUB_WORKSPACE\build
-        & $env:GITHUB_WORKSPACE\.github\scripts\cmake_msvc.ps1 -Config Debug
+        $Config=Debug
+        Get-Content $env:GITHUB_WORKSPACE\.github\scripts\cmake_msvc.ps1 | Invoke-Expression
         nmake
         echo "result-${{ matrix.arch }}=true" >> $env:GITHUB_OUTPUT
   update:
