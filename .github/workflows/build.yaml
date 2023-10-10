@@ -31,6 +31,10 @@ jobs:
         pushd src
         ../utils/find_unused_includes.py
         popd
+    - name: Check regression test coverage of starting and win conditions
+      run: |
+        pip install iniparse
+        python3 utils/check_template_test_coverage.py
 
   codecheck:
     runs-on: ubuntu-latest
