@@ -85,7 +85,7 @@ for test in tests:
         section = cfg[s]
 
         # Test's win condition
-        if s == "global":
+        if s == 'global':
             if not section.win_condition in win_conditions:
                 unknown_wc.append(section.win_condition)
             else:
