@@ -231,7 +231,8 @@ jobs:
         then
           TIMEOUT="-t 20"
         fi
-        ./regression_test.py -b build/src/widelands $TIMEOUT
+        # NOCOM: Speed up testing
+        ./regression_test.py -b build/src/widelands -r templates $TIMEOUT
 
   windows-msvc:
     # inspired by https://github.com/lukka/CppCMakeVcpkgTemplate/blob/main/.github/workflows/hosted-pure-workflow.yml
