@@ -201,7 +201,7 @@ msgstr "Az amazonok gránitot használnak a szerszámokhoz és a fegyverekhez. A
 #: ../../data/tribes/initialization/amazons/units.lua:116
 msgctxt "ware"
 msgid "Amazons use quartz for sharp tools and weapons."
-msgstr ""
+msgstr "Az amazonok kvarcot használnak az éles szerszámokhoz és a fegyverekhez."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Quartz, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:118
@@ -209,7 +209,7 @@ msgctxt "amazons_ware"
 msgid ""
 "It is also a building material for some advanced buildings. It is produced "
 "in stone mines."
-msgstr ""
+msgstr "Ezen kívül építőanyagként is használják a fejlettebb épületekhez. A kőbányákban bányásszák."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Balsa
 #: ../../data/tribes/initialization/amazons/units.lua:129
@@ -389,7 +389,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Picks are used by stonecutters to cut granite from rocks or mine granite and"
 " quartz in stone mines."
-msgstr ""
+msgstr "A csákányt a kőfejtők használják a kőfejtőkben és a kőbányákban."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for a Barbarian ware: Felling Ax, part 1
@@ -501,7 +501,7 @@ msgstr "A kőtálakat az aranymosáshoz és az aranypor olvasztásához használ
 #: ../../data/tribes/initialization/amazons/units.lua:424
 msgctxt "amazons_ware"
 msgid "Firestones are used to light the fires of charcoal kilns and furnaces."
-msgstr ""
+msgstr "A tűzkövet a faszénégető kemence és az olvasztókemence begyújtásához használják."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Wooden Spear, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:435
@@ -644,7 +644,7 @@ msgctxt "amazons_worker"
 msgid ""
 "Cuts blocks of granite out of rocks in the vicinity or mines granite and "
 "quartz in stone mines."
-msgstr ""
+msgstr "Gránittömböket váj ki a közelben található kövekből, vagy gránitot és kvarcot bányászik a kőbányában."
 
 #. TRANSLATORS: Helptext for an Amazon worker: Woodcutter
 #: ../../data/tribes/initialization/amazons/units.lua:618
@@ -1043,7 +1043,7 @@ msgstr "A gránit az egyik alapvető építőanyag. A kőbányákban bányássz�
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1224
 msgid "There is only a little bit of quartz here."
-msgstr ""
+msgstr "Csak kevés kvarc található itt."
 
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an Atlantean resource indicator: Gold, part 2
@@ -1061,7 +1061,7 @@ msgstr "Sok arany található itt."
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1246
 msgid "There is a lot of quartz here."
-msgstr ""
+msgstr "Sok kvarc található itt."
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an Atlantean immovable: Ship Under Construction
@@ -1547,7 +1547,7 @@ msgstr "A csokoládé nélkülözhetetlen az amazon katonák kiképzéséhez."
 #: ../../data/tribes/initialization/amazons/units.lua:1531
 msgctxt "amazons_building"
 msgid "Digs granite and quartz out of the ground in mountain terrain."
-msgstr ""
+msgstr "Hegyes terepen gránitot és kvarcot bányászik a földből."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Stone Mine
 #: ../../data/tribes/initialization/amazons/units.lua:1533
@@ -1556,7 +1556,7 @@ msgctxt "amazons_building"
 msgid ""
 "The stone mine can produce one slab of each kind of stone in %s on average "
 "if the supply with rations is steady and the mine is not worn out."
-msgstr ""
+msgstr "A kőbánya átlagosan %s alatt bányászik ki egy gránit- és egy kvarctömböt, ha folyamatos az ellátása harapnivalóval, és van még kibányászható kő a munkaterületén."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Gold Digger
 #. Dwelling
@@ -7235,7 +7235,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce granite in %s on "
 "average."
-msgstr "Ha az élelmiszerellátás folyamatos, akkor ez a bánya átlagosan %s alatt képes gránitot termelni."
+msgstr "Ha az élelmiszerellátás folyamatos, akkor ez a bánya átlagosan %s alatt termel egy gránittömböt."
 
 #. TRANSLATORS: Lore helptext for production site: Coal Mine, part 1
 #. TRANSLATORS: Lore helptext for production site: Deep Coal Mine, part 1
@@ -7271,7 +7271,7 @@ msgstr "A fa hasznos lehet a házi tűzhelyhez és melegen tart, de ha vassal é
 msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in %s on average."
-msgstr "Ha az élelmiszerellátás folyamatos, akkor ez a bánya átlagosan %senként képes szenet termelni."
+msgstr "Ha az élelmiszerellátás folyamatos, akkor ez a bánya átlagosan %s alatt termel egy darab szenet."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Iron Mine
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Deep Iron Mine
@@ -7313,7 +7313,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce iron ore in %s on "
 "average."
-msgstr "Ha az élelmiszerellátás folyamatos, akkor ez a bánya átlagosan %s alatt képes vasércet termelni."
+msgstr "Ha az élelmiszerellátás folyamatos, akkor ez a bánya átlagosan %s alatt termel egy darab vasércet."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Gold Mine
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Deep Gold Mine
@@ -7353,7 +7353,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in %s on "
 "average."
-msgstr "Ha az élelmiszerellátás folyamatos, akkor ez a bánya átlagosan %s alatt képes aranyércet termelni."
+msgstr "Ha az élelmiszerellátás folyamatos, akkor ez a bánya átlagosan %s alatt termel egy darab aranyércet."
 
 #. TRANSLATORS: Lore helptext for a Barbarian training site: Battle Arena
 #: ../../data/tribes/initialization/barbarians/units.lua:1669
@@ -11468,7 +11468,7 @@ msgctxt "empire_building"
 msgid ""
 "If the food supply is steady, this mine can produce iron ore in %s on "
 "average."
-msgstr "Ha az élelmiszerellátás folyamatos, akkor ez a bánya átlagosan %s alatt termel egy vasércet."
+msgstr "Ha az élelmiszerellátás folyamatos, akkor ez a bánya átlagosan %s alatt termel egy darab vasércet."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11522,7 +11522,7 @@ msgctxt "empire_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in %s on "
 "average."
-msgstr "Ha az élelmiszerellátás folyamatos, akkor ez a bánya átlagosan %s alatt termel egy aranyércet."
+msgstr "Ha az élelmiszerellátás folyamatos, akkor ez a bánya átlagosan %s alatt termel egy darab aranyércet."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -14872,7 +14872,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the coal mine can produce coal in %s on "
 "average."
-msgstr "Ha az élelmiszerellátás folyamatos, akkor a szénbánya átlagosan %senként képes szenet termelni."
+msgstr "Ha az élelmiszerellátás folyamatos, akkor a szénbánya átlagosan %s alatt termel egy darab szenet."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Deep Coal
 #. Mine
@@ -14882,7 +14882,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep coal mine can produce coal in %s on "
 "average."
-msgstr "Ha az élelmiszerellátás folyamatos, akkor a mély szénbánya átlagosan %senként képes szenet termelni."
+msgstr "Ha az élelmiszerellátás folyamatos, akkor a mély szénbánya átlagosan %s alatt termel egy darab szenet."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Iron Mine
 #: ../../data/tribes/initialization/frisians/units.lua:2055
@@ -14891,7 +14891,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the iron mine can produce one piece of iron "
 "ore in %s on average."
-msgstr "Ha az élelmiszerellátás folyamatos, akkor a vasércbánya átlagosan %s alatt termel egy vasércet."
+msgstr "Ha az élelmiszerellátás folyamatos, akkor a vasércbánya átlagosan %s alatt termel egy darab vasércet."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Deep Iron
 #. Mine
@@ -14901,7 +14901,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep iron mine can produce iron ore in %s "
 "on average."
-msgstr "Ha az élelmiszerellátás folyamatos, akkor a mély vasércbánya átlagosan %s alatt termel egy vasércet."
+msgstr "Ha az élelmiszerellátás folyamatos, akkor a mély vasércbánya átlagosan %s alatt termel egy darab vasércet."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Gold Mine
 #: ../../data/tribes/initialization/frisians/units.lua:2073
@@ -14910,7 +14910,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the gold mine can produce one piece of gold "
 "ore in %s on average."
-msgstr "Ha az élelmiszerellátás folyamatos, akkor az aranybánya átlagosan %s alatt termel egy aranyércet."
+msgstr "Ha az élelmiszerellátás folyamatos, akkor az aranybánya átlagosan %s alatt termel egy darab aranyércet."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Deep Gold
 #. Mine
@@ -14920,7 +14920,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep gold mine can produce gold ore in %s "
 "on average."
-msgstr "Ha az élelmiszerellátás folyamatos, akkor a mély aranybánya átlagosan %s alatt termel egy aranyércet."
+msgstr "Ha az élelmiszerellátás folyamatos, akkor a mély aranybánya átlagosan %s alatt termel egy darab aranyércet."
 
 #. TRANSLATORS: Lore helptext for a Frisian training site: Training Camp
 #: ../../data/tribes/initialization/frisians/units.lua:2091
