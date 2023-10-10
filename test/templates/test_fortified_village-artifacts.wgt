@@ -16,35 +16,35 @@ custom_starting_positions="false"
 tribe="amazons"
 init="fortified_village.lua"
 team="0"
-ai="empty"
+ai="normal"
 closed="false"
 
 [player_2]
 tribe="atlanteans"
 init="fortified_village.lua"
 team="0"
-ai="empty"
+ai="normal"
 closed="false"
 
 [player_3]
 tribe="barbarians"
 init="fortified_village.lua"
 team="0"
-ai="empty"
+ai="normal"
 closed="false"
 
 [player_4]
 tribe="empire"
 init="fortified_village.lua"
 team="0"
-ai="empty"
+ai="normal"
 closed="false"
 
 [player_5]
 tribe="frisians"
 init="fortified_village.lua"
 team="0"
-ai="empty"
+ai="normal"
 closed="false"
 
 [player_6]

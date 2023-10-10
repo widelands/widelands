@@ -13,35 +13,35 @@ custom_starting_positions="false"
 tribe="amazons"
 init="poor_hamlet.lua"
 team="0"
-ai="normal"
+ai="empty"
 closed="false"
 
 [player_2]
 tribe="atlanteans"
 init="poor_hamlet.lua"
 team="0"
-ai="normal"
+ai="empty"
 closed="false"
 
 [player_3]
 tribe="barbarians"
 init="poor_hamlet.lua"
 team="0"
-ai="normal"
+ai="empty"
 closed="false"
 
 [player_4]
 tribe="empire"
 init="poor_hamlet.lua"
 team="0"
-ai="normal"
+ai="empty"
 closed="false"
 
 [player_5]
 tribe="frisians"
 init="poor_hamlet.lua"
 team="0"
-ai="normal"
+ai="empty"
 closed="false"
 
 [player_6]
