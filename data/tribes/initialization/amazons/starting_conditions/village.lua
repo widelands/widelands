@@ -98,21 +98,6 @@ init = {
          }
       })
 
-   -- NOCOM for debugging
-   b = plr:get_buildings("amazons_stone_workshop")
-   if b[1] ~= nil then
-      print("Wares in stone workshop:")
-      for w,q in pairs(b[1]:get_inputs("all")) do
-         print(w .. ": ", q)
-      end
-      if b[1]:get_inputs("granite") < 6 then
-         error("Place building should have failed, but did not.")
-      end
-   else
-      error("No stone workshop")
-   end
-   -- NOCOM for debugging
-
 end
 }
 
