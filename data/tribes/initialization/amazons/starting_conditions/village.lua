@@ -79,8 +79,7 @@ init = {
 
       place_building_in_region(plr, "amazons_stone_workshop", sf:region(11), {
          inputs = {
-            -- NOCOM granite = 3,
-            granite = 8,
+            granite = 3,
             quartz = 5,
             log = 5,
             ironwood = 4,
@@ -106,7 +105,7 @@ init = {
       for w,q in pairs(b[1]:get_inputs("all")) do
          print(w .. ": ", q)
       end
-      if b[1]:get_inputs("granite") < 8 then
+      if b[1]:get_inputs("granite") < 6 then
          error("Place building should have failed, but did not.")
       end
    else
