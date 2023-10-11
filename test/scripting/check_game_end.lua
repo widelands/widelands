@@ -22,6 +22,14 @@ local function result_table(winners)
   return r
 end
 
+local time_fmt = "%02d:%06.3f"
+local function formatted_time()
+  local t = game.time / 1000
+  local m = math.floor(t / 60)
+  local s = t % 60
+  return time_fmt:bformat(m, s)
+end
+
 function check_win_condition(winners)
   run(function()
     -- 2 minutes grace period
@@ -35,6 +43,7 @@ function check_win_condition(winners)
     repeat
       sleep(5000)
       game_ended = mapview.windows.game_summary ~= nil
+      print("Checking end of game at " .. formatted_time())
     until game_ended or game.time > timeout
 
     -- Check timeout

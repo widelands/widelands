@@ -24,10 +24,12 @@ run(function()
   end
 
   for j,f in ipairs(ff) do
+    print(_("Placing forester for the winner at (%d,%d)"):bformat(f.x, f.y))
     b = p:place_building("empire_foresters_house", f, false, true)
     b:set_workers("empire_forester", 1)
     p:conquer(f, 8)
   end
+  -- Time limited win condition, let trees grow until the game ends.
 end)
 
 check_win_condition(winner)
