@@ -18,10 +18,11 @@ wl.Descriptions():new_ship_type {
    heal_per_second = 100,
 
    refit_cost = {
-      ironwood = 4,
-      balsa = 2,
-      rubber = 2,
-      rope = 2,
+      quartz = 2,
+      ironwood = 2,
+      balsa = 1,
+      rubber = 1,
+      rope = 4,
    },
 
    animation_directory = dirname,
