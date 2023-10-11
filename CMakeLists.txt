@@ -133,7 +133,12 @@ if (OPTION_BUILD_WINSTATIC)
   endif()
 endif()
 
-find_package (PythonInterp REQUIRED)
+if(${CMAKE_VERSION} VERSION_LESS 3.12.0)
+  # PythonInterp module has been deprecated since CMake 3.12.
+  find_package (PythonInterp REQUIRED)
+else()
+  find_package (Python REQUIRED)
+endif()
 
 find_package(Gettext REQUIRED)
 find_package(OpenGL REQUIRED)
