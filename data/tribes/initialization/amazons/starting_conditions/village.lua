@@ -23,7 +23,8 @@ init = {
    hq = prefilled_buildings(plr, { "amazons_headquarters", sf.x, sf.y,
       wares = {
          log = 100,
-         granite = 50,
+         granite = 40,
+         quartz = 14,
          rope = 30,
          liana = 15,
          ironwood = 15,
@@ -48,6 +49,7 @@ init = {
          spear_wooden = 6,
          stone_bowl = 2,
          needles = 2,
+         firestones = 3,
       },
       workers = {
          amazons_cook = 3,

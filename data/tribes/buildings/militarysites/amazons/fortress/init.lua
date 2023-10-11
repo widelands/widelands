@@ -14,18 +14,21 @@ wl.Descriptions():new_militarysite_type {
       name = "amazons_fortification",
       enhancement_cost = {
          ironwood = 4,
-         granite = 4,
+         granite = 2,
+         quartz = 2,
          rope = 2
       },
       enhancement_return_on_dismantle = {
          ironwood = 2,
-         granite = 2,
+         granite = 1,
+         quartz = 1,
       }
    },
 
    buildcost = {
       ironwood = 6,
-      granite = 6,
+      granite = 5,
+      quartz = 1,
       log = 2,
       rubber = 2
    },
