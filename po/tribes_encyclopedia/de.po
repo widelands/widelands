@@ -29,7 +29,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-10-05 02:30+0000\n"
+"POT-Creation-Date: 2023-10-12 02:27+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Iwan Gabovitch, 2023\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
@@ -207,9 +207,9 @@ msgstr "Stein ist ein grundlegendes Baumaterial."
 #: ../../data/tribes/initialization/amazons/units.lua:105
 msgctxt "amazons_ware"
 msgid ""
-"The Amazons use granite for making tools and weapons as well. It is produced"
-" by the stonecutters and in stone mines."
-msgstr "Die Amazonen verwenden Stein, um Werkzeuge und auch Waffen herzustellen. Er wird von Steinhauerinnen und in Steinminen gewonnen."
+"The Amazons use granite for making some tools as well. It is produced by the"
+" stonecutters and in stone mines."
+msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Quartz, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:116

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-10-05 02:30+0000\n"
+"POT-Creation-Date: 2023-10-12 02:27+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2023\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -188,9 +188,9 @@ msgstr "Flint is een wichtig Baukraam."
 #: ../../data/tribes/initialization/amazons/units.lua:105
 msgctxt "amazons_ware"
 msgid ""
-"The Amazons use granite for making tools and weapons as well. It is produced"
-" by the stonecutters and in stone mines."
-msgstr "De Amazonen bruken Flint ok, um Warktüüg un Wapens to maken. ’t word vun de Flinthauersken un in Steen-Bargwarken produzeert."
+"The Amazons use granite for making some tools as well. It is produced by the"
+" stonecutters and in stone mines."
+msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Quartz, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:116
