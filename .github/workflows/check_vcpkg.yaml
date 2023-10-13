@@ -90,7 +90,7 @@ jobs:
     - name: Update vcpkg_ref
       run: |
         echo "Updating to ${{ needs.vcpkg-packages.outputs.vcpkg_ref }}"
-        echo "${{ needs.vcpkg-packages.outputs.vcpkg_ref }}" > .github/scripts/vcpkg_ref
+        echo -n "${{ needs.vcpkg-packages.outputs.vcpkg_ref }}" > .github/scripts/vcpkg_ref
         if [ -n "$(git status -s)" ]; then
           git config --global user.name "The Widelands Build Bot"
           git config --global user.email "bunnybot@widelands.org"
