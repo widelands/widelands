@@ -80,7 +80,7 @@ jobs:
     needs: vcpkg-packages
     if: ${{ github.repository == 'widelands/widelands' && needs.vcpkg-packages.outputs.result-x64 && needs.vcpkg-packages.outputs.result-x86 }}
     name: Commit new version
-    runs-on: windows-2022
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v3
