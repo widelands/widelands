@@ -128,7 +128,7 @@ local r = {
          check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
          local all_artifacts_found = true
          for idx, f in ipairs(artifact_fields) do
-            if f.owner then
+            if f.owner and not f.owner.hidden_from_general_statistics then -- owner is normal player
                if artifacts_owner[f] then
                   if f.owner.team ~= artifacts_owner[f].team or (f.owner.team == 0 and f.owner.number ~= artifacts_owner[f].number) then
                      -- a new team has this artifact
@@ -142,6 +142,7 @@ local r = {
                end
             else
                all_artifacts_found = false
+               artifacts_owner[f] = nil -- delete in case owned by hidden player
             end
          end
       until all_artifacts_found
