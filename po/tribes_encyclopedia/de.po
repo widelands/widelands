@@ -209,7 +209,7 @@ msgctxt "amazons_ware"
 msgid ""
 "The Amazons use granite for making some tools as well. It is produced by the"
 " stonecutters and in stone mines."
-msgstr ""
+msgstr "Die Amazonen verwenden Stein, um auch einige Werkzeuge herzustellen. Er wird von Steinhauerinnen und in Steinminen gewonnen."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Quartz, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:116
