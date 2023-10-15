@@ -403,4 +403,4 @@ msgstr "Il vincitore è %1$s con %2$s."
 #: ../../data/scripting/win_conditions/wood_gnome.lua:101
 #, lua-format
 msgid "The winners had %s."
-msgstr ""
+msgstr "I vincitori ne hanno avuti %s."
