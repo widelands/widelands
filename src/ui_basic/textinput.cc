@@ -207,6 +207,8 @@ void AbstractTextInputPanel::Data::draw(RenderTarget& dst, bool with_caret) {
 }
 
 void AbstractTextInputPanel::layout() {
+	// Offset snaps the text panel to the start of input. Saved text always displays from beginning
+	d_->scrolloffset = get_text().length() / get_h();
 	Panel::layout();
 	d_->scrollbar.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
 }

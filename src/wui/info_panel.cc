@@ -66,12 +66,16 @@ inline bool MessagePreview::message_still_exists() const {
 }
 
 void MessagePreview::think() {
+	MutexLock m(MutexLock::ID::kMessages);
+
 	if (!message_still_exists() || SDL_GetTicks() - creation_time_ > kMessagePreviewMaxLifetime) {
 		owner_.pop_message(this);
 	}
 }
 
 void MessagePreview::draw(RenderTarget& r) {
+	MutexLock m(MutexLock::ID::kMessages);
+
 	if (!message_still_exists()) {
 		return;
 	}

@@ -432,8 +432,8 @@ void InteractivePlayer::draw_immovables_for_visible_field(
 void InteractivePlayer::think() {
 	InteractiveGameBase::think();
 
-	if (player().get_starting_position_state() ==
-	    Widelands::Player::StartingPositionState::kPicking) {
+	if (player().is_picking_custom_starting_position() &&
+	    !player().local_player_starting_position_is_pending()) {
 		set_sel_picture(
 		   playercolor_image(player().get_playercolor(), "images/players/player_position_menu.png"));
 	}
@@ -514,8 +514,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 	FieldsToDraw* fields_to_draw =
 	   given_map_view->draw_terrain(gbase, &plr, workareas, false, false, dst);
 	const auto& road_building_s = road_building_steepness_overlays();
-	const bool picking_starting_pos =
-	   (plr.get_starting_position_state() == Widelands::Player::StartingPositionState::kPicking);
+	const bool picking_starting_pos = plr.is_picking_custom_starting_position();
 
 	const float scale = 1.f / given_map_view->view().zoom;
 
@@ -584,8 +583,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			for (unsigned pn = map.get_nrplayers(); pn != 0u; --pn) {
 				if (map.get_starting_pos(pn) == f->fcoords) {
 					Widelands::Player* p = gbase.get_player(pn);
-					if (p == nullptr || p->get_starting_position_state() ==
-					                       Widelands::Player::StartingPositionState::kFinal) {
+					if (p == nullptr || !p->is_picking_custom_starting_position()) {
 						// Should have a HQ if finished picking, no need for the overlay
 						continue;
 					}
@@ -752,8 +750,7 @@ Widelands::PlayerNumber InteractivePlayer::player_number() const {
 
 /// Player has clicked on the given node; bring up the context menu.
 void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) {
-	if (player().get_starting_position_state() ==
-	    Widelands::Player::StartingPositionState::kPicking) {
+	if (player().is_picking_custom_starting_position()) {
 		if (get_player()->pick_custom_starting_position(node_and_triangle.node)) {
 			unset_sel_picture();
 		}
