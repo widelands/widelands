@@ -1,4 +1,4 @@
-#!/usr/bin/python -tt
+#!/usr/bin/python3 -tt
 
 """Checks that all TRANSLATORS: comments are immediately above the string to be
 translated.
