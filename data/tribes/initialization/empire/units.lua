@@ -160,6 +160,24 @@ wl.Descriptions():new_tribe {
                -- TRANSLATORS: Helptext for an Empire ware: Cloth
                purpose = pgettext("empire_ware", "Cloth is needed to build several buildings. It is also consumed in the armor smithy.")
             }
+         },
+         {
+            name = "marble",
+            default_target_quantity = 30,
+            preciousness = 3,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an Empire ware: Marble
+               purpose = pgettext("empire_ware", "Marble is the beautiful stone which is cut out of the mountains or produced in a quarry. Marble is used as a building material and gets chiseled into marble columns in the stonemason’s house.")
+            }
+         },
+         {
+            name = "marble_column",
+            default_target_quantity = 10,
+            preciousness = 5,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an Empire ware: Marble Column
+               purpose = pgettext("empire_ware", "Marble columns represent the high culture of the Empire, so they are needed for nearly every larger building. They are produced out of marble at a stonemason’s house.")
+            }
          }
       },
       {
@@ -277,24 +295,6 @@ wl.Descriptions():new_tribe {
       },
       {
          -- Mining
-         {
-            name = "marble",
-            default_target_quantity = 30,
-            preciousness = 3,
-            helptexts = {
-               -- TRANSLATORS: Helptext for an Empire ware: Marble
-               purpose = pgettext("empire_ware", "Marble is the beautiful stone which is cut out of the mountains or produced in a quarry. Marble is used as a building material and gets chiseled into marble columns in the stonemason’s house.")
-            }
-         },
-         {
-            name = "marble_column",
-            default_target_quantity = 10,
-            preciousness = 5,
-            helptexts = {
-               -- TRANSLATORS: Helptext for an Empire ware: Marble Column
-               purpose = pgettext("empire_ware", "Marble columns represent the high culture of the Empire, so they are needed for nearly every larger building. They are produced out of marble at a stonemason’s house.")
-            }
-         },
          {
             name = "coal",
             default_target_quantity = 20,
