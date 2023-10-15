@@ -481,6 +481,24 @@ wl.Descriptions():new_tribe {
                purpose = pgettext("atlanteans_ware", "Spidercloth is made out of spider silk in a weaving mill. It is used in the toolsmithy and the shipyard. Also some higher developed buildings need spidercloth for their construction.")
             }
          },
+         {
+            name = "quartz",
+            default_target_quantity = 5,
+            preciousness = 1,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an Atlantean ware: Quartz
+               purpose = pgettext("atlanteans_ware", "These transparent quartz gems are used to build some exclusive buildings. They are produced in a crystal mine.")
+            }
+         },
+         {
+            name = "diamond",
+            default_target_quantity = 5,
+            preciousness = 2,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an Atlantean ware: Diamond
+               purpose = pgettext("atlanteans_ware", "These wonderful diamonds are used to build some exclusive buildings. They are mined in a crystal mine.")
+            }
+         },
       },
       {
          -- Food
@@ -580,24 +598,6 @@ wl.Descriptions():new_tribe {
       },
       {
          -- Mining
-         {
-            name = "quartz",
-            default_target_quantity = 5,
-            preciousness = 1,
-            helptexts = {
-               -- TRANSLATORS: Helptext for an Atlantean ware: Quartz
-               purpose = pgettext("atlanteans_ware", "These transparent quartz gems are used to build some exclusive buildings. They are produced in a crystal mine.")
-            }
-         },
-         {
-            name = "diamond",
-            default_target_quantity = 5,
-            preciousness = 2,
-            helptexts = {
-               -- TRANSLATORS: Helptext for an Atlantean ware: Diamond
-               purpose = pgettext("atlanteans_ware", "These wonderful diamonds are used to build some exclusive buildings. They are mined in a crystal mine.")
-            }
-         },
          {
             name = "coal",
             default_target_quantity = 20,
