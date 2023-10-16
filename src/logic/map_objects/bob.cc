@@ -366,6 +366,8 @@ void Bob::reset_tasks(Game& game) {
 Bob::Task const Bob::taskIdle = {"idle", &Bob::idle_update,
                                  nullptr,  // signal_immediate
                                  nullptr, true};
+constexpr int kIdleOffsetBits = 15;
+constexpr int kIdleOffsetBitmask = (1 << 15) - 1;
 
 /**
  * Start an idle phase, using the given animation
@@ -375,7 +377,7 @@ Bob::Task const Bob::taskIdle = {"idle", &Bob::idle_update,
  *
  * This task always succeeds unless interrupted.
  */
-void Bob::start_task_idle(Game& game, uint32_t const anim, int32_t const timeout, Vector2i offset) {
+void Bob::start_task_idle(Game& game, uint32_t anim, int32_t timeout, bool always_on_top, Vector2i offset) {
 	assert(timeout < 0 || timeout > 0);
 
 	set_animation(game, anim);
@@ -383,8 +385,8 @@ void Bob::start_task_idle(Game& game, uint32_t const anim, int32_t const timeout
 	push_task(game, taskIdle);
 
 	top_state().ivar1 = timeout;
-	top_state().ivar2 = offset.x;
-	top_state().ivar3 = offset.y;
+	top_state().ivar2 = ((offset.y & kIdleOffsetBitmask) << kIdleOffsetBits) | (offset.x & kIdleOffsetBitmask);
+	top_state().ivar3 = always_on_top ? 1 : 0;
 }
 
 void Bob::idle_update(Game& game, State& state) {
@@ -812,12 +814,19 @@ void Bob::draw(const EditorGameBase& egbase,
 	auto* const bob_owner = get_owner();
 	Vector2f adjust_field_on_dst = field_on_dst;
 	if (const State* s = get_state(taskIdle)) {
-		adjust_field_on_dst.x += s->ivar2 * scale;
-		adjust_field_on_dst.y += s->ivar3 * scale;
+		adjust_field_on_dst.x += (s->ivar2 & kIdleOffsetBitmask) * scale;
+		adjust_field_on_dst.y += ((s->ivar2 >> kIdleOffsetBits) & kIdleOffsetBitmask) * scale;
 	}
 	dst->blit_animation(calc_drawpos(egbase, adjust_field_on_dst, scale), coords, scale, anim_,
 	                    Time(egbase.get_gametime().get() - animstart_.get()),
 	                    (bob_owner == nullptr) ? nullptr : &bob_owner->get_playercolor());
+}
+
+bool Bob::draw_always_on_top() const {
+	if (const State* s = get_state(taskIdle)) {
+		return s->ivar3 != 0;
+	}
+	return false;
 }
 
 /**

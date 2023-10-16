@@ -2938,14 +2938,14 @@ void Worker::refit_warship_update(Game& game, State& state) {
 			molog(game.get_gametime(), "[refit_warship]: Next work step");
 			queue->set_filled(queue->get_filled() - 1);
 			queue->set_max_size(queue->get_max_size() - 1);
-			return start_task_idle(game, descr().get_animation("work", this), kStepTime);
+			return start_task_idle(game, descr().get_animation("work", this), kStepTime, true);
 		}
 		needs_any_ware |= queue->get_max_size() > 0;
 	}
 
 	if (needs_any_ware) {
 		molog(game.get_gametime(), "[refit_warship]: Have no materials");
-		return start_task_idle(game, descr().get_animation("idle", this), 500);
+		return start_task_idle(game, descr().get_animation("idle", this), 500, true);
 	}
 
 	molog(game.get_gametime(), "[refit_warship]: Work complete");

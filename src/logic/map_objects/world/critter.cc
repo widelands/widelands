@@ -469,6 +469,7 @@ void Critter::roam_update(Game& game, State& state) {
 	}
 	return start_task_idle(game, descr().get_animation("idle", this),
 	                       idle_time_min + game.logic_rand() % idle_time_rnd,
+	                       false,
 	                       Vector2i(n_th_bob_on_field * std::cos(n_th_bob_on_field),
 	                                n_th_bob_on_field * std::sin(n_th_bob_on_field)));
 }

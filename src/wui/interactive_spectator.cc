@@ -111,6 +111,7 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 
 		{
 			MutexLock m(MutexLock::ID::kObjects);
+
 			Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
 			if (imm != nullptr && imm->get_positions(the_game).front() == field.fcoords) {
 				imm->draw(gametime, info_to_draw, field.rendertarget_pixel, field.fcoords, scale, dst);
@@ -123,8 +124,16 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 				}
 			}
 
+			std::vector<Widelands::Bob*> deferred;
 			for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob != nullptr;
 			     bob = bob->get_next_bob()) {
+				if (bob->draw_always_on_top()) {
+					deferred.push_back(bob);
+				} else {
+					bob->draw(the_game, info_to_draw, field.rendertarget_pixel, field.fcoords, scale, dst);
+				}
+			}
+			for (Widelands::Bob* bob : deferred) {
 				bob->draw(the_game, info_to_draw, field.rendertarget_pixel, field.fcoords, scale, dst);
 			}
 		}
