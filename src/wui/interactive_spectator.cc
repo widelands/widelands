@@ -130,7 +130,8 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 				if (bob->draw_always_on_top()) {
 					deferred.push_back(bob);
 				} else {
-					bob->draw(the_game, info_to_draw, field.rendertarget_pixel, field.fcoords, scale, dst);
+					bob->draw(
+					   the_game, info_to_draw, field.rendertarget_pixel, field.fcoords, scale, dst);
 				}
 			}
 			for (Widelands::Bob* bob : deferred) {

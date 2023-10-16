@@ -117,13 +117,13 @@ void draw_bobs_for_visible_field(const Widelands::EditorGameBase& egbase,
 			deferred.push_back(bob);
 		} else {
 			bob->draw(egbase, filter_info_to_draw(info_to_draw, bob, player), field.rendertarget_pixel,
-				      field.fcoords, scale, dst);
+			          field.fcoords, scale, dst);
 		}
 	}
 
 	for (Widelands::Bob* bob : deferred) {
 		bob->draw(egbase, filter_info_to_draw(info_to_draw, bob, player), field.rendertarget_pixel,
-			      field.fcoords, scale, dst);
+		          field.fcoords, scale, dst);
 	}
 }
 

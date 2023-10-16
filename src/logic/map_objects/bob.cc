@@ -377,7 +377,8 @@ constexpr int kIdleOffsetBitmask = (1 << 15) - 1;
  *
  * This task always succeeds unless interrupted.
  */
-void Bob::start_task_idle(Game& game, uint32_t anim, int32_t timeout, bool always_on_top, Vector2i offset) {
+void Bob::start_task_idle(
+   Game& game, uint32_t anim, int32_t timeout, bool always_on_top, Vector2i offset) {
 	assert(timeout < 0 || timeout > 0);
 
 	set_animation(game, anim);
@@ -385,7 +386,8 @@ void Bob::start_task_idle(Game& game, uint32_t anim, int32_t timeout, bool alway
 	push_task(game, taskIdle);
 
 	top_state().ivar1 = timeout;
-	top_state().ivar2 = ((offset.y & kIdleOffsetBitmask) << kIdleOffsetBits) | (offset.x & kIdleOffsetBitmask);
+	top_state().ivar2 =
+	   ((offset.y & kIdleOffsetBitmask) << kIdleOffsetBits) | (offset.x & kIdleOffsetBitmask);
 	top_state().ivar3 = always_on_top ? 1 : 0;
 }
 

@@ -262,7 +262,11 @@ public:
 
 	// TODO(feature-Hasi50): correct (?) Send a signal that may switch to some other \ref Task
 	void send_signal(Game&, char const*);
-	void start_task_idle(Game&, uint32_t anim, int32_t timeout, bool always_on_top = false, Vector2i offset = Vector2i::zero());
+	void start_task_idle(Game&,
+	                     uint32_t anim,
+	                     int32_t timeout,
+	                     bool always_on_top = false,
+	                     Vector2i offset = Vector2i::zero());
 	[[nodiscard]] bool is_idle() const;
 	[[nodiscard]] bool draw_always_on_top() const;
 
