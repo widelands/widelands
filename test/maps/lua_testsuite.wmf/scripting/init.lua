@@ -74,8 +74,20 @@ end
 -- ===========================
 -- Test for auxiliary scripts
 -- ===========================
-include "map:scripting/table.lua"
-include "map:scripting/set.lua"
+local ret_table = include "map:scripting/table.lua"
+local ret_set = include "map:scripting/set.lua"
+
+local test_include = lunit.TestCase("include tests")
+function test_include:test_include_return_nothing()
+   assert_table(ret_table)
+   assert_nil(next(ret_table), "empty table")
+end
+
+function test_include:test_include_return_table()
+   assert_table(ret_set)
+   assert_equal('set return text', ret_set.testString)
+   assert_equal(7, ret_set.testNo)
+end
 
 -- ============
 -- Test Runner
