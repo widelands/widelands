@@ -104,6 +104,15 @@ wl.Descriptions():new_tribe {
             }
          },
          {
+            name = "grout",
+            default_target_quantity = 10,
+            preciousness = 5,
+            helptexts = {
+               -- TRANSLATORS: Helptext for a Barbarian ware: Grout
+               purpose = pgettext("barbarians_ware", "Granite can be processed into grout which provides a solid, non burning building material. Grout is produced in a lime kiln.")
+            }
+         },
+         {
             name = "log",
             preciousness = 14,
             helptexts = {
@@ -122,15 +131,6 @@ wl.Descriptions():new_tribe {
             helptexts = {
                -- TRANSLATORS: Helptext for a Barbarian ware: Blackwood
                purpose = pgettext("barbarians_ware", "This fire-hardened wood is as hard as iron and it is used for several buildings. It is produced out of logs in the wood hardener.")
-            }
-         },
-         {
-            name = "grout",
-            default_target_quantity = 10,
-            preciousness = 5,
-            helptexts = {
-               -- TRANSLATORS: Helptext for a Barbarian ware: Grout
-               purpose = pgettext("barbarians_ware", "Granite can be processed into grout which provides a solid, non burning building material. Grout is produced in a lime kiln.")
             }
          },
          {
