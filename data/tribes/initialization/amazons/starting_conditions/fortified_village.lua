@@ -109,9 +109,10 @@ init = {
 
       place_building_in_region(plr, "amazons_stone_workshop", sf:region(11), {
          inputs = {
-            granite = 7,
+            granite = 4,
+            quartz = 7,
             log = 6,
-            ironwood = 5,
+            ironwood = 6,
          }
       })
 

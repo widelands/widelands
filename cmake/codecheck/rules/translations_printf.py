@@ -1,4 +1,4 @@
-#!/usr/bin/python -tt
+#!/usr/bin/python3 -tt
 
 """Checks that all translatable strings that have multiple printf placeholders
 have defined those as reversible.
