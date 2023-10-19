@@ -82,18 +82,6 @@ wl.Descriptions():new_tribe {
       {
          -- Building Materials
          {
-            name = "log",
-            preciousness = 24,
-            helptexts = {
-               purpose = {
-                  -- TRANSLATORS: Helptext for an Amazon ware: Log, part 1
-                  pgettext("ware", "Logs are an important basic building material. They are produced by felling trees."),
-                  -- TRANSLATORS: Helptext for an Amazon ware: Log, part 2
-                  pgettext("amazons_ware", "Amazon woodcutters fell trees and jungle preservers will plant them. The resulting logs are used by the stone carver. The charcoal kiln also needs logs to produce charcoal.")
-               }
-            }
-         },
-         {
             name = "granite",
             default_target_quantity = 20,
             preciousness = 7,
@@ -107,15 +95,14 @@ wl.Descriptions():new_tribe {
             }
          },
          {
-            name = "quartz",
-            default_target_quantity = 25,
-            preciousness = 15,
+            name = "log",
+            preciousness = 24,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an Amazon ware: Quartz, part 1
-                  pgettext("ware", "Amazons use quartz for sharp tools and weapons."),
-                  -- TRANSLATORS: Helptext for an Amazon ware: Quartz, part 2
-                  pgettext("amazons_ware", "It is also a building material for some advanced buildings. It is produced in stone mines."),
+                  -- TRANSLATORS: Helptext for an Amazon ware: Log, part 1
+                  pgettext("ware", "Logs are an important basic building material. They are produced by felling trees."),
+                  -- TRANSLATORS: Helptext for an Amazon ware: Log, part 2
+                  pgettext("amazons_ware", "Amazon woodcutters fell trees and jungle preservers will plant them. The resulting logs are used by the stone carver. The charcoal kiln also needs logs to produce charcoal.")
                }
             }
          },
@@ -267,6 +254,19 @@ wl.Descriptions():new_tribe {
       },
       {
          -- Mining
+         {
+            name = "quartz",
+            default_target_quantity = 25,
+            preciousness = 15,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an Amazon ware: Quartz, part 1
+                  pgettext("ware", "Amazons use quartz for sharp tools and weapons."),
+                  -- TRANSLATORS: Helptext for an Amazon ware: Quartz, part 2
+                  pgettext("amazons_ware", "It is also a building material for some advanced buildings. It is produced in stone mines."),
+               }
+            }
+         },
          {
             name = "gold_dust",
             default_target_quantity = 15,
