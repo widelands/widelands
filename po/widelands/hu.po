@@ -10,6 +10,7 @@
 # Herczeg Attila <hnczy.public@gmail.com>, 2015
 # litoll <litoll@freemail.hu>, 2016-2017,2020
 # litoll <litoll@freemail.hu>, 2020
+# litoll <litoll@freemail.hu>, 2020
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2016
 # Tóth András <txa-dev@posteo.hu>, 2021-2023
 # zone <z-one@freemail.hu>, 2015
@@ -18,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-09-30 02:25+0000\n"
+"POT-Creation-Date: 2023-10-02 02:28+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: zone <z-one@freemail.hu>, 2015\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
@@ -1056,7 +1057,7 @@ msgstr "Megjelenítés"
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:696
 #: ../../src/ui_fsmenu/helpwindow.cc:56
 #: ../../src/ui_fsmenu/keyboard_options.cc:68
-#: ../../src/ui_fsmenu/keyboard_options.cc:232 ../../src/ui_fsmenu/menu.cc:167
+#: ../../src/ui_fsmenu/keyboard_options.cc:232 ../../src/ui_fsmenu/menu.cc:166
 #: ../../src/ui_fsmenu/options.cc:93
 #: ../../src/ui_fsmenu/training_wheel_options.cc:154
 #: ../../src/wui/game_main_menu_save_game.cc:100
@@ -3650,7 +3651,7 @@ msgstr "Kék"
 
 #: ../../src/ui_basic/color_chooser.cc:484
 msgid "Remove from favorites"
-msgstr ""
+msgstr "Szín törlése a kedvencekből"
 
 #: ../../src/ui_basic/color_chooser.cc:484
 #: ../../src/ui_fsmenu/addons/packager.cc:109
@@ -3661,7 +3662,7 @@ msgstr "–"
 
 #: ../../src/ui_basic/color_chooser.cc:491
 msgid "Add current color to favorites"
-msgstr ""
+msgstr "Jelenlegi szín hozzáadása a kedvencekhez"
 
 #: ../../src/ui_basic/dropdown.cc:111
 msgctxt "dropdown"
@@ -6099,16 +6100,16 @@ msgstr "Nincs megadva"
 msgid "The map does not specify whether it is balanced"
 msgstr "A térképre nincs beállítva, hogy kiegyenlített-e"
 
-#: ../../src/ui_fsmenu/menu.cc:130 ../../src/wui/helpwindow.cc:69
+#: ../../src/ui_fsmenu/menu.cc:129 ../../src/wui/helpwindow.cc:69
 msgid "Back"
 msgstr "Vissza"
 
-#: ../../src/ui_fsmenu/menu.cc:293
+#: ../../src/ui_fsmenu/menu.cc:292
 #, c-format
 msgid "Back to ‘%s’"
 msgstr "Vissza ide: „%s”"
 
-#: ../../src/ui_fsmenu/menu.cc:302
+#: ../../src/ui_fsmenu/menu.cc:301
 msgid "Close window"
 msgstr "Ablak bezárása"
 
@@ -9244,7 +9245,7 @@ msgstr "%1$s (%2$s) (%3$s)"
 
 #: ../../src/wui/interactive_gamebase.cc:656
 msgid "Remaining construction costs:"
-msgstr ""
+msgstr "Hátralévő építési költségek:"
 
 #. * TRANSLATORS: Title for the statistics menu button in the game
 #: ../../src/wui/interactive_player.cc:187
