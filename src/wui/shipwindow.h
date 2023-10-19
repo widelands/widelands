@@ -30,6 +30,7 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/textinput.h"
 #include "ui_basic/unique_window.h"
+#include "wui/inputqueuedisplay.h"
 #include "wui/interactive_base.h"
 #include "wui/itemwaresdisplay.h"
 
@@ -73,10 +74,14 @@ private:
 
 	InteractiveBase& ibase_;
 	Widelands::OPtr<Widelands::Ship> ship_;
+	BuildingWindow::CollapsedState input_queues_collapsed_state_{
+	   BuildingWindow::CollapsedState::kCollapsed};
 
 	UI::Box vbox_;
 	UI::Box navigation_box_;
+	UI::Box refit_box_;
 	UI::Panel* warship_capacity_control_;
+	std::vector<std::unique_ptr<InputQueueDisplay>> refit_costs_;
 	UI::Textarea warship_health_;
 	UI::EditBox* name_field_;
 	UI::Button* btn_goto_;

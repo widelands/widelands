@@ -620,7 +620,7 @@ bool AttackPanel::ListOfSoldiers::handle_mousemove(
 		if (mo->descr().type() == Widelands::MapObjectType::SHIP) {
 			upcast(const Widelands::Ship, ship, mo);
 			set_tooltip(format(_("%1$s  HP: %2$u/%3$u  AT: +%4$u%%"), ship->get_shipname(),
-			                   ship->get_hitpoints(), ship->descr().max_hitpoints_,
+			                   ship->get_hitpoints(), ship->descr().get_max_hitpoints(),
 			                   ship->get_sea_attack_soldier_bonus(attack_box_->iplayer_.egbase())));
 		} else {
 			upcast(const Widelands::Soldier, soldier, mo);

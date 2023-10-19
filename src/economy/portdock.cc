@@ -39,6 +39,93 @@
 
 namespace Widelands {
 
+PortDock::WarshipRequests::WarshipRequests(Warehouse& warehouse, Ship* ship, SoldierPreference pref)
+   : warehouse_(warehouse),
+     soldier_request(
+        warehouse_,
+        pref,
+        Ship::warship_soldier_callback,
+        [ship]() {
+	        return ship->get_ship_type() == ShipType::kWarship ?
+                     ship->get_warship_soldier_capacity() :
+                     0U;
+        },
+        [ship]() { return ship->onboard_soldiers(); }) {
+}
+
+PortDock::WarshipRequests::~WarshipRequests() {
+	if (is_refitting()) {
+		end_refit();
+	}
+}
+
+void PortDock::WarshipRequests::create_shipwright_request() {
+	assert(shipwright_request == nullptr);
+	shipwright_request.reset(new Request(warehouse_, warehouse_.owner().tribe().shipwright(),
+	                                     Ship::warship_soldier_callback, wwWORKER));
+	shipwright_request->set_count(1);
+}
+
+void PortDock::WarshipRequests::start_refit() {
+	create_shipwright_request();
+
+	const Buildcost& cost = warehouse_.owner()
+	                           .egbase()
+	                           .descriptions()
+	                           .get_ship_descr(warehouse_.owner().tribe().ship())
+	                           ->get_refit_cost();
+	for (const auto& pair : cost) {
+		refit_queues.emplace_back(new WaresQueue(warehouse_, pair.first, pair.second));
+	}
+}
+
+void PortDock::WarshipRequests::end_refit() {
+	assert(shipwright_request != nullptr);
+
+	for (auto& queue : refit_queues) {
+		warehouse_.insert_wares(queue->get_index(), queue->get_filled());
+		queue->remove_from_economy(*warehouse_.get_economy(wwWARE));
+	}
+
+	refit_queues.clear();
+	shipwright_request.reset();
+}
+
+bool PortDock::WarshipRequests::is_refitting() const {
+	return shipwright_request != nullptr;
+}
+
+bool PortDock::WarshipRequests::has_request(const Request* r) const {
+	if (shipwright_request.get() == r || soldier_request.get_request() == r) {
+		return true;
+	}
+	for (const auto& queue : refit_queues) {
+		if (queue->matches(*r)) {
+			return true;
+		}
+	}
+	return false;
+}
+
+void PortDock::WarshipRequests::set_economy(Economy* new_e, Economy* old_e, WareWorker type) {
+	soldier_request.set_economy(new_e, type);
+
+	if (shipwright_request != nullptr && type == shipwright_request->get_type()) {
+		shipwright_request->set_economy(new_e);
+	}
+
+	for (auto& queue : refit_queues) {
+		if (type == queue->get_type()) {
+			if (old_e != nullptr) {
+				queue->remove_from_economy(*old_e);
+			}
+			if (new_e != nullptr) {
+				queue->add_to_economy(*new_e);
+			}
+		}
+	}
+}
+
 PortdockDescr g_portdock_descr("portdock", "Port Dock");
 
 const PortdockDescr& PortDock::descr() const {
@@ -75,6 +162,27 @@ void PortDock::add_position(Coords where) {
 
 Warehouse* PortDock::get_warehouse() const {
 	return warehouse_;
+}
+
+InputQueue& PortDock::inputqueue(DescriptionIndex index, WareWorker type, const Request* r) {
+	if (r != nullptr) {
+		for (auto& pair : warship_requests_) {
+			for (auto& queue : pair.second->refit_queues) {
+				if (queue->matches(*r)) {
+					return *queue;
+				}
+			}
+		}
+	}
+
+	if (expedition_bootstrap() != nullptr) {
+		return r != nullptr ? expedition_bootstrap()->inputqueue(*r) :
+                            expedition_bootstrap()->inputqueue(index, type, false);
+	}
+
+	throw wexception("Port dock %s %u has no input queue for %s %u",
+	                 warehouse_ == nullptr ? "nil" : warehouse_->get_warehouse_name().c_str(),
+	                 serial(), type == wwWARE ? "ware" : "worker", index);
 }
 
 /**
@@ -120,7 +228,8 @@ PortDock* PortDock::get_dock(Flag& flag) const {
  * change to @ref ShipFleet.
  */
 void PortDock::set_economy(Economy* e, WareWorker type) {
-	if (e == get_economy(type)) {
+	Economy* old = get_economy(type);
+	if (e == old) {
 		return;
 	}
 
@@ -139,8 +248,8 @@ void PortDock::set_economy(Economy* e, WareWorker type) {
 		expedition_bootstrap_->set_economy(e, type);
 	}
 
-	for (auto& pair : warship_soldier_requests_) {
-		pair.second->set_economy(e, type);
+	for (auto& pair : warship_requests_) {
+		pair.second->set_economy(e, old, type);
 	}
 }
 
@@ -452,32 +561,29 @@ void PortDock::cancel_expedition(Game& game) {
 	expedition_cancelling_ = false;
 }
 
-SoldierRequest* PortDock::get_warship_request(Serial ship) const {
-	auto it = warship_soldier_requests_.find(ship);
-	if (it != warship_soldier_requests_.end()) {
+PortDock::WarshipRequests* PortDock::get_warship_request(Serial ship) const {
+	auto it = warship_requests_.find(ship);
+	if (it != warship_requests_.end()) {
 		return it->second.get();
 	}
 	return nullptr;
 }
 
-SoldierRequest& PortDock::create_warship_request(Ship* ship, SoldierPreference pref) {
-	assert(warship_soldier_requests_.count(ship->serial()) == 0);
-	SoldierRequest* req = new SoldierRequest(
-	   *get_warehouse(), pref, Ship::warship_soldier_callback,
-	   [ship]() { return ship->get_warship_soldier_capacity(); },
-	   [ship]() { return ship->onboard_soldiers(); });
-	warship_soldier_requests_.emplace(ship->serial(), req);
+PortDock::WarshipRequests& PortDock::create_warship_request(Ship* ship, SoldierPreference pref) {
+	assert(warship_requests_.count(ship->serial()) == 0);
+	WarshipRequests* req = new WarshipRequests(*get_warehouse(), ship, pref);
+	warship_requests_.emplace(ship->serial(), req);
 	return *req;
 }
 
 void PortDock::erase_warship_request(Serial ship) {
-	warship_soldier_requests_.erase(ship);
+	warship_requests_.erase(ship);
 }
 
 Ship* PortDock::find_ship_for_warship_request(const EditorGameBase& egbase,
                                               const Request& req) const {
-	for (const auto& pair : warship_soldier_requests_) {
-		if (pair.second->get_request() == &req) {
+	for (const auto& pair : warship_requests_) {
+		if (pair.second->has_request(&req)) {
 			return dynamic_cast<Ship*>(egbase.objects().get_object(pair.first));
 		}
 	}

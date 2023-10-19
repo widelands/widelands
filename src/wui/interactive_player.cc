@@ -109,8 +109,19 @@ void draw_bobs_for_visible_field(const Widelands::EditorGameBase& egbase,
 		return;
 	}
 	MutexLock m(MutexLock::ID::kObjects);
+
+	std::vector<Widelands::Bob*> deferred;
 	for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob != nullptr;
 	     bob = bob->get_next_bob()) {
+		if (bob->draw_always_on_top()) {
+			deferred.push_back(bob);
+		} else {
+			bob->draw(egbase, filter_info_to_draw(info_to_draw, bob, player), field.rendertarget_pixel,
+			          field.fcoords, scale, dst);
+		}
+	}
+
+	for (Widelands::Bob* bob : deferred) {
 		bob->draw(egbase, filter_info_to_draw(info_to_draw, bob, player), field.rendertarget_pixel,
 		          field.fcoords, scale, dst);
 	}

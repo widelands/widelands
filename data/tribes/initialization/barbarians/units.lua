@@ -2579,6 +2579,7 @@ wl.Descriptions():new_tribe {
 
    -- Special types
    builder = "barbarians_builder",
+   shipwright = "barbarians_shipwright",
    carriers = {"barbarians_carrier", "barbarians_ox"},
    geologist = "barbarians_geologist",
    scouts_house = "barbarians_scouts_hut",

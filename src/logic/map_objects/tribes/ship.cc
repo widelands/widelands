@@ -176,16 +176,20 @@ private:
  * The contents of 'table' are documented in
  * /data/tribes/ships/atlanteans/init.lua
  */
-ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
+ShipDescr::ShipDescr(const std::string& init_descname,
+                     const LuaTable& table,
+                     Widelands::Descriptions& descriptions)
    : BobDescr(init_descname, MapObjectType::SHIP, MapObjectDescr::OwnerType::kTribe, table),
+     default_capacity_(table.has_key("capacity") ? table.get_int("capacity") : 20),
+     ship_names_(table.get_table("names")->array_entries<std::string>()),
+
+     refit_cost_(table.get_table("refit_cost"), descriptions),
      max_hitpoints_(table.get_int("hitpoints")),
      min_attack_(table.get_int("min_attack")),
      max_attack_(table.get_int("max_attack")),
      defense_(table.get_int("defense")),
      attack_accuracy_(table.get_int("attack_accuracy")),
-     heal_per_second_(table.get_int("heal_per_second")),
-     default_capacity_(table.has_key("capacity") ? table.get_int("capacity") : 20),
-     ship_names_(table.get_table("names")->array_entries<std::string>()) {
+     heal_per_second_(table.get_int("heal_per_second")) {
 	// Read the sailing animations
 	assign_directional_animation(&sail_anims_, "sail");
 }
@@ -200,9 +204,9 @@ Bob& ShipDescr::create_object() const {
 
 Ship::Ship(const ShipDescr& gdescr)
    : Bob(gdescr),
-     hitpoints_(gdescr.max_hitpoints_),
+     hitpoints_(gdescr.get_max_hitpoints()),
      capacity_(gdescr.get_default_capacity()),
-     warship_soldier_capacity_(capacity_) {
+     warship_soldier_capacity_(0U) {
 }
 
 PortDock* Ship::get_lastdock(EditorGameBase& egbase) const {
@@ -253,7 +257,7 @@ bool Ship::init_fleet(EditorGameBase& egbase) {
 }
 
 void Ship::cleanup(EditorGameBase& egbase) {
-	erase_warship_soldier_request();
+	erase_warship_request();
 
 	if (fleet_ != nullptr) {
 		fleet_->remove_ship(egbase, this);
@@ -447,7 +451,7 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 			}
 
 			// Arrived at destination, now unload and refit
-			set_destination(game, nullptr);
+			lastdock_ = dest;
 			Warehouse* wh = dest->get_warehouse();
 			for (ShippingItem& si : items_) {
 				/* Since the items may not have been in transit properly,
@@ -470,22 +474,20 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 			}
 			items_.clear();
 
-			ship_type_ = pending_refit_;
-			erase_warship_soldier_request();
-
-			if (ship_type_ == ShipType::kWarship) {
-				start_task_expedition(game);
-				set_destination(game, dest);
+			if (pending_refit_ == ShipType::kTransport) {
+				set_ship_type(game, pending_refit_);
 			} else {
-				exp_cancel(game);
+				update_warship_request(true);
 			}
-		} else {
-			// Destination vanished, try to find a new one
-			molog(game.get_gametime(), "Refit failed, retry\n");
-			const ShipType t = pending_refit_;
-			pending_refit_ = ship_type_;
-			refit(game, t);
+
+			return start_task_idle(game, descr().main_animation(), 250);
 		}
+
+		// Destination vanished, try to find a new one
+		molog(game.get_gametime(), "Refit failed, retry\n");
+		const ShipType t = pending_refit_;
+		pending_refit_ = ship_type_;
+		refit(game, t);
 		return;
 	}
 
@@ -760,7 +762,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 	}
 
 	if (destination_coords_ != nullptr) {
-		erase_warship_soldier_request();
+		erase_warship_request();
 
 		if (destination_coords_->has_dockpoint(get_position())) {  // Already there
 			destination_coords_ = nullptr;
@@ -791,7 +793,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 
 			// Sail to the destination port if we're not there yet.
 			if (position.field->get_immovable() != dest) {
-				erase_warship_soldier_request();
+				erase_warship_request();
 				if (!start_task_movetodock(game, *dest)) {
 					if (send_message_at_destination_) {
 						send_message(
@@ -809,17 +811,18 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 
 			// We're on the destination dock. Load soldiers, heal, and wait for orders.
 			constexpr Duration kHealInterval(1000);
-			if (hitpoints_ < descr().max_hitpoints_ &&
+			if (hitpoints_ < descr().get_max_hitpoints() &&
 			    game.get_gametime() - last_heal_time_ >= kHealInterval) {
 				last_heal_time_ = game.get_gametime();
-				hitpoints_ = std::min(descr().max_hitpoints_, hitpoints_ + descr().heal_per_second_);
+				hitpoints_ =
+				   std::min(descr().get_max_hitpoints(), hitpoints_ + descr().get_heal_per_second());
 			}
 
 			lastdock_ = dest;
 			set_ship_state_and_notify(
 			   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
 
-			update_warship_soldier_request(true);
+			update_warship_request(true);
 
 			start_task_idle(game, descr().main_animation(), 250);
 
@@ -828,7 +831,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 
 		case MapObjectType::SHIP:
 		case MapObjectType::PINNED_NOTE: {
-			erase_warship_soldier_request();
+			erase_warship_request();
 			Bob* dest = dynamic_cast<Bob*>(destination_object);
 
 			if (map->calc_distance(position, dest->get_position()) <=
@@ -869,7 +872,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 		}
 	}
 
-	erase_warship_soldier_request();  // Clear the request when not in port
+	erase_warship_request();  // Clear the request when not in port
 
 	if (ship_state_ == ShipStates::kExpeditionScouting && get_ship_type() == ShipType::kTransport) {
 		// TODO(tothxa): Implement expedition options for stop_on_report and report_known
@@ -884,10 +887,10 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 
 void Ship::set_soldier_preference(SoldierPreference pref) {
 	soldier_preference_ = pref;
-	update_warship_soldier_request(false);
+	update_warship_request(false);
 }
 
-void Ship::erase_warship_soldier_request() {
+void Ship::erase_warship_request() {
 	const EditorGameBase& egbase = owner().egbase();
 	if (PortDock* dock = requestdock_.get(egbase); dock != nullptr) {
 		molog(egbase.get_gametime(), "Erasing soldier request at %s",
@@ -897,22 +900,35 @@ void Ship::erase_warship_soldier_request() {
 	requestdock_ = nullptr;
 }
 
-void Ship::update_warship_soldier_request(bool create) {
+void Ship::update_warship_request(bool create) {
 	const EditorGameBase& egbase = owner().egbase();
 	PortDock* dock = requestdock_.get(egbase);
+	const bool is_refitting_to_warship =
+	   ship_type_ != ShipType::kWarship && pending_refit_ == ShipType::kWarship;
 
 	if (dock != nullptr) {
 		// We should already have a request
-		molog(egbase.get_gametime(), "Updating existing soldier request at %s",
+		molog(egbase.get_gametime(), "Updating existing warship request at %s",
 		      dock->get_warehouse()->get_warehouse_name().c_str());
-		SoldierRequest* req = dock->get_warship_request(serial());
+		PortDock::WarshipRequests* req = dock->get_warship_request(serial());
 		if (req == nullptr) {
-			throw wexception("Ship %s has no soldier request at request dock %s",
+			throw wexception("Ship %s has no warship request at request dock %s",
 			                 get_shipname().c_str(),
 			                 dock->get_warehouse()->get_warehouse_name().c_str());
 		}
-		req->set_preference(soldier_preference_);
-		req->update();
+
+		if (is_refitting_to_warship ^ req->is_refitting()) {
+			if (is_refitting_to_warship) {
+				molog(egbase.get_gametime(), "Initiating refitting requests");
+				req->start_refit();
+			} else {
+				molog(egbase.get_gametime(), "Cancelling refitting requests");
+				req->end_refit();
+			}
+		}
+
+		req->soldier_request.set_preference(soldier_preference_);
+		req->soldier_request.update();
 		return;
 	}
 
@@ -924,28 +940,38 @@ void Ship::update_warship_soldier_request(bool create) {
 	// Create a new request at the current port.
 	dock = lastdock_.get(owner().egbase());
 	if (dock == nullptr) {
-		throw wexception("Ship %s attempts to create warship soldier request while not in dock",
-		                 get_shipname().c_str());
+		throw wexception(
+		   "Ship %s attempts to create warship request while not in dock", get_shipname().c_str());
 	}
-	molog(egbase.get_gametime(), "Creating new soldier request at %s",
+	molog(egbase.get_gametime(), "Creating new warship request at %s",
 	      dock->get_warehouse()->get_warehouse_name().c_str());
 	if (get_position().field->get_immovable() != dock) {
-		throw wexception(
-		   "Ship %s attempts to create warship soldier request while not on request dock %s",
-		   get_shipname().c_str(), dock->get_warehouse()->get_warehouse_name().c_str());
+		throw wexception("Ship %s attempts to create warship request while not on request dock %s",
+		                 get_shipname().c_str(), dock->get_warehouse()->get_warehouse_name().c_str());
 	}
 
-	SoldierRequest* req = dock->get_warship_request(serial());
+	PortDock::WarshipRequests* req = dock->get_warship_request(serial());
 	if (req == nullptr) {
 		req = &dock->create_warship_request(this, soldier_preference_);
 	} else {
 		// TODO(Nordfriese): Can only happen with legacy savegames, replace this with an assert
-		log_warn("Ship %s already has soldier request at new request dock %s", get_shipname().c_str(),
+		log_warn("Ship %s already has warship request at new request dock %s", get_shipname().c_str(),
 		         dock->get_warehouse()->get_warehouse_name().c_str());
 	}
 
 	requestdock_ = dock;
-	req->update();
+
+	if (is_refitting_to_warship ^ req->is_refitting()) {
+		if (is_refitting_to_warship) {
+			molog(egbase.get_gametime(), "Initiating refitting requests");
+			req->start_refit();
+		} else {
+			molog(egbase.get_gametime(), "Cancelling refitting requests");
+			req->end_refit();
+		}
+	}
+
+	req->soldier_request.update();
 }
 
 bool Ship::remember_detected_portspace(const Coords& coords) {
@@ -996,28 +1022,34 @@ bool Ship::remember_detected_portspace(const Coords& coords) {
 }
 
 // static
-void Ship::warship_soldier_callback(Game& game,
-                                    Request& req,
-                                    DescriptionIndex /* di */,
-                                    Worker* worker,
-                                    PlayerImmovable& immovable) {
+void Ship::warship_soldier_callback(
+   Game& game, Request& req, DescriptionIndex di, Worker* worker, PlayerImmovable& immovable) {
+
 	Warehouse& warehouse = dynamic_cast<Warehouse&>(immovable);
 	PortDock* dock = warehouse.get_portdock();
 	assert(dock != nullptr);
 	Ship* ship = dock->find_ship_for_warship_request(game, req);
+	const bool is_shipwright = di == ship->owner().tribe().shipwright();
 
-	if (ship == nullptr || ship->get_ship_type() != ShipType::kWarship ||
+	if (ship == nullptr || (!is_shipwright && ship->get_ship_type() != ShipType::kWarship) ||
 	    ship->get_destination_port(game) != dock ||
-	    ship->get_position().field->get_immovable() != dock) {
+	    ship->get_position().field->get_immovable() != dock ||
+	    (is_shipwright != ship->is_refitting())) {
 		verb_log_info_time(game.get_gametime(), "%s %u missed his assigned warship at dock %s",
 		                   worker->descr().name().c_str(), worker->serial(),
 		                   warehouse.get_warehouse_name().c_str());
-		// The soldier is in the port now, ready to get some new assignment by the economy.
 		return;
 	}
 
 	assert(ship->get_owner() == warehouse.get_owner());
 	assert(ship->requestdock_.serial() == dock->serial());
+
+	if (is_shipwright) {
+		worker->reset_tasks(game);
+		worker->start_task_refit_warship(game, dock, ship);
+		return;
+	}
+
 	ship->molog(game.get_gametime(), "%s %u embarked on warship %s", worker->descr().name().c_str(),
 	            worker->serial(), ship->get_shipname().c_str());
 
@@ -1029,7 +1061,7 @@ void Ship::warship_soldier_callback(Game& game,
 	ship->capacity_ = std::max<Quantity>(old_capacity, ship->items_.size() + 1);
 
 	ship->add_item(game, ShippingItem(*worker));
-	ship->update_warship_soldier_request(false);
+	ship->update_warship_request(false);
 	ship->kickout_superfluous_soldiers(game);
 
 	assert(ship->items_.size() <= old_capacity);
@@ -1055,21 +1087,41 @@ bool Ship::can_attack() const {
 bool Ship::can_refit(const ShipType type) const {
 	return !is_refitting() && !has_battle() && type != ship_type_;
 }
+bool Ship::can_cancel_refit() const {
+	return is_refitting();
+}
 
-#ifndef NDEBUG
 void Ship::set_ship_type(EditorGameBase& egbase, ShipType t) {
-	assert(!egbase.is_game());
 	ship_type_ = t;
 	pending_refit_ = ship_type_;
+	hitpoints_ = descr().get_max_hitpoints();
+
+	if (egbase.is_game()) {
+		upcast(Game, game, &egbase);
+		if (ship_type_ == ShipType::kWarship) {
+			start_task_expedition(*game);
+			set_destination(*game, get_destination_port(*game));
+			update_warship_request(true);
+		} else {
+			exp_cancel(*game);
+			erase_warship_request();
+		}
+	}
 }
-#else
-void Ship::set_ship_type(EditorGameBase& /* egbase */, ShipType t) {
-	ship_type_ = t;
-	pending_refit_ = ship_type_;
-}
-#endif
 
 void Ship::refit(Game& game, const ShipType type) {
+	if (is_refitting() && type == ship_type_ && can_cancel_refit()) {
+		pending_refit_ = type;
+		send_signal(game, "wakeup");
+
+		// If this is a transport ship, bring it back into a fleet
+		if (expedition_ == nullptr && fleet_ == nullptr) {
+			init_fleet(game);
+		}
+
+		return;
+	}
+
 	if (!can_refit(type)) {
 		molog(game.get_gametime(), "Requested refit to %d not possible", static_cast<int>(type));
 		return;
@@ -1154,8 +1206,9 @@ std::vector<Soldier*> Ship::associated_soldiers() const {
 	std::vector<Soldier*> result = onboard_soldiers();
 
 	if (PortDock* dock = requestdock_.get(owner().egbase()); dock != nullptr) {
-		if (const SoldierRequest* sr = dock->get_warship_request(serial()); sr != nullptr) {
-			if (const Request* request = sr->get_request(); request != nullptr) {
+		if (const PortDock::WarshipRequests* sr = dock->get_warship_request(serial());
+		    sr != nullptr) {
+			if (const Request* request = sr->soldier_request.get_request(); request != nullptr) {
 				for (const Transfer* t : request->get_transfers()) {
 					Soldier& s = dynamic_cast<Soldier&>(*t->get_worker());
 					result.push_back(&s);
@@ -1232,7 +1285,7 @@ void Ship::warship_command(Game& game,
 		warship_soldier_capacity_ =
 		   std::max(std::min(parameters.back(), get_capacity()), min_warship_soldier_capacity());
 		if (get_ship_type() == ShipType::kWarship) {
-			update_warship_soldier_request(false);
+			update_warship_request(false);
 			kickout_superfluous_soldiers(game);
 		}
 		return;
@@ -1309,7 +1362,7 @@ void Ship::start_battle(Game& game, Battle new_battle, bool immediately) {
 	}
 }
 
-/** Onboard soldiers add a bonus onto the base attack strength, expressed in percent. */
+/** Onboard soldiers add a bonus onto the base attack strength. */
 unsigned Ship::get_sea_attack_soldier_bonus(const EditorGameBase& egbase) const {
 	unsigned attack_bonus = 0;
 	for (const ShippingItem& si : items_) {
@@ -1388,17 +1441,32 @@ void Ship::battle_update(Game& game) {
 	auto fight = [this, &current_battle, other_battle, &game, target_ship]() {
 		if (target_ship == nullptr) {
 			molog(game.get_gametime(), "[battle] Attacking a port");
-			current_battle.pending_damage = 1;                             // Ports always take 1 point
-		} else if (game.logic_rand() % 100 < descr().attack_accuracy_) {  // Hit
-			uint32_t attack_strength =
-			   (game.logic_rand() % (descr().max_attack_ - descr().min_attack_));
-			attack_strength += descr().min_attack_;
+			current_battle.pending_damage = 1;  // Ports always take 1 point
+		} else if (game.logic_rand() % 100 < descr().get_attack_accuracy()) {  // Hit
+			/* More soldiers mean a linear progression for both min and max attack,
+			 * with min attack rising faster than max attack.
+			 * At a bonus of `kMaxBonus` points (maximum possible is 330 with default tribes),
+			 * the strength is `kMaxMultiplier` times the initial strength
+			 * and min/max attack are identical.
+			 */
+			constexpr uint32_t kMaxBonus = 500;
+			constexpr uint32_t kMaxMultiplier = 5;
+			uint32_t bonus = get_sea_attack_soldier_bonus(game);
 
-			attack_strength += attack_strength * get_sea_attack_soldier_bonus(game) / 100;
+			uint32_t min_attack =
+			   descr().get_min_attack() +
+			   bonus * ((kMaxMultiplier * descr().get_max_attack()) - descr().get_min_attack()) /
+			      kMaxBonus;
+			uint32_t max_attack =
+			   descr().get_max_attack() +
+			   bonus * ((kMaxMultiplier - 1) * descr().get_max_attack()) / kMaxBonus;
+			uint32_t delta = max_attack > min_attack ? max_attack - min_attack : 1;
+
+			uint32_t attack_strength = min_attack + (game.logic_rand() % delta);
 
 			molog(game.get_gametime(), "[battle] Hit with %u points", attack_strength);
 			current_battle.pending_damage =
-			   attack_strength * (100 - target_ship->descr().defense_) / 100;
+			   attack_strength * (100 - target_ship->descr().get_defense()) / 100;
 		} else {  // Miss
 			molog(game.get_gametime(), "[battle] Miss");
 			current_battle.pending_damage = 0;
@@ -2148,7 +2216,7 @@ uint32_t Ship::calculate_sea_route(EditorGameBase& egbase, PortDock& pd, Path* f
  * Returns false if the dock is unreachable.
  */
 bool Ship::start_task_movetodock(Game& game, PortDock& pd) {
-	erase_warship_soldier_request();
+	erase_warship_request();
 
 	Path path;
 
@@ -2472,7 +2540,7 @@ void Ship::draw(const EditorGameBase& egbase,
 	   info_to_draw, richtext_escape(shipname_), statistics_string, point_on_dst, scale, dst);
 
 	if ((info_to_draw & InfoToDraw::kSoldierLevels) != 0 &&
-	    (ship_type_ == ShipType::kWarship || hitpoints_ < descr().max_hitpoints_)) {
+	    (ship_type_ == ShipType::kWarship || hitpoints_ < descr().get_max_hitpoints())) {
 		draw_healthbar(egbase, dst, point_on_dst, scale);
 	}
 }
@@ -2512,7 +2580,7 @@ void Ship::draw_healthbar(const EditorGameBase& egbase,
 
 	// Now draw the health bar itself
 	constexpr int kInnerHealthBarWidth = 2 * (kShipHalfHealthBarWidth - 1);
-	int health_width = kInnerHealthBarWidth * health_to_show / descr().max_hitpoints_;
+	int health_width = kInnerHealthBarWidth * health_to_show / descr().get_max_hitpoints();
 
 	Recti energy_inner(draw_position + Vector2i(-kShipHalfHealthBarWidth + 1, 1) * scale,
 	                   health_width * scale, 3 * scale);
@@ -2832,7 +2900,7 @@ void Ship::Loader::load_finish() {
 	ship.ship_state_ = ship_state_;
 	ship.ship_type_ = ship_type_;
 	ship.pending_refit_ = pending_refit_;
-	ship.hitpoints_ = (hitpoints_ < 0) ? ship.descr().max_hitpoints_ : hitpoints_;
+	ship.hitpoints_ = (hitpoints_ < 0) ? ship.descr().get_max_hitpoints() : hitpoints_;
 	ship.last_heal_time_ = last_heal_time_;
 	ship.send_message_at_destination_ = send_message_at_destination_;
 

@@ -540,6 +540,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 						// TODO(Nordfriese): The ship can only fail to exist in a pre-v1.2
 						// development version. Require its existence after v1.2.
 						if (!mol.is_object_known(ship_serial)) {
+							assert(packet_version < 12);
 							log_warn("Reading soldier request for nonexistent ship %u", ship_serial);
 							SoldierRequest req(
 							   warehouse, SoldierPreference::kHeroes, Ship::warship_soldier_callback,
@@ -549,13 +550,21 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 						}
 
 						Ship* ship = &mol.get<Ship>(ship_serial);
-						assert(warehouse.portdock_->warship_soldier_requests_.count(ship->serial()) == 0);
-						SoldierRequest* req = new SoldierRequest(
-						   warehouse, SoldierPreference::kHeroes, Ship::warship_soldier_callback,
-						   [ship]() { return ship->get_warship_soldier_capacity(); },
-						   [ship]() { return ship->onboard_soldiers(); });
-						req->read(fr, game, mol);
-						warehouse.portdock_->warship_soldier_requests_.emplace(ship->serial(), req);
+						assert(warehouse.portdock_->warship_requests_.count(ship->serial()) == 0);
+
+						PortDock::WarshipRequests* req =
+						   new PortDock::WarshipRequests(warehouse, ship, SoldierPreference::kHeroes);
+						req->soldier_request.read(fr, game, mol);
+						if (packet_version >= 12 && fr.unsigned_8() != 0) {
+							req->create_shipwright_request();
+							req->shipwright_request->read(fr, game, mol);
+							for (uint32_t j = fr.unsigned_32(); j > 0; --j) {
+								req->refit_queues.emplace_back(new WaresQueue(warehouse, 0, 0));
+								req->refit_queues.back()->read(fr, game, mol);
+							}
+						}
+
+						warehouse.portdock_->warship_requests_.emplace(ship->serial(), req);
 					}
 				}
 			}
@@ -1295,10 +1304,22 @@ void MapBuildingdataPacket::write_warehouse(const Warehouse& warehouse,
 			warehouse.portdock_->expedition_bootstrap()->save(fw, game, mos);
 		}
 
-		fw.unsigned_32(warehouse.portdock_->warship_soldier_requests_.size());
-		for (const auto& pair : warehouse.portdock_->warship_soldier_requests_) {
+		fw.unsigned_32(warehouse.portdock_->warship_requests_.size());
+		for (const auto& pair : warehouse.portdock_->warship_requests_) {
 			fw.unsigned_32(mos.get_object_file_index(*game.objects().get_object(pair.first)));
-			pair.second->write(fw, game, mos);
+
+			pair.second->soldier_request.write(fw, game, mos);
+
+			if (pair.second->shipwright_request != nullptr) {
+				fw.unsigned_8(1);
+				pair.second->shipwright_request->write(fw, game, mos);
+				fw.unsigned_32(pair.second->refit_queues.size());
+				for (const auto& queue : pair.second->refit_queues) {
+					queue->write(fw, game, mos);
+				}
+			} else {
+				fw.unsigned_8(0);
+			}
 		}
 	}
 

@@ -46,6 +46,7 @@
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
 #include "logic/map_objects/tribes/market.h"
+#include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
@@ -2886,6 +2887,75 @@ void Worker::geologist_update(Game& game, State& state) {
 }
 
 /**
+ * Refit a transport ship to a warship.
+ *
+ * objvar1 - The ship to refit.
+ * ivar1, ivar2 - The original coords (x and y).
+ *
+ * The worker's location is the associated port dock's warehouse.
+ * The worker's position follows the ship and must be reset when the work is done or cancelled.
+ */
+const Bob::Task Worker::taskRefitWarship = {
+   "refit_warship", static_cast<Bob::Ptr>(&Worker::refit_warship_update), nullptr, nullptr, true};
+
+void Worker::start_task_refit_warship(Game& game, PortDock* dock, Ship* ship) {
+	set_location(dock->get_warehouse());
+
+	push_task(game, taskRefitWarship);
+	State& state = top_state();
+	state.objvar1 = ship;
+	state.ivar1 = get_position().x;
+	state.ivar2 = get_position().y;
+}
+
+void Worker::refit_warship_update(Game& game, State& state) {
+	upcast(Warehouse, warehouse, get_location(game));
+	if (warehouse == nullptr || warehouse->get_portdock() == nullptr) {
+		molog(game.get_gametime(), "[refit_warship]: Location disappeared");
+		set_position(game, Coords(state.ivar1, state.ivar2));
+		return pop_task(game);
+	}
+
+	upcast(Ship, ship, state.objvar1.get(game));
+	if (ship == nullptr || ship->get_ship_type() == ShipType::kWarship) {
+		molog(game.get_gametime(), "[refit_warship]: Ship disappeared");
+		set_position(game, Coords(state.ivar1, state.ivar2));
+		return pop_task(game);
+	}
+
+	PortDock::WarshipRequests* req = warehouse->get_portdock()->get_warship_request(ship->serial());
+	if (req == nullptr) {
+		molog(game.get_gametime(), "[refit_warship]: Ship has no request");
+		set_position(game, Coords(state.ivar1, state.ivar2));
+		return pop_task(game);
+	}
+
+	set_position(game, ship->get_position());
+	constexpr unsigned kStepTime = 30000;
+	bool needs_any_ware = false;
+	for (auto& queue : req->refit_queues) {
+		if (queue->get_filled() > 0) {
+			molog(game.get_gametime(), "[refit_warship]: Next work step");
+			queue->set_filled(queue->get_filled() - 1);
+			queue->set_max_size(queue->get_max_size() - 1);
+			return start_task_idle(game, descr().get_animation("work", this), kStepTime, true);
+		}
+		needs_any_ware |= queue->get_max_size() > 0;
+	}
+
+	if (needs_any_ware) {
+		molog(game.get_gametime(), "[refit_warship]: Have no materials");
+		return start_task_idle(game, descr().get_animation("idle", this), 500, true);
+	}
+
+	molog(game.get_gametime(), "[refit_warship]: Work complete");
+	ship->set_ship_type(game, ShipType::kWarship);
+
+	set_position(game, Coords(state.ivar1, state.ivar2));
+	return pop_task(game);
+}
+
+/**
  * Look at fields that are in the fog of war around our owner.
  *
  * ivar1 - radius to start searching
@@ -3415,6 +3485,9 @@ const Bob::Task* Worker::Loader::get_task(const std::string& name) {
 	}
 	if (name == "scout") {
 		return &taskScout;
+	}
+	if (name == "refit_warship") {
+		return &taskRefitWarship;
 	}
 	return Bob::Loader::get_task(name);
 }

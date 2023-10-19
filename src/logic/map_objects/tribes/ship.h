@@ -26,6 +26,7 @@
 #include "economy/shippingitem.h"
 #include "graphic/animation/diranimations.h"
 #include "logic/map_objects/bob.h"
+#include "logic/map_objects/buildcost.h"
 #include "logic/map_objects/tribes/shipstates.h"
 
 namespace Widelands {
@@ -56,7 +57,9 @@ struct NoteShip {
 
 class ShipDescr : public BobDescr {
 public:
-	ShipDescr(const std::string& init_descname, const LuaTable& t);
+	ShipDescr(const std::string& init_descname,
+	          const LuaTable& t,
+	          Widelands::Descriptions& descriptions);
 	~ShipDescr() override = default;
 
 	[[nodiscard]] Bob& create_object() const override;
@@ -74,17 +77,40 @@ public:
 		return ship_names_;
 	}
 
+	[[nodiscard]] const Buildcost& get_refit_cost() const {
+		return refit_cost_;
+	}
+	[[nodiscard]] uint32_t get_max_hitpoints() const {
+		return max_hitpoints_;
+	}
+	[[nodiscard]] uint32_t get_min_attack() const {
+		return min_attack_;
+	}
+	[[nodiscard]] uint32_t get_max_attack() const {
+		return max_attack_;
+	}
+	[[nodiscard]] uint32_t get_defense() const {
+		return defense_;
+	}
+	[[nodiscard]] uint32_t get_attack_accuracy() const {
+		return attack_accuracy_;
+	}
+	[[nodiscard]] uint32_t get_heal_per_second() const {
+		return heal_per_second_;
+	}
+
+private:
+	DirAnimations sail_anims_;
+	Quantity default_capacity_;
+	std::vector<std::string> ship_names_;
+
+	const Buildcost refit_cost_;
 	const uint32_t max_hitpoints_;
 	const uint32_t min_attack_;
 	const uint32_t max_attack_;
 	const uint32_t defense_;
 	const uint32_t attack_accuracy_;
 	const uint32_t heal_per_second_;
-
-private:
-	DirAnimations sail_anims_;
-	Quantity default_capacity_;
-	std::vector<std::string> ship_names_;
 
 	DISALLOW_COPY_AND_ASSIGN(ShipDescr);
 };
@@ -328,7 +354,8 @@ struct Ship : Bob {
 	[[nodiscard]] ShipType get_pending_refit() const {
 		return pending_refit_;
 	}
-	[[nodiscard]] bool can_refit(ShipType) const;
+	[[nodiscard]] bool can_refit(ShipType type) const;
+	[[nodiscard]] bool can_cancel_refit() const;
 	[[nodiscard]] inline bool is_refitting() const {
 		return get_pending_refit() != get_ship_type();
 	}
@@ -339,7 +366,6 @@ struct Ship : Bob {
 		return soldier_preference_;
 	}
 
-	// Editor only
 	void set_ship_type(EditorGameBase& egbase, ShipType t);
 	void set_warship_soldier_capacity(Quantity c);
 
@@ -372,8 +398,8 @@ private:
 	bool ship_update_expedition(Game&, State&);
 	void ship_update_idle(Game&, State&);
 	void battle_update(Game&);
-	void update_warship_soldier_request(bool create);
-	void erase_warship_soldier_request();
+	void update_warship_request(bool create);
+	void erase_warship_request();
 	void kickout_superfluous_soldiers(Game& game);
 	/// Set the ship's state to 'state' and if the ship state has changed, publish a notification.
 	void set_ship_state_and_notify(ShipStates state, NoteShip::Action action);

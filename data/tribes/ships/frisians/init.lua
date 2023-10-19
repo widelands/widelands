@@ -18,6 +18,13 @@ wl.Descriptions():new_ship_type {
    attack_accuracy = 60,
    heal_per_second = 100,
 
+   refit_cost = {
+      cloth = 2,
+      iron = 4,
+      log = 2,
+      clay = 2,
+   },
+
    spritesheets = {
       idle = {
          fps = 10,

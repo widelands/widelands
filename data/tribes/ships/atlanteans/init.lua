@@ -39,6 +39,8 @@
 --
 --    **heal_per_second**: The number of hitpoints the ship heals per second when in a dock.
 --
+--    **refit_cost**: A table of the wares required to refit the ship to a warship.
+--
 --    **animations**: A table containing all file animations for this ship.
 --    Ships have an "idle", a "sinking" and a directional "sail" animation.
 --    Animations can either be defined as file animations in this table or as spritesheet animations
@@ -122,6 +124,12 @@ wl.Descriptions():new_ship_type {
    defense         =  5,
    attack_accuracy = 60,
    heal_per_second = 100,
+
+   refit_cost = {
+      spidercloth = 2,
+      iron = 4,
+      planks = 4,
+   },
 
    spritesheets = {
       idle = {
