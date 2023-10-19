@@ -102,7 +102,7 @@ wl.Descriptions():new_tribe {
                   -- TRANSLATORS: Helptext for an Amazon ware: Granite, part 1
                   pgettext("ware", "Granite is a basic building material."),
                   -- TRANSLATORS: Helptext for an Amazon ware: Granite, part 2
-                  pgettext("amazons_ware", "The Amazons use granite for making tools and weapons as well. It is produced by the stonecutters and in stone mines."),
+                  pgettext("amazons_ware", "The Amazons use granite for making some tools as well. It is produced by the stonecutters and in stone mines."),
                }
             }
          },
