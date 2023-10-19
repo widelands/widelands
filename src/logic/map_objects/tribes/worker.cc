@@ -697,8 +697,10 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
  * Walk to a previously selected destination. where can be one of:
  * object  walk to a previously found and selected object
  * coords  walk to a previously found and selected field/coordinate
+ * <dir>   walk one field in a fixed direction
  *
  * iparam1 = walkXXX
+ * iparam2 = direction for walkDir
  */
 bool Worker::run_walk(Game& game, State& state, const Action& action) {
 	BaseImmovable const* const imm = game.map()[get_position()].get_immovable();
@@ -712,6 +714,13 @@ bool Worker::run_walk(Game& game, State& state, const Action& action) {
 			start_task_leavebuilding(game, false);
 			return true;
 		}
+	}
+
+	if ((action.iparam1 & Action::walkDir) != 0) {
+		start_task_move(
+		   game, action.iparam2, descr().get_right_walk_anims(does_carry_ware(), this), false);
+		++state.ivar1;  // next instruction
+		return true;
 	}
 
 	// Determine the coords we need to walk towards
