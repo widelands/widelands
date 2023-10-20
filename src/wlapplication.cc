@@ -1349,7 +1349,7 @@ OptionalParameter WLApplication::get_commandline_option_value(const std::string&
 		throw_empty_value(opt);
 	}
 	commandline_.erase(found);
-	return rv;
+	return std::move(rv);
 }
 
 /**
