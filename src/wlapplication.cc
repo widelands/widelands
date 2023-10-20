@@ -1337,13 +1337,8 @@ bool WLApplication::check_commandline_flag(const std::string& opt) {
 // Returns the value of `opt`. Only returns std::nullopt if `opt` was not used.
 // If `opt` was used without a value, then returns an empty string if `allow_empty` is true,
 // otherwise throws ParameterError.
-<<<<<<< HEAD
 OptionalParameter WLApplication::get_commandline_option_value(const std::string& opt,
                                                               const bool allow_empty) {
-=======
-std::optional<std::string> WLApplication::get_commandline_option_value(const std::string& opt,
-                                                                       const bool allow_empty) {
->>>>>>> 8e93db0c52235707b678374eb80c83e111cf0607
 	auto found = commandline_.find(opt);
 	if (found == commandline_.end()) {
 		return std::nullopt;
@@ -1496,17 +1491,10 @@ void WLApplication::handle_commandline_parameters() {
 	fill_parameter_vector();
 
 	// This is used by the parser to report an error
-<<<<<<< HEAD
 	if (OptionalParameter err = get_commandline_option_value("error"); err.has_value()) {
 		throw ParameterError(
 		   CmdLineVerbosity::Normal,
 		   format(_("Unknown command line parameter: %s\nMaybe a '=' is missing?"), *err));
-=======
-	if (auto err = get_commandline_option_value("error"); err.has_value()) {
-		throw ParameterError(
-		   CmdLineVerbosity::Normal,
-		   format(_("Unknown command line parameter: %s\nMaybe a '=' is missing?"), *err));
->>>>>>> 8e93db0c52235707b678374eb80c83e111cf0607
 	}
 
 	if (OptionalParameter testdir = get_commandline_option_value("datadir_for_testing");
@@ -1545,21 +1533,12 @@ void WLApplication::handle_commandline_parameters() {
 		g_verbose = true;
 	}
 
-<<<<<<< HEAD
 	static const std::map<GameType, std::string> game_type_options = {
 	   {GameType::kEditor, "editor"},
 	   {GameType::kReplay, "replay"},
 	   {GameType::kFromTemplate, "new_game_from_template"},
 	   {GameType::kLoadGame, "loadgame"},
 	   {GameType::kScenario, "scenario"}};
-=======
-	const std::map<GameType, std::string> game_type_options = {
-	   {GameType::kEditor, "editor"},
-	   {GameType::kReplay, "replay"},
-	   {GameType::kFromTemplate, "new_game_from_template"},
-	   {GameType::kLoadGame, "loadgame"},
-	   {GameType::kScenario, "scenario"}};
->>>>>>> 8e93db0c52235707b678374eb80c83e111cf0607
 
 	for (const auto& pair : game_type_options) {
 		const std::string& opt = pair.second;
