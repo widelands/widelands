@@ -1316,7 +1316,7 @@ void throw_empty_value(const std::string& opt) {
 void throw_exclusive(const std::string& opt, const std::string& other) {
 	throw ParameterError(
 	   CmdLineVerbosity::None,
-	   format(_("Command line parameters --%s and --%s can not be combined"), opt, other));
+	   format(_("Command line parameters --%1$s and --%2$s can not be combined"), opt, other));
 }
 
 
@@ -1338,7 +1338,7 @@ bool WLApplication::check_commandline_flag(const std::string& opt) {
 // Returns the value of `opt`. Only returns std::nullopt if `opt` was not used.
 // If `opt` was used without a value, then returns an empty string if `allow_empty` is true,
 // otherwise throws ParameterError.
-std::optional<std::string>
+OptionalParameter
 WLApplication::get_commandline_option_value(const std::string& opt, const bool allow_empty) {
 	auto found = commandline_.find(opt);
 	if (found == commandline_.end()) {
@@ -1364,7 +1364,7 @@ void WLApplication::handle_commandline_parameters() {
 		i18n::enable_verbose_i18n();
 	}
 
-	if (auto localedir_option = get_commandline_option_value("localedir");
+	if (OptionalParameter localedir_option = get_commandline_option_value("localedir");
 	    localedir_option.has_value()) {
 		localedir_ = *localedir_option;
 	}
@@ -1410,7 +1410,8 @@ void WLApplication::handle_commandline_parameters() {
 		return std::string();
 	};
 	bool found = false;
-	if (auto datadir_option = get_commandline_option_value("datadir"); datadir_option.has_value()) {
+	if (OptionalParameter datadir_option = get_commandline_option_value("datadir");
+	    datadir_option.has_value()) {
 		datadir_ = *datadir_option;
 
 		const std::string err = checkdatadirversion(datadir_);
@@ -1481,7 +1482,7 @@ void WLApplication::handle_commandline_parameters() {
 		}
 	}
 
-	if (auto lang = get_commandline_option_value("language"); lang.has_value()) {
+	if (OptionalParameter lang = get_commandline_option_value("language"); lang.has_value()) {
 		set_config_string("language", *lang);
 	}
 	if (found) {
@@ -1491,13 +1492,14 @@ void WLApplication::handle_commandline_parameters() {
 	fill_parameter_vector();
 
 	// This is used by the parser to report an error
-	if (auto err = get_commandline_option_value("error"); err.has_value()) {
+	if (OptionalParameter err = get_commandline_option_value("error"); err.has_value()) {
 		throw ParameterError(CmdLineVerbosity::Normal,
 		                     format(_("Unknown command line parameter: %s\nMaybe a '=' is missing?"),
 		                            *err));
 	}
 
-	if (auto testdir = get_commandline_option_value("datadir_for_testing"); testdir.has_value()) {
+	if (OptionalParameter testdir = get_commandline_option_value("datadir_for_testing");
+	    testdir.has_value()) {
 		datadir_for_testing_ = *testdir;
 	}
 
@@ -1532,7 +1534,7 @@ void WLApplication::handle_commandline_parameters() {
 		g_verbose = true;
 	}
 
-	const std::map<GameType, std::string> game_type_options = {
+	static const std::map<GameType, std::string> game_type_options = {
 		{ GameType::kEditor, "editor" },
 		{ GameType::kReplay, "replay" },
 		{ GameType::kFromTemplate, "new_game_from_template" },
@@ -1540,10 +1542,10 @@ void WLApplication::handle_commandline_parameters() {
 		{ GameType::kScenario, "scenario" }
 	};
 
-	for (auto pair : game_type_options) {
+	for (const auto& pair : game_type_options) {
 		const std::string& opt = pair.second;
 		const bool allow_empty = opt == "editor";
-		auto val = get_commandline_option_value(opt, allow_empty);
+		OptionalParameter val = get_commandline_option_value(opt, allow_empty);
 		if (!val.has_value()) {
 			continue;
 		}
@@ -1554,15 +1556,15 @@ void WLApplication::handle_commandline_parameters() {
 		game_type_ = pair.first;
 
 		filename_ = *val;
-		if (/* !filename_.empty() && */ *filename_.rbegin() == '/') {
+		if (filename_.back() == '/') {
 			// Strip trailing directory separator
 			filename_.erase(filename_.size() - 1);
 		}
 	}
 
-	if (auto val = get_commandline_option_value("script"); val.has_value()) {
+	if (OptionalParameter val = get_commandline_option_value("script"); val.has_value()) {
 		script_to_run_ = *val;
-		if (*script_to_run_.rbegin() == '/') {
+		if (script_to_run_.back() == '/') {
 			// Strip trailing directory separator
 			script_to_run_.erase(script_to_run_.size() - 1);
 		}
@@ -1609,8 +1611,8 @@ void WLApplication::handle_commandline_parameters() {
 			throw_exclusive("fullscreen", "maximized");
 		}
 
-		const auto xres = get_commandline_option_value("xres");
-		const auto yres = get_commandline_option_value("yres");
+		const OptionalParameter xres = get_commandline_option_value("xres");
+		const OptionalParameter yres = get_commandline_option_value("yres");
 		if ((xres.has_value() || yres.has_value()) && (display_fullscreen || display_maximized)) {
 			std::string which_res;
 			if (xres.has_value() && yres.has_value()) {

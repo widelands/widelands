@@ -64,6 +64,8 @@ struct ParameterError : public std::runtime_error {
 	CmdLineVerbosity level_;
 };
 
+using OptionalParameter = std::optional<std::string>;
+
 // Callbacks input events to the UI. All functions return true when the event
 // was handled, false otherwise.
 struct InputCallback {
@@ -217,9 +219,8 @@ private:
 
 	void parse_commandline(int argc, char const* const* argv);
 	void handle_commandline_parameters();
-	bool check_commandline_flag(const std::string& param);
-	std::optional<std::string>
-	get_commandline_option_value(const std::string& opt, const bool allow_empty = false);
+	bool check_commandline_flag(const std::string& opt);
+	OptionalParameter get_commandline_option_value(const std::string& opt, bool allow_empty = false);
 
 	void setup_homedir();
 
