@@ -1349,7 +1349,17 @@ OptionalParameter WLApplication::get_commandline_option_value(const std::string&
 		throw_empty_value(opt);
 	}
 	commandline_.erase(found);
+
+	// Fix warning in old clang versions
+#ifdef __clang__
+#if __clang_major__ < 13
 	return std::move(rv);
+#else
+	return rv;
+#endif
+#else
+	return rv;
+#endif
 }
 
 /**
