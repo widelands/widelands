@@ -242,7 +242,7 @@ void GameSummaryScreen::fill_data() {
 		te.set_string(3, gametimestring(pes.time.get()));
 	}
 
-	assert(i == game_.player_manager()->get_number_of_players());
+	assert(players_table_->size() == game_.player_manager()->get_number_of_players());
 
 	if (local_in_game) {
 		if (local_won) {
