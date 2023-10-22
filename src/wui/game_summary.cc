@@ -18,6 +18,8 @@
 
 #include "wui/game_summary.h"
 
+#include <vector>
+
 #include <SDL_mouse.h>
 
 #include "base/log.h"
@@ -182,10 +184,9 @@ void GameSummaryScreen::fill_data() {
 	std::string won_name;
 	Widelands::TeamNumber team_won = 0;
 	InteractivePlayer* ipl = game_.get_ipl();
-	// This defines a row to be selected, current player,
-	// if not then the first line
-	uint32_t current_player_position = 0;
-	uint32_t i = 0;
+	// This defines a row to be selected: either the local player,
+	// or the first line if the local player was not in the game
+	uint32_t local_player_index = 0;
 
 	const std::map<Widelands::PlayerNumber, Widelands::PlayerEndStatus>& end_status_map =
 	   game_.player_manager()->get_all_players_end_status();
@@ -197,7 +198,7 @@ void GameSummaryScreen::fill_data() {
 		if ((ipl != nullptr) && pes.player == ipl->player_number()) {
 			local_in_game = true;
 			local_won = pes.result == Widelands::PlayerEndResult::kWon;
-			current_player_position = i;
+			local_player_index = players_table_->size();
 		}
 		Widelands::Player* p = game_.get_player(pn);
 		UI::Table<uintptr_t const>::EntryRecord& te = players_table_->add(pes);
@@ -239,7 +240,6 @@ void GameSummaryScreen::fill_data() {
 		te.set_string(2, stat_str);
 		// Time
 		te.set_string(3, gametimestring(pes.time.get()));
-		++i;
 	}
 
 	assert(i == game_.player_manager()->get_number_of_players());
@@ -258,7 +258,7 @@ void GameSummaryScreen::fill_data() {
 		}
 	}
 	if (local_in_game) {
-		players_table_->select(current_player_position);
+		players_table_->select(local_player_index);
 	}
 	players_table_->layout();
 }
