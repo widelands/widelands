@@ -46,9 +46,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
          descname = _("quarrying granite"),
          actions = {
-            -- time of worker: 24.7-49.9 sec
+            -- time of worker: 24.7-49.9 sec, min+max average 37.3 sec
             -- min. time total: 24.7 + 17.5 = 42.2 sec
             -- max. time total: 49.9 + 17.5 = 67.4 sec
+            -- avg. time total: 37.3 + 17.5 = 54.8 sec
             "callworker=cut_granite",
             "sleep=duration:17s500ms"
          }

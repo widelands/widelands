@@ -17,9 +17,10 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       hunt = {
-         -- steps from building to animal: 2-16
+         -- steps from building to animal: 2-16, min+max average 9
          -- min. worker time: 2 * 2 * 1.8 + 1 = 8.2 sec
          -- max. worker time: 2 * 16 * 1.8 + 1 = 58.6 sec
+         -- avg. worker time: 2 * 9 * 1.8 + 1 = 33.4 sec
          -- chasing of the game also changes time, average should remain the same
          "findobject=type:bob radius:13 attrib:eatable",
          "walk=object",

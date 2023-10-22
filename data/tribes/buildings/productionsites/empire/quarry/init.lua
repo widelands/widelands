@@ -38,9 +38,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
-            -- time of worker: 24.7-49.9 sec
+            -- time of worker: 24.7-49.9 sec, min+max average 37.3 sec
             -- min. time of 1 stone: 24.7 + 17.5 = 42.2 sec
             -- max. time of 1 stone: 49.9 + 17.5 = 67.4 sec
+            -- avg. time of 1 stone: 37.3 + 17.5 = 54.8 sec
             "call=mine_granite on failure fail",
             "call=mine_granite on failure fail",
             "call=mine_granite on failure fail",

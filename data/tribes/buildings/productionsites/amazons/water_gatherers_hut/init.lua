@@ -37,9 +37,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
-            -- time of worker: 11.8-44.2 sec
+            -- time of worker: 11.8-44.2 sec, min+max average 28 sec
             -- min. time total: 11.8 + 20 = 31.8 sec
             -- max. time total: 44.2 + 20 = 64.2 sec
+            -- avg. time total: 28 + 20 = 48 sec
             "sleep=duration:20s",
             "callworker=fetch_water",
             -- he carries 2 buckets so we need to create one now

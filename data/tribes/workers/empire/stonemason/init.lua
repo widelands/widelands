@@ -17,9 +17,10 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       cut_granite = {
-         -- steps from building to rock: 2-9
+         -- steps from building to rock: 2-9, min+max average 5.5
          -- min. worker time: 2 * 2 * 1.8 + 17.5 = 24.7 sec
          -- max. worker time: 2 * 9 * 1.8 + 17.5 = 49.9 sec
+         -- avg. worker time: 2 * 5.5 * 1.8 + 17.5 = 37.3 sec
          "findobject=attrib:rocks radius:6",
          "walk=object",
          "playsound=sound/stonecutting/stonecutter priority:70% allow_multiple",
@@ -29,9 +30,10 @@ wl.Descriptions():new_worker_type {
          "return"
       },
       cut_marble = {
-         -- steps from building to rock: 2-9
+         -- steps from building to rock: 2-9, min+max average 5.5
          -- min. worker time: 2 * 2 * 1.8 + 17.5 = 24.7 sec
          -- max. worker time: 2 * 9 * 1.8 + 17.5 = 49.9 sec
+         -- avg. worker time: 2 * 5.5 * 1.8 + 17.5 = 37.3 sec
          "findobject=attrib:rocks radius:6",
          "walk=object",
          "playsound=sound/stonecutting/stonecutter priority:70% allow_multiple",
