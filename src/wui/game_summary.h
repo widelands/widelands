@@ -21,7 +21,6 @@
 
 #include <vector>
 
-#include "logic/widelands.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/icon.h"
