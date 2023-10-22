@@ -177,8 +177,10 @@
 --       }
 --
 --    **builder**:  The internal name of the tribe's builder. This unit needs to be defined in the ``workers_order`` table too.
+--                  The unit must have a ``work`` and an ``idle`` animation.
 --
 --    **shipwright**:  The internal name of the tribe's shipwright. This unit needs to be defined in the ``workers_order`` table too.
+--                     The unit must have a ``work`` animation that will be used when refitting a ship.
 --
 --    **carriers**:  An :class:`array` with the internal names of the tribe's carrier and beasts of burden. Must have at least two entries,
 --                   the first of which is used as the tribe's primary carrier and the second of which as the tribe's secondary carrier.
