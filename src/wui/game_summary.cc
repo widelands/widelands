@@ -120,7 +120,7 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	// Connections
 	continue_button_->sigclicked.connect([this]() { continue_clicked(); });
 	stop_button_->sigclicked.connect([this]() { stop_clicked(); });
-	players_table_->selected.connect([this](uint32_t i) { player_selected(i); });
+	players_table_->selected.connect([this](uint32_t) { player_selected(players_table_->get_selected()); });
 
 	// Window
 	center_to_parent();
