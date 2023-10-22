@@ -48,8 +48,8 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	vbox->add_space(kPadding);
 
 	UI::Box* hbox1 = new UI::Box(vbox, UI::PanelStyle::kWui, "hbox1", 0, 0, UI::Box::Horizontal);
-	players_table_ =
-	   new UI::Table<const Widelands::PlayerEndStatus&>(hbox1, "table", 0, 0, 0, 0, UI::PanelStyle::kWui);
+	players_table_ = new UI::Table<const Widelands::PlayerEndStatus&>(
+	   hbox1, "table", 0, 0, 0, 0, UI::PanelStyle::kWui);
 	players_table_->fit_height(game_.player_manager()->get_number_of_players());
 
 	info_box_ = new UI::Box(hbox1, UI::PanelStyle::kWui, "info_box", 0, 0, UI::Box::Vertical, 0, 0);
