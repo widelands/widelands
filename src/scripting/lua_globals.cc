@@ -384,6 +384,8 @@ static int L_npgettext(lua_State* L) {
       :type script: :class:`string`
       :arg script: The filename relative to the root of the data directory.
       :returns: table returned by included script or an empty table
+         .. versionchanged:: 1.2
+            It returned nil before
 */
 static int L_include(lua_State* L) {
 	const std::string script = luaL_checkstring(L, -1);
