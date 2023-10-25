@@ -24,6 +24,7 @@ jobs:
     outputs:
       result-x64: ${{ steps.build.outputs.result-x64 }}
       result-x86: ${{ steps.build.outputs.result-x86 }}
+      vcpkg_ref: ${{ steps.prepare.outputs.vcpkg_ref }}
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -36,30 +37,50 @@ jobs:
         HEAD=$(git rev-parse --short HEAD)
         popd
         echo "Current HEAD is $HEAD"
-        echo -n $HEAD > .github/scripts/vcpkg_ref
         echo "vcpkg_key=${{ hashFiles( './install-dependencies.sh' ) }}-${HEAD}" >> $GITHUB_OUTPUT
+        # Test newest toolset
+        toolset=$(curl https://raw.githubusercontent.com/actions/runner-images/main/images/win/toolsets/toolset-2022.json | \
+                  jq '.visualStudio.workloads[] | capture("Component\\.VC\\.(?<v>[0-9]+\\.[0-9]+)(\\.[0-9]+){2}\\.x86\\.x64") | .v' | \
+                  sort -u | tail -n 1 | tr -d '"')
+        echo "Current toolset is ${toolset}"
+        echo "toolset=${toolset}" >> $GITHUB_OUTPUT
+        echo "vcpkg_ref=\"$HEAD ${toolset}\"" >> $GITHUB_OUTPUT
       shell: bash
     - name: Check whether cache exists
       id: lookup
       uses: actions/cache@v3
       with:
-        path: ${{ env.VCPKG_ROOT }}/installed
+        # Explicit path here because env is overridden by msvc-dev-cmd
+        path: C:\vcpkg\installed
         key: |
           ${{ steps.prepare.outputs.vcpkg_key }}-${{ matrix.arch }}
     - name: Building packages
-      id: build
       if: steps.lookup.outputs.cache-hit != 'true'
       run: |
         ./install-dependencies.sh vcpkg --triplet=${{ env.VCPKG_TARGET_TRIPLET }}
-        echo "result-${{ matrix.arch }}=true" >> $GITHUB_OUTPUT
       shell: bash
+    - name: Configure MSVC development console
+      if: steps.lookup.outputs.cache-hit != 'true'
+      uses: ilammy/msvc-dev-cmd@v1
+      with:
+        arch: ${{ matrix.arch }}
+        toolset: ${{ steps.prepare.outputs.toolset }}
+    - name: Compiler
+      id: build
+      if: steps.lookup.outputs.cache-hit != 'true'
+      env:
+        VCPKG_ROOT: C:\vcpkg
+      run: |
+        mkdir $env:GITHUB_WORKSPACE\build
+        cd $env:GITHUB_WORKSPACE\build
+        cmake.exe -G "NMake Makefiles" .. -DVCPKG_TARGET_TRIPLET=${{ env.VCPKG_TARGET_TRIPLET }} -DCMAKE_TOOLCHAIN_FILE="${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake" -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TRANSLATIONS=ON -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DOPTION_BUILD_WINSTATIC=ON -DOPTION_USE_GLBINDING=ON -DOPTION_FORCE_EMBEDDED_MINIZIP=ON
+        nmake
+        echo "result-${{ matrix.arch }}=true" >> $env:GITHUB_OUTPUT
   update:
     needs: vcpkg-packages
     if: ${{ github.repository == 'widelands/widelands' && needs.vcpkg-packages.outputs.result-x64 && needs.vcpkg-packages.outputs.result-x86 }}
     name: Commit new version
     runs-on: windows-2022
-    env:
-      VCPKG_ROOT: C:\vcpkg
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -68,11 +89,8 @@ jobs:
         persist-credentials: false
     - name: Update vcpkg_ref
       run: |
-        pushd ${{ env.VCPKG_ROOT }}
-        HEAD=$(git rev-parse --short HEAD)
-        popd
-        echo "Current HEAD is $HEAD"
-        echo -n $HEAD > .github/scripts/vcpkg_ref
+        echo "Updating to ${{ needs.vcpkg-packages.outputs.vcpkg_ref }}"
+        echo "${{ needs.vcpkg-packages.outputs.vcpkg_ref }}" > .github/scripts/vcpkg_ref
         if [ -n "$(git status -s)" ]; then
           git config --global user.name "The Widelands Build Bot"
           git config --global user.email "bunnybot@widelands.org"
