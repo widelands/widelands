@@ -62,6 +62,8 @@ wl.Descriptions():new_productionsite_type {
             -- time total: 19 * 69 = 1311 sec
             "call=produce_shovel",
             "call=produce_spear_wooden",
+            -- firestones before felling_ax to make poor hamlet work without dismantle
+            "call=produce_firestones",
             "call=produce_felling_ax",
             "call=produce_spear_stone_tipped",
             "call=produce_pick",
@@ -78,7 +80,6 @@ wl.Descriptions():new_productionsite_type {
             "call=produce_spear_stone_tipped",
             "call=produce_stone_bowl",
             "call=produce_spear_hardened",
-            "call=produce_firestones",
          },
       },
       produce_shovel = {
