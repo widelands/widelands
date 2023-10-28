@@ -417,16 +417,23 @@ uint32_t PortDock::calc_max_priority(const EditorGameBase& egbase, const PortDoc
 	return priority;
 }
 
-/// \returns whether an expedition was started or is even ready
+/// \returns whether an expedition or a refit was started or is even ready
 bool PortDock::expedition_started() const {
-	return !expedition_cancelling_ && ((expedition_bootstrap_ != nullptr) || expedition_ready_);
+	return (expedition_state_ == ExpeditionState::kStarted ||
+	        expedition_state_ == ExpeditionState::kReady);
+}
+
+bool PortDock::is_expedition_ready() const {
+	return (expedition_state_ == ExpeditionState::kReady);
 }
 
 /// Start an expedition
-void PortDock::start_expedition() {
-	assert(!expedition_bootstrap_);
+void PortDock::start_expedition(ExpeditionType expedition_type) {
+	assert(expedition_bootstrap_ == nullptr);
+	expedition_type_ = expedition_type;
 	expedition_bootstrap_.reset(new ExpeditionBootstrap(this));
-	expedition_bootstrap_->start();
+	expedition_bootstrap_->start(expedition_type_);
+	expedition_state_ = ExpeditionState::kStarted;
 }
 
 ExpeditionBootstrap* PortDock::expedition_bootstrap() const {
@@ -434,22 +441,32 @@ ExpeditionBootstrap* PortDock::expedition_bootstrap() const {
 }
 
 void PortDock::set_expedition_bootstrap_complete(Game& game, bool complete) {
-	if (expedition_ready_ != complete) {
-		expedition_ready_ = complete;
+	assert(expedition_state_ != ExpeditionState::kNone);
+	assert(expedition_bootstrap_ != nullptr);
+
+	if (expedition_state_ == ExpeditionState::kCancelling) {
+		return;
+	}
+
+	const ExpeditionState set_state =
+	   complete ? ExpeditionState::kReady : ExpeditionState::kStarted;
+
+	if (expedition_state_ != set_state) {
+		expedition_state_ = set_state;
 		get_fleet()->update(game);
 	}
 }
 
 void PortDock::cancel_expedition(Game& game) {
 	// Reset
-	assert(!expedition_cancelling_);
-	expedition_cancelling_ = true;
-	expedition_ready_ = false;
+	assert(expedition_state_ != ExpeditionState::kCancelling);
+	expedition_state_ = ExpeditionState::kCancelling;
 
 	expedition_bootstrap_->cancel(game);
 	expedition_bootstrap_.reset(nullptr);
 
-	expedition_cancelling_ = false;
+	expedition_type_ = ExpeditionType::kNone;
+	expedition_state_ = ExpeditionState::kNone;
 }
 
 SoldierRequest* PortDock::get_warship_request(Serial ship) const {
@@ -484,6 +501,8 @@ Ship* PortDock::find_ship_for_warship_request(const EditorGameBase& egbase,
 	return nullptr;
 }
 
+// NOCOM
+// TODO(tothxa): log expedition type
 void PortDock::log_general_info(const EditorGameBase& egbase) const {
 	PlayerImmovable::log_general_info(egbase);
 
@@ -493,12 +512,12 @@ void PortDock::log_general_info(const EditorGameBase& egbase) const {
 		      "PortDock for warehouse %u (%s at %3dx%3d) in fleet %u, expedition_ready: %s, "
 		      "waiting: %" PRIuS "\n",
 		      warehouse_->serial(), warehouse_->get_warehouse_name().c_str(), pos.x, pos.y,
-		      fleet_ != nullptr ? fleet_->serial() : 0, expedition_ready_ ? "true" : "false",
+		      fleet_ != nullptr ? fleet_->serial() : 0, is_expedition_ready() ? "true" : "false",
 		      waiting_.size());
 	} else {
 		molog(egbase.get_gametime(),
 		      "PortDock without a warehouse in fleet %u, expedition_ready: %s, waiting: %" PRIuS "\n",
-		      fleet_ != nullptr ? fleet_->serial() : 0, expedition_ready_ ? "true" : "false",
+		      fleet_ != nullptr ? fleet_->serial() : 0, is_expedition_ready() ? "true" : "false",
 		      waiting_.size());
 	}
 
@@ -512,6 +531,8 @@ void PortDock::log_general_info(const EditorGameBase& egbase) const {
  * Version 6 (v1.1): Deleted the list with the serials of ships heading
  * to this port as this information was moved to the ShippingSchedule.
  */
+// NOCOM
+// TODO(tothxa): save and load expedition bootstrap type
 constexpr uint8_t kCurrentPacketVersion = 6;
 
 void PortDock::Loader::load(FileRead& fr, uint8_t /* packet_version */) {
@@ -533,11 +554,25 @@ void PortDock::Loader::load(FileRead& fr, uint8_t /* packet_version */) {
 		shipping_loader.load(fr);
 	}
 
+	// NOCOM
+	// TODO(tothxa): old saves can only contain expeditions, needs proper handling when saving
+	//               is implemented
+
 	// All the other expedition specific stuff is saved in the warehouse.
 	if (fr.unsigned_8() != 0u) {  // Do we have an expedition?
 		pd.expedition_bootstrap_.reset(new ExpeditionBootstrap(&pd));
+		pd.expedition_type_ = ExpeditionType::kExpedition;
 	}
-	pd.expedition_ready_ = (fr.unsigned_8() != 0u);
+	if (fr.unsigned_8() == 0u) {
+		pd.expedition_state_ =
+		   (pd.expedition_bootstrap_ == nullptr) ? ExpeditionState::kNone : ExpeditionState::kStarted;
+	} else {
+		if (pd.expedition_bootstrap_ == nullptr) {
+			throw wexception("expedition_state_ is ready, but there was no ExpeditionBootstrap.");
+		}
+		pd.expedition_state_ = ExpeditionState::kReady;
+	}
+	// NOCOM
 }
 
 // During the first loading phase we only loaded the serials.
@@ -611,7 +646,7 @@ void PortDock::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) 
 
 	// Expedition specific stuff
 	fw.unsigned_8(expedition_bootstrap_ != nullptr ? 1 : 0);
-	fw.unsigned_8(expedition_ready_ ? 1 : 0);
+	fw.unsigned_8(is_expedition_ready() ? 1 : 0);
 }
 
 }  // namespace Widelands

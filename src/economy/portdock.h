@@ -25,6 +25,7 @@
 #include "economy/shippingitem.h"
 #include "economy/soldier_request.h"
 #include "logic/map_objects/immovable.h"
+#include "logic/map_objects/tribes/shipstates.h"
 #include "logic/map_objects/tribes/wareworker.h"
 
 namespace Widelands {
@@ -113,22 +114,34 @@ public:
 	[[nodiscard]] uint32_t count_waiting(WareWorker waretype, DescriptionIndex wareindex) const;
 	[[nodiscard]] uint32_t count_waiting(const PortDock* = nullptr) const;
 
-	// Returns true if a expedition is started or ready to be send out.
+	enum class ExpeditionState : uint8_t {kNone = 0, kStarted, kCancelling, kReady};
+
+	[[nodiscard]] ExpeditionState expedition_state() const {
+		return expedition_state_;
+	}
+	[[nodiscard]] ExpeditionType expedition_type() const {
+		return expedition_type_;
+	}
+
+	// NOCOM
+	// TODO(tothxa): Check all old users of these whether they should now check the expedition
+	//               type too
+	// Returns true if an expedition is started or ready to be sent out.
 	[[nodiscard]] bool expedition_started() const;
 
+	[[nodiscard]] bool is_expedition_ready() const;
+	// NOCOM
+
 	// Called when the button in the warehouse window is pressed.
-	void start_expedition();
+	void start_expedition(ExpeditionType expedition_type = ExpeditionType::kExpedition);
 	void cancel_expedition(Game&);
 
 	// May return nullptr when there is no expedition ongoing or if the
 	// expedition ship is already underway.
 	[[nodiscard]] ExpeditionBootstrap* expedition_bootstrap() const;
 
-	[[nodiscard]] bool is_expedition_ready() const {
-		return expedition_ready_;
-	}
-
 	// Gets called by the ExpeditionBootstrap as soon as all wares and workers are available.
+	// Also used to notify the fleet on changes of completion state.
 	void set_expedition_bootstrap_complete(Game& game, bool complete);
 
 	[[nodiscard]] SoldierRequest* get_warship_request(Serial ship) const;
@@ -159,8 +172,9 @@ private:
 	Warehouse* warehouse_;
 	PositionList dockpoints_;
 	std::list<ShippingItem> waiting_;
-	bool expedition_ready_{false};
-	bool expedition_cancelling_{false};
+
+	ExpeditionState expedition_state_{ExpeditionState::kNone};
+	ExpeditionType expedition_type_{ExpeditionType::kNone};
 
 	std::unique_ptr<ExpeditionBootstrap> expedition_bootstrap_;
 
