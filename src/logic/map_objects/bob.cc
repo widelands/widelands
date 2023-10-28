@@ -961,6 +961,24 @@ void Bob::set_position(EditorGameBase& egbase, const Coords& coords) {
 	}
 }
 
+void Bob::draw_on_top() {
+	if (position_.field == nullptr || linknext_ == nullptr) {
+		// Not drawn or already on top
+		return;
+	}
+
+	*linkpprev_ = linknext_;
+	linknext_->linkpprev_ = linkpprev_;
+
+	Bob* last;
+	do {
+		last = linknext_;
+		linknext_ = linknext_->linknext_;
+	} while(linknext_ != nullptr);
+	linkpprev_ = &last;
+	last->linknext_ = this;
+}
+
 /// Give debug information.
 void Bob::log_general_info(const EditorGameBase& egbase) const {
 	FORMAT_WARNINGS_OFF

@@ -465,7 +465,7 @@ void Descriptions::add_object_description(const LuaTable& table, MapObjectType t
 		buildings_->add(new ProductionSiteDescr(type_descname, table, *this));
 		break;
 	case MapObjectType::SHIP:
-		ships_->add(new ShipDescr(type_descname, table));
+		ships_->add(new ShipDescr(type_descname, table, *this));
 		break;
 	case MapObjectType::SOLDIER:
 		workers_->add(new SoldierDescr(type_descname, table, *this));
