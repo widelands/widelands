@@ -54,7 +54,6 @@ constexpr const char* const kImgScoutSW = "images/wui/ship/ship_scout_sw.png";
 constexpr const char* const kImgScoutSE = "images/wui/ship/ship_scout_se.png";
 constexpr const char* const kImgConstructPort = "images/wui/ship/ship_construct_port_space.png";
 constexpr const char* const kImgRefitTransport = "images/wui/ship/ship_refit_transport.png";
-constexpr const char* const kImgRefitWarship = "images/wui/ship/ship_refit_warship.png";
 constexpr const char* const kImgWarshipStay = "images/wui/ship/ship_stay.png";
 
 constexpr int kPadding = 5;
@@ -176,6 +175,8 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 
 	btn_refit_ =
 	   make_button(buttons, "refit", "", kImgRefitTransport, false, [this]() { act_refit(); });
+	btn_refit_->set_pic(g_image_cache->get(kImgRefitTransport));
+	btn_refit_->set_tooltip(_("Refit to transport ship"));
 	buttons->add(btn_refit_);
 	buttons->add_space(kPadding);
 
@@ -449,19 +450,8 @@ void ShipWindow::think() {
 	update_destination_buttons(ship);
 	set_destination_->set_enabled(can_act);
 	btn_sink_->set_enabled(can_act);
-
-	btn_refit_->set_visible(!ibase_.egbase().is_game() || ibase_.game().naval_warfare_allowed());
-
-	btn_refit_->set_pic(g_image_cache->get(ship->get_ship_type() == Widelands::ShipType::kWarship ?
-                                             kImgRefitTransport :
-                                             kImgRefitWarship));
-	btn_refit_->set_enabled(can_act &&
-	                        ship->can_refit(ship->get_ship_type() == Widelands::ShipType::kWarship ?
-                                              Widelands::ShipType::kTransport :
-                                              Widelands::ShipType::kWarship));
-	btn_refit_->set_tooltip(ship->get_ship_type() == Widelands::ShipType::kWarship ?
-                              _("Refit to transport ship") :
-                              _("Refit to warship"));
+	btn_refit_->set_visible(can_act && ship->can_refit(Widelands::ShipType::kTransport) &&
+	                        (!ibase_.egbase().is_game() || ibase_.game().naval_warfare_allowed()));
 	btn_warship_stay_->set_enabled(can_act);
 
 	display_->clear();
@@ -604,13 +594,10 @@ void ShipWindow::act_refit() {
 	if (ship == nullptr) {
 		return;
 	}
-	const Widelands::ShipType t = ship->get_ship_type() == Widelands::ShipType::kWarship ?
-                                    Widelands::ShipType::kTransport :
-                                    Widelands::ShipType::kWarship;
 	if (Widelands::Game* game = ibase_.get_game(); game != nullptr) {
-		game->send_player_refit_ship(*ship, t);
+		game->send_player_refit_to_transport_ship(*ship);
 	} else {
-		ship->set_ship_type(ibase_.egbase(), t);
+		ship->set_ship_type(ibase_.egbase(), Widelands::ShipType::kTransport);
 	}
 }
 

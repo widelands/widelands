@@ -66,7 +66,6 @@ BuildingWindow::BuildingWindow(InteractiveBase& parent,
      showing_workarea_(false),
      avoid_fastclick_(avoid_fastclick),
      priority_collapsed_(&reg.priority_collapsed),
-     expeditionbtn_(nullptr),
      mute_this_(nullptr),
      mute_all_(nullptr) {
 	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
@@ -251,26 +250,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 
 	bool requires_destruction_separator = false;
 	if (can_act) {
-		// Check if this is a port building and if yes show expedition button
-		if (upcast(Widelands::Warehouse const, warehouse, building)) {
-			if (const Widelands::PortDock* pd = warehouse->get_portdock()) {
-				expeditionbtn_ = new UI::Button(
-				   capsbuttons, "start_or_cancel_expedition", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-				   g_image_cache->get("images/wui/buildings/start_expedition.png"));
-				update_expedition_button(!pd->expedition_started());
-				expeditionbtn_->sigclicked.connect([this]() { act_start_or_cancel_expedition(); });
-				capsbuttons->add(expeditionbtn_);
-
-				expedition_canceled_subscriber_ =
-				   Notifications::subscribe<Widelands::NoteExpeditionCanceled>(
-				      [this, pd](const Widelands::NoteExpeditionCanceled& canceled) {
-					      // Check this was not just any but our Expedition
-					      if (canceled.bootstrap == pd->expedition_bootstrap()) {
-						      update_expedition_button(true);
-					      }
-				      });
-			}
-		} else if (upcast(const Widelands::ProductionSite, productionsite, building)) {
+		if (upcast(const Widelands::ProductionSite, productionsite, building)) {
 			const bool is_stopped = productionsite->is_stopped();
 			UI::Button* stopbtn = new UI::Button(
 			   capsbuttons, is_stopped ? "continue" : "stop", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
@@ -549,33 +529,6 @@ void BuildingWindow::act_produce_infinite() {
 
 /**
 ===============
-Callback for starting an expedition request
-===============
-*/
-void BuildingWindow::act_start_or_cancel_expedition() {
-	Widelands::Building* building = building_.get(parent_->egbase());
-	if (building == nullptr) {
-		return;
-	}
-
-	if (upcast(Widelands::Warehouse const, warehouse, building)) {
-		if (warehouse->get_portdock() != nullptr) {
-			expeditionbtn_->set_enabled(false);
-			if (game_ != nullptr) {
-				game_->send_player_start_or_cancel_expedition(*building);
-			} else {
-				NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
-			}
-		}
-		get_tabs()->activate("expedition_wares_queue");
-	}
-
-	// No need to die here - as soon as the request is handled, the UI will get updated by the
-	// portdock
-}
-
-/**
-===============
 Callback for enhancement request
 ===============
 */
@@ -718,19 +671,6 @@ void BuildingWindow::toggle_workarea() {
  */
 void BuildingWindow::clicked_goto() {
 	ibase()->map_view()->scroll_to_field(building_position_, MapView::Transition::Smooth);
-}
-
-void BuildingWindow::update_expedition_button(bool expedition_was_canceled) {
-	assert(expeditionbtn_ != nullptr);
-	if (expedition_was_canceled) {
-		expeditionbtn_->set_tooltip(_("Start an expedition"));
-		expeditionbtn_->set_pic(g_image_cache->get("images/wui/buildings/start_expedition.png"));
-		tabs_->remove_last_tab("expedition_wares_queue");
-	} else {
-		expeditionbtn_->set_tooltip(_("Cancel the expedition"));
-		expeditionbtn_->set_pic(g_image_cache->get("images/wui/buildings/cancel_expedition.png"));
-	}
-	expeditionbtn_->set_enabled(true);
 }
 
 constexpr uint16_t kCurrentPacketVersion = 2;
