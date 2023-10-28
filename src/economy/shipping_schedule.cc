@@ -95,7 +95,7 @@ bool ShippingSchedule::is_busy(const Ship& ship) const {
 
 void ShippingSchedule::start_expedition(Game& game, Ship& ship, PortDock& port) {
 	sslog("Loading expedition\n\n");
-	assert(port.expedition_ready_);
+	assert(port.expedition_state() == PortDock::ExpeditionState::kReady);
 	assert(ship.get_nritems() == 0);
 
 	std::vector<Worker*> workers;
@@ -110,7 +110,16 @@ void ShippingSchedule::start_expedition(Game& game, Ship& ship, PortDock& port) 
 	}
 
 	ship.set_destination(game, nullptr);
-	ship.start_task_expedition(game);
+	switch (port.expedition_type()) {
+	case ExpeditionType::kExpedition:
+		ship.start_task_expedition(game);
+		break;
+	case ExpeditionType::kRefitToWarship:
+		ship.start_task_refit_to_warship(game);
+		break;
+	default:
+		NEVER_HERE();
+	}
 	port.cancel_expedition(game);
 
 	// The ship is technically not a part of the fleet any more.

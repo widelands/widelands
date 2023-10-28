@@ -64,6 +64,8 @@ constexpr unsigned kNearDestinationNoteRadius = 1;
 
 const std::string kPortspaceIconFile = "images/wui/editor/fsel_editor_set_port_space.png";
 
+static const Duration kRefitDuration(5 * 60 * 1000);  // 5 minutes
+
 /// Returns true if 'coords' is not blocked by immovables
 /// Trees are allowed, because we don't want spreading forests to block portspaces from expeditions
 bool can_support_port(const FCoords& coords, BaseImmovable::Size max_immo_size) {
@@ -438,55 +440,12 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 
 	if (is_refitting()) {
 		assert(fleet_ == nullptr);
-		if (PortDock* dest = get_destination_port(game); dest != nullptr) {
-			const Map& map = game.map();
-			FCoords position = map.get_fcoords(get_position());
-
-			if (position.field->get_immovable() != dest) {
-				molog(game.get_gametime(), "Move to dock %u for refit\n", dest->serial());
-				start_task_movetodock(game, *dest);
-				return;
-			}
-
-			// Arrived at destination, now unload and refit
-			set_destination(game, nullptr);
-			Warehouse* wh = dest->get_warehouse();
-			for (ShippingItem& si : items_) {
-				/* Since the items may not have been in transit properly,
-				 * force their reception instead of doing it the normal way.
-				 */
-				WareInstance* ware;
-				Worker* worker;
-				si.get(game, &ware, &worker);
-				if (worker == nullptr) {
-					assert(ware != nullptr);
-					wh->receive_ware(game, game.descriptions().safe_ware_index(ware->descr().name()));
-					ware->remove(game);
-				} else {
-					assert(ware == nullptr);
-					worker->set_economy(nullptr, wwWARE);
-					worker->set_economy(nullptr, wwWORKER);
-					worker->set_position(game, wh->get_position());
-					wh->incorporate_worker(game, worker);
-				}
-			}
-			items_.clear();
-
-			ship_type_ = pending_refit_;
-			erase_warship_soldier_request();
-
-			if (ship_type_ == ShipType::kWarship) {
-				start_task_expedition(game);
-				set_destination(game, dest);
-			} else {
-				exp_cancel(game);
-			}
-		} else {
-			// Destination vanished, try to find a new one
-			molog(game.get_gametime(), "Refit failed, retry\n");
-			const ShipType t = pending_refit_;
-			pending_refit_ = ship_type_;
-			refit(game, t);
+		switch(pending_refit_) {
+		case ShipType::kWarship:
+			ship_update_refit_to_warship(game);
+			break;
+		case ShipType::kTransport:
+			ship_update_refit_to_transport(game);
 		}
 		return;
 	}
@@ -809,12 +768,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 			}
 
 			// We're on the destination dock. Load soldiers, heal, and wait for orders.
-			constexpr Duration kHealInterval(1000);
-			if (hitpoints_ < descr().max_hitpoints_ &&
-			    game.get_gametime() - last_heal_time_ >= kHealInterval) {
-				last_heal_time_ = game.get_gametime();
-				hitpoints_ = std::min(descr().max_hitpoints_, hitpoints_ + descr().heal_per_second_);
-			}
+			heal(game);
 
 			lastdock_ = dest;
 			set_ship_state_and_notify(
@@ -881,6 +835,123 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 	}
 
 	return false;  // Continue with the regular expedition updates
+}
+
+void Ship::heal(Game& game) {
+	constexpr Duration kHealInterval(1000);
+	if (hitpoints_ < descr().max_hitpoints_ &&
+	    game.get_gametime() - last_heal_time_ >= kHealInterval) {
+		last_heal_time_ = game.get_gametime();
+		hitpoints_ = std::min(descr().max_hitpoints_, hitpoints_ + descr().heal_per_second_);
+	}
+}
+
+void Ship::ship_update_refit_to_warship(Game& game){
+	assert(ship_type_ == ShipType::kTransport);
+	assert(pending_refit_ == ShipType::kWarship);
+
+	if (Time gametime = game.get_gametime(); gametime < refit_start_time_ + kRefitDuration) {
+		refit_percent_ = ((gametime - refit_start_time_).get() * 100) / kRefitDuration.get();
+
+		// Consume wares proportionally to time
+		if ((100 * items_.size()) / descr().get_refit_cost().total() > 100 - refit_percent_) {
+			items_.back().remove(game);
+			items_.pop_back();
+		}
+
+		start_task_idle(game, descr().main_animation(), 1000);
+		return;
+	}
+
+	// The shipwright's done, return it to the port
+	assert(items_.size() == 0);
+	assert(refit_worker_ != nullptr);
+
+	refit_worker_->set_economy(nullptr, wwWARE);
+	refit_worker_->set_economy(nullptr, wwWORKER);
+
+	if (lastdock_ != nullptr) {
+		Warehouse* wh = lastdock_.get(game)->get_warehouse();
+		refit_worker_->set_position(game, wh->get_position());
+		refit_worker_->reset_tasks(game);
+		wh->incorporate_worker(game, refit_worker_);
+	} else {
+		refit_worker_->start_task_fugitive(game);
+	}
+	refit_worker_ = nullptr;
+	refit_percent_ = 0;
+
+	ship_type_ = ShipType::kWarship;
+	assert(requestdock_ == nullptr);
+	start_task_expedition(game);
+
+	// No problem if the portdock is gone, the ship will just become idle.
+	set_destination(game, lastdock_.get(game));
+}
+
+void Ship::ship_update_refit_to_transport(Game& game){
+	assert(fleet_ == nullptr);
+	assert(ship_type_ == ShipType::kWarship);
+	assert(pending_refit_ == ShipType::kTransport);
+
+	if (PortDock* dest = get_destination_port(game); dest != nullptr) {
+		const Map& map = game.map();
+		FCoords position = map.get_fcoords(get_position());
+
+		if (position.field->get_immovable() != dest) {
+			refit_percent_ = 0;
+			molog(game.get_gametime(), "Move to dock %u for refit\n", dest->serial());
+			start_task_movetodock(game, *dest);
+			return;
+		}
+
+		// Arrived at destination, now unload
+		refit_percent_ = (100 * hitpoints_) / descr().max_hitpoints_;
+		if (!items_.empty()) {
+			Warehouse* wh = dest->get_warehouse();
+			for (ShippingItem& si : items_) {
+				/* Since the items may not have been in transit properly,
+				 * force their reception instead of doing it the normal way.
+				 */
+				WareInstance* ware;
+				Worker* worker;
+				si.get(game, &ware, &worker);
+				if (worker == nullptr) {
+					assert(ware != nullptr);
+					wh->receive_ware(game, game.descriptions().safe_ware_index(ware->descr().name()));
+					ware->remove(game);
+				} else {
+					assert(ware == nullptr);
+					worker->set_economy(nullptr, wwWARE);
+					worker->set_economy(nullptr, wwWORKER);
+					worker->set_position(game, wh->get_position());
+					wh->incorporate_worker(game, worker);
+				}
+			}
+			items_.clear();
+		}
+		if (expedition_ != nullptr) {
+			exp_cancel(game);
+		}
+		if (requestdock_ != nullptr) {
+			erase_warship_soldier_request();
+		}
+
+		// Wait with refitting until fully healed
+		if (hitpoints_ < descr().max_hitpoints_) {
+			heal(game);
+		} else {
+			set_destination(game, nullptr);
+			ship_type_ = ShipType::kTransport;
+			refit_percent_ = 0;
+		}
+		start_task_idle(game, descr().main_animation(), 1000);
+	} else {
+		// Destination vanished, try to find a new one
+		molog(game.get_gametime(), "Refit failed, retry\n");
+		start_task_refit_to_transport(game);
+	}
+	return;
 }
 
 void Ship::set_soldier_preference(SoldierPreference pref) {
@@ -1070,9 +1141,9 @@ void Ship::set_ship_type(EditorGameBase& /* egbase */, ShipType t) {
 }
 #endif
 
-void Ship::refit(Game& game, const ShipType type) {
-	if (!can_refit(type)) {
-		molog(game.get_gametime(), "Requested refit to %d not possible", static_cast<int>(type));
+void Ship::start_task_refit_to_transport(Game& game) {
+	if (!can_refit(ShipType::kTransport)) {
+		molog(game.get_gametime(), "Requested refit to transport ship not possible");
 		return;
 	}
 
@@ -1081,13 +1152,13 @@ void Ship::refit(Game& game, const ShipType type) {
 	} else if (PortDock* dest = find_nearest_port(game); dest != nullptr) {
 		set_destination(game, dest);
 	} else {
-		molog(game.get_gametime(), "Attempted refit to %d but no ports in fleet",
-		      static_cast<int>(type));
+		molog(game.get_gametime(), "Attempted refit to transport ship but no ports in fleet");
 		return;
 	}
 
-	pending_refit_ = type;
+	pending_refit_ = ShipType::kTransport;
 
+	// TODO(tothxa): Is this necessary here? Do warships have fleets?
 	// Already remove the ship from the fleet
 	if (fleet_ != nullptr) {
 		fleet_->remove_ship(game, this);
@@ -2226,6 +2297,40 @@ void Ship::start_task_expedition(Game& game) {
 	Notifications::publish(NoteShip(this, NoteShip::Action::kWaitingForCommand));
 }
 
+/// Prepare the ship for refitting and start shipwright animation
+void Ship::start_task_refit_to_warship(Game& game) {
+	assert(can_refit(ShipType::kWarship));
+
+	// Already remove the ship from the fleet
+	if (fleet_ != nullptr) {
+		fleet_->remove_ship(game, this);
+		assert(fleet_ == nullptr);
+	}
+
+	pending_refit_ = ShipType::kWarship;
+	refit_start_time_ = game.get_gametime();
+
+	assert(refit_worker_ == nullptr);
+
+	for (auto it = items_.begin(); it != items_.end(); ++it) {
+		const ShippingItem& si = *it;
+		si.get(game, nullptr, &refit_worker_);
+		if (refit_worker_ != nullptr) {
+			// TODO(tothxa): Add an assert here to check that it's indeed the shipwright
+			items_.erase(it);
+			break;
+		}
+	}
+	if (refit_worker_ == nullptr) {
+		// TODO(tothxa): More info in message
+		throw wexception("No worker for refitting.");
+	}
+	refit_worker_->reset_tasks(game);
+	refit_worker_->set_position(game, get_position());
+	refit_worker_->draw_on_top();
+	refit_worker_->start_task_idle(game, refit_worker_->descr().get_animation("work", refit_worker_), -1);
+}
+
 /// Initializes / changes the direction of scouting to @arg direction
 /// @note only called via player command
 void Ship::exp_scouting_direction(Game& game, WalkingDir scouting_direction) {
@@ -2390,10 +2495,12 @@ void Ship::draw(const EditorGameBase& egbase,
 		} else if (is_refitting()) {
 			switch (pending_refit_) {
 			case ShipType::kTransport:
-				statistics_string = pgettext("ship_state", "Refitting to Transport Ship");
+				statistics_string =
+				   format(pgettext("ship_state", "Refitting to Transport Ship: %d%%"), refit_percent_);
 				break;
 			case ShipType::kWarship:
-				statistics_string = pgettext("ship_state", "Refitting to Warship");
+				statistics_string =
+				   format(pgettext("ship_state", "Refitting to Warship: %d%%"), refit_percent_);
 				break;
 			}
 		} else {
