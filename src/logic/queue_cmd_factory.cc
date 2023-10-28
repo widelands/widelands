@@ -94,8 +94,8 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 		return *new CmdShipExploreIsland();
 	case QueueCommandTypes::kShipSetDestination:
 		return *new CmdShipSetDestination();
-	case QueueCommandTypes::kShipRefit:
-		return *new CmdShipRefit();
+	case QueueCommandTypes::kShipRefitTransport:
+		return *new CmdShipRefitTransport();
 	case QueueCommandTypes::kWarshipCommand:
 		return *new CmdWarshipCommand();
 	case QueueCommandTypes::kDestroyMapObject:

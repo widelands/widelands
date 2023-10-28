@@ -981,17 +981,39 @@ void Player::start_stop_building(PlayerImmovable& imm) {
 	}
 }
 
-void Player::start_or_cancel_expedition(const Warehouse& wh) {
-	if (wh.get_owner() == this) {
-		if (PortDock* pd = wh.get_portdock()) {
-			if (pd->expedition_started()) {
-				upcast(Game, game, &egbase());
-				pd->cancel_expedition(*game);
-			} else {
-				pd->start_expedition();
-			}
-		}
+void Player::start_or_cancel_expedition(const Warehouse& wh, const ExpeditionType t) {
+	if (wh.get_owner() != this) {
+		return;
 	}
+	PortDock* pd = wh.get_portdock();
+	if (pd == nullptr) {
+		return;
+	}
+	upcast(Game, game, &egbase());
+
+	// Cancel requested
+	if (t == ExpeditionType::kNone) {
+		if (pd->expedition_started()) {
+			pd->cancel_expedition(*game);
+		} else {
+			log_warn_time(egbase().get_gametime(),
+			              "Cancelling expedition at port %d, but none was started.", pd->serial());
+		}
+		return;
+	}
+
+	// Start requested: Checking conflict
+	if (pd->expedition_started()) {
+		const std::string t_str = (t == ExpeditionType::kExpedition) ? "expedition" : "refit";
+		const std::string current = (t == pd->expedition_type()) ? "it" : "another type";
+		log_warn_time(egbase().get_gametime(),
+		              "Not starting %s at port %d, because %s was already started.",
+		              t_str.c_str(), pd->serial(), current.c_str());
+		return;
+	}
+
+	// No conflict
+	pd->start_expedition(t);
 }
 
 /*
