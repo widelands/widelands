@@ -721,6 +721,10 @@ ImmovableDescr const* TribeDescr::get_immovable_descr(const DescriptionIndex& in
 	return descriptions_.get_immovable_descr(index);
 }
 
+ShipDescr const* TribeDescr::get_ship_descr() const {
+	return descriptions_.get_ship_descr(ship());
+}
+
 DescriptionIndex TribeDescr::builder() const {
 	assert(descriptions_.worker_exists(builder_));
 	return builder_;
