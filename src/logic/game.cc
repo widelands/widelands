@@ -1091,9 +1091,9 @@ void Game::send_player_set_soldier_preference(MapObject& mo, SoldierPreference m
 	   new CmdSetSoldierPreference(get_gametime(), mo.owner().player_number(), mo, my_preference));
 }
 
-void Game::send_player_start_or_cancel_expedition(Building& building) {
+void Game::send_player_start_or_cancel_expedition(Building& building, const ExpeditionType t) {
 	send_player_command(
-	   new CmdStartOrCancelExpedition(get_gametime(), building.owner().player_number(), building));
+	   new CmdStartOrCancelExpedition(get_gametime(), building.owner().player_number(), building, t));
 }
 
 void Game::send_player_enhance_building(Building& building,
@@ -1187,9 +1187,9 @@ void Game::send_player_sink_ship(const Ship& ship) {
 	   new CmdShipSink(get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }
 
-void Game::send_player_refit_ship(const Ship& ship, const ShipType t) {
+void Game::send_player_refit_to_transport_ship(const Ship& ship) {
 	send_player_command(
-	   new CmdShipRefit(get_gametime(), ship.get_owner()->player_number(), ship.serial(), t));
+	   new CmdShipRefitTransport(get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }
 
 void Game::send_player_warship_command(const Ship& ship,

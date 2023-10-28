@@ -5939,6 +5939,7 @@ const MethodType<LuaWarehouse> LuaWarehouse::Methods[] = {
    METHOD(LuaWarehouse, set_warehouse_policies),
    METHOD(LuaWarehouse, get_warehouse_policies),
    METHOD(LuaWarehouse, start_expedition),
+   METHOD(LuaWarehouse, start_refit_to_warship),
    METHOD(LuaWarehouse, cancel_expedition),
    {nullptr, nullptr},
 };
@@ -6348,7 +6349,36 @@ int LuaWarehouse::start_expedition(lua_State* L) {
 			return 0;
 		}
 		if (!pd->expedition_started()) {
-			game->send_player_start_or_cancel_expedition(*wh);
+			game->send_player_start_or_cancel_expedition(*wh, Widelands::ExpeditionType::kExpedition);
+			return 1;
+		}
+	}
+
+	return 0;
+}
+
+/* RST
+   .. method:: start_refit_to_warship()
+
+      Starts preparation for refitting a ship to a warship.
+
+*/
+int LuaWarehouse::start_refit_to_warship(lua_State* L) {
+
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::Warehouse* wh = get(L, egbase);
+
+	if (wh == nullptr) {
+		return 0;
+	}
+
+	if (upcast(Widelands::Game, game, &egbase)) {
+		const Widelands::PortDock* pd = wh->get_portdock();
+		if (pd == nullptr) {
+			return 0;
+		}
+		if (!pd->expedition_started()) {
+			game->send_player_start_or_cancel_expedition(*wh, Widelands::ExpeditionType::kRefitToWarship);
 			return 1;
 		}
 	}
@@ -6359,7 +6389,7 @@ int LuaWarehouse::start_expedition(lua_State* L) {
 /* RST
    .. method:: cancel_expedition()
 
-      Cancels an expedition if in progress.
+      Cancels an expedition or refitting a warship if in progress.
 
 */
 int LuaWarehouse::cancel_expedition(lua_State* L) {
@@ -6377,7 +6407,7 @@ int LuaWarehouse::cancel_expedition(lua_State* L) {
 			return 0;
 		}
 		if (pd->expedition_started()) {
-			game->send_player_start_or_cancel_expedition(*wh);
+			game->send_player_start_or_cancel_expedition(*wh, Widelands::ExpeditionType::kNone);
 			return 1;
 		}
 	}
@@ -6996,7 +7026,7 @@ const MethodType<LuaShip> LuaShip::Methods[] = {
    METHOD(LuaShip, get_workers),
    METHOD(LuaShip, build_colonization_port),
    METHOD(LuaShip, make_expedition),
-   METHOD(LuaShip, refit),
+   METHOD(LuaShip, refit_to_transport),
    {nullptr, nullptr},
 };
 const PropertyType<LuaShip> LuaShip::Properties[] = {
@@ -7531,30 +7561,21 @@ int LuaShip::make_expedition(lua_State* L) {
 }
 
 /* RST
-   .. method:: refit(type)
+   .. method:: refit_to_transport()
 
       .. versionadded:: 1.2
 
-      Order the ship to refit to the given type.
-
-      :arg string type: :const:`"transport"` or :const:`"warship"`
+      Order the ship to refit to a transport ship.
 
       :returns: :const:`nil`
 */
-int LuaShip::refit(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Wrong number of arguments to refit!");
+int LuaShip::refit_to_transport(lua_State* L) {
+	if (lua_gettop(L) != 1) {
+		report_error(L, "Wrong number of arguments to refit_to_transport!");
 	}
 	Widelands::Game& game = get_game(L);
 	Widelands::Ship* ship = get(L, game);
-	const std::string type = luaL_checkstring(L, 2);
-	if (type == "transport") {
-		ship->refit(game, Widelands::ShipType::kTransport);
-	} else if (type == "warship") {
-		ship->refit(game, Widelands::ShipType::kWarship);
-	} else {
-		report_error(L, "Invalid ship refit type '%s'", type.c_str());
-	}
+	game.send_player_refit_to_transport_ship(*ship);
 	return 0;
 }
 

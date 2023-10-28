@@ -178,8 +178,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdShipPortName(des);
 	case QueueCommandTypes::kFleetTargets:
 		return new CmdFleetTargets(des);
-	case QueueCommandTypes::kShipRefit:
-		return new CmdShipRefit(des);
+	case QueueCommandTypes::kShipRefitTransport:
+		return new CmdShipRefitTransport(des);
 	case QueueCommandTypes::kWarshipCommand:
 		return new CmdWarshipCommand(des);
 
@@ -731,26 +731,32 @@ void CmdStartOrCancelExpedition::execute(Game& game) {
 	MapObject* mo = game.objects().get_object(serial);
 	if (upcast(ConstructionSite, cs, mo)) {
 		if (upcast(WarehouseSettings, s, cs->get_settings())) {
+			// NOCOM
+			// TODO(tothxa): implement refit in constructionsite too
 			s->launch_expedition = !s->launch_expedition;
 		}
 	} else if (upcast(Warehouse, warehouse, game.objects().get_object(serial))) {
-		game.get_player(sender())->start_or_cancel_expedition(*warehouse);
+		game.get_player(sender())->start_or_cancel_expedition(*warehouse, type_);
 	}
 }
 
 void CmdStartOrCancelExpedition::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
+	ser.unsigned_8(static_cast<uint8_t>(type_));
 }
 
-constexpr uint16_t kCurrentPacketVersionExpedition = 1;
+constexpr uint16_t kCurrentPacketVersionExpedition = 2;
 
 void CmdStartOrCancelExpedition::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionExpedition) {
+		if (packet_version <= kCurrentPacketVersionExpedition) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<Warehouse>(fr.unsigned_32(), mol);
+			if (packet_version > 1) {
+				type_ = static_cast<ExpeditionType>(fr.unsigned_8());
+			}  // TODO(tothxa): can we implement old toggle behaviour here?
 		} else {
 			throw UnhandledVersionError(
 			   "CmdStartOrCancelExpedition", packet_version, kCurrentPacketVersionExpedition);
@@ -767,6 +773,7 @@ void CmdStartOrCancelExpedition::write(FileWrite& fw, EditorGameBase& egbase, Ma
 
 	// Now serial
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
+	fw.unsigned_8(static_cast<uint8_t>(type_));
 }
 
 /*** Cmd_ExpeditionConfig ***/
@@ -966,48 +973,47 @@ void CmdEvictWorker::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
 }
 
-/*** Cmd_ShipRefit ***/
-CmdShipRefit::CmdShipRefit(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
+/*** Cmd_ShipRefitTransport ***/
+CmdShipRefitTransport::CmdShipRefitTransport(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial_ = des.unsigned_32();
-	type_ = static_cast<ShipType>(des.unsigned_8());
 }
 
-void CmdShipRefit::execute(Game& game) {
+void CmdShipRefitTransport::execute(Game& game) {
 	upcast(Ship, ship, game.objects().get_object(serial_));
 	if (ship != nullptr && ship->get_owner()->player_number() == sender()) {
-		ship->refit(game, type_);
+		ship->start_task_refit_to_transport(game);
 	}
 }
 
-void CmdShipRefit::serialize(StreamWrite& ser) {
+void CmdShipRefitTransport::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
 	ser.unsigned_32(serial_);
-	ser.unsigned_8(static_cast<uint8_t>(type_));
 }
 
-constexpr uint16_t kCurrentPacketVersionShipRefit = 1;
+constexpr uint16_t kCurrentPacketVersionShipRefitTransport = 2;
 
-void CmdShipRefit::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+void CmdShipRefitTransport::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionShipRefit) {
+		if (packet_version <= kCurrentPacketVersionShipRefitTransport) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial_ = get_object_serial_or_zero<Ship>(fr.unsigned_32(), mol);
-			type_ = static_cast<ShipType>(fr.unsigned_8());
+			if (packet_version == 1) {
+				fr.unsigned_8();  // Was ship type. We ignore refit to warship.
+			}
 		} else {
 			throw UnhandledVersionError(
-			   "CmdShipRefit", packet_version, kCurrentPacketVersionShipRefit);
+			   "CmdShipRefitTransport", packet_version, kCurrentPacketVersionShipRefitTransport);
 		}
 	} catch (const WException& e) {
 		throw GameDataError("Ship refit: %s", e.what());
 	}
 }
-void CmdShipRefit::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
-	fw.unsigned_16(kCurrentPacketVersionShipRefit);
+void CmdShipRefitTransport::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_16(kCurrentPacketVersionShipRefitTransport);
 	PlayerCommand::write(fw, egbase, mos);
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
-	fw.unsigned_8(static_cast<uint8_t>(type_));
 }
 
 /*** Cmd_WarshipCommand ***/

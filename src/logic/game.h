@@ -281,7 +281,7 @@ public:
 	void send_player_start_stop_building(Building&);
 	void send_player_toggle_infinite_production(Building&);
 	void send_player_set_soldier_preference(MapObject&, SoldierPreference preference);
-	void send_player_start_or_cancel_expedition(Building&);
+	void send_player_start_or_cancel_expedition(Building&, ExpeditionType);
 	void send_player_expedition_config(PortDock&, WareWorker, DescriptionIndex, bool);
 
 	void send_player_enhance_building(Building&, DescriptionIndex, bool keep_wares);
@@ -306,7 +306,7 @@ public:
 	void send_player_ship_set_destination(const Ship& ship, const MapObject* dest);
 	void send_player_ship_set_destination(const Ship& ship, const DetectedPortSpace& dest);
 	void send_player_sink_ship(const Ship& ship);
-	void send_player_refit_ship(const Ship& ship, ShipType t);
+	void send_player_refit_to_transport_ship(const Ship& ship);
 	void send_player_warship_command(const Ship& ship,
 	                                 WarshipCommand cmd,
 	                                 const std::vector<uint32_t>& parameters);

@@ -238,7 +238,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 				                  "  %1d: Starting preparation for expedition in port at %3dx%3d\n",
 				                  player_number(), wh_obs.site->get_position().x,
 				                  wh_obs.site->get_position().y);
-				game().send_player_start_or_cancel_expedition(*wh_obs.site);
+				game().send_player_start_or_cancel_expedition(*wh_obs.site, Widelands::ExpeditionType::kExpedition);
 				return true;
 			}
 		}

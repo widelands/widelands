@@ -284,8 +284,8 @@ private:
 
 struct CmdStartOrCancelExpedition : public PlayerCommand {
 	CmdStartOrCancelExpedition() = default;  // For savegame loading
-	CmdStartOrCancelExpedition(const Time& t, PlayerNumber const p, Building& b)
-	   : PlayerCommand(t, p), serial(b.serial()) {
+	CmdStartOrCancelExpedition(const Time& t, PlayerNumber const p, Building& b, const ExpeditionType et)
+	   : PlayerCommand(t, p), serial(b.serial()), type_(et) {
 	}
 
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
@@ -302,6 +302,7 @@ struct CmdStartOrCancelExpedition : public PlayerCommand {
 
 private:
 	Serial serial{kInvalidSerial};
+	ExpeditionType type_;
 };
 
 struct CmdExpeditionConfig : public PlayerCommand {
@@ -403,27 +404,26 @@ private:
 	Serial serial{0U};
 };
 
-struct CmdShipRefit : public PlayerCommand {
-	CmdShipRefit() = default;  // For savegame loading
-	CmdShipRefit(const Time& t, PlayerNumber const p, Serial s, ShipType ss)
-	   : PlayerCommand(t, p), serial_(s), type_(ss) {
+struct CmdShipRefitTransport : public PlayerCommand {
+	CmdShipRefitTransport() = default;  // For savegame loading
+	CmdShipRefitTransport(const Time& t, PlayerNumber const p, Serial s)
+	   : PlayerCommand(t, p), serial_(s) {
 	}
 
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
 	[[nodiscard]] QueueCommandTypes id() const override {
-		return QueueCommandTypes::kShipRefit;
+		return QueueCommandTypes::kShipRefitTransport;
 	}
 
-	explicit CmdShipRefit(StreamRead&);
+	explicit CmdShipRefitTransport(StreamRead&);
 
 	void execute(Game&) override;
 	void serialize(StreamWrite&) override;
 
 private:
 	Serial serial_{0U};
-	ShipType type_{ShipType::kTransport};
 };
 
 struct CmdWarshipCommand : public PlayerCommand {
