@@ -176,7 +176,8 @@ private:
  * The contents of 'table' are documented in
  * /data/tribes/ships/atlanteans/init.lua
  */
-ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
+ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table,
+                     Widelands::Descriptions& descriptions)
    : BobDescr(init_descname, MapObjectType::SHIP, MapObjectDescr::OwnerType::kTribe, table),
      max_hitpoints_(table.get_int("hitpoints")),
      min_attack_(table.get_int("min_attack")),
@@ -184,6 +185,7 @@ ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table)
      defense_(table.get_int("defense")),
      attack_accuracy_(table.get_int("attack_accuracy")),
      heal_per_second_(table.get_int("heal_per_second")),
+     refit_cost_(table.get_table("refit_cost"), descriptions),
      default_capacity_(table.has_key("capacity") ? table.get_int("capacity") : 20),
      ship_names_(table.get_table("names")->array_entries<std::string>()) {
 	// Read the sailing animations

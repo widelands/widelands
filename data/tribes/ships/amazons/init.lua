@@ -17,6 +17,14 @@ wl.Descriptions():new_ship_type {
    attack_accuracy = 60,
    heal_per_second = 100,
 
+   refit_cost = {
+      quartz = 2,
+      ironwood = 2,
+      balsa = 1,
+      rubber = 1,
+      rope = 4,
+   },
+
    animation_directory = dirname,
    spritesheets = {
       idle = {
