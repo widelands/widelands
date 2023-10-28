@@ -104,6 +104,7 @@ public:
 	[[nodiscard]] ImmovableDescr const* get_immovable_descr(const DescriptionIndex& index) const;
 	[[nodiscard]] WareDescr const* get_ware_descr(const DescriptionIndex& index) const;
 	[[nodiscard]] WorkerDescr const* get_worker_descr(const DescriptionIndex& index) const;
+	[[nodiscard]] ShipDescr const* get_ship_descr() const;
 
 	[[nodiscard]] DescriptionIndex builder() const;
 	[[nodiscard]] DescriptionIndex shipwright() const;

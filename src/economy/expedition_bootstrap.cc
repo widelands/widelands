@@ -26,6 +26,7 @@
 #include "economy/workers_queue.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
+#include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
@@ -48,6 +49,7 @@ void ExpeditionBootstrap::check_is_ready(Game& game) {
 	for (auto& iq : queues_) {
 		if (iq.first->get_max_size() != iq.first->get_filled() ||
 		    iq.first->get_max_size() != iq.first->get_max_fill()) {
+			// Notify fleet if needed?
 			return portdock_->set_expedition_bootstrap_complete(game, false);
 		}
 	}
@@ -74,13 +76,17 @@ void ExpeditionBootstrap::input_callback(
 	}
 }
 
-void ExpeditionBootstrap::start() {
+void ExpeditionBootstrap::start(const ExpeditionType what) {
 	assert(queues_.empty());
+	assert(what == ExpeditionType::kExpedition || what == ExpeditionType::kRefitToWarship);
 
-	// Load the buildcosts for the port building + builder
 	Warehouse* const warehouse = portdock_->get_warehouse();
 
-	const std::map<DescriptionIndex, uint8_t>& buildcost = warehouse->descr().buildcost();
+	// Load the buildcosts for the port building or the refit costs for the warship
+	const std::map<DescriptionIndex, uint8_t>&
+	buildcost = what == ExpeditionType::kExpedition ?
+               warehouse->descr().buildcost() :
+               warehouse->owner().tribe().get_ship_descr()->get_refit_cost();
 	size_t const buildcost_size = buildcost.size();
 
 	// Issue request for wares for this expedition.
@@ -96,9 +102,13 @@ void ExpeditionBootstrap::start() {
 		queues_[i].second = false;
 	}
 
-	// Issue the request for the workers (so far only a builder).
+	// Issue the request for the workers (so far only a builder or a shipwright).
 	queues_[buildcost_size].first.reset(
-	   new WorkersQueue(*warehouse, warehouse->owner().tribe().builder(), 1));
+	   new WorkersQueue(*warehouse,
+                       what == ExpeditionType::kExpedition ?
+                       warehouse->owner().tribe().builder() :
+                       warehouse->owner().tribe().shipwright(),
+		                 1));
 	queues_[buildcost_size].first->set_callback(input_callback, this);
 	queues_[buildcost_size].second = false;
 
