@@ -1296,7 +1296,7 @@ wl.Descriptions():new_tribe {
             note = pgettext("amazons_building", "The stonecutter’s hut needs rocks to cut within the work area."),
             performance = {
                -- TRANSLATORS: Performance helptext for an Amazon production site: Stonecutter's Hut, part 1
-               pgettext("amazons_building", "This building can produce one granite between %1$s and %2$s."):bformat(format_seconds(52), format_minutes_seconds(1, 17)),
+               pgettext("amazons_building", "This building can produce one granite between %1$s and %2$s, depending on how far the stonecutter has stones."):bformat(format_seconds(52), format_minutes_seconds(1, 17)),
                -- TRANSLATORS: Performance helptext for an Amazon production site: Stonecutter's Hut, part 2
                pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
@@ -1311,7 +1311,7 @@ wl.Descriptions():new_tribe {
             note = pgettext("amazons_building", "The woodcutter’s hut needs trees to fell within the work area."),
             performance = {
                -- TRANSLATORS: Performance helptext for an Amazon production site: Woodcutter's Hut, part 1
-               pgettext("amazons_building", "This building can produce one log between %1$s and %2$s (with master woodcutter between %3$s and %4$s)."):bformat(format_seconds(49), format_minutes_seconds(1, 29), format_seconds(44), format_minutes_seconds(1, 24)),
+               pgettext("amazons_building", "This building can produce one log between %1$s and %2$s (with master woodcutter between %3$s and %4$s), depending on how far the woodcutter has trees."):bformat(format_seconds(49), format_minutes_seconds(1, 29), format_seconds(44), format_minutes_seconds(1, 24)),
                -- TRANSLATORS: Performance helptext for an Amazon production site: Woodcutter's Hut, part 2
                pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
@@ -1345,7 +1345,7 @@ wl.Descriptions():new_tribe {
             },
             performance = {
                -- TRANSLATORS: Performance helptext for an Amazon production site: Hunter-Gatherer's Hut, part 1
-               pgettext("amazons_building", "This building can produce one meat or one fish between %1$s and %2$s."):bformat(format_seconds(42), format_minutes_seconds(1, 36)),
+               pgettext("amazons_building", "This building can produce one meat or one fish between %1$s and %2$s, depending on how far the hunter-gatherer has animals and water."):bformat(format_seconds(42), format_minutes_seconds(1, 36)),
                -- TRANSLATORS: Performance helptext for an Amazon production site: Hunter-Gatherer's Hut, part 2
                pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
@@ -1379,7 +1379,7 @@ wl.Descriptions():new_tribe {
             },
             performance = {
                -- TRANSLATORS: Performance helptext for an Amazon production site: Water Gatherer's Hut, part 1
-               pgettext("amazons_building", "This building can produce one bucket of water between %1$s and %2$s on average."):bformat(format_seconds(16), format_seconds(32)),
+               pgettext("amazons_building", "This building can produce one bucket of water between %1$s and %2$s on average, depending on how far the carrier has water."):bformat(format_seconds(16), format_seconds(32)),
                -- TRANSLATORS: Performance helptext for an Amazon production site: Water Gatherer's Hut, part 2
                pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
@@ -1561,7 +1561,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Stone Mine
             purpose = pgettext("amazons_building", "Digs granite and quartz out of the ground in mountain terrain."),
             -- TRANSLATORS: Performance helptext for an Amazon production site: Stone Mine
-            performance = pgettext("amazons_building", "The stone mine can produce one slab of each kind of stone in %s on average if the supply with rations is steady and the mine is not worn out."):bformat(format_seconds(74))
+            performance = pgettext("amazons_building", "The stone mine can produce one slab of each kind of stone in %s on average if the supply with rations is steady and the mine is not worn out."):bformat(format_minutes_seconds(1, 14))
          }
       },
       {
