@@ -18,6 +18,8 @@
 
 #include "wui/portdockwaresdisplay.h"
 
+#include <cassert>
+
 #include "economy/expedition_bootstrap.h"
 #include "economy/portdock.h"
 #include "logic/map_objects/tribes/ship.h"
@@ -209,33 +211,154 @@ private:
 	   dropdowns_;
 };
 
+static const std::string kStartExpeditionIcon = "images/wui/buildings/start_expedition.png";
+static const std::string kCancelExpeditionIcon = "images/wui/buildings/cancel_expedition.png";
+static const std::string kStartRefitIcon = "images/wui/ship/ship_refit_warship.png";
+static const std::string kCancelRefitIcon = "images/wui/ship/cancel_refit_warship.png";
+
 /// Create a panel that displays the wares and the builder waiting for the expedition to start.
-UI::Box* create_portdock_expedition_display(UI::Panel* parent,
-                                            Warehouse& wh,
-                                            InteractiveGameBase& igb,
-                                            BuildingWindow::CollapsedState* collapsed) {
-	UI::Box& box =
-	   *new UI::Box(parent, UI::PanelStyle::kWui, "expedition_box", 0, 0, UI::Box::Vertical);
-	ensure_box_can_hold_input_queues(box);
+ExpeditionDisplay::ExpeditionDisplay(UI::Panel* parent, Warehouse* wh, InteractiveGameBase* igb,
+                                     BuildingWindow::CollapsedState* collapsed) :
+	UI::Box(parent, UI::PanelStyle::kWui, "expedition_box", 0, 0, UI::Box::Vertical),
+	warehouse_(wh),
+	igbase_(igb),
+	collapsed_(collapsed),
+	control_box_(this, UI::PanelStyle::kWui, "expedition_controls", 0, 0, UI::Box::Horizontal),
+	expeditionbtn_(&control_box_, "start_or_cancel_expedition", 0, 0, 34, 34,
+	               UI::ButtonStyle::kWuiMenu,
+	               g_image_cache->get(kStartExpeditionIcon)),
+	refitbutton_(&control_box_, "start_or_cancel_refit", 0, 0, 34, 34,
+	             UI::ButtonStyle::kWuiMenu,
+	             g_image_cache->get(kStartRefitIcon)) {
+
+	if (warehouse_ == nullptr) {
+		return;
+	}
+	assert(warehouse_->get_portdock() != nullptr);
+
+	ensure_box_can_hold_input_queues(*this);
+	// Add main controls
+	control_box_.add(&expeditionbtn_);
+	control_box_.add(&refitbutton_);
+
+	expeditionbtn_.sigclicked.connect([this]() { act_start_or_cancel(Widelands::ExpeditionType::kExpedition); });
+	refitbutton_.sigclicked.connect([this]() { act_start_or_cancel(Widelands::ExpeditionType::kRefitToWarship); });
+
+	update_buttons();
+	update_contents();
+}
+
+void ExpeditionDisplay::think() {
+	if (warehouse_ == nullptr) {
+		return;
+	}
+
+	const Widelands::PortDock::ExpeditionState pd_state = warehouse_->get_portdock()->expedition_state();
+	if (pd_state == Widelands::PortDock::ExpeditionState::kCancelling) {
+		// Transient state, keep input queues, and only disable buttons.
+		expeditionbtn_.set_enabled(false);
+		refitbutton_.set_enabled(false);
+		return;
+	}
+
+	const Widelands::ExpeditionType prev_type = current_type_;
+	current_type_ = (pd_state == Widelands::PortDock::ExpeditionState::kNone) ?
+                   Widelands::ExpeditionType::kNone :  // just to be sure
+                   warehouse_->get_portdock()->expedition_type();
+
+	update_buttons();
+
+	if (prev_type == current_type_) {
+		// Everything should be fine.
+		return;
+	}
+
+	update_contents();
+}
+
+void ExpeditionDisplay::update_buttons() {
+	const bool has_expedition = current_type_ == Widelands::ExpeditionType::kExpedition;
+	const bool has_refit = current_type_ == Widelands::ExpeditionType::kRefitToWarship;
+
+	expeditionbtn_.set_pic(g_image_cache->get(
+	   has_expedition ? kCancelExpeditionIcon : kStartExpeditionIcon));
+	refitbutton_.set_pic(g_image_cache->get(
+	   has_refit ? kCancelRefitIcon : kStartRefitIcon));
+
+	expeditionbtn_.set_tooltip(
+	   has_expedition ? _("Cancel the expedition") : _("Start an expedition"));
+	refitbutton_.set_tooltip(
+	   has_refit ? _("Cancel refitting") : _("Start refitting a ship to a warship"));
+
+	const bool can_act = igbase_->can_act(warehouse_->get_owner()->player_number());
+
+	expeditionbtn_.set_enabled(can_act && !has_refit);
+	refitbutton_.set_enabled(can_act && !has_expedition);
+}
+
+void ExpeditionDisplay::update_contents() {
+	clear();
+
+	if (warehouse_ == nullptr) {
+		return;
+	}
+
+	add(&control_box_);
+
+	const Widelands::ExpeditionBootstrap* expedition = warehouse_->get_portdock()->expedition_bootstrap();
+	if (expedition == nullptr) {
+		// Make sure it gets updated next time if it was a transient problem
+		current_type_ = Widelands::ExpeditionType::kNone;
+		return;
+	}
 
 	// Add the input queues.
-	int32_t capacity = igb.egbase()
+	int32_t capacity = igbase_->egbase()
 	                      .descriptions()
-	                      .get_ship_descr(wh.get_owner()->tribe().ship())
+	                      .get_ship_descr(warehouse_->get_owner()->tribe().ship())
 	                      ->get_default_capacity();
-	for (InputQueue* wq : wh.get_portdock()->expedition_bootstrap()->queues(false)) {
-		InputQueueDisplay* iqd = new InputQueueDisplay(&box, igb, wh, *wq, false, true, collapsed);
-		box.add(iqd, UI::Box::Resizing::kFullSize);
+
+	for (InputQueue* wq : expedition->queues(false)) {
+		InputQueueDisplay* iqd =
+		   new InputQueueDisplay(this, *igbase_, *warehouse_, *wq, false, true, collapsed_);
+		add(iqd, UI::Box::Resizing::kFullSize);
 		capacity -= wq->get_max_size();
 	}
+	// TODO(tothxa): This can happen due to bad lua definitions. Shouldn't this be a proper check
+	//               that throws an exception on fail?
 	assert(capacity >= 0);
 
-	if (capacity > 0 && wh.owner().additional_expedition_items_allowed()) {
-		const bool can_act = igb.can_act(wh.get_owner()->player_number());
-		box.add(new PortDockAdditionalItemsDisplay(
-		           igb.game(), &box, can_act, *wh.get_portdock(), capacity),
-		        UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	if (capacity > 0 && current_type_ == Widelands::ExpeditionType::kExpedition &&
+	    warehouse_->owner().additional_expedition_items_allowed()) {
+		add(new PortDockAdditionalItemsDisplay(
+		   igbase_->game(), this, igbase_->can_act(warehouse_->get_owner()->player_number()),
+		   *warehouse_->get_portdock(), capacity),
+		   UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	}
+}
+
+void ExpeditionDisplay::act_start_or_cancel(const Widelands::ExpeditionType t) {
+	if (!igbase_->can_act(warehouse_->get_owner()->player_number())) {
+		return;
 	}
 
-	return &box;
+	switch (warehouse_->get_portdock()->expedition_state()) {
+	case Widelands::PortDock::ExpeditionState::kCancelling:
+		return;
+	case Widelands::PortDock::ExpeditionState::kNone:
+		igbase_->game().send_player_start_or_cancel_expedition(*warehouse_, t);
+		break;
+	case Widelands::PortDock::ExpeditionState::kStarted:
+	case Widelands::PortDock::ExpeditionState::kReady:
+		// To avoid races, we only cancel if the matching button was pressed, otherwise
+		// we ignore the button event.
+		if (t == warehouse_->get_portdock()->expedition_type()) {
+			// Prevent use after free: ExpeditionBootstrap starts deleting input queues while
+			// draw() may still try to use them.
+			clear();
+			add(&control_box_);
+			igbase_->game().send_player_start_or_cancel_expedition(
+			   *warehouse_, Widelands::ExpeditionType::kNone);
+		}
+	}
 }
