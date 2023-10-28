@@ -144,6 +144,7 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
      descriptions_(descriptions),
      bridge_height_(table.get_int("bridge_height")),
      builder_(Widelands::INVALID_INDEX),
+     shipwright_(Widelands::INVALID_INDEX),
      geologist_(Widelands::INVALID_INDEX),
      soldier_(Widelands::INVALID_INDEX),
      ship_(Widelands::INVALID_INDEX),
@@ -559,6 +560,9 @@ void TribeDescr::load_workers(const LuaTable& table, Descriptions& descriptions)
 	if (table.has_key("builder")) {
 		builder_ = add_special_worker(table.get_string("builder"), descriptions);
 	}
+	if (table.has_key("shipwright")) {
+		shipwright_ = add_special_worker(table.get_string("shipwright"), descriptions);
+	}
 	if (table.has_key("geologist")) {
 		geologist_ = add_special_worker(table.get_string("geologist"), descriptions);
 	}
@@ -731,6 +735,10 @@ DescriptionIndex TribeDescr::builder() const {
 	assert(descriptions_.worker_exists(builder_));
 	return builder_;
 }
+DescriptionIndex TribeDescr::shipwright() const {
+	assert(descriptions_.worker_exists(shipwright_));
+	return shipwright_;
+}
 DescriptionIndex TribeDescr::geologist() const {
 	assert(descriptions_.worker_exists(geologist_));
 	return geologist_;
@@ -872,6 +880,9 @@ void TribeDescr::finalize_loading(Descriptions& descriptions) {
 	// Validate special units
 	if (builder_ == Widelands::INVALID_INDEX) {
 		throw GameDataError("special worker 'builder' not defined");
+	}
+	if (shipwright_ == Widelands::INVALID_INDEX) {
+		throw GameDataError("special worker 'shipwright' not defined");
 	}
 	if (carriers_.size() < 2) {
 		throw GameDataError(

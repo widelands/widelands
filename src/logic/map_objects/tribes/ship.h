@@ -26,6 +26,7 @@
 #include "economy/shippingitem.h"
 #include "graphic/animation/diranimations.h"
 #include "logic/map_objects/bob.h"
+#include "logic/map_objects/buildcost.h"
 #include "logic/map_objects/tribes/shipstates.h"
 
 namespace Widelands {
@@ -56,7 +57,9 @@ struct NoteShip {
 
 class ShipDescr : public BobDescr {
 public:
-	ShipDescr(const std::string& init_descname, const LuaTable& t);
+	ShipDescr(const std::string& init_descname,
+	          const LuaTable& t,
+	          Widelands::Descriptions& descriptions);
 	~ShipDescr() override = default;
 
 	[[nodiscard]] Bob& create_object() const override;
@@ -74,6 +77,10 @@ public:
 		return ship_names_;
 	}
 
+	[[nodiscard]] const Buildcost& get_refit_cost() const {
+		return refit_cost_;
+	}
+
 	const uint32_t max_hitpoints_;
 	const uint32_t min_attack_;
 	const uint32_t max_attack_;
@@ -82,6 +89,7 @@ public:
 	const uint32_t heal_per_second_;
 
 private:
+	const Buildcost refit_cost_;
 	DirAnimations sail_anims_;
 	Quantity default_capacity_;
 	std::vector<std::string> ship_names_;
