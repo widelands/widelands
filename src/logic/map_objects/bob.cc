@@ -975,7 +975,7 @@ void Bob::draw_on_top() {
 		last = linknext_;
 		linknext_ = linknext_->linknext_;
 	} while (linknext_ != nullptr);
-	linkpprev_ = &last;
+	linkpprev_ = &(last->linknext_);
 	last->linknext_ = this;
 }
 
