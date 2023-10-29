@@ -234,30 +234,44 @@ ExpeditionDisplay::ExpeditionDisplay(UI::Panel* parent, Warehouse* wh, Interacti
 	if (warehouse_ == nullptr) {
 		return;
 	}
-	assert(warehouse_->get_portdock() != nullptr);
+	const Widelands::PortDock* pd = warehouse_->get_portdock();
+	assert(pd != nullptr);
+
+	// TODO(tothxa):
+	//   This shouldn't be necessary (think() should do the updates), but for some reason
+	//   then the input queues are not drawn if the expedition is already started when the
+	//   port window is opened. This does not make sense. See also comment in update_contents().
+	current_type_ =
+	   pd->expedition_started() ? pd->expedition_type() : Widelands::ExpeditionType::kNone;
 
 	ensure_box_can_hold_input_queues(*this);
+
 	// Add main controls
 	control_box_.add(&expeditionbtn_);
 	control_box_.add(&refitbutton_);
+	// TODO(tothxa): A target quantity spinbox could also be added to the control_box_
+	//            To make it simple, maybe count down (unless infinite) the number left to produce?
 
 	expeditionbtn_.sigclicked.connect([this]() { act_start_or_cancel(Widelands::ExpeditionType::kExpedition); });
 	refitbutton_.sigclicked.connect([this]() { act_start_or_cancel(Widelands::ExpeditionType::kRefitToWarship); });
 
 	update_buttons();
-	update_contents();
+	update_contents();  // Make sure it gets called at least once
 }
 
 void ExpeditionDisplay::think() {
 	if (warehouse_ == nullptr) {
+		clear();
 		return;
 	}
 
 	const Widelands::PortDock::ExpeditionState pd_state = warehouse_->get_portdock()->expedition_state();
 	if (pd_state == Widelands::PortDock::ExpeditionState::kCancelling) {
-		// Transient state, keep input queues, and only disable buttons.
+		// Transient state, disable buttons.
 		expeditionbtn_.set_enabled(false);
 		refitbutton_.set_enabled(false);
+		clear();  // some more precaution against use after free
+		add(&control_box_);
 		return;
 	}
 
@@ -298,7 +312,6 @@ void ExpeditionDisplay::update_buttons() {
 
 void ExpeditionDisplay::update_contents() {
 	clear();
-
 	if (warehouse_ == nullptr) {
 		return;
 	}
@@ -306,7 +319,17 @@ void ExpeditionDisplay::update_contents() {
 	add(&control_box_);
 
 	const Widelands::ExpeditionBootstrap* expedition = warehouse_->get_portdock()->expedition_bootstrap();
-	if (expedition == nullptr) {
+	if (expedition == nullptr
+	    // TODO(tothxa):
+	    //   It should be safer with these, but for some reason then the queues aren't drawn for
+	    //   newly started expeditions, even though they are added and the space is reserved for
+	    //   them. This just does not make sense.
+	    //   If an expedition is already started when the building window is opened, then it's drawn,
+	    //   (since I added code to properly initialise the type in the constructor), but if it's
+	    //   cancelled then a new one is started, then I get an empty window.
+	    // || current_type_ == Widelands::ExpeditionType::kNone ||
+	    // !warehouse_->get_portdock()->expedition_started()
+		) {
 		// Make sure it gets updated next time if it was a transient problem
 		current_type_ = Widelands::ExpeditionType::kNone;
 		return;
@@ -317,13 +340,13 @@ void ExpeditionDisplay::update_contents() {
 	                      .descriptions()
 	                      .get_ship_descr(warehouse_->get_owner()->tribe().ship())
 	                      ->get_default_capacity();
-
 	for (InputQueue* wq : expedition->queues(false)) {
 		InputQueueDisplay* iqd =
 		   new InputQueueDisplay(this, *igbase_, *warehouse_, *wq, false, true, collapsed_);
 		add(iqd, UI::Box::Resizing::kFullSize);
 		capacity -= wq->get_max_size();
 	}
+
 	// TODO(tothxa): This can happen due to bad lua definitions. Shouldn't this be a proper check
 	//               that throws an exception on fail?
 	assert(capacity >= 0);
@@ -335,6 +358,8 @@ void ExpeditionDisplay::update_contents() {
 		   *warehouse_->get_portdock(), capacity),
 		   UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	}
+
+	// TODO(tothxa): Add soldier control if kRefitToWarship
 }
 
 void ExpeditionDisplay::act_start_or_cancel(const Widelands::ExpeditionType t) {
