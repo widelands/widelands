@@ -217,19 +217,31 @@ static const std::string kStartRefitIcon = "images/wui/ship/ship_refit_warship.p
 static const std::string kCancelRefitIcon = "images/wui/ship/cancel_refit_warship.png";
 
 /// Create a panel that displays the wares and the builder waiting for the expedition to start.
-ExpeditionDisplay::ExpeditionDisplay(UI::Panel* parent, Warehouse* wh, InteractiveGameBase* igb,
-                                     BuildingWindow::CollapsedState* collapsed) :
-	UI::Box(parent, UI::PanelStyle::kWui, "expedition_box", 0, 0, UI::Box::Vertical),
-	warehouse_(wh),
-	igbase_(igb),
-	collapsed_(collapsed),
-	control_box_(this, UI::PanelStyle::kWui, "expedition_controls", 0, 0, UI::Box::Horizontal),
-	expeditionbtn_(&control_box_, "start_or_cancel_expedition", 0, 0, 34, 34,
-	               UI::ButtonStyle::kWuiMenu,
-	               g_image_cache->get(kStartExpeditionIcon)),
-	refitbutton_(&control_box_, "start_or_cancel_refit", 0, 0, 34, 34,
-	             UI::ButtonStyle::kWuiMenu,
-	             g_image_cache->get(kStartRefitIcon)) {
+ExpeditionDisplay::ExpeditionDisplay(UI::Panel* parent,
+                                     Warehouse* wh,
+                                     InteractiveGameBase* igb,
+                                     BuildingWindow::CollapsedState* collapsed)
+   : UI::Box(parent, UI::PanelStyle::kWui, "expedition_box", 0, 0, UI::Box::Vertical),
+     warehouse_(wh),
+     igbase_(igb),
+     collapsed_(collapsed),
+     control_box_(this, UI::PanelStyle::kWui, "expedition_controls", 0, 0, UI::Box::Horizontal),
+     expeditionbtn_(&control_box_,
+                    "start_or_cancel_expedition",
+                    0,
+                    0,
+                    34,
+                    34,
+                    UI::ButtonStyle::kWuiMenu,
+                    g_image_cache->get(kStartExpeditionIcon)),
+     refitbutton_(&control_box_,
+                  "start_or_cancel_refit",
+                  0,
+                  0,
+                  34,
+                  34,
+                  UI::ButtonStyle::kWuiMenu,
+                  g_image_cache->get(kStartRefitIcon)) {
 
 	if (warehouse_ == nullptr) {
 		return;
@@ -252,8 +264,10 @@ ExpeditionDisplay::ExpeditionDisplay(UI::Panel* parent, Warehouse* wh, Interacti
 	// TODO(tothxa): A target quantity spinbox could also be added to the control_box_
 	//            To make it simple, maybe count down (unless infinite) the number left to produce?
 
-	expeditionbtn_.sigclicked.connect([this]() { act_start_or_cancel(Widelands::ExpeditionType::kExpedition); });
-	refitbutton_.sigclicked.connect([this]() { act_start_or_cancel(Widelands::ExpeditionType::kRefitToWarship); });
+	expeditionbtn_.sigclicked.connect(
+	   [this]() { act_start_or_cancel(Widelands::ExpeditionType::kExpedition); });
+	refitbutton_.sigclicked.connect(
+	   [this]() { act_start_or_cancel(Widelands::ExpeditionType::kRefitToWarship); });
 
 	update_buttons();
 	update_contents();  // Make sure it gets called at least once
@@ -265,7 +279,8 @@ void ExpeditionDisplay::think() {
 		return;
 	}
 
-	const Widelands::PortDock::ExpeditionState pd_state = warehouse_->get_portdock()->expedition_state();
+	const Widelands::PortDock::ExpeditionState pd_state =
+	   warehouse_->get_portdock()->expedition_state();
 	if (pd_state == Widelands::PortDock::ExpeditionState::kCancelling) {
 		// Transient state, disable buttons.
 		expeditionbtn_.set_enabled(false);
@@ -277,8 +292,8 @@ void ExpeditionDisplay::think() {
 
 	const Widelands::ExpeditionType prev_type = current_type_;
 	current_type_ = (pd_state == Widelands::PortDock::ExpeditionState::kNone) ?
-                   Widelands::ExpeditionType::kNone :  // just to be sure
-                   warehouse_->get_portdock()->expedition_type();
+                      Widelands::ExpeditionType::kNone :  // just to be sure
+                      warehouse_->get_portdock()->expedition_type();
 
 	update_buttons();
 
@@ -294,15 +309,14 @@ void ExpeditionDisplay::update_buttons() {
 	const bool has_expedition = current_type_ == Widelands::ExpeditionType::kExpedition;
 	const bool has_refit = current_type_ == Widelands::ExpeditionType::kRefitToWarship;
 
-	expeditionbtn_.set_pic(g_image_cache->get(
-	   has_expedition ? kCancelExpeditionIcon : kStartExpeditionIcon));
-	refitbutton_.set_pic(g_image_cache->get(
-	   has_refit ? kCancelRefitIcon : kStartRefitIcon));
+	expeditionbtn_.set_pic(
+	   g_image_cache->get(has_expedition ? kCancelExpeditionIcon : kStartExpeditionIcon));
+	refitbutton_.set_pic(g_image_cache->get(has_refit ? kCancelRefitIcon : kStartRefitIcon));
 
-	expeditionbtn_.set_tooltip(
-	   has_expedition ? _("Cancel the expedition") : _("Start an expedition"));
-	refitbutton_.set_tooltip(
-	   has_refit ? _("Cancel refitting") : _("Start refitting a ship to a warship"));
+	expeditionbtn_.set_tooltip(has_expedition ? _("Cancel the expedition") :
+                                               _("Start an expedition"));
+	refitbutton_.set_tooltip(has_refit ? _("Cancel refitting") :
+                                        _("Start refitting a ship to a warship"));
 
 	const bool can_act = igbase_->can_act(warehouse_->get_owner()->player_number());
 
@@ -318,7 +332,8 @@ void ExpeditionDisplay::update_contents() {
 
 	add(&control_box_);
 
-	const Widelands::ExpeditionBootstrap* expedition = warehouse_->get_portdock()->expedition_bootstrap();
+	const Widelands::ExpeditionBootstrap* expedition =
+	   warehouse_->get_portdock()->expedition_bootstrap();
 	if (expedition == nullptr
 	    // TODO(tothxa):
 	    //   It should be safer with these, but for some reason then the queues aren't drawn for
@@ -329,7 +344,7 @@ void ExpeditionDisplay::update_contents() {
 	    //   cancelled then a new one is started, then I get an empty window.
 	    // || current_type_ == Widelands::ExpeditionType::kNone ||
 	    // !warehouse_->get_portdock()->expedition_started()
-		) {
+	) {
 		// Make sure it gets updated next time if it was a transient problem
 		current_type_ = Widelands::ExpeditionType::kNone;
 		return;
@@ -354,9 +369,9 @@ void ExpeditionDisplay::update_contents() {
 	if (capacity > 0 && current_type_ == Widelands::ExpeditionType::kExpedition &&
 	    warehouse_->owner().additional_expedition_items_allowed()) {
 		add(new PortDockAdditionalItemsDisplay(
-		   igbase_->game(), this, igbase_->can_act(warehouse_->get_owner()->player_number()),
-		   *warehouse_->get_portdock(), capacity),
-		   UI::Box::Resizing::kAlign, UI::Align::kCenter);
+		       igbase_->game(), this, igbase_->can_act(warehouse_->get_owner()->player_number()),
+		       *warehouse_->get_portdock(), capacity),
+		    UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	}
 
 	// TODO(tothxa): Add soldier control if kRefitToWarship

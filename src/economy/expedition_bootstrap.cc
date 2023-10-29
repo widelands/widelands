@@ -83,10 +83,10 @@ void ExpeditionBootstrap::start(const ExpeditionType what) {
 	Warehouse* const warehouse = portdock_->get_warehouse();
 
 	// Load the buildcosts for the port building or the refit costs for the warship
-	const std::map<DescriptionIndex, uint8_t>&
-	buildcost = what == ExpeditionType::kExpedition ?
-               warehouse->descr().buildcost() :
-               warehouse->owner().tribe().get_ship_descr()->get_refit_cost();
+	const std::map<DescriptionIndex, uint8_t>& buildcost =
+	   what == ExpeditionType::kExpedition ?
+         warehouse->descr().buildcost() :
+         warehouse->owner().tribe().get_ship_descr()->get_refit_cost();
 	size_t const buildcost_size = buildcost.size();
 
 	// Issue request for wares for this expedition.
@@ -103,12 +103,11 @@ void ExpeditionBootstrap::start(const ExpeditionType what) {
 	}
 
 	// Issue the request for the workers (so far only a builder or a shipwright).
-	queues_[buildcost_size].first.reset(
-	   new WorkersQueue(*warehouse,
-                       what == ExpeditionType::kExpedition ?
-                       warehouse->owner().tribe().builder() :
-                       warehouse->owner().tribe().shipwright(),
-		                 1));
+	queues_[buildcost_size].first.reset(new WorkersQueue(*warehouse,
+	                                                     what == ExpeditionType::kExpedition ?
+                                                           warehouse->owner().tribe().builder() :
+                                                           warehouse->owner().tribe().shipwright(),
+	                                                     1));
 	queues_[buildcost_size].first->set_callback(input_callback, this);
 	queues_[buildcost_size].second = false;
 

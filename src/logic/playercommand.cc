@@ -971,7 +971,8 @@ void CmdEvictWorker::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver
 }
 
 /*** Cmd_ShipRefitTransport ***/
-CmdShipRefitTransport::CmdShipRefitTransport(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
+CmdShipRefitTransport::CmdShipRefitTransport(StreamRead& des)
+   : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial_ = des.unsigned_32();
 }
 
