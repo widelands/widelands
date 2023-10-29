@@ -25,10 +25,6 @@
 #include "wui/interactive_gamebase.h"
 #include "wui/waresdisplay.h"
 
-namespace Widelands {
-class PortDock;
-}  // namespace Widelands
-
 AbstractWaresDisplay* create_portdock_wares_display(UI::Panel* parent,
                                                     uint32_t width,
                                                     const Widelands::PortDock& pd,
