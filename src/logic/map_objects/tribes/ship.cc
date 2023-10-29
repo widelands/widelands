@@ -64,7 +64,7 @@ constexpr unsigned kNearDestinationNoteRadius = 1;
 
 const std::string kPortspaceIconFile = "images/wui/editor/fsel_editor_set_port_space.png";
 
-static const Duration kRefitDuration(5 * 60 * 1000);  // 5 minutes
+const Duration kRefitDuration(5 * 60 * 1000);  // 5 minutes
 
 /// Returns true if 'coords' is not blocked by immovables
 /// Trees are allowed, because we don't want spreading forests to block portspaces from expeditions
@@ -865,7 +865,7 @@ void Ship::ship_update_refit_to_warship(Game& game) {
 	}
 
 	// The shipwright's done, return it to the port
-	assert(items_.size() == 0);
+	assert(items_.empty());
 	assert(refit_worker_ != nullptr);
 
 	refit_worker_->set_economy(nullptr, wwWARE);
@@ -952,7 +952,6 @@ void Ship::ship_update_refit_to_transport(Game& game) {
 		molog(game.get_gametime(), "Refit failed, retry\n");
 		start_task_refit_to_transport(game);
 	}
-	return;
 }
 
 void Ship::set_soldier_preference(SoldierPreference pref) {
