@@ -1007,8 +1007,8 @@ void Player::start_or_cancel_expedition(const Warehouse& wh, const ExpeditionTyp
 		const std::string t_str = (t == ExpeditionType::kExpedition) ? "expedition" : "refit";
 		const std::string current = (t == pd->expedition_type()) ? "it" : "another type";
 		log_warn_time(egbase().get_gametime(),
-		              "Not starting %s at port %d, because %s was already started.",
-		              t_str.c_str(), pd->serial(), current.c_str());
+		              "Not starting %s at port %d, because %s was already started.", t_str.c_str(),
+		              pd->serial(), current.c_str());
 		return;
 	}
 

@@ -305,7 +305,8 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 					if (game_ != nullptr) {
 						game_->send_player_start_or_cancel_expedition(
 						   *construction_site_.get(ibase()->egbase()),
-						   launch ? Widelands::ExpeditionType::kExpedition : Widelands::ExpeditionType::kNone);
+						   launch ? Widelands::ExpeditionType::kExpedition :
+                              Widelands::ExpeditionType::kNone);
 					} else {
 						NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 					}

@@ -448,8 +448,7 @@ void PortDock::set_expedition_bootstrap_complete(Game& game, bool complete) {
 		return;
 	}
 
-	const ExpeditionState set_state =
-	   complete ? ExpeditionState::kReady : ExpeditionState::kStarted;
+	const ExpeditionState set_state = complete ? ExpeditionState::kReady : ExpeditionState::kStarted;
 
 	if (expedition_state_ != set_state) {
 		expedition_state_ = set_state;

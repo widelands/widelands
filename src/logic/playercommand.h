@@ -284,7 +284,10 @@ private:
 
 struct CmdStartOrCancelExpedition : public PlayerCommand {
 	CmdStartOrCancelExpedition() = default;  // For savegame loading
-	CmdStartOrCancelExpedition(const Time& t, PlayerNumber const p, Building& b, const ExpeditionType et)
+	CmdStartOrCancelExpedition(const Time& t,
+	                           PlayerNumber const p,
+	                           Building& b,
+	                           const ExpeditionType et)
 	   : PlayerCommand(t, p), serial(b.serial()), type_(et) {
 	}
 

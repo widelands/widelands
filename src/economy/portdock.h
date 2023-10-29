@@ -114,7 +114,7 @@ public:
 	[[nodiscard]] uint32_t count_waiting(WareWorker waretype, DescriptionIndex wareindex) const;
 	[[nodiscard]] uint32_t count_waiting(const PortDock* = nullptr) const;
 
-	enum class ExpeditionState : uint8_t {kNone = 0, kStarted, kCancelling, kReady};
+	enum class ExpeditionState : uint8_t { kNone = 0, kStarted, kCancelling, kReady };
 
 	[[nodiscard]] ExpeditionState expedition_state() const {
 		return expedition_state_;

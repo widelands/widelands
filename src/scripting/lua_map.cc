@@ -6378,7 +6378,8 @@ int LuaWarehouse::start_refit_to_warship(lua_State* L) {
 			return 0;
 		}
 		if (!pd->expedition_started()) {
-			game->send_player_start_or_cancel_expedition(*wh, Widelands::ExpeditionType::kRefitToWarship);
+			game->send_player_start_or_cancel_expedition(
+			   *wh, Widelands::ExpeditionType::kRefitToWarship);
 			return 1;
 		}
 	}

@@ -1092,8 +1092,8 @@ void Game::send_player_set_soldier_preference(MapObject& mo, SoldierPreference m
 }
 
 void Game::send_player_start_or_cancel_expedition(Building& building, const ExpeditionType t) {
-	send_player_command(
-	   new CmdStartOrCancelExpedition(get_gametime(), building.owner().player_number(), building, t));
+	send_player_command(new CmdStartOrCancelExpedition(
+	   get_gametime(), building.owner().player_number(), building, t));
 }
 
 void Game::send_player_enhance_building(Building& building,

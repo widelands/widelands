@@ -178,7 +178,8 @@ private:
  * The contents of 'table' are documented in
  * /data/tribes/ships/atlanteans/init.lua
  */
-ShipDescr::ShipDescr(const std::string& init_descname, const LuaTable& table,
+ShipDescr::ShipDescr(const std::string& init_descname,
+                     const LuaTable& table,
                      Widelands::Descriptions& descriptions)
    : BobDescr(init_descname, MapObjectType::SHIP, MapObjectDescr::OwnerType::kTribe, table),
      max_hitpoints_(table.get_int("hitpoints")),
@@ -440,7 +441,7 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 
 	if (is_refitting()) {
 		assert(fleet_ == nullptr);
-		switch(pending_refit_) {
+		switch (pending_refit_) {
 		case ShipType::kWarship:
 			ship_update_refit_to_warship(game);
 			break;
@@ -847,7 +848,7 @@ void Ship::heal(Game& game) {
 	}
 }
 
-void Ship::ship_update_refit_to_warship(Game& game){
+void Ship::ship_update_refit_to_warship(Game& game) {
 	assert(ship_type_ == ShipType::kTransport);
 	assert(pending_refit_ == ShipType::kWarship);
 
@@ -890,7 +891,7 @@ void Ship::ship_update_refit_to_warship(Game& game){
 	set_destination(game, lastdock_.get(game));
 }
 
-void Ship::ship_update_refit_to_transport(Game& game){
+void Ship::ship_update_refit_to_transport(Game& game) {
 	assert(fleet_ == nullptr);
 	assert(ship_type_ == ShipType::kWarship);
 	assert(pending_refit_ == ShipType::kTransport);
@@ -2329,7 +2330,8 @@ void Ship::start_task_refit_to_warship(Game& game) {
 	refit_worker_->reset_tasks(game);
 	refit_worker_->set_position(game, get_position());
 	refit_worker_->draw_on_top();
-	refit_worker_->start_task_idle(game, refit_worker_->descr().get_animation("work", refit_worker_), -1);
+	refit_worker_->start_task_idle(
+	   game, refit_worker_->descr().get_animation("work", refit_worker_), -1);
 }
 
 /// Initializes / changes the direction of scouting to @arg direction

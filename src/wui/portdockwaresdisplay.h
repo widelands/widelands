@@ -19,8 +19,8 @@
 #ifndef WL_WUI_PORTDOCKWARESDISPLAY_H
 #define WL_WUI_PORTDOCKWARESDISPLAY_H
 
-#include "ui_basic/box.h"
 #include "economy/expedition_bootstrap.h"
+#include "ui_basic/box.h"
 #include "wui/buildingwindow.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/waresdisplay.h"
@@ -36,7 +36,9 @@ AbstractWaresDisplay* create_portdock_wares_display(UI::Panel* parent,
 
 class ExpeditionDisplay : public UI::Box {
 public:
-	ExpeditionDisplay(UI::Panel* parent, Widelands::Warehouse* wh, InteractiveGameBase*,
+	ExpeditionDisplay(UI::Panel* parent,
+	                  Widelands::Warehouse* wh,
+	                  InteractiveGameBase*,
 	                  BuildingWindow::CollapsedState* collapsed);
 
 private:
