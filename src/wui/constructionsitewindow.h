@@ -73,6 +73,7 @@ struct ConstructionSiteWindow : public BuildingWindow {
 
 protected:
 	void init(bool avoid_fastclick, bool workarea_preview_wanted) override;
+	void evict_builder();
 
 private:
 	class FakeWaresDisplay : public WaresDisplay {

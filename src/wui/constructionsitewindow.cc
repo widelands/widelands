@@ -45,6 +45,7 @@ static const char pic_stock_policy_button_remove[] =
 static const char pic_decrease_capacity[] = "images/wui/buildings/menu_down_train.png";
 static const char pic_increase_capacity[] = "images/wui/buildings/menu_up_train.png";
 constexpr uint16_t kSoldierCapacityDisplayWidth = 145;
+constexpr int8_t kButtonSize = 34;
 
 ConstructionSiteWindow::FakeWaresDisplay::FakeWaresDisplay(UI::Panel* parent,
                                                            bool can_act,
@@ -150,6 +151,20 @@ void ConstructionSiteWindow::build_wares_tab(Widelands::ConstructionSite* constr
 
 	ensure_box_can_hold_input_queues(box);
 	add_wares_queues(construction_site, box);
+
+	if (ibase()->can_act(construction_site->owner().player_number())) {
+		UI::Box* builder_caps = new UI::Box(
+			&box, UI::PanelStyle::kWui, "builder_caps_box", 0, 0, UI::Box::Horizontal);
+		builder_caps->add_inf_space();
+		UI::Button* evict_button = new UI::Button(
+			builder_caps, "evict", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiMenu,
+			g_image_cache->get("images/wui/buildings/menu_drop_soldier.png"),
+			_("Send the builder away"));
+		evict_button->sigclicked.connect([this]() { evict_builder(); });
+		builder_caps->add(evict_button);
+		box.add(builder_caps, UI::Box::Resizing::kFullSize);
+	}
+
 
 	get_tabs()->add("wares", g_image_cache->get(pic_tab_wares), &box, _("Building materials"));
 }
@@ -398,6 +413,29 @@ void ConstructionSiteWindow::change_policy(Widelands::WareWorker ww, Widelands::
 				}
 			}
 		}
+	}
+}
+
+void ConstructionSiteWindow::evict_builder() {
+	Widelands::ConstructionSite* construction_site = construction_site_.get(ibase()->egbase());
+
+	if (construction_site == nullptr) { // || ! construction_site->builder_.is_set()) {
+		return;
+	}
+
+	if (game_ != nullptr) {
+		/* TODO(aDiscoverer) find out how to access construction_site->builder_, friend in PartiallyFinishedBuilding does not help
+		void builder = construction_site->builder_->get(game_);
+		void* prev_location = builder->get_location(game_);
+		game_->send_player_evict_worker(builder);
+		if (builder->get_location(game_) != prev_location) {
+			// TODO(aDiscoverer): check if this is all
+			// construction_site.builder_ = nullprt; // probably
+			construction_site->request_builder(*game_)
+		}
+		*/
+	} else {
+		NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 	}
 }
 
