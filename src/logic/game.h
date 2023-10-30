@@ -413,7 +413,7 @@ public:
 	}
 
 	[[nodiscard]] bool naval_warfare_allowed() const {
-		return diplomacy_allowed_;
+		return naval_warfare_allowed_;
 	}
 	void set_naval_warfare_allowed(bool allow) {
 		naval_warfare_allowed_ = allow;
