@@ -153,16 +153,16 @@ void ConstructionSiteWindow::build_wares_tab(Widelands::ConstructionSite* constr
 	add_wares_queues(construction_site, box);
 
 	if (ibase()->can_act(construction_site->owner().player_number())) {
-		UI::Box* builder_caps = new UI::Box(
+		UI::Box& builder_caps = *new UI::Box(
 			&box, UI::PanelStyle::kWui, "builder_caps_box", 0, 0, UI::Box::Horizontal);
-		builder_caps->add_inf_space();
-		UI::Button* evict_button = new UI::Button(
-			builder_caps, "evict", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiMenu,
+		builder_caps.add_inf_space();
+		UI::Button& evict_button = *new UI::Button(
+			&builder_caps, "evict", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiMenu,
 			g_image_cache->get("images/wui/buildings/menu_drop_soldier.png"),
 			_("Send the builder away"));
-		evict_button->sigclicked.connect([this]() { evict_builder(); });
-		builder_caps->add(evict_button);
-		box.add(builder_caps, UI::Box::Resizing::kFullSize);
+		evict_button.sigclicked.connect([this]() { evict_builder(); });
+		builder_caps.add(&evict_button);
+		box.add(&builder_caps, UI::Box::Resizing::kFullSize);
 	}
 
 
