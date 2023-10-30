@@ -396,7 +396,9 @@ void LaunchGame::update_naval_warfare() {
 	} else if (settings_.settings().savegame) {
 		checkbox->set_tooltip(_("Naval warfare is set by the saved game"));
 	} else {
-		checkbox->set_tooltip(_("Enable coastal invasions and ship-to-ship battles. This feature is experimental and may undergo substantial redesign in future versions of Widelands."));
+		checkbox->set_tooltip(
+		   _("Enable coastal invasions and ship-to-ship battles. This feature is experimental and "
+		     "may undergo substantial redesign in future versions of Widelands."));
 	}
 }
 
