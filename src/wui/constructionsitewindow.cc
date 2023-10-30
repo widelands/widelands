@@ -419,21 +419,20 @@ void ConstructionSiteWindow::change_policy(Widelands::WareWorker ww, Widelands::
 void ConstructionSiteWindow::evict_builder() {
 	Widelands::ConstructionSite* construction_site = construction_site_.get(ibase()->egbase());
 
-	if (construction_site == nullptr) { // || ! construction_site->builder_.is_set()) {
+	// TODO(aDiscoverer): construction_site->builder_ is protected, how to be friend?
+	if (construction_site == nullptr || ! construction_site->builder_.is_set()) {
 		return;
 	}
 
 	if (game_ != nullptr) {
-		/* TODO(aDiscoverer) find out how to access construction_site->builder_, friend in PartiallyFinishedBuilding does not help
-		void builder = construction_site->builder_->get(game_);
-		void* prev_location = builder->get_location(game_);
+		Widelands::Worker& builder = *construction_site->builder_.get(*game_);
+		Widelands::OPtr<Widelands::PlayerImmovable> prev_location = builder.get_location();
 		game_->send_player_evict_worker(builder);
-		if (builder->get_location(game_) != prev_location) {
-			// TODO(aDiscoverer): check if this is all
-			// construction_site.builder_ = nullprt; // probably
-			construction_site->request_builder(*game_)
+		if (builder.get_location() != prev_location) {
+			// TODO(aDiscoverer): check if this is all needed
+			construction_site->builder_ = nullptr; // probably
+			// construction_site->request_builder(*game_); // TODO(aDiscoverer) this is a private fn
 		}
-		*/
 	} else {
 		NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 	}
