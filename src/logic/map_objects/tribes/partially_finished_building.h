@@ -39,7 +39,6 @@ dismantlesites.
 class PartiallyFinishedBuilding : public Building {
 	friend class MapBuildingdataPacket;
 	friend struct MapBuildingPacket;
-	friend struct ConstructionSiteWindow;
 	friend class LuaMaps::LuaConstructionSite;
 	friend class LuaMaps::LuaDismantleSite;
 
