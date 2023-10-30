@@ -405,11 +405,18 @@ public:
 		return pending_diplomacy_actions_;
 	}
 
-	bool diplomacy_allowed() const {
+	[[nodiscard]] bool diplomacy_allowed() const {
 		return diplomacy_allowed_;
 	}
-	void set_diplomacy_allowed(bool d) {
-		diplomacy_allowed_ = d;
+	void set_diplomacy_allowed(bool allow) {
+		diplomacy_allowed_ = allow;
+	}
+
+	[[nodiscard]] bool naval_warfare_allowed() const {
+		return diplomacy_allowed_;
+	}
+	void set_naval_warfare_allowed(bool allow) {
+		naval_warfare_allowed_ = allow;
 	}
 
 private:
@@ -495,6 +502,7 @@ private:
 
 	std::list<PendingDiplomacyAction> pending_diplomacy_actions_;
 	bool diplomacy_allowed_{true};
+	bool naval_warfare_allowed_{false};
 
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;
