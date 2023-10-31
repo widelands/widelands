@@ -35,12 +35,14 @@ shallow_clone: false
 branches:
   only:
     - master
+    - revision_fix_windows
 
 skip_tags: true
 
 
 build_script:
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
+  - cmd: python3 %APPVEYOR_BUILD_FOLDER%\utils\detect_revision.py
   - cmd: md build
   - cmd: cd build
   # detect version
