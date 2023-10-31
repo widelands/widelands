@@ -426,26 +426,8 @@ void ConstructionSiteWindow::evict_builder() {
 
 	if (game_ != nullptr) {
 		/*
-		in lua, I would:
-		function evict_builder(site)
-			local builder = site.fields[0].bobs[0]
-			if builder then
-				local last_loc = builder.location
-				builder.evict() -- this does not update the construction site
-				if last_loc ~= builder.location then
-					site.has_builder = false -- might trigger assert
-				end
-			end
-		end
-
 		Widelands::Worker& builder = *construction_site->builder_.get(*game_);
-		Widelands::OPtr<Widelands::PlayerImmovable> prev_location = builder.get_location();
 		game_->send_player_evict_worker(builder);
-		if (builder.get_location() != prev_location) {
-			// TODO(aDiscoverer): check if this is all needed
-			construction_site->builder_ = nullptr; // probably
-			// construction_site->request_builder(*game_); // TODO(aDiscoverer) this is a private fn
-		}
 		*/
 	} else {
 		NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
