@@ -6,7 +6,7 @@ on:
   pull_request:
     types: [ opened, reopened, synchronize ]
   push:
-    branches: [ master, 6186-revdetect ]
+    branches: [ master ]
 
 jobs:
   # This job runs multiple smaller checks where having several jobs would be overkill.
@@ -379,10 +379,9 @@ jobs:
     - name: Building
       run: |
         mkdir build_wl
-        pushd build_wl/
+        cd build_wl/
         ../utils/macos/build_app.sh "--${{ matrix.config }}" "--${{ matrix.compiler }}"
-        popd
-        grep -v REVDETECT-BROKEN build/VERSION
+        grep -v REVDETECT-BROKEN ../build/VERSION
         DMGPATH="$(pwd)"
         DMGFILE="$(ls *.dmg)"
         echo "DMG file is: $DMGPATH/$DMGFILE"
