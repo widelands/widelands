@@ -137,7 +137,7 @@ if(${CMAKE_VERSION} VERSION_LESS 3.12.0)
   # PythonInterp module has been deprecated since CMake 3.12.
   find_package (PythonInterp REQUIRED)
 else()
-  find_package (Python REQUIRED)
+  find_package (Python3 REQUIRED)
 endif()
 
 find_package(Gettext REQUIRED)
