@@ -1,4 +1,4 @@
-terrain_affinity = {
+return {
    preferred_temperature = 45, -- Temperature is in arbitrary units.
    preferred_humidity = 750,   -- Values between 0 and 1000 (1000 being very wet).
    preferred_fertility = 400,  -- Values between 0 and 1000 (1000 being very fertile).
