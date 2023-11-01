@@ -137,9 +137,8 @@ if(${CMAKE_VERSION} VERSION_LESS 3.12.0)
   # PythonInterp module has been deprecated since CMake 3.12.
   find_package (PythonInterp REQUIRED)
 else()
-  find_package (Python REQUIRED)
-  message(STATUS "Found Python in '${Python_EXECUTABLE}' '${PYTHON_EXECUTABLE}'.")
-  set(PYTHON_EXECUTABLE ${Python_EXECUTABLE})
+  find_package (Python3 REQUIRED)
+  set(PYTHON_EXECUTABLE ${Python3_EXECUTABLE})
 endif()
 
 find_package(Gettext REQUIRED)
