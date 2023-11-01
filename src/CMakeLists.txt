@@ -6,7 +6,7 @@ configure_file (${CMAKE_CURRENT_SOURCE_DIR}/../cmake/datadirversion.cmake ${CMAK
 add_custom_target(codecheck)
 add_custom_target(run_build_deps
   COMMAND
-    ${PYTHON_EXECUTABLE}
+    ${_Python3_EXECUTABLE}
     ${CMAKE_SOURCE_DIR}/utils/build_deps.py
   COMMENT "Checking CMakeLists.txt files."
 )

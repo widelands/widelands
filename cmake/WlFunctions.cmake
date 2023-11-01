@@ -259,7 +259,7 @@ function(wl_run_codecheck NAME SRC)
         ${OUTPUT_FILE}
       COMMAND
         ${CMAKE_COMMAND}
-        -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
+        -DPYTHON_EXECUTABLE=${_Python3_EXECUTABLE}
         -DWL_SOURCE_CHECKER=${CMAKE_SOURCE_DIR}/cmake/codecheck/CodeCheck.py
         -DSRC=${ABSOLUTE_SRC}
         -DOUTPUT_FILE=${OUTPUT_FILE}

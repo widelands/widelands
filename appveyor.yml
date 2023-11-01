@@ -35,7 +35,6 @@ shallow_clone: false
 branches:
   only:
     - master
-    - revision_fix_windows
 
 skip_tags: true
 
