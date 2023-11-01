@@ -1,4 +1,4 @@
-terrain_affinity = {
+return {
    -- Temperature is in arbitrary units.
    preferred_temperature = 125,
 

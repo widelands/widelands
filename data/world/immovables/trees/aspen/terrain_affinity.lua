@@ -1,4 +1,4 @@
-terrain_affinity = {
+return {
    preferred_temperature = 100,
    preferred_humidity = 600,
    preferred_fertility = 700,
