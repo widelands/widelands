@@ -203,7 +203,7 @@ jobs:
         mkdir build
         pushd build
         cmake .. -DCMAKE_BUILD_TYPE:STRING="${{ matrix.config }}" -DOPTION_BUILD_TRANSLATIONS="ON" -DOPTION_BUILD_WEBSITE_TOOLS="ON" -DOPTION_ASAN="ON" -DOPTION_BUILD_CODECHECK="OFF"
-        grep ${GITHUB_SHA} VERSION
+        grep -v REVDETECT-BROKEN VERSION
         make -k -j$(nproc) VERBOSE=1
     - name: Make install/uninstall
       run: |
@@ -284,7 +284,7 @@ jobs:
         mkdir $env:GITHUB_WORKSPACE\build
         cd $env:GITHUB_WORKSPACE\build
         cmake.exe -G "NMake Makefiles" .. -DVCPKG_TARGET_TRIPLET=${{ env.VCPKG_TARGET_TRIPLET }} -DCMAKE_TOOLCHAIN_FILE="${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake" -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TRANSLATIONS=ON -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DOPTION_BUILD_WINSTATIC=ON -DOPTION_USE_GLBINDING=ON -DOPTION_FORCE_EMBEDDED_MINIZIP=ON
-        if ((Select-String -Quiet ${{ github.sha }} VERSION)) { exit 1 }
+        if ((Select-String -Quiet REVDETECT-BROKEN VERSION)) { exit 1 }
         nmake
         if ("${{ matrix.config }}" -Match "Release") {
           strip -sv ./src/widelands.exe
@@ -338,7 +338,7 @@ jobs:
         mkdir $env:GITHUB_WORKSPACE\build
         cd $env:GITHUB_WORKSPACE\build
         cmake.exe -G Ninja .. -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TRANSLATIONS=ON -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DUSE_XDG=OFF -DOPTION_BUILD_CODECHECK=OFF -DUSE_FLTO_IF_AVAILABLE=OFF -DCMAKE_JOB_POOLS="linking=1" -DCMAKE_JOB_POOL_LINK=linking -DOPTION_BUILD_WINSTATIC=ON -DOPTION_FORCE_EMBEDDED_MINIZIP=ON
-        if (-not (Select-String -Quiet ${{ github.sha }} VERSION)) { exit 1 }
+        if (-not (Select-String -Quiet REVDETECT-BROKEN VERSION)) { exit 1 }
         cmake.exe --build .
         strip -sv ./src/widelands.exe
     - name: InnoSetup
@@ -382,7 +382,7 @@ jobs:
         pushd build_wl/
         ../utils/macos/build_app.sh "--${{ matrix.config }}" "--${{ matrix.compiler }}"
         popd
-        grep ${GITHUB_SHA} build/VERSION
+        grep -v REVDETECT-BROKEN build/VERSION
         DMGPATH="$(pwd)"
         DMGFILE="$(ls *.dmg)"
         echo "DMG file is: $DMGPATH/$DMGFILE"
