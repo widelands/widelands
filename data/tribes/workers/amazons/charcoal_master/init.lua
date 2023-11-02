@@ -10,31 +10,31 @@ wl.Descriptions():new_worker_type {
    vision_range = 2,
 
    animation_directory = dirname,
-   ware_hotspot = {0, 29},
+   ware_hotspot = {0, 28},
    spritesheets = {
       walk = {
          directional = true,
-         hotspot = {17, 28},
+         hotspot = {19, 33},
          fps = 15,
          frames = 30,
-         columns = 6,
-         rows = 5
+         columns = 10,
+         rows = 3
       },
       walkload = {
          directional = true,
-         hotspot = {17, 31},
+         hotspot = {19, 33},
          fps = 15,
          frames = 30,
-         columns = 6,
-         rows = 5
+         columns = 10,
+         rows = 3
       },
       idle = {
          basename = "walk_se",
-         hotspot = {17, 28},
+         hotspot = {19, 33},
          fps = 15,
          frames = 30,
-         columns = 6,
-         rows = 5
+         columns = 10,
+         rows = 3
       },
    },
 }
