@@ -13,8 +13,7 @@ wl.Descriptions():new_productionsite_type {
       name = "amazons_rare_tree_kiln",
       enhancement_cost = {
          granite = 3,
-         quartz = 1,
-         selected_firestones = 1,
+         quartz = 3,
       },
       enhancement_return_on_dismantle = {
          granite = 1,

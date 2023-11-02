@@ -51,7 +51,6 @@ init = {
          stone_bowl = 2,
          needles = 2,
          firestones = 3,
-         selected_firestones = 1,
          },
          workers = {
          amazons_cook = 3,

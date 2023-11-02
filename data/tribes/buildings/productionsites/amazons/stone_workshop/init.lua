@@ -59,7 +59,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
-            -- time total: 20 * 69 = 1380 sec
+            -- time total: 19 * 69 = 1311 sec
             "call=produce_shovel",
             "call=produce_spear_wooden",
             "call=produce_felling_ax",
@@ -67,19 +67,18 @@ wl.Descriptions():new_productionsite_type {
             "call=produce_pick",
             "call=produce_spear_hardened",
             "call=produce_machete",
+            "call=produce_spear_wooden",
             "call=produce_kitchen_tools",
-            "call=produce_spear_wooden",
+            "call=produce_spear_stone_tipped",
             "call=produce_hammer",
-            "call=produce_spear_stone_tipped",
+            "call=produce_spear_hardened",
             "call=produce_chisel",
-            "call=produce_spear_hardened",
-            "call=produce_needles",
-            "call=produce_stone_bowl",
             "call=produce_spear_wooden",
-            "call=produce_firestones",
+            "call=produce_needles",
             "call=produce_spear_stone_tipped",
-            "call=produce_selected_firestones",
+            "call=produce_stone_bowl",
             "call=produce_spear_hardened",
+            "call=produce_firestones",
          },
       },
       produce_shovel = {
@@ -200,18 +199,6 @@ wl.Descriptions():new_productionsite_type {
             "sleep=duration:30s400ms",
             "animate=working duration:35s",
             "produce=firestones"
-         },
-      },
-      produce_selected_firestones = {
-         -- TRANSLATORS: Completed/Skipped/Did not start making selected firestones because ...
-         descname = _("making selected firestones"),
-         actions = {
-            -- time: 30.4 + 35 + 3.6 = 69 sec
-            "return=skipped unless economy needs selected_firestones",
-            "consume=quartz:2",
-            "sleep=duration:30s400ms",
-            "animate=working duration:35s",
-            "produce=selected_firestones"
          },
       },
       produce_spear_wooden = {
