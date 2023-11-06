@@ -63,7 +63,7 @@ wl.Descriptions():new_worker_type {
          -- min. worker time: 2 * 2 * 1.8 + 25 + 2 = 34.2 sec
          -- max. worker time: 2 * 13 * 1.8 + 25 + 2 = 73.8 sec
          -- avg. worker time: 2 * 7.5 * 1.8 + 25 + + 2 = 54 sec
-         -- some of trees delay woodcutting by 1-1.4 sec (aspen, balsa, ironwood, oak, rubber)
+         -- some of trees delay woodcutting by 1.4 sec (aspen, oak)
          "findobject=attrib:normal_tree radius:10",
          "walk=object",
          "playsound=sound/woodcutting/woodcutting priority:100% allow_multiple",
