@@ -183,17 +183,17 @@ for category in developers:
     if 'heading' in category and category['heading'] != 'Translators':
         print('- Adding ' + category['heading'])
         lua_string += '\n\t{'  # category
-        lua_string += add_lua_table_key('heading',
-                                        category['heading'], transl=True)
-        lua_string += add_lua_table_key('image', category['image'])
+        lua_string += '\n\t\t' + add_lua_table_key(
+            'heading', category['heading'], transl=True)
+        lua_string += '\n\t\t' + add_lua_table_key('image', category['image'])
 
-        lua_string += add_lua_table_key('entries')
+        lua_string += '\n\t\t' + add_lua_table_key('entries')
         lua_string += '{'  # entries
         for subcategory in category['entries']:
-            lua_string += '{'  # entry
+            lua_string += '\n\t\t\t{'  # entry
             if 'subheading' in subcategory:
-                lua_string += add_lua_table_key('subheading',
-                                                subcategory['subheading'], transl=True)
+                lua_string += '\n\t\t\t\t' + add_lua_table_key(
+                    'subheading', subcategory['subheading'], transl=True)
             members = []
             if 'members' in subcategory:
                 for m in subcategory['members']:
@@ -201,11 +201,11 @@ for category in developers:
             if 'translate' in subcategory:
                 for m in subcategory['translate']:
                     members.append('_("' + m + '"),')
-            lua_string += add_lua_table_key('members', members)
+            lua_string += '\n\t\t\t\t' + add_lua_table_key('members', members)
 
-            lua_string += '},'  # entry
-        lua_string += '},'  # entries
-        lua_string += '},'  # category
+            lua_string += '\n\t\t\t},'  # entry
+        lua_string += '\n\t\t},'  # entries
+        lua_string += '\n\t},'  # category
 
 lua_string += '\n} end\n'  # developers
 
