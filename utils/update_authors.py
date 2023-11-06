@@ -13,7 +13,8 @@ import sys
 # It then collects all other contributors from ../data/txts/developers.json,
 # and writes the developer credits to ./data/txts/developers.lua
 
-INDENT = '   ' # one indentation level in lua
+INDENT = '   '  # one indentation level in lua
+
 
 def add_lua_array(values):
     """Creates an array."""
@@ -150,7 +151,7 @@ dest_filename = 'locales.lua'
 dest_filepath = os.path.normpath(
     base_path + '/data/i18n') + '/' + dest_filename
 dest_file = codecs.open(dest_filepath, encoding='utf-8', mode='w')
-dest_file.write(lua_locales.replace('\t', INDENT)) # replace indentation
+dest_file.write(lua_locales.replace('\t', INDENT))  # replace indentation
 dest_file.close()
 
 print('Writing translators\n')
