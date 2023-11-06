@@ -1609,7 +1609,7 @@ wl.Descriptions():new_tribe {
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Well, part 1
                pgettext("atlanteans_building", "The carrier needs %s to get one bucket full of water."):bformat(format_seconds(44)),
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Well, part 2
-               pgettext("atlanteans_building", "If the water resource is depleted, the carrier needs %s on average."):bformat(format_seconds(71))
+               pgettext("atlanteans_building", "If the water resource is depleted, the carrier needs %s on average."):bformat(format_minutes_seconds(1, 11))
             }
          }
       },
