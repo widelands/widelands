@@ -346,6 +346,9 @@ int LuaPlayer::set_hidden_from_general_statistics(lua_State* L) {
 
       (RO) Type of the AI controlling this player
       ("normal", "weak", "very_weak", "empty"; "" if human controlled only)
+
+      This information is reliable for multi player games. For single player games,
+      the value for an ai player may also be "random" or even "".
 */
 int LuaPlayer::get_ai_type(lua_State* L) {
 	Widelands::Game& game = get_game(L);
