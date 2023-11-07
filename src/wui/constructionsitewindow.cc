@@ -153,18 +153,17 @@ void ConstructionSiteWindow::build_wares_tab(Widelands::ConstructionSite* constr
 	add_wares_queues(construction_site, box);
 
 	if (ibase()->can_act(construction_site->owner().player_number())) {
-		UI::Box& builder_caps = *new UI::Box(
-			&box, UI::PanelStyle::kWui, "builder_caps_box", 0, 0, UI::Box::Horizontal);
+		UI::Box& builder_caps =
+		   *new UI::Box(&box, UI::PanelStyle::kWui, "builder_caps_box", 0, 0, UI::Box::Horizontal);
 		builder_caps.add_inf_space();
 		UI::Button& evict_button = *new UI::Button(
-			&builder_caps, "evict", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiMenu,
-			g_image_cache->get("images/wui/buildings/menu_drop_soldier.png"),
-			_("Send the builder away"));
+		   &builder_caps, "evict", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiMenu,
+		   g_image_cache->get("images/wui/buildings/menu_drop_soldier.png"),
+		   _("Send the builder away"));
 		evict_button.sigclicked.connect([this]() { evict_builder(); });
 		builder_caps.add(&evict_button);
 		box.add(&builder_caps, UI::Box::Resizing::kFullSize);
 	}
-
 
 	get_tabs()->add("wares", g_image_cache->get(pic_tab_wares), &box, _("Building materials"));
 }
@@ -420,7 +419,7 @@ void ConstructionSiteWindow::evict_builder() {
 	Widelands::ConstructionSite* construction_site = construction_site_.get(ibase()->egbase());
 
 	// TODO(aDiscoverer): construction_site->builder_ is protected, how to be friend?
-	if (construction_site == nullptr) { // || ! construction_site->builder_.is_set()) {
+	if (construction_site == nullptr) {  // || ! construction_site->builder_.is_set()) {
 		return;
 	}
 
