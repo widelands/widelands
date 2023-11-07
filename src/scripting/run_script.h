@@ -31,6 +31,7 @@
 int check_return_value_for_errors(lua_State* L, int rv);
 
 // Runs the 'script' searched in the given 'fs'.
-std::unique_ptr<LuaTable> run_script(lua_State* L, const std::string& path, FileSystem* fs, const bool no_pop_table = false);
+std::unique_ptr<LuaTable>
+run_script(lua_State* L, const std::string& path, FileSystem* fs, const bool no_pop_table = false);
 
 #endif  // end of include guard: WL_SCRIPTING_RUN_SCRIPT_H
