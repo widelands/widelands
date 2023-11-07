@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 
 """This is something that should be caught before it reaches Nicolai's eyes.
