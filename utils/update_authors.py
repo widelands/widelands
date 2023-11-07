@@ -194,16 +194,13 @@ for category in developers:
             if 'subheading' in subcategory:
                 lua_string += '\n\t\t\t\t' + add_lua_table_key(
                     'subheading', subcategory['subheading'], transl=True)
-            members = []
+            lua_string += '\n\t\t\t\tmembers = {'
             if 'members' in subcategory:
                 for m in subcategory['members']:
-                    members.append(m)
+                    lua_string += '\n\t\t\t\t\t"'+m+'",'
             if 'translate' in subcategory:
                 for m in subcategory['translate']:
-                    members.append('_("' + m + '"),')
-            lua_string += '\n\t\t\t\tmembers = {'
-            for member in members:
-                lua_string += '\n\t\t\t\t\t"'+member+'",'
+                    lua_string += '\n\t\t\t\t\t_("' + m + '"),'
             lua_string += '\n\t\t\t\t},'
 
             lua_string += '\n\t\t\t},'  # entry
