@@ -7,6 +7,7 @@
 # Jindřich Michal <jimi2000@seznam.cz>, 2020
 # Markus7cz <markus7cz@gmail.com>, 2008
 # Matej Svrcek <mmatej@yahoo.com>, 2015,2022
+# Michal Havlíček, 2023
 # Zlopez <michal.konecny@psmail.xyz>, 2021
 # Zlopez <michal.konecny@psmail.xyz>, 2021-2022
 # Milan Fašina <matrix17@seznam.cz>, 2016-2018
@@ -18,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-10-02 02:28+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Václav Černý <vaclav.vatoz.cerny@gmail.com>, 2022\n"
+"Last-Translator: Michal Havlíček, 2023\n"
 "Language-Team: Czech (http://app.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -306,7 +307,7 @@ msgstr "Esc"
 #: ../../src/wlapplication_options.cc:1034
 msgctxt "editor"
 msgid "Tools"
-msgstr ""
+msgstr "Nástroje"
 
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
@@ -698,7 +699,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:1426
 msgid "Publish Map"
-msgstr ""
+msgstr "Zveřejnit mapu"
 
 #: ../../src/editor/editorinteractive.cc:1427
 #, c-format
@@ -722,7 +723,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:1457
 msgid "Saving map…"
-msgstr ""
+msgstr "Ukládání mapy..."
 
 #: ../../src/editor/editorinteractive.cc:1476
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:315
@@ -1324,7 +1325,7 @@ msgstr "Náhodné číslo:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:235
 msgid "Generate a new random number"
-msgstr ""
+msgstr "Vygenerovat nové náhodné číslo"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:244
 msgid "Map ID:"
@@ -1702,11 +1703,11 @@ msgstr "Velikost nástroje"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:51
 msgid "Size:"
-msgstr ""
+msgstr "Velikost:"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:64
 msgid "Gaps:"
-msgstr ""
+msgstr "Mezery:"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:67
 msgid "Radius of the active tool"
@@ -1826,7 +1827,7 @@ msgstr "Shader jazyk"
 
 #: ../../src/graphic/text/rt_render.cc:1420
 msgid "Copy link to clipboard"
-msgstr ""
+msgstr "Zkopírovat odkaz do schránky"
 
 #: ../../src/graphic/text_layout.cc:273
 #, c-format
@@ -2857,7 +2858,7 @@ msgstr "Ukládání hry…"
 
 #: ../../src/logic/save_handler.cc:152
 msgid "Saving skipped"
-msgstr ""
+msgstr "Ukládání přeskočeno"
 
 #: ../../src/logic/save_handler.cc:170
 #: ../../src/wui/game_main_menu_save_game.cc:338
@@ -3672,7 +3673,7 @@ msgstr "Modrá"
 
 #: ../../src/ui_basic/color_chooser.cc:484
 msgid "Remove from favorites"
-msgstr ""
+msgstr "Odstranit z oblíbených"
 
 #: ../../src/ui_basic/color_chooser.cc:484
 #: ../../src/ui_fsmenu/addons/packager.cc:109
@@ -5373,12 +5374,12 @@ msgstr ""
 #: ../../src/ui_fsmenu/crash_report.cc:61
 #: ../../src/ui_fsmenu/crash_report.cc:151
 msgid "Open link"
-msgstr ""
+msgstr "Otevřít odkaz"
 
 #: ../../src/ui_fsmenu/crash_report.cc:63
 #: ../../src/ui_fsmenu/crash_report.cc:153
 msgid "Copy link"
-msgstr ""
+msgstr "Zkopírovat odkaz"
 
 #: ../../src/ui_fsmenu/crash_report.cc:67
 #: ../../src/ui_fsmenu/crash_report.cc:158
@@ -6659,7 +6660,7 @@ msgstr "Vypnuto"
 #. * TRANSLATORS: Options: Delete replays after:
 #: ../../src/ui_fsmenu/options.cc:509
 msgid "Never"
-msgstr ""
+msgstr "Nikdy"
 
 #. * TRANSLATORS: Entry in the window size dropdown
 #: ../../src/ui_fsmenu/options.cc:564
@@ -6944,7 +6945,7 @@ msgstr "Neznámý parameter: %s"
 
 #: ../../src/wlapplication.cc:1651
 msgid "Incompatible"
-msgstr ""
+msgstr "Nekompatibilní"
 
 #: ../../src/wlapplication.cc:1688
 msgid "Game ended unexpectedly"
@@ -7462,7 +7463,7 @@ msgstr "Nastavení normálního tempa hry"
 
 #: ../../src/wlapplication_options.cc:705
 msgid "Pause The Game"
-msgstr ""
+msgstr "Pozastavit hru"
 
 #: ../../src/wlapplication_options.cc:710
 msgid "Scroll to Starting Field"
@@ -9602,7 +9603,7 @@ msgstr ""
 
 #: ../../src/wui/minimap.cc:237
 msgid "Attacks"
-msgstr ""
+msgstr "Útoky"
 
 #: ../../src/wui/minimap.cc:248
 msgid "Zoom"
