@@ -61,7 +61,7 @@ def generate_translation_stats(po_dir, output_file):
                 ['pocount', '--csv', subdir],
                 encoding='utf-8',
                 stderr=subprocess.STDOUT,
-                )
+            )
             if 'ERROR' in stats_output:
                 print('\nError running pocount:\n' + stats_output +
                       '\nAborted creating translation statistics.')
@@ -100,11 +100,12 @@ def generate_translation_stats(po_dir, output_file):
             if po_filename.endswith('.po'):
                 locale = regex_po.match(po_filename).group(1)
                 entry = locale_stats[locale]
-                entry.total = entry.total + int(cells[total_column])
-                entry.translated = entry.translated + int(cells[translated_column])
+                entry.total += int(cells[total_column])
+                entry.translated += int(cells[translated_column])
                 if entry.translated > entry.total:
-                    print('Error! Translated ' + str(entry.translated) + ' (+' + (cells[translated_column]) +
-                          ') is bigger than the total of ' + str(entry.total) + '(' + (cells[total_column]) + ')\n' + line)
+                    print('Error! Translated ' + str(entry.translated) + ' (+' +
+                          cells[translated_column] + ') is bigger than the total of ' +
+                          str(entry.total) + '(' + cells[total_column] + ')\n' + line)
                     sys.exit(1)
                 locale_stats[locale] = entry
 
