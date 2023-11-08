@@ -185,10 +185,9 @@ for category in developers:
         lua_string += '\n\t{'  # category
         lua_string += '\n\t\t' + add_lua_table_key(
             'heading', category['heading'], transl=True)
-        lua_string += '\n\t\t' + add_lua_table_key('image', category['image'])
+        lua_string += f'\n\t\timage = "{ category["image"] }",'
 
-        lua_string += '\n\t\t' + add_lua_table_key('entries')
-        lua_string += '{'  # entries
+        lua_string += '\n\t\tentries = {'  # entries
         for subcategory in category['entries']:
             lua_string += '\n\t\t\t{'  # entry
             if 'subheading' in subcategory:
@@ -197,10 +196,10 @@ for category in developers:
             lua_string += '\n\t\t\t\tmembers = {'
             if 'members' in subcategory:
                 for m in subcategory['members']:
-                    lua_string += '\n\t\t\t\t\t"'+m+'",'
+                    lua_string += f'\n\t\t\t\t\t"{ m }",'
             if 'translate' in subcategory:
                 for m in subcategory['translate']:
-                    lua_string += '\n\t\t\t\t\t_("' + m + '"),'
+                    lua_string += f'\n\t\t\t\t\t_("{ m }"),'
             lua_string += '\n\t\t\t\t},'
 
             lua_string += '\n\t\t\t},'  # entry
