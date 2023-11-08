@@ -16,52 +16,6 @@ import sys
 INDENT = '   '  # one indentation level in lua
 
 
-def add_lua_array(values):
-    """Creates an array."""
-
-    text = '{'
-    for value in values:
-        if value.startswith('_("'):
-            # a translation marker has already been added
-            text += value
-        else:
-            text += '"' + value + '",'
-    text += '},'
-    return text
-
-
-def add_lua_table_key(key, value=None, **kwrds):
-    """Adds a key to a table.
-
-    Surrounding brackets of the table have to be applied manually.
-    If given, the value(s) is/are applied also to the key.
-
-    Known kwrds: 'transl', if true a translation marker is added
-    """
-
-    transl = kwrds.get('transl', False)
-    if key == '':
-        print('At least a key must be given!')
-        sys.exit(1)
-
-    if value == None:
-        # We have only a key, which in general shouldn't be translated
-        return key + ' = '
-
-    else:
-        # A value is present
-        if transl:
-            return key + ' = _("' + value + '"),'
-
-        if isinstance(value, list):
-            # To get translations, apply '_("foo")' manually to the list
-            return key + ' = ' + add_lua_array(value)
-        else:
-            return key + ' = "' + value + '",'
-
-    return ''
-
-
 base_path = os.path.abspath(os.path.join(
     os.path.dirname(__file__), os.path.pardir))
 
@@ -183,16 +137,14 @@ for category in developers:
     if 'heading' in category and category['heading'] != 'Translators':
         print('- Adding ' + category['heading'])
         lua_string += '\n\t{'  # category
-        lua_string += '\n\t\t' + add_lua_table_key(
-            'heading', category['heading'], transl=True)
+        lua_string += f'\n\t\theading = _("{ category["heading"] }"),'
         lua_string += f'\n\t\timage = "{ category["image"] }",'
 
         lua_string += '\n\t\tentries = {'  # entries
         for subcategory in category['entries']:
             lua_string += '\n\t\t\t{'  # entry
             if 'subheading' in subcategory:
-                lua_string += '\n\t\t\t\t' + add_lua_table_key(
-                    'subheading', subcategory['subheading'], transl=True)
+                lua_string += f'\n\t\t\t\tsubheading = _("{ subcategory["subheading"] }"),'
             lua_string += '\n\t\t\t\tmembers = {'
             if 'members' in subcategory:
                 for m in subcategory['members']:
