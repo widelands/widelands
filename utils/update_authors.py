@@ -59,7 +59,8 @@ for source_filename in source_files:
             locale_message += ' translators and'
             lua_translators += '\t{\n'  # entry
             lua_translators += f'\t\theading = "{ translators["your-language-name"] }'
-            if translators['your-language-name-in-english'] != 'English' and translators['your-language-name-in-english'] != translators['your-language-name']:
+            if translators['your-language-name-in-english'] != 'English' and \
+               translators['your-language-name-in-english'] != translators['your-language-name']:
                 lua_translators += f' ({ translators["your-language-name-in-english"] })'
             lua_translators += '",\n'
             lua_translators += '\t\tentries = {\n'  # entries
