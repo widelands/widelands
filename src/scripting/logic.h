@@ -34,7 +34,7 @@ public:
 	~LuaEditorInterface() override = default;
 
 	std::unique_ptr<LuaTable> run_script(const std::string& script,
-	                                     const bool no_pop_table = false) override;
+	                                     bool no_pop_table = false) override;
 
 private:
 	std::unique_ptr<EditorFactory> factory_;
@@ -49,7 +49,7 @@ public:
 	std::unique_ptr<LuaTable> get_hook(const std::string& name);
 
 	std::unique_ptr<LuaTable> run_script(const std::string& script,
-	                                     const bool no_pop_table = false) override;
+	                                     bool no_pop_table = false) override;
 
 	// Input/output for coroutines.
 	std::unique_ptr<LuaCoroutine> read_coroutine(FileRead&);

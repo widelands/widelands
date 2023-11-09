@@ -37,7 +37,7 @@ public:
 
 	// Runs 'script' and returns the table it returned.
 	virtual std::unique_ptr<LuaTable> run_script(const std::string& path,
-	                                             const bool no_pop_table = false);
+	                                             bool no_pop_table = false);
 
 	// Returns an empty table.
 	std::unique_ptr<LuaTable> empty_table();
