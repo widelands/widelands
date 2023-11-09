@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 
 """For standard containers and similar, do not use "not something.size()" to
