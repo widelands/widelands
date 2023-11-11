@@ -82,6 +82,7 @@ Player
       for p_idx, player in pairs(wl.Game().players) do
          if player.number == wl.Game().interactive_player then
             i_plr = player -- the interactive player
+            break
          end
       end
 
