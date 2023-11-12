@@ -1409,7 +1409,7 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("amazons_building", "Explores unknown territory."),
             performance = {
                -- TRANSLATORS: Performance helptext for an Amazon production site: Scout's Hut, part 1
-               pgettext("amazons_building", "The scout makes exploration between %1$s and %2$s."):bformat(format_minutes_seconds(1, 52), format_minutes_seconds(4, 5)),
+               pgettext("amazons_building", "One exploration trip of the scout takes between %1$s and %2$s."):bformat(format_minutes_seconds(1, 52), format_minutes_seconds(4, 5)),
                -- TRANSLATORS: Performance helptext for an Amazon production site: Scout's Hut, part 2
                pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
