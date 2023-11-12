@@ -1140,7 +1140,7 @@ wl.Descriptions():new_tribe {
             note = pgettext("barbarians_building", "The quarry needs rocks to cut within the work area."),
             performance = {
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Quarry, part 1
-               pgettext("barbarians_building", "This building can produce one granite between %1$s and %2$s, depending on how far the stonemason has stones."):bformat(format_seconds(42), format_minutes_seconds(1, 7)),
+               pgettext("barbarians_building", "This building can produce one granite between %1$s and %2$s, depending on how far the stonemason has to walk."):bformat(format_seconds(42), format_minutes_seconds(1, 7)),
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Quarry, part 2
                pgettext("barbarians_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
@@ -1159,7 +1159,7 @@ wl.Descriptions():new_tribe {
             note = pgettext("barbarians_building", "The lumberjack’s hut needs trees to fell within the work area."),
             performance = {
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Lumberjack_s Hut
-               pgettext("barbarians_building", "This building can produce one log between %1$s and %2$s, depending on how far the lumberjack has trees."):bformat(format_seconds(44), format_minutes_seconds(1, 24)),
+               pgettext("barbarians_building", "This building can produce one log between %1$s and %2$s, depending on how far the lumberjack has to walk."):bformat(format_seconds(44), format_minutes_seconds(1, 24)),
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Lumberjack_s Hut
                pgettext("barbarians_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
@@ -1179,7 +1179,7 @@ wl.Descriptions():new_tribe {
             note = pgettext("barbarians_building", "The ranger’s hut needs free space within the work area to plant the trees."),
             performance = {
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Ranger's Hut, part 1
-               pgettext("barbarians_building", "The ranger plants one tree between %1$s and %2$s."):bformat(format_seconds(28), format_seconds(50)),
+               pgettext("barbarians_building", "The ranger plants one tree between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(28), format_seconds(50)),
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Ranger's Hut, part 2
                pgettext("barbarians_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
@@ -1202,7 +1202,7 @@ wl.Descriptions():new_tribe {
             },
             performance = {
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Fisher's Hut, part 1
-               pgettext("barbarians_building", "This building can produce one fish between %1$s and %2$s, depending on how far the fisher has water."):bformat(format_seconds(28), format_seconds(57)),
+               pgettext("barbarians_building", "This building can produce one fish between %1$s and %2$s, depending on how far the fisher has to walk."):bformat(format_seconds(28), format_seconds(57)),
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Fisher's Hut, part 2
                pgettext("barbarians_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
@@ -1221,7 +1221,7 @@ wl.Descriptions():new_tribe {
             note = pgettext("barbarians_building", "The hunter’s hut needs animals to hunt within the work area."),
             performance = {
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Hunter's Hut, part 1
-               pgettext("barbarians_building", "This building can produce one meat between %1$s and %2$s, depending on how far the hunter has animals."):bformat(format_seconds(43), format_minutes_seconds(1, 34)),
+               pgettext("barbarians_building", "This building can produce one meat between %1$s and %2$s, depending on how far the hunter has to walk."):bformat(format_seconds(43), format_minutes_seconds(1, 34)),
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Hunter's Hut, part 2
                pgettext("barbarians_building", "In case of slopes or obstacles in the way, the time is increased.")
             }

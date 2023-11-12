@@ -1483,7 +1483,7 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("atlanteans_building", "Priest of Satul asked why stones are needed for buildings"),
             performance = {
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Quarry, part 1
-               pgettext("atlanteans_building", "This building can produce one granite between %1$s and %2$s, depending on how far the stonecutter has stones."):bformat(format_seconds(44), format_minutes_seconds(1, 9)),
+               pgettext("atlanteans_building", "This building can produce one granite between %1$s and %2$s, depending on how far the stonecutter has to walk."):bformat(format_seconds(44), format_minutes_seconds(1, 9)),
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Quarry, part 2
                pgettext("atlanteans_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
@@ -1502,7 +1502,7 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("atlanteans_building", "Atlantean woodcutter asked why saws are used to cut trees"),
             performance = {
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Woodcutter's House, part 1
-               pgettext("atlanteans_building", "This building can produce one log between %1$s and %2$s, depending on how far the woodcutter has trees."):bformat(format_seconds(49), format_minutes_seconds(1, 29)),
+               pgettext("atlanteans_building", "This building can produce one log between %1$s and %2$s, depending on how far the woodcutter has to walk."):bformat(format_seconds(49), format_minutes_seconds(1, 29)),
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Woodcutter's House, part 2
                pgettext("atlanteans_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
@@ -1524,7 +1524,7 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("atlanteans_building", "Prophecy of the foresters’ guild"),
             performance = {
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Forester's House, part 1
-               pgettext("atlanteans_building", "The forester plants one tree between %1$s and %2$s."):bformat(format_seconds(23), format_seconds(45)),
+               pgettext("atlanteans_building", "The forester plants one tree between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(23), format_seconds(45)),
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Forester's House, part 2
                pgettext("atlanteans_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
@@ -1552,7 +1552,7 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("atlanteans_building", "A song from the fishers’ guild"),
             performance = {
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Fisher's House, part 1
-               pgettext("atlanteans_building", "This building can produce one fish between %1$s and %2$s, depending on how far the fisher has water."):bformat(format_seconds(26), format_seconds(55)),
+               pgettext("atlanteans_building", "This building can produce one fish between %1$s and %2$s, depending on how far the fisher has to walk."):bformat(format_seconds(26), format_seconds(55)),
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Fisher's House, part 2
                pgettext("atlanteans_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
@@ -1588,7 +1588,7 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("atlanteans_building", "Hunter answering a fisher"),
             performance = {
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Hunter's House, part 1
-               pgettext("atlanteans_building", "This building can produce one meat between %1$s and %2$s, depending on how far the hunter has animals."):bformat(format_seconds(44), format_minutes_seconds(1, 34)),
+               pgettext("atlanteans_building", "This building can produce one meat between %1$s and %2$s, depending on how far the hunter has to walk."):bformat(format_seconds(44), format_minutes_seconds(1, 34)),
                -- TRANSLATORS: Performance helptext for an Atlantean production site: Hunter's House, part 2
                pgettext("atlanteans_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
