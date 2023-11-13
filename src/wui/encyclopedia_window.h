@@ -37,7 +37,7 @@ struct EncyclopediaWindow : public UI::UniqueWindow {
 	EncyclopediaWindow(InteractiveBase&, UI::UniqueWindow::Registry&, LuaInterface* lua);
 
 	UI::Panel::SaveType save_type() const override {
-		return UI::Panel::SaveType::kEncyclopedia;
+		return save_type_;
 	}
 	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
 	static UI::Window& load(FileRead&, InteractiveBase&);
@@ -77,6 +77,7 @@ private:
 	std::map<std::string, std::unique_ptr<UI::Listselect<EncyclopediaEntry>>> lists_;
 	// The contents shown when an entry is selected in a tab
 	std::map<std::string, std::unique_ptr<UI::MultilineTextarea>> contents_;
+	UI::Panel::SaveType save_type_{UI::Panel::SaveType::kNone};
 };
 
 }  // namespace UI
