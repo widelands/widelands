@@ -1389,7 +1389,13 @@ wl.Descriptions():new_tribe {
          name = "amazons_rare_tree_cutters_hut",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Rare Tree Cutter's Hut
-            purpose = pgettext("amazons_building", "Harvests rare trees in the surrounding area. Delivers ironwood, balsa and rubber.")
+            purpose = pgettext("amazons_building", "Harvests rare trees in the surrounding area. Delivers ironwood, balsa and rubber."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Rare Tree Cutter's Hut, part 1
+               pgettext("amazons_building", "This building can produce one of each rare wood between %1$s and %2$s, depending on how far the woodcutter has to walk."):bformat(format_minutes_seconds(2, 22), format_minutes_seconds(4, 20)),
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Rare Tree Cutter's Hut, part 2
+               pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
