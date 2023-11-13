@@ -1345,7 +1345,7 @@ wl.Descriptions():new_tribe {
             },
             performance = {
                -- TRANSLATORS: Performance helptext for an Amazon production site: Hunter-Gatherer's Hut, part 1
-               pgettext("amazons_building", "This building can produce one meat or one fish between %1$s and %2$s, depending on how far the hunter-gatherer has to walk."):bformat(format_seconds(42), format_minutes_seconds(1, 36)),
+               pgettext("amazons_building", "This building can produce one meat or one fish between %1$s and %2$s, depending on how far the hunter-gatherer has to walk."):bformat(format_minutes_seconds(1, 24), format_minutes_seconds(3, 12)),
                -- TRANSLATORS: Performance helptext for an Amazon production site: Hunter-Gatherer's Hut, part 2
                pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
             }

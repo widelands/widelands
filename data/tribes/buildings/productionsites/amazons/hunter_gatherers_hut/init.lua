@@ -39,6 +39,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...
          descname = _("gathering"),
          actions = {
+            -- min. time total: 2 * 42.2 = 84.4 sec
+            -- max. time total: 2 * 96.2 = 192.4 sec
+            -- avg. time total: 2 * 69.2 = 138.4 sec
             "call=hunt",
             "call=fish",
          }
