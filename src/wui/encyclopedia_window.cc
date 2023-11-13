@@ -156,7 +156,7 @@ void EncyclopediaWindow::init(std::unique_ptr<LuaTable> table) {
 	}
 
 	tabs_.set_size(WINDOW_WIDTH, WINDOW_HEIGHT);
-	if (tabs_.tabs().size() > 0) {
+	if (!tabs_.tabs().empty()) {
 		// Window is now valid
 		save_type_ = UI::Panel::SaveType::kEncyclopedia;
 	}
@@ -279,6 +279,7 @@ UI::Window& EncyclopediaWindow::load(FileRead& fr, InteractiveBase& ib) {
 void EncyclopediaWindow::save(FileWrite& fw, Widelands::MapObjectSaver& /* mos */) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 
+	assert(!tabs_.tabs().empty());
 	const std::string tab = tabs_.tabs()[tabs_.active()]->get_name().substr(kTabNamePrefix.size());
 	fw.string(tab);
 
