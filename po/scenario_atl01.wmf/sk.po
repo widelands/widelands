@@ -7,13 +7,14 @@
 # MiroslavR <miroslavr256@gmail.com>, 2015-2017
 # Miroslav Remák <Unknown>, 2014
 # MiroslavR <miroslavr256@gmail.com>, 2015
+# Viliam Molo, 2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2023-08-31 02:28+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: Karl Vest, 2020\n"
+"Last-Translator: Viliam Molo, 2023\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -89,10 +90,9 @@ msgid ""
 "The other two important food wares are smoked fish and smoked meat. Raw meat"
 " is delivered from a hunter. A fisher gets the fish out of the sea while a "
 "fish breeder makes sure that a school of fish does not go extinct by "
-"breeding more. Make sure that there are always fish left, otherwise the fish"
-" breeder won’t be able to breed new ones. The smoking happens in a smokery, "
-"you will need at least two of those."
-msgstr "Ďalšími dvomi dôležitými potravinami sú údené ryby a údené mäso. Surové mäso dodáva lovec. Rybár loví ryby z mora, zatiaľ čo chovateľ rýb zabezpečuje, aby ryby v záľahách nevyhynuli, tým, že ich chová viac. Uistite sa, že sú stále k dispozícii nejaké ryby, inak chovateľ rýb nebude môcť chovať nové. Údenie nastáva v udiarni a budete ich potrebovať aspoň dve."
+"breeding more. The smoking happens in a smokery, you will need at least two "
+"of those."
+msgstr "Ďalšími dvoma dôležitými potravinami sú údené ryby a údené mäso. Surové mäso dodáva lovec. Rybár získava ryby z mora, zatiaľ čo chovateľ sa stará o to, aby húf rýb nevyhynul premnožením. Údenie sa deje v údiarni a budete potrebovať aspoň dve."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Build a farm and a blackroot farm"
@@ -662,18 +662,18 @@ msgstr "Premýšľala som o tom, Sidolus, a myslím si, že je najvyšší čas.
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:314
 msgid "Loftomor Reports"
-msgstr ""
+msgstr "Loftomor podáva správu"
 
 #. TRANSLATORS: Loftomor
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:317
 msgid ""
 "May Satul warm you, Jundlina! We have completed a toolsmithy and now our "
 "toolsmiths will produce new tools in an instant."
-msgstr ""
+msgstr "Nech ťa Satul hreje, Jundlína! Dokončili sme výheň na nástroje a teraz naši kováči v okamihu vyrobia nové nástroje."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:320
 msgid "Jundlina Reminds"
-msgstr ""
+msgstr "Jundlína pripomína"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:323
@@ -682,7 +682,7 @@ msgid ""
 "please remember that our toolsmiths need to be equipped with a saw. Making "
 "tools is an art for us, requiring a precise tool like a saw, not a brutal "
 "hammer like for the other tribes."
-msgstr ""
+msgstr "Nech ťa Satul tiež zahreje, Loftomor. To je dobrá správa. Nezabudni však prosím, že náš kováč nástrojov musí byť vybavený pílou. Výroba nástrojov je pre nás umenie ktoré si vyžaduje precízny nástroj, ako je píla, a nie brutálne kladivo ako u ostatných kmeňov."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:329
 msgid "Jundlina Writes a Letter"
@@ -940,7 +940,7 @@ msgstr "Gratulujeme"
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Túto misiu ste splnili. Môžete pokračovať v hre alebo prejsť na ďalšiu misiu."
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.

@@ -6,6 +6,7 @@
 # Jukka Pakarinen, 2020
 # heidi.wenger, 2022
 # Atte Timonen, 2022
+# Oi Suomi On! <oisuomion@protonmail.com>, 2023
 # 
 msgid ""
 msgstr ""
@@ -13,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: Atte Timonen, 2022\n"
+"Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2023\n"
 "Language-Team: Finnish (https://app.transifex.com/widelands/teams/35159/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +25,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../data/campaigns/fri02.wmf/scripting/init.lua:33
 msgid "Note"
-msgstr "Huomaute"
+msgstr "Huomautus"
 
 #: ../../data/campaigns/fri02.wmf/scripting/init.lua:34
 msgid ""
@@ -741,6 +742,9 @@ msgid ""
 "inhospitable, hostile tribe of Barbarians in the vicinity of this very "
 "outpost of the Empire."
 msgstr ""
+"Tässä tapauksessa, Reebaude, minun täytyy tiedottaa sinulle epäsuotuisasta, "
+"vihamielisestä barbaariheimosta joka oleskelee aivan tämän Imperiumin "
+"etuvartioaseman näköpiirissä. "
 
 #. TRANSLATORS: Murilius – Supply Murilius 5
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:286
@@ -815,6 +819,11 @@ msgid ""
 "though you are, I do believe you will realize the truth of my words after "
 "some consideration."
 msgstr ""
+"Sinun täytyy taistella noita barbaareja vastaan, mikäli aikomus on elää "
+"tällä alueella; ymmärräthän, että taisteleminen keisarikunnan kanssa "
+"barbaareja vastaan kävisi helpommaksi kuin taistelu yksin? Et varmastikaan "
+"halua keisarikunnasta vihollistanne. Vaikkakin barbaari, uskon että "
+"sisäistät totuuden näissä sanoissani asiaa hieman mietittyäsi."
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:317
@@ -945,6 +954,9 @@ msgid ""
 "this land with anyone, as sharing only leads to conflicts and battles, as we"
 " saw in our old home. We must defeat the Barbarians as well."
 msgstr ""
+"Barbaarien heimo jonka hän mainitsi on myös uhka. En halua jakaa tätä maata "
+"kenenkään kanssa, koska jakaminen johtaa selkkauksiin ja taisteluihin, kuten"
+" näimme entisessä kodissamme. Meidän täytyy kukistaa myös barbaarit."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:382
 msgid "The Empire is Grateful"
@@ -976,6 +988,11 @@ msgid ""
 "end of the mountains enclosing this outpost; you will find the Barbarians "
 "there – attack them! We will fend off attacks launched by the enemy."
 msgstr ""
+"Sallin teidän nyt avustamaan meitä kukistaessamme barbaarit, jotka elävät "
+"suojaisassa laaksossa meistä luoteeseen. Lähetän teidät hyökkäykseen, "
+"vuoriston pohjoista reunaa pitkin, joka päättää tämän etuvartioaseman; "
+"löydät nuo barbaarit sieltä – hyökkää heitä vastaan! Me vastaavasti torjumme"
+" vihollisen aloittamat hyökkäykset."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:393
 msgid "The Reward For Your Service"

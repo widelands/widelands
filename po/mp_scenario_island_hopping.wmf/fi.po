@@ -4,13 +4,14 @@
 # Translators:
 # Jukka Pakarinen, 2016,2018
 # Markus <markus@hallfors.com>, 2015
+# Oi Suomi On! <oisuomion@protonmail.com>, 2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2015-02-03 14:27+0000\n"
-"Last-Translator: Jukka Pakarinen, 2016,2018\n"
+"Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2023\n"
 "Language-Team: Finnish (http://app.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,7 +53,7 @@ msgid ""
 "headquarters on a second island, which will get all wares, workers and "
 "soldiers transferred from your headquarters and warehouses on the first "
 "island."
-msgstr ""
+msgstr "Saarivalloitus on perinteinen kilpailu atlantislaisessa kulttuurissa. Pelin säännöt ovat yksinkertaiset: aloitat saaren päämajasta. Kun olet saanut linnan valmiiksi ensimmäisen saaren lopussa, sinut palkitaan toisella päämajalla toisella saarella, johon siirretään kaikki tuotteet, työläiset ja sotilaat ensimmäisistä päämajoista ja varastoista ensimmäiseltä saarelta."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:16
 msgid ""
@@ -61,7 +62,7 @@ msgid ""
 "soldiers getting transferred from your previous headquarters and warehouses "
 "again. You must build a castle at the center of the third island and hold it"
 " for 20 minutes to win the game."
-msgstr ""
+msgstr "Jos saat linnan valmiiksi toisen saaren kohdealueella, saat kolmannen päämajan kolmannelta saarelta kaikkine tarvikkeineen, työläisineen ja sotilaineen siirrettyinä edellisistä päämajoistasi ja varastoistasi jälleen. Sinun täytyy rakentaa linna kolmannen saaren keskelle ja pitää se hallussa 20 minuuttia voittaaksesi pelin."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:22
 msgid ""

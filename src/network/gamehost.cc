@@ -1334,10 +1334,12 @@ bool GameHost::remove_player_name(uint8_t const number, const std::string& name)
 	PlayerSettings& p = d->settings.players.at(number);
 	std::string temp(p.name);
 	temp.erase(p.name.find(name), name.size());
-	if (temp.back() == ' ') {
-		temp.erase(temp.end() - 1);
-	} else if (temp.front() == ' ') {
-		temp.erase(temp.begin());
+	if (!temp.empty()) {
+		if (temp.back() == ' ') {
+			temp.pop_back();
+		} else if (temp.front() == ' ') {
+			temp.erase(temp.begin());
+		}
 	}
 	set_player_name(number, temp);
 	return temp.empty();
@@ -1834,6 +1836,16 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	}
 
 	send_system_message_code("CLIENT_HAS_JOINED_GAME", effective_name);
+
+	if (g_allow_script_console) {
+		// TODO(tothxa): The host could warn only the new client, but other clients can only
+		//               broadcast:
+		//                 1. They can only send commands to the host
+		//                 2. System messages are assembled and translated on each client, so
+		//                    individual players can't be @-addressed
+		//               Until this is solved, it's better if the host broadcasts too.
+		send_system_message_code("CAN_CHEAT", d->localplayername);
+	}
 }
 
 void GameHost::committed_network_time(const Time& time) {
@@ -2463,12 +2475,15 @@ void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
 	}
 }
 
+static const std::set<std::string> cheating_message_codes = {
+   "CHEAT", "CAN_CHEAT", "SWITCHED_PLAYER", "CHEAT_OTHER"};
+
 void GameHost::handle_system_message(RecvPacket& packet) {
 	const std::string code = packet.string();
 	const std::string arg1 = packet.string();
 	const std::string arg2 = packet.string();
 	const std::string arg3 = packet.string();
-	if (code != "CHEAT") {
+	if (cheating_message_codes.count(code) == 0) {
 		log_err("[Host]: Received system command %s(%s,%s,%s) from client", code.c_str(),
 		        arg1.c_str(), arg2.c_str(), arg3.c_str());
 		throw DisconnectException("MALFORMED_COMMANDS");

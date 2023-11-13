@@ -7,12 +7,12 @@
 # Balázs Meskó <meskobalazs@mailbox.org>, 2017
 # litoll <litoll@freemail.hu>, 2016-2017
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
-# Tóth András <txa-dev@posteo.hu>, 2021
+# Tóth András <txa-dev@posteo.hu>, 2021,2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
 "Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
@@ -830,14 +830,14 @@ msgid ""
 "the balance between wasteful stockpiling and just-in-time production in your"
 " supply chains is one of most profound challenges of perfecting your "
 "economy. When in doubt, lean towards having some extra reserves."
-msgstr ""
+msgstr "A raktárkészlet kétélű fegyver. Egyfelől az elraktározott áruk segítenek a termelésed elkerülhetetlen hullámzásainak kisimításában. Másfelől viszont ha egy áru a raktárban pihen ahelyett, hogy felhasználnák valamire, az pazarlás. A tökéletes gazdaság kialakításának egyik legnagyobb kihívása az, hogy megtaláld az egyensúlyt a pazarló raktározás és az ellátási láncaid hibátlan ütemezése között. Ha bizonytalan vagy, inkább engedj meg kicsivel nagyobb raktárkészletet."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:498
 msgid ""
 "To ease the process of switching between different economic situations, you "
 "can save and apply economy profiles at the bottom of the economy options "
 "window. A profile for stockpiling and one for efficiency are preset there."
-msgstr ""
+msgstr "Hogy könnyebben tudj váltani a különböző gazdasági helyzetek igényei között, a „Gazdaság beállításai” ablak alján el tudod menteni és vissza tudod állítani a célbeállításokat. Két beállítás van előre elmentve: egy a felhalmozáshoz és egy a hatékonysághoz."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
 msgid ""
@@ -846,7 +846,7 @@ msgid ""
 "need. However, sometimes it can be useful to stockpile a ware in very large "
 "quantities. To achieve this, the economy options window allows you to set "
 "the target of a ware to infinite, so that it will always be produced."
-msgstr ""
+msgstr "A gazdaság beállításai általában azért hasznosak, hogy biztosítsák, hogy ne pazarolj nyersanyagokat olyan árukra, amikre a gazdaságodnak nincs is éppen szüksége. Néha viszont szükséged lehet arra, hogy bizonyos árukból hatalmas készletet halmozz fel. Ehhez a gazdaság beállításai ablakban be tudsz állítani végtelen mennyiséget is az adott áruból, hogy ennek soha ne álljon le a termelése."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:507
 msgid ""
@@ -855,7 +855,7 @@ msgid ""
 "regardless of the economy settings. This can be useful to arrange, for "
 "example, that more building materials are produced near the border even if "
 "there are plenty in stock far away in your homeland."
-msgstr ""
+msgstr "Ugyanez a gomb megtalálható a termelő épületek ablakaiban is. Itt csak az adott épületre vonatkozóan tudod beállítani, hogy állandóan termeljen, a gazdaság beállításaitól függetlenül. Ez akkor hasznos, ha pl. az újonnan meghódított területeken akarsz építőanyagokat termelni, miközben távol, a területed belsejében bőségesen állnak raktáron."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:513
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:515

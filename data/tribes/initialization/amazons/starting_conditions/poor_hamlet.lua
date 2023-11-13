@@ -24,11 +24,13 @@ init = {
       prefilled_buildings(player, { "amazons_warehouse", sf.x, sf.y,
          wares = {
             log = 4,
+            -- rope weaver
             rubber = 1,
-            --Woodcutter, stonecutter, jungle preserver, liana cutter, stonecarver:
+            quartz = 1,
+            -- Woodcutter, stonecutter, jungle preserver, liana cutter, stonecarver:
             felling_ax = 1,
             pick = 1,
-            shovel =1 ,
+            shovel = 1,
             machete = 1,
             hammer = 2,
             chisel = 1,

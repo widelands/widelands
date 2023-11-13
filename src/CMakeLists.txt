@@ -6,7 +6,7 @@ configure_file (${CMAKE_CURRENT_SOURCE_DIR}/../cmake/datadirversion.cmake ${CMAK
 add_custom_target(codecheck)
 add_custom_target(run_build_deps
   COMMAND
-    ${PYTHON_EXECUTABLE}
+    ${Python3_EXECUTABLE}
     ${CMAKE_SOURCE_DIR}/utils/build_deps.py
   COMMENT "Checking CMakeLists.txt files."
 )
@@ -145,6 +145,7 @@ wl_library(widelands_ball_of_mud
     ui_fsmenu
     widelands_options
     wui
+    wui_chat_ui
 )
 
 wl_library(widelands_options
