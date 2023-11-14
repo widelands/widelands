@@ -15,11 +15,11 @@ run(function()
 
   fri:place_building("frisians_port", f(179, 5), false, true)
 
-  for y = 20, 170, 50 do
+  for y = 20, 120, 50 do
     for x = 50, 150, 100 do
-      sleep(1000)
+      sleep(3000)
       print(_("Conquer some land for winner at %d,%d"):bformat(x, y))
-      fri:conquer(f(x, y), 40)
+      fri:conquer(f(x, y), 33)
     end
   end
   print("Most land belongs to the winner, win condition should be triggered.")
