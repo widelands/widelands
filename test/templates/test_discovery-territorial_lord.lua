@@ -9,6 +9,10 @@ function f(x, y)
   return r
 end
 
+-- Start watching for win condition early, because it can be triggered before
+-- all positions are conquered.
+check_win_condition(5)
+
 run(function()
   print("Placing ports")
   emp:place_building("empire_port", f(9, 141), false, true)
@@ -24,5 +28,3 @@ run(function()
   end
   print("Most land belongs to the winner, win condition should be triggered.")
 end)
-
-check_win_condition(5)
