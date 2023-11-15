@@ -434,10 +434,10 @@ public:
 		kFleetOptions,
 	};
 	virtual SaveType save_type() const {
-		return UI::Panel::SaveType::kNone;
+		return SaveType::kNone;
 	}
 	SaveType get_save_type() const {
-		return initialized_ ? save_type() : UI::Panel::SaveType::kNone;
+		return initialized_ ? save_type() : SaveType::kNone;
 	}
 	virtual void save(FileWrite&, Widelands::MapObjectSaver&) const {
 		NEVER_HERE();
