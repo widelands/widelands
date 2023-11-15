@@ -418,16 +418,16 @@ void ConstructionSiteWindow::change_policy(Widelands::WareWorker ww, Widelands::
 void ConstructionSiteWindow::evict_builder() {
 	Widelands::ConstructionSite* construction_site = construction_site_.get(ibase()->egbase());
 
-	// TODO(aDiscoverer): construction_site->builder_ is protected, how to be friend?
-	if (construction_site == nullptr) {  // || ! construction_site->builder_.is_set()) {
+	if (construction_site == nullptr) {
 		return;
 	}
-
+	std::vector<Widelands::Worker*> workers = construction_site->get_workers();
+	if (workers.size() == 0) {
+		return;
+	}
 	if (game_ != nullptr) {
-		/*
-		Widelands::Worker& builder = *construction_site->builder_.get(*game_);
-		game_->send_player_evict_worker(builder);
-		*/
+		Widelands::Worker* builder = workers.front();
+		game_->send_player_evict_worker(*builder);
 	} else {
 		NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 	}
