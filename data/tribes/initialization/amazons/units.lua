@@ -1345,7 +1345,7 @@ wl.Descriptions():new_tribe {
             },
             performance = {
                -- TRANSLATORS: Performance helptext for an Amazon production site: Hunter-Gatherer's Hut, part 1
-               pgettext("amazons_building", "This building can produce one meat or one fish between %1$s and %2$s, depending on how far the hunter-gatherer has to walk."):bformat(format_minutes_seconds(1, 24), format_minutes_seconds(3, 12)),
+               pgettext("amazons_building", "This building can produce one meat or one fish between %1$s and %2$s, depending on how far the hunter-gatherer has to walk. If both kinds of food are available, then one of each kind is produced between %3$s and %4$s."):bformat(format_seconds(42), format_minutes_seconds(1, 36), format_minutes_seconds(1, 24), format_minutes_seconds(3, 12)),
                -- TRANSLATORS: Performance helptext for an Amazon production site: Hunter-Gatherer's Hut, part 2
                pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
@@ -1392,7 +1392,7 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("amazons_building", "Harvests rare trees in the surrounding area. Delivers ironwood, balsa and rubber."),
             performance = {
                -- TRANSLATORS: Performance helptext for an Amazon production site: Rare Tree Cutter's Hut, part 1
-               pgettext("amazons_building", "This building can produce one of each rare wood between %1$s and %2$s, depending on how far the woodcutter has to walk."):bformat(format_minutes_seconds(2, 22), format_minutes_seconds(4, 20)),
+               pgettext("amazons_building", "This building can produce one rare wood between %1$s and %2$s, depending on how far the woodcutter has to walk. If all kinds of rare tree are available within her work area, then one of each kind is produced between %3$s and %4$s."):bformat(format_seconds(47), format_minutes_seconds(1, 27), format_minutes_seconds(2, 22), format_minutes_seconds(4, 20)),
                -- TRANSLATORS: Performance helptext for an Amazon production site: Rare Tree Cutter's Hut, part 2
                pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
