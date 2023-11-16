@@ -85,11 +85,10 @@ def generate_translation_stats(po_dir, output_file):
         header_entries = header.split(',')
         column_counter = 0
         total_column = 0
-        translated_column = 0
-        for column_counter in range(len(header_entries)):
-            if header_entries[column_counter].strip() == 'Total Source Words':
+        for column_counter, cell in enumerate(header_entries):
+            if cell.strip() == 'Total Source Words':
                 total_column = column_counter
-            elif header_entries[column_counter].strip() == 'Translated Source Words':
+            elif cell.strip() == 'Translated Source Words':
                 translated_column = column_counter
 
         # Now do the actual counting for the current textdomain
