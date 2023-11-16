@@ -132,6 +132,7 @@ function translators() return {
                "hessenfarmer",
                "HybridDog",
                "hurz",
+               "Iwan Gabovitch (qubodup)",
                "Johannes (nuefke)",
                "Johannes Haupt",
                "Jonas Jonas",
