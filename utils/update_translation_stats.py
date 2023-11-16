@@ -73,18 +73,9 @@ def generate_translation_stats(po_dir, output_file):
 
         result = stats_output.split('\n')
 
-        # pocount distributes its header over multiple lines, so we have to do some
-        # collecting here before we parse it
-        header = ''
-        for line in result:
-            # Non-header rows will have a file path in them
-            if '/' in line or '\\' in line:
-                break
-            header = header + ' ' + line
-        header_entries = header.split(',')
         total_column = None
         translated_column = None
-        for column_counter, cell in enumerate(header_entries):
+        for column_counter, cell in enumerate(result[0].split(",")):
             if cell.strip() == 'Total Source Words':
                 total_column = column_counter
             elif cell.strip() == 'Translated Source Words':
