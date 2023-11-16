@@ -422,7 +422,7 @@ void ConstructionSiteWindow::evict_builder() {
 		return;
 	}
 	std::vector<Widelands::Worker*> workers = construction_site->get_workers();
-	if (workers.size() == 0) {
+	if (workers.empty()) {
 		return;
 	}
 	if (game_ != nullptr) {
