@@ -86,12 +86,11 @@ def generate_translation_stats(po_dir, output_file):
         column_counter = 0
         total_column = 0
         translated_column = 0
-        while column_counter < len(header_entries):
+        for column_counter in range(len(header_entries)):
             if header_entries[column_counter].strip() == 'Total Source Words':
                 total_column = column_counter
             elif header_entries[column_counter].strip() == 'Translated Source Words':
                 translated_column = column_counter
-            column_counter = column_counter + 1
 
         # Now do the actual counting for the current textdomain
         for line in result:
@@ -113,15 +112,17 @@ def generate_translation_stats(po_dir, output_file):
     print('------\t-----\t----------')
 
     # The total goes in a [global] section and is identical for all locales
-    result = '# This file is managed by utils/update_translations_stats.py\n\n[global]\n'
-    result = '{}total={}\n'.format(
-        result, list(locale_stats.values())[0].total)
+    result = '''# This file is managed by utils/update_translations_stats.py
+
+[global]
+'''
+    result += 'total={}\n'.format(list(locale_stats.values())[0].total)
     # Write translation stats for all locales
     for locale in sorted(locale_stats.keys(), key=str.lower):
         entry = locale_stats[locale]
         print(locale + '\t' + str(entry.total) + '\t' + str(entry.translated))
-        result = '{}\n[{}]\n'.format(result, locale)
-        result = '{}translated={}\n'.format(result, str(entry.translated))
+        result += '\n[{}]\n'.format(locale)
+        result += 'translated={}\n'.format(entry.translated)
 
     with open(output_file, 'w') as destination:
         destination.write(result)
