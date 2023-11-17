@@ -4,14 +4,14 @@
 # Translators:
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
-# Ivan Bižaca <biza@malilosinj.info>, 2015
+# Ivan Bižaca <biza@malilosinj.info>, 2015,2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-10-05 02:30+0000\n"
+"POT-Creation-Date: 2023-10-12 02:27+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: GunChleoc, 2016\n"
+"Last-Translator: Ivan Bižaca <biza@malilosinj.info>, 2015,2023\n"
 "Language-Team: Croatian (http://app.transifex.com/widelands/widelands/language/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -187,8 +187,8 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:105
 msgctxt "amazons_ware"
 msgid ""
-"The Amazons use granite for making tools and weapons as well. It is produced"
-" by the stonecutters and in stone mines."
+"The Amazons use granite for making some tools as well. It is produced by the"
+" stonecutters and in stone mines."
 msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Quartz, part 1
@@ -16061,7 +16061,7 @@ msgstr ""
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:62
 msgid "Size"
-msgstr ""
+msgstr "Veličina"
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:66
 msgid "Workers and animals can walk across fields with this immovable."

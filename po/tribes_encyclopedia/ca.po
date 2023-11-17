@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-10-05 02:30+0000\n"
+"POT-Creation-Date: 2023-10-12 02:27+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Juanjo, 2015-2023\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
@@ -188,15 +188,15 @@ msgstr "El granit és un material de construcció bàsic."
 #: ../../data/tribes/initialization/amazons/units.lua:105
 msgctxt "amazons_ware"
 msgid ""
-"The Amazons use granite for making tools and weapons as well. It is produced"
-" by the stonecutters and in stone mines."
-msgstr "Les amazones usen granit per fer eines i armes. El produeixen les pedreres a les mines de pedra."
+"The Amazons use granite for making some tools as well. It is produced by the"
+" stonecutters and in stone mines."
+msgstr "Les amazones fan servir granit per a fer algunes eines. El produeixen les pedreres a les mines de pedra."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Quartz, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:116
 msgctxt "ware"
 msgid "Amazons use quartz for sharp tools and weapons."
-msgstr ""
+msgstr "Les amazones fan servir quars per a afilar eines i armes."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Quartz, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:118
@@ -204,7 +204,7 @@ msgctxt "amazons_ware"
 msgid ""
 "It is also a building material for some advanced buildings. It is produced "
 "in stone mines."
-msgstr ""
+msgstr "També és un material de construcció d'alguns edificis avançats. Es produeix a les mines de pedra."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Balsa
 #: ../../data/tribes/initialization/amazons/units.lua:129
@@ -384,7 +384,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Picks are used by stonecutters to cut granite from rocks or mine granite and"
 " quartz in stone mines."
-msgstr ""
+msgstr "Els pics els fan servir els tallistes per a tallar granit de les roques o extraure granit i quars a les mines de pedra."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for a Barbarian ware: Felling Ax, part 1
@@ -496,7 +496,7 @@ msgstr "Els bols de pedra serveixen per rentar i fondre la pols d’or."
 #: ../../data/tribes/initialization/amazons/units.lua:424
 msgctxt "amazons_ware"
 msgid "Firestones are used to light the fires of charcoal kilns and furnaces."
-msgstr ""
+msgstr "Les pedres refractàries es fan servir als kilns de carbó i a les fargues."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Wooden Spear, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:435
@@ -639,7 +639,7 @@ msgctxt "amazons_worker"
 msgid ""
 "Cuts blocks of granite out of rocks in the vicinity or mines granite and "
 "quartz in stone mines."
-msgstr ""
+msgstr "Talla blocs de granit de les roques del voltant o extrau granit i quars a les mines de pedra."
 
 #. TRANSLATORS: Helptext for an Amazon worker: Woodcutter
 #: ../../data/tribes/initialization/amazons/units.lua:618
@@ -1038,7 +1038,7 @@ msgstr "El granit és un material de construcció que s’ha de tallar amb una m
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1224
 msgid "There is only a little bit of quartz here."
-msgstr ""
+msgstr "Aquí només hi ha una mica de quars."
 
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an Atlantean resource indicator: Gold, part 2
@@ -1056,7 +1056,7 @@ msgstr "Aquí hi ha molt or."
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1246
 msgid "There is a lot of quartz here."
-msgstr ""
+msgstr "Aquí hi ha molt quars."
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an Atlantean immovable: Ship Under Construction
@@ -1542,7 +1542,7 @@ msgstr "La xocolata és essencial per entrenar les soldades amazones."
 #: ../../data/tribes/initialization/amazons/units.lua:1531
 msgctxt "amazons_building"
 msgid "Digs granite and quartz out of the ground in mountain terrain."
-msgstr ""
+msgstr "Extreu quars i blocs de granit en terrenys muntanyosos."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Stone Mine
 #: ../../data/tribes/initialization/amazons/units.lua:1533
@@ -1551,7 +1551,7 @@ msgctxt "amazons_building"
 msgid ""
 "The stone mine can produce one slab of each kind of stone in %s on average "
 "if the supply with rations is steady and the mine is not worn out."
-msgstr ""
+msgstr "La mina de pedra pot produir un bloc de cada tipus de pedra cada %s de mitjana si té els subministraments adequats."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Gold Digger
 #. Dwelling

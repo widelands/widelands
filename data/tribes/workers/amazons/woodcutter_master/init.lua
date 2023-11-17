@@ -11,6 +11,11 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       harvest_ironwood = {
+         -- steps from building to tree: 2-13, min+max average 7.5
+         -- falling of ironwood: 1 sec
+         -- min. worker time: 2 * 2 * 1.8 + 25 + 1 + 2 = 35.2 sec
+         -- max. worker time: 2 * 13 * 1.8 + 25 + 1 + 2 = 74.8 sec
+         -- avg. worker time: 2 * 7.5 * 1.8 + 25 + 1 + 2 = 55 sec
          "findobject=attrib:tree_ironwood radius:10",
          "walk=object",
          "playsound=sound/woodcutting/woodcutting priority:100% allow_multiple",
@@ -22,6 +27,11 @@ wl.Descriptions():new_worker_type {
          "return"
       },
       harvest_rubber = {
+         -- steps from building to tree: 2-13, min+max average 7.5
+         -- falling of rubber: 1 sec
+         -- min. worker time: 2 * 2 * 1.8 + 25 + 1 + 2 = 35.2 sec
+         -- max. worker time: 2 * 13 * 1.8 + 25 + 1 + 2 = 74.8 sec
+         -- avg. worker time: 2 * 7.5 * 1.8 + 25 + 1 + 2 = 55 sec
          "findobject=attrib:tree_rubber radius:10",
          "walk=object",
          "playsound=sound/woodcutting/woodcutting priority:100% allow_multiple",
@@ -33,6 +43,11 @@ wl.Descriptions():new_worker_type {
          "return"
       },
       harvest_balsa = {
+         -- steps from building to tree: 2-13, min+max average 7.5
+         -- falling of balsa: 1 sec
+         -- min. worker time: 2 * 2 * 1.8 + 25 + 1 + 2 = 35.2 sec
+         -- max. worker time: 2 * 13 * 1.8 + 25 + 1 + 2 = 74.8 sec
+         -- avg. worker time: 2 * 7.5 * 1.8 + 25 + 1 + 2 = 55 sec
          "findobject=attrib:tree_balsa radius:10",
          "walk=object",
          "playsound=sound/woodcutting/woodcutting priority:100% allow_multiple",
@@ -44,6 +59,11 @@ wl.Descriptions():new_worker_type {
          "return"
       },
       harvest = {
+         -- steps from building to tree: 2-13, min+max average 7.5
+         -- min. worker time: 2 * 2 * 1.8 + 25 + 2 = 34.2 sec
+         -- max. worker time: 2 * 13 * 1.8 + 25 + 2 = 73.8 sec
+         -- avg. worker time: 2 * 7.5 * 1.8 + 25 + + 2 = 54 sec
+         -- some of trees delay woodcutting by 1.4 sec (aspen, oak)
          "findobject=attrib:normal_tree radius:10",
          "walk=object",
          "playsound=sound/woodcutting/woodcutting priority:100% allow_multiple",

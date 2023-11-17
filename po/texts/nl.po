@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-08-24 02:15+0000\n"
+"POT-Creation-Date: 2023-11-16 02:33+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Rick van der Zwet <info@rickvanderzwet.nl>, 2015,2021\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
@@ -204,141 +204,142 @@ msgstr "Als je een bewaard spel of een herhaling hebt die het probleem toont (bi
 msgid "Widelands Translators"
 msgstr "Vertalers van Widelands"
 
-#: ../../data/txts/developers.lua:3
-msgid "Add-Ons"
-msgstr "Uitbreidingen"
-
-#: ../../data/txts/developers.lua:3
-msgid "Atlanteans"
-msgstr "Atlantiërs"
-
-#: ../../data/txts/developers.lua:3
-msgid "Barbarians"
-msgstr "Barbaren"
-
-#: ../../data/txts/developers.lua:3
-msgid "Campaign Story"
-msgstr "Campagneverhaal"
-
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:5
 msgid "Chieftains"
 msgstr "Stamhoofden"
 
-#: ../../data/txts/developers.lua:3
-msgid "Coders"
-msgstr "Programmeurs"
-
-#: ../../data/txts/developers.lua:3
-msgid "Debian Linux"
-msgstr "Debian GNU/Linux"
-
-#: ../../data/txts/developers.lua:3
-msgid "Documentation, Help and Wiki"
-msgstr "Documentatie, Help en Wiki"
-
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:18
 msgid "Elders"
 msgstr "Eerbiedwaardige Wijzen"
 
-#: ../../data/txts/developers.lua:3
-msgid "Empire"
-msgstr "Imperium"
-
-#: ../../data/txts/developers.lua:3
-msgid "Fedora Linux"
-msgstr "Fedora GNU/Linux"
-
-#: ../../data/txts/developers.lua:3
-msgid "Flatpak"
-msgstr "Flatpak"
-
-#: ../../data/txts/developers.lua:3
-msgid "Former Elders"
-msgstr "Voormalige Wijzen"
-
-#: ../../data/txts/developers.lua:3
-msgid "FreeBSD"
-msgstr "FreeBSD"
-
-#: ../../data/txts/developers.lua:3
-msgid "Frisians"
-msgstr "Friezen"
-
-#: ../../data/txts/developers.lua:3
-msgid "Graphicians"
-msgstr "Grafici"
-
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:22 ../../data/txts/developers.lua:414
 msgid "Graphics"
 msgstr "Grafiek"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:28 ../../data/txts/developers.lua:358
+#: ../../data/txts/developers.lua:421
 msgid "Homepage"
 msgstr "Website"
 
-#: ../../data/txts/developers.lua:3
-msgid "Homepage Coders"
-msgstr "Websiteontwikkelaars"
-
-#: ../../data/txts/developers.lua:3
-msgid "Mac OS X"
-msgstr "Mac OS X"
-
-#: ../../data/txts/developers.lua:3
-msgid "Mandriva Linux"
-msgstr "Mandriva GNU/Linux"
-
-#: ../../data/txts/developers.lua:3
-msgid "Maps and Missions"
-msgstr "Kaarten en Missies"
-
-#: ../../data/txts/developers.lua:3
-msgid "Musicians"
-msgstr "Musici"
-
-#: ../../data/txts/developers.lua:3
-msgid "Other"
-msgstr "Overige"
-
-#: ../../data/txts/developers.lua:3
-msgid "Packagers"
-msgstr "Pakketmakers"
-
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:34
 msgid "Scripting"
 msgstr ""
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:40 ../../data/txts/developers.lua:429
 msgid "Sound"
 msgstr "Geluid"
 
-#: ../../data/txts/developers.lua:3
-msgid "Sound Effects"
-msgstr "Geluidseffecten"
+#: ../../data/txts/developers.lua:42
+msgid "vacant"
+msgstr "vacant"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:46
 msgid "Tongues"
 msgstr "Woorden"
 
-#: ../../data/txts/developers.lua:3
-msgid "Translation"
-msgstr "Woorden"
+#: ../../data/txts/developers.lua:54
+msgid "Coders"
+msgstr "Programmeurs"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:149
+msgid "Graphicians"
+msgstr "Grafici"
+
+#: ../../data/txts/developers.lua:186
+msgid "Musicians"
+msgstr "Musici"
+
+#: ../../data/txts/developers.lua:205
+msgid "Sound Effects"
+msgstr "Geluidseffecten"
+
+#: ../../data/txts/developers.lua:221
+msgid "Maps and Missions"
+msgstr "Kaarten en Missies"
+
+#: ../../data/txts/developers.lua:255
+msgid "Campaign Story"
+msgstr "Campagneverhaal"
+
+#: ../../data/txts/developers.lua:259
+msgid "Barbarians"
+msgstr "Barbaren"
+
+#: ../../data/txts/developers.lua:267
+msgid "Empire"
+msgstr "Imperium"
+
+#: ../../data/txts/developers.lua:274
+msgid "Atlanteans"
+msgstr "Atlantiërs"
+
+#: ../../data/txts/developers.lua:282
+msgid "Frisians"
+msgstr "Friezen"
+
+#: ../../data/txts/developers.lua:290
+msgid "Packagers"
+msgstr "Pakketmakers"
+
+#: ../../data/txts/developers.lua:294
+msgid "Debian Linux"
+msgstr "Debian GNU/Linux"
+
+#: ../../data/txts/developers.lua:300
+msgid "Fedora Linux"
+msgstr "Fedora GNU/Linux"
+
+#: ../../data/txts/developers.lua:308
+msgid "Mandriva Linux"
+msgstr "Mandriva GNU/Linux"
+
+#: ../../data/txts/developers.lua:314
+msgid "FreeBSD"
+msgstr "FreeBSD"
+
+#: ../../data/txts/developers.lua:320
+msgid "Flatpak"
+msgstr "Flatpak"
+
+#: ../../data/txts/developers.lua:327
+msgid "Mac OS X"
+msgstr "Mac OS X"
+
+#: ../../data/txts/developers.lua:339
 msgid "Windows"
 msgstr "Windows"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:350
 msgid "ZetaOS"
 msgstr "ZetaOS"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:362
+msgid "Homepage Coders"
+msgstr "Websiteontwikkelaars"
+
+#: ../../data/txts/developers.lua:373
+msgid "Documentation, Help and Wiki"
+msgstr "Documentatie, Help en Wiki"
+
+#: ../../data/txts/developers.lua:391
+msgid "Add-Ons"
+msgstr "Uitbreidingen"
+
+#: ../../data/txts/developers.lua:410
+msgid "Former Elders"
+msgstr "Voormalige Wijzen"
+
+#: ../../data/txts/developers.lua:436
+msgid "Translation"
+msgstr "Woorden"
+
+#: ../../data/txts/developers.lua:445
+msgid "Other"
+msgstr "Overige"
+
+#: ../../data/txts/developers.lua:453
 msgid "and many, many more (thank you for everything you’ve done)"
 msgstr "en vele vele anderen (dank je voor alles wat jullie gedaan hebben)"
-
-#: ../../data/txts/developers.lua:3
-msgid "vacant"
-msgstr "vacant"
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"

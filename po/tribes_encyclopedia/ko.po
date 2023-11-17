@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-10-05 02:30+0000\n"
+"POT-Creation-Date: 2023-10-12 02:27+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: tamanegi, 2018\n"
 "Language-Team: Korean (http://app.transifex.com/widelands/widelands/language/ko/)\n"
@@ -192,9 +192,9 @@ msgstr "화강암은 기본적인 건설 재료입니다."
 #: ../../data/tribes/initialization/amazons/units.lua:105
 msgctxt "amazons_ware"
 msgid ""
-"The Amazons use granite for making tools and weapons as well. It is produced"
-" by the stonecutters and in stone mines."
-msgstr "아마존 사람들은 연장과 무기를 만들기 위해 화강암을 사용합니다. 그것은 석공업자와 석재 광산에서 생산됩니다."
+"The Amazons use granite for making some tools as well. It is produced by the"
+" stonecutters and in stone mines."
+msgstr ""
 
 #. TRANSLATORS: Helptext for an Amazon ware: Quartz, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:116

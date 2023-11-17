@@ -13,6 +13,10 @@ wl.Descriptions():new_carrier_type {
 
    programs = {
       fetch_water = {
+         -- steps from building to water: 2-11, min+max average 6.5
+         -- min. worker time: 2 * 2 * 1.8 + 1 = 8.2 sec
+         -- max. worker time: 2 * 11 * 1.8 + 1 = 40.6 sec
+         -- avg. worker time: 2 * 6.5 * 1.8 + 1 = 24.4 sec
          "findspace=size:swim radius:8",
          "walk=coords",
          "animate=fetch_water duration:1s",
