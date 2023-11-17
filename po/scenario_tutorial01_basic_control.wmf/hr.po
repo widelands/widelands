@@ -2,14 +2,14 @@
 # Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
-# Ivan Bižaca <biza@malilosinj.info>, 2015
+# Ivan Bižaca <biza@malilosinj.info>, 2015,2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-07-08 03:03+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
-"Last-Translator: Ivan Bižaca <biza@malilosinj.info>, 2015\n"
+"Last-Translator: Ivan Bižaca <biza@malilosinj.info>, 2015,2023\n"
 "Language-Team: Croatian (http://app.transifex.com/widelands/widelands/language/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,25 +52,25 @@ msgstr "Dobrodošli u Widelands!"
 msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction rather than destruction."
-msgstr ""
+msgstr "Widelands je strateška igra građenja, sa naglaskom na izgradnju, a ne na uništavanje. "
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid "You will be guided through this tutorial by objectives."
-msgstr ""
+msgstr "Ovaj vodič će vas voditi uz pomoć zadataka."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:48
 msgid "Objectives and how to handle them"
-msgstr ""
+msgstr "Kako upravljati zadacima"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:50
 msgid "Handling of the ‘Objectives’ window"
-msgstr ""
+msgstr "Upravljanje prozorom ‘Zadaci’"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:51
 msgid ""
 "You can open and close the ‘Objectives’ window by clicking on the "
 "‘Objectives’ button in the toolbar on the bottom of the screen."
-msgstr ""
+msgstr "Prozor  ‘Zadaci’  možete otvoriti i zatvoriti tako da kliknete na gumb ‘Zadaci’ na alatnoj traci na dnu ekrana."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:52
 msgid ""
@@ -94,22 +94,22 @@ msgstr ""
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:62
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:64
 msgid "Show building spaces"
-msgstr ""
+msgstr "Pokaži mjesta za građevine"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:65
 msgid "Activate ‘Show Building Spaces’. There are two ways you can do this:"
-msgstr ""
+msgstr "Uključiti ‘Pokaži mjesta za građevine’ prikaz. Postoje dva načina kako bi to uradili:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:66
 #, lua-format
 msgid ""
 "Press %s to toggle them, or select ‘Show Building Spaces’ in the ‘Show / "
 "Hide’ menu."
-msgstr ""
+msgstr "Pretisni %sza prebacivanje prikaza, ili odaberite  ‘Pokaži mjesta za građevine’ u  ‘Pokaži / Sakrij’ izborniku"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:67
 msgid "Show the building spaces now."
-msgstr ""
+msgstr "Sada pokaži mjesta za građevine."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:72
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:87
@@ -119,7 +119,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:76
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:91
 msgid "Let’s dive right in!"
-msgstr ""
+msgstr "Krenimo!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:78
 msgid ""
@@ -127,7 +127,7 @@ msgid ""
 "the Atlanteans, the Frisians and the Amazons. All tribes have different "
 "economies, strengths, and weaknesses, but the general gameplay is the same "
 "for all. We will play the Barbarians for now."
-msgstr ""
+msgstr "U Widelands su se naselila pet različita plemena: Barbari, Emperatori, Atlantiđani, Frizijci i Amazonci. Svako pleme je razvilo svoju jedinstvenu ekonomiju, prednosti i mane. Općenita igrivost je jednaka, koje god pleme odabrali. Za sada ćemo igrati kao Barbari."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:79
 msgid ""
@@ -139,13 +139,13 @@ msgid ""
 "game are the basic construction wares: logs and granite. Let’s make sure "
 "that we do not run out of logs. For this, we need a lumberjack and a hut for"
 " him to stay in."
-msgstr ""
+msgstr "Obično započinjemo igru sa jednim sjedištem, to je velika građevina sa plavom zastavicom. U nju skladištimo robu, smještamo radnike i vojnike. Neku robu koristimo za gradnju kuća i građevina, dok neku trebamo za izradu druge robe ili materijala. Očito, početna zaliha nam neće dugo trajati, trebamo se pobrinuti da nadomjestimo potrošenu robu. Najvažnija roba na početku igre nam je osnovni građevinski materijal: drvo i kamen. Krenimo sa proizvodnjom drvene građe, treba nam drvosječa i koliba u kojoj će živjeti."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:80
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show Building Spaces’."
-msgstr ""
+msgstr "Trebamo naći lijepo mjesto na koje ćemo smjestiti kolibu drvosječe. Kako bi nam bilo lakše, možemo uključiti  ‘Pokaži mjesta za građevine’."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:81
 msgid ""
@@ -157,11 +157,11 @@ msgstr ""
 msgid ""
 "Now that I have shown you where to show and hide the building spaces, please"
 " switch them on so that we can place our first building."
-msgstr ""
+msgstr "Sada kada sam vam pokazao kako da uključite i isključite prikaz mjesta za građevine, molim vas da uključite prikaz istih kako bi mogli lakše napraviti vašu prvu građevinu."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:101
 msgid "Lumberjack’s Spot"
-msgstr ""
+msgstr "Mjesto za drvosječu"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:106
 msgid ""
@@ -169,28 +169,28 @@ msgid ""
 " connect it with a road. There is a sweet spot for a lumberjack right next "
 "to those trees. I’ll describe the steps I will take and then demonstrate "
 "them."
-msgstr ""
+msgstr "Evo ga. Sada mi dopusti da ti pokažem kako ćeš sagraditi kolibu za drvosječu, i kako češ je povezati cestom. Postoji super mjesto za njega odmah tamo pored stabala. Prvo ću ti opisati što treba napraviti, zatim i demonstrirati. "
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:113
 msgid "Building the Lumberjack"
-msgstr ""
+msgstr "Izgradnja kolibe"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:117
 msgid ""
 "First, I’ll left-click on the symbol where I want the lumberjack’s hut to be"
 " built. A window will appear where I can choose between buildings."
-msgstr ""
+msgstr "Prvo, klini sa lijevom tipkom miša na simbol gdje želiš sagraditi kolibu za drvosječu. Pojaviti će se prozor u kojem ćeš moći birati građevinu koju želiš sagraditi."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:118
 msgid ""
 "The lumberjack’s hut is a small building, so I will then go on to select the"
 " small buildings tab. Then I’ll choose the lumberjack’s hut."
-msgstr ""
+msgstr "Koliba za drvosječu je malena građevina, odaberi karticu male građevine, zatim kolibu za drvosječu."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:125
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:136
 msgid "Building a Connecting Road"
-msgstr ""
+msgstr "Izgradnja ceste"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:128
 msgid ""
@@ -198,7 +198,7 @@ msgid ""
 "headquarters. After ordering the construction site, I was automatically put "
 "into road building mode, so all I have to do is click on the blue flag in "
 "front of my headquarters."
-msgstr ""
+msgstr "Ovo nije dovoljno, moraš cestom spojiti kolibu sa sjedištem. Nakon što postaviš gradilište, igra te automatski prebacuje u mod za gradnju ceste, sve što trebaš napraviti je kliknuti na plavu zastavicu ispred sjedišta."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:140
 msgid ""
@@ -229,7 +229,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:162
 msgid "Build a Flag on the Road"
-msgstr ""
+msgstr "Postavi zastavu na cestu"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:163
 msgid ""
