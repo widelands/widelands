@@ -4,14 +4,14 @@
 # Translators:
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
-# Ivan Bižaca <biza@malilosinj.info>, 2015
+# Ivan Bižaca <biza@malilosinj.info>, 2015,2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: GunChleoc, 2016\n"
+"Last-Translator: Ivan Bižaca <biza@malilosinj.info>, 2015,2023\n"
 "Language-Team: Croatian (http://app.transifex.com/widelands/widelands/language/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -57,7 +57,7 @@ msgstr "Ova zemlja je naša zemlja"
 msgid ""
 "This tutorial explains the handling of military and training site buildings "
 "and will introduce fighting."
-msgstr "Ovaj vodič objašnjava rukovanje vojnicima i treniranje vojske. Također, uvodi i borbu."
+msgstr "Ovaj vodič objašnjava upravljanje vojnicima i treniranje vojske. Također, nas upoznaje sa osnovnim vojnim građevinama i borbom."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:14
@@ -326,7 +326,7 @@ msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
 "soldiers, how to train them and how to lead them in battle. Scouting will be"
 " also covered."
-msgstr ""
+msgstr "Kad prođete ovaj vodič znati ćete tajne ratovanja: kako napraviti vojsku, kako ih obučiti i voditi u bitkama. Također naučiti ćete i osnove izviđanja."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
 msgid "Seafaring"
@@ -336,7 +336,7 @@ msgstr "Pomorstvo"
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports, and how to use ferries and waterways."
-msgstr ""
+msgstr "Ovaj vodić provesti će vas kroz pomorstvo. Naučiti ćete upravljati brodovima i lukama, i kako koristiti vodene puteve."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy"
@@ -346,7 +346,7 @@ msgstr "Ekonomija"
 msgid ""
 "In this tutorial, you will learn what option Widelands offers to adjust your"
 " economy. Recommended for players with some experience."
-msgstr ""
+msgstr "Ovaj vodič preporučamo iskusnijim igračima. Pokazati će vam koje su mogučnosti i alati za učinkovito upravljanje ekonomijom."
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"

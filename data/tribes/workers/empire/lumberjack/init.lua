@@ -17,6 +17,11 @@ wl.Descriptions():new_worker_type {
 
    programs = {
       harvest = {
+         -- steps from building to tree: 2-13, min+max average 7.5
+         -- min. worker time: 2 * 2 * 1.8 + 20 + 2 = 29.2 sec
+         -- max. worker time: 2 * 13 * 1.8 + 20 + 2 = 68.8 sec
+         -- avg. worker time: 2 * 7.5 * 1.8 + 20 + 2 = 49 sec
+         -- some of trees delay woodcutting by 1-1.4 sec (aspen, balsa, ironwood, oak, rubber)
          "findobject=attrib:tree radius:10",
          "walk=object",
          "playsound=sound/woodcutting/fast_woodcutting priority:95% allow_multiple",

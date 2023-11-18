@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-08-24 02:15+0000\n"
+"POT-Creation-Date: 2023-11-16 02:33+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: tamanegi, 2018-2019\n"
 "Language-Team: Japanese (http://app.transifex.com/widelands/widelands/language/ja/)\n"
@@ -198,141 +198,142 @@ msgstr "もしゲームのセーブファイルや問題を含むリプレイが
 msgid "Widelands Translators"
 msgstr "Widelands翻訳者"
 
-#: ../../data/txts/developers.lua:3
-msgid "Add-Ons"
-msgstr ""
-
-#: ../../data/txts/developers.lua:3
-msgid "Atlanteans"
-msgstr "アトランティス"
-
-#: ../../data/txts/developers.lua:3
-msgid "Barbarians"
-msgstr "野蛮人"
-
-#: ../../data/txts/developers.lua:3
-msgid "Campaign Story"
-msgstr "キャンペーン"
-
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:5
 msgid "Chieftains"
 msgstr "首領"
 
-#: ../../data/txts/developers.lua:3
-msgid "Coders"
-msgstr "コーダー"
-
-#: ../../data/txts/developers.lua:3
-msgid "Debian Linux"
-msgstr "Debian Linux"
-
-#: ../../data/txts/developers.lua:3
-msgid "Documentation, Help and Wiki"
-msgstr "ドキュメント、ヘルプ、Wiki"
-
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:18
 msgid "Elders"
 msgstr "長老"
 
-#: ../../data/txts/developers.lua:3
-msgid "Empire"
-msgstr "帝国"
-
-#: ../../data/txts/developers.lua:3
-msgid "Fedora Linux"
-msgstr "Fedora Linux"
-
-#: ../../data/txts/developers.lua:3
-msgid "Flatpak"
-msgstr "Flatpak"
-
-#: ../../data/txts/developers.lua:3
-msgid "Former Elders"
-msgstr "元長老"
-
-#: ../../data/txts/developers.lua:3
-msgid "FreeBSD"
-msgstr "FreeBSD"
-
-#: ../../data/txts/developers.lua:3
-msgid "Frisians"
-msgstr "フリジア"
-
-#: ../../data/txts/developers.lua:3
-msgid "Graphicians"
-msgstr "グラフィッカー"
-
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:22 ../../data/txts/developers.lua:414
 msgid "Graphics"
 msgstr "グラフィック"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:28 ../../data/txts/developers.lua:358
+#: ../../data/txts/developers.lua:421
 msgid "Homepage"
 msgstr "ホームページ"
 
-#: ../../data/txts/developers.lua:3
-msgid "Homepage Coders"
-msgstr "ホームページコーダー"
-
-#: ../../data/txts/developers.lua:3
-msgid "Mac OS X"
-msgstr "Mac OS X"
-
-#: ../../data/txts/developers.lua:3
-msgid "Mandriva Linux"
-msgstr "Mandriva Linux"
-
-#: ../../data/txts/developers.lua:3
-msgid "Maps and Missions"
-msgstr "マップとミッション"
-
-#: ../../data/txts/developers.lua:3
-msgid "Musicians"
-msgstr "BGM"
-
-#: ../../data/txts/developers.lua:3
-msgid "Other"
-msgstr "その他"
-
-#: ../../data/txts/developers.lua:3
-msgid "Packagers"
-msgstr "パッケージ"
-
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:34
 msgid "Scripting"
 msgstr ""
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:40 ../../data/txts/developers.lua:429
 msgid "Sound"
 msgstr "サウンド"
 
-#: ../../data/txts/developers.lua:3
-msgid "Sound Effects"
-msgstr "効果音"
+#: ../../data/txts/developers.lua:42
+msgid "vacant"
+msgstr "空席"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:46
 msgid "Tongues"
 msgstr "言語"
 
-#: ../../data/txts/developers.lua:3
-msgid "Translation"
-msgstr "翻訳"
+#: ../../data/txts/developers.lua:54
+msgid "Coders"
+msgstr "コーダー"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:149
+msgid "Graphicians"
+msgstr "グラフィッカー"
+
+#: ../../data/txts/developers.lua:186
+msgid "Musicians"
+msgstr "BGM"
+
+#: ../../data/txts/developers.lua:205
+msgid "Sound Effects"
+msgstr "効果音"
+
+#: ../../data/txts/developers.lua:221
+msgid "Maps and Missions"
+msgstr "マップとミッション"
+
+#: ../../data/txts/developers.lua:255
+msgid "Campaign Story"
+msgstr "キャンペーン"
+
+#: ../../data/txts/developers.lua:259
+msgid "Barbarians"
+msgstr "野蛮人"
+
+#: ../../data/txts/developers.lua:267
+msgid "Empire"
+msgstr "帝国"
+
+#: ../../data/txts/developers.lua:274
+msgid "Atlanteans"
+msgstr "アトランティス"
+
+#: ../../data/txts/developers.lua:282
+msgid "Frisians"
+msgstr "フリジア"
+
+#: ../../data/txts/developers.lua:290
+msgid "Packagers"
+msgstr "パッケージ"
+
+#: ../../data/txts/developers.lua:294
+msgid "Debian Linux"
+msgstr "Debian Linux"
+
+#: ../../data/txts/developers.lua:300
+msgid "Fedora Linux"
+msgstr "Fedora Linux"
+
+#: ../../data/txts/developers.lua:308
+msgid "Mandriva Linux"
+msgstr "Mandriva Linux"
+
+#: ../../data/txts/developers.lua:314
+msgid "FreeBSD"
+msgstr "FreeBSD"
+
+#: ../../data/txts/developers.lua:320
+msgid "Flatpak"
+msgstr "Flatpak"
+
+#: ../../data/txts/developers.lua:327
+msgid "Mac OS X"
+msgstr "Mac OS X"
+
+#: ../../data/txts/developers.lua:339
 msgid "Windows"
 msgstr "Windows"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:350
 msgid "ZetaOS"
 msgstr "ZetaOS"
 
-#: ../../data/txts/developers.lua:3
-msgid "and many, many more (thank you for everything you’ve done)"
+#: ../../data/txts/developers.lua:362
+msgid "Homepage Coders"
+msgstr "ホームページコーダー"
+
+#: ../../data/txts/developers.lua:373
+msgid "Documentation, Help and Wiki"
+msgstr "ドキュメント、ヘルプ、Wiki"
+
+#: ../../data/txts/developers.lua:391
+msgid "Add-Ons"
 msgstr ""
 
-#: ../../data/txts/developers.lua:3
-msgid "vacant"
-msgstr "空席"
+#: ../../data/txts/developers.lua:410
+msgid "Former Elders"
+msgstr "元長老"
+
+#: ../../data/txts/developers.lua:436
+msgid "Translation"
+msgstr "翻訳"
+
+#: ../../data/txts/developers.lua:445
+msgid "Other"
+msgstr "その他"
+
+#: ../../data/txts/developers.lua:453
+msgid "and many, many more (thank you for everything you’ve done)"
+msgstr ""
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
