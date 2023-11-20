@@ -2426,7 +2426,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Smokery"
-msgstr "Pekara"
+msgstr "Pušnica"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smoking meat because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:70
@@ -4121,7 +4121,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:8
 msgctxt "frisians_building"
 msgid "Smokery"
-msgstr ""
+msgstr "Pušnica"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:8
@@ -4653,19 +4653,19 @@ msgstr ""
 #: ../../data/tribes/buildings/warehouses/amazons/headquarters/init.lua:8
 msgctxt "amazons_building"
 msgid "Headquarters"
-msgstr ""
+msgstr "Sjedište"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/amazons/port/init.lua:8
 msgctxt "amazons_building"
 msgid "Port"
-msgstr ""
+msgstr "Luka"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/amazons/warehouse/init.lua:8
 msgctxt "amazons_building"
 msgid "Warehouse"
-msgstr ""
+msgstr "Skladište"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua:79
@@ -4732,19 +4732,19 @@ msgstr "Skladište"
 #: ../../data/tribes/buildings/warehouses/frisians/headquarters/init.lua:8
 msgctxt "frisians_building"
 msgid "Headquarters"
-msgstr ""
+msgstr "Sjedište"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/frisians/port/init.lua:8
 msgctxt "frisians_building"
 msgid "Port"
-msgstr ""
+msgstr "Luka"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/frisians/warehouse/init.lua:8
 msgctxt "frisians_building"
 msgid "Warehouse"
-msgstr ""
+msgstr "Skladište"
 
 #: ../../data/tribes/economy_profiles/amazons:4
 #: ../../data/tribes/economy_profiles/atlanteans:4
@@ -5219,7 +5219,7 @@ msgstr ""
 #: ../../data/tribes/immovables/resi/frisians/water/init.lua:8
 msgctxt "resource_indicator"
 msgid "Water"
-msgstr ""
+msgstr "Voda"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/barbarians/stones_1/init.lua:8
@@ -5255,7 +5255,7 @@ msgstr ""
 #: ../../data/tribes/immovables/shipconstruction_frisians/init.lua:8
 msgctxt "immovable"
 msgid "Ship Under Construction"
-msgstr "Gradilište"
+msgstr "Brod u izgradnji"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/mature/black/init.lua:11
@@ -5330,7 +5330,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/mature/green/init.lua:11
 #: ../../data/tribes/immovables/trees/ironwood/mature/winter/init.lua:11
 msgid "Ironwood Tree (Mature)"
-msgstr ""
+msgstr " \nStablo Jatobe (zrelo)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/old/black/init.lua:11
@@ -5338,7 +5338,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/old/green/init.lua:11
 #: ../../data/tribes/immovables/trees/ironwood/old/winter/init.lua:11
 msgid "Ironwood Tree (Old)"
-msgstr ""
+msgstr " \nStablo Jatobe (staro)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/old/black/init.lua:13
@@ -5346,7 +5346,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/old/green/init.lua:13
 #: ../../data/tribes/immovables/trees/ironwood/old/winter/init.lua:13
 msgid "Ironwood Tree"
-msgstr ""
+msgstr "Stablo Jatobe"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/pole/black/init.lua:11
@@ -5354,7 +5354,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/pole/green/init.lua:11
 #: ../../data/tribes/immovables/trees/ironwood/pole/winter/init.lua:11
 msgid "Ironwood Tree (Pole)"
-msgstr ""
+msgstr "Stablo Jatobe (stup)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/sapling/black/init.lua:11
@@ -5362,7 +5362,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/sapling/green/init.lua:11
 #: ../../data/tribes/immovables/trees/ironwood/sapling/winter/init.lua:11
 msgid "Ironwood Tree (Sapling)"
-msgstr ""
+msgstr "Stablo Jatobe (mladica)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/mature/black/init.lua:11
@@ -8373,7 +8373,7 @@ msgstr ""
 #: ../../data/tribes/wares/coal/init.lua:8
 msgctxt "ware"
 msgid "Coal"
-msgstr "Ugljena"
+msgstr "Ugljen"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/cocoa_beans/init.lua:8
@@ -8421,19 +8421,19 @@ msgstr ""
 #: ../../data/tribes/wares/fish/init.lua:8
 msgctxt "ware"
 msgid "Fish"
-msgstr "Ribar"
+msgstr "Riba"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/fishing_net/init.lua:8
 msgctxt "ware"
 msgid "Fishing Net"
-msgstr "Ribolov"
+msgstr "Ribarska mreža"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/fishing_rod/init.lua:8
 msgctxt "ware"
 msgid "Fishing Rod"
-msgstr ""
+msgstr "Štap za ribolov"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/flour/init.lua:8
@@ -8451,7 +8451,7 @@ msgstr ""
 #: ../../data/tribes/wares/fur/init.lua:8
 msgctxt "ware"
 msgid "Fur"
-msgstr ""
+msgstr "Krzno"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/fur_garment/init.lua:8
@@ -8487,13 +8487,13 @@ msgstr "Zlato"
 #: ../../data/tribes/wares/gold_dust/init.lua:8
 msgctxt "ware"
 msgid "Gold Dust"
-msgstr ""
+msgstr "Zlatna prašina"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/gold_ore/init.lua:8
 msgctxt "ware"
 msgid "Gold Ore"
-msgstr "Zlato"
+msgstr "Zlatna rudača"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/gold_thread/init.lua:8
@@ -8505,7 +8505,7 @@ msgstr ""
 #: ../../data/tribes/wares/granite/init.lua:8
 msgctxt "ware"
 msgid "Granite"
-msgstr ""
+msgstr "Granit"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/grape/init.lua:8
@@ -8583,7 +8583,7 @@ msgstr ""
 #: ../../data/tribes/wares/hunting_spear/init.lua:8
 msgctxt "ware"
 msgid "Hunting Spear"
-msgstr "Lovac"
+msgstr "Koplje"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/iron/init.lua:8
@@ -8601,13 +8601,13 @@ msgstr "Željezna ruda"
 #: ../../data/tribes/wares/ironwood/init.lua:8
 msgctxt "ware"
 msgid "Ironwood"
-msgstr ""
+msgstr "Tvrdo drvo - Jatoba"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/kitchen_tools/init.lua:8
 msgctxt "ware"
 msgid "Kitchen Tools"
-msgstr ""
+msgstr "Kuhinjski alati"
 
 #. TRANSLATORS: This is a ware name used in lists of wares. Used to make
 #. ropes.
@@ -8674,7 +8674,7 @@ msgstr ""
 #: ../../data/tribes/wares/pick/init.lua:8
 msgctxt "ware"
 msgid "Pick"
-msgstr ""
+msgstr "Kramp"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/planks/init.lua:8
@@ -8759,7 +8759,7 @@ msgstr ""
 #: ../../data/tribes/wares/shovel/init.lua:8
 msgctxt "ware"
 msgid "Shovel"
-msgstr ""
+msgstr "Lopata"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/smoked_fish/init.lua:8
@@ -8819,7 +8819,7 @@ msgstr ""
 #: ../../data/tribes/wares/spear_wooden/init.lua:8
 msgctxt "ware"
 msgid "Wooden Spear"
-msgstr ""
+msgstr "Drveno koplje"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spider_silk/init.lua:8
@@ -9053,7 +9053,7 @@ msgstr ""
 #: ../../data/tribes/workers/amazons/soldier/init.lua:20
 msgctxt "amazons_worker"
 msgid "Soldier"
-msgstr ""
+msgstr "Vojnik"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/stone_carver/init.lua:8
@@ -9095,13 +9095,13 @@ msgstr ""
 #: ../../data/tribes/workers/amazons/woodcutter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Woodcutter"
-msgstr ""
+msgstr "Drvosječa"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/woodcutter_master/init.lua:8
 msgctxt "amazons_worker"
 msgid "Master Woodcutter"
-msgstr ""
+msgstr "Majstor drvosječa"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #. descname = pgettext("empire_worker", "Fisher"),
@@ -9293,7 +9293,7 @@ msgstr "Ljevac"
 #: ../../data/tribes/workers/atlanteans/smoker/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Smoker"
-msgstr ""
+msgstr "Pušničar"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/soldier/init.lua:474
@@ -9341,7 +9341,7 @@ msgstr ""
 #: ../../data/tribes/workers/atlanteans/woodcutter/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Woodcutter"
-msgstr ""
+msgstr "Drvosječa"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/baker/init.lua:8
@@ -9929,31 +9929,31 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/shipwright/init.lua:8
 msgctxt "frisians_worker"
 msgid "Shipwright"
-msgstr ""
+msgstr "Brodograditelj"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/smelter/init.lua:8
 msgctxt "frisians_worker"
 msgid "Smelter"
-msgstr ""
+msgstr "Topioničar"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/smoker/init.lua:8
 msgctxt "frisians_worker"
 msgid "Smoker"
-msgstr ""
+msgstr "Pušničar"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/soldier/init.lua:628
 msgctxt "frisians_worker"
 msgid "Soldier"
-msgstr ""
+msgstr "Vojnik"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/stonemason/init.lua:8
 msgctxt "frisians_worker"
 msgid "Stonemason"
-msgstr ""
+msgstr "Klesar"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/trainer/init.lua:8
@@ -9965,4 +9965,4 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/woodcutter/init.lua:8
 msgctxt "frisians_worker"
 msgid "Woodcutter"
-msgstr ""
+msgstr "Drvosječa"

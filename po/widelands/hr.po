@@ -3798,7 +3798,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/about.cc:59 ../../src/ui_fsmenu/tech_info.cc:131
 msgid "Technical Info"
-msgstr ""
+msgstr "Tehničke info"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:35
 msgid "Contact Form"
@@ -5522,7 +5522,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/keyboard_options.cc:297
 #: ../../src/wui/interactive_player.cc:340
 msgid "General"
-msgstr ""
+msgstr "Općenito"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:299
 #: ../../src/wlapplication_options.cc:285
@@ -5856,11 +5856,11 @@ msgstr "Učitaj igru"
 
 #: ../../src/ui_fsmenu/main.cc:382
 msgid "Continue a saved game"
-msgstr ""
+msgstr "Nastavi spremljenu igru"
 
 #: ../../src/ui_fsmenu/main.cc:403 ../../src/wlapplication_options.cc:310
 msgid "Continue Playing"
-msgstr ""
+msgstr "Nastavi igrati"
 
 #: ../../src/ui_fsmenu/main.cc:412
 #, c-format
@@ -5875,14 +5875,14 @@ msgstr ""
 #: ../../src/ui_fsmenu/main.cc:421
 #, c-format
 msgid "Gametime: %s"
-msgstr ""
+msgstr "Odigrano: %s"
 
 #. * TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today,
 #. * 10:30'
 #: ../../src/ui_fsmenu/main.cc:427
 #, c-format
 msgid "Saved: %s"
-msgstr ""
+msgstr "Spremljeno: %s"
 
 #: ../../src/ui_fsmenu/main.cc:435
 msgid "Online Game"
@@ -5922,11 +5922,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:491
 msgid "Single Player…"
-msgstr ""
+msgstr "Igrajte sami..."
 
 #: ../../src/ui_fsmenu/main.cc:492
 msgid "Multiplayer…"
-msgstr ""
+msgstr "Igrajte s prijateljima..."
 
 #: ../../src/ui_fsmenu/main.cc:493
 msgid "Editor…"
@@ -5934,7 +5934,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:495
 msgid "Begin or load a single-player campaign or free game"
-msgstr "Započni ili učitaj kampanju ili brzu igru za jednog igrača"
+msgstr "Započni novu ili učitaj kampanju ili brzu igru za jednog igrača"
 
 #: ../../src/ui_fsmenu/main.cc:498
 msgid "Play with your friends over the internet"
@@ -5950,7 +5950,7 @@ msgstr "Pogledaj reprizu igre"
 
 #: ../../src/ui_fsmenu/main.cc:506
 msgid "Watch the replay of an old game"
-msgstr ""
+msgstr "Pogledaj reprizu stare igre koju ste spremili"
 
 #: ../../src/ui_fsmenu/main.cc:509 ../../src/wlapplication_options.cc:323
 msgid "Add-Ons"
@@ -5967,11 +5967,11 @@ msgstr "Postavke"
 
 #: ../../src/ui_fsmenu/main.cc:515
 msgid "Technical and game-related settings"
-msgstr "Prilagodite razne tehničke i igračke mogučnosti igre"
+msgstr "Prilagodite razne tehničke i igračke mogućnosti igre"
 
 #: ../../src/ui_fsmenu/main.cc:519
 msgid "Readme, License, and Credits"
-msgstr ""
+msgstr "Readme, licence i zasluge"
 
 #: ../../src/ui_fsmenu/main.cc:521 ../../src/wlapplication_options.cc:314
 msgid "Exit Widelands"
@@ -6605,7 +6605,7 @@ msgstr "Zvuk"
 
 #: ../../src/ui_fsmenu/options.cc:404
 msgid "Saving"
-msgstr ""
+msgstr "Spremanje"
 
 #: ../../src/ui_fsmenu/options.cc:405
 msgid "New Games"
@@ -7056,7 +7056,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:219
 msgid "Smokery"
-msgstr ""
+msgstr "Pušnica"
 
 #: ../../src/wlapplication_options.cc:220
 msgid "Tavern"
