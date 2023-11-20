@@ -346,7 +346,7 @@ msgstr "Ekonomija"
 msgid ""
 "In this tutorial, you will learn what option Widelands offers to adjust your"
 " economy. Recommended for players with some experience."
-msgstr "Ovaj vodič preporučamo iskusnijim igračima. Pokazati će vam koje su mogučnosti i alati za učinkovito upravljanje ekonomijom."
+msgstr "Ovaj vodič preporučamo iskusnijim igračima. Pokazati će vam koje su mogućnosti i alati za učinkovito upravljanje ekonomijom."
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"

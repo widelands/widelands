@@ -13538,7 +13538,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Fish is smoked in a smokery. Smoked fish is then consumed by soldiers in "
 "training or turned into rations and meals for miners and scouts."
-msgstr ""
+msgstr "Riba se dimi u pušnici. Dimljenu ribu zatim konzumiraju vojnici na obuci ili se pretvara u hranu i obroke za rudare i izviđače."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Smoked Meat
 #: ../../data/tribes/initialization/frisians/units.lua:273
@@ -13546,7 +13546,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Meat is smoked in a smokery. Smoked meat is then consumed by soldiers in "
 "training or turned into rations and meals for miners and scouts."
-msgstr ""
+msgstr "Meso se dimi u pušnici. Dimljeno meso zatim konzumiraju vojnici na obuci ili se pretvara u hranu i obroke za rudare i izviđače."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Ration, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:285
@@ -13684,7 +13684,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Kitchen tools are needed for preparing rations and meals. The smoker also "
 "needs them."
-msgstr ""
+msgstr "Kuhinjski alati su potrebni za pripremu hrane.Pušničar ih također treba."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Fire Tongs, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:507
