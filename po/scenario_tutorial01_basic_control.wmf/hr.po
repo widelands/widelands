@@ -76,20 +76,20 @@ msgstr "Prozor  ‘Zadaci’  možete otvoriti i zatvoriti tako da kliknete na g
 msgid ""
 "Like most other windows, you can also close the window by right-clicking on "
 "it."
-msgstr ""
+msgstr "Večinu prozora možete zatvoriti desnim klikom na prozor."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid "You can also minimize windows by middle-clicking on them."
-msgstr ""
+msgstr "Također, prozor možete minimizirati klikom na srednju tipku iznad prozora"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:54
 msgid ""
 "When you have accomplished an objective, it will disappear from the list."
-msgstr ""
+msgstr "Kada ispunite zadatak, nestati će sa popisa."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:56
 msgid "Now please close the ‘Objectives’ window to proceed."
-msgstr ""
+msgstr "Za nastaviti, moliti ću vas da zatvorite prozor \"Zadaci\"."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:62
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:64
@@ -105,7 +105,7 @@ msgstr "Uključiti ‘Pokaži mjesta za građevine’ prikaz. Postoje dva način
 msgid ""
 "Press %s to toggle them, or select ‘Show Building Spaces’ in the ‘Show / "
 "Hide’ menu."
-msgstr "Pretisni %sza prebacivanje prikaza, ili odaberite  ‘Pokaži mjesta za građevine’ u  ‘Pokaži / Sakrij’ izborniku"
+msgstr "Pritisni %s za prebacivanje prikaza, ili odaberite  ‘Pokaži mjesta za građevine’ u  ‘Pokaži / Sakrij’ izborniku"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:67
 msgid "Show the building spaces now."
@@ -114,7 +114,7 @@ msgstr "Sada pokaži mjesta za građevine."
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:72
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:87
 msgid "Building Spaces"
-msgstr ""
+msgstr "Mjesto za građevinu"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:76
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:91
@@ -151,7 +151,7 @@ msgstr "Trebamo naći lijepo mjesto na koje ćemo smjestiti kolibu drvosječe. K
 msgid ""
 "I’ll show you where the menu is and where to show and hide the building "
 "spaces."
-msgstr ""
+msgstr "Sada ću vam pokazati kako pokazati i sakriti prikaz mjesta za građenje građevina."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:92
 msgid ""
@@ -214,14 +214,14 @@ msgstr ""
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:182
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:226
 msgid "Waiting for the Lumberjack to Go Up"
-msgstr ""
+msgstr "Pričekajmo drvosječu"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:152
 msgid ""
 "Now watch closely while a builder leaves the headquarters and goes to the "
 "construction site. Also, a carrier will take position in between the two "
 "blue flags and carry wares from one blue flag to the other."
-msgstr ""
+msgstr "Sada pripazite, zidar napušta sjedište i odlazi na gradilište. Također, teklič zauzima mjesto na cesti između dvije plave zastavice, on će nositi svu robu i materijal preko svoje dionice puta."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:160
 msgid "Build a flag to divide the road to the lumberjack"
@@ -236,30 +236,30 @@ msgid ""
 "The shorter your road segments are, the faster your wares will be "
 "transported. You should therefore make sure that your roads have as many "
 "flags as possible."
-msgstr ""
+msgstr "Što su dijelovi ceste između zastava kraći, brže će putovati vaša roba. Trebate se pobrinuti da vaše ceste imaju što je više moguće zastava."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:164
 msgid ""
 "Build a blue flag now in the middle of the road that connects your "
 "headquarters to your lumberjack’s hut."
-msgstr ""
+msgstr "Postavite plavu zastavu na polovinu ceste koja spaja sjedište i kolibu drvosjeće."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:165
 msgid ""
 "To build the flag, click on the yellow flag symbol in between the two blue "
 "flags we just placed and then click on the build flag symbol."
-msgstr ""
+msgstr "Za postaviti zastavu prvo kliknite na žutu zastavu na cesti između dvije plave zastave i onda na simbol za postavljanje zastave."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:171
 msgid "Placing Another Flag"
-msgstr ""
+msgstr "Postavljanje nove zastave"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:175
 msgid ""
 "Nice how they are working, isn’t it? But the poor carrier has a very long "
 "way to go. We can make it easier for him (and more efficient for us) by "
 "placing another blue flag on the road. You try it this time."
-msgstr ""
+msgstr "Prekrasno ih je gledati kako rade, zar ne? Žao mi je ovoga jadnog tekliča, mora nositi balvane jako daleko između zastava. Ako postavite još koju zastavu na cestu dovesti ćemo mu pomoć i smanjiti put koji mora prijeći. Time će naše kraljevstvo funkcionirati optimalnije. Pokušajte!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:186
 msgid ""
@@ -287,7 +287,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:204
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:214
 msgid "The Construction Site"
-msgstr ""
+msgstr "Gradilište"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:208
 msgid ""
