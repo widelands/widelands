@@ -55,9 +55,11 @@ public:
 	ProductionSiteDescr(const std::string& init_descname,
 	                    MapObjectType type,
 	                    const LuaTable& t,
+	                    const std::vector<std::string>& attribs,
 	                    Descriptions& descriptions);
 	ProductionSiteDescr(const std::string& init_descname,
 	                    const LuaTable& t,
+	                    const std::vector<std::string>& attribs,
 	                    Descriptions& descriptions);
 
 	[[nodiscard]] Building& create_object() const override;

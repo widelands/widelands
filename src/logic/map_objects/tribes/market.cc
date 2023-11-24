@@ -29,8 +29,9 @@ namespace Widelands {
 
 MarketDescr::MarketDescr(const std::string& init_descname,
                          const LuaTable& table,
+                         const std::vector<std::string>& attribs,
                          Descriptions& descriptions)
-   : BuildingDescr(init_descname, MapObjectType::MARKET, table, descriptions) {
+   : BuildingDescr(init_descname, MapObjectType::MARKET, table, attribs, descriptions) {
 
 	DescriptionIndex const woi = descriptions.worker_index(table.get_string("carrier"));
 	if (!descriptions.worker_exists(woi)) {

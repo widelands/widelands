@@ -30,7 +30,7 @@ namespace Widelands {
 
 class MarketDescr : public BuildingDescr {
 public:
-	MarketDescr(const std::string& init_descname, const LuaTable& t, Descriptions& descriptions);
+	MarketDescr(const std::string& init_descname, const LuaTable& t, const std::vector<std::string>& attribs, Descriptions& descriptions);
 	~MarketDescr() override = default;
 
 	[[nodiscard]] Building& create_object() const override;

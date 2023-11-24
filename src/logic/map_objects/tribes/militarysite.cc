@@ -314,8 +314,9 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
  */
 MilitarySiteDescr::MilitarySiteDescr(const std::string& init_descname,
                                      const LuaTable& table,
+                                     const std::vector<std::string>& attribs,
                                      Descriptions& descriptions)
-   : BuildingDescr(init_descname, MapObjectType::MILITARYSITE, table, descriptions) {
+   : BuildingDescr(init_descname, MapObjectType::MILITARYSITE, table, attribs, descriptions) {
 
 	conquer_radius_ = table.get_int("conquers");
 	num_soldiers_ = table.get_int("max_soldiers");

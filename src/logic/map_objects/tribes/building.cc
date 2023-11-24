@@ -52,8 +52,9 @@ static const Duration kBuildingLeaveInterval = Duration(1000);
 BuildingDescr::BuildingDescr(const std::string& init_descname,
                              const MapObjectType init_type,
                              const LuaTable& table,
+                             const std::vector<std::string>& attribs,
                              Descriptions& descriptions)
-   : MapObjectDescr(init_type, table.get_string("name"), init_descname, table),
+   : MapObjectDescr(init_type, table.get_string("name"), init_descname, table, attribs),
      descriptions_(descriptions),
      buildable_(table.has_key("buildcost")),
      can_be_dismantled_(table.has_key("return_on_dismantle")),

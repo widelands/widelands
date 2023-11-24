@@ -94,8 +94,9 @@ ProductionSite BUILDING
 ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          MapObjectType init_type,
                                          const LuaTable& table,
+                                         const std::vector<std::string>& attribs,
                                          Descriptions& descriptions)
-   : BuildingDescr(init_descname, init_type, table, descriptions),
+   : BuildingDescr(init_descname, init_type, table, attribs, descriptions),
      ware_demand_checks_(new std::set<DescriptionIndex>()),
      worker_demand_checks_(new std::set<DescriptionIndex>()),
      is_infinite_production_useful_(false),
@@ -213,8 +214,9 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 
 ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          const LuaTable& table,
+                                         const std::vector<std::string>& attribs,
                                          Descriptions& descriptions)
-   : ProductionSiteDescr(init_descname, MapObjectType::PRODUCTIONSITE, table, descriptions) {
+   : ProductionSiteDescr(init_descname, MapObjectType::PRODUCTIONSITE, table, attribs, descriptions) {
 }
 
 /**

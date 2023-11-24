@@ -74,6 +74,7 @@ class ConstructionSiteDescr : public BuildingDescr {
 public:
 	ConstructionSiteDescr(const std::string& init_descname,
 	                      const LuaTable& t,
+	                      const std::vector<std::string>& attribs,
 	                      Descriptions& descriptions);
 	~ConstructionSiteDescr() override = default;
 

@@ -83,8 +83,9 @@ bool SoldierLevelRange::matches(const Soldier* soldier) const {
 
 SoldierDescr::SoldierDescr(const std::string& init_descname,
                            const LuaTable& table,
+                           const std::vector<std::string>& attribs,
                            Descriptions& descriptions)
-   : WorkerDescr(init_descname, MapObjectType::SOLDIER, table, descriptions),
+   : WorkerDescr(init_descname, MapObjectType::SOLDIER, table, attribs, descriptions),
      health_(table.get_table("health")),
      attack_(table.get_table("attack")),
      defense_(table.get_table("defense")),

@@ -138,8 +138,9 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
  */
 ConstructionSiteDescr::ConstructionSiteDescr(const std::string& init_descname,
                                              const LuaTable& table,
+                                             const std::vector<std::string>& attribs,
                                              Descriptions& descriptions)
-   : BuildingDescr(init_descname, MapObjectType::CONSTRUCTIONSITE, table, descriptions),
+   : BuildingDescr(init_descname, MapObjectType::CONSTRUCTIONSITE, table, attribs, descriptions),
      creation_fx_(
         SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {
 }

@@ -315,8 +315,9 @@ Warehouse Building
  */
 WarehouseDescr::WarehouseDescr(const std::string& init_descname,
                                const LuaTable& table,
+                               const std::vector<std::string>& attribs,
                                Descriptions& descriptions)
-   : BuildingDescr(init_descname, MapObjectType::WAREHOUSE, table, descriptions) {
+   : BuildingDescr(init_descname, MapObjectType::WAREHOUSE, table, attribs, descriptions) {
 	heal_per_second_ = table.get_int("heal_per_second");
 	if (table.has_key("conquers")) {
 		conquers_ = table.get_int("conquers");

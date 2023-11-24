@@ -28,6 +28,7 @@ class CarrierDescr : public WorkerDescr {
 public:
 	CarrierDescr(const std::string& init_descname,
 	             const LuaTable& table,
+	             const std::vector<std::string>& attribs,
 	             Descriptions& descriptions,
 	             MapObjectType t = MapObjectType::CARRIER);
 	~CarrierDescr() override = default;
