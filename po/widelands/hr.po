@@ -1259,7 +1259,7 @@ msgstr "Igrači:"
 #. editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:88
 msgid "Low"
-msgstr "Niska"
+msgstr "Siromašno"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
@@ -1272,27 +1272,27 @@ msgstr "Srednja"
 #. editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:92
 msgid "High"
-msgstr "Visoka"
+msgstr "Bogato"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:102
 msgid "Climate"
-msgstr ""
+msgstr "Klima"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:126
 msgid "Terrain Distribution"
-msgstr ""
+msgstr "Raspodjela zemlje"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:143
 msgid "Water:"
-msgstr ""
+msgstr "Voda:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:157
 msgid "Land:"
-msgstr ""
+msgstr "Zemlja:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:171
 msgid "Wasteland:"
-msgstr ""
+msgstr "Pustopoljina"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:184
 msgid "Mountains:"
@@ -1312,11 +1312,11 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:220
 msgid "Random number:"
-msgstr ""
+msgstr "Nasumični broj:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:235
 msgid "Generate a new random number"
-msgstr ""
+msgstr "Napravi novi nasumični broj"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:244
 msgid "Map ID:"
@@ -1332,21 +1332,21 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:282
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:316
 msgid "Random"
-msgstr ""
+msgstr "Slučajna"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:313
 msgid "Alpine"
-msgstr ""
+msgstr "Planine"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:314
 msgid "Atoll"
-msgstr ""
+msgstr "Otoci"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:315
 #: ../../src/logic/map.cc:62
 msgid "Wasteland"
-msgstr ""
+msgstr "Pustopoljina"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:624
 msgid "Generating random map…"
@@ -1465,11 +1465,11 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/map_size_box.cc:38
 msgid "Width"
-msgstr ""
+msgstr "Širina"
 
 #: ../../src/editor/ui_menus/map_size_box.cc:50
 msgid "Height"
-msgstr ""
+msgstr "Visina"
 
 #. * TRANSLATORS: Window title in the editor when a player has selected more
 #. than the
@@ -2668,7 +2668,7 @@ msgstr ""
 #: ../../src/wui/productionsitewindow.cc:107
 #: ../../src/wui/productionsitewindow.cc:124
 msgid "Worker"
-msgstr ""
+msgstr "Radnik"
 
 #: ../../src/logic/map_objects/tribes/worker.cc:2089
 msgid "Worker got lost!"
@@ -6666,7 +6666,7 @@ msgid ""
 "usually – but not always – well playable. Seafaring and artifacts are not "
 "supported. Add-ons of the Tribes and Script categories are disabled in "
 "random matches."
-msgstr ""
+msgstr "Generator nasumičnih zemljovida je još uvijek u beta fazi razvoja. Zamljovidi koje stvori su obično, ali ne i uvijek, poprilično igrivi. Pomorstvo i artefakti nisu podržani. Dodaci i skripte nisu uključeni i ne mogu se koristiti u nasumičnim partijama."
 
 #: ../../src/ui_fsmenu/random_game.cc:127
 msgid "Map Generation Error"
@@ -9667,7 +9667,7 @@ msgstr "Otkaži posao odabranom radniku"
 
 #: ../../src/wui/productionsitewindow.cc:246
 msgid "coming"
-msgstr ""
+msgstr "u dolasku"
 
 #: ../../src/wui/productionsitewindow.cc:246
 msgid "vacant"

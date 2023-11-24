@@ -56,7 +56,7 @@ msgstr "Kuna"
 
 #: ../../data/world/critters/moose/init.lua:7
 msgid "Moose"
-msgstr ""
+msgstr "Los"
 
 #: ../../data/world/critters/reindeer/init.lua:7
 msgid "Reindeer"
@@ -87,7 +87,7 @@ msgstr "Vuk"
 #: ../../data/world/immovables/artifacts/artifact02/init.lua:7
 #: ../../data/world/immovables/artifacts/artifact03/init.lua:7
 msgid "Artifact"
-msgstr ""
+msgstr "Artefakt"
 
 #: ../../data/world/immovables/miscellaneous/bar-ruin00/init.lua:7
 #: ../../data/world/immovables/miscellaneous/bar-ruin01/init.lua:7
@@ -122,7 +122,7 @@ msgstr "Šljunak"
 #: ../../data/world/immovables/miscellaneous/ruin4/init.lua:7
 #: ../../data/world/immovables/miscellaneous/ruin5/init.lua:7
 msgid "Tombstone"
-msgstr ""
+msgstr "Nadgrobni spomenik"
 
 #: ../../data/world/immovables/miscellaneous/skeleton1/init.lua:7
 #: ../../data/world/immovables/miscellaneous/skeleton3/init.lua:7
@@ -253,63 +253,63 @@ msgstr ""
 
 #: ../../data/world/immovables/trees/aspen/mature/init.lua:9
 msgid "Aspen (Mature)"
-msgstr ""
+msgstr "Jasika (zrela)"
 
 #: ../../data/world/immovables/trees/aspen/old/init.lua:9
 msgid "Aspen (Old)"
-msgstr ""
+msgstr "Jasika (stara)"
 
 #: ../../data/world/immovables/trees/aspen/old/init.lua:10
 msgid "Aspen"
-msgstr ""
+msgstr "Jasika"
 
 #: ../../data/world/immovables/trees/aspen/pole/init.lua:9
 msgid "Aspen (Pole)"
-msgstr ""
+msgstr "Jasika (stup)"
 
 #: ../../data/world/immovables/trees/aspen/sapling/init.lua:9
 msgid "Aspen (Sapling)"
-msgstr ""
+msgstr "Jasika (mladica)"
 
 #: ../../data/world/immovables/trees/beech/mature/init.lua:9
 msgid "Beech (Mature)"
-msgstr ""
+msgstr "Bukva (zrela)"
 
 #: ../../data/world/immovables/trees/beech/old/init.lua:9
 msgid "Beech (Old)"
-msgstr ""
+msgstr "Bukva (stara)"
 
 #: ../../data/world/immovables/trees/beech/old/init.lua:10
 msgid "Beech"
-msgstr ""
+msgstr "Bukva"
 
 #: ../../data/world/immovables/trees/beech/pole/init.lua:9
 msgid "Beech (Pole)"
-msgstr ""
+msgstr "Bukva (stup)"
 
 #: ../../data/world/immovables/trees/beech/sapling/init.lua:9
 msgid "Beech (Sapling)"
-msgstr ""
+msgstr "Bukva (mladica)"
 
 #: ../../data/world/immovables/trees/birch/mature/init.lua:9
 msgid "Birch (Mature)"
-msgstr ""
+msgstr "Breza (zrela)"
 
 #: ../../data/world/immovables/trees/birch/old/init.lua:9
 msgid "Birch (Old)"
-msgstr ""
+msgstr "Breza (stara)"
 
 #: ../../data/world/immovables/trees/birch/old/init.lua:10
 msgid "Birch"
-msgstr ""
+msgstr "Breza"
 
 #: ../../data/world/immovables/trees/birch/pole/init.lua:9
 msgid "Birch (Pole)"
-msgstr ""
+msgstr "Breza (stup)"
 
 #: ../../data/world/immovables/trees/birch/sapling/init.lua:9
 msgid "Birch (Sapling)"
-msgstr ""
+msgstr "Breza (mladica)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/mature/init.lua:10
@@ -801,7 +801,7 @@ msgstr ""
 #. TRANSLATORS: A category in the editor for placing terrains on the map.
 #: ../../data/world/init.lua:515
 msgid "Wasteland"
-msgstr ""
+msgstr "Pustopoljina"
 
 #. TRANSLATORS: A category in the editor for placing terrains on the map.
 #: ../../data/world/init.lua:543

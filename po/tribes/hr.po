@@ -3684,7 +3684,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:8
 msgctxt "frisians_building"
 msgid "Blacksmithy"
-msgstr ""
+msgstr "Kovačnica"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
@@ -9353,13 +9353,13 @@ msgstr "Pekar"
 #: ../../data/tribes/workers/barbarians/blacksmith/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Blacksmith"
-msgstr ""
+msgstr "Kovač"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/blacksmith_master/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Master Blacksmith"
-msgstr ""
+msgstr "Majstor kovač"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/brewer/init.lua:8
@@ -9773,13 +9773,13 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/blacksmith/init.lua:8
 msgctxt "frisians_worker"
 msgid "Blacksmith"
-msgstr ""
+msgstr "Kovač"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/blacksmith_master/init.lua:8
 msgctxt "frisians_worker"
 msgid "Master Blacksmith"
-msgstr ""
+msgstr "Majstor kovač"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/brewer/init.lua:8
