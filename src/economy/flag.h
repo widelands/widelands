@@ -39,7 +39,7 @@ class WareInstance;
 class FlagDescr : public MapObjectDescr {
 public:
 	FlagDescr(char const* const init_name, char const* const init_descname)
-	   : MapObjectDescr(MapObjectType::FLAG, init_name, init_descname) {
+	   : MapObjectDescr(MapObjectType::FLAG, init_name, init_descname, std::vector<std::string>()) {
 	}
 	~FlagDescr() override = default;
 
