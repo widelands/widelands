@@ -90,8 +90,8 @@ def generate_translation_stats(po_dir, output_file):
             elif cell.strip() == 'Translated Source Words':
                 translated_column = column_counter
         if not total_column or not translated_column:
-            for_column = "total_column" if not total_column else translated_column
-            sys.exit("Column for {} not found in output of pocount".format(for_column))
+            for_column = 'total_column' if not total_column else translated_column
+            sys.exit('Column for {} not found in output of pocount'.format(for_column))
 
         # Now do the actual counting for the current textdomain
         for line in result:
