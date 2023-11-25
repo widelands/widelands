@@ -256,7 +256,7 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:259
 msgid "Barbarians"
-msgstr ""
+msgstr "Barbari"
 
 #: ../../data/txts/developers.lua:267
 msgid "Empire"
@@ -264,11 +264,11 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:274
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlantiđani"
 
 #: ../../data/txts/developers.lua:282
 msgid "Frisians"
-msgstr ""
+msgstr "Frizijci"
 
 #: ../../data/txts/developers.lua:290
 msgid "Packagers"

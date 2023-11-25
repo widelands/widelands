@@ -1074,7 +1074,7 @@ msgstr "OK"
 #: ../../src/wui/game_main_menu_save_game.cc:99
 #: ../../src/wui/pinned_note.cc:67
 msgid "Cancel"
-msgstr "Poništi"
+msgstr "Odustani"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:143
 msgid "File names"
@@ -1904,7 +1904,7 @@ msgstr ""
 #. * TRANSLATORS: Header for campaign name
 #: ../../src/logic/addons.cc:61 ../../src/ui_fsmenu/campaigndetails.cc:48
 msgid "Campaign"
-msgstr ""
+msgstr "Pohod"
 
 #: ../../src/logic/addons.cc:64
 msgid "Win Condition"
@@ -2948,7 +2948,7 @@ msgstr ""
 
 #: ../../src/map_io/map_saver.cc:317
 msgid "Minimap"
-msgstr ""
+msgstr "Minimapa"
 
 #: ../../src/map_io/map_scripting_packet.cc:82
 msgid ""
@@ -3611,7 +3611,7 @@ msgstr ""
 
 #: ../../src/ui_basic/color_chooser.cc:253
 msgid "Choose Color…"
-msgstr ""
+msgstr "Odaberite boju..."
 
 #: ../../src/ui_basic/color_chooser.cc:290
 msgid "Initial Color"
@@ -3641,15 +3641,15 @@ msgstr ""
 
 #: ../../src/ui_basic/color_chooser.cc:339
 msgid "Red"
-msgstr ""
+msgstr "Crvena"
 
 #: ../../src/ui_basic/color_chooser.cc:352
 msgid "Green"
-msgstr ""
+msgstr "Zelena"
 
 #: ../../src/ui_basic/color_chooser.cc:365
 msgid "Blue"
-msgstr ""
+msgstr "Plava"
 
 #: ../../src/ui_basic/color_chooser.cc:484
 msgid "Remove from favorites"
@@ -3683,7 +3683,7 @@ msgstr ""
 
 #: ../../src/ui_basic/panel.cc:307
 msgid "Please wait…"
-msgstr ""
+msgstr "Molim pričekajte..."
 
 #: ../../src/ui_basic/panel.cc:438
 msgid "Game ending – please wait…"
@@ -3691,7 +3691,7 @@ msgstr ""
 
 #: ../../src/ui_basic/progresswindow.cc:79
 msgid "Loading…"
-msgstr ""
+msgstr "Učitavanje...."
 
 #: ../../src/ui_basic/spinbox.cc:153 ../../src/ui_basic/spinbox.cc:166
 #, c-format
@@ -3750,11 +3750,11 @@ msgstr[2] ""
 
 #: ../../src/ui_basic/table.cc:157
 msgid "Click to reverse sorting"
-msgstr ""
+msgstr "Kliknite za obrnuto sortiranje"
 
 #: ../../src/ui_basic/table.cc:157
 msgid "Click to sort by this column"
-msgstr ""
+msgstr "Kliknite za sortiranje po ovom stupcu"
 
 #. * TRANSLATORS: Tooltip format for table headers: %1 is column description,
 #. %2 is
@@ -3762,7 +3762,7 @@ msgstr ""
 #: ../../src/ui_basic/table.cc:163
 #, c-format
 msgid "%1$s<br>(%2$s)"
-msgstr ""
+msgstr "%1$s <br> ( %2$s )"
 
 #: ../../src/ui_basic/window.cc:101 ../../src/ui_fsmenu/about.cc:41
 #: ../../src/ui_fsmenu/crash_report.cc:70
@@ -3774,11 +3774,11 @@ msgstr "Zatvori"
 
 #: ../../src/ui_basic/window.cc:167
 msgid "Minimize"
-msgstr ""
+msgstr "Stisni"
 
 #: ../../src/ui_basic/window.cc:167
 msgid "Restore"
-msgstr ""
+msgstr "Povečaj"
 
 #: ../../src/ui_basic/window.cc:172 ../../src/wui/info_panel.cc:198
 msgid "Pin"
@@ -3968,11 +3968,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:287
 msgid "Refresh"
-msgstr ""
+msgstr "Osvježi"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:288
 msgid "Refresh the list of add-ons available from the server"
-msgstr ""
+msgstr "Osvježi popis dostupnih dodataka (sa servera)"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:305
 msgid "Fix dependencies…"
@@ -4259,7 +4259,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/manager.cc:1068
 #, c-format
 msgid "Installed (%u)"
-msgstr ""
+msgstr "Instalirana (%u)"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1146
 msgid "Browse"
@@ -4268,7 +4268,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/manager.cc:1146
 #, c-format
 msgid "Browse (%u)"
-msgstr ""
+msgstr "Pregledaj (%u)"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1156
 #, c-format
@@ -5304,7 +5304,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:33
 msgid "Choose Campaign"
-msgstr ""
+msgstr "Odaberite pohod"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:38
 #: ../../src/ui_fsmenu/loadgame.cc:76
@@ -5767,7 +5767,7 @@ msgstr "Učitaj ovu igru"
 
 #: ../../src/ui_fsmenu/login_box.cc:37 ../../src/ui_fsmenu/main.cc:438
 msgid "Online Game Settings"
-msgstr ""
+msgstr "Postavke online igre"
 
 #: ../../src/ui_fsmenu/login_box.cc:44 ../../src/wlapplication_options.cc:407
 #: ../../src/wui/economy_options_window.cc:678
@@ -5886,7 +5886,7 @@ msgstr "Spremljeno: %s"
 
 #: ../../src/ui_fsmenu/main.cc:435
 msgid "Online Game"
-msgstr ""
+msgstr "Online igra"
 
 #: ../../src/ui_fsmenu/main.cc:436
 msgid "Join the Widelands lobby"
@@ -5979,7 +5979,7 @@ msgstr "Zatvori Widelands"
 
 #: ../../src/ui_fsmenu/main.cc:523
 msgid "Quit the game"
-msgstr ""
+msgstr "Izađi iz igre"
 
 #. * TRANSLATORS: %1$s = version string and build type  ("Debug" or "Release")
 #: ../../src/ui_fsmenu/main.cc:528
@@ -6240,7 +6240,7 @@ msgstr ""
 #. The ':' will be added by another format string.
 #: ../../src/ui_fsmenu/mousewheel_options.cc:441
 msgid "Change Game Speed"
-msgstr ""
+msgstr "Promjenite brzinu izvođenja igre"
 
 #. * TRANSLATORS: Name of a function for the scroll wheel.
 #. Used as e.g.: "Change Editor Toolsize: Ctrl+Any scroll"
@@ -8789,14 +8789,14 @@ msgstr "Prikaži dolazne poruke"
 #, c-format
 msgid "Restore the selected %d message"
 msgid_plural "Restore the selected %d messages"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Vrati %d odabranu poruku"
+msgstr[1] "Vrati %d odabranih poruka"
+msgstr[2] "Vrati %d odabranih poruka"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:638
 msgid "Restore selected message"
-msgstr ""
+msgstr "Vrati odabrane poruke"
 
 #. * TRANSLATORS: Tooltip in the messages window. There is a separate string
 #. for 1
@@ -9095,11 +9095,11 @@ msgstr ""
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:293
 msgid "Hide Minimap"
-msgstr ""
+msgstr "Sakrij minimapu"
 
 #: ../../src/wui/interactive_base.cc:293
 msgid "Show Minimap"
-msgstr ""
+msgstr "Pokaži minimapu"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:300
@@ -9167,7 +9167,7 @@ msgstr "PAUZA"
 #. options o increase/decrease the gamespeed, and to pause the game
 #: ../../src/wui/interactive_gamebase.cc:116
 msgid "Game Speed"
-msgstr ""
+msgstr "Brzina izvođenja igre"
 
 #. * TRANSLATORS: Tooltip for Sound Options in the game's main menu
 #: ../../src/wui/interactive_gamebase.cc:149
@@ -9220,21 +9220,21 @@ msgstr ""
 
 #: ../../src/wui/interactive_gamebase.cc:348
 msgid "Speed +"
-msgstr ""
+msgstr "Brzina +"
 
 #. * TRANSLATORS: Tooltip for Speed + in the game's game speed menu
 #: ../../src/wui/interactive_gamebase.cc:351
 msgid "Increase the game speed"
-msgstr ""
+msgstr "Ubrzajte izvođenje igre"
 
 #: ../../src/wui/interactive_gamebase.cc:354
 msgid "Speed -"
-msgstr ""
+msgstr "Brzina -"
 
 #. * TRANSLATORS: Tooltip for Speed - in the game's game speed menu
 #: ../../src/wui/interactive_gamebase.cc:357
 msgid "Decrease the game speed"
-msgstr ""
+msgstr "Usporite izvođenje igre"
 
 #: ../../src/wui/interactive_gamebase.cc:363
 msgid "Resume"

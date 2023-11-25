@@ -5677,7 +5677,7 @@ msgstr ""
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/atlanteans/init.lua:13
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlantiđani"
 
 #: ../../data/tribes/initialization/atlanteans/init.lua:14
 msgid ""
@@ -5697,7 +5697,7 @@ msgstr ""
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/barbarians/init.lua:12
 msgid "Barbarians"
-msgstr ""
+msgstr "Barbari"
 
 #: ../../data/tribes/initialization/barbarians/init.lua:13
 msgid "The mighty tribes of the east-lands."
@@ -5715,7 +5715,7 @@ msgstr ""
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/frisians/init.lua:12
 msgid "Frisians"
-msgstr ""
+msgstr "Frizijci"
 
 #: ../../data/tribes/initialization/frisians/init.lua:13
 msgid "The inhabitants of the rough North Sea shore."
@@ -6982,7 +6982,7 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:152
 msgctxt "shipname"
 msgid "Atlantis"
-msgstr ""
+msgstr "Atlantis"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:154
