@@ -75,7 +75,7 @@ def generate_translation_stats(po_dir, output_file):
 
         total_column = None
         translated_column = None
-        for column_counter, cell in enumerate(result[0].split(",")):
+        for column_counter, cell in enumerate(result[0].split(',')):
             if cell.strip() == 'Total Source Words':
                 total_column = column_counter
             elif cell.strip() == 'Translated Source Words':
