@@ -12,6 +12,7 @@ For Debian-based Linux: sudo apt-get install translate-toolkit
 """
 
 from collections import defaultdict
+import csv
 import os.path
 import re
 import subprocess
@@ -71,32 +72,30 @@ def generate_translation_stats(po_dir, output_file):
                   '\n  ' + stats_output.split('\n', 1)[1])
             return 1
 
-        result = stats_output.split('\n')
-
-        total_column = None
-        translated_column = None
-        for column_counter, cell in enumerate(result[0].split(',')):
-            if cell.strip() == 'Total Source Words':
-                total_column = column_counter
-            elif cell.strip() == 'Translated Source Words':
-                translated_column = column_counter
-        if not total_column or not translated_column:
-            for_column = 'total_column' if not total_column else 'translated_column'
-            sys.exit('Column for {} not found in output of pocount'.format(for_column))
+        COLUMNS = {
+            'filename': 'Filename',
+            'total': 'Total Source Words',
+            'translated': 'Translated Source Words'
+        }
+        result = csv.DictReader(csv.StringIO(stats_output), dialect='unix', skipinitialspace=True)
+        missing_cols = set(COLUMNS.values()) - set(result.fieldnames)
+        if missing_cols:
+            sys.exit(
+                'Columns "{}" not found in output of pocount'.format('", "'.join(missing_cols)))
 
         # Now do the actual counting for the current textdomain
-        for line in result:
-            cells = line.split(',')
-            po_filename = cells[0]
+        for cells in result:
+            po_filename = cells[COLUMNS['filename']]
             if po_filename.endswith('.po'):
                 locale = regex_po.match(po_filename).group(1)
                 entry = locale_stats[locale]
-                entry.total += int(cells[total_column])
-                entry.translated += int(cells[translated_column])
+                entry.total += int(cells[COLUMNS['total']])
+                entry.translated += int(cells[COLUMNS['translated']])
                 if entry.translated > entry.total:
-                    print('Error! Translated ' + str(entry.translated) + ' (+' +
-                          cells[translated_column] + ') is bigger than the total of ' +
-                          str(entry.total) + '(' + cells[total_column] + ')\n' + line)
+                    print(('Error! Translated {entry.translated} ({c_translated}) is bigger than ' +
+                           'the total of {entry.total} ({c_total}) on line {line}\n').format(
+                        entry=entry, c_translated=cells[COLUMNS['translated']],
+                        c_total=cells[COLUMNS['total']], line=result.line_num))
                     sys.exit(1)
                 locale_stats[locale] = entry
 
