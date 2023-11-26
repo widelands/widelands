@@ -1258,7 +1258,7 @@ void InteractiveBase::load_windows(FileRead& fr, Widelands::MapObjectLoader& mol
 void InteractiveBase::save_windows(FileWrite& fw, Widelands::MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersionUniqueWindows);
 	for (UI::Panel* child = get_first_child(); child != nullptr; child = child->get_next_sibling()) {
-		const UI::Panel::SaveType t = child->save_type();
+		const UI::Panel::SaveType t = child->current_save_type();
 		if (t != UI::Panel::SaveType::kNone) {
 			fw.unsigned_8(static_cast<uint8_t>(t));
 			fw.signed_32(child->get_x());

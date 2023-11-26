@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
+# Alex Rijckaert, 2023
 # CrisiusXIII <chris@cborn.nl>, 2021
 # FvZ, 2020
 # Nora Ghaoui, 2016
@@ -11,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
-"Last-Translator: CrisiusXIII <chris@cborn.nl>, 2021\n"
+"Last-Translator: Alex Rijckaert, 2023\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -829,14 +830,14 @@ msgid ""
 "the balance between wasteful stockpiling and just-in-time production in your"
 " supply chains is one of most profound challenges of perfecting your "
 "economy. When in doubt, lean towards having some extra reserves."
-msgstr ""
+msgstr "Het aanleggen van voorraden is een tweesnijdend zwaard. Aan de ene kant zijn goederen in voorraad handig als buffer voor tijdelijke schommelingen in je economie, die vaak voorkomen. Aan de andere kant is elk product dat in een magazijn ligt in plaats van verwerkt te worden tot iets anders verspilling. De balans vinden tussen verspillende voorraden en just-in-time productie in je toeleveringsketens is een van de grootste uitdagingen bij het perfectioneren van je economie. Als je twijfelt, ga dan voor extra reserves."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:498
 msgid ""
 "To ease the process of switching between different economic situations, you "
 "can save and apply economy profiles at the bottom of the economy options "
 "window. A profile for stockpiling and one for efficiency are preset there."
-msgstr ""
+msgstr "Om het schakelen tussen verschillende economische situaties te vergemakkelijken, kun je onderin het venster met de opties voor de economie economische profielen opslaan en toepassen. Een profiel voor voorraadvorming en een profiel voor efficiëntie zijn daar vooraf ingesteld."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
 msgid ""
@@ -845,7 +846,7 @@ msgid ""
 "need. However, sometimes it can be useful to stockpile a ware in very large "
 "quantities. To achieve this, the economy options window allows you to set "
 "the target of a ware to infinite, so that it will always be produced."
-msgstr ""
+msgstr "Meestal zijn de opties voor de economie een nuttig hulpmiddel om ervoor te zorgen dat grondstoffen niet worden verspild om goederen te produceren die je economie eigenlijk niet nodig heeft. Soms kan het echter handig zijn om grote voorraden van een product aan te leggen. Om dit te bereiken kun je in het venster met de economieopties het doel van een product instellen op oneindig, zodat het altijd wordt geproduceerd."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:507
 msgid ""
@@ -854,7 +855,7 @@ msgid ""
 "regardless of the economy settings. This can be useful to arrange, for "
 "example, that more building materials are produced near the border even if "
 "there are plenty in stock far away in your homeland."
-msgstr ""
+msgstr "Dezelfde knop is ook te vinden in het bouwvenster van productielocaties. Daar zorgt hij ervoor dat alleen deze ene locatie onbeperkt produceert, ongeacht de economie-instellingen. Dit kan handig zijn om bijvoorbeeld te regelen dat er meer bouwmaterialen worden geproduceerd bij de grens, zelfs als er ver weg in je thuisland genoeg op voorraad is."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:513
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:515
