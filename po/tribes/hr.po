@@ -491,7 +491,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:8
 msgctxt "barbarians_building"
 msgid "Barrier"
-msgstr "Prepreka"
+msgstr "Kula"
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:52
@@ -599,7 +599,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:8
 msgctxt "barbarians_building"
 msgid "Sentry"
-msgstr ""
+msgstr "Stražarnica"
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:54
@@ -671,7 +671,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:8
 msgctxt "empire_building"
 msgid "Barrier"
-msgstr "Prepreka"
+msgstr "Kula"
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:45
@@ -851,7 +851,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:8
 msgctxt "empire_building"
 msgid "Sentry"
-msgstr ""
+msgstr "Stražarnica"
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:45
@@ -1699,7 +1699,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:8
 msgctxt "amazons_building"
 msgid "Stone Workshop"
-msgstr ""
+msgstr "Klesarstvo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:86
@@ -1985,7 +1985,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/bakery/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Bakery"
-msgstr "Pekar"
+msgstr "Pekara"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/bakery/init.lua:57
@@ -2129,7 +2129,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Farm"
-msgstr "Uzgajivač"
+msgstr "Farma"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting corn because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:56
@@ -2192,7 +2192,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Fisher’s House"
-msgstr ""
+msgstr "Ribarova kuća"
 
 #. TRANSLATORS: Completed/Skipped/Did not start fishing because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:42
@@ -2245,7 +2245,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Horse Farm"
-msgstr ""
+msgstr "Farma konja"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding horses because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:49
@@ -2257,7 +2257,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Hunter’s House"
-msgstr ""
+msgstr "Lovčeva kuća"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:39
@@ -2272,7 +2272,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:55
 #: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:71
 msgid "No Game"
-msgstr ""
+msgstr "Nema divljači"
 
 #. TRANSLATORS: "Game" means animals that you can hunt
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:54
@@ -2294,7 +2294,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Iron Mine"
-msgstr ""
+msgstr "Rudnik željeza"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:53
@@ -2347,7 +2347,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Mill"
-msgstr ""
+msgstr "Mlin"
 
 #. TRANSLATORS: Completed/Skipped/Did not start grinding corn because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:66
@@ -2402,7 +2402,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Shipyard"
-msgstr "Brod"
+msgstr "Brodogradilište"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:8
@@ -2602,7 +2602,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:8
 msgctxt "barbarians_building"
 msgid "Ax Workshop"
-msgstr ""
+msgstr "Kovačnica sjekira"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an ax because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:81
@@ -2632,7 +2632,7 @@ msgstr "Pekar"
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/init.lua:54
 msgctxt "barbarians_building"
 msgid "baking pitta bread"
-msgstr ""
+msgstr "peče lepinje"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:8
@@ -2669,7 +2669,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/brewery/init.lua:8
 msgctxt "barbarians_building"
 msgid "Brewery"
-msgstr "Pivar"
+msgstr "Pivovara"
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing strong beer because
 #. ...
@@ -2681,7 +2681,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:8
 msgctxt "barbarians_building"
 msgid "Cattle Farm"
-msgstr "Borbena sjekira"
+msgstr "Farma goveda"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing cattle because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:49
@@ -2733,7 +2733,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:8
 msgctxt "barbarians_building"
 msgid "Farm"
-msgstr "Uzgajivač"
+msgstr "Farma"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:73
@@ -2920,7 +2920,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/init.lua:8
 msgctxt "barbarians_building"
 msgid "Lime Kiln"
-msgstr ""
+msgstr "Počenjara za vapno"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mixing grout because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/init.lua:52
@@ -2945,7 +2945,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:8
 msgctxt "barbarians_building"
 msgid "Metal Workshop"
-msgstr ""
+msgstr "Kovačnica"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing rod because
 #. ...
@@ -3094,7 +3094,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:8
 msgctxt "barbarians_building"
 msgid "Wood Hardener"
-msgstr "Vrtlar"
+msgstr "Sušionica drva"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hardening wood because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:65
@@ -3204,7 +3204,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:8
 msgctxt "empire_building"
 msgid "Farm"
-msgstr "Uzgajivač"
+msgstr "Farma"
 
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:77
 msgctxt "empire_building"
@@ -4039,7 +4039,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:8
 msgctxt "frisians_building"
 msgid "Reed Farm"
-msgstr ""
+msgstr "Farma Trstike"
 
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:80
 msgctxt "frisians_building"
@@ -4382,7 +4382,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:8
 msgctxt "barbarians_building"
 msgid "Battle Arena"
-msgstr "Borbena sjekira"
+msgstr "Borbena arena"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:86
@@ -4416,7 +4416,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:8
 msgctxt "barbarians_building"
 msgid "Training Camp"
-msgstr ""
+msgstr "Vojni poligon"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:84
@@ -4512,7 +4512,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:8
 msgctxt "empire_building"
 msgid "Training Camp"
-msgstr ""
+msgstr "Vojni poligon"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:74
@@ -4617,7 +4617,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:8
 msgctxt "frisians_building"
 msgid "Training Camp"
-msgstr ""
+msgstr "Vojni poligon"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:83
@@ -5408,31 +5408,31 @@ msgstr ""
 #: ../../data/tribes/immovables/wheatfield/harvested/init.lua:8
 msgctxt "immovable"
 msgid "Wheat Field (harvested)"
-msgstr ""
+msgstr "Polje pšenice (ubrano)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/medium/init.lua:8
 msgctxt "immovable"
 msgid "Wheat Field (medium)"
-msgstr ""
+msgstr "Polje pšenice (srednje)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/ripe/init.lua:8
 msgctxt "immovable"
 msgid "Wheat Field (ripe)"
-msgstr ""
+msgstr "Polje pšenice (zrelo)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/small/init.lua:8
 msgctxt "immovable"
 msgid "Wheat Field (small)"
-msgstr ""
+msgstr "Polje pšenice (maleno)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Wheat Field (tiny)"
-msgstr ""
+msgstr "Polje pšenice (sićušno)"
 
 #: ../../data/tribes/initialization/amazons/init.lua:11
 #: ../../data/tribes/initialization/atlanteans/init.lua:11
@@ -5445,7 +5445,7 @@ msgstr ""
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/amazons/init.lua:13
 msgid "Amazons"
-msgstr ""
+msgstr "Amazonci"
 
 #: ../../data/tribes/initialization/amazons/init.lua:14
 msgid "The people of the amazonian jungle."
@@ -5531,7 +5531,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/starting_conditions/fortified_village.lua:11
 #: ../../data/tribes/initialization/frisians/starting_conditions/fortified_village.lua:11
 msgid "Fortified Village"
-msgstr ""
+msgstr "Vojno naselje"
 
 #. TRANSLATORS: This is the tooltip for the "Fortified Village" starting
 #. condition
@@ -5541,7 +5541,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/starting_conditions/fortified_village.lua:13
 #: ../../data/tribes/initialization/frisians/starting_conditions/fortified_village.lua:13
 msgid "Start the game with a fortified military installation"
-msgstr ""
+msgstr "Započni igru sa već postavljenim vojnim objektima"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/headquarters.lua:11
@@ -5550,7 +5550,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/starting_conditions/headquarters.lua:11
 #: ../../data/tribes/initialization/frisians/starting_conditions/headquarters.lua:11
 msgid "Headquarters"
-msgstr ""
+msgstr "Sjedište"
 
 #. TRANSLATORS: This is the tooltip for the "Headquarters" starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/headquarters.lua:13
@@ -5559,7 +5559,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/starting_conditions/headquarters.lua:13
 #: ../../data/tribes/initialization/frisians/starting_conditions/headquarters.lua:13
 msgid "Start the game with your headquarters only"
-msgstr ""
+msgstr "Započnite igru samo sa sjedištem"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/new_world.lua:11
@@ -5642,7 +5642,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/starting_conditions/trading_outpost.lua:11
 #: ../../data/tribes/initialization/frisians/starting_conditions/trading_outpost.lua:11
 msgid "Trading Outpost"
-msgstr ""
+msgstr "Trgovačka stanica"
 
 #. TRANSLATORS: This is the tooltip for the "Trading Outpost" starting
 #. condition
@@ -5654,7 +5654,7 @@ msgstr ""
 msgid ""
 "If this player runs low on important wares, they will be replenished for "
 "free"
-msgstr ""
+msgstr "Ako ovaj igrač ostane bez važne robe, biti će opskrbljen besplatnom robom"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/village.lua:11
@@ -5735,11 +5735,11 @@ msgstr ""
 
 #: ../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
-msgstr ""
+msgstr "Upravljanje"
 
 #: ../../data/tribes/scripting/help/init.lua:107
 msgid "Tips"
-msgstr ""
+msgstr "Savjeti"
 
 #: ../../data/tribes/scripting/help/init.lua:116
 msgid "Wares"
@@ -6634,7 +6634,7 @@ msgstr ""
 #: ../../data/tribes/ships/amazons/init.lua:329
 msgctxt "shipname"
 msgid "Tea"
-msgstr ""
+msgstr "Čaj"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:331
@@ -6922,7 +6922,7 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:101
 msgctxt "atlanteans_ship"
 msgid "Ship"
-msgstr ""
+msgstr "Brod"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:134
@@ -8163,7 +8163,7 @@ msgstr ""
 #: ../../data/tribes/wares/armor/init.lua:77
 msgctxt "ware"
 msgid "Armor"
-msgstr ""
+msgstr "Oklop"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/armor_chain/init.lua:8
@@ -8187,7 +8187,7 @@ msgstr "Kaciga"
 #: ../../data/tribes/wares/armor_wooden/init.lua:8
 msgctxt "ware"
 msgid "Light Wooden Armor"
-msgstr ""
+msgstr "Lagani drveni oklop"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/ax/init.lua:8
@@ -8205,43 +8205,43 @@ msgstr "Borbena sjekira"
 #: ../../data/tribes/wares/ax_broad/init.lua:8
 msgctxt "ware"
 msgid "Broad Ax"
-msgstr ""
+msgstr "Široka sjekira"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/ax_bronze/init.lua:8
 msgctxt "ware"
 msgid "Bronze Ax"
-msgstr ""
+msgstr "Brončana sjekira"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/ax_sharp/init.lua:8
 msgctxt "ware"
 msgid "Sharp Ax"
-msgstr ""
+msgstr "Naoštrena sjekira"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/ax_warriors/init.lua:8
 msgctxt "ware"
 msgid "Warrior’s Ax"
-msgstr ""
+msgstr "Ratnička sjekira"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/balsa/init.lua:8
 msgctxt "ware"
 msgid "Balsa"
-msgstr ""
+msgstr "Balsa"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/barley/init.lua:8
 msgctxt "ware"
 msgid "Barley"
-msgstr ""
+msgstr "Ječam"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/basket/init.lua:8
 msgctxt "ware"
 msgid "Basket"
-msgstr ""
+msgstr "Košara"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/beer/init.lua:8
@@ -8253,7 +8253,7 @@ msgstr "Pivo"
 #: ../../data/tribes/wares/beer_strong/init.lua:8
 msgctxt "ware"
 msgid "Strong Beer"
-msgstr ""
+msgstr "Jako pivo"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/blackroot/init.lua:8
@@ -8271,7 +8271,7 @@ msgstr "Crnokorijensko brašno"
 #: ../../data/tribes/wares/blackwood/init.lua:8
 msgctxt "ware"
 msgid "Blackwood"
-msgstr ""
+msgstr "Termički obrađeno drvo"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/boots_hero/init.lua:8
@@ -8295,7 +8295,7 @@ msgstr ""
 #: ../../data/tribes/wares/bread_amazons/init.lua:8
 msgctxt "ware"
 msgid "Bread"
-msgstr ""
+msgstr "Kruh"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/bread_atlanteans/init.lua:8
@@ -8307,7 +8307,7 @@ msgstr "Kruh"
 #: ../../data/tribes/wares/bread_barbarians/init.lua:8
 msgctxt "barbarians_ware"
 msgid "Pitta Bread"
-msgstr ""
+msgstr "Lepinja"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/bread_empire/init.lua:8
@@ -8319,7 +8319,7 @@ msgstr "Kruh"
 #: ../../data/tribes/wares/bread_frisians/init.lua:8
 msgctxt "frisians_ware"
 msgid "Bread"
-msgstr ""
+msgstr "Kruh"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/bread_paddle/init.lua:8
@@ -8331,13 +8331,13 @@ msgstr "Lopata za kruh"
 #: ../../data/tribes/wares/brick/init.lua:8
 msgctxt "ware"
 msgid "Brick"
-msgstr ""
+msgstr "Opeka"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/buckets/init.lua:8
 msgctxt "ware"
 msgid "Buckets"
-msgstr ""
+msgstr "Kante"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/cassavaroot/init.lua:8
@@ -8349,25 +8349,25 @@ msgstr ""
 #: ../../data/tribes/wares/chisel/init.lua:8
 msgctxt "ware"
 msgid "Chisel"
-msgstr ""
+msgstr "Dijetao"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/chocolate/init.lua:8
 msgctxt "ware"
 msgid "Chocolate"
-msgstr ""
+msgstr "Čokolada"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/clay/init.lua:8
 msgctxt "ware"
 msgid "Clay"
-msgstr ""
+msgstr "Glina"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/cloth/init.lua:8
 msgctxt "ware"
 msgid "Cloth"
-msgstr ""
+msgstr "Tkanina"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/coal/init.lua:8
@@ -8397,25 +8397,25 @@ msgstr ""
 #: ../../data/tribes/wares/diamond/init.lua:8
 msgctxt "ware"
 msgid "Diamond"
-msgstr ""
+msgstr "Dijamant"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/felling_ax/init.lua:8
 msgctxt "ware"
 msgid "Felling Ax"
-msgstr ""
+msgstr "Sjekira za cijepanje"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/fire_tongs/init.lua:8
 msgctxt "ware"
 msgid "Fire Tongs"
-msgstr ""
+msgstr "Kovačeva kliješta"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/firestones/init.lua:8
 msgctxt "ware"
 msgid "Firestones"
-msgstr ""
+msgstr "Kremen"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/fish/init.lua:8
@@ -8439,13 +8439,13 @@ msgstr "Štap za ribolov"
 #: ../../data/tribes/wares/flour/init.lua:8
 msgctxt "ware"
 msgid "Flour"
-msgstr ""
+msgstr "Brašno"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/fruit/init.lua:8
 msgctxt "ware"
 msgid "Fruit"
-msgstr ""
+msgstr "Voće"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/fur/init.lua:8
@@ -8511,7 +8511,7 @@ msgstr "Granit"
 #: ../../data/tribes/wares/grape/init.lua:8
 msgctxt "ware"
 msgid "Grape"
-msgstr ""
+msgstr "Grožđe"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/grout/init.lua:8
@@ -8523,19 +8523,19 @@ msgstr ""
 #: ../../data/tribes/wares/hammer/init.lua:8
 msgctxt "ware"
 msgid "Hammer"
-msgstr ""
+msgstr "Čekić"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/helmet/init.lua:8
 msgctxt "ware"
 msgid "Helmet"
-msgstr ""
+msgstr "Kaciga"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/helmet_golden/init.lua:8
 msgctxt "frisians_ware"
 msgid "Golden Helmet"
-msgstr ""
+msgstr "Zlatna kaciga"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/helmet_mask/init.lua:8
@@ -8553,19 +8553,19 @@ msgstr ""
 #: ../../data/tribes/wares/helmet_wooden/init.lua:8
 msgctxt "ware"
 msgid "Wooden Helmet"
-msgstr ""
+msgstr "Drveni šljem"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/honey/init.lua:8
 msgctxt "ware"
 msgid "Honey"
-msgstr ""
+msgstr "Med"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/honey_bread/init.lua:8
 msgctxt "frisians_ware"
 msgid "Honey Bread"
-msgstr ""
+msgstr "Medenjak"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/hook_pole/init.lua:8
@@ -8577,13 +8577,13 @@ msgstr ""
 #: ../../data/tribes/wares/hunting_bow/init.lua:8
 msgctxt "ware"
 msgid "Hunting Bow"
-msgstr ""
+msgstr "Lovački luk"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/hunting_spear/init.lua:8
 msgctxt "ware"
 msgid "Hunting Spear"
-msgstr "Koplje"
+msgstr "Lovačko koplje"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/iron/init.lua:8
@@ -8705,7 +8705,7 @@ msgstr ""
 #: ../../data/tribes/wares/reed/init.lua:8
 msgctxt "ware"
 msgid "Reed"
-msgstr ""
+msgstr "Trstika"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/rope/init.lua:8
@@ -8741,7 +8741,7 @@ msgstr ""
 #: ../../data/tribes/wares/scythe/init.lua:8
 msgctxt "ware"
 msgid "Scythe"
-msgstr ""
+msgstr "Kosa"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/shield_advanced/init.lua:8
@@ -8753,7 +8753,7 @@ msgstr "Napredni štit"
 #: ../../data/tribes/wares/shield_steel/init.lua:8
 msgctxt "ware"
 msgid "Steel Shield"
-msgstr ""
+msgstr "Čelični štit"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/shovel/init.lua:8
@@ -8765,13 +8765,13 @@ msgstr "Lopata"
 #: ../../data/tribes/wares/smoked_fish/init.lua:8
 msgctxt "ware"
 msgid "Smoked Fish"
-msgstr ""
+msgstr "Dimljena riba"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/smoked_meat/init.lua:8
 msgctxt "ware"
 msgid "Smoked Meat"
-msgstr ""
+msgstr "Dimljeno meso"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/snack/init.lua:8
@@ -8783,25 +8783,25 @@ msgstr ""
 #: ../../data/tribes/wares/spear/init.lua:8
 msgctxt "ware"
 msgid "Spear"
-msgstr ""
+msgstr "Koplje"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear_advanced/init.lua:8
 msgctxt "ware"
 msgid "Advanced Spear"
-msgstr ""
+msgstr "Poboljšano koplje"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear_hardened/init.lua:8
 msgctxt "ware"
 msgid "Hardened Spear"
-msgstr ""
+msgstr "Pojačano koplje"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear_heavy/init.lua:8
 msgctxt "ware"
 msgid "Heavy Spear"
-msgstr ""
+msgstr "Teško koplje"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear_stone_tipped/init.lua:8
@@ -8813,7 +8813,7 @@ msgstr ""
 #: ../../data/tribes/wares/spear_war/init.lua:8
 msgctxt "ware"
 msgid "War Spear"
-msgstr ""
+msgstr "Ratno koplje"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear_wooden/init.lua:8
@@ -8825,7 +8825,7 @@ msgstr "Drveno koplje"
 #: ../../data/tribes/wares/spider_silk/init.lua:8
 msgctxt "ware"
 msgid "Spider Silk"
-msgstr ""
+msgstr "Paukova svila"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spidercloth/init.lua:8
@@ -8933,7 +8933,7 @@ msgstr "Voda"
 #: ../../data/tribes/wares/wheat/init.lua:8
 msgctxt "ware"
 msgid "Wheat"
-msgstr ""
+msgstr "Pšenica"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/wine/init.lua:8
@@ -9077,7 +9077,7 @@ msgstr ""
 #: ../../data/tribes/workers/amazons/tapir_breeder/init.lua:8
 msgctxt "amazons_worker"
 msgid "Tapir Breeder"
-msgstr ""
+msgstr "Uzgajivač tapira"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/trainer/init.lua:8
@@ -9095,13 +9095,13 @@ msgstr ""
 #: ../../data/tribes/workers/amazons/woodcutter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Woodcutter"
-msgstr "Drvosječa"
+msgstr "Tesar"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/woodcutter_master/init.lua:8
 msgctxt "amazons_worker"
 msgid "Master Woodcutter"
-msgstr "Majstor drvosječa"
+msgstr "Majstor tesar"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #. descname = pgettext("empire_worker", "Fisher"),
@@ -9209,7 +9209,7 @@ msgstr ""
 #: ../../data/tribes/workers/atlanteans/fishbreeder/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Fish Breeder"
-msgstr ""
+msgstr "Uzgajivač ribe"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/fisher/init.lua:8
@@ -9239,7 +9239,7 @@ msgstr ""
 #: ../../data/tribes/workers/atlanteans/horsebreeder/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Horse Breeder"
-msgstr ""
+msgstr "Uzgajivač konja"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/hunter/init.lua:8
@@ -9305,7 +9305,7 @@ msgstr "Vojnik"
 #: ../../data/tribes/workers/atlanteans/spiderbreeder/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Spider Breeder"
-msgstr ""
+msgstr "Uzgajivač pauka"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/stonecutter/init.lua:8
@@ -9323,7 +9323,7 @@ msgstr ""
 #: ../../data/tribes/workers/atlanteans/trainer/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Trainer"
-msgstr "Rudar"
+msgstr "Trener"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/weaponsmith/init.lua:8
@@ -9341,7 +9341,7 @@ msgstr ""
 #: ../../data/tribes/workers/atlanteans/woodcutter/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Woodcutter"
-msgstr "Drvosječa"
+msgstr "Tesar"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/baker/init.lua:8
@@ -9389,7 +9389,7 @@ msgstr "Dostavljač"
 #: ../../data/tribes/workers/barbarians/cattlebreeder/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Cattle Breeder"
-msgstr ""
+msgstr "Uzgajivač goveda"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/charcoal_burner/init.lua:8
@@ -9437,7 +9437,7 @@ msgstr "Geolog"
 #: ../../data/tribes/workers/barbarians/helmsmith/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Helmsmith"
-msgstr "Kaciga"
+msgstr "Kovač kaciga"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/hunter/init.lua:8
@@ -9455,7 +9455,7 @@ msgstr ""
 #: ../../data/tribes/workers/barbarians/lime_burner/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Lime-Burner"
-msgstr ""
+msgstr "Pekač vapna"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/lumberjack/init.lua:8
@@ -9473,7 +9473,7 @@ msgstr "Rudar"
 #: ../../data/tribes/workers/barbarians/miner_chief/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Chief Miner"
-msgstr "Rudar"
+msgstr "Poslovođa rudara"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/miner_master/init.lua:8
@@ -9491,7 +9491,7 @@ msgstr "Vol"
 #: ../../data/tribes/workers/barbarians/ranger/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Ranger"
-msgstr ""
+msgstr "Šumar"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/recruit/init.lua:8
@@ -9533,7 +9533,7 @@ msgstr "Klesar"
 #: ../../data/tribes/workers/barbarians/trainer/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Trainer"
-msgstr "Rudar"
+msgstr "Trener"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/weaver/init.lua:8
@@ -9593,7 +9593,7 @@ msgstr ""
 #: ../../data/tribes/workers/empire/donkeybreeder/init.lua:8
 msgctxt "empire_worker"
 msgid "Donkey Breeder"
-msgstr ""
+msgstr "Uzgajivač majmuna"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/farmer/init.lua:8
@@ -9665,7 +9665,7 @@ msgstr ""
 #: ../../data/tribes/workers/empire/pigbreeder/init.lua:8
 msgctxt "empire_worker"
 msgid "Pig Breeder"
-msgstr ""
+msgstr "Uzgajivač svinja"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/recruit/init.lua:8
@@ -9719,7 +9719,7 @@ msgstr ""
 #: ../../data/tribes/workers/empire/trainer/init.lua:8
 msgctxt "empire_worker"
 msgid "Trainer"
-msgstr "Rudar"
+msgstr "Trener"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/vinefarmer/init.lua:8
@@ -9893,7 +9893,7 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/reed_farmer/init.lua:8
 msgctxt "frisians_worker"
 msgid "Reed Farmer"
-msgstr ""
+msgstr "Uzgajivač trstike"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/reindeer/init.lua:8
@@ -9905,7 +9905,7 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/reindeer_breeder/init.lua:8
 msgctxt "frisians_worker"
 msgid "Reindeer Breeder"
-msgstr ""
+msgstr "Uzgajivač sobova"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/scout/init.lua:8
@@ -9965,4 +9965,4 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/woodcutter/init.lua:8
 msgctxt "frisians_worker"
 msgid "Woodcutter"
-msgstr "Drvosječa"
+msgstr "Tesar"
