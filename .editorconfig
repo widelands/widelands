@@ -18,6 +18,8 @@ indent_size = 3
 
 [*.{h,cc}]
 indent_style = tab
+# to indicate line break correctly:
+tab_width = 3
 
 [{*.cmake,CMakeLists.txt}]
 indent_style = space
