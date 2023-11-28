@@ -18,12 +18,11 @@
 
 #include "wui/info_panel.h"
 
-#include <iomanip>
 #include <memory>
-#include <sstream>
 
 #include <SDL_timer.h>
 
+#include "base/time_string.h"
 #include "graphic/font_handler.h"
 #include "graphic/text_layout.h"
 #include "logic/message_queue.h"
@@ -38,6 +37,7 @@ constexpr int16_t kMessagePreviewMaxLifetime = 15 * 1000;  // show messages for 
 MessagePreview::MessagePreview(InfoPanel* i, const std::string& text, const std::string& tooltip)
    : UI::Textarea(i,
                   UI::PanelStyle::kWui,
+                  "message_preview",
                   UI::FontStyle::kWuiGameSpeedAndCoordinates,
                   0,
                   0,
@@ -66,12 +66,16 @@ inline bool MessagePreview::message_still_exists() const {
 }
 
 void MessagePreview::think() {
+	MutexLock m(MutexLock::ID::kMessages);
+
 	if (!message_still_exists() || SDL_GetTicks() - creation_time_ > kMessagePreviewMaxLifetime) {
 		owner_.pop_message(this);
 	}
 }
 
 void MessagePreview::draw(RenderTarget& r) {
+	MutexLock m(MutexLock::ID::kMessages);
+
 	if (!message_still_exists()) {
 		return;
 	}
@@ -125,9 +129,9 @@ bool MessagePreview::handle_mousepress(const uint8_t button, int32_t /* x */, in
 }
 
 InfoPanel::InfoPanel(InteractiveBase& ib)
-   : UI::Panel(&ib, UI::PanelStyle::kWui, 0, 0, 0, 0),
+   : UI::Panel(&ib, UI::PanelStyle::kWui, "info_panel", 0, 0, 0, 0),
      ibase_(ib),
-     snap_target_panel_(&ibase_, UI::PanelStyle::kWui, 0, 0, 0, 0),
+     snap_target_panel_(&ibase_, UI::PanelStyle::kWui, "snap_target", 0, 0, 0, 0),
      toggle_mode_(this,
                   "mode",
                   0,
@@ -141,6 +145,7 @@ InfoPanel::InfoPanel(InteractiveBase& ib)
                   UI::ButtonStyle::kWuiMenu),
      text_time_speed_(this,
                       UI::PanelStyle::kWui,
+                      "label_time_speed",
                       UI::FontStyle::kWuiGameSpeedAndCoordinates,
                       0,
                       0,
@@ -150,6 +155,7 @@ InfoPanel::InfoPanel(InteractiveBase& ib)
                       UI::Align::kLeft),
      text_fps_(this,
                UI::PanelStyle::kWui,
+               "label_fps",
                UI::FontStyle::kWuiGameSpeedAndCoordinates,
                0,
                0,
@@ -159,6 +165,7 @@ InfoPanel::InfoPanel(InteractiveBase& ib)
                UI::Align::kLeft),
      text_coords_(this,
                   UI::PanelStyle::kWui,
+                  "label_coords",
                   UI::FontStyle::kWuiGameSpeedAndCoordinates,
                   0,
                   0,
@@ -423,11 +430,7 @@ void InfoPanel::set_speed_string(const std::string& t) {
 void InfoPanel::update_time_speed_string() {
 	std::string realtime;
 	if (draw_real_time_) {
-		std::time_t t = std::time(nullptr);
-		std::tm tm = *std::localtime(&t);
-		std::ostringstream oss("");
-		oss << std::put_time(&tm, "%X");
-		realtime = oss.str();
+		realtime = realtimestring();
 	}
 
 	std::vector<std::string*> non_empty;

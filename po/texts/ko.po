@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-05-01 02:42+0000\n"
+"POT-Creation-Date: 2023-11-16 02:33+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: ks k, 2017-2021\n"
 "Language-Team: Korean (http://app.transifex.com/widelands/widelands/language/ko/)\n"
@@ -204,141 +204,142 @@ msgstr "게임을 저장하거나 문제를 시연하는 경우 (예를 들어, 
 msgid "Widelands Translators"
 msgstr "와이드랜드 번역자"
 
-#: ../../data/txts/developers.lua:3
-msgid "Add-Ons"
-msgstr "추가 기능"
-
-#: ../../data/txts/developers.lua:3
-msgid "Atlanteans"
-msgstr "아틀란티스인"
-
-#: ../../data/txts/developers.lua:3
-msgid "Barbarians"
-msgstr "야만인들"
-
-#: ../../data/txts/developers.lua:3
-msgid "Campaign Story"
-msgstr "캠패인 이야기"
-
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:5
 msgid "Chieftains"
 msgstr "족장"
 
-#: ../../data/txts/developers.lua:3
-msgid "Coders"
-msgstr "코더"
-
-#: ../../data/txts/developers.lua:3
-msgid "Debian Linux"
-msgstr "데비안 리눅스"
-
-#: ../../data/txts/developers.lua:3
-msgid "Documentation, Help and Wiki"
-msgstr "문서, 도움말 및 위키"
-
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:18
 msgid "Elders"
 msgstr "장로"
 
-#: ../../data/txts/developers.lua:3
-msgid "Empire"
-msgstr "제국"
-
-#: ../../data/txts/developers.lua:3
-msgid "Fedora Linux"
-msgstr "페도라 리눅스"
-
-#: ../../data/txts/developers.lua:3
-msgid "Flatpak"
-msgstr "Flatpak"
-
-#: ../../data/txts/developers.lua:3
-msgid "Former Elders"
-msgstr "전직 장로"
-
-#: ../../data/txts/developers.lua:3
-msgid "FreeBSD"
-msgstr "프리BSD"
-
-#: ../../data/txts/developers.lua:3
-msgid "Frisians"
-msgstr "프리지아인들"
-
-#: ../../data/txts/developers.lua:3
-msgid "Graphicians"
-msgstr "그래픽 디자이너"
-
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:22 ../../data/txts/developers.lua:414
 msgid "Graphics"
 msgstr "그래픽"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:28 ../../data/txts/developers.lua:358
+#: ../../data/txts/developers.lua:421
 msgid "Homepage"
 msgstr "누리집"
 
-#: ../../data/txts/developers.lua:3
-msgid "Homepage Coders"
-msgstr "누리집 코더"
-
-#: ../../data/txts/developers.lua:3
-msgid "Mac OS X"
-msgstr "맥오에스 엑스"
-
-#: ../../data/txts/developers.lua:3
-msgid "Mandriva Linux"
-msgstr "맨드리바 리눅스"
-
-#: ../../data/txts/developers.lua:3
-msgid "Maps and Missions"
-msgstr "지도 및 임무"
-
-#: ../../data/txts/developers.lua:3
-msgid "Musicians"
-msgstr "음악 제작자"
-
-#: ../../data/txts/developers.lua:3
-msgid "Other"
-msgstr "기타"
-
-#: ../../data/txts/developers.lua:3
-msgid "Packagers"
-msgstr "포장업"
-
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:34
 msgid "Scripting"
 msgstr ""
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:40 ../../data/txts/developers.lua:429
 msgid "Sound"
 msgstr "소리"
 
-#: ../../data/txts/developers.lua:3
-msgid "Sound Effects"
-msgstr "효과음"
+#: ../../data/txts/developers.lua:42
+msgid "vacant"
+msgstr "비어있는 자리"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:46
 msgid "Tongues"
 msgstr "언어"
 
-#: ../../data/txts/developers.lua:3
-msgid "Translation"
-msgstr "번역"
+#: ../../data/txts/developers.lua:54
+msgid "Coders"
+msgstr "코더"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:149
+msgid "Graphicians"
+msgstr "그래픽 디자이너"
+
+#: ../../data/txts/developers.lua:186
+msgid "Musicians"
+msgstr "음악 제작자"
+
+#: ../../data/txts/developers.lua:205
+msgid "Sound Effects"
+msgstr "효과음"
+
+#: ../../data/txts/developers.lua:221
+msgid "Maps and Missions"
+msgstr "지도 및 임무"
+
+#: ../../data/txts/developers.lua:255
+msgid "Campaign Story"
+msgstr "캠패인 이야기"
+
+#: ../../data/txts/developers.lua:259
+msgid "Barbarians"
+msgstr "야만인들"
+
+#: ../../data/txts/developers.lua:267
+msgid "Empire"
+msgstr "제국"
+
+#: ../../data/txts/developers.lua:274
+msgid "Atlanteans"
+msgstr "아틀란티스인"
+
+#: ../../data/txts/developers.lua:282
+msgid "Frisians"
+msgstr "프리지아인들"
+
+#: ../../data/txts/developers.lua:290
+msgid "Packagers"
+msgstr "포장업"
+
+#: ../../data/txts/developers.lua:294
+msgid "Debian Linux"
+msgstr "데비안 리눅스"
+
+#: ../../data/txts/developers.lua:300
+msgid "Fedora Linux"
+msgstr "페도라 리눅스"
+
+#: ../../data/txts/developers.lua:308
+msgid "Mandriva Linux"
+msgstr "맨드리바 리눅스"
+
+#: ../../data/txts/developers.lua:314
+msgid "FreeBSD"
+msgstr "프리BSD"
+
+#: ../../data/txts/developers.lua:320
+msgid "Flatpak"
+msgstr "Flatpak"
+
+#: ../../data/txts/developers.lua:327
+msgid "Mac OS X"
+msgstr "맥오에스 엑스"
+
+#: ../../data/txts/developers.lua:339
 msgid "Windows"
 msgstr "윈도우즈"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:350
 msgid "ZetaOS"
 msgstr "제타OS"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:362
+msgid "Homepage Coders"
+msgstr "누리집 코더"
+
+#: ../../data/txts/developers.lua:373
+msgid "Documentation, Help and Wiki"
+msgstr "문서, 도움말 및 위키"
+
+#: ../../data/txts/developers.lua:391
+msgid "Add-Ons"
+msgstr "추가 기능"
+
+#: ../../data/txts/developers.lua:410
+msgid "Former Elders"
+msgstr "전직 장로"
+
+#: ../../data/txts/developers.lua:436
+msgid "Translation"
+msgstr "번역"
+
+#: ../../data/txts/developers.lua:445
+msgid "Other"
+msgstr "기타"
+
+#: ../../data/txts/developers.lua:453
 msgid "and many, many more (thank you for everything you’ve done)"
 msgstr "그리고, (당신이 한) 모든 것에 대해 더 많은 감사를 드립니다"
-
-#: ../../data/txts/developers.lua:3
-msgid "vacant"
-msgstr "비어있는 자리"
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
@@ -604,6 +605,12 @@ msgid ""
 "Most enhanced buildings need experienced workers. Do not enhance a building "
 "unless you have the necessary workers available."
 msgstr "대부분의 고급 건물들에는 숙련된 일꾼들 필요합니다. 필요한 일꾼들이 없는 한 건물을 강화하지 마십시오."
+
+#: ../../data/txts/tips/crash.lua:7
+msgid ""
+"Widelands is creating an emergency save, so you can continue playing exactly"
+" where the game closed."
+msgstr ""
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/editor.lua:8

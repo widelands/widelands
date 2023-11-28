@@ -39,6 +39,7 @@ struct Statebox : public Panel {
 	 */
 	Statebox(Panel* parent,
 	         PanelStyle,
+	         const std::string& name,
 	         Vector2i,
 	         const Image* pic,
 	         const std::string& tooltip_text = std::string());
@@ -50,6 +51,7 @@ struct Statebox : public Panel {
 	 */
 	Statebox(Panel* parent,
 	         PanelStyle,
+	         const std::string& name,
 	         Vector2i,
 	         const std::string& label_text,
 	         const std::string& tooltip_text = std::string(),
@@ -66,6 +68,8 @@ struct Statebox : public Panel {
 	}
 	void set_state(bool on, bool send_signal = true);
 
+	void layout() override;
+
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
 	void draw_overlay(RenderTarget&) override;
@@ -80,7 +84,6 @@ protected:
 	std::vector<Recti> focus_overlay_rects() override;
 
 private:
-	void layout() override;
 	virtual void button_clicked() = 0;
 
 	enum Flags {
@@ -117,10 +120,11 @@ struct Checkbox : public Statebox {
 	 */
 	Checkbox(Panel* const parent,
 	         PanelStyle s,
+	         const std::string& name,
 	         Vector2i const p,
 	         const Image* pic,
 	         const std::string& tooltip_text = std::string())
-	   : Statebox(parent, s, p, pic, tooltip_text) {
+	   : Statebox(parent, s, name, p, pic, tooltip_text) {
 	}
 
 	/**
@@ -133,11 +137,12 @@ struct Checkbox : public Statebox {
 	 */
 	Checkbox(Panel* const parent,
 	         PanelStyle s,
+	         const std::string& name,
 	         Vector2i const p,
 	         const std::string& label_text,
 	         const std::string& tooltip_text = std::string(),
 	         uint32_t width = 0)
-	   : Statebox(parent, s, p, label_text, tooltip_text, width) {
+	   : Statebox(parent, s, name, p, label_text, tooltip_text, width) {
 	}
 
 private:

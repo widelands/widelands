@@ -63,7 +63,7 @@ private:
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 
 	UI::Panel* launchgame_;
-	UI::Box clientbox_, playerbox_, scrollable_playerbox_;
+	UI::Box clientbox_, scrollable_clientbox_, playerbox_, scrollable_playerbox_;
 	UI::Textarea clients_, players_;
 	int32_t buth_;
 

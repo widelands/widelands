@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-05-01 02:42+0000\n"
+"POT-Creation-Date: 2023-11-16 02:33+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: D M <kamera001dm@gmail.com>, 2023\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
@@ -200,141 +200,142 @@ msgstr "Om du har ett sparat spel eller en repris som demonstrerar problemet (t.
 msgid "Widelands Translators"
 msgstr "Widelands översättare"
 
-#: ../../data/txts/developers.lua:3
-msgid "Add-Ons"
-msgstr "Tillägg"
-
-#: ../../data/txts/developers.lua:3
-msgid "Atlanteans"
-msgstr "Atlanterna"
-
-#: ../../data/txts/developers.lua:3
-msgid "Barbarians"
-msgstr "Barbarerna"
-
-#: ../../data/txts/developers.lua:3
-msgid "Campaign Story"
-msgstr "Fälttågsberättelse"
-
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:5
 msgid "Chieftains"
 msgstr "Hövdingar"
 
-#: ../../data/txts/developers.lua:3
-msgid "Coders"
-msgstr "Programmerare"
-
-#: ../../data/txts/developers.lua:3
-msgid "Debian Linux"
-msgstr "Debian Linux"
-
-#: ../../data/txts/developers.lua:3
-msgid "Documentation, Help and Wiki"
-msgstr "Dokumentation, hjälp och uppslagsbok"
-
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:18
 msgid "Elders"
 msgstr "Åldermän"
 
-#: ../../data/txts/developers.lua:3
-msgid "Empire"
-msgstr "Imperiet"
-
-#: ../../data/txts/developers.lua:3
-msgid "Fedora Linux"
-msgstr "Fedora Linux"
-
-#: ../../data/txts/developers.lua:3
-msgid "Flatpak"
-msgstr "Flatpak"
-
-#: ../../data/txts/developers.lua:3
-msgid "Former Elders"
-msgstr "Tidigare åldermän"
-
-#: ../../data/txts/developers.lua:3
-msgid "FreeBSD"
-msgstr "FreeBSD"
-
-#: ../../data/txts/developers.lua:3
-msgid "Frisians"
-msgstr "Friserna"
-
-#: ../../data/txts/developers.lua:3
-msgid "Graphicians"
-msgstr "Grafiker"
-
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:22 ../../data/txts/developers.lua:414
 msgid "Graphics"
 msgstr "Grafik"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:28 ../../data/txts/developers.lua:358
+#: ../../data/txts/developers.lua:421
 msgid "Homepage"
 msgstr "Webbplats"
 
-#: ../../data/txts/developers.lua:3
-msgid "Homepage Coders"
-msgstr "Webbplatens kodare"
-
-#: ../../data/txts/developers.lua:3
-msgid "Mac OS X"
-msgstr "Mac OS X"
-
-#: ../../data/txts/developers.lua:3
-msgid "Mandriva Linux"
-msgstr "Mandriva Linux"
-
-#: ../../data/txts/developers.lua:3
-msgid "Maps and Missions"
-msgstr "Banor och uppdrag"
-
-#: ../../data/txts/developers.lua:3
-msgid "Musicians"
-msgstr "Musikskapare"
-
-#: ../../data/txts/developers.lua:3
-msgid "Other"
-msgstr "Övriga"
-
-#: ../../data/txts/developers.lua:3
-msgid "Packagers"
-msgstr "Paketerare"
-
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:34
 msgid "Scripting"
 msgstr "Skript"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:40 ../../data/txts/developers.lua:429
 msgid "Sound"
 msgstr "Ljud"
 
-#: ../../data/txts/developers.lua:3
-msgid "Sound Effects"
-msgstr "Ljudeffekter"
+#: ../../data/txts/developers.lua:42
+msgid "vacant"
+msgstr "vakant"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:46
 msgid "Tongues"
 msgstr "Språk"
 
-#: ../../data/txts/developers.lua:3
-msgid "Translation"
-msgstr "Översättning"
+#: ../../data/txts/developers.lua:54
+msgid "Coders"
+msgstr "Programmerare"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:149
+msgid "Graphicians"
+msgstr "Grafiker"
+
+#: ../../data/txts/developers.lua:186
+msgid "Musicians"
+msgstr "Musikskapare"
+
+#: ../../data/txts/developers.lua:205
+msgid "Sound Effects"
+msgstr "Ljudeffekter"
+
+#: ../../data/txts/developers.lua:221
+msgid "Maps and Missions"
+msgstr "Banor och uppdrag"
+
+#: ../../data/txts/developers.lua:255
+msgid "Campaign Story"
+msgstr "Fälttågsberättelse"
+
+#: ../../data/txts/developers.lua:259
+msgid "Barbarians"
+msgstr "Barbarerna"
+
+#: ../../data/txts/developers.lua:267
+msgid "Empire"
+msgstr "Imperiet"
+
+#: ../../data/txts/developers.lua:274
+msgid "Atlanteans"
+msgstr "Atlanterna"
+
+#: ../../data/txts/developers.lua:282
+msgid "Frisians"
+msgstr "Friserna"
+
+#: ../../data/txts/developers.lua:290
+msgid "Packagers"
+msgstr "Paketerare"
+
+#: ../../data/txts/developers.lua:294
+msgid "Debian Linux"
+msgstr "Debian Linux"
+
+#: ../../data/txts/developers.lua:300
+msgid "Fedora Linux"
+msgstr "Fedora Linux"
+
+#: ../../data/txts/developers.lua:308
+msgid "Mandriva Linux"
+msgstr "Mandriva Linux"
+
+#: ../../data/txts/developers.lua:314
+msgid "FreeBSD"
+msgstr "FreeBSD"
+
+#: ../../data/txts/developers.lua:320
+msgid "Flatpak"
+msgstr "Flatpak"
+
+#: ../../data/txts/developers.lua:327
+msgid "Mac OS X"
+msgstr "Mac OS X"
+
+#: ../../data/txts/developers.lua:339
 msgid "Windows"
 msgstr "Windows"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:350
 msgid "ZetaOS"
 msgstr "ZetaOS"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:362
+msgid "Homepage Coders"
+msgstr "Webbplatens kodare"
+
+#: ../../data/txts/developers.lua:373
+msgid "Documentation, Help and Wiki"
+msgstr "Dokumentation, hjälp och uppslagsbok"
+
+#: ../../data/txts/developers.lua:391
+msgid "Add-Ons"
+msgstr "Tillägg"
+
+#: ../../data/txts/developers.lua:410
+msgid "Former Elders"
+msgstr "Tidigare åldermän"
+
+#: ../../data/txts/developers.lua:436
+msgid "Translation"
+msgstr "Översättning"
+
+#: ../../data/txts/developers.lua:445
+msgid "Other"
+msgstr "Övriga"
+
+#: ../../data/txts/developers.lua:453
 msgid "and many, many more (thank you for everything you’ve done)"
 msgstr "och många många fler (tack för allting ni har gjort)"
-
-#: ../../data/txts/developers.lua:3
-msgid "vacant"
-msgstr "vakant"
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
@@ -600,6 +601,12 @@ msgid ""
 "Most enhanced buildings need experienced workers. Do not enhance a building "
 "unless you have the necessary workers available."
 msgstr "De flesta utbyggda byggnader behöver erfarna arbetare. Bygg inte ut en byggnad om du inte har de nödvändiga arbetarna tillgängliga."
+
+#: ../../data/txts/tips/crash.lua:7
+msgid ""
+"Widelands is creating an emergency save, so you can continue playing exactly"
+" where the game closed."
+msgstr ""
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/editor.lua:8

@@ -77,13 +77,13 @@ Window::Window(Panel* const parent,
                uint32_t const w,
                uint32_t const h,
                const std::string& title)
-   : NamedPanel(parent,
-                s == WindowStyle::kWui ? PanelStyle::kWui : PanelStyle::kFsMenu,
-                name,
-                x,
-                y,
-                w + kVerticalBorderThickness * 2,
-                kTopBorderThickness + h + kBottomBorderThickness),
+   : Panel(parent,
+           s == WindowStyle::kWui ? PanelStyle::kWui : PanelStyle::kFsMenu,
+           name,
+           x,
+           y,
+           w + kVerticalBorderThickness * 2,
+           kTopBorderThickness + h + kBottomBorderThickness),
      window_style_(s),
 
      oldh_(kTopBorderThickness + h + kBottomBorderThickness),
@@ -384,8 +384,9 @@ void Window::move_inside_parent() {
 		} else {
 			if (py < toolbar_top_h) {
 				py = toolbar_top_h;
-			} else if (py + get_h() > ph) {
-				py = ph - get_h();
+			} else if (const int32_t p_bottom = parent->get_inner_h() - toolbar_bottom_h;
+			           py + get_h() > p_bottom) {
+				py = p_bottom - get_h();
 				if (!is_minimal_ && toolbar_bottom_h == 0 && parent->get_dock_windows_to_edges()) {
 					py += kBottomBorderThickness;
 				}

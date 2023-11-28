@@ -53,6 +53,11 @@ public:
 protected:
 	void draw_ware(RenderTarget& dst, Widelands::DescriptionIndex ware) override;
 
+	uint32_t amount_of(const Widelands::DescriptionIndex ware) override {
+		return (get_type() == Widelands::wwWORKER ? warehouse_.get_workers() : warehouse_.get_wares())
+		   .stock(ware);
+	}
+
 private:
 	Widelands::Warehouse& warehouse_;
 };
@@ -64,7 +69,6 @@ WarehouseWaresDisplay::WarehouseWaresDisplay(UI::Panel* parent,
                                              bool selectable)
    : WaresDisplay(parent, 0, 0, wh.owner().tribe(), type, selectable), warehouse_(wh) {
 	set_inner_size(width, 0);
-	add_warelist(type == Widelands::wwWORKER ? warehouse_.get_workers() : warehouse_.get_wares());
 	if (type == Widelands::wwWORKER) {
 		const std::vector<Widelands::DescriptionIndex>& worker_types_without_cost =
 		   warehouse_.owner().tribe().worker_types_without_cost();
@@ -124,7 +128,7 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
                                          InteractiveBase& ib,
                                          Widelands::Warehouse& wh,
                                          Widelands::WareWorker type)
-   : UI::Box(parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+   : UI::Box(parent, UI::PanelStyle::kWui, "wares_panel", 0, 0, UI::Box::Vertical),
      interactive_base_(ib),
      wh_(wh),
      can_act_(interactive_base_.can_act(wh_.owner().player_number())),
@@ -132,7 +136,8 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
      display_(this, width, wh_, type_, can_act_) {
 	add(&display_, Resizing::kFullSize);
 
-	UI::Box* buttons = new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	UI::Box* buttons =
+	   new UI::Box(this, UI::PanelStyle::kWui, "buttons_box", 0, 0, UI::Box::Horizontal);
 	add(buttons, UI::Box::Resizing::kFullSize);
 	UI::Button* b;
 
@@ -259,7 +264,7 @@ void WarehouseWindow::setup_name_field_editbox(UI::Box& vbox) {
 		return BuildingWindow::setup_name_field_editbox(vbox);
 	}
 
-	UI::EditBox* name_field = new UI::EditBox(&vbox, 0, 0, 0, UI::PanelStyle::kWui);
+	UI::EditBox* name_field = new UI::EditBox(&vbox, "name", 0, 0, 0, UI::PanelStyle::kWui);
 	name_field->set_text(warehouse->get_warehouse_name());
 	name_field->changed.connect([this, name_field]() {
 		Widelands::Warehouse* wh = warehouse_.get(ibase()->egbase());

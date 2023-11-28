@@ -1,5 +1,5 @@
-cmake_minimum_required (VERSION 3.5)
-cmake_policy(VERSION 3.5)
+cmake_minimum_required (VERSION 3.12)
+cmake_policy(VERSION 3.12)
 
 project (widelands)
 
@@ -38,36 +38,13 @@ endforeach()
 include("${CMAKE_SOURCE_DIR}/cmake/UseSystemInfo.cmake")
 include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
 
-# This policy is not known to versions prior 3.11 and would result in errors,
+# This policy is not known to versions prior 3.27 and would result in errors,
 # if set on such systems. This can be removed when cmake_minimum_required is set
-# to 3.11 or newer  by using:
-# cmake_policy(VERSION 3.11)
-if(POLICY CMP0072)
-  cmake_policy(SET CMP0072 NEW)
-
-  # TODO(stonerl): Check on later Ubuntu releases whether this workaround is
-  # still needed or not.
-  # --- Seems to work fine on 21.04
-  if (CMAKE_SYSTEM MATCHES "Linux")
-    distro_name (DISTRO_NAME)
-    # DISTRO_NAME is different on the build-servers.
-    if ((DISTRO_NAME MATCHES "Ubuntu 18.10" OR DISTRO_NAME MATCHES "Cosmic"
-         OR DISTRO_NAME MATCHES "Ubuntu 19.04" OR DISTRO_NAME MATCHES "Disco"
-         OR DISTRO_NAME MATCHES "Ubuntu 19.10" OR DISTRO_NAME MATCHES "Eoan"
-         OR DISTRO_NAME MATCHES "Ubuntu 20.04" OR DISTRO_NAME MATCHES "Focal")
-        AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-      cmake_policy(SET CMP0072 OLD)
-    endif()
-  endif()
-endif(POLICY CMP0072)
-
-# This policy is not known to versions prior 3.12 and would result in errors,
-# if set on such systems. This can be removed when cmake_minimum_required is set
-# to 3.12 or newer  by using:
-# cmake_policy(VERSION 3.12)
-if(POLICY CMP0074)
-  cmake_policy(SET CMP0074 NEW)
-endif(POLICY CMP0074)
+# to 3.27 or newer  by using:
+# cmake_policy(VERSION 3.27)
+if(POLICY CMP0148)
+  cmake_policy(SET CMP0148 NEW)
+endif(POLICY CMP0148)
 
 IF(USE_XDG AND NOT APPLE AND NOT WIN32)
   ADD_DEFINITIONS(-DUSE_XDG)
@@ -101,7 +78,7 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8)
     message(FATAL_ERROR "Widelands needs GCC >= 4.8 to compile.")
   endif()
-elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang")
   if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 3.4)
     message(FATAL_ERROR "Clang version must be at least 3.4!")
   endif()
@@ -133,7 +110,7 @@ if (OPTION_BUILD_WINSTATIC)
   endif()
 endif()
 
-find_package (PythonInterp REQUIRED)
+find_package (Python3 REQUIRED)
 
 find_package(Gettext REQUIRED)
 find_package(OpenGL REQUIRED)
@@ -242,6 +219,7 @@ if(OPTION_ASAN)
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-fsanitize=address")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-fno-omit-frame-pointer")
   set (CMAKE_EXE_LINKER_FLAGS "-fsanitize=address" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+  add_definitions(-DUSE_ASAN)
 else()
   message(STATUS "Not using AddressSanitizer.")
 endif(OPTION_ASAN)
@@ -351,8 +329,8 @@ if(NOT MSVC)
     message(STATUS "Compiler warnings will be ignored.")
   elseif(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (
          ((NOT (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 12.0)) AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 12.2))
-         OR (NOT (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 13.0))))
-    # Skip this on g++ versions 12.0, 12.1, and 13.x because of false-positives from system headers.
+         OR (NOT (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 13.0)) AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 13.1)))
+    # Skip this on g++ versions 12.0, 12.1, and 13.0 because of false-positives from system headers.
     message(WARNING "This compiler is known to cause false-positive warnings.")
   else()
     # Turn some warnings into errors.
@@ -416,16 +394,18 @@ IF (WIN32)
       message (STATUS "Detected mingw32-w64")
     endif (CMAKE_SIZEOF_VOID_P EQUAL 4)
   endif()
+else()
+  add_definitions(-DLUA_USE_POSIX)
 endif()
 
 if(OPTION_BUILD_WINSTATIC)
   # Add required libraries for statical linking
-  wl_add_static_libs(SDL_IMG_STATIC_LIBS jpeg tiff lzma)
+  wl_add_static_libs(SDL_IMG_STATIC_LIBS tiff jpeg lzma)
   wl_add_static_libs(SDL_MIXER_STATIC_LIBS opusfile opus FLAC vorbisfile vorbis ogg mpg123 shlwapi)
   wl_add_static_libs(SDL_TTF_STATIC_LIBS freetype bz2 graphite2 usp10 dwrite harfbuzz freetype rpcrt4)
   wl_add_static_libs(SDL_STATIC_LIBS intl iconv dinput8 shell32 setupapi advapi32 uuid version oleaut32 ole32 imm32 winmm gdi32 user32)
+  set(BROTLI brotlidec brotlicommon brotlienc)
   if(MSVC)
-    set(BROTLI brotlidec-static brotlicommon-static brotlienc-static)
     wl_add_static_libs(SDL_IMG_STATIC_LIBS libwebp)
     wl_add_static_libs(SDL_STATIC_LIBS charset ${BROTLI})
     if(CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -436,12 +416,24 @@ if(OPTION_BUILD_WINSTATIC)
       wl_add_flag(TARGET_COMPILE_FLAGS "/MT /EHsc")
     endif()
   else()
-    set(BROTLI brotlidec brotlicommon brotlienc)
     wl_add_static_libs(SDL_IMG_STATIC_LIBS webp jbig deflate Lerc jxl hwy sharpyuv)
     wl_add_static_libs(SDL_MIXER_STATIC_LIBS ssp)
     wl_add_static_libs(SDL_STATIC_LIBS mingw32 dxerr8 zstd ${BROTLI})
   endif(MSVC)
 endif(OPTION_BUILD_WINSTATIC)
+
+if(NOT OPTION_ASAN)
+  # Allow self-diagnosis for crashes if the system supports it (uses a GNU extension)
+  find_path(has_execinfo "execinfo.h")
+  if(has_execinfo)
+    message(STATUS "Adding crash self-diagnosis handler.")
+    add_definitions(-DPRINT_SEGFAULT_BACKTRACE)
+    if(NOT WIN32)
+      # Needed for human-readable-ish symbolizing; doesn't hurt performance, see https://stackoverflow.com/q/12634114
+      SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -rdynamic")
+    endif()
+  endif()
+endif()
 
 # on BSD this must be explicitly linked
 if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")

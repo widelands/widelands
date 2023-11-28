@@ -29,6 +29,9 @@
 #include "ui_basic/mouse_constants.h"
 #include "wui/chat_msg_layout.h"
 
+UI::EditBoxHistory g_chat_sent_history(32);
+UI::EditBoxHistory g_script_console_history(64);
+
 /**
  * Create a game chat panel
  */
@@ -39,12 +42,14 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
                              uint32_t const w,
                              uint32_t const h,
                              ChatProvider& chat,
+                             UI::EditBoxHistory* history,
                              UI::PanelStyle style)
-   : UI::Panel(parent, style, x, y, w, h),
+   : UI::Panel(parent, style, "chat_panel", x, y, w, h),
      color_functor_(fn),
      chat_(chat),
-     vbox_(this, style, 0, 0, UI::Box::Vertical),
+     vbox_(this, style, "vbox", 0, 0, UI::Box::Vertical),
      chatbox(&vbox_,
+             "chat",
              0,
              0,
              0,
@@ -53,7 +58,7 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
              "",
              UI::Align::kLeft,
              UI::MultilineTextarea::ScrollMode::kScrollLog),
-     hbox_(&vbox_, style, 0, 0, UI::Box::Horizontal),
+     hbox_(&vbox_, style, "hbox", 0, 0, UI::Box::Horizontal),
      recipient_dropdown_(&hbox_,
                          "chat_recipient_dropdown",
                          0,
@@ -65,7 +70,7 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
                          UI::DropdownType::kPictorial,
                          UI::PanelStyle::kFsMenu,
                          UI::ButtonStyle::kFsMenuSecondary),
-     editbox(&hbox_, 28, 0, w - 28, style),
+     editbox(&hbox_, "input", 28, 0, w - 28, style),
 
      chat_sound(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {
 
@@ -75,10 +80,11 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 
 	editbox.ok.connect([this]() { key_enter(); });
 	editbox.cancel.connect([this]() { key_escape(); });
-	editbox.activate_history(true);
+	editbox.activate_history(history);
 
 	set_handle_mouse(true);
 	set_can_focus(true);
+	set_handle_textinput(true);
 
 	if (chat_.participants_ == nullptr) {
 		// No access to participant list. Hide the dropdown
@@ -146,6 +152,11 @@ bool GameChatPanel::handle_key(const bool down, const SDL_Keysym code) {
 
 	// Try autocomplete. If it worked, we handled the key press
 	return try_autocomplete();
+}
+
+bool GameChatPanel::handle_textinput(const std::string& text) {
+	focus_edit();
+	return editbox.handle_textinput(text);
 }
 
 /**

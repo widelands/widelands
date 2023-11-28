@@ -39,6 +39,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...
          descname = _("gathering"),
          actions = {
+            -- min. time total: 2 * 42.2 = 84.4 sec
+            -- max. time total: 2 * 96.2 = 192.4 sec
+            -- avg. time total: 2 * 69.2 = 138.4 sec
             "call=hunt",
             "call=fish",
          }
@@ -47,6 +50,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...
          descname = _("gathering meat"),
          actions = {
+            -- time of worker: 8.2-62.2 sec, min+max average 35.2 sec
+            -- min. time: 8.2 + 34 = 42.2 sec
+            -- max. time: 62.2 + 34 = 96.2 sec
+            -- avg. time: 35.2 + 34 = 69.2 sec
             "callworker=hunt",
             "sleep=duration:34s",
          }
@@ -55,6 +62,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...
          descname = _("gathering fish"),
          actions = {
+            -- time of worker: 8.2-62.2 sec, min+max average 35.2 sec
+            -- min. time: 8.2 + 34 = 42.2 sec
+            -- max. time: 62.2 + 34 = 96.2 sec
+            -- avg. time: 35.2 + 34 = 69.2 sec
             "callworker=fish",
             "sleep=duration:34s",
          }

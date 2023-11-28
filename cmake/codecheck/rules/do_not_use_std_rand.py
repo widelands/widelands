@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 
 error_msg = 'Do not use std::rand(), use RNG::static_rand() from base/random.h.'

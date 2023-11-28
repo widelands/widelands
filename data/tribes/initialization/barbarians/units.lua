@@ -11,7 +11,7 @@ wl.Descriptions():new_tribe {
    name = "barbarians",
    animation_directory = image_dirname,
    animations = {
-      frontier = { hotspot = {1, 19} },
+      frontier = { hotspot = {8, 31} },
       pinned_note = { hotspot = {18, 67} },
       bridge_normal_e = { hotspot = {-1, 13} },
       bridge_busy_e = { hotspot = {-1, 13} },
@@ -1138,8 +1138,12 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("barbarians_building", "Cuts raw pieces of granite out of rocks in the vicinity."),
             -- TRANSLATORS: Note helptext for a Barbarian production site: Quarry
             note = pgettext("barbarians_building", "The quarry needs rocks to cut within the work area."),
-            -- TRANSLATORS: Performance helptext for a Barbarian production site: Quarry
-            performance = pgettext("barbarians_building", "The stonemason pauses %s before going back to work again."):bformat(format_minutes_seconds(1, 5))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Quarry, part 1
+               pgettext("barbarians_building", "This building can produce one granite between %1$s and %2$s, depending on how far the stonemason has to walk."):bformat(format_seconds(42), format_minutes_seconds(1, 7)),
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Quarry, part 2
+               pgettext("barbarians_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1155,9 +1159,9 @@ wl.Descriptions():new_tribe {
             note = pgettext("barbarians_building", "The lumberjack’s hut needs trees to fell within the work area."),
             performance = {
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Lumberjack_s Hut
-               pgettext("barbarians_building", "The lumberjack needs %s to fell a tree, not counting the time he needs to reach the destination and go home again."):bformat(format_seconds(17)),
+               pgettext("barbarians_building", "This building can produce one log between %1$s and %2$s, depending on how far the lumberjack has to walk."):bformat(format_seconds(44), format_minutes_seconds(1, 24)),
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Lumberjack_s Hut
-               pgettext("barbarians_building", "Afterwards he rests in the hut for %s."):bformat(format_seconds(20))
+               pgettext("barbarians_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
          }
       },
@@ -1173,8 +1177,12 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("building", "Plants trees in the surrounding area."),
             -- TRANSLATORS: Note helptext for a Barbarian production site: Ranger's Hut
             note = pgettext("barbarians_building", "The ranger’s hut needs free space within the work area to plant the trees."),
-            -- TRANSLATORS: Performance helptext for a Barbarian production site: Ranger's Hut
-            performance = pgettext("barbarians_building", "The ranger needs %s to plant a tree, not counting the time he needs to reach the destination and go home again."):bformat(format_seconds(5))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Ranger's Hut, part 1
+               pgettext("barbarians_building", "The ranger plants one tree between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(28), format_seconds(50)),
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Ranger's Hut, part 2
+               pgettext("barbarians_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1192,8 +1200,12 @@ wl.Descriptions():new_tribe {
                -- TRANSLATORS: Note helptext for production site: Fisher's Hut, part 2
                pgettext("building", "Roads and trees along the shoreline block fishing."),
             },
-            -- TRANSLATORS: Performance helptext for production site: Fisher's Hut
-            performance = pgettext("barbarians_building", "The fisher pauses %s before going to work again."):bformat(format_seconds(18))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Fisher's Hut, part 1
+               pgettext("barbarians_building", "This building can produce one fish between %1$s and %2$s, depending on how far the fisher has to walk."):bformat(format_seconds(28), format_seconds(57)),
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Fisher's Hut, part 2
+               pgettext("barbarians_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1207,8 +1219,12 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("building", "Hunts animals to produce meat."),
             -- TRANSLATORS: Note helptext for a Barbarian production site: Hunter's Hut
             note = pgettext("barbarians_building", "The hunter’s hut needs animals to hunt within the work area."),
-            -- TRANSLATORS: Performance helptext for a Barbarian production site: Hunter's Hut
-            performance = pgettext("barbarians_building", "The hunter pauses %s before going to work again."):bformat(format_seconds(35))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Hunter's Hut, part 1
+               pgettext("barbarians_building", "This building can produce one meat between %1$s and %2$s, depending on how far the hunter has to walk."):bformat(format_seconds(43), format_minutes_seconds(1, 34)),
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Hunter's Hut, part 2
+               pgettext("barbarians_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1233,8 +1249,12 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("barbarians_building", "Song written by Sigurd the Bard when the first rain fell after the Great Drought in the 21ˢᵗ year of Chat’Karuth’s reign."),
             -- TRANSLATORS: Purpose helptext for a Barbarian production site: Well
             purpose = pgettext("building", "Draws water out of the deep."),
-            -- TRANSLATORS: Performance helptext for a Barbarian production site: Well
-            performance = pgettext("barbarians_building", "The carrier needs %s to get one bucket full of water."):bformat(format_seconds(40))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Well, part 1
+               pgettext("barbarians_building", "The carrier needs %s to get one bucket full of water."):bformat(format_seconds(44)),
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Well, part 2
+               pgettext("barbarians_building", "If the water resource is depleted, the carrier needs %s on average."):bformat(format_minutes_seconds(1, 11))
+            }
          }
       },
       {
@@ -1246,7 +1266,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for a Barbarian production site: Scout's Hut
             lore_author = pgettext("barbarians_building", "Chat’Karuth<br>at the oath taking ceremony of the first scout troupe"),
             -- TRANSLATORS: Purpose helptext for a Barbarian production site: Scout's Hut
-            purpose = pgettext("building", "Explores unknown territory.")
+            purpose = pgettext("building", "Explores unknown territory."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Scout's Hut, part 1
+               pgettext("barbarians_building", "One exploration trip of the scout takes between %1$s and %2$s."):bformat(format_minutes_seconds(1, 52), format_minutes_seconds(4, 5)),
+               -- TRANSLATORS: Performance helptext for a Barbarian production site: Scout's Hut, part 2
+               pgettext("barbarians_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
 
@@ -1358,7 +1384,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Barbarian production site: Inn
             purpose = pgettext("building", "Prepares rations for scouts and rations and snacks to feed the miners in the basic and deep mines."),
             -- TRANSLATORS: Performance helptext for a Barbarian production site: Inn
-            performance = pgettext("barbarians_building", "The inn can produce one ration in %1$s and one snack in %2$s on average, if the supply is steady."):bformat(format_minutes_seconds(1, 18), format_minutes_seconds(1, 18))
+            performance = pgettext("barbarians_building", "If this building is fully supplied and all kinds of food are needed by the economy, production of one of each food takes %1$s on average. If only one kind of food is needed by the economy, production of one ration takes %2$s and one snack takes %3$s on average."):bformat(format_minutes_seconds(1, 18), format_seconds(37), format_seconds(41))
          }
       },
       {
@@ -1371,7 +1397,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Barbarian production site: Big Inn
             purpose = pgettext("barbarians_building", "Prepares rations for scouts and rations, snacks and meals to feed all miners."),
             -- TRANSLATORS: Performance helptext for a Barbarian production site: Big Inn
-            performance = pgettext("barbarians_building", "The big inn can produce one ration in %1$s, one snack in %2$s and one meal in %3$s on average, if the supply is steady."):bformat(format_minutes_seconds(2, 2), format_minutes_seconds(2, 2), format_minutes_seconds(2, 2))
+            performance = pgettext("barbarians_building", "If this building is fully supplied and all kinds of food are needed by the economy, production of one of each food takes %1$s on average. If only one kind of food is needed by the economy, production of one ration takes %2$s, one snack takes %3$s and one meal takes %4$s on average."):bformat(format_minutes_seconds(2, 2), format_seconds(37), format_seconds(41), format_seconds(44))
          }
       },
       {
@@ -1401,7 +1427,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for a Barbarian production site: Smelting Works
             lore_author = pgettext("barbarians_building", "Chat’Karuth<br>at the 5ᵗʰ conference of master craftsmen"),
             -- TRANSLATORS: Purpose helptext for a Barbarian production site: Smelting Works
-            purpose = pgettext("building", "Smelts iron ore into iron and gold ore into gold.")
+            purpose = pgettext("building", "Smelts iron ore into iron and gold ore into gold."),
+            -- TRANSLATORS: Performance helptext for a Barbarian production site: Smelting Works
+            performance = pgettext("barbarians_building", "If this building is fully supplied and all metals are needed by the economy, production of one iron takes %1$s and one gold takes %2$s on average. If only one kind of metal is needed by the economy, production of one iron takes %3$s and one gold takes %4$s on average."):bformat(format_minutes_seconds(1, 42), format_minutes_seconds(3, 24), format_minutes_seconds(1, 8), format_minutes_seconds(1, 8))
          }
       },
       {
@@ -1416,7 +1444,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Note helptext for a Barbarian production site: Metal Workshop
             note = pgettext("barbarians_building", "The Barbarian metal workshop is the basic production site in a series of three buildings and creates all the tools that Barbarians need. The others are for weapons."),
             -- TRANSLATORS: Performance helptext for a Barbarian production site: Metal Workshop
-            performance = pgettext("barbarians_building", "If all needed wares are delivered in time, this building can produce each tool in about %s on average."):bformat(format_minutes_seconds(1, 11))
+            performance = pgettext("barbarians_building", "If this building is fully supplied and all tools are needed by the economy, production of one of each tool takes %1$s on average. If only one kind of tool is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(11, 50), format_minutes_seconds(1, 20))
          }
       },
       {
@@ -1432,7 +1460,7 @@ wl.Descriptions():new_tribe {
             note = pgettext("barbarians_building", "The Barbarian war mill is their most advanced production site for weapons. As such you will need to enhance an ax workshop in order to get one."),
             performance = {
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Warmill, part 1
-               pgettext("barbarians_building", "If all needed wares are delivered in time, this building can produce each type of ax in about %s on average."):bformat(format_minutes_seconds(1, 1)),
+               pgettext("barbarians_building", "If this building is fully supplied and all axes are needed by the economy, production of one of each ax takes %1$s on average. If only one kind of ax is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(5, 58), format_minutes_seconds(1, 8)),
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Warmill, part 2
                pgettext("barbarians_building", "All weapons require the same time for making, but the consumption of the same raw materials increases from step to step. The last two need gold.")
             }
@@ -1451,7 +1479,7 @@ wl.Descriptions():new_tribe {
             note = pgettext("barbarians_building", "The Barbarian ax workshop is the intermediate production site in a series of three buildings. It is enhanced from the metal workshop but doesn’t require additional qualification for the worker."),
             performance = {
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Ax Workshop
-               pgettext("barbarians_building", "If all needed wares are delivered in time, this building can produce each type of ax in about %s on average."):bformat(format_minutes_seconds(1, 1)),
+               pgettext("barbarians_building", "If this building is fully supplied and all axes are needed by the economy, production of one of each ax takes %1$s on average. If only one kind of ax is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(3, 4), format_minutes_seconds(1, 8)),
                -- TRANSLATORS: Performance helptext for a Barbarian production site: Ax Workshop
                pgettext("barbarians_building", "All three weapons take the same time for making, but the required raw materials vary.")
             }
@@ -1507,7 +1535,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for a Barbarian production site: Helm Smithy
             lore_author = pgettext("barbarians_building", "Slogan of ‘Harrath’s Handsome Helmets’ in Al’thunran"),
             -- TRANSLATORS: Purpose helptext for a Barbarian production site: Helm Smithy
-            purpose = pgettext("barbarians_building", "Forges helmets that are used for training soldiers’ health in the training camp.")
+            purpose = pgettext("barbarians_building", "Forges helmets that are used for training soldiers’ health in the training camp."),
+            -- TRANSLATORS: Performance helptext for a Barbarian production site: Helm Smithy
+            performance = pgettext("barbarians_building", "If this building is fully supplied and all helmets are needed by the economy, production of one of each helmet takes %1$s on average. If only one kind of helmet is needed by the economy, production of one helmet takes %2$s, one mask takes %3$s and one warhelm takes %4$s on average."):bformat(format_minutes_seconds(4, 3), format_minutes_seconds(1, 11), format_minutes_seconds(1, 21), format_minutes_seconds(1, 31))
          }
       },
 

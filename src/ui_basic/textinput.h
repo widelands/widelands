@@ -61,17 +61,22 @@ public:
 		return warning_;
 	}
 
-protected:
-	AbstractTextInputPanel(
-	   UI::Panel*, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style);
-
-	void draw(RenderTarget&) override;
-
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mousemove(uint8_t state, int32_t x, int32_t, int32_t, int32_t) override;
 	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
 	bool handle_key(bool down, SDL_Keysym) override;
 	bool handle_textinput(const std::string& text) override;
+
+protected:
+	AbstractTextInputPanel(UI::Panel*,
+	                       const std::string& name,
+	                       int32_t x,
+	                       int32_t y,
+	                       uint32_t w,
+	                       uint32_t h,
+	                       UI::PanelStyle style);
+
+	void draw(RenderTarget&) override;
 
 	void scrollpos_changed(int32_t);
 	void delete_selected_text() const;
@@ -99,21 +104,58 @@ protected:
 	uint32_t multiclick_counter_{0U};
 };
 
+class EditBoxHistory {
+public:
+	explicit EditBoxHistory(uint16_t max_size) : max_size_(max_size) {
+	}
+
+	// Newer entries have lower positions
+	void add_entry(const std::string& new_entry);
+
+	// Returns tmp_ when position is out of range
+	[[nodiscard]] const std::string& get_entry(int16_t position) const;
+
+	[[nodiscard]] int16_t current_size() const {
+		return entries_.size();
+	}
+
+	void clear_tmp() {
+		tmp_.clear();
+	}
+	void set_tmp(const std::string& s) {
+		tmp_ = s;
+	}
+	// No getter, use get_entry(-1) to get tmp_
+
+	void load(const std::string& filename);
+	void save(const std::string& filename);
+
+private:
+	uint16_t max_size_{0};
+	std::vector<std::string> entries_;
+	std::string tmp_;
+	bool changed_{false};
+};
+
 /** Subclass for single-line text input. */
 class EditBox : public AbstractTextInputPanel {
 public:
-	static constexpr unsigned kHistorySize = 16;
-
-	EditBox(UI::Panel* parent, int32_t x, int32_t y, uint32_t w, UI::PanelStyle style);
+	EditBox(UI::Panel* parent,
+	        const std::string& name,
+	        int32_t x,
+	        int32_t y,
+	        uint32_t w,
+	        UI::PanelStyle style);
 
 	Notifications::Signal<> ok;
 
-	void activate_history(bool activate) {
-		history_active_ = activate;
+	void activate_history(EditBoxHistory* history) {
+		history_ = history;
 	}
 
-protected:
 	bool handle_key(bool down, SDL_Keysym) override;
+
+protected:
 	uint32_t max_text_width_for_wrap() const override;
 	void scroll_cursor_into_view() override;
 	void escape_illegal_characters() const override;
@@ -121,16 +163,21 @@ protected:
 		return true;
 	}
 
-	bool history_active_{false};
+private:
 	int16_t history_position_{-1};
-	std::string history_[kHistorySize];
+	EditBoxHistory* history_{nullptr};
 };
 
 /** Subclass for multi-line text input. */
 class MultilineEditbox : public AbstractTextInputPanel {
 public:
-	MultilineEditbox(
-	   UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style);
+	MultilineEditbox(UI::Panel* parent,
+	                 const std::string& name,
+	                 int32_t x,
+	                 int32_t y,
+	                 uint32_t w,
+	                 uint32_t h,
+	                 UI::PanelStyle style);
 };
 
 }  // namespace UI

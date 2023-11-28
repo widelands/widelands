@@ -21,6 +21,7 @@
 
 #include <atomic>
 #include <memory>
+#include <set>
 
 #include "base/macros.h"
 #include "economy/economy.h"
@@ -565,6 +566,9 @@ public:
 	void reserve_shipname(const std::string& name);
 	void reserve_warehousename(const std::string& name);
 
+	void set_shipnames(const std::set<std::string>& names);
+	void set_warehousenames(const std::set<std::string>& names);
+
 	void add_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
 	void remove_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
 	uint32_t count_soldiers() const;
@@ -589,6 +593,9 @@ public:
 		return is_picking_custom_starting_position_;
 	}
 	bool get_starting_position_suitability(const Coords&) const;
+	bool local_player_starting_position_is_pending() const {
+		return local_player_starting_position_is_pending_;
+	}
 
 	bool additional_expedition_items_allowed() const {
 		return allow_additional_expedition_items_;
@@ -643,8 +650,8 @@ private:
 	std::vector<uint8_t> further_initializations_;   // used in shared kingdom mode
 	std::vector<uint8_t> further_shared_in_player_;  //  ''  ''   ''     ''     ''
 
-	std::list<std::string> remaining_shipnames_;
-	std::list<std::string> remaining_warehousenames_;
+	std::vector<std::string> remaining_shipnames_;
+	std::vector<std::string> remaining_warehousenames_;
 
 	PlayerBuildingStats building_stats_;
 	std::vector<SoldierStatistics> soldier_stats_;
@@ -719,6 +726,8 @@ private:
 	bool see_all_{false};
 	bool random_tribe_{false};
 	bool is_picking_custom_starting_position_{false};
+	// Only used for the local player
+	bool local_player_starting_position_is_pending_{false};
 	bool allow_additional_expedition_items_{true};
 	bool hidden_from_general_statistics_{false};
 
@@ -740,6 +749,8 @@ struct NotePlayerDetailsEvent {
 void find_former_buildings(const Descriptions& descriptions,
                            DescriptionIndex bi,
                            FormerBuildings* former_buildings);
+
+std::pair<std::set<std::string>, std::set<std::string>> read_custom_warehouse_ship_names();
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_PLAYER_H

@@ -106,6 +106,7 @@ public:
 
 	Panel(Panel* nparent,
 	      UI::PanelStyle,
+	      const std::string& name,
 	      int32_t nx,
 	      int32_t ny,
 	      int nw,
@@ -116,13 +117,13 @@ public:
 	Notifications::Signal<> clicked;
 	Notifications::Signal<> position_changed;
 
-	Panel* get_parent() const {
+	[[nodiscard]] Panel* get_parent() const {
 		return parent_;
 	}
 
 	void free_children();
 
-	bool get_flag(unsigned flag) const {
+	[[nodiscard]] bool get_flag(unsigned flag) const {
 		return (flags_ & flag) != 0;
 	}
 	void set_flag(unsigned flag, bool on) {
@@ -136,7 +137,7 @@ public:
 	// Checks whether this panel will be deleted in the next think cycle.
 	// This check is used to stop panels from thinking and performing other
 	// activities to prevent undesired side-effects.
-	bool is_dying() const {
+	[[nodiscard]] bool is_dying() const {
 		return get_flag(pf_die);
 	}
 
@@ -156,7 +157,7 @@ public:
 		return_code_ = static_cast<int>(code);
 	}
 
-	bool is_modal() const;
+	[[nodiscard]] bool is_modal() const;
 
 	virtual void start();
 	virtual void end();
@@ -178,90 +179,97 @@ public:
 
 	void get_desired_size(int* w, int* h) const;
 
-	int32_t get_x() const {
+	[[nodiscard]] const std::string& get_name() const {
+		return name_;
+	}
+
+	[[nodiscard]] int32_t get_x() const {
 		return x_;
 	}
-	int32_t get_y() const {
+	[[nodiscard]] int32_t get_y() const {
 		return y_;
 	}
-	Vector2i get_pos() const {
+	[[nodiscard]] Vector2i get_pos() const {
 		return Vector2i(x_, y_);
 	}
 	// int instead of uint because of overflow situations
-	int32_t get_w() const {
+	[[nodiscard]] int32_t get_w() const {
 		return w_;
 	}
-	int32_t get_h() const {
+	[[nodiscard]] int32_t get_h() const {
 		return h_;
 	}
 
-	Vector2i to_parent(const Vector2i&) const;
+	[[nodiscard]] Vector2i to_parent(const Vector2i&) const;
 
-	bool is_snap_target() const {
+	[[nodiscard]] bool is_snap_target() const {
 		return get_flag(pf_snap_target);
 	}
 	void set_snap_target(bool on) {
 		set_flag(pf_snap_target, on);
 	}
-	uint16_t get_border_snap_distance() const {
+	[[nodiscard]] uint16_t get_border_snap_distance() const {
 		return border_snap_distance_;
 	}
 	void set_border_snap_distance(uint8_t const value) {
 		border_snap_distance_ = value;
 	}
-	uint8_t get_panel_snap_distance() const {
+	[[nodiscard]] uint8_t get_panel_snap_distance() const {
 		return panel_snap_distance_;
 	}
 	void set_panel_snap_distance(uint8_t const value) {
 		panel_snap_distance_ = value;
 	}
-	bool get_dock_windows_to_edges() const {
+	[[nodiscard]] bool get_dock_windows_to_edges() const {
 		return get_flag(pf_dock_windows_to_edges);
 	}
-	void set_dock_windows_to_edges(bool on = true);
+	inline void set_dock_windows_to_edges(bool on = true) {
+		set_flag(pf_dock_windows_to_edges, on);
+	}
 	void set_inner_size(int nw, int nh);
 	void set_border(int l, int r, int t, int b);
 
-	int get_lborder() const {
+	[[nodiscard]] int get_lborder() const {
 		return lborder_;
 	}
-	int get_rborder() const {
+	[[nodiscard]] int get_rborder() const {
 		return rborder_;
 	}
-	int get_tborder() const {
+	[[nodiscard]] int get_tborder() const {
 		return tborder_;
 	}
-	int get_bborder() const {
+	[[nodiscard]] int get_bborder() const {
 		return bborder_;
 	}
 
-	int get_inner_w() const;
-	int get_inner_h() const;
+	[[nodiscard]] int get_inner_w() const;
+	[[nodiscard]] int get_inner_h() const;
 
-	const Panel* get_next_sibling() const {
+	[[nodiscard]] const Panel* get_next_sibling() const {
 		return next_;
 	}
-	Panel* get_next_sibling() {
+	[[nodiscard]] Panel* get_next_sibling() {
 		return next_;
 	}
-	const Panel* get_prev_sibling() const {
+	[[nodiscard]] const Panel* get_prev_sibling() const {
 		return prev_;
 	}
-	Panel* get_prev_sibling() {
+	[[nodiscard]] Panel* get_prev_sibling() {
 		return prev_;
 	}
-	const Panel* get_first_child() const {
+	[[nodiscard]] const Panel* get_first_child() const {
 		return first_child_;
 	}
-	Panel* get_first_child() {
+	[[nodiscard]] Panel* get_first_child() {
 		return first_child_;
 	}
-	const Panel* get_last_child() const {
+	[[nodiscard]] const Panel* get_last_child() const {
 		return last_child_;
 	}
-	Panel* get_last_child() {
+	[[nodiscard]] Panel* get_last_child() {
 		return last_child_;
 	}
+	Panel* find_child_by_name(const std::string& name, bool recurse);
 
 	void move_to_top(bool on_top_of_equal_z = true);
 	[[nodiscard]] virtual ZOrder get_z() const {
@@ -272,7 +280,7 @@ public:
 	}
 
 	// Drawing, visibility
-	bool is_visible() const {
+	[[nodiscard]] bool is_visible() const {
 		return get_flag(pf_visible);
 	}
 	void set_visible(bool on);
@@ -294,7 +302,7 @@ public:
 		set_flag(pf_hide_all_overlays, on);
 	}
 
-	Vector2i get_mouse_position() const;
+	[[nodiscard]] Vector2i get_mouse_position() const;
 	void set_mouse_pos(Vector2i);
 	void center_mouse();
 
@@ -317,7 +325,7 @@ public:
 	/// item #1916453). That is "a huge oversight" in SDL 1.2 and a fix is
 	/// promised in SDL 1.3:
 	/// http://lists.libsdl.org/pipermail/sdl-libsdl.org/2008-March/064560.html
-	bool get_key_state(SDL_Scancode) const;
+	[[nodiscard]] bool get_key_state(SDL_Scancode) const;
 
 	void set_handle_mouse(bool yes) {
 		set_flag(pf_handle_mouse, yes);
@@ -325,41 +333,41 @@ public:
 	void grab_mouse(bool grab);
 
 	void set_can_focus(bool yes);
-	bool get_can_focus() const {
+	[[nodiscard]] bool get_can_focus() const {
 		return get_flag(pf_can_focus);
 	}
-	bool has_focus() const {
+	[[nodiscard]] bool has_focus() const {
 		return (get_can_focus() && parent_->focus_ == this);
 	}
-	bool has_top_level_focus();
+	[[nodiscard]] bool has_top_level_focus();
 	virtual void focus(bool topcaller = true);
-	Panel* focused_child() const {
+	[[nodiscard]] Panel* focused_child() const {
 		return focus_;
 	}
 
 	void set_top_on_click(bool const on) {
 		set_flag(pf_top_on_click, on);
 	}
-	bool get_top_on_click() const {
+	[[nodiscard]] bool get_top_on_click() const {
 		return get_flag(pf_top_on_click);
 	}
 
 	static void set_allow_user_input(bool const t) {
 		allow_user_input_ = t;
 	}
-	static bool allow_user_input() {
+	[[nodiscard]] static bool allow_user_input() {
 		return allow_user_input_;
 	}
 
 	static void set_allow_fastclick(bool const t) {
 		allow_fastclick_ = t;
 	}
-	static bool allow_fastclick() {
+	[[nodiscard]] static bool allow_fastclick() {
 		return allow_fastclick_;
 	}
 
 	void set_tooltip(const std::string&);
-	const std::string& tooltip() const {
+	[[nodiscard]] const std::string& tooltip() const {
 		return tooltip_;
 	}
 
@@ -389,7 +397,7 @@ public:
 
 	void find_all_children_at(int16_t x, int16_t y, std::vector<Panel*>& result) const;
 
-	Panel& get_topmost_forefather();
+	[[nodiscard]] Panel& get_topmost_forefather();
 
 	struct ModalGuard {
 		explicit ModalGuard(Panel& p);
@@ -425,8 +433,19 @@ public:
 		kQuicknav,
 		kFleetOptions,
 	};
+	/*
+	 * Actual save type after initialization.
+	 * Overridden in derived classes
+	 */
 	virtual SaveType save_type() const {
 		return SaveType::kNone;
+	}
+	/*
+	 * Saving partially initialized windows can trigger
+	 * race conditions. Wait until initialization_complete().
+	 */
+	SaveType current_save_type() const {
+		return initialized_ ? save_type() : SaveType::kNone;
 	}
 	virtual void save(FileWrite&, Widelands::MapObjectSaver&) const {
 		NEVER_HERE();
@@ -457,13 +476,15 @@ protected:
 		set_flag(pf_thinks, yes);
 	}
 
-	bool keyboard_free() {
+	[[nodiscard]] bool keyboard_free() const {
 		return (focus_) == nullptr;
 	}
 
 	virtual void update_desired_size();
 
 	static void play_click();
+
+	virtual void handle_hyperlink(const std::string& action);
 
 	static bool
 	draw_tooltip(const std::string& text, PanelStyle, Vector2i pos = Vector2i::invalid());
@@ -474,13 +495,14 @@ protected:
 	virtual void update_template() {
 	}
 
-	virtual Panel* get_open_dropdown();
+	[[nodiscard]] virtual Panel* get_open_dropdown();
 
-	virtual bool is_focus_toplevel() const;
+	[[nodiscard]] virtual bool is_focus_toplevel() const;
 
-	virtual std::vector<Recti> focus_overlay_rects();
+	[[nodiscard]] virtual std::vector<Recti> focus_overlay_rects();
 	// Convenience functions for overriding focus_overlay_rects()
-	std::vector<Recti> focus_overlay_rects(int off_x, int off_y, int strength_diff) const;
+	[[nodiscard]] std::vector<Recti>
+	focus_overlay_rects(int off_x, int off_y, int strength_diff) const;
 
 	// Wait until the current logic frame has ended
 	void wait_for_current_logic_frame();
@@ -506,20 +528,24 @@ public:
 		return get_flag(pf_handle_mouse);
 	}
 
+	[[nodiscard]] static uint32_t time_of_last_user_activity() {
+		return time_of_last_user_activity_;
+	}
+
 private:
 	bool initialized_{false};
 
-	bool handles_keypresses() const {
+	[[nodiscard]] bool handles_keypresses() const {
 		if (get_parent() != nullptr && !get_parent()->handles_keypresses()) {
 			return false;
 		}
 		return get_flag(pf_handle_keypresses);
 	}
 
-	bool handles_textinput() const {
+	[[nodiscard]] bool handles_textinput() const {
 		return get_flag(pf_handle_textinput);
 	}
-	bool thinks() const {
+	[[nodiscard]] bool thinks() const {
 		return get_flag(pf_thinks);
 	}
 
@@ -553,6 +579,8 @@ private:
 	static bool ui_mousewheel(int32_t x, int32_t y, uint16_t modstate);
 	static bool ui_key(bool down, SDL_Keysym code);
 	static bool ui_textinput(const std::string& text);
+	static void register_user_activity();
+	static uint32_t time_of_last_user_activity_;
 
 	Panel* parent_;
 	Panel* next_;
@@ -563,6 +591,7 @@ private:
 	Panel* focus_{nullptr};          //  keyboard focus
 
 	std::atomic<uint32_t> flags_;
+	std::string name_;
 
 	/**
 	 * The outer rectangle is defined by (x_, y_, w_, h_)
@@ -600,6 +629,8 @@ private:
 
 	static FxId click_fx_;
 
+	std::unique_ptr<Notifications::Subscriber<NoteHyperlink>> hyperlink_subscriber_;
+
 	enum class LogicThreadState { kFree, kLocked, kEndingRequested, kEndingConfirmed };
 	std::atomic<LogicThreadState> logic_thread_locked_;
 	static std::atomic_bool logic_thread_running_;
@@ -612,35 +643,6 @@ private:
 	std::unique_ptr<MutexLock> current_think_mutex_;
 
 	DISALLOW_COPY_AND_ASSIGN(Panel);
-};
-
-inline void Panel::set_dock_windows_to_edges(const bool on) {
-	set_flag(pf_dock_windows_to_edges, on);
-}
-
-/**
- * A Panel with a name. Important for scripting
- */
-struct NamedPanel : public Panel {
-	NamedPanel(Panel* nparent,
-	           UI::PanelStyle s,
-	           const std::string& name,
-	           int32_t nx,
-	           int32_t ny,
-	           int nw,
-	           int nh,
-	           const std::string& tooltip_text = std::string());
-
-	const std::string& get_name() const {
-		return name_;
-	}
-
-protected:
-	virtual void handle_hyperlink(const std::string& action);
-
-private:
-	std::string name_;
-	std::unique_ptr<Notifications::Subscriber<NoteHyperlink>> hyperlink_subscriber_;
 };
 }  // namespace UI
 

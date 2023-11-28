@@ -98,6 +98,9 @@ void fill_parameter_vector() {
 		_("Constantly adjust the game speed automatically depending on AI delay. "
 		  "Only to be used for AI testing or training (in conjunction with --ai_training)."),
 		true},
+	  /* This is deliberately so long to discourage overusage */
+	  {"", "enable_development_testing_tools", "", _("Enable the Script Console and Cheating Mode."),
+		true},
 	  /// Saving options
 	  {_("Game options:"), _("Note: New values will be written to the config file."), "--", "",
 		false},
@@ -109,12 +112,27 @@ void fill_parameter_vector() {
 	  {"", "rolling_autosave", _("n"),
 		/** TRANSLATORS: `n` references a numerical placeholder */
 		_("Use `n` files for rolling autosaves."), true},
+	  /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
+	  /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain. */
+	  /** TRANSLATORS: * marks the default value */
+	  {"", "skip_autosave_on_inactivity", _("[true*|false]"),
+		_("Do not create an autosave when the user has been inactive since the last autosave."),
+		true},
 	  {"", "nozip", "", _("Do not save files as binary zip archives."), false},
+	  // The below comment is duplicated from above for the other case, when false is the default.
+	  /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
+	  /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain. */
+	  /** TRANSLATORS: * marks the default value */
+	  {"", "save_chat_history", _("[true|false*]"),
+		_("Whether to save the history of sent chat messages to a file."), true},
 	  {"", "display_replay_filenames", _("[true*|false]"), _("Show filenames in the replay screen."),
 		true},
 	  {"", "editor_player_menu_warn_too_many_players", _("[true*|false]"),
 		_("Whether a warning should be shown in the editor if there are too many players."), true},
 	  /// Game options
+	  {"", "pause_game_on_inactivity", _("n"),
+		/** TRANSLATORS: `n` references a numerical placeholder */
+		_("Pause the game after `n` minutes of user inactivity."), true},
 	  {"", "auto_roadbuild_mode", _("[true*|false]"),
 		_("Start building a road after placing a flag."), true},
 	  {"", "display_flags",
@@ -129,11 +147,8 @@ void fill_parameter_vector() {
 	 true
 	},
 #endif
-	  {"", "edge_scrolling",
-		/** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
-		/** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain. */
-		/** TRANSLATORS: * marks the default value */
-		_("[true|false*]"), _("Scroll when the mouse cursor is near the screen edge."), true},
+	  {"", "edge_scrolling", _("[true|false*]"),
+		_("Scroll when the mouse cursor is near the screen edge."), true},
 	  {"", "invert_movement", _("[true|false*]"), _("Invert click-and-drag map movement direction."),
 		true},
 	  {"", "numpad_diagonalscrolling", _("[true|false*]"),
@@ -144,17 +159,8 @@ void fill_parameter_vector() {
 		_("Show in-game chat with transparent background."), true},
 	  {"", "toolbar_pos", _("[...]"), _("Bitmask to set the toolbar location and mode."), true},
 	  /// Networking
-	  {_("Networking:"), "write_syncstreams",
-		/** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
-		/** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain. */
-		/** TRANSLATORS: * marks the default value */
-		_("[true*|false]"),
-		/** TRANSLATORS: A syncstream is a synchronization stream. Syncstreams are used in multiplayer
-		 */
-		/** TRANSLATORS: games to make sure that there is no mismatch between the players. */
-		_("Create syncstream dump files to help debug network games."), false},
-	  {"", "metaserver", _("URI"), _("Connect to a different metaserver for internet gaming."),
-		false},
+	  {_("Networking:"), "metaserver", _("URI"),
+		_("Connect to a different metaserver for internet gaming."), false},
 	  {"", "metaserverport", _("n"),
 		/** TRANSLATORS: `n` references a numerical placeholder */
 		_("Port number `n` of the metaserver for internet gaming."), false},
@@ -169,6 +175,11 @@ void fill_parameter_vector() {
 		_("Connect to a different server address from the add-ons manager."), false},
 	  {"", "addon_server_port", _("n"),
 		_("Connect to a different server port from the add-ons manager."), false},
+	  {"", "write_syncstreams", "",
+		/** TRANSLATORS: A syncstream is a synchronization stream. Syncstreams are used in multiplayer
+		 */
+		/** TRANSLATORS: games to make sure that there is no mismatch between the players. */
+		_("Create syncstream dump files to help debug network games."), true},
 
 	  /// Interface options
 	  {_("Graphic options:"), "fullscreen", _("[true|false*]"),
@@ -185,14 +196,10 @@ void fill_parameter_vector() {
 		_("y"),
 		/** TRANSLATORS: `y` references a window height placeholder */
 		_("Height `y` of the window in pixel."), false},
-	  {"", "inputgrab", _("[true|false*]"), _("Whether to grab the mouse input."), true},
 	  {"", "sdl_cursor", _("[true*|false]"), _("Whether to use the mouse cursor provided by SDL."),
 		true},
 	  {"", "tooltip_accessibility_mode", _("[true|false*]"), _("Whether to use sticky tooltips."),
 		true},
-	  {"", "maxfps", _("n"),
-		/** TRANSLATORS: `n` references a numerical placeholder */
-		_("Maximal optical framerate `n` of the game."), true},
 	  {"", "theme", _("DIRNAME"),
 		_("The path to the active UI theme, relative to the Widelands home directory."), false},
 	  /// Window options

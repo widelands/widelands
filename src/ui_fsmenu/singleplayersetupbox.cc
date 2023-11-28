@@ -35,7 +35,12 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
                                                              int32_t const h,
                                                              PlayerSlot id,
                                                              GameSettingsProvider* const settings)
-   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+   : UI::Box(parent,
+             UI::PanelStyle::kFsMenu,
+             format("single_player_active_player_group_box_%d", id),
+             0,
+             0,
+             UI::Box::Horizontal),
      id_(id),
      settings_(settings),
      number_(this,
@@ -88,10 +93,12 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
 	update();
 }
 void SinglePlayerActivePlayerGroup::force_new_dimensions(uint32_t standard_element_height) {
+	number_.set_desired_size(standard_element_height, standard_element_height);
 	player_.set_desired_size(standard_element_height, standard_element_height);
 	player_type_.set_desired_size(standard_element_height, standard_element_height);
 	tribe_.set_desired_size(standard_element_height, standard_element_height);
-	start_type.set_desired_size(8 * standard_element_height, standard_element_height);
+	// Set to 0 to allow proper dynamic box layout (kExpandBoth)
+	start_type.set_desired_size(0, standard_element_height);
 	teams_.set_desired_size(standard_element_height, standard_element_height);
 }
 
@@ -147,13 +154,15 @@ SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,
                                            LaunchGame& lg,
                                            GameSettingsProvider* const settings,
                                            uint32_t standard_element_height)
-   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+   : UI::Box(parent, UI::PanelStyle::kFsMenu, "single_player_setup_box", 0, 0, UI::Box::Vertical),
      launch_game_(lg),
      settings_(settings),
      standard_height_(standard_element_height),
-     scrollable_playerbox_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     scrollable_playerbox_(
+        this, UI::PanelStyle::kFsMenu, "scrollable_player_box", 0, 0, UI::Box::Vertical),
      title_(this,
             UI::PanelStyle::kFsMenu,
+            "title",
             UI::FontStyle::kFsGameSetupHeadings,
             0,
             0,
@@ -200,6 +209,7 @@ void SinglePlayerSetupBox::force_new_dimensions(uint32_t standard_element_height
 		active_player_group->force_new_dimensions(standard_element_height);
 	}
 	scrollable_playerbox_.set_max_size(get_inner_w(), max_size - 2 * title_.get_h());
+	scrollable_playerbox_.set_desired_size(0, 0);
 }
 void SinglePlayerSetupBox::reset() {
 	for (auto& p : active_player_groups_) {

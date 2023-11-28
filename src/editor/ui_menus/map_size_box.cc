@@ -27,7 +27,7 @@ MapSizeBox::MapSizeBox(UI::Box& parent,
                        int spacing,
                        int map_width,
                        int map_height)
-   : UI::Box(&parent, s, 0, 0, UI::Box::Horizontal, 0, 0, spacing),
+   : UI::Box(&parent, s, name + "_map_size_box", 0, 0, UI::Box::Horizontal, 0, 0, spacing),
      width_(this,
             name + "_map_width",
             0,

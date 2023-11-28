@@ -102,7 +102,20 @@ wl.Descriptions():new_tribe {
                   -- TRANSLATORS: Helptext for an Amazon ware: Granite, part 1
                   pgettext("ware", "Granite is a basic building material."),
                   -- TRANSLATORS: Helptext for an Amazon ware: Granite, part 2
-                  pgettext("amazons_ware", "The Amazons use granite for making tools and weapons as well. It is produced by the stonecutters and in stone mines."),
+                  pgettext("amazons_ware", "The Amazons use granite for making some tools as well. It is produced by the stonecutters and in stone mines."),
+               }
+            }
+         },
+         {
+            name = "quartz",
+            default_target_quantity = 25,
+            preciousness = 15,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an Amazon ware: Quartz, part 1
+                  pgettext("ware", "Amazons use quartz for sharp tools and weapons."),
+                  -- TRANSLATORS: Helptext for an Amazon ware: Quartz, part 2
+                  pgettext("amazons_ware", "It is also a building material for some advanced buildings. It is produced in stone mines."),
                }
             }
          },
@@ -301,7 +314,7 @@ wl.Descriptions():new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an Amazon ware: Pick
-                  pgettext("amazons_ware", "Picks are used by stonecutters to cut granite from rocks or in mines.")
+                  pgettext("amazons_ware", "Picks are used by stonecutters to cut granite from rocks or mine granite and quartz in stone mines.")
                }
             }
          },
@@ -356,19 +369,6 @@ wl.Descriptions():new_tribe {
             }
          },
          {
-            name = "spear_wooden",
-            default_target_quantity = 30,
-            preciousness = 3,
-            helptexts = {
-               purpose = {
-                  -- TRANSLATORS: Helptext for an Amazon ware: Wooden Spear, part 1
-                  pgettext("amazons_ware", "This spear is the basic weapon in the Amazon military system. It is produced by the stone carver. In combination with a tunic, it is the equipment to fit out young soldiers."),
-                  -- TRANSLATORS: Helptext for an Amazon ware: Wooden Spear, part 2
-                  pgettext("amazons_ware", "It is used by the Amazon hunter-gatherers as well.")
-               }
-            }
-         },
-         {
             name = "chisel",
             default_target_quantity = 2,
             preciousness = 1,
@@ -414,6 +414,30 @@ wl.Descriptions():new_tribe {
                }
             }
          },
+         {
+            name = "firestones",
+            default_target_quantity = 2,
+            preciousness = 1,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an Amazon ware: Firestones
+                  pgettext("amazons_ware", "Firestones are used to light the fires of charcoal kilns and furnaces.")
+               }
+            }
+         },
+         {
+            name = "spear_wooden",
+            default_target_quantity = 30,
+            preciousness = 3,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an Amazon ware: Wooden Spear, part 1
+                  pgettext("amazons_ware", "This spear is the basic weapon in the Amazon military system. It is produced by the stone carver. In combination with a tunic, it is the equipment to fit out young soldiers."),
+                  -- TRANSLATORS: Helptext for an Amazon ware: Wooden Spear, part 2
+                  pgettext("amazons_ware", "It is used by the Amazon hunter-gatherers as well.")
+               }
+            }
+         },
       },
       {
          -- Military
@@ -436,39 +460,6 @@ wl.Descriptions():new_tribe {
                purpose = {
                   -- TRANSLATORS: Helptext for an Amazon ware: Hardened Spear
                   pgettext("amazons_ware", "This is a hardened spear with a stone tip. It is produced in a stone workshop and used in a warriors’ gathering – together with food – to train soldiers from attack level 1 to level 2.")
-               }
-            }
-         },
-         {
-            name = "armor_wooden",
-            default_target_quantity = 1,
-            preciousness = 0,
-            helptexts = {
-               purpose = {
-                  -- TRANSLATORS: Helptext for an Amazon ware: Wooden Armor
-                  pgettext("amazons_ware", "This light wooden armor is a basic piece of armor for the Amazons’ soldiers. It is produced by a dressmaker and used in a training glade – together with food – to train soldiers from health level 0 to level 1.")
-               }
-            }
-         },
-         {
-            name = "helmet_wooden",
-            default_target_quantity = 2,
-            preciousness = 3,
-            helptexts = {
-               purpose = {
-                  -- TRANSLATORS: Helptext for an Amazon ware: Wodden Helmet
-                  pgettext ("amazons_ware", "A wooden helmet is a basic piece of equipment for protecting soldiers. It is produced by the dressmaker and used to train soldiers from health level 1 to level 2."),
-               }
-            }
-         },
-         {
-            name = "warriors_coat",
-            default_target_quantity = 1,
-            preciousness = 3,
-            helptexts = {
-               purpose = {
-                  -- TRANSLATORS: Helptext for an Amazon ware: Warrior's Coat
-                  pgettext("amazons_ware", "Ordinary tunics can be decorated and reinforced with gold and wood chunks. Such tunics are the best armor.")
                }
             }
          },
@@ -506,6 +497,39 @@ wl.Descriptions():new_tribe {
             }
          },
          {
+            name = "armor_wooden",
+            default_target_quantity = 1,
+            preciousness = 0,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an Amazon ware: Wooden Armor
+                  pgettext("amazons_ware", "This light wooden armor is a basic piece of armor for the Amazons’ soldiers. It is produced by a dressmaker and used in a training glade – together with food – to train soldiers from health level 0 to level 1.")
+               }
+            }
+         },
+         {
+            name = "helmet_wooden",
+            default_target_quantity = 2,
+            preciousness = 3,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an Amazon ware: Wodden Helmet
+                  pgettext ("amazons_ware", "A wooden helmet is a basic piece of equipment for protecting soldiers. It is produced by the dressmaker and used to train soldiers from health level 1 to level 2."),
+               }
+            }
+         },
+         {
+            name = "warriors_coat",
+            default_target_quantity = 1,
+            preciousness = 3,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an Amazon ware: Warrior's Coat
+                  pgettext("amazons_ware", "Ordinary tunics can be decorated and reinforced with gold and wood chunks. Such tunics are the best armor.")
+               }
+            }
+         },
+         {
             name = "boots_sturdy",
             default_target_quantity = 1,
             preciousness = 5,
@@ -527,7 +551,7 @@ wl.Descriptions():new_tribe {
                }
             }
          },
-                  {
+         {
             name = "boots_hero",
             default_target_quantity = 1,
             preciousness = 5,
@@ -584,7 +608,7 @@ wl.Descriptions():new_tribe {
             name = "amazons_stonecutter",
             helptexts = {
                -- TRANSLATORS: Helptext for an Amazon worker: Stonecutter
-               purpose = pgettext("amazons_worker", "Cuts blocks of granite out of rocks in the vicinity.")
+               purpose = pgettext("amazons_worker", "Cuts blocks of granite out of rocks in the vicinity or mines granite and quartz in stone mines.")
             }
          },
          {
@@ -1197,7 +1221,7 @@ wl.Descriptions():new_tribe {
                -- TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 1
                _("Granite is a basic building material and can be dug up by a stone mine."),
                -- TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 2
-               _("There is only a little bit of granite here."),
+               _("There is only a little bit of quartz here."),
             }
          }
       },
@@ -1219,7 +1243,7 @@ wl.Descriptions():new_tribe {
                -- TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 1
                _("Granite is a basic building material and can be dug up by a stone mine."),
                -- TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 2
-               _("There is a lot of granite here.")
+               _("There is a lot of quartz here.")
             }
          }
       },
@@ -1269,7 +1293,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Stonecutter's Hut
             purpose = pgettext("amazons_building", "Cuts raw pieces of granite out of rocks in the vicinity."),
             -- TRANSLATORS: Note helptext for an Amazon production site: Stonecutter's Hut
-            note = pgettext("amazons_building", "The stonecutter’s hut needs rocks to cut within the work area.")
+            note = pgettext("amazons_building", "The stonecutter’s hut needs rocks to cut within the work area."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Stonecutter's Hut, part 1
+               pgettext("amazons_building", "This building can produce one granite between %1$s and %2$s, depending on how far the stonecutter has to walk."):bformat(format_seconds(52), format_minutes_seconds(1, 17)),
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Stonecutter's Hut, part 2
+               pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1278,7 +1308,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Woodcutter's Hut
             purpose = pgettext("amazons_building", "Fells trees in the surrounding area and processes them into logs."),
             -- TRANSLATORS: Note helptext for an Amazon production site: Woodcutter's Hut
-            note = pgettext("amazons_building", "The woodcutter’s hut needs trees to fell within the work area.")
+            note = pgettext("amazons_building", "The woodcutter’s hut needs trees to fell within the work area."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Woodcutter's Hut, part 1
+               pgettext("amazons_building", "This building can produce one log between %1$s and %2$s (with master woodcutter between %3$s and %4$s), depending on how far the woodcutter has to walk."):bformat(format_seconds(49), format_minutes_seconds(1, 29), format_seconds(44), format_minutes_seconds(1, 24)),
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Woodcutter's Hut, part 2
+               pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1287,7 +1323,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Jungle Preserver's Hut
             purpose = pgettext("amazons_building", "Plants trees in the surrounding area."),
             -- TRANSLATORS: Note helptext for an Amazon production site: Jungle Preserver's Hut
-            note = pgettext("amazons_building", "The jungle preserver’s hut needs free space within the work area to plant the trees.")
+            note = pgettext("amazons_building", "The jungle preserver’s hut needs free space within the work area to plant the trees."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Jungle Preserver's Hut, part 1
+               pgettext("amazons_building", "The jungle preserver or jungle master plants one tree between %1$s and %2$s, depending on how far she has to walk."):bformat(format_seconds(20), format_seconds(45)),
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Jungle Preserver's Hut, part 2
+               pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1301,9 +1343,12 @@ wl.Descriptions():new_tribe {
                -- TRANSLATORS: Note helptext for an Amazon production site: Hunter-Gatherer's Hut
                pgettext("amazons_building", "Roads and trees along the shoreline block fishing."),
             },
-            -- TRANSLATORS: Performance helptext for an Amazon production site: Hunter-Gatherer's Hut
-            performance = pgettext("amazons_building", "The hunter-gatherer pauses %s before going to work again."):bformat(format_seconds(34))
-
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Hunter-Gatherer's Hut, part 1
+               pgettext("amazons_building", "This building can produce one meat or one fish between %1$s and %2$s, depending on how far the hunter-gatherer has to walk. If both kinds of food are available, then one of each kind is produced between %3$s and %4$s."):bformat(format_seconds(42), format_minutes_seconds(1, 36), format_minutes_seconds(1, 24), format_minutes_seconds(3, 12)),
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Hunter-Gatherer's Hut, part 2
+               pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1331,6 +1376,12 @@ wl.Descriptions():new_tribe {
                pgettext("amazons_building", "The water gatherer’s hut needs open water within the work area. Your workers cannot dig up water from the ground!"),
                -- TRANSLATORS: Note helptext for an Amazon production site: Water Gatherer's Hut, part 2
                pgettext("amazons_building", "Roads and trees along the shoreline block drawing water."),
+            },
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Water Gatherer's Hut, part 1
+               pgettext("amazons_building", "This building can produce one bucket of water between %1$s and %2$s on average, depending on how far the carrier has to walk."):bformat(format_seconds(16), format_seconds(32)),
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Water Gatherer's Hut, part 2
+               pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
          }
       },
@@ -1338,7 +1389,13 @@ wl.Descriptions():new_tribe {
          name = "amazons_rare_tree_cutters_hut",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Rare Tree Cutter's Hut
-            purpose = pgettext("amazons_building", "Harvests rare trees in the surrounding area. Delivers ironwood, balsa and rubber.")
+            purpose = pgettext("amazons_building", "Harvests rare trees in the surrounding area. Delivers ironwood, balsa and rubber."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Rare Tree Cutter's Hut, part 1
+               pgettext("amazons_building", "This building can produce one rare wood between %1$s and %2$s, depending on how far the woodcutter has to walk. If all kinds of rare tree are available within her work area, then one of each kind is produced between %3$s and %4$s."):bformat(format_seconds(47), format_minutes_seconds(1, 27), format_minutes_seconds(2, 22), format_minutes_seconds(4, 20)),
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Rare Tree Cutter's Hut, part 2
+               pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1356,8 +1413,12 @@ wl.Descriptions():new_tribe {
             no_scouting_building_connected = pgettext("amazons_building", "You need to connect this flag to a scout’s hut before you can send a scout here."),
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Scout's Hut
             purpose = pgettext("amazons_building", "Explores unknown territory."),
-            -- TRANSLATORS: Performance helptext for an Amazon production site: Scout's Hut
-            performance = pgettext("amazons_building", "The scout pauses %s before going to work again."):bformat(format_seconds(30))
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Scout's Hut, part 1
+               pgettext("amazons_building", "One exploration trip of the scout takes between %1$s and %2$s."):bformat(format_minutes_seconds(1, 52), format_minutes_seconds(4, 5)),
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Scout's Hut, part 2
+               pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
 
@@ -1399,7 +1460,9 @@ wl.Descriptions():new_tribe {
          name = "amazons_stone_workshop",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Stone Workshop
-            purpose = pgettext("amazons_building", "Makes tools and spears for our soldiers.")
+            purpose = pgettext("amazons_building", "Makes tools and spears for our soldiers."),
+            -- TRANSLATORS: Performance helptext for an Amazon production site: Stone Workshop
+            performance = pgettext("amazons_building", "If this building is fully supplied and all tools and spears are needed by the economy, production of one of each tool takes %1$s and one of each spear takes %2$s on average. If only one kind of tool or spear is needed by the economy, its production takes %3$s on average."):bformat(format_minutes_seconds(21, 51), format_minutes_seconds(7, 17), format_minutes_seconds(1, 9))
          }
       },
       {
@@ -1410,7 +1473,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Amazon production site: Dressmakery
             lore_author = pgettext("amazons_building", "Dressmakers’ ethos, adapted from the traditional verse ‘Mother Jungle’s wisdom: Song of the Conscientious.’"),
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Dressmakery
-            purpose = pgettext("amazons_building", "Sews all dresses, boots and armor for our soldiers.")
+            purpose = pgettext("amazons_building", "Sews all dresses, boots and armor for our soldiers."),
+            -- TRANSLATORS: Performance helptext for an Amazon production site: Dressmakery
+            performance = pgettext("amazons_building", "If this building is fully supplied and all dresses, boots and armors are needed by the economy, production of one of each of them takes %1$s on average. If only one kind of them is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(10, 39), format_minutes_seconds(1, 11))
          }
       },
       {
@@ -1500,16 +1565,18 @@ wl.Descriptions():new_tribe {
          name = "amazons_stonemine",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Stone Mine
-            purpose = pgettext("amazons_building", "Digs granite out of the ground in mountain terrain."),
+            purpose = pgettext("amazons_building", "Digs granite and quartz out of the ground in mountain terrain."),
             -- TRANSLATORS: Performance helptext for an Amazon production site: Stone Mine
-            performance = pgettext("amazons_building", "The stone mine can produce one slab of granite in %s on average if the supply with rations is steady and the mine is not worn out."):bformat(format_seconds(32))
+            performance = pgettext("amazons_building", "The stone mine can produce one slab of each kind of stone in %s on average if the supply with rations is steady and the mine is not worn out."):bformat(format_minutes_seconds(1, 14))
          }
       },
       {
          name = "amazons_gold_digger_dwelling",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Gold Digger Dwelling
-            purpose = pgettext("amazons_building", "Washes gold dust out of the ground in mountain terrain.")
+            purpose = pgettext("amazons_building", "Washes gold dust out of the ground in mountain terrain."),
+            -- TRANSLATORS: Performance helptext for an Amazon production site: Gold Digger Dwelling
+            performance = pgettext("amazons_building", "If the supply is steady, this mine can produce gold dust in %s on average."):bformat(format_minutes_seconds(1, 9))
          }
       },
 

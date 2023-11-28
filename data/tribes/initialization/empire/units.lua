@@ -19,12 +19,12 @@ wl.Descriptions():new_tribe {
    animation_directory = image_dirname,
    animations = {
       pinned_note = { hotspot = {18, 67} },
-      bridge_normal_e = { hotspot = {-2, 12} },
-      bridge_busy_e = { hotspot = {-2, 12} },
-      bridge_normal_se = { hotspot = {5, 2} },
-      bridge_busy_se = { hotspot = {5, 2} },
-      bridge_normal_sw = { hotspot = {36, 3} },
-      bridge_busy_sw = { hotspot = {36, 3} }
+      bridge_normal_e = { hotspot = {0, 17} },
+      bridge_busy_e = { hotspot = {0, 17} },
+      bridge_normal_se = { hotspot = {8, 8} },
+      bridge_busy_se = { hotspot = {8, 8} },
+      bridge_normal_sw = { hotspot = {40, 8} },
+      bridge_busy_sw = { hotspot = {40, 8} }
    },
    spritesheets = {
       frontier = {
@@ -1246,8 +1246,18 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("empire_building", "An enthusiastic stonemason arriving to a new quarry"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Quarry
             purpose = pgettext("empire_building", "Cuts blocks of granite and marble out of rocks in the vicinity."),
-            -- TRANSLATORS: Note helptext for an Empire production site: Quarry
-            note = pgettext("empire_building", "The quarry needs rocks to cut within the work area.")
+            note = {
+               -- TRANSLATORS: Note helptext for an Empire production site: Quarry, part 1
+               pgettext("empire_building", "The quarry needs rocks to cut within the work area."),
+               -- TRANSLATORS: Note helptext for an Empire production site: Quarry, part 2
+               pgettext("empire_building", "The stonemason finds 5 blocks of granite and 2 blocks of marble out of 7 rocks.")
+            },
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire production site: Quarry, part 1
+               pgettext("empire_building", "This building can produce one granite between %1$s and %2$s and one marble between %3$s and %4$s, depending on how far the stonemason has to walk."):bformat(format_seconds(59), format_minutes_seconds(1, 34), format_minutes_seconds(2, 28), format_minutes_seconds(3, 56)),
+               -- TRANSLATORS: Performance helptext for an Empire production site: Quarry, part 2
+               pgettext("empire_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1268,7 +1278,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Empire production site: Lumberjack's House
             purpose = pgettext("building", "Fells trees in the surrounding area and processes them into logs."),
             -- TRANSLATORS: Note helptext for an Empire production site: Lumberjack's House
-            note = pgettext("empire_building", "The lumberjack’s house needs trees to fell within the work area.")
+            note = pgettext("empire_building", "The lumberjack’s house needs trees to fell within the work area."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire production site: Lumberjack's House
+               pgettext("empire_building", "This building can produce one log between %1$s and %2$s, depending on how far the lumberjack has to walk."):bformat(format_seconds(49), format_minutes_seconds(1, 29)),
+               -- TRANSLATORS: Performance helptext for an Empire production site: Lumberjack's House
+               pgettext("empire_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1289,7 +1305,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Empire production site: Forester's House
             purpose = pgettext("building", "Plants trees in the surrounding area."),
             -- TRANSLATORS: Note helptext for an Empire production site: Forester's House
-            note = pgettext("empire_building", "The forester’s house needs free space within the work area to plant the trees.")
+            note = pgettext("empire_building", "The forester’s house needs free space within the work area to plant the trees."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire production site: Forester's House, part 1
+               pgettext("empire_building", "The forester plants one tree between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(23), format_seconds(45)),
+               -- TRANSLATORS: Performance helptext for an Empire production site: Forester's House, part 2
+               pgettext("empire_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1314,6 +1336,12 @@ wl.Descriptions():new_tribe {
                pgettext("empire_building", "The fisher’s house needs water full of fish within the work area."),
                -- TRANSLATORS: Note helptext for an Empire production site: Fisher's House, part 2
                pgettext("empire_building", "Roads and trees along the shoreline block fishing."),
+            },
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire production site: Fisher's House, part 1
+               pgettext("empire_building", "This building can produce one fish between %1$s and %2$s, depending on how far the fisher has to walk."):bformat(format_seconds(27), format_seconds(56)),
+               -- TRANSLATORS: Performance helptext for an Empire production site: Fisher's House, part 2
+               pgettext("empire_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
          }
       },
@@ -1335,7 +1363,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Empire production site: Hunter's House
             purpose = pgettext("building", "Hunts animals to produce meat."),
             -- TRANSLATORS: Note helptext for an Empire production site: Hunter's House
-            note = pgettext("empire_building", "The hunter’s house needs animals to hunt within the work area.")
+            note = pgettext("empire_building", "The hunter’s house needs animals to hunt within the work area."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire production site: Hunter's House, part 1
+               pgettext("empire_building", "This building can produce one meat between %1$s and %2$s, depending on how far the hunter has to walk."):bformat(format_seconds(43), format_minutes_seconds(1, 34)),
+               -- TRANSLATORS: Performance helptext for an Empire production site: Hunter's House, part 2
+               pgettext("empire_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1354,7 +1388,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Empire production site: Well
             lore_author = pgettext("empire_building", "Imperial proverb"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Well
-            purpose = pgettext("building", "Draws water out of the deep.")
+            purpose = pgettext("building", "Draws water out of the deep."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire production site: Well, part 1
+               pgettext("empire_building", "The carrier needs %s to get one bucket full of water."):bformat(format_seconds(44)),
+               -- TRANSLATORS: Performance helptext for an Empire production site: Well, part 2
+               pgettext("empire_building", "If the water resource is depleted, the carrier needs %s on average."):bformat(format_minutes_seconds(1, 11))
+            }
          }
       },
       {
@@ -1374,7 +1414,13 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("empire_building", "A belated scout’s report"),
             no_scouting_building_connected = pgettext("empire_building", "You need to connect this flag to a scout’s house before you can send a scout here."),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Scout's House
-            purpose = pgettext("building", "Explores unknown territory.")
+            purpose = pgettext("building", "Explores unknown territory."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire production site: Scout's House, part 1
+               pgettext("empire_building", "One exploration trip of the scout takes between %1$s and %2$s."):bformat(format_minutes_seconds(1, 52), format_minutes_seconds(4, 5)),
+               -- TRANSLATORS: Performance helptext for an Empire production site: Scout's House, part 2
+               pgettext("empire_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
 
@@ -1539,7 +1585,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Empire production site: Tavern
             purpose = pgettext("building", "Prepares rations to feed the scouts and miners."),
             -- TRANSLATORS: Performance helptext for an Empire production site: Tavern
-            performance = pgettext("empire_building", "The innkeeper needs %1% on average to prepare a ration."):bformat(format_seconds(36))
+            performance = pgettext("empire_building", "The innkeeper needs %1% on average to prepare a ration."):bformat(format_seconds(37))
          }
       },
       {
@@ -1560,7 +1606,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Empire production site: Inn
             purpose = pgettext("empire_building", "Prepares rations for scouts and rations and meals to feed the miners in all mines."),
             -- TRANSLATORS: Performance helptext for an Empire production site: Inn
-            performance = pgettext("empire_building", "The innkeeper needs %1% on average to prepare a ration and a meal. If the economy doesn’t need both, the innkeeper needs %2% on average to prepare one ration or one meal."):bformat(format_minutes_seconds(1, 25), format_seconds(48))
+            performance = pgettext("empire_building", "If this building is fully supplied and all kinds of food are needed by the economy, production of one of each food takes %1$s on average. If only one kind of food is needed by the economy, production of one ration takes %2$s and one meal takes %3$s on average."):bformat(format_minutes_seconds(1, 21), format_seconds(37), format_seconds(44))
          }
       },
       {
@@ -1600,7 +1646,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Empire production site: Smelting Works
             lore_author = pgettext("empire_building", "Amalea after inspecting a smelting works"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Smelting Works
-            purpose = pgettext("building", "Smelts iron ore into iron and gold ore into gold.")
+            purpose = pgettext("building", "Smelts iron ore into iron and gold ore into gold."),
+            -- TRANSLATORS: Performance helptext for an Empire production site: Smelting Works
+            performance = pgettext("empire_building", "If this building is fully supplied and all metals are needed by the economy, production of one iron takes %1$s and one gold takes %2$s on average. If only one kind of metal is needed by the economy, production of one iron takes %3$s and one gold takes %4$s on average."):bformat(format_minutes_seconds(1, 36), format_minutes_seconds(3, 12), format_minutes_seconds(1, 4), format_minutes_seconds(1, 4))
          }
       },
       {
@@ -1619,7 +1667,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Empire production site: Toolsmithy
             lore_author = pgettext("empire_building", "Imperial proverb quoted in a toolsmith's advertising"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Toolsmithy
-            purpose = pgettext("building", "Forges all the tools that your workers need.")
+            purpose = pgettext("building", "Forges all the tools that your workers need."),
+            -- TRANSLATORS: Performance helptext for an Empire production site: Toolsmithy
+            performance = pgettext("empire_building", "If this building is fully supplied and all tools are needed by the economy, production of one of each tool takes %1$s on average. If only one kind of tool is needed by the economy, its production takes %2$s on average."):bformat(format_minutes_seconds(14, 12), format_minutes_seconds(1, 11))
          }
       },
       {
@@ -1642,7 +1692,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Empire production site: Armorsmithy
             lore_author = pgettext("empire_building", "An armorsmith teaching an apprentice"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Armor Smithy
-            purpose = pgettext("empire_building", "Forges armor and helmets that are used for training soldiers’ health in the training camp.")
+            purpose = pgettext("empire_building", "Forges armor and helmets that are used for training soldiers’ health in the training camp."),
+            -- TRANSLATORS: Performance helptext for an Empire production site: Armor Smithy
+            performance = pgettext("empire_building", "If this building is fully supplied and all kinds of armor and helmets are needed by the economy, production of one helmet takes %1$s and one of each kind of armor takes %2$s on average. If only one kind of armor or helmets is needed by the economy, production of one helmet takes %3$s, while one kind of armor takes %4$s on average."):bformat(format_minutes_seconds(3, 13), format_minutes_seconds(6, 25), format_minutes_seconds(1, 11), format_minutes_seconds(1, 21))
          }
       },
       {
@@ -1785,7 +1837,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Empire production site: Weapon Smithy
             lore_author = pgettext("empire_building", "Motto of the Weaponsmiths’ Guild"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Weapon Smithy
-            purpose = pgettext("empire_building", "Forges spears to equip the soldiers and to train their attack in the training camp.")
+            purpose = pgettext("empire_building", "Forges spears to equip the soldiers and to train their attack in the training camp."),
+            -- TRANSLATORS: Performance helptext for an Empire production site: Weapon Smithy
+            performance = pgettext("empire_building", "If this building is fully supplied and all spears are needed by the economy, production of one of each spear takes %1$s on average. If only one kind of spear is needed by the economy, production of one wooden spear takes %2$s, one spear, one advanced spear, one heavy spear or one war spear takes %3$s on average."):bformat(format_minutes_seconds(6, 18), format_seconds(54), format_minutes_seconds(1, 21))
          }
       },
 

@@ -51,9 +51,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
          descname = _("mining gold"),
          actions = {
+            -- time total: 45.4 + 20 + 3.6 = 69 sec
             "return=skipped unless economy needs gold_dust",
             "consume=ration water:5",
-            "sleep=duration:45s",
+            "sleep=duration:45s400ms",
             "animate=working duration:20s",
             "mine=resource_gold radius:1 yield:100% when_empty:5%",
             "produce=gold_dust"

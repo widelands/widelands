@@ -1100,7 +1100,7 @@ void Ship::draw(const EditorGameBase& egbase,
 		   statistics_string, g_style_manager->building_statistics_style().medium_color());
 	}
 
-	do_draw_info(info_to_draw, shipname_, statistics_string,
+	do_draw_info(info_to_draw, richtext_escape(shipname_), statistics_string,
 	             calc_drawpos(egbase, point_on_dst, scale), scale, dst);
 }
 

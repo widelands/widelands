@@ -31,6 +31,9 @@
 #include "io/filesystem/disk_filesystem.h"
 #include "logic/filesystem_constants.h"
 
+bool g_allow_script_console = false;
+bool g_write_syncstreams = false;
+
 static Profile g_options(Profile::err_log);
 
 static std::string config_file;
@@ -391,12 +394,12 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGlobal},
                          keysym(SDLK_SPACE, kDefaultCtrlModifier | KMOD_SHIFT),
                          "debugconsole",
-                         gettext_noop("Open the Debug Console (only in debug builds)"))},
+                         gettext_noop("Open the Debug Console (developer tool)"))},
    {KeyboardShortcut::kCommonCheatMode,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGlobal},
                          keysym(SDLK_BACKSPACE, kDefaultCtrlModifier | KMOD_SHIFT),
                          "cheatmode",
-                         gettext_noop("Toggle Cheat Mode (only in debug builds)"))},
+                         gettext_noop("Toggle Cheat Mode (developer tool)"))},
    {KeyboardShortcut::kCommonSave,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame, KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_s, kDefaultCtrlModifier),
@@ -833,7 +836,7 @@ bool is_real(const KeyboardShortcut id) {
 	return it != shortcuts_.end();
 }
 
-bool is_debug_only(KeyboardShortcut id) {
+bool is_developer_tool(KeyboardShortcut id) {
 	return id == KeyboardShortcut::kCommonDebugConsole || id == KeyboardShortcut::kCommonCheatMode;
 }
 
@@ -982,10 +985,10 @@ std::string get_ingame_shortcut_help() {
 	   get_shortcut_range_help(KeyboardShortcut::kInGame_Begin, KeyboardShortcut::kInGameMain_End);
 	rv += get_shortcut_range_help(
 	   KeyboardShortcut::kCommonGeneral_Begin, KeyboardShortcut::kCommonGeneral_End);
-#ifndef NDEBUG
-	rv += get_shortcut_help_line(KeyboardShortcut::kCommonDebugConsole);
-	rv += get_shortcut_help_line(KeyboardShortcut::kCommonCheatMode);
-#endif
+	if (g_allow_script_console) {
+		rv += get_shortcut_help_line(KeyboardShortcut::kCommonDebugConsole);
+		rv += get_shortcut_help_line(KeyboardShortcut::kCommonCheatMode);
+	}
 
 	/** TRANSLATORS: Section heading in "Controls" help */
 	rv += as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, _("Message Window"));
@@ -1023,9 +1026,9 @@ std::string get_editor_shortcut_help() {
 	   get_shortcut_range_help(KeyboardShortcut::kEditor_Begin, KeyboardShortcut::kEditorMain_End);
 	rv += get_shortcut_range_help(
 	   KeyboardShortcut::kCommonGeneral_Begin, KeyboardShortcut::kCommonGeneral_End);
-#ifndef NDEBUG
-	rv += get_shortcut_help_line(KeyboardShortcut::kCommonDebugConsole);
-#endif
+	if (g_allow_script_console) {
+		rv += get_shortcut_help_line(KeyboardShortcut::kCommonDebugConsole);
+	}
 
 	/** TRANSLATORS: Heading in the editor keyboard shortcuts help */
 	rv += as_paragraph_style(UI::ParagraphStyle::kWuiHeading2, pgettext("editor", "Tools"));
@@ -1198,15 +1201,14 @@ bool set_shortcut(const KeyboardShortcut id, const SDL_Keysym code, KeyboardShor
 	for (auto& pair : shortcuts_) {
 		if (pair.first != id && shared_scope(scopes, pair.second) &&
 		    matches_shortcut(pair.first, code)) {
-#ifdef NDEBUG
-			// Release builds are not supposed to know about debug features, so we silently
-			// clear their shortcuts on conflict
-			if (is_debug_only(pair.first)) {
+			if (!g_allow_script_console && is_developer_tool(pair.first)) {
+				// We don't want to advertise these features, so we silently clear their
+				// shortcuts on conflict when they are not enabled
 				shortcuts_.at(pair.first).current_shortcut = keysym(SDLK_UNKNOWN);
 				write_shortcut(pair.first, keysym(SDLK_UNKNOWN));
 				continue;
 			}
-#endif
+
 			if (conflict != nullptr) {
 				*conflict = pair.first;
 			}

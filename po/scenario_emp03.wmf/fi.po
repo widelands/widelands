@@ -8,14 +8,15 @@
 # Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2021
 # heidi.wenger, 2022
 # Atte Timonen, 2022
+# Oi Suomi On! <oisuomion@protonmail.com>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Atte Timonen, 2022\n"
+"Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2023\n"
 "Language-Team: Finnish (https://app.transifex.com/widelands/teams/35159/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -148,6 +149,8 @@ msgid ""
 "Now build a sheep farm and turn all the wheat into at least 50 bales of "
 "wool. Afterwards use the wool to weave cloth in order to build a ship."
 msgstr ""
+"Nyt rakenna lammastila ja muunna vehnä ainakin 50 paaliksi villaa. Käytä "
+"tämän jälkeen villat kankaan kutomiseen, jotta voit rakentaa aluksen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:118
 msgid "Build 2 ports on distant islands"
@@ -164,6 +167,9 @@ msgid ""
 "Explore the island in the south. Send an expedition from our port to build a"
 " port there. Afterwards, try to find some mining resources."
 msgstr ""
+"Tutki etelässä oleva saari. Lähetä retkikunta omasta satamastamme "
+"rakentamaan sinne sataman. Tämän jälkeen, yritä löytää jonkin verran "
+"kaivosmineraaleja."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid ""

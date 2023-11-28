@@ -81,8 +81,9 @@ private:
 	UI::Button loadlasthost_;
 
 	UI::Button joingame_, hostgame_;
+	bool valid_playername_{false};
 
-	LanGameFinder discovery_;
+	std::unique_ptr<LanGameFinder> discovery_;
 };
 }  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_NETSETUP_LAN_H

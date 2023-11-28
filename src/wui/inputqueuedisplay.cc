@@ -164,7 +164,12 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                                      bool show_only,
                                      bool has_priority,
                                      BuildingWindow::CollapsedState* collapsed)
-   : UI::Box(parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+   : UI::Box(parent,
+             UI::PanelStyle::kWui,
+             format("inputqueuedisplay_%u_%u", static_cast<unsigned>(type), ware_or_worker_index),
+             0,
+             0,
+             UI::Box::Horizontal),
      ibase_(interactive_base),
      can_act_(!show_only && ibase_.can_act(building.owner().player_number())),
      show_only_(show_only),
@@ -175,8 +180,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
      queue_(queue),
      settings_(settings),
      max_fill_indicator_(*g_image_cache->get("images/wui/buildings/max_fill_indicator.png")),
-     vbox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-     hbox_(&vbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+     vbox_(this, UI::PanelStyle::kWui, "vbox", 0, 0, UI::Box::Vertical),
+     hbox_(&vbox_, UI::PanelStyle::kWui, "hbox", 0, 0, UI::Box::Horizontal),
      b_decrease_desired_fill_(&hbox_,
                               "decrease_desired",
                               0,
@@ -238,7 +243,9 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                "",
                kButtonSize,
                can_act_ && has_priority_),
-     spacer_(&hbox_, UI::PanelStyle::kWui, 0, 0, priority_.get_w(), priority_.get_h()),
+     spacer_(&hbox_, UI::PanelStyle::kWui, "spacer", 0, 0, priority_.get_w(), priority_.get_h()),
+     priority_indicator_(
+        &hbox_, UI::PanelStyle::kWui, "priority_indicator", 0, 0, kButtonSize / 5, kButtonSize),
      slider_was_moved_(nullptr),
      collapsed_(collapsed),
      nr_icons_(queue_ != nullptr            ? queue_->get_max_size() :
@@ -268,10 +275,10 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 	hbox_.add(&b_decrease_desired_fill_);
 
 	for (size_t i = 0; i < nr_icons_; ++i) {
-		icons_[i] = new UI::Icon(&hbox_, UI::PanelStyle::kWui, 0, 0, kButtonSize, kButtonSize,
-		                         type_ == Widelands::wwWARE ?
-                                  building.owner().tribe().get_ware_descr(index_)->icon() :
-                                  building.owner().tribe().get_worker_descr(index_)->icon());
+		icons_[i] = new UI::Icon(
+		   &hbox_, UI::PanelStyle::kWui, format("icon_%u", i), 0, 0, kButtonSize, kButtonSize,
+		   type_ == Widelands::wwWARE ? building.owner().tribe().get_ware_descr(index_)->icon() :
+                                      building.owner().tribe().get_worker_descr(index_)->icon());
 		hbox_.add(icons_[i]);
 	}
 
@@ -283,7 +290,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 
 	// To make sure the fill buttons are aligned even when some queues
 	// have priority buttons and some don't (e.g. in barracks)
-	hbox_.add_space(kButtonSize / 4);
+	hbox_.add(&priority_indicator_);
 	priority_.set_visible(has_priority_);
 	spacer_.set_visible(!has_priority_);
 	hbox_.add(&priority_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -420,7 +427,7 @@ bool InputQueueDisplay::handle_mousewheel(int32_t x, int32_t y, uint16_t modstat
 		big_step = true;
 	}
 
-	if (get_mouse_position().x < priority_.get_x() - kButtonSize / 4) {
+	if (get_mouse_position().x < priority_indicator_.get_x()) {
 		// Mouse is over desired fill
 
 		if (big_step) {
@@ -738,11 +745,11 @@ void InputQueueDisplay::draw_overlay(RenderTarget& r) {
 	if (has_priority_ && is_collapsed()) {
 		const size_t p = priority_to_index(queue_ != nullptr ? b->get_priority(type_, index_) :
                                                              get_setting()->priority);
-		const int w = kButtonSize / 5;
-		const int x = hbox_.get_x() + collapse_.get_x() - w;
+		const int w = priority_indicator_.get_w();
+		// Add kButtonSize / 4 to the position to align it against the collapse button
+		const int x = hbox_.get_x() + priority_indicator_.get_x() + kButtonSize / 4;
 		r.brighten_rect(Recti(x, hbox_.get_y(), w, kButtonSize), -32);
-		r.fill_rect(Recti(x, hbox_.get_y() + (4 - p) * kButtonSize / 5, w, kButtonSize / 5),
-		            kPriorityColors[p], BlendMode::Copy);
+		r.fill_rect(Recti(x, hbox_.get_y() + (4 - p) * w, w, w), kPriorityColors[p], BlendMode::Copy);
 	}
 
 	UI::Box::draw_overlay(r);

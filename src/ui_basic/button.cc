@@ -49,7 +49,7 @@ Button::Button  //  Common constructor
     const std::string& tooltip_text,
     UI::Button::VisualState init_state,
     ImageMode mode)
-   : NamedPanel(parent, to_panel_style(init_style), name, x, y, w, h, tooltip_text),
+   : Panel(parent, to_panel_style(init_style), name, x, y, w, h, tooltip_text),
      highlighted_(false),
      pressed_(false),
      enabled_(true),
@@ -326,7 +326,7 @@ bool Button::handle_key(bool down, SDL_Keysym code) {
 		sigclicked();
 		return true;
 	}
-	return NamedPanel::handle_key(down, code);
+	return Panel::handle_key(down, code);
 }
 
 /**
