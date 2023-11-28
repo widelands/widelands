@@ -280,7 +280,7 @@ int LuaGame::set_allow_diplomacy(lua_State* L) {
  ==========================================================
  */
 /* RST
-   .. method:: launch_coroutine(func[, when = now])
+   .. method:: launch_coroutine(func[, when = now[, "realtimedelta"]])
 
       Hands a Lua coroutine object over to widelands for execution. The object
       must have been created via :func:`coroutine.create`. The coroutine is
@@ -310,7 +310,7 @@ int LuaGame::launch_coroutine(lua_State* L) {
 	if (nargs == 3) {
 		runtime = Time(luaL_checkuint32(L, 3));
 		lua_pop(L, 1);
-	} else {
+	} else if (nargs == 4) {
 		if (const std::string extra_arg(luaL_checkstring(L, 4)); extra_arg != "realtimedelta") {
 			report_error(L, "\"realtimedelta\" is expected as last argument!");
 		}
