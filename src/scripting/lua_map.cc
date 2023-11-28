@@ -4765,6 +4765,9 @@ int LuaMapObject::destroy(lua_State* L) {
       :type attribute: :class:`string`
 */
 int LuaMapObject::has_attribute(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::MapObject* obj = get_or_zero(egbase);
 	if (obj == nullptr) {
