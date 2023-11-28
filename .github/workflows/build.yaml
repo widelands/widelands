@@ -503,10 +503,19 @@ jobs:
   summary:
     name: CI Results Summary
     needs: [testsuite, windows, macos, appimage]  # We do not require MSVC due to frequent unrelated runner failures
+    if: always() # to check if dependencies have failed or passed
     runs-on: "ubuntu-latest"
     steps:
-      - name: Empty step
-        run: 'true'
+    - name: Check for failed jobs
+      if: >-
+        contains(needs.*.result, 'failure') ||
+        contains(needs.*.result, 'cancelled')
+      run: |
+        echo "A job failed or was cancelled!"
+        exit 1
+    - name: No step skipped  # Optional, just gives info
+      if: ! contains(needs.*.result, 'skipped')
+      run: true
 
   dev_release:
     name: Automated development pre-release
