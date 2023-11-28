@@ -113,7 +113,7 @@ void LuaCoroutine::push_arg(const int number) {
 	++ninput_args_;
 }
 
-uint32_t LuaCoroutine::n_returned() {
+uint32_t LuaCoroutine::n_returned() const {
 	return nreturn_values_;
 }
 

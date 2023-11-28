@@ -47,15 +47,13 @@ void CmdLuaCoroutine::execute(Game& game) {
 				if (extra_arg != "realtimedelta") {
 					throw LuaError(format("coroutine.yield() only accepts \"realtimedelta\" as second "
 					                      "argument, got \"%s\"",
-					                      extra_arg)
-					                  .c_str());
+					                      extra_arg));
 				}
 				game.enqueue_command_realtime(
 				   new Widelands::CmdLuaCoroutine(Time(SDL_GetTicks() + sleeptime), std::move(cr_)));
 			} else {
 				throw LuaError(
-				   format("coroutine.yield() only accepts 1 or 2 arguments, got %d", cr_->n_returned())
-				      .c_str());
+				   format("coroutine.yield() only accepts 1 or 2 arguments, got %d", cr_->n_returned()));
 			}
 		} else if (rv == LuaCoroutine::DONE) {
 			cr_.reset();
