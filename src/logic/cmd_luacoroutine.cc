@@ -52,8 +52,8 @@ void CmdLuaCoroutine::execute(Game& game) {
 				game.enqueue_command_realtime(
 				   new Widelands::CmdLuaCoroutine(Time(SDL_GetTicks() + sleeptime), std::move(cr_)));
 			} else {
-				throw LuaError(
-				   format("coroutine.yield() only accepts 1 or 2 arguments, got %d", cr_->n_returned()));
+				throw LuaError(format(
+				   "coroutine.yield() only accepts 1 or 2 arguments, got %d", cr_->n_returned()));
 			}
 		} else if (rv == LuaCoroutine::DONE) {
 			cr_.reset();
