@@ -57,6 +57,9 @@ public:
 	void push_arg(const std::string&);
 	void push_arg(int);
 
+	// Number of returned values not yet popped from the stack.
+	uint32_t n_returned();
+
 	// Accesses the returned values from the run of the coroutine.
 	uint32_t pop_uint32();
 	std::string pop_string();

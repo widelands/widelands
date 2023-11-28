@@ -20,6 +20,8 @@
 
 #include <memory>
 
+#include <SDL_timer.h>
+
 #include "base/log.h"
 #include "logic/cmd_luacoroutine.h"
 #include "logic/game.h"
@@ -283,8 +285,10 @@ int LuaGame::set_allow_diplomacy(lua_State* L) {
       Hands a Lua coroutine object over to widelands for execution. The object
       must have been created via :func:`coroutine.create`. The coroutine is
       expected to :func:`coroutine.yield` at regular intervals with the
-      absolute game time on which the function should be awakened again. You
-      should also have a look at :mod:`core.cr`.
+      absolute game time on which the function should be awakened again,
+      or the relative real time and the string "realtimedelta".
+
+      You should also have a look at :mod:`core.cr`.
 
       :arg func: coroutine object to run
       :type func: :class:`thread`
@@ -296,18 +300,33 @@ int LuaGame::set_allow_diplomacy(lua_State* L) {
 int LuaGame::launch_coroutine(lua_State* L) {
 	int nargs = lua_gettop(L);
 	Time runtime = get_game(L).get_gametime();
+	bool is_gametime = true;
 	if (nargs < 2) {
 		report_error(L, "Too few arguments!");
+	}
+	if (nargs > 4) {
+		report_error(L, "Too many arguments!");
 	}
 	if (nargs == 3) {
 		runtime = Time(luaL_checkuint32(L, 3));
 		lua_pop(L, 1);
+	} else {
+		if (const std::string extra_arg(luaL_checkstring(L, 4)); extra_arg != "realtimedelta") {
+			report_error(L, "\"realtimedelta\" is expected as last argument!");
+		}
+		is_gametime = false;
+		runtime = Time(SDL_GetTicks() + luaL_checkuint32(L, 3));
+		lua_pop(L, 2);
 	}
 
 	std::unique_ptr<LuaCoroutine> cr(new LuaCoroutine(luaL_checkthread(L, 2)));
 	lua_pop(L, 2);  // Remove coroutine and Game object from stack
 
-	get_game(L).enqueue_command(new Widelands::CmdLuaCoroutine(runtime, std::move(cr)));
+	if (is_gametime) {
+		get_game(L).enqueue_command(new Widelands::CmdLuaCoroutine(runtime, std::move(cr)));
+	} else {
+		get_game(L).enqueue_command_realtime(new Widelands::CmdLuaCoroutine(runtime, std::move(cr)));
+	}
 
 	return 0;
 }

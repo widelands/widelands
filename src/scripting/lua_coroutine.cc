@@ -113,6 +113,10 @@ void LuaCoroutine::push_arg(const int number) {
 	++ninput_args_;
 }
 
+uint32_t LuaCoroutine::n_returned() {
+	return nreturn_values_;
+}
+
 std::string LuaCoroutine::pop_string() {
 	if (nreturn_values_ == 0u) {
 		return "";

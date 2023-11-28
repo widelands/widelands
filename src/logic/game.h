@@ -263,7 +263,16 @@ public:
 	void report_desync(int32_t playernumber);
 	Md5Checksum get_sync_hash() const;
 
+	// Use this for in-game tasks.
+	// The duetime_ of the Command is interpreted as game time.
+	// Queued GameLogicCommands will be stored in savegames.
 	void enqueue_command(Command*);
+
+	// Use this only for external user scripts that need to run even when the game is paused.
+	// The duetime_ of the Command is interpreted as real time.
+	// The realtime_queue_ is never saved.
+	// Not sync-safe.
+	void enqueue_command_realtime(Command*);
 
 	void send_player_command(Widelands::PlayerCommand*);
 

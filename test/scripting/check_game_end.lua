@@ -34,17 +34,28 @@ function check_win_condition(winners)
   run(function()
     -- 2 minutes grace period
     local timeout = (game.win_condition_duration + 2) * 60 * 1000
+    local check_interval = 2000
+    local pause_timeout = 2 * 60  -- 2 minutes
 
     local game_ended = false
+    local last_gametime = 0
+    local pause_counter = 0
 
     sleep(1000)
     game.desired_speed = 100000
 
     repeat
-      sleep(5000)
+      realtime_sleep(check_interval)
+      if (game.time > last_gametime) then
+        last_gametime = game.time
+        pause_counter = 0
+      else
+        pause_counter = pause_counter + check_interval / 1000
+        print(string.bformat("No progress since last check. (%d seconds)", pause_counter))
+      end
       game_ended = mapview.windows.game_summary ~= nil
       print("Checking end of game at " .. formatted_time())
-    until game_ended or game.time > timeout
+    until game_ended or game.time > timeout or pause_counter >= pause_timeout
 
     -- Check timeout
     assert_true(game_ended, "## Game did not end in time. ##")
