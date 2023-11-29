@@ -502,7 +502,7 @@ private:
 
 	std::list<PendingDiplomacyAction> pending_diplomacy_actions_;
 	bool diplomacy_allowed_{true};
-	bool naval_warfare_allowed_{false};
+	bool naval_warfare_allowed_{true};
 
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;
