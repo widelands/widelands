@@ -84,18 +84,18 @@ def generate_translation_stats(po_dir, output_file):
                 'Columns "{}" not found in output of pocount'.format('", "'.join(missing_cols)))
 
         # Now do the actual counting for the current textdomain
-        for cells in result:
-            po_filename = cells[COLUMNS['filename']]
+        for row in result:
+            po_filename = row[COLUMNS['filename']]
             if po_filename.endswith('.po'):
                 locale = regex_po.match(po_filename).group(1)
                 entry = locale_stats[locale]
-                entry.total += int(cells[COLUMNS['total']])
-                entry.translated += int(cells[COLUMNS['translated']])
+                entry.total += int(row[COLUMNS['total']])
+                entry.translated += int(row[COLUMNS['translated']])
                 if entry.translated > entry.total:
                     print(('Error! Translated {entry.translated} ({c_translated}) is bigger than ' +
                            'the total of {entry.total} ({c_total}) on line {line}\n').format(
-                        entry=entry, c_translated=cells[COLUMNS['translated']],
-                        c_total=cells[COLUMNS['total']], line=result.line_num))
+                        entry=entry, c_translated=row[COLUMNS['translated']],
+                        c_total=row[COLUMNS['total']], line=result.line_num))
                     sys.exit(1)
                 locale_stats[locale] = entry
 
