@@ -33,6 +33,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("cutting granite"),
          actions = {
+            -- time of worker: 42.2-67.4 sec, min+max average 54.8 sec
+            -- min. time total: 42.2 + 10 = 52.2 sec
+            -- max. time total: 67.4 + 10 = 77.4 sec
+            -- avg. time total: 54.8 + 10 = 64.8 sec
             "callworker=cut_granite",
             "sleep=duration:10s"
          },
