@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-11-18 02:30+0000\n"
+"POT-Creation-Date: 2023-11-27 02:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -9019,10 +9019,12 @@ msgstr ""
 #. animation_directory = dirname,
 #. icon = dirname .. "menu.png",
 #. vision_range = 2,
+#.
 #. buildcost = {
 #. empire_carrier = 1,
 #. fishing_rod = 1
 #. },
+#.
 #. programs = {
 #. fish = {
 #. "findspace=size:any radius:7 resource:resource_fish",
@@ -9035,11 +9037,13 @@ msgstr ""
 #. "return"
 #. }
 #. },
+#.
 #. animations = {
 #. idle = {
 #. hotspot = { 7, 38 },
 #. },
 #. },
+#.
 #. spritesheets = {
 #. fishing = {
 #. fps = 10,
@@ -9067,6 +9071,7 @@ msgstr ""
 #. },
 #. },
 #. }
+#.
 #. pop_textdomain()
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/armorsmith/init.lua:104
