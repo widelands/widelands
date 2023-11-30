@@ -64,6 +64,8 @@ public:
 	int get_scenario_difficulty(lua_State*);
 	int get_allow_diplomacy(lua_State*);
 	int set_allow_diplomacy(lua_State*);
+	int get_allow_naval_warfare(lua_State*);
+	int set_allow_naval_warfare(lua_State*);
 	int get_interactive_player(lua_State*);
 	int get_win_condition(lua_State*);
 	int get_win_condition_duration(lua_State*);

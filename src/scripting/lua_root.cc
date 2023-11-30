@@ -90,7 +90,8 @@ const PropertyType<LuaGame> LuaGame::Properties[] = {
    PROP_RO(LuaGame, last_save_time),     PROP_RO(LuaGame, type),
    PROP_RO(LuaGame, interactive_player), PROP_RO(LuaGame, scenario_difficulty),
    PROP_RO(LuaGame, win_condition),      PROP_RO(LuaGame, win_condition_duration),
-   PROP_RW(LuaGame, allow_diplomacy),    {nullptr, nullptr, nullptr},
+   PROP_RW(LuaGame, allow_diplomacy),    PROP_RW(LuaGame, allow_naval_warfare),
+   {nullptr, nullptr, nullptr},
 };
 
 LuaGame::LuaGame(lua_State* /* L */) {
@@ -274,6 +275,23 @@ int LuaGame::get_allow_diplomacy(lua_State* L) {
 }
 int LuaGame::set_allow_diplomacy(lua_State* L) {
 	get_game(L).set_diplomacy_allowed(luaL_checkboolean(L, -1));
+	return 0;
+}
+
+/* RST
+   .. attribute:: allow_naval_warfare
+
+      .. versionadded:: 1.2
+
+      (RW) Whether players are allowed to refit ships to warships and
+      launch coastal invasions and ship-to-ship battles.
+*/
+int LuaGame::get_allow_naval_warfare(lua_State* L) {
+	lua_pushboolean(L, static_cast<int>(get_game(L).naval_warfare_allowed()));
+	return 1;
+}
+int LuaGame::set_allow_naval_warfare(lua_State* L) {
+	get_game(L).set_naval_warfare_allowed(luaL_checkboolean(L, -1));
 	return 0;
 }
 
