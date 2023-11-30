@@ -133,8 +133,9 @@ CrashReportWindow::CrashReportWindow(FsMenu::MainMenu& menu, const FilenameSet& 
 	   box, "header", 0, 0, 200, 200, UI::PanelStyle::kFsMenu,
 	   as_richtext_paragraph(
 	      format(_("It looks like Widelands crashed the last time you ran it, but a backtrace for "
-	               "debugging was automatically generated. Please provide the report to the "
-	               "Widelands Development Team under %s so we can fix the problem."),
+	               "debugging was automatically generated. Please provide the report along with a "
+			         "description of what was going on in the game and what you did last before the "
+			         "crash to the Widelands Development Team under %s so we can fix the problem."),
 	             as_url_hyperlink(kReportBugsURL)),
 	      UI::FontStyle::kFsMenuLabel),
 	   UI::Align::kCenter, UI::MultilineTextarea::ScrollMode::kNoScrolling);
