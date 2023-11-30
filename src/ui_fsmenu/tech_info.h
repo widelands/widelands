@@ -42,7 +42,7 @@ class TechInfoList : public UI::Box {
 public:
 	TechInfoList(UI::Panel* parent,
 	             std::string label,
-	             std::vector<std::string> values,
+	             const std::vector<std::string>& values,
 	             bool right_to_left);
 };
 

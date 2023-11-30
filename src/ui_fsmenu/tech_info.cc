@@ -32,6 +32,23 @@
 #include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
 
+namespace {
+
+std::pair<std::vector<std::string>, std::vector<std::string>> list_addons() {
+	std::vector<std::string> enabled;
+	std::vector<std::string> disabled;
+	for (auto& addon : AddOns::g_addons) {
+		if (addon.second) {
+			enabled.emplace_back(addon.first->internal_name);
+		} else {
+			disabled.emplace_back(addon.first->internal_name);
+		}
+	}
+	return make_pair(enabled, disabled);
+}
+
+}  // namespace
+
 namespace FsMenu {
 
 constexpr int16_t kSpacing = 8;
@@ -62,7 +79,7 @@ TechInfoLine::TechInfoLine(UI::Panel* parent,
 
 TechInfoList::TechInfoList(UI::Panel* parent,
                            std::string label,
-                           std::vector<std::string> values,
+                           const std::vector<std::string>& values,
                            bool right_to_left)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, "tech_info_list", 0, 0, UI::Box::Horizontal),
      label_(this,
@@ -72,7 +89,7 @@ TechInfoList::TechInfoList(UI::Panel* parent,
             label,
             UI::mirror_alignment(UI::Align::kLeft, right_to_left)),
      values_(this, UI::PanelStyle::kFsMenu, "tech_info_list_values", 0, 0, UI::Box::Vertical) {
-	for (std::string value : values) {
+	for (const std::string& value : values) {
 		values_.add(new UI::Textarea(&values_, UI::PanelStyle::kFsMenu, "tech_info_list_item",
 		                             UI::FontStyle::kFsMenuInfoPanelParagraph, value,
 		                             UI::mirror_alignment(UI::Align::kRight, right_to_left)),
@@ -91,19 +108,6 @@ TechInfoList::TechInfoList(UI::Panel* parent,
 		add(&values_, UI::Box::Resizing::kAlign, UI::Align::kRight);
 	}
 	add_space(kSpacing);
-}
-
-std::pair<std::vector<std::string>, std::vector<std::string>> list_addons() {
-	std::vector<std::string> enabled;
-	std::vector<std::string> disabled;
-	for (auto& addon : AddOns::g_addons) {
-		if (addon.second) {
-			enabled.emplace_back(addon.first->internal_name);
-		} else {
-			disabled.emplace_back(addon.first->internal_name);
-		}
-	}
-	return make_pair(enabled, disabled);
 }
 
 TechInfoBox::TechInfoBox(UI::Panel* parent, TechInfoBox::Type t)
