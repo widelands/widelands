@@ -103,10 +103,9 @@ def generate_translation_stats(po_dir, output_file):
     print('------\t-----\t----------')
 
     # The total goes in a [global] section and is identical for all locales
-    result = '''# This file is managed by utils/update_translations_stats.py
+    result = ('# This file is managed by utils/update_translations_stats.py\n\n'
+              '[global]')
 
-[global]
-'''
     result += 'total={}\n'.format(list(locale_stats.values())[0].total)
     # Write translation stats for all locales
     for locale in sorted(locale_stats.keys(), key=str.lower):
