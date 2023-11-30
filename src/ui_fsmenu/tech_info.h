@@ -20,6 +20,7 @@
 #define WL_UI_FSMENU_TECH_INFO_H
 
 #include <memory>
+#include <vector>
 
 #include "ui_basic/box.h"
 #include "ui_basic/textarea.h"
@@ -32,6 +33,14 @@ class TechInfoLine : public UI::Box {
 
 public:
 	TechInfoLine(UI::Panel* parent, std::string label, std::string value, bool right_to_left);
+};
+
+class TechInfoList : public UI::Box {
+	UI::Textarea label_;
+	UI::Box values_;
+
+public:
+	TechInfoList(UI::Panel* parent, std::string label, std::vector<std::string> values, bool right_to_left);
 };
 
 struct TechInfoBox : public UI::Box {
