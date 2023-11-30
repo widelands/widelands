@@ -81,7 +81,7 @@ def generate_translation_stats(po_dir, output_file):
         missing_cols = set(COLUMNS.values()) - set(result.fieldnames)
         if missing_cols:
             sys.exit(
-                'Columns "{}" not found in output of pocount'.format('", "'.join(missing_cols)))
+                'Column(s) "{}" not found in output of pocount'.format('", "'.join(missing_cols)))
 
         # Now do the actual counting for the current textdomain
         for row in result:
