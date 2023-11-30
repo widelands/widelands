@@ -73,11 +73,8 @@ TechInfoList::TechInfoList(UI::Panel* parent,
             UI::mirror_alignment(UI::Align::kLeft, right_to_left)),
      values_(this, UI::PanelStyle::kFsMenu, "tech_info_list_values", 0, 0, UI::Box::Vertical) {
 	for (std::string value : values) {
-		values_.add(new UI::Textarea(&values_,
-		                             UI::PanelStyle::kFsMenu,
-		                             "tech_info_list_item",
-		                             UI::FontStyle::kFsMenuInfoPanelParagraph,
-		                             value,
+		values_.add(new UI::Textarea(&values_, UI::PanelStyle::kFsMenu, "tech_info_list_item",
+		                             UI::FontStyle::kFsMenuInfoPanelParagraph, value,
 		                             UI::mirror_alignment(UI::Align::kRight, right_to_left)),
 		            UI::Box::Resizing::kFullSize);
 	}
@@ -213,7 +210,7 @@ TechInfoBox::TechInfoBox(UI::Panel* parent, TechInfoBox::Type t)
 			    UI::Box::Resizing::kFullSize);
 		} else {
 			auto it = c.value_list.begin();
-			while(it != c.value_list.end()) {
+			while (it != c.value_list.end()) {
 				report_ += *it;
 				if (++it != c.value_list.end()) {
 					report_ += ", ";
