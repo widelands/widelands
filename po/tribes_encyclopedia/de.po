@@ -11,12 +11,14 @@
 # GunChleoc, 2015
 # Hybrid Dog, 2015
 # Iwan Gabovitch, 2023
+# Iwan Gabovitch, 2023
 # Jonas Richardsen <jonas.richardsen@isdas.de>, 2017
 # Klaus Halfmann <klaus.halfmann@arcor.de>, 2022-2023
 # millimarg, 2015
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
+# Simon Heimberg, 2023
 # Simon Heimberg, 2023
 # Stephan Lutz <stephan-lutz@gmx.de>, 2018-2023
 # Venatrix, 2015
@@ -25,13 +27,14 @@
 # wl-zocker, 2015
 # 39a0b2e5ef9bf024c2fcfbdd0522de1a_96abb62, 2015-2016
 # Wuzzy <Wuzzy@disroot.org>, 2018
+# Wuzzy <Wuzzy@disroot.org>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-11-18 02:30+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Iwan Gabovitch, 2023\n"
+"Last-Translator: Wuzzy <Wuzzy@disroot.org>, 2018\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1146,7 +1149,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s, depending on "
 "how far the stonecutter has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann ein Stück Granit zwischen %1$s und %2$s herstellen, je nachdem, wie weit der Steinmetz gehen muss."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site:
 #. Stonecutter's Hut, part 2
@@ -1171,7 +1174,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1420
 msgctxt "amazons_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr ""
+msgstr "Wenn Steigungen oder Hindernisse im Weg sind, verlängert sich die Zeit."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Woodcutter's
 #. Hut
@@ -1194,7 +1197,7 @@ msgid ""
 "This building can produce one log between %1$s and %2$s (with master "
 "woodcutter between %3$s and %4$s), depending on how far the woodcutter has "
 "to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann einen Stamm zwischen %1$s und %2$s (mit Meisterholzfällerin zwischen %3$s und %4$s) produzieren, je nach Laufdistanz."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Jungle
 #. Preserver's Hut
@@ -1219,7 +1222,7 @@ msgctxt "amazons_building"
 msgid ""
 "The jungle preserver or jungle master plants one tree between %1$s and %2$s,"
 " depending on how far she has to walk."
-msgstr ""
+msgstr "Die Dschungelbewahrerin oder Dschungelmeisterin pflanzt einen Baum zwischen %1$s und %2$s, je nachdem, wie weit sie laufen muss."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Hunter-
 #. Gatherer's Hut
@@ -1252,7 +1255,7 @@ msgid ""
 "This building can produce one meat or one fish between %1$s and %2$s, "
 "depending on how far the hunter-gatherer has to walk. If both kinds of food "
 "are available, then one of each kind is produced between %3$s and %4$s."
-msgstr ""
+msgstr "Dieses Gebäude kann ein Fleisch oder einen Fisch zwischen %1$s und %2$s produzieren, je nachdem, wie weit der die Jäger-Sammlerin laufen muss. Wenn beide Arten von Nahrung verfügbar sind, wird eine von jeder Art zwischen %3$s und %4$s hergestellt."
 
 #. TRANSLATORS: Lore author helptext for an Amazon production site: Liana
 #. Cutter's Hut
@@ -1325,7 +1328,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one bucket of water between %1$s and %2$s on "
 "average, depending on how far the carrier has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann im Durchschnitt einen Eimer Wasser zwischen %1$s und %2$s produzieren, je nachdem, wie weit getragen werden muss."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Rare Tree
 #. Cutter's Hut
@@ -1345,7 +1348,7 @@ msgid ""
 "how far the woodcutter has to walk. If all kinds of rare tree are available "
 "within her work area, then one of each kind is produced between %3$s and "
 "%4$s."
-msgstr ""
+msgstr "Dieses Gebäude kann ein seltenes Holz zwischen%1$s und %2$s produzieren, je nachdem, wie weit die Holzfällerin laufen muss. Wenn alle Arten von seltenen Bäumen in ihrem Arbeitsbereich vorhanden sind, dann wird von jeder Art eine zwischen %3$s und %4$s produziert."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Wilderness
 #. Keeper's Tent
@@ -1381,7 +1384,7 @@ msgstr "Erkundet unbekanntes Gebiet."
 #: ../../data/tribes/initialization/amazons/units.lua:1418
 msgctxt "amazons_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Eine Erkundungsreise der Kundschafterin dauert zwischen %1$s und %2$s."
 
 #. TRANSLATORS: Lore author helptext for an Amazon production site: Rope
 #. Weaver's Booth
@@ -1660,7 +1663,7 @@ msgstr "Wäscht Goldstaub aus Geröll im bergigen Gelände."
 msgctxt "amazons_building"
 msgid ""
 "If the supply is steady, this mine can produce gold dust in %s on average."
-msgstr ""
+msgstr "Wenn der Nachschub gleichmäßig ist, kann diese Mine im Durchschnitt %s Goldstaub produzieren."
 
 #. TRANSLATORS: Purpose helptext for an Amazon training site: Warriors’
 #. Gathering
@@ -4101,7 +4104,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s, depending on "
 "how far the stonecutter has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann ein Stück Granit zwischen %1$s und %2$s herstellen, je nachdem, wie weit der Steinmetz gehen muss."
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Quarry,
 #. part 2
@@ -4123,7 +4126,7 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:1646
 msgctxt "atlanteans_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr ""
+msgstr "Wenn Steigungen oder Hindernisse im Weg sind, verlängert sich die Zeit."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site:
 #. Woodcutter's House
@@ -4170,7 +4173,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one log between %1$s and %2$s, depending on how "
 "far the woodcutter has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann einen Stamm zwischen %1$s und %2$s produzieren, je nachdem, wie weit der Holzfäller laufen muss."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Forester's
 #. House
@@ -4219,7 +4222,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The forester plants one tree between %1$s and %2$s, depending on how far he "
 "has to walk."
-msgstr ""
+msgstr "Der Förster pflanzt einen Baum zwischen %1$s und %2$s, je nachdem, wie weit er laufen muss."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Fisher's
 #. House
@@ -4275,7 +4278,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one fish between %1$s and %2$s, depending on how "
 "far the fisher has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann einen Fisch zwischen %1$s und %2$s produzieren, je nachdem, wie weit die Fischer laufen muss."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Fish
 #. Breeder's House
@@ -4349,7 +4352,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one meat between %1$s and %2$s, depending on how "
 "far the hunter has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann ein Stück Fleisch zwischen %1$s und %2$s produzieren, je nachdem, wie weit der Jäger laufen muss."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Well
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Well
@@ -4387,7 +4390,7 @@ msgstr "Wasserträger im Selbstgespräch"
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The carrier needs %s to get one bucket full of water."
-msgstr ""
+msgstr "Der Träger braucht %s, um einen Eimer Wasser zu holen."
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Well,
 #. part 2
@@ -4395,7 +4398,7 @@ msgstr ""
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "If the water resource is depleted, the carrier needs %s on average."
-msgstr ""
+msgstr "Wenn die Wasserressourcen erschöpft sind, braucht der Träger im Durchschnitt %s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Gold
 #. Spinning Mill
@@ -4475,7 +4478,7 @@ msgstr "Ein Kundschafter einem Soldaten antwortend"
 #: ../../data/tribes/initialization/atlanteans/units.lua:1644
 msgctxt "atlanteans_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Eine Erkundungsreise des Kundschafters dauert zwischen %1$s und %2$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Sawmill
 #. TRANSLATORS: Purpose helptext for an Empire production site: Sawmill
@@ -5028,7 +5031,7 @@ msgstr "Lied der Gilde der Bergleute"
 msgctxt "atlanteans_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in %s on average."
-msgstr ""
+msgstr "Wenn die Nahrungsversorgung stabil ist, kann diese Mine Kohle in durchschnittlich %s herstellen."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Iron Mine
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Iron Mine
@@ -5060,7 +5063,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "If the food supply is steady, this mine can produce iron ore in %s on "
 "average."
-msgstr ""
+msgstr "Wenn die Nahrungsversorgung stabil ist, kann diese Mine Eisenerz in durchschnittlich %s herstellen."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for production site: Gold Mine
@@ -5106,7 +5109,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in %s on "
 "average."
-msgstr ""
+msgstr "Wenn die Nahrungsversorgung stabil ist, kann diese Mine Golderz in durchschnittlich %s herstellen."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean training site: Dungeon, part
 #. 1
@@ -6618,7 +6621,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s, depending on "
 "how far the stonemason has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann ein Stück Granit zwischen %1$s und %2$s herstellen, je nachdem, wie weit der Steinmetz gehen muss."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Quarry,
 #. part 2
@@ -6640,7 +6643,7 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:1274
 msgctxt "barbarians_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr ""
+msgstr "Wenn Steigungen oder Hindernisse im Weg sind, verlängert sich die Zeit."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Lumberjack_s
 #. Hut
@@ -6673,7 +6676,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one log between %1$s and %2$s, depending on how "
 "far the lumberjack has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann einen Stamm zwischen %1$s und %2$s produzieren, je nachdem, wie weit der Holzfäller laufen muss."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Ranger's Hut
 #: ../../data/tribes/initialization/barbarians/units.lua:1173
@@ -6704,7 +6707,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The ranger plants one tree between %1$s and %2$s, depending on how far he "
 "has to walk."
-msgstr ""
+msgstr "Der Förster pflanzt einen Baum zwischen %1$s und %2$s, je nachdem, wie weit er laufen muss."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Fisher's Hut
 #: ../../data/tribes/initialization/barbarians/units.lua:1192
@@ -6746,7 +6749,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one fish between %1$s and %2$s, depending on how "
 "far the fisher has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann einen Fisch zwischen %1$s und %2$s produzieren, je nachdem, wie weit der Fischer laufen muss."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Hunter's Hut
 #: ../../data/tribes/initialization/barbarians/units.lua:1215
@@ -6776,7 +6779,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one meat between %1$s and %2$s, depending on how "
 "far the hunter has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann ein Stück Fleisch zwischen %1$s und %2$s produzieren, je nachdem, wie weit der Jäger laufen muss."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Gamekeeper's
 #. Hut
@@ -6836,7 +6839,7 @@ msgstr "Der Träger braucht %s, um einen Eimer Wasser zu holen."
 #, lua-format
 msgctxt "barbarians_building"
 msgid "If the water resource is depleted, the carrier needs %s on average."
-msgstr ""
+msgstr "Wenn die Wasserressourcen erschöpft sind, braucht der Träger im Durchschnitt %s."
 
 #: ../../data/tribes/initialization/barbarians/units.lua:1263
 msgctxt "barbarians_building"
@@ -6865,7 +6868,7 @@ msgstr "Chat’Karuth,<br>bei der Vereidigung der ersten Kundschaftertruppe"
 #: ../../data/tribes/initialization/barbarians/units.lua:1272
 msgctxt "barbarians_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Eine Erkundungsreise des Kundschafters dauert zwischen %1$s und %2$s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Wood Hardener
 #: ../../data/tribes/initialization/barbarians/units.lua:1284
@@ -10769,7 +10772,7 @@ msgctxt "empire_building"
 msgid ""
 "The stonemason finds 5 blocks of granite and 2 blocks of marble out of 7 "
 "rocks."
-msgstr ""
+msgstr "Der Steinmetz findet 5 Granitblöcke und 2 Marmorblöcke von 7 Steinen."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Quarry,
 #. part 1
@@ -10778,7 +10781,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s and one marble "
 "between %3$s and %4$s, depending on how far the stonemason has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann ein Stück Granit zwischen %1$s und %2$s und ein Stück Marmor zwischen %3$s und %4$s produzieren, je nachdem, wie weit der Steinmetz gehen muss."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Quarry,
 #. part 2
@@ -10800,7 +10803,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:1422
 msgctxt "empire_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr ""
+msgstr "Wenn Steigungen oder Hindernisse im Weg sind, verlängert sich die Zeit."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -10839,7 +10842,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one log between %1$s and %2$s, depending on how "
 "far the lumberjack has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann einen Stamm zwischen %1$s und %2$s herstellen, je nachdem, wie weit der Holzfäller gehen muss."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -10878,7 +10881,7 @@ msgctxt "empire_building"
 msgid ""
 "The forester plants one tree between %1$s and %2$s, depending on how far he "
 "has to walk."
-msgstr ""
+msgstr "Der Förster pflanzt einen Baum zwischen %1$s und %2$s, je nachdem, wie weit er laufen muss."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -10929,7 +10932,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one fish between %1$s and %2$s, depending on how "
 "far the fisher has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann einen Fisch zwischen %1$s und %2$s produzieren, je nachdem, wie weit der Fischer laufen muss."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -10966,7 +10969,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one meat between %1$s and %2$s, depending on how "
 "far the hunter has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann ein Stück Fleisch zwischen %1$s und %2$s produzieren, je nachdem, wie weit der Jäger laufen muss."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -10998,7 +11001,7 @@ msgstr "Sprichwort des Imperiums"
 #, lua-format
 msgctxt "empire_building"
 msgid "The carrier needs %s to get one bucket full of water."
-msgstr ""
+msgstr "Der Träger braucht %s, um einen Eimer Wasser zu holen."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Well, part
 #. 2
@@ -11006,7 +11009,7 @@ msgstr ""
 #, lua-format
 msgctxt "empire_building"
 msgid "If the water resource is depleted, the carrier needs %s on average."
-msgstr ""
+msgstr "Wenn die Wasserressourcen erschöpft sind, braucht der Träger im Durchschnitt %s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11042,7 +11045,7 @@ msgstr "Du musst diese Flagge mit einem Kundschafterhaus verbinden, bevor du ein
 #: ../../data/tribes/initialization/empire/units.lua:1420
 msgctxt "empire_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Eine Erkundungsreise des Kundschafters dauert zwischen %1$s und %2$s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -14210,7 +14213,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s, depending on "
 "how far the stonemason has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann ein Stück Granit zwischen %1$s und %2$s herstellen, je nachdem, wie weit der Steinmetz gehen muss."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Quarry,
 #. part 2
@@ -14232,7 +14235,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1777
 msgctxt "frisians_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr ""
+msgstr "Wenn Steigungen oder Hindernisse im Weg sind, verlängert sich die Zeit."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Woodcutter's
 #. House
@@ -14264,7 +14267,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one log between %1$s and %2$s, depending on how "
 "far the woodcutter has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann einen Stamm zwischen %1$s und %2$s herstellen, je nachdem, wie weit der Holzfäller gehen muss."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Forester's House
 #: ../../data/tribes/initialization/frisians/units.lua:1594
@@ -14296,7 +14299,7 @@ msgctxt "frisians_building"
 msgid ""
 "The forester plants one tree between %1$s and %2$s, depending on how far he "
 "has to walk."
-msgstr ""
+msgstr "Der Förster pflanzt einen Baum zwischen %1$s und %2$s, je nachdem, wie weit er laufen muss."
 
 #. TRANSLATORS: Note helptext for a Frisian production site: Hunter's House
 #: ../../data/tribes/initialization/frisians/units.lua:1615
@@ -14311,14 +14314,14 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one meat between %1$s and %2$s, depending on how "
 "far the hunter has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann ein Stück Fleisch zwischen %1$s und %2$s produzieren, je nachdem, wie weit der Jäger laufen muss."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Hunter's
 #. House, part 3
 #: ../../data/tribes/initialization/frisians/units.lua:1622
 msgctxt "frisians_building"
 msgid "The hunter produces one fur after he has produced five pieces of meat."
-msgstr ""
+msgstr "Der Jäger produziert ein Fell, nachdem er fünf Fleischstücke produziert hat."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Fisher's House
 #: ../../data/tribes/initialization/frisians/units.lua:1630
@@ -14362,7 +14365,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one fish between %1$s and %2$s, depending on how "
 "far the fisher has to walk."
-msgstr ""
+msgstr "Dieses Gebäude kann einen Fisch zwischen %1$s und %2$s produzieren, je nachdem, wie weit der Fischer laufen muss."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Reed Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1653
@@ -14412,7 +14415,7 @@ msgstr "Die Antwort von Häuptling Arldor auf die Frage, warum sein Stamm nicht 
 #, lua-format
 msgctxt "frisians_building"
 msgid "The carrier needs %s to get one bucket full of water."
-msgstr ""
+msgstr "Der Träger braucht %s, um einen Eimer Wasser zu holen."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Well, part
 #. 2
@@ -14420,7 +14423,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "If the water resource is depleted, the carrier needs %s on average."
-msgstr ""
+msgstr "Wenn die Wasserressourcen erschöpft sind, braucht der Träger im Durchschnitt %s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Clay Pit
 #: ../../data/tribes/initialization/frisians/units.lua:1683
@@ -14641,7 +14644,7 @@ msgstr "Du musst diese Flagge mit einem Kundschafterhaus verbinden, bevor du ein
 #: ../../data/tribes/initialization/frisians/units.lua:1775
 msgctxt "frisians_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Eine Erkundungsreise des Kundschafters dauert zwischen %1$s und %2$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Brick Kiln
 #: ../../data/tribes/initialization/frisians/units.lua:1787

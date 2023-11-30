@@ -27,11 +27,11 @@ msgstr ""
 
 #: ../../data/txts/ABOUT.lua:15
 msgid "Developers"
-msgstr ""
+msgstr "Razvojni tim"
 
 #: ../../data/txts/ABOUT.lua:19
 msgid "Translators"
-msgstr ""
+msgstr "Prevoditelji"
 
 #: ../../data/txts/AUTHORS.lua:28
 msgid "Widelands Development Team"
@@ -50,7 +50,7 @@ msgstr ""
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
-msgstr ""
+msgstr "Ova igra je besplatna i otvorenog koda (FOSS), koristi GNU General Public License (GPL) V2.0."
 
 #: ../../data/txts/LICENSE.lua:18
 #, lua-format
@@ -256,7 +256,7 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:259
 msgid "Barbarians"
-msgstr ""
+msgstr "Barbari"
 
 #: ../../data/txts/developers.lua:267
 msgid "Empire"
@@ -264,11 +264,11 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:274
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlantiđani"
 
 #: ../../data/txts/developers.lua:282
 msgid "Frisians"
-msgstr ""
+msgstr "Frizijci"
 
 #: ../../data/txts/developers.lua:290
 msgid "Packagers"
@@ -356,7 +356,7 @@ msgid ""
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
 "has significantly more variety and depth to it. Still, it is easy to get "
 "started through playable tutorials."
-msgstr ""
+msgstr "Widelands je besplatna igra otvorenog koda. To je strateška igra u stvarnom vremenu sa pohodima (kampanjama) za jednog igrača i opcijom igranja sa više igrača u multiplayer modu. Ova igra je inspirirana igrom Settlers II, ali je obogaćena većom raznolikošću i dubinom. Usprkos tome, lako se nauči uz pomoć igrivih vodiča - tutoriala. "
 
 #: ../../data/txts/help/common_helptexts.lua:21
 msgid ""
@@ -365,7 +365,7 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an "
 "economic infrastructure, explore the land around you and face rivaling "
 "tribes."
-msgstr ""
+msgstr "Igru započinjete na malenom komadu zemlje s ograničenim resursima. Upotrijebite li ih pametno stvoriti ćete carstvo sa mnogo tisuća stanovnika. Na putu do cilja morati ćete uspostaviti održivu gospodarsku infrastrukturu, istražiti nepoznate zemlje i suočiti se sa susjednim plemenima."
 
 #: ../../data/txts/help/common_helptexts.lua:29
 msgid "Replays"

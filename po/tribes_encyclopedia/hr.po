@@ -6978,7 +6978,7 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:1330
 msgctxt "barbarians_building"
 msgid "Bakes pitta bread for soldiers and miners alike."
-msgstr "Peče kruh za radnike."
+msgstr "Peče lepinje za radnike."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Bakery
 #: ../../data/tribes/initialization/barbarians/units.lua:1332
@@ -13538,7 +13538,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Fish is smoked in a smokery. Smoked fish is then consumed by soldiers in "
 "training or turned into rations and meals for miners and scouts."
-msgstr ""
+msgstr "Riba se dimi u pušnici. Dimljenu ribu zatim konzumiraju vojnici na obuci ili se pretvara u hranu i obroke za rudare i izviđače."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Smoked Meat
 #: ../../data/tribes/initialization/frisians/units.lua:273
@@ -13546,7 +13546,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Meat is smoked in a smokery. Smoked meat is then consumed by soldiers in "
 "training or turned into rations and meals for miners and scouts."
-msgstr ""
+msgstr "Meso se dimi u pušnici. Dimljeno meso zatim konzumiraju vojnici na obuci ili se pretvara u hranu i obroke za rudare i izviđače."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Ration, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:285
@@ -13684,7 +13684,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Kitchen tools are needed for preparing rations and meals. The smoker also "
 "needs them."
-msgstr ""
+msgstr "Kuhinjski alati su potrebni za pripremu hrane.Pušničar ih također treba."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Fire Tongs, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:507
@@ -16244,7 +16244,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:7
 #: ../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
-msgstr ""
+msgstr "Upravljanje"
 
 #: ../../data/tribes/scripting/help/controls.lua:9
 msgid "Window Control"
@@ -16472,7 +16472,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/init.lua:107
 #: ../../data/tribes/scripting/help/tips.lua:60
 msgid "Tips"
-msgstr ""
+msgstr "Savjeti"
 
 #: ../../data/tribes/scripting/help/init.lua:116
 msgid "Wares"
