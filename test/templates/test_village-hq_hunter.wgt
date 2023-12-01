@@ -27,32 +27,35 @@ team="0"
 ai="empty"
 closed="false"
 
+# test reporting with closed player slots in the middle
+# winner is players[3] at slot 6
+
 [player_3]
+closed="true"
+
+[player_4]
+closed="true"
+
+[player_5]
+closed="true"
+
+[player_6]
 tribe="barbarians"
 init="village.lua"
 team="0"
 ai="empty"
 closed="false"
 
-[player_4]
+[player_7]
 tribe="empire"
 init="village.lua"
 team="0"
 ai="empty"
 closed="false"
 
-[player_5]
+[player_8]
 tribe="frisians"
 init="village.lua"
 team="0"
 ai="empty"
 closed="false"
-
-[player_6]
-closed="true"
-
-[player_7]
-closed="true"
-
-[player_8]
-closed="true"

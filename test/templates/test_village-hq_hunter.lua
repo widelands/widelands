@@ -1,6 +1,7 @@
 include "test/scripting/lunit.lua"
 include "test/scripting/check_game_end.lua"
 
+-- Slots 3 to 5 are closed, players[3] is slot 6
 winner = 3
 
 run(function()
