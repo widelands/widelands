@@ -4741,8 +4741,8 @@ int LuaMapObject::destroy(lua_State* L) {
 
       Returns :const:`true` if the map object has this attribute, :const:`false` otherwise.
 
-      Note: This method does exist for all MapObjects, but it only gets initialised for immovables
-      and for critters. (It always returns false for other types.)
+      .. note:: This method does exist for all MapObjects, but its data only gets initialised for
+                immovables and for critters. (It always returns :const:`false` for other types.)
 
       :arg attribute: The attribute to check for.
       :type attribute: :class:`string`
