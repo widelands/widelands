@@ -203,6 +203,7 @@ jobs:
         mkdir build
         pushd build
         cmake .. -DCMAKE_BUILD_TYPE:STRING="${{ matrix.config }}" -DOPTION_BUILD_TRANSLATIONS="ON" -DOPTION_BUILD_WEBSITE_TOOLS="ON" -DOPTION_ASAN="ON" -DOPTION_BUILD_CODECHECK="OFF"
+        grep -v REVDETECT-BROKEN VERSION
         make -k -j$(nproc) VERBOSE=1
     - name: Make install/uninstall
       run: |
@@ -261,7 +262,7 @@ jobs:
     - name: Restore vcpkg and its artifacts.
       uses: actions/cache@v3
       with:
-        path: ${{ env.VCPKG_ROOT }}/installed
+        path: ${{ env.VCPKG_ROOT }}\installed
         key: |
           ${{ steps.prepare.outputs.vcpkg_key }}-${{ matrix.arch }}
     - name: Installing dependencies
@@ -283,6 +284,7 @@ jobs:
         mkdir $env:GITHUB_WORKSPACE\build
         cd $env:GITHUB_WORKSPACE\build
         cmake.exe -G "NMake Makefiles" .. -DVCPKG_TARGET_TRIPLET=${{ env.VCPKG_TARGET_TRIPLET }} -DCMAKE_TOOLCHAIN_FILE="${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake" -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TRANSLATIONS=ON -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DOPTION_BUILD_WINSTATIC=ON -DOPTION_USE_GLBINDING=ON -DOPTION_FORCE_EMBEDDED_MINIZIP=ON
+        if ((Select-String -Quiet REVDETECT-BROKEN VERSION)) { exit 1 }
         nmake
         if ("${{ matrix.config }}" -Match "Release") {
           strip -sv ./src/widelands.exe
@@ -336,6 +338,7 @@ jobs:
         mkdir $env:GITHUB_WORKSPACE\build
         cd $env:GITHUB_WORKSPACE\build
         cmake.exe -G Ninja .. -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TRANSLATIONS=ON -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DUSE_XDG=OFF -DOPTION_BUILD_CODECHECK=OFF -DUSE_FLTO_IF_AVAILABLE=OFF -DCMAKE_JOB_POOLS="linking=1" -DCMAKE_JOB_POOL_LINK=linking -DOPTION_BUILD_WINSTATIC=ON -DOPTION_FORCE_EMBEDDED_MINIZIP=ON
+        if ((Select-String -Quiet REVDETECT-BROKEN VERSION)) { exit 1 }
         cmake.exe --build .
         strip -sv ./src/widelands.exe
     - name: InnoSetup
@@ -378,11 +381,11 @@ jobs:
         mkdir build_wl
         cd build_wl/
         ../utils/macos/build_app.sh "--${{ matrix.config }}" "--${{ matrix.compiler }}"
+        grep -v REVDETECT-BROKEN ../build/VERSION
         DMGPATH="$(pwd)"
         DMGFILE="$(ls *.dmg)"
         echo "DMG file is: $DMGPATH/$DMGFILE"
         mv "$DMGFILE" "${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}.dmg"
-        #echo "::set-env name=dmg::$DMGPATH/$DMGFILE"
 
     - name: Uploading DMG
       uses: actions/upload-artifact@v3

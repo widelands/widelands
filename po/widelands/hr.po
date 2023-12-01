@@ -4,14 +4,14 @@
 # Translators:
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
-# Ivan Bižaca <biza@malilosinj.info>, 2015
+# Ivan Bižaca <biza@malilosinj.info>, 2015,2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-10-02 02:28+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: GunChleoc, 2016\n"
+"Last-Translator: Ivan Bižaca <biza@malilosinj.info>, 2015,2023\n"
 "Language-Team: Croatian (http://app.transifex.com/widelands/widelands/language/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,7 +28,7 @@ msgstr ""
 #. TRANSLATORS: Short for "Not enough space"
 #: ../../data/scripting/infrastructure.lua:185
 msgid "No Space"
-msgstr ""
+msgstr "Nema mjesta"
 
 #: ../../data/scripting/infrastructure.lua:186
 msgid ""
@@ -39,11 +39,11 @@ msgstr ""
 
 #: ../../data/scripting/infrastructure.lua:187
 msgid "Not enough space"
-msgstr ""
+msgstr "Nema dovoljno mjesta"
 
 #: ../../data/scripting/infrastructure.lua:285
 msgid "No rocks nearby"
-msgstr ""
+msgstr "U blizini nema stijena"
 
 #: ../../data/scripting/infrastructure.lua:285
 msgid ""
@@ -53,7 +53,7 @@ msgstr ""
 
 #: ../../data/scripting/infrastructure.lua:291
 msgid "Not enough trees nearby"
-msgstr ""
+msgstr "U blizini nema dovoljno stabala"
 
 #: ../../data/scripting/infrastructure.lua:291
 msgid ""
@@ -68,11 +68,11 @@ msgstr "Status"
 
 #: ../../data/scripting/messages.lua:293
 msgid "New Objective"
-msgstr ""
+msgstr "Novi zadatak"
 
 #: ../../data/scripting/messages.lua:295
 msgid "New Objectives"
-msgstr ""
+msgstr "Novi zadatak"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
@@ -127,22 +127,22 @@ msgstr ""
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:380
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:206
 msgid "No AI"
-msgstr ""
+msgstr "Bez AI"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:96
 msgid "Normal AI"
-msgstr ""
+msgstr "Normalna AI"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:111
 msgid "Weak AI"
-msgstr ""
+msgstr "Slaba AI"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:126
 msgid "Very Weak AI"
-msgstr ""
+msgstr "Jako slaba AI"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -310,7 +310,7 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:130
 #: ../../src/wui/interactive_gamebase.cc:82
 msgid "Show / Hide"
-msgstr ""
+msgstr "Pokaži / Sakrij"
 
 #: ../../src/editor/editorinteractive.cc:143
 msgid "Tool size"
@@ -366,7 +366,7 @@ msgstr "Spremi zemljovid"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:235
 msgid "Publish Map Online…"
-msgstr ""
+msgstr "Objavi zemljovid online"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:243
@@ -536,7 +536,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/options.cc:287
 #: ../../src/wui/interactive_gamebase.cc:268
 msgid "Show Building Spaces"
-msgstr ""
+msgstr "Pokaži mjesta za građevine"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether to
 #. show maximum
@@ -950,7 +950,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/field_info_window.cc:233
 msgid "Size: %1% × %2%"
-msgstr ""
+msgstr "Veličina: %1% × %2%"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:237
 #, c-format
@@ -971,7 +971,7 @@ msgstr "Autor: %s"
 #: ../../src/ui_fsmenu/main.cc:484 ../../src/ui_fsmenu/mapdetailsbox.cc:124
 #, c-format
 msgid "Description: %s"
-msgstr ""
+msgstr "Opis: %s"
 
 #. * TRANSLATORS: No add-ons enabled
 #: ../../src/editor/ui_menus/field_info_window.cc:251
@@ -1013,7 +1013,7 @@ msgstr "Scenariji za mrežnu igru"
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:85
 #: ../../src/wui/mapdata.cc:193
 msgid "Singleplayer Scenarios"
-msgstr ""
+msgstr "Scenariji za jednog igrača"
 
 #. * TRANSLATORS: Directory name for downloaded maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:87
@@ -1074,7 +1074,7 @@ msgstr "OK"
 #: ../../src/wui/game_main_menu_save_game.cc:99
 #: ../../src/wui/pinned_note.cc:67
 msgid "Cancel"
-msgstr "Poništi"
+msgstr "Odustani"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:143
 msgid "File names"
@@ -1154,7 +1154,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:389
 msgid "Tags:"
-msgstr ""
+msgstr "Oznake:"
 
 #. * TRANSLATORS: Header for suitable team line-up tags, like "Free for all",
 #. * "Teams of 2", etc.
@@ -1218,7 +1218,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:502
 #: ../../src/wui/mapdetails.cc:176
 msgid "Tags"
-msgstr ""
+msgstr "Oznake"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:504
 msgid "Teams"
@@ -1231,7 +1231,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:554
 msgid "Size: %1% x %2%"
-msgstr ""
+msgstr "Veličina: %1% x %2%"
 
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:62
 msgid "Create Map"
@@ -1259,7 +1259,7 @@ msgstr "Igrači:"
 #. editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:88
 msgid "Low"
-msgstr "Niska"
+msgstr "Siromašno"
 
 #. * TRANSLATORS: Amount of resources in the random map generator in the
 #. editor
@@ -1272,27 +1272,27 @@ msgstr "Srednja"
 #. editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:92
 msgid "High"
-msgstr "Visoka"
+msgstr "Bogato"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:102
 msgid "Climate"
-msgstr ""
+msgstr "Klima"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:126
 msgid "Terrain Distribution"
-msgstr ""
+msgstr "Raspodjela zemlje"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:143
 msgid "Water:"
-msgstr ""
+msgstr "Voda:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:157
 msgid "Land:"
-msgstr ""
+msgstr "Zemlja:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:171
 msgid "Wasteland:"
-msgstr ""
+msgstr "Pustopoljina"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:184
 msgid "Mountains:"
@@ -1312,11 +1312,11 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:220
 msgid "Random number:"
-msgstr ""
+msgstr "Nasumični broj:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:235
 msgid "Generate a new random number"
-msgstr ""
+msgstr "Napravi novi nasumični broj"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:244
 msgid "Map ID:"
@@ -1332,21 +1332,21 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:282
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:316
 msgid "Random"
-msgstr ""
+msgstr "Slučajna"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:313
 msgid "Alpine"
-msgstr ""
+msgstr "Planine"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:314
 msgid "Atoll"
-msgstr ""
+msgstr "Otoci"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:315
 #: ../../src/logic/map.cc:62
 msgid "Wasteland"
-msgstr ""
+msgstr "Pustopoljina"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:624
 msgid "Generating random map…"
@@ -1465,11 +1465,11 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/map_size_box.cc:38
 msgid "Width"
-msgstr ""
+msgstr "Širina"
 
 #: ../../src/editor/ui_menus/map_size_box.cc:50
 msgid "Height"
-msgstr ""
+msgstr "Visina"
 
 #. * TRANSLATORS: Window title in the editor when a player has selected more
 #. than the
@@ -1536,7 +1536,7 @@ msgstr "Pleme"
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:97
 msgctxt "tribe"
 msgid "Random"
-msgstr ""
+msgstr "Nasumično"
 
 #: ../../src/editor/ui_menus/player_menu.cc:205
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:463
@@ -1604,7 +1604,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:53
 msgid "Minimum height:"
-msgstr ""
+msgstr "Minimalna visina:"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:66
 msgid "Maximum height:"
@@ -1694,7 +1694,7 @@ msgstr "Veličina alata"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:51
 msgid "Size:"
-msgstr ""
+msgstr "Veličina:"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:64
 msgid "Gaps:"
@@ -1747,11 +1747,11 @@ msgstr ""
 #: ../../src/game_io/game_saver.cc:50
 #, c-format
 msgid "Saving game: %1$s (%2$d/%3$d)"
-msgstr ""
+msgstr "Spremanje igre: : %1$s(%2$d/%3$d)"
 
 #: ../../src/game_io/game_saver.cc:52
 msgid "Autosaving game…"
-msgstr ""
+msgstr "Automatsko spremanje igre..."
 
 #: ../../src/game_io/game_saver.cc:103
 msgid "Interactive player"
@@ -1904,7 +1904,7 @@ msgstr ""
 #. * TRANSLATORS: Header for campaign name
 #: ../../src/logic/addons.cc:61 ../../src/ui_fsmenu/campaigndetails.cc:48
 msgid "Campaign"
-msgstr ""
+msgstr "Pohod"
 
 #: ../../src/logic/addons.cc:64
 msgid "Win Condition"
@@ -2097,7 +2097,7 @@ msgstr ""
 
 #: ../../src/logic/generic_save_handler.cc:235
 msgid "Try saving under a different name!"
-msgstr ""
+msgstr "Pokušaj spremiti sa drugim imenom!"
 
 #: ../../src/logic/generic_save_handler.cc:240
 #, c-format
@@ -2629,15 +2629,15 @@ msgstr ""
 
 #: ../../src/logic/map_objects/tribes/warehouse.cc:557
 msgid "A new port was added to your economy."
-msgstr ""
+msgstr "Nova luka je dodana u vaše gospodarstvo."
 
 #: ../../src/logic/map_objects/tribes/warehouse.cc:560
 msgid "A new headquarters was added to your economy."
-msgstr ""
+msgstr "Novo sjedište je dodano u vaše gospodarstvo."
 
 #: ../../src/logic/map_objects/tribes/warehouse.cc:563
 msgid "A new warehouse was added to your economy."
-msgstr ""
+msgstr "Novo skladište je dodano u vaše gospodarstvo."
 
 #. * TRANSLATORS: Message header, short for "Waterway Destroyed" (not much
 #. space
@@ -2668,7 +2668,7 @@ msgstr ""
 #: ../../src/wui/productionsitewindow.cc:107
 #: ../../src/wui/productionsitewindow.cc:124
 msgid "Worker"
-msgstr ""
+msgstr "Radnik"
 
 #: ../../src/logic/map_objects/tribes/worker.cc:2089
 msgid "Worker got lost!"
@@ -2714,19 +2714,19 @@ msgstr ""
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
-msgstr ""
+msgstr "Brod %d"
 
 #: ../../src/logic/player.cc:2014
 #, c-format
 msgctxt "warehouse"
 msgid "Port %d"
-msgstr ""
+msgstr "Luka %d"
 
 #: ../../src/logic/player.cc:2014
 #, c-format
 msgctxt "warehouse"
 msgid "Warehouse %d"
-msgstr ""
+msgstr "Skladište %d"
 
 #: ../../src/logic/playercommand.cc:2204
 #: ../../src/wlapplication_options.cc:663
@@ -2827,7 +2827,7 @@ msgstr ""
 
 #: ../../src/logic/replay_game_controller.cc:102
 msgid "End of Replay"
-msgstr ""
+msgstr "Kraj reprize"
 
 #: ../../src/logic/replay_game_controller.cc:103
 msgid ""
@@ -2837,11 +2837,11 @@ msgstr "Došao je kraj snimke i igra je zaustavljena. Možete pokrenuti igru i n
 
 #: ../../src/logic/save_handler.cc:114
 msgid "Saving game…"
-msgstr ""
+msgstr "Spremanje igre..."
 
 #: ../../src/logic/save_handler.cc:152
 msgid "Saving skipped"
-msgstr ""
+msgstr "Spremanje je preskočeno"
 
 #: ../../src/logic/save_handler.cc:170
 #: ../../src/wui/game_main_menu_save_game.cc:338
@@ -2875,12 +2875,12 @@ msgstr ""
 #: ../../src/map_io/map_saver.cc:134
 #: ../../src/map_io/widelands_map_loader.cc:257
 msgid "Starting positions"
-msgstr ""
+msgstr "Početno mjesto"
 
 #: ../../src/map_io/map_saver.cc:162
 #: ../../src/map_io/widelands_map_loader.cc:285
 msgid "Map version"
-msgstr ""
+msgstr "Verzija zemljovida"
 
 #: ../../src/map_io/map_saver.cc:174
 #: ../../src/map_io/widelands_map_loader.cc:291
@@ -2895,7 +2895,7 @@ msgstr "Zastave"
 #: ../../src/map_io/map_saver.cc:206
 #: ../../src/map_io/widelands_map_loader.cc:323
 msgid "Roads and waterways"
-msgstr ""
+msgstr "Ceste i vodeni putevi"
 
 #: ../../src/map_io/map_saver.cc:228
 #: ../../src/map_io/widelands_map_loader.cc:253
@@ -2948,7 +2948,7 @@ msgstr ""
 
 #: ../../src/map_io/map_saver.cc:317
 msgid "Minimap"
-msgstr ""
+msgstr "Minimapa"
 
 #: ../../src/map_io/map_scripting_packet.cc:82
 msgid ""
@@ -2959,7 +2959,7 @@ msgstr ""
 
 #: ../../src/map_io/s2map.cc:421 ../../src/map_io/widelands_map_loader.cc:196
 msgid "Loading map…"
-msgstr ""
+msgstr "Učitavam zemljovid..."
 
 #: ../../src/map_io/s2map.cc:459
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -2968,7 +2968,7 @@ msgstr "Bluebyte Settlers II zemljovid. Nema komentara!"
 #: ../../src/map_io/widelands_map_loader.cc:209
 #, c-format
 msgid "Loading map: %1$s (%2$u/%3$d)"
-msgstr ""
+msgstr "Učitavam mapu: %1$s (%2$u/%3$d)"
 
 #: ../../src/map_io/widelands_map_loader.cc:304
 msgid "Territories"
@@ -2976,32 +2976,32 @@ msgstr ""
 
 #: ../../src/map_io/widelands_map_loader.cc:344
 msgid "Initializing flags"
-msgstr ""
+msgstr "Postavljam zastave"
 
 #: ../../src/map_io/widelands_map_loader.cc:351
 msgid "Initializing roads and waterways"
-msgstr ""
+msgstr "Postavljam ceste i vodene puteve"
 
 #: ../../src/map_io/widelands_map_loader.cc:364
 msgid "Initializing buildings"
-msgstr ""
+msgstr "Postavljam građevine"
 
 #: ../../src/map_io/widelands_map_loader.cc:371
 msgid "Initializing map objects"
-msgstr ""
+msgstr "Postavljam predmete"
 
 #: ../../src/map_io/widelands_map_loader.cc:435
 msgid "Checking map"
-msgstr ""
+msgstr "Provjeravam zemljovid"
 
 #: ../../src/map_io/widelands_map_loader.cc:450
 msgid "Postloading map objects"
-msgstr ""
+msgstr "Učitavam objekte sa mape"
 
 #: ../../src/network/gameclient.cc:162 ../../src/network/gamehost.cc:561
 #: ../../src/ui_fsmenu/launch_spg.cc:174 ../../src/wlapplication.cc:783
 msgid "Preparing game…"
-msgstr ""
+msgstr "Pripremam igru..."
 
 #: ../../src/network/gameclient.cc:232
 #: ../../src/network/internet_gaming.cc:104
@@ -3090,7 +3090,7 @@ msgstr ""
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:130
 msgid "/endForcedPause        -  Return game to normal speed."
-msgstr "/endForcedPause        -  Vrača igru u normalnu brzinu."
+msgstr "/endForcedPause        -  Vrača igru na normalnu brzinu."
 
 #: ../../src/network/gamehost.cc:136
 msgid "Wrong use, should be: /announce <message>"
@@ -3611,7 +3611,7 @@ msgstr ""
 
 #: ../../src/ui_basic/color_chooser.cc:253
 msgid "Choose Color…"
-msgstr ""
+msgstr "Odaberite boju..."
 
 #: ../../src/ui_basic/color_chooser.cc:290
 msgid "Initial Color"
@@ -3641,15 +3641,15 @@ msgstr ""
 
 #: ../../src/ui_basic/color_chooser.cc:339
 msgid "Red"
-msgstr ""
+msgstr "Crvena"
 
 #: ../../src/ui_basic/color_chooser.cc:352
 msgid "Green"
-msgstr ""
+msgstr "Zelena"
 
 #: ../../src/ui_basic/color_chooser.cc:365
 msgid "Blue"
-msgstr ""
+msgstr "Plava"
 
 #: ../../src/ui_basic/color_chooser.cc:484
 msgid "Remove from favorites"
@@ -3683,7 +3683,7 @@ msgstr ""
 
 #: ../../src/ui_basic/panel.cc:307
 msgid "Please wait…"
-msgstr ""
+msgstr "Molim pričekajte..."
 
 #: ../../src/ui_basic/panel.cc:438
 msgid "Game ending – please wait…"
@@ -3691,7 +3691,7 @@ msgstr ""
 
 #: ../../src/ui_basic/progresswindow.cc:79
 msgid "Loading…"
-msgstr ""
+msgstr "Učitavanje...."
 
 #: ../../src/ui_basic/spinbox.cc:153 ../../src/ui_basic/spinbox.cc:166
 #, c-format
@@ -3750,11 +3750,11 @@ msgstr[2] ""
 
 #: ../../src/ui_basic/table.cc:157
 msgid "Click to reverse sorting"
-msgstr ""
+msgstr "Kliknite za obrnuto sortiranje"
 
 #: ../../src/ui_basic/table.cc:157
 msgid "Click to sort by this column"
-msgstr ""
+msgstr "Kliknite za sortiranje po ovom stupcu"
 
 #. * TRANSLATORS: Tooltip format for table headers: %1 is column description,
 #. %2 is
@@ -3762,7 +3762,7 @@ msgstr ""
 #: ../../src/ui_basic/table.cc:163
 #, c-format
 msgid "%1$s<br>(%2$s)"
-msgstr ""
+msgstr "%1$s <br> ( %2$s )"
 
 #: ../../src/ui_basic/window.cc:101 ../../src/ui_fsmenu/about.cc:41
 #: ../../src/ui_fsmenu/crash_report.cc:70
@@ -3774,11 +3774,11 @@ msgstr "Zatvori"
 
 #: ../../src/ui_basic/window.cc:167
 msgid "Minimize"
-msgstr ""
+msgstr "Stisni"
 
 #: ../../src/ui_basic/window.cc:167
 msgid "Restore"
-msgstr ""
+msgstr "Povečaj"
 
 #: ../../src/ui_basic/window.cc:172 ../../src/wui/info_panel.cc:198
 msgid "Pin"
@@ -3790,7 +3790,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/about.cc:38 ../../src/ui_fsmenu/main.cc:517
 msgid "About Widelands"
-msgstr ""
+msgstr "O igri Widelands"
 
 #: ../../src/ui_fsmenu/about.cc:49 ../../src/ui_fsmenu/about.cc:54
 msgid "Lua Error"
@@ -3798,7 +3798,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/about.cc:59 ../../src/ui_fsmenu/tech_info.cc:131
 msgid "Technical Info"
-msgstr ""
+msgstr "Tehničke info"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:35
 msgid "Contact Form"
@@ -3844,7 +3844,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:182
 #: ../../src/ui_fsmenu/training_wheel_options.cc:119
 msgid "Reset"
-msgstr ""
+msgstr "Resetiraj"
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:81
 #: ../../src/ui_fsmenu/login_box.cc:71
@@ -3942,7 +3942,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:230
 msgid "Minimum quality"
-msgstr ""
+msgstr "Minimalna kvaliteta"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:241
 msgid "Choose add-on to upload…"
@@ -3968,11 +3968,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:287
 msgid "Refresh"
-msgstr ""
+msgstr "Osvježi"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:288
 msgid "Refresh the list of add-ons available from the server"
-msgstr ""
+msgstr "Osvježi popis dostupnih dodataka (sa servera)"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:305
 msgid "Fix dependencies…"
@@ -4259,7 +4259,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/manager.cc:1068
 #, c-format
 msgid "Installed (%u)"
-msgstr ""
+msgstr "Instalirana (%u)"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1146
 msgid "Browse"
@@ -4268,7 +4268,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/manager.cc:1146
 #, c-format
 msgid "Browse (%u)"
-msgstr ""
+msgstr "Pregledaj (%u)"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1156
 #, c-format
@@ -4453,7 +4453,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/packager.cc:177 ../../src/wui/mapdetails.cc:198
 #: ../../src/wui/mapdetails.cc:203
 msgid "Minimum Widelands Version:"
-msgstr ""
+msgstr "Minimalna verzija Widelandsa:"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:183
 msgid "Maximum Widelands Version:"
@@ -4695,7 +4695,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/main.cc:477 ../../src/ui_fsmenu/mapdetailsbox.cc:112
 #, c-format
 msgid "Size: %s"
-msgstr ""
+msgstr "Veličina: %s"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:287
 #: ../../src/ui_fsmenu/main.cc:479 ../../src/ui_fsmenu/mapdetailsbox.cc:114
@@ -4708,12 +4708,12 @@ msgstr ""
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:119
 #, c-format
 msgid "Players: %s"
-msgstr ""
+msgstr "Igrača: %s"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:291
 #, c-format
 msgid "Minimum Widelands Version: %s"
-msgstr ""
+msgstr "Minimalna verzija Widelandsa: %s"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:324
 msgid "Top-level directory"
@@ -5304,7 +5304,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:33
 msgid "Choose Campaign"
-msgstr ""
+msgstr "Odaberite pohod"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:38
 #: ../../src/ui_fsmenu/loadgame.cc:76
@@ -5489,15 +5489,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:211
 msgid "Edit Keyboard And Mouse Actions"
-msgstr ""
+msgstr "Uređivanje tipkovničkih kratica i poteza mišom"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:223
 msgid "Reset all"
-msgstr ""
+msgstr "Resetiraj sve"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:224
 msgid "Reset all to defaults"
-msgstr ""
+msgstr "Vrati sve postavke na tvorničke vrijednosti"
 
 #. * TRANSLATORS: This is a button label for a keyboard shortcut in the form
 #. "Action: Key"
@@ -5522,7 +5522,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/keyboard_options.cc:297
 #: ../../src/wui/interactive_player.cc:340
 msgid "General"
-msgstr ""
+msgstr "Općenito"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:299
 #: ../../src/wlapplication_options.cc:285
@@ -5543,7 +5543,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launch_game.cc:53
 msgid "Configure this game"
-msgstr ""
+msgstr "Prilagodi ovu partiju"
 
 #: ../../src/ui_fsmenu/launch_game.cc:66
 msgid ""
@@ -5552,7 +5552,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launch_game.cc:90
 msgid "Playing time"
-msgstr ""
+msgstr "Trajanje partije"
 
 #: ../../src/ui_fsmenu/launch_game.cc:104
 msgid "Show or hide additional game configuration options"
@@ -5767,7 +5767,7 @@ msgstr "Učitaj ovu igru"
 
 #: ../../src/ui_fsmenu/login_box.cc:37 ../../src/ui_fsmenu/main.cc:438
 msgid "Online Game Settings"
-msgstr ""
+msgstr "Postavke online igre"
 
 #: ../../src/ui_fsmenu/login_box.cc:44 ../../src/wlapplication_options.cc:407
 #: ../../src/wui/economy_options_window.cc:678
@@ -5814,7 +5814,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:371
 msgid "Begin a new game"
-msgstr ""
+msgstr "Započni novu igru"
 
 #: ../../src/ui_fsmenu/main.cc:371 ../../src/wlapplication_options.cc:249
 msgid "New Game"
@@ -5823,11 +5823,11 @@ msgstr "Nova igra"
 #: ../../src/ui_fsmenu/main.cc:373 ../../src/ui_fsmenu/random_game.cc:29
 #: ../../src/wlapplication_options.cc:263
 msgid "New Random Game"
-msgstr ""
+msgstr "Nova nasumična igra"
 
 #: ../../src/ui_fsmenu/main.cc:374
 msgid "Create a new random match"
-msgstr ""
+msgstr "Stvori novu igru sa nasumično odabranim postavkama"
 
 #: ../../src/ui_fsmenu/main.cc:376 ../../src/wlapplication_options.cc:273
 msgid "Campaigns"
@@ -5835,15 +5835,15 @@ msgstr "Pohodi"
 
 #: ../../src/ui_fsmenu/main.cc:376
 msgid "Play a campaign"
-msgstr ""
+msgstr "Igraj kampanju "
 
 #: ../../src/ui_fsmenu/main.cc:378 ../../src/wlapplication_options.cc:268
 msgid "Tutorials"
-msgstr ""
+msgstr "Vodiči"
 
 #: ../../src/ui_fsmenu/main.cc:379
 msgid "Play one of our beginners’ tutorials"
-msgstr ""
+msgstr "Nauči igru uz pomoć naših vodiča (tutoriala)"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #. * TRANSLATORS: An entry in the game's main menu
@@ -5856,11 +5856,11 @@ msgstr "Učitaj igru"
 
 #: ../../src/ui_fsmenu/main.cc:382
 msgid "Continue a saved game"
-msgstr ""
+msgstr "Nastavi spremljenu igru"
 
 #: ../../src/ui_fsmenu/main.cc:403 ../../src/wlapplication_options.cc:310
 msgid "Continue Playing"
-msgstr ""
+msgstr "Nastavi igrati"
 
 #: ../../src/ui_fsmenu/main.cc:412
 #, c-format
@@ -5875,18 +5875,18 @@ msgstr ""
 #: ../../src/ui_fsmenu/main.cc:421
 #, c-format
 msgid "Gametime: %s"
-msgstr ""
+msgstr "Odigrano: %s"
 
 #. * TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today,
 #. * 10:30'
 #: ../../src/ui_fsmenu/main.cc:427
 #, c-format
 msgid "Saved: %s"
-msgstr ""
+msgstr "Spremljeno: %s"
 
 #: ../../src/ui_fsmenu/main.cc:435
 msgid "Online Game"
-msgstr ""
+msgstr "Online igra"
 
 #: ../../src/ui_fsmenu/main.cc:436
 msgid "Join the Widelands lobby"
@@ -5922,11 +5922,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:491
 msgid "Single Player…"
-msgstr ""
+msgstr "Igrajte sami..."
 
 #: ../../src/ui_fsmenu/main.cc:492
 msgid "Multiplayer…"
-msgstr ""
+msgstr "Igrajte s prijateljima..."
 
 #: ../../src/ui_fsmenu/main.cc:493
 msgid "Editor…"
@@ -5934,15 +5934,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:495
 msgid "Begin or load a single-player campaign or free game"
-msgstr ""
+msgstr "Započni novu ili učitaj kampanju ili brzu igru za jednog igrača"
 
 #: ../../src/ui_fsmenu/main.cc:498
 msgid "Play with your friends over the internet"
-msgstr ""
+msgstr "Igraj sa prijateljima preko interneta ili lokalno"
 
 #: ../../src/ui_fsmenu/main.cc:501
 msgid "Launch the map editor"
-msgstr ""
+msgstr "Pokreni editor mapa"
 
 #: ../../src/ui_fsmenu/main.cc:504 ../../src/wlapplication_options.cc:258
 msgid "Watch Replay"
@@ -5950,15 +5950,15 @@ msgstr "Pogledaj reprizu igre"
 
 #: ../../src/ui_fsmenu/main.cc:506
 msgid "Watch the replay of an old game"
-msgstr ""
+msgstr "Pogledaj reprizu stare igre koju ste spremili"
 
 #: ../../src/ui_fsmenu/main.cc:509 ../../src/wlapplication_options.cc:323
 msgid "Add-Ons"
-msgstr ""
+msgstr "Proširenja"
 
 #: ../../src/ui_fsmenu/main.cc:511
 msgid "Install and manage add-ons"
-msgstr ""
+msgstr "Instaliraj i upravljaj proširenjima"
 
 #: ../../src/ui_fsmenu/main.cc:513 ../../src/ui_fsmenu/options.cc:87
 #: ../../src/wlapplication_options.cc:340
@@ -5967,11 +5967,11 @@ msgstr "Postavke"
 
 #: ../../src/ui_fsmenu/main.cc:515
 msgid "Technical and game-related settings"
-msgstr ""
+msgstr "Prilagodite razne tehničke i igračke mogućnosti igre"
 
 #: ../../src/ui_fsmenu/main.cc:519
 msgid "Readme, License, and Credits"
-msgstr ""
+msgstr "Readme, licence i zasluge"
 
 #: ../../src/ui_fsmenu/main.cc:521 ../../src/wlapplication_options.cc:314
 msgid "Exit Widelands"
@@ -5979,7 +5979,7 @@ msgstr "Zatvori Widelands"
 
 #: ../../src/ui_fsmenu/main.cc:523
 msgid "Quit the game"
-msgstr ""
+msgstr "Izađi iz igre"
 
 #. * TRANSLATORS: %1$s = version string and build type  ("Debug" or "Release")
 #: ../../src/ui_fsmenu/main.cc:528
@@ -6061,7 +6061,7 @@ msgstr "(nema zemljovida)"
 
 #: ../../src/ui_fsmenu/mapselect.cc:48
 msgid "Choose Map"
-msgstr ""
+msgstr "Odaberite zemljovid"
 
 #: ../../src/ui_fsmenu/mapselect.cc:86
 msgid "Show all maps"
@@ -6077,11 +6077,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:109
 msgid "Official & Unofficial"
-msgstr ""
+msgstr "Službeni i neslužbeni"
 
 #: ../../src/ui_fsmenu/mapselect.cc:109
 msgid "Show both official and unofficial maps"
-msgstr ""
+msgstr "Prikaži oboje, službene i neslužbene zemljovide"
 
 #: ../../src/ui_fsmenu/mapselect.cc:121
 msgid "Filter by desired line-up"
@@ -6092,7 +6092,7 @@ msgstr ""
 #. * "Teams of 2" etc.
 #: ../../src/ui_fsmenu/mapselect.cc:125
 msgid "Any Teams"
-msgstr ""
+msgstr "Svejedno"
 
 #: ../../src/ui_fsmenu/mapselect.cc:125
 msgid "Do not filter by line-up suggestions"
@@ -6104,16 +6104,16 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:495
 msgid "Balanced & Unbalanced"
-msgstr ""
+msgstr "Izjednačeni i neuravnoteženi"
 
 #: ../../src/ui_fsmenu/mapselect.cc:495
 msgid "Show both balanced and unbalanced maps"
-msgstr ""
+msgstr "Prikaži izjednačene i neuravnotežene zemljovide"
 
 #: ../../src/ui_fsmenu/mapselect.cc:500
 msgctxt "balancing"
 msgid "Unspecified"
-msgstr ""
+msgstr "Neodređeno"
 
 #: ../../src/ui_fsmenu/mapselect.cc:501
 msgid "The map does not specify whether it is balanced"
@@ -6240,7 +6240,7 @@ msgstr ""
 #. The ':' will be added by another format string.
 #: ../../src/ui_fsmenu/mousewheel_options.cc:441
 msgid "Change Game Speed"
-msgstr ""
+msgstr "Promjenite brzinu izvođenja igre"
 
 #. * TRANSLATORS: Name of a function for the scroll wheel.
 #. Used as e.g.: "Change Editor Toolsize: Ctrl+Any scroll"
@@ -6334,7 +6334,7 @@ msgstr "Gledatelj"
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:198
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:54
 msgid "Player Number"
-msgstr ""
+msgstr "Igrač broj"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:216
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:370
@@ -6355,7 +6355,7 @@ msgstr "Tim"
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:178
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:179
 msgid "Random AI"
-msgstr ""
+msgstr "Nasumični AI"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:351
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:353
@@ -6469,7 +6469,7 @@ msgstr "Jezik"
 
 #: ../../src/ui_fsmenu/options.cc:146
 msgid "Window Size"
-msgstr ""
+msgstr "Veličina prozora"
 
 #: ../../src/ui_fsmenu/options.cc:154
 msgid "Use system mouse cursor"
@@ -6497,15 +6497,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:223
 msgid "Save game automatically every:"
-msgstr ""
+msgstr "Automatski spremi igru svakih:"
 
 #: ../../src/ui_fsmenu/options.cc:237
 msgid "Maximum number of autosave files:"
-msgstr ""
+msgstr "Maksimalni broj datoteka za automatsko spremanje:"
 
 #: ../../src/ui_fsmenu/options.cc:253
 msgid "Delete replays after:"
-msgstr ""
+msgstr "Obriši reprize nakon:"
 
 #: ../../src/ui_fsmenu/options.cc:263
 msgid "Skip autosaves while inactive"
@@ -6522,7 +6522,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/options.cc:289
 #: ../../src/wui/interactive_gamebase.cc:275
 msgid "Show Census"
-msgstr ""
+msgstr "Pokaži oznake"
 
 #: ../../src/ui_fsmenu/options.cc:291
 #: ../../src/wui/interactive_gamebase.cc:284
@@ -6537,7 +6537,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/options.cc:298
 #: ../../src/wui/interactive_gamebase.cc:302
 msgid "Show Buildings"
-msgstr ""
+msgstr "Pokaži građevine"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
@@ -6548,7 +6548,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:316
 msgid "Pause game when inactive for:"
-msgstr ""
+msgstr "Zaustavi igru ako sam neaktivan duže od:"
 
 #: ../../src/ui_fsmenu/options.cc:326
 msgid "Start building road after placing a flag"
@@ -6597,19 +6597,19 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:402
 msgid "Interface"
-msgstr ""
+msgstr "Sučelje"
 
 #: ../../src/ui_fsmenu/options.cc:403
 msgid "Sound"
-msgstr ""
+msgstr "Zvuk"
 
 #: ../../src/ui_fsmenu/options.cc:404
 msgid "Saving"
-msgstr ""
+msgstr "Spremanje"
 
 #: ../../src/ui_fsmenu/options.cc:405
 msgid "New Games"
-msgstr ""
+msgstr "Nove igre"
 
 #: ../../src/ui_fsmenu/options.cc:406
 msgid "In-Game"
@@ -6666,7 +6666,7 @@ msgid ""
 "usually – but not always – well playable. Seafaring and artifacts are not "
 "supported. Add-ons of the Tribes and Script categories are disabled in "
 "random matches."
-msgstr ""
+msgstr "Generator nasumičnih zemljovida je još uvijek u beta fazi razvoja. Zamljovidi koje stvori su obično, ali ne i uvijek, poprilično igrivi. Pomorstvo i artefakti nisu podržani. Dodaci i skripte nisu uključeni i ne mogu se koristiti u nasumičnim partijama."
 
 #: ../../src/ui_fsmenu/random_game.cc:127
 msgid "Map Generation Error"
@@ -6681,15 +6681,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/scenario_select.cc:47
 msgid "Choose Scenario"
-msgstr ""
+msgstr "Odaberite scenarij"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:47
 msgid "Choose Tutorial"
-msgstr ""
+msgstr "Odaberite vodiča"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:87
 msgid "Pick a tutorial from the list, then hit “OK”."
-msgstr ""
+msgstr "Odaberite vodiča sa popisa, nakon toga kliknite na “OK”."
 
 #: ../../src/ui_fsmenu/scenario_select.cc:89
 msgid ""
@@ -6698,7 +6698,7 @@ msgstr "Desno je opis odabranog vodiča."
 
 #: ../../src/ui_fsmenu/scenario_select.cc:106
 msgid "Return to campaign selection"
-msgstr ""
+msgstr "Povratak na izbor pohoda"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:107
 msgid "Play this scenario"
@@ -7056,7 +7056,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:219
 msgid "Smokery"
-msgstr ""
+msgstr "Pušnica"
 
 #: ../../src/wlapplication_options.cc:220
 msgid "Tavern"
@@ -7156,11 +7156,11 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:290
 msgid "Editor – Load Map"
-msgstr ""
+msgstr "Editor – učitaj mapu"
 
 #: ../../src/wlapplication_options.cc:295
 msgid "Editor – New Map"
-msgstr ""
+msgstr "Editor – nova mapa"
 
 #: ../../src/wlapplication_options.cc:300
 msgid "Editor – New Random Map"
@@ -7176,7 +7176,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:346
 msgid "Toggle Building Spaces"
-msgstr ""
+msgstr "Uključi/isključi mjesta za građevine"
 
 #: ../../src/wlapplication_options.cc:351
 msgid "Toggle Minimap"
@@ -7349,7 +7349,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:606
 msgid "Toggle Census"
-msgstr ""
+msgstr "Pokaži/sakrij oznake"
 
 #: ../../src/wlapplication_options.cc:611
 msgid "Toggle Status Labels"
@@ -7361,7 +7361,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:621
 msgid "Toggle Buildings Visibility"
-msgstr ""
+msgstr "Uključi/isključi vidljivost građevina"
 
 #: ../../src/wlapplication_options.cc:626
 msgid "Toggle Overlapping Workareas"
@@ -7426,7 +7426,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:705
 msgid "Pause The Game"
-msgstr ""
+msgstr "Zaustavi igru"
 
 #: ../../src/wlapplication_options.cc:710
 msgid "Scroll to Starting Field"
@@ -7511,17 +7511,17 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:809
 msgid "Toggle Quick Navigation"
-msgstr ""
+msgstr "Pokaži/sakri brzo premještanje"
 
 #: ../../src/wlapplication_options.cc:816
 #, c-format
 msgid "Set Landmark #%d"
-msgstr ""
+msgstr "Postavi orjentir #%d"
 
 #: ../../src/wlapplication_options.cc:820
 #, c-format
 msgid "Go To Landmark #%d"
-msgstr ""
+msgstr "Odi na orjentir#%d"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #. * TRANSLATORS: An entry in the game's main menu
@@ -8056,7 +8056,7 @@ msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:82
 msgid "(no building selected)"
-msgstr ""
+msgstr "(nije odabrana građevina)"
 
 #: ../../src/wui/building_statistics_menu.cc:88
 msgid "Owned:"
@@ -8074,13 +8074,13 @@ msgstr ""
 #: ../../src/wui/building_statistics_menu.cc:154
 #: ../../src/wui/building_statistics_menu.cc:173
 msgid "Show previous building"
-msgstr ""
+msgstr "Pokaži prethodnu građevinu"
 
 #: ../../src/wui/building_statistics_menu.cc:144
 #: ../../src/wui/building_statistics_menu.cc:163
 #: ../../src/wui/building_statistics_menu.cc:182
 msgid "Show next building"
-msgstr ""
+msgstr "Pokaži sljedeću građevinu"
 
 #: ../../src/wui/building_statistics_menu.cc:232
 msgid ""
@@ -8090,15 +8090,15 @@ msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:366
 msgid "Small buildings"
-msgstr ""
+msgstr "Malene građevine"
 
 #: ../../src/wui/building_statistics_menu.cc:368
 msgid "Medium buildings"
-msgstr ""
+msgstr "Građevine srednje veličine"
 
 #: ../../src/wui/building_statistics_menu.cc:370
 msgid "Big buildings"
-msgstr ""
+msgstr "Velike građevine"
 
 #: ../../src/wui/building_statistics_menu.cc:372
 msgid "Mines"
@@ -8370,7 +8370,7 @@ msgstr "Sagradi malenu građevinu"
 
 #: ../../src/wui/fieldaction.cc:236
 msgid "Build big building"
-msgstr ""
+msgstr "Sagradi veliku građevinu"
 
 #: ../../src/wui/fieldaction.cc:236
 msgid "Build medium building"
@@ -8789,14 +8789,14 @@ msgstr "Prikaži dolazne poruke"
 #, c-format
 msgid "Restore the selected %d message"
 msgid_plural "Restore the selected %d messages"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Vrati %d odabranu poruku"
+msgstr[1] "Vrati %d odabranih poruka"
+msgstr[2] "Vrati %d odabranih poruka"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:638
 msgid "Restore selected message"
-msgstr ""
+msgstr "Vrati odabrane poruke"
 
 #. * TRANSLATORS: Tooltip in the messages window. There is a separate string
 #. for 1
@@ -9090,16 +9090,16 @@ msgstr ""
 #. * TRANSLATORS: Title for the map view menu button in the game
 #: ../../src/wui/interactive_base.cc:143
 msgid "Map View"
-msgstr ""
+msgstr "Pogled na zemljovid"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:293
 msgid "Hide Minimap"
-msgstr ""
+msgstr "Sakrij minimapu"
 
 #: ../../src/wui/interactive_base.cc:293
 msgid "Show Minimap"
-msgstr ""
+msgstr "Pokaži minimapu"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:300
@@ -9128,7 +9128,7 @@ msgstr ""
 #: ../../src/wui/interactive_base.cc:890
 #, c-format
 msgid "Road length: %1$u (%2$u)"
-msgstr ""
+msgstr "Dužina ceste: %1$u (%2$u)"
 
 #: ../../src/wui/interactive_base.cc:892
 #, c-format
@@ -9138,7 +9138,7 @@ msgstr ""
 #: ../../src/wui/interactive_base.cc:897
 #, c-format
 msgid "Road length: %u"
-msgstr ""
+msgstr "Dužina ceste: %u"
 
 #: ../../src/wui/interactive_base.cc:900
 #, c-format
@@ -9167,7 +9167,7 @@ msgstr "PAUZA"
 #. options o increase/decrease the gamespeed, and to pause the game
 #: ../../src/wui/interactive_gamebase.cc:116
 msgid "Game Speed"
-msgstr ""
+msgstr "Brzina izvođenja igre"
 
 #. * TRANSLATORS: Tooltip for Sound Options in the game's main menu
 #: ../../src/wui/interactive_gamebase.cc:149
@@ -9198,7 +9198,7 @@ msgstr ""
 #. building names are shown
 #: ../../src/wui/interactive_gamebase.cc:275
 msgid "Hide Census"
-msgstr ""
+msgstr "Sakrij oznake"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * building status labels are shown
@@ -9216,25 +9216,25 @@ msgstr ""
 #. * buildings are greyed out
 #: ../../src/wui/interactive_gamebase.cc:301
 msgid "Hide Buildings"
-msgstr ""
+msgstr "Sakrij građevine"
 
 #: ../../src/wui/interactive_gamebase.cc:348
 msgid "Speed +"
-msgstr ""
+msgstr "Brzina +"
 
 #. * TRANSLATORS: Tooltip for Speed + in the game's game speed menu
 #: ../../src/wui/interactive_gamebase.cc:351
 msgid "Increase the game speed"
-msgstr ""
+msgstr "Ubrzajte izvođenje igre"
 
 #: ../../src/wui/interactive_gamebase.cc:354
 msgid "Speed -"
-msgstr ""
+msgstr "Brzina -"
 
 #. * TRANSLATORS: Tooltip for Speed - in the game's game speed menu
 #: ../../src/wui/interactive_gamebase.cc:357
 msgid "Decrease the game speed"
-msgstr ""
+msgstr "Usporite izvođenje igre"
 
 #: ../../src/wui/interactive_gamebase.cc:363
 msgid "Resume"
@@ -9252,7 +9252,7 @@ msgstr ""
 #. * TRANSLATORS: Tooltip for Pause in the game's game speed menu
 #: ../../src/wui/interactive_gamebase.cc:372
 msgid "Pause the Game"
-msgstr ""
+msgstr "Zaustavi igru"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
 #: ../../src/wui/interactive_gamebase.cc:613
@@ -9281,7 +9281,7 @@ msgstr "Statistike"
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:314 ../../src/wui/map_tags.cc:51
 msgid "Seafaring"
-msgstr "Pomorski"
+msgstr "Pomorstvo"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:320
@@ -9363,12 +9363,12 @@ msgstr "Službeni"
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../src/wui/map_tags.cc:32
 msgid "The map is provided by the official Widelands release"
-msgstr ""
+msgstr "Ovaj zemljovid je dio službenog Widelands izdanja"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:35
 msgid "Unofficial"
-msgstr ""
+msgstr "Neslužbeni"
 
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../src/wui/map_tags.cc:37
@@ -9378,7 +9378,7 @@ msgstr ""
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:40
 msgid "Balanced"
-msgstr ""
+msgstr "Izjednačeno"
 
 #: ../../src/wui/map_tags.cc:43
 msgid ""
@@ -9614,7 +9614,7 @@ msgstr ""
 #: ../../src/wui/plot_area.cc:127
 msgctxt "unit_generic"
 msgid "minutes"
-msgstr ""
+msgstr "minuta"
 
 #: ../../src/wui/plot_area.cc:354
 msgid "game"
@@ -9667,7 +9667,7 @@ msgstr "Otkaži posao odabranom radniku"
 
 #: ../../src/wui/productionsitewindow.cc:246
 msgid "coming"
-msgstr ""
+msgstr "u dolasku"
 
 #: ../../src/wui/productionsitewindow.cc:246
 msgid "vacant"
@@ -9679,7 +9679,7 @@ msgstr "(neiskorišteno)"
 
 #: ../../src/wui/quicknavigation.cc:161
 msgid "Quick Navigation"
-msgstr ""
+msgstr "Brzo premještanje"
 
 #: ../../src/wui/quicknavigation.cc:174
 msgid "Go to previous location"
@@ -9691,15 +9691,15 @@ msgstr ""
 
 #: ../../src/wui/quicknavigation.cc:197
 msgid "Add a new landmark"
-msgstr ""
+msgstr "Dodaj novi orjentir"
 
 #: ../../src/wui/quicknavigation.cc:240 ../../src/wui/quicknavigation.cc:243
 msgid "Go to this landmark"
-msgstr ""
+msgstr "Odi na ovaj orjentir"
 
 #: ../../src/wui/quicknavigation.cc:251
 msgid "View this landmark in a watch window"
-msgstr ""
+msgstr "Otvori novi prozor s pogledom na ovaj orjentir"
 
 #: ../../src/wui/quicknavigation.cc:265
 msgid "Unset this landmark"
@@ -9711,7 +9711,7 @@ msgstr ""
 
 #: ../../src/wui/quicknavigation.cc:286
 msgid "Remove this landmark"
-msgstr ""
+msgstr "Ukloni ovaj orjentir"
 
 #: ../../src/wui/savegamedeleter.cc:52
 msgid "Confirm Deleting File"
@@ -10151,7 +10151,7 @@ msgstr ""
 
 #: ../../src/wui/sound_options.cc:149
 msgid "Play your own music in-game"
-msgstr ""
+msgstr "Pusti vlastitu glazbu u igri"
 
 #: ../../src/wui/sound_options.cc:151
 msgid ""
@@ -10164,7 +10164,7 @@ msgstr ""
 #: ../../src/wui/sound_options.cc:160
 msgctxt "sound_options"
 msgid "Music"
-msgstr ""
+msgstr "Glazba"
 
 #: ../../src/wui/sound_options.cc:163
 msgctxt "sound_options"
@@ -10179,7 +10179,7 @@ msgstr ""
 #: ../../src/wui/sound_options.cc:171
 msgctxt "sound_options"
 msgid "User Interface"
-msgstr ""
+msgstr "Korisničko sučelje"
 
 #: ../../src/wui/sound_options.cc:174
 msgctxt "sound_options"
@@ -10199,11 +10199,11 @@ msgstr ""
 #. lower than the economy target setting. Very little space is available.
 #: ../../src/wui/stock_menu.cc:52
 msgid "Evaluate"
-msgstr ""
+msgstr "Pregledaj"
 
 #: ../../src/wui/stock_menu.cc:56
 msgid "Compare stocked amounts to economy target quantities"
-msgstr ""
+msgstr "Usporedi količinu u zalihama i željenu količinu"
 
 #: ../../src/wui/stock_menu.cc:59
 msgid "Red:"

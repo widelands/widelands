@@ -1,0 +1,41 @@
+# EditorConfig file for widelands
+#
+# read about the file on https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# all files
+[*]
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+max_line_length = 100
+
+[*.lua]
+indent_style = space
+indent_size = 3
+
+[*.{h,cc}]
+indent_style = tab
+# to indicate line break correctly:
+tab_width = 3
+
+[{*.cmake,CMakeLists.txt}]
+indent_style = space
+indent_size = 2
+
+[*.py]
+indent_style = space
+indent_size = 4
+
+[*.sh]
+indent_style = space
+indent_size = 2
+
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+
+[*.po]
+trim_trailing_whitespace = false
