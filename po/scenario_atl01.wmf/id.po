@@ -2,14 +2,15 @@
 # Copyright (C) 2005-2023 Widelands Development Team
 # 
 # Translators:
+# Dhimas “Ry” <dhi.mas26wnz@gmail.com>, 2023
 # Febryan 45 Mappers <muhammadfebryan1208@gmail.com>, 2019-2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2023-08-31 02:28+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: Febryan 45 Mappers <muhammadfebryan1208@gmail.com>, 2019-2021\n"
+"Last-Translator: Dhimas “Ry” <dhi.mas26wnz@gmail.com>, 2023\n"
 "Language-Team: Indonesian (http://app.transifex.com/widelands/widelands/language/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -85,10 +86,9 @@ msgid ""
 "The other two important food wares are smoked fish and smoked meat. Raw meat"
 " is delivered from a hunter. A fisher gets the fish out of the sea while a "
 "fish breeder makes sure that a school of fish does not go extinct by "
-"breeding more. Make sure that there are always fish left, otherwise the fish"
-" breeder won’t be able to breed new ones. The smoking happens in a smokery, "
-"you will need at least two of those."
-msgstr "Dua bahan makanan penting lainnya adalah ikan asap dan daging asap. Daging mentah dikirim dari seorang pemburu. Seorang nelayan mengeluarkan ikan dari laut sementara seorang pemulia ikan memastikan bahwa sekumpulan ikan tidak punah dengan mengembangbiakkan lebih banyak. Pastikan selalu ada ikan yang tersisa, jika tidak, pemulia ikan tidak akan bisa mengembangbiakkan yang baru. Pengasapan terjadi di sebuah tempat pengasapan, anda membutuhkan setidaknya dua dari itu."
+"breeding more. The smoking happens in a smokery, you will need at least two "
+"of those."
+msgstr "Dua hal lain yang penting dari persediaan makanan adalah ikan bakar dan daging bakar. Daging mentah didapat dari pemburu. Seorang nelayan menjala ikan dari lautan sementara pembudidaya ikan memastikan sekelompok spesies ikan tidak punah dengan membiakkannya lagi. Untuk membakar atau memanggang, kamu dapat melakukannya dengan pemanggang, setidaknya kamu memerlukan dua pemanggang."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Build a farm and a blackroot farm"
@@ -591,7 +591,7 @@ msgid ""
 "our warehouses. Could you not help the weavers’ guild by arranging the "
 "building of a weaving mill and a spider farm? The spiders deliver the finest"
 " silk and we will produce the finest spidercloth from it."
-msgstr ""
+msgstr "Semoga Satul memberkahimu, Jundlina. Perkenalkan, nama ku Opol, dan aku adalah seorang penenun paling handal di kelompok Pelarian Atlantis dan Lutas bersamamu. Aku datang dengan kabar buruk, kita tidak lagi punya tenunan jaring laba-laba. Tak sehelaipun tersisa di gudang. Tidak bisakah kamu membantu para penenun dengan mengatur pembangunan pabrik tenun dan peternakan laba-laba? Laba-laba menghasilkan sutra terbaik dan kita akan menghasilkan kain tenun terbaik!"
 
 #. TRANSLATORS: Opol
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:269
@@ -599,7 +599,7 @@ msgid ""
 "We offer to also produce the tabards for young soldiers and the golden "
 "tabards for officers for you in exchange. You will need them for sure as "
 "soon as you want to recruit new soldiers."
-msgstr ""
+msgstr "Kami juga menawarkan produksi mantel untuk prajurit muda dan mantel emas untuk perwira untukmu sebagai imbalannya. Kamu pasti akan membutuhkannya segera setelah kamu mengangkat prajurit baru."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:275
@@ -608,11 +608,11 @@ msgid ""
 "but I understand your urgency. Your suggestion sounds fair to me, I will "
 "build your weaving mill and spider farm. I will also build a gold spinning "
 "mill so that the golden tabards you make will not be golden by name alone."
-msgstr ""
+msgstr "Semoga Satul memberkahimu juga, Opol. Sebenarnya, Aku ingin menunda produksi tenun laba-laba dahulu, tapi Aku mengerti keadaan mendesakmu. Aku rasa saranmu juga masuk akal, kalau begitu Aku akan membangunkanmu pabrik tenun dan peternakan laba-laba. Aku juga akan membangun pabrik pemintalan emas sehingga mantel emas yang kamu buat bukan hanya sekadar nama."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:282
 msgid "Opol Seeks Out Jundlina"
-msgstr ""
+msgstr "Opol Mencari Di Mana Jundlina Berada"
 
 #. TRANSLATORS: Opol
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:285
@@ -621,18 +621,18 @@ msgid ""
 "spider farm buildings are complete and are starting their work at this very "
 "moment. The weavers’ guild is very grateful for your support and we will "
 "stand by our word and deliver the first tabard very soon."
-msgstr ""
+msgstr "Semoga Satul memberkahimu, Jundlina! Pabrik tenun, pabrik pemintalan emas, dan peternakan laba-laba sudah selesai dibangun dan akan segera beroperasi. Para penenun sangat berterima kasih atas dukunganmu dan aku akan memegang janjiku. Aku akan mengirimkan mantel pertama sesegera mungkin."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:291
 msgid ""
 "This is good news indeed, Opol. Our economy is developing very well. Go back"
 " to your work now, Opol, and may Satul warm you and all your guild members!"
-msgstr ""
+msgstr "Ini berita bagus, Opol! Perekonomian kita terus berkembang. Kembalilah bekerja, Opol. Semoga Satul memberkahimu dan seluruh orang juga!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:298
 msgid "Sidolus Seeks Out Jundlina"
-msgstr ""
+msgstr "Sidolus Mencari Jundlina"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:301
@@ -643,33 +643,33 @@ msgid ""
 "find an ample supply of those commodities, we could start producing weapons "
 "and tools; this would help enormously. Of course, we would need smelters, a "
 "weapon smithy, an armor smithy and a toolsmithy. And maybe even more."
-msgstr ""
+msgstr "Semoga Satul memberkahimu, Jundlina. Sudahkan kamu mempertimbangkan kegiatan penambangan sumber daya di pegunungan sekitar kita? Perlahan-lahan kita mulai kehabisan cadangan batu kuarsa dan berlian untuk bangunan-bangunan. Terlebih lagi, kita harus menggunakan lebih banyak besi, emas, dan khususnya batu bara. Jika kita bisa menemukan pasokan komoditas cukup banyak, kita dapat mulai memproduksi senjata dan perkakas; ini akan sangat membantu. Tentu saja, kita juga memerlukan pabrik peleburan, bengkel senjata, bengkel baju zirah, dan bengkel perkakas. Atau justru lebih banyak lagi."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:305
 msgid "Jundlina Nods"
-msgstr ""
+msgstr "Jundlina Mengangguk"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:307
 msgid ""
 "I have considered this, Sidolus. I think it is about time. We will make this"
 " a priority for now. You shall get your industry soon!"
-msgstr ""
+msgstr "Aku sudah mempertimbangkan ini, Sidolus. Aku fikir ini hanya perihal waktu. Kita akan mengutamakan hal ini mulai sekarang. Segera, kamu akan mendapatkan bagian industrimu!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:314
 msgid "Loftomor Reports"
-msgstr ""
+msgstr "Loftomor Melapor"
 
 #. TRANSLATORS: Loftomor
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:317
 msgid ""
 "May Satul warm you, Jundlina! We have completed a toolsmithy and now our "
 "toolsmiths will produce new tools in an instant."
-msgstr ""
+msgstr "Semoga Satul memberkahimu, Jundlina! Kita telah menyelesaikan bengkel perkakas dan sekarang bengkel perkakas milik kita akan segera menghasilkan perkakas baru dalam sekejap."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:320
 msgid "Jundlina Reminds"
-msgstr ""
+msgstr "Jundline Mengingat"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:323
@@ -678,11 +678,11 @@ msgid ""
 "please remember that our toolsmiths need to be equipped with a saw. Making "
 "tools is an art for us, requiring a precise tool like a saw, not a brutal "
 "hammer like for the other tribes."
-msgstr ""
+msgstr "Semoga Satul memberkahimu, Loftomor. Itu kabar baik. Bagaimanapun tolong selalu diingat bahwa bengkel perkakas kita perlu gergaji. Membuat perkakas adalah seni bagi kita. seorang pengrajin memerlukan ketelitian dan kecermatan. Ia memerlukan peralatan seperti gergaji, bukan palu ganas seperti suku lain."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:329
 msgid "Jundlina Writes a Letter"
-msgstr ""
+msgstr "Jundlina Menuliskan Sepucuk Surat"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:332
@@ -690,22 +690,22 @@ msgid ""
 "I have received word that our mining industry started working. Now that we "
 "are forging weapons, I will send a letter to Sidolus informing him that it’s"
 " time to build a barracks and start recruiting soldiers."
-msgstr ""
+msgstr "Aku pernah mendengar bahwa industri penambangan milik kita sudah mulai bekerja. Sekarang kita sudah mulai menempa senjata. Aku akan mengirimkan sepucuk surat kepada Sidolus memberitahunya bahwa saat ini adalah waktu untuk membangun barak dan mulai mengangkat prajurit."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:342
 msgid ""
 "Today I saw the first recruits gathering in front of the new barracks. If "
 "everything goes well, they should receive their training soon."
-msgstr ""
+msgstr "Hari ini, Aku melihat para calon prajurit baru berkumpul di depan barak yang baru. Jika semuanya berjalan lancar, Mereka akan segera mendapat pelatihannya segera."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:348
 msgid "Jundlina Summons Sidolus"
-msgstr ""
+msgstr "Jundlina Memanggil Sidolus"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:349
 msgid "Jundlina is Angry"
-msgstr ""
+msgstr "Jundlina Marah"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:351
@@ -714,11 +714,11 @@ msgid ""
 "misbehaving and bullying the common folk. What is this nonsense all about? "
 "They are servants for the common good and must not misuse their powers. This"
 " is inexcusable! Explain this, if you will!"
-msgstr ""
+msgstr "Apa ini yang aku dengar, Wahai Sidolus? Aku mendengar bahwa prajuritmu berprilaku buruk dan mulai menindas rakyat jelata. Apa maksudnya ini, hah? Mereka seharusnya memberikan pelayanan yang baik dan tidak seharusnya menyalahgunakan kekuasaan. Ini tidak lagi bisa dimaafkan! Jelaskan ini, atau Kamu hanya bungkam?"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:354
 msgid "Sidolus Seems Contrite"
-msgstr ""
+msgstr "Sidolus Tampak Menyesal"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:357
@@ -729,7 +729,7 @@ msgid ""
 "would keep them occupied and focused on their duties. I would need a dungeon"
 " and a labyrinth for them. I have the plans ready, but I guess they won’t "
 "come cheap."
-msgstr ""
+msgstr "Aku setuju denganmu dan Aku sudah menghukum para pembuat onar itu. Tapi, benar-benar sulit untuk membuat mereka tetap diam: Mereka bosan dan tidak tahu harus melakukan apa. Aku ingin memperketat waktu latihan mereka. Aku fikir lebih banyak rutinitas akan membuat mereka sibuk dan fokus pada tugas mereka. Aku butuh penjara bawah tanah dan juga labirin. Aku sudah punya rencananya, tapi aku rasa itu tidak murah."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:363
@@ -738,11 +738,11 @@ msgid ""
 " shall get your buildings. But note that I will not tolerate any rogue "
 "soldier; if similar things happen again, I will make you responsible for "
 "them. Dismissed."
-msgstr ""
+msgstr "Aku tidak takut dengan biaya ataupun tenaga selama ini nantinya dapat membuat orang-orangmu tetap berada dijalannya. Kamu akan mendapatkan bangunan-bangunan itu. Tapi ingat! Aku tidak akan memberi keringanan pada setiap prajurit yang berani melanggar; jika hal yang sama terjadi lagi, Aku akan membuatmu bertanggungjawab untuknya. Pergi."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:370
 msgid "Jundlina Received a Letter"
-msgstr ""
+msgstr "Jundlina Menerima Sepucuk Surat"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:373
@@ -752,11 +752,11 @@ msgid ""
 "will start its work soon. I am looking forward to tomorrow; I am very "
 "interested in how our soldiers are trained, and I wonder if the additional "
 "workload will keep them from bullying the civilian population."
-msgstr ""
+msgstr "Aku menerima undangan dari Sidolus. Di Hari pertama pelatihan di labirin yang baru saja selesai dibangun, esok hari. Penjara bawah tanah juga sudah rampung dan akan dibuka segera. Aku menantikannya; Aku sangat tertarik perihal bagaimana para prajurit kita dilatih, dan Aku membayangkan apakah benar jika kesibukan ini akan menjaga para prajurit dari menindas rakyat jelata?"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:379
 msgid "Jundlina Considers the Economy"
-msgstr ""
+msgstr "Jundlina Mempertimbangkan Bidang Perekonomian"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:382
@@ -764,7 +764,7 @@ msgid ""
 "People are complaining about crowded streets and slow transportation. We "
 "need to help out our carriers on the roads. I have decided to build a horse "
 "farm so that the horses can help with the heavy wares."
-msgstr ""
+msgstr "Masyarakat mengeluh mengenai jalan-jalan yang mulai sesak dan transportasi yang lamban. Kita perlu mencari jalan keluarnya. Aku memutuskan untuk membangun peternakan kuda jadi kuda-kuda ini dapat membantu mengangkut barang-barang berat."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:385
@@ -772,16 +772,16 @@ msgid ""
 "Another way to take load from our roads is to build warehouses. We have "
 "claimed the mountain now, it seems a good idea to have a warehouse on the "
 "plateau to avoid having to transport everything up and down the slopes."
-msgstr ""
+msgstr "Cara lainnya untuk meringankan kesesakan di jalan adalah dengan membangun gudang. Kita sudah mengklaim bagian gunung sekarang, sepertinya ide yang bagus untuk membangun gudang di daerah yang tinggi. Sehingga pengangkutan tidak lagi harus naik-turun lereng. "
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:397
 msgid "A Dangerous Discovery"
-msgstr ""
+msgstr "Penemuan Yang Berbahaya"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:398
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:426
 msgid "Jundlina is in Thought"
-msgstr ""
+msgstr "Jundlina Sedang Berfikir"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:400
@@ -792,7 +792,7 @@ msgid ""
 " building is crude, the assemblage is sloppy. But the materials are very "
 "enduring: the wood used for it seemed to have been burned in a strange way "
 "before it was used as building material – it is hard as stone."
-msgstr ""
+msgstr "Kita menemukan bangunan tua, sudah hancur, dan hangus terbakar. Aku sangat khawatir melihat penemuan ini. Bangunan itu tidak seperti bangunan apapun yang pernah Aku lihat. Ini jelas bukan dirancang oleh perancang bangunan dari Atlantis. Bangunan itu tidak indah, juga berantakkan. Tapi bahan bangunannya sangat kokoh dan abadi: Kayu yang digunakan sepertinya dibakar lebih dulu sebelum digunakan sebagai bahan bangunan – Itu keras, bagai batu."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:403
@@ -801,7 +801,7 @@ msgid ""
 "they then? They work with fire, are they praying to Satul too? Are they "
 "friends or foe? And why is the building burned down? Has this island seen "
 "war? Is a war being waged on it right now?"
-msgstr ""
+msgstr "kaitannya membuat Aku ketakutan. Apakah ada orang lain di pulau ini? Kemana mereka semua? Mereka berkaitan dengan api, apa mereka juga menyembah Satul? Apakah mereka berkawan ataukah justru lawan? Dan apa yang membuat bangunan itu terbakar? Apa pulau ini pernah menjadi saksi bisu peperangan? Apakah saat ini sedang berlangsung perang?"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:406
@@ -809,15 +809,15 @@ msgid ""
 "We must improve our military capabilities. If there are foes on the island, "
 "we have to be prepared when we meet them. We should also enforce the "
 "fortification of our borders."
-msgstr ""
+msgstr "Kita harus meningkatkan kemampuan pertahanan kita. Apabila benar ada musuh di pulau ini, kita harus bersiap jika nanti kita bertemu dengan mereka. Kita juga harus menegakkan benteng perbatasan kita."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:414
 msgid "Another Building"
-msgstr ""
+msgstr "Bangunan Lain"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:415
 msgid "Jundlina is Worried"
-msgstr ""
+msgstr "Jundlina Semakin Khawatir"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:417
@@ -827,11 +827,11 @@ msgid ""
 "before and obviously it was militarized. I have to check on our military "
 "status with my generals. I will not allow that a potential enemy will find "
 "us unprepared."
-msgstr ""
+msgstr "Lagi-lagi kita menemukan bangunan yang tampak asing ini. Kita sama sekali belum melihat siapa yang membangunnya. Tapi yang jelas sudah ada komunitas yang tinggal di pulau ini sebelumnya dan tentu saja mereka dimiliterisasi. Aku sudah memeriksa status pertahanan kita dengan para jenderal. Aku tidak mau mereka menemui kita dalam keadaan tanpa persiapan."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:425
 msgid "One More Building"
-msgstr ""
+msgstr "Satu Bangunan Lagi"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:428

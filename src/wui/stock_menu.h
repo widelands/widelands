@@ -35,9 +35,13 @@ class InteractivePlayer;
  * one player
  */
 struct StockMenu : public UI::UniqueWindow {
-	StockMenu(InteractivePlayer&, UI::UniqueWindow::Registry&);
+	struct Registry : public UI::UniqueWindow::Registry {
+		size_t active_tab{2};
+		bool solid_icon_backgrounds{false};
+	};
 
-	void think() override;
+	StockMenu(InteractivePlayer&, Registry&);
+
 	void layout() override;
 
 	UI::Panel::SaveType save_type() const override {
@@ -47,7 +51,6 @@ struct StockMenu : public UI::UniqueWindow {
 	static UI::Window& load(FileRead&, InteractiveBase&);
 
 private:
-	InteractivePlayer& player_;
 	const UI::BuildingStatisticsStyleInfo& colors_;
 	UI::Box main_box_;
 	UI::TabPanel tabs_;
@@ -56,9 +59,6 @@ private:
 	StockMenuWaresDisplay* all_workers_;
 	StockMenuWaresDisplay* warehouse_wares_;
 	StockMenuWaresDisplay* warehouse_workers_;
-
-	void fill_total_waresdisplay(WaresDisplay* waresdisplay, Widelands::WareWorker type);
-	void fill_warehouse_waresdisplay(WaresDisplay* waresdisplay, Widelands::WareWorker type);
 };
 
 #endif  // end of include guard: WL_WUI_STOCK_MENU_H

@@ -37,6 +37,16 @@ const FindImmovable& find_immovable_always_true() {
 	return alwaystrue;
 }
 
+bool FindImmovableAnd::accept(const BaseImmovable& i) const {
+	return std::all_of(
+	   functors_.begin(), functors_.end(), [&i](const FindImmovable& f) { return f.accept(i); });
+}
+
+bool FindImmovableOr::accept(const BaseImmovable& i) const {
+	return std::any_of(
+	   functors_.begin(), functors_.end(), [&i](const FindImmovable& f) { return f.accept(i); });
+}
+
 bool FindImmovableSize::accept(const BaseImmovable& imm) const {
 	int32_t const size = imm.get_size();
 	return min <= size && size <= max;
@@ -87,6 +97,10 @@ bool FindImmovableByDescr::accept(const BaseImmovable& baseimm) const {
 		}
 	}
 	return false;
+}
+
+bool FindImmovableNotReserved::accept(const BaseImmovable& i) const {
+	return !i.is_reserved_by_worker();
 }
 
 bool FindFlagOf::accept(const BaseImmovable& baseimm) const {

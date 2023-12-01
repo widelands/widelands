@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-06 03:09+0000\n"
+"POT-Creation-Date: 2023-08-31 02:28+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
 "Last-Translator: Samuele Battarra, 2023\n"
 "Language-Team: Italian (http://app.transifex.com/widelands/widelands/language/it/)\n"
@@ -42,11 +42,11 @@ msgstr "Cerca antichi manufatti preziosi. Nel momento in cui vengono trovati tut
 msgid "Artifacts owned"
 msgstr "Manufatti preziosi posseduti"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:76
+#: ../../data/scripting/win_conditions/artifacts.lua:75
 msgid "No Artifacts"
 msgstr "Nessun manufatto prezioso"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:76
+#: ../../data/scripting/win_conditions/artifacts.lua:75
 #, lua-format
 msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
@@ -56,50 +56,50 @@ msgstr "Non ci sono manufatti preziosi in questa mappa.  Ciò non dovrebbe norma
 
 #. TRANSLATORS: Keep this as short as possible. You can also translate this as
 #. "New artifact"
-#: ../../data/scripting/win_conditions/artifacts.lua:83
+#: ../../data/scripting/win_conditions/artifacts.lua:82
 msgid "Artifact Found"
 msgstr "Trovato un manufatto prezioso"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:84
+#: ../../data/scripting/win_conditions/artifacts.lua:83
 msgid "Your team found a new artifact."
 msgstr "La tua squadra ha trovato un nuovo manufatto prezioso,"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:85
+#: ../../data/scripting/win_conditions/artifacts.lua:84
 msgid "You found a new artifact."
 msgstr "Hai trovato un nuovo manufatto prezioso."
 
 #. TRANSLATORS: Keep this as short as possible.
-#: ../../data/scripting/win_conditions/artifacts.lua:89
+#: ../../data/scripting/win_conditions/artifacts.lua:88
 msgid "Artifact Lost"
 msgstr "Manufatto prezioso perso"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:90
+#: ../../data/scripting/win_conditions/artifacts.lua:89
 msgid "One of your team’s artifacts was stolen by an enemy."
 msgstr "Uno dei manufatti preziosi della tua squadra è stato rubato da un nemico."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:91
+#: ../../data/scripting/win_conditions/artifacts.lua:90
 msgid "One of your artifacts was stolen by an enemy."
 msgstr "Uno dei tuoi manufatti preziosi è stato rubato dal nemico."
 
 #. TRANSLATORS: Keep this as short as possible.
-#: ../../data/scripting/win_conditions/artifacts.lua:95
+#: ../../data/scripting/win_conditions/artifacts.lua:94
 msgid "Artifact Conquered"
 msgstr "Manufatto prezioso conquistato"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:96
+#: ../../data/scripting/win_conditions/artifacts.lua:95
 msgid "Your team stole an artifact from an enemy."
 msgstr "La tua squadra ha rubato un manufatto prezioso a un nemico."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:97
+#: ../../data/scripting/win_conditions/artifacts.lua:96
 msgid "You stole an artifact from an enemy."
 msgstr "Hai rubato un manufatto prezioso al nemico."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:180
+#: ../../data/scripting/win_conditions/artifacts.lua:179
 msgid "Overview:"
 msgstr "Panoramica:"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:183
-#: ../../data/scripting/win_conditions/artifacts.lua:196
+#: ../../data/scripting/win_conditions/artifacts.lua:182
+#: ../../data/scripting/win_conditions/artifacts.lua:195
 #, lua-format
 msgid "%i artifact"
 msgid_plural "%i artifacts"
@@ -108,13 +108,13 @@ msgstr[1] "%i manufatti"
 msgstr[2] "%i manufatti preziosi"
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
-#: ../../data/scripting/win_conditions/artifacts.lua:185
+#: ../../data/scripting/win_conditions/artifacts.lua:184
 msgid "%1$s owns %2$s."
 msgstr "%1$s possiede %2$s"
 
 #. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members
 #. (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
-#: ../../data/scripting/win_conditions/artifacts.lua:198
+#: ../../data/scripting/win_conditions/artifacts.lua:197
 msgid "Team %1$i (%2$s) owns %3$s."
 msgstr "Il team %1$i (%2$s) possiede %3$s."
 
@@ -403,4 +403,4 @@ msgstr "Il vincitore è %1$s con %2$s."
 #: ../../data/scripting/win_conditions/wood_gnome.lua:101
 #, lua-format
 msgid "The winners had %s."
-msgstr ""
+msgstr "I vincitori ne hanno avuti %s."

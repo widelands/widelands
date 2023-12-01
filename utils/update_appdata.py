@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: utf-8
 
 import subprocess
@@ -25,6 +25,11 @@ import sys
 # The output is written to ../xdg/org.widelands.Widelands.desktop
 #
 # All translations are sourced from ../xdg/translations/
+#
+# If used with the --nonet command line option, the validator for the generated
+# appdata.xml file will be executed with the same, or the equivalent --no-net option.
+# This skips the downloading of the screenshot images in restricted environments
+# without network access, such as e.g. flatpak-builder.
 
 
 print('Updating appdata.xml and .desktop files')
@@ -180,15 +185,23 @@ print('Done!')
 
 
 # Validate Appdata
+skip_screenshot_check = len(sys.argv) > 1 and sys.argv[1] == '--nonet'
+
 if shutil.which('appstreamcli'):
-    subprocess.run(['appstreamcli', 'validate', appdata_filepath])
+    validate_cmd = ['appstreamcli', 'validate', appdata_filepath]
+    if skip_screenshot_check:
+        validate_cmd.insert(2, '--no-net')
+    appdata_result = subprocess.run(validate_cmd)
 elif shutil.which('appstream-util'):
-    subprocess.run(['appstream-util', 'validate-relax', appdata_filepath])
+    validate_cmd = ['appstream-util', 'validate-relax', appdata_filepath]
+    if skip_screenshot_check:
+        validate_cmd.insert(2, '--nonet')
+    appdata_result = subprocess.run(validate_cmd)
 else:
     print('Cannot validate generated appdata file.')
+    appdata_result = FileNotFoundError() # dummy object for returncode
+    appdata_result.returncode = 0
 
-# Validate desktop file. We don't get return codes, so we have to parse it
-desktop_result = subprocess.run(['desktop-file-validate', desktop_filepath],
-                                capture_output=True)
+desktop_result = subprocess.run(['desktop-file-validate', desktop_filepath])
 
-sys.exit(desktop_result.returncode)
+sys.exit(max(desktop_result.returncode, appdata_result.returncode))

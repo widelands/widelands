@@ -13,12 +13,12 @@ wl.Descriptions():new_tribe {
    animations = {
       frontier = { hotspot = {8, 26} },
       pinned_note = { hotspot = {18, 67} },
-      bridge_normal_e = { hotspot = {-2, 12} },
-      bridge_busy_e = { hotspot = {-2, 12} },
-      bridge_normal_se = { hotspot = {5, 2} },
-      bridge_busy_se = { hotspot = {5, 2} },
-      bridge_normal_sw = { hotspot = {36, 3} },
-      bridge_busy_sw = { hotspot = {36, 3} }
+      bridge_normal_e = { hotspot = {0, 17} },
+      bridge_busy_e = { hotspot = {0, 17} },
+      bridge_normal_se = { hotspot = {8, 8} },
+      bridge_busy_se = { hotspot = {8, 8} },
+      bridge_normal_sw = { hotspot = {40, 8} },
+      bridge_busy_sw = { hotspot = {40, 8} }
    },
    spritesheets = {
       flag = {
@@ -1560,8 +1560,12 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("frisians_building", "Cuts raw pieces of granite out of rocks in the vicinity."),
             -- TRANSLATORS: Note helptext for a Frisian production site: Quarry
             note = pgettext("frisians_building", "The quarry needs rocks to cut within the work area."),
-            -- TRANSLATORS: Performance helptext for a Frisian production site: Quarry
-            performance = pgettext("frisians_building", "The stonemason pauses %s before going to work again."):bformat(format_seconds(25))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Quarry, part 1
+               pgettext("frisians_building", "This building can produce one granite between %1$s and %2$s, depending on how far the stonemason has to walk."):bformat(format_seconds(42), format_minutes_seconds(1, 7)),
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Quarry, part 2
+               pgettext("frisians_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1574,7 +1578,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Woodcutter's House
             purpose = pgettext("building", "Fells trees in the surrounding area and processes them into logs."),
             -- TRANSLATORS: Note helptext for a Frisian production site: Woodcutter's House
-            note = pgettext("frisians_building", "The woodcutter’s house needs trees to fell within the work area.")
+            note = pgettext("frisians_building", "The woodcutter’s house needs trees to fell within the work area."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Woodcutter's House, part 1
+               pgettext("frisians_building", "This building can produce one log between %1$s and %2$s, depending on how far the woodcutter has to walk."):bformat(format_seconds(49), format_minutes_seconds(1, 29)),
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Woodcutter's House, part 2
+               pgettext("frisians_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1588,8 +1598,12 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("building", "Plants trees in the surrounding area."),
             -- TRANSLATORS: Note helptext for a Frisian production site: Forester's House
             note = pgettext("frisians_building", "The forester’s house needs free space within the work area to plant the trees."),
-            -- TRANSLATORS: Performance helptext for a Frisian production site: Forester's House
-            performance = pgettext("frisians_building", "The forester pauses %s before going to work again."):bformat(format_seconds(12))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Forester's House, part 1
+               pgettext("frisians_building", "The forester plants one tree between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(24), format_seconds(46)),
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Forester's House, part 2
+               pgettext("frisians_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1599,8 +1613,14 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("building", "Hunts animals to produce meat."),
             -- TRANSLATORS: Note helptext for a Frisian production site: Hunter's House
             note = pgettext("frisians_building", "The hunter’s house needs animals to hunt within the work area."),
-            -- TRANSLATORS: Performance helptext for a Frisian production site: Hunter's House
-            performance = pgettext("frisians_building", "The hunter pauses %s before going to work again. He produces one fur after he has produced five pieces of meat."):bformat(format_seconds(35))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Hunter's House, part 1
+               pgettext("frisians_building", "This building can produce one meat between %1$s and %2$s, depending on how far the hunter has to walk."):bformat(format_seconds(43), format_minutes_seconds(1, 37)),
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Hunter's House, part 2
+               pgettext("frisians_building", "In case of slopes or obstacles in the way, the time is increased."),
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Hunter's House, part 3
+               pgettext("frisians_building", "The hunter produces one fur after he has produced five pieces of meat."),
+            }
          }
       },
       {
@@ -1618,8 +1638,12 @@ wl.Descriptions():new_tribe {
                -- TRANSLATORS: Note helptext for a Frisian production site: Fisher's House, part 2
                pgettext("frisians_building", "Roads and trees along the shoreline block fishing."),
             },
-            -- TRANSLATORS: Performance helptext for a Frisian production site: Fisher's House
-            performance = pgettext("frisians_building", "The fisher pauses %s before going to work again."):bformat(format_seconds(16))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Fisher's House, part 1
+               pgettext("frisians_building", "This building can produce one fish between %1$s and %2$s, depending on how far the fisher has to walk."):bformat(format_seconds(26), format_seconds(59)),
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Fisher's House, part 2
+               pgettext("frisians_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1644,8 +1668,12 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("frisians_building", "Chieftain Arldor’s retort when he was asked why his tribe can’t drink salt water"),
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Well
             purpose = pgettext("building", "Draws water out of the deep."),
-            -- TRANSLATORS: Performance helptext for a Frisian production site: Well
-            performance = pgettext("frisians_building", "The well needs %s on average to produce one bucket of water."):bformat(format_seconds(40))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Well, part 1
+               pgettext("frisians_building", "The carrier needs %s to get one bucket full of water."):bformat(format_seconds(44)),
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Well, part 2
+               pgettext("frisians_building", "If the water resource is depleted, the carrier needs %s on average."):bformat(format_minutes_seconds(1, 11))
+            }
          }
       },
       {
@@ -1742,8 +1770,12 @@ wl.Descriptions():new_tribe {
             no_scouting_building_connected = pgettext("frisians_building", "You need to connect this flag to a scout’s house before you can send a scout here."),
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Scout's House
             purpose = pgettext("building", "Explores unknown territory."),
-            -- TRANSLATORS: Performance helptext for a Frisian production site: Scout's House
-            performance = pgettext("frisians_building", "The scout pauses %s before going to work again."):bformat(format_seconds(30))
+            performance = {
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Scout's House, part 1
+               pgettext("frisians_building", "One exploration trip of the scout takes between %1$s and %2$s."):bformat(format_minutes_seconds(1, 52), format_minutes_seconds(4, 5)),
+               -- TRANSLATORS: Performance helptext for a Frisian production site: Scout's House, part 2
+               pgettext("frisians_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
 

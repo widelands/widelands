@@ -27,6 +27,7 @@
 #include "ui_basic/unique_window.h"
 #include "wui/general_statistics_menu.h"
 #include "wui/interactive_base.h"
+#include "wui/stock_menu.h"
 
 class InteractiveGameBase : public InteractiveBase {
 public:
@@ -102,7 +103,7 @@ public:
 
 		GeneralStatisticsMenu::Registry stats_general;
 		UI::UniqueWindow::Registry stats_wares;
-		UI::UniqueWindow::Registry stats_stock;
+		StockMenu::Registry stats_stock;
 		UI::UniqueWindow::Registry stats_buildings;
 		UI::UniqueWindow::Registry stats_soldiers;
 		UI::UniqueWindow::Registry stats_seafaring;
@@ -129,9 +130,7 @@ protected:
 private:
 	// For referencing the items in mainmenu_
 	enum class MainMenuEntry {
-#ifndef NDEBUG  //  only in debug builds
 		kScriptConsole,
-#endif
 		kOptions,
 		kSaveMap,
 		kLoadMap,

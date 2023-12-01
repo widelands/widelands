@@ -86,8 +86,6 @@ private:
 
 	std::vector<SuggestedTeamsEntry*> suggested_teams_entries_;
 	UI::Button new_suggested_team_;
-
-	UI::UniqueWindow::Registry& registry_;
 };
 
 struct SuggestedTeamsEntry : public UI::Panel {

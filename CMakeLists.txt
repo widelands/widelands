@@ -1,5 +1,5 @@
-cmake_minimum_required (VERSION 3.5)
-cmake_policy(VERSION 3.5)
+cmake_minimum_required (VERSION 3.12)
+cmake_policy(VERSION 3.12)
 
 project (widelands)
 
@@ -38,36 +38,13 @@ endforeach()
 include("${CMAKE_SOURCE_DIR}/cmake/UseSystemInfo.cmake")
 include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
 
-# This policy is not known to versions prior 3.11 and would result in errors,
+# This policy is not known to versions prior 3.27 and would result in errors,
 # if set on such systems. This can be removed when cmake_minimum_required is set
-# to 3.11 or newer  by using:
-# cmake_policy(VERSION 3.11)
-if(POLICY CMP0072)
-  cmake_policy(SET CMP0072 NEW)
-
-  # TODO(stonerl): Check on later Ubuntu releases whether this workaround is
-  # still needed or not.
-  # --- Seems to work fine on 21.04
-  if (CMAKE_SYSTEM MATCHES "Linux")
-    distro_name (DISTRO_NAME)
-    # DISTRO_NAME is different on the build-servers.
-    if ((DISTRO_NAME MATCHES "Ubuntu 18.10" OR DISTRO_NAME MATCHES "Cosmic"
-         OR DISTRO_NAME MATCHES "Ubuntu 19.04" OR DISTRO_NAME MATCHES "Disco"
-         OR DISTRO_NAME MATCHES "Ubuntu 19.10" OR DISTRO_NAME MATCHES "Eoan"
-         OR DISTRO_NAME MATCHES "Ubuntu 20.04" OR DISTRO_NAME MATCHES "Focal")
-        AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-      cmake_policy(SET CMP0072 OLD)
-    endif()
-  endif()
-endif(POLICY CMP0072)
-
-# This policy is not known to versions prior 3.12 and would result in errors,
-# if set on such systems. This can be removed when cmake_minimum_required is set
-# to 3.12 or newer  by using:
-# cmake_policy(VERSION 3.12)
-if(POLICY CMP0074)
-  cmake_policy(SET CMP0074 NEW)
-endif(POLICY CMP0074)
+# to 3.27 or newer  by using:
+# cmake_policy(VERSION 3.27)
+if(POLICY CMP0148)
+  cmake_policy(SET CMP0148 NEW)
+endif(POLICY CMP0148)
 
 IF(USE_XDG AND NOT APPLE AND NOT WIN32)
   ADD_DEFINITIONS(-DUSE_XDG)
@@ -101,7 +78,7 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8)
     message(FATAL_ERROR "Widelands needs GCC >= 4.8 to compile.")
   endif()
-elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang")
   if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 3.4)
     message(FATAL_ERROR "Clang version must be at least 3.4!")
   endif()
@@ -133,7 +110,7 @@ if (OPTION_BUILD_WINSTATIC)
   endif()
 endif()
 
-find_package (PythonInterp REQUIRED)
+find_package (Python3 REQUIRED)
 
 find_package(Gettext REQUIRED)
 find_package(OpenGL REQUIRED)
@@ -427,8 +404,8 @@ if(OPTION_BUILD_WINSTATIC)
   wl_add_static_libs(SDL_MIXER_STATIC_LIBS opusfile opus FLAC vorbisfile vorbis ogg mpg123 shlwapi)
   wl_add_static_libs(SDL_TTF_STATIC_LIBS freetype bz2 graphite2 usp10 dwrite harfbuzz freetype rpcrt4)
   wl_add_static_libs(SDL_STATIC_LIBS intl iconv dinput8 shell32 setupapi advapi32 uuid version oleaut32 ole32 imm32 winmm gdi32 user32)
+  set(BROTLI brotlidec brotlicommon brotlienc)
   if(MSVC)
-    set(BROTLI brotlidec-static brotlicommon-static brotlienc-static)
     wl_add_static_libs(SDL_IMG_STATIC_LIBS libwebp)
     wl_add_static_libs(SDL_STATIC_LIBS charset ${BROTLI})
     if(CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -439,7 +416,6 @@ if(OPTION_BUILD_WINSTATIC)
       wl_add_flag(TARGET_COMPILE_FLAGS "/MT /EHsc")
     endif()
   else()
-    set(BROTLI brotlidec brotlicommon brotlienc)
     wl_add_static_libs(SDL_IMG_STATIC_LIBS webp jbig deflate Lerc jxl hwy sharpyuv)
     wl_add_static_libs(SDL_MIXER_STATIC_LIBS ssp)
     wl_add_static_libs(SDL_STATIC_LIBS mingw32 dxerr8 zstd ${BROTLI})
