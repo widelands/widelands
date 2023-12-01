@@ -391,7 +391,7 @@ jobs:
         echo "A job failed or was cancelled!"
         exit 1
     - name: No step skipped  # Optional, just gives info
-      if: ! contains(needs.*.result, 'skipped')
+      if: "! contains(needs.*.result, 'skipped')"
       run: true
 
   dev_release:
