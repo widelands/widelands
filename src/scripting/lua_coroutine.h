@@ -58,7 +58,7 @@ public:
 	void push_arg(int);
 
 	// Number of returned values not yet popped from the stack.
-	uint32_t n_returned() const {
+	[[nodiscard]] uint32_t n_returned() const {
 		return nreturn_values_;
 	}
 
