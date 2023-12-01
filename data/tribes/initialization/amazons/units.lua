@@ -1300,7 +1300,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Stonecutter's Hut
             purpose = pgettext("amazons_building", "Cuts raw pieces of granite out of rocks in the vicinity."),
             -- TRANSLATORS: Note helptext for an Amazon production site: Stonecutter's Hut
-            note = pgettext("amazons_building", "The stonecutter’s hut needs rocks to cut within the work area.")
+            note = pgettext("amazons_building", "The stonecutter’s hut needs rocks to cut within the work area."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Stonecutter's Hut, part 1
+               pgettext("amazons_building", "This building can produce one granite between %1$s and %2$s, depending on how far the stonecutter has to walk."):bformat(format_seconds(52), format_minutes_seconds(1, 17)),
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Stonecutter's Hut, part 2
+               pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1309,7 +1315,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Woodcutter's Hut
             purpose = pgettext("amazons_building", "Fells trees in the surrounding area and processes them into logs."),
             -- TRANSLATORS: Note helptext for an Amazon production site: Woodcutter's Hut
-            note = pgettext("amazons_building", "The woodcutter’s hut needs trees to fell within the work area.")
+            note = pgettext("amazons_building", "The woodcutter’s hut needs trees to fell within the work area."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Woodcutter's Hut, part 1
+               pgettext("amazons_building", "This building can produce one log between %1$s and %2$s (with master woodcutter between %3$s and %4$s), depending on how far the woodcutter has to walk."):bformat(format_seconds(49), format_minutes_seconds(1, 29), format_seconds(44), format_minutes_seconds(1, 24)),
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Woodcutter's Hut, part 2
+               pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1318,7 +1330,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Jungle Preserver's Hut
             purpose = pgettext("amazons_building", "Plants trees in the surrounding area."),
             -- TRANSLATORS: Note helptext for an Amazon production site: Jungle Preserver's Hut
-            note = pgettext("amazons_building", "The jungle preserver’s hut needs free space within the work area to plant the trees.")
+            note = pgettext("amazons_building", "The jungle preserver’s hut needs free space within the work area to plant the trees."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Jungle Preserver's Hut, part 1
+               pgettext("amazons_building", "The jungle preserver or jungle master plants one tree between %1$s and %2$s, depending on how far she has to walk."):bformat(format_seconds(20), format_seconds(45)),
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Jungle Preserver's Hut, part 2
+               pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1332,9 +1350,12 @@ wl.Descriptions():new_tribe {
                -- TRANSLATORS: Note helptext for an Amazon production site: Hunter-Gatherer's Hut
                pgettext("amazons_building", "Roads and trees along the shoreline block fishing."),
             },
-            -- TRANSLATORS: Performance helptext for an Amazon production site: Hunter-Gatherer's Hut
-            performance = pgettext("amazons_building", "The hunter-gatherer pauses %s before going to work again."):bformat(format_seconds(34))
-
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Hunter-Gatherer's Hut, part 1
+               pgettext("amazons_building", "This building can produce one meat or one fish between %1$s and %2$s, depending on how far the hunter-gatherer has to walk. If both kinds of food are available, then one of each kind is produced between %3$s and %4$s."):bformat(format_seconds(42), format_minutes_seconds(1, 36), format_minutes_seconds(1, 24), format_minutes_seconds(3, 12)),
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Hunter-Gatherer's Hut, part 2
+               pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1362,6 +1383,12 @@ wl.Descriptions():new_tribe {
                pgettext("amazons_building", "The water gatherer’s hut needs open water within the work area. Your workers cannot dig up water from the ground!"),
                -- TRANSLATORS: Note helptext for an Amazon production site: Water Gatherer's Hut, part 2
                pgettext("amazons_building", "Roads and trees along the shoreline block drawing water."),
+            },
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Water Gatherer's Hut, part 1
+               pgettext("amazons_building", "This building can produce one bucket of water between %1$s and %2$s on average, depending on how far the carrier has to walk."):bformat(format_seconds(16), format_seconds(32)),
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Water Gatherer's Hut, part 2
+               pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
          }
       },
@@ -1369,7 +1396,13 @@ wl.Descriptions():new_tribe {
          name = "amazons_rare_tree_cutters_hut",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Rare Tree Cutter's Hut
-            purpose = pgettext("amazons_building", "Harvests rare trees in the surrounding area. Delivers ironwood, balsa and rubber.")
+            purpose = pgettext("amazons_building", "Harvests rare trees in the surrounding area. Delivers ironwood, balsa and rubber."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Rare Tree Cutter's Hut, part 1
+               pgettext("amazons_building", "This building can produce one rare wood between %1$s and %2$s, depending on how far the woodcutter has to walk. If all kinds of rare tree are available within her work area, then one of each kind is produced between %3$s and %4$s."):bformat(format_seconds(47), format_minutes_seconds(1, 27), format_minutes_seconds(2, 22), format_minutes_seconds(4, 20)),
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Rare Tree Cutter's Hut, part 2
+               pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1387,8 +1420,12 @@ wl.Descriptions():new_tribe {
             no_scouting_building_connected = pgettext("amazons_building", "You need to connect this flag to a scout’s hut before you can send a scout here."),
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Scout's Hut
             purpose = pgettext("amazons_building", "Explores unknown territory."),
-            -- TRANSLATORS: Performance helptext for an Amazon production site: Scout's Hut
-            performance = pgettext("amazons_building", "The scout pauses %s before going to work again."):bformat(format_seconds(30))
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Scout's Hut, part 1
+               pgettext("amazons_building", "One exploration trip of the scout takes between %1$s and %2$s."):bformat(format_minutes_seconds(1, 52), format_minutes_seconds(4, 5)),
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Scout's Hut, part 2
+               pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
 
@@ -1550,14 +1587,16 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Stone Mine
             purpose = pgettext("amazons_building", "Digs granite and quartz out of the ground in mountain terrain."),
             -- TRANSLATORS: Performance helptext for an Amazon production site: Stone Mine
-            performance = pgettext("amazons_building", "The stone mine can produce one slab of each kind of stone in %s on average if the supply with rations is steady and the mine is not worn out."):bformat(format_seconds(74))
+            performance = pgettext("amazons_building", "The stone mine can produce one slab of each kind of stone in %s on average if the supply with rations is steady and the mine is not worn out."):bformat(format_minutes_seconds(1, 14))
          }
       },
       {
          name = "amazons_gold_digger_dwelling",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Gold Digger Dwelling
-            purpose = pgettext("amazons_building", "Washes gold dust out of the ground in mountain terrain.")
+            purpose = pgettext("amazons_building", "Washes gold dust out of the ground in mountain terrain."),
+            -- TRANSLATORS: Performance helptext for an Amazon production site: Gold Digger Dwelling
+            performance = pgettext("amazons_building", "If the supply is steady, this mine can produce gold dust in %s on average."):bformat(format_minutes_seconds(1, 9))
          }
       },
 

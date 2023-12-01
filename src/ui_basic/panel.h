@@ -433,8 +433,19 @@ public:
 		kQuicknav,
 		kFleetOptions,
 	};
+	/*
+	 * Actual save type after initialization.
+	 * Overridden in derived classes
+	 */
 	virtual SaveType save_type() const {
 		return SaveType::kNone;
+	}
+	/*
+	 * Saving partially initialized windows can trigger
+	 * race conditions. Wait until initialization_complete().
+	 */
+	SaveType current_save_type() const {
+		return initialized_ ? save_type() : SaveType::kNone;
 	}
 	virtual void save(FileWrite&, Widelands::MapObjectSaver&) const {
 		NEVER_HERE();
