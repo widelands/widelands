@@ -2628,7 +2628,7 @@ int LuaMapView::mouse_to_field(lua_State* L) {
 }
 
 /* RST
-   .. method:: update_toolbar(field)
+   .. method:: update_toolbar()
 
       .. versionadded:: 1.2
 
