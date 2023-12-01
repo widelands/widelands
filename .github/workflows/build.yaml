@@ -52,21 +52,21 @@ jobs:
             - 'cmake/WlFunctions.cmake'
             - 'src/**'
     - name: Installing dependencies
-      if: steps.filter_files.outputs.codecheck == 'true'
+      if: steps.changed_files.outputs.codecheck == 'true'
       run: sh ./.github/scripts/install_deps.sh
     - name: Test
-      if: steps.filter_files.outputs.codecheck == 'true'
+      if: steps.changed_files.outputs.codecheck == 'true'
       run: |
         ./cmake/codecheck/run_tests.py
     - name: Check
-      if: steps.filter_files.outputs.codecheck == 'true'
+      if: steps.changed_files.outputs.codecheck == 'true'
       run: |
         mkdir build
         cd build
         cmake .. -DCMAKE_BUILD_TYPE:STRING="Debug"
         TERM=dumb make -j1 codecheck 2>&1 | tee codecheck.out
     - name: Report
-      if: steps.filter_files.outputs.codecheck == 'true'
+      if: steps.changed_files.outputs.codecheck == 'true'
       run: |
         if grep '^[/_.a-zA-Z]\+:[0-9]\+:' build/codecheck.out; then
           echo "You have codecheck warnings (see above). Please fix."
@@ -147,7 +147,7 @@ jobs:
             - 'utils/macos/*'
             - '.github/workflows/build_macos.yaml'
     - name: Clang-tidy steps
-      if: steps.filter_files.outputs.clang_tidy == 'true'
+      if: steps.changed_files.outputs.clang_tidy == 'true'
       uses: ./.github/actions/build_clang_tidy.yml
 
   lua_style:
