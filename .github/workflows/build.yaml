@@ -138,14 +138,21 @@ jobs:
             - 'data/**'
             - 'doc/**'
             - 'po/**'
+          install_dependencies: &install_dependencies
+            - 'install-dependencies.sh'
+            - 'utils/download_asio.sh' # called by install-dependencies.sh
           inst_windows_msvc:
+            - *install_dependencies
             - 'utils/win32/**'
             - '.github/scripts/vcpkg_ref'
             - '.github/workflows/build_windows_msvc.yaml'
           inst_windows:
+            - *install_dependencies
             - 'utils/win32/**'
             - '.github/workflows/build_windows.yaml'
           inst_macos:
+            - 'compile.sh' # called by utils/macos/build_app.sh
+            - *install_dependencies
             - 'utils/macos/*'
             - '.github/workflows/build_macos.yaml'
           appimage:
