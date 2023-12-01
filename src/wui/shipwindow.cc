@@ -450,6 +450,8 @@ void ShipWindow::think() {
 	set_destination_->set_enabled(can_act);
 	btn_sink_->set_enabled(can_act);
 
+	btn_refit_->set_visible(!ibase_.egbase().is_game() || ibase_.game().naval_warfare_allowed());
+
 	btn_refit_->set_pic(g_image_cache->get(ship->get_ship_type() == Widelands::ShipType::kWarship ?
                                              kImgRefitTransport :
                                              kImgRefitWarship));
