@@ -7637,7 +7637,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, a battle arena can train evade "
 "for one soldier from 0 to the highest level in %s on average."
-msgstr ""
+msgstr "Als alle benodigde goederen op tijd worden geleverd, kan een gevechtsarena het ontwijken van een soldaat van 0 tot het hoogste niveau in gemiddeld %s trainen."
 
 #. TRANSLATORS: Lore helptext for a Barbarian training site: Training Camp
 #: ../../data/tribes/initialization/barbarians/units.lua:1714
@@ -9986,7 +9986,7 @@ msgstr[1] "%1%(+%2%) soldaten"
 #: ../../data/tribes/initialization/empire/units.lua:12
 msgctxt "empire_lore"
 msgid "‘%1%’<br>(%2%)"
-msgstr ""
+msgstr "‘%1%’<br>(%2%)"
 
 #. TRANSLATORS: Helptext for an Empire ware: Granite, part 2
 #: ../../data/tribes/initialization/empire/units.lua:115
@@ -13309,35 +13309,35 @@ msgstr "Vinovia"
 #: ../../data/tribes/initialization/empire/units.lua:2723
 msgctxt "empire"
 msgid "Worker missing"
-msgstr ""
+msgstr "Werker ontbreekt"
 
 #. TRANSLATORS: Productivity label on an Empire building if there is 1 worker
 #. coming
 #: ../../data/tribes/initialization/empire/units.lua:2725
 msgctxt "empire"
 msgid "Worker is coming"
-msgstr ""
+msgstr "Werker komt eraan"
 
 #. TRANSLATORS: Productivity label on an Empire building if there is more than
 #. 1 worker missing. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/empire/units.lua:2727
 msgctxt "empire"
 msgid "Workers missing"
-msgstr ""
+msgstr "Werkers ontbreken"
 
 #. TRANSLATORS: Productivity label on an Empire building if there is more than
 #. 1 worker coming. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/empire/units.lua:2729
 msgctxt "empire"
 msgid "Workers are coming"
-msgstr ""
+msgstr "Werkers komen eraan"
 
 #. TRANSLATORS: Productivity label on an Empire building if there is 1
 #. experienced worker missing
 #: ../../data/tribes/initialization/empire/units.lua:2731
 msgctxt "empire"
 msgid "Expert missing"
-msgstr ""
+msgstr "Ontbrekende expert"
 
 #. TRANSLATORS: Productivity label on an Empire building if there is more than
 #. 1 experienced worker missing. If you need plural forms here, please let us
@@ -13345,7 +13345,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:2733
 msgctxt "empire"
 msgid "Experts missing"
-msgstr ""
+msgstr "Ontbrekende experten"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. is the maximum number of soldier slots in the building.
@@ -13353,16 +13353,16 @@ msgstr ""
 msgctxt "empire_soldier"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% soldaat (+%2%)"
+msgstr[1] "%1% soldaten (+%2%)"
 
 #. TRANSLATORS: Number of Empire soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/empire/units.lua:2749
 msgctxt "empire_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% soldaten"
+msgstr[1] "%1% soldaten"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
@@ -13371,8 +13371,8 @@ msgstr[1] ""
 msgctxt "empire_soldier"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) soldaat (+%3%)"
+msgstr[1] "%1%(+%2%) soldaten (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building.
@@ -13380,8 +13380,8 @@ msgstr[1] ""
 msgctxt "empire_soldier"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) soldaat"
+msgstr[1] "%1%(+%2%) soldaten"
 
 #. TRANSLATORS: Helptext for a Frisian ware: Log, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:101
@@ -13424,7 +13424,7 @@ msgid ""
 "Reed is grown in a reed farm. Nothing is better suited to make roofs "
 "waterproof. It is also used to make baskets and fishing nets as well as "
 "cloth."
-msgstr ""
+msgstr "Reed wordt gekweekt in een rietboerderij. Niets is beter geschikt om daken waterdicht te maken. Het wordt ook gebruikt om emmers, visnetten en doek te maken."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Fur
 #: ../../data/tribes/initialization/frisians/units.lua:150
@@ -13559,7 +13559,7 @@ msgctxt "ware"
 msgid ""
 "Coal is mined in coal mines or produced out of logs by a charcoal burner in "
 "a charcoal kiln or charcoal burner’s house."
-msgstr ""
+msgstr "Steenkool wordt gewonnen in kolenmijnen of geproduceerd uit houtblokken door een houtskoolbrander in een houtskooloven of houtskoolbrandershuis."
 
 #. TRANSLATORS: Helptext for a Frisian ware: Coal, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:310
@@ -13860,7 +13860,7 @@ msgstr "Werkt in de scheepswerf en bouwt nieuwe schepen."
 #: ../../data/tribes/initialization/frisians/units.lua:729
 msgctxt "frisians_worker"
 msgid "Constructs breakwaters to gain new land from the sea."
-msgstr ""
+msgstr "Bouwt golfbrekers om nieuw land te winnen van de zee."
 
 #. TRANSLATORS: Helptext for a Frisian worker: Fisher
 #: ../../data/tribes/initialization/frisians/units.lua:739
@@ -14002,7 +14002,7 @@ msgstr "Verkent onbekend grondgebied."
 #: ../../data/tribes/initialization/frisians/units.lua:1115
 #: ../../data/tribes/initialization/frisians/units.lua:1143
 msgid "This berry bush has just been planted."
-msgstr ""
+msgstr "Deze bessenstruik is net geplant."
 
 #. TRANSLATORS: Helptext for a Frisian immovable: One of the berry bushes
 #: ../../data/tribes/initialization/frisians/units.lua:926
@@ -14015,7 +14015,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1122
 #: ../../data/tribes/initialization/frisians/units.lua:1150
 msgid "This berry bush is growing."
-msgstr ""
+msgstr "Deze bessenstruik groeit."
 
 #. TRANSLATORS: Helptext for a Frisian immovable: One of the berry bushes
 #: ../../data/tribes/initialization/frisians/units.lua:933
@@ -14029,7 +14029,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1157
 msgid ""
 "This berry bush is flowering. Honey can be produced from it by a beekeeper."
-msgstr ""
+msgstr "Deze bessenstruik staat in bloei. Een imker kan er honing van maken."
 
 #. TRANSLATORS: Helptext for a Frisian immovable: One of the berry bushes
 #: ../../data/tribes/initialization/frisians/units.lua:940
@@ -14042,7 +14042,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1136
 #: ../../data/tribes/initialization/frisians/units.lua:1164
 msgid "This berry bush is ready for harvesting."
-msgstr ""
+msgstr "Deze bessenstruik is klaar om geoogst te worden."
 
 #. TRANSLATORS: Helptext for a Frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for an Empire/Barbarian immovable usable by Frisians:
@@ -14059,7 +14059,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1403
 #: ../../data/tribes/initialization/frisians/units.lua:1417
 msgid "This field is flowering. Honey can be produced from it by a beekeeper."
-msgstr ""
+msgstr "This field is flowering. Honey can be produced from it by a beekeeper."
 
 #. TRANSLATORS: Helptext for a Frisian immovable: Pond
 #: ../../data/tribes/initialization/frisians/units.lua:1206
@@ -14067,40 +14067,40 @@ msgid ""
 "When claydiggers dig up earth, they leave holes in the ground. These holes "
 "vanish after a while. Aqua farms can use them as ponds to grow fish in them,"
 " whereas charcoal burners erect their charcoal stacks in them."
-msgstr ""
+msgstr "Als kleigravers aarde opgraven, laten ze gaten achter in de grond. Deze gaten verdwijnen na een tijdje. Aquakwekerijen kunnen ze gebruiken als vijvers om er vis in te kweken, terwijl houtskoolbranders er hun houtskoolstapels in bouwen."
 
 #. TRANSLATORS: Helptext for a Frisian immovable: Pond
 #: ../../data/tribes/initialization/frisians/units.lua:1213
 msgid ""
 "Fish are maturing in this pond. A fisher working from an aqua farm will be "
 "able to catch them when they are bigger."
-msgstr ""
+msgstr "Vissen worden volwassen in deze vijver. Een visser die vanuit een aquakwekerij werkt, zal ze kunnen vangen als ze groter zijn."
 
 #. TRANSLATORS: Helptext for a Frisian immovable: Pond
 #: ../../data/tribes/initialization/frisians/units.lua:1220
 msgid ""
 "Fish are living in this pond. A fisher working from an aqua farm can catch "
 "them as food."
-msgstr ""
+msgstr "In deze vijver leven vissen. Een visser die vanuit een aquacultuurbedrijf werkt, kan ze als voedsel vangen."
 
 #. TRANSLATORS: Helptext for a Frisian immovable: Pond
 #: ../../data/tribes/initialization/frisians/units.lua:1227
 msgid ""
 "A charcoal stack is burning in this earthen hole. When it has burnt down, a "
 "charcoal burner will be able to gather coal from it."
-msgstr ""
+msgstr "In dit aarden gat brandt een houtskoolstapel. Als deze is afgebrand, kan een houtskoolbrander er kolen uit halen."
 
 #. TRANSLATORS: Helptext for a Frisian immovable: Pond
 #: ../../data/tribes/initialization/frisians/units.lua:1234
 msgid ""
 "A charcoal stack, which had been erected in this earthen hole, is ready for "
 "a charcoal burner to gather coal from it."
-msgstr ""
+msgstr "Een houtskoolstapel, die in dit aarden gat was gebouwd, staat klaar voor een houtskoolbrander om er kolen uit te halen."
 
 #. TRANSLATORS: Helptext for a Frisian immovable: Dike
 #: ../../data/tribes/initialization/frisians/units.lua:1241
 msgid "A breakwater erected by a diker to gain new land from the sea."
-msgstr ""
+msgstr "Een golfbreker, opgericht door een dijkwerker om nieuw land te winnen van de zee."
 
 #. TRANSLATORS: Note helptext for a Frisian production site: Diker's House
 #: ../../data/tribes/initialization/frisians/units.lua:1243
@@ -14108,13 +14108,13 @@ msgid ""
 "You can manually remove the dike when the land is sufficiently secured to "
 "prevent wasting resources. To do so, build a flag, road, or building in its "
 "place."
-msgstr ""
+msgstr "Je kunt de dijk handmatig verwijderen als het land voldoende beveiligd is om verspilling van grondstoffen te voorkomen. Bouw hiervoor een vlag, weg of gebouw in de plaats."
 
 #. TRANSLATORS: Helptext for a Frisian immovable: Reed Field
 #: ../../data/tribes/initialization/frisians/units.lua:1264
 msgid ""
 "This reed field is flowering. Honey can be produced from it by a beekeeper."
-msgstr ""
+msgstr "Dit rietveld staat in bloei. Een imker kan er honing van maken."
 
 #. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 1
 #: ../../data/tribes/initialization/frisians/units.lua:1326
@@ -14126,7 +14126,7 @@ msgstr "Graniet is een eenvoudig bouwmateriaal en kan worden opgegraven door een
 #: ../../data/tribes/initialization/frisians/units.lua:1410
 msgid ""
 "This grapevine is flowering. Honey can be produced from it by a beekeeper."
-msgstr ""
+msgstr "Deze wijnstok staat in bloei. Een imker kan er honing van maken."
 
 #. TRANSLATORS: Purpose helptext for a Frisian warehouse: Headquarters
 #: ../../data/tribes/initialization/frisians/units.lua:1529
@@ -14146,7 +14146,7 @@ msgctxt "frisians_building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools."
-msgstr ""
+msgstr "Je arbeiders en soldaten vinden hier onderdak. Je kunt er ook je goederen en gereedschap opslaan."
 
 #. TRANSLATORS: Purpose helptext for a Frisian warehouse: Port
 #: ../../data/tribes/initialization/frisians/units.lua:1545
@@ -14162,7 +14162,7 @@ msgctxt "frisians_building"
 msgid ""
 "Similar to the Headquarters a Port can be attacked and destroyed by an "
 "enemy. It is recommendable to send soldiers to defend it."
-msgstr ""
+msgstr "Net als het hoofdkwartier kan een haven worden aangevallen en vernietigd door een vijand. Het is aan te raden om soldaten te sturen om het te verdedigen."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Quarry
 #: ../../data/tribes/initialization/frisians/units.lua:1556
@@ -14195,7 +14195,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s, depending on "
 "how far the stonemason has to walk."
-msgstr ""
+msgstr "Dit gebouw kan één graniet produceren tussen %1$s en %2$s, afhankelijk van hoe ver de steenhouwer moet lopen."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Quarry,
 #. part 2
@@ -14217,7 +14217,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1777
 msgctxt "frisians_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr ""
+msgstr "In geval van hellingen of obstakels onderweg, wordt de tijd verlengd."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Woodcutter's
 #. House
@@ -14249,7 +14249,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one log between %1$s and %2$s, depending on how "
 "far the woodcutter has to walk."
-msgstr ""
+msgstr "Dit gebouw kan één houtblok produceren tussen %1$s en %2$s, afhankelijk van hoe ver de houthakker moet lopen."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Forester's House
 #: ../../data/tribes/initialization/frisians/units.lua:1594
@@ -14281,7 +14281,7 @@ msgctxt "frisians_building"
 msgid ""
 "The forester plants one tree between %1$s and %2$s, depending on how far he "
 "has to walk."
-msgstr ""
+msgstr "De boswachter plant één boom tussen %1$s en %2$s, afhankelijk van hoe ver hij moet lopen."
 
 #. TRANSLATORS: Note helptext for a Frisian production site: Hunter's House
 #: ../../data/tribes/initialization/frisians/units.lua:1615
@@ -14296,14 +14296,14 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one meat between %1$s and %2$s, depending on how "
 "far the hunter has to walk."
-msgstr ""
+msgstr "Dit gebouw kan één vlees produceren tussen %1$s en %2$s, afhankelijk van hoe ver de visser moet lopen."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Hunter's
 #. House, part 3
 #: ../../data/tribes/initialization/frisians/units.lua:1622
 msgctxt "frisians_building"
 msgid "The hunter produces one fur after he has produced five pieces of meat."
-msgstr ""
+msgstr "De jager produceert één pels nadat hij vijf stukken vlees heeft geproduceerd."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Fisher's House
 #: ../../data/tribes/initialization/frisians/units.lua:1630
@@ -14338,7 +14338,7 @@ msgstr "Het vissershuis heeft visrijk water nodig binnen het werkgebied."
 #: ../../data/tribes/initialization/frisians/units.lua:1639
 msgctxt "frisians_building"
 msgid "Roads and trees along the shoreline block fishing."
-msgstr ""
+msgstr "Wegen en bomen langs de kust belemmeren het vissen."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Fisher's
 #. House, part 1
@@ -14347,7 +14347,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one fish between %1$s and %2$s, depending on how "
 "far the fisher has to walk."
-msgstr ""
+msgstr "Dit gebouw kan één vis produceren tussen %1$s en %2$s, afhankelijk van hoe ver de visser moet lopen."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Reed Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1653
@@ -14375,7 +14375,7 @@ msgid ""
 "Reed is the traditional material for roofing. It is also needed to produce "
 "baskets and fishing nets, and it is woven – together with reindeer fur – "
 "into the cloth used for ships’ sails."
-msgstr ""
+msgstr "Dakriet is het traditionele materiaal voor dakbedekking. Het is ook nodig voor het maken van manden en visnetten. Daarnaast wordt het – samen met rendiervacht – geweven in het doek dat wordt gebruikt voor scheepszeilen."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Well
 #: ../../data/tribes/initialization/frisians/units.lua:1666
@@ -14397,7 +14397,7 @@ msgstr "Het antwoord van hoofdman Arldor toen hem werd gevraagd waarom zijn stam
 #, lua-format
 msgctxt "frisians_building"
 msgid "The carrier needs %s to get one bucket full of water."
-msgstr ""
+msgstr "De drager heeft %s nodig voor een volle emmer water."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Well, part
 #. 2
@@ -14405,7 +14405,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "If the water resource is depleted, the carrier needs %s on average."
-msgstr ""
+msgstr "Als de watervoorraad uitgeput is, heeft de vervoerder gemiddeld behoefte aan %s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Clay Pit
 #: ../../data/tribes/initialization/frisians/units.lua:1683
@@ -14454,7 +14454,7 @@ msgctxt "building"
 msgid ""
 "The charcoal burner’s house needs holes in the ground that were dug by a "
 "clay pit’s worker nearby to erect charcoal stacks in them."
-msgstr ""
+msgstr "De houtskoolbranderij heeft gaten in de grond nodig die in de buurt zijn gegraven door de werker van een kleiput om houtskoolstapels in aan te leggen."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Charcoal
 #. Burner's House
@@ -14462,7 +14462,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The charcoal burner’s house needs %s on average to produce one coal."
-msgstr ""
+msgstr "De houtskoolbranderij heeft gemiddeld %s nodig om een stuk kool te produceren."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Berry Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1709
@@ -14588,7 +14588,7 @@ msgstr "De visser die de visteelt heeft uitgevonden"
 #: ../../data/tribes/initialization/frisians/units.lua:1758
 msgctxt "frisians_building"
 msgid "Breeds fish as food for soldiers and miners."
-msgstr ""
+msgstr "Kweekt vis als voedsel voor soldaten en mijnwerkers."
 
 #. TRANSLATORS: Note helptext for a Frisian production site: Aqua Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1760
@@ -14619,14 +14619,14 @@ msgctxt "frisians_building"
 msgid ""
 "You need to connect this flag to a scout’s house before you can send a scout"
 " here."
-msgstr ""
+msgstr "Je moet deze vlag verbinden met het huis van een verkenner voordat je hier een verkenner naartoe kunt sturen."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Scout's
 #. House, part 1
 #: ../../data/tribes/initialization/frisians/units.lua:1775
 msgctxt "frisians_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Een verkenningstocht van de scout duurt tussen %1$s en %2$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Brick Kiln
 #: ../../data/tribes/initialization/frisians/units.lua:1787
@@ -14655,7 +14655,7 @@ msgstr "Maakt bakstenen van graniet en klei, en kolen als brandstof. Bakstenen z
 #, lua-format
 msgctxt "frisians_building"
 msgid "The brick kiln needs %s on average to produce three bricks."
-msgstr ""
+msgstr "De steenoven heeft gemiddeld %s nodig om drie bakstenen te produceren."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Furnace
 #: ../../data/tribes/initialization/frisians/units.lua:1800
@@ -14685,7 +14685,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr ""
+msgstr "Als dit gebouw volledig bevoorraad is en alle metalen nodig zijn voor de economie, kost de productie van één ijzer %1$s en een gouden neemt gemiddeld %2$s. Als de economie slechts één soort metaal nodig heeft, kost de productie van één ijzer %3$s en een goud neemt gemiddeld %4$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Recycling Center
 #: ../../data/tribes/initialization/frisians/units.lua:1813
@@ -14722,7 +14722,7 @@ msgid ""
 "takes %3$s on average. If only one kind of material is needed by the "
 "economy, production of one fur takes %4$s, one iron takes %5$s and one gold "
 "takes %6$s on average."
-msgstr ""
+msgstr "Als dit gebouw volledig bevoorraad is en alle materialen nodig zijn voor de economie, duurt de productie van één pels %1$s, één ijzer gemiddeld %2$s en één goud gemiddeld %3$s. Als de economie slechts één soort materiaal nodig heeft, neemt de productie van één bont gemiddeld %4$s, één ijzer gemiddeld %5$s en één goud gemiddeld %6$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Blacksmithy
 #: ../../data/tribes/initialization/frisians/units.lua:1826
@@ -14753,7 +14753,7 @@ msgid ""
 "tool is needed by the economy, its production takes %2$s on average. Needles"
 " are an exception - in the time to produce one tool two needles are "
 "produced."
-msgstr ""
+msgstr "Als dit gebouw volledig bevoorraad is en alle gereedschappen nodig zijn voor de economie, duurt de productie van één stuk gereedschap gemiddeld %1$s. Als de economie maar één soort gereedschap nodig heeft, duurt de productie ervan gemiddeld %2$s. Naalden zijn een uitzondering - in de tijd die nodig is om één gereedschap te produceren, worden twee naalden geproduceerd."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Small Armor
 #. Smithy
@@ -14776,7 +14776,7 @@ msgstr "Een smid die wijst op zijn invloed op de opleiding van soldaten"
 #: ../../data/tribes/initialization/frisians/units.lua:1843
 msgctxt "frisians_building"
 msgid "Produces basic weapons and helmets for the soldiers."
-msgstr ""
+msgstr "Produceert basiswapens en helmen voor de soldaten."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Small
 #. Armor Smithy
@@ -14788,7 +14788,7 @@ msgid ""
 "%2$s and one helmet takes %3$s on average. If only one kind of sword or "
 "helmet is needed by the economy, production of one short sword takes %4$s, "
 "one long sword takes %5$s and one helmet takes %6$s on average."
-msgstr ""
+msgstr "Als dit gebouw volledig bevoorraad is en alle zwaarden en helmen nodig zijn voor de economie, duurt de productie van één kort zwaard gemiddeld %1$s, één lang zwaard gemiddeld %2$s en één helm gemiddeld %3$s. Als de economie maar één soort zwaard of helm nodig heeft, kost de productie van één kort zwaard gemiddeld %4$s, één lang zwaard gemiddeld %5$s en één helm gemiddeld %6$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Large Armor
 #. Smithy
@@ -14813,7 +14813,7 @@ msgstr "Een meestersmid die weigert alles behalve de meest geavanceerde helmen e
 #: ../../data/tribes/initialization/frisians/units.lua:1856
 msgctxt "frisians_building"
 msgid "Produces advanced weapons and golden helmets for the soldiers."
-msgstr ""
+msgstr "Produceert geavanceerde wapens en gouden helmen voor de soldaten."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Large
 #. Armor Smithy
@@ -14826,7 +14826,7 @@ msgid ""
 " sword or helmet is needed by the economy, production of one broadsword "
 "takes %4$s, one double-edged sword takes %5$s and one golden helmet takes "
 "%6$s on average."
-msgstr ""
+msgstr "Als dit gebouw volledig bevoorraad is en alle zwaarden en helmen nodig zijn voor de economie, kost de productie van één breedzwaard gemiddeld %1$s, één tweesnijdend zwaard gemiddeld %2$s en één gouden helm gemiddeld %3$s. Als de economie maar één soort zwaard of helm nodig heeft, kost de productie van één breedzwaard gemiddeld %4$s, één tweesnijdend zwaard gemiddeld %5$s en één gouden helm gemiddeld %6$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Sewing Room
 #: ../../data/tribes/initialization/frisians/units.lua:1865
@@ -14887,7 +14887,7 @@ msgid ""
 "economy, production of one of each garment takes %1$s on average. If only "
 "one kind of garment is needed by the economy, its production takes %2$s on "
 "average."
-msgstr ""
+msgstr "Als dit gebouw volledig bevoorraad is en de economie alle kledingstukken nodig heeft, kost de productie van één kledingstuk van elk kledingstuk gemiddeld %1$s. Als de economie maar één soort kledingstuk nodig heeft, kost de productie ervan gemiddeld %2$s."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Charcoal
 #. Kiln
@@ -14917,7 +14917,7 @@ msgctxt "frisians_building"
 msgid ""
 "Smokes fish and meat using logs. Only smoked meat and fish are good enough "
 "to be eaten by miners and soldiers."
-msgstr ""
+msgstr "Rookt vis en vlees met behulp van boomstammen. Alleen gerookt vlees en gerookte vis zijn goed genoeg om te worden gegeten door mijnwerkers en soldaten."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Smokery
 #: ../../data/tribes/initialization/frisians/units.lua:1910
@@ -14926,7 +14926,7 @@ msgctxt "frisians_building"
 msgid ""
 "If this building is fully supplied, production of one of each smoked food "
 "takes %s on average."
-msgstr ""
+msgstr "Als dit gebouw volledig bevoorraad is, duurt de productie van één van elk gerookt voedsel gemiddeld %s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Bakery
 #: ../../data/tribes/initialization/frisians/units.lua:1917
@@ -14944,7 +14944,7 @@ msgstr "Een bakker"
 #: ../../data/tribes/initialization/frisians/units.lua:1921
 msgctxt "frisians_building"
 msgid "Bakes bread out of barley and water to feed miners and soldiers."
-msgstr ""
+msgstr "Bakt brood uit gerst en water om mijnwerkers en soldaten te voeden."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Bakery
 #: ../../data/tribes/initialization/frisians/units.lua:1923
@@ -14976,7 +14976,7 @@ msgctxt "frisians_building"
 msgid ""
 "Bakes honey bread out of barley, water and honey to feed miners in deep "
 "mines and soldiers in advanced training."
-msgstr ""
+msgstr "Bakt honingbrood uit gerst, water en honing om mijnwerkers in diepe mijnen en soldaten in gevorderde training te voeden."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Honey
 #. Bread Bakery
@@ -14987,7 +14987,7 @@ msgid ""
 " production of one bread takes %1$s and one honey bread takes %2$s on "
 "average. If only one kind of bread is needed by the economy, production of "
 "one bread or one honey bread takes %3$s on average."
-msgstr ""
+msgstr "Als dit gebouw volledig bevoorraad is en alle broden nodig zijn voor de economie, kost de productie van één brood gemiddeld %1$s en één honingbrood gemiddeld %2$s. Als de economie maar één soort brood nodig heeft, kost de productie van één brood of één honingbrood gemiddeld %3$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Brewery
 #: ../../data/tribes/initialization/frisians/units.lua:1943
@@ -15006,7 +15006,7 @@ msgstr "Een brouwer die opschept over het belang van zijn beroep"
 #: ../../data/tribes/initialization/frisians/units.lua:1947
 msgctxt "frisians_building"
 msgid "Brews beer for miners and soldier training."
-msgstr ""
+msgstr "Brouwt bier voor mijnwerkers en het trainen van soldaten."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Brewery
 #: ../../data/tribes/initialization/frisians/units.lua:1949
@@ -15034,7 +15034,7 @@ msgctxt "frisians_building"
 msgid ""
 "Brews beer out of barley and water. It also brews mead, which is beer "
 "refined with honey. Mead is consumed by experienced soldiers."
-msgstr ""
+msgstr "Brouwt bier uit gerst en water. Brouwt ook mede, dat is bier verfijnd met honing. Mede wordt geconsumeerd door ervaren soldaten."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Mead
 #. Brewery
@@ -15045,7 +15045,7 @@ msgid ""
 " production of one beer takes %1$s and one mead takes %2$s on average. If "
 "only one kind of drink is needed by the economy, production of one beer or "
 "one mead takes %3$s on average."
-msgstr ""
+msgstr "Als dit gebouw volledig bevoorraad is en alle dranken nodig zijn voor de economie, kost de productie van één bier gemiddeld %1$s en één mede gemiddeld %2$s. Als de economie maar één soort drank nodig heeft, kost de productie van één bier of één mede gemiddeld%3$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Tavern
 #: ../../data/tribes/initialization/frisians/units.lua:1969
@@ -15066,7 +15066,7 @@ msgid ""
 "If the tavern is fully supplied, it can produce one ration in %1$s on "
 "average, using 2 kinds of ingredients. If it can only use one kind of "
 "ingredient, it can produce one ration in %2$s on average."
-msgstr ""
+msgstr "Als de taverne volledig bevoorraad is, kan het gemiddeld één rantsoen produceren in %1$s met behulp van 2 soorten ingrediënten. Als er maar één soort ingrediënt gebruikt kan worden, kan er gemiddeld één rantsoen per %2$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Drinking Hall
 #: ../../data/tribes/initialization/frisians/units.lua:1982
@@ -15100,7 +15100,7 @@ msgid ""
 "economy, production of one of each food takes %1$s on average. If only one "
 "kind of food is needed by the economy, production of one ration takes %2$s "
 "and one meal takes %3$s on average."
-msgstr ""
+msgstr "Als dit gebouw volledig bevoorraad is en alle soorten voedsel nodig zijn voor de economie, kost de productie van één van elk voedsel gemiddeld %1$s. Als de economie maar één soort voedsel nodig heeft, kost de productie van één rantsoen gemiddeld %2$s en van één maal gemiddeld %3$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Barracks
 #: ../../data/tribes/initialization/frisians/units.lua:1995
@@ -15130,7 +15130,7 @@ msgstr "Voorziet rekruten van uitrusting en leidt ze op als soldaten."
 #, lua-format
 msgctxt "frisians_building"
 msgid "The barracks need %s on average to recruit one soldier."
-msgstr ""
+msgstr "De kazerne heeft gemiddeld %s nodig om een soldaat te rekruteren."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Reindeer Farm
 #: ../../data/tribes/initialization/frisians/units.lua:2010
@@ -15161,7 +15161,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the supply is steady and there is continuous demand for fur, then the "
 "reindeer farm produces one meat after producing three pieces of fur."
-msgstr ""
+msgstr "Als het aanbod constant is en er voortdurend vraag is naar pels, dan produceert de rendierhouderij één stuk vlees na de productie van drie stukken pels."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Reindeer
 #. Farm
@@ -15173,7 +15173,7 @@ msgid ""
 "on average. If only reindeers are needed by the economy, their production "
 "takes %3$s on average. If only fur is needed by the economy, its production "
 "takes %4$s on average."
-msgstr ""
+msgstr "Als dit gebouw volledig bevoorraad is en de economie zowel rendieren als pelzen nodig heeft, kost de productie van één rendier gemiddeld %1$s en van één pels gemiddeld %2$s. Als de economie alleen rendieren nodig heeft, kost de productie ervan gemiddeld %3$s. Als de economie alleen een pels nodig heeft, kost de productie daarvan gemiddeld %4$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Farm
 #: ../../data/tribes/initialization/frisians/units.lua:2025
@@ -15181,7 +15181,7 @@ msgctxt "frisians_building"
 msgid ""
 "No frost, no heat; no rain, no drought; no rats, no locusts; naught can "
 "destroy my harvest."
-msgstr ""
+msgstr "Geen vorst, geen hitte; geen regen, geen droogte; geen ratten, geen sprinkhanen; niets kan mijn oogst vernietigen."
 
 #. TRANSLATORS: Lore author helptext for a Frisian production site: Farm
 #: ../../data/tribes/initialization/frisians/units.lua:2027
@@ -15207,7 +15207,7 @@ msgstr "De boerderij heeft vrije ruimte binnen het werkgebied nodig om zaden te 
 #: ../../data/tribes/initialization/frisians/units.lua:2038
 msgctxt "frisians_building"
 msgid "Constructs breakwaters nearby to gain new land from the sea."
-msgstr ""
+msgstr "Bouwt golfbrekers in de buurt om nieuw land te winnen van de zee."
 
 #. TRANSLATORS: Note helptext for a Frisian production site: Diker's House
 #: ../../data/tribes/initialization/frisians/units.lua:2040
@@ -15217,7 +15217,7 @@ msgid ""
 "times. You can manually remove breakwaters when the land is sufficiently "
 "secured to prevent wasting resources; to do so, build a flag, road, or "
 "building in the dike’s place."
-msgstr ""
+msgstr "De dijkwerker zal meerdere keren terreinvormen rond elke golfbreker die hij bouwt. Je kunt golfbrekers handmatig verwijderen als het land voldoende beveiligd is om verspilling van grondstoffen te voorkomen; om dit te doen bouw je een vlag, weg of gebouw op de plaats van de dijk."
 
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Rock Mine
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Deep Rock Mine
@@ -15234,7 +15234,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the rock mine can produce granite in %s on "
 "average."
-msgstr ""
+msgstr "Als de voedselvoorraad constant is, kan de steenmijn gemiddeld %s produceren."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Deep Rock
 #. Mine
@@ -15244,7 +15244,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep rock mine can produce granite in %s "
 "on average."
-msgstr ""
+msgstr "Als de voedselvoorraad constant is, kan de diepe rotsmijn gemiddeld %s produceren."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Coal Mine
 #: ../../data/tribes/initialization/frisians/units.lua:2069
@@ -15253,7 +15253,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the coal mine can produce coal in %s on "
 "average."
-msgstr ""
+msgstr "Als de voedselvoorraad constant is, kan de kolenmijn kolen produceren in gemiddeld %s."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Deep Coal
 #. Mine
@@ -15263,7 +15263,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep coal mine can produce coal in %s on "
 "average."
-msgstr ""
+msgstr "Als de voedselvoorziening stabiel is, kan de diepe kolenmijn kolen produceren in gemiddeld. %s."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Iron Mine
 #: ../../data/tribes/initialization/frisians/units.lua:2087
@@ -15282,7 +15282,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep iron mine can produce iron ore in %s "
 "on average."
-msgstr ""
+msgstr "Als de voedselvoorziening stabiel is, kan de diepe ijzermijn  in gemiddeld %s ijzererts produceren."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Gold Mine
 #: ../../data/tribes/initialization/frisians/units.lua:2105
@@ -15301,7 +15301,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep gold mine can produce gold ore in %s "
 "on average."
-msgstr ""
+msgstr "Als de voedselvoorziening stabiel is, kan de diepe goudmijn in gemiddeld %s gouderts produceren."
 
 #. TRANSLATORS: Lore helptext for a Frisian training site: Training Camp
 #: ../../data/tribes/initialization/frisians/units.lua:2123
@@ -15344,7 +15344,7 @@ msgid ""
 "Now that you have two swords, there’s more of a risk you’ll accidentally "
 "stab yourself, but if you got this far, you’ll likely master this challenge "
 "as well."
-msgstr ""
+msgstr "Nu je twee zwaarden hebt, is het risico groter dat je jezelf per ongeluk neersteekt, maar als je zover bent gekomen, zul je deze uitdaging waarschijnlijk ook wel aankunnen."
 
 #. TRANSLATORS: Purpose helptext for a Frisian training site: Training Arena
 #: ../../data/tribes/initialization/frisians/units.lua:2140
@@ -15377,7 +15377,7 @@ msgstr "Traint alleen soldaten die in het trainingskamp tot het maximale niveau 
 #: ../../data/tribes/initialization/frisians/units.lua:2196
 msgctxt "frisians_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Verzamel soldaten in garnizoen om je territorium uit te breiden."
 
 #. TRANSLATORS: Note helptext for a Frisian military site: Wooden Tower
 #. TRANSLATORS: Note helptext for a Frisian military site: High Wooden Tower
@@ -15396,7 +15396,7 @@ msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
 "arrow button to decrease the capacity. You can also click on a soldier to "
 "send him away."
-msgstr ""
+msgstr "Als je te weinig soldaten hebt om nieuwe militaire locaties te bezetten, gebruik je de pijltjestoets omlaag om de capaciteit te verlagen. Je kunt ook op een soldaat klikken om hem weg te sturen."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Shipyard
 #: ../../data/tribes/initialization/frisians/units.lua:2220
@@ -15448,476 +15448,476 @@ msgstr "De weverij heeft gemiddeld %s nodig om een stuk doek te produceren."
 #: ../../data/tribes/initialization/frisians/units.lua:2274
 msgctxt "warehousename"
 msgid "Aalkersem"
-msgstr ""
+msgstr "Aalkersem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2276
 msgctxt "warehousename"
 msgid "Äfkebel"
-msgstr ""
+msgstr "Äfkebel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2278
 msgctxt "warehousename"
 msgid "Ämelsbel"
-msgstr ""
+msgstr "Ämelsbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2280
 msgctxt "warehousename"
 msgid "A Nääs"
-msgstr ""
+msgstr "A Nääs"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2282
 msgctxt "warehousename"
 msgid "Ārichsem"
-msgstr ""
+msgstr "Ārichsem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2284
 msgctxt "warehousename"
 msgid "Baamst"
-msgstr ""
+msgstr "Baamst"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2286
 msgctxt "warehousename"
 msgid "Beergem"
-msgstr ""
+msgstr "Beergem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2288
 msgctxt "warehousename"
 msgid "Borigsem"
-msgstr ""
+msgstr "Borigsem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2290
 msgctxt "warehousename"
 msgid "Bousbel"
-msgstr ""
+msgstr "Bousbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2292
 msgctxt "warehousename"
 msgid "Bräist"
-msgstr ""
+msgstr "Bräist"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2294
 msgctxt "warehousename"
 msgid "Bualigsem"
-msgstr ""
+msgstr "Bualigsem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2296
 msgctxt "warehousename"
 msgid "Deesbel"
-msgstr ""
+msgstr "Deesbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2298
 msgctxt "warehousename"
 msgid "Doogebel"
-msgstr ""
+msgstr "Doogebel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2300
 msgctxt "warehousename"
 msgid "Dunsem"
-msgstr ""
+msgstr "Dunsem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2302
 msgctxt "warehousename"
 msgid "E Hoorne"
-msgstr ""
+msgstr "E Hoorne"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2304
 msgctxt "warehousename"
 msgid "Emst"
-msgstr ""
+msgstr "Emst"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2306
 msgctxt "warehousename"
 msgid "Fåålst"
-msgstr ""
+msgstr "Fåålst"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2308
 msgctxt "warehousename"
 msgid "Friedrichstääd"
-msgstr ""
+msgstr "Friedrichstääd"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2310
 msgctxt "warehousename"
 msgid "Gaarding"
-msgstr ""
+msgstr "Gaarding"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2312
 msgctxt "warehousename"
 msgid "Haatst"
-msgstr ""
+msgstr "Haatst"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2314
 msgctxt "warehousename"
 msgid "Hoorbel"
-msgstr ""
+msgstr "Hoorbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2316
 msgctxt "warehousename"
 msgid "Hoorst"
-msgstr ""
+msgstr "Hoorst"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2318
 msgctxt "warehousename"
 msgid "Hörnem"
-msgstr ""
+msgstr "Hörnem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2320
 msgctxt "warehousename"
 msgid "Hüsem"
-msgstr ""
+msgstr "Hüsem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2322
 msgctxt "warehousename"
 msgid "Iibel"
-msgstr ""
+msgstr "Iibel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2324
 msgctxt "warehousename"
 msgid "Imensteed"
-msgstr ""
+msgstr "Imensteed"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2326
 msgctxt "warehousename"
 msgid "Kååting"
-msgstr ""
+msgstr "Kååting"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2328
 msgctxt "warehousename"
 msgid "Kairem"
-msgstr ""
+msgstr "Kairem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2330
 msgctxt "warehousename"
 msgid "Klangsbel"
-msgstr ""
+msgstr "Klangsbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2332
 msgctxt "warehousename"
 msgid "Kläntem"
-msgstr ""
+msgstr "Kläntem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2334
 msgctxt "warehousename"
 msgid "Klasbel"
-msgstr ""
+msgstr "Klasbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2336
 msgctxt "warehousename"
 msgid "Kuurlem"
-msgstr ""
+msgstr "Kuurlem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2338
 msgctxt "warehousename"
 msgid "Läitjholem"
-msgstr ""
+msgstr "Läitjholem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2340
 msgctxt "warehousename"
 msgid "Madlem"
-msgstr ""
+msgstr "Madlem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2342
 msgctxt "warehousename"
 msgid "Mälst"
-msgstr ""
+msgstr "Mälst"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2344
 msgctxt "warehousename"
 msgid "Mönkebel"
-msgstr ""
+msgstr "Mönkebel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2346
 msgctxt "warehousename"
 msgid "Moosbel"
-msgstr ""
+msgstr "Moosbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2348
 msgctxt "warehousename"
 msgid "Muasem"
-msgstr ""
+msgstr "Muasem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2350
 msgctxt "warehousename"
 msgid "Naibel"
-msgstr ""
+msgstr "Naibel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2352
 msgctxt "warehousename"
 msgid "Neebel"
-msgstr ""
+msgstr "Neebel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2354
 msgctxt "warehousename"
 msgid "Njiblem"
-msgstr ""
+msgstr "Njiblem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2356
 msgctxt "warehousename"
 msgid "Noorst"
-msgstr ""
+msgstr "Noorst"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2358
 msgctxt "warehousename"
 msgid "Olersem"
-msgstr ""
+msgstr "Olersem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2360
 msgctxt "warehousename"
 msgid "Odenbel"
-msgstr ""
+msgstr "Odenbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2362
 msgctxt "warehousename"
 msgid "Ödersem"
-msgstr ""
+msgstr "Ödersem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2364
 msgctxt "warehousename"
 msgid "Popenbel"
-msgstr ""
+msgstr "Popenbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2366
 msgctxt "warehousename"
 msgid "Raantem"
-msgstr ""
+msgstr "Raantem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2368
 msgctxt "warehousename"
 msgid "Reinsbel"
-msgstr ""
+msgstr "Reinsbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2370
 msgctxt "warehousename"
 msgid "Rikesbel"
-msgstr ""
+msgstr "Rikesbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2372
 msgctxt "warehousename"
 msgid "Risem"
-msgstr ""
+msgstr "Risem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2374
 msgctxt "warehousename"
 msgid "Seebel"
-msgstr ""
+msgstr "Seebel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2376
 msgctxt "warehousename"
 msgid "Snootebel"
-msgstr ""
+msgstr "Snootebel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2378
 msgctxt "warehousename"
 msgid "Söleraanj"
-msgstr ""
+msgstr "Söleraanj"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2380
 msgctxt "warehousename"
 msgid "Strükem"
-msgstr ""
+msgstr "Strükem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2382
 msgctxt "warehousename"
 msgid "Tååting"
-msgstr ""
+msgstr "Tååting"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2384
 msgctxt "warehousename"
 msgid "Taning"
-msgstr ""
+msgstr "Taning"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2386
 msgctxt "warehousename"
 msgid "Teedenbel"
-msgstr ""
+msgstr "Teedenbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2388
 msgctxt "warehousename"
 msgid "Tinem"
-msgstr ""
+msgstr "Tinem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2390
 msgctxt "warehousename"
 msgid "Toorpem"
-msgstr ""
+msgstr "Toorpem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2392
 msgctxt "warehousename"
 msgid "Ülwelsbel"
-msgstr ""
+msgstr "Ülwelsbel"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2394
 msgctxt "warehousename"
 msgid "Wiisem"
-msgstr ""
+msgstr "Wiisem"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2396
 msgctxt "warehousename"
 msgid "A Wik"
-msgstr ""
+msgstr "A Wik"
 
 #. TRANSLATORS: This Frisian warehouse is named after a town in Northern
 #. Frisia
 #: ../../data/tribes/initialization/frisians/units.lua:2398
 msgctxt "warehousename"
 msgid "Witjdün"
-msgstr ""
+msgstr "Witjdün"
 
 #. TRANSLATORS: Productivity label on a Frisian building if there is 1 worker
 #. missing
 #: ../../data/tribes/initialization/frisians/units.lua:2404
 msgctxt "frisians"
 msgid "Worker missing"
-msgstr ""
+msgstr "Worker missing"
 
 #. TRANSLATORS: Productivity label on a Frisian building if there is 1 worker
 #. coming
 #: ../../data/tribes/initialization/frisians/units.lua:2406
 msgctxt "frisians"
 msgid "Worker is coming"
-msgstr ""
+msgstr "Werker komt eraan"
 
 #. TRANSLATORS: Productivity label on a Frisian building if there is more than
 #. 1 worker missing. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/frisians/units.lua:2408
 msgctxt "frisians"
 msgid "Workers missing"
-msgstr ""
+msgstr "Werkers ontbreken"
 
 #. TRANSLATORS: Productivity label on a Frisian building if there is more than
 #. 1 worker coming. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/frisians/units.lua:2410
 msgctxt "frisians"
 msgid "Workers are coming"
-msgstr ""
+msgstr "Werkers komen eraan"
 
 #. TRANSLATORS: Productivity label on a Frisian building if there is 1
 #. experienced worker missing
 #: ../../data/tribes/initialization/frisians/units.lua:2412
 msgctxt "frisians"
 msgid "Expert missing"
-msgstr ""
+msgstr "Ontbrekende expert"
 
 #. TRANSLATORS: Productivity label on a Frisian building if there is more than
 #. 1 experienced worker missing. If you need plural forms here, please let us
@@ -15925,7 +15925,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2414
 msgctxt "frisians"
 msgid "Experts missing"
-msgstr ""
+msgstr "Ontbrekende experten"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% is the maximum number of soldier slots in the building.
@@ -15933,16 +15933,16 @@ msgstr ""
 msgctxt "frisians_soldier"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% soldaat (+%2%)"
+msgstr[1] "%1% soldaten (+%2%)"
 
 #. TRANSLATORS: Number of Frisian soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/frisians/units.lua:2430
 msgctxt "frisians_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% soldaten"
+msgstr[1] "%1% soldaten"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -15951,8 +15951,8 @@ msgstr[1] ""
 msgctxt "frisians_soldier"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) soldaat (+%3%)"
+msgstr[1] "%1%(+%2%) soldaten (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -15960,8 +15960,8 @@ msgstr[1] ""
 msgctxt "frisians_soldier"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) soldaat"
+msgstr[1] "%1%(+%2%) soldaten"
 
 #. TRANSLATORS: Lore helptext for a building - it hasn't been written yet.
 #. TRANSLATORS: Purpose helptext for a building - it hasn't been written yet.
@@ -15990,7 +15990,7 @@ msgstr "Doel:"
 msgid ""
 "This mine will exploit %1%%% of its resources. From there on out, it will "
 "only have a %2%%% chance of finding any more of them."
-msgstr ""
+msgstr "Deze mijn zal zijn bronnen %1%%% uitputten. Vanaf dan is er alleen nog %2%%% kans dat er nog meer van gevonden wordt."
 
 #. TRANSLATORS: Note helptext for a mine.
 #: ../../data/tribes/scripting/help/building_help.lua:339
@@ -15998,7 +15998,7 @@ msgid ""
 "This mine will exploit all of its resources down to the deepest level. But "
 "even after having done so, it will still have a %1%%% chance of finding some"
 " more of them."
-msgstr ""
+msgstr "Deze mijn zal al zijn grondstoffen uitbuiten tot op het diepste niveau. Maar zelfs als dat is gebeurd, is er nog steeds %1%%% kans dat er nog meer wordt gevonden."
 
 #: ../../data/tribes/scripting/help/building_help.lua:347
 #: ../../data/tribes/scripting/help/building_help.lua:494
@@ -16057,7 +16057,7 @@ msgstr "Verzamelt:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:421
 msgid "Creates:"
-msgstr ""
+msgstr "Creëert:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:462
 msgid "Outgoing:"
@@ -16075,7 +16075,7 @@ msgstr "Afhankelijkheden"
 #. help, containing size info, buildcost etc.
 #: ../../data/tribes/scripting/help/building_help.lua:479
 msgid "Building requirements"
-msgstr ""
+msgstr "Eisen voor gebouwen"
 
 #: ../../data/tribes/scripting/help/building_help.lua:495
 msgid ""
@@ -16166,29 +16166,29 @@ msgstr "Productie"
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
 #: ../../data/tribes/scripting/help/building_help.lua:741
 msgid "Health improvement:"
-msgstr ""
+msgstr "Gezondheidsverbetering:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:742
 #: ../../data/tribes/scripting/help/building_help.lua:749
 #: ../../data/tribes/scripting/help/building_help.lua:756
 #: ../../data/tribes/scripting/help/building_help.lua:763
 msgid "From %1% to %2%"
-msgstr ""
+msgstr "Van %1% tot %2%"
 
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
 #: ../../data/tribes/scripting/help/building_help.lua:748
 msgid "Attack training:"
-msgstr ""
+msgstr "Aanvaltraining:"
 
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
 #: ../../data/tribes/scripting/help/building_help.lua:755
 msgid "Defense training:"
-msgstr ""
+msgstr "Verdedigingstraining:"
 
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
 #: ../../data/tribes/scripting/help/building_help.lua:762
 msgid "Evade training:"
-msgstr ""
+msgstr "Ontwijk training:"
 
 #. TRANSLATORS: Ware Encyclopedia: 1 ware produced by a productionsite
 #: ../../data/tribes/scripting/help/building_help.lua:771
@@ -16331,17 +16331,17 @@ msgstr "Bij het verwijderen van een vlag: alle vlaggen verwijderen tot aan de ee
 #. TRANSLATORS: Size of a map immovablee
 #: ../../data/tribes/scripting/help/format_help.lua:60
 msgid "Small"
-msgstr ""
+msgstr "Small"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../data/tribes/scripting/help/format_help.lua:63
 msgid "Medium"
-msgstr ""
+msgstr "Medium"
 
 #. TRANSLATORS: Size of a map immovable
 #: ../../data/tribes/scripting/help/format_help.lua:66
 msgid "Big"
-msgstr ""
+msgstr "Groot"
 
 #. TRANSLATORS: Size of a map immovable
 #. TRANSLATORS: Space on the map required for building a building there
@@ -16419,7 +16419,7 @@ msgstr "Doel"
 #: ../../data/tribes/scripting/help/immovable_help.lua:43
 #: ../../data/tribes/scripting/help/worker_help.lua:143
 msgid "Note"
-msgstr ""
+msgstr "Aantekening"
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:58
 msgid "Requirements"
@@ -16427,19 +16427,19 @@ msgstr "Vereisten"
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:62
 msgid "Size"
-msgstr ""
+msgstr "Grootte"
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:66
 msgid "Workers and animals can walk across fields with this immovable."
-msgstr ""
+msgstr "Werknemers en dieren kunnen over velden lopen met dit onroerende materiaal.."
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:68
 msgid "Workers and animals can’t walk across fields with this immovable."
-msgstr ""
+msgstr "Werknemers en dieren kunnen niet over velden lopen met dit onroerende materiaal."
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:74
 msgid "Becomes"
-msgstr ""
+msgstr "Wordt"
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:100
 msgid "Preferred Terrains"
@@ -16468,11 +16468,11 @@ msgstr "Gebouwen"
 
 #: ../../data/tribes/scripting/help/init.lua:137
 msgid "Tribes Immovables"
-msgstr ""
+msgstr "Stammen Onroerend Goed"
 
 #: ../../data/tribes/scripting/help/init.lua:144
 msgid "World Immovables"
-msgstr ""
+msgstr "Wereld Onroerend Goed"
 
 #: ../../data/tribes/scripting/help/introduction.lua:7
 msgid "About Widelands"
