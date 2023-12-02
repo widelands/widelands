@@ -1640,6 +1640,11 @@ void WLApplication::emergency_save(UI::Panel* panel,
                                    const uint8_t playernumber,
                                    const bool replace_ctrl,
                                    const bool ask_for_bug_report) {
+	if (!is_initializer_thread()) {
+		// We're already handling a bad situation... Let it go as far as it can, but UI calls
+		// may violate assertions and segfault.
+		log_err("WLApplication::emergency_save() is running in the logic thread!\n");
+	}
 	log_err("##############################\n"
 	        "  FATAL EXCEPTION: %s\n"
 	        "##############################\n",
@@ -1709,7 +1714,7 @@ void WLApplication::emergency_save(UI::Panel* panel,
 
 	bool added_loader = false;
 	try {
-		if (!game.has_loader_ui() && is_initializer_thread()) {
+		if (!game.has_loader_ui()) {
 			// Shouldn't have one yet, but in an emergency situation, don't make any assumptions.
 			game.create_loader_ui(
 			   {"crash"}, true, game.map().get_background_theme(), game.map().get_background(), true);
