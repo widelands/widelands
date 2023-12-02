@@ -1,0 +1,49 @@
+name: build - codecheck
+on:
+  workflow_call:
+
+jobs:
+  codecheck:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+    - name: Check for changed files
+      uses: dorny/paths-filter@v2
+      id: changed_files
+      with:
+        # groups to check for changed files
+        filters: |
+          codecheck:
+            - 'CMakeLists.txt'
+            - '*/CMakeLists.txt'
+            - 'cmake/codecheck/**'
+            - 'cmake/WlFunctions.cmake'
+            - 'src/**'
+            - '.github/workflows/build_codecheck.yaml'
+    - name: Installing dependencies
+      if: steps.changed_files.outputs.codecheck == 'true'
+      run: sh ./.github/scripts/install_deps.sh
+    - name: Test
+      if: steps.changed_files.outputs.codecheck == 'true'
+      run: |
+        ./cmake/codecheck/run_tests.py
+    - name: Check
+      if: steps.changed_files.outputs.codecheck == 'true'
+      run: |
+        mkdir build
+        cd build
+        cmake .. -DCMAKE_BUILD_TYPE:STRING="Debug"
+        TERM=dumb make -j1 codecheck 2>&1 | tee codecheck.out
+    - name: Report
+      if: steps.changed_files.outputs.codecheck == 'true'
+      run: |
+        if grep '^[/_.a-zA-Z]\+:[0-9]\+:' build/codecheck.out; then
+          echo "You have codecheck warnings (see above). Please fix."
+          exit 1
+        else
+          echo "Codecheck is clear :)"
+          exit 0
+        fi
