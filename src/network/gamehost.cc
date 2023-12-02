@@ -2572,8 +2572,9 @@ void GameHost::disconnect_client(uint32_t const client_number,
 				}
 				NoteThreadSafeFunction::instantiate(
 				   [&game = *d->game, &reason]() {
-				      WLApplication::emergency_save(nullptr, game, reason, 1, false);
-				   }, true);
+					   WLApplication::emergency_save(nullptr, game, reason, 1, false);
+				   },
+				   true);
 			}
 			// Client was active but is a winner of the game: Replace with normal AI
 		} else if (d->settings.users.at(client.usernum).result == Widelands::PlayerEndResult::kWon) {
