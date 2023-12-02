@@ -120,6 +120,12 @@ jobs:
     - name: Clang-tidy steps
       if: steps.changed_files.outputs.clang_tidy == 'true'
       uses: ./.github/actions/build_clang_tidy.yml
+    - name: job summary # shown on workflow summary page
+      run: >
+        echo "Clang-tidy \
+              ${{ steps.changed_files.outputs.clang_tidy == 'true'
+                  && 'run :green_circle:' || 'skipped :stop_button:' }} \
+             " >> "$GITHUB_STEP_SUMMARY"
 
   lua_style:
     runs-on: ubuntu-latest

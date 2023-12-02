@@ -47,3 +47,9 @@ jobs:
           echo "Codecheck is clear :)"
           exit 0
         fi
+    - name: job summary
+      run: >
+        echo "Codecheck \
+              ${{ steps.changed_files.outputs.codecheck == 'true'
+                  && 'run :green_circle:' || 'skipped :stop_button:' }} \
+             " >> "$GITHUB_STEP_SUMMARY"
