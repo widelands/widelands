@@ -83,12 +83,11 @@ jobs:
             - 'utils/check_clang_tidy_results.py'
             - 'utils/run-clang-tidy.py'
             - '.github/actions/build_clang_tidy.yaml'
-          compile: &compile
-            - 'CMakeLists.txt'
-            - 'cmake/**'
-            - 'src/**'
           test_suite:
-            - *compile
+            - &compile
+              - 'CMakeLists.txt'
+              - 'cmake/**'
+              - 'src/**'
             - 'data/**'
             - 'regression_test.py'
             - 'test/**'
@@ -98,11 +97,10 @@ jobs:
             - 'data/**'
             - 'doc/**'
             - 'po/**'
-          install_dependencies: &install_dependencies
-            - 'install-dependencies.sh'
-            - 'utils/download_asio.sh' # called by install-dependencies.sh
           inst_windows_msvc:
-            - *install_dependencies
+            - &install_dependencies
+              - 'install-dependencies.sh'
+              - 'utils/download_asio.sh' # called by install-dependencies.sh
             - 'utils/win32/**'
             - '.github/scripts/vcpkg_ref'
             - '.github/workflows/build_windows_msvc.yaml'
