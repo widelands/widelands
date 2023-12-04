@@ -7,6 +7,7 @@ runs:
     # code is already checked out
     - name: Installing dependencies
       run: sh ./.github/scripts/install_deps.sh
+      shell: bash
     - name: CMake
       run: |
         # Prepare build dir
@@ -15,6 +16,7 @@ runs:
         pushd build
         cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
         popd
+      shell: bash
     - name: Restore cache
       uses: actions/cache/restore@v3
       with:
@@ -30,6 +32,7 @@ runs:
         pushd build
         python3 ../utils/run-clang-tidy.py -cache | tee ../clang-tidy.log
         popd
+      shell: bash
     - name: Save cache
       # We want to save the cache even if the report fails because of failed files
       uses: actions/cache/save@v3
@@ -38,3 +41,4 @@ runs:
         key: clang-tidy-cache-${{ github.sha }}
     - name: Report
       run: utils/check_clang_tidy_results.py clang-tidy.log
+      shell: bash
