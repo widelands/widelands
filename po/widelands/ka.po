@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-12-02 02:35+0000\n"
+"POT-Creation-Date: 2023-12-04 02:34+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: FIRST AUTHOR <EMAIL@ADDRESS>, 2014\n"
 "Language-Team: Georgian (http://app.transifex.com/widelands/widelands/language/ka/)\n"
@@ -60,7 +60,7 @@ msgid ""
 msgstr ""
 
 #: ../../data/scripting/messages.lua:66 ../../data/scripting/messages.lua:68
-#: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:117
+#: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:119
 msgid "Status"
 msgstr ""
 
@@ -1399,7 +1399,7 @@ msgid "Computer %u"
 msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:736
-#: ../../src/wui/game_summary.cc:115
+#: ../../src/wui/game_summary.cc:117
 msgid "Player"
 msgstr ""
 
@@ -6316,7 +6316,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:249
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:357
-#: ../../src/wui/game_chat_panel.cc:449 ../../src/wui/game_summary.cc:116
+#: ../../src/wui/game_chat_panel.cc:449 ../../src/wui/game_summary.cc:118
 msgid "Team"
 msgstr ""
 
@@ -7515,7 +7515,7 @@ msgstr ""
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wlapplication_options.cc:873
 #: ../../src/wui/game_client_disconnected.cc:112
-#: ../../src/wui/game_summary.cc:106 ../../src/wui/interactive_gamebase.cc:193
+#: ../../src/wui/game_summary.cc:108 ../../src/wui/interactive_gamebase.cc:193
 msgid "Exit Game"
 msgstr ""
 
@@ -8791,74 +8791,74 @@ msgstr[1] ""
 msgid "Archive selected message"
 msgstr ""
 
-#: ../../src/wui/game_summary.cc:37
+#: ../../src/wui/game_summary.cc:39
 msgid "Game over"
 msgstr ""
 
-#: ../../src/wui/game_summary.cc:57
+#: ../../src/wui/game_summary.cc:59
 msgid "Player Info:"
 msgstr ""
 
-#: ../../src/wui/game_summary.cc:90
+#: ../../src/wui/game_summary.cc:92
 msgid "Elapsed time:"
 msgstr ""
 
-#: ../../src/wui/game_summary.cc:102
+#: ../../src/wui/game_summary.cc:104
 msgid "Continue playing"
 msgstr ""
 
-#: ../../src/wui/game_summary.cc:118
+#: ../../src/wui/game_summary.cc:120
 msgid "Time"
 msgstr ""
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. lost.
-#: ../../src/wui/game_summary.cc:222
+#: ../../src/wui/game_summary.cc:219
 msgid "Lost"
 msgstr ""
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. won.
-#: ../../src/wui/game_summary.cc:226
+#: ../../src/wui/game_summary.cc:223
 msgid "Won"
 msgstr ""
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. resigned.
-#: ../../src/wui/game_summary.cc:235
+#: ../../src/wui/game_summary.cc:232
 msgid "Resigned"
 msgstr ""
 
 #. * TRANSLATORS: This is shown in the game summary when we don't know
 #. * TRANSLATORS: if the player has lost or won.
-#: ../../src/wui/game_summary.cc:240
+#: ../../src/wui/game_summary.cc:237
 msgctxt "player_won"
 msgid "Unknown"
 msgstr ""
 
-#: ../../src/wui/game_summary.cc:253
+#: ../../src/wui/game_summary.cc:249
 msgid "You won!"
 msgstr ""
 
-#: ../../src/wui/game_summary.cc:255
+#: ../../src/wui/game_summary.cc:251
 msgid "You lost."
 msgstr ""
 
-#: ../../src/wui/game_summary.cc:259
+#: ../../src/wui/game_summary.cc:255
 #, c-format
 msgid "%s won!"
 msgstr ""
 
-#: ../../src/wui/game_summary.cc:261
+#: ../../src/wui/game_summary.cc:257
 #, c-format
 msgid "Team %u won!"
 msgstr ""
 
-#: ../../src/wui/game_summary.cc:318
+#: ../../src/wui/game_summary.cc:311
 msgid "Score"
 msgstr ""
 
-#: ../../src/wui/game_summary.cc:320
+#: ../../src/wui/game_summary.cc:313
 msgid "Team Score"
 msgstr ""
 

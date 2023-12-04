@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-12-02 02:35+0000\n"
+"POT-Creation-Date: 2023-12-04 02:34+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: David D, 2017-2018,2021-2023\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
@@ -81,7 +81,7 @@ msgid ""
 msgstr "Il n'y a pas assez d'arbres près de votre position de départ. Pour cette raison, vous recevrez des ressources bonus afin de démarrer votre économie."
 
 #: ../../data/scripting/messages.lua:66 ../../data/scripting/messages.lua:68
-#: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:117
+#: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:119
 msgid "Status"
 msgstr "État"
 
@@ -1421,7 +1421,7 @@ msgid "Computer %u"
 msgstr "Ordinateur %u"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:736
-#: ../../src/wui/game_summary.cc:115
+#: ../../src/wui/game_summary.cc:117
 msgid "Player"
 msgstr "Joueur"
 
@@ -6366,7 +6366,7 @@ msgstr "Type"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:249
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:357
-#: ../../src/wui/game_chat_panel.cc:449 ../../src/wui/game_summary.cc:116
+#: ../../src/wui/game_chat_panel.cc:449 ../../src/wui/game_summary.cc:118
 msgid "Team"
 msgstr "Équipe"
 
@@ -7565,7 +7565,7 @@ msgstr "Enregistrer la partie"
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wlapplication_options.cc:873
 #: ../../src/wui/game_client_disconnected.cc:112
-#: ../../src/wui/game_summary.cc:106 ../../src/wui/interactive_gamebase.cc:193
+#: ../../src/wui/game_summary.cc:108 ../../src/wui/interactive_gamebase.cc:193
 msgid "Exit Game"
 msgstr "Quitter le jeu"
 
@@ -8844,74 +8844,74 @@ msgstr[2] "Archiver les %d messages sélectionnés"
 msgid "Archive selected message"
 msgstr "Archiver le message sélectionné"
 
-#: ../../src/wui/game_summary.cc:37
+#: ../../src/wui/game_summary.cc:39
 msgid "Game over"
 msgstr "Fin de la partie"
 
-#: ../../src/wui/game_summary.cc:57
+#: ../../src/wui/game_summary.cc:59
 msgid "Player Info:"
 msgstr "Information joueur :"
 
-#: ../../src/wui/game_summary.cc:90
+#: ../../src/wui/game_summary.cc:92
 msgid "Elapsed time:"
 msgstr "Temps écoulé :"
 
-#: ../../src/wui/game_summary.cc:102
+#: ../../src/wui/game_summary.cc:104
 msgid "Continue playing"
 msgstr "Continuer à jouer"
 
-#: ../../src/wui/game_summary.cc:118
+#: ../../src/wui/game_summary.cc:120
 msgid "Time"
 msgstr "Temps"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. lost.
-#: ../../src/wui/game_summary.cc:222
+#: ../../src/wui/game_summary.cc:219
 msgid "Lost"
 msgstr "Perdu"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. won.
-#: ../../src/wui/game_summary.cc:226
+#: ../../src/wui/game_summary.cc:223
 msgid "Won"
 msgstr "Gagné"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. resigned.
-#: ../../src/wui/game_summary.cc:235
+#: ../../src/wui/game_summary.cc:232
 msgid "Resigned"
 msgstr "Abandon"
 
 #. * TRANSLATORS: This is shown in the game summary when we don't know
 #. * TRANSLATORS: if the player has lost or won.
-#: ../../src/wui/game_summary.cc:240
+#: ../../src/wui/game_summary.cc:237
 msgctxt "player_won"
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: ../../src/wui/game_summary.cc:253
+#: ../../src/wui/game_summary.cc:249
 msgid "You won!"
 msgstr "Vous avez gagné !"
 
-#: ../../src/wui/game_summary.cc:255
+#: ../../src/wui/game_summary.cc:251
 msgid "You lost."
 msgstr "Vous avez perdu."
 
-#: ../../src/wui/game_summary.cc:259
+#: ../../src/wui/game_summary.cc:255
 #, c-format
 msgid "%s won!"
 msgstr "%s a gagné !"
 
-#: ../../src/wui/game_summary.cc:261
+#: ../../src/wui/game_summary.cc:257
 #, c-format
 msgid "Team %u won!"
 msgstr "L'équipe %u a gagné!"
 
-#: ../../src/wui/game_summary.cc:318
+#: ../../src/wui/game_summary.cc:311
 msgid "Score"
 msgstr "Score"
 
-#: ../../src/wui/game_summary.cc:320
+#: ../../src/wui/game_summary.cc:313
 msgid "Team Score"
 msgstr "Score équipe"
 
