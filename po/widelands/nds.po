@@ -5340,7 +5340,7 @@ msgid ""
 "with a description of what was going on in the game and what you did last "
 "before the crash to the Widelands Development Team under %s so we can fix "
 "the problem."
-msgstr ""
+msgstr "’t süchst so ut, as of Widelands ofstört is, as du dat tolest utföhrt hest. Aver eene Rückspoor för ’t Fehler-Söken is automatisk schrieven worden. Bidde schick de Bericht tosamen mit een Beschrieven, wat in de Speel löss weer un wat du tolest daan hest, ehr dat Speel ofstört is, an de Widelands Entwicklen-Klottje unner %s, daarmit wi dat Probleem ofhelpen könen."
 
 #: ../../src/ui_fsmenu/crash_report.cc:145
 msgid "Show details…"
@@ -6813,11 +6813,11 @@ msgstr "Utföhrensverteeknis:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:172
 msgid "Enabled Add-Ons:"
-msgstr ""
+msgstr "Anknipst Verwiederns:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:174
 msgid "Inactive Installed Add-Ons:"
-msgstr ""
+msgstr "Utnkipst installiert Verwiederns:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:233
 msgid "Copy"

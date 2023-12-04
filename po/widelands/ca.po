@@ -5338,7 +5338,7 @@ msgid ""
 "with a description of what was going on in the game and what you did last "
 "before the crash to the Widelands Development Team under %s so we can fix "
 "the problem."
-msgstr ""
+msgstr "Sembla que l'última vegada que es va fer servir el Widelands va patir una fallada i que es va generar un informe de depuració automàtic. Si us plau, feu arribar l'informe amb una descripció de què estava passant a la partida i què recordeu que vau fer abans de la fallada a l'equip de desenvolupament del Widelands a %s per tal que puguin resoldre el problema."
 
 #: ../../src/ui_fsmenu/crash_report.cc:145
 msgid "Show details…"
@@ -6811,11 +6811,11 @@ msgstr "Carpeta executable:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:172
 msgid "Enabled Add-Ons:"
-msgstr ""
+msgstr "Complements activats:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:174
 msgid "Inactive Installed Add-Ons:"
-msgstr ""
+msgstr "Complements instal·lats no actius:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:233
 msgid "Copy"

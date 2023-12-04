@@ -5344,7 +5344,7 @@ msgid ""
 "with a description of what was going on in the game and what you did last "
 "before the crash to the Widelands Development Team under %s so we can fix "
 "the problem."
-msgstr ""
+msgstr "Het lijkt erop dat Widelands is gecrasht de laatste keer dat u het hebt uitgevoerd, maar er is automatisch een backtrace gegenereerd voor het debuggen. Stuur het rapport samen met een beschrijving van wat er aan de hand was in het spel en wat u het laatst deed voor de crash naar het Widelands Development Team onder %s zodat we het probleem kunnen oplossen."
 
 #: ../../src/ui_fsmenu/crash_report.cc:145
 msgid "Show details…"
@@ -6817,11 +6817,11 @@ msgstr "Uitvoerbare map:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:172
 msgid "Enabled Add-Ons:"
-msgstr ""
+msgstr "Ingeschakeld Add-Ons:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:174
 msgid "Inactive Installed Add-Ons:"
-msgstr ""
+msgstr "Inactief Geïnstalleerde invoegtoepassingen:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:233
 msgid "Copy"

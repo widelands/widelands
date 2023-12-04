@@ -660,7 +660,7 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:1175
 #, c-format
 msgid "Loading map “%s”…"
-msgstr ""
+msgstr "Učitavanje karte \"%s\"..."
 
 #. * TRANSLATORS: Default name for new map
 #: ../../src/editor/editorinteractive.cc:1197
@@ -2460,7 +2460,7 @@ msgstr ""
 
 #: ../../src/logic/map_objects/tribes/ship.cc:701
 msgid "Unloading of wares failed, expedition is cancelled now."
-msgstr ""
+msgstr "Iskrcaj robe nije uspio, ekspedicija je otkazana."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:757
 msgid "No Port Can Be Built"
@@ -2552,7 +2552,7 @@ msgstr ""
 #. * TRANSLATORS: Example: Loading Barbarians: Buildings (2/6)
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:160
 msgid "Loading %1%: %2% (%3%/%4%)"
-msgstr ""
+msgstr "Učitavanje %1%: %2% (%3%/%4%)"
 
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:165
 #: ../../src/wui/minimap.cc:213
