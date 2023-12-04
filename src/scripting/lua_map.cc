@@ -2849,7 +2849,7 @@ int LuaBuildingDescription::get_enhancement_returns_on_dismantle(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: vision range
+   .. attribute:: vision_range
 
       (RO) The vision_range of the building as an :class:`integer`.
 */

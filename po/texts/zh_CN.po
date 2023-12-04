@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-08-24 02:15+0000\n"
+"POT-Creation-Date: 2023-11-16 02:33+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Roy Luo <1598359376@qq.com>, 2021\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/widelands/widelands/language/zh_CN/)\n"
@@ -198,141 +198,142 @@ msgstr ""
 msgid "Widelands Translators"
 msgstr "Widelands 翻译人员"
 
-#: ../../data/txts/developers.lua:3
-msgid "Add-Ons"
-msgstr ""
-
-#: ../../data/txts/developers.lua:3
-msgid "Atlanteans"
-msgstr "亚特兰蒂斯人"
-
-#: ../../data/txts/developers.lua:3
-msgid "Barbarians"
-msgstr "蛮族"
-
-#: ../../data/txts/developers.lua:3
-msgid "Campaign Story"
-msgstr "战役故事"
-
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:5
 msgid "Chieftains"
 msgstr "核心创始人员"
 
-#: ../../data/txts/developers.lua:3
-msgid "Coders"
-msgstr "程序员"
-
-#: ../../data/txts/developers.lua:3
-msgid "Debian Linux"
-msgstr "Debian Linux 操作系统"
-
-#: ../../data/txts/developers.lua:3
-msgid "Documentation, Help and Wiki"
-msgstr "文档，帮助和维基"
-
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:18
 msgid "Elders"
 msgstr "先行者"
 
-#: ../../data/txts/developers.lua:3
-msgid "Empire"
-msgstr "帝国"
-
-#: ../../data/txts/developers.lua:3
-msgid "Fedora Linux"
-msgstr "Fedora Linux 操作系统"
-
-#: ../../data/txts/developers.lua:3
-msgid "Flatpak"
-msgstr "Flatpak 操作系统"
-
-#: ../../data/txts/developers.lua:3
-msgid "Former Elders"
-msgstr "前辈"
-
-#: ../../data/txts/developers.lua:3
-msgid "FreeBSD"
-msgstr "FreeBSD 操作系统"
-
-#: ../../data/txts/developers.lua:3
-msgid "Frisians"
-msgstr "弗里西亚部族"
-
-#: ../../data/txts/developers.lua:3
-msgid "Graphicians"
-msgstr "图形艺术家"
-
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:22 ../../data/txts/developers.lua:414
 msgid "Graphics"
 msgstr "绘图"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:28 ../../data/txts/developers.lua:358
+#: ../../data/txts/developers.lua:421
 msgid "Homepage"
 msgstr "网站主页"
 
-#: ../../data/txts/developers.lua:3
-msgid "Homepage Coders"
-msgstr "网站主页程序员"
-
-#: ../../data/txts/developers.lua:3
-msgid "Mac OS X"
-msgstr "Mac OS X 操作系统"
-
-#: ../../data/txts/developers.lua:3
-msgid "Mandriva Linux"
-msgstr "Mandriva Linux 操作系统"
-
-#: ../../data/txts/developers.lua:3
-msgid "Maps and Missions"
-msgstr "地图和任务"
-
-#: ../../data/txts/developers.lua:3
-msgid "Musicians"
-msgstr "音乐家"
-
-#: ../../data/txts/developers.lua:3
-msgid "Other"
-msgstr "其他"
-
-#: ../../data/txts/developers.lua:3
-msgid "Packagers"
-msgstr "游戏程序集成打包"
-
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:34
 msgid "Scripting"
 msgstr ""
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:40 ../../data/txts/developers.lua:429
 msgid "Sound"
 msgstr "声音"
 
-#: ../../data/txts/developers.lua:3
-msgid "Sound Effects"
-msgstr "音效"
+#: ../../data/txts/developers.lua:42
+msgid "vacant"
+msgstr "空闲的"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:46
 msgid "Tongues"
 msgstr "语言"
 
-#: ../../data/txts/developers.lua:3
-msgid "Translation"
-msgstr "翻译"
+#: ../../data/txts/developers.lua:54
+msgid "Coders"
+msgstr "程序员"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:149
+msgid "Graphicians"
+msgstr "图形艺术家"
+
+#: ../../data/txts/developers.lua:186
+msgid "Musicians"
+msgstr "音乐家"
+
+#: ../../data/txts/developers.lua:205
+msgid "Sound Effects"
+msgstr "音效"
+
+#: ../../data/txts/developers.lua:221
+msgid "Maps and Missions"
+msgstr "地图和任务"
+
+#: ../../data/txts/developers.lua:255
+msgid "Campaign Story"
+msgstr "战役故事"
+
+#: ../../data/txts/developers.lua:259
+msgid "Barbarians"
+msgstr "蛮族"
+
+#: ../../data/txts/developers.lua:267
+msgid "Empire"
+msgstr "帝国"
+
+#: ../../data/txts/developers.lua:274
+msgid "Atlanteans"
+msgstr "亚特兰蒂斯人"
+
+#: ../../data/txts/developers.lua:282
+msgid "Frisians"
+msgstr "弗里西亚部族"
+
+#: ../../data/txts/developers.lua:290
+msgid "Packagers"
+msgstr "游戏程序集成打包"
+
+#: ../../data/txts/developers.lua:294
+msgid "Debian Linux"
+msgstr "Debian Linux 操作系统"
+
+#: ../../data/txts/developers.lua:300
+msgid "Fedora Linux"
+msgstr "Fedora Linux 操作系统"
+
+#: ../../data/txts/developers.lua:308
+msgid "Mandriva Linux"
+msgstr "Mandriva Linux 操作系统"
+
+#: ../../data/txts/developers.lua:314
+msgid "FreeBSD"
+msgstr "FreeBSD 操作系统"
+
+#: ../../data/txts/developers.lua:320
+msgid "Flatpak"
+msgstr "Flatpak 操作系统"
+
+#: ../../data/txts/developers.lua:327
+msgid "Mac OS X"
+msgstr "Mac OS X 操作系统"
+
+#: ../../data/txts/developers.lua:339
 msgid "Windows"
 msgstr "Windows 操作系统"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:350
 msgid "ZetaOS"
 msgstr "Zeta 操作系统"
 
-#: ../../data/txts/developers.lua:3
-msgid "and many, many more (thank you for everything you’ve done)"
+#: ../../data/txts/developers.lua:362
+msgid "Homepage Coders"
+msgstr "网站主页程序员"
+
+#: ../../data/txts/developers.lua:373
+msgid "Documentation, Help and Wiki"
+msgstr "文档，帮助和维基"
+
+#: ../../data/txts/developers.lua:391
+msgid "Add-Ons"
 msgstr ""
 
-#: ../../data/txts/developers.lua:3
-msgid "vacant"
-msgstr "空闲的"
+#: ../../data/txts/developers.lua:410
+msgid "Former Elders"
+msgstr "前辈"
+
+#: ../../data/txts/developers.lua:436
+msgid "Translation"
+msgstr "翻译"
+
+#: ../../data/txts/developers.lua:445
+msgid "Other"
+msgstr "其他"
+
+#: ../../data/txts/developers.lua:453
+msgid "and many, many more (thank you for everything you’ve done)"
+msgstr ""
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
