@@ -57,7 +57,9 @@ jobs:
             - '.github/workflows/build_clang_tidy.yaml'
           test_suite:
             - *src_cmake_dependencies
-            - 'data/**' # TODO(aDiscoverer) list what needs to be checked
+            - 'data/!(campaigns|maps|music|sound)/**' # ignore some subdirectories
+            # 'data/maps/map27/**' # in case some parts should not be ignored
+            - 'data/*' # do not ignore files directly inside
             - 'regression_test.py'
             - 'test/**'
             - '.github/scripts/install_deps.sh' # calls install-dependencies.sh
