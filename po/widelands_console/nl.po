@@ -266,7 +266,7 @@ msgstr "De bewegingsrichting van de klik-en-sleep-kaart omkeren."
 
 #: ../../src/wlapplication_messages.cc:155
 msgid "Allow diagonal scrolling with the numeric keypad."
-msgstr ""
+msgstr "Sta diagonaal scrollen toe met het toestenblok"
 
 #: ../../src/wlapplication_messages.cc:156
 msgid "Display system time in the info panel."
