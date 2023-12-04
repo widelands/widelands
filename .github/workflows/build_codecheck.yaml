@@ -22,6 +22,7 @@ jobs:
             - 'cmake/codecheck/**'
             - 'cmake/WlFunctions.cmake'
             - 'src/**'
+            - '.github/scripts/install_deps.sh'
             - '.github/workflows/build_codecheck.yaml'
     - name: Installing dependencies
       if: steps.changed_files.outputs.codecheck == 'true'

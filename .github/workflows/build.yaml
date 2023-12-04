@@ -91,6 +91,7 @@ jobs:
             - 'data/**'
             - 'regression_test.py'
             - 'test/**'
+            - '.github/scripts/install_deps.sh' # calls install-dependencies.sh
             - '.github/workflows/build_testsuite.yaml'
           installer:
             - *compile
@@ -115,6 +116,7 @@ jobs:
             - '.github/workflows/build_macos.yaml'
           appimage:
             - 'xdg/org.widelands.Widelands.*'
+            - '.github/scripts/install_deps.sh'
             - '.github/workflows/build_appimage.yaml'
     - name: Clang-tidy steps
       if: steps.changed_files.outputs.clang_tidy == 'true'
