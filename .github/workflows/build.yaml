@@ -82,7 +82,7 @@ jobs:
             - 'src/**'
             - 'utils/check_clang_tidy_results.py'
             - 'utils/run-clang-tidy.py'
-            - '.github/actions/build_clang_tidy.yaml'
+            - '.github/actions/build_clang_tidy/*'
           test_suite:
             - &compile_and_dependencies
               - 'CMakeLists.txt'
@@ -122,7 +122,7 @@ jobs:
             - '.github/workflows/build_appimage.yaml'
     - name: Clang-tidy steps
       if: steps.changed_files.outputs.clang_tidy == 'true'
-      uses: ./.github/actions/build_clang_tidy.yaml
+      uses: ./.github/actions/build_clang_tidy/
     - name: job summary # shown on workflow summary page
       run: >
         echo "Clang-tidy \
