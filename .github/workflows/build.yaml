@@ -91,7 +91,7 @@ jobs:
             - 'data/**'
             - 'regression_test.py'
             - 'test/**'
-            - './.github/scripts/install_deps.sh' # calls install-dependencies.sh
+            - '.github/scripts/install_deps.sh' # calls install-dependencies.sh
             - '.github/workflows/build_testsuite.yaml'
           installer:
             - *compile
