@@ -10,7 +10,7 @@ on:
 
 jobs:
   changes:
-    name: check changed files for other jobs
+    name: changed files
     runs-on: ubuntu-latest
     # Set job outputs to values from changed_files step for other jobs
     outputs:
