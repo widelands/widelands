@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     # Set job outputs to values from changed_files step for other jobs
     outputs:
+      codecheck: ${{ steps.changed_files.outputs.codecheck }}
       clang_tidy: ${{ steps.changed_files.outputs.clang_tidy }}
       run_test_suite: ${{ steps.changed_files.outputs.test_suite }}
       create_installer: ${{ steps.changed_files.outputs.installer }}
@@ -28,6 +29,14 @@ jobs:
       with:
         # groups to check for changed files (as string, yaml anchors are resolved by the tool)
         filters: |
+          codecheck:
+            - 'CMakeLists.txt'
+            - '*/CMakeLists.txt'
+            - 'cmake/codecheck/**'
+            - 'cmake/WlFunctions.cmake'
+            - 'src/**'
+            - '.github/scripts/install_deps.sh'
+            - '.github/workflows/build_codecheck.yaml'
           clang_tidy:
             - 'src/**'
             - 'utils/check_clang_tidy_results.py'
@@ -95,6 +104,8 @@ jobs:
         popd
 
   codecheck:
+    needs: [changes]
+    if: needs.changes.outputs.codecheck == 'true'
     uses: ./.github/workflows/build_codecheck.yaml
 
   documentation:
