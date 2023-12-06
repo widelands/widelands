@@ -5,6 +5,7 @@ validates github workflow files
 
 - checks if the called local workflows exist
 - checks if the files checked for changes exist
+- checks if listed files are in valid yaml string (happens while loading it)
 '''
 
 import glob
