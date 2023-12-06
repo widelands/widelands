@@ -38,6 +38,8 @@ jobs:
             - '.github/scripts/install_deps.sh'
             - '.github/workflows/build_codecheck.yaml'
           clang_tidy:
+            - 'CMakeLists.txt'
+            - 'cmake/**'
             - 'src/**'
             - 'utils/check_clang_tidy_results.py'
             - 'utils/run-clang-tidy.py'
