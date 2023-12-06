@@ -17,7 +17,6 @@ jobs:
       codecheck: ${{ steps.changed_files.outputs.codecheck }}
       clang_tidy: ${{ steps.changed_files.outputs.clang_tidy }}
       run_test_suite: ${{ steps.changed_files.outputs.test_suite }}
-      create_installer: ${{ steps.changed_files.outputs.installer }}
       inst_windows_msvc: ${{ steps.changed_files.outputs.inst_windows_msvc }}
       inst_windows: ${{ steps.changed_files.outputs.inst_windows }}
       inst_macos: ${{ steps.changed_files.outputs.inst_macos }}
@@ -57,27 +56,26 @@ jobs:
             - 'test/**'
             - '.github/scripts/install_deps.sh' # calls install-dependencies.sh
             - '.github/workflows/build_testsuite.yaml'
-          installer:
-            - *compile_and_dependencies
-            - 'data/**'
-            - 'doc/**'
-            - 'po/**'
           inst_windows_msvc:
-            # installer is checked with an if condition
+            - &installer
+              - *compile_and_dependencies
+              - 'data/**'
+              - 'po/**'
+            # doc/** maybe for some installers TODO(unknown)
             - 'utils/win32/**'
             - '.github/scripts/vcpkg_ref'
             - '.github/workflows/build_windows_msvc.yaml'
           inst_windows:
-            # installer is checked with an if condition
+            - *installer
             - 'utils/win32/**'
             - '.github/workflows/build_windows.yaml'
           inst_macos:
-            # installer is checked with an if condition
+            - *installer
             - 'compile.sh' # called by utils/macos/build_app.sh
             - 'utils/macos/*'
             - '.github/workflows/build_macos.yaml'
           appimage:
-            # installer is checked with an if condition
+            - *installer
             - 'xdg/org.widelands.Widelands.*'
             - '.github/scripts/install_deps.sh'
             - '.github/workflows/build_appimage.yaml'
@@ -156,30 +154,23 @@ jobs:
 
   windows-msvc:
     needs: [changes, clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
-    if: >
-      needs.changes.outputs.create_installer == 'true' ||
-      needs.changes.outputs.inst_windows_msvc == 'true'
+    if: needs.changes.outputs.inst_windows_msvc == 'true'
     uses: ./.github/workflows/build_windows_msvc.yaml
 
   windows:
     needs: [changes, clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
-    if: >
-      needs.changes.outputs.create_installer == 'true' ||
-      needs.changes.outputs.inst_windows == 'true'
+    if: needs.changes.outputs.inst_windows == 'true'
     uses: ./.github/workflows/build_windows.yaml
 
   macos:
     needs: [changes, clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
-    if: >
-      needs.changes.outputs.create_installer == 'true' ||
-      needs.changes.outputs.inst_macos == 'true'
+    if: needs.changes.outputs.inst_macos == 'true'
     uses: ./.github/workflows/build_macos.yaml
 
   appimage:
     if: >
       github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' &&
-      ( needs.changes.outputs.create_installer == 'true' ||
-        needs.changes.outputs.appimage == 'true' )
+      needs.changes.outputs.appimage == 'true'
     needs: [changes, clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
     uses: ./.github/workflows/build_appimage.yaml
 
