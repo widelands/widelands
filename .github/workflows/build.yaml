@@ -57,8 +57,13 @@ jobs:
             - '.github/workflows/build_clang_tidy.yaml'
           test_suite:
             - *src_cmake_dependencies
-            - 'data/!(campaigns|maps|music|sound)/**' # ignore some subdirectories
-            # 'data/maps/map27/**' # in case some parts should not be ignored
+            # ignore some subdirectories
+            - 'data/!(campaigns|maps|music|sound|tribes|world)/**'
+            # but track parts of them
+            - 'data/tribes/**.lua' # track lua files
+            - 'data/world/**.lua'
+            - added|deleted: 'data/tribes/**' # do not care about image modifications
+            - added|deleted: 'data/world/**' # dito
             - 'data/*' # do not ignore files directly inside
             - 'regression_test.py'
             - 'test/**'
