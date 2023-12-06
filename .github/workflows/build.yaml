@@ -9,69 +9,19 @@ on:
     branches: [ master ]
 
 jobs:
-  # This job runs multiple smaller checks where having several jobs would be overkill.
-  misc_sanity_checks:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 1
-    - name: Validate JSON files
-      run: |
-        python3 utils/validate_json.py data/txts/
-        python3 utils/update_authors.py
-    - name: Check for missing copyright headers
-      run: |
-        pushd src
-        ../utils/find_missing_copyright_headers.sh
-        popd
-    - name: Check for superfluous includes and forward declarations
-      run: |
-        pushd src
-        ../utils/find_unused_includes.py
-        popd
-
-  codecheck:
-    uses: ./.github/workflows/build_codecheck.yaml
-
-  documentation:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 1
-    - name: Installing python
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.x
-    - name: Generate documentation
-      run: |
-        cd doc/sphinx
-        pip install -r requirements.txt
-        mkdir source/_static
-        ./extract_rst.py
-        sphinx-build -W -b json -d build/doctrees source build/json
-
-  clang_tidy:
+  changes:
+    name: check changed files for other jobs
     runs-on: ubuntu-latest
     # Set job outputs to values from changed_files step for other jobs
     outputs:
+      clang_tidy: ${{ steps.changed_files.outputs.clang_tidy }}
       run_test_suite: ${{ steps.changed_files.outputs.test_suite }}
       create_installer: ${{ steps.changed_files.outputs.installer }}
       inst_windows_msvc: ${{ steps.changed_files.outputs.inst_windows_msvc }}
       inst_windows: ${{ steps.changed_files.outputs.inst_windows }}
       inst_macos: ${{ steps.changed_files.outputs.inst_macos }}
       appimage: ${{ steps.changed_files.outputs.appimage }}
-    env:
-      CC:  /usr/bin/clang
-      CXX: /usr/bin/clang++
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 1
     - name: Check for changed files
       uses: dorny/paths-filter@v2
       id: changed_files
@@ -120,13 +70,70 @@ jobs:
             - 'xdg/org.widelands.Widelands.*'
             - '.github/scripts/install_deps.sh'
             - '.github/workflows/build_appimage.yaml'
+
+  # This job runs multiple smaller checks where having several jobs would be overkill.
+  misc_sanity_checks:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+    - name: Validate JSON files
+      run: |
+        python3 utils/validate_json.py data/txts/
+        python3 utils/update_authors.py
+    - name: Check for missing copyright headers
+      run: |
+        pushd src
+        ../utils/find_missing_copyright_headers.sh
+        popd
+    - name: Check for superfluous includes and forward declarations
+      run: |
+        pushd src
+        ../utils/find_unused_includes.py
+        popd
+
+  codecheck:
+    uses: ./.github/workflows/build_codecheck.yaml
+
+  documentation:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+    - name: Installing python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.x
+    - name: Generate documentation
+      run: |
+        cd doc/sphinx
+        pip install -r requirements.txt
+        mkdir source/_static
+        ./extract_rst.py
+        sphinx-build -W -b json -d build/doctrees source build/json
+
+  clang_tidy:
+    runs-on: ubuntu-latest
+    needs: [changes]
+    if: needs.changes.outputs.clang_tidy == 'true'
+    env:
+      CC:  /usr/bin/clang
+      CXX: /usr/bin/clang++
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
     - name: Clang-tidy steps
-      if: steps.changed_files.outputs.clang_tidy == 'true'
       uses: ./.github/actions/build_clang_tidy/
     - name: job summary # shown on workflow summary page
       run: >
         echo "Clang-tidy \
-              ${{ steps.changed_files.outputs.clang_tidy == 'true'
+              ${{ needs.changes.outputs.clang_tidy == 'true'
                   && 'run :green_circle:' || 'skipped :stop_button:' }} \
              " >> "$GITHUB_STEP_SUMMARY"
 
@@ -146,37 +153,37 @@ jobs:
       run: ./utils/lua_style_checker.py
 
   testsuite:
-    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
-    if: needs.clang_tidy.outputs.run_test_suite == 'true'
+    needs: [changes, clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
+    if: needs.changes.outputs.run_test_suite == 'true'
     uses: ./.github/workflows/build_testsuite.yaml
 
   windows-msvc:
-    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
+    needs: [changes, clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
     if: >
-      needs.clang_tidy.outputs.create_installer == 'true' ||
-      needs.clang_tidy.outputs.inst_windows_msvc == 'true'
+      needs.changes.outputs.create_installer == 'true' ||
+      needs.changes.outputs.inst_windows_msvc == 'true'
     uses: ./.github/workflows/build_windows_msvc.yaml
 
   windows:
-    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
+    needs: [changes, clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
     if: >
-      needs.clang_tidy.outputs.create_installer == 'true' ||
-      needs.clang_tidy.outputs.inst_windows == 'true'
+      needs.changes.outputs.create_installer == 'true' ||
+      needs.changes.outputs.inst_windows == 'true'
     uses: ./.github/workflows/build_windows.yaml
 
   macos:
-    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
+    needs: [changes, clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
     if: >
-      needs.clang_tidy.outputs.create_installer == 'true' ||
-      needs.clang_tidy.outputs.inst_macos == 'true'
+      needs.changes.outputs.create_installer == 'true' ||
+      needs.changes.outputs.inst_macos == 'true'
     uses: ./.github/workflows/build_macos.yaml
 
   appimage:
     if: >
       github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' &&
-      ( needs.clang_tidy.outputs.create_installer == 'true' ||
-        needs.clang_tidy.outputs.appimage == 'true' )
-    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
+      ( needs.changes.outputs.create_installer == 'true' ||
+        needs.changes.outputs.appimage == 'true' )
+    needs: [changes, clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
     uses: ./.github/workflows/build_appimage.yaml
 
   # Dummy check for PRs that all required status checks have either passed or were skipped
