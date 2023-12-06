@@ -1,10 +1,18 @@
-name: clang-tidy
-description: run clang tidy on c++ code
+name: build - clang-tidy
+on:
+  workflow_call:
 
-runs:
-  using: composite
-  steps:
-    # code is already checked out
+jobs:
+  clang_tidy:
+    runs-on: ubuntu-latest
+    env:
+      CC:  /usr/bin/clang
+      CXX: /usr/bin/clang++
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
     - name: Installing dependencies
       run: sh ./.github/scripts/install_deps.sh
       shell: bash

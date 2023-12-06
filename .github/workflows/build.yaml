@@ -32,7 +32,7 @@ jobs:
             - 'src/**'
             - 'utils/check_clang_tidy_results.py'
             - 'utils/run-clang-tidy.py'
-            - '.github/actions/build_clang_tidy/*'
+            - '.github/workflows/build_clang_tidy.yaml'
           test_suite:
             - &compile_and_dependencies
               - 'CMakeLists.txt'
@@ -117,25 +117,9 @@ jobs:
         sphinx-build -W -b json -d build/doctrees source build/json
 
   clang_tidy:
-    runs-on: ubuntu-latest
     needs: [changes]
     if: needs.changes.outputs.clang_tidy == 'true'
-    env:
-      CC:  /usr/bin/clang
-      CXX: /usr/bin/clang++
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 1
-    - name: Clang-tidy steps
-      uses: ./.github/actions/build_clang_tidy/
-    - name: job summary # shown on workflow summary page
-      run: >
-        echo "Clang-tidy \
-              ${{ needs.changes.outputs.clang_tidy == 'true'
-                  && 'run :green_circle:' || 'skipped :stop_button:' }} \
-             " >> "$GITHUB_STEP_SUMMARY"
+    uses: ./.github/workflows/build_clang_tidy.yaml
 
   lua_style:
     runs-on: ubuntu-latest
