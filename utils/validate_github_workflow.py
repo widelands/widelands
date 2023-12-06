@@ -43,18 +43,19 @@ class CheckGithubYaml:
             print('missing file:', file, 'from', ref)
         self.failures += 1
 
+    def _check_files(self, files: iter, ref: dict):
+        for file in files:
+            if type(file) == list:
+                self._check_files(file, ref)
+            else:
+                self._check_path_valid(file, ref)
+
     def _check_steps(self, steps: iter, yaml_path: str, path: str):
         for step in steps:
             if step.get('uses', '').startswith('dorny/paths-filter'):
                 for k, files in yaml.safe_load(io.StringIO(step['with']['filters'])).items():
                     ref = {'file': path, 'in': f'{yaml_path}.steps.with.filters'}
-                    for file in files:
-                        if type(file) == list:
-                            files = file
-                            for file in files:
-                                self._check_path_valid(file, ref)
-                        else:
-                            self._check_path_valid(file, ref)
+                    self._check_files(files, ref)
             elif (step.get('uses', '').startswith('./')):
                 # check use of local action
                 ref = {'file': path, 'in': f'{yaml_path}.steps.uses'}
