@@ -37,13 +37,7 @@ jobs:
             - '.github/scripts/install_deps.sh'
             - '.github/workflows/build_codecheck.yaml'
           clang_tidy:
-            - 'CMakeLists.txt'
-            - 'cmake/**'
-            - 'src/**'
-            - 'utils/check_clang_tidy_results.py'
-            - 'utils/run-clang-tidy.py'
-            - '.github/workflows/build_clang_tidy.yaml'
-          test_suite:
+            # this job does not compile, but uses cmake, install-dependencies.sh and source files
             - &compile_and_dependencies
               - 'CMakeLists.txt'
               - 'cmake/**'
@@ -51,6 +45,11 @@ jobs:
                 # dependencies:
               - 'install-dependencies.sh' # called by xx.yaml or ./.github/scripts/install_deps.sh
               - 'utils/download_asio.sh' # called by install-dependencies.sh
+            - 'utils/check_clang_tidy_results.py'
+            - 'utils/run-clang-tidy.py'
+            - '.github/workflows/build_clang_tidy.yaml'
+          test_suite:
+            - *compile_and_dependencies
             - 'data/**' # TODO(aDiscoverer or ...) list what needs to be checked
             - 'regression_test.py'
             - 'test/**'
