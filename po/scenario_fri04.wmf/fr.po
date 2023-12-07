@@ -4,6 +4,7 @@
 # 
 # Translators:
 # David D, 2023
+# C138, 2023
 # 
 msgid ""
 msgstr ""
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-06-05 02:59+0000\n"
 "PO-Revision-Date: 2022-07-28 07:48+0000\n"
-"Last-Translator: David D, 2023\n"
+"Last-Translator: C138, 2023\n"
 "Language-Team: French (https://app.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -65,7 +66,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:50
 msgid "Defeat Marcus Caius Iniucundus."
-msgstr ""
+msgstr "Vaincre Marcus Caius Iniucundus."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:55
 msgid "Recruit & train"
@@ -104,6 +105,10 @@ msgid ""
 "just in time; it caught us while we were on sea and we were all certain our "
 "ship was about to split and sink, and none of us would see our home again."
 msgstr ""
+"Marcus Caïus Iniucundus n'avait pas menti au sujet de l'orage. Nous étions "
+"partis juste à temps ; Il nous a attrapés alors que nous étions en mer et "
+"nous étions tous certains que notre navire était sur le point de se fendre "
+"et de couler, et qu'aucun d'entre nous ne reverrait sa maison."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:74
@@ -113,6 +118,10 @@ msgid ""
 "could continue sailing. Finally, we arrived as far North as it is possible "
 "to go by ship."
 msgstr ""
+"Mais Dieu a été miséricordieux, et nos prières abondantes l'ont incité à "
+"nous épargner. Nous avions dû débarquer sur un rivage morne et inhabité et "
+"réparer le navire avant de pouvoir continuer à naviguer. Finalement, nous "
+"sommes arrivés aussi loin au nord qu'il est possible d'aller en bateau."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:80
@@ -125,6 +134,10 @@ msgid ""
 "not regret that I will probably not be seeing him again. He set up his camp "
 "some distance away from mine so that we will not hinder each other."
 msgstr ""
+"Mais Dieu a été miséricordieux, et nos prières abondantes l'ont incité à "
+"nous épargner. Nous avions dû débarquer sur un rivage morne et inhabité et "
+"réparer le navire avant de pouvoir continuer à naviguer. Finalement, nous "
+"sommes arrivés aussi loin au nord qu'il est possible d'aller en bateau."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:86
@@ -134,6 +147,10 @@ msgid ""
 "I have seen no signs of human habitation around here yet, I have no doubt "
 "that we will find him soon."
 msgstr ""
+"Mais maintenant que nous sommes devenus si proches, je suis trop impatient "
+"pour rester assis à méditer sur le passé. Vite maintenant ! Allons à la "
+"recherche de mon ami. Bien que je n'aie encore vu aucun signe d'habitation "
+"humaine par ici, je n'ai aucun doute que nous le retrouverons bientôt."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:91
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:97
@@ -244,6 +261,9 @@ msgid ""
 "and I journeyed this far to seek you out. I cannot say how glad I am to have"
 " found you at last."
 msgstr ""
+"Ce n'est pas une ruse ou une tromperie, c'est vraiment moi, Claus Lembeck ! "
+"Mon fils Henneke et moi avons voyagé jusqu'ici pour vous chercher. Je ne "
+"saurai vous dire combien je suis heureux de vous avoir enfin trouvé."
 
 #. TRANSLATORS: Reebaud – Reebaud 4
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:144
@@ -253,6 +273,10 @@ msgid ""
 " Just as you once helped me fend off a Holstein invasion, I will now help my"
 " friend if I can."
 msgstr ""
+"Je suis encouragé que vous vous soyez donné tant de mal pour me rencontrer. "
+"Mais vous n'avez pas fait ça juste pour me parler à nouveau. Qu'est-ce qui "
+"vous dérange ? Tout comme vous m'avez aidé à repousser une invasion "
+"Holstein, je vais maintenant aider mon ami si je le peux."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 5
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:150
@@ -263,6 +287,12 @@ msgid ""
 "you directly; but I have made an arch-enemy of him by frequently aiding "
 "those he sought to conquer."
 msgstr ""
+"En effet, je suis venu vous demander de l'aide. Vous vous souvenez "
+"certainement d'Atterdag, le roi des Danois, qui nous causa bien des "
+"difficultés à nous les Frisons. Vous ne l'avez jamais combattu vous-même, il"
+" était trop méfiant de votre réputation pour vous agresser directement ; "
+"mais je me suis fait de lui un ennemi juré en aidant souvent ceux qu'il "
+"cherchait à conquérir."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 5
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:153
@@ -274,6 +304,13 @@ msgid ""
 "friends on the mainland could help me, for Atterdag’s armies are so "
 "incredibly numerous that I knew they wouldn’t have stood a chance."
 msgstr ""
+"Il y a trois ou quatre mois – j'ai perdu la notion du temps au cours de ce "
+"long voyage – il a débarqué ses soldats sur mon île de Föhr. Je vous "
+"épargnerai le récit de la bataille, qui a duré cinq semaines et non pas un "
+"jour de moins. La vérité courte et amère est que j'ai été vaincu et forcé de"
+" fuir. Je n'avais aucun espoir que mes amis sur le continent puissent "
+"m'aider, car les armées d'Atterdag sont si incroyablement nombreuses que je "
+"savais qu'elles n'auraient eu aucune chance."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 6
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:159
@@ -283,6 +320,10 @@ msgid ""
 "come South with me and liberate Föhr, or at least to send with me a troop of"
 " your far-famed soldiers."
 msgstr ""
+"Vous seul avez la réputation des plus merveilleux faits d'armes. Vous êtes "
+"probablement le seul humain vivant qui peut vaincre le maléfique Danois. Je "
+"vous prie de venir avec moi dans le Sud et de libérer Föhr, ou du moins "
+"d'envoyer avec moi une troupe de vos fameux soldats."
 
 #. TRANSLATORS: Reebaud – Reebaud 7
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:165
@@ -296,6 +337,15 @@ msgid ""
 "We defeated them all, and believed to have found peace at last. And for four"
 " long years, life was peaceful indeed."
 msgstr ""
+"Si vous étiez arrivé une semaine plus tôt, j'aurais accédé à votre demande "
+"instantanément. Aujourd'hui, cependant, une pointe d'inquiétude est apparue "
+"à l'horizon. Je le dis littéralement ; Des étrangers sont venus de loin et "
+"cherchent à nous chasser et à s'emparer de nos terres comme nous l'avons "
+"fait nous-mêmes, poussés par le besoin, en les enlevant aux gens hostiles "
+"qui vivaient ici. Des barbares belliqueux et un fripon impérial nommé "
+"Murilius qui faisait les demandes les plus scandaleuses. Nous les avons tous"
+" vaincus, et nous avons cru avoir enfin trouvé la paix. Et pendant quatre "
+"longues années, la vie a été paisible."
 
 #. TRANSLATORS: Reebaud – Reebaud 8a
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:171
@@ -312,6 +362,19 @@ msgid ""
 " South with you. For this period, you shall of course receive all the "
 "hospitality and courtesy we can offer."
 msgstr ""
+"Mais maintenant, comme je le disais, à l'arrivée de la courte période de "
+"l'été, pendant laquelle la neige fond en certains endroits et où il est "
+"possible de voyager dans des endroits éloignés, les étrangers sont apparus "
+"et nous ont engagés dans la bataille. Ils nous ont pris par surprise, la vie"
+" sans combat nous ayant rendus insouciants. Plus d'un bon soldat tomba sous "
+"leurs lances, y compris Hauke, mon meilleur ami et mon très vénérable "
+"conseiller, et Fiete, mon fils unique et héritier. Leurs mouvements de "
+"combat sournois étaient une nouveauté pour nous, mais maintenant que nous "
+"savons à quoi nous sommes confrontés, il ne fait aucun doute que nous les "
+"battrons à la fin. Mais je crains qu'il ne faille encore un certain temps "
+"avant qu'ils ne soient vaincus et qu'il ne soit sûr pour moi de voyager vers"
+" le Sud avec vous. Pendant cette période, vous bénéficierez bien sûr de "
+"toute l'hospitalité et de la courtoisie que nous pouvons vous offrir."
 
 #. TRANSLATORS: Reebaud – Reebaud 8b
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:177
@@ -328,6 +391,20 @@ msgid ""
 "recuperate before we can send them into battle again. For this period, you "
 "shall of course receive all the hospitality and courtesy we can offer."
 msgstr ""
+"Mais maintenant, comme je le disais, à l'arrivée de la courte période de "
+"l'été, pendant laquelle la neige fond en certains endroits et où il est "
+"possible de voyager dans des endroits éloignés, les étrangers sont apparus "
+"et nous ont engagés dans la bataille. Ils nous ont pris par surprise, la vie"
+" sans combat nous ayant rendus insouciants. Plus d'un bon soldat tomba sous "
+"leurs lances, y compris Hauke, mon meilleur ami et mon très vénérable "
+"conseiller, et Fiete, mon fils unique et héritier. Leurs mouvements de "
+"combat sournois étaient une nouveauté pour nous, mais maintenant que nous "
+"savions à quoi nous étions confrontés, nous avons réussi à les battre à la "
+"fin. Cependant, tous nos soldats sont encore endoloris et blessés par les "
+"violents combats, et ils auront besoin d'un certain temps pour récupérer "
+"avant que nous puissions les envoyer à nouveau au combat. Pendant cette "
+"période, vous bénéficierez bien sûr de toute l'hospitalité et de la "
+"courtoisie que nous pouvons vous offrir."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 9a
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:183
@@ -337,6 +414,10 @@ msgid ""
 "spirit of our friendship, and in honour of the good men you lost, we will "
 "fight the invaders alongside you!"
 msgstr ""
+"Je crois que nous avons déjà rencontré ces intrus. Il serait inconvenant de "
+"s'asseoir en dégustant des tasses d'hydromel pendant que vous vous battez "
+"pour votre vie. Dans l'esprit de notre amitié, et en l'honneur des hommes de"
+" bien que vous avez perdus, nous combattrons les envahisseurs à vos côtés !"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 9b
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:189
@@ -346,6 +427,10 @@ msgid ""
 "honour of the good men you lost, we shall seek out those invaders and fight "
 "them alongside you!"
 msgstr ""
+"Vraiment, il serait très inconvenant de s'asseoir en dégustant des tasses "
+"d'hydromel pendant que vous vous battez pour votre vie. Dans l'esprit de "
+"notre amitié, et en l'honneur des hommes de bien que vous avez perdus, nous "
+"chercherons ces envahisseurs et les combattrons à vos côtés !"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud 9c
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:196
@@ -358,6 +443,14 @@ msgid ""
 " for our own soldiers, so that they may learn from yours and become as "
 "strong as possible before we return to our homeland."
 msgstr ""
+"Je suis presque déçu que votre réputation ne dépasse pas les faits, car "
+"alors que vous décriviez les envahisseurs, j'avais hâte de les combattre à "
+"vos côtés. Je suis désolé de vos pertes, et surtout de ce que je ne "
+"rencontrerai jamais le célèbre Hauke, dont le nom vivra dans la gloire. "
+"Pendant que vos soldats se rétablissent, je me chargerai d'organiser des "
+"séances d'entraînement pour nos propres soldats, afin qu'ils puissent "
+"apprendre des vôtres et devenir aussi forts que possible avant que nous "
+"retournions dans notre patrie."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:201
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:213
