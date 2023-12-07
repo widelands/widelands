@@ -34,7 +34,7 @@ jobs:
             - 'cmake/codecheck/**'
             - 'cmake/WlFunctions.cmake'
             - 'src/**'
-            - '.github/scripts/install_deps.sh'
+            - '.github/scripts/install_deps.sh' # calls install-dependencies.sh
             - '.github/workflows/build_codecheck.yaml'
           clang_tidy:
             # this job does not compile, but uses cmake, install-dependencies.sh and source files
@@ -47,6 +47,7 @@ jobs:
               - 'utils/download_asio.sh' # called by install-dependencies.sh
             - 'utils/check_clang_tidy_results.py'
             - 'utils/run-clang-tidy.py'
+            - '.github/scripts/install_deps.sh' # calls install-dependencies.sh
             - '.github/workflows/build_clang_tidy.yaml'
           test_suite:
             - *compile_and_dependencies
@@ -63,20 +64,20 @@ jobs:
             # doc/** maybe for some installers TODO(unknown)
             - 'utils/win32/**'
             - '.github/scripts/vcpkg_ref'
-            - '.github/workflows/build_windows_msvc.yaml'
+            - '.github/workflows/build_windows_msvc.yaml' # calls install-dependencies.sh
           inst_windows:
             - *installer
             - 'utils/win32/**'
-            - '.github/workflows/build_windows.yaml'
+            - '.github/workflows/build_windows.yaml' # calls install-dependencies.sh
           inst_macos:
             - *installer
-            - 'compile.sh' # called by utils/macos/build_app.sh
+            - 'compile.sh' # called by utils/macos/build_app.sh, calls install-dependencies.sh
             - 'utils/macos/*'
-            - '.github/workflows/build_macos.yaml'
+            - '.github/workflows/build_macos.yaml' # calls install-dependencies.sh
           appimage:
             - *installer
             - 'xdg/org.widelands.Widelands.*'
-            - '.github/scripts/install_deps.sh'
+            - '.github/scripts/install_deps.sh' # calls install-dependencies.sh
             - '.github/workflows/build_appimage.yaml'
 
   # This job runs multiple smaller checks where having several jobs would be overkill.
