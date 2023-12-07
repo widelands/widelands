@@ -12,7 +12,7 @@
 # Hybrid Dog, 2015
 # Iwan Gabovitch, 2023
 # Iwan Gabovitch, 2023
-# Jonas Richardsen <jonas.richardsen@isdas.de>, 2017
+# 1dd713b44d53c6f200eff6c2cb59aa8a_24534f2 <a51069abad5b85f84df96b034560114b_616796>, 2017
 # Klaus Halfmann <klaus.halfmann@arcor.de>, 2022-2023
 # millimarg, 2015
 # millimarg, 2015
@@ -34,7 +34,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-11-18 02:30+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Wuzzy <Wuzzy@disroot.org>, 2018\n"
+"Last-Translator: Simon Heimberg, 2023\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1474,7 +1474,7 @@ msgid ""
 "the economy, production of one of each tool takes %1$s and one of each spear"
 " takes %2$s on average. If only one kind of tool or spear is needed by the "
 "economy, its production takes %3$s on average."
-msgstr "Wenn dieses Gebäude voll beliefert wird und alle Werkzeuge und Speere von der Wirtschaft benötigt werden, dauert die Produktion jeweils eines Werkzeugs von Allen im Durchschnitt %1$sund die jeweils eines Speers von Allen im Durchschnitt %2$s. Wenn nur ein Werkzeug oder Speer benötigt wird, dauert seine Produktion im Durchschnitt %3$s."
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Werkzeuge und Speere von der Wirtschaft benötigt werden, dauert die Produktion jeweils eines Werkzeugs von Allen im Durchschnitt %1$s und die jeweils eines Speers von Allen im Durchschnitt %2$s. Wenn nur ein Werkzeug oder Speer benötigt wird, dauert seine Produktion im Durchschnitt %3$s."
 
 #. TRANSLATORS: Lore helptext for an Amazon production site: Dressmakery
 #: ../../data/tribes/initialization/amazons/units.lua:1472
@@ -3274,7 +3274,7 @@ msgid ""
 "This tasty bread is made in bakeries out of cornmeal, blackroot flour and "
 "water. It is appreciated as basic food by miners, scouts and soldiers in "
 "training sites (labyrinth and dungeon)."
-msgstr "Dieses köstliche Brot wird in Bäckerein aus Maismehl, Dunkelrübenmehl und Wasser hergestellt. Es wird von Bergleuten, Kundschaftern und Soldaten in Ausbildungsgebäuden (Verlies und Labyrinth) als Grundnahrungsmittel geschätzt."
+msgstr "Dieses köstliche Brot wird in Bäckereien aus Maismehl, Dunkelrübenmehl und Wasser hergestellt. Es wird von Bergleuten, Kundschaftern und Soldaten in Ausbildungsgebäuden (Verlies und Labyrinth) als Grundnahrungsmittel geschätzt."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Quartz
 #: ../../data/tribes/initialization/atlanteans/units.lua:589
@@ -4541,7 +4541,7 @@ msgid ""
 " takes %2$s on average. If only one kind of food is needed by the economy, "
 "production of one smoked fish takes %3$s and one smoked meat takes %4$s on "
 "average."
-msgstr "Wenn dieses Gebäude voll beliefert wird und alle Arten geräucherter Nahrung von der Wirtschaft benötigt werden, dauert die Produktion eines Räucherfischs im Durchschnitt %1$sund die eines Räucherfleischs im Durchschnitt %2$s. Wenn nur eine Art Nahrung benötigt wird, dauert die Produktion eines Räucherfischs im Durchschnitt %3$s und die eines Räucherfleischs im Durchschnitt %4$s."
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Arten geräucherter Nahrung von der Wirtschaft benötigt werden, dauert die Produktion eines Räucherfischs im Durchschnitt %1$s und die eines Räucherfleischs im Durchschnitt %2$s. Wenn nur eine Art Nahrung benötigt wird, dauert die Produktion eines Räucherfischs im Durchschnitt %3$s und die eines Räucherfleischs im Durchschnitt %4$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Mill
 #: ../../data/tribes/initialization/atlanteans/units.lua:1683
@@ -4687,7 +4687,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr "Wenn dieses Gebäude voll beliefert wird und alle Metalle von der Wirtschaft benötigt werden, dauert die Produktion eines Eisens im Durchschnitt %1$sund ein Barren Gold benötigt im Durchschnitt %2$s. Wenn nur eine Art Metall benötigt wird, dauert die Produktion eines Eisens im Durchschnitt %3$s und die eines Goldbarrens im Durchschnitt %4$s."
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Metalle von der Wirtschaft benötigt werden, dauert die Produktion eines Eisens im Durchschnitt %1$s und ein Barren Gold benötigt im Durchschnitt %2$s. Wenn nur eine Art Metall benötigt wird, dauert die Produktion eines Eisens im Durchschnitt %3$s und die eines Goldbarrens im Durchschnitt %4$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Toolsmithy
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Metal
@@ -4903,7 +4903,7 @@ msgid ""
 "gain the spider silk once a day. There is no need to spin this again. The "
 "thread can directly be used by the weaving mill. Oh hello, here is one of "
 "our nice spiders … Hey! Why are you running away?"
-msgstr "Nein, die Spinnen werden nicht mit Mais gefüttert. Wir verfüttern ihn an fette Grashüpfer, die dann von unseren Spinnen gefressen werden. Einmal am Tag gewinnen wir den Seidenfaden mit Hilfe einer speziellen Vorrichtung. Er muss auch nicht mehr gesponnen werden, sondern kann direkt in der Weberei verarbeitet werden. Oh hallo, da kommt ja eine von unseren hübschen Spinnen … He! Warum läufts du denn weg?"
+msgstr "Nein, die Spinnen werden nicht mit Mais gefüttert. Wir verfüttern ihn an fette Grashüpfer, die dann von unseren Spinnen gefressen werden. Einmal am Tag gewinnen wir den Seidenfaden mit Hilfe einer speziellen Vorrichtung. Er muss auch nicht mehr gesponnen werden, sondern kann direkt in der Weberei verarbeitet werden. Oh hallo, da kommt ja eine von unseren hübschen Spinnen … He! Warum läufst du denn weg?"
 
 #. TRANSLATORS: Lore author helptext for an Atlantean production site: Spider
 #. Farm
@@ -7204,7 +7204,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr "Wenn dieses Gebäude voll beliefert wird und alle Metalle von der Wirtschaft benötigt werden, dauert die Produktion eines Eisens im Durchschnitt %1$sund ein Barren Gold benötigt im Durchschnitt %2$s. Wenn nur eine Art Metall benötigt wird, dauert die Produktion eines Eisens im Durchschnitt %3$s und die eines Goldbarrens im Durchschnitt %4$s."
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Metalle von der Wirtschaft benötigt werden, dauert die Produktion eines Eisens im Durchschnitt %1$s und ein Barren Gold benötigt im Durchschnitt %2$s. Wenn nur eine Art Metall benötigt wird, dauert die Produktion eines Eisens im Durchschnitt %3$s und die eines Goldbarrens im Durchschnitt %4$s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Metal Workshop
 #: ../../data/tribes/initialization/barbarians/units.lua:1439
@@ -11374,7 +11374,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr "Wenn dieses Gebäude voll beliefert wird und alle Metalle von der Wirtschaft benötigt werden, dauert die Produktion eines Eisens im Durchschnitt %1$sund ein Barren Gold benötigt im Durchschnitt %2$s. Wenn nur eine Art Metall benötigt wird, dauert die Produktion eines Eisens im Durchschnitt %3$s und die eines Goldbarrens im Durchschnitt %4$s."
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Metalle von der Wirtschaft benötigt werden, dauert die Produktion eines Eisens im Durchschnitt %1$s und ein Barren Gold benötigt im Durchschnitt %2$s. Wenn nur eine Art Metall benötigt wird, dauert die Produktion eines Eisens im Durchschnitt %3$s und die eines Goldbarrens im Durchschnitt %4$s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11454,7 +11454,7 @@ msgid ""
 "kind of armor takes %2$s on average. If only one kind of armor or helmets is"
 " needed by the economy, production of one helmet takes %3$s, while one kind "
 "of armor takes %4$s on average."
-msgstr "Wenn dieses Gebäude voll beliefert wird und alle Arten Rüstungen und Helme von der Wirtschaft benötigt werden, dauert die Produktion eines Helms im Durchschnitt %1$sund die Produktion von jeweils einer Art von allen Rüstungen dauert im Durchschnitt %2$s. Wenn nur eine Art Rüstungen oder Helme benötigt wird, dauert die Produktion eines Helms im Durchschnitt %3$s während eine Art Rüstung im Durchschnitt %4$s dauert."
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Arten Rüstungen und Helme von der Wirtschaft benötigt werden, dauert die Produktion eines Helms im Durchschnitt %1$s und die Produktion von jeweils einer Art von allen Rüstungen dauert im Durchschnitt %2$s. Wenn nur eine Art Rüstungen oder Helme benötigt wird, dauert die Produktion eines Helms im Durchschnitt %3$s während eine Art Rüstung im Durchschnitt %4$s dauert."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -14703,7 +14703,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr "Wenn dieses Gebäude voll beliefert wird und alle Metalle von der Wirtschaft benötigt werden, dauert die Produktion eines Eisens im Durchschnitt %1$sund ein Barren Gold benötigt im Durchschnitt %2$s. Wenn nur eine Art Metall benötigt wird, dauert die Produktion eines Eisens im Durchschnitt %3$s und die eines Goldbarrens im Durchschnitt %4$s."
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Metalle von der Wirtschaft benötigt werden, dauert die Produktion eines Eisens im Durchschnitt %1$s und ein Barren Gold benötigt im Durchschnitt %2$s. Wenn nur eine Art Metall benötigt wird, dauert die Produktion eines Eisens im Durchschnitt %3$s und die eines Goldbarrens im Durchschnitt %4$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Recycling Center
 #: ../../data/tribes/initialization/frisians/units.lua:1813
@@ -14978,7 +14978,7 @@ msgctxt "frisians_building"
 msgid ""
 "Rookies will say that vengeance is sweet. Heroes will say that honey bread "
 "is sweeter."
-msgstr "Grünschäbel sagen, dass Rache süß ist. Alte Hasen aber wissen, dass Honigbrot süßer ist."
+msgstr "Grünschnäbel sagen, dass Rache süß ist. Alte Hasen aber wissen, dass Honigbrot süßer ist."
 
 #. TRANSLATORS: Lore author helptext for a Frisian production site: Honey
 #. Bread Bakery
@@ -15005,7 +15005,7 @@ msgid ""
 " production of one bread takes %1$s and one honey bread takes %2$s on "
 "average. If only one kind of bread is needed by the economy, production of "
 "one bread or one honey bread takes %3$s on average."
-msgstr "Wenn dieses Gebäude voll beliefert wird und alle Brote von der Wirtschaft benötigt werden, dauert die Produktion eines Brots im Durchschnitt %1$sund ein Honigbrot benötigt im Durchschnitt %2$s. Wenn nur eine Art Brot benötigt wird, dauert die Produktion eines Brots oder Honigbrots im Durchschnitt %3$s."
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Brote von der Wirtschaft benötigt werden, dauert die Produktion eines Brots im Durchschnitt %1$s und ein Honigbrot benötigt im Durchschnitt %2$s. Wenn nur eine Art Brot benötigt wird, dauert die Produktion eines Brots oder Honigbrots im Durchschnitt %3$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Brewery
 #: ../../data/tribes/initialization/frisians/units.lua:1943
@@ -15063,7 +15063,7 @@ msgid ""
 " production of one beer takes %1$s and one mead takes %2$s on average. If "
 "only one kind of drink is needed by the economy, production of one beer or "
 "one mead takes %3$s on average."
-msgstr "Wenn dieses Gebäude voll beliefert wird und alle Getränke von der Wirtschaft benötigt werden, dauert die Produktion eines Biers im Durchschnitt %1$sund ein Met benötigt im Durchschnitt %2$s. Wenn nur eine Art Getränk benötigt wird, dauert die Produktion eines Bieres oder Mets im Durchschnitt %3$s."
+msgstr "Wenn dieses Gebäude voll beliefert wird und alle Getränke von der Wirtschaft benötigt werden, dauert die Produktion eines Biers im Durchschnitt %1$s und ein Met benötigt im Durchschnitt %2$s. Wenn nur eine Art Getränk benötigt wird, dauert die Produktion eines Bieres oder Mets im Durchschnitt %3$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Tavern
 #: ../../data/tribes/initialization/frisians/units.lua:1969
@@ -15084,7 +15084,7 @@ msgid ""
 "If the tavern is fully supplied, it can produce one ration in %1$s on "
 "average, using 2 kinds of ingredients. If it can only use one kind of "
 "ingredient, it can produce one ration in %2$s on average."
-msgstr "Wenn die Taverne voll beliefert wird, kann sie eine Ration unter Verwendung von 2 Zutaten in durchschnittlich %1$szubereiten. Wenn nur eine Zutat zur Verfügung steht kann sie eine Ration in durchschnittlich %2$s zubereiten."
+msgstr "Wenn die Taverne voll beliefert wird, kann sie eine Ration unter Verwendung von 2 Zutaten in durchschnittlich %1$s zubereiten. Wenn nur eine Zutat zur Verfügung steht kann sie eine Ration in durchschnittlich %2$s zubereiten."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Drinking Hall
 #: ../../data/tribes/initialization/frisians/units.lua:1982
@@ -15191,7 +15191,7 @@ msgid ""
 "on average. If only reindeers are needed by the economy, their production "
 "takes %3$s on average. If only fur is needed by the economy, its production "
 "takes %4$s on average."
-msgstr "Wenn dieses Gebäude voll beliefert wird und sowohl Rentiere als auch Fell von der Wirtschaft benötigt werden, dauert die Produktion eines Rentieres im Durchschnitt %1$sund ein Fell benötigt im Durchschnitt %2$s. Wenn nur Rentiere benötigt werden, dauert ihre Produktion im Durchschnitt %3$s. Wenn nur Fell benötigt wird, dauert seine Produktion im Durchschnitt %4$s."
+msgstr "Wenn dieses Gebäude voll beliefert wird und sowohl Rentiere als auch Fell von der Wirtschaft benötigt werden, dauert die Produktion eines Rentieres im Durchschnitt %1$s und ein Fell benötigt im Durchschnitt %2$s. Wenn nur Rentiere benötigt werden, dauert ihre Produktion im Durchschnitt %3$s. Wenn nur Fell benötigt wird, dauert seine Produktion im Durchschnitt %4$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Farm
 #: ../../data/tribes/initialization/frisians/units.lua:2025

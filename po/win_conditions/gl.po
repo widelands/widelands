@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-08-31 02:28+0000\n"
+"POT-Creation-Date: 2023-12-04 02:34+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
 "Last-Translator: GunChleoc, 2015\n"
 "Language-Team: Galician (http://app.transifex.com/widelands/widelands/language/gl/)\n"
@@ -382,6 +382,7 @@ msgstr ""
 msgid "The winner is %1$s with %2$s."
 msgstr ""
 
+#. TRANSLATORS: %s = x tree(s)
 #: ../../data/scripting/win_conditions/wood_gnome.lua:101
 #, lua-format
 msgid "The winners had %s."
