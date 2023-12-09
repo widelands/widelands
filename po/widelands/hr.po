@@ -23,7 +23,7 @@ msgstr ""
 #: ../../data/scripting/help.lua:110
 #, lua-format
 msgid "%2.1f%%"
-msgstr ""
+msgstr "%2.1f%% "
 
 #. TRANSLATORS: Short for "Not enough space"
 #: ../../data/scripting/infrastructure.lua:185
@@ -35,7 +35,7 @@ msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
-msgstr ""
+msgstr "Neke od vaših početnih građevina nisu imale dovoljno prostora i nisu izgrađene. Vi ste u nepovoljnom položaju zbog toga; razmotrite ponovno pokretanje ove mape s poštenim početnim uvjetima."
 
 #: ../../data/scripting/infrastructure.lua:187
 msgid "Not enough space"
@@ -49,7 +49,7 @@ msgstr "U blizini nema stijena"
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "Nema stijena blizu vaše početne pozicije. Stoga dobivate dodatne resurse za pokretanje vaše ekonomije."
 
 #: ../../data/scripting/infrastructure.lua:291
 msgid "Not enough trees nearby"
@@ -59,7 +59,7 @@ msgstr "U blizini nema dovoljno stabala"
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "Nema dovoljno stabala blizu vaše početne pozicije. Stoga dobivate dodatne resurse za pokretanje vašeg gospodarstva."
 
 #: ../../data/scripting/messages.lua:66 ../../data/scripting/messages.lua:68
 #: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:119
@@ -81,7 +81,7 @@ msgstr "Novi zadatak"
 #, lua-format
 msgctxt "sentence_separator"
 msgid "%s %s"
-msgstr ""
+msgstr "%s %s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -120,7 +120,7 @@ msgstr "%1$s i %2$s"
 #: ../../data/scripting/richtext_scenarios.lua:52
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:41
@@ -161,7 +161,7 @@ msgstr ""
 #: ../../src/base/format/float_node.h:33
 msgctxt "decimal_separator"
 msgid "."
-msgstr ""
+msgstr "."
 
 #. * TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably
@@ -169,7 +169,7 @@ msgstr ""
 #: ../../src/base/i18n.cc:427
 msgctxt "sentence_separator"
 msgid "%1% %2%"
-msgstr ""
+msgstr "%1% %2%"
 
 #. * TRANSLATORS: January. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -299,7 +299,7 @@ msgstr ""
 #: ../../src/wlapplication_options.cc:1034
 msgctxt "editor"
 msgid "Tools"
-msgstr ""
+msgstr "Alati"
 
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
@@ -314,7 +314,7 @@ msgstr "Pokaži / Sakrij"
 
 #: ../../src/editor/editorinteractive.cc:143
 msgid "Tool size"
-msgstr ""
+msgstr "Veličina alata"
 
 #: ../../src/editor/editorinteractive.cc:158
 #: ../../src/wlapplication_options.cc:465
@@ -643,7 +643,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launch_mpg.cc:320 ../../src/ui_fsmenu/main.cc:273
 #: ../../src/wlapplication.cc:1673
 msgid "Error"
-msgstr ""
+msgstr "Greška"
 
 #: ../../src/editor/editorinteractive.cc:1141 ../../src/ui_fsmenu/main.cc:257
 #: ../../src/wlapplication.cc:1675
@@ -682,7 +682,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:1224
 msgid "Loading world…"
-msgstr ""
+msgstr "Učitavanje svijeta ..."
 
 #: ../../src/editor/editorinteractive.cc:1403
 #, c-format
@@ -707,7 +707,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:1451
 msgid "Login Error"
-msgstr ""
+msgstr "Pogreška pri prijavi"
 
 #: ../../src/editor/editorinteractive.cc:1456
 msgid "Uploading Add-On…"
@@ -715,7 +715,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:1457
 msgid "Saving map…"
-msgstr ""
+msgstr "Spremanje mape…"
 
 #: ../../src/editor/editorinteractive.cc:1476
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:315
@@ -1136,7 +1136,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:361
 msgid "Map name:"
-msgstr ""
+msgstr "Naziv zemljovida:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:366
 msgid "Authors:"
@@ -1327,7 +1327,7 @@ msgstr "Zemljovid ID:"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:312
 #: ../../src/ui_fsmenu/campaigns.cc:53
 msgid "Default"
-msgstr ""
+msgstr "Zadano"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:282
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:316
@@ -1350,7 +1350,7 @@ msgstr "Pustopoljina"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:624
 msgid "Generating random map…"
-msgstr ""
+msgstr "Generiranje nasumične karte..."
 
 #. * TRANSLATORS: Window title. This is shown after a random map has been
 #. created in the
@@ -1429,17 +1429,17 @@ msgstr "bezimeno"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:173
 msgid "A file or directory with that name already exists."
-msgstr ""
+msgstr "Datoteka ili mapa s tim imenom već postoji."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:174
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:187
 msgid "Error Creating Directory!"
-msgstr ""
+msgstr "Pogreška prilikom stvaranja mape!"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:186
 #, c-format
 msgid "Error while creating directory ‘%s’."
-msgstr ""
+msgstr "Greška prilikom stvaranja mape ‘%s’."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:313
 #: ../../src/wui/game_main_menu_save_game.cc:286
@@ -1449,7 +1449,7 @@ msgstr "Datoteka s imenom ‘%s’ već postoji. Prebrisati?"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:345
 msgid "Saving the map…"
-msgstr ""
+msgstr "Spremanje karte..."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:363
 msgid "Map saved"
@@ -2009,11 +2009,11 @@ msgstr[2] ""
 #: ../../src/logic/editor_game_base.cc:236
 #, c-format
 msgid "Creating player %d…"
-msgstr ""
+msgstr "Stvaranje igrača %d..."
 
 #: ../../src/logic/editor_game_base.cc:306
 msgid "Postloading world and tribes…"
-msgstr ""
+msgstr "Naknadno učitavanje svijeta i plemena..."
 
 #: ../../src/logic/editor_game_base.cc:564
 msgid "Cleaning up for loading: Map objects (1/3)"
@@ -2063,7 +2063,7 @@ msgstr ""
 
 #: ../../src/logic/game.cc:1250
 msgid "Trade Offer"
-msgstr ""
+msgstr "Ponuda trgovine"
 
 #: ../../src/logic/game.cc:1252
 msgid "This market has received a new trade offer."
@@ -2073,12 +2073,12 @@ msgstr ""
 msgid ""
 "This game was saved using an older version of Widelands and cannot be loaded"
 " anymore, or it’s a new version that can’t be handled yet."
-msgstr ""
+msgstr "Ova igra je spremljena koristeći stariju verziju Widelandsa i više je nije moguće učitati, ili je nova verzija koja još nije podržana."
 
 #: ../../src/logic/generic_save_handler.cc:221
 #: ../../src/logic/generic_save_handler.cc:225
 msgid "File successfully saved!"
-msgstr ""
+msgstr "Datoteka uspješno spremljena!"
 
 #: ../../src/logic/generic_save_handler.cc:226
 #, c-format
@@ -2260,7 +2260,7 @@ msgstr ""
 #. experience'.
 #: ../../src/logic/map_objects/tribes/production_program.cc:585
 msgid "a worker needs experience"
-msgstr ""
+msgstr "radniku je potrebno iskustvo"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
 #. need no experience'.
@@ -2365,11 +2365,11 @@ msgstr ""
 #: ../../src/logic/map_objects/tribes/production_program.cc:1947
 #, c-format
 msgid "Completed %s"
-msgstr ""
+msgstr "Završeno %s"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:395
 msgid "(stopped)"
-msgstr ""
+msgstr "(zaustavljeno)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
@@ -2377,7 +2377,7 @@ msgstr ""
 #: ../../src/wui/building_statistics_menu.cc:722
 #, c-format
 msgid "%i%%"
-msgstr ""
+msgstr "%i%%"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:1195
 msgid "Can’t find any more resources!"
@@ -4910,7 +4910,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:381
 msgctxt "tx"
 msgid "Priority:"
-msgstr ""
+msgstr "Prioritet:"
 
 #. * TRANSLATORS: "Resource" here refers to the name of a translation unit
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:390
@@ -7114,7 +7114,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:231
 msgid "Charcoal"
-msgstr ""
+msgstr "Drveni ugljen"
 
 #: ../../src/wlapplication_options.cc:232
 msgid "Stone Mine"
@@ -9019,55 +9019,55 @@ msgstr ""
 #: ../../src/wui/info_panel.cc:454
 #, c-format
 msgid "%1$s · %2$s"
-msgstr ""
+msgstr "%1$s · %2$s"
 
 #. * TRANSLATORS: Gametime · Realtime · Gamespeed
 #: ../../src/wui/info_panel.cc:459
 #, c-format
 msgid "%1$s · %2$s · %3$s"
-msgstr ""
+msgstr "%1$s · %2$s · %3$s"
 
 #: ../../src/wui/inputqueuedisplay.cc:70
 msgid "Priority: Very Low"
-msgstr ""
+msgstr "Prioritet: Vrlo nizak"
 
 #: ../../src/wui/inputqueuedisplay.cc:72
 msgid "Priority: Low"
-msgstr ""
+msgstr "Prioritet: Nizak"
 
 #: ../../src/wui/inputqueuedisplay.cc:74
 msgid "Priority: Normal"
-msgstr ""
+msgstr "Prioritet: Normalan"
 
 #: ../../src/wui/inputqueuedisplay.cc:76
 msgid "Priority: High"
-msgstr ""
+msgstr "Prioritet: Visok"
 
 #: ../../src/wui/inputqueuedisplay.cc:78
 msgid "Priority: Very High"
-msgstr ""
+msgstr "Prioritet: Vrlo visok"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue
 #: ../../src/wui/inputqueuedisplay.cc:136
 msgid "Increase the number of wares you want to be stored here"
-msgstr ""
+msgstr "Povećajte broj proizvoda koje želite pohraniti ovdje"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue
 #: ../../src/wui/inputqueuedisplay.cc:138
 msgid "Decrease the number of wares you want to be stored here"
-msgstr ""
+msgstr "Smanjite broj proizvoda koje želite pohraniti ovdje"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue -
 #. option explanation
 #: ../../src/wui/inputqueuedisplay.cc:142
 msgid "Hold down Shift to increase all ware types at the same time"
-msgstr ""
+msgstr "Držite pritisnutu tipku Shift kako biste istovremeno povećali sve vrste robe"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue -
 #. option explanation
 #: ../../src/wui/inputqueuedisplay.cc:145
 msgid "Hold down Shift to decrease all ware types at the same time"
-msgstr ""
+msgstr "Pritisnite tipku Shift da biste istovremeno smanjili sve vrste robe"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue -
 #. option explanation
