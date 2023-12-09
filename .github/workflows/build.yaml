@@ -37,8 +37,7 @@ jobs:
             - '.github/scripts/install_deps.sh' # calls install-dependencies.sh
             - '.github/workflows/build_codecheck.yaml'
           clang_tidy:
-            # this job does not compile, but uses cmake, install-dependencies.sh and source files
-            - &compile_and_dependencies
+            - &src_cmake_dependencies
               - 'CMakeLists.txt'
               - 'cmake/**'
               - 'src/**'
@@ -50,7 +49,7 @@ jobs:
             - '.github/scripts/install_deps.sh' # calls install-dependencies.sh
             - '.github/workflows/build_clang_tidy.yaml'
           test_suite:
-            - *compile_and_dependencies
+            - *src_cmake_dependencies
             - 'data/**' # TODO(aDiscoverer or ...) list what needs to be checked
             - 'regression_test.py'
             - 'test/**'
@@ -58,7 +57,7 @@ jobs:
             - '.github/workflows/build_testsuite.yaml'
           inst_windows_msvc:
             - &installer
-              - *compile_and_dependencies
+              - *src_cmake_dependencies
               - 'data/**'
               - 'po/**'
             # doc/** maybe for some installers TODO(unknown)
