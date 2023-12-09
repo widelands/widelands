@@ -46,6 +46,9 @@
 --    :arg create_carriers: If this is :const:`true` carriers are created for
 --       the roads. Otherwise no carriers will be created.
 --    :type create_carriers: :class:`boolean`
+--
+--    Note that this returns ``nil``. If you need the created :class:`~wl.map.Road`
+--    you have to use :meth:`wl.bases.PlayerBase.place_road`
 
 function connected_road(roadtype, p, start, cmd, g_create_carriers)
    create_carriers = true

@@ -734,18 +734,18 @@ int LuaPlayerBase::place_flag(lua_State* L) {  // NOLINT - can not be made const
 }
 
 /* RST
-   .. method:: place_road(roadtype, start_field, dirs, ...[, force=false])
+   .. method:: place_road(roadtype, start_flag, dirs, ...[, force=false])
 
-      Start a road or waterway at the given field, then walk the **dirs**
+      Start a road or waterway at the given flag, then walk the **dirs**
       given. Places a flag at the last field.
 
       See also the convenience function :meth:`connected_road` in *infrastructure.lua*.
 
       :arg roadtype: One of: :const:`"normal"`, :const:`"busy"`, or :const:`"waterway"`.
       :type roadtype: :class:`string`
-      :arg start_field: The field where to start the road.
-      :type start_field: :class:`~wl.map.Field`
-      :arg dirs: Comma separated list of directions of the road. Allowed values for each
+      :arg start_flag: The flag where to start the road.
+      :type start_flag: :class:`~wl.map.Flag`
+      :arg dirs: Comma separated directions of the road. Allowed values for each
         direction are either:
 
                * directions: :const:`"r"`, :const:`"l"`, :const:`"br"`, :const:`"bl"`,
@@ -757,6 +757,16 @@ int LuaPlayerBase::place_flag(lua_State* L) {  // NOLINT - can not be made const
          in the way are removed and land is conquered. Defaults to :const:`false`.
       :type force: :class:`boolean`
       :returns: The :class:`~wl.map.Road` created.
+
+      Example:
+
+      .. code-block:: lua
+
+         local plr = wl.Game().players[1]
+         local start_field = wl.Game().map:get_field(20,10)
+         local start_flag = pl:place_flag(start_field, true)
+         plr:place_road("normal", start_flag, "br", "br", "r", "r", true)
+
 */
 int LuaPlayerBase::place_road(lua_State* L) {  // NOLINT - can not be made const
 	Widelands::EditorGameBase& egbase = get_egbase(L);
