@@ -167,9 +167,7 @@ class WidelandsTestCase(unittest.TestCase):
         # Catch instabilities with SDL in CI environment
         if self.widelands_returncode == 2:
             print("SDL initialization failed. TEST SKIPPED.")
-            with open(stdout_filename, 'r') as stdout_file:
-                for line in stdout_file.readlines():
-                    print(line.strip())
+            out(stdout)
             out("  SKIPPED.\n")
         else:
             common_msg = "Analyze the files in {} to see why this test case failed. Stdout is\n  {}\n\nstdout:\n{}".format(
