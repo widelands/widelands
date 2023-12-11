@@ -204,7 +204,8 @@ class WidelandsTestCase(unittest.TestCase):
             self.assertTrue("All Tests passed" in stdout,
                             CommonFailMsg("Not all tests pass."))
             self.assertFalse("lua_errors.cc" in stdout,
-                             CommonFailMsg("Not all tests pass."))
+                             CommonFailMsg("Not all tests pass (output has error message)."))
+                             # mainly happens if error code is ignored
             self.longMessage = longMessage  # reset to combined messages for next call
             out("  done.\n")
         if self.keep_output_around:
