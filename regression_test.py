@@ -164,11 +164,13 @@ class WidelandsTestCase(unittest.TestCase):
 
     def verify_success(self, stdout, stdout_filename):
         out("    Elapsed time: {}\n".format(self.duration))
+        skipped_msg = None
         # Catch instabilities with SDL in CI environment
         if self.widelands_returncode == 2:
             print("SDL initialization failed. TEST SKIPPED.")
             out(stdout)
             out("  SKIPPED.\n")
+            skipped_msg = "SDL initialization failed"
         else:
             common_msg = "Analyze the files in {} to see why this test case failed. Stdout is\n  {}\n\nstdout:\n{}".format(
                     self.run_dir, stdout_filename, stdout)
@@ -190,6 +192,8 @@ class WidelandsTestCase(unittest.TestCase):
             out("  done.\n")
         if self.keep_output_around:
             out("    stdout: {}\n".format(stdout_filename))
+        if skipped_msg:
+            self.skipTest(skipped_msg)  # reports this clearly and aborts this TestCase here
 
 def parse_args():
     p = argparse.ArgumentParser(description=
