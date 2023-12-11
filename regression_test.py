@@ -176,11 +176,11 @@ class WidelandsTestCase(unittest.TestCase):
                     self.run_dir, stdout_filename, stdout)
             if self.wl_timed_out:
                 out("  TIMED OUT.\n")
-                self.assertTrue(False, "The test timed out. {}".format(common_msg))
+                self.fail("The test timed out. {}".format(common_msg))
             if self.widelands_returncode == 1 and self.ignore_error_code:
                 out("  IGNORING error code 1\n")
             else:
-                self.assertTrue(self.widelands_returncode == 0,
+                self.assertEqual(self.widelands_returncode, 0,
                     "Widelands exited abnormally. {}".format(common_msg)
                 )
             self.assertTrue("All Tests passed" in stdout,
