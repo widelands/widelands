@@ -183,12 +183,15 @@ class WidelandsTestCase(unittest.TestCase):
                 self.assertEqual(self.widelands_returncode, 0,
                     "Widelands exited abnormally. {}".format(common_msg)
                 )
+            longMessage = self.longMessage
+            self.longMessage = False  # only show custom message
             self.assertTrue("All Tests passed" in stdout,
                 "Not all tests pass. {}.".format(common_msg)
             )
             self.assertFalse("lua_errors.cc" in stdout,
                 "Not all tests pass. {}.".format(common_msg)
             )
+            self.longMessage = longMessage  # reset to combined messages for next call
             out("  done.\n")
         if self.keep_output_around:
             out("    stdout: {}\n".format(stdout_filename))
