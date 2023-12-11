@@ -168,7 +168,11 @@ class WidelandsTestCase(unittest.TestCase):
         # Catch instabilities with SDL in CI environment
         if self.widelands_returncode == 2:
             print("SDL initialization failed. TEST SKIPPED.")
+            if os.getenv("GITHUB_ACTION"):
+                print("\n::group::stdout")  # visual group for stdout on github
             out(stdout)
+            if os.getenv("GITHUB_ACTION"):
+                print("\n::endgroup::")
             out("  SKIPPED.\n")
             skipped_msg = "SDL initialization failed"
         else:
@@ -179,9 +183,13 @@ class WidelandsTestCase(unittest.TestCase):
                     self_msg.intro = intro
 
                 def __str__(self_msg):
+                    start_stdout = end_stdout = ""
+                    if os.getenv("GITHUB_ACTION"):
+                        start_stdout = "::group::stdout\n"
+                        end_stdout = "::endgroup::\n"
                     return (f"{self_msg.intro} Analyze the files in {self.run_dir} to see why "
                             f"this test case failed. Stdout is\n  {stdout_filename}\n\n"
-                            f"stdout:\n{stdout}")
+                            f"{start_stdout}stdout:\n{stdout}{end_stdout}")
 
             if self.wl_timed_out:
                 out("  TIMED OUT.\n")
