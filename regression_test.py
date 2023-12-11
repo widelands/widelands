@@ -172,25 +172,31 @@ class WidelandsTestCase(unittest.TestCase):
             out("  SKIPPED.\n")
             skipped_msg = "SDL initialization failed"
         else:
-            common_msg = "Analyze the files in {} to see why this test case failed. Stdout is\n  {}\n\nstdout:\n{}".format(
-                    self.run_dir, stdout_filename, stdout)
+            class CommonFailMsg:
+                """To only create error message on failure"""
+
+                def __init__(self_msg, intro):
+                    self_msg.intro = intro
+
+                def __str__(self_msg):
+                    return (f"{self_msg.intro} Analyze the files in {self.run_dir} to see why "
+                            f"this test case failed. Stdout is\n  {stdout_filename}\n\n"
+                            f"stdout:\n{stdout}")
+
             if self.wl_timed_out:
                 out("  TIMED OUT.\n")
-                self.fail("The test timed out. {}".format(common_msg))
+                self.fail(CommonFailMsg("The test timed out."))
             if self.widelands_returncode == 1 and self.ignore_error_code:
                 out("  IGNORING error code 1\n")
             else:
                 self.assertEqual(self.widelands_returncode, 0,
-                    "Widelands exited abnormally. {}".format(common_msg)
-                )
+                                 CommonFailMsg("Widelands exited abnormally."))
             longMessage = self.longMessage
             self.longMessage = False  # only show custom message
             self.assertTrue("All Tests passed" in stdout,
-                "Not all tests pass. {}.".format(common_msg)
-            )
+                            CommonFailMsg("Not all tests pass."))
             self.assertFalse("lua_errors.cc" in stdout,
-                "Not all tests pass. {}.".format(common_msg)
-            )
+                             CommonFailMsg("Not all tests pass."))
             self.longMessage = longMessage  # reset to combined messages for next call
             out("  done.\n")
         if self.keep_output_around:
