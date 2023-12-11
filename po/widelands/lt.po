@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-12-04 02:34+0000\n"
+"POT-Creation-Date: 2023-12-11 02:34+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Tachionas <tachionexas@gmail.com>, 2020-2021,2023\n"
 "Language-Team: Lithuanian (http://app.transifex.com/widelands/widelands/language/lt/)\n"
@@ -27,36 +27,36 @@ msgid "%2.1f%%"
 msgstr "%2.1f%%"
 
 #. TRANSLATORS: Short for "Not enough space"
-#: ../../data/scripting/infrastructure.lua:185
+#: ../../data/scripting/infrastructure.lua:188
 msgid "No Space"
 msgstr "Nėra vietos"
 
-#: ../../data/scripting/infrastructure.lua:186
+#: ../../data/scripting/infrastructure.lua:189
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr ""
 
-#: ../../data/scripting/infrastructure.lua:187
+#: ../../data/scripting/infrastructure.lua:190
 msgid "Not enough space"
 msgstr "Nepakanka vietos"
 
-#: ../../data/scripting/infrastructure.lua:285
+#: ../../data/scripting/infrastructure.lua:288
 msgid "No rocks nearby"
 msgstr "Netoliese nėra akmens"
 
-#: ../../data/scripting/infrastructure.lua:285
+#: ../../data/scripting/infrastructure.lua:288
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
 msgstr "Šalia tavo pradinės padėties nėra akmens. Todėl ekonomikos vystymui gauni papildomų išteklių."
 
-#: ../../data/scripting/infrastructure.lua:291
+#: ../../data/scripting/infrastructure.lua:294
 msgid "Not enough trees nearby"
 msgstr "Netoliese nepakankamai medžių"
 
-#: ../../data/scripting/infrastructure.lua:291
+#: ../../data/scripting/infrastructure.lua:294
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."
