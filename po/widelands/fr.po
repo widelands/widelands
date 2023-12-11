@@ -3673,7 +3673,7 @@ msgstr "Bleu"
 
 #: ../../src/ui_basic/color_chooser.cc:484
 msgid "Remove from favorites"
-msgstr ""
+msgstr "Retirer des favoris"
 
 #: ../../src/ui_basic/color_chooser.cc:484
 #: ../../src/ui_fsmenu/addons/packager.cc:109
@@ -3684,7 +3684,7 @@ msgstr "–"
 
 #: ../../src/ui_basic/color_chooser.cc:491
 msgid "Add current color to favorites"
-msgstr ""
+msgstr "Ajouter la couleur actuelle aux favoris"
 
 #: ../../src/ui_basic/dropdown.cc:111
 msgctxt "dropdown"
