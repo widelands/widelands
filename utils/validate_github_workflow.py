@@ -4,8 +4,11 @@
 validates github workflow files
 
 - checks if the called local workflows exist
-- checks if the files checked for changes exist
+- checks if the files checked for changes (by https://github.com/dorny/paths-filter) exist
 - checks if listed files are in valid yaml string (happens while loading it)
+
+For a troughout test the author recommends https://github.com/rhysd/actionlint/
+this tool just does some additional tests.
 '''
 
 import glob
