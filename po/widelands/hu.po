@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-10-02 02:28+0000\n"
+"POT-Creation-Date: 2023-12-11 02:34+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: zone <z-one@freemail.hu>, 2015\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
@@ -36,43 +36,43 @@ msgid "%2.1f%%"
 msgstr "%2.1f%%"
 
 #. TRANSLATORS: Short for "Not enough space"
-#: ../../data/scripting/infrastructure.lua:185
+#: ../../data/scripting/infrastructure.lua:188
 msgid "No Space"
 msgstr "Nincs hely"
 
-#: ../../data/scripting/infrastructure.lua:186
+#: ../../data/scripting/infrastructure.lua:189
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr "Néhány kezdőépületed nem fért el, és ezért nem lettek megépítve. Emiatt hátrányba kerültél; fontold meg a pálya újrakezdését az egyenlő esélyek érdekében."
 
-#: ../../data/scripting/infrastructure.lua:187
+#: ../../data/scripting/infrastructure.lua:190
 msgid "Not enough space"
 msgstr "Nincs elég hely"
 
-#: ../../data/scripting/infrastructure.lua:285
+#: ../../data/scripting/infrastructure.lua:288
 msgid "No rocks nearby"
 msgstr "Nincsenek a közelben kövek"
 
-#: ../../data/scripting/infrastructure.lua:285
+#: ../../data/scripting/infrastructure.lua:288
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
 msgstr "A kezdőpozíciód közelében nincsenek kövek, ezért több nyersanyagot kapsz a gazdaságod beindításához."
 
-#: ../../data/scripting/infrastructure.lua:291
+#: ../../data/scripting/infrastructure.lua:294
 msgid "Not enough trees nearby"
 msgstr "Nincs elég fa a közelben"
 
-#: ../../data/scripting/infrastructure.lua:291
+#: ../../data/scripting/infrastructure.lua:294
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."
 msgstr "A kezdőpozíciód közelében nincs elég fa, ezért több nyersanyagot kapsz a gazdaságod beindításához."
 
 #: ../../data/scripting/messages.lua:66 ../../data/scripting/messages.lua:68
-#: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:117
+#: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:119
 msgid "Status"
 msgstr "Állapot"
 
@@ -1411,7 +1411,7 @@ msgid "Computer %u"
 msgstr "%u. számítógép"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:736
-#: ../../src/wui/game_summary.cc:115
+#: ../../src/wui/game_summary.cc:117
 msgid "Player"
 msgstr "Játékos"
 
@@ -3759,7 +3759,7 @@ msgstr "%1$s<br>(%2$s)"
 
 #: ../../src/ui_basic/window.cc:101 ../../src/ui_fsmenu/about.cc:41
 #: ../../src/ui_fsmenu/crash_report.cc:70
-#: ../../src/ui_fsmenu/crash_report.cc:163
+#: ../../src/ui_fsmenu/crash_report.cc:164
 #: ../../src/ui_fsmenu/mousewheel_report.cc:74
 #: ../../src/wui/watchwindow.cc:110
 msgid "Close"
@@ -3789,7 +3789,7 @@ msgstr "A Widelands névjegye"
 msgid "Lua Error"
 msgstr "Lua Hiba"
 
-#: ../../src/ui_fsmenu/about.cc:59 ../../src/ui_fsmenu/tech_info.cc:131
+#: ../../src/ui_fsmenu/about.cc:59 ../../src/ui_fsmenu/tech_info.cc:189
 msgid "Technical Info"
 msgstr "Műszaki információk"
 
@@ -4436,7 +4436,7 @@ msgid "Author:"
 msgstr "Szerző:"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:171
-#: ../../src/ui_fsmenu/tech_info.cc:71
+#: ../../src/ui_fsmenu/tech_info.cc:123
 msgid "Version:"
 msgstr "Verzió:"
 
@@ -5316,22 +5316,22 @@ msgid "Crash Report Details"
 msgstr "Összeomlási jelentés részletei"
 
 #: ../../src/ui_fsmenu/crash_report.cc:61
-#: ../../src/ui_fsmenu/crash_report.cc:151
+#: ../../src/ui_fsmenu/crash_report.cc:152
 msgid "Open link"
 msgstr "Hivatkozás megnyitása"
 
 #: ../../src/ui_fsmenu/crash_report.cc:63
-#: ../../src/ui_fsmenu/crash_report.cc:153
+#: ../../src/ui_fsmenu/crash_report.cc:154
 msgid "Copy link"
 msgstr "Hivatkozás másolása"
 
 #: ../../src/ui_fsmenu/crash_report.cc:67
-#: ../../src/ui_fsmenu/crash_report.cc:158
+#: ../../src/ui_fsmenu/crash_report.cc:159
 msgid "Copy report"
 msgstr "Jelentés másolása"
 
 #: ../../src/ui_fsmenu/crash_report.cc:68
-#: ../../src/ui_fsmenu/crash_report.cc:158
+#: ../../src/ui_fsmenu/crash_report.cc:159
 msgid "Copy the full report to the clipboard"
 msgstr "A teljes jelentés vágólapra másolása"
 
@@ -5343,19 +5343,21 @@ msgstr "Összeomlási jelentés"
 #, c-format
 msgid ""
 "It looks like Widelands crashed the last time you ran it, but a backtrace "
-"for debugging was automatically generated. Please provide the report to the "
-"Widelands Development Team under %s so we can fix the problem."
-msgstr "Úgy tűnik, a Widelands összeomlott a legutóbbi használatkor, de a hibakereséshez sikerült elmenteni az összeomlás adatait. Kérjük, küldd el a jelentést a Widelands fejlesztői csapatának a %s szerint, hogy ki tudjuk javítani a hibát!"
+"for debugging was automatically generated. Please provide the report along "
+"with a description of what was going on in the game and what you did last "
+"before the crash to the Widelands Development Team under %s so we can fix "
+"the problem."
+msgstr ""
 
-#: ../../src/ui_fsmenu/crash_report.cc:144
+#: ../../src/ui_fsmenu/crash_report.cc:145
 msgid "Show details…"
 msgstr "Részletek megjelenítése…"
 
-#: ../../src/ui_fsmenu/crash_report.cc:144
+#: ../../src/ui_fsmenu/crash_report.cc:145
 msgid "View the detailed crash report"
 msgstr "A teljes összeomlási jelentés megtekintése"
 
-#: ../../src/ui_fsmenu/crash_report.cc:161
+#: ../../src/ui_fsmenu/crash_report.cc:162
 msgid "Remind me later"
 msgstr "Elhalasztás későbbre"
 
@@ -6326,7 +6328,7 @@ msgstr "Típus"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:249
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:357
-#: ../../src/wui/game_chat_panel.cc:449 ../../src/wui/game_summary.cc:116
+#: ../../src/wui/game_chat_panel.cc:449 ../../src/wui/game_summary.cc:118
 msgid "Team"
 msgstr "Csapat"
 
@@ -6740,87 +6742,95 @@ msgstr "Szerzők"
 msgid "You"
 msgstr "Te"
 
-#: ../../src/ui_fsmenu/tech_info.cc:75
+#: ../../src/ui_fsmenu/tech_info.cc:127
 msgid "MacOS"
 msgstr "MacOS"
 
-#: ../../src/ui_fsmenu/tech_info.cc:77
+#: ../../src/ui_fsmenu/tech_info.cc:129
 msgid "Windows (64 bit)"
 msgstr "Windows (64 bites)"
 
-#: ../../src/ui_fsmenu/tech_info.cc:79
+#: ../../src/ui_fsmenu/tech_info.cc:131
 msgid "Windows (32 bit)"
 msgstr "Windows (32 bites)"
 
-#: ../../src/ui_fsmenu/tech_info.cc:81
+#: ../../src/ui_fsmenu/tech_info.cc:133
 msgid "Linux"
 msgstr "Linux"
 
-#: ../../src/ui_fsmenu/tech_info.cc:83
+#: ../../src/ui_fsmenu/tech_info.cc:135
 msgid "FreeBSD"
 msgstr "FreeBSD"
 
-#: ../../src/ui_fsmenu/tech_info.cc:85
+#: ../../src/ui_fsmenu/tech_info.cc:137
 msgid "Unix"
 msgstr "Unix"
 
-#: ../../src/ui_fsmenu/tech_info.cc:87
+#: ../../src/ui_fsmenu/tech_info.cc:139
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: ../../src/ui_fsmenu/tech_info.cc:89
+#: ../../src/ui_fsmenu/tech_info.cc:141
 msgid "Operating System:"
 msgstr "Operációs rendszer:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:90
+#: ../../src/ui_fsmenu/tech_info.cc:142
 msgid "Compiled with SDL version:"
 msgstr "Fordításkori SDL verzió:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:97
+#: ../../src/ui_fsmenu/tech_info.cc:149
 msgid "Using SDL version:"
 msgstr "Használt SDL verzió:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:102
+#: ../../src/ui_fsmenu/tech_info.cc:154
 msgid "SDL video driver:"
 msgstr "SDL képernyő meghajtó:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:106
+#: ../../src/ui_fsmenu/tech_info.cc:158
 msgid "SDL horizontal scroll:"
 msgstr "SDL vízszintes görgetés:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:107
+#: ../../src/ui_fsmenu/tech_info.cc:159
 msgid "assuming inverted"
 msgstr "fordítottnak észleltük"
 
-#: ../../src/ui_fsmenu/tech_info.cc:111
+#: ../../src/ui_fsmenu/tech_info.cc:163
 msgid "Locale:"
 msgstr "Nyelv:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:112
+#: ../../src/ui_fsmenu/tech_info.cc:164
 msgid "Home Directory:"
 msgstr "Saját Widelands könyvtár:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:113
+#: ../../src/ui_fsmenu/tech_info.cc:165
 msgid "Configuration File:"
 msgstr "Beállító fájl:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:114
+#: ../../src/ui_fsmenu/tech_info.cc:166
 msgid "Data Directory:"
 msgstr "Adatfájlok helye:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:115
+#: ../../src/ui_fsmenu/tech_info.cc:167
 msgid "Locale Directory:"
 msgstr "Fordítások helye:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:117
+#: ../../src/ui_fsmenu/tech_info.cc:169
 msgid "Executable Directory:"
 msgstr "Program helye:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:159
+#: ../../src/ui_fsmenu/tech_info.cc:172
+msgid "Enabled Add-Ons:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:174
+msgid "Inactive Installed Add-Ons:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:233
 msgid "Copy"
 msgstr "Másolás"
 
-#: ../../src/ui_fsmenu/tech_info.cc:160
+#: ../../src/ui_fsmenu/tech_info.cc:234
 msgid "Copy the technical report to the clipboard"
 msgstr "Műszaki információk másolása a vágólapra"
 
@@ -7517,7 +7527,7 @@ msgstr "Játék mentése"
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wlapplication_options.cc:873
 #: ../../src/wui/game_client_disconnected.cc:112
-#: ../../src/wui/game_summary.cc:106 ../../src/wui/interactive_gamebase.cc:193
+#: ../../src/wui/game_summary.cc:108 ../../src/wui/interactive_gamebase.cc:193
 msgid "Exit Game"
 msgstr "Kilépés a játékból"
 
@@ -8793,74 +8803,74 @@ msgstr[1] "A kijelölt %d üzenet archiválása"
 msgid "Archive selected message"
 msgstr "Kijelölt üzenet archiválása"
 
-#: ../../src/wui/game_summary.cc:37
+#: ../../src/wui/game_summary.cc:39
 msgid "Game over"
 msgstr "Vége a játéknak"
 
-#: ../../src/wui/game_summary.cc:57
+#: ../../src/wui/game_summary.cc:59
 msgid "Player Info:"
 msgstr "Játékos infó:"
 
-#: ../../src/wui/game_summary.cc:90
+#: ../../src/wui/game_summary.cc:92
 msgid "Elapsed time:"
 msgstr "Eltelt idő:"
 
-#: ../../src/wui/game_summary.cc:102
+#: ../../src/wui/game_summary.cc:104
 msgid "Continue playing"
 msgstr "Játék folytatása"
 
-#: ../../src/wui/game_summary.cc:118
+#: ../../src/wui/game_summary.cc:120
 msgid "Time"
 msgstr "Idő"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. lost.
-#: ../../src/wui/game_summary.cc:222
+#: ../../src/wui/game_summary.cc:219
 msgid "Lost"
 msgstr "Vesztett"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. won.
-#: ../../src/wui/game_summary.cc:226
+#: ../../src/wui/game_summary.cc:223
 msgid "Won"
 msgstr "Nyert"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. resigned.
-#: ../../src/wui/game_summary.cc:235
+#: ../../src/wui/game_summary.cc:232
 msgid "Resigned"
 msgstr "Feladta"
 
 #. * TRANSLATORS: This is shown in the game summary when we don't know
 #. * TRANSLATORS: if the player has lost or won.
-#: ../../src/wui/game_summary.cc:240
+#: ../../src/wui/game_summary.cc:237
 msgctxt "player_won"
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: ../../src/wui/game_summary.cc:253
+#: ../../src/wui/game_summary.cc:249
 msgid "You won!"
 msgstr "Nyertél!"
 
-#: ../../src/wui/game_summary.cc:255
+#: ../../src/wui/game_summary.cc:251
 msgid "You lost."
 msgstr "Vesztettél."
 
-#: ../../src/wui/game_summary.cc:259
+#: ../../src/wui/game_summary.cc:255
 #, c-format
 msgid "%s won!"
 msgstr "%s nyert!"
 
-#: ../../src/wui/game_summary.cc:261
+#: ../../src/wui/game_summary.cc:257
 #, c-format
 msgid "Team %u won!"
 msgstr "A(z) %u csapat nyert!"
 
-#: ../../src/wui/game_summary.cc:318
+#: ../../src/wui/game_summary.cc:311
 msgid "Score"
 msgstr "Pontszám"
 
-#: ../../src/wui/game_summary.cc:320
+#: ../../src/wui/game_summary.cc:313
 msgid "Team Score"
 msgstr "Csapat pontszám"
 
