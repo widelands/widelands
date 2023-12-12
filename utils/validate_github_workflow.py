@@ -27,9 +27,18 @@ class CheckGithubYaml:
     def __init__(self):
         self.failures = 0
 
+    def _check_glob_path_exists(self, file, retry=True):
+        try:
+            return next(glob.iglob(file, recursive=True))
+        except StopIteration:
+            if retry and '**' in file:
+                # because **.xx is not interpretet as *.xx in any subdir
+                return self._check_glob_path_exists(file.replace('**', '**/*'), False)
+            return False
+
     def _check_path_valid(self, file, ref):
         exists = False
-        if os.path.exists(file) or glob.glob(file):
+        if os.path.exists(file) or self._check_glob_path_exists(file):
             exists = True
             if file_in_git(file):
                 return
