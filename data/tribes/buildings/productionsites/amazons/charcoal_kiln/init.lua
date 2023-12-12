@@ -13,10 +13,9 @@ wl.Descriptions():new_productionsite_type {
       name = "amazons_rare_tree_kiln",
       enhancement_cost = {
          granite = 3,
-         quartz = 3,
+         quartz = 1,
       },
       enhancement_return_on_dismantle = {
-         granite = 1,
          quartz = 1,
       }
    },
@@ -62,8 +61,8 @@ wl.Descriptions():new_productionsite_type {
          descname = _("producing charcoal"),
          actions = {
             "return=skipped unless economy needs coal",
-            "consume=log:6",
             -- Make it a little more efficient than other tribes
+            "consume=log:5",
             "sleep=duration:15s",
             "animate=working duration:85s", -- Charcoal fires will burn for some days in real life
             "produce=coal"

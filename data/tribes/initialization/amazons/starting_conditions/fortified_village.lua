@@ -39,7 +39,7 @@ init = {
          water = 20,
          cassavaroot = 15,
          ration = 5,
-         coal = 5,
+         coal = 12,
          gold = 1,
          hammer = 10,
          shovel = 5,
@@ -73,6 +73,7 @@ init = {
             amazons_trainer = 3,
             amazons_tapir= 5,
             amazons_woodcutter_master = 3,
+            amazons_charcoal_master = 1,
          },
          soldiers = {
             [{0,0,0,0}] = 33,
