@@ -40,12 +40,15 @@ class CheckGithubYaml:
         exists = False
         if os.path.exists(file) or self._check_glob_path_exists(file):
             exists = True
-            if file_in_git(file):
+            if '!(' in file and ')' in file:
+                # replace !(xx|yy) by * for git
+                l = file.find('!(')
+                r = file.rfind(')')
+                gfile = file[0:l] + '*' + file[r+1:]
+            else:
+                gfile = file
+            if file_in_git(gfile):
                 return
-        elif '!(' in file:
-            # TODO replace r'!([^()]*)' with '*', maybe check each part (separated by |)
-            print('can not check extended glob', file, 'from', ref)
-            return
         if exists:
             print('untracked file:', file, 'from', ref)
         else:
