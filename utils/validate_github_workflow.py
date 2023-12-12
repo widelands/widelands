@@ -26,6 +26,7 @@ def file_in_git(file):
 class CheckGithubYaml:
     def __init__(self):
         self.failures = 0
+        self.checked_files = 0
 
     def _check_glob_path_exists(self, file, retry=True):
         try:
@@ -86,9 +87,11 @@ class CheckGithubYaml:
                     # check use of shared workflow
                     ref = {'file': path, 'in': 'jobs.uses'}
                     self._check_path_valid(j_data['uses'], ref)
+            self.checked_files += 1
         elif w['runs'].get('using') == 'composite':
             # it is a composite action
             self._check_steps(w['runs'].get('steps', []), 'runs', path)
+            self.checked_files += 1
 
 
 if __name__ == '__main__':
@@ -96,4 +99,9 @@ if __name__ == '__main__':
     for arg in sys.argv[1:]:
         check.run(arg)
     if check.failures:
+        print(f'{check.failures} failures in {check.checked_files} files 🟧')
         sys.exit(1)
+    elif check.checked_files == 0:
+        print('no file checked ⁉️')
+    else:
+        print(f'no failure in {check.checked_files} file(s) 😀')
