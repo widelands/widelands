@@ -33,7 +33,9 @@ class CheckGithubYaml:
 
     def _check_glob_path_exists(self, file, retry=True):
         try:
-            return next(glob.iglob(file, recursive=True))
+            m1 = next(glob.iglob(file, recursive=True))
+            # because xxx/** just returns xxx/ without checking:
+            return '**' not in file or os.path.exists(m1)
         except StopIteration:
             if retry and '**' in file:
                 # because **.xx is not interpretet as *.xx in any subdir
@@ -44,15 +46,17 @@ class CheckGithubYaml:
         exists = False
         if os.path.exists(file) or self._check_glob_path_exists(file):
             exists = True
-            if '!(' in file and ')' in file:
-                # replace !(xx|yy) by * for git
-                l = file.find('!(')
-                r = file.rfind(')')
-                gfile = file[0:l] + '*' + file[r+1:]
-            else:
-                gfile = file
-            if file_in_git(gfile):
+            if file_in_git(file):
                 return
+        elif '!(' in file and ')' in file:
+            # replace !(xx|yy) by * for matching
+            l = file.find('!(')
+            r = file.rfind(')')
+            mfile = file[0:l] + '*' + file[r+1:]
+            if self._check_glob_path_exists(mfile):
+                exists = True
+                if file_in_git(mfile):
+                    return
         if exists:
             print('untracked file:', file, 'from', ref)
         else:
