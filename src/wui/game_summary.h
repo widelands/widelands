@@ -19,9 +19,6 @@
 #ifndef WL_WUI_GAME_SUMMARY_H
 #define WL_WUI_GAME_SUMMARY_H
 
-#include <vector>
-
-#include "logic/widelands.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/icon.h"
@@ -33,6 +30,7 @@
 class InteractiveGameBase;
 namespace Widelands {
 class Game;
+struct PlayerEndStatus;
 }  // namespace Widelands
 
 /// Shows an ingame summary window on game end
@@ -46,7 +44,7 @@ private:
 	void fill_data();
 	void stop_clicked();
 	void continue_clicked();
-	void player_selected(uint32_t entry_index);
+	void update_selection();
 	std::string parse_player_info(const std::string& info);
 	bool compare_status(uint32_t, uint32_t) const;
 
@@ -61,8 +59,7 @@ private:
 	UI::Icon* widelands_icon_;
 	UI::Button* continue_button_;
 	UI::Button* stop_button_;
-	UI::Table<uintptr_t const>* players_table_;
-	std::vector<Widelands::PlayerNumber> playernumbers_;
+	UI::Table<const Widelands::PlayerEndStatus&>* players_table_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_SUMMARY_H
