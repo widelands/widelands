@@ -40,7 +40,10 @@ struct WarehouseSupply;
 
 class WarehouseDescr : public BuildingDescr {
 public:
-	WarehouseDescr(const std::string& init_descname, const LuaTable& t, const std::vector<std::string>& attribs, Descriptions& descriptions);
+	WarehouseDescr(const std::string& init_descname,
+	               const LuaTable& t,
+	               const std::vector<std::string>& attribs,
+	               Descriptions& descriptions);
 	~WarehouseDescr() override = default;
 
 	[[nodiscard]] Building& create_object() const override;

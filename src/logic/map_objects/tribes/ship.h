@@ -53,7 +53,9 @@ struct NoteShip {
 
 class ShipDescr : public BobDescr {
 public:
-	ShipDescr(const std::string& init_descname, const LuaTable& t, const std::vector<std::string>& attribs);
+	ShipDescr(const std::string& init_descname,
+	          const LuaTable& t,
+	          const std::vector<std::string>& attribs);
 	~ShipDescr() override = default;
 
 	[[nodiscard]] Bob& create_object() const override;

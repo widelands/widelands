@@ -32,7 +32,8 @@ struct Waterway;
 class FerryFleetDescr : public MapObjectDescr {
 public:
 	FerryFleetDescr(char const* const init_name, char const* const init_descname)
-	   : MapObjectDescr(MapObjectType::FERRY_FLEET, init_name, init_descname, std::vector<std::string>()) {
+	   : MapObjectDescr(
+	        MapObjectType::FERRY_FLEET, init_name, init_descname, std::vector<std::string>()) {
 	}
 	~FerryFleetDescr() override = default;
 

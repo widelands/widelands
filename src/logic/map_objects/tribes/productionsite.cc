@@ -216,7 +216,8 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          const LuaTable& table,
                                          const std::vector<std::string>& attribs,
                                          Descriptions& descriptions)
-   : ProductionSiteDescr(init_descname, MapObjectType::PRODUCTIONSITE, table, attribs, descriptions) {
+   : ProductionSiteDescr(
+        init_descname, MapObjectType::PRODUCTIONSITE, table, attribs, descriptions) {
 }
 
 /**

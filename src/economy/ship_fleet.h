@@ -39,7 +39,8 @@ class ShipFleetYardInterface;
 class ShipFleetDescr : public MapObjectDescr {
 public:
 	ShipFleetDescr(char const* const init_name, char const* const init_descname)
-	   : MapObjectDescr(MapObjectType::SHIP_FLEET, init_name, init_descname, std::vector<std::string>()) {
+	   : MapObjectDescr(
+	        MapObjectType::SHIP_FLEET, init_name, init_descname, std::vector<std::string>()) {
 	}
 	~ShipFleetDescr() override = default;
 
