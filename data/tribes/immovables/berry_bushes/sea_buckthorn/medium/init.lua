@@ -2,7 +2,7 @@ push_textdomain("tribes")
 
 local dirname = path.dirname (__file__)
 
-local terrain_affinity = include(dirname .. "../terrain_affinity.lua")
+include(dirname .. "../terrain_affinity.lua")
 
 wl.Descriptions():new_immovable_type {
    name = "berry_bush_sea_buckthorn_medium",
