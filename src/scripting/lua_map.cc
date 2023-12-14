@@ -2611,31 +2611,6 @@ int LuaImmovableDescription::get_size(lua_State* L) {
 	return 1;
 }
 
-/*
- ==========================================================
- METHODS
- ==========================================================
- */
-
-/* RST
-   .. method:: has_attribute(attribute_name)
-
-      Returns :const:`true` if the immovable has the attribute, :const:`false` otherwise.
-
-      :arg attribute_name: The attribute that we are checking for.
-      :type attribute_name: :class:`string`
-
-*/
-int LuaImmovableDescription::has_attribute(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-	const Widelands::MapObjectDescr::AttributeIndex attribute_id =
-	   Widelands::MapObjectDescr::get_attribute_id(luaL_checkstring(L, 2));
-	lua_pushboolean(L, static_cast<int>(get()->has_attribute(attribute_id)));
-	return 1;
-}
-
 /* RST
    .. method:: probability_to_grow(terrain_description)
 
