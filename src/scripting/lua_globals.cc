@@ -383,7 +383,7 @@ static int L_npgettext(lua_State* L) {
 
       :type script: :class:`string`
       :arg script: The filename relative to the root of the data directory.
-      :returns: table returned by included script or an empty table
+      :returns: The table returned by the included script, or an empty table if the script does not return anything.
          .. versionchanged:: 1.2  It returned nil before
 */
 static int L_include(lua_State* L) {
