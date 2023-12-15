@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-12-04 02:34+0000\n"
+"POT-Creation-Date: 2023-12-11 02:34+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2023\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -29,36 +29,36 @@ msgid "%2.1f%%"
 msgstr "%2.1f%%"
 
 #. TRANSLATORS: Short for "Not enough space"
-#: ../../data/scripting/infrastructure.lua:185
+#: ../../data/scripting/infrastructure.lua:188
 msgid "No Space"
 msgstr "Keen Platz"
 
-#: ../../data/scripting/infrastructure.lua:186
+#: ../../data/scripting/infrastructure.lua:189
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr "Welke vun dienen Anfangs-Husen sünd nich baut worden, wiel keen Rüümte daar is. Daarum hest du enen Nadeel un sallst di överleggen, of du de Kaart noch eenmal gerecht anfangen wullt."
 
-#: ../../data/scripting/infrastructure.lua:187
+#: ../../data/scripting/infrastructure.lua:190
 msgid "Not enough space"
 msgstr "Nich noog Platz"
 
-#: ../../data/scripting/infrastructure.lua:285
+#: ../../data/scripting/infrastructure.lua:288
 msgid "No rocks nearby"
 msgstr "Keene Stenen dicht bi"
 
-#: ../../data/scripting/infrastructure.lua:285
+#: ../../data/scripting/infrastructure.lua:288
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
 msgstr "In de Naberskupp vun diener Anfangs-Stee gifft dat keene Stenen. Daarum kriggst du mehr Mineraale, um diene Weertskupp uptobauen."
 
-#: ../../data/scripting/infrastructure.lua:291
+#: ../../data/scripting/infrastructure.lua:294
 msgid "Not enough trees nearby"
 msgstr "Nich genoog Bomen dicht bi"
 
-#: ../../data/scripting/infrastructure.lua:291
+#: ../../data/scripting/infrastructure.lua:294
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."

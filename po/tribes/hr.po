@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-11-18 02:30+0000\n"
+"POT-Creation-Date: 2023-11-27 02:33+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Ivan Bižaca <biza@malilosinj.info>, 2015,2023\n"
 "Language-Team: Croatian (http://app.transifex.com/widelands/widelands/language/hr/)\n"
@@ -1297,7 +1297,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/charcoal_kiln/init.lua:8
 msgctxt "amazons_building"
 msgid "Charcoal Kiln"
-msgstr ""
+msgstr "Karbunica"
 
 #. TRANSLATORS: Completed/Skipped/Did not start producing charcoal because ...
 #: ../../data/tribes/buildings/productionsites/amazons/charcoal_kiln/init.lua:50
@@ -2033,7 +2033,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Charcoal Kiln"
-msgstr ""
+msgstr "Karbunica"
 
 #. TRANSLATORS: Completed/Skipped/Did not start producing coal because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/init.lua:53
@@ -2693,7 +2693,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/init.lua:8
 msgctxt "barbarians_building"
 msgid "Charcoal Kiln"
-msgstr ""
+msgstr "Karbunica"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:8
@@ -2992,7 +2992,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:8
 msgctxt "barbarians_building"
 msgid "Ranger’s Hut"
-msgstr ""
+msgstr "Koliba za šumara"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:8
@@ -3159,7 +3159,7 @@ msgstr "Pivar"
 #: ../../data/tribes/buildings/productionsites/empire/charcoal_kiln/init.lua:8
 msgctxt "empire_building"
 msgid "Charcoal Kiln"
-msgstr ""
+msgstr "Karbunica"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:8
@@ -3718,7 +3718,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:8
 msgctxt "frisians_building"
 msgid "Charcoal Burner’s House"
-msgstr ""
+msgstr "Ugljenarova kuća"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a charcoal stack
 #. because ...
@@ -3748,7 +3748,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:8
 msgctxt "frisians_building"
 msgid "Charcoal Kiln"
-msgstr ""
+msgstr "Karbunica"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:8
@@ -5072,7 +5072,7 @@ msgstr ""
 #: ../../data/tribes/immovables/pond/burning/init.lua:8
 msgctxt "immovable"
 msgid "Burning Charcoal Stack"
-msgstr ""
+msgstr "Goreća vuglenica"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/pond/coal/init.lua:8
@@ -8379,7 +8379,7 @@ msgstr "Ugljen"
 #: ../../data/tribes/wares/cocoa_beans/init.lua:8
 msgctxt "ware"
 msgid "Cocoa Beans"
-msgstr ""
+msgstr "Kakao zrna"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/corn/init.lua:8
@@ -8620,25 +8620,25 @@ msgstr ""
 #: ../../data/tribes/wares/log/init.lua:8
 msgctxt "ware"
 msgid "Log"
-msgstr ""
+msgstr "Drvo"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/machete/init.lua:8
 msgctxt "ware"
 msgid "Machete"
-msgstr ""
+msgstr "Mačeta"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/marble/init.lua:8
 msgctxt "ware"
 msgid "Marble"
-msgstr ""
+msgstr "Mramor"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/marble_column/init.lua:8
 msgctxt "ware"
 msgid "Marble Column"
-msgstr ""
+msgstr "Mramorni stup"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/mead/init.lua:8
@@ -8650,7 +8650,7 @@ msgstr ""
 #: ../../data/tribes/wares/meal/init.lua:8
 msgctxt "ware"
 msgid "Meal"
-msgstr ""
+msgstr "Obrok"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/meat/init.lua:8
@@ -8698,7 +8698,7 @@ msgstr "Kamenolom"
 #: ../../data/tribes/wares/ration/init.lua:8
 msgctxt "ware"
 msgid "Ration"
-msgstr ""
+msgstr "Porcija"
 
 #. TRANSLATORS: This is a ware name used in lists of wares. Used for thatching
 #. roofs and as a fiber for weaving cloth, fishing nets etc.
@@ -8711,7 +8711,7 @@ msgstr "Trstika"
 #: ../../data/tribes/wares/rope/init.lua:8
 msgctxt "ware"
 msgid "Rope"
-msgstr ""
+msgstr "Uže"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/rubber/init.lua:8
@@ -8777,7 +8777,7 @@ msgstr "Dimljeno meso"
 #: ../../data/tribes/wares/snack/init.lua:8
 msgctxt "ware"
 msgid "Snack"
-msgstr ""
+msgstr "Objed"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear/init.lua:8
@@ -8807,7 +8807,7 @@ msgstr "Teško koplje"
 #: ../../data/tribes/wares/spear_stone_tipped/init.lua:8
 msgctxt "ware"
 msgid "Stone-tipped Spear"
-msgstr ""
+msgstr "Koplje s kamenim vrhom"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear_war/init.lua:8
@@ -8831,13 +8831,13 @@ msgstr "Paukova svila"
 #: ../../data/tribes/wares/spidercloth/init.lua:8
 msgctxt "ware"
 msgid "Spidercloth"
-msgstr ""
+msgstr "Paukovina"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/stone_bowl/init.lua:8
 msgctxt "ware"
 msgid "Stone Bowl"
-msgstr ""
+msgstr "Kameni lonac"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/sword_broad/init.lua:8
@@ -8939,13 +8939,13 @@ msgstr "Pšenica"
 #: ../../data/tribes/wares/wine/init.lua:8
 msgctxt "ware"
 msgid "Wine"
-msgstr ""
+msgstr "Vino"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/wool/init.lua:8
 msgctxt "ware"
 msgid "Wool"
-msgstr ""
+msgstr "Vuna"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/builder/init.lua:8
@@ -8957,7 +8957,7 @@ msgstr ""
 #: ../../data/tribes/workers/amazons/carrier/init.lua:8
 msgctxt "amazons_worker"
 msgid "Carrier"
-msgstr ""
+msgstr "Teklić"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/cassava_farmer/init.lua:8
@@ -8969,7 +8969,7 @@ msgstr ""
 #: ../../data/tribes/workers/amazons/charcoal_burner/init.lua:8
 msgctxt "amazons_worker"
 msgid "Charcoal Burner"
-msgstr ""
+msgstr "Ugljenar"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/cocoa_farmer/init.lua:8
@@ -9191,7 +9191,7 @@ msgstr "Dostavljač"
 #: ../../data/tribes/workers/atlanteans/charcoal_burner/init.lua:8
 msgctxt "atlanteans_worker"
 msgid "Charcoal Burner"
-msgstr ""
+msgstr "Ugljenar"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/farmer/init.lua:8
@@ -9395,7 +9395,7 @@ msgstr "Uzgajivač goveda"
 #: ../../data/tribes/workers/barbarians/charcoal_burner/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Charcoal Burner"
-msgstr ""
+msgstr "Ugljenar"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/farmer/init.lua:8
@@ -9581,7 +9581,7 @@ msgstr "Dostavljač"
 #: ../../data/tribes/workers/empire/charcoal_burner/init.lua:8
 msgctxt "empire_worker"
 msgid "Charcoal Burner"
-msgstr ""
+msgstr "Ugljenar"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/donkey/init.lua:8
@@ -9815,7 +9815,7 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/charcoal_burner/init.lua:8
 msgctxt "frisians_worker"
 msgid "Charcoal Burner"
-msgstr ""
+msgstr "Ugljenar"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/claydigger/init.lua:8

@@ -4,6 +4,7 @@
 # Translators:
 # adrien vigneron <adrien.v@ml1.net>, 2015-2016
 # Arnaud Lefort <zlitus@gmail.com>, 2018
+# Arthinet Balika, 2023
 # Atanase Albaran, 2021
 # Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
 # Benedikt Straub <benedikt-straub@web.de>, 2021
@@ -28,9 +29,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-12-04 02:34+0000\n"
+"POT-Creation-Date: 2023-12-11 02:34+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: David D, 2017-2018,2021-2023\n"
+"Last-Translator: Arthinet Balika, 2023\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -45,36 +46,36 @@ msgid "%2.1f%%"
 msgstr "%2.1f%%"
 
 #. TRANSLATORS: Short for "Not enough space"
-#: ../../data/scripting/infrastructure.lua:185
+#: ../../data/scripting/infrastructure.lua:188
 msgid "No Space"
 msgstr "Pas d'espace"
 
-#: ../../data/scripting/infrastructure.lua:186
+#: ../../data/scripting/infrastructure.lua:189
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr "Certains de vos bâtiments de départ n'ont pu être construits en raison du manque de place. Vous êtes désavantagé ; vous devriez envisager de redémarrer cette carte avec des conditions de départ équitables."
 
-#: ../../data/scripting/infrastructure.lua:187
+#: ../../data/scripting/infrastructure.lua:190
 msgid "Not enough space"
 msgstr "Espace insuffisant"
 
-#: ../../data/scripting/infrastructure.lua:285
+#: ../../data/scripting/infrastructure.lua:288
 msgid "No rocks nearby"
 msgstr "Pas de roches aux alentours"
 
-#: ../../data/scripting/infrastructure.lua:285
+#: ../../data/scripting/infrastructure.lua:288
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
 msgstr "Il n'y a pas de roches près de votre position de départ. Pour cette raison, vous recevrez des ressources bonus afin de démarrer votre économie."
 
-#: ../../data/scripting/infrastructure.lua:291
+#: ../../data/scripting/infrastructure.lua:294
 msgid "Not enough trees nearby"
 msgstr "Pas assez d'arbres aux alentours"
 
-#: ../../data/scripting/infrastructure.lua:291
+#: ../../data/scripting/infrastructure.lua:294
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."
@@ -3580,7 +3581,7 @@ msgstr "Le client %1$s n'a pas répondu depuis plus de %2$s."
 #: ../../src/network/network_gaming_messages.cc:77
 #, c-format
 msgid "Client %s has cheating features enabled!"
-msgstr ""
+msgstr "Le client%s a activé les fonctionnalités de triche !"
 
 #: ../../src/network/network_gaming_messages.cc:78
 #, c-format
@@ -3591,13 +3592,13 @@ msgstr "Le client %s triche !"
 #: ../../src/network/network_gaming_messages.cc:80
 #, c-format
 msgid "Cheating: Client %1$s now controls %2$s"
-msgstr ""
+msgstr "Triche : le client%1$s contrôle désormais%2$s"
 
 #. * TRANSLATORS: %1 and %2 are user and player names
 #: ../../src/network/network_gaming_messages.cc:82
 #, c-format
 msgid "Client %1$s is cheating, acting as %2$s!"
-msgstr ""
+msgstr "Le client%1$s triche, agissant comme %2$s!"
 
 #: ../../src/network/network_lan_promotion.cc:357
 msgid "Failed to use the local network!"
@@ -3672,7 +3673,7 @@ msgstr "Bleu"
 
 #: ../../src/ui_basic/color_chooser.cc:484
 msgid "Remove from favorites"
-msgstr ""
+msgstr "Retirer des favoris"
 
 #: ../../src/ui_basic/color_chooser.cc:484
 #: ../../src/ui_fsmenu/addons/packager.cc:109
@@ -3683,7 +3684,7 @@ msgstr "–"
 
 #: ../../src/ui_basic/color_chooser.cc:491
 msgid "Add current color to favorites"
-msgstr ""
+msgstr "Ajouter la couleur actuelle aux favoris"
 
 #: ../../src/ui_basic/dropdown.cc:111
 msgctxt "dropdown"
@@ -5351,31 +5352,31 @@ msgstr "Nom de la campagne"
 
 #: ../../src/ui_fsmenu/crash_report.cc:43
 msgid "Crash Report Details"
-msgstr ""
+msgstr "Détails du rapport d'incident"
 
 #: ../../src/ui_fsmenu/crash_report.cc:61
 #: ../../src/ui_fsmenu/crash_report.cc:152
 msgid "Open link"
-msgstr ""
+msgstr "Ouvrir le lien"
 
 #: ../../src/ui_fsmenu/crash_report.cc:63
 #: ../../src/ui_fsmenu/crash_report.cc:154
 msgid "Copy link"
-msgstr ""
+msgstr "Copier le lien"
 
 #: ../../src/ui_fsmenu/crash_report.cc:67
 #: ../../src/ui_fsmenu/crash_report.cc:159
 msgid "Copy report"
-msgstr ""
+msgstr "Copier le rapport"
 
 #: ../../src/ui_fsmenu/crash_report.cc:68
 #: ../../src/ui_fsmenu/crash_report.cc:159
 msgid "Copy the full report to the clipboard"
-msgstr ""
+msgstr "Copiez le rapport complet dans le presse-papiers"
 
 #: ../../src/ui_fsmenu/crash_report.cc:97
 msgid "Crash Report"
-msgstr ""
+msgstr "Rapport d'incident"
 
 #: ../../src/ui_fsmenu/crash_report.cc:135
 #, c-format
@@ -5385,19 +5386,19 @@ msgid ""
 "with a description of what was going on in the game and what you did last "
 "before the crash to the Widelands Development Team under %s so we can fix "
 "the problem."
-msgstr ""
+msgstr "Il semble que Widelands s'est planté la dernière fois que vous l'avez exécuté, mais une trace de débogage a été automatiquement générée. Veuillez fournir le rapport ainsi qu'une description de ce qui se passait dans le jeu et de ce que vous avez fait avant le crash à l'équipe de développement de Widelands sous %s afin que nous puissions résoudre le problème."
 
 #: ../../src/ui_fsmenu/crash_report.cc:145
 msgid "Show details…"
-msgstr ""
+msgstr "Afficher les détails…"
 
 #: ../../src/ui_fsmenu/crash_report.cc:145
 msgid "View the detailed crash report"
-msgstr ""
+msgstr "Afficher le rapport d'accident détaillé"
 
 #: ../../src/ui_fsmenu/crash_report.cc:162
 msgid "Remind me later"
-msgstr ""
+msgstr "Rappelle-moi plus tard"
 
 #: ../../src/ui_fsmenu/helpwindow.cc:46 ../../src/wui/helpwindow.cc:48
 #, c-format
@@ -6538,7 +6539,7 @@ msgstr "Compresse les fichiers de donnés de Widelands (cartes, replays et sauve
 
 #: ../../src/ui_fsmenu/options.cc:278
 msgid "Keep history of sent chat messages in a file"
-msgstr ""
+msgstr "Conserver l'historique des messages de discussion envoyés dans un fichier"
 
 #: ../../src/ui_fsmenu/options.cc:289
 #: ../../src/wui/interactive_gamebase.cc:275
@@ -6858,11 +6859,11 @@ msgstr "Dossier exécutable :"
 
 #: ../../src/ui_fsmenu/tech_info.cc:172
 msgid "Enabled Add-Ons:"
-msgstr ""
+msgstr "Modules complémentaires activés :"
 
 #: ../../src/ui_fsmenu/tech_info.cc:174
 msgid "Inactive Installed Add-Ons:"
-msgstr ""
+msgstr "Modules complémentaires installés inactifs :"
 
 #: ../../src/ui_fsmenu/tech_info.cc:233
 msgid "Copy"
@@ -7249,11 +7250,11 @@ msgstr "Prendre capture d'écran"
 
 #: ../../src/wlapplication_options.cc:397
 msgid "Open the Debug Console (developer tool)"
-msgstr ""
+msgstr "Ouvrez la console de débogage (outil de développement)"
 
 #: ../../src/wlapplication_options.cc:402
 msgid "Toggle Cheat Mode (developer tool)"
-msgstr ""
+msgstr "Basculer le mode de triche (outil de développement)"
 
 #: ../../src/wlapplication_options.cc:412
 msgid "Load"
@@ -9298,7 +9299,7 @@ msgstr "%1$s (%2$s) (%3$s)"
 
 #: ../../src/wui/interactive_gamebase.cc:656
 msgid "Remaining construction costs:"
-msgstr ""
+msgstr "Coûts des travaux restants :"
 
 #. * TRANSLATORS: Title for the statistics menu button in the game
 #: ../../src/wui/interactive_player.cc:187

@@ -981,7 +981,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:513
 msgid "Thron looks worried…"
-msgstr ""
+msgstr "Thron izgleda zabrinuto..."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:515
@@ -989,19 +989,19 @@ msgid ""
 "The winter is upon us. Many of us are suffering from the cold, yet we must "
 "endure. The day we may return cannot be far anymore – it must not be far "
 "anymore."
-msgstr ""
+msgstr "Zima je nad nama. Mnogi od nas pate od hladnoće, ali moramo izdržati. Dan kada ćemo se vratiti ne može biti daleko – ne smije biti daleko."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:518
 msgid ""
 "I prayed that it might get warmer again, as I prayed that the war would "
 "finally come to an end."
-msgstr ""
+msgstr "Molio sam se da će ponovno postati toplije, i također molio sam se da će rat napokon završiti."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:521
 msgid "So far, it seems that neither prayer was fulfilled."
-msgstr ""
+msgstr "Za sada mi se čini da ni jedna od tih molitva nije ispunjena."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:525
 msgid "A friendly village has joined us!"

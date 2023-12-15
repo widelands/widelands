@@ -4,7 +4,7 @@
 # 
 # Translators:
 # Raymond Vetter, 2017
-# Jonas Richardsen <jonas.richardsen@isdas.de>, 2017
+# 1dd713b44d53c6f200eff6c2cb59aa8a_24534f2 <a51069abad5b85f84df96b034560114b_616796>, 2017
 # Elisabeth Jäger, 2018
 # Wuzzy <Wuzzy@disroot.org>, 2022
 # Simon Heimberg, 2023
