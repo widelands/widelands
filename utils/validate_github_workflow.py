@@ -76,9 +76,9 @@ class CheckGithubYaml:
 
     def _check_filter_files(self, files: iter, ref: dict):
         for file in files:
-            if type(file) == list:
+            if isinstance(file, list):
                 self._check_filter_files(file, ref)
-            elif type(file) == dict:
+            elif isinstance(file, dict):
                 self._check_filter_files(file.values(), ref)
             else:
                 self._check_glob_path_valid(file, ref)
