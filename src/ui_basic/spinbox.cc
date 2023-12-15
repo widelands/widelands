@@ -485,7 +485,7 @@ const std::string SpinBox::unit_text(int32_t value, const bool change) const {
             format(npgettext("spinbox_change", "%d minute", "%d minutes", value), value) :
             /** TRANSLATORS: The current value of a spinbox */
             format(ngettext("%d minute", "%d minutes", value), value);
-			// clang-format on
+			                 // clang-format on
 		}
 
 		if (value % 60 == 0) {
@@ -497,7 +497,7 @@ const std::string SpinBox::unit_text(int32_t value, const bool change) const {
             format(npgettext("spinbox_change", "%d hour", "%d hours", value), value) :
             /** TRANSLATORS: The current value of a spinbox */
             format(ngettext("%d hour", "%d hours", value), value);
-			// clang-format on
+			                 // clang-format on
 		}
 
 		const int32_t hours = value / 60;
