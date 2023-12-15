@@ -455,9 +455,9 @@ private:
 	uint16_t shipyards_count;
 	uint16_t expeditions_in_prep;
 	uint16_t expeditions_ready;
-	uint16_t expeditions_in_progress;
-	uint16_t warships_count;
-	uint16_t tradeships_count;
+	uint16_t expeditions_in_progress = 0;
+	uint16_t warships_count = 0;
+	uint16_t tradeships_count = 0;
 	bool idle_shipyard_stocked;
 	bool warship_needed{false};
 	bool tradeship_refit_needed{false};
