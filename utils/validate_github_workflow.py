@@ -42,7 +42,7 @@ class CheckGithubYaml:
                 return self._check_glob_path_exists(file.replace('**', '**/*'), False)
             return False
 
-    def _check_path_valid(self, file, ref):
+    def _check_glob_path_valid(self, file, ref):
         exists = False
         if os.path.exists(file) or self._check_glob_path_exists(file):
             exists = True
@@ -57,6 +57,17 @@ class CheckGithubYaml:
                 exists = True
                 if file_in_git(mfile):
                     return
+        self._report_path_invalid(file, exists, ref)
+
+    def _check_path_valid(self, file, ref):
+        exists = False
+        if os.path.exists(file):
+            exists = True
+            if file_in_git(file):
+                return True
+        self._report_path_invalid(file, exists, ref)
+
+    def _report_path_invalid(self, file, exists, ref):
         if exists:
             print('untracked file:', file, 'from', ref)
         else:
@@ -70,7 +81,7 @@ class CheckGithubYaml:
             elif type(file) == dict:
                 self._check_filter_files(file.values(), ref)
             else:
-                self._check_path_valid(file, ref)
+                self._check_glob_path_valid(file, ref)
 
     def _check_steps(self, steps: iter, yaml_path: str, path: str):
         for step in steps:
