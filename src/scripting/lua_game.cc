@@ -175,8 +175,8 @@ int LuaPlayer::get_allowed_buildings(lua_State* L) {
       and it will be reflected in the game. To add a new item, use :meth:`add_objective`.
 
       .. note:: The actual implementation of objectives has a single list that is shared
-      by all players, so it's not possible to have different objectives for different
-      players.
+         by all players, so it's not possible to have different objectives for different
+         players.
 */
 int LuaPlayer::get_objectives(lua_State* L) {
 	lua_newtable(L);
@@ -652,7 +652,7 @@ int LuaPlayer::forbid_buildings(lua_State* L) {
       if an Objective with the same name is already registered.
 
       .. note:: Objectives are shared by all players, so it's not possible to have
-      different objectives for different players.
+         different objectives for different players.
 
       :arg name: The name of the objective. Has to be unique.
       :type name: :class:`string`
@@ -1283,7 +1283,7 @@ void LuaObjective::__unpersist(lua_State* L) {
       :attr:`wl.game.Player.objectives` with :attr:`name` as key.
 
       .. note:: In spite of accessing them through :class:`~wl.game.Player`, Objectives
-      are actually shared by all players.
+         are actually shared by all players.
 */
 int LuaObjective::get_name(lua_State* L) {
 	const Widelands::Objective& o = get(L, get_game(L));
