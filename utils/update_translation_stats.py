@@ -54,6 +54,9 @@ def generate_translation_stats(po_dir, output_file):
         if os.path.isdir(subdir):
             subdirs.append(subdir)
 
+    def joinrow(a_row):
+        return ', '.join(v for v in a_row.values() if v is not None)
+
     if True:  # TODO(aDiscoverer) delete, just kept for code review
         proc = subprocess.Popen(
             ['pocount', '--csv'] + subdirs,
@@ -98,8 +101,8 @@ def generate_translation_stats(po_dir, output_file):
                     sys.exit(1)
                 locale_stats[locale] = entry
             elif 'ERROR' in next(iter(row.values())):
-                print('\nError running pocount:\n' + ', '.join(l2_row.values()) +
-                      ', '.join(l1_row.values()) + ', '.join(row.values()) +
+                print('\nError running pocount:\n  ' + joinrow(l2_row) +
+                      '\n  ' + joinrow(l1_row) + '\n  ' + joinrow(row) +
                       '\nAborted creating translation statistics.')
                 return 1
             l2_row = l1_row
@@ -107,7 +110,7 @@ def generate_translation_stats(po_dir, output_file):
         proc.wait(1)
         if proc.returncode != 0:
             print('Failed to run pocount:\n  FILES: ' + ' '.join(subdirs[0:2]) +
-                  ' ...\n  ' + ', '.join(l2_row.values()) + '  ' + ', '.join(l1_row.values()))
+                  ' ...\n  ' + joinrow(l2_row) + '\n  ' + joinrow(l1_row))
             return 1
 
     print('\n\nLocale\tTotal\tTranslated')
