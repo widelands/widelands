@@ -174,7 +174,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	}
 
 	assert(tradeships_count >= expeditions_in_progress);
-	bool ship_free = tradeships_count - expeditions_in_progress - ports_count > 0;
+	bool ship_free = tradeships_count - expeditions_in_progress - ports_count / 3 > 0;
 
 	/* Now we decide whether we have enough ships or need to build another:
 	 * - We always need at least one ship in transport mode
@@ -225,7 +225,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	}
 
 	if ((static_cast<int>(ports_finished_count) * 2 - warships_count) > 0 &&
-	    (tradeships_count - expeditions_in_progress - ports_count) > 1) {
+	    (tradeships_count - expeditions_in_progress - ports_count / 3) > 1) {
 		warship_needed = true;
 	}
 	if (!ship_free && warships_count > 0) {
