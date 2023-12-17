@@ -96,8 +96,8 @@ void LuaInterface::interpret_string(const std::string& cmd) {
 }
 
 std::unique_ptr<LuaTable> LuaInterface::run_script(const std::string& path,
-                                                   const bool no_pop_table) {
-	return ::run_script(lua_state_, g_fs->fix_cross_file(path), g_fs, no_pop_table);
+                                                   const bool keep_lua_table) {
+	return ::run_script(lua_state_, g_fs->fix_cross_file(path), g_fs, keep_lua_table);
 }
 
 std::unique_ptr<LuaTable> LuaInterface::empty_table() {

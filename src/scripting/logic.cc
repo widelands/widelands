@@ -52,11 +52,11 @@ void setup_for_editor_and_game(lua_State* L, Widelands::EditorGameBase* g) {
 
 // Can run script also from the map.
 std::unique_ptr<LuaTable>
-run_script_maybe_from_map(lua_State* L, const std::string& path, const bool no_pop_table = false) {
+run_script_maybe_from_map(lua_State* L, const std::string& path, const bool keep_lua_table = false) {
 	if (starts_with(path, "map:")) {
-		return run_script(L, path.substr(4), get_egbase(L).map().filesystem(), no_pop_table);
+		return run_script(L, path.substr(4), get_egbase(L).map().filesystem(), keep_lua_table);
 	}
-	return run_script(L, path, g_fs, no_pop_table);
+	return run_script(L, path, g_fs, keep_lua_table);
 }
 
 }  // namespace
@@ -74,8 +74,8 @@ LuaEditorInterface::LuaEditorInterface(Widelands::EditorGameBase* g)
 }
 
 std::unique_ptr<LuaTable> LuaEditorInterface::run_script(const std::string& script,
-                                                         const bool no_pop_table) {
-	return run_script_maybe_from_map(lua_state_, script, no_pop_table);
+                                                         const bool keep_lua_table) {
+	return run_script_maybe_from_map(lua_state_, script, keep_lua_table);
 }
 
 // Special handling of math.random.
@@ -230,6 +230,6 @@ std::unique_ptr<LuaTable> LuaGameInterface::get_hook(const std::string& name) {
 }
 
 std::unique_ptr<LuaTable> LuaGameInterface::run_script(const std::string& script,
-                                                       const bool no_pop_table) {
-	return run_script_maybe_from_map(lua_state_, script, no_pop_table);
+                                                       const bool keep_lua_table) {
+	return run_script_maybe_from_map(lua_state_, script, keep_lua_table);
 }
