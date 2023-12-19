@@ -49,9 +49,14 @@ class CheckGithubYaml:
             if file_in_git(file):
                 return True
         elif '!(' in file and ')' in file:
-            # replace !(xx|yy) by * for matching
+            # check each excluded part of !(xx|yy)
             l = file.find('!(')
             r = file.rfind(')')
+            ex_parts = file[l+2:r].split("|")
+            for ex_part in ex_parts:
+                mfile = file[0:l] + ex_part + file[r+1:]
+                self._check_glob_path_valid(mfile, ref)
+            # replace !(xx|yy) by * to check if any match exists
             mfile = file[0:l] + '*' + file[r+1:]
             if self._check_glob_path_exists(mfile):
                 exists = True
