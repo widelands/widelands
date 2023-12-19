@@ -11,6 +11,7 @@ For a troughout test the author recommends https://github.com/rhysd/actionlint/
 this tool just does some additional tests.
 '''
 
+import fnmatch
 import glob
 import io
 import os
@@ -33,14 +34,16 @@ class CheckGithubYaml:
 
     def _check_glob_path_exists(self, file, retry=True):
         try:
-            m1 = next(glob.iglob(file, recursive=True))
+            i = glob.iglob(file, recursive=True)
+            match1 = next(i)
             # because xxx/** just returns xxx/ without checking:
-            return '**' not in file or os.path.exists(m1)
+            if '**' not in file or os.path.exists(match1):
+                return match1, i
         except StopIteration:
             if retry and '**' in file:
                 # because **.xx is not interpretet as *.xx in any subdir
                 return self._check_glob_path_exists(file.replace('**', '**/*'), False)
-            return False
+        return None
 
     def _check_glob_path_valid(self, file, ref):
         exists = False
@@ -53,15 +56,24 @@ class CheckGithubYaml:
             l = file.find('!(')
             r = file.rfind(')')
             ex_parts = file[l+2:r].split("|")
+            ex_patterns = []
             for ex_part in ex_parts:
                 mfile = file[0:l] + ex_part + file[r+1:]
                 self._check_glob_path_valid(mfile, ref)
-            # replace !(xx|yy) by * to check if any match exists
+                ex_patterns.append(mfile)
+            # replace !(xx|yy) by * to check if any other match exists
             mfile = file[0:l] + '*' + file[r+1:]
-            if self._check_glob_path_exists(mfile):
-                exists = True
-                if file_in_git(mfile):
-                    return True
+            mi = self._check_glob_path_exists(mfile)
+            if mi:
+                match_path, i = mi
+                while match_path:
+                    for p in ex_patterns:
+                        if fnmatch.fnmatch(match_path, p):  # glob matches with fnmatch
+                            break
+                    else:
+                        if file_in_git(match_path):
+                            return True  # found another match
+                    match_path = next(i, None)
         self._report_path_invalid(file, exists, ref)
         return False
 
