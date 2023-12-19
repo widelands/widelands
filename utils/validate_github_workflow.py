@@ -47,7 +47,7 @@ class CheckGithubYaml:
         if os.path.exists(file) or self._check_glob_path_exists(file):
             exists = True
             if file_in_git(file):
-                return
+                return True
         elif '!(' in file and ')' in file:
             # replace !(xx|yy) by * for matching
             l = file.find('!(')
@@ -56,8 +56,9 @@ class CheckGithubYaml:
             if self._check_glob_path_exists(mfile):
                 exists = True
                 if file_in_git(mfile):
-                    return
+                    return True
         self._report_path_invalid(file, exists, ref)
+        return False
 
     def _check_path_valid(self, file, ref):
         exists = False
@@ -66,6 +67,7 @@ class CheckGithubYaml:
             if file_in_git(file):
                 return True
         self._report_path_invalid(file, exists, ref)
+        return False
 
     def _report_path_invalid(self, file, exists, ref):
         if exists:
