@@ -79,7 +79,18 @@ jobs:
     - name: Start xvfb
       run: |
         /sbin/start-stop-daemon --start --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 800x600x24 -ac +extension GLX
-        sleep 1m
+        # wait for start of xvfb:
+        i=0
+        while [ $(( i++ )) -lt 60 ]
+        do
+          sleep 1
+          if xset q 2>/dev/null >/dev/null # ask some config
+          then
+            break
+          fi
+        done
+        sleep 5 # some extra time
+        xset q >/dev/null # report error if it is still there
     - name: Website Binaries
       run: |
         # Ignore transient SDL errors (exit code 2)
