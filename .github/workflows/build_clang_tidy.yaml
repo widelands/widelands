@@ -44,5 +44,8 @@ jobs:
       with:
         path: build/clang-tidy-cache
         key: clang-tidy-cache-${{ github.sha }}
+    - name: show clang-tidy failures clearly on github
+      uses: ammaraskar/gcc-problem-matcher@0.2
+      # error format is the same as gcc
     - name: Report
       run: utils/check_clang_tidy_results.py clang-tidy.log
