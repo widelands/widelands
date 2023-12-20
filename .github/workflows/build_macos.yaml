@@ -20,11 +20,15 @@ jobs:
         export ICU_ROOT="$(brew --prefix icu4c)" && \
         export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH";
         ./install-dependencies.sh homebrew ccache dylibbundler
+    - name: show compiler failures clearly on github
+      uses: ammaraskar/gcc-problem-matcher@0.2
+      # clang reports problems the same way
     - name: Building
       run: |
         mkdir build_wl
         cd build_wl/
         ../utils/macos/build_app.sh "--${{ matrix.config }}" "--${{ matrix.compiler }}"
+        echo ::remove-matcher owner=gcc-problem-matcher:: # removes the problem matcher
         grep -v REVDETECT-BROKEN ../build/VERSION
         DMGPATH="$(pwd)"
         DMGFILE="$(ls *.dmg)"

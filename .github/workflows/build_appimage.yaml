@@ -18,6 +18,8 @@ jobs:
       uses: actions/checkout@v3
     - name: Installing dependencies
       run: sh ./.github/scripts/install_deps.sh
+    - name: show compiler failures clearly on github
+      uses: ammaraskar/gcc-problem-matcher@0.2
     - name: Compile
       run: |
         if [ "${CXX:0:1}" == "c" ]
@@ -35,6 +37,7 @@ jobs:
         popd
         mv AppDir/usr/bin/share/* AppDir/usr/share
         rmdir AppDir/usr/bin/share
+        echo ::remove-matcher owner=gcc-problem-matcher:: # removes the problem matcher
     - name: Build AppImage
       run: |
         wget -nv -c https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
