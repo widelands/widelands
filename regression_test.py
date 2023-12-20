@@ -65,12 +65,21 @@ def mark_failures(stdout, test_script):
     """
     map_dir = os.path.dirname(os.path.dirname(test_script))
     test_title = ""
+    test_titles = set()
     last_wl_err_idx = -2
     lines = stdout.split("\n")
     for idx, line in enumerate(lines):
         if line.startswith("#### Running "):
             m = re.search("'(.*)'", line)
             test_title = m.group(1) if m else line.split("Running", 1)[1].strip()
+            warn = ""
+            if "(0 Test" in line:  # to detect usage of wrong test variable (copy/paste)
+                warn = "no tests"
+            if test_title in test_titles:  # to detect copied test name
+                warn = (warn + ", duplicate test name").lstrip(", ")
+            test_titles.add(test_title)
+            if warn:
+                lines[idx] = f"::warning title={warn}::{line}"
         elif ":" in line and line.startswith(("FAIL: ", "ERROR: ", "WARNING: ")):
             data = line.split(':', 4)
             severity = "warning" if data[0] == "WARNING" else "error"
