@@ -52,6 +52,69 @@ def out(string):
     sys.stdout.write(string)
     sys.stdout.flush()
 
+def mark_failures(stdout, test_script):
+    """find failure lines in stdout of a test run and mark them
+
+    finds: failure lines and test summary from lunit, failure messages from widelands
+
+    Examples of detected lines are shown in code.
+
+    Failures are marked on github.
+
+    returns the modified stdout
+    """
+    map_dir = os.path.dirname(os.path.dirname(test_script))
+    test_title = ""
+    last_wl_err_idx = -2
+    lines = stdout.split("\n")
+    for idx, line in enumerate(lines):
+        if line.startswith("#### Running "):
+            m = re.search("'(.*)'", line)
+            test_title = m.group(1) if m else line.split("Running", 1)[1].strip()
+        elif ":" in line and line.startswith(("FAIL: ", "ERROR: ", "WARNING: ")):
+            data = line.split(':', 4)
+            severity = "warning" if data[0] == "WARNING" else "error"
+            if len(data) > 4 and data[3].isnumeric():
+                # format:
+                # FAIL: test_name: [string "scripting/flag.lua"]:22: expected 'flag' but was 'ware'!
+                test_name = data[1].lstrip()
+                m = re.search(r'"(.*)"', data[2])
+                if m:  # found file name in double quotes
+                    file = m.group(1)
+                else:
+                    m = re.search(r"\[(.*)\]", data[2])  # filename in brackets
+                    file = m.group(1) if m else data[2].strip()
+                if file.startswith("scripting"):
+                    file = f"{map_dir}/{file}"
+                line_no = data[3]
+                err = f"::{severity} file={file},line={line_no},title={test_title} - {test_name}::"
+            elif len(data) > 1:
+                # format:
+                # FAIL: test_road_crosses_another: Couldn't build flag!
+                test_name = data[1].lstrip()
+                # could try to find file and line in following traceback
+                err = f"::{severity} title={test_title} - {test_name}::"
+            else:
+                # format:
+                # WARNING: teardown() failed!
+                err = f"::{severity} title={test_title}::"
+            lines[idx] = err
+        elif "Assertions checked." in line and "Tests passed" in line:
+            # summary of lua test run
+            lines[idx] = "::info title=test summary::" + line
+        elif "] ERROR: " in line:
+            # error message of widelands, like:
+            # [00:00:00.000 real] ERROR: [] config:0: RealFSImpl::load: ...
+            if "could not open file for reading" in line and "/config" in line or \
+               test_title == "string.bformat test":
+                # no config is no problem, or triggered by testrun
+                continue
+            if last_wl_err_idx + 1 != idx:  # to mark each block only once
+                lines[idx] = "::info title=potential problem::" + line
+            last_wl_err_idx = idx
+    return "\n".join(lines) + "\n"
+
+
 class WidelandsTestCase(unittest.TestCase):
     do_use_random_directory = True
     path_to_widelands_binary = None
@@ -184,12 +247,14 @@ class WidelandsTestCase(unittest.TestCase):
 
                 def __str__(self_msg):
                     start_stdout = end_stdout = ""
+                    stdout_txt = stdout  # stdout is a nonlocal variable
                     if os.getenv("GITHUB_ACTION"):
                         start_stdout = "::group::stdout\n"
                         end_stdout = "::endgroup::\n"
+                        stdout_txt = mark_failures(stdout, self._test_script)
                     return (f"{self_msg.intro} Analyze the files in {self.run_dir} to see why "
                             f"this test case failed. Stdout is\n  {stdout_filename}\n\n"
-                            f"{start_stdout}stdout:\n{stdout}{end_stdout}")
+                            f"{start_stdout}stdout:\n{stdout_txt}{end_stdout}")
 
             if self.wl_timed_out:
                 out("  TIMED OUT.\n")
