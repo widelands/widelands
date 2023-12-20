@@ -49,6 +49,8 @@ jobs:
         arch: ${{ matrix.arch }}
         # Check https://github.com/actions/runner-images/blob/main/images/win/toolsets/toolset-2022.json for installed versions
         toolset: ${{ steps.prepare.outputs.toolset }}
+    - name: show compiler failures clearly on github
+      uses: ammaraskar/msvc-problem-matcher@0.2
     - name: Compiler
       env:
         VCPKG_ROOT: C:\vcpkg
