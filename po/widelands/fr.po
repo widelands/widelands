@@ -29,7 +29,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-12-11 02:34+0000\n"
+"POT-Creation-Date: 2023-12-16 02:32+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Arthinet Balika, 2023\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
@@ -661,12 +661,12 @@ msgstr "Êtes vous sûr de vouloir quitter l'éditeur ?"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:486
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
 #: ../../src/ui_fsmenu/launch_mpg.cc:320 ../../src/ui_fsmenu/main.cc:273
-#: ../../src/wlapplication.cc:1673
+#: ../../src/wlapplication.cc:1678
 msgid "Error"
 msgstr "Erreur"
 
 #: ../../src/editor/editorinteractive.cc:1141 ../../src/ui_fsmenu/main.cc:257
-#: ../../src/wlapplication.cc:1675
+#: ../../src/wlapplication.cc:1680
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -5352,31 +5352,31 @@ msgstr "Nom de la campagne"
 
 #: ../../src/ui_fsmenu/crash_report.cc:43
 msgid "Crash Report Details"
-msgstr ""
+msgstr "Détails du rapport d'incident"
 
 #: ../../src/ui_fsmenu/crash_report.cc:61
 #: ../../src/ui_fsmenu/crash_report.cc:152
 msgid "Open link"
-msgstr ""
+msgstr "Ouvrir le lien"
 
 #: ../../src/ui_fsmenu/crash_report.cc:63
 #: ../../src/ui_fsmenu/crash_report.cc:154
 msgid "Copy link"
-msgstr ""
+msgstr "Copier le lien"
 
 #: ../../src/ui_fsmenu/crash_report.cc:67
 #: ../../src/ui_fsmenu/crash_report.cc:159
 msgid "Copy report"
-msgstr ""
+msgstr "Copier le rapport"
 
 #: ../../src/ui_fsmenu/crash_report.cc:68
 #: ../../src/ui_fsmenu/crash_report.cc:159
 msgid "Copy the full report to the clipboard"
-msgstr ""
+msgstr "Copiez le rapport complet dans le presse-papiers"
 
 #: ../../src/ui_fsmenu/crash_report.cc:97
 msgid "Crash Report"
-msgstr ""
+msgstr "Rapport d'incident"
 
 #: ../../src/ui_fsmenu/crash_report.cc:135
 #, c-format
@@ -5386,19 +5386,19 @@ msgid ""
 "with a description of what was going on in the game and what you did last "
 "before the crash to the Widelands Development Team under %s so we can fix "
 "the problem."
-msgstr ""
+msgstr "Il semble que Widelands s'est planté la dernière fois que vous l'avez exécuté, mais une trace de débogage a été automatiquement générée. Veuillez fournir le rapport ainsi qu'une description de ce qui se passait dans le jeu et de ce que vous avez fait avant le crash à l'équipe de développement de Widelands sous %s afin que nous puissions résoudre le problème."
 
 #: ../../src/ui_fsmenu/crash_report.cc:145
 msgid "Show details…"
-msgstr ""
+msgstr "Afficher les détails…"
 
 #: ../../src/ui_fsmenu/crash_report.cc:145
 msgid "View the detailed crash report"
-msgstr ""
+msgstr "Afficher le rapport d'accident détaillé"
 
 #: ../../src/ui_fsmenu/crash_report.cc:162
 msgid "Remind me later"
-msgstr ""
+msgstr "Rappelle-moi plus tard"
 
 #: ../../src/ui_fsmenu/helpwindow.cc:46 ../../src/wui/helpwindow.cc:48
 #, c-format
@@ -6539,7 +6539,7 @@ msgstr "Compresse les fichiers de donnés de Widelands (cartes, replays et sauve
 
 #: ../../src/ui_fsmenu/options.cc:278
 msgid "Keep history of sent chat messages in a file"
-msgstr ""
+msgstr "Conserver l'historique des messages de discussion envoyés dans un fichier"
 
 #: ../../src/ui_fsmenu/options.cc:289
 #: ../../src/wui/interactive_gamebase.cc:275
@@ -6859,11 +6859,11 @@ msgstr "Dossier exécutable :"
 
 #: ../../src/ui_fsmenu/tech_info.cc:172
 msgid "Enabled Add-Ons:"
-msgstr ""
+msgstr "Modules complémentaires activés :"
 
 #: ../../src/ui_fsmenu/tech_info.cc:174
 msgid "Inactive Installed Add-Ons:"
-msgstr ""
+msgstr "Modules complémentaires installés inactifs :"
 
 #: ../../src/ui_fsmenu/tech_info.cc:233
 msgid "Copy"
@@ -6936,19 +6936,19 @@ msgstr "--xres/--yres, --maximized et --fullscreen ne peuvent pas être combiné
 msgid "Unknown command line parameter: %s"
 msgstr "Paramètre de ligne de commande inconnu: %s"
 
-#: ../../src/wlapplication.cc:1651
+#: ../../src/wlapplication.cc:1656
 msgid "Incompatible"
 msgstr "Incompatible"
 
-#: ../../src/wlapplication.cc:1688
+#: ../../src/wlapplication.cc:1693
 msgid "Game ended unexpectedly"
 msgstr "Le jeu s'est terminé inopinément "
 
-#: ../../src/wlapplication.cc:1688
+#: ../../src/wlapplication.cc:1693
 msgid "Unexpected error during the game"
 msgstr "Erreur inattendue pendant le jeu"
 
-#: ../../src/wlapplication.cc:1691
+#: ../../src/wlapplication.cc:1696
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6962,7 +6962,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Une erreur est survenue. Le message d'erreur est :\n\n%1$s\n\nS'il vous plait, reportez nous ce problème pour nous aider à améliorer Widelands. Vous trouverez les messages relatifs dans la sortie standard (stdout.txt sur windows). Vous utilisez la version %2$s.\nAjoutez cette information à ce rapport s'il vous plait.\n\nVoulez vous que Widelands essaye de créer une sauvegarde d'urgence ? Il est souvent – si ce n'est tout le temps – possible de la recharger et de continuer à jouer."
 
-#: ../../src/wlapplication.cc:1700
+#: ../../src/wlapplication.cc:1705
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6972,11 +6972,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Le jeu s'est terminé de manière innopiné pour la raison suivante:\n\n%s\n\nVoulez vous que Widelands essaye de créer un sauvegarde d'urgence? La plupart du temps – mais pas toujours – il est possible de la charger et de continuer à jouer."
 
-#: ../../src/wlapplication.cc:1734
+#: ../../src/wlapplication.cc:1739
 msgid "Emergency save failed"
 msgstr "Sauvegarde d'urgence échouée"
 
-#: ../../src/wlapplication.cc:1735
+#: ../../src/wlapplication.cc:1740
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -7250,11 +7250,11 @@ msgstr "Prendre capture d'écran"
 
 #: ../../src/wlapplication_options.cc:397
 msgid "Open the Debug Console (developer tool)"
-msgstr ""
+msgstr "Ouvrez la console de débogage (outil de développement)"
 
 #: ../../src/wlapplication_options.cc:402
 msgid "Toggle Cheat Mode (developer tool)"
-msgstr ""
+msgstr "Basculer le mode de triche (outil de développement)"
 
 #: ../../src/wlapplication_options.cc:412
 msgid "Load"
@@ -9299,7 +9299,7 @@ msgstr "%1$s (%2$s) (%3$s)"
 
 #: ../../src/wui/interactive_gamebase.cc:656
 msgid "Remaining construction costs:"
-msgstr ""
+msgstr "Coûts des travaux restants :"
 
 #. * TRANSLATORS: Title for the statistics menu button in the game
 #: ../../src/wui/interactive_player.cc:187
