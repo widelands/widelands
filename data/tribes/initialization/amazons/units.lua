@@ -1399,9 +1399,13 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("amazons_building", "Harvests rare trees in the surrounding area. Delivers ironwood, balsa and rubber."),
             performance = {
                -- TRANSLATORS: Performance helptext for an Amazon production site: Rare Tree Cutter's Hut, part 1
-               pgettext("amazons_building", "This building can produce one rare wood between %1$s and %2$s, depending on how far the woodcutter has to walk. If all kinds of rare tree are available within her work area, then one of each kind is produced between %3$s and %4$s."):bformat(format_seconds(47), format_minutes_seconds(1, 27), format_minutes_seconds(2, 22), format_minutes_seconds(4, 20)),
+               pgettext("amazons_building", "This building can produce one rare wood between %1$s and %2$s, depending on how far the woodcutter has to walk."):bformat(format_seconds(47), format_minutes_seconds(1, 27)),
                -- TRANSLATORS: Performance helptext for an Amazon production site: Rare Tree Cutter's Hut, part 2
-               pgettext("amazons_building", "In case of slopes or obstacles in the way, the time is increased.")
+               pgettext("amazons_building", "If all kinds of rare tree are needed by the economy and available within her work area, then one of each kind is produced between %1$s and %2$s."):bformat(format_minutes_seconds(2, 22), format_minutes_seconds(4, 20)),
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Rare Tree Cutter's Hut, part 3
+               pgettext("amazons_building", "If only one kind of rare tree is needed by the economy and all kinds are available within her work area, then one of the needed kind is produced between %1$s and %2$s, and one of each of the other kinds is produced between %3$s and %4$s."):bformat(format_minutes_seconds(1, 19), format_minutes_seconds(2, 25), format_minutes_seconds(3, 56), format_minutes_seconds(7, 14)),
+               -- TRANSLATORS: Performance helptext for an Amazon production site: Rare Tree Cutter's Hut, part 4
+               pgettext("amazons_building", "In case of slopes or obstacles in the way, the times are increased.")
             }
          }
       },
