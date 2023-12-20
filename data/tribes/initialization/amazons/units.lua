@@ -1504,7 +1504,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Amazon production site: Rare Tree Kiln
             purpose = pgettext("amazons_building", "Burns rare trees into charcoal."),
             -- TRANSLATORS: Performance helptext for an Amazon production site: Rare Tree Kiln
-            performance = pgettext("amazons_building", "If fully supplied, the rare tree kiln needs %s on average to produce one lump of coal."):bformat(format_minutes_seconds(1,14))
+            performance = pgettext("amazons_building", "If fully supplied, the rare tree kiln needs %s on average to produce one lump of coal."):bformat(format_minutes_seconds(1,4))
          }
       },
       {

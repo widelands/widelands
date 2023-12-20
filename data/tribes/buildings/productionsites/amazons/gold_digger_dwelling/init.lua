@@ -43,7 +43,7 @@ wl.Descriptions():new_productionsite_type {
 
    inputs = {
       { name = "ration", amount = 3 },
-      { name = "water", amount = 8 }
+      { name = "water", amount = 10 }
    },
 
    programs = {
@@ -53,7 +53,7 @@ wl.Descriptions():new_productionsite_type {
          actions = {
             -- time total: 45.4 + 20 + 3.6 = 69 sec
             "return=skipped unless economy needs gold_dust",
-            "consume=ration water:4",
+            "consume=ration water:5",
             "sleep=duration:45s400ms",
             "animate=working duration:20s",
             "mine=resource_gold radius:1 yield:100% when_empty:5%",

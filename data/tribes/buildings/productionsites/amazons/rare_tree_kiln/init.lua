@@ -48,7 +48,7 @@ wl.Descriptions():new_productionsite_type {
             "return=skipped unless site has rubber",
             "consume=ironwood balsa rubber",
             "sleep=duration:30s",
-            "animate=working duration:40s",
+            "animate=working duration:30s",
             "produce=coal"
          },
       },

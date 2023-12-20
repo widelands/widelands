@@ -55,8 +55,8 @@ wl.Descriptions():new_trainingsite_type {
    inputs = {
       { name = "fish", amount = 10 },
       { name = "meat", amount = 10 },
-      { name = "amazons_bread", amount = 6 },
-      { name = "chocolate", amount = 6 },
+      { name = "amazons_bread", amount = 8 },
+      { name = "chocolate", amount = 10 },
       { name = "boots_sturdy", amount = 2 },
       { name = "boots_swift", amount = 2 },
       { name = "boots_hero", amount = 2 },
