@@ -490,6 +490,7 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 				if (field->map_object_descr->type() == MapObjectType::DISMANTLESITE) {
 					// `building` can only be nullptr in compatibility cases.
 					// Remove the non-null check after v1.0
+					// TODO(tothxa): Is it worth risking a nullptr deref segfault?
 					fw.string(field->dismantlesite.building != nullptr ?
                             field->dismantlesite.building->name() :
                             "dismantlesite");

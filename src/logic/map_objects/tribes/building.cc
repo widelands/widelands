@@ -99,37 +99,8 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 
 	// Parse build options
 	if (table.has_key("enhancement")) {
-		// TODO(GunChleoc): Compatibility code, remove "if" section after v1.0.
-		// The "else" branch with get_table is the current code.
-		if (table.get_datatype("enhancement") == LuaTable::DataType::kString) {
-			const std::string enh = table.get_string("enhancement");
-			log_warn("Deprecated enhancement code found in building '%s'", name().c_str());
-
-			if (enh == name()) {
-				throw wexception("enhancement to same type");
-			}
-			DescriptionIndex const en_i = descriptions.load_building(enh);
-			if (descriptions.building_exists(en_i)) {
-				enhancement_ = en_i;
-
-				//  Merge the enhancements workarea info into this building's
-				//  workarea info.
-				const BuildingDescr* tmp_enhancement = descriptions.get_building_descr(en_i);
-				for (const auto& area : tmp_enhancement->workarea_info_) {
-					std::set<std::string>& strs = workarea_info_[area.first];
-					for (const std::string& str : area.second) {
-						strs.insert(str);
-					}
-				}
-			} else {
-				throw GameDataError(
-				   "\"%s\" has not been defined as a building type (wrong declaration order?)",
-				   enh.c_str());
-			}
-		} else {
-			std::unique_ptr<LuaTable> enhancement_table = table.get_table("enhancement");
-			set_enhancement(descriptions, *enhancement_table);
-		}
+		std::unique_ptr<LuaTable> enhancement_table = table.get_table("enhancement");
+		set_enhancement(descriptions, *enhancement_table);
 	}
 
 	// We define a building as buildable if it has a "buildcost" table.
@@ -145,19 +116,6 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 			   "The building '%s' has a \"buildcost\" but no \"return_on_dismantle\"", name().c_str());
 		}
 		buildcost_ = Buildcost(table.get_table("buildcost"), descriptions);
-	}
-
-	if (table.has_key("enhancement_cost")) {
-		// TODO(GunChleoc): Compatibility code, remove after v1.0
-		log_warn("Deprecated enhancement_cost code found in building '%s'", name().c_str());
-		if (!table.has_key("return_on_dismantle_on_enhanced")) {
-			throw GameDataError("The enhanced building '%s' has an \"enhancement_cost\" but no "
-			                    "\"return_on_dismantle_on_enhanced\"",
-			                    name().c_str());
-		}
-		set_enhancement_cost(
-		   Buildcost(table.get_table("enhancement_cost"), descriptions),
-		   Buildcost(table.get_table("return_on_dismantle_on_enhanced"), descriptions));
 	}
 
 	needs_seafaring_ = false;

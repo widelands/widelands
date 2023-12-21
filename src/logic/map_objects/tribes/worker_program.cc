@@ -67,7 +67,6 @@ Available actions are:
 - `callobject`_
 - `plant`_
 - `createbob`_
-- `buildferry`_
 - `removeobject`_
 - `repeatsearch`_
 - `findresources`_
@@ -89,7 +88,6 @@ const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
    {"callobject", &WorkerProgram::parse_callobject},
    {"plant", &WorkerProgram::parse_plant},
    {"createbob", &WorkerProgram::parse_createbob},
-   {"buildferry", &WorkerProgram::parse_buildferry},
    {"removeobject", &WorkerProgram::parse_removeobject},
    {"repeatsearch", &WorkerProgram::parse_repeatsearch},
    {"findresources", &WorkerProgram::parse_findresources},
@@ -214,27 +212,19 @@ void WorkerProgram::parse_mine(Worker::Action* act, const std::vector<std::strin
 
 	act->function = &Worker::run_mine;
 
-	if (read_key_value_pair(cmd[1], ':').second.empty()) {
-		// TODO(GunChleoc): Compatibility, remove this option after v1.0
-		log_warn("'mine' program without parameter names is deprecated, please use "
-		         "'mine=<resource_name> radius:<number>' in %s\n",
-		         worker_.name().c_str());
-		act->sparam1 = cmd[0];
-		act->iparam1 = read_positive(cmd[1]);
-	} else {
-		for (const std::string& argument : cmd) {
-			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
-			if (item.first == "radius") {
-				act->iparam1 = read_positive(item.second);
-			} else if (item.second.empty()) {
-				act->sparam1 = item.first;
-			} else {
-				throw GameDataError(
-				   "Unknown parameter '%s'. Usage: mine=<resource_name> radius:<number>",
-				   item.first.c_str());
-			}
+	for (const std::string& argument : cmd) {
+		const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+		if (item.first == "radius") {
+			act->iparam1 = read_positive(item.second);
+		} else if (item.second.empty()) {
+			act->sparam1 = item.first;
+		} else {
+			throw GameDataError(
+			   "Unknown parameter '%s'. Usage: mine=<resource_name> radius:<number>",
+			   item.first.c_str());
 		}
 	}
+
 	Notifications::publish(
 	   NoteMapObjectDescription(act->sparam1, NoteMapObjectDescription::LoadType::kObject));
 }
@@ -271,27 +261,19 @@ void WorkerProgram::parse_breed(Worker::Action* act, const std::vector<std::stri
 
 	act->function = &Worker::run_breed;
 
-	if (read_key_value_pair(cmd[1], ':').second.empty()) {
-		// TODO(GunChleoc): Compatibility, remove this option after v1.0
-		log_warn("'breed' program without parameter names is deprecated, please use "
-		         "'breed=<resource_name> radius:<number>' in %s\n",
-		         worker_.name().c_str());
-		act->sparam1 = cmd[0];
-		act->iparam1 = read_positive(cmd[1]);
-	} else {
-		for (const std::string& argument : cmd) {
-			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
-			if (item.first == "radius") {
-				act->iparam1 = read_positive(item.second);
-			} else if (item.second.empty()) {
-				act->sparam1 = item.first;
-			} else {
-				throw GameDataError(
-				   "Unknown parameter '%s'. Usage: breed=<resource_name> radius:<number>",
-				   item.first.c_str());
-			}
+	for (const std::string& argument : cmd) {
+		const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+		if (item.first == "radius") {
+			act->iparam1 = read_positive(item.second);
+		} else if (item.second.empty()) {
+			act->sparam1 = item.first;
+		} else {
+			throw GameDataError(
+			   "Unknown parameter '%s'. Usage: breed=<resource_name> radius:<number>",
+			   item.first.c_str());
 		}
 	}
+
 	Notifications::publish(
 	   NoteMapObjectDescription(act->sparam1, NoteMapObjectDescription::LoadType::kObject));
 }
@@ -836,23 +818,6 @@ void WorkerProgram::parse_createbob(Worker::Action* act, const std::vector<std::
 }
 
 /* RST
-buildferry
-^^^^^^^^^^
-.. function:: buildferry
-
-   **DEPRECATED** use ``createbob=TRIBENAME_ferry`` instead.
-*/
-void WorkerProgram::parse_buildferry(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() > 1) {
-		throw wexception("buildferry takes no arguments");
-	}
-	// TODO(GunChleoc): API compatibility - remove after v1.0
-	log_warn("%s: Worker program 'buildferry' is deprecated. Use createbob=TRIBENAME_ferry instead.",
-	         worker_.name().c_str());
-	act->function = &Worker::run_buildferry;
-}
-
-/* RST
 terraform
 ^^^^^^^^^
 .. function:: terraform=\<category\>
@@ -932,28 +897,18 @@ void WorkerProgram::parse_repeatsearch(Worker::Action* act, const std::vector<st
 
 	act->function = &Worker::run_repeatsearch;
 
-	if (read_key_value_pair(cmd[1], ':').second.empty()) {
-		// TODO(GunChleoc): Compatibility, remove this option after v1.0
-		log_warn("'repeatsearch' program without parameter names is deprecated, please use "
-		         "'repeatsearch=<program_name> repetitions:<number> radius:<number>' in %s\n",
-		         worker_.name().c_str());
-		act->iparam1 = read_positive(cmd[0]);
-		act->iparam2 = read_positive(cmd[1]);
-		act->sparam1 = cmd[2];
-	} else {
-		for (const std::string& argument : cmd) {
-			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
-			if (item.first == "repetitions") {
-				act->iparam1 = read_positive(item.second);
-			} else if (item.first == "radius") {
-				act->iparam2 = read_positive(item.second);
-			} else if (item.second.empty()) {
-				act->sparam1 = item.first;
-			} else {
-				throw GameDataError("Unknown parameter '%s'. Usage: repeatsearch=<program_name> "
-				                    "repetitions:<number> radius:<number>",
-				                    item.first.c_str());
-			}
+	for (const std::string& argument : cmd) {
+		const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+		if (item.first == "repetitions") {
+			act->iparam1 = read_positive(item.second);
+		} else if (item.first == "radius") {
+			act->iparam2 = read_positive(item.second);
+		} else if (item.second.empty()) {
+			act->sparam1 = item.first;
+		} else {
+			throw GameDataError("Unknown parameter '%s'. Usage: repeatsearch=<program_name> "
+			                    "repetitions:<number> radius:<number>",
+			                    item.first.c_str());
 		}
 	}
 }
@@ -1010,25 +965,16 @@ void WorkerProgram::parse_scout(Worker::Action* act, const std::vector<std::stri
 	}
 	act->function = &Worker::run_scout;
 
-	if (read_key_value_pair(cmd[0], ':').second.empty()) {
-		// TODO(GunChleoc): Compatibility, remove this option after v1.0
-		log_warn("'scout' program without parameter names is deprecated, please use "
-		         "'scout=radius:<number> duration:<duration>' in %s\n",
-		         worker_.name().c_str());
-		act->iparam1 = read_positive(cmd[0]);
-		act->iparam2 = read_positive(cmd[1]);
-	} else {
-		for (const std::string& argument : cmd) {
-			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
-			if (item.first == "radius") {
-				act->iparam1 = read_positive(item.second);
-			} else if (item.first == "duration") {
-				act->iparam2 = read_duration(item.second, worker_).get();
-			} else {
-				throw GameDataError(
-				   "Unknown parameter '%s'. Usage: scout=radius:<number> duration:<duration>",
-				   item.first.c_str());
-			}
+	for (const std::string& argument : cmd) {
+		const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+		if (item.first == "radius") {
+			act->iparam1 = read_positive(item.second);
+		} else if (item.first == "duration") {
+			act->iparam2 = read_duration(item.second, worker_).get();
+		} else {
+			throw GameDataError(
+			   "Unknown parameter '%s'. Usage: scout=radius:<number> duration:<duration>",
+			   item.first.c_str());
 		}
 	}
 }

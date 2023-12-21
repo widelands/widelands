@@ -61,16 +61,14 @@ void write_tribes_dir(FileSystem& target_fs, FileSystem* map_fs, const std::stri
 		} else {
 			// Write file
 			const std::string filename(FileSystem::fs_filename(file.c_str()));
-			// TODO(GunChleoc): Savegame compatibility, forbid "helptexts.lua" after v1.0
-			if (filename == "init.lua" || filename == "register.lua" || filename == "helptexts.lua" ||
-			    ends_with(filename, ".png")) {
+			if (filename == "init.lua" || filename == "register.lua" || ends_with(filename, ".png")) {
 				size_t length;
 				void* input_data = map_fs->load(file, length);
 				target_fs.write(file, input_data, length);
 				free(input_data);
 			} else {
 				log_warn("File name '%s' is not allowed in scenario tribes – expecting "
-				         "'init.lua', 'register.lua', 'helptexts.lua' or a *.png file\n",
+				         "'init.lua', 'register.lua' or a *.png file\n",
 				         file.c_str());
 			}
 		}

@@ -29,10 +29,6 @@
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "scripting/lua_interface.h"
 
-namespace {
-constexpr const char* const kCampVisFileLegacy = "save/campvis";
-}  // namespace
-
 Campaigns::Campaigns() {
 	// Load solved scenarios
 	std::unique_ptr<Profile> campvis;
@@ -42,9 +38,6 @@ Campaigns::Campaigns() {
 		campvis.reset(new Profile(kCampVisFile.c_str()));
 		campvis->pull_section("scenarios");
 		campvis->write(kCampVisFile.c_str(), true);
-		if (g_fs->file_exists(kCampVisFileLegacy)) {
-			update_legacy_campvis();
-		}
 	}
 	campvis.reset(new Profile(kCampVisFile.c_str()));
 	Section& campvis_scenarios = campvis->get_safe_section("scenarios");
@@ -188,62 +181,4 @@ void Campaigns::update_visibility_info() {
 			}
 		}
 	}
-}
-
-/**
- * Handle legacy campvis file
- */
-// TODO(GunChleoc): Savegame compatibility, remove after v1.0
-void Campaigns::update_legacy_campvis() {
-	Profile legacy_campvis(kCampVisFileLegacy);
-	if (legacy_campvis.get_section("campmaps") == nullptr) {
-		return;
-	}
-
-	log_info("Converting legacy campvis\n");
-
-	using LegacyList = std::vector<std::pair<std::string, std::string>>;
-
-	std::vector<LegacyList> legacy_scenarios;
-
-	legacy_scenarios.push_back(
-	   {{"fri02.wmf", "frisians01"}, {"fri01.wmf", "frisians00"}, {"atl01.wmf", "atlanteans00"}});
-
-	legacy_scenarios.push_back(
-	   {{"fri02.wmf", "frisians01"}, {"fri01.wmf", "frisians00"}, {"emp04.wmf", "empiretut03"}});
-
-	legacy_scenarios.push_back({{"atl02.wmf", "atlanteans01"},
-	                            {"atl01.wmf", "atlanteans00"},
-	                            {"emp02.wmf", "empiretut01"},
-	                            {"emp01.wmf", "empiretut00"}});
-
-	legacy_scenarios.push_back({
-	   {"emp04.wmf", "empiretut03"},
-	   {"emp03.wmf", "empiretut02"},
-	   {"emp02.wmf", "empiretut01"},
-	   {"emp01.wmf", "empiretut00"},
-	   {"bar02.wmf", "barbariantut01"},
-	   {"bar01.wmf", "barbariantut00"},
-	});
-
-	Section& campvis_scenarios = legacy_campvis.get_safe_section("campmaps");
-	std::set<std::string> solved_legacy_scenarios;
-	for (const auto& legacy_list : legacy_scenarios) {
-		bool set_solved = false;
-		for (const auto& legacy_scenario : legacy_list) {
-			if (set_solved) {
-				solved_legacy_scenarios.insert(legacy_scenario.first);
-			}
-			set_solved = campvis_scenarios.get_bool(legacy_scenario.second.c_str(), false);
-		}
-	}
-
-	// Now write everything
-	Profile write_campvis(kCampVisFile.c_str());
-	Section& write_scenarios = write_campvis.pull_section("scenarios");
-	for (const auto& scenario : solved_legacy_scenarios) {
-		write_scenarios.set_bool(scenario.c_str(), true);
-	}
-
-	write_campvis.write(kCampVisFile.c_str(), true);
 }

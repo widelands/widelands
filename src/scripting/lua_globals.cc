@@ -169,17 +169,6 @@ static int L_pop_textdomain(lua_State* L) {
 	return 0;
 }
 
-/* RST
-   .. function:: set_textdomain(domain)
-
-      DEPRECATED. Use `push_textdomain(domain)` instead.
-*/
-// TODO(Nordfriese): Delete after v1.0
-static int L_set_textdomain(lua_State* L) {
-	log_warn("set_textdomain is deprecated, use push_textdomain instead");
-	return L_push_textdomain(L);
-}
-
 static const TextdomainInfo* current_textdomain(const lua_State* L) {
 	const auto it = textdomains.find(L);
 	return it == textdomains.end() || it->second.empty() ? nullptr : &it->second.back();
@@ -432,7 +421,6 @@ const static struct luaL_Reg globals[] = {{"_", &L__},
                                           {"ngettext", &L_ngettext},
                                           {"pgettext", &L_pgettext},
                                           {"npgettext", &L_npgettext},
-                                          {"set_textdomain", &L_set_textdomain},
                                           {"push_textdomain", &L_push_textdomain},
                                           {"pop_textdomain", &L_pop_textdomain},
                                           {"ticks", &L_ticks},

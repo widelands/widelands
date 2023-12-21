@@ -715,10 +715,6 @@ int LuaPlayer::reveal_fields(lua_State* L) {
 
       See also :ref:`field_animations` for animated hiding.
 
-      .. note:: Passing a :class:`boolean` as the **state** argument is deprecated.
-         Use :const:`"permanent"` instead of :const:`true` and :const:`"seen"` instead of
-         :const:`false`.
-
       :arg fields: The fields to hide.
       :type fields: :class:`array` of :class:`fields <wl.map.Field>`.
 
@@ -739,11 +735,7 @@ int LuaPlayer::hide_fields(lua_State* L) {
 	Widelands::Player& p = get(L, game);
 
 	luaL_checktype(L, 2, LUA_TTABLE);
-	// TODO(hessenfarmer): Boolean check for compatibility. Remove after v1.0
-	const std::string state = lua_isnone(L, 3)        ? "seen" :
-	                          !lua_isboolean(L, 3)    ? luaL_checkstring(L, 3) :
-	                          luaL_checkboolean(L, 3) ? "permanent" :
-                                                       "seen";
+	const std::string state = lua_isnone(L, 3) ? "seen" : luaL_checkstring(L, 3);
 	const Widelands::HideOrRevealFieldMode mode =
 	   (state == "permanent")  ? Widelands::HideOrRevealFieldMode::kHide :
 	   (state == "explorable") ? Widelands::HideOrRevealFieldMode::kUnexplore :

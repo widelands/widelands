@@ -1108,12 +1108,6 @@ ProductionProgram::ActSleep::ActSleep(const std::vector<std::string>& arguments,
 	const std::pair<std::string, std::string> item = read_key_value_pair(arguments.front(), ':');
 	if (item.first == "duration") {
 		duration_ = read_duration(item.second, psite);
-	} else if (item.second.empty()) {
-		// TODO(GunChleoc): Compatibility, remove after v1.0
-		duration_ = read_duration(item.first, psite);
-		log_warn("'sleep' program without parameter name is deprecated, please use "
-		         "'sleep=duration:<duration>' in %s\n",
-		         psite.name().c_str());
 	} else {
 		throw GameDataError(
 		   "Unknown argument '%s'. Usage: duration:<duration>", arguments.front().c_str());
@@ -1545,42 +1539,28 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 	}
 	experience_chance_ = 0U;
 
-	if (read_key_value_pair(arguments.at(2), ':').second.empty()) {
-		// TODO(GunChleoc): Savegame compatibility, remove after v1.0
-		log_warn("Using old syntax in %s. Please use 'mine=<resource name> radius:<number> "
-		         "yield:<percent> when_empty:<percent> [experience_on_fail:<percent>] [no_notify]'",
-		         descr->name().c_str());
-		resource_ = descriptions.load_resource(arguments.front());
-		workarea_ = read_positive(arguments.at(1));
-		max_resources_ = read_positive(arguments.at(2)) * 100U;
-		depleted_chance_ = read_positive(arguments.at(3)) * 100U;
-		if (arguments.size() == 5) {
-			experience_chance_ = read_positive(arguments.at(4)) * 100U;
-		}
-	} else {
-		for (const std::string& argument : arguments) {
-			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
-			if (item.second.empty()) {
-				// The safeguard is for the case that someone creates a resource called "no_notify"
-				if (item.first == "no_notify" && resource_ != INVALID_INDEX) {
-					notify_on_failure_ = false;
-				} else {
-					resource_ = descriptions.load_resource(item.first);
-				}
-			} else if (item.first == "radius") {
-				workarea_ = read_positive(item.second);
-			} else if (item.first == "yield") {
-				max_resources_ = math::read_percent_to_int(item.second);
-			} else if (item.first == "when_empty") {
-				depleted_chance_ = math::read_percent_to_int(item.second);
-			} else if (item.first == "experience_on_fail") {
-				experience_chance_ = math::read_percent_to_int(item.second);
+	for (const std::string& argument : arguments) {
+		const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+		if (item.second.empty()) {
+			// The safeguard is for the case that someone creates a resource called "no_notify"
+			if (item.first == "no_notify" && resource_ != INVALID_INDEX) {
+				notify_on_failure_ = false;
 			} else {
-				throw GameDataError(
-				   "Unknown argument '%s'. Usage: mine=<resource name> radius:<number> "
-				   "yield:<percent> when_empty:<percent> [experience_on_fail:<percent>]",
-				   item.first.c_str());
+				resource_ = descriptions.load_resource(item.first);
 			}
+		} else if (item.first == "radius") {
+			workarea_ = read_positive(item.second);
+		} else if (item.first == "yield") {
+			max_resources_ = math::read_percent_to_int(item.second);
+		} else if (item.first == "when_empty") {
+			depleted_chance_ = math::read_percent_to_int(item.second);
+		} else if (item.first == "experience_on_fail") {
+			experience_chance_ = math::read_percent_to_int(item.second);
+		} else {
+			throw GameDataError(
+			   "Unknown argument '%s'. Usage: mine=<resource name> radius:<number> "
+			   "yield:<percent> when_empty:<percent> [experience_on_fail:<percent>]",
+			   item.first.c_str());
 		}
 	}
 
@@ -1755,24 +1735,11 @@ ProductionProgram::ActCheckSoldier::ActCheckSoldier(const std::vector<std::strin
 		                    "only available to trainingsites.",
 		                    descr.name().c_str());
 	}
-	if (arguments.size() != 2 && arguments.size() != 3) {
+	if (arguments.size() != 2) {
 		throw GameDataError("Usage: checksoldier=soldier:attack|defense|evade|health level:<number>");
 	}
 
-	if (arguments.size() == 3) {
-		// TODO(GunChleoc): Savegame compatibility, remove after v1.0
-		log_warn("Using old syntax in %s. Please use "
-		         "'checksoldier=soldier:attack|defense|evade|health level:<number>'\n",
-		         descr.name().c_str());
-
-		if (arguments.front() != "soldier") {
-			throw GameDataError("Expected 'soldier' but found '%s'", arguments.front().c_str());
-		}
-		training_.attribute = parse_training_attribute(arguments.at(1));
-		training_.level = read_int(arguments.at(2), 0);
-	} else {
-		training_ = TrainingParameters::parse(arguments, "checksoldier");
-	}
+	training_ = TrainingParameters::parse(arguments, "checksoldier");
 }
 
 void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps) const {
@@ -1863,25 +1830,11 @@ ProductionProgram::ActTrain::ActTrain(const std::vector<std::string>& arguments,
 		                    descr.name().c_str());
 	}
 
-	if (arguments.size() != 2 && arguments.size() != 4) {
+	if (arguments.size() != 2) {
 		throw GameDataError("Usage: train=soldier:attack|defense|evade|health level:<number>");
 	}
 
-	if (arguments.size() == 4) {
-		// TODO(GunChleoc): Savegame compatibility, remove after v1.0
-		log_warn("Using old syntax in %s. Please use train=soldier:attack|defense|evade|health "
-		         "level:<number>\n",
-		         descr.name().c_str());
-
-		if (arguments.front() != "soldier") {
-			throw GameDataError("Expected 'soldier' but found '%s'", arguments.front().c_str());
-		}
-
-		training_.attribute = parse_training_attribute(arguments.at(1));
-		training_.level = read_positive(arguments.at(3));
-	} else {
-		training_ = TrainingParameters::parse(arguments, "train");
-	}
+	training_ = TrainingParameters::parse(arguments, "train");
 }
 
 void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const {
@@ -2012,28 +1965,18 @@ ProductionProgram::ActConstruct::ActConstruct(const std::vector<std::string>& ar
 		   "Usage: construct=<immovable_name> worker:<program_name> radius:<number>");
 	}
 
-	if (read_key_value_pair(arguments.at(2), ':').second.empty()) {
-		// TODO(GunChleoc): Compatibility, remove this argument option after v1.0
-		log_warn("'construct' program without parameter names is deprecated, please use "
-		         "'construct=<immovable_name> worker:<program_name> radius:<number>' in %s\n",
-		         descr->name().c_str());
-		objectname = arguments.at(0);
-		workerprogram = arguments.at(1);
-		radius = read_positive(arguments.at(2));
-	} else {
-		for (const std::string& argument : arguments) {
-			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
-			if (item.first == "worker") {
-				workerprogram = item.second;
-			} else if (item.first == "radius") {
-				radius = read_positive(item.second);
-			} else if (item.second.empty()) {
-				objectname = item.first;
-			} else {
-				throw GameDataError("Unknown parameter '%s'. Usage: construct=<immovable_name> "
-				                    "worker:<program_name> radius:<number>",
-				                    item.first.c_str());
-			}
+	for (const std::string& argument : arguments) {
+		const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
+		if (item.first == "worker") {
+			workerprogram = item.second;
+		} else if (item.first == "radius") {
+			radius = read_positive(item.second);
+		} else if (item.second.empty()) {
+			objectname = item.first;
+		} else {
+			throw GameDataError("Unknown parameter '%s'. Usage: construct=<immovable_name> "
+			                    "worker:<program_name> radius:<number>",
+			                    item.first.c_str());
 		}
 	}
 

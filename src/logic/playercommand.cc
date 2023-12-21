@@ -1548,10 +1548,6 @@ void CmdSetInputMaxFill::execute(Game& game) {
 						p->expedition_bootstrap()->check_is_ready(game);
 					}
 				}
-			} catch (const std::exception& e) {
-				// TODO(matthiakl): This exception is only caught to ensure b21 savegame compatibility
-				// and should be removed after v1.0
-				log_err("Skipped CmdSetInputMaxFill command: %s", e.what());
 			}
 		}
 	}

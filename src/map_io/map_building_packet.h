@@ -34,9 +34,6 @@ class Building;
 struct MapBuildingPacket {
 	void read(FileSystem&, EditorGameBase&, bool, MapObjectLoader&);
 	void write(FileSystem&, EditorGameBase&, MapObjectSaver&);
-
-protected:
-	void read_priorities(Building&, FileRead&);
 };
 }  // namespace Widelands
 

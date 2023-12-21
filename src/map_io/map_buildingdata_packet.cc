@@ -171,9 +171,7 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 							const std::string map_object_name(fr.c_string());
 							const std::string type(fr.c_string());
 							DescriptionIndex oldidx = INVALID_INDEX;
-							// TODO(Nordfriese): `type.empty()` is only allowed for
-							// savegame compatibility, disallow after v1.0
-							if (type.empty() || type == "building") {
+							if (type == "building") {
 								oldidx = building.owner().tribe().safe_building_index(map_object_name);
 							} else if (type == "immovable") {
 								oldidx = building.owner().tribe().immovable_index(map_object_name);
@@ -222,8 +220,7 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 						}
 					}
 
-					// TODO(Nordfriese): Savegame compatibility v1.0
-					building.is_destruction_blocked_ = (packet_version >= 9) && (fr.unsigned_8() != 0);
+					building.is_destruction_blocked_ = (fr.unsigned_8() != 0);
 
 					//  Set economy now, some stuff below will count on this.
 					building.set_economy(building.flag_->get_economy(wwWARE), wwWARE);
