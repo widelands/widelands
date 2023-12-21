@@ -36,7 +36,7 @@ jobs:
           _anchors: # to define yaml anchors in one place
             - &src_cmake_dependencies
               - 'CMakeLists.txt'
-              - 'cmake/**'
+              - 'cmake/!(codecheck)**'
               - 'src/**'
                 # dependencies:
               - 'install-dependencies.sh' # called by xx.yaml or ./.github/scripts/install_deps.sh
@@ -46,8 +46,9 @@ jobs:
               - 'data/**'
               - 'po/**'
           codecheck:
-            - *src_cmake_dependencies
-            - '.github/scripts/install_deps.sh' # calls install-dependencies.sh
+            - 'src/**'
+            - 'cmake/codecheck/*.py'
+            - 'cmake/codecheck/rules/'
             - '.github/workflows/build_codecheck.yaml'
           clang_tidy:
             - *src_cmake_dependencies
