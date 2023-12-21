@@ -28,45 +28,44 @@ jobs:
       with:
         # groups to check for changed files (as string, yaml anchors are resolved by the tool)
         filters: |
-          codecheck:
-            - 'CMakeLists.txt'
-            - '*/CMakeLists.txt'
-            - 'cmake/codecheck/**'
-            - 'cmake/WlFunctions.cmake'
-            - 'src/**'
-            - '.github/scripts/install_deps.sh' # calls install-dependencies.sh
-            - '.github/workflows/build_codecheck.yaml'
-          clang_tidy:
+          _anchors: # to define yaml anchors in one place
             - &src_cmake_dependencies
               - 'CMakeLists.txt'
               - 'cmake/**'
               - 'src/**'
                 # dependencies:
               - 'install-dependencies.sh' # called by xx.yaml or ./.github/scripts/install_deps.sh
-              - 'utils/download_asio.sh' # called by install-dependencies.sh
+              - 'utils/download_asio.sh' # called sometimes by install-dependencies.sh
+            - &installer
+              - *src_cmake_dependencies
+              - 'data/**'
+              - 'po/**'
+          codecheck:
+            - *src_cmake_dependencies
+            - '.github/scripts/install_deps.sh' # calls install-dependencies.sh
+            - '.github/workflows/build_codecheck.yaml'
+          clang_tidy:
+            - *src_cmake_dependencies
             - 'utils/check_clang_tidy_results.py'
             - 'utils/run-clang-tidy.py'
             - '.github/scripts/install_deps.sh' # calls install-dependencies.sh
             - '.github/workflows/build_clang_tidy.yaml'
           test_suite:
             - *src_cmake_dependencies
-            - 'data/**' # TODO(aDiscoverer or ...) list what needs to be checked
+            - 'data/**' # TODO(aDiscoverer) list what needs to be checked
             - 'regression_test.py'
             - 'test/**'
             - '.github/scripts/install_deps.sh' # calls install-dependencies.sh
             - '.github/workflows/build_testsuite.yaml'
           inst_windows_msvc:
-            - &installer
-              - *src_cmake_dependencies
-              - 'data/**'
-              - 'po/**'
+            - *installer
             # doc/** maybe for some installers TODO(unknown)
-            - 'utils/win32/**'
+            - 'utils/win32/**' # utils\win32\innosetup\Widelands.iss used by build_windows.yaml
             - '.github/scripts/vcpkg_ref'
             - '.github/workflows/build_windows_msvc.yaml' # calls install-dependencies.sh
           inst_windows:
             - *installer
-            - 'utils/win32/**'
+            - 'utils/win32/**' # utils\win32\innosetup\Widelands.iss used by build_windows.yaml
             - '.github/workflows/build_windows.yaml' # calls install-dependencies.sh
           inst_macos:
             - *installer
