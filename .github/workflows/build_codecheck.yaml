@@ -15,12 +15,17 @@ jobs:
         ./cmake/codecheck/run_tests.py
     - name: Check
       run: |
+        # to show failures clearly on github
+        echo ::add-matcher::.github/problem_matchers/file_line_column_msg.json
+        #
         set -o pipefail # to keep return value
         #
         # for all c++ source files excluding /third_party/
         ./cmake/codecheck/CodeCheck.py src/*.cc src/*.h src/[^t][^h]*/ |
           tee codecheck.out
         # exit code of CodeCheck.py is also 0 if failures detected
+        #
+        echo ::remove-matcher owner=file_line_column_msg:: # removes the problem matcher
       timeout-minutes: 2
     - name: Report
       run: |
