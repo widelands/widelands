@@ -20,7 +20,6 @@
 
 #include <memory>
 
-#include "base/log.h"
 #include "graphic/image_cache.h"
 #include "io/filesystem/filesystem.h"
 #include "io/profile.h"

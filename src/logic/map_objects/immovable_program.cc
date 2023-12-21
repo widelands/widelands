@@ -368,7 +368,7 @@ remove
       },
 */
 ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments,
-                                       const ImmovableDescr& descr) {
+                                       const ImmovableDescr&) {
 	if (arguments.size() > 1) {
 		throw GameDataError("Usage: remove=[chance:<percent>]");
 	}

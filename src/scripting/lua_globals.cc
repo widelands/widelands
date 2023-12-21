@@ -25,7 +25,6 @@
 #include <SDL_timer.h>
 
 #include "base/i18n.h"
-#include "base/log.h"
 #include "build_info.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"

@@ -21,7 +21,6 @@
 #include <cassert>
 #include <memory>
 
-#include "base/log.h"
 #include "base/math.h"
 #include "base/vector.h"
 #include "io/filesystem/layered_filesystem.h"

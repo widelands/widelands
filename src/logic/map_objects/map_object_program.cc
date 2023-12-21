@@ -21,7 +21,6 @@
 #include <cstdlib>
 #include <regex>
 
-#include "base/log.h"
 #include "base/math.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/map_object.h"
@@ -184,7 +183,7 @@ You can combine these units in descending order as you please. Examples:
 * ``1m500s100000ms`` will work too, but is not recommended (unreadable)
 
 */
-Duration MapObjectProgram::read_duration(const std::string& input, const MapObjectDescr& descr) {
+Duration MapObjectProgram::read_duration(const std::string& input, const MapObjectDescr&) {
 	// Convert unit part into milliseconds
 	auto as_ms = [](uint32_t number, const std::string& unit) {
 		if (unit == "s") {
@@ -415,7 +414,7 @@ playsound
 */
 MapObjectProgram::PlaySoundParameters
 MapObjectProgram::parse_act_play_sound(const std::vector<std::string>& arguments,
-                                       const MapObjectDescr& descr) {
+                                       const MapObjectDescr&) {
 	if (arguments.size() != 2 && arguments.size() != 3) {
 		throw GameDataError(
 		   "Usage: playsound=<sound_dir/sound_name> priority:<percent> [allow_multiple]");

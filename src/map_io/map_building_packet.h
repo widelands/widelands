@@ -21,8 +21,6 @@
 
 #include "map_io/map_data_packet.h"
 
-class FileRead;
-
 namespace Widelands {
 
 class Building;

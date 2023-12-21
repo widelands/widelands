@@ -18,7 +18,6 @@
 
 #include "logic/map_objects/tribes/worker_program.h"
 
-#include "base/log.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/findnode.h"
 #include "sound/sound_handler.h"
