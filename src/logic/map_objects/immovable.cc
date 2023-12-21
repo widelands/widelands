@@ -206,8 +206,7 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 		}
 		try {
 			programs_[program_name] = new ImmovableProgram(
-			   program_name, programs->get_table(program_name)->array_entries<std::string>(),
-			   *this);
+			   program_name, programs->get_table(program_name)->array_entries<std::string>(), *this);
 		} catch (const std::exception& e) {
 			throw GameDataError("%s: Error in immovable program %s: %s", name().c_str(),
 			                    program_name.c_str(), e.what());

@@ -219,9 +219,8 @@ void WorkerProgram::parse_mine(Worker::Action* act, const std::vector<std::strin
 		} else if (item.second.empty()) {
 			act->sparam1 = item.first;
 		} else {
-			throw GameDataError(
-			   "Unknown parameter '%s'. Usage: mine=<resource_name> radius:<number>",
-			   item.first.c_str());
+			throw GameDataError("Unknown parameter '%s'. Usage: mine=<resource_name> radius:<number>",
+			                    item.first.c_str());
 		}
 	}
 
@@ -268,9 +267,8 @@ void WorkerProgram::parse_breed(Worker::Action* act, const std::vector<std::stri
 		} else if (item.second.empty()) {
 			act->sparam1 = item.first;
 		} else {
-			throw GameDataError(
-			   "Unknown parameter '%s'. Usage: breed=<resource_name> radius:<number>",
-			   item.first.c_str());
+			throw GameDataError("Unknown parameter '%s'. Usage: breed=<resource_name> radius:<number>",
+			                    item.first.c_str());
 		}
 	}
 

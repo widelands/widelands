@@ -1557,10 +1557,9 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 		} else if (item.first == "experience_on_fail") {
 			experience_chance_ = math::read_percent_to_int(item.second);
 		} else {
-			throw GameDataError(
-			   "Unknown argument '%s'. Usage: mine=<resource name> radius:<number> "
-			   "yield:<percent> when_empty:<percent> [experience_on_fail:<percent>]",
-			   item.first.c_str());
+			throw GameDataError("Unknown argument '%s'. Usage: mine=<resource name> radius:<number> "
+			                    "yield:<percent> when_empty:<percent> [experience_on_fail:<percent>]",
+			                    item.first.c_str());
 		}
 	}
 
