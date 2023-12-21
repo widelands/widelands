@@ -426,8 +426,8 @@ private:
 	std::vector<std::vector<int16_t>> AI_military_matrix;
 	std::vector<int16_t> AI_military_numbers;
 
-	uint16_t build_material_mines_count = 0;
-	bool ai_training_mode_ = false;
+	uint16_t build_material_mines_count{0U};
+	bool ai_training_mode_{false};
 
 	// ------------- Seafaring -----------------------------
 	// Functions used for seafaring / defaultai_seafaring.cc
@@ -450,15 +450,15 @@ private:
 	Duration expedition_max_duration;
 	std::vector<int16_t> marine_task_queue;
 	std::unordered_set<uint32_t> expedition_visited_spots;
-	uint16_t ports_count;
-	uint16_t ports_finished_count;
-	uint16_t shipyards_count;
-	uint16_t expeditions_in_prep;
-	uint16_t expeditions_ready;
-	uint16_t expeditions_in_progress = 0;
-	uint16_t warships_count = 0;
-	uint16_t tradeships_count = 0;
-	bool idle_shipyard_stocked;
+	uint16_t ports_count{0U};
+	uint16_t ports_finished_count{0U};
+	uint16_t shipyards_count{0U};
+	uint16_t expeditions_in_prep{0U};
+	uint16_t expeditions_ready{0U};
+	uint16_t expeditions_in_progress{0U};
+	uint16_t warships_count{0U};
+	uint16_t tradeships_count{0U};
+	bool idle_shipyard_stocked{false};
 	bool warship_needed{false};
 	bool tradeship_refit_needed{false};
 	std::deque<ShipObserver> allships;
