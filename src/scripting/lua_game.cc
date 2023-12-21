@@ -81,7 +81,7 @@ Player
       local i_plr
       for p_idx, player in pairs(wl.Game().players) do
          if player.number == wl.Game().interactive_player then
-            i_plr = player -- the interactive player
+            i_plr = player                                        -- the interactive player
             break
          end
       end
@@ -1035,7 +1035,7 @@ int LuaPlayer::allow_workers(lua_State* L) {
       full control over the player given by **playernumber** and loosing control over the
       formerly interactive player.
 
-      :arg playernumber: :attr:`wl.game.Player.number` of player to switch to.
+      :arg playernumber: The :attr:`wl.bases.PlayerBase.number` of the player to switch to.
       :type playernumber: :class:`integer`
 */
 int LuaPlayer::switchplayer(lua_State* L) {
@@ -1099,7 +1099,7 @@ int LuaPlayer::get_produced_wares_count(lua_State* L) {
       necessarily mean that this player *can* attack the other player, as they might for
       example be in the same team.
 
-      :arg playernumber: value of :attr:`wl.game.Player.number`.
+      :arg playernumber: The value of :attr:`wl.bases.PlayerBase.number` of the other player.
       :type playernumber: :class:`int`
       :rtype: :class:`boolean`
 */
@@ -1116,7 +1116,7 @@ int LuaPlayer::is_attack_forbidden(lua_State* L) {
       **playernumber**. Note that setting this to :const:`false` does not necessarily mean that this
       player *can* attack the other player, as they might for example be in the same team.
 
-      :arg playernumber: value of :attr:`wl.game.Player.number`.
+      :arg playernumber: The value of :attr:`wl.bases.PlayerBase.number` of the other player.
       :type playernumber: :class:`int`
       :arg forbid: If this is :const:`true` forbids attacking, :const:`false` allows
          attacking (if the player is not in the same team).
