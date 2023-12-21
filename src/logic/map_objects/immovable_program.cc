@@ -367,8 +367,7 @@ remove
          "remove=", -- This object will always be removed when 'fall' is called
       },
 */
-ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments,
-                                       const ImmovableDescr&) {
+ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments, const ImmovableDescr&) {
 	if (arguments.size() > 1) {
 		throw GameDataError("Usage: remove=[chance:<percent>]");
 	}
