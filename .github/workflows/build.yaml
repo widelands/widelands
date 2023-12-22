@@ -313,7 +313,7 @@ jobs:
         include:
           - arch: x64
             bits: 64
-            archname: x86_x64
+            archname: x86_64
           - arch: x86
             bits: 32
             archname: i686
