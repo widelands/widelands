@@ -104,7 +104,7 @@ macro(_common_compile_tasks)
 
   if(ARG_USES_MINIZIP)
       if(MINIZIP_STATIC_LIBRARIES)
-          target_link_libraries(${NAME} minizip)
+          target_link_libraries(${NAME} ${pkgcfg_lib_MINIZIP_minizip})
           message(STATUS "Link ${NAME} with minizip")
       else()
           target_link_libraries(${NAME} third_party_minizip)
