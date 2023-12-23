@@ -654,6 +654,12 @@ int LuaPlayer::forbid_buildings(lua_State* L) {
       .. note:: Objectives are shared by all players, so it's not possible to have
          different objectives for different players.
 
+         This function has two kind of users currently:
+
+         1. Scenarios where the objective is only relevant for the interactive player,
+            but it doesn't matter that it's also set for the AI players
+         2. Win conditions where it is assumed that all players have the same goal
+
       :arg name: The name of the objective. Has to be unique.
       :type name: :class:`string`
       :arg title: The title of the objective that will be shown in the menu.
