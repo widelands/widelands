@@ -3,6 +3,7 @@
 # 
 # Translators:
 # adrien vigneron <adrien.v@ml1.net>, 2015
+# Arthinet Balika, 2023
 # Atanase Albaran, 2021
 # Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
 # Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
@@ -30,7 +31,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-11-18 02:30+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: David D, 2018,2023\n"
+"Last-Translator: Arthinet Balika, 2023\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -208,13 +209,13 @@ msgctxt "amazons_ware"
 msgid ""
 "The Amazons use granite for making some tools as well. It is produced by the"
 " stonecutters and in stone mines."
-msgstr ""
+msgstr "Les Amazones utilisent également le granit pour fabriquer certains outils. Il est produit par les tailleurs de pierre et dans les mines de pierre."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Quartz, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:116
 msgctxt "ware"
 msgid "Amazons use quartz for sharp tools and weapons."
-msgstr ""
+msgstr "Les Amazones utilisent le quartz pour fabriquer des outils et des armes tranchants."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Quartz, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:118
@@ -222,7 +223,7 @@ msgctxt "amazons_ware"
 msgid ""
 "It is also a building material for some advanced buildings. It is produced "
 "in stone mines."
-msgstr ""
+msgstr "C'est également un matériau de construction pour certains bâtiments avancés. Il est produit dans les mines de pierre."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Balsa
 #: ../../data/tribes/initialization/amazons/units.lua:129
@@ -402,7 +403,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Picks are used by stonecutters to cut granite from rocks or mine granite and"
 " quartz in stone mines."
-msgstr ""
+msgstr "Les tailleurs de pierre utilisent des pics pour couper le granit des roches ou extraire du granit et du quartz dans les mines de pierre."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for a Barbarian ware: Felling Ax, part 1
@@ -514,7 +515,7 @@ msgstr "Les bols en pierre sont utilisés pour nettoyer et fondre la poussière 
 #: ../../data/tribes/initialization/amazons/units.lua:424
 msgctxt "amazons_ware"
 msgid "Firestones are used to light the fires of charcoal kilns and furnaces."
-msgstr ""
+msgstr "Les pierres à feu sont utilisées pour allumer les feux des fours et des fournaises à charbon de bois."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Wooden Spear, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:435
@@ -657,7 +658,7 @@ msgctxt "amazons_worker"
 msgid ""
 "Cuts blocks of granite out of rocks in the vicinity or mines granite and "
 "quartz in stone mines."
-msgstr ""
+msgstr "Coupe des blocs de granit dans les roches à proximité ou extrait du granit et du quartz dans des mines de pierre."
 
 #. TRANSLATORS: Helptext for an Amazon worker: Woodcutter
 #: ../../data/tribes/initialization/amazons/units.lua:618
@@ -1056,7 +1057,7 @@ msgstr "Le granit est un matériau de construction de base et est extrait dans u
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1224
 msgid "There is only a little bit of quartz here."
-msgstr ""
+msgstr "Il n'y a que peu de quartz ici."
 
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an Atlantean resource indicator: Gold, part 2
@@ -1074,7 +1075,7 @@ msgstr "Il y a un beaucoup d'or ici."
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1246
 msgid "There is a lot of quartz here."
-msgstr ""
+msgstr "Il y a beaucoup de quartz ici."
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an Atlantean immovable: Ship Under Construction
@@ -1145,7 +1146,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s, depending on "
 "how far the stonecutter has to walk."
-msgstr ""
+msgstr "Ce bâtiment peut produire un granit entre %1$s et %2$s, en fonction de la distance que le tailleur de pierre doit parcourir."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site:
 #. Stonecutter's Hut, part 2
@@ -1170,7 +1171,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1420
 msgctxt "amazons_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr ""
+msgstr "En cas de pentes ou d'obstacles sur le chemin, le temps est augmenté."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Woodcutter's
 #. Hut
@@ -1193,7 +1194,7 @@ msgid ""
 "This building can produce one log between %1$s and %2$s (with master "
 "woodcutter between %3$s and %4$s), depending on how far the woodcutter has "
 "to walk."
-msgstr ""
+msgstr "Ce bâtiment peut produire une bûche entre %1$s et %2$s(avec maître bûcheron entre %3$s et %4$s), en fonction de la distance que le bûcheron doit parcourir."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Jungle
 #. Preserver's Hut
@@ -1218,7 +1219,7 @@ msgctxt "amazons_building"
 msgid ""
 "The jungle preserver or jungle master plants one tree between %1$s and %2$s,"
 " depending on how far she has to walk."
-msgstr ""
+msgstr "Le conservateur de la jungle ou le maître de la jungle plante un arbre entre %1$s et %2$s, en fonction de la distance qu'elle doit parcourir."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Hunter-
 #. Gatherer's Hut
@@ -1251,7 +1252,7 @@ msgid ""
 "This building can produce one meat or one fish between %1$s and %2$s, "
 "depending on how far the hunter-gatherer has to walk. If both kinds of food "
 "are available, then one of each kind is produced between %3$s and %4$s."
-msgstr ""
+msgstr "Ce bâtiment peut produire une viande ou un poisson entre %1$s et %2$s, en fonction de la distance que le chasseur-cueilleur doit parcourir. Si les deux types d’aliments sont disponibles, alors un de chaque type est produit entre %3$s et %4$s"
 
 #. TRANSLATORS: Lore author helptext for an Amazon production site: Liana
 #. Cutter's Hut
@@ -1261,14 +1262,14 @@ msgid ""
 "‘Sunlight smiled upon us and our Ancestors while we worked to clear liana "
 "from the trees. I was not as efficient as my aunt and sisters, and so I "
 "learned to ply rope.’"
-msgstr ""
+msgstr "« La lumière du soleil nous souriait, ainsi qu'à nos ancêtres, pendant que nous travaillions à dégager les lianes des arbres. Je n'étais pas aussi efficace que ma tante et mes sœurs et j'ai donc appris à jouer à la corde."
 
 #. TRANSLATORS: Lore author helptext for an Amazon production site: Liana
 #. Cutter's Hut
 #: ../../data/tribes/initialization/amazons/units.lua:1360
 msgctxt "amazons_building"
 msgid "Mistress WeaverSong, recollecting her early years as a liana cutter."
-msgstr ""
+msgstr "Maîtresse WeaverSong, se remémorant ses premières années en tant que coupeuse de lianes."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Liana Cutter's
 #. Hut
@@ -1284,7 +1285,7 @@ msgctxt "amazons_building"
 msgid ""
 "The liana cutter harvests liana from fully matured trees within the work "
 "area which are not being used as lookouts."
-msgstr ""
+msgstr "Le coupeur de lianes récolte les lianes sur les arbres pleinement matures situés dans la zone de travail et qui ne sont pas utilisés comme vigies."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Liana
 #. Cutter's Hut
@@ -1315,7 +1316,7 @@ msgstr "La cabane du collecteur d'eau a besoin d'eau libre dans la zone de trava
 #: ../../data/tribes/initialization/amazons/units.lua:1378
 msgctxt "amazons_building"
 msgid "Roads and trees along the shoreline block drawing water."
-msgstr ""
+msgstr "Les routes et les arbres le long du rivage bloquent le puisage de l’eau."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Water
 #. Gatherer's Hut, part 1
@@ -1324,7 +1325,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one bucket of water between %1$s and %2$s on "
 "average, depending on how far the carrier has to walk."
-msgstr ""
+msgstr "Ce bâtiment peut produire un seau d'eau entre %1$set%2$s en moyenne, en fonction de la distance que le porteur doit parcourir."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Rare Tree
 #. Cutter's Hut
@@ -1344,7 +1345,7 @@ msgid ""
 "how far the woodcutter has to walk. If all kinds of rare tree are available "
 "within her work area, then one of each kind is produced between %3$s and "
 "%4$s."
-msgstr ""
+msgstr "Ce bâtiment peut produire un bois rare entre %1$set%2$s, en fonction de la distance que le bûcheron doit parcourir. Si toutes sortes d'arbres rares sont disponibles dans sa zone de travail, alors un de chaque espèce est produit entre %3$set%4$s."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Wilderness
 #. Keeper's Tent
@@ -1360,7 +1361,7 @@ msgctxt "amazons_building"
 msgid ""
 "The wilderness keeper will only release new game at a nearby tree which is "
 "not being used as a lookout."
-msgstr ""
+msgstr "Le gardien de la nature ne relâchera du nouveau gibier que sur un arbre voisin qui n'est pas utilisé comme belvédère."
 
 #: ../../data/tribes/initialization/amazons/units.lua:1413
 msgctxt "amazons_building"
@@ -1380,7 +1381,7 @@ msgstr "Explorez des territoires inconnus"
 #: ../../data/tribes/initialization/amazons/units.lua:1418
 msgctxt "amazons_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Un voyage d'exploration du scout dure entre %1$set%2$s."
 
 #. TRANSLATORS: Lore author helptext for an Amazon production site: Rope
 #. Weaver's Booth
@@ -1390,14 +1391,14 @@ msgid ""
 "‘My mother taught me to ply the ropes from Liana, how to choose the "
 "strongest cuttings and parts of the harvest, how to trim away flaws. I bless"
 " her wisdom in every length I use.’"
-msgstr ""
+msgstr "« Ma mère m'a appris à tordre les cordes de Liana, à choisir les boutures et les parties de récolte les plus solides, à éliminer les défauts. Je bénis sa sagesse dans chaque longueur que j'utilise."
 
 #. TRANSLATORS: Lore author helptext for an Amazon production site: Rope
 #. Weaver's Booth
 #: ../../data/tribes/initialization/amazons/units.lua:1432
 msgctxt "amazons_building"
 msgid "Mistress WeaverSong, reflecting on training."
-msgstr ""
+msgstr "Maîtresse WeaverSong, réfléchissant à la formation."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Rope Weaver's
 #. Booth
@@ -1419,7 +1420,7 @@ msgctxt "amazons_building"
 msgid ""
 "The furnace can produce one gold ingot in %s on average if the supply is "
 "steady."
-msgstr ""
+msgstr "Le four peut produire un lingot d'or en %s en moyenne si l'offre est stable."
 
 #. TRANSLATORS: Lore helptext for an Amazon production site: Rare Tree
 #. Plantation
@@ -1428,14 +1429,14 @@ msgctxt "amazons_building"
 msgid ""
 "‘If properly harvested, cured and stored, ironwood becomes almost "
 "indestructible, and will not rust in damp conditions.’"
-msgstr ""
+msgstr "\"S'il est correctement récolté, séché et stocké, le bois de fer devient presque indestructible et ne rouillera pas dans des conditions humides.\""
 
 #. TRANSLATORS: Lore author helptext for an Amazon production site: Rare Tree
 #. Plantation
 #: ../../data/tribes/initialization/amazons/units.lua:1452
 msgctxt "amazons_building"
 msgid "Jungle Master Abacaxis"
-msgstr ""
+msgstr "Abacaxis maitre de la Jungle"
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Rare Tree
 #. Plantation
@@ -1470,7 +1471,7 @@ msgid ""
 "the economy, production of one of each tool takes %1$s and one of each spear"
 " takes %2$s on average. If only one kind of tool or spear is needed by the "
 "economy, its production takes %3$s on average."
-msgstr ""
+msgstr "Si ce bâtiment est entièrement approvisionné et que tous les outils et lances sont nécessaires à l'économie, la production d'un de chaque outil prend %1$s et une de chaque lance prend %2$s en moyenne. Si l’économie n’a besoin que d’un seul type d’outil ou de lance, sa production prend %3$s en moyenne."
 
 #. TRANSLATORS: Lore helptext for an Amazon production site: Dressmakery
 #: ../../data/tribes/initialization/amazons/units.lua:1472
@@ -1478,7 +1479,7 @@ msgctxt "amazons_building"
 msgid ""
 "‘A skilled maker crafts garments of unsurpassed defence,<br> with each "
 "stitch imbued with conscious intent.’"
-msgstr ""
+msgstr "\"Un fabricant qualifié fabrique des vêtements d'une défense inégalée, <br> avec chaque point imprégné d'une intention consciente."
 
 #. TRANSLATORS: Lore author helptext for an Amazon production site:
 #. Dressmakery
@@ -1487,7 +1488,7 @@ msgctxt "amazons_building"
 msgid ""
 "Dressmakers’ ethos, adapted from the traditional verse ‘Mother Jungle’s "
 "wisdom: Song of the Conscientious.’"
-msgstr ""
+msgstr "La philosophie des couturières, adaptée du vers traditionnel « La sagesse de Mère Jungle : le chant des consciencieux »."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Dressmakery
 #: ../../data/tribes/initialization/amazons/units.lua:1476
@@ -1504,7 +1505,7 @@ msgid ""
 "needed by the economy, production of one of each of them takes %1$s on "
 "average. If only one kind of them is needed by the economy, its production "
 "takes %2$s on average."
-msgstr ""
+msgstr "Si ce bâtiment est entièrement approvisionné et que toutes les robes, bottes et armures sont nécessaires à l'économie, la production d'un de chacun d'entre eux prend %1$s en moyenne. Si l’économie n’en a besoin que d’un seul type, sa production prend %2$sen moyenne."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Charcoal Kiln
 #: ../../data/tribes/initialization/amazons/units.lua:1485
@@ -1518,7 +1519,7 @@ msgstr "Brûle des troncs pour produire du charbon de bois."
 #, lua-format
 msgctxt "amazons_building"
 msgid "The charcoal kiln needs %s on average to produce one lump of coal."
-msgstr ""
+msgstr "Le four à charbon a besoin  d'%sen moyenne pour produire un morceau de charbon."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Cassava Root
 #. Cooker
@@ -1541,7 +1542,7 @@ msgstr "Brasse du chocolat pour l'entraînement des soldats."
 msgctxt "amazons_building"
 msgid ""
 "The chocolate brewery needs %s on average to brew one mug of chocolate."
-msgstr ""
+msgstr "La brasserie de chocolat a besoin d'%s en moyenne pour préparer une tasse de chocolat."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Food Preserver
 #: ../../data/tribes/initialization/amazons/units.lua:1510
@@ -1574,7 +1575,7 @@ msgstr "Équipez vos recrues et entraînez les en tant que soldats."
 #, lua-format
 msgctxt "amazons_building"
 msgid "The initiation site needs %s on average to recruit one soldier."
-msgstr ""
+msgstr "Le site d'initiation a besoin d'%sen moyenne pour recruter un soldat."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Gardening
 #. Center
@@ -1589,7 +1590,7 @@ msgctxt "amazons_building"
 msgid ""
 "Only a Jungle Master has the necessary experience to coax more growth from "
 "land."
-msgstr ""
+msgstr "Seul un Maître de la Jungle possède l'expérience nécessaire pour extraire davantage de croissance de la terre."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Tapir Farm
 #: ../../data/tribes/initialization/amazons/units.lua:1539
@@ -1628,13 +1629,13 @@ msgstr "Cultive le cacao nécessaire pour brasser des boissons chocolatées."
 #: ../../data/tribes/initialization/amazons/units.lua:1559
 msgctxt "amazons_building"
 msgid "Chocolate is essential for training Amazon soldiers."
-msgstr ""
+msgstr "Le chocolat est essentiel pour entraîner les soldats amazoniens."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Stone Mine
 #: ../../data/tribes/initialization/amazons/units.lua:1568
 msgctxt "amazons_building"
 msgid "Digs granite and quartz out of the ground in mountain terrain."
-msgstr ""
+msgstr "Extrait le granit et le quartz du sol en terrain montagneux."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Stone Mine
 #: ../../data/tribes/initialization/amazons/units.lua:1570
@@ -1643,7 +1644,7 @@ msgctxt "amazons_building"
 msgid ""
 "The stone mine can produce one slab of each kind of stone in %s on average "
 "if the supply with rations is steady and the mine is not worn out."
-msgstr ""
+msgstr "La mine de pierre peut produire une dalle de chaque type de pierre d'%s en moyenne si l'approvisionnement en rations est stable et que la mine n'est pas épuisée."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Gold Digger
 #. Dwelling
@@ -1659,7 +1660,7 @@ msgstr "Extrait de la poussière d'or du sol montagneux."
 msgctxt "amazons_building"
 msgid ""
 "If the supply is steady, this mine can produce gold dust in %s on average."
-msgstr ""
+msgstr "Si l'approvisionnement est stable, cette mine peut produire de la poussière d'or en %sen moyenne."
 
 #. TRANSLATORS: Purpose helptext for an Amazon training site: Warriors’
 #. Gathering

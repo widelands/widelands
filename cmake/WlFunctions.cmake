@@ -112,7 +112,8 @@ macro(_common_compile_tasks)
       endif()
   endif()
 
-  if(ARG_USES_ATOMIC AND NOT APPLE AND ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"))
+  if(ARG_USES_ATOMIC AND CMAKE_SYSTEM MATCHES "Linux"
+     AND ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"))
     # clang on linux needs explicit linkage against standard library atomic
     target_link_libraries(${NAME} atomic)
   endif()

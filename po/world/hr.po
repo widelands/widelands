@@ -245,11 +245,11 @@ msgstr "Joha"
 
 #: ../../data/world/immovables/trees/alder/pole/init.lua:9
 msgid "Alder (Pole)"
-msgstr "Joha (stup)"
+msgstr "Joha (mladica)"
 
 #: ../../data/world/immovables/trees/alder/sapling/init.lua:9
 msgid "Alder (Sapling)"
-msgstr "Joha (mladica)"
+msgstr "Joha (klica)"
 
 #: ../../data/world/immovables/trees/aspen/mature/init.lua:9
 msgid "Aspen (Mature)"
@@ -265,11 +265,11 @@ msgstr "Jasika"
 
 #: ../../data/world/immovables/trees/aspen/pole/init.lua:9
 msgid "Aspen (Pole)"
-msgstr "Jasika (stup)"
+msgstr "Jasika (mladica)"
 
 #: ../../data/world/immovables/trees/aspen/sapling/init.lua:9
 msgid "Aspen (Sapling)"
-msgstr "Jasika (mladica)"
+msgstr "Jasika (klica)"
 
 #: ../../data/world/immovables/trees/beech/mature/init.lua:9
 msgid "Beech (Mature)"
@@ -285,11 +285,11 @@ msgstr "Bukva"
 
 #: ../../data/world/immovables/trees/beech/pole/init.lua:9
 msgid "Beech (Pole)"
-msgstr "Bukva (stup)"
+msgstr "Bukva (mladica)"
 
 #: ../../data/world/immovables/trees/beech/sapling/init.lua:9
 msgid "Beech (Sapling)"
-msgstr "Bukva (mladica)"
+msgstr "Bukva (klica)"
 
 #: ../../data/world/immovables/trees/birch/mature/init.lua:9
 msgid "Birch (Mature)"
@@ -305,11 +305,11 @@ msgstr "Breza"
 
 #: ../../data/world/immovables/trees/birch/pole/init.lua:9
 msgid "Birch (Pole)"
-msgstr "Breza (stup)"
+msgstr "Breza (mladica)"
 
 #: ../../data/world/immovables/trees/birch/sapling/init.lua:9
 msgid "Birch (Sapling)"
-msgstr "Breza (mladica)"
+msgstr "Breza (klica)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/mature/init.lua:10
@@ -363,11 +363,11 @@ msgstr "Ariš"
 
 #: ../../data/world/immovables/trees/larch/pole/init.lua:9
 msgid "Larch (Pole)"
-msgstr "Ariš (stup)"
+msgstr "Ariš (mladica)"
 
 #: ../../data/world/immovables/trees/larch/sapling/init.lua:9
 msgid "Larch (Sapling)"
-msgstr "Ariš (mladica)"
+msgstr "Ariš (klica)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/mature/init.lua:10
@@ -408,11 +408,11 @@ msgstr "Javor"
 
 #: ../../data/world/immovables/trees/maple/pole/init.lua:9
 msgid "Maple (Pole)"
-msgstr "Javor (stup)"
+msgstr "Javor (mladica)"
 
 #: ../../data/world/immovables/trees/maple/sapling/init.lua:9
 msgid "Maple (Sapling)"
-msgstr "Javor (mladica)"
+msgstr "Javor (klica)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/mature/init.lua:10
@@ -503,11 +503,11 @@ msgstr "Hrast"
 
 #: ../../data/world/immovables/trees/oak/pole/init.lua:9
 msgid "Oak (Pole)"
-msgstr "Hrast (stup)"
+msgstr "Hrast (mladica)"
 
 #: ../../data/world/immovables/trees/oak/sapling/init.lua:9
 msgid "Oak (Sapling)"
-msgstr "Hrast (mladica)"
+msgstr "Hrast (klica)"
 
 #: ../../data/world/immovables/trees/palm_borassus/mature/init.lua:9
 msgid "Borassus Palm (Mature)"
@@ -543,11 +543,11 @@ msgstr "Kokosova palma"
 
 #: ../../data/world/immovables/trees/palm_coconut/pole/init.lua:9
 msgid "Coconut Palm (Pole)"
-msgstr "Kokosova palma (stup)"
+msgstr "Kokosova palma (mladica)"
 
 #: ../../data/world/immovables/trees/palm_coconut/sapling/init.lua:9
 msgid "Coconut Palm (Sapling)"
-msgstr "Kokosova palma (mladica)"
+msgstr "Kokosova palma (klica)"
 
 #: ../../data/world/immovables/trees/palm_date/mature/init.lua:9
 msgid "Date Palm (Mature)"
@@ -623,11 +623,11 @@ msgstr "Oskoruša"
 
 #: ../../data/world/immovables/trees/rowan/pole/init.lua:9
 msgid "Rowan (Pole)"
-msgstr "Oskoruša (stup)"
+msgstr "Oskoruša (mladica)"
 
 #: ../../data/world/immovables/trees/rowan/sapling/init.lua:9
 msgid "Rowan (Sapling)"
-msgstr "Oskoruša (mladica)"
+msgstr "Oskoruša (klica)"
 
 #: ../../data/world/immovables/trees/spruce/mature/init.lua:9
 msgid "Spruce (Mature)"
@@ -643,11 +643,11 @@ msgstr "Smreka"
 
 #: ../../data/world/immovables/trees/spruce/pole/init.lua:9
 msgid "Spruce (Pole)"
-msgstr "Smreka (stup)"
+msgstr "Smreka (mladica)"
 
 #: ../../data/world/immovables/trees/spruce/sapling/init.lua:9
 msgid "Spruce (Sapling)"
-msgstr "Smreka (mladica)"
+msgstr "Smreka (klica)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/twine/mature/init.lua:10
@@ -831,7 +831,7 @@ msgstr "Rudnik željeza"
 
 #: ../../data/world/resources/stones/init.lua:7
 msgid "Stones"
-msgstr ""
+msgstr "Stijene"
 
 #: ../../data/world/resources/water/init.lua:7
 #: ../../data/world/terrains/desert/water/init.lua:5
@@ -846,7 +846,7 @@ msgstr "Voda"
 #: ../../data/world/terrains/wasteland/beach/init.lua:5
 #: ../../data/world/terrains/winter/beach/init.lua:5
 msgid "Beach"
-msgstr ""
+msgstr "Plaža"
 
 #: ../../data/world/terrains/desert/desert1/init.lua:5
 msgid "Desert 1"
