@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-12-04 02:34+0000\n"
+"POT-Creation-Date: 2023-12-16 02:32+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: ks k, 2017-2021\n"
 "Language-Team: Korean (http://app.transifex.com/widelands/widelands/language/ko/)\n"
@@ -31,36 +31,36 @@ msgid "%2.1f%%"
 msgstr "%2.1f%%"
 
 #. TRANSLATORS: Short for "Not enough space"
-#: ../../data/scripting/infrastructure.lua:185
+#: ../../data/scripting/infrastructure.lua:188
 msgid "No Space"
 msgstr "공간 없음"
 
-#: ../../data/scripting/infrastructure.lua:186
+#: ../../data/scripting/infrastructure.lua:189
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr "몇 가지 시작 건물이 공간 부족으로 건설되지 않았습니다. 불이익이 있을 것입니다; 이 지도를 공정한 시작 조건으로 다시 시작하기를 고려해 보십시오."
 
-#: ../../data/scripting/infrastructure.lua:187
+#: ../../data/scripting/infrastructure.lua:190
 msgid "Not enough space"
 msgstr "충분하지 않은 공간"
 
-#: ../../data/scripting/infrastructure.lua:285
+#: ../../data/scripting/infrastructure.lua:288
 msgid "No rocks nearby"
 msgstr "근처에 바위가 없습니다"
 
-#: ../../data/scripting/infrastructure.lua:285
+#: ../../data/scripting/infrastructure.lua:288
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
 msgstr "시작 위치에 가까운 바위가 없습니다. 따라서 경제 성장을 위한 추가 자원을 받게 됩니다."
 
-#: ../../data/scripting/infrastructure.lua:291
+#: ../../data/scripting/infrastructure.lua:294
 msgid "Not enough trees nearby"
 msgstr ""
 
-#: ../../data/scripting/infrastructure.lua:291
+#: ../../data/scripting/infrastructure.lua:294
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."
@@ -646,12 +646,12 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:486
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
 #: ../../src/ui_fsmenu/launch_mpg.cc:320 ../../src/ui_fsmenu/main.cc:273
-#: ../../src/wlapplication.cc:1673
+#: ../../src/wlapplication.cc:1678
 msgid "Error"
 msgstr "오류"
 
 #: ../../src/editor/editorinteractive.cc:1141 ../../src/ui_fsmenu/main.cc:257
-#: ../../src/wlapplication.cc:1675
+#: ../../src/wlapplication.cc:1680
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -6863,19 +6863,19 @@ msgstr "--xres/--yres, --maximized 과 --fullscreen 은 결합할 수 없습니�
 msgid "Unknown command line parameter: %s"
 msgstr "알 수 없는 명령 줄 매개 변수: %s"
 
-#: ../../src/wlapplication.cc:1651
+#: ../../src/wlapplication.cc:1656
 msgid "Incompatible"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1688
+#: ../../src/wlapplication.cc:1693
 msgid "Game ended unexpectedly"
 msgstr "놀이가 예기치 않게 종료되었습니다"
 
-#: ../../src/wlapplication.cc:1688
+#: ../../src/wlapplication.cc:1693
 msgid "Unexpected error during the game"
 msgstr "게임 중 예상치 못한 오류가 발생"
 
-#: ../../src/wlapplication.cc:1691
+#: ../../src/wlapplication.cc:1696
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6889,7 +6889,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1700
+#: ../../src/wlapplication.cc:1705
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6899,11 +6899,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "다음과 같은 이유로 게임이 예기치 않게 종료되었습니다:\n\n%s\n\n와이드랜드가 긴급 저장 게임을 만들도록 하겠습니까? 항상 그런 것은 아니지만 불러오기하고 계속 플레이하는 것이 가능합니다."
 
-#: ../../src/wlapplication.cc:1734
+#: ../../src/wlapplication.cc:1739
 msgid "Emergency save failed"
 msgstr "긴급 저장 실패"
 
-#: ../../src/wlapplication.cc:1735
+#: ../../src/wlapplication.cc:1740
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
