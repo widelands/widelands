@@ -115,7 +115,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:102
 msgid "Wheat Production"
-msgstr ""
+msgstr "Proizvodnja pšenice"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:103
 msgid ""

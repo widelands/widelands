@@ -5,7 +5,7 @@
 # 34b6ffed036c169f8c0dd59e6bb8a305_b52781a <671f2e957f50d5213a1238cd588b004a_1012986>, 2021
 # Boese Kaiser, 2022
 # Renaud Bouchard, 2014
-# C138, 2021
+# C138, 2021,2023
 # David D, 2023
 # GunChleoc, 2016,2018-2019
 # GunChleoc, 2016
@@ -22,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-08-28 02:28+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
-"Last-Translator: David D, 2023\n"
+"Last-Translator: C138, 2021,2023\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -161,7 +161,7 @@ msgstr "ajuste la vitesse de jeu en permanence et automatiquepent en fonction du
 
 #: ../../src/wlapplication_messages.cc:102
 msgid "Enable the Script Console and Cheating Mode."
-msgstr ""
+msgstr "Activer le script en console et le mode triche"
 
 #: ../../src/wlapplication_messages.cc:105
 msgid "Game options:"
@@ -226,7 +226,7 @@ msgstr "[vrai|faux*]"
 
 #: ../../src/wlapplication_messages.cc:127
 msgid "Whether to save the history of sent chat messages to a file."
-msgstr ""
+msgstr "S'il faut enregistrer l'historique des messages de chat envoyés dans un fichier"
 
 #: ../../src/wlapplication_messages.cc:128
 msgid "Show filenames in the replay screen."

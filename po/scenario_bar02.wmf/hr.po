@@ -32,7 +32,7 @@ msgstr "Sagradi kolibu za drvosječu"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:23
 msgid "Build a ranger’s hut"
-msgstr ""
+msgstr "Sagradi kolibu za šumara"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:24
 msgid "Build a quarry"
@@ -252,7 +252,7 @@ msgstr ""
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:168
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:326
 msgid "Thron looks worried…"
-msgstr ""
+msgstr "Thron izgleda zabrinuto..."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:158

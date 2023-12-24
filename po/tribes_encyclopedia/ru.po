@@ -11,6 +11,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 # CupIvan <mail@cupivan.ru>, 2015
 # Viktor Skachkov <awsswa59@gmail.com>, 2018-2019
+# Viktor Skachkov <awsswa59@gmail.com>, 2023
 # Yuriy Sokolov <lention@mail.ru>, 2015,2019,2022-2023
 # Zme Zzzz <zmey1207@gmail.com>, 2021
 # Владимир Шевцов, 2022
@@ -23,7 +24,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-11-18 02:30+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2019,2022-2023\n"
+"Last-Translator: Viktor Skachkov <awsswa59@gmail.com>, 2023\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -201,13 +202,13 @@ msgctxt "amazons_ware"
 msgid ""
 "The Amazons use granite for making some tools as well. It is produced by the"
 " stonecutters and in stone mines."
-msgstr ""
+msgstr "Амазонки также используют гранит для изготовления некоторых инструментов. Его добывают камнетёсы и шахтёры в каменоломнях."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Quartz, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:116
 msgctxt "ware"
 msgid "Amazons use quartz for sharp tools and weapons."
-msgstr ""
+msgstr "Амазонки используют кварц для изготовления острых инструментов и оружия."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Quartz, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:118
@@ -215,7 +216,7 @@ msgctxt "amazons_ware"
 msgid ""
 "It is also a building material for some advanced buildings. It is produced "
 "in stone mines."
-msgstr ""
+msgstr "Это также строительный материал для некоторых современных строений. Он производится в каменоломнях."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Balsa
 #: ../../data/tribes/initialization/amazons/units.lua:129
@@ -395,7 +396,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Picks are used by stonecutters to cut granite from rocks or mine granite and"
 " quartz in stone mines."
-msgstr ""
+msgstr "Кирки используются камнетёсами для добычи гранита из камней или добычи гранита и кварца в каменных шахтах."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for a Barbarian ware: Felling Ax, part 1
@@ -507,7 +508,7 @@ msgstr "В каменных чашах как намывают, так и пла
 #: ../../data/tribes/initialization/amazons/units.lua:424
 msgctxt "amazons_ware"
 msgid "Firestones are used to light the fires of charcoal kilns and furnaces."
-msgstr ""
+msgstr "Кремень используются для разжига огня угольных печей и литейных."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Wooden Spear, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:435
@@ -1049,7 +1050,7 @@ msgstr "Гранит - это основной строительный мате
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1224
 msgid "There is only a little bit of quartz here."
-msgstr ""
+msgstr "Здесь есть немного кварца."
 
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an Atlantean resource indicator: Gold, part 2
@@ -1067,7 +1068,7 @@ msgstr "Здесь много золота."
 #. TRANSLATORS: Helptext for an Amazon resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1246
 msgid "There is a lot of quartz here."
-msgstr ""
+msgstr "Здесь много кварца."
 
 #. TRANSLATORS: Helptext for an Amazon immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an Atlantean immovable: Ship Under Construction
@@ -1627,7 +1628,7 @@ msgstr "Шоколад незаменим в обучении солдат-ам�
 #: ../../data/tribes/initialization/amazons/units.lua:1568
 msgctxt "amazons_building"
 msgid "Digs granite and quartz out of the ground in mountain terrain."
-msgstr ""
+msgstr "Выкапывает гранит и кварц из-под земли в горной местности."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Stone Mine
 #: ../../data/tribes/initialization/amazons/units.lua:1570
@@ -4101,7 +4102,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s, depending on "
 "how far the stonecutter has to walk."
-msgstr ""
+msgstr "Это здание может производить один гранит между %1$s и %2$s, в зависимости от того, как далеко должен идти камнетёс."
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Quarry,
 #. part 2
@@ -4349,7 +4350,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one meat between %1$s and %2$s, depending on how "
 "far the hunter has to walk."
-msgstr ""
+msgstr "Это здание может производить одно мясо между %1$s и %2$s, в зависимости от того, как далеко должен идти охотник."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Well
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Well
@@ -4395,7 +4396,7 @@ msgstr ""
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "If the water resource is depleted, the carrier needs %s on average."
-msgstr ""
+msgstr "Если водные ресурсы истощены, перевозчику, в среднем, нужно %s ."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Gold
 #. Spinning Mill
@@ -15200,7 +15201,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the supply is steady and there is continuous demand for fur, then the "
 "reindeer farm produces one meat after producing three pieces of fur."
-msgstr ""
+msgstr "Если поставка пищи будет стабильной и существует постоянный спрос на мех, то оленья ферма производит одно мясо после производства трех кусков меха."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Reindeer
 #. Farm
