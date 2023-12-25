@@ -313,8 +313,10 @@ jobs:
         include:
           - arch: x64
             bits: 64
+            archname: x86_64
           - arch: x86
             bits: 32
+            archname: i686
     name: Windows ${{ matrix.config }} ${{ matrix.arch }} Build (MinGW)
     runs-on: windows-2022
     steps:
@@ -328,7 +330,7 @@ jobs:
         pacman.exe --noconfirm -Syyuu --ignore ca-certificates
         pacman.exe --noconfirm -Syyuu --ignore ca-certificates
         bash.exe -c "./install-dependencies.sh msys${{ matrix.bits }} --noconfirm"
-        # pacman.exe --noconfirm -U https://repo.msys2.org/mingw/$env:archname/mingw-w64-$env:archname-libtiff-4.3.0-3-any.pkg.tar.zst
+        pacman.exe --noconfirm -U https://repo.msys2.org/mingw/mingw${{ matrix.bits }}/mingw-w64-${{ matrix.archname }}-SDL2_image-2.8.0-1-any.pkg.tar.zst
         choco install innosetup
     - name: Compiler
       run: |
