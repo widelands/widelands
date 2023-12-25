@@ -118,7 +118,9 @@ def mark_failures(stdout, test_script):
                test_title == "string.bformat test":
                 # no config is no problem, or triggered by testrun
                 continue
-            if last_wl_err_idx + 1 != idx:  # to mark each block only once
+            if "lua_errors.cc" in line:
+                lines[idx] = "::error title=lua error::" + line
+            elif last_wl_err_idx + 1 != idx:  # to mark each block only once
                 lines[idx] = "::info title=potential problem::" + line
             last_wl_err_idx = idx
     return "\n".join(lines) + "\n"
