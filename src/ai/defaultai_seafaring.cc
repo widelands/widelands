@@ -244,14 +244,17 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		if (start_expedition) {
 			verb_log_dbg_time(game().get_gametime(),
 			                  "  %1d: Starting preparation for expedition in port at %3dx%3d\n",
-			                  player_number(), p_obs.site->get_position().x, p_obs.site->get_position().y);
+			                  player_number(), p_obs.site->get_position().x,
+			                  p_obs.site->get_position().y);
 			game().send_player_start_or_cancel_expedition(*p_obs.site);
 			start_expedition = false;
 		}
 		p_obs.guard_ship_needed = warships_count / num_ports > p_obs.ships_assigned;
-		verb_log_dbg_time(game().get_gametime(),
-			                  "checking port %s: %d(%llu) ports and %d warships of %d assigned. We need %d warship\n",
-			                  p_obs.site->get_warehouse_name().c_str(), num_ports, portsites.size(), p_obs.ships_assigned, warships_count, p_obs.guard_ship_needed);
+		verb_log_dbg_time(
+		   game().get_gametime(),
+		   "checking port %s: %d(%llu) ports and %d warships of %d assigned. We need %d warship\n",
+		   p_obs.site->get_warehouse_name().c_str(), num_ports, portsites.size(),
+		   p_obs.ships_assigned, warships_count, p_obs.guard_ship_needed);
 	}
 	return true;
 }
@@ -598,7 +601,9 @@ void DefaultAI::warship_management(ShipObserver& so) {
 	game().send_player_warship_command(*so.ship, Widelands::WarshipCommand::kSetCapacity, {0u});
 
 	for (PortSiteObserver& p_obs : portsites) {
-		verb_log_dbg_time(gametime, "Port %s: needs %d guardship, has %d ships assigned\n", p_obs.site->get_warehouse_name().c_str(), p_obs.guard_ship_needed, p_obs.ships_assigned);
+		verb_log_dbg_time(gametime, "Port %s: needs %d guardship, has %d ships assigned\n",
+		                  p_obs.site->get_warehouse_name().c_str(), p_obs.guard_ship_needed,
+		                  p_obs.ships_assigned);
 		if (p_obs.guard_ship_needed) {
 			game().send_player_ship_set_destination(*so.ship, p_obs.site->get_portdock());
 			p_obs.guard_ship_needed = false;
