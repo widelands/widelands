@@ -252,7 +252,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		p_obs.guard_ship_needed = warships_count / num_ports > p_obs.ships_assigned;
 		verb_log_dbg_time(
 		   game().get_gametime(),
-		   "checking port %s: %d(%llu) ports and %d warships of %d assigned. We need %d warship\n",
+		   "checking port %s: %d(%lu) ports and %d warships of %d assigned. We need %d warship\n",
 		   p_obs.site->get_warehouse_name().c_str(), num_ports, portsites.size(),
 		   p_obs.ships_assigned, warships_count, p_obs.guard_ship_needed);
 	}
