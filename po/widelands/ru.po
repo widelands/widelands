@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-12-04 02:34+0000\n"
+"POT-Creation-Date: 2023-12-16 02:32+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Viktor Skachkov <awsswa59@gmail.com>, 2023\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
@@ -42,36 +42,36 @@ msgid "%2.1f%%"
 msgstr "%2.1f%%"
 
 #. TRANSLATORS: Short for "Not enough space"
-#: ../../data/scripting/infrastructure.lua:185
+#: ../../data/scripting/infrastructure.lua:188
 msgid "No Space"
 msgstr "Нет места"
 
-#: ../../data/scripting/infrastructure.lua:186
+#: ../../data/scripting/infrastructure.lua:189
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr "Не хватило места для постройки некоторых ваших стартовых зданий. Вы находитесь в невыгодном положении; можете начать игру заново, чтобы стартовать на более справедливых условиях."
 
-#: ../../data/scripting/infrastructure.lua:187
+#: ../../data/scripting/infrastructure.lua:190
 msgid "Not enough space"
 msgstr "Недостаточно места"
 
-#: ../../data/scripting/infrastructure.lua:285
+#: ../../data/scripting/infrastructure.lua:288
 msgid "No rocks nearby"
 msgstr "Поблизости нет скал"
 
-#: ../../data/scripting/infrastructure.lua:285
+#: ../../data/scripting/infrastructure.lua:288
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
 msgstr "Рядом с вашей исходной позицией нет скал. Поэтому вы получаете дополнительные ресурсы для развития своей экономики."
 
-#: ../../data/scripting/infrastructure.lua:291
+#: ../../data/scripting/infrastructure.lua:294
 msgid "Not enough trees nearby"
 msgstr "Не хватает деревьев поблизости"
 
-#: ../../data/scripting/infrastructure.lua:291
+#: ../../data/scripting/infrastructure.lua:294
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."
@@ -657,12 +657,12 @@ msgstr "Вы уверены, что хотите выйти из редакто�
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:486
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
 #: ../../src/ui_fsmenu/launch_mpg.cc:320 ../../src/ui_fsmenu/main.cc:273
-#: ../../src/wlapplication.cc:1673
+#: ../../src/wlapplication.cc:1678
 msgid "Error"
 msgstr "Ошибка"
 
 #: ../../src/editor/editorinteractive.cc:1141 ../../src/ui_fsmenu/main.cc:257
-#: ../../src/wlapplication.cc:1675
+#: ../../src/wlapplication.cc:1680
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -6961,19 +6961,19 @@ msgstr "Нельзя использовать сочетания парамет�
 msgid "Unknown command line parameter: %s"
 msgstr "Задан неизвестный параметр командной строки: %s"
 
-#: ../../src/wlapplication.cc:1651
+#: ../../src/wlapplication.cc:1656
 msgid "Incompatible"
 msgstr "Несовместимо"
 
-#: ../../src/wlapplication.cc:1688
+#: ../../src/wlapplication.cc:1693
 msgid "Game ended unexpectedly"
 msgstr "Неожиданный конец игры"
 
-#: ../../src/wlapplication.cc:1688
+#: ../../src/wlapplication.cc:1693
 msgid "Unexpected error during the game"
 msgstr "Неожиданная ошибка во время игры"
 
-#: ../../src/wlapplication.cc:1691
+#: ../../src/wlapplication.cc:1696
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6987,7 +6987,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Во время игры произошла ошибка. Сообщение об ошибке:\n\n%1$s\n\nПожалуйста, сообщите об этой проблеме, чтобы помочь нам улучшить Widelands. Вы найдете соответствующие сообщения в стандартном выводе (stdout.txt в Windows). Вы используете версию %2$s.\n\nПожалуйста, добавьте эту информацию в свой отчет.\n\nХотели бы вы, чтобы Widelands попытался создать автосохранение? Часто – хотя и не всегда – можно загрузить его и продолжить играть."
 
-#: ../../src/wlapplication.cc:1700
+#: ../../src/wlapplication.cc:1705
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6997,11 +6997,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Игра неожиданно завершилась по следующей причине:\n\n%s.\n\nХотели бы вы, чтобы Widelands попытался создать автосохранение? Часто – хотя и не всегда – можно загрузить его и продолжить играть."
 
-#: ../../src/wlapplication.cc:1734
+#: ../../src/wlapplication.cc:1739
 msgid "Emergency save failed"
 msgstr "Автосохранение завершилось с ошибкой"
 
-#: ../../src/wlapplication.cc:1735
+#: ../../src/wlapplication.cc:1740
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
