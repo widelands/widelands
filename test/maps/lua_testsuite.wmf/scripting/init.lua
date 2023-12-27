@@ -51,8 +51,13 @@ include "map:scripting/cplr_access.lua"
 
 include "map:scripting/immovables.lua"
 include "map:scripting/immovables_descriptions.lua"
-include "map:scripting/terrains_resources_descriptions.lua"
-include "map:scripting/tribes_descriptions.lua"
+local ret_empty = include "map:scripting/terrains_resources_descriptions.lua"
+
+local function to_test_include_in_fn()
+   ret = include "map:scripting/tribes_descriptions.lua"
+   return ret
+end
+local ret_empty_from_fn = to_test_include_in_fn() -- tested directly
 
 if not wl.editor then
    include "map:scripting/game.lua"
@@ -74,31 +79,54 @@ end
 -- ===========================
 -- Test for auxiliary scripts
 -- ===========================
-local ret_table = include "map:scripting/table.lua"
-local ret_set = include "map:scripting/set.lua"
+local ret_values = include "map:scripting/set.lua"
+local function test_with_coro(test_case, sleep_time)
+   if sleep_time > 0 then
+      sleep(sleep_time)
+   end
+   local ret = include "map:scripting/table.lua"
+   function test_case:test_include_in_coro()
+      assert_table(ret)
+      assert_nil(next(ret), "empty table")
+   end
+end
+-- is called later
 
+-- ===========================
+-- Test for return of include
+-- ===========================
 local test_include = lunit.TestCase("include tests")
+
 function test_include:test_include_return_nothing()
-   assert_table(ret_table)
-   assert_nil(next(ret_table), "empty table")
+   assert_table(ret_empty)
+   assert_nil(next(ret_empty), "empty table")
 end
 
-function test_include:test_include_return_table()
-   assert_table(ret_set)
-   assert_equal('set return text', ret_set.testString)
-   assert_equal(7, ret_set.testNo)
+function test_include:test_include_return_nothing_in_func()
+   assert_table(ret_empty_from_fn)
+   assert_nil(next(ret_empty_from_fn), "empty table")
+end
+
+function test_include:test_include_return_values()
+   assert_table(ret_values)
+   assert_equal('set return text', ret_values.testString)
+   assert_equal(7, ret_values.testNo)
 end
 
 -- ============
 -- Test Runner
 -- ============
-lunit:run()
 
 include "scripting/coroutine.lua"
 if wl.editor then
+   run(test_with_coro, test_include, 0)
+   lunit:run()
    wl.ui.MapView():close()
 else
+   run(test_with_coro, test_include, 10)
    run(function()
+      sleep(87)
+      lunit:run()
       sleep(1000)
       wl.ui.MapView():close()
    end)
