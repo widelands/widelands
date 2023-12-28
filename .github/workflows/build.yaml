@@ -35,7 +35,7 @@ jobs:
               - 'src/**'
                 # dependencies:
               - 'install-dependencies.sh' # called by xx.yaml or ./.github/scripts/install_deps.sh
-              - 'utils/download_asio.sh' # called sometimes by install-dependencies.sh
+              # not 'utils/download_asio.sh', called by install-dependencies.sh for some other arch
             - &installer
               - *src_cmake_dependencies
               - 'data/**'
