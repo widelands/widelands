@@ -997,7 +997,7 @@ msgstr "%1$s; %2$s"
 #: ../../src/editor/ui_menus/field_info_window.cc:262
 #, c-format
 msgid "Enabled Add-Ons: %s"
-msgstr "Aktív Bővítmények: %s"
+msgstr "Aktív bővítmények: %s"
 
 #: ../../src/editor/ui_menus/help.cc:36 ../../src/ui_fsmenu/login_box.cc:255
 #: ../../src/ui_fsmenu/main.cc:255 ../../src/ui_fsmenu/main.cc:1084
@@ -5347,7 +5347,7 @@ msgid ""
 "with a description of what was going on in the game and what you did last "
 "before the crash to the Widelands Development Team under %s so we can fix "
 "the problem."
-msgstr ""
+msgstr "Úgy tűnik, a Widelands összeomlott a legutóbbi használatkor, de a hibakereséshez sikerült elmenteni az összeomlás adatait. Kérjük, küldd el a jelentést a Widelands fejlesztői csapatának a %s szerint, hogy ki tudjuk javítani a hibát! Kérjük írd le azt is, hogy mi történt éppen a játékban, és te mit csináltál utoljára az összeomlás előtt!"
 
 #: ../../src/ui_fsmenu/crash_report.cc:145
 msgid "Show details…"
@@ -6820,11 +6820,11 @@ msgstr "Program helye:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:172
 msgid "Enabled Add-Ons:"
-msgstr ""
+msgstr "Aktív bővítmények:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:174
 msgid "Inactive Installed Add-Ons:"
-msgstr ""
+msgstr "Telepített, de kikapcsolt bővítmények:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:233
 msgid "Copy"
