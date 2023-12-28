@@ -981,7 +981,7 @@ void Soldier::attack_update(Game& game, State& state) {
 
 	// Count remaining defenders
 	if (enemy != nullptr) {
-		if (!owner().is_hostile(enemy->owner())) {
+		if (!owner().is_hostile(enemy->owner()) && !enemy->owner().is_hostile(owner())) {
 			/* The players agreed on a truce. */
 			molog(game.get_gametime(), "[attack] opponent is an ally, cancel attack");
 			combat_walking_ = CD_NONE;
@@ -1440,7 +1440,7 @@ void Soldier::battle_update(Game& game, State& /* state */) {
 
 	const Map& map = game.map();
 	Soldier& opponent = *battle_->opponent(*this);
-	if (!owner().is_hostile(opponent.owner())) {
+	if (!owner().is_hostile(opponent.owner()) && !opponent.owner().is_hostile(owner())) {
 		/* The players agreed on a truce. */
 		molog(game.get_gametime(), "[battle] opponent is an ally, cancel battle");
 		combat_walking_ = CD_NONE;

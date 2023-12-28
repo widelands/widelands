@@ -8,14 +8,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Frida Bäcklund <frida.sofia.backlund@gmail.com>, 2021
 # GunChleoc, 2014
-# Niklas Nordgren, 2022
+# Niklas Nordgren, 2022-2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-07-08 03:03+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
-"Last-Translator: D M <kamera001dm@gmail.com>, 2023\n"
+"Last-Translator: Niklas Nordgren, 2022-2023\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,13 +27,13 @@ msgstr ""
 msgid ""
 "I am sorry, but I will have to tear this down. We might need the space here "
 "later on."
-msgstr ""
+msgstr "Tyvärr behöver jag riva det här. Vi kan behöva utrymmet senare."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:17
 msgid ""
 "I am sorry, but I will have to tear this down again. We might need the space"
 " here later on."
-msgstr ""
+msgstr "Tyvärr behöver jag riva det här igen. Vi kan behöva utrymmet senare."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:21
 msgid "Nice And Easy Does It All the Time"
@@ -44,7 +44,7 @@ msgid ""
 "If I am too slow for you, you might want to play a real game and just find "
 "everything out for yourself. Otherwise, please bear with me, I am not the "
 "youngest and quickest anymore."
-msgstr ""
+msgstr "Om jag är för långsam i dina ögon kanske du vill spela ett riktigt spel och själv lista ut hur allt funkar. Ha annars tålamod med mig, jag är inte längre så ung och rask av mig."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:36
 msgid "Welcome to the Widelands Tutorial!"
@@ -214,7 +214,7 @@ msgid ""
 "menu). Therefore, I have entered the road building mode manually. I will "
 "tell you later how to do that. To build the road, all I have to do now is "
 "click on the blue flag in front of my headquarters."
-msgstr ""
+msgstr "Detta räcker ändå inte. Jag måste också ansluta skogshuggarens stuga till högkvarteret Du har stängt av inställningen ‘Börja bygga väg efter att flaggan placeras’ (för att ändra detta, välj 'Inställningar' i Widelands huvudmeny). Därför har jag gått in i vägbyggnadsläge manuellt. Jag kommer att tala om senare hur du gör det. För att bygga vägen är allt jag nu behöver göra att klicka på den blåa flaggan framför mitt högkvarter."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:148
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:182
