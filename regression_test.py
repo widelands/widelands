@@ -52,6 +52,29 @@ def out(string):
     sys.stdout.write(string)
     sys.stdout.flush()
 
+
+def mark_line(severity, line, file=None, line_no=None, title=None):
+    """Add an annotation on github or color on console."""
+    if os.getenv("GITHUB_ACTION"):
+        ref_list = []
+        for k, val in iteritems({"file": file, "line": line_no, "title": title}):
+            if val:
+                ref_list.append(f"{k}={val}")
+        refs = " " + ",".join(ref_list) if ref_list else ""
+        return f"::{ severity }{ refs }::{ line }"
+    else:
+        sev_to_col = {
+            "info": 36,  # cyan
+            "warning": 33,  # yellow
+            "error": 31,  # red
+        }
+        color = sev_to_col.get(severity, 35)  # fallback to violet
+        line = f"\033[{ color }m{ line }\033[{ 39 }m"  # line has colour
+        if file:
+            line = line.replace(file, f"\033[4m{ file }\033[24m", 1)  # underline filename
+        return line
+
+
 def mark_failures(stdout, test_script):
     """find failure lines in stdout of a test run and mark them
 
@@ -59,7 +82,7 @@ def mark_failures(stdout, test_script):
 
     Examples of detected lines are shown in code.
 
-    Failures are marked on github.
+    Failures are marked on github or colored on console.
 
     returns the modified stdout
     """
@@ -79,7 +102,7 @@ def mark_failures(stdout, test_script):
                 warn = (warn + ", duplicate test name").lstrip(", ")
             test_titles.add(test_title)
             if warn:
-                lines[idx] = f"::warning title={warn}::{line}"
+                lines[idx] = mark_line("warning", line, title=warn)
         elif ":" in line and line.startswith(("FAIL: ", "ERROR: ", "WARNING: ")):
             data = line.split(':', 4)
             severity = "warning" if data[0] == "WARNING" else "error"
@@ -96,21 +119,22 @@ def mark_failures(stdout, test_script):
                 if file.startswith("scripting"):
                     file = f"{map_dir}/{file}"
                 line_no = data[3]
-                err = f"::{severity} file={file},line={line_no},title={test_title} - {test_name}::"
+                title = f"{test_title} - {test_name}"
+                err = mark_line(severity, line, file=file, line_no=line_no, title=title)
             elif len(data) > 1:
                 # format:
                 # FAIL: test_road_crosses_another: Couldn't build flag!
                 test_name = data[1].lstrip()
                 # could try to find file and line in following traceback
-                err = f"::{severity} title={test_title} - {test_name}::"
+                err = mark_line(severity, line, title=f"{test_title} - {test_name}")
             else:
                 # format:
                 # WARNING: teardown() failed!
-                err = f"::{severity} title={test_title}::"
+                err = mark_line(severity, line, title=test_title)
             lines[idx] = err
         elif "Assertions checked." in line and "Tests passed" in line:
             # summary of lua test run
-            lines[idx] = "::info title=test summary::" + line
+            lines[idx] = mark_line("warning", line, title="test summary")
         elif "] ERROR: " in line:
             # error message of widelands, like:
             # [00:00:00.000 real] ERROR: [] config:0: RealFSImpl::load: ...
@@ -119,9 +143,9 @@ def mark_failures(stdout, test_script):
                 # no config is no problem, or triggered by testrun
                 continue
             if "lua_errors.cc" in line:
-                lines[idx] = "::error title=lua error::" + line
+                lines[idx] = mark_line("error", line, title="lua error")
             elif last_wl_err_idx + 1 != idx:  # to mark each block only once
-                lines[idx] = "::info title=potential problem::" + line
+                lines[idx] = mark_line("info", line, title="potential problem")
             last_wl_err_idx = idx
     return "\n".join(lines) + "\n"
 
@@ -262,7 +286,11 @@ class WidelandsTestCase(unittest.TestCase):
                     if os.getenv("GITHUB_ACTION"):
                         start_stdout = "::group::stdout\n"
                         end_stdout = "::endgroup::\n"
+
+                    if os.getenv("GITHUB_ACTION") or \
+                            sys.stdout.isatty() and os.getenv("TERM") != "dumb":
                         stdout_txt = mark_failures(stdout, self._test_script)
+
                     return (f"{self_msg.intro} Analyze the files in {self.run_dir} to see why "
                             f"this test case failed. Stdout is\n  {stdout_filename}\n\n"
                             f"{start_stdout}stdout:\n{stdout_txt}{end_stdout}")
