@@ -121,12 +121,12 @@ static int L_string_bformat(lua_State* L) {
 				const std::string type = lua_typename(L, lua_type(L, i));
 				report_error(L, "Cannot format the given type %s at index %i", type.c_str(), i);
 				NEVER_HERE();  // as report_error will never return
-				}
+			}
 
 			default: {
 				const std::string type = lua_typename(L, lua_type(L, i));
 				throw LuaError("Unexpected type " + type + " is not supported");
-				}
+			}
 			}
 		}
 
