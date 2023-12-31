@@ -51,8 +51,9 @@ void setup_for_editor_and_game(lua_State* L, Widelands::EditorGameBase* g) {
 }
 
 // Can run script also from the map.
-std::unique_ptr<LuaTable>
-run_script_maybe_from_map(lua_State* L, const std::string& path, const bool keep_lua_table = false) {
+std::unique_ptr<LuaTable> run_script_maybe_from_map(lua_State* L,
+                                                    const std::string& path,
+                                                    const bool keep_lua_table = false) {
 	if (starts_with(path, "map:")) {
 		return run_script(L, path.substr(4), get_egbase(L).map().filesystem(), keep_lua_table);
 	}
