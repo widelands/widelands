@@ -1132,7 +1132,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s, depending on "
 "how far the stonecutter has to walk."
-msgstr ""
+msgstr "A kőfejtő %1$s és %2$s között termel egy gránitot, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site:
 #. Stonecutter's Hut, part 2
@@ -1157,7 +1157,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1420
 msgctxt "amazons_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr ""
+msgstr "Egyenetlen terep vagy akadályok esetén tovább is tarthat."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Woodcutter's
 #. Hut
@@ -1180,7 +1180,7 @@ msgid ""
 "This building can produce one log between %1$s and %2$s (with master "
 "woodcutter between %3$s and %4$s), depending on how far the woodcutter has "
 "to walk."
-msgstr ""
+msgstr "A favágó %1$s és %2$s között, a favágómester %3$s és %4$s között termel egy farönköt, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Jungle
 #. Preserver's Hut
@@ -1205,7 +1205,7 @@ msgctxt "amazons_building"
 msgid ""
 "The jungle preserver or jungle master plants one tree between %1$s and %2$s,"
 " depending on how far she has to walk."
-msgstr ""
+msgstr "A dzsungelfenntartó vagy dzsungelmester %1$s és %2$s között ültet egy fát, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Hunter-
 #. Gatherer's Hut
@@ -1238,7 +1238,7 @@ msgid ""
 "This building can produce one meat or one fish between %1$s and %2$s, "
 "depending on how far the hunter-gatherer has to walk. If both kinds of food "
 "are available, then one of each kind is produced between %3$s and %4$s."
-msgstr ""
+msgstr "A vadász-gyűjtögető %1$s és %2$s között termel egy húst vagy egy halat, attól függően, hogy mennyit kell gyalogolnia. Ha mindkettőt talál, akkor %3$s és %4$s között termel egyet-egyet."
 
 #. TRANSLATORS: Lore author helptext for an Amazon production site: Liana
 #. Cutter's Hut
@@ -1311,7 +1311,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one bucket of water between %1$s and %2$s on "
 "average, depending on how far the carrier has to walk."
-msgstr ""
+msgstr "A vízgyűjtő kunyhó %1$s és %2$s között termel egy vödör vizet, attól függően, hogy a hordárnak mennyit kell gyalogolnia."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Rare Tree
 #. Cutter's Hut
@@ -1331,7 +1331,7 @@ msgid ""
 "how far the woodcutter has to walk. If all kinds of rare tree are available "
 "within her work area, then one of each kind is produced between %3$s and "
 "%4$s."
-msgstr ""
+msgstr "A favágómester %1$s és %2$s között termel egy ritkafát, attól függően, hogy mennyit kell gyalogolnia. Ha minden fajta ritkafát talál a munkaterületén, akkor %3$s és %4$s között termel mindegyikből egyet-egyet."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Wilderness
 #. Keeper's Tent
@@ -1367,7 +1367,7 @@ msgstr "Ismeretlen területeket fedez fel."
 #: ../../data/tribes/initialization/amazons/units.lua:1418
 msgctxt "amazons_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Egy felderítőút %1$s és %2$s közötti ideig tart."
 
 #. TRANSLATORS: Lore author helptext for an Amazon production site: Rope
 #. Weaver's Booth
@@ -1457,7 +1457,7 @@ msgid ""
 "the economy, production of one of each tool takes %1$s and one of each spear"
 " takes %2$s on average. If only one kind of tool or spear is needed by the "
 "economy, its production takes %3$s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és minden szerszámra és lándzsára szükség van a gazdaságban, akkor a kőfaragó műhely átlagosan %1$senként készít minden szerszámból egyet, és %2$senként minden lándzsából egyet. Ha csak egy fajta szerszámra vagy lándzsára van szükség, akkor abból átlagosan %3$senként készít egyet."
 
 #. TRANSLATORS: Lore helptext for an Amazon production site: Dressmakery
 #: ../../data/tribes/initialization/amazons/units.lua:1472
@@ -1491,7 +1491,7 @@ msgid ""
 "needed by the economy, production of one of each of them takes %1$s on "
 "average. If only one kind of them is needed by the economy, its production "
 "takes %2$s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és minden ruhára, csizmára és páncélra szükség van a gazdaságban, akkor a ruhakészítő műhely átlagosan %1$senként készít mindegyikből egyet. Ha csak egy fajtára van szükség, akkor abból átlagosan %2$senként készít egyet."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Charcoal Kiln
 #: ../../data/tribes/initialization/amazons/units.lua:1485
@@ -1646,7 +1646,7 @@ msgstr "Itt mossák ki az aranyport a kőtörmelék közül a hegyekben."
 msgctxt "amazons_building"
 msgid ""
 "If the supply is steady, this mine can produce gold dust in %s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, akkor az aranyásó átlagosan %senként termel egy adag aranyport."
 
 #. TRANSLATORS: Purpose helptext for an Amazon training site: Warriors’
 #. Gathering
@@ -4087,7 +4087,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s, depending on "
 "how far the stonecutter has to walk."
-msgstr ""
+msgstr "A kőfejtő %1$s és %2$s között termel egy gránitot, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Quarry,
 #. part 2
@@ -4109,7 +4109,7 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:1646
 msgctxt "atlanteans_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr ""
+msgstr "Egyenetlen terep vagy akadályok esetén tovább is tarthat."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site:
 #. Woodcutter's House
@@ -4156,7 +4156,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one log between %1$s and %2$s, depending on how "
 "far the woodcutter has to walk."
-msgstr ""
+msgstr "A favágó %1$s és %2$s között termel egy farönköt, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Forester's
 #. House
@@ -4205,7 +4205,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The forester plants one tree between %1$s and %2$s, depending on how far he "
 "has to walk."
-msgstr ""
+msgstr "Az erdész %1$s és %2$s között ültet egy fát, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Fisher's
 #. House
@@ -4261,7 +4261,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one fish between %1$s and %2$s, depending on how "
 "far the fisher has to walk."
-msgstr ""
+msgstr "A halász %1$s és %2$s között termel egy halat, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Fish
 #. Breeder's House
@@ -4335,7 +4335,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one meat between %1$s and %2$s, depending on how "
 "far the hunter has to walk."
-msgstr ""
+msgstr "A vadász %1$s és %2$s között termel egy húst, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Well
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Well
@@ -4373,7 +4373,7 @@ msgstr "Geológus víz keresése közben"
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The carrier needs %s to get one bucket full of water."
-msgstr ""
+msgstr "A kút %senként termel egy vödör vizet."
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Well,
 #. part 2
@@ -4381,7 +4381,7 @@ msgstr ""
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "If the water resource is depleted, the carrier needs %s on average."
-msgstr ""
+msgstr "Ha a vízkészlet kimerült, akkor átlagosan %senként termel egyet."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Gold
 #. Spinning Mill
@@ -4461,7 +4461,7 @@ msgstr "Felderítő válasza a katonának"
 #: ../../data/tribes/initialization/atlanteans/units.lua:1644
 msgctxt "atlanteans_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Egy felderítőút %1$s és %2$s közötti ideig tart."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Sawmill
 #. TRANSLATORS: Purpose helptext for an Empire production site: Sawmill
@@ -4524,7 +4524,7 @@ msgid ""
 " takes %2$s on average. If only one kind of food is needed by the economy, "
 "production of one smoked fish takes %3$s and one smoked meat takes %4$s on "
 "average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és minden füstölt árura szükség van a gazdaságban, akkor a füstölő átlagosan %1$senként készít egy füstölt halat, és %2$senként egy füstölt húst. Ha csak az egyikre van szükség, akkor átlagosan %3$senként készít egy füstölt halat, vagy %4$senként egy füstölt húst."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Mill
 #: ../../data/tribes/initialization/atlanteans/units.lua:1683
@@ -4564,7 +4564,7 @@ msgid ""
 " economy, production of one sack of each kind of flour takes %1$s on "
 "average. If only one kind of flour is needed by the economy, its production "
 "takes %2$s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és mindkét fajta lisztre szükség van a gazdaságban, akkor a malom átlagosan %1$senként készít mindegyikből egyet. Ha csak az egyikre van szükség, akkor abból átlagosan %2$senként készít egyet."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Bakery
 #: ../../data/tribes/initialization/atlanteans/units.lua:1698
@@ -4670,7 +4670,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és mindkét fémre szükség van a gazdaságban, akkor a kohó átlagosan %1$senként készít egy vasat és %2$senként egy aranyat. Ha csak az egyikre van szükség, akkor átlagosan %3$senként készít egy vasat vagy %4$senként egy aranyat."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Toolsmithy
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Metal
@@ -4704,7 +4704,7 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és minden szerszámra szükség van a gazdaságban, akkor a szerszámkovács átlagosan %1$senként készít mindegyikből egyet. Ha csak egy fajtára van szükség, akkor abból átlagosan %2$senként készít egyet."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Weapon
 #. Smithy
@@ -4743,7 +4743,7 @@ msgid ""
 "one kind of trident is needed by the economy, production of one light "
 "trident takes %2$s and one long trident, one steel trident, one double "
 "trident or one heavy double trident takes %3$s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és minden fajta szigonyra szükség van a gazdaságban, akkor a fegyverkovács átlagosan %1$senként készít mindegyikből egyet. Ha csak egy fajtára van szükség, akkor átlagosan %2$senként készít egy könnyű szigonyt, vagy %3$senként egy hosszú-, acél-, kétvégű- vagy nehéz kétvégű szigonyt."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Armor
 #. Smithy
@@ -4772,7 +4772,7 @@ msgid ""
 "the economy, production of one of each kind takes %1$s on average. If only "
 "one kind of shield is needed by the economy, production of one steel shield "
 "takes %2$s and one advanced shield takes %3$s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és mindkét fajta pajzsra szükség van a gazdaságban, akkor a páncélkovács átlagosan %1$senként készít mindegyikből egyet. Ha csak az egyikre van szükség, akkor átlagosan %2$senként készít egy acélpajzsot, vagy %3$senként egy fejlesztett pajzsot."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Barracks
 #: ../../data/tribes/initialization/atlanteans/units.lua:1782
@@ -4929,7 +4929,7 @@ msgid ""
 "needed by the economy, production of one of each cloth and tabard takes %1$s"
 " on average. If only one kind of cloth or tabard is needed by the economy, "
 "its production takes %2$s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és minden termékére szükség van a gazdaságban, akkor a szövőmalom átlagosan %1$senként készít egy pókszövetet és mindkét fajta köntösből egyet-egyet. Ha csak az egyikre van szükség, akkor abból átlagosan %2$senként készít egyet."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Crystal
 #. Mine
@@ -4965,7 +4965,7 @@ msgid ""
 " diamond takes %3$s on average. If only one kind of mineral is needed by the"
 " economy, production of one granite takes %4$s, one quartz takes %5$s and "
 "one diamond takes %6$s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és minden ásványra szükség van a gazdaságban, akkor a kristálybánya átlagosan %1$senként termel egy gránitot, %2$senként egy kvarcot, és %3$senként egy gyémántot. Ha csak az egyikre van szükség, akkor átlagosan %4$senként termel egy gránitot, %5$senként egy kvarcot, vagy %6$senként egy gyémántot."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for production site: Coal Mine
@@ -5014,7 +5014,7 @@ msgstr "Dal a bányászok céhétől"
 msgctxt "atlanteans_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in %s on average."
-msgstr ""
+msgstr "Ha az élelmiszerellátás folyamatos, akkor ez a bánya átlagosan %s alatt termel egy darab szenet."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Iron Mine
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Iron Mine
@@ -5046,7 +5046,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "If the food supply is steady, this mine can produce iron ore in %s on "
 "average."
-msgstr ""
+msgstr "Ha az élelmiszerellátás folyamatos, akkor ez a bánya átlagosan %s alatt termel egy darab vasércet."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for production site: Gold Mine
@@ -5092,7 +5092,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in %s on "
 "average."
-msgstr ""
+msgstr "Ha az élelmiszerellátás folyamatos, akkor ez a bánya átlagosan %s alatt termel egy darab aranyércet."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean training site: Dungeon, part
 #. 1
@@ -6604,7 +6604,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s, depending on "
 "how far the stonemason has to walk."
-msgstr ""
+msgstr "A kőfaragó %1$s és %2$s között termel egy gránitot, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Quarry,
 #. part 2
@@ -6626,7 +6626,7 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:1274
 msgctxt "barbarians_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr ""
+msgstr "Egyenetlen terep vagy akadályok esetén tovább is tarthat."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Lumberjack_s
 #. Hut
@@ -6659,7 +6659,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one log between %1$s and %2$s, depending on how "
 "far the lumberjack has to walk."
-msgstr ""
+msgstr "A favágó %1$s és %2$s között termel egy farönköt, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Ranger's Hut
 #: ../../data/tribes/initialization/barbarians/units.lua:1173
@@ -6690,7 +6690,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The ranger plants one tree between %1$s and %2$s, depending on how far he "
 "has to walk."
-msgstr ""
+msgstr "Az erdőőr %1$s és %2$s között ültet egy fát, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Fisher's Hut
 #: ../../data/tribes/initialization/barbarians/units.lua:1192
@@ -6732,7 +6732,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one fish between %1$s and %2$s, depending on how "
 "far the fisher has to walk."
-msgstr ""
+msgstr "A halász %1$s és %2$s között termel egy halat, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Hunter's Hut
 #: ../../data/tribes/initialization/barbarians/units.lua:1215
@@ -6762,7 +6762,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one meat between %1$s and %2$s, depending on how "
 "far the hunter has to walk."
-msgstr ""
+msgstr "A vadász %1$s és %2$s között termel egy húst, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Gamekeeper's
 #. Hut
@@ -6814,7 +6814,7 @@ msgstr "Sigurd, a Bárd dala a Nagy Aszály utáni első eső lehullásakor, Cha
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The carrier needs %s to get one bucket full of water."
-msgstr "A hordár %s alatt merít egy vízzel teli vödröt."
+msgstr "A kút %senként termel egy vödör vizet."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Well,
 #. part 2
@@ -6822,7 +6822,7 @@ msgstr "A hordár %s alatt merít egy vízzel teli vödröt."
 #, lua-format
 msgctxt "barbarians_building"
 msgid "If the water resource is depleted, the carrier needs %s on average."
-msgstr ""
+msgstr "Ha a vízkészlet kimerült, akkor átlagosan %senként termel egyet."
 
 #: ../../data/tribes/initialization/barbarians/units.lua:1263
 msgctxt "barbarians_building"
@@ -6851,7 +6851,7 @@ msgstr "Chat’Karuth<br>az első felderítőosztag eskütételén"
 #: ../../data/tribes/initialization/barbarians/units.lua:1272
 msgctxt "barbarians_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Egy felderítőút %1$s és %2$s közötti ideig tart."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Wood Hardener
 #: ../../data/tribes/initialization/barbarians/units.lua:1284
@@ -7111,7 +7111,7 @@ msgid ""
 "economy, production of one of each food takes %1$s on average. If only one "
 "kind of food is needed by the economy, production of one ration takes %2$s "
 "and one snack takes %3$s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és mindkét fajta ételre szükség van a gazdaságban, akkor a fogadó átlagosan %1$senként készít mindegyikből egyet. Ha csak egy fajtára van szükség, akkor átlagosan %2$senként készít egy harapnivalót vagy %3$senként egy uzsonnát."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Big Inn
 #: ../../data/tribes/initialization/barbarians/units.lua:1394
@@ -7143,7 +7143,7 @@ msgid ""
 "economy, production of one of each food takes %1$s on average. If only one "
 "kind of food is needed by the economy, production of one ration takes %2$s, "
 "one snack takes %3$s and one meal takes %4$s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és minden fajta ételre szükség van a gazdaságban, akkor a nagy fogadó átlagosan %1$senként készít mindegyikből egyet. Ha csak egy fajtára van szükség, akkor átlagosan %2$senként készít egy harapnivalót, %3$senként egy uzsonnát, vagy %4$senként egy ebédet."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Charcoal Kiln
 #: ../../data/tribes/initialization/barbarians/units.lua:1407
@@ -7187,7 +7187,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és mindkét fémre szükség van a gazdaságban, akkor a kohó átlagosan %1$senként készít egy vasat és %2$senként egy aranyat. Ha csak az egyikre van szükség, akkor átlagosan %3$senként készít egy vasat vagy %4$senként egy aranyat."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Metal Workshop
 #: ../../data/tribes/initialization/barbarians/units.lua:1439
@@ -7221,7 +7221,7 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és minden szerszámra szükség van a gazdaságban, akkor a szerszámkészítő műhely átlagosan %1$senként készít mindegyikből egyet. Ha csak egy fajtára van szükség, akkor abból átlagosan %2$senként készít egyet."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Warmill
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Ax Workshop
@@ -7269,7 +7269,7 @@ msgid ""
 "If this building is fully supplied and all axes are needed by the economy, "
 "production of one of each ax takes %1$s on average. If only one kind of ax "
 "is needed by the economy, its production takes %2$s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és minden fejszére szükség van a gazdaságban, akkor a fejszekészítő műhely átlagosan %1$senként készít mindegyikből egyet. Ha csak egy fajtára van szükség, akkor abból átlagosan %2$senként készít egyet."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Warmill,
 #. part 2
@@ -7423,7 +7423,7 @@ msgid ""
 "economy, production of one of each helmet takes %1$s on average. If only one"
 " kind of helmet is needed by the economy, production of one helmet takes "
 "%2$s, one mask takes %3$s and one warhelm takes %4$s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és minden sisakra szükség van a gazdaságban, akkor a sisakkészítő műhely átlagosan %1$senként készít mindegyikből egyet. Ha csak egy fajtára van szükség, akkor átlagosan %2$senként készít egy sisakot, %3$senként egy maszkot, vagy %4$senként egy harci sisakot."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Granite Mine
 #: ../../data/tribes/initialization/barbarians/units.lua:1549
@@ -10755,7 +10755,7 @@ msgctxt "empire_building"
 msgid ""
 "The stonemason finds 5 blocks of granite and 2 blocks of marble out of 7 "
 "rocks."
-msgstr ""
+msgstr "A kőfaragó hétből ötször gránitot, kétszer márványt talál."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Quarry,
 #. part 1
@@ -10764,7 +10764,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s and one marble "
 "between %3$s and %4$s, depending on how far the stonemason has to walk."
-msgstr ""
+msgstr "A kőfaragó átlagosan %1$s és %2$s között termel egy gránitot, és %3$s és %4$s között egy márványt, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Quarry,
 #. part 2
@@ -10786,7 +10786,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:1422
 msgctxt "empire_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr ""
+msgstr "Egyenetlen terep vagy akadályok esetén tovább is tarthat."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -10825,7 +10825,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one log between %1$s and %2$s, depending on how "
 "far the lumberjack has to walk."
-msgstr ""
+msgstr "A favágó %1$s és %2$s között termel egy farönköt, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -10864,7 +10864,7 @@ msgctxt "empire_building"
 msgid ""
 "The forester plants one tree between %1$s and %2$s, depending on how far he "
 "has to walk."
-msgstr ""
+msgstr "Az erdész %1$s és %2$s között ültet egy fát, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -10915,7 +10915,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one fish between %1$s and %2$s, depending on how "
 "far the fisher has to walk."
-msgstr ""
+msgstr "A halász %1$s és %2$s között termel egy halat, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -10952,7 +10952,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one meat between %1$s and %2$s, depending on how "
 "far the hunter has to walk."
-msgstr ""
+msgstr "A vadász %1$s és %2$s között termel egy húst, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -10984,7 +10984,7 @@ msgstr "Birodalmi közmondás"
 #, lua-format
 msgctxt "empire_building"
 msgid "The carrier needs %s to get one bucket full of water."
-msgstr ""
+msgstr "A kút %senként termel egy vödör vizet."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Well, part
 #. 2
@@ -10992,7 +10992,7 @@ msgstr ""
 #, lua-format
 msgctxt "empire_building"
 msgid "If the water resource is depleted, the carrier needs %s on average."
-msgstr ""
+msgstr "Ha a vízkészlet kimerült, akkor átlagosan %senként termel egyet."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11028,7 +11028,7 @@ msgstr "Felderítő küldéséhez a zászlót össze kell kötni egy felderítő
 #: ../../data/tribes/initialization/empire/units.lua:1420
 msgctxt "empire_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Egy felderítőút %1$s és %2$s közötti ideig tart."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11302,7 +11302,7 @@ msgid ""
 "economy, production of one of each food takes %1$s on average. If only one "
 "kind of food is needed by the economy, production of one ration takes %2$s "
 "and one meal takes %3$s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és mindkét fajta ételre szükség van a gazdaságban, akkor a fogadó átlagosan %1$senként készít mindegyikből egyet. Ha csak egy fajtára van szükség, akkor átlagosan %2$senként készít egy harapnivalót vagy %3$senként egy ebédet."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11357,7 +11357,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és mindkét fémre szükség van a gazdaságban, akkor a kohó átlagosan %1$senként készít egy vasat és %2$senként egy aranyat. Ha csak az egyikre van szükség, akkor átlagosan %3$senként készít egy vasat vagy %4$senként egy aranyat."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11387,7 +11387,7 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és minden szerszámra szükség van a gazdaságban, akkor a szerszámkovács átlagosan %1$senként készít mindegyikből egyet. Ha csak egy fajtára van szükség, akkor abból átlagosan %2$senként készít egyet."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11437,7 +11437,7 @@ msgid ""
 "kind of armor takes %2$s on average. If only one kind of armor or helmets is"
 " needed by the economy, production of one helmet takes %3$s, while one kind "
 "of armor takes %4$s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és minden páncélra és sisakra is szükség van a gazdaságban, akkor a páncélkovács átlagosan %1$senként készít egy sisakot és %2$senként minden fajta páncélból egyet-egyet. Ha csak az egyikre van szükség, akkor átlagosan %3$senként készít egy sisakot vagy %4$senként egy páncélt."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11654,7 +11654,7 @@ msgid ""
 "spear is needed by the economy, production of one wooden spear takes %2$s, "
 "one spear, one advanced spear, one heavy spear or one war spear takes %3$s "
 "on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és minden lándzsára szükség van a gazdaságban, akkor a fegyverkovács átlagosan %1$senként készít mindegyikből egyet. Ha csak egy fajtára van szükség, akkor átlagosan %2$senként készít egy fa lándzsát, vagy %3$senként egy lándzsát, fejlesztett lándzsát, nehéz lándzsát vagy harci lándzsát."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -14196,7 +14196,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s, depending on "
 "how far the stonemason has to walk."
-msgstr ""
+msgstr "A kőfaragó %1$s és %2$s között termel egy gránitot, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Quarry,
 #. part 2
@@ -14218,7 +14218,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1777
 msgctxt "frisians_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr ""
+msgstr "Egyenetlen terep vagy akadályok esetén tovább is tarthat."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Woodcutter's
 #. House
@@ -14250,7 +14250,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one log between %1$s and %2$s, depending on how "
 "far the woodcutter has to walk."
-msgstr ""
+msgstr "A favágó %1$s és %2$s között termel egy farönköt, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Forester's House
 #: ../../data/tribes/initialization/frisians/units.lua:1594
@@ -14282,7 +14282,7 @@ msgctxt "frisians_building"
 msgid ""
 "The forester plants one tree between %1$s and %2$s, depending on how far he "
 "has to walk."
-msgstr ""
+msgstr "Az erdész %1$s és %2$s között ültet egy fát, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: Note helptext for a Frisian production site: Hunter's House
 #: ../../data/tribes/initialization/frisians/units.lua:1615
@@ -14297,14 +14297,14 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one meat between %1$s and %2$s, depending on how "
 "far the hunter has to walk."
-msgstr ""
+msgstr "A vadász %1$s és %2$s között termel egy húst, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Hunter's
 #. House, part 3
 #: ../../data/tribes/initialization/frisians/units.lua:1622
 msgctxt "frisians_building"
 msgid "The hunter produces one fur after he has produced five pieces of meat."
-msgstr ""
+msgstr "A vadász minden ötödik hús után termel egy szőrmét is."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Fisher's House
 #: ../../data/tribes/initialization/frisians/units.lua:1630
@@ -14348,7 +14348,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one fish between %1$s and %2$s, depending on how "
 "far the fisher has to walk."
-msgstr ""
+msgstr "A halász %1$s és %2$s között termel egy halat, attól függően, hogy mennyit kell gyalogolnia."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Reed Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1653
@@ -14398,7 +14398,7 @@ msgstr "Arldor törzsfőnök visszavágása arra, hogy miért nem iszik a törzs
 #, lua-format
 msgctxt "frisians_building"
 msgid "The carrier needs %s to get one bucket full of water."
-msgstr ""
+msgstr "A kút %senként termel egy vödör vizet."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Well, part
 #. 2
@@ -14406,7 +14406,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "If the water resource is depleted, the carrier needs %s on average."
-msgstr ""
+msgstr "Ha a vízkészlet kimerült, akkor átlagosan %senként termel egyet."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Clay Pit
 #: ../../data/tribes/initialization/frisians/units.lua:1683
@@ -14627,7 +14627,7 @@ msgstr "Felderítő küldéséhez a zászlót össze kell kötni egy felderítő
 #: ../../data/tribes/initialization/frisians/units.lua:1775
 msgctxt "frisians_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Egy felderítőút %1$s és %2$s közötti ideig tart."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Brick Kiln
 #: ../../data/tribes/initialization/frisians/units.lua:1787
@@ -14686,7 +14686,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és mindkét fémre szükség van a gazdaságban, akkor a kemence átlagosan %1$senként készít egy vasat és %2$senként egy aranyat. Ha csak az egyikre van szükség, akkor átlagosan %3$senként készít egy vasat vagy %4$senként egy aranyat."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Recycling Center
 #: ../../data/tribes/initialization/frisians/units.lua:1813
@@ -14723,7 +14723,7 @@ msgid ""
 "takes %3$s on average. If only one kind of material is needed by the "
 "economy, production of one fur takes %4$s, one iron takes %5$s and one gold "
 "takes %6$s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és minden anyagra szükség van a gazdaságban, akkor az újrahasznosító telep átlagosan %1$senként készít egy szőrmét, %2$senként egy vasat és %3$senként egy aranyat. Ha csak az egyikre van szükség, akkor átlagosan %4$senként készít egy szőrmét, %5$senként egy vasat, vagy %6$senként egy aranyat."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Blacksmithy
 #: ../../data/tribes/initialization/frisians/units.lua:1826
@@ -14754,7 +14754,7 @@ msgid ""
 "tool is needed by the economy, its production takes %2$s on average. Needles"
 " are an exception - in the time to produce one tool two needles are "
 "produced."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és minden szerszámra szükség van a gazdaságban, akkor a kovácsműhely átlagosan %1$senként készít mindegyikből egyet. Ha csak egy fajtára van szükség, akkor abból átlagosan %2$senként készít egyet. A tű kivétel, abból kettő készül ennyi idő alatt."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Small Armor
 #. Smithy
@@ -14789,7 +14789,7 @@ msgid ""
 "%2$s and one helmet takes %3$s on average. If only one kind of sword or "
 "helmet is needed by the economy, production of one short sword takes %4$s, "
 "one long sword takes %5$s and one helmet takes %6$s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és minden felszerelésre szükség van a gazdaságban, akkor a fegyverkovács átlagosan %1$senként készít egy rövid kardot, %2$senként egy hosszú kardot és %3$senként egy sisakot. Ha csak az egyikre van szükség, akkor átlagosan %4$senként készít egy rövid kardot, %5$senként egy hosszú kardot, vagy %6$senként egy sisakot."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Large Armor
 #. Smithy
@@ -14827,7 +14827,7 @@ msgid ""
 " sword or helmet is needed by the economy, production of one broadsword "
 "takes %4$s, one double-edged sword takes %5$s and one golden helmet takes "
 "%6$s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és minden felszerelésre szükség van a gazdaságban, akkor a kovácsmester átlagosan %1$senként készít egy pallost, %2$senként egy kétélű kardot és %3$senként egy aranysisakot. Ha csak az egyikre van szükség, akkor átlagosan %4$senként készít egy pallost, %5$senként egy kétélű kardot, vagy %6$senként egy aranysisakot."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Sewing Room
 #: ../../data/tribes/initialization/frisians/units.lua:1865
@@ -14888,7 +14888,7 @@ msgid ""
 "economy, production of one of each garment takes %1$s on average. If only "
 "one kind of garment is needed by the economy, its production takes %2$s on "
 "average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és mindkét fajta kacagányra szükség van a gazdaságban, akkor a szabóműhely átlagosan %1$senként készít egyet-egyet. Ha csak az egyikre van szükség, akkor abból átlagosan %2$senként készít egyet."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Charcoal
 #. Kiln
@@ -14927,7 +14927,7 @@ msgctxt "frisians_building"
 msgid ""
 "If this building is fully supplied, production of one of each smoked food "
 "takes %s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, akkor a füstölő átlagosan %1$senként készít egy-egy füstölt húst és halat."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Bakery
 #: ../../data/tribes/initialization/frisians/units.lua:1917
@@ -14988,7 +14988,7 @@ msgid ""
 " production of one bread takes %1$s and one honey bread takes %2$s on "
 "average. If only one kind of bread is needed by the economy, production of "
 "one bread or one honey bread takes %3$s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és mindkét fajta kenyérre szükség van a gazdaságban, akkor a mézeskenyérpékség átlagosan %1$senként készít egy kenyeret és %2$senként egy mézes kenyeret. Ha csak az egyikre van szükség, akkor abból átlagosan %3$senként készít egyet."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Brewery
 #: ../../data/tribes/initialization/frisians/units.lua:1943
@@ -15046,7 +15046,7 @@ msgid ""
 " production of one beer takes %1$s and one mead takes %2$s on average. If "
 "only one kind of drink is needed by the economy, production of one beer or "
 "one mead takes %3$s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és mindkét fajta sörre szükség van a gazdaságban, akkor a mézsör főzde átlagosan %1$senként készít egy sört és %2$senként egy mézsört. Ha csak az egyikre van szükség, akkor abból átlagosan %3$senként készít egyet."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Tavern
 #: ../../data/tribes/initialization/frisians/units.lua:1969
@@ -15067,7 +15067,7 @@ msgid ""
 "If the tavern is fully supplied, it can produce one ration in %1$s on "
 "average, using 2 kinds of ingredients. If it can only use one kind of "
 "ingredient, it can produce one ration in %2$s on average."
-msgstr ""
+msgstr "Ha az ellátása minden hozzávalóból folyamatos, akkor a kocsma átlagosan %1$senként készít egy harapnivalót kétféle hozzávalóból. Ha csak egy fajta hozzávalót tud használni, akkor átlagosan %2$senként készít egy harapnivalót."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Drinking Hall
 #: ../../data/tribes/initialization/frisians/units.lua:1982
@@ -15101,7 +15101,7 @@ msgid ""
 "economy, production of one of each food takes %1$s on average. If only one "
 "kind of food is needed by the economy, production of one ration takes %2$s "
 "and one meal takes %3$s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és mindkét fajta ételre szükség van a gazdaságban, akkor a fogadó átlagosan %1$senként készít mindegyikből egyet. Ha csak egy fajtára van szükség, akkor átlagosan %2$senként készít egy harapnivalót vagy %3$senként egy ebédet."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Barracks
 #: ../../data/tribes/initialization/frisians/units.lua:1995
@@ -15174,7 +15174,7 @@ msgid ""
 "on average. If only reindeers are needed by the economy, their production "
 "takes %3$s on average. If only fur is needed by the economy, its production "
 "takes %4$s on average."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és a gazdaságban szükség van rénszarvasra és szőrmére is, akkor a rénszarvastelep átlagosan %1$senként nevel egy rénszarvast és %2$senként termel egy szőrmét. Ha csak rénszarvasra van szükség, akkor átlagosan %3$senként nevel egyet. Ha csak szőrmére van szükség, akkor átlagosan %4$senként termel egyet."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Farm
 #: ../../data/tribes/initialization/frisians/units.lua:2025
