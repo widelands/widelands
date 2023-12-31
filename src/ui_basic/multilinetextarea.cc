@@ -198,7 +198,7 @@ bool MultilineTextarea::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 	          x - render_anchor_.x, y - render_anchor_.y + scrollbar_.get_scrollpos());
 }
 bool MultilineTextarea::handle_mousemove(
-   uint8_t /* state */, int32_t x, int32_t y, int32_t /* xdiff */, int32_t /* ydiff */) {
+   uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
 	if (rendered_text_ != nullptr) {
 		const std::string* tt = rendered_text_->get_tooltip(
 		   x - render_anchor_.x, y - render_anchor_.y + scrollbar_.get_scrollpos());
@@ -207,12 +207,15 @@ bool MultilineTextarea::handle_mousemove(
 				tooltip_before_hyperlink_tooltip_ = tooltip();
 			}
 			set_tooltip(*tt);
-			return true;
+			return Panel::handle_mousemove(state, x, y, xdiff, ydiff);
 		}
 	}
 
-	set_tooltip(tooltip_before_hyperlink_tooltip_);
-	return false;
+	if (tooltip_before_hyperlink_tooltip_.has_value()) {
+		set_tooltip(tooltip_before_hyperlink_tooltip_.value());
+		tooltip_before_hyperlink_tooltip_ = std::nullopt;
+	}
+	return Panel::handle_mousemove(state, x, y, xdiff, ydiff);
 }
 
 bool MultilineTextarea::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {

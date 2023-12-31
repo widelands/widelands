@@ -680,6 +680,8 @@ int LuaPanel::get_child(lua_State* L) {
              the replacement string is displayed instead of the value.
            * ``"on_changed"``: **Optional**. Callback code to run when the spinbox's value changes.
 
+           This widget can not have a custom tooltip.
+
          * ``"slider"``: A button that can be slid along a line to change a value. Properties:
 
            * ``"orientation"``: **Mandatory**. The slider's direction:
@@ -769,6 +771,8 @@ int LuaPanel::get_child(lua_State* L) {
            * ``"on_double_clicked"``: **Optional**.
              Callback code to run when the user double-clicks on an entry.
 
+           This widget can not have a custom tooltip.
+
          * ``"table"``: A table with multiple rows and columns. Properties:
 
            * ``"datatype"``: **Mandatory**. The data type of the table's entries.
@@ -807,11 +811,13 @@ int LuaPanel::get_child(lua_State* L) {
            * ``"on_double_clicked"``: **Optional**.
              Callback code to run when the user double-clicks on an entry.
 
+           This widget can not have a custom tooltip.
+
          * ``"tabpanel"``: A panel that allows switching between multiple tabs.
 
            * ``"dark"``: **Optional**. Whether to use dark appearance (default :const:`false`).
            * ``"active"``: **Optional**. The name or index of the initially active tab.
-           * ``"tabs"``: **Optional**. The tabs in the listselect.
+           * ``"tabs"``: **Optional**. The tabs in the tab panel.
              An array of tables with the following keys:
 
              * ``"name"``: **Mandatory**. The name of the tab.
