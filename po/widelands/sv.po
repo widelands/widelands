@@ -9,14 +9,14 @@
 # Greger Cronquist, 2021
 # GunChleoc, 2014
 # efef6ec5b435a041fce803c7f8af77d2_2341d43, 2018-2020
-# Niklas Nordgren, 2022
+# Niklas Nordgren, 2022-2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-10-02 02:28+0000\n"
+"POT-Creation-Date: 2023-12-16 02:32+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: D M <kamera001dm@gmail.com>, 2021,2023\n"
+"Last-Translator: Niklas Nordgren, 2022-2023\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,43 +31,43 @@ msgid "%2.1f%%"
 msgstr "%2.1f%%"
 
 #. TRANSLATORS: Short for "Not enough space"
-#: ../../data/scripting/infrastructure.lua:185
+#: ../../data/scripting/infrastructure.lua:188
 msgid "No Space"
 msgstr "Inget utrymme"
 
-#: ../../data/scripting/infrastructure.lua:186
+#: ../../data/scripting/infrastructure.lua:189
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr "Några av dina startbyggnader fick inte plats och byggdes därför inte. Detta är till din nackdel så överväg att starta om denna karta med rimliga startförhållanden."
 
-#: ../../data/scripting/infrastructure.lua:187
+#: ../../data/scripting/infrastructure.lua:190
 msgid "Not enough space"
 msgstr "Inte tillräckligt med utrymme"
 
-#: ../../data/scripting/infrastructure.lua:285
+#: ../../data/scripting/infrastructure.lua:288
 msgid "No rocks nearby"
 msgstr "Inga klippor i närheten"
 
-#: ../../data/scripting/infrastructure.lua:285
+#: ../../data/scripting/infrastructure.lua:288
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
 msgstr "Det finns inga klippor i närheten av din startposition. Därför får du extra resurser för att få fart på din ekonomi."
 
-#: ../../data/scripting/infrastructure.lua:291
+#: ../../data/scripting/infrastructure.lua:294
 msgid "Not enough trees nearby"
-msgstr ""
+msgstr "Inte tillräckligt med träd i närheten"
 
-#: ../../data/scripting/infrastructure.lua:291
+#: ../../data/scripting/infrastructure.lua:294
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "Det finns inte tillräckligt med träd vid din startposition. Därför får du extraresurser för att få fart på din ekonomi."
 
 #: ../../data/scripting/messages.lua:66 ../../data/scripting/messages.lua:68
-#: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:117
+#: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:119
 msgid "Status"
 msgstr "Status"
 
@@ -304,7 +304,7 @@ msgstr "Esc"
 #: ../../src/wlapplication_options.cc:1034
 msgctxt "editor"
 msgid "Tools"
-msgstr ""
+msgstr "Redigeringsverktyg"
 
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
@@ -646,12 +646,12 @@ msgstr "Är du säker på att du vill lämna kartredigeraren?"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:486
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
 #: ../../src/ui_fsmenu/launch_mpg.cc:320 ../../src/ui_fsmenu/main.cc:273
-#: ../../src/wlapplication.cc:1673
+#: ../../src/wlapplication.cc:1678
 msgid "Error"
 msgstr "Fel"
 
 #: ../../src/editor/editorinteractive.cc:1141 ../../src/ui_fsmenu/main.cc:257
-#: ../../src/wlapplication.cc:1675
+#: ../../src/wlapplication.cc:1680
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -692,7 +692,7 @@ msgstr "Laddar värld..."
 #: ../../src/editor/editorinteractive.cc:1403
 #, c-format
 msgid "Tool gaps: %u%%"
-msgstr ""
+msgstr "Verktygsmellanrum: %u%%"
 
 #: ../../src/editor/editorinteractive.cc:1426
 msgid "Publish Map"
@@ -793,7 +793,7 @@ msgstr "Smådjur: %1$s"
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:93
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:98
 msgid "Automatic Trees"
-msgstr ""
+msgstr "Automatiska Träd"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../src/editor/tools/place_immovable_tool.cc:148
@@ -1406,7 +1406,7 @@ msgid "Computer %u"
 msgstr "Dator %u"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:736
-#: ../../src/wui/game_summary.cc:115
+#: ../../src/wui/game_summary.cc:117
 msgid "Player"
 msgstr "Spelare"
 
@@ -1638,30 +1638,30 @@ msgstr "%1$s %2$s"
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:51
 #, c-format
 msgid "%1$s (removable by e.g. placing roads)"
-msgstr ""
+msgstr "%1$s (kan tas bort genom t. ex. vägkonstruktion)"
 
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:54
 #, c-format
 msgid "%1$s (needs a small building plot)"
-msgstr ""
+msgstr "%1$s (behöver en liten byggplats)"
 
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:57
 #, c-format
 msgid "%1$s (needs a medium building plot)"
-msgstr ""
+msgstr "%1$s (behöver en mellanstor byggplats)"
 
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:60
 #, c-format
 msgid "%1$s (needs a big building plot)"
-msgstr ""
+msgstr "%1$s (behöver en stor byggplats)"
 
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:99
 msgid "Automatically place the trees which grow best on the terrain"
-msgstr ""
+msgstr "Lägg automatiskt ut de träd som växer bäst i denna mark"
 
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:115
 msgid "Automatic Immovable Placement"
-msgstr ""
+msgstr "Automatisk Placering av Fasta Föremål"
 
 #: ../../src/editor/ui_menus/tool_resize_options_menu.cc:34
 msgid "Resize"
@@ -1698,19 +1698,19 @@ msgstr "Verktygsstorlek"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:51
 msgid "Size:"
-msgstr ""
+msgstr "Storlek:"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:64
 msgid "Gaps:"
-msgstr ""
+msgstr "Mellanrum: "
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:67
 msgid "Radius of the active tool"
-msgstr ""
+msgstr "Aktiva verktygets radius"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:68
 msgid "Amount of random gaps in the tool’s area"
-msgstr ""
+msgstr "Mängd slumpmässiga mellanrum i verktygets område"
 
 #: ../../src/game_io/game_loader.cc:69
 #, c-format
@@ -1828,7 +1828,7 @@ msgstr "Kopiera länk till urklipp"
 #, c-format
 msgctxt "definitionterm"
 msgid "%s:"
-msgstr ""
+msgstr "%s:"
 
 #. * TRANSLATORS: Part of tooltip entry for characters in illegal filenames.
 #. replaces the
@@ -1920,7 +1920,7 @@ msgstr "Ursprungligt förhållande"
 
 #: ../../src/logic/addons.cc:71
 msgid "UI Plugin"
-msgstr ""
+msgstr "Gränssnittsplugin"
 
 #: ../../src/logic/addons.cc:112
 #, c-format
@@ -2269,23 +2269,23 @@ msgstr "arbetarna behöver ingen erfarenhet"
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:620
 msgid "the fleet needs a ferry"
-msgstr ""
+msgstr "flottan behöver en transportbåt"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the fleet needs
 #. a ship/ferry'.
 #: ../../src/logic/map_objects/tribes/production_program.cc:620
 msgid "the fleet needs a ship"
-msgstr ""
+msgstr "flottan behöver ett skepp"
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:627
 msgid "the fleet needs no ferries"
-msgstr ""
+msgstr "flottan behöver inte transportbåtar"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the fleet needs
 #. no ships/ferries'.
 #: ../../src/logic/map_objects/tribes/production_program.cc:627
 msgid "the fleet needs no ships"
-msgstr ""
+msgstr "flottan behöver inte skepp"
 
 #. * TRANSLATORS: "Did not start working because the economy needs the ware
 #. '%s'"
@@ -2383,27 +2383,27 @@ msgstr "Kan inte hitta mer resurser."
 #: ../../src/logic/map_objects/tribes/productionsite.cc:1264
 msgctxt "building"
 msgid "No Shore"
-msgstr ""
+msgstr "Ingen Kust"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:1244
 msgid "Shipyard Without Shore"
-msgstr ""
+msgstr "Skeppsvarv Utan Kust"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:1245
 msgid ""
 "Your shipyard has not been built close enough to a shore. It will not be "
 "able to build ships."
-msgstr ""
+msgstr "Ditt skeppsvarv har inte byggts tillräckligt nära kusten. Det kommer inte kunna bygga skepp."
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:1265
 msgid "Ferry Yard Without Shore"
-msgstr ""
+msgstr "Båtsnickeri Utan Kust"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:1266
 msgid ""
 "Your ferry yard has not been built close enough to a shore. It will not be "
 "able to build ferries."
-msgstr ""
+msgstr "Ditt båtsnickeri har inte byggts tillräckligt nära kusten. Det kommer inte kunna bygga transportbåtar."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:460
 msgid "Port Space"
@@ -2837,7 +2837,7 @@ msgstr "Sparar spel..."
 
 #: ../../src/logic/save_handler.cc:152
 msgid "Saving skipped"
-msgstr ""
+msgstr "Hoppade över att spara"
 
 #: ../../src/logic/save_handler.cc:170
 #: ../../src/wui/game_main_menu_save_game.cc:338
@@ -2992,7 +2992,7 @@ msgstr "Kontrollerar kartan"
 
 #: ../../src/map_io/widelands_map_loader.cc:450
 msgid "Postloading map objects"
-msgstr ""
+msgstr "Efterladdar kartobjekt"
 
 #: ../../src/network/gameclient.cc:162 ../../src/network/gamehost.cc:561
 #: ../../src/ui_fsmenu/launch_spg.cc:174 ../../src/wlapplication.cc:783
@@ -3554,7 +3554,7 @@ msgstr "Klient %1$s svarade inte i mer än %2$s."
 #: ../../src/network/network_gaming_messages.cc:77
 #, c-format
 msgid "Client %s has cheating features enabled!"
-msgstr ""
+msgstr "Klient %s har aktiverade fuskverktyg!"
 
 #: ../../src/network/network_gaming_messages.cc:78
 #, c-format
@@ -3565,13 +3565,13 @@ msgstr "Klient %s fuskar!"
 #: ../../src/network/network_gaming_messages.cc:80
 #, c-format
 msgid "Cheating: Client %1$s now controls %2$s"
-msgstr ""
+msgstr "Fusk: Klient %1$s kontrollerar nu %2$s"
 
 #. * TRANSLATORS: %1 and %2 are user and player names
 #: ../../src/network/network_gaming_messages.cc:82
 #, c-format
 msgid "Client %1$s is cheating, acting as %2$s!"
-msgstr ""
+msgstr "Klient %1$s fuskar, agerar som %2$s!"
 
 #: ../../src/network/network_lan_promotion.cc:357
 msgid "Failed to use the local network!"
@@ -3593,14 +3593,14 @@ msgstr "%1% (%2%)"
 
 #: ../../src/scripting/lua_ui.cc:912
 msgid "Plugin Error"
-msgstr ""
+msgstr "Fel i Plugin"
 
 #: ../../src/scripting/lua_ui.cc:913
 #, c-format
 msgid ""
 "Error when running plugin:\n"
 "%s"
-msgstr ""
+msgstr "Fel i plugin:\n%s"
 
 #: ../../src/ui_basic/color_chooser.cc:253
 msgid "Choose Color…"
@@ -3646,7 +3646,7 @@ msgstr "Blå"
 
 #: ../../src/ui_basic/color_chooser.cc:484
 msgid "Remove from favorites"
-msgstr ""
+msgstr "Ta bort från favoriter"
 
 #: ../../src/ui_basic/color_chooser.cc:484
 #: ../../src/ui_fsmenu/addons/packager.cc:109
@@ -3657,7 +3657,7 @@ msgstr "–"
 
 #: ../../src/ui_basic/color_chooser.cc:491
 msgid "Add current color to favorites"
-msgstr ""
+msgstr "Lägg till nuvarande färg till favoriter"
 
 #: ../../src/ui_basic/dropdown.cc:111
 msgctxt "dropdown"
@@ -3754,7 +3754,7 @@ msgstr "%1$s<br>(%2$s)"
 
 #: ../../src/ui_basic/window.cc:101 ../../src/ui_fsmenu/about.cc:41
 #: ../../src/ui_fsmenu/crash_report.cc:70
-#: ../../src/ui_fsmenu/crash_report.cc:163
+#: ../../src/ui_fsmenu/crash_report.cc:164
 #: ../../src/ui_fsmenu/mousewheel_report.cc:74
 #: ../../src/wui/watchwindow.cc:110
 msgid "Close"
@@ -3784,7 +3784,7 @@ msgstr "Om Widelands"
 msgid "Lua Error"
 msgstr "Lua fel"
 
-#: ../../src/ui_fsmenu/about.cc:59 ../../src/ui_fsmenu/tech_info.cc:131
+#: ../../src/ui_fsmenu/about.cc:59 ../../src/ui_fsmenu/tech_info.cc:189
 msgid "Technical Info"
 msgstr "Teknisk information"
 
@@ -4431,18 +4431,18 @@ msgid "Author:"
 msgstr "Upphovsman:"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:171
-#: ../../src/ui_fsmenu/tech_info.cc:71
+#: ../../src/ui_fsmenu/tech_info.cc:123
 msgid "Version:"
 msgstr "Version:"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:177 ../../src/wui/mapdetails.cc:198
 #: ../../src/wui/mapdetails.cc:203
 msgid "Minimum Widelands Version:"
-msgstr ""
+msgstr "Minimal Widelands Version"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:183
 msgid "Maximum Widelands Version:"
-msgstr ""
+msgstr "Maximal Widelands Version:"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:356
 msgid "New Add-On"
@@ -4569,14 +4569,14 @@ msgstr "Bekräfta sparning"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:590
 msgid "Invalid Version Requirement"
-msgstr ""
+msgstr "Ogiltigt Versionskrav"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:591
 #, c-format
 msgid ""
 "The minimum Widelands version ‘%1$s’ may not be newer than the maximum "
 "Widelands version ‘%2$s’. The add-on ‘%3$s’ will not be saved."
-msgstr ""
+msgstr "Den minimala Widelands-versionen '%1$s' kan inte vara nyare än den maximala idelands-versionen '%2$s'.  Tillägget '%3$s' Kommer inte sparas."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:598
 msgid "Invalid Version"
@@ -4590,7 +4590,7 @@ msgstr "\"%1$s\" är inte en giltig versionssträng. Tillägget \"%2$s\" kommer 
 
 #: ../../src/ui_fsmenu/addons/packager.cc:612
 msgid "Version Requirement"
-msgstr ""
+msgstr "Versionskrav"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:614
 #, c-format
@@ -4598,7 +4598,7 @@ msgid ""
 "The add-on ‘%1$s’ does not specify a minimum Widelands version. None of the "
 "contained maps can be loaded with a Widelands version older than %2$s. The "
 "minimum version requirement will automatically be set accordingly."
-msgstr ""
+msgstr "Tillägget '%1$s'  specifierar inte ett versionsminimum, men inga av kartorna kan laddas med Widelands-versioner äldre än %2$s. Versionsminimumet sätts automatiskt till det."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:619
 #, c-format
@@ -4606,7 +4606,7 @@ msgid ""
 "The add-on ‘%1$s’ specifies a minimum Widelands version of %2$s. However, "
 "none of the contained maps can be loaded with a Widelands version older than"
 " %3$s. The version requirement will automatically be changed accordingly."
-msgstr ""
+msgstr "Tillägget '%1$s'  specifierar ett versionsminimum %2$s, men inga av kartorna kan laddas med Widelands-versioner äldre än %3$s Versionsminimumet sätts automatiskt till det."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:641
 msgid "Error Writing Addon"
@@ -4695,7 +4695,7 @@ msgstr "Spelare: %s"
 #: ../../src/ui_fsmenu/addons/packager_box.cc:291
 #, c-format
 msgid "Minimum Widelands Version: %s"
-msgstr ""
+msgstr "Minimal Widelands-version: %s"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:324
 msgid "Top-level directory"
@@ -5308,51 +5308,53 @@ msgstr "Fälttågsnamn"
 
 #: ../../src/ui_fsmenu/crash_report.cc:43
 msgid "Crash Report Details"
-msgstr ""
+msgstr "Krashrapportdetaljer"
 
 #: ../../src/ui_fsmenu/crash_report.cc:61
-#: ../../src/ui_fsmenu/crash_report.cc:151
+#: ../../src/ui_fsmenu/crash_report.cc:152
 msgid "Open link"
-msgstr ""
+msgstr "Öppna länk"
 
 #: ../../src/ui_fsmenu/crash_report.cc:63
-#: ../../src/ui_fsmenu/crash_report.cc:153
+#: ../../src/ui_fsmenu/crash_report.cc:154
 msgid "Copy link"
-msgstr ""
+msgstr "Kopiera länk"
 
 #: ../../src/ui_fsmenu/crash_report.cc:67
-#: ../../src/ui_fsmenu/crash_report.cc:158
+#: ../../src/ui_fsmenu/crash_report.cc:159
 msgid "Copy report"
-msgstr ""
+msgstr "Kopiera rapport"
 
 #: ../../src/ui_fsmenu/crash_report.cc:68
-#: ../../src/ui_fsmenu/crash_report.cc:158
+#: ../../src/ui_fsmenu/crash_report.cc:159
 msgid "Copy the full report to the clipboard"
-msgstr ""
+msgstr "Kopiera den fullständiga rapporten till urklippshanteraren"
 
 #: ../../src/ui_fsmenu/crash_report.cc:97
 msgid "Crash Report"
-msgstr ""
+msgstr "Krashrapport"
 
 #: ../../src/ui_fsmenu/crash_report.cc:135
 #, c-format
 msgid ""
 "It looks like Widelands crashed the last time you ran it, but a backtrace "
-"for debugging was automatically generated. Please provide the report to the "
-"Widelands Development Team under %s so we can fix the problem."
-msgstr ""
+"for debugging was automatically generated. Please provide the report along "
+"with a description of what was going on in the game and what you did last "
+"before the crash to the Widelands Development Team under %s so we can fix "
+"the problem."
+msgstr "Det verkar som Widelands krashade förra gången du körde det. En backtrace genererades automatiskt i debuggingsyfte. Skicka gärna in rapporten och en beskrivning av vad dugjorde innan krashen till Widelands utvecklare under %s så att vi kan lösa problemen."
 
-#: ../../src/ui_fsmenu/crash_report.cc:144
+#: ../../src/ui_fsmenu/crash_report.cc:145
 msgid "Show details…"
-msgstr ""
+msgstr "Visa detaljer..."
 
-#: ../../src/ui_fsmenu/crash_report.cc:144
+#: ../../src/ui_fsmenu/crash_report.cc:145
 msgid "View the detailed crash report"
-msgstr ""
+msgstr "Visa den detaljerade krashrapporten"
 
-#: ../../src/ui_fsmenu/crash_report.cc:161
+#: ../../src/ui_fsmenu/crash_report.cc:162
 msgid "Remind me later"
-msgstr ""
+msgstr "Påminn mig senare"
 
 #: ../../src/ui_fsmenu/helpwindow.cc:46 ../../src/wui/helpwindow.cc:48
 #, c-format
@@ -5532,7 +5534,7 @@ msgstr "Speltid"
 
 #: ../../src/ui_fsmenu/launch_game.cc:104
 msgid "Show or hide additional game configuration options"
-msgstr ""
+msgstr "Visa eller dölj ytterligare spelkonfigureringsdetaljer"
 
 #: ../../src/ui_fsmenu/launch_game.cc:117
 msgid "Peaceful mode"
@@ -5544,7 +5546,7 @@ msgstr "Ingen krigsdimma"
 
 #: ../../src/ui_fsmenu/launch_game.cc:133
 msgid "Forbid diplomacy"
-msgstr ""
+msgstr "Förbjud diplomati"
 
 #: ../../src/ui_fsmenu/launch_game.cc:141
 msgid "Custom starting positions"
@@ -5568,11 +5570,11 @@ msgstr "Starta spel"
 
 #: ../../src/ui_fsmenu/launch_game.cc:281
 msgid "Show fewer options"
-msgstr ""
+msgstr "Visa färre alternativ"
 
 #: ../../src/ui_fsmenu/launch_game.cc:281
 msgid "Show more options"
-msgstr ""
+msgstr "Visa fler alternativ"
 
 #: ../../src/ui_fsmenu/launch_game.cc:296
 msgid "The relations between players are set by the scenario"
@@ -5622,15 +5624,15 @@ msgstr "Ge alla spelare ständig överblick av hela kartan"
 
 #: ../../src/ui_fsmenu/launch_game.cc:385
 msgid "Player relations are set by the scenario"
-msgstr ""
+msgstr "Relationen mellan spelarna avgörs av scenariot"
 
 #: ../../src/ui_fsmenu/launch_game.cc:387
 msgid "Player relations are set by the saved game"
-msgstr ""
+msgstr "Relationen mellan spelarna avgörs av det sparade spelet"
 
 #: ../../src/ui_fsmenu/launch_game.cc:389
 msgid "Disallow players to change their alliances during the game"
-msgstr ""
+msgstr "Förbjud att spelare byter allianser under spelets gång"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/ui_fsmenu/launch_game.cc:397
@@ -6230,7 +6232,7 @@ msgstr "Ändra kartredigerarens verktygsstorlek"
 #. The ':' will be added by another format string.
 #: ../../src/ui_fsmenu/mousewheel_options.cc:457
 msgid "Change Editor Tool Gap"
-msgstr ""
+msgstr "Ändra Kartredigerarens Verktygsmellanrum"
 
 #. * TRANSLATORS: Used as e.g. "Invert scroll direction for map zooming:
 #. Vertical"
@@ -6274,7 +6276,7 @@ msgstr "Rullningsinställningskonflikt"
 msgid ""
 "‘%1$s’, ‘%2$s’, or ‘%3$s’ conflicts with the recommended settings. Change "
 "the conflicting setting(s) too?"
-msgstr ""
+msgstr "‘%1$s’, '%2$s',  eller ‘%3$s’ är i konflikt med de rekommenderade inställningarna. Vill du ändra på inställning(ar) i konflikt?"
 
 #: ../../src/ui_fsmenu/mousewheel_report.cc:50
 msgid "Send Feedback for Inverted Horizontal Scrolling"
@@ -6321,7 +6323,7 @@ msgstr "Typ"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:249
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:357
-#: ../../src/wui/game_chat_panel.cc:449 ../../src/wui/game_summary.cc:116
+#: ../../src/wui/game_chat_panel.cc:449 ../../src/wui/game_summary.cc:118
 msgid "Team"
 msgstr "Lag"
 
@@ -6485,7 +6487,7 @@ msgstr "Tag bort repriser efter:"
 
 #: ../../src/ui_fsmenu/options.cc:263
 msgid "Skip autosaves while inactive"
-msgstr ""
+msgstr "Hoppa över autosparning vid inaktivitet"
 
 #: ../../src/ui_fsmenu/options.cc:270
 msgid "Compress Widelands data files (maps, replays, and savegames)"
@@ -6493,7 +6495,7 @@ msgstr "Komprimera Widelands datafiler (kartor, repriser och sparade spel)"
 
 #: ../../src/ui_fsmenu/options.cc:278
 msgid "Keep history of sent chat messages in a file"
-msgstr ""
+msgstr "Behåll chatthistoriket i en fil."
 
 #: ../../src/ui_fsmenu/options.cc:289
 #: ../../src/wui/interactive_gamebase.cc:275
@@ -6524,7 +6526,7 @@ msgstr "Visa överlappande arbetsområden"
 
 #: ../../src/ui_fsmenu/options.cc:316
 msgid "Pause game when inactive for:"
-msgstr ""
+msgstr "Pausa spelet vid inaktivitet längre än: "
 
 #: ../../src/ui_fsmenu/options.cc:326
 msgid "Start building road after placing a flag"
@@ -6735,87 +6737,95 @@ msgstr "Upphovsmän"
 msgid "You"
 msgstr "Du"
 
-#: ../../src/ui_fsmenu/tech_info.cc:75
+#: ../../src/ui_fsmenu/tech_info.cc:127
 msgid "MacOS"
 msgstr "MacOS"
 
-#: ../../src/ui_fsmenu/tech_info.cc:77
+#: ../../src/ui_fsmenu/tech_info.cc:129
 msgid "Windows (64 bit)"
 msgstr "Windows (64 bit)"
 
-#: ../../src/ui_fsmenu/tech_info.cc:79
+#: ../../src/ui_fsmenu/tech_info.cc:131
 msgid "Windows (32 bit)"
 msgstr "Windows (32 bit)"
 
-#: ../../src/ui_fsmenu/tech_info.cc:81
+#: ../../src/ui_fsmenu/tech_info.cc:133
 msgid "Linux"
 msgstr "Linux"
 
-#: ../../src/ui_fsmenu/tech_info.cc:83
+#: ../../src/ui_fsmenu/tech_info.cc:135
 msgid "FreeBSD"
 msgstr "FreeBSD"
 
-#: ../../src/ui_fsmenu/tech_info.cc:85
+#: ../../src/ui_fsmenu/tech_info.cc:137
 msgid "Unix"
 msgstr "Unix"
 
-#: ../../src/ui_fsmenu/tech_info.cc:87
+#: ../../src/ui_fsmenu/tech_info.cc:139
 msgid "Unknown"
 msgstr "Okänd"
 
-#: ../../src/ui_fsmenu/tech_info.cc:89
+#: ../../src/ui_fsmenu/tech_info.cc:141
 msgid "Operating System:"
 msgstr "Operativsystem:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:90
+#: ../../src/ui_fsmenu/tech_info.cc:142
 msgid "Compiled with SDL version:"
 msgstr "Kompilerad med SDL version:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:97
+#: ../../src/ui_fsmenu/tech_info.cc:149
 msgid "Using SDL version:"
 msgstr "Använder SDL version:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:102
+#: ../../src/ui_fsmenu/tech_info.cc:154
 msgid "SDL video driver:"
 msgstr "SDL video driver:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:106
+#: ../../src/ui_fsmenu/tech_info.cc:158
 msgid "SDL horizontal scroll:"
 msgstr "SDL horisontell rullning:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:107
+#: ../../src/ui_fsmenu/tech_info.cc:159
 msgid "assuming inverted"
 msgstr "antages inverterad"
 
-#: ../../src/ui_fsmenu/tech_info.cc:111
+#: ../../src/ui_fsmenu/tech_info.cc:163
 msgid "Locale:"
 msgstr "Språk:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:112
+#: ../../src/ui_fsmenu/tech_info.cc:164
 msgid "Home Directory:"
 msgstr "Hemkatalog:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:113
+#: ../../src/ui_fsmenu/tech_info.cc:165
 msgid "Configuration File:"
 msgstr "Konfigurationsfil:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:114
+#: ../../src/ui_fsmenu/tech_info.cc:166
 msgid "Data Directory:"
 msgstr "Datakatalog:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:115
+#: ../../src/ui_fsmenu/tech_info.cc:167
 msgid "Locale Directory:"
 msgstr "Katalog för språkfiler:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:117
+#: ../../src/ui_fsmenu/tech_info.cc:169
 msgid "Executable Directory:"
 msgstr "Katalog för körbara filer:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:159
+#: ../../src/ui_fsmenu/tech_info.cc:172
+msgid "Enabled Add-Ons:"
+msgstr "Aktiverade tillägg: "
+
+#: ../../src/ui_fsmenu/tech_info.cc:174
+msgid "Inactive Installed Add-Ons:"
+msgstr "Inaktiva Installerade Tillägg: "
+
+#: ../../src/ui_fsmenu/tech_info.cc:233
 msgid "Copy"
 msgstr "Kopia"
 
-#: ../../src/ui_fsmenu/tech_info.cc:160
+#: ../../src/ui_fsmenu/tech_info.cc:234
 msgid "Copy the technical report to the clipboard"
 msgstr "Kopiera den tekniska rapporten till urklippshanteraren"
 
@@ -6882,19 +6892,19 @@ msgstr "--xres/--yres, --maximized och --fullscreen kan inte kombineras"
 msgid "Unknown command line parameter: %s"
 msgstr "Okänd kommandoradsparameter: %s"
 
-#: ../../src/wlapplication.cc:1651
+#: ../../src/wlapplication.cc:1656
 msgid "Incompatible"
 msgstr "Inkompatibel"
 
-#: ../../src/wlapplication.cc:1688
+#: ../../src/wlapplication.cc:1693
 msgid "Game ended unexpectedly"
 msgstr "Spelet avslutades oväntat"
 
-#: ../../src/wlapplication.cc:1688
+#: ../../src/wlapplication.cc:1693
 msgid "Unexpected error during the game"
 msgstr "Oväntat fel under spelets gång"
 
-#: ../../src/wlapplication.cc:1691
+#: ../../src/wlapplication.cc:1696
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6908,7 +6918,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Ett fel uppstod under spelets gång. Felmeddelandet är:\n\n%1$s\n\nVar vänlig och rapportera detta problem för att hjälpa oss förbättra Widelands. Du kan hitta relaterade meddelanden i standard output (stdout.txt i Windows). Du använder version %2$s\n\nVar vänlig och bifoga denna information till din rapport.\n\nVill du att Widelands ska försöka skapa en nödlägessparning av ditt spel? Det är ofta, men inte alltid, möjligt att ladda den och fortsätta spela."
 
-#: ../../src/wlapplication.cc:1700
+#: ../../src/wlapplication.cc:1705
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6918,11 +6928,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Spelet avslutades oväntat av följande anledning:\n\n%s\n\nVill du att Widelands ska försöka skapa en nödlägessparning av ditt spel? Det är ofta – men inte alltid – möjligt att ladda den och fortsätta spela."
 
-#: ../../src/wlapplication.cc:1734
+#: ../../src/wlapplication.cc:1739
 msgid "Emergency save failed"
 msgstr "Nödlägessparning misslyckades"
 
-#: ../../src/wlapplication.cc:1735
+#: ../../src/wlapplication.cc:1740
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -7196,7 +7206,7 @@ msgstr "Gör skärmdump"
 
 #: ../../src/wlapplication_options.cc:397
 msgid "Open the Debug Console (developer tool)"
-msgstr ""
+msgstr "Öppna Debugkonsolen (utvecklarverktyg)"
 
 #: ../../src/wlapplication_options.cc:402
 msgid "Toggle Cheat Mode (developer tool)"
@@ -7447,43 +7457,43 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:759
 msgid "Go to Ship"
-msgstr ""
+msgstr "Gå till skeppet"
 
 #: ../../src/wlapplication_options.cc:764
 msgid "Watch Ship"
-msgstr ""
+msgstr "Följ Skeppet"
 
 #: ../../src/wlapplication_options.cc:769
 msgid "Open Ship Window"
-msgstr ""
+msgstr "Öppna Skeppsfönstret"
 
 #: ../../src/wlapplication_options.cc:774
 msgid "Open Ship Window And Go to Ship"
-msgstr ""
+msgstr "Öppna Skeppsfönstret och gå till Skeppet"
 
 #: ../../src/wlapplication_options.cc:779
 msgid "Show All Ships"
-msgstr ""
+msgstr "Visa Alla Skepp"
 
 #: ../../src/wlapplication_options.cc:784
 msgid "Show Idle Ships"
-msgstr ""
+msgstr "Visa Väntande Skepp"
 
 #: ../../src/wlapplication_options.cc:789
 msgid "Show Transport Ships"
-msgstr ""
+msgstr "Visa Transportskepp"
 
 #: ../../src/wlapplication_options.cc:794
 msgid "Show Waiting Expeditions"
-msgstr ""
+msgstr "Visa Väntnande Skepp"
 
 #: ../../src/wlapplication_options.cc:799
 msgid "Show Scouting Expeditions"
-msgstr ""
+msgstr "Visa Utforskningexpeditioner"
 
 #: ../../src/wlapplication_options.cc:804
 msgid "Show Expeditions with Port Spaces"
-msgstr ""
+msgstr "Visa Expeditioner vid Hamnplatser"
 
 #: ../../src/wlapplication_options.cc:809
 msgid "Toggle Quick Navigation"
@@ -7512,7 +7522,7 @@ msgstr "Spara spel"
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wlapplication_options.cc:873
 #: ../../src/wui/game_client_disconnected.cc:112
-#: ../../src/wui/game_summary.cc:106 ../../src/wui/interactive_gamebase.cc:193
+#: ../../src/wui/game_summary.cc:108 ../../src/wui/interactive_gamebase.cc:193
 msgid "Exit Game"
 msgstr "Avsluta spel"
 
@@ -7520,119 +7530,119 @@ msgstr "Avsluta spel"
 #: ../../src/wlapplication_options.cc:891
 msgctxt "hotkey"
 msgid "Arrow keys"
-msgstr ""
+msgstr "Piltangenter"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:893
 msgid "Move the map"
-msgstr ""
+msgstr "Flytta kartan"
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../src/wlapplication_options.cc:895
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
-msgstr ""
+msgstr "Ctrl och Piltangenter"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:897
 msgid "Move the map fast"
-msgstr ""
+msgstr "Flytta kartan snabbt"
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../src/wlapplication_options.cc:899
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
-msgstr ""
+msgstr "Shift och Piltangenter"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:901
 msgid "Move the map slowly"
-msgstr ""
+msgstr "Flytta kartan långsamt"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:913
 msgid "Remember current location"
-msgstr ""
+msgstr "Kom ihåg nuvarande position"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:916
 msgid "Go to previously remembered location"
-msgstr ""
+msgstr "Gå till tidigare ihågkommen plats"
 
 #. * TRANSLATORS: Separator for a list of hotkeys
 #: ../../src/wlapplication_options.cc:965
 #, c-format
 msgctxt "hotkey"
 msgid "%1$s / %2$s"
-msgstr ""
+msgstr "%1$s / %2$s"
 
 #: ../../src/wlapplication_options.cc:983
 #: ../../src/wlapplication_options.cc:1024
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Snabbkommandon"
 
 #. * TRANSLATORS: Section heading in "Controls" help
 #: ../../src/wlapplication_options.cc:994
 msgid "Message Window"
-msgstr ""
+msgstr "Meddelandefönster"
 
 #. * TRANSLATORS: Section heading in "Controls" help
 #: ../../src/wlapplication_options.cc:999
 msgid "Ship Statistics"
-msgstr ""
+msgstr "Skeppstatistik"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:1038
 msgid "Change tool size"
-msgstr ""
+msgstr "Ändra verktygsstorlek"
 
 #: ../../src/wlapplication_options.cc:1039
 msgid "Change tool gap"
-msgstr ""
+msgstr "Ändra verktygsmellanrum"
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../src/wlapplication_options.cc:1044
 msgctxt "hotkey"
 msgid "Click"
-msgstr ""
+msgstr "Klicka"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:1046
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
-msgstr ""
+msgstr "Placera nya element på kartan, eller öka kartelement med värdet som väljs med 'Öka/minska värde'"
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../src/wlapplication_options.cc:1050
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "'Shift' + klicka"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:1052
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
-msgstr ""
+msgstr "Tag bort element från kartan, eller minska kartelement med värdet som välja med 'Öka/minska värde'"
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../src/wlapplication_options.cc:1055
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr ""
+msgstr "'Ctrl' + klicka"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:1057
 msgid "Set map elements to the value selected by ‘Set Value’"
-msgstr ""
+msgstr "Ställ in kartelement till värdet som väljs med 'Sätt värde'"
 
 #. * TRANSLATORS: prefix for message window shortcuts in keyboard options
 #: ../../src/wlapplication_options.cc:1161
 #, c-format
 msgctxt "hotkey"
 msgid "Messages: %s"
-msgstr ""
+msgstr "Meddelanden: %s"
 
 #. * TRANSLATORS: prefix for seafaring statistics window shortcuts in keyboard
 #. options
@@ -7640,7 +7650,7 @@ msgstr ""
 #, c-format
 msgctxt "hotkey"
 msgid "Seafaring: %s"
-msgstr ""
+msgstr "Sjöfart: %s"
 
 #: ../../src/wlapplication_options.cc:1359
 msgctxt "hotkey"
@@ -8417,11 +8427,11 @@ msgstr "Förstör en vattenväg"
 
 #: ../../src/wui/fieldaction.cc:522
 msgid "Configure this ocean’s ship fleet"
-msgstr ""
+msgstr "Konfigurera detta havs skeppsflotta"
 
 #: ../../src/wui/fieldaction.cc:533
 msgid "Configure this ocean’s ferry fleet"
-msgstr ""
+msgstr "Konfigurera detta havs transportbåtsflotta"
 
 #: ../../src/wui/fieldaction.cc:540
 msgid "Watch field in a separate window"
@@ -8481,51 +8491,51 @@ msgstr "Bygg vattenvägar"
 
 #: ../../src/wui/fleet_options_window.cc:94
 msgid "Ferry Fleet Options"
-msgstr ""
+msgstr "Transportsbåtsflottalternativ"
 
 #: ../../src/wui/fleet_options_window.cc:94
 msgid "Ship Fleet Options"
-msgstr ""
+msgstr "Skeppsflottalternativ"
 
 #: ../../src/wui/fleet_options_window.cc:124
 msgid "Toggle infinite production"
-msgstr ""
+msgstr "Slå av/på oändlig produktion"
 
 #: ../../src/wui/fleet_options_window.cc:134
 msgid "Fleet Statistics"
-msgstr ""
+msgstr "Flottstatistik"
 
 #: ../../src/wui/fleet_options_window.cc:158
 msgid "Ports:"
-msgstr ""
+msgstr "Hamnar:"
 
 #: ../../src/wui/fleet_options_window.cc:159
 msgid "Ships:"
-msgstr ""
+msgstr "Skepp:"
 
 #: ../../src/wui/fleet_options_window.cc:161
 msgid "Total waterways:"
-msgstr ""
+msgstr "Totalt antal vattenvägar:"
 
 #: ../../src/wui/fleet_options_window.cc:162
 msgid "Unserviced waterways:"
-msgstr ""
+msgstr "Obetjänade vattenvägar"
 
 #: ../../src/wui/fleet_options_window.cc:163
 msgid "Total ferries:"
-msgstr ""
+msgstr "Totalt antal transportbåtar:"
 
 #: ../../src/wui/fleet_options_window.cc:164
 msgid "Unemployed ferries:"
-msgstr ""
+msgstr "Arbetslösa transportbåtar:"
 
 #: ../../src/wui/fleet_options_window.cc:175
 msgid "Desired number of transport ships:"
-msgstr ""
+msgstr "Mål för antal transportskepp:"
 
 #: ../../src/wui/fleet_options_window.cc:176
 msgid "Desired number of unemployed ferries:"
-msgstr ""
+msgstr "Mål för antal arbetslösa transportbåtar:"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_chat_menu.cc:79
@@ -8788,74 +8798,74 @@ msgstr[1] "Arkivera valda %d meddelanden"
 msgid "Archive selected message"
 msgstr "Arkivera valt meddelande"
 
-#: ../../src/wui/game_summary.cc:37
+#: ../../src/wui/game_summary.cc:39
 msgid "Game over"
 msgstr "Spelet är slut"
 
-#: ../../src/wui/game_summary.cc:57
+#: ../../src/wui/game_summary.cc:59
 msgid "Player Info:"
 msgstr "Spelarinformation:"
 
-#: ../../src/wui/game_summary.cc:90
+#: ../../src/wui/game_summary.cc:92
 msgid "Elapsed time:"
 msgstr "Förfluten tid:"
 
-#: ../../src/wui/game_summary.cc:102
+#: ../../src/wui/game_summary.cc:104
 msgid "Continue playing"
 msgstr "Fortsätt spela"
 
-#: ../../src/wui/game_summary.cc:118
+#: ../../src/wui/game_summary.cc:120
 msgid "Time"
 msgstr "Tid"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. lost.
-#: ../../src/wui/game_summary.cc:222
+#: ../../src/wui/game_summary.cc:219
 msgid "Lost"
 msgstr "Förlorat"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. won.
-#: ../../src/wui/game_summary.cc:226
+#: ../../src/wui/game_summary.cc:223
 msgid "Won"
 msgstr "Vunnit"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. resigned.
-#: ../../src/wui/game_summary.cc:235
+#: ../../src/wui/game_summary.cc:232
 msgid "Resigned"
 msgstr "Gett upp"
 
 #. * TRANSLATORS: This is shown in the game summary when we don't know
 #. * TRANSLATORS: if the player has lost or won.
-#: ../../src/wui/game_summary.cc:240
+#: ../../src/wui/game_summary.cc:237
 msgctxt "player_won"
 msgid "Unknown"
 msgstr "Okänt"
 
-#: ../../src/wui/game_summary.cc:253
+#: ../../src/wui/game_summary.cc:249
 msgid "You won!"
 msgstr "Du vann!"
 
-#: ../../src/wui/game_summary.cc:255
+#: ../../src/wui/game_summary.cc:251
 msgid "You lost."
 msgstr "Du förlorade."
 
-#: ../../src/wui/game_summary.cc:259
+#: ../../src/wui/game_summary.cc:255
 #, c-format
 msgid "%s won!"
 msgstr "%s vann!"
 
-#: ../../src/wui/game_summary.cc:261
+#: ../../src/wui/game_summary.cc:257
 #, c-format
 msgid "Team %u won!"
 msgstr "Lag %u vann!"
 
-#: ../../src/wui/game_summary.cc:318
+#: ../../src/wui/game_summary.cc:311
 msgid "Score"
 msgstr "Poäng"
 
-#: ../../src/wui/game_summary.cc:320
+#: ../../src/wui/game_summary.cc:313
 msgid "Team Score"
 msgstr "Lagpoäng"
 
@@ -9240,7 +9250,7 @@ msgstr "%1$s (%2$s) (%3$s)"
 
 #: ../../src/wui/interactive_gamebase.cc:656
 msgid "Remaining construction costs:"
-msgstr ""
+msgstr "Återstående uppförandekostnader:"
 
 #. * TRANSLATORS: Title for the statistics menu button in the game
 #: ../../src/wui/interactive_player.cc:187
@@ -9288,7 +9298,7 @@ msgstr[1] "%u nya meddelanden"
 
 #: ../../src/wui/interactive_player.cc:911
 msgid "Fastplace Shortcuts"
-msgstr ""
+msgstr "Snabbplaceringskommando"
 
 #: ../../src/wui/load_or_save_game.cc:146
 msgid "Version Mismatch"
@@ -9526,11 +9536,11 @@ msgstr "Vägar"
 
 #: ../../src/wui/minimap.cc:226
 msgid "High Traffic"
-msgstr ""
+msgstr "Mycket Trafik"
 
 #: ../../src/wui/minimap.cc:237
 msgid "Attacks"
-msgstr ""
+msgstr "Attacker"
 
 #: ../../src/wui/minimap.cc:248
 msgid "Zoom"

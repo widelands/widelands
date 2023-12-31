@@ -7,7 +7,7 @@
 # 39a0b2e5ef9bf024c2fcfbdd0522de1a_96abb62, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Lennard Hofmann <lennard.hofmann@web.de>, 2021
-# Matthias Mast <mastmatthias@gmail.com>, 2021
+# Matthias Mast, 2021
 # Simon Heimberg, 2023
 # Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022
 # Elisabeth Jäger, 2015

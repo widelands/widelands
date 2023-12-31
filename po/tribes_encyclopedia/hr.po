@@ -3282,7 +3282,7 @@ msgstr ""
 msgctxt "ware"
 msgid ""
 "Coal is mined in coal mines or produced out of logs by a charcoal kiln."
-msgstr ""
+msgstr "Ugljen se vadi u rudnicima ili proizvodi iz drva pomoću karbunica, peći za drveni ugljen."
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Coal, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:610
@@ -4607,7 +4607,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1895
 msgctxt "building"
 msgid "Burns logs into charcoal."
-msgstr ""
+msgstr "Pretvara drvo u ugljen."
 
 #. TRANSLATORS: Note helptext for an Atlantean production site: Charcoal Kiln
 #: ../../data/tribes/initialization/atlanteans/units.lua:1715
@@ -6978,7 +6978,7 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:1330
 msgctxt "barbarians_building"
 msgid "Bakes pitta bread for soldiers and miners alike."
-msgstr "Peče kruh za radnike."
+msgstr "Peče lepinje za radnike."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Bakery
 #: ../../data/tribes/initialization/barbarians/units.lua:1332
@@ -14473,7 +14473,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The charcoal burner’s house needs %s on average to produce one coal."
-msgstr ""
+msgstr "Kuća ugljenara treba prosječno %s da bi proizvela jedan ugljen."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Berry Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1709
@@ -14906,7 +14906,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The charcoal kiln needs %s on average to produce one coal."
-msgstr ""
+msgstr "Karbunici je prosječno potrebno %s za proizvodnju jednog komada ugljena."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Smokery
 #: ../../data/tribes/initialization/frisians/units.lua:1904
@@ -16244,7 +16244,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:7
 #: ../../data/tribes/scripting/help/init.lua:101
 msgid "Controls"
-msgstr ""
+msgstr "Upravljanje"
 
 #: ../../data/tribes/scripting/help/controls.lua:9
 msgid "Window Control"
@@ -16472,7 +16472,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/init.lua:107
 #: ../../data/tribes/scripting/help/tips.lua:60
 msgid "Tips"
-msgstr ""
+msgstr "Savjeti"
 
 #: ../../data/tribes/scripting/help/init.lua:116
 msgid "Wares"
