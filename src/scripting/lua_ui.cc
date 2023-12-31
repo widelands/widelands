@@ -555,7 +555,9 @@ int LuaPanel::get_child(lua_State* L) {
              is too large. Default: false.
 
          * ``"inf_space"``: Only valid as the direct child of a Box. A flexible spacer.
-         * ``"space"``: Only valid as the direct child of a Box. A fixed-size spacer. Property:
+            Takes no properties.
+         * ``"space"``: Only valid as the direct child of a Box. A fixed-size spacer.
+            Only accepted property:
 
            * ``"value"``: **Mandatory**. The size of the space.
 
@@ -636,6 +638,8 @@ int LuaPanel::get_child(lua_State* L) {
              (0-based; -1 for none).
            * ``"on_changed"``: **Optional**. Callback code to run when the
              radiogroup's active button changes.
+
+           This widget does not use the sizing and positioning properties and has no tooltip.
 
          * ``"progressbar"``: A partially filled bar that indicates the progress
            of an operation. Properties:
@@ -1355,7 +1359,6 @@ UI::Panel* LuaPanel::do_create_child_dropdown(lua_State* L, UI::Panel* parent) {
 	UI::DropdownType type = get_table_dropdown_type(L, "type", true);
 	std::string datatype = get_table_string(L, "datatype", true);
 
-	std::string tooltip = get_table_string(L, "tooltip", false);
 	int32_t x = get_table_int(L, "x", false);
 	int32_t y = get_table_int(L, "y", false);
 	int32_t w = get_table_int(L, "w", false);
@@ -1402,13 +1405,13 @@ UI::Panel* LuaPanel::do_create_child_editbox(lua_State* L, UI::Panel* parent) {
 	bool password = get_table_boolean(L, "password", false);
 	bool warning = get_table_boolean(L, "warning", false);
 
-	std::string tooltip = get_table_string(L, "tooltip", false);
 	int32_t x = get_table_int(L, "x", false);
 	int32_t y = get_table_int(L, "y", false);
 	int32_t w = get_table_int(L, "w", false);
 
 	UI::EditBox* editbox = new UI::EditBox(parent, name, x, y, w, UI::PanelStyle::kWui);
 
+	editbox->set_text(text);
 	editbox->set_password(password);
 	editbox->set_warning(warning);
 
@@ -1483,7 +1486,6 @@ UI::Panel* LuaPanel::do_create_child_multilineeditbox(lua_State* L, UI::Panel* p
 	bool password = get_table_boolean(L, "password", false);
 	bool warning = get_table_boolean(L, "warning", false);
 
-	std::string tooltip = get_table_string(L, "tooltip", false);
 	int32_t x = get_table_int(L, "x", false);
 	int32_t y = get_table_int(L, "y", false);
 	int32_t w = get_table_int(L, "w", false);
@@ -1492,6 +1494,7 @@ UI::Panel* LuaPanel::do_create_child_multilineeditbox(lua_State* L, UI::Panel* p
 	UI::MultilineEditbox* editbox =
 	   new UI::MultilineEditbox(parent, name, x, y, w, h, UI::PanelStyle::kWui);
 
+	editbox->set_text(text);
 	editbox->set_password(password);
 	editbox->set_warning(warning);
 
@@ -1510,7 +1513,6 @@ UI::Panel* LuaPanel::do_create_child_multilinetextarea(lua_State* L, UI::Panel* 
 	std::string text = get_table_string(L, "text", true);
 	UI::Align align = get_table_align(L, "text_align", false);
 
-	std::string tooltip = get_table_string(L, "tooltip", false);
 	int32_t x = get_table_int(L, "x", false);
 	int32_t y = get_table_int(L, "y", false);
 	int32_t w = get_table_int(L, "w", false);
@@ -1567,7 +1569,6 @@ UI::Panel* LuaPanel::do_create_child_progressbar(lua_State* L, UI::Panel* parent
 		report_error(L, "Progressbar initial state out of range");
 	}
 
-	std::string tooltip = get_table_string(L, "tooltip", false);
 	int32_t x = get_table_int(L, "x", false);
 	int32_t y = get_table_int(L, "y", false);
 	int32_t w = get_table_int(L, "w", false);
@@ -1679,7 +1680,6 @@ UI::Panel* LuaPanel::do_create_child_spinbox(lua_State* L, UI::Panel* parent) {
 		report_error(L, "Spinbox initial value out of range");
 	}
 
-	std::string tooltip = get_table_string(L, "tooltip", false);
 	int32_t x = get_table_int(L, "x", false);
 	int32_t y = get_table_int(L, "y", false);
 	int32_t w = get_table_int(L, "w", false);
@@ -1775,9 +1775,9 @@ UI::Panel* LuaPanel::do_create_child_tabpanel(lua_State* L, UI::Panel* parent) {
 			lua_pop(L, 1);
 
 			if (icon.empty()) {
-				tabpanel->add(name, title, wrapped_tab, ttooltip);
+				tabpanel->add(tabname, title, wrapped_tab, ttooltip);
 			} else {
-				tabpanel->add(name, g_image_cache->get(icon), wrapped_tab, ttooltip);
+				tabpanel->add(tabname, g_image_cache->get(icon), wrapped_tab, ttooltip);
 			}
 
 			lua_pop(L, 1);
@@ -1787,10 +1787,10 @@ UI::Panel* LuaPanel::do_create_child_tabpanel(lua_State* L, UI::Panel* parent) {
 
 	lua_getfield(L, -1, "active");
 	if (!lua_isnil(L, -1)) {
-		if (static_cast<bool>(lua_isstring(L, -1))) {
-			tabpanel->activate(luaL_checkstring(L, -1));
-		} else {
+		if (static_cast<bool>(lua_isnumber(L, -1))) {
 			tabpanel->activate(luaL_checkuint32(L, -1));
+		} else {
+			tabpanel->activate(luaL_checkstring(L, -1));
 		}
 	}
 	lua_pop(L, 1);
@@ -1807,7 +1807,6 @@ UI::Panel* LuaPanel::do_create_child_table(lua_State* L, UI::Panel* parent) {
 	std::string datatype = get_table_string(L, "datatype", true);
 	bool multiselect = get_table_boolean(L, "multiselect", false);
 
-	std::string tooltip = get_table_string(L, "tooltip", false);
 	int32_t x = get_table_int(L, "x", false);
 	int32_t y = get_table_int(L, "y", false);
 	int32_t w = get_table_int(L, "w", false);
@@ -1901,7 +1900,6 @@ UI::Panel* LuaPanel::do_create_child_textarea(lua_State* L, UI::Panel* parent) {
 	UI::FontStyle font = g_style_manager->safe_font_style(get_table_string(L, "font", true));
 	UI::Align align = get_table_align(L, "text_align", false);
 
-	std::string tooltip = get_table_string(L, "tooltip", false);
 	int32_t x = get_table_int(L, "x", false);
 	int32_t y = get_table_int(L, "y", false);
 	int32_t w = get_table_int(L, "w", false);
@@ -1930,7 +1928,6 @@ UI::Panel* LuaPanel::do_create_child_unique_window(lua_State* L, UI::Panel* pare
 	std::string name = get_table_string(L, "name", true);
 	std::string title = get_table_string(L, "title", true);
 
-	std::string tooltip = get_table_string(L, "tooltip", false);
 	int32_t x = get_table_int(L, "x", false);
 	int32_t y = get_table_int(L, "y", false);
 	int32_t w = get_table_int(L, "w", false);
@@ -1953,7 +1950,6 @@ UI::Panel* LuaPanel::do_create_child_window(lua_State* L, UI::Panel* parent) {
 		report_error(L, "Windows must be toplevel components");
 	}
 
-	std::string tooltip = get_table_string(L, "tooltip", false);
 	int32_t x = get_table_int(L, "x", false);
 	int32_t y = get_table_int(L, "y", false);
 	int32_t w = get_table_int(L, "w", false);
