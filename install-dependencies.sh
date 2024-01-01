@@ -183,7 +183,7 @@ elif [ "$DISTRO" = "msys32" ]; then
 
 elif [ "$DISTRO" = "msys64" ]; then
    echo "Installing dependencies for 64-bit Windows..."
-   install_msys_pkgs x86_64 $@ mingw-w64-$ARCH-glbinding
+   install_msys_pkgs x86_64 $@ mingw-w64-x86_64-glbinding
 
 elif [ "$DISTRO" = "homebrew" ]; then
    echo "Installing dependencies for Mac Homebrew..."
