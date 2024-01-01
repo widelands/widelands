@@ -1,12 +1,13 @@
-# Automatically created by Widelands r24458[ea6e6ce@tribes-filtering] (Debug)
+# Automatically created by Widelands 1.2~git26366 (f2ddbe7@HEAD) Debug
 
 [global]
 packet_version="1"
-map_w="512"
-map_h="512"
+map_w="128"
+map_h="128"
 nr_players="8"
 name="All Tribes"
 author="GunChleoc"
 descr="Test map to showcase all tribes units"
 hint="Not playable"
 tags="ferries,seafaring,unbalanced"
+addons=

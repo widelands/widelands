@@ -72,6 +72,7 @@ end
 
 -- get starting field for a player, currently the same for each one
 function get_starting_field(player)
+   -- only player 1 and 2 have a useful starting position
    return game.map.player_slots[1].starting_field -- fixed position
 end
 
