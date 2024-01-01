@@ -402,7 +402,7 @@ function init_empire(player)
    total_buildings = init_mines(player, sf, total_buildings)
 
    -- Construction
-   player:place_building("empire_weaponsmithy", map:get_field((sf.x + 510) % 512, (sf.y + 3) % 512), true, true)
+   player:place_building("empire_weaponsmithy", get_safe_field(player, sf, 510, 3), true, true)
 
    -- Test ships
    place_player_ship(player.number)
