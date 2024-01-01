@@ -72,7 +72,7 @@ end
 
 -- get starting field for a player, currently the same for each one
 function get_starting_field(player)
-   return game.map.player_slots[player.number].starting_field
+   return game.map.player_slots[1].starting_field -- fixed position
 end
 
 -- Placement functions
