@@ -126,7 +126,7 @@ install_msys_pkgs() {
    pacman -S $@ mingw-w64-$ARCH-toolchain git mingw-w64-$ARCH-cmake \
     mingw-w64-$ARCH-ninja mingw-w64-$ARCH-asio mingw-w64-$ARCH-SDL2_ttf \
     mingw-w64-$ARCH-SDL2_mixer mingw-w64-$ARCH-SDL2_image \
-    mingw-w64-$ARCH-glbinding mingw-w64-$ARCH-glew mingw-w64-$ARCH-icu
+    mingw-w64-$ARCH-glew mingw-w64-$ARCH-icu
 }
 
 # Install the dependencies
@@ -178,10 +178,12 @@ elif [ "$DISTRO" = "openbsd" ]; then
 elif [ "$DISTRO" = "msys32" ]; then
    echo "Installing dependencies for 32-bit Windows..."
    install_msys_pkgs i686 $@
+   # No more updates for 32bit version...
+   pacman.exe --noconfirm -U https://repo.msys2.org/mingw/i686/mingw-w64-i686-glbinding-3.1.0-3-any.pkg.tar.zst
 
 elif [ "$DISTRO" = "msys64" ]; then
    echo "Installing dependencies for 64-bit Windows..."
-   install_msys_pkgs x86_64 $@
+   install_msys_pkgs x86_64 $@ mingw-w64-$ARCH-glbinding
 
 elif [ "$DISTRO" = "homebrew" ]; then
    echo "Installing dependencies for Mac Homebrew..."
