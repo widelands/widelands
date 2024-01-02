@@ -7,7 +7,7 @@ cmake:      c-ares brotli libunistring libidn2 libpsl libtasn1 p11-kit ca-certif
 asio
 SDL2_ttf:   vulkan-headers vulkan-loader SDL2 libpng wineditline pcre2 glib2 harfbuzz freetype
 SDL2_mixer: libogg flac lame libvorbis mpg123 opus libsndfile portaudio fluidsynth libmodplug opusfile
-SDL2_image=2.8.0-1: aom dav1d rav1e libjpeg-turbo libyuv giflib giflib jbigkit lerc libdeflate libtiff libwebp libavif highway lcms2 imath openexr libjxl=0.8.2-1
+SDL2_image=2.8.0-1: aom dav1d rav1e libjpeg-turbo libyuv giflib jbigkit lerc libdeflate libtiff libwebp libavif highway lcms2 imath openexr libjxl
 glew
 glbinding
 icu
