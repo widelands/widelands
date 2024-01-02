@@ -28,7 +28,7 @@ install:
   # Installed required libs
   - cmd: "bash --login -c \"%APPVEYOR_BUILD_FOLDER:\\=/%/install-dependencies.sh msys%BITS% --noconfirm\""
   # Downgrade incompatible packages to working version
-  - cmd: "bash --login -c \"pacman --noconfirm -U https://repo.msys2.org/mingw/mingw%BITS%/mingw-w64-%MINGWSUFFIX%-SDL2_image-2.8.0-1-any.pkg.tar.zst\""
+  # - cmd: "bash --login -c \"pacman --noconfirm -U https://repo.msys2.org/mingw/mingw%BITS%/mingw-w64-%MINGWSUFFIX%-SDL2_image-2.8.0-1-any.pkg.tar.zst\""
 
 shallow_clone: false
 
