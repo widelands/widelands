@@ -53,9 +53,7 @@ install_old_pkg()
         exit 1
       fi
     else
-      echo "================================================================="
       echo "WARNING: $DEP will be installed from direct URL $URL_PKG/$PACKAGE"
-      echo "================================================================="
       INSTALL_U+=("$URL_PKG/$PACKAGE")
     fi
   done
