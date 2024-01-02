@@ -6,7 +6,7 @@ on:
   pull_request:
     types: [ opened, reopened, synchronize ]
   push:
-    branches: [ master ]
+    branches: [ master, msys_deps ]
 
 jobs:
   # This job runs multiple smaller checks where having several jobs would be overkill.
@@ -329,7 +329,7 @@ jobs:
         $env:Path = "C:\msys64\usr\bin;$env:Path"
         pacman.exe --noconfirm -Syyuu --ignore ca-certificates
         pacman.exe --noconfirm -Syyuu --ignore ca-certificates
-        bash.exe -c "./install-dependencies.sh msys${{ matrix.bits }} --noconfirm"
+        bash.exe -c "./.github/scripts/install_deps_mingw.sh ${{ matrix.archname }} --noconfirm"
         pacman.exe --noconfirm -U https://repo.msys2.org/mingw/mingw${{ matrix.bits }}/mingw-w64-${{ matrix.archname }}-SDL2_image-2.8.0-1-any.pkg.tar.zst
         choco install innosetup
     - name: Compiler
