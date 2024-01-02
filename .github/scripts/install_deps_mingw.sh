@@ -7,9 +7,6 @@ PACMAN_ARGS=$@
 URL_MINGW="https://mirror.msys2.org/mingw/$ARCH"
 URL_MSYS="https://mirror.msys2.org/msys/$ARCH"
 
-# exit if any command produces an error (with a return code)
-set -e
-
 cd $(dirname "$0")
 curl -L "$URL_MINGW" > mingw
 curl -L "$URL_MSYS" > msys
