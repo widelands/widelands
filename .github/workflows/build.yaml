@@ -330,7 +330,8 @@ jobs:
         pacman.exe --noconfirm -Syyuu --ignore ca-certificates
         pacman.exe --noconfirm -Syyuu --ignore ca-certificates
         bash.exe -c "./.github/scripts/install_deps_mingw.sh ${{ matrix.archname }} --noconfirm --disable-download-timeout"
-        pacman.exe --noconfirm -U https://repo.msys2.org/mingw/mingw${{ matrix.bits }}/mingw-w64-${{ matrix.archname }}-SDL2_image-2.8.0-1-any.pkg.tar.zst
+        # Downgrade incompatible packages to working version
+        # pacman.exe --noconfirm -U https://repo.msys2.org/mingw/mingw${{ matrix.bits }}/mingw-w64-${{ matrix.archname }}-SDL2_image-2.8.0-1-any.pkg.tar.zst
         choco install innosetup
     - name: Compiler
       run: |
