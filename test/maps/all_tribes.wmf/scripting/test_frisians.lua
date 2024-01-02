@@ -392,7 +392,7 @@ end
 function init_frisians(player)
    assert_equal("frisians", player.tribe.name)
 
-   local sf = wl.Game().map.player_slots[player.number].starting_field
+   local sf = get_starting_field(player)
    map = wl.Game().map
 
    -- Headquarters

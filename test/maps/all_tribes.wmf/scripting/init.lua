@@ -70,6 +70,10 @@ function count_buildings(player, old_count, expected_buildings)
    return total_buildings
 end
 
+-- get starting field for a player, currently the same for each one
+function get_starting_field(player)
+   return game.map.player_slots[player.number].starting_field
+end
 
 -- Placement functions
 
