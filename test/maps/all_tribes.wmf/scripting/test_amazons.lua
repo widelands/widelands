@@ -389,7 +389,7 @@ end
 function init_amazons(player)
    assert_equal("amazons", player.tribe.name)
 
-   local sf = wl.Game().map.player_slots[player.number].starting_field
+   local sf = get_starting_field(player)
    map = wl.Game().map
 
    -- Headquarters

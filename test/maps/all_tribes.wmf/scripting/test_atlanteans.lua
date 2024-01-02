@@ -387,7 +387,7 @@ end
 function init_atlanteans(player)
    assert_equal("atlanteans", player.tribe.name)
 
-   local sf = wl.Game().map.player_slots[player.number].starting_field
+   local sf = get_starting_field(player)
    map = wl.Game().map
 
    -- Headquarters
