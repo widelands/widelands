@@ -1099,14 +1099,13 @@ Blocks the execution of the program for the specified duration. Example:
          "callworker=scout"
       }
 */
-ProductionProgram::ActSleep::ActSleep(const std::vector<std::string>& arguments,
-                                      const ProductionSiteDescr& psite) {
+ProductionProgram::ActSleep::ActSleep(const std::vector<std::string>& arguments) {
 	if (arguments.size() != 1) {
 		throw GameDataError("Usage: sleep=duration:<duration>");
 	}
 	const std::pair<std::string, std::string> item = read_key_value_pair(arguments.front(), ':');
 	if (item.first == "duration") {
-		duration_ = read_duration(item.second, psite);
+		duration_ = read_duration(item.second);
 	} else {
 		throw GameDataError(
 		   "Unknown argument '%s'. Usage: duration:<duration>", arguments.front().c_str());
@@ -1907,9 +1906,8 @@ playsound
 ---------
 Plays a sound effect. See :ref:`map_object_programs_playsound`.
 */
-ProductionProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments,
-                                              const ProductionSiteDescr& descr)
-   : parameters(MapObjectProgram::parse_act_play_sound(arguments, descr)) {
+ProductionProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments)
+   : parameters(MapObjectProgram::parse_act_play_sound(arguments)) {
 }
 
 void ProductionProgram::ActPlaySound::execute(Game& game, ProductionSite& ps) const {
@@ -2154,7 +2152,7 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				   std::unique_ptr<ProductionProgram::Action>(new ActCall(parseinput.arguments)));
 			} else if (parseinput.name == "sleep") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActSleep(parseinput.arguments, *building)));
+				   new ActSleep(parseinput.arguments)));
 			} else if (parseinput.name == "animate") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActAnimate(parseinput.arguments, building)));
@@ -2181,7 +2179,7 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				   new ActTrain(parseinput.arguments, *building)));
 			} else if (parseinput.name == "playsound") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActPlaySound(parseinput.arguments, *building)));
+				   new ActPlaySound(parseinput.arguments)));
 			} else if (parseinput.name == "construct") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActConstruct(parseinput.arguments, name(), building, descriptions)));

@@ -183,7 +183,7 @@ You can combine these units in descending order as you please. Examples:
 * ``1m500s100000ms`` will work too, but is not recommended (unreadable)
 
 */
-Duration MapObjectProgram::read_duration(const std::string& input, const MapObjectDescr&) {
+Duration MapObjectProgram::read_duration(const std::string& input) {
 	// Convert unit part into milliseconds
 	auto as_ms = [](uint32_t number, const std::string& unit) {
 		if (unit == "s") {
@@ -343,7 +343,7 @@ MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(
 	if (arguments.size() == 2) {
 		const std::pair<std::string, std::string> item = read_key_value_pair(arguments.at(1), ':');
 		if (item.first == "duration") {
-			result.duration = read_duration(item.second, descr);
+			result.duration = read_duration(item.second);
 		} else {
 			throw GameDataError("Unknown argument '%s'. Usage: <animation_name> [duration:<duration>]",
 			                    arguments.at(1).c_str());
@@ -413,8 +413,7 @@ playsound
       }
 */
 MapObjectProgram::PlaySoundParameters
-MapObjectProgram::parse_act_play_sound(const std::vector<std::string>& arguments,
-                                       const MapObjectDescr&) {
+MapObjectProgram::parse_act_play_sound(const std::vector<std::string>& arguments) {
 	if (arguments.size() != 2 && arguments.size() != 3) {
 		throw GameDataError(
 		   "Usage: playsound=<sound_dir/sound_name> priority:<percent> [allow_multiple]");

@@ -967,7 +967,7 @@ void WorkerProgram::parse_scout(Worker::Action* act, const std::vector<std::stri
 		if (item.first == "radius") {
 			act->iparam1 = read_positive(item.second);
 		} else if (item.first == "duration") {
-			act->iparam2 = read_duration(item.second, worker_).get();
+			act->iparam2 = read_duration(item.second).get();
 		} else {
 			throw GameDataError(
 			   "Unknown parameter '%s'. Usage: scout=radius:<number> duration:<duration>",
@@ -983,7 +983,7 @@ Plays a sound effect. See :ref:`map_object_programs_playsound`.
 */
 void WorkerProgram::parse_playsound(Worker::Action* act, const std::vector<std::string>& cmd) {
 	//  50% chance to play, only one instance at a time
-	PlaySoundParameters parameters = MapObjectProgram::parse_act_play_sound(cmd, worker_);
+	PlaySoundParameters parameters = MapObjectProgram::parse_act_play_sound(cmd);
 
 	act->iparam1 = parameters.priority;
 	act->iparam2 = parameters.fx;
