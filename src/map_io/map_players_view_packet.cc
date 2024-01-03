@@ -488,13 +488,16 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 				fw.string(field->map_object_descr->name());
 
 				if (field->map_object_descr->type() == MapObjectType::DISMANTLESITE) {
-					// `building` can only be nullptr in compatibility cases.
-					// Remove the non-null check after v1.0
-					// TODO(tothxa): Is it worth risking a nullptr deref segfault?
-					fw.string(field->dismantlesite.building != nullptr ?
-                            field->dismantlesite.building->name() :
-                            "dismantlesite");
-					fw.unsigned_32(field->dismantlesite.progress);
+					if (const BuildingDescr* b = field->dismantlesite.building; b != nullptr) {
+						fw.string(b->name());
+						fw.unsigned_32(field->dismantlesite.progress);
+					} else {
+						// `building` was only supposed to be nullptr in compatibility cases.
+						// Not throw() because we may already be doing and emergency save.
+						log_err("Previously seen dismantlesite has no building type");
+						// Let's pretend we didn't have an immovable...
+						fw.string("");
+					}
 				} else if (field->map_object_descr->type() == MapObjectType::CONSTRUCTIONSITE) {
 					fw.string(field->constructionsite->becomes->name());
 					fw.string(field->constructionsite->was != nullptr ?
