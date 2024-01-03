@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2023 by the Widelands Development Team
+ * Copyright (C) 2016-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,10 +26,28 @@
 #include "graphic/font_handler.h"
 #include "graphic/style_manager.h"
 #include "graphic/styles/paragraph_style.h"
+#include "logic/addons.h"
 #include "ui_basic/button.h"
 #include "wlapplication.h"
 #include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
+
+namespace {
+
+std::pair<std::vector<std::string>, std::vector<std::string>> list_addons() {
+	std::vector<std::string> enabled;
+	std::vector<std::string> disabled;
+	for (auto& addon : AddOns::g_addons) {
+		if (addon.second) {
+			enabled.emplace_back(addon.first->internal_name);
+		} else {
+			disabled.emplace_back(addon.first->internal_name);
+		}
+	}
+	return make_pair(enabled, disabled);
+}
+
+}  // namespace
 
 namespace FsMenu {
 
@@ -59,14 +77,48 @@ TechInfoLine::TechInfoLine(UI::Panel* parent,
 	add_space(kSpacing);
 }
 
+TechInfoList::TechInfoList(UI::Panel* parent,
+                           std::string label,
+                           const std::vector<std::string>& values,
+                           bool right_to_left)
+   : UI::Box(parent, UI::PanelStyle::kFsMenu, "tech_info_list", 0, 0, UI::Box::Horizontal),
+     label_(this,
+            UI::PanelStyle::kFsMenu,
+            "tech_info_label",
+            UI::FontStyle::kFsMenuInfoPanelHeading,
+            label,
+            UI::mirror_alignment(UI::Align::kLeft, right_to_left)),
+     values_(this, UI::PanelStyle::kFsMenu, "tech_info_list_values", 0, 0, UI::Box::Vertical) {
+	for (const std::string& value : values) {
+		values_.add(new UI::Textarea(&values_, UI::PanelStyle::kFsMenu, "tech_info_list_item",
+		                             UI::FontStyle::kFsMenuInfoPanelParagraph, value,
+		                             UI::mirror_alignment(UI::Align::kRight, right_to_left)),
+		            UI::Box::Resizing::kFullSize);
+	}
+	add_space(kSpacing);
+	// Can't use ? operator, because the types are different (UI::TextArea vs. UI::Box).
+	// Casting them both to UI::Panel would look worse than this.
+	if (right_to_left) {
+		add(&values_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
+		add_inf_space();
+		add(&label_, UI::Box::Resizing::kAlign, UI::Align::kRight);
+	} else {
+		add(&label_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
+		add_inf_space();
+		add(&values_, UI::Box::Resizing::kAlign, UI::Align::kRight);
+	}
+	add_space(kSpacing);
+}
+
 TechInfoBox::TechInfoBox(UI::Panel* parent, TechInfoBox::Type t)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, "tech_info_box", 0, 0, UI::Box::Vertical) {
 	struct ContentT {
 		std::string label, localized_label, value, localized_value;
+		std::vector<std::string> value_list;
 	};
 	std::vector<ContentT> content;
 
-#define ADD_CONTENT(a, b, c, d) content.emplace_back(ContentT({a, b, c, d}))
+#define ADD_CONTENT(a, b, c, d) content.emplace_back(ContentT({a, b, c, d, {}}))
 
 	ADD_CONTENT("Version:", _("Version:"), build_ver_details(), "");
 
@@ -115,6 +167,12 @@ TechInfoBox::TechInfoBox(UI::Panel* parent, TechInfoBox::Type t)
 		ADD_CONTENT("Locale Directory:", _("Locale Directory:"), i18n::get_localedir(), "");
 		ADD_CONTENT(
 		   "Executable Directory:", _("Executable Directory:"), get_executable_directory(false), "");
+		auto addons_lists = list_addons();
+#define ADD_LIST(a, b, l) content.emplace_back(ContentT({a, b, "", "", l}))
+		ADD_LIST("Enabled Add-Ons:", _("Enabled Add-Ons:"), addons_lists.first);
+		ADD_LIST(
+		   "Inactive Installed Add-Ons:", _("Inactive Installed Add-Ons:"), addons_lists.second);
+#undef ADD_LIST
 	}
 
 /**** Done filling content *****/
@@ -144,13 +202,29 @@ TechInfoBox::TechInfoBox(UI::Panel* parent, TechInfoBox::Type t)
 		report_ += "> ";
 		report_ += c.label;
 		report_ += ' ';
-		report_ += c.value;
-		report_ += "  \n";
 
 		add_space(kSpacing);
-		add(new TechInfoLine(this, c.localized_label,
-		                     c.localized_value.empty() ? c.value : c.localized_value, mirror),
-		    UI::Box::Resizing::kFullSize);
+
+		if (c.value_list.empty()) {
+			report_ += c.value;
+			report_ += "  \n";
+
+			add(new TechInfoLine(this, c.localized_label,
+			                     c.localized_value.empty() ? c.value : c.localized_value, mirror),
+			    UI::Box::Resizing::kFullSize);
+		} else {
+			auto it = c.value_list.begin();
+			while (it != c.value_list.end()) {
+				report_ += *it;
+				if (++it != c.value_list.end()) {
+					report_ += ", ";
+				}
+			}
+			report_ += "  \n";
+
+			add(new TechInfoList(this, c.localized_label, c.value_list, mirror),
+			    UI::Box::Resizing::kFullSize);
+		}
 	}
 
 	UI::Box* buttonbox =

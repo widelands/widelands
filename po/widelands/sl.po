@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-10-02 02:28+0000\n"
+"POT-Creation-Date: 2023-12-16 02:32+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Matevž Jekovec <matevz.jekovec@gmail.com>, 2020-2021\n"
 "Language-Team: Slovenian (http://app.transifex.com/widelands/widelands/language/sl/)\n"
@@ -27,43 +27,43 @@ msgid "%2.1f%%"
 msgstr "%2.1f %%"
 
 #. TRANSLATORS: Short for "Not enough space"
-#: ../../data/scripting/infrastructure.lua:185
+#: ../../data/scripting/infrastructure.lua:188
 msgid "No Space"
 msgstr "Ni prostora"
 
-#: ../../data/scripting/infrastructure.lua:186
+#: ../../data/scripting/infrastructure.lua:189
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr "Nekaj začetnih stavb ni bilo zgrajenih, ker ni bilo dovolj prostora zanje. S tem ste prikrajšani; premislite o ponovnem začetku z bolj poštenimi začetnimi pogoji."
 
-#: ../../data/scripting/infrastructure.lua:187
+#: ../../data/scripting/infrastructure.lua:190
 msgid "Not enough space"
 msgstr "Ni dovolj prostora"
 
-#: ../../data/scripting/infrastructure.lua:285
+#: ../../data/scripting/infrastructure.lua:288
 msgid "No rocks nearby"
 msgstr "V bližini ni kamna"
 
-#: ../../data/scripting/infrastructure.lua:285
+#: ../../data/scripting/infrastructure.lua:288
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
 msgstr "V bližini začetne pozicije ni kamenja. Posledično imate dodatne surovine za zagon vašega gospodarstva."
 
-#: ../../data/scripting/infrastructure.lua:291
+#: ../../data/scripting/infrastructure.lua:294
 msgid "Not enough trees nearby"
 msgstr ""
 
-#: ../../data/scripting/infrastructure.lua:291
+#: ../../data/scripting/infrastructure.lua:294
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."
 msgstr ""
 
 #: ../../data/scripting/messages.lua:66 ../../data/scripting/messages.lua:68
-#: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:117
+#: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:119
 msgid "Status"
 msgstr "Stanje"
 
@@ -642,12 +642,12 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:486
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
 #: ../../src/ui_fsmenu/launch_mpg.cc:320 ../../src/ui_fsmenu/main.cc:273
-#: ../../src/wlapplication.cc:1673
+#: ../../src/wlapplication.cc:1678
 msgid "Error"
 msgstr "Napaka"
 
 #: ../../src/editor/editorinteractive.cc:1141 ../../src/ui_fsmenu/main.cc:257
-#: ../../src/wlapplication.cc:1675
+#: ../../src/wlapplication.cc:1680
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -1404,7 +1404,7 @@ msgid "Computer %u"
 msgstr "Računalnik %u"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:736
-#: ../../src/wui/game_summary.cc:115
+#: ../../src/wui/game_summary.cc:117
 msgid "Player"
 msgstr "Igralec"
 
@@ -3784,7 +3784,7 @@ msgstr ""
 
 #: ../../src/ui_basic/window.cc:101 ../../src/ui_fsmenu/about.cc:41
 #: ../../src/ui_fsmenu/crash_report.cc:70
-#: ../../src/ui_fsmenu/crash_report.cc:163
+#: ../../src/ui_fsmenu/crash_report.cc:164
 #: ../../src/ui_fsmenu/mousewheel_report.cc:74
 #: ../../src/wui/watchwindow.cc:110
 msgid "Close"
@@ -3814,7 +3814,7 @@ msgstr "O Widelands"
 msgid "Lua Error"
 msgstr "Napaka Lua"
 
-#: ../../src/ui_fsmenu/about.cc:59 ../../src/ui_fsmenu/tech_info.cc:131
+#: ../../src/ui_fsmenu/about.cc:59 ../../src/ui_fsmenu/tech_info.cc:189
 msgid "Technical Info"
 msgstr ""
 
@@ -4467,7 +4467,7 @@ msgid "Author:"
 msgstr "Avtor:"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:171
-#: ../../src/ui_fsmenu/tech_info.cc:71
+#: ../../src/ui_fsmenu/tech_info.cc:123
 msgid "Version:"
 msgstr "Različica:"
 
@@ -5365,22 +5365,22 @@ msgid "Crash Report Details"
 msgstr ""
 
 #: ../../src/ui_fsmenu/crash_report.cc:61
-#: ../../src/ui_fsmenu/crash_report.cc:151
+#: ../../src/ui_fsmenu/crash_report.cc:152
 msgid "Open link"
 msgstr ""
 
 #: ../../src/ui_fsmenu/crash_report.cc:63
-#: ../../src/ui_fsmenu/crash_report.cc:153
+#: ../../src/ui_fsmenu/crash_report.cc:154
 msgid "Copy link"
 msgstr ""
 
 #: ../../src/ui_fsmenu/crash_report.cc:67
-#: ../../src/ui_fsmenu/crash_report.cc:158
+#: ../../src/ui_fsmenu/crash_report.cc:159
 msgid "Copy report"
 msgstr ""
 
 #: ../../src/ui_fsmenu/crash_report.cc:68
-#: ../../src/ui_fsmenu/crash_report.cc:158
+#: ../../src/ui_fsmenu/crash_report.cc:159
 msgid "Copy the full report to the clipboard"
 msgstr ""
 
@@ -5392,19 +5392,21 @@ msgstr ""
 #, c-format
 msgid ""
 "It looks like Widelands crashed the last time you ran it, but a backtrace "
-"for debugging was automatically generated. Please provide the report to the "
-"Widelands Development Team under %s so we can fix the problem."
+"for debugging was automatically generated. Please provide the report along "
+"with a description of what was going on in the game and what you did last "
+"before the crash to the Widelands Development Team under %s so we can fix "
+"the problem."
 msgstr ""
 
-#: ../../src/ui_fsmenu/crash_report.cc:144
+#: ../../src/ui_fsmenu/crash_report.cc:145
 msgid "Show details…"
 msgstr ""
 
-#: ../../src/ui_fsmenu/crash_report.cc:144
+#: ../../src/ui_fsmenu/crash_report.cc:145
 msgid "View the detailed crash report"
 msgstr ""
 
-#: ../../src/ui_fsmenu/crash_report.cc:161
+#: ../../src/ui_fsmenu/crash_report.cc:162
 msgid "Remind me later"
 msgstr ""
 
@@ -6375,7 +6377,7 @@ msgstr "Tip"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:249
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:357
-#: ../../src/wui/game_chat_panel.cc:449 ../../src/wui/game_summary.cc:116
+#: ../../src/wui/game_chat_panel.cc:449 ../../src/wui/game_summary.cc:118
 msgid "Team"
 msgstr "Ekipa"
 
@@ -6789,87 +6791,95 @@ msgstr "Avtorji"
 msgid "You"
 msgstr "Vi"
 
-#: ../../src/ui_fsmenu/tech_info.cc:75
+#: ../../src/ui_fsmenu/tech_info.cc:127
 msgid "MacOS"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:77
+#: ../../src/ui_fsmenu/tech_info.cc:129
 msgid "Windows (64 bit)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:79
+#: ../../src/ui_fsmenu/tech_info.cc:131
 msgid "Windows (32 bit)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:81
+#: ../../src/ui_fsmenu/tech_info.cc:133
 msgid "Linux"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:83
+#: ../../src/ui_fsmenu/tech_info.cc:135
 msgid "FreeBSD"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:85
+#: ../../src/ui_fsmenu/tech_info.cc:137
 msgid "Unix"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:87
+#: ../../src/ui_fsmenu/tech_info.cc:139
 msgid "Unknown"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:89
+#: ../../src/ui_fsmenu/tech_info.cc:141
 msgid "Operating System:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:90
+#: ../../src/ui_fsmenu/tech_info.cc:142
 msgid "Compiled with SDL version:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:97
+#: ../../src/ui_fsmenu/tech_info.cc:149
 msgid "Using SDL version:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:102
+#: ../../src/ui_fsmenu/tech_info.cc:154
 msgid "SDL video driver:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:106
+#: ../../src/ui_fsmenu/tech_info.cc:158
 msgid "SDL horizontal scroll:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:107
+#: ../../src/ui_fsmenu/tech_info.cc:159
 msgid "assuming inverted"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:111
+#: ../../src/ui_fsmenu/tech_info.cc:163
 msgid "Locale:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:112
+#: ../../src/ui_fsmenu/tech_info.cc:164
 msgid "Home Directory:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:113
+#: ../../src/ui_fsmenu/tech_info.cc:165
 msgid "Configuration File:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:114
+#: ../../src/ui_fsmenu/tech_info.cc:166
 msgid "Data Directory:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:115
+#: ../../src/ui_fsmenu/tech_info.cc:167
 msgid "Locale Directory:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:117
+#: ../../src/ui_fsmenu/tech_info.cc:169
 msgid "Executable Directory:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:159
+#: ../../src/ui_fsmenu/tech_info.cc:172
+msgid "Enabled Add-Ons:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:174
+msgid "Inactive Installed Add-Ons:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:233
 msgid "Copy"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:160
+#: ../../src/ui_fsmenu/tech_info.cc:234
 msgid "Copy the technical report to the clipboard"
 msgstr ""
 
@@ -6936,19 +6946,19 @@ msgstr ""
 msgid "Unknown command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1651
+#: ../../src/wlapplication.cc:1656
 msgid "Incompatible"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1688
+#: ../../src/wlapplication.cc:1693
 msgid "Game ended unexpectedly"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1688
+#: ../../src/wlapplication.cc:1693
 msgid "Unexpected error during the game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1691
+#: ../../src/wlapplication.cc:1696
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6962,7 +6972,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1700
+#: ../../src/wlapplication.cc:1705
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6972,11 +6982,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1734
+#: ../../src/wlapplication.cc:1739
 msgid "Emergency save failed"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1735
+#: ../../src/wlapplication.cc:1740
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -7566,7 +7576,7 @@ msgstr "Shrani igro"
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wlapplication_options.cc:873
 #: ../../src/wui/game_client_disconnected.cc:112
-#: ../../src/wui/game_summary.cc:106 ../../src/wui/interactive_gamebase.cc:193
+#: ../../src/wui/game_summary.cc:108 ../../src/wui/interactive_gamebase.cc:193
 msgid "Exit Game"
 msgstr "Zapusti igro"
 
@@ -8848,74 +8858,74 @@ msgstr[3] "Arhiviraj %d izbranih sporočil"
 msgid "Archive selected message"
 msgstr "Arhiviraj izbrano sporočilo"
 
-#: ../../src/wui/game_summary.cc:37
+#: ../../src/wui/game_summary.cc:39
 msgid "Game over"
 msgstr "Konec igre"
 
-#: ../../src/wui/game_summary.cc:57
+#: ../../src/wui/game_summary.cc:59
 msgid "Player Info:"
 msgstr "Podatki o igralcu:"
 
-#: ../../src/wui/game_summary.cc:90
+#: ../../src/wui/game_summary.cc:92
 msgid "Elapsed time:"
 msgstr "Pretečen čas:"
 
-#: ../../src/wui/game_summary.cc:102
+#: ../../src/wui/game_summary.cc:104
 msgid "Continue playing"
 msgstr "Nadaljuj z igranjem"
 
-#: ../../src/wui/game_summary.cc:118
+#: ../../src/wui/game_summary.cc:120
 msgid "Time"
 msgstr "Čas"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. lost.
-#: ../../src/wui/game_summary.cc:222
+#: ../../src/wui/game_summary.cc:219
 msgid "Lost"
 msgstr "Izgubil"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. won.
-#: ../../src/wui/game_summary.cc:226
+#: ../../src/wui/game_summary.cc:223
 msgid "Won"
 msgstr "Zmagal"
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. resigned.
-#: ../../src/wui/game_summary.cc:235
+#: ../../src/wui/game_summary.cc:232
 msgid "Resigned"
 msgstr "Predal"
 
 #. * TRANSLATORS: This is shown in the game summary when we don't know
 #. * TRANSLATORS: if the player has lost or won.
-#: ../../src/wui/game_summary.cc:240
+#: ../../src/wui/game_summary.cc:237
 msgctxt "player_won"
 msgid "Unknown"
 msgstr "Neznano"
 
-#: ../../src/wui/game_summary.cc:253
+#: ../../src/wui/game_summary.cc:249
 msgid "You won!"
 msgstr "Zmagali ste!"
 
-#: ../../src/wui/game_summary.cc:255
+#: ../../src/wui/game_summary.cc:251
 msgid "You lost."
 msgstr "Izgubili ste."
 
-#: ../../src/wui/game_summary.cc:259
+#: ../../src/wui/game_summary.cc:255
 #, c-format
 msgid "%s won!"
 msgstr "%s je zmagal!"
 
-#: ../../src/wui/game_summary.cc:261
+#: ../../src/wui/game_summary.cc:257
 #, c-format
 msgid "Team %u won!"
 msgstr ""
 
-#: ../../src/wui/game_summary.cc:318
+#: ../../src/wui/game_summary.cc:311
 msgid "Score"
 msgstr "Točke"
 
-#: ../../src/wui/game_summary.cc:320
+#: ../../src/wui/game_summary.cc:313
 msgid "Team Score"
 msgstr "Točke ekipe"
 
