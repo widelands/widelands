@@ -1486,6 +1486,7 @@ void Game::sample_statistics() {
  * Read statistics data from a file.
  *
  * \param fr file to read from
+ * \param packet_version from GamePlayerInfoPacket in game_io/game_player_info_packet.cc
  */
 void Game::read_statistics(FileRead& fr, uint16_t packet_version) {
 	fr.unsigned_32();  // used to be last stats update time

@@ -195,6 +195,7 @@ ProductionProgram::ActReturn::Condition* create_economy_condition(
 
 // TODO(GunChleoc): Incorporate this into TrainingParameters constructor when we drop compatibility
 // after v1.0
+// TODO(tothxa): Looks fine to me as is. Can I remove above to-do item?
 TrainingAttribute parse_training_attribute(const std::string& argument) {
 	if (argument == "health") {
 		return TrainingAttribute::kHealth;
