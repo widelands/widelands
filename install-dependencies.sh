@@ -96,8 +96,9 @@ else
    shift 1
 fi
 
+WL_DIR="$(dirname $0)"
+
 asio_not_packaged() {
-   WL_DIR="$(dirname $0)"
    if [ -f /usr/include/asio.hpp -o -f "${WL_DIR}"/auto_dependencies/asio/asio.hpp ]; then
       return 0
    elif "${WL_DIR}"/utils/download_asio.sh "$1" ; then
@@ -168,11 +169,11 @@ elif [ "$DISTRO" = "openbsd" ]; then
 
 elif [ "$DISTRO" = "msys32" ]; then
    echo "Installing dependencies for 32-bit Windows..."
-   ./util/win32/install_deps_mingw.sh i686 $@
+   "${WL_DIR}"/utils/win32/install_deps_mingw.sh i686 $@
 
 elif [ "$DISTRO" = "msys64" ]; then
    echo "Installing dependencies for 64-bit Windows..."
-   ./util/win32/install_deps_mingw.sh x86_64 $@
+   "${WL_DIR}"/utils/win32/install_deps_mingw.sh x86_64 $@
 
 elif [ "$DISTRO" = "homebrew" ]; then
    echo "Installing dependencies for Mac Homebrew..."
