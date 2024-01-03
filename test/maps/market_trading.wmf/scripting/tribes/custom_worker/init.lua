@@ -36,7 +36,7 @@ wl.Descriptions():new_worker_type {
          "walk=object",
          "playsound=sound/woodcutting/woodcutting priority:100%",
          "animate=hacking duration:15s",
-         "playsound=sound/woodcutting/tree_falling priority:100%",
+         "playsound=sound/woodcutting/tree_falling priority:50%",
          "callobject=fall",
          "animate=idle duration:2s",
          "createware=custom_ware",
