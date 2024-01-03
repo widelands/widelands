@@ -74,6 +74,9 @@ if os.getenv('GITHUB_ACTION'):
     group_start = '\n::group::'
     group_end = '\n::endgroup::\n'
 
+# exit code to use for failure of LeakSanitizer
+LSAN_ERROR = 58  # conflict unlikely, it is not defined in module errno
+
 
 class WidelandsTestCase():
     do_use_random_directory = True
@@ -151,6 +154,7 @@ class WidelandsTestCase():
             lsan = env.get("LSAN_OPTIONS", "")
             if "suppressions=" not in lsan:  # allow to overwrite
                 lsan += f" suppressions={datadir_for_testing()}/asan_3rd_party_leaks"
+            lsan += f" exitcode={LSAN_ERROR}"
             env["LSAN_OPTIONS"] = lsan
 
             start_time = get_time()
@@ -288,8 +292,8 @@ class WidelandsTestCase():
                 self.fail("TIMED OUT", "The test timed out.", stdout_filename)
                 return
             if self.widelands_returncode != 0:
-                if self.widelands_returncode == 1 and self.ignore_error_code:
-                    self.out_status(' IGN ', f'IGNORING error code 1')
+                if self.widelands_returncode == LSAN_ERROR and self.ignore_error_code:
+                    self.out_status(' IGN ', f'IGNORING error code {LSAN_ERROR}')
                 else:
                     self.fail("FAILED", "Widelands exited abnormally.", stdout_filename)
                     return
@@ -401,7 +405,7 @@ def parse_args():
         help = "Run this binary as Widelands. Otherwise some default paths are searched."
     )
     p.add_argument("-i", "--ignore-error-code", action="store_true", default = False,
-        help = "Assume success on return code 1, to allow running the tests "
+        help = f"Assume success on return code {LSAN_ERROR}, to allow running the tests "
         "without ASan reporting false positives."
     )
     p.add_argument("-j", "--workers", type=int, default = 0,
