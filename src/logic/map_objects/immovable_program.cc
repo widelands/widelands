@@ -106,7 +106,7 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 				   std::unique_ptr<Action>(new ActGrow(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "remove") {
 				actions_.push_back(
-				   std::unique_ptr<Action>(new ActRemove(parseinput.arguments, immovable)));
+				   std::unique_ptr<Action>(new ActRemove(parseinput.arguments)));
 			} else if (parseinput.name == "seed") {
 				actions_.push_back(
 				   std::unique_ptr<Action>(new ActSeed(parseinput.arguments, immovable)));
@@ -365,7 +365,7 @@ remove
          "remove=", -- This object will always be removed when 'fall' is called
       },
 */
-ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments, const ImmovableDescr&) {
+ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments) {
 	if (arguments.size() > 1) {
 		throw GameDataError("Usage: remove=[chance:<percent>]");
 	}

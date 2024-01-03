@@ -92,7 +92,7 @@ struct ImmovableProgram : public MapObjectProgram {
 
 	class ActRemove : public Action {
 	public:
-		ActRemove(std::vector<std::string>& arguments, const ImmovableDescr& descr);
+		explicit ActRemove(std::vector<std::string>& arguments);
 		void execute(Game&, Immovable&) const override;
 
 	private:
