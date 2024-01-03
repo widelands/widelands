@@ -2151,8 +2151,8 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				actions_.push_back(
 				   std::unique_ptr<ProductionProgram::Action>(new ActCall(parseinput.arguments)));
 			} else if (parseinput.name == "sleep") {
-				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActSleep(parseinput.arguments)));
+				actions_.push_back(
+				   std::unique_ptr<ProductionProgram::Action>(new ActSleep(parseinput.arguments)));
 			} else if (parseinput.name == "animate") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActAnimate(parseinput.arguments, building)));
@@ -2178,8 +2178,8 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActTrain(parseinput.arguments, *building)));
 			} else if (parseinput.name == "playsound") {
-				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActPlaySound(parseinput.arguments)));
+				actions_.push_back(
+				   std::unique_ptr<ProductionProgram::Action>(new ActPlaySound(parseinput.arguments)));
 			} else if (parseinput.name == "construct") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActConstruct(parseinput.arguments, name(), building, descriptions)));

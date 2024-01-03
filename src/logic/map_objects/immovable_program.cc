@@ -111,8 +111,7 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 				actions_.push_back(
 				   std::unique_ptr<Action>(new ActSeed(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "playsound") {
-				actions_.push_back(
-				   std::unique_ptr<Action>(new ActPlaySound(parseinput.arguments)));
+				actions_.push_back(std::unique_ptr<Action>(new ActPlaySound(parseinput.arguments)));
 			} else if (parseinput.name == "construct") {
 				actions_.push_back(
 				   std::unique_ptr<Action>(new ActConstruct(parseinput.arguments, immovable)));
