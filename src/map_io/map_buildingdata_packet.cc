@@ -175,8 +175,7 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 							oldidx = building.owner().tribe().safe_building_index(map_object_name);
 						} else if (type == "immovable") {
 							oldidx = building.owner().tribe().immovable_index(map_object_name);
-							building.was_immovable_ =
-							   building.owner().tribe().get_immovable_descr(oldidx);
+							building.was_immovable_ = building.owner().tribe().get_immovable_descr(oldidx);
 						} else {
 							throw GameDataError(
 							   "Invalid FormerBuildings type %s, expected 'building' or 'immovable'",
@@ -334,9 +333,8 @@ void MapBuildingdataPacket::read_constructionsite(ConstructionSite& construction
 
 			const uint32_t intermediates = fr.unsigned_32();
 			for (uint32_t i = 0; i < intermediates; ++i) {
-				constructionsite.info_.intermediates.push_back(
-				   game.descriptions().get_building_descr(
-				      game.descriptions().safe_building_index(fr.c_string())));
+				constructionsite.info_.intermediates.push_back(game.descriptions().get_building_descr(
+				   game.descriptions().safe_building_index(fr.c_string())));
 			}
 			constructionsite.settings_.reset(
 			   BuildingSettings::load(game, constructionsite.owner().tribe(), fr));
