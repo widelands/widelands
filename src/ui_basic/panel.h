@@ -91,6 +91,8 @@ public:
 		pf_hide_all_overlays = 1 << 13,
 		// Other panels will snap to this one.
 		pf_snap_target = 1 << 14,
+		// Layouting hint that this panel is expected to grow to some very large sizes.
+		pf_unlimited_size = 1 << 15,
 	};
 
 	/** The Z ordering of overlapping panels; highest value is always on top. */
