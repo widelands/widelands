@@ -151,65 +151,20 @@ add_iterator_function_to_not_unpersist(lua_State* L, const std::string& global, 
 // Those are the globals that will be regenerated (not by the persistence engine),
 // e.g. C-functions or automatically populated fields. Changing the ordering here will
 // break save game compatibility.
-static const char* kPersistentGlobals[] = {"_VERSION",
-                                           "assert",
-                                           "collectgarbage",
-                                           "coroutine",
-                                           "debug",
-                                           "dofile",
-                                           "error",
-                                           "gcinfo",
-                                           "getfenv",
-                                           "getmetatable",
-                                           "io",
-                                           "ipairs",
-                                           "load",
-                                           "loadfile",
-                                           "loadstring",
-                                           "math",
-                                           "module",
-                                           "newproxy",
-                                           "next",
-                                           "os",
-                                           "package",
-                                           "pairs",
-                                           "pcall",
-                                           "print",
-                                           "rawequal",
-                                           "rawget",
-                                           "rawset",
-                                           "rawlen",
-                                           "require",
-                                           "select",
-                                           "setfenv",
-                                           "setmetatable",
-                                           "table",
-                                           "tonumber",
-                                           "tostring",
-                                           "type",
-                                           "unpack",
-                                           "wl",
-                                           "xpcall",
-                                           "string",
-                                           "_",
-// clang-format off
+static const char* kPersistentGlobals[] = {
+   "_VERSION", "assert", "collectgarbage", "coroutine", "debug", "dofile", "error", "gcinfo",
+   "getfenv", "getmetatable", "io", "ipairs", "load", "loadfile", "loadstring", "math", "module",
+   "newproxy", "next", "os", "package", "pairs", "pcall", "print", "rawequal", "rawget", "rawset",
+   "rawlen", "require", "select", "setfenv", "setmetatable", "table", "tonumber", "tostring",
+   "type", "unpack", "wl", "xpcall", "string", "_",
+   // clang-format off
                                            // TODO(tothxa): set_textdomain should be deleted, but
                                            //    that would break the rest. Replace the next time
                                            //    when a new global function is added?
                                            "set_textdomain",
-// clang-format on
-                                           "get_build_id",
-                                           "coroutine.yield",
-                                           "ngettext",
-                                           "include",
-                                           "path",
-                                           "pgettext",
-                                           "ticks",
-                                           "push_textdomain",
-                                           "pop_textdomain",
-                                           "npgettext",
-                                           "styles",
-                                           nullptr};
+   // clang-format on
+   "get_build_id", "coroutine.yield", "ngettext", "include", "path", "pgettext", "ticks",
+   "push_textdomain", "pop_textdomain", "npgettext", "styles", nullptr};
 
 /**
  * Does all the persisting work. Returns the number of bytes
