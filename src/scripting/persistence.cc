@@ -192,6 +192,10 @@ static const char* kPersistentGlobals[] = {"_VERSION",
                                            "xpcall",
                                            "string",
                                            "_",
+                                           // TODO(tothxa): set_textdomain should be deleted, but
+                                           //    that would break the rest. Replace the next time
+                                           //    when a new global function is added?
+                                           "set_textdomain",
                                            "get_build_id",
                                            "coroutine.yield",
                                            "ngettext",
