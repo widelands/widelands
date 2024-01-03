@@ -281,7 +281,6 @@ wl_library(logic
     base_times
     build_info
     economy
-    editor  # TODO(Nordfriese): Needed only for an ugly temporary hack
     game_io
     graphic
     graphic_color

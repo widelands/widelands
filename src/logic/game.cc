@@ -38,7 +38,6 @@
 #include "build_info.h"
 #include "economy/economy.h"
 #include "economy/portdock.h"
-#include "editor/editorinteractive.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
 #include "io/fileread.h"
