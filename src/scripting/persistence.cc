@@ -152,8 +152,9 @@ add_iterator_function_to_not_unpersist(lua_State* L, const std::string& global, 
 // e.g. C-functions or automatically populated fields. Changing the ordering here will
 // break save game compatibility.
 // clang-format off
-// the TODO comment in the middle made clang-format decide on a wildly different format
-// than without it. You can re-enable it if the TODO is solved and the comment is removed.
+// TODO(tothxa): The to-do comment in the middle made clang-format decide on a wildly different
+//               format than without it. You can re-enable it if the to-do is solved and the
+//               comment is removed.
 static const char* kPersistentGlobals[] = {"_VERSION",
                                            "assert",
                                            "collectgarbage",
