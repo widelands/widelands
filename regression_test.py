@@ -147,9 +147,15 @@ class WidelandsTestCase():
             stdout_file.write("\n")
             stdout_file.flush()
 
+            env = dict(os.environ)
+            lsan = env.get("LSAN_OPTIONS", "")
+            if "suppressions=" not in lsan:  # allow to overwrite
+                lsan += f" suppressions={datadir_for_testing()}/asan_3rd_party_leaks"
+            env["LSAN_OPTIONS"] = lsan
+
             start_time = get_time()
             widelands = subprocess.Popen(
-                    args, shell=False, stdout=stdout_file, stderr=subprocess.STDOUT)
+                    args, shell=False, stdout=stdout_file, stderr=subprocess.STDOUT, env=env)
             try:
                 widelands.communicate(timeout = self.timeout)
             except subprocess.TimeoutExpired:
