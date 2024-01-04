@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
 # Tóth András <txa-dev@posteo.hu>, 2021
@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-12-11 02:34+0000\n"
+"POT-Creation-Date: 2024-01-04 02:32+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: zone <z-one@freemail.hu>, 2015\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
@@ -637,12 +637,12 @@ msgstr "Valóban ki szeretnél lépni a térképszerkesztőből?"
 #: ../../src/editor/editorinteractive.cc:1139 ../../src/logic/addons.cc:48
 #: ../../src/ui_basic/dropdown.cc:358 ../../src/ui_basic/dropdown.cc:360
 #: ../../src/ui_fsmenu/addons/contact.cc:81
-#: ../../src/ui_fsmenu/addons/manager.cc:1390
-#: ../../src/ui_fsmenu/addons/manager.cc:1401
-#: ../../src/ui_fsmenu/addons/manager.cc:1452
-#: ../../src/ui_fsmenu/addons/manager.cc:1500
-#: ../../src/ui_fsmenu/addons/manager.cc:1578
-#: ../../src/ui_fsmenu/addons/manager.cc:1647
+#: ../../src/ui_fsmenu/addons/manager.cc:1393
+#: ../../src/ui_fsmenu/addons/manager.cc:1404
+#: ../../src/ui_fsmenu/addons/manager.cc:1455
+#: ../../src/ui_fsmenu/addons/manager.cc:1503
+#: ../../src/ui_fsmenu/addons/manager.cc:1581
+#: ../../src/ui_fsmenu/addons/manager.cc:1650
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:104
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:292
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:565
@@ -651,12 +651,12 @@ msgstr "Valóban ki szeretnél lépni a térképszerkesztőből?"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:486
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
 #: ../../src/ui_fsmenu/launch_mpg.cc:320 ../../src/ui_fsmenu/main.cc:273
-#: ../../src/wlapplication.cc:1673
+#: ../../src/wlapplication.cc:1678
 msgid "Error"
 msgstr "Hiba"
 
 #: ../../src/editor/editorinteractive.cc:1141 ../../src/ui_fsmenu/main.cc:257
-#: ../../src/wlapplication.cc:1675
+#: ../../src/wlapplication.cc:1680
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -997,7 +997,7 @@ msgstr "%1$s; %2$s"
 #: ../../src/editor/ui_menus/field_info_window.cc:262
 #, c-format
 msgid "Enabled Add-Ons: %s"
-msgstr "Aktív Bővítmények: %s"
+msgstr "Aktív bővítmények: %s"
 
 #: ../../src/editor/ui_menus/help.cc:36 ../../src/ui_fsmenu/login_box.cc:255
 #: ../../src/ui_fsmenu/main.cc:255 ../../src/ui_fsmenu/main.cc:1084
@@ -4002,11 +4002,11 @@ msgstr "Bővítménycsomagoló indítása"
 msgid "Contact us…"
 msgstr "Kapcsolatfelvétel"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:377
+#: ../../src/ui_fsmenu/addons/manager.cc:380
 msgid "Tools for Add-Ons Developers"
 msgstr "Eszközök bővítményfejlesztők számára"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:385
+#: ../../src/ui_fsmenu/addons/manager.cc:388
 msgid ""
 "The interactive add-ons packager allows you to create, edit, and delete add-"
 "ons. You can bundle maps designed with the Widelands Map Editor as an add-on"
@@ -4014,14 +4014,14 @@ msgid ""
 "having to write a single line of code."
 msgstr "Az interaktív bővítménycsomagoló segít bővítményeket készíteni, szerkeszteni és törölni. Grafikus felhasználói felület segítségével csomagolhatsz össze a Widelands Térképszerkesztőben készített térképeket bővítményként, és megoszthatod a többi játékossal anélkül, hogy akár csak egy sor programot kellene írnod."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:400
+#: ../../src/ui_fsmenu/addons/manager.cc:403
 #, c-format
 msgid ""
 "For more information regarding how to develop and package your own add-ons, "
 "please visit %s."
 msgstr "További információkért a bővítmények fejlesztéséről és csomagolásáról kérjük keresd fel a következő oldalt: %s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:416
+#: ../../src/ui_fsmenu/addons/manager.cc:419
 msgid ""
 "Here, you can upload your add-ons to the server to make them available to "
 "other players. By uploading, you agree to publish your creation under the "
@@ -4030,7 +4030,7 @@ msgid ""
 "GPL, please refer to ‘About Widelands’ → ‘License’ in the main menu."
 msgstr "Itt tudod a saját bővítményeidet feltölteni a kiszolgálóra, hogy mások is használhassák. A feltöltéssel hozzájárulsz a munkád közzétételéhez a GNU GPL 2. verziójának a feltételei szerint (megegyezően magával a Widelands programmal). A GPL-ről további információkat a főmenüben „A Widelands névjegye” alatti „Licenc” fülön találsz."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:423
+#: ../../src/ui_fsmenu/addons/manager.cc:426
 msgid ""
 "It is forbidden to upload add-ons containing harmful or malicious content or"
 " spam. By uploading an add-on, you assert that the add-on is of your own "
@@ -4038,7 +4038,7 @@ msgid ""
 " stead."
 msgstr "Tilos ártalmas vagy rosszindulatú elemeket vagy spamet tartalmazó bővítmények feltöltése. A feltöltéssel egyben nyilatkozol, hogy a bővítmény a saját alkotásod, vagy rendelkezel az eredeti szerző(k) hozzájárulásával a nevükben történő feltöltéshez."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:429
+#: ../../src/ui_fsmenu/addons/manager.cc:432
 msgid ""
 "You are required to have read the add-ons documentation under the link given"
 " further above before submitting content. Since the documentation is subject"
@@ -4046,7 +4046,7 @@ msgid ""
 "followed all guidelines stated there."
 msgstr "Mielőtt bővítményt töltenél fel, kötelezően el kell olvasnod a bővítmények fejlesztői dokumentációját a fent megadott hivatkozáson. A dokumentáció gyakran változik, ezért győződj meg róla, hogy megismerted-e a legfrissebb változatot, és betartottál-e minden útmutatást!"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:435
+#: ../../src/ui_fsmenu/addons/manager.cc:438
 msgid ""
 "The Widelands Development Team will review your add-on soon after uploading."
 " In case they have further inquiries, they will contact you via a PM on the "
@@ -4054,7 +4054,7 @@ msgid ""
 "profile page frequently."
 msgstr "A Widelands fejlesztőcsapat feltöltés után hamarosan ellenőrzi a bővítményedet. Ha észrevételeik vannak, a Widelands honlapján privát üzenetben veszik fel veled a kapcsolatot, ezért kérjük rendszeresen ellenőrizd a belépési oldaladat."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:465
+#: ../../src/ui_fsmenu/addons/manager.cc:468
 #, c-format
 msgid ""
 "Technical problems? Unclear documentation? Advanced needs such as deletion "
@@ -4063,7 +4063,7 @@ msgid ""
 "be happy to help."
 msgstr "Technikai problémák, nem egyértelmű dokumentáció, magasabb szintű igények (pl. bővítmény törlése vagy együttműködés más bővítményfejlesztőkkel) esetén keresd fel a fórumunkat: %s\nA Widelands fejlesztőcsapat örömmel segít."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:482
+#: ../../src/ui_fsmenu/addons/manager.cc:485
 msgid ""
 "Alternatively you can also send a message to the Widelands Development Team "
 "and we’ll try to help you with your enquiry as soon as we can. Only the "
@@ -4074,136 +4074,136 @@ msgid ""
 " website user profile page."
 msgstr "Küldhetsz üzenetet a Widelands Fejlesztőcsapatnak is. Igyekszünk megválaszolni a kérdéseket, amilyen gyorsan tudjuk, de csak a bővítménykiszolgáló rendszergazdái látják az innen küldött üzeneteket. Mivel a legtöbb kérdés és válasz hasznos más bővítményfejlesztőknek is, azt kérjük, hogy ezt a lehetőséget csak indokolt esetben használd, ha a problémád nem nyilvános. A válaszunkat a Widelands honlapján lévő felhasználói fiókodra küldjük el privát üzenetként."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:519
+#: ../../src/ui_fsmenu/addons/manager.cc:522
 msgid "Development"
 msgstr "Fejlesztőknek"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
-#: ../../src/ui_fsmenu/addons/manager.cc:522
+#: ../../src/ui_fsmenu/addons/manager.cc:525
 msgid "Name"
 msgstr "Név"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
-#: ../../src/ui_fsmenu/addons/manager.cc:524
+#: ../../src/ui_fsmenu/addons/manager.cc:527
 msgid "Name (descending)"
 msgstr "Név (csökkenő)"
 
 #. * TRANSLATORS: Sort add-ons by average rating
-#: ../../src/ui_fsmenu/addons/manager.cc:526
+#: ../../src/ui_fsmenu/addons/manager.cc:529
 msgid "Most popular"
 msgstr "Legnépszerűbb"
 
 #. * TRANSLATORS: Sort add-ons by average rating
-#: ../../src/ui_fsmenu/addons/manager.cc:528
+#: ../../src/ui_fsmenu/addons/manager.cc:531
 msgid "Least popular"
 msgstr "Legkevésbé népszerű"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
-#: ../../src/ui_fsmenu/addons/manager.cc:530
+#: ../../src/ui_fsmenu/addons/manager.cc:533
 msgid "Most often downloaded"
 msgstr "Legtöbbször letöltött"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
-#: ../../src/ui_fsmenu/addons/manager.cc:532
+#: ../../src/ui_fsmenu/addons/manager.cc:535
 msgid "Least often downloaded"
 msgstr "Legkevesebbszer letöltött"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
-#: ../../src/ui_fsmenu/addons/manager.cc:534
+#: ../../src/ui_fsmenu/addons/manager.cc:537
 msgid "Oldest"
 msgstr "Legrégebbi"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
-#: ../../src/ui_fsmenu/addons/manager.cc:536
+#: ../../src/ui_fsmenu/addons/manager.cc:539
 msgid "Newest"
 msgstr "Legújabb"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:544
+#: ../../src/ui_fsmenu/addons/manager.cc:547
 msgid "Filter add-ons by name"
 msgstr "Bővítmények szűrése név alapján"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:555
+#: ../../src/ui_fsmenu/addons/manager.cc:558
 #, c-format
 msgid "Toggle category ‘%s’"
 msgstr "%s kategória ki/bekapcsolása"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:646
+#: ../../src/ui_fsmenu/addons/manager.cc:649
 #, c-format
 msgid "Are you certain that you want to upgrade this %u add-on?"
 msgid_plural "Are you certain that you want to upgrade these %u add-ons?"
 msgstr[0] "Biztosan frissíteni szeretnéd ezt az %u bővítményt?"
 msgstr[1] "Biztosan frissíteni szeretnéd ezt a %u bővítményt?"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:652
+#: ../../src/ui_fsmenu/addons/manager.cc:655
 #, c-format
 msgid ""
 "\n"
 "· %1$s (%2$s) by %3$s"
 msgstr "\n· %1$s (%2$s) szerző: %3$s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:653
+#: ../../src/ui_fsmenu/addons/manager.cc:656
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:413
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:441
 msgid "NOT VERIFIED"
 msgstr "NEM ELLENŐRZÖTT"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:653
+#: ../../src/ui_fsmenu/addons/manager.cc:656
 msgid "verified"
 msgstr "ellenőrzött"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:657
+#: ../../src/ui_fsmenu/addons/manager.cc:660
 msgid "Upgrade All"
 msgstr "Az összes frissítése"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:796
+#: ../../src/ui_fsmenu/addons/manager.cc:799
 msgid "Not logged in"
 msgstr "Nem vagy bejelentkezve"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:797
+#: ../../src/ui_fsmenu/addons/manager.cc:800
 msgid ""
 "Click to log in. You can then comment and vote on add-ons and upload your "
 "own add-ons."
 msgstr "Kattints ide a bejelentkezéshez! Csak ezután tudsz megjegyzéseket küldeni, szavazni a bővítményekre és saját bővítményeket feltölteni."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:801
+#: ../../src/ui_fsmenu/addons/manager.cc:804
 msgid "Please log in to upload add-ons"
 msgstr "Kérjük jelentkezz be, ha bővítményt szeretnél feltölteni!"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:803
+#: ../../src/ui_fsmenu/addons/manager.cc:806
 msgid "Please log in to upload content"
 msgstr "Kérjük jelentkezz be, ha képet szeretnél feltölteni!"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:805
+#: ../../src/ui_fsmenu/addons/manager.cc:808
 msgid "Please log in to send an enquiry"
 msgstr "Kérjük jelentkezz be, ha üzenetet szeretnél küldeni!"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:810
+#: ../../src/ui_fsmenu/addons/manager.cc:813
 #, c-format
 msgid "Logged in as %s"
 msgstr "Bejelentkezve: %s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:810
+#: ../../src/ui_fsmenu/addons/manager.cc:813
 #, c-format
 msgid "Logged in as %s (admin)"
 msgstr "Bejelentkezve: %s (rendszergazda)"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:811
+#: ../../src/ui_fsmenu/addons/manager.cc:814
 msgid "Click to log out"
 msgstr "Kijelentkezés"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:816
+#: ../../src/ui_fsmenu/addons/manager.cc:819
 msgid "Please tick the confirmation checkbox to upload add-ons"
 msgstr "Kérjük jelöld be a beleegyező négyzetet, ha bővítményt szeretnél feltölteni!"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:819
+#: ../../src/ui_fsmenu/addons/manager.cc:822
 msgid "Please tick the confirmation checkbox to upload content"
 msgstr "Kérjük jelöld be a beleegyező négyzetet, ha képet szeretnél feltölteni!"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:846
+#: ../../src/ui_fsmenu/addons/manager.cc:849
 msgid "Server Error"
 msgstr "Kiszolgálóhiba"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:847
+#: ../../src/ui_fsmenu/addons/manager.cc:850
 #, c-format
 msgid ""
 "Unable to connect to the server.\n"
@@ -4211,101 +4211,101 @@ msgid ""
 "%s"
 msgstr "Nem sikerült csatlakozni a kiszolgálóhoz.\nA hibaüzenet:\n%s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:855
+#: ../../src/ui_fsmenu/addons/manager.cc:858
 msgid "Wrong Password"
 msgstr "Hibás jelszó"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:856
+#: ../../src/ui_fsmenu/addons/manager.cc:859
 #, c-format
 msgid ""
 "The entered username or password is invalid:\n"
 "%s"
 msgstr "A megadott felhasználónév vagy jelszó hibás:\n%s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:953
+#: ../../src/ui_fsmenu/addons/manager.cc:956
 #, c-format
 msgid "Fetching add-ons… (%.1f%%)"
 msgstr "Bővítmények lekérdezése… (%.1f%%)"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:956
+#: ../../src/ui_fsmenu/addons/manager.cc:959
 msgid "Connecting to the server…"
 msgstr "Csatlakozás a kiszolgálóhoz…"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:979
+#: ../../src/ui_fsmenu/addons/manager.cc:982
 msgid "Server Connection Error"
 msgstr "Kiszolgáló kapcsolódási hiba"
 
 #. * TRANSLATORS: This will be inserted into the string "Server Connection
 #. Error <br> by %s"
-#: ../../src/ui_fsmenu/addons/manager.cc:981
+#: ../../src/ui_fsmenu/addons/manager.cc:984
 msgid "a networking bug"
 msgstr "hálózati hiba"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:982
+#: ../../src/ui_fsmenu/addons/manager.cc:985
 #, c-format
 msgid ""
 "Unable to fetch the list of available add-ons from the server!<br>Error "
 "Message: %s"
 msgstr "Nem sikerült letölteni az elérhető bővítmények listáját a kiszolgálóról!<br>Hibaüzenet: %s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1068
+#: ../../src/ui_fsmenu/addons/manager.cc:1071
 #, c-format
 msgid "Installed (%u)"
 msgstr "Telepítve (%u)"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1146
+#: ../../src/ui_fsmenu/addons/manager.cc:1149
 msgid "Browse"
 msgstr "Böngésző"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1146
+#: ../../src/ui_fsmenu/addons/manager.cc:1149
 #, c-format
 msgid "Browse (%u)"
 msgstr "Böngésző (%u)"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1156
+#: ../../src/ui_fsmenu/addons/manager.cc:1159
 #, c-format
 msgid "Upgrade all (%u)"
 msgstr "Az összes frissítése (%u)"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1159
+#: ../../src/ui_fsmenu/addons/manager.cc:1162
 msgid "No upgrades are available for your installed add-ons"
 msgstr "Nincsenek elérhető frissítések a telepített bővítményekhez"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1161
+#: ../../src/ui_fsmenu/addons/manager.cc:1164
 #, c-format
 msgid "Upgrade the following %u add-on:"
 msgid_plural "Upgrade the following %u add-ons:"
 msgstr[0] "Frissítsd az alábbi %u bővítményt:"
 msgstr[1] "Frissítsd az alábbi %u bővítményt:"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1166
+#: ../../src/ui_fsmenu/addons/manager.cc:1169
 #, c-format
 msgid "· %s"
 msgstr "· %s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1202
+#: ../../src/ui_fsmenu/addons/manager.cc:1205
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which could not be found"
 msgstr "· a(z) ‘%1$s’ által igényelt ‘%2$s’ nem található"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1207
+#: ../../src/ui_fsmenu/addons/manager.cc:1210
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which is disabled"
 msgstr "· a(z) ‘%1$s’ által igényelt ‘%2$s’ le van tiltva"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1214
+#: ../../src/ui_fsmenu/addons/manager.cc:1217
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
 msgstr "· a(z) ‘%1$s’ által igényelt ‘%2$s’ az igénylő alá van sorolva"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1242
+#: ../../src/ui_fsmenu/addons/manager.cc:1245
 #, c-format
 msgid ""
 "· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
 msgstr "· a(z) ‘%1$s’ előbb a(z) ‘%2$s’-t utána a(z) ‘%3$s’-t igényli, de azok rossz sorrendben vannak felsorolva"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1258
+#: ../../src/ui_fsmenu/addons/manager.cc:1261
 #, c-format
 msgid ""
 "An enabled add-on is defective. No games can be started with the current configuration.\n"
@@ -4313,55 +4313,55 @@ msgid ""
 "%s"
 msgstr "Az egyik aktív bővítmény hibás. Nem indítható játék a jelenlegi beállításokkal.\nA hibaüzenet:\n%s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1275
+#: ../../src/ui_fsmenu/addons/manager.cc:1278
 #, c-format
 msgid "%u Dependency Error"
 msgid_plural "%u Dependency Errors"
 msgstr[0] "%u függőségi hiba"
 msgstr[1] "%u függőségi hiba"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1277
+#: ../../src/ui_fsmenu/addons/manager.cc:1280
 msgid ""
 "Add-Ons with dependency errors may work incorrectly or prevent games and "
 "maps from loading."
 msgstr "A bővítmények függőségi hibái hibás működést okozhatnak, vagy meghiúsíthatják a mentett játékok vagy a térképek betöltését."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1391
+#: ../../src/ui_fsmenu/addons/manager.cc:1394
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its version (%2$s) is not "
 "newer than the version present on the server (%3$s)."
 msgstr "A(z) „%1$s” bővítményt nem lehet feltölteni, mert a verziója (%2$s) nem újabb, mint a kiszolgálón található (%3$s)."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1402
+#: ../../src/ui_fsmenu/addons/manager.cc:1405
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its category (%2$s) does not "
 "match the category of the version present on the server (%3$s)."
 msgstr "A(z) „%1$s” bővítményt nem lehet feltölteni, mert más kategóriában van (%2$s), mint a kiszolgálón található (%3$s)."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1413
+#: ../../src/ui_fsmenu/addons/manager.cc:1416
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:54
 msgid "Upload"
 msgstr "Feltöltés"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1414
+#: ../../src/ui_fsmenu/addons/manager.cc:1417
 #, c-format
 msgid "Do you really want to upload the add-on ‘%s’ to the server?"
 msgstr "Biztosan fel szeretnéd tölteni a(z) „%s” bővítményt a kiszolgálóra?"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1424
+#: ../../src/ui_fsmenu/addons/manager.cc:1427
 #, c-format
 msgid "Uploading ‘%s’…"
 msgstr "„%s” feltöltése…"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1431
-#: ../../src/ui_fsmenu/addons/manager.cc:1486
-#: ../../src/ui_fsmenu/addons/manager.cc:1548
+#: ../../src/ui_fsmenu/addons/manager.cc:1434
+#: ../../src/ui_fsmenu/addons/manager.cc:1489
+#: ../../src/ui_fsmenu/addons/manager.cc:1551
 msgid "%1% / %2%"
 msgstr "%1% / %2%"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1453
+#: ../../src/ui_fsmenu/addons/manager.cc:1456
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be uploaded to the server.\n"
@@ -4370,12 +4370,12 @@ msgid ""
 "%2$s"
 msgstr "A(z) „%1$s” bővítményt nem sikerült feltölteni a kiszolgálóra.\n\nA hibaüzenet:\n%2$s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1466
+#: ../../src/ui_fsmenu/addons/manager.cc:1469
 #, c-format
 msgid "Downloading ‘%s’…"
 msgstr "„%s” letöltése…"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1502
+#: ../../src/ui_fsmenu/addons/manager.cc:1505
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n"
@@ -4384,7 +4384,7 @@ msgid ""
 "%2$s"
 msgstr "A(z) „%1$s” bővítményt nem sikerült letölteni. A bővítmény telepítése/frissítése kimarad.\n\nHibaüzenet:\n%2$s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1579
+#: ../../src/ui_fsmenu/addons/manager.cc:1582
 #, c-format
 msgid ""
 "The translations for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading the translations will be skipped.\n"
@@ -4393,7 +4393,7 @@ msgid ""
 "%2$s"
 msgstr "A(z) „%1$s” bővítmény fordításait nem sikerült letölteni. A bővítmény fordításainak telepítése/frissítése kimarad.\n\nA hibaüzenet:\n%2$s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1648
+#: ../../src/ui_fsmenu/addons/manager.cc:1651
 #, c-format
 msgid "The required add-on ‘%s’ could not be found on the server."
 msgstr "Az igényelt %s bővítmény nem található a kiszolgálón."
@@ -5347,7 +5347,7 @@ msgid ""
 "with a description of what was going on in the game and what you did last "
 "before the crash to the Widelands Development Team under %s so we can fix "
 "the problem."
-msgstr ""
+msgstr "Úgy tűnik, a Widelands összeomlott a legutóbbi használatkor, de a hibakereséshez sikerült elmenteni az összeomlás adatait. Kérjük, küldd el a jelentést a Widelands fejlesztői csapatának a %s szerint, hogy ki tudjuk javítani a hibát! Kérjük írd le azt is, hogy mi történt éppen a játékban, és te mit csináltál utoljára az összeomlás előtt!"
 
 #: ../../src/ui_fsmenu/crash_report.cc:145
 msgid "Show details…"
@@ -6820,11 +6820,11 @@ msgstr "Program helye:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:172
 msgid "Enabled Add-Ons:"
-msgstr ""
+msgstr "Aktív bővítmények:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:174
 msgid "Inactive Installed Add-Ons:"
-msgstr ""
+msgstr "Telepített, de kikapcsolt bővítmények:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:233
 msgid "Copy"
@@ -6897,19 +6897,19 @@ msgstr "Az --xres/--yres, a --maximized és a --fullscreen beállítások nem ha
 msgid "Unknown command line parameter: %s"
 msgstr "Ismeretlen parancssori beállítás: %s"
 
-#: ../../src/wlapplication.cc:1651
+#: ../../src/wlapplication.cc:1656
 msgid "Incompatible"
 msgstr "Nem kompatibilis mentett játék"
 
-#: ../../src/wlapplication.cc:1688
+#: ../../src/wlapplication.cc:1693
 msgid "Game ended unexpectedly"
 msgstr "A játék váratlanul ért véget"
 
-#: ../../src/wlapplication.cc:1688
+#: ../../src/wlapplication.cc:1693
 msgid "Unexpected error during the game"
 msgstr "Váratlan hiba játék közben"
 
-#: ../../src/wlapplication.cc:1691
+#: ../../src/wlapplication.cc:1696
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6923,7 +6923,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Hiba történt játék közben. A hibaüzenet:\n\n%1$s\n\nKérjük segítsd a Widelands fejlesztését a hiba bejelentésével. A kapcsolódó üzeneteket a standard kimeneten (Windowson az stdout.txt fájlban) találod meg. A %2$s verziót használod\nKérjük add meg ezeket az információkat a hibajelentésben.\n\nSzeretnéd, ha a Widelands megpróbálna egy vészhelyzeti játékmentést készíteni? Ennek betöltésével gyakran – de nem mindig – tovább folytatható a játék."
 
-#: ../../src/wlapplication.cc:1700
+#: ../../src/wlapplication.cc:1705
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6933,11 +6933,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "A játék váratlanul ért véget az alábbi okból:\n\n%s\n\nSzeretnéd, ha a Widelands megpróbálna egy vészhelyzeti játékmentést készíteni? Ennek betöltésével gyakran – de nem mindig – tovább folytatható a játék."
 
-#: ../../src/wlapplication.cc:1734
+#: ../../src/wlapplication.cc:1739
 msgid "Emergency save failed"
 msgstr "Vészhelyzeti mentés sikertelen"
 
-#: ../../src/wlapplication.cc:1735
+#: ../../src/wlapplication.cc:1740
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
