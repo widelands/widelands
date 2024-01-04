@@ -506,21 +506,21 @@ const std::string SpinBox::unit_text(int32_t value, const bool change) const {
 
 		const std::string hours_mins_format_string =
 		   change ?
-            /** TRANSLATORS: "Increase/Decrease the value by X hours and Y minutes"
-                   You may want to treat this as "by X hours and Y minutes", depending on how you
-                   translated "Increase/Decrease the value by %s". You can also defer translation
-                   of "by X hours" and "by Y minutes". */
-            pgettext("spinbox_change_hours_mins", "%1$s and %2$s") :
-            /** TRANSLATORS: The current value of a spinbox, "X hours and Y minutes" */
-            _("%1$s and %2$s");
+                   /** TRANSLATORS: "Increase/Decrease the value by X hours and Y minutes"
+                          You may want to treat this as "by X hours and Y minutes", depending on how you
+                          translated "Increase/Decrease the value by %s". You can also defer translation
+                          of "by X hours" and "by Y minutes". */
+                   pgettext("spinbox_change_hours_mins", "%1$s and %2$s") :
+                   /** TRANSLATORS: The current value of a spinbox, "X hours and Y minutes" */
+                   _("%1$s and %2$s");
 
 		const std::string hours_string =
 		   change ?
             format(
 		         /** TRANSLATORS:
-                      The hours part of "Increase/Decrease the value by X hours and Y minutes".
-                      You may want to treat this as "by <n> hours", depending on how you translated
-                      "Increase/Decrease the value by %s" and "%1$s and %2$s". */
+		                The hours part of "Increase/Decrease the value by X hours and Y minutes".
+		                You may want to treat this as "by <n> hours", depending on how you translated
+		                "Increase/Decrease the value by %s" and "%1$s and %2$s". */
 		         npgettext("spinbox_change_hours_mins", "%d hour", "%d hours", value), value) :
             format(
 		         /** TRANSLATORS: The current value of a spinbox */
@@ -552,40 +552,40 @@ const std::string SpinBox::unit_text(int32_t value, const bool change) const {
 		                   ngettext("%d week", "%d weeks", value), value);
 	case (Units::kPixels):
 		return change ? format(
-                         /** TRANSLATORS: "Increase/Decrease the value by <n> pixels"
-                                You may want to treat this as "by <n> pixels", depending on how you
-                                translated "Increase/Decrease the value by %s". */
-                         npgettext("spinbox_change", "%d pixel", "%d pixels", value), value) :
+		                   /** TRANSLATORS: "Increase/Decrease the value by <n> pixels"
+		                          You may want to treat this as "by <n> pixels", depending on how you
+		                          translated "Increase/Decrease the value by %s". */
+		                   npgettext("spinbox_change", "%d pixel", "%d pixels", value), value) :
                       format(
-                         /** TRANSLATORS: The current value of a spinbox */
-                         ngettext("%d pixel", "%d pixels", value), value);
+		                   /** TRANSLATORS: The current value of a spinbox */
+		                   ngettext("%d pixel", "%d pixels", value), value);
 	case (Units::kFields):
 		return change ? format(
-                         /** TRANSLATORS: "Increase/Decrease the value by <n> fields"
-                                You may want to treat this as "by <n> fields", depending on how you
-                                translated "Increase/Decrease the value by %s". */
-                         npgettext("spinbox_change", "%d field", "%d fields", value), value) :
+		                   /** TRANSLATORS: "Increase/Decrease the value by <n> fields"
+		                          You may want to treat this as "by <n> fields", depending on how you
+		                          translated "Increase/Decrease the value by %s". */
+		                   npgettext("spinbox_change", "%d field", "%d fields", value), value) :
                       format(
-                         /** TRANSLATORS: The current value of a spinbox */
-                         ngettext("%d field", "%d fields", value), value);
+		                   /** TRANSLATORS: The current value of a spinbox */
+		                   ngettext("%d field", "%d fields", value), value);
 	case (Units::kPercent):
 		return change ? format(
-                         /** TRANSLATORS: "Increase/Decrease the value by <n>%"
-                                You may want to treat this as "by <n>%", depending on how you
-                                translated "Increase/Decrease the value by %s". */
-                         pgettext("spinbox_change", "%i %%"), value) :
+		                   /** TRANSLATORS: "Increase/Decrease the value by <n>%"
+		                          You may want to treat this as "by <n>%", depending on how you
+		                          translated "Increase/Decrease the value by %s". */
+		                   pgettext("spinbox_change", "%i %%"), value) :
                       format(
-                         /** TRANSLATORS: The current value of a spinbox */
-                         _("%i %%"), value);
+		                   /** TRANSLATORS: The current value of a spinbox */
+		                   _("%i %%"), value);
 	case (Units::kNone):
 		return change ? format(
-                         /** TRANSLATORS: "Increase/Decrease the value by <n>"
-                                You may want to treat this as "by <n>", depending on how you
-                                translated "Increase/Decrease the value by %s". */
-                         pgettext("spinbox_change", "%d"), value) :
+		                   /** TRANSLATORS: "Increase/Decrease the value by <n>"
+		                          You may want to treat this as "by <n>", depending on how you
+		                          translated "Increase/Decrease the value by %s". */
+		                   pgettext("spinbox_change", "%d"), value) :
                       format(
-                         /** TRANSLATORS: The current value of a spinbox */
-                         "%d", value);
+		                   /** TRANSLATORS: The current value of a spinbox */
+		                   "%d", value);
 	}
 	NEVER_HERE();
 }
