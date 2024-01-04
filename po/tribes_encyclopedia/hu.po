@@ -1457,7 +1457,7 @@ msgid ""
 "the economy, production of one of each tool takes %1$s and one of each spear"
 " takes %2$s on average. If only one kind of tool or spear is needed by the "
 "economy, its production takes %3$s on average."
-msgstr "Ha az ellátása folyamatos, és minden szerszámra és lándzsára szükség van a gazdaságban, akkor a kőfaragó műhely átlagosan %1$senként készít minden szerszámból egyet, és %2senként minden lándzsából egyet. Ha csak egy fajta szerszámra vagy lándzsára van szükség, akkor abból átlagosan %3$senként készít egyet."
+msgstr "Ha az ellátása folyamatos, és minden szerszámra és lándzsára szükség van a gazdaságban, akkor a kőfaragó műhely átlagosan %1$senként készít minden szerszámból egyet, és %2$senként minden lándzsából egyet. Ha csak egy fajta szerszámra vagy lándzsára van szükség, akkor abból átlagosan %3$senként készít egyet."
 
 #. TRANSLATORS: Lore helptext for an Amazon production site: Dressmakery
 #: ../../data/tribes/initialization/amazons/units.lua:1472
@@ -4743,7 +4743,7 @@ msgid ""
 "one kind of trident is needed by the economy, production of one light "
 "trident takes %2$s and one long trident, one steel trident, one double "
 "trident or one heavy double trident takes %3$s on average."
-msgstr "Ha az ellátása folyamatos, és minden fajta szigonyra szükség van a gazdaságban, akkor a fegyverkovács átlagosan %1$senként készít mindegyikből egyet. Ha csak egy fajtára van szükség, akkor abból átlagosan %2$senként készít egyet."
+msgstr "Ha az ellátása folyamatos, és minden fajta szigonyra szükség van a gazdaságban, akkor a fegyverkovács átlagosan %1$senként készít mindegyikből egyet. Ha csak egy fajtára van szükség, akkor átlagosan %2$senként készít egy könnyű szigonyt, vagy %3$senként egy hosszú-, acél-, kétvégű- vagy nehéz kétvégű szigonyt."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Armor
 #. Smithy
@@ -4772,7 +4772,7 @@ msgid ""
 "the economy, production of one of each kind takes %1$s on average. If only "
 "one kind of shield is needed by the economy, production of one steel shield "
 "takes %2$s and one advanced shield takes %3$s on average."
-msgstr "Ha az ellátása folyamatos, és mindkét fajta pajzsra szükség van a gazdaságban, akkor a páncélkovács átlagosan %1$senként készít mindegyikből egyet. Ha csak az egyikre van szükség, akkor abból átlagosan %2$senként készít egyet."
+msgstr "Ha az ellátása folyamatos, és mindkét fajta pajzsra szükség van a gazdaságban, akkor a páncélkovács átlagosan %1$senként készít mindegyikből egyet. Ha csak az egyikre van szükség, akkor átlagosan %2$senként készít egy acélpajzsot, vagy %3$senként egy fejlesztett pajzsot."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Barracks
 #: ../../data/tribes/initialization/atlanteans/units.lua:1782
@@ -7143,7 +7143,7 @@ msgid ""
 "economy, production of one of each food takes %1$s on average. If only one "
 "kind of food is needed by the economy, production of one ration takes %2$s, "
 "one snack takes %3$s and one meal takes %4$s on average."
-msgstr "Ha az ellátása folyamatos, és minden fajta ételre szükség van a gazdaságban, akkor a nagy fogadó átlagosan %1$senként készít mindegyikből egyet. Ha csak egy fajtára van szükség, akkor átlagosan %2$senként készít egy harapnivalót, %3$senként egy uzsonnát, vagy %4senként egy ebédet."
+msgstr "Ha az ellátása folyamatos, és minden fajta ételre szükség van a gazdaságban, akkor a nagy fogadó átlagosan %1$senként készít mindegyikből egyet. Ha csak egy fajtára van szükség, akkor átlagosan %2$senként készít egy harapnivalót, %3$senként egy uzsonnát, vagy %4$senként egy ebédet."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Charcoal Kiln
 #: ../../data/tribes/initialization/barbarians/units.lua:1407
