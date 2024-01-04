@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
 # Luitzen Hietkamp <luitzenhietkamp@gmail.com>, 2017
@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-12-16 02:32+0000\n"
+"POT-Creation-Date: 2024-01-04 02:32+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Luitzen Hietkamp <luitzenhietkamp@gmail.com>, 2017\n"
 "Language-Team: Western Frisian (http://app.transifex.com/widelands/widelands/language/fy/)\n"
@@ -625,12 +625,12 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:1139 ../../src/logic/addons.cc:48
 #: ../../src/ui_basic/dropdown.cc:358 ../../src/ui_basic/dropdown.cc:360
 #: ../../src/ui_fsmenu/addons/contact.cc:81
-#: ../../src/ui_fsmenu/addons/manager.cc:1390
-#: ../../src/ui_fsmenu/addons/manager.cc:1401
-#: ../../src/ui_fsmenu/addons/manager.cc:1452
-#: ../../src/ui_fsmenu/addons/manager.cc:1500
-#: ../../src/ui_fsmenu/addons/manager.cc:1578
-#: ../../src/ui_fsmenu/addons/manager.cc:1647
+#: ../../src/ui_fsmenu/addons/manager.cc:1393
+#: ../../src/ui_fsmenu/addons/manager.cc:1404
+#: ../../src/ui_fsmenu/addons/manager.cc:1455
+#: ../../src/ui_fsmenu/addons/manager.cc:1503
+#: ../../src/ui_fsmenu/addons/manager.cc:1581
+#: ../../src/ui_fsmenu/addons/manager.cc:1650
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:104
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:292
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:565
@@ -3990,11 +3990,11 @@ msgstr ""
 msgid "Contact us…"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:377
+#: ../../src/ui_fsmenu/addons/manager.cc:380
 msgid "Tools for Add-Ons Developers"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:385
+#: ../../src/ui_fsmenu/addons/manager.cc:388
 msgid ""
 "The interactive add-ons packager allows you to create, edit, and delete add-"
 "ons. You can bundle maps designed with the Widelands Map Editor as an add-on"
@@ -4002,14 +4002,14 @@ msgid ""
 "having to write a single line of code."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:400
+#: ../../src/ui_fsmenu/addons/manager.cc:403
 #, c-format
 msgid ""
 "For more information regarding how to develop and package your own add-ons, "
 "please visit %s."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:416
+#: ../../src/ui_fsmenu/addons/manager.cc:419
 msgid ""
 "Here, you can upload your add-ons to the server to make them available to "
 "other players. By uploading, you agree to publish your creation under the "
@@ -4018,7 +4018,7 @@ msgid ""
 "GPL, please refer to ‘About Widelands’ → ‘License’ in the main menu."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:423
+#: ../../src/ui_fsmenu/addons/manager.cc:426
 msgid ""
 "It is forbidden to upload add-ons containing harmful or malicious content or"
 " spam. By uploading an add-on, you assert that the add-on is of your own "
@@ -4026,7 +4026,7 @@ msgid ""
 " stead."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:429
+#: ../../src/ui_fsmenu/addons/manager.cc:432
 msgid ""
 "You are required to have read the add-ons documentation under the link given"
 " further above before submitting content. Since the documentation is subject"
@@ -4034,7 +4034,7 @@ msgid ""
 "followed all guidelines stated there."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:435
+#: ../../src/ui_fsmenu/addons/manager.cc:438
 msgid ""
 "The Widelands Development Team will review your add-on soon after uploading."
 " In case they have further inquiries, they will contact you via a PM on the "
@@ -4042,7 +4042,7 @@ msgid ""
 "profile page frequently."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:465
+#: ../../src/ui_fsmenu/addons/manager.cc:468
 #, c-format
 msgid ""
 "Technical problems? Unclear documentation? Advanced needs such as deletion "
@@ -4051,7 +4051,7 @@ msgid ""
 "be happy to help."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:482
+#: ../../src/ui_fsmenu/addons/manager.cc:485
 msgid ""
 "Alternatively you can also send a message to the Widelands Development Team "
 "and we’ll try to help you with your enquiry as soon as we can. Only the "
@@ -4062,136 +4062,136 @@ msgid ""
 " website user profile page."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:519
+#: ../../src/ui_fsmenu/addons/manager.cc:522
 msgid "Development"
 msgstr ""
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
-#: ../../src/ui_fsmenu/addons/manager.cc:522
+#: ../../src/ui_fsmenu/addons/manager.cc:525
 msgid "Name"
 msgstr ""
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
-#: ../../src/ui_fsmenu/addons/manager.cc:524
+#: ../../src/ui_fsmenu/addons/manager.cc:527
 msgid "Name (descending)"
 msgstr ""
 
 #. * TRANSLATORS: Sort add-ons by average rating
-#: ../../src/ui_fsmenu/addons/manager.cc:526
+#: ../../src/ui_fsmenu/addons/manager.cc:529
 msgid "Most popular"
 msgstr ""
 
 #. * TRANSLATORS: Sort add-ons by average rating
-#: ../../src/ui_fsmenu/addons/manager.cc:528
+#: ../../src/ui_fsmenu/addons/manager.cc:531
 msgid "Least popular"
 msgstr ""
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
-#: ../../src/ui_fsmenu/addons/manager.cc:530
+#: ../../src/ui_fsmenu/addons/manager.cc:533
 msgid "Most often downloaded"
 msgstr ""
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
-#: ../../src/ui_fsmenu/addons/manager.cc:532
+#: ../../src/ui_fsmenu/addons/manager.cc:535
 msgid "Least often downloaded"
 msgstr ""
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
-#: ../../src/ui_fsmenu/addons/manager.cc:534
+#: ../../src/ui_fsmenu/addons/manager.cc:537
 msgid "Oldest"
 msgstr ""
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
-#: ../../src/ui_fsmenu/addons/manager.cc:536
+#: ../../src/ui_fsmenu/addons/manager.cc:539
 msgid "Newest"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:544
+#: ../../src/ui_fsmenu/addons/manager.cc:547
 msgid "Filter add-ons by name"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:555
+#: ../../src/ui_fsmenu/addons/manager.cc:558
 #, c-format
 msgid "Toggle category ‘%s’"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:646
+#: ../../src/ui_fsmenu/addons/manager.cc:649
 #, c-format
 msgid "Are you certain that you want to upgrade this %u add-on?"
 msgid_plural "Are you certain that you want to upgrade these %u add-ons?"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:652
+#: ../../src/ui_fsmenu/addons/manager.cc:655
 #, c-format
 msgid ""
 "\n"
 "· %1$s (%2$s) by %3$s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:653
+#: ../../src/ui_fsmenu/addons/manager.cc:656
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:413
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:441
 msgid "NOT VERIFIED"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:653
+#: ../../src/ui_fsmenu/addons/manager.cc:656
 msgid "verified"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:657
+#: ../../src/ui_fsmenu/addons/manager.cc:660
 msgid "Upgrade All"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:796
+#: ../../src/ui_fsmenu/addons/manager.cc:799
 msgid "Not logged in"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:797
+#: ../../src/ui_fsmenu/addons/manager.cc:800
 msgid ""
 "Click to log in. You can then comment and vote on add-ons and upload your "
 "own add-ons."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:801
+#: ../../src/ui_fsmenu/addons/manager.cc:804
 msgid "Please log in to upload add-ons"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:803
+#: ../../src/ui_fsmenu/addons/manager.cc:806
 msgid "Please log in to upload content"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:805
+#: ../../src/ui_fsmenu/addons/manager.cc:808
 msgid "Please log in to send an enquiry"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:810
+#: ../../src/ui_fsmenu/addons/manager.cc:813
 #, c-format
 msgid "Logged in as %s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:810
+#: ../../src/ui_fsmenu/addons/manager.cc:813
 #, c-format
 msgid "Logged in as %s (admin)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:811
+#: ../../src/ui_fsmenu/addons/manager.cc:814
 msgid "Click to log out"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:816
+#: ../../src/ui_fsmenu/addons/manager.cc:819
 msgid "Please tick the confirmation checkbox to upload add-ons"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:819
+#: ../../src/ui_fsmenu/addons/manager.cc:822
 msgid "Please tick the confirmation checkbox to upload content"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:846
+#: ../../src/ui_fsmenu/addons/manager.cc:849
 msgid "Server Error"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:847
+#: ../../src/ui_fsmenu/addons/manager.cc:850
 #, c-format
 msgid ""
 "Unable to connect to the server.\n"
@@ -4199,101 +4199,101 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:855
+#: ../../src/ui_fsmenu/addons/manager.cc:858
 msgid "Wrong Password"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:856
+#: ../../src/ui_fsmenu/addons/manager.cc:859
 #, c-format
 msgid ""
 "The entered username or password is invalid:\n"
 "%s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:953
+#: ../../src/ui_fsmenu/addons/manager.cc:956
 #, c-format
 msgid "Fetching add-ons… (%.1f%%)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:956
+#: ../../src/ui_fsmenu/addons/manager.cc:959
 msgid "Connecting to the server…"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:979
+#: ../../src/ui_fsmenu/addons/manager.cc:982
 msgid "Server Connection Error"
 msgstr ""
 
 #. * TRANSLATORS: This will be inserted into the string "Server Connection
 #. Error <br> by %s"
-#: ../../src/ui_fsmenu/addons/manager.cc:981
+#: ../../src/ui_fsmenu/addons/manager.cc:984
 msgid "a networking bug"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:982
+#: ../../src/ui_fsmenu/addons/manager.cc:985
 #, c-format
 msgid ""
 "Unable to fetch the list of available add-ons from the server!<br>Error "
 "Message: %s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1068
+#: ../../src/ui_fsmenu/addons/manager.cc:1071
 #, c-format
 msgid "Installed (%u)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1146
+#: ../../src/ui_fsmenu/addons/manager.cc:1149
 msgid "Browse"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1146
+#: ../../src/ui_fsmenu/addons/manager.cc:1149
 #, c-format
 msgid "Browse (%u)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1156
+#: ../../src/ui_fsmenu/addons/manager.cc:1159
 #, c-format
 msgid "Upgrade all (%u)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1159
+#: ../../src/ui_fsmenu/addons/manager.cc:1162
 msgid "No upgrades are available for your installed add-ons"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1161
+#: ../../src/ui_fsmenu/addons/manager.cc:1164
 #, c-format
 msgid "Upgrade the following %u add-on:"
 msgid_plural "Upgrade the following %u add-ons:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1166
+#: ../../src/ui_fsmenu/addons/manager.cc:1169
 #, c-format
 msgid "· %s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1202
+#: ../../src/ui_fsmenu/addons/manager.cc:1205
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which could not be found"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1207
+#: ../../src/ui_fsmenu/addons/manager.cc:1210
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which is disabled"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1214
+#: ../../src/ui_fsmenu/addons/manager.cc:1217
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1242
+#: ../../src/ui_fsmenu/addons/manager.cc:1245
 #, c-format
 msgid ""
 "· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1258
+#: ../../src/ui_fsmenu/addons/manager.cc:1261
 #, c-format
 msgid ""
 "An enabled add-on is defective. No games can be started with the current configuration.\n"
@@ -4301,55 +4301,55 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1275
+#: ../../src/ui_fsmenu/addons/manager.cc:1278
 #, c-format
 msgid "%u Dependency Error"
 msgid_plural "%u Dependency Errors"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1277
+#: ../../src/ui_fsmenu/addons/manager.cc:1280
 msgid ""
 "Add-Ons with dependency errors may work incorrectly or prevent games and "
 "maps from loading."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1391
+#: ../../src/ui_fsmenu/addons/manager.cc:1394
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its version (%2$s) is not "
 "newer than the version present on the server (%3$s)."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1402
+#: ../../src/ui_fsmenu/addons/manager.cc:1405
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its category (%2$s) does not "
 "match the category of the version present on the server (%3$s)."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1413
+#: ../../src/ui_fsmenu/addons/manager.cc:1416
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:54
 msgid "Upload"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1414
+#: ../../src/ui_fsmenu/addons/manager.cc:1417
 #, c-format
 msgid "Do you really want to upload the add-on ‘%s’ to the server?"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1424
+#: ../../src/ui_fsmenu/addons/manager.cc:1427
 #, c-format
 msgid "Uploading ‘%s’…"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1431
-#: ../../src/ui_fsmenu/addons/manager.cc:1486
-#: ../../src/ui_fsmenu/addons/manager.cc:1548
+#: ../../src/ui_fsmenu/addons/manager.cc:1434
+#: ../../src/ui_fsmenu/addons/manager.cc:1489
+#: ../../src/ui_fsmenu/addons/manager.cc:1551
 msgid "%1% / %2%"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1453
+#: ../../src/ui_fsmenu/addons/manager.cc:1456
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be uploaded to the server.\n"
@@ -4358,12 +4358,12 @@ msgid ""
 "%2$s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1466
+#: ../../src/ui_fsmenu/addons/manager.cc:1469
 #, c-format
 msgid "Downloading ‘%s’…"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1502
+#: ../../src/ui_fsmenu/addons/manager.cc:1505
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n"
@@ -4372,7 +4372,7 @@ msgid ""
 "%2$s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1579
+#: ../../src/ui_fsmenu/addons/manager.cc:1582
 #, c-format
 msgid ""
 "The translations for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading the translations will be skipped.\n"
@@ -4381,7 +4381,7 @@ msgid ""
 "%2$s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1648
+#: ../../src/ui_fsmenu/addons/manager.cc:1651
 #, c-format
 msgid "The required add-on ‘%s’ could not be found on the server."
 msgstr ""
