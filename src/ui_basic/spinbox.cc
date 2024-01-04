@@ -157,9 +157,9 @@ SpinBox::SpinBox(Panel* const parent,
 	   new Button(box_, "+", 0, 0, button_size_, button_size_, sbi_->button_style,
 	              g_image_cache->get(is_big ? "images/ui_basic/scrollbar_right.png" :
                                              "images/ui_basic/scrollbar_up.png"),
-	              /** TRANSLATORS: You may want to treat this as "Decrease the value %s", you get
+	              /** TRANSLATORS: You may want to treat this as "Increase the value %s", you get
 	                               the chance to translate the substituted text as "by <n units>" */
-	              format(_("Increase the value %s"), unit_text(sbi_->step_size, true)));
+	              format(_("Increase the value by %s"), unit_text(sbi_->step_size, true)));
 	sbi_->button_minus->set_can_focus(false);
 	sbi_->button_plus->set_can_focus(false);
 
