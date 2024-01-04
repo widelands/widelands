@@ -478,14 +478,14 @@ const std::string SpinBox::unit_text(int32_t value, const bool change) const {
 	case (Units::kMinutes): {
 		if (value < 60) {
 			return change ?
-            format(
-               /** TRANSLATORS: "Increase/Decrease the value by <n> minutes"
-                      You may want to treat this as "by <n> minutes", depending on how you
-                      translated "Increase/Decrease the value by %s". */
-               npgettext("spinbox_change", "%d minute", "%d minutes", value), value) :
-            format(
-               /** TRANSLATORS: The current value of a spinbox */
-               ngettext("%d minute", "%d minutes", value), value);
+                   format(
+			             /** TRANSLATORS: "Increase/Decrease the value by <n> minutes"
+			                    You may want to treat this as "by <n> minutes", depending on how you
+			                    translated "Increase/Decrease the value by %s". */
+			             npgettext("spinbox_change", "%d minute", "%d minutes", value), value) :
+                   format(
+			             /** TRANSLATORS: The current value of a spinbox */
+			             ngettext("%d minute", "%d minutes", value), value);
 		}
 
 		if (value % 60 == 0) {
