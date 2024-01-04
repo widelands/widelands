@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
@@ -13,7 +13,7 @@
 # George Matsune <georg29387878@gmail.com>, 2017
 # Viktor Skachkov <awsswa59@gmail.com>, 2018-2020
 # Viktor Skachkov <awsswa59@gmail.com>, 2023
-# Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022-2023
+# Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022-2024
 # Zme Zzzz <zmey1207@gmail.com>, 2021
 # Владимир Шевцов, 2022
 # bcd998a534fa92d05529385de8735da7_84390ba <27ce5340b01d4cdb2226fa37a41159b9_403942>, 2016
@@ -25,9 +25,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-12-16 02:32+0000\n"
+"POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Viktor Skachkov <awsswa59@gmail.com>, 2023\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022-2024\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -5411,7 +5411,7 @@ msgid ""
 "with a description of what was going on in the game and what you did last "
 "before the crash to the Widelands Development Team under %s so we can fix "
 "the problem."
-msgstr ""
+msgstr "Похоже, что во время последнего запуска Widelands произошел сбой, при этом был автоматически сгенерирован отчет об ошибках для отладки. Пожалуйста, отправьте отчет вместе с описанием ваших действий в игре, производившихся перед сбоем, команде разработчиков Widelands по адресу %s, чтобы мы могли исправить проблему."
 
 #: ../../src/ui_fsmenu/crash_report.cc:145
 msgid "Show details…"
@@ -6884,11 +6884,11 @@ msgstr "Каталог с программами:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:172
 msgid "Enabled Add-Ons:"
-msgstr ""
+msgstr "Включенные дополнения."
 
 #: ../../src/ui_fsmenu/tech_info.cc:174
 msgid "Inactive Installed Add-Ons:"
-msgstr ""
+msgstr "Отключенные установленные дополнения:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:233
 msgid "Copy"
