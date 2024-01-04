@@ -477,16 +477,15 @@ const std::string SpinBox::unit_text(int32_t value, const bool change) const {
 	switch (sbi_->unit) {
 	case (Units::kMinutes): {
 		if (value < 60) {
-			// auto-formatting completely messes up the indentation of these comments
-			// clang-format off
 			return change ?
-            /** TRANSLATORS: "Increase/Decrease the value by <n> minutes"
-                             You may want to treat this as "by <n> minutes", depending on how you
-                             translated "Increase/Decrease the value by %s". */
-            format(npgettext("spinbox_change", "%d minute", "%d minutes", value), value) :
-            /** TRANSLATORS: The current value of a spinbox */
-            format(ngettext("%d minute", "%d minutes", value), value);
-			// clang-format on
+            format(
+               /** TRANSLATORS: "Increase/Decrease the value by <n> minutes"
+                      You may want to treat this as "by <n> minutes", depending on how you
+                      translated "Increase/Decrease the value by %s". */
+               npgettext("spinbox_change", "%d minute", "%d minutes", value), value) :
+            format(
+               /** TRANSLATORS: The current value of a spinbox */
+               ngettext("%d minute", "%d minutes", value), value);
 		}
 
 		if (value % 60 == 0) {
