@@ -37,7 +37,7 @@ echo "* freebsd   FreeBSD"
 echo "* openbsd   OpenBSD"
 echo " "
 echo "Windows:"
-echo "* msys32    MSys 32bit"
+echo "* msys32    MSys 32bit (deprecated)"
 echo "* msys64    MSys 64bit"
 echo "* vcpkg     MSVC"
 echo " "
@@ -168,12 +168,13 @@ elif [ "$DISTRO" = "openbsd" ]; then
    asio_not_packaged "OpenBSD" "doas" || exit 1
 
 elif [ "$DISTRO" = "msys32" ]; then
+   echo "WARNING: Some msys packages are no longer updated for 32-bit, consider switching to 64-bit!"
    echo "Installing dependencies for 32-bit Windows..."
-   "${WL_DIR}"/utils/win32/install_deps_mingw.sh i686 $@
+   "${WL_DIR}"/utils/windows/install_deps_mingw.sh i686 $@
 
 elif [ "$DISTRO" = "msys64" ]; then
    echo "Installing dependencies for 64-bit Windows..."
-   "${WL_DIR}"/utils/win32/install_deps_mingw.sh x86_64 $@
+   "${WL_DIR}"/utils/windows/install_deps_mingw.sh x86_64 $@
 
 elif [ "$DISTRO" = "homebrew" ]; then
    echo "Installing dependencies for Mac Homebrew..."
