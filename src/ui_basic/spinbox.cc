@@ -490,21 +490,20 @@ const std::string SpinBox::unit_text(int32_t value, const bool change) const {
 
 		if (value % 60 == 0) {
 			value /= 60;
-			// clang-format off
 			return change ?
-            /** TRANSLATORS: "Increase/Decrease the value by <n> hours"
+                   format(
+                      /** TRANSLATORS: "Increase/Decrease the value by <n> hours"
                              You may want to treat this as "by <n> hours", depending on how you
                              translated "Increase/Decrease the value by %s". */
-            format(npgettext("spinbox_change", "%d hour", "%d hours", value), value) :
-            /** TRANSLATORS: The current value of a spinbox */
-            format(ngettext("%d hour", "%d hours", value), value);
-			// clang-format on
+                      npgettext("spinbox_change", "%d hour", "%d hours", value), value) :
+                   format(
+                      /** TRANSLATORS: The current value of a spinbox */
+                      ngettext("%d hour", "%d hours", value), value);
 		}
 
 		const int32_t hours = value / 60;
 		value %= 60;
 
-		// clang-format off
 		const std::string hours_mins_format_string = change ?
          /** TRANSLATORS: "Increase/Decrease the value by X hours and Y minutes"
                           You may want to treat this as "by X hours and Y minutes", depending on how
@@ -515,13 +514,16 @@ const std::string SpinBox::unit_text(int32_t value, const bool change) const {
          _("%1$s and %2$s");
 
 		const std::string hours_string = change ?
-         /** TRANSLATORS: The hours part of "Increase/Decrease the value by X hours and Y minutes".
-                          You may want to treat this as "by <n> hours", depending on how you
-                          translated "Increase/Decrease the value by %s" and "%1$s and %2$s". */
-         format(npgettext("spinbox_change_hours_mins", "%d hour", "%d hours", value), value) :
-         /** TRANSLATORS: The current value of a spinbox */
-         format(ngettext("%d hour", "%d hours", hours), hours);
+         format(
+            /** TRANSLATORS: The hours part of "Increase/Decrease the value by X hours and Y
+                   minutes". You may want to treat this as "by <n> hours", depending on how you
+                   translated "Increase/Decrease the value by %s" and "%1$s and %2$s". */
+            npgettext("spinbox_change_hours_mins", "%d hour", "%d hours", value), value) :
+         format(
+            /** TRANSLATORS: The current value of a spinbox */
+            ngettext("%d hour", "%d hours", hours), hours);
 
+		// clang-format off
 		const std::string minutes_string = change ?
          /** TRANSLATORS: The minutes part of "Increase/Decrease the value by X hours and Y minutes"
                           You may want to treat this as "by <n> minutes", depending on how you
@@ -534,15 +536,18 @@ const std::string SpinBox::unit_text(int32_t value, const bool change) const {
 		return format(hours_mins_format_string, hours_string, minutes_string);
 	}
 
-	// clang-format off
 	case (Units::kWeeks):
 		return change ?
-         /** TRANSLATORS: "Increase/Decrease the value by <n> weeks"
+                format(
+                   /** TRANSLATORS: "Increase/Decrease the value by <n> weeks"
                           You may want to treat this as "by <n> weeks", depending on how you
                           translated "Increase/Decrease the value by %s". */
-         format(npgettext("spinbox_change", "%d week", "%d weeks", value), value) :
-         /** TRANSLATORS: The current value of a spinbox */
-         format(ngettext("%d week", "%d weeks", value), value);
+                   npgettext("spinbox_change", "%d week", "%d weeks", value), value) :
+                format(
+                   /** TRANSLATORS: The current value of a spinbox */
+                   ngettext("%d week", "%d weeks", value), value);
+
+	// clang-format off
 	case (Units::kPixels):
 		return change ?
          /** TRANSLATORS: "Increase/Decrease the value by <n> pixels"
