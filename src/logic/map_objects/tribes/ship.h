@@ -389,7 +389,7 @@ private:
 	// on newly discovered port spaces.
 	// If stop_on_report is true, then also stops the ship when a port space is reported.
 	// Returns whether the ship was stopped.
-	bool update_seen_portspaces(Game& game, bool report_known = true, bool stop_on_report = true);
+	bool update_seen_portspaces(Game& game, bool report_known, bool stop_on_report);
 
 	// Stores coords as a DetectedPortSpace or updates owner if already known.
 	// Returns true if the port space was previously not known.
