@@ -193,3 +193,18 @@ function sleep_with_fps(seconds)
       end
    until counter == seconds
 end
+
+local function init_map()
+   -- remove 2/3 of the ducks from the map
+   for x=0, game.map.width-1 do
+      if x % 3 < 2 then
+         for y=0, game.map.height-1 do
+            local bob = game.map:get_field(x, y).bobs[1]
+            if bob and bob.descr.type_name == "critter" and bob.descr.name == "duck" then
+               bob:remove()
+            end
+         end
+      end
+   end
+end
+init_map()
