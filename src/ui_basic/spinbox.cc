@@ -529,14 +529,14 @@ const std::string SpinBox::unit_text(int32_t value, const bool change) const {
 		const std::string minutes_string =
 		   change ?
             format(
-               /** TRANSLATORS: ..
-                      The minutes part of "Increase/Decrease the value by X hours and Y minutes"
-                      You may want to treat this as "by <n> minutes", depending on how you
-                      translated "Increase/Decrease the value by %s" and "%1$s and %2$s". */
-            npgettext("spinbox_change_hours_mins", "%d minute", "%d minutes", value), value) :
+		         /** TRANSLATORS: ..
+		                The minutes part of "Increase/Decrease the value by X hours and Y minutes"
+		                You may want to treat this as "by <n> minutes", depending on how you
+		                translated "Increase/Decrease the value by %s" and "%1$s and %2$s". */
+		         npgettext("spinbox_change_hours_mins", "%d minute", "%d minutes", value), value) :
             format(
-               /** TRANSLATORS: The current value of a spinbox */
-               ngettext("%d minute", "%d minutes", value), value);
+		         /** TRANSLATORS: The current value of a spinbox */
+		         ngettext("%d minute", "%d minutes", value), value);
 
 		return format(hours_mins_format_string, hours_string, minutes_string);
 	}
