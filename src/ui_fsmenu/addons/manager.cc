@@ -371,6 +371,9 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                   "",
                   UI::Align::kRight) {
 
+	installed_addons_box_.set_flag(UI::Panel::pf_unlimited_size, true);
+	browse_addons_box_.set_flag(UI::Panel::pf_unlimited_size, true);
+
 	dev_box_.set_force_scrolling(true);
 	dev_box_.add(new UI::Textarea(&dev_box_, UI::PanelStyle::kFsMenu, "label_development",
 	                              UI::FontStyle::kFsMenuInfoPanelHeading,
