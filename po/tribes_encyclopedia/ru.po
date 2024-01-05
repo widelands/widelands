@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
@@ -12,7 +12,7 @@
 # CupIvan <mail@cupivan.ru>, 2015
 # Viktor Skachkov <awsswa59@gmail.com>, 2018-2019
 # Viktor Skachkov <awsswa59@gmail.com>, 2023
-# Yuriy Sokolov <lention@mail.ru>, 2015,2019,2022-2023
+# Yuriy Sokolov <lention@mail.ru>, 2015,2019,2022-2024
 # Zme Zzzz <zmey1207@gmail.com>, 2021
 # Владимир Шевцов, 2022
 # Олег Шевченко <olegrock@gmail.com>, 2017
@@ -22,9 +22,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-11-18 02:30+0000\n"
+"POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Viktor Skachkov <awsswa59@gmail.com>, 2023\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2019,2022-2024\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -216,7 +216,7 @@ msgctxt "amazons_ware"
 msgid ""
 "It is also a building material for some advanced buildings. It is produced "
 "in stone mines."
-msgstr "Это также строительный материал для некоторых современных строений. Он производится в каменоломнях."
+msgstr "Это также строительный материал для некоторых продвинутых строений. Он производится в каменоломнях."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Balsa
 #: ../../data/tribes/initialization/amazons/units.lua:129
@@ -396,7 +396,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Picks are used by stonecutters to cut granite from rocks or mine granite and"
 " quartz in stone mines."
-msgstr "Кирки используются камнетёсами для добычи гранита из камней или добычи гранита и кварца в каменных шахтах."
+msgstr "Кирки используются камнетёсами для добычи гранита в скалах и шахтах, а также кварца в каменоломнях."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for a Barbarian ware: Felling Ax, part 1
@@ -508,7 +508,7 @@ msgstr "В каменных чашах как намывают, так и пла
 #: ../../data/tribes/initialization/amazons/units.lua:424
 msgctxt "amazons_ware"
 msgid "Firestones are used to light the fires of charcoal kilns and furnaces."
-msgstr "Кремень используются для разжига огня угольных печей и литейных."
+msgstr "Огниво используется для разжига огня в печах углежога и литейных."
 
 #. TRANSLATORS: Helptext for an Amazon ware: Wooden Spear, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:435
@@ -651,7 +651,7 @@ msgctxt "amazons_worker"
 msgid ""
 "Cuts blocks of granite out of rocks in the vicinity or mines granite and "
 "quartz in stone mines."
-msgstr ""
+msgstr "Высекает блоки гранита из скал в окрестностях или добывает гранит и кварц в каменоломнях."
 
 #. TRANSLATORS: Helptext for an Amazon worker: Woodcutter
 #: ../../data/tribes/initialization/amazons/units.lua:618
@@ -663,7 +663,7 @@ msgstr "Рубит деревья."
 #: ../../data/tribes/initialization/amazons/units.lua:625
 msgctxt "amazons_worker"
 msgid "Harvests special trees: ironwood, rubber and balsa."
-msgstr "Собираетурожай с особых деревьев: железного дерева, гевеи и бальсы."
+msgstr "Собирает урожай с особых деревьев: железного дерева, гевеи и бальсы."
 
 #. TRANSLATORS: Helptext for an Amazon worker: Jungle Preserver
 #: ../../data/tribes/initialization/amazons/units.lua:632
@@ -1139,7 +1139,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s, depending on "
 "how far the stonecutter has to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко должен идти камнетёс, этому зданию нужно от %1$s до %2$s чтобы произвести один гранит"
 
 #. TRANSLATORS: Performance helptext for an Amazon production site:
 #. Stonecutter's Hut, part 2
@@ -1164,7 +1164,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1420
 msgctxt "amazons_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr ""
+msgstr "В случае наличия склонов или препятствий на пути, время увеличивается."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Woodcutter's
 #. Hut
@@ -1187,7 +1187,7 @@ msgid ""
 "This building can produce one log between %1$s and %2$s (with master "
 "woodcutter between %3$s and %4$s), depending on how far the woodcutter has "
 "to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко должен идти лесоруб, этому зданию нужно от %1$s до %2$s чтобы произвести одно бревно (со старшим лесорубом - от %3$s до %4$s), "
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Jungle
 #. Preserver's Hut
@@ -1212,7 +1212,7 @@ msgctxt "amazons_building"
 msgid ""
 "The jungle preserver or jungle master plants one tree between %1$s and %2$s,"
 " depending on how far she has to walk."
-msgstr ""
+msgstr "В зависимости от того, насколько далеко им нужно идти, защитнице джунглей и хозяйке джунглей нужно от %1$s до %2$s, чтобы высадить одно дерево."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Hunter-
 #. Gatherer's Hut
@@ -1245,7 +1245,7 @@ msgid ""
 "This building can produce one meat or one fish between %1$s and %2$s, "
 "depending on how far the hunter-gatherer has to walk. If both kinds of food "
 "are available, then one of each kind is produced between %3$s and %4$s."
-msgstr ""
+msgstr "В зависимости от того, как далеко придется идти охотнику-собирателю, этому зданию потребуется от %1$s до %2$s, чтобы произвести одно мясо или рыбу. Если доступны оба продукта, на производство каждого из них уходит от %3$s до %4$s."
 
 #. TRANSLATORS: Lore author helptext for an Amazon production site: Liana
 #. Cutter's Hut
@@ -1318,7 +1318,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one bucket of water between %1$s and %2$s on "
 "average, depending on how far the carrier has to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко должен идти носильщик, этому зданию нужно от %1$s до%2$s, чтобы произвести одно ведро воды."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Rare Tree
 #. Cutter's Hut
@@ -1338,7 +1338,7 @@ msgid ""
 "how far the woodcutter has to walk. If all kinds of rare tree are available "
 "within her work area, then one of each kind is produced between %3$s and "
 "%4$s."
-msgstr ""
+msgstr "В зависимости от того, как далеко придется идти лесорубу, этому зданию потребуется от %1$s до %2$s, чтобы произвести одно редкое дерево. Если в рабочей области доступны все виды редких деревьев, на добычу каждого из них уходит от %3$s до %4$s."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Wilderness
 #. Keeper's Tent
@@ -1374,7 +1374,7 @@ msgstr "Разведывает незнакомую территорию."
 #: ../../data/tribes/initialization/amazons/units.lua:1418
 msgctxt "amazons_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Один поход занимает у разведчика от %1$s до %2$s."
 
 #. TRANSLATORS: Lore author helptext for an Amazon production site: Rope
 #. Weaver's Booth
@@ -1637,7 +1637,7 @@ msgctxt "amazons_building"
 msgid ""
 "The stone mine can produce one slab of each kind of stone in %s on average "
 "if the supply with rations is steady and the mine is not worn out."
-msgstr ""
+msgstr "В среднем каменоломне нужно %s для получения одного блока камня любого сорта, при полном обеспечении пайками и стабильности жилы."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Gold Digger
 #. Dwelling
@@ -1653,7 +1653,7 @@ msgstr "Вымывает золотой песок из пород в горно
 msgctxt "amazons_building"
 msgid ""
 "If the supply is steady, this mine can produce gold dust in %s on average."
-msgstr ""
+msgstr "При стабильном снабжении эта шахта сможет производить золотой песок, в среднем, за %s."
 
 #. TRANSLATORS: Purpose helptext for an Amazon training site: Warriors’
 #. Gathering
@@ -4102,7 +4102,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s, depending on "
 "how far the stonecutter has to walk."
-msgstr "Это здание может производить один гранит между %1$s и %2$s, в зависимости от того, как далеко должен идти камнетёс."
+msgstr " В зависимости от того, как далеко должен идти камнетёс, этому зданию нужно от %1$s до %2$s, чтобы произвести один гранит."
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Quarry,
 #. part 2
@@ -4124,7 +4124,7 @@ msgstr "Это здание может производить один гран�
 #: ../../data/tribes/initialization/atlanteans/units.lua:1646
 msgctxt "atlanteans_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr ""
+msgstr "В случае наличия склонов или препятствий на пути, время увеличивается."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site:
 #. Woodcutter's House
@@ -4171,7 +4171,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one log between %1$s and %2$s, depending on how "
 "far the woodcutter has to walk."
-msgstr ""
+msgstr " В зависимости от того, как далеко должен идти лесоруб, этому зданию нужно от %1$s до %2$s, чтобы произвести одно бревно."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Forester's
 #. House
@@ -4220,7 +4220,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The forester plants one tree between %1$s and %2$s, depending on how far he "
 "has to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко ему нужно идти, леснику требуется от %1$s до %2$s, чтобы высадить одно дерево."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Fisher's
 #. House
@@ -4276,7 +4276,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one fish between %1$s and %2$s, depending on how "
 "far the fisher has to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко должен идти рыболов, этому зданию нужно от %1$s до%2$s, чтобы произвести одну рыбу."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Fish
 #. Breeder's House
@@ -4350,7 +4350,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one meat between %1$s and %2$s, depending on how "
 "far the hunter has to walk."
-msgstr "Это здание может производить одно мясо между %1$s и %2$s, в зависимости от того, как далеко должен идти охотник."
+msgstr "В зависимости от того, как далеко должен идти охотник, этому зданию нужно от %1$s до%2$s, чтобы произвести одно мясо."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Well
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Well
@@ -4388,7 +4388,7 @@ msgstr "Пробормотал водонос"
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "The carrier needs %s to get one bucket full of water."
-msgstr ""
+msgstr "Носильщику нужно %s, чтобы добыть одно ведро воды."
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Well,
 #. part 2
@@ -4396,7 +4396,7 @@ msgstr ""
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "If the water resource is depleted, the carrier needs %s on average."
-msgstr "Если водные ресурсы истощены, перевозчику, в среднем, нужно %s ."
+msgstr "Если водные ресурсы истощены, носильщику, в среднем, нужно %s ."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Gold
 #. Spinning Mill
@@ -4476,7 +4476,7 @@ msgstr "Разведчик ответил солдату"
 #: ../../data/tribes/initialization/atlanteans/units.lua:1644
 msgctxt "atlanteans_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Один поход занимает у разведчика от %1$s до %2$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Sawmill
 #. TRANSLATORS: Purpose helptext for an Empire production site: Sawmill
@@ -4579,7 +4579,7 @@ msgid ""
 " economy, production of one sack of each kind of flour takes %1$s on "
 "average. If only one kind of flour is needed by the economy, its production "
 "takes %2$s on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено а оба вида муки нужны экономике, то в среднем изготовление одного мешка муки занимает %1$s. Если экономике нужен только один сорт муки, его изготовление занимает %2$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Bakery
 #: ../../data/tribes/initialization/atlanteans/units.lua:1698
@@ -4685,7 +4685,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено а все металлы нужны экономике, то в среднем производство одного железа занимает %1$sа одного золота - %2$s. Если экономике нужен только один металл, на железо будет уходить, в среднем %3$s, а на золото - %4$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Toolsmithy
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Metal
@@ -4719,7 +4719,7 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено и все инструменты нужны экономике, то в среднем изготовление одного орудия занимает %1$s. Если экономике нужен только одно из орудий, его изготовление занимает %2$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Weapon
 #. Smithy
@@ -4758,7 +4758,7 @@ msgid ""
 "one kind of trident is needed by the economy, production of one light "
 "trident takes %2$s and one long trident, one steel trident, one double "
 "trident or one heavy double trident takes %3$s on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено а все трезубцы нужны экономике, то в среднем производство каждого трезубца занимает %1$s. Если экономике нужен только один вид трезубцев, на производство лёгкого трезубца будет уходить %2$s, а на производство длинного трезубца, стального трезубца, двойного трезубца или тяжёлого двойного трезубца в среднем %3$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Armor
 #. Smithy
@@ -4787,7 +4787,7 @@ msgid ""
 "the economy, production of one of each kind takes %1$s on average. If only "
 "one kind of shield is needed by the economy, production of one steel shield "
 "takes %2$s and one advanced shield takes %3$s on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено и все виды щитов нужны экономике, то в среднем производство каждого из них занимает %1$s. Если экономике нужен только один вид щитов, на стальной щит будет уходить, в среднем %2$s, а на продвинутый щит - %3$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Barracks
 #: ../../data/tribes/initialization/atlanteans/units.lua:1782
@@ -4944,7 +4944,7 @@ msgid ""
 "needed by the economy, production of one of each cloth and tabard takes %1$s"
 " on average. If only one kind of cloth or tabard is needed by the economy, "
 "its production takes %2$s on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено и все виды полотна и накидок нужны экономике, то в среднем изготовление одного полотна или накидки занимает %1$s. Если экономике нужен только один из видов продукции, то его изготовление занимает %2$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Crystal
 #. Mine
@@ -4980,7 +4980,7 @@ msgid ""
 " diamond takes %3$s on average. If only one kind of mineral is needed by the"
 " economy, production of one granite takes %4$s, one quartz takes %5$s and "
 "one diamond takes %6$s on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено а все минералы нужны экономике, то в среднем производство одного гранита занимает %1$s, одного кварца - %2$s, одного алмаза - %3$s. Если экономике нужен только один минерал, на один гранит будет уходить, в среднем %4$s, на кварц - %5$s, а на алмаз - %6$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for production site: Coal Mine
@@ -5029,7 +5029,7 @@ msgstr "Песня гильдии шахтеров"
 msgctxt "atlanteans_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in %s on average."
-msgstr ""
+msgstr "Если поставка пищи будет стабильной, эта шахта сможет производить уголь, в среднем, за %s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Iron Mine
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Iron Mine
@@ -5061,7 +5061,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "If the food supply is steady, this mine can produce iron ore in %s on "
 "average."
-msgstr ""
+msgstr "Если поставка пищи будет стабильной, эта шахта сможет производить железную руду, в среднем, за %s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for production site: Gold Mine
@@ -5107,7 +5107,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "If the food supply is steady, this mine can produce gold ore in %s on "
 "average."
-msgstr ""
+msgstr "Если поставка пищи будет стабильной, эта шахта сможет производить золотую руду, в среднем, за %s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean training site: Dungeon, part
 #. 1
@@ -6627,7 +6627,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s, depending on "
 "how far the stonemason has to walk."
-msgstr ""
+msgstr " В зависимости от того, как далеко должен идти камнетёс, этому зданию нужно от %1$s до %2$s, чтобы произвести один гранит."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Quarry,
 #. part 2
@@ -6649,7 +6649,7 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:1274
 msgctxt "barbarians_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr ""
+msgstr "В случае наличия склонов или препятствий на пути, время увеличивается."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Lumberjack_s
 #. Hut
@@ -6682,7 +6682,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one log between %1$s and %2$s, depending on how "
 "far the lumberjack has to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко должен идти дровосек, этому зданию нужно от %1$s до %2$s чтобы произвести одно бревно. "
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Ranger's Hut
 #: ../../data/tribes/initialization/barbarians/units.lua:1173
@@ -6713,7 +6713,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The ranger plants one tree between %1$s and %2$s, depending on how far he "
 "has to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко ему нужно идти, лесничему требуется от %1$s до %2$s, чтобы высадить одно дерево."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Fisher's Hut
 #: ../../data/tribes/initialization/barbarians/units.lua:1192
@@ -6755,7 +6755,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one fish between %1$s and %2$s, depending on how "
 "far the fisher has to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко должен идти рыболов, этому зданию нужно от %1$s до%2$s, чтобы произвести одну рыбу."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Hunter's Hut
 #: ../../data/tribes/initialization/barbarians/units.lua:1215
@@ -6785,7 +6785,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one meat between %1$s and %2$s, depending on how "
 "far the hunter has to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко должен идти охотник, этому зданию нужно от %1$s до%2$s, чтобы произвести одно мясо."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Gamekeeper's
 #. Hut
@@ -6845,7 +6845,7 @@ msgstr "Носильщику нужно %s, чтобы добыть одно в�
 #, lua-format
 msgctxt "barbarians_building"
 msgid "If the water resource is depleted, the carrier needs %s on average."
-msgstr ""
+msgstr "Если водные ресурсы истощены, носильщику, в среднем, нужно %s ."
 
 #: ../../data/tribes/initialization/barbarians/units.lua:1263
 msgctxt "barbarians_building"
@@ -6874,7 +6874,7 @@ msgstr "Чат'Карут<br>на церемонии принятия прися
 #: ../../data/tribes/initialization/barbarians/units.lua:1272
 msgctxt "barbarians_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Один поход занимает у разведчика от %1$s до %2$s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Wood Hardener
 #: ../../data/tribes/initialization/barbarians/units.lua:1284
@@ -7134,7 +7134,7 @@ msgid ""
 "economy, production of one of each food takes %1$s on average. If only one "
 "kind of food is needed by the economy, production of one ration takes %2$s "
 "and one snack takes %3$s on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено и все продукты нужны экономике, то в среднем производство каждого из них занимает %1$s. Если экономике нужен только один вид пищи, на паёк будет уходить, в среднем %2$s, а на закуску - %3$s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Big Inn
 #: ../../data/tribes/initialization/barbarians/units.lua:1394
@@ -7166,7 +7166,7 @@ msgid ""
 "economy, production of one of each food takes %1$s on average. If only one "
 "kind of food is needed by the economy, production of one ration takes %2$s, "
 "one snack takes %3$s and one meal takes %4$s on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено и все продукты нужны экономике, то в среднем производство каждого из них занимает %1$s. Если экономике нужен только один вид пищи, на паёк будет уходить, в среднем %2$s, на закуску - %3$s, а на обед - %4$s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Charcoal Kiln
 #: ../../data/tribes/initialization/barbarians/units.lua:1407
@@ -7210,7 +7210,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено а все металлы нужны экономике, то в среднем производство одного железа занимает %1$sа одного золота - %2$s. Если экономике нужен только один металл, на железо будет уходить, в среднем %3$s, а на золото - %4$s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Metal Workshop
 #: ../../data/tribes/initialization/barbarians/units.lua:1439
@@ -7244,7 +7244,7 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено и все инструменты нужны экономике, то в среднем изготовление одного орудия занимает %1$s. Если экономике нужен только одно из орудий, его изготовление занимает %2$s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Warmill
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Ax Workshop
@@ -7292,7 +7292,7 @@ msgid ""
 "If this building is fully supplied and all axes are needed by the economy, "
 "production of one of each ax takes %1$s on average. If only one kind of ax "
 "is needed by the economy, its production takes %2$s on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено и все топоры нужны экономике, то в среднем изготовление одного топора занимает %1$s. Если экономике нужен только один из видов топоров, его изготовление занимает %2$s."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Warmill,
 #. part 2
@@ -7446,7 +7446,7 @@ msgid ""
 "economy, production of one of each helmet takes %1$s on average. If only one"
 " kind of helmet is needed by the economy, production of one helmet takes "
 "%2$s, one mask takes %3$s and one warhelm takes %4$s on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено и все шлемы нужны экономике, то в среднем производство каждого из них занимает %1$s. Если экономике нужен только один вид шлемов, на производство одного шлема будет уходить, в среднем %2$s, на маску - %3$s, а на боевой шлем - %4$s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Granite Mine
 #: ../../data/tribes/initialization/barbarians/units.lua:1549
@@ -10786,7 +10786,7 @@ msgctxt "empire_building"
 msgid ""
 "The stonemason finds 5 blocks of granite and 2 blocks of marble out of 7 "
 "rocks."
-msgstr ""
+msgstr "Из каждых 7 булыжников камнетёс получает 5 блоков гранита и 2 блока мрамора."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Quarry,
 #. part 1
@@ -10795,7 +10795,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s and one marble "
 "between %3$s and %4$s, depending on how far the stonemason has to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко должен идти камнетёс, этому зданию нужно от %1$s до %2$s чтобы произвести один гранит, и от %3$s до %4$s, чтобы произвести один мрамор, "
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Quarry,
 #. part 2
@@ -10817,7 +10817,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:1422
 msgctxt "empire_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr ""
+msgstr "В случае наличия склонов или препятствий на пути, время увеличивается."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -10856,7 +10856,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one log between %1$s and %2$s, depending on how "
 "far the lumberjack has to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко должен идти дровосек, этому зданию нужно от %1$s до %2$s чтобы произвести одно бревно. "
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -10895,7 +10895,7 @@ msgctxt "empire_building"
 msgid ""
 "The forester plants one tree between %1$s and %2$s, depending on how far he "
 "has to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко ему нужно идти, леснику требуется от %1$s до %2$s, чтобы высадить одно дерево."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -10946,7 +10946,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one fish between %1$s and %2$s, depending on how "
 "far the fisher has to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко должен идти рыболов, этому зданию нужно от %1$s до%2$s, чтобы произвести одну рыбу."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -10983,7 +10983,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one meat between %1$s and %2$s, depending on how "
 "far the hunter has to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко должен идти охотник, этому зданию нужно от %1$s до%2$s, чтобы произвести одно мясо."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11015,7 +11015,7 @@ msgstr "Имперская поговорка"
 #, lua-format
 msgctxt "empire_building"
 msgid "The carrier needs %s to get one bucket full of water."
-msgstr ""
+msgstr "Носильщику нужно %s, чтобы добыть одно ведро воды."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Well, part
 #. 2
@@ -11023,7 +11023,7 @@ msgstr ""
 #, lua-format
 msgctxt "empire_building"
 msgid "If the water resource is depleted, the carrier needs %s on average."
-msgstr ""
+msgstr "Если водные ресурсы истощены, носильщику, в среднем, нужно %s ."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11059,7 +11059,7 @@ msgstr "Чтобы отправить сюда разведчика, соеди�
 #: ../../data/tribes/initialization/empire/units.lua:1420
 msgctxt "empire_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Один поход занимает у разведчика от %1$s до %2$s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11333,7 +11333,7 @@ msgid ""
 "economy, production of one of each food takes %1$s on average. If only one "
 "kind of food is needed by the economy, production of one ration takes %2$s "
 "and one meal takes %3$s on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено и все продукты нужны экономике, то в среднем производство каждого из них занимает %1$s. Если экономике нужен только один вид пищи, на паёк будет уходить, в среднем %2$s, а на обед - %3$s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11388,7 +11388,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено а все металлы нужны экономике, то в среднем производство одного железа занимает %1$sа одного золота - %2$s. Если экономике нужен только один металл, на железо будет уходить, в среднем %3$s, а на золото - %4$s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11418,7 +11418,7 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено и все инструменты нужны экономике, то в среднем изготовление одного орудия занимает %1$s. Если экономике нужен только одно из орудий, его изготовление занимает %2$s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11468,7 +11468,7 @@ msgid ""
 "kind of armor takes %2$s on average. If only one kind of armor or helmets is"
 " needed by the economy, production of one helmet takes %3$s, while one kind "
 "of armor takes %4$s on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено и все виды брони и шлемов нужны экономике, то в среднем производство одного шлема занимает %1$sа одной брони - %2$s. Если экономике нужен только один вид брони или шлемов, на один шлем будет уходить, в среднем %3$s, а на броню - %4$s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11685,7 +11685,7 @@ msgid ""
 "spear is needed by the economy, production of one wooden spear takes %2$s, "
 "one spear, one advanced spear, one heavy spear or one war spear takes %3$s "
 "on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено и все копья нужны экономике, то в среднем производство каждого из них занимает %1$s. Если экономике нужен только один вид копий, на производство одного деревянного копья будет уходить, в среднем %2$s, а на копьё, улучшенное копьё или боевое копьё - %3$s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -14235,7 +14235,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s, depending on "
 "how far the stonemason has to walk."
-msgstr ""
+msgstr " В зависимости от того, как далеко должен идти камнетёс, этому зданию нужно от %1$s до %2$s, чтобы произвести один гранит."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Quarry,
 #. part 2
@@ -14257,7 +14257,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1777
 msgctxt "frisians_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr ""
+msgstr "В случае наличия склонов или препятствий на пути, время увеличивается."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Woodcutter's
 #. House
@@ -14289,7 +14289,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one log between %1$s and %2$s, depending on how "
 "far the woodcutter has to walk."
-msgstr ""
+msgstr " В зависимости от того, как далеко должен идти лесоруб, этому зданию нужно от %1$s до %2$s, чтобы произвести одно бревно."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Forester's House
 #: ../../data/tribes/initialization/frisians/units.lua:1594
@@ -14321,7 +14321,7 @@ msgctxt "frisians_building"
 msgid ""
 "The forester plants one tree between %1$s and %2$s, depending on how far he "
 "has to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко ему нужно идти, леснику требуется от %1$s до %2$s, чтобы высадить одно дерево."
 
 #. TRANSLATORS: Note helptext for a Frisian production site: Hunter's House
 #: ../../data/tribes/initialization/frisians/units.lua:1615
@@ -14336,14 +14336,14 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one meat between %1$s and %2$s, depending on how "
 "far the hunter has to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко должен идти охотник, этому зданию нужно от %1$s до%2$s, чтобы произвести одно мясо."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Hunter's
 #. House, part 3
 #: ../../data/tribes/initialization/frisians/units.lua:1622
 msgctxt "frisians_building"
 msgid "The hunter produces one fur after he has produced five pieces of meat."
-msgstr ""
+msgstr "Охотник производит один мех на каждые пять кусков мяса."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Fisher's House
 #: ../../data/tribes/initialization/frisians/units.lua:1630
@@ -14387,7 +14387,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one fish between %1$s and %2$s, depending on how "
 "far the fisher has to walk."
-msgstr ""
+msgstr "В зависимости от того, как далеко должен идти рыболов, этому зданию нужно от %1$s до%2$s, чтобы произвести одну рыбу."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Reed Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1653
@@ -14437,7 +14437,7 @@ msgstr "Вождь Альдор о том, почему его племя не �
 #, lua-format
 msgctxt "frisians_building"
 msgid "The carrier needs %s to get one bucket full of water."
-msgstr ""
+msgstr "Носильщику нужно %s, чтобы добыть одно ведро воды."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Well, part
 #. 2
@@ -14445,7 +14445,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "If the water resource is depleted, the carrier needs %s on average."
-msgstr ""
+msgstr "Если водные ресурсы истощены, носильщику, в среднем, нужно %s ."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Clay Pit
 #: ../../data/tribes/initialization/frisians/units.lua:1683
@@ -14666,7 +14666,7 @@ msgstr "Чтобы отправить сюда разведчика, соеди�
 #: ../../data/tribes/initialization/frisians/units.lua:1775
 msgctxt "frisians_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr ""
+msgstr "Один поход занимает у разведчика от %1$s до %2$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Brick Kiln
 #: ../../data/tribes/initialization/frisians/units.lua:1787
@@ -14725,7 +14725,7 @@ msgid ""
 " production of one iron takes %1$s and one gold takes %2$s on average. If "
 "only one kind of metal is needed by the economy, production of one iron "
 "takes %3$s and one gold takes %4$s on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено а все металлы нужны экономике, то в среднем производство одного железа занимает %1$sа одного золота - %2$s. Если экономике нужен только один металл, на железо будет уходить, в среднем %3$s, а на золото - %4$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Recycling Center
 #: ../../data/tribes/initialization/frisians/units.lua:1813
@@ -14762,7 +14762,7 @@ msgid ""
 "takes %3$s on average. If only one kind of material is needed by the "
 "economy, production of one fur takes %4$s, one iron takes %5$s and one gold "
 "takes %6$s on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено а все материалы нужны экономике, то в среднем производство одного меха занимает %1$s, одного железа - %2$s, одного золота - %3$s. Если экономике нужен только один материал, на один мех будет уходить, в среднем %4$s, на железо - %5$s, а на золото - %6$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Blacksmithy
 #: ../../data/tribes/initialization/frisians/units.lua:1826
@@ -14793,7 +14793,7 @@ msgid ""
 "tool is needed by the economy, its production takes %2$s on average. Needles"
 " are an exception - in the time to produce one tool two needles are "
 "produced."
-msgstr ""
+msgstr "Если это здание полностью обеспечено и все инструменты нужны экономике, то в среднем изготовление одного орудия занимает %1$s. Если экономике нужен только одно из орудий, его изготовление занимает %2$s. Исключение составляют иглы – во время изготовления любого инструмента производятся две иглы."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Small Armor
 #. Smithy
@@ -14828,7 +14828,7 @@ msgid ""
 "%2$s and one helmet takes %3$s on average. If only one kind of sword or "
 "helmet is needed by the economy, production of one short sword takes %4$s, "
 "one long sword takes %5$s and one helmet takes %6$s on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено а все мечи и шлемы нужны экономике, то в среднем производство одного короткого меча занимает %1$s, одного длинного меча - %2$s, одного шлема - %3$s. Если экономике нужен только один вид меча или шлема, на один короткий меч будет уходить, в среднем %4$s, на длинный меч - %5$s, а на шлем - %6$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Large Armor
 #. Smithy
@@ -14866,7 +14866,7 @@ msgid ""
 " sword or helmet is needed by the economy, production of one broadsword "
 "takes %4$s, one double-edged sword takes %5$s and one golden helmet takes "
 "%6$s on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено а все мечи и шлемы нужны экономике, то в среднем производство одного тесака занимает %1$s, одного обоюдоострого меча - %2$s, одного золотого шлема - %3$s. Если экономике нужен только один вид меча или шлема, на один тесак будет уходить, в среднем %4$s, на обоюдоострый меч - %5$s, а на золотой шлем - %6$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Sewing Room
 #: ../../data/tribes/initialization/frisians/units.lua:1865
@@ -14927,7 +14927,7 @@ msgid ""
 "economy, production of one of each garment takes %1$s on average. If only "
 "one kind of garment is needed by the economy, its production takes %2$s on "
 "average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено и вся одежда нужна экономике, то в среднем изготовление одной одежды занимает %1$s. Если экономике нужен только один вид одежды, её изготовление занимает %2$s."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Charcoal
 #. Kiln
@@ -14966,7 +14966,7 @@ msgctxt "frisians_building"
 msgid ""
 "If this building is fully supplied, production of one of each smoked food "
 "takes %s on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено, производство каждого из копченых продуктов занимает в среднем %s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Bakery
 #: ../../data/tribes/initialization/frisians/units.lua:1917
@@ -15027,7 +15027,7 @@ msgid ""
 " production of one bread takes %1$s and one honey bread takes %2$s on "
 "average. If only one kind of bread is needed by the economy, production of "
 "one bread or one honey bread takes %3$s on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено а все виды хлеба нужны экономике, то в среднем производство одного хлеба занимает %1$s а одного пряника - %2$s. Если экономике нужен только один вид хлеба, на один хлеб или пряник будет уходить, в среднем %3$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Brewery
 #: ../../data/tribes/initialization/frisians/units.lua:1943
@@ -15085,7 +15085,7 @@ msgid ""
 " production of one beer takes %1$s and one mead takes %2$s on average. If "
 "only one kind of drink is needed by the economy, production of one beer or "
 "one mead takes %3$s on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено а все напитики нужны экономике, то в среднем производство одного пива занимает %1$s а одной медовухи - %2$s. Если экономике нужен только один вид напитка, на одно пиво или медовуху будет уходить, в среднем %3$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Tavern
 #: ../../data/tribes/initialization/frisians/units.lua:1969
@@ -15106,7 +15106,7 @@ msgid ""
 "If the tavern is fully supplied, it can produce one ration in %1$s on "
 "average, using 2 kinds of ingredients. If it can only use one kind of "
 "ingredient, it can produce one ration in %2$s on average."
-msgstr ""
+msgstr "Если таверна полностью снабжена, она может производить один паёк (из двух ингрединетов) в среднем за %1$s. Если в наличии только один ингредиент, один паёк будет производиться в среднем за %2$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Drinking Hall
 #: ../../data/tribes/initialization/frisians/units.lua:1982
@@ -15140,7 +15140,7 @@ msgid ""
 "economy, production of one of each food takes %1$s on average. If only one "
 "kind of food is needed by the economy, production of one ration takes %2$s "
 "and one meal takes %3$s on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено и все продукты нужны экономике, то в среднем производство каждого из них занимает %1$s. Если экономике нужен только один вид пищи, на паёк будет уходить, в среднем %2$s, а на обед - %3$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Barracks
 #: ../../data/tribes/initialization/frisians/units.lua:1995
@@ -15201,7 +15201,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the supply is steady and there is continuous demand for fur, then the "
 "reindeer farm produces one meat after producing three pieces of fur."
-msgstr "Если поставка пищи будет стабильной и существует постоянный спрос на мех, то оленья ферма производит одно мясо после производства трех кусков меха."
+msgstr "Если поставка пищи будет стабильной и существует постоянный спрос на мех, то олений выгон производит один кусок мяса через каждые три куска меха."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Reindeer
 #. Farm
@@ -15213,7 +15213,7 @@ msgid ""
 "on average. If only reindeers are needed by the economy, their production "
 "takes %3$s on average. If only fur is needed by the economy, its production "
 "takes %4$s on average."
-msgstr ""
+msgstr "Если это здание полностью обеспечено, а экономика нуждается и в оленях и в мехе, то в среднем производство одного северного оленя занимает %1$s а одного меха - %2$s. Если экономике нужны только олени, одного из них будут производить в среднем за %3$s. Если нужен только мех, его производство займёт %4$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Farm
 #: ../../data/tribes/initialization/frisians/units.lua:2025
