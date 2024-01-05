@@ -1,7 +1,7 @@
 -- =============================
 -- Test string.bformat
 -- =============================
-string_bformat_test = lunit.TestCase("math.random test")
+string_bformat_test = lunit.TestCase("string.bformat test")
 function string_bformat_test:test_simple()
    local str = ("%s %s"):bformat("Hello", "World")
    assert_equal("Hello World", str)

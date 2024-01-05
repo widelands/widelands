@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2023 by the Widelands Development Team
+ * Copyright (C) 2020-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -368,6 +368,9 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                   0,
                   "",
                   UI::Align::kRight) {
+
+	installed_addons_box_.set_flag(UI::Panel::pf_unlimited_size, true);
+	browse_addons_box_.set_flag(UI::Panel::pf_unlimited_size, true);
 
 	network_handler_.set_hangup_fn(
 	   create_hangup_function(fsmm, UI::WindowStyle::kFsMenu, network_handler_));
