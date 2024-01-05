@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2023 by the Widelands Development Team
+ * Copyright (C) 2009-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -150,12 +150,16 @@ SpinBox::SpinBox(Panel* const parent,
 	   new Button(box_, "-", 0, 0, button_size_, button_size_, sbi_->button_style,
 	              g_image_cache->get(is_big ? "images/ui_basic/scrollbar_left.png" :
                                              "images/ui_basic/scrollbar_down.png"),
-	              format(_("Decrease the value by %s"), unit_text(sbi_->step_size)));
+	              /** TRANSLATORS: You may want to treat this as "Decrease the value %s", you get
+	                               the chance to translate the substituted text as "by <n units>" */
+	              format(_("Decrease the value by %s"), unit_text(sbi_->step_size, true)));
 	sbi_->button_plus =
 	   new Button(box_, "+", 0, 0, button_size_, button_size_, sbi_->button_style,
 	              g_image_cache->get(is_big ? "images/ui_basic/scrollbar_right.png" :
                                              "images/ui_basic/scrollbar_up.png"),
-	              format(_("Increase the value by %s"), unit_text(sbi_->step_size)));
+	              /** TRANSLATORS: You may want to treat this as "Increase the value %s", you get
+	                               the chance to translate the substituted text as "by <n units>" */
+	              format(_("Increase the value by %s"), unit_text(sbi_->step_size, true)));
 	sbi_->button_minus->set_can_focus(false);
 	sbi_->button_plus->set_can_focus(false);
 
@@ -163,11 +167,11 @@ SpinBox::SpinBox(Panel* const parent,
 		sbi_->button_ten_minus =
 		   new Button(box_, "--", 0, 0, big_step_button_width_, button_size_, sbi_->button_style,
 		              g_image_cache->get("images/ui_basic/scrollbar_left_fast.png"),
-		              format(_("Decrease the value by %s"), unit_text(sbi_->big_step_size)));
+		              format(_("Decrease the value by %s"), unit_text(sbi_->big_step_size, true)));
 		sbi_->button_ten_plus =
 		   new Button(box_, "++", 0, 0, big_step_button_width_, button_size_, sbi_->button_style,
 		              g_image_cache->get("images/ui_basic/scrollbar_right_fast.png"),
-		              format(_("Increase the value by %s"), unit_text(sbi_->big_step_size)));
+		              format(_("Increase the value by %s"), unit_text(sbi_->big_step_size, true)));
 		sbi_->button_ten_minus->set_can_focus(false);
 		sbi_->button_ten_plus->set_can_focus(false);
 
@@ -469,45 +473,119 @@ void SpinBox::add_replacement(int32_t value, const std::string& text) {
 	update();
 }
 
-const std::string SpinBox::unit_text(int32_t value) const {
+const std::string SpinBox::unit_text(int32_t value, const bool change) const {
 	switch (sbi_->unit) {
 	case (Units::kMinutes): {
 		if (value < 60) {
-			/** TRANSLATORS: A spinbox unit */
-			return format(ngettext("%d minute", "%d minutes", value), value);
+			return change ?
+                   format(
+			             /** TRANSLATORS: "Increase/Decrease the value by <n> minutes"
+			                    You may want to treat this as "by <n> minutes", depending on how you
+			                    translated "Increase/Decrease the value by %s". */
+			             npgettext("spinbox_change", "%d minute", "%d minutes", value), value) :
+                   format(
+			             /** TRANSLATORS: The current value of a spinbox */
+			             ngettext("%d minute", "%d minutes", value), value);
 		}
 
 		if (value % 60 == 0) {
 			value /= 60;
-			/** TRANSLATORS: A spinbox unit */
-			return format(ngettext("%d hour", "%d hours", value), value);
+			return change ?
+                   format(
+			             /** TRANSLATORS: "Increase/Decrease the value by <n> hours"
+			                    You may want to treat this as "by <n> hours", depending on how you
+			                    translated "Increase/Decrease the value by %s". */
+			             npgettext("spinbox_change", "%d hour", "%d hours", value), value) :
+                   format(
+			             /** TRANSLATORS: The current value of a spinbox */
+			             ngettext("%d hour", "%d hours", value), value);
 		}
 
 		const int32_t hours = value / 60;
 		value %= 60;
-		return format(
-		   /** TRANSLATORS: X hours and Y minutes */
-		   _("%1$s and %2$s"),
-		   /** TRANSLATORS: A spinbox unit */
-		   format(ngettext("%d hour", "%d hours", hours), hours),
-		   /** TRANSLATORS: A spinbox unit */
-		   format(ngettext("%d minute", "%d minutes", value), value));
+
+		const std::string hours_mins_format_string =
+		   change ?
+                   /** TRANSLATORS: "Increase/Decrease the value by X hours and Y minutes"
+                          You may want to treat this as "by X hours and Y minutes", depending on how you
+                          translated "Increase/Decrease the value by %s". You can also defer translation
+                          of "by X hours" and "by Y minutes". */
+                   pgettext("spinbox_change_hours_mins", "%1$s and %2$s") :
+                   /** TRANSLATORS: The current value of a spinbox, "X hours and Y minutes" */
+                   _("%1$s and %2$s");
+
+		const std::string hours_string =
+		   change ?
+            format(
+		         /** TRANSLATORS: ..
+		                The hours part of "Increase/Decrease the value by X hours and Y minutes".
+		                You may want to treat this as "by <n> hours", depending on how you translated
+		                "Increase/Decrease the value by %s" and "%1$s and %2$s". */
+		         npgettext("spinbox_change_hours_mins", "%d hour", "%d hours", value), value) :
+            format(
+		         /** TRANSLATORS: The current value of a spinbox */
+		         ngettext("%d hour", "%d hours", hours), hours);
+
+		const std::string minutes_string =
+		   change ?
+            format(
+		         /** TRANSLATORS: ..
+		                The minutes part of "Increase/Decrease the value by X hours and Y minutes"
+		                You may want to treat this as "by <n> minutes", depending on how you
+		                translated "Increase/Decrease the value by %s" and "%1$s and %2$s". */
+		         npgettext("spinbox_change_hours_mins", "%d minute", "%d minutes", value), value) :
+            format(
+		         /** TRANSLATORS: The current value of a spinbox */
+		         ngettext("%d minute", "%d minutes", value), value);
+
+		return format(hours_mins_format_string, hours_string, minutes_string);
 	}
 
 	case (Units::kWeeks):
-		/** TRANSLATORS: A spinbox unit */
-		return format(ngettext("%d week", "%d weeks", value), value);
+		return change ? format(
+		                   /** TRANSLATORS: "Increase/Decrease the value by <n> weeks"
+		                          You may want to treat this as "by <n> weeks", depending on how you
+		                          translated "Increase/Decrease the value by %s". */
+		                   npgettext("spinbox_change", "%d week", "%d weeks", value), value) :
+                      format(
+		                   /** TRANSLATORS: The current value of a spinbox */
+		                   ngettext("%d week", "%d weeks", value), value);
 	case (Units::kPixels):
-		/** TRANSLATORS: A spinbox unit */
-		return format(ngettext("%d pixel", "%d pixels", value), value);
+		return change ? format(
+		                   /** TRANSLATORS: "Increase/Decrease the value by <n> pixels"
+		                          You may want to treat this as "by <n> pixels", depending on how you
+		                          translated "Increase/Decrease the value by %s". */
+		                   npgettext("spinbox_change", "%d pixel", "%d pixels", value), value) :
+                      format(
+		                   /** TRANSLATORS: The current value of a spinbox */
+		                   ngettext("%d pixel", "%d pixels", value), value);
 	case (Units::kFields):
-		/** TRANSLATORS: A spinbox unit */
-		return format(ngettext("%d field", "%d fields", value), value);
+		return change ? format(
+		                   /** TRANSLATORS: "Increase/Decrease the value by <n> fields"
+		                          You may want to treat this as "by <n> fields", depending on how you
+		                          translated "Increase/Decrease the value by %s". */
+		                   npgettext("spinbox_change", "%d field", "%d fields", value), value) :
+                      format(
+		                   /** TRANSLATORS: The current value of a spinbox */
+		                   ngettext("%d field", "%d fields", value), value);
 	case (Units::kPercent):
-		/** TRANSLATORS: A spinbox unit */
-		return format(_("%i %%"), value);
+		return change ? format(
+		                   /** TRANSLATORS: "Increase/Decrease the value by <n>%"
+		                          You may want to treat this as "by <n>%", depending on how you
+		                          translated "Increase/Decrease the value by %s". */
+		                   pgettext("spinbox_change", "%i %%"), value) :
+                      format(
+		                   /** TRANSLATORS: The current value of a spinbox */
+		                   _("%i %%"), value);
 	case (Units::kNone):
-		return format("%d", value);
+		return change ? format(
+		                   /** TRANSLATORS: "Increase/Decrease the value by <n>"
+		                          You may want to treat this as "by <n>", depending on how you
+		                          translated "Increase/Decrease the value by %s". */
+		                   pgettext("spinbox_change", "%d"), value) :
+                      format(
+		                   /** TRANSLATORS: The current value of a spinbox */
+		                   "%d", value);
 	}
 	NEVER_HERE();
 }
