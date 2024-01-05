@@ -751,7 +751,8 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 
 		// TODO(tothxa): Implement expedition options for stop_on_report and report_known
 		//               (report_known can probably always be disabled when stopping is disabled)
-		if (!update_seen_portspaces(game, !has_destination(), !has_destination()) && found_new_target) {
+		if (!update_seen_portspaces(game, !has_destination(), !has_destination()) &&
+		    found_new_target) {
 			set_ship_state_and_notify(
 			   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
 		}
