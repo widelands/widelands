@@ -56,7 +56,6 @@
 - Cleanup: Remove last uses of deprecated `tribe.carrier2` and `tribe.carrier` (#6025)
 - Win condition artifacts minor fix (#6042)
 - Implement `walk=<direction>` in worker programs (CB #4467 / GH #6149)
-- Fix title in test of `string_bformat.lua` of `lua_testsuite.wmf` (CB #4647 / GH #6283)
 - Pass correct parameter to lua_typename() (CB #4646 / GH #6282)
 
 
@@ -251,6 +250,7 @@
 - Allow saving favourite colours in colour chooser (#6124)
 - Remember more settings in stock/unique window (#6128)
 - Fix selection cursor setting after picking custom starting position (#6082, #6152)
+- Different overlay image for valid custom starting positions (#6148)
 - Refactor `WaresDisplay` ware list handling (#6144)
 - Fix comment box overflow (CB #4499 / GH #6157)
 - Do not handle_mousein in ware display (CB #4501 / GH #6159)
@@ -268,6 +268,7 @@
 - String Fixes (#5710, #5782, #5999)
 - Capitalisation of tribe names (#5910, #5913, #5916)
 - Keep PO and POT files in sync in translations updates (#6027)
+- Translations update CI: Commit pure translations separately (#6064)
 - Make spinbox current value and change-by value translatable separately (CB #4612 / GH #6273)
 
 
@@ -324,7 +325,6 @@
 - Allow lookup of richtext inline images without specifying scale suffix (#5935)
 - Continuous Bob Animations (#5954)
 - Force all textures to 32bit for Mesa 23.x (#6072)
-- Different overlay image for valid custom starting positions (#6148)
 - Correct float-int type mismatch in fragment shader's alpha calculation (CB #4586 / GH #6245)
 
 
@@ -380,9 +380,7 @@
     - Resolved most GCC warnings
     - Resolved warnings in MinGW builds
 - Fix documentation CI workflow (#6062, #6089)
-- Self-diagnose crashes (#6100)
 - Fix MinGW library linking order (#6111)
-- Translations update CI: Commit pure translations separately (#6064)
 - Report all validation errors by update_appdata.py (#6116)
 - Remove formatting workarounds (fixes GH #5221)
 - Rename brotli static dependency (GH #6177 / CB #4519)
@@ -421,8 +419,10 @@
     - Skip POT-Creation-Date only changes in PO files too (#5941)
     - Translation update: Exit cleanly when nothing needs to be committed (#5959)
 - Remove unused code from regression_test.py (#5987)
+- Self-diagnose crashes (#6100)
 - Add `.editorconfig` for automatic indentation in many editors (CB #4415 / GH #6019)
 - Update copyright end year to 2024
+- Fix title in test of `string_bformat.lua` of `lua_testsuite.wmf` (CB #4647 / GH #6283)
 
 
 ## Release 1.1
