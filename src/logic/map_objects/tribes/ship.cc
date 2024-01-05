@@ -691,11 +691,9 @@ bool Ship::update_seen_portspaces(Game& game, const bool report_known, const boo
 			if (remember_detected_portspace(mr.location())) {
 				send_new_portspace_message(game);
 				stopped = stop_on_report;
-			} else {
-				if (report_known) {
-					send_known_portspace_message(game);
-					stopped = stop_on_report;
-				}
+			} else if (report_known) {
+				send_known_portspace_message(game);
+				stopped = stop_on_report;
 			}
 		}
 	} while (mr.advance(map));
@@ -753,7 +751,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 
 		// TODO(tothxa): Implement expedition options for stop_on_report and report_known
 		//               (report_known can probably always be disabled when stopping is disabled)
-		if (!update_seen_portspaces(game) && found_new_target) {
+		if (!update_seen_portspaces(game, !has_destination(), !has_destination()) && found_new_target) {
 			set_ship_state_and_notify(
 			   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
 		}
@@ -874,7 +872,7 @@ bool Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 	if (ship_state_ == ShipStates::kExpeditionScouting && get_ship_type() == ShipType::kTransport) {
 		// TODO(tothxa): Implement expedition options for stop_on_report and report_known
 		//               (report_known can probably always be disabled when stopping is disabled)
-		update_seen_portspaces(game);
+		update_seen_portspaces(game, !has_destination(), !has_destination());
 	} else if (ship_state_ == ShipStates::kExpeditionPortspaceFound) {
 		check_port_space_still_available(game);
 	}
