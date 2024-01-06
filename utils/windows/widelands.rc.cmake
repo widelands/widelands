@@ -19,7 +19,7 @@
 
 #include <windows.h> // included for version info constants
 
-A ICON MOVEABLE PURE LOADONCALL DISCARDABLE "@CMAKE_CURRENT_SOURCE_DIR@/../utils/win32/WL.ico"
+A ICON MOVEABLE PURE LOADONCALL DISCARDABLE "@CMAKE_CURRENT_SOURCE_DIR@/../utils/windows/WL.ico"
 
 // To change version information, edit FILEVERSION and PRODUCTVERSION. Keep these two identical.
 // Version "A,B,C,D" translates to version "A.B.C.D",

@@ -4860,19 +4860,19 @@ msgstr "Красная смородина (крохотное)"
 
 #: ../../data/tribes/immovables/berry_bushes/desert_hackberry/medium/init.lua:9
 msgid "Desert Hackberry (medium)"
-msgstr "Каркас (среднее)"
+msgstr "Пустынная ежевика (среднее)"
 
 #: ../../data/tribes/immovables/berry_bushes/desert_hackberry/ripe/init.lua:9
 msgid "Desert Hackberry (ripe)"
-msgstr "Каркас (зрелое)"
+msgstr "Пустынная ежевика (зрелое)"
 
 #: ../../data/tribes/immovables/berry_bushes/desert_hackberry/small/init.lua:9
 msgid "Desert Hackberry (small)"
-msgstr "Каркас (малое)"
+msgstr "Пустынная ежевика (малое)"
 
 #: ../../data/tribes/immovables/berry_bushes/desert_hackberry/tiny/init.lua:9
 msgid "Desert Hackberry (tiny)"
-msgstr "Каркас (крохотное)"
+msgstr "Пустынная ежевика (крохотное)"
 
 #: ../../data/tribes/immovables/berry_bushes/juniper/medium/init.lua:9
 msgid "Juniper (medium)"
