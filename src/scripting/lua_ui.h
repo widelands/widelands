@@ -607,6 +607,12 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_title(lua_State* L);
+	int set_title(lua_State* L);
+	int get_pinned(lua_State* L);
+	int set_pinned(lua_State* L);
+	int get_minimal(lua_State* L);
+	int set_minimal(lua_State* L);
 
 	/*
 	 * Lua Methods
