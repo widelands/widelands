@@ -309,15 +309,25 @@ void InteractiveBase::rebuild_mapview_menu() {
 	                 g_image_cache->get("images/wui/menus/zoom_increase.png"), false, "",
 	                 shortcut_string_for(KeyboardShortcut::kCommonZoomIn, false));
 
+  /** TRANSLATORS: An entry in the game's map view menu */
+	mapviewmenu_.add(_("Zoom max"), MapviewMenuEntry::kZoomMax,
+	                 g_image_cache->get("images/wui/menus/zoom_increase.png"), false, "",
+	                 shortcut_string_for(KeyboardShortcut::kCommonZoomMax, false));
+
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Reset zoom"), MapviewMenuEntry::kResetZoom,
 	                 g_image_cache->get("images/wui/menus/zoom_reset.png"), false, "",
 	                 shortcut_string_for(KeyboardShortcut::kCommonZoomReset, false));
 
 	/** TRANSLATORS: An entry in the game's map view menu */
-	mapviewmenu_.add(_("Zoom –"), MapviewMenuEntry::kDecreaseZoom,
+  mapviewmenu_.add(_("Zoom –"), MapviewMenuEntry::kDecreaseZoom,
 	                 g_image_cache->get("images/wui/menus/zoom_decrease.png"), false, "",
 	                 shortcut_string_for(KeyboardShortcut::kCommonZoomOut, false));
+
+  /** TRANSLATORS: An entry in the game's map view menu */
+	mapviewmenu_.add(_("Zoom min"), MapviewMenuEntry::kZoomMin,
+	                 g_image_cache->get("images/wui/menus/zoom_decrease.png"), false, "",
+	                 shortcut_string_for(KeyboardShortcut::kCommonZoomMin, false));
 
 	mapviewmenu_.select(last_selection);
 }
@@ -338,6 +348,14 @@ void InteractiveBase::mapview_menu_selected(MapviewMenuEntry entry) {
 	} break;
 	case MapviewMenuEntry::kIncreaseZoom: {
 		map_view()->increase_zoom();
+		mapviewmenu_.toggle();
+	} break;
+  case MapviewMenuEntry::kZoomMax: {
+		map_view()->zoom_to_max();
+		mapviewmenu_.toggle();
+	} break;
+  case MapviewMenuEntry::kZoomMin: {
+		map_view()->zoom_to_min();
 		mapviewmenu_.toggle();
 	} break;
 	case MapviewMenuEntry::kResetZoom: {
