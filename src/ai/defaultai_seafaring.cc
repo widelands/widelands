@@ -181,11 +181,12 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	 * - We want at least as many free ships as we have ports
 	 * - If ships utilization is too high
 	 */
-	const bool need_ship =
-	   ports_count > 0 && shipyards_count > 0 && basic_economy_established &&
-	   (!ship_free || persistent_data->ships_utilization > 5000 ||
-	    tradeships_count < (ports_count + expeditions_in_progress) ||
-	    game().naval_warfare_allowed() ? ports_finished_count * 2 > warships_count : false);
+	const bool need_ship = ports_count > 0 && shipyards_count > 0 && basic_economy_established &&
+	                       (!ship_free || persistent_data->ships_utilization > 5000 ||
+	                              tradeships_count < (ports_count + expeditions_in_progress) ||
+	                              game().naval_warfare_allowed() ?
+                              ports_finished_count * 2 > warships_count :
+                              false);
 
 	// goes over productionsites finds shipyards and configures them
 	for (const ProductionSiteObserver& ps_obs : productionsites) {
