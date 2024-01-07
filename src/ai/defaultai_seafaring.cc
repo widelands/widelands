@@ -184,7 +184,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	const bool need_ship =
 	   ports_count > 0 && shipyards_count > 0 && basic_economy_established &&
 	   (!ship_free || persistent_data->ships_utilization > 5000 ||
-	    tradeships_count > (ports_count + expeditions_in_progress) ||
+	    tradeships_count < (ports_count + expeditions_in_progress) ||
 	    ports_finished_count * 2 > warships_count);
 
 	// goes over productionsites finds shipyards and configures them
