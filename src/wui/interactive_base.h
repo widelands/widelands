@@ -256,7 +256,15 @@ public:
 
 protected:
 	// For referencing the items in mapviewmenu_
-	enum class MapviewMenuEntry { kMinimap, kIncreaseZoom, kZoomMax, kDecreaseZoom, kZoomMin, kResetZoom, kQuicknav };
+	enum class MapviewMenuEntry {
+		kMinimap,
+		kIncreaseZoom,
+		kZoomMax,
+		kDecreaseZoom,
+		kZoomMin,
+		kResetZoom,
+		kQuicknav
+	};
 
 	// Adds the mapviewmenu_ to the toolbar
 	void add_mapview_menu(MiniMapType minimap_type);

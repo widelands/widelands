@@ -430,7 +430,7 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          keysym(SDLK_MINUS, kDefaultCtrlModifier),
                          "zoom_out",
                          gettext_noop("Zoom Out"))},
-  {KeyboardShortcut::kCommonZoomMin,
+   {KeyboardShortcut::kCommonZoomMin,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame, KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_MINUS, KMOD_SHIFT),
                          "zoom_min",

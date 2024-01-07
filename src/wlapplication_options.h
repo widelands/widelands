@@ -123,9 +123,9 @@ enum class KeyboardShortcut : uint16_t {
 	// These can be inserted as one block in the in-game and in-editor help
 	kCommonGeneral_Begin,
 	kCommonZoomIn = kCommonGeneral_Begin,
-  kCommonZoomMax,
+	kCommonZoomMax,
 	kCommonZoomOut,
-  kCommonZoomMin,
+	kCommonZoomMin,
 	kCommonZoomReset,
 	kCommonTextCut,
 	kCommonTextCopy,
