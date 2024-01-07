@@ -299,6 +299,9 @@ public:
 	[[nodiscard]] State* get_state() {
 		return !stack_.empty() ? &*stack_.rbegin() : nullptr;
 	}
+	[[nodiscard]] size_t get_stack_size() const {
+		return stack_.size();
+	}
 
 	[[nodiscard]] std::string get_signal() const {
 		return signal_;

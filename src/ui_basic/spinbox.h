@@ -85,7 +85,8 @@ private:
 	void layout() override;
 	void update();
 	void change_value(int32_t);
-	const std::string unit_text(int32_t value) const;
+	// Format value or change step with unit.
+	const std::string unit_text(int32_t value, bool change = false) const;
 	void calculate_big_step();
 
 	const SpinBox::Type type_;

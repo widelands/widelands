@@ -1975,15 +1975,14 @@ void Worker::evict(Game& game) {
 		                   descr().name().c_str(), serial());
 		return;
 	}
-
-	upcast(Building, building, get_location(game));
-	if (building == nullptr || get_state(taskBuildingwork) == nullptr) {
+	if (!is_employed()) {
 		verb_log_warn_time(game.get_gametime(), "Trying to evict worker %s %u who is not employed",
 		                   descr().name().c_str(), serial());
 		return;
 	}
 
 	molog(game.get_gametime(), "Evicting!");
+	upcast(Building, building, get_location(game));
 	building->notify_worker_evicted(game, *this);
 	reset_tasks(game);
 	set_location(&building->base_flag());
@@ -1992,6 +1991,22 @@ void Worker::evict(Game& game) {
 
 bool Worker::is_evict_allowed() {
 	return true;
+}
+
+/** Check if this worker is currently employed in a building. */
+bool Worker::is_employed() {
+	PlayerImmovable* loc = get_location(owner().egbase());
+	if (loc == nullptr || loc->descr().type() < MapObjectType::BUILDING) {
+		return false;
+	}
+
+	if (get_state(taskBuildingwork) != nullptr) {
+		// Main worker has task buildingwork anywhere in the stack.
+		return true;
+	}
+
+	// Additional workers have idle task and no other task.
+	return get_stack_size() == 1 && is_idle();
 }
 
 /**
