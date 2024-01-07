@@ -580,7 +580,6 @@ struct WarehouseSiteObserver {
 
 	Widelands::Warehouse* site;
 	BuildingObserver* bo;
-	// uint32_t flag_distances_last_update;
 };
 
 struct PortSiteObserver {
