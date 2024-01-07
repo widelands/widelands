@@ -185,7 +185,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	   ports_count > 0 && shipyards_count > 0 && basic_economy_established &&
 	   (!ship_free || persistent_data->ships_utilization > 5000 ||
 	    tradeships_count < (ports_count + expeditions_in_progress) ||
-	    ports_finished_count * 2 > warships_count);
+	    game().naval_warfare_allowed() ? ports_finished_count * 2 > warships_count : false);
 
 	// goes over productionsites finds shipyards and configures them
 	for (const ProductionSiteObserver& ps_obs : productionsites) {
@@ -224,7 +224,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		}
 	}
 
-	if (ports_finished_count * 2 > warships_count &&
+	if (game().naval_warfare_allowed() && ports_finished_count * 2 > warships_count &&
 	    tradeships_count > expeditions_in_progress + ports_count / 3 + 1) {
 		warship_needed = true;
 	}
