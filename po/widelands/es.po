@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-06 02:32+0000\n"
+"POT-Creation-Date: 2024-01-08 02:35+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020-2023\n"
 "Language-Team: Spanish (http://app.transifex.com/widelands/widelands/language/es/)\n"
@@ -2672,19 +2672,19 @@ msgstr "Una vía acuática tuvo que ser destruida para hacer espacio para un nue
 msgid "A geologist found resources."
 msgstr "Un geólogo encontró recursos."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2083
+#: ../../src/logic/map_objects/tribes/worker.cc:2098
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
 msgstr "Tu %s no encuentra un camino a casa, probablemente muera."
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
-#: ../../src/logic/map_objects/tribes/worker.cc:2088
+#: ../../src/logic/map_objects/tribes/worker.cc:2103
 #: ../../src/wui/productionsitewindow.cc:107
 #: ../../src/wui/productionsitewindow.cc:124
 msgid "Worker"
 msgstr "Trabajador"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2089
+#: ../../src/logic/map_objects/tribes/worker.cc:2104
 msgid "Worker got lost!"
 msgstr "¡Un trabajador se ha perdido!"
 
