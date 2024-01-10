@@ -160,10 +160,10 @@ public:
 	void reset_zoom();
 	// Zoom in a bit
 	void increase_zoom();
-	// Zoom to max
-	void zoom_to_max();
 	// Zoom out a bit
 	void decrease_zoom();
+  // Zoom to max
+	void zoom_to_max();
 	// Zoom to min
 	void zoom_to_min();
 
