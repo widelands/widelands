@@ -174,9 +174,15 @@ int LuaPlayer::get_allowed_buildings(lua_State* L) {
       (RO) A :class:`table` of :class:`objectives <wl.game.Objective>` in form of
       ``{objectivename=objective}``. You can change the objectives in this :class:`table`
       and it will be reflected in the game. To add a new item, use :meth:`add_objective`.
+
+      .. note:: The actual implementation of objectives has a single list that is shared
+         by all players, so it's not possible to have different objectives for different
+         players.
 */
 int LuaPlayer::get_objectives(lua_State* L) {
 	lua_newtable(L);
+	// TODO(tothxa): either make each player have their own objectives vector, or move this
+	//               to LuaMap
 	for (const auto& pair : get_egbase(L).map().objectives()) {
 		lua_pushstring(L, pair.second->name());
 		to_lua<LuaObjective>(L, new LuaObjective(*pair.second));
@@ -658,10 +664,17 @@ int LuaPlayer::forbid_buildings(lua_State* L) {
 /* RST
    .. method:: add_objective(name, title, body)
 
-      Add a new :class:`~wl.game.Objective` for this player. Will report an error, if an
-      Objective with the same name is already registered - note that the names
-      for the objectives are shared internally for all players, so not even
-      another player can have an objective with the same name.
+      Add a new :class:`~wl.game.Objective` for the game. Will report an error, if an objective
+      with the same name is already registered.
+
+      .. note:: Objectives are shared by all players, so it's not possible to have
+         different objectives for different players.
+
+         This function has two kind of users currently:
+
+         1. Scenarios where the objective is only relevant for the interactive player,
+            but it doesn't matter that it's also set for the AI players
+         2. Win conditions where it is assumed that all players have the same goal
 
       :arg name: The name of the objective. Has to be unique.
       :type name: :class:`string`
@@ -674,6 +687,9 @@ int LuaPlayer::forbid_buildings(lua_State* L) {
       :rtype: :class:`wl.game.Objective`
 */
 int LuaPlayer::add_objective(lua_State* L) {
+	// TODO(tothxa): either make each player have their own objectives vector, or move this
+	//               to LuaMap
+
 	Widelands::Game& game = get_game(L);
 
 	Widelands::Map::Objectives* objectives = game.mutable_map()->mutable_objectives();
@@ -1251,10 +1267,10 @@ Objective
 
 .. class:: Objective
 
-   This represents an Objective, a goal for the player in the game. This is
+   This represents an Objective, a goal for the player(s) in the game. This is
    mainly for displaying to the user, but each objective also has an attribute
    :attr:`done` which can be set by the scripter to define if this is done. Use
-   :attr:`visible` to hide it from the user.
+   :attr:`visible` to hide it from the users.
 */
 const char LuaObjective::className[] = "Objective";
 const MethodType<LuaObjective> LuaObjective::Methods[] = {
@@ -1287,6 +1303,9 @@ void LuaObjective::__unpersist(lua_State* L) {
 
       (RO) The internal name. You can reference this object via
       :attr:`wl.game.Player.objectives` with :attr:`name` as key.
+
+      .. note:: Although objectives are accessible through :class:`~wl.game.Player`, they are
+         actually shared by all players.
 */
 int LuaObjective::get_name(lua_State* L) {
 	const Widelands::Objective& o = get(L, get_game(L));
@@ -1344,7 +1363,7 @@ int LuaObjective::set_visible(lua_State* L) {
    .. attribute:: done
 
       (RW) Defines if this objective is already fulfilled. If done is
-      :const:`true`, the objective will not be shown to the user, no matter what
+      :const:`true`, the objective will not be shown to the users, no matter what
       :attr:`visible` is set to. A savegame will be created when this attribute
       is changed to :const:`true`.
 
