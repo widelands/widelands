@@ -162,7 +162,7 @@ public:
 	void increase_zoom();
 	// Zoom out a bit
 	void decrease_zoom();
-  // Zoom to max
+	// Zoom to max
 	void zoom_to_max();
 	// Zoom to min
 	void zoom_to_min();

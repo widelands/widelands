@@ -774,7 +774,7 @@ bool MapView::handle_key(bool down, SDL_Keysym code) {
 		}
 		return true;
 	}
-  if (matches_shortcut(KeyboardShortcut::kCommonZoomMax, code)) {
+	if (matches_shortcut(KeyboardShortcut::kCommonZoomMax, code)) {
 		if (!is_animating()) {
 			zoom_to_max();
 		}
