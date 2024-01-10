@@ -60,12 +60,12 @@ jobs:
           inst_windows_msvc:
             - *installer
             # doc/** maybe for some installers TODO(unknown)
-            - 'utils/win32/**' # utils\win32\innosetup\Widelands.iss used by build_windows.yaml
+            - 'utils/windows/**' # utils\windows\innosetup\Widelands.iss used by build_windows_msvc.yaml
             - '.github/scripts/vcpkg_ref'
             - '.github/workflows/build_windows_msvc.yaml' # calls install-dependencies.sh
           inst_windows:
             - *installer
-            - 'utils/win32/**' # utils\win32\innosetup\Widelands.iss used by build_windows.yaml
+            - 'utils/windows/**' # utils\windows\innosetup\Widelands.iss used by build_windows.yaml
             - '.github/workflows/build_windows.yaml' # calls install-dependencies.sh
           inst_macos:
             - *installer
