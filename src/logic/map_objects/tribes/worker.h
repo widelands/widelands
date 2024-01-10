@@ -180,6 +180,7 @@ public:
 
 protected:
 	virtual bool is_evict_allowed();
+	virtual bool is_employed();
 	virtual void draw_inner(const EditorGameBase& game,
 	                        const Vector2f& point_on_dst,
 	                        const Widelands::Coords& coords,
