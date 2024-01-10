@@ -45,12 +45,11 @@ private:
 		const std::string label;
 		const std::vector<std::string> values;
 		const bool localize_values;
-
 	};
 	std::vector<TechInfo::Entry> entries_;
 
-	void add_plain_entry(
-	   const std::string& label, const std::string& single_value, bool localize_value);
+	void
+	add_plain_entry(const std::string& label, const std::string& single_value, bool localize_value);
 };
 
 /*** The UI presentation ***/

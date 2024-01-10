@@ -49,7 +49,8 @@ std::pair<std::vector<std::string>, std::vector<std::string>> list_addons() {
 	return make_pair(enabled, disabled);
 }
 
-std::string merge_list(const std::vector<std::string>& list, const std::string& separator,
+std::string merge_list(const std::vector<std::string>& list,
+                       const std::string& separator,
                        const bool localize) {
 	std::string rv;
 	auto it = list.begin();
@@ -92,8 +93,7 @@ TechInfo::TechInfo(const TechInfo::Type t) {
 #endif
 	add_plain_entry(gettext_noop("Operating System:"), os, true);
 	add_plain_entry(gettext_noop("Compiled with SDL version:"),
-	                format("%d.%d.%d", SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL),
-                   false);
+	                format("%d.%d.%d", SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL), false);
 
 	SDL_version sdl_current = {0, 0, 0};
 	SDL_GetVersion(&sdl_current);
@@ -104,11 +104,13 @@ TechInfo::TechInfo(const TechInfo::Type t) {
 		                false);
 	}
 
-	add_plain_entry(gettext_noop("SDL video driver:"), std::string(SDL_GetCurrentVideoDriver()), false);
+	add_plain_entry(
+	   gettext_noop("SDL video driver:"), std::string(SDL_GetCurrentVideoDriver()), false);
 
 	// Doesn't hurt if we report it in About too
 	if (get_mousewheel_option_bool(MousewheelOptionID::kInvertedXDetected)) {
-		add_plain_entry(gettext_noop("SDL horizontal scroll:"), gettext_noop("assuming inverted"), true);
+		add_plain_entry(
+		   gettext_noop("SDL horizontal scroll:"), gettext_noop("assuming inverted"), true);
 	}
 
 	if (t != TechInfo::Type::kMousewheelReport) {
@@ -117,17 +119,20 @@ TechInfo::TechInfo(const TechInfo::Type t) {
 		add_plain_entry(gettext_noop("Configuration File:"), get_config_file(), false);
 		add_plain_entry(gettext_noop("Data Directory:"), WLApplication::get().get_datadir(), false);
 		add_plain_entry(gettext_noop("Locale Directory:"), i18n::get_localedir(), false);
-		add_plain_entry(gettext_noop("Executable Directory:"), get_executable_directory(false), false);
+		add_plain_entry(
+		   gettext_noop("Executable Directory:"), get_executable_directory(false), false);
 
 		auto addons_lists = list_addons();
-		entries_.emplace_back(Entry {gettext_noop("Enabled Add-Ons:"), addons_lists.first, false});
-		entries_.emplace_back(Entry {gettext_noop("Inactive Installed Add-Ons:"), addons_lists.second, false});
+		entries_.emplace_back(Entry{gettext_noop("Enabled Add-Ons:"), addons_lists.first, false});
+		entries_.emplace_back(
+		   Entry{gettext_noop("Inactive Installed Add-Ons:"), addons_lists.second, false});
 	}
 }
 
-inline void TechInfo::add_plain_entry(
-   const std::string& label, const std::string& single_value, const bool localize_value) {
-	entries_.emplace_back(Entry {label, std::vector<std::string> {single_value}, localize_value});
+inline void TechInfo::add_plain_entry(const std::string& label,
+                                      const std::string& single_value,
+                                      const bool localize_value) {
+	entries_.emplace_back(Entry{label, std::vector<std::string>{single_value}, localize_value});
 }
 
 std::string TechInfo::get_markdown() const {
@@ -148,8 +153,10 @@ std::string TechInfo::get_richtext() const {
 	// we always add an empty first line.
 	const std::string first_wrapping = rtl ? "&nbsp;<br>\n" : "&nbsp; ";
 
-	const UI::FontStyleInfo& label_font = g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading);
-	const UI::FontStyleInfo& value_font = g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph);
+	const UI::FontStyleInfo& label_font =
+	   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading);
+	const UI::FontStyleInfo& value_font =
+	   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph);
 
 	std::string report = "<rt>\n";
 	for (const Entry& entry : entries_) {
@@ -168,9 +175,10 @@ std::string TechInfo::get_richtext() const {
 
 		// Check for long first values
 		bool wrap = !entry.values.empty() &&
-		               text_width(localized_label, label_font) +
-		               // Only some short ones are translatable, let's keep it simple...
-		               text_width(entry.values[0], value_font) > kMinWidth;
+		            text_width(localized_label, label_font) +
+		                  // Only some short ones are translatable, let's keep it simple...
+		                  text_width(entry.values[0], value_font) >
+		               kMinWidth;
 
 		// TODO(tothxa): text_width() is not reliable for RTL (bidi?) (make wrap const above if fixed)
 		if (rtl && !entry.values.empty() && !wrap) {
@@ -184,7 +192,8 @@ std::string TechInfo::get_richtext() const {
 		values += merge_list(entry.values, "<br>\n", entry.localize_values);
 
 		// The content is a plain paragraph that can flow around the label.
-		report += format("<p align=right>%s<vspace gap=%d></p>", value_font.as_font_tag(values), kSpacing);
+		report +=
+		   format("<p align=right>%s<vspace gap=%d></p>", value_font.as_font_tag(values), kSpacing);
 
 		// End the <div> of the entry
 		report += "</div>\n";
