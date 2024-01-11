@@ -424,7 +424,33 @@ def main():
     discover_scenario_tests(args.regexp, suite)
     discover_editor_tests(args.regexp, suite)
 
-    return unittest.TextTestRunner(verbosity=2).run(suite).wasSuccessful()
+    result = unittest.TextTestRunner(verbosity=2).run(suite)
+
+    to_check = {
+        "Failed tests": result.failures,
+        "Error in test": result.errors,  # error in python code, should not happend
+        "Unexpected in test": result.unexpectedSuccesses,  # we have no expected failure yet
+        "Skipped tests": result.skipped,
+    }
+    for reason, issues in iteritems(to_check):
+        if len(issues) > 0:
+            out(f"{ reason }:\n")
+            for issue in issues:
+                info = ""
+                if isinstance(issue, (list, tuple)):
+                    p_issue = issue[0]
+                    initial_line = True  # title of traceback
+                    for line in issue[1].split("\n"):
+                        if not initial_line and line[0] != " ":
+                            # first line which starts with no space: AssertionXxx or ErrorXxx
+                            info = "    \t" + line.split(".", 1)[0] + "."
+                            break
+                        initial_line = False
+                else:  # unexpectedSuccess has no additional info
+                    p_issue = issue
+                out(f" - {p_issue}{info}\n")
+
+    return result.wasSuccessful()
 
 if __name__ == '__main__':
     sys.exit(0 if main() else 1)
