@@ -1,12 +1,11 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: utf-8
 
+import configparser
 from glob import glob
 import os.path
 import re
 import sys
-
-import iniparse
 
 # This script checks that all starting conditions of all tribes and all
 # win conditions are used in the regression test suite.
@@ -78,30 +77,30 @@ unknown_sc = dict()
 
 # Collect uses
 for test in tests:
-    with open(test, 'r', encoding = 'utf-8') as fh:
-        cfg = iniparse.INIConfig(fh)
+    cfg = configparser.ConfigParser()
+    cfg.read(test)
 
-    for s in cfg:
+    for s in cfg.sections():
         section = cfg[s]
 
         # Test's win condition
         if s == 'global':
-            if not section.win_condition in win_conditions:
-                unknown_wc.append(section.win_condition)
+            if not section["win_condition"] in win_conditions:
+                unknown_wc.append(section["win_condition"])
             else:
-                win_conditions[section.win_condition] = True
+                win_conditions[section["win_condition"]] = True
 
         # Each player's start condition
-        if s.startswith('player_') and section.closed != '"true"':
-            if not section.tribe in start_conditions:
-                unknown_tribe.append(section.tribe)
+        if s.startswith('player_') and section["closed"] != '"true"':
+            if not section["tribe"] in start_conditions:
+                unknown_tribe.append(section["tribe"])
             else:
-                if not section.init in start_conditions[section.tribe]:
-                    if not section.tribe in unknown_sc:
-                        unknown_sc[section.tribe] = []
-                    unknown_sc[section.tribe].append(section.init)
+                if not section["init"] in start_conditions[section["tribe"]]:
+                    if not section["tribe"] in unknown_sc:
+                        unknown_sc[section["tribe"]] = []
+                    unknown_sc[section["tribe"]].append(section["init"])
                 else:
-                    start_conditions[section.tribe][section.init] = True
+                    start_conditions[section["tribe"]][section["init"]] = True
 
 # Check unused
 unused_wc = [wc for wc in win_conditions if not win_conditions[wc]]
