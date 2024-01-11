@@ -5,10 +5,10 @@ include "test/scripting/check_game_end.lua"
 winner = 3
 
 run(function()
-  sleep(10000)
+  sleep(8000)
 
   for i,p in ipairs(game.players) do
-    sleep(1000)
+    sleep(2000)
     if i ~= winner then
       print("Destroying HQ of " .. p.name)
       b = p:get_buildings(p.tribe.name .. "_headquarters")

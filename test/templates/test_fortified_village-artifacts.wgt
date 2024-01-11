@@ -1,5 +1,5 @@
 [global]
-map="test/templates/artifacts.wmf"
+map="maps/Wisent_Valley.wmf"
 multiplayer="true"
 interactive_player="0"
 

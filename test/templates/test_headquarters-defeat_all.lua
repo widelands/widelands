@@ -6,10 +6,10 @@ losers = {3, 2, 1}
 winners = {4, 5}
 
 run(function()
-  sleep(20000)
+  sleep(8000)
 
   for i,n in ipairs(losers) do
-    sleep(3000)
+    sleep(2000)
     p = game.players[n]
     print("Destroying HQ of " .. p.name)
     b = p:get_buildings(p.tribe.name .. "_headquarters")
