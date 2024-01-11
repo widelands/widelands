@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-08 02:35+0000\n"
+"POT-Creation-Date: 2024-01-11 02:36+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022-2024\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
@@ -3929,7 +3929,7 @@ msgstr "%1$s<br>(%2$s)"
 
 #: ../../src/ui_basic/window.cc:101 ../../src/ui_fsmenu/about.cc:41
 #: ../../src/ui_fsmenu/crash_report.cc:70
-#: ../../src/ui_fsmenu/crash_report.cc:164
+#: ../../src/ui_fsmenu/crash_report.cc:160
 #: ../../src/ui_fsmenu/mousewheel_report.cc:74
 #: ../../src/wui/watchwindow.cc:110
 msgid "Close"
@@ -3959,7 +3959,7 @@ msgstr "О Widelands"
 msgid "Lua Error"
 msgstr "Ошибка сценария Lua"
 
-#: ../../src/ui_fsmenu/about.cc:59 ../../src/ui_fsmenu/tech_info.cc:189
+#: ../../src/ui_fsmenu/about.cc:59 ../../src/ui_fsmenu/tech_info.cc:221
 msgid "Technical Info"
 msgstr "Технические данные"
 
@@ -4612,7 +4612,7 @@ msgid "Author:"
 msgstr "Автор: "
 
 #: ../../src/ui_fsmenu/addons/packager.cc:171
-#: ../../src/ui_fsmenu/tech_info.cc:123
+#: ../../src/ui_fsmenu/tech_info.cc:76
 msgid "Version:"
 msgstr "Версия: "
 
@@ -5510,22 +5510,22 @@ msgid "Crash Report Details"
 msgstr "Отчет о сбое подробно"
 
 #: ../../src/ui_fsmenu/crash_report.cc:61
-#: ../../src/ui_fsmenu/crash_report.cc:152
+#: ../../src/ui_fsmenu/crash_report.cc:148
 msgid "Open link"
 msgstr "Перейти по ссылке"
 
 #: ../../src/ui_fsmenu/crash_report.cc:63
-#: ../../src/ui_fsmenu/crash_report.cc:154
+#: ../../src/ui_fsmenu/crash_report.cc:150
 msgid "Copy link"
 msgstr "Скопировать ссылку"
 
 #: ../../src/ui_fsmenu/crash_report.cc:67
-#: ../../src/ui_fsmenu/crash_report.cc:159
+#: ../../src/ui_fsmenu/crash_report.cc:155
 msgid "Copy report"
 msgstr "Скопировать отчет"
 
 #: ../../src/ui_fsmenu/crash_report.cc:68
-#: ../../src/ui_fsmenu/crash_report.cc:159
+#: ../../src/ui_fsmenu/crash_report.cc:155
 msgid "Copy the full report to the clipboard"
 msgstr "Скопировать полный отчет в буфер обмена"
 
@@ -5533,7 +5533,7 @@ msgstr "Скопировать полный отчет в буфер обмен�
 msgid "Crash Report"
 msgstr "Отчет о сбое"
 
-#: ../../src/ui_fsmenu/crash_report.cc:135
+#: ../../src/ui_fsmenu/crash_report.cc:131
 #, c-format
 msgid ""
 "It looks like Widelands crashed the last time you ran it, but a backtrace "
@@ -5543,15 +5543,15 @@ msgid ""
 "the problem."
 msgstr "Похоже, что во время последнего запуска Widelands произошел сбой, при этом был автоматически сгенерирован отчет об ошибках для отладки. Пожалуйста, отправьте отчет вместе с описанием ваших действий в игре, производившихся перед сбоем, команде разработчиков Widelands по адресу %s, чтобы мы могли исправить проблему."
 
-#: ../../src/ui_fsmenu/crash_report.cc:145
+#: ../../src/ui_fsmenu/crash_report.cc:141
 msgid "Show details…"
 msgstr "Показать подробности..."
 
-#: ../../src/ui_fsmenu/crash_report.cc:145
+#: ../../src/ui_fsmenu/crash_report.cc:141
 msgid "View the detailed crash report"
 msgstr "Просмотреть подробный отчет о сбое"
 
-#: ../../src/ui_fsmenu/crash_report.cc:162
+#: ../../src/ui_fsmenu/crash_report.cc:158
 msgid "Remind me later"
 msgstr "Напомнить позже"
 
@@ -6936,95 +6936,95 @@ msgstr "Авторы"
 msgid "You"
 msgstr "Вы"
 
-#: ../../src/ui_fsmenu/tech_info.cc:127
+#: ../../src/ui_fsmenu/tech_info.cc:80
 msgid "MacOS"
 msgstr "MacOS"
 
-#: ../../src/ui_fsmenu/tech_info.cc:129
+#: ../../src/ui_fsmenu/tech_info.cc:82
 msgid "Windows (64 bit)"
 msgstr "Windows (64 bit)"
 
-#: ../../src/ui_fsmenu/tech_info.cc:131
+#: ../../src/ui_fsmenu/tech_info.cc:84
 msgid "Windows (32 bit)"
 msgstr "Windows (32 bit)"
 
-#: ../../src/ui_fsmenu/tech_info.cc:133
+#: ../../src/ui_fsmenu/tech_info.cc:86
 msgid "Linux"
 msgstr "Linux"
 
-#: ../../src/ui_fsmenu/tech_info.cc:135
+#: ../../src/ui_fsmenu/tech_info.cc:88
 msgid "FreeBSD"
 msgstr "FreeBSD"
 
-#: ../../src/ui_fsmenu/tech_info.cc:137
+#: ../../src/ui_fsmenu/tech_info.cc:90
 msgid "Unix"
 msgstr "Unix"
 
-#: ../../src/ui_fsmenu/tech_info.cc:139
+#: ../../src/ui_fsmenu/tech_info.cc:92
 msgid "Unknown"
 msgstr "Неопределена"
 
-#: ../../src/ui_fsmenu/tech_info.cc:141
+#: ../../src/ui_fsmenu/tech_info.cc:94
 msgid "Operating System:"
 msgstr "ОС:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:142
+#: ../../src/ui_fsmenu/tech_info.cc:95
 msgid "Compiled with SDL version:"
 msgstr "Собрано с SDL версии:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:149
+#: ../../src/ui_fsmenu/tech_info.cc:102
 msgid "Using SDL version:"
 msgstr "Используется версия SDL:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:154
+#: ../../src/ui_fsmenu/tech_info.cc:108
 msgid "SDL video driver:"
 msgstr "Видео драйвер SDL:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:158
+#: ../../src/ui_fsmenu/tech_info.cc:113
 msgid "SDL horizontal scroll:"
 msgstr "Горизонтальная прокрутка SDL:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:159
+#: ../../src/ui_fsmenu/tech_info.cc:113
 msgid "assuming inverted"
 msgstr "предположительно инвертировано"
 
-#: ../../src/ui_fsmenu/tech_info.cc:163
+#: ../../src/ui_fsmenu/tech_info.cc:117
 msgid "Locale:"
 msgstr "Язык:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:164
+#: ../../src/ui_fsmenu/tech_info.cc:118
 msgid "Home Directory:"
 msgstr "Домашний каталог:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:165
+#: ../../src/ui_fsmenu/tech_info.cc:119
 msgid "Configuration File:"
 msgstr "Файл настроек:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:166
+#: ../../src/ui_fsmenu/tech_info.cc:120
 msgid "Data Directory:"
 msgstr "Каталог с данными:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:167
+#: ../../src/ui_fsmenu/tech_info.cc:121
 msgid "Locale Directory:"
 msgstr "Каталог с переводами:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:169
+#: ../../src/ui_fsmenu/tech_info.cc:123
 msgid "Executable Directory:"
 msgstr "Каталог с программами:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:172
+#: ../../src/ui_fsmenu/tech_info.cc:126
 msgid "Enabled Add-Ons:"
 msgstr "Включенные дополнения."
 
-#: ../../src/ui_fsmenu/tech_info.cc:174
+#: ../../src/ui_fsmenu/tech_info.cc:128
 msgid "Inactive Installed Add-Ons:"
 msgstr "Отключенные установленные дополнения:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:233
+#: ../../src/ui_fsmenu/tech_info.cc:238
 msgid "Copy"
 msgstr "Копировать"
 
-#: ../../src/ui_fsmenu/tech_info.cc:234
+#: ../../src/ui_fsmenu/tech_info.cc:239
 msgid "Copy the technical report to the clipboard"
 msgstr "Скопировать тех.отчёт в буфер обмена"
 
