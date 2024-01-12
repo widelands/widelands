@@ -250,7 +250,7 @@ public:
 	                        const std::string& icon,
 	                        const std::string& label,
 	                        const std::string& tt);
-	void add_plugin_timer(const std::string& action, uint32_t interval);
+	void add_plugin_timer(const std::string& action, uint32_t interval, bool failsafe);
 
 	UI::Box* toolbar();
 	// Sets the toolbar's position to the bottom middle and configures its background images
@@ -272,7 +272,7 @@ protected:
 	void mapview_menu_selected(MapviewMenuEntry entry);
 
 	void add_plugin_menu();
-	bool plugin_action(const std::string& action);
+	bool plugin_action(const std::string& action, bool failsafe);
 
 	/// Adds a toolbar button to the toolbar
 	/// \param image_basename:      File path for button image starting from 'images' and without
@@ -458,12 +458,14 @@ private:
 
 	struct PluginTimer {
 		PluginTimer() = default;
-		explicit PluginTimer(const std::string& a, uint32_t i) : action(a), interval(i) {
+		explicit PluginTimer(const std::string& a, uint32_t i, bool f)
+		   : action(a), interval(i), failsafe(f) {
 		}
 
 		std::string action;
 		uint32_t interval{0U};
 		uint32_t next_run{0U};
+		bool failsafe{false};
 	};
 	std::vector<PluginTimer> plugin_timers_;
 
