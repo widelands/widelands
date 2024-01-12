@@ -458,7 +458,8 @@ private:
 
 	struct PluginTimer {
 		PluginTimer() = default;
-		explicit PluginTimer(const std::string& a, uint32_t i, bool f) : action(a), interval(i), failsafe(f) {
+		explicit PluginTimer(const std::string& a, uint32_t i, bool f)
+		   : action(a), interval(i), failsafe(f) {
 		}
 
 		std::string action;

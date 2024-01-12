@@ -284,14 +284,17 @@ UI::Box* InteractiveBase::toolbar() {
 	return &toolbar_.box;
 }
 
-void InteractiveBase::add_plugin_timer(const std::string& action, uint32_t interval, bool failsafe) {
+void InteractiveBase::add_plugin_timer(const std::string& action,
+                                       uint32_t interval,
+                                       bool failsafe) {
 	plugin_timers_.emplace_back(action, interval, failsafe);
 }
 
 void InteractiveBase::add_plugin_menu() {
 	plugins_dropdown_.set_image(g_image_cache->get("images/plugin.png"));
 	toolbar()->add(&plugins_dropdown_);
-	plugins_dropdown_.selected.connect([this] { plugin_action(plugins_dropdown_.get_selected(), true); });
+	plugins_dropdown_.selected.connect(
+	   [this] { plugin_action(plugins_dropdown_.get_selected(), true); });
 }
 
 bool InteractiveBase::plugin_action(const std::string& action, bool failsafe) {
