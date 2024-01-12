@@ -35,14 +35,10 @@
 --    :returns: :const:`nil`
 function run(func, ...)
    local c = coroutine.create(func)
-   local success, sleeptime, time_type = coroutine.resume(c, ...)
+   local success, sleeptime = coroutine.resume(c, ...)
    if success then
       if coroutine.status(c) ~= "dead" then
-         if time_type == nil then
-            wl.Game():launch_coroutine(c, sleeptime)
-         else
-            wl.Game():launch_coroutine(c, sleeptime, time_type)
-         end
+         wl.Game():launch_coroutine(c, sleeptime)
       end
    else
       error(sleeptime)
@@ -53,7 +49,7 @@ end
 -- .. function:: sleep(time)
 --
 --    This must be called inside a coroutine. This will put the coroutine to
---    sleep. Widelands will wake it after the given amount of game time.
+--    sleep. Widelands will wake it after the given amount of time.
 --
 --    :arg time: time to sleep in ms
 --    :type time: :class:`integer`
@@ -61,22 +57,6 @@ end
 --    :returns: :const:`nil`
 function sleep(time)
    coroutine.yield(wl.Game().time + time)
-end
-
--- RST
--- .. function:: realtime_sleep(time)
---
---    This must be called inside a coroutine. This will put the coroutine to
---    sleep. Widelands will wake it after the given amount of real time.
---    Do not use in game or scenario logic scripts. The coroutine will not be
---    stored in savegames. Not sync-safe.
---
---    :arg time: time to sleep in ms
---    :type time: :class:`integer`
---
---    :returns: :const:`nil`
-function realtime_sleep(time)
-   coroutine.yield(time, "realtimedelta")
 end
 
 -- RST

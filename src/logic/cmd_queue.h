@@ -130,16 +130,11 @@ public:
 	/// Add a command to the queue. Takes ownership.
 	void enqueue(Command*);
 
-	/// Add a command to the realtime queue. The command's due time is interpreted as real time.
-	/// Takes ownership. Not sync-safe.
-	void enqueue_realtime(Command*);
-
 	// Run all commands scheduled for the next interval milliseconds, and update
 	// the internal time as well. the game_time_var represents the current game
 	// time, which we update and with which we must mess around (to run all
-	// queued cmd.s) and which we update (add the interval).
-	// Also run all commands scheduled in real time until real_time.
-	void run_queue(const Duration& interval, Time& game_time_var, const Time& real_time);
+	// queued cmd.s) and which we update (add the interval)
+	void run_queue(const Duration& interval, Time& game_time_var);
 
 	void flush();  // delete all commands in the queue now
 
@@ -149,9 +144,6 @@ private:
 	uint32_t ncmds_{0};
 	using CommandsContainer = std::vector<std::priority_queue<CmdItem>>;
 	CommandsContainer cmds_;
-
-	// This one shouldn't grow big.
-	std::priority_queue<CmdItem> realtime_cmds_;
 };
 }  // namespace Widelands
 

@@ -869,8 +869,7 @@ void Game::think() {
 		// computer and the fps if and when the game is saved - this is very bad
 		// for scenarios and even worse for the regression suite (which relies on
 		// the timings of savings.
-		cmdqueue().run_queue(
-		   Duration(ctrl_->get_frametime()), get_gametime_pointer(), Time(SDL_GetTicks()));
+		cmdqueue().run_queue(Duration(ctrl_->get_frametime()), get_gametime_pointer());
 
 		// check if autosave is needed
 		savehandler_.think(*this);
@@ -1042,13 +1041,6 @@ void Game::enqueue_command(Command* const cmd) {
 		}
 	}
 	cmdqueue().enqueue(cmd);
-}
-
-void Game::enqueue_command_realtime(Command* const cmd) {
-	if (game_controller()->get_game_type() != GameController::GameType::kSingleplayer) {
-		log_warn("Enqueuing a command with due time in real time. Expect desync on execution!");
-	}
-	cmdqueue_.enqueue_realtime(cmd);
 }
 
 // we might want to make these inlines:

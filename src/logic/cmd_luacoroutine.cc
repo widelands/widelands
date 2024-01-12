@@ -37,24 +37,9 @@ namespace Widelands {
 void CmdLuaCoroutine::execute(Game& game) {
 	try {
 		int rv = cr_->resume();
+		const uint32_t sleeptime = cr_->pop_uint32();
 		if (rv == LuaCoroutine::YIELDED) {
-			if (cr_->n_returned() == 1) {
-				const uint32_t sleeptime = cr_->pop_uint32();
-				game.enqueue_command(new Widelands::CmdLuaCoroutine(Time(sleeptime), std::move(cr_)));
-			} else if (cr_->n_returned() == 2) {
-				const std::string extra_arg = cr_->pop_string();
-				const uint32_t sleeptime = cr_->pop_uint32();
-				if (extra_arg != "realtimedelta") {
-					throw LuaError(format("coroutine.yield() only accepts \"realtimedelta\" as second "
-					                      "argument, got \"%s\"",
-					                      extra_arg));
-				}
-				game.enqueue_command_realtime(
-				   new Widelands::CmdLuaCoroutine(Time(SDL_GetTicks() + sleeptime), std::move(cr_)));
-			} else {
-				throw LuaError(format(
-				   "coroutine.yield() only accepts 1 or 2 arguments, got %d", cr_->n_returned()));
-			}
+			game.enqueue_command(new Widelands::CmdLuaCoroutine(Time(sleeptime), std::move(cr_)));
 		} else if (rv == LuaCoroutine::DONE) {
 			cr_.reset();
 		}

@@ -23,7 +23,6 @@
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game.h"
-#include "logic/game_controller.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/player.h"
@@ -45,7 +44,7 @@ CmdQueue::~CmdQueue() {
 }
 
 /*
- * flushes all commands from the queue. Needed for
+ * flushs all commands from the queue. Needed for
  * game loading (while in game)
  */
 // TODO(unknown): ...but game loading while in game is not possible!
@@ -64,17 +63,11 @@ void CmdQueue::flush() {
 		++cbucket;
 	}
 	assert(ncmds_ == 0);
-
-	while (!realtime_cmds_.empty()) {
-		Command* cmd = realtime_cmds_.top().cmd;
-		realtime_cmds_.pop();
-		delete cmd;
-	}
 }
 
 /*
 ===============
-Insert a new command into the queue; it will be executed at the given gametime
+Insert a new command into the queue; it will be executed at the given time
 ===============
 */
 void CmdQueue::enqueue(Command* const cmd) {
@@ -101,27 +94,7 @@ void CmdQueue::enqueue(Command* const cmd) {
 	++ncmds_;
 }
 
-// Insert a new command into the realtime queue; it will be executed at the given real time
-void CmdQueue::enqueue_realtime(Command* const cmd) {
-	CmdItem ci;
-
-	ci.cmd = cmd;
-
-	if (upcast(PlayerCommand, plcmd, cmd)) {
-		ci.category = cat_playercommand;
-	} else if (dynamic_cast<GameLogicCommand*>(cmd) != nullptr) {
-		ci.category = cat_gamelogic;
-	} else {
-		ci.category = cat_nongamelogic;
-	}
-
-	// Ordering doesn't matter, realtime scheduling is not sync-safe anyway.
-	ci.serial = 0;
-
-	realtime_cmds_.push(ci);
-}
-
-void CmdQueue::run_queue(const Duration& interval, Time& game_time_var, const Time& real_time) {
+void CmdQueue::run_queue(const Duration& interval, Time& game_time_var) {
 	const Time final_time = game_time_var + interval;
 
 	while (game_time_var < final_time) {
@@ -153,20 +126,6 @@ void CmdQueue::run_queue(const Duration& interval, Time& game_time_var, const Ti
 	}
 
 	assert(final_time == game_time_var);
-
-	// Now the realtime scheduled commands
-	while (!realtime_cmds_.empty()) {
-		Command& c = *realtime_cmds_.top().cmd;
-		if (real_time < c.duetime()) {
-			break;
-		}
-		realtime_cmds_.pop();
-		if (game_.game_controller()->get_game_type() != GameController::GameType::kSingleplayer) {
-			log_warn("Executing a realtime command. Expect desync!");
-		}
-		c.execute(game_);
-		delete &c;
-	}
 }
 
 constexpr uint16_t kCurrentPacketVersion = 1;
