@@ -85,22 +85,22 @@ for test in tests:
 
         # Test's win condition
         if s == 'global':
-            if not section["win_condition"] in win_conditions:
-                unknown_wc.append(section["win_condition"])
+            if not section['win_condition'] in win_conditions:
+                unknown_wc.append(section['win_condition'])
             else:
-                win_conditions[section["win_condition"]] = True
+                win_conditions[section['win_condition']] = True
 
         # Each player's start condition
-        if s.startswith('player_') and section["closed"] != '"true"':
-            if not section["tribe"] in start_conditions:
-                unknown_tribe.append(section["tribe"])
+        if s.startswith('player_') and section['closed'] != '"true"':
+            if not section['tribe'] in start_conditions:
+                unknown_tribe.append(section['tribe'])
             else:
-                if not section["init"] in start_conditions[section["tribe"]]:
-                    if not section["tribe"] in unknown_sc:
-                        unknown_sc[section["tribe"]] = []
-                    unknown_sc[section["tribe"]].append(section["init"])
+                if not section['init'] in start_conditions[section['tribe']]:
+                    if not section['tribe'] in unknown_sc:
+                        unknown_sc[section['tribe']] = []
+                    unknown_sc[section['tribe']].append(section['init'])
                 else:
-                    start_conditions[section["tribe"]][section["init"]] = True
+                    start_conditions[section['tribe']][section['init']] = True
 
 # Check unused
 unused_wc = [wc for wc in win_conditions if not win_conditions[wc]]
