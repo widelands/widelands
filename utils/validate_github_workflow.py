@@ -1,7 +1,6 @@
 #!/bin/env python3
 
-'''
-validates github workflow files
+"""Validates github workflow files.
 
 - checks if the called local workflows exist
 - checks if the files checked for changes (by https://github.com/dorny/paths-filter) exist
@@ -9,7 +8,7 @@ validates github workflow files
 
 For a troughout test the author recommends https://github.com/rhysd/actionlint/
 this tool just does some additional tests.
-'''
+"""
 
 import fnmatch
 import glob
@@ -55,7 +54,7 @@ class CheckGithubYaml:
             # check each excluded part of !(xx|yy)
             l = file.find('!(')
             r = file.rfind(')')
-            ex_parts = file[l+2:r].split("|")
+            ex_parts = file[l+2:r].split('|')
             ex_patterns = []
             for ex_part in ex_parts:
                 mfile = file[0:l] + ex_part + file[r+1:]
