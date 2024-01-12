@@ -33,7 +33,7 @@ end
 -- 2 minutes grace period
 timeout = (game.win_condition_duration + 2) * 60 * 1000
 check_interval = 2000
-pause_timeout = 2 * 60 -- 2 minutes
+pause_timeout = 2 * 6 -- 0 -- 2 minutes
 
 game_ended = false
 last_gametime = 0
@@ -54,25 +54,21 @@ function check_game_ended()
   if game_ended or game.time > timeout or pause_counter >= pause_timeout then
 
     -- Check timeout
-    if not game_ended then
-      print("ERROR: ### Game did not end in time. ###")
+    assert_true(game_ended, "## Game did not end in time. ##")
 
-    else
-      -- Check that the expected player(s) won
-      local good = true
-      if expected ~= nil then
-        for i = 1, #game.players do
-          if(expected[i] ~= game.players[i].end_result) then
-            print("ERROR: ### Wrong result for " .. game.players[i].name .. " ###")
-            good = false
-          end
+    -- Check that the expected player(s) won
+    local good = true
+    if expected ~= nil then
+      for i = 1, #game.players do
+        if(expected[i] ~= game.players[i].end_result) then
+          print("Wrong result for " .. game.players[i].name)
+          good = false
         end
       end
-
-      if good then
-        print("# All Tests passed.")
-      end
     end
+    assert_true(good, "## Game ended with wrong results. ##")
+
+    print("# All Tests passed.")
 
     mapview:close()
   end
@@ -91,7 +87,7 @@ function check_win_condition(winners)
     end
 
     -- Schedule check
-    mapview:add_plugin_timer("check_game_ended()", check_interval)
+    mapview:add_plugin_timer("check_game_ended()", check_interval, false)
 
     game.desired_speed = 100000
   end)

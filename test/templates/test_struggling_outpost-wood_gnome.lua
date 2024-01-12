@@ -32,6 +32,10 @@ run(function()
     p:conquer(f, 8)
   end
   -- Time limited win condition, let trees grow until the game ends.
+
+  -- make it time out for testing
+  sleep(2000)
+  game.desired_speed = 0
 end)
 
 check_win_condition(winner)
