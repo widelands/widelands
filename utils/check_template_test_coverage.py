@@ -78,7 +78,7 @@ no_script = []
 
 # Collect uses
 for test in tests:
-    if not os.path.isfile(test[:-3] + "lua"):
+    if not os.path.isfile(test[:-3] + 'lua'):
         no_script.append(test)
     cfg = configparser.ConfigParser()
     cfg.read(test)
