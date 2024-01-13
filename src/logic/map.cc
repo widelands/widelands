@@ -978,25 +978,37 @@ void Map::sanitize_suggested_teams() {
 			for (size_t player_index = 0; player_index < team.size();) {
 				PlayerNumber pn = team.at(player_index);  // Zero-based
 				if (pn >= nrplayers_ || used.count(pn) > 0) {
-					team.at(player_index) = team.back();
-					team.pop_back();
+					team.erase(team.begin() + player_index);
 				} else {
 					used.insert(pn);
 					++player_index;
 				}
 			}
 			if (team.empty()) {
-				stl.at(team_index) = stl.back();
-				stl.pop_back();
+				stl.erase(stl.begin() + team_index);
 			} else {
 				++team_index;
 			}
 		}
 		if (stl.empty()) {
-			suggested_teams_.at(lineup_index) = suggested_teams_.back();
-			suggested_teams_.pop_back();
+			suggested_teams_.erase(suggested_teams_.begin() + lineup_index);
 		} else {
 			++lineup_index;
+		}
+	}
+
+	for (auto it = suggested_teams_.begin(); it != suggested_teams_.end();) {
+		bool remove = false;
+		for (auto other = suggested_teams_.begin(); other != it; ++other) {
+			if (*other == *it) {
+				remove = true;
+				break;
+			}
+		}
+		if (remove) {
+			it = suggested_teams_.erase(it);
+		} else {
+			++it;
 		}
 	}
 }
