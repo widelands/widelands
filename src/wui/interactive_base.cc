@@ -284,29 +284,21 @@ UI::Box* InteractiveBase::toolbar() {
 	return &toolbar_.box;
 }
 
-void InteractiveBase::add_plugin_timer(const std::string& action,
-                                       uint32_t interval,
-                                       bool failsafe) {
-	plugin_timers_.emplace_back(action, interval, failsafe);
+void InteractiveBase::add_plugin_timer(const std::string& action, uint32_t interval) {
+	plugin_timers_.emplace_back(action, interval);
 }
 
 void InteractiveBase::add_plugin_menu() {
 	plugins_dropdown_.set_image(g_image_cache->get("images/plugin.png"));
 	toolbar()->add(&plugins_dropdown_);
-	plugins_dropdown_.selected.connect(
-	   [this] { plugin_action(plugins_dropdown_.get_selected(), true); });
+	plugins_dropdown_.selected.connect([this] { plugin_action(plugins_dropdown_.get_selected()); });
 }
 
-bool InteractiveBase::plugin_action(const std::string& action, bool failsafe) {
+bool InteractiveBase::plugin_action(const std::string& action) {
 	try {
 		egbase().lua().interpret_string(action);
 		return true;
 	} catch (const LuaError& e) {
-		if (!failsafe) {
-			log_err("FATAL: Lua error in plugin: %s", e.what());
-			throw;
-		}
-
 		log_err("Lua error in plugin: %s", e.what());
 		UI::WLMessageBox m(this, UI::WindowStyle::kWui, _("Plugin Error"),
 		                   format_l(_("Error when running plugin:\n%s"), e.what()),
@@ -983,7 +975,7 @@ void InteractiveBase::think() {
 	for (auto plugin = plugin_timers_.begin(); plugin != plugin_timers_.end();) {
 		if (time >= plugin->next_run) {
 			plugin->next_run = time + plugin->interval;
-			if (!plugin_action(plugin->action, plugin->failsafe)) {
+			if (!plugin_action(plugin->action)) {
 				// In case of an error, remove it from the queue
 				log_err("Unregistering defective plugin timer");
 				plugin = plugin_timers_.erase(plugin);

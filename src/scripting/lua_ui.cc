@@ -3903,7 +3903,7 @@ int LuaMapView::add_toolbar_plugin(lua_State* L) {
 }
 
 /* RST
-   .. method:: add_plugin_timer(action, interval[, failsafe=true])
+   .. method:: add_plugin_timer(action, interval)
 
       .. versionadded:: 1.2
 
@@ -3913,20 +3913,16 @@ int LuaMapView::add_toolbar_plugin(lua_State* L) {
       :type action: :class:`string`
       :arg interval: The interval in milliseconds realtime in which the code will be invoked.
       :type interval: :class:`int`
-      :arg failsafe: In event of an error, an error message is shown and the timer is removed.
-         If this is set to :const:`false`, the game will be aborted with no error handling instead.
-      :type failsafe: :class:`boolean`
 */
 int LuaMapView::add_plugin_timer(lua_State* L) {
 	std::string action = luaL_checkstring(L, 2);
 	uint32_t interval = luaL_checkuint32(L, 3);
-	bool failsafe = lua_gettop(L) < 4 || luaL_checkboolean(L, 4);
 
 	if (interval == 0) {
 		report_error(L, "Timer interval must be non-zero");
 	}
 
-	get_egbase(L).get_ibase()->add_plugin_timer(action, interval, failsafe);
+	get_egbase(L).get_ibase()->add_plugin_timer(action, interval);
 	return 0;
 }
 
