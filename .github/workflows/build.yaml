@@ -22,6 +22,11 @@ jobs:
       inst_macos: ${{ steps.changed_files.outputs.inst_macos }}
       appimage: ${{ steps.changed_files.outputs.appimage }}
     steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      if: github.ref == 'refs/heads/master'
+      with:
+        fetch-depth: 1
     - name: Check for changed files
       uses: dorny/paths-filter@v2
       id: changed_files
@@ -179,7 +184,8 @@ jobs:
   # (see https://github.com/actions/runner/issues/952 and https://github.com/orgs/community/discussions/9141)
   summary:
     name: CI Results Summary
-    needs: [testsuite, windows, macos, appimage]  # We do not require MSVC due to frequent unrelated runner failures
+    # "changes" has to be included in needs here too, because all others are skipped if it fails
+    needs: [changes, testsuite, windows, windows-msvc, macos, appimage]
     if: always() # to check if dependencies have failed or passed
     runs-on: "ubuntu-latest"
     steps:
