@@ -6,8 +6,7 @@ on:
   pull_request:
     types: [ opened, reopened, synchronize ]
   push:
-    # NOCOM
-    branches: [ master, fix-workflow-changes-step ]
+    branches: [ master ]
 
 jobs:
   changes:
@@ -25,8 +24,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-      # NOCOM
-      if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/fix-workflow-changes-step'
+      if: github.ref == 'refs/heads/master'
       with:
         fetch-depth: 1
     - name: Check for changed files
