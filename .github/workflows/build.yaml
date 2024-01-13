@@ -231,11 +231,9 @@ jobs:
         then
           TIMEOUT="-t 20"
         fi
-        # NOCOM for testing the PR, run only the new template tests
-        ./regression_test.py -b build/src/widelands -r template $TIMEOUT
+        ./regression_test.py -b build/src/widelands $TIMEOUT
 
   windows-msvc:
-    if: false
     # inspired by https://github.com/lukka/CppCMakeVcpkgTemplate/blob/main/.github/workflows/hosted-pure-workflow.yml
     needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
     strategy:
@@ -310,7 +308,6 @@ jobs:
         path: ${{ github.workspace }}\Widelands-${{ github.sha }}-msvc-${{ matrix.config }}-${{ matrix.arch }}.exe
 
   windows:
-    if: false
     needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
     strategy:
       matrix:
@@ -366,7 +363,6 @@ jobs:
         path: ${{ github.workspace }}\Widelands-${{ github.sha }}-mingw-${{ matrix.config }}-${{ matrix.arch }}.exe
 
   macos:
-    if: false
     needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
     strategy:
       matrix:
