@@ -33,7 +33,7 @@ end
 -- 2 minutes grace period
 timeout = (game.win_condition_duration + 2) * 60 * 1000
 check_interval = 2000
-pause_timeout = 2 * 6 -- 0 -- 2 minutes
+pause_timeout = 2 * 60  -- 2 minutes
 
 game_ended = false
 last_gametime = 0

@@ -25,4 +25,4 @@ run(function()
   print("Most land belongs to the winner, win condition should be triggered.")
 end)
 
-check_win_condition(5-2)
+check_win_condition(5)
