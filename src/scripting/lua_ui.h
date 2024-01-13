@@ -29,7 +29,6 @@
 #include "ui_basic/radiobutton.h"
 #include "ui_basic/slider.h"
 #include "ui_basic/spinbox.h"
-#include "ui_basic/table.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/textinput.h"
@@ -37,11 +36,6 @@
 #include "wui/interactive_base.h"
 
 namespace LuaUi {
-
-// The currently supported kinds of templated UI elements.
-using TableOfInt = UI::Table<uintptr_t>;
-using DropdownOfString = UI::Dropdown<std::string>;
-using ListselectOfString = UI::Listselect<std::string>;
 
 /*
  * Base class for all classes in wl.ui
@@ -107,32 +101,11 @@ public:
 #endif
 	int create_child(lua_State* L);
 	int get_child(lua_State* L);
-	int die(lua_State* L);
-	int force_redraw(lua_State* L);
 
 	/*
 	 * C Methods
 	 */
 	static UI::Panel* do_create_child(lua_State* L, UI::Panel* parent, UI::Box* as_box);
-	static UI::Box* do_create_child_box(lua_State* L, UI::Panel* parent);
-	static UI::Panel* do_create_child_button(lua_State* L, UI::Panel* parent);
-	static UI::Panel* do_create_child_checkbox(lua_State* L, UI::Panel* parent);
-	static UI::Panel* do_create_child_discrete_slider(lua_State* L, UI::Panel* parent);
-	static UI::Panel* do_create_child_dropdown(lua_State* L, UI::Panel* parent);
-	static UI::Panel* do_create_child_editbox(lua_State* L, UI::Panel* parent);
-	static UI::Panel* do_create_child_listselect(lua_State* L, UI::Panel* parent);
-	static UI::Panel* do_create_child_multilineeditbox(lua_State* L, UI::Panel* parent);
-	static UI::Panel* do_create_child_multilinetextarea(lua_State* L, UI::Panel* parent);
-	static UI::Panel* do_create_child_panel(lua_State* L, UI::Panel* parent);
-	static UI::Panel* do_create_child_progressbar(lua_State* L, UI::Panel* parent);
-	static void do_create_child_radiogroup(lua_State* L, UI::Panel* parent, UI::Box* as_box);
-	static UI::Panel* do_create_child_slider(lua_State* L, UI::Panel* parent);
-	static UI::Panel* do_create_child_spinbox(lua_State* L, UI::Panel* parent);
-	static UI::Panel* do_create_child_tabpanel(lua_State* L, UI::Panel* parent);
-	static UI::Panel* do_create_child_table(lua_State* L, UI::Panel* parent);
-	static UI::Panel* do_create_child_textarea(lua_State* L, UI::Panel* parent);
-	static UI::Panel* do_create_child_unique_window(lua_State* L, UI::Panel* parent);
-	static UI::Panel* do_create_child_window(lua_State* L, UI::Panel* parent);
 };
 
 class LuaButton : public LuaPanel {
@@ -149,19 +122,12 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_title(lua_State* L);
-	int set_title(lua_State* L);
-	int get_enabled(lua_State* L);
-	int set_enabled(lua_State* L);
 
 	/*
 	 * Lua Methods
 	 */
 	int press(lua_State* L);
 	int click(lua_State* L);
-	int set_repeating(lua_State* L);
-	int set_perm_pressed(lua_State* L);
-	int toggle(lua_State* L);
 
 	/*
 	 * C Methods
@@ -440,10 +406,8 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_datatype(lua_State* L);
 	int get_expanded(lua_State* L);
 	int get_no_of_items(lua_State* L);
-	int get_selection(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -452,115 +416,12 @@ public:
 	int highlight_item(lua_State* L);
 	int indicate_item(lua_State* L);
 	int select(lua_State* L);
-	int add(lua_State* L);
 
 	/*
 	 * C Methods
 	 */
 	UI::BaseDropdown* get() {
 		return dynamic_cast<UI::BaseDropdown*>(panel_);
-	}
-};
-
-class LuaListselect : public LuaPanel {
-public:
-	LUNA_CLASS_HEAD(LuaListselect);
-
-	LuaListselect() = default;
-	explicit LuaListselect(UI::Panel* p) : LuaPanel(p) {
-	}
-	explicit LuaListselect(lua_State* L) : LuaPanel(L) {
-	}
-	~LuaListselect() override = default;
-
-	/*
-	 * Properties
-	 */
-	int get_datatype(lua_State* L);
-	int get_no_of_items(lua_State* L);
-	int get_selection(lua_State* L);
-
-	/*
-	 * Lua Methods
-	 */
-	int add(lua_State* L);
-
-	/*
-	 * C Methods
-	 */
-	UI::BaseListselect* get() {
-		return dynamic_cast<UI::BaseListselect*>(panel_);
-	}
-};
-
-class LuaTable : public LuaPanel {
-public:
-	LUNA_CLASS_HEAD(LuaTable);
-
-	LuaTable() = default;
-	explicit LuaTable(UI::Panel* p) : LuaPanel(p) {
-	}
-	explicit LuaTable(lua_State* L) : LuaPanel(L) {
-	}
-	~LuaTable() override = default;
-
-	/*
-	 * Properties
-	 */
-	int get_datatype(lua_State* L);
-	int get_no_of_rows(lua_State* L);
-	int get_selection_index(lua_State* L);
-	int set_selection_index(lua_State* L);
-	int get_selections(lua_State* L);
-	int get_sort_column(lua_State* L);
-	int set_sort_column(lua_State* L);
-	int get_sort_descending(lua_State* L);
-	int set_sort_descending(lua_State* L);
-
-	/*
-	 * Lua Methods
-	 */
-	int get(lua_State* L);
-	int add(lua_State* L);
-	int remove_row(lua_State* L);
-	int remove_entry(lua_State* L);
-
-	/*
-	 * C Methods
-	 */
-	UI::BaseTable* get() {
-		return dynamic_cast<UI::BaseTable*>(panel_);
-	}
-};
-
-class LuaTabPanel : public LuaPanel {
-public:
-	LUNA_CLASS_HEAD(LuaTabPanel);
-
-	LuaTabPanel() = default;
-	explicit LuaTabPanel(UI::Panel* p) : LuaPanel(p) {
-	}
-	explicit LuaTabPanel(lua_State* L) : LuaPanel(L) {
-	}
-	~LuaTabPanel() override = default;
-
-	/*
-	 * Properties
-	 */
-	int get_no_of_tabs(lua_State* L);
-	int get_active(lua_State* L);
-	int set_active(lua_State* L);
-
-	/*
-	 * Lua Methods
-	 */
-	int remove_last_tab(lua_State* L);
-
-	/*
-	 * C Methods
-	 */
-	UI::TabPanel* get() {
-		return dynamic_cast<UI::TabPanel*>(panel_);
 	}
 };
 
@@ -607,12 +468,6 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_title(lua_State* L);
-	int set_title(lua_State* L);
-	int get_pinned(lua_State* L);
-	int set_pinned(lua_State* L);
-	int get_minimal(lua_State* L);
-	int set_minimal(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -671,9 +526,7 @@ public:
 	int is_visible(lua_State* L);
 	int mouse_to_field(lua_State* L);
 	int mouse_to_pixel(lua_State* L);
-	int add_toolbar_plugin(lua_State* L);
 	int update_toolbar(lua_State* L);
-	int add_plugin_timer(lua_State* L);
 
 	/*
 	 * C Methods

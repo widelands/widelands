@@ -560,17 +560,17 @@ bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t /*x*/, int32_t
 }
 
 bool BaseListselect::handle_mousemove(
-   uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
+   uint8_t /*state*/, int32_t /*x*/, int32_t y, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	y = (y + scrollpos_) / get_lineheight();
 	if (y < 0 || static_cast<int32_t>(entry_records_.size()) <= y) {
 		set_tooltip("");
-		return Panel::handle_mousemove(state, x, y, xdiff, ydiff);
+		return false;
 	}
 	if (selection_mode_ == ListselectLayout::kDropdown) {
 		select(y);
 	}
 	set_tooltip(entry_records_.at(y)->tooltip);
-	return Panel::handle_mousemove(state, x, y, xdiff, ydiff);
+	return true;
 }
 
 bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {

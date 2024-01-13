@@ -41,14 +41,14 @@ namespace UI {
  *       w       dimensions, in pixels, of the Table
  *       h
  */
-BaseTable::Table(Panel* const parent,
-                 const std::string& name,
-                 int32_t x,
-                 int32_t y,
-                 uint32_t w,
-                 uint32_t h,
-                 PanelStyle style,
-                 TableRows rowtype)
+Table<void*>::Table(Panel* const parent,
+                    const std::string& name,
+                    int32_t x,
+                    int32_t y,
+                    uint32_t w,
+                    uint32_t h,
+                    PanelStyle style,
+                    TableRows rowtype)
    : Panel(parent, style, name, x, y, w, h),
 
      lineheight_(text_height(g_style_manager->table_style(style).enabled())),
@@ -83,7 +83,7 @@ BaseTable::Table(Panel* const parent,
 /**
  * Free allocated resources
  */
-BaseTable::~Table() {
+Table<void*>::~Table() {
 	for (const EntryRecord* entry : entry_records_) {
 		delete entry;
 	}
@@ -93,16 +93,16 @@ BaseTable::~Table() {
 	multiselect_.clear();
 }
 
-size_t BaseTable::number_of_columns() const {
+size_t Table<void*>::number_of_columns() const {
 	return columns_.size();
 }
 
 /// Add a new column to this table.
-void BaseTable::add_column(uint32_t const width,
-                           const std::string& title,
-                           const std::string& tooltip_string,
-                           Align const alignment,
-                           TableColumnType column_type) {
+void Table<void*>::add_column(uint32_t const width,
+                              const std::string& title,
+                              const std::string& tooltip_string,
+                              Align const alignment,
+                              TableColumnType column_type) {
 	//  If there would be existing entries, they would not get the new column.
 	assert(size() == 0);
 
@@ -137,14 +137,14 @@ void BaseTable::add_column(uint32_t const width,
 	}
 }
 
-void BaseTable::set_column_title(const uint8_t col, const std::string& title) {
+void Table<void*>::set_column_title(const uint8_t col, const std::string& title) {
 	assert(col < columns_.size());
 	Column& column = columns_.at(col);
 	assert(column.btn);
 	column.btn->set_title(title);
 }
 
-void BaseTable::set_column_tooltip(uint8_t col, const std::string& text) {
+void Table<void*>::set_column_tooltip(uint8_t col, const std::string& text) {
 	assert(col < columns_.size());
 	Column& column = columns_.at(col);
 	assert(column.btn);
@@ -152,7 +152,7 @@ void BaseTable::set_column_tooltip(uint8_t col, const std::string& text) {
 	column.update_tooltip(col == get_sort_column());
 }
 
-void BaseTable::Column::update_tooltip(const bool sorted) const {
+void Table<void*>::Column::update_tooltip(const bool sorted) const {
 	const std::string click_tooltip =
 	   sorted ? _("Click to reverse sorting") : _("Click to sort by this column");
 	if (user_tooltip.empty()) {
@@ -167,13 +167,13 @@ void BaseTable::Column::update_tooltip(const bool sorted) const {
 /**
  * Set a custom comparison function for sorting of the given column.
  */
-void BaseTable::set_column_compare(uint8_t col, const BaseTable::CompareFn& fn) {
+void Table<void*>::set_column_compare(uint8_t col, const Table<void*>::CompareFn& fn) {
 	assert(col < columns_.size());
 	Column& column = columns_.at(col);
 	column.compare = fn;
 }
 
-void BaseTable::set_sort_column(uint8_t const col) {
+void Table<void*>::set_sort_column(uint8_t const col) {
 	const uint8_t old = get_sort_column();
 	if (col == old) {
 		return;
@@ -185,7 +185,7 @@ void BaseTable::set_sort_column(uint8_t const col) {
 	columns_.at(col).update_tooltip(true);
 }
 
-BaseTable::EntryRecord* BaseTable::find(const void* const entry) const
+Table<void*>::EntryRecord* Table<void*>::find(const void* const entry) const
 
 {
 	for (EntryRecord* temp_entry : entry_records_) {
@@ -199,7 +199,7 @@ BaseTable::EntryRecord* BaseTable::find(const void* const entry) const
 /**
  * A header button has been clicked
  */
-void BaseTable::header_button_clicked(Columns::size_type const n) {
+void Table<void*>::header_button_clicked(Columns::size_type const n) {
 	assert(columns_.at(n).btn);
 	if (get_sort_column() == n) {
 		set_sort_descending(!get_sort_descending());  //  change sort direction
@@ -215,7 +215,7 @@ void BaseTable::header_button_clicked(Columns::size_type const n) {
 /**
  * Remove all entries from the table
  */
-void BaseTable::clear() {
+void Table<void*>::clear() {
 	for (const EntryRecord* entry : entry_records_) {
 		delete entry;
 	}
@@ -229,17 +229,17 @@ void BaseTable::clear() {
 	clear_selections();
 }
 
-void BaseTable::clear_selections() {
+void Table<void*>::clear_selections() {
 	multiselect_.clear();
 	selection_ = no_selection_index();
 	last_selection_ = no_selection_index();
 }
 
-uint32_t BaseTable::get_eff_w() const {
+uint32_t Table<void*>::get_eff_w() const {
 	return scrollbar_->is_enabled() ? get_w() - scrollbar_->get_w() : get_w();
 }
 
-void BaseTable::fit_height(uint32_t entries) {
+void Table<void*>::fit_height(uint32_t entries) {
 	if (entries == 0) {
 		entries = size();
 	}
@@ -250,7 +250,7 @@ void BaseTable::fit_height(uint32_t entries) {
 	set_desired_size(tablewidth, tableheight);
 }
 
-std::vector<Recti> BaseTable::focus_overlay_rects() {
+std::vector<Recti> Table<void*>::focus_overlay_rects() {
 	if (!has_selection()) {
 		return Panel::focus_overlay_rects();
 	}
@@ -279,7 +279,7 @@ std::vector<Recti> BaseTable::focus_overlay_rects() {
 /**
  * Redraw the table
  */
-void BaseTable::draw(RenderTarget& dst) {
+void Table<void*>::draw(RenderTarget& dst) {
 	//  draw text lines
 	int32_t lineheight = get_lineheight();
 	uint32_t idx = scrollpos_ / lineheight;
@@ -397,7 +397,7 @@ void BaseTable::draw(RenderTarget& dst) {
 	}
 }
 
-bool BaseTable::handle_tooltip() {
+bool Table<void*>::handle_tooltip() {
 	int32_t lineheight = get_lineheight();
 	uint32_t idx = scrollpos_ / lineheight;
 	int32_t y = 1 + idx * lineheight - scrollpos_ + headerheight_;
@@ -427,15 +427,15 @@ bool BaseTable::handle_tooltip() {
 	return true;
 }
 
-UI::FontStyleInfo& BaseTable::get_column_fontstyle(const BaseTable::EntryRecord& er) {
+UI::FontStyleInfo& Table<void*>::get_column_fontstyle(const Table<void*>::EntryRecord& er) {
 	return const_cast<FontStyleInfo&>(
 	   er.font_style() != nullptr ? *er.font_style() :
 	   er.is_disabled()           ? g_style_manager->table_style(panel_style_).disabled() :
                                    g_style_manager->table_style(panel_style_).enabled());
 }
-bool BaseTable::is_mouse_in(const Vector2i& cursor_pos,
-                            const Vector2i& point,
-                            const int column_width) const {
+bool Table<void*>::is_mouse_in(const Vector2i& cursor_pos,
+                               const Vector2i& point,
+                               const int column_width) const {
 	const int line = get_lineheight();
 
 	return cursor_pos.x >= point.x && cursor_pos.x <= point.x + column_width &&
@@ -445,7 +445,7 @@ bool BaseTable::is_mouse_in(const Vector2i& cursor_pos,
 /**
  * handle key presses
  */
-bool BaseTable::handle_key(bool down, SDL_Keysym code) {
+bool Table<void*>::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		if (is_multiselect_ && !empty() &&
 		    matches_shortcut(KeyboardShortcut::kCommonSelectAll, code)) {
@@ -511,14 +511,14 @@ bool BaseTable::handle_key(bool down, SDL_Keysym code) {
 	return UI::Panel::handle_key(down, code);
 }
 
-bool BaseTable::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
+bool Table<void*>::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 	return scrollbar_->handle_mousewheel(x, y, modstate);
 }
 
 /**
  * Handle mouse presses: select the appropriate entry
  */
-bool BaseTable::handle_mousepress(uint8_t const btn, int32_t /*x*/, int32_t const y) {
+bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t /*x*/, int32_t const y) {
 	if (get_can_focus()) {
 		focus();
 	}
@@ -558,7 +558,7 @@ bool BaseTable::handle_mousepress(uint8_t const btn, int32_t /*x*/, int32_t cons
  * \param offset positive value move the selection down and
  *        negative values up.
  */
-void BaseTable::move_selection(const int32_t offset) {
+void Table<void*>::move_selection(const int32_t offset) {
 	int32_t new_selection =
 	   has_selection() ? (is_multiselect_ ? last_multiselect_ : selection_) + offset : 0;
 
@@ -578,7 +578,7 @@ void BaseTable::move_selection(const int32_t offset) {
  *
  * Args: i  the entry to select
  */
-void BaseTable::select(const uint32_t i) {
+void Table<void*>::select(const uint32_t i) {
 	if (empty() || i == no_selection_index()) {
 		return;
 	}
@@ -595,7 +595,7 @@ void BaseTable::select(const uint32_t i) {
 /**
  * If 'force' is true, adds the given 'row' to the selection, ignoring everything else.
  */
-void BaseTable::multiselect(uint32_t row, bool force) {
+void Table<void*>::multiselect(uint32_t row, bool force) {
 	if (force) {
 		select(row);
 		return;
@@ -630,7 +630,7 @@ void BaseTable::multiselect(uint32_t row, bool force) {
 }
 
 // Scroll to the given item. Out of range items will be corrected automatically.
-void BaseTable::scroll_to_item(int32_t item) {
+void Table<void*>::scroll_to_item(int32_t item) {
 	if (scrollbar_ != nullptr) {
 		// Correct out of range items
 		if (item < 0) {
@@ -653,7 +653,7 @@ void BaseTable::scroll_to_item(int32_t item) {
  * Returns the row that should be selected afterwards, or no_selection_index() if
  * the multiselect is empty.
  */
-uint32_t BaseTable::toggle_entry(uint32_t row) {
+uint32_t Table<void*>::toggle_entry(uint32_t row) {
 	assert(is_multiselect_);
 	if (multiselect_.count(row) != 0u) {
 		multiselect_.erase(row);
@@ -670,7 +670,7 @@ uint32_t BaseTable::toggle_entry(uint32_t row) {
 /**
  * Add a new entry to the table.
  */
-BaseTable::EntryRecord& BaseTable::add(void* const entry, const bool do_select) {
+Table<void*>::EntryRecord& Table<void*>::add(void* const entry, const bool do_select) {
 	EntryRecord& result = *new EntryRecord(entry);
 	entry_records_.push_back(&result);
 	result.data_.resize(columns_.size());
@@ -686,18 +686,18 @@ BaseTable::EntryRecord& BaseTable::add(void* const entry, const bool do_select) 
 /**
  * Scroll to the given position, in pixels.
  */
-void BaseTable::set_scrollpos(int32_t const i) {
+void Table<void*>::set_scrollpos(int32_t const i) {
 	scrollpos_ = i;
 }
 
-void BaseTable::scroll_to_top() {
+void Table<void*>::scroll_to_top() {
 	scrollbar_->set_scrollpos(0);
 }
 
 /**
  * Remove the table entry at the given (zero-based) index.
  */
-void BaseTable::remove(const uint32_t i) {
+void Table<void*>::remove(const uint32_t i) {
 	assert(i < entry_records_.size());
 	multiselect_.clear();
 
@@ -721,7 +721,7 @@ void BaseTable::remove(const uint32_t i) {
 /**
  * Remove the given table entry if it exists.
  */
-void BaseTable::remove_entry(const void* const entry) {
+void Table<void*>::remove_entry(const void* const entry) {
 	for (uint32_t i = 0; i < entry_records_.size(); ++i) {
 		if (entry_records_[i]->entry() == entry) {
 			remove(i);
@@ -730,14 +730,14 @@ void BaseTable::remove_entry(const void* const entry) {
 	}
 }
 
-bool BaseTable::sort_helper(uint32_t a, uint32_t b) {
+bool Table<void*>::sort_helper(uint32_t a, uint32_t b) {
 	if (sort_descending_) {
 		return columns_[sort_column_].compare(b, a);
 	}
 	return columns_[sort_column_].compare(a, b);
 }
 
-void BaseTable::layout() {
+void Table<void*>::layout() {
 	if (columns_.empty() || get_h() == 0 || get_w() == 0) {
 		return;
 	}
@@ -754,13 +754,13 @@ void BaseTable::layout() {
 	}
 }
 
-void BaseTable::reposition_scrollbar() {
+void Table<void*>::reposition_scrollbar() {
 	scrollbar_->set_pos(Vector2i(get_w() - Scrollbar::kSize, headerheight_));
 	scrollbar_->set_size(scrollbar_->get_w(), get_h() - headerheight_);
 	scrollbar_->set_pagesize(get_h() - 2 * get_lineheight() - headerheight_);
 	scrollbar_->set_steps(entry_records_.size() * get_lineheight() - (get_h() - headerheight_ - 2));
 }
-size_t BaseTable::find_resizable_column_idx() {
+size_t Table<void*>::find_resizable_column_idx() {
 
 	if (flexible_column_idx_ < columns_.size()) {
 		return flexible_column_idx_;
@@ -777,7 +777,7 @@ size_t BaseTable::find_resizable_column_idx() {
 	return widest_column_idx;
 }
 
-int BaseTable::total_columns_width() {
+int Table<void*>::total_columns_width() {
 	int all_columns_width = scrollbar_->is_enabled() ? scrollbar_->get_w() : 0;
 	for (const auto& column : columns_) {
 		all_columns_width += column.width;
@@ -785,7 +785,7 @@ int BaseTable::total_columns_width() {
 	return all_columns_width;
 }
 
-void BaseTable::adjust_column_sizes(int all_columns_width, size_t resizeable_column_idx) {
+void Table<void*>::adjust_column_sizes(int all_columns_width, size_t resizeable_column_idx) {
 	Column& resizable_col = columns_.at(resizeable_column_idx);
 	resizable_col.width = std::max(0, resizable_col.width + get_w() - all_columns_width);
 	resizable_col.btn->set_size(resizable_col.width, resizable_col.btn->get_h());
@@ -804,7 +804,7 @@ void BaseTable::adjust_column_sizes(int all_columns_width, size_t resizeable_col
 	}
 }
 
-void BaseTable::update_scrollbar_filler() {
+void Table<void*>::update_scrollbar_filler() {
 	if (scrollbar_->is_enabled()) {
 		const UI::Button* last_column_btn = columns_.back().btn;
 		scrollbar_filler_button_->set_pos(
@@ -824,7 +824,7 @@ void BaseTable::update_scrollbar_filler() {
  * For example, you might want to sort directories for themselves at the
  * top of the list, and files at the bottom.
  */
-void BaseTable::sort(const uint32_t lower_bound, uint32_t upper_bound) {
+void Table<void*>::sort(const uint32_t lower_bound, uint32_t upper_bound) {
 	assert(columns_.at(sort_column_).btn);
 	assert(sort_column_ < columns_.size());
 
@@ -866,41 +866,41 @@ void BaseTable::sort(const uint32_t lower_bound, uint32_t upper_bound) {
 	}
 }
 
-bool BaseTable::default_compare_string(uint32_t column, uint32_t a, uint32_t b) const {
+bool Table<void*>::default_compare_string(uint32_t column, uint32_t a, uint32_t b) const {
 	const EntryRecord& ea = get_record(a);
 	const EntryRecord& eb = get_record(b);
 	return ea.get_string(column) < eb.get_string(column);
 }
-bool BaseTable::handle_mousemove(
+bool Table<void*>::handle_mousemove(
    uint8_t /*state*/, int32_t /*x*/, int32_t /*y*/, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	// needed to activate tooltip rendering without providing tooltiptext to parent (panel) class
 	return true;
 }
 
-BaseTable::EntryRecord::EntryRecord(void* const e) : entry_(e), font_style_(nullptr) {
+Table<void*>::EntryRecord::EntryRecord(void* const e) : entry_(e), font_style_(nullptr) {
 }
 
-void BaseTable::EntryRecord::set_picture(uint8_t const col,
-                                         const Image* pic,
-                                         const std::string& str) {
+void Table<void*>::EntryRecord::set_picture(uint8_t const col,
+                                            const Image* pic,
+                                            const std::string& str) {
 	assert(col < data_.size());
 
 	data_.at(col).d_picture = pic;
 	data_.at(col).d_string = str;
 }
-void BaseTable::EntryRecord::set_string(uint8_t const col, const std::string& str) {
+void Table<void*>::EntryRecord::set_string(uint8_t const col, const std::string& str) {
 	assert(col < data_.size());
 
 	data_.at(col).d_picture = nullptr;
 	data_.at(col).d_string = str;
 }
 
-const Image* BaseTable::EntryRecord::get_picture(uint8_t const col) const {
+const Image* Table<void*>::EntryRecord::get_picture(uint8_t const col) const {
 	assert(col < data_.size());
 
 	return data_.at(col).d_picture;
 }
-const std::string& BaseTable::EntryRecord::get_string(uint8_t const col) const {
+const std::string& Table<void*>::EntryRecord::get_string(uint8_t const col) const {
 	assert(col < data_.size());
 
 	return data_.at(col).d_string;

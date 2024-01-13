@@ -246,8 +246,6 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 		node_action(node_and_triangle);
 	});
 
-	add_plugin_menu();
-
 	finalize_toolbar();
 
 	if (g_allow_script_console) {

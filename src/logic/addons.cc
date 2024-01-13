@@ -68,8 +68,8 @@ const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories = {
                       "tribes/buildings/warehouses/atlanteans/headquarters/menu.png", true}},
    {AddOnCategory::kTheme, AddOnCategoryInfo{"theme", []() { return _("Theme"); },
                                              "images/wui/menus/main_menu.png", false}},
-   {AddOnCategory::kUIPlugin,
-    AddOnCategoryInfo{"ui_plugin", []() { return _("UI Plugin"); }, "images/plugin.png", false}}};
+   {AddOnCategory::kUIPlugin, AddOnCategoryInfo{"ui_plugin", []() { return _("UI Plugin"); },
+                                                "images/logos/WL-Editor-32.png", false}}};
 
 std::vector<AddOnState> g_addons;
 

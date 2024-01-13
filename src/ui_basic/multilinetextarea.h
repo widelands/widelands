@@ -20,7 +20,6 @@
 #define WL_UI_BASIC_MULTILINETEXTAREA_H
 
 #include <memory>
-#include <optional>
 
 #include "graphic/align.h"
 #include "graphic/styles/font_style.h"
@@ -95,7 +94,7 @@ private:
 	 */
 	std::string make_richtext();
 	std::string text_;
-	std::optional<std::string> tooltip_before_hyperlink_tooltip_;
+	std::string tooltip_before_hyperlink_tooltip_;
 
 	std::shared_ptr<const UI::RenderedText> rendered_text_;
 	Vector2i render_anchor_;
