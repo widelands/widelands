@@ -51,4 +51,6 @@ closed="true"
 closed="true"
 
 [player_8]
-closed="true"
+tribe=
+ai="random"
+closed="false"

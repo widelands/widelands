@@ -8,7 +8,7 @@ win_condition="hq_hunter.lua"
 # HQ hunter is not time based, but we can use this in the script for the timeout.
 win_condition_duration="3"
 
-diplomacy="true"
+forbid_diplomacy="false"
 peaceful="false"
 fogless="false"
 custom_starting_positions="false"

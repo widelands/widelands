@@ -74,11 +74,19 @@ if len(tests) < 1:
 unknown_wc = []
 unknown_tribe = []
 unknown_sc = dict()
+no_script = []
 
 # Collect uses
 for test in tests:
+    if not os.path.isfile(test[:-3] + "lua"):
+        no_script.append(test)
     cfg = configparser.ConfigParser()
     cfg.read(test)
+
+    # This one is a bare minimum template, leaves all to defaults, including tribes, and start and
+    # win conditions.
+    if test == os.path.join(testdir, 'test_alldefaults.wgt'):
+        continue
 
     for s in cfg.sections():
         section = cfg[s]
@@ -91,7 +99,8 @@ for test in tests:
                 win_conditions[section['win_condition']] = True
 
         # Each player's start condition
-        if s.startswith('player_') and section['closed'] != '"true"':
+        if s.startswith('player_') and section['closed'] != '"true"' and \
+           section['tribe'] != '':
             if not section['tribe'] in start_conditions:
                 unknown_tribe.append(section['tribe'])
             else:
@@ -112,7 +121,7 @@ for tribe in start_conditions:
 
 # Report
 if len(unknown_wc) == 0 and len(unknown_tribe) == 0 and len(unknown_sc) == 0 and \
-   len(unused_wc) == 0 and len(unused_sc) == 0:
+   len(unused_wc) == 0 and len(unused_sc) == 0 and len(no_script) == 0:
     print()
     print('Done, all starting and win conditions are covered by tests.')
     sys.exit(0)
@@ -138,5 +147,10 @@ if len(unused_wc) > 0:
     print()
     print('ERROR: Win conditions not covered by tests:')
     print(unused_wc)
+
+if len(no_script) > 0:
+    print()
+    print('ERROR: No scripts provided for tests:')
+    print(no_script)
 
 sys.exit(1)
