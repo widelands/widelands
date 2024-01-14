@@ -62,9 +62,11 @@ public:
 	};
 
 	struct View {
-		View(Vector2f init_viewpoint, float init_zoom, float init_zoom_saved) : viewpoint(init_viewpoint), zoom(init_zoom), zoom_saved(init_zoom_saved) {
+		View(Vector2f init_viewpoint, float init_zoom, float init_zoom_saved)
+		   : viewpoint(init_viewpoint), zoom(init_zoom), zoom_saved(init_zoom_saved) {
 		}
-		View(Vector2f init_viewpoint, float init_zoom) : viewpoint(init_viewpoint), zoom(init_zoom), zoom_saved(init_zoom) {
+		View(Vector2f init_viewpoint, float init_zoom)
+		   : viewpoint(init_viewpoint), zoom(init_zoom), zoom_saved(init_zoom) {
 		}
 		View() : View(Vector2f::zero(), 1.0f) {
 		}

@@ -212,9 +212,9 @@ std::deque<MapView::TimestampedView> plan_zoom_transition(const uint32_t start_t
 	const SmoothstepInterpolator<float> zoom_t(start_zoom, end_zoom, kShortAnimationMs);
 	std::deque<MapView::TimestampedView> plan;
 	const auto push = [&](const float dt, const float zoom) {
-		plan.push_back(
-		   MapView::TimestampedView{static_cast<uint32_t>(std::lround(start_time + dt)),
-		                            {center - Vector2f(zoom * width, zoom * height) * 0.5f, zoom, zoom_saved}});
+		plan.push_back(MapView::TimestampedView{
+		   static_cast<uint32_t>(std::lround(start_time + dt)),
+		   {center - Vector2f(zoom * width, zoom * height) * 0.5f, zoom, zoom_saved}});
 	};
 
 	push(0, start_zoom);
@@ -497,7 +497,9 @@ void MapView::pan_by(Vector2i delta_pixels, const Transition& transition) {
 	if (is_animating() || map_.get_width() == 0 || map_.get_height() == 0) {
 		return;
 	}
-	set_view({view_.viewpoint + delta_pixels.cast<float>() * view_.zoom, view_.zoom, view_.zoom_saved}, transition);
+	set_view(
+	   {view_.viewpoint + delta_pixels.cast<float>() * view_.zoom, view_.zoom, view_.zoom_saved},
+	   transition);
 }
 
 void MapView::stop_dragging() {
@@ -635,7 +637,8 @@ void MapView::zoom_around(float new_zoom,
 		// Zoom around the current mouse position. See
 		// https://stackoverflow.com/questions/2916081/zoom-in-on-a-point-using-scale-and-translate
 		// for a good explanation of this math.
-		set_view({current.view.viewpoint - panel_pixel * (new_zoom - current.view.zoom), new_zoom, current.view.zoom_saved},
+		set_view({current.view.viewpoint - panel_pixel * (new_zoom - current.view.zoom), new_zoom,
+		          current.view.zoom_saved},
 		         Transition::Jump);
 		return;
 	}
@@ -651,8 +654,9 @@ void MapView::zoom_around(float new_zoom,
 		}
 		const int w = get_w();
 		const int h = get_h();
-		const auto plan = plan_zoom_transition(
-		   current.t, get_view_area(current.view, w, h).center(), current.view.zoom, new_zoom, current.view.zoom_saved, w, h);
+		const auto plan =
+		   plan_zoom_transition(current.t, get_view_area(current.view, w, h).center(),
+		                        current.view.zoom, new_zoom, current.view.zoom_saved, w, h);
 		if (!plan.empty()) {
 			view_plans_.push_back(plan);
 		}
