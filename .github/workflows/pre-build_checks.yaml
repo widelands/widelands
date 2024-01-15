@@ -4,18 +4,18 @@ on:
     inputs:
       clang_tidy:
         required: true
-        type: string
+        type: boolean
       codecheck:
         required: true
-        type: string
+        type: boolean
 
 jobs:
   clang_tidy:
-    if: inputs.clang_tidy == 'true'
+    if: inputs.clang_tidy
     uses: ./.github/workflows/build_clang_tidy.yaml
 
   codecheck:
-    if: inputs.codecheck == 'true'
+    if: inputs.codecheck
     uses: ./.github/workflows/build_codecheck.yaml
 
   # This job runs multiple smaller checks where having several jobs would be overkill.
