@@ -3207,12 +3207,12 @@ int LuaTable::get(lua_State* L) {
 }
 
 /* RST
-   .. method:: add(value, select, disable, columns...)
+   .. method:: add(value, select, disable, columns)
 
       Add a row to the table. Only allowed for tables with supported datatypes.
 
-      The named arguments are followed by as many arguments as the table has columns.
-      Each argument is a :class:`table` describing the content of one table cell.
+      The named arguments are followed by an array of as many entries as the table has columns.
+      Each array entry is a :class:`table` describing the content of one table cell.
       Valid keys are:
 
          * ``"text"``: **Optional**. The text to show in the cell.
@@ -3225,10 +3225,9 @@ int LuaTable::get(lua_State* L) {
       :arg disable: Whether to disable this row.
       :type disable: :class:`boolean`
       :arg columns: The cell descriptors.
-      :type columns: Parameter pack of :class:`table`
+      :type columns: :class:`array` of :class:`table`
 */
 int LuaTable::add(lua_State* L) {
-	int top = lua_gettop(L);
 	bool select = luaL_checkboolean(L, 3);
 	bool disable = luaL_checkboolean(L, 4);
 
@@ -3237,21 +3236,20 @@ int LuaTable::add(lua_State* L) {
 		TableOfInt::EntryRecord& record = table->add(value, select);
 		record.set_disabled(disable);
 
-		constexpr int kArgsOffset = 5;
-		for (int i = kArgsOffset; i < top; ++i) {
-			lua_geti(L, -1, i);
-			luaL_checktype(L, -1, LUA_TTABLE);
-
+		int column = 0;
+		lua_pushnil(L);
+		while (lua_next(L, 5) != 0) {
 			std::string text = get_table_string(L, "text", false);
 			std::string icon = get_table_string(L, "icon", false);
 
 			if (icon.empty()) {
-				record.set_string(i - kArgsOffset, text);
+				record.set_string(column, text);
 			} else {
-				record.set_picture(i - kArgsOffset, g_image_cache->get(icon), text);
+				record.set_picture(column, g_image_cache->get(icon), text);
 			}
 
 			lua_pop(L, 1);
+			++column;
 		}
 	} else {
 		report_error(L, "add() not allowed for table with unsupported datatype");
@@ -3341,10 +3339,10 @@ int LuaTabPanel::get_active(lua_State* L) {
 	return 1;
 }
 int LuaTabPanel::set_active(lua_State* L) {
-	if (static_cast<bool>(lua_isstring(L, -1))) {
-		get()->activate(luaL_checkstring(L, -1));
-	} else {
+	if (static_cast<bool>(lua_isnumber(L, -1))) {
 		get()->activate(luaL_checkuint32(L, -1));
+	} else {
+		get()->activate(luaL_checkstring(L, -1));
 	}
 	return 0;
 }
