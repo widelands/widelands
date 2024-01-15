@@ -87,8 +87,8 @@ jobs:
     needs: [changes]
     uses: ./.github/workflows/pre-build_checks.yaml
     with:
-      clang_tidy: ${{ needs.changes.outputs.clang_tidy }} == 'true'
-      codecheck: ${{ needs.changes.outputs.codecheck }} == 'true'
+      clang_tidy: ${{ needs.changes.outputs.clang_tidy }}
+      codecheck: ${{ needs.changes.outputs.codecheck }}
 
   testsuite:
     needs: [changes, pre-build_checks]
