@@ -2269,7 +2269,7 @@ const PropertyType<LuaProgressBar> LuaProgressBar::Properties[] = {
       (RW) The current progress value.
 
       .. Note:: When using a progress bar to visualize the progress of a blocking script,
-         you may need to call :meth:`force_redraw` after changing this property to ensure
+         you may need to call :meth:`~Panel.force_redraw` after changing this property to ensure
          the change becomes visible to the user immediately.
 */
 int LuaProgressBar::get_state(lua_State* L) {
