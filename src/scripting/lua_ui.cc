@@ -1554,6 +1554,7 @@ UI::Panel* LuaPanel::do_create_child_multilinetextarea(lua_State* L, UI::Panel* 
 
 	if (std::string font = get_table_string(L, "font", false); !font.empty()) {
 		txt->set_style(g_style_manager->safe_font_style(font));
+		txt->set_text(text);  // Needed to force a recompute
 	}
 
 	return txt;
