@@ -16,6 +16,8 @@
  *
  */
 
+NOCOM test: make it fail
+
 #include <iostream>
 #include <typeinfo>
 
