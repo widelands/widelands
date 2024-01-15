@@ -1,5 +1,6 @@
 name: Pre-Build Documentation and Sanity Checks
-on: workflow_call:
+on:
+  workflow_call:
 
 jobs:
   # This job runs multiple smaller checks where having several jobs would be overkill.
