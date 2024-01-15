@@ -16,6 +16,11 @@
  *
  */
 
+<<<<<<< HEAD
+=======
+NOCOM test : make it fail
+
+>>>>>>> 4892eb7340790af9a466187348cd1359c2af1325
 #include <iostream>
 #include <typeinfo>
 
@@ -42,9 +47,11 @@
 #include "wlapplication_messages.h"
 
 #ifdef PRINT_SEGFAULT_BACKTRACE
-// Taken from https://stackoverflow.com/a/77336
-// TODO(Nordfriese): Implement this on Windows as well (see https://stackoverflow.com/a/26398082)
-static void segfault_handler(const int sig) {
+   // Taken from https://stackoverflow.com/a/77336
+   // TODO(Nordfriese): Implement this on Windows as well (see
+   // https://stackoverflow.com/a/26398082)
+             static void
+             segfault_handler(const int sig) {
 	constexpr int kMaxBacktraceSize = 256;
 	void* array[kMaxBacktraceSize];
 	size_t size = backtrace(array, kMaxBacktraceSize);
