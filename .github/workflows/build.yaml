@@ -101,7 +101,7 @@ jobs:
   # (see https://github.com/actions/runner/issues/952 and https://github.com/orgs/community/discussions/9141)
   pre-build_summary:
     name: Pre-Build Checks Summary
-    needs: [changes, clang-tidy, codecheck, pre-build_checks]
+    needs: [changes, clang_tidy, codecheck, pre-build_checks]
     if: always() # to check if dependencies have failed or passed
     runs-on: "ubuntu-latest"
     steps:
