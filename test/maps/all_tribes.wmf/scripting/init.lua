@@ -173,8 +173,8 @@ end
 
 function place_player_ship(playernumber)
    local player = wl.Game().players[playernumber]
-   local starting_field = wl.Game().map.player_slots[playernumber].starting_field
-   player:place_ship(map:wrap_field(starting_field.x + 12, starting_field.y + 6))
+   local starting_field = get_starting_field(player)
+   player:place_ship(get_safe_field(player, starting_field, 12, 6))
 end
 
 -- Sleep and adjust game speed each second for reasonable average FPS
