@@ -16,9 +16,6 @@
  *
  */
 
-// NOCOM: make checks fail for testing
-nonsense();
-
 #include <iostream>
 #include <typeinfo>
 
