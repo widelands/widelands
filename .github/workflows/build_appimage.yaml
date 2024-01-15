@@ -19,7 +19,7 @@ jobs:
     - name: Installing dependencies
       run: sh ./.github/scripts/install_deps.sh
     - name: show compiler failures clearly on github
-      uses: ammaraskar/gcc-problem-matcher@0.2
+      uses: ammaraskar/gcc-problem-matcher@0.2.0
     - name: Compile
       run: |
         if [ "${CXX:0:1}" == "c" ]

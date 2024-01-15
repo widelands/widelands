@@ -30,7 +30,7 @@ jobs:
         bash.exe -c "./install-dependencies.sh msys${{ matrix.bits }} --noconfirm --disable-download-timeout"
         choco install innosetup
     - name: show compiler failures clearly on github
-      uses: ammaraskar/gcc-problem-matcher@0.2
+      uses: ammaraskar/gcc-problem-matcher@0.2.0
     - name: Compiler
       run: |
         $env:Path = "C:/msys64/mingw${{ matrix.bits }}/include;C:/msys64/mingw${{ matrix.bits }}/lib;C:/msys64/mingw${{ matrix.bits }}/bin;C:/msys64/usr/bin;$env:Path"

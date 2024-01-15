@@ -21,7 +21,7 @@ jobs:
         export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH";
         ./install-dependencies.sh homebrew ccache dylibbundler
     - name: show compiler failures clearly on github
-      uses: ammaraskar/gcc-problem-matcher@0.2
+      uses: ammaraskar/gcc-problem-matcher@0.2.0
       # clang reports problems the same way
     - name: Building
       run: |
