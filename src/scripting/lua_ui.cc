@@ -830,6 +830,15 @@ int LuaPanel::get_child(lua_State* L) {
 
            * ``"on_clicked"``: **Optional**. Callback code to run when the user selects a tab.
 
+      It is strongly recommended to use box layouting for all widgets.
+      All widgets that are the child of a Box widget are layouted automatically by the Box.
+      Their x and y positions will be ignored, and their width and/or height may be changed in
+      accordance with their resizing strategy in order to optimally layout all components.
+
+      If a widget appears to be missing, usually its width and/or height has been determined
+      as zero. In this case, setting a minimum width and height or using a more dynamic
+      resizing strategy will fix the widget's layout.
+
       Note that event callbacks functions must be provided as raw code in string form.
       During the lifetime of a *toolbar* widget, the Lua Interface used by the game may be reset.
       Therefore, any callbacks attached to such widgets must not use any functions or variables
@@ -2258,6 +2267,10 @@ const PropertyType<LuaProgressBar> LuaProgressBar::Properties[] = {
    .. attribute:: state
 
       (RW) The current progress value.
+
+      .. Note:: When using a progress bar to visualize the progress of a blocking script,
+         you may need to call :meth:`force_redraw` after changing this property to ensure
+         the change becomes visible to the user immediately.
 */
 int LuaProgressBar::get_state(lua_State* L) {
 	lua_pushinteger(L, get()->get_state());
