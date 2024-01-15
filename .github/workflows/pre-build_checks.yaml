@@ -11,14 +11,11 @@ on:
 
 jobs:
   clang_tidy:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo ${{ inputs.clang_tidy }}
-    # if: ${{ inputs.clang_tidy }} == 'true'
-    # uses: ./.github/workflows/build_clang_tidy.yaml
+    if: ${{ inputs.clang_tidy }} != false
+    uses: ./.github/workflows/build_clang_tidy.yaml
 
   codecheck:
-    if: ${{ inputs.codecheck }} != 'false'
+    if: ${{ inputs.codecheck }} != false
     uses: ./.github/workflows/build_codecheck.yaml
 
   # This job runs multiple smaller checks where having several jobs would be overkill.
