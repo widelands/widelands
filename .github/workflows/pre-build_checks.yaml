@@ -1,8 +1,23 @@
 name: Pre-Build Documentation and Sanity Checks
 on:
   workflow_call:
+    inputs:
+      clang_tidy:
+        required: true
+        type: string
+      codecheck:
+        required: true
+        type: string
 
 jobs:
+  clang_tidy:
+    if: inputs.clang_tidy == 'true'
+    uses: ./.github/workflows/build_clang_tidy.yaml
+
+  codecheck:
+    if: inputs.codecheck == 'true'
+    uses: ./.github/workflows/build_codecheck.yaml
+
   # This job runs multiple smaller checks where having several jobs would be overkill.
   misc_sanity_checks:
     runs-on: ubuntu-latest
