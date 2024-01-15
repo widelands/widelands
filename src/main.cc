@@ -16,8 +16,6 @@
  *
  */
 
-// NOCOM for testing with good C++ change
-
 #include <iostream>
 #include <typeinfo>
 
