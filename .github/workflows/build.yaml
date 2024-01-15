@@ -112,8 +112,7 @@ jobs:
       run: |
         echo "A job failed or was cancelled!"
         exit 1
-    - name: No step skipped  # Optional, just gives info
-      if: "! contains(needs.*.result, 'skipped')"
+    - name: Report success
       run: true
 
   testsuite:
