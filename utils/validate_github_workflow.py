@@ -87,9 +87,12 @@ class CheckGithubYaml:
 
     def _report_path_invalid(self, file, exists, ref):
         if exists:
-            print('untracked file:', file, 'from', ref)
+            msg = 'untracked file:'
         else:
-            print('missing file:', file, 'from', ref)
+            msg = 'missing file:'
+        if os.getenv('GITHUB_ACTION'):
+            msg = f'::error file={ ref["file"] }::{ msg }'
+        print(msg, file, 'from', ref)
         self.failures += 1
 
     def _check_filter_files(self, files: iter, ref: dict):
