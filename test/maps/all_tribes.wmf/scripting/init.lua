@@ -196,11 +196,17 @@ end
 
 local function init_map()
    -- remove 2/3 of the ducks from the map
+   -- and animals too far in the north (not influencing the player)
    for x=0, game.map.width-1 do
-      if x % 3 < 2 then
-         for y=0, game.map.height-1 do
+      for y=0, game.map.height-1 do
+         if x % 3 < 2 then
             local bob = game.map:get_field(x, y).bobs[1]
             if bob and bob.descr.type_name == "critter" and bob.descr.name == "duck" then
+               bob:remove()
+            end
+         elseif y > 20 and y < 105 then
+            local bob = game.map:get_field(x, y).bobs[1]
+            if bob and bob.descr.type_name == "critter" and bob.descr.name ~= "duck" then
                bob:remove()
             end
          end
