@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2023 by the Widelands Development Team
+ * Copyright (C) 2007-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,6 +17,8 @@
  */
 
 #include "wui/game_summary.h"
+
+#include <vector>
 
 #include <SDL_mouse.h>
 
@@ -48,8 +50,8 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	vbox->add_space(kPadding);
 
 	UI::Box* hbox1 = new UI::Box(vbox, UI::PanelStyle::kWui, "hbox1", 0, 0, UI::Box::Horizontal);
-	players_table_ =
-	   new UI::Table<uintptr_t const>(hbox1, "table", 0, 0, 0, 0, UI::PanelStyle::kWui);
+	players_table_ = new UI::Table<const Widelands::PlayerEndStatus&>(
+	   hbox1, "table", 0, 0, 0, 0, UI::PanelStyle::kWui);
 	players_table_->fit_height(game_.player_manager()->get_number_of_players());
 
 	info_box_ = new UI::Box(hbox1, UI::PanelStyle::kWui, "info_box", 0, 0, UI::Box::Vertical, 0, 0);
@@ -120,7 +122,7 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	// Connections
 	continue_button_->sigclicked.connect([this]() { continue_clicked(); });
 	stop_button_->sigclicked.connect([this]() { stop_clicked(); });
-	players_table_->selected.connect([this](uint32_t i) { player_selected(i); });
+	players_table_->selected.connect([this](uint32_t) { update_selection(); });
 
 	// Window
 	center_to_parent();
@@ -151,27 +153,25 @@ bool GameSummaryScreen::compare_status(const uint32_t index1, const uint32_t ind
 	assert(index1 < game_.player_manager()->get_number_of_players());
 	assert(index2 < game_.player_manager()->get_number_of_players());
 
-	const Widelands::PlayerEndStatus* p1 =
-	   game_.player_manager()->get_player_end_status(playernumbers_[index1]);
-	const Widelands::PlayerEndStatus* p2 =
-	   game_.player_manager()->get_player_end_status(playernumbers_[index2]);
+	const Widelands::PlayerEndStatus& p1 = (*players_table_)[index1];
+	const Widelands::PlayerEndStatus& p2 = (*players_table_)[index2];
 
-	if (p1->result == p2->result) {
+	if (p1.result == p2.result) {
 		// We want to use the time as tie-breaker: The first player to lose sorts last
-		return p1->time > p2->time;
+		return p1.time > p2.time;
 	}
-	if (p1->result == Widelands::PlayerEndResult::kWon) {
+	if (p1.result == Widelands::PlayerEndResult::kWon) {
 		// Winners sort first
 		return true;
 	}
-	if (p1->result == Widelands::PlayerEndResult::kResigned) {
+	if (p1.result == Widelands::PlayerEndResult::kResigned) {
 		// Resigned players sort last
 		return false;
 	}
-	if (p2->result == Widelands::PlayerEndResult::kWon) {
+	if (p2.result == Widelands::PlayerEndResult::kWon) {
 		return false;
 	}
-	if (p2->result == Widelands::PlayerEndResult::kResigned) {
+	if (p2.result == Widelands::PlayerEndResult::kResigned) {
 		return true;
 	}
 
@@ -184,11 +184,9 @@ void GameSummaryScreen::fill_data() {
 	std::string won_name;
 	Widelands::TeamNumber team_won = 0;
 	InteractivePlayer* ipl = game_.get_ipl();
-	// This defines a row to be selected, current player,
-	// if not then the first line
-	uint32_t current_player_position = 0;
-	uint32_t i = 0;
-	playernumbers_.clear();
+	// This defines a row to be selected: either the local player,
+	// or the first line if the local player was not in the game
+	uint32_t local_player_index = 0;
 
 	const std::map<Widelands::PlayerNumber, Widelands::PlayerEndStatus>& end_status_map =
 	   game_.player_manager()->get_all_players_end_status();
@@ -197,14 +195,13 @@ void GameSummaryScreen::fill_data() {
 		const Widelands::PlayerEndStatus& pes = it.second;
 		assert(pn == pes.player);
 
-		playernumbers_.emplace_back(pn);
 		if ((ipl != nullptr) && pes.player == ipl->player_number()) {
 			local_in_game = true;
 			local_won = pes.result == Widelands::PlayerEndResult::kWon;
-			current_player_position = i;
+			local_player_index = players_table_->size();
 		}
 		Widelands::Player* p = game_.get_player(pn);
-		UI::Table<uintptr_t const>::EntryRecord& te = players_table_->add(i);
+		UI::Table<uintptr_t const>::EntryRecord& te = players_table_->add(pes);
 		// Player name & pic
 		const Image* player_image = playercolor_image(
 		   game_.player(pn).get_playercolor(), "images/players/genstats_player.png");
@@ -243,10 +240,9 @@ void GameSummaryScreen::fill_data() {
 		te.set_string(2, stat_str);
 		// Time
 		te.set_string(3, gametimestring(pes.time.get()));
-		++i;
 	}
 
-	assert(i == game_.player_manager()->get_number_of_players());
+	assert(players_table_->size() == game_.player_manager()->get_number_of_players());
 
 	if (local_in_game) {
 		if (local_won) {
@@ -262,7 +258,7 @@ void GameSummaryScreen::fill_data() {
 		}
 	}
 	if (local_in_game) {
-		players_table_->select(current_player_position);
+		players_table_->select(local_player_index);
 	}
 	players_table_->layout();
 }
@@ -276,11 +272,8 @@ void GameSummaryScreen::stop_clicked() {
 	game_.get_ibase()->end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 
-void GameSummaryScreen::player_selected(uint32_t entry_index) {
-	const Widelands::PlayerEndStatus* player_status =
-	   game_.player_manager()->get_player_end_status(playernumbers_[entry_index]);
-
-	std::string info_str = parse_player_info(player_status->info);
+void GameSummaryScreen::update_selection() {
+	std::string info_str = parse_player_info(players_table_->get_selected().info);
 	info_area_->set_text(info_str);
 	if (info_str.empty()) {
 		widelands_icon_->set_visible(true);

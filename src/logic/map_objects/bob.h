@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -297,6 +297,9 @@ public:
 	}
 	[[nodiscard]] State* get_state() {
 		return !stack_.empty() ? &*stack_.rbegin() : nullptr;
+	}
+	[[nodiscard]] size_t get_stack_size() const {
+		return stack_.size();
 	}
 
 	[[nodiscard]] std::string get_signal() const {
