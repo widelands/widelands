@@ -1,3 +1,5 @@
+game.desired_speed = 1000
+
 run(function()
 
    wl.ui.MapView():create_child({
@@ -44,6 +46,17 @@ run(function()
                            title  = "This is a CheckBox",
                            state  = true,
                            tooltip = "Tooltip for checkbox",
+                        },
+                        {
+                           widget = "space",
+                           value  = 10,
+                        },
+                        {
+                           widget = "button",
+                           name   = "button",
+                           title  = "Click Me",
+                           tooltip = "Tooltip for button",
+                           on_click = [[ button_clicked() ]]
                         },
                         {
                            widget = "space",
@@ -201,7 +214,7 @@ run(function()
                            name = "tabpanel",
                            resizing = "fullsize",
                            tooltip = "Tooltip for tabpanel",
-                           active = "tab_dd",
+                           active = "tab_table",
                            tabs = {
                               {
                                  name = "tab_edit",
@@ -246,6 +259,7 @@ run(function()
                                           tooltip = "Tooltip for i3",
                                        },
                                     },
+                                    on_selected = [=[ dropdown_changed() ]=]
                                  },
                               },
                               {
@@ -369,6 +383,7 @@ run(function()
    local vslider           = window:get_child("vslider")
    local dslider           = window:get_child("dslider")
    local checkbox          = window:get_child("checkbox")
+   local button            = window:get_child("button")
    local radiogroup        = window:get_child("radio0")
    local dropdown          = window:get_child("dropdown")
    local listselect        = window:get_child("listselect")
@@ -382,6 +397,7 @@ run(function()
    assert_not_nil(vslider, "vslider was not created")
    assert_not_nil(dslider, "dslider was not created")
    assert_not_nil(checkbox, "checkbox was not created")
+   assert_not_nil(button, "button was not created")
    assert_not_nil(radiogroup, "radio0 was not created")
    assert_not_nil(dropdown, "dropdown was not created")
    assert_not_nil(listselect, "listselect was not created")
@@ -397,10 +413,11 @@ run(function()
    assert_equal(64, vslider.min_value)
    assert_equal(3, dslider.value)
    assert_equal(true, checkbox.state)
+   assert_equal(true, button.enabled)
    assert_equal(3, radiogroup.state)
    assert_equal(3, dropdown.no_of_items)
    assert_equal("string", listselect.datatype)
-   assert_equal(1, tabpanel.active)
+   assert_equal(2, tabpanel.active)
    assert_equal(7, table.no_of_rows)
 
    window.title = "Changed title"
@@ -411,10 +428,11 @@ run(function()
    vslider.min_value = 20
    dslider.value = 0
    checkbox.state = false
+   button.enabled = false
    radiogroup.state = 2
-   dropdown:add("fourth", "New Item")
-   listselect:add("fourth", "New Item", nil, "", true, 2)
-   tabpanel.active = 2
+   dropdown:add("New Item", "fourth")
+   listselect:add("New Item", "fourth", nil, "", true, 2)
+   tabpanel.active = 1
    table:add(1234, false, true, {{text = "Invalid"}, {text = "1234"}, {icon = "images/ui_basic/menu_help.png"}})
 
    sleep(500)
@@ -427,12 +445,31 @@ run(function()
    assert_equal(20, vslider.min_value)
    assert_equal(0, dslider.value)
    assert_equal(false, checkbox.state)
+   assert_equal(false, button.enabled)
    assert_equal(2, radiogroup.state)
    assert_equal(4, dropdown.no_of_items)
    assert_equal("listselect", listselect.name)
-   assert_equal(2, tabpanel.active)
+   assert_equal(1, tabpanel.active)
    assert_equal(8, table.no_of_rows)
 
+   button.enabled = true
+   sleep(1000)
+
+   dropdown:open()
+   dropdown:highlight_item(2)
+   dropdown:select()
+
+end)
+
+function dropdown_changed()
+   local window = wl.ui.MapView():get_child("uipluginstestwindow")
+
+   assert_equal("third", window:get_child("dropdown").selection)
+
+   window:get_child("button"):click()
+end
+
+function button_clicked()
    print("# All Tests passed.")
    wl.ui.MapView():close()
-end)
+end

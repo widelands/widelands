@@ -1128,6 +1128,11 @@ static std::function<void(Args...)> create_plugin_action_lambda(lua_State* L,
 			egbase.lua().interpret_string(cmd);
 		} catch (const LuaError& e) {
 			log_err("Lua error in plugin: %s", e.what());
+
+			if (g_fail_on_lua_error) {
+				throw;
+			}
+
 			UI::WLMessageBox m(egbase.get_ibase(), UI::WindowStyle::kWui, _("Plugin Error"),
 			                   format_l(_("Error when running plugin:\n%s"), e.what()),
 			                   UI::WLMessageBox::MBoxType::kOk);

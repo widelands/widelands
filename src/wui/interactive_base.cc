@@ -302,7 +302,7 @@ bool InteractiveBase::plugin_action(const std::string& action, bool failsafe) {
 		egbase().lua().interpret_string(action);
 		return true;
 	} catch (const LuaError& e) {
-		if (!failsafe) {
+		if (!failsafe || g_fail_on_lua_error) {
 			log_err("FATAL: Lua error in plugin: %s", e.what());
 			throw;
 		}
