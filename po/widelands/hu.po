@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-06 02:32+0000\n"
+"POT-Creation-Date: 2024-01-11 02:36+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: zone <z-one@freemail.hu>, 2015\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
@@ -1313,7 +1313,7 @@ msgstr "Hegyek:"
 #: ../../src/ui_basic/spinbox.cc:579
 #, c-format
 msgid "%i %%"
-msgstr "%i %%"
+msgstr "%i%%"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:195
 msgid "Island mode"
@@ -2659,19 +2659,19 @@ msgstr "Egy víziutat meg kellett semmisíteni, hogy legyen helye az új kiköt�
 msgid "A geologist found resources."
 msgstr "Geológus ásványkincseket talált."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2083
+#: ../../src/logic/map_objects/tribes/worker.cc:2098
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
 msgstr "A(z) %s nem talál haza vezető útvonalat és valószínűleg meg fog halni."
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
-#: ../../src/logic/map_objects/tribes/worker.cc:2088
+#: ../../src/logic/map_objects/tribes/worker.cc:2103
 #: ../../src/wui/productionsitewindow.cc:107
 #: ../../src/wui/productionsitewindow.cc:124
 msgid "Worker"
 msgstr "Munkás"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2089
+#: ../../src/logic/map_objects/tribes/worker.cc:2104
 msgid "Worker got lost!"
 msgstr "Eltűnt egy munkás!"
 
@@ -3715,8 +3715,8 @@ msgstr "Érték növelése %s"
 msgctxt "spinbox_change"
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d perccel"
+msgstr[1] "%d perccel"
 
 #. * TRANSLATORS: The current value of a spinbox
 #: ../../src/ui_basic/spinbox.cc:488 ../../src/ui_basic/spinbox.cc:539
@@ -3734,8 +3734,8 @@ msgstr[1] "%d perc"
 msgctxt "spinbox_change"
 msgid "%d hour"
 msgid_plural "%d hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d órával"
+msgstr[1] "%d órával"
 
 #. * TRANSLATORS: The current value of a spinbox
 #: ../../src/ui_basic/spinbox.cc:501 ../../src/ui_basic/spinbox.cc:527
@@ -3755,7 +3755,7 @@ msgstr[1] "%d óra"
 #, c-format
 msgctxt "spinbox_change_hours_mins"
 msgid "%1$s and %2$s"
-msgstr ""
+msgstr "%1$s %2$s"
 
 #. * TRANSLATORS: ..
 #. The hours part of "Increase/Decrease the value by X hours and Y minutes".
@@ -3767,8 +3767,8 @@ msgstr ""
 msgctxt "spinbox_change_hours_mins"
 msgid "%d hour"
 msgid_plural "%d hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d óra"
+msgstr[1] "%d óra"
 
 #. * TRANSLATORS: ..
 #. The minutes part of "Increase/Decrease the value by X hours and Y minutes"
@@ -3779,8 +3779,8 @@ msgstr[1] ""
 msgctxt "spinbox_change_hours_mins"
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d perccel"
+msgstr[1] "%d perccel"
 
 #. * TRANSLATORS: "Increase/Decrease the value by <n> weeks"
 #. You may want to treat this as "by <n> weeks", depending on how you
@@ -3790,8 +3790,8 @@ msgstr[1] ""
 msgctxt "spinbox_change"
 msgid "%d week"
 msgid_plural "%d weeks"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d héttel"
+msgstr[1] "%d héttel"
 
 #. * TRANSLATORS: The current value of a spinbox
 #: ../../src/ui_basic/spinbox.cc:552
@@ -3809,8 +3809,8 @@ msgstr[1] "%d hét"
 msgctxt "spinbox_change"
 msgid "%d pixel"
 msgid_plural "%d pixels"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d képponttal"
+msgstr[1] "%d képponttal"
 
 #. * TRANSLATORS: The current value of a spinbox
 #: ../../src/ui_basic/spinbox.cc:561
@@ -3828,8 +3828,8 @@ msgstr[1] "%d képpont"
 msgctxt "spinbox_change"
 msgid "%d field"
 msgid_plural "%d fields"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d mezővel"
+msgstr[1] "%d mezővel"
 
 #. * TRANSLATORS: The current value of a spinbox
 #: ../../src/ui_basic/spinbox.cc:570
@@ -3846,7 +3846,7 @@ msgstr[1] "%d mező"
 #, c-format
 msgctxt "spinbox_change"
 msgid "%i %%"
-msgstr ""
+msgstr "%i%%-kal"
 
 #. * TRANSLATORS: "Increase/Decrease the value by <n>"
 #. You may want to treat this as "by <n>", depending on how you
@@ -3855,7 +3855,7 @@ msgstr ""
 #, c-format
 msgctxt "spinbox_change"
 msgid "%d"
-msgstr ""
+msgstr "%d egységgel"
 
 #: ../../src/ui_basic/table.cc:157
 msgid "Click to reverse sorting"
@@ -3875,7 +3875,7 @@ msgstr "%1$s<br>(%2$s)"
 
 #: ../../src/ui_basic/window.cc:101 ../../src/ui_fsmenu/about.cc:41
 #: ../../src/ui_fsmenu/crash_report.cc:70
-#: ../../src/ui_fsmenu/crash_report.cc:164
+#: ../../src/ui_fsmenu/crash_report.cc:160
 #: ../../src/ui_fsmenu/mousewheel_report.cc:74
 #: ../../src/wui/watchwindow.cc:110
 msgid "Close"
@@ -3905,7 +3905,7 @@ msgstr "A Widelands névjegye"
 msgid "Lua Error"
 msgstr "Lua Hiba"
 
-#: ../../src/ui_fsmenu/about.cc:59 ../../src/ui_fsmenu/tech_info.cc:189
+#: ../../src/ui_fsmenu/about.cc:59 ../../src/ui_fsmenu/tech_info.cc:221
 msgid "Technical Info"
 msgstr "Műszaki információk"
 
@@ -4552,7 +4552,7 @@ msgid "Author:"
 msgstr "Szerző:"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:171
-#: ../../src/ui_fsmenu/tech_info.cc:123
+#: ../../src/ui_fsmenu/tech_info.cc:76
 msgid "Version:"
 msgstr "Verzió:"
 
@@ -5432,22 +5432,22 @@ msgid "Crash Report Details"
 msgstr "Összeomlási jelentés részletei"
 
 #: ../../src/ui_fsmenu/crash_report.cc:61
-#: ../../src/ui_fsmenu/crash_report.cc:152
+#: ../../src/ui_fsmenu/crash_report.cc:148
 msgid "Open link"
 msgstr "Hivatkozás megnyitása"
 
 #: ../../src/ui_fsmenu/crash_report.cc:63
-#: ../../src/ui_fsmenu/crash_report.cc:154
+#: ../../src/ui_fsmenu/crash_report.cc:150
 msgid "Copy link"
 msgstr "Hivatkozás másolása"
 
 #: ../../src/ui_fsmenu/crash_report.cc:67
-#: ../../src/ui_fsmenu/crash_report.cc:159
+#: ../../src/ui_fsmenu/crash_report.cc:155
 msgid "Copy report"
 msgstr "Jelentés másolása"
 
 #: ../../src/ui_fsmenu/crash_report.cc:68
-#: ../../src/ui_fsmenu/crash_report.cc:159
+#: ../../src/ui_fsmenu/crash_report.cc:155
 msgid "Copy the full report to the clipboard"
 msgstr "A teljes jelentés vágólapra másolása"
 
@@ -5455,7 +5455,7 @@ msgstr "A teljes jelentés vágólapra másolása"
 msgid "Crash Report"
 msgstr "Összeomlási jelentés"
 
-#: ../../src/ui_fsmenu/crash_report.cc:135
+#: ../../src/ui_fsmenu/crash_report.cc:131
 #, c-format
 msgid ""
 "It looks like Widelands crashed the last time you ran it, but a backtrace "
@@ -5465,15 +5465,15 @@ msgid ""
 "the problem."
 msgstr "Úgy tűnik, a Widelands összeomlott a legutóbbi használatkor, de a hibakereséshez sikerült elmenteni az összeomlás adatait. Kérjük, küldd el a jelentést a Widelands fejlesztői csapatának a %s szerint, hogy ki tudjuk javítani a hibát! Kérjük írd le azt is, hogy mi történt éppen a játékban, és te mit csináltál utoljára az összeomlás előtt!"
 
-#: ../../src/ui_fsmenu/crash_report.cc:145
+#: ../../src/ui_fsmenu/crash_report.cc:141
 msgid "Show details…"
 msgstr "Részletek megjelenítése…"
 
-#: ../../src/ui_fsmenu/crash_report.cc:145
+#: ../../src/ui_fsmenu/crash_report.cc:141
 msgid "View the detailed crash report"
 msgstr "A teljes összeomlási jelentés megtekintése"
 
-#: ../../src/ui_fsmenu/crash_report.cc:162
+#: ../../src/ui_fsmenu/crash_report.cc:158
 msgid "Remind me later"
 msgstr "Elhalasztás későbbre"
 
@@ -6858,95 +6858,95 @@ msgstr "Szerzők"
 msgid "You"
 msgstr "Te"
 
-#: ../../src/ui_fsmenu/tech_info.cc:127
+#: ../../src/ui_fsmenu/tech_info.cc:80
 msgid "MacOS"
 msgstr "MacOS"
 
-#: ../../src/ui_fsmenu/tech_info.cc:129
+#: ../../src/ui_fsmenu/tech_info.cc:82
 msgid "Windows (64 bit)"
 msgstr "Windows (64 bites)"
 
-#: ../../src/ui_fsmenu/tech_info.cc:131
+#: ../../src/ui_fsmenu/tech_info.cc:84
 msgid "Windows (32 bit)"
 msgstr "Windows (32 bites)"
 
-#: ../../src/ui_fsmenu/tech_info.cc:133
+#: ../../src/ui_fsmenu/tech_info.cc:86
 msgid "Linux"
 msgstr "Linux"
 
-#: ../../src/ui_fsmenu/tech_info.cc:135
+#: ../../src/ui_fsmenu/tech_info.cc:88
 msgid "FreeBSD"
 msgstr "FreeBSD"
 
-#: ../../src/ui_fsmenu/tech_info.cc:137
+#: ../../src/ui_fsmenu/tech_info.cc:90
 msgid "Unix"
 msgstr "Unix"
 
-#: ../../src/ui_fsmenu/tech_info.cc:139
+#: ../../src/ui_fsmenu/tech_info.cc:92
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: ../../src/ui_fsmenu/tech_info.cc:141
+#: ../../src/ui_fsmenu/tech_info.cc:94
 msgid "Operating System:"
 msgstr "Operációs rendszer:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:142
+#: ../../src/ui_fsmenu/tech_info.cc:95
 msgid "Compiled with SDL version:"
 msgstr "Fordításkori SDL verzió:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:149
+#: ../../src/ui_fsmenu/tech_info.cc:102
 msgid "Using SDL version:"
 msgstr "Használt SDL verzió:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:154
+#: ../../src/ui_fsmenu/tech_info.cc:108
 msgid "SDL video driver:"
 msgstr "SDL képernyő meghajtó:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:158
+#: ../../src/ui_fsmenu/tech_info.cc:113
 msgid "SDL horizontal scroll:"
 msgstr "SDL vízszintes görgetés:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:159
+#: ../../src/ui_fsmenu/tech_info.cc:113
 msgid "assuming inverted"
 msgstr "fordítottnak észleltük"
 
-#: ../../src/ui_fsmenu/tech_info.cc:163
+#: ../../src/ui_fsmenu/tech_info.cc:117
 msgid "Locale:"
 msgstr "Nyelv:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:164
+#: ../../src/ui_fsmenu/tech_info.cc:118
 msgid "Home Directory:"
 msgstr "Saját Widelands könyvtár:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:165
+#: ../../src/ui_fsmenu/tech_info.cc:119
 msgid "Configuration File:"
 msgstr "Beállító fájl:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:166
+#: ../../src/ui_fsmenu/tech_info.cc:120
 msgid "Data Directory:"
 msgstr "Adatfájlok helye:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:167
+#: ../../src/ui_fsmenu/tech_info.cc:121
 msgid "Locale Directory:"
 msgstr "Fordítások helye:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:169
+#: ../../src/ui_fsmenu/tech_info.cc:123
 msgid "Executable Directory:"
 msgstr "Program helye:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:172
+#: ../../src/ui_fsmenu/tech_info.cc:126
 msgid "Enabled Add-Ons:"
 msgstr "Aktív bővítmények:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:174
+#: ../../src/ui_fsmenu/tech_info.cc:128
 msgid "Inactive Installed Add-Ons:"
 msgstr "Telepített, de kikapcsolt bővítmények:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:233
+#: ../../src/ui_fsmenu/tech_info.cc:238
 msgid "Copy"
 msgstr "Másolás"
 
-#: ../../src/ui_fsmenu/tech_info.cc:234
+#: ../../src/ui_fsmenu/tech_info.cc:239
 msgid "Copy the technical report to the clipboard"
 msgstr "Műszaki információk másolása a vágólapra"
 

@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-06 02:32+0000\n"
+"POT-Creation-Date: 2024-01-11 02:36+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Sergiusz NA, 2023\n"
 "Language-Team: Polish (http://app.transifex.com/widelands/widelands/language/pl/)\n"
@@ -2683,19 +2683,19 @@ msgstr "Droga wodna musiała zostać zniszczona, aby zwolnić miejsce na dok now
 msgid "A geologist found resources."
 msgstr "Geolog znalazł surowce."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2083
+#: ../../src/logic/map_objects/tribes/worker.cc:2098
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
 msgstr "Twój %s nie może znaleźć drogi do domu i najpewniej umrze."
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
-#: ../../src/logic/map_objects/tribes/worker.cc:2088
+#: ../../src/logic/map_objects/tribes/worker.cc:2103
 #: ../../src/wui/productionsitewindow.cc:107
 #: ../../src/wui/productionsitewindow.cc:124
 msgid "Worker"
 msgstr "Pracownik"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2089
+#: ../../src/logic/map_objects/tribes/worker.cc:2104
 msgid "Worker got lost!"
 msgstr "Zaginął pracownik!"
 
@@ -3929,7 +3929,7 @@ msgstr ""
 
 #: ../../src/ui_basic/window.cc:101 ../../src/ui_fsmenu/about.cc:41
 #: ../../src/ui_fsmenu/crash_report.cc:70
-#: ../../src/ui_fsmenu/crash_report.cc:164
+#: ../../src/ui_fsmenu/crash_report.cc:160
 #: ../../src/ui_fsmenu/mousewheel_report.cc:74
 #: ../../src/wui/watchwindow.cc:110
 msgid "Close"
@@ -3959,7 +3959,7 @@ msgstr "O Widelands"
 msgid "Lua Error"
 msgstr "Błąd skryptu Lua"
 
-#: ../../src/ui_fsmenu/about.cc:59 ../../src/ui_fsmenu/tech_info.cc:189
+#: ../../src/ui_fsmenu/about.cc:59 ../../src/ui_fsmenu/tech_info.cc:221
 msgid "Technical Info"
 msgstr "Informacje techniczne"
 
@@ -4612,7 +4612,7 @@ msgid "Author:"
 msgstr "Autor:"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:171
-#: ../../src/ui_fsmenu/tech_info.cc:123
+#: ../../src/ui_fsmenu/tech_info.cc:76
 msgid "Version:"
 msgstr "Wersja:"
 
@@ -5510,22 +5510,22 @@ msgid "Crash Report Details"
 msgstr ""
 
 #: ../../src/ui_fsmenu/crash_report.cc:61
-#: ../../src/ui_fsmenu/crash_report.cc:152
+#: ../../src/ui_fsmenu/crash_report.cc:148
 msgid "Open link"
 msgstr ""
 
 #: ../../src/ui_fsmenu/crash_report.cc:63
-#: ../../src/ui_fsmenu/crash_report.cc:154
+#: ../../src/ui_fsmenu/crash_report.cc:150
 msgid "Copy link"
 msgstr ""
 
 #: ../../src/ui_fsmenu/crash_report.cc:67
-#: ../../src/ui_fsmenu/crash_report.cc:159
+#: ../../src/ui_fsmenu/crash_report.cc:155
 msgid "Copy report"
 msgstr ""
 
 #: ../../src/ui_fsmenu/crash_report.cc:68
-#: ../../src/ui_fsmenu/crash_report.cc:159
+#: ../../src/ui_fsmenu/crash_report.cc:155
 msgid "Copy the full report to the clipboard"
 msgstr ""
 
@@ -5533,7 +5533,7 @@ msgstr ""
 msgid "Crash Report"
 msgstr ""
 
-#: ../../src/ui_fsmenu/crash_report.cc:135
+#: ../../src/ui_fsmenu/crash_report.cc:131
 #, c-format
 msgid ""
 "It looks like Widelands crashed the last time you ran it, but a backtrace "
@@ -5543,15 +5543,15 @@ msgid ""
 "the problem."
 msgstr ""
 
-#: ../../src/ui_fsmenu/crash_report.cc:145
+#: ../../src/ui_fsmenu/crash_report.cc:141
 msgid "Show details…"
 msgstr ""
 
-#: ../../src/ui_fsmenu/crash_report.cc:145
+#: ../../src/ui_fsmenu/crash_report.cc:141
 msgid "View the detailed crash report"
 msgstr ""
 
-#: ../../src/ui_fsmenu/crash_report.cc:162
+#: ../../src/ui_fsmenu/crash_report.cc:158
 msgid "Remind me later"
 msgstr ""
 
@@ -6936,95 +6936,95 @@ msgstr "Autorzy"
 msgid "You"
 msgstr "Ty"
 
-#: ../../src/ui_fsmenu/tech_info.cc:127
+#: ../../src/ui_fsmenu/tech_info.cc:80
 msgid "MacOS"
 msgstr "MacOS"
 
-#: ../../src/ui_fsmenu/tech_info.cc:129
+#: ../../src/ui_fsmenu/tech_info.cc:82
 msgid "Windows (64 bit)"
 msgstr "Windows (64 bitowy)"
 
-#: ../../src/ui_fsmenu/tech_info.cc:131
+#: ../../src/ui_fsmenu/tech_info.cc:84
 msgid "Windows (32 bit)"
 msgstr "Windows (32 bitowy)"
 
-#: ../../src/ui_fsmenu/tech_info.cc:133
+#: ../../src/ui_fsmenu/tech_info.cc:86
 msgid "Linux"
 msgstr "Linux"
 
-#: ../../src/ui_fsmenu/tech_info.cc:135
+#: ../../src/ui_fsmenu/tech_info.cc:88
 msgid "FreeBSD"
 msgstr "FreeBSD"
 
-#: ../../src/ui_fsmenu/tech_info.cc:137
+#: ../../src/ui_fsmenu/tech_info.cc:90
 msgid "Unix"
 msgstr "Unix"
 
-#: ../../src/ui_fsmenu/tech_info.cc:139
+#: ../../src/ui_fsmenu/tech_info.cc:92
 msgid "Unknown"
 msgstr "Nieznany"
 
-#: ../../src/ui_fsmenu/tech_info.cc:141
+#: ../../src/ui_fsmenu/tech_info.cc:94
 msgid "Operating System:"
 msgstr "System operacyjny:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:142
+#: ../../src/ui_fsmenu/tech_info.cc:95
 msgid "Compiled with SDL version:"
 msgstr "Skompilowany przy użyciu SDL w wersji:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:149
+#: ../../src/ui_fsmenu/tech_info.cc:102
 msgid "Using SDL version:"
 msgstr "Używana wersja SDL:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:154
+#: ../../src/ui_fsmenu/tech_info.cc:108
 msgid "SDL video driver:"
 msgstr "Sterownik grafiki SDL:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:158
+#: ../../src/ui_fsmenu/tech_info.cc:113
 msgid "SDL horizontal scroll:"
 msgstr "Przewijanie poziome SDL:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:159
+#: ../../src/ui_fsmenu/tech_info.cc:113
 msgid "assuming inverted"
 msgstr "zakładając odwrócony"
 
-#: ../../src/ui_fsmenu/tech_info.cc:163
+#: ../../src/ui_fsmenu/tech_info.cc:117
 msgid "Locale:"
 msgstr "Język:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:164
+#: ../../src/ui_fsmenu/tech_info.cc:118
 msgid "Home Directory:"
 msgstr "Katalog domowy:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:165
+#: ../../src/ui_fsmenu/tech_info.cc:119
 msgid "Configuration File:"
 msgstr "Plik konfiguracyjny:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:166
+#: ../../src/ui_fsmenu/tech_info.cc:120
 msgid "Data Directory:"
 msgstr "Katalog z danymi:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:167
+#: ../../src/ui_fsmenu/tech_info.cc:121
 msgid "Locale Directory:"
 msgstr "Katalog z językami:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:169
+#: ../../src/ui_fsmenu/tech_info.cc:123
 msgid "Executable Directory:"
 msgstr "Katalog z plikiem wykonywalnym:"
 
-#: ../../src/ui_fsmenu/tech_info.cc:172
+#: ../../src/ui_fsmenu/tech_info.cc:126
 msgid "Enabled Add-Ons:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:174
+#: ../../src/ui_fsmenu/tech_info.cc:128
 msgid "Inactive Installed Add-Ons:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/tech_info.cc:233
+#: ../../src/ui_fsmenu/tech_info.cc:238
 msgid "Copy"
 msgstr "Kopiuj"
 
-#: ../../src/ui_fsmenu/tech_info.cc:234
+#: ../../src/ui_fsmenu/tech_info.cc:239
 msgid "Copy the technical report to the clipboard"
 msgstr "Kopiuj informacje techniczne do schowka"
 
