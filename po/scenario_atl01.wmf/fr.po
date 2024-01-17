@@ -1,9 +1,9 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
 # adrien vigneron <adrien.v@ml1.net>, 2016
-# C138, 2022
+# C138, 2022-2023
 # GunChleoc, 2014
 # GunChleoc, 2014
 # Samuël Weber/GwendalD <samuel.weber@normalesup.org>, 2017
@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-08-31 02:28+0000\n"
+"POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: C138, 2022\n"
+"Last-Translator: C138, 2022-2023\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -96,7 +96,7 @@ msgid ""
 "fish breeder makes sure that a school of fish does not go extinct by "
 "breeding more. The smoking happens in a smokery, you will need at least two "
 "of those."
-msgstr ""
+msgstr "Les deux autres aliments importants sont le poisson fumé et la viande fumée. La viande crue est livrée par un chasseur. Un pêcheur sort le poisson de la mer tandis qu'un éleveur de poissons s'assure qu'un banc de poissons ne s'éteint pas en se reproduisant davantage. Le fumage se réalise dans un fumoir, vous en aurez besoin d'au moins deux."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Build a farm and a blackroot farm"

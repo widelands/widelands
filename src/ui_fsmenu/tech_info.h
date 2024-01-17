@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022-2023 by the Widelands Development Team
+ * Copyright (C) 2022-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,32 +19,47 @@
 #ifndef WL_UI_FSMENU_TECH_INFO_H
 #define WL_UI_FSMENU_TECH_INFO_H
 
-#include <memory>
+#include <string>
+#include <vector>
 
 #include "ui_basic/box.h"
-#include "ui_basic/textarea.h"
+#include "ui_basic/multilinetextarea.h"
 
 namespace FsMenu {
 
-class TechInfoLine : public UI::Box {
-	UI::Textarea label_;
-	UI::Textarea value_;
-
-public:
-	TechInfoLine(UI::Panel* parent, std::string label, std::string value, bool right_to_left);
-};
-
-struct TechInfoBox : public UI::Box {
+/*** The data ***/
+struct TechInfo {
+	// TODO(tothxa): It looks like the mousewheel report can be removed in v1.3
 	enum class Type { kAbout, kMousewheelReport };
 
-	explicit TechInfoBox(UI::Panel* parent, TechInfoBox::Type t);
+	explicit TechInfo(TechInfo::Type t);
 
-	[[nodiscard]] const std::string& get_report() const {
-		return report_;
-	}
+	// Not localized, to be copied into bugreports
+	[[nodiscard]] std::string get_markdown() const;
+
+	// Localized, for the UI
+	[[nodiscard]] std::string get_richtext() const;
 
 private:
-	std::string report_;
+	struct Entry {
+		const std::string label;
+		const std::vector<std::string> values;
+		const bool localize_values;
+	};
+	std::vector<TechInfo::Entry> entries_;
+
+	void
+	add_plain_entry(const std::string& label, const std::string& single_value, bool localize_value);
+};
+
+/*** The UI presentation ***/
+struct TechInfoBox : public UI::Box {
+	explicit TechInfoBox(UI::Panel* parent, TechInfo::Type t);
+
+private:
+	std::string markdown_report_;
+	std::string richtext_report_;
+	UI::MultilineTextarea report_area_;
 };
 
 }  // namespace FsMenu

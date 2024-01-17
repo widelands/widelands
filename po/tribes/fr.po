@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
 # adrien vigneron <adrien.v@ml1.net>, 2015
 # Arnaud Arnaud <arnaudgay@hotmail.com>, 2020
 # Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
 # Boese Kaiser, 2022
-# C138, 2021-2022
+# C138, 2021-2023
 # David D, 2018,2021
 # GunChleoc, 2016
 # GunChleoc, 2014
@@ -26,9 +26,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-10-05 02:30+0000\n"
+"POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: Renaud Bouchard, 2015-2023\n"
+"Last-Translator: C138, 2021-2023\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1471,7 +1471,7 @@ msgstr "Logement de chercheur d'or"
 #. TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
 #: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:52
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:53
-#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:64
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:65
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:73
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:63
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:78
@@ -1487,8 +1487,8 @@ msgstr "Logement de chercheur d'or"
 msgid "mining gold"
 msgstr "mine de l'or"
 
-#: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:65
-#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:82
+#: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:66
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:83
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:87
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:96
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:85
@@ -1499,8 +1499,8 @@ msgstr "mine de l'or"
 msgid "No Gold"
 msgstr "Pas d'or"
 
-#: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:66
-#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:83
+#: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:67
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:84
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:88
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:97
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:86
@@ -1511,7 +1511,7 @@ msgstr "Pas d'or"
 msgid "Main Gold Vein Exhausted"
 msgstr "Veine d'Or principale épuisée."
 
-#: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:68
+#: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:69
 msgctxt "amazons_building"
 msgid ""
 "This gold digger dwelling’s main vein is exhausted. Expect strongly "
@@ -1531,26 +1531,26 @@ msgid "gathering"
 msgstr "rassemble"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
-#: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:48
+#: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:51
 msgid "gathering meat"
 msgstr "rassemble de la viande"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
-#: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:56
+#: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:63
 msgid "gathering fish"
 msgstr "rassemble du poisson"
 
-#: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:65
+#: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:76
 msgid "No Game, No Fish"
 msgstr "Pas de gibier, pas de poisson"
 
 #. TRANSLATORS: "Game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:67
+#: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:78
 msgid "Out of Game and Fish"
 msgstr "Plus de gibier ni de poisson"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:69
+#: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:80
 msgctxt "amazons_building"
 msgid ""
 "The hunter-gatherer working out of this hunter-gatherer’s hut can’t find any"
@@ -1597,11 +1597,11 @@ msgstr "coupe des lianes"
 
 #. TRANSLATORS: Short for "No Trees to cut lianas" for clay pits
 #: ../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:49
-#: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:57
-#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:46
-#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:58
-#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:49
-#: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:56
+#: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:65
+#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:50
+#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:62
+#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:53
+#: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:60
 msgid "No Trees"
 msgstr "Pas d'arbres"
 
@@ -1625,19 +1625,19 @@ msgstr "Hutte de coupeur d'arbres rares"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
-#: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:39
+#: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:42
 msgid "harvesting balsa"
 msgstr "récolte du balsa"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
-#: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:48
+#: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:54
 msgid "harvesting rubber"
 msgstr "récolte du caoutchouc"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
-#: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:57
+#: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:66
 msgid "harvesting ironwood"
 msgstr "récolte du bois ferreux"
 
@@ -1684,15 +1684,15 @@ msgstr "Cabane d'éclaireur"
 
 #. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
 #: ../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:41
-#: ../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:49
+#: ../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:53
 #: ../../data/tribes/buildings/productionsites/atlanteans/scouts_house/init.lua:50
-#: ../../data/tribes/buildings/productionsites/atlanteans/scouts_house/init.lua:61
+#: ../../data/tribes/buildings/productionsites/atlanteans/scouts_house/init.lua:65
 #: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:56
-#: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:64
+#: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:68
 #: ../../data/tribes/buildings/productionsites/empire/scouts_house/init.lua:51
-#: ../../data/tribes/buildings/productionsites/empire/scouts_house/init.lua:59
+#: ../../data/tribes/buildings/productionsites/empire/scouts_house/init.lua:63
 #: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:52
-#: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:60
+#: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:64
 msgid "scouting"
 msgstr "Explore"
 
@@ -1817,23 +1817,23 @@ msgstr "Cabane du tailleur de pierre"
 msgid "cutting granite"
 msgstr "Coupe le granit"
 
-#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:44
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:45
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:56
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:69
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:56
+#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:48
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:49
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:60
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:80
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:60
 msgid "No Rocks"
 msgstr "Pas de roches"
 
-#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:45
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:46
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:57
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:70
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:57
+#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:49
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:50
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:61
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:81
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:61
 msgid "Out of Rocks"
 msgstr "Plus de roches"
 
-#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:46
+#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:50
 msgctxt "amazons_building"
 msgid ""
 "The stonecutter working at this stonecutter’s hut can’t find any rocks in "
@@ -1849,7 +1849,7 @@ msgstr "Mine de pierre"
 #. TRANSLATORS: Completed/Skipped/Did not start mining because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:51
 msgid "mining"
-msgstr ""
+msgstr "creuser"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:64
@@ -1876,11 +1876,11 @@ msgstr "mine du quartz"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:91
 msgid "No Stones"
-msgstr ""
+msgstr "Pas de pierre"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:92
 msgid "Main Stone Vein Exhausted"
-msgstr ""
+msgstr "Veine principale de pierre épuisée"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:94
 msgctxt "amazons_building"
@@ -1907,23 +1907,23 @@ msgctxt "amazons_building"
 msgid "Water Gatherer’s Hut"
 msgstr "Hutte de porteur d'eau"
 
-#: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:50
-#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:55
-#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:64
-#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:59
-#: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:61
+#: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:55
+#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:58
+#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:67
+#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:62
+#: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:64
 msgid "No Water"
 msgstr "Pas d'eau"
 
-#: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:51
-#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:56
-#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:65
-#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:60
-#: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:62
+#: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:56
+#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:59
+#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:68
+#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:63
+#: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:65
 msgid "Out of Water"
 msgstr "Plus d'eau"
 
-#: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:52
+#: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:57
 msgctxt "amazons_building"
 msgid ""
 "The carrier working at this water gatherer’s hut can’t find any water in its"
@@ -1964,15 +1964,15 @@ msgstr "Cabane du bûcheron"
 msgid "felling trees"
 msgstr "Abat des arbres"
 
-#: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:58
-#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:47
-#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:59
-#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:50
-#: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:57
+#: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:66
+#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:51
+#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:63
+#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:54
+#: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:61
 msgid "Out of Trees"
 msgstr "Plus d'arbres."
 
-#: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:59
+#: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:67
 msgctxt "amazons_building"
 msgid ""
 "The woodcutter working at this woodcutter’s hut can’t find any trees in her "
@@ -2177,18 +2177,18 @@ msgid "Fish Breeder’s House"
 msgstr "Cabane de pisciculteur"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:51
-#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:52
-#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:61
-#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:52
-#: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:59
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:56
+#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:65
+#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:56
+#: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:63
 msgid "No Fish"
 msgstr "Pas de poisson"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:52
-#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:53
-#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:62
-#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:53
-#: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:60
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:57
+#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:66
+#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:57
+#: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:64
 msgid "Out of Fish"
 msgstr "Plus de poisson"
 
@@ -2220,7 +2220,7 @@ msgstr "Cabane de pêcheur"
 msgid "fishing"
 msgstr "pêche"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:54
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:58
 msgctxt "atlanteans_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
@@ -2251,7 +2251,7 @@ msgctxt "atlanteans_building"
 msgid "Gold Mine"
 msgstr "Mine d'or"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:85
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:86
 msgctxt "atlanteans_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2284,23 +2284,23 @@ msgstr "Cabane de chasseur"
 msgid "hunting"
 msgstr "chasse"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:48
-#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:66
-#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:51
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:67
+#: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:52
+#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:70
+#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:55
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:71
 msgid "No Game"
 msgstr "Pas de gibier"
 
 #. TRANSLATORS: "Game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:50
-#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:68
-#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:53
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:69
+#: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:54
+#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:72
+#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:57
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:73
 msgid "Out of Game"
 msgstr "Plus de gibier"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:52
+#: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:56
 msgctxt "atlanteans_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
@@ -2385,12 +2385,12 @@ msgstr "Carrière"
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:36
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:47
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:52
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:55
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:47
 msgid "quarrying granite"
 msgstr "extrait du granite"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:47
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:51
 msgctxt "atlanteans_building"
 msgid ""
 "The stonecutter working at this quarry can’t find any rocks in his work "
@@ -2596,7 +2596,7 @@ msgctxt "atlanteans_building"
 msgid "Well"
 msgstr "Puits"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:57
+#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:60
 msgctxt "atlanteans_building"
 msgid "The carrier working at this well can’t find any water in his well."
 msgstr "Le porteur travaillant à ce puits ne trouve plus d'eau dans son puits."
@@ -2607,7 +2607,7 @@ msgctxt "atlanteans_building"
 msgid "Woodcutter’s House"
 msgstr "Maison du coupeur de bois"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:48
+#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:52
 msgctxt "atlanteans_building"
 msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
@@ -2782,7 +2782,7 @@ msgctxt "barbarians_building"
 msgid "Fisher’s Hut"
 msgstr "Cabane de pêcheur"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:63
+#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:67
 msgctxt "barbarians_building"
 msgid ""
 "The fisher working out of this fisher’s hut can’t find any fish in his work "
@@ -2885,7 +2885,7 @@ msgid "Hunter’s Hut"
 msgstr "Cabane du chasseur"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:70
+#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:74
 msgctxt "barbarians_building"
 msgid ""
 "The hunter working out of this hunter’s hut can’t find any game in his work "
@@ -2950,7 +2950,7 @@ msgctxt "barbarians_building"
 msgid "Lumberjack’s Hut"
 msgstr "Cabane du bûcheron"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:60
+#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:64
 msgctxt "barbarians_building"
 msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
@@ -2999,7 +2999,7 @@ msgctxt "barbarians_building"
 msgid "Quarry"
 msgstr "Carrière"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:58
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:62
 msgctxt "barbarians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -3102,7 +3102,7 @@ msgctxt "barbarians_building"
 msgid "Well"
 msgstr "Puits"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:66
+#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:69
 msgctxt "barbarians_building"
 msgid "The carrier working at this well can’t find any water in his well."
 msgstr "Le porteur travaillant à ce puits ne trouve plus d'eau dans son puits."
@@ -3241,7 +3241,7 @@ msgctxt "empire_building"
 msgid "Fisher’s House"
 msgstr "Maison de pêcheur"
 
-#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:54
+#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:58
 msgctxt "empire_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
@@ -3288,7 +3288,7 @@ msgid "Hunter’s House"
 msgstr "Maison de chasseur"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:55
+#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:59
 msgctxt "empire_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
@@ -3334,7 +3334,7 @@ msgctxt "empire_building"
 msgid "Lumberjack’s House"
 msgstr "Maison de bûcheron"
 
-#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:51
+#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:55
 msgctxt "empire_building"
 msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
@@ -3417,11 +3417,11 @@ msgid "Quarry"
 msgstr "Carrière"
 
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying marble because ...
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:60
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:67
 msgid "quarrying marble"
 msgstr "extrait du marbre"
 
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:71
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:82
 msgctxt "empire_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -3564,7 +3564,7 @@ msgctxt "empire_building"
 msgid "Well"
 msgstr "Puits"
 
-#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:61
+#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:64
 msgctxt "empire_building"
 msgid "The carrier working at this well can’t find any water in his well."
 msgstr "Le porteur travaillant à ce puits ne trouve plus d'eau dans son puits."
@@ -3904,7 +3904,7 @@ msgctxt "frisians_building"
 msgid "Fisher’s House"
 msgstr "Maison de pêcheur"
 
-#: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:61
+#: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:65
 msgctxt "frisians_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
@@ -3969,7 +3969,7 @@ msgid "Hunter’s House"
 msgstr "Maison du chasseur"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:71
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:75
 msgctxt "frisians_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
@@ -4021,7 +4021,7 @@ msgctxt "frisians_building"
 msgid "Quarry"
 msgstr "Carrière"
 
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:58
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:62
 msgctxt "frisians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -4192,7 +4192,7 @@ msgctxt "frisians_building"
 msgid "Well"
 msgstr "Puits"
 
-#: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:63
+#: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:66
 msgctxt "frisians_building"
 msgid "The carrier working at this well can’t find any water in his well."
 msgstr "Le porteur travaillant à ce puits ne trouve plus d'eau dans sa zone de travail."
@@ -4203,7 +4203,7 @@ msgctxt "frisians_building"
 msgid "Woodcutter’s House"
 msgstr "Maison de bûcheron"
 
-#: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:58
+#: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:62
 msgctxt "frisians_building"
 msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
@@ -5173,13 +5173,13 @@ msgstr "Pas de ressources"
 #: ../../data/tribes/immovables/resi/amazons/stones_1/init.lua:8
 msgctxt "resource_indicator"
 msgid "Some Quartz"
-msgstr ""
+msgstr "Un peu de Quartz"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/amazons/stones_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Quartz"
-msgstr ""
+msgstr "Beaucoup de Quartz"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/coal_1/init.lua:8

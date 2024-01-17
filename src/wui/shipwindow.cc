@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2023 by the Widelands Development Team
+ * Copyright (C) 2011-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -450,6 +450,10 @@ void ShipWindow::think() {
 	update_destination_buttons(ship);
 	set_destination_->set_enabled(can_act);
 	btn_sink_->set_enabled(can_act);
+	// TODO(tothxa): This still allows refitting to transport if naval warfare is disabled,
+	//    IOW when there shouldn't have been warships to begin with. If that's not desired,
+	//    then add:
+	//       && ibase_.game().naval_warfare_allowed()
 	btn_refit_->set_visible(can_act && ship->can_refit(Widelands::ShipType::kTransport));
 	btn_warship_stay_->set_enabled(can_act);
 

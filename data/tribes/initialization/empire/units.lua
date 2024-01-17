@@ -1246,8 +1246,18 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("empire_building", "An enthusiastic stonemason arriving to a new quarry"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Quarry
             purpose = pgettext("empire_building", "Cuts blocks of granite and marble out of rocks in the vicinity."),
-            -- TRANSLATORS: Note helptext for an Empire production site: Quarry
-            note = pgettext("empire_building", "The quarry needs rocks to cut within the work area.")
+            note = {
+               -- TRANSLATORS: Note helptext for an Empire production site: Quarry, part 1
+               pgettext("empire_building", "The quarry needs rocks to cut within the work area."),
+               -- TRANSLATORS: Note helptext for an Empire production site: Quarry, part 2
+               pgettext("empire_building", "The stonemason finds 5 blocks of granite and 2 blocks of marble out of 7 rocks.")
+            },
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire production site: Quarry, part 1
+               pgettext("empire_building", "This building can produce one granite between %1$s and %2$s and one marble between %3$s and %4$s, depending on how far the stonemason has to walk."):bformat(format_seconds(59), format_minutes_seconds(1, 34), format_minutes_seconds(2, 28), format_minutes_seconds(3, 56)),
+               -- TRANSLATORS: Performance helptext for an Empire production site: Quarry, part 2
+               pgettext("empire_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1268,7 +1278,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Empire production site: Lumberjack's House
             purpose = pgettext("building", "Fells trees in the surrounding area and processes them into logs."),
             -- TRANSLATORS: Note helptext for an Empire production site: Lumberjack's House
-            note = pgettext("empire_building", "The lumberjack’s house needs trees to fell within the work area.")
+            note = pgettext("empire_building", "The lumberjack’s house needs trees to fell within the work area."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire production site: Lumberjack's House
+               pgettext("empire_building", "This building can produce one log between %1$s and %2$s, depending on how far the lumberjack has to walk."):bformat(format_seconds(49), format_minutes_seconds(1, 29)),
+               -- TRANSLATORS: Performance helptext for an Empire production site: Lumberjack's House
+               pgettext("empire_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1289,7 +1305,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Empire production site: Forester's House
             purpose = pgettext("building", "Plants trees in the surrounding area."),
             -- TRANSLATORS: Note helptext for an Empire production site: Forester's House
-            note = pgettext("empire_building", "The forester’s house needs free space within the work area to plant the trees.")
+            note = pgettext("empire_building", "The forester’s house needs free space within the work area to plant the trees."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire production site: Forester's House, part 1
+               pgettext("empire_building", "The forester plants one tree between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(23), format_seconds(45)),
+               -- TRANSLATORS: Performance helptext for an Empire production site: Forester's House, part 2
+               pgettext("empire_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1314,6 +1336,12 @@ wl.Descriptions():new_tribe {
                pgettext("empire_building", "The fisher’s house needs water full of fish within the work area."),
                -- TRANSLATORS: Note helptext for an Empire production site: Fisher's House, part 2
                pgettext("empire_building", "Roads and trees along the shoreline block fishing."),
+            },
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire production site: Fisher's House, part 1
+               pgettext("empire_building", "This building can produce one fish between %1$s and %2$s, depending on how far the fisher has to walk."):bformat(format_seconds(27), format_seconds(56)),
+               -- TRANSLATORS: Performance helptext for an Empire production site: Fisher's House, part 2
+               pgettext("empire_building", "In case of slopes or obstacles in the way, the time is increased.")
             }
          }
       },
@@ -1335,7 +1363,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an Empire production site: Hunter's House
             purpose = pgettext("building", "Hunts animals to produce meat."),
             -- TRANSLATORS: Note helptext for an Empire production site: Hunter's House
-            note = pgettext("empire_building", "The hunter’s house needs animals to hunt within the work area.")
+            note = pgettext("empire_building", "The hunter’s house needs animals to hunt within the work area."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire production site: Hunter's House, part 1
+               pgettext("empire_building", "This building can produce one meat between %1$s and %2$s, depending on how far the hunter has to walk."):bformat(format_seconds(43), format_minutes_seconds(1, 34)),
+               -- TRANSLATORS: Performance helptext for an Empire production site: Hunter's House, part 2
+               pgettext("empire_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1354,7 +1388,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore author helptext for an Empire production site: Well
             lore_author = pgettext("empire_building", "Imperial proverb"),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Well
-            purpose = pgettext("building", "Draws water out of the deep.")
+            purpose = pgettext("building", "Draws water out of the deep."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire production site: Well, part 1
+               pgettext("empire_building", "The carrier needs %s to get one bucket full of water."):bformat(format_seconds(44)),
+               -- TRANSLATORS: Performance helptext for an Empire production site: Well, part 2
+               pgettext("empire_building", "If the water resource is depleted, the carrier needs %s on average."):bformat(format_minutes_seconds(1, 11))
+            }
          }
       },
       {
@@ -1374,7 +1414,13 @@ wl.Descriptions():new_tribe {
             lore_author = pgettext("empire_building", "A belated scout’s report"),
             no_scouting_building_connected = pgettext("empire_building", "You need to connect this flag to a scout’s house before you can send a scout here."),
             -- TRANSLATORS: Purpose helptext for an Empire production site: Scout's House
-            purpose = pgettext("building", "Explores unknown territory.")
+            purpose = pgettext("building", "Explores unknown territory."),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Empire production site: Scout's House, part 1
+               pgettext("empire_building", "One exploration trip of the scout takes between %1$s and %2$s."):bformat(format_minutes_seconds(1, 52), format_minutes_seconds(4, 5)),
+               -- TRANSLATORS: Performance helptext for an Empire production site: Scout's House, part 2
+               pgettext("empire_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
 

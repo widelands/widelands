@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1195,7 +1195,7 @@ void InteractiveBase::load_windows(FileRead& fr, Widelands::MapObjectLoader& mol
 void InteractiveBase::save_windows(FileWrite& fw, Widelands::MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersionUniqueWindows);
 	for (UI::Panel* child = get_first_child(); child != nullptr; child = child->get_next_sibling()) {
-		const UI::Panel::SaveType t = child->save_type();
+		const UI::Panel::SaveType t = child->current_save_type();
 		if (t != UI::Panel::SaveType::kNone) {
 			fw.unsigned_8(static_cast<uint8_t>(t));
 			fw.signed_32(child->get_x());

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2023 by the Widelands Development Team
+ * Copyright (C) 2011-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -268,6 +268,8 @@ ExpeditionDisplay::ExpeditionDisplay(UI::Panel* parent,
 	   [this]() { act_start_or_cancel(Widelands::ExpeditionType::kExpedition); });
 	refitbutton_.sigclicked.connect(
 	   [this]() { act_start_or_cancel(Widelands::ExpeditionType::kRefitToWarship); });
+
+	refitbutton_.set_visible(igbase_->game().naval_warfare_allowed());
 
 	update_buttons();
 	update_contents();  // Make sure it gets called at least once
