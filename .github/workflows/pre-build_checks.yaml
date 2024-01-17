@@ -1,0 +1,80 @@
+name: Pre-Build Documentation and Sanity Checks
+on:
+  workflow_call:
+    inputs:
+      clang_tidy:
+        required: true
+        type: string
+      codecheck:
+        required: true
+        type: string
+
+jobs:
+  clang_tidy:
+    if: ${{ inputs.clang_tidy != 'false' }}
+    uses: ./.github/workflows/build_clang_tidy.yaml
+
+  codecheck:
+    if: ${{ inputs.codecheck != 'false' }}
+    uses: ./.github/workflows/build_codecheck.yaml
+
+  # This job runs multiple smaller checks where having several jobs would be overkill.
+  misc_sanity_checks:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+    - name: Validate JSON files
+      run: |
+        python3 utils/validate_json.py data/txts/
+        python3 utils/update_authors.py
+    - name: Check for missing copyright headers
+      run: |
+        pushd src
+        ../utils/find_missing_copyright_headers.sh
+        popd
+    - name: Check for superfluous includes and forward declarations
+      run: |
+        pushd src
+        ../utils/find_unused_includes.py
+        popd
+    - name: Check regression test coverage of starting and win conditions
+      run: |
+        python3 utils/check_template_test_coverage.py
+
+  documentation:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+    - name: Installing python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.x
+    - name: Generate documentation
+      run: |
+        cd doc/sphinx
+        pip install -r requirements.txt
+        mkdir source/_static
+        ./extract_rst.py
+        sphinx-build -W -b json -d build/doctrees source build/json
+
+  lua_style:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+    - name: Prepare documentation examples for parsing
+      run: |
+        pushd doc/sphinx
+        ./extract_rst.py
+        popd
+    - name: Run Lua style checker
+      run: ./utils/lua_style_checker.py
+
