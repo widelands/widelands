@@ -31,7 +31,7 @@ wl_library(build_info
 )
 
 if (WIN32)
-	configure_file (${CMAKE_CURRENT_SOURCE_DIR}/../utils/win32/widelands.rc.cmake ${CMAKE_CURRENT_BINARY_DIR}/widelands.rc)
+	configure_file (${CMAKE_CURRENT_SOURCE_DIR}/../utils/windows/widelands.rc.cmake ${CMAKE_CURRENT_BINARY_DIR}/widelands.rc)
 	message (STATUS "Configured windows resource file")
 	set(WIN32_ICON_O ${CMAKE_CURRENT_BINARY_DIR}/wl_icon.o)
 	if(MSVC)

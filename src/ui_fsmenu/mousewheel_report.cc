@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022-2023 by the Widelands Development Team
+ * Copyright (C) 2022-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -70,27 +70,20 @@ InvertedScrollFeedbackWindow::InvertedScrollFeedbackWindow(UI::Panel* parent)
                            .as_font_tag(as_url_hyperlink(kReportURL))))),
         UI::Align::kLeft,
         UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     infobox_(&content_, TechInfoBox::Type::kMousewheelReport),
+     infobox_(&content_, TechInfo::Type::kMousewheelReport),
      close_(&content_, "close", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close")) {
-	do_not_layout_on_resolution_change();
 
 	close_.sigclicked.connect([this]() { die(); });
 
-	content_.add_space(3 * kSpacing);
+	content_.add_space(kSpacing);
 	content_.add(&header_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
-	content_.add_inf_space();
-	content_.add(&infobox_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
-	content_.add_inf_space();
+	content_.add_space(3 * kSpacing);
+	content_.add(&infobox_, UI::Box::Resizing::kExpandBoth);
+	content_.add_space(3 * kSpacing);
 	content_.add(&close_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	content_.add_space(kSpacing);
 
-	int32_t min_w = std::min(get_lborder() + infobox_.get_w() + get_rborder(), parent->get_w());
-	if (get_w() < min_w) {
-		set_size(min_w, get_h());
-	}
 	content_.set_size(get_inner_w(), get_inner_h());
-	header_.set_size(content_.get_inner_w(), 0);
-	infobox_.set_size(content_.get_inner_w(), infobox_.get_h());
 	layout();
 	center_to_parent();
 	initialization_complete();

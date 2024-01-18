@@ -1,6 +1,6 @@
 [TOC]
 
-## Post-1.1 until [git da38617](https://github.com/widelands/widelands/commit/da386174eda132e4267d4d605a7a2f646ad85672)
+## Post-1.1 until [git 301d672](https://codeberg.org/wl/widelands/commit/301d6725e2d5477eb1d0dde4d8a580fbdafc4374)
 
 ### Animations, Icons and Overlays
 
@@ -10,6 +10,9 @@
 - Redesigned Amazon frontiers and flags with more visible playercolour (#5714)
 - Updated Frisian Campaign Portraits (#5737)
 - Add high resolution images for Empire ship (#5950)
+- More playercolour for amazon ship (#6109)
+- Add high resolution images for most tribe immovables (#6137)
+- High resolution images of basic wares from blender models (CB #4576 / GH #6235)
 
 
 ### Sounds and Music
@@ -23,6 +26,7 @@
 - Scenario "Island hopping" fix (#5746)
 - Carry over ship names in Atlantean campaign (#5781)
 - Tutorial 01 fixes (#5909)
+- Fix Food Production objective in first atlantean campaign (#6081)
 
 
 ### Scripting
@@ -49,11 +53,16 @@
     - Read+Write access to most properties of all kinds of UI elements at runtime
     - Add support for checkboxes, radio groups, unique windows, spinboxes, sliders (all three flavours), progress bars, editboxes and multiline editboxes
 - Cleanup: Deduplicate index variables in Lua `get_x_descriptions` (#6026)
+- Cleanup: Remove last uses of deprecated `tribe.carrier2` and `tribe.carrier` (#6025)
+- Win condition artifacts minor fix (#6042)
+- Implement `walk=<direction>` in worker programs (CB #4467 / GH #6149)
+- Pass correct parameter to lua_typename() (CB #4646 / GH #6282)
 
 
 ### Maps
 
 - Map Required Widelands Version Check (#5884)
+- Add a building plot to unusable port island on Calvisson (#6084)
 
 
 ### Add-Ons
@@ -68,6 +77,10 @@
 - Turn unguaranteed add-on dependency check assert into a conditional (#5829)
 - Add-Ons Packager: Compute Minimum Widelands Version For Maps (#5905)
 - UI Plugins (#5872)
+- Do not hide Add-On comment text during layout (#6032)
+- Fix false positives in add-ons packager change detection (#6033)
+- Add missing `richtext_escape` for add-ons error message (#6049)
+- Don't require World add-ons to be globally enabled for dependent Maps add-ons (#6057)
 
 
 ### Saveloading
@@ -78,6 +91,16 @@
 - Fix Filesystem Errors from ReplayWriter (#5724)
 - Save only used terrains in terrain packet (#5803)
 - Fix Shipyard/PortDock/FleetInterface Load Order Regression (#5928)
+- Building Stats Menu checks if saveloaded selection is still available (#6050)
+- Settlers2/RTTR Map Loading Fixes (#6054)
+    - Support RTTR Maps
+    - Fixes for stones placement
+    - Allow up to 8 players
+    - More useful error messages for invalid maps
+- Fix `PlayerMessageCommand` Saveloading (#6097)
+- Fix double cleanup for direct loading of invalid replay (#6098)
+- Reinitialize forester cache when reloading (#6105)
+- Do not save partially initialized window (GH #6223 / CB #4564)
 
 
 ### AI
@@ -107,6 +130,19 @@
 - Count trees for start conditions like Poor Hamlet (#5964)
 - Clean up legacy resource handling code (#6000)
 - Cleanup failed game state before entering menu after game error (#6004)
+- Free Unsent PlayerCommands on Cleanup (#6011)
+- Well-defined shipyards collaboration (#6070): When a shipyard has multiple shipconstructionsites nearby, then on each working cycle a random site to work on is picked.
+- Custom Ship & Warehouse Naming Lists (#6056)
+- Add mutex locks for economy creation/deletion (#6091)
+- Safeguard pathfinding with a mutex (#6104)
+- Emergency saving enhancements (#6108)
+    - Emergency saves from network games are now saved as network savegames instead of singleplayer savegames.
+    - During the emergency save, show a game saving progress screen like for manual saves.
+- More consistent worker eviction (#6136)
+- Further enhancements for ship construction (#6129)
+- Add quartz to the Amazon economy (CB #4512 / GH #6170)
+- Amazon starting conditions: Fix input quantities in stone workshop (GH #6178 / CB #4520)
+- Cancel battles only when players negotiate real truce (CB #4574 / GH #6233)
 
 
 ### User Interface
@@ -190,12 +226,50 @@
 - Fix Segfault in `FieldActionWindow` (#5982)
 - Revert preventing `move_inside_parent()` to move `UniqueWindow`s with saved position (#5995)
 - Name All UI Elements (#5963)
+- Remove hardcoded panel sizes in launch game window (#6016)
+- Do not layout invisible box items (#6035). Resolves game setup UI regressions.
+- Fix `Window::move_inside_parent` bottom docking (#6055)
+- Options Window Cleanup (#6059)
+    - Remove mouse grab option
+    - Make syncstream writing a command-line-only option
+    - Redesign sound options layout
+    - Fix layouting for checkboxes and translation stats text
+- User Inactivity Detection (#6048)
+    - Autosaves are skipped if the user has not been active since the last autosave,
+      or if gametime progressed by less than half of the autosave interval. Autosaves can also happen during pauses.
+      This behaviour can be toggled via an option (default: on).
+    - If the user is inactive for a configurable time span (default: disabled), the game is automatically set to paused.
+- Fix racecondition segfault when opening building window (#6065)
+- Fix editbox horizontal scrolling mouse clicks regression (#6060)
+- Fix LaunchMPG Layouting Segfault (#6079)
+- Fix more box regressions (#6101)
+    - Fix input queue priority indicators positions
+    - Fix LaunchMPG client box scrolling
+- Draw system clock also in main menu (#6103)
+- Debugconsole and input history improvements (#5944)
+- Allow saving favourite colours in colour chooser (#6124)
+- Remember more settings in stock/unique window (#6128)
+- Fix selection cursor setting after picking custom starting position (#6082, #6152)
+- Different overlay image for valid custom starting positions (#6148)
+- Refactor `WaresDisplay` ware list handling (#6144)
+- Fix comment box overflow (CB #4499 / GH #6157)
+- Do not handle_mousein in ware display (CB #4501 / GH #6159)
+- Fix heap-use-after-free in message preview drawing (CB #4511 / GH #6169)
+- Game title box (GH #6172 / CB #4514)
+- Add zero check for division in textinput (GH #6218 / CB #4559)
+- Fix duplicated richtext wrapping in messagebox (CB #4587 / GH #6246)
+- Ask for more information when reporting crashes (CB #4592 / GH #6252)
+- Fix end status text sorting in game summary window (CB #4539 / GH #6197)
+- Fix size assert for very large panels (CB #4652 / GH #6289)
 
 
 ### Internationalization
 
 - String Fixes (#5710, #5782, #5999)
 - Capitalisation of tribe names (#5910, #5913, #5916)
+- Keep PO and POT files in sync in translations updates (#6027)
+- Translations update CI: Commit pure translations separately (#6064)
+- Make spinbox current value and change-by value translatable separately (CB #4612 / GH #6273)
 
 
 ### Help and Documentation
@@ -209,6 +283,15 @@
 - Update keyboard controls help and generate it semi-automatically (#5717)
 - Follow links in building help window (#6003)
 - Helptexts about roads blocking shorelines for workers (#6014)
+- Update performance helptext for buildings producing more wares (#5861)
+- Some documentation rephrasings (#6041)
+- Documentation: attribute name with underline (and not space) (CB #4536 / GH #6194)
+- Doc Lua API: current examples for get_build_id() (GH #6209 / CB #4552)
+- Update performance helptext for comparable buildings between tribes, small sites (GH #6068 / CB #4435)
+- Fix documentation for workers (GH #6244 / CB #4585)
+- Doc for lua function update_toolbar() matches code (CB #4594 / GH #6254)
+- Extend documentation about attributes of units (GH #6195 / CB #4537)
+- Documentation: place_road() needs a flag, not a field (GH #6262 / CB #4601)
 
 
 ### Editor
@@ -241,6 +324,8 @@
 - Remove superfluous `SDL_GetModState()` calls (#5945)
 - Allow lookup of richtext inline images without specifying scale suffix (#5935)
 - Continuous Bob Animations (#5954)
+- Force all textures to 32bit for Mesa 23.x (#6072)
+- Correct float-int type mismatch in fragment shader's alpha calculation (CB #4586 / GH #6245)
 
 
 ### Networking
@@ -249,6 +334,14 @@
 - Prevent spectating host from changing game speed (#5604)
 - Show enabled game-relevant add-ons before hosting (#5599)
 - Disambiguate temporary savegame for multiple LAN games (#5875)
+- Show error message immediately when host leaves metaserver game (#6012)
+- Game client win condition duration bugfixes (#6073): The duration spinbox is disabled for the gameclient, and an update from the host triggers no `changed()` signals on the client.
+- Fix chat player color indices if some players are not in the game (#6069)
+- Fail gracefully in LAN setup when network access restricted (#6076)
+- Fix custom naming lists for spectators (#6107)
+- Game Chat Accessibility Tweaks (#6127)
+- Sanitize network game player names more thoroughly (#6132)
+- Fix calling emergency save from GameHost::disconnect_client() (CB #4597 / GH #6258)
 
 
 ### Build System
@@ -280,12 +373,33 @@
 - CMakeLists Cleanups for RelWithDebInfo (#5943)
 - CI: Push vcpkg ref only to main repo (#5977)
 - Define `PRIuS` using `PRIuPTR` if available (#5979)
-- Set fixed MSVC toolset version (#6007)
+- Set fixed MSVC toolset version (#6007, #6147)
 - Resolve compiler warnings (#6021)
     - Re-enable `-Werror` for GCC 13.1.1+
     - Update Clang version in CI
     - Resolved most GCC warnings
     - Resolved warnings in MinGW builds
+- Fix documentation CI workflow (#6062, #6089)
+- Fix MinGW library linking order (#6111)
+- Report all validation errors by update_appdata.py (#6116)
+- Remove formatting workarounds (fixes GH #5221)
+- Rename brotli static dependency (GH #6177 / CB #4519)
+- Improve vcpkg update check (GH #6181 / CB #4523)
+- Use cmakes newer FindPython module (CB #4525 / GH #6183)
+- Python files require python3 explicitly (CB #4529 / GH #6187)
+- Fix vcpkg cache restore (GH #6198 / CB #4540)
+- Fix revision detection, bump cmake version (CB #4550 / GH #6207)
+- `update_authors` minor enhancement (GH #6117 / CB #4453)
+- Update toolset.json path (GH #6234 / CB #4575)
+- Improve update translations stats (GH #6120 / CB #4456)
+- Fix msys2 Windows builds (GH #6265 / CB #4604, GH #6278 / CB #4617)
+- Fix building on FreeBSD / OpenBSD (CB #4600 / GH #6261)
+- Fix error detected by shellcheck in compile.sh (GH #6268 / CB #4607)
+- Install fixed version of 32bit glbinding (GH #6287 / CB #4650)
+- Fix building with external minizip (GH #6279 / CB #4618)
+- New Msys dependencies (GH #6281 / CB #4645)
+- Update `download_asio.sh` to asio version 1.28.0 (CB #4616 / GH #6277)
+- MinGW dependency system (CB #4653 / GH #6290)
 
 
 ### Other Issues
@@ -305,6 +419,10 @@
     - Skip POT-Creation-Date only changes in PO files too (#5941)
     - Translation update: Exit cleanly when nothing needs to be committed (#5959)
 - Remove unused code from regression_test.py (#5987)
+- Self-diagnose crashes (#6100)
+- Add `.editorconfig` for automatic indentation in many editors (CB #4415 / GH #6019)
+- Update copyright end year to 2024
+- Fix title in test of `string_bformat.lua` of `lua_testsuite.wmf` (CB #4647 / GH #6283)
 
 
 ## Release 1.1
