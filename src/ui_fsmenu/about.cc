@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2023 by the Widelands Development Team
+ * Copyright (C) 2016-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -55,7 +55,7 @@ About::About(MainMenu& fsmm, UI::UniqueWindow::Registry& r)
 		log_err("%s", err.what());
 	}
 
-	TechInfoBox* infobox = new TechInfoBox(&tabs_, TechInfoBox::Type::kAbout);
+	TechInfoBox* infobox = new TechInfoBox(&tabs_, TechInfo::Type::kAbout);
 	tabs_.add_tab_without_script("info", _("Technical Info"), infobox);
 
 	close_.sigclicked.connect([this]() { die(); });

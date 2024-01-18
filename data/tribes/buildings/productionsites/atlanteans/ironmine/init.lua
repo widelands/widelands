@@ -52,10 +52,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
          descname = _("mining iron"),
          actions = {
-            -- time total: 105 + 5 x 3.6
+            -- time total: 37 + 5 * (14 + 3.6) = 125 sec
             "return=skipped unless economy needs iron_ore",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "sleep=duration:35s",
+            "sleep=duration:37s",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",

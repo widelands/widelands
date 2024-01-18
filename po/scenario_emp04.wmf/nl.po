@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -8,14 +8,15 @@
 # stdh, 2020
 # CrisiusXIII <chris@cborn.nl>, 2021
 # 78874c46c2b3a507dfdeacb75f6712de_6b7b1df, 2022
+# Alex Rijckaert, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: 78874c46c2b3a507dfdeacb75f6712de_6b7b1df, 2022\n"
+"Last-Translator: Alex Rijckaert, 2023\n"
 "Language-Team: Dutch (https://app.transifex.com/widelands/teams/35159/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +26,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/starting_conditions.lua:39
 msgid "Fremil"
-msgstr ""
+msgstr "Fremil"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:43
 msgid "Dismantle the unproductive buildings"
@@ -1164,6 +1165,9 @@ msgid ""
 "wine. We found the additional wares while we were taking stock recently. "
 "Maybe the goddess Vesta is still supporting us."
 msgstr ""
+"Proost Lutius, ik weet niet hoe, maar we hebben wat bier en wijn gekregen. "
+"We vonden de extra waren toen we onlangs aan het inventariseren waren. "
+"Misschien steunt de godin Vesta ons nog steeds."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:547
 msgid "Amalea Analyzes the Economy"
@@ -1189,6 +1193,8 @@ msgstr ""
 msgid ""
 "I think we should have a deeper look into the issue and visit one of them."
 msgstr ""
+"Ik denk dat we de kwestie nader moeten onderzoeken en een van hen moeten "
+"bezoeken."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:560
 msgid "Amalea’s Restrictions"
@@ -1263,6 +1269,9 @@ msgid ""
 "Oh no Lutius, I don’t know how this could have happened, but the Barbarians "
 "have sacked our headquarters. So, we have lost this battle and our empire!"
 msgstr ""
+"Oh nee Lutius, ik weet niet hoe dit heeft kunnen gebeuren, maar de Barbaren "
+"hebben ons hoofdkwartier geplunderd. Dus we hebben deze strijd en ons rijk "
+"verloren!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:591
 msgid "Amalea reports our headquarters lost…"
@@ -1275,6 +1284,9 @@ msgid ""
 "have destroyed our headquarters. So, we can’t deliver the wares to Julia "
 "anymore."
 msgstr ""
+"Oh nee Lutius, ik weet niet hoe dit heeft kunnen gebeuren, maar de barbaren "
+"hebben ons hoofdkwartier vernietigd. Dus we kunnen de waren niet meer aan "
+"Julia leveren."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:596
@@ -1292,6 +1304,9 @@ msgid ""
 "have destroyed our last warehouse. So, we have lost this battle and our "
 "empire!"
 msgstr ""
+"Oh nee Lutius, ik weet niet hoe dit heeft kunnen gebeuren, maar de Barbaren "
+"hebben onze laatste opslagplaats vernietigd. Dus we hebben deze strijd en "
+"ons rijk verloren!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:609
 msgid "Amalea in a Hurry"
@@ -1308,6 +1323,9 @@ msgid ""
 "I’ll be very busy to examine everything, so I won’t be here to provide as "
 "detailed advice as I used to do."
 msgstr ""
+"Broer, zoals je ziet lijkt er van alles mis te zijn in deze economie. Ik zal"
+" het erg druk hebben om alles te onderzoeken, dus ik zal hier niet zo "
+"gedetailleerd advies kunnen geven als ik vroeger deed."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:615
@@ -1316,6 +1334,9 @@ msgid ""
 "yourself. Of course I will report and advise immediately whenever I discover"
 " new problems."
 msgstr ""
+"Maar ik heb er alle vertrouwen in dat je alles zelf naar behoren zult "
+"afhandelen. Natuurlijk zal ik direct rapporteren en adviseren als ik nieuwe "
+"problemen ontdek."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:623
 msgid "Saledus looks very relaxed…"
@@ -1826,6 +1847,8 @@ msgid ""
 "In the temple of Vesta, the wares to worship are stored. It is the home of "
 "the priestesses and the guards of the goddess."
 msgstr ""
+"In de tempel van Vesta worden de waren ter verering opgeslagen. Het is de "
+"thuisbasis van de priesteressen en de bewakers van de godin."
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:7
 msgctxt "empire_building"

@@ -55,6 +55,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start scouting because ...
          descname = _("scouting"),
          actions = {
+            -- time of worker: 82.2-214.8 sec
+            -- min. time total: 30 + 82.2 = 112.2 sec
+            -- max. time total: 30 + 214.8 = 244.8 sec
+            -- avg. time total: (112.2 + 244.8) / 2 = 178.5 sec
             "consume=ration",
             "sleep=duration:30s",
             "callworker=scout"

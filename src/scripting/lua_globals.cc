@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -117,12 +117,14 @@ static int L_string_bformat(lua_State* L) {
 			case LUA_TFUNCTION:
 			case LUA_TUSERDATA:
 			case LUA_TTHREAD:
-			case LUA_TLIGHTUSERDATA:
-				report_error(L, "Cannot format the given type %s at index %i", lua_typename(L, i), i);
+			case LUA_TLIGHTUSERDATA: {
+				const std::string type = lua_typename(L, lua_type(L, i));
+				report_error(L, "Cannot format the given type %s at index %i", type.c_str(), i);
 				NEVER_HERE();  // as report_error will never return
+			}
 
 			default: {
-				const std::string type = lua_typename(L, i);
+				const std::string type = lua_typename(L, lua_type(L, i));
 				throw LuaError("Unexpected type " + type + " is not supported");
 			}
 			}
@@ -417,7 +419,9 @@ static int L_ticks(lua_State* L) {
 .. function:: get_build_id()
 
    returns the version string of this widelands executable.  Something like
-   "build-16[debug]".
+   "1.1" (for a release),
+   "1.2~git26354 (4ba897c@master)" (development for 1.2) or
+   "build-16[debug]" (old, before version 1.0).
 */
 static int L_get_build_id(lua_State* L) {
 	lua_pushstring(L, build_id());
