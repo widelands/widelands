@@ -64,7 +64,9 @@ jobs:
             - 'data/world/**.lua'
             - added|deleted: 'data/tribes/**' # do not care about image modifications
             - added|deleted: 'data/world/**' # dito
+            - 'data/maps/Crater.wmf/**' # for test/template/test_alldefaults.wgt
             - 'data/maps/Lesser_Ring.wmf/**' # for test/template/*.wgt
+            - 'data/maps/Wisent_Valley.wmf/**' # for test/template/test_fortified_vi*-artifacts.wgt
             - 'data/*' # do not ignore files directly inside
             - 'regression_test.py'
             - 'test/**'
