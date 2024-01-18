@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -64,6 +64,8 @@ public:
 	int get_scenario_difficulty(lua_State*);
 	int get_allow_diplomacy(lua_State*);
 	int set_allow_diplomacy(lua_State*);
+	int get_allow_naval_warfare(lua_State*);
+	int set_allow_naval_warfare(lua_State*);
 	int get_interactive_player(lua_State*);
 	int get_win_condition(lua_State*);
 	int get_win_condition_duration(lua_State*);

@@ -44,6 +44,10 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
          descname = _("planting trees"),
          actions = {
+            -- time of worker: 13.2-34.8 sec, mean 23.784 sec
+            -- min. time total: 13.2 + 10 = 23.2 sec
+            -- max. time total: 34.8 + 10 = 44.8 sec
+            -- mean time total: 23.784 + 10 = 33.784 sec
             "callworker=plant",
             "sleep=duration:10s"
          }

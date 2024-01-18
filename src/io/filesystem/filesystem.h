@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -158,7 +158,7 @@ protected:
 	/// To get a filesystem, use the Create methods
 	FileSystem() = default;
 
-	/// How to address the fs' topmost component (e.g. "" on Unix, "D:" on win32)
+	/// How to address the fs' topmost component (e.g. "" on Unix, "D:" on windows)
 	/// \warning This is should \e not contain filesep!
 	std::string root_;
 

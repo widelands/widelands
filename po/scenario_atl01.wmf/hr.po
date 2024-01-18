@@ -3,14 +3,14 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
-# Ivan Bižaca <biza@malilosinj.info>, 2015
+# Ivan Bižaca <biza@malilosinj.info>, 2015,2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2023-08-31 02:28+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: Ivan Bižaca <biza@malilosinj.info>, 2015\n"
+"Last-Translator: Ivan Bižaca <biza@malilosinj.info>, 2015,2023\n"
 "Language-Team: Croatian (http://app.transifex.com/widelands/widelands/language/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -59,11 +59,11 @@ msgid ""
 "The island is huge and as long as we are not sure that we are alone here, we"
 " cannot relax. Explore and conquer it, this is the only way to protect us "
 "from threats on the island and from Atlantis."
-msgstr ""
+msgstr "Otok je ogroman i sve dok nismo sigurni da smo ovdje sami, ne možemo se opustiti. Istražite i osvojite ga, to je jedini način da se zaštitimo od prijetnji na otoku i od Atlantide."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:46
 msgid "Build military sites to expand your territory"
-msgstr ""
+msgstr "Izgradite vojne lokacije kako biste proširili svoj teritorij"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:52
 msgid "Establish a solid food production"
@@ -79,7 +79,7 @@ msgid ""
 "well working food environment by building at least one farm, one blackroot "
 "farm and a mill. The two kinds of flour together with water from a well will"
 " be baked into bread in a bakery, so build a bakery and a well, too."
-msgstr ""
+msgstr "Hrana je vrlo važna za rudare i trening vojske. Uspostavite dobro funkcionirajuću proizvodnju hrane izgradnjom barem jedne farme, jedne farme crnog korijena i mlina. Dvije vrste brašna zajedno s vodom iz bunara bit će promješane i pečene u kruh u pekari, stoga izgradite i pekaru i bunar."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:56
 msgid ""
@@ -88,11 +88,11 @@ msgid ""
 "fish breeder makes sure that a school of fish does not go extinct by "
 "breeding more. The smoking happens in a smokery, you will need at least two "
 "of those."
-msgstr ""
+msgstr "Druge dvije važne vrste hrane su dimljena riba i dimljeno meso. Sirovo meso dostavlja lovac. Ribar iz mora izvlači ribu dok ribogojitelj osigurava da jato riba ne izumre uzgojem riba. Dimljenje se odvija u pušnici, trebat će vam barem dvije pušnice."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Build a farm and a blackroot farm"
-msgstr ""
+msgstr "Izgradite farmu i farmu crnog korijena."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:58
 msgid "Build a mill to make cornmeal and blackroot flour"
@@ -122,7 +122,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build two smokeries to smoke raw meat and fish"
-msgstr ""
+msgstr "Sagradi dvije pušnice kako bi mogao dimiti ribu i meso"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:70
 msgid "Build a spider farm and a weaving mill"

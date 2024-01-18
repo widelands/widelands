@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
 # D M <kamera001dm@gmail.com>, 2017
@@ -8,14 +8,14 @@
 # Frida Bäcklund <frida.sofia.backlund@gmail.com>, 2021
 # GunChleoc, 2014
 # GunChleoc, 2014
-# Niklas Nordgren, 2022
+# Niklas Nordgren, 2022-2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-08-31 02:28+0000\n"
+"POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: D M <kamera001dm@gmail.com>, 2023\n"
+"Last-Translator: Niklas Nordgren, 2022-2023\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -93,7 +93,7 @@ msgid ""
 "fish breeder makes sure that a school of fish does not go extinct by "
 "breeding more. The smoking happens in a smokery, you will need at least two "
 "of those."
-msgstr ""
+msgstr "De andra två viktiga matvarorna är rökt fisk och rökt kött. Rått kött levereras av en jägare. En fiskare får fisken ur vattnet medan en fiskodlare ser till att fiskstimmen inte utrotas genom att odla fler fiskar. Se till att alltid ha fisk över, annars kommer inte fiskodlaren kunna odla nya. Rökningen sker i ett rökeri, och du behöver minst två av dem."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Build a farm and a blackroot farm"

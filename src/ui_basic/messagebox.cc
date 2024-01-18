@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -72,8 +72,8 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 
 	// Stupid heuristic to avoid excessively long lines
 	if (height < 2 * text_height(font_style)) {
-		std::shared_ptr<const UI::RenderedText> temp_rendered_text =
-		   g_fh->render(as_richtext_paragraph(text, font_style), maxwidth / 2);
+		std::shared_ptr<const UI::RenderedText> temp_rendered_text = g_fh->render(
+		   is_richtext(text) ? text : as_richtext_paragraph(text, font_style), maxwidth / 2);
 		width = temp_rendered_text->width();
 		height = temp_rendered_text->height();
 	}

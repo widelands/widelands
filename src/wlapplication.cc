@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -716,6 +716,8 @@ void WLApplication::init_and_run_game_from_template() {
 	                   section.get_bool("custom_starting_positions", false));
 	settings->set_flag(
 	   GameSettings::Flags::kForbidDiplomacy, section.get_bool("forbid_diplomacy", false));
+	settings->set_flag(
+	   GameSettings::Flags::kAllowNavalWarfare, section.get_bool("allow_naval_warfare", false));
 
 	{
 		std::string wc_name = section.get_string("win_condition", "endless_game.lua");
@@ -1640,6 +1642,11 @@ void WLApplication::emergency_save(UI::Panel* panel,
                                    const uint8_t playernumber,
                                    const bool replace_ctrl,
                                    const bool ask_for_bug_report) {
+	if (!is_initializer_thread()) {
+		// We're already handling a bad situation... Let it go as far as it can, but UI calls
+		// may violate assertions and segfault.
+		log_err("WLApplication::emergency_save() is running in the logic thread!\n");
+	}
 	log_err("##############################\n"
 	        "  FATAL EXCEPTION: %s\n"
 	        "##############################\n",

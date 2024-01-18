@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -91,6 +91,8 @@ public:
 		pf_hide_all_overlays = 1 << 13,
 		// Other panels will snap to this one.
 		pf_snap_target = 1 << 14,
+		// Layouting hint that this panel is expected to grow to some very large sizes.
+		pf_unlimited_size = 1 << 15,
 	};
 
 	/** The Z ordering of overlapping panels; highest value is always on top. */
@@ -433,8 +435,19 @@ public:
 		kQuicknav,
 		kFleetOptions,
 	};
+	/*
+	 * Actual save type after initialization.
+	 * Overridden in derived classes
+	 */
 	virtual SaveType save_type() const {
 		return SaveType::kNone;
+	}
+	/*
+	 * Saving partially initialized windows can trigger
+	 * race conditions. Wait until initialization_complete().
+	 */
+	SaveType current_save_type() const {
+		return initialized_ ? save_type() : SaveType::kNone;
 	}
 	virtual void save(FileWrite&, Widelands::MapObjectSaver&) const {
 		NEVER_HERE();
