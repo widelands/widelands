@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -2861,7 +2861,7 @@ int LuaBuildingDescription::get_enhancement_returns_on_dismantle(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: vision range
+   .. attribute:: vision_range
 
       (RO) The vision_range of the building as an :class:`integer`.
 */
@@ -4752,6 +4752,9 @@ int LuaMapObject::destroy(lua_State* L) {
    .. method:: has_attribute(attribute)
 
       Returns :const:`true` if the map object has this attribute, :const:`false` otherwise.
+
+      .. note:: This method does exist for all MapObjects, but its data only gets initialised for
+                immovables and for critters. (It always returns :const:`false` for other types.)
 
       :arg attribute: The attribute to check for.
       :type attribute: :class:`string`

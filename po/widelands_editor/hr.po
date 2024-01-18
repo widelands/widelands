@@ -1,14 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
+# Ivan Bižaca <biza@malilosinj.info>, 2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-05-01 02:42+0000\n"
+"POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2016-03-24 07:33+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: Ivan Bižaca <biza@malilosinj.info>, 2023\n"
 "Language-Team: Croatian (http://app.transifex.com/widelands/widelands/language/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,7 +20,7 @@ msgstr ""
 #: ../../data/scripting/editor/editor_controls.lua:4
 #: ../../data/scripting/editor/editor_help.lua:66
 msgid "Controls"
-msgstr ""
+msgstr "Upravljanje"
 
 #: ../../data/scripting/editor/editor_help.lua:50
 msgid "Editor Help"
@@ -37,7 +38,7 @@ msgstr ""
 #: ../../data/scripting/editor/editor_help.lua:72
 #: ../../data/scripting/editor/tips.lua:15
 msgid "Tips"
-msgstr ""
+msgstr "Savjeti"
 
 #: ../../data/scripting/editor/editor_help.lua:82
 msgid "Terrains"

@@ -1480,7 +1480,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Note lore for an Atlantean production site: Quarry
             lore = pgettext("atlanteans_building", "You must not assume Atlanteans will play everything soft, there are hard times we cannot avoid."),
             -- TRANSLATORS: Note lore_autor for an Atlantean production site: Quarry
-            lore_author = pgettext("atlanteans_building", "Priest of Satul asked why stones are needed for buildings")
+            lore_author = pgettext("atlanteans_building", "Priest of Satul asked why stones are needed for buildings"),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Quarry, part 1
+               pgettext("atlanteans_building", "This building can produce one granite between %1$s and %2$s, depending on how far the stonecutter has to walk."):bformat(format_seconds(44), format_minutes_seconds(1, 9)),
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Quarry, part 2
+               pgettext("atlanteans_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1493,7 +1499,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Note lore for an Atlantean production site: Woodcutter's House
             lore = pgettext("atlanteans_building", "We want to fell trees in a clean and dignified way, therefore we use saws. An ax is a tool used by other tribes only."),
             -- TRANSLATORS: Note lore_autor for an Atlantean production site: Woodcutter's House
-            lore_author = pgettext("atlanteans_building", "Atlantean woodcutter asked why saws are used to cut trees")
+            lore_author = pgettext("atlanteans_building", "Atlantean woodcutter asked why saws are used to cut trees"),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Woodcutter's House, part 1
+               pgettext("atlanteans_building", "This building can produce one log between %1$s and %2$s, depending on how far the woodcutter has to walk."):bformat(format_seconds(49), format_minutes_seconds(1, 29)),
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Woodcutter's House, part 2
+               pgettext("atlanteans_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1509,7 +1521,13 @@ wl.Descriptions():new_tribe {
                                           [[Only after the last piece of green has become bare soil<br>]] ..
                                           [[Then will you find that nature needs to be cared for.’]]),
             -- TRANSLATORS: Note lore_autor for an Atlantean production site: Forester's House
-            lore_author = pgettext("atlanteans_building", "Prophecy of the foresters’ guild")
+            lore_author = pgettext("atlanteans_building", "Prophecy of the foresters’ guild"),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Forester's House, part 1
+               pgettext("atlanteans_building", "The forester plants one tree between %1$s and %2$s, depending on how far he has to walk."):bformat(format_seconds(23), format_seconds(45)),
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Forester's House, part 2
+               pgettext("atlanteans_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1531,7 +1549,13 @@ wl.Descriptions():new_tribe {
                                           [[Collect ya catch by net or by spear,<br>]] ..
                                           [[and don’t forget to give Satul his share.’]]),
             -- TRANSLATORS: Note lore_autor for an Atlantean production site: Fisher's House
-            lore_author = pgettext("atlanteans_building", "A song from the fishers’ guild")
+            lore_author = pgettext("atlanteans_building", "A song from the fishers’ guild"),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Fisher's House, part 1
+               pgettext("atlanteans_building", "This building can produce one fish between %1$s and %2$s, depending on how far the fisher has to walk."):bformat(format_seconds(26), format_seconds(55)),
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Fisher's House, part 2
+               pgettext("atlanteans_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1561,7 +1585,13 @@ wl.Descriptions():new_tribe {
             lore = pgettext("atlanteans_building", "Sometimes we end up in a region with no fish, so we must hunt. "..
                                                    "Game will reproduce by itself, if not hunted too much. But yes, fish is our main meal."),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Hunter's House
-            lore_author = pgettext("atlanteans_building", "Hunter answering a fisher")
+            lore_author = pgettext("atlanteans_building", "Hunter answering a fisher"),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Hunter's House, part 1
+               pgettext("atlanteans_building", "This building can produce one meat between %1$s and %2$s, depending on how far the hunter has to walk."):bformat(format_seconds(44), format_minutes_seconds(1, 34)),
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Hunter's House, part 2
+               pgettext("atlanteans_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
       {
@@ -1574,7 +1604,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an Atlantean production site: Well
             lore = pgettext("atlanteans_building", "Well, there is no wellbeing without a well."),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Well
-            lore_author = pgettext("atlanteans_building", "Water carrier muttering to himself")
+            lore_author = pgettext("atlanteans_building", "Water carrier muttering to himself"),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Well, part 1
+               pgettext("atlanteans_building", "The carrier needs %s to get one bucket full of water."):bformat(format_seconds(44)),
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Well, part 2
+               pgettext("atlanteans_building", "If the water resource is depleted, the carrier needs %s on average."):bformat(format_minutes_seconds(1, 11))
+            }
          }
       },
       {
@@ -1602,7 +1638,13 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an Atlantean production site:  Scout's House
             lore = pgettext("atlanteans_building", "You do not see everything from your high towers. Sometimes you need someone to find out in person, that’s me!"),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site:  Scout's House
-            lore_author = pgettext("atlanteans_building", "A scout answering a soldier")
+            lore_author = pgettext("atlanteans_building", "A scout answering a soldier"),
+            performance = {
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Scout's House, part 1
+               pgettext("atlanteans_building", "One exploration trip of the scout takes between %1$s and %2$s."):bformat(format_minutes_seconds(1, 52), format_minutes_seconds(4, 5)),
+               -- TRANSLATORS: Performance helptext for an Atlantean production site: Scout's House, part 2
+               pgettext("atlanteans_building", "In case of slopes or obstacles in the way, the time is increased.")
+            }
          }
       },
 
@@ -1839,7 +1881,9 @@ wl.Descriptions():new_tribe {
                                           [[I sweat and toil till day is done,<br>]] ..
                                           [[but I’ll be back with morning come.’]]),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site:  Coal Mine
-            lore_author = pgettext("atlanteans_building", "Song from the miners’ guild")
+            lore_author = pgettext("atlanteans_building", "Song from the miners’ guild"),
+            -- TRANSLATORS: Performance helptext for an Atlantean production site: Coal Mine
+            performance = pgettext("atlanteans_building", "If the food supply is steady, this mine can produce coal in %s on average."):bformat(format_seconds(19))
          }
       },
       {
@@ -1853,7 +1897,9 @@ wl.Descriptions():new_tribe {
                                           [[I sweat and toil till day is done,<br>]] ..
                                           [[but I’ll be back with morning come.’]]),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site:  Iron Mine
-            lore_author = pgettext("atlanteans_building", "Song from the miners’ guild")
+            lore_author = pgettext("atlanteans_building", "Song from the miners’ guild"),
+            -- TRANSLATORS: Performance helptext for an Atlantean production site: Iron Mine
+            performance = pgettext("atlanteans_building", "If the food supply is steady, this mine can produce iron ore in %s on average."):bformat(format_seconds(25))
          }
       },
       {
@@ -1867,8 +1913,9 @@ wl.Descriptions():new_tribe {
                                           [[I dig in the dust until I see the spark;<br>]] ..
                                           [[The golden ore I find in the dark.’]]),
             -- TRANSLATORS: Lore author helptext for an Atlantean production site: Gold Mine
-            lore_author = pgettext("atlanteans_building", "Miner’s prayer")
-
+            lore_author = pgettext("atlanteans_building", "Miner’s prayer"),
+            -- TRANSLATORS: Performance helptext for an Atlantean production site: Gold Mine
+            performance = pgettext("atlanteans_building", "If the food supply is steady, this mine can produce gold ore in %s on average."):bformat(format_seconds(39))
          }
       },
 

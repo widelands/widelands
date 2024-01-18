@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,8 +30,9 @@ namespace Widelands {
  * Changelog:
  * 8: v1.1
  * 9: Added RNG state
+ * 10: Added naval warfare flag.
  */
-constexpr uint16_t kCurrentPacketVersion = 9;
+constexpr uint16_t kCurrentPacketVersion = 10;
 
 void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* mol */) {
 	try {
@@ -70,6 +71,7 @@ void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* mol *
 			}
 
 			game.diplomacy_allowed_ = (fr.unsigned_8() > 0);
+			game.naval_warfare_allowed_ = packet_version >= 10 && fr.unsigned_8() > 0;
 			game.pending_diplomacy_actions_.clear();
 			for (size_t i = fr.unsigned_32(); i > 0; --i) {
 				const PlayerNumber p1 = fr.unsigned_8();
@@ -118,6 +120,7 @@ void GameClassPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const /*
 	}
 
 	fw.unsigned_8(game.diplomacy_allowed_ ? 1 : 0);
+	fw.unsigned_8(game.naval_warfare_allowed_ ? 1 : 0);
 	fw.unsigned_32(game.pending_diplomacy_actions_.size());
 	for (const auto& a : game.pending_diplomacy_actions_) {
 		fw.unsigned_8(a.sender);

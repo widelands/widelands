@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -408,6 +408,7 @@ void Game::init_newgame(const GameSettings& settings) {
 		}
 
 		diplomacy_allowed_ &= ((settings.flags & GameSettings::Flags::kForbidDiplomacy) == 0);
+		naval_warfare_allowed_ &= ((settings.flags & GameSettings::Flags::kAllowNavalWarfare) != 0);
 		win_condition_duration_ = settings.win_condition_duration;
 		std::unique_ptr<LuaTable> table(lua().run_script(settings.win_condition_script));
 		table->do_not_warn_about_unaccessed_keys();
@@ -893,6 +894,7 @@ void Game::cleanup_for_load() {
 
 	pending_diplomacy_actions_.clear();
 	diplomacy_allowed_ = true;
+	naval_warfare_allowed_ = true;
 
 	// Statistics
 	general_stats_.clear();

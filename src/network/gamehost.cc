@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2023 by the Widelands Development Team
+ * Copyright (C) 2008-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -2570,7 +2570,11 @@ void GameHost::disconnect_client(uint32_t const client_number,
 				if (!forced_pause()) {
 					force_pause();
 				}
-				WLApplication::emergency_save(nullptr, *d->game, reason, 1, false);
+				NoteThreadSafeFunction::instantiate(
+				   [&game = *d->game, &reason]() {
+					   WLApplication::emergency_save(nullptr, game, reason, 1, false);
+				   },
+				   true);
 			}
 			// Client was active but is a winner of the game: Replace with normal AI
 		} else if (d->settings.users.at(client.usernum).result == Widelands::PlayerEndResult::kWon) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -2628,7 +2628,7 @@ int LuaMapView::mouse_to_field(lua_State* L) {
 }
 
 /* RST
-   .. method:: update_toolbar(field)
+   .. method:: update_toolbar()
 
       .. versionadded:: 1.2
 
@@ -2750,6 +2750,9 @@ static int L_get_editor_shortcut_help(lua_State* L) {
    .. versionadded:: 1.2
 
    Show the user a modal message box with an OK button and optionally a cancel button.
+
+   You can use :ref:`richtext <wlrichtext>` to style the text.
+   Don't forget to wrap it in an :ref:`rt tag <rt_tags_rt>` in this case.
 
    :arg title: The caption of the window
    :type title: :class:`string`

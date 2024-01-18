@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2023 by the Widelands Development Team
+ * Copyright (C) 2004-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -973,6 +973,11 @@ CmdShipRefit::CmdShipRefit(StreamRead& des) : PlayerCommand(Time(0), des.unsigne
 }
 
 void CmdShipRefit::execute(Game& game) {
+	if (!game.naval_warfare_allowed()) {
+		log_warn("Received a refit command but naval warfare is disabled, ignoring.");
+		return;
+	}
+
 	upcast(Ship, ship, game.objects().get_object(serial_));
 	if (ship != nullptr && ship->get_owner()->player_number() == sender()) {
 		ship->refit(game, type_);
@@ -1020,6 +1025,11 @@ CmdWarshipCommand::CmdWarshipCommand(StreamRead& des) : PlayerCommand(Time(0), d
 }
 
 void CmdWarshipCommand::execute(Game& game) {
+	if (!game.naval_warfare_allowed()) {
+		log_warn("Received a warship command but naval warfare is disabled, ignoring.");
+		return;
+	}
+
 	upcast(Ship, ship, game.objects().get_object(serial_));
 	if (ship != nullptr && ship->get_owner()->player_number() == sender()) {
 		ship->warship_command(game, cmd_, parameters_);

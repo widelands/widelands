@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -208,7 +208,7 @@ void AbstractTextInputPanel::Data::draw(RenderTarget& dst, bool with_caret) {
 
 void AbstractTextInputPanel::layout() {
 	// Offset snaps the text panel to the start of input. Saved text always displays from beginning
-	d_->scrolloffset = get_text().length() / get_h();
+	d_->scrolloffset = get_h() == 0 ? 0 : get_text().length() / get_h();
 	Panel::layout();
 	d_->scrollbar.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
 }
