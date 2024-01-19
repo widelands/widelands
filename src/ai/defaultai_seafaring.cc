@@ -286,7 +286,7 @@ bool DefaultAI::check_ships(const Time& gametime) {
 				}
 			} else {
 				++tradeships_count;
-				if (warship_needed) {
+				if (warship_needed && !so.ship->state_is_expedition()) {
 					game().send_player_refit_ship(*so.ship, Widelands::ShipType::kWarship);
 					warship_needed = false;
 					--tradeships_count;
