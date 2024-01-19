@@ -236,7 +236,8 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	// starting an expedition? if yes, find a port and order it to start an expedition
 	bool start_expedition = false;
 	if (ports_count > 0 && expeditions_in_progress == 0 && expeditions_in_prep == 0 &&
-	    !persistent_data->no_more_expeditions && (ports_count < 2 ? ship_free : !need_ship) && basic_economy_established) {
+	    !persistent_data->no_more_expeditions && (ports_count < 2 ? ship_free : !need_ship) &&
+	    basic_economy_established) {
 		start_expedition = true;
 	}
 
