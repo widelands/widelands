@@ -42,3 +42,6 @@ gmon.out
 /po_validation
 /clang-tidy.log
 /clangtidy
+
+# Saveloading compatibility test cases
+/test/save/v1.*.wgf
