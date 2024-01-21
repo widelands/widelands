@@ -652,7 +652,6 @@ void DefaultAI::warship_management(ShipObserver& so) {
 		}
 
 		if (picked_port != nullptr && picked_port_guard_ships < kWarshipsPerPort) {
-			assert(picked_port_guard_ships <= kWarshipsPerPort);
 			assert(picked_port_guard_ships == picked_port->ships_assigned);
 
 			verb_log_dbg_time(gametime, "AI %d: Assigning warship %s to port %s",
