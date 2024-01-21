@@ -1288,7 +1288,6 @@ void DefaultAI::late_initialization() {
 
 	// Just to be initialized
 	soldier_status_ = SoldiersStatus::kEnough;
-	vacant_mil_positions_average_ = 0;
 	spots_avail.resize(4);
 	trees_nearby_treshold_ = 3 + std::abs(management_data.get_military_number_at(121)) / 2;
 	last_road_dismantled_ = Time(0);

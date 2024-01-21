@@ -670,12 +670,9 @@ void DefaultAI::count_military_vacant_positions() {
 		}
 	}
 
+	// May become negative (sigend type, so no wraparound), but that doesn't seem to
+	// be a problem for the below checks, and the variable is local.
 	vacant_mil_positions_ -= on_stock_;
-
-	// TODO(tothxa): This doesn't seem to be used for anything.
-	// to avoid floats this is actual number * 100
-	vacant_mil_positions_average_ =
-	   vacant_mil_positions_average_ * 8 / 10 + 20 * vacant_mil_positions_;
 
 	if (vacant_mil_positions_ <= 1 || on_stock_ > 4) {
 		soldier_status_ = SoldiersStatus::kFull;

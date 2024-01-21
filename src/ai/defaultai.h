@@ -324,7 +324,6 @@ private:
 	bool critical_mine_unoccupied(const Time&);
 
 	SoldiersStatus soldier_status_;
-	int32_t vacant_mil_positions_average_;
 	uint16_t attackers_count_{0U};
 	EventTimeQueue soldier_trained_log;
 	EventTimeQueue soldier_attacks_log;
