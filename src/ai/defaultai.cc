@@ -154,25 +154,24 @@ DefaultAI::DefaultAI(Widelands::Game& ggame, Widelands::PlayerNumber const pid, 
 			        ++i) {
 				   if (i->ship == note.ship) {
 
-						// Account guarded port
-						ShipObserver& so = *i;
-						if (so.guarding) {
+					   // Account guarded port
+					   ShipObserver& so = *i;
+					   if (so.guarding) {
 						   assert(so.ship->get_ship_type() == Widelands::ShipType::kWarship);
-							Widelands::PortDock* dest = so.ship->get_destination_port(game());
-							for (PortSiteObserver& pso : portsites) {
-								if (dest == pso.site->get_portdock()) {
-									assert(pso.ships_assigned > 0);
-									--pso.ships_assigned;
-									verb_log_dbg_time(game().get_gametime(),
-									                  "AI %d: port %s lost guard ship %s, %u remaining",
-									                  player_->player_number(),
-									                  pso.site->get_warehouse_name().c_str(),
-									                  so.ship->get_shipname().c_str(),
-									                  pso.ships_assigned);
-									break;
-								}
-							}
-						}
+						   Widelands::PortDock* dest = so.ship->get_destination_port(game());
+						   for (PortSiteObserver& pso : portsites) {
+							   if (dest == pso.site->get_portdock()) {
+								   assert(pso.ships_assigned > 0);
+								   --pso.ships_assigned;
+								   verb_log_dbg_time(game().get_gametime(),
+								                     "AI %d: port %s lost guard ship %s, %u remaining",
+								                     player_->player_number(),
+								                     pso.site->get_warehouse_name().c_str(),
+								                     so.ship->get_shipname().c_str(), pso.ships_assigned);
+								   break;
+							   }
+						   }
+					   }
 
 					   allships.erase(i);
 					   break;
@@ -188,18 +187,18 @@ DefaultAI::DefaultAI(Widelands::Game& ggame, Widelands::PlayerNumber const pid, 
 				   }
 			   }
 			   break;
-			case Widelands::NoteShip::Action::kDestinationChanged:
-				if (note.ship->get_ship_type() == Widelands::ShipType::kWarship &&
-				    note.ship->get_destination_port(game()) == nullptr) {
-					// A warship lost its destination
+		   case Widelands::NoteShip::Action::kDestinationChanged:
+			   if (note.ship->get_ship_type() == Widelands::ShipType::kWarship &&
+			       note.ship->get_destination_port(game()) == nullptr) {
+				   // A warship lost its destination
 				   for (ShipObserver& observer : allships) {
 					   if (observer.ship == note.ship) {
 						   observer.waiting_for_command_ = true;
 						   break;
 					   }
 				   }
-				}
-				break;
+			   }
+			   break;
 		   default:
 			   // Do nothing
 			   break;

@@ -255,10 +255,8 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		if (game().naval_warfare_allowed() &&
 		    p_obs.site->get_desired_soldier_count() < kPortDefaultGarrison) {
 			// Check garrisoned soldiers
-			verb_log_dbg_time(game().get_gametime(),
-			                  "AI %d: Set garrison for port %s",
-			                  player_number(),
-			                  p_obs.site->get_warehouse_name().c_str());
+			verb_log_dbg_time(game().get_gametime(), "AI %d: Set garrison for port %s",
+			                  player_number(), p_obs.site->get_warehouse_name().c_str());
 			game().send_player_change_soldier_capacity(
 			   *p_obs.site, kPortDefaultGarrison - p_obs.site->get_desired_soldier_count());
 			game().send_player_set_soldier_preference(
@@ -294,10 +292,8 @@ bool DefaultAI::check_ships(const Time& gametime) {
 			} else {
 				if (!so.ship->is_refitting()) {
 					if (warship_needed && !so.ship->state_is_expedition()) {
-						verb_log_dbg_time(gametime,
-						                  "AI %d: Refit ship %s to warship",
-						                  player_->player_number(),
-						                  so.ship->get_shipname().c_str());
+						verb_log_dbg_time(gametime, "AI %d: Refit ship %s to warship",
+						                  player_->player_number(), so.ship->get_shipname().c_str());
 						game().send_player_refit_ship(*so.ship, Widelands::ShipType::kWarship);
 						warship_needed = false;
 						++warships_count;
@@ -624,10 +620,8 @@ void DefaultAI::warship_management(ShipObserver& so) {
 			// We only backfit if we find an idle warship. Trade ships shouldn't disappear anyway, so
 			// backfit requests should be extremely rare.
 
-			verb_log_dbg_time(gametime,
-			                  "AI %d: Refit warship %s to trade ship",
-			                  player_->player_number(),
-			                  so.ship->get_shipname().c_str());
+			verb_log_dbg_time(gametime, "AI %d: Refit warship %s to trade ship",
+			                  player_->player_number(), so.ship->get_shipname().c_str());
 			game().send_player_refit_ship(*so.ship, Widelands::ShipType::kTransport);
 			tradeship_refit_needed = false;
 			--warships_count;
@@ -637,13 +631,14 @@ void DefaultAI::warship_management(ShipObserver& so) {
 		}
 
 		verb_log_dbg_time(gametime, "AI %d: Warship %s is looking for assignment.",
-		   player_->player_number(), so.ship->get_shipname().c_str());
+		                  player_->player_number(), so.ship->get_shipname().c_str());
 		PortSiteObserver* picked_port = nullptr;
 		Widelands::Quantity picked_port_guard_ships = kWarshipsPerPort + 1;
 
 		for (PortSiteObserver& p_obs : portsites) {
-			verb_log_dbg_time(gametime, "AI %d: Port %s has %d ships assigned", player_->player_number(),
-			                  p_obs.site->get_warehouse_name().c_str(), p_obs.ships_assigned);
+			verb_log_dbg_time(gametime, "AI %d: Port %s has %d ships assigned",
+			                  player_->player_number(), p_obs.site->get_warehouse_name().c_str(),
+			                  p_obs.ships_assigned);
 			if (p_obs.ships_assigned < picked_port_guard_ships) {
 				picked_port = &p_obs;
 				picked_port_guard_ships = p_obs.ships_assigned;
@@ -658,8 +653,8 @@ void DefaultAI::warship_management(ShipObserver& so) {
 			assert(picked_port_guard_ships == picked_port->ships_assigned);
 
 			verb_log_dbg_time(gametime, "AI %d: Assigning warship %s to port %s",
-			   player_->player_number(), so.ship->get_shipname().c_str(),
-			   picked_port->site->get_warehouse_name().c_str());
+			                  player_->player_number(), so.ship->get_shipname().c_str(),
+			                  picked_port->site->get_warehouse_name().c_str());
 			game().send_player_ship_set_destination(*so.ship, picked_port->site->get_portdock());
 			++(picked_port->ships_assigned);
 			so.guarding = true;
@@ -672,10 +667,8 @@ void DefaultAI::warship_management(ShipObserver& so) {
 				assert(picked_port_guard_ships == picked_port->ships_assigned);
 			}
 #endif
-			log_dbg_time(gametime,
-			             "AI %d: all ports have enough guard ships, warship %s remains idle",
-			             player_->player_number(),
-			             so.ship->get_shipname().c_str());
+			log_dbg_time(gametime, "AI %d: all ports have enough guard ships, warship %s remains idle",
+			             player_->player_number(), so.ship->get_shipname().c_str());
 		}
 
 	} else if (so.ship->get_destination_port(game()) == nullptr) {
