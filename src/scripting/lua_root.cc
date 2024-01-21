@@ -75,7 +75,7 @@ Game
 
    .. code-block:: lua
 
-      current_speed = wl.Game().real_Speed
+      current_speed = wl.Game().real_speed
 
 */
 const char LuaGame::className[] = "Game";
@@ -111,8 +111,12 @@ void LuaGame::__unpersist(lua_State* /* L */) {
 /* RST
    .. attribute:: real_speed
 
-      (RO) The speed that the current game is running at in ms.
+      (RO) The speed that the current game is set to run at in ms.
       For example, for game speed = 2x, this returns 2000.
+
+      In network games this is the speed resulting from the votes of the players, so it can be
+      different from the local player's :attr:`desired_speed`.
+      Else it is the same as :attr:`desired_speed`.
 */
 int LuaGame::get_real_speed(lua_State* L) {
 	lua_pushinteger(L, get_game(L).game_controller()->real_speed());
@@ -133,8 +137,9 @@ int LuaGame::get_time(lua_State* L) {
    .. attribute:: desired_speed
 
       (RW) Sets the desired speed of the game in ms per real second, so a speed of
-      2000 means the game runs at 2x speed. Note that this will not work in
-      network games as expected.
+      2000 means the game runs at 2x speed.
+      Note that in network games this is the speed voted by the current player. The speed resulting
+      from the votes is in :attr:`real_speed`.
 */
 // UNTESTED
 int LuaGame::set_desired_speed(lua_State* L) {
