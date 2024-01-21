@@ -670,8 +670,8 @@ void DefaultAI::count_military_vacant_positions() {
 		}
 	}
 
-	// May become negative (sigend type, so no wraparound), but that doesn't seem to
-	// be a problem for the below checks, and the variable is local.
+	// May become negative, but that doesn't seem to be a problem for the below checks,
+	// and the variable is local and of a signed type.
 	vacant_mil_positions_ -= on_stock_;
 
 	if (vacant_mil_positions_ <= 1 || on_stock_ > 4) {
