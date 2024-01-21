@@ -655,15 +655,24 @@ void DefaultAI::count_military_vacant_positions() {
 		                         mso.site->soldier_control()->associated_soldiers().size();
 		understaffed_ += mso.understaffed;
 	}
+
 	vacant_mil_positions_ += understaffed_;
 
 	// also available in warehouses
 	for (auto wh : warehousesites) {
-		on_stock_ += wh.site->soldier_control()->stationed_soldiers().size();
+		if (wh.site->soldier_control()->stationed_soldiers().size() <
+		    wh.site->get_desired_soldier_count()) {
+			vacant_mil_positions_ += wh.site->get_desired_soldier_count() -
+			                         wh.site->soldier_control()->stationed_soldiers().size();
+		} else {
+			on_stock_ += wh.site->soldier_control()->stationed_soldiers().size() -
+			             wh.site->get_desired_soldier_count();
+		}
 	}
 
-	vacant_mil_positions_ += on_stock_;
+	vacant_mil_positions_ -= on_stock_;
 
+	// TODO(tothxa): This doesn't seem to be used for anything.
 	// to avoid floats this is actual number * 100
 	vacant_mil_positions_average_ =
 	   vacant_mil_positions_average_ * 8 / 10 + 20 * vacant_mil_positions_;

@@ -577,17 +577,14 @@ struct TrainingSiteObserver {
 };
 
 struct WarehouseSiteObserver {
-
 	Widelands::Warehouse* site;
 	BuildingObserver* bo;
 };
 
 struct PortSiteObserver {
-
 	Widelands::Warehouse* site;
 	BuildingObserver* bo;
 	uint32_t ships_assigned;
-	bool guard_ship_needed;
 };
 
 struct ShipObserver {
@@ -595,6 +592,9 @@ struct ShipObserver {
 	bool waiting_for_command_ = false;
 	Time last_command_time = Time(0);
 	bool escape_mode = false;
+
+	// Used for warships, stores whether the ship is assigned to a port
+	bool guarding = false;
 
 	// direction by which the ship circumvents an island
 	// this is the last circle-island command's direction

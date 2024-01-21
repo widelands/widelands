@@ -182,6 +182,15 @@ private:
 	static constexpr Duration kShipCheckInterval{5 * 1000};
 	static constexpr Duration kMarineDecisionInterval{20 * 1000};
 
+	// Maximum number of ports per tradeship
+	static constexpr Widelands::Quantity kPortsPerTradeShip = 3;
+
+	// Number of defending warships the AI sets for each port initially
+	static constexpr Widelands::Quantity kWarshipsPerPort = 2;
+
+	// Number of defending soldiers the AI sets for each port initially
+	static constexpr Widelands::Quantity kPortDefaultGarrison = 5;
+
 	// used by defaultai_warfare.cc
 	// duration of military campaign
 	static constexpr Duration kCampaignDuration{15 * 60 * 1000};
