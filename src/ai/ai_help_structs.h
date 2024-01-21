@@ -593,7 +593,9 @@ struct ShipObserver {
 	Time last_command_time = Time(0);
 	bool escape_mode = false;
 
-	// Used for warships, stores whether the ship is assigned to a port
+	// Used for warships, stores whether the ship is assigned to a port.
+	// has_destination() cannot be used alone, because newly refitted warships
+	// keep the refitting port as destination.
 	bool guarding = false;
 
 	// direction by which the ship circumvents an island
