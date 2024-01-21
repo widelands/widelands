@@ -670,25 +670,21 @@ void DefaultAI::warship_management(ShipObserver& so) {
 			}
 #endif
 			if (portsites.empty()) {
-				log_dbg_time(gametime,
-				             "AI %d: no more ports left, no action for warship %s",
-			                player_->player_number(),
-				             so.ship->get_shipname().c_str());
+				log_dbg_time(gametime, "AI %d: no more ports left, no action for warship %s",
+				             player_->player_number(), so.ship->get_shipname().c_str());
 			} else if (so.ship->has_destination()) {
 				log_dbg_time(gametime,
 				             "AI %d: all ports have enough guard ships, no action for warship %s",
-			                player_->player_number(),
-				             so.ship->get_shipname().c_str());
+				             player_->player_number(), so.ship->get_shipname().c_str());
 			} else {
 				// `portsites.front()` is likely the oldest port with the most infrastructure. (or not)
 				// TODO(tothxa): But the whole guarding ship business needs proper AI handling.
 				log_dbg_time(gametime,
 				             "AI %d: all ports have enough guard ships, warship %s retreats to %s",
-			                player_->player_number(),
-				             so.ship->get_shipname().c_str(),
+				             player_->player_number(), so.ship->get_shipname().c_str(),
 				             portsites.front().site->get_warehouse_name().c_str());
 				game().send_player_ship_set_destination(
-					*so.ship, portsites.front().site->get_portdock());
+				   *so.ship, portsites.front().site->get_portdock());
 				// Not an assignment, so not setting `so.guarding`, and not increasing
 				// `portsites.front().ships_assigned`!
 			}
