@@ -241,7 +241,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		start_expedition = true;
 	}
 
-	// handle ports: start expedition and decide whether we need guard ships.
+	// handle ports: start expedition and set garrison
 	for (PortSiteObserver& p_obs : portsites) {
 		if (start_expedition) {
 			verb_log_dbg_time(game().get_gametime(),
@@ -661,7 +661,7 @@ void DefaultAI::warship_management(ShipObserver& so) {
 		} else {
 #ifndef NDEBUG
 			if (picked_port == nullptr) {
-				assert(portsites.size() == 0);
+				assert(portsites.empty());
 			} else {
 				assert(picked_port_guard_ships == kWarshipsPerPort);
 				assert(picked_port_guard_ships == picked_port->ships_assigned);
