@@ -40,13 +40,7 @@ constexpr int kButtonSize = 34;
 
 SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                                                  UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(&plr,
-                      UI::WindowStyle::kWui,
-                      "seafaring_statistics",
-                      &registry,
-                      375,
-                      375,
-                      _("Seafaring Statistics")),
+   : UI::UniqueWindow(&plr, UI::WindowStyle::kWui, "seafaring_statistics", &registry, 375, 375, ""),
      main_box_(this,
                UI::PanelStyle::kWui,
                "main_box",
@@ -428,6 +422,10 @@ void SeafaringStatisticsMenu::update_button_states() {
 	centerviewbtn_.set_enabled(table_.has_selection());
 	openwindowbtn_.set_enabled(table_.has_selection());
 	watchbtn_.set_enabled(table_.has_selection());
+
+	set_title(format(ngettext("Seafaring Statistics (%u Ship)", "Seafaring Statistics (%u Ships)",
+	                          iplayer().player().ships().size()),
+	                 iplayer().player().ships().size()));
 }
 
 bool SeafaringStatisticsMenu::handle_key(bool down, SDL_Keysym code) {
