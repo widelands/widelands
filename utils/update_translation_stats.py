@@ -14,7 +14,6 @@ For Debian-based Linux: sudo apt-get install translate-toolkit
 from collections import defaultdict
 import csv
 import os.path
-import pathlib
 import re
 import subprocess
 import sys
@@ -47,18 +46,20 @@ def generate_translation_stats(po_dir, output_file):
     # Regex to extract the locale from the po filenames.
     regex_po = re.compile(r'/\S+/(\w+)\.po')
 
-    # pocount returns errors for non-po files, so we have to walk the subdirs.
-    entries = []
-    for entry_p in pathlib.Path(po_dir).iterdir():  # for each entry in directory
-        if next(entry_p.glob('**/*.po'), None):  # only add entries which have matching file(s)
-            entries.append(str(entry_p))
+    # We get errors for non-po files in the base po dir, so we have to walk
+    # the subdirs.
+    subdirs = []
+    for subdir in sorted(os.listdir(po_dir), key=str.lower):
+        subdir = os.path.join(po_dir, subdir)
+        if os.path.isdir(subdir):
+            subdirs.append(subdir)
 
     def joinrow(a_row):
         return ', '.join(v for v in a_row.values() if v is not None)
 
     if True:  # TODO(aDiscoverer) delete, just kept for code review
         proc = subprocess.Popen(
-            ['pocount', '--csv'] + sorted(entries, key=str.lower),  # sorted for stable print order
+            ['pocount', '--csv'] + subdirs,
             encoding='utf-8',
             stderr=subprocess.STDOUT,
             stdout=subprocess.PIPE,
@@ -108,7 +109,7 @@ def generate_translation_stats(po_dir, output_file):
             l1_row = row
         proc.wait(1)
         if proc.returncode != 0:
-            print('Failed to run: ' + ' '.join(proc.args[0:4]) +
+            print('Failed to run pocount:\n  FILES: ' + ' '.join(subdirs[0:2]) +
                   ' ...\n  ' + joinrow(l2_row) + '\n  ' + joinrow(l1_row))
             return 1
 
