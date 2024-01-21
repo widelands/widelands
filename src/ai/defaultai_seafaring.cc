@@ -500,9 +500,8 @@ void DefaultAI::gain_ship(Widelands::Ship& ship, NewShip type) {
 	if (type == NewShip::kBuilt) {
 		marine_task_queue.push_back(kStopShipyard);
 	} else {
-		if (ship.state_is_expedition()) {
-			if (expedition_ship_ == kNoShip &&
-			    ship.get_ship_type() == Widelands::ShipType::kTransport) {
+		if (ship.get_ship_type() == Widelands::ShipType::kTransport && ship.state_is_expedition()) {
+			if (expedition_ship_ == kNoShip) {
 				// OK, this ship is in expedition
 				expedition_ship_ = ship.serial();
 			} else {
@@ -611,7 +610,9 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 void DefaultAI::warship_management(ShipObserver& so) {
 	const Time& gametime = game().get_gametime();
 
-	game().send_player_warship_command(*so.ship, Widelands::WarshipCommand::kSetCapacity, {0u});
+	if (so.ship->get_warship_soldier_capacity() > 0) {
+		game().send_player_warship_command(*so.ship, Widelands::WarshipCommand::kSetCapacity, {0u});
+	}
 
 	if (!so.guarding) {
 
@@ -634,6 +635,8 @@ void DefaultAI::warship_management(ShipObserver& so) {
 		                  player_->player_number(), so.ship->get_shipname().c_str());
 		PortSiteObserver* picked_port = nullptr;
 		Widelands::Quantity picked_port_guard_ships = kWarshipsPerPort + 1;
+		// TODO(tothxa): Should also consider distance to avoid unnecessary travel and
+		//               reshuffling on game loading.
 
 		for (PortSiteObserver& p_obs : portsites) {
 			verb_log_dbg_time(gametime, "AI %d: Port %s has %d ships assigned",
@@ -677,8 +680,13 @@ void DefaultAI::warship_management(ShipObserver& so) {
 		verb_log_dbg_time(gametime, "AI %d: Warship %s lost guarded port", player_->player_number(),
 		                  so.ship->get_shipname().c_str());
 		so.guarding = false;
+
+		// We want to assign new port as soon as possible (no-op actually)
+		so.waiting_for_command_ = true;
+		return;
 	}
 
+	// Normally we don't want to check again too soon
 	so.last_command_time = gametime;
 	so.waiting_for_command_ = false;
 }
