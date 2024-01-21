@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2014
@@ -7,13 +7,14 @@
 # MiroslavR <miroslavr256@gmail.com>, 2015-2016
 # Miroslav Remák <Unknown>, 2014
 # MiroslavR <miroslavr256@gmail.com>, 2015
+# Pavol Gono, 2024
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-11-18 02:30+0000\n"
+"POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: Karl Vest, 2020\n"
+"Last-Translator: Pavol Gono, 2024\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -169,7 +170,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:8
 msgctxt "amazons_building"
 msgid "Tower"
-msgstr ""
+msgstr "Veža"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:59
@@ -1400,7 +1401,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/ferry_yard/init.lua:8
 msgctxt "amazons_building"
 msgid "Ferry Yard"
-msgstr ""
+msgstr "Trajektový dvor"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/food_preserver/init.lua:8
@@ -1795,7 +1796,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Stonecutter’s Hut"
-msgstr ""
+msgstr "Kamenárska chatrč"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:34
@@ -4278,7 +4279,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:112
 msgctxt "amazons_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Nenašiel sa vojak pre túto úroveň výcviku!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:8
@@ -4342,7 +4343,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:140
 msgctxt "atlanteans_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Nenašiel sa vojak pre túto úroveň výcviku!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:8
@@ -4412,7 +4413,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:202
 msgctxt "barbarians_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Nenašiel sa vojak pre túto úroveň výcviku!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:8
@@ -4496,7 +4497,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:192
 msgctxt "empire_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Nenašiel sa vojak pre túto úroveň výcviku!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:8
@@ -4613,7 +4614,7 @@ msgstr ""
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:168
 msgctxt "frisians_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Nenašiel sa vojak pre túto úroveň výcviku!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:8
@@ -4655,7 +4656,7 @@ msgstr "vylepšenie obrany vojakov z úrovne 0 na úroveň 1"
 #: ../../data/tribes/buildings/warehouses/amazons/headquarters/init.lua:8
 msgctxt "amazons_building"
 msgid "Headquarters"
-msgstr ""
+msgstr "Ústredie"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/amazons/port/init.lua:8
@@ -5766,7 +5767,7 @@ msgstr ""
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../data/tribes/ships/amazons/init.lua:8
 msgid "Ship"
-msgstr ""
+msgstr "Loď"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:41
@@ -6924,7 +6925,7 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:101
 msgctxt "atlanteans_ship"
 msgid "Ship"
-msgstr ""
+msgstr "Loď"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:134
@@ -7278,7 +7279,7 @@ msgstr ""
 #: ../../data/tribes/ships/barbarians/init.lua:8
 msgctxt "barbarians_ship"
 msgid "Ship"
-msgstr ""
+msgstr "Loď"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:34
@@ -7524,7 +7525,7 @@ msgstr ""
 #: ../../data/tribes/ships/empire/init.lua:8
 msgctxt "empire_ship"
 msgid "Ship"
-msgstr ""
+msgstr "Loď"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:34
@@ -7992,7 +7993,7 @@ msgstr ""
 #: ../../data/tribes/ships/frisians/init.lua:8
 msgctxt "frisians_ship"
 msgid "Ship"
-msgstr ""
+msgstr "Loď"
 
 #. TRANSLATORS: This Frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:40
@@ -8995,7 +8996,7 @@ msgstr ""
 #: ../../data/tribes/workers/amazons/ferry/init.lua:8
 msgctxt "amazons_worker"
 msgid "Ferry"
-msgstr ""
+msgstr "Trajekt"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/geologist/init.lua:8
@@ -9049,7 +9050,7 @@ msgstr ""
 #: ../../data/tribes/workers/amazons/shipwright/init.lua:8
 msgctxt "amazons_worker"
 msgid "Shipwright"
-msgstr ""
+msgstr "Loadiar"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/soldier/init.lua:20
@@ -9067,7 +9068,7 @@ msgstr ""
 #: ../../data/tribes/workers/amazons/stonecutter/init.lua:8
 msgctxt "amazons_worker"
 msgid "Stonecutter"
-msgstr ""
+msgstr "Kamenár"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/tapir/init.lua:8
