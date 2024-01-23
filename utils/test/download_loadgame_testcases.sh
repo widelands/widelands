@@ -12,7 +12,7 @@ EXTRACTED_DIR="${TMPDIR}/widelands-test-saves-${SAVES_VER}/test/save"
 
 echo "Downloading v${SAVES_VER} saveloading test cases..."
 
-WL_DIR=$(dirname $(dirname "$0"))
+WL_DIR=$(dirname $(dirname $(dirname "$0")))
 cd "$WL_DIR"
 if ! [ -f src/wlapplication.cc -a -d test ] ; then
    echo
