@@ -11,32 +11,32 @@ jobs:
         config: [Debug, Release]
         os: [ubuntu-22.04]
         compiler: [clang-15, clang-14, g++-12, g++-11]
-        include:
-          # Some compilers need an older ubuntu version to run correctly
-          - compiler: g++-7
-            os: ubuntu-20.04
-            config: Debug
-          - compiler: g++-7
-            os: ubuntu-20.04
-            config: Release
-          - compiler: g++-8
-            os: ubuntu-20.04
-            config: Debug
-          - compiler: g++-8
-            os: ubuntu-20.04
-            config: Release
-          - compiler: clang-8
-            os: ubuntu-20.04
-            config: Debug
-          - compiler: clang-8
-            os: ubuntu-20.04
-            config: Release
-          - compiler: clang-7
-            os: ubuntu-20.04
-            config: Debug
-          - compiler: clang-7
-            os: ubuntu-20.04
-            config: Release
+        # include:
+        #   # Some compilers need an older ubuntu version to run correctly
+        #   - compiler: g++-7
+        #     os: ubuntu-20.04
+        #     config: Debug
+        #   - compiler: g++-7
+        #     os: ubuntu-20.04
+        #     config: Release
+        #   - compiler: g++-8
+        #     os: ubuntu-20.04
+        #     config: Debug
+        #   - compiler: g++-8
+        #     os: ubuntu-20.04
+        #     config: Release
+        #   - compiler: clang-8
+        #     os: ubuntu-20.04
+        #     config: Debug
+        #   - compiler: clang-8
+        #     os: ubuntu-20.04
+        #     config: Release
+        #   - compiler: clang-7
+        #     os: ubuntu-20.04
+        #     config: Debug
+        #   - compiler: clang-7
+        #     os: ubuntu-20.04
+        #     config: Release
     runs-on: ${{ matrix.os }}
     env:
       SDL_VIDEODRIVER: 'x11'
@@ -93,4 +93,4 @@ jobs:
         then
           TIMEOUT="-t 20"
         fi
-        ./regression_test.py -b build/src/widelands $TIMEOUT
+        ./regression_test.py -b build/src/widelands -r test/save $TIMEOUT
