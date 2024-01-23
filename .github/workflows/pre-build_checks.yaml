@@ -42,7 +42,7 @@ jobs:
         popd
     - name: Check regression test coverage of starting and win conditions
       run: |
-        python3 utils/check_template_test_coverage.py
+        python3 utils/test/check_template_test_coverage.py
 
   documentation:
     runs-on: ubuntu-latest
