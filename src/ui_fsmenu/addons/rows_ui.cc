@@ -114,6 +114,33 @@ std::string required_wl_version_and_sync_safety_string(std::shared_ptr<AddOns::A
 	return result;
 }
 
+std::string assemble_map_description_text(const std::string& descr, const std::string& hint, const std::string& comment) {
+	std::string result;
+
+	if (!descr.empty()) {
+		result += format("<vspace gap=%d><p>%s<br>%s</p>",
+			kRowButtonSpacing,
+			g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(_("Description:")),
+			g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(descr));
+	}
+
+	if (!hint.empty()) {
+		result += format("<vspace gap=%d><p>%s<br>%s</p>",
+			kRowButtonSpacing,
+			g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(_("Hint:")),
+			g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(hint));
+	}
+
+	if (!comment.empty()) {
+		result += format("<vspace gap=%d><p>%s<br>%s</p>",
+			kRowButtonSpacing,
+			g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(_("Comment by uploader:")),
+			g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(comment));
+	}
+
+	return result;
+}
+
 }  // namespace
 
 InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
@@ -255,6 +282,11 @@ void InstalledAddOnRow::draw(RenderTarget& r) {
 }
 
 void RemoteAddOnRow::draw(RenderTarget& r) {
+	UI::Panel::draw(r);
+	r.brighten_rect(Recti(0, 0, get_w(), get_h()), -20);
+}
+
+void MapRow::draw(RenderTarget& r) {
 	UI::Panel::draw(r);
 	r.brighten_rect(Recti(0, 0, get_w(), get_h()), -20);
 }
@@ -549,6 +581,163 @@ void RemoteAddOnRow::layout() {
 
 bool RemoteAddOnRow::upgradeable() const {
 	return upgrade_.enabled();
+}
+
+MapRow::MapRow(Panel* parent,
+		AddOnsCtrl* ctrl,
+		std::shared_ptr<AddOns::AddOnInfo> info,
+		bool installed)
+   : UI::Panel(parent,
+               UI::PanelStyle::kFsMenu,
+               format("map_row_%s", info->internal_name),
+               0,
+               0,
+               kRowButtonSize,
+               7 * kRowButtonSize + kRowButtonSpacing),
+     info_(info),
+     minimap_(this, UI::PanelStyle::kFsMenu, "minimap", info_->icon),
+     install_(this,
+              "install",
+              0,
+              0,
+              24,
+              24,
+              UI::ButtonStyle::kFsMenuSecondary,
+              g_image_cache->get("images/ui_basic/continue.png"),
+              _("Install")),
+     uninstall_(this,
+                "uninstall",
+                0,
+                0,
+                24,
+                24,
+                UI::ButtonStyle::kFsMenuSecondary,
+                g_image_cache->get("images/wui/menus/exit.png"),
+                _("Uninstall")),
+     interact_(this,
+               "interact",
+               0,
+               0,
+               24,
+               24,
+               UI::ButtonStyle::kFsMenuSecondary,
+               "…",
+               _("Comments and Votes")),
+     txt_(
+        this,
+        "description",
+        0,
+        0,
+        24,
+        24,
+        UI::PanelStyle::kFsMenu,
+        format(
+           "<rt><p>%s</p><p>%s%s</p><p>%s</p>%s</rt>",
+           format(
+              _("%1$s %2$s"),
+              g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
+                 .as_font_tag(info->descname()),
+              g_style_manager->font_style(UI::FontStyle::kItalic)
+                 .as_font_tag(format(_("(%s)"), info->internal_name))),
+           g_style_manager->font_style(UI::FontStyle::kItalic)
+              .as_font_tag(
+                 info->author() == info->upload_username ?
+                    format(_("by %s"), info->author()) :
+                    format(_("by %1$s (uploaded by %2$s)"), info->author(), info->upload_username)),
+           required_wl_version_and_sync_safety_string(info),
+           g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(format(
+					_("Size: %1$u×%2$u • Max Players: %3$u • %4$s"),
+					info->map_width,
+					info->map_height,
+					info->map_nr_players,
+					info->map_world_name.empty() ? _("One World") : i18n::translate(info->map_world_name)
+           )),
+           assemble_map_description_text(info->description(), info->map_hint(), info->map_uploader_comment())
+        )),
+     bottom_row_(this,
+                      UI::PanelStyle::kFsMenu,
+                      "bottom_row",
+                      UI::FontStyle::kFsTooltip,
+                      0,
+                      0,
+                      0,
+                      0,
+                      format(
+		        /** TRANSLATORS: Timestamp · Filesize · Download count · Average rating ·
+		           Number of comments */
+		        _("%1$s   %2$s   ⬇ %3$u   ★ %4$s   “” %5$u"),
+		        time_string(info->upload_timestamp),
+		        filesize_string(info->total_file_size),
+		        info->download_count,
+		        (info->number_of_votes() != 0u ? format_l("%.2f", info->average_rating()) : "–"),
+		        info->user_comments.size()),
+                      UI::Align::kLeft)
+{
+	interact_.sigclicked.connect([ctrl, info]() {
+		RemoteInteractionWindow m(*ctrl, info);
+		m.run<UI::Panel::Returncodes>();
+	});
+	uninstall_.sigclicked.connect([ctrl, this]() {
+		// NOCOM create new method for uninstalling
+		uninstall(ctrl, info_, false);
+	});
+	install_.sigclicked.connect([ctrl, this]() {
+		// No need to confirm for maps
+		// NOCOM create new method for downloading
+		ctrl->install_or_upgrade(info_, false);
+		ctrl->rebuild(true);
+	});
+#ifdef NDEBUG
+	install_.set_enabled(info->matches_widelands_version());
+#endif
+
+	if (installed) {
+		install_.set_enabled(false);
+	} else {
+		uninstall_.set_enabled(false);
+	}
+
+	bottom_row_.set_handle_mouse(true);
+	bottom_row_.set_tooltip(
+         format(
+	         "%s<br>%s<br>%s<br>%s",
+	         format(ngettext("Total size: %u byte", "Total size: %u bytes", info->total_file_size),
+	                info->total_file_size),
+	         format(
+	            ngettext("%u download", "%u downloads", info->download_count), info->download_count),
+	         (info->number_of_votes() != 0u ?
+                format_l(ngettext("Average rating: %1$.3f (%2$u vote)",
+	                               "Average rating: %1$.3f (%2$u votes)", info->number_of_votes()),
+	                      info->average_rating(), info->number_of_votes()) :
+                _("No votes yet")),
+	         format(ngettext("%u comment", "%u comments", info->user_comments.size()),
+	                info->user_comments.size())
+	                ));
+	set_can_focus(true);
+	layout();
+}
+
+void MapRow::layout() {
+	UI::Panel::layout();
+	if (get_w() <= 6 * kRowButtonSize) {
+		// size not yet set
+		return;
+	}
+
+	set_desired_size(get_w(), 7 * kRowButtonSize + kRowButtonSpacing);
+
+	minimap_.set_size(6 * kRowButtonSize, 6 * kRowButtonSize);
+	install_.set_size(kRowButtonSize, kRowButtonSize);
+	uninstall_.set_size(kRowButtonSize, kRowButtonSize);
+	interact_.set_size(kRowButtonSize, kRowButtonSize);
+	bottom_row_.set_size(get_w() - 3 * kRowButtonSize - 3 * kRowButtonSpacing, bottom_row_.get_h());
+	txt_.set_size(get_w() - 6 * kRowButtonSize - kRowButtonSpacing, 6 * kRowButtonSize);
+
+	bottom_row_.set_pos(Vector2i(0, 7 * kRowButtonSize - bottom_row_.get_h()));
+	interact_.set_pos(Vector2i(get_w() - kRowButtonSize, 6 * kRowButtonSize + kRowButtonSpacing));
+	uninstall_.set_pos(Vector2i(interact_.get_x() - kRowButtonSize - kRowButtonSpacing, interact_.get_y()));
+	install_.set_pos(Vector2i(uninstall_.get_x() - kRowButtonSize - kRowButtonSpacing, interact_.get_y()));
+	txt_.set_pos(Vector2i(6 * kRowButtonSize + kRowButtonSpacing, 0));
 }
 
 }  // namespace AddOnsUI

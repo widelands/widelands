@@ -636,7 +636,9 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	ok_.sigclicked.connect([this]() { die(); });
 	refresh_.sigclicked.connect([this]() {
 		refresh_remotes(matches_keymod(SDL_GetModState(), KMOD_CTRL));
-		tabs_.activate(1);
+		if (tabs_.active() != 2) {
+			tabs_.activate(1);
+		}
 	});
 	tabs_.sigclicked.connect([this]() {
 		if ((tabs_.active() == 1 || tabs_.active() == 2) && remotes_.size() <= 1) {
@@ -1065,7 +1067,7 @@ bool AddOnsCtrl::matches_filter(std::shared_ptr<AddOns::AddOnInfo> info) {
 		return true;
 	}
 	auto array = {info->descname(), info->author(), info->upload_username, info->internal_name,
-	              info->description()};
+	              info->description(), info->map_hint(), info->map_uploader_comment()};
 	return std::any_of(array.begin(), array.end(), [this](const std::string& text) {
 		return text.find(filter_name_.get_text()) != std::string::npos;
 	});
@@ -1201,10 +1203,7 @@ void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
 		if (0 < index++) {
 			maps_box_.add_space(kRowButtonSize);
 		}
-		AddOns::AddOnVersion installed;
-		// NOCOM check if installed
-		RemoteAddOnRow* r =
-		   new RemoteAddOnRow(&maps_box_, this, a, installed, 0);  // NOCOM new class for maps
+		MapRow* r = new MapRow(&maps_box_, this, a, g_fs->file_exists(kDownloadedMapsDir + FileSystem::file_separator() + a->map_file_name));
 		maps_box_.add(r, UI::Box::Resizing::kFullSize);
 	}
 	tabs_.tabs()[2]->set_title(index == 0 ? _("Maps") : format(_("Maps (%u)"), index));
@@ -1366,7 +1365,7 @@ void AddOnsCtrl::layout() {
 		browse_addons_inner_wrapper_.set_max_size(
 		   tabs_placeholder_.get_w(),
 		   tabs_placeholder_.get_h() - 2 * kRowButtonSize - browse_addons_buttons_box_.get_h());
-		maps_outer_wrapper_.set_max_size(
+		maps_inner_wrapper_.set_max_size(
 		   tabs_placeholder_.get_w(),
 		   tabs_placeholder_.get_h() - 2 * kRowButtonSize - maps_buttons_box_.get_h());
 

@@ -136,6 +136,7 @@ struct AddOnInfo {
 	std::function<std::string()> map_hint;
 	std::function<std::string()> map_uploader_comment;
 
+	std::string map_file_name;   ///< Map file name (may contain whitespace and special characters).
 	std::string map_world_name;  ///< Map world name (unlocalized).
 	uint16_t map_width;          ///< Map width.
 	uint16_t map_height;         ///< Map height.

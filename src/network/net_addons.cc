@@ -514,6 +514,8 @@ AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 	}
 
 	if (a.category == AddOnCategory::kSingleMap) {
+		a.map_file_name = read_line();
+
 		a.unlocalized_map_hint = read_line();
 		std::string localized_map_hint = read_line();
 		a.map_hint = [localized_map_hint]() { return localized_map_hint; };
