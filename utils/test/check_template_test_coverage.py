@@ -12,7 +12,7 @@ import sys
 
 print('Checking starting and win conditions test coverage')
 
-basedir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
+basedir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir, os.path.pardir))
 
 datadir = os.path.join(basedir, 'data')
 if not os.path.isdir(datadir):
