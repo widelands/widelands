@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2023
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2024
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # GunChleoc, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-11-18 02:30+0000\n"
+"POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2023\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2024\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -389,7 +389,7 @@ msgstr "Toorn"
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:57
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your tower."
-msgstr "Diene Soldatsken hebben dienen Toorn besett."
+msgstr "Diene Soldaten hebben dienen Toorn besett."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:59
@@ -407,13 +407,13 @@ msgstr "Feinde griepen dienen Toorn an."
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:63
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the tower."
-msgstr "De Feinde hebben diene Soldatsken in eenem Toorn manntjet."
+msgstr "De Feinde hebben diene Soldaten in eenem Toorn manntjet."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:65
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr "Diene Soldatsken hebben de Feinde in eenem Toorn manntjet."
+msgstr "Diene Soldaten hebben de Feinde in eenem Toorn manntjet."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:8
@@ -569,7 +569,7 @@ msgstr "Schanz"
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:77
 msgctxt "barbarians_building"
 msgid "Your soldiers have occupied your fortress."
-msgstr "Diene Soldatsken hebben diene Schanz besett."
+msgstr "Diene Soldaten hebben diene Schanz besett."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:79
@@ -587,13 +587,13 @@ msgstr "Feinde griepen diene Schanz an."
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:83
 msgctxt "barbarians_building"
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr "De Feinde hebben diene Soldatsken in eener Schanz manntjet."
+msgstr "De Feinde hebben diene Soldaten in eener Schanz manntjet."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:85
 msgctxt "barbarians_building"
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr "Diene Soldatsken hebben de Feinde in eener Schanz manntjet."
+msgstr "Diene Soldaten hebben de Feinde in eener Schanz manntjet."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:8
@@ -641,7 +641,7 @@ msgstr "Toorn"
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:59
 msgctxt "barbarians_building"
 msgid "Your soldiers have occupied your tower."
-msgstr "Diene Soldatsken hebben dienen Toorn besett."
+msgstr "Diene Soldaten hebben dienen Toorn besett."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:61
@@ -659,13 +659,13 @@ msgstr "Feinde griepen dienen Toorn an."
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:65
 msgctxt "barbarians_building"
 msgid "The enemy defeated your soldiers at the tower."
-msgstr "De Feinde hebben diene Soldatsken in eenem Toorn manntjet."
+msgstr "De Feinde hebben diene Soldaten in eenem Toorn manntjet."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:67
 msgctxt "barbarians_building"
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr "Diene Soldatsken hebben de Feinde in eenem Toorn manntjet."
+msgstr "Diene Soldaten hebben de Feinde in eenem Toorn manntjet."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:8
@@ -785,7 +785,7 @@ msgstr "Schanz"
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:73
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your fortress."
-msgstr "Diene Soldatsken hebben diene Schanz besett."
+msgstr "Diene Soldaten hebben diene Schanz besett."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:75
@@ -803,13 +803,13 @@ msgstr "Feinde griepen diene Schanz an."
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:79
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr "De Feinde hebben diene Soldatsken in eener Schanz manntjet."
+msgstr "De Feinde hebben diene Soldaten in eener Schanz manntjet."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:81
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr "Diene Soldatsken hebben de Feinde in eener Schanz manntjet."
+msgstr "Diene Soldaten hebben de Feinde in eener Schanz manntjet."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:8
@@ -893,7 +893,7 @@ msgstr "Toorn"
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:53
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your tower."
-msgstr "Diene Soldatsken hebben dienen Toorn besett."
+msgstr "Diene Soldaten hebben dienen Toorn besett."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:55
@@ -911,13 +911,13 @@ msgstr "Feinde griepen dienen Toorn an."
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:59
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the tower."
-msgstr "De Feinde hebben diene Soldatsken in eenem Toorn manntjet."
+msgstr "De Feinde hebben diene Soldaten in eenem Toorn manntjet."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:61
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr "Diene Soldatsken hebben de Feinde in eenem Toorn manntjet."
+msgstr "Diene Soldaten hebben de Feinde in eenem Toorn manntjet."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:8
@@ -929,7 +929,7 @@ msgstr "Schanz"
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:55
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your fortress."
-msgstr "Diene Soldatsken hebben diene Schanz besett."
+msgstr "Diene Soldaten hebben diene Schanz besett."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:57
@@ -947,13 +947,13 @@ msgstr "Feinde griepen diene Schanz an."
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:61
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr "De Feinde hebben diene Soldatsken in eener Schanz manntjet."
+msgstr "De Feinde hebben diene Soldaten in eener Schanz manntjet."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:63
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr "Diene Soldatsken hebben de Feinde in eener Schanz manntjet."
+msgstr "Diene Soldaten hebben de Feinde in eener Schanz manntjet."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:8
@@ -1037,7 +1037,7 @@ msgstr "Toorn"
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:56
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your tower."
-msgstr "Diene Soldatsken hebben dienen Toorn besett."
+msgstr "Diene Soldaten hebben dienen Toorn besett."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:58
@@ -1055,13 +1055,13 @@ msgstr "Feinde griepen dienen Toorn an."
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:62
 msgctxt "frisians_building"
 msgid "The enemy defeated your soldiers at the tower."
-msgstr "De Feinde hebben diene Soldatsken in eenem Toorn manntjet."
+msgstr "De Feinde hebben diene Soldaten in eenem Toorn manntjet."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:64
 msgctxt "frisians_building"
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr "Diene Soldatsken hebben de Feinde in eenem Toorn manntjet."
+msgstr "Diene Soldaten hebben de Feinde in eenem Toorn manntjet."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:8
