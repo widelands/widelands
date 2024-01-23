@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Language-Team: Latin (https://app.transifex.com/widelands/teams/35159/la/)\n"
 "MIME-Version: 1.0\n"
