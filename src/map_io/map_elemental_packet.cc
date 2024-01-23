@@ -125,6 +125,7 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 				++team_section_id;
 				teamsection_key = format("teams%02i", team_section_id);
 			}
+			map->sanitize_suggested_teams();
 		} else {
 			throw UnhandledVersionError(
 			   "MapElementalPacket", packet_version, kEightPlayersPacketVersion);
