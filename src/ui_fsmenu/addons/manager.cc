@@ -548,7 +548,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	{
 		uint8_t index = 0;
 		for (const auto& pair : AddOns::kAddOnCategories) {
-			if (pair.first == AddOns::AddOnCategory::kNone) {
+			if (pair.second.hide) {
 				continue;
 			}
 			UI::Checkbox* c =
@@ -1007,6 +1007,10 @@ bool AddOnsCtrl::matches_filter(std::shared_ptr<AddOns::AddOnInfo> info) {
 	if (info->internal_name.empty()) {
 		// always show error messages
 		return true;
+	}
+
+	if (AddOns::kAddOnCategories.at(info->category).hide) {
+		return false;  // Hidden in the main view
 	}
 
 	if (!filter_category_.at(info->category)->get_state()) {

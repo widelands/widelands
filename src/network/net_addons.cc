@@ -65,8 +65,8 @@ namespace AddOns {
  */
 
 constexpr unsigned kCurrentProtocolVersion = 7;
-static const std::string kCmdList = "2:CMD_LIST";
-static const std::string kCmdInfo = "2:CMD_INFO";
+static const std::string kCmdList = "3:CMD_LIST";
+static const std::string kCmdInfo = "3:CMD_INFO";
 static const std::string kCmdDownload = "1:CMD_DOWNLOAD";
 static const std::string kCmdI18N = "1:CMD_I18N";
 static const std::string kCmdScreenshot = "1:CMD_SCREENSHOT";
@@ -511,6 +511,21 @@ AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 		check_checksum(path, icon_checksum);
 		a.icon = g_image_cache->get(path);
 		g_fs->fs_unlink(path);
+	}
+
+	if (a.category == AddOnCategory::kSingleMap) {
+		a.unlocalized_map_hint = read_line();
+		std::string localized_map_hint = read_line();
+		a.map_hint = [localized_map_hint]() { return localized_map_hint; };
+
+		a.unlocalized_map_uploader_comment = read_line();
+		std::string localized_map_uploader_comment = read_line();
+		a.map_uploader_comment = [localized_map_uploader_comment]() { return localized_map_uploader_comment; };
+
+		a.map_width = math::to_int(read_line());
+		a.map_height = math::to_int(read_line());
+		a.map_nr_players = math::to_int(read_line());
+		a.map_world_name = read_line();
 	}
 
 	check_endofstream();
