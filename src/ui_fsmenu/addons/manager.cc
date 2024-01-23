@@ -200,6 +200,28 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                         UI::Box::Vertical,
                         kHugeSize,
                         kHugeSize),
+     maps_outer_wrapper_(
+        &tabs_, UI::PanelStyle::kFsMenu, "maps_outer_wrapper_box", 0, 0, UI::Box::Vertical),
+     maps_inner_wrapper_(&maps_outer_wrapper_,
+                                  UI::PanelStyle::kFsMenu,
+                                  "maps_inner_wrapper_box",
+                                  0,
+                                  0,
+                                  UI::Box::Vertical),
+     maps_buttons_box_(&maps_outer_wrapper_,
+                                   UI::PanelStyle::kFsMenu,
+                                   "maps_buttons_box",
+                                   0,
+                                   0,
+                                   UI::Box::Vertical),
+     maps_box_(&maps_inner_wrapper_,
+                           UI::PanelStyle::kFsMenu,
+                           "maps_box",
+                           0,
+                           0,
+                           UI::Box::Vertical,
+                           kHugeSize,
+                           kHugeSize),
      dev_box_(&tabs_, UI::PanelStyle::kFsMenu, "development_box", 0, 0, UI::Box::Vertical),
      filter_name_(
         &browse_addons_buttons_box_rvbox_, "filter_name", 0, 0, 100, UI::PanelStyle::kFsMenu),
@@ -373,6 +395,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 
 	installed_addons_box_.set_flag(UI::Panel::pf_unlimited_size, true);
 	browse_addons_box_.set_flag(UI::Panel::pf_unlimited_size, true);
+	maps_box_.set_flag(UI::Panel::pf_unlimited_size, true);
 
 	dev_box_.set_force_scrolling(true);
 	dev_box_.add(new UI::Textarea(&dev_box_, UI::PanelStyle::kFsMenu, "label_development",
@@ -515,11 +538,17 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	browse_addons_outer_wrapper_.add_space(2 * kRowButtonSpacing);
 	browse_addons_outer_wrapper_.add(&browse_addons_inner_wrapper_, UI::Box::Resizing::kExpandBoth);
 
+	maps_outer_wrapper_.add(&maps_buttons_box_, UI::Box::Resizing::kFullSize);
+	maps_outer_wrapper_.add_space(2 * kRowButtonSpacing);
+	maps_outer_wrapper_.add(&maps_inner_wrapper_, UI::Box::Resizing::kExpandBoth);
+
 	installed_addons_inner_wrapper_.add(&installed_addons_box_, UI::Box::Resizing::kExpandBoth);
 	browse_addons_inner_wrapper_.add(&browse_addons_box_, UI::Box::Resizing::kExpandBoth);
+	maps_inner_wrapper_.add(&maps_box_, UI::Box::Resizing::kExpandBoth);
 	tabs_.add("my", "", &installed_addons_outer_wrapper_);
 	tabs_.add("all", "", &browse_addons_outer_wrapper_);
-	tabs_.add("all", _("Development"), &dev_box_);
+	tabs_.add("maps", "", &maps_outer_wrapper_);
+	tabs_.add("development", _("Development"), &dev_box_);
 
 	/** TRANSLATORS: Sort add-ons alphabetically by name */
 	sort_order_.add(_("Name"), AddOnSortingCriteria::kNameABC);
@@ -610,7 +639,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		tabs_.activate(1);
 	});
 	tabs_.sigclicked.connect([this]() {
-		if (tabs_.active() == 1 && remotes_.size() <= 1) {
+		if ((tabs_.active() == 1 || tabs_.active() == 2) && remotes_.size() <= 1) {
 			refresh_remotes(false);
 		}
 	});
@@ -750,11 +779,14 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	// prevent assert failures
 	installed_addons_box_.set_size(100, 100);
 	browse_addons_box_.set_size(100, 100);
+	maps_box_.set_size(100, 100);
 	installed_addons_inner_wrapper_.set_size(100, 100);
 	browse_addons_inner_wrapper_.set_size(100, 100);
+	maps_inner_wrapper_.set_size(100, 100);
 
 	installed_addons_inner_wrapper_.set_force_scrolling(true);
 	browse_addons_inner_wrapper_.set_force_scrolling(true);
+	maps_inner_wrapper_.set_force_scrolling(true);
 
 	login_button_.sigclicked.connect([this]() { login_button_clicked(); });
 	update_login_button(&login_button_);
@@ -1047,13 +1079,19 @@ void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
 	const uint32_t scrollpos_b = browse_addons_inner_wrapper_.get_scrollbar() != nullptr ?
                                    browse_addons_inner_wrapper_.get_scrollbar()->get_scrollpos() :
                                    0;
+	const uint32_t scrollpos_m = maps_inner_wrapper_.get_scrollbar() != nullptr ?
+                                   maps_inner_wrapper_.get_scrollbar()->get_scrollpos() :
+                                   0;
 	installed_addons_box_.free_children();
 	browse_addons_box_.free_children();
+	maps_box_.free_children();
 	installed_addons_box_.clear();
 	browse_addons_box_.clear();
 	browse_.clear();
+	maps_box_.clear();
 	assert(installed_addons_box_.get_nritems() == 0);
 	assert(browse_addons_box_.get_nritems() == 0);
+	assert(maps_box_.get_nritems() == 0);
 	upload_addon_.clear();
 	upload_screenshot_.clear();
 
@@ -1074,16 +1112,18 @@ void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
 	}
 	tabs_.tabs()[0]->set_title(format(_("Installed (%u)"), index));
 
-	index = 0;
 	std::list<std::shared_ptr<AddOns::AddOnInfo>> remotes_to_show;
+	std::list<std::shared_ptr<AddOns::AddOnInfo>> maps_to_show;
 	for (auto& a : remotes_) {
-		if (matches_filter(a)) {
+		if (a->category == AddOns::AddOnCategory::kSingleMap) {
+			maps_to_show.push_back(a);
+		} else if (matches_filter(a)) {
 			remotes_to_show.push_back(a);
 		}
 	}
 	{
 		const AddOnSortingCriteria sort_by = sort_order_.get_selected();
-		remotes_to_show.sort([sort_by](const std::shared_ptr<AddOns::AddOnInfo> a,
+		auto functor = [sort_by](const std::shared_ptr<AddOns::AddOnInfo> a,
 		                               const std::shared_ptr<AddOns::AddOnInfo> b) {
 			switch (sort_by) {
 			case AddOnSortingCriteria::kNameABC:
@@ -1126,9 +1166,13 @@ void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
 				}
 			}
 			NEVER_HERE();
-		});
+		};
+		remotes_to_show.sort(functor);
+		maps_to_show.sort(functor);
 	}
 	std::vector<std::string> has_upgrades;
+
+	index = 0;
 	for (const auto& a : remotes_to_show) {
 		if (0 < index++) {
 			browse_addons_box_.add_space(kRowButtonSize);
@@ -1152,11 +1196,27 @@ void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
 	}
 	tabs_.tabs()[1]->set_title(index == 0 ? _("Browse") : format(_("Browse (%u)"), index));
 
+	index = 0;
+	for (const auto& a : maps_to_show) {
+		if (0 < index++) {
+			maps_box_.add_space(kRowButtonSize);
+		}
+		AddOns::AddOnVersion installed;
+		// NOCOM check if installed
+		RemoteAddOnRow* r =
+		   new RemoteAddOnRow(&maps_box_, this, a, installed, 0);  // NOCOM new class for maps
+		maps_box_.add(r, UI::Box::Resizing::kFullSize);
+	}
+	tabs_.tabs()[2]->set_title(index == 0 ? _("Maps") : format(_("Maps (%u)"), index));
+
 	if ((installed_addons_inner_wrapper_.get_scrollbar() != nullptr) && (scrollpos_i != 0u)) {
 		installed_addons_inner_wrapper_.get_scrollbar()->set_scrollpos(scrollpos_i);
 	}
 	if ((browse_addons_inner_wrapper_.get_scrollbar() != nullptr) && (scrollpos_b != 0u)) {
 		browse_addons_inner_wrapper_.get_scrollbar()->set_scrollpos(scrollpos_b);
+	}
+	if ((maps_inner_wrapper_.get_scrollbar() != nullptr) && (scrollpos_m != 0u)) {
+		maps_inner_wrapper_.get_scrollbar()->set_scrollpos(scrollpos_m);
 	}
 
 	check_enable_move_buttons();
@@ -1306,6 +1366,9 @@ void AddOnsCtrl::layout() {
 		browse_addons_inner_wrapper_.set_max_size(
 		   tabs_placeholder_.get_w(),
 		   tabs_placeholder_.get_h() - 2 * kRowButtonSize - browse_addons_buttons_box_.get_h());
+		maps_outer_wrapper_.set_max_size(
+		   tabs_placeholder_.get_w(),
+		   tabs_placeholder_.get_h() - 2 * kRowButtonSize - maps_buttons_box_.get_h());
 
 		login_button_.set_size(get_inner_w() / 3, login_button_.get_h());
 		login_button_.set_pos(Vector2i(get_inner_w() - login_button_.get_w(), 0));

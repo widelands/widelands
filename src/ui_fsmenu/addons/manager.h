@@ -113,10 +113,13 @@ private:
 	UI::Panel tabs_placeholder_;
 	UI::TabPanel tabs_;
 	UI::Box installed_addons_outer_wrapper_, installed_addons_inner_wrapper_,
-	   installed_addons_buttons_box_, installed_addons_box_, browse_addons_outer_wrapper_,
+	   installed_addons_buttons_box_, installed_addons_box_;
+	UI::Box browse_addons_outer_wrapper_,
 	   browse_addons_inner_wrapper_, browse_addons_buttons_box_, browse_addons_buttons_box_lvbox_,
 	   browse_addons_buttons_box_rvbox_, browse_addons_buttons_box_category_box_,
-	   browse_addons_buttons_box_right_hbox_, browse_addons_box_, dev_box_;
+	   browse_addons_buttons_box_right_hbox_, browse_addons_box_;
+	UI::Box maps_outer_wrapper_, maps_inner_wrapper_, maps_buttons_box_, maps_box_;
+	UI::Box dev_box_;
 	std::map<AddOns::AddOnCategory, UI::Checkbox*> filter_category_;
 	std::vector<RemoteAddOnRow*> browse_;
 	UI::EditBox filter_name_;
