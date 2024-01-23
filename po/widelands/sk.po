@@ -303,7 +303,7 @@ msgstr "Esc"
 #: ../../src/wlapplication_options.cc:1034
 msgctxt "editor"
 msgid "Tools"
-msgstr ""
+msgstr "Nástroje"
 
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
@@ -686,7 +686,7 @@ msgstr "neznámi"
 
 #: ../../src/editor/editorinteractive.cc:1224
 msgid "Loading world…"
-msgstr "Nahrávanie sveta..."
+msgstr "Nahrávanie sveta…"
 
 #: ../../src/editor/editorinteractive.cc:1403
 #, c-format
@@ -707,7 +707,7 @@ msgid ""
 "Author: %3$s\n"
 "Description: %4$s\n"
 "Hint: %5$s\n"
-msgstr "Ste si istý že chcete túto mapu zverejniť online?\n\nMeno: %1$s\nPrezývka: %2$s\nAutor: %3$s\nPopis: %4$s\nNápoveda: %5$s\n"
+msgstr "Ste si istý že chcete túto mapu zverejniť online?\n\nMeno: %1$s\nPrezývka: %2$s\nAutor: %3$s\nPopis: %4$s\nRada: %5$s\n"
 
 #: ../../src/editor/editorinteractive.cc:1451
 msgid "Login Error"
@@ -715,7 +715,7 @@ msgstr "Chyba prihlásenia"
 
 #: ../../src/editor/editorinteractive.cc:1456
 msgid "Uploading Add-On…"
-msgstr "Nahrávanie doplnku..."
+msgstr "Nahrávanie doplnku…"
 
 #: ../../src/editor/editorinteractive.cc:1457
 msgid "Saving map…"
@@ -981,7 +981,7 @@ msgstr "Popis: %s"
 #: ../../src/editor/ui_menus/field_info_window.cc:251
 #: ../../src/ui_fsmenu/addons/packager_box.cc:294
 msgid "(none)"
-msgstr ""
+msgstr "(žiadne)"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:258
 #, c-format
@@ -991,7 +991,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/field_info_window.cc:262
 #, c-format
 msgid "Enabled Add-Ons: %s"
-msgstr ""
+msgstr "Povolené doplnky: %s"
 
 #: ../../src/editor/ui_menus/help.cc:36 ../../src/ui_fsmenu/login_box.cc:255
 #: ../../src/ui_fsmenu/main.cc:255 ../../src/ui_fsmenu/main.cc:1084
@@ -1454,7 +1454,7 @@ msgstr "Súbor s názvom „%s“ už existuje. Chcete ho prepísať?"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:345
 msgid "Saving the map…"
-msgstr "Ukladanie mapy..."
+msgstr "Ukladanie mapy…"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:363
 msgid "Map saved"
@@ -2023,7 +2023,7 @@ msgstr "Vytváranie hráča %d…"
 
 #: ../../src/logic/editor_game_base.cc:306
 msgid "Postloading world and tribes…"
-msgstr ""
+msgstr "Nahrávanie sveta a kmeňov…"
 
 #: ../../src/logic/editor_game_base.cc:564
 msgid "Cleaning up for loading: Map objects (1/3)"
@@ -2508,7 +2508,7 @@ msgstr "Expedičná loď čaká na vaše rozkazy."
 #: ../../src/wui/seafaring_statistics_menu.cc:247
 msgctxt "ship_state"
 msgid "Empty"
-msgstr ""
+msgstr "Prázdna"
 
 #. * TRANSLATORS: This is a ship state. The ship is currently
 #. * transporting wares to a specific destination port.
@@ -2681,7 +2681,7 @@ msgstr ""
 #: ../../src/wui/productionsitewindow.cc:107
 #: ../../src/wui/productionsitewindow.cc:124
 msgid "Worker"
-msgstr ""
+msgstr "Pracovník"
 
 #: ../../src/logic/map_objects/tribes/worker.cc:2104
 msgid "Worker got lost!"
@@ -2850,7 +2850,7 @@ msgstr "Dosiahli ste koniec záznamu a hra sa pozastavila. Ak chcete, môžete z
 
 #: ../../src/logic/save_handler.cc:114
 msgid "Saving game…"
-msgstr "Ukladanie hry..."
+msgstr "Ukladanie hry…"
 
 #: ../../src/logic/save_handler.cc:152
 msgid "Saving skipped"
@@ -2873,7 +2873,7 @@ msgstr "Ukladanie mapy: %1$s (%2$d/%3$d)"
 
 #: ../../src/map_io/map_saver.cc:87
 msgid "Autosaving map…"
-msgstr "Autoukladanie mapy..."
+msgstr "Autoukladanie mapy…"
 
 #: ../../src/map_io/map_saver.cc:120
 #: ../../src/map_io/widelands_map_loader.cc:237
@@ -3001,7 +3001,7 @@ msgstr ""
 
 #: ../../src/map_io/widelands_map_loader.cc:371
 msgid "Initializing map objects"
-msgstr ""
+msgstr "Inicializácia mapových objektov"
 
 #: ../../src/map_io/widelands_map_loader.cc:435
 msgid "Checking map"
@@ -3699,11 +3699,11 @@ msgstr ""
 
 #: ../../src/ui_basic/panel.cc:307
 msgid "Please wait…"
-msgstr ""
+msgstr "Prosím počkajte…"
 
 #: ../../src/ui_basic/panel.cc:438
 msgid "Game ending – please wait…"
-msgstr ""
+msgstr "Hra sa ukončuje – prosím počkajte…"
 
 #: ../../src/ui_basic/progresswindow.cc:79
 msgid "Loading…"
@@ -4283,7 +4283,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/manager.cc:558
 #, c-format
 msgid "Toggle category ‘%s’"
-msgstr ""
+msgstr "Prepnúť kategóriu ‘%s’"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:649
 #, c-format
@@ -4623,7 +4623,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:359
 msgid "Category"
-msgstr ""
+msgstr "Kategória"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:380
 #: ../../src/ui_fsmenu/addons/packager.cc:396
@@ -5333,7 +5333,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:474
 #, c-format
 msgid "Category: %s"
-msgstr ""
+msgstr "Kategória: %s"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:220
@@ -5559,7 +5559,7 @@ msgstr "Klienti online:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:89
 msgid "Open Games:"
-msgstr ""
+msgstr "Otvorené hry:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:99
 #: ../../src/ui_fsmenu/netsetup_lan.cc:90
@@ -5937,7 +5937,7 @@ msgstr "Nastavenia online hry"
 #: ../../src/ui_fsmenu/login_box.cc:44 ../../src/wlapplication_options.cc:407
 #: ../../src/wui/economy_options_window.cc:678
 msgid "Save"
-msgstr ""
+msgstr "Uložiť"
 
 #: ../../src/ui_fsmenu/login_box.cc:53
 msgid "Log in to a registered account."
@@ -6190,7 +6190,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:51
 msgid "Saved Players"
-msgstr ""
+msgstr "Uložení hráči"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:58
 #, c-format
@@ -6205,16 +6205,16 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:107
 msgid "Map Details"
-msgstr "Podrobnosti mapy"
+msgstr "Podrobnosti o mape"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:107
 msgid "Scenario Details"
-msgstr "Detaily scenára"
+msgstr "Podrobnosti o scenári"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:132
 #, c-format
 msgid "Hint: %s"
-msgstr ""
+msgstr "Rada: %s"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:170
 msgid "No map selected"
@@ -7002,11 +7002,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/tech_info.cc:126
 msgid "Enabled Add-Ons:"
-msgstr ""
+msgstr "Povolené doplnky:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:128
 msgid "Inactive Installed Add-Ons:"
-msgstr ""
+msgstr "Neaktívne nainštalované doplnky:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:238
 msgid "Copy"
@@ -8230,7 +8230,7 @@ msgstr "ZD: %1$u/%2$u  ÚT: %3$u/%4$u  OB: %5$u/%6$u  UH: %7$u/%8$u"
 
 #: ../../src/wui/building_statistics_menu.cc:82
 msgid "(no building selected)"
-msgstr ""
+msgstr "(nevybraná žiadna budova)"
 
 #: ../../src/wui/building_statistics_menu.cc:88
 msgid "Owned:"
@@ -9168,7 +9168,7 @@ msgstr ""
 
 #: ../../src/wui/info_panel.cc:206
 msgid "Hide"
-msgstr ""
+msgstr "Skryť"
 
 #: ../../src/wui/info_panel.cc:211
 msgid "Move panel to bottom"
@@ -9694,7 +9694,7 @@ msgstr "Názov tejto mapy vo vašom jazyku: %s"
 #. * TRANSLATORS: Map hint header when selecting a map.
 #: ../../src/wui/mapdetails.cc:214
 msgid "Hint"
-msgstr ""
+msgstr "Rada"
 
 #: ../../src/wui/mapdetails.cc:240
 msgid "Game data error"
@@ -9747,7 +9747,7 @@ msgstr "Priblíženie"
 
 #: ../../src/wui/pinned_note.cc:76
 msgid "Change color…"
-msgstr "Zmeniť farbu..."
+msgstr "Zmeniť farbu…"
 
 #. * TRANSLATORS: day(s). Keep this as short as possible. Used in statistics.
 #: ../../src/wui/plot_area.cc:102
@@ -10169,12 +10169,12 @@ msgstr "Vycentrovať mapu na vybratú loď"
 #: ../../src/wui/seafaring_statistics_menu.cc:212
 msgctxt "ship"
 msgid "Name"
-msgstr ""
+msgstr "Meno"
 
 #: ../../src/wui/seafaring_statistics_menu.cc:213
 msgctxt "ship"
 msgid "Status"
-msgstr ""
+msgstr "Stav"
 
 #: ../../src/wui/seafaring_statistics_menu.cc:249
 msgctxt "ship_state"
@@ -10189,7 +10189,7 @@ msgstr ""
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:521
 msgid "Show empty ships"
-msgstr ""
+msgstr "Ukázať prázdne lode"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:526
@@ -10199,7 +10199,7 @@ msgstr ""
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:531
 msgid "Show waiting expeditions"
-msgstr ""
+msgstr "Ukázať čakajúce výpravy"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:536

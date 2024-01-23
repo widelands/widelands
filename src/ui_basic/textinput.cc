@@ -211,6 +211,7 @@ void AbstractTextInputPanel::layout() {
 	d_->scrolloffset = get_h() == 0 ? 0 : get_text().length() / get_h();
 	Panel::layout();
 	d_->scrollbar.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
+	d_->scrollbar.set_size(Scrollbar::kSize, get_inner_h());
 }
 
 /**
