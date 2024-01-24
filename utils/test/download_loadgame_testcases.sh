@@ -2,7 +2,7 @@
 
 ## Download saveloading compatibility test cases for regression_test.py
 
-SAVES_VER=1.1
+SAVES_VER=1.0
 
 URL="https://github.com/tothxa/widelands-test-saves/archive/refs/tags/v${SAVES_VER}.tar.gz"
 
