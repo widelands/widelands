@@ -51,6 +51,7 @@ struct ProductionProgram : public MapObjectProgram {
 			TrainingParameters() = default;
 			static TrainingParameters parse(const std::vector<std::string>& arguments,
 			                                const std::string& action_name);
+			static TrainingAttribute parse_training_attribute(const std::string& argument);
 
 			TrainingAttribute attribute{TrainingAttribute::kTotal};
 			unsigned level{INVALID_INDEX};

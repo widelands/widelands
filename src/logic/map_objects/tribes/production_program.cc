@@ -192,26 +192,6 @@ ProductionProgram::ActReturn::Condition* create_economy_condition(
 		throw GameDataError("economy condition: %s", e.what());
 	}
 }
-
-// TODO(GunChleoc): Incorporate this into TrainingParameters constructor when we drop compatibility
-// after v1.0
-// TODO(tothxa): Looks fine to me as is. Can I remove above to-do item?
-TrainingAttribute parse_training_attribute(const std::string& argument) {
-	if (argument == "health") {
-		return TrainingAttribute::kHealth;
-	}
-	if (argument == "attack") {
-		return TrainingAttribute::kAttack;
-	}
-	if (argument == "defense") {
-		return TrainingAttribute::kDefense;
-	}
-	if (argument == "evade") {
-		return TrainingAttribute::kEvade;
-	}
-	throw GameDataError(
-	   "Expected health|attack|defense|evade after 'soldier' but found '%s'", argument.c_str());
-}
 }  // namespace
 
 bool ProductionProgram::Action::get_building_work(Game& /* game */,
@@ -320,6 +300,25 @@ ProductionProgram::Action::TrainingParameters::parse(const std::vector<std::stri
 		}
 	}
 	return result;
+}
+
+TrainingAttribute ProductionProgram::Action::TrainingParameters::parse_training_attribute(
+   const std::string& argument) {
+
+	if (argument == "health") {
+		return TrainingAttribute::kHealth;
+	}
+	if (argument == "attack") {
+		return TrainingAttribute::kAttack;
+	}
+	if (argument == "defense") {
+		return TrainingAttribute::kDefense;
+	}
+	if (argument == "evade") {
+		return TrainingAttribute::kEvade;
+	}
+	throw GameDataError(
+	   "Expected health|attack|defense|evade after 'soldier' but found '%s'", argument.c_str());
 }
 
 /* RST
