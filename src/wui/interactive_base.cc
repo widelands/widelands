@@ -53,6 +53,7 @@
 #include "network/gamehost.h"
 #include "scripting/lua_interface.h"
 #include "sound/sound_handler.h"
+#include "ui_basic/messagebox.h"
 #include "ui_basic/toolbar_setup.h"
 #include "wlapplication_options.h"
 #include "wui/attack_window.h"
@@ -145,6 +146,18 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
                   UI::PanelStyle::kWui,
                   UI::ButtonStyle::kWuiPrimary,
                   [this](MapviewMenuEntry t) { mapview_menu_selected(t); }),
+     plugins_dropdown_(toolbar(),
+                       "dropdown_menu_plugins",
+                       0,
+                       0,
+                       UI::main_toolbar_button_size(),
+                       10,
+                       UI::main_toolbar_button_size(),
+                       /** TRANSLATORS: Title for the plugins menu button in the game */
+                       _("Plugins"),
+                       UI::DropdownType::kPictorialMenu,
+                       UI::PanelStyle::kWui,
+                       UI::ButtonStyle::kWuiPrimary),
      quick_navigation_(&map_view_),
      minimap_registry_(the_egbase.is_game()),
      workareas_cache_(nullptr),
@@ -269,6 +282,46 @@ InteractiveBase::~InteractiveBase() {
 
 UI::Box* InteractiveBase::toolbar() {
 	return &toolbar_.box;
+}
+
+void InteractiveBase::add_plugin_timer(const std::string& action,
+                                       uint32_t interval,
+                                       bool failsafe) {
+	plugin_timers_.emplace_back(action, interval, failsafe);
+}
+
+void InteractiveBase::add_plugin_menu() {
+	plugins_dropdown_.set_image(g_image_cache->get("images/plugin.png"));
+	toolbar()->add(&plugins_dropdown_);
+	plugins_dropdown_.selected.connect(
+	   [this] { plugin_action(plugins_dropdown_.get_selected(), true); });
+}
+
+bool InteractiveBase::plugin_action(const std::string& action, bool failsafe) {
+	try {
+		egbase().lua().interpret_string(action);
+		return true;
+	} catch (const LuaError& e) {
+		if (!failsafe || g_fail_on_lua_error) {
+			log_err("FATAL: Lua error in plugin: %s", e.what());
+			throw;
+		}
+
+		log_err("Lua error in plugin: %s", e.what());
+		UI::WLMessageBox m(this, UI::WindowStyle::kWui, _("Plugin Error"),
+		                   format_l(_("Error when running plugin:\n%s"), e.what()),
+		                   UI::WLMessageBox::MBoxType::kOk);
+		m.run<UI::Panel::Returncodes>();
+		return false;
+	}
+}
+
+void InteractiveBase::add_toolbar_plugin(const std::string& action,
+                                         const std::string& icon,
+                                         const std::string& label,
+                                         const std::string& tt) {
+	plugins_dropdown_.add(label, action, g_image_cache->get(icon), false, tt);
+	finalize_toolbar();
 }
 
 void InteractiveBase::add_mapview_menu(MiniMapType minimap_type) {
@@ -446,7 +499,10 @@ void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center) {
 }
 
 void InteractiveBase::finalize_toolbar() {
+	plugins_dropdown_.set_visible(!plugins_dropdown_.empty());
+
 	toolbar_.finalize();
+
 	// prevent toolbar dropdowns from grabbing the Space button
 	focus();
 }
@@ -900,6 +956,7 @@ void InteractiveBase::game_logic_think() {
 
 void InteractiveBase::think() {
 	UI::Panel::think();
+
 	if (in_road_building_mode()) {
 		const size_t steps = get_build_road_path().get_nsteps();
 		if ((SDL_GetModState() & KMOD_CTRL) != 0 && road_building_mode_->preview_path.has_value()) {
@@ -938,6 +995,20 @@ void InteractiveBase::think() {
 		}
 
 		it = wanted_building_windows_.erase(it);
+	}
+
+	const uint32_t time = SDL_GetTicks();
+	for (auto plugin = plugin_timers_.begin(); plugin != plugin_timers_.end();) {
+		if (time >= plugin->next_run) {
+			plugin->next_run = time + plugin->interval;
+			if (!plugin_action(plugin->action, plugin->failsafe)) {
+				// In case of an error, remove it from the queue
+				log_err("Unregistering defective plugin timer");
+				plugin = plugin_timers_.erase(plugin);
+				continue;
+			}
+		}
+		++plugin;
 	}
 }
 
