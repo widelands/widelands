@@ -97,17 +97,17 @@ jobs:
 
   windows-msvc:
     needs: [changes, pre-build_checks]
-    if: needs.changes.outputs.inst_windows_msvc == 'true' && false
+    if: needs.changes.outputs.inst_windows_msvc == 'true'
     uses: ./.github/workflows/build_windows_msvc.yaml
 
   windows:
     needs: [changes, pre-build_checks]
-    if: needs.changes.outputs.inst_windows == 'true' && false
+    if: needs.changes.outputs.inst_windows == 'true'
     uses: ./.github/workflows/build_windows.yaml
 
   macos:
     needs: [changes, pre-build_checks]
-    if: needs.changes.outputs.inst_macos == 'true' && false
+    if: needs.changes.outputs.inst_macos == 'true'
     uses: ./.github/workflows/build_macos.yaml
 
   appimage:
