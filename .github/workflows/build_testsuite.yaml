@@ -87,7 +87,6 @@ jobs:
     - name: Testsuite
       run: |
         # regression_test.py
-        utils/test/download_loadgame_testcases.sh
         TIMEOUT=""
         if [ "${{ matrix.config }}" = "Debug" ]
         then
