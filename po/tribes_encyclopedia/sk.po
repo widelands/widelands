@@ -1129,7 +1129,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s, depending on "
 "how far the stonecutter has to walk."
-msgstr "Táto budova dokáže vyrobiť jednu žulu medzi %1$s a %2$s, podľa toho, ako ďaleko musí kamenár prejsť."
+msgstr "Táto budova dokáže vyrobiť jednu žulu za %1$s až %2$s, podľa toho, ako ďaleko musí kamenár prejsť."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site:
 #. Stonecutter's Hut, part 2
@@ -1177,7 +1177,7 @@ msgid ""
 "This building can produce one log between %1$s and %2$s (with master "
 "woodcutter between %3$s and %4$s), depending on how far the woodcutter has "
 "to walk."
-msgstr "Táto budova dokáže vyrobiť jeden kmeň medzi %1$s a %2$s (s majstrom drevorubačom medzi %3$s and %4$s), podľa toho, ako ďaleko musí drevorubač prejsť."
+msgstr "Táto budova dokáže vyrobiť jeden kmeň za %1$s až %2$s (s majstrom drevorubačom za %3$s až %4$s), podľa toho, ako ďaleko musí drevorubač prejsť."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Jungle
 #. Preserver's Hut
@@ -1308,7 +1308,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one bucket of water between %1$s and %2$s on "
 "average, depending on how far the carrier has to walk."
-msgstr "Táto budova dokáže vyrobiť jedno vedro vody priemerne medzi %1$s a %2$s, podľa toho, ako ďaleko musí nosič prejsť."
+msgstr "Táto budova dokáže vyrobiť jedno vedro vody priemerne za %1$s až %2$s, podľa toho, ako ďaleko musí nosič prejsť."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Rare Tree
 #. Cutter's Hut
@@ -4092,7 +4092,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s, depending on "
 "how far the stonecutter has to walk."
-msgstr "Táto budova dokáže vyrobiť jednu žulu medzi %1$s a %2$s, podľa toho, ako ďaleko musí kamenár prejsť."
+msgstr "Táto budova dokáže vyrobiť jednu žulu za %1$s až %2$s, podľa toho, ako ďaleko musí kamenár prejsť."
 
 #. TRANSLATORS: Performance helptext for an Atlantean production site: Quarry,
 #. part 2
@@ -4161,7 +4161,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one log between %1$s and %2$s, depending on how "
 "far the woodcutter has to walk."
-msgstr "Táto budova dokáže vyrobiť jeden kmeň medzi %1$s a %2$s, podľa toho, ako ďaleko musí drevorubač prejsť."
+msgstr "Táto budova dokáže vyrobiť jeden kmeň za %1$s až %2$s, podľa toho, ako ďaleko musí drevorubač prejsť."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Forester's
 #. House
@@ -4266,7 +4266,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one fish between %1$s and %2$s, depending on how "
 "far the fisher has to walk."
-msgstr "Táto budova dokáže vyrobiť jednu rybu medzi %1$s a %2$s, podľa toho, ako ďaleko musí rybár prejsť."
+msgstr "Táto budova dokáže vyrobiť jednu rybu za %1$s až %2$s, podľa toho, ako ďaleko musí rybár prejsť."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Fish
 #. Breeder's House
@@ -4340,7 +4340,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This building can produce one meat between %1$s and %2$s, depending on how "
 "far the hunter has to walk."
-msgstr "Táto budova dokáže vyrobiť jedno mäso medzi %1$s a %2$s, podľa toho, ako ďaleko musí lovec prejsť."
+msgstr "Táto budova dokáže vyrobiť jedno mäso za %1$s až %2$s, podľa toho, ako ďaleko musí lovec prejsť."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Well
 #. TRANSLATORS: Purpose helptext for a Barbarian production site: Well
@@ -6617,7 +6617,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s, depending on "
 "how far the stonemason has to walk."
-msgstr "Táto budova dokáže vyrobiť jednu žulu medzi %1$s a %2$s, podľa toho, ako ďaleko musí kamenár prejsť."
+msgstr "Táto budova dokáže vyrobiť jednu žulu za %1$s až %2$s, podľa toho, ako ďaleko musí kamenár prejsť."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Quarry,
 #. part 2
@@ -6672,7 +6672,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one log between %1$s and %2$s, depending on how "
 "far the lumberjack has to walk."
-msgstr "Táto budova dokáže vyrobiť jeden kmeň medzi %1$s a %2$s, podľa toho, ako ďaleko musí drevorubač prejsť."
+msgstr "Táto budova dokáže vyrobiť jeden kmeň za %1$s až %2$s, podľa toho, ako ďaleko musí drevorubač prejsť."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Ranger's Hut
 #: ../../data/tribes/initialization/barbarians/units.lua:1173
@@ -6745,7 +6745,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one fish between %1$s and %2$s, depending on how "
 "far the fisher has to walk."
-msgstr "Táto budova dokáže vyrobiť jednu rybu medzi %1$s a %2$s, podľa toho, ako ďaleko musí rybár prejsť."
+msgstr "Táto budova dokáže vyrobiť jednu rybu za %1$s až %2$s, podľa toho, ako ďaleko musí rybár prejsť."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Hunter's Hut
 #: ../../data/tribes/initialization/barbarians/units.lua:1215
@@ -6775,7 +6775,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This building can produce one meat between %1$s and %2$s, depending on how "
 "far the hunter has to walk."
-msgstr "Táto budova dokáže vyrobiť jedno mäso medzi %1$s a %2$s, podľa toho, ako ďaleko musí lovec prejsť."
+msgstr "Táto budova dokáže vyrobiť jedno mäso za %1$s až %2$s, podľa toho, ako ďaleko musí lovec prejsť."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Gamekeeper's
 #. Hut
@@ -6998,7 +6998,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce a pitta"
 " bread in %s on average."
-msgstr "Ak sa všetok potrebný tovar dodá načas, táto budova dokáže vyrobiť jednu pitu v priemere za asi %s."
+msgstr "Ak sa všetok potrebný tovar dodá načas, táto budova dokáže vyrobiť jednu pitu priemerne za %s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Micro Brewery
 #: ../../data/tribes/initialization/barbarians/units.lua:1339
@@ -10785,7 +10785,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s and one marble "
 "between %3$s and %4$s, depending on how far the stonemason has to walk."
-msgstr "Táto budova dokáže vyrobiť jednu žulu medzi %1$s a %2$s a jeden mramor medzi %3$s a %4$s, podľa toho, ako ďaleko musí kamenár prejsť."
+msgstr "Táto budova dokáže vyrobiť jednu žulu za %1$s až %2$s a jeden mramor za %3$s až %4$s, podľa toho, ako ďaleko musí kamenár prejsť."
 
 #. TRANSLATORS: Performance helptext for an Empire production site: Quarry,
 #. part 2
@@ -10846,7 +10846,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one log between %1$s and %2$s, depending on how "
 "far the lumberjack has to walk."
-msgstr "Táto budova dokáže vyrobiť jeden kmeň medzi %1$s a %2$s, podľa toho, ako ďaleko musí drevorubač prejsť."
+msgstr "Táto budova dokáže vyrobiť jeden kmeň za %1$s až %2$s, podľa toho, ako ďaleko musí drevorubač prejsť."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -10936,7 +10936,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one fish between %1$s and %2$s, depending on how "
 "far the fisher has to walk."
-msgstr "Táto budova dokáže vyrobiť jednu rybu medzi %1$s a %2$s, podľa toho, ako ďaleko musí rybár prejsť."
+msgstr "Táto budova dokáže vyrobiť jednu rybu za %1$s až %2$s, podľa toho, ako ďaleko musí rybár prejsť."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -10973,7 +10973,7 @@ msgctxt "empire_building"
 msgid ""
 "This building can produce one meat between %1$s and %2$s, depending on how "
 "far the hunter has to walk."
-msgstr "Táto budova dokáže vyrobiť jedno mäso medzi %1$s a %2$s, podľa toho, ako ďaleko musí lovec prejsť."
+msgstr "Táto budova dokáže vyrobiť jedno mäso za %1$s až %2$s, podľa toho, ako ďaleko musí lovec prejsť."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -14225,7 +14225,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s, depending on "
 "how far the stonemason has to walk."
-msgstr "Táto budova dokáže vyrobiť jednu žulu medzi %1$s a %2$s, podľa toho, ako ďaleko musí kamenár prejsť."
+msgstr "Táto budova dokáže vyrobiť jednu žulu za %1$s až %2$s, podľa toho, ako ďaleko musí kamenár prejsť."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Quarry,
 #. part 2
@@ -14279,7 +14279,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one log between %1$s and %2$s, depending on how "
 "far the woodcutter has to walk."
-msgstr "Táto budova dokáže vyrobiť jeden kmeň medzi %1$s a %2$s, podľa toho, ako ďaleko musí drevorubač prejsť."
+msgstr "Táto budova dokáže vyrobiť jeden kmeň za %1$s až %2$s, podľa toho, ako ďaleko musí drevorubač prejsť."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Forester's House
 #: ../../data/tribes/initialization/frisians/units.lua:1594
@@ -14326,7 +14326,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one meat between %1$s and %2$s, depending on how "
 "far the hunter has to walk."
-msgstr "Táto budova dokáže vyrobiť jedno mäso medzi %1$s a %2$s, podľa toho, ako ďaleko musí lovec prejsť."
+msgstr "Táto budova dokáže vyrobiť jedno mäso za %1$s až %2$s, podľa toho, ako ďaleko musí lovec prejsť."
 
 #. TRANSLATORS: Performance helptext for a Frisian production site: Hunter's
 #. House, part 3
@@ -14377,7 +14377,7 @@ msgctxt "frisians_building"
 msgid ""
 "This building can produce one fish between %1$s and %2$s, depending on how "
 "far the fisher has to walk."
-msgstr "Táto budova dokáže vyrobiť jednu rybu medzi %1$s a %2$s, podľa toho, ako ďaleko musí rybár prejsť."
+msgstr "Táto budova dokáže vyrobiť jednu rybu za %1$s až %2$s, podľa toho, ako ďaleko musí rybár prejsť."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Reed Farm
 #: ../../data/tribes/initialization/frisians/units.lua:1653
@@ -16097,7 +16097,7 @@ msgstr "Zbiera:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:421
 msgid "Creates:"
-msgstr ""
+msgstr "Vyrába:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:462
 msgid "Outgoing:"
@@ -16115,7 +16115,7 @@ msgstr "Závislosti"
 #. help, containing size info, buildcost etc.
 #: ../../data/tribes/scripting/help/building_help.lua:479
 msgid "Building requirements"
-msgstr ""
+msgstr "Stavebné požiadavky"
 
 #: ../../data/tribes/scripting/help/building_help.lua:495
 msgid ""
@@ -16186,7 +16186,7 @@ msgstr "%s alebo skúsenejší"
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool 1 worker uses
 #: ../../data/tribes/scripting/help/building_help.lua:697
 msgid "Worker uses:"
-msgstr ""
+msgstr "Pracovník používa:"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool more than 1 worker
 #. uses
@@ -16218,17 +16218,17 @@ msgstr ""
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
 #: ../../data/tribes/scripting/help/building_help.lua:748
 msgid "Attack training:"
-msgstr ""
+msgstr "Výcvik útoku:"
 
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
 #: ../../data/tribes/scripting/help/building_help.lua:755
 msgid "Defense training:"
-msgstr ""
+msgstr "Výcvik obrany:"
 
 #. TRANSLATORS: Building Encyclopedia Skill trained by a trainingsite
 #: ../../data/tribes/scripting/help/building_help.lua:762
 msgid "Evade training:"
-msgstr ""
+msgstr "Výcvik uhýbania:"
 
 #. TRANSLATORS: Ware Encyclopedia: 1 ware produced by a productionsite
 #: ../../data/tribes/scripting/help/building_help.lua:771
@@ -16244,7 +16244,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/building_help.lua:799
 #: ../../data/tribes/scripting/help/ware_help.lua:63
 msgid "Wares produced:"
-msgstr ""
+msgstr "Vyrobené výrobky:"
 
 #. TRANSLATORS: Ware Encyclopedia: 1 special worker or soldier recruited by a
 #. productionsite
@@ -16436,7 +16436,7 @@ msgstr "%s a"
 #. a productionsite
 #: ../../data/tribes/scripting/help/format_help.lua:278
 msgid "Wares and workers consumed:"
-msgstr ""
+msgstr "Spotrebované výrobky a pracovníci:"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for workers consumed by a
 #. productionsite
@@ -16448,7 +16448,7 @@ msgstr ""
 #. productionsite
 #: ../../data/tribes/scripting/help/format_help.lua:285
 msgid "Wares consumed:"
-msgstr ""
+msgstr "Spotrebované výrobky:"
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:35
 #: ../../data/tribes/scripting/help/ware_help.lua:30

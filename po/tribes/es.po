@@ -9,6 +9,7 @@
 # GunChleoc, 2016
 # Gontzal Pujana Onaindia <juchuf@gmail.com>, 2018,2021
 # Javier Mora <morehash@gmail.com>, 2015
+# Juan Miguel Bernal González, 2024
 # Gontzal Pujana Onaindia <juchuf@gmail.com>, 2015
 # Kiibakun, 2015
 # Kiibakun, 2021
@@ -27,7 +28,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020-2022\n"
+"Last-Translator: Juan Miguel Bernal González, 2024\n"
 "Language-Team: Spanish (http://app.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1785,7 +1786,7 @@ msgstr "fabricando un cuenco de piedra"
 #. TRANSLATORS: Completed/Skipped/Did not start making firestones because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:194
 msgid "making firestones"
-msgstr ""
+msgstr "hacer piedras de fuego"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a wooden spear because
 #. ...
@@ -1848,7 +1849,7 @@ msgstr "Mina de Piedra"
 #. TRANSLATORS: Completed/Skipped/Did not start mining because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:51
 msgid "mining"
-msgstr ""
+msgstr "minería"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:64
@@ -1875,11 +1876,11 @@ msgstr "minando cuarzo"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:91
 msgid "No Stones"
-msgstr ""
+msgstr "Sin Piedras"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:92
 msgid "Main Stone Vein Exhausted"
-msgstr ""
+msgstr "Veta de piedra principal agotado"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:94
 msgctxt "amazons_building"
@@ -2198,7 +2199,7 @@ msgid ""
 "water where he can breed fish in his work area. Remember that you can only "
 "regenerate your fish resources if there ever were some fish in the vicinity "
 "in the first place."
-msgstr ""
+msgstr "El criador de peces que trabaja en este criadero de peces, no puede encontrar agua donde pueda criar peces en su área de trabajo. Recuerde que solo podrá regenerar sus recursos pesqueros si alguna vez hubo peces en las cercanías."
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:57
 msgid "The fishing grounds are full"
@@ -3851,17 +3852,17 @@ msgstr "El recolector de fruta trabajando en la casa del recolector de frutas no
 #: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:7
 msgctxt "frisians_building"
 msgid "Diker’s House"
-msgstr ""
+msgstr "La Casa del Constructor de Diques"
 
 #. TRANSLATORS: Completed/Skipped/Did not start diking because ...
 #: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:62
 msgid "diking"
-msgstr ""
+msgstr "dique"
 
 #. TRANSLATORS: Completed/Skipped/Did not start building a dike because ...
 #: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:72
 msgid "building a dike"
-msgstr ""
+msgstr "construir un dique"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:8
@@ -5058,7 +5059,7 @@ msgstr "Edificio Destruido"
 #: ../../data/tribes/immovables/dike/init.lua:8
 msgctxt "immovable"
 msgid "Dike"
-msgstr ""
+msgstr "Dique"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/grapevine/medium/init.lua:8
@@ -5172,13 +5173,13 @@ msgstr "Sin Recursos"
 #: ../../data/tribes/immovables/resi/amazons/stones_1/init.lua:8
 msgctxt "resource_indicator"
 msgid "Some Quartz"
-msgstr ""
+msgstr "Un Poco de Cuarzo"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/amazons/stones_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Quartz"
-msgstr ""
+msgstr "Mucho Cuarzo"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/coal_1/init.lua:8
@@ -5461,11 +5462,11 @@ msgstr "El Equipo de Desarrollo de Widelands"
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/amazons/init.lua:13
 msgid "Amazons"
-msgstr ""
+msgstr "Amazonas"
 
 #: ../../data/tribes/initialization/amazons/init.lua:14
 msgid "The people of the amazonian jungle."
-msgstr ""
+msgstr "Los pueblos de la selva amazónica."
 
 #. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
@@ -6926,7 +6927,7 @@ msgstr ""
 #: ../../data/tribes/ships/amazons/init.lua:421
 msgctxt "shipname"
 msgid "Lake Titicaca"
-msgstr ""
+msgstr "Lago Titicaca"
 
 #. TRANSLATORS: This Amazonian ship is named after the main Inca temple
 #: ../../data/tribes/ships/amazons/init.lua:423
@@ -7328,7 +7329,7 @@ msgstr "Beowulf"
 #: ../../data/tribes/ships/barbarians/init.lua:44
 msgctxt "shipname"
 msgid "Bison"
-msgstr ""
+msgstr "Bisonte"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
 #: ../../data/tribes/ships/barbarians/init.lua:46
@@ -7352,7 +7353,7 @@ msgstr "Dellingr"
 #: ../../data/tribes/ships/barbarians/init.lua:52
 msgctxt "shipname"
 msgid "Eagle"
-msgstr ""
+msgstr "Aguila"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:54
@@ -7514,13 +7515,13 @@ msgstr "Jabalí"
 #: ../../data/tribes/ships/barbarians/init.lua:106
 msgctxt "shipname"
 msgid "Valkyrie"
-msgstr ""
+msgstr "Valquiria"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:108
 msgctxt "shipname"
 msgid "Wisent"
-msgstr ""
+msgstr "Sabio"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:110
@@ -7724,7 +7725,7 @@ msgstr "Galo"
 #: ../../data/tribes/ships/empire/init.lua:94
 msgctxt "shipname"
 msgid "Gladiator"
-msgstr ""
+msgstr "Gladiador"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:96
@@ -8431,7 +8432,7 @@ msgstr "Tenazas"
 #: ../../data/tribes/wares/firestones/init.lua:8
 msgctxt "ware"
 msgid "Firestones"
-msgstr ""
+msgstr "Piedras de fuego"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/fish/init.lua:8
@@ -9843,7 +9844,7 @@ msgstr "Excavador de arcilla"
 #: ../../data/tribes/workers/frisians/diker/init.lua:8
 msgctxt "frisians_worker"
 msgid "Diker"
-msgstr ""
+msgstr "Constructor de diques"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/farmer/init.lua:8

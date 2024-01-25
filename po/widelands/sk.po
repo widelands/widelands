@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-11 02:36+0000\n"
+"POT-Creation-Date: 2024-01-25 02:37+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Pavol Gono, 2024\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
@@ -338,14 +338,14 @@ msgid "Help"
 msgstr "Pomoc"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:205
+#: ../../src/editor/editorinteractive.cc:207
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:40
 #: ../../src/ui_fsmenu/main.cc:445 ../../src/wlapplication_options.cc:447
 msgid "New Map"
 msgstr "Nová mapa"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:214
+#: ../../src/editor/editorinteractive.cc:216
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:842
 #: ../../src/wlapplication_options.cc:452
 msgid "New Random Map"
@@ -353,7 +353,7 @@ msgstr "Nová náhodná mapa"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/editor/editorinteractive.cc:222
+#: ../../src/editor/editorinteractive.cc:224
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:33
 #: ../../src/ui_fsmenu/main.cc:450 ../../src/wlapplication_options.cc:846
 msgid "Load Map"
@@ -361,19 +361,19 @@ msgstr "Načítať mapu"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/editor/editorinteractive.cc:230
+#: ../../src/editor/editorinteractive.cc:232
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:53
 #: ../../src/wlapplication_options.cc:849
 msgid "Save Map"
 msgstr "Uložiť mapu"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:235
+#: ../../src/editor/editorinteractive.cc:237
 msgid "Publish Map Online…"
 msgstr "Zverejni mapu online..."
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:243
+#: ../../src/editor/editorinteractive.cc:245
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:227
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:62
 #: ../../src/wlapplication_options.cc:461
@@ -382,34 +382,34 @@ msgstr "Možnosti mapy"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/editor/editorinteractive.cc:248
+#: ../../src/editor/editorinteractive.cc:250
 #: ../../src/wlapplication_options.cc:852
 msgid "Exit Editor"
 msgstr "Ukončiť editor"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:289
+#: ../../src/editor/editorinteractive.cc:291
 msgid "Change height"
 msgstr "Zmeniť výšku"
 
 #. * TRANSLATORS: Tooltip for the change height tool in the editor
-#: ../../src/editor/editorinteractive.cc:292
+#: ../../src/editor/editorinteractive.cc:294
 msgid "Change the terrain height"
 msgstr "Zmeniť výšku terénu"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:299
+#: ../../src/editor/editorinteractive.cc:301
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:98
 msgid "Random height"
 msgstr "Náhodná výška"
 
 #. * TRANSLATORS: Tooltip for the random height tool in the editor
-#: ../../src/editor/editorinteractive.cc:302
+#: ../../src/editor/editorinteractive.cc:304
 msgid "Set the terrain height to random values"
 msgstr "Nastaviť výšku terénu na náhodné hodnoty"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:309
+#: ../../src/editor/editorinteractive.cc:311
 #: ../../src/editor/ui_menus/field_info_window.cc:139
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:92
 #: ../../src/wui/minimap.cc:158
@@ -417,35 +417,35 @@ msgid "Terrain"
 msgstr "Terén"
 
 #. * TRANSLATORS: Tooltip for the terrain tool in the editor
-#: ../../src/editor/editorinteractive.cc:312
+#: ../../src/editor/editorinteractive.cc:314
 msgid "Change the map’s terrain"
 msgstr "Zmeniť terén mapy"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:320
+#: ../../src/editor/editorinteractive.cc:322
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:78
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:169
 msgid "Immovables"
 msgstr "Nehybné objekty"
 
 #. * TRANSLATORS: Tooltip for the immovables tool in the editor
-#: ../../src/editor/editorinteractive.cc:323
+#: ../../src/editor/editorinteractive.cc:325
 msgid "Add or remove immovables"
-msgstr "Pridať alebo odobrať nehybné predmety"
+msgstr "Pridať alebo odobrať nehybné objekty"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:330
+#: ../../src/editor/editorinteractive.cc:332
 #: ../../src/editor/ui_menus/tool_place_critter_options_menu.cc:47
 msgid "Animals"
 msgstr "Zvieratá"
 
 #. * TRANSLATORS: Tooltip for the animals tool in the editor
-#: ../../src/editor/editorinteractive.cc:333
+#: ../../src/editor/editorinteractive.cc:335
 msgid "Add or remove animals"
 msgstr "Pridať alebo odobrať zvieratá"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:341
+#: ../../src/editor/editorinteractive.cc:343
 #: ../../src/editor/ui_menus/field_info_window.cc:220
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:114
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:41
@@ -455,73 +455,73 @@ msgid "Resources"
 msgstr "Zdroje"
 
 #. * TRANSLATORS: Tooltip for the resources tool in the editor
-#: ../../src/editor/editorinteractive.cc:344
+#: ../../src/editor/editorinteractive.cc:346
 msgid "Set or change resources"
 msgstr "Nastaviť alebo zmeniť zdroje"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:348
+#: ../../src/editor/editorinteractive.cc:350
 msgid "Port spaces"
 msgstr "Miesta pre prístavy"
 
 #. * TRANSLATORS: Tooltip for the port spaces tool in the editor
-#: ../../src/editor/editorinteractive.cc:351
+#: ../../src/editor/editorinteractive.cc:353
 msgid "Add or remove port spaces"
 msgstr "Pridať alebo odobrať miesta pre prístavy"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:359
+#: ../../src/editor/editorinteractive.cc:361
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:708
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:171
 msgid "Players"
 msgstr "Hráči"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
-#: ../../src/editor/editorinteractive.cc:362
+#: ../../src/editor/editorinteractive.cc:364
 msgid "Set number of players and their names, tribes and starting positions"
 msgstr "Nastav počet hráčov, ich mená, kmene a štartovacie pozície"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:366
+#: ../../src/editor/editorinteractive.cc:368
 msgid "Map origin"
 msgstr "Pôvod mapy"
 
 #. * TRANSLATORS: Tooltip for the map origin tool in the editor
-#: ../../src/editor/editorinteractive.cc:369
+#: ../../src/editor/editorinteractive.cc:371
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the "
 "top-left corner of a generated minimap."
 msgstr "Nastaviť pozíciu, ktorá bude mať súradnice (0, 0). Bude to ľavý horný roh vygenerovanej minimapy."
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:377
+#: ../../src/editor/editorinteractive.cc:379
 msgid "Map size"
 msgstr "Veľkosť mapy"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
-#: ../../src/editor/editorinteractive.cc:380
+#: ../../src/editor/editorinteractive.cc:382
 msgid "Change the map’s size"
 msgstr "Zmeniť veľkosť mapy"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:384
+#: ../../src/editor/editorinteractive.cc:386
 msgid "Information"
 msgstr "Informácie"
 
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
-#: ../../src/editor/editorinteractive.cc:387
+#: ../../src/editor/editorinteractive.cc:389
 msgid "Click on a field to show information about it"
 msgstr "Kliknutím zobrazíte ďalšie informácie o políčku."
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:391
+#: ../../src/editor/editorinteractive.cc:393
 #: ../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:44
 #: ../../src/wlapplication_options.cc:526
 msgid "Tool History"
 msgstr "História nástrojov"
 
 #. * TRANSLATORS: Tooltip for the tool history tool in the editor
-#: ../../src/editor/editorinteractive.cc:394
+#: ../../src/editor/editorinteractive.cc:396
 msgid "Restore previous tool settings"
 msgstr ""
 
@@ -531,12 +531,12 @@ msgstr ""
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#: ../../src/editor/editorinteractive.cc:464
+#: ../../src/editor/editorinteractive.cc:466
 #: ../../src/wui/interactive_gamebase.cc:268
 msgid "Hide Building Spaces"
 msgstr "Skry stavebné miesta"
 
-#: ../../src/editor/editorinteractive.cc:464
+#: ../../src/editor/editorinteractive.cc:466
 #: ../../src/ui_fsmenu/options.cc:287
 #: ../../src/wui/interactive_gamebase.cc:268
 msgid "Show Building Spaces"
@@ -546,89 +546,89 @@ msgstr "Zobraz stavebné miesta"
 #. show maximum
 #. * building spaces that will be available if all immovables (trees, rocks,
 #. etc.) are removed
-#: ../../src/editor/editorinteractive.cc:471
+#: ../../src/editor/editorinteractive.cc:473
 msgid "Hide Maximum Building Spaces"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:472
+#: ../../src/editor/editorinteractive.cc:474
 msgid "Show Maximum Building Spaces"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:475
+#: ../../src/editor/editorinteractive.cc:477
 msgid ""
 "Toggle whether to show maximum building spaces that will be available if all"
 " immovables (trees, rocks, etc.) are removed"
-msgstr "Prepínač zobrazenia maximálneho počtu stavebných miest ktoré sú k dispozícii, ak sa odstránia všetky nehnuteľnosti (stromy, skaly atď.)"
+msgstr "Prepínač zobrazenia najväčších stavebných miest, ktoré sú k dispozícii, ak sa odstránia všetky nehybné objekty (stromy, skaly atď.)"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
-#: ../../src/editor/editorinteractive.cc:481
+#: ../../src/editor/editorinteractive.cc:483
 msgid "Hide Grid"
 msgstr "Skry mriežku"
 
-#: ../../src/editor/editorinteractive.cc:481
+#: ../../src/editor/editorinteractive.cc:483
 msgid "Show Grid"
 msgstr "Zobraz mriežku"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables
 #. *  (trees, rocks etc.) are shown
-#: ../../src/editor/editorinteractive.cc:489
+#: ../../src/editor/editorinteractive.cc:491
 msgid "Hide Immovables"
 msgstr "Skry nehybné objekty"
 
-#: ../../src/editor/editorinteractive.cc:489
+#: ../../src/editor/editorinteractive.cc:491
 msgid "Show Immovables"
 msgstr "Zobraz nehybné objekty"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. animals are shown
-#: ../../src/editor/editorinteractive.cc:494
+#: ../../src/editor/editorinteractive.cc:496
 msgid "Hide Animals"
 msgstr "Skry zvieratá"
 
-#: ../../src/editor/editorinteractive.cc:494
+#: ../../src/editor/editorinteractive.cc:496
 msgid "Show Animals"
 msgstr "Zobraz zvieratá"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. resources are shown
-#: ../../src/editor/editorinteractive.cc:500
+#: ../../src/editor/editorinteractive.cc:502
 msgid "Hide Resources"
 msgstr "Skry zdroje"
 
-#: ../../src/editor/editorinteractive.cc:500
+#: ../../src/editor/editorinteractive.cc:502
 msgid "Show Resources"
 msgstr "Zobraz zdroje"
 
-#: ../../src/editor/editorinteractive.cc:543
+#: ../../src/editor/editorinteractive.cc:545
 msgid "Unsupported Format"
 msgstr "Nepodporovaný formát"
 
-#: ../../src/editor/editorinteractive.cc:544
+#: ../../src/editor/editorinteractive.cc:546
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr "Nepodarilo sa načítať súbor „%s“. Zdá sa, že formát súboru nie je kompatibilný."
 
-#: ../../src/editor/editorinteractive.cc:609
+#: ../../src/editor/editorinteractive.cc:611
 msgid "Exit Editor Confirmation"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:609
+#: ../../src/editor/editorinteractive.cc:611
 msgid "Unsaved Map"
 msgstr "Neuložená mapa"
 
-#: ../../src/editor/editorinteractive.cc:610
+#: ../../src/editor/editorinteractive.cc:612
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Mapa nebola uložená, naozaj chcete skončiť?"
 
-#: ../../src/editor/editorinteractive.cc:611
+#: ../../src/editor/editorinteractive.cc:613
 msgid "Are you sure you wish to exit the editor?"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1139 ../../src/logic/addons.cc:48
+#: ../../src/editor/editorinteractive.cc:1141 ../../src/logic/addons.cc:48
 #: ../../src/ui_basic/dropdown.cc:358 ../../src/ui_basic/dropdown.cc:360
 #: ../../src/ui_fsmenu/addons/contact.cc:81
 #: ../../src/ui_fsmenu/addons/manager.cc:1393
@@ -649,7 +649,7 @@ msgstr ""
 msgid "Error"
 msgstr "Chyba"
 
-#: ../../src/editor/editorinteractive.cc:1141 ../../src/ui_fsmenu/main.cc:257
+#: ../../src/editor/editorinteractive.cc:1143 ../../src/ui_fsmenu/main.cc:257
 #: ../../src/wlapplication.cc:1680
 #, c-format
 msgid ""
@@ -661,13 +661,13 @@ msgid ""
 "Please add this information to your report."
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1175
+#: ../../src/editor/editorinteractive.cc:1177
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "Nahrávanie mapy „%s“…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:1197
+#: ../../src/editor/editorinteractive.cc:1199
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:115
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:620
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:144
@@ -676,7 +676,7 @@ msgid "No Name"
 msgstr "Bez názvu"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:1200
+#: ../../src/editor/editorinteractive.cc:1202
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:116
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:621
 #: ../../src/logic/map.h:232 ../../src/ui_fsmenu/addons/packager.cc:412
@@ -684,20 +684,20 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "neznámi"
 
-#: ../../src/editor/editorinteractive.cc:1224
+#: ../../src/editor/editorinteractive.cc:1226
 msgid "Loading world…"
 msgstr "Nahrávanie sveta…"
 
-#: ../../src/editor/editorinteractive.cc:1403
+#: ../../src/editor/editorinteractive.cc:1405
 #, c-format
 msgid "Tool gaps: %u%%"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1426
+#: ../../src/editor/editorinteractive.cc:1428
 msgid "Publish Map"
 msgstr "Zverejni mapu"
 
-#: ../../src/editor/editorinteractive.cc:1427
+#: ../../src/editor/editorinteractive.cc:1429
 #, c-format
 msgid ""
 "Are you certain that you want to publish this map online?\n"
@@ -709,50 +709,50 @@ msgid ""
 "Hint: %5$s\n"
 msgstr "Ste si istý že chcete túto mapu zverejniť online?\n\nMeno: %1$s\nPrezývka: %2$s\nAutor: %3$s\nPopis: %4$s\nRada: %5$s\n"
 
-#: ../../src/editor/editorinteractive.cc:1451
+#: ../../src/editor/editorinteractive.cc:1453
 msgid "Login Error"
 msgstr "Chyba prihlásenia"
 
-#: ../../src/editor/editorinteractive.cc:1456
+#: ../../src/editor/editorinteractive.cc:1458
 msgid "Uploading Add-On…"
 msgstr "Nahrávanie doplnku…"
 
-#: ../../src/editor/editorinteractive.cc:1457
+#: ../../src/editor/editorinteractive.cc:1459
 msgid "Saving map…"
 msgstr "Ukladanie mapy..."
 
-#: ../../src/editor/editorinteractive.cc:1476
+#: ../../src/editor/editorinteractive.cc:1478
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:315
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:370
 msgid "Error Saving Map!"
 msgstr "Chyba pri ukladaní mapy!"
 
-#: ../../src/editor/editorinteractive.cc:1482
+#: ../../src/editor/editorinteractive.cc:1484
 msgid "Packaging add-on…"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1533
+#: ../../src/editor/editorinteractive.cc:1535
 msgid "Add-On Generation Error"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1534
+#: ../../src/editor/editorinteractive.cc:1536
 msgid "The add-on could not be written to the disk."
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1541
+#: ../../src/editor/editorinteractive.cc:1543
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:108
 msgid "Uploading…"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1547
+#: ../../src/editor/editorinteractive.cc:1549
 msgid "Upload Error"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1569
+#: ../../src/editor/editorinteractive.cc:1571
 msgid "Success"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1570
+#: ../../src/editor/editorinteractive.cc:1572
 msgid "The add-on was uploaded successfully."
 msgstr ""
 
@@ -798,7 +798,7 @@ msgstr ""
 #: ../../src/editor/tools/place_immovable_tool.cc:148
 #, c-format
 msgid "Immovable: %1$s"
-msgstr ""
+msgstr "Nehybný objekt: %1$s"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../src/editor/tools/set_terrain_tool.cc:120
@@ -1722,7 +1722,7 @@ msgstr "Nahrávanie hry: %1$s (%2$u/%3$d)"
 #: ../../src/map_io/map_saver.cc:100
 #: ../../src/map_io/widelands_map_loader.cc:212
 msgid "Elemental data"
-msgstr ""
+msgstr "Základné údaje"
 
 #: ../../src/game_io/game_loader.cc:135 ../../src/game_io/game_saver.cc:82
 msgid "Economies"
@@ -1740,7 +1740,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_loader.cc:400
 #: ../../src/wlapplication_options.cc:667
 #: ../../src/wui/interactive_player.cc:226
-#: ../../src/wui/interactive_player.cc:465
+#: ../../src/wui/interactive_player.cc:467
 msgid "Messages"
 msgstr "Správy"
 
@@ -1919,7 +1919,7 @@ msgstr "Podmienka výhry"
 msgid "Starting Condition"
 msgstr ""
 
-#: ../../src/logic/addons.cc:71
+#: ../../src/logic/addons.cc:72
 msgid "UI Plugin"
 msgstr ""
 
@@ -2049,7 +2049,7 @@ msgstr "Prednahrávanie mapy…"
 
 #: ../../src/logic/game.cc:373
 msgid "Initializing game…"
-msgstr ""
+msgstr "Inicializácia hry…"
 
 #. * TRANSLATORS: All players (plural)
 #: ../../src/logic/game.cc:631
@@ -2069,7 +2069,7 @@ msgstr "Nepodarilo sa spustiť hru, pretože hráč %u nemá žiadnu počiatočn
 
 #: ../../src/logic/game.cc:749
 msgid "Initializing…"
-msgstr ""
+msgstr "Inicializácia…"
 
 #: ../../src/logic/game.cc:1250
 msgid "Trade Offer"
@@ -2576,7 +2576,7 @@ msgstr ""
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:173
 #: ../../src/wui/economy_options_window.cc:75
 #: ../../src/wui/general_statistics_menu.cc:157
-#: ../../src/wui/interactive_player.cc:335
+#: ../../src/wui/interactive_player.cc:337
 #: ../../src/wui/productionsitewindow.cc:90
 #: ../../src/wui/warehousewindow.cc:292
 msgid "Wares"
@@ -2598,7 +2598,7 @@ msgstr "Pracovníci"
 #: ../../src/map_io/map_saver.cc:219
 #: ../../src/map_io/widelands_map_loader.cc:336
 #: ../../src/wui/general_statistics_menu.cc:153
-#: ../../src/wui/interactive_player.cc:330 ../../src/wui/minimap.cc:202
+#: ../../src/wui/interactive_player.cc:332 ../../src/wui/minimap.cc:202
 msgid "Buildings"
 msgstr "Budovy"
 
@@ -2657,7 +2657,7 @@ msgstr "Vaša ekonomika bola rozšírená o nový sklad."
 #. * available)
 #: ../../src/logic/map_objects/tribes/warehouse.cc:649
 msgid "Waterway"
-msgstr ""
+msgstr "Vodná cesta"
 
 #: ../../src/logic/map_objects/tribes/warehouse.cc:650
 msgid "Waterway destroyed"
@@ -2908,7 +2908,7 @@ msgstr "Vlajky"
 #: ../../src/map_io/map_saver.cc:206
 #: ../../src/map_io/widelands_map_loader.cc:323
 msgid "Roads and waterways"
-msgstr ""
+msgstr "Cesty a vodné cesty"
 
 #: ../../src/map_io/map_saver.cc:228
 #: ../../src/map_io/widelands_map_loader.cc:253
@@ -2989,15 +2989,15 @@ msgstr ""
 
 #: ../../src/map_io/widelands_map_loader.cc:344
 msgid "Initializing flags"
-msgstr ""
+msgstr "Inicializácia vlajok"
 
 #: ../../src/map_io/widelands_map_loader.cc:351
 msgid "Initializing roads and waterways"
-msgstr ""
+msgstr "Inicializácia ciest a vodných ciest"
 
 #: ../../src/map_io/widelands_map_loader.cc:364
 msgid "Initializing buildings"
-msgstr ""
+msgstr "Inicializácia budov"
 
 #: ../../src/map_io/widelands_map_loader.cc:371
 msgid "Initializing map objects"
@@ -3614,11 +3614,11 @@ msgstr ""
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
-#: ../../src/scripting/lua_ui.cc:912
+#: ../../src/scripting/lua_ui.cc:1136 ../../src/wui/interactive_base.cc:311
 msgid "Plugin Error"
 msgstr ""
 
-#: ../../src/scripting/lua_ui.cc:913
+#: ../../src/scripting/lua_ui.cc:1137 ../../src/wui/interactive_base.cc:312
 #, c-format
 msgid ""
 "Error when running plugin:\n"
@@ -5067,7 +5067,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:381
 msgctxt "tx"
 msgid "Priority:"
-msgstr ""
+msgstr "Priorita:"
 
 #. * TRANSLATORS: "Resource" here refers to the name of a translation unit
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:390
@@ -5685,7 +5685,7 @@ msgstr ""
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/ui_fsmenu/keyboard_options.cc:297
-#: ../../src/wui/interactive_player.cc:340
+#: ../../src/wui/interactive_player.cc:342
 msgid "General"
 msgstr "Všeobecné"
 
@@ -6707,7 +6707,7 @@ msgstr "Zobraz budovy"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/ui_fsmenu/options.cc:303 ../../src/wui/interactive_player.cc:385
+#: ../../src/ui_fsmenu/options.cc:303 ../../src/wui/interactive_player.cc:387
 msgid "Show Workarea Overlaps"
 msgstr "Zobraz prekrytia pracovných oblastí"
 
@@ -7041,7 +7041,7 @@ msgstr ""
 #: ../../src/wlapplication.cc:833
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
-msgstr ""
+msgstr "Hre Widelands sa nepodarilo nájsť súbor \"%s\"."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
 #: ../../src/wlapplication.cc:834 ../../src/wlapplication.cc:839
@@ -7449,7 +7449,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:492
 msgid "Immovables Tool"
-msgstr ""
+msgstr "Nehybné objekty"
 
 #: ../../src/wlapplication_options.cc:496
 msgid "Animals Tool"
@@ -7485,7 +7485,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:536
 msgid "Toggle Immovables"
-msgstr ""
+msgstr "Prepnúť nehybné objekty"
 
 #: ../../src/wlapplication_options.cc:541
 msgid "Toggle Animals"
@@ -8303,19 +8303,19 @@ msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:207
 msgid "Muted – click to unmute"
-msgstr ""
+msgstr "Stlmené – ozvučiť kliknutím"
 
 #: ../../src/wui/buildingwindow.cc:208
 msgid "Mute this building’s messages"
-msgstr ""
+msgstr "Stlmiť správy tejto budovy"
 
 #: ../../src/wui/buildingwindow.cc:213
 msgid "All buildings of this type are muted – click to unmute"
-msgstr ""
+msgstr "Všetky budovy tohto typu sú stlmené – ozvučiť kliknutím"
 
 #: ../../src/wui/buildingwindow.cc:217
 msgid "Mute all buildings of this type"
-msgstr ""
+msgstr "Stlmiť všetky budovy tohto typu"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
 #: ../../src/wui/buildingwindow.cc:281
@@ -8436,7 +8436,7 @@ msgstr ""
 
 #: ../../src/wui/constructionsitewindow.cc:370
 msgid "Settings to apply after construction"
-msgstr ""
+msgstr "Nastavenia použité po výstavbe"
 
 #: ../../src/wui/constructionsitewindow.cc:464
 #: ../../src/wui/soldiercapacitycontrol.cc:71
@@ -9197,33 +9197,33 @@ msgstr ""
 
 #: ../../src/wui/inputqueuedisplay.cc:70
 msgid "Priority: Very Low"
-msgstr ""
+msgstr "Priorita: veľmi nízka"
 
 #: ../../src/wui/inputqueuedisplay.cc:72
 msgid "Priority: Low"
-msgstr ""
+msgstr "Priorita: nízka"
 
 #: ../../src/wui/inputqueuedisplay.cc:74
 msgid "Priority: Normal"
-msgstr ""
+msgstr "Priorita: normálna"
 
 #: ../../src/wui/inputqueuedisplay.cc:76
 msgid "Priority: High"
-msgstr ""
+msgstr "Priorita: vysoká"
 
 #: ../../src/wui/inputqueuedisplay.cc:78
 msgid "Priority: Very High"
-msgstr ""
+msgstr "Priorita: veľmi vysoká"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue
 #: ../../src/wui/inputqueuedisplay.cc:136
 msgid "Increase the number of wares you want to be stored here"
-msgstr ""
+msgstr "Zvýšiť počet výrobkov, ktoré tu majú byť uložené"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue
 #: ../../src/wui/inputqueuedisplay.cc:138
 msgid "Decrease the number of wares you want to be stored here"
-msgstr ""
+msgstr "Znížiť počet výrobkov, ktoré tu majú byť uložené"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue -
 #. option explanation
@@ -9259,75 +9259,80 @@ msgstr ""
 
 #: ../../src/wui/inputqueuedisplay.cc:621
 msgid "Hide controls"
-msgstr ""
+msgstr "Skryť ovládanie"
 
 #: ../../src/wui/inputqueuedisplay.cc:621
 msgid "Show controls"
-msgstr ""
+msgstr "Zobraziť ovládanie"
 
 #. * TRANSLATORS: Title for the map view menu button in the game
-#: ../../src/wui/interactive_base.cc:143
+#: ../../src/wui/interactive_base.cc:144
 msgid "Map View"
 msgstr "Zobrazenie mapy"
 
+#. * TRANSLATORS: Title for the plugins menu button in the game
+#: ../../src/wui/interactive_base.cc:157
+msgid "Plugins"
+msgstr ""
+
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:293
+#: ../../src/wui/interactive_base.cc:346
 msgid "Hide Minimap"
 msgstr "Skryť minimapu"
 
-#: ../../src/wui/interactive_base.cc:293
+#: ../../src/wui/interactive_base.cc:346
 msgid "Show Minimap"
 msgstr "Ukázať minimapu"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:300
+#: ../../src/wui/interactive_base.cc:353
 msgid "Hide Quick Navigation"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:301
+#: ../../src/wui/interactive_base.cc:354
 msgid "Show Quick Navigation"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:308
+#: ../../src/wui/interactive_base.cc:361
 msgid "Zoom +"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:313
+#: ../../src/wui/interactive_base.cc:366
 msgid "Reset zoom"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:318
+#: ../../src/wui/interactive_base.cc:371
 msgid "Zoom –"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:890
+#: ../../src/wui/interactive_base.cc:947
 #, c-format
 msgid "Road length: %1$u (%2$u)"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:892
+#: ../../src/wui/interactive_base.cc:949
 #, c-format
 msgid "Waterway length: %1$u (%2$u) / %3$u"
-msgstr ""
+msgstr "Dĺžka vodnej cesty: %1$u (%2$u) / %3$u"
 
-#: ../../src/wui/interactive_base.cc:897
+#: ../../src/wui/interactive_base.cc:954
 #, c-format
 msgid "Road length: %u"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:900
+#: ../../src/wui/interactive_base.cc:957
 #, c-format
 msgid "Waterway length: %1$u / %2$u"
-msgstr ""
+msgstr "Dĺžka vodnej cesty: %1$u / %2$u"
 
-#: ../../src/wui/interactive_base.cc:1816
+#: ../../src/wui/interactive_base.cc:1887
 msgid "Failed saving screenshot!"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:1820
+#: ../../src/wui/interactive_base.cc:1891
 msgid "Screenshot saved"
 msgstr ""
 
@@ -9457,18 +9462,18 @@ msgstr "Štatistika"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
-#: ../../src/wui/interactive_player.cc:314 ../../src/wui/map_tags.cc:51
+#: ../../src/wui/interactive_player.cc:316 ../../src/wui/map_tags.cc:51
 msgid "Seafaring"
 msgstr "Moreplavba"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:320
+#: ../../src/wui/interactive_player.cc:322
 #: ../../src/wui/militarysitewindow.cc:40 ../../src/wui/warehousewindow.cc:315
 msgid "Soldiers"
 msgstr "Vojaci"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:325 ../../src/wui/stock_menu.cc:40
+#: ../../src/wui/interactive_player.cc:327 ../../src/wui/stock_menu.cc:40
 #: ../../src/wui/ware_statistics_menu.cc:152 ../../src/wui/waresdisplay.cc:81
 msgid "Stock"
 msgstr "Zásoby"
@@ -9476,17 +9481,17 @@ msgstr "Zásoby"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/wui/interactive_player.cc:382
+#: ../../src/wui/interactive_player.cc:384
 msgid "Hide Workarea Overlaps"
 msgstr "Skry prekrytia pracovných oblastí"
 
-#: ../../src/wui/interactive_player.cc:388
+#: ../../src/wui/interactive_player.cc:390
 msgid ""
 "Toggle whether overlapping workareas are indicated when placing a "
 "constructionsite"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:470
+#: ../../src/wui/interactive_player.cc:472
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
@@ -9495,7 +9500,7 @@ msgstr[1] "%u nové správy"
 msgstr[2] "%u nových správ"
 msgstr[3] "%u nových správ"
 
-#: ../../src/wui/interactive_player.cc:911
+#: ../../src/wui/interactive_player.cc:913
 msgid "Fastplace Shortcuts"
 msgstr ""
 
