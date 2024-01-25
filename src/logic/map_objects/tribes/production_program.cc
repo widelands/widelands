@@ -283,42 +283,32 @@ BillOfMaterials ProductionProgram::parse_bill_of_materials(
 	return result;
 }
 
-ProductionProgram::Action::TrainingParameters
-ProductionProgram::Action::TrainingParameters::parse(const std::vector<std::string>& arguments,
-                                                     const std::string& action_name) {
-	ProductionProgram::Action::TrainingParameters result;
+ProductionProgram::Action::TrainingParameters::TrainingParameters(
+   const std::vector<std::string>& arguments, const std::string& action_name) {
 	for (const std::string& argument : arguments) {
 		const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
 		if (item.first == "soldier") {
-			result.attribute = parse_training_attribute(item.second);
+			if (item.second == "health") {
+				attribute = TrainingAttribute::kHealth;
+			} else if (item.second == "attack") {
+				attribute = TrainingAttribute::kAttack;
+			} else if (item.second == "defense") {
+				attribute = TrainingAttribute::kDefense;
+			} else if (item.second == "evade") {
+				attribute = TrainingAttribute::kEvade;
+			} else {
+				throw GameDataError(
+				   "Expected health|attack|defense|evade after 'soldier' but found '%s'",
+				   argument.c_str());
+			}
 		} else if (item.first == "level") {
-			result.level = read_int(item.second, 0);
+			level = read_int(item.second, 0);
 		} else {
 			throw GameDataError(
 			   "Unknown argument '%s'. Usage: %s=soldier:attack|defense|evade|health level:<number>",
 			   item.first.c_str(), action_name.c_str());
 		}
 	}
-	return result;
-}
-
-TrainingAttribute ProductionProgram::Action::TrainingParameters::parse_training_attribute(
-   const std::string& argument) {
-
-	if (argument == "health") {
-		return TrainingAttribute::kHealth;
-	}
-	if (argument == "attack") {
-		return TrainingAttribute::kAttack;
-	}
-	if (argument == "defense") {
-		return TrainingAttribute::kDefense;
-	}
-	if (argument == "evade") {
-		return TrainingAttribute::kEvade;
-	}
-	throw GameDataError(
-	   "Expected health|attack|defense|evade after 'soldier' but found '%s'", argument.c_str());
 }
 
 /* RST
@@ -1736,7 +1726,7 @@ ProductionProgram::ActCheckSoldier::ActCheckSoldier(const std::vector<std::strin
 		throw GameDataError("Usage: checksoldier=soldier:attack|defense|evade|health level:<number>");
 	}
 
-	training_ = TrainingParameters::parse(arguments, "checksoldier");
+	training_ = TrainingParameters(arguments, "checksoldier");
 }
 
 void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps) const {
@@ -1831,7 +1821,7 @@ ProductionProgram::ActTrain::ActTrain(const std::vector<std::string>& arguments,
 		throw GameDataError("Usage: train=soldier:attack|defense|evade|health level:<number>");
 	}
 
-	training_ = TrainingParameters::parse(arguments, "train");
+	training_ = TrainingParameters(arguments, "train");
 }
 
 void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const {
