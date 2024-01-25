@@ -431,7 +431,7 @@ msgstr "Nehybné objekty"
 #. * TRANSLATORS: Tooltip for the immovables tool in the editor
 #: ../../src/editor/editorinteractive.cc:323
 msgid "Add or remove immovables"
-msgstr "Pridať alebo odobrať nehybné predmety"
+msgstr "Pridať alebo odobrať nehybné objekty"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:330
@@ -558,7 +558,7 @@ msgstr ""
 msgid ""
 "Toggle whether to show maximum building spaces that will be available if all"
 " immovables (trees, rocks, etc.) are removed"
-msgstr "Prepínač zobrazenia maximálneho počtu stavebných miest ktoré sú k dispozícii, ak sa odstránia všetky nehnuteľnosti (stromy, skaly atď.)"
+msgstr "Prepínač zobrazenia najväčších stavebných miest, ktoré sú k dispozícii, ak sa odstránia všetky nehybné objekty (stromy, skaly atď.)"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
@@ -798,7 +798,7 @@ msgstr ""
 #: ../../src/editor/tools/place_immovable_tool.cc:148
 #, c-format
 msgid "Immovable: %1$s"
-msgstr ""
+msgstr "Nehybný objekt: %1$s"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../src/editor/tools/set_terrain_tool.cc:120
@@ -1722,7 +1722,7 @@ msgstr "Nahrávanie hry: %1$s (%2$u/%3$d)"
 #: ../../src/map_io/map_saver.cc:100
 #: ../../src/map_io/widelands_map_loader.cc:212
 msgid "Elemental data"
-msgstr ""
+msgstr "Základné údaje"
 
 #: ../../src/game_io/game_loader.cc:135 ../../src/game_io/game_saver.cc:82
 msgid "Economies"
@@ -2049,7 +2049,7 @@ msgstr "Prednahrávanie mapy…"
 
 #: ../../src/logic/game.cc:373
 msgid "Initializing game…"
-msgstr ""
+msgstr "Inicializácia hry…"
 
 #. * TRANSLATORS: All players (plural)
 #: ../../src/logic/game.cc:631
@@ -2069,7 +2069,7 @@ msgstr "Nepodarilo sa spustiť hru, pretože hráč %u nemá žiadnu počiatočn
 
 #: ../../src/logic/game.cc:749
 msgid "Initializing…"
-msgstr ""
+msgstr "Inicializácia…"
 
 #: ../../src/logic/game.cc:1250
 msgid "Trade Offer"
@@ -2657,7 +2657,7 @@ msgstr "Vaša ekonomika bola rozšírená o nový sklad."
 #. * available)
 #: ../../src/logic/map_objects/tribes/warehouse.cc:649
 msgid "Waterway"
-msgstr ""
+msgstr "Vodná cesta"
 
 #: ../../src/logic/map_objects/tribes/warehouse.cc:650
 msgid "Waterway destroyed"
@@ -2908,7 +2908,7 @@ msgstr "Vlajky"
 #: ../../src/map_io/map_saver.cc:206
 #: ../../src/map_io/widelands_map_loader.cc:323
 msgid "Roads and waterways"
-msgstr ""
+msgstr "Cesty a vodné cesty"
 
 #: ../../src/map_io/map_saver.cc:228
 #: ../../src/map_io/widelands_map_loader.cc:253
@@ -2989,15 +2989,15 @@ msgstr ""
 
 #: ../../src/map_io/widelands_map_loader.cc:344
 msgid "Initializing flags"
-msgstr ""
+msgstr "Inicializácia vlajok"
 
 #: ../../src/map_io/widelands_map_loader.cc:351
 msgid "Initializing roads and waterways"
-msgstr ""
+msgstr "Inicializácia ciest a vodných ciest"
 
 #: ../../src/map_io/widelands_map_loader.cc:364
 msgid "Initializing buildings"
-msgstr ""
+msgstr "Inicializácia budov"
 
 #: ../../src/map_io/widelands_map_loader.cc:371
 msgid "Initializing map objects"
@@ -5067,7 +5067,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:381
 msgctxt "tx"
 msgid "Priority:"
-msgstr ""
+msgstr "Priorita:"
 
 #. * TRANSLATORS: "Resource" here refers to the name of a translation unit
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:390
@@ -7041,7 +7041,7 @@ msgstr ""
 #: ../../src/wlapplication.cc:833
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
-msgstr ""
+msgstr "Hre Widelands sa nepodarilo nájsť súbor \"%s\"."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
 #: ../../src/wlapplication.cc:834 ../../src/wlapplication.cc:839
@@ -7449,7 +7449,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:492
 msgid "Immovables Tool"
-msgstr ""
+msgstr "Nehybné objekty"
 
 #: ../../src/wlapplication_options.cc:496
 msgid "Animals Tool"
@@ -7485,7 +7485,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:536
 msgid "Toggle Immovables"
-msgstr ""
+msgstr "Prepnúť nehybné objekty"
 
 #: ../../src/wlapplication_options.cc:541
 msgid "Toggle Animals"
@@ -8303,19 +8303,19 @@ msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:207
 msgid "Muted – click to unmute"
-msgstr ""
+msgstr "Stlmené – ozvučiť kliknutím"
 
 #: ../../src/wui/buildingwindow.cc:208
 msgid "Mute this building’s messages"
-msgstr ""
+msgstr "Stlmiť správy tejto budovy"
 
 #: ../../src/wui/buildingwindow.cc:213
 msgid "All buildings of this type are muted – click to unmute"
-msgstr ""
+msgstr "Všetky budovy tohto typu sú stlmené – ozvučiť kliknutím"
 
 #: ../../src/wui/buildingwindow.cc:217
 msgid "Mute all buildings of this type"
-msgstr ""
+msgstr "Stlmiť všetky budovy tohto typu"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
 #: ../../src/wui/buildingwindow.cc:281
@@ -8436,7 +8436,7 @@ msgstr ""
 
 #: ../../src/wui/constructionsitewindow.cc:370
 msgid "Settings to apply after construction"
-msgstr ""
+msgstr "Nastavenia použité po výstavbe"
 
 #: ../../src/wui/constructionsitewindow.cc:464
 #: ../../src/wui/soldiercapacitycontrol.cc:71
@@ -9197,33 +9197,33 @@ msgstr ""
 
 #: ../../src/wui/inputqueuedisplay.cc:70
 msgid "Priority: Very Low"
-msgstr ""
+msgstr "Priorita: veľmi nízka"
 
 #: ../../src/wui/inputqueuedisplay.cc:72
 msgid "Priority: Low"
-msgstr ""
+msgstr "Priorita: nízka"
 
 #: ../../src/wui/inputqueuedisplay.cc:74
 msgid "Priority: Normal"
-msgstr ""
+msgstr "Priorita: normálna"
 
 #: ../../src/wui/inputqueuedisplay.cc:76
 msgid "Priority: High"
-msgstr ""
+msgstr "Priorita: vysoká"
 
 #: ../../src/wui/inputqueuedisplay.cc:78
 msgid "Priority: Very High"
-msgstr ""
+msgstr "Priorita: veľmi vysoká"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue
 #: ../../src/wui/inputqueuedisplay.cc:136
 msgid "Increase the number of wares you want to be stored here"
-msgstr ""
+msgstr "Zvýšiť počet výrobkov, ktoré tu majú byť uložené"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue
 #: ../../src/wui/inputqueuedisplay.cc:138
 msgid "Decrease the number of wares you want to be stored here"
-msgstr ""
+msgstr "Znížiť počet výrobkov, ktoré tu majú byť uložené"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue -
 #. option explanation
@@ -9259,11 +9259,11 @@ msgstr ""
 
 #: ../../src/wui/inputqueuedisplay.cc:621
 msgid "Hide controls"
-msgstr ""
+msgstr "Skryť ovládanie"
 
 #: ../../src/wui/inputqueuedisplay.cc:621
 msgid "Show controls"
-msgstr ""
+msgstr "Zobraziť ovládanie"
 
 #. * TRANSLATORS: Title for the map view menu button in the game
 #: ../../src/wui/interactive_base.cc:143
@@ -9311,7 +9311,7 @@ msgstr ""
 #: ../../src/wui/interactive_base.cc:892
 #, c-format
 msgid "Waterway length: %1$u (%2$u) / %3$u"
-msgstr ""
+msgstr "Dĺžka vodnej cesty: %1$u (%2$u) / %3$u"
 
 #: ../../src/wui/interactive_base.cc:897
 #, c-format
@@ -9321,7 +9321,7 @@ msgstr ""
 #: ../../src/wui/interactive_base.cc:900
 #, c-format
 msgid "Waterway length: %1$u / %2$u"
-msgstr ""
+msgstr "Dĺžka vodnej cesty: %1$u / %2$u"
 
 #: ../../src/wui/interactive_base.cc:1816
 msgid "Failed saving screenshot!"

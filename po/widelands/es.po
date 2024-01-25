@@ -9,6 +9,7 @@
 # GunChleoc, 2016,2018
 # Gontzal Pujana Onaindia <juchuf@gmail.com>, 2018
 # Javier Mora <morehash@gmail.com>, 2015
+# Juan Miguel Bernal González, 2024
 # Gontzal Pujana Onaindia <juchuf@gmail.com>, 2015
 # Kiibakun, 2015,2021
 # Kiibakun, 2015
@@ -25,7 +26,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-01-11 02:36+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020-2023\n"
+"Last-Translator: Juan Miguel Bernal González, 2024\n"
 "Language-Team: Spanish (http://app.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -67,13 +68,13 @@ msgstr "No hay rocas cerca de tu posición inicial. Por eso recibes recursos adi
 
 #: ../../data/scripting/infrastructure.lua:294
 msgid "Not enough trees nearby"
-msgstr ""
+msgstr "No hay suficientes árboles cerca"
 
 #: ../../data/scripting/infrastructure.lua:294
 msgid ""
 "There are not enough trees near to your starting position. Therefore, you "
 "receive extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "No hay suficientes árboles cerca de tu posición inicial. Por lo tanto, recibe recursos adicionales para impulsar su economía."
 
 #: ../../data/scripting/messages.lua:66 ../../data/scripting/messages.lua:68
 #: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:119
@@ -313,7 +314,7 @@ msgstr "Esc"
 #: ../../src/wlapplication_options.cc:1034
 msgctxt "editor"
 msgid "Tools"
-msgstr ""
+msgstr "Herramientas"
 
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
@@ -380,7 +381,7 @@ msgstr "Guardar Mapa"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:235
 msgid "Publish Map Online…"
-msgstr ""
+msgstr "Publicar mapa en línea…"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:243
@@ -528,12 +529,12 @@ msgstr "Haz clic en una casilla para mostrar información sobre ella"
 #: ../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:44
 #: ../../src/wlapplication_options.cc:526
 msgid "Tool History"
-msgstr ""
+msgstr "Historico de Herramientas"
 
 #. * TRANSLATORS: Tooltip for the tool history tool in the editor
 #: ../../src/editor/editorinteractive.cc:394
 msgid "Restore previous tool settings"
-msgstr ""
+msgstr "Restaurar las configuración anterior de la herramienta"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
@@ -558,17 +559,17 @@ msgstr "Mostrar Zonas de Construcción"
 #. etc.) are removed
 #: ../../src/editor/editorinteractive.cc:471
 msgid "Hide Maximum Building Spaces"
-msgstr ""
+msgstr "Ocultar espacios máximos de construcción"
 
 #: ../../src/editor/editorinteractive.cc:472
 msgid "Show Maximum Building Spaces"
-msgstr ""
+msgstr "Mostrar espacios máximos de construcción"
 
 #: ../../src/editor/editorinteractive.cc:475
 msgid ""
 "Toggle whether to show maximum building spaces that will be available if all"
 " immovables (trees, rocks, etc.) are removed"
-msgstr ""
+msgstr "Alternar entre mostrar el máximo de espacios de construcción que estarán disponibles si se eliminan todos los bienes inmuebles (árboles, rocas, etc.)"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
@@ -624,7 +625,7 @@ msgstr "Widelands no pudo cargar el archivo \"%s\". Parece que el formato del ar
 
 #: ../../src/editor/editorinteractive.cc:609
 msgid "Exit Editor Confirmation"
-msgstr ""
+msgstr "Confirmación de Salida del Editor"
 
 #: ../../src/editor/editorinteractive.cc:609
 msgid "Unsaved Map"
@@ -636,7 +637,7 @@ msgstr "El mapa no fue guardado. ¿Realmente quieres salir?"
 
 #: ../../src/editor/editorinteractive.cc:611
 msgid "Are you sure you wish to exit the editor?"
-msgstr ""
+msgstr "¿Seguro de que deseas salir del editor?"
 
 #: ../../src/editor/editorinteractive.cc:1139 ../../src/logic/addons.cc:48
 #: ../../src/ui_basic/dropdown.cc:358 ../../src/ui_basic/dropdown.cc:360
@@ -669,7 +670,7 @@ msgid ""
 "\n"
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using version %2$s.\n"
 "Please add this information to your report."
-msgstr ""
+msgstr "Ha ocurrido un error. El mensaje de error es:\n\n%1$s\n\nInforme este problema para ayudarnos a mejorar Widelands. Encontrará mensajes relacionados en la salida estándar (stdout.txt en Windows). Estás utilizando la versión %2$s.\nAgrega esta información a tu informe."
 
 #: ../../src/editor/editorinteractive.cc:1175
 #, c-format
@@ -701,11 +702,11 @@ msgstr "Cargando mundo…"
 #: ../../src/editor/editorinteractive.cc:1403
 #, c-format
 msgid "Tool gaps: %u%%"
-msgstr ""
+msgstr "Separación entre herramientas: %u%%"
 
 #: ../../src/editor/editorinteractive.cc:1426
 msgid "Publish Map"
-msgstr ""
+msgstr "Publicar Mapa"
 
 #: ../../src/editor/editorinteractive.cc:1427
 #, c-format
@@ -717,15 +718,15 @@ msgid ""
 "Author: %3$s\n"
 "Description: %4$s\n"
 "Hint: %5$s\n"
-msgstr ""
+msgstr "¿Estás seguro de que deseas publicar este mapa en línea?\n\nNombre: %1$s\nNombre interno: %2$s\nAutor: %3$s\nDescripción: %4$s\nPista: %5$s\n"
 
 #: ../../src/editor/editorinteractive.cc:1451
 msgid "Login Error"
-msgstr ""
+msgstr "Error de Inicio de Sesión"
 
 #: ../../src/editor/editorinteractive.cc:1456
 msgid "Uploading Add-On…"
-msgstr ""
+msgstr "Subiendo complemento…"
 
 #: ../../src/editor/editorinteractive.cc:1457
 msgid "Saving map…"
@@ -739,32 +740,32 @@ msgstr "¡Error Guardando el Mapa!"
 
 #: ../../src/editor/editorinteractive.cc:1482
 msgid "Packaging add-on…"
-msgstr ""
+msgstr "Empaquetando complemento..."
 
 #: ../../src/editor/editorinteractive.cc:1533
 msgid "Add-On Generation Error"
-msgstr ""
+msgstr "Error al Generar el Complemento"
 
 #: ../../src/editor/editorinteractive.cc:1534
 msgid "The add-on could not be written to the disk."
-msgstr ""
+msgstr "El complemento no se pudo escribir en el disco."
 
 #: ../../src/editor/editorinteractive.cc:1541
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:108
 msgid "Uploading…"
-msgstr ""
+msgstr "Subiendo…"
 
 #: ../../src/editor/editorinteractive.cc:1547
 msgid "Upload Error"
-msgstr ""
+msgstr "Error de Subida"
 
 #: ../../src/editor/editorinteractive.cc:1569
 msgid "Success"
-msgstr ""
+msgstr "Éxito"
 
 #: ../../src/editor/editorinteractive.cc:1570
 msgid "The add-on was uploaded successfully."
-msgstr ""
+msgstr "El complemento se subio correctamente."
 
 #: ../../src/editor/map_generator.cc:754
 msgid "Random Player"
@@ -776,7 +777,7 @@ msgstr "Jugador aleatorio"
 #: ../../src/editor/tools/increase_height_tool.cc:62
 #, c-format
 msgid "Height: inc./dec. %1$d, set to %2$d"
-msgstr ""
+msgstr "Altura: inc./dec. %1$d, establecer a %2$d"
 
 #. * TRANSLATORS: An entry in the tool history list. Inc. and dec. stand for
 #. increase and
@@ -784,25 +785,25 @@ msgstr ""
 #: ../../src/editor/tools/increase_resources_tool.cc:85
 #, c-format
 msgid "%1$s: inc./dec. %2$d, set to %3$d"
-msgstr ""
+msgstr "%1$s: inc./dic. %2$d, establecido en %3$d"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../src/editor/tools/noise_height_tool.cc:78
 #, c-format
 msgid "Noise height: %1$d–%2$d"
-msgstr ""
+msgstr "Altura de ruido: inc./dec. %1$d, establecer a %2$d"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../src/editor/tools/place_critter_tool.cc:127
 #, c-format
 msgid "Critter: %1$s"
-msgstr ""
+msgstr "Bicho: %1$s"
 
 #: ../../src/editor/tools/place_immovable_tool.cc:141
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:93
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:98
 msgid "Automatic Trees"
-msgstr ""
+msgstr "Árboles Automáticos"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../src/editor/tools/place_immovable_tool.cc:148
@@ -1174,21 +1175,21 @@ msgstr "Etiquetas:"
 #. * "Teams of 2", etc.
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:397
 msgid "This map is suitable for:"
-msgstr ""
+msgstr "Este mapa es adecuado para:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:399
 msgid ""
 "Please add suggested team line-ups in the next tab for all selected options"
-msgstr ""
+msgstr "Agregue alineaciones de equipos sugeridas en la siguiente pestaña para todas las opciones seleccionadas."
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:415
 msgid ""
 "Mark whether the starting positions provide equal conditions for each player"
-msgstr ""
+msgstr "Marca si las posiciones iniciales ofrecen igualdad de condiciones para cada jugador"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:420
 msgid "Set the theme for the game loadscreens"
-msgstr ""
+msgstr "Establecer el tema para las pantallas de carga del juego."
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:421
 msgctxt "map_theme"
@@ -1197,13 +1198,13 @@ msgstr "(ninguno)"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:432
 msgid "Ferry range:"
-msgstr ""
+msgstr "Rango del ferry:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:433
 msgid ""
 "Enable ferries, waterways, and ferry yards on this map by setting the "
 "maximum length of waterways for ferries"
-msgstr ""
+msgstr "Habilite transbordadores, vías navegables y astilleros en este mapa estableciendo la longitud máxima de las vías navegables para los transbordadores."
 
 #. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
@@ -1330,7 +1331,7 @@ msgstr "Número aleatorio:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:235
 msgid "Generate a new random number"
-msgstr ""
+msgstr "Generar un nuevo número aleatorio"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:244
 msgid "Map ID:"
@@ -1398,7 +1399,7 @@ msgid ""
 "The map generator could not produce a good-enough map with the provided "
 "settings. This map will probably need extensive editing to be playable. "
 "Consider creating a new map with different parameters."
-msgstr ""
+msgstr "El generador de mapas no pudo producir un mapa suficientemente bueno con la configuración proporcionada. Este mapa probablemente necesitará una edición exhaustiva para poder reproducirlo. Considere la posibilidad de crear un nuevo mapa con diferentes parámetros."
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:726
 msgid "The Widelands Random Map Generator"
@@ -1648,30 +1649,30 @@ msgstr "%1$s %2$s"
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:51
 #, c-format
 msgid "%1$s (removable by e.g. placing roads)"
-msgstr ""
+msgstr "%1$s (eliminable, por ejemplo, colocando carreteras)"
 
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:54
 #, c-format
 msgid "%1$s (needs a small building plot)"
-msgstr ""
+msgstr "%1$s (necesita un terreno edificable pequeño)"
 
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:57
 #, c-format
 msgid "%1$s (needs a medium building plot)"
-msgstr ""
+msgstr "%1$s (necesita un terreno edificable mediano)"
 
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:60
 #, c-format
 msgid "%1$s (needs a big building plot)"
-msgstr ""
+msgstr "%1$s (necesita un terreno edificable grande)"
 
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:99
 msgid "Automatically place the trees which grow best on the terrain"
-msgstr ""
+msgstr "Coloca automáticamente los árboles que mejor crecen en el terreno"
 
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:115
 msgid "Automatic Immovable Placement"
-msgstr ""
+msgstr "Colocación Inamovible Automática"
 
 #: ../../src/editor/ui_menus/tool_resize_options_menu.cc:34
 msgid "Resize"
@@ -1700,7 +1701,7 @@ msgstr "%1%: %2%"
 #: ../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:121
 msgid ""
 "Click to restore, Shift + Click to delete, and Ctrl + Click to pin an item."
-msgstr ""
+msgstr "Haga clic para restaurar, Shift + click para eliminar y Ctrl + click para fijar un elemento."
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:39
 msgid "Tool Size"
@@ -1708,19 +1709,19 @@ msgstr "Tamaño de herramienta"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:51
 msgid "Size:"
-msgstr ""
+msgstr "Tamaño:"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:64
 msgid "Gaps:"
-msgstr ""
+msgstr "Espacio:"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:67
 msgid "Radius of the active tool"
-msgstr ""
+msgstr "Radio de la herramienta activa."
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:68
 msgid "Amount of random gaps in the tool’s area"
-msgstr ""
+msgstr "Cantidad de espacios aleatorios en el área de la herramienta"
 
 #: ../../src/game_io/game_loader.cc:69
 #, c-format
@@ -1832,7 +1833,7 @@ msgstr "lenguaje de sombreado"
 
 #: ../../src/graphic/text/rt_render.cc:1420
 msgid "Copy link to clipboard"
-msgstr ""
+msgstr "Copiar enlace al portapapeles"
 
 #: ../../src/graphic/text_layout.cc:273
 #, c-format
@@ -1913,7 +1914,7 @@ msgstr "Guión"
 
 #: ../../src/logic/addons.cc:56
 msgid "Map Set"
-msgstr ""
+msgstr "Conjunto de Mapas"
 
 #. * TRANSLATORS: Header for campaign name
 #: ../../src/logic/addons.cc:61 ../../src/ui_fsmenu/campaigndetails.cc:48
@@ -2010,15 +2011,15 @@ msgstr "%1$s<br>· %2$s (versión %3$s)"
 
 #: ../../src/logic/addons.cc:305
 msgid "No game-relevant add-ons in use."
-msgstr ""
+msgstr "No se utilizan complementos relevantes para el juego."
 
 #: ../../src/logic/addons.cc:310
 #, c-format
 msgid "%u game-relevant add-on in use:"
 msgid_plural "%u game-relevant add-ons in use:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%u complemento relevante para el juego en uso:"
+msgstr[1] "%u complementos relevantes para el juego en uso:"
+msgstr[2] "%u complementos relevantes para el juego en uso:"
 
 #: ../../src/logic/editor_game_base.cc:236
 #, c-format
@@ -2087,7 +2088,7 @@ msgstr "Este mercado ha recibido una nueva oferta de negocio."
 msgid ""
 "This game was saved using an older version of Widelands and cannot be loaded"
 " anymore, or it’s a new version that can’t be handled yet."
-msgstr ""
+msgstr "Este juego se guardó usando una versión anterior de Widelands y ya no se puede cargar, o es una versión nueva que aún no se puede gestionar."
 
 #: ../../src/logic/generic_save_handler.cc:221
 #: ../../src/logic/generic_save_handler.cc:225
@@ -2284,23 +2285,23 @@ msgstr "los trabajadores no necesitan más experiencia"
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:620
 msgid "the fleet needs a ferry"
-msgstr ""
+msgstr "la flota necesita un ferry"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the fleet needs
 #. a ship/ferry'.
 #: ../../src/logic/map_objects/tribes/production_program.cc:620
 msgid "the fleet needs a ship"
-msgstr ""
+msgstr "la flota necesita un barco"
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:627
 msgid "the fleet needs no ferries"
-msgstr ""
+msgstr "la flota no necesita ferries"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the fleet needs
 #. no ships/ferries'.
 #: ../../src/logic/map_objects/tribes/production_program.cc:627
 msgid "the fleet needs no ships"
-msgstr ""
+msgstr "la flota no necesita barcos"
 
 #. * TRANSLATORS: "Did not start working because the economy needs the ware
 #. '%s'"
@@ -2401,27 +2402,27 @@ msgstr "¡No se encuentran más recursos!"
 #: ../../src/logic/map_objects/tribes/productionsite.cc:1264
 msgctxt "building"
 msgid "No Shore"
-msgstr ""
+msgstr "Sin Costa"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:1244
 msgid "Shipyard Without Shore"
-msgstr ""
+msgstr "Astillero Sin Costa"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:1245
 msgid ""
 "Your shipyard has not been built close enough to a shore. It will not be "
 "able to build ships."
-msgstr ""
+msgstr "Su astillero no se ha construido lo suficientemente cerca de la costa. No podrá construir barcos."
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:1265
 msgid "Ferry Yard Without Shore"
-msgstr ""
+msgstr "Astillero de Ferry Sin Costa"
 
 #: ../../src/logic/map_objects/tribes/productionsite.cc:1266
 msgid ""
 "Your ferry yard has not been built close enough to a shore. It will not be "
 "able to build ferries."
-msgstr ""
+msgstr "Su astillero no se ha construido lo suficientemente cerca de la costa. No podrá construir transbordadores."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:460
 msgid "Port Space"
@@ -2478,7 +2479,7 @@ msgstr "Descarga de productos fallida, la expedición es cancelada."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:757
 msgid "No Port Can Be Built"
-msgstr ""
+msgstr "No se Puede Construir Puertos"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:757
 msgid "Port Space Lost!"
@@ -2487,7 +2488,7 @@ msgstr "¡Espacio para Puerto Perdido!"
 #: ../../src/logic/map_objects/tribes/ship.cc:758
 msgid ""
 "A discovered port build space is not available for building a port anymore."
-msgstr ""
+msgstr "Un espacio de construcción de puerto descubierto ya no está disponible para construir un puerto."
 
 #. * TRANSLATORS: Ship expedition ready
 #: ../../src/logic/map_objects/tribes/ship.cc:904
@@ -2517,7 +2518,7 @@ msgstr "Vacío"
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
-msgstr ""
+msgstr "Partiendo de %s"
 
 #. * TRANSLATORS: This is a ship state. The ship is currently sailing
 #. * to a specific destination port without transporting wares.
@@ -2525,7 +2526,7 @@ msgstr ""
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
-msgstr ""
+msgstr "Navegando hacia %s"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
@@ -2632,14 +2633,14 @@ msgstr "Trabajadores en camino"
 #. experienced worker missing.
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:255
 msgid "Expert missing"
-msgstr ""
+msgstr "Experto perdido"
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. experienced
 #. worker missing. If you need plural forms here, please let us know.
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:260
 msgid "Experts missing"
-msgstr ""
+msgstr "Expertos perdidos"
 
 #: ../../src/logic/map_objects/tribes/warehouse.cc:557
 msgid "A new port was added to your economy."
@@ -2747,87 +2748,87 @@ msgstr "Almacén %d"
 #: ../../src/wui/game_diplomacy_menu.cc:36
 #: ../../src/wui/interactive_gamebase.cc:247
 msgid "Diplomacy"
-msgstr ""
+msgstr "Diplomácia"
 
 #: ../../src/logic/playercommand.cc:2218
 #, c-format
 msgid "%s has resigned and is now a spectator."
-msgstr ""
+msgstr "%s ha renunciado y ahora es espectador."
 
 #: ../../src/logic/playercommand.cc:2218
 msgid "Player Resigned"
-msgstr ""
+msgstr "Jugador ha Renunciado"
 
 #: ../../src/logic/playercommand.cc:2230
 msgid "Player Leaves Team"
-msgstr ""
+msgstr "El jugador Deja el Equipo"
 
 #: ../../src/logic/playercommand.cc:2231
 #, c-format
 msgid "%1$s has left team %2$u and is now teamless."
-msgstr ""
+msgstr "%1$s ha dejado el equipo %2$u y ahora no tiene equipo."
 
 #: ../../src/logic/playercommand.cc:2239
 msgid "Team Joining Request"
-msgstr ""
+msgstr "Solicitud para Unirse al Equipo"
 
 #: ../../src/logic/playercommand.cc:2240
 msgid "Team Joining Invitation"
-msgstr ""
+msgstr "Invitación para Unirse al Equipo"
 
 #: ../../src/logic/playercommand.cc:2242
 #: ../../src/wui/game_diplomacy_menu.cc:269
 #, c-format
 msgid "%1$s has requested to join the team of %2$s."
-msgstr ""
+msgstr "%1$s ha solicitado unirse al equipo de %2$s."
 
 #: ../../src/logic/playercommand.cc:2243
 #: ../../src/wui/game_diplomacy_menu.cc:276
 #, c-format
 msgid "%1$s has invited %2$s to join their team."
-msgstr ""
+msgstr "%1$s ha invitado a %2$s a unirse a su equipo."
 
 #: ../../src/logic/playercommand.cc:2282
 #, c-format
 msgid "%1$s has accepted %2$s into their team."
-msgstr ""
+msgstr "%1$s ha aceptado a %2$s en su equipo."
 
 #: ../../src/logic/playercommand.cc:2284
 #, c-format
 msgid "%1$s has accepted the invitation to join the team of %2$s."
-msgstr ""
+msgstr "%1$s ha aceptado la invitación para unirse al equipo de %2$s."
 
 #: ../../src/logic/playercommand.cc:2289
 #, c-format
 msgid "%1$s has retracted the request to join the team of %2$s."
-msgstr ""
+msgstr "%1$s ha rechazado la solicitud para unirse al equipo de %2$s."
 
 #: ../../src/logic/playercommand.cc:2291
 #, c-format
 msgid "%1$s has denied %2$s membership in their team."
-msgstr ""
+msgstr "%1$s ha rechazado la incorporación de %2$s en su equipo."
 
 #: ../../src/logic/playercommand.cc:2294
 #, c-format
 msgid "%1$s has retracted the invitation to %2$s to join their team."
-msgstr ""
+msgstr "%1$s ha retirado la invitación a %2$s para unirse a su equipo."
 
 #: ../../src/logic/playercommand.cc:2296
 #, c-format
 msgid "%1$s has rejected the invitation to join the team of %2$s."
-msgstr ""
+msgstr "%1$s ha rechazado la invitación para unirse al equipo de %2$s."
 
 #: ../../src/logic/playercommand.cc:2300
 msgid "Team Change Accepted"
-msgstr ""
+msgstr "Cambio de Equipo Aceptado"
 
 #: ../../src/logic/playercommand.cc:2300
 msgid "Team Change Rejected"
-msgstr ""
+msgstr "Cambio de Equipo Rechazado"
 
 #: ../../src/logic/replay.cc:94
 msgid "Desync"
-msgstr ""
+msgstr "Desincronización"
 
 #: ../../src/logic/replay.cc:95
 #, c-format
@@ -2837,7 +2838,7 @@ msgid ""
 "\n"
 "If you are certain that the replay was created with the same version of Widelands, %1$s, please report this problem as a bug.\n"
 "You will find related messages in the standard output (stdout.txt on Windows). Please add this information to your report."
-msgstr ""
+msgstr "La repetición se desincronizó y el juego se pausó.\nProbablemente estés viendo una repetición creada con otra versión de Widelands, que no es compatible.\nSi estás seguro de que la repetición se creó con la misma versión de Widelands, %1$s, informe este problema como un error. \nEncontrará mensajes relacionados en la salida estándar (stdout.txt en Windows). Por favor agregue esta información a su informe."
 
 #: ../../src/logic/replay_game_controller.cc:102
 msgid "End of Replay"
@@ -2855,7 +2856,7 @@ msgstr "Guardando partida..."
 
 #: ../../src/logic/save_handler.cc:152
 msgid "Saving skipped"
-msgstr ""
+msgstr "Guardado omitido"
 
 #: ../../src/logic/save_handler.cc:170
 #: ../../src/wui/game_main_menu_save_game.cc:338
@@ -3010,7 +3011,7 @@ msgstr "Comprobando mapa"
 
 #: ../../src/map_io/widelands_map_loader.cc:450
 msgid "Postloading map objects"
-msgstr ""
+msgstr "Postcarga de objetos del mapa"
 
 #: ../../src/network/gameclient.cc:162 ../../src/network/gamehost.cc:561
 #: ../../src/ui_fsmenu/launch_spg.cc:174 ../../src/wlapplication.cc:783
@@ -3042,18 +3043,18 @@ msgstr[2] "%u discrepancias de complementos detectado:\n"
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ required by host not found"
-msgstr ""
+msgstr "%1$s\n· '%2$s' requerido por el host no encontrado"
 
 #: ../../src/network/gameclient.cc:819
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ installed at version %3$s but host uses version %4$s"
-msgstr ""
+msgstr "%1$s\n· '%2$s' instalado en la versión %3$s pero el host usa la versión %4$s"
 
 #: ../../src/network/gameclient.cc:990
 msgid "/me ’s file failed md5 checksumming."
-msgstr ""
+msgstr "El archivo /me falló en la suma de verificación md5."
 
 #: ../../src/network/gameclient.cc:1032
 msgid ""
@@ -3070,7 +3071,7 @@ msgstr "Desconectado"
 msgid ""
 "The connection with the host was lost for the following reason:\n"
 "%s"
-msgstr ""
+msgstr "La conexión con el host se perdió por el siguiente motivo:\n%s"
 
 #: ../../src/network/gamehost.cc:118
 msgid "Available host commands are:"
@@ -3224,7 +3225,7 @@ msgstr "¡Bienvenido al Metaservidor de Widelands!"
 msgid ""
 "You have been logged in as ‘%s’ since your requested name is already in use "
 "or reserved."
-msgstr ""
+msgstr "Ha iniciado sesión como \"%s\" ya que el nombre solicitado ya está en uso o reservado."
 
 #: ../../src/network/internet_gaming.cc:437
 msgid "Our forums can be found at:"
@@ -3575,7 +3576,7 @@ msgstr "El cliente %1$s no ha respondido por más de %2$s."
 #: ../../src/network/network_gaming_messages.cc:77
 #, c-format
 msgid "Client %s has cheating features enabled!"
-msgstr ""
+msgstr "¡El cliente %s tiene habilitadas las funciones de trampa!"
 
 #: ../../src/network/network_gaming_messages.cc:78
 #, c-format
@@ -3586,13 +3587,13 @@ msgstr "El cliente %s está haciendo trampa!"
 #: ../../src/network/network_gaming_messages.cc:80
 #, c-format
 msgid "Cheating: Client %1$s now controls %2$s"
-msgstr ""
+msgstr "Hacer trampa: el cliente %1$s ahora controla %2$s"
 
 #. * TRANSLATORS: %1 and %2 are user and player names
 #: ../../src/network/network_gaming_messages.cc:82
 #, c-format
 msgid "Client %1$s is cheating, acting as %2$s!"
-msgstr ""
+msgstr "¡El cliente %1$s está haciendo trampa y actúa como %2$s!"
 
 #: ../../src/network/network_lan_promotion.cc:357
 msgid "Failed to use the local network!"
@@ -3621,7 +3622,7 @@ msgstr ""
 msgid ""
 "Error when running plugin:\n"
 "%s"
-msgstr ""
+msgstr "Error al ejecutar el plugin:\n%s"
 
 #: ../../src/ui_basic/color_chooser.cc:253
 msgid "Choose Color…"
@@ -3667,7 +3668,7 @@ msgstr "Azul"
 
 #: ../../src/ui_basic/color_chooser.cc:484
 msgid "Remove from favorites"
-msgstr ""
+msgstr "Quitar de favoritos"
 
 #: ../../src/ui_basic/color_chooser.cc:484
 #: ../../src/ui_fsmenu/addons/packager.cc:109
@@ -3678,7 +3679,7 @@ msgstr "–"
 
 #: ../../src/ui_basic/color_chooser.cc:491
 msgid "Add current color to favorites"
-msgstr ""
+msgstr "Agregar color actual a favoritos"
 
 #: ../../src/ui_basic/dropdown.cc:111
 msgctxt "dropdown"
@@ -3693,15 +3694,15 @@ msgstr "No Seleccionado"
 
 #: ../../src/ui_basic/dropdown.h:470
 msgid "No matches"
-msgstr ""
+msgstr "No hay coincidencias"
 
 #: ../../src/ui_basic/panel.cc:307
 msgid "Please wait…"
-msgstr ""
+msgstr "Espere por favor…"
 
 #: ../../src/ui_basic/panel.cc:438
 msgid "Game ending – please wait…"
-msgstr ""
+msgstr "Fin del juego – por favor espera…"
 
 #: ../../src/ui_basic/progresswindow.cc:79
 msgid "Loading…"
@@ -3713,7 +3714,7 @@ msgstr "Cargando…"
 #: ../../src/ui_basic/spinbox.cc:155 ../../src/ui_basic/spinbox.cc:170
 #, c-format
 msgid "Decrease the value by %s"
-msgstr ""
+msgstr "Disminuir el valor en %s"
 
 #. * TRANSLATORS: You may want to treat this as "Increase the value %s", you
 #. get
@@ -3721,7 +3722,7 @@ msgstr ""
 #: ../../src/ui_basic/spinbox.cc:162 ../../src/ui_basic/spinbox.cc:174
 #, c-format
 msgid "Increase the value by %s"
-msgstr ""
+msgstr "Aumentar el valor en %s"
 
 #. * TRANSLATORS: "Increase/Decrease the value by <n> minutes"
 #. You may want to treat this as "by <n> minutes", depending on how you
@@ -3731,9 +3732,9 @@ msgstr ""
 msgctxt "spinbox_change"
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d minuto"
+msgstr[1] "%d minutos"
+msgstr[2] "%d minutos"
 
 #. * TRANSLATORS: The current value of a spinbox
 #: ../../src/ui_basic/spinbox.cc:488 ../../src/ui_basic/spinbox.cc:539
@@ -3752,9 +3753,9 @@ msgstr[2] "%d minutos"
 msgctxt "spinbox_change"
 msgid "%d hour"
 msgid_plural "%d hours"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d hora"
+msgstr[1] "%d horas"
+msgstr[2] "%d horas"
 
 #. * TRANSLATORS: The current value of a spinbox
 #: ../../src/ui_basic/spinbox.cc:501 ../../src/ui_basic/spinbox.cc:527
@@ -3775,7 +3776,7 @@ msgstr[2] "%d horas"
 #, c-format
 msgctxt "spinbox_change_hours_mins"
 msgid "%1$s and %2$s"
-msgstr ""
+msgstr "%1$s y %2$s"
 
 #. * TRANSLATORS: ..
 #. The hours part of "Increase/Decrease the value by X hours and Y minutes".
@@ -3787,9 +3788,9 @@ msgstr ""
 msgctxt "spinbox_change_hours_mins"
 msgid "%d hour"
 msgid_plural "%d hours"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d hora"
+msgstr[1] "%d horas"
+msgstr[2] "%d horas"
 
 #. * TRANSLATORS: ..
 #. The minutes part of "Increase/Decrease the value by X hours and Y minutes"
@@ -3800,9 +3801,9 @@ msgstr[2] ""
 msgctxt "spinbox_change_hours_mins"
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d minuto"
+msgstr[1] "%d minutos"
+msgstr[2] "%d minutos"
 
 #. * TRANSLATORS: "Increase/Decrease the value by <n> weeks"
 #. You may want to treat this as "by <n> weeks", depending on how you
@@ -3812,18 +3813,18 @@ msgstr[2] ""
 msgctxt "spinbox_change"
 msgid "%d week"
 msgid_plural "%d weeks"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d semana"
+msgstr[1] "%d semanas"
+msgstr[2] "%d semanas"
 
 #. * TRANSLATORS: The current value of a spinbox
 #: ../../src/ui_basic/spinbox.cc:552
 #, c-format
 msgid "%d week"
 msgid_plural "%d weeks"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d semana"
+msgstr[1] "%d semanas"
+msgstr[2] "%d semanas"
 
 #. * TRANSLATORS: "Increase/Decrease the value by <n> pixels"
 #. You may want to treat this as "by <n> pixels", depending on how you
@@ -3833,9 +3834,9 @@ msgstr[2] ""
 msgctxt "spinbox_change"
 msgid "%d pixel"
 msgid_plural "%d pixels"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d píxel"
+msgstr[1] "%d píxeles"
+msgstr[2] "%d píxeles"
 
 #. * TRANSLATORS: The current value of a spinbox
 #: ../../src/ui_basic/spinbox.cc:561
@@ -3854,9 +3855,9 @@ msgstr[2] "%d píxeles"
 msgctxt "spinbox_change"
 msgid "%d field"
 msgid_plural "%d fields"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d campo"
+msgstr[1] "%d campos"
+msgstr[2] "%d campos"
 
 #. * TRANSLATORS: The current value of a spinbox
 #: ../../src/ui_basic/spinbox.cc:570
@@ -3887,11 +3888,11 @@ msgstr ""
 
 #: ../../src/ui_basic/table.cc:157
 msgid "Click to reverse sorting"
-msgstr ""
+msgstr "Haga click para invertir la ordenación"
 
 #: ../../src/ui_basic/table.cc:157
 msgid "Click to sort by this column"
-msgstr ""
+msgstr "Haga click para ordenar por esta columna"
 
 #. * TRANSLATORS: Tooltip format for table headers: %1 is column description,
 #. %2 is
@@ -3935,11 +3936,11 @@ msgstr "Error de Lua"
 
 #: ../../src/ui_fsmenu/about.cc:59 ../../src/ui_fsmenu/tech_info.cc:221
 msgid "Technical Info"
-msgstr ""
+msgstr "Información Técnica"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:35
 msgid "Contact Form"
-msgstr ""
+msgstr "Formulario de Contacto"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:47
 msgid "Send message"
@@ -3951,7 +3952,7 @@ msgstr "Enviar Mensaje"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:72
 msgid "Send this message now?"
-msgstr ""
+msgstr "¿Enviar el mensaje ahora?"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:82
 #, c-format
@@ -3959,7 +3960,7 @@ msgid ""
 "Unable to submit your enquiry.\n"
 "Error message:\n"
 "%s"
-msgstr ""
+msgstr "No se puede enviar su consulta.\nMensaje de error:\n%s"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:90
 msgid "Sent"
@@ -3970,7 +3971,7 @@ msgid ""
 "Your message has been sent to the Widelands Development Team, and we will "
 "respond as soon as we can. Don’t forget to check your website inbox "
 "frequently."
-msgstr ""
+msgstr "Su mensaje ha sido enviado al equipo de desarrollo de Widelands y le responderemos lo antes posible. No olvide revisar la bandeja de entrada de su sitio web con frecuencia."
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:37
 msgid "Login"
@@ -3994,7 +3995,7 @@ msgstr "Para utilizar una cuenta registrada, necesita una cuenta en la pagina we
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:93
 msgid "Username:"
-msgstr ""
+msgstr "Nombre de usuario:"
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:100
 #: ../../src/ui_fsmenu/login_box.cc:63
@@ -4025,41 +4026,41 @@ msgstr "%u bytes"
 #: ../../src/ui_fsmenu/addons/manager.cc:89
 msgctxt "quality"
 msgid "Any"
-msgstr ""
+msgstr "Cualquiera"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:89
 msgid "Quality not yet evaluated"
-msgstr ""
+msgstr "Calidad no evaluada todavía"
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../src/ui_fsmenu/addons/manager.cc:95
 msgctxt "quality"
 msgid "Poor"
-msgstr ""
+msgstr "Pobre"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:96
 msgid "This add-on may cause major glitches and errors."
-msgstr ""
+msgstr "Este complemento puede causar fallos y errores importantes."
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../src/ui_fsmenu/addons/manager.cc:102
 msgctxt "quality"
 msgid "Good"
-msgstr ""
+msgstr "Bueno"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:102
 msgid "This add-on works as advertised."
-msgstr ""
+msgstr "Este complemento funciona como se esperaba."
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../src/ui_fsmenu/addons/manager.cc:107
 msgctxt "quality"
 msgid "Excellent"
-msgstr ""
+msgstr "Excelente"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:108
 msgid "This add-on has been decorated for its remarkably high quality."
-msgstr ""
+msgstr "Este complemento ha sido destacado por su alta calidad."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:120
 msgid "Add-On Manager"
@@ -4071,7 +4072,7 @@ msgstr "Solo verificados"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:211
 msgid "Show only verified add-ons"
-msgstr ""
+msgstr "Mostrar sólo complementos verificados."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:219
 msgid "Sort by"
@@ -4079,25 +4080,25 @@ msgstr "Ordenar por"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:230
 msgid "Minimum quality"
-msgstr ""
+msgstr "Calidad mínima"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:241
 msgid "Choose add-on to upload…"
-msgstr ""
+msgstr "Elija el complemento para subir..."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:252
 msgid "Upload a screenshot…"
-msgstr ""
+msgstr "Subiendo una captura de pantalla…"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:260
 msgid "Understood and confirmed"
-msgstr ""
+msgstr "Entendido y confirmado"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:261
 msgid ""
 "By ticking this checkbox, you confirm that you have read and agree to the "
 "above terms."
-msgstr ""
+msgstr "Al marcar esta casilla de verificación, confirma que ha leído y acepta los términos anteriores."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:271
 msgid "Reset the filters"
@@ -4144,7 +4145,7 @@ msgstr "Iniciar el empaquetador de complementos..."
 #. Development Team
 #: ../../src/ui_fsmenu/addons/manager.cc:362
 msgid "Contact us…"
-msgstr ""
+msgstr "Contacta con nosotros ..."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:380
 msgid "Tools for Add-Ons Developers"
@@ -4156,7 +4157,7 @@ msgid ""
 "ons. You can bundle maps designed with the Widelands Map Editor as an add-on"
 " using the graphical interface and share them with other players, without "
 "having to write a single line of code."
-msgstr ""
+msgstr "El empaquetador de complementos interactivo le permite crear, editar y eliminar complementos. Puedes agrupar mapas diseñados con el Editor de Mapas de Widelands como complemento usando la interfaz gráfica y compartirlos con otros jugadores, sin tener que escribir una sola línea de código."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:403
 #, c-format
@@ -4172,7 +4173,7 @@ msgid ""
 "terms of the GNU General Public License (GPL) version 2 (the same license "
 "under which Widelands itself is distributed). For more information on the "
 "GPL, please refer to ‘About Widelands’ → ‘License’ in the main menu."
-msgstr ""
+msgstr "Aquí puedes subir tus complementos al servidor para ponerlos a disposición de otros jugadores. Al cargar, acepta publicar su creación bajo los términos de la Licencia Pública General GNU (GPL) versión 2 (la misma licencia bajo la cual se distribuye Widelands). Para obtener más información sobre la GPL, consulte \"Acerca de Widelands\" → \"Licencia\" en el menú principal."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:426
 msgid ""
@@ -4180,7 +4181,7 @@ msgid ""
 " spam. By uploading an add-on, you assert that the add-on is of your own "
 "creation or you have the add-on’s author(s) permission to submit it in their"
 " stead."
-msgstr ""
+msgstr "Está prohibido cargar complementos que contengan contenido dañino, malicioso o spam. Al subir un complemento, usted afirma que el complemento es de su propia creación o que tiene el permiso del autor del complemento para enviarlo en su lugar."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:432
 msgid ""
@@ -4188,7 +4189,7 @@ msgid ""
 " further above before submitting content. Since the documentation is subject"
 " to frequent changes, ensure that you have read it recently and that you "
 "followed all guidelines stated there."
-msgstr ""
+msgstr "Debe haber leído la documentación de complementos en el enlace que figura más arriba antes de enviar contenido. Dado que la documentación está sujeta a cambios frecuentes, asegúrese de haberla leído recientemente y de haber seguido todas las pautas allí indicadas."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:438
 msgid ""
@@ -4196,7 +4197,7 @@ msgid ""
 " In case they have further inquiries, they will contact you via a PM on the "
 "Widelands website; therefore please check the inbox of your online user "
 "profile page frequently."
-msgstr ""
+msgstr "El equipo de desarrollo de Widelands revisará su complemento poco después de subirlo. En caso de que tengan más consultas, se comunicarán con usted a través de un mensaje privado en el sitio web de Widelands; por lo tanto, consulte con frecuencia la bandeja de entrada de su página de perfil de usuario en línea."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:468
 #, c-format
@@ -4205,7 +4206,7 @@ msgid ""
 "of an add-on or collaborating with another add-on designer? Please visit our"
 " forums at %s, explain your needs, and the Widelands Development Team will "
 "be happy to help."
-msgstr ""
+msgstr "¿Problemas técnicos? ¿Documentación poco clara? ¿Necesidades avanzadas como eliminar un complemento o colaborar con otro diseñador de complementos? Visite nuestros foros en %s, explique sus necesidades y el equipo de desarrollo de Widelands estará encantado de ayudarle."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:485
 msgid ""
@@ -4216,7 +4217,7 @@ msgid ""
 "use this way of communication only if there is a reason why your concern is "
 "not for everyone’s ears. You’ll receive our reply via a PM on your Widelands"
 " website user profile page."
-msgstr ""
+msgstr "Alternativamente, también puede enviar un mensaje al equipo de desarrollo de Widelands e intentaremos ayudarlo con su consulta lo antes posible. Sólo los administradores del servidor pueden leer los mensajes enviados de esta forma. Dado que otros diseñadores de complementos generalmente pueden beneficiarse de las preguntas y respuestas de otros, utilice esta forma de comunicación solo si hay una razón por la cual su preocupación no es para los oídos de todos. Recibirá nuestra respuesta a través de un mensaje privado en su página de perfil de usuario del sitio web de Widelands."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:522
 msgid "Development"
@@ -4235,22 +4236,22 @@ msgstr "Nombre (descendiente)"
 #. * TRANSLATORS: Sort add-ons by average rating
 #: ../../src/ui_fsmenu/addons/manager.cc:529
 msgid "Most popular"
-msgstr ""
+msgstr "Más popular"
 
 #. * TRANSLATORS: Sort add-ons by average rating
 #: ../../src/ui_fsmenu/addons/manager.cc:531
 msgid "Least popular"
-msgstr ""
+msgstr "Menos popular"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
 #: ../../src/ui_fsmenu/addons/manager.cc:533
 msgid "Most often downloaded"
-msgstr ""
+msgstr "Más descargado"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
 #: ../../src/ui_fsmenu/addons/manager.cc:535
 msgid "Least often downloaded"
-msgstr ""
+msgstr "Menos descargado"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
 #: ../../src/ui_fsmenu/addons/manager.cc:537
@@ -4269,7 +4270,7 @@ msgstr "Filtrar complementos por nombre"
 #: ../../src/ui_fsmenu/addons/manager.cc:558
 #, c-format
 msgid "Toggle category ‘%s’"
-msgstr ""
+msgstr "Alternar categoria ‘%s’"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:649
 #, c-format
@@ -4302,51 +4303,51 @@ msgstr "Actualizar todo"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:799
 msgid "Not logged in"
-msgstr ""
+msgstr "Sesión no iniciada"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:800
 msgid ""
 "Click to log in. You can then comment and vote on add-ons and upload your "
 "own add-ons."
-msgstr ""
+msgstr "Haga click para iniciar sesión. Luego podrá comentar, votar y subir sus propios complementos."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:804
 msgid "Please log in to upload add-ons"
-msgstr ""
+msgstr "Inicie sesión para subir complementos"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:806
 msgid "Please log in to upload content"
-msgstr ""
+msgstr "Inicie sesión para subir contenido"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:808
 msgid "Please log in to send an enquiry"
-msgstr ""
+msgstr "Por favor inicie sesión para enviar una consulta"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:813
 #, c-format
 msgid "Logged in as %s"
-msgstr ""
+msgstr "Inicia sesión como %s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:813
 #, c-format
 msgid "Logged in as %s (admin)"
-msgstr ""
+msgstr "Inicia sesión como %s (admin)"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:814
 msgid "Click to log out"
-msgstr ""
+msgstr "Haga click para cerrar sesión"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:819
 msgid "Please tick the confirmation checkbox to upload add-ons"
-msgstr ""
+msgstr "Marque la casilla de confirmación para subir complementos"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:822
 msgid "Please tick the confirmation checkbox to upload content"
-msgstr ""
+msgstr "Marque la casilla de confirmación para subir complementos"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:849
 msgid "Server Error"
-msgstr ""
+msgstr "Error del Servidor"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:850
 #, c-format
@@ -4354,44 +4355,44 @@ msgid ""
 "Unable to connect to the server.\n"
 "Error message:\n"
 "%s"
-msgstr ""
+msgstr "No se puede conectar al servidor.\nMensaje de error:\n%s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:858
 msgid "Wrong Password"
-msgstr ""
+msgstr "Contraseña incorrecta"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:859
 #, c-format
 msgid ""
 "The entered username or password is invalid:\n"
 "%s"
-msgstr ""
+msgstr "El nombre de usuario o contraseña ingresados ​​no son válidos:\n%s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:956
 #, c-format
 msgid "Fetching add-ons… (%.1f%%)"
-msgstr ""
+msgstr "Obteniendo complementos… (%.1f%%)"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:959
 msgid "Connecting to the server…"
-msgstr ""
+msgstr "Conectando al servidor..."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:982
 msgid "Server Connection Error"
-msgstr ""
+msgstr "Error de conexión del servidor"
 
 #. * TRANSLATORS: This will be inserted into the string "Server Connection
 #. Error <br> by %s"
 #: ../../src/ui_fsmenu/addons/manager.cc:984
 msgid "a networking bug"
-msgstr ""
+msgstr "un error de red"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:985
 #, c-format
 msgid ""
 "Unable to fetch the list of available add-ons from the server!<br>Error "
 "Message: %s"
-msgstr ""
+msgstr "¡No se puede recuperar la lista de complementos disponibles del servidor!<br>Mensaje de error: %s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1071
 #, c-format
@@ -4400,12 +4401,12 @@ msgstr "Instalado (%u)"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1149
 msgid "Browse"
-msgstr ""
+msgstr "Explorar"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1149
 #, c-format
 msgid "Browse (%u)"
-msgstr ""
+msgstr "Explorar (%u)"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1159
 #, c-format
@@ -4414,15 +4415,15 @@ msgstr "Actualizar todo (%u)"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1162
 msgid "No upgrades are available for your installed add-ons"
-msgstr ""
+msgstr "No hay actualizaciones disponibles para los complementos instalados"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1164
 #, c-format
 msgid "Upgrade the following %u add-on:"
 msgid_plural "Upgrade the following %u add-ons:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Actualice el siguiente complemento %u:"
+msgstr[1] "Actualice los siguientes complementos %u:"
+msgstr[2] "Actualice los siguientes complementos %u:"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1169
 #, c-format
@@ -4432,24 +4433,24 @@ msgstr "· %s"
 #: ../../src/ui_fsmenu/addons/manager.cc:1205
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which could not be found"
-msgstr ""
+msgstr "· '%1$s' requiere '%2$s' que no se pudo encontrar"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1210
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which is disabled"
-msgstr ""
+msgstr "· '%1$s' requiere '%2$s' que esta deshabilitado"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1217
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
-msgstr ""
+msgstr "· '%1$s' requiere '%2$s' que aparece debajo del complemento requerido"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1245
 #, c-format
 msgid ""
 "· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
-msgstr ""
+msgstr "· '%1$s' requiere primero '%2$s' y luego '%3$s', pero aparecen en el orden incorrecto"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1261
 #, c-format
@@ -4457,50 +4458,50 @@ msgid ""
 "An enabled add-on is defective. No games can be started with the current configuration.\n"
 "Error message:\n"
 "%s"
-msgstr ""
+msgstr "Un complemento habilitado es defectuoso. No se pueden iniciar juegos con la configuración actual.\nMensaje de error:\n%s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1278
 #, c-format
 msgid "%u Dependency Error"
 msgid_plural "%u Dependency Errors"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%u Errore de dependencia"
+msgstr[1] "%u Errores de dependencia"
+msgstr[2] "%u Errores de dependencia"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1280
 msgid ""
 "Add-Ons with dependency errors may work incorrectly or prevent games and "
 "maps from loading."
-msgstr ""
+msgstr "Los complementos con errores de dependencia pueden funcionar incorrectamente o impedir que se carguen partidas y mapas."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1394
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its version (%2$s) is not "
 "newer than the version present on the server (%3$s)."
-msgstr ""
+msgstr "El complemento '%1$s' no se puede cargar porque su versión (%2$s) no es más nueva que la versión presente en el servidor (%3$s)."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1405
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its category (%2$s) does not "
 "match the category of the version present on the server (%3$s)."
-msgstr ""
+msgstr "El complemento '%1$s' no se puede cargar porque su categoría (%2$s) no coincide con la categoría de la versión presente en el servidor (%3$s)."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1416
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:54
 msgid "Upload"
-msgstr ""
+msgstr "Subir"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1417
 #, c-format
 msgid "Do you really want to upload the add-on ‘%s’ to the server?"
-msgstr ""
+msgstr "¿Realmente deseas subir el complemento '%s' al servidor?"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1427
 #, c-format
 msgid "Uploading ‘%s’…"
-msgstr ""
+msgstr "Subiendo ‘%s’…"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1434
 #: ../../src/ui_fsmenu/addons/manager.cc:1489
@@ -4515,7 +4516,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr ""
+msgstr "El complemento '%1$s' no se pudo cargar en el servidor.\n\nMensaje de error:\n%2$s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1469
 #, c-format
@@ -4529,7 +4530,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr ""
+msgstr "El complemento '%1$s' no se pudo descargar del servidor. Se omitirá la instalación/actualización de este complemento.\n\nMensaje de error:\n%2$s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1582
 #, c-format
@@ -4538,16 +4539,16 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr ""
+msgstr "Las traducciones del complemento '%1$s' no se pudieron descargar del servidor. Se omitirá la instalación/actualización de las traducciones.\n\nMensaje de error:\n%2$s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1651
 #, c-format
 msgid "The required add-on ‘%s’ could not be found on the server."
-msgstr ""
+msgstr "El complemento requerido \"%s\" no se pudo encontrar en el servidor."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:49
 msgid "Add-Ons Packager"
-msgstr ""
+msgstr "Empaquetador de Complementos"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:101
 msgid "New add-on"
@@ -4556,23 +4557,23 @@ msgstr "Complemento nuevo"
 #: ../../src/ui_fsmenu/addons/packager.cc:110
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:813
 msgid "Delete this add-on"
-msgstr ""
+msgstr "Borrar este complemento"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:118
 msgid "Discard changes"
-msgstr ""
+msgstr "Descartar cambios"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:126
 msgid "Save changes"
-msgstr ""
+msgstr "Guardar cambios"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:136
 msgid "Writing Add-Ons…"
-msgstr ""
+msgstr "Escribir Complementos..."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:138
 msgid "Please be patient while your changes are written."
-msgstr ""
+msgstr "Tenga paciencia mientras se escriben los cambios."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:161
 msgid "Name:"
@@ -4590,11 +4591,11 @@ msgstr "Versión:"
 #: ../../src/ui_fsmenu/addons/packager.cc:177 ../../src/wui/mapdetails.cc:198
 #: ../../src/wui/mapdetails.cc:203
 msgid "Minimum Widelands Version:"
-msgstr ""
+msgstr "Versión mínima de Widelands:"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:183
 msgid "Maximum Widelands Version:"
-msgstr ""
+msgstr "Versión Máxima de Widelands:"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:356
 msgid "New Add-On"
@@ -4602,7 +4603,7 @@ msgstr "Complemento Nuevo"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:357
 msgid "Enter the name for the new add-on."
-msgstr ""
+msgstr "Ingrese el nombre del nuevo complemento."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:359
 msgid "Category"
@@ -4615,7 +4616,7 @@ msgstr "Categoría:"
 #: ../../src/ui_fsmenu/addons/packager_box.cc:417
 #: ../../src/ui_fsmenu/addons/packager_box.cc:423
 msgid "Invalid Name"
-msgstr ""
+msgstr "Nombre inválido"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:381
 #: ../../src/ui_fsmenu/addons/packager_box.cc:403
@@ -4624,26 +4625,26 @@ msgid ""
 "This name is invalid. Reason: %s\n"
 "\n"
 "Please choose a different name."
-msgstr ""
+msgstr "Este nombre no es válido. Motivo: %s\n\nElija un nombre diferente."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:396
 msgid "An add-on with this internal name already exists."
-msgstr ""
+msgstr "Ya existe un complemento con este nombre interno"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:401
 msgid ""
 "An add-on with this internal name was deleted recently. Please commit your "
 "changes before using this name again."
-msgstr ""
+msgstr "Recientemente se eliminó un complemento con este nombre interno. Confirme sus cambios antes de volver a utilizar este nombre."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:427
 msgid "Delete Add-on"
-msgstr ""
+msgstr "Eliminar Complemento"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:429
 #, c-format
 msgid "Do you really want to delete the add-on ‘%s’?"
-msgstr ""
+msgstr "¿Realmente deseas eliminar el complemento '%s'?"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:430
 #, c-format
@@ -4651,7 +4652,7 @@ msgid ""
 "Do you really want to delete the local add-on ‘%s’?\n"
 "\n"
 "Note that this add-on can not be downloaded again from the server."
-msgstr ""
+msgstr "¿Realmente desea eliminar el complemento local '%s'?\n\nTenga en cuenta que este complemento no se puede descargar nuevamente desde el servidor."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:451
 #, c-format
@@ -4661,9 +4662,9 @@ msgid ""
 msgid_plural ""
 "If you quit the packager now, all changes to the following %u add-ons will "
 "be discarded."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Si sale del empaquetador ahora, se descartarán todos los cambios realizados en el siguiente complemento %u."
+msgstr[1] "Si sale del empaquetador ahora, se descartarán todos los cambios realizados en los siguientes complementos %u."
+msgstr[2] "Si sale del empaquetador ahora, se descartarán todos los cambios realizados en los siguientes complementos %u."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:460
 #: ../../src/ui_fsmenu/addons/packager.cc:487
@@ -4676,30 +4677,30 @@ msgstr "%1$s\n· %2$s"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:463
 msgid "Quit Packager"
-msgstr ""
+msgstr "Salir del Empaquetador"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:478
 #, c-format
 msgid "Do you really want to discard all changes to the add-on ‘%s’?"
-msgstr ""
+msgstr "¿Realmente desea descartar todos los cambios realizados en el complemento '%s'?"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:482
 #, c-format
 msgid "Do you really want to discard all changes to the following %u add-on?"
 msgid_plural ""
 "Do you really want to discard all changes to the following %u add-ons?"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "¿Realmente desea descartar todos los cambios realizados en el siguiente complemento %u?"
+msgstr[1] "¿Realmente desea descartar todos los cambios realizados en los siguientes complementos %u?"
+msgstr[2] "¿Realmente desea descartar todos los cambios realizados en los siguientes complementos %u?"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:491
 msgid "Discard Changes"
-msgstr ""
+msgstr "Descartar Cambios"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:503
 #, c-format
 msgid "Do you really want to commit all changes to the add-on ‘%s’ to disk?"
-msgstr ""
+msgstr "¿Realmente desea guardar todos los cambios del complemento '%s' en el disco?"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:507
 #, c-format
@@ -4708,30 +4709,30 @@ msgid ""
 msgid_plural ""
 "Do you really want to commit all changes to the following %u add-ons to "
 "disk?"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "¿Realmente desea enviar todos los cambios del siguiente complemento %u al disco?"
+msgstr[1] "¿Realmente desea enviar todos los cambios de los siguientes complementos %u al disco?"
+msgstr[2] "¿Realmente desea enviar todos los cambios de los siguientes complementos %u al disco?"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:516
 msgid ""
 "Warning: If you manually edited any files in this add-on, your changes may "
 "be overwritten!"
-msgstr ""
+msgstr "Advertencia: si editó manualmente algún archivo en este complemento, es posible que se sobrescriban los cambios."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:519
 msgid "Confirm Saving"
-msgstr ""
+msgstr "Confirmar Guardado"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:590
 msgid "Invalid Version Requirement"
-msgstr ""
+msgstr "Requisito de Versión Inválido"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:591
 #, c-format
 msgid ""
 "The minimum Widelands version ‘%1$s’ may not be newer than the maximum "
 "Widelands version ‘%2$s’. The add-on ‘%3$s’ will not be saved."
-msgstr ""
+msgstr "La versión mínima de Widelands '%1$s' no puede ser más nueva que la versión máxima de Widelands '%2$s'. El complemento '%3$s' no se guardará."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:598
 msgid "Invalid Version"
@@ -4741,11 +4742,11 @@ msgstr "Versión no Válida"
 #, c-format
 msgid ""
 "‘%1$s’ is not a valid version string. The add-on ‘%2$s’ will not be saved."
-msgstr ""
+msgstr "'%1$s' no es una cadena de versión válida. El complemento '%2$s' no se guardará."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:612
 msgid "Version Requirement"
-msgstr ""
+msgstr "Requisito de Versión"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:614
 #, c-format
@@ -4753,7 +4754,7 @@ msgid ""
 "The add-on ‘%1$s’ does not specify a minimum Widelands version. None of the "
 "contained maps can be loaded with a Widelands version older than %2$s. The "
 "minimum version requirement will automatically be set accordingly."
-msgstr ""
+msgstr "El complemento '%1$s' no especifica una versión mínima de Widelands. Ninguno de los mapas contenidos se puede cargar con una versión de Widelands anterior a %2$s. El requisito de versión mínima se establecerá automáticamente en consecuencia."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:619
 #, c-format
@@ -4761,40 +4762,40 @@ msgid ""
 "The add-on ‘%1$s’ specifies a minimum Widelands version of %2$s. However, "
 "none of the contained maps can be loaded with a Widelands version older than"
 " %3$s. The version requirement will automatically be changed accordingly."
-msgstr ""
+msgstr "El complemento '%1$s' especifica una versión mínima de Widelands de %2$s. Sin embargo, ninguno de los mapas contenidos se puede cargar con una versión de Widelands anterior a %3$s. El requisito de versión se cambiará automáticamente en consecuencia."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:641
 msgid "Error Writing Addon"
-msgstr ""
+msgstr "Error al Escribir el Complemento"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:642
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be saved to disk:\n"
 "%2$s"
-msgstr ""
+msgstr "El complemento '%1$s' no se puede guardar en disco:\n%2$s"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:55
 msgid "Invalid filename"
-msgstr ""
+msgstr "Nombre de archivo inválido"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:58
 msgid "Name too long"
-msgstr ""
+msgstr "Nombre de archivo demasiado largo"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:63
 #, c-format
 msgid "Invalid character ‘%c’"
-msgstr ""
+msgstr "Character Inválido ‘%c’"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:68
 #, c-format
 msgid "Filename may not contain ‘%s’"
-msgstr ""
+msgstr "El nombre del archivo no puede contener \"%s\""
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:154
 msgid "Add selected map"
-msgstr ""
+msgstr "Añadir el mapa seleccionado"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:162
 msgid "*"
@@ -4802,25 +4803,25 @@ msgstr "*"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:163
 msgid "Create subdirectory"
-msgstr ""
+msgstr "Crear subdirectorio"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:172
 msgid "Remove selected map or directory"
-msgstr ""
+msgstr "Eliminar el mapa o el directorio seleccionado"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:194
 msgid ""
 "The selected internal directory name is used multiple times. All directories"
 " with the same internal name will also share the same display name."
-msgstr ""
+msgstr "El nombre del directorio interno seleccionado se utiliza varias veces. Todos los directorios con el mismo nombre interno también compartirán el mismo nombre para mostrar."
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:200
 msgid "Directory Display Name"
-msgstr ""
+msgstr "Nombre del Directorio a Mostrar"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:208
 msgid "Directory Tree"
-msgstr ""
+msgstr "Árbol del Directorio"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:281
 #: ../../src/ui_fsmenu/main.cc:474
@@ -4850,11 +4851,11 @@ msgstr "Jugadores: %s"
 #: ../../src/ui_fsmenu/addons/packager_box.cc:291
 #, c-format
 msgid "Minimum Widelands Version: %s"
-msgstr ""
+msgstr "Versión mínima de Widelands: %s"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:324
 msgid "Top-level directory"
-msgstr ""
+msgstr "Directorio de nivel superior"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:389
 msgid "New Directory"
@@ -4862,7 +4863,7 @@ msgstr "Directorio Nuevo"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:390
 msgid "Enter the name for the new directory."
-msgstr ""
+msgstr "Introduzca el nombre del nuevo directorio."
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:410
 #, c-format
@@ -4870,7 +4871,7 @@ msgid ""
 "Directories may not use the extension ‘%s’.\n"
 "\n"
 "Please choose a different name."
-msgstr ""
+msgstr "Los directorios no pueden usar la extensión \"%s\".\n\nElija un nombre diferente."
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:423
 msgid "A directory with this name already exists."
@@ -4879,7 +4880,7 @@ msgstr "Ya existe un directorio con este nombre."
 #: ../../src/ui_fsmenu/addons/packager_box.cc:439
 #, c-format
 msgid "Do you really want to delete the directory ‘%s’ and all its contents?"
-msgstr ""
+msgstr "¿Realmente deseas eliminar el directorio '%s' y todo su contenido?"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:441
 #, c-format
@@ -4900,19 +4901,19 @@ msgstr "Dificultad:"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:524
 msgid "The campaigns difficulty. One word."
-msgstr ""
+msgstr "La dificultad de las campañas. Una palabra."
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:525
 msgid "Short description, which will be appended to the difficulty."
-msgstr ""
+msgstr "Breve descripción, que se adjuntará a la dificultad."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:66
 msgid "Edit…"
-msgstr ""
+msgstr "Editar…"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:91
 msgid "Are you sure you want to delete this comment?"
-msgstr ""
+msgstr "¿Estás seguro de que quieres eliminar este comentario?"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:105
 #, c-format
@@ -4921,15 +4922,15 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%s"
-msgstr ""
+msgstr "El comentario no se pudo eliminar.\n\nMensaje de error:\n%s"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:159
 msgid "Edit Comment"
-msgstr ""
+msgstr "Editar Comentario"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:159
 msgid "Write Comment"
-msgstr ""
+msgstr "Escribir Comentario"
 
 #. * TRANSLATORS: Short for Bold text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:212
@@ -4939,7 +4940,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:212
 msgid "Bold"
-msgstr ""
+msgstr "Negrita"
 
 #. * TRANSLATORS: Short for Italic text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:216
@@ -4949,11 +4950,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:216
 msgid "Italic"
-msgstr ""
+msgstr "Itálica"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:220
 msgid "Underline"
-msgstr ""
+msgstr "Subrayado"
 
 #. * TRANSLATORS: Short for Underline text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:220
@@ -4969,7 +4970,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:224
 msgid "Shadow"
-msgstr ""
+msgstr "Sombra"
 
 #. * TRANSLATORS: Short for Color text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:230
@@ -4989,7 +4990,7 @@ msgstr "1"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:246
 msgid "Tiny"
-msgstr ""
+msgstr "Diminuta"
 
 #. * TRANSLATORS: Short for Small text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:250
@@ -5015,7 +5016,7 @@ msgstr "4"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:258
 msgid "Large"
-msgstr ""
+msgstr "Grande"
 
 #. * TRANSLATORS: Short for Huge text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:262
@@ -5025,7 +5026,7 @@ msgstr "5"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:262
 msgid "Huge"
-msgstr ""
+msgstr "Enorme"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:293
 #, c-format
@@ -5034,15 +5035,15 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%s"
-msgstr ""
+msgstr "No se pudo enviar el comentario.\n\nMensaje de error:\n%s"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:311
 msgid "Preview:"
-msgstr ""
+msgstr "Avance:"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:336
 msgid "The comment contains invalid richtext markup:"
-msgstr ""
+msgstr "El comentario contiene marcas de texto enriquecido inválidas:"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:381
 msgctxt "tx"
@@ -5058,11 +5059,11 @@ msgstr "Nombre de Recurso:"
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:397
 msgctxt "tx"
 msgid "Categories (whitespace-separated; characters only):"
-msgstr ""
+msgstr "Categorías (separadas por espacios en blanco; solo caracteres):"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:405
 msgid "This may take several minutes. Please be patient."
-msgstr ""
+msgstr "Esto puede tomar varios minutos. Por favor sea paciente."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:410
 msgctxt "priority"
@@ -5081,12 +5082,12 @@ msgstr "Alta"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:481
 msgid "Please explain why you are deleting this add-on."
-msgstr ""
+msgstr "Explique por qué está eliminando este complemento."
 
 #. * TRANSLATORS: This add-on has not yet been verified
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:500
 msgid "Unchecked"
-msgstr ""
+msgstr "Desmarcado"
 
 #. * TRANSLATORS: This add-on has been verified
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:502
@@ -5098,12 +5099,12 @@ msgstr "Verificado"
 #. * TRANSLATORS: This add-on is known to cause desyncs
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:506
 msgid "Desyncs"
-msgstr ""
+msgstr "Desincronizado"
 
 #. * TRANSLATORS: This add-on will not cause desyncs
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:508
 msgid "Sync-safe"
-msgstr ""
+msgstr "Sincronización-segura"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:648
 msgid "Your vote"
@@ -5119,11 +5120,11 @@ msgstr "Captura anterior"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:695
 msgid "Write a comment…"
-msgstr ""
+msgstr "Escribir un comentario..."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:705
 msgid "Administrator actions"
-msgstr ""
+msgstr "Acciones del administrador"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:712
 msgid "Not voted"
@@ -5134,7 +5135,7 @@ msgstr "Sin votos"
 msgid ""
 "The vote could not be submitted.\n"
 "Error code: %s"
-msgstr ""
+msgstr "No se pudo enviar la votación.\nCódigo de error: %s"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:785
 #, c-format
@@ -5143,19 +5144,19 @@ msgstr "Capturas (%u)"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:808
 msgid "Change verification status"
-msgstr ""
+msgstr "Cambiar estado de verificación"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:809
 msgid "Change quality rating"
-msgstr ""
+msgstr "Cambiar calificación de calidad"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:810
 msgid "Change sync-safety status"
-msgstr ""
+msgstr "Cambiar el estado de seguridad de sincronización"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:812
 msgid "Configure Transifex integration"
-msgstr ""
+msgstr "Configurar la integración de Transifex"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:862
 #, c-format
@@ -5165,16 +5166,16 @@ msgstr "Comentarios (%u)"
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:863
 #, c-format
 msgid "Votes (%u)"
-msgstr ""
+msgstr "Votos (%u)"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:867
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:498
 #, c-format
 msgid "Average rating: %1$.3f (%2$u vote)"
 msgid_plural "Average rating: %1$.3f (%2$u votes)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Calificación promedio: %1$.3f (%2$u voto)"
+msgstr[1] "Calificación promedio: %1$.3f (%2$u votos)"
+msgstr[2] "Calificación promedio: %1$.3f (%2$u votos)"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:870
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:501
@@ -5196,17 +5197,17 @@ msgstr[2] "%u comentarios:"
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:900
 #, c-format
 msgid "%1$s (edited on %2$s)"
-msgstr ""
+msgstr "%1$s (editado el %2$s)"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:906
 #, c-format
 msgid "%1$s (edited by ‘%2$s’ on %3$s)"
-msgstr ""
+msgstr "%1$s (editado por '%2$s' en %3$s)"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:912
 #, c-format
 msgid "‘%1$s’ commented on version %2$s:"
-msgstr ""
+msgstr "'%1$s' comentó en la versión %2$s:"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:938
 #, c-format
@@ -5215,15 +5216,15 @@ msgstr "%1$u / %2$u"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:974
 msgid "This screenshot could not be fetched from the server due to an error."
-msgstr ""
+msgstr "Esta captura de pantalla no se pudo recuperar del servidor debido a un error."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:992
 msgid "Please log in to comment"
-msgstr ""
+msgstr "Por favor inicie sesión para comentar"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:994
 msgid "Please log in to vote"
-msgstr ""
+msgstr "Por favor inicie sesión para votar"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:44
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:140
@@ -5243,7 +5244,7 @@ msgid ""
 "%5$s\n"
 "\n"
 "Note that this add-on can not be downloaded again from the server."
-msgstr ""
+msgstr "¿Está seguro de que desea desinstalar este complemento?\n\n%1$s\nby %2$s\nVersión %3$s\nCategoría: %4$s\n%5$s\n\nTenga en cuenta que este complemento no se puede volver a descargar desde el servidor."
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:53
 #, c-format
@@ -5260,22 +5261,22 @@ msgstr "¿Estás seguro de querer desinstalar este complemento?\n\n%1$s\nde %2$s
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:96
 msgid ""
 "This add-on is known to cause desyncs in multiplayer games and replays."
-msgstr ""
+msgstr "Es conocido que este complemento provoca desincronizaciones en juegos y repeticiones multijugador."
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:102
 #, c-format
 msgid "Requires a Widelands version of at least %s."
-msgstr ""
+msgstr "Necesita al menos una versión %s de Widelands."
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:104
 #, c-format
 msgid "Requires a Widelands version of at most %s."
-msgstr ""
+msgstr "Necesita como máximo una versión %s de Widelands."
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:106
 #, c-format
 msgid "Requires a Widelands version of at least %1$s and at most %2$s."
-msgstr ""
+msgstr "Necesita una versión de Widelands comprendida entre %1$s y %2$s."
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:150
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:201
@@ -5345,7 +5346,7 @@ msgstr "%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:388
 #, c-format
 msgid "by %1$s (uploaded by %2$s)"
-msgstr ""
+msgstr "por %1$s (subido por %2$s)"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:405
 #, c-format
@@ -5388,17 +5389,17 @@ msgstr "Este complemento aún no ha sido verificado por el equipo de desarrollo 
 #, c-format
 msgid "Total size: %u byte"
 msgid_plural "Total size: %u bytes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Tamaño total: %u byte"
+msgstr[1] "Tamaño total: %u bytes"
+msgstr[2] "Tamaño total: %u bytes"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:496
 #, c-format
 msgid "%u download"
 msgid_plural "%u downloads"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%u descarga"
+msgstr[1] "%u descargas"
+msgstr[2] "%u descargas"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:502
 #, c-format
@@ -5419,7 +5420,7 @@ msgstr[2] "%u capturas"
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:41
 #, c-format
 msgid "Upload Screenshot for ‘%s’"
-msgstr ""
+msgstr "Captura de Pantalla Subida por '%s'"
 
 #. * TRANSLATORS: Header for campaign description
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:95
@@ -5437,7 +5438,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%3$s"
-msgstr ""
+msgstr "La captura de pantalla '%1$s' para el complemento '%2$s' no se pudo subir al servidor.\n\nMensaje de error:\n%3$s"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:33
 msgid "Choose Campaign"
@@ -5469,31 +5470,31 @@ msgstr "Nombre de la Campaña"
 
 #: ../../src/ui_fsmenu/crash_report.cc:43
 msgid "Crash Report Details"
-msgstr ""
+msgstr "Detalles del Informe de Errores"
 
 #: ../../src/ui_fsmenu/crash_report.cc:61
 #: ../../src/ui_fsmenu/crash_report.cc:148
 msgid "Open link"
-msgstr ""
+msgstr "Abrir enlace"
 
 #: ../../src/ui_fsmenu/crash_report.cc:63
 #: ../../src/ui_fsmenu/crash_report.cc:150
 msgid "Copy link"
-msgstr ""
+msgstr "Copiarr enlace"
 
 #: ../../src/ui_fsmenu/crash_report.cc:67
 #: ../../src/ui_fsmenu/crash_report.cc:155
 msgid "Copy report"
-msgstr ""
+msgstr "Copiar informe"
 
 #: ../../src/ui_fsmenu/crash_report.cc:68
 #: ../../src/ui_fsmenu/crash_report.cc:155
 msgid "Copy the full report to the clipboard"
-msgstr ""
+msgstr "Copiar el informe completo al portapapeles."
 
 #: ../../src/ui_fsmenu/crash_report.cc:97
 msgid "Crash Report"
-msgstr ""
+msgstr "Informe del Error"
 
 #: ../../src/ui_fsmenu/crash_report.cc:131
 #, c-format
@@ -5503,19 +5504,19 @@ msgid ""
 "with a description of what was going on in the game and what you did last "
 "before the crash to the Widelands Development Team under %s so we can fix "
 "the problem."
-msgstr ""
+msgstr "Parece que Widelands falló la última vez que se ejecutó, pero se generó automáticamente un seguimiento para la depuración. Proporcione el informe junto con una descripción de lo que estaba sucediendo en el juego y lo último que se hizo antes del bloqueo, al equipo de desarrollo de Widelands en %s para que podamos solucionar el problema."
 
 #: ../../src/ui_fsmenu/crash_report.cc:141
 msgid "Show details…"
-msgstr ""
+msgstr "Mostrar detalles..."
 
 #: ../../src/ui_fsmenu/crash_report.cc:141
 msgid "View the detailed crash report"
-msgstr ""
+msgstr "Ver el informe detallado del error"
 
 #: ../../src/ui_fsmenu/crash_report.cc:158
 msgid "Remind me later"
-msgstr ""
+msgstr "Recuérdame más tarde"
 
 #: ../../src/ui_fsmenu/helpwindow.cc:46 ../../src/wui/helpwindow.cc:48
 #, c-format
@@ -5620,15 +5621,15 @@ msgstr "Reiniciar al valor predeterminado"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:74
 msgid "Press the new shortcut or close this window to cancel."
-msgstr ""
+msgstr "Presione el nuevo acceso directo o cierre esta ventana para cancelar."
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:133
 msgid "(unused)"
-msgstr ""
+msgstr "(no usado)"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:211
 msgid "Edit Keyboard And Mouse Actions"
-msgstr ""
+msgstr "Editar Acciones del Teclado y el Ratón"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:223
 msgid "Reset all"
@@ -5647,7 +5648,7 @@ msgstr "%1$s: %2$s"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:265
 msgid "Keyboard Shortcut Conflict"
-msgstr ""
+msgstr "Conflicto con Atajos de Teclado"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:267
 #, c-format
@@ -5655,7 +5656,7 @@ msgid ""
 "The shortcut you selected (‘%1$s’) is already in use for the following "
 "action: ‘%2$s’. Please select a different shortcut or change the conflicting"
 " shortcut first."
-msgstr ""
+msgstr "El acceso directo seleccionado ('%1$s') ya está en uso para la siguiente acción: '%2$s'. Seleccione un acceso directo diferente o cambie primero el acceso directo conflictivo."
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/ui_fsmenu/keyboard_options.cc:297
@@ -5670,11 +5671,11 @@ msgstr "Editor"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:303
 msgid "Fastplace"
-msgstr ""
+msgstr "Colocación rápida"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:305
 msgid "Mouse Scrolling"
-msgstr ""
+msgstr "Desplazamiento del Ratón"
 
 #: ../../src/ui_fsmenu/launch_game.cc:42
 msgid "Launch Game"
@@ -5687,15 +5688,15 @@ msgstr "Configurar este juego"
 #: ../../src/ui_fsmenu/launch_game.cc:66
 msgid ""
 "An enabled add-on is known to cause desyncs. No replay will be written."
-msgstr ""
+msgstr "Es conocido que un complemento habilitado provoca desincronizaciones. No se escribirá ninguna repetición."
 
 #: ../../src/ui_fsmenu/launch_game.cc:90
 msgid "Playing time"
-msgstr ""
+msgstr "Tiempo de juego"
 
 #: ../../src/ui_fsmenu/launch_game.cc:104
 msgid "Show or hide additional game configuration options"
-msgstr ""
+msgstr "Mostrar u ocultar opciones adicionales de configuración del juego"
 
 #: ../../src/ui_fsmenu/launch_game.cc:117
 msgid "Peaceful mode"
@@ -5703,11 +5704,11 @@ msgstr "Modo pacífico"
 
 #: ../../src/ui_fsmenu/launch_game.cc:125
 msgid "No fog of war"
-msgstr ""
+msgstr "Sin niebla de guerra"
 
 #: ../../src/ui_fsmenu/launch_game.cc:133
 msgid "Forbid diplomacy"
-msgstr ""
+msgstr "Prohibir la diplomacia"
 
 #: ../../src/ui_fsmenu/launch_game.cc:141
 msgid "Custom starting positions"
@@ -5715,7 +5716,7 @@ msgstr "Posiciones de inicio personalizadas"
 
 #: ../../src/ui_fsmenu/launch_game.cc:149
 msgid "Write Replay"
-msgstr ""
+msgstr "Escribir Repetición"
 
 #: ../../src/ui_fsmenu/launch_game.cc:159
 msgid "Change map…"
@@ -5731,11 +5732,11 @@ msgstr "Comenzar partida"
 
 #: ../../src/ui_fsmenu/launch_game.cc:281
 msgid "Show fewer options"
-msgstr ""
+msgstr "Mostrar menos opciones"
 
 #: ../../src/ui_fsmenu/launch_game.cc:281
 msgid "Show more options"
-msgstr ""
+msgstr "Mostrar má opciones"
 
 #: ../../src/ui_fsmenu/launch_game.cc:296
 msgid "The relations between players are set by the scenario"
@@ -5755,7 +5756,7 @@ msgstr "Prohibir la lucha entre jugadores"
 
 #: ../../src/ui_fsmenu/launch_game.cc:332
 msgid "All selected starting conditions ignore the map’s starting positions"
-msgstr ""
+msgstr "Todas las condiciones iniciales seleccionadas, ignoran las posiciones iniciales del mapa."
 
 #: ../../src/ui_fsmenu/launch_game.cc:338
 msgid "The starting positions are set by the scenario"
@@ -5773,27 +5774,27 @@ msgstr "Permitir a los jugadores elegir su propia posición de inicio al princip
 
 #: ../../src/ui_fsmenu/launch_game.cc:362
 msgid "Player vision is set by the scenario"
-msgstr ""
+msgstr "La visión del jugador está determinada por el escenario"
 
 #: ../../src/ui_fsmenu/launch_game.cc:364
 msgid "Player vision is set by the saved game"
-msgstr ""
+msgstr "La visión del jugador esta determinada por la partida guardada."
 
 #: ../../src/ui_fsmenu/launch_game.cc:366
 msgid "Give all players permanent vision of the entire map"
-msgstr ""
+msgstr "Proporciona a todos los jugadores una visión permanente de todo el mapa."
 
 #: ../../src/ui_fsmenu/launch_game.cc:385
 msgid "Player relations are set by the scenario"
-msgstr ""
+msgstr "Las relaciones con los jugadores están establecidas por el escenario."
 
 #: ../../src/ui_fsmenu/launch_game.cc:387
 msgid "Player relations are set by the saved game"
-msgstr ""
+msgstr "Las relaciones con los jugadores están establecidas por la partida guardada."
 
 #: ../../src/ui_fsmenu/launch_game.cc:389
 msgid "Disallow players to change their alliances during the game"
-msgstr ""
+msgstr "No permitir que los jugadores cambien sus alianzas durante la partida."
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/ui_fsmenu/launch_game.cc:397
@@ -5823,7 +5824,7 @@ msgstr "Esta es una partida guardada – la condición de victoria ya fue establ
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
 "loaded."
-msgstr ""
+msgstr "No se pueden determinar las condiciones válidas para ganar porque no se pudo cargar el mapa '%s'."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:64
 msgid "Show the help window"
@@ -5869,7 +5870,7 @@ msgstr "El archivo seleccionado no se puede encontrar. Si no se transfiere autom
 #: ../../src/ui_fsmenu/launch_mpg.cc:322
 #, c-format
 msgid "Unable to load the win condition script file ‘%s’."
-msgstr ""
+msgstr "No se puede cargar el archivo de script con las condiciones de victoria '%s'."
 
 #. * TRANSLATORS: This is a heading for a help window
 #: ../../src/ui_fsmenu/launch_mpg.cc:449
@@ -5949,7 +5950,7 @@ msgid ""
 "Unable to create a Game instance!\n"
 "Error message:\n"
 "%s"
-msgstr ""
+msgstr "¡No se puede crear una instancia de juego!\nMensaje de error:\n%s"
 
 #: ../../src/ui_fsmenu/main.cc:371
 msgid "Begin a new game"
@@ -6135,11 +6136,11 @@ msgstr "(c) %1%-%2% por el Equipo de Desarrollo de Widelands · Licenciado bajo 
 
 #: ../../src/ui_fsmenu/main.cc:873
 msgid "Desyncing Add-On Found"
-msgstr ""
+msgstr "Encontrado Complemento Desincronizado"
 
 #: ../../src/ui_fsmenu/main.cc:874
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
-msgstr ""
+msgstr "Es conocido que un complemento habilitado provoca desincronizaciones. Proceda bajo su propio riesgo."
 
 #: ../../src/ui_fsmenu/main.cc:976 ../../src/ui_fsmenu/netsetup_lan.cc:352
 msgid "No tribes found!"
@@ -6147,15 +6148,15 @@ msgstr "¡No se han encontrado tribus!"
 
 #: ../../src/ui_fsmenu/main.cc:977 ../../src/ui_fsmenu/netsetup_lan.cc:353
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
-msgstr ""
+msgstr "No se encontraron tribus en 'data/tribes/initialization/[tribename]/init.lua'."
 
 #: ../../src/ui_fsmenu/main.cc:1021
 msgid "Exit Confirmation"
-msgstr ""
+msgstr "Confirmación de Salida"
 
 #: ../../src/ui_fsmenu/main.cc:1022
 msgid "Are you sure you wish to exit Widelands?"
-msgstr ""
+msgstr "¿Estás seguro de que deseas salir de Widelands?"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:38
 #, c-format
@@ -6212,7 +6213,7 @@ msgstr "Mostrar nombres originales de mapas"
 
 #: ../../src/ui_fsmenu/mapselect.cc:107
 msgid "Filter by official status"
-msgstr ""
+msgstr "Filtrar por estatus oficial"
 
 #: ../../src/ui_fsmenu/mapselect.cc:109
 msgid "Official & Unofficial"
@@ -6220,11 +6221,11 @@ msgstr "Oficial & No Oficial"
 
 #: ../../src/ui_fsmenu/mapselect.cc:109
 msgid "Show both official and unofficial maps"
-msgstr ""
+msgstr "Mostrar mapas oficiales y no oficiales."
 
 #: ../../src/ui_fsmenu/mapselect.cc:121
 msgid "Filter by desired line-up"
-msgstr ""
+msgstr "Filtrar por alineación deseada"
 
 #. * TRANSLATORS: Filter entry in map selection. Other entries are "Free for
 #. all"",
@@ -6235,11 +6236,11 @@ msgstr "Cualquier Equipo"
 
 #: ../../src/ui_fsmenu/mapselect.cc:125
 msgid "Do not filter by line-up suggestions"
-msgstr ""
+msgstr "No filtrar por sugerencias de alineación"
 
 #: ../../src/ui_fsmenu/mapselect.cc:140
 msgid "Filter by balancing status"
-msgstr ""
+msgstr "Filtrar por estado de equilibrio"
 
 #: ../../src/ui_fsmenu/mapselect.cc:495
 msgid "Balanced & Unbalanced"
@@ -6247,7 +6248,7 @@ msgstr "Equilibrado & Desequilibrado"
 
 #: ../../src/ui_fsmenu/mapselect.cc:495
 msgid "Show both balanced and unbalanced maps"
-msgstr ""
+msgstr "Mostrar mapas equilibrados y desequilibrados"
 
 #: ../../src/ui_fsmenu/mapselect.cc:500
 msgctxt "balancing"
@@ -6256,7 +6257,7 @@ msgstr "No especificado"
 
 #: ../../src/ui_fsmenu/mapselect.cc:501
 msgid "The map does not specify whether it is balanced"
-msgstr ""
+msgstr "El mapa no especifica si está equilibrado"
 
 #: ../../src/ui_fsmenu/menu.cc:129 ../../src/wui/helpwindow.cc:69
 msgid "Back"
@@ -6265,7 +6266,7 @@ msgstr "Atrás"
 #: ../../src/ui_fsmenu/menu.cc:292
 #, c-format
 msgid "Back to ‘%s’"
-msgstr ""
+msgstr "Volver a ‘%s’"
 
 #: ../../src/ui_fsmenu/menu.cc:301
 msgid "Close window"
@@ -6274,30 +6275,30 @@ msgstr "Cerrar ventana"
 #. * TRANSLATORS: e.g. Ctrl+Vertical scroll
 #: ../../src/ui_fsmenu/mousewheel_options.cc:59
 msgid "Vertical scroll"
-msgstr ""
+msgstr "Desplazamiento Vertical"
 
 #. * TRANSLATORS: e.g. Ctrl+Horizontal scroll
 #: ../../src/ui_fsmenu/mousewheel_options.cc:61
 msgid "Horizontal scroll"
-msgstr ""
+msgstr "Desplazamiento Horizontal"
 
 #. * TRANSLATORS: Used when a function works with either vertical or
 #. horizontal scrolling.
 #. It may be used in combination with modifier keys, e.g. "Ctrl+Any scroll"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:64
 msgid "Any scroll"
-msgstr ""
+msgstr "Cualquier desplazamiento"
 
 #. * TRANSLATORS: Placeholder when no modifier key is used, e.g. "(plain)
 #. Horizontal scroll"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:151
 msgid "(plain)"
-msgstr ""
+msgstr "(plano)"
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Neither"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:205
 msgid "Neither"
-msgstr ""
+msgstr "Ninguno"
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Vertical"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:207
@@ -6312,7 +6313,7 @@ msgstr ""
 #. * TRANSLATORS: Used as: "Invert scroll direction: Both"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:211
 msgid "Both"
-msgstr ""
+msgstr "Ambos"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:235
 msgid "%1%:"
@@ -6320,7 +6321,7 @@ msgstr "%1%:"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:292
 msgid "Scroll Setting Conflict"
-msgstr ""
+msgstr "Conflicto en Configuración de Desplazamiento"
 
 #. * TRANSLATORS: %1 is a modifier key combination, e.g. "Ctrl+", or
 #. empty if none is used. %2 is scrolling direction.

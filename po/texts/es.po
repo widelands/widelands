@@ -6,6 +6,7 @@
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2015-2016
 # GunChleoc, 2016
 # Juanjo Cb <jjcabrejas@gmail.com>, 2019
+# Juan Miguel Bernal González, 2024
 # Gontzal Pujana Onaindia <juchuf@gmail.com>, 2015
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015-2016,2021
@@ -19,7 +20,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022\n"
+"Last-Translator: Juan Miguel Bernal González, 2024\n"
 "Language-Team: Spanish (http://app.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -387,7 +388,7 @@ msgid ""
 "This file contains an initial savegame and all commands that were issued by "
 "all players, such as building a road or attacking an enemy. The filename "
 "will tell you the time you started the game."
-msgstr ""
+msgstr "Widelands registra cada partida que juegas en un archivo de repetición con extensión '.wry'. Este archivo contiene una partida guardada inicial y todos los comandos emitidos por todos los jugadores, como construir una carretera o atacar a un enemigo. El nombre del archivo te indicará la hora a la que iniciaste el juego."
 
 #: ../../data/txts/help/common_helptexts.lua:31
 msgid ""
@@ -533,43 +534,43 @@ msgstr "La comida se seca con carbón vegetal. Asegúrate de tener un suministro
 msgid ""
 "Liana cutters harvest lianas from nearby trees, but trees are not harmed in "
 "this process."
-msgstr ""
+msgstr "Los cortadores de lianas las cosechan de los árboles cercanos, pero los árboles no son dañados en este proceso."
 
 #: ../../data/txts/tips/amazons.lua:24
 msgid ""
 "Water is life for the Amazons. Water gatherers perform an important service "
 "to their tribe."
-msgstr ""
+msgstr "El agua es vida para las Amazonas. Los recolectores de agua realizan un importante servicio a su tribu."
 
 #: ../../data/txts/tips/amazons.lua:28
 msgid ""
 "Panning for gold requires a steady stream of water, better sourced as close "
 "as possible for efficiency and freshness."
-msgstr ""
+msgstr "La búsqueda de oro requiere un flujo constante de agua, cuya fuente es mejor tenerla lo más cercana posible para lograr eficiencia y frescura."
 
 #: ../../data/txts/tips/amazons.lua:32
 msgid ""
 "Wilderness keepers ensure fresh game for hunting and fish for fishing. Game "
 "is only released near trees uninhabited by sentries."
-msgstr ""
+msgstr "Los cuidadores de la naturaleza garantizan caza y pescado fresco. La caza sólo se realiza cerca de árboles deshabitados por centinelas."
 
 #: ../../data/txts/tips/amazons.lua:36
 msgid ""
 "Rare wood stock levels are monitored by rare tree plantations, and jungle "
 "masters will plant according to economic requirements."
-msgstr ""
+msgstr "Los niveles de existencias de maderas raras se controlan mediante plantaciones de árboles raros, y los maestros de la jungla las plantarán de acuerdo con las necesidades económicas."
 
 #: ../../data/txts/tips/amazons.lua:40
 msgid ""
 "Ropes are essential for ensuring sound buildings, sewing sturdy clothing, "
 "and lashing canoes together to form ships."
-msgstr ""
+msgstr "Las cuerdas son esenciales para garantizar edificios sólidos, coser ropa resistente y amarrar canoas para formar barcos."
 
 #: ../../data/txts/tips/amazons.lua:43
 msgid ""
 "Jungle masters learn their skills by working as jungle preservers before "
 "working in gardening centres or rare tree plantations."
-msgstr ""
+msgstr "Los maestros de la jungla aprenden sus habilidades trabajando como preservadores de la jungla antes de trabajar en centros de jardinería o plantaciones de árboles raros."
 
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""
@@ -613,7 +614,7 @@ msgstr "La mayoría de edificios mejorados necesitan a trabajadores cualificados
 msgid ""
 "Widelands is creating an emergency save, so you can continue playing exactly"
 " where the game closed."
-msgstr ""
+msgstr "Widelands está creando un guardado de emergencia para que puedas continuar jugando en el punto exacto donde se cerró la partida."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/editor.lua:8
@@ -646,7 +647,7 @@ msgstr "Manteniendo presionado Shift activa la primera herramienta alternativa. 
 #: ../../data/txts/tips/editor.lua:24
 msgid ""
 "Holding down Ctrl switches the second alternative tool on (if it exists)."
-msgstr ""
+msgstr "Mantener presionada la tecla Ctrl para activar la segunda herramienta alternativa (si existe)."
 
 #: ../../data/txts/tips/editor.lua:28
 msgid ""
@@ -791,14 +792,14 @@ msgid ""
 "An economy consists of all buildings and flags connected by roads, ferries, "
 "or ships. The supplies and demands of buildings are handled in their "
 "economy. A player can have more than one economy."
-msgstr ""
+msgstr "Una economía se compone de todos los edificios y banderas conectados por carreteras, transbordadores o barcos. Las ofertas y demandas de los edificios se manejan en su economía. Un jugador puede tener más de una economía."
 
 #: ../../data/txts/tips/general_game.lua:69
 msgid ""
 "You can have more than one economy if their flags are not connected by any "
 "means of transportation. This is why the Configure Economy menu can only be "
 "accessed from flags and warehouses, not the player’s main menu."
-msgstr ""
+msgstr "Puede haber más de una economía si sus banderas no están conectadas por ningún medio de transporte. Es por eso que solo se puede acceder al menú Configurar economía desde banderas y almacenes, y no desde el menú principal del jugador."
 
 #: ../../data/txts/tips/general_game.lua:73
 msgid ""
@@ -849,7 +850,7 @@ msgid ""
 "touchpad scrolling in the ‘Options’ → ‘Edit keyboard and mouse actions’ "
 "menu. For example, moving the map view can be much more comfortable by "
 "scrolling instead of dragging with the right mouse button."
-msgstr ""
+msgstr "Si juegas en una computadora portátil con panel táctil, puedes asignar la funcionalidad al desplazamiento del panel táctil en el menú \"Opciones\" → \"Editar acciones de teclado y mouse\". Por ejemplo, mover la vista del mapa puede resultar mucho más cómodo desplazándola en lugar de arrastrar con el botón derecho del ratón."
 
 #: ../../data/txts/tips/general_game.lua:106
 msgid ""
