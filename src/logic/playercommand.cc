@@ -538,18 +538,15 @@ void CmdFlagAction::serialize(StreamWrite& ser) {
 	ser.unsigned_32(serial_);
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdFlagAction = 3;
+constexpr uint16_t kCurrentPacketVersionCmdFlagAction = 3;  // since v1.0
 
 void CmdFlagAction::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		// TODO(Nordfriese): Savegame compatibility
-		if (packet_version >= 2 && packet_version <= kCurrentPacketVersionCmdFlagAction) {
+		if (packet_version >= 3 && packet_version <= kCurrentPacketVersionCmdFlagAction) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial_ = get_object_serial_or_zero<Flag>(fr.unsigned_32(), mol);
-			// TODO(Nordfriese): Savegame compatibility
-			type_ = packet_version < 3 ? FlagJob::Type::kGeologist :
-                                      static_cast<FlagJob::Type>(fr.unsigned_8());
+			type_ = static_cast<FlagJob::Type>(fr.unsigned_8());
 		} else {
 			throw UnhandledVersionError(
 			   "CmdFlagAction", packet_version, kCurrentPacketVersionCmdFlagAction);
@@ -1540,18 +1537,12 @@ void CmdSetInputMaxFill::execute(Game& game) {
 		}
 	} else if (upcast(Building, b, mo)) {
 		if (b->owner().player_number() == sender()) {
-			try {
-				b->inputqueue(index_, type_, nullptr).set_max_fill(max_fill_);
-				if (upcast(Warehouse, wh, b)) {
-					if (PortDock* p = wh->get_portdock()) {
-						// Update in case the expedition was ready previously and now lacks a ware again
-						p->expedition_bootstrap()->check_is_ready(game);
-					}
+			b->inputqueue(index_, type_, nullptr).set_max_fill(max_fill_);
+			if (upcast(Warehouse, wh, b)) {
+				if (PortDock* p = wh->get_portdock()) {
+					// Update in case the expedition was ready previously and now lacks a ware again
+					p->expedition_bootstrap()->check_is_ready(game);
 				}
-			} catch (const std::exception& e) {
-				// TODO(matthiakl): This exception is only caught to ensure b21 savegame compatibility
-				// and should be removed after v1.0
-				log_err("Skipped CmdSetInputMaxFill command: %s", e.what());
 			}
 		}
 	}
@@ -1990,40 +1981,21 @@ void CmdEnemyFlagAction::serialize(StreamWrite& ser) {
 	ser.unsigned_8(allow_conquer_ ? 1 : 0);
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdEnemyFlagAction = 5;
+constexpr uint16_t kCurrentPacketVersionCmdEnemyFlagAction = 5;  // since v1.0
 
 void CmdEnemyFlagAction::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		// TODO(Nordfriese): Savegame compatibility
-		if (packet_version <= kCurrentPacketVersionCmdEnemyFlagAction && packet_version >= 3) {
+		if (packet_version <= kCurrentPacketVersionCmdEnemyFlagAction && packet_version >= 5) {
 			PlayerCommand::read(fr, egbase, mol);
-			if (packet_version < 5) {
-				fr.unsigned_8();
-			}
 			serial_ = get_object_serial_or_zero<Flag>(fr.unsigned_32(), mol);
-			if (packet_version < 5) {
-				fr.unsigned_8();
-			}
 
 			soldiers_.clear();
-			if (packet_version == kCurrentPacketVersionCmdEnemyFlagAction) {
-				const uint32_t number = fr.unsigned_32();
-				for (uint32_t i = 0; i < number; ++i) {
-					soldiers_.push_back(mol.get<Soldier>(fr.unsigned_32()).serial());
-				}
-			} else {
-				const uint8_t number = fr.unsigned_8();
-				upcast(Flag, flag, egbase.objects().get_object(serial_));
-				assert(flag);
-				std::vector<Soldier*> result;
-				egbase.get_player(sender())->find_attack_soldiers(*flag, &result, number);
-				assert(result.size() == number);
-				for (const auto& s : result) {
-					soldiers_.push_back(s->serial());
-				}
+			const uint32_t number = fr.unsigned_32();
+			for (uint32_t i = 0; i < number; ++i) {
+				soldiers_.push_back(mol.get<Soldier>(fr.unsigned_32()).serial());
 			}
-			allow_conquer_ = packet_version < 5 || (fr.unsigned_8() != 0u);
+			allow_conquer_ = (fr.unsigned_8() != 0u);
 		} else {
 			throw UnhandledVersionError(
 			   "CmdEnemyFlagAction", packet_version, kCurrentPacketVersionCmdEnemyFlagAction);

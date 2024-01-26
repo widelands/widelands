@@ -73,7 +73,6 @@ struct Campaigns {
 
 private:
 	void update_visibility_info();
-	static void update_legacy_campvis();
 
 	std::vector<std::unique_ptr<CampaignData>> campaigns_;
 	std::unordered_set<std::string> solved_scenarios_;
