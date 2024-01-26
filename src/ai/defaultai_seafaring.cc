@@ -190,35 +190,47 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 
 	// goes over productionsites finds shipyards and configures them
 	for (const ProductionSiteObserver& ps_obs : productionsites) {
-		if (ps_obs.bo->is(BuildingAttribute::kShipyard)) {
+		if (ps_obs.site != nullptr && ps_obs.bo->is(BuildingAttribute::kShipyard)) {
+
+			// Verify whether only the correct fleet is reachable
+			bool dismantle = ps_obs.site->get_ship_fleet_interfaces().empty();  // wrong place?
+			// TODO(tothxa): When the AI is made to handle multiple fleets, this needs to be
+			//    changed to only dismantle if it has interfaces to more than one fleet.
+			if (Widelands::Serial fleet = get_main_fleet(); fleet != Widelands::kInvalidSerial) {
+				for (const Widelands::ShipFleetYardInterface* yard_if :
+				     ps_obs.site->get_ship_fleet_interfaces()) {
+					if (yard_if->get_fleet()->serial() != fleet) {
+						dismantle = true;
+						break;
+					}
+				}
+			}
+			if (dismantle) {
+				verb_log_dbg_time(game().get_gametime(), "AI %d: Dismantling shipyard in second fleet",
+				                  player_number());
+				if (!ps_obs.site->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
+					game().send_player_dismantle(*ps_obs.site, true);
+				} else {
+					game().send_player_bulldoze(*ps_obs.site);
+				}
+				continue;
+			}
+
 			// counting stocks
 			uint8_t stocked_wares = 0;
+			uint8_t max_wares = 0;
 			std::vector<Widelands::InputQueue*> const inputqueues = ps_obs.site->inputqueues();
 			for (Widelands::InputQueue* queue : inputqueues) {
 				if (queue->get_type() == Widelands::wwWARE) {
 					stocked_wares += queue->get_filled();
+					max_wares += queue->get_max_size();
 				}
 			}
-			if (stocked_wares == 16 && ps_obs.site->is_stopped() && ps_obs.site->can_start_working()) {
+			if (stocked_wares == max_wares && ps_obs.site->is_stopped() &&
+			    ps_obs.site->can_start_working()) {
 				idle_shipyard_stocked = true;
 			}
 
-			if (expeditions_ready > 0 && idle_shipyard_stocked && ship_free) {
-				if (potential_wrong_shipyard_) {
-					if (!ps_obs.site->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
-						game().send_player_dismantle(*ps_obs.site, true);
-					} else {
-						game().send_player_bulldoze(*ps_obs.site);
-					}
-					for (ShipObserver& so : allships) {
-						game().send_player_sink_ship(*so.ship);
-					}
-					potential_wrong_shipyard_ = false;
-					return true;
-				}
-				potential_wrong_shipyard_ = true;
-				return false;
-			}
 			if (need_ship && idle_shipyard_stocked) {
 				game().send_player_start_stop_building(*ps_obs.site);
 			}
@@ -241,8 +253,29 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		start_expedition = true;
 	}
 
+	Widelands::Serial fleet = get_main_fleet();
+
 	// handle ports: start expedition and set garrison
 	for (PortSiteObserver& p_obs : portsites) {
+		if (p_obs.site == nullptr) {
+			// Race condition?
+			log_err_time(game().get_gametime(), "AI %d: Invalid port", player_number());
+			continue;
+		}
+
+		if (fleet != Widelands::kInvalidSerial && p_obs.site->get_portdock() != nullptr &&
+		    p_obs.site->get_portdock()->get_fleet() != nullptr &&
+		    p_obs.site->get_portdock()->get_fleet()->serial() != fleet) {
+			// Only allow one fleet for now.
+			// TODO(tothxa): v1.3: Make the AI handle multiple fleets.
+			// TODO(tothxa): Immediate: When evaluating portspaces for building additional ports,
+			//               check whether portsites.front() is reachable.
+			verb_log_dbg_time(game().get_gametime(), "AI %d: Dismantling port %s in second fleet",
+			                  player_number(), p_obs.site->get_warehouse_name().c_str());
+			game().send_player_dismantle(*p_obs.site, true);
+			continue;
+		}
+
 		if (start_expedition) {
 			verb_log_dbg_time(game().get_gametime(),
 			                  "  %1d: Starting preparation for expedition in port at %3dx%3d\n",
@@ -280,8 +313,25 @@ bool DefaultAI::check_ships(const Time& gametime) {
 	tradeships_count = 0;
 
 	if (!allships.empty()) {
+		Widelands::Serial fleet = get_main_fleet();
+
 		// iterating over ships and doing what is needed
 		for (ShipObserver& so : allships) {
+
+			if (so.ship == nullptr) {  // good old paranoia
+				log_err_time(game().get_gametime(), "AI %d: Invalid ship", player_number());
+				continue;
+			}
+
+			// Sink if not in right fleet.
+			// TODO(tothxa): Make the AI handle multiple fleets. Then this can be removed.
+			if (fleet != Widelands::kInvalidSerial && so.ship->get_fleet() != nullptr &&
+			    so.ship->get_fleet()->serial() != fleet) {
+				verb_log_dbg_time(game().get_gametime(), "AI %d: Sinking ship %s in second fleet",
+				                  player_number(), so.ship->get_shipname().c_str());
+				game().send_player_sink_ship(*so.ship);
+				continue;
+			}
 
 			if (so.ship->get_ship_type() == Widelands::ShipType::kWarship) {
 				if (!so.ship->is_refitting()) {
@@ -335,12 +385,14 @@ bool DefaultAI::check_ships(const Time& gametime) {
 			    !so.waiting_for_command_) {
 				if (gametime - so.last_command_time > Duration(180 * 1000)) {
 					so.waiting_for_command_ = true;
-					verb_log_warn_time(
-					   gametime,
-					   "  %1d: last command for ship %s at %3dx%3d was %3d seconds ago, something wrong "
-					   "here?...\n",
-					   player_number(), so.ship->get_shipname().c_str(), so.ship->get_position().x,
-					   so.ship->get_position().y, (gametime - so.last_command_time).get() / 1000);
+					if (!so.guarding) {
+						verb_log_warn_time(
+						   gametime,
+						   "  %1d: last command for ship %s at %3dx%3d was %3d seconds ago, something "
+						   "wrong here?...\n",
+						   player_number(), so.ship->get_shipname().c_str(), so.ship->get_position().x,
+						   so.ship->get_position().y, (gametime - so.last_command_time).get() / 1000);
+					}
 				}
 			}
 
@@ -526,6 +578,13 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 
 	const Time& gametime = game().get_gametime();
 	Widelands::PlayerNumber const pn = player_->player_number();
+
+	// We will dereference this all over this function. Let's check at least once.
+	if (so.ship == nullptr) {  // Should only happen in race conditions.
+		log_err_time(gametime, "AI %d: expedition_management(): Invalid expedition ship.", pn);
+		return;
+	}
+
 	BuildingObserver& port_obs = get_building_observer(BuildingAttribute::kPort);
 	// Check whether a port is allowed to help the AI with "New World" start condition
 	bool port_allowed =
@@ -776,5 +835,16 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 		return true;  // we were successful
 	}
 	return false;
+}
+
+// We need to fetch this fresh all the time unfortunately, because fleets seem to come and go as
+// new ones are created for each new ship and port, then merged with the old ones.
+Widelands::Serial DefaultAI::get_main_fleet() {
+	if (portsites.empty() || portsites.front().site == nullptr ||
+	    portsites.front().site->get_portdock() == nullptr ||
+	    portsites.front().site->get_portdock()->get_fleet() == nullptr) {
+		return Widelands::kInvalidSerial;
+	}
+	return portsites.front().site->get_portdock()->get_fleet()->serial();
 }
 }  // namespace AI
