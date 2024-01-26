@@ -2173,8 +2173,10 @@ void Player::init_statistics() {
  * Read statistics data from a file.
  *
  * \param fr source stream
+ * \param packet_version from GamePlayerInfoPacket in game_io/game_player_info_packet.cc
+ *                       currently unused, but may be needed for savegame compatibility
  */
-void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
+void Player::read_statistics(FileRead& fr, const uint16_t /* packet_version */) {
 	uint16_t nr_wares = fr.unsigned_16();
 	size_t nr_entries = fr.unsigned_16();
 	assert(tribe().wares().size() >= nr_wares);
@@ -2271,9 +2273,8 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 	}
 
 	// Read worker stock statistics
-	// TODO(Nordfriese): Savegame compatibility
-	uint16_t nr_workers = packet_version >= 29 ? fr.unsigned_16() : 0;
-	nr_entries = packet_version >= 29 ? fr.unsigned_16() : 0;
+	uint16_t nr_workers = fr.unsigned_16();
+	nr_entries = fr.unsigned_16();
 	assert(tribe().workers().size() >= nr_workers);
 
 	for (DescriptionIndex idx : tribe().workers()) {

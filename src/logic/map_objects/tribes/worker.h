@@ -260,7 +260,6 @@ private:
 	bool run_callobject(Game&, State&, const Action&);
 	bool run_plant(Game&, State&, const Action&);
 	bool run_createbob(Game&, State&, const Action&);
-	bool run_buildferry(Game&, State&, const Action&);
 	bool run_removeobject(Game&, State&, const Action&);
 	bool run_repeatsearch(Game&, State&, const Action&);
 	bool run_findresources(Game&, State&, const Action&);

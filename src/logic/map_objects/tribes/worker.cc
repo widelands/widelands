@@ -1049,21 +1049,6 @@ bool Worker::run_terraform(Game& game, State& state, const Action& a) {
 }
 
 /**
- * buildferry
- *
- * Creates a new instance of the ferry the worker's
- * tribe uses and adds it to the appropriate fleet.
- *
- */
-// TODO(GunChleoc): Savegame compatibility, remove after v1.0.
-bool Worker::run_buildferry(Game& game, State& state, const Action& /* action */) {
-	game.create_worker(get_position(), owner_.load()->tribe().ferry(), owner_);
-	++state.ivar1;
-	schedule_act(game, Duration(10));
-	return true;
-}
-
-/**
  * Simply remove the currently selected object - make no fuss about it.
  */
 bool Worker::run_removeobject(Game& game, State& state, const Action& /* action */) {

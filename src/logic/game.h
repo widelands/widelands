@@ -218,7 +218,6 @@ public:
 
 	void postload() override;
 	void postload_addons_before_loading();
-	void check_legacy_addons_desync_magic();
 
 	void think() override;
 
