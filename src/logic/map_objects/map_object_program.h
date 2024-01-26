@@ -76,10 +76,9 @@ protected:
 	 * @brief Reads time duration with units from a string
 	 * @param input: A positive integer, followed by 'ms' (milliseconds), 's' (seconds) or 'm'
 	 * (minutes). This can be repeated to form units like '1m20s500ms'.
-	 * @param descr: For error messages
 	 * @return The duration in SDL ticks (milliseconds)
 	 */
-	static Duration read_duration(const std::string& input, const MapObjectDescr& descr);
+	static Duration read_duration(const std::string& input);
 
 	/// Left-hand and right-hand elements of a line in a program, e.g. parsed from "return=skipped
 	/// unless economy needs meal"
@@ -114,9 +113,8 @@ protected:
 		/// Whether the sound can be played by different map objects at the same time
 		bool allow_multiple;
 	};
-	/// Parses the arguments for a play_sound action, e.g. { "sound/smiths/sharpening", "120" }
-	static PlaySoundParameters parse_act_play_sound(const std::vector<std::string>& arguments,
-	                                                const MapObjectDescr& descr);
+	/// Parses the arguments for a playsound action
+	static PlaySoundParameters parse_act_play_sound(const std::vector<std::string>& arguments);
 
 private:
 	const std::string name_;

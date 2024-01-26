@@ -1684,11 +1684,6 @@ int LuaMap::place_immovable(lua_State* const L) {
 
 	const std::string objname = luaL_checkstring(L, 2);
 	LuaMaps::LuaField* c = *get_user_class<LuaMaps::LuaField>(L, 3);
-	if (lua_gettop(L) > 3 && !lua_isnil(L, 4)) {
-		// TODO(GunChleoc): Compatibility, remove after v1.0
-		log_warn("Found deprecated parameter '%s' in place_immovable call, placing '%s'",
-		         luaL_checkstring(L, 4), objname.c_str());
-	}
 
 	// Check if the map is still free here
 	if (Widelands::BaseImmovable const* const imm = c->fcoords(L).field->get_immovable()) {

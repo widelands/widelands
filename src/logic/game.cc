@@ -38,7 +38,6 @@
 #include "build_info.h"
 #include "economy/economy.h"
 #include "economy/portdock.h"
-#include "editor/editorinteractive.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
 #include "io/fileread.h"
@@ -218,34 +217,6 @@ void Game::postload_addons_before_loading() {
 	did_postload_addons_before_loading_ = true;
 	delete_world_and_tribes();
 	mutable_descriptions()->ensure_tribes_are_registered();
-	postload_addons();
-}
-
-// TODO(Nordfriese): Needed for v1.0 savegame compatibility, remove after v1.1
-void Game::check_legacy_addons_desync_magic() {
-	bool needed = false;
-	for (const auto& a : enabled_addons()) {
-		if (a->category == AddOns::AddOnCategory::kWorld ||
-		    a->category == AddOns::AddOnCategory::kTribes) {
-			needed = true;
-			break;
-		}
-	}
-	if (!needed) {
-		postload_addons();
-		return;
-	}
-
-	did_postload_addons_before_loading_ = true;
-	did_postload_addons_ = false;
-
-	delete_world_and_tribes();
-	descriptions();
-
-	// Cyclic dependency. Can and must be gotten rid of when fixing the above TO-DO.
-	EditorInteractive::load_world_units(nullptr, *this);
-	load_all_tribes();
-
 	postload_addons();
 }
 
@@ -1515,6 +1486,7 @@ void Game::sample_statistics() {
  * Read statistics data from a file.
  *
  * \param fr file to read from
+ * \param packet_version from GamePlayerInfoPacket in game_io/game_player_info_packet.cc
  */
 void Game::read_statistics(FileRead& fr, uint16_t packet_version) {
 	fr.unsigned_32();  // used to be last stats update time
