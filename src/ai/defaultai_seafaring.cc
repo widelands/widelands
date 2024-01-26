@@ -181,7 +181,8 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 
 	// Free ships are the actively trading trade ships (the ones not in expedition)
 	const bool ship_free = tradeships_count > min_tradeships;
-	const bool warship_shortage = game().naval_warfare_allowed() && (warships_target > warships_count);
+	const bool warship_shortage =
+	   game().naval_warfare_allowed() && (warships_target > warships_count);
 
 	const uint32_t free_ships_count = ship_free ? (tradeships_count - min_tradeships) : 0;
 
@@ -251,8 +252,8 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		verb_log_dbg_time(gametime,
 		                  "AI %d backfit needed: %u ports, %" PRIuS
 		                  " ships total: %u expeditions, %u tradeships, %u warships",
-		                  player_number(), ports_count, allships.size(),
-		                  expeditions_in_progress, tradeships_count, warships_count);
+		                  player_number(), ports_count, allships.size(), expeditions_in_progress,
+		                  tradeships_count, warships_count);
 		tradeship_refit_needed = true;
 	}
 
