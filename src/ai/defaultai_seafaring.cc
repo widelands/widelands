@@ -174,7 +174,16 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	}
 
 	assert(tradeships_count >= expeditions_in_progress);
-	bool ship_free = tradeships_count > expeditions_in_progress + ports_count / kPortsPerTradeShip;
+
+	const uint32_t min_tradeships = ports_count / kPortsPerTradeShip + expeditions_in_progress;
+	const uint32_t tradeships_target = ports_count + expeditions_in_progress;
+	const uint32_t warships_target = ports_finished_count * kWarshipsPerPort;
+
+	// Free ships are the actively trading trade ships (the ones not in expedition)
+	const bool ship_free = tradeships_count > min_tradeships;
+	const bool warship_shortage = game().naval_warfare_allowed() && (warships_target > warships_count);
+
+	const uint32_t free_ships_count = ship_free ? (tradeships_count - min_tradeships) : 0;
 
 	/* Now we decide whether we have enough ships or need to build another:
 	 * - We always need at least one ship in transport mode
@@ -183,10 +192,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	 */
 	const bool need_ship = ports_count > 0 && shipyards_count > 0 && basic_economy_established &&
 	                       (!ship_free || persistent_data->ships_utilization > 5000 ||
-	                              tradeships_count < (ports_count + expeditions_in_progress) ||
-	                              game().naval_warfare_allowed() ?
-                              ports_finished_count * kWarshipsPerPort > warships_count :
-                              false);
+	                        tradeships_count < tradeships_target || warship_shortage);
 
 	// goes over productionsites finds shipyards and configures them
 	for (const ProductionSiteObserver& ps_obs : productionsites) {
@@ -237,11 +243,16 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		}
 	}
 
-	if (game().naval_warfare_allowed() && ports_finished_count * kWarshipsPerPort > warships_count &&
-	    tradeships_count > expeditions_in_progress + ports_count / kPortsPerTradeShip + 1) {
+	if (warship_shortage && free_ships_count > 1) {
 		warship_needed = true;
 	}
 	if (!ship_free && warships_count > 0) {
+		// This shouldn't happen...
+		verb_log_dbg_time(gametime,
+		                  "AI %d backfit needed: %u ports, %" PRIuS
+		                  " ships total: %u expeditions, %u tradeships, %u warships",
+		                  player_number(), ports_count, allships.size(),
+		                  expeditions_in_progress, tradeships_count, warships_count);
 		tradeship_refit_needed = true;
 	}
 
