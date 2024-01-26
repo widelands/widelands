@@ -423,10 +423,10 @@ bool DefaultAI::check_ships(const Time& gametime) {
 			            (so.last_command_time + Duration(5 * 60 * 1000)) < gametime) &&
 			           so.ship->get_ship_state() == Widelands::ShipStates::kExpeditionScouting) {
 				attempt_escape(so);
-			}
 
-			// Checking utilization
-			if (so.ship->get_ship_state() == Widelands::ShipStates::kTransport) {
+			} else if (so.ship->get_ship_state() == Widelands::ShipStates::kTransport) {
+				// Checking utilization
+
 				// Good utilization is 10 pieces of ware onboard, to track utilization we use range
 				// 0-10000
 				// to avoid float or rounding errors if integers in range 0-100
