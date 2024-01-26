@@ -3221,8 +3221,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 	}
 
 	// send the command to construct a new building
-	verb_log_dbg("AI %d builds %s at %d,%d", player_number(), best_building->desc->name().c_str(),
-	             proposed_coords.x, proposed_coords.y);
+	verb_log_dbg_time(game().get_gametime(), "AI %d builds %s at %d,%d", player_number(),
+	                  best_building->desc->name().c_str(), proposed_coords.x, proposed_coords.y);
 	game().send_player_build(player_number(), proposed_coords, best_building->id);
 	blocked_fields.add(proposed_coords, game().get_gametime() + Duration(2 * 60 * 1000));
 
@@ -6932,17 +6932,20 @@ bool DefaultAI::check_supply(const BuildingObserver& bo) {
 	for (const Widelands::DescriptionIndex& temp_input : bo.inputs) {
 		for (const Widelands::DescriptionIndex& bidx : wares.at(temp_input).producers) {
 			BuildingObserver& temp_building = get_building_observer(bidx);
-			verb_log_dbg("Checking producer %s of ware %s for building %s.", temp_building.name,
-			             tribe_->get_ware_descr(temp_input)->name().c_str(), bo.name);
+			verb_log_dbg_time(game().get_gametime(),
+			                  "Checking producer %s of ware %s for building %s.", temp_building.name,
+			                  tribe_->get_ware_descr(temp_input)->name().c_str(), bo.name);
 			if (temp_building.cnt_built != 0 && temp_building.current_stats > 10) {
 				++supplied;
 				break;
 			}
 		}
 	}
-	verb_log_dbg("Found supplies for %d of %d input wares for Building %s",
-	             static_cast<unsigned int>(supplied), static_cast<unsigned int>(bo.inputs.size()),
-	             bo.name);
+	verb_log_dbg_time(game().get_gametime(),
+	                  "Found supplies for %d of %d input wares for Building %s",
+	                  static_cast<unsigned int>(supplied),
+	                  static_cast<unsigned int>(bo.inputs.size()),
+	                  bo.name);
 
 	return supplied == bo.inputs.size();
 }
