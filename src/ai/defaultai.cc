@@ -4784,9 +4784,9 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 	    gametime - site.bo->last_dismantle_time >
 	       Duration(static_cast<uint32_t>(
 	          (std::abs(management_data.get_military_number_at(169)) / 5 + 1) * 60 * 1000)) &&
-
 	    site.bo->current_stats > site.site->get_statistics_percent() &&  // underperformer
-	    (game().get_gametime() - site.unoccupied_till) > Duration(10 * 60 * 1000)) {
+	    (game().get_gametime() - site.unoccupied_till) > Duration(10 * 60 * 1000) &&
+	    !site.bo->is(BuildingAttribute::kShipyard)) {
 
 		site.bo->last_dismantle_time = game().get_gametime();
 
