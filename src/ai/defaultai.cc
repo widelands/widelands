@@ -4458,7 +4458,7 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 			considering_upgrade = false;
 		}
 		// if upgraded building is part of basic economy we allow earlier upgrade
-		if (en_bo.cnt_built < static_cast<int32_t>(en_bo.basic_amount)) {
+		if (en_bo.cnt_built < en_bo.basic_amount) {
 			considering_upgrade = true;
 		}
 	}
@@ -5258,7 +5258,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		}
 		const uint16_t min_roads_count =
 		   40 + std::abs(management_data.get_military_number_at(33)) / 2;
-		if (static_cast<int>(roads.size()) < min_roads_count * (1 + bo.total_count())) {
+		if (roads.size() < min_roads_count * (1 + bo.total_count())) {
 			return BuildingNecessity::kForbidden;
 		}
 		bo.primary_priority +=
@@ -5653,7 +5653,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			assert(bo.cnt_target > 1 && bo.cnt_target < 1000);
 
 			// allow them always if basic economy not established and building is a basic one
-			if (bo.total_count() < static_cast<int32_t>(bo.basic_amount)) {
+			if (bo.total_count() < bo.basic_amount) {
 				return BuildingNecessity::kNeeded;
 			}
 
@@ -6146,7 +6146,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			}
 			bo.primary_priority = 0;
 			if (num_ports > 0) {
-				bo.primary_priority += std::abs(management_data.get_military_number_at(150) * 3 / num_ports);
+				bo.primary_priority += std::abs(management_data.get_military_number_at(150)) * 3 / num_ports;
 			}
 			if (spots_ < kSpotsTooLittle) {
 				bo.primary_priority += std::abs(management_data.get_military_number_at(151) * 3);

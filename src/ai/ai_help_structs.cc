@@ -344,7 +344,7 @@ EconomyObserver::EconomyObserver(Widelands::Economy& e)
    : economy(e), fields_block_last_time(Time(0)) {
 }
 
-int32_t BuildingObserver::total_count() const {
+uint32_t BuildingObserver::total_count() const {
 	return cnt_built + cnt_under_construction;
 }
 
