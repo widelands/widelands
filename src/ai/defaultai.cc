@@ -6138,7 +6138,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			return BuildingNecessity::kForbidden;
 		}
 		if (bo.is(BuildingAttribute::kShipyard)) {
-			if ((num_ports < 3 ? bo.total_count() > num_ports : bo.total_count() > num_ports / 2 ||
+			if ((num_ports < 3 ? bo.total_count() > num_ports : bo.total_count() > num_ports / 2) ||
 			    (!basic_economy_established &&
 			     site_needed_for_economy == BasicEconomyBuildingStatus::kDiscouraged) ||
 			    !map_allows_seafaring_) {
