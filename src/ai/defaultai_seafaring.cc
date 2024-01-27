@@ -125,29 +125,24 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	player_ = game().get_player(player_number());
 	ports_count = 0;
 	ports_finished_count = 0;
-	shipyards_count = 0;
 	expeditions_in_prep = 0;
 	expeditions_ready = 0;
 	idle_shipyard_stocked = false;
 
 	// goes over productionsites and gets status of shipyards
-	for (const ProductionSiteObserver& ps_obs : productionsites) {
-		if (ps_obs.bo->is(BuildingAttribute::kShipyard)) {
-			++shipyards_count;
-
-			// In very rare situation, we might have non-seafaring map but there is a shipyard
-			if (!map_allows_seafaring_) {
-				verb_log_dbg_time(
-				   game().get_gametime(),
-				   "  %1d: we have a shipyard in a non seafaring economy, dismantling it...\n",
-				   player_number());
-				if (!ps_obs.site->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
-					game().send_player_dismantle(*ps_obs.site, true);
-				} else {
-					game().send_player_bulldoze(*ps_obs.site);
-				}
-				return false;
+	for (const ProductionSiteObserver& sy_obs : shipyardsites) {
+		// In very rare situation, we might have non-seafaring map but there is a shipyard
+		if (!map_allows_seafaring_) {
+			verb_log_dbg_time(
+			   game().get_gametime(),
+			   "  %1d: we have a shipyard in a non seafaring economy, dismantling it...\n",
+			   player_number());
+			if (!sy_obs.site->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
+				game().send_player_dismantle(*sy_obs.site, true);
+			} else {
+				game().send_player_bulldoze(*sy_obs.site);
 			}
+			return false;
 		}
 	}
 
@@ -191,56 +186,53 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	 * - We want at least as many free ships as we have ports
 	 * - If ships utilization is too high
 	 */
-	const bool need_ship = ports_count > 0 && shipyards_count > 0 && basic_economy_established &&
+	const bool need_ship = ports_count > 0 && basic_economy_established &&
 	                       (!ship_free || persistent_data->ships_utilization > 5000 ||
 	                        tradeships_count < tradeships_target || warship_shortage);
 
 	// goes over productionsites finds shipyards and configures them
-	for (const ProductionSiteObserver& ps_obs : productionsites) {
-		if (ps_obs.site != nullptr && ps_obs.bo->is(BuildingAttribute::kShipyard)) {
-
-			// Verify whether only the correct fleet is reachable
-			bool dismantle = ps_obs.site->get_ship_fleet_interfaces().empty();  // wrong place?
-			// TODO(tothxa): When the AI is made to handle multiple fleets, this needs to be
-			//    changed to only dismantle if it has interfaces to more than one fleet.
-			if (Widelands::Serial fleet = get_main_fleet(); fleet != Widelands::kInvalidSerial) {
-				for (const Widelands::ShipFleetYardInterface* yard_if :
-				     ps_obs.site->get_ship_fleet_interfaces()) {
-					if (yard_if->get_fleet()->serial() != fleet) {
-						dismantle = true;
-						break;
-					}
+	for (const ProductionSiteObserver& sy_obs : shipyardsites) {
+		// Verify whether only the correct fleet is reachable
+		bool dismantle = sy_obs.site->get_ship_fleet_interfaces().empty();  // wrong place?
+		// TODO(tothxa): When the AI is made to handle multiple fleets, this needs to be
+		//    changed to only dismantle if it has interfaces to more than one fleet.
+		if (Widelands::Serial fleet = get_main_fleet(); fleet != Widelands::kInvalidSerial) {
+			for (const Widelands::ShipFleetYardInterface* yard_if :
+				 sy_obs.site->get_ship_fleet_interfaces()) {
+				if (yard_if->get_fleet()->serial() != fleet) {
+					dismantle = true;
+					break;
 				}
 			}
-			if (dismantle) {
-				verb_log_dbg_time(game().get_gametime(), "AI %d: Dismantling shipyard in second fleet",
-				                  player_number());
-				if (!ps_obs.site->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
-					game().send_player_dismantle(*ps_obs.site, true);
-				} else {
-					game().send_player_bulldoze(*ps_obs.site);
-				}
-				continue;
+		}
+		if (dismantle) {
+			verb_log_dbg_time(game().get_gametime(), "AI %d: Dismantling shipyard in second fleet",
+							  player_number());
+			if (!sy_obs.site->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
+				game().send_player_dismantle(*sy_obs.site, true);
+			} else {
+				game().send_player_bulldoze(*sy_obs.site);
 			}
+			continue;
+		}
 
-			// counting stocks
-			uint8_t stocked_wares = 0;
-			uint8_t max_wares = 0;
-			std::vector<Widelands::InputQueue*> const inputqueues = ps_obs.site->inputqueues();
-			for (Widelands::InputQueue* queue : inputqueues) {
-				if (queue->get_type() == Widelands::wwWARE) {
-					stocked_wares += queue->get_filled();
-					max_wares += queue->get_max_size();
-				}
+		// counting stocks
+		uint8_t stocked_wares = 0;
+		uint8_t max_wares = 0;
+		std::vector<Widelands::InputQueue*> const inputqueues = sy_obs.site->inputqueues();
+		for (Widelands::InputQueue* queue : inputqueues) {
+			if (queue->get_type() == Widelands::wwWARE) {
+				stocked_wares += queue->get_filled();
+				max_wares += queue->get_max_size();
 			}
-			if (stocked_wares == max_wares && ps_obs.site->is_stopped() &&
-			    ps_obs.site->can_start_working()) {
-				idle_shipyard_stocked = true;
-			}
+		}
+		if (stocked_wares == max_wares && sy_obs.site->is_stopped() &&
+			sy_obs.site->can_start_working()) {
+			idle_shipyard_stocked = true;
+		}
 
-			if (need_ship && idle_shipyard_stocked) {
-				game().send_player_start_stop_building(*ps_obs.site);
-			}
+		if (need_ship && idle_shipyard_stocked) {
+			game().send_player_start_stop_building(*sy_obs.site);
 		}
 	}
 

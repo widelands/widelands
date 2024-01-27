@@ -353,6 +353,7 @@ private:
 	std::deque<EconomyObserver*> economies;
 	std::deque<ProductionSiteObserver> productionsites;
 	std::deque<ProductionSiteObserver> mines_;
+	std::deque<ProductionSiteObserver> shipyardsites;
 	std::deque<MilitarySiteObserver> militarysites;
 	std::deque<WarehouseSiteObserver> warehousesites;
 	std::deque<PortSiteObserver> portsites;
@@ -460,7 +461,6 @@ private:
 	std::unordered_set<uint32_t> expedition_visited_spots;
 	uint16_t ports_count{0U};
 	uint16_t ports_finished_count{0U};
-	uint16_t shipyards_count{0U};
 	uint16_t expeditions_in_prep{0U};
 	uint16_t expeditions_ready{0U};
 	uint16_t expeditions_in_progress{0U};

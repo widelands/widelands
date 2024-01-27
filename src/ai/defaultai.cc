@@ -6730,8 +6730,17 @@ void DefaultAI::gain_building(Widelands::Building& b, const bool found_on_load) 
 			productionsites.back().unoccupied_till = gametime;
 			++productionsites.back().bo->unoccupied_count;
 			if (bo.is(BuildingAttribute::kShipyard)) {
-				marine_task_queue.push_back(kStopShipyard);
-				marine_task_queue.push_back(kReprioritize);
+				shipyardsites.emplace_back();
+				shipyardsites.back().site = &dynamic_cast<Widelands::ProductionSite&>(b);
+				shipyardsites.back().bo = &bo;
+				if (found_on_load && gametime > Time(5 * 60 * 1000)) {
+					shipyardsites.back().built_time = gametime - Duration(5 * 60 * 1000);
+				} else {
+					shipyardsites.back().built_time = gametime;
+				}
+				shipyardsites.back().unoccupied_till = gametime;
+				// marine_task_queue.push_back(kStopShipyard);
+				// marine_task_queue.push_back(kReprioritize);
 			}
 			if (bo.is(BuildingAttribute::kFisher)) {
 				++fishers_count_;
@@ -6850,6 +6859,16 @@ void DefaultAI::lose_building(const Widelands::Building& b) {
 					assert(bo.cnt_upgrade_pending == 0 || bo.cnt_upgrade_pending == 1);
 					productionsites.erase(i);
 					break;
+				}
+			}
+
+			if (bo.is(BuildingAttribute::kShipyard)) {
+				for (std::deque<ProductionSiteObserver>::iterator i = shipyardsites.begin();
+					 i != shipyardsites.end(); ++i) {
+					if (i->site == &b) {
+						shipyardsites.erase(i);
+						break;
+					}
 				}
 			}
 
