@@ -2918,8 +2918,6 @@ bool DefaultAI::construct_building(const Time& gametime) {
 							prio += (-3 + bf->water_nearby);
 						}
 					} else if (bo.is(BuildingAttribute::kShipyard)) {
-						// for now AI builds only one shipyard
-						assert(bo.total_count() == 0);
 						if (bf->open_water_nearby > 3 && map_allows_seafaring_ &&
 						    bf->shipyard_preferred == ExtendedBool::kTrue) {
 							prio += productionsites.size() * 5 +
@@ -6140,7 +6138,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			return BuildingNecessity::kForbidden;
 		}
 		if (bo.is(BuildingAttribute::kShipyard)) {
-			if (bo.total_count() > 0 ||
+			if (bo.total_count() > num_ports ||
 			    (!basic_economy_established &&
 			     site_needed_for_economy == BasicEconomyBuildingStatus::kDiscouraged) ||
 			    !map_allows_seafaring_) {
@@ -6148,7 +6146,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			}
 			bo.primary_priority = 0;
 			if (num_ports > 0) {
-				bo.primary_priority += std::abs(management_data.get_military_number_at(150) * 3);
+				bo.primary_priority += std::abs(management_data.get_military_number_at(150) * 3 / num_ports);
 			}
 			if (spots_ < kSpotsTooLittle) {
 				bo.primary_priority += std::abs(management_data.get_military_number_at(151) * 3);
