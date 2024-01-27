@@ -235,7 +235,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 
 	if (shipyard_stocked) {
 		game().send_player_fleet_targets(player_number(), shipyardsites.front().site->get_ship_fleet_interfaces().front()->serial(), tradeships_target);
-	} else if (shipyardsites.size() != 0 && !shipyard_stocked) {
+	} else if (!shipyardsites.empty() && !shipyard_stocked) {
 		game().send_player_fleet_targets(player_number(), shipyardsites.front().site->get_ship_fleet_interfaces().front()->serial(), 0);
 	}
 
