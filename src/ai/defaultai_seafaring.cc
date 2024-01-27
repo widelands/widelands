@@ -229,9 +229,15 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 			idle_shipyard_stocked = true;
 		}
 
-		if (need_ship && idle_shipyard_stocked) {
+/* 		if (need_ship && idle_shipyard_stocked) {
 			game().send_player_start_stop_building(*sy_obs.site);
-		}
+		} */
+	}
+
+	if (idle_shipyard_stocked) {
+		game().send_player_fleet_targets(player_number(), shipyardsites.front().site->get_ship_fleet_interfaces().front()->serial(), tradeships_target);
+	} else {
+		game().send_player_fleet_targets(player_number(), shipyardsites.front().site->get_ship_fleet_interfaces().front()->serial(), 0);
 	}
 
 	if (warship_shortage && free_ships_count > 1) {
@@ -434,7 +440,7 @@ bool DefaultAI::check_ships(const Time& gametime) {
 		}
 	}
 
-	// processing marine_task_queue
+/* 	// processing marine_task_queue
 	while (!marine_task_queue.empty()) {
 		for (const ProductionSiteObserver& observer : productionsites) {
 			if (observer.bo->is(BuildingAttribute::kShipyard)) {
@@ -451,7 +457,7 @@ bool DefaultAI::check_ships(const Time& gametime) {
 			}
 		}
 		marine_task_queue.pop_back();
-	}
+	} */
 
 	// If map_allows_seafaring_, we indicate that normal frequency check makes sense
 	return map_allows_seafaring_;
@@ -542,9 +548,7 @@ void DefaultAI::gain_ship(Widelands::Ship& ship, NewShip type) {
 	allships.back().ship = &ship;
 	allships.back().island_circ_direction = randomExploreDirection();
 
-	if (type == NewShip::kBuilt) {
-		marine_task_queue.push_back(kStopShipyard);
-	} else {
+	if (type != NewShip::kBuilt) {
 		if (ship.get_ship_type() == Widelands::ShipType::kTransport && ship.state_is_expedition()) {
 			if (expedition_ship_ == kNoShip) {
 				// OK, this ship is in expedition
