@@ -196,7 +196,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		//    changed to only dismantle if it has interfaces to more than one fleet.
 		if (Widelands::Serial fleet = get_main_fleet(); fleet != Widelands::kInvalidSerial) {
 			for (const Widelands::ShipFleetYardInterface* yard_if :
-				 sy_obs.site->get_ship_fleet_interfaces()) {
+			     sy_obs.site->get_ship_fleet_interfaces()) {
 				if (yard_if->get_fleet()->serial() != fleet) {
 					dismantle = true;
 					break;
@@ -204,8 +204,8 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 			}
 		}
 		if (dismantle) {
-			verb_log_dbg_time(game().get_gametime(), "AI %d: Dismantling shipyard in second fleet",
-							  player_number());
+			verb_log_dbg_time(
+			   game().get_gametime(), "AI %d: Dismantling shipyard in second fleet", player_number());
 			if (!sy_obs.site->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
 				game().send_player_dismantle(*sy_obs.site, true);
 			} else {
@@ -227,13 +227,16 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		if (stocked_wares == max_wares) {
 			shipyard_stocked = true;
 		}
-
 	}
 
 	if (shipyard_stocked) {
-		game().send_player_fleet_targets(player_number(), shipyardsites.front().site->get_ship_fleet_interfaces().front()->serial(), tradeships_target);
+		game().send_player_fleet_targets(
+		   player_number(), shipyardsites.front().site->get_ship_fleet_interfaces().front()->serial(),
+		   tradeships_target);
 	} else if (!shipyardsites.empty() && !shipyard_stocked) {
-		game().send_player_fleet_targets(player_number(), shipyardsites.front().site->get_ship_fleet_interfaces().front()->serial(), 0);
+		game().send_player_fleet_targets(
+		   player_number(), shipyardsites.front().site->get_ship_fleet_interfaces().front()->serial(),
+		   0);
 	}
 
 	if (warship_shortage && free_ships_count > 1) {
