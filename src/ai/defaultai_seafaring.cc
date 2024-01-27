@@ -196,7 +196,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		//    changed to only dismantle if it has interfaces to more than one fleet.
 		if (Widelands::Serial fleet = get_main_fleet(); fleet != Widelands::kInvalidSerial) {
 			for (const Widelands::ShipFleetYardInterface* yard_if :
-				 sy_obs.site->get_ship_fleet_interfaces()) {
+			     sy_obs.site->get_ship_fleet_interfaces()) {
 				if (yard_if->get_fleet()->serial() != fleet) {
 					dismantle = true;
 					break;
@@ -204,8 +204,8 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 			}
 		}
 		if (dismantle) {
-			verb_log_dbg_time(game().get_gametime(), "AI %d: Dismantling shipyard in second fleet",
-							  player_number());
+			verb_log_dbg_time(
+			   game().get_gametime(), "AI %d: Dismantling shipyard in second fleet", player_number());
 			if (!sy_obs.site->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
 				game().send_player_dismantle(*sy_obs.site, true);
 			} else {
@@ -228,15 +228,29 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 			shipyard_stocked = true;
 		}
 
-/* 		if (need_ship && shipyard_stocked) {
-			game().send_player_start_stop_building(*sy_obs.site);
-		} */
+		/* 		if (need_ship && shipyard_stocked) {
+		         game().send_player_start_stop_building(*sy_obs.site);
+		      } */
 	}
 
 	if (shipyard_stocked) {
-		game().send_player_fleet_targets(player_number(), shipyardsites.front().site->get_ship_fleet_interfaces().front()->serial(), tradeships_target);
+<<<<<<< HEAD
+		game().send_player_fleet_targets(
+		   player_number(), shipyardsites.front().site->get_ship_fleet_interfaces().front()->serial(),
+		   tradeships_target);
 	} else if (!shipyardsites.empty() && !shipyard_stocked) {
-		game().send_player_fleet_targets(player_number(), shipyardsites.front().site->get_ship_fleet_interfaces().front()->serial(), 0);
+		game().send_player_fleet_targets(
+		   player_number(), shipyardsites.front().site->get_ship_fleet_interfaces().front()->serial(),
+		   0);
+=======
+		game().send_player_fleet_targets(
+		   player_number(), shipyardsites.front().site->get_ship_fleet_interfaces().front()->serial(),
+		   tradeships_target);
+	} else if (shipyardsites.size() != 0 && !shipyard_stocked) {
+		game().send_player_fleet_targets(
+		   player_number(), shipyardsites.front().site->get_ship_fleet_interfaces().front()->serial(),
+		   0);
+>>>>>>> f30a264782c8a8634c9bd5c6f29aa9a15d47365e
 	}
 
 	if (warship_shortage && free_ships_count > 1) {
@@ -439,24 +453,24 @@ bool DefaultAI::check_ships(const Time& gametime) {
 		}
 	}
 
-/* 	// processing marine_task_queue
-	while (!marine_task_queue.empty()) {
-		for (const ProductionSiteObserver& observer : productionsites) {
-			if (observer.bo->is(BuildingAttribute::kShipyard)) {
-				if (marine_task_queue.back() == kStopShipyard && !observer.site->is_stopped()) {
-					game().send_player_start_stop_building(*observer.site);
-				}
-				if (marine_task_queue.back() == kReprioritize) {
-					for (uint32_t k = 0; k < observer.bo->inputs.size(); ++k) {
-						game().send_player_set_ware_priority(*observer.site, Widelands::wwWARE,
-						                                     observer.bo->inputs.at(k),
-						                                     Widelands::WarePriority::kHigh);
-					}
-				}
-			}
-		}
-		marine_task_queue.pop_back();
-	} */
+	/* 	// processing marine_task_queue
+	   while (!marine_task_queue.empty()) {
+	      for (const ProductionSiteObserver& observer : productionsites) {
+	         if (observer.bo->is(BuildingAttribute::kShipyard)) {
+	            if (marine_task_queue.back() == kStopShipyard && !observer.site->is_stopped()) {
+	               game().send_player_start_stop_building(*observer.site);
+	            }
+	            if (marine_task_queue.back() == kReprioritize) {
+	               for (uint32_t k = 0; k < observer.bo->inputs.size(); ++k) {
+	                  game().send_player_set_ware_priority(*observer.site, Widelands::wwWARE,
+	                                                       observer.bo->inputs.at(k),
+	                                                       Widelands::WarePriority::kHigh);
+	               }
+	            }
+	         }
+	      }
+	      marine_task_queue.pop_back();
+	   } */
 
 	// If map_allows_seafaring_, we indicate that normal frequency check makes sense
 	return map_allows_seafaring_;
