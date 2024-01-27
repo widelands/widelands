@@ -6864,7 +6864,7 @@ void DefaultAI::lose_building(const Widelands::Building& b) {
 
 			if (bo.is(BuildingAttribute::kShipyard)) {
 				for (std::deque<ProductionSiteObserver>::iterator i = shipyardsites.begin();
-					 i != shipyardsites.end(); ++i) {
+				     i != shipyardsites.end(); ++i) {
 					if (i->site == &b) {
 						shipyardsites.erase(i);
 						break;
