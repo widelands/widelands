@@ -446,20 +446,12 @@ bool DefaultAI::check_ships(const Time& gametime) {
 
 	// processing marine_task_queue
 	while (!marine_task_queue.empty()) {
-		if (marine_task_queue.back() == kStopShipyard) {
-			// iterate over all production sites searching for shipyard
-			for (const ProductionSiteObserver& observer : productionsites) {
-				if (observer.bo->is(BuildingAttribute::kShipyard)) {
-					if (!observer.site->is_stopped()) {
-						game().send_player_start_stop_building(*observer.site);
-					}
+		for (const ProductionSiteObserver& observer : productionsites) {
+			if (observer.bo->is(BuildingAttribute::kShipyard)) {
+				if (marine_task_queue.back() == kStopShipyard && !observer.site->is_stopped()) {
+					game().send_player_start_stop_building(*observer.site);
 				}
-			}
-		}
-
-		if (marine_task_queue.back() == kReprioritize) {
-			for (const ProductionSiteObserver& observer : productionsites) {
-				if (observer.bo->is(BuildingAttribute::kShipyard)) {
+				if (marine_task_queue.back() == kReprioritize) {
 					for (uint32_t k = 0; k < observer.bo->inputs.size(); ++k) {
 						game().send_player_set_ware_priority(*observer.site, Widelands::wwWARE,
 						                                     observer.bo->inputs.at(k),
@@ -468,7 +460,6 @@ bool DefaultAI::check_ships(const Time& gametime) {
 				}
 			}
 		}
-
 		marine_task_queue.pop_back();
 	}
 
