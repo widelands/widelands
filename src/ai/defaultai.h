@@ -466,7 +466,7 @@ private:
 	uint16_t expeditions_in_progress{0U};
 	uint16_t warships_count{0U};
 	uint16_t tradeships_count{0U};
-	bool idle_shipyard_stocked{false};
+	bool shipyard_stocked{false};
 	bool warship_needed{false};
 	bool tradeship_refit_needed{false};
 	std::deque<ShipObserver> allships;

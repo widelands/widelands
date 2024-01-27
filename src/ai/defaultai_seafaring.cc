@@ -127,7 +127,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	ports_finished_count = 0;
 	expeditions_in_prep = 0;
 	expeditions_ready = 0;
-	idle_shipyard_stocked = false;
+	shipyard_stocked = false;
 
 	// goes over productionsites and gets status of shipyards
 	for (const ProductionSiteObserver& sy_obs : shipyardsites) {
@@ -224,19 +224,18 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 				max_wares += queue->get_max_size();
 			}
 		}
-		if (stocked_wares == max_wares && sy_obs.site->is_stopped() &&
-			sy_obs.site->can_start_working()) {
-			idle_shipyard_stocked = true;
+		if (stocked_wares == max_wares) {
+			shipyard_stocked = true;
 		}
 
-/* 		if (need_ship && idle_shipyard_stocked) {
+/* 		if (need_ship && shipyard_stocked) {
 			game().send_player_start_stop_building(*sy_obs.site);
 		} */
 	}
 
-	if (idle_shipyard_stocked) {
+	if (shipyard_stocked) {
 		game().send_player_fleet_targets(player_number(), shipyardsites.front().site->get_ship_fleet_interfaces().front()->serial(), tradeships_target);
-	} else {
+	} else if (shipyardsites.size() != 0 && !shipyard_stocked) {
 		game().send_player_fleet_targets(player_number(), shipyardsites.front().site->get_ship_fleet_interfaces().front()->serial(), 0);
 	}
 
