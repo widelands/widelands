@@ -443,20 +443,20 @@ private:
 	void check_ship_in_expedition(ShipObserver&, const Time&);
 	void expedition_management(ShipObserver&);
 	void warship_management(ShipObserver&);
-	Widelands::Serial get_main_fleet();  // TODO(tothxa): until AI handles multiple fleets
+	Widelands::ShipFleet* get_main_fleet();  // TODO(tothxa): until AI handles multiple fleets
 	// considering trees, rocks, mines, water, fish for candidate for colonization (new port)
 	uint8_t spot_scoring(Widelands::Coords candidate_spot);
 	bool marine_main_decisions(const Time&);
 	bool check_ships(const Time&);
 	bool attempt_escape(ShipObserver& so);
 	// seafaring related variables
-	enum { kReprioritize, kStopShipyard, kStartShipyard };
+	enum { kReprioritize };  // TODO(tothxa): get rid of this
 	static Time last_seafaring_check_;
 	static bool map_allows_seafaring_;  // False by default, until Map::allows_seafaring() = true
 	bool potential_wrong_shipyard_ = false;
 	uint32_t expedition_ship_;
 	Duration expedition_max_duration;
-	std::vector<int16_t> marine_task_queue;
+	std::vector<int16_t> marine_task_queue;  // TODO(tothxa): get rid of this
 	std::unordered_set<uint32_t> expedition_visited_spots;
 	uint16_t ports_count{0U};
 	uint16_t ports_finished_count{0U};
@@ -466,7 +466,8 @@ private:
 	uint16_t expeditions_in_progress{0U};
 	uint16_t warships_count{0U};
 	uint16_t tradeships_count{0U};
-	bool idle_shipyard_stocked{false};
+	uint16_t fleet_target{1U};
+	bool start_expedition{false};
 	bool warship_needed{false};
 	bool tradeship_refit_needed{false};
 	std::deque<ShipObserver> allships;

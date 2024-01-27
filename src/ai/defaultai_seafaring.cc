@@ -128,7 +128,6 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	shipyards_count = 0;
 	expeditions_in_prep = 0;
 	expeditions_ready = 0;
-	idle_shipyard_stocked = false;
 
 	// goes over productionsites and gets status of shipyards
 	for (const ProductionSiteObserver& ps_obs : productionsites) {
@@ -173,40 +172,86 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		}
 	}
 
-	assert(tradeships_count >= expeditions_in_progress);
+	// Evaluate fleet, decide needs
 
-	const uint32_t min_tradeships = ports_count / kPortsPerTradeShip + expeditions_in_progress;
-	const uint32_t tradeships_target = ports_count + expeditions_in_progress;
-	const uint32_t warships_target = ports_finished_count * kWarshipsPerPort;
+	{  // scope for temporary variables
+		// TODO(tothxa): turn this and the shipyard and port handling parts into separate functions
 
-	// Free ships are the actively trading trade ships (the ones not in expedition)
-	const bool ship_free = tradeships_count > min_tradeships;
-	const bool warship_shortage =
-	   game().naval_warfare_allowed() && (warships_target > warships_count);
+		const bool tradeship_surplus_needed =
+		   tradeships_count >= ports_count && persistent_data->ships_utilization > 5000;
 
-	const uint32_t free_ships_count = ship_free ? (tradeships_count - min_tradeships) : 0;
+		const uint32_t min_tradeships = (ports_count + 1) / kPortsPerTradeShip;
+		const uint32_t tradeships_target = tradeship_surplus_needed ? tradeships_count + 1 : ports_count;
 
-	/* Now we decide whether we have enough ships or need to build another:
-	 * - We always need at least one ship in transport mode
-	 * - We want at least as many free ships as we have ports
-	 * - If ships utilization is too high
-	 */
-	const bool need_ship = ports_count > 0 && shipyards_count > 0 && basic_economy_established &&
-	                       (!ship_free || persistent_data->ships_utilization > 5000 ||
-	                        tradeships_count < tradeships_target || warship_shortage);
+		const bool ship_free = tradeships_count > min_tradeships;
+		const bool ships_full = tradeships_count >= tradeships_target;
 
-	// goes over productionsites finds shipyards and configures them
+		const uint32_t warships_target = ports_finished_count * kWarshipsPerPort;
+		const bool warship_shortage =
+		   game().naval_warfare_allowed() && (warships_target > warships_count);
+
+		const bool consider_expedition = ports_count > 0 && expeditions_in_progress == 0 &&
+		   expeditions_in_prep == 0 && !persistent_data->no_more_expeditions &&
+		   basic_economy_established;
+
+		// Help the AI get out of small starting islands
+		const bool prioritise_expedition = ports_count < 2;
+
+		// Set this AI's global variables
+
+		// Make sure we get a free ship for an expedition or a warship
+		fleet_target = std::max(tradeships_target, min_tradeships + 1);
+
+		if (ship_free) {
+			tradeship_refit_needed = false;
+			if (prioritise_expedition) {
+				start_expedition = consider_expedition;
+
+				const uint32_t free_ships_count = ship_free ? (tradeships_count - min_tradeships) : 0;
+
+				// We also need to keep a ship ready for previously ordered expeditions
+				const bool allow_warship =
+				   (!start_expedition && (expeditions_in_prep + expeditions_ready) == 0) ||
+				   free_ships_count > 1;
+
+				warship_needed = allow_warship && warship_shortage;
+			} else {
+				warship_needed = warship_shortage;
+				start_expedition = !warship_needed && consider_expedition && ships_full;
+			}
+		} else {  // no free ships
+			start_expedition = false;
+			warship_needed = false;
+			tradeship_refit_needed = (tradeships_count < min_tradeships) && (warships_count > 0);
+		}
+
+		if (tradeship_refit_needed) {
+			// This shouldn't happen... except when a new port is built from land
+			verb_log_dbg_time(gametime,
+			                  "AI %d backfit needed: %u ports, %" PRIuS
+			                  " ships total: %u expeditions, %u tradeships, %u warships",
+			                  player_number(), ports_count, allships.size(), expeditions_in_progress,
+			                  tradeships_count, warships_count);
+		}
+	}  // end of scope of temporary variables
+
+	Widelands::ShipFleet* fleet = get_main_fleet();
+
+	bool update_ships_target = fleet != nullptr && fleet->get_ships_target() != fleet_target;
+
+	/***** Handle Shipyards: set target / start / stop / dismantle *****/
+
 	for (const ProductionSiteObserver& ps_obs : productionsites) {
 		if (ps_obs.site != nullptr && ps_obs.bo->is(BuildingAttribute::kShipyard)) {
 
 			// Verify whether only the correct fleet is reachable
-			bool dismantle = ps_obs.site->get_ship_fleet_interfaces().empty();  // wrong place?
+			auto yard_interfaces = ps_obs.site->get_ship_fleet_interfaces();
+			bool dismantle = yard_interfaces.empty();  // wrong place?
 			// TODO(tothxa): When the AI is made to handle multiple fleets, this needs to be
 			//    changed to only dismantle if it has interfaces to more than one fleet.
-			if (Widelands::Serial fleet = get_main_fleet(); fleet != Widelands::kInvalidSerial) {
-				for (const Widelands::ShipFleetYardInterface* yard_if :
-				     ps_obs.site->get_ship_fleet_interfaces()) {
-					if (yard_if->get_fleet()->serial() != fleet) {
+			if (fleet != nullptr) {
+				for (const Widelands::ShipFleetYardInterface* yard_if : yard_interfaces) {
+					if (yard_if->get_fleet()->serial() != fleet->serial()) {
 						dismantle = true;
 						break;
 					}
@@ -223,51 +268,63 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 				continue;
 			}
 
-			// counting stocks
-			uint8_t stocked_wares = 0;
-			uint8_t max_wares = 0;
-			std::vector<Widelands::InputQueue*> const inputqueues = ps_obs.site->inputqueues();
-			for (Widelands::InputQueue* queue : inputqueues) {
-				if (queue->get_type() == Widelands::wwWARE) {
-					stocked_wares += queue->get_filled();
-					max_wares += queue->get_max_size();
-				}
-			}
-			if (stocked_wares == max_wares && ps_obs.site->is_stopped() &&
-			    ps_obs.site->can_start_working()) {
-				idle_shipyard_stocked = true;
+			if (update_ships_target) {
+				verb_log_dbg_time(game().get_gametime(), "AI %d: setting ships target to %u",
+				                  player_number(), fleet_target);
+				game().send_player_fleet_targets(
+				   player_number(), yard_interfaces.front()->serial(), fleet_target);
+				update_ships_target = false;
 			}
 
-			if (need_ship && idle_shipyard_stocked) {
-				game().send_player_start_stop_building(*ps_obs.site);
+			const bool stopped = ps_obs.site->is_stopped();
+
+			if (basic_economy_established) {
+				// checking stocks
+				bool shipyard_stocked = true;
+				std::vector<Widelands::InputQueue*> const inputqueues = ps_obs.site->inputqueues();
+				for (Widelands::InputQueue* queue : inputqueues) {
+					if (queue->get_type() == Widelands::wwWARE) {
+						if (!stopped &&
+						    // TODO(tothxa): define operator!= for Widelands::WarePriority
+						    !(ps_obs.site->get_priority(Widelands::wwWARE, queue->get_index()) ==
+						       Widelands::WarePriority::kHigh)) {
+							game().send_player_set_ware_priority(*ps_obs.site, Widelands::wwWARE,
+							   queue->get_index(), Widelands::WarePriority::kHigh);
+						}
+						if (!stopped && queue->get_max_fill() < queue->get_max_size()) {
+							game().send_player_set_input_max_fill(*ps_obs.site, queue->get_index(),
+							   Widelands::wwWARE, queue->get_max_size());
+							shipyard_stocked = false;
+						} else if (queue->get_missing() > (stopped ? 0 : queue->get_max_size() / 3)) {
+							shipyard_stocked = false;
+						}
+					}
+				}
+				if (shipyard_stocked && stopped && ps_obs.site->can_start_working()) {
+					verb_log_dbg_time(game().get_gametime(), "AI %d: Starting shipyard.", player_number());
+					game().send_player_start_stop_building(*ps_obs.site);
+				} else if (!shipyard_stocked && !stopped) {
+					verb_log_dbg_time(game().get_gametime(), "AI %d: Stopping shipyard with poor supply.",
+					                  player_number());
+					game().send_player_start_stop_building(*ps_obs.site);
+				}
+			} else {  // basic economy not established
+				verb_log_warn_time(game().get_gametime(), "AI %d: Shipyard found in weak economy!",
+				                  player_number());
+				// give back all wares and stop
+				for (uint32_t k = 0; k < ps_obs.bo->inputs.size(); ++k) {
+					game().send_player_set_input_max_fill(
+					   *ps_obs.site, ps_obs.bo->inputs.at(k), Widelands::wwWARE, 0);
+				}
+				if (!stopped) {
+					game().send_player_start_stop_building(*ps_obs.site);
+				}
 			}
 		}
 	}
 
-	if (warship_shortage && free_ships_count > 1) {
-		warship_needed = true;
-	}
-	if (!ship_free && warships_count > 0) {
-		// This shouldn't happen...
-		verb_log_dbg_time(gametime,
-		                  "AI %d backfit needed: %u ports, %" PRIuS
-		                  " ships total: %u expeditions, %u tradeships, %u warships",
-		                  player_number(), ports_count, allships.size(), expeditions_in_progress,
-		                  tradeships_count, warships_count);
-		tradeship_refit_needed = true;
-	}
+	/***** Handle Ports: start expedition and set garrison *****/
 
-	// starting an expedition? if yes, find a port and order it to start an expedition
-	bool start_expedition = false;
-	if (ports_count > 0 && expeditions_in_progress == 0 && expeditions_in_prep == 0 &&
-	    !persistent_data->no_more_expeditions && (ports_count < 2 ? ship_free : !need_ship) &&
-	    basic_economy_established) {
-		start_expedition = true;
-	}
-
-	Widelands::Serial fleet = get_main_fleet();
-
-	// handle ports: start expedition and set garrison
 	for (PortSiteObserver& p_obs : portsites) {
 		if (p_obs.site == nullptr) {
 			// Race condition?
@@ -275,9 +332,9 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 			continue;
 		}
 
-		if (fleet != Widelands::kInvalidSerial && p_obs.site->get_portdock() != nullptr &&
+		if (fleet != nullptr && p_obs.site->get_portdock() != nullptr &&
 		    p_obs.site->get_portdock()->get_fleet() != nullptr &&
-		    p_obs.site->get_portdock()->get_fleet()->serial() != fleet) {
+		    p_obs.site->get_portdock()->get_fleet()->serial() != fleet->serial()) {
 			// Only allow one fleet for now.
 			// TODO(tothxa): v1.3: Make the AI handle multiple fleets.
 			// TODO(tothxa): Immediate: When evaluating portspaces for building additional ports,
@@ -309,6 +366,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		}
 		// Warships assign themselves
 	}
+
 	return true;
 }
 
@@ -325,7 +383,7 @@ bool DefaultAI::check_ships(const Time& gametime) {
 	tradeships_count = 0;
 
 	if (!allships.empty()) {
-		Widelands::Serial fleet = get_main_fleet();
+		Widelands::ShipFleet* fleet = get_main_fleet();
 
 		// iterating over ships and doing what is needed
 		for (ShipObserver& so : allships) {
@@ -337,8 +395,8 @@ bool DefaultAI::check_ships(const Time& gametime) {
 
 			// Sink if not in right fleet.
 			// TODO(tothxa): Make the AI handle multiple fleets. Then this can be removed.
-			if (fleet != Widelands::kInvalidSerial && so.ship->get_fleet() != nullptr &&
-			    so.ship->get_fleet()->serial() != fleet) {
+			if (fleet != nullptr && so.ship->get_fleet() != nullptr &&
+			    so.ship->get_fleet()->serial() != fleet->serial()) {
 				verb_log_dbg_time(game().get_gametime(), "AI %d: Sinking ship %s in second fleet",
 				                  player_number(), so.ship->get_shipname().c_str());
 				game().send_player_sink_ship(*so.ship);
@@ -381,6 +439,8 @@ bool DefaultAI::check_ships(const Time& gametime) {
 				// - no_more_expeditions_
 				check_ship_in_expedition(so, gametime);
 				++expeditions_in_progress;
+				assert(tradeships_count > 0);
+				--tradeships_count;
 
 				// We are not in expedition mode (or perhaps building a colonisation port)
 				// so resetting start time
@@ -446,17 +506,6 @@ bool DefaultAI::check_ships(const Time& gametime) {
 
 	// processing marine_task_queue
 	while (!marine_task_queue.empty()) {
-		if (marine_task_queue.back() == kStopShipyard) {
-			// iterate over all production sites searching for shipyard
-			for (const ProductionSiteObserver& observer : productionsites) {
-				if (observer.bo->is(BuildingAttribute::kShipyard)) {
-					if (!observer.site->is_stopped()) {
-						game().send_player_start_stop_building(*observer.site);
-					}
-				}
-			}
-		}
-
 		if (marine_task_queue.back() == kReprioritize) {
 			for (const ProductionSiteObserver& observer : productionsites) {
 				if (observer.bo->is(BuildingAttribute::kShipyard)) {
@@ -561,9 +610,7 @@ void DefaultAI::gain_ship(Widelands::Ship& ship, NewShip type) {
 	allships.back().ship = &ship;
 	allships.back().island_circ_direction = randomExploreDirection();
 
-	if (type == NewShip::kBuilt) {
-		marine_task_queue.push_back(kStopShipyard);
-	} else {
+	if (type != NewShip::kBuilt) {
 		if (ship.get_ship_type() == Widelands::ShipType::kTransport && ship.state_is_expedition()) {
 			if (expedition_ship_ == kNoShip) {
 				// OK, this ship is in expedition
@@ -851,12 +898,11 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 
 // We need to fetch this fresh all the time unfortunately, because fleets seem to come and go as
 // new ones are created for each new ship and port, then merged with the old ones.
-Widelands::Serial DefaultAI::get_main_fleet() {
+Widelands::ShipFleet* DefaultAI::get_main_fleet() {
 	if (portsites.empty() || portsites.front().site == nullptr ||
-	    portsites.front().site->get_portdock() == nullptr ||
-	    portsites.front().site->get_portdock()->get_fleet() == nullptr) {
-		return Widelands::kInvalidSerial;
+	    portsites.front().site->get_portdock() == nullptr) {
+		return nullptr;
 	}
-	return portsites.front().site->get_portdock()->get_fleet()->serial();
+	return portsites.front().site->get_portdock()->get_fleet();
 }
 }  // namespace AI
