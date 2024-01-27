@@ -451,13 +451,11 @@ private:
 	bool check_ships(const Time&);
 	bool attempt_escape(ShipObserver& so);
 	// seafaring related variables
-	// enum { kReprioritize, kStopShipyard, kStartShipyard };
 	static Time last_seafaring_check_;
 	static bool map_allows_seafaring_;  // False by default, until Map::allows_seafaring() = true
 	bool potential_wrong_shipyard_ = false;
 	uint32_t expedition_ship_;
 	Duration expedition_max_duration;
-	// std::vector<int16_t> marine_task_queue;
 	std::unordered_set<uint32_t> expedition_visited_spots;
 	uint16_t ports_count{0U};
 	uint16_t ports_finished_count{0U};

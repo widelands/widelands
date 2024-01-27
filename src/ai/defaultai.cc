@@ -6739,8 +6739,6 @@ void DefaultAI::gain_building(Widelands::Building& b, const bool found_on_load) 
 					shipyardsites.back().built_time = gametime;
 				}
 				shipyardsites.back().unoccupied_till = gametime;
-				// marine_task_queue.push_back(kStopShipyard);
-				// marine_task_queue.push_back(kReprioritize);
 			}
 			if (bo.is(BuildingAttribute::kFisher)) {
 				++fishers_count_;

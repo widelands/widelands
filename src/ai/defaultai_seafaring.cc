@@ -228,9 +228,6 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 			shipyard_stocked = true;
 		}
 
-/* 		if (need_ship && shipyard_stocked) {
-			game().send_player_start_stop_building(*sy_obs.site);
-		} */
 	}
 
 	if (shipyard_stocked) {
@@ -438,25 +435,6 @@ bool DefaultAI::check_ships(const Time& gametime) {
 			}
 		}
 	}
-
-/* 	// processing marine_task_queue
-	while (!marine_task_queue.empty()) {
-		for (const ProductionSiteObserver& observer : productionsites) {
-			if (observer.bo->is(BuildingAttribute::kShipyard)) {
-				if (marine_task_queue.back() == kStopShipyard && !observer.site->is_stopped()) {
-					game().send_player_start_stop_building(*observer.site);
-				}
-				if (marine_task_queue.back() == kReprioritize) {
-					for (uint32_t k = 0; k < observer.bo->inputs.size(); ++k) {
-						game().send_player_set_ware_priority(*observer.site, Widelands::wwWARE,
-						                                     observer.bo->inputs.at(k),
-						                                     Widelands::WarePriority::kHigh);
-					}
-				}
-			}
-		}
-		marine_task_queue.pop_back();
-	} */
 
 	// If map_allows_seafaring_, we indicate that normal frequency check makes sense
 	return map_allows_seafaring_;
