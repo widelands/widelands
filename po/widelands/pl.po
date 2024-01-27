@@ -316,7 +316,7 @@ msgstr "Esc"
 #: ../../src/wlapplication_options.cc:1034
 msgctxt "editor"
 msgid "Tools"
-msgstr ""
+msgstr "Narzędzia"
 
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
@@ -627,7 +627,7 @@ msgstr "Widelands nie mogło załadować pliku \"%s\". Format pliku wygląda na 
 
 #: ../../src/editor/editorinteractive.cc:611
 msgid "Exit Editor Confirmation"
-msgstr ""
+msgstr "Potwierdzenie wyjścia z edytora"
 
 #: ../../src/editor/editorinteractive.cc:611
 msgid "Unsaved Map"
@@ -1712,11 +1712,11 @@ msgstr "Wielkość narzędzia"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:51
 msgid "Size:"
-msgstr ""
+msgstr "Rozmiar:"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:64
 msgid "Gaps:"
-msgstr ""
+msgstr "Odstępy:"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:67
 msgid "Radius of the active tool"
@@ -7657,43 +7657,43 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:759
 msgid "Go to Ship"
-msgstr ""
+msgstr "Idź do statku"
 
 #: ../../src/wlapplication_options.cc:764
 msgid "Watch Ship"
-msgstr ""
+msgstr "Obserwuj statek"
 
 #: ../../src/wlapplication_options.cc:769
 msgid "Open Ship Window"
-msgstr ""
+msgstr "Otwórz okno statku"
 
 #: ../../src/wlapplication_options.cc:774
 msgid "Open Ship Window And Go to Ship"
-msgstr ""
+msgstr "Otwórz okno statku i idź do statku"
 
 #: ../../src/wlapplication_options.cc:779
 msgid "Show All Ships"
-msgstr ""
+msgstr "Pokaż wszystkie statki"
 
 #: ../../src/wlapplication_options.cc:784
 msgid "Show Idle Ships"
-msgstr ""
+msgstr "Pokaż bezczynne statki"
 
 #: ../../src/wlapplication_options.cc:789
 msgid "Show Transport Ships"
-msgstr ""
+msgstr "Pokaż statki transportowe"
 
 #: ../../src/wlapplication_options.cc:794
 msgid "Show Waiting Expeditions"
-msgstr ""
+msgstr "Pokaż oczekujące ekspedycje"
 
 #: ../../src/wlapplication_options.cc:799
 msgid "Show Scouting Expeditions"
-msgstr ""
+msgstr "Pokaż ekspedycje zwiadowcze"
 
 #: ../../src/wlapplication_options.cc:804
 msgid "Show Expeditions with Port Spaces"
-msgstr ""
+msgstr "Pokaż ekspedycje z miejscami na port"
 
 #: ../../src/wlapplication_options.cc:809
 msgid "Toggle Quick Navigation"
@@ -7730,119 +7730,119 @@ msgstr "Opuść grę"
 #: ../../src/wlapplication_options.cc:891
 msgctxt "hotkey"
 msgid "Arrow keys"
-msgstr ""
+msgstr "Klawisze strzałek"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:893
 msgid "Move the map"
-msgstr ""
+msgstr "Przesuń mapę"
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../src/wlapplication_options.cc:895
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
-msgstr ""
+msgstr "Ctrl + Klawisze strzałek"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:897
 msgid "Move the map fast"
-msgstr ""
+msgstr "Szybko przesuń mapę"
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../src/wlapplication_options.cc:899
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
-msgstr ""
+msgstr "Shift + Klawisze strzałek"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:901
 msgid "Move the map slowly"
-msgstr ""
+msgstr "Powoli przesuń mapę"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:913
 msgid "Remember current location"
-msgstr ""
+msgstr "Zapamiętaj aktualną pozycję"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:916
 msgid "Go to previously remembered location"
-msgstr ""
+msgstr "Przejdź do poprzedniej zapamiętanej pozycji"
 
 #. * TRANSLATORS: Separator for a list of hotkeys
 #: ../../src/wlapplication_options.cc:965
 #, c-format
 msgctxt "hotkey"
 msgid "%1$s / %2$s"
-msgstr ""
+msgstr "%1$s / %2$s"
 
 #: ../../src/wlapplication_options.cc:983
 #: ../../src/wlapplication_options.cc:1024
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Skróty klawiszowe"
 
 #. * TRANSLATORS: Section heading in "Controls" help
 #: ../../src/wlapplication_options.cc:994
 msgid "Message Window"
-msgstr ""
+msgstr "Okno wiadomości"
 
 #. * TRANSLATORS: Section heading in "Controls" help
 #: ../../src/wlapplication_options.cc:999
 msgid "Ship Statistics"
-msgstr ""
+msgstr "Statystyki statków"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:1038
 msgid "Change tool size"
-msgstr ""
+msgstr "Zmień rozmiar narzędzia"
 
 #: ../../src/wlapplication_options.cc:1039
 msgid "Change tool gap"
-msgstr ""
+msgstr "Zmień odstęp narzędzia"
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../src/wlapplication_options.cc:1044
 msgctxt "hotkey"
 msgid "Click"
-msgstr ""
+msgstr "Kliknięcie"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:1046
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
-msgstr ""
+msgstr "Umieść nowe elementy na mapie lub zwiększ liczbę elementów o wartość wybraną przez opcję \"Zmniejsz/zwiększ wartość\""
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../src/wlapplication_options.cc:1050
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "Shift + kliknięcie"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:1052
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
-msgstr ""
+msgstr "Usuń elementy z mapy lub zmniejsz liczbę elementów o wartość wybraną przez opcję \"Zmniejsz/zwiększ wartość\""
 
 #. * TRANSLATORS: This is an access key combination.
 #: ../../src/wlapplication_options.cc:1055
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr ""
+msgstr "Ctrl + kliknięcie"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:1057
 msgid "Set map elements to the value selected by ‘Set Value’"
-msgstr ""
+msgstr "Ustaw elementy mapy na wartość wybraną przez opcję \"Ustaw wartość\""
 
 #. * TRANSLATORS: prefix for message window shortcuts in keyboard options
 #: ../../src/wlapplication_options.cc:1161
 #, c-format
 msgctxt "hotkey"
 msgid "Messages: %s"
-msgstr ""
+msgstr "Wiadomości: %s"
 
 #. * TRANSLATORS: prefix for seafaring statistics window shortcuts in keyboard
 #. options
@@ -7850,7 +7850,7 @@ msgstr ""
 #, c-format
 msgctxt "hotkey"
 msgid "Seafaring: %s"
-msgstr ""
+msgstr "Żeglarstwo: %s"
 
 #: ../../src/wlapplication_options.cc:1359
 msgctxt "hotkey"
@@ -8145,11 +8145,11 @@ msgstr "Czy na pewno chcesz przerwać trwającą ekspedycję?"
 
 #: ../../src/wui/actionconfirm.cc:459
 msgid "Do you really want to give up and become a spectator?"
-msgstr ""
+msgstr "Czy na pewno chcesz się poddać i zostać obserwatorem?"
 
 #: ../../src/wui/actionconfirm.cc:459
 msgid "Resign?"
-msgstr ""
+msgstr "Zrezygnować?"
 
 #: ../../src/wui/attack_window.cc:46
 msgid "Attack"
@@ -8343,12 +8343,12 @@ msgstr "Zatrzymaj"
 #. * TRANSLATORS: Infinite Production toggle button for production sites.
 #: ../../src/wui/buildingwindow.cc:297
 msgid "Stop producing indefinitely"
-msgstr ""
+msgstr "Przestań produkować w nieskończoność"
 
 #. * TRANSLATORS: Infinite Production toggle button for production sites.
 #: ../../src/wui/buildingwindow.cc:299
 msgid "Produce indefinitely regardless of the economy’s needs"
-msgstr ""
+msgstr "Produkuj w nieskończoność, niezależnie od potrzeb gospodarki"
 
 #: ../../src/wui/buildingwindow.cc:323
 #, c-format
@@ -8629,11 +8629,11 @@ msgstr "Zniszcz drogę wodną"
 
 #: ../../src/wui/fieldaction.cc:522
 msgid "Configure this ocean’s ship fleet"
-msgstr ""
+msgstr "Skonfiguruj flotę statków na tym oceanie"
 
 #: ../../src/wui/fieldaction.cc:533
 msgid "Configure this ocean’s ferry fleet"
-msgstr ""
+msgstr "Skonfiguruj flotę promów na tym oceanie"
 
 #: ../../src/wui/fieldaction.cc:540
 msgid "Watch field in a separate window"
@@ -8641,11 +8641,11 @@ msgstr "Obserwuj miejsce w oddzielnym oknie"
 
 #: ../../src/wui/fieldaction.cc:545
 msgid "Pinned note"
-msgstr ""
+msgstr "Przypięta notatka"
 
 #: ../../src/wui/fieldaction.cc:550
 msgid "Show debug window"
-msgstr ""
+msgstr "Pokaż okno debugowania"
 
 #: ../../src/wui/fieldaction.cc:558 ../../src/wui/watchwindow.cc:85
 msgid "Watch"
@@ -8665,7 +8665,7 @@ msgstr "Anuluj budowę drogi"
 
 #: ../../src/wui/fieldaction.cc:696
 msgid "Go to road"
-msgstr ""
+msgstr "Idź do drogi"
 
 #: ../../src/wui/fieldaction.cc:704
 msgid "Cancel road and start building waterway"
@@ -8681,7 +8681,7 @@ msgstr "Anuluj drogę wodną"
 
 #: ../../src/wui/fieldaction.cc:723
 msgid "Go to waterway"
-msgstr ""
+msgstr "Idź do drogi wodnej"
 
 #: ../../src/wui/fieldaction.cc:726
 msgid "Cancel waterway and start building road"
@@ -8693,11 +8693,11 @@ msgstr "Buduj drogi wodne"
 
 #: ../../src/wui/fleet_options_window.cc:94
 msgid "Ferry Fleet Options"
-msgstr ""
+msgstr "Opcje floty promów"
 
 #: ../../src/wui/fleet_options_window.cc:94
 msgid "Ship Fleet Options"
-msgstr ""
+msgstr "Opcje floty statków"
 
 #: ../../src/wui/fleet_options_window.cc:124
 msgid "Toggle infinite production"
@@ -8705,15 +8705,15 @@ msgstr ""
 
 #: ../../src/wui/fleet_options_window.cc:134
 msgid "Fleet Statistics"
-msgstr ""
+msgstr "Statystyki floty"
 
 #: ../../src/wui/fleet_options_window.cc:158
 msgid "Ports:"
-msgstr ""
+msgstr "Porty:"
 
 #: ../../src/wui/fleet_options_window.cc:159
 msgid "Ships:"
-msgstr ""
+msgstr "Statki:"
 
 #: ../../src/wui/fleet_options_window.cc:161
 msgid "Total waterways:"
@@ -8857,7 +8857,7 @@ msgstr "Zrezygnowano w %s"
 
 #: ../../src/wui/game_diplomacy_menu.cc:272
 msgid "Approve"
-msgstr ""
+msgstr "Zatwierdź"
 
 #: ../../src/wui/game_diplomacy_menu.cc:273
 msgid "Reject"
@@ -8869,11 +8869,11 @@ msgstr "Akceptuj"
 
 #: ../../src/wui/game_diplomacy_menu.cc:280
 msgid "Refuse"
-msgstr ""
+msgstr "Odrzuć"
 
 #: ../../src/wui/game_diplomacy_menu.cc:296
 msgid "Retract"
-msgstr ""
+msgstr "Wycofaj"
 
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
 #: ../../src/wui/game_exit_confirm_box.cc:27
@@ -9286,7 +9286,7 @@ msgstr "Widok Mapy"
 #. * TRANSLATORS: Title for the plugins menu button in the game
 #: ../../src/wui/interactive_base.cc:157
 msgid "Plugins"
-msgstr ""
+msgstr "Pluginy"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:346
@@ -9300,11 +9300,11 @@ msgstr "Pokaż Minimapę"
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:353
 msgid "Hide Quick Navigation"
-msgstr ""
+msgstr "Ukryj szybką nawigację"
 
 #: ../../src/wui/interactive_base.cc:354
 msgid "Show Quick Navigation"
-msgstr ""
+msgstr "Pokaż szybką nawigację"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:361
@@ -9324,12 +9324,12 @@ msgstr "Zoom –"
 #: ../../src/wui/interactive_base.cc:947
 #, c-format
 msgid "Road length: %1$u (%2$u)"
-msgstr ""
+msgstr "Długość drogi: %1$u (%2$u)"
 
 #: ../../src/wui/interactive_base.cc:949
 #, c-format
 msgid "Waterway length: %1$u (%2$u) / %3$u"
-msgstr ""
+msgstr "Długość drogi wodnej: %1$u (%2$u) / %3$u"
 
 #: ../../src/wui/interactive_base.cc:954
 #, c-format
@@ -9339,7 +9339,7 @@ msgstr "Długość drogi: %u"
 #: ../../src/wui/interactive_base.cc:957
 #, c-format
 msgid "Waterway length: %1$u / %2$u"
-msgstr ""
+msgstr "Długość drogi wodnej: %1$u / %2$u"
 
 #: ../../src/wui/interactive_base.cc:1887
 msgid "Failed saving screenshot!"
@@ -9465,7 +9465,7 @@ msgstr "%1$s (%2$s) (%3$s)"
 
 #: ../../src/wui/interactive_gamebase.cc:656
 msgid "Remaining construction costs:"
-msgstr ""
+msgstr "Pozostały koszt budowy:"
 
 #. * TRANSLATORS: Title for the statistics menu button in the game
 #: ../../src/wui/interactive_player.cc:187
@@ -9765,7 +9765,7 @@ msgstr "Przybliż"
 
 #: ../../src/wui/pinned_note.cc:76
 msgid "Change color…"
-msgstr ""
+msgstr "Zmień kolor..."
 
 #. * TRANSLATORS: day(s). Keep this as short as possible. Used in statistics.
 #: ../../src/wui/plot_area.cc:102
@@ -9879,39 +9879,39 @@ msgstr "(niedostępny)"
 
 #: ../../src/wui/quicknavigation.cc:161
 msgid "Quick Navigation"
-msgstr ""
+msgstr "Szybka nawigacja"
 
 #: ../../src/wui/quicknavigation.cc:174
 msgid "Go to previous location"
-msgstr ""
+msgstr "Przejdź do poprzedniej pozycji"
 
 #: ../../src/wui/quicknavigation.cc:186
 msgid "Go to next location"
-msgstr ""
+msgstr "Przejdź do następnej pozycji"
 
 #: ../../src/wui/quicknavigation.cc:197
 msgid "Add a new landmark"
-msgstr ""
+msgstr "Dodaj nowy punkt orientacyjny"
 
 #: ../../src/wui/quicknavigation.cc:240 ../../src/wui/quicknavigation.cc:243
 msgid "Go to this landmark"
-msgstr ""
+msgstr "Idź do tego punktu orientacyjnego"
 
 #: ../../src/wui/quicknavigation.cc:251
 msgid "View this landmark in a watch window"
-msgstr ""
+msgstr "Pokaż ten punkt orientacyjny w oknie podglądu"
 
 #: ../../src/wui/quicknavigation.cc:265
 msgid "Unset this landmark"
-msgstr ""
+msgstr "Wyłącz ten punkt orientacyjny"
 
 #: ../../src/wui/quicknavigation.cc:275 ../../src/wui/quicknavigation.cc:278
 msgid "Set this landmark to the current map view location"
-msgstr ""
+msgstr "Ustaw ten punkt orientacyjny na bieżącą pozycję widoku mapy"
 
 #: ../../src/wui/quicknavigation.cc:286
 msgid "Remove this landmark"
-msgstr ""
+msgstr "Usuń ten punkt orientacyjny"
 
 #: ../../src/wui/savegamedeleter.cc:52
 msgid "Confirm Deleting File"
@@ -10177,7 +10177,7 @@ msgstr "Otwórz okno wybranego statku"
 #: ../../src/wui/seafaring_statistics_menu.cc:154
 #, c-format
 msgid "(You can use %s to go to the selected ship and open its window.)"
-msgstr ""
+msgstr "(Możesz użyć %s aby przejść do wybranego statku i otworzyć jego okno.)"
 
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:169
@@ -10296,7 +10296,7 @@ msgstr "Idź do celu"
 #: ../../src/wui/shipwindow.cc:243
 #, c-format
 msgid "Go to destination (%s)"
-msgstr ""
+msgstr "Idź do celu (%s)"
 
 #: ../../src/wui/soldier_statistics_menu.cc:89
 #: ../../src/wui/soldier_statistics_menu.cc:182

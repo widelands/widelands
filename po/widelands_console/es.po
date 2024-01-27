@@ -30,18 +30,18 @@ msgstr "Uso:"
 
 #: ../../src/wlapplication_messages.cc:51
 msgid "widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr ""
+msgstr "widelands <option0>=<value0> ... <optionN>=<valueN>"
 
 #: ../../src/wlapplication_messages.cc:52
 msgid "widelands <save.wgf>/<replay.wry>"
-msgstr ""
+msgstr "widelands <save.wgf>/<replay.wry>"
 
 #: ../../src/wlapplication_messages.cc:54
 #: ../../src/wlapplication_messages.cc:56
 #: ../../src/wlapplication_messages.cc:61
 #: ../../src/wlapplication_messages.cc:203
 msgid "DIRNAME"
-msgstr ""
+msgstr "DIRNAME"
 
 #: ../../src/wlapplication_messages.cc:54
 msgid "Options:"
@@ -70,7 +70,7 @@ msgstr "Utilice la configuración regional especificada."
 #. monospaced terminals
 #: ../../src/wlapplication_messages.cc:66
 msgid "[de_DE|sv_SE|...]"
-msgstr ""
+msgstr "[de_DE|sv_SE|...]"
 
 #: ../../src/wlapplication_messages.cc:68
 msgid ""
@@ -84,7 +84,7 @@ msgstr "No comprobar si el directorio de datos a utilizar es compatible con esta
 #: ../../src/wlapplication_messages.cc:80
 #: ../../src/wlapplication_messages.cc:81
 msgid "FILENAME"
-msgstr ""
+msgstr "FILENAME"
 
 #: ../../src/wlapplication_messages.cc:73
 #, c-format
@@ -188,7 +188,7 @@ msgstr "Utilizar `n` archivos para realizar guardados automáticos continuos."
 #: ../../src/wlapplication_messages.cc:199
 #: ../../src/wlapplication_messages.cc:206
 msgid "[true*|false]"
-msgstr ""
+msgstr "[true*|false]"
 
 #: ../../src/wlapplication_messages.cc:119
 msgid ""
@@ -216,7 +216,7 @@ msgstr "No guarde archivos como archivos zip binarios."
 #: ../../src/wlapplication_messages.cc:201
 #: ../../src/wlapplication_messages.cc:213
 msgid "[true|false*]"
-msgstr ""
+msgstr "[true|false*]"
 
 #: ../../src/wlapplication_messages.cc:127
 msgid "Whether to save the history of sent chat messages to a file."
@@ -292,7 +292,7 @@ msgstr "Redes:"
 
 #: ../../src/wlapplication_messages.cc:162
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 #: ../../src/wlapplication_messages.cc:163
 msgid "Connect to a different metaserver for internet gaming."
@@ -329,7 +329,7 @@ msgstr "La contraseña hash para inicios de sesión en línea."
 
 #: ../../src/wlapplication_messages.cc:174
 msgid "IP"
-msgstr ""
+msgstr "IP"
 
 #: ../../src/wlapplication_messages.cc:175
 msgid "Connect to a different server address from the add-ons manager."
@@ -448,7 +448,7 @@ msgstr "Muestre esta ayuda con todas las opciones de configuración disponibles.
 
 #: ../../src/wlapplication_messages.cc:231
 msgid "<save.wgf>/<replay.wry>"
-msgstr ""
+msgstr "<save.wgf>/<replay.wry>"
 
 #: ../../src/wlapplication_messages.cc:232
 msgid ""

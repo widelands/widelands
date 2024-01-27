@@ -6,6 +6,7 @@
 # Madkat Here, 2020
 # Gontzal Pujana Onaindia <juchuf@gmail.com>, 2021
 # Stephan Lutz <stephan-lutz@gmx.de>, 2021
+# Juan Miguel Bernal González, 2024
 # 
 msgid ""
 msgstr ""
@@ -13,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2021\n"
+"Last-Translator: Juan Miguel Bernal González, 2024\n"
 "Language-Team: Spanish (https://app.transifex.com/widelands/teams/35159/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,28 +32,28 @@ msgstr "Zonas de Construcción"
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:31
 msgid "We will want to place buildings so that we can produce wares."
-msgstr ""
+msgstr "Querremos colocar edificios para que podamos producir productos."
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:32
 msgid "So, let’s find out where we have space for them."
-msgstr ""
+msgstr "Entonces, averigüemos dónde tenemos espacio para ellos."
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:33
 msgid "Click on the ‘Show / Hide’ menu."
-msgstr ""
+msgstr "Haga click en el menú 'Mostrar / Ocultar'."
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:44
 msgid "Select ‘Show Building Spaces’."
-msgstr ""
+msgstr "Seleccione \"Mostrar Espacios de Construcción\"."
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:54
 msgid "Now we can see where it is possible to place buildings and flags."
-msgstr ""
+msgstr "Ahora podemos ver dónde es posible colocar edificios y banderas."
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:55
 #: ../../data/scripting/training_wheels/welcome.lua:26
 msgid "Click ‘OK’ to continue."
-msgstr ""
+msgstr "Haga click en \"Aceptar\" para continuar."
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/flags.lua:60
@@ -66,6 +67,8 @@ msgstr "Banderas"
 #: ../../data/scripting/training_wheels/logs.lua:122
 msgid "Your carriers can transport your wares faster if they share the load."
 msgstr ""
+"Sus transportistas pueden llevar sus mercancías más rápido si comparten la "
+"carga."
 
 #: ../../data/scripting/training_wheels/flags.lua:64
 msgid "Click on the flag symbol."
@@ -77,11 +80,11 @@ msgstr "Haz clic en el botón de la bandera."
 
 #: ../../data/scripting/training_wheels/flags.lua:86
 msgid "Now check if you can place even more flags on your roads."
-msgstr ""
+msgstr "Ahora comprueba si puedes colocar aún más banderas en tus carreteras."
 
 #: ../../data/scripting/training_wheels/flags.lua:87
 msgid "Click ‘OK’ when you’re done."
-msgstr ""
+msgstr "Haga click en \"Aceptar\" cuando haya terminado."
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:142
@@ -98,7 +101,7 @@ msgstr "Objetivos"
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:158
 msgid "Logs & Roads"
-msgstr ""
+msgstr "Troncos y Caminos"
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:163
@@ -137,6 +140,8 @@ msgid ""
 "If you hold down the ‘Ctrl’ key while clicking on the second flag, this will"
 " also place more flags on your road if possible."
 msgstr ""
+"Si mantienes presionada la tecla \"Ctrl\" mientras haces click en la segunda"
+" bandera, esto también colocará más banderas en tu carretera si es posible."
 
 #: ../../data/scripting/training_wheels/logs.lua:125
 #: ../../data/scripting/training_wheels/logs.lua:175
@@ -163,11 +168,15 @@ msgstr "Caminos"
 #: ../../data/scripting/training_wheels/rocks.lua:144
 msgid "Click on the flag in front of the building to start placing a road."
 msgstr ""
+"Haga click en la bandera frente al edificio para comenzar a colocar una "
+"carretera."
 
 #: ../../data/scripting/training_wheels/logs.lua:152
 msgid ""
 "Click on the ‘Build road’ button, then and click on the indicated flag."
 msgstr ""
+"Haga click en el botón 'Construir carretera', luego haga clic en la bandera "
+"indicada."
 
 #: ../../data/scripting/training_wheels/logs.lua:164
 #: ../../data/scripting/training_wheels/rocks.lua:166
@@ -183,6 +192,8 @@ msgid ""
 "Well done! We will soon start producing logs, which we will need for "
 "building more buildings."
 msgstr ""
+"¡Bien hecho! Pronto empezaremos a producir troncos, que necesitaremos para "
+"construir más edificios."
 
 #: ../../data/scripting/training_wheels/objectives.lua:38
 msgid "Open the Objectives window"
@@ -210,6 +221,8 @@ msgid ""
 "You can open and close this window by clicking on the ‘Objectives’ button in"
 " the toolbar on the bottom of the screen."
 msgstr ""
+"Puede abrir y cerrar esta ventana haciendo click en el botón \"Objetivos\" "
+"de la barra de herramientas en la parte inferior de la pantalla."
 
 #: ../../data/scripting/training_wheels/objectives.lua:49
 msgid ""
@@ -223,6 +236,8 @@ msgstr ""
 msgid ""
 "While you do that, check the markers to make the road as flat as possible:"
 msgstr ""
+"Mientras haces eso, revisa los marcadores para que el camino sea lo más "
+"plano posible:"
 
 #: ../../data/scripting/training_wheels/rocks.lua:123
 msgid ""
@@ -266,18 +281,25 @@ msgid ""
 "the map to guide your road until you reach the flag in front of the target "
 "building."
 msgstr ""
+"Haga click en el botón \"Construir carretera\". Luego, haz click en los "
+"marcadores de colores en el mapa para guiar tu camino hasta llegar a la "
+"bandera frente al edificio objetivo."
 
 #: ../../data/scripting/training_wheels/rocks.lua:168
 msgid ""
 "…then click the colored markers on the map to guide your road until you "
 "reach the flag in front of the target building."
 msgstr ""
+"…luego haz click en los marcadores de colores en el mapa para guiar tu "
+"camino hasta llegar a la bandera frente al edificio objetivo."
 
 #: ../../data/scripting/training_wheels/rocks.lua:179
 msgid ""
 "Well done! We will soon start producing granite, which we will need for "
 "building more buildings."
 msgstr ""
+"¡Bien hecho! Pronto empezaremos a producir granito, que necesitaremos para "
+"construir más edificios."
 
 #: ../../data/scripting/training_wheels/welcome.lua:20
 #: ../../data/scripting/training_wheels/welcome.lua:24

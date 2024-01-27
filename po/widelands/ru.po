@@ -9285,7 +9285,7 @@ msgstr "Карта"
 #. * TRANSLATORS: Title for the plugins menu button in the game
 #: ../../src/wui/interactive_base.cc:157
 msgid "Plugins"
-msgstr ""
+msgstr "Плагины"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:346
