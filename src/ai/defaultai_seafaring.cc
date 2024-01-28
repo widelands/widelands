@@ -172,6 +172,9 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		const uint32_t tradeships_target =
 		   tradeship_surplus_needed ? tradeships_count + 1 : ports_count;
 
+		// Make sure we get a free ship for an expedition or a warship
+		const uint32_t new_fleet_target = std::max(tradeships_target, min_tradeships + 1);
+
 		const bool ship_free = tradeships_count > min_tradeships;
 		const bool ships_full = tradeships_count >= tradeships_target;
 
@@ -188,9 +191,14 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		const bool prioritise_expedition = ports_count < 2;
 
 		// Set this AI's global variables
-
-		// Make sure we get a free ship for an expedition or a warship
-		fleet_target = std::max(tradeships_target, min_tradeships + 1);
+		if (tradeship_surplus_needed) {
+			// Don't increase fleet_target for heavy utilization until old value is reached
+			if (tradeships_count >= fleet_target) {
+				fleet_target = new_fleet_target;
+			}
+		} else {
+			fleet_target = new_fleet_target;
+		}
 
 		if (ship_free) {
 			tradeship_refit_needed = false;
