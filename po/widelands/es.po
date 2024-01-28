@@ -1839,7 +1839,7 @@ msgstr "Copiar enlace al portapapeles"
 #, c-format
 msgctxt "definitionterm"
 msgid "%s:"
-msgstr ""
+msgstr "%s:"
 
 #. * TRANSLATORS: Part of tooltip entry for characters in illegal filenames.
 #. replaces the
@@ -1931,7 +1931,7 @@ msgstr "Condición Inicial"
 
 #: ../../src/logic/addons.cc:72
 msgid "UI Plugin"
-msgstr ""
+msgstr "UI Plugin"
 
 #: ../../src/logic/addons.cc:112
 #, c-format
@@ -3615,7 +3615,7 @@ msgstr "%1% (%2%)"
 
 #: ../../src/scripting/lua_ui.cc:1136 ../../src/wui/interactive_base.cc:311
 msgid "Plugin Error"
-msgstr ""
+msgstr "Error en Plugin"
 
 #: ../../src/scripting/lua_ui.cc:1137 ../../src/wui/interactive_base.cc:312
 #, c-format
@@ -3875,7 +3875,7 @@ msgstr[2] "%d campos"
 #, c-format
 msgctxt "spinbox_change"
 msgid "%i %%"
-msgstr ""
+msgstr "%i %%"
 
 #. * TRANSLATORS: "Increase/Decrease the value by <n>"
 #. You may want to treat this as "by <n>", depending on how you
@@ -3884,7 +3884,7 @@ msgstr ""
 #, c-format
 msgctxt "spinbox_change"
 msgid "%d"
-msgstr ""
+msgstr "%d"
 
 #: ../../src/ui_basic/table.cc:157
 msgid "Click to reverse sorting"
@@ -4936,7 +4936,7 @@ msgstr "Escribir Comentario"
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:212
 msgctxt "markup"
 msgid "B"
-msgstr ""
+msgstr "B"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:212
 msgid "Bold"
@@ -4946,7 +4946,7 @@ msgstr "Negrita"
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:216
 msgctxt "markup"
 msgid "I"
-msgstr ""
+msgstr "I"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:216
 msgid "Italic"
@@ -4960,13 +4960,13 @@ msgstr "Subrayado"
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:220
 msgctxt "markup"
 msgid "_"
-msgstr ""
+msgstr "_"
 
 #. * TRANSLATORS: Short for Shadow text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:224
 msgctxt "markup"
 msgid "S"
-msgstr ""
+msgstr "S"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:224
 msgid "Shadow"
@@ -4976,11 +4976,11 @@ msgstr "Sombra"
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:230
 msgctxt "markup"
 msgid "C"
-msgstr ""
+msgstr "C"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:230
 msgid "Color…"
-msgstr ""
+msgstr "Color…"
 
 #. * TRANSLATORS: Short for Tiny text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:246
@@ -6303,12 +6303,12 @@ msgstr "Ninguno"
 #. * TRANSLATORS: Used as: "Invert scroll direction: Vertical"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:207
 msgid "Vertical"
-msgstr ""
+msgstr "Vertical"
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Horizontal"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:209
 msgid "Horizontal"
-msgstr ""
+msgstr "Horizontal"
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Both"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:211
@@ -6331,92 +6331,92 @@ msgstr "Conflicto en Configuración de Desplazamiento"
 msgid ""
 "‘%1$s%2$s’ conflicts with ‘%3$s’. Please select a different combination or "
 "change the conflicting setting first."
-msgstr ""
+msgstr "'%1$s%2$s' entra en conflicto con '%3$s'. Seleccione una combinación diferente o cambie primero la configuración conflictiva."
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:371
 msgid "Reset Scrolling"
-msgstr ""
+msgstr "Restablecer Desplazamiento"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:372
 msgid ""
 "Reset scroll settings to the defaults recommended for a standard single "
 "wheel mouse"
-msgstr ""
+msgstr "Restablezca la configuración de desplazamiento a los valores predeterminados recomendados para un ratón estándar de una sola rueda"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:381
 msgid "Set for Touchpad"
-msgstr ""
+msgstr "Establecer para panel táctil"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:382
 msgid ""
 "Sets ‘Zoom Map’ and ‘Scroll Map’ to the recommended settings for a touchpad "
 "or other pointing device that can scroll horizontally as well as vertically."
-msgstr ""
+msgstr "Establece el 'Zoom del Mapa' y el 'Desplazamiento en el Mapa' en las configuraciones recomendadas para un panel táctil u otro dispositivo señalador que pueda desplazarse tanto horizontal como verticalmente."
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:392
 msgid "Apply Scrolling"
-msgstr ""
+msgstr "Aplicar Desplazamiento"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:393
 msgid "Apply scroll settings"
-msgstr ""
+msgstr "Aplicar Configuraciones de Desplazamiento"
 
 #. * TRANSLATORS: Name of a function for the scroll wheel.
 #. Used as e.g.: "Zoom Map: Ctrl+Any scroll"
 #. The ':' will be added by another format string.
 #: ../../src/ui_fsmenu/mousewheel_options.cc:424
 msgid "Zoom Map"
-msgstr ""
+msgstr "Zoom del Mapa"
 
 #. * TRANSLATORS: Name of a function for the scroll wheel.
 #. Used as e.g.: "Scroll Map: Ctrl+Any scroll"
 #. The ':' will be added by another format string.
 #: ../../src/ui_fsmenu/mousewheel_options.cc:432
 msgid "Scroll Map"
-msgstr ""
+msgstr "Desplazamiento en el Mapa"
 
 #. * TRANSLATORS: Name of a function for the scroll wheel.
 #. Used as e.g.: "Change Game Speed: Ctrl+Any scroll"
 #. The ':' will be added by another format string.
 #: ../../src/ui_fsmenu/mousewheel_options.cc:441
 msgid "Change Game Speed"
-msgstr ""
+msgstr "Cambiar Velocidad del Juego"
 
 #. * TRANSLATORS: Name of a function for the scroll wheel.
 #. Used as e.g.: "Change Editor Toolsize: Ctrl+Any scroll"
 #. The ':' will be added by another format string.
 #: ../../src/ui_fsmenu/mousewheel_options.cc:449
 msgid "Change Editor Toolsize"
-msgstr ""
+msgstr "Cambiar el Tamaño de la Barra de Herramientas del Editor"
 
 #. * TRANSLATORS: Name of a function for the scroll wheel.
 #. Used as e.g.: "Change Editor Tool Gap: Ctrl+Any scroll"
 #. The ':' will be added by another format string.
 #: ../../src/ui_fsmenu/mousewheel_options.cc:457
 msgid "Change Editor Tool Gap"
-msgstr ""
+msgstr "Cambier Espacio entre Herramientas del Editor"
 
 #. * TRANSLATORS: Used as e.g. "Invert scroll direction for map zooming:
 #. Vertical"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:464
 msgid "Invert scroll direction for map zooming:"
-msgstr ""
+msgstr "Invertir la dirección de desplazamiento para hacer zoom en el mapa:"
 
 #. * TRANSLATORS: Used as e.g. "Invert scroll direction for tab switching:
 #. Vertical"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:469
 msgid "Invert scroll direction for tab switching:"
-msgstr ""
+msgstr "Invertir la dirección de desplazamiento para cambiar de pestaña:"
 
 #. * TRANSLATORS: Used as e.g. "Invert scroll direction for increase/decrease:
 #. Vertical"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:474
 msgid "Invert scroll direction for increase/decrease:"
-msgstr ""
+msgstr "Invertir la dirección de desplazamiento para aumentar/disminuir:"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:490
 msgid "Fix inverted horizontal scrolling"
-msgstr ""
+msgstr "Arreglar la inversion del desplazamiento horizontal"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:491
 msgid ""
