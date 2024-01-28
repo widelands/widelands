@@ -535,6 +535,26 @@ AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 	return a;
 }
 
+void NetAddons::download_map(const std::string& name, const std::string& save_as) {
+	check_string_validity(name);
+	init();
+	CrashGuard guard(*this);
+
+	std::string send = kCmdDownload;
+	send += ' ';
+	send += name;
+	send += '\n';
+	write_to_server(send);
+
+	const std::string checksum = read_line();
+	const int64_t length = math::to_long(read_line());
+	read_file(length, save_as);
+	check_checksum(save_as, checksum);
+
+	check_endofstream();
+	guard.ok();
+}
+
 void NetAddons::download_addon(const std::string& name,
                                const std::string& save_as,
                                const CallbackFn& progress) {

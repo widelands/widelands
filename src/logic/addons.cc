@@ -69,7 +69,7 @@ const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories = {
     AddOnCategoryInfo{"starting_condition", []() { return _("Starting Condition"); },
                       "tribes/buildings/warehouses/atlanteans/headquarters/menu.png", true, false}},
    {AddOnCategory::kTheme, AddOnCategoryInfo{"theme", []() { return _("Theme"); },
-                                             "images/wui/menus/main_menu.png", false}},
+                                             "images/wui/menus/main_menu.png", false, false}},
    {AddOnCategory::kUIPlugin,
     AddOnCategoryInfo{"ui_plugin", []() { return _("UI Plugin"); }, "images/plugin.png", false, false}}};
 

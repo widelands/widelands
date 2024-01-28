@@ -1339,6 +1339,8 @@ bool AddOnsCtrl::matches_filter_maps(std::shared_ptr<AddOns::AddOnInfo> info) {
 }
 
 void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
+	server_name_.set_text(net().server_descname());
+
 	const uint32_t scrollpos_i =
 	   installed_addons_inner_wrapper_.get_scrollbar() != nullptr ?
          installed_addons_inner_wrapper_.get_scrollbar()->get_scrollpos() :
@@ -1423,7 +1425,8 @@ void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
 		if (0 < index++) {
 			maps_box_.add_space(kRowButtonSize);
 		}
-		MapRow* r = new MapRow(&maps_box_, this, a, g_fs->file_exists(kDownloadedMapsDir + FileSystem::file_separator() + a->map_file_name));
+		MapRow* r = new MapRow(&maps_box_, this, a, g_fs->file_exists(
+				kMapsDir + FileSystem::file_separator() + kDownloadedMapsDir + FileSystem::file_separator() + a->map_file_name));
 		maps_box_.add(r, UI::Box::Resizing::kFullSize);
 	}
 	tabs_.tabs()[2]->set_title(index == 0 ? _("Maps") : format(_("Maps (%u)"), index));
@@ -1744,6 +1747,49 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 		   UI::WLMessageBox::MBoxType::kOk);
 		m.run<UI::Panel::Returncodes>();
 	}
+}
+
+void AddOnsCtrl::install_map(std::shared_ptr<AddOns::AddOnInfo> remote) {
+	g_fs->ensure_directory_exists(kTempFileDir);
+	std::string temp_file = kTempFileDir + FileSystem::file_separator() + timestring() + ".addon." +
+	                       remote->internal_name + kTempFileExtension;
+	if (g_fs->file_exists(temp_file)) {
+		g_fs->fs_unlink(temp_file);
+	}
+
+	bool success = false;
+	try {
+		net().download_map(remote->internal_name, temp_file);
+		success = true;
+	} catch (const OperationCancelledByUserException&) {
+		log_info("install map %s cancelled by user", remote->internal_name.c_str());
+	} catch (const std::exception& e) {
+		log_err("install map %s: %s", remote->internal_name.c_str(), e.what());
+		UI::WLMessageBox m(
+		   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
+		   format(
+		      _("The map ‘%1$s’ could not be downloaded from the server.\n\nError Message:\n%2$s"),
+		      remote->internal_name, e.what()),
+		   UI::WLMessageBox::MBoxType::kOk);
+		m.run<UI::Panel::Returncodes>();
+	}
+
+	if (!success) {
+		g_fs->fs_unlink(temp_file);
+		return;
+	}
+
+	std::string new_path = kMapsDir + FileSystem::file_separator() + kDownloadedMapsDir;
+	g_fs->ensure_directory_exists(new_path);
+	new_path += FileSystem::file_separator();
+	new_path += remote->map_file_name;
+
+	if (g_fs->file_exists(new_path)) {
+		g_fs->fs_unlink(new_path);
+	}
+	g_fs->fs_rename(temp_file, new_path);
+
+	rebuild(true);
 }
 
 // TODO(Nordfriese): install_or_upgrade() should also (recursively) install the add-on's

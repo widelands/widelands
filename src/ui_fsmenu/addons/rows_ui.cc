@@ -39,10 +39,24 @@ inline std::string safe_richtext_message(std::string body) {
 }
 
 void uninstall(AddOnsCtrl* ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const bool local) {
+	const bool is_map = ends_with(info->internal_name, ".map");
+
 	if (!matches_keymod(SDL_GetModState(), KMOD_CTRL)) {
 		UI::WLMessageBox w(
 		   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Uninstall"),
+		   is_map ?
 		   safe_richtext_message(
+		      format(local ? _("Are you certain that you want to uninstall this map?\n\n"
+		                       "%1$s\n"
+		                       "by %2$s\n"
+		                       "%3$s\n\n"
+		                       "Note that this map can not be downloaded again from the server.") :
+                           _("Are you certain that you want to uninstall this map?\n\n"
+		                       "%1$s\n"
+		                       "by %2$s\n"
+		                       "%3$s"),
+		             info->descname(), info->author(), info->description()))
+		   : safe_richtext_message(
 		      format(local ? _("Are you certain that you want to uninstall this add-on?\n\n"
 		                       "%1$s\n"
 		                       "by %2$s\n"
@@ -62,6 +76,12 @@ void uninstall(AddOnsCtrl* ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const 
 		if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;
 		}
+	}
+
+	if (is_map) {
+		// Maps only have this one file and no translations currently
+		g_fs->fs_unlink(kMapsDir + FileSystem::file_separator() + kDownloadedMapsDir + FileSystem::file_separator() + info->map_file_name);
+		return ctrl->rebuild(true);
 	}
 
 	// Delete the add-on…
@@ -677,14 +697,10 @@ MapRow::MapRow(Panel* parent,
 		RemoteInteractionWindow m(*ctrl, info);
 		m.run<UI::Panel::Returncodes>();
 	});
-	uninstall_.sigclicked.connect([ctrl, this]() {
-		// NOCOM create new method for uninstalling
-		uninstall(ctrl, info_, false);
-	});
+	uninstall_.sigclicked.connect([ctrl, this]() { uninstall(ctrl, info_, !ctrl->is_remote(info_->internal_name)); });
 	install_.sigclicked.connect([ctrl, this]() {
 		// No need to confirm for maps
-		// NOCOM create new method for downloading
-		ctrl->install_or_upgrade(info_, false);
+		ctrl->install_map(info_);
 		ctrl->rebuild(true);
 	});
 #ifdef NDEBUG
