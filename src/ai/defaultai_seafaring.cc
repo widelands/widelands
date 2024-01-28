@@ -203,7 +203,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 			if (prioritise_expedition) {
 				start_expedition = consider_expedition;
 
-				const uint32_t free_ships_count = ship_free ? (tradeships_count - min_tradeships) : 0;
+				const uint32_t free_ships_count = tradeships_count - min_tradeships;
 
 				// We also need to keep a ship ready for previously ordered expeditions
 				const bool allow_warship =
