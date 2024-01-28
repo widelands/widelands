@@ -1550,11 +1550,14 @@ void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
 		if (0 < index++) {
 			maps_box_.add_space(kRowButtonSize);
 		}
-		MapRow* r =
-		   new MapRow(&maps_box_, this, a,
-		              g_fs->file_exists(kMapsDir + FileSystem::file_separator() + kDownloadedMapsDir +
-		                                FileSystem::file_separator() + a->map_file_name));
-		maps_box_.add(r, UI::Box::Resizing::kFullSize);
+
+		std::string map_file_path = kMapsDir;
+		map_file_path += FileSystem::file_separator();
+		map_file_path += kDownloadedMapsDir;
+		map_file_path += FileSystem::file_separator() + a->map_file_name;
+
+		MapRow* row = new MapRow(&maps_box_, this, a, g_fs->file_exists(map_file_path));
+		maps_box_.add(row, UI::Box::Resizing::kFullSize);
 	}
 	tabs_.tabs()[2]->set_title(index == 0 ? _("Maps") : format(_("Maps (%u)"), index));
 
