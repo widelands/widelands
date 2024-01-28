@@ -258,6 +258,11 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		if (fleet == nullptr) {
 			assert(ports_finished_count == 0);
 			Widelands::ShipFleet* yard_fleet = yard_interfaces.front()->get_fleet();
+
+			// Set target to avoid building too many ships before the port is ready, because
+			// the default is infinite ships. It may even turn out that we're building a
+			// fleet for a different ocean that will have to be sunk.
+			// TODO(tothxa): May need update when the AI is made to handle multiple fleets.
 			update_ships_target =
 			   yard_fleet != nullptr && yard_fleet->get_ships_target() != fleet_target;
 		}
@@ -297,8 +302,8 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 				verb_log_dbg_time(game().get_gametime(), "AI %d: Starting shipyard.", player_number());
 				game().send_player_start_stop_building(*sy_obs.site);
 			} else if (!stopped && (!shipyard_stocked || ports_count == 0)) {
-				verb_log_dbg_time(game().get_gametime(), "AI %d: Stopping shipyard with poor supply.",
-				                  player_number());
+				verb_log_dbg_time(game().get_gametime(), "AI %d: Stopping shipyard %s.", player_number(),
+				                  (ports_count == 0) ? "without port" : "with poor supply");
 				game().send_player_start_stop_building(*sy_obs.site);
 			}
 		} else {  // basic economy not established
