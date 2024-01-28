@@ -444,7 +444,7 @@ private:
 	void check_ship_in_expedition(ShipObserver&, const Time&);
 	void expedition_management(ShipObserver&);
 	void warship_management(ShipObserver&);
-	Widelands::Serial get_main_fleet();  // TODO(tothxa): until AI handles multiple fleets
+	Widelands::ShipFleet* get_main_fleet();  // TODO(tothxa): until AI handles multiple fleets
 	// considering trees, rocks, mines, water, fish for candidate for colonization (new port)
 	uint8_t spot_scoring(Widelands::Coords candidate_spot);
 	bool marine_main_decisions(const Time&);
@@ -464,7 +464,8 @@ private:
 	uint16_t expeditions_in_progress{0U};
 	uint16_t warships_count{0U};
 	uint16_t tradeships_count{0U};
-	bool shipyard_stocked{false};
+	uint16_t fleet_target{1U};
+	bool start_expedition{false};
 	bool warship_needed{false};
 	bool tradeship_refit_needed{false};
 	std::deque<ShipObserver> allships;
