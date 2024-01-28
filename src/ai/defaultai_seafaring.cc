@@ -177,7 +177,8 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		   tradeships_count >= ports_count && persistent_data->ships_utilization > 5000;
 
 		const uint32_t min_tradeships = (ports_count + 1) / kPortsPerTradeShip;
-		const uint32_t tradeships_target = tradeship_surplus_needed ? tradeships_count + 1 : ports_count;
+		const uint32_t tradeships_target =
+		   tradeship_surplus_needed ? tradeships_count + 1 : ports_count;
 
 		const bool ship_free = tradeships_count > min_tradeships;
 		const bool ships_full = tradeships_count >= tradeships_target;
@@ -186,9 +187,9 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		const bool warship_shortage =
 		   game().naval_warfare_allowed() && (warships_target > warships_count);
 
-		const bool consider_expedition = ports_count > 0 && expeditions_in_progress == 0 &&
-		   expeditions_in_prep == 0 && !persistent_data->no_more_expeditions &&
-		   basic_economy_established;
+		const bool consider_expedition =
+		   ports_count > 0 && expeditions_in_progress == 0 && expeditions_in_prep == 0 &&
+		   !persistent_data->no_more_expeditions && basic_economy_established;
 
 		// Help the AI get out of small starting islands
 		const bool prioritise_expedition = ports_count < 2;
@@ -253,8 +254,8 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 			}
 		}
 		if (dismantle) {
-			verb_log_dbg_time(game().get_gametime(), "AI %d: Dismantling shipyard in second fleet",
-			                  player_number());
+			verb_log_dbg_time(
+			   game().get_gametime(), "AI %d: Dismantling shipyard in second fleet", player_number());
 			if (!sy_obs.site->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
 				game().send_player_dismantle(*sy_obs.site, true);
 			} else {
@@ -279,15 +280,15 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 			std::vector<Widelands::InputQueue*> const inputqueues = sy_obs.site->inputqueues();
 			for (Widelands::InputQueue* queue : inputqueues) {
 				if (queue->get_type() == Widelands::wwWARE) {
-					if (!stopped &&
-					    sy_obs.site->get_priority(Widelands::wwWARE, queue->get_index()) !=
-					       Widelands::WarePriority::kHigh) {
+					if (!stopped && sy_obs.site->get_priority(Widelands::wwWARE, queue->get_index()) !=
+					                   Widelands::WarePriority::kHigh) {
 						game().send_player_set_ware_priority(*sy_obs.site, Widelands::wwWARE,
-						   queue->get_index(), Widelands::WarePriority::kHigh);
+						                                     queue->get_index(),
+						                                     Widelands::WarePriority::kHigh);
 					}
 					if (!stopped && queue->get_max_fill() < queue->get_max_size()) {
-						game().send_player_set_input_max_fill(*sy_obs.site, queue->get_index(),
-						   Widelands::wwWARE, queue->get_max_size());
+						game().send_player_set_input_max_fill(
+						   *sy_obs.site, queue->get_index(), Widelands::wwWARE, queue->get_max_size());
 						shipyard_stocked = false;
 					} else if (queue->get_missing() > (stopped ? 0 : queue->get_max_size() / 3)) {
 						shipyard_stocked = false;
@@ -303,8 +304,8 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 				game().send_player_start_stop_building(*sy_obs.site);
 			}
 		} else {  // basic economy not established
-			verb_log_warn_time(game().get_gametime(), "AI %d: Shipyard found in weak economy!",
-			                  player_number());
+			verb_log_warn_time(
+			   game().get_gametime(), "AI %d: Shipyard found in weak economy!", player_number());
 			// give back all wares and stop
 			for (uint32_t k = 0; k < sy_obs.bo->inputs.size(); ++k) {
 				game().send_player_set_input_max_fill(
