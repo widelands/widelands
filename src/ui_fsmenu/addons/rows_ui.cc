@@ -45,33 +45,33 @@ void uninstall(AddOnsCtrl* ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const 
 		UI::WLMessageBox w(
 		   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Uninstall"),
 		   is_map ?
-		   safe_richtext_message(
-		      format(local ? _("Are you certain that you want to uninstall this map?\n\n"
-		                       "%1$s\n"
-		                       "by %2$s\n"
-		                       "%3$s\n\n"
-		                       "Note that this map can not be downloaded again from the server.") :
-                           _("Are you certain that you want to uninstall this map?\n\n"
-		                       "%1$s\n"
-		                       "by %2$s\n"
-		                       "%3$s"),
-		             info->descname(), info->author(), info->description()))
-		   : safe_richtext_message(
-		      format(local ? _("Are you certain that you want to uninstall this add-on?\n\n"
-		                       "%1$s\n"
-		                       "by %2$s\n"
-		                       "Version %3$s\n"
-		                       "Category: %4$s\n"
-		                       "%5$s\n\n"
-		                       "Note that this add-on can not be downloaded again from the server.") :
-                           _("Are you certain that you want to uninstall this add-on?\n\n"
-		                       "%1$s\n"
-		                       "by %2$s\n"
-		                       "Version %3$s\n"
-		                       "Category: %4$s\n"
-		                       "%5$s"),
-		             info->descname(), info->author(), AddOns::version_to_string(info->version),
-		             AddOns::kAddOnCategories.at(info->category).descname(), info->description())),
+            safe_richtext_message(
+		         format(local ? _("Are you certain that you want to uninstall this map?\n\n"
+		                          "%1$s\n"
+		                          "by %2$s\n"
+		                          "%3$s\n\n"
+		                          "Note that this map can not be downloaded again from the server.") :
+                              _("Are you certain that you want to uninstall this map?\n\n"
+		                          "%1$s\n"
+		                          "by %2$s\n"
+		                          "%3$s"),
+		                info->descname(), info->author(), info->description())) :
+            safe_richtext_message(format(
+		         local ? _("Are you certain that you want to uninstall this add-on?\n\n"
+		                   "%1$s\n"
+		                   "by %2$s\n"
+		                   "Version %3$s\n"
+		                   "Category: %4$s\n"
+		                   "%5$s\n\n"
+		                   "Note that this add-on can not be downloaded again from the server.") :
+                       _("Are you certain that you want to uninstall this add-on?\n\n"
+		                   "%1$s\n"
+		                   "by %2$s\n"
+		                   "Version %3$s\n"
+		                   "Category: %4$s\n"
+		                   "%5$s"),
+		         info->descname(), info->author(), AddOns::version_to_string(info->version),
+		         AddOns::kAddOnCategories.at(info->category).descname(), info->description())),
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;
@@ -80,7 +80,8 @@ void uninstall(AddOnsCtrl* ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const 
 
 	if (is_map) {
 		// Maps only have this one file and no translations currently
-		g_fs->fs_unlink(kMapsDir + FileSystem::file_separator() + kDownloadedMapsDir + FileSystem::file_separator() + info->map_file_name);
+		g_fs->fs_unlink(kMapsDir + FileSystem::file_separator() + kDownloadedMapsDir +
+		                FileSystem::file_separator() + info->map_file_name);
 		return ctrl->rebuild(true);
 	}
 
@@ -134,28 +135,33 @@ std::string required_wl_version_and_sync_safety_string(std::shared_ptr<AddOns::A
 	return result;
 }
 
-std::string assemble_map_description_text(const std::string& descr, const std::string& hint, const std::string& comment) {
+std::string assemble_map_description_text(const std::string& descr,
+                                          const std::string& hint,
+                                          const std::string& comment) {
 	std::string result;
 
 	if (!descr.empty()) {
-		result += format("<vspace gap=%d><p>%s<br>%s</p>",
-			kRowButtonSpacing,
-			g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(_("Description:")),
-			g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(descr));
+		result += format(
+		   "<vspace gap=%d><p>%s<br>%s</p>", kRowButtonSpacing,
+		   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
+		      .as_font_tag(_("Description:")),
+		   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(descr));
 	}
 
 	if (!hint.empty()) {
-		result += format("<vspace gap=%d><p>%s<br>%s</p>",
-			kRowButtonSpacing,
-			g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(_("Hint:")),
-			g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(hint));
+		result += format(
+		   "<vspace gap=%d><p>%s<br>%s</p>", kRowButtonSpacing,
+		   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
+		      .as_font_tag(_("Hint:")),
+		   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(hint));
 	}
 
 	if (!comment.empty()) {
-		result += format("<vspace gap=%d><p>%s<br>%s</p>",
-			kRowButtonSpacing,
-			g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(_("Comment by uploader:")),
-			g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(comment));
+		result += format("<vspace gap=%d><p>%s<br>%s</p>", kRowButtonSpacing,
+		                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
+		                    .as_font_tag(_("Comment by uploader:")),
+		                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+		                    .as_font_tag(comment));
 	}
 
 	return result;
@@ -604,9 +610,9 @@ bool RemoteAddOnRow::upgradeable() const {
 }
 
 MapRow::MapRow(Panel* parent,
-		AddOnsCtrl* ctrl,
-		std::shared_ptr<AddOns::AddOnInfo> info,
-		bool installed)
+               AddOnsCtrl* ctrl,
+               std::shared_ptr<AddOns::AddOnInfo> info,
+               bool installed)
    : UI::Panel(parent,
                UI::PanelStyle::kFsMenu,
                format("map_row_%s", info->internal_name),
@@ -643,61 +649,61 @@ MapRow::MapRow(Panel* parent,
                UI::ButtonStyle::kFsMenuSecondary,
                "…",
                _("Comments and Votes")),
-     txt_(
+     txt_(this,
+          "description",
+          0,
+          0,
+          24,
+          24,
+          UI::PanelStyle::kFsMenu,
+          format("<rt><p>%s</p><p>%s%s</p><p>%s</p>%s</rt>",
+                 format(_("%1$s %2$s"),
+                        g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
+                           .as_font_tag(info->descname()),
+                        g_style_manager->font_style(UI::FontStyle::kItalic)
+                           .as_font_tag(format(_("(%s)"), info->internal_name))),
+                 g_style_manager->font_style(UI::FontStyle::kItalic)
+                    .as_font_tag(info->author() == info->upload_username ?
+                                    format(_("by %s"), info->author()) :
+                                    format(_("by %1$s (uploaded by %2$s)"),
+                                           info->author(),
+                                           info->upload_username)),
+                 required_wl_version_and_sync_safety_string(info),
+                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
+                    .as_font_tag(format(_("Size: %1$u×%2$u • Max Players: %3$u • %4$s"),
+                                        info->map_width,
+                                        info->map_height,
+                                        info->map_nr_players,
+                                        info->map_world_name.empty() ?
+                                           _("One World") :
+                                           i18n::translate(info->map_world_name))),
+                 assemble_map_description_text(
+                    info->description(), info->map_hint(), info->map_uploader_comment()))),
+     bottom_row_(
         this,
-        "description",
-        0,
-        0,
-        24,
-        24,
         UI::PanelStyle::kFsMenu,
+        "bottom_row",
+        UI::FontStyle::kFsTooltip,
+        0,
+        0,
+        0,
+        0,
         format(
-           "<rt><p>%s</p><p>%s%s</p><p>%s</p>%s</rt>",
-           format(
-              _("%1$s %2$s"),
-              g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
-                 .as_font_tag(info->descname()),
-              g_style_manager->font_style(UI::FontStyle::kItalic)
-                 .as_font_tag(format(_("(%s)"), info->internal_name))),
-           g_style_manager->font_style(UI::FontStyle::kItalic)
-              .as_font_tag(
-                 info->author() == info->upload_username ?
-                    format(_("by %s"), info->author()) :
-                    format(_("by %1$s (uploaded by %2$s)"), info->author(), info->upload_username)),
-           required_wl_version_and_sync_safety_string(info),
-           g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(format(
-					_("Size: %1$u×%2$u • Max Players: %3$u • %4$s"),
-					info->map_width,
-					info->map_height,
-					info->map_nr_players,
-					info->map_world_name.empty() ? _("One World") : i18n::translate(info->map_world_name)
-           )),
-           assemble_map_description_text(info->description(), info->map_hint(), info->map_uploader_comment())
-        )),
-     bottom_row_(this,
-                      UI::PanelStyle::kFsMenu,
-                      "bottom_row",
-                      UI::FontStyle::kFsTooltip,
-                      0,
-                      0,
-                      0,
-                      0,
-                      format(
-		        /** TRANSLATORS: Timestamp · Filesize · Download count · Average rating ·
-		           Number of comments */
-		        _("%1$s   %2$s   ⬇ %3$u   ★ %4$s   “” %5$u"),
-		        time_string(info->upload_timestamp),
-		        filesize_string(info->total_file_size),
-		        info->download_count,
-		        (info->number_of_votes() != 0u ? format_l("%.2f", info->average_rating()) : "–"),
-		        info->user_comments.size()),
-                      UI::Align::kLeft)
-{
+           /** TRANSLATORS: Timestamp · Filesize · Download count · Average rating ·
+              Number of comments */
+           _("%1$s   %2$s   ⬇ %3$u   ★ %4$s   “” %5$u"),
+           time_string(info->upload_timestamp),
+           filesize_string(info->total_file_size),
+           info->download_count,
+           (info->number_of_votes() != 0u ? format_l("%.2f", info->average_rating()) : "–"),
+           info->user_comments.size()),
+        UI::Align::kLeft) {
 	interact_.sigclicked.connect([ctrl, info]() {
 		RemoteInteractionWindow m(*ctrl, info);
 		m.run<UI::Panel::Returncodes>();
 	});
-	uninstall_.sigclicked.connect([ctrl, this]() { uninstall(ctrl, info_, !ctrl->is_remote(info_->internal_name)); });
+	uninstall_.sigclicked.connect(
+	   [ctrl, this]() { uninstall(ctrl, info_, !ctrl->is_remote(info_->internal_name)); });
 	install_.sigclicked.connect([ctrl, this]() {
 		// No need to confirm for maps
 		ctrl->install_map(info_);
@@ -714,21 +720,18 @@ MapRow::MapRow(Panel* parent,
 	}
 
 	bottom_row_.set_handle_mouse(true);
-	bottom_row_.set_tooltip(
-         format(
-	         "%s<br>%s<br>%s<br>%s",
-	         format(ngettext("Total size: %u byte", "Total size: %u bytes", info->total_file_size),
-	                info->total_file_size),
-	         format(
-	            ngettext("%u download", "%u downloads", info->download_count), info->download_count),
-	         (info->number_of_votes() != 0u ?
-                format_l(ngettext("Average rating: %1$.3f (%2$u vote)",
-	                               "Average rating: %1$.3f (%2$u votes)", info->number_of_votes()),
-	                      info->average_rating(), info->number_of_votes()) :
-                _("No votes yet")),
-	         format(ngettext("%u comment", "%u comments", info->user_comments.size()),
-	                info->user_comments.size())
-	                ));
+	bottom_row_.set_tooltip(format(
+	   "%s<br>%s<br>%s<br>%s",
+	   format(ngettext("Total size: %u byte", "Total size: %u bytes", info->total_file_size),
+	          info->total_file_size),
+	   format(ngettext("%u download", "%u downloads", info->download_count), info->download_count),
+	   (info->number_of_votes() != 0u ?
+          format_l(ngettext("Average rating: %1$.3f (%2$u vote)",
+	                         "Average rating: %1$.3f (%2$u votes)", info->number_of_votes()),
+	                info->average_rating(), info->number_of_votes()) :
+          _("No votes yet")),
+	   format(ngettext("%u comment", "%u comments", info->user_comments.size()),
+	          info->user_comments.size())));
 	set_can_focus(true);
 	layout();
 }
@@ -751,8 +754,10 @@ void MapRow::layout() {
 
 	bottom_row_.set_pos(Vector2i(0, 7 * kRowButtonSize - bottom_row_.get_h()));
 	interact_.set_pos(Vector2i(get_w() - kRowButtonSize, 6 * kRowButtonSize + kRowButtonSpacing));
-	uninstall_.set_pos(Vector2i(interact_.get_x() - kRowButtonSize - kRowButtonSpacing, interact_.get_y()));
-	install_.set_pos(Vector2i(uninstall_.get_x() - kRowButtonSize - kRowButtonSpacing, interact_.get_y()));
+	uninstall_.set_pos(
+	   Vector2i(interact_.get_x() - kRowButtonSize - kRowButtonSpacing, interact_.get_y()));
+	install_.set_pos(
+	   Vector2i(uninstall_.get_x() - kRowButtonSize - kRowButtonSpacing, interact_.get_y()));
 	txt_.set_pos(Vector2i(6 * kRowButtonSize + kRowButtonSpacing, 0));
 }
 

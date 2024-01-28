@@ -522,7 +522,9 @@ AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 
 		a.unlocalized_map_uploader_comment = read_line();
 		std::string localized_map_uploader_comment = read_line();
-		a.map_uploader_comment = [localized_map_uploader_comment]() { return localized_map_uploader_comment; };
+		a.map_uploader_comment = [localized_map_uploader_comment]() {
+			return localized_map_uploader_comment;
+		};
 
 		a.map_width = math::to_int(read_line());
 		a.map_height = math::to_int(read_line());

@@ -81,54 +81,53 @@ std::string time_string(const std::time_t& time) {
 	return oss.str();
 }
 
+static inline std::function<bool(const std::shared_ptr<AddOns::AddOnInfo>,
+                                 const std::shared_ptr<AddOns::AddOnInfo>)>
+create_sort_functor(const AddOnSortingCriteria sort_by) {
+	return [sort_by](const std::shared_ptr<AddOns::AddOnInfo> a,
+	                 const std::shared_ptr<AddOns::AddOnInfo> b) {
+		switch (sort_by) {
+		case AddOnSortingCriteria::kNameABC:
+			return a->descname().compare(b->descname()) < 0;
+		case AddOnSortingCriteria::kNameCBA:
+			return a->descname().compare(b->descname()) > 0;
 
-static inline std::function<bool(const std::shared_ptr<AddOns::AddOnInfo>, const std::shared_ptr<AddOns::AddOnInfo>)>
-create_sort_functor(const AddOnSortingCriteria sort_by)
-{
-		return [sort_by](const std::shared_ptr<AddOns::AddOnInfo> a,
-		                               const std::shared_ptr<AddOns::AddOnInfo> b) {
-			switch (sort_by) {
-			case AddOnSortingCriteria::kNameABC:
-				return a->descname().compare(b->descname()) < 0;
-			case AddOnSortingCriteria::kNameCBA:
-				return a->descname().compare(b->descname()) > 0;
+		case AddOnSortingCriteria::kFewestDownloads:
+			return a->download_count < b->download_count;
+		case AddOnSortingCriteria::kMostDownloads:
+			return a->download_count > b->download_count;
 
-			case AddOnSortingCriteria::kFewestDownloads:
-				return a->download_count < b->download_count;
-			case AddOnSortingCriteria::kMostDownloads:
-				return a->download_count > b->download_count;
+		case AddOnSortingCriteria::kOldest:
+			return a->upload_timestamp < b->upload_timestamp;
+		case AddOnSortingCriteria::kNewest:
+			return a->upload_timestamp > b->upload_timestamp;
 
-			case AddOnSortingCriteria::kOldest:
-				return a->upload_timestamp < b->upload_timestamp;
-			case AddOnSortingCriteria::kNewest:
-				return a->upload_timestamp > b->upload_timestamp;
-
-			case AddOnSortingCriteria::kLowestRating:
-				if (a->number_of_votes() == 0) {
-					// Add-ons without votes should always end up
-					// below any others when sorting by rating
-					return false;
-				} else if (b->number_of_votes() == 0) {
-					return true;
-				} else if (std::abs(a->average_rating() - b->average_rating()) < 0.01) {
-					// ambiguity – always choose the one with more votes
-					return a->number_of_votes() > b->number_of_votes();
-				} else {
-					return a->average_rating() < b->average_rating();
-				}
-			case AddOnSortingCriteria::kHighestRating:
-				if (a->number_of_votes() == 0) {
-					return false;
-				} else if (b->number_of_votes() == 0) {
-					return true;
-				} else if (std::abs(a->average_rating() - b->average_rating()) < 0.01) {
-					return a->number_of_votes() > b->number_of_votes();
-				} else {
-					return a->average_rating() > b->average_rating();
-				}
+		case AddOnSortingCriteria::kLowestRating:
+			if (a->number_of_votes() == 0) {
+				// Add-ons without votes should always end up
+				// below any others when sorting by rating
+				return false;
+			} else if (b->number_of_votes() == 0) {
+				return true;
+			} else if (std::abs(a->average_rating() - b->average_rating()) < 0.01) {
+				// ambiguity – always choose the one with more votes
+				return a->number_of_votes() > b->number_of_votes();
+			} else {
+				return a->average_rating() < b->average_rating();
 			}
-			NEVER_HERE();
-		};
+		case AddOnSortingCriteria::kHighestRating:
+			if (a->number_of_votes() == 0) {
+				return false;
+			} else if (b->number_of_votes() == 0) {
+				return true;
+			} else if (std::abs(a->average_rating() - b->average_rating()) < 0.01) {
+				return a->number_of_votes() > b->number_of_votes();
+			} else {
+				return a->average_rating() > b->average_rating();
+			}
+		}
+		NEVER_HERE();
+	};
 }
 
 const std::map<unsigned, std::function<AddOnQuality()>> AddOnQuality::kQualities = {  // NOLINT
@@ -253,89 +252,196 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
      maps_outer_wrapper_(
         &tabs_, UI::PanelStyle::kFsMenu, "maps_outer_wrapper_box", 0, 0, UI::Box::Vertical),
      maps_inner_wrapper_(&maps_outer_wrapper_,
-                                  UI::PanelStyle::kFsMenu,
-                                  "maps_inner_wrapper_box",
-                                  0,
-                                  0,
-                                  UI::Box::Vertical),
+                         UI::PanelStyle::kFsMenu,
+                         "maps_inner_wrapper_box",
+                         0,
+                         0,
+                         UI::Box::Vertical),
      maps_buttons_box_(&maps_outer_wrapper_,
-                                   UI::PanelStyle::kFsMenu,
-                                   "maps_buttons_box",
-                                   0,
-                                   0,
-                                   UI::Box::Horizontal),
+                       UI::PanelStyle::kFsMenu,
+                       "maps_buttons_box",
+                       0,
+                       0,
+                       UI::Box::Horizontal),
      maps_box_(&maps_inner_wrapper_,
-                           UI::PanelStyle::kFsMenu,
-                           "maps_box",
-                           0,
-                           0,
-                           UI::Box::Vertical,
-                           kHugeSize,
-                           kHugeSize),
-     filter_maps_lvbox_(&maps_buttons_box_, UI::PanelStyle::kFsMenu, "maps_buttons_lvbox", 0, 0, UI::Box::Vertical),
-     filter_maps_rvbox_min_(&maps_buttons_box_, UI::PanelStyle::kFsMenu, "maps_buttons_rvbox_min", 0, 0, UI::Box::Vertical),
-     filter_maps_rvbox_max_(&maps_buttons_box_, UI::PanelStyle::kFsMenu, "maps_buttons_rvbox_max", 0, 0, UI::Box::Vertical),
-     filter_maps_lhbox_(&filter_maps_lvbox_, UI::PanelStyle::kFsMenu, "maps_buttons_lhbox", 0, 0, UI::Box::Horizontal),
+               UI::PanelStyle::kFsMenu,
+               "maps_box",
+               0,
+               0,
+               UI::Box::Vertical,
+               kHugeSize,
+               kHugeSize),
+     filter_maps_lvbox_(
+        &maps_buttons_box_, UI::PanelStyle::kFsMenu, "maps_buttons_lvbox", 0, 0, UI::Box::Vertical),
+     filter_maps_rvbox_min_(&maps_buttons_box_,
+                            UI::PanelStyle::kFsMenu,
+                            "maps_buttons_rvbox_min",
+                            0,
+                            0,
+                            UI::Box::Vertical),
+     filter_maps_rvbox_max_(&maps_buttons_box_,
+                            UI::PanelStyle::kFsMenu,
+                            "maps_buttons_rvbox_max",
+                            0,
+                            0,
+                            UI::Box::Vertical),
+     filter_maps_lhbox_(&filter_maps_lvbox_,
+                        UI::PanelStyle::kFsMenu,
+                        "maps_buttons_lhbox",
+                        0,
+                        0,
+                        UI::Box::Horizontal),
      dev_box_(&tabs_, UI::PanelStyle::kFsMenu, "development_box", 0, 0, UI::Box::Vertical),
-     filter_browse_name_(
-        &browse_addons_buttons_box_rvbox_, "filter_browse_name", 0, 0, 100, UI::PanelStyle::kFsMenu),
-     filter_maps_name_(
-        &filter_maps_lvbox_, "filter_maps_name", 0, 0, 100, UI::PanelStyle::kFsMenu),
+     filter_browse_name_(&browse_addons_buttons_box_rvbox_,
+                         "filter_browse_name",
+                         0,
+                         0,
+                         100,
+                         UI::PanelStyle::kFsMenu),
+     filter_maps_name_(&filter_maps_lvbox_, "filter_maps_name", 0, 0, 100, UI::PanelStyle::kFsMenu),
      filter_browse_verified_(&browse_addons_buttons_box_right_hbox_,
-                      UI::PanelStyle::kFsMenu,
-                      "filter_browse_verified",
-                      Vector2i(0, 0),
-                      _("Verified only"),
-                      _("Show only verified add-ons")),
+                             UI::PanelStyle::kFsMenu,
+                             "filter_browse_verified",
+                             Vector2i(0, 0),
+                             _("Verified only"),
+                             _("Show only verified add-ons")),
      sort_order_browse_(&browse_addons_buttons_box_rvbox_,
-                 "sort_browse",
-                 0,
-                 0,
-                 0,
-                 10,
-                 filter_browse_name_.get_h(),
-                 _("Sort by"),
-                 UI::DropdownType::kTextual,
-                 UI::PanelStyle::kFsMenu,
-                 UI::ButtonStyle::kFsMenuSecondary),
+                        "sort_browse",
+                        0,
+                        0,
+                        0,
+                        10,
+                        filter_browse_name_.get_h(),
+                        _("Sort by"),
+                        UI::DropdownType::kTextual,
+                        UI::PanelStyle::kFsMenu,
+                        UI::ButtonStyle::kFsMenuSecondary),
      sort_order_maps_(&filter_maps_lvbox_,
-                 "sort_maps",
-                 0,
-                 0,
-                 0,
-                 10,
-                 filter_maps_name_.get_h(),
-                 _("Sort by"),
-                 UI::DropdownType::kTextual,
-                 UI::PanelStyle::kFsMenu,
-                 UI::ButtonStyle::kFsMenuSecondary),
+                      "sort_maps",
+                      0,
+                      0,
+                      0,
+                      10,
+                      filter_maps_name_.get_h(),
+                      _("Sort by"),
+                      UI::DropdownType::kTextual,
+                      UI::PanelStyle::kFsMenu,
+                      UI::ButtonStyle::kFsMenuSecondary),
      filter_browse_quality_(&browse_addons_buttons_box_right_hbox_,
-                     "quality",
-                     0,
-                     0,
-                     0,
-                     10,
-                     filter_browse_name_.get_h(),
-                     _("Minimum quality"),
-                     UI::DropdownType::kTextual,
-                     UI::PanelStyle::kFsMenu,
-                     UI::ButtonStyle::kFsMenuSecondary),
-		filter_maps_min_players_(&filter_maps_rvbox_min_, "filter_maps_min_players", 0, 0, 0, 150, 1, 1, kMaxPlayers,
-				UI::PanelStyle::kFsMenu, _("Min Players:"), UI::SpinBox::Units::kNone, UI::SpinBox::Type::kSmall),
-		filter_maps_min_w_(&filter_maps_rvbox_min_, "filter_maps_min_w", 0, 0, 0, 150, 0, 0, 0,
-				UI::PanelStyle::kFsMenu, _("Min Width:"), UI::SpinBox::Units::kNone, UI::SpinBox::Type::kValueList),
-		filter_maps_min_h_(&filter_maps_rvbox_min_, "filter_maps_min_h", 0, 0, 0, 150, 0, 0, 0,
-				UI::PanelStyle::kFsMenu, _("Min Height:"), UI::SpinBox::Units::kNone, UI::SpinBox::Type::kValueList),
-		filter_maps_min_size_(&filter_maps_rvbox_min_, "filter_maps_min_size", 0, 0, 0, 150, 0, 0, 0,
-				UI::PanelStyle::kFsMenu, _("Min Size:"), UI::SpinBox::Units::kNone, UI::SpinBox::Type::kValueList),
-		filter_maps_max_players_(&filter_maps_rvbox_max_, "filter_maps_max_players", 0, 0, 0, 150, kMaxPlayers, 1, kMaxPlayers,
-				UI::PanelStyle::kFsMenu, _("Max Players:"), UI::SpinBox::Units::kNone, UI::SpinBox::Type::kSmall),
-		filter_maps_max_w_(&filter_maps_rvbox_max_, "filter_maps_max_w", 0, 0, 0, 150, 0, 0, 0,
-				UI::PanelStyle::kFsMenu, _("Max Width:"), UI::SpinBox::Units::kNone, UI::SpinBox::Type::kValueList),
-		filter_maps_max_h_(&filter_maps_rvbox_max_, "filter_maps_max_h", 0, 0, 0, 150, 0, 0, 0,
-				UI::PanelStyle::kFsMenu, _("Max Height:"), UI::SpinBox::Units::kNone, UI::SpinBox::Type::kValueList),
-		filter_maps_max_size_(&filter_maps_rvbox_max_, "filter_maps_max_size", 0, 0, 0, 150, 0, 0, 0,
-				UI::PanelStyle::kFsMenu, _("Max Size:"), UI::SpinBox::Units::kNone, UI::SpinBox::Type::kValueList),
+                            "quality",
+                            0,
+                            0,
+                            0,
+                            10,
+                            filter_browse_name_.get_h(),
+                            _("Minimum quality"),
+                            UI::DropdownType::kTextual,
+                            UI::PanelStyle::kFsMenu,
+                            UI::ButtonStyle::kFsMenuSecondary),
+     filter_maps_min_players_(&filter_maps_rvbox_min_,
+                              "filter_maps_min_players",
+                              0,
+                              0,
+                              0,
+                              150,
+                              1,
+                              1,
+                              kMaxPlayers,
+                              UI::PanelStyle::kFsMenu,
+                              _("Min Players:"),
+                              UI::SpinBox::Units::kNone,
+                              UI::SpinBox::Type::kSmall),
+     filter_maps_min_w_(&filter_maps_rvbox_min_,
+                        "filter_maps_min_w",
+                        0,
+                        0,
+                        0,
+                        150,
+                        0,
+                        0,
+                        0,
+                        UI::PanelStyle::kFsMenu,
+                        _("Min Width:"),
+                        UI::SpinBox::Units::kNone,
+                        UI::SpinBox::Type::kValueList),
+     filter_maps_min_h_(&filter_maps_rvbox_min_,
+                        "filter_maps_min_h",
+                        0,
+                        0,
+                        0,
+                        150,
+                        0,
+                        0,
+                        0,
+                        UI::PanelStyle::kFsMenu,
+                        _("Min Height:"),
+                        UI::SpinBox::Units::kNone,
+                        UI::SpinBox::Type::kValueList),
+     filter_maps_min_size_(&filter_maps_rvbox_min_,
+                           "filter_maps_min_size",
+                           0,
+                           0,
+                           0,
+                           150,
+                           0,
+                           0,
+                           0,
+                           UI::PanelStyle::kFsMenu,
+                           _("Min Size:"),
+                           UI::SpinBox::Units::kNone,
+                           UI::SpinBox::Type::kValueList),
+     filter_maps_max_players_(&filter_maps_rvbox_max_,
+                              "filter_maps_max_players",
+                              0,
+                              0,
+                              0,
+                              150,
+                              kMaxPlayers,
+                              1,
+                              kMaxPlayers,
+                              UI::PanelStyle::kFsMenu,
+                              _("Max Players:"),
+                              UI::SpinBox::Units::kNone,
+                              UI::SpinBox::Type::kSmall),
+     filter_maps_max_w_(&filter_maps_rvbox_max_,
+                        "filter_maps_max_w",
+                        0,
+                        0,
+                        0,
+                        150,
+                        0,
+                        0,
+                        0,
+                        UI::PanelStyle::kFsMenu,
+                        _("Max Width:"),
+                        UI::SpinBox::Units::kNone,
+                        UI::SpinBox::Type::kValueList),
+     filter_maps_max_h_(&filter_maps_rvbox_max_,
+                        "filter_maps_max_h",
+                        0,
+                        0,
+                        0,
+                        150,
+                        0,
+                        0,
+                        0,
+                        UI::PanelStyle::kFsMenu,
+                        _("Max Height:"),
+                        UI::SpinBox::Units::kNone,
+                        UI::SpinBox::Type::kValueList),
+     filter_maps_max_size_(&filter_maps_rvbox_max_,
+                           "filter_maps_max_size",
+                           0,
+                           0,
+                           0,
+                           150,
+                           0,
+                           0,
+                           0,
+                           UI::PanelStyle::kFsMenu,
+                           _("Max Size:"),
+                           UI::SpinBox::Units::kNone,
+                           UI::SpinBox::Type::kValueList),
      upload_addon_(&dev_box_,
                    "upload_addon",
                    0,
@@ -366,23 +472,23 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                           _("By ticking this checkbox, you confirm that you have read and agree to "
                             "the above terms.")),
      filter_browse_reset_(&browse_addons_buttons_box_lvbox_,
-                   "f_browse_reset",
-                   0,
-                   0,
-                   24,
-                   24,
-                   UI::ButtonStyle::kFsMenuSecondary,
-                   _("Reset"),
-                   _("Reset the filters")),
+                          "f_browse_reset",
+                          0,
+                          0,
+                          24,
+                          24,
+                          UI::ButtonStyle::kFsMenuSecondary,
+                          _("Reset"),
+                          _("Reset the filters")),
      filter_maps_reset_(&filter_maps_lvbox_,
-                   "f_maps_reset",
-                   0,
-                   0,
-                   24,
-                   24,
-                   UI::ButtonStyle::kFsMenuSecondary,
-                   _("Reset"),
-                   _("Reset the filters")),
+                        "f_maps_reset",
+                        0,
+                        0,
+                        24,
+                        24,
+                        UI::ButtonStyle::kFsMenuSecondary,
+                        _("Reset"),
+                        _("Reset the filters")),
      upgrade_all_(&buttons_box_,
                   "upgrade_all",
                   0,
@@ -694,15 +800,16 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	}
 
 	{
-		std::vector<Widelands::Map::OldWorldInfo> worlds = {{"", "", "world/pics/one_world.png", []() { return _("One World"); }}};
-		worlds.insert(worlds.end(), Widelands::Map::kOldWorldNames.begin(), Widelands::Map::kOldWorldNames.end());
+		std::vector<Widelands::Map::OldWorldInfo> worlds = {
+		   {"", "", "world/pics/one_world.png", []() { return _("One World"); }}};
+		worlds.insert(worlds.end(), Widelands::Map::kOldWorldNames.begin(),
+		              Widelands::Map::kOldWorldNames.end());
 		uint8_t index = 0;
 		for (const Widelands::Map::OldWorldInfo& world : worlds) {
-			UI::Checkbox* c =
-			   new UI::Checkbox(&filter_maps_lhbox_, UI::PanelStyle::kFsMenu,
-			                    format("world_%s", world.old_name), Vector2i(0, 0),
-			                    g_image_cache->get(world.icon),
-			                    format(_("Toggle world ‘%s’"), world.descname()));
+			UI::Checkbox* c = new UI::Checkbox(&filter_maps_lhbox_, UI::PanelStyle::kFsMenu,
+			                                   format("world_%s", world.old_name), Vector2i(0, 0),
+			                                   g_image_cache->get(world.icon),
+			                                   format(_("Toggle world ‘%s’"), world.descname()));
 			filter_maps_world_[world.old_name] = c;
 			c->set_state(true);
 			c->changed.connect([this, world]() { world_filter_maps_changed(world.old_name); });
@@ -717,7 +824,8 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 
 	browse_addons_buttons_box_right_hbox_.add(
 	   &filter_browse_verified_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	browse_addons_buttons_box_right_hbox_.add(&filter_browse_quality_, UI::Box::Resizing::kExpandBoth);
+	browse_addons_buttons_box_right_hbox_.add(
+	   &filter_browse_quality_, UI::Box::Resizing::kExpandBoth);
 
 	browse_addons_buttons_box_rvbox_.add(
 	   &browse_addons_buttons_box_right_hbox_, UI::Box::Resizing::kFullSize);
@@ -1312,17 +1420,33 @@ bool AddOnsCtrl::matches_filter_maps(std::shared_ptr<AddOns::AddOnInfo> info) {
 		return false;
 	}
 
-	if (info->map_width < filter_maps_min_w_.get_value()) { return false; }
-	if (info->map_height < filter_maps_min_h_.get_value()) { return false; }
-	if (info->map_nr_players < filter_maps_min_players_.get_value()) { return false; }
-	if (info->map_width * info->map_height < filter_maps_min_size_.get_value()) { return false; }
-	if (info->map_width > filter_maps_max_w_.get_value()) { return false; }
-	if (info->map_height > filter_maps_max_h_.get_value()) { return false; }
-	if (info->map_nr_players > filter_maps_max_players_.get_value()) { return false; }
-	if (info->map_width * info->map_height > filter_maps_max_size_.get_value()) { return false; }
+	if (info->map_width < filter_maps_min_w_.get_value()) {
+		return false;
+	}
+	if (info->map_height < filter_maps_min_h_.get_value()) {
+		return false;
+	}
+	if (info->map_nr_players < filter_maps_min_players_.get_value()) {
+		return false;
+	}
+	if (info->map_width * info->map_height < filter_maps_min_size_.get_value()) {
+		return false;
+	}
+	if (info->map_width > filter_maps_max_w_.get_value()) {
+		return false;
+	}
+	if (info->map_height > filter_maps_max_h_.get_value()) {
+		return false;
+	}
+	if (info->map_nr_players > filter_maps_max_players_.get_value()) {
+		return false;
+	}
+	if (info->map_width * info->map_height > filter_maps_max_size_.get_value()) {
+		return false;
+	}
 
 	if (const auto it = filter_maps_world_.find(info->map_world_name);
-			it != filter_maps_world_.end() && !it->second->get_state()) {
+	    it != filter_maps_world_.end() && !it->second->get_state()) {
 		// wrong world
 		return false;
 	}
@@ -1331,8 +1455,9 @@ bool AddOnsCtrl::matches_filter_maps(std::shared_ptr<AddOns::AddOnInfo> info) {
 		// no text filter given, so we accept it
 		return true;
 	}
-	auto array = {info->descname(), info->author(), info->upload_username, info->internal_name,
-	              info->description(), info->map_hint(), info->map_uploader_comment()};
+	auto array = {
+	   info->descname(),    info->author(),   info->upload_username,       info->internal_name,
+	   info->description(), info->map_hint(), info->map_uploader_comment()};
 	return std::any_of(array.begin(), array.end(), [this](const std::string& text) {
 		return text.find(filter_maps_name_.get_text()) != std::string::npos;
 	});
@@ -1425,8 +1550,10 @@ void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
 		if (0 < index++) {
 			maps_box_.add_space(kRowButtonSize);
 		}
-		MapRow* r = new MapRow(&maps_box_, this, a, g_fs->file_exists(
-				kMapsDir + FileSystem::file_separator() + kDownloadedMapsDir + FileSystem::file_separator() + a->map_file_name));
+		MapRow* r =
+		   new MapRow(&maps_box_, this, a,
+		              g_fs->file_exists(kMapsDir + FileSystem::file_separator() + kDownloadedMapsDir +
+		                                FileSystem::file_separator() + a->map_file_name));
 		maps_box_.add(r, UI::Box::Resizing::kFullSize);
 	}
 	tabs_.tabs()[2]->set_title(index == 0 ? _("Maps") : format(_("Maps (%u)"), index));
@@ -1752,7 +1879,7 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 void AddOnsCtrl::install_map(std::shared_ptr<AddOns::AddOnInfo> remote) {
 	g_fs->ensure_directory_exists(kTempFileDir);
 	std::string temp_file = kTempFileDir + FileSystem::file_separator() + timestring() + ".addon." +
-	                       remote->internal_name + kTempFileExtension;
+	                        remote->internal_name + kTempFileExtension;
 	if (g_fs->file_exists(temp_file)) {
 		g_fs->fs_unlink(temp_file);
 	}

@@ -80,10 +80,7 @@ private:
 
 class MapRow : public UI::Panel {
 public:
-	MapRow(Panel*,
-	       AddOnsCtrl*,
-	       std::shared_ptr<AddOns::AddOnInfo>,
-	       bool installed);
+	MapRow(Panel*, AddOnsCtrl*, std::shared_ptr<AddOns::AddOnInfo>, bool installed);
 	~MapRow() override = default;
 	void layout() override;
 	void draw(RenderTarget&) override;
