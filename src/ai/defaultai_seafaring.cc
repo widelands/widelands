@@ -285,9 +285,8 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 				for (Widelands::InputQueue* queue : inputqueues) {
 					if (queue->get_type() == Widelands::wwWARE) {
 						if (!stopped &&
-						    // TODO(tothxa): define operator!= for Widelands::WarePriority
-						    !(ps_obs.site->get_priority(Widelands::wwWARE, queue->get_index()) ==
-						       Widelands::WarePriority::kHigh)) {
+						    ps_obs.site->get_priority(Widelands::wwWARE, queue->get_index()) !=
+						       Widelands::WarePriority::kHigh) {
 							game().send_player_set_ware_priority(*ps_obs.site, Widelands::wwWARE,
 							   queue->get_index(), Widelands::WarePriority::kHigh);
 						}
@@ -502,23 +501,6 @@ bool DefaultAI::check_ships(const Time& gametime) {
 				       persistent_data->ships_utilization <= 10000);
 			}
 		}
-	}
-
-	// processing marine_task_queue
-	while (!marine_task_queue.empty()) {
-		if (marine_task_queue.back() == kReprioritize) {
-			for (const ProductionSiteObserver& observer : productionsites) {
-				if (observer.bo->is(BuildingAttribute::kShipyard)) {
-					for (uint32_t k = 0; k < observer.bo->inputs.size(); ++k) {
-						game().send_player_set_ware_priority(*observer.site, Widelands::wwWARE,
-						                                     observer.bo->inputs.at(k),
-						                                     Widelands::WarePriority::kHigh);
-					}
-				}
-			}
-		}
-
-		marine_task_queue.pop_back();
 	}
 
 	// If map_allows_seafaring_, we indicate that normal frequency check makes sense

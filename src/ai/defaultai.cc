@@ -6731,7 +6731,7 @@ void DefaultAI::gain_building(Widelands::Building& b, const bool found_on_load) 
 			productionsites.back().unoccupied_till = gametime;
 			++productionsites.back().bo->unoccupied_count;
 			if (bo.is(BuildingAttribute::kShipyard)) {
-				marine_task_queue.push_back(kReprioritize);
+// TODO(tothxa): shipyards vector
 			}
 			if (bo.is(BuildingAttribute::kFisher)) {
 				++fishers_count_;
