@@ -601,8 +601,6 @@ void DefaultAI::late_initialization() {
 	// The data struct below is owned by Player object, the purpose is to have them saved therein
 	persistent_data = player_->get_mutable_ai_persistent_state();
 	management_data.persistent_data = player_->get_mutable_ai_persistent_state();
-	const bool create_basic_buildings_list =
-	   !persistent_data->initialized || (gametime.get() < kRemainingBasicBuildingsResetTime.get());
 
 	if (!persistent_data->initialized) {
 		// As all data are initialized without given values, they must be populated with reasonable
@@ -649,10 +647,13 @@ void DefaultAI::late_initialization() {
 
 		verb_log_info_time(gametime, " AI %2d: %" PRIuS " basic buildings in savegame file. %s\n",
 		                   player_number(), persistent_data->remaining_basic_buildings.size(),
-		                   (create_basic_buildings_list) ?
+		                   (gametime.get() < kRemainingBasicBuildingsResetTime.get()) ?
                             "New list will be recreated though (kAITrainingMode is true)" :
                             "");
 	}
+
+	const bool create_basic_buildings_list =
+	   !persistent_data->initialized || (gametime.get() < kRemainingBasicBuildingsResetTime.get());
 
 	// Even if we have basic buildings from savefile, we ignore them and recreate them based
 	// on lua conf files
@@ -6142,7 +6143,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			    (!basic_economy_established &&
 			     site_needed_for_economy == BasicEconomyBuildingStatus::kDiscouraged) ||
 			    !map_allows_seafaring_) {
-					return BuildingNecessity::kForbidden;
+				return BuildingNecessity::kForbidden;
 				}
 			bo.primary_priority = 0;
 			if (num_ports > 0) {
