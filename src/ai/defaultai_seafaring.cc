@@ -214,7 +214,8 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 				warship_needed = allow_warship && warship_shortage;
 			} else {
 				warship_needed = warship_shortage;
-				start_expedition = !warship_needed && consider_expedition && ships_full;
+				start_expedition = !warship_needed && consider_expedition && (ships_full ||
+				    persistent_data->ships_utilization < 2000);
 			}
 		} else {  // no free ships
 			start_expedition = false;
