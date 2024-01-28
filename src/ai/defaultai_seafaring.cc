@@ -22,7 +22,6 @@
 
 #include "base/log.h"
 #include "economy/ship_fleet.h"
-#include "economy/wares_queue.h"
 
 namespace AI {
 
