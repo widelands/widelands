@@ -452,9 +452,9 @@ private:
 	bool check_ships(const Time&);
 	bool attempt_escape(ShipObserver& so);
 	// seafaring related variables
-	static Time last_seafaring_check_;
-	static bool map_allows_seafaring_;  // False by default, until Map::allows_seafaring() = true
-	bool potential_wrong_shipyard_ = false;
+	Time last_seafaring_check_{0};
+	bool map_allows_seafaring_{false};  // False by default, until Map::allows_seafaring() = true
+	bool potential_wrong_shipyard_{false};
 	uint32_t expedition_ship_;
 	Duration expedition_max_duration;
 	std::unordered_set<uint32_t> expedition_visited_spots;
