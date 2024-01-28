@@ -598,6 +598,8 @@ void DefaultAI::late_initialization() {
 
 	const Widelands::DescriptionIndex& nr_buildings = game().descriptions().nr_buildings();
 
+	check_seafaring_allowed();  // update map_allows_seafaring_ if needed
+
 	// The data struct below is owned by Player object, the purpose is to have them saved therein
 	persistent_data = player_->get_mutable_ai_persistent_state();
 	management_data.persistent_data = player_->get_mutable_ai_persistent_state();
@@ -2404,10 +2406,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 	const Widelands::Map& map = game().map();
 
-	if (gametime > last_seafaring_check_ + Duration(20 * 1000)) {
-		map_allows_seafaring_ = map.allows_seafaring();
-		last_seafaring_check_ = gametime;
-	}
+	check_seafaring_allowed();  // update map_allows_seafaring_ if needed
 
 	// Do we have basic economy established? Informing that we just left the basic economy mode.
 	if (!basic_economy_established && persistent_data->remaining_basic_buildings.empty()) {
