@@ -116,22 +116,11 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		map_allows_seafaring_ = map.allows_seafaring();
 		last_seafaring_check_ = gametime;
 	}
-	if (!map_allows_seafaring_ &&
-	    count_buildings_with_attribute(BuildingAttribute::kShipyard) == 0 && allships.empty()) {
-		return false;
-	}
-
-	// getting some base statistics
-	player_ = game().get_player(player_number());
-	ports_count = 0;
-	ports_finished_count = 0;
-	expeditions_in_prep = 0;
-	expeditions_ready = 0;
 
 	// goes over productionsites and gets status of shipyards
-	for (const ProductionSiteObserver& sy_obs : shipyardsites) {
-		// In very rare situation, we might have non-seafaring map but there is a shipyard
-		if (!map_allows_seafaring_) {
+	if (!map_allows_seafaring_) {
+		for (const ProductionSiteObserver& sy_obs : shipyardsites) {
+			// In very rare situation, we might have non-seafaring map but there is a shipyard
 			verb_log_dbg_time(
 			   game().get_gametime(),
 			   "  %1d: we have a shipyard in a non seafaring economy, dismantling it...\n",
@@ -141,14 +130,29 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 			} else {
 				game().send_player_bulldoze(*sy_obs.site);
 			}
-			return false;
+			// TODO(tothxa): player commands are asynchronous, need to return here if we want the
+			//               below extra check
+			// return false;
 		}
-	}
 
-	// If non-seafaring economy, no sense to go on with this function
-	if (!map_allows_seafaring_) {
+		// if (count_buildings_with_attribute(BuildingAttribute::kShipyard) == 0) {
+		// TODO(tothxa): bring back old code going over all buildings, or trust above?
+		// }
+
+		// if (!allships.empty()) {
+		// TODO(tothxa): delete ships?
+		// }
+
+		// If non-seafaring economy, no sense to go on with this function
 		return false;
 	}
+
+	// getting some base statistics
+	player_ = game().get_player(player_number());
+	ports_count = 0;
+	ports_finished_count = 0;
+	expeditions_in_prep = 0;
+	expeditions_ready = 0;
 
 	BuildingObserver& port_obs = get_building_observer(BuildingAttribute::kPort);
 	ports_finished_count = port_obs.cnt_built;
