@@ -6142,8 +6142,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			    (!basic_economy_established &&
 			     site_needed_for_economy == BasicEconomyBuildingStatus::kDiscouraged) ||
 			    !map_allows_seafaring_) {
-				return BuildingNecessity::kForbidden;
-			}
+					return BuildingNecessity::kForbidden;
+				}
 			bo.primary_priority = 0;
 			if (num_ports > 0) {
 				bo.primary_priority +=
