@@ -296,10 +296,10 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 					}
 				}
 			}
-			if (shipyard_stocked && stopped && sy_obs.site->can_start_working()) {
+			if (ports_count > 0 && shipyard_stocked && stopped && sy_obs.site->can_start_working()) {
 				verb_log_dbg_time(game().get_gametime(), "AI %d: Starting shipyard.", player_number());
 				game().send_player_start_stop_building(*sy_obs.site);
-			} else if (!shipyard_stocked && !stopped) {
+			} else if (!stopped && (!shipyard_stocked || ports_count == 0)) {
 				verb_log_dbg_time(game().get_gametime(), "AI %d: Stopping shipyard with poor supply.",
 				                  player_number());
 				game().send_player_start_stop_building(*sy_obs.site);
