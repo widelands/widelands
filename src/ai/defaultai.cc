@@ -2919,8 +2919,6 @@ bool DefaultAI::construct_building(const Time& gametime) {
 							prio += (-3 + bf->water_nearby);
 						}
 					} else if (bo.is(BuildingAttribute::kShipyard)) {
-						// for now AI builds only one shipyard
-						assert(bo.total_count() == 0);
 						if (bf->open_water_nearby > 3 && map_allows_seafaring_ &&
 						    bf->shipyard_preferred == ExtendedBool::kTrue) {
 							prio += productionsites.size() * 5 +
@@ -4461,7 +4459,7 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 			considering_upgrade = false;
 		}
 		// if upgraded building is part of basic economy we allow earlier upgrade
-		if (en_bo.cnt_built < static_cast<int32_t>(en_bo.basic_amount)) {
+		if (en_bo.cnt_built < en_bo.basic_amount) {
 			considering_upgrade = true;
 		}
 	}
@@ -4787,9 +4785,9 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 	    gametime - site.bo->last_dismantle_time >
 	       Duration(static_cast<uint32_t>(
 	          (std::abs(management_data.get_military_number_at(169)) / 5 + 1) * 60 * 1000)) &&
-
 	    site.bo->current_stats > site.site->get_statistics_percent() &&  // underperformer
-	    (game().get_gametime() - site.unoccupied_till) > Duration(10 * 60 * 1000)) {
+	    (game().get_gametime() - site.unoccupied_till) > Duration(10 * 60 * 1000) &&
+	    !site.bo->is(BuildingAttribute::kShipyard)) {
 
 		site.bo->last_dismantle_time = game().get_gametime();
 
@@ -5261,7 +5259,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		}
 		const uint16_t min_roads_count =
 		   40 + std::abs(management_data.get_military_number_at(33)) / 2;
-		if (static_cast<int>(roads.size()) < min_roads_count * (1 + bo.total_count())) {
+		if (static_cast<uint32_t>(roads.size()) < min_roads_count * (1 + bo.total_count())) {
 			return BuildingNecessity::kForbidden;
 		}
 		bo.primary_priority +=
@@ -5656,7 +5654,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			assert(bo.cnt_target > 1 && bo.cnt_target < 1000);
 
 			// allow them always if basic economy not established and building is a basic one
-			if (bo.total_count() < static_cast<int32_t>(bo.basic_amount)) {
+			if (bo.total_count() < bo.basic_amount) {
 				return BuildingNecessity::kNeeded;
 			}
 
@@ -6141,7 +6139,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			return BuildingNecessity::kForbidden;
 		}
 		if (bo.is(BuildingAttribute::kShipyard)) {
-			if (bo.total_count() > 0 ||
+			if ((num_ports < 3 ? bo.total_count() > num_ports : bo.total_count() > num_ports / 2) ||
 			    (!basic_economy_established &&
 			     site_needed_for_economy == BasicEconomyBuildingStatus::kDiscouraged) ||
 			    !map_allows_seafaring_) {
@@ -6149,7 +6147,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			}
 			bo.primary_priority = 0;
 			if (num_ports > 0) {
-				bo.primary_priority += std::abs(management_data.get_military_number_at(150) * 3);
+				bo.primary_priority +=
+				   std::abs(management_data.get_military_number_at(150)) * 3 / num_ports;
 			}
 			if (spots_ < kSpotsTooLittle) {
 				bo.primary_priority += std::abs(management_data.get_military_number_at(151) * 3);

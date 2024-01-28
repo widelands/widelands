@@ -478,7 +478,7 @@ struct BuildingObserver {
 		kMine
 	};
 
-	int32_t total_count() const;
+	[[nodiscard]] uint32_t total_count() const;
 	AiModeBuildings aimode_limit_status() const;
 	bool buildable(const Widelands::Player& p) const;
 
@@ -531,12 +531,12 @@ struct BuildingObserver {
 	int16_t initial_preciousness;
 	int16_t max_preciousness;
 	int16_t max_needed_preciousness;
-	int32_t cnt_built;
-	int32_t cnt_under_construction;
-	int32_t cnt_target;           // number of buildings as target
-	int32_t cnt_limit_by_aimode;  // limit imposed by weak or normal AI mode
+	uint32_t cnt_built;
+	uint32_t cnt_under_construction;
+	uint32_t cnt_target;           // number of buildings as target
+	uint32_t cnt_limit_by_aimode;  // limit imposed by weak or normal AI mode
 
-	int32_t cnt_upgrade_pending;  // number of buildings that are to be upgraded
+	uint32_t cnt_upgrade_pending;  // number of buildings that are to be upgraded
 
 	// used to track amount of wares produced by building
 	uint32_t stocklevel_count;
