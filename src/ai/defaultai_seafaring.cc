@@ -105,19 +105,22 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 	return score;
 }
 
+bool DefaultAI::check_seafaring_allowed() {
+	const Time& gametime = game().get_gametime();
+	if (gametime > last_seafaring_check_ + Duration(20 * 1000) || last_seafaring_check_ == Time(0)) {
+		const Widelands::Map& map = game().map();
+		map_allows_seafaring_ = map.allows_seafaring();
+		last_seafaring_check_ = gametime;
+	}
+	return map_allows_seafaring_;
+}
+
 // This function scans current situation with shipyards, ports, ships, ongoing expeditions
 // and makes two decisions:
 // - build a ship
 // - start preparation for expedition
 bool DefaultAI::marine_main_decisions(const Time& gametime) {
-	if (gametime > last_seafaring_check_ + Duration(20 * 1000)) {
-		const Widelands::Map& map = game().map();
-		map_allows_seafaring_ = map.allows_seafaring();
-		last_seafaring_check_ = gametime;
-	}
-
-	// goes over productionsites and gets status of shipyards
-	if (!map_allows_seafaring_) {
+	if (!check_seafaring_allowed()) {
 		for (const ProductionSiteObserver& sy_obs : shipyardsites) {
 			// In very rare situation, we might have non-seafaring map but there is a shipyard
 			verb_log_dbg_time(
@@ -129,18 +132,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 			} else {
 				game().send_player_bulldoze(*sy_obs.site);
 			}
-			// TODO(tothxa): player commands are asynchronous, need to return here if we want the
-			//               below extra check
-			// return false;
 		}
-
-		// if (count_buildings_with_attribute(BuildingAttribute::kShipyard) == 0) {
-		// TODO(tothxa): bring back old code going over all buildings, or trust above?
-		// }
-
-		// if (!allships.empty()) {
-		// TODO(tothxa): delete ships?
-		// }
 
 		// If non-seafaring economy, no sense to go on with this function
 		return false;
@@ -188,8 +180,9 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		   game().naval_warfare_allowed() && (warships_target > warships_count);
 
 		const bool consider_expedition =
-		   ports_count > 0 && expeditions_in_progress == 0 && expeditions_in_prep == 0 &&
-		   !persistent_data->no_more_expeditions && basic_economy_established;
+		   ports_count > 0 && !persistent_data->no_more_expeditions &&
+		   (expeditions_in_progress + expeditions_in_prep + expeditions_ready) == 0 &&
+		   basic_economy_established;
 
 		// Help the AI get out of small starting islands
 		const bool prioritise_expedition = ports_count < 2;
@@ -262,6 +255,12 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 				game().send_player_bulldoze(*sy_obs.site);
 			}
 			continue;
+		}
+		if (fleet == nullptr) {
+			assert(ports_finished_count == 0);
+			Widelands::ShipFleet* yard_fleet = yard_interfaces.front()->get_fleet();
+			update_ships_target =
+			   yard_fleet != nullptr && yard_fleet->get_ships_target() != fleet_target;
 		}
 
 		if (update_ships_target) {
@@ -367,11 +366,19 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 // This identifies ships that are waiting for command
 bool DefaultAI::check_ships(const Time& gametime) {
 	// There is possibility that the map is not seafaring but we still have ships and/or shipyards
-	if (!map_allows_seafaring_ &&
-	    count_buildings_with_attribute(BuildingAttribute::kShipyard) == 0 && allships.empty()) {
+	if (!check_seafaring_allowed()) {
+		for (ShipObserver& so : allships) {
+			// Sink ships if we can't use them.
+			verb_log_dbg_time(game().get_gametime(),
+			                  "AI %d: Sinking unexpected ship %s on non-seafaring map.",
+			                  player_number(), so.ship->get_shipname().c_str());
+			game().send_player_sink_ship(*so.ship);
+		}
+
 		// False indicates that we can postpone next call of this function
 		return false;
 	}
+
 	expeditions_in_progress = 0;
 	warships_count = 0;
 	tradeships_count = 0;

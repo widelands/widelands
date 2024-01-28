@@ -439,6 +439,7 @@ private:
 
 	// ------------- Seafaring -----------------------------
 	// Functions used for seafaring / defaultai_seafaring.cc
+	bool check_seafaring_allowed();  // Query and update as needed, returns map_allows_seafaring_
 	Widelands::IslandExploreDirection randomExploreDirection();
 	void gain_ship(Widelands::Ship&, NewShip);
 	void check_ship_in_expedition(ShipObserver&, const Time&);
