@@ -66,16 +66,16 @@ const std::vector<int32_t> Map::kMapFieldCounts = gather_map_field_counts();
 
 const std::vector<Map::OldWorldInfo> Map::kOldWorldNames = {
    {"summer", "greenland", "world/pics/editor_terrain_category_green.png",
-   /** TRANSLATORS: A world name for the random map generator in the editor */
+    /** TRANSLATORS: A world name for the random map generator in the editor */
     []() { return _("Summer"); }},
    {"winter", "winterland", "world/pics/editor_terrain_category_winter.png",
-   /** TRANSLATORS: A world name for the random map generator in the editor */
+    /** TRANSLATORS: A world name for the random map generator in the editor */
     []() { return _("Winter"); }},
    {"wasteland", "blackland", "world/pics/editor_terrain_category_wasteland.png",
-   /** TRANSLATORS: A world name for the random map generator in the editor */
+    /** TRANSLATORS: A world name for the random map generator in the editor */
     []() { return _("Wasteland"); }},
    {"desert", "desert", "world/pics/editor_terrain_category_desert.png",
-   /** TRANSLATORS: A world name for the random map generator in the editor */
+    /** TRANSLATORS: A world name for the random map generator in the editor */
     []() { return _("Desert"); }}};
 const Map::OldWorldInfo& Map::get_old_world_info_by_old_name(const std::string& old_name) {
 	for (const OldWorldInfo& owi : kOldWorldNames) {
