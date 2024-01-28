@@ -334,8 +334,12 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		    p_obs.site->get_portdock()->get_fleet()->serial() != fleet->serial()) {
 			// Only allow one fleet for now.
 			// TODO(tothxa): v1.3: Make the AI handle multiple fleets.
-			// TODO(tothxa): Immediate: When evaluating portspaces for building additional ports,
-			//               check whether portsites.front() is reachable.
+			// TODO(tothxa): In building decisions:
+			//                * When evaluating portspaces for building additional ports, check whether
+			//                  portsites.front() is reachable. (or when to start new fleet when it's
+			//                  implemented)
+			//                * Be more careful with placing buildings near portspaces. AIs often fail
+			//                  to escape from starting island if it has only one portspace.
 			verb_log_dbg_time(game().get_gametime(), "AI %d: Dismantling port %s in second fleet",
 			                  player_number(), p_obs.site->get_warehouse_name().c_str());
 			game().send_player_dismantle(*p_obs.site, true);
