@@ -439,7 +439,6 @@ private:
 
 	// ------------- Seafaring -----------------------------
 	// Functions used for seafaring / defaultai_seafaring.cc
-	bool check_seafaring_allowed();  // Query and update as needed, returns map_allows_seafaring_
 	Widelands::IslandExploreDirection randomExploreDirection();
 	void gain_ship(Widelands::Ship&, NewShip);
 	void check_ship_in_expedition(ShipObserver&, const Time&);
@@ -452,9 +451,6 @@ private:
 	bool check_ships(const Time&);
 	bool attempt_escape(ShipObserver& so);
 	// seafaring related variables
-	static Time last_seafaring_check_;
-	static bool map_allows_seafaring_;  // False by default, until Map::allows_seafaring() = true
-	bool potential_wrong_shipyard_ = false;
 	uint32_t expedition_ship_;
 	Duration expedition_max_duration;
 	std::unordered_set<uint32_t> expedition_visited_spots;

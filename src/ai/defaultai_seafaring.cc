@@ -105,22 +105,12 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 	return score;
 }
 
-bool DefaultAI::check_seafaring_allowed() {
-	const Time& gametime = game().get_gametime();
-	if (gametime > last_seafaring_check_ + Duration(20 * 1000) || last_seafaring_check_ == Time(0)) {
-		const Widelands::Map& map = game().map();
-		map_allows_seafaring_ = map.allows_seafaring();
-		last_seafaring_check_ = gametime;
-	}
-	return map_allows_seafaring_;
-}
-
 // This function scans current situation with shipyards, ports, ships, ongoing expeditions
 // and makes two decisions:
 // - build a ship
 // - start preparation for expedition
 bool DefaultAI::marine_main_decisions(const Time& gametime) {
-	if (!check_seafaring_allowed()) {
+	if (game().map().allows_seafaring()) {
 		for (const ProductionSiteObserver& sy_obs : shipyardsites) {
 			// In very rare situation, we might have non-seafaring map but there is a shipyard
 			verb_log_dbg_time(
@@ -374,7 +364,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 // This identifies ships that are waiting for command
 bool DefaultAI::check_ships(const Time& gametime) {
 	// There is possibility that the map is not seafaring but we still have ships and/or shipyards
-	if (!check_seafaring_allowed()) {
+	if (!game().map().allows_seafaring()) {
 		for (ShipObserver& so : allships) {
 			// Sink ships if we can't use them.
 			verb_log_dbg_time(game().get_gametime(),
@@ -513,8 +503,7 @@ bool DefaultAI::check_ships(const Time& gametime) {
 		}
 	}
 
-	// If map_allows_seafaring_, we indicate that normal frequency check makes sense
-	return map_allows_seafaring_;
+	return true;
 }
 
 /**
