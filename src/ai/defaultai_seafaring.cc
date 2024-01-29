@@ -110,12 +110,12 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 // - build a ship
 // - start preparation for expedition
 bool DefaultAI::marine_main_decisions(const Time& /* gametime */) {
-	if (game().map().allows_seafaring()) {
+	if (!game().map().allows_seafaring()) {
 		for (const ProductionSiteObserver& sy_obs : shipyardsites) {
 			// In very rare situation, we might have non-seafaring map but there is a shipyard
 			verb_log_dbg_time(
 			   game().get_gametime(),
-			   "  %1d: we have a shipyard in a non seafaring economy, dismantling it...\n",
+			   "AI %d: we have a shipyard in a non seafaring economy, dismantling it...\n",
 			   player_number());
 			if (!sy_obs.site->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
 				game().send_player_dismantle(*sy_obs.site, true);
@@ -435,6 +435,11 @@ bool DefaultAI::check_ships(const Time& gametime) {
 						verb_log_dbg_time(gametime, "AI %d: Refit ship %s to warship",
 						                  player_->player_number(), so.ship->get_shipname().c_str());
 						game().send_player_refit_ship(*so.ship, Widelands::ShipType::kWarship);
+						// transport ships remember soldier capacity
+						if (so.ship->get_warship_soldier_capacity() > 0) {
+							game().send_player_warship_command(
+							   *so.ship, Widelands::WarshipCommand::kSetCapacity, {0u});
+						}
 						warship_needed = false;
 						++warships_count;
 					} else {
@@ -730,6 +735,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 void DefaultAI::warship_management(ShipObserver& so) {
 	const Time& gametime = game().get_gametime();
 
+	// Should have been set on refit, but it will need updating here when it gets dynamic
 	if (so.ship->get_warship_soldier_capacity() > 0) {
 		game().send_player_warship_command(*so.ship, Widelands::WarshipCommand::kSetCapacity, {0u});
 	}
