@@ -141,9 +141,17 @@ This Lua script returns a table with descriptions for all UI elements. The table
 * **tables** (table): Style definitons for `tables`_
 * **wareinfo** (table): Style definitons for `ware statistics`_ windows
 * **fonts** (table): Style definitons for all `fonts`_ commonly used in Widelands
-* **paragraphs** (table): Style definitons for all `paragraph styles`_ commonly used in Widelands .. versionadded:: 1.2
-* **colors** (table): Style definitons for RGB `colors`_ .. versionadded:: 1.2
-* **styled_sizes** (table): Definitons for UI element `sizes`_ and text spacing .. versionadded:: 1.2
+* **paragraphs** (table): Style definitons for all `paragraph styles`_ commonly used in Widelands
+
+  .. versionadded:: 1.2
+
+* **colors** (table): Style definitons for RGB `colors`_
+
+  .. versionadded:: 1.2
+
+* **styled_sizes** (table): Definitons for UI element `sizes`_ and text spacing
+
+  .. versionadded:: 1.2
 
 RGB colors are arrays with three entries representing the red, green, and blue components (in this order).
 RGBA colors are arrays with four entries representing the red, green, blue, and alpha components (in this order).
@@ -158,7 +166,7 @@ Since version 1.2, it is no longer required to specify all styles in a theme. Th
 style from the default theme will be used for omitted styles. However, if a style is included,
 its definition must be complete. Individual elements still cannot be overridden separately.
 
-Windows
+windows
 ~~~~~~~
 
 The ``windows`` table contains two subtables ``wui`` and ``fsmenu`` for in-game/in-editor and main menu windows respectively. Each subtable requires the following keys:
@@ -167,7 +175,7 @@ The ``windows`` table contains two subtables ``wui`` and ``fsmenu`` for in-game/
 * **window_border_unfocused** (RGBA): The color to blend over the border of the window if it does not have focus.
 * **background**, **border_top**, **border_bottom**, **border_right**, **border_left**, **button_close**, **button_pin**, **button_unpin**, **button_minimize**, **button_unminimize** (strings): The paths to the corresponding icons. See above for the recommended directory structure.
 
-Buttons
+buttons
 ~~~~~~~
 
 .. image:: images/themes/buttons.png
@@ -176,17 +184,17 @@ Buttons
 
 The ``buttons`` table contains two subtables ``wui`` and ``fsmenu`` for in-game/in-editor and main menu buttons respectively. Each subtable contains three sub-subtables ``primary``, ``secondary``, and ``menu`` for the three button types. Each sub-subtable contains two sub-sub-subtables ``enabled`` and ``disabled`` for the button's enabled and disabled variant. Each of these contains a key ``font`` with a :ref:`font definition table<theme_fonts>` and a table ``background`` with the keys ``image``, typically pointing to the button background image as described above, and an RGB color ``color`` which will be blended with the image.
 
-Sliders
+sliders
 ~~~~~~~
 
 The ``sliders`` table contains two subtables ``wui`` and ``fsmenu`` for in-game/in-editor and main menu sliders respectively. The ``fsmenu`` subtable contains a single sub-subtable ``menu``; the ``wui`` subtable contains two sub-subtables ``light`` and ``dark``. Each of these contains tables ``background`` and ``font`` like for `buttons`_.
 
-Tabpanels
+tabpanels
 ~~~~~~~~~
 
 The ``tabpanels`` table contains two subtables ``wui`` and ``fsmenu`` for in-game/in-editor and main menu tabpanels respectively. The ``fsmenu`` subtable contains a single sub-subtable ``menu``; the ``wui`` subtable contains two sub-subtables ``light`` and ``dark``. Each of these contains tables ``image`` and ``color`` like for the backgrounds of `buttons`_.
 
-Editboxes
+editboxes
 ~~~~~~~~~
 
 The ``editboxes`` table contains two subtables ``wui`` and ``fsmenu`` for in-game/in-editor and main menu editboxes respectively. Each subtable contains tables ``background`` and ``font`` like for `buttons`_. The ``background`` table requires an additional argument ``margin`` of type ``int`` which will be used for the editbox's padding.
@@ -196,39 +204,39 @@ Dropdowns
 
 The ``dropdowns`` table contains two subtables ``wui`` and ``fsmenu`` for in-game/in-editor and main menu dropdowns respectively, each of which contains a single sub-subtable ``menu``. Each sub-subtable contains tables ``image`` and ``color`` like for the backgrounds of `buttons`_.
 
-Scrollbars
+scrollbars
 ~~~~~~~~~~
 
 The ``scrollbars`` table contains two subtables ``wui`` and ``fsmenu`` for in-game/in-editor and main menu scrollbars respectively, each of which contains a single sub-subtable ``menu``. Each sub-subtable contains tables ``image`` and ``color`` like for the backgrounds of `buttons`_.
 
-Statistics Plots
+statistics plots
 ~~~~~~~~~~~~~~~~
 
 The ``statistics_plot`` table contains two subtables ``colors`` and ``fonts``. The ``colors`` table defines two RGB colors named ``axis_line`` and ``zero_line`` for the two axis of a statistics plot. The ``fonts`` tables needs to define :ref:`font definition tables<theme_fonts>` named ``y_min_value`` and ``y_max_value`` (for the y-axis labels) and ``x_tick`` (for the x-axis labels).
 
-Building Statistics
+building statistics
 ~~~~~~~~~~~~~~~~~~~
 
 The ``building statistics`` table contains two font definition tables ``census_font`` and ``statistics_font`` which will be used for the in-game census and statistics strings shown over buildings; a table ``colors`` with eight RGB colors ``low``, ``medium``, and ``high`` (for production sites), ``low_alt``, ``medium_alt``, and ``high_alt`` (alternative colors for situations where more contrast is required), ``construction`` (for objects under construction), and ``neutral`` (e.g. for military sites' soldier string); and a table ``statistics_window`` with an integer value ``editbox_margin`` to override the padding of editboxes and a table ``fonts`` with two :ref:`font definition tables<theme_fonts>` ``button_font`` (for buttons) and ``details_font`` (for other texts).
 
-Progress bars
+progress bars
 ~~~~~~~~~~~~~
 
 The ``progressbar`` table contains two subtables ``wui`` and ``fsmenu`` for in-game/in-editor and loading screen progress bars respectively. Each subtable contains a :ref:`font definition table<theme_fonts>` ``font`` and a table ``background_colors`` with three RGB colors ``low``, ``medium``, and ``high`` for the three states of the progress bar.
 
-Tables
+tables
 ~~~~~~
 
 The ``tables`` table contains two subtables ``wui`` and ``fsmenu`` for in-game/in-editor and main menu tables respectively. Each subtable contains three :ref:`font definition tables<theme_fonts>` ``enabled`` (for normal table entries), ``disabled`` (for greyed-out table entries), and ``hotkey`` (to display hotkeys).
 
-Ware Statistics
+ware statistics
 ~~~~~~~~~~~~~~~
 
 The ``wareinfo`` table contains two subtables ``highlight`` and ``normal``  for highlighted/selected and non-highlighted items respectively. Each subtable contains a string ``icon_background_image`` with an image path; a ``colors`` table with three RGB colors ``icon_frame`` (for frames), ``icon_background`` (for the backgrounds of icons), and ``info_background`` (for the background of the info string associated with an item); and a ``fonts`` table with two :ref:`font definition tables<theme_fonts>` ``header`` (for captions) and ``info`` (for the info strings).
 
 .. _theme_fonts:
 
-Fonts
+fonts
 ~~~~~
 
 A font definition table contains the following entries:
@@ -287,9 +295,11 @@ global
 
 * **warning**: Warnings and errors
 * **disabled**: Greyed-out items
-* **unknown**: Used when a Lua script requests a font style not included in this list .. versionadded:: 1.2
+* **unknown**: Used when a Lua script requests a font style not included in this list
 
-Paragraph Styles
+  .. versionadded:: 1.2
+
+paragraph styles
 ~~~~~~~~~~~~~~~~
 
 .. versionadded:: 1.2
@@ -328,7 +338,7 @@ The ``paragraphs`` table defines paragraph styles used mostly by the help texts 
 * **wui_lore_author**: Used for the lore author texts in the Encyclopedia
 * **unknown**: Used when a Lua script requests a paragraph style not included in this list
 
-Colors
+colors
 ~~~~~~
 
 .. versionadded:: 1.2
@@ -363,7 +373,7 @@ The ``colors`` table contains subtables of RGB colors:
 * **map_river_advisor**: Text color for the advisor's speech box titles in the Along the River SP scenario
 * **unknown**: Used when a Lua script requests a color not included in this list
 
-Sizes
+sizes
 ~~~~~
 
 .. versionadded:: 1.2

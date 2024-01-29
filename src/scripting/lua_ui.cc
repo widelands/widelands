@@ -576,7 +576,7 @@ int LuaPanel::get_child(lua_State* L) {
            Properties:
 
            * ``"text"``: **Mandatory**. The text to display. The text can be formatted with richtext
-   (see :ref:`richtext.lua`), the ``font`` attribute has no effect then.
+             (see :ref:`richtext.lua`), in which case the ``font`` attribute will have no effect.
            * ``"scroll_mode"``: **Mandatory**. The text area's scrolling behaviour. One of:
 
              * ``"none"``: The text area expands to accommodate its content instead of scrolling.
