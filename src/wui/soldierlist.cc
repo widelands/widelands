@@ -538,8 +538,8 @@ void SoldierList::think() {
 	case Widelands::MapObjectType::SHIP: {
 		upcast(const Widelands::Ship, ship, object);
 		soldier_preference_.set_state(static_cast<uint8_t>(ship->get_soldier_preference()), false);
-		soldierpanel_.set_visible(
-		   (ship->get_ship_type() == Widelands::ShipType::kWarship) && !ship->is_refitting());
+		soldierpanel_.set_visible((ship->get_ship_type() == Widelands::ShipType::kWarship) &&
+		                          !ship->is_refitting());
 		break;
 	}
 	case Widelands::MapObjectType::TRAININGSITE:

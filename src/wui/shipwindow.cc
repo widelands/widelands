@@ -132,9 +132,8 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	               kImgConstructPort, true, [this]() { act_construct_port(); });
 	exp_mid->add(btn_construct_port_);
 
-	btn_stay_ =
-	   make_button(exp_mid, "stay", _("Anchor at the current location"), kImgWarshipStay, true,
-	               [this]() { act_scout_towards(Widelands::IDLE); });
+	btn_stay_ = make_button(exp_mid, "stay", _("Anchor at the current location"), kImgWarshipStay,
+	                        true, [this]() { act_scout_towards(Widelands::IDLE); });
 	exp_mid->add(btn_stay_);
 
 	btn_scout_[Widelands::WALK_E - 1] =
@@ -251,8 +250,7 @@ void ShipWindow::set_button_visibility() {
 	const bool show_expedition_controls = ship->state_is_expedition() && !is_refitting;
 	const bool show_soldier_controls =
 	   (ship->get_ship_type() == Widelands::ShipType::kWarship) ^ is_refitting;
-	const bool show_wares =
-	   (ship->get_ship_type() != Widelands::ShipType::kWarship) || is_refitting;
+	const bool show_wares = (ship->get_ship_type() != Widelands::ShipType::kWarship) || is_refitting;
 	const bool show_construct_port =
 	   ship->get_ship_state() == Widelands::ShipStates::kExpeditionPortspaceFound;
 
@@ -498,7 +496,7 @@ void ShipWindow::think() {
 		 * - The "scout towards a direction" buttons are only active, if the ship can move at least
 		 *   one field in that direction without reaching the coast.
 		 * - The "explore island's coast" buttons are only active, if a coast is in vision range
-	    *   (no matter if in waiting or already expedition/scouting mode)
+		 *   (no matter if in waiting or already expedition/scouting mode)
 		 */
 		btn_construct_port_->set_enabled(can_act &&
 		                                 (state == Widelands::ShipStates::kExpeditionPortspaceFound));
