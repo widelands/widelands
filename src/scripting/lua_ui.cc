@@ -566,7 +566,7 @@ int LuaPanel::get_child(lua_State* L) {
          * ``"textarea"``: A static text area with a single line of text. Properties:
 
            * ``"text"``: **Mandatory**. The text to display.
-           * ``"font"``: **Mandatory**. The font style to use.
+           * ``"font"``: **Mandatory**. The font style to use. See :ref:`theme_fonts`
            * ``"text_align"``: **Optional**. The alignment of the text. Valid values are
              ``"center"`` (the default), ``"left"``, and ``"right"``.
            * ``"fixed_width"``: **Optional**. If set, the text area's width is fixed instead
@@ -575,7 +575,7 @@ int LuaPanel::get_child(lua_State* L) {
          * ``"multilinetextarea"``: A static text area displaying multiple lines of text.
            Properties:
 
-           * ``"text"``: **Mandatory**. The text to display.
+           * ``"text"``: **Mandatory**. The text to display. The text can be formatted with richtext (see :ref:`richtext.lua`), the ``font`` attribute has no effect then.
            * ``"scroll_mode"``: **Mandatory**. The text area's scrolling behaviour. One of:
 
              * ``"none"``: The text area expands to accommodate its content instead of scrolling.
@@ -584,7 +584,7 @@ int LuaPanel::get_child(lua_State* L) {
              * ``"log"``: Follow the bottom of the log.
              * ``"log_force"``: Follow the bottom of the log with forced scrolling.
 
-           * ``"font"``: **Optional**. The font style to use.
+           * ``"font"``: **Optional**. The font style to use. See :ref:`theme_fonts`
            * ``"text_align"``: **Optional**. The alignment of the text. Valid values are
              ``"center"`` (the default), ``"left"``, and ``"right"``.
 

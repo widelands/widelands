@@ -158,7 +158,7 @@ Since version 1.2, it is no longer required to specify all styles in a theme. Th
 style from the default theme will be used for omitted styles. However, if a style is included,
 its definition must be complete. Individual elements still cannot be overridden separately.
 
-windows
+Windows
 ~~~~~~~
 
 The ``windows`` table contains two subtables ``wui`` and ``fsmenu`` for in-game/in-editor and main menu windows respectively. Each subtable requires the following keys:
@@ -167,64 +167,68 @@ The ``windows`` table contains two subtables ``wui`` and ``fsmenu`` for in-game/
 * **window_border_unfocused** (RGBA): The color to blend over the border of the window if it does not have focus.
 * **background**, **border_top**, **border_bottom**, **border_right**, **border_left**, **button_close**, **button_pin**, **button_unpin**, **button_minimize**, **button_unminimize** (strings): The paths to the corresponding icons. See above for the recommended directory structure.
 
-buttons
+Buttons
 ~~~~~~~
 
-The ``buttons`` table contains two subtables ``wui`` and ``fsmenu`` for in-game/in-editor and main menu buttons respectively. Each subtable contains three sub-subtables ``primary``, ``secondary``, and `menu`` for the three button types. Each sub-subtable contains two sub-sub-subtables ``enabled`` and ``disabled`` for the button's enabled and disabled variant. Each of these contains a key ``font`` with a :ref:`font definition table<theme_fonts>` and a table ``background`` with the keys ``image``, typically pointing to the button background image as described above, and an RGB color ``color`` which will be blended with the image.
+.. image:: images/themes/buttons.png
+   :align: right
+   :alt: fonts and themes
 
-sliders
+The ``buttons`` table contains two subtables ``wui`` and ``fsmenu`` for in-game/in-editor and main menu buttons respectively. Each subtable contains three sub-subtables ``primary``, ``secondary``, and ``menu`` for the three button types. Each sub-subtable contains two sub-sub-subtables ``enabled`` and ``disabled`` for the button's enabled and disabled variant. Each of these contains a key ``font`` with a :ref:`font definition table<theme_fonts>` and a table ``background`` with the keys ``image``, typically pointing to the button background image as described above, and an RGB color ``color`` which will be blended with the image.
+
+Sliders
 ~~~~~~~
 
 The ``sliders`` table contains two subtables ``wui`` and ``fsmenu`` for in-game/in-editor and main menu sliders respectively. The ``fsmenu`` subtable contains a single sub-subtable ``menu``; the ``wui`` subtable contains two sub-subtables ``light`` and ``dark``. Each of these contains tables ``background`` and ``font`` like for `buttons`_.
 
-tabpanels
+Tabpanels
 ~~~~~~~~~
 
 The ``tabpanels`` table contains two subtables ``wui`` and ``fsmenu`` for in-game/in-editor and main menu tabpanels respectively. The ``fsmenu`` subtable contains a single sub-subtable ``menu``; the ``wui`` subtable contains two sub-subtables ``light`` and ``dark``. Each of these contains tables ``image`` and ``color`` like for the backgrounds of `buttons`_.
 
-editboxes
+Editboxes
 ~~~~~~~~~
 
 The ``editboxes`` table contains two subtables ``wui`` and ``fsmenu`` for in-game/in-editor and main menu editboxes respectively. Each subtable contains tables ``background`` and ``font`` like for `buttons`_. The ``background`` table requires an additional argument ``margin`` of type ``int`` which will be used for the editbox's padding.
 
-dropdowns
+Dropdowns
 ~~~~~~~~~
 
 The ``dropdowns`` table contains two subtables ``wui`` and ``fsmenu`` for in-game/in-editor and main menu dropdowns respectively, each of which contains a single sub-subtable ``menu``. Each sub-subtable contains tables ``image`` and ``color`` like for the backgrounds of `buttons`_.
 
-scrollbars
+Scrollbars
 ~~~~~~~~~~
 
 The ``scrollbars`` table contains two subtables ``wui`` and ``fsmenu`` for in-game/in-editor and main menu scrollbars respectively, each of which contains a single sub-subtable ``menu``. Each sub-subtable contains tables ``image`` and ``color`` like for the backgrounds of `buttons`_.
 
-statistics plots
+Statistics Plots
 ~~~~~~~~~~~~~~~~
 
 The ``statistics_plot`` table contains two subtables ``colors`` and ``fonts``. The ``colors`` table defines two RGB colors named ``axis_line`` and ``zero_line`` for the two axis of a statistics plot. The ``fonts`` tables needs to define :ref:`font definition tables<theme_fonts>` named ``y_min_value`` and ``y_max_value`` (for the y-axis labels) and ``x_tick`` (for the x-axis labels).
 
-building statistics
+Building Statistics
 ~~~~~~~~~~~~~~~~~~~
 
 The ``building statistics`` table contains two font definition tables ``census_font`` and ``statistics_font`` which will be used for the in-game census and statistics strings shown over buildings; a table ``colors`` with eight RGB colors ``low``, ``medium``, and ``high`` (for production sites), ``low_alt``, ``medium_alt``, and ``high_alt`` (alternative colors for situations where more contrast is required), ``construction`` (for objects under construction), and ``neutral`` (e.g. for military sites' soldier string); and a table ``statistics_window`` with an integer value ``editbox_margin`` to override the padding of editboxes and a table ``fonts`` with two :ref:`font definition tables<theme_fonts>` ``button_font`` (for buttons) and ``details_font`` (for other texts).
 
-progress bars
+Progress bars
 ~~~~~~~~~~~~~
 
 The ``progressbar`` table contains two subtables ``wui`` and ``fsmenu`` for in-game/in-editor and loading screen progress bars respectively. Each subtable contains a :ref:`font definition table<theme_fonts>` ``font`` and a table ``background_colors`` with three RGB colors ``low``, ``medium``, and ``high`` for the three states of the progress bar.
 
-tables
+Tables
 ~~~~~~
 
 The ``tables`` table contains two subtables ``wui`` and ``fsmenu`` for in-game/in-editor and main menu tables respectively. Each subtable contains three :ref:`font definition tables<theme_fonts>` ``enabled`` (for normal table entries), ``disabled`` (for greyed-out table entries), and ``hotkey`` (to display hotkeys).
 
-ware statistics
+Ware Statistics
 ~~~~~~~~~~~~~~~
 
 The ``wareinfo`` table contains two subtables ``highlight`` and ``normal``  for highlighted/selected and non-highlighted items respectively. Each subtable contains a string ``icon_background_image`` with an image path; a ``colors`` table with three RGB colors ``icon_frame`` (for frames), ``icon_background`` (for the backgrounds of icons), and ``info_background`` (for the background of the info string associated with an item); and a ``fonts`` table with two :ref:`font definition tables<theme_fonts>` ``header`` (for captions) and ``info`` (for the info strings).
 
 .. _theme_fonts:
 
-fonts
+Fonts
 ~~~~~
 
 A font definition table contains the following entries:
@@ -237,13 +241,33 @@ Optionally the following boolean values may be set: **bold**, **italic**, **unde
 
 Some of the above style tables define custom fonts. Additionally, there is a ``fonts`` table which defines fonts used in many places in Widelands:
 
+.. image:: images/themes/fonts_styles.png
+   :align: right
+   :alt: fonts and themes
+
+wui
+
+* **wui_window_title**: Window titles (game and editor)
+* **wui_message_heading**: Headings for in-game inbox messages
+* **wui_message_paragraph**: Text of in-game inbox messages
+* **wui_info_panel_heading**: Headings for info texts (game and editor)
+* **wui_info_panel_paragraph**: Info texts (game and editor)
+* **label_wui**: Normal labels (game and editor)
+* **tooltip_header_wui**: Tooltip headings (game and editor)
+* **tooltip_wui**: Tooltips (game and editor)
+* **tooltip_hotkey_wui**: Hotkey tooltips (game and editor)
+* **wui_game_speed_and_coordinates**: Time, speed and coordinates strings in the game/editor info panel
+* **wui_attack_box_slider_label**: The label over the in-game attack dialog's slider
+* **game_summary_title**: Heading in the end-of-game-summary screen
 * **chat_message**: Basic chat messages
 * **chat_timestamp**: Timestamps for chat messages
 * **chat_whisper**: Whispered chat messages
 * **chat_playername**: The name of the player who sent a chat message
 * **chat_server**: Chat messages sent by the server
-* **fsmenu_intro**: Previously used in the splashscreen. Currently unused.
-* **italic**: Italic texts (main menu only)
+
+fs
+
+* **fs_window_title**: Window titles (main menu only)
 * **fsmenu_gametip**: Tips shown on the loading screens
 * **fsmenu_info_panel_heading**: Headings for info texts (main menu only)
 * **fsmenu_info_panel_paragraph**: Info texts (main menu only)
@@ -252,28 +276,20 @@ Some of the above style tables define custom fonts. Additionally, there is a ``f
 * **fsmenu_game_setup_superuser**: Administrators in the internet lobby's list of users
 * **fsmenu_game_setup_irc_client**: IRC clients in the internet lobby's list of users
 * **fsmenu_translation_info**: Translation statistics in the main menu's options window
-* **fs_window_title**: Window titles (main menu only)
-* **wui_window_title**: Window titles (game and editor)
 * **label_fs**: Normal labels (main menu only)
-* **label_wui**: Normal labels (game and editor)
+* **tooltip_header_fs**: Tooltip headings (main menu only)
 * **tooltip_fs**: Tooltips (main menu only)
 * **tooltip_hotkey_fs**: Hotkey tooltips (main menu only)
-* **tooltip_header_fs**: Tooltip headings (main menu only)
-* **tooltip_wui**: Tooltips (game and editor)
-* **tooltip_hotkey_wui**: Hotkey tooltips (game and editor)
-* **tooltip_header_wui**: Tooltip headings (game and editor)
-* **game_summary_title**: Heading in the end-of-game-summary screen
+* **fsmenu_intro**: Previously used in the splashscreen. Currently unused.
+* **italic**: Italic texts (main menu only)
+
+global
+
 * **warning**: Warnings and errors
 * **disabled**: Greyed-out items
-* **wui_attack_box_slider_label**: The label over the in-game attack dialog's slider
-* **wui_info_panel_heading**: Headings for info texts (game and editor)
-* **wui_info_panel_paragraph**: Info texts (game and editor)
-* **wui_message_heading**: Headings for in-game inbox messages
-* **wui_message_paragraph**: Text of in-game inbox messages
-* **wui_game_speed_and_coordinates**: Time, speed and coordinates strings in the game/editor info panel
 * **unknown**: Used when a Lua script requests a font style not included in this list .. versionadded:: 1.2
 
-paragraph styles
+Paragraph Styles
 ~~~~~~~~~~~~~~~~
 
 .. versionadded:: 1.2
@@ -312,7 +328,7 @@ The ``paragraphs`` table defines paragraph styles used mostly by the help texts 
 * **wui_lore_author**: Used for the lore author texts in the Encyclopedia
 * **unknown**: Used when a Lua script requests a paragraph style not included in this list
 
-colors
+Colors
 ~~~~~~
 
 .. versionadded:: 1.2
@@ -347,7 +363,7 @@ The ``colors`` table contains subtables of RGB colors:
 * **map_river_advisor**: Text color for the advisor's speech box titles in the Along the River SP scenario
 * **unknown**: Used when a Lua script requests a color not included in this list
 
-sizes
+Sizes
 ~~~~~
 
 .. versionadded:: 1.2
