@@ -1134,7 +1134,7 @@ bool Ship::is_on_destination_dock() const {
 }
 
 uint32_t Ship::min_warship_soldier_capacity() const {
-	return is_on_destination_dock() ? 0U : get_nritems();
+	return (ship_type_ != ShipType::kWarship || is_on_destination_dock()) ? 0U : get_nritems();
 }
 
 std::vector<Soldier*> Ship::onboard_soldiers() const {
