@@ -575,7 +575,8 @@ int LuaPanel::get_child(lua_State* L) {
          * ``"multilinetextarea"``: A static text area displaying multiple lines of text.
            Properties:
 
-           * ``"text"``: **Mandatory**. The text to display. The text can be formatted with richtext (see :ref:`richtext.lua`), the ``font`` attribute has no effect then.
+           * ``"text"``: **Mandatory**. The text to display. The text can be formatted with richtext
+   (see :ref:`richtext.lua`), the ``font`` attribute has no effect then.
            * ``"scroll_mode"``: **Mandatory**. The text area's scrolling behaviour. One of:
 
              * ``"none"``: The text area expands to accommodate its content instead of scrolling.
