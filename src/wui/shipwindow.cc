@@ -249,13 +249,18 @@ void ShipWindow::set_button_visibility() {
 
 	const bool is_refitting = ship->is_refitting();
 	const bool show_expedition_controls = ship->state_is_expedition() && !is_refitting;
-	const bool is_warship = (ship->get_ship_type() == Widelands::ShipType::kWarship) ^ is_refitting;
+	const bool show_soldier_controls =
+	   (ship->get_ship_type() == Widelands::ShipType::kWarship) ^ is_refitting;
+	const bool show_wares =
+	   (ship->get_ship_type() != Widelands::ShipType::kWarship) || is_refitting;
+	const bool show_warship_stay =
+	   ship->get_ship_type() == Widelands::ShipType::kWarship;
 
-	display_->set_visible(!is_warship);
-	warship_capacity_control_->set_visible(is_warship);
+	display_->set_visible(show_wares);
+	warship_capacity_control_->set_visible(show_soldier_controls);
 	btn_cancel_expedition_->set_visible(btn_cancel_expedition_->enabled());
-	btn_warship_stay_->set_visible(is_warship);
-	btn_construct_port_->set_visible(!is_warship);
+	btn_warship_stay_->set_visible(show_warship_stay);
+	btn_construct_port_->set_visible(!show_warship_stay);
 	navigation_box_.set_visible(show_expedition_controls);
 	set_destination_->set_visible(show_expedition_controls);
 }
@@ -488,15 +493,12 @@ void ShipWindow::think() {
 	Widelands::ShipStates state = ship->get_ship_state();
 	if (ship->state_is_expedition()) {
 		/* The following rules apply:
-		 * - The "construct port" button is only active, if the ship is waiting for commands and found
-		 * a port
-		 *   buildspace
+		 * - The "construct port" button is only active, if the ship is waiting for commands and
+		 *   found a port buildspace
 		 * - The "scout towards a direction" buttons are only active, if the ship can move at least
-		 * one field
-		 *   in that direction without reaching the coast.
-		 * - The "explore island's coast" buttons are only active, if a coast is in vision range (no
-		 * matter if
-		 *   in waiting or already expedition/scouting mode)
+		 *   one field in that direction without reaching the coast.
+		 * - The "explore island's coast" buttons are only active, if a coast is in vision range
+	    *   (no matter if in waiting or already expedition/scouting mode)
 		 */
 		btn_construct_port_->set_enabled(can_act &&
 		                                 (state == Widelands::ShipStates::kExpeditionPortspaceFound));
