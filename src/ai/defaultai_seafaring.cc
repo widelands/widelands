@@ -161,73 +161,73 @@ bool DefaultAI::marine_main_decisions(const Time& /* gametime */) {
  * Part of marine_main_decisions() to make decisions and set this AI's globals for the other parts
  */
 void DefaultAI::evaluate_fleet() {
-		const bool tradeship_surplus_needed =
-		   tradeships_count >= ports_count && persistent_data->ships_utilization > 5000;
+	const bool tradeship_surplus_needed =
+	   tradeships_count >= ports_count && persistent_data->ships_utilization > 5000;
 
-		const uint32_t min_tradeships = (ports_count + 1) / kPortsPerTradeShip;
-		const uint32_t tradeships_target =
-		   tradeship_surplus_needed ? tradeships_count + 1 : ports_count;
+	const uint32_t min_tradeships = (ports_count + 1) / kPortsPerTradeShip;
+	const uint32_t tradeships_target =
+	   tradeship_surplus_needed ? tradeships_count + 1 : ports_count;
 
-		// Make sure we get a free ship for an expedition or a warship
-		const uint32_t new_fleet_target = std::max(tradeships_target, min_tradeships + 1);
+	// Make sure we get a free ship for an expedition or a warship
+	const uint32_t new_fleet_target = std::max(tradeships_target, min_tradeships + 1);
 
-		const bool ship_free = tradeships_count > min_tradeships;
-		const bool ships_full = tradeships_count >= tradeships_target;
+	const bool ship_free = tradeships_count > min_tradeships;
+	const bool ships_full = tradeships_count >= tradeships_target;
 
-		const uint32_t warships_target = ports_finished_count * kWarshipsPerPort;
-		const bool warship_shortage =
-		   game().naval_warfare_allowed() && (warships_target > warships_count);
+	const uint32_t warships_target = ports_finished_count * kWarshipsPerPort;
+	const bool warship_shortage =
+	   game().naval_warfare_allowed() && (warships_target > warships_count);
 
-		const bool consider_expedition =
-		   ports_count > 0 && !persistent_data->no_more_expeditions &&
-		   (expeditions_in_progress + expeditions_in_prep + expeditions_ready) == 0 &&
-		   basic_economy_established;
+	const bool consider_expedition =
+	   ports_count > 0 && !persistent_data->no_more_expeditions &&
+	   (expeditions_in_progress + expeditions_in_prep + expeditions_ready) == 0 &&
+	   basic_economy_established;
 
-		// Help the AI get out of small starting islands
-		const bool prioritise_expedition = ports_count < 2;
+	// Help the AI get out of small starting islands
+	const bool prioritise_expedition = ports_count < 2;
 
-		// Set this AI's global variables
-		if (tradeship_surplus_needed) {
-			// Don't increase fleet_target for heavy utilization until old value is reached
-			if (tradeships_count >= fleet_target) {
-				fleet_target = new_fleet_target;
-			}
-		} else {
+	// Set this AI's global variables
+	if (tradeship_surplus_needed) {
+		// Don't increase fleet_target for heavy utilization until old value is reached
+		if (tradeships_count >= fleet_target) {
 			fleet_target = new_fleet_target;
 		}
+	} else {
+		fleet_target = new_fleet_target;
+	}
 
-		if (ship_free) {
-			tradeship_refit_needed = false;
-			if (prioritise_expedition) {
-				start_expedition = consider_expedition;
+	if (ship_free) {
+		tradeship_refit_needed = false;
+		if (prioritise_expedition) {
+			start_expedition = consider_expedition;
 
-				const uint32_t free_ships_count = tradeships_count - min_tradeships;
+			const uint32_t free_ships_count = tradeships_count - min_tradeships;
 
-				// We also need to keep a ship ready for previously ordered expeditions
-				const bool allow_warship =
-				   (!start_expedition && (expeditions_in_prep + expeditions_ready) == 0) ||
-				   free_ships_count > 1;
+			// We also need to keep a ship ready for previously ordered expeditions
+			const bool allow_warship =
+			   (!start_expedition && (expeditions_in_prep + expeditions_ready) == 0) ||
+			   free_ships_count > 1;
 
-				warship_needed = allow_warship && warship_shortage;
-			} else {
-				warship_needed = warship_shortage;
-				start_expedition = !warship_needed && consider_expedition &&
-				                   (ships_full || persistent_data->ships_utilization < 2000);
-			}
-		} else {  // no free ships
-			start_expedition = false;
-			warship_needed = false;
-			tradeship_refit_needed = (tradeships_count < min_tradeships) && (warships_count > 0);
+			warship_needed = allow_warship && warship_shortage;
+		} else {
+			warship_needed = warship_shortage;
+			start_expedition = !warship_needed && consider_expedition &&
+			                   (ships_full || persistent_data->ships_utilization < 2000);
 		}
+	} else {  // no free ships
+		start_expedition = false;
+		warship_needed = false;
+		tradeship_refit_needed = (tradeships_count < min_tradeships) && (warships_count > 0);
+	}
 
-		if (tradeship_refit_needed) {
-			// This shouldn't happen... except when a new port is built from land
-			verb_log_dbg_time(game().get_gametime(),
-			                  "AI %d backfit needed: %u ports, %" PRIuS
-			                  " ships total: %u expeditions, %u tradeships, %u warships",
-			                  player_number(), ports_count, allships.size(), expeditions_in_progress,
-			                  tradeships_count, warships_count);
-		}
+	if (tradeship_refit_needed) {
+		// This shouldn't happen... except when a new port is built from land
+		verb_log_dbg_time(game().get_gametime(),
+		                  "AI %d backfit needed: %u ports, %" PRIuS
+		                  " ships total: %u expeditions, %u tradeships, %u warships",
+		                  player_number(), ports_count, allships.size(), expeditions_in_progress,
+		                  tradeships_count, warships_count);
+	}
 }
 
 /**
