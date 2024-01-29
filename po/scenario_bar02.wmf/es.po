@@ -6,6 +6,7 @@
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2016
 # GunChleoc, 2016
 # Juan Miguel Bernal González, 2024
+# Juan Miguel Bernal González, 2024
 # Gontzal Pujana Onaindia <juchuf@gmail.com>, 2015
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015-2016
@@ -292,7 +293,7 @@ msgid ""
 " is the first war leader to leave Al’thunran, thus leaving his side weak and"
 " vulnerable. As my scouts report, he has set foot on the lower grounds "
 "around the capital, securing the outer fortification rings."
-msgstr "Las noticias que trajo una patrulla no son buenas. Nuestros espías nos cuentan que las tribus en guerra siguen haciendo estragos en la batalla, pero algunos de los soldados ancianos y los líderes tribales parecen cansados de esta guerra sin sentido. Kalitath, hijo de Kun es el primer lider en dejar Al'thunran ,dejando a su lado débil y vulnerable. Como informan mis exploradores, ha puesto un pie en los terrenos más bajos alrededor de la capital, asegurando los anillos exteriores de fortificación."
+msgstr "Las noticias que trajo una patrulla no son buenas. Nuestros espías nos cuentan que las tribus en guerra siguen haciendo estragos en la batalla, pero algunos de los soldados ancianos y los líderes tribales parecen cansados de esta guerra sin sentido. Kalitath, hijo de Kun es el primer lider en dejar Al'thunran ,dejando a su lado débil y vulnerable. Como informan mis exploradores, ha puesto un pie en los terrenos más bajos alrededor de la capital, asegurando los anillos exteriores de la fortificación."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:175
 msgid "Doubts"

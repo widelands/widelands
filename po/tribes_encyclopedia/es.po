@@ -8,6 +8,7 @@
 # GunChleoc, 2016,2018
 # Javier Mora <morehash@gmail.com>, 2015
 # Juan Miguel Bernal González, 2024
+# Juan Miguel Bernal González, 2024
 # Gontzal Pujana Onaindia <juchuf@gmail.com>, 2015
 # Kiibakun, 2015
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
@@ -7026,7 +7027,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Produces beer of the lower grade. This beer is a vital component of the "
 "snacks that inns and big inns prepare for miners in deep mines."
-msgstr "Produce cerveza de bajo grado. Esta cerveza es un componente vital de los bocadillos que las posadas y las grandes posadas preparan para los mineros en las profundas minas."
+msgstr "Produce cerveza con poco grado. Esta cerveza es un componente vital de los bocadillos que las posadas y las grandes posadas preparan para los mineros en las profundas minas."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Micro
 #. Brewery

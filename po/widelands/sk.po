@@ -548,11 +548,11 @@ msgstr "Zobraz stavebné miesta"
 #. etc.) are removed
 #: ../../src/editor/editorinteractive.cc:473
 msgid "Hide Maximum Building Spaces"
-msgstr ""
+msgstr "Skry najväčšie stavebné miesta"
 
 #: ../../src/editor/editorinteractive.cc:474
 msgid "Show Maximum Building Spaces"
-msgstr ""
+msgstr "Zobraz najväčšie stavebné miesta"
 
 #: ../../src/editor/editorinteractive.cc:477
 msgid ""
@@ -1332,7 +1332,7 @@ msgstr "Identifikátor mapy:"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:312
 #: ../../src/ui_fsmenu/campaigns.cc:53
 msgid "Default"
-msgstr ""
+msgstr "Normálna"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:282
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:316
@@ -2362,10 +2362,10 @@ msgstr[3] "Vyrobené výrobky: %s"
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
-msgstr[0] "Najatý pracovník: %s"
-msgstr[1] "Najatí pracovníci: %s"
-msgstr[2] "Najatí pracovníci: %s"
-msgstr[3] "Najatí pracovníci: %s"
+msgstr[0] "Vycvičený: %s"
+msgstr[1] "Vycvičení: %s"
+msgstr[2] "Vycvičení: %s"
+msgstr[3] "Vycvičení: %s"
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:1906
 msgid "No soldier found for this training level!"
@@ -3627,7 +3627,7 @@ msgstr ""
 
 #: ../../src/ui_basic/color_chooser.cc:253
 msgid "Choose Color…"
-msgstr ""
+msgstr "Výber farby…"
 
 #: ../../src/ui_basic/color_chooser.cc:290
 msgid "Initial Color"
@@ -3653,7 +3653,7 @@ msgstr ""
 
 #: ../../src/ui_basic/color_chooser.cc:327
 msgid "Default Color"
-msgstr ""
+msgstr "Predvolená farba"
 
 #: ../../src/ui_basic/color_chooser.cc:339
 msgid "Red"
@@ -4899,12 +4899,12 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/packager_box.cc:439
 #, c-format
 msgid "Do you really want to delete the directory ‘%s’ and all its contents?"
-msgstr ""
+msgstr "Naozaj chcete vymazať adresár ‚%s’ a všetok jeho obsah?"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:441
 #, c-format
 msgid "Do you really want to delete the map ‘%s’?"
-msgstr ""
+msgstr "Naozaj chcete zmazať mapu ‚%s’?"
 
 #. * TRANSLATORS: Header for campaign difficulty
 #: ../../src/ui_fsmenu/addons/packager_box.cc:489
@@ -5642,7 +5642,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:53
 msgid "Reset to default"
-msgstr ""
+msgstr "Obnoviť do predvolených nastavení"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:74
 msgid "Press the new shortcut or close this window to cancel."
@@ -5654,15 +5654,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:211
 msgid "Edit Keyboard And Mouse Actions"
-msgstr ""
+msgstr "Upravovanie akcií klávesnice a myši"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:223
 msgid "Reset all"
-msgstr ""
+msgstr "Obnoviť všetko"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:224
 msgid "Reset all to defaults"
-msgstr ""
+msgstr "Obnoviť všetko do predvolených nastavení"
 
 #. * TRANSLATORS: This is a button label for a keyboard shortcut in the form
 #. "Action: Key"
@@ -5696,11 +5696,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:303
 msgid "Fastplace"
-msgstr ""
+msgstr "Rýchle umiestnenie"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:305
 msgid "Mouse Scrolling"
-msgstr ""
+msgstr "Posúvanie kolieskom myši"
 
 #: ../../src/ui_fsmenu/launch_game.cc:42
 msgid "Launch Game"
@@ -6099,7 +6099,7 @@ msgstr "Editor…"
 
 #: ../../src/ui_fsmenu/main.cc:495
 msgid "Begin or load a single-player campaign or free game"
-msgstr "Začať alebo nahrať kampaň alebo hru jedného hráča"
+msgstr "Začať alebo načítať kampaň alebo hru jedného hráča"
 
 #: ../../src/ui_fsmenu/main.cc:498
 msgid "Play with your friends over the internet"
@@ -6658,7 +6658,7 @@ msgstr "Vzdialenosť na prichytenie okien k okrajom obrazovky:"
 
 #: ../../src/ui_fsmenu/options.cc:207
 msgid "Edit keyboard and mouse actions…"
-msgstr ""
+msgstr "Upraviť akcie klávesnice a myši…"
 
 #: ../../src/ui_fsmenu/options.cc:223
 msgid "Save game automatically every:"
@@ -6846,7 +6846,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/scenario_select.cc:47
 msgid "Choose Scenario"
-msgstr ""
+msgstr "Výber scenára"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:47
 msgid "Choose Tutorial"
@@ -6854,7 +6854,7 @@ msgstr "Výber tutoriálu"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:87
 msgid "Pick a tutorial from the list, then hit “OK”."
-msgstr ""
+msgstr "Vyberte tutoriál zo zoznamu, potom stlačte „OK“."
 
 #: ../../src/ui_fsmenu/scenario_select.cc:89
 msgid ""
@@ -6863,7 +6863,7 @@ msgstr "Popis aktuálne vybraného tutoriálu sa zobrazuje vpravo."
 
 #: ../../src/ui_fsmenu/scenario_select.cc:106
 msgid "Return to campaign selection"
-msgstr ""
+msgstr "Vrátiť sa do výberu kampane"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:107
 msgid "Play this scenario"
@@ -7401,7 +7401,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:412
 msgid "Load"
-msgstr ""
+msgstr "Načítať"
 
 #: ../../src/wlapplication_options.cc:417
 msgid "Exit"
@@ -7530,7 +7530,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:616
 msgid "Toggle Soldier Levels"
-msgstr ""
+msgstr "Prepnúť úrovne vojakov"
 
 #: ../../src/wlapplication_options.cc:621
 msgid "Toggle Buildings Visibility"
@@ -7644,11 +7644,11 @@ msgstr "Zobraziť iba správy scenára"
 
 #: ../../src/wlapplication_options.cc:759
 msgid "Go to Ship"
-msgstr ""
+msgstr "Ísť k lodi"
 
 #: ../../src/wlapplication_options.cc:764
 msgid "Watch Ship"
-msgstr ""
+msgstr "Sledovať loď"
 
 #: ../../src/wlapplication_options.cc:769
 msgid "Open Ship Window"
@@ -7656,7 +7656,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:774
 msgid "Open Ship Window And Go to Ship"
-msgstr ""
+msgstr "Otvoriť okno lode a ísť k lodi"
 
 #: ../../src/wlapplication_options.cc:779
 msgid "Show All Ships"
@@ -8064,7 +8064,7 @@ msgstr ""
 #: ../../src/wlapplication_options.cc:1501
 #, c-format
 msgid "Fastplace #%i"
-msgstr ""
+msgstr "Rýchle umiestnenie #%i"
 
 #: ../../src/wui/actionconfirm.cc:201
 msgid "Destroy building?"
@@ -8072,7 +8072,7 @@ msgstr "Zničiť budovu?"
 
 #: ../../src/wui/actionconfirm.cc:202
 msgid "Do you really want to destroy this building?"
-msgstr ""
+msgstr "Naozaj chcete zničiť túto budovu?"
 
 #: ../../src/wui/actionconfirm.cc:262
 msgid "Dismantle building?"
@@ -8080,7 +8080,7 @@ msgstr "Rozobrať budovu?"
 
 #: ../../src/wui/actionconfirm.cc:263
 msgid "Do you really want to dismantle this building?"
-msgstr ""
+msgstr "Naozaj chcete rozobrať túto budovu?"
 
 #: ../../src/wui/actionconfirm.cc:265 ../../src/wui/actionconfirm.cc:325
 msgid "Preserve wares"
@@ -8098,7 +8098,7 @@ msgstr "Vylepšiť budovu?"
 
 #: ../../src/wui/actionconfirm.cc:320 ../../src/wui/actionconfirm.cc:323
 msgid "Do you really want to enhance this building?"
-msgstr ""
+msgstr "Naozaj chcete vylepšiť túto budovu?"
 
 #. * TRANSLATORS: Warning message when player wants to enhance a military
 #. building
@@ -8238,11 +8238,11 @@ msgstr "Vo vlastníctve:"
 
 #: ../../src/wui/building_statistics_menu.cc:94
 msgid "Under construction:"
-msgstr ""
+msgstr "Vo výstavbe:"
 
 #: ../../src/wui/building_statistics_menu.cc:124
 msgid "Low productivity threshold:"
-msgstr ""
+msgstr "Hranica nízkej produktivity:"
 
 #: ../../src/wui/building_statistics_menu.cc:135
 #: ../../src/wui/building_statistics_menu.cc:154
@@ -8284,7 +8284,7 @@ msgstr "Prístavy"
 
 #: ../../src/wui/building_statistics_menu.cc:731
 msgid "Low productivity:"
-msgstr ""
+msgstr "Nízka produktivita:"
 
 #. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
@@ -8299,7 +8299,7 @@ msgstr "%1%/%2%"
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
 #: ../../src/wui/building_statistics_menu.cc:750
 msgid "Lacking soldiers:"
-msgstr ""
+msgstr "Chýbajúci vojaci:"
 
 #: ../../src/wui/buildingwindow.cc:207
 msgid "Muted – click to unmute"
@@ -8330,12 +8330,12 @@ msgstr "Zastaviť"
 #. * TRANSLATORS: Infinite Production toggle button for production sites.
 #: ../../src/wui/buildingwindow.cc:297
 msgid "Stop producing indefinitely"
-msgstr ""
+msgstr "Prestať nepretržite vyrábať"
 
 #. * TRANSLATORS: Infinite Production toggle button for production sites.
 #: ../../src/wui/buildingwindow.cc:299
 msgid "Produce indefinitely regardless of the economy’s needs"
-msgstr ""
+msgstr "Vyrábať nepretržite bez ohľadu na potreby ekonomiky"
 
 #: ../../src/wui/buildingwindow.cc:323
 #, c-format
@@ -8360,7 +8360,7 @@ msgstr "Vráti:"
 
 #: ../../src/wui/buildingwindow.cc:424
 msgid "Watch the scout"
-msgstr ""
+msgstr "Sledovať prieskumníka"
 
 #: ../../src/wui/buildingwindow.cc:698
 msgid "Hide work area"
@@ -8386,11 +8386,11 @@ msgstr "Stavebné materiály"
 
 #: ../../src/wui/constructionsitewindow.cc:230
 msgid "Stopped"
-msgstr ""
+msgstr "Zastavené"
 
 #: ../../src/wui/constructionsitewindow.cc:231
 msgid "Stop this building’s work after completion"
-msgstr ""
+msgstr "Zastaviť činnosť tejto budovy po výstavbe"
 
 #: ../../src/wui/constructionsitewindow.cc:270
 #: ../../src/wui/soldierlist.cc:452
@@ -8564,7 +8564,7 @@ msgstr ""
 
 #: ../../src/wui/fieldaction.cc:396 ../../src/wui/fieldaction.cc:403
 msgid "Immovable Actions"
-msgstr ""
+msgstr "Akcie s nehybnými objektami"
 
 #: ../../src/wui/fieldaction.cc:402
 msgid "Mark this immovable for timely removal by a suited worker"
@@ -8576,7 +8576,7 @@ msgstr "Postaviť cestu"
 
 #: ../../src/wui/fieldaction.cc:428
 msgid "Build waterway"
-msgstr ""
+msgstr "Postaviť vodnú cestu"
 
 #: ../../src/wui/fieldaction.cc:436
 msgid "Destroy this flag"
@@ -8612,7 +8612,7 @@ msgstr "Zničiť cestu"
 
 #: ../../src/wui/fieldaction.cc:502
 msgid "Destroy a waterway"
-msgstr ""
+msgstr "Zničiť vodnú cestu"
 
 #: ../../src/wui/fieldaction.cc:522
 msgid "Configure this ocean’s ship fleet"
@@ -8652,11 +8652,11 @@ msgstr "Zrušiť cestu"
 
 #: ../../src/wui/fieldaction.cc:696
 msgid "Go to road"
-msgstr ""
+msgstr "Ísť k ceste"
 
 #: ../../src/wui/fieldaction.cc:704
 msgid "Cancel road and start building waterway"
-msgstr ""
+msgstr "Zrušiť cestu a začať stavať vodnú cestu"
 
 #: ../../src/wui/fieldaction.cc:708
 msgid "Build roads"
@@ -8664,19 +8664,19 @@ msgstr "Postaviť cesty"
 
 #: ../../src/wui/fieldaction.cc:721
 msgid "Cancel waterway"
-msgstr ""
+msgstr "Zrušiť vodnú cestu"
 
 #: ../../src/wui/fieldaction.cc:723
 msgid "Go to waterway"
-msgstr ""
+msgstr "Ísť k vodnej ceste"
 
 #: ../../src/wui/fieldaction.cc:726
 msgid "Cancel waterway and start building road"
-msgstr ""
+msgstr "Zrušiť vodnú cestu a začať stavať cestu"
 
 #: ../../src/wui/fieldaction.cc:729
 msgid "Build waterways"
-msgstr ""
+msgstr "Výstavba vodných ciest"
 
 #: ../../src/wui/fleet_options_window.cc:94
 msgid "Ferry Fleet Options"
@@ -8875,12 +8875,12 @@ msgstr "Naozaj chcete ukončiť hru?"
 #: ../../src/wui/game_main_menu_save_game.cc:46
 #: ../../src/wui/interactive_gamebase.cc:166
 msgid "Load Replay"
-msgstr ""
+msgstr "Načítať záznam"
 
 #: ../../src/wui/game_main_menu_save_game.cc:288
 #: ../../src/wui/game_main_menu_save_game.cc:328
 msgid "Error Saving Game!"
-msgstr ""
+msgstr "Chyba pri ukladaní hry!"
 
 #: ../../src/wui/game_message_menu.cc:53
 #: ../../src/wui/game_message_menu.cc:607
@@ -9152,7 +9152,7 @@ msgstr "Stratených civilných budov"
 
 #: ../../src/wui/general_statistics_menu.cc:193
 msgid "Civilian buildings destroyed"
-msgstr ""
+msgstr "Porazených civilných budov"
 
 #: ../../src/wui/general_statistics_menu.cc:198
 msgid "Military"
@@ -9311,7 +9311,7 @@ msgstr ""
 #: ../../src/wui/interactive_base.cc:947
 #, c-format
 msgid "Road length: %1$u (%2$u)"
-msgstr ""
+msgstr "Dĺžka cesty: %1$u (%2$u)"
 
 #: ../../src/wui/interactive_base.cc:949
 #, c-format
@@ -9321,7 +9321,7 @@ msgstr "Dĺžka vodnej cesty: %1$u (%2$u) / %3$u"
 #: ../../src/wui/interactive_base.cc:954
 #, c-format
 msgid "Road length: %u"
-msgstr ""
+msgstr "Dĺžka cesty: %u"
 
 #: ../../src/wui/interactive_base.cc:957
 #, c-format
@@ -9902,11 +9902,11 @@ msgstr ""
 
 #: ../../src/wui/savegamedeleter.cc:52
 msgid "Confirm Deleting File"
-msgstr ""
+msgstr "Potvrdenie vymazania súboru"
 
 #: ../../src/wui/savegamedeleter.cc:52
 msgid "Confirm Deleting Files"
-msgstr ""
+msgstr "Potvrdenie vymazania súborov"
 
 #: ../../src/wui/savegamedeleter.cc:60
 msgid "Do you really want to delete this game?"
@@ -10152,7 +10152,7 @@ msgstr ""
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:128
 msgid "Watch the selected ship"
-msgstr ""
+msgstr "Sledovať vybranú loď"
 
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:144
@@ -10283,7 +10283,7 @@ msgstr "Ísť k cieľu"
 #: ../../src/wui/shipwindow.cc:243
 #, c-format
 msgid "Go to destination (%s)"
-msgstr ""
+msgstr "Ísť k cieľu (%s)"
 
 #: ../../src/wui/soldier_statistics_menu.cc:89
 #: ../../src/wui/soldier_statistics_menu.cc:182
@@ -10467,7 +10467,7 @@ msgstr "Spotreba"
 
 #: ../../src/wui/ware_statistics_menu.cc:146
 msgid "Economy health"
-msgstr ""
+msgstr "Stav ekonomiky"
 
 #: ../../src/wui/warehousewindow.cc:162
 msgid "Remove 10 wares"

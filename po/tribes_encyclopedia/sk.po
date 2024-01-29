@@ -1364,7 +1364,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1418
 msgctxt "amazons_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr "Jeden prieskum prieskumníka trvá medzi %1$s a %2$s."
+msgstr "Jeden prieskum prieskumníka trvá %1$s až %2$s."
 
 #. TRANSLATORS: Lore author helptext for an Amazon production site: Rope
 #. Weaver's Booth
@@ -4210,7 +4210,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The forester plants one tree between %1$s and %2$s, depending on how far he "
 "has to walk."
-msgstr "Horár zasadí jeden strom v čase medzi %1$s a %2$s, podľa toho, ako ďaleko musí prejsť."
+msgstr "Horár zasadí jeden strom za %1$s až %2$s, podľa toho, ako ďaleko musí prejsť."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Fisher's
 #. House
@@ -4466,7 +4466,7 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:1644
 msgctxt "atlanteans_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr "Jeden prieskum prieskumníka trvá medzi %1$s a %2$s."
+msgstr "Jeden prieskum prieskumníka trvá %1$s až %2$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Sawmill
 #. TRANSLATORS: Purpose helptext for an Empire production site: Sawmill
@@ -6703,7 +6703,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The ranger plants one tree between %1$s and %2$s, depending on how far he "
 "has to walk."
-msgstr "Lesník zasadí jeden strom v čase medzi %1$s a %2$s, podľa toho, ako ďaleko musí prejsť."
+msgstr "Lesník zasadí jeden strom za %1$s až %2$s, podľa toho, ako ďaleko musí prejsť."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Fisher's Hut
 #: ../../data/tribes/initialization/barbarians/units.lua:1192
@@ -6864,7 +6864,7 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:1272
 msgctxt "barbarians_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr "Jeden prieskum prieskumníka trvá medzi %1$s a %2$s."
+msgstr "Jeden prieskum prieskumníka trvá %1$s až %2$s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Wood Hardener
 #: ../../data/tribes/initialization/barbarians/units.lua:1284
@@ -10885,7 +10885,7 @@ msgctxt "empire_building"
 msgid ""
 "The forester plants one tree between %1$s and %2$s, depending on how far he "
 "has to walk."
-msgstr "Horár zasadí jeden strom v čase medzi %1$s a %2$s, podľa toho, ako ďaleko musí prejsť."
+msgstr "Horár zasadí jeden strom za %1$s až %2$s, podľa toho, ako ďaleko musí prejsť."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11049,7 +11049,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:1420
 msgctxt "empire_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr "Jeden prieskum prieskumníka trvá medzi %1$s a %2$s."
+msgstr "Jeden prieskum prieskumníka trvá %1$s až %2$s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -14311,7 +14311,7 @@ msgctxt "frisians_building"
 msgid ""
 "The forester plants one tree between %1$s and %2$s, depending on how far he "
 "has to walk."
-msgstr "Horár zasadí jeden strom v čase medzi %1$s a %2$s, podľa toho, ako ďaleko musí prejsť."
+msgstr "Horár zasadí jeden strom za %1$s až %2$s, podľa toho, ako ďaleko musí prejsť."
 
 #. TRANSLATORS: Note helptext for a Frisian production site: Hunter's House
 #: ../../data/tribes/initialization/frisians/units.lua:1615
@@ -14656,7 +14656,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1775
 msgctxt "frisians_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr "Jeden prieskum prieskumníka trvá medzi %1$s a %2$s."
+msgstr "Jeden prieskum prieskumníka trvá %1$s až %2$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Brick Kiln
 #: ../../data/tribes/initialization/frisians/units.lua:1787
@@ -16236,7 +16236,7 @@ msgstr "Výcvik uhýbania:"
 #: ../../data/tribes/scripting/help/building_help.lua:796
 #: ../../data/tribes/scripting/help/ware_help.lua:60
 msgid "Ware produced:"
-msgstr ""
+msgstr "Vyrobený výrobok:"
 
 #. TRANSLATORS: Ware Encyclopedia: More than 1 ware produced by a
 #. productionsite
@@ -16253,7 +16253,7 @@ msgstr "Vyrobené výrobky:"
 #: ../../data/tribes/scripting/help/building_help.lua:812
 #: ../../data/tribes/scripting/help/worker_help.lua:56
 msgid "Workers recruited:"
-msgstr ""
+msgstr "Vycvičení pracovníci:"
 
 #. TRANSLATORS: Performance helptext for a building - it hasn't been written
 #. yet.
@@ -16508,11 +16508,11 @@ msgstr "Budovy"
 
 #: ../../data/tribes/scripting/help/init.lua:137
 msgid "Tribes Immovables"
-msgstr ""
+msgstr "Nehybné objekty kmeňa"
 
 #: ../../data/tribes/scripting/help/init.lua:144
 msgid "World Immovables"
-msgstr ""
+msgstr "Nehybné objekty sveta"
 
 #: ../../data/tribes/scripting/help/introduction.lua:7
 msgid "About Widelands"
@@ -16561,18 +16561,18 @@ msgstr "Výrobca"
 #. consumes a ware
 #: ../../data/tribes/scripting/help/ware_help.lua:125
 msgid "Consumer"
-msgstr ""
+msgstr "Spotrebiteľ"
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
 #. consume a ware
 #: ../../data/tribes/scripting/help/ware_help.lua:128
 msgid "Consumers"
-msgstr ""
+msgstr "Spotrebitelia"
 
 #. TRANSLATORS: Worker Encyclopedia: 1 worker recruited by a productionsite
 #: ../../data/tribes/scripting/help/worker_help.lua:53
 msgid "Worker recruited:"
-msgstr ""
+msgstr "Vycvičený pracovník:"
 
 #. TRANSLATORS: Worker Encyclopedia: Heading for 1 building where a worker can
 #. work
@@ -16580,7 +16580,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/worker_help.lua:86
 msgctxt "workerhelp_one_building"
 msgid "Works at"
-msgstr ""
+msgstr "Pracuje v"
 
 #. TRANSLATORS: Worker Encyclopedia: A list of more than 1 building where a
 #. worker can work
@@ -16588,7 +16588,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/worker_help.lua:90
 msgctxt "workerhelp_multiple_buildings"
 msgid "Works at"
-msgstr ""
+msgstr "Pracuje v"
 
 #. TRANSLATORS: You can also translate this as 'additional workplace'
 #: ../../data/tribes/scripting/help/worker_help.lua:106

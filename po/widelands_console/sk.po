@@ -31,7 +31,7 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:52
 msgid "widelands <save.wgf>/<replay.wry>"
-msgstr ""
+msgstr "widelands <hra.wgf>/<zaznam.wry>"
 
 #: ../../src/wlapplication_messages.cc:54
 #: ../../src/wlapplication_messages.cc:56
@@ -445,7 +445,7 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:231
 msgid "<save.wgf>/<replay.wry>"
-msgstr ""
+msgstr "<hra.wgf>/<zaznam.wry>"
 
 #: ../../src/wlapplication_messages.cc:232
 msgid ""

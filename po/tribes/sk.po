@@ -5758,11 +5758,11 @@ msgstr "Budovy"
 
 #: ../../data/tribes/scripting/help/init.lua:137
 msgid "Tribes Immovables"
-msgstr ""
+msgstr "Nehybné objekty kmeňa"
 
 #: ../../data/tribes/scripting/help/init.lua:144
 msgid "World Immovables"
-msgstr ""
+msgstr "Nehybné objekty sveta"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../data/tribes/ships/amazons/init.lua:8
@@ -9056,7 +9056,7 @@ msgstr "Lodiar"
 #: ../../data/tribes/workers/amazons/soldier/init.lua:20
 msgctxt "amazons_worker"
 msgid "Soldier"
-msgstr ""
+msgstr "Vojak"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/stone_carver/init.lua:8

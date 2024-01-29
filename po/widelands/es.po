@@ -10,6 +10,7 @@
 # Gontzal Pujana Onaindia <juchuf@gmail.com>, 2018
 # Javier Mora <morehash@gmail.com>, 2015
 # Juan Miguel Bernal González, 2024
+# Juan Miguel Bernal González, 2024
 # Gontzal Pujana Onaindia <juchuf@gmail.com>, 2015
 # Kiibakun, 2015,2021
 # Kiibakun, 2015
@@ -10364,7 +10365,7 @@ msgstr "Rojo:"
 
 #: ../../src/wui/stock_menu.cc:59
 msgid "Stock is lower than the target"
-msgstr "Las existencias son más bajo que el objetivo"
+msgstr "Las existencias estan por debajo del objetivo"
 
 #: ../../src/wui/stock_menu.cc:62
 msgid "Yellow:"
