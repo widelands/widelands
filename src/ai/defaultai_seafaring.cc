@@ -165,8 +165,7 @@ void DefaultAI::evaluate_fleet() {
 	   tradeships_count >= ports_count && persistent_data->ships_utilization > 5000;
 
 	const uint32_t min_tradeships = (ports_count + 1) / kPortsPerTradeShip;
-	const uint32_t tradeships_target =
-	   tradeship_surplus_needed ? tradeships_count + 1 : ports_count;
+	const uint32_t tradeships_target = tradeship_surplus_needed ? tradeships_count + 1 : ports_count;
 
 	// Make sure we get a free ship for an expedition or a warship
 	const uint32_t new_fleet_target = std::max(tradeships_target, min_tradeships + 1);
@@ -310,7 +309,8 @@ void DefaultAI::manage_shipyards() {
 				verb_log_dbg_time(game().get_gametime(), "AI %d: Starting shipyard.", player_number());
 				game().send_player_start_stop_building(*sy_obs.site);
 			} else if (!stopped && (!shipyard_stocked || ports_count == 0)) {
-				verb_log_dbg_time(game().get_gametime(), "AI %d: Stopping shipyard %s.", player_number(),
+				verb_log_dbg_time(game().get_gametime(), "AI %d: Stopping shipyard %s.",
+				                  player_number(),
 				                  (ports_count == 0) ? "without port" : "with poor supply");
 				game().send_player_start_stop_building(*sy_obs.site);
 			}
