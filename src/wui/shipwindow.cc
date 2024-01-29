@@ -132,10 +132,10 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	               kImgConstructPort, true, [this]() { act_construct_port(); });
 	exp_mid->add(btn_construct_port_);
 
-	btn_warship_stay_ =
+	btn_stay_ =
 	   make_button(exp_mid, "stay", _("Anchor at the current location"), kImgWarshipStay, true,
 	               [this]() { act_scout_towards(Widelands::IDLE); });
-	exp_mid->add(btn_warship_stay_);
+	exp_mid->add(btn_stay_);
 
 	btn_scout_[Widelands::WALK_E - 1] =
 	   make_button(exp_mid, "sce", _("Scout towards the east"), kImgScoutE, true,
@@ -253,14 +253,14 @@ void ShipWindow::set_button_visibility() {
 	   (ship->get_ship_type() == Widelands::ShipType::kWarship) ^ is_refitting;
 	const bool show_wares =
 	   (ship->get_ship_type() != Widelands::ShipType::kWarship) || is_refitting;
-	const bool show_warship_stay =
-	   ship->get_ship_type() == Widelands::ShipType::kWarship;
+	const bool show_construct_port =
+	   ship->get_ship_state() == Widelands::ShipStates::kExpeditionPortspaceFound;
 
 	display_->set_visible(show_wares);
 	warship_capacity_control_->set_visible(show_soldier_controls);
 	btn_cancel_expedition_->set_visible(btn_cancel_expedition_->enabled());
-	btn_warship_stay_->set_visible(show_warship_stay);
-	btn_construct_port_->set_visible(!show_warship_stay);
+	btn_stay_->set_visible(!show_construct_port);
+	btn_construct_port_->set_visible(show_construct_port);
 	navigation_box_.set_visible(show_expedition_controls);
 	set_destination_->set_visible(show_expedition_controls);
 }
@@ -467,7 +467,7 @@ void ShipWindow::think() {
 	btn_refit_->set_tooltip(ship->get_ship_type() == Widelands::ShipType::kWarship ?
                               _("Refit to transport ship") :
                               _("Refit to warship"));
-	btn_warship_stay_->set_enabled(can_act);
+	btn_stay_->set_enabled(can_act);
 
 	display_->clear();
 	for (uint32_t idx = 0; idx < ship->get_nritems(); ++idx) {
