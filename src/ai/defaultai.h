@@ -448,6 +448,9 @@ private:
 	// considering trees, rocks, mines, water, fish for candidate for colonization (new port)
 	uint8_t spot_scoring(Widelands::Coords candidate_spot);
 	bool marine_main_decisions(const Time&);
+	void evaluate_fleet();    // part of marine_main_decisions()
+	void manage_shipyards();  // part of marine_main_decisions()
+	void manage_ports();      // part of marine_main_decisions()
 	bool check_ships(const Time&);
 	bool attempt_escape(ShipObserver& so);
 	// seafaring related variables

@@ -109,7 +109,7 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 // and makes two decisions:
 // - build a ship
 // - start preparation for expedition
-bool DefaultAI::marine_main_decisions(const Time& gametime) {
+bool DefaultAI::marine_main_decisions(const Time& /* gametime */) {
 	if (game().map().allows_seafaring()) {
 		for (const ProductionSiteObserver& sy_obs : shipyardsites) {
 			// In very rare situation, we might have non-seafaring map but there is a shipyard
@@ -150,11 +150,17 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		}
 	}
 
-	// Evaluate fleet, decide needs
+	evaluate_fleet();  // sets some more of this AI's globals for the other parts
+	manage_shipyards();
+	manage_ports();
 
-	{  // scope for temporary variables
-		// TODO(tothxa): turn this and the shipyard and port handling parts into separate functions
+	return true;
+}
 
+/**
+ * Part of marine_main_decisions() to make decisions and set this AI's globals for the other parts
+ */
+void DefaultAI::evaluate_fleet() {
 		const bool tradeship_surplus_needed =
 		   tradeships_count >= ports_count && persistent_data->ships_utilization > 5000;
 
@@ -216,19 +222,21 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 
 		if (tradeship_refit_needed) {
 			// This shouldn't happen... except when a new port is built from land
-			verb_log_dbg_time(gametime,
+			verb_log_dbg_time(game().get_gametime(),
 			                  "AI %d backfit needed: %u ports, %" PRIuS
 			                  " ships total: %u expeditions, %u tradeships, %u warships",
 			                  player_number(), ports_count, allships.size(), expeditions_in_progress,
 			                  tradeships_count, warships_count);
 		}
-	}  // end of scope of temporary variables
+}
 
+/**
+ * Part of marine_main_decisions() to handle shipyards: set target / start / stop / dismantle
+ */
+void DefaultAI::manage_shipyards() {
 	Widelands::ShipFleet* fleet = get_main_fleet();
 
 	bool update_ships_target = fleet != nullptr && fleet->get_ships_target() != fleet_target;
-
-	/***** Handle Shipyards: set target / start / stop / dismantle *****/
 
 	for (const ProductionSiteObserver& sy_obs : shipyardsites) {
 
@@ -319,8 +327,13 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 			}
 		}
 	}
+}
 
-	/***** Handle Ports: start expedition and set garrison *****/
+/**
+ * Part of marine_main_decisions() to handle ports: start expedition and set garrison
+ */
+void DefaultAI::manage_ports() {
+	Widelands::ShipFleet* fleet = get_main_fleet();
 
 	for (PortSiteObserver& p_obs : portsites) {
 		if (p_obs.site == nullptr) {
@@ -367,8 +380,6 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		}
 		// Warships assign themselves
 	}
-
-	return true;
 }
 
 // This identifies ships that are waiting for command
