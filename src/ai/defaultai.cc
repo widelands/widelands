@@ -6795,7 +6795,7 @@ void DefaultAI::gain_building(Widelands::Building& b, const bool found_on_load) 
 				portsites.back().ships_assigned = 0;
 				// ports should always require Heroes so set it directly after completion
 				game().send_player_set_soldier_preference(
-				   portsites.back().site, Widelands::SoldierPreference::kHeroes);
+				   *portsites.back().site, Widelands::SoldierPreference::kHeroes);
 			}
 			if (!found_on_load) {
 				// recalculate distance ASAP
