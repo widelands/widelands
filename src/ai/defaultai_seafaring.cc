@@ -546,8 +546,10 @@ bool DefaultAI::check_ships(const Time& gametime) {
 			// This number is kind of average
 			persistent_data->ships_utilization =
 			   persistent_data->ships_utilization / 20 * 19 + tmp_util / 20;
-			verb_log_dbg_time(game().get_gametime(), "AI %d: ship %s has current utilization of %d, average is %d.\n",
-			   player_number(), so.ship->get_shipname().c_str(), tmp_util, persistent_data->ships_utilization);
+			verb_log_dbg_time(game().get_gametime(),
+			                  "AI %d: ship %s has current utilization of %d, average is %d.\n",
+			                  player_number(), so.ship->get_shipname().c_str(), tmp_util,
+			                  persistent_data->ships_utilization);
 
 			// Arithmetics check
 			assert(persistent_data->ships_utilization >= 0 &&
