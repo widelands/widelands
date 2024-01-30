@@ -368,16 +368,16 @@ void DefaultAI::manage_ports() {
 			start_expedition = false;
 		}
 		int32_t desired_garrison = 0;
-		
+
 		switch (soldier_status_) {
-			case SoldiersStatus::kBadShortage:
-				// reduce minimum to allow garrison of some milsites to ensure expansion
-				desired_garrison = 2;
-				break;
-			case SoldiersStatus::kShortage:
-				desired_garrison = kPortDefaultGarrison;
-				break;
-			case SoldiersStatus::kEnough
+		case SoldiersStatus::kBadShortage:
+			// reduce minimum to allow garrison of some milsites to ensure expansion
+			desired_garrison = 2;
+			break;
+		case SoldiersStatus::kShortage:
+			desired_garrison = kPortDefaultGarrison;
+			break;
+		   case SoldiersStatus::kEnough
 				desired_garrison = kPortDefaultGarrison * 2;
 				break;
 			case SoldiersStatus::kFull
@@ -395,11 +395,11 @@ void DefaultAI::manage_ports() {
 				// if we require more then 5 soldiers we increase or decrease the requirement slowly
 				game().send_player_change_soldier_capacity(
 				   *p_obs.site, desired_garrison - p_obs.site->get_desired_soldier_count() > 0 ? 1 : -1);
-			}
-		}
-		// Warships assign themselves
+		   }
 	}
+	// Warships assign themselves
 }
+}  // namespace AI
 
 // This identifies ships that are waiting for command
 bool DefaultAI::check_ships(const Time& gametime) {
