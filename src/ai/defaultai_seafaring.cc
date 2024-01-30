@@ -415,9 +415,9 @@ bool DefaultAI::check_ships(const Time& gametime) {
 		// Sink if not in right fleet.
 		// TODO(tothxa): Make the AI handle multiple fleets. Then this can be removed.
 		if (fleet != nullptr && so.ship->get_fleet() != nullptr &&
-			 so.ship->get_fleet()->serial() != fleet->serial()) {
+		    so.ship->get_fleet()->serial() != fleet->serial()) {
 			verb_log_dbg_time(game().get_gametime(), "AI %d: Sinking ship %s in second fleet",
-									player_number(), so.ship->get_shipname().c_str());
+			                  player_number(), so.ship->get_shipname().c_str());
 			game().send_player_sink_ship(*so.ship);
 			continue;
 		}
@@ -432,12 +432,12 @@ bool DefaultAI::check_ships(const Time& gametime) {
 			if (!so.ship->is_refitting()) {
 				if (warship_needed && !so.ship->state_is_expedition()) {
 					verb_log_dbg_time(gametime, "AI %d: Refit ship %s to warship",
-											player_->player_number(), so.ship->get_shipname().c_str());
+					                  player_->player_number(), so.ship->get_shipname().c_str());
 					game().send_player_refit_ship(*so.ship, Widelands::ShipType::kWarship);
 					// transport ships remember soldier capacity
 					if (so.ship->get_warship_soldier_capacity() > 0) {
 						game().send_player_warship_command(
-							*so.ship, Widelands::WarshipCommand::kSetCapacity, {0u});
+						   *so.ship, Widelands::WarshipCommand::kSetCapacity, {0u});
 					}
 					warship_needed = false;
 					++warships_count;
@@ -452,9 +452,9 @@ bool DefaultAI::check_ships(const Time& gametime) {
 
 		// Here we manage duration of expedition and related variables
 		if (so.ship->get_ship_type() == Widelands::ShipType::kTransport &&
-			 (ship_state == Widelands::ShipStates::kExpeditionWaiting ||
-			  ship_state == Widelands::ShipStates::kExpeditionScouting ||
-			  ship_state == Widelands::ShipStates::kExpeditionPortspaceFound)) {
+		    (ship_state == Widelands::ShipStates::kExpeditionWaiting ||
+		     ship_state == Widelands::ShipStates::kExpeditionScouting ||
+		     ship_state == Widelands::ShipStates::kExpeditionPortspaceFound)) {
 
 			// the function below will take care of variables like
 			// - expedition_ship_
@@ -471,23 +471,23 @@ bool DefaultAI::check_ships(const Time& gametime) {
 		} else if (expedition_ship_ == so.ship->serial()) {
 			// Obviously expedition just ended
 			persistent_data->expedition_start_time =
-				Widelands::Player::AiPersistentState::kNoExpedition;
+			   Widelands::Player::AiPersistentState::kNoExpedition;
 			expedition_ship_ = kNoShip;
 		}
 
 		// only two states need an attention
 		if ((so.ship->get_ship_state() == Widelands::ShipStates::kExpeditionWaiting ||
-			  so.ship->get_ship_state() == Widelands::ShipStates::kExpeditionPortspaceFound) &&
-			 !so.waiting_for_command_) {
+		     so.ship->get_ship_state() == Widelands::ShipStates::kExpeditionPortspaceFound) &&
+		    !so.waiting_for_command_) {
 			if (gametime - so.last_command_time > Duration(180 * 1000)) {
 				so.waiting_for_command_ = true;
 				if (!so.guarding) {
 					verb_log_warn_time(
-						gametime,
-						"  %1d: last command for ship %s at %3dx%3d was %3d seconds ago, something "
-						"wrong here?...\n",
-						player_number(), so.ship->get_shipname().c_str(), so.ship->get_position().x,
-						so.ship->get_position().y, (gametime - so.last_command_time).get() / 1000);
+					   gametime,
+					   "  %1d: last command for ship %s at %3dx%3d was %3d seconds ago, something "
+					   "wrong here?...\n",
+					   player_number(), so.ship->get_shipname().c_str(), so.ship->get_position().x,
+					   so.ship->get_position().y, (gametime - so.last_command_time).get() / 1000);
 				}
 			}
 		}
@@ -504,9 +504,8 @@ bool DefaultAI::check_ships(const Time& gametime) {
 			// escape mode here indicates that we are going over known ports, that means that last
 			// port space we found when circumventing the island was already known to the ship.
 			// Or(!) this is a island without a port and ship would sail around forever
-		} else if ((so.escape_mode ||
-						(so.last_command_time + Duration(5 * 60 * 1000)) < gametime) &&
-					  so.ship->get_ship_state() == Widelands::ShipStates::kExpeditionScouting) {
+		} else if ((so.escape_mode || (so.last_command_time + Duration(5 * 60 * 1000)) < gametime) &&
+		           so.ship->get_ship_state() == Widelands::ShipStates::kExpeditionScouting) {
 			attempt_escape(so);
 
 		} else if (so.ship->get_ship_state() == Widelands::ShipStates::kTransport) {
@@ -516,14 +515,14 @@ bool DefaultAI::check_ships(const Time& gametime) {
 			// 0-10000
 			// to avoid float or rounding errors if integers in range 0-100
 			const int16_t tmp_util =
-				(so.ship->get_nritems() > 10) ? 10000 : so.ship->get_nritems() * 1000;
+			   (so.ship->get_nritems() > 10) ? 10000 : so.ship->get_nritems() * 1000;
 			// This number is kind of average
 			persistent_data->ships_utilization =
-				persistent_data->ships_utilization * 19 / 20 + tmp_util / 20;
+			   persistent_data->ships_utilization * 19 / 20 + tmp_util / 20;
 
 			// Arithmetics check
 			assert(persistent_data->ships_utilization >= 0 &&
-					 persistent_data->ships_utilization <= 10000);
+			       persistent_data->ships_utilization <= 10000);
 		}
 	}
 
