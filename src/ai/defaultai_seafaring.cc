@@ -367,16 +367,35 @@ void DefaultAI::manage_ports() {
 			game().send_player_start_or_cancel_expedition(*p_obs.site);
 			start_expedition = false;
 		}
+		int32_t desired_garrison = 0;
+		
+		switch (soldier_status_) {
+			case SoldiersStatus::kBadShortage:
+				// reduce minimum to allow garrison of some milsites to ensure expansion
+				desired_garrison = 2;
+				break;
+			case SoldiersStatus::kShortage:
+				desired_garrison = kPortDefaultGarrison;
+				break;
+			case SoldiersStatus::kEnough
+				desired_garrison = kPortDefaultGarrison * 2;
+				break;
+			case SoldiersStatus::kFull
+				desired_garrison = kPortDefaultGarrison * 3;
+		}
 
-		if (game().naval_warfare_allowed() &&
-		    p_obs.site->get_desired_soldier_count() < kPortDefaultGarrison) {
-			// Check garrisoned soldiers
+		// Check soldiers requirement of port and set garrison to desired value
+		if (p_obs.site->get_desired_soldier_count() != desired_garrison) {
 			verb_log_dbg_time(game().get_gametime(), "AI %d: Set garrison for port %s",
 			                  player_number(), p_obs.site->get_warehouse_name().c_str());
-			game().send_player_change_soldier_capacity(
-			   *p_obs.site, kPortDefaultGarrison - p_obs.site->get_desired_soldier_count());
-			game().send_player_set_soldier_preference(
-			   *p_obs.site, Widelands::SoldierPreference::kHeroes);
+			if (desired_garrison <= kPortDefaultGarrison) {
+				game().send_player_change_soldier_capacity(
+				   *p_obs.site, desired_garrison - p_obs.site->get_desired_soldier_count());
+			} else {
+				// if we require more then 5 soldiers we increase or decrease the requirement slowly
+				game().send_player_change_soldier_capacity(
+				   *p_obs.site, desired_garrison - p_obs.site->get_desired_soldier_count() > 0 ? 1 : -1);
+			}
 		}
 		// Warships assign themselves
 	}
