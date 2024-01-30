@@ -386,6 +386,9 @@ void DefaultAI::manage_ports() {
 
 		// Check soldiers requirement of port and set garrison to desired value
 		if (p_obs.site->get_desired_soldier_count() != desired_garrison) {
+			// ports should always require Heroes
+			game().send_player_set_soldier_preference(
+			   *p_obs.site, Widelands::SoldierPreference::kHeroes);
 			verb_log_dbg_time(game().get_gametime(), "AI %d: Set garrison for port %s",
 			                  player_number(), p_obs.site->get_warehouse_name().c_str());
 			if (desired_garrison <= kPortDefaultGarrison) {
