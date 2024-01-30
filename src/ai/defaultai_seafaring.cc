@@ -514,11 +514,11 @@ bool DefaultAI::check_ships(const Time& gametime) {
 			// Good utilization is 10 pieces of ware onboard, to track utilization we use range
 			// 0-10000
 			// to avoid float or rounding errors if integers in range 0-100
-			const int16_t tmp_util =
+			const uint16_t tmp_util =
 			   (so.ship->get_nritems() > 10) ? 10000 : so.ship->get_nritems() * 1000;
 			// This number is kind of average
 			persistent_data->ships_utilization =
-			   persistent_data->ships_utilization * 19 / 20 + tmp_util / 20;
+			   persistent_data->ships_utilization / 20 * 19 + tmp_util / 20;
 
 			// Arithmetics check
 			assert(persistent_data->ships_utilization >= 0 &&
