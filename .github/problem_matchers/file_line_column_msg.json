@@ -1,0 +1,17 @@
+{
+  "problemMatcher": [
+    {
+      "owner": "file_line_column_msg",
+      "severity": "error",
+      "pattern": [
+        {
+          "regexp": "^(.*?):(\\d+):(\\d*):? (.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "message": 4
+        }
+      ]
+    }
+  ]
+}
