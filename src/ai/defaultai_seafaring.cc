@@ -535,7 +535,8 @@ bool DefaultAI::check_ships(const Time& gametime) {
 		// no casting
 		const uint32_t diff =
 		   counted_more ? counted_ships - allships.size() : allships.size() - counted_ships;
-		log_warn_time(gametime, "AI %d check_ships(): Accounting error: allships = %" PRIuS
+		log_warn_time(gametime,
+		              "AI %d check_ships(): Accounting error: allships = %" PRIuS
 		              " %s counted = %u (%u tradeships, %u expeditions, %u warships), difference: %u",
 		              player_number(), allships.size(), counted_more ? "<" : ">", counted_ships,
 		              tradeships_count, expeditions_in_progress, warships_count, diff);
