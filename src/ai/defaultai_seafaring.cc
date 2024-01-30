@@ -529,6 +529,18 @@ bool DefaultAI::check_ships(const Time& gametime) {
 		}
 	}
 
+	const uint32_t counted_ships = tradeships_count + expeditions_in_progress + warships_count;
+	if (counted_ships != allships.size()) {
+		const bool counted_more = counted_ships > allships.size();
+		// no casting
+		const uint32_t diff =
+		   counted_more ? counted_ships - allships.size() : allships.size() - counted_ships;
+		log_warn_time(gametime, "AI %d check_ships(): Accounting error: allships = %" PRIuS
+		              " %s counted = %u (%u tradeships, %u expeditions, %u warships), difference: %u",
+		              player_number(), allships.size(), counted_more ? "<" : ">", counted_ships,
+		              tradeships_count, expeditions_in_progress, warships_count, diff);
+	}
+
 	return true;
 }
 
@@ -752,6 +764,7 @@ void DefaultAI::warship_management(ShipObserver& so) {
 			game().send_player_refit_ship(*so.ship, Widelands::ShipType::kTransport);
 			tradeship_refit_needed = false;
 			--warships_count;
+			++tradeships_count;
 			so.last_command_time = gametime;
 			so.waiting_for_command_ = false;
 			return;
