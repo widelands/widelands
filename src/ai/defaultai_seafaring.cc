@@ -379,7 +379,7 @@ void DefaultAI::manage_ports() {
 			break;
 		case SoldiersStatus::kEnough:
 			desired_garrison = kPortDefaultGarrison * 2;
-				break;
+			break;
 		case SoldiersStatus::kFull:
 			desired_garrison = kPortDefaultGarrison * 3;
 		}
@@ -390,15 +390,20 @@ void DefaultAI::manage_ports() {
 			                  player_number(), p_obs.site->get_warehouse_name().c_str());
 			if (desired_garrison <= kPortDefaultGarrison) {
 				game().send_player_change_soldier_capacity(
-				   *p_obs.site, static_cast<int32_t>(desired_garrison) - p_obs.site->get_desired_soldier_count());
+				   *p_obs.site,
+				   static_cast<int32_t>(desired_garrison) - p_obs.site->get_desired_soldier_count());
 			} else {
 				// if we require more then 5 soldiers we increase or decrease the requirement slowly
 				game().send_player_change_soldier_capacity(
-				   *p_obs.site, static_cast<int32_t>(desired_garrison) - p_obs.site->get_desired_soldier_count() > 0 ? 1 : -1);
-		   }
+				   *p_obs.site,
+				   static_cast<int32_t>(desired_garrison) - p_obs.site->get_desired_soldier_count() >
+				         0 ?
+                  1 :
+                  -1);
+			}
+		}
+		// Warships assign themselves
 	}
-	// Warships assign themselves
-}
 }  // namespace AI
 
 // This identifies ships that are waiting for command
