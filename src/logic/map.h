@@ -347,6 +347,7 @@ public:
 	std::vector<SuggestedTeamLineup>& get_suggested_teams() {
 		return suggested_teams_;
 	}
+	void sanitize_suggested_teams();
 
 	[[nodiscard]] PlayerNumber get_nrplayers() const {
 		return nrplayers_;

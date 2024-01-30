@@ -37,7 +37,7 @@ echo "* freebsd   FreeBSD"
 echo "* openbsd   OpenBSD"
 echo " "
 echo "Windows:"
-echo "* msys32    MSys 32bit"
+echo "* msys32    MSys 32bit (deprecated)"
 echo "* msys64    MSys 64bit"
 echo "* vcpkg     MSVC"
 echo " "
@@ -96,8 +96,9 @@ else
    shift 1
 fi
 
+WL_DIR="$(dirname $0)"
+
 asio_not_packaged() {
-   WL_DIR="$(dirname $0)"
    if [ -f /usr/include/asio.hpp -o -f "${WL_DIR}"/auto_dependencies/asio/asio.hpp ]; then
       return 0
    elif "${WL_DIR}"/utils/download_asio.sh "$1" ; then
@@ -118,15 +119,6 @@ sudo_or_su() {
       # su wants it as a single argument
       su -c "$*"
    fi
-}
-
-install_msys_pkgs() {
-   ARCH=$1
-   shift 1
-   pacman -S $@ mingw-w64-$ARCH-toolchain git mingw-w64-$ARCH-cmake \
-    mingw-w64-$ARCH-ninja mingw-w64-$ARCH-asio mingw-w64-$ARCH-SDL2_ttf \
-    mingw-w64-$ARCH-SDL2_mixer mingw-w64-$ARCH-SDL2_image \
-    mingw-w64-$ARCH-glew mingw-w64-$ARCH-icu
 }
 
 # Install the dependencies
@@ -176,14 +168,13 @@ elif [ "$DISTRO" = "openbsd" ]; then
    asio_not_packaged "OpenBSD" "doas" || exit 1
 
 elif [ "$DISTRO" = "msys32" ]; then
+   echo "WARNING: Some msys packages are no longer updated for 32-bit, consider switching to 64-bit!"
    echo "Installing dependencies for 32-bit Windows..."
-   install_msys_pkgs i686 $@
-   # No more updates for 32bit version...
-   pacman.exe --noconfirm -U https://repo.msys2.org/mingw/i686/mingw-w64-i686-glbinding-3.1.0-3-any.pkg.tar.zst
+   "${WL_DIR}"/utils/windows/install_deps_mingw.sh i686 $@
 
 elif [ "$DISTRO" = "msys64" ]; then
    echo "Installing dependencies for 64-bit Windows..."
-   install_msys_pkgs x86_64 $@ mingw-w64-x86_64-glbinding
+   "${WL_DIR}"/utils/windows/install_deps_mingw.sh x86_64 $@
 
 elif [ "$DISTRO" = "homebrew" ]; then
    echo "Installing dependencies for Mac Homebrew..."

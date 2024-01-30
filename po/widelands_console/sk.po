@@ -1,18 +1,19 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2014
 # Karl Vest, 2020
 # MiroslavR <miroslavr256@gmail.com>, 2015-2016
 # Miroslav Remák <Unknown>, 2014
+# Pavol Gono, 2024
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-08-28 02:28+0000\n"
+"POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
-"Last-Translator: Karl Vest, 2020\n"
+"Last-Translator: Pavol Gono, 2024\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,7 +31,7 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:52
 msgid "widelands <save.wgf>/<replay.wry>"
-msgstr ""
+msgstr "widelands <hra.wgf>/<zaznam.wry>"
 
 #: ../../src/wlapplication_messages.cc:54
 #: ../../src/wlapplication_messages.cc:56
@@ -444,7 +445,7 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:231
 msgid "<save.wgf>/<replay.wry>"
-msgstr ""
+msgstr "<hra.wgf>/<zaznam.wry>"
 
 #: ../../src/wlapplication_messages.cc:232
 msgid ""
@@ -457,7 +458,7 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:259
 #, c-format
 msgid "This is Widelands version %s"
-msgstr ""
+msgstr "Toto je Widelands verzie %s"
 
 #: ../../src/wlapplication_messages.cc:317
 msgid ""

@@ -1,19 +1,20 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # Karl Vest, 2020
 # MiroslavR <miroslavr256@gmail.com>, 2015-2016
+# Pavol Gono, 2024
 # Viliam Molo, 2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-07-08 03:03+0000\n"
+"POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
-"Last-Translator: Viliam Molo, 2023\n"
+"Last-Translator: Pavol Gono, 2024\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -143,7 +144,7 @@ msgid ""
 "game are the basic construction wares: logs and granite. Let’s make sure "
 "that we do not run out of logs. For this, we need a lumberjack and a hut for"
 " him to stay in."
-msgstr "Hru zvyčajne začínate s jedným veliteľstvom. Je to veľká budova s modrou vlajkou pred ňou. Na veliteľstve sa skladuje tovar, robotníci a vojaci. Niektoré tovary sú potrebné na stavbu domov, iné na výrobu iných tovarov. Je zrejmé, že počiatočné tovary nevydržia večne, takže sa musíte postarať o ich doplnenie. Najdôležitejším tovarom na začiatku hry sú základné stavebné tovary: guľatina (polená dreva) a žula. Dbajme na to, aby nám guľatina nedošla. Na to potrebujeme drevorubača a chatrč, v ktorej bude bývať."
+msgstr "Hru zvyčajne začínate s jedným ústredím. Je to veľká budova s modrou vlajkou pred ňou. Na ústredí sa skladujú výrobky, pracovníci a vojaci. Niektoré výrobky sú potrebné na stavbu domov, iné na výrobu iných výrobkov. Je zrejmé, že počiatočné výrobky nevydržia večne, takže sa musíte postarať o ich doplnenie. Najdôležitejšími výrobkami na začiatku hry sú základné stavebné výrobky: kmene a žula. Dbajme na to, aby nám kmene nedošli. Na to potrebujeme drevorubača a chatrč, v ktorej bude bývať."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:80
 msgid ""
@@ -155,7 +156,7 @@ msgstr "Potrebujeme nájsť vhodné miesto pre drevorubačskú chatrč. Môžeme
 msgid ""
 "I’ll show you where the menu is and where to show and hide the building "
 "spaces."
-msgstr "Ukážem Vám, kde sa nachádza ponuka a kde sa zobrazujú a skrývajú priestory pre budovy."
+msgstr "Ukážem Vám, kde sa nachádza ponuka a kde sa zobrazujú a skrývajú stavné miesta."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:92
 msgid ""

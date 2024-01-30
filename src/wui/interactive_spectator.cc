@@ -68,6 +68,8 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 
 	add_diplomacy_menu();
 
+	add_plugin_menu();
+
 	finalize_toolbar();
 
 	// Setup all screen elements
