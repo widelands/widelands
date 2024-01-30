@@ -1829,7 +1829,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Blacksmithy
             purpose = pgettext("building", "Forges tools to equip new workers."),
             -- TRANSLATORS: Performance helptext for a Frisian production site: Blacksmithy
-            performance = pgettext("frisians_building", "If this building is fully supplied and all tools are needed by the economy, production of one of each tool takes %1$s on average. If only one kind of tool is needed by the economy, its production takes %2$s on average. Needles are an exception - in the time to produce one tool two needles are produced."):bformat(format_minutes_seconds(14, 12), format_minutes_seconds(1, 20))
+            performance = pgettext("frisians_building", "If this building is fully supplied and all tools are needed by the economy, production of one of each tool takes %1$s on average. If only one kind of tool is needed by the economy, its production takes %2$s on average. Needles are an exception – in the time to produce one tool two needles are produced."):bformat(format_minutes_seconds(14, 12), format_minutes_seconds(1, 20))
          }
       },
       {
@@ -1972,7 +1972,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for a Frisian production site: Tavern
             purpose = pgettext("building", "Prepares rations to feed the scouts and miners."),
             -- TRANSLATORS: Performance helptext for a Frisian production site: Tavern
-            performance = pgettext("frisians_building", "If the tavern is fully supplied, it can produce one ration in %1$s on average, using 2 kinds of ingredients. If it can only use one kind of ingredient, it can produce one ration in %2$s on average."):bformat(format_seconds(37), format_seconds(55))
+            performance = pgettext("frisians_building", "If the tavern is fully supplied, it can produce one ration in %1$s on average, using two kinds of ingredients. If it can only use one kind of ingredient, it can produce one ration in %2$s on average."):bformat(format_seconds(37), format_seconds(55))
          }
       },
       {
