@@ -543,7 +543,7 @@ bool DefaultAI::check_ships(const Time& gametime) {
 			// average 95% (19/20) weight. To allow for smoothed averaging.
 			// Average is directly saved to the players ai persistent data
 
-			const uint16_t tmp_util = std::min(so.ship->get_nritems(), 10) * 50;
+			const uint32_t tmp_util = std::min(so.ship->get_nritems(), 10) * 50;
 			// help variable for following consistancy checks
 			const uint32_t old_average = persistent_data->ships_utilization;
 
