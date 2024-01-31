@@ -393,7 +393,7 @@ void DefaultAI::manage_ports() {
 			                  player_number(), p_obs.site->get_warehouse_name().c_str());
 			if (desired_garrison < kPortDefaultGarrison) {
 				// If we are very short on soldiers we drop the garrison of ports immediately
-				// as soldiers would be more valuable elsewhere. 
+				// as soldiers would be more valuable elsewhere.
 				game().send_player_change_soldier_capacity(
 				   *p_obs.site,
 				   static_cast<int32_t>(desired_garrison) - p_obs.site->get_desired_soldier_count());
