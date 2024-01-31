@@ -550,16 +550,18 @@ bool DefaultAI::check_ships(const Time& gametime) {
 			persistent_data->ships_utilization =
 			   static_cast<uint16_t>(old_average * 19 / 20 + tmp_util);
 #ifndef NDEBUG
-			if (!(std::min(old_average, tmp_util) < persistent_data->ships_utilization < std::max(old_average, tmp_util))) {
+			if (!(std::min(old_average, tmp_util) < persistent_data->ships_utilization <
+			      std::max(old_average, tmp_util))) {
 				verb_log_warn_time(game().get_gametime(),
-				  "AI %d: Potential overflow: Ship %s had old average utilization of %d, new average is %d, but actual value was %d.\n",
-				  player_number(), so.ship->get_shipname().c_str(), old_average,
-				  persistent_data->ships_utilization, tmp_util);
+				                   "AI %d: Potential overflow: Ship %s had old average utilization of "
+				                   "%d, new average is %d, but actual value was %d.\n",
+				                   player_number(), so.ship->get_shipname().c_str(), old_average,
+				                   persistent_data->ships_utilization, tmp_util);
 			}
 
 			// Arithmetics check
 			assert(persistent_data->ships_utilization >= 0 &&
-				   persistent_data->ships_utilization <= 10000);
+			       persistent_data->ships_utilization <= 10000);
 
 #endif
 		}
