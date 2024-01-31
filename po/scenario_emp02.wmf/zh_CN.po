@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
+# Roy Luo <1598359376@qq.com>, 2024
 # liu lizhi <xingzuo88@qq.com>, 2021
 msgid ""
 msgstr ""
@@ -9,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2015-02-03 14:45+0000\n"
-"Last-Translator: liu lizhi <xingzuo88@qq.com>, 2021\n"
+"Last-Translator: Roy Luo <1598359376@qq.com>, 2024\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,39 +20,39 @@ msgstr ""
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:25
 msgid "Build up a wood economy"
-msgstr ""
+msgstr "建立木业经济"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:27
 msgid "Wood Economy"
-msgstr ""
+msgstr "木业经济"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:28
 msgid "Build three lumberjack’s houses, a forester’s house and a sawmill."
-msgstr ""
+msgstr "建造三间伐木小屋，一间护林员之屋和一座锯木厂。"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:34
 msgid "Build a quarry"
-msgstr ""
+msgstr "建造一个采石场"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:36
 msgid "Quarry"
-msgstr ""
+msgstr "采石场"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:37
 msgid "Build a quarry to the south of your headquarters."
-msgstr ""
+msgstr "在你的总部南面修建一个采石场。"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:43
 msgid "Protect your colony"
-msgstr "保卫殖民地"
+msgstr "保卫你的殖民地"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:45
 msgid "Protect Your Colony"
-msgstr "保卫殖民地"
+msgstr "保卫你的殖民地"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:46
 msgid "Build some blockhouses and sentries around the colony."
-msgstr ""
+msgstr "在殖民地的周围建造一些木质碉堡和边哨。"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:52
 msgid "Start mining marble"
@@ -63,7 +64,7 @@ msgstr "大理石"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:55
 msgid "Expand to the east, to start mining marble from the mountain."
-msgstr "向东扩张，从山上开采大理石。"
+msgstr "向东扩张，开采山上的大理石。"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:61
 msgid "Build a stonemason’s house and mining infrastructure"
@@ -71,22 +72,22 @@ msgstr "建造一所石匠之屋，和采矿基础设施。"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:63
 msgid "Stonemason’s house and Mining Infrastructure"
-msgstr ""
+msgstr "石匠之屋和采矿基础设施"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:64
 msgid ""
 "Build a stonemason’s house and then a complete mining and production "
 "infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, "
 "weapon smithy, armor smithy and smelting works)."
-msgstr ""
+msgstr "建造一间石匠之屋然后完成采矿和生产基础设施（煤矿/煅炭窑，铁矿，工具铺，兵器铺，盔甲铺和冶炼厂）。"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:70
 msgid "Provide your miners with food"
-msgstr ""
+msgstr "为你的矿工提供食物"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:72
 msgid "Food For Your Miners"
-msgstr ""
+msgstr "矿工需要食物"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:73
 msgid "Build a tavern to produce some food to sustain our miners."
@@ -149,7 +150,7 @@ msgstr "摧毁蛮族部落"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:97
 msgid "Build a barracks to start training soldiers."
-msgstr "建造军营，来生产士兵。"
+msgstr "建造步兵营，开始训练士兵。"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:98
 msgid ""
