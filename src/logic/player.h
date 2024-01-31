@@ -188,8 +188,8 @@ public:
 		uint32_t colony_scan_area{0U};
 		uint32_t trees_around_cutters{0U};
 		Time expedition_start_time{0U};
-		int16_t ships_utilization{
-		   0};  // 0-10000 to avoid floats, used for decision for building new ships
+		uint16_t ships_utilization{
+		   0U};  // 0-10000 to avoid floats, used for decision for building new ships
 		bool no_more_expeditions{false};
 		int16_t last_attacked_player{0};
 		int32_t least_military_score{0};
