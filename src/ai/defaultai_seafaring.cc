@@ -484,7 +484,7 @@ bool DefaultAI::check_ships(const Time& gametime) {
 				if (!so.guarding) {
 					verb_log_warn_time(
 					   gametime,
-					   "  %1d: last command for ship %s at %3dx%3d was %3d seconds ago, something "
+					   "AI %1d: last command for ship %s at %3dx%3d was %3d seconds ago, something "
 					   "wrong here?...\n",
 					   player_number(), so.ship->get_shipname().c_str(), so.ship->get_position().x,
 					   so.ship->get_position().y, (gametime - so.last_command_time).get() / 1000);
@@ -512,19 +512,34 @@ bool DefaultAI::check_ships(const Time& gametime) {
 			// Checking utilization
 
 			// Good utilization is 10 pieces of ware onboard, to track utilization we use range
-			// 0-10000
-			// to avoid float or rounding errors if integers in range 0-100
-			int32_t tmp_util = persistent_data->ships_utilization;
+			// 0-10000 to avoid float or rounding errors if integers in range 0-100
+			const uint32_t tmp_util = std::min(so.ship->get_nritems(), 10U) * 1000;
 
-			// This number is kind of average
-			// persistent_data->ships_utilization is int16_t, and saved in player data in
+			// persistent_data->ships_utilization is uint16_t, and saved in player data in
 			// savegames. Let's just work around the limitation, then convert back.
-			tmp_util *= 19;
-			tmp_util += (so.ship->get_nritems() > 10) ? 10000 : so.ship->get_nritems() * 1000;
-			tmp_util /= 20;
+			uint32_t average_util = persistent_data->ships_utilization;
+			average_util = (average_util * 19 + tmp_util) / 20;
 
-			assert(tmp_util >= 0 && tmp_util <= 10000);
-			persistent_data->ships_utilization = tmp_util;
+			// Sanity checks
+#ifdef NDEBUG
+			// always in debug builds, and when --verbose is enabled in release builds
+			if (g_verbose) {
+#endif
+				if ((persistent_data->ships_utilization == tmp_util && average_util != tmp_util) ||
+				    // std::min/max is picky about integer size...
+				    (average_util < persistent_data->ships_utilization && average_util < tmp_util) ||
+				    (average_util > persistent_data->ships_utilization && average_util > tmp_util) ||
+				    // ..._util < 0 is prevented by uint type
+				    tmp_util > 10000 || average_util > 10000) {
+					log_warn_time(gametime,
+					   "AI %d: Ship utilisation calculation error: old: %u current: %u new: %u",
+					   player_number(), persistent_data->ships_utilization, tmp_util, average_util);
+				}
+#ifdef NDEBUG
+			}  // g_verbose
+#endif
+			// Now we can safely assign new value back to uint16_t
+			persistent_data->ships_utilization = average_util;
 		}
 	}
 
