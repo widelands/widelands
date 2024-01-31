@@ -391,12 +391,14 @@ void DefaultAI::manage_ports() {
 			   *p_obs.site, Widelands::SoldierPreference::kHeroes);
 			verb_log_dbg_time(game().get_gametime(), "AI %d: Set garrison for port %s",
 			                  player_number(), p_obs.site->get_warehouse_name().c_str());
-			if (desired_garrison <= kPortDefaultGarrison) {
+			if (desired_garrison < kPortDefaultGarrison) {
+				// If we are very short on soldiers we drop the garrison of ports immediately
+				// as soldiers would be more valuable elsewhere. 
 				game().send_player_change_soldier_capacity(
 				   *p_obs.site,
 				   static_cast<int32_t>(desired_garrison) - p_obs.site->get_desired_soldier_count());
 			} else {
-				// if we require more then 5 soldiers we increase or decrease the requirement slowly
+				// if we require 5 or more soldiers we increase or decrease the requirement slowly
 				game().send_player_change_soldier_capacity(
 				   *p_obs.site,
 				   static_cast<int32_t>(desired_garrison) - p_obs.site->get_desired_soldier_count() >
