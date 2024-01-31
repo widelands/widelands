@@ -537,12 +537,12 @@ bool DefaultAI::check_ships(const Time& gametime) {
 
 		} else if (so.ship->get_ship_state() == Widelands::ShipStates::kTransport) {
 			// Checking utilization
-			// Heavy utilization will start at 10 pieces of ware onboard (so we limit to 10) 
+			// Heavy utilization will start at 10 pieces of ware onboard (so we limit to 10)
 			// For utilization we use range 0-10000 to avoid float and minimize rounding errors
 			// We multiply by 50 (not 1000) to give the actual value 5% weight and the existing
 			// average 95% (19/20) weight. To allow for smoothed averaging.
 			// Average is directly saved to the players ai persistent data
-			
+
 			const uint16_t tmp_util = std::min(so.ship->get_nritems(), 10) * 50;
 			// help variable for following consistancy checks
 			const uint32_t old_average = persistent_data->ships_utilization;
