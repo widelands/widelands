@@ -407,7 +407,7 @@ void DefaultAI::manage_ports() {
 		}
 		// Warships assign themselves
 	}
-}  // namespace AI
+}
 
 // This identifies ships that are waiting for command
 bool DefaultAI::check_ships(const Time& gametime) {
@@ -537,23 +537,31 @@ bool DefaultAI::check_ships(const Time& gametime) {
 
 		} else if (so.ship->get_ship_state() == Widelands::ShipStates::kTransport) {
 			// Checking utilization
+			// Heavy utilization will start at 10 pieces of ware onboard (so we limit to 10) 
+			// For utilization we use range 0-10000 to avoid float and minimize rounding errors
+			// We multiply by 50 (not 1000) to give the actual value 5% weight and the existing
+			// average 95% (19/20) weight. To allow for smoothed averaging.
+			// Average is directly saved to the players ai persistent data
+			
+			const uint16_t tmp_util = std::min(so.ship->get_nritems(), 10) * 50;
+			// help variable for following consistancy checks
+			const uint32_t old_average = persistent_data->ships_utilization;
 
-			// Good utilization is 10 pieces of ware onboard, to track utilization we use range
-			// 0-10000
-			// to avoid float or rounding errors if integers in range 0-100
-			const uint16_t tmp_util =
-			   (so.ship->get_nritems() > 10) ? 10000 : so.ship->get_nritems() * 1000;
-			// This number is kind of average
 			persistent_data->ships_utilization =
-			   persistent_data->ships_utilization / 20 * 19 + tmp_util / 20;
-			verb_log_dbg_time(game().get_gametime(),
-			                  "AI %d: ship %s has current utilization of %d, average is %d.\n",
-			                  player_number(), so.ship->get_shipname().c_str(), tmp_util,
-			                  persistent_data->ships_utilization);
+			   static_cast<uint16_t>(old_average * 19 / 20 + tmp_util);
+#ifndef NDEBUG
+			if (!(std::min(old_average, tmp_util) < persistent_data->ships_utilization < std::max(old_average, tmp_util))) {
+				verb_log_warn_time(game().get_gametime(),
+				  "AI %d: Potential overflow: Ship %s had old average utilization of %d, new average is %d, but actual value was %d.\n",
+				  player_number(), so.ship->get_shipname().c_str(), old_average,
+				  persistent_data->ships_utilization, tmp_util);
+			}
 
 			// Arithmetics check
 			assert(persistent_data->ships_utilization >= 0 &&
-			       persistent_data->ships_utilization <= 10000);
+				   persistent_data->ships_utilization <= 10000);
+
+#endif
 		}
 	}
 
