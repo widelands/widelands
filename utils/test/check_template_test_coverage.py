@@ -65,7 +65,8 @@ for tr in start_conditions:
         print('      ' + sc)
 
 # Collect tests
-testdir = os.path.join(basedir, 'test', 'templates')
+test_basedir = os.path.join(basedir, 'test')
+testdir = os.path.join(test_basedir, 'templates')
 tests = sorted(glob(os.path.join(testdir, '*.wgt')))
 if len(tests) < 1:
     print('ERROR: No tests found in directory ' + testdir)
@@ -80,12 +81,19 @@ no_script = []
 for test in tests:
     if not os.path.isfile(test[:-3] + 'lua'):
         no_script.append(test)
+
     cfg = configparser.ConfigParser()
     cfg.read(test)
 
-    # This one is a bare minimum template, leaves all to defaults, including tribes, and start and
-    # win conditions.
-    if test == os.path.join(testdir, 'test_alldefaults.wgt'):
+    # Allow skipping templates that have below comment as first line.
+    # Can be used for local tests as needed or desired.
+    # There is one official test that uses this, because its purpose is testing
+    # default values. Normally we don't allow that, because it introduces
+    # uncertainty into the test environment.
+    firstline = ''
+    with open(test, mode='r', encoding='utf-8') as f:
+        firstline = f.readline().strip()
+    if firstline == '# coverage test: ignore':
         continue
 
     for s in cfg.sections():
@@ -119,38 +127,39 @@ for tribe in start_conditions:
     if len(unused) > 0:
         unused_sc[tribe] = unused
 
+# Check tribes missing from test/maps/all_tribes.wmf
+missing_in_alltribes = []
+allmapsdir = os.path.join(test_basedir, 'maps', 'all_tribes.wmf', 'scripting')
+for tribe in start_conditions:
+    tribe = tribe.strip('"')
+    script = os.path.join(allmapsdir, f'test_{ tribe }.lua')
+    if not os.path.isfile(script):
+        missing_in_alltribes.append(tribe)
+
 # Report
-if len(unknown_wc) == 0 and len(unknown_tribe) == 0 and len(unknown_sc) == 0 and \
-   len(unused_wc) == 0 and len(unused_sc) == 0 and len(no_script) == 0:
-    print()
-    print('Done, all starting and win conditions are covered by tests.')
-    sys.exit(0)
+failed = False
+def check_empty(err_list, message):
+    global failed
+    if len(err_list) > 0:
+        failed = True
+        print()
+        print('ERROR:', message)
+        print(err_list)
 
-if len(unknown_tribe) > 0:
-    print()
-    print('ERROR: Unknown tribes found in the tests:')
-    print(unknown_tribe)
-if len(unknown_sc) > 0:
-    print()
-    print('ERROR: Unknown start conditions found in the tests:')
-    print(unknown_sc)
-if len(unknown_wc) > 0:
-    print()
-    print('ERROR: Unknown win conditions found in the tests:')
-    print(unknown_wc)
+check_empty(unknown_tribe, 'Unknown tribes found in the tests:')
+check_empty(unknown_sc, 'Unknown start conditions found in the tests:')
+check_empty(unknown_wc, 'Unknown win conditions found in the tests:')
 
-if len(unused_sc) > 0:
-    print()
-    print('ERROR: Start conditions not covered by tests:')
-    print(unused_sc)
-if len(unused_wc) > 0:
-    print()
-    print('ERROR: Win conditions not covered by tests:')
-    print(unused_wc)
+check_empty(unused_sc, 'Start conditions not covered by tests:')
+check_empty(unused_wc, 'Win conditions not covered by tests:')
 
-if len(no_script) > 0:
-    print()
-    print('ERROR: No scripts provided for tests:')
-    print(no_script)
+check_empty(no_script, 'No scripts provided for tests:')
 
-sys.exit(1)
+check_empty(missing_in_alltribes, 'Tribes not covered by test/maps/all_tribes.wmf:')
+
+if failed:
+    sys.exit(1)
+
+print()
+print('Done, all starting and win conditions are covered by tests.')
+sys.exit(0)

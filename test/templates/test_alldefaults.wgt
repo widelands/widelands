@@ -1,2 +1,4 @@
+# coverage test: ignore
+
 [global]
 map="maps/Crater.wmf"
