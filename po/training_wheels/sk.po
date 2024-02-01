@@ -96,7 +96,7 @@ msgstr ""
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:158
 msgid "Logs & Roads"
-msgstr ""
+msgstr "Kmene & cesty"
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:163
@@ -133,7 +133,7 @@ msgstr ""
 #: ../../data/scripting/training_wheels/logs.lua:125
 #: ../../data/scripting/training_wheels/logs.lua:175
 msgid "Logs"
-msgstr ""
+msgstr "Kmene"
 
 #: ../../data/scripting/training_wheels/logs.lua:128
 msgid ""

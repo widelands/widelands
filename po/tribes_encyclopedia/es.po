@@ -5989,7 +5989,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Beer is produced in micro breweries and used in inns and big inns to produce"
 " snacks."
-msgstr "La cerveza es producida en pequeñas cervecerías y usada en posadas y grandes posadas para producir bocadillos."
+msgstr "La cerveza se produce en pequeñas cervecerías, y se utiliza en posadas posadas para producir aperitivos."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Strong Beer
 #: ../../data/tribes/initialization/barbarians/units.lua:224
@@ -7027,7 +7027,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Produces beer of the lower grade. This beer is a vital component of the "
 "snacks that inns and big inns prepare for miners in deep mines."
-msgstr "Produce cerveza con poco grado. Esta cerveza es un componente vital de los bocadillos que las posadas y las grandes posadas preparan para los mineros en las profundas minas."
+msgstr "Produce cerveza con poco grado. Esta cerveza es un componente vital de los aperitivos que las posadas preparan para los mineros que trabajan en las profundas minas."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Micro
 #. Brewery

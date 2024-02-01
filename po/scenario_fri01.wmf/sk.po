@@ -72,7 +72,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:45
 msgid "30 × Log"
-msgstr "30 x Drevo"
+msgstr "30 x Kmene"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:46
 msgid "30 × Granite"
@@ -302,9 +302,9 @@ msgid ""
 "by adding some logs and granite. The roofs are thatched with reed, "
 "naturally. Nothing is better suited to keep the rain out."
 msgstr ""
-"Ako všetcí Frížania, staviame svoje domy hlavne z tehiel. Vylepšujeme ich "
-"pridaním dreva a žuly. Strechy sú, prirodzene, z trstiny. Nie je nič lepšie,"
-" čo by odolalo dažďu."
+"Ako všetcí Frízania, staviame svoje domy hlavne z tehiel. Vylepšujeme ich "
+"pridaním kmeňov a žuly. Strechy sú, prirodzene, z trstiny. Nie je nič "
+"lepšie, čo by odolalo dažďu."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:153
@@ -452,7 +452,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:207
 msgid "Warehouses"
-msgstr ""
+msgstr "Sklady"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:208
 msgid "Build a warehouse in the east"

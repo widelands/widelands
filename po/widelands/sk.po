@@ -614,7 +614,7 @@ msgstr "Nepodarilo sa načítať súbor „%s“. Zdá sa, že formát súboru n
 
 #: ../../src/editor/editorinteractive.cc:611
 msgid "Exit Editor Confirmation"
-msgstr ""
+msgstr "Potvrdenie ukončenia editora"
 
 #: ../../src/editor/editorinteractive.cc:611
 msgid "Unsaved Map"
@@ -626,7 +626,7 @@ msgstr "Mapa nebola uložená, naozaj chcete skončiť?"
 
 #: ../../src/editor/editorinteractive.cc:613
 msgid "Are you sure you wish to exit the editor?"
-msgstr ""
+msgstr "Naozaj chcete ukončiť editor?"
 
 #: ../../src/editor/editorinteractive.cc:1141 ../../src/logic/addons.cc:48
 #: ../../src/ui_basic/dropdown.cc:358 ../../src/ui_basic/dropdown.cc:360
@@ -792,7 +792,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:93
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:98
 msgid "Automatic Trees"
-msgstr ""
+msgstr "Automatické stromy"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../src/editor/tools/place_immovable_tool.cc:148
@@ -804,7 +804,7 @@ msgstr "Nehybný objekt: %1$s"
 #: ../../src/editor/tools/set_terrain_tool.cc:120
 #, c-format
 msgid "Terrain: %1$s"
-msgstr ""
+msgstr "Terén: %1$s"
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:192
@@ -860,7 +860,7 @@ msgstr "vlajka"
 #. * TRANSLATORS: Editor terrain property: mine building plot
 #: ../../src/editor/ui_menus/field_info_window.cc:108
 msgid "mine"
-msgstr "tažit"
+msgstr "baňa"
 
 #. * TRANSLATORS: Editor terrain property: port space
 #: ../../src/editor/ui_menus/field_info_window.cc:112
@@ -937,7 +937,7 @@ msgstr "Lode: %s"
 #: ../../src/editor/ui_menus/field_info_window.cc:222
 msgctxt "resources"
 msgid "%1%× %2%"
-msgstr ""
+msgstr "%1%× %2%"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:229
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:159
@@ -986,7 +986,7 @@ msgstr "(žiadne)"
 #: ../../src/editor/ui_menus/field_info_window.cc:258
 #, c-format
 msgid "%1$s; %2$s"
-msgstr ""
+msgstr "%1$s; %2$s"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:262
 #, c-format
@@ -1023,7 +1023,7 @@ msgstr "Scenáre pre jedného hráča"
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:87
 #: ../../src/wui/mapdata.cc:199
 msgid "Downloaded Maps"
-msgstr ""
+msgstr "Stiahnuté mapy"
 
 #. * TRANSLATORS: The folder that a file will be saved to.
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:90
@@ -1187,7 +1187,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:432
 msgid "Ferry range:"
-msgstr ""
+msgstr "Dosah trajektov:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:433
 msgid ""
@@ -1285,7 +1285,7 @@ msgstr "Podnebie"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:126
 msgid "Terrain Distribution"
-msgstr ""
+msgstr "Distribúcia terénu"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:143
 msgid "Water:"
@@ -1337,15 +1337,15 @@ msgstr "Normálna"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:282
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:316
 msgid "Random"
-msgstr "Náhodné"
+msgstr "Náhodná"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:313
 msgid "Alpine"
-msgstr ""
+msgstr "Horská"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:314
 msgid "Atoll"
-msgstr ""
+msgstr "Ostrovná"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:315
@@ -1634,7 +1634,7 @@ msgstr "Pevná výška"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:379 ../../src/wui/stock_menu.cc:36
 #, c-format
 msgid "%1$s %2$s"
-msgstr ""
+msgstr "%1$s %2$s"
 
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:51
 #, c-format
@@ -1752,7 +1752,7 @@ msgstr "Dokončovanie"
 #: ../../src/game_io/game_saver.cc:50
 #, c-format
 msgid "Saving game: %1$s (%2$d/%3$d)"
-msgstr "Ukladám hru: %1$s (%2$d/%3$d)"
+msgstr "Ukladanie hry: %1$s (%2$d/%3$d)"
 
 #: ../../src/game_io/game_saver.cc:52
 msgid "Autosaving game…"
@@ -1815,7 +1815,7 @@ msgstr ""
 
 #: ../../src/graphic/gl/initialize.cc:263
 msgid "OpenGL"
-msgstr ""
+msgstr "OpenGL"
 
 #: ../../src/graphic/gl/initialize.cc:310
 msgid "Shading Language"
@@ -1829,7 +1829,7 @@ msgstr ""
 #, c-format
 msgctxt "definitionterm"
 msgid "%s:"
-msgstr ""
+msgstr "%s:"
 
 #. * TRANSLATORS: Part of tooltip entry for characters in illegal filenames.
 #. replaces the
@@ -1860,7 +1860,7 @@ msgstr ""
 #: ../../src/io/filesystem/illegal_filename_check.cc:93
 msgctxt "illegal_filename_characters"
 msgid "The following characters are not allowed:"
-msgstr ""
+msgstr "Nasledujúce znaky nie sú dovolené:"
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -2739,7 +2739,7 @@ msgstr ""
 #, c-format
 msgctxt "warehouse"
 msgid "Warehouse %d"
-msgstr ""
+msgstr "Sklad %d"
 
 #: ../../src/logic/playercommand.cc:2204
 #: ../../src/wlapplication_options.cc:663
@@ -2883,7 +2883,7 @@ msgstr ""
 #: ../../src/map_io/map_saver.cc:127
 #: ../../src/map_io/widelands_map_loader.cc:244
 msgid "Terrains"
-msgstr ""
+msgstr "Terény"
 
 #: ../../src/map_io/map_saver.cc:134
 #: ../../src/map_io/widelands_map_loader.cc:257
@@ -3014,7 +3014,7 @@ msgstr ""
 #: ../../src/network/gameclient.cc:162 ../../src/network/gamehost.cc:561
 #: ../../src/ui_fsmenu/launch_spg.cc:174 ../../src/wlapplication.cc:783
 msgid "Preparing game…"
-msgstr ""
+msgstr "Príprava hry…"
 
 #: ../../src/network/gameclient.cc:232
 #: ../../src/network/internet_gaming.cc:104
@@ -3272,7 +3272,7 @@ msgstr[3] ""
 #: ../../src/network/internet_gaming.cc:509
 #, c-format
 msgid "Invalid chat message type \"%s\"."
-msgstr "Neplatný typ chatovej správy \"%s\"."
+msgstr "Neplatný typ chatovej správy „%s“."
 
 #: ../../src/network/internet_gaming.cc:509
 msgid "Invalid message type"
@@ -4283,7 +4283,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/manager.cc:558
 #, c-format
 msgid "Toggle category ‘%s’"
-msgstr "Prepnúť kategóriu ‘%s’"
+msgstr "Prepnúť kategóriu „%s“"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:649
 #, c-format
@@ -4899,12 +4899,12 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/packager_box.cc:439
 #, c-format
 msgid "Do you really want to delete the directory ‘%s’ and all its contents?"
-msgstr "Naozaj chcete vymazať adresár ‚%s’ a všetok jeho obsah?"
+msgstr "Naozaj chcete vymazať adresár „%s“ a všetok jeho obsah?"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:441
 #, c-format
 msgid "Do you really want to delete the map ‘%s’?"
-msgstr "Naozaj chcete zmazať mapu ‚%s’?"
+msgstr "Naozaj chcete zmazať mapu „%s“?"
 
 #. * TRANSLATORS: Header for campaign difficulty
 #: ../../src/ui_fsmenu/addons/packager_box.cc:489
@@ -6291,11 +6291,11 @@ msgstr "Späť"
 #: ../../src/ui_fsmenu/menu.cc:292
 #, c-format
 msgid "Back to ‘%s’"
-msgstr ""
+msgstr "Naspäť na „%s“"
 
 #: ../../src/ui_fsmenu/menu.cc:301
 msgid "Close window"
-msgstr ""
+msgstr "Zatvoriť okno"
 
 #. * TRANSLATORS: e.g. Ctrl+Vertical scroll
 #: ../../src/ui_fsmenu/mousewheel_options.cc:59
@@ -6922,7 +6922,7 @@ msgstr "Autori"
 #. * TRANSLATORS: This is the "name" of the single player
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:183
 msgid "You"
-msgstr ""
+msgstr "Vy"
 
 #: ../../src/ui_fsmenu/tech_info.cc:80
 msgid "MacOS"
@@ -6978,7 +6978,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/tech_info.cc:117
 msgid "Locale:"
-msgstr ""
+msgstr "Lokalizácia:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:118
 msgid "Home Directory:"
@@ -6994,7 +6994,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/tech_info.cc:121
 msgid "Locale Directory:"
-msgstr ""
+msgstr "Adresár lokalizácie:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:123
 msgid "Executable Directory:"
@@ -7041,7 +7041,7 @@ msgstr ""
 #: ../../src/wlapplication.cc:833
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
-msgstr "Hre Widelands sa nepodarilo nájsť súbor \"%s\"."
+msgstr "Hre Widelands sa nepodarilo nájsť súbor „%s“."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
 #: ../../src/wlapplication.cc:834 ../../src/wlapplication.cc:839
@@ -7129,7 +7129,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:194
 msgid "Warehouse"
-msgstr ""
+msgstr "Sklad"
 
 #: ../../src/wlapplication_options.cc:195
 msgid "Port"
@@ -7165,7 +7165,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:203
 msgid "Fortress"
-msgstr ""
+msgstr "Pevnosť"
 
 #: ../../src/wlapplication_options.cc:204
 msgid "Woodcutter’s House"
@@ -7409,15 +7409,15 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:422
 msgid "Zoom In"
-msgstr ""
+msgstr "Priblížiť"
 
 #: ../../src/wlapplication_options.cc:427
 msgid "Zoom Out"
-msgstr ""
+msgstr "Oddialiť"
 
 #: ../../src/wlapplication_options.cc:432
 msgid "Reset Zoom"
-msgstr ""
+msgstr "Obnoviť priblíženie"
 
 #: ../../src/wlapplication_options.cc:437
 msgid "Jump to Next Location"
@@ -7518,7 +7518,7 @@ msgstr "Možnosti zvuku"
 
 #: ../../src/wlapplication_options.cc:601
 msgid "Restart Scenario or Replay"
-msgstr ""
+msgstr "Reštartovať scenár alebo záznam"
 
 #: ../../src/wlapplication_options.cc:606
 msgid "Toggle Census"
@@ -7599,7 +7599,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:705
 msgid "Pause The Game"
-msgstr ""
+msgstr "Zastaviť hru"
 
 #: ../../src/wlapplication_options.cc:710
 msgid "Scroll to Starting Field"
@@ -7684,7 +7684,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:809
 msgid "Toggle Quick Navigation"
-msgstr ""
+msgstr "Prepnúť rýchlu navigáciu"
 
 #: ../../src/wlapplication_options.cc:816
 #, c-format
@@ -7897,7 +7897,7 @@ msgstr ""
 #: ../../src/wlapplication_options.cc:1404
 msgctxt "hotkey"
 msgid "Pause"
-msgstr ""
+msgstr "Zastaviť"
 
 #: ../../src/wlapplication_options.cc:1406
 msgctxt "hotkey"
@@ -8084,7 +8084,7 @@ msgstr "Naozaj chcete rozobrať túto budovu?"
 
 #: ../../src/wui/actionconfirm.cc:265 ../../src/wui/actionconfirm.cc:325
 msgid "Preserve wares"
-msgstr ""
+msgstr "Zachovať výrobky"
 
 #: ../../src/wui/actionconfirm.cc:267
 msgid ""
@@ -8442,13 +8442,13 @@ msgstr "Nastavenia použité po výstavbe"
 #: ../../src/wui/soldiercapacitycontrol.cc:71
 msgid ""
 "Decrease capacity. Hold down Ctrl to set the capacity to the lowest value"
-msgstr ""
+msgstr "Znížiť kapacitu. Súčasným pridržaním Ctrl sa nastaví na najnižšiu hodnotu."
 
 #: ../../src/wui/constructionsitewindow.cc:474
 #: ../../src/wui/soldiercapacitycontrol.cc:80
 msgid ""
 "Increase capacity. Hold down Ctrl to set the capacity to the highest value"
-msgstr ""
+msgstr "Zvýšiť kapacitu. Súčasným pridržaním Ctrl sa nastaví na najvyššiu hodnotu."
 
 #: ../../src/wui/economy_options_window.cc:49
 msgid "Economy options"
@@ -9287,26 +9287,26 @@ msgstr "Ukázať minimapu"
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:353
 msgid "Hide Quick Navigation"
-msgstr ""
+msgstr "Skryť rýchlu navigáciu"
 
 #: ../../src/wui/interactive_base.cc:354
 msgid "Show Quick Navigation"
-msgstr ""
+msgstr "Zobraziť rýchlu navigáciu"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:361
 msgid "Zoom +"
-msgstr ""
+msgstr "Priblížiť"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:366
 msgid "Reset zoom"
-msgstr ""
+msgstr "Obnoviť priblíženie"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:371
 msgid "Zoom –"
-msgstr ""
+msgstr "Oddialiť"
 
 #: ../../src/wui/interactive_base.cc:947
 #, c-format
@@ -9361,21 +9361,21 @@ msgstr "Nastaviť možnosti zvukových efektov a hudby"
 #: ../../src/wui/interactive_gamebase.cc:171
 #: ../../src/wui/interactive_gamebase.cc:237
 msgid "Restart Replay"
-msgstr ""
+msgstr "Reštartovať záznam"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/interactive_gamebase.cc:187
 #: ../../src/wui/interactive_gamebase.cc:237
 msgid "Restart Scenario"
-msgstr ""
+msgstr "Reštartovať scenár"
 
 #: ../../src/wui/interactive_gamebase.cc:238
 msgid "Are you sure you wish to restart this replay?"
-msgstr ""
+msgstr "Naozaj chcete reštartovať tento záznam?"
 
 #: ../../src/wui/interactive_gamebase.cc:239
 msgid "Are you sure you wish to restart this scenario?"
-msgstr ""
+msgstr "Naozaj chcete reštartovať tento scenár?"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building names are shown
@@ -9403,39 +9403,39 @@ msgstr "Skry budovy"
 
 #: ../../src/wui/interactive_gamebase.cc:348
 msgid "Speed +"
-msgstr ""
+msgstr "Rýchlosť +"
 
 #. * TRANSLATORS: Tooltip for Speed + in the game's game speed menu
 #: ../../src/wui/interactive_gamebase.cc:351
 msgid "Increase the game speed"
-msgstr ""
+msgstr "Zvýšiť rýchlosť hry"
 
 #: ../../src/wui/interactive_gamebase.cc:354
 msgid "Speed -"
-msgstr ""
+msgstr "Rýchlosť -"
 
 #. * TRANSLATORS: Tooltip for Speed - in the game's game speed menu
 #: ../../src/wui/interactive_gamebase.cc:357
 msgid "Decrease the game speed"
-msgstr ""
+msgstr "Znížiť rýchlosť hry"
 
 #: ../../src/wui/interactive_gamebase.cc:363
 msgid "Resume"
-msgstr ""
+msgstr "Pokračovať"
 
 #. * TRANSLATORS: Tooltip for Pause in the game's game speed menu
 #: ../../src/wui/interactive_gamebase.cc:366
 msgid "Resume the Game"
-msgstr ""
+msgstr "Pokračovať v hre"
 
 #: ../../src/wui/interactive_gamebase.cc:369
 msgid "Pause"
-msgstr ""
+msgstr "Zastaviť"
 
 #. * TRANSLATORS: Tooltip for Pause in the game's game speed menu
 #: ../../src/wui/interactive_gamebase.cc:372
 msgid "Pause the Game"
-msgstr ""
+msgstr "Zastaviť hru"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
 #: ../../src/wui/interactive_gamebase.cc:613
@@ -9537,7 +9537,7 @@ msgstr ""
 #. selected multiple files
 #: ../../src/wui/load_or_save_game.cc:186
 msgid "Delete these games"
-msgstr ""
+msgstr "Vymazať tieto hry"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:30
@@ -9866,7 +9866,7 @@ msgstr "(nečinný)"
 
 #: ../../src/wui/quicknavigation.cc:161
 msgid "Quick Navigation"
-msgstr ""
+msgstr "Rýchla navigácia"
 
 #: ../../src/wui/quicknavigation.cc:174
 msgid "Go to previous location"
@@ -10355,7 +10355,7 @@ msgstr ""
 #: ../../src/wui/sound_options.cc:160
 msgctxt "sound_options"
 msgid "Music"
-msgstr ""
+msgstr "Hudba"
 
 #: ../../src/wui/sound_options.cc:163
 msgctxt "sound_options"
@@ -10365,7 +10365,7 @@ msgstr ""
 #: ../../src/wui/sound_options.cc:167
 msgctxt "sound_options"
 msgid "Game Messages"
-msgstr ""
+msgstr "Herné správy"
 
 #: ../../src/wui/sound_options.cc:171
 msgctxt "sound_options"
@@ -10438,11 +10438,11 @@ msgstr "Pracovníci v skladoch"
 
 #: ../../src/wui/story_message_box.cc:78
 msgid "Next Mission"
-msgstr ""
+msgstr "Ďalšia misia"
 
 #: ../../src/wui/story_message_box.cc:79
 msgid "Start the next mission now"
-msgstr ""
+msgstr "Začať teraz ďalšiu misiu"
 
 #: ../../src/wui/story_message_box.cc:125
 msgid "Continue playing this mission"
