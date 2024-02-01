@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-25 02:37+0000\n"
+"POT-Creation-Date: 2024-02-01 02:29+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Niklas Nordgren, 2022-2023\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
@@ -1991,8 +1991,8 @@ msgstr "Inga"
 
 #: ../../src/logic/addons.cc:275
 #, c-format
-msgid "%1$s<br>· %2$s (version %3$s)"
-msgstr "%1$s<br>· %2$s (version %3$s)"
+msgid "%1$s<br>• %2$s (version %3$s)"
+msgstr ""
 
 #: ../../src/logic/addons.cc:305
 msgid "No game-relevant add-ons in use."
@@ -3022,15 +3022,15 @@ msgstr[1] "%u felaktigheter i tillägg upptäckta:\n"
 #, c-format
 msgid ""
 "%1$s\n"
-"· ‘%2$s’ required by host not found"
-msgstr "%1$s\n·\"%2$s\" som krävs av värden kunde inte hittas"
+"• ‘%2$s’ required by host not found"
+msgstr ""
 
 #: ../../src/network/gameclient.cc:819
 #, c-format
 msgid ""
 "%1$s\n"
-"· ‘%2$s’ installed at version %3$s but host uses version %4$s"
-msgstr "%1$s\n·\"%2$s\" installerad med version %3$s men värden använder version %4$s"
+"• ‘%2$s’ installed at version %3$s but host uses version %4$s"
+msgstr ""
 
 #: ../../src/network/gameclient.cc:990
 msgid "/me ’s file failed md5 checksumming."
@@ -4249,8 +4249,8 @@ msgstr[1] "Är du säker på att du vill uppgradera dessa %u tillägg?"
 #, c-format
 msgid ""
 "\n"
-"· %1$s (%2$s) by %3$s"
-msgstr "\n· %1$s (%2$s) av %3$s"
+"• %1$s (%2$s) by %3$s"
+msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:656
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:413
@@ -4391,30 +4391,30 @@ msgstr[1] "Uppgradera följande %u tillägg:"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1169
 #, c-format
-msgid "· %s"
-msgstr "· %s"
+msgid "• %s"
+msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1205
 #, c-format
-msgid "· ‘%1$s’ requires ‘%2$s’ which could not be found"
-msgstr "· \"%1$s\" kräver \"%2$s\" som inte kunde hittas"
+msgid "• ‘%1$s’ requires ‘%2$s’ which could not be found"
+msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1210
 #, c-format
-msgid "· ‘%1$s’ requires ‘%2$s’ which is disabled"
-msgstr "· \"%1$s\" kräver \"%2$s\" som är inaktiverad"
+msgid "• ‘%1$s’ requires ‘%2$s’ which is disabled"
+msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1217
 #, c-format
-msgid "· ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
-msgstr "· \"%1$s\" kräver \"%2$s\",  vilket anges under nödvändiga tillägg"
+msgid "• ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
+msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1245
 #, c-format
 msgid ""
-"· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
+"• ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
-msgstr "·\"%1$s\" kräver först \"%2$s\" och därefter \"%3$s\", men de är listade i fel ordning."
+msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1261
 #, c-format
@@ -4634,8 +4634,8 @@ msgstr[1] "Om du lämnar packeteraren nu kommer alla ändringar som berör följ
 #, c-format
 msgid ""
 "%1$s\n"
-"· %2$s"
-msgstr "%1$s\n· %2$s"
+"• %2$s"
+msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:463
 msgid "Quit Packager"
@@ -5293,8 +5293,8 @@ msgstr "Uppgradera"
 msgid "Comments and Votes"
 msgstr "Kommentarer och röster"
 
-#. * TRANSLATORS: Filesize · Download count · Average rating · Number of
-#. comments ·
+#. * TRANSLATORS: Filesize • Download count • Average rating • Number of
+#. comments •
 #. Number of screenshots
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:360
 #, c-format
@@ -6084,9 +6084,9 @@ msgstr "Version %1$s"
 #. * TRANSLATORS: Placeholders are the copyright years
 #: ../../src/ui_fsmenu/main.cc:531
 msgid ""
-"(C) %1%-%2% by the Widelands Development Team · Licensed under the GNU "
+"(C) %1%-%2% by the Widelands Development Team • Licensed under the GNU "
 "General Public License V2.0"
-msgstr "(C) %1% - %2% av Widelands utvecklingsteam · Licensierat under GNU General Public License V2.0"
+msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:873
 msgid "Desyncing Add-On Found"
@@ -9101,18 +9101,18 @@ msgstr "Flytta panelen till överkanten"
 msgid "Cheat mode enabled"
 msgstr "Fuskläge aktiverat"
 
-#. * TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime
-#. · Gamespeed)
+#. * TRANSLATORS: (Gametime • Realtime) or (Gametime • Gamespeed) or (Realtime
+#. • Gamespeed)
 #: ../../src/wui/info_panel.cc:454
 #, c-format
-msgid "%1$s · %2$s"
-msgstr "%1$s · %2$s"
+msgid "%1$s • %2$s"
+msgstr ""
 
-#. * TRANSLATORS: Gametime · Realtime · Gamespeed
+#. * TRANSLATORS: Gametime • Realtime • Gamespeed
 #: ../../src/wui/info_panel.cc:459
 #, c-format
-msgid "%1$s · %2$s · %3$s"
-msgstr "%1$s · %2$s · %3$s"
+msgid "%1$s • %2$s • %3$s"
+msgstr ""
 
 #: ../../src/wui/inputqueuedisplay.cc:70
 msgid "Priority: Very Low"
