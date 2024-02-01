@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2018
@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2024-02-01 02:29+0000\n"
 "PO-Revision-Date: 2015-02-03 14:47+0000\n"
 "Last-Translator: TaeMin An, 2017,2019\n"
 "Language-Team: Korean (http://app.transifex.com/widelands/widelands/language/ko/)\n"
@@ -111,8 +111,8 @@ msgid ""
 "Barbarians cannot train in this skill and therefore have always defense "
 "level 0, which means that the damage is always reduced by %1%%%. If an "
 "attacker with an attack value of 3500 points hits a Barbarian soldier, the "
-"Barbarian will lose 3500·%2%%% = %3% health."
-msgstr "방어력은 공격값에서 빠지는 비율입니다. 야만인들은 이 능력을 훈련할 수 없기에 언제나 방어력 수준이 0이고, 이는 데미지가 언제나 %1%%% 만큼 감소하는 것을 의미합니다. 공격자가 3500 포인트의 공격 값으로 야만인 군인을 친다면, 야만인은 3500 - %2%%% = %3% 체력을 잃습니다."
+"Barbarian will lose 3500×%2%%% = %3% health."
+msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:49
 msgid "Evade:"

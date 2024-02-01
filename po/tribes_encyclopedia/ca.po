@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-11-18 02:30+0000\n"
+"POT-Creation-Date: 2024-02-01 02:29+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Juanjo, 2015-2023\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
@@ -14747,9 +14747,9 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average. Needles"
-" are an exception - in the time to produce one tool two needles are "
+" are an exception – in the time to produce one tool two needles are "
 "produced."
-msgstr "Si aquest edifici està ben subministrat i l'economia necessita totes les eines, per a produir-ne una unitat de cadascuna d'elles es triga de mitjana %1$s. Si l'economia només necessita un tipus determinat d'eina, produir cada unitat costa %2$s de mitjana. Les agulles són l'excepció: se'n produeixen dues en el temps que normalment es triga a produir una eina."
+msgstr ""
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Small Armor
 #. Smithy
@@ -15060,9 +15060,9 @@ msgstr "Clients famolencs en temps d’escassedat de carn i peix fumats"
 msgctxt "frisians_building"
 msgid ""
 "If the tavern is fully supplied, it can produce one ration in %1$s on "
-"average, using 2 kinds of ingredients. If it can only use one kind of "
+"average, using two kinds of ingredients. If it can only use one kind of "
 "ingredient, it can produce one ration in %2$s on average."
-msgstr "Si la taverna està ben subministrada, pot produir una ració cada %1$s de mitjana, si fa servir dos tipus d'ingredient. Si només en fa servir un tipus, pot produir una ració cada %2$s de mitjana."
+msgstr ""
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Drinking Hall
 #: ../../data/tribes/initialization/frisians/units.lua:1982

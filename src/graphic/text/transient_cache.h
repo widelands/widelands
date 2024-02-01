@@ -58,8 +58,8 @@ public:
 	                                        std::shared_ptr<const T> entry) = 0;
 
 protected:
-	/// Inserts this entry of type T into the cache. asserts() that there is no entry with this hash
-	/// already cached. Returns the given T for convenience.
+	/// Inserts this entry of type T into the cache if there is no entry with this hash already
+	/// cached. Returns the given T for convenience.
 	std::shared_ptr<const T> insert(const std::string& hash,
 	                                std::shared_ptr<const T> entry,
 	                                uint32_t entry_size_in_size_unit);
@@ -118,7 +118,9 @@ template <typename T>
 std::shared_ptr<const T> TransientCache<T>::insert(const std::string& hash,
                                                    std::shared_ptr<const T> entry,
                                                    uint32_t entry_size_in_size_unit) {
-	assert(entries_.find(hash) == entries_.end());
+	if (entries_.find(hash) != entries_.end()) {  // Should happen only in race conditions
+		return entry;
+	}
 
 	while (!entries_.empty() &&
 	       size_in_size_unit_ + entry_size_in_size_unit > max_size_in_size_unit_) {

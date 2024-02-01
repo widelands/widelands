@@ -1,17 +1,18 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
 # Karl Vest, 2020
 # MiroslavR <miroslavr256@gmail.com>, 2015-2017
 # Miroslav Remák <Unknown>, 2014
+# Pavol Gono, 2024
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-11-16 02:33+0000\n"
+"POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Karl Vest, 2020\n"
+"Last-Translator: Pavol Gono, 2024\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -75,7 +76,7 @@ msgstr "GPL tiež dodávame ako textový dokument spolu so samotnou hrou."
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
-msgstr "V systéme Linux môžete nájsť súbor s názvom COPYING v koreňovom priečinku zdrojového alebo samostatného binárneho balíčka, alebo v priečinku, kde je hra nainštalovaná (napríklad ‘%1%’)."
+msgstr "V systéme Linux môžete nájsť súbor s názvom COPYING v koreňovom priečinku zdrojového alebo samostatného binárneho balíčka, alebo v priečinku, kde je hra nainštalovaná (napríklad „%1%“)."
 
 #: ../../data/txts/LICENSE.lua:24
 msgid ""
@@ -318,7 +319,7 @@ msgstr "Dokumentácia, pomoc a wiki"
 
 #: ../../data/txts/developers.lua:391
 msgid "Add-Ons"
-msgstr ""
+msgstr "Doplnky"
 
 #: ../../data/txts/developers.lua:410
 msgid "Former Elders"
@@ -478,7 +479,7 @@ msgid ""
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players."
-msgstr "Posledné tri môže nastaviť len hostujúci klient ľavým kliknutím na tlačidlo \"typ\" hráča. Hostujúci hráči ďalej dokážu nastaviť inicializáciu každého hráča (budovy, tovar a pracovníkov, s ktorými hráč začína) a kmeň a tím počítačových hráčov."
+msgstr "Posledné tri môže nastaviť len hostujúci klient ľavým kliknutím na tlačidlo „typ“ hráča. Hostujúci hráči ďalej dokážu nastaviť inicializáciu každého hráča (budovy, výrobky a pracovníkov, s ktorými hráč začína) a kmeň a tím počítačových hráčov."
 
 #: ../../data/txts/help/multiplayer_help.lua:23
 msgid ""
