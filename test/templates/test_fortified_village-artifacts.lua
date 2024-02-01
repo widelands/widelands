@@ -1,12 +1,21 @@
 include "test/scripting/check_game_end.lua"
 
+local map = wl.Game().map
 local winner = 1
-local artifacts = {
-  { 68, 29 },
-  { 85, 41 },
-  { 40, 72 },
-  { 36, 82 },
-}
+local artifacts = {}
+
+-- gather the artifacts from the map
+for x = 0, (map.width - 1) do
+  for y = 0, (map.height - 1) do
+    local f = map:get_field(x,y)
+    local imm = f.immovable
+    if imm ~= nil and imm:has_attribute("artifact") and f == imm.fields[1] then
+      table.insert(artifacts, { x, y })
+    end
+  end
+end
+
+assert_true(#artifacts > 0, "## No artifacts found on map. ##")
 
 run(function()
   sleep(8000)
