@@ -960,6 +960,57 @@ void Map::set_nrplayers(PlayerNumber const nrplayers) {
 	scenario_tribes_.resize(nrplayers);
 
 	nrplayers_ = nrplayers;  // in case the number players got less
+
+	sanitize_suggested_teams();
+}
+
+/*
+===============
+Remove invalid and duplicate players from suggested teams and remove empty teams and lineups.
+===============
+*/
+void Map::sanitize_suggested_teams() {
+	for (size_t lineup_index = 0; lineup_index < suggested_teams_.size();) {
+		SuggestedTeamLineup& stl = suggested_teams_.at(lineup_index);
+		std::set<PlayerNumber> used;
+		for (size_t team_index = 0; team_index < stl.size();) {
+			SuggestedTeam& team = stl.at(team_index);
+			for (size_t player_index = 0; player_index < team.size();) {
+				PlayerNumber pn = team.at(player_index);  // Zero-based
+				if (pn >= nrplayers_ || used.count(pn) > 0) {
+					team.erase(team.begin() + player_index);
+				} else {
+					used.insert(pn);
+					++player_index;
+				}
+			}
+			if (team.empty()) {
+				stl.erase(stl.begin() + team_index);
+			} else {
+				++team_index;
+			}
+		}
+		if (stl.empty()) {
+			suggested_teams_.erase(suggested_teams_.begin() + lineup_index);
+		} else {
+			++lineup_index;
+		}
+	}
+
+	for (auto it = suggested_teams_.begin(); it != suggested_teams_.end();) {
+		bool remove = false;
+		for (auto other = suggested_teams_.begin(); other != it; ++other) {
+			if (*other == *it) {
+				remove = true;
+				break;
+			}
+		}
+		if (remove) {
+			it = suggested_teams_.erase(it);
+		} else {
+			++it;
+		}
+	}
 }
 
 /*

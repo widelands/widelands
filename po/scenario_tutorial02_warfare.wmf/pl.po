@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
 # Andrzej 'Endrju' Krentosz <endrjux@gmail.com>, 2006
@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2024-02-01 02:29+0000\n"
 "PO-Revision-Date: 2015-02-03 14:47+0000\n"
 "Last-Translator: Pawel <pawcio980@gmail.com>, 2022\n"
 "Language-Team: Polish (http://app.transifex.com/widelands/widelands/language/pl/)\n"
@@ -115,8 +115,8 @@ msgid ""
 "Barbarians cannot train in this skill and therefore have always defense "
 "level 0, which means that the damage is always reduced by %1%%%. If an "
 "attacker with an attack value of 3500 points hits a Barbarian soldier, the "
-"Barbarian will lose 3500·%2%%% = %3% health."
-msgstr "Obrona to wartość procentowa odejmowana od wartości ataku. Barbarzyńcy nie mogą trenować tej umiejętności, zaś ich poziom obrony jest zawsze równy 0, co zmniejsza otrzymywane obrażenia o %1%%%. Jeśli atakujący z wartością ataku 3500 uderzy barbarzyńskiego żołnierza, to Barbarzyńca straci 3500 · %2%%% = %3% punktów zdrowia."
+"Barbarian will lose 3500×%2%%% = %3% health."
+msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:49
 msgid "Evade:"

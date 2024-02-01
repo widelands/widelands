@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
 # Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2021
@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2024-02-01 02:29+0000\n"
 "PO-Revision-Date: 2015-02-03 14:47+0000\n"
 "Last-Translator: Atte Timonen, 2022\n"
 "Language-Team: Finnish (http://app.transifex.com/widelands/widelands/language/fi/)\n"
@@ -113,8 +113,8 @@ msgid ""
 "Barbarians cannot train in this skill and therefore have always defense "
 "level 0, which means that the damage is always reduced by %1%%%. If an "
 "attacker with an attack value of 3500 points hits a Barbarian soldier, the "
-"Barbarian will lose 3500·%2%%% = %3% health."
-msgstr "Puolustus on prosenttimäärä, joka vähenee hyökkäysarvosta. Barbaari ei voi harjoitella tätä taitoa ja siksi hänellä on aina puolustustaso 0, mikä tarkoitta, että vanhingosta vähennetään aina %1%%%. Jos 3500 pisteen hyökkääjä iskee Barbaarisotilasta, hän menettää 3500·%2%%% = %3% terveyttä."
+"Barbarian will lose 3500×%2%%% = %3% health."
+msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:49
 msgid "Evade:"
