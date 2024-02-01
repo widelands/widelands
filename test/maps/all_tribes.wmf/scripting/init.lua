@@ -13,6 +13,7 @@ include "test/scripting/lunit.lua"
 include "test/scripting/stable_save.lua"
 
 game = wl.Game()
+map = wl.Game().map
 
 -- See all so that we can debug stuff
 game.players[1].see_all = 1
@@ -70,27 +71,22 @@ function count_buildings(player, old_count, expected_buildings)
    return total_buildings
 end
 
--- get starting field for a player, currently the same for each one
-function get_starting_field(player)
-   -- only player 1 and 2 have a useful starting position
-   return game.map.player_slots[1].starting_field -- fixed position
-end
 
 -- Placement functions
 
+local map_w = map.width
+local map_h = map.height
+
 -- Get a field with the coordinates shifted for the player
-function get_safe_field(player, starting_field, x, y)
-   if x > 400 then x = x - 512 end -- work with old map size
-   if x > 400 then x = x - 512 end -- dito
-   return map:wrap_field(starting_field.x + x, starting_field.y + y)
+function get_safe_field(starting_field, x, y)
+   return map:get_field((starting_field.x + x) % map_w, (starting_field.y + y) % map_h)
 end
 
 -- Add a building with coordinates not going out of range.
 -- Note that this has only been tested with starting_field.y == 1
 function place_safe_building(player, buildingname, starting_field, x, y)
-   local fld = get_safe_field(player, starting_field, x, y)
+   local fld = get_safe_field(starting_field, x, y)
    print("Placing " .. buildingname .. " at " .. fld.x .. " " .. fld.y)
-
    local b = player:place_building(buildingname, fld, false, true)
    return b
 end
@@ -173,8 +169,8 @@ end
 
 function place_player_ship(playernumber)
    local player = wl.Game().players[playernumber]
-   local starting_field = get_starting_field(player)
-   player:place_ship(get_safe_field(player, starting_field, 12, 6))
+   local starting_field = wl.Game().map.player_slots[playernumber].starting_field
+   player:place_ship(get_safe_field(starting_field, 12, 6))
 end
 
 -- Sleep and adjust game speed each second for reasonable average FPS
@@ -193,24 +189,3 @@ function sleep_with_fps(seconds)
       end
    until counter == seconds
 end
-
-local function init_map()
-   -- remove 2/3 of the ducks from the map
-   -- and animals too far in the north (not influencing the player)
-   for x=0, game.map.width-1 do
-      for y=0, game.map.height-1 do
-         if x % 3 < 2 then
-            local bob = game.map:get_field(x, y).bobs[1]
-            if bob and bob.descr.type_name == "critter" and bob.descr.name == "duck" then
-               bob:remove()
-            end
-         elseif y > 20 and y < 105 then
-            local bob = game.map:get_field(x, y).bobs[1]
-            if bob and bob.descr.type_name == "critter" and bob.descr.name ~= "duck" then
-               bob:remove()
-            end
-         end
-      end
-   end
-end
-init_map()

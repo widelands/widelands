@@ -1,12 +1,12 @@
-# Automatically created by Widelands 1.2~git26366 (f2ddbe7@HEAD) Debug
+# Automatically created by Widelands 1.2~git26455 (bb52261@master) Release
 
 [global]
 map_source_url=
 map_release=
 map_creator_version="r24448[7b43008@tribes-filtering]"
 map_version_major="0"
-map_version_minor="22"
-map_version_timestamp="1704145090"
+map_version_minor="23"
+map_version_timestamp="1706803527"
 packet_version="1"
 packet_compatibility="1"
 minimum_required_widelands_version="1.2"

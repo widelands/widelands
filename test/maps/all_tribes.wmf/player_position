@@ -1,12 +1,12 @@
-# Automatically created by Widelands 1.2~git26366 (f2ddbe7@HEAD) Debug
+# Automatically created by Widelands 1.2~git26455 (bb52261@master) Release
 
 [global]
 packet_version="2"
 player_1="0 1"
-player_2="66 1"
-player_3="121 71"
-player_4="17 71"
-player_5="41 71"
-player_6="65 71"
-player_7="89 71"
-player_8="105 87"
+player_2="0 1"
+player_3="0 1"
+player_4="0 1"
+player_5="0 1"
+player_6="0 1"
+player_7="0 1"
+player_8="0 1"
