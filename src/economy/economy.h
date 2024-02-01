@@ -208,6 +208,8 @@ public:
 		start_request_timer();
 	}
 
+	void recalc_districts();
+
 protected:
 	static Serial last_economy_serial_;
 

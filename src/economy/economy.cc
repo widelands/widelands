@@ -420,6 +420,7 @@ void Economy::remove_warehouse(Warehouse& wh) {
 		if (warehouses_[i] == &wh) {
 			warehouses_[i] = *warehouses_.rbegin();
 			warehouses_.pop_back();
+			recalc_districts();
 			return;
 		}
 	}
@@ -649,6 +650,8 @@ void Economy::split(const std::set<OPtr<Flag>>& flags) {
 		remove_flag(flag);
 		e->add_flag(flag);
 	}
+
+	e->recalc_districts();
 
 	// As long as rebalance commands are tied to specific flags, we
 	// need this, because the flag that rebalance commands for us were
@@ -1136,6 +1139,29 @@ void Economy::handle_active_supplies(Game& game) {
 	}
 }
 
+void Economy::recalc_districts() {
+	if (flags_.empty()) {
+		return;  // Nothing to do.
+	}
+
+	if (warehouses_.empty()) {
+		// Special case for economy without warehouses: Obviously there are no districts.
+		for (Flag* flag : flags_) {
+			flag->set_district_center(nullptr);
+		}
+		return;
+	}
+
+	RouteAStar<AStarZeroEstimator> astar(*router_, type_, AStarZeroEstimator());
+	for (Warehouse* wh : warehouses_) {
+		wh->base_flag().set_district_center(wh);
+		astar.push(wh->base_flag());
+	}
+	while (RoutingNode* current = astar.step()) {
+		current->base_flag().set_district_center(astar.route_start(*current).base_flag().get_district_center());
+	}
+}
+
 /**
  * Balance Requests and Supplies by collecting and weighing pairs, and
  * starting transfers for them.
@@ -1149,6 +1175,8 @@ void Economy::balance(uint32_t const timerid) {
 	Game& game = dynamic_cast<Game&>(owner().egbase());
 
 	check_splits();
+
+	recalc_districts();
 
 	create_requested_workers(game);
 

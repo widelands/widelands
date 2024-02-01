@@ -34,6 +34,7 @@ namespace Widelands {
 struct RoadBase;
 struct Road;
 struct Waterway;
+class Warehouse;
 class WareInstance;
 
 class FlagDescr : public MapObjectDescr {
@@ -90,71 +91,81 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	void load_finish(EditorGameBase&) override;
 	void destroy(EditorGameBase&) override;
 
-	int32_t get_size() const override;
-	bool get_passable() const override;
+	[[nodiscard]]int32_t get_size() const override;
+	[[nodiscard]]bool get_passable() const override;
 
-	Flag& base_flag() override;
+	[[nodiscard]] Flag& base_flag() override;
 
-	const Coords& get_position() const override {
+	[[nodiscard]] const Coords& get_position() const override {
 		return position_;
 	}
-	PositionList get_positions(const EditorGameBase&) const override;
+	[[nodiscard]] PositionList get_positions(const EditorGameBase&) const override;
 	void get_neighbours(WareWorker type, RoutingNodeNeighbours&) override;
-	int32_t get_waitcost() const {
+	[[nodiscard]] int32_t get_waitcost() const {
 		return ware_filled_;
 	}
 
 	void set_economy(Economy*, WareWorker) override;
 
-	Building* get_building() const {
+	[[nodiscard]] Building* get_building() const {
 		return building_;
 	}
 	void attach_building(EditorGameBase&, Building&);
 	void detach_building(EditorGameBase&);
 
-	bool has_roadbase() const {
+	[[nodiscard]] bool has_roadbase() const {
 		return std::any_of(std::begin(roads_), std::end(roads_),
 		                   [](const RoadBase* road) { return road != nullptr; });
 	}
-	bool has_waterway() const {
+	[[nodiscard]] bool has_waterway() const {
 		return nr_of_waterways() > 0;
 	}
-	bool has_road() const {
+	[[nodiscard]] bool has_road() const {
 		return nr_of_roads() > 0;
 	}
-	RoadBase* get_roadbase(uint8_t dir) const {
+	[[nodiscard]] RoadBase* get_roadbase(uint8_t dir) const {
 		return roads_[dir - 1];
 	}
-	Road* get_road(uint8_t dir) const;
-	Waterway* get_waterway(uint8_t dir) const;
-	uint8_t nr_of_roadbases() const;
-	uint8_t nr_of_roads() const;
-	uint8_t nr_of_waterways() const;
+	[[nodiscard]] Road* get_road(uint8_t dir) const;
+	[[nodiscard]] Waterway* get_waterway(uint8_t dir) const;
+	[[nodiscard]] uint8_t nr_of_roadbases() const;
+	[[nodiscard]] uint8_t nr_of_roads() const;
+	[[nodiscard]] uint8_t nr_of_waterways() const;
 	void attach_road(int32_t dir, RoadBase*);
 	void detach_road(int32_t dir);
 
-	RoadBase* get_roadbase(Flag&);
-	Road* get_road(Flag&) const;
+	[[nodiscard]] RoadBase* get_roadbase(Flag&);
+	[[nodiscard]] Road* get_road(Flag&) const;
 
-	bool is_dead_end() const;
+	[[nodiscard]] bool is_dead_end() const;
 
-	bool has_capacity() const;
-	uint32_t total_capacity() const {
+	[[nodiscard]] bool has_capacity() const;
+	[[nodiscard]] uint32_t total_capacity() const {
 		return ware_capacity_;
 	}
-	uint32_t current_wares() const {
+	[[nodiscard]] uint32_t current_wares() const {
 		return ware_filled_;
 	}
 	void wait_for_capacity(Game&, Worker&);
 	void skip_wait_for_capacity(Game&, Worker&);
 	void add_ware(EditorGameBase&, WareInstance&);
-	bool has_pending_ware(Game&, Flag& destflag);
-	bool ack_pickup(Game&, Flag& destflag);
+	[[nodiscard]] bool has_pending_ware(Game&, Flag& destflag);
+	[[nodiscard]] bool ack_pickup(Game&, Flag& destflag);
 	bool cancel_pickup(Game&, Flag& destflag);
-	WareInstance* fetch_pending_ware(Game&, PlayerImmovable& dest);
+	[[nodiscard]] WareInstance* fetch_pending_ware(Game&, PlayerImmovable& dest);
 	void propagate_promoted_road(Road* promoted_road);
-	Wares get_wares();
-	uint8_t count_wares_in_queue(PlayerImmovable& dest) const;
+	[[nodiscard]] Wares get_wares();
+	[[nodiscard]] uint8_t count_wares_in_queue(PlayerImmovable& dest) const;
+
+	[[nodiscard]] const Warehouse* get_district_center() const {
+		return district_center_;
+	}
+	[[nodiscard]] Warehouse* get_district_center() {
+		return district_center_;
+	}
+	void set_district_center(Warehouse* wh) {
+		district_center_ = wh;
+	}
 
 	void call_carrier(Game&, WareInstance&, PlayerImmovable* nextstep);
 	void update_wares(Game&, Flag* other);
@@ -203,6 +214,8 @@ private:
 
 	Coords position_;
 	Time animstart_{0};
+
+	Warehouse* district_center_{nullptr};  ///< Warehouse at the center of our district (may be null).
 
 	Building* building_{nullptr};  ///< attached building (replaces road WALK_NW)
 	RoadBase* roads_[WalkingDir::LAST_DIRECTION];

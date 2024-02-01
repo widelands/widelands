@@ -861,7 +861,7 @@ void Flag::cleanup(EditorGameBase& egbase) {
 }
 
 void Flag::draw(const Time& gametime,
-                const InfoToDraw /*info_to_draw*/,
+                const InfoToDraw info_to_draw,
                 const Vector2f& field_on_dst,
                 const Coords& coords,
                 float scale,
@@ -887,6 +887,9 @@ void Flag::draw(const Time& gametime,
 		                    wares_[i].ware->descr().get_animation("idle", wares_[i].ware), Time(0),
 		                    &player_color);
 	}
+
+	// NOCOM for testing only
+	do_draw_info(info_to_draw, "", district_center_ == nullptr ? "-" : as_string(district_center_->serial()), field_on_dst, scale, dst);
 }
 
 /**
@@ -1014,6 +1017,12 @@ void Flag::log_general_info(const Widelands::EditorGameBase& egbase) const {
 	molog(egbase.get_gametime(), "Flag at %i,%i\n", position_.x, position_.y);
 
 	Widelands::PlayerImmovable::log_general_info(egbase);
+
+	if (district_center_ == nullptr) {
+		molog(egbase.get_gametime(), "No district\n");
+	} else {
+		molog(egbase.get_gametime(), "District %u (%s)\n", district_center_->serial(), district_center_->get_warehouse_name().c_str());
+	}
 
 	if (ware_filled_ != 0) {
 		molog(egbase.get_gametime(), "Wares at flag:\n");
