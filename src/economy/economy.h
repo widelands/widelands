@@ -167,9 +167,10 @@ public:
 	}
 
 	/// Whether the economy needs more of this ware/worker type.
+	/// If a flag is given, consider only its district, otherwise the entire economy.
 	/// Productionsites may ask this before they produce, to avoid depleting a
 	/// ware type by overproducing another from it.
-	[[nodiscard]] bool needs_ware_or_worker(DescriptionIndex) const;
+	[[nodiscard]] bool needs_ware_or_worker(DescriptionIndex, const Flag* flag) const;
 
 	[[nodiscard]] const TargetQuantity& target_quantity(DescriptionIndex const i) const {
 		return target_quantities_[i];
@@ -219,11 +220,9 @@ private:
 	// (flag,
 	// warehouse)
 	struct UniqueDistance {
-		bool operator<(const UniqueDistance& other) const {
-			return std::forward_as_tuple(distance, serial, provider_type) <
-			       std::forward_as_tuple(other.distance, other.serial, other.provider_type);
-		}
+		bool operator<(const UniqueDistance& other) const;
 
+		bool same_district;
 		uint32_t distance;
 		uint32_t serial;
 		SupplyProviders provider_type;

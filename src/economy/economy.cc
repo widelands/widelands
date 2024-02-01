@@ -505,21 +505,45 @@ Worker& Economy::soldier_prototype(const WorkerDescr* d) {
 	return *soldier_prototype_;
 }
 
-bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type) const {
-	Quantity const t = target_quantity(ware_or_worker_type).permanent;
+bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type, const Flag* flag) const {
+	Quantity const target_global = target_quantity(ware_or_worker_type).permanent;
 
-	// we have a target quantity set
-	if (t > 0) {
-		Quantity quantity = 0;
+	if (target_global > 0) {
+		// We have a target quantity set.
+		Quantity target_district;
+		if (flag != nullptr) {
+			target_district = target_global / warehouses_.size();
+			if (target_district * warehouses_.size() < target_global) {
+				++target_district;  // Rounding up is important for wares with small targets
+			}
+		} else {
+			target_district = 0;
+		}
+
+		Quantity quantity_global = 0;
+		Quantity quantity_district = 0;
 		for (const Warehouse* wh : warehouses_) {
-			quantity += type_ == wwWARE ? wh->get_wares().stock(ware_or_worker_type) :
-                                       wh->get_workers().stock(ware_or_worker_type);
-			if (t <= quantity) {
+			const Quantity q = type_ == wwWARE ? wh->get_wares().stock(ware_or_worker_type) :
+	                                    wh->get_workers().stock(ware_or_worker_type);
+			quantity_global += q;
+
+			if (flag != nullptr && wh == flag->get_district_center()) {
+				quantity_district += q;
+				if (quantity_district >= target_district && quantity_global >= target_global) {
+					// If a district is specified, the ware is needed if the district lacks it
+					// even if the global stock is above target.
+					// If the global stock is below target we also need it.
+					return false;
+				}
+			} else if (quantity_global >= target_global) {
 				return false;
 			}
 		}
+
 		return true;
-	}  // Target quantity is set to 0, we need to check if there is an open request.
+	}
+
+	// Target quantity is set to 0, we need to check if there is an open request.
 	// For soldier requests, do not recruit new rookies if only heroes are needed.
 	const bool is_soldier = type_ == wwWORKER && ware_or_worker_type == owner().tribe().soldier();
 	return std::any_of(
@@ -672,6 +696,15 @@ void Economy::start_request_timer(const Duration& delta) {
 	}
 }
 
+bool Economy::UniqueDistance::operator<(const Economy::UniqueDistance& other) const {
+	if (same_district != other.same_district) {
+		return same_district;  // Same-district supplies are always preferred over imports.
+	}
+
+	return std::forward_as_tuple(distance, serial, provider_type) <
+	       std::forward_as_tuple(other.distance, other.serial, other.provider_type);
+}
+
 /**
  * Find the supply that is best suited to fulfill the given request.
  * \return 0 if no supply is found, the best supply otherwise
@@ -704,12 +737,14 @@ Supply* Economy::find_best_supply(Game& game, const Request& req, int32_t& cost)
 			continue;
 		}
 
-		const Widelands::Coords provider_position =
-		   supp.get_position(game)->base_flag().get_position();
+		const Widelands::Flag& supp_flag = supp.get_position(game)->base_flag();
 
-		const uint32_t dist = game.map().calc_distance(target_flag.get_position(), provider_position);
+		// Birds-eye distance for performance, may be inaccurate.
+		const uint32_t dist = game.map().calc_distance(target_flag.get_position(), supp_flag.get_position());
 
-		UniqueDistance ud = {dist, supp.get_position(game)->serial(), provider};
+		const bool same_district = target_flag.get_district_center() == supp_flag.get_district_center();
+
+		UniqueDistance ud = {same_district, dist, supp.get_position(game)->serial(), provider};
 
 		// std::map quarantees uniqueness, practically it means that if more wares are on the same
 		// flag, only

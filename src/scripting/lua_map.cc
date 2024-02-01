@@ -4528,10 +4528,15 @@ int LuaEconomy::set_target_quantity(lua_State* L) {
 }
 
 /* RST
-   .. method:: needs(name)
+   .. method:: needs(name[, flag = nil])
+
+      .. versionchanged:: 1.3
+         Added parameter ``flag``.
 
       Check whether the economy's stock of the given
       ware or worker is lower than the target setting.
+
+      If a flag is provided, only consider the flag's district, otherwise the entire economy.
 
       **Warning**: Since economies can disappear when a player merges them
       through placing/deleting roads and flags, you must get a fresh economy
@@ -4539,15 +4544,25 @@ int LuaEconomy::set_target_quantity(lua_State* L) {
 
       :arg name: The name of the ware or worker.
       :type name: :class:`string`
+      :arg flag: The flag whose district to query.
+      :type flag: :class:`wl.map.Flag` or :const:`nil`.
       :returns: :class:`boolean`
 */
 int LuaEconomy::needs(lua_State* L) {
 	const std::string wname = luaL_checkstring(L, 2);
+	Widelands::Flag* flag = nullptr;
+	if (!lua_isnil(L, 3)) {
+		flag = (*get_user_class<LuaMaps::LuaFlag>(L, 3))->get(L, get_egbase(L));
+		if (flag->get_economy(get()->type()) != get()) {
+			report_error(L, "Flag does not belong to this economy.");
+		}
+	}
+
 	switch (get()->type()) {
 	case Widelands::wwWARE: {
 		const Widelands::DescriptionIndex index = get_egbase(L).descriptions().ware_index(wname);
 		if (get_egbase(L).descriptions().ware_exists(index)) {
-			lua_pushboolean(L, static_cast<int>(get()->needs_ware_or_worker(index)));
+			lua_pushboolean(L, static_cast<int>(get()->needs_ware_or_worker(index, flag)));
 		} else {
 			report_error(L, "There is no ware '%s'.", wname.c_str());
 		}
@@ -4556,7 +4571,7 @@ int LuaEconomy::needs(lua_State* L) {
 	case Widelands::wwWORKER: {
 		const Widelands::DescriptionIndex index = get_egbase(L).descriptions().worker_index(wname);
 		if (get_egbase(L).descriptions().worker_exists(index)) {
-			lua_pushboolean(L, static_cast<int>(get()->needs_ware_or_worker(index)));
+			lua_pushboolean(L, static_cast<int>(get()->needs_ware_or_worker(index, flag)));
 		} else {
 			report_error(L, "There is no worker '%s'.", wname.c_str());
 		}
