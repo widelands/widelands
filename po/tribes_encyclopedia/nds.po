@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-01 02:43+0000\n"
+"POT-Creation-Date: 2024-02-01 02:29+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2023\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -14747,9 +14747,9 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average. Needles"
-" are an exception - in the time to produce one tool two needles are "
+" are an exception – in the time to produce one tool two needles are "
 "produced."
-msgstr "Wenn all Waren to rechter Tied ankomen un de Weertskupp all Aarden vun Warktüüg bruukt, produzeert dat Huus dör de Bank elkeen Warktüüg in %1$s. Wenn de Weertskupp blots eene Aard vun Warktüüg bruukt, word dat dör de Bank in %2$s produzeert. De Utnahm sünd Nadels – in de Tied, wat man bruukt, um een Warktüüg to produzeren, worden twee Nadels produzeert."
+msgstr ""
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Small Armor
 #. Smithy
@@ -15060,9 +15060,9 @@ msgstr "Smachterge Gasten in Tied, waar Rökelfiss un -Fleesk nau is"
 msgctxt "frisians_building"
 msgid ""
 "If the tavern is fully supplied, it can produce one ration in %1$s on "
-"average, using 2 kinds of ingredients. If it can only use one kind of "
+"average, using two kinds of ingredients. If it can only use one kind of "
 "ingredient, it can produce one ration in %2$s on average."
-msgstr "Wenn de Kneipe mit all Waren versörgt word, kann se mit 2 Bigaven dör de Bank in %1$s een Happ produzeren. Wenn se blots eene Bigaav bruken kann, produzeert se dör de Bank in %2$s een Happ."
+msgstr ""
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Drinking Hall
 #: ../../data/tribes/initialization/frisians/units.lua:1982

@@ -113,7 +113,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:62
 msgid "30 × Log"
-msgstr ""
+msgstr "30 x Kmene"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:63
 msgid "40 × Granite"

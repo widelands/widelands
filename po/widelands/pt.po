@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-25 02:37+0000\n"
+"POT-Creation-Date: 2024-02-01 02:29+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Francisco Fernandes <franciscof09@gmail.com>, 2021\n"
 "Language-Team: Portuguese (http://app.transifex.com/widelands/widelands/language/pt/)\n"
@@ -1993,7 +1993,7 @@ msgstr ""
 
 #: ../../src/logic/addons.cc:275
 #, c-format
-msgid "%1$s<br>· %2$s (version %3$s)"
+msgid "%1$s<br>• %2$s (version %3$s)"
 msgstr ""
 
 #: ../../src/logic/addons.cc:305
@@ -3029,14 +3029,14 @@ msgstr[2] ""
 #, c-format
 msgid ""
 "%1$s\n"
-"· ‘%2$s’ required by host not found"
+"• ‘%2$s’ required by host not found"
 msgstr ""
 
 #: ../../src/network/gameclient.cc:819
 #, c-format
 msgid ""
 "%1$s\n"
-"· ‘%2$s’ installed at version %3$s but host uses version %4$s"
+"• ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr ""
 
 #: ../../src/network/gameclient.cc:990
@@ -4271,7 +4271,7 @@ msgstr[2] ""
 #, c-format
 msgid ""
 "\n"
-"· %1$s (%2$s) by %3$s"
+"• %1$s (%2$s) by %3$s"
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:656
@@ -4414,28 +4414,28 @@ msgstr[2] ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1169
 #, c-format
-msgid "· %s"
+msgid "• %s"
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1205
 #, c-format
-msgid "· ‘%1$s’ requires ‘%2$s’ which could not be found"
+msgid "• ‘%1$s’ requires ‘%2$s’ which could not be found"
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1210
 #, c-format
-msgid "· ‘%1$s’ requires ‘%2$s’ which is disabled"
+msgid "• ‘%1$s’ requires ‘%2$s’ which is disabled"
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1217
 #, c-format
-msgid "· ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
+msgid "• ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1245
 #, c-format
 msgid ""
-"· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
+"• ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
 msgstr ""
 
@@ -4659,7 +4659,7 @@ msgstr[2] ""
 #, c-format
 msgid ""
 "%1$s\n"
-"· %2$s"
+"• %2$s"
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:463
@@ -5322,8 +5322,8 @@ msgstr ""
 msgid "Comments and Votes"
 msgstr ""
 
-#. * TRANSLATORS: Filesize · Download count · Average rating · Number of
-#. comments ·
+#. * TRANSLATORS: Filesize • Download count • Average rating • Number of
+#. comments •
 #. Number of screenshots
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:360
 #, c-format
@@ -6117,7 +6117,7 @@ msgstr ""
 #. * TRANSLATORS: Placeholders are the copyright years
 #: ../../src/ui_fsmenu/main.cc:531
 msgid ""
-"(C) %1%-%2% by the Widelands Development Team · Licensed under the GNU "
+"(C) %1%-%2% by the Widelands Development Team • Licensed under the GNU "
 "General Public License V2.0"
 msgstr ""
 
@@ -9139,17 +9139,17 @@ msgstr ""
 msgid "Cheat mode enabled"
 msgstr ""
 
-#. * TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime
-#. · Gamespeed)
+#. * TRANSLATORS: (Gametime • Realtime) or (Gametime • Gamespeed) or (Realtime
+#. • Gamespeed)
 #: ../../src/wui/info_panel.cc:454
 #, c-format
-msgid "%1$s · %2$s"
+msgid "%1$s • %2$s"
 msgstr ""
 
-#. * TRANSLATORS: Gametime · Realtime · Gamespeed
+#. * TRANSLATORS: Gametime • Realtime • Gamespeed
 #: ../../src/wui/info_panel.cc:459
 #, c-format
-msgid "%1$s · %2$s · %3$s"
+msgid "%1$s • %2$s • %3$s"
 msgstr ""
 
 #: ../../src/wui/inputqueuedisplay.cc:70
