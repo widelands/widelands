@@ -31,15 +31,15 @@ local function formatted_time()
 end
 
 -- 2 minutes grace period
-timeout = (game.win_condition_duration + 2) * 60 * 1000
-check_interval = 2000
-pause_timeout = 2 * 60  -- 2 minutes
+local timeout = (game.win_condition_duration + 2) * 60 * 1000
+local check_interval = 2000
+local pause_timeout = 2 * 60  -- 2 minutes
 
-game_ended = false
-last_gametime = 0
-pause_counter = 0
+local game_ended = false
+local last_gametime = 0
+local pause_counter = 0
 
-expected = nil
+local expected = nil
 
 function check_game_ended()
   if (game.time > last_gametime) then
