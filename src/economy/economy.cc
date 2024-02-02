@@ -18,10 +18,12 @@
 
 #include "economy/economy.h"
 
+#include <algorithm>
 #include <memory>
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "base/scoped_timer.h"  // NOCOM
 #include "base/wexception.h"
 #include "economy/cmd_call_economy_balance.h"
 #include "economy/flag.h"
@@ -512,8 +514,8 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type, c
 		// We have a target quantity set.
 		Quantity target_district;
 		if (flag != nullptr) {
-			target_district = target_global / warehouses_.size();
-			if (target_district * warehouses_.size() < target_global) {
+			target_district = target_global / nr_districts_;
+			if (target_district * nr_districts_ < target_global) {
 				++target_district;  // Rounding up is important for wares with small targets
 			}
 		} else {
@@ -527,13 +529,15 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type, c
 	                                    wh->get_workers().stock(ware_or_worker_type);
 			quantity_global += q;
 
-			if (flag != nullptr && wh == flag->get_district_center()) {
-				quantity_district += q;
-				if (quantity_district >= target_district && quantity_global >= target_global) {
-					// If a district is specified, the ware is needed if the district lacks it
-					// even if the global stock is above target.
-					// If the global stock is below target we also need it.
-					return false;
+			if (flag != nullptr) {
+				if (flag->get_district_center() == wh->base_flag().get_district_center()) {
+					quantity_district += q;
+					if (quantity_district >= target_district && quantity_global >= target_global) {
+						// If a district is specified, the ware is needed if the district lacks it
+						// even if the global stock is above target.
+						// If the global stock is below target we also need it.
+						return false;
+					}
 				}
 			} else if (quantity_global >= target_global) {
 				return false;
@@ -1175,18 +1179,23 @@ void Economy::handle_active_supplies(Game& game) {
 }
 
 void Economy::recalc_districts() {
+	ScopedTimer NOCOM_Timer(format("NOCOM Recalcing districts for %u flags and %u warehouses took %%u ms", flags_.size(), warehouses_.size()));
+
 	if (flags_.empty()) {
-		return;  // Nothing to do.
+		nr_districts_ = 0;
+		return;
 	}
 
 	if (warehouses_.empty()) {
 		// Special case for economy without warehouses: Obviously there are no districts.
+		nr_districts_ = 0;
 		for (Flag* flag : flags_) {
 			flag->set_district_center(nullptr);
 		}
 		return;
 	}
 
+	// First pass: Assign each flag to the closest warehouse.
 	RouteAStar<AStarZeroEstimator> astar(*router_, type_, AStarZeroEstimator());
 	for (Warehouse* wh : warehouses_) {
 		wh->base_flag().set_district_center(wh);
@@ -1195,6 +1204,98 @@ void Economy::recalc_districts() {
 	while (RoutingNode* current = astar.step()) {
 		current->base_flag().set_district_center(astar.route_start(*current).base_flag().get_district_center());
 	}
+
+	// Second pass: Identify minimal monodirectional distances between warehouses.
+	constexpr uint32_t kClusterThreshold = 12 * 1800;  // 12 nodes on flat terrain.
+	std::map<std::pair<Warehouse*, Warehouse*>, uint32_t> warehouse_distances;
+
+	for (Flag* flag1 : flags_) {
+		Warehouse* wh1 = flag1->get_district_center();
+
+		RoutingNodeNeighbours neighbours;
+		flag1->get_neighbours(type(), neighbours);
+
+		for (RoutingNodeNeighbour& flag2 : neighbours) {
+			Warehouse* wh2 = flag2.get_neighbour()->base_flag().get_district_center();
+			if (wh1 != wh2) {
+				uint32_t cost = flag2.get_cost() + (type() == wwWARE ?
+						(flag1->mpf_realcost_ware + flag2.get_neighbour()->mpf_realcost_ware) :
+						(flag1->mpf_realcost_worker + flag2.get_neighbour()->mpf_realcost_worker));
+
+				if (cost < kClusterThreshold) {
+					std::pair<Warehouse*, Warehouse*> key(wh1->serial() < wh2->serial() ? wh1 : wh2, wh1->serial() < wh2->serial() ? wh2 : wh1);
+
+					auto it = warehouse_distances.find(key);
+					if (it == warehouse_distances.end()) {
+						warehouse_distances.emplace(key, cost);
+					} else if (cost < it->second) {
+						it->second = cost;
+					}
+				}
+			}
+		}
+	}
+
+	// Third pass: Cluster warehouses within the distance threshold.
+	using Cluster = std::vector<Warehouse*>;
+	std::vector<Cluster> all_clusters;
+	using ClusterIterator = std::vector<Cluster>::iterator;
+
+	for (Warehouse* current : warehouses_) {
+		// Find all warehouses this one should be clustered with
+		Cluster current_cluster = {current};
+		for (auto& pair : warehouse_distances) {
+			if (pair.first.first == current) {
+				current_cluster.push_back(pair.first.second);
+			} else if (pair.first.second == current) {
+				current_cluster.push_back(pair.first.first);
+			}
+		}
+
+		// Now find all existing clusters to merge this one with
+		std::vector<ClusterIterator> merge_iterators;
+		for (auto it = all_clusters.begin(); it != all_clusters.end(); ++it) {
+			for (Warehouse* wh : current_cluster) {
+				if (std::find(it->begin(), it->end(), wh) != it->end()) {
+					merge_iterators.push_back(it);
+					break;
+				}
+			}
+		}
+
+		if (merge_iterators.empty()) {  // New cluster
+			all_clusters.emplace_back(current_cluster);
+		} else {  // Merge into other cluster(s)
+			ClusterIterator it_merge = merge_iterators.front();
+			it_merge->insert(it_merge->end(), current_cluster.begin(), current_cluster.end());
+
+			for (ClusterIterator iterator : merge_iterators) {
+				if (iterator != it_merge) {
+					it_merge->insert(it_merge->end(), iterator->begin(), iterator->end());
+					all_clusters.erase(iterator);
+				}
+			}
+		}
+	}
+
+	// Fourth pass: Assign each flag to it's district's representative warehouse.
+	std::map<Warehouse*, Warehouse*> warehouse_to_district;
+
+	for (Cluster& cluster : all_clusters) {
+		// Sort each cluster by warehouse serials and remove duplicate entries
+		std::sort(cluster.begin(), cluster.end(), [](const Warehouse* a, const Warehouse* b) { return a->serial() < b->serial(); });
+		cluster.erase(std::unique(cluster.begin(), cluster.end()), cluster.end());
+
+		for (Warehouse* wh : cluster) {
+			// Identity each cluster with its first (i.e. lowest serial) warehouse
+			warehouse_to_district.emplace(wh, cluster.front());
+		}
+	}
+
+	for (Flag* flag : flags_) {
+		flag->set_district_center(warehouse_to_district.at(flag->get_district_center()));
+	}
+	nr_districts_ = all_clusters.size();
 }
 
 /**

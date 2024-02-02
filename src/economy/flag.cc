@@ -174,6 +174,9 @@ bool Flag::get_passable() const {
 Flag& Flag::base_flag() {
 	return *this;
 }
+const Flag& Flag::base_flag() const {
+	return *this;
+}
 
 /**
  * Call this only from Economy code!

@@ -262,6 +262,7 @@ private:
 	Flags flags_;
 	WareList wares_or_workers_;  ///< virtual storage with all wares/workers in this Economy
 	std::vector<Warehouse*> warehouses_;
+	uint32_t nr_districts_{0U};
 
 	WareWorker type_;  ///< whether we are a WareEconomy or a WorkerEconomy
 

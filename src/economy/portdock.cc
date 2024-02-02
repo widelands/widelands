@@ -101,6 +101,9 @@ PortDock::PositionList PortDock::get_positions(const EditorGameBase& /* egbase *
 Flag& PortDock::base_flag() {
 	return warehouse_->base_flag();
 }
+const Flag& PortDock::base_flag() const {
+	return warehouse_->base_flag();
+}
 
 /**
  * Return the dock that has the given flag as its base, or 0 if no dock of our fleet

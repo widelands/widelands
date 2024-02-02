@@ -65,6 +65,7 @@ struct RoadBase : public PlayerImmovable {
 	PositionList get_positions(const EditorGameBase&) const override;
 
 	Flag& base_flag() override;
+	const Flag& base_flag() const override;
 
 	int32_t get_cost(FlagId fromflag);
 	const Path& get_path() const {

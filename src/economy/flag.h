@@ -95,6 +95,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	[[nodiscard]]bool get_passable() const override;
 
 	[[nodiscard]] Flag& base_flag() override;
+	[[nodiscard]] const Flag& base_flag() const override;
 
 	[[nodiscard]] const Coords& get_position() const override {
 		return position_;

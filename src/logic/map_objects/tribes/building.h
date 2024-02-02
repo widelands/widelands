@@ -262,6 +262,7 @@ public:
 	bool get_passable() const override;
 
 	Flag& base_flag() override;
+	const Flag& base_flag() const override;
 	virtual uint32_t get_playercaps() const;
 
 	virtual Coords get_position() const {

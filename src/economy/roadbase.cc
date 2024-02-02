@@ -68,6 +68,9 @@ BaseImmovable::PositionList RoadBase::get_positions(const EditorGameBase& egbase
 Flag& RoadBase::base_flag() {
 	return *flags_[FlagStart];
 }
+const Flag& RoadBase::base_flag() const {
+	return *flags_[FlagStart];
+}
 
 /**
  * Return the cost of getting from fromflag to the other flag.

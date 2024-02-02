@@ -90,6 +90,7 @@ public:
 	bool get_passable() const override;
 
 	Flag& base_flag() override;
+	const Flag& base_flag() const override;
 	PositionList get_positions(const EditorGameBase&) const override;
 
 	bool init(EditorGameBase&) override;
