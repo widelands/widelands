@@ -158,6 +158,10 @@ private:
 	UI::Dropdown<std::string> language_dropdown_;
 	UI::Dropdown<ScreenResolution> resolution_dropdown_;
 	UI::Dropdown<int> display_dropdown_;
+<<<<<<< HEAD
+=======
+	UI::Checkbox inputgrab_;
+>>>>>>> 58826eb85af690abafe889d1c712af676f883e36
 	UI::Checkbox sdl_cursor_;
 	UI::Checkbox tooltip_accessibility_mode_;
 	UI::MultilineTextarea translation_info_;

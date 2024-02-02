@@ -106,9 +106,13 @@ void Graphic::initialize(const TraceGl& trace_gl,
 #ifdef RESIZABLE_WINDOW
 	window_flags |= SDL_WINDOW_RESIZABLE;
 #endif
-	sdl_window_ =
-	   SDL_CreateWindow("Widelands Window", window_x, window_y,
-	                    window_mode_width_, window_mode_height_, window_flags);
+<<<<<<< HEAD
+	sdl_window_ = SDL_CreateWindow("Widelands Window", window_x, window_y, window_mode_width_,
+	                               window_mode_height_, window_flags);
+=======
+	sdl_window_ = SDL_CreateWindow("Widelands Window", window_x, window_y, window_mode_width_,
+	                               window_mode_height_, window_flags);
+>>>>>>> 58826eb85af690abafe889d1c712af676f883e36
 	SDL_SetWindowMinimumSize(sdl_window_, kMinimumResolutionW, kMinimumResolutionH);
 
 	GLint max;
@@ -177,8 +181,13 @@ Graphic::~Graphic() {
 int Graphic::get_display_at(int x, int y) const {
 	for (int i = 0; i < SDL_GetNumVideoDisplays(); ++i) {
 		SDL_Rect r;
-		if (SDL_GetDisplayBounds(i, &r) == 0 &&
-			r.x <= x && x < r.x + r.w && r.y <= y && y < r.y + r.h) {
+<<<<<<< HEAD
+		if (SDL_GetDisplayBounds(i, &r) == 0 && r.x <= x && x < r.x + r.w && r.y <= y &&
+		    y < r.y + r.h) {
+=======
+		if (SDL_GetDisplayBounds(i, &r) == 0 && r.x <= x && x < r.x + r.w && r.y <= y &&
+		    y < r.y + r.h) {
+>>>>>>> 58826eb85af690abafe889d1c712af676f883e36
 			return i;
 		}
 	}
@@ -190,7 +199,13 @@ void Graphic::move_to_display(int display) {
 		return;
 	}
 
-	SDL_SetWindowPosition(sdl_window_, SDL_WINDOWPOS_CENTERED_DISPLAY(display), SDL_WINDOWPOS_CENTERED_DISPLAY(display));
+<<<<<<< HEAD
+	SDL_SetWindowPosition(sdl_window_, SDL_WINDOWPOS_CENTERED_DISPLAY(display),
+	                      SDL_WINDOWPOS_CENTERED_DISPLAY(display));
+=======
+	SDL_SetWindowPosition(sdl_window_, SDL_WINDOWPOS_CENTERED_DISPLAY(display),
+	                      SDL_WINDOWPOS_CENTERED_DISPLAY(display));
+>>>>>>> 58826eb85af690abafe889d1c712af676f883e36
 }
 
 /**

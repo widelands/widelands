@@ -150,16 +150,37 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                           UI::PanelStyle::kFsMenu,
                           UI::ButtonStyle::kFsMenuMenu),
      display_dropdown_(&box_interface_vbox_,
-                          "dropdown_display",
-                          0,
-                          0,
-                          100,  // 100 is arbitrary, will be resized in layout().
-                          50,
-                          24,
-                          _("Display"),
-                          UI::DropdownType::kTextual,
-                          UI::PanelStyle::kFsMenu,
-                          UI::ButtonStyle::kFsMenuMenu),
+<<<<<<< HEAD
+                       "dropdown_display",
+                       0,
+                       0,
+                       100,  // 100 is arbitrary, will be resized in layout().
+                       50,
+                       24,
+                       _("Display"),
+                       UI::DropdownType::kTextual,
+                       UI::PanelStyle::kFsMenu,
+                       UI::ButtonStyle::kFsMenuMenu),
+=======
+                       "dropdown_display",
+                       0,
+                       0,
+                       100,  // 100 is arbitrary, will be resized in layout().
+                       50,
+                       24,
+                       _("Display"),
+                       UI::DropdownType::kTextual,
+                       UI::PanelStyle::kFsMenu,
+                       UI::ButtonStyle::kFsMenuMenu),
+
+     inputgrab_(&box_interface_,
+                UI::PanelStyle::kFsMenu,
+                "input_grab",
+                Vector2i::zero(),
+                _("Grab Input"),
+                "",
+                0),
+>>>>>>> 58826eb85af690abafe889d1c712af676f883e36
      sdl_cursor_(&box_interface_,
                  UI::PanelStyle::kFsMenu,
                  "sdl_cursor",
@@ -422,10 +443,13 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	box_interface_vbox_.add(&language_dropdown_, UI::Box::Resizing::kFullSize);
 	box_interface_vbox_.add(&resolution_dropdown_, UI::Box::Resizing::kFullSize);
 	box_interface_vbox_.add(&display_dropdown_, UI::Box::Resizing::kFullSize);
+<<<<<<< HEAD
 	// TODO(tothxa): Replace with infinite space if box layouting quirks get fixed
 	box_interface_vbox_.add(&translation_padding_, UI::Box::Resizing::kFullSize);
 	// box_interface_vbox_.add_inf_space();
 
+=======
+>>>>>>> 58826eb85af690abafe889d1c712af676f883e36
 	box_interface_hbox_.add(&box_interface_vbox_, UI::Box::Resizing::kExpandBoth);
 	box_interface_hbox_.add(&translation_info_, UI::Box::Resizing::kExpandBoth);
 
@@ -581,8 +605,13 @@ void Options::add_displays(const OptionsCtrl::OptionsStruct& opt) {
 		if (SDL_GetDisplayBounds(i, &r) == 0) {
 			display_dropdown_.add(
 			   /** TRANSLATORS: Display index and virtual coordinates, e.g, '#0 (0, 0, 1920, 1080)'*/
-			  format(_("#%1% (%2%, %3%, %4%, %5%)"), i, r.x, r.y, r.w, r.h),
-			  i, nullptr, opt.display == i);
+<<<<<<< HEAD
+			   format(_("#%1% (%2%, %3%, %4%, %5%)"), i, r.x, r.y, r.w, r.h), i, nullptr,
+			   opt.display == i);
+=======
+			   format(_("#%1% (%2%, %3%, %4%, %5%)"), i, r.x, r.y, r.w, r.h), i, nullptr,
+			   opt.display == i);
+>>>>>>> 58826eb85af690abafe889d1c712af676f883e36
 		}
 	}
 	if (!display_dropdown_.has_selection()) {
@@ -648,8 +677,17 @@ void Options::layout() {
 		// Interface
 		language_dropdown_.set_height(tabs_.get_h() - language_dropdown_.get_y() - buth -
 		                              3 * kPadding);
+<<<<<<< HEAD
+=======
+		translation_info_.set_size(
+		   language_dropdown_.get_w(), language_dropdown_.get_h() + resolution_dropdown_.get_h() +
+		                                  display_dropdown_.get_h() + 2 * kPadding);
+		sb_maxfps_.set_unit_width(unit_w);
+		sb_maxfps_.set_desired_size(tab_panel_width, sb_maxfps_.get_h());
+>>>>>>> 58826eb85af690abafe889d1c712af676f883e36
 
-		const int min_h = language_dropdown_.get_h() + resolution_dropdown_.get_h() + display_dropdown_.get_h() + 3 * kPadding;
+		const int min_h = language_dropdown_.get_h() + resolution_dropdown_.get_h() +
+		                  display_dropdown_.get_h() + 3 * kPadding;
 		const int half_w = (tab_panel_width - 3 * kPadding) / 2;
 
 		// Make initial value big enough to avoid needing a scrollbar
@@ -871,6 +909,10 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 	if (display_dropdown_.has_selection()) {
 		os_.display = display_dropdown_.get_selected();
 	}
+<<<<<<< HEAD
+=======
+	os_.inputgrab = inputgrab_.get_state();
+>>>>>>> 58826eb85af690abafe889d1c712af676f883e36
 	os_.sdl_cursor = sdl_cursor_.get_state();
 	os_.tooltip_accessibility_mode = tooltip_accessibility_mode_.get_state();
 
