@@ -521,24 +521,18 @@ bool DefaultAI::check_ships(const Time& gametime) {
 			average_util = (average_util * 19 + tmp_util) / 20;
 
 			// Sanity checks
-#ifdef NDEBUG
-			// always in debug builds, and when --verbose is enabled in release builds
-			if (g_verbose) {
-#endif
-				if ((persistent_data->ships_utilization == tmp_util && average_util != tmp_util) ||
-				    // std::min/max is picky about integer size...
-				    (average_util < persistent_data->ships_utilization && average_util < tmp_util) ||
-				    (average_util > persistent_data->ships_utilization && average_util > tmp_util) ||
-				    // ..._util < 0 is prevented by uint type
-				    tmp_util > 10000 || average_util > 10000) {
-					log_warn_time(
-					   gametime,
-					   "AI %d: Ship utilisation calculation error: old: %u current: %u new: %u",
-					   player_number(), persistent_data->ships_utilization, tmp_util, average_util);
-				}
-#ifdef NDEBUG
-			}  // g_verbose
-#endif
+			if ((persistent_data->ships_utilization == tmp_util && average_util != tmp_util) ||
+			    // std::min/max is picky about integer size...
+			    (average_util < persistent_data->ships_utilization && average_util < tmp_util) ||
+			    (average_util > persistent_data->ships_utilization && average_util > tmp_util) ||
+			    // ..._util < 0 is prevented by uint type
+			    tmp_util > 10000 || average_util > 10000) {
+				log_err_time(
+				   gametime,
+				   "AI %d: Ship utilisation calculation error: old: %u current: %u new: %u",
+				   player_number(), persistent_data->ships_utilization, tmp_util, average_util);
+			}
+
 			// Now we can safely assign new value back to uint16_t
 			persistent_data->ships_utilization = average_util;
 		}
