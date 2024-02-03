@@ -656,13 +656,26 @@ void DefaultAI::count_military_vacant_positions() {
 		understaffed_ += mso.understaffed;
 	}
 
-	vacant_mil_positions_ += understaffed_;
+	int32_t garrisons_count = militarysites.size();
 
 	// also available in warehouses
 	for (auto wh : warehousesites) {
+		if (wh.site->soldier_control()->max_soldier_capacity() > 0) {  // port or HQ
+			// TODO(tothxa): check for and exempt HQ here, or handle its garrison with other sites
+			++garrisons_count;
+			// TODO(tothxa): use a common constextpr with manage_ports() for maximum
+			assert(wh.site->get_desired_soldier_count() <= kPortDefaultGarrison * 3);
+			// Do the same as military sites
+			understaffed_ += kPortDefaultGarrison * 3 - wh.site->get_desired_soldier_count();
+		}
+
 		if (wh.site->soldier_control()->stationed_soldiers().size() <
 		    wh.site->get_desired_soldier_count()) {
 			vacant_mil_positions_ += wh.site->get_desired_soldier_count() -
+			                         // Warehouses don't track coming soldiers. That creates
+			                         // instability here.
+			                         // TODO(tothxa): Maybe we could count them by subtracting
+			                         //    the number of soldiers we have found from total soldiers?
 			                         wh.site->soldier_control()->stationed_soldiers().size();
 		} else {
 			on_stock_ += wh.site->soldier_control()->stationed_soldiers().size() -
@@ -670,16 +683,22 @@ void DefaultAI::count_military_vacant_positions() {
 		}
 	}
 
+	vacant_mil_positions_ += understaffed_;
+
 	// May become negative, but that doesn't seem to be a problem for the below checks,
 	// and the variable is local and of a signed type.
 	vacant_mil_positions_ -= on_stock_;
 
+	// TODO(tothxa): This is entirely unstable. kEnough and kFull are practically controlled by
+	//    small surpluses in the stock, that makes the AI increase the garrison setting of all
+	//    military sites. That then causes kBadShortage, making it decrease all sites.
+	//    It kind of works only because the differences are small, so the frequent changes maintain
+	//    something similar to a dynamic equilibrium.
 	if (vacant_mil_positions_ <= 1 || on_stock_ > 4) {
 		soldier_status_ = SoldiersStatus::kFull;
-	} else if (vacant_mil_positions_ * 4 <= static_cast<int32_t>(militarysites.size()) ||
-	           on_stock_ > 2) {
+	} else if (vacant_mil_positions_ * 4 <= garrisons_count || on_stock_ > 2) {
 		soldier_status_ = SoldiersStatus::kEnough;
-	} else if (vacant_mil_positions_ > static_cast<int32_t>(militarysites.size())) {
+	} else if (vacant_mil_positions_ > garrisons_count) {
 		soldier_status_ = SoldiersStatus::kBadShortage;
 	} else {
 		soldier_status_ = SoldiersStatus::kShortage;
