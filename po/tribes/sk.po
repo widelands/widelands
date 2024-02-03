@@ -716,7 +716,7 @@ msgstr "Vojenský zrub"
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:50
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your blockhouse."
-msgstr ""
+msgstr "Vaši vojaci obsadili váš vojenský zrub."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:52

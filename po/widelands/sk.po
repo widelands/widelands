@@ -2001,7 +2001,7 @@ msgstr "žiadne"
 #: ../../src/logic/addons.cc:275
 #, c-format
 msgid "%1$s<br>• %2$s (version %3$s)"
-msgstr ""
+msgstr "%1$s<br>• %2$s (verzia %3$s)"
 
 #: ../../src/logic/addons.cc:305
 msgid "No game-relevant add-ons in use."
@@ -4081,11 +4081,11 @@ msgstr "Správca doplnkov"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:210
 msgid "Verified only"
-msgstr ""
+msgstr "Iba overené"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:211
 msgid "Show only verified add-ons"
-msgstr ""
+msgstr "Ukázať iba overené doplnky"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:219
 msgid "Sort by"
@@ -4305,11 +4305,11 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:413
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:441
 msgid "NOT VERIFIED"
-msgstr ""
+msgstr "NEOVERENÉ"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:656
 msgid "verified"
-msgstr ""
+msgstr "overené"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:660
 msgid "Upgrade All"
@@ -5113,7 +5113,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:413
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:441
 msgid "Verified"
-msgstr ""
+msgstr "Overené"
 
 #. * TRANSLATORS: This add-on is known to cause desyncs
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:506
@@ -5398,7 +5398,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:482
 msgid "Verified by the Widelands Development Team"
-msgstr ""
+msgstr "Overené vývojovým tímom hry Widelands"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:483
 msgid ""
@@ -6157,7 +6157,7 @@ msgstr "Verzia %1$s"
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team • Licensed under the GNU "
 "General Public License V2.0"
-msgstr ""
+msgstr "(C) %1%-%2% Vývojový tím hry Widelands • licencované pod Všeobecnou verejnou licenciou GNU (GPL) v.2.0"
 
 #: ../../src/ui_fsmenu/main.cc:873
 msgid "Desyncing Add-On Found"
