@@ -26,6 +26,9 @@ namespace LuaStyles {
 :mod:`styles`
 =============
 
+These functions provides functionality to format :ref:`richtext <richtext.lua>` with the styles of the
+current :ref:`theme <themes>`.
+
 .. versionadded:: 1.2
 
 .. module:: styles
@@ -37,6 +40,7 @@ namespace LuaStyles {
 
 */
 
+
 /* RST
 Module Functions
 ^^^^^^^^^^^^^^^^
@@ -46,7 +50,7 @@ Module Functions
 /* RST
 .. function:: as_font(style, text)
 
-   Format the given text with the given font style.
+   Format the given text with the given :ref:`font style <theme_fonts>`.
 
    :type style: class:`string`
    :arg style: name of the font style to use.
@@ -66,7 +70,7 @@ static int L_as_font(lua_State* L) {
 /* RST
 .. function:: as_paragraph(style, text)
 
-   Format the given text as a paragraph with the given style.
+   Format the given text as a paragraph with the given :ref:`paragraph style <theme_paragraphs>`.
 
    :type style: class:`string`
    :arg style: name of the paragraph style to use.
@@ -86,12 +90,14 @@ static int L_as_paragraph(lua_State* L) {
 /* RST
 .. function:: as_p_with_attr(style, attributes, text)
 
-   Format the given text as a paragraph with the given style and extra attributes.
+   Format the given text as a paragraph with the given :ref:`paragraph style <theme_paragraphs>`
+   and extra attributes.
 
    :type style: class:`string`
    :arg style: name of the paragraph style to use.
    :type attributes: class:`string`
-   :arg attributes: attributes for the paragraph tag.
+   :arg attributes: attributes for the paragraph tag. For possible attributes see the
+   	:ref:`p tag's documentation <rt_tags_p>`.
    :type text: class:`string`
    :arg text: text to format.
 
@@ -109,7 +115,8 @@ static int L_as_p_with_attr(lua_State* L) {
 /* RST
 .. function:: open_p(style)
 
-   Return richtext formatting to start a paragraph with the given style.
+   Return richtext formatting to start a paragraph with the given
+   :ref:`paragraph style <theme_paragraphs>`.
 
    :type style: class:`string`
    :arg style: name of the paragraph style to use.
@@ -126,12 +133,14 @@ static int L_open_p(lua_State* L) {
 /* RST
 .. function:: open_p_with_attr(style, attributes)
 
-   Return richtext formatting to start a paragraph with the given style and extra attributes.
+   Return richtext formatting to start a :ref:`paragraph style <theme_paragraphs>` with the given
+   style and extra attributes.
 
    :type style: class:`string`
    :arg style: name of the paragraph style to use.
    :type attributes: class:`string`
-   :arg attributes: attributes for the paragraph tag.
+   :arg attributes: attributes for the paragraph tag. For possible attributes see the
+      :ref:`p tag's documentation <rt_tags_p>`.
 
    :returns: The richtext formatting that starts the paragraph.
 */
@@ -163,8 +172,8 @@ static int L_close_p(lua_State* L) {
 /* RST
 .. function:: as_font_from_p(p_style, text)
 
-   Format the given text with the font style of the given paragraph style, without the paragraph
-   tags.
+   Format the given text with the font of the given :ref:`paragraph style <theme_paragraphs>`
+   without the paragraph tags.
 
    :type style: class:`string`
    :arg p_style: name of the paragraph style to use.
@@ -184,7 +193,7 @@ static int L_as_font_from_p(lua_State* L) {
 /* RST
 .. function:: color(style_name)
 
-   Return the given color style in hex format suitable for font tags.
+   Return the given :ref:`color style <theme_colors>` in hex format suitable for font tags.
 
    :type style_name: class:`string`
    :arg style_name: name of the color style to use.
@@ -201,7 +210,7 @@ static int L_color(lua_State* L) {
 /* RST
 .. function:: get_size(style_name)
 
-   Return the given styled size.
+   Return the given :ref:`styled size <theme_sizes>`.
 
    :type style_name: class:`string`
    :arg style_name: name of the styled size to get.
