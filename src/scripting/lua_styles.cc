@@ -102,6 +102,16 @@ static int L_as_paragraph(lua_State* L) {
    :arg text: Text to format.
 
    :returns: The text with richtext tags.
+
+   Example:
+
+   .. code-block:: lua
+
+      rt(
+         styles.as_paragraph("wui_text", _("This paragraph is left aligned"))
+         .. styles.as_p_with_attr("wui_text", "align=center", _("This paragraph is centered"))
+        )
+
 */
 static int L_as_p_with_attr(lua_State* L) {
 	const std::string style(luaL_checkstring(L, 1));
