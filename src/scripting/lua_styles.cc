@@ -26,8 +26,8 @@ namespace LuaStyles {
 :mod:`styles`
 =============
 
-These functions provides functionality to format :ref:`richtext <richtext.lua>` with the styles of the
-current :ref:`theme <themes>`.
+These functions provides functionality to format :ref:`richtext <richtext.lua>` with the styles of
+the current :ref:`theme <themes>`.
 
 .. versionadded:: 1.2
 
@@ -39,7 +39,6 @@ current :ref:`theme <themes>`.
 .. currentmodule:: styles
 
 */
-
 
 /* RST
 Module Functions
