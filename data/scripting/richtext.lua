@@ -202,6 +202,8 @@ if (_style_prefix_ == nil) then
 end
 
 -- RST
+-- .. _set_fs_style:
+--
 -- .. function:: set_fs_style(enable)
 --
 --    Change the style for text headings and normal paragraphs between the in-game and the main
@@ -222,7 +224,7 @@ end
 -- RST
 -- .. function:: fs_color(text)
 --
---    .. deprecated:: 1.2 Use `set_fs_style()` instead.
+--    .. deprecated:: 1.2 Use :ref:`set_fs_style() <set_fs_style>` instead.
 --
 --    Returns the given text wrapped in a font tag for the
 --    default color that is used for texts in the main menu.
