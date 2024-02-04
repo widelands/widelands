@@ -16,6 +16,8 @@
 -- If you're writing a scenario, you should also have a look at
 -- :ref:`richtext_scenarios.lua`.
 --
+-- If you want to use the styles of :doc:`themes <themes>` refer to :doc:`autogen_styles`.
+--
 -- To make these functions available include this file at the beginning
 -- of a script via:
 --
