@@ -158,14 +158,14 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	[[nodiscard]] Wares get_wares();
 	[[nodiscard]] uint8_t count_wares_in_queue(PlayerImmovable& dest) const;
 
-	[[nodiscard]] const Warehouse* get_district_center() const {
-		return district_center_;
+	[[nodiscard]] const Warehouse* get_district_center(WareWorker ww) const {
+		return district_center_[ww];
 	}
-	[[nodiscard]] Warehouse* get_district_center() {
-		return district_center_;
+	[[nodiscard]] Warehouse* get_district_center(WareWorker ww) {
+		return district_center_[ww];
 	}
-	void set_district_center(Warehouse* wh) {
-		district_center_ = wh;
+	void set_district_center(WareWorker ww, Warehouse* wh) {
+		district_center_[ww] = wh;
 	}
 
 	void call_carrier(Game&, WareInstance&, PlayerImmovable* nextstep);
@@ -216,7 +216,7 @@ private:
 	Coords position_;
 	Time animstart_{0};
 
-	Warehouse* district_center_{nullptr};  ///< Warehouse at the center of our district (may be null).
+	Warehouse* district_center_[2] = {nullptr, nullptr};  ///< Warehouse at the center of our district, indexed by WareWorker (may be null).
 
 	Building* building_{nullptr};  ///< attached building (replaces road WALK_NW)
 	RoadBase* roads_[WalkingDir::LAST_DIRECTION];

@@ -209,7 +209,9 @@ public:
 		start_request_timer();
 	}
 
+	void check_imports(Game& game);
 	void recalc_districts();
+	[[nodiscard]] bool same_district(const PlayerImmovable& p1, const PlayerImmovable& p2) const;
 
 protected:
 	static Serial last_economy_serial_;
@@ -220,9 +222,11 @@ private:
 	// (flag,
 	// warehouse)
 	struct UniqueDistance {
-		bool operator<(const UniqueDistance& other) const;
+		bool operator<(const UniqueDistance& other) const {
+			return std::forward_as_tuple(distance, serial, provider_type) <
+			       std::forward_as_tuple(other.distance, other.serial, other.provider_type);
+		}
 
-		bool same_district;
 		uint32_t distance;
 		uint32_t serial;
 		SupplyProviders provider_type;
@@ -240,7 +244,7 @@ private:
 
 	void start_request_timer(const Duration& delta = Duration(200));
 
-	Supply* find_best_supply(Game&, const Request&, int32_t& cost);
+	Supply* find_best_supply(Game&, const Request&, int32_t& cost, bool allow_import);
 	void process_requests(Game&, RSPairStruct* supply_pairs);
 	void balance_requestsupply(Game&);
 	void handle_active_supplies(Game&);
