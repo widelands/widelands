@@ -2013,7 +2013,7 @@ msgstr "Нет"
 #: ../../src/logic/addons.cc:275
 #, c-format
 msgid "%1$s<br>• %2$s (version %3$s)"
-msgstr ""
+msgstr "%1$s<br>· %2$s (версии %3$s)"
 
 #: ../../src/logic/addons.cc:305
 msgid "No game-relevant add-ons in use."
@@ -3054,14 +3054,14 @@ msgstr[3] "%u конфликтов дополнений:\n"
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
-msgstr ""
+msgstr "%1$s\n. Требования  \"%2$s\" не выполнены"
 
 #: ../../src/network/gameclient.cc:819
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
-msgstr ""
+msgstr "%1$s\n• ‘%2$s’ установлено версии %3$s, но хост использует версию %4$s"
 
 #: ../../src/network/gameclient.cc:990
 msgid "/me ’s file failed md5 checksumming."
@@ -4311,7 +4311,7 @@ msgstr[3] "Вы уверены, что эти %u дополнений нужно
 msgid ""
 "\n"
 "• %1$s (%2$s) by %3$s"
-msgstr ""
+msgstr "\n• %1$s (%2$s) от %3$s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:656
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:413
@@ -4455,29 +4455,29 @@ msgstr[3] "Обновить следующие %u дополнений:"
 #: ../../src/ui_fsmenu/addons/manager.cc:1169
 #, c-format
 msgid "• %s"
-msgstr ""
+msgstr "• %s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1205
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which could not be found"
-msgstr ""
+msgstr "• ‘%1$s’ нужен ‘%2$s’ хотя его нет"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1210
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is disabled"
-msgstr ""
+msgstr "• ‘%1$s’ нужен ‘%2$s’ хотя он отключен"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1217
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
-msgstr ""
+msgstr ". ‘%1$s’ нужен ‘%2$s’, который содержится в списке зависимостей дополнения"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1245
 #, c-format
 msgid ""
 "• ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
-msgstr ""
+msgstr "• ‘%1$s’ нужен сначала ‘%2$s’ а потом ‘%3$s’, но в списке они расположены в другом порядке"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1261
 #, c-format
@@ -4702,7 +4702,7 @@ msgstr[3] "Если вы сейчас выйдете из упаковщика �
 msgid ""
 "%1$s\n"
 "• %2$s"
-msgstr ""
+msgstr "%1$s\n• %2$s"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:463
 msgid "Quit Packager"
@@ -6169,7 +6169,7 @@ msgstr "Версия %1$s"
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team • Licensed under the GNU "
 "General Public License V2.0"
-msgstr ""
+msgstr "(C) %1%-%2% команда разработчиков Widelands • Лицензировано по GNU General Public License V2.0"
 
 #: ../../src/ui_fsmenu/main.cc:873
 msgid "Desyncing Add-On Found"
@@ -9199,13 +9199,13 @@ msgstr "Доступны читы"
 #: ../../src/wui/info_panel.cc:454
 #, c-format
 msgid "%1$s • %2$s"
-msgstr ""
+msgstr "%1$s • %2$s"
 
 #. * TRANSLATORS: Gametime • Realtime • Gamespeed
 #: ../../src/wui/info_panel.cc:459
 #, c-format
 msgid "%1$s • %2$s • %3$s"
-msgstr ""
+msgstr "%1$s • %2$s • %3$s"
 
 #: ../../src/wui/inputqueuedisplay.cc:70
 msgid "Priority: Very Low"

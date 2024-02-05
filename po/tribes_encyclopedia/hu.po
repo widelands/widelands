@@ -14754,7 +14754,7 @@ msgid ""
 "tool is needed by the economy, its production takes %2$s on average. Needles"
 " are an exception – in the time to produce one tool two needles are "
 "produced."
-msgstr ""
+msgstr "Ha az ellátása folyamatos, és minden szerszámra szükség van a gazdaságban, akkor a kovácsműhely átlagosan %1$senként készít mindegyikből egyet. Ha csak egy fajtára van szükség, akkor abból átlagosan %2$senként készít egyet, kivéve a tűt, amiből kettő készül ennyi idő alatt."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Small Armor
 #. Smithy
@@ -15067,7 +15067,7 @@ msgid ""
 "If the tavern is fully supplied, it can produce one ration in %1$s on "
 "average, using two kinds of ingredients. If it can only use one kind of "
 "ingredient, it can produce one ration in %2$s on average."
-msgstr ""
+msgstr "Ha az ellátása minden hozzávalóból folyamatos, akkor a kocsma átlagosan %1$senként készít egy harapnivalót kétféle hozzávalóból. Ha csak egy fajta hozzávalót tud használni, akkor átlagosan %2$senként készít egy harapnivalót."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Drinking Hall
 #: ../../data/tribes/initialization/frisians/units.lua:1982
