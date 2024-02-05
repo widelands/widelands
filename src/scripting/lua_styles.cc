@@ -26,7 +26,7 @@ namespace LuaStyles {
 :mod:`styles`
 =============
 
-These functions provides functionality to format :ref:`richtext <richtext.lua>` with the styles of
+These functions provide functionality to format :ref:`richtext <richtext.lua>` with the styles of
 the current :ref:`theme <themes>`.
 
 .. versionadded:: 1.2
@@ -108,10 +108,10 @@ static int L_as_paragraph(lua_State* L) {
 
       include "scripting/richtext.lua"
 
-      rt(
-         styles.as_paragraph("wui_text", _("This paragraph is left aligned"))
-         .. styles.as_p_with_attr("wui_text", "align=center", _("This paragraph is centered"))
-        )
+      formatted_text = rt(
+                          styles.as_paragraph("wui_text", _("This paragraph is left aligned"))
+                          .. styles.as_p_with_attr("wui_text", "align=center", _("This paragraph is centered"))
+                         )
 
 */
 static int L_as_p_with_attr(lua_State* L) {
@@ -183,7 +183,7 @@ static int L_close_p(lua_State* L) {
 /* RST
 .. function:: as_font_from_p(p_style, text)
 
-   Format the given text with the font of the given :ref:`paragraph style <theme_paragraphs>`
+   Format the given text with the font style of the given :ref:`paragraph style <theme_paragraphs>`
    without the paragraph tags.
 
    :type style: class:`string`
