@@ -1734,7 +1734,7 @@ msgstr "Umelá inteligencia"
 
 #: ../../src/game_io/game_loader.cc:149 ../../src/game_io/game_saver.cc:96
 msgid "Command queue"
-msgstr ""
+msgstr "Rad príkazov"
 
 #: ../../src/game_io/game_loader.cc:157 ../../src/map_io/map_saver.cc:146
 #: ../../src/map_io/widelands_map_loader.cc:400
@@ -2001,7 +2001,7 @@ msgstr "žiadne"
 #: ../../src/logic/addons.cc:275
 #, c-format
 msgid "%1$s<br>• %2$s (version %3$s)"
-msgstr ""
+msgstr "%1$s<br>• %2$s (verzia %3$s)"
 
 #: ../../src/logic/addons.cc:305
 msgid "No game-relevant add-ons in use."
@@ -2913,7 +2913,7 @@ msgstr "Cesty a vodné cesty"
 #: ../../src/map_io/map_saver.cc:228
 #: ../../src/map_io/widelands_map_loader.cc:253
 msgid "Map objects"
-msgstr ""
+msgstr "Mapové objekty"
 
 #: ../../src/map_io/map_saver.cc:237
 #: ../../src/map_io/widelands_map_loader.cc:408
@@ -4081,11 +4081,11 @@ msgstr "Správca doplnkov"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:210
 msgid "Verified only"
-msgstr ""
+msgstr "Iba overené"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:211
 msgid "Show only verified add-ons"
-msgstr ""
+msgstr "Ukázať iba overené doplnky"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:219
 msgid "Sort by"
@@ -4305,11 +4305,11 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:413
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:441
 msgid "NOT VERIFIED"
-msgstr ""
+msgstr "NEOVERENÉ"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:656
 msgid "verified"
-msgstr ""
+msgstr "overené"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:660
 msgid "Upgrade All"
@@ -5113,7 +5113,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:413
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:441
 msgid "Verified"
-msgstr ""
+msgstr "Overené"
 
 #. * TRANSLATORS: This add-on is known to cause desyncs
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:506
@@ -5398,7 +5398,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:482
 msgid "Verified by the Widelands Development Team"
-msgstr ""
+msgstr "Overené vývojovým tímom hry Widelands"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:483
 msgid ""
@@ -5673,7 +5673,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:265
 msgid "Keyboard Shortcut Conflict"
-msgstr ""
+msgstr "Konflikt klávesovej skratky"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:267
 #, c-format
@@ -6157,7 +6157,7 @@ msgstr "Verzia %1$s"
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team • Licensed under the GNU "
 "General Public License V2.0"
-msgstr ""
+msgstr "(C) %1%-%2% Vývojový tím hry Widelands • licencované pod Všeobecnou verejnou licenciou GNU (GPL) v.2.0"
 
 #: ../../src/ui_fsmenu/main.cc:873
 msgid "Desyncing Add-On Found"
@@ -7133,7 +7133,7 @@ msgstr "Sklad"
 
 #: ../../src/wlapplication_options.cc:195
 msgid "Port"
-msgstr ""
+msgstr "Prístav"
 
 #: ../../src/wlapplication_options.cc:196
 msgid "Minor Training Site"
@@ -7357,27 +7357,27 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:356
 msgid "Encyclopedia"
-msgstr ""
+msgstr "Encyklopédia"
 
 #: ../../src/wlapplication_options.cc:360
 msgid "Cut Text"
-msgstr ""
+msgstr "Vystrihnúť text"
 
 #: ../../src/wlapplication_options.cc:364
 msgid "Copy Text"
-msgstr ""
+msgstr "Kopírovať text"
 
 #: ../../src/wlapplication_options.cc:368
 msgid "Paste Text"
-msgstr ""
+msgstr "Vložiť text"
 
 #: ../../src/wlapplication_options.cc:372
 msgid "Select All"
-msgstr ""
+msgstr "Označiť všetko"
 
 #: ../../src/wlapplication_options.cc:377
 msgid "Delete Item"
-msgstr ""
+msgstr "Vymazať položku"
 
 #: ../../src/wlapplication_options.cc:382
 msgid "Tooltip Accessibility Mode Key"
@@ -7385,7 +7385,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:387
 msgid "Toggle Fullscreen"
-msgstr ""
+msgstr "Prepnúť režim celej obrazovky"
 
 #: ../../src/wlapplication_options.cc:392
 msgid "Take Screenshot"
@@ -7405,7 +7405,7 @@ msgstr "Načítať"
 
 #: ../../src/wlapplication_options.cc:417
 msgid "Exit"
-msgstr ""
+msgstr "Ukončiť"
 
 #: ../../src/wlapplication_options.cc:422
 msgid "Zoom In"
@@ -7717,7 +7717,7 @@ msgstr "Ukončiť hru"
 #: ../../src/wlapplication_options.cc:891
 msgctxt "hotkey"
 msgid "Arrow keys"
-msgstr ""
+msgstr "Šípky"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:893
@@ -7728,7 +7728,7 @@ msgstr ""
 #: ../../src/wlapplication_options.cc:895
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
-msgstr ""
+msgstr "Ctrl + šípky"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:897
@@ -7739,7 +7739,7 @@ msgstr ""
 #: ../../src/wlapplication_options.cc:899
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
-msgstr ""
+msgstr "Shift + šípky"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:901
@@ -7791,7 +7791,7 @@ msgstr ""
 #: ../../src/wlapplication_options.cc:1044
 msgctxt "hotkey"
 msgid "Click"
-msgstr ""
+msgstr "Kliknutie"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:1046
@@ -7804,7 +7804,7 @@ msgstr ""
 #: ../../src/wlapplication_options.cc:1050
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "Shift + kliknutie"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:1052
@@ -7817,7 +7817,7 @@ msgstr ""
 #: ../../src/wlapplication_options.cc:1055
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr ""
+msgstr "Ctrl + kliknutie"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:1057
@@ -7842,7 +7842,7 @@ msgstr ""
 #: ../../src/wlapplication_options.cc:1359
 msgctxt "hotkey"
 msgid "Shift"
-msgstr ""
+msgstr "Shift"
 
 #: ../../src/wlapplication_options.cc:1362
 msgctxt "hotkey"
@@ -7872,7 +7872,7 @@ msgstr ""
 #: ../../src/wlapplication_options.cc:1394
 msgctxt "hotkey"
 msgid "Space"
-msgstr ""
+msgstr "Medzerník"
 
 #: ../../src/wlapplication_options.cc:1396
 msgctxt "hotkey"
@@ -7897,7 +7897,7 @@ msgstr ""
 #: ../../src/wlapplication_options.cc:1404
 msgctxt "hotkey"
 msgid "Pause"
-msgstr "Zastaviť"
+msgstr "Pause"
 
 #: ../../src/wlapplication_options.cc:1406
 msgctxt "hotkey"
@@ -8160,12 +8160,12 @@ msgstr "Počet vojakov:"
 
 #: ../../src/wui/attack_window.cc:255
 msgid "Send less soldiers. Hold down Ctrl to send no soldiers"
-msgstr ""
+msgstr "Poslať menej vojakov. Stlačte Ctrl na odobratie všetkých vojakov."
 
 #: ../../src/wui/attack_window.cc:260
 msgid ""
 "Send more soldiers. Hold down Ctrl to send as many soldiers as possible"
-msgstr ""
+msgstr "Poslať viac vojakov. Stlačte Ctrl na poslanie čo najviac vojakov."
 
 #: ../../src/wui/attack_window.cc:264
 msgid "Start attack"
@@ -8190,7 +8190,7 @@ msgstr ""
 
 #: ../../src/wui/attack_window.cc:299
 msgid "Not attacking:"
-msgstr ""
+msgstr "Neútočiaci:"
 
 #: ../../src/wui/attack_window.cc:304
 msgid "Click on a soldier to add him to the list of attackers"
@@ -8206,7 +8206,7 @@ msgstr ""
 
 #: ../../src/wui/attack_window.cc:322
 msgid "Destroy target"
-msgstr ""
+msgstr "Zničiť cieľ"
 
 #: ../../src/wui/attack_window.cc:323
 msgid "Destroy the target building instead of conquering it"
@@ -8528,7 +8528,7 @@ msgstr ""
 msgid ""
 "Error loading script for encyclopedia:\n"
 "%s"
-msgstr ""
+msgstr "Chyba pri načítaní skriptu pre encyklopédiu:\n%s"
 
 #: ../../src/wui/encyclopedia_window.cc:235 ../../src/wui/helpwindow.cc:147
 msgid "Broken Link"
@@ -8696,7 +8696,7 @@ msgstr ""
 
 #: ../../src/wui/fleet_options_window.cc:158
 msgid "Ports:"
-msgstr ""
+msgstr "Prístavy:"
 
 #: ../../src/wui/fleet_options_window.cc:159
 msgid "Ships:"
@@ -9334,7 +9334,7 @@ msgstr ""
 
 #: ../../src/wui/interactive_base.cc:1891
 msgid "Screenshot saved"
-msgstr ""
+msgstr "Snímka obrazovky uložená"
 
 #. * TRANSLATORS: This is a game speed value
 #: ../../src/wui/interactive_gamebase.cc:57

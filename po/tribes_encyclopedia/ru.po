@@ -4719,7 +4719,7 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average."
-msgstr "Если это здание полностью обеспечено и все инструменты нужны экономике, то в среднем изготовление одного орудия занимает %1$s. Если экономике нужен только одно из орудий, его изготовление занимает %2$s."
+msgstr "Если это здание полностью обеспечено и все инструменты нужны экономике, то в среднем изготовление одного орудия занимает %1$s. Если экономике нужно только одно из орудий, его изготовление занимает %2$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Weapon
 #. Smithy
@@ -7244,7 +7244,7 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average."
-msgstr "Если это здание полностью обеспечено и все инструменты нужны экономике, то в среднем изготовление одного орудия занимает %1$s. Если экономике нужен только одно из орудий, его изготовление занимает %2$s."
+msgstr "Если это здание полностью обеспечено и все инструменты нужны экономике, то в среднем изготовление одного орудия занимает %1$s. Если экономике нужно только одно из орудий, его изготовление занимает %2$s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Warmill
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Ax Workshop
@@ -11418,7 +11418,7 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average."
-msgstr "Если это здание полностью обеспечено и все инструменты нужны экономике, то в среднем изготовление одного орудия занимает %1$s. Если экономике нужен только одно из орудий, его изготовление занимает %2$s."
+msgstr "Если это здание полностью обеспечено и все инструменты нужны экономике, то в среднем изготовление одного орудия занимает %1$s. Если экономике нужно только одно из орудий, его изготовление занимает %2$s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -14793,7 +14793,7 @@ msgid ""
 "tool is needed by the economy, its production takes %2$s on average. Needles"
 " are an exception – in the time to produce one tool two needles are "
 "produced."
-msgstr ""
+msgstr "Если это здание полностью обеспечено и все инструменты нужны экономике, то в среднем изготовление одного орудия занимает %1$s. Если экономике нужно только одно из орудий, его изготовление занимает %2$s. Исключение составляют иглы – во время изготовления любого инструмента производятся две иглы."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Small Armor
 #. Smithy
@@ -15106,7 +15106,7 @@ msgid ""
 "If the tavern is fully supplied, it can produce one ration in %1$s on "
 "average, using two kinds of ingredients. If it can only use one kind of "
 "ingredient, it can produce one ration in %2$s on average."
-msgstr ""
+msgstr "Если таверна полностью снабжена, она может производить один паёк (из двух ингрединетов) в среднем за %1$s. Если в наличии только один ингредиент, один паёк будет производиться в среднем за %2$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Drinking Hall
 #: ../../data/tribes/initialization/frisians/units.lua:1982

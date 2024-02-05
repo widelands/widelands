@@ -285,7 +285,7 @@ msgstr ""
 msgid ""
 "Have a look at the first two tabs in the stock window. They show all the "
 "wares and workers you have."
-msgstr ""
+msgstr "Prezrite si prvé dve karty v okne Zásoby. Zobrazujú všetky výrobky a pracovníkov, ktorých máte."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:147
 msgid ""
@@ -425,7 +425,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:253
 msgid "Encyclopedia"
-msgstr ""
+msgstr "Encyklopédia"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:255
 msgid "How to get help"

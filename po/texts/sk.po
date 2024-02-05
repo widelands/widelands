@@ -47,7 +47,7 @@ msgstr "Licenčné informácie hry Widelands"
 #. TRANSLATORS: Placeholder is copyright end year
 #: ../../data/txts/LICENSE.lua:14
 msgid "Copyright 2002 - %1% by the Widelands Development Team."
-msgstr "Copyright 2002 - %1% by the Widelands Development Team."
+msgstr "Copyright 2002 - %1% Vývojový tím hry Widelands."
 
 #: ../../data/txts/LICENSE.lua:16
 msgid ""
