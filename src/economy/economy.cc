@@ -438,7 +438,6 @@ void Economy::remove_warehouse(Warehouse& wh) {
  * Important: This must only be called by the \ref Request class.
  */
 void Economy::add_request(Request& req) {
-	assert(req.is_open());
 	assert(!has_request(req));
 
 	assert(&owner());
@@ -705,8 +704,6 @@ void Economy::start_request_timer(const Duration& delta) {
  * \return 0 if no supply is found, the best supply otherwise
  */
 Supply* Economy::find_best_supply(Game& game, const Request& req, int32_t& cost, bool allow_import) {
-	assert(req.is_open());
-
 	Route buf_route0;
 	Route buf_route1;
 	Supply* best_supply = nullptr;
@@ -835,6 +832,9 @@ void Economy::process_requests(Game& game, RSPairStruct* supply_pairs) {
 	// right now, therefore we need to shcedule next pairing
 	for (Request* temp_req : requests_) {
 		Request& req = *temp_req;
+		if (!req.is_open()) {
+			continue;
+		}
 
 		// We somehow get desynced request lists that don't trigger desync
 		// alerts, so add info to the sync stream here.
@@ -947,7 +947,7 @@ void Economy::create_requested_worker(Game& game, DescriptionIndex index) {
 	for (Request* temp_req : requests_) {
 		const Request& req = *temp_req;
 
-		if (req.get_type() != wwWORKER || req.get_index() != index) {
+		if (!req.is_open() || req.get_type() != wwWORKER || req.get_index() != index) {
 			continue;
 		}
 

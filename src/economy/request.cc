@@ -81,7 +81,7 @@ Request::Request(PlayerImmovable& init_target,
 
 Request::~Request() {
 	// Remove from the economy
-	if (is_open() && (economy_ != nullptr)) {
+	if (economy_ != nullptr) {
 		economy_->remove_request(*this);
 	}
 
@@ -174,9 +174,7 @@ void Request::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
 				}
 			}
 			requirements_.read(fr, game, mol);
-			if (is_open()) {
-				economy_->add_request(*this);
-			}
+			economy_->add_request(*this);
 		} else {
 			throw UnhandledVersionError("Request", packet_version, kCurrentPacketVersion);
 		}
@@ -353,11 +351,11 @@ uint32_t Request::get_normalized_transfer_priority() const {
  */
 void Request::set_economy(Economy* const e) {
 	if (economy_ != e) {
-		if ((economy_ != nullptr) && is_open()) {
+		if (economy_ != nullptr) {
 			economy_->remove_request(*this);
 		}
 		economy_ = e;
-		if ((economy_ != nullptr) && is_open()) {
+		if (economy_ != nullptr) {
 			economy_->add_request(*this);
 		}
 	}
@@ -367,8 +365,6 @@ void Request::set_economy(Economy* const e) {
  * Change the number of wares we need.
  */
 void Request::set_count(uint32_t const count) {
-	bool const wasopen = is_open();
-
 	count_ = count;
 
 	// Cancel unneeded transfers. This should be more clever about which
@@ -376,15 +372,6 @@ void Request::set_count(uint32_t const count) {
 	// normal play anyway
 	while (count_ < transfers_.size()) {
 		cancel_transfer(transfers_.size() - 1);
-	}
-
-	// Update the economy
-	if (economy_ != nullptr) {
-		if (wasopen && !is_open()) {
-			economy_->remove_request(*this);
-		} else if (!wasopen && is_open()) {
-			economy_->add_request(*this);
-		}
 	}
 }
 
@@ -446,9 +433,6 @@ void Request::start_transfer(Game& game, Supply& supp) {
 	}
 
 	transfers_.push_back(t);
-	if (!is_open()) {
-		economy_->remove_request(*this);
-	}
 }
 
 /**
@@ -484,16 +468,10 @@ void Request::transfer_finish(Game& game, Transfer& t) {
  * Re-open the request.
  */
 void Request::transfer_fail(Game& /* game */, Transfer& t) {
-	bool const wasopen = is_open();
-
 	t.worker_ = nullptr;
 	t.ware_ = nullptr;
 
 	remove_transfer(find_transfer(t));
-
-	if (!wasopen) {
-		economy_->add_request(*this);
-	}
 }
 
 /// Cancel the transfer with the given index.
