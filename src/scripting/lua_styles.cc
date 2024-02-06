@@ -111,7 +111,7 @@ static int L_as_paragraph(lua_State* L) {
       formatted_text = rt(
                           styles.as_paragraph("wui_text", _("This paragraph is left aligned"))
                           .. styles.as_p_with_attr("wui_text", "align=center", _("This paragraph is
-centered"))
+                          centered"))
                          )
 
 */
