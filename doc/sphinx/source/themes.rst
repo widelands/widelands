@@ -3,7 +3,12 @@
 Themes
 ======
 
-A theme defines the appearance and style of Widelands' user interface.
+A theme defines the appearance and style of :doc:`Widelands' user interface <autogen_wl_ui>`.
+Especially some widgets defined with :meth:`~wl.ui.Panel.create_child` need some of the
+styles of themes.
+
+When working with :doc:`richtext <autogen_auxiliary_richtext>` it is recommended to use the
+theme styles. Look at :doc:`autogen_styles` to access the styles within richtext.
 
 A theme's directory needs to use the following directory structure:
 
