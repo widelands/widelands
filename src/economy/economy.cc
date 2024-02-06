@@ -422,7 +422,15 @@ void Economy::remove_warehouse(Warehouse& wh) {
 		if (warehouses_[i] == &wh) {
 			warehouses_[i] = *warehouses_.rbegin();
 			warehouses_.pop_back();
-			recalc_districts();
+
+			// Trigger districts recalculation
+			for (Flag* flag : flags_) {
+				if (flag->get_district_center(type()) == &wh) {
+					flag->set_district_center(type(), nullptr);
+				}
+			}
+			start_request_timer();
+
 			return;
 		}
 	}
@@ -509,10 +517,10 @@ Worker& Economy::soldier_prototype(const WorkerDescr* d) {
 bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type, const Flag* flag) const {
 	Quantity const target_global = target_quantity(ware_or_worker_type).permanent;
 
-	if (target_global > 0) {
+	if (target_global > 0 && !warehouses_.empty()) {
 		// We have a target quantity set.
 		Quantity target_district;
-		if (flag != nullptr) {
+		if (flag != nullptr && nr_districts_ > 0) {
 			target_district = target_global / nr_districts_;
 			if (target_district * nr_districts_ < target_global) {
 				++target_district;  // Rounding up is important for wares with small targets
@@ -1184,6 +1192,7 @@ bool Economy::same_district(const PlayerImmovable& p1, const PlayerImmovable& p2
 	return wh != nullptr && wh == p2.base_flag().get_district_center(type());
 }
 
+// Note: Do not call this function when pending road network splits and merges may exist!
 void Economy::recalc_districts() {
 	ScopedTimer NOCOM_Timer(format("NOCOM Recalcing districts for %u flags and %u warehouses took %%u ms", flags_.size(), warehouses_.size()));
 
@@ -1284,7 +1293,7 @@ void Economy::recalc_districts() {
 		}
 	}
 
-	// Fourth pass: Assign each flag to it's district's representative warehouse.
+	// Fourth pass: Assign each flag to its district's representative warehouse.
 	std::map<Warehouse*, Warehouse*> warehouse_to_district;
 
 	for (Cluster& cluster : all_clusters) {
