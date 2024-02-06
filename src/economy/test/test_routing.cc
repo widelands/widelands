@@ -49,9 +49,6 @@ public:
 	Widelands::Flag& base_flag() override {
 		return flag_;
 	}
-	const Widelands::Flag& base_flag() const override {
-		return flag_;
-	}
 	void set_waitcost(int32_t const wc) {
 		waitcost_ = wc;
 	}
