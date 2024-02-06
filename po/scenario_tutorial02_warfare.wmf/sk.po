@@ -111,7 +111,7 @@ msgid ""
 "level 0, which means that the damage is always reduced by %1%%%. If an "
 "attacker with an attack value of 3500 points hits a Barbarian soldier, the "
 "Barbarian will lose 3500×%2%%% = %3% health."
-msgstr ""
+msgstr "Obrana je percento, ktoré sa odráta z hodnoty útoku. Barbarov nemožno cvičiť v tejto schopnosti, preto ich obrana navždy zostane na úrovni 0, čo znamená, že škoda sa vždy zníži o %1%%%. Ak útočník s hodnotou útoku 3500 bodov zasiahne barbarského vojaka, ten Barbar príde o 3500×%2%%% = %3% bodov zdravia."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:49
 msgid "Evade:"
