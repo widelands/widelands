@@ -91,8 +91,8 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	void load_finish(EditorGameBase&) override;
 	void destroy(EditorGameBase&) override;
 
-	[[nodiscard]]int32_t get_size() const override;
-	[[nodiscard]]bool get_passable() const override;
+	[[nodiscard]] int32_t get_size() const override;
+	[[nodiscard]] bool get_passable() const override;
 
 	[[nodiscard]] Flag& base_flag() override;
 	[[nodiscard]] const Flag& base_flag() const override;
@@ -216,7 +216,9 @@ private:
 	Coords position_;
 	Time animstart_{0};
 
-	Warehouse* district_center_[2] = {nullptr, nullptr};  ///< Warehouse at the center of our district, indexed by WareWorker (may be null).
+	Warehouse* district_center_[2] = {
+	   nullptr,
+	   nullptr};  ///< Warehouse at the center of our district, indexed by WareWorker (may be null).
 
 	Building* building_{nullptr};  ///< attached building (replaces road WALK_NW)
 	RoadBase* roads_[WalkingDir::LAST_DIRECTION];

@@ -896,9 +896,9 @@ void Flag::draw(const Time& gametime,
 	if (district_center_[0] == district_center_[1]) {
 		NOCOM = district_center_[0] == nullptr ? "-" : as_string(district_center_[0]->serial());
 	} else {
-		NOCOM = format("%s / %s",
-				district_center_[0] == nullptr ? "-" : as_string(district_center_[0]->serial()),
-				district_center_[1] == nullptr ? "-" : as_string(district_center_[1]->serial()));
+		NOCOM = format(
+		   "%s / %s", district_center_[0] == nullptr ? "-" : as_string(district_center_[0]->serial()),
+		   district_center_[1] == nullptr ? "-" : as_string(district_center_[1]->serial()));
 	}
 	do_draw_info(info_to_draw, "", NOCOM, field_on_dst, scale, dst);
 }
@@ -1032,12 +1032,14 @@ void Flag::log_general_info(const Widelands::EditorGameBase& egbase) const {
 	if (district_center_[0] == nullptr) {
 		molog(egbase.get_gametime(), "No ware district\n");
 	} else {
-		molog(egbase.get_gametime(), "Ware district %u (%s)\n", district_center_[0]->serial(), district_center_[0]->get_warehouse_name().c_str());
+		molog(egbase.get_gametime(), "Ware district %u (%s)\n", district_center_[0]->serial(),
+		      district_center_[0]->get_warehouse_name().c_str());
 	}
 	if (district_center_[1] == nullptr) {
 		molog(egbase.get_gametime(), "No worker district\n");
 	} else {
-		molog(egbase.get_gametime(), "Worker district %u (%s)\n", district_center_[1]->serial(), district_center_[1]->get_warehouse_name().c_str());
+		molog(egbase.get_gametime(), "Worker district %u (%s)\n", district_center_[1]->serial(),
+		      district_center_[1]->get_warehouse_name().c_str());
 	}
 
 	if (ware_filled_ != 0) {
