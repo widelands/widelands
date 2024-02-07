@@ -535,7 +535,7 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type,
 		Quantity quantity_district = 0;
 		for (const Warehouse* wh : warehouses_) {
 			Quantity stock = type_ == wwWARE ? wh->get_wares().stock(ware_or_worker_type) :
-                                              wh->get_workers().stock(ware_or_worker_type);
+                                            wh->get_workers().stock(ware_or_worker_type);
 			if (is_soldier) {
 				Quantity garrison = wh->get_desired_soldier_count();
 				if (garrison >= stock) {
