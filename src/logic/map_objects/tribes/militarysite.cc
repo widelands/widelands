@@ -24,7 +24,6 @@
 #include "base/log.h"
 #include "base/macros.h"
 #include "economy/flag.h"
-#include "graphic/style_manager.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/findbob.h"
@@ -370,48 +369,7 @@ Display number of soldiers.
 ===============
 */
 void MilitarySite::update_statistics_string(std::string* s) {
-	std::unique_ptr<i18n::GenericTextdomain> td(AddOns::create_textdomain_for_addon(
-	   owner().tribe().basic_info().addon, "tribes_encyclopedia"));
-	s->clear();
-	Quantity present = soldier_control_.present_soldiers().size();
-	Quantity stationed = soldier_control_.stationed_soldiers().size();
-	const UI::BuildingStatisticsStyleInfo& style = g_style_manager->building_statistics_style();
-
-	// military capacity strings
-	if (present == stationed) {
-		if (capacity_ > stationed) {  // Soldiers are lacking
-			*s = format(
-			   npgettext(owner().tribe().get_soldier_context_string().c_str(),
-			             owner().tribe().get_soldier_capacity_strings_sg()[0].c_str(),
-			             owner().tribe().get_soldier_capacity_strings_pl()[0].c_str(), stationed),
-			   stationed,
-			   StyleManager::color_tag(as_string(capacity_ - stationed), style.low_color()));
-		} else {  // Soldiers filled to capacity
-			*s = format(
-			   npgettext(owner().tribe().get_soldier_context_string().c_str(),
-			             owner().tribe().get_soldier_capacity_strings_sg()[1].c_str(),
-			             owner().tribe().get_soldier_capacity_strings_pl()[1].c_str(), stationed),
-			   stationed);
-		}
-	} else {
-		if (capacity_ > stationed) {  // Soldiers are lacking; others are outside
-			*s = format(
-			   npgettext(owner().tribe().get_soldier_context_string().c_str(),
-			             owner().tribe().get_soldier_capacity_strings_sg()[2].c_str(),
-			             owner().tribe().get_soldier_capacity_strings_pl()[2].c_str(), stationed),
-			   present, StyleManager::color_tag(as_string(stationed - present), style.high_color()),
-			   StyleManager::color_tag(as_string(capacity_ - stationed), style.low_color()));
-		} else {  // Soldiers filled to capacity; some are outside
-			*s = format(
-			   npgettext(owner().tribe().get_soldier_context_string().c_str(),
-			             owner().tribe().get_soldier_capacity_strings_sg()[3].c_str(),
-			             owner().tribe().get_soldier_capacity_strings_pl()[3].c_str(), stationed),
-			   present, StyleManager::color_tag(as_string(stationed - present), style.high_color()));
-		}
-	}
-
-	*s = StyleManager::color_tag(
-	   format("%s %s", soldier_preference_icon(get_soldier_preference()), *s), style.medium_color());
+	*s = soldier_control_.get_status_string(owner().tribe(), get_soldier_preference());
 }
 
 bool MilitarySite::init(EditorGameBase& egbase) {
