@@ -1495,7 +1495,7 @@ void DefaultAI::soldier_trained(const Widelands::TrainingSite& site) {
 		}
 	}
 
-	verb_log_err_time(
-	   gametime, " %d: Computer player error - trainingsite not found\n", player_number());
+	verb_log_warn_time(
+	   gametime, "AI %d: soldier_trained(): trainingsite not found\n", player_number());
 }
 }  // namespace AI
