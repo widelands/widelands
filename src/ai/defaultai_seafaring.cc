@@ -338,7 +338,8 @@ void DefaultAI::manage_ports() {
 	for (PortSiteObserver& p_obs : portsites) {
 		if (p_obs.site == nullptr) {
 			// Race condition?
-			log_err_time(game().get_gametime(), "AI %d: Invalid port", player_number());
+			log_warn_time(
+			   game().get_gametime(), "AI %d: manage_ports(): Invalid port", player_number());
 			continue;
 		}
 
@@ -408,7 +409,7 @@ bool DefaultAI::check_ships(const Time& gametime) {
 	for (ShipObserver& so : allships) {
 
 		if (so.ship == nullptr) {  // good old paranoia
-			log_err_time(game().get_gametime(), "AI %d: Invalid ship", player_number());
+			log_warn_time(game().get_gametime(), "AI %d: check_ships(): Invalid ship", player_number());
 			continue;
 		}
 
@@ -527,7 +528,7 @@ bool DefaultAI::check_ships(const Time& gametime) {
 			    (average_util > persistent_data->ships_utilization && average_util > tmp_util) ||
 			    // ..._util < 0 is prevented by uint type
 			    tmp_util > 10000 || average_util > 10000) {
-				log_err_time(
+				log_warn_time(
 				   gametime, "AI %d: Ship utilisation calculation error: old: %u current: %u new: %u",
 				   player_number(), persistent_data->ships_utilization, tmp_util, average_util);
 			}
@@ -669,7 +670,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 
 	// We will dereference this all over this function. Let's check at least once.
 	if (so.ship == nullptr) {  // Should only happen in race conditions.
-		log_err_time(gametime, "AI %d: expedition_management(): Invalid expedition ship.", pn);
+		log_warn_time(gametime, "AI %d: expedition_management(): Invalid expedition ship.", pn);
 		return;
 	}
 
