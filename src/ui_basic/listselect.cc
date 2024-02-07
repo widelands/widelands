@@ -497,6 +497,10 @@ void BaseListselect::draw(RenderTarget& dst) {
  * Handle mouse wheel events
  */
 bool BaseListselect::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
+	if (!select_with_wheel_) {
+		return scrollbar_.handle_mousewheel(x, y, modstate);
+	}
+
 	const uint32_t selected_idx = selection_index();
 	uint32_t max = size();
 	if (max > 0) {
@@ -504,6 +508,7 @@ bool BaseListselect::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) 
 	} else {
 		return false;
 	}
+
 	if (y != 0 && matches_keymod(modstate, KMOD_NONE)) {
 		if (selected_idx > max) {
 			select(y < 0 ? 0 : max);
@@ -512,8 +517,10 @@ bool BaseListselect::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) 
 		} else if (y < 0 && selected_idx < max) {
 			select(selected_idx + 1);
 		}
+
 		return scrollbar_.handle_mousewheel(x, y, modstate);
 	}
+
 	return false;
 }
 
@@ -644,7 +651,8 @@ void BaseListselect::scroll_to_selection() {
 	if (selection_index() * get_lineheight() < scrollpos_) {
 		scrollpos_ = selection_index() * get_lineheight();
 		scrollbar_.set_scrollpos(scrollpos_);
-	} else if ((selection_index() + 1) * get_lineheight() - get_inner_h() > scrollpos_) {
+	} else if (static_cast<int>((selection_index() + 1) * get_lineheight() - get_inner_h()) >
+	           static_cast<int>(scrollpos_)) {
 		int32_t scrollpos = (selection_index() + 1) * get_lineheight() - get_inner_h();
 		scrollpos_ = (scrollpos < 0) ? 0 : scrollpos;
 		scrollbar_.set_scrollpos(scrollpos_);

@@ -116,11 +116,6 @@ TerrainDescription::TerrainDescription(const LuaTable& table,
 		                 name_.c_str(), dither_layer_disambiguator, kMaxDitherLayerDisambiguator);
 	}
 
-	if (table.has_key("tooltips")) {
-		// TODO(GunChleoc): Compatibility, remove after v1.0
-		log_warn("Terrain '%s' contains obsolete 'tooltips' table", name().c_str());
-	}
-
 	for (DescriptionIndex di = descriptions.nr_terrains(); di != 0u; --di) {
 		const TerrainDescription* t = descriptions.get_terrain_descr(di - 1);
 		if (t->dither_layer_ == dither_layer_) {
