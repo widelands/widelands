@@ -1,6 +1,6 @@
 [global]
-name=_"UI: Fonts and styles"
-description=_"Show default fonts and styles"
+name="UI: Style images"
+description="Display images of used styles"
 author="kaputtnik"
 version="0.1"
 category="ui_plugin"
