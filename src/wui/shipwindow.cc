@@ -231,8 +231,7 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	// Init button visibility
 	navigation_box_.set_visible(false);
 	btn_cancel_expedition_->set_enabled(false);
-
-	update_destination_button(ship);
+	update_destination_buttons(ship);
 	set_button_visibility();
 
 	move_out_of_the_way();

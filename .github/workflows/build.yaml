@@ -112,7 +112,7 @@ jobs:
 
   appimage:
     if: >
-      github.repository == 'widelands/widelands' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/protected/navalwarfare') &&
+      github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' &&
       needs.changes.outputs.appimage == 'true'
     needs: [changes, pre-build_checks]
     uses: ./.github/workflows/build_appimage.yaml

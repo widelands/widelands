@@ -1274,11 +1274,11 @@ public:
 	        ibase, UI::WindowStyle::kWui, "ship_selection", registry, 0, 0, _("Select Ship")),
 	     ibase_(*ibase),
 	     node_(node),
-	     hbox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
-	     box_manageable_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-	     box_attackable_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-	     list_manageable_(&box_manageable_, 0, 0, 0, 0, UI::PanelStyle::kWui),
-	     list_attackable_(&box_attackable_, 0, 0, 0, 0, UI::PanelStyle::kWui) {
+	     hbox_(this, UI::PanelStyle::kWui, "hbox", 0, 0, UI::Box::Horizontal),
+	     box_manageable_(&hbox_, UI::PanelStyle::kWui, "manageable_box", 0, 0, UI::Box::Vertical),
+	     box_attackable_(&hbox_, UI::PanelStyle::kWui, "attackable_box", 0, 0, UI::Box::Vertical),
+	     list_manageable_(&box_manageable_, "manageable_list", 0, 0, 0, 0, UI::PanelStyle::kWui),
+	     list_attackable_(&box_attackable_, "attackable_list", 0, 0, 0, 0, UI::PanelStyle::kWui) {
 		for (Widelands::Ship* ship : manageable) {
 			list_manageable_.add(ship_description(ship, false), ship, ship->descr().icon());
 		}

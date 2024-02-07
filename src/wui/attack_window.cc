@@ -87,7 +87,6 @@ AttackWindow::AttackWindow(InteractivePlayer& parent,
                    attack_type_,
                    [this]() { return get_max_attackers(); }),
      bottombox_(&mainbox_, UI::PanelStyle::kWui, "bottom_box", 0, 0, UI::Box::Horizontal) {
-
 	if (target_building_or_ship != nullptr) {
 		const unsigned serial = serial_;
 		living_attack_windows_[serial] = this;
@@ -134,8 +133,8 @@ AttackPanel::AttackPanel(
      icon_h_(attack_type_ == AttackPanel::AttackType::kShip ? kShipIconHeight : kSoldierIconHeight),
      lastupdate_(0),
 
-     linebox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
-     columnbox_(&linebox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical) {
+     linebox_(this, UI::PanelStyle::kWui, "line_box", 0, 0, UI::Box::Horizontal),
+     columnbox_(&linebox_, UI::PanelStyle::kWui, "column_box", 0, 0, UI::Box::Vertical) {
 
 	const std::vector<Widelands::OPtr<Widelands::Bob>> all_attackers = get_max_attackers_();
 
@@ -572,7 +571,7 @@ AttackPanel::ListOfSoldiers::ListOfSoldiers(UI::Panel* const parent,
                                             int const w,
                                             int const h,
                                             bool restrict_rows)
-   : UI::Panel(parent, UI::PanelStyle::kWui, x, y, w, h),
+   : UI::Panel(parent, UI::PanelStyle::kWui, "list_of_soldiers", x, y, w, h),
      restricted_row_number_(restrict_rows),
      attack_box_(parent_box) {
 	update_desired_size();

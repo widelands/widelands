@@ -679,7 +679,6 @@ private:
 
 	std::vector<std::string> remaining_shipnames_;
 	std::vector<std::string> remaining_warehousenames_;
-
 	std::vector<std::unique_ptr<DetectedPortSpace>> detected_port_spaces_;
 
 	PlayerBuildingStats building_stats_;
