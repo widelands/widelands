@@ -644,42 +644,93 @@ void DefaultAI::count_military_vacant_positions() {
 	int32_t vacant_mil_positions_ = 0;
 	int32_t understaffed_ = 0;
 	int32_t on_stock_ = 0;
+
+	// count all soldiers too
+	int32_t soldiers_counted = 0;
+
 	for (TrainingSiteObserver tso : trainingsites) {
 		vacant_mil_positions_ +=
 		   5 * std::min<int32_t>((tso.site->soldier_control()->soldier_capacity() -
 		                          tso.site->soldier_control()->associated_soldiers().size()),
 		                         2);
+		soldiers_counted += tso.site->soldier_control()->associated_soldiers().size();
 	}
 	for (const MilitarySiteObserver& mso : militarysites) {
 		vacant_mil_positions_ += mso.site->soldier_control()->soldier_capacity() -
 		                         mso.site->soldier_control()->associated_soldiers().size();
 		understaffed_ += mso.understaffed;
+		soldiers_counted += mso.site->soldier_control()->associated_soldiers().size();
 	}
 
-	vacant_mil_positions_ += understaffed_;
+	int32_t garrisons_count = militarysites.size();
 
 	// also available in warehouses
+	int32_t vacant_in_warehouses = 0;
 	for (auto wh : warehousesites) {
+		// TODO(tothxa): If HQ garrison handling is added, use the condition from below assert
+		//               instead.
+		if (wh.bo->is(BuildingAttribute::kPort)) {
+			assert(wh.site->soldier_control()->max_soldier_capacity() > 0);
+			++garrisons_count;
+			// TODO(tothxa): use a common constextpr with manage_ports() for maximum
+			assert(wh.site->get_desired_soldier_count() <= kPortDefaultGarrison * 3);
+			// Do the same as military sites
+			understaffed_ += kPortDefaultGarrison * 3 - wh.site->get_desired_soldier_count();
+		}
+
+		// Warehouses don't track coming soldiers.
 		if (wh.site->soldier_control()->stationed_soldiers().size() <
 		    wh.site->get_desired_soldier_count()) {
-			vacant_mil_positions_ += wh.site->get_desired_soldier_count() -
-			                         wh.site->soldier_control()->stationed_soldiers().size();
+			vacant_in_warehouses += wh.site->get_desired_soldier_count() -
+			                        wh.site->soldier_control()->stationed_soldiers().size();
 		} else {
 			on_stock_ += wh.site->soldier_control()->stationed_soldiers().size() -
 			             wh.site->get_desired_soldier_count();
 		}
+		soldiers_counted += wh.site->soldier_control()->stationed_soldiers().size();
 	}
+
+	// Associate unaccounted soldiers to warehouses in general (supposedly they are the ones
+	// on their way to a warehouse)
+	int32_t total_soldiers = player_->count_soldiers();
+	if (soldiers_counted < total_soldiers) {
+		int32_t remaining_soldiers = total_soldiers - soldiers_counted;
+		verb_log_dbg_time(game().get_gametime(),
+		                  "AI %d: soldiers: total: %d, associated: %d, difference: %d",
+		                  player_number(), total_soldiers, soldiers_counted, remaining_soldiers);
+		if (vacant_in_warehouses > remaining_soldiers) {
+			vacant_in_warehouses -= remaining_soldiers;
+		} else {
+			on_stock_ += remaining_soldiers - vacant_in_warehouses;
+			vacant_in_warehouses = 0;
+		}
+	} else if (soldiers_counted > total_soldiers) {
+		// This shouldn't happen
+		log_err_time(game().get_gametime(),
+		             "AI %d: soldiers: total: %d, associated: %d, unexpected: %d", player_number(),
+		             total_soldiers, soldiers_counted, soldiers_counted - total_soldiers);
+	}
+	vacant_mil_positions_ += vacant_in_warehouses;
+
+	vacant_mil_positions_ += understaffed_;
 
 	// May become negative, but that doesn't seem to be a problem for the below checks,
 	// and the variable is local and of a signed type.
 	vacant_mil_positions_ -= on_stock_;
 
+	// In practice kFull and kEnough only depend on small values of on_stock_.
+	// Military site garrisons are increased or decreased based on this, maintaining a kind of
+	// dynamic equilibrium, controlled by genetic parameters.
+	// TODO(tothxa): The names are thus confusing and should be changed. Also all consumers
+	//               should be checked whether they use the correct interpretation.
+	//               Possibly the values here should be tweaked too to make the intermediate
+	//               states actually matter, and the whole garrison handling more stable,
+	//               but that probably needs re-training the AI afterwards.
 	if (vacant_mil_positions_ <= 1 || on_stock_ > 4) {
 		soldier_status_ = SoldiersStatus::kFull;
-	} else if (vacant_mil_positions_ * 4 <= static_cast<int32_t>(militarysites.size()) ||
-	           on_stock_ > 2) {
+	} else if (vacant_mil_positions_ * 4 <= garrisons_count || on_stock_ > 2) {
 		soldier_status_ = SoldiersStatus::kEnough;
-	} else if (vacant_mil_positions_ > static_cast<int32_t>(militarysites.size())) {
+	} else if (vacant_mil_positions_ > garrisons_count) {
 		soldier_status_ = SoldiersStatus::kBadShortage;
 	} else {
 		soldier_status_ = SoldiersStatus::kShortage;
