@@ -1,6 +1,7 @@
 [TOC]
 
 ## Post-1.1 until [git df6e12b](https://codeberg.org/wl/widelands/commit/df6e12bc8e9ae8065929c9c6aeea6c5c63daa06e)
+
 ### Animations, Icons and Overlays
 
 - Remove leftover individual animation frames of buildings (#5269)
