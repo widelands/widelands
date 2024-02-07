@@ -1,6 +1,7 @@
 name: build - macos
 on:
   workflow_call:
+  push:
 
 jobs:
   macos:
@@ -8,8 +9,13 @@ jobs:
       matrix:
         config: [debug, release]
         compiler: [clang]
+        include:
+          - os: macos-14
+            arch: x86
+          - os: macos-14-xlarge
+            arch: arm64
     name: MacOS ${{ matrix.config }} ${{ matrix.compiler }}
-    runs-on: macos-11
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -34,5 +40,5 @@ jobs:
     - name: Uploading DMG
       uses: actions/upload-artifact@v3
       with:
-        name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} MacOS 11 AppImage
-        path: ${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}.dmg
+        name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} MacOS 14 ${{ matrix.arch }} AppImage
+        path: ${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}-${{ matrix.arch }}.dmg
