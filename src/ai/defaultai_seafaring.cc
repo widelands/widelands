@@ -409,7 +409,8 @@ bool DefaultAI::check_ships(const Time& gametime) {
 	for (ShipObserver& so : allships) {
 
 		if (so.ship == nullptr) {  // good old paranoia
-			log_warn_time(game().get_gametime(), "AI %d: check_ships(): Invalid ship", player_number());
+			log_warn_time(
+			   game().get_gametime(), "AI %d: check_ships(): Invalid ship", player_number());
 			continue;
 		}
 
