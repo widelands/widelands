@@ -9,11 +9,12 @@ jobs:
       matrix:
         config: [debug, release]
         compiler: [clang]
+        arch: [x86, arm64]
         include:
-          - os: macos-14
-            arch: x86
-          - os: macos-14-xlarge
-            arch: arm64
+          - arch: x86
+            os: macos-14
+          - arch: arm64
+            os: macos-14-xlarge
     name: MacOS ${{ matrix.config }} ${{ matrix.compiler }}
     runs-on: ${{ matrix.os }}
     steps:
