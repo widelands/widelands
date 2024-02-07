@@ -156,7 +156,7 @@ msgstr "Potrebujeme nájsť vhodné miesto pre drevorubačskú chatrč. Môžeme
 msgid ""
 "I’ll show you where the menu is and where to show and hide the building "
 "spaces."
-msgstr "Ukážem Vám, kde sa nachádza ponuka a kde sa zobrazujú a skrývajú stavné miesta."
+msgstr "Ukážem Vám, kde sa nachádza ponuka a kde sa zobrazujú a skrývajú stavebné miesta."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:92
 msgid ""

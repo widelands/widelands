@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-01 02:43+0000\n"
+"POT-Creation-Date: 2024-02-03 02:22+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Pavol Gono, 2024\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
@@ -26,13 +26,13 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:8
 msgctxt "amazons_building"
 msgid "Fortification"
-msgstr ""
+msgstr "Opevnenie"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:32
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your fortification."
-msgstr ""
+msgstr "Vaši vojaci obsadili vaše opevnenie."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:34
@@ -62,13 +62,13 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:8
 msgctxt "amazons_building"
 msgid "Fortress"
-msgstr ""
+msgstr "Pevnosť"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:62
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your fortress."
-msgstr ""
+msgstr "Vaši vojaci obsadili vašu pevnosť."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:64
@@ -134,13 +134,13 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:8
 msgctxt "amazons_building"
 msgid "Patrol Post"
-msgstr ""
+msgstr "Hliadkové stanovište"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:39
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your patrol post."
-msgstr ""
+msgstr "Vaši vojaci obsadili vaše hliadkové stanovište."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:41
@@ -176,7 +176,7 @@ msgstr "Veža"
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:59
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your tower."
-msgstr ""
+msgstr "Vaši vojaci obsadili vašu vežu."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:61
@@ -206,13 +206,13 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:8
 msgctxt "amazons_building"
 msgid "Treetop Sentry"
-msgstr ""
+msgstr "Strážnica na strome"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:41
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your treetop sentry."
-msgstr ""
+msgstr "Vaši vojaci obsadili vašu strážnicu na strome."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:43
@@ -284,7 +284,7 @@ msgstr "Hrad"
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:153
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your castle."
-msgstr ""
+msgstr "Vaši vojaci obsadili váš hrad."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:155
@@ -320,7 +320,7 @@ msgstr "Strážna hala"
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:42
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your guardhall."
-msgstr ""
+msgstr "Vaši vojaci obsadili vašu strážnu halu."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:44
@@ -356,7 +356,7 @@ msgstr "Strážnica"
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:40
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your guardhouse."
-msgstr ""
+msgstr "Vaši vojaci obsadili vašu strážnicu."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:42
@@ -392,7 +392,7 @@ msgstr "Veža"
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:57
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your tower."
-msgstr ""
+msgstr "Vaši vojaci obsadili vašu vežu."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:59
@@ -428,7 +428,7 @@ msgstr "Vysoká veža"
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:29
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your high tower."
-msgstr ""
+msgstr "Vaši vojaci obsadili vašu vysokú vežu."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:31
@@ -464,7 +464,7 @@ msgstr "Malá veža"
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:41
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your small tower."
-msgstr ""
+msgstr "Vaši vojaci obsadili vašu malú vežu."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:43
@@ -500,7 +500,7 @@ msgstr "Hradba"
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:52
 msgctxt "barbarians_building"
 msgid "Your soldiers have occupied your barrier."
-msgstr ""
+msgstr "Vaši vojaci obsadili vašu hradbu."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:54
@@ -536,7 +536,7 @@ msgstr "Citadela"
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:43
 msgctxt "barbarians_building"
 msgid "Your soldiers have occupied your citadel."
-msgstr ""
+msgstr "Vaši vojaci obsadili vašu citadelu."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:45
@@ -572,7 +572,7 @@ msgstr "Pevnosť"
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:77
 msgctxt "barbarians_building"
 msgid "Your soldiers have occupied your fortress."
-msgstr ""
+msgstr "Vaši vojaci obsadili vašu pevnosť."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:79
@@ -608,7 +608,7 @@ msgstr "Strážnica"
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:54
 msgctxt "barbarians_building"
 msgid "Your soldiers have occupied your sentry."
-msgstr ""
+msgstr "Vaši vojaci obsadili vašu strážnicu."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:56
@@ -644,7 +644,7 @@ msgstr "Veža"
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:59
 msgctxt "barbarians_building"
 msgid "Your soldiers have occupied your tower."
-msgstr ""
+msgstr "Vaši vojaci obsadili vašu vežu."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:61
@@ -680,7 +680,7 @@ msgstr "Hradba"
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:45
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your barrier."
-msgstr ""
+msgstr "Vaši vojaci obsadili vašu hradbu."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:47
@@ -716,7 +716,7 @@ msgstr "Vojenský zrub"
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:50
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your blockhouse."
-msgstr ""
+msgstr "Vaši vojaci obsadili váš vojenský zrub."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:52
@@ -752,7 +752,7 @@ msgstr "Hrad"
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:31
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your castle."
-msgstr ""
+msgstr "Vaši vojaci obsadili váš hrad."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:33
@@ -788,7 +788,7 @@ msgstr "Pevnosť"
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:73
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your fortress."
-msgstr ""
+msgstr "Vaši vojaci obsadili vašu pevnosť."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:75
@@ -824,7 +824,7 @@ msgstr "Pozorovateľňa"
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:59
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your outpost."
-msgstr ""
+msgstr "Vaši vojaci obsadili vašu pozorovateľňu."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:61
@@ -860,7 +860,7 @@ msgstr "Strážnica"
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:45
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your sentry."
-msgstr ""
+msgstr "Vaši vojaci obsadili vašu strážnicu."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:47
@@ -896,7 +896,7 @@ msgstr "Veža"
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:53
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your tower."
-msgstr ""
+msgstr "Vaši vojaci obsadili vašu vežu."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:55
@@ -932,7 +932,7 @@ msgstr "Pevnosť"
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:55
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your fortress."
-msgstr ""
+msgstr "Vaši vojaci obsadili vašu pevnosť."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:57
@@ -968,7 +968,7 @@ msgstr "Pozorovateľňa"
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:53
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your outpost."
-msgstr ""
+msgstr "Vaši vojaci obsadili vašu pozorovateľňu."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:55
@@ -1040,7 +1040,7 @@ msgstr "Veža"
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:56
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your tower."
-msgstr ""
+msgstr "Vaši vojaci obsadili vašu vežu."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:58
@@ -1076,7 +1076,7 @@ msgstr "Drevená veža"
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:60
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your wooden tower."
-msgstr ""
+msgstr "Vaši vojaci obsadili vašu drevenú vežu."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:62
@@ -1112,7 +1112,7 @@ msgstr "Vysoká drevená veža"
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:40
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your high wooden tower."
-msgstr ""
+msgstr "Vaši vojaci obsadili vašu vysokú drevenú vežu."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:42
@@ -1509,7 +1509,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Hunter-Gatherer’s Hut"
-msgstr ""
+msgstr "Lovecko-zberačská chatrč"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:40
@@ -1666,7 +1666,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Scout’s Hut"
-msgstr ""
+msgstr "Prieskumnícka chatrč"
 
 #. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
 #: ../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:41
@@ -1705,7 +1705,7 @@ msgid "Stone Workshop"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:86
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:87
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:212
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:222
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:218
@@ -1715,14 +1715,14 @@ msgstr "vyrábanie lopaty"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:98
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:99
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:118
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:75
 msgid "making a felling ax"
 msgstr "vyrábanie drevorubačskej sekery"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:110
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:111
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:173
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:196
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:179
@@ -1730,13 +1730,13 @@ msgid "making a pick"
 msgstr "vyrábanie krompáča"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a machete because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:122
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:123
 msgid "making a machete"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:134
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:135
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:183
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:166
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:184
@@ -1744,7 +1744,7 @@ msgid "making kitchen tools"
 msgstr "vyrábanie kuchynských nástrojov"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:146
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:147
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:121
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:157
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:140
@@ -1753,42 +1753,42 @@ msgid "making a hammer"
 msgstr "vyrábanie kladiva"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a chisel because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:158
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:159
 msgid "making a chisel"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:170
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:171
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:220
 msgid "making needles"
 msgstr "vyrábanie ihiel"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a stone bowl because
 #. ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:182
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:183
 msgid "making a stone bowl"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making firestones because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:194
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:195
 msgid "making firestones"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a wooden spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:206
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:207
 msgid "making a wooden spear"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a stone-tipped spear
 #. because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:218
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:219
 msgid "making a stone-tipped spear"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hardened spear
 #. because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:230
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:231
 msgid "making a hardened spear"
 msgstr ""
 
@@ -1879,7 +1879,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:8
 msgctxt "amazons_building"
 msgid "Tapir Farm"
-msgstr ""
+msgstr "Tapíria farma"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding tapir because ...
 #: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:63
@@ -1939,7 +1939,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Woodcutter’s Hut"
-msgstr ""
+msgstr "Drevorubačská chatrč"
 
 #. TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
 #: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:47
@@ -2883,7 +2883,7 @@ msgstr "Lovec pracujúci mimo tejto loveckej chatrče nedokáže vo svojej praco
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:8
 msgctxt "barbarians_building"
 msgid "Inn"
-msgstr "Krčma"
+msgstr "Hostinec"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:8
@@ -3285,7 +3285,7 @@ msgstr "Lovec pracujúci mimo tohto loveckého domu nedokáže vo svojej pracovn
 #: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:8
 msgctxt "empire_building"
 msgid "Inn"
-msgstr "Krčma"
+msgstr "Hostinec"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:8
@@ -4668,7 +4668,7 @@ msgstr ""
 #: ../../data/tribes/buildings/warehouses/amazons/warehouse/init.lua:8
 msgctxt "amazons_building"
 msgid "Warehouse"
-msgstr ""
+msgstr "Sklad"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua:79
@@ -5448,11 +5448,11 @@ msgstr "Vývojový tím hry Widelands"
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/amazons/init.lua:13
 msgid "Amazons"
-msgstr ""
+msgstr "Amazonky"
 
 #: ../../data/tribes/initialization/amazons/init.lua:14
 msgid "The people of the amazonian jungle."
-msgstr ""
+msgstr "Obyvatelia Amazonskej džungle."
 
 #. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
@@ -5603,7 +5603,7 @@ msgid ""
 "an economy. Warning: the AI can’t successfully start from this."
 msgstr ""
 
-#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:45
+#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:46
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
 #: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:47
 #: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:48
@@ -5611,7 +5611,7 @@ msgstr ""
 msgid "Be careful"
 msgstr "Buď opatrný"
 
-#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:45
+#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:46
 msgid ""
 "You only have exactly the wares for each tool you will need to start your "
 "economy. Make sure no unneeded tool is created."
@@ -9002,7 +9002,7 @@ msgstr "Trajekt"
 #: ../../data/tribes/workers/amazons/geologist/init.lua:8
 msgctxt "amazons_worker"
 msgid "Geologist"
-msgstr ""
+msgstr "Geológ"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/gold_digger/init.lua:8
@@ -9020,7 +9020,7 @@ msgstr ""
 #: ../../data/tribes/workers/amazons/hunter_gatherer/init.lua:8
 msgctxt "amazons_worker"
 msgid "Hunter-Gatherer"
-msgstr ""
+msgstr "Lovkyňa-zberačka"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/jungle_master/init.lua:8
@@ -9074,7 +9074,7 @@ msgstr "Kamenár"
 #: ../../data/tribes/workers/amazons/tapir/init.lua:8
 msgctxt "amazons_worker"
 msgid "Tapir"
-msgstr ""
+msgstr "Tapír"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/tapir_breeder/init.lua:8

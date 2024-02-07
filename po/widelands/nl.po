@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-25 02:37+0000\n"
+"POT-Creation-Date: 2024-02-01 02:29+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Alex Rijckaert, 2023\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
@@ -1993,8 +1993,8 @@ msgstr "Geen"
 
 #: ../../src/logic/addons.cc:275
 #, c-format
-msgid "%1$s<br>· %2$s (version %3$s)"
-msgstr "%1$s<br>. %2$s (versie %3$s)"
+msgid "%1$s<br>• %2$s (version %3$s)"
+msgstr ""
 
 #: ../../src/logic/addons.cc:305
 msgid "No game-relevant add-ons in use."
@@ -3024,15 +3024,15 @@ msgstr[1] "%u uitbreiding ongelijkheden ontdekt:\n"
 #, c-format
 msgid ""
 "%1$s\n"
-"· ‘%2$s’ required by host not found"
-msgstr "%1$s\n. '%2$s' nodig voor de host is niet gevonden"
+"• ‘%2$s’ required by host not found"
+msgstr ""
 
 #: ../../src/network/gameclient.cc:819
 #, c-format
 msgid ""
 "%1$s\n"
-"· ‘%2$s’ installed at version %3$s but host uses version %4$s"
-msgstr "%1$s\n. '%2$s' geinstalleerd met versie %3$s maar de host gebruikt versie %4$s"
+"• ‘%2$s’ installed at version %3$s but host uses version %4$s"
+msgstr ""
 
 #: ../../src/network/gameclient.cc:990
 msgid "/me ’s file failed md5 checksumming."
@@ -4251,8 +4251,8 @@ msgstr[1] "Weet je zeker dat je deze %u uitbreidingen wilt opwaarden?"
 #, c-format
 msgid ""
 "\n"
-"· %1$s (%2$s) by %3$s"
-msgstr "\n. %1$s (%2$s) by %3$s"
+"• %1$s (%2$s) by %3$s"
+msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:656
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:413
@@ -4393,30 +4393,30 @@ msgstr[1] "Opwaarden van de volgende %u uitbreidingen:"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1169
 #, c-format
-msgid "· %s"
-msgstr ". %s"
+msgid "• %s"
+msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1205
 #, c-format
-msgid "· ‘%1$s’ requires ‘%2$s’ which could not be found"
-msgstr ". '%1$s' heeft '%2$s' nodig welke niet kon worden gevonden"
+msgid "• ‘%1$s’ requires ‘%2$s’ which could not be found"
+msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1210
 #, c-format
-msgid "· ‘%1$s’ requires ‘%2$s’ which is disabled"
-msgstr ". '%1$s' heeft '%2$s' nodig welke is uitgezet"
+msgid "• ‘%1$s’ requires ‘%2$s’ which is disabled"
+msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1217
 #, c-format
-msgid "· ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
-msgstr ". '%1$s' heeft '%2$s' nodig welke is opgegeven na de uitbreiding die het nodig heeft"
+msgid "• ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
+msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1245
 #, c-format
 msgid ""
-"· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
+"• ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
-msgstr ". '%1$s' heeft '%2$s' nodig en daarna '%3$s', maar ze zijn in de verkeerde volgorde opgegeven"
+msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1261
 #, c-format
@@ -4636,8 +4636,8 @@ msgstr[1] "Als je de verpakker nu sluit, worden alle veranderingen aan de volgen
 #, c-format
 msgid ""
 "%1$s\n"
-"· %2$s"
-msgstr "%1$s\n. %2$s"
+"• %2$s"
+msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:463
 msgid "Quit Packager"
@@ -5295,8 +5295,8 @@ msgstr "Opwaarderen"
 msgid "Comments and Votes"
 msgstr "Opmerkingen en Stemmen"
 
-#. * TRANSLATORS: Filesize · Download count · Average rating · Number of
-#. comments ·
+#. * TRANSLATORS: Filesize • Download count • Average rating • Number of
+#. comments •
 #. Number of screenshots
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:360
 #, c-format
@@ -6086,9 +6086,9 @@ msgstr "Versie %1$s"
 #. * TRANSLATORS: Placeholders are the copyright years
 #: ../../src/ui_fsmenu/main.cc:531
 msgid ""
-"(C) %1%-%2% by the Widelands Development Team · Licensed under the GNU "
+"(C) %1%-%2% by the Widelands Development Team • Licensed under the GNU "
 "General Public License V2.0"
-msgstr "(C) %1%-%2% door het Widelands Development Team . Licentie onder de GNU General Public License V2.0"
+msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:873
 msgid "Desyncing Add-On Found"
@@ -9103,18 +9103,18 @@ msgstr "Verplaats paneel naar boven"
 msgid "Cheat mode enabled"
 msgstr "Valsspeel mode staat aan"
 
-#. * TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime
-#. · Gamespeed)
+#. * TRANSLATORS: (Gametime • Realtime) or (Gametime • Gamespeed) or (Realtime
+#. • Gamespeed)
 #: ../../src/wui/info_panel.cc:454
 #, c-format
-msgid "%1$s · %2$s"
-msgstr "%1$s . %2$s"
+msgid "%1$s • %2$s"
+msgstr ""
 
-#. * TRANSLATORS: Gametime · Realtime · Gamespeed
+#. * TRANSLATORS: Gametime • Realtime • Gamespeed
 #: ../../src/wui/info_panel.cc:459
 #, c-format
-msgid "%1$s · %2$s · %3$s"
-msgstr "%1$s . %2$s . %3$s"
+msgid "%1$s • %2$s • %3$s"
+msgstr ""
 
 #: ../../src/wui/inputqueuedisplay.cc:70
 msgid "Priority: Very Low"

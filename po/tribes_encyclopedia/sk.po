@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-01 02:43+0000\n"
+"POT-Creation-Date: 2024-02-01 02:29+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Pavol Gono, 2024\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
@@ -1494,7 +1494,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1485
 msgctxt "amazons_building"
 msgid "Burns logs into charcoal."
-msgstr ""
+msgstr "Páli kmene na uhlie."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Charcoal
 #. Kiln
@@ -3631,7 +3631,7 @@ msgstr "Rúbe stromy."
 #: ../../data/tribes/initialization/atlanteans/units.lua:950
 msgctxt "atlanteans_worker"
 msgid "Saws logs to produce planks."
-msgstr "Píli drevo na dosky."
+msgstr "Píli kmene na dosky."
 
 #. TRANSLATORS: Helptext for an Atlantean worker: Forester
 #: ../../data/tribes/initialization/atlanteans/units.lua:957
@@ -4709,7 +4709,7 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky nástroje, výroba jedného nástroja trvá priemerne %1$s. Ak ekonomika potrebuje len jeden druh nástroja, jeho výroba trvá priemerne %2$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Weapon
 #. Smithy
@@ -4934,7 +4934,7 @@ msgid ""
 "needed by the economy, production of one of each cloth and tabard takes %1$s"
 " on average. If only one kind of cloth or tabard is needed by the economy, "
 "its production takes %2$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky druhy látky a kabátcov, výroba jednej látky a jedného z každého kabátca trvá priemerne %1$s. Ak ekonomika potrebuje len jeden druh látky alebo kabátca, jeho výroba trvá priemerne %2$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Crystal
 #. Mine
@@ -7234,7 +7234,7 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky nástroje, výroba jedného nástroja trvá priemerne %1$s. Ak ekonomika potrebuje len jeden druh nástroja, jeho výroba trvá priemerne %2$s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Warmill
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Ax Workshop
@@ -10823,7 +10823,7 @@ msgstr ""
 #. "In silvam non ligna feras."
 #: ../../data/tribes/initialization/empire/units.lua:1274
 msgid "Don’t carry logs to the forest."
-msgstr ""
+msgstr "Nenos drevo do lesa."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site:
 #. Lumberjack's House
@@ -11408,7 +11408,7 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky nástroje, výroba jedného nástroja trvá priemerne %1$s. Ak ekonomika potrebuje len jeden druh nástroja, jeho výroba trvá priemerne %2$s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -14781,7 +14781,7 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average. Needles"
-" are an exception - in the time to produce one tool two needles are "
+" are an exception – in the time to produce one tool two needles are "
 "produced."
 msgstr ""
 
@@ -15094,7 +15094,7 @@ msgstr ""
 msgctxt "frisians_building"
 msgid ""
 "If the tavern is fully supplied, it can produce one ration in %1$s on "
-"average, using 2 kinds of ingredients. If it can only use one kind of "
+"average, using two kinds of ingredients. If it can only use one kind of "
 "ingredient, it can produce one ration in %2$s on average."
 msgstr ""
 
