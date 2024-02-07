@@ -13,8 +13,6 @@ jobs:
         include:
           - arch: x86
             os: macos-14
-          - arch: arm64
-            os: macos-14-xlarge
     name: MacOS ${{ matrix.config }} ${{ matrix.compiler }} ${{ matrix.arch }}
     runs-on: ${{ matrix.os }}
     steps:
