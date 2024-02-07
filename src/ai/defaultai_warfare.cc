@@ -647,26 +647,32 @@ void DefaultAI::count_military_vacant_positions() {
 	for (TrainingSiteObserver tso : trainingsites) {
 		vacant_mil_positions_ +=
 		   5 * std::min<int32_t>((tso.site->soldier_control()->soldier_capacity() -
-		                          tso.site->soldier_control()->stationed_soldiers().size()),
+		                          tso.site->soldier_control()->associated_soldiers().size()),
 		                         2);
 	}
 	for (const MilitarySiteObserver& mso : militarysites) {
 		vacant_mil_positions_ += mso.site->soldier_control()->soldier_capacity() -
-		                         mso.site->soldier_control()->stationed_soldiers().size();
+		                         mso.site->soldier_control()->associated_soldiers().size();
 		understaffed_ += mso.understaffed;
 	}
+
 	vacant_mil_positions_ += understaffed_;
 
 	// also available in warehouses
 	for (auto wh : warehousesites) {
-		on_stock_ += wh.site->soldier_control()->stationed_soldiers().size();
+		if (wh.site->soldier_control()->stationed_soldiers().size() <
+		    wh.site->get_desired_soldier_count()) {
+			vacant_mil_positions_ += wh.site->get_desired_soldier_count() -
+			                         wh.site->soldier_control()->stationed_soldiers().size();
+		} else {
+			on_stock_ += wh.site->soldier_control()->stationed_soldiers().size() -
+			             wh.site->get_desired_soldier_count();
+		}
 	}
 
-	vacant_mil_positions_ += on_stock_;
-
-	// to avoid floats this is actual number * 100
-	vacant_mil_positions_average_ =
-	   vacant_mil_positions_average_ * 8 / 10 + 20 * vacant_mil_positions_;
+	// May become negative, but that doesn't seem to be a problem for the below checks,
+	// and the variable is local and of a signed type.
+	vacant_mil_positions_ -= on_stock_;
 
 	if (vacant_mil_positions_ <= 1 || on_stock_ > 4) {
 		soldier_status_ = SoldiersStatus::kFull;
@@ -1051,8 +1057,7 @@ bool DefaultAI::check_militarysites(const Time& gametime) {
 			changed = true;
 		}
 		if (ms->get_soldier_preference() == Widelands::SoldierPreference::kRookies) {
-			game().send_player_militarysite_set_soldier_preference(
-			   *ms, Widelands::SoldierPreference::kHeroes);
+			game().send_player_set_soldier_preference(*ms, Widelands::SoldierPreference::kHeroes);
 			changed = true;
 		}
 	} else if (should_be_dismantled && can_be_dismantled) {
@@ -1070,8 +1075,7 @@ bool DefaultAI::check_militarysites(const Time& gametime) {
 			changed = true;
 		}
 		if (ms->get_soldier_preference() == Widelands::SoldierPreference::kHeroes) {
-			game().send_player_militarysite_set_soldier_preference(
-			   *ms, Widelands::SoldierPreference::kRookies);
+			game().send_player_set_soldier_preference(*ms, Widelands::SoldierPreference::kRookies);
 			changed = true;
 		}
 	}
@@ -1407,7 +1411,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo, cons
 	inputs[107] = stocked_wood_level < 25 ? -3 * (size - 1) : 0;
 	inputs[108] = stocked_wood_level < 25 ? -5 * size : 0;
 	inputs[109] = stocked_wood_level < 25 ? -5 * (size - 1) : 0;
-	if (!bo.critical_building_material.empty() && buil_material_mines_count == 0) {
+	if (!bo.critical_building_material.empty() && build_material_mines_count == 0) {
 		inputs[110] = -5;
 		inputs[111] = -2;
 		inputs[111] = -10;
@@ -1432,10 +1436,10 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo, cons
 		inputs[123] = size * -2;
 	}
 	if (!basic_economy_established && !bo.critical_building_material.empty()) {
-		inputs[124] = (size - buil_material_mines_count) * -5;
-		inputs[125] = (size - buil_material_mines_count) * -3;
-		inputs[126] = (size - buil_material_mines_count) * -4;
-		inputs[127] = (size - buil_material_mines_count) * -2;
+		inputs[124] = (size - build_material_mines_count) * -5;
+		inputs[125] = (size - build_material_mines_count) * -3;
+		inputs[126] = (size - build_material_mines_count) * -4;
+		inputs[127] = (size - build_material_mines_count) * -2;
 	}
 
 	for (int i = 0; i < 4 * kFNeuronBitSize; i = i + 1) {

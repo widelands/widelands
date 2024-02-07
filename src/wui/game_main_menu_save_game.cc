@@ -306,7 +306,7 @@ bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
 	   complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR);
 	GenericSaveHandler::Error error;
 	{
-		MutexLock m(MutexLock::ID::kLogicFrame, [this]() { stay_responsive(); });
+		MutexLock m(MutexLock::ID::kLogicFrame);
 		error = gsh.save();
 	}
 

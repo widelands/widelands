@@ -43,6 +43,7 @@
 #include "logic/game_data_error.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/findimmovable.h"
+#include "logic/map_objects/pinned_note.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
@@ -993,15 +994,6 @@ void Player::start_or_cancel_expedition(const Warehouse& wh) {
 	}
 }
 
-void Player::military_site_set_soldier_preference(PlayerImmovable& imm,
-                                                  SoldierPreference soldier_preference) {
-	if (imm.get_owner() == this) {
-		if (upcast(MilitarySite, milsite, &imm)) {
-			milsite->set_soldier_preference(soldier_preference);
-		}
-	}
-}
-
 /*
  * enhance this building, remove it, but give the constructionsite
  * an idea of enhancing
@@ -1326,10 +1318,28 @@ void Player::enemyflagaction(const Flag& flag,
 			if (const AttackTarget* attack_target = building->attack_target()) {
 				if (attack_target->can_be_attacked()) {
 					attack_target->set_allow_conquer(player_number(), allow_conquer);
+					std::map<OPtr<Ship>, std::vector<uint32_t>> soldiers_on_warships;
+
 					for (Soldier* temp_attacker : soldiers) {
-						assert(temp_attacker);
+						assert(temp_attacker != nullptr);
 						assert(temp_attacker->get_owner() == this);
-						if (upcast(MilitarySite, ms, temp_attacker->get_location(egbase()))) {
+						if (temp_attacker->is_shipping()) {
+							if (Ship* ship = dynamic_cast<Ship*>(
+							       egbase().objects().get_object(temp_attacker->get_ship_serial()));
+							    ship != nullptr) {
+								std::vector<uint32_t>& parameters_vector = soldiers_on_warships[ship];
+								if (parameters_vector.empty()) {
+									parameters_vector.push_back(building->get_position().x);
+									parameters_vector.push_back(building->get_position().y);
+								}
+								parameters_vector.push_back(temp_attacker->serial());
+							} else {
+								verb_log_warn_time(egbase().get_gametime(),
+								                   "Player(%u)::enemyflagaction: Not sending soldier %u "
+								                   "because his warship has vanished\n",
+								                   player_number(), temp_attacker->serial());
+							}
+						} else if (upcast(MilitarySite, ms, temp_attacker->get_location(egbase()))) {
 							assert(ms->get_owner() == this);
 							ms->send_attacker(*temp_attacker, *building);
 						} else {
@@ -1337,10 +1347,14 @@ void Player::enemyflagaction(const Flag& flag,
 							// in the short delay between sending and executing a playercommand
 							verb_log_warn_time(egbase().get_gametime(),
 							                   "Player(%u)::enemyflagaction: Not sending soldier %u "
-							                   "because he left the "
-							                   "building\n",
+							                   "because he left the building\n",
 							                   player_number(), temp_attacker->serial());
 						}
+					}
+
+					for (auto& pair : soldiers_on_warships) {
+						pair.first.get(egbase())->warship_command(
+						   dynamic_cast<Game&>(egbase()), WarshipCommand::kAttack, pair.second);
 					}
 				}
 			}
@@ -1904,6 +1918,15 @@ bool Player::is_attack_forbidden(PlayerNumber who) const {
 	return forbid_attack_.find(who) != forbid_attack_.end();
 }
 
+void Player::register_pinned_note(PinnedNote* note) {
+	assert(pinned_notes_.count(note) == 0);
+	pinned_notes_.insert(note);
+}
+void Player::unregister_pinned_note(PinnedNote* note) {
+	assert(pinned_notes_.count(note) == 1);
+	pinned_notes_.erase(note);
+}
+
 void Player::add_soldier(unsigned h, unsigned a, unsigned d, unsigned e) {
 	SoldierStatistics ss(h, a, d, e);
 	auto it = std::find(soldier_stats_.begin(), soldier_stats_.end(), ss);
@@ -2061,6 +2084,48 @@ void Player::set_warehousenames(const std::set<std::string>& names) {
 	}
 }
 
+DetectedPortSpace* Player::has_detected_port_space(const Coords& coords) {
+	for (auto& dps : detected_port_spaces_) {
+		if (dps->coords == coords) {
+			return dps.get();
+		}
+	}
+	return nullptr;
+}
+
+void Player::detect_port_space(std::unique_ptr<DetectedPortSpace> new_dps) {
+	detected_port_spaces_.emplace_back(std::move(new_dps));
+}
+
+const DetectedPortSpace& Player::get_detected_port_space(Serial serial) const {
+	for (const auto& dps : detected_port_spaces_) {
+		if (dps->serial == serial) {
+			return *dps;
+		}
+	}
+	throw wexception("Player %u has no detected port space with serial %u", player_number(), serial);
+}
+
+bool Player::remove_detected_port_space(const Coords& coords, PortDock* replaced_by) {
+	for (size_t i = 0; i < detected_port_spaces_.size(); ++i) {
+		if (detected_port_spaces_[i]->coords == coords) {
+			for (Serial serial : ships()) {
+				Ship* ship = dynamic_cast<Ship*>(egbase().objects().get_object(serial));
+				if (ship != nullptr &&
+				    ship->get_destination_detected_port_space() == detected_port_spaces_[i].get()) {
+					ship->set_destination(
+					   egbase(), replaced_by, ship->get_send_message_at_destination());
+				}
+			}
+
+			detected_port_spaces_[i] = std::move(detected_port_spaces_.back());
+			detected_port_spaces_.pop_back();
+			return true;
+		}
+	}
+	return false;
+}
+
 /**
  * Read remaining ship names from the given file
  *
@@ -2108,8 +2173,10 @@ void Player::init_statistics() {
  * Read statistics data from a file.
  *
  * \param fr source stream
+ * \param packet_version from GamePlayerInfoPacket in game_io/game_player_info_packet.cc
+ *                       currently unused, but may be needed for savegame compatibility
  */
-void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
+void Player::read_statistics(FileRead& fr, const uint16_t /* packet_version */) {
 	uint16_t nr_wares = fr.unsigned_16();
 	size_t nr_entries = fr.unsigned_16();
 	assert(tribe().wares().size() >= nr_wares);
@@ -2206,9 +2273,8 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 	}
 
 	// Read worker stock statistics
-	// TODO(Nordfriese): Savegame compatibility
-	uint16_t nr_workers = packet_version >= 29 ? fr.unsigned_16() : 0;
-	nr_entries = packet_version >= 29 ? fr.unsigned_16() : 0;
+	uint16_t nr_workers = fr.unsigned_16();
+	nr_entries = fr.unsigned_16();
 	assert(tribe().workers().size() >= nr_workers);
 
 	for (DescriptionIndex idx : tribe().workers()) {
