@@ -29,7 +29,7 @@ struct CmdCallEconomyBalance : public GameLogicCommand {
 	CmdCallEconomyBalance() : GameLogicCommand(Time()) {
 	}  ///< for load and save
 
-	CmdCallEconomyBalance(const Time&, Economy*, uint32_t timerid);
+	CmdCallEconomyBalance(const Time& starttime, Flag* representative_flag, WareWorker type, uint32_t timerid);
 
 	void execute(Game&) override;
 

@@ -29,15 +29,10 @@
 
 namespace Widelands {
 
-CmdCallEconomyBalance::CmdCallEconomyBalance(const Time& starttime,
-                                             Economy* const economy,
-                                             uint32_t const timerid)
-   : GameLogicCommand(starttime) {
-	Flag* flag = economy->get_arbitrary_flag();
-	flag_ = flag;
-	timerid_ = timerid;
-	type_ = economy->type();
-	assert(flag->get_economy(type_) == economy);
+CmdCallEconomyBalance::CmdCallEconomyBalance(const Time& starttime, Flag* representative_flag, WareWorker type, uint32_t timerid)
+   : GameLogicCommand(starttime), flag_(representative_flag), type_(type), timerid_(timerid) {
+	assert(representative_flag != nullptr);
+	assert(representative_flag->get_economy(type) != nullptr);
 }
 
 /**

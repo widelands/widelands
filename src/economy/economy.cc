@@ -693,6 +693,7 @@ void Economy::split(const std::set<OPtr<Flag>>& flags) {
 	// need this, because the flag that rebalance commands for us were
 	// tied to might have been moved into the other economy
 	start_request_timer();
+	e->start_request_timer();
 }
 
 /**
@@ -702,8 +703,11 @@ void Economy::split(const std::set<OPtr<Flag>>& flags) {
 void Economy::start_request_timer(const Duration& delta) {
 	if (!flags_.empty()) {
 		if (upcast(Game, game, &owner_.egbase())) {
-			game->cmdqueue().enqueue(
-			   new CmdCallEconomyBalance(game->get_gametime() + delta, this, request_timerid_));
+			Flag* flag = get_arbitrary_flag();
+			if (flag->get_economy(type()) == this) {  // Sanity check during economy splits
+				game->cmdqueue().enqueue(
+					new CmdCallEconomyBalance(game->get_gametime() + delta, flag, type(), request_timerid_));
+			}
 		}
 	}
 }

@@ -209,8 +209,6 @@ public:
 		start_request_timer();
 	}
 
-	void check_imports(Game& game);
-	void recalc_districts();
 	[[nodiscard]] bool same_district(const PlayerImmovable& p1, const PlayerImmovable& p2) const;
 
 protected:
@@ -252,6 +250,9 @@ private:
 	void create_requested_worker(Game&, DescriptionIndex);
 
 	bool has_request(Request&) const;
+
+	void check_imports(Game& game);
+	void recalc_districts();
 
 	/*************/
 	/* Variables */
