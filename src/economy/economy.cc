@@ -705,8 +705,8 @@ void Economy::start_request_timer(const Duration& delta) {
 		if (upcast(Game, game, &owner_.egbase())) {
 			Flag* flag = get_arbitrary_flag();
 			if (flag->get_economy(type()) == this) {  // Sanity check during economy splits
-				game->cmdqueue().enqueue(
-					new CmdCallEconomyBalance(game->get_gametime() + delta, flag, type(), request_timerid_));
+				game->cmdqueue().enqueue(new CmdCallEconomyBalance(
+				   game->get_gametime() + delta, flag, type(), request_timerid_));
 			}
 		}
 	}
