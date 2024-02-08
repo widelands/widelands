@@ -370,7 +370,8 @@ void DefaultAI::manage_ports() {
 		}
 
 		const Widelands::Quantity current_garrison = p_obs.site->get_desired_soldier_count();
-		const bool full = p_obs.site->soldier_control()->associated_soldiers().size() >= current_garrison;
+		const bool full =
+		   p_obs.site->soldier_control()->associated_soldiers().size() >= current_garrison;
 
 		Widelands::Quantity desired_garrison = kPortDefaultGarrison;
 		int32_t change_value = 0;

@@ -701,8 +701,8 @@ void DefaultAI::count_military_vacant_positions() {
 	} else if (soldiers_counted > total_soldiers) {
 		// This shouldn't happen
 		log_warn_time(game().get_gametime(),
-		             "AI %d: soldiers: total: %d, associated: %d, unexpected: %d", player_number(),
-		             total_soldiers, soldiers_counted, soldiers_counted - total_soldiers);
+		              "AI %d: soldiers: total: %d, associated: %d, unexpected: %d", player_number(),
+		              total_soldiers, soldiers_counted, soldiers_counted - total_soldiers);
 	}
 
 	vacant_mil_positions_ += understaffed_;
