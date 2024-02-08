@@ -55,8 +55,8 @@ jobs:
         cache: pip
     - name: Install graphviz
       run: |
-        apt-get update
-        apt-get install graphviz
+        sudo apt-get update
+        sudo apt-get install graphviz
     - name: Generate documentation
       run: |
         cd doc/sphinx
