@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-01 02:29+0000\n"
+"POT-Creation-Date: 2024-02-08 02:24+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Pavol Gono, 2024\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
@@ -134,17 +134,17 @@ msgid "No AI"
 msgstr "Žiadna AI"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:96
+#: ../../src/ai/defaultai.h:95
 msgid "Normal AI"
 msgstr "Normálna AI"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:111
+#: ../../src/ai/defaultai.h:110
 msgid "Weak AI"
 msgstr "Slabá AI"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:126
+#: ../../src/ai/defaultai.h:125
 msgid "Very Weak AI"
 msgstr "Veľmi slabá AI"
 
@@ -286,13 +286,13 @@ msgstr "12."
 #. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:99
 #: ../../src/ui_fsmenu/keyboard_options.cc:298
-#: ../../src/wui/interactive_gamebase.cc:100
+#: ../../src/wui/interactive_gamebase.cc:101
 #: ../../src/wui/story_message_box.cc:89
 msgid "Main Menu"
 msgstr "Hlavné menu"
 
 #: ../../src/editor/editorinteractive.cc:100
-#: ../../src/wui/interactive_gamebase.cc:101
+#: ../../src/wui/interactive_gamebase.cc:102
 msgctxt "hotkey"
 msgid "Esc"
 msgstr "Esc"
@@ -300,7 +300,7 @@ msgstr "Esc"
 #. * TRANSLATORS: Title for the tool menu button in the editor
 #. * TRANSLATORS: Heading in the editor keyboard shortcuts help
 #: ../../src/editor/editorinteractive.cc:114
-#: ../../src/wlapplication_options.cc:1034
+#: ../../src/wlapplication_options.cc:1044
 msgctxt "editor"
 msgid "Tools"
 msgstr "Nástroje"
@@ -312,7 +312,7 @@ msgstr "Nástroje"
 #. show/hide
 #. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:130
-#: ../../src/wui/interactive_gamebase.cc:82
+#: ../../src/wui/interactive_gamebase.cc:83
 msgid "Show / Hide"
 msgstr "Zobraz / Skry"
 
@@ -332,8 +332,8 @@ msgstr "Znovu"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/editor/editorinteractive.cc:175
-#: ../../src/wlapplication_options.cc:855 ../../src/wui/buildingwindow.cc:443
-#: ../../src/wui/interactive_player.cc:236
+#: ../../src/wlapplication_options.cc:865 ../../src/wui/buildingwindow.cc:443
+#: ../../src/wui/interactive_player.cc:237
 msgid "Help"
 msgstr "Pomoc"
 
@@ -355,7 +355,7 @@ msgstr "Nová náhodná mapa"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/editor/editorinteractive.cc:224
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:33
-#: ../../src/ui_fsmenu/main.cc:450 ../../src/wlapplication_options.cc:846
+#: ../../src/ui_fsmenu/main.cc:450 ../../src/wlapplication_options.cc:856
 msgid "Load Map"
 msgstr "Načítať mapu"
 
@@ -363,7 +363,7 @@ msgstr "Načítať mapu"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/editor/editorinteractive.cc:232
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:53
-#: ../../src/wlapplication_options.cc:849
+#: ../../src/wlapplication_options.cc:859
 msgid "Save Map"
 msgstr "Uložiť mapu"
 
@@ -383,7 +383,7 @@ msgstr "Možnosti mapy"
 #. * TRANSLATORS: An entry in the editor's main menu
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/editor/editorinteractive.cc:250
-#: ../../src/wlapplication_options.cc:852
+#: ../../src/wlapplication_options.cc:862
 msgid "Exit Editor"
 msgstr "Ukončiť editor"
 
@@ -532,13 +532,13 @@ msgstr ""
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:466
-#: ../../src/wui/interactive_gamebase.cc:268
+#: ../../src/wui/interactive_gamebase.cc:269
 msgid "Hide Building Spaces"
 msgstr "Skry stavebné miesta"
 
 #: ../../src/editor/editorinteractive.cc:466
 #: ../../src/ui_fsmenu/options.cc:287
-#: ../../src/wui/interactive_gamebase.cc:268
+#: ../../src/wui/interactive_gamebase.cc:269
 msgid "Show Building Spaces"
 msgstr "Zobraz stavebné miesta"
 
@@ -645,12 +645,12 @@ msgstr "Naozaj chcete ukončiť editor?"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:486
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
 #: ../../src/ui_fsmenu/launch_mpg.cc:320 ../../src/ui_fsmenu/main.cc:273
-#: ../../src/wlapplication.cc:1678
+#: ../../src/wlapplication.cc:1680
 msgid "Error"
 msgstr "Chyba"
 
 #: ../../src/editor/editorinteractive.cc:1143 ../../src/ui_fsmenu/main.cc:257
-#: ../../src/wlapplication.cc:1680
+#: ../../src/wlapplication.cc:1682
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -980,6 +980,7 @@ msgstr "Popis: %s"
 #. * TRANSLATORS: No add-ons enabled
 #: ../../src/editor/ui_menus/field_info_window.cc:251
 #: ../../src/ui_fsmenu/addons/packager_box.cc:294
+#: ../../src/wui/shipwindow.cc:355
 msgid "(none)"
 msgstr "(žiadne)"
 
@@ -1330,7 +1331,7 @@ msgstr "Identifikátor mapy:"
 #. * TRANSLATORS: A campaign difficulty
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:256
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:312
-#: ../../src/ui_fsmenu/campaigns.cc:53
+#: ../../src/ui_fsmenu/campaigns.cc:45
 msgid "Default"
 msgstr "Normálna"
 
@@ -1681,7 +1682,7 @@ msgstr ""
 #. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:306 ../../src/ui_basic/dropdown.cc:358
-#: ../../src/ui_basic/dropdown.cc:425 ../../src/ui_basic/dropdown.cc:433
+#: ../../src/ui_basic/dropdown.cc:429 ../../src/ui_basic/dropdown.cc:437
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:370
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:197
 msgid "%1%: %2%"
@@ -1739,8 +1740,8 @@ msgstr "Rad príkazov"
 #: ../../src/game_io/game_loader.cc:157 ../../src/map_io/map_saver.cc:146
 #: ../../src/map_io/widelands_map_loader.cc:400
 #: ../../src/wlapplication_options.cc:667
-#: ../../src/wui/interactive_player.cc:226
-#: ../../src/wui/interactive_player.cc:467
+#: ../../src/wui/interactive_player.cc:227
+#: ../../src/wui/interactive_player.cc:482
 msgid "Messages"
 msgstr "Správy"
 
@@ -2016,6 +2017,157 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
+#: ../../src/logic/detected_port_space.cc:51
+#, c-format
+msgid "northwest of %s"
+msgstr ""
+
+#: ../../src/logic/detected_port_space.cc:54
+#, c-format
+msgid "northeast of %s"
+msgstr ""
+
+#: ../../src/logic/detected_port_space.cc:57
+#, c-format
+msgid "southwest of %s"
+msgstr ""
+
+#: ../../src/logic/detected_port_space.cc:60
+#, c-format
+msgid "southeast of %s"
+msgstr ""
+
+#: ../../src/logic/detected_port_space.cc:63
+#, c-format
+msgid "north of %s"
+msgstr ""
+
+#: ../../src/logic/detected_port_space.cc:66
+#, c-format
+msgid "south of %s"
+msgstr ""
+
+#: ../../src/logic/detected_port_space.cc:69
+#, c-format
+msgid "west of %s"
+msgstr ""
+
+#: ../../src/logic/detected_port_space.cc:72
+#, c-format
+msgid "east of %s"
+msgstr ""
+
+#: ../../src/logic/detected_port_space.cc:80
+#, c-format
+msgid "Unowned port space discovered at %1$s by %2$s"
+msgstr ""
+
+#. * TRANSLATORS: Last placeholder is "northwest/southeast/... of <port name>"
+#: ../../src/logic/detected_port_space.cc:85
+#, c-format
+msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s"
+msgid_plural "Unowned port space discovered at %1$s by %2$s %3$u steps %4$s"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#: ../../src/logic/detected_port_space.cc:91
+#, c-format
+msgid "Port space of %1$s discovered at %2$s by %3$s"
+msgstr ""
+
+#. * TRANSLATORS: Last placeholder is "northwest/southeast/... of <port name>"
+#: ../../src/logic/detected_port_space.cc:97
+#, c-format
+msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s"
+msgid_plural "Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#. * TRANSLATORS: This is an abbreviated direction: Northwest.
+#: ../../src/logic/detected_port_space.cc:109
+msgctxt "direction"
+msgid "NW"
+msgstr ""
+
+#. * TRANSLATORS: This is an abbreviated direction: Northeast.
+#: ../../src/logic/detected_port_space.cc:113
+msgctxt "direction"
+msgid "NE"
+msgstr ""
+
+#. * TRANSLATORS: This is an abbreviated direction: Southwest.
+#: ../../src/logic/detected_port_space.cc:117
+msgctxt "direction"
+msgid "SW"
+msgstr ""
+
+#. * TRANSLATORS: This is an abbreviated direction: Southeast.
+#: ../../src/logic/detected_port_space.cc:121
+msgctxt "direction"
+msgid "SE"
+msgstr ""
+
+#. * TRANSLATORS: This is an abbreviated direction: North.
+#: ../../src/logic/detected_port_space.cc:125
+msgctxt "direction"
+msgid "N"
+msgstr ""
+
+#. * TRANSLATORS: This is an abbreviated direction: South.
+#: ../../src/logic/detected_port_space.cc:129
+msgctxt "direction"
+msgid "S"
+msgstr ""
+
+#. * TRANSLATORS: This is an abbreviated direction: West.
+#: ../../src/logic/detected_port_space.cc:133
+msgctxt "direction"
+msgid "W"
+msgstr ""
+
+#. * TRANSLATORS: This is an abbreviated direction: East.
+#: ../../src/logic/detected_port_space.cc:137
+msgctxt "direction"
+msgid "E"
+msgstr ""
+
+#. * TRANSLATORS: Placeholders are gametime and shipname. Keep this short.
+#: ../../src/logic/detected_port_space.cc:146
+#, c-format
+msgctxt "detected_port_space"
+msgid "Unowned / %1$s / %2$s"
+msgstr ""
+
+#. * TRANSLATORS: Placeholders are gametime, shipname, and distance direction
+#. port_name.
+#. *  Keep this short.
+#: ../../src/logic/detected_port_space.cc:151
+#, c-format
+msgctxt "detected_port_space"
+msgid "Unowned / %1$s / %2$s / %3$u %4$s %5$s"
+msgstr ""
+
+#. * TRANSLATORS: Placeholders are owner, gametime, and shipname. Keep this
+#. short.
+#: ../../src/logic/detected_port_space.cc:157
+#, c-format
+msgctxt "detected_port_space"
+msgid "%1$s / %2$s / %3$s"
+msgstr ""
+
+#. * TRANSLATORS: Placeholders are owner, gametime, shipname, and "distance
+#. direction port_name.
+#. *  Keep this short.
+#: ../../src/logic/detected_port_space.cc:163
+#, c-format
+msgctxt "detected_port_space"
+msgid "%1$s / %2$s / %3$s / %4$u %5$s %6$s"
+msgstr ""
+
 #: ../../src/logic/editor_game_base.cc:236
 #, c-format
 msgid "Creating player %d…"
@@ -2038,44 +2190,44 @@ msgid "Cleaning up for loading: Map (3/3)"
 msgstr ""
 
 #. * TRANSLATORS: Win condition for this game has not been set.
-#: ../../src/logic/game.cc:146
+#: ../../src/logic/game.cc:145
 msgid "Not set"
 msgstr "Nenastavené"
 
-#: ../../src/logic/game.cc:274 ../../src/logic/game.cc:317
-#: ../../src/logic/game.cc:434 ../../src/logic/game.cc:489
+#: ../../src/logic/game.cc:246 ../../src/logic/game.cc:289
+#: ../../src/logic/game.cc:407 ../../src/logic/game.cc:462
 msgid "Preloading map…"
 msgstr "Prednahrávanie mapy…"
 
-#: ../../src/logic/game.cc:373
+#: ../../src/logic/game.cc:345
 msgid "Initializing game…"
 msgstr "Inicializácia hry…"
 
 #. * TRANSLATORS: All players (plural)
-#: ../../src/logic/game.cc:631
+#: ../../src/logic/game.cc:604
 msgid "Creating player infrastructure…"
 msgstr ""
 
-#: ../../src/logic/game.cc:648 ../../src/logic/player.cc:257
+#: ../../src/logic/game.cc:621 ../../src/logic/player.cc:258
 msgid "Missing starting position"
 msgstr "Chýbajúca počiatočná pozícia"
 
-#: ../../src/logic/game.cc:649 ../../src/logic/player.cc:258
+#: ../../src/logic/game.cc:622 ../../src/logic/player.cc:259
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "Nepodarilo sa spustiť hru, pretože hráč %u nemá žiadnu počiatočnú pozíciu.\nTento problém môžete opraviť, ak ju pridáte ručne pomocou editora máp."
 
-#: ../../src/logic/game.cc:749
+#: ../../src/logic/game.cc:722
 msgid "Initializing…"
 msgstr "Inicializácia…"
 
-#: ../../src/logic/game.cc:1250
+#: ../../src/logic/game.cc:1246
 msgid "Trade Offer"
 msgstr ""
 
-#: ../../src/logic/game.cc:1252
+#: ../../src/logic/game.cc:1248
 msgid "This market has received a new trade offer."
 msgstr ""
 
@@ -2156,7 +2308,7 @@ msgstr "Púšť"
 msgid "No description defined"
 msgstr "Nie je zadefinovaný žiadny popis"
 
-#: ../../src/logic/map_objects/immovable.cc:505
+#: ../../src/logic/map_objects/immovable.cc:491
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:169
 #, c-format
 msgid "%i%% built"
@@ -2168,40 +2320,40 @@ msgid "%u%% dismantled"
 msgstr "rozobratých %u %%"
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
-#: ../../src/logic/map_objects/tribes/militarysite.cc:262
+#: ../../src/logic/map_objects/tribes/militarysite.cc:254
 msgctxt "building"
 msgid "Lost!"
 msgstr "Strata!"
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:263
+#: ../../src/logic/map_objects/tribes/militarysite.cc:255
 msgid "Militarysite lost!"
 msgstr "Strata vojenskej budovy!"
 
 #. * TRANSLATORS: Message title.
 #. * TRANSLATORS: If you run out of space, you can also translate this as
 #. "Success!"
-#: ../../src/logic/map_objects/tribes/militarysite.cc:305
+#: ../../src/logic/map_objects/tribes/militarysite.cc:297
 msgid "Enemy Defeated!"
 msgstr "Porážka nepriateľa"
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:305
+#: ../../src/logic/map_objects/tribes/militarysite.cc:297
 msgid "Enemy at site defeated!"
 msgstr "Nepriateľ na mieste porazený!"
 
 #. * TRANSLATORS: Militarysite is being attacked
-#: ../../src/logic/map_objects/tribes/militarysite.cc:908
+#: ../../src/logic/map_objects/tribes/militarysite.cc:757
 msgctxt "building"
 msgid "Attack!"
 msgstr "Útok!"
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:908
+#: ../../src/logic/map_objects/tribes/militarysite.cc:757
 msgid "You are under attack"
 msgstr "Útočí na vás nepriateľ"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the ware
 #. * '%s'
-#: ../../src/logic/map_objects/tribes/production_program.cc:464
+#: ../../src/logic/map_objects/tribes/production_program.cc:453
 #, c-format
 msgid "the economy needs the ware ‘%s’"
 msgstr "ekonomika potrebuje výrobok „%s“"
@@ -2209,7 +2361,7 @@ msgstr "ekonomika potrebuje výrobok „%s“"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. doesn't need the
 #. * ware '%s'
-#: ../../src/logic/map_objects/tribes/production_program.cc:471
+#: ../../src/logic/map_objects/tribes/production_program.cc:460
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
 msgstr "ekonomika nepotrebuje výrobok „%s“"
@@ -2217,14 +2369,14 @@ msgstr "ekonomika nepotrebuje výrobok „%s“"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the worker
 #. * '%s'
-#: ../../src/logic/map_objects/tribes/production_program.cc:483
+#: ../../src/logic/map_objects/tribes/production_program.cc:472
 #, c-format
 msgid "the economy needs the worker ‘%s’"
 msgstr "ekonomika potrebuje pracovníka „%s“"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker '%s'
-#: ../../src/logic/map_objects/tribes/production_program.cc:492
+#: ../../src/logic/map_objects/tribes/production_program.cc:481
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
 msgstr "ekonomika nepotrebuje pracovníka „%s“"
@@ -2245,56 +2397,56 @@ msgstr "ekonomika nepotrebuje pracovníka „%s“"
 #. Ox":
 #. * TRANSLATORS:    %1$i = "2"
 #. * TRANSLATORS:    %2$s = "Ox"
-#: ../../src/logic/map_objects/tribes/production_program.cc:541
-#: ../../src/logic/map_objects/tribes/production_program.cc:564
-#: ../../src/logic/map_objects/tribes/production_program.cc:1285
-#: ../../src/logic/map_objects/tribes/production_program.cc:1390
-#: ../../src/logic/map_objects/tribes/production_program.cc:1472
+#: ../../src/logic/map_objects/tribes/production_program.cc:530
+#: ../../src/logic/map_objects/tribes/production_program.cc:553
+#: ../../src/logic/map_objects/tribes/production_program.cc:1267
+#: ../../src/logic/map_objects/tribes/production_program.cc:1372
+#: ../../src/logic/map_objects/tribes/production_program.cc:1454
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$ix %2$s"
 
 #. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/map_objects/tribes/production_program.cc:546
+#: ../../src/logic/map_objects/tribes/production_program.cc:535
 #, c-format
 msgid "the building has the following wares: %s"
 msgstr "budova má tieto výrobky: %s"
 
 #. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/map_objects/tribes/production_program.cc:569
+#: ../../src/logic/map_objects/tribes/production_program.cc:558
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
 msgstr "budova nemá tieto výrobky: %s"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
 #. experience'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:585
+#: ../../src/logic/map_objects/tribes/production_program.cc:574
 msgid "a worker needs experience"
 msgstr "pracovník potrebuje nadobudnúť skúsenosti"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
 #. need no experience'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:591
+#: ../../src/logic/map_objects/tribes/production_program.cc:580
 msgid "the workers need no experience"
 msgstr "pracovníci nepotrebujú nadobudnúť skúsenosti"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:620
+#: ../../src/logic/map_objects/tribes/production_program.cc:609
 msgid "the fleet needs a ferry"
 msgstr ""
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the fleet needs
 #. a ship/ferry'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:620
+#: ../../src/logic/map_objects/tribes/production_program.cc:609
 msgid "the fleet needs a ship"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:627
+#: ../../src/logic/map_objects/tribes/production_program.cc:616
 msgid "the fleet needs no ferries"
 msgstr ""
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the fleet needs
 #. no ships/ferries'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:627
+#: ../../src/logic/map_objects/tribes/production_program.cc:616
 msgid "the fleet needs no ships"
 msgstr ""
 
@@ -2311,21 +2463,21 @@ msgstr ""
 #. * TRANSLATORS: on a development build if you can, and let us know if there
 #. are any issues
 #. * TRANSLATORS: we need to address for your language.
-#: ../../src/logic/map_objects/tribes/production_program.cc:776
-#: ../../src/logic/map_objects/tribes/production_program.cc:1307
+#: ../../src/logic/map_objects/tribes/production_program.cc:765
+#: ../../src/logic/map_objects/tribes/production_program.cc:1289
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr "Nezačalo sa %1$s, pretože %2$s"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware '%s'"
-#: ../../src/logic/map_objects/tribes/production_program.cc:782
+#: ../../src/logic/map_objects/tribes/production_program.cc:771
 #, c-format
 msgid "Completed %1$s because %2$s"
 msgstr "Dokončilo sa %1$s, pretože %2$s"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware '%s'"
-#: ../../src/logic/map_objects/tribes/production_program.cc:787
-#: ../../src/logic/map_objects/tribes/production_program.cc:792
+#: ../../src/logic/map_objects/tribes/production_program.cc:776
+#: ../../src/logic/map_objects/tribes/production_program.cc:781
 #, c-format
 msgid "Skipped %1$s because %2$s"
 msgstr "Nevykonalo sa %1$s, pretože %2$s"
@@ -2334,7 +2486,7 @@ msgstr "Nevykonalo sa %1$s, pretože %2$s"
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
 #. bread is missing'
-#: ../../src/logic/map_objects/tribes/production_program.cc:1294
+#: ../../src/logic/map_objects/tribes/production_program.cc:1276
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -2346,7 +2498,7 @@ msgstr[3] "chýba %s"
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1399
+#: ../../src/logic/map_objects/tribes/production_program.cc:1381
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -2358,7 +2510,7 @@ msgstr[3] "Vyrobené výrobky: %s"
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1481
+#: ../../src/logic/map_objects/tribes/production_program.cc:1463
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
@@ -2367,7 +2519,7 @@ msgstr[1] "Vycvičení: %s"
 msgstr[2] "Vycvičení: %s"
 msgstr[3] "Vycvičení: %s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1906
+#: ../../src/logic/map_objects/tribes/production_program.cc:1846
 msgid "No soldier found for this training level!"
 msgstr "Nenašiel sa žiaden vojak pre túto úroveň výcviku!"
 
@@ -2375,7 +2527,7 @@ msgstr "Nenašiel sa žiaden vojak pre túto úroveň výcviku!"
 #. description of the
 #. * training program, e.g. Completed upgrading soldier evade from level 0 to
 #. level 1
-#: ../../src/logic/map_objects/tribes/production_program.cc:1947
+#: ../../src/logic/map_objects/tribes/production_program.cc:1887
 #, c-format
 msgid "Completed %s"
 msgstr ""
@@ -2392,173 +2544,323 @@ msgstr "(zastavené)"
 msgid "%i%%"
 msgstr "%i %%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:1195
+#: ../../src/logic/map_objects/tribes/productionsite.cc:1197
 msgid "Can’t find any more resources!"
 msgstr "Nemožno nájsť ďalšie zdroje!"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:1243
-#: ../../src/logic/map_objects/tribes/productionsite.cc:1264
+#: ../../src/logic/map_objects/tribes/productionsite.cc:1245
+#: ../../src/logic/map_objects/tribes/productionsite.cc:1266
 msgctxt "building"
 msgid "No Shore"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:1244
+#: ../../src/logic/map_objects/tribes/productionsite.cc:1246
 msgid "Shipyard Without Shore"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:1245
+#: ../../src/logic/map_objects/tribes/productionsite.cc:1247
 msgid ""
 "Your shipyard has not been built close enough to a shore. It will not be "
 "able to build ships."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:1265
+#: ../../src/logic/map_objects/tribes/productionsite.cc:1267
 msgid "Ferry Yard Without Shore"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:1266
+#: ../../src/logic/map_objects/tribes/productionsite.cc:1268
 msgid ""
 "Your ferry yard has not been built close enough to a shore. It will not be "
 "able to build ferries."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:460
+#: ../../src/logic/map_objects/tribes/ship.cc:399
+msgid "Destination Gone"
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:399
+msgid "Ship Destination Vanished"
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:400
+msgid "Your ship’s destination has disappeared."
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:427
+msgid "Ship Arrived"
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:427
+msgid "Ship Reached Destination"
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:428
+msgid "Your ship has arrived at its destination."
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:637
+msgid "A warship arrived at a known port build space."
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:638
+msgid "An expedition ship arrived at a known port build space."
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:639
+#: ../../src/logic/map_objects/tribes/ship.cc:647
 msgid "Port Space"
 msgstr "Prístavné miesto"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:460
-msgid "Port Space Found"
-msgstr "Nález miesta pre prístav"
+#: ../../src/logic/map_objects/tribes/ship.cc:639
+msgid "Port Space Spotted"
+msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:461
+#: ../../src/logic/map_objects/tribes/ship.cc:645
+msgid "A warship found a new port build space."
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:646
 msgid "An expedition ship found a new port build space."
 msgstr "Expedičná loď našla nové miesto na postavenie prístavu."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:584
+#: ../../src/logic/map_objects/tribes/ship.cc:647
+msgid "Port Space Found"
+msgstr "Nález miesta pre prístav"
+
+#: ../../src/logic/map_objects/tribes/ship.cc:747
+msgid "Enemy Ship"
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:747
+msgid "Enemy Ship Spotted"
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:748
+msgid "A warship spotted an enemy ship."
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:778
+#: ../../src/logic/map_objects/tribes/ship.cc:797
+msgid "Destination Unreachable"
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:778
+#: ../../src/logic/map_objects/tribes/ship.cc:797
+msgid "Ship Destination Unreachable"
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:779
+msgid "Your ship could not find a path to its destination."
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:798
+#, c-format
+msgid "Your ship could not find a path to its destination port ‘%s’."
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:1303
+#: ../../src/logic/map_objects/tribes/ship.cc:1561
+msgid "Enemy Ship Attacking"
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:1303
+#: ../../src/logic/map_objects/tribes/ship.cc:1560
+msgid "Naval Attack"
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:1304
+#, c-format
+msgid "Your ship ‘%s’ is under attack from an enemy warship."
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:1423
+msgid "Ship Destroyed"
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:1423
+msgid "Ship Sunk"
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:1424
+msgid "An enemy ship has destroyed your warship."
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:1562
+msgid "Your coast is under attack from an enemy warship."
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:1791
 msgid "Island Circumnavigated"
 msgstr "Oboplávanie ostrova"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../src/logic/map_objects/tribes/ship.cc:584
+#: ../../src/logic/map_objects/tribes/ship.cc:1791
 msgctxt "ship"
 msgid "Waiting"
 msgstr "Čakanie"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:585
+#: ../../src/logic/map_objects/tribes/ship.cc:1792
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Expedičná loď oboplávala svoj ostrov bez akýchkoľvek udalostí."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:648
+#: ../../src/logic/map_objects/tribes/ship.cc:1856
 msgid "Coast Reached"
 msgstr "Dosiahnutie pobrežia"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:648
+#: ../../src/logic/map_objects/tribes/ship.cc:1856
 msgid "Land Ahoy!"
 msgstr "Zem na obzore!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:649
+#: ../../src/logic/map_objects/tribes/ship.cc:1857
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Expedičná loď dosiahla pobrežie a čaká na ďalšie rozkazy."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:700
+#: ../../src/logic/map_objects/tribes/ship.cc:1910
 msgid "New port construction site is gone"
 msgstr "Zmizlo stavenisko nového prístavu"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:700
+#: ../../src/logic/map_objects/tribes/ship.cc:1910
 msgid "Port Lost!"
 msgstr "Strata prístavu"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:701
+#: ../../src/logic/map_objects/tribes/ship.cc:1911
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Nepodarilo sa vyložiť výrobky a výprava sa preto zrušila."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:757
+#: ../../src/logic/map_objects/tribes/ship.cc:1966
 msgid "No Port Can Be Built"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:757
+#: ../../src/logic/map_objects/tribes/ship.cc:1966
 msgid "Port Space Lost!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:758
+#: ../../src/logic/map_objects/tribes/ship.cc:1967
 msgid ""
 "A discovered port build space is not available for building a port anymore."
 msgstr ""
 
+#. * TRANSLATORS: Warship ready
+#: ../../src/logic/map_objects/tribes/ship.cc:2214
+msgctxt "ship"
+msgid "Warship"
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:2214
+msgid "Warship Ready"
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:2215
+msgid "A warship is waiting for your commands."
+msgstr ""
+
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:904
+#: ../../src/logic/map_objects/tribes/ship.cc:2220
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Výprava"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:904
+#: ../../src/logic/map_objects/tribes/ship.cc:2220
 msgid "Expedition Ready"
 msgstr "Výprava pripravená"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:905
+#: ../../src/logic/map_objects/tribes/ship.cc:2221
 msgid "An expedition ship is waiting for your commands."
 msgstr "Expedičná loď čaká na vaše rozkazy."
 
+#: ../../src/logic/map_objects/tribes/ship.cc:2385
+msgctxt "ship_state"
+msgid "Sinking"
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:2387
+msgctxt "ship_state"
+msgid "Fighting"
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:2391
+msgctxt "ship_state"
+msgid "Refitting to Transport Ship"
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:2394
+msgctxt "ship_state"
+msgid "Refitting to Warship"
+msgstr ""
+
+#: ../../src/logic/map_objects/tribes/ship.cc:2400
+#: ../../src/wui/seafaring_statistics_menu.cc:270
+msgctxt "ship_state"
+msgid "Warship"
+msgstr ""
+
+#. * TRANSLATORS: This is a ship state. The ship is
+#. * currently sailing to a specific destination ship.
+#. * TRANSLATORS: This is a ship state. The ship is
+#. * currently sailing to a specific destination note.
+#. * TRANSLATORS: This is a ship state. The ship is currently sailing
+#. * to a specific destination port without transporting wares.
+#: ../../src/logic/map_objects/tribes/ship.cc:2406
+#: ../../src/logic/map_objects/tribes/ship.cc:2416
+#: ../../src/logic/map_objects/tribes/ship.cc:2422
+#: ../../src/logic/map_objects/tribes/ship.cc:2436
+#, c-format
+msgctxt "ship_state"
+msgid "Sailing to %s"
+msgstr ""
+
 #. * TRANSLATORS: This is a ship state. The ship is ready
 #. * to transport wares, but has nothing to do.
-#: ../../src/logic/map_objects/tribes/ship.cc:1063
-#: ../../src/wui/seafaring_statistics_menu.cc:247
+#: ../../src/logic/map_objects/tribes/ship.cc:2411
+#: ../../src/wui/seafaring_statistics_menu.cc:260
 msgctxt "ship_state"
 msgid "Empty"
 msgstr "Prázdna"
 
 #. * TRANSLATORS: This is a ship state. The ship is currently
 #. * transporting wares to a specific destination port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1068
+#: ../../src/logic/map_objects/tribes/ship.cc:2431
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
 msgstr ""
 
-#. * TRANSLATORS: This is a ship state. The ship is currently sailing
-#. * to a specific destination port without transporting wares.
-#: ../../src/logic/map_objects/tribes/ship.cc:1074
-#, c-format
-msgctxt "ship_state"
-msgid "Sailing to %s"
-msgstr ""
-
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:1080
-#: ../../src/wui/seafaring_statistics_menu.cc:251
+#: ../../src/logic/map_objects/tribes/ship.cc:2443
+#: ../../src/wui/seafaring_statistics_menu.cc:264
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr "Čaká"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:1084
-#: ../../src/wui/seafaring_statistics_menu.cc:253
+#: ../../src/logic/map_objects/tribes/ship.cc:2447
+#: ../../src/wui/seafaring_statistics_menu.cc:266
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Vykonáva prieskum"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:1088
-#: ../../src/wui/seafaring_statistics_menu.cc:255
+#: ../../src/logic/map_objects/tribes/ship.cc:2451
+#: ../../src/wui/seafaring_statistics_menu.cc:268
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr "Našla prístavné miesto"
 
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
-#. wares/workers to build a
-#. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1093
+#. wares/workers to
+#. * build a port.
+#: ../../src/logic/map_objects/tribes/ship.cc:2456
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Zakladá kolóniu"
 
-#: ../../src/logic/map_objects/tribes/soldier.cc:1522
-#: ../../src/logic/map_objects/tribes/soldier.cc:1526
+#: ../../src/logic/map_objects/tribes/soldier.cc:1533
+#: ../../src/logic/map_objects/tribes/soldier.cc:1537
 msgid "Logic error"
 msgstr "Logická chyba"
 
@@ -2568,17 +2870,17 @@ msgid "Loading %1%: %2% (%3%/%4%)"
 msgstr "Nahrávanie %1%: %2% (%3%/%4%)"
 
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:165
-#: ../../src/wui/minimap.cc:213
+#: ../../src/wui/general_statistics_menu.cc:175 ../../src/wui/minimap.cc:213
 msgid "Ships"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:173
 #: ../../src/wui/economy_options_window.cc:75
-#: ../../src/wui/general_statistics_menu.cc:157
-#: ../../src/wui/interactive_player.cc:337
+#: ../../src/wui/general_statistics_menu.cc:165
+#: ../../src/wui/interactive_player.cc:329
 #: ../../src/wui/productionsitewindow.cc:90
-#: ../../src/wui/warehousewindow.cc:292
+#: ../../src/wui/warehousewindow.cc:293
 msgid "Wares"
 msgstr "Výrobky"
 
@@ -2587,9 +2889,9 @@ msgstr "Výrobky"
 #. need plural forms here, please let us know.
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:180
 #: ../../src/wui/economy_options_window.cc:76
-#: ../../src/wui/general_statistics_menu.cc:148
+#: ../../src/wui/general_statistics_menu.cc:156
 #: ../../src/wui/productionsitewindow.cc:110
-#: ../../src/wui/warehousewindow.cc:296
+#: ../../src/wui/warehousewindow.cc:297
 msgid "Workers"
 msgstr "Pracovníci"
 
@@ -2597,8 +2899,8 @@ msgstr "Pracovníci"
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:187
 #: ../../src/map_io/map_saver.cc:219
 #: ../../src/map_io/widelands_map_loader.cc:336
-#: ../../src/wui/general_statistics_menu.cc:153
-#: ../../src/wui/interactive_player.cc:332 ../../src/wui/minimap.cc:202
+#: ../../src/wui/general_statistics_menu.cc:161
+#: ../../src/wui/interactive_player.cc:324 ../../src/wui/minimap.cc:202
 msgid "Buildings"
 msgstr "Budovy"
 
@@ -2640,50 +2942,50 @@ msgstr "chýba špecialista"
 msgid "Experts missing"
 msgstr "chýbajú špecialisti"
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:557
+#: ../../src/logic/map_objects/tribes/warehouse.cc:581
 msgid "A new port was added to your economy."
 msgstr "Vaša ekonomika bola rozšírená o nový prístav."
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:560
+#: ../../src/logic/map_objects/tribes/warehouse.cc:584
 msgid "A new headquarters was added to your economy."
 msgstr "Vaša ekonomika bola rozšírená o nové ústredie."
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:563
+#: ../../src/logic/map_objects/tribes/warehouse.cc:587
 msgid "A new warehouse was added to your economy."
 msgstr "Vaša ekonomika bola rozšírená o nový sklad."
 
 #. * TRANSLATORS: Message header, short for "Waterway Destroyed" (not much
 #. space
 #. * available)
-#: ../../src/logic/map_objects/tribes/warehouse.cc:649
+#: ../../src/logic/map_objects/tribes/warehouse.cc:675
 msgid "Waterway"
 msgstr "Vodná cesta"
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:650
+#: ../../src/logic/map_objects/tribes/warehouse.cc:676
 msgid "Waterway destroyed"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:651
+#: ../../src/logic/map_objects/tribes/warehouse.cc:677
 msgid "A waterway had to be destroyed to make room for your new port dock."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1129
+#: ../../src/logic/map_objects/tribes/worker.cc:1114
 msgid "A geologist found resources."
 msgstr "Geológ objavil zdroje."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2098
+#: ../../src/logic/map_objects/tribes/worker.cc:2084
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
 msgstr ""
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
-#: ../../src/logic/map_objects/tribes/worker.cc:2103
+#: ../../src/logic/map_objects/tribes/worker.cc:2089
 #: ../../src/wui/productionsitewindow.cc:107
 #: ../../src/wui/productionsitewindow.cc:124
 msgid "Worker"
 msgstr "Pracovník"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2104
+#: ../../src/logic/map_objects/tribes/worker.cc:2090
 msgid "Worker got lost!"
 msgstr "Pracovník sa stratil!"
 
@@ -2723,104 +3025,104 @@ msgstr ""
 msgid "This objective has no description."
 msgstr "Táto úloha nemá k dispozícii žiaden popis."
 
-#: ../../src/logic/player.cc:1997
+#: ../../src/logic/player.cc:2020
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
 msgstr ""
 
-#: ../../src/logic/player.cc:2014
+#: ../../src/logic/player.cc:2037
 #, c-format
 msgctxt "warehouse"
 msgid "Port %d"
 msgstr ""
 
-#: ../../src/logic/player.cc:2014
+#: ../../src/logic/player.cc:2037
 #, c-format
 msgctxt "warehouse"
 msgid "Warehouse %d"
 msgstr "Sklad %d"
 
-#: ../../src/logic/playercommand.cc:2204
+#: ../../src/logic/playercommand.cc:2357
 #: ../../src/wlapplication_options.cc:663
 #: ../../src/wui/game_diplomacy_menu.cc:36
-#: ../../src/wui/interactive_gamebase.cc:247
+#: ../../src/wui/interactive_gamebase.cc:248
 msgid "Diplomacy"
 msgstr "Diplomacia"
 
-#: ../../src/logic/playercommand.cc:2218
+#: ../../src/logic/playercommand.cc:2371
 #, c-format
 msgid "%s has resigned and is now a spectator."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2218
+#: ../../src/logic/playercommand.cc:2371
 msgid "Player Resigned"
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2230
+#: ../../src/logic/playercommand.cc:2383
 msgid "Player Leaves Team"
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2231
+#: ../../src/logic/playercommand.cc:2384
 #, c-format
 msgid "%1$s has left team %2$u and is now teamless."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2239
+#: ../../src/logic/playercommand.cc:2392
 msgid "Team Joining Request"
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2240
+#: ../../src/logic/playercommand.cc:2393
 msgid "Team Joining Invitation"
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2242
+#: ../../src/logic/playercommand.cc:2395
 #: ../../src/wui/game_diplomacy_menu.cc:269
 #, c-format
 msgid "%1$s has requested to join the team of %2$s."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2243
+#: ../../src/logic/playercommand.cc:2396
 #: ../../src/wui/game_diplomacy_menu.cc:276
 #, c-format
 msgid "%1$s has invited %2$s to join their team."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2282
+#: ../../src/logic/playercommand.cc:2435
 #, c-format
 msgid "%1$s has accepted %2$s into their team."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2284
+#: ../../src/logic/playercommand.cc:2437
 #, c-format
 msgid "%1$s has accepted the invitation to join the team of %2$s."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2289
+#: ../../src/logic/playercommand.cc:2442
 #, c-format
 msgid "%1$s has retracted the request to join the team of %2$s."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2291
+#: ../../src/logic/playercommand.cc:2444
 #, c-format
 msgid "%1$s has denied %2$s membership in their team."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2294
+#: ../../src/logic/playercommand.cc:2447
 #, c-format
 msgid "%1$s has retracted the invitation to %2$s to join their team."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2296
+#: ../../src/logic/playercommand.cc:2449
 #, c-format
 msgid "%1$s has rejected the invitation to join the team of %2$s."
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2300
+#: ../../src/logic/playercommand.cc:2453
 msgid "Team Change Accepted"
 msgstr ""
 
-#: ../../src/logic/playercommand.cc:2300
+#: ../../src/logic/playercommand.cc:2453
 msgid "Team Change Rejected"
 msgstr ""
 
@@ -2950,7 +3252,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_loader.cc:418
 #: ../../src/wlapplication_options.cc:658
 #: ../../src/wui/game_objectives_menu.cc:30
-#: ../../src/wui/interactive_player.cc:216
+#: ../../src/wui/interactive_player.cc:217
 msgid "Objectives"
 msgstr "Úlohy"
 
@@ -2963,7 +3265,7 @@ msgstr ""
 msgid "Minimap"
 msgstr "Minimapa"
 
-#: ../../src/map_io/map_scripting_packet.cc:82
+#: ../../src/map_io/map_scripting_packet.cc:80
 msgid ""
 "The engine received a SIGABRT signal which was most likely triggered by a "
 "corrupted savegame. No solution for this bug has been implemented yet. We "
@@ -3012,7 +3314,7 @@ msgid "Postloading map objects"
 msgstr ""
 
 #: ../../src/network/gameclient.cc:162 ../../src/network/gamehost.cc:561
-#: ../../src/ui_fsmenu/launch_spg.cc:174 ../../src/wlapplication.cc:783
+#: ../../src/ui_fsmenu/launch_spg.cc:174 ../../src/wlapplication.cc:785
 msgid "Preparing game…"
 msgstr "Príprava hry…"
 
@@ -3610,7 +3912,7 @@ msgstr ""
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1372
+#: ../../src/scripting/lua_game.cc:1364
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -3688,20 +3990,20 @@ msgid "Select Item"
 msgstr ""
 
 #. * TRANSLATORS: Selection in Dropdown menus.
-#: ../../src/ui_basic/dropdown.cc:418
+#: ../../src/ui_basic/dropdown.cc:422
 msgctxt "dropdown"
 msgid "Not Selected"
 msgstr ""
 
-#: ../../src/ui_basic/dropdown.h:470
+#: ../../src/ui_basic/dropdown.h:479
 msgid "No matches"
 msgstr ""
 
-#: ../../src/ui_basic/panel.cc:307
+#: ../../src/ui_basic/panel.cc:320
 msgid "Please wait…"
 msgstr "Prosím počkajte…"
 
-#: ../../src/ui_basic/panel.cc:438
+#: ../../src/ui_basic/panel.cc:450
 msgid "Game ending – please wait…"
 msgstr "Hra sa ukončuje – prosím počkajte…"
 
@@ -5685,7 +5987,7 @@ msgstr ""
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/ui_fsmenu/keyboard_options.cc:297
-#: ../../src/wui/interactive_player.cc:342
+#: ../../src/wui/interactive_player.cc:334
 msgid "General"
 msgstr "Všeobecné"
 
@@ -5736,93 +6038,112 @@ msgid "Forbid diplomacy"
 msgstr "Zakázaná diplomacia"
 
 #: ../../src/ui_fsmenu/launch_game.cc:141
+msgid "Enable naval warfare (experimental feature)"
+msgstr ""
+
+#: ../../src/ui_fsmenu/launch_game.cc:149
 msgid "Custom starting positions"
 msgstr "Nastavenie začiatočných pozícií"
 
-#: ../../src/ui_fsmenu/launch_game.cc:149
+#: ../../src/ui_fsmenu/launch_game.cc:157
 msgid "Write Replay"
 msgstr "Zápis záznamu"
 
-#: ../../src/ui_fsmenu/launch_game.cc:159
+#: ../../src/ui_fsmenu/launch_game.cc:167
 msgid "Change map…"
 msgstr "Zmeniť mapu…"
 
-#: ../../src/ui_fsmenu/launch_game.cc:169
+#: ../../src/ui_fsmenu/launch_game.cc:177
 msgid "Change saved game…"
 msgstr "Zmeniť uloženú hru…"
 
-#: ../../src/ui_fsmenu/launch_game.cc:196
+#: ../../src/ui_fsmenu/launch_game.cc:204
 msgid "Start game"
 msgstr "Začať hru"
 
-#: ../../src/ui_fsmenu/launch_game.cc:281
+#: ../../src/ui_fsmenu/launch_game.cc:289
 msgid "Show fewer options"
 msgstr "Ukázať menej nastavení"
 
-#: ../../src/ui_fsmenu/launch_game.cc:281
+#: ../../src/ui_fsmenu/launch_game.cc:289
 msgid "Show more options"
 msgstr "Ukázať viac nastavení"
 
-#: ../../src/ui_fsmenu/launch_game.cc:296
+#: ../../src/ui_fsmenu/launch_game.cc:304
 msgid "The relations between players are set by the scenario"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:298
+#: ../../src/ui_fsmenu/launch_game.cc:306
 msgid "The relations between players are set by the saved game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:300
+#: ../../src/ui_fsmenu/launch_game.cc:308
 msgid "The selected win condition does not allow peaceful matches"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:302
+#: ../../src/ui_fsmenu/launch_game.cc:310
 msgid "Forbid fighting between players"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:332
+#: ../../src/ui_fsmenu/launch_game.cc:340
 msgid "All selected starting conditions ignore the map’s starting positions"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:338
+#: ../../src/ui_fsmenu/launch_game.cc:346
 msgid "The starting positions are set by the scenario"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:340
+#: ../../src/ui_fsmenu/launch_game.cc:348
 msgid "The starting positions are set by the saved game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:343
+#: ../../src/ui_fsmenu/launch_game.cc:351
 msgid ""
 "Allow the players to choose their own starting positions at the beginning of"
 " the game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:362
+#: ../../src/ui_fsmenu/launch_game.cc:370
 msgid "Player vision is set by the scenario"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:364
+#: ../../src/ui_fsmenu/launch_game.cc:372
 msgid "Player vision is set by the saved game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:366
+#: ../../src/ui_fsmenu/launch_game.cc:374
 msgid "Give all players permanent vision of the entire map"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:385
+#: ../../src/ui_fsmenu/launch_game.cc:395
+msgid "Naval warfare is set by the scenario"
+msgstr ""
+
+#: ../../src/ui_fsmenu/launch_game.cc:397
+msgid "Naval warfare is set by the saved game"
+msgstr ""
+
+#: ../../src/ui_fsmenu/launch_game.cc:400
+msgid ""
+"Enable coastal invasions and ship-to-ship battles. This feature is "
+"experimental and may undergo substantial redesign in future versions of "
+"Widelands."
+msgstr ""
+
+#: ../../src/ui_fsmenu/launch_game.cc:420
 msgid "Player relations are set by the scenario"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:387
+#: ../../src/ui_fsmenu/launch_game.cc:422
 msgid "Player relations are set by the saved game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:389
+#: ../../src/ui_fsmenu/launch_game.cc:424
 msgid "Disallow players to change their alliances during the game"
 msgstr ""
 
 #. * TRANSLATORS: This is a map tag
-#: ../../src/ui_fsmenu/launch_game.cc:397
+#: ../../src/ui_fsmenu/launch_game.cc:432
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:506
 #: ../../src/ui_fsmenu/scenariodetails.cc:47
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:283
@@ -5830,21 +6151,21 @@ msgstr ""
 msgid "Scenario"
 msgstr "Scenár"
 
-#: ../../src/ui_fsmenu/launch_game.cc:398
+#: ../../src/ui_fsmenu/launch_game.cc:433
 msgid "Win condition is set through the scenario"
 msgstr "Podmienka výhry sa nastaví počas scenára"
 
-#: ../../src/ui_fsmenu/launch_game.cc:404
+#: ../../src/ui_fsmenu/launch_game.cc:439
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:510
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:287
 msgid "Saved Game"
 msgstr "Uložená hra"
 
-#: ../../src/ui_fsmenu/launch_game.cc:406
+#: ../../src/ui_fsmenu/launch_game.cc:441
 msgid "The game is a saved game – the win condition was set before."
 msgstr "Toto je uložená hra – podmienka výhry bola určená skôr."
 
-#: ../../src/ui_fsmenu/launch_game.cc:479
+#: ../../src/ui_fsmenu/launch_game.cc:515
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
@@ -6013,9 +6334,9 @@ msgstr "Hrať jeden zo začiatočníckych tutoriálov"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/ui_fsmenu/main.cc:381 ../../src/wlapplication_options.cc:253
-#: ../../src/wlapplication_options.cc:867
+#: ../../src/wlapplication_options.cc:877
 #: ../../src/wui/game_main_menu_save_game.cc:48
-#: ../../src/wui/interactive_gamebase.cc:180
+#: ../../src/wui/interactive_gamebase.cc:181
 msgid "Load Game"
 msgstr "Načítať hru"
 
@@ -6685,29 +7006,29 @@ msgid "Keep history of sent chat messages in a file"
 msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:289
-#: ../../src/wui/interactive_gamebase.cc:275
+#: ../../src/wui/interactive_gamebase.cc:276
 msgid "Show Census"
 msgstr "Zobraz názvy budov"
 
 #: ../../src/ui_fsmenu/options.cc:291
-#: ../../src/wui/interactive_gamebase.cc:284
+#: ../../src/wui/interactive_gamebase.cc:285
 msgid "Show Status"
 msgstr "Zobraz stav"
 
 #: ../../src/ui_fsmenu/options.cc:296
-#: ../../src/wui/interactive_gamebase.cc:293
+#: ../../src/wui/interactive_gamebase.cc:294
 msgid "Show Soldier Levels"
 msgstr "Zobraz úrovne vojakov"
 
 #: ../../src/ui_fsmenu/options.cc:298
-#: ../../src/wui/interactive_gamebase.cc:302
+#: ../../src/wui/interactive_gamebase.cc:303
 msgid "Show Buildings"
 msgstr "Zobraz budovy"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/ui_fsmenu/options.cc:303 ../../src/wui/interactive_player.cc:387
+#: ../../src/ui_fsmenu/options.cc:303 ../../src/wui/interactive_player.cc:379
 msgid "Show Workarea Overlaps"
 msgstr "Zobraz prekrytia pracovných oblastí"
 
@@ -7038,60 +7359,60 @@ msgstr ""
 msgid "Unmark All"
 msgstr ""
 
-#: ../../src/wlapplication.cc:833
+#: ../../src/wlapplication.cc:835
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr "Hre Widelands sa nepodarilo nájsť súbor „%s“."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:834 ../../src/wlapplication.cc:839
+#: ../../src/wlapplication.cc:836 ../../src/wlapplication.cc:841
 #: ../../src/wui/savegameloader.cc:119
 msgid "Error message:"
 msgstr "Chybové hlásenie:"
 
-#: ../../src/wlapplication.cc:835
+#: ../../src/wlapplication.cc:837
 msgid "File system error"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1312
+#: ../../src/wlapplication.cc:1314
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1317
+#: ../../src/wlapplication.cc:1319
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1472
+#: ../../src/wlapplication.cc:1474
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1607
+#: ../../src/wlapplication.cc:1609
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1625
+#: ../../src/wlapplication.cc:1627
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1656
+#: ../../src/wlapplication.cc:1658
 msgid "Incompatible"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1693
+#: ../../src/wlapplication.cc:1695
 msgid "Game ended unexpectedly"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1693
+#: ../../src/wlapplication.cc:1695
 msgid "Unexpected error during the game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1696
+#: ../../src/wlapplication.cc:1698
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -7105,7 +7426,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1705
+#: ../../src/wlapplication.cc:1707
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -7115,11 +7436,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1739
+#: ../../src/wlapplication.cc:1741
 msgid "Emergency save failed"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1740
+#: ../../src/wlapplication.cc:1742
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -7512,7 +7833,7 @@ msgstr ""
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wlapplication_options.cc:596
 #: ../../src/wui/game_options_sound_menu.cc:34
-#: ../../src/wui/interactive_gamebase.cc:146
+#: ../../src/wui/interactive_gamebase.cc:147
 msgid "Sound Options"
 msgstr "Možnosti zvuku"
 
@@ -7565,7 +7886,6 @@ msgid "Soldier Statistics"
 msgstr "Štatistika vojakov"
 
 #: ../../src/wlapplication_options.cc:654
-#: ../../src/wui/seafaring_statistics_menu.cc:49
 msgid "Seafaring Statistics"
 msgstr "Námorná štatistika"
 
@@ -7606,7 +7926,7 @@ msgid "Scroll to Starting Field"
 msgstr ""
 
 #: ../../src/wlapplication_options.cc:714 ../../src/wui/game_chat_menu.cc:68
-#: ../../src/wui/interactive_gamebase.cc:409
+#: ../../src/wui/interactive_gamebase.cc:410
 msgid "Chat"
 msgstr "Chat"
 
@@ -7683,149 +8003,157 @@ msgid "Show Expeditions with Port Spaces"
 msgstr ""
 
 #: ../../src/wlapplication_options.cc:809
+msgid "Show Warships"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:814
+msgid "Show Ships Being Refitted"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:819
 msgid "Toggle Quick Navigation"
 msgstr "Prepnúť rýchlu navigáciu"
 
-#: ../../src/wlapplication_options.cc:816
+#: ../../src/wlapplication_options.cc:826
 #, c-format
 msgid "Set Landmark #%d"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:820
+#: ../../src/wlapplication_options.cc:830
 #, c-format
 msgid "Go To Landmark #%d"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/wlapplication_options.cc:870
+#: ../../src/wlapplication_options.cc:880
 #: ../../src/wui/game_main_menu_save_game.cc:50
-#: ../../src/wui/interactive_gamebase.cc:156
+#: ../../src/wui/interactive_gamebase.cc:157
 msgid "Save Game"
 msgstr "Uložiť hru"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/wlapplication_options.cc:873
+#: ../../src/wlapplication_options.cc:883
 #: ../../src/wui/game_client_disconnected.cc:112
-#: ../../src/wui/game_summary.cc:108 ../../src/wui/interactive_gamebase.cc:193
+#: ../../src/wui/game_summary.cc:108 ../../src/wui/interactive_gamebase.cc:194
 msgid "Exit Game"
 msgstr "Ukončiť hru"
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../src/wlapplication_options.cc:891
+#: ../../src/wlapplication_options.cc:901
 msgctxt "hotkey"
 msgid "Arrow keys"
 msgstr "Šípky"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/wlapplication_options.cc:893
+#: ../../src/wlapplication_options.cc:903
 msgid "Move the map"
 msgstr ""
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../src/wlapplication_options.cc:895
+#: ../../src/wlapplication_options.cc:905
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
 msgstr "Ctrl + šípky"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/wlapplication_options.cc:897
+#: ../../src/wlapplication_options.cc:907
 msgid "Move the map fast"
 msgstr ""
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../src/wlapplication_options.cc:899
+#: ../../src/wlapplication_options.cc:909
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
 msgstr "Shift + šípky"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/wlapplication_options.cc:901
+#: ../../src/wlapplication_options.cc:911
 msgid "Move the map slowly"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/wlapplication_options.cc:913
+#: ../../src/wlapplication_options.cc:923
 msgid "Remember current location"
 msgstr ""
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/wlapplication_options.cc:916
+#: ../../src/wlapplication_options.cc:926
 msgid "Go to previously remembered location"
 msgstr ""
 
 #. * TRANSLATORS: Separator for a list of hotkeys
-#: ../../src/wlapplication_options.cc:965
+#: ../../src/wlapplication_options.cc:975
 #, c-format
 msgctxt "hotkey"
 msgid "%1$s / %2$s"
 msgstr "%1$s / %2$s"
 
-#: ../../src/wlapplication_options.cc:983
-#: ../../src/wlapplication_options.cc:1024
+#: ../../src/wlapplication_options.cc:993
+#: ../../src/wlapplication_options.cc:1034
 msgid "Keyboard Shortcuts"
 msgstr "Klávesové skratky"
 
 #. * TRANSLATORS: Section heading in "Controls" help
-#: ../../src/wlapplication_options.cc:994
+#: ../../src/wlapplication_options.cc:1004
 msgid "Message Window"
 msgstr ""
 
 #. * TRANSLATORS: Section heading in "Controls" help
-#: ../../src/wlapplication_options.cc:999
+#: ../../src/wlapplication_options.cc:1009
 msgid "Ship Statistics"
 msgstr "Štatistika lodí"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/wlapplication_options.cc:1038
+#: ../../src/wlapplication_options.cc:1048
 msgid "Change tool size"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1039
+#: ../../src/wlapplication_options.cc:1049
 msgid "Change tool gap"
 msgstr ""
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../src/wlapplication_options.cc:1044
+#: ../../src/wlapplication_options.cc:1054
 msgctxt "hotkey"
 msgid "Click"
 msgstr "Klik"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/wlapplication_options.cc:1046
+#: ../../src/wlapplication_options.cc:1056
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
 msgstr ""
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../src/wlapplication_options.cc:1050
+#: ../../src/wlapplication_options.cc:1060
 msgctxt "hotkey"
 msgid "Shift + Click"
 msgstr "Shift + klik"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/wlapplication_options.cc:1052
+#: ../../src/wlapplication_options.cc:1062
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
 msgstr ""
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../src/wlapplication_options.cc:1055
+#: ../../src/wlapplication_options.cc:1065
 msgctxt "hotkey"
 msgid "Ctrl + Click"
 msgstr "Ctrl + klik"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/wlapplication_options.cc:1057
+#: ../../src/wlapplication_options.cc:1067
 msgid "Set map elements to the value selected by ‘Set Value’"
 msgstr ""
 
 #. * TRANSLATORS: prefix for message window shortcuts in keyboard options
-#: ../../src/wlapplication_options.cc:1161
+#: ../../src/wlapplication_options.cc:1171
 #, c-format
 msgctxt "hotkey"
 msgid "Messages: %s"
@@ -7833,235 +8161,235 @@ msgstr ""
 
 #. * TRANSLATORS: prefix for seafaring statistics window shortcuts in keyboard
 #. options
-#: ../../src/wlapplication_options.cc:1166
+#: ../../src/wlapplication_options.cc:1176
 #, c-format
 msgctxt "hotkey"
 msgid "Seafaring: %s"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1359
+#: ../../src/wlapplication_options.cc:1369
 msgctxt "hotkey"
 msgid "Shift"
 msgstr "Shift"
 
-#: ../../src/wlapplication_options.cc:1362
+#: ../../src/wlapplication_options.cc:1372
 msgctxt "hotkey"
 msgid "Alt"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1366
+#: ../../src/wlapplication_options.cc:1376
 msgctxt "hotkey"
 msgid "Cmd"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1368
+#: ../../src/wlapplication_options.cc:1378
 msgctxt "hotkey"
 msgid "GUI"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1372
+#: ../../src/wlapplication_options.cc:1382
 msgctxt "hotkey"
 msgid "Ctrl"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1381
+#: ../../src/wlapplication_options.cc:1391
 #, c-format
 msgid "%1$s+%2$s"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1394
+#: ../../src/wlapplication_options.cc:1404
 msgctxt "hotkey"
 msgid "Space"
 msgstr "Medzerník"
 
-#: ../../src/wlapplication_options.cc:1396
+#: ../../src/wlapplication_options.cc:1406
 msgctxt "hotkey"
 msgid "Enter"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1398
+#: ../../src/wlapplication_options.cc:1408
 msgctxt "hotkey"
 msgid "Escape"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1400
+#: ../../src/wlapplication_options.cc:1410
 msgctxt "hotkey"
 msgid "Tab"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1402
+#: ../../src/wlapplication_options.cc:1412
 msgctxt "hotkey"
 msgid "Menu"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1404
+#: ../../src/wlapplication_options.cc:1414
 msgctxt "hotkey"
 msgid "Pause"
 msgstr "Pause"
 
-#: ../../src/wlapplication_options.cc:1406
+#: ../../src/wlapplication_options.cc:1416
 msgctxt "hotkey"
 msgid "Page Up"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1408
+#: ../../src/wlapplication_options.cc:1418
 msgctxt "hotkey"
 msgid "Page Down"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1410
+#: ../../src/wlapplication_options.cc:1420
 msgctxt "hotkey"
 msgid "Home"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1412
+#: ../../src/wlapplication_options.cc:1422
 msgctxt "hotkey"
 msgid "End"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1414
+#: ../../src/wlapplication_options.cc:1424
 msgctxt "hotkey"
 msgid "Left Arrow Key"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1416
+#: ../../src/wlapplication_options.cc:1426
 msgctxt "hotkey"
 msgid "Right Arrow Key"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1418
+#: ../../src/wlapplication_options.cc:1428
 msgctxt "hotkey"
 msgid "Up Arrow Key"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1420
+#: ../../src/wlapplication_options.cc:1430
 msgctxt "hotkey"
 msgid "Down Arrow Key"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1422
+#: ../../src/wlapplication_options.cc:1432
 msgctxt "hotkey"
 msgid "Insert"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1424
+#: ../../src/wlapplication_options.cc:1434
 msgctxt "hotkey"
 msgid "Delete"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1426
+#: ../../src/wlapplication_options.cc:1436
 msgctxt "hotkey"
 msgid "Backspace"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1428
+#: ../../src/wlapplication_options.cc:1438
 msgctxt "hotkey"
 msgid "Caps Lock"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1430
+#: ../../src/wlapplication_options.cc:1440
 msgctxt "hotkey"
 msgid "Numpad Lock"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1432
+#: ../../src/wlapplication_options.cc:1442
 msgctxt "hotkey"
 msgid "Scroll Lock"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1434
+#: ../../src/wlapplication_options.cc:1444
 msgctxt "hotkey"
 msgid "Keypad 1"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1436
+#: ../../src/wlapplication_options.cc:1446
 msgctxt "hotkey"
 msgid "Keypad 2"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1438
+#: ../../src/wlapplication_options.cc:1448
 msgctxt "hotkey"
 msgid "Keypad 3"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1440
+#: ../../src/wlapplication_options.cc:1450
 msgctxt "hotkey"
 msgid "Keypad 4"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1442
+#: ../../src/wlapplication_options.cc:1452
 msgctxt "hotkey"
 msgid "Keypad 5"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1444
+#: ../../src/wlapplication_options.cc:1454
 msgctxt "hotkey"
 msgid "Keypad 6"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1446
+#: ../../src/wlapplication_options.cc:1456
 msgctxt "hotkey"
 msgid "Keypad 7"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1448
+#: ../../src/wlapplication_options.cc:1458
 msgctxt "hotkey"
 msgid "Keypad 8"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1450
+#: ../../src/wlapplication_options.cc:1460
 msgctxt "hotkey"
 msgid "Keypad 9"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1452
+#: ../../src/wlapplication_options.cc:1462
 msgctxt "hotkey"
 msgid "Keypad 0"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1454
+#: ../../src/wlapplication_options.cc:1464
 msgctxt "hotkey"
 msgid "Keypad ."
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1456
+#: ../../src/wlapplication_options.cc:1466
 msgctxt "hotkey"
 msgid "Keypad +"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1458
+#: ../../src/wlapplication_options.cc:1468
 msgctxt "hotkey"
 msgid "Keypad -"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1460
+#: ../../src/wlapplication_options.cc:1470
 msgctxt "hotkey"
 msgid "Keypad *"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1462
+#: ../../src/wlapplication_options.cc:1472
 msgctxt "hotkey"
 msgid "Keypad /"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1464
+#: ../../src/wlapplication_options.cc:1474
 msgctxt "hotkey"
 msgid "Keypad Enter"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1473
+#: ../../src/wlapplication_options.cc:1483
 msgid "(disabled)"
 msgstr ""
 
 #. * TRANSLATORS: The first placeholder is the stock amount of a ware/worker,
 #. and the second is an
 #. * icon indicating a trend. Very little space is available.
-#: ../../src/wlapplication_options.cc:1476 ../../src/wui/waresdisplay.cc:548
+#: ../../src/wlapplication_options.cc:1486 ../../src/wui/waresdisplay.cc:548
 #, c-format
 msgid "%1$s%2$s"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1501
+#: ../../src/wlapplication_options.cc:1511
 #, c-format
 msgid "Fastplace #%i"
 msgstr "Rýchle umiestnenie #%i"
@@ -8138,14 +8466,25 @@ msgstr ""
 msgid "Resign?"
 msgstr ""
 
-#: ../../src/wui/attack_window.cc:46
+#: ../../src/wui/attack_window.cc:71
 msgid "Attack"
 msgstr "Útok"
 
+#. * TRANSLATORS: Number of ships that should attack. Used in the attack
+#. window.
+#: ../../src/wui/attack_window.cc:283
+#, c-format
+msgid "%u ship"
+msgid_plural "%u ships"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
 #. * TRANSLATORS: Number of soldiers that should attack. Used in the attack
 #. window.
-#: ../../src/wui/attack_window.cc:171
-#: ../../src/wui/constructionsitewindow.cc:538
+#: ../../src/wui/attack_window.cc:285
+#: ../../src/wui/constructionsitewindow.cc:567
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
@@ -8154,76 +8493,115 @@ msgstr[1] "%u vojaci"
 msgstr[2] "%u vojakov"
 msgstr[3] "%u vojakov"
 
-#: ../../src/wui/attack_window.cc:249
+#: ../../src/wui/attack_window.cc:368
+msgid "Number of ships"
+msgstr ""
+
+#: ../../src/wui/attack_window.cc:368
 msgid "Number of soldiers"
 msgstr "Počet vojakov:"
 
-#: ../../src/wui/attack_window.cc:255
+#: ../../src/wui/attack_window.cc:375
+msgid "Send less ships. Hold down Ctrl to send no ships"
+msgstr ""
+
+#: ../../src/wui/attack_window.cc:376
 msgid "Send less soldiers. Hold down Ctrl to send no soldiers"
 msgstr "Poslať menej vojakov. Stlačte Ctrl na odobratie všetkých vojakov."
 
-#: ../../src/wui/attack_window.cc:260
+#: ../../src/wui/attack_window.cc:382
+msgid "Send more ships. Hold down Ctrl to send as many ships as possible"
+msgstr ""
+
+#: ../../src/wui/attack_window.cc:383
 msgid ""
 "Send more soldiers. Hold down Ctrl to send as many soldiers as possible"
 msgstr "Poslať viac vojakov. Stlačte Ctrl na poslanie všetkých dostupných vojakov."
 
-#: ../../src/wui/attack_window.cc:264
+#: ../../src/wui/attack_window.cc:388
 msgid "Start attack"
 msgstr "Zaútočiť"
 
-#: ../../src/wui/attack_window.cc:283
+#: ../../src/wui/attack_window.cc:409
 msgid "Attackers:"
 msgstr "Útočníci:"
 
-#: ../../src/wui/attack_window.cc:289
+#: ../../src/wui/attack_window.cc:416
+msgid "Click on a ship to remove her from the list of attackers"
+msgstr ""
+
+#: ../../src/wui/attack_window.cc:417
 msgid "Click on a soldier to remove him from the list of attackers"
 msgstr ""
 
-#: ../../src/wui/attack_window.cc:291
+#: ../../src/wui/attack_window.cc:419
+msgid "Hold down Ctrl to remove all ships from the list"
+msgstr ""
+
+#: ../../src/wui/attack_window.cc:420
 msgid "Hold down Ctrl to remove all soldiers from the list"
 msgstr ""
 
-#: ../../src/wui/attack_window.cc:292
+#: ../../src/wui/attack_window.cc:424
+msgid "Hold down Shift to remove all ships up to the one you’re pointing at"
+msgstr ""
+
+#: ../../src/wui/attack_window.cc:425
 msgid ""
 "Hold down Shift to remove all soldiers up to the one you’re pointing at"
 msgstr ""
 
-#: ../../src/wui/attack_window.cc:299
+#: ../../src/wui/attack_window.cc:432
 msgid "Not attacking:"
 msgstr "Neútočiaci:"
 
-#: ../../src/wui/attack_window.cc:304
+#: ../../src/wui/attack_window.cc:438
+msgid "Click on a ship to add her to the list of attackers"
+msgstr ""
+
+#: ../../src/wui/attack_window.cc:439
 msgid "Click on a soldier to add him to the list of attackers"
 msgstr ""
 
-#: ../../src/wui/attack_window.cc:306
+#: ../../src/wui/attack_window.cc:441
+msgid "Hold down Ctrl to add all ships to the list"
+msgstr ""
+
+#: ../../src/wui/attack_window.cc:442
 msgid "Hold down Ctrl to add all soldiers to the list"
 msgstr ""
 
-#: ../../src/wui/attack_window.cc:307
+#: ../../src/wui/attack_window.cc:445
+msgid "Hold down Shift to add all ships up to the one you’re pointing at"
+msgstr ""
+
+#: ../../src/wui/attack_window.cc:446
 msgid "Hold down Shift to add all soldiers up to the one you’re pointing at"
 msgstr ""
 
-#: ../../src/wui/attack_window.cc:322
+#: ../../src/wui/attack_window.cc:463
 msgid "Destroy target"
 msgstr "Zničiť cieľ"
 
-#: ../../src/wui/attack_window.cc:323
+#: ../../src/wui/attack_window.cc:464
 msgid "Destroy the target building instead of conquering it"
 msgstr ""
 
-#: ../../src/wui/attack_window.cc:334 ../../src/wui/buildingwindow.cc:415
-#: ../../src/wui/shipwindow.cc:153
+#: ../../src/wui/attack_window.cc:475 ../../src/wui/buildingwindow.cc:415
+#: ../../src/wui/shipwindow.cc:191
 msgid "Show Debug Window"
 msgstr "Zobraziť okno ladenia"
 
-#: ../../src/wui/attack_window.cc:338 ../../src/wui/buildingwindow.cc:431
+#: ../../src/wui/attack_window.cc:479 ../../src/wui/buildingwindow.cc:431
 msgid "Center view on this"
 msgstr "Vycentrovať sem pohľad"
 
-#. * TRANSLATORS: Health, Attack, Defense, Evade
-#: ../../src/wui/attack_window.cc:444 ../../src/wui/soldierlist.cc:433
-#: ../../src/wui/soldierlist.cc:496
+#: ../../src/wui/attack_window.cc:622
+#, c-format
+msgid "%1$s  HP: %2$u/%3$u  AT: +%4$u%%"
+msgstr ""
+
+#: ../../src/wui/attack_window.cc:627 ../../src/wui/soldierlist.cc:556
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
 msgstr "ZD: %1$u/%2$u  ÚT: %3$u/%4$u  OB: %5$u/%6$u  UH: %7$u/%8$u"
@@ -8342,7 +8720,7 @@ msgstr "Vyrábať nepretržite bez ohľadu na potreby ekonomiky"
 msgid "Enhance to %s"
 msgstr "Vylepšiť na %s"
 
-#: ../../src/wui/buildingwindow.cc:326 ../../src/wui/fieldaction.cc:106
+#: ../../src/wui/buildingwindow.cc:326 ../../src/wui/fieldaction.cc:107
 msgid "Construction costs:"
 msgstr "Náklady na stavbu:"
 
@@ -8371,7 +8749,7 @@ msgid "Show work area"
 msgstr "Zobraziť pracovnú plochu"
 
 #: ../../src/wui/buildingwindow.cc:726
-#: ../../src/wui/constructionsitewindow.cc:346
+#: ../../src/wui/constructionsitewindow.cc:302
 msgid "Start an expedition"
 msgstr "Začať výpravu"
 
@@ -8392,60 +8770,65 @@ msgstr "Zastavené"
 msgid "Stop this building’s work after completion"
 msgstr "Zastaviť činnosť tejto budovy po výstavbe"
 
-#: ../../src/wui/constructionsitewindow.cc:270
-#: ../../src/wui/soldierlist.cc:452
-msgid "Prefer heroes"
-msgstr "Uprednostniť hrdinov"
-
-#: ../../src/wui/constructionsitewindow.cc:273
-#: ../../src/wui/soldierlist.cc:449
-msgid "Prefer rookies"
-msgstr "Uprednostniť nováčikov"
-
-#: ../../src/wui/constructionsitewindow.cc:304
-#: ../../src/wui/warehousewindow.cc:154
+#: ../../src/wui/constructionsitewindow.cc:260
+#: ../../src/wui/warehousewindow.cc:155
 msgid "Normal policy"
 msgstr "Normálny postup"
 
-#: ../../src/wui/constructionsitewindow.cc:308
-#: ../../src/wui/warehousewindow.cc:155
+#: ../../src/wui/constructionsitewindow.cc:264
+#: ../../src/wui/warehousewindow.cc:156
 msgid "Preferably store selected wares here"
 msgstr "Uprednostňovať tu skladovanie vybraných výrobkov"
 
-#: ../../src/wui/constructionsitewindow.cc:312
-#: ../../src/wui/warehousewindow.cc:156
+#: ../../src/wui/constructionsitewindow.cc:268
+#: ../../src/wui/warehousewindow.cc:157
 msgid "Do not store selected wares here"
 msgstr "Tu neskladovať vybrané výbobky"
 
-#: ../../src/wui/constructionsitewindow.cc:316
-#: ../../src/wui/warehousewindow.cc:157
+#: ../../src/wui/constructionsitewindow.cc:272
+#: ../../src/wui/warehousewindow.cc:158
 msgid "Remove selected wares from here"
 msgstr "Odstrániť vybrané výrobky"
 
-#: ../../src/wui/constructionsitewindow.cc:335
+#: ../../src/wui/constructionsitewindow.cc:291
 msgid "Ware settings to apply after construction"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:338
+#: ../../src/wui/constructionsitewindow.cc:294
 msgid "Worker settings to apply after construction"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:346
+#: ../../src/wui/constructionsitewindow.cc:302
 msgid "Start an expedition from this port after completion"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:370
+#: ../../src/wui/constructionsitewindow.cc:356
+#: ../../src/wui/soldierlist.cc:490
+msgid "Prefer rookies"
+msgstr "Uprednostniť nováčikov"
+
+#: ../../src/wui/constructionsitewindow.cc:360
+#: ../../src/wui/soldierlist.cc:493
+msgid "Prefer heroes"
+msgstr "Uprednostniť hrdinov"
+
+#: ../../src/wui/constructionsitewindow.cc:364
+#: ../../src/wui/soldierlist.cc:496
+msgid "No preference"
+msgstr ""
+
+#: ../../src/wui/constructionsitewindow.cc:395
 msgid "Settings to apply after construction"
 msgstr "Nastavenia použité po výstavbe"
 
-#: ../../src/wui/constructionsitewindow.cc:464
-#: ../../src/wui/soldiercapacitycontrol.cc:71
+#: ../../src/wui/constructionsitewindow.cc:493
+#: ../../src/wui/soldiercapacitycontrol.cc:85
 msgid ""
 "Decrease capacity. Hold down Ctrl to set the capacity to the lowest value"
 msgstr "Znížiť kapacitu. Súčasným pridržaním Ctrl sa nastaví na najnižšiu hodnotu."
 
-#: ../../src/wui/constructionsitewindow.cc:474
-#: ../../src/wui/soldiercapacitycontrol.cc:80
+#: ../../src/wui/constructionsitewindow.cc:503
+#: ../../src/wui/soldiercapacitycontrol.cc:94
 msgid ""
 "Increase capacity. Hold down Ctrl to set the capacity to the highest value"
 msgstr "Zvýšiť kapacitu. Súčasným pridržaním Ctrl sa nastaví na najvyššiu hodnotu."
@@ -8538,145 +8921,187 @@ msgstr ""
 msgid "This hyperlink seems to be broken."
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:235
+#: ../../src/wui/fieldaction.cc:236
 msgid "Build small building"
 msgstr "Postaviť malú budovu"
 
-#: ../../src/wui/fieldaction.cc:236
+#: ../../src/wui/fieldaction.cc:237
 msgid "Build big building"
 msgstr "Postaviť veľkú budovu"
 
-#: ../../src/wui/fieldaction.cc:236
+#: ../../src/wui/fieldaction.cc:237
 msgid "Build medium building"
 msgstr "Postaviť strednú budovu"
 
-#: ../../src/wui/fieldaction.cc:237
+#: ../../src/wui/fieldaction.cc:238
 msgid "Build port building"
 msgstr "Postaviť prístavnú budovu"
 
-#: ../../src/wui/fieldaction.cc:269
+#: ../../src/wui/fieldaction.cc:270
 msgid "Action"
 msgstr "Akcia"
 
-#: ../../src/wui/fieldaction.cc:395
+#: ../../src/wui/fieldaction.cc:396
 msgid "Marked for removal by a worker – click to unmark"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:396 ../../src/wui/fieldaction.cc:403
+#: ../../src/wui/fieldaction.cc:397 ../../src/wui/fieldaction.cc:404
 msgid "Immovable Actions"
 msgstr "Akcie s nehybnými objektami"
 
-#: ../../src/wui/fieldaction.cc:402
+#: ../../src/wui/fieldaction.cc:403
 msgid "Mark this immovable for timely removal by a suited worker"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:424 ../../src/wui/fieldaction.cc:555
+#: ../../src/wui/fieldaction.cc:425 ../../src/wui/fieldaction.cc:556
 msgid "Build road"
 msgstr "Postaviť cestu"
 
-#: ../../src/wui/fieldaction.cc:428
+#: ../../src/wui/fieldaction.cc:429
 msgid "Build waterway"
 msgstr "Postaviť vodnú cestu"
 
-#: ../../src/wui/fieldaction.cc:436
+#: ../../src/wui/fieldaction.cc:437
 msgid "Destroy this flag"
 msgstr "Zničiť túto vlajku"
 
-#: ../../src/wui/fieldaction.cc:443
+#: ../../src/wui/fieldaction.cc:444
 msgid "Configure this flag’s economy"
 msgstr "Nastaviť ekonomiku tejto vlajky"
 
-#: ../../src/wui/fieldaction.cc:446
+#: ../../src/wui/fieldaction.cc:447
 msgid "Send geologist to explore site"
 msgstr "Vyslať geológa na prieskum oblasti"
 
-#: ../../src/wui/fieldaction.cc:452 ../../src/wui/fieldaction.cc:472
+#: ../../src/wui/fieldaction.cc:453 ../../src/wui/fieldaction.cc:473
 msgid "Send scout to explore surroundings"
 msgstr ""
 
 #. * TRANSLATORS: This string is used only when the name of the tribe’s scout
 #. house/hut is unknown.
-#: ../../src/wui/fieldaction.cc:464
+#: ../../src/wui/fieldaction.cc:465
 msgid ""
 "You need to connect this flag to a scouting building before you can send a "
 "scout here."
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:492
+#: ../../src/wui/fieldaction.cc:493
 msgid "Place a flag"
 msgstr "Umiestniť vlajku"
 
-#: ../../src/wui/fieldaction.cc:497
+#: ../../src/wui/fieldaction.cc:498
 msgid "Destroy a road"
 msgstr "Zničiť cestu"
 
-#: ../../src/wui/fieldaction.cc:502
+#: ../../src/wui/fieldaction.cc:503
 msgid "Destroy a waterway"
 msgstr "Zničiť vodnú cestu"
 
-#: ../../src/wui/fieldaction.cc:522
+#: ../../src/wui/fieldaction.cc:523
 msgid "Configure this ocean’s ship fleet"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:533
+#: ../../src/wui/fieldaction.cc:534
 msgid "Configure this ocean’s ferry fleet"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:540
+#: ../../src/wui/fieldaction.cc:541
 msgid "Watch field in a separate window"
 msgstr "Sledovať oblasť v samostatnom okne"
 
-#: ../../src/wui/fieldaction.cc:545
+#: ../../src/wui/fieldaction.cc:546
 msgid "Pinned note"
 msgstr "Pripnutá poznámka"
 
-#: ../../src/wui/fieldaction.cc:550
+#: ../../src/wui/fieldaction.cc:551
 msgid "Show debug window"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:558 ../../src/wui/watchwindow.cc:85
+#: ../../src/wui/fieldaction.cc:559 ../../src/wui/watchwindow.cc:85
 msgid "Watch"
 msgstr "Sledovať"
 
-#: ../../src/wui/fieldaction.cc:675
+#: ../../src/wui/fieldaction.cc:676
 msgid "Build mines"
 msgstr "Postaviť bane"
 
-#: ../../src/wui/fieldaction.cc:690 ../../src/wui/fieldaction.cc:717
+#: ../../src/wui/fieldaction.cc:691 ../../src/wui/fieldaction.cc:718
 msgid "Build flag"
 msgstr "Postaviť vlajku"
 
-#: ../../src/wui/fieldaction.cc:694
+#: ../../src/wui/fieldaction.cc:695
 msgid "Cancel road"
 msgstr "Zrušiť cestu"
 
-#: ../../src/wui/fieldaction.cc:696
+#: ../../src/wui/fieldaction.cc:697
 msgid "Go to road"
 msgstr "Ísť k ceste"
 
-#: ../../src/wui/fieldaction.cc:704
+#: ../../src/wui/fieldaction.cc:705
 msgid "Cancel road and start building waterway"
 msgstr "Zrušiť cestu a začať stavať vodnú cestu"
 
-#: ../../src/wui/fieldaction.cc:708
+#: ../../src/wui/fieldaction.cc:709
 msgid "Build roads"
 msgstr "Postaviť cesty"
 
-#: ../../src/wui/fieldaction.cc:721
+#: ../../src/wui/fieldaction.cc:722
 msgid "Cancel waterway"
 msgstr "Zrušiť vodnú cestu"
 
-#: ../../src/wui/fieldaction.cc:723
+#: ../../src/wui/fieldaction.cc:724
 msgid "Go to waterway"
 msgstr "Ísť k vodnej ceste"
 
-#: ../../src/wui/fieldaction.cc:726
+#: ../../src/wui/fieldaction.cc:727
 msgid "Cancel waterway and start building road"
 msgstr "Zrušiť vodnú cestu a začať stavať cestu"
 
-#: ../../src/wui/fieldaction.cc:729
+#: ../../src/wui/fieldaction.cc:730
 msgid "Build waterways"
 msgstr "Výstavba vodných ciest"
+
+#. * TRANSLATORS: Placeholders are the hitpoints and the attack bonus of the
+#. warship.
+#: ../../src/wui/fieldaction.cc:1254
+#, c-format
+msgctxt "ship_state"
+msgid "Warship · HP %1$u%% · AT +%2$u%%"
+msgstr ""
+
+#: ../../src/wui/fieldaction.cc:1258
+msgctxt "ship_state"
+msgid "Enemy Transport Ship"
+msgstr ""
+
+#: ../../src/wui/fieldaction.cc:1260
+msgctxt "ship_state"
+msgid "Expedition"
+msgstr ""
+
+#: ../../src/wui/fieldaction.cc:1262
+msgctxt "ship_state"
+msgid "Transport"
+msgstr ""
+
+#. * TRANSLATORS: actual_speed (desired_speed)
+#: ../../src/wui/fieldaction.cc:1264 ../../src/wui/interactive_gamebase.cc:614
+#: ../../src/wui/productionsitewindow.cc:246
+#, c-format
+msgid "%1$s (%2$s)"
+msgstr "%1$s (%2$s)"
+
+#: ../../src/wui/fieldaction.cc:1274
+msgid "Select Ship"
+msgstr ""
+
+#: ../../src/wui/fieldaction.cc:1297
+msgid "Own Ships"
+msgstr ""
+
+#: ../../src/wui/fieldaction.cc:1311
+msgid "Attackable Ships"
+msgstr ""
 
 #: ../../src/wui/fleet_options_window.cc:94
 msgid "Ferry Fleet Options"
@@ -8728,7 +9153,7 @@ msgstr ""
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_chat_menu.cc:79
-#: ../../src/wui/interactive_gamebase.cc:137
+#: ../../src/wui/interactive_gamebase.cc:138
 msgid "Script Console"
 msgstr ""
 
@@ -8873,7 +9298,7 @@ msgstr "Naozaj chcete ukončiť hru?"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_main_menu_save_game.cc:46
-#: ../../src/wui/interactive_gamebase.cc:166
+#: ../../src/wui/interactive_gamebase.cc:167
 msgid "Load Replay"
 msgstr "Načítať záznam"
 
@@ -9122,39 +9547,47 @@ msgstr "Doplnky:"
 msgid "Game data error:"
 msgstr ""
 
-#: ../../src/wui/general_statistics_menu.cc:142
+#: ../../src/wui/general_statistics_menu.cc:150
 msgid "Land"
 msgstr "Územie"
 
-#: ../../src/wui/general_statistics_menu.cc:163
+#: ../../src/wui/general_statistics_menu.cc:171
 msgid "Productivity"
 msgstr "Produktivita"
 
-#: ../../src/wui/general_statistics_menu.cc:168
+#: ../../src/wui/general_statistics_menu.cc:185
+msgid "Warships lost"
+msgstr ""
+
+#: ../../src/wui/general_statistics_menu.cc:194
+msgid "Warships defeated"
+msgstr ""
+
+#: ../../src/wui/general_statistics_menu.cc:203
 msgid "Casualties"
 msgstr "Straty na životoch"
 
-#: ../../src/wui/general_statistics_menu.cc:172
+#: ../../src/wui/general_statistics_menu.cc:207
 msgid "Kills"
 msgstr "Zabitia"
 
-#: ../../src/wui/general_statistics_menu.cc:178
+#: ../../src/wui/general_statistics_menu.cc:213
 msgid "Military buildings lost"
 msgstr "Stratených vojenských budov"
 
-#: ../../src/wui/general_statistics_menu.cc:183
+#: ../../src/wui/general_statistics_menu.cc:218
 msgid "Military buildings defeated"
 msgstr "Porazených vojenských budov"
 
-#: ../../src/wui/general_statistics_menu.cc:188
+#: ../../src/wui/general_statistics_menu.cc:223
 msgid "Civilian buildings lost"
 msgstr "Stratených civilných budov"
 
-#: ../../src/wui/general_statistics_menu.cc:193
+#: ../../src/wui/general_statistics_menu.cc:228
 msgid "Civilian buildings destroyed"
 msgstr "Porazených civilných budov"
 
-#: ../../src/wui/general_statistics_menu.cc:198
+#: ../../src/wui/general_statistics_menu.cc:233
 msgid "Military"
 msgstr "Vojsko"
 
@@ -9195,73 +9628,73 @@ msgstr ""
 msgid "%1$s • %2$s • %3$s"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:70
+#: ../../src/wui/inputqueuedisplay.cc:69
 msgid "Priority: Very Low"
 msgstr "Priorita: veľmi nízka"
 
-#: ../../src/wui/inputqueuedisplay.cc:72
+#: ../../src/wui/inputqueuedisplay.cc:71
 msgid "Priority: Low"
 msgstr "Priorita: nízka"
 
-#: ../../src/wui/inputqueuedisplay.cc:74
+#: ../../src/wui/inputqueuedisplay.cc:73
 msgid "Priority: Normal"
 msgstr "Priorita: normálna"
 
-#: ../../src/wui/inputqueuedisplay.cc:76
+#: ../../src/wui/inputqueuedisplay.cc:75
 msgid "Priority: High"
 msgstr "Priorita: vysoká"
 
-#: ../../src/wui/inputqueuedisplay.cc:78
+#: ../../src/wui/inputqueuedisplay.cc:77
 msgid "Priority: Very High"
 msgstr "Priorita: veľmi vysoká"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue
-#: ../../src/wui/inputqueuedisplay.cc:136
+#: ../../src/wui/inputqueuedisplay.cc:135
 msgid "Increase the number of wares you want to be stored here"
 msgstr "Zvýšiť počet výrobkov, ktoré tu majú byť uložené"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue
-#: ../../src/wui/inputqueuedisplay.cc:138
+#: ../../src/wui/inputqueuedisplay.cc:137
 msgid "Decrease the number of wares you want to be stored here"
 msgstr "Znížiť počet výrobkov, ktoré tu majú byť uložené"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue -
 #. option explanation
-#: ../../src/wui/inputqueuedisplay.cc:142
+#: ../../src/wui/inputqueuedisplay.cc:141
 msgid "Hold down Shift to increase all ware types at the same time"
 msgstr ""
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue -
 #. option explanation
-#: ../../src/wui/inputqueuedisplay.cc:145
+#: ../../src/wui/inputqueuedisplay.cc:144
 msgid "Hold down Shift to decrease all ware types at the same time"
 msgstr ""
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue -
 #. option explanation
-#: ../../src/wui/inputqueuedisplay.cc:150
+#: ../../src/wui/inputqueuedisplay.cc:149
 msgid "Hold down Ctrl to allow all of this ware"
 msgstr ""
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue -
 #. option explanation
-#: ../../src/wui/inputqueuedisplay.cc:153
+#: ../../src/wui/inputqueuedisplay.cc:152
 msgid "Hold down Ctrl to allow none of this ware"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:211
+#: ../../src/wui/inputqueuedisplay.cc:210
 msgid "Remove ware"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:220
+#: ../../src/wui/inputqueuedisplay.cc:219
 msgid "Add ware"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:621
+#: ../../src/wui/inputqueuedisplay.cc:620
 msgid "Hide controls"
 msgstr "Skryť ovládanie"
 
-#: ../../src/wui/inputqueuedisplay.cc:621
+#: ../../src/wui/inputqueuedisplay.cc:620
 msgid "Show controls"
 msgstr "Zobraziť ovládanie"
 
@@ -9337,143 +9770,136 @@ msgid "Screenshot saved"
 msgstr "Snímka obrazovky uložená"
 
 #. * TRANSLATORS: This is a game speed value
-#: ../../src/wui/interactive_gamebase.cc:57
+#: ../../src/wui/interactive_gamebase.cc:58
 #, c-format
 msgid "%1$u.%2$u×"
 msgstr ""
 
-#: ../../src/wui/interactive_gamebase.cc:59
+#: ../../src/wui/interactive_gamebase.cc:60
 msgid "PAUSE"
 msgstr "PAUZA"
 
 #. * TRANSLATORS: Title for a menu button in the game. This menu will show
 #. options o increase/decrease the gamespeed, and to pause the game
-#: ../../src/wui/interactive_gamebase.cc:116
+#: ../../src/wui/interactive_gamebase.cc:117
 msgid "Game Speed"
 msgstr "Rýchlosť hry"
 
 #. * TRANSLATORS: Tooltip for Sound Options in the game's main menu
-#: ../../src/wui/interactive_gamebase.cc:149
+#: ../../src/wui/interactive_gamebase.cc:150
 msgid "Set sound effect and music options"
 msgstr "Nastaviť možnosti zvukových efektov a hudby"
 
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/wui/interactive_gamebase.cc:171
-#: ../../src/wui/interactive_gamebase.cc:237
+#: ../../src/wui/interactive_gamebase.cc:172
+#: ../../src/wui/interactive_gamebase.cc:238
 msgid "Restart Replay"
 msgstr "Reštartovať záznam"
 
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/wui/interactive_gamebase.cc:187
-#: ../../src/wui/interactive_gamebase.cc:237
+#: ../../src/wui/interactive_gamebase.cc:188
+#: ../../src/wui/interactive_gamebase.cc:238
 msgid "Restart Scenario"
 msgstr "Reštartovať scenár"
 
-#: ../../src/wui/interactive_gamebase.cc:238
+#: ../../src/wui/interactive_gamebase.cc:239
 msgid "Are you sure you wish to restart this replay?"
 msgstr "Naozaj chcete reštartovať tento záznam?"
 
-#: ../../src/wui/interactive_gamebase.cc:239
+#: ../../src/wui/interactive_gamebase.cc:240
 msgid "Are you sure you wish to restart this scenario?"
 msgstr "Naozaj chcete reštartovať tento scenár?"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building names are shown
-#: ../../src/wui/interactive_gamebase.cc:275
+#: ../../src/wui/interactive_gamebase.cc:276
 msgid "Hide Census"
 msgstr "Skry názvy budov"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * building status labels are shown
-#: ../../src/wui/interactive_gamebase.cc:283
+#: ../../src/wui/interactive_gamebase.cc:284
 msgid "Hide Status"
 msgstr "Skry stav"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * level information is shown above soldiers' heads
-#: ../../src/wui/interactive_gamebase.cc:292
+#: ../../src/wui/interactive_gamebase.cc:293
 msgid "Hide Soldier Levels"
 msgstr "Skry úrovne vojakov"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * buildings are greyed out
-#: ../../src/wui/interactive_gamebase.cc:301
+#: ../../src/wui/interactive_gamebase.cc:302
 msgid "Hide Buildings"
 msgstr "Skry budovy"
 
-#: ../../src/wui/interactive_gamebase.cc:348
+#: ../../src/wui/interactive_gamebase.cc:349
 msgid "Speed +"
 msgstr "Rýchlosť +"
 
 #. * TRANSLATORS: Tooltip for Speed + in the game's game speed menu
-#: ../../src/wui/interactive_gamebase.cc:351
+#: ../../src/wui/interactive_gamebase.cc:352
 msgid "Increase the game speed"
 msgstr "Zvýšiť rýchlosť hry"
 
-#: ../../src/wui/interactive_gamebase.cc:354
+#: ../../src/wui/interactive_gamebase.cc:355
 msgid "Speed -"
 msgstr "Rýchlosť -"
 
 #. * TRANSLATORS: Tooltip for Speed - in the game's game speed menu
-#: ../../src/wui/interactive_gamebase.cc:357
+#: ../../src/wui/interactive_gamebase.cc:358
 msgid "Decrease the game speed"
 msgstr "Znížiť rýchlosť hry"
 
-#: ../../src/wui/interactive_gamebase.cc:363
+#: ../../src/wui/interactive_gamebase.cc:364
 msgid "Resume"
 msgstr "Pokračovať"
 
 #. * TRANSLATORS: Tooltip for Pause in the game's game speed menu
-#: ../../src/wui/interactive_gamebase.cc:366
+#: ../../src/wui/interactive_gamebase.cc:367
 msgid "Resume the Game"
 msgstr "Pokračovať v hre"
 
-#: ../../src/wui/interactive_gamebase.cc:369
+#: ../../src/wui/interactive_gamebase.cc:370
 msgid "Pause"
 msgstr "Zastaviť"
 
 #. * TRANSLATORS: Tooltip for Pause in the game's game speed menu
-#: ../../src/wui/interactive_gamebase.cc:372
+#: ../../src/wui/interactive_gamebase.cc:373
 msgid "Pause the Game"
 msgstr "Zastaviť hru"
 
-#. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/wui/interactive_gamebase.cc:613
-#: ../../src/wui/productionsitewindow.cc:246
-#, c-format
-msgid "%1$s (%2$s)"
-msgstr "%1$s (%2$s)"
-
 #. * TRANSLATORS: actual_speed (target_speed) (desired_speed)
-#: ../../src/wui/interactive_gamebase.cc:617
+#: ../../src/wui/interactive_gamebase.cc:618
 #, c-format
 msgid "%1$s (%2$s) (%3$s)"
 msgstr ""
 
-#: ../../src/wui/interactive_gamebase.cc:656
+#: ../../src/wui/interactive_gamebase.cc:657
 msgid "Remaining construction costs:"
 msgstr ""
 
 #. * TRANSLATORS: Title for the statistics menu button in the game
-#: ../../src/wui/interactive_player.cc:187
+#: ../../src/wui/interactive_player.cc:188
 #: ../../src/wui/interactive_spectator.cc:48
 msgid "Statistics"
 msgstr "Štatistika"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
-#: ../../src/wui/interactive_player.cc:316 ../../src/wui/map_tags.cc:51
+#: ../../src/wui/interactive_player.cc:308 ../../src/wui/map_tags.cc:51
 msgid "Seafaring"
 msgstr "Moreplavba"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:322
-#: ../../src/wui/militarysitewindow.cc:40 ../../src/wui/warehousewindow.cc:315
+#: ../../src/wui/interactive_player.cc:314
+#: ../../src/wui/militarysitewindow.cc:40 ../../src/wui/warehousewindow.cc:324
 msgid "Soldiers"
 msgstr "Vojaci"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:327 ../../src/wui/stock_menu.cc:40
+#: ../../src/wui/interactive_player.cc:319 ../../src/wui/stock_menu.cc:40
 #: ../../src/wui/ware_statistics_menu.cc:152 ../../src/wui/waresdisplay.cc:81
 msgid "Stock"
 msgstr "Zásoby"
@@ -9481,17 +9907,17 @@ msgstr "Zásoby"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/wui/interactive_player.cc:384
+#: ../../src/wui/interactive_player.cc:376
 msgid "Hide Workarea Overlaps"
 msgstr "Skry prekrytia pracovných oblastí"
 
-#: ../../src/wui/interactive_player.cc:390
+#: ../../src/wui/interactive_player.cc:382
 msgid ""
 "Toggle whether overlapping workareas are indicated when placing a "
 "constructionsite"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:472
+#: ../../src/wui/interactive_player.cc:487
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
@@ -9500,7 +9926,7 @@ msgstr[1] "%u nové správy"
 msgstr[2] "%u nových správ"
 msgstr[3] "%u nových správ"
 
-#: ../../src/wui/interactive_player.cc:913
+#: ../../src/wui/interactive_player.cc:978
 msgid "Fastplace Shortcuts"
 msgstr ""
 
@@ -10150,140 +10576,196 @@ msgid "Map name (start of replay)"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:128
+#: ../../src/wui/seafaring_statistics_menu.cc:137
 msgid "Watch the selected ship"
 msgstr "Sledovať vybranú loď"
 
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:144
+#: ../../src/wui/seafaring_statistics_menu.cc:153
 msgid "Open the selected ship’s window"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the seafaring statistics window, placeholder is a
 #. hotkey
-#: ../../src/wui/seafaring_statistics_menu.cc:154
+#: ../../src/wui/seafaring_statistics_menu.cc:163
 #, c-format
 msgid "(You can use %s to go to the selected ship and open its window.)"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:169
+#: ../../src/wui/seafaring_statistics_menu.cc:178
 msgid "Center the map on the selected ship"
 msgstr "Vycentrovať mapu na vybratú loď"
 
-#: ../../src/wui/seafaring_statistics_menu.cc:212
+#: ../../src/wui/seafaring_statistics_menu.cc:225
 msgctxt "ship"
 msgid "Name"
 msgstr "Meno"
 
-#: ../../src/wui/seafaring_statistics_menu.cc:213
+#: ../../src/wui/seafaring_statistics_menu.cc:226
 msgctxt "ship"
 msgid "Status"
 msgstr "Stav"
 
-#: ../../src/wui/seafaring_statistics_menu.cc:249
+#: ../../src/wui/seafaring_statistics_menu.cc:262
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr "Preváža"
 
+#: ../../src/wui/seafaring_statistics_menu.cc:272
+msgctxt "ship_state"
+msgid "Being Refitted"
+msgstr ""
+
+#: ../../src/wui/seafaring_statistics_menu.cc:426
+#, c-format
+msgid "Seafaring Statistics (%u Ship)"
+msgid_plural "Seafaring Statistics (%u Ships)"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:511
+#: ../../src/wui/seafaring_statistics_menu.cc:568
 msgid "Show all ships"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:521
+#: ../../src/wui/seafaring_statistics_menu.cc:578
 msgid "Show empty ships"
 msgstr "Ukázať prázdne lode"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:526
+#: ../../src/wui/seafaring_statistics_menu.cc:583
 msgid "Show ships shipping wares and workers"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:531
+#: ../../src/wui/seafaring_statistics_menu.cc:588
 msgid "Show waiting expeditions"
 msgstr "Ukázať čakajúce výpravy"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:536
+#: ../../src/wui/seafaring_statistics_menu.cc:593
 msgid "Show scouting expeditions"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:541
+#: ../../src/wui/seafaring_statistics_menu.cc:598
 msgid "Show expeditions that have found a port space or are founding a colony"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:90
+#. * TRANSLATORS: Tooltip in the ship statistics window
+#: ../../src/wui/seafaring_statistics_menu.cc:603
+msgid "Show warships"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the ship statistics window
+#: ../../src/wui/seafaring_statistics_menu.cc:608
+msgid "Show ships being refitted"
+msgstr ""
+
+#: ../../src/wui/shipwindow.cc:86
+#, c-format
+msgid ""
+"Damaged warships regain %u hitpoint per second when anchored in a port."
+msgid_plural ""
+"Damaged warships regain %u hitpoints per second when anchored in a port."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#: ../../src/wui/shipwindow.cc:111
 msgid "Scout towards the north west"
 msgstr "Preskúmať oblasť smerom na severozápad"
 
-#: ../../src/wui/shipwindow.cc:95
+#: ../../src/wui/shipwindow.cc:116
 msgid "Explore the island’s coast clockwise"
 msgstr "Preskúmať pobrežie ostrova v smere pohybu hodinových ručičiek"
 
-#: ../../src/wui/shipwindow.cc:100
+#: ../../src/wui/shipwindow.cc:121
 msgid "Scout towards the north east"
 msgstr "Preskúmať oblasť smerom na severovýchod"
 
-#: ../../src/wui/shipwindow.cc:105
+#: ../../src/wui/shipwindow.cc:126
 msgid "Scout towards the west"
 msgstr "Preskúmať oblasť smerom na západ"
 
-#: ../../src/wui/shipwindow.cc:110
+#: ../../src/wui/shipwindow.cc:131
 msgid "Construct a port at the current location"
 msgstr "Postaviť prístav na aktuálnej pozícii"
 
-#: ../../src/wui/shipwindow.cc:115
+#: ../../src/wui/shipwindow.cc:136
+msgid "Anchor at the current location"
+msgstr ""
+
+#: ../../src/wui/shipwindow.cc:141
 msgid "Scout towards the east"
 msgstr "Preskúmať oblasť smerom na východ"
 
-#: ../../src/wui/shipwindow.cc:120
+#: ../../src/wui/shipwindow.cc:146
 msgid "Scout towards the south west"
 msgstr "Preskúmať oblasť smerom na juhozápad"
 
-#: ../../src/wui/shipwindow.cc:125
+#: ../../src/wui/shipwindow.cc:151
 msgid "Explore the island’s coast counter clockwise"
 msgstr "Preskúmať pobrežie ostrova proti smeru pohybu hodinových ručičiek"
 
-#: ../../src/wui/shipwindow.cc:130
+#: ../../src/wui/shipwindow.cc:156
 msgid "Scout towards the south east"
 msgstr "Preskúmať oblasť smerom na juhovýchod"
 
-#: ../../src/wui/shipwindow.cc:141
+#: ../../src/wui/shipwindow.cc:163
+msgid "Destination"
+msgstr ""
+
+#: ../../src/wui/shipwindow.cc:174
 msgid "Sink the ship"
 msgstr "Potopiť loď"
 
-#: ../../src/wui/shipwindow.cc:145
+#: ../../src/wui/shipwindow.cc:183
 msgid "Cancel the Expedition"
 msgstr "Zrušiť výpravu"
 
-#: ../../src/wui/shipwindow.cc:162
+#: ../../src/wui/shipwindow.cc:201
 msgid "Go to ship"
 msgstr "Ísť k lodi"
 
 #. * TRANSLATORS: Window label when an expedition can't be canceled
-#: ../../src/wui/shipwindow.cc:229
+#: ../../src/wui/shipwindow.cc:272
 msgid "Cancel Expedition"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:230
+#: ../../src/wui/shipwindow.cc:273
 msgid ""
 "This expedition can’t be canceled, because the ship has no port to return "
 "to."
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:241
-msgid "Go to destination"
-msgstr "Ísť k cieľu"
-
-#. * TRANSLATORS: Placeholder is the name of the destination port
-#: ../../src/wui/shipwindow.cc:243
+#: ../../src/wui/shipwindow.cc:421 ../../src/wui/shipwindow.cc:426
+#: ../../src/wui/shipwindow.cc:431
 #, c-format
 msgid "Go to destination (%s)"
 msgstr "Ísť k cieľu (%s)"
+
+#: ../../src/wui/shipwindow.cc:436
+msgid "Go to destination"
+msgstr "Ísť k cieľu"
+
+#: ../../src/wui/shipwindow.cc:463
+msgid "Refit to transport ship"
+msgstr ""
+
+#: ../../src/wui/shipwindow.cc:464
+msgid "Refit to warship"
+msgstr ""
+
+#: ../../src/wui/shipwindow.cc:486
+#, c-format
+msgid "HP: %1$u/%2$u"
+msgstr ""
 
 #: ../../src/wui/soldier_statistics_menu.cc:89
 #: ../../src/wui/soldier_statistics_menu.cc:182
@@ -10326,12 +10808,11 @@ msgstr "Prehľad (%u)"
 msgid "×%u"
 msgstr ""
 
-#: ../../src/wui/soldiercapacitycontrol.cc:87
+#: ../../src/wui/soldiercapacitycontrol.cc:101
 msgid "Capacity"
 msgstr "Kapacita"
 
-#: ../../src/wui/soldierlist.cc:416 ../../src/wui/soldierlist.cc:438
-#: ../../src/wui/soldierlist.cc:492
+#: ../../src/wui/soldierlist.cc:564
 msgid "Click soldier to send away"
 msgstr "Kliknutím na vojaka ho pošlete preč"
 
@@ -10469,35 +10950,35 @@ msgstr "Spotreba"
 msgid "Economy health"
 msgstr "Stav ekonomiky"
 
-#: ../../src/wui/warehousewindow.cc:162
+#: ../../src/wui/warehousewindow.cc:163
 msgid "Remove 10 wares"
 msgstr ""
 
-#: ../../src/wui/warehousewindow.cc:169
+#: ../../src/wui/warehousewindow.cc:170
 msgid "Remove a ware"
 msgstr ""
 
-#: ../../src/wui/warehousewindow.cc:176
+#: ../../src/wui/warehousewindow.cc:177
 msgid "Add a ware"
 msgstr ""
 
-#: ../../src/wui/warehousewindow.cc:183
+#: ../../src/wui/warehousewindow.cc:184
 msgid "Add 10 wares"
 msgstr ""
 
-#: ../../src/wui/warehousewindow.cc:194
+#: ../../src/wui/warehousewindow.cc:195
 msgid "Configure this building’s economy"
 msgstr "Nastaviť ekonomiku tejto budovy"
 
-#: ../../src/wui/warehousewindow.cc:320
+#: ../../src/wui/warehousewindow.cc:329
 msgid "Wares waiting to be shipped"
 msgstr "Výrobky, ktoré sa majú dopraviť"
 
-#: ../../src/wui/warehousewindow.cc:323
+#: ../../src/wui/warehousewindow.cc:332
 msgid "Workers waiting to embark"
 msgstr "Pracovníci čakajúci na nalodenie"
 
-#: ../../src/wui/warehousewindow.cc:329
+#: ../../src/wui/warehousewindow.cc:338
 msgid "Expedition"
 msgstr "Výprava"
 
