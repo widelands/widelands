@@ -665,7 +665,6 @@ void DefaultAI::count_military_vacant_positions() {
 	int32_t garrisons_count = militarysites.size();
 
 	// also available in warehouses
-	int32_t vacant_in_warehouses = 0;
 	for (auto wh : warehousesites) {
 		// TODO(tothxa): If HQ garrison handling is added, use the condition from below assert
 		//               instead.
@@ -678,39 +677,33 @@ void DefaultAI::count_military_vacant_positions() {
 			understaffed_ += kPortDefaultGarrison * 3 - wh.site->get_desired_soldier_count();
 		}
 
-		// Warehouses don't track coming soldiers.
-		if (wh.site->soldier_control()->stationed_soldiers().size() <
-		    wh.site->get_desired_soldier_count()) {
-			vacant_in_warehouses += wh.site->get_desired_soldier_count() -
-			                        wh.site->soldier_control()->stationed_soldiers().size();
+		uint32_t wh_associated = wh.site->soldier_control()->associated_soldiers().size();
+		if (wh_associated < wh.site->get_desired_soldier_count()) {
+			vacant_mil_positions_ += wh.site->get_desired_soldier_count() - wh_associated;
 		} else {
-			on_stock_ += wh.site->soldier_control()->stationed_soldiers().size() -
-			             wh.site->get_desired_soldier_count();
+			on_stock_ += wh_associated - wh.site->get_desired_soldier_count();
 		}
-		soldiers_counted += wh.site->soldier_control()->stationed_soldiers().size();
+		soldiers_counted += wh_associated;
 	}
 
-	// Associate unaccounted soldiers to warehouses in general (supposedly they are the ones
-	// on their way to a warehouse)
+	// Unassociated soldiers on the roads are counted as stock.
+	// TODO(tothxa): Soldiers fighting for ports are still not associated, so they are counted as
+	//               on stock...
+	// TODO(tothxa): If AI warships are allowed to hold soldiers, the soldiers associated to
+	//               them will have to be counted too
 	int32_t total_soldiers = player_->count_soldiers();
 	if (soldiers_counted < total_soldiers) {
 		int32_t remaining_soldiers = total_soldiers - soldiers_counted;
 		verb_log_dbg_time(game().get_gametime(),
 		                  "AI %d: soldiers: total: %d, associated: %d, difference: %d",
 		                  player_number(), total_soldiers, soldiers_counted, remaining_soldiers);
-		if (vacant_in_warehouses > remaining_soldiers) {
-			vacant_in_warehouses -= remaining_soldiers;
-		} else {
-			on_stock_ += remaining_soldiers - vacant_in_warehouses;
-			vacant_in_warehouses = 0;
-		}
+		on_stock_ += remaining_soldiers;
 	} else if (soldiers_counted > total_soldiers) {
 		// This shouldn't happen
-		log_err_time(game().get_gametime(),
+		log_warn_time(game().get_gametime(),
 		             "AI %d: soldiers: total: %d, associated: %d, unexpected: %d", player_number(),
 		             total_soldiers, soldiers_counted, soldiers_counted - total_soldiers);
 	}
-	vacant_mil_positions_ += vacant_in_warehouses;
 
 	vacant_mil_positions_ += understaffed_;
 
