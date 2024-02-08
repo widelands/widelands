@@ -205,22 +205,8 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 			                    program_name.c_str(), name().c_str());
 		}
 		try {
-			// TODO(GunChleoc): Compatibility, remove after v1.0
-			if (program_name == "program") {
-				log_warn("The main program for the immovable %s should be renamed from 'program' "
-				         "to 'main'\n",
-				         name().c_str());
-				if (programs->keys<std::string>().count(MapObjectProgram::kMainProgram) != 0u) {
-					log_err("         This also clashes with an already existing 'main' program\n");
-				}
-				programs_[MapObjectProgram::kMainProgram] = new ImmovableProgram(
-				   MapObjectProgram::kMainProgram,
-				   programs->get_table(program_name)->array_entries<std::string>(), *this);
-			} else {
-				programs_[program_name] = new ImmovableProgram(
-				   program_name, programs->get_table(program_name)->array_entries<std::string>(),
-				   *this);
-			}
+			programs_[program_name] = new ImmovableProgram(
+			   program_name, programs->get_table(program_name)->array_entries<std::string>(), *this);
 		} catch (const std::exception& e) {
 			throw GameDataError("%s: Error in immovable program %s: %s", name().c_str(),
 			                    program_name.c_str(), e.what());

@@ -51,36 +51,6 @@
 #include "logic/player.h"
 #include "logic/playercommand.h"
 
-// following is in milliseconds (widelands counts time in ms)
-constexpr Duration kFieldInfoExpiration(14 * 1000);
-constexpr Duration kMineFieldInfoExpiration(20 * 1000);
-constexpr Duration kNewMineConstInterval(19000);
-constexpr Duration kBusyMineUpdateInterval(2000);
-// building of the same building can be started after 25s at earliest
-constexpr Duration kBuildingMinInterval(25 * 1000);
-constexpr Duration kMinBFCheckInterval(5 * 1000);
-constexpr Duration kMinMFCheckInterval(19 * 1000);
-constexpr Duration kMarineDecisionInterval(20 * 1000);
-constexpr Duration kRemainingBasicBuildingsResetTime(1 * 60 * 1000);
-
-// following two are used for roads management, for creating shortcuts and dismantling dispensable
-// roads
-constexpr int32_t kSpotsEnough = 25;
-
-constexpr uint16_t kTargetQuantCap = 30;
-
-// this is intended for map developers & testers, should be off by default
-// also note that some of that stats is printed only in verbose mode
-constexpr bool kEnableStatsPrint = false;
-// enable also the above to print the results of the performance data collection
-constexpr bool kCollectPerfData = false;
-
-// for scheduler
-constexpr int kMaxJobs = 4;
-
-// Count of mine types / ground resources
-constexpr int kMineTypes = 4;
-
 namespace AI {
 
 // Fix undefined references
@@ -88,9 +58,6 @@ namespace AI {
 DefaultAI::NormalImpl DefaultAI::normal_impl;
 DefaultAI::WeakImpl DefaultAI::weak_impl;
 DefaultAI::VeryWeakImpl DefaultAI::very_weak_impl;
-
-Time DefaultAI::last_seafaring_check_ = Time(0);
-bool DefaultAI::map_allows_seafaring_ = false;
 
 /// Constructor of DefaultAI
 DefaultAI::DefaultAI(Widelands::Game& ggame, Widelands::PlayerNumber const pid, AiType const t)
@@ -183,6 +150,26 @@ DefaultAI::DefaultAI(Widelands::Game& ggame, Widelands::PlayerNumber const pid, 
 			   for (std::deque<ShipObserver>::iterator i = allships.begin(); i != allships.end();
 			        ++i) {
 				   if (i->ship == note.ship) {
+
+					   // Account guarded port
+					   ShipObserver& so = *i;
+					   if (so.guarding) {
+						   assert(so.ship->get_ship_type() == Widelands::ShipType::kWarship);
+						   Widelands::PortDock* dest = so.ship->get_destination_port(game());
+						   for (PortSiteObserver& pso : portsites) {
+							   if (dest == pso.site->get_portdock()) {
+								   assert(pso.ships_assigned > 0);
+								   --pso.ships_assigned;
+								   verb_log_dbg_time(game().get_gametime(),
+								                     "AI %d: port %s lost guard ship %s, %u remaining",
+								                     player_->player_number(),
+								                     pso.site->get_warehouse_name().c_str(),
+								                     so.ship->get_shipname().c_str(), pso.ships_assigned);
+								   break;
+							   }
+						   }
+					   }
+
 					   allships.erase(i);
 					   break;
 				   }
@@ -194,6 +181,18 @@ DefaultAI::DefaultAI(Widelands::Game& ggame, Widelands::PlayerNumber const pid, 
 				   if (observer.ship == note.ship) {
 					   observer.waiting_for_command_ = true;
 					   break;
+				   }
+			   }
+			   break;
+		   case Widelands::NoteShip::Action::kDestinationChanged:
+			   if (note.ship->get_ship_type() == Widelands::ShipType::kWarship &&
+			       note.ship->get_destination_port(game()) == nullptr) {
+				   // A warship lost its destination
+				   for (ShipObserver& observer : allships) {
+					   if (observer.ship == note.ship) {
+						   observer.waiting_for_command_ = true;
+						   break;
+					   }
 				   }
 			   }
 			   break;
@@ -425,7 +424,7 @@ void DefaultAI::think() {
 		case SchedulerTaskId::kCheckShips:
 			// if function returns false, we can postpone next call
 			{
-				const uint8_t wait_multiplier = (check_ships(gametime)) ? 1 : 5;
+				const uint8_t wait_multiplier = (check_ships(gametime)) ? 1 : 10;
 				set_taskpool_task_time(
 				   gametime + kShipCheckInterval * wait_multiplier, SchedulerTaskId::kCheckShips);
 			}
@@ -433,7 +432,7 @@ void DefaultAI::think() {
 		case SchedulerTaskId::KMarineDecisions:
 			// if function returns false, we can postpone for next call
 			{
-				const uint8_t wait_multiplier = (marine_main_decisions(gametime)) ? 1 : 5;
+				const uint8_t wait_multiplier = (marine_main_decisions(gametime)) ? 1 : 10;
 				set_taskpool_task_time(gametime + kMarineDecisionInterval * wait_multiplier,
 				                       SchedulerTaskId::KMarineDecisions);
 			}
@@ -599,8 +598,6 @@ void DefaultAI::late_initialization() {
 	// The data struct below is owned by Player object, the purpose is to have them saved therein
 	persistent_data = player_->get_mutable_ai_persistent_state();
 	management_data.persistent_data = player_->get_mutable_ai_persistent_state();
-	const bool create_basic_buildings_list =
-	   !persistent_data->initialized || (gametime.get() < kRemainingBasicBuildingsResetTime.get());
 
 	if (!persistent_data->initialized) {
 		// As all data are initialized without given values, they must be populated with reasonable
@@ -647,10 +644,13 @@ void DefaultAI::late_initialization() {
 
 		verb_log_info_time(gametime, " AI %2d: %" PRIuS " basic buildings in savegame file. %s\n",
 		                   player_number(), persistent_data->remaining_basic_buildings.size(),
-		                   (create_basic_buildings_list) ?
+		                   (gametime.get() < kRemainingBasicBuildingsResetTime.get()) ?
                             "New list will be recreated though (kAITrainingMode is true)" :
                             "");
 	}
+
+	const bool create_basic_buildings_list =
+	   !persistent_data->initialized || (gametime.get() < kRemainingBasicBuildingsResetTime.get());
 
 	// Even if we have basic buildings from savefile, we ignore them and recreate them based
 	// on lua conf files
@@ -1286,7 +1286,6 @@ void DefaultAI::late_initialization() {
 
 	// Just to be initialized
 	soldier_status_ = SoldiersStatus::kEnough;
-	vacant_mil_positions_average_ = 0;
 	spots_avail.resize(4);
 	trees_nearby_treshold_ = 3 + std::abs(management_data.get_military_number_at(121)) / 2;
 	last_road_dismantled_ = Time(0);
@@ -2401,11 +2400,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 	}
 
 	const Widelands::Map& map = game().map();
-
-	if (gametime > last_seafaring_check_ + Duration(20 * 1000)) {
-		map_allows_seafaring_ = map.allows_seafaring();
-		last_seafaring_check_ = gametime;
-	}
+	const bool map_allows_seafaring = map.allows_seafaring();
 
 	// Do we have basic economy established? Informing that we just left the basic economy mode.
 	if (!basic_economy_established && persistent_data->remaining_basic_buildings.empty()) {
@@ -2850,7 +2845,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						prio += 150;
 						assert(!bo.is(BuildingAttribute::kShipyard));
 					} else if (bo.is(BuildingAttribute::kShipyard)) {
-						if (!map_allows_seafaring_) {
+						if (!map_allows_seafaring) {
 							continue;
 						}
 					} else {
@@ -2917,9 +2912,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 							prio += (-3 + bf->water_nearby);
 						}
 					} else if (bo.is(BuildingAttribute::kShipyard)) {
-						// for now AI builds only one shipyard
-						assert(bo.total_count() == 0);
-						if (bf->open_water_nearby > 3 && map_allows_seafaring_ &&
+						if (bf->open_water_nearby > 3 && map_allows_seafaring &&
 						    bf->shipyard_preferred == ExtendedBool::kTrue) {
 							prio += productionsites.size() * 5 +
 							        bf->open_water_nearby *
@@ -3220,6 +3213,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 	}
 
 	// send the command to construct a new building
+	verb_log_dbg_time(game().get_gametime(), "AI %d builds %s at %d,%d", player_number(),
+	                  best_building->desc->name().c_str(), proposed_coords.x, proposed_coords.y);
 	game().send_player_build(player_number(), proposed_coords, best_building->id);
 	blocked_fields.add(proposed_coords, game().get_gametime() + Duration(2 * 60 * 1000));
 
@@ -4077,7 +4072,7 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
 	if (spots_ < kSpotsTooLittle) {
 		fields_necessity += 10;
 	}
-	if (map_allows_seafaring_ && num_ports == 0) {
+	if (map.allows_seafaring() && num_ports == 0) {
 		fields_necessity += 10;
 	}
 	if (num_ports < 4) {
@@ -4457,7 +4452,7 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 			considering_upgrade = false;
 		}
 		// if upgraded building is part of basic economy we allow earlier upgrade
-		if (en_bo.cnt_built < static_cast<int32_t>(en_bo.basic_amount)) {
+		if (en_bo.cnt_built < en_bo.basic_amount) {
 			considering_upgrade = true;
 		}
 	}
@@ -4783,9 +4778,9 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 	    gametime - site.bo->last_dismantle_time >
 	       Duration(static_cast<uint32_t>(
 	          (std::abs(management_data.get_military_number_at(169)) / 5 + 1) * 60 * 1000)) &&
-
 	    site.bo->current_stats > site.site->get_statistics_percent() &&  // underperformer
-	    (game().get_gametime() - site.unoccupied_till) > Duration(10 * 60 * 1000)) {
+	    (game().get_gametime() - site.unoccupied_till) > Duration(10 * 60 * 1000) &&
+	    !site.bo->is(BuildingAttribute::kShipyard)) {
 
 		site.bo->last_dismantle_time = game().get_gametime();
 
@@ -5059,7 +5054,7 @@ BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo, con
 
 	// First there are situation when we cannot built the warehouse/port
 	// a) This is port and map is not seafaring one
-	if (bo.is(BuildingAttribute::kPort) && !map_allows_seafaring_) {
+	if (bo.is(BuildingAttribute::kPort) && !game().map().allows_seafaring()) {
 		bo.new_building_overdue = 0;
 		return BuildingNecessity::kForbidden;
 	}
@@ -5151,6 +5146,7 @@ BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo, con
 BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
                                                       const PerfEvaluation purpose,
                                                       const Time& gametime) {
+	const bool map_allows_seafaring = game().map().allows_seafaring();
 	bo.primary_priority = 0;
 
 	static BasicEconomyBuildingStatus site_needed_for_economy = BasicEconomyBuildingStatus::kNone;
@@ -5178,7 +5174,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	}
 
 	// Perhaps buildings are not allowed because the map is no seafaring
-	if (purpose == PerfEvaluation::kForConstruction && !map_allows_seafaring_ &&
+	if (purpose == PerfEvaluation::kForConstruction && !map_allows_seafaring &&
 	    bo.is(BuildingAttribute::kNeedsSeafaring)) {
 		return BuildingNecessity::kForbidden;
 	}
@@ -5257,7 +5253,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		}
 		const uint16_t min_roads_count =
 		   40 + std::abs(management_data.get_military_number_at(33)) / 2;
-		if (static_cast<int>(roads.size()) < min_roads_count * (1 + bo.total_count())) {
+		if (static_cast<uint32_t>(roads.size()) < min_roads_count * (1 + bo.total_count())) {
 			return BuildingNecessity::kForbidden;
 		}
 		bo.primary_priority +=
@@ -5652,7 +5648,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			assert(bo.cnt_target > 1 && bo.cnt_target < 1000);
 
 			// allow them always if basic economy not established and building is a basic one
-			if (bo.total_count() < static_cast<int32_t>(bo.basic_amount)) {
+			if (bo.total_count() < bo.basic_amount) {
 				return BuildingNecessity::kNeeded;
 			}
 
@@ -6065,7 +6061,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
                           0;
 			inputs[111] = bo.current_stats / (bo.ware_outputs.size() + 1);
 			// boost for buildings supporting seafaring
-			if (bo.is(BuildingAttribute::kSupportsSeafaring) && map_allows_seafaring_) {
+			if (bo.is(BuildingAttribute::kSupportsSeafaring) && map_allows_seafaring) {
 				inputs[112] = std::abs(management_data.get_military_number_at(170)) / 10;
 				inputs[113] = 4;
 				if (bo.total_count() == 0) {
@@ -6137,15 +6133,16 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			return BuildingNecessity::kForbidden;
 		}
 		if (bo.is(BuildingAttribute::kShipyard)) {
-			if (bo.total_count() > 0 ||
+			if (bo.total_count() > (num_ports + 1) / 2 ||
 			    (!basic_economy_established &&
 			     site_needed_for_economy == BasicEconomyBuildingStatus::kDiscouraged) ||
-			    !map_allows_seafaring_) {
+			    !map_allows_seafaring) {
 				return BuildingNecessity::kForbidden;
 			}
 			bo.primary_priority = 0;
 			if (num_ports > 0) {
-				bo.primary_priority += std::abs(management_data.get_military_number_at(150) * 3);
+				bo.primary_priority +=
+				   std::abs(management_data.get_military_number_at(150)) * 3 / num_ports;
 			}
 			if (spots_ < kSpotsTooLittle) {
 				bo.primary_priority += std::abs(management_data.get_military_number_at(151) * 3);
@@ -6728,8 +6725,15 @@ void DefaultAI::gain_building(Widelands::Building& b, const bool found_on_load) 
 			productionsites.back().unoccupied_till = gametime;
 			++productionsites.back().bo->unoccupied_count;
 			if (bo.is(BuildingAttribute::kShipyard)) {
-				marine_task_queue.push_back(kStopShipyard);
-				marine_task_queue.push_back(kReprioritize);
+				shipyardsites.emplace_back();
+				shipyardsites.back().site = &dynamic_cast<Widelands::ProductionSite&>(b);
+				shipyardsites.back().bo = &bo;
+				if (found_on_load && gametime > Time(5 * 60 * 1000)) {
+					shipyardsites.back().built_time = gametime - Duration(5 * 60 * 1000);
+				} else {
+					shipyardsites.back().built_time = gametime;
+				}
+				shipyardsites.back().unoccupied_till = gametime;
 			}
 			if (bo.is(BuildingAttribute::kFisher)) {
 				++fishers_count_;
@@ -6748,7 +6752,7 @@ void DefaultAI::gain_building(Widelands::Building& b, const bool found_on_load) 
 			++mines_per_type[bo.mines].finished;
 
 			if (bo.is(BuildingAttribute::kBuildingMatProducer)) {
-				++buil_material_mines_count;
+				++build_material_mines_count;
 			}
 
 			set_inputs_to_zero(mines_.back());
@@ -6785,6 +6789,10 @@ void DefaultAI::gain_building(Widelands::Building& b, const bool found_on_load) 
 			warehousesites.back().bo = &bo;
 			if (bo.is(BuildingAttribute::kPort)) {
 				++num_ports;
+				portsites.emplace_back();
+				portsites.back().site = &dynamic_cast<Widelands::Warehouse&>(b);
+				portsites.back().bo = &bo;
+				portsites.back().ships_assigned = 0;
 			}
 			if (!found_on_load) {
 				// recalculate distance ASAP
@@ -6847,6 +6855,16 @@ void DefaultAI::lose_building(const Widelands::Building& b) {
 				}
 			}
 
+			if (bo.is(BuildingAttribute::kShipyard)) {
+				for (std::deque<ProductionSiteObserver>::iterator i = shipyardsites.begin();
+				     i != shipyardsites.end(); ++i) {
+					if (i->site == &b) {
+						shipyardsites.erase(i);
+						break;
+					}
+				}
+			}
+
 			if (bo.is(BuildingAttribute::kFisher)) {
 				assert(fishers_count_ > 0);
 				--fishers_count_;
@@ -6864,8 +6882,8 @@ void DefaultAI::lose_building(const Widelands::Building& b) {
 			--mines_per_type[bo.mines].finished;
 
 			if (bo.is(BuildingAttribute::kBuildingMatProducer)) {
-				assert(buil_material_mines_count > 0);
-				++buil_material_mines_count;
+				assert(build_material_mines_count > 0);
+				++build_material_mines_count;
 			}
 
 		} else if (bo.type == BuildingObserver::Type::kMilitarysite) {
@@ -6894,6 +6912,13 @@ void DefaultAI::lose_building(const Widelands::Building& b) {
 			--numof_warehouses_;
 			if (bo.is(BuildingAttribute::kPort)) {
 				--num_ports;
+				for (std::deque<PortSiteObserver>::iterator i = portsites.begin(); i != portsites.end();
+				     ++i) {
+					if (i->site == &b) {
+						portsites.erase(i);
+						break;
+					}
+				}
 			}
 
 			for (std::deque<WarehouseSiteObserver>::iterator i = warehousesites.begin();
@@ -6918,17 +6943,18 @@ bool DefaultAI::check_supply(const BuildingObserver& bo) {
 	for (const Widelands::DescriptionIndex& temp_input : bo.inputs) {
 		for (const Widelands::DescriptionIndex& bidx : wares.at(temp_input).producers) {
 			BuildingObserver& temp_building = get_building_observer(bidx);
-			verb_log_dbg("Checking producer %s of ware %s for building %s.", temp_building.name,
-			             tribe_->get_ware_descr(temp_input)->name().c_str(), bo.name);
+			verb_log_dbg_time(game().get_gametime(),
+			                  "Checking producer %s of ware %s for building %s.", temp_building.name,
+			                  tribe_->get_ware_descr(temp_input)->name().c_str(), bo.name);
 			if (temp_building.cnt_built != 0 && temp_building.current_stats > 10) {
 				++supplied;
 				break;
 			}
 		}
 	}
-	verb_log_dbg("Found supplies for %d of %d input wares for Building %s",
-	             static_cast<unsigned int>(supplied), static_cast<unsigned int>(bo.inputs.size()),
-	             bo.name);
+	verb_log_dbg_time(
+	   game().get_gametime(), "Found supplies for %d of %d input wares for Building %s",
+	   static_cast<unsigned int>(supplied), static_cast<unsigned int>(bo.inputs.size()), bo.name);
 
 	return supplied == bo.inputs.size();
 }
