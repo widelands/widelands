@@ -49,9 +49,10 @@ jobs:
       with:
         fetch-depth: 1
     - name: Installing python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: 3.x
+        cache: pip
     - name: Install graphviz
       run: |
         apt-get update
@@ -67,7 +68,7 @@ jobs:
         # Create a downloadable workflow artifact for testing
         ./make.py html -graphs
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: Widelands HTML Documentation
         path: "doc/sphinx/build/html"

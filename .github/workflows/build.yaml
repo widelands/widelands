@@ -129,7 +129,7 @@ jobs:
           fetch-depth: 15
           token: '${{ secrets.WIDELANDS_FORMAT_TOKEN }}'
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
       - name: Check missing artifacts
         # This step ensures that the development release always contains an artifact for every platform.
         # artifacts.list lists all attachments of the pre-release. In case a build step failed, we detect
