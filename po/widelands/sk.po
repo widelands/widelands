@@ -72,7 +72,7 @@ msgstr "Stav"
 
 #: ../../data/scripting/messages.lua:293
 msgid "New Objective"
-msgstr "Nová uloha"
+msgstr "Nová úloha"
 
 #: ../../data/scripting/messages.lua:295
 msgid "New Objectives"
@@ -2631,14 +2631,14 @@ msgstr ""
 #. experienced worker missing.
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:255
 msgid "Expert missing"
-msgstr ""
+msgstr "chýba špecialista"
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. experienced
 #. worker missing. If you need plural forms here, please let us know.
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:260
 msgid "Experts missing"
-msgstr ""
+msgstr "chýbajú špecialisti"
 
 #: ../../src/logic/map_objects/tribes/warehouse.cc:557
 msgid "A new port was added to your economy."
@@ -4385,7 +4385,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/manager.cc:956
 #, c-format
 msgid "Fetching add-ons… (%.1f%%)"
-msgstr ""
+msgstr "Nahrávanie doplnkov… (%.1f%%)"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:959
 msgid "Connecting to the server…"
@@ -7791,7 +7791,7 @@ msgstr ""
 #: ../../src/wlapplication_options.cc:1044
 msgctxt "hotkey"
 msgid "Click"
-msgstr "Kliknutie"
+msgstr "Klik"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:1046
@@ -7804,7 +7804,7 @@ msgstr ""
 #: ../../src/wlapplication_options.cc:1050
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr "Shift + kliknutie"
+msgstr "Shift + klik"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:1052
@@ -7817,7 +7817,7 @@ msgstr ""
 #: ../../src/wlapplication_options.cc:1055
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr "Ctrl + kliknutie"
+msgstr "Ctrl + klik"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/wlapplication_options.cc:1057
@@ -8165,7 +8165,7 @@ msgstr "Poslať menej vojakov. Stlačte Ctrl na odobratie všetkých vojakov."
 #: ../../src/wui/attack_window.cc:260
 msgid ""
 "Send more soldiers. Hold down Ctrl to send as many soldiers as possible"
-msgstr "Poslať viac vojakov. Stlačte Ctrl na poslanie čo najviac vojakov."
+msgstr "Poslať viac vojakov. Stlačte Ctrl na poslanie všetkých dostupných vojakov."
 
 #: ../../src/wui/attack_window.cc:264
 msgid "Start attack"
@@ -9854,11 +9854,11 @@ msgstr "Ukončiť zamestnanie vybraného pracovníka"
 
 #: ../../src/wui/productionsitewindow.cc:246
 msgid "coming"
-msgstr ""
+msgstr "Prichádza"
 
 #: ../../src/wui/productionsitewindow.cc:246
 msgid "vacant"
-msgstr ""
+msgstr "Neobsadené"
 
 #: ../../src/wui/productionsitewindow.cc:311
 msgid "(vacant)"
