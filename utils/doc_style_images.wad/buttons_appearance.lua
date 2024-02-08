@@ -54,7 +54,7 @@ wl.ui.MapView():create_child({
             scroll_mode = "none",
             w       = width,
             font    = "wui_info_panel_heading",
-            text    = "Button appereance"
+            text    = "Button appearance"
          },
          { widget = "space", value = 5},
          {

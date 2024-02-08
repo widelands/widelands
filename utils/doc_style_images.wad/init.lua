@@ -10,7 +10,7 @@ if not wl.Editor then return end  -- Only in the editor
 -- Save screenshot as doc/sphinx/source/images/buttons.png
 -- See: https://www.widelands.org/documentation/themes/#buttons
 wl.ui.MapView():add_toolbar_plugin(
-   [[ include("addons/doc_style_images.wad/buttons_appereance.lua") ]],
+   [[ include("addons/doc_style_images.wad/buttons_appearance.lua") ]],
    "images/wui/fieldaction/menu_debug.png",
    "Button styles",
    ""
@@ -20,7 +20,7 @@ wl.ui.MapView():add_toolbar_plugin(
 -- Save screenshot as doc/sphinx/source/images/fonts_styles.png
 -- See https://www.widelands.org/documentation/themes/#fonts
 wl.ui.MapView():add_toolbar_plugin(
-   [[ include("addons/doc_style_images.wad/fonts_appereance.lua") ]],
+   [[ include("addons/doc_style_images.wad/fonts_appearance.lua") ]],
    "images/wui/fieldaction/menu_debug.png",
    "Font styles",
    ""
