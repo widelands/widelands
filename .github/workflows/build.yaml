@@ -23,7 +23,7 @@ jobs:
       appimage: ${{ steps.changed_files.outputs.appimage }}
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       if: github.ref == 'refs/heads/master'
       with:
         fetch-depth: 1
@@ -124,7 +124,7 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 15
           token: '${{ secrets.WIDELANDS_FORMAT_TOKEN }}'
