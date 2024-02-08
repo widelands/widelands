@@ -58,7 +58,18 @@ jobs:
         pip install -r requirements.txt
         mkdir source/_static
         ./extract_rst.py
-        sphinx-build -W -b json -d build/doctrees source build/json
+        # Test building for the homepage
+        sphinx-build -W -n -b json -d build/doctrees source build/json
+        # Create a downloadable workflow artifact for testing
+        ./make.py html
+        cd build
+        zip -r widelands_doc.zip html
+        mv widelands_doc.zip "${{ github.workspace }}/widelands_doc_${{ github.sha }}.zip"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: Widelands HTML Documentation
+        path: "${{ github.workspace }}/widelands_doc_${{ github.sha }}.zip"
 
   lua_style:
     runs-on: ubuntu-latest
