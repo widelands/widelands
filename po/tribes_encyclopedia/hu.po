@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
 # Tóth András <txa-dev@posteo.hu>, 2021
@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-11-18 02:30+0000\n"
+"POT-Creation-Date: 2024-02-01 02:29+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: litoll <litoll@freemail.hu>, 2016\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
@@ -14752,9 +14752,9 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average. Needles"
-" are an exception - in the time to produce one tool two needles are "
+" are an exception – in the time to produce one tool two needles are "
 "produced."
-msgstr "Ha az ellátása folyamatos, és minden szerszámra szükség van a gazdaságban, akkor a kovácsműhely átlagosan %1$senként készít mindegyikből egyet. Ha csak egy fajtára van szükség, akkor abból átlagosan %2$senként készít egyet. A tű kivétel, abból kettő készül ennyi idő alatt."
+msgstr "Ha az ellátása folyamatos, és minden szerszámra szükség van a gazdaságban, akkor a kovácsműhely átlagosan %1$senként készít mindegyikből egyet. Ha csak egy fajtára van szükség, akkor abból átlagosan %2$senként készít egyet, kivéve a tűt, amiből kettő készül ennyi idő alatt."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Small Armor
 #. Smithy
@@ -15065,7 +15065,7 @@ msgstr "Éhes vendégek füstölt hal- és húshiány idején"
 msgctxt "frisians_building"
 msgid ""
 "If the tavern is fully supplied, it can produce one ration in %1$s on "
-"average, using 2 kinds of ingredients. If it can only use one kind of "
+"average, using two kinds of ingredients. If it can only use one kind of "
 "ingredient, it can produce one ration in %2$s on average."
 msgstr "Ha az ellátása minden hozzávalóból folyamatos, akkor a kocsma átlagosan %1$senként készít egy harapnivalót kétféle hozzávalóból. Ha csak egy fajta hozzávalót tud használni, akkor átlagosan %2$senként készít egy harapnivalót."
 

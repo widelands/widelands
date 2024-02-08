@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
 # Atte Timonen, 2022
@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-11-18 02:30+0000\n"
+"POT-Creation-Date: 2024-02-03 02:22+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: LINUX-SAUNA, 2022\n"
 "Language-Team: Finnish (http://app.transifex.com/widelands/widelands/language/fi/)\n"
@@ -1712,7 +1712,7 @@ msgid "Stone Workshop"
 msgstr "Kiventyöstön paja"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:86
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:87
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:212
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:222
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:218
@@ -1722,14 +1722,14 @@ msgstr "Lapion teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:98
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:99
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:118
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:75
 msgid "making a felling ax"
 msgstr "Kaatokirveen teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:110
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:111
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:173
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:196
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:179
@@ -1737,13 +1737,13 @@ msgid "making a pick"
 msgstr "Hakun teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a machete because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:122
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:123
 msgid "making a machete"
 msgstr "Viidakkoveitsen teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:134
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:135
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:183
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:166
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:184
@@ -1751,7 +1751,7 @@ msgid "making kitchen tools"
 msgstr "Keittiövälineiden teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:146
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:147
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:121
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:157
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:140
@@ -1760,42 +1760,42 @@ msgid "making a hammer"
 msgstr "Vasaran teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a chisel because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:158
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:159
 msgid "making a chisel"
 msgstr "Taltan teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:170
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:171
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:220
 msgid "making needles"
 msgstr "Neulojen valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a stone bowl because
 #. ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:182
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:183
 msgid "making a stone bowl"
 msgstr "Kivimaljan teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making firestones because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:194
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:195
 msgid "making firestones"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a wooden spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:206
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:207
 msgid "making a wooden spear"
 msgstr "Puukeihään teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a stone-tipped spear
 #. because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:218
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:219
 msgid "making a stone-tipped spear"
 msgstr "Kivikärkisen keihään teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hardened spear
 #. because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:230
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:231
 msgid "making a hardened spear"
 msgstr "Vahvistetun keihään teko"
 
@@ -5610,7 +5610,7 @@ msgid ""
 "an economy. Warning: the AI can’t successfully start from this."
 msgstr "Aloita peli ainoastaan varastolla ja tyhjähköllä taloudella. Varoitus: Tekoäly ei pysty aloittamaan tätä menestyksellisesti."
 
-#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:45
+#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:46
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
 #: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:47
 #: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:48
@@ -5618,7 +5618,7 @@ msgstr "Aloita peli ainoastaan varastolla ja tyhjähköllä taloudella. Varoitus
 msgid "Be careful"
 msgstr "Ole varovainen"
 
-#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:45
+#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:46
 msgid ""
 "You only have exactly the wares for each tool you will need to start your "
 "economy. Make sure no unneeded tool is created."

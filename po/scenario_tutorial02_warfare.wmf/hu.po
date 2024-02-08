@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
 # Tóth András <txa-dev@posteo.hu>, 2021
@@ -10,14 +10,14 @@
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016
 # litoll <litoll@freemail.hu>, 2016
-# Tóth András <txa-dev@posteo.hu>, 2021,2023
+# Tóth András <txa-dev@posteo.hu>, 2021,2023-2024
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-02-10 03:09+0000\n"
+"POT-Creation-Date: 2024-02-01 02:29+0000\n"
 "PO-Revision-Date: 2015-02-03 14:47+0000\n"
-"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021,2023\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021,2023-2024\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -114,8 +114,8 @@ msgid ""
 "Barbarians cannot train in this skill and therefore have always defense "
 "level 0, which means that the damage is always reduced by %1%%%. If an "
 "attacker with an attack value of 3500 points hits a Barbarian soldier, the "
-"Barbarian will lose 3500·%2%%% = %3% health."
-msgstr "A védelem az a százalék érték, amennyivel csökken a kapott találatok által okozott sérülés. A barbároknak nem fejleszthető ez a képessége, így a védelmi szintjük mindig 0, ami azt jelenti, hogy a sérülés mindig %1%%%-kal alacsonyabb az ellenség támadásértékénél. Pl. ha egy 3500 támadásértékű ellenség találatot mér egy barbár katonára, akkor a barbár 3500·%2%%% = %3% életerőpontot veszít."
+"Barbarian will lose 3500×%2%%% = %3% health."
+msgstr "A védelem az a százalék érték, amennyivel csökken a kapott találatok által okozott sérülés. A barbároknak nem fejleszthető ez a képessége, így a védelmi szintjük mindig 0, ami azt jelenti, hogy a sérülés mindig %1%%%-kal alacsonyabb az ellenség támadásértékénél. Pl. ha egy 3500 támadásértékű ellenség találatot mér egy barbár katonára, akkor a barbár 3500×%2%%% = %3% életerőpontot veszít."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:49
 msgid "Evade:"

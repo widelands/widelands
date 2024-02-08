@@ -55,7 +55,7 @@ function encyclopedia_tutorial()
    o = campaign_message_with_objective(explain_encyclopedia, obj_lookup_wares) -- what information is available
    wait_for_window_and_tab_or_complain(
       "encyclopedia",
-      "encyclopedia_wares",
+      "tab_encyclopedia_wares",
       reopen_encyclopedia, obj_reopen_encyclopedia
    )
    while mv.windows.encyclopedia do sleep(200) end

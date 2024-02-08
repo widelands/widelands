@@ -3,7 +3,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Walter Benkel <tromaster@gmail.com>, 2020
+# Walter Benkel, 2020
 # Madkat Here, 2020
 # Gontzal Pujana Onaindia <juchuf@gmail.com>, 2020
 # Stephan Lutz <stephan-lutz@gmx.de>, 2023

@@ -41,6 +41,9 @@ public:
 	bool operator==(const WarePriority& w) const {
 		return value_ == w.value_;
 	}
+	bool operator!=(const WarePriority& w) const {
+		return value_ != w.value_;
+	}
 	// For ordering in sets and maps
 	bool operator<(const WarePriority& w) const {
 		return value_ < w.value_;

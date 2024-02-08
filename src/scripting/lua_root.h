@@ -177,46 +177,6 @@ public:
 	void do_modify_ship(lua_State* L, const std::string&, const std::string&);
 };
 
-// TODO(GunChleoc): This class is here for saveloading compatibility only. We'll get a SIGABRT from
-// the scripting packet if it's not there.
-class LuaWorld : public LuaRootModuleClass {
-public:
-	LUNA_CLASS_HEAD(LuaWorld);
-	const char* get_modulename() override {
-		return "";
-	}
-	LuaWorld() = default;
-	explicit LuaWorld(lua_State*) {
-	}
-
-	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
-	void __persist(lua_State*) override {
-	}
-	void __unpersist(lua_State*) override {
-	}
-	CLANG_DIAG_RESERVED_IDENTIFIER_ON
-};
-
-// TODO(GunChleoc): This class is here for saveloading compatibility only. We'll get a SIGABRT from
-// the scripting packet if it's not there.
-class LuaTribes : public LuaRootModuleClass {
-public:
-	LUNA_CLASS_HEAD(LuaTribes);
-	const char* get_modulename() override {
-		return "";
-	}
-	LuaTribes() = default;
-	explicit LuaTribes(lua_State*) {
-	}
-
-	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
-	void __persist(lua_State*) override {
-	}
-	void __unpersist(lua_State*) override {
-	}
-	CLANG_DIAG_RESERVED_IDENTIFIER_ON
-};
-
 void luaopen_wlroot(lua_State*, bool in_editor);
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_ROOT_H
