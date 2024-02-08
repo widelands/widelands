@@ -7,6 +7,8 @@
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2015-2016
 # GunChleoc, 2016,2018
 # Javier Mora <morehash@gmail.com>, 2015
+# Juan Miguel Bernal González, 2024
+# Juan Miguel Bernal González, 2024
 # Gontzal Pujana Onaindia <juchuf@gmail.com>, 2015
 # Kiibakun, 2015
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
@@ -23,9 +25,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-01 02:43+0000\n"
+"POT-Creation-Date: 2024-02-01 02:29+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022\n"
+"Last-Translator: Juan Miguel Bernal González, 2024\n"
 "Language-Team: Spanish (http://app.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -5987,7 +5989,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Beer is produced in micro breweries and used in inns and big inns to produce"
 " snacks."
-msgstr "La cerveza es producida en pequeñas cervecerías y usada en posadas y grandes posadas para producir bocadillos."
+msgstr "La cerveza se produce en pequeñas cervecerías, y se utiliza en posadas posadas para producir aperitivos."
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Strong Beer
 #: ../../data/tribes/initialization/barbarians/units.lua:224
@@ -7025,7 +7027,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Produces beer of the lower grade. This beer is a vital component of the "
 "snacks that inns and big inns prepare for miners in deep mines."
-msgstr "Produce cerveza de bajo grado. Esta cerveza es un componente vital de los bocadillos que las posadas y las grandes posadas preparan para los mineros en las profundas minas."
+msgstr "Produce cerveza con poco grado. Esta cerveza es un componente vital de los aperitivos que las posadas preparan para los mineros que trabajan en las profundas minas."
 
 #. TRANSLATORS: Performance helptext for a Barbarian production site: Micro
 #. Brewery
@@ -14125,7 +14127,7 @@ msgstr "Una pila de carbón, que se había erigido en este agujero de tierra, es
 #. TRANSLATORS: Helptext for a Frisian immovable: Dike
 #: ../../data/tribes/initialization/frisians/units.lua:1241
 msgid "A breakwater erected by a diker to gain new land from the sea."
-msgstr ""
+msgstr "Un rompeolas erigido por un constructor de diques para ganar nuevas tierras al mar."
 
 #. TRANSLATORS: Note helptext for a Frisian production site: Diker's House
 #: ../../data/tribes/initialization/frisians/units.lua:1243
@@ -14776,7 +14778,7 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average. Needles"
-" are an exception - in the time to produce one tool two needles are "
+" are an exception – in the time to produce one tool two needles are "
 "produced."
 msgstr ""
 
@@ -15089,7 +15091,7 @@ msgstr "Clientes hambrientos en tiempos de escasez de pescado y carne ahumados"
 msgctxt "frisians_building"
 msgid ""
 "If the tavern is fully supplied, it can produce one ration in %1$s on "
-"average, using 2 kinds of ingredients. If it can only use one kind of "
+"average, using two kinds of ingredients. If it can only use one kind of "
 "ingredient, it can produce one ration in %2$s on average."
 msgstr ""
 
@@ -15242,7 +15244,7 @@ msgid ""
 "times. You can manually remove breakwaters when the land is sufficiently "
 "secured to prevent wasting resources; to do so, build a flag, road, or "
 "building in the dike’s place."
-msgstr ""
+msgstr "El dique terraformará varias veces el terreno alrededor de cada rompeolas que construya. Puede eliminar manualmente los rompeolas cuando el terreno esté lo suficientemente seguro para evitar el desperdicio de recursos; para ello, construye una bandera, un camino o un edificio en el lugar del dique."
 
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Rock Mine
 #. TRANSLATORS: Purpose helptext for a Frisian production site: Deep Rock Mine

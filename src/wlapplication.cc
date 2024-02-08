@@ -1439,7 +1439,7 @@ void WLApplication::handle_commandline_parameters() {
 			        "with the --datadir command line option. Tried the following %d path(s):",
 			        static_cast<int>(wrong_candidates.size()));
 			for (const auto& pair : wrong_candidates) {
-				log_err(" · '%s': %s", pair.first.c_str(), pair.second.c_str());
+				log_err(" • '%s': %s", pair.first.c_str(), pair.second.c_str());
 			}
 		}
 	}

@@ -9,6 +9,7 @@
 # GunChleoc, 2016
 # Gontzal Pujana Onaindia <juchuf@gmail.com>, 2018,2021
 # Javier Mora <morehash@gmail.com>, 2015
+# Juan Miguel Bernal González, 2024
 # Gontzal Pujana Onaindia <juchuf@gmail.com>, 2015
 # Kiibakun, 2015
 # Kiibakun, 2021
@@ -25,9 +26,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-01 02:43+0000\n"
+"POT-Creation-Date: 2024-02-03 02:22+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020-2022\n"
+"Last-Translator: Juan Miguel Bernal González, 2024\n"
 "Language-Team: Spanish (http://app.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1718,7 +1719,7 @@ msgid "Stone Workshop"
 msgstr "Taller de Piedra"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:86
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:87
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:212
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:222
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:218
@@ -1728,14 +1729,14 @@ msgstr "fabricando una pala"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:98
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:99
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:118
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:75
 msgid "making a felling ax"
 msgstr "la fabricación del hacha de talar"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:110
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:111
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:173
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:196
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:179
@@ -1743,13 +1744,13 @@ msgid "making a pick"
 msgstr "fabricando un pico"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a machete because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:122
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:123
 msgid "making a machete"
 msgstr "fabricando un machete"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:134
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:135
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:183
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:166
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:184
@@ -1757,7 +1758,7 @@ msgid "making kitchen tools"
 msgstr "fabricando utensilios de cocina"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:146
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:147
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:121
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:157
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:140
@@ -1766,42 +1767,42 @@ msgid "making a hammer"
 msgstr "fabricando un martillo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a chisel because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:158
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:159
 msgid "making a chisel"
 msgstr "fabricando un cincel"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:170
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:171
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:220
 msgid "making needles"
 msgstr "haciendo agujas"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a stone bowl because
 #. ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:182
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:183
 msgid "making a stone bowl"
 msgstr "fabricando un cuenco de piedra"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making firestones because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:194
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:195
 msgid "making firestones"
-msgstr ""
+msgstr "hacer piedras de fuego"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a wooden spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:206
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:207
 msgid "making a wooden spear"
 msgstr "fabricando una lanza de madera"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a stone-tipped spear
 #. because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:218
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:219
 msgid "making a stone-tipped spear"
 msgstr "fabricando una lanza con punta de piedra"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hardened spear
 #. because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:230
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:231
 msgid "making a hardened spear"
 msgstr "fabricando una lanza endurecida"
 
@@ -1848,7 +1849,7 @@ msgstr "Mina de Piedra"
 #. TRANSLATORS: Completed/Skipped/Did not start mining because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:51
 msgid "mining"
-msgstr ""
+msgstr "minería"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:64
@@ -1875,11 +1876,11 @@ msgstr "minando cuarzo"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:91
 msgid "No Stones"
-msgstr ""
+msgstr "Sin Piedras"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:92
 msgid "Main Stone Vein Exhausted"
-msgstr ""
+msgstr "Veta de piedra principal agotado"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:94
 msgctxt "amazons_building"
@@ -2198,7 +2199,7 @@ msgid ""
 "water where he can breed fish in his work area. Remember that you can only "
 "regenerate your fish resources if there ever were some fish in the vicinity "
 "in the first place."
-msgstr ""
+msgstr "El criador de peces que trabaja en este criadero de peces, no puede encontrar agua donde pueda criar peces en su área de trabajo. Recuerde que solo podrá regenerar sus recursos pesqueros si alguna vez hubo peces en las cercanías."
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:57
 msgid "The fishing grounds are full"
@@ -3851,17 +3852,17 @@ msgstr "El recolector de fruta trabajando en la casa del recolector de frutas no
 #: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:7
 msgctxt "frisians_building"
 msgid "Diker’s House"
-msgstr ""
+msgstr "La Casa del Constructor de Diques"
 
 #. TRANSLATORS: Completed/Skipped/Did not start diking because ...
 #: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:62
 msgid "diking"
-msgstr ""
+msgstr "dique"
 
 #. TRANSLATORS: Completed/Skipped/Did not start building a dike because ...
 #: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:72
 msgid "building a dike"
-msgstr ""
+msgstr "construir un dique"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:8
@@ -5058,7 +5059,7 @@ msgstr "Edificio Destruido"
 #: ../../data/tribes/immovables/dike/init.lua:8
 msgctxt "immovable"
 msgid "Dike"
-msgstr ""
+msgstr "Dique"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/grapevine/medium/init.lua:8
@@ -5172,13 +5173,13 @@ msgstr "Sin Recursos"
 #: ../../data/tribes/immovables/resi/amazons/stones_1/init.lua:8
 msgctxt "resource_indicator"
 msgid "Some Quartz"
-msgstr ""
+msgstr "Un Poco de Cuarzo"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/amazons/stones_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Quartz"
-msgstr ""
+msgstr "Mucho Cuarzo"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/coal_1/init.lua:8
@@ -5461,11 +5462,11 @@ msgstr "El Equipo de Desarrollo de Widelands"
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/amazons/init.lua:13
 msgid "Amazons"
-msgstr ""
+msgstr "Amazonas"
 
 #: ../../data/tribes/initialization/amazons/init.lua:14
 msgid "The people of the amazonian jungle."
-msgstr ""
+msgstr "Los pueblos de la selva amazónica."
 
 #. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
@@ -5616,7 +5617,7 @@ msgid ""
 "an economy. Warning: the AI can’t successfully start from this."
 msgstr "Empieza el partido con solo un almacén y el mínimo pelado para montar una economía. Aviso: la IA no puede empezar afortunada de esta condición."
 
-#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:45
+#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:46
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
 #: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:47
 #: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:48
@@ -5624,7 +5625,7 @@ msgstr "Empieza el partido con solo un almacén y el mínimo pelado para montar 
 msgid "Be careful"
 msgstr "Ten cuidado"
 
-#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:45
+#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:46
 msgid ""
 "You only have exactly the wares for each tool you will need to start your "
 "economy. Make sure no unneeded tool is created."
@@ -6164,7 +6165,7 @@ msgstr "Içana"
 #: ../../data/tribes/ships/amazons/init.lua:167
 msgctxt "shipname"
 msgid "Igapó-Açu"
-msgstr ""
+msgstr "Igapó-Açu"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:169
@@ -6392,7 +6393,7 @@ msgstr "Mapari"
 #: ../../data/tribes/ships/amazons/init.lua:243
 msgctxt "shipname"
 msgid "Mapiá"
-msgstr ""
+msgstr "Mapiá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:245
@@ -6776,163 +6777,163 @@ msgstr "Xie"
 #: ../../data/tribes/ships/amazons/init.lua:371
 msgctxt "shipname"
 msgid "Apu Illapu"
-msgstr ""
+msgstr "Apu Illapu"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:373
 msgctxt "shipname"
 msgid "Ayar Cachi"
-msgstr ""
+msgstr "Ayar Cachi"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:375
 msgctxt "shipname"
 msgid "Illapa"
-msgstr ""
+msgstr "Illapa"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:377
 msgctxt "shipname"
 msgid "Inti"
-msgstr ""
+msgstr "Inti"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:379
 msgctxt "shipname"
 msgid "Kuychi"
-msgstr ""
+msgstr "Kuychi"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:381
 msgctxt "shipname"
 msgid "Mama Killa"
-msgstr ""
+msgstr "Mama Killa"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:383
 msgctxt "shipname"
 msgid "Mama Occlo"
-msgstr ""
+msgstr "Mama Occlo"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:385
 msgctxt "shipname"
 msgid "Manco Cápac"
-msgstr ""
+msgstr "Manco Cápac"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:387
 msgctxt "shipname"
 msgid "Pachamama"
-msgstr ""
+msgstr "Pachamama"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:389
 msgctxt "shipname"
 msgid "Quchamama"
-msgstr ""
+msgstr "Quchamama"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:391
 msgctxt "shipname"
 msgid "Sachamama"
-msgstr ""
+msgstr "Sachamama"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:393
 msgctxt "shipname"
 msgid "Viracocha"
-msgstr ""
+msgstr "Viracocha"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
 #: ../../data/tribes/ships/amazons/init.lua:395
 msgctxt "shipname"
 msgid "Yakumama"
-msgstr ""
+msgstr "Yakumama"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:397
 msgctxt "shipname"
 msgid "Atahuallpa"
-msgstr ""
+msgstr "Atahuallpa"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:399
 msgctxt "shipname"
 msgid "Lloqe Yupanki"
-msgstr ""
+msgstr "Lloqe Yupanki"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:401
 msgctxt "shipname"
 msgid "Manqo Qhapaq"
-msgstr ""
+msgstr "Manqo Qhapaq"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:403
 msgctxt "shipname"
 msgid "Mayta Qhapaq"
-msgstr ""
+msgstr "Mayta Qhapaq"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:405
 msgctxt "shipname"
 msgid "Pachakuti"
-msgstr ""
+msgstr "Pachakuti"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:407
 msgctxt "shipname"
 msgid "Qhapaq Yupanki"
-msgstr ""
+msgstr "Qhapaq Yupanki"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:409
 msgctxt "shipname"
 msgid "Thupa"
-msgstr ""
+msgstr "Thupa"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:411
 msgctxt "shipname"
 msgid "Urqon"
-msgstr ""
+msgstr "Urqon"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:413
 msgctxt "shipname"
 msgid "Washkar"
-msgstr ""
+msgstr "Washkar"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:415
 msgctxt "shipname"
 msgid "Wayna Qhapaq"
-msgstr ""
+msgstr "Wayna Qhapaq"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:417
 msgctxt "shipname"
 msgid "Yawar Waqaq"
-msgstr ""
+msgstr "Yawar Waqaq"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
 #: ../../data/tribes/ships/amazons/init.lua:419
 msgctxt "shipname"
 msgid "Zinchi Roqa"
-msgstr ""
+msgstr "Zinchi Roqa"
 
 #. TRANSLATORS: This Amazonian ship is named after the lake in the Andes
 #: ../../data/tribes/ships/amazons/init.lua:421
 msgctxt "shipname"
 msgid "Lake Titicaca"
-msgstr ""
+msgstr "Lago Titicaca"
 
 #. TRANSLATORS: This Amazonian ship is named after the main Inca temple
 #: ../../data/tribes/ships/amazons/init.lua:423
 msgctxt "shipname"
 msgid "Koricancha"
-msgstr ""
+msgstr "Koricancha"
 
 #. TRANSLATORS: This is the Atlanteans' ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:101
@@ -7328,7 +7329,7 @@ msgstr "Beowulf"
 #: ../../data/tribes/ships/barbarians/init.lua:44
 msgctxt "shipname"
 msgid "Bison"
-msgstr ""
+msgstr "Bisonte"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
 #: ../../data/tribes/ships/barbarians/init.lua:46
@@ -7352,7 +7353,7 @@ msgstr "Dellingr"
 #: ../../data/tribes/ships/barbarians/init.lua:52
 msgctxt "shipname"
 msgid "Eagle"
-msgstr ""
+msgstr "Aguila"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:54
@@ -7376,7 +7377,7 @@ msgstr "Hagbard"
 #: ../../data/tribes/ships/barbarians/init.lua:60
 msgctxt "shipname"
 msgid "Hakhor"
-msgstr ""
+msgstr "Hakhor"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:62
@@ -7514,13 +7515,13 @@ msgstr "Jabalí"
 #: ../../data/tribes/ships/barbarians/init.lua:106
 msgctxt "shipname"
 msgid "Valkyrie"
-msgstr ""
+msgstr "Valquiria"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:108
 msgctxt "shipname"
 msgid "Wisent"
-msgstr ""
+msgstr "Sabio"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:110
@@ -7550,13 +7551,13 @@ msgstr "Mar Adriático"
 #: ../../data/tribes/ships/empire/init.lua:36
 msgctxt "shipname"
 msgid "Adamas"
-msgstr ""
+msgstr "Adamas"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:38
 msgctxt "shipname"
 msgid "Agrippa"
-msgstr ""
+msgstr "Agrippa"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:40
@@ -7586,7 +7587,7 @@ msgstr "Apollo"
 #: ../../data/tribes/ships/empire/init.lua:48
 msgctxt "shipname"
 msgid "Aquila"
-msgstr ""
+msgstr "Aquila"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:50
@@ -7598,7 +7599,7 @@ msgstr "Augustus"
 #: ../../data/tribes/ships/empire/init.lua:52
 msgctxt "shipname"
 msgid "Aurum"
-msgstr ""
+msgstr "Aurum"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:54
@@ -7646,19 +7647,19 @@ msgstr "Carrara"
 #: ../../data/tribes/ships/empire/init.lua:68
 msgctxt "shipname"
 msgid "Cato"
-msgstr ""
+msgstr "Cato"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:70
 msgctxt "shipname"
 msgid "Cæsar"
-msgstr ""
+msgstr "Cæsar"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:72
 msgctxt "shipname"
 msgid "Cervus"
-msgstr ""
+msgstr "Cervus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:74
@@ -7682,7 +7683,7 @@ msgstr "Dian"
 #: ../../data/tribes/ships/empire/init.lua:80
 msgctxt "shipname"
 msgid "Delphinus"
-msgstr ""
+msgstr "Delphinus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:82
@@ -7694,7 +7695,7 @@ msgstr "Domiciano"
 #: ../../data/tribes/ships/empire/init.lua:84
 msgctxt "shipname"
 msgid "Etna"
-msgstr ""
+msgstr "Etna"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:86
@@ -7706,7 +7707,7 @@ msgstr "Fáustulo"
 #: ../../data/tribes/ships/empire/init.lua:88
 msgctxt "shipname"
 msgid "Ferrum"
-msgstr ""
+msgstr "Ferrum"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:90
@@ -7724,13 +7725,13 @@ msgstr "Galo"
 #: ../../data/tribes/ships/empire/init.lua:94
 msgctxt "shipname"
 msgid "Gladiator"
-msgstr ""
+msgstr "Gladiador"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:96
 msgctxt "shipname"
 msgid "Gloria Imperii"
-msgstr ""
+msgstr "Gloria Imperii"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:98
@@ -7742,7 +7743,7 @@ msgstr "Jano"
 #: ../../data/tribes/ships/empire/init.lua:100
 msgctxt "shipname"
 msgid "Iulius Cæsar"
-msgstr ""
+msgstr "Iulius Cæsar"
 
 #. TRANSLATORS: This Empire ship is named after a Roman goddess
 #: ../../data/tribes/ships/empire/init.lua:102
@@ -7772,13 +7773,13 @@ msgstr "Latonia"
 #: ../../data/tribes/ships/empire/init.lua:110
 msgctxt "shipname"
 msgid "Leo"
-msgstr ""
+msgstr "Leo"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:112
 msgctxt "shipname"
 msgid "Lepus"
-msgstr ""
+msgstr "Lepus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:114
@@ -7802,7 +7803,7 @@ msgstr "Mármol"
 #: ../../data/tribes/ships/empire/init.lua:120
 msgctxt "shipname"
 msgid "Marcus Aurelius"
-msgstr ""
+msgstr "Marcus Aurelius"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../data/tribes/ships/empire/init.lua:122
@@ -7862,7 +7863,7 @@ msgstr "Portus Bellus"
 #: ../../data/tribes/ships/empire/init.lua:140
 msgctxt "shipname"
 msgid "Præda"
-msgstr ""
+msgstr "Præda"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:142
@@ -7886,7 +7887,7 @@ msgstr "Rómulo"
 #: ../../data/tribes/ships/empire/init.lua:148
 msgctxt "shipname"
 msgid "Sagitta"
-msgstr ""
+msgstr "Sagitta"
 
 #. TRANSLATORS: This Empire ship is named after an in-game character
 #: ../../data/tribes/ships/empire/init.lua:150
@@ -7904,13 +7905,13 @@ msgstr "Saturno"
 #: ../../data/tribes/ships/empire/init.lua:154
 msgctxt "shipname"
 msgid "Scipio"
-msgstr ""
+msgstr "Scipio"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:156
 msgctxt "shipname"
 msgid "Seneca"
-msgstr ""
+msgstr "Seneca"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:158
@@ -7922,7 +7923,7 @@ msgstr "Siena"
 #: ../../data/tribes/ships/empire/init.lua:160
 msgctxt "shipname"
 msgid "Spiculum"
-msgstr ""
+msgstr "Spiculum"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:162
@@ -7952,7 +7953,7 @@ msgstr "Trajano"
 #: ../../data/tribes/ships/empire/init.lua:170
 msgctxt "shipname"
 msgid "Venator"
-msgstr ""
+msgstr "Venator"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:172
@@ -7964,13 +7965,13 @@ msgstr "Venus"
 #: ../../data/tribes/ships/empire/init.lua:174
 msgctxt "shipname"
 msgid "Vergilius"
-msgstr ""
+msgstr "Vergilius"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:176
 msgctxt "shipname"
 msgid "Vespa"
-msgstr ""
+msgstr "Vespa"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:178
@@ -7988,7 +7989,7 @@ msgstr "Vesta"
 #: ../../data/tribes/ships/empire/init.lua:182
 msgctxt "shipname"
 msgid "Vesuvius"
-msgstr ""
+msgstr "Vesuvius"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:184
@@ -8431,7 +8432,7 @@ msgstr "Tenazas"
 #: ../../data/tribes/wares/firestones/init.lua:8
 msgctxt "ware"
 msgid "Firestones"
-msgstr ""
+msgstr "Piedras de fuego"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/fish/init.lua:8
@@ -9843,7 +9844,7 @@ msgstr "Excavador de arcilla"
 #: ../../data/tribes/workers/frisians/diker/init.lua:8
 msgctxt "frisians_worker"
 msgid "Diker"
-msgstr ""
+msgstr "Constructor de diques"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/farmer/init.lua:8

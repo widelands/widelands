@@ -272,7 +272,7 @@ AddOnConflict check_requirements(const AddOnRequirements& required_addons) {
 	}
 	AddOnConflict result = check_requirements_conflicts(required_addons);
 	for (const auto& pair : required_addons) {
-		result.first = format(_("%1$s<br>· %2$s (version %3$s)"), result.first, pair.first,
+		result.first = format(_("%1$s<br>• %2$s (version %3$s)"), result.first, pair.first,
 		                      version_to_string(pair.second));
 	}
 	return result;
