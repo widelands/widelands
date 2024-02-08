@@ -5,6 +5,7 @@
 # Translators:
 # Pedro Montaño <pedrol.montanoa@gmail.com>, 2022
 # Puniasterus <puniasterus@gmail.com>, 2023
+# Juan Miguel Bernal González, 2024
 # 
 msgid ""
 msgstr ""
@@ -12,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
-"Last-Translator: Puniasterus <puniasterus@gmail.com>, 2023\n"
+"Last-Translator: Juan Miguel Bernal González, 2024\n"
 "Language-Team: Spanish (https://app.transifex.com/widelands/teams/35159/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -227,6 +228,9 @@ msgid ""
 "Törver, that is rapidly building up its armies. They may soon have become "
 "too strong to be defeated."
 msgstr ""
+"Desde el Norte nos amenaza una tribu beligerante, liderada por el señor de "
+"la guerra Törver, que está reuniendo rápidamente sus ejércitos. Es posible "
+"que pronto se hayan vuelto demasiado fuertes para ser derrotados."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
 msgid ""
@@ -277,6 +281,10 @@ msgid ""
 " our rival in the North is still stronger than all our armies combined. We "
 "should avoid a conflict until we are able to defeat them."
 msgstr ""
+"Señor, aunque nuestros soldados se enfrentarían a cualquier enemigo sin el "
+"menor miedo, nuestro rival del Norte sigue siendo más fuerte que todos "
+"nuestros ejércitos juntos. Debemos evitar un conflicto hasta que seamos "
+"capaces de derrotarlos."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:30
 msgid ""
@@ -340,6 +348,9 @@ msgid ""
 "their excellent access to the adjacent great lake. A port in the North will "
 "give us better opportunities to have contact with other tribes."
 msgstr ""
+"Señor, ahora que hemos conquistado la tierra de Törver, podemos aprovechar "
+"su excelente acceso al gran lago. Un puerto en el Norte nos dará mejores "
+"oportunidades de tener contacto con otras tribus."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
 msgid ""
@@ -370,10 +381,14 @@ msgid ""
 "to be very good fighters. It is best to establish a strong military presence"
 " here before we proceed."
 msgstr ""
+"Sin embargo, debemos tener cuidado si queremos conquistar el centinela. "
+"Puede haber más edificios enemigos que estén fuera de vista y se sabe que "
+"los piratas son muy buenos luchadores. Lo mejor es establecer una fuerte "
+"presencia militar aquí antes de continuar."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:70
 msgid "Found a treasure"
-msgstr ""
+msgstr "Tesoro encontrado"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:71
 msgid ""
@@ -381,6 +396,10 @@ msgid ""
 "have been looted from the gold diggers’ huts nearby. This gold ore will be "
 "transported to our headquarters."
 msgstr ""
+"Señor, hemos encontrado 25 unidades de mineral de oro dentro del centinela "
+"pirata. Es posible que hayan sido saqueados de las chozas cercanas de los "
+"buscadores de oro. Este mineral de oro será transportado a nuestra cuartel "
+"general."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:73
 msgid ""
@@ -389,11 +408,14 @@ msgid ""
 "this area. There is a good building spot only three steps away from the "
 "sentry."
 msgstr ""
+"Con nuestra expansión exitosa en esta área, deberíamos considerar construir "
+"un almacén directamente al suroeste del centinela para poder explorar más "
+"esta área. Hay un buen lugar para construir a solo tres pasos del centinela."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:79
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:86
 msgid "Removing the swamps"
-msgstr ""
+msgstr "Eliminando los pantanos"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:80
 msgid ""
@@ -402,6 +424,10 @@ msgid ""
 "continue. If you bring enough shovels to the new warehouse then volunteers "
 "will remove the swamps."
 msgstr ""
+"Señor, la temporada de lluvias ha creado pantanos a lo largo del arroyo "
+"hacia el este y no podemos atravesarlos. Tienen que ser eliminados antes de "
+"que podamos continuar. Si traes suficientes palas al nuevo almacén, los "
+"voluntarios eliminarán los pantanos."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
 msgid ""
@@ -409,6 +435,9 @@ msgid ""
 "will not have removed the swamps before the next wet season. If you bring "
 "more shovels to the new warehouse then more volunteers will join in."
 msgstr ""
+"Señor, se han repartido todas las palas, pero si seguimos a este ritmo no "
+"habremos eliminado los pantanos antes de la próxima temporada de lluvias. Si"
+" traes más palas al nuevo almacén, se unirán más voluntarios."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
 msgid ""
@@ -416,20 +445,25 @@ msgid ""
 "and finish them off. Maybe there are even more treasures hidden in their "
 "territory."
 msgstr ""
+"Señor, ahora que tenemos acceso al escondite de los piratas, debemos "
+"conquistarlo y acabar con ellos. Quizás haya aún más tesoros escondidos en "
+"su territorio."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:100
 msgid "The pirates were defeated."
-msgstr ""
+msgstr "Los piratas fueron derrotados."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:101
 msgid ""
 "Sire, we have defeated the pirates. They have hidden some gold in their last"
 " bastion which is now being transferred to our headquarters."
 msgstr ""
+"Señor, hemos derrotado a los piratas. Habían escondido algo de oro en su "
+"último bastión que ahora está siendo trasladado a nuestro cuartel general."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:106
 msgid "Pirates are regrouping"
-msgstr ""
+msgstr "Los piratas se reagrupan"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:107
 msgid ""
@@ -438,10 +472,14 @@ msgid ""
 "lost strength. Our dwindling resources can become a problem with such a "
 "mighty enemy in front of us."
 msgstr ""
+"Señor, como resultado de nuestros ataques a los piratas, han comenzado a "
+"reagruparse con piratas de otras tribus. Podrían recuperar gran parte de la "
+"fuerza que habían perdido anteriormente. Nuestros recursos menguantes pueden"
+" convertirse en un problema con un enemigo tan poderoso frente a nosotros."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:112
 msgid "Pirates on the run"
-msgstr ""
+msgstr "Los piratas huyen"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:113
 msgid ""
@@ -449,10 +487,13 @@ msgid ""
 "them have fled and moved away in small boats. It is unknown in which "
 "direction they have escaped."
 msgstr ""
+"Señor, gracias a nuestros exitosos esfuerzos para expulsar a los piratas, "
+"muchos de ellos han huido y se han alejado en pequeñas embarcaciones. Se "
+"desconoce en qué dirección han escapado."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:118
 msgid "Ability to build shipyards"
-msgstr ""
+msgstr "Capacidad para construir astilleros."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:119
 msgid ""
@@ -460,10 +501,14 @@ msgid ""
 "decipher the strange language in Törver’s descriptions that we had found in "
 "his headquarters. From now on we are able to build shipyards."
 msgstr ""
+"Señor, después de un largo estudio e investigación, nuestros sabios "
+"finalmente lograron descifrar el extraño lenguaje de las descripciones de "
+"Törver que habíamos encontrado en su cuartel general. A partir de ahora "
+"podremos construir astilleros."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:124
 msgid "Our scout has been captured"
-msgstr ""
+msgstr "Nuestro explorador ha sido capturado"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:125
 msgid ""
@@ -471,6 +516,9 @@ msgid ""
 "their island. He is the only person who knows the way through the swamps "
 "towards Hjalmar."
 msgstr ""
+"Señor, uno de nuestros exploradores ha sido capturado por los piratas y "
+"llevado a su isla. Es la única persona que conoce el camino a través de los "
+"pantanos hacia Hjalmar."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:127
 msgid ""
@@ -478,10 +526,13 @@ msgid ""
 "We should use the knowledge about shipbuilding that we took from Törver to "
 "build ships and attack their positions."
 msgstr ""
+"Según nuestros pescadores está encerrado en la fortaleza de la isla. "
+"Deberíamos utilizar los conocimientos sobre construcción naval que "
+"aprendimos de Törver para construir barcos y atacar sus posiciones."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:133
 msgid "Island conquered"
-msgstr ""
+msgstr "Isla conquistada"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:134
 msgid ""
@@ -489,26 +540,34 @@ msgid ""
 "It turns out that the pirates have left a large amount of gold, beer, and "
 "weapons on the island."
 msgstr ""
+"Señor, nuestros soldados conquistaron la isla y lograron liberar al "
+"explorador. Resulta que los piratas han dejado una gran cantidad de oro, "
+"cerveza y armas en la isla."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:139
 msgid "The scout returns"
-msgstr ""
+msgstr "El explorador regresa"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:140
 msgid ""
 "Sire, our scout has returned to our territory, and he has shown us the road "
 "through the swamps towards Hjalmar."
 msgstr ""
+"Señor, nuestro explorador ha regresado a nuestro territorio y nos ha "
+"mostrado el camino a través de los pantanos hacia Hjalmar."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:142
 msgid ""
 "He noticed that we can also move along the other side of the mountain, in "
 "case we might fail here, but it will be much more difficult to do."
 msgstr ""
+"Se dio cuenta de que también podemos movernos por el otro lado de la "
+"montaña, en caso de que no podamos por aquí, pero será mucho más difícil de "
+"hacer."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:148
 msgid "The last frontier"
-msgstr ""
+msgstr "La última frontera"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:149
 msgid ""
@@ -516,19 +575,24 @@ msgid ""
 "final enemy. They have been expecting us for a long time and will be "
 "prepared for the heaviest battle in their lifetime."
 msgstr ""
+"Señor, casi hemos derrotado a todos los ejércitos y ahora nos acercamos a "
+"nuestro último enemigo. Nos esperan desde hace mucho tiempo y estarán "
+"preparados para la batalla más dura de su vida."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:151
 msgid ""
 "Make sure that our armies are at full strength and then act decisively."
 msgstr ""
+"Asegúrese de que nuestros ejércitos tengan toda su fuerza y ​​luego actúe "
+"con decisión."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:157
 msgid "Victory!"
-msgstr ""
+msgstr "¡Victoria!"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:158
 msgid "Sire, my congratulations!"
-msgstr ""
+msgstr "¡Señor, mis felicitaciones!"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:160
 msgid ""
@@ -536,7 +600,10 @@ msgid ""
 " conquered our rivalling tribes, but you have also captured the hearts of "
 "your loving people."
 msgstr ""
+"Has completado todos los objetivos y derrotado a todos nuestros enemigos. No"
+" sólo has conquistado a nuestras tribus rivales, sino que también has ganado"
+" los corazones de tu querido pueblo."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:162
 msgid "Your name will be remembered forever."
-msgstr ""
+msgstr "Tu nombre será recordado para la eternidad."

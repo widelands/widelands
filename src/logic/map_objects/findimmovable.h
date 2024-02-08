@@ -123,6 +123,7 @@ struct FindImmovableSize {
 private:
 	int32_t min, max;
 };
+
 struct FindImmovableType {
 	explicit FindImmovableType(MapObjectType const init_type) : type(init_type) {
 	}
@@ -132,6 +133,7 @@ struct FindImmovableType {
 private:
 	MapObjectType type;
 };
+
 struct FindImmovableAttribute {
 	explicit FindImmovableAttribute(uint32_t const init_attrib) : attrib(init_attrib) {
 	}
@@ -141,28 +143,36 @@ struct FindImmovableAttribute {
 private:
 	int32_t attrib;
 };
+
 struct FindImmovablePlayerImmovable {
 	FindImmovablePlayerImmovable() = default;
 
 	[[nodiscard]] bool accept(const BaseImmovable&) const;
 };
+
 struct FindImmovablePlayerMilitarySite {
 	explicit FindImmovablePlayerMilitarySite(const Player& init_player) : player(init_player) {
 	}
 
 	[[nodiscard]] bool accept(const BaseImmovable&) const;
 
+private:
 	const Player& player;
 };
+
 struct FindImmovableAttackTarget {
 	FindImmovableAttackTarget() = default;
 
 	[[nodiscard]] bool accept(const BaseImmovable&) const;
 };
+
 struct FindForeignMilitarysite {
 	explicit FindForeignMilitarysite(const Player& init_player) : player(init_player) {
 	}
+
 	[[nodiscard]] bool accept(const BaseImmovable&) const;
+
+private:
 	const Player& player;
 };
 
@@ -172,6 +182,7 @@ struct FindImmovableByDescr {
 
 	[[nodiscard]] bool accept(const BaseImmovable&) const;
 
+private:
 	const ImmovableDescr& descr;
 };
 
@@ -185,7 +196,18 @@ struct FindFlagOf {
 
 	[[nodiscard]] bool accept(const BaseImmovable&) const;
 
+private:
 	const FindImmovable finder;
+};
+
+struct FindFlagWithPlayersWarehouse {
+	explicit FindFlagWithPlayersWarehouse(const Player& owner) : owner_(owner) {
+	}
+
+	[[nodiscard]] bool accept(const BaseImmovable& imm) const;
+
+private:
+	const Player& owner_;
 };
 
 }  // namespace Widelands

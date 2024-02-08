@@ -298,6 +298,8 @@ enum class KeyboardShortcut : uint16_t {
 	kInGameSeafaringstatsFilterExpWait,
 	kInGameSeafaringstatsFilterExpScout,
 	kInGameSeafaringstatsFilterExpPortspace,
+	kInGameSeafaringstatsFilterWarship,
+	kInGameSeafaringstatsFilterRefitting,
 	kInGameSeafaringstatsGotoShip,
 	kInGameSeafaringstatsWatchShip,
 	kInGameSeafaringstatsOpenShipWindow,

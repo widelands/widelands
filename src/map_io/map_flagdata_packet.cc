@@ -35,7 +35,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 6;
+constexpr uint16_t kCurrentPacketVersion = 6;  // since v1.0
 
 void MapFlagdataPacket::read(FileSystem& fs,
                              EditorGameBase& egbase,
@@ -54,7 +54,7 @@ void MapFlagdataPacket::read(FileSystem& fs,
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version >= 5 && packet_version <= kCurrentPacketVersion) {
+		if (packet_version >= 6 && packet_version <= kCurrentPacketVersion) {
 			const Map& map = egbase.map();
 			while (!fr.end_of_file()) {
 				Serial const serial = fr.unsigned_32();
@@ -63,12 +63,7 @@ void MapFlagdataPacket::read(FileSystem& fs,
 
 					//  Owner is already set, nothing to do from PlayerImmovable.
 
-					// TODO(Nordfriese): Savegame compatibility
-					if (packet_version < 6) {
-						flag.animstart_ = Time(fr.unsigned_16());
-					} else {
-						flag.animstart_ = Time(fr);
-					}
+					flag.animstart_ = Time(fr);
 
 					{
 						FCoords building_position = map.get_fcoords(flag.position_);
@@ -134,8 +129,7 @@ void MapFlagdataPacket::read(FileSystem& fs,
 						assert(flag.flag_jobs_.empty());
 						for (uint16_t i = 0; i < nr_jobs; ++i) {
 							FlagJob f;
-							f.type = packet_version < 6 ? FlagJob::Type::kGeologist :
-                                                   static_cast<FlagJob::Type>(fr.unsigned_8());
+							f.type = static_cast<FlagJob::Type>(fr.unsigned_8());
 							if (fr.unsigned_8() != 0u) {
 								f.request = new Request(flag, 0, Flag::flag_job_request_callback, wwWORKER);
 								f.request->read(fr, dynamic_cast<Game&>(egbase), mol);
@@ -146,7 +140,7 @@ void MapFlagdataPacket::read(FileSystem& fs,
 							flag.flag_jobs_.push_back(f);
 						}
 
-						flag.act_pending_ = packet_version >= 6 && (fr.unsigned_8() != 0u);
+						flag.act_pending_ = (fr.unsigned_8() != 0u);
 
 						mol.mark_object_as_loaded(flag);
 					}

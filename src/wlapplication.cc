@@ -719,6 +719,8 @@ void WLApplication::init_and_run_game_from_template(FsMenu::MainMenu& mainmenu) 
 	                   section.get_bool("custom_starting_positions", false));
 	settings->set_flag(
 	   GameSettings::Flags::kForbidDiplomacy, section.get_bool("forbid_diplomacy", false));
+	settings->set_flag(
+	   GameSettings::Flags::kAllowNavalWarfare, section.get_bool("allow_naval_warfare", false));
 
 	{
 		std::string wc_name = section.get_string("win_condition", "endless_game.lua");
@@ -1487,7 +1489,7 @@ void WLApplication::handle_commandline_parameters() {
 			        "with the --datadir command line option. Tried the following %d path(s):",
 			        static_cast<int>(wrong_candidates.size()));
 			for (const auto& pair : wrong_candidates) {
-				log_err(" · '%s': %s", pair.first.c_str(), pair.second.c_str());
+				log_err(" • '%s': %s", pair.first.c_str(), pair.second.c_str());
 			}
 		}
 	}

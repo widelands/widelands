@@ -35,6 +35,7 @@
 #include "logic/game_controller.h"
 #include "logic/map_objects/pinned_note.h"
 #include "logic/map_objects/tribes/market.h"
+#include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
@@ -144,8 +145,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdDismantleBuilding(des);
 	case QueueCommandTypes::kEvictWorker:
 		return new CmdEvictWorker(des);
-	case QueueCommandTypes::kMilitarysiteSetSoldierPreference:
-		return new CmdMilitarySiteSetSoldierPreference(des);
+	case QueueCommandTypes::kSetSoldierPreference:
+		return new CmdSetSoldierPreference(des);
 	case QueueCommandTypes::kToggleMuteMessages:
 		return new CmdToggleMuteMessages(des);
 
@@ -155,6 +156,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdShipScoutDirection(des);
 	case QueueCommandTypes::kShipExploreIsland:
 		return new CmdShipExploreIsland(des);
+	case QueueCommandTypes::kShipSetDestination:
+		return new CmdShipSetDestination(des);
 	case QueueCommandTypes::kShipConstructPort:
 		return new CmdShipConstructPort(des);
 	case QueueCommandTypes::kShipSink:
@@ -175,6 +178,10 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdShipPortName(des);
 	case QueueCommandTypes::kFleetTargets:
 		return new CmdFleetTargets(des);
+	case QueueCommandTypes::kShipRefit:
+		return new CmdShipRefit(des);
+	case QueueCommandTypes::kWarshipCommand:
+		return new CmdWarshipCommand(des);
 
 	default:
 		throw wexception("PlayerCommand::deserialize(): Encountered invalid command id: %d",
@@ -531,18 +538,15 @@ void CmdFlagAction::serialize(StreamWrite& ser) {
 	ser.unsigned_32(serial_);
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdFlagAction = 3;
+constexpr uint16_t kCurrentPacketVersionCmdFlagAction = 3;  // since v1.0
 
 void CmdFlagAction::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		// TODO(Nordfriese): Savegame compatibility
-		if (packet_version >= 2 && packet_version <= kCurrentPacketVersionCmdFlagAction) {
+		if (packet_version >= 3 && packet_version <= kCurrentPacketVersionCmdFlagAction) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial_ = get_object_serial_or_zero<Flag>(fr.unsigned_32(), mol);
-			// TODO(Nordfriese): Savegame compatibility
-			type_ = packet_version < 3 ? FlagJob::Type::kGeologist :
-                                      static_cast<FlagJob::Type>(fr.unsigned_8());
+			type_ = static_cast<FlagJob::Type>(fr.unsigned_8());
 		} else {
 			throw UnhandledVersionError(
 			   "CmdFlagAction", packet_version, kCurrentPacketVersionCmdFlagAction);
@@ -652,36 +656,40 @@ void CmdToggleInfiniteProduction::write(FileWrite& fw,
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
 }
 
-/*** Cmd_MilitarySiteSetSoldierPreference ***/
+/*** Cmd_SetSoldierPreference ***/
 
-CmdMilitarySiteSetSoldierPreference::CmdMilitarySiteSetSoldierPreference(StreamRead& des)
+CmdSetSoldierPreference::CmdSetSoldierPreference(StreamRead& des)
    : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial = des.unsigned_32();
 	preference = static_cast<Widelands::SoldierPreference>(des.unsigned_8());
 }
 
-void CmdMilitarySiteSetSoldierPreference::serialize(StreamWrite& ser) {
+void CmdSetSoldierPreference::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
 	ser.unsigned_8(static_cast<uint8_t>(preference));
 }
 
-void CmdMilitarySiteSetSoldierPreference::execute(Game& game) {
+void CmdSetSoldierPreference::execute(Game& game) {
 	MapObject* mo = game.objects().get_object(serial);
 	if (upcast(ConstructionSite, cs, mo)) {
-		if (upcast(MilitarysiteSettings, s, cs->get_settings())) {
-			s->prefer_heroes = preference == SoldierPreference::kHeroes;
+		if (upcast(MilitarysiteSettings, ms, cs->get_settings())) {
+			ms->soldier_preference = preference;
+		} else if (upcast(WarehouseSettings, wh, cs->get_settings())) {
+			wh->soldier_preference = preference;
 		}
-	} else if (upcast(MilitarySite, building, mo)) {
-		game.get_player(sender())->military_site_set_soldier_preference(*building, preference);
+	} else if (upcast(MilitarySite, ms, mo)) {
+		ms->set_soldier_preference(preference);
+	} else if (upcast(Warehouse, wh, mo)) {
+		wh->set_soldier_preference(preference);
+	} else if (upcast(Ship, ship, mo)) {
+		ship->set_soldier_preference(preference);
 	}
 }
 
 constexpr uint16_t kCurrentPacketVersionSoldierPreference = 1;
 
-void CmdMilitarySiteSetSoldierPreference::write(FileWrite& fw,
-                                                EditorGameBase& egbase,
-                                                MapObjectSaver& mos) {
+void CmdSetSoldierPreference::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 	// First, write version
 	fw.unsigned_16(kCurrentPacketVersionSoldierPreference);
 	// Write base classes
@@ -693,21 +701,19 @@ void CmdMilitarySiteSetSoldierPreference::write(FileWrite& fw,
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
 }
 
-void CmdMilitarySiteSetSoldierPreference::read(FileRead& fr,
-                                               EditorGameBase& egbase,
-                                               MapObjectLoader& mol) {
+void CmdSetSoldierPreference::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersionSoldierPreference) {
 			PlayerCommand::read(fr, egbase, mol);
 			preference = static_cast<Widelands::SoldierPreference>(fr.unsigned_8());
-			serial = get_object_serial_or_zero<MilitarySite>(fr.unsigned_32(), mol);
+			serial = get_object_serial_or_zero<MapObject>(fr.unsigned_32(), mol);
 		} else {
-			throw UnhandledVersionError("CmdMilitarySiteSetSoldierPreference", packet_version,
-			                            kCurrentPacketVersionSoldierPreference);
+			throw UnhandledVersionError(
+			   "CmdSetSoldierPreference", packet_version, kCurrentPacketVersionSoldierPreference);
 		}
 	} catch (const WException& e) {
-		throw GameDataError("start/stop building: %s", e.what());
+		throw GameDataError("cmd soldier preference: %s", e.what());
 	}
 }
 
@@ -747,7 +753,7 @@ void CmdStartOrCancelExpedition::read(FileRead& fr, EditorGameBase& egbase, MapO
 			   "CmdStartOrCancelExpedition", packet_version, kCurrentPacketVersionExpedition);
 		}
 	} catch (const WException& e) {
-		throw GameDataError("start/stop building: %s", e.what());
+		throw GameDataError("cmd start/cancel expedition: %s", e.what());
 	}
 }
 void CmdStartOrCancelExpedition::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
@@ -957,6 +963,118 @@ void CmdEvictWorker::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
 }
 
+/*** Cmd_ShipRefit ***/
+CmdShipRefit::CmdShipRefit(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
+	serial_ = des.unsigned_32();
+	type_ = static_cast<ShipType>(des.unsigned_8());
+}
+
+void CmdShipRefit::execute(Game& game) {
+	if (!game.naval_warfare_allowed()) {
+		log_warn("Received a refit command but naval warfare is disabled, ignoring.");
+		return;
+	}
+
+	upcast(Ship, ship, game.objects().get_object(serial_));
+	if (ship != nullptr && ship->get_owner()->player_number() == sender()) {
+		ship->refit(game, type_);
+	}
+}
+
+void CmdShipRefit::serialize(StreamWrite& ser) {
+	write_id_and_sender(ser);
+	ser.unsigned_32(serial_);
+	ser.unsigned_8(static_cast<uint8_t>(type_));
+}
+
+constexpr uint16_t kCurrentPacketVersionShipRefit = 1;
+
+void CmdShipRefit::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersionShipRefit) {
+			PlayerCommand::read(fr, egbase, mol);
+			serial_ = get_object_serial_or_zero<Ship>(fr.unsigned_32(), mol);
+			type_ = static_cast<ShipType>(fr.unsigned_8());
+		} else {
+			throw UnhandledVersionError(
+			   "CmdShipRefit", packet_version, kCurrentPacketVersionShipRefit);
+		}
+	} catch (const WException& e) {
+		throw GameDataError("Ship refit: %s", e.what());
+	}
+}
+void CmdShipRefit::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_16(kCurrentPacketVersionShipRefit);
+	PlayerCommand::write(fw, egbase, mos);
+
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
+	fw.unsigned_8(static_cast<uint8_t>(type_));
+}
+
+/*** Cmd_WarshipCommand ***/
+CmdWarshipCommand::CmdWarshipCommand(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
+	serial_ = des.unsigned_32();
+	cmd_ = static_cast<WarshipCommand>(des.unsigned_8());
+	for (uint32_t i = des.unsigned_32(); i > 0U; --i) {
+		parameters_.push_back(des.signed_32());
+	}
+}
+
+void CmdWarshipCommand::execute(Game& game) {
+	if (!game.naval_warfare_allowed()) {
+		log_warn("Received a warship command but naval warfare is disabled, ignoring.");
+		return;
+	}
+
+	upcast(Ship, ship, game.objects().get_object(serial_));
+	if (ship != nullptr && ship->get_owner()->player_number() == sender()) {
+		ship->warship_command(game, cmd_, parameters_);
+	}
+}
+
+void CmdWarshipCommand::serialize(StreamWrite& ser) {
+	write_id_and_sender(ser);
+	ser.unsigned_32(serial_);
+	ser.unsigned_8(static_cast<uint8_t>(cmd_));
+	ser.unsigned_32(parameters_.size());
+	for (uint32_t p : parameters_) {
+		ser.unsigned_32(p);
+	}
+}
+
+constexpr uint16_t kCurrentPacketVersionWarshipCommand = 1;
+
+void CmdWarshipCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersionWarshipCommand) {
+			PlayerCommand::read(fr, egbase, mol);
+			serial_ = get_object_serial_or_zero<Ship>(fr.unsigned_32(), mol);
+			cmd_ = static_cast<WarshipCommand>(fr.unsigned_8());
+			for (uint32_t i = fr.unsigned_32(); i > 0U; --i) {
+				parameters_.push_back(fr.signed_32());
+			}
+		} else {
+			throw UnhandledVersionError(
+			   "CmdWarshipCommand", packet_version, kCurrentPacketVersionWarshipCommand);
+		}
+	} catch (const WException& e) {
+		throw GameDataError("Warship command: %s", e.what());
+	}
+}
+void CmdWarshipCommand::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_16(kCurrentPacketVersionWarshipCommand);
+	PlayerCommand::write(fw, egbase, mos);
+
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
+	fw.unsigned_8(static_cast<uint8_t>(cmd_));
+	fw.unsigned_32(parameters_.size());
+	for (uint32_t p : parameters_) {
+		fw.unsigned_32(p);
+	}
+}
+
 /*** Cmd_ShipScoutDirection ***/
 CmdShipScoutDirection::CmdShipScoutDirection(StreamRead& des)
    : PlayerCommand(Time(0), des.unsigned_8()) {
@@ -966,10 +1084,10 @@ CmdShipScoutDirection::CmdShipScoutDirection(StreamRead& des)
 
 void CmdShipScoutDirection::execute(Game& game) {
 	upcast(Ship, ship, game.objects().get_object(serial));
-	if ((ship != nullptr) && ship->get_owner()->player_number() == sender()) {
-		if (!(ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionWaiting ||
-		      ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionPortspaceFound ||
-		      ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionScouting)) {
+	if (ship != nullptr && ship->get_owner()->player_number() == sender()) {
+		if (!(ship->get_ship_state() == Widelands::ShipStates::kExpeditionWaiting ||
+		      ship->get_ship_state() == Widelands::ShipStates::kExpeditionPortspaceFound ||
+		      ship->get_ship_state() == Widelands::ShipStates::kExpeditionScouting)) {
 			log_warn_time(
 			   game.get_gametime(),
 			   " %1d:ship on %3dx%3d received scout command but not in "
@@ -1029,8 +1147,8 @@ CmdShipConstructPort::CmdShipConstructPort(StreamRead& des)
 
 void CmdShipConstructPort::execute(Game& game) {
 	upcast(Ship, ship, game.objects().get_object(serial));
-	if ((ship != nullptr) && ship->get_owner()->player_number() == sender()) {
-		if (ship->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
+	if (ship != nullptr && ship->get_owner()->player_number() == sender()) {
+		if (ship->get_ship_state() != Widelands::ShipStates::kExpeditionPortspaceFound) {
 			log_warn_time(game.get_gametime(),
 			              " %1d:ship on %3dx%3d received build port command but "
 			              "not in kExpeditionPortspaceFound status (expedition: %s), ignoring...\n",
@@ -1088,10 +1206,10 @@ CmdShipExploreIsland::CmdShipExploreIsland(StreamRead& des)
 
 void CmdShipExploreIsland::execute(Game& game) {
 	upcast(Ship, ship, game.objects().get_object(serial));
-	if ((ship != nullptr) && ship->get_owner()->player_number() == sender()) {
-		if (!(ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionWaiting ||
-		      ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionPortspaceFound ||
-		      ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionScouting)) {
+	if (ship != nullptr && ship->get_owner()->player_number() == sender()) {
+		if (!(ship->get_ship_state() == Widelands::ShipStates::kExpeditionWaiting ||
+		      ship->get_ship_state() == Widelands::ShipStates::kExpeditionPortspaceFound ||
+		      ship->get_ship_state() == Widelands::ShipStates::kExpeditionScouting)) {
 			log_warn_time(
 			   game.get_gametime(),
 			   " %1d:ship on %3dx%3d received explore island command "
@@ -1139,6 +1257,62 @@ void CmdShipExploreIsland::write(FileWrite& fw, EditorGameBase& egbase, MapObjec
 
 	// Direction of exploration
 	fw.unsigned_8(static_cast<uint8_t>(island_explore_direction));
+}
+
+/*** Cmd_ShipSetDestination ***/
+CmdShipSetDestination::CmdShipSetDestination(StreamRead& des)
+   : PlayerCommand(Time(0), des.unsigned_8()) {
+	serial_ = des.unsigned_32();
+	destination_object_ = des.unsigned_32();
+	destination_coords_ = des.unsigned_32();
+}
+
+void CmdShipSetDestination::execute(Game& game) {
+	upcast(Ship, ship, game.objects().get_object(serial_));
+	if (ship != nullptr && ship->get_owner()->player_number() == sender()) {
+		if (destination_coords_ != 0U) {
+			ship->set_destination(
+			   game, ship->owner().get_detected_port_space(destination_coords_), true);
+		} else {
+			ship->set_destination(game, game.objects().get_object(destination_object_), true);
+		}
+	}
+}
+
+void CmdShipSetDestination::serialize(StreamWrite& ser) {
+	write_id_and_sender(ser);
+	ser.unsigned_32(serial_);
+	ser.unsigned_32(destination_object_);
+	ser.unsigned_32(destination_coords_);
+}
+
+constexpr uint16_t kCurrentPacketVersionShipSetDestination = 2;
+
+void CmdShipSetDestination::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		// TODO(Nordfriese): Savegame compatibility v1.1
+		if (packet_version >= 1 && packet_version <= kCurrentPacketVersionShipSetDestination) {
+			PlayerCommand::read(fr, egbase, mol);
+			serial_ = get_object_serial_or_zero<Ship>(fr.unsigned_32(), mol);
+			destination_object_ = get_object_serial_or_zero<MapObject>(fr.unsigned_32(), mol);
+			destination_coords_ = packet_version >= 2 ? fr.unsigned_32() : 0;
+		} else {
+			throw UnhandledVersionError(
+			   "CmdShipSetDestination", packet_version, kCurrentPacketVersionShipSetDestination);
+		}
+	} catch (const WException& e) {
+		throw GameDataError("Ship set destination: %s", e.what());
+	}
+}
+void CmdShipSetDestination::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_16(kCurrentPacketVersionShipSetDestination);
+	PlayerCommand::write(fw, egbase, mos);
+
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
+	fw.unsigned_32(
+	   mos.get_object_file_index_or_zero(egbase.objects().get_object(destination_object_)));
+	fw.unsigned_32(destination_coords_);
 }
 
 /*** Cmd_ShipSink ***/
@@ -1363,18 +1537,12 @@ void CmdSetInputMaxFill::execute(Game& game) {
 		}
 	} else if (upcast(Building, b, mo)) {
 		if (b->owner().player_number() == sender()) {
-			try {
-				b->inputqueue(index_, type_, nullptr).set_max_fill(max_fill_);
-				if (upcast(Warehouse, wh, b)) {
-					if (PortDock* p = wh->get_portdock()) {
-						// Update in case the expedition was ready previously and now lacks a ware again
-						p->expedition_bootstrap()->check_is_ready(game);
-					}
+			b->inputqueue(index_, type_, nullptr).set_max_fill(max_fill_);
+			if (upcast(Warehouse, wh, b)) {
+				if (PortDock* p = wh->get_portdock()) {
+					// Update in case the expedition was ready previously and now lacks a ware again
+					p->expedition_bootstrap()->check_is_ready(game);
 				}
-			} catch (const std::exception& e) {
-				// TODO(matthiakl): This exception is only caught to ensure b21 savegame compatibility
-				// and should be removed after v1.0
-				log_err("Skipped CmdSetInputMaxFill command: %s", e.what());
 			}
 		}
 	}
@@ -1644,6 +1812,8 @@ void CmdDropSoldier::execute(Game& game) {
 		if (upcast(Soldier, s, game.objects().get_object(soldier))) {
 			game.get_player(sender())->drop_soldier(*player_imm, *s);
 		}
+	} else if (upcast(Ship, ship, game.objects().get_object(serial))) {
+		ship->drop_soldier(game, soldier);
 	}
 }
 
@@ -1660,7 +1830,7 @@ void CmdDropSoldier::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader&
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersionCmdDropSoldier) {
 			PlayerCommand::read(fr, egbase, mol);
-			serial = get_object_serial_or_zero<PlayerImmovable>(fr.unsigned_32(), mol);
+			serial = get_object_serial_or_zero<MapObject>(fr.unsigned_32(), mol);
 			soldier = get_object_serial_or_zero<Soldier>(fr.unsigned_32(), mol);
 		} else {
 			throw UnhandledVersionError(
@@ -1701,6 +1871,8 @@ void CmdChangeSoldierCapacity::execute(Game& game) {
 			ms->desired_capacity = std::max(1, std::min<int32_t>(ms->max_capacity, val));
 		} else if (upcast(TrainingsiteSettings, ts, cs->get_settings())) {
 			ts->desired_capacity = std::max(0, std::min<int32_t>(ts->max_capacity, val));
+		} else if (upcast(WarehouseSettings, ws, cs->get_settings())) {
+			ws->desired_capacity = std::max(0, std::min<int32_t>(ws->max_garrison, val));
 		}
 	} else if (upcast(Building, building, mo)) {
 		if (building->get_owner() == game.get_player(sender()) &&
@@ -1809,40 +1981,21 @@ void CmdEnemyFlagAction::serialize(StreamWrite& ser) {
 	ser.unsigned_8(allow_conquer_ ? 1 : 0);
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdEnemyFlagAction = 5;
+constexpr uint16_t kCurrentPacketVersionCmdEnemyFlagAction = 5;  // since v1.0
 
 void CmdEnemyFlagAction::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		// TODO(Nordfriese): Savegame compatibility
-		if (packet_version <= kCurrentPacketVersionCmdEnemyFlagAction && packet_version >= 3) {
+		if (packet_version <= kCurrentPacketVersionCmdEnemyFlagAction && packet_version >= 5) {
 			PlayerCommand::read(fr, egbase, mol);
-			if (packet_version < 5) {
-				fr.unsigned_8();
-			}
 			serial_ = get_object_serial_or_zero<Flag>(fr.unsigned_32(), mol);
-			if (packet_version < 5) {
-				fr.unsigned_8();
-			}
 
 			soldiers_.clear();
-			if (packet_version == kCurrentPacketVersionCmdEnemyFlagAction) {
-				const uint32_t number = fr.unsigned_32();
-				for (uint32_t i = 0; i < number; ++i) {
-					soldiers_.push_back(mol.get<Soldier>(fr.unsigned_32()).serial());
-				}
-			} else {
-				const uint8_t number = fr.unsigned_8();
-				upcast(Flag, flag, egbase.objects().get_object(serial_));
-				assert(flag);
-				std::vector<Soldier*> result;
-				egbase.get_player(sender())->find_attack_soldiers(*flag, &result, number);
-				assert(result.size() == number);
-				for (const auto& s : result) {
-					soldiers_.push_back(s->serial());
-				}
+			const uint32_t number = fr.unsigned_32();
+			for (uint32_t i = 0; i < number; ++i) {
+				soldiers_.push_back(mol.get<Soldier>(fr.unsigned_32()).serial());
 			}
-			allow_conquer_ = packet_version < 5 || (fr.unsigned_8() != 0u);
+			allow_conquer_ = (fr.unsigned_8() != 0u);
 		} else {
 			throw UnhandledVersionError(
 			   "CmdEnemyFlagAction", packet_version, kCurrentPacketVersionCmdEnemyFlagAction);

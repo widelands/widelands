@@ -1049,21 +1049,6 @@ bool Worker::run_terraform(Game& game, State& state, const Action& a) {
 }
 
 /**
- * buildferry
- *
- * Creates a new instance of the ferry the worker's
- * tribe uses and adds it to the appropriate fleet.
- *
- */
-// TODO(GunChleoc): Savegame compatibility, remove after v1.0.
-bool Worker::run_buildferry(Game& game, State& state, const Action& /* action */) {
-	game.create_worker(get_position(), owner_.load()->tribe().ferry(), owner_);
-	++state.ivar1;
-	schedule_act(game, Duration(10));
-	return true;
-}
-
-/**
  * Simply remove the currently selected object - make no fuss about it.
  */
 bool Worker::run_removeobject(Game& game, State& state, const Action& /* action */) {
@@ -1687,8 +1672,8 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 			set_animation(game, descr().get_animation("idle", this));
 			schedule_act(game, Duration(10));  //  wait a little
 		} else {
-			throw wexception(
-			   "MO(%u): [transfer]: flag to bad nextstep %u", serial(), nextstep->serial());
+			throw wexception("MO(%u): [transfer]: flag to bad nextstep %s %u", serial(),
+			                 nextstep->descr().name().c_str(), nextstep->serial());
 		}
 	} else if (upcast(RoadBase, road, location)) {
 		// Road to Flag
@@ -1760,7 +1745,8 @@ void Worker::start_task_shipping(Game& game, PortDock* pd) {
  * @note the worker must be in a @ref Warehouse location
  */
 void Worker::end_shipping(Game& game) {
-	if (State* state = get_state(taskShipping)) {
+	set_ship_serial(0);
+	if (State* state = get_state(taskShipping); state != nullptr) {
 		state->ivar1 = 1;
 		send_signal(game, "endshipping");
 	}
@@ -1769,7 +1755,7 @@ void Worker::end_shipping(Game& game) {
 /**
  * Whether we are currently being handled by the shipping code.
  */
-bool Worker::is_shipping() {
+bool Worker::is_shipping() const {
 	return get_state(taskShipping) != nullptr;
 }
 
@@ -2664,24 +2650,6 @@ void Worker::start_task_fugitive(Game& game) {
 	// Fugitives survive for two to four minutes
 	top_state().ivar1 = game.get_gametime().get() + 120000 + 200 * (game.logic_rand() % 600);
 }
-
-struct FindFlagWithPlayersWarehouse {
-	explicit FindFlagWithPlayersWarehouse(const Player& owner) : owner_(owner) {
-	}
-	[[nodiscard]] bool accept(const BaseImmovable& imm) const {
-		if (upcast(Flag const, flag, &imm)) {
-			if (flag->get_owner() == &owner_) {
-				if (!flag->economy(wwWORKER).warehouses().empty()) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-private:
-	const Player& owner_;
-};
 
 void Worker::fugitive_update(Game& game, State& state) {
 	if (!get_signal().empty()) {

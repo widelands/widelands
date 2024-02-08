@@ -6,20 +6,21 @@
 # GunChleoc, 2016,2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Juanjo Cb <jjcabrejas@gmail.com>, 2019
+# Juan Miguel Bernal González, 2024
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015-2016
 # Puniasterus <puniasterus@gmail.com>, 2023
 # Stephan Lutz <stephan-lutz@gmx.de>, 2022
 # Gontzal Pujana Onaindia <juchuf@gmail.com>, 2017
-# Walter Benkel <tromaster@gmail.com>, 2020
-# Walter Benkel <tromaster@gmail.com>, 2020
+# Walter Benkel, 2020
+# Walter Benkel, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: Puniasterus <puniasterus@gmail.com>, 2023\n"
+"Last-Translator: Juan Miguel Bernal González, 2024\n"
 "Language-Team: Spanish (http://app.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -97,7 +98,7 @@ msgid ""
 "fish breeder makes sure that a school of fish does not go extinct by "
 "breeding more. The smoking happens in a smokery, you will need at least two "
 "of those."
-msgstr ""
+msgstr "Los otros dos productos alimenticios importantes son el pescado ahumado y la carne ahumada. La carne cruda la entrega un cazador. Un pescador saca los peces del mar mientras un criador de peces se asegura de que un banco de peces no se extinga al reproducirse más. El ahumado se realiza en un ahumador, necesitarás al menos dos de ellos."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Build a farm and a blackroot farm"

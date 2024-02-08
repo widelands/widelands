@@ -526,7 +526,7 @@ void MainMenu::set_labels() {
 	   format(_("Version %1$s"), build_ver_details()));
 	copyright_.set_text(
 	   /** TRANSLATORS: Placeholders are the copyright years */
-	   format(_("(C) %1%-%2% by the Widelands Development Team · Licensed under "
+	   format(_("(C) %1%-%2% by the Widelands Development Team • Licensed under "
 	            "the GNU General Public License V2.0"),
 	          kWidelandsCopyrightStart, kWidelandsCopyrightEnd));
 }
