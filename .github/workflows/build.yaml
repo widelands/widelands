@@ -28,7 +28,7 @@ jobs:
       with:
         fetch-depth: 1
     - name: Check for changed files
-      uses: dorny/paths-filter@v2
+      uses: dorny/paths-filter@v3
       id: changed_files
       with:
         # groups to check for changed files (as string, yaml anchors are resolved by the tool)
