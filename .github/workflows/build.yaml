@@ -117,26 +117,6 @@ jobs:
     needs: [changes, pre-build_checks]
     uses: ./.github/workflows/build_appimage.yaml
 
-  # Dummy check for PRs that all required status checks have either passed or were skipped
-  # (see https://github.com/actions/runner/issues/952 and https://github.com/orgs/community/discussions/9141)
-  summary:
-    name: CI Results Summary
-    # "changes" has to be included in needs here too, because all others are skipped if it fails
-    needs: [changes, pre-build_checks, testsuite, windows, windows-msvc, macos, appimage]
-    if: always() # to check if dependencies have failed or passed
-    runs-on: "ubuntu-latest"
-    steps:
-    - name: Check for failed jobs
-      if: >-
-        contains(needs.*.result, 'failure') ||
-        contains(needs.*.result, 'cancelled')
-      run: |
-        echo "A job failed or was cancelled!"
-        exit 1
-    - name: No step skipped  # Optional, just gives info
-      if: "! contains(needs.*.result, 'skipped')"
-      run: exit 0
-
   dev_release:
     name: Automated development pre-release
     if: ${{ github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' && always() }}
