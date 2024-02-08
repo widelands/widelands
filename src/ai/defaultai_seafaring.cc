@@ -367,7 +367,10 @@ void DefaultAI::manage_ports() {
 			game().send_player_start_or_cancel_expedition(*p_obs.site);
 			start_expedition = false;
 		}
-		Widelands::Quantity current_garrison = p_obs.site->get_desired_soldier_count();
+
+		const Widelands::Quantity current_garrison = p_obs.site->get_desired_soldier_count();
+		const bool full = p_obs.site->soldier_control()->associated_soldiers().size() >= current_garrison;
+
 		Widelands::Quantity desired_garrison = kPortDefaultGarrison;
 		int32_t change_value = 0;
 
@@ -387,13 +390,13 @@ void DefaultAI::manage_ports() {
 			break;
 		case SoldiersStatus::kEnough:
 			desired_garrison = kPortDefaultGarrison * 2;
-			if (current_garrison < desired_garrison) {
+			if (full && current_garrison < desired_garrison) {
 				change_value = 1;
 			}
 			break;
 		case SoldiersStatus::kFull:
 			desired_garrison = kPortDefaultGarrison * 3;
-			if (current_garrison < desired_garrison) {
+			if (full && current_garrison < desired_garrison) {
 				change_value = 1;
 			}
 		}
