@@ -3,7 +3,12 @@
 Themes
 ======
 
-A theme defines the appearance and style of Widelands' user interface.
+A theme defines the appearance and style of :doc:`Widelands' user interface <autogen_wl_ui>`.
+Especially some widgets defined with :meth:`~wl.ui.Panel.create_child` need some of the
+styles of themes.
+
+When working with :doc:`richtext <autogen_auxiliary_richtext>` it is recommended to use the
+theme styles. Look at :doc:`autogen_styles` to access the styles within richtext.
 
 A theme's directory needs to use the following directory structure:
 
@@ -299,6 +304,8 @@ global
 
   .. versionadded:: 1.2
 
+.. _theme_paragraphs:
+
 paragraph styles
 ~~~~~~~~~~~~~~~~
 
@@ -338,6 +345,8 @@ The ``paragraphs`` table defines paragraph styles used mostly by the help texts 
 * **wui_lore_author**: Used for the lore author texts in the Encyclopedia
 * **unknown**: Used when a Lua script requests a paragraph style not included in this list
 
+.. _theme_colors:
+
 colors
 ~~~~~~
 
@@ -372,6 +381,8 @@ The ``colors`` table contains subtables of RGB colors:
 * **campaign_fri_ketelsen**: Text color for Ketelsen's speech box titles in the Frisian campaign
 * **map_river_advisor**: Text color for the advisor's speech box titles in the Along the River SP scenario
 * **unknown**: Used when a Lua script requests a color not included in this list
+
+.. _theme_sizes:
 
 sizes
 ~~~~~

@@ -751,7 +751,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:751
 msgctxt "amazons_worker"
 msgid "Defend and Conquer!"
-msgstr ""
+msgstr "Obraňuj a panuj!"
 
 #. TRANSLATORS: Helptext for an Amazon worker: Trainer
 #: ../../data/tribes/initialization/amazons/units.lua:758
@@ -1129,7 +1129,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s, depending on "
 "how far the stonecutter has to walk."
-msgstr "Táto budova dokáže vyrobiť jednu žulu za %1$s až %2$s, podľa toho, ako ďaleko musí kamenár prejsť."
+msgstr "Táto budova dokáže vyrobiť jednu žulu za %1$s až %2$s, podľa toho, ako ďaleko musí kamenárka prejsť."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site:
 #. Stonecutter's Hut, part 2
@@ -1177,7 +1177,7 @@ msgid ""
 "This building can produce one log between %1$s and %2$s (with master "
 "woodcutter between %3$s and %4$s), depending on how far the woodcutter has "
 "to walk."
-msgstr "Táto budova dokáže vyrobiť jeden kmeň za %1$s až %2$s (s majstrom drevorubačom za %3$s až %4$s), podľa toho, ako ďaleko musí drevorubač prejsť."
+msgstr "Táto budova dokáže vyrobiť jeden kmeň za %1$s až %2$s (s majsterkou drevorubačkou za %3$s až %4$s), podľa toho, ako ďaleko musí drevorubačka prejsť."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Jungle
 #. Preserver's Hut
@@ -1308,7 +1308,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one bucket of water between %1$s and %2$s on "
 "average, depending on how far the carrier has to walk."
-msgstr "Táto budova dokáže vyrobiť jedno vedro vody priemerne za %1$s až %2$s, podľa toho, ako ďaleko musí nosič prejsť."
+msgstr "Táto budova dokáže vyrobiť jedno vedro vody priemerne za %1$s až %2$s, podľa toho, ako ďaleko musí nosička prejsť."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Rare Tree
 #. Cutter's Hut
@@ -1364,7 +1364,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1418
 msgctxt "amazons_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr "Jeden prieskum prieskumníka trvá %1$s až %2$s."
+msgstr "Jeden prieskum prieskumníčky trvá %1$s až %2$s."
 
 #. TRANSLATORS: Lore author helptext for an Amazon production site: Rope
 #. Weaver's Booth
@@ -3059,7 +3059,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:2073
 msgctxt "amazons"
 msgid "Expert missing"
-msgstr ""
+msgstr "chýba špecialistka"
 
 #. TRANSLATORS: Productivity label on an Amazon building if there is more than
 #. 1 experienced worker missing. If you need plural forms here, please let us
@@ -3067,7 +3067,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:2075
 msgctxt "amazons"
 msgid "Experts missing"
-msgstr ""
+msgstr "chýbajú špecialistky"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. is the maximum number of soldier slots in the building.
@@ -5826,7 +5826,7 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:2273
 msgctxt "atlanteans"
 msgid "Expert missing"
-msgstr ""
+msgstr "chýba špecialista"
 
 #. TRANSLATORS: Productivity label on an Atlantean building if there is more
 #. than 1 experienced worker missing. If you need plural forms here, please
@@ -5834,7 +5834,7 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:2275
 msgctxt "atlanteans"
 msgid "Experts missing"
-msgstr ""
+msgstr "chýbajú špecialisti"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% is the maximum number of soldier slots in the building.
@@ -9950,7 +9950,7 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:2582
 msgctxt "barbarians"
 msgid "Expert missing"
-msgstr ""
+msgstr "chýba špecialista"
 
 #. TRANSLATORS: Productivity label on a Barbarian building if there is more
 #. than 1 experienced worker missing. If you need plural forms here, please
@@ -9958,7 +9958,7 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:2584
 msgctxt "barbarians"
 msgid "Experts missing"
-msgstr ""
+msgstr "chýbajú špecialisti"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% is the maximum number of soldier slots in the building.
@@ -13359,7 +13359,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:2731
 msgctxt "empire"
 msgid "Expert missing"
-msgstr ""
+msgstr "chýba špecialista"
 
 #. TRANSLATORS: Productivity label on an Empire building if there is more than
 #. 1 experienced worker missing. If you need plural forms here, please let us
@@ -13367,7 +13367,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:2733
 msgctxt "empire"
 msgid "Experts missing"
-msgstr ""
+msgstr "chýbajú špecialisti"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. is the maximum number of soldier slots in the building.
@@ -14007,7 +14007,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:880
 msgctxt "frisians_worker"
 msgid "Defend and Conquer!"
-msgstr ""
+msgstr "Obraňuj a panuj!"
 
 #. TRANSLATORS: Helptext for a Frisian worker: Trainer
 #: ../../data/tribes/initialization/frisians/units.lua:887
@@ -15947,7 +15947,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2412
 msgctxt "frisians"
 msgid "Expert missing"
-msgstr ""
+msgstr "chýba špecialista"
 
 #. TRANSLATORS: Productivity label on a Frisian building if there is more than
 #. 1 experienced worker missing. If you need plural forms here, please let us
@@ -15955,7 +15955,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2414
 msgctxt "frisians"
 msgid "Experts missing"
-msgstr ""
+msgstr "chýbajú špecialisti"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% is the maximum number of soldier slots in the building.
@@ -16321,7 +16321,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:28
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr ""
+msgstr "Ctrl + klik"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:30
@@ -16333,7 +16333,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:32
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "Shift + klik"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:34
