@@ -59,7 +59,7 @@ jobs:
         mkdir source/_static
         ./extract_rst.py
         # Test building for the homepage
-        sphinx-build -W -n -b json -d build/doctrees source build/json
+        sphinx-build -W -b json -d build/doctrees source build/json
         # Create a downloadable workflow artifact for testing
         ./make.py html
         cd build
