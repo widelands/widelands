@@ -27,6 +27,7 @@
 #include "economy/economy.h"
 #include "economy/flag_job.h"
 #include "graphic/color.h"
+#include "logic/detected_port_space.h"
 #include "logic/editor_game_base.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/constructionsite.h"
@@ -40,6 +41,7 @@ class Node;
 namespace Widelands {
 
 struct Path;
+class PinnedNote;
 struct PlayerImmovable;
 class TrainingSite;
 struct Road;
@@ -186,8 +188,8 @@ public:
 		uint32_t colony_scan_area{0U};
 		uint32_t trees_around_cutters{0U};
 		Time expedition_start_time{0U};
-		int16_t ships_utilization{
-		   0};  // 0-10000 to avoid floats, used for decision for building new ships
+		uint16_t ships_utilization{
+		   0U};  // 0-10000 to avoid floats, used for decision for building new ships
 		bool no_more_expeditions{false};
 		int16_t last_attacked_player{0};
 		int32_t least_military_score{0};
@@ -449,8 +451,6 @@ public:
 	void bulldoze(PlayerImmovable&, bool recurse = false);
 	void flagaction(Flag&, FlagJob::Type);
 	void start_stop_building(PlayerImmovable&);
-	void military_site_set_soldier_preference(PlayerImmovable&,
-	                                          SoldierPreference soldier_preference);
 	void start_or_cancel_expedition(const Warehouse&);
 	void enhance_building(Building*, DescriptionIndex index_of_new_building, bool keep_wares);
 	void dismantle_building(Building*, bool keep_wares);
@@ -498,6 +498,12 @@ public:
 	uint32_t civil_blds_defeated() const {
 		return civil_blds_defeated_;
 	}
+	uint32_t naval_losses() const {
+		return naval_losses_;
+	}
+	uint32_t naval_victories() const {
+		return naval_victories_;
+	}
 	void count_casualty() {
 		++casualties_;
 	}
@@ -515,6 +521,12 @@ public:
 	}
 	void count_civil_bld_defeated() {
 		++civil_blds_defeated_;
+	}
+	void count_naval_victory() {
+		++naval_victories_;
+	}
+	void count_naval_loss() {
+		++naval_losses_;
 	}
 
 	// Statistics
@@ -569,6 +581,15 @@ public:
 	void set_shipnames(const std::set<std::string>& names);
 	void set_warehousenames(const std::set<std::string>& names);
 
+	[[nodiscard]] const std::vector<std::unique_ptr<DetectedPortSpace>>&
+	detected_port_spaces() const {
+		return detected_port_spaces_;
+	}
+	void detect_port_space(std::unique_ptr<DetectedPortSpace> new_dps);
+	DetectedPortSpace* has_detected_port_space(const Coords& coords);
+	[[nodiscard]] const DetectedPortSpace& get_detected_port_space(Serial serial) const;
+	bool remove_detected_port_space(const Coords& coords, PortDock* replaced_by);
+
 	void add_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
 	void remove_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
 	uint32_t count_soldiers() const;
@@ -577,6 +598,12 @@ public:
 	uint32_t count_soldiers_a(unsigned) const;
 	uint32_t count_soldiers_d(unsigned) const;
 	uint32_t count_soldiers_e(unsigned) const;
+
+	void register_pinned_note(PinnedNote* note);
+	void unregister_pinned_note(PinnedNote* note);
+	[[nodiscard]] const std::set<OPtr<PinnedNote>>& all_pinned_notes() const {
+		return pinned_notes_;
+	}
 
 	bool is_muted(DescriptionIndex di) const {
 		return muted_building_types_.count(di) != 0u;
@@ -652,9 +679,11 @@ private:
 
 	std::vector<std::string> remaining_shipnames_;
 	std::vector<std::string> remaining_warehousenames_;
+	std::vector<std::unique_ptr<DetectedPortSpace>> detected_port_spaces_;
 
 	PlayerBuildingStats building_stats_;
 	std::vector<SoldierStatistics> soldier_stats_;
+	std::set<OPtr<PinnedNote>> pinned_notes_;
 
 	std::string name_;                     // Player name
 	std::string ai_;                       /**< Name of preferred AI implementation */
@@ -710,6 +739,8 @@ private:
 	uint32_t msites_defeated_{0U};
 	uint32_t civil_blds_lost_{0U};
 	uint32_t civil_blds_defeated_{0U};
+	uint32_t naval_victories_{0U};
+	uint32_t naval_losses_{0U};
 
 	// If we run out of ship names, we'll want to continue with unique numbers
 	uint32_t ship_name_counter_{0U};

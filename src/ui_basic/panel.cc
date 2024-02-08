@@ -173,6 +173,8 @@ void Panel::free_children() {
 }
 
 Panel::ModalGuard::ModalGuard(Panel& p) : bottom_panel_(Panel::modal_), top_panel_(p) {
+	MutexLock::push_stay_responsive_function([&p]() { p.handle_notes(); });
+
 	if (Panel::modal_ != nullptr) {
 		/* Clean up stale notes first. */
 		Panel::modal_.load()->handle_notes();
@@ -180,6 +182,8 @@ Panel::ModalGuard::ModalGuard(Panel& p) : bottom_panel_(Panel::modal_), top_pane
 	Panel::modal_ = &top_panel_;
 }
 Panel::ModalGuard::~ModalGuard() {
+	MutexLock::pop_stay_responsive_function();
+
 	Panel::modal_ = bottom_panel_;
 	if (bottom_panel_ != nullptr) {
 		bottom_panel_->become_modal_again(top_panel_);
@@ -206,7 +210,16 @@ void Panel::logic_thread() {
 			       lock_if_free, LogicThreadState::kLocked)) {
 				MutexLock lock(MutexLock::ID::kLogicFrame);
 
-				m->game_logic_think();  // actual game logic
+				try {
+					m->game_logic_think();  // actual game logic
+				} catch (const WException& e) {
+					// Forward uncaught exceptions to the main thread's handler.
+					NoteThreadSafeFunction::instantiate(
+					   [&e]() { throw WException::copy(e); }, true, false);
+				} catch (const std::exception& e) {
+					NoteThreadSafeFunction::instantiate([&e]() { throw e; }, true, false);
+				}
+
 				LogicThreadState free_if_locked = LogicThreadState::kLocked;
 				m->logic_thread_locked_.compare_exchange_strong(
 				   free_if_locked, LogicThreadState::kFree);
@@ -261,7 +274,7 @@ void Panel::do_redraw_now(const bool handle_input, const std::string& message) {
 	RenderTarget& rt = *g_gr->get_render_target();
 
 	{
-		MutexLock m(MutexLock::ID::kObjects, [this]() { handle_notes(); });
+		MutexLock m(MutexLock::ID::kObjects);
 		ff.do_draw(rt);
 	}
 
@@ -402,8 +415,7 @@ int Panel::do_run() {
 			}
 
 			{
-				current_think_mutex_.reset(
-				   new MutexLock(MutexLock::ID::kObjects, [this]() { handle_notes(); }));
+				current_think_mutex_.reset(new MutexLock(MutexLock::ID::kObjects));
 				do_think();
 				current_think_mutex_.reset();
 			}

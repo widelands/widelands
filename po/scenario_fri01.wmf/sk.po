@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Karl Vest, 2020
+# Pavol Gono, 2024
 # 
 msgid ""
 msgstr ""
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: Karl Vest, 2020\n"
+"Last-Translator: Pavol Gono, 2024\n"
 "Language-Team: Slovak (https://app.transifex.com/widelands/teams/35159/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,6 +42,8 @@ msgid ""
 "Build at least one woodcutter’s house and two forester’s houses to start "
 "producing logs, and a reed farm to start growing reed."
 msgstr ""
+"Postavte najmenej jeden drevorubačský dom a dve horárne, aby sme začali "
+"vyrábať kmene a trstinovú záhradu, aby sme mohli začať pestovať trstinu."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:33
 msgid "Start producing bricks"
@@ -71,7 +74,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:45
 msgid "30 × Log"
-msgstr "30 x Drevo"
+msgstr "30 x Kmene"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:46
 msgid "30 × Granite"
@@ -197,7 +200,7 @@ msgstr "Porazte nepriateľa"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:107
 msgid "Destroy the enemy tribe’s headquarters."
-msgstr "Zničte hlavný stan nepriateľského kmeňa"
+msgstr "Zničte ústredie nepriateľského kmeňa"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:112
 msgid "Escape from the floods"
@@ -273,6 +276,8 @@ msgid ""
 "This is as good a place as any to start building our new home. First of all,"
 " we must ensure a stable supply of basic building materials."
 msgstr ""
+"Toto je dobré miesto na budovanie nášho nového domova. Najskôr musíme "
+"zabezpečiť stabilný prísun základných stavebných materiálov."
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:141
@@ -280,6 +285,8 @@ msgid ""
 "I have asked Hauke, one of my advisors, to oversee the construction of our "
 "settlement."
 msgstr ""
+"Požiadal som Haukeho, jedného z mojich poradcov, aby dohliadal na výstavbu "
+"našej osady."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:145
 msgid "The first buildings"
@@ -301,9 +308,9 @@ msgid ""
 "by adding some logs and granite. The roofs are thatched with reed, "
 "naturally. Nothing is better suited to keep the rain out."
 msgstr ""
-"Ako všetcí Frížania, staviame svoje domy hlavne z tehiel. Vylepšujeme ich "
-"pridaním dreva a žuly. Strechy sú, prirodzene, z trstiny. Nie je nič lepšie,"
-" čo by odolalo dažďu."
+"Ako všetcí Frízania, staviame svoje domy hlavne z tehiel. Vylepšujeme ich "
+"pridaním kmeňov a žuly. Strechy sú, prirodzene, z trstiny. Nie je nič "
+"lepšie, čo by odolalo dažďu."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:153
@@ -451,7 +458,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:207
 msgid "Warehouses"
-msgstr ""
+msgstr "Sklady"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:208
 msgid "Build a warehouse in the east"

@@ -1,22 +1,23 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007
 # GunChleoc, 2016
 # Javier Mora <morehash@gmail.com>, 2015
+# Juan Miguel Bernal González, 2024
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015-2016
 # Raul Ferriz <raul.ferriz@gmail.com>, 2009
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020-2021
-# Walter Benkel <tromaster@gmail.com>, 2020
+# Walter Benkel, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020-2021\n"
+"Last-Translator: Juan Miguel Bernal González, 2024\n"
 "Language-Team: Spanish (http://app.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -832,14 +833,14 @@ msgid ""
 "the balance between wasteful stockpiling and just-in-time production in your"
 " supply chains is one of most profound challenges of perfecting your "
 "economy. When in doubt, lean towards having some extra reserves."
-msgstr ""
+msgstr "El almacenamiento de mercancías es un arma de doble filo. Por un lado, los productos en stock son útiles para amortiguar las fluctuaciones temporales la economía, que tienden a ocurrir todo el tiempo. Por otro lado, cualquier artículo que se quede en un almacén en lugar de ser procesado para convertirlo en otra cosa se desperdicia. Encontrar el equilibrio entre el almacenamiento y la producción en las cadenas de suministro es uno de los desafíos más profundos para mejorar la economía. En caso de duda, opte por tener algunas reservas adicionales."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:498
 msgid ""
 "To ease the process of switching between different economic situations, you "
 "can save and apply economy profiles at the bottom of the economy options "
 "window. A profile for stockpiling and one for efficiency are preset there."
-msgstr ""
+msgstr "Para facilitar el proceso de cambio entre diferentes situaciones económicas, puede guardar y aplicar perfiles económicos en la parte inferior de la ventana de opciones económicas. Allí están preestablecidos  perfiles de almacenamiento y eficiencia."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
 msgid ""
@@ -848,7 +849,7 @@ msgid ""
 "need. However, sometimes it can be useful to stockpile a ware in very large "
 "quantities. To achieve this, the economy options window allows you to set "
 "the target of a ware to infinite, so that it will always be produced."
-msgstr ""
+msgstr "La mayoría de las veces, las opciones económicas son una herramienta útil para garantizar que los recursos no se desperdicien en producir productos no necesarios para la economía. Sin embargo, a veces puede resultar útil almacenar una mercancía en cantidades muy grandes. Para lograr esto, la ventana de opciones económicas le permite establecer el objetivo de un producto en infinito, para que se produzca indefinidamente."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:507
 msgid ""
@@ -857,7 +858,7 @@ msgid ""
 "regardless of the economy settings. This can be useful to arrange, for "
 "example, that more building materials are produced near the border even if "
 "there are plenty in stock far away in your homeland."
-msgstr ""
+msgstr "El mismo botón también se puede encontrar en la ventana de construcción de los lugares de producción. Allí, hace que sólo este sitio produzca indefinidamente, independientemente de la configuración económica. Esto puede ser útil para lograr, por ejemplo, que se produzcan más materiales de construcción cerca de la frontera, incluso si hay suficientes existencias en lugares lejanos, en su país de origen."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:513
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:515
