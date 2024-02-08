@@ -5,13 +5,14 @@
 # GunChleoc, 2014
 # Karl Vest, 2020
 # MiroslavR <miroslavr256@gmail.com>, 2015-2016
+# Pavol Gono, 2024
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2015-02-03 14:36+0000\n"
-"Last-Translator: Karl Vest, 2020\n"
+"Last-Translator: Pavol Gono, 2024\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -484,7 +485,7 @@ msgid ""
 "his fears: the forests are deep, and the frontier to Al’thunran is near. I "
 "am sure that there are a thousand greater dangers out there than the unknown"
 " tracks."
-msgstr "Prvé opevnenie, ktoré Thron nariadil postaviť, je hotové. V tejto chvíli sa snaží vzbudiť dôveru v obyvateľoch nášho nového domova, ktorý sme nazvali ‚Ondun‘, čo v starej reči znamená ‚tí, čo čakajú‘. Thron však stále nie je spokojný – a úplne chápem jeho obavy: lesy sú hlboké a hranica Al’thunranu je neďaleko. Som presvedčený, že vonku číhajú ďaleko väčšie nebezpečenstvá ako nejaké stopy."
+msgstr "Prvé opevnenie, ktoré Thron nariadil postaviť, je hotové. V tejto chvíli sa snaží vzbudiť dôveru v obyvateľoch nášho nového domova, ktorý sme nazvali „Ondun“, čo v starej reči znamená „tí, čo čakajú“. Thron však stále nie je spokojný – a úplne chápem jeho obavy: lesy sú hlboké a hranica Al’thunranu je neďaleko. Som presvedčený, že vonku číhajú ďaleko väčšie nebezpečenstvá ako nejaké stopy."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:272

@@ -33,6 +33,7 @@
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/productionsite.h"
+#include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/message_queue.h"
@@ -257,15 +258,6 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 
 	map_options_subscriber_ = Notifications::subscribe<NoteMapOptions>(
 	   [this](const NoteMapOptions& /* note */) { rebuild_statistics_menu(); });
-	shipnotes_subscriber_ =
-	   Notifications::subscribe<Widelands::NoteShip>([this](const Widelands::NoteShip& note) {
-		   if (note.ship->owner().player_number() == player_number() &&
-		       note.action == Widelands::NoteShip::Action::kWaitingForCommand &&
-		       note.ship->get_ship_state() ==
-		          Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
-			   expedition_port_spaces_.emplace(note.ship, note.ship->exp_port_spaces().front());
-		   }
-	   });
 
 	initialization_complete();
 }
@@ -393,9 +385,32 @@ void InteractivePlayer::rebuild_showhide_menu() {
 	showhidemenu_.select(last_selection);
 }
 
-bool InteractivePlayer::has_expedition_port_space(const Widelands::Coords& coords) const {
-	return std::any_of(expedition_port_spaces_.begin(), expedition_port_spaces_.end(),
-	                   [&coords](const auto& pair) { return pair.second == coords; });
+InteractivePlayer::HasExpeditionPortSpace
+InteractivePlayer::has_expedition_port_space(const Widelands::Coords& coords) const {
+	HasExpeditionPortSpace tmp_rv = HasExpeditionPortSpace::kNone;
+	for (auto serial : player().ships()) {
+		Widelands::Ship* ship = dynamic_cast<Widelands::Ship*>(egbase().objects().get_object(serial));
+		if (ship == nullptr) {
+			continue;
+		}
+		const Widelands::Coords portspace = ship->current_portspace();
+		if (!static_cast<bool>(portspace)) {
+			continue;
+		}
+		// Expeditions can only use the primary port space, show the others faded.
+		// Warships show all seen port spaces the same: either as usable if they are not engaged
+		// or faded otherwise.
+		if (portspace == coords && !ship->has_battle()) {
+			return HasExpeditionPortSpace::kPrimary;
+		}
+		if (ship->sees_portspace(coords)) {
+			if (ship->can_attack()) {
+				return HasExpeditionPortSpace::kPrimary;
+			}
+			tmp_rv = HasExpeditionPortSpace::kOther;
+		}
+	}
+	return tmp_rv;
 }
 
 void InteractivePlayer::draw_immovables_for_visible_field(
@@ -475,17 +490,6 @@ void InteractivePlayer::think() {
 		toggle_message_menu_->set_tooltip(as_tooltip_text_with_hotkey(
 		   msg_tooltip, shortcut_string_for(KeyboardShortcut::kInGameMessages, true),
 		   UI::PanelStyle::kWui));
-	}
-
-	// Cleanup found port spaces if the ship sailed on or was destroyed
-	for (auto it = expedition_port_spaces_.begin(); it != expedition_port_spaces_.end(); ++it) {
-		Widelands::Ship* ship = it->first.get(egbase());
-		if ((ship == nullptr) ||
-		    ship->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
-			expedition_port_spaces_.erase(it);
-			// If another port space also needs removing, we'll take care of it in the next frame
-			return;
-		}
 	}
 }
 
@@ -624,17 +628,23 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 		if (f->seeing != Widelands::VisibleState::kUnexplored) {
 			// Draw build help.
-			const bool show_port_space = has_expedition_port_space(f->fcoords);
-			if (show_port_space || buildhelp()) {
+			const HasExpeditionPortSpace show_port_space = map.is_port_space(f->fcoords) ?
+                                                           has_expedition_port_space(f->fcoords) :
+                                                           HasExpeditionPortSpace::kNone;
+			if (show_port_space != HasExpeditionPortSpace::kNone || buildhelp()) {
 				Widelands::NodeCaps caps;
 				Widelands::NodeCaps maxcaps = f->fcoords.field->maxcaps();
 				float opacity =
 				   f->seeing == Widelands::VisibleState::kVisible ? 1.f : kBuildhelpOpacityWeak;
 				if (picking_starting_pos) {
-					caps = show_port_space || buildhelp() ? f->fcoords.field->nodecaps() :
-                                                       Widelands::CAPS_NONE;
-				} else if (show_port_space) {
+					caps = (show_port_space != HasExpeditionPortSpace::kNone || buildhelp()) ?
+                         f->fcoords.field->nodecaps() :
+                         Widelands::CAPS_NONE;
+				} else if (show_port_space != HasExpeditionPortSpace::kNone) {
 					caps = maxcaps;
+					if (show_port_space == HasExpeditionPortSpace::kOther) {
+						opacity *= kBuildhelpOpacityMedium;
+					}
 				} else {
 					caps = plr.get_buildcaps(f->fcoords);
 					if ((caps & Widelands::BUILDCAPS_SIZEMASK) == 0) {
@@ -767,14 +777,12 @@ void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and
 				return;
 			}
 		}
-		if (show_attack_window(node_and_triangle.node, true) != nullptr) {
+
+		if (!in_road_building_mode() && try_show_ship_windows()) {
 			return;
 		}
-
-		if (!in_road_building_mode()) {
-			if (try_show_ship_window()) {
-				return;
-			}
+		if (show_attack_window(node_and_triangle.node, nullptr, true) != nullptr) {
+			return;
 		}
 
 		// everything else can bring up the temporary dialog
@@ -782,27 +790,84 @@ void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and
 	}
 }
 
-UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& c,
-                                                  const bool fastclick) {
-	const Map& map = egbase().map();
-	if (Widelands::BaseImmovable* immo = map.get_immovable(c)) {
-		if (immo->descr().type() >= Widelands::MapObjectType::BUILDING) {
-			upcast(Building, building, immo);
-			assert(building != nullptr);
-			if (const Widelands::AttackTarget* attack_target = building->attack_target()) {
-				if (player().is_hostile(building->owner()) && attack_target->can_be_attacked()) {
-					UI::UniqueWindow::Registry& registry =
-					   unique_windows().get_registry(format("attack_%d", building->serial()));
-					registry.open_window = [this, &registry, building, &c, fastclick]() {
-						new AttackWindow(*this, registry, *building, c, fastclick);
-					};
-					registry.create();
-					return registry.window;
+UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& coords,
+                                                  Widelands::MapObject* object,
+                                                  bool fastclick) {
+	if (object == nullptr) {
+		// Auto-detect what kind of attack window we need to show.
+		const Map& map = egbase().map();
+
+		for (auto serial : player().ships()) {
+			Widelands::Ship* ship =
+			   dynamic_cast<Widelands::Ship*>(egbase().objects().get_object(serial));
+			if (ship != nullptr && ship->get_ship_type() == Widelands::ShipType::kWarship &&
+			    ship->sees_portspace(coords)) {
+				UI::UniqueWindow::Registry& registry =
+				   unique_windows().get_registry(format("attack_coords_%d_%d", coords.x, coords.y));
+				registry.open_window = [this, &registry, &coords, fastclick]() {
+					new AttackWindow(*this, registry, nullptr, coords, fastclick);
+				};
+				registry.create();
+				return registry.window;
+			}
+		}
+
+		if (Widelands::BaseImmovable* immo = map.get_immovable(coords)) {
+			if (immo->descr().type() >= Widelands::MapObjectType::BUILDING) {
+				upcast(Building, building, immo);
+				assert(building != nullptr);
+				if (const Widelands::AttackTarget* attack_target = building->attack_target();
+				    attack_target != nullptr) {
+					if (player().is_hostile(building->owner()) && attack_target->can_be_attacked()) {
+						object = building;
+					}
 				}
 			}
 		}
+
+		for (Widelands::Bob* bob = map[coords].get_first_bob(); bob != nullptr && object == nullptr;
+		     bob = bob->get_next_bob()) {
+			if (bob->descr().type() == Widelands::MapObjectType::SHIP &&
+			    player().is_hostile(bob->owner()) &&
+			    dynamic_cast<Widelands::Ship*>(bob)->can_be_attacked()) {
+				object = bob;
+			}
+		}
+
+		if (object == nullptr) {
+			return nullptr;
+		}
 	}
-	return nullptr;
+
+	if (object->descr().type() >= Widelands::MapObjectType::BUILDING) {
+		upcast(Widelands::Building, building, object);
+		assert(building != nullptr);
+		assert(player().is_hostile(building->owner()));
+		assert(building->attack_target() != nullptr);
+		assert(building->attack_target()->can_be_attacked());
+
+		UI::UniqueWindow::Registry& registry =
+		   unique_windows().get_registry(format("attack_building_%u", building->serial()));
+		registry.open_window = [this, &registry, building, &coords, fastclick]() {
+			new AttackWindow(*this, registry, building, coords, fastclick);
+		};
+		registry.create();
+		return registry.window;
+	}
+
+	if (object->descr().type() == Widelands::MapObjectType::SHIP) {
+		assert(player().is_hostile(object->owner()));
+		assert(dynamic_cast<Widelands::Ship*>(object)->can_be_attacked());
+		UI::UniqueWindow::Registry& registry =
+		   unique_windows().get_registry(format("attack_ship_%u", object->serial()));
+		registry.open_window = [this, &registry, object, &coords, fastclick]() {
+			new AttackWindow(*this, registry, object, coords, fastclick);
+		};
+		registry.create();
+		return registry.window;
+	}
+
+	throw wexception("Attempting to show attack window for a %s", object->descr().name().c_str());
 }
 
 /**
