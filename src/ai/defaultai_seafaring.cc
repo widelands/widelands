@@ -369,15 +369,51 @@ void DefaultAI::manage_ports() {
 			start_expedition = false;
 		}
 
-		if (game().naval_warfare_allowed() &&
-		    p_obs.site->get_desired_soldier_count() < kPortDefaultGarrison) {
-			// Check garrisoned soldiers
-			verb_log_dbg_time(game().get_gametime(), "AI %d: Set garrison for port %s",
-			                  player_number(), p_obs.site->get_warehouse_name().c_str());
-			game().send_player_change_soldier_capacity(
-			   *p_obs.site, kPortDefaultGarrison - p_obs.site->get_desired_soldier_count());
+		const Widelands::Quantity current_garrison = p_obs.site->get_desired_soldier_count();
+		const bool full =
+		   p_obs.site->soldier_control()->associated_soldiers().size() >= current_garrison;
+
+		Widelands::Quantity desired_garrison = kPortDefaultGarrison;
+		int32_t change_value = 0;
+
+		switch (soldier_status_) {
+		case SoldiersStatus::kBadShortage:
+			// reduce minimum to allow garrison of some milsites to ensure expansion
+			desired_garrison = 2;
+			if (current_garrison > desired_garrison) {
+				change_value = -1;
+			}
+			break;
+		case SoldiersStatus::kShortage:
+			desired_garrison = kPortDefaultGarrison;
+			if (current_garrison > desired_garrison) {
+				change_value = -1;
+			}
+			break;
+		case SoldiersStatus::kEnough:
+			desired_garrison = kPortDefaultGarrison * 2;
+			if (full && current_garrison < desired_garrison) {
+				change_value = 1;
+			}
+			break;
+		case SoldiersStatus::kFull:
+			desired_garrison = kPortDefaultGarrison * 3;
+			if (full && current_garrison < desired_garrison) {
+				change_value = 1;
+			}
+		}
+
+		// Check soldiers requirement of port and set garrison to desired value
+		if (change_value != 0) {
+			// ports should always require Heroes
 			game().send_player_set_soldier_preference(
 			   *p_obs.site, Widelands::SoldierPreference::kHeroes);
+			verb_log_dbg_time(game().get_gametime(),
+			                  "AI %d: Set garrison for port %s, desired garrison %d, actual garrison "
+			                  "%d, change value %d\n",
+			                  player_number(), p_obs.site->get_warehouse_name().c_str(),
+			                  desired_garrison, p_obs.site->get_desired_soldier_count(), change_value);
+			game().send_player_change_soldier_capacity(*p_obs.site, change_value);
 		}
 		// Warships assign themselves
 	}
