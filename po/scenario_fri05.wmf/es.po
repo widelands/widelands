@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Juan Miguel Bernal González, 2024
+# Juan Miguel Bernal González, 2024
 # 
 msgid ""
 msgstr ""
@@ -485,7 +486,7 @@ msgstr ""
 " centro de la ciudad. Construyamos todos nuestros edificios de producción "
 "importantes allí. Unas cuantas fortalezas situadas muy juntas justo en su "
 "extremo sur harán que esta vasta meseta sea casi imposible de conquistar. "
-"Incluso si el enemigo consiguiera apoderarse de toda la isla inferior, es "
+"Incluso si el enemigo consiguiera apoderarse de toda la isla menor, es "
 "posible que pudiéramos resistir allí durante años, siempre que almacenemos "
 "con antelación suficientes suministros en los almacenes de las Tierras "
 "Altas. Por supuesto, quedaríamos aislados de los puertos y de las rutas "
@@ -547,7 +548,7 @@ msgid ""
 msgstr ""
 "Como bien señala Reebaud, las Tierras Altas son la mejor posición para "
 "nuevas construcciones. Además de su valor estratégico, ofrecen mucho espacio"
-" para la construcción, del que la isla inferior es algo escasa."
+" para la construcción, del que la isla menor es algo escasa."
 
 #. TRANSLATORS: Henneke Lembeck – Getting Started 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:244

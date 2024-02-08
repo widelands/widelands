@@ -1006,7 +1006,7 @@ AddOnsCtrl::AddOnsCtrl(FsMenu::MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 			text += '\n';
 			for (const auto& pair : upgrades) {
 				if (pair.second) {
-					text += format(_("\n· %1$s (%2$s) by %3$s"), pair.first->descname(),
+					text += format(_("\n• %1$s (%2$s) by %3$s"), pair.first->descname(),
 					               (pair.first->verified ? _("verified") : _("NOT VERIFIED")),
 					               pair.first->author());
 				}
@@ -1582,7 +1582,7 @@ void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
 		                          has_upgrades.size());
 		for (const std::string& name : has_upgrades) {
 			text += "<br>";
-			text += format(_("· %s"), name);
+			text += format(_("• %s"), name);
 		}
 		upgrade_all_.set_tooltip(text);
 	}
@@ -1618,19 +1618,19 @@ void AddOnsCtrl::update_dependency_errors() {
 			}
 			if (search_result == AddOns::g_addons.end()) {
 				warn_requirements.push_back(
-				   format(_("· ‘%1$s’ requires ‘%2$s’ which could not be found"),
+				   format(_("• ‘%1$s’ requires ‘%2$s’ which could not be found"),
 				          addon->first->descname(), requirement));
 			} else {
 				if (!search_result->second &&
 				    AddOns::require_enabled(addon->first->category, search_result->first->category)) {
-					warn_requirements.push_back(format(_("· ‘%1$s’ requires ‘%2$s’ which is disabled"),
+					warn_requirements.push_back(format(_("• ‘%1$s’ requires ‘%2$s’ which is disabled"),
 					                                   addon->first->descname(),
 					                                   search_result->first->descname()));
 				}
 				if (too_late &&
 				    AddOns::order_matters(addon->first->category, search_result->first->category)) {
 					warn_requirements.push_back(
-					   format(_("· ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"),
+					   format(_("• ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"),
 					          addon->first->descname(), search_result->first->descname()));
 				}
 			}
@@ -1658,7 +1658,7 @@ void AddOnsCtrl::update_dependency_errors() {
 					assert(!too_late || next != nullptr);
 					if (too_late && AddOns::order_matters(prev->category, next->category)) {
 						warn_requirements.push_back(format(
-						   _("· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are "
+						   _("• ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are "
 						     "listed in the wrong order"),
 						   addon->first->descname(), prev->descname(), search_result->first->descname()));
 					}

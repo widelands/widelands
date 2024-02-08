@@ -6,6 +6,7 @@
 # Gontzal Pujana Onaindia <juchuf@gmail.com>, 2022
 # Stephan Lutz <stephan-lutz@gmx.de>, 2022
 # Juan Miguel Bernal González, 2024
+# Juan Miguel Bernal González, 2024
 # 
 msgid ""
 msgstr ""
@@ -164,7 +165,7 @@ msgid ""
 "The island was prospering under my rule, and my subjects loved and respected"
 " me. They even built me a new castle as a gift. And then Atterdag came."
 msgstr ""
-"La isla prosperaba bajo mi gobierno,  mis súbditos me amaban y respetaban. "
+"La isla prosperaba bajo mi gobierno, mis súbditos me amaban y respetaban. "
 "Incluso me construyeron un castillo nuevo como regalo. Y entonces llegó "
 "Atterdag."
 
@@ -193,8 +194,8 @@ msgid ""
 "son Henneke and a few of my closest followers while Atterdag now calls Föhr "
 "another piece of his growing empire."
 msgstr ""
-"Y debo admitir con amargura: lo logró. Los combates duraron treinta y cinco "
-"días, cada mañana y tarde llegaba otro barco de Dinamarca trayendo otra "
+"Y debo admitir con amargura – lo logró. Los combates duraron treinta y cinco"
+" días, cada mañana y tarde llegaba otro barco de Dinamarca trayendo otra "
 "tropa de soldados. ¿Cómo podría esperar competir contra tales "
 "probabilidades? Al final no tuve más remedio que escapar con mi hijo Henneke"
 " y algunos de mis seguidores más cercanos, mientras Atterdag ahora llama a "

@@ -132,7 +132,7 @@ msgid ""
 "the Atlanteans, the Frisians and the Amazons. All tribes have different "
 "economies, strengths, and weaknesses, but the general gameplay is the same "
 "for all. We will play the Barbarians for now."
-msgstr "Vo Widelands je päť rôznych kmeňov: Barbari, Impérium, Atlanťania, Frízania a Amazonky. Všetky kmene majú rôzne ekonomiky, silné a slabé stránky, ale všeobecná hrateľnosť je pre všetky rovnaká. My budeme zatiaľ hrať za barbarov."
+msgstr "Vo Widelands je päť rôznych kmeňov: Barbari, Impérium, Atlantíďania, Frízania a Amazonky. Všetky kmene majú rôzne ekonomiky, silné a slabé stránky, ale všeobecná hrateľnosť je pre všetky rovnaká. My budeme zatiaľ hrať za barbarov."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:79
 msgid ""
@@ -156,7 +156,7 @@ msgstr "Potrebujeme nájsť vhodné miesto pre drevorubačskú chatrč. Môžeme
 msgid ""
 "I’ll show you where the menu is and where to show and hide the building "
 "spaces."
-msgstr "Ukážem Vám, kde sa nachádza ponuka a kde sa zobrazujú a skrývajú priestory pre budovy."
+msgstr "Ukážem Vám, kde sa nachádza ponuka a kde sa zobrazujú a skrývajú stavebné miesta."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:92
 msgid ""

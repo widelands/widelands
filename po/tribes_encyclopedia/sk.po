@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-01 02:43+0000\n"
+"POT-Creation-Date: 2024-02-01 02:29+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Pavol Gono, 2024\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
@@ -751,7 +751,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:751
 msgctxt "amazons_worker"
 msgid "Defend and Conquer!"
-msgstr ""
+msgstr "Obraňuj a panuj!"
 
 #. TRANSLATORS: Helptext for an Amazon worker: Trainer
 #: ../../data/tribes/initialization/amazons/units.lua:758
@@ -1129,7 +1129,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s, depending on "
 "how far the stonecutter has to walk."
-msgstr "Táto budova dokáže vyrobiť jednu žulu za %1$s až %2$s, podľa toho, ako ďaleko musí kamenár prejsť."
+msgstr "Táto budova dokáže vyrobiť jednu žulu za %1$s až %2$s, podľa toho, ako ďaleko musí kamenárka prejsť."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site:
 #. Stonecutter's Hut, part 2
@@ -1177,7 +1177,7 @@ msgid ""
 "This building can produce one log between %1$s and %2$s (with master "
 "woodcutter between %3$s and %4$s), depending on how far the woodcutter has "
 "to walk."
-msgstr "Táto budova dokáže vyrobiť jeden kmeň za %1$s až %2$s (s majstrom drevorubačom za %3$s až %4$s), podľa toho, ako ďaleko musí drevorubač prejsť."
+msgstr "Táto budova dokáže vyrobiť jeden kmeň za %1$s až %2$s (s majsterkou drevorubačkou za %3$s až %4$s), podľa toho, ako ďaleko musí drevorubačka prejsť."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Jungle
 #. Preserver's Hut
@@ -1308,7 +1308,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one bucket of water between %1$s and %2$s on "
 "average, depending on how far the carrier has to walk."
-msgstr "Táto budova dokáže vyrobiť jedno vedro vody priemerne za %1$s až %2$s, podľa toho, ako ďaleko musí nosič prejsť."
+msgstr "Táto budova dokáže vyrobiť jedno vedro vody priemerne za %1$s až %2$s, podľa toho, ako ďaleko musí nosička prejsť."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Rare Tree
 #. Cutter's Hut
@@ -1364,7 +1364,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1418
 msgctxt "amazons_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr "Jeden prieskum prieskumníka trvá medzi %1$s a %2$s."
+msgstr "Jeden prieskum prieskumníčky trvá %1$s až %2$s."
 
 #. TRANSLATORS: Lore author helptext for an Amazon production site: Rope
 #. Weaver's Booth
@@ -1494,7 +1494,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1485
 msgctxt "amazons_building"
 msgid "Burns logs into charcoal."
-msgstr ""
+msgstr "Páli kmene na uhlie."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site: Charcoal
 #. Kiln
@@ -3059,7 +3059,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:2073
 msgctxt "amazons"
 msgid "Expert missing"
-msgstr ""
+msgstr "chýba špecialistka"
 
 #. TRANSLATORS: Productivity label on an Amazon building if there is more than
 #. 1 experienced worker missing. If you need plural forms here, please let us
@@ -3067,7 +3067,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:2075
 msgctxt "amazons"
 msgid "Experts missing"
-msgstr ""
+msgstr "chýbajú špecialistky"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. is the maximum number of soldier slots in the building.
@@ -3631,7 +3631,7 @@ msgstr "Rúbe stromy."
 #: ../../data/tribes/initialization/atlanteans/units.lua:950
 msgctxt "atlanteans_worker"
 msgid "Saws logs to produce planks."
-msgstr "Píli drevo na dosky."
+msgstr "Píli kmene na dosky."
 
 #. TRANSLATORS: Helptext for an Atlantean worker: Forester
 #: ../../data/tribes/initialization/atlanteans/units.lua:957
@@ -4210,7 +4210,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The forester plants one tree between %1$s and %2$s, depending on how far he "
 "has to walk."
-msgstr "Horár zasadí jeden strom v čase medzi %1$s a %2$s, podľa toho, ako ďaleko musí prejsť."
+msgstr "Horár zasadí jeden strom za %1$s až %2$s, podľa toho, ako ďaleko musí prejsť."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Fisher's
 #. House
@@ -4466,7 +4466,7 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:1644
 msgctxt "atlanteans_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr "Jeden prieskum prieskumníka trvá medzi %1$s a %2$s."
+msgstr "Jeden prieskum prieskumníka trvá %1$s až %2$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Sawmill
 #. TRANSLATORS: Purpose helptext for an Empire production site: Sawmill
@@ -4709,7 +4709,7 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky nástroje, výroba jedného nástroja trvá priemerne %1$s. Ak ekonomika potrebuje len jeden druh nástroja, jeho výroba trvá priemerne %2$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Weapon
 #. Smithy
@@ -4934,7 +4934,7 @@ msgid ""
 "needed by the economy, production of one of each cloth and tabard takes %1$s"
 " on average. If only one kind of cloth or tabard is needed by the economy, "
 "its production takes %2$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky druhy látky a kabátcov, výroba jednej látky a jedného z každého kabátca trvá priemerne %1$s. Ak ekonomika potrebuje len jeden druh látky alebo kabátca, jeho výroba trvá priemerne %2$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Crystal
 #. Mine
@@ -5826,7 +5826,7 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:2273
 msgctxt "atlanteans"
 msgid "Expert missing"
-msgstr ""
+msgstr "chýba špecialista"
 
 #. TRANSLATORS: Productivity label on an Atlantean building if there is more
 #. than 1 experienced worker missing. If you need plural forms here, please
@@ -5834,7 +5834,7 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:2275
 msgctxt "atlanteans"
 msgid "Experts missing"
-msgstr ""
+msgstr "chýbajú špecialisti"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% is the maximum number of soldier slots in the building.
@@ -6703,7 +6703,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The ranger plants one tree between %1$s and %2$s, depending on how far he "
 "has to walk."
-msgstr "Lesník zasadí jeden strom v čase medzi %1$s a %2$s, podľa toho, ako ďaleko musí prejsť."
+msgstr "Lesník zasadí jeden strom za %1$s až %2$s, podľa toho, ako ďaleko musí prejsť."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Fisher's Hut
 #: ../../data/tribes/initialization/barbarians/units.lua:1192
@@ -6864,7 +6864,7 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:1272
 msgctxt "barbarians_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr "Jeden prieskum prieskumníka trvá medzi %1$s a %2$s."
+msgstr "Jeden prieskum prieskumníka trvá %1$s až %2$s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Wood Hardener
 #: ../../data/tribes/initialization/barbarians/units.lua:1284
@@ -7234,7 +7234,7 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky nástroje, výroba jedného nástroja trvá priemerne %1$s. Ak ekonomika potrebuje len jeden druh nástroja, jeho výroba trvá priemerne %2$s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Warmill
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Ax Workshop
@@ -9950,7 +9950,7 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:2582
 msgctxt "barbarians"
 msgid "Expert missing"
-msgstr ""
+msgstr "chýba špecialista"
 
 #. TRANSLATORS: Productivity label on a Barbarian building if there is more
 #. than 1 experienced worker missing. If you need plural forms here, please
@@ -9958,7 +9958,7 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:2584
 msgctxt "barbarians"
 msgid "Experts missing"
-msgstr ""
+msgstr "chýbajú špecialisti"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% is the maximum number of soldier slots in the building.
@@ -10823,7 +10823,7 @@ msgstr ""
 #. "In silvam non ligna feras."
 #: ../../data/tribes/initialization/empire/units.lua:1274
 msgid "Don’t carry logs to the forest."
-msgstr ""
+msgstr "Nenos drevo do lesa."
 
 #. TRANSLATORS: Lore author helptext for an Empire production site:
 #. Lumberjack's House
@@ -10885,7 +10885,7 @@ msgctxt "empire_building"
 msgid ""
 "The forester plants one tree between %1$s and %2$s, depending on how far he "
 "has to walk."
-msgstr "Horár zasadí jeden strom v čase medzi %1$s a %2$s, podľa toho, ako ďaleko musí prejsť."
+msgstr "Horár zasadí jeden strom za %1$s až %2$s, podľa toho, ako ďaleko musí prejsť."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11049,7 +11049,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:1420
 msgctxt "empire_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr "Jeden prieskum prieskumníka trvá medzi %1$s a %2$s."
+msgstr "Jeden prieskum prieskumníka trvá %1$s až %2$s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11408,7 +11408,7 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky nástroje, výroba jedného nástroja trvá priemerne %1$s. Ak ekonomika potrebuje len jeden druh nástroja, jeho výroba trvá priemerne %2$s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -13359,7 +13359,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:2731
 msgctxt "empire"
 msgid "Expert missing"
-msgstr ""
+msgstr "chýba špecialista"
 
 #. TRANSLATORS: Productivity label on an Empire building if there is more than
 #. 1 experienced worker missing. If you need plural forms here, please let us
@@ -13367,7 +13367,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:2733
 msgctxt "empire"
 msgid "Experts missing"
-msgstr ""
+msgstr "chýbajú špecialisti"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. is the maximum number of soldier slots in the building.
@@ -14007,7 +14007,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:880
 msgctxt "frisians_worker"
 msgid "Defend and Conquer!"
-msgstr ""
+msgstr "Obraňuj a panuj!"
 
 #. TRANSLATORS: Helptext for a Frisian worker: Trainer
 #: ../../data/tribes/initialization/frisians/units.lua:887
@@ -14311,7 +14311,7 @@ msgctxt "frisians_building"
 msgid ""
 "The forester plants one tree between %1$s and %2$s, depending on how far he "
 "has to walk."
-msgstr "Horár zasadí jeden strom v čase medzi %1$s a %2$s, podľa toho, ako ďaleko musí prejsť."
+msgstr "Horár zasadí jeden strom za %1$s až %2$s, podľa toho, ako ďaleko musí prejsť."
 
 #. TRANSLATORS: Note helptext for a Frisian production site: Hunter's House
 #: ../../data/tribes/initialization/frisians/units.lua:1615
@@ -14656,7 +14656,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1775
 msgctxt "frisians_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr "Jeden prieskum prieskumníka trvá medzi %1$s a %2$s."
+msgstr "Jeden prieskum prieskumníka trvá %1$s až %2$s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Brick Kiln
 #: ../../data/tribes/initialization/frisians/units.lua:1787
@@ -14781,7 +14781,7 @@ msgid ""
 "If this building is fully supplied and all tools are needed by the economy, "
 "production of one of each tool takes %1$s on average. If only one kind of "
 "tool is needed by the economy, its production takes %2$s on average. Needles"
-" are an exception - in the time to produce one tool two needles are "
+" are an exception – in the time to produce one tool two needles are "
 "produced."
 msgstr ""
 
@@ -15094,7 +15094,7 @@ msgstr ""
 msgctxt "frisians_building"
 msgid ""
 "If the tavern is fully supplied, it can produce one ration in %1$s on "
-"average, using 2 kinds of ingredients. If it can only use one kind of "
+"average, using two kinds of ingredients. If it can only use one kind of "
 "ingredient, it can produce one ration in %2$s on average."
 msgstr ""
 
@@ -15947,7 +15947,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2412
 msgctxt "frisians"
 msgid "Expert missing"
-msgstr ""
+msgstr "chýba špecialista"
 
 #. TRANSLATORS: Productivity label on a Frisian building if there is more than
 #. 1 experienced worker missing. If you need plural forms here, please let us
@@ -15955,7 +15955,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2414
 msgctxt "frisians"
 msgid "Experts missing"
-msgstr ""
+msgstr "chýbajú špecialisti"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% is the maximum number of soldier slots in the building.
@@ -16236,7 +16236,7 @@ msgstr "Výcvik uhýbania:"
 #: ../../data/tribes/scripting/help/building_help.lua:796
 #: ../../data/tribes/scripting/help/ware_help.lua:60
 msgid "Ware produced:"
-msgstr ""
+msgstr "Vyrobený výrobok:"
 
 #. TRANSLATORS: Ware Encyclopedia: More than 1 ware produced by a
 #. productionsite
@@ -16253,7 +16253,7 @@ msgstr "Vyrobené výrobky:"
 #: ../../data/tribes/scripting/help/building_help.lua:812
 #: ../../data/tribes/scripting/help/worker_help.lua:56
 msgid "Workers recruited:"
-msgstr ""
+msgstr "Vycvičení pracovníci:"
 
 #. TRANSLATORS: Performance helptext for a building - it hasn't been written
 #. yet.
@@ -16321,7 +16321,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:28
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr ""
+msgstr "Ctrl + klik"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:30
@@ -16333,7 +16333,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:32
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "Shift + klik"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:34
@@ -16508,11 +16508,11 @@ msgstr "Budovy"
 
 #: ../../data/tribes/scripting/help/init.lua:137
 msgid "Tribes Immovables"
-msgstr ""
+msgstr "Nehybné objekty kmeňa"
 
 #: ../../data/tribes/scripting/help/init.lua:144
 msgid "World Immovables"
-msgstr ""
+msgstr "Nehybné objekty sveta"
 
 #: ../../data/tribes/scripting/help/introduction.lua:7
 msgid "About Widelands"
@@ -16561,18 +16561,18 @@ msgstr "Výrobca"
 #. consumes a ware
 #: ../../data/tribes/scripting/help/ware_help.lua:125
 msgid "Consumer"
-msgstr ""
+msgstr "Spotrebiteľ"
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
 #. consume a ware
 #: ../../data/tribes/scripting/help/ware_help.lua:128
 msgid "Consumers"
-msgstr ""
+msgstr "Spotrebitelia"
 
 #. TRANSLATORS: Worker Encyclopedia: 1 worker recruited by a productionsite
 #: ../../data/tribes/scripting/help/worker_help.lua:53
 msgid "Worker recruited:"
-msgstr ""
+msgstr "Vycvičený pracovník:"
 
 #. TRANSLATORS: Worker Encyclopedia: Heading for 1 building where a worker can
 #. work
@@ -16580,7 +16580,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/worker_help.lua:86
 msgctxt "workerhelp_one_building"
 msgid "Works at"
-msgstr ""
+msgstr "Pracuje v"
 
 #. TRANSLATORS: Worker Encyclopedia: A list of more than 1 building where a
 #. worker can work
@@ -16588,7 +16588,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/worker_help.lua:90
 msgctxt "workerhelp_multiple_buildings"
 msgid "Works at"
-msgstr ""
+msgstr "Pracuje v"
 
 #. TRANSLATORS: You can also translate this as 'additional workplace'
 #: ../../data/tribes/scripting/help/worker_help.lua:106
