@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-01 02:43+0000\n"
+"POT-Creation-Date: 2024-02-08 02:24+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2023\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -461,10 +461,6 @@ msgstr "Kristin – vun 3plus4i bewarkt"
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
 msgstr "Rüst dien Schipp ut un seil tum Kimm."
-
-#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:11
-msgid "This map is not winnable with the ‘Autocrat’ win condition."
-msgstr "Deese Kaart kann mit de Upgaav tum Winnen »Dwingelant« nich wunnen worden."
 
 #: ../../data/maps/Dolomites.wmf/elemental:8
 msgid "Dolomites 3.0"

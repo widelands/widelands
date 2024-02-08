@@ -20,10 +20,13 @@
 #define WL_SCRIPTING_LUA_MAP_H
 
 #include "economy/economy.h"
+#include "economy/ferry_fleet.h"
 #include "economy/flag.h"
 #include "economy/portdock.h"
 #include "economy/road.h"
+#include "economy/ship_fleet.h"
 #include "logic/game.h"
+#include "logic/map_objects/pinned_note.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
 #include "logic/map_objects/tribes/market.h"
@@ -1418,6 +1421,7 @@ public:
 	int get_last_portdock(lua_State* L);
 	int get_destination(lua_State* L);
 	int get_state(lua_State* L);
+	int get_type(lua_State* L);
 	int get_scouting_direction(lua_State* L);
 	int set_scouting_direction(lua_State* L);
 	int get_island_explore_direction(lua_State* L);
@@ -1433,12 +1437,125 @@ public:
 	int get_workers(lua_State* L);
 	int build_colonization_port(lua_State* L);
 	int make_expedition(lua_State* L);
+	int refit(lua_State* L);
 
 	/*
 	 * C methods
 	 */
 	CASTED_GET(Ship)
 };
+
+class LuaPinnedNote : public LuaBob {
+public:
+	LUNA_CLASS_HEAD(LuaPinnedNote);
+
+	LuaPinnedNote() = default;
+	explicit LuaPinnedNote(Widelands::PinnedNote& n) : LuaBob(n) {
+	}
+	explicit LuaPinnedNote(lua_State* L) : LuaBob(L) {
+	}
+	~LuaPinnedNote() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_owner(lua_State* L);
+	int get_text(lua_State*);
+	int set_text(lua_State*);
+	int get_color(lua_State*);
+	int set_color(lua_State*);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+	CASTED_GET(PinnedNote)
+};
+
+class LuaNavalInvasionBase : public LuaBob {
+public:
+	LUNA_CLASS_HEAD(LuaNavalInvasionBase);
+
+	LuaNavalInvasionBase() = default;
+	explicit LuaNavalInvasionBase(Widelands::NavalInvasionBase& n) : LuaBob(n) {
+	}
+	explicit LuaNavalInvasionBase(lua_State* L) : LuaBob(L) {
+	}
+	~LuaNavalInvasionBase() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_owner(lua_State* L);
+	int get_soldiers(lua_State*);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+	CASTED_GET(NavalInvasionBase)
+};
+
+class LuaShipFleetYardInterface : public LuaBob {
+public:
+	LUNA_CLASS_HEAD(LuaShipFleetYardInterface);
+
+	LuaShipFleetYardInterface() = default;
+	explicit LuaShipFleetYardInterface(Widelands::ShipFleetYardInterface& i) : LuaBob(i) {
+	}
+	explicit LuaShipFleetYardInterface(lua_State* L) : LuaBob(L) {
+	}
+	~LuaShipFleetYardInterface() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_owner(lua_State* L);
+	int get_building(lua_State*);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+	CASTED_GET(ShipFleetYardInterface)
+};
+
+class LuaFerryFleetYardInterface : public LuaBob {
+public:
+	LUNA_CLASS_HEAD(LuaFerryFleetYardInterface);
+
+	LuaFerryFleetYardInterface() = default;
+	explicit LuaFerryFleetYardInterface(Widelands::FerryFleetYardInterface& i) : LuaBob(i) {
+	}
+	explicit LuaFerryFleetYardInterface(lua_State* L) : LuaBob(L) {
+	}
+	~LuaFerryFleetYardInterface() override = default;
+
+	/*
+	 * Properties
+	 */
+	int get_owner(lua_State* L);
+	int get_building(lua_State*);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+	CASTED_GET(FerryFleetYardInterface)
+};
+
 #undef CASTED_GET
 
 class LuaField : public LuaMapModuleClass {
