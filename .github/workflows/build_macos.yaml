@@ -31,6 +31,13 @@ jobs:
         # https://github.com/actions/setup-python/issues/577
         brew list -1 | grep python | while read formula; do brew unlink $formula; brew link --overwrite $formula; done
         ./install-dependencies.sh homebrew ccache
+    # XProtect can cause random failures if it decides that the DMG we create
+    # during the packaging phase is malware.
+    # https://github.com/actions/runner-images/issues/7522
+    - name: Kill XProtectBehaviorService
+      if: matrix.os == 'macos-13'
+      run: |
+        echo Killing XProtect.; sudo pkill -9 XProtect >/dev/null || true;
     - name: Building
       run: |
         mkdir build_wl

@@ -69,6 +69,7 @@ process_dylibs() {
 	    process_dylibs "$(list_dylibs $dest)" "$dest"
 	fi
 	install_name_tool -change "$dylib" "@rpath/$name" "$file"
+	echo "Adding $dylib"
     done
 }
 
