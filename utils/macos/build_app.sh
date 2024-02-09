@@ -9,11 +9,19 @@ SOURCE_DIR=$DIR/../../
 
 # Check if the SDK for the minimum build target is available.
 # If not, use the one for the installed macOS Version
-OSX_MIN_VERSION="10.7"
+OSX_MIN_VERSION="12.7"
 SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$OSX_MIN_VERSION.sdk"
 
 OSX_VERSION=$(sw_vers -productVersion | cut -d . -f 1,2)
 OSX_MINOR=$(sw_vers -productVersion | cut -d . -f 2)
+
+if [ ! -d "$SDK_DIRECTORY" ]; then
+   SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$OSX_VERSION.sdk"
+   if [ ! -d "$SDK_DIRECTORY" ]; then
+      # If the SDK for the current macOS Version can't be found, use whatever is linked to MacOSX.sdk
+      SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
+   fi
+fi
 
 PYTHON=python
 if ! which python; then
@@ -122,7 +130,10 @@ function BuildWidelands() {
    echo "FIXED ICU Issue $CMAKE_PREFIX_PATH"
 
    pushd $SOURCE_DIR
-   ./compile.sh $@
+   ./compile.sh \
+      -DCMAKE_OSX_DEPLOYMENT_TARGET:STRING="$OSX_MIN_VERSION" \
+      -DCMAKE_OSX_SYSROOT:PATH="$SDK_DIRECTORY" \
+      $@
    popd
 
    echo "Done building."
