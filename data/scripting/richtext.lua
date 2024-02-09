@@ -16,6 +16,8 @@
 -- If you're writing a scenario, you should also have a look at
 -- :ref:`richtext_scenarios.lua`.
 --
+-- If you want to use the styles of :doc:`themes <themes>` refer to :doc:`autogen_styles`.
+--
 -- To make these functions available include this file at the beginning
 -- of a script via:
 --
@@ -202,6 +204,8 @@ if (_style_prefix_ == nil) then
 end
 
 -- RST
+-- .. _set_fs_style:
+--
 -- .. function:: set_fs_style(enable)
 --
 --    Change the style for text headings and normal paragraphs between the in-game and the main
@@ -222,7 +226,7 @@ end
 -- RST
 -- .. function:: fs_color(text)
 --
---    .. deprecated:: 1.2 Use `set_fs_style()` instead.
+--    .. deprecated:: 1.2 Use :ref:`set_fs_style() <set_fs_style>` instead.
 --
 --    Returns the given text wrapped in a font tag for the
 --    default color that is used for texts in the main menu.

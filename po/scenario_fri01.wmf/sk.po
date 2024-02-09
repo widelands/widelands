@@ -42,6 +42,8 @@ msgid ""
 "Build at least one woodcutter’s house and two forester’s houses to start "
 "producing logs, and a reed farm to start growing reed."
 msgstr ""
+"Postavte najmenej jeden drevorubačský dom a dve horárne, aby sme začali "
+"vyrábať kmene a trstinovú záhradu, aby sme mohli začať pestovať trstinu."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:33
 msgid "Start producing bricks"
@@ -274,6 +276,8 @@ msgid ""
 "This is as good a place as any to start building our new home. First of all,"
 " we must ensure a stable supply of basic building materials."
 msgstr ""
+"Toto je dobré miesto na budovanie nášho nového domova. Najskôr musíme "
+"zabezpečiť stabilný prísun základných stavebných materiálov."
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:141
@@ -281,6 +285,8 @@ msgid ""
 "I have asked Hauke, one of my advisors, to oversee the construction of our "
 "settlement."
 msgstr ""
+"Požiadal som Haukeho, jedného z mojich poradcov, aby dohliadal na výstavbu "
+"našej osady."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:145
 msgid "The first buildings"
