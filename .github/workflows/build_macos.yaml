@@ -37,7 +37,7 @@ jobs:
     - name: Kill XProtectBehaviorService
       if: matrix.os == 'macos-13'
       run: |
-        echo Killing XProtect.; sudo pkill -9 XProtect >/dev/null || true;
+        sudo pkill -9 XProtect
     - name: Building
       run: |
         mkdir build_wl

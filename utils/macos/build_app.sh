@@ -62,6 +62,7 @@ function MakeDMG {
 
    echo "Creating DMG ..."
    # if [ "$TYPE" == "Release" ]; then
+      sudo pkill -9 XProtect || true
       hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}.dmg"
    # elif [ "$TYPE" == "Debug" ]; then
    #  hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}_${TYPE}.dmg"
