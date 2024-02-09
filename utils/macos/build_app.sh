@@ -61,8 +61,9 @@ function MakeDMG {
    cp $SOURCE_DIR/COPYING  $DESTINATION/COPYING.txt
 
    echo "Creating DMG ..."
+   find "$DESTINATION"
    # if [ "$TYPE" == "Release" ]; then
-      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}.dmg"
+      hdiutil create -verbose -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}.dmg"
    # elif [ "$TYPE" == "Debug" ]; then
    #  hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}_${TYPE}.dmg"
    # fi
