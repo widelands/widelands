@@ -65,7 +65,7 @@ jobs:
         ./extract_rst.py
         # Test building for the homepage
         sphinx-build -W -b json -d build/doctrees source build/json
-        # Create a downloadable workflow artifact for testing
+        # This is suitable for user testing
         ./make.py html -graphs
     - name: Upload artifact
       uses: actions/upload-artifact@v4
