@@ -9,13 +9,13 @@ SOURCE_DIR=$DIR/../../
 
 # Check if the SDK for the minimum build target is available.
 # If not, use the one for the installed macOS Version
-OSX_MIN_VERSION="12.7"
+OSX_MIN_VERSION="12.3"
 SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$OSX_MIN_VERSION.sdk"
 
 OSX_VERSION=$(sw_vers -productVersion | cut -d . -f 1,2)
-OSX_MINOR=$(sw_vers -productVersion | cut -d . -f 2)
 
 if [ ! -d "$SDK_DIRECTORY" ]; then
+   OSX_MIN_VERSION=$OSX_VERSION
    SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$OSX_VERSION.sdk"
    if [ ! -d "$SDK_DIRECTORY" ]; then
       # If the SDK for the current macOS Version can't be found, use whatever is linked to MacOSX.sdk
@@ -24,8 +24,8 @@ if [ ! -d "$SDK_DIRECTORY" ]; then
 fi
 
 PYTHON=python
-if ! which python; then
-   if which python3; then
+if ! which python > /dev/null; then
+   if which python3 > /dev/null; then
       PYTHON=python3
    else
       echo "No python executable found!"
@@ -61,9 +61,9 @@ function MakeDMG {
 
    echo "Creating DMG ..."
    # See https://github.com/actions/runner-images/issues/7522 why we do this
-   for i in seq 1 5 ; do
+   for i in $(seq 1 3) ; do
       hdiutil create -verbose -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}.dmg" \
-        && true || break
+        && break || true
 
       echo "Unable to run 'hdiutil' (attempt #${i}). Retrying."
       if [ -n "${GITHUB_JOB}" ] ; then

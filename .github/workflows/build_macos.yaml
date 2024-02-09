@@ -13,7 +13,7 @@ jobs:
         # Check https://github.com/actions/runner-images#available-images
         include:
           - arch: x86
-            os: 13
+            os: 12
           - arch: arm64
             os: 14
     name: MacOS ${{ matrix.config }} ${{ matrix.compiler }} ${{ matrix.arch }}
