@@ -1,6 +1,6 @@
 [TOC]
 
-## Post-1.1 until [git df6e12b](https://codeberg.org/wl/widelands/commit/df6e12bc8e9ae8065929c9c6aeea6c5c63daa06e)
+## Post-1.1 until [git 09f4790](https://codeberg.org/wl/widelands/commit/09f4790ff8522f0de1b53ec94697af5cf8592763)
 
 ### Animations, Icons and Overlays
 
@@ -116,6 +116,8 @@
 - AI Diplomacy (#5774)
 - Make AI supplycheck non recursive and more efficient (#5866)
 - Navalwarfare AI (CB #4441 / GH #6083)
+- Fix integer overflow in AI ship utilisation calculation (CB #4713 / GH #6350)
+- Make AI set port garrison according to soldier availability (GH #6351 / CB #4714)
 
 
 ### Gameplay
@@ -361,6 +363,8 @@
 - Documentation: place_road() needs a flag, not a field (GH #6262 / CB #4601)
 - Fix documentation of the objectives lua interface (CB #4613 / GH #6274)
 - Lua doc: explain `wl.Game().real_speed` a bit better (CB #4665 / GH #6302)
+- Lua styles documentation (CB #4704 / GH #6341)
+- Add images to theme documentation for fonts and buttons (CB #4695 / GH #6332)
 
 
 ### Editor
