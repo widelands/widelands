@@ -60,16 +60,7 @@ function MakeDMG {
    cp $SOURCE_DIR/COPYING  $DESTINATION/COPYING.txt
 
    echo "Creating DMG ..."
-   # See https://github.com/actions/runner-images/issues/7522 why we do this
-   for i in $(seq 1 3) ; do
-      hdiutil create -verbose -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}.dmg" \
-        && break || true
-
-      echo "Unable to run 'hdiutil' (attempt #${i}). Retrying."
-      if [ -n "${GITHUB_JOB}" ] ; then
-         sudo pkill -9 XProtect >/dev/null || true
-      fi
-   done
+   hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}.dmg"
 }
 
 function MakeAppPackage {

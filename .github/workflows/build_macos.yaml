@@ -27,9 +27,6 @@ jobs:
       run: |
         export ICU_ROOT="$(brew --prefix icu4c)" && \
         export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH";
-        # Unlink and re-link to prevent errors with github mac runner images
-        # https://github.com/actions/setup-python/issues/577
-        brew list -1 | grep python | while read formula; do brew unlink $formula; brew link --overwrite $formula; done
         ./install-dependencies.sh homebrew ccache
     - name: Building
       run: |
