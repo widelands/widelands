@@ -15,17 +15,6 @@ SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platf
 OSX_VERSION=$(sw_vers -productVersion | cut -d . -f 1,2)
 OSX_MINOR=$(sw_vers -productVersion | cut -d . -f 2)
 
-if [ ! -d "$SDK_DIRECTORY" ]; then
-   if [ "$OSX_MINOR" -ge 9 ]; then
-      OSX_MIN_VERSION="10.9"
-   fi
-   SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$OSX_VERSION.sdk"
-   if [ ! -d "$SDK_DIRECTORY" ]; then
-      # If the SDK for the current macOS Version can't be found, use whatever is linked to MacOSX.sdk
-      SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
-   fi
-fi
-
 PYTHON=python
 if ! which python; then
    if which python3; then
@@ -83,8 +72,6 @@ function MakeAppPackage {
    cp $SOURCE_DIR/data/images/logos/widelands.icns $DESTINATION/Widelands.app/Contents/Resources/widelands.icns
    ln -s /Applications $DESTINATION/Applications
 
-   # TODO(stonerl/k.halfmann): Check if NSHighResolutionCapable = false; is still neede with #3542
-   # is resolved. This needs an updated SDL2.
    cat > $DESTINATION/Widelands.app/Contents/Info.plist << EOF
 {
    CFBundleName = widelands;
@@ -116,10 +103,9 @@ EOF
    ASANPATH=`dirname $ASANLIB`
 
    echo "Copying and fixing dynamic libraries... "
-   dylibbundler --create-dir --bundle-deps \
-	--fix-file $DESTINATION/Widelands.app/Contents/MacOS/widelands \
-	--dest-dir $DESTINATION/Widelands.app/Contents/libs \
-	--search-path $ASANPATH
+   $SOURCE_DIR/utils/macos/bundle-dylibs \
+      -l ../libs \
+      $DESTINATION/Widelands.app
 
    echo "Re-sign libraries with an 'ad-hoc signing' see man codesign"
    codesign --sign - --force $DESTINATION/Widelands.app/Contents/libs/*
