@@ -104,7 +104,7 @@ std::string DetectedPortSpace::to_long_string(const EditorGameBase& egbase) cons
 	}
 	return format(
 	   /** TRANSLATORS: "Port space of Player3 discovered at 1:23 by Ship2 34 steps north
-		    of Port1" */
+	       of Port1" */
 	   ngettext("Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s of %6$s",
 	            "Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s of %6$s",
 	            distance_to_portdock),
