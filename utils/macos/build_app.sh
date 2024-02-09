@@ -31,7 +31,6 @@ if ! which python; then
       echo "No python executable found!"
    fi
 fi
-echo $python
 WLVERSION=`$PYTHON $DIR/../detect_revision.py`
 
 DESTINATION="WidelandsRelease"
@@ -60,12 +59,16 @@ function MakeDMG {
    echo "Copying COPYING"
    cp $SOURCE_DIR/COPYING  $DESTINATION/COPYING.txt
 
-   DONE=5
-   while [ $DONE -gt 0 ] ; do
-      echo "Creating DMG ... ($DONE)"
-      sudo pkill -9 XProtect || true
+   echo "Creating DMG ..."
+   # See https://github.com/actions/runner-images/issues/7522 why we do this
+   for i in seq 1 5 ; do
       hdiutil create -verbose -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}.dmg" \
-         && DONE=0 || DONE=$(( $DONE - 1 ))
+        && true || break
+
+      echo "Unable to run 'hdiutil' (attempt #${i}). Retrying."
+      if [ -n "${GITHUB_JOB}" ] ; then
+         sudo pkill -9 XProtect >/dev/null || true
+      fi
    done
 }
 
