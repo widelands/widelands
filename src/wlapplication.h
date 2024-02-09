@@ -229,9 +229,9 @@ private:
 	void cleanup_temp_files();
 	void cleanup_temp_backups(const std::string& dir);
 	void cleanup_temp_backups();
-	std::unique_ptr<FsMenu::MainMenu> check_crash_reports();
+	void check_crash_reports(FsMenu::MainMenu& menu);
 
-	void init_and_run_game_from_template();
+	void init_and_run_game_from_template(FsMenu::MainMenu& mainmenu);
 
 	bool redirect_output(std::string path = "");
 
