@@ -26,7 +26,16 @@ if [ ! -d "$SDK_DIRECTORY" ]; then
    fi
 fi
 
-WLVERSION=`python $DIR/../detect_revision.py`
+PYTHON=python
+if ! which python; then
+   if which python3; then
+      PYTHON=python3
+   else
+      echo "No python executable found!"
+   fi
+fi
+echo $python
+WLVERSION=`$PYTHON $DIR/../detect_revision.py`
 
 DESTINATION="WidelandsRelease"
 
@@ -110,7 +119,7 @@ EOF
    dylibbundler --create-dir --bundle-deps \
 	--fix-file $DESTINATION/Widelands.app/Contents/MacOS/widelands \
 	--dest-dir $DESTINATION/Widelands.app/Contents/libs \
-	--search-path $ASANPATH 
+	--search-path $ASANPATH
 
    echo "Re-sign libraries with an 'ad-hoc signing' see man codesign"
    codesign --sign - --force $DESTINATION/Widelands.app/Contents/libs/*
