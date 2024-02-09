@@ -60,13 +60,13 @@ function MakeDMG {
    echo "Copying COPYING"
    cp $SOURCE_DIR/COPYING  $DESTINATION/COPYING.txt
 
-   echo "Creating DMG ..."
-   # if [ "$TYPE" == "Release" ]; then
+   DONE=5
+   while [ $DONE -gt 0 ] ; do
+      echo "Creating DMG ... ($DONE)"
       sudo pkill -9 XProtect || true
-      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}.dmg"
-   # elif [ "$TYPE" == "Debug" ]; then
-   #  hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}_${TYPE}.dmg"
-   # fi
+      hdiutil create -verbose -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}.dmg" \
+         && DONE=0 || DONE=$(( $DONE - 1 ))
+   done
 }
 
 function MakeAppPackage {
