@@ -702,8 +702,8 @@ void WLApplication::init_and_run_game_from_template(FsMenu::MainMenu& mainmenu) 
 	std::unique_ptr<GameSettingsProvider> settings;
 	std::shared_ptr<GameController> ctrl;
 	GameHost* host = nullptr;  // will be deleted by ctrl
-	FsMenu::MenuCapsule capsule(mainmenu);
 	if (multiplayer) {
+		FsMenu::MenuCapsule capsule(mainmenu);
 		host = new GameHost(&capsule, ctrl, get_config_string("nickname", _("nobody")),
 		                    Widelands::get_all_tribeinfos(nullptr), false);
 		ctrl.reset(host);
