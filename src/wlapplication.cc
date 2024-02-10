@@ -702,9 +702,15 @@ void WLApplication::init_and_run_game_from_template(FsMenu::MainMenu& mainmenu) 
 	std::unique_ptr<GameSettingsProvider> settings;
 	std::shared_ptr<GameController> ctrl;
 	GameHost* host = nullptr;  // will be deleted by ctrl
+
+	// To avoid double free of mainmenu when capsule goes out of scope (only for multiplayer)
+	std::unique_ptr<FsMenu::MainMenu> menu_for_capsule;
+	std::unique_ptr<FsMenu::MenuCapsule> capsule;
+
 	if (multiplayer) {
-		FsMenu::MenuCapsule capsule(mainmenu);
-		host = new GameHost(&capsule, ctrl, get_config_string("nickname", _("nobody")),
+		menu_for_capsule.reset(new FsMenu::MainMenu(true));
+		capsule.reset(new FsMenu::MenuCapsule(*menu_for_capsule));
+		host = new GameHost(capsule.get(), ctrl, get_config_string("nickname", _("nobody")),
 		                    Widelands::get_all_tribeinfos(nullptr), false);
 		ctrl.reset(host);
 		settings.reset(new HostGameSettingsProvider(host));
