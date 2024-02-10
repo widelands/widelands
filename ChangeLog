@@ -1,6 +1,6 @@
 [TOC]
 
-## Post-1.1 until [git 09f4790](https://codeberg.org/wl/widelands/commit/09f4790ff8522f0de1b53ec94697af5cf8592763)
+## Post-1.1 until [git e058662](https://codeberg.org/wl/widelands/commit/e058662c90381ac7dc549e0bafde3890111d776d)
 
 ### Animations, Icons and Overlays
 
@@ -51,6 +51,7 @@
     - Add function `LuaWorker::evict`
     - Add property `LuaMapObject.exists`
     - Expose worker buildcost to `modify_unit`
+- UI Plugins (#5872, CB #4420 / GH #6030)
 - Lua UI API Extensions (#5933)
     - Read+Write access to most properties of all kinds of UI elements at runtime
     - Add support for checkboxes, radio groups, unique windows, spinboxes, sliders (all three flavours), progress bars, editboxes and multiline editboxes
@@ -66,7 +67,6 @@
 
 - Map Required Widelands Version Check (#5884)
 - Add a building plot to unusable port island on Calvisson (#6084)
-- Sanitize suggested teams lineups (CB #4673 / GH #6310)
 - Remove unwinnable-with-autocrat hint from map Crossing The Horizon
 
 
@@ -81,7 +81,6 @@
 - Fix add-ons admin dialog Enter key handling (#5763)
 - Turn unguaranteed add-on dependency check assert into a conditional (#5829)
 - Add-Ons Packager: Compute Minimum Widelands Version For Maps (#5905)
-- UI Plugins (#5872, CB #4420 / GH #6030)
 - Do not hide Add-On comment text during layout (#6032)
 - Fix false positives in add-ons packager change detection (#6033)
 - Add missing `richtext_escape` for add-ons error message (#6049)
@@ -108,6 +107,7 @@
 - Do not save partially initialized window (GH #6223 / CB #4564)
 - Save and load garrison settings (#5983)
 - Remove v1.0 compatibility code (CB #4615 / GH #6276)
+- Allow loading last savegame/replay/edited map from the command line (CB #4470 / GH #6153)
 
 
 ### AI
@@ -179,6 +179,8 @@
 - Misc Naval Warfare Segfault/Assert Fixes (#6066)
     - Fix assert failure during soldier swapping on a warship with maximal soldier capacity
     - Transport ships skip updating warship soldier requests and kickouts
+- Make `SoldierList` robust against map object removal (#6087)
+- Make AttackPanel/Window robust against object deletion (#6123)
 - Fix naval battle stacking in complex situations (#6071)
 - Stop ship battles when ship is destroyed (#6099)
 - Garrisoned soldiers shouldn't count towards economy target (#6086)
@@ -315,12 +317,9 @@
 - Forbid spectators setting ship destination (#6010)
 - Redesign ship healthbar/bonus rendering to fix overflow-hang (#6039)
 - Warship soldier capacity setting enhancements (#6044)
-    - While a ship is refitting to warship, already allow changing its soldier capacity and preference.
-    - The "click soldier to send away" info text is far too wide and makes the window take up unnecessarily much space.
-      Show it as a tooltip instead to make the window narrower (also applies to military- and trainingsites).
+    - Allow changing soldier capacity and preference while refitting to warship.
+    - Turn "click soldier to send away" info texts into tooltips to make windows narrower.
 - Forbid changing soldier capacity in replays (#6053)
-- Make `SoldierList` robust against map object removal (#6087)
-- Make AttackPanel/Window robust against object deletion (#6123)
 - Misc sea-fighting-related UI tweaks (#6142)
     - The attack window now uses bigger icons for ships to display the health bar properly, and also draws ship icons as background.
     - Clicking and dragging on an empty part of the soldier list drags the window now.
@@ -381,6 +380,7 @@
 - Z-Order Map Options Window Above Save Map Window (#5956)
 - Editor Tool Random Gap (#5864)
 - Select info tool after opening history window (#6002)
+- Sanitize suggested teams lineups (CB #4673 / GH #6310)
 
 
 ### Graphics Engine
