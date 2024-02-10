@@ -4,11 +4,14 @@ multiplayer="true"
 interactive_player="0"
 
 win_condition="territorial_time.lua"
-win_condition_duration="3"
+
+# give some time for the refitted ship to reach the port
+win_condition_duration="6"
 
 peaceful="false"
 fogless="false"
 custom_starting_positions="false"
+allow_naval_warfare="true"
 
 [player_1]
 tribe="amazons"
