@@ -1,7 +1,6 @@
 name: build - macos
 on:
   workflow_call:
-  push:
 
 jobs:
   macos:
