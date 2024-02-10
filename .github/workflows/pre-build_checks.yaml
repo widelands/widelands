@@ -70,7 +70,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: Widelands_Developer_Documentation_${{ github.sha }}
+        name: Widelands-${{ github.sha }}-Developer-Documentation
         path: "doc/sphinx/build/**"
 
   lua_style:
