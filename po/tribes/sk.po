@@ -1686,7 +1686,7 @@ msgstr "preskúmavanie"
 #: ../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:8
 msgctxt "amazons_building"
 msgid "Shipyard"
-msgstr ""
+msgstr "Lodenica"
 
 #. TRANSLATORS: Completed/Skipped/Did not start constructing a ship because
 #. ...
@@ -4961,7 +4961,7 @@ msgstr "Čiernokoreňové pole (stredné)"
 #: ../../data/tribes/immovables/blackrootfield/ripe/init.lua:8
 msgctxt "immovable"
 msgid "Blackroot Field (ripe)"
-msgstr "Čiernokoreňové pole (maličké)"
+msgstr "Čiernokoreňové pole (zrelé)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/blackrootfield/small/init.lua:8
@@ -5021,7 +5021,7 @@ msgstr "Kukuričné pole (stredné)"
 #: ../../data/tribes/immovables/cornfield/ripe/init.lua:8
 msgctxt "immovable"
 msgid "Cornfield (ripe)"
-msgstr "Kukuričné pole (maličké)"
+msgstr "Kukuričné pole (zrelé)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cornfield/small/init.lua:8
@@ -5373,7 +5373,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/rubber/mature/green/init.lua:11
 #: ../../data/tribes/immovables/trees/rubber/mature/winter/init.lua:11
 msgid "Rubber Tree (Mature)"
-msgstr ""
+msgstr "Kaučukovník (dospelý)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/old/black/init.lua:11
@@ -5381,7 +5381,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/rubber/old/green/init.lua:11
 #: ../../data/tribes/immovables/trees/rubber/old/winter/init.lua:11
 msgid "Rubber Tree (Old)"
-msgstr ""
+msgstr "Kaučukovník (starý)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/old/black/init.lua:13
@@ -5389,7 +5389,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/rubber/old/green/init.lua:13
 #: ../../data/tribes/immovables/trees/rubber/old/winter/init.lua:13
 msgid "Rubber Tree"
-msgstr ""
+msgstr "Kaučukovník"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/pole/black/init.lua:11
@@ -5397,7 +5397,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/rubber/pole/green/init.lua:11
 #: ../../data/tribes/immovables/trees/rubber/pole/winter/init.lua:11
 msgid "Rubber Tree (Pole)"
-msgstr ""
+msgstr "Kaučukovník (žrďovina)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/sapling/black/init.lua:11
@@ -5405,7 +5405,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/rubber/sapling/green/init.lua:11
 #: ../../data/tribes/immovables/trees/rubber/sapling/winter/init.lua:11
 msgid "Rubber Tree (Sapling)"
-msgstr ""
+msgstr "Kaučukovník (mladý)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/harvested/init.lua:8
@@ -8720,7 +8720,7 @@ msgstr ""
 #: ../../data/tribes/wares/rubber/init.lua:8
 msgctxt "ware"
 msgid "Rubber"
-msgstr ""
+msgstr "Guma"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/saw/init.lua:8

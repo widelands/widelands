@@ -633,7 +633,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:601
 msgctxt "amazons_worker"
 msgid "Breeds tapirs for adding them to the transportation system."
-msgstr ""
+msgstr "Chová tapíry, ktoré sa začlenia do prepravného systému."
 
 #. TRANSLATORS: Helptext for an Amazon worker: Stonecutter
 #: ../../data/tribes/initialization/amazons/units.lua:611
@@ -683,7 +683,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:660
 msgctxt "amazons_worker"
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "Pracuje v lodenici a stavia nové lode."
 
 #. TRANSLATORS: Helptext for an Amazon worker: Hunter-Gatherer
 #: ../../data/tribes/initialization/amazons/units.lua:670
@@ -1579,7 +1579,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1539
 msgctxt "amazons_building"
 msgid "Breeds tapirs for adding them to the transportation system."
-msgstr ""
+msgstr "Chová tapíry, ktoré sa začlenia do prepravného systému."
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Tapir Farm
 #: ../../data/tribes/initialization/amazons/units.lua:1541
@@ -3038,7 +3038,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:2067
 msgctxt "amazons"
 msgid "Worker is coming"
-msgstr ""
+msgstr "Pracovníčka prichádza"
 
 #. TRANSLATORS: Productivity label on an Amazon building if there is more than
 #. 1 worker missing. If you need plural forms here, please let us know.
@@ -5805,7 +5805,7 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:2267
 msgctxt "atlanteans"
 msgid "Worker is coming"
-msgstr ""
+msgstr "Pracovník prichádza"
 
 #. TRANSLATORS: Productivity label on an Atlantean building if there is more
 #. than 1 worker missing. If you need plural forms here, please let us know.
@@ -9929,7 +9929,7 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:2576
 msgctxt "barbarians"
 msgid "Worker is coming"
-msgstr ""
+msgstr "Pracovník prichádza"
 
 #. TRANSLATORS: Productivity label on a Barbarian building if there is more
 #. than 1 worker missing. If you need plural forms here, please let us know.
@@ -13338,7 +13338,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:2725
 msgctxt "empire"
 msgid "Worker is coming"
-msgstr ""
+msgstr "Pracovník prichádza"
 
 #. TRANSLATORS: Productivity label on an Empire building if there is more than
 #. 1 worker missing. If you need plural forms here, please let us know.
@@ -13884,7 +13884,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:722
 msgctxt "frisians_worker"
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "Pracuje v lodenici a stavia nové lode."
 
 #. TRANSLATORS: Purpose helptext for a Frisian worker: Diker
 #: ../../data/tribes/initialization/frisians/units.lua:729
@@ -15926,7 +15926,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2406
 msgctxt "frisians"
 msgid "Worker is coming"
-msgstr ""
+msgstr "Pracovník prichádza"
 
 #. TRANSLATORS: Productivity label on a Frisian building if there is more than
 #. 1 worker missing. If you need plural forms here, please let us know.

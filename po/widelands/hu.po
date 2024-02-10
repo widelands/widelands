@@ -2014,123 +2014,123 @@ msgstr[1] "%u bővítmény van bekapcsolva, ami befolyásolja a játékot:"
 #: ../../src/logic/detected_port_space.cc:51
 #, c-format
 msgid "northwest of %s"
-msgstr ""
+msgstr "%s kikötőjétől északnyugatra"
 
 #: ../../src/logic/detected_port_space.cc:54
 #, c-format
 msgid "northeast of %s"
-msgstr ""
+msgstr "%s kikötőjétől északkeletre"
 
 #: ../../src/logic/detected_port_space.cc:57
 #, c-format
 msgid "southwest of %s"
-msgstr ""
+msgstr "%s kikötőjétől délnyugatra"
 
 #: ../../src/logic/detected_port_space.cc:60
 #, c-format
 msgid "southeast of %s"
-msgstr ""
+msgstr "%s kikötőjétől délkeletre"
 
 #: ../../src/logic/detected_port_space.cc:63
 #, c-format
 msgid "north of %s"
-msgstr ""
+msgstr "%s kikötőjétől északra"
 
 #: ../../src/logic/detected_port_space.cc:66
 #, c-format
 msgid "south of %s"
-msgstr ""
+msgstr "%s kikötőjétől délre"
 
 #: ../../src/logic/detected_port_space.cc:69
 #, c-format
 msgid "west of %s"
-msgstr ""
+msgstr "%s kikötőjétől nyugatra"
 
 #: ../../src/logic/detected_port_space.cc:72
 #, c-format
 msgid "east of %s"
-msgstr ""
+msgstr "%s kikötőjétől keletre"
 
 #: ../../src/logic/detected_port_space.cc:80
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s"
-msgstr ""
+msgstr "Szabad kikötőhely, amit %1$s-kor talált %2$s"
 
 #. * TRANSLATORS: Last placeholder is "northwest/southeast/... of <port name>"
 #: ../../src/logic/detected_port_space.cc:85
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s"
 msgid_plural "Unowned port space discovered at %1$s by %2$s %3$u steps %4$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Szabad kikötőhely, amit %1$s-kor talált %2$s %4$s %3$u távolságban"
+msgstr[1] "Szabad kikötőhely, amit %1$s-kor talált %2$s %4$s %3$u távolságban"
 
 #: ../../src/logic/detected_port_space.cc:91
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s"
-msgstr ""
+msgstr "%1$s kikötőhelye, amit %2$s-kor talált %3$s"
 
 #. * TRANSLATORS: Last placeholder is "northwest/southeast/... of <port name>"
 #: ../../src/logic/detected_port_space.cc:97
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s"
 msgid_plural "Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s kikötőhelye, amit %2$s-kor talált %3$s %5$s %4$u távolságban"
+msgstr[1] "%1$s kikötőhelye, amit %3$s talált %2$s-kor %5$s %4$u távolságban"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northwest.
 #: ../../src/logic/detected_port_space.cc:109
 msgctxt "direction"
 msgid "NW"
-msgstr ""
+msgstr "ÉNy"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northeast.
 #: ../../src/logic/detected_port_space.cc:113
 msgctxt "direction"
 msgid "NE"
-msgstr ""
+msgstr "ÉK"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southwest.
 #: ../../src/logic/detected_port_space.cc:117
 msgctxt "direction"
 msgid "SW"
-msgstr ""
+msgstr "DNy"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southeast.
 #: ../../src/logic/detected_port_space.cc:121
 msgctxt "direction"
 msgid "SE"
-msgstr ""
+msgstr "DK"
 
 #. * TRANSLATORS: This is an abbreviated direction: North.
 #: ../../src/logic/detected_port_space.cc:125
 msgctxt "direction"
 msgid "N"
-msgstr ""
+msgstr "É"
 
 #. * TRANSLATORS: This is an abbreviated direction: South.
 #: ../../src/logic/detected_port_space.cc:129
 msgctxt "direction"
 msgid "S"
-msgstr ""
+msgstr "D"
 
 #. * TRANSLATORS: This is an abbreviated direction: West.
 #: ../../src/logic/detected_port_space.cc:133
 msgctxt "direction"
 msgid "W"
-msgstr ""
+msgstr "Ny"
 
 #. * TRANSLATORS: This is an abbreviated direction: East.
 #: ../../src/logic/detected_port_space.cc:137
 msgctxt "direction"
 msgid "E"
-msgstr ""
+msgstr "K"
 
 #. * TRANSLATORS: Placeholders are gametime and shipname. Keep this short.
 #: ../../src/logic/detected_port_space.cc:146
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s"
-msgstr ""
+msgstr "Szabad / %1$s / %2$s"
 
 #. * TRANSLATORS: Placeholders are gametime, shipname, and distance direction
 #. port_name.
@@ -2139,7 +2139,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s / %3$u %4$s %5$s"
-msgstr ""
+msgstr "Szabad / %1$s / %2$s / %3$u %4$s %5$s"
 
 #. * TRANSLATORS: Placeholders are owner, gametime, and shipname. Keep this
 #. short.
@@ -2147,7 +2147,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s"
-msgstr ""
+msgstr "%1$s / %2$s / %3$s"
 
 #. * TRANSLATORS: Placeholders are owner, gametime, shipname, and "distance
 #. direction port_name.
@@ -2156,7 +2156,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s / %4$u %5$s %6$s"
-msgstr ""
+msgstr "%1$s / %2$s / %3$s / %4$u %5$s %6$s"
 
 #: ../../src/logic/editor_game_base.cc:236
 #, c-format
@@ -2560,35 +2560,35 @@ msgstr "A csónakkészítő műhely nem a part közelében épült, így nem tud
 
 #: ../../src/logic/map_objects/tribes/ship.cc:399
 msgid "Destination Gone"
-msgstr ""
+msgstr "Eltűnt cél"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:399
 msgid "Ship Destination Vanished"
-msgstr ""
+msgstr "A hajó célja eltűnt"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:400
 msgid "Your ship’s destination has disappeared."
-msgstr ""
+msgstr "A hajód célja eltűnt."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:427
 msgid "Ship Arrived"
-msgstr ""
+msgstr "Megérkezett hajó"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:427
 msgid "Ship Reached Destination"
-msgstr ""
+msgstr "A hajó megérkezett"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:428
 msgid "Your ship has arrived at its destination."
-msgstr ""
+msgstr "A hajód megérkezett a kijelölt céljához."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:637
 msgid "A warship arrived at a known port build space."
-msgstr ""
+msgstr "Egy hadihajó egy ismert kikötőhelyhez ért."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:638
 msgid "An expedition ship arrived at a known port build space."
-msgstr ""
+msgstr "Egy expedíciós hajó egy ismert kikötőhelyhez ért."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:639
 #: ../../src/logic/map_objects/tribes/ship.cc:647
@@ -2597,15 +2597,15 @@ msgstr "Kikötőhely"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:639
 msgid "Port Space Spotted"
-msgstr ""
+msgstr "Kikötőhely a láthatáron"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:645
 msgid "A warship found a new port build space."
-msgstr ""
+msgstr "Egy hadihajó új kikötőhelyet fedezett fel."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:646
 msgid "An expedition ship found a new port build space."
-msgstr "Az expedíciós hajó új kikötőhelyet fedezett fel."
+msgstr "Egy expedíciós hajó új kikötőhelyet fedezett fel."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:647
 msgid "Port Space Found"
@@ -2613,65 +2613,65 @@ msgstr "Kikötőhely felfedezve"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:747
 msgid "Enemy Ship"
-msgstr ""
+msgstr "Ellenséges hajó"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:747
 msgid "Enemy Ship Spotted"
-msgstr ""
+msgstr "Ellenséges hajó a láthatáron"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:748
 msgid "A warship spotted an enemy ship."
-msgstr ""
+msgstr "Egy hadihajó egy ellenséges hajót észlelt."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:778
 #: ../../src/logic/map_objects/tribes/ship.cc:797
 msgid "Destination Unreachable"
-msgstr ""
+msgstr "Elérhetetlen cél"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:778
 #: ../../src/logic/map_objects/tribes/ship.cc:797
 msgid "Ship Destination Unreachable"
-msgstr ""
+msgstr "A hajó célja elérhetetlen"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:779
 msgid "Your ship could not find a path to its destination."
-msgstr ""
+msgstr "A hajód nem talál hajózható útvonalat a kijelölt céljához."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:798
 #, c-format
 msgid "Your ship could not find a path to its destination port ‘%s’."
-msgstr ""
+msgstr "A hajód nem talál hajózható útvonalat a számára kijelölt %s kikötőhöz."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1303
 #: ../../src/logic/map_objects/tribes/ship.cc:1561
 msgid "Enemy Ship Attacking"
-msgstr ""
+msgstr "Ellenséges hajó támad"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1303
 #: ../../src/logic/map_objects/tribes/ship.cc:1560
 msgid "Naval Attack"
-msgstr ""
+msgstr "Tengeri ütközet"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1304
 #, c-format
 msgid "Your ship ‘%s’ is under attack from an enemy warship."
-msgstr ""
+msgstr "A(z) %s nevű hajódat megtámadta egy ellenséges hadihajó."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1423
 msgid "Ship Destroyed"
-msgstr ""
+msgstr "Elvesztett hajó"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1423
 msgid "Ship Sunk"
-msgstr ""
+msgstr "Elsüllyedt hajó"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1424
 msgid "An enemy ship has destroyed your warship."
-msgstr ""
+msgstr "Egy ellenséges hajó megsemmisítette a hadihajódat."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1562
 msgid "Your coast is under attack from an enemy warship."
-msgstr ""
+msgstr "A partvonaladon partra szállt az ellenség."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1791
 msgid "Island Circumnavigated"
@@ -2731,15 +2731,15 @@ msgstr "Egy korábban felfedezett kikötő építési hely többé már nem szab
 #: ../../src/logic/map_objects/tribes/ship.cc:2214
 msgctxt "ship"
 msgid "Warship"
-msgstr ""
+msgstr "Hadihajó"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2214
 msgid "Warship Ready"
-msgstr ""
+msgstr "Hadihajó kész"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2215
 msgid "A warship is waiting for your commands."
-msgstr ""
+msgstr "Egy hadihajó a parancsaidra vár."
 
 #. * TRANSLATORS: Ship expedition ready
 #: ../../src/logic/map_objects/tribes/ship.cc:2220
@@ -2758,28 +2758,28 @@ msgstr "Expedíciós hajó parancsra vár."
 #: ../../src/logic/map_objects/tribes/ship.cc:2385
 msgctxt "ship_state"
 msgid "Sinking"
-msgstr ""
+msgstr "Süllyed"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2387
 msgctxt "ship_state"
 msgid "Fighting"
-msgstr ""
+msgstr "Harcol"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2391
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
-msgstr ""
+msgstr "Átalakítás teherhajóvá"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2394
 msgctxt "ship_state"
 msgid "Refitting to Warship"
-msgstr ""
+msgstr "Átalakítás hadihajóvá"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2400
 #: ../../src/wui/seafaring_statistics_menu.cc:270
 msgctxt "ship_state"
 msgid "Warship"
-msgstr ""
+msgstr "Hadihajó"
 
 #. * TRANSLATORS: This is a ship state. The ship is
 #. * currently sailing to a specific destination ship.
@@ -5969,7 +5969,7 @@ msgstr "Diplomácia letiltása"
 
 #: ../../src/ui_fsmenu/launch_game.cc:141
 msgid "Enable naval warfare (experimental feature)"
-msgstr ""
+msgstr "Tengeri hadviselés engedélyezése (fejlesztés alatt)"
 
 #: ../../src/ui_fsmenu/launch_game.cc:149
 msgid "Custom starting positions"
@@ -6047,18 +6047,18 @@ msgstr "A játékosok mindig látják a teljes térképet"
 
 #: ../../src/ui_fsmenu/launch_game.cc:395
 msgid "Naval warfare is set by the scenario"
-msgstr ""
+msgstr "A tengeri hadviselés engedélyezését a küldetés határozza meg"
 
 #: ../../src/ui_fsmenu/launch_game.cc:397
 msgid "Naval warfare is set by the saved game"
-msgstr ""
+msgstr "A tengeri hadviselés engedélyezését a mentett játék határozza meg"
 
 #: ../../src/ui_fsmenu/launch_game.cc:400
 msgid ""
 "Enable coastal invasions and ship-to-ship battles. This feature is "
 "experimental and may undergo substantial redesign in future versions of "
 "Widelands."
-msgstr ""
+msgstr "A kikötőknél és kikötőhelyeknél partra szállhatnak támadó katonák a hadihajókról, és a hadihajók is harcolhatnak egymás ellen. Ez a játékmód még fejlesztés alatt áll, és jelentős változások várhatók benne a Widelands későbbi verzióiban."
 
 #: ../../src/ui_fsmenu/launch_game.cc:420
 msgid "Player relations are set by the scenario"
@@ -7934,11 +7934,11 @@ msgstr "Expedíciók kikötőhelynél"
 
 #: ../../src/wlapplication_options.cc:809
 msgid "Show Warships"
-msgstr ""
+msgstr "Hadihajók"
 
 #: ../../src/wlapplication_options.cc:814
 msgid "Show Ships Being Refitted"
-msgstr ""
+msgstr "Átalakítás alatt"
 
 #: ../../src/wlapplication_options.cc:819
 msgid "Toggle Quick Navigation"
@@ -8406,8 +8406,8 @@ msgstr "Támadás"
 #, c-format
 msgid "%u ship"
 msgid_plural "%u ships"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u hajó"
+msgstr[1] "%u hajó"
 
 #. * TRANSLATORS: Number of soldiers that should attack. Used in the attack
 #. window.
@@ -8421,7 +8421,7 @@ msgstr[1] "%u katona"
 
 #: ../../src/wui/attack_window.cc:368
 msgid "Number of ships"
-msgstr ""
+msgstr "Hajók száma"
 
 #: ../../src/wui/attack_window.cc:368
 msgid "Number of soldiers"
@@ -8429,7 +8429,7 @@ msgstr "Katonák száma"
 
 #: ../../src/wui/attack_window.cc:375
 msgid "Send less ships. Hold down Ctrl to send no ships"
-msgstr ""
+msgstr "Kevesebb hajó küldése. A Ctrl billentyűt lenyomva egyet se."
 
 #: ../../src/wui/attack_window.cc:376
 msgid "Send less soldiers. Hold down Ctrl to send no soldiers"
@@ -8437,7 +8437,7 @@ msgstr "Kevesebb katona küldése. A Ctrl billentyűt lenyomva egyet se."
 
 #: ../../src/wui/attack_window.cc:382
 msgid "Send more ships. Hold down Ctrl to send as many ships as possible"
-msgstr ""
+msgstr "Több hajó küldése. A Ctrl billentyűt lenyomva a lehető legtöbbet."
 
 #: ../../src/wui/attack_window.cc:383
 msgid ""
@@ -8454,7 +8454,7 @@ msgstr "Támadók:"
 
 #: ../../src/wui/attack_window.cc:416
 msgid "Click on a ship to remove her from the list of attackers"
-msgstr ""
+msgstr "Az egyes hajókra kattintva eltávolíthatod őket a támadásra küldöttek közül"
 
 #: ../../src/wui/attack_window.cc:417
 msgid "Click on a soldier to remove him from the list of attackers"
@@ -8462,7 +8462,7 @@ msgstr "Az egyes katonákra kattintva eltávolíthatod őket a támadásra küld
 
 #: ../../src/wui/attack_window.cc:419
 msgid "Hold down Ctrl to remove all ships from the list"
-msgstr ""
+msgstr "A Ctrl billentyűt lenyomva az összes hajó eltávolítása"
 
 #: ../../src/wui/attack_window.cc:420
 msgid "Hold down Ctrl to remove all soldiers from the list"
@@ -8470,7 +8470,7 @@ msgstr "A Ctrl billentyűt lenyomva az összes katona eltávolítása"
 
 #: ../../src/wui/attack_window.cc:424
 msgid "Hold down Shift to remove all ships up to the one you’re pointing at"
-msgstr ""
+msgstr "A Shift billentyűt lenyomva a hajók eltávolítása a kiválasztott hajóig"
 
 #: ../../src/wui/attack_window.cc:425
 msgid ""
@@ -8483,7 +8483,7 @@ msgstr "Nem támadnak:"
 
 #: ../../src/wui/attack_window.cc:438
 msgid "Click on a ship to add her to the list of attackers"
-msgstr ""
+msgstr "Az egyes hajókra kattintva hozzáadhatod őket a támadásra küldöttekhez"
 
 #: ../../src/wui/attack_window.cc:439
 msgid "Click on a soldier to add him to the list of attackers"
@@ -8491,7 +8491,7 @@ msgstr "Az egyes katonákra kattintva hozzáadhatod őket a támadásra küldöt
 
 #: ../../src/wui/attack_window.cc:441
 msgid "Hold down Ctrl to add all ships to the list"
-msgstr ""
+msgstr "A Ctrl billentyűt lenyomva az összes hajó hozzáadása"
 
 #: ../../src/wui/attack_window.cc:442
 msgid "Hold down Ctrl to add all soldiers to the list"
@@ -8499,7 +8499,7 @@ msgstr "A Ctrl billentyűt lenyomva az összes katona hozzáadása"
 
 #: ../../src/wui/attack_window.cc:445
 msgid "Hold down Shift to add all ships up to the one you’re pointing at"
-msgstr ""
+msgstr "A Shift billentyűt lenyomva a hajók hozzáadása a kiválasztott hajóig"
 
 #: ../../src/wui/attack_window.cc:446
 msgid "Hold down Shift to add all soldiers up to the one you’re pointing at"
@@ -8525,7 +8525,7 @@ msgstr "Látómező közepébe helyezés"
 #: ../../src/wui/attack_window.cc:622
 #, c-format
 msgid "%1$s  HP: %2$u/%3$u  AT: +%4$u%%"
-msgstr ""
+msgstr "%1$s  ÉP: %2$u/%3$u  TÁ: +%4$u%%"
 
 #: ../../src/wui/attack_window.cc:627 ../../src/wui/soldierlist.cc:556
 #, c-format
@@ -8741,7 +8741,7 @@ msgstr "Hősök előnyben részesítése"
 #: ../../src/wui/constructionsitewindow.cc:364
 #: ../../src/wui/soldierlist.cc:496
 msgid "No preference"
-msgstr ""
+msgstr "Mindegy"
 
 #: ../../src/wui/constructionsitewindow.cc:395
 msgid "Settings to apply after construction"
@@ -8993,22 +8993,22 @@ msgstr "Vízi utak építése"
 #, c-format
 msgctxt "ship_state"
 msgid "Warship · HP %1$u%% · AT +%2$u%%"
-msgstr ""
+msgstr "Hadihajó · ÉP %1$u%% · TÁ +%2$u%%"
 
 #: ../../src/wui/fieldaction.cc:1258
 msgctxt "ship_state"
 msgid "Enemy Transport Ship"
-msgstr ""
+msgstr "Ellenséges teherhajó"
 
 #: ../../src/wui/fieldaction.cc:1260
 msgctxt "ship_state"
 msgid "Expedition"
-msgstr ""
+msgstr "Expedíció"
 
 #: ../../src/wui/fieldaction.cc:1262
 msgctxt "ship_state"
 msgid "Transport"
-msgstr ""
+msgstr "Teherhajó"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
 #: ../../src/wui/fieldaction.cc:1264 ../../src/wui/interactive_gamebase.cc:614
@@ -9019,15 +9019,15 @@ msgstr "%1$s (%2$s)"
 
 #: ../../src/wui/fieldaction.cc:1274
 msgid "Select Ship"
-msgstr ""
+msgstr "Hajó kiválasztása"
 
 #: ../../src/wui/fieldaction.cc:1297
 msgid "Own Ships"
-msgstr ""
+msgstr "Saját hajók"
 
 #: ../../src/wui/fieldaction.cc:1311
 msgid "Attackable Ships"
-msgstr ""
+msgstr "Megtámadható hajók"
 
 #: ../../src/wui/fleet_options_window.cc:94
 msgid "Ferry Fleet Options"
@@ -9475,11 +9475,11 @@ msgstr "Termelékenység"
 
 #: ../../src/wui/general_statistics_menu.cc:185
 msgid "Warships lost"
-msgstr ""
+msgstr "Elvesztett hadihajók"
 
 #: ../../src/wui/general_statistics_menu.cc:194
 msgid "Warships defeated"
-msgstr ""
+msgstr "Legyőzött hadihajók"
 
 #: ../../src/wui/general_statistics_menu.cc:203
 msgid "Casualties"
@@ -10517,14 +10517,14 @@ msgstr "Szállít"
 #: ../../src/wui/seafaring_statistics_menu.cc:272
 msgctxt "ship_state"
 msgid "Being Refitted"
-msgstr ""
+msgstr "Átalakítás alatt"
 
 #: ../../src/wui/seafaring_statistics_menu.cc:426
 #, c-format
 msgid "Seafaring Statistics (%u Ship)"
 msgid_plural "Seafaring Statistics (%u Ships)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Hajózási statisztika (%u hajó)"
+msgstr[1] "Hajózási statisztika (%u hajó)"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:568
@@ -10559,12 +10559,12 @@ msgstr "Azon expedíciók megjelenítése, melyek találtak kikötőhelyet, vagy
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:603
 msgid "Show warships"
-msgstr ""
+msgstr "Hadihajók megjelenítése"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:608
 msgid "Show ships being refitted"
-msgstr ""
+msgstr "Átalakítás alatt álló hajók megjelenítése"
 
 #: ../../src/wui/shipwindow.cc:86
 #, c-format
@@ -10572,8 +10572,8 @@ msgid ""
 "Damaged warships regain %u hitpoint per second when anchored in a port."
 msgid_plural ""
 "Damaged warships regain %u hitpoints per second when anchored in a port."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "A sérült hadihajókat másodpercenként %u életponttal javítják, amikor egy kikötőben horgonyoznak."
+msgstr[1] "A sérült hadihajókat másodpercenként %u életponttal javítják, amikor egy kikötőben horgonyoznak."
 
 #: ../../src/wui/shipwindow.cc:111
 msgid "Scout towards the north west"
@@ -10597,7 +10597,7 @@ msgstr "Kikötő építése a jelenlegi helyen"
 
 #: ../../src/wui/shipwindow.cc:136
 msgid "Anchor at the current location"
-msgstr ""
+msgstr "Lehorgonyzás a kijelölt helyen"
 
 #: ../../src/wui/shipwindow.cc:141
 msgid "Scout towards the east"
@@ -10617,7 +10617,7 @@ msgstr "Felderítés délkelet felé"
 
 #: ../../src/wui/shipwindow.cc:163
 msgid "Destination"
-msgstr ""
+msgstr "Cél"
 
 #: ../../src/wui/shipwindow.cc:174
 msgid "Sink the ship"
@@ -10646,24 +10646,24 @@ msgstr "Ezt az expedíciót nem lehet lefújni, mert nincs kikötő ahová a haj
 #: ../../src/wui/shipwindow.cc:431
 #, c-format
 msgid "Go to destination (%s)"
-msgstr "Menj a célhoz (%s)"
+msgstr "Ugrás a hajó céljához (%s)"
 
 #: ../../src/wui/shipwindow.cc:436
 msgid "Go to destination"
-msgstr "Menj a célhoz"
+msgstr "Ugrás a hajó céljához"
 
 #: ../../src/wui/shipwindow.cc:463
 msgid "Refit to transport ship"
-msgstr ""
+msgstr "Átalakítás teherhajóvá"
 
 #: ../../src/wui/shipwindow.cc:464
 msgid "Refit to warship"
-msgstr ""
+msgstr "Átalakítás hadihajóvá"
 
 #: ../../src/wui/shipwindow.cc:486
 #, c-format
 msgid "HP: %1$u/%2$u"
-msgstr ""
+msgstr "ÉP: %1$u/%2$u"
 
 #: ../../src/wui/soldier_statistics_menu.cc:89
 #: ../../src/wui/soldier_statistics_menu.cc:182

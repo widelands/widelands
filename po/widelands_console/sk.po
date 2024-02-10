@@ -269,7 +269,7 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:156
 msgid "Display system time in the info panel."
-msgstr ""
+msgstr "Zobraziť systémový čas v informačnom paneli"
 
 #: ../../src/wlapplication_messages.cc:157
 msgid "Use single watchwindow mode."

@@ -2018,7 +2018,7 @@ msgstr "Keine"
 #: ../../src/logic/addons.cc:275
 #, c-format
 msgid "%1$s<br>• %2$s (version %3$s)"
-msgstr ""
+msgstr "%1$s<br>• %2$s (Version %3$s)"
 
 #: ../../src/logic/addons.cc:305
 msgid "No game-relevant add-ons in use."
@@ -2034,123 +2034,123 @@ msgstr[1] "%u spielrelevante Erweiterungen in Gebrauch:"
 #: ../../src/logic/detected_port_space.cc:51
 #, c-format
 msgid "northwest of %s"
-msgstr ""
+msgstr "nordwestlich von %s"
 
 #: ../../src/logic/detected_port_space.cc:54
 #, c-format
 msgid "northeast of %s"
-msgstr ""
+msgstr "nordöstlich von %s"
 
 #: ../../src/logic/detected_port_space.cc:57
 #, c-format
 msgid "southwest of %s"
-msgstr ""
+msgstr "südwestlich von %s"
 
 #: ../../src/logic/detected_port_space.cc:60
 #, c-format
 msgid "southeast of %s"
-msgstr ""
+msgstr "südöstlich von %s"
 
 #: ../../src/logic/detected_port_space.cc:63
 #, c-format
 msgid "north of %s"
-msgstr ""
+msgstr "nördlich von %s"
 
 #: ../../src/logic/detected_port_space.cc:66
 #, c-format
 msgid "south of %s"
-msgstr ""
+msgstr "südlich von %s"
 
 #: ../../src/logic/detected_port_space.cc:69
 #, c-format
 msgid "west of %s"
-msgstr ""
+msgstr "westlich von %s"
 
 #: ../../src/logic/detected_port_space.cc:72
 #, c-format
 msgid "east of %s"
-msgstr ""
+msgstr "östlich von %s"
 
 #: ../../src/logic/detected_port_space.cc:80
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s"
-msgstr ""
+msgstr "Herrenloser Hafenbauplatz bei %1$s durch %2$s entdeckt"
 
 #. * TRANSLATORS: Last placeholder is "northwest/southeast/... of <port name>"
 #: ../../src/logic/detected_port_space.cc:85
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s"
 msgid_plural "Unowned port space discovered at %1$s by %2$s %3$u steps %4$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Herrenloser Hafenbauplatz bei%1$s,%3$u Feld %4$s, durch %2$sentdeckt"
+msgstr[1] "Herrenloser Hafenbauplatz bei %1$s, %3$u Felder %4$s, durch %2$s entdeckt"
 
 #: ../../src/logic/detected_port_space.cc:91
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s"
-msgstr ""
+msgstr "Hafenbauplatz von %1$s bei %2$s durch %3$s entdeckt"
 
 #. * TRANSLATORS: Last placeholder is "northwest/southeast/... of <port name>"
 #: ../../src/logic/detected_port_space.cc:97
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s"
 msgid_plural "Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Hafenbauplatz von %1$s bei %2$s, %4$u Felder %5$s, durch %3$s entdeckt"
+msgstr[1] "Hafenbauplatz von %1$s bei %2$s, %4$u Felder %5$s, durch  %3$s entdeckt"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northwest.
 #: ../../src/logic/detected_port_space.cc:109
 msgctxt "direction"
 msgid "NW"
-msgstr ""
+msgstr "NW"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northeast.
 #: ../../src/logic/detected_port_space.cc:113
 msgctxt "direction"
 msgid "NE"
-msgstr ""
+msgstr "NO"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southwest.
 #: ../../src/logic/detected_port_space.cc:117
 msgctxt "direction"
 msgid "SW"
-msgstr ""
+msgstr "SW"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southeast.
 #: ../../src/logic/detected_port_space.cc:121
 msgctxt "direction"
 msgid "SE"
-msgstr ""
+msgstr "SO"
 
 #. * TRANSLATORS: This is an abbreviated direction: North.
 #: ../../src/logic/detected_port_space.cc:125
 msgctxt "direction"
 msgid "N"
-msgstr ""
+msgstr "N"
 
 #. * TRANSLATORS: This is an abbreviated direction: South.
 #: ../../src/logic/detected_port_space.cc:129
 msgctxt "direction"
 msgid "S"
-msgstr ""
+msgstr "S"
 
 #. * TRANSLATORS: This is an abbreviated direction: West.
 #: ../../src/logic/detected_port_space.cc:133
 msgctxt "direction"
 msgid "W"
-msgstr ""
+msgstr "W"
 
 #. * TRANSLATORS: This is an abbreviated direction: East.
 #: ../../src/logic/detected_port_space.cc:137
 msgctxt "direction"
 msgid "E"
-msgstr ""
+msgstr "O"
 
 #. * TRANSLATORS: Placeholders are gametime and shipname. Keep this short.
 #: ../../src/logic/detected_port_space.cc:146
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s"
-msgstr ""
+msgstr "Herrenlos / %1$s / %2$s"
 
 #. * TRANSLATORS: Placeholders are gametime, shipname, and distance direction
 #. port_name.
@@ -2159,7 +2159,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s / %3$u %4$s %5$s"
-msgstr ""
+msgstr "Herrenlos / %1$s / %2$s / %3$u %4$s %5$s"
 
 #. * TRANSLATORS: Placeholders are owner, gametime, and shipname. Keep this
 #. short.
@@ -2167,7 +2167,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s"
-msgstr ""
+msgstr "%1$s / %2$s / %3$s"
 
 #. * TRANSLATORS: Placeholders are owner, gametime, shipname, and "distance
 #. direction port_name.
@@ -2176,7 +2176,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s / %4$u %5$s %6$s"
-msgstr ""
+msgstr "%1$s / %2$s / %3$s / %4$u %5$s %6$s"
 
 #: ../../src/logic/editor_game_base.cc:236
 #, c-format
@@ -2580,35 +2580,35 @@ msgstr "Deine Fährenwerft wurde nicht nah genug am Ufer gebaut. Sie wird nicht 
 
 #: ../../src/logic/map_objects/tribes/ship.cc:399
 msgid "Destination Gone"
-msgstr ""
+msgstr "Ziel verschwunden"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:399
 msgid "Ship Destination Vanished"
-msgstr ""
+msgstr "Schiffsziel verschwunden"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:400
 msgid "Your ship’s destination has disappeared."
-msgstr ""
+msgstr "Das Ziel deines Schiffs ist verschwunden."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:427
 msgid "Ship Arrived"
-msgstr ""
+msgstr "Schiff angekommen"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:427
 msgid "Ship Reached Destination"
-msgstr ""
+msgstr "Schiff hat Ziel erreicht"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:428
 msgid "Your ship has arrived at its destination."
-msgstr ""
+msgstr "Dein Schiff ist an seinem Ziel angekommen."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:637
 msgid "A warship arrived at a known port build space."
-msgstr ""
+msgstr "Ein Kriegsschiff ist an einem bekannten Hafenbauplatz angekommen."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:638
 msgid "An expedition ship arrived at a known port build space."
-msgstr ""
+msgstr "Ein Expeditionsschiff ist an einem bekannten Hafenbauplatz angekommen."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:639
 #: ../../src/logic/map_objects/tribes/ship.cc:647
@@ -2617,11 +2617,11 @@ msgstr "Hafenbauplatz"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:639
 msgid "Port Space Spotted"
-msgstr ""
+msgstr "Hafenbauplatz entdeckt"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:645
 msgid "A warship found a new port build space."
-msgstr ""
+msgstr "Ein Kriegsschiff hat einen neuen Hafenbauplatz gefunden."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:646
 msgid "An expedition ship found a new port build space."
@@ -2633,65 +2633,65 @@ msgstr "Hafenbauplatz gefunden"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:747
 msgid "Enemy Ship"
-msgstr ""
+msgstr "Feindliches Schiff"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:747
 msgid "Enemy Ship Spotted"
-msgstr ""
+msgstr "Feindliches Schiff entdeckt"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:748
 msgid "A warship spotted an enemy ship."
-msgstr ""
+msgstr "Ein Kriegsschiff hat ein feindliches Schiff entdeckt."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:778
 #: ../../src/logic/map_objects/tribes/ship.cc:797
 msgid "Destination Unreachable"
-msgstr ""
+msgstr "Ziel unerreichbar"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:778
 #: ../../src/logic/map_objects/tribes/ship.cc:797
 msgid "Ship Destination Unreachable"
-msgstr ""
+msgstr "Schiffsziel unerreichbar"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:779
 msgid "Your ship could not find a path to its destination."
-msgstr ""
+msgstr "Dein Schiff konnte keinen Seeweg zu seinem Ziel finden."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:798
 #, c-format
 msgid "Your ship could not find a path to its destination port ‘%s’."
-msgstr ""
+msgstr "Dein Schiff konnte keinen Seeweg zu seinem Zielhafen ‘%s’ finden."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1303
 #: ../../src/logic/map_objects/tribes/ship.cc:1561
 msgid "Enemy Ship Attacking"
-msgstr ""
+msgstr "Feindliches Schiff greift an"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1303
 #: ../../src/logic/map_objects/tribes/ship.cc:1560
 msgid "Naval Attack"
-msgstr ""
+msgstr "Seeangriff"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1304
 #, c-format
 msgid "Your ship ‘%s’ is under attack from an enemy warship."
-msgstr ""
+msgstr "Dein Schiff ‘%s’ wird von einem feindlichen Kriegsschiff angegriffen."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1423
 msgid "Ship Destroyed"
-msgstr ""
+msgstr "Schiff zerstört"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1423
 msgid "Ship Sunk"
-msgstr ""
+msgstr "Schiff gesunken"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1424
 msgid "An enemy ship has destroyed your warship."
-msgstr ""
+msgstr "Ein feindliches Schiff hat dein Kriegsschiff zertört."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1562
 msgid "Your coast is under attack from an enemy warship."
-msgstr ""
+msgstr "Deine Küste wird von einem feindlichen Kriegsschiff angegriffen."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1791
 msgid "Island Circumnavigated"
@@ -2751,15 +2751,15 @@ msgstr "Ein entdeckter Hafenbauplatz kann nicht mehr zum Bau eines Hafens verwen
 #: ../../src/logic/map_objects/tribes/ship.cc:2214
 msgctxt "ship"
 msgid "Warship"
-msgstr ""
+msgstr "Kriegsschiff"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2214
 msgid "Warship Ready"
-msgstr ""
+msgstr "Kriegsschiff bereit"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2215
 msgid "A warship is waiting for your commands."
-msgstr ""
+msgstr "Ein Kriegsschiff wartet auf seine Befehle."
 
 #. * TRANSLATORS: Ship expedition ready
 #: ../../src/logic/map_objects/tribes/ship.cc:2220
@@ -2778,28 +2778,28 @@ msgstr "Ein Expeditionsschiff wartet auf seine Befehle."
 #: ../../src/logic/map_objects/tribes/ship.cc:2385
 msgctxt "ship_state"
 msgid "Sinking"
-msgstr ""
+msgstr "Sinkt"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2387
 msgctxt "ship_state"
 msgid "Fighting"
-msgstr ""
+msgstr "Kämpft"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2391
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
-msgstr ""
+msgstr "Wird zum Transportschiff umgerüstet"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2394
 msgctxt "ship_state"
 msgid "Refitting to Warship"
-msgstr ""
+msgstr "Wird zum Kriegsschiff umgerüstet"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2400
 #: ../../src/wui/seafaring_statistics_menu.cc:270
 msgctxt "ship_state"
 msgid "Warship"
-msgstr ""
+msgstr "Kriegsschiff"
 
 #. * TRANSLATORS: This is a ship state. The ship is
 #. * currently sailing to a specific destination ship.
@@ -3346,14 +3346,14 @@ msgstr[1] "%u Erweiterungsdiskrepanzen erkannt:\n"
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
-msgstr ""
+msgstr "%1$s\n• „%2$s“ vom Host benötigt aber nicht gefunden"
 
 #: ../../src/network/gameclient.cc:819
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
-msgstr ""
+msgstr "%1$s\n• „%2$s“ installiert in Version %3$s aber der Host verwendet Version %4$s"
 
 #: ../../src/network/gameclient.cc:990
 msgid "/me ’s file failed md5 checksumming."
@@ -4573,7 +4573,7 @@ msgstr[1] "Möchtest du diese %u Erweiterungen wirklich aktualisieren?"
 msgid ""
 "\n"
 "• %1$s (%2$s) by %3$s"
-msgstr ""
+msgstr "\n• %1$s (%2$s) von %3$s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:656
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:413
@@ -4715,29 +4715,29 @@ msgstr[1] "Aktualisiere die folgenden %u Erweiterungen:"
 #: ../../src/ui_fsmenu/addons/manager.cc:1169
 #, c-format
 msgid "• %s"
-msgstr ""
+msgstr "• %s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1205
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which could not be found"
-msgstr ""
+msgstr "• „%1$s“ benötigt „%2$s“, welche nicht gefunden wurde"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1210
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is disabled"
-msgstr ""
+msgstr "• „%1$s“ benötigt „%2$s“, welche deaktiviert ist"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1217
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
-msgstr ""
+msgstr "• „%1$s“ benötigt „%2$s“, welche unter der anfordernden Erweiterung aufgeführt ist"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1245
 #, c-format
 msgid ""
 "• ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
-msgstr ""
+msgstr "• „%1$s“ benötigt zuerst „%2$s“ und dann „%3$s“, aber sie sind in der falschen Reihenfolge aufgeführt"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1261
 #, c-format
@@ -4958,7 +4958,7 @@ msgstr[1] "Wenn du die Paketierung jetzt verlässt, werden alle Änderungen zu %
 msgid ""
 "%1$s\n"
 "• %2$s"
-msgstr ""
+msgstr "%1$s\n• %2$s"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:463
 msgid "Quit Packager"
@@ -5989,7 +5989,7 @@ msgstr "Diplomatie verbieten"
 
 #: ../../src/ui_fsmenu/launch_game.cc:141
 msgid "Enable naval warfare (experimental feature)"
-msgstr ""
+msgstr "Seekriegsführung aktivieren (experimentelle Funktion)"
 
 #: ../../src/ui_fsmenu/launch_game.cc:149
 msgid "Custom starting positions"
@@ -6067,18 +6067,18 @@ msgstr "Erlaube allen Spielern permanente Sicht der ganzen Karte"
 
 #: ../../src/ui_fsmenu/launch_game.cc:395
 msgid "Naval warfare is set by the scenario"
-msgstr ""
+msgstr "Die Seekriegsführung wird durch das Szenario definiert"
 
 #: ../../src/ui_fsmenu/launch_game.cc:397
 msgid "Naval warfare is set by the saved game"
-msgstr ""
+msgstr "Die Seekriegsführung wird durch das gespeicherte Spiel definiert"
 
 #: ../../src/ui_fsmenu/launch_game.cc:400
 msgid ""
 "Enable coastal invasions and ship-to-ship battles. This feature is "
 "experimental and may undergo substantial redesign in future versions of "
 "Widelands."
-msgstr ""
+msgstr "Aktiviere Küsteninvasionen und Schiff zu Schiff Kämpfe. Diese Funktion ist experimentell und kann in zukünftigen Widelandsversionen noch stark verändert werden. "
 
 #: ../../src/ui_fsmenu/launch_game.cc:420
 msgid "Player relations are set by the scenario"
@@ -6428,7 +6428,7 @@ msgstr "Version %1$s"
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team • Licensed under the GNU "
 "General Public License V2.0"
-msgstr ""
+msgstr "(C) %1%-%2% Widelands-Entwicklungsteam • Lizenziert unter der GNU General Public License V2.0"
 
 #: ../../src/ui_fsmenu/main.cc:873
 msgid "Desyncing Add-On Found"
@@ -7954,11 +7954,11 @@ msgstr "Expeditionen mit Hafenbauplatz zeigen"
 
 #: ../../src/wlapplication_options.cc:809
 msgid "Show Warships"
-msgstr ""
+msgstr "Zeige Kriegsschife"
 
 #: ../../src/wlapplication_options.cc:814
 msgid "Show Ships Being Refitted"
-msgstr ""
+msgstr "Zeige Schiffe in Umrüstung"
 
 #: ../../src/wlapplication_options.cc:819
 msgid "Toggle Quick Navigation"
@@ -8426,8 +8426,8 @@ msgstr "Angriff"
 #, c-format
 msgid "%u ship"
 msgid_plural "%u ships"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u Schiff"
+msgstr[1] "%u Schiffe"
 
 #. * TRANSLATORS: Number of soldiers that should attack. Used in the attack
 #. window.
@@ -8441,7 +8441,7 @@ msgstr[1] "%u Soldaten"
 
 #: ../../src/wui/attack_window.cc:368
 msgid "Number of ships"
-msgstr ""
+msgstr "Anzahl der Schiffe"
 
 #: ../../src/wui/attack_window.cc:368
 msgid "Number of soldiers"
@@ -8449,7 +8449,7 @@ msgstr "Anzahl der Soldaten"
 
 #: ../../src/wui/attack_window.cc:375
 msgid "Send less ships. Hold down Ctrl to send no ships"
-msgstr ""
+msgstr "Sende weniger Schiffe. Halte STRG gedrückt, um keine Schiffe zu senden"
 
 #: ../../src/wui/attack_window.cc:376
 msgid "Send less soldiers. Hold down Ctrl to send no soldiers"
@@ -8457,7 +8457,7 @@ msgstr "Sende weniger Soldaten. Halte STRG gedrückt, um keine Soldaten zu sende
 
 #: ../../src/wui/attack_window.cc:382
 msgid "Send more ships. Hold down Ctrl to send as many ships as possible"
-msgstr ""
+msgstr "Sende mehr Schiffe. Halte STRG gedrückt, um so viele Schiffe wie möglich zu senden"
 
 #: ../../src/wui/attack_window.cc:383
 msgid ""
@@ -8474,7 +8474,7 @@ msgstr "Angreifer:"
 
 #: ../../src/wui/attack_window.cc:416
 msgid "Click on a ship to remove her from the list of attackers"
-msgstr ""
+msgstr "Klicke auf ein Schiff um es aus der Liste der Angreifer zu entfernen"
 
 #: ../../src/wui/attack_window.cc:417
 msgid "Click on a soldier to remove him from the list of attackers"
@@ -8482,7 +8482,7 @@ msgstr "Klicke auf einen Soldaten, um ihn aus der Liste der Angreifer zu entfern
 
 #: ../../src/wui/attack_window.cc:419
 msgid "Hold down Ctrl to remove all ships from the list"
-msgstr ""
+msgstr "Halte STRG gedrückt, um alle Schiffe aus der Liste zu entfernen"
 
 #: ../../src/wui/attack_window.cc:420
 msgid "Hold down Ctrl to remove all soldiers from the list"
@@ -8490,7 +8490,7 @@ msgstr "Halte STRG gedrückt, um alle Soldaten aus der Liste zu entfernen"
 
 #: ../../src/wui/attack_window.cc:424
 msgid "Hold down Shift to remove all ships up to the one you’re pointing at"
-msgstr ""
+msgstr "Halte UMSCHALT gedrückt, um alle Schiffe bis zu dem auf das du zeigst zu entfernen"
 
 #: ../../src/wui/attack_window.cc:425
 msgid ""
@@ -8503,7 +8503,7 @@ msgstr "Nichtangreifer:"
 
 #: ../../src/wui/attack_window.cc:438
 msgid "Click on a ship to add her to the list of attackers"
-msgstr ""
+msgstr "Klicke auf ein Schiff, um es zur Liste der Angreifer hinzuzufügen"
 
 #: ../../src/wui/attack_window.cc:439
 msgid "Click on a soldier to add him to the list of attackers"
@@ -8511,7 +8511,7 @@ msgstr "Klicke auf einen Soldaten, um ihn zur Liste der Angreifer hinzuzufügen"
 
 #: ../../src/wui/attack_window.cc:441
 msgid "Hold down Ctrl to add all ships to the list"
-msgstr ""
+msgstr "Halte STRG gedrückt, um alle Schiffe zur Liste hinzuzufügen"
 
 #: ../../src/wui/attack_window.cc:442
 msgid "Hold down Ctrl to add all soldiers to the list"
@@ -8519,7 +8519,7 @@ msgstr "Halte STRG gedrückt, um alle Soldaten zur Liste hinzuzufügen"
 
 #: ../../src/wui/attack_window.cc:445
 msgid "Hold down Shift to add all ships up to the one you’re pointing at"
-msgstr ""
+msgstr "Halte UMSCHALT gedrückt, um alle Schiffe bis zu dem auf das du zeigst hinzuzufügen"
 
 #: ../../src/wui/attack_window.cc:446
 msgid "Hold down Shift to add all soldiers up to the one you’re pointing at"
@@ -8545,7 +8545,7 @@ msgstr "Zentriere die Hauptansicht auf dieses Objekt"
 #: ../../src/wui/attack_window.cc:622
 #, c-format
 msgid "%1$s  HP: %2$u/%3$u  AT: +%4$u%%"
-msgstr ""
+msgstr "%1$s  Leben: %2$u/%3$u  Angr.: +%4$u%%"
 
 #: ../../src/wui/attack_window.cc:627 ../../src/wui/soldierlist.cc:556
 #, c-format
@@ -8761,7 +8761,7 @@ msgstr "Bevorzuge Helden"
 #: ../../src/wui/constructionsitewindow.cc:364
 #: ../../src/wui/soldierlist.cc:496
 msgid "No preference"
-msgstr ""
+msgstr "Keine Präferenz"
 
 #: ../../src/wui/constructionsitewindow.cc:395
 msgid "Settings to apply after construction"
@@ -9013,22 +9013,22 @@ msgstr "Baue Wasserwege"
 #, c-format
 msgctxt "ship_state"
 msgid "Warship · HP %1$u%% · AT +%2$u%%"
-msgstr ""
+msgstr "Kriegsschiff · Leben %1$u%% · Angr. +%2$u%%"
 
 #: ../../src/wui/fieldaction.cc:1258
 msgctxt "ship_state"
 msgid "Enemy Transport Ship"
-msgstr ""
+msgstr "Feindliches Transportschiff"
 
 #: ../../src/wui/fieldaction.cc:1260
 msgctxt "ship_state"
 msgid "Expedition"
-msgstr ""
+msgstr "Expedition"
 
 #: ../../src/wui/fieldaction.cc:1262
 msgctxt "ship_state"
 msgid "Transport"
-msgstr ""
+msgstr "Transport"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
 #: ../../src/wui/fieldaction.cc:1264 ../../src/wui/interactive_gamebase.cc:614
@@ -9039,15 +9039,15 @@ msgstr "%1$s (%2$s)"
 
 #: ../../src/wui/fieldaction.cc:1274
 msgid "Select Ship"
-msgstr ""
+msgstr "Schiff wählen"
 
 #: ../../src/wui/fieldaction.cc:1297
 msgid "Own Ships"
-msgstr ""
+msgstr "Eigene Schiffe"
 
 #: ../../src/wui/fieldaction.cc:1311
 msgid "Attackable Ships"
-msgstr ""
+msgstr "Angreifbare Schiffe"
 
 #: ../../src/wui/fleet_options_window.cc:94
 msgid "Ferry Fleet Options"
@@ -9495,11 +9495,11 @@ msgstr "Produktivität"
 
 #: ../../src/wui/general_statistics_menu.cc:185
 msgid "Warships lost"
-msgstr ""
+msgstr "Verlorene Kriegsschiffe"
 
 #: ../../src/wui/general_statistics_menu.cc:194
 msgid "Warships defeated"
-msgstr ""
+msgstr "Besiegte Kriegsschiffe"
 
 #: ../../src/wui/general_statistics_menu.cc:203
 msgid "Casualties"
@@ -9558,13 +9558,13 @@ msgstr "Schummelmodus aktiviert"
 #: ../../src/wui/info_panel.cc:454
 #, c-format
 msgid "%1$s • %2$s"
-msgstr ""
+msgstr "%1$s • %2$s"
 
 #. * TRANSLATORS: Gametime • Realtime • Gamespeed
 #: ../../src/wui/info_panel.cc:459
 #, c-format
 msgid "%1$s • %2$s • %3$s"
-msgstr ""
+msgstr "%1$s • %2$s • %3$s"
 
 #: ../../src/wui/inputqueuedisplay.cc:69
 msgid "Priority: Very Low"
@@ -10537,14 +10537,14 @@ msgstr "Liefert Waren"
 #: ../../src/wui/seafaring_statistics_menu.cc:272
 msgctxt "ship_state"
 msgid "Being Refitted"
-msgstr ""
+msgstr "In Umrüstung"
 
 #: ../../src/wui/seafaring_statistics_menu.cc:426
 #, c-format
 msgid "Seafaring Statistics (%u Ship)"
 msgid_plural "Seafaring Statistics (%u Ships)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Seefahrtsstatistik (%u Schiff)"
+msgstr[1] "Seefahrtsstatistik (%u Schiffe)"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:568
@@ -10579,12 +10579,12 @@ msgstr "Zeige Expeditionen, die einen Hafenbauplatz gefunden haben oder eine Kol
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:603
 msgid "Show warships"
-msgstr ""
+msgstr "Zeige Kriegsschife"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:608
 msgid "Show ships being refitted"
-msgstr ""
+msgstr "Zeige Schiffe in Umrüstung"
 
 #: ../../src/wui/shipwindow.cc:86
 #, c-format
@@ -10592,8 +10592,8 @@ msgid ""
 "Damaged warships regain %u hitpoint per second when anchored in a port."
 msgid_plural ""
 "Damaged warships regain %u hitpoints per second when anchored in a port."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Beschädigte Kriegsschiffe gewinnen %u Lebenspunkt zurück, während sie in einem Hafen ankern."
+msgstr[1] "Beschädigte Kriegsschiffe gewinnen %u Lebenspunkte zurück, während sie in einem Hafen ankern."
 
 #: ../../src/wui/shipwindow.cc:111
 msgid "Scout towards the north west"
@@ -10617,7 +10617,7 @@ msgstr "Errichte einen Hafen an der derzeitigen Position"
 
 #: ../../src/wui/shipwindow.cc:136
 msgid "Anchor at the current location"
-msgstr ""
+msgstr "Ankere an der derzeitigen Position"
 
 #: ../../src/wui/shipwindow.cc:141
 msgid "Scout towards the east"
@@ -10637,7 +10637,7 @@ msgstr "Erkunde in Richtung Südosten"
 
 #: ../../src/wui/shipwindow.cc:163
 msgid "Destination"
-msgstr ""
+msgstr "Ziel"
 
 #: ../../src/wui/shipwindow.cc:174
 msgid "Sink the ship"
@@ -10674,16 +10674,16 @@ msgstr "Gehe zum Ziel"
 
 #: ../../src/wui/shipwindow.cc:463
 msgid "Refit to transport ship"
-msgstr ""
+msgstr "Zum Transportschiff umrüsten"
 
 #: ../../src/wui/shipwindow.cc:464
 msgid "Refit to warship"
-msgstr ""
+msgstr "Zum Kriegsschiff umrüsten"
 
 #: ../../src/wui/shipwindow.cc:486
 #, c-format
 msgid "HP: %1$u/%2$u"
-msgstr ""
+msgstr "Leben: %1$u/%2$u"
 
 #: ../../src/wui/soldier_statistics_menu.cc:89
 #: ../../src/wui/soldier_statistics_menu.cc:182

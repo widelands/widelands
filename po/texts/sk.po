@@ -219,7 +219,7 @@ msgstr "Domovská stránka"
 
 #: ../../data/txts/developers.lua:34
 msgid "Scripting"
-msgstr ""
+msgstr "Skriptovanie"
 
 #: ../../data/txts/developers.lua:40 ../../data/txts/developers.lua:429
 msgid "Sound"
@@ -723,7 +723,7 @@ msgstr "Baníci pracujú, len ak sú zásobovaní jedlom."
 msgid ""
 "Split your roads into shorter sections by planting some flags. This will "
 "speed up transportation of your wares."
-msgstr "Rozdeľte svoje cesty na kratšie úseky umiestnením vlajok. Tak sa preprava vašich tovarov zrýchli."
+msgstr "Rozdeľte svoje cesty na kratšie úseky umiestnením vlajok. Tak sa preprava vašich výrobkov zrýchli."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/general_game.lua:28

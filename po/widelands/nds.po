@@ -2007,123 +2007,123 @@ msgstr[1] "%u speelwichtig Verwiederns anknipst:"
 #: ../../src/logic/detected_port_space.cc:51
 #, c-format
 msgid "northwest of %s"
-msgstr ""
+msgstr "noordwestelk vun %s"
 
 #: ../../src/logic/detected_port_space.cc:54
 #, c-format
 msgid "northeast of %s"
-msgstr ""
+msgstr "noordoostelk vun %s"
 
 #: ../../src/logic/detected_port_space.cc:57
 #, c-format
 msgid "southwest of %s"
-msgstr ""
+msgstr "südwestelk vun %s"
 
 #: ../../src/logic/detected_port_space.cc:60
 #, c-format
 msgid "southeast of %s"
-msgstr ""
+msgstr "südoostelk vun %s"
 
 #: ../../src/logic/detected_port_space.cc:63
 #, c-format
 msgid "north of %s"
-msgstr ""
+msgstr "noordelk vun %s"
 
 #: ../../src/logic/detected_port_space.cc:66
 #, c-format
 msgid "south of %s"
-msgstr ""
+msgstr "südelk vun %s"
 
 #: ../../src/logic/detected_port_space.cc:69
 #, c-format
 msgid "west of %s"
-msgstr ""
+msgstr "westelk vun %s"
 
 #: ../../src/logic/detected_port_space.cc:72
 #, c-format
 msgid "east of %s"
-msgstr ""
+msgstr "oostelk vun %s"
 
 #: ../../src/logic/detected_port_space.cc:80
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s"
-msgstr ""
+msgstr "Rüümte för Muden sünner Eegner um %1$s vun %2$s funnen"
 
 #. * TRANSLATORS: Last placeholder is "northwest/southeast/... of <port name>"
 #: ../../src/logic/detected_port_space.cc:85
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s"
 msgid_plural "Unowned port space discovered at %1$s by %2$s %3$u steps %4$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Rüümte för Muden sünner Eegner um %1$s vun %2$s %3$u Stapp %4$s funnen"
+msgstr[1] "Rüümte för Muden sünner Eegner um %1$s vun %2$s %3$u Stappen %4$s funnen"
 
 #: ../../src/logic/detected_port_space.cc:91
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s"
-msgstr ""
+msgstr "Rüümte för Muden vun %1$s um %2$s vun %3$s funnen"
 
 #. * TRANSLATORS: Last placeholder is "northwest/southeast/... of <port name>"
 #: ../../src/logic/detected_port_space.cc:97
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s"
 msgid_plural "Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Rüümte för Muden vun %1$s um %2$s vun %3$s %4$u Stapp %5$s funnen"
+msgstr[1] "Rüümte för Muden vun %1$s um %2$s vun %3$s %4$u Stappen %5$s funnen"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northwest.
 #: ../../src/logic/detected_port_space.cc:109
 msgctxt "direction"
 msgid "NW"
-msgstr ""
+msgstr "NW"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northeast.
 #: ../../src/logic/detected_port_space.cc:113
 msgctxt "direction"
 msgid "NE"
-msgstr ""
+msgstr "NO"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southwest.
 #: ../../src/logic/detected_port_space.cc:117
 msgctxt "direction"
 msgid "SW"
-msgstr ""
+msgstr "SW"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southeast.
 #: ../../src/logic/detected_port_space.cc:121
 msgctxt "direction"
 msgid "SE"
-msgstr ""
+msgstr "SO"
 
 #. * TRANSLATORS: This is an abbreviated direction: North.
 #: ../../src/logic/detected_port_space.cc:125
 msgctxt "direction"
 msgid "N"
-msgstr ""
+msgstr "N"
 
 #. * TRANSLATORS: This is an abbreviated direction: South.
 #: ../../src/logic/detected_port_space.cc:129
 msgctxt "direction"
 msgid "S"
-msgstr ""
+msgstr "S"
 
 #. * TRANSLATORS: This is an abbreviated direction: West.
 #: ../../src/logic/detected_port_space.cc:133
 msgctxt "direction"
 msgid "W"
-msgstr ""
+msgstr "W"
 
 #. * TRANSLATORS: This is an abbreviated direction: East.
 #: ../../src/logic/detected_port_space.cc:137
 msgctxt "direction"
 msgid "E"
-msgstr ""
+msgstr "O"
 
 #. * TRANSLATORS: Placeholders are gametime and shipname. Keep this short.
 #: ../../src/logic/detected_port_space.cc:146
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s"
-msgstr ""
+msgstr "Sünner Eegner / %1$s / %2$s"
 
 #. * TRANSLATORS: Placeholders are gametime, shipname, and distance direction
 #. port_name.
@@ -2132,7 +2132,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s / %3$u %4$s %5$s"
-msgstr ""
+msgstr "Sünner Eegner / %1$s / %2$s / %3$u %4$s %5$s"
 
 #. * TRANSLATORS: Placeholders are owner, gametime, and shipname. Keep this
 #. short.
@@ -2140,7 +2140,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s"
-msgstr ""
+msgstr "%1$s / %2$s / %3$s"
 
 #. * TRANSLATORS: Placeholders are owner, gametime, shipname, and "distance
 #. direction port_name.
@@ -2149,7 +2149,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s / %4$u %5$s %6$s"
-msgstr ""
+msgstr "%1$s / %2$s / %3$s / %4$u %5$s %6$s"
 
 #: ../../src/logic/editor_game_base.cc:236
 #, c-format
@@ -2553,35 +2553,35 @@ msgstr "Diene Fährenwarft is nicht dicht genoog bi eener Küst baut worden. Se 
 
 #: ../../src/logic/map_objects/tribes/ship.cc:399
 msgid "Destination Gone"
-msgstr ""
+msgstr "Enn weg"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:399
 msgid "Ship Destination Vanished"
-msgstr ""
+msgstr "Schipp-Enn verswunnen"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:400
 msgid "Your ship’s destination has disappeared."
-msgstr ""
+msgstr "Dat Enn vun dienem Schipp is verswunnen."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:427
 msgid "Ship Arrived"
-msgstr ""
+msgstr "Schipp ankomen"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:427
 msgid "Ship Reached Destination"
-msgstr ""
+msgstr "Schipp am Enn ankomen"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:428
 msgid "Your ship has arrived at its destination."
-msgstr ""
+msgstr "Dien Schipp is an sienem Enn ankomen."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:637
 msgid "A warship arrived at a known port build space."
-msgstr ""
+msgstr "Een Kriegsschipp is an eenem bekennt Rüümte för Muden ankomen."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:638
 msgid "An expedition ship arrived at a known port build space."
-msgstr ""
+msgstr "Een Schipp up Söök is an eenem bekennt Rüümte för Muden ankomen."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:639
 #: ../../src/logic/map_objects/tribes/ship.cc:647
@@ -2590,11 +2590,11 @@ msgstr "Rüümte för Muden"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:639
 msgid "Port Space Spotted"
-msgstr ""
+msgstr "Rüümte för Muden to sehn kregen"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:645
 msgid "A warship found a new port build space."
-msgstr ""
+msgstr "Een Kriegsschipp hett eene neje Rüümte för Muden funnen."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:646
 msgid "An expedition ship found a new port build space."
@@ -2606,65 +2606,65 @@ msgstr "Rüümte för Muden funnen"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:747
 msgid "Enemy Ship"
-msgstr ""
+msgstr "Feindelk Schipp"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:747
 msgid "Enemy Ship Spotted"
-msgstr ""
+msgstr "Feindelk Schipp to sehn kregen"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:748
 msgid "A warship spotted an enemy ship."
-msgstr ""
+msgstr "Een Kriegsschipp hett een feindelk Schipp to sehn kregen."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:778
 #: ../../src/logic/map_objects/tribes/ship.cc:797
 msgid "Destination Unreachable"
-msgstr ""
+msgstr "Enn nich hentokomen"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:778
 #: ../../src/logic/map_objects/tribes/ship.cc:797
 msgid "Ship Destination Unreachable"
-msgstr ""
+msgstr "Schipp-Enn nich hentokomen"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:779
 msgid "Your ship could not find a path to its destination."
-msgstr ""
+msgstr "Dien Schipp kann keenen Weg to sienem Enn finnen."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:798
 #, c-format
 msgid "Your ship could not find a path to its destination port ‘%s’."
-msgstr ""
+msgstr "Dien Schipp kann keenen Weg to siener Enn-Muu »%s« finnen."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1303
 #: ../../src/logic/map_objects/tribes/ship.cc:1561
 msgid "Enemy Ship Attacking"
-msgstr ""
+msgstr "Feindelk Schipp griept an"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1303
 #: ../../src/logic/map_objects/tribes/ship.cc:1560
 msgid "Naval Attack"
-msgstr ""
+msgstr "See-Angriep"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1304
 #, c-format
 msgid "Your ship ‘%s’ is under attack from an enemy warship."
-msgstr ""
+msgstr "Dien Schipp »%s« word vun eenem feindelk Kriegsschipp angriepen."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1423
 msgid "Ship Destroyed"
-msgstr ""
+msgstr "Schipp verneelt"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1423
 msgid "Ship Sunk"
-msgstr ""
+msgstr "Schipp sunken"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1424
 msgid "An enemy ship has destroyed your warship."
-msgstr ""
+msgstr "Een feindelk Schipp hett dien Kriegsschipp verneelt."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1562
 msgid "Your coast is under attack from an enemy warship."
-msgstr ""
+msgstr "Diene Küst word vun eenem feindelk Kriegsschipp angriepen."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1791
 msgid "Island Circumnavigated"
@@ -2724,15 +2724,15 @@ msgstr "Bi een funnen Rüümte för Muden kann nu keene Muu mehr baut worden."
 #: ../../src/logic/map_objects/tribes/ship.cc:2214
 msgctxt "ship"
 msgid "Warship"
-msgstr ""
+msgstr "Kriegsschipp"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2214
 msgid "Warship Ready"
-msgstr ""
+msgstr "Kriegsschipp paraat"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2215
 msgid "A warship is waiting for your commands."
-msgstr ""
+msgstr "Een Kriegsschipp wacht up dien Gebood."
 
 #. * TRANSLATORS: Ship expedition ready
 #: ../../src/logic/map_objects/tribes/ship.cc:2220
@@ -2751,28 +2751,28 @@ msgstr "Een Schipp up Söök wacht up dien Gebood."
 #: ../../src/logic/map_objects/tribes/ship.cc:2385
 msgctxt "ship_state"
 msgid "Sinking"
-msgstr ""
+msgstr "Sinkt"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2387
 msgctxt "ship_state"
 msgid "Fighting"
-msgstr ""
+msgstr "Kämpt"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2391
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
-msgstr ""
+msgstr "Rüst för Schipperee um"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2394
 msgctxt "ship_state"
 msgid "Refitting to Warship"
-msgstr ""
+msgstr "Rüst tum Kriegsschipp um"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2400
 #: ../../src/wui/seafaring_statistics_menu.cc:270
 msgctxt "ship_state"
 msgid "Warship"
-msgstr ""
+msgstr "Kriegsschipp"
 
 #. * TRANSLATORS: This is a ship state. The ship is
 #. * currently sailing to a specific destination ship.
@@ -5962,7 +5962,7 @@ msgstr "Betreckens verseggen"
 
 #: ../../src/ui_fsmenu/launch_game.cc:141
 msgid "Enable naval warfare (experimental feature)"
-msgstr ""
+msgstr "Seekrieg anknipsen (noch nich stevig)"
 
 #: ../../src/ui_fsmenu/launch_game.cc:149
 msgid "Custom starting positions"
@@ -6040,18 +6040,18 @@ msgstr "All Spelers ewig Utsicht up de ganze Kaart geven"
 
 #: ../../src/ui_fsmenu/launch_game.cc:395
 msgid "Naval warfare is set by the scenario"
-msgstr ""
+msgstr "Seekrieg leggt de Rutfödderung fast"
 
 #: ../../src/ui_fsmenu/launch_game.cc:397
 msgid "Naval warfare is set by the saved game"
-msgstr ""
+msgstr "Seekrieg word vun de sekert Speel fastleggt"
 
 #: ../../src/ui_fsmenu/launch_game.cc:400
 msgid ""
 "Enable coastal invasions and ship-to-ship battles. This feature is "
 "experimental and may undergo substantial redesign in future versions of "
 "Widelands."
-msgstr ""
+msgstr "Angriepen up Küstens un Slachten tüsken Schippen anknipsen. Dat is ganz wat nejes un noch nich stevig un kann in tokünftig Versionen vun Widelands noch maal ganz anners umsett worden."
 
 #: ../../src/ui_fsmenu/launch_game.cc:420
 msgid "Player relations are set by the scenario"
@@ -7927,11 +7927,11 @@ msgstr "Seefahrt: Söken mit Rüümte för Muden wiesen"
 
 #: ../../src/wlapplication_options.cc:809
 msgid "Show Warships"
-msgstr ""
+msgstr "Kriegsschippen wiesen"
 
 #: ../../src/wlapplication_options.cc:814
 msgid "Show Ships Being Refitted"
-msgstr ""
+msgstr "Schippen bi’m Umrüsten wiesen"
 
 #: ../../src/wlapplication_options.cc:819
 msgid "Toggle Quick Navigation"
@@ -8399,8 +8399,8 @@ msgstr "Angriff"
 #, c-format
 msgid "%u ship"
 msgid_plural "%u ships"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u Schipp"
+msgstr[1] "%u Schippen"
 
 #. * TRANSLATORS: Number of soldiers that should attack. Used in the attack
 #. window.
@@ -8414,7 +8414,7 @@ msgstr[1] "%u Soldaten"
 
 #: ../../src/wui/attack_window.cc:368
 msgid "Number of ships"
-msgstr ""
+msgstr "Tahl vun Schippen"
 
 #: ../../src/wui/attack_window.cc:368
 msgid "Number of soldiers"
@@ -8422,7 +8422,7 @@ msgstr "Tahl vun Soldaten"
 
 #: ../../src/wui/attack_window.cc:375
 msgid "Send less ships. Hold down Ctrl to send no ships"
-msgstr ""
+msgstr "Minner Schippen schicken. Holl de Strg-Tast drückt, um keene Schippen to schicken"
 
 #: ../../src/wui/attack_window.cc:376
 msgid "Send less soldiers. Hold down Ctrl to send no soldiers"
@@ -8430,7 +8430,7 @@ msgstr "Minner Soldaten schicken. Holl de Strg-Tast drückt, um keene Soldaten t
 
 #: ../../src/wui/attack_window.cc:382
 msgid "Send more ships. Hold down Ctrl to send as many ships as possible"
-msgstr ""
+msgstr "Mehr Schippen schicken. Holl de Strg-Tast drückt, um so völe Schippen as mögelk to schicken"
 
 #: ../../src/wui/attack_window.cc:383
 msgid ""
@@ -8447,7 +8447,7 @@ msgstr "Angriepers:"
 
 #: ../../src/wui/attack_window.cc:416
 msgid "Click on a ship to remove her from the list of attackers"
-msgstr ""
+msgstr "Klick up een Schipp, um se vun de List vun Angriepers wegtodoon"
 
 #: ../../src/wui/attack_window.cc:417
 msgid "Click on a soldier to remove him from the list of attackers"
@@ -8455,7 +8455,7 @@ msgstr "Klick up eenen Soldat, um hüm vun de List vun Angriepers wegtodoon"
 
 #: ../../src/wui/attack_window.cc:419
 msgid "Hold down Ctrl to remove all ships from the list"
-msgstr ""
+msgstr "Holl de Strg-Tast drückt, um all Schippen vun de List wegtodoon"
 
 #: ../../src/wui/attack_window.cc:420
 msgid "Hold down Ctrl to remove all soldiers from the list"
@@ -8463,7 +8463,7 @@ msgstr "Holl de Strg-Tast drückt, um all Soldaten vun de List wegtodoon"
 
 #: ../../src/wui/attack_window.cc:424
 msgid "Hold down Shift to remove all ships up to the one you’re pointing at"
-msgstr ""
+msgstr "Holl de Umschalt-Tast drückt, um all Schippen bit tu hör, waar du henwiest, vun de List wegtodoon"
 
 #: ../../src/wui/attack_window.cc:425
 msgid ""
@@ -8476,7 +8476,7 @@ msgstr "Griepen nich an:"
 
 #: ../../src/wui/attack_window.cc:438
 msgid "Click on a ship to add her to the list of attackers"
-msgstr ""
+msgstr "Klick up een Schipp, um se up de List vun Angriepers to setten"
 
 #: ../../src/wui/attack_window.cc:439
 msgid "Click on a soldier to add him to the list of attackers"
@@ -8484,7 +8484,7 @@ msgstr "Klick up eenen Soldat, um hüm up de List vun Angriepers to setten"
 
 #: ../../src/wui/attack_window.cc:441
 msgid "Hold down Ctrl to add all ships to the list"
-msgstr ""
+msgstr "Holl de Strg-Tast drückt, um all Schippen up de List to setten"
 
 #: ../../src/wui/attack_window.cc:442
 msgid "Hold down Ctrl to add all soldiers to the list"
@@ -8492,7 +8492,7 @@ msgstr "Holl de Strg-Tast drückt, um all Soldaten up de List to setten"
 
 #: ../../src/wui/attack_window.cc:445
 msgid "Hold down Shift to add all ships up to the one you’re pointing at"
-msgstr ""
+msgstr "Holl de Umschalt-Tast drückt, um all Schippen bit tu hör, waar du henwiest, up de List to setten"
 
 #: ../../src/wui/attack_window.cc:446
 msgid "Hold down Shift to add all soldiers up to the one you’re pointing at"
@@ -8518,7 +8518,7 @@ msgstr "Hierher gahn"
 #: ../../src/wui/attack_window.cc:622
 #, c-format
 msgid "%1$s  HP: %2$u/%3$u  AT: +%4$u%%"
-msgstr ""
+msgstr "%1$s  GH: %2$u/%3$u  AG: +%4$u%%"
 
 #: ../../src/wui/attack_window.cc:627 ../../src/wui/soldierlist.cc:556
 #, c-format
@@ -8734,7 +8734,7 @@ msgstr "Helden vörtrecken"
 #: ../../src/wui/constructionsitewindow.cc:364
 #: ../../src/wui/soldierlist.cc:496
 msgid "No preference"
-msgstr ""
+msgstr "Nix vörtrecken"
 
 #: ../../src/wui/constructionsitewindow.cc:395
 msgid "Settings to apply after construction"
@@ -8986,22 +8986,22 @@ msgstr "Prielen bauen"
 #, c-format
 msgctxt "ship_state"
 msgid "Warship · HP %1$u%% · AT +%2$u%%"
-msgstr ""
+msgstr "Kriegsschipp · GH %1$u%% · AG +%2$u%%"
 
 #: ../../src/wui/fieldaction.cc:1258
 msgctxt "ship_state"
 msgid "Enemy Transport Ship"
-msgstr ""
+msgstr "Feindelk Schipp up Schipperee"
 
 #: ../../src/wui/fieldaction.cc:1260
 msgctxt "ship_state"
 msgid "Expedition"
-msgstr ""
+msgstr "Söök"
 
 #: ../../src/wui/fieldaction.cc:1262
 msgctxt "ship_state"
 msgid "Transport"
-msgstr ""
+msgstr "Schipperee"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
 #: ../../src/wui/fieldaction.cc:1264 ../../src/wui/interactive_gamebase.cc:614
@@ -9012,15 +9012,15 @@ msgstr "%1$s (%2$s)"
 
 #: ../../src/wui/fieldaction.cc:1274
 msgid "Select Ship"
-msgstr ""
+msgstr "Schipp utkören"
 
 #: ../../src/wui/fieldaction.cc:1297
 msgid "Own Ships"
-msgstr ""
+msgstr "Eegen Schippen"
 
 #: ../../src/wui/fieldaction.cc:1311
 msgid "Attackable Ships"
-msgstr ""
+msgstr "Schippen tum Angriepen"
 
 #: ../../src/wui/fleet_options_window.cc:94
 msgid "Ferry Fleet Options"
@@ -9468,11 +9468,11 @@ msgstr "Wöörde"
 
 #: ../../src/wui/general_statistics_menu.cc:185
 msgid "Warships lost"
-msgstr ""
+msgstr "Verloren Kriegsschippen"
 
 #: ../../src/wui/general_statistics_menu.cc:194
 msgid "Warships defeated"
-msgstr ""
+msgstr "Manntjet Kriegsschippen"
 
 #: ../../src/wui/general_statistics_menu.cc:203
 msgid "Casualties"
@@ -10510,14 +10510,14 @@ msgstr "Up Schipperee"
 #: ../../src/wui/seafaring_statistics_menu.cc:272
 msgctxt "ship_state"
 msgid "Being Refitted"
-msgstr ""
+msgstr "Word umrüst"
 
 #: ../../src/wui/seafaring_statistics_menu.cc:426
 #, c-format
 msgid "Seafaring Statistics (%u Ship)"
 msgid_plural "Seafaring Statistics (%u Ships)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Tahlen över Seefahrt (%u Schipp)"
+msgstr[1] "Tahlen över Seefahrt (%u Schippen)"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:568
@@ -10552,12 +10552,12 @@ msgstr "Wies Söken wat Rüümte för Muden funnen hebben of een Dörp upsetten"
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:603
 msgid "Show warships"
-msgstr ""
+msgstr "Kriegsschippen wiesen"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:608
 msgid "Show ships being refitted"
-msgstr ""
+msgstr "Schippen bi’m Umrüsten wiesen"
 
 #: ../../src/wui/shipwindow.cc:86
 #, c-format
@@ -10565,8 +10565,8 @@ msgid ""
 "Damaged warships regain %u hitpoint per second when anchored in a port."
 msgid_plural ""
 "Damaged warships regain %u hitpoints per second when anchored in a port."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ramponeert Kriegsschippen kriegen %u Gesundheid-Punkt pro Sekünn weer, wenn se in eener Muu vör Anker liggen."
+msgstr[1] "Ramponeert Kriegsschippen kriegen %u Gesundheid-Punkten pro Sekünn weer, wenn se in eener Muu vör Anker liggen."
 
 #: ../../src/wui/shipwindow.cc:111
 msgid "Scout towards the north west"
@@ -10590,7 +10590,7 @@ msgstr "Hier eene Muu bauen"
 
 #: ../../src/wui/shipwindow.cc:136
 msgid "Anchor at the current location"
-msgstr ""
+msgstr "Hier vör Anker gahn"
 
 #: ../../src/wui/shipwindow.cc:141
 msgid "Scout towards the east"
@@ -10610,7 +10610,7 @@ msgstr "Na Südoosten utförsken"
 
 #: ../../src/wui/shipwindow.cc:163
 msgid "Destination"
-msgstr ""
+msgstr "Enn"
 
 #: ../../src/wui/shipwindow.cc:174
 msgid "Sink the ship"
@@ -10647,16 +10647,16 @@ msgstr "Tum Enn gahn"
 
 #: ../../src/wui/shipwindow.cc:463
 msgid "Refit to transport ship"
-msgstr ""
+msgstr "För Schipperee umrüsten"
 
 #: ../../src/wui/shipwindow.cc:464
 msgid "Refit to warship"
-msgstr ""
+msgstr "To Kriegsschipp umrüsten"
 
 #: ../../src/wui/shipwindow.cc:486
 #, c-format
 msgid "HP: %1$u/%2$u"
-msgstr ""
+msgstr "GH: %1$u/%2$u"
 
 #: ../../src/wui/soldier_statistics_menu.cc:89
 #: ../../src/wui/soldier_statistics_menu.cc:182

@@ -2005,123 +2005,123 @@ msgstr[1] "Es fa servir %u complement rellevant:"
 #: ../../src/logic/detected_port_space.cc:51
 #, c-format
 msgid "northwest of %s"
-msgstr ""
+msgstr "al nord-oest de %s"
 
 #: ../../src/logic/detected_port_space.cc:54
 #, c-format
 msgid "northeast of %s"
-msgstr ""
+msgstr "al nord-est de %s"
 
 #: ../../src/logic/detected_port_space.cc:57
 #, c-format
 msgid "southwest of %s"
-msgstr ""
+msgstr "al sud-oest de %s"
 
 #: ../../src/logic/detected_port_space.cc:60
 #, c-format
 msgid "southeast of %s"
-msgstr ""
+msgstr "al sud-est de %s"
 
 #: ../../src/logic/detected_port_space.cc:63
 #, c-format
 msgid "north of %s"
-msgstr ""
+msgstr "al nord de %s"
 
 #: ../../src/logic/detected_port_space.cc:66
 #, c-format
 msgid "south of %s"
-msgstr ""
+msgstr "al sud de %s"
 
 #: ../../src/logic/detected_port_space.cc:69
 #, c-format
 msgid "west of %s"
-msgstr ""
+msgstr "a l'oest de %s"
 
 #: ../../src/logic/detected_port_space.cc:72
 #, c-format
 msgid "east of %s"
-msgstr ""
+msgstr "a l'est de %s"
 
 #: ../../src/logic/detected_port_space.cc:80
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s"
-msgstr ""
+msgstr "S'ha descobert un espai portuari sense propietari %1$s de %2$s"
 
 #. * TRANSLATORS: Last placeholder is "northwest/southeast/... of <port name>"
 #: ../../src/logic/detected_port_space.cc:85
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s"
 msgid_plural "Unowned port space discovered at %1$s by %2$s %3$u steps %4$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "S'ha descobert un espai portuari sense propietari %1$s de %2$s %3$u pas %4$s"
+msgstr[1] "S'ha descobert un espai portuari sense propietari %1$s de %2$s %3$u passos %4$s"
 
 #: ../../src/logic/detected_port_space.cc:91
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s"
-msgstr ""
+msgstr "S'ha descobert un espai portuari de %1$s descobert %2$s de %3$s"
 
 #. * TRANSLATORS: Last placeholder is "northwest/southeast/... of <port name>"
 #: ../../src/logic/detected_port_space.cc:97
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s"
 msgid_plural "Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "S'ha descobert un espai portuari de %1$s descobert %2$s de %3$s %4$u pas %5$s"
+msgstr[1] "S'ha descobert un espai portuari de %1$s descobert %2$s by %3$s %4$u passos %5$s"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northwest.
 #: ../../src/logic/detected_port_space.cc:109
 msgctxt "direction"
 msgid "NW"
-msgstr ""
+msgstr "NO"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northeast.
 #: ../../src/logic/detected_port_space.cc:113
 msgctxt "direction"
 msgid "NE"
-msgstr ""
+msgstr "NE"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southwest.
 #: ../../src/logic/detected_port_space.cc:117
 msgctxt "direction"
 msgid "SW"
-msgstr ""
+msgstr "SO"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southeast.
 #: ../../src/logic/detected_port_space.cc:121
 msgctxt "direction"
 msgid "SE"
-msgstr ""
+msgstr "SE"
 
 #. * TRANSLATORS: This is an abbreviated direction: North.
 #: ../../src/logic/detected_port_space.cc:125
 msgctxt "direction"
 msgid "N"
-msgstr ""
+msgstr "N"
 
 #. * TRANSLATORS: This is an abbreviated direction: South.
 #: ../../src/logic/detected_port_space.cc:129
 msgctxt "direction"
 msgid "S"
-msgstr ""
+msgstr "S"
 
 #. * TRANSLATORS: This is an abbreviated direction: West.
 #: ../../src/logic/detected_port_space.cc:133
 msgctxt "direction"
 msgid "W"
-msgstr ""
+msgstr "O"
 
 #. * TRANSLATORS: This is an abbreviated direction: East.
 #: ../../src/logic/detected_port_space.cc:137
 msgctxt "direction"
 msgid "E"
-msgstr ""
+msgstr "E"
 
 #. * TRANSLATORS: Placeholders are gametime and shipname. Keep this short.
 #: ../../src/logic/detected_port_space.cc:146
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s"
-msgstr ""
+msgstr "Sense propietari / %1$s / %2$s"
 
 #. * TRANSLATORS: Placeholders are gametime, shipname, and distance direction
 #. port_name.
@@ -2130,7 +2130,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s / %3$u %4$s %5$s"
-msgstr ""
+msgstr "Sense propietari / %1$s / %2$s / %3$u %4$s %5$s"
 
 #. * TRANSLATORS: Placeholders are owner, gametime, and shipname. Keep this
 #. short.
@@ -2138,7 +2138,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s"
-msgstr ""
+msgstr "%1$s / %2$s / %3$s"
 
 #. * TRANSLATORS: Placeholders are owner, gametime, shipname, and "distance
 #. direction port_name.
@@ -2147,7 +2147,7 @@ msgstr ""
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s / %4$u %5$s %6$s"
-msgstr ""
+msgstr "%1$s / %2$s / %3$s / %4$u %5$s %6$s"
 
 #: ../../src/logic/editor_game_base.cc:236
 #, c-format
@@ -2551,35 +2551,35 @@ msgstr "El taller de transbordadors no s'ha construït prou a prop de la costa. 
 
 #: ../../src/logic/map_objects/tribes/ship.cc:399
 msgid "Destination Gone"
-msgstr ""
+msgstr "La destinació ha desaparegut"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:399
 msgid "Ship Destination Vanished"
-msgstr ""
+msgstr "La destinació del vaixell ha desaparegut"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:400
 msgid "Your ship’s destination has disappeared."
-msgstr ""
+msgstr "La destinació del vostre vaixell ha desaparegut."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:427
 msgid "Ship Arrived"
-msgstr ""
+msgstr "El vaixell ha arribat"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:427
 msgid "Ship Reached Destination"
-msgstr ""
+msgstr "El vaixell arriba a la destinació"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:428
 msgid "Your ship has arrived at its destination."
-msgstr ""
+msgstr "El vaixell ha arribat a la seva destinació."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:637
 msgid "A warship arrived at a known port build space."
-msgstr ""
+msgstr "Un vaixell de guerra ha arribat a un espai portuari conegut."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:638
 msgid "An expedition ship arrived at a known port build space."
-msgstr ""
+msgstr "Una expedició ha arribat a un espai portuari conegut."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:639
 #: ../../src/logic/map_objects/tribes/ship.cc:647
@@ -2588,11 +2588,11 @@ msgstr "Zona portuària"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:639
 msgid "Port Space Spotted"
-msgstr ""
+msgstr "S'ha vist un espai portuari"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:645
 msgid "A warship found a new port build space."
-msgstr ""
+msgstr "Un vaixell de guerra ha trobat un espai portuari nou."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:646
 msgid "An expedition ship found a new port build space."
@@ -2604,65 +2604,65 @@ msgstr "S’ha trobat una zona portuària"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:747
 msgid "Enemy Ship"
-msgstr ""
+msgstr "Vaixell enemic"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:747
 msgid "Enemy Ship Spotted"
-msgstr ""
+msgstr "S'ha vist un vaixell enemic"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:748
 msgid "A warship spotted an enemy ship."
-msgstr ""
+msgstr "Un vaixell de guerra ha vist un vaixell enemic."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:778
 #: ../../src/logic/map_objects/tribes/ship.cc:797
 msgid "Destination Unreachable"
-msgstr ""
+msgstr "No es pot arribar a la destinació"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:778
 #: ../../src/logic/map_objects/tribes/ship.cc:797
 msgid "Ship Destination Unreachable"
-msgstr ""
+msgstr "No es pot arribar a la destinació del vaixell"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:779
 msgid "Your ship could not find a path to its destination."
-msgstr ""
+msgstr "El vostre vaixell no pot trobar un camí fins al seu destí."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:798
 #, c-format
 msgid "Your ship could not find a path to its destination port ‘%s’."
-msgstr ""
+msgstr "El vostre vaixell no pot trobar un camí fins al seu port de destí «%s»."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1303
 #: ../../src/logic/map_objects/tribes/ship.cc:1561
 msgid "Enemy Ship Attacking"
-msgstr ""
+msgstr "Atac de vaixell enemic"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1303
 #: ../../src/logic/map_objects/tribes/ship.cc:1560
 msgid "Naval Attack"
-msgstr ""
+msgstr "Atac naval"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1304
 #, c-format
 msgid "Your ship ‘%s’ is under attack from an enemy warship."
-msgstr ""
+msgstr "Un vaixell de guerra enemic ataca el vostre vaixell «%s»."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1423
 msgid "Ship Destroyed"
-msgstr ""
+msgstr "Vaixell destruït"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1423
 msgid "Ship Sunk"
-msgstr ""
+msgstr "Vaixell enfonsat"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1424
 msgid "An enemy ship has destroyed your warship."
-msgstr ""
+msgstr "Un vaixell enemic ha destruït el vostre vaixell de guerra."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1562
 msgid "Your coast is under attack from an enemy warship."
-msgstr ""
+msgstr "Un vaixell de guerra enemic ataca la vostra costa."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1791
 msgid "Island Circumnavigated"
@@ -2722,15 +2722,15 @@ msgstr "Un lloc on s'hi podia construir un port ja no està disponible."
 #: ../../src/logic/map_objects/tribes/ship.cc:2214
 msgctxt "ship"
 msgid "Warship"
-msgstr ""
+msgstr "Vaixell de guerra"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2214
 msgid "Warship Ready"
-msgstr ""
+msgstr "Vaixell de guerra preparat"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2215
 msgid "A warship is waiting for your commands."
-msgstr ""
+msgstr "Un vaixell de guerra espera les vostres ordres."
 
 #. * TRANSLATORS: Ship expedition ready
 #: ../../src/logic/map_objects/tribes/ship.cc:2220
@@ -2749,28 +2749,28 @@ msgstr "Un vaixell espera l’ordre de començar l’expedició."
 #: ../../src/logic/map_objects/tribes/ship.cc:2385
 msgctxt "ship_state"
 msgid "Sinking"
-msgstr ""
+msgstr "Enfonsant-se"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2387
 msgctxt "ship_state"
 msgid "Fighting"
-msgstr ""
+msgstr "Lluita"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2391
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
-msgstr ""
+msgstr "Es converteix a vaixell de transport"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2394
 msgctxt "ship_state"
 msgid "Refitting to Warship"
-msgstr ""
+msgstr "Es converteix a vaixell de guerra"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2400
 #: ../../src/wui/seafaring_statistics_menu.cc:270
 msgctxt "ship_state"
 msgid "Warship"
-msgstr ""
+msgstr "Vaixell de guerra"
 
 #. * TRANSLATORS: This is a ship state. The ship is
 #. * currently sailing to a specific destination ship.
@@ -5960,7 +5960,7 @@ msgstr "Prohibeix la diplomàcia"
 
 #: ../../src/ui_fsmenu/launch_game.cc:141
 msgid "Enable naval warfare (experimental feature)"
-msgstr ""
+msgstr "Activa la guerra naval (funcionalitat experimental)"
 
 #: ../../src/ui_fsmenu/launch_game.cc:149
 msgid "Custom starting positions"
@@ -6038,18 +6038,18 @@ msgstr "Dóna a tots els jugadors visió permanent del mapa sencer"
 
 #: ../../src/ui_fsmenu/launch_game.cc:395
 msgid "Naval warfare is set by the scenario"
-msgstr ""
+msgstr "L'escenari ha activat la guerra naval"
 
 #: ../../src/ui_fsmenu/launch_game.cc:397
 msgid "Naval warfare is set by the saved game"
-msgstr ""
+msgstr "La partida desada ha activat la guerra naval"
 
 #: ../../src/ui_fsmenu/launch_game.cc:400
 msgid ""
 "Enable coastal invasions and ship-to-ship battles. This feature is "
 "experimental and may undergo substantial redesign in future versions of "
 "Widelands."
-msgstr ""
+msgstr "Activa les invasions per costa i les batalles vaixell contra vaixell. Aquesta funcionalitat és experimental i potser s'hi fan canvis substancials de redisseny en futures versions del Widelands."
 
 #: ../../src/ui_fsmenu/launch_game.cc:420
 msgid "Player relations are set by the scenario"
@@ -7925,11 +7925,11 @@ msgstr "Mostra les expedicions en espais portuaris"
 
 #: ../../src/wlapplication_options.cc:809
 msgid "Show Warships"
-msgstr ""
+msgstr "Mostra els vaixells de guerra"
 
 #: ../../src/wlapplication_options.cc:814
 msgid "Show Ships Being Refitted"
-msgstr ""
+msgstr "Mostra els vaixells que s'estan reconvertint"
 
 #: ../../src/wlapplication_options.cc:819
 msgid "Toggle Quick Navigation"
@@ -8397,8 +8397,8 @@ msgstr "Atac"
 #, c-format
 msgid "%u ship"
 msgid_plural "%u ships"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u vaixell"
+msgstr[1] "%u vaixells"
 
 #. * TRANSLATORS: Number of soldiers that should attack. Used in the attack
 #. window.
@@ -8412,7 +8412,7 @@ msgstr[1] "%u soldats"
 
 #: ../../src/wui/attack_window.cc:368
 msgid "Number of ships"
-msgstr ""
+msgstr "Nombre de vaixells"
 
 #: ../../src/wui/attack_window.cc:368
 msgid "Number of soldiers"
@@ -8420,7 +8420,7 @@ msgstr "Nombre de soldats"
 
 #: ../../src/wui/attack_window.cc:375
 msgid "Send less ships. Hold down Ctrl to send no ships"
-msgstr ""
+msgstr "Envieu menys vaixells. Mantingueu premut Ctrl per a no enviar-n’hi."
 
 #: ../../src/wui/attack_window.cc:376
 msgid "Send less soldiers. Hold down Ctrl to send no soldiers"
@@ -8428,7 +8428,7 @@ msgstr "Envieu menys soldats. Mantingueu premut Ctrl per no enviar-n’hi."
 
 #: ../../src/wui/attack_window.cc:382
 msgid "Send more ships. Hold down Ctrl to send as many ships as possible"
-msgstr ""
+msgstr "Envia més vaixells. Mantingueu premuda la tecla Ctrl per a enviar-n’hi el màxim possible."
 
 #: ../../src/wui/attack_window.cc:383
 msgid ""
@@ -8445,7 +8445,7 @@ msgstr "Atacants:"
 
 #: ../../src/wui/attack_window.cc:416
 msgid "Click on a ship to remove her from the list of attackers"
-msgstr ""
+msgstr "Feu clic en un vaixell per a treure’l de la llista d’atacants."
 
 #: ../../src/wui/attack_window.cc:417
 msgid "Click on a soldier to remove him from the list of attackers"
@@ -8453,7 +8453,7 @@ msgstr "Feu clic en un soldat per treure’l de la llista d’atacants."
 
 #: ../../src/wui/attack_window.cc:419
 msgid "Hold down Ctrl to remove all ships from the list"
-msgstr ""
+msgstr "Mantingueu premuda la tecla Ctrl per a treure tots els vaixells de la llista."
 
 #: ../../src/wui/attack_window.cc:420
 msgid "Hold down Ctrl to remove all soldiers from the list"
@@ -8461,7 +8461,7 @@ msgstr "Mantingueu premuda la tecla Ctrl per treure tots els soldats de la llist
 
 #: ../../src/wui/attack_window.cc:424
 msgid "Hold down Shift to remove all ships up to the one you’re pointing at"
-msgstr ""
+msgstr "Mantingueu premuda la tecla Maj per a treure tots els vaixells de la llista excepte el que esteu senyalant."
 
 #: ../../src/wui/attack_window.cc:425
 msgid ""
@@ -8474,7 +8474,7 @@ msgstr "Sense atacar:"
 
 #: ../../src/wui/attack_window.cc:438
 msgid "Click on a ship to add her to the list of attackers"
-msgstr ""
+msgstr "Feu clic en un vaixell per a afegir-lo a la llista d’atacants."
 
 #: ../../src/wui/attack_window.cc:439
 msgid "Click on a soldier to add him to the list of attackers"
@@ -8482,7 +8482,7 @@ msgstr "Feu clic en un soldat per afegir-lo a la llista d’atacants."
 
 #: ../../src/wui/attack_window.cc:441
 msgid "Hold down Ctrl to add all ships to the list"
-msgstr ""
+msgstr "Mantingueu premuda la tecla Ctrl per afegir tots els vaixells a la llista."
 
 #: ../../src/wui/attack_window.cc:442
 msgid "Hold down Ctrl to add all soldiers to the list"
@@ -8490,7 +8490,7 @@ msgstr "Mantingueu premuda la tecla Ctrl per afegir tots els soldats a la llista
 
 #: ../../src/wui/attack_window.cc:445
 msgid "Hold down Shift to add all ships up to the one you’re pointing at"
-msgstr ""
+msgstr "Mantingueu premuda la tecla Maj per a afegir tots els vaixells de la llista excepte el que esteu senyalant."
 
 #: ../../src/wui/attack_window.cc:446
 msgid "Hold down Shift to add all soldiers up to the one you’re pointing at"
@@ -8516,7 +8516,7 @@ msgstr "Centra la vista aquí"
 #: ../../src/wui/attack_window.cc:622
 #, c-format
 msgid "%1$s  HP: %2$u/%3$u  AT: +%4$u%%"
-msgstr ""
+msgstr "%1$s  PdV: %2$u/%3$u  AT: +%4$u%%"
 
 #: ../../src/wui/attack_window.cc:627 ../../src/wui/soldierlist.cc:556
 #, c-format
@@ -8732,7 +8732,7 @@ msgstr "Demana preferiblement herois"
 #: ../../src/wui/constructionsitewindow.cc:364
 #: ../../src/wui/soldierlist.cc:496
 msgid "No preference"
-msgstr ""
+msgstr "Sense preferència"
 
 #: ../../src/wui/constructionsitewindow.cc:395
 msgid "Settings to apply after construction"
@@ -8984,22 +8984,22 @@ msgstr "Construeix vies d’aigua"
 #, c-format
 msgctxt "ship_state"
 msgid "Warship · HP %1$u%% · AT +%2$u%%"
-msgstr ""
+msgstr "Vaixell de guerra · PdV %1$u%% · AT +%2$u%%"
 
 #: ../../src/wui/fieldaction.cc:1258
 msgctxt "ship_state"
 msgid "Enemy Transport Ship"
-msgstr ""
+msgstr "Vaixell de transport enemic"
 
 #: ../../src/wui/fieldaction.cc:1260
 msgctxt "ship_state"
 msgid "Expedition"
-msgstr ""
+msgstr "Expedició"
 
 #: ../../src/wui/fieldaction.cc:1262
 msgctxt "ship_state"
 msgid "Transport"
-msgstr ""
+msgstr "Transport"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
 #: ../../src/wui/fieldaction.cc:1264 ../../src/wui/interactive_gamebase.cc:614
@@ -9010,15 +9010,15 @@ msgstr "%1$s (%2$s)"
 
 #: ../../src/wui/fieldaction.cc:1274
 msgid "Select Ship"
-msgstr ""
+msgstr "Tria un vaixell"
 
 #: ../../src/wui/fieldaction.cc:1297
 msgid "Own Ships"
-msgstr ""
+msgstr "Vaixells propis"
 
 #: ../../src/wui/fieldaction.cc:1311
 msgid "Attackable Ships"
-msgstr ""
+msgstr "Vaixells que es poden atacar"
 
 #: ../../src/wui/fleet_options_window.cc:94
 msgid "Ferry Fleet Options"
@@ -9466,11 +9466,11 @@ msgstr "Productivitat"
 
 #: ../../src/wui/general_statistics_menu.cc:185
 msgid "Warships lost"
-msgstr ""
+msgstr "Vaixells de guerra perduts"
 
 #: ../../src/wui/general_statistics_menu.cc:194
 msgid "Warships defeated"
-msgstr ""
+msgstr "Vaixells de guerra derrotats"
 
 #: ../../src/wui/general_statistics_menu.cc:203
 msgid "Casualties"
@@ -10508,14 +10508,14 @@ msgstr "Està embarcant"
 #: ../../src/wui/seafaring_statistics_menu.cc:272
 msgctxt "ship_state"
 msgid "Being Refitted"
-msgstr ""
+msgstr "En procés de reconversió"
 
 #: ../../src/wui/seafaring_statistics_menu.cc:426
 #, c-format
 msgid "Seafaring Statistics (%u Ship)"
 msgid_plural "Seafaring Statistics (%u Ships)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Estadístiques de navegació (%u vaixell)"
+msgstr[1] "Estadístiques de navegació (%u vaixells)"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:568
@@ -10550,12 +10550,12 @@ msgstr "Mostra les expedicions que han trobat un espai portuari o estan fundant 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:603
 msgid "Show warships"
-msgstr ""
+msgstr "Mostra els vaixells de guerra"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:608
 msgid "Show ships being refitted"
-msgstr ""
+msgstr "Mostra els vaixells que s'estan reconvertint"
 
 #: ../../src/wui/shipwindow.cc:86
 #, c-format
@@ -10563,8 +10563,8 @@ msgid ""
 "Damaged warships regain %u hitpoint per second when anchored in a port."
 msgid_plural ""
 "Damaged warships regain %u hitpoints per second when anchored in a port."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Els vaixells de guerra danyats recuperen %u punt de vida per segon quan estan ancorats en ports."
+msgstr[1] "Els vaixells de guerra danyats recuperen %u punts de vida per segon quan estan ancorats en ports."
 
 #: ../../src/wui/shipwindow.cc:111
 msgid "Scout towards the north west"
@@ -10588,7 +10588,7 @@ msgstr "Construeix un port en aquest lloc"
 
 #: ../../src/wui/shipwindow.cc:136
 msgid "Anchor at the current location"
-msgstr ""
+msgstr "Ancora a la posició actual"
 
 #: ../../src/wui/shipwindow.cc:141
 msgid "Scout towards the east"
@@ -10608,7 +10608,7 @@ msgstr "Explora cap al sud-est"
 
 #: ../../src/wui/shipwindow.cc:163
 msgid "Destination"
-msgstr ""
+msgstr "Destinació"
 
 #: ../../src/wui/shipwindow.cc:174
 msgid "Sink the ship"
@@ -10645,16 +10645,16 @@ msgstr "Vés al destí"
 
 #: ../../src/wui/shipwindow.cc:463
 msgid "Refit to transport ship"
-msgstr ""
+msgstr "Reconverteix en vaixell de transport"
 
 #: ../../src/wui/shipwindow.cc:464
 msgid "Refit to warship"
-msgstr ""
+msgstr "Reconverteix en vaixell de guerra"
 
 #: ../../src/wui/shipwindow.cc:486
 #, c-format
 msgid "HP: %1$u/%2$u"
-msgstr ""
+msgstr "PdV: %1$u/%2$u"
 
 #: ../../src/wui/soldier_statistics_menu.cc:89
 #: ../../src/wui/soldier_statistics_menu.cc:182
