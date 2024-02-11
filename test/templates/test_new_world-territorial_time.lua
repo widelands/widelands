@@ -80,7 +80,7 @@ run(function()
     sleep(5000)
   end
 
-  assert_equal(ship.type, "warship", "## Refitting timed out ##")
+  assert_equal("warship", ship.type, "## Refitting timed out ##")
   print("Warship is ready")
 
   -- Time limited win condition, let's just wait.
