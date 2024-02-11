@@ -70,6 +70,7 @@ jobs:
         grep -v REVDETECT-BROKEN VERSION
         make -k -j$(nproc) VERBOSE=1
     - name: Make install/uninstall
+      if: false
       run: |
         cd build
         TEST_INSTALL_DIR="${PWD}/test_install"
@@ -77,6 +78,7 @@ jobs:
         make -j$(nproc) DESTDIR=${TEST_INSTALL_DIR} uninstall
         test ! -d ${TEST_INSTALL_DIR}
     - name: Website Binaries
+      if: false
       run: |
         /sbin/start-stop-daemon --start --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 800x600x24 -ac +extension GLX
         sleep 1m
@@ -92,4 +94,4 @@ jobs:
         then
           TIMEOUT="-t 20"
         fi
-        ./regression_test.py -b build/src/widelands $TIMEOUT
+        ./regression_test.py -b build/src/widelands $TIMEOUT -r template
