@@ -25,15 +25,6 @@
 
 #include <SDL_timer.h>
 
-#ifdef __clang__
-#if __has_feature(address_sanitizer)
-
-#define CLANG_ASAN
-#include <sanitizer/common_interface_defs.h>
-
-#endif
-#endif
-
 #include "base/log.h"
 #include "base/mutex.h"
 #include "base/wexception.h"
@@ -256,12 +247,6 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 	// by giving it a lower sleep time between attempts. This keeps overall waiting times low.
 	// The Logic Frame mutex's extended sleep time is higher because it's locked much longer.
 	const bool has_priority = (record.waiting_threads.empty() || is_initializer_thread());
-
-#ifdef CLANG_ASAN
-	if (record.waiting_threads.count(self) != 0) {
-		__sanitizer_print_stack_trace();
-	}
-#endif
 
 	assert(record.waiting_threads.count(self) == 0);
 	record.waiting_threads.insert(self);
