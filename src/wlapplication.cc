@@ -456,8 +456,9 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 
 	g_gr->initialize(
 	   get_config_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
-	   get_config_int("xres", kDefaultResolutionW), get_config_int("yres", kDefaultResolutionH),
-	   get_config_bool("fullscreen", false), get_config_bool("maximized", false));
+	   get_config_int("display", -1), get_config_int("xres", kDefaultResolutionW),
+	   get_config_int("yres", kDefaultResolutionH), get_config_bool("fullscreen", false),
+	   get_config_bool("maximized", false));
 
 	g_mouse_cursor = new MouseCursor();
 	g_mouse_cursor->initialize(get_config_bool("sdl_cursor", true));

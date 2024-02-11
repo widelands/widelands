@@ -50,6 +50,8 @@ namespace {
 constexpr int kDropdownFullscreen = -2;
 constexpr int kDropdownMaximized = -1;
 
+constexpr int kDropdownFollowMouse = -1;
+
 // Locale identifiers can look like this: ca_ES@valencia.UTF-8
 // The contents of 'selected_locale' will be changed to match the 'current_locale'
 void find_selected_locale(std::string* selected_locale, const std::string& current_locale) {
@@ -147,6 +149,17 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                           UI::DropdownType::kTextual,
                           UI::PanelStyle::kFsMenu,
                           UI::ButtonStyle::kFsMenuMenu),
+     display_dropdown_(&box_interface_vbox_,
+                       "dropdown_display",
+                       0,
+                       0,
+                       100,  // 100 is arbitrary, will be resized in layout().
+                       50,
+                       24,
+                       _("Display"),
+                       UI::DropdownType::kTextual,
+                       UI::PanelStyle::kFsMenu,
+                       UI::ButtonStyle::kFsMenuMenu),
      sdl_cursor_(&box_interface_,
                  UI::PanelStyle::kFsMenu,
                  "sdl_cursor",
@@ -408,6 +421,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	// Interface
 	box_interface_vbox_.add(&language_dropdown_, UI::Box::Resizing::kFullSize);
 	box_interface_vbox_.add(&resolution_dropdown_, UI::Box::Resizing::kFullSize);
+	box_interface_vbox_.add(&display_dropdown_, UI::Box::Resizing::kFullSize);
 	// TODO(tothxa): Replace with infinite space if box layouting quirks get fixed
 	box_interface_vbox_.add(&translation_padding_, UI::Box::Resizing::kFullSize);
 	// box_interface_vbox_.add_inf_space();
@@ -510,6 +524,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 
 	// Fill in data
 	// Interface options
+	add_displays(opt);
 	add_screen_resolutions(opt);
 
 	sdl_cursor_.set_state(opt.sdl_cursor);
@@ -556,6 +571,25 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	}
 	initialization_complete();
 }
+
+void Options::add_displays(const OptionsCtrl::OptionsStruct& opt) {
+	display_dropdown_.add(
+	   /** TRANSLATORS: Entry in the display selection dropdown */
+	   _("Follow mouse"), kDropdownFollowMouse, nullptr, opt.display < 0);
+	for (int i = 0; i < SDL_GetNumVideoDisplays(); ++i) {
+		SDL_Rect r;
+		if (SDL_GetDisplayBounds(i, &r) == 0) {
+			display_dropdown_.add(
+			   /** TRANSLATORS: Display index and virtual coordinates, e.g, '#0 (0, 0, 1920, 1080)'*/
+			   format(_("#%1% (%2%, %3%, %4%, %5%)"), i, r.x, r.y, r.w, r.h), i, nullptr,
+			   opt.display == i);
+		}
+	}
+	if (!display_dropdown_.has_selection()) {
+		display_dropdown_.select(kDropdownFollowMouse);
+	}
+}
+
 void Options::add_screen_resolutions(const OptionsCtrl::OptionsStruct& opt) {
 	ScreenResolution current_res = {g_gr->get_window_mode_xres(), g_gr->get_window_mode_yres()};
 
@@ -615,7 +649,8 @@ void Options::layout() {
 		language_dropdown_.set_height(tabs_.get_h() - language_dropdown_.get_y() - buth -
 		                              3 * kPadding);
 
-		const int min_h = language_dropdown_.get_h() + resolution_dropdown_.get_h() + 2 * kPadding;
+		const int min_h = language_dropdown_.get_h() + resolution_dropdown_.get_h() +
+		                  display_dropdown_.get_h() + 3 * kPadding;
 		const int half_w = (tab_panel_width - 3 * kPadding) / 2;
 
 		// Make initial value big enough to avoid needing a scrollbar
@@ -834,6 +869,9 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 			os_.yres = res.yres;
 		}
 	}
+	if (display_dropdown_.has_selection()) {
+		os_.display = display_dropdown_.get_selected();
+	}
 	os_.sdl_cursor = sdl_cursor_.get_state();
 	os_.tooltip_accessibility_mode = tooltip_accessibility_mode_.get_state();
 
@@ -892,9 +930,10 @@ void OptionsCtrl::handle_menu() {
 	MenuTarget i = opt_dialog_->run<MenuTarget>();
 	if (i != MenuTarget::kBack) {
 		save_options();
-		g_gr->set_fullscreen(opt_dialog_->get_values().fullscreen);
+		int display = opt_dialog_->get_values().display;
+		g_gr->set_fullscreen(opt_dialog_->get_values().fullscreen, display);
 		if (opt_dialog_->get_values().maximized) {
-			g_gr->set_maximized(true);
+			g_gr->set_maximized(true, display);
 		} else if (!opt_dialog_->get_values().fullscreen && !opt_dialog_->get_values().maximized) {
 			g_gr->change_resolution(
 			   opt_dialog_->get_values().xres, opt_dialog_->get_values().yres, true);
@@ -911,6 +950,7 @@ void OptionsCtrl::handle_menu() {
 OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	OptionsStruct opt;
 	// Interface options
+	opt.display = opt_section_.get_int("display", kDropdownFollowMouse);
 	opt.xres = opt_section_.get_int("xres", kDefaultResolutionW);
 	opt.yres = opt_section_.get_int("yres", kDefaultResolutionH);
 	opt.maximized = opt_section_.get_bool("maximized", false);
@@ -960,6 +1000,7 @@ void OptionsCtrl::save_options() {
 	OptionsCtrl::OptionsStruct opt = opt_dialog_->get_values();
 
 	// Interface options
+	opt_section_.set_int("display", opt.display);
 	opt_section_.set_int("xres", opt.xres);
 	opt_section_.set_int("yres", opt.yres);
 	opt_section_.set_bool("maximized", opt.maximized);
