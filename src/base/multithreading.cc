@@ -256,7 +256,7 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 	const bool has_priority = (record.waiting_threads.empty() || is_initializer_thread());
 
 #ifdef CLANG_ASAN
-	if (record.waiting_threads.count(self) == 0) {
+	if (record.waiting_threads.count(self) != 0) {
 		__sanitizer_print_stack_trace();
 	}
 #endif
