@@ -708,6 +708,8 @@ void WLApplication::init_and_run_game_from_template(FsMenu::MainMenu& mainmenu) 
 	std::unique_ptr<FsMenu::MenuCapsule> capsule;
 
 	if (multiplayer) {
+		// replace main menu
+		mainmenu.die();
 		menu_for_capsule.reset(new FsMenu::MainMenu(true));
 		capsule.reset(new FsMenu::MenuCapsule(*menu_for_capsule));
 		host = new GameHost(capsule.get(), ctrl, get_config_string("nickname", _("nobody")),
