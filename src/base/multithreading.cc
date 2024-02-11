@@ -230,7 +230,9 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 	const uint32_t start_time = SDL_GetTicks();
 #ifdef MUTEX_LOCK_DEBUG
 	uint32_t counter = 0;
-	log_dbg("Starting to lock mutex %s ...", to_string(id_).c_str());
+	if (id_ != ID::kLog) {
+		log_dbg("Starting to lock mutex %s ...", to_string(id_).c_str());
+	}
 #endif
 
 	const std::thread::id self = std::this_thread::get_id();
@@ -239,7 +241,7 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 
 	if (record.current_owner != kNoThread) {
 		for (const auto& pair : acting_as_another_thread) {
-			if (pair.first == self && pair.second == record.current_owner) {
+			if (pair.first == self && pair.second == record.current_owner && id_ != ID::kLog) {
 				verb_log_dbg("%s skips locking mutex %s owned by wrapping thread %s",
 				             thread_name(self).c_str(), to_string(id_).c_str(),
 				             thread_name(record.current_owner).c_str());
@@ -275,7 +277,7 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 	uint32_t last_function_call = 0;
 	while (!record.mutex.try_lock()) {
 		const uint32_t now = SDL_GetTicks();
-		if (now - start_time > 1000) {
+		if (now - start_time > 1000 && id_ != ID::kLog) {
 			verb_log_dbg("WARNING: %s locking mutex %s, already waiting for %d ms",
 			             thread_name(self).c_str(), to_string(id_).c_str(), now - start_time);
 		}
@@ -285,7 +287,7 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 				std::lock_guard<std::mutex> guard(responsiveness_list_mutex_);
 				if (!stay_responsive_.empty()) {
 					stay_responsive_.back()();
-				} else {
+				} else if (id_ != ID::kLog) {
 					verb_log_dbg("WARNING: Mutex locking: No responsiveness function set");
 				}
 			}
@@ -327,7 +329,9 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 					}
 
 					s_mutex_.unlock();
-					log_err("%s", info.c_str());
+					if (id_ != ID::kLog) {
+						log_err("%s", info.c_str());
+					}
 					throw wexception("%s", info.c_str());
 				}
 			}
@@ -352,8 +356,10 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 	record.ownership_count++;
 
 #ifdef MUTEX_LOCK_DEBUG
-	log_dbg("Locking mutex %s took %ums (%u function calls)", to_string(id_).c_str(),
-	        SDL_GetTicks() - start_time, counter);
+	if (id_ != ID::kLog) {
+		log_dbg("Locking mutex %s took %ums (%u function calls)", to_string(id_).c_str(),
+		        SDL_GetTicks() - start_time, counter);
+	}
 #endif
 }
 MutexLock::~MutexLock() {
@@ -362,7 +368,9 @@ MutexLock::~MutexLock() {
 	}
 
 #ifdef MUTEX_LOCK_DEBUG
-	log_dbg("Unlocking mutex %s", to_string(id_).c_str());
+	if (id_ != ID::kLog) {
+		log_dbg("Unlocking mutex %s", to_string(id_).c_str());
+	}
 #endif
 
 	std::lock_guard<std::mutex> guard(s_mutex_);
