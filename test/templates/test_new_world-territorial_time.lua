@@ -14,8 +14,14 @@ run(function()
   print("Place a port for the winner to conquer some land.")
   atl:place_building("atlanteans_port", f(9, 141), false, true)
 
+  local timeout = game.time + 60 * 1000
+  while #atl:get_buildings("atlanteans_port") < 1 and game.time < timeout do
+    sleep(1000)
+  end
+
+  assert_true(#atl:get_buildings("atlanteans_port") >= 1, "## Port placement timed out ##")
+
   -- Test naval warfare
-  sleep(1000)
   assert_true(#atl:get_ships() > 3, "## Too few ships for New World starting condition ##")
   local ship = atl:get_ships()[1]
   assert_equal(ship.type, "transport", "## Ship 1 is not a transport ship ##")
@@ -23,9 +29,9 @@ run(function()
   print("Refitting a ship to warship")
   ship:refit("warship")
 
-  local refit_timeout = game.time + 5 * 60 * 1000
-  while ship.type == "transport" and game.time < refit_timeout do
-    print("Waiting for ship to refit...")
+  timeout = game.time + 5 * 60 * 1000
+  while ship.type == "transport" and game.time < timeout do
+    print("Waiting for ship to refit... time left:", (timeout - game.time) / 1000)
     sleep(5000)
   end
 
