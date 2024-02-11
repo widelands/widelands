@@ -92,4 +92,4 @@ jobs:
         then
           TIMEOUT="-t 20"
         fi
-        ./regression_test.py -b build/src/widelands $TIMEOUT -r template
+        ./regression_test.py -b build/src/widelands $TIMEOUT
