@@ -280,8 +280,11 @@ def discover_scenario_tests(regexp, suite):
 def discover_game_template_tests(regexp, suite):
     """Add all tests using --new_game_from_template to the 'suite'."""
     for templ in sorted(glob(os.path.join("test", "templates", "test*.wgt"))):
+        if not os.path.isfile(templ):
+            continue
         test_script = templ[:-3] + 'lua'
-        if not os.path.isfile(templ) or not os.path.isfile(test_script):
+        if not os.path.isfile(test_script):
+            print(f"WARNING: Game template test { templ }: corresponding script { test_script } not found - Skipping.")
             continue
         if regexp is not None and not re.search(regexp, test_script):
             continue
