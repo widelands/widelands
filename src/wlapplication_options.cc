@@ -259,7 +259,7 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
    {KeyboardShortcut::kMainMenuLoadReplay,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
                          keysym(SDLK_g),
-                         "mainmenu_replay",
+                         "mainmenu_load_replay",
                          gettext_noop("Load Replay"))},
    {KeyboardShortcut::kMainMenuReplayLast,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
