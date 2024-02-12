@@ -260,9 +260,11 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 	}
 
 	uint32_t last_function_call = 0;
+	uint32_t last_log_time = 0;
 	while (!record.mutex.try_lock()) {
 		const uint32_t now = SDL_GetTicks();
-		if (now - start_time > 1000 && id_ != ID::kLog) {
+		if (now - start_time > 1000 && now - last_log_time > 1000 && id_ != ID::kLog) {
+			last_log_time = now;
 			verb_log_dbg("WARNING: %s locking mutex %s, already waiting for %d ms",
 			             thread_name(self).c_str(), to_string(id_).c_str(), now - start_time);
 		}
