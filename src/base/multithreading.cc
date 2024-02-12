@@ -232,10 +232,12 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 
 	if (record.current_owner != kNoThread) {
 		for (const auto& pair : acting_as_another_thread) {
-			if (pair.first == self && pair.second == record.current_owner && id_ != ID::kLog) {
-				verb_log_dbg("%s skips locking mutex %s owned by wrapping thread %s",
-				             thread_name(self).c_str(), to_string(id_).c_str(),
-				             thread_name(record.current_owner).c_str());
+			if (pair.first == self && pair.second == record.current_owner) {
+				if (id_ != ID::kLog) {
+					verb_log_dbg("%s skips locking mutex %s owned by wrapping thread %s",
+					             thread_name(self).c_str(), to_string(id_).c_str(),
+					             thread_name(record.current_owner).c_str());
+				}
 				s_mutex_.unlock();
 				id_ = ID::kNone;
 				return;
