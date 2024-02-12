@@ -5266,7 +5266,7 @@ msgstr "Stavenisko lode"
 #: ../../data/tribes/immovables/trees/balsa/mature/green/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/mature/winter/init.lua:11
 msgid "Balsa Tree (Mature)"
-msgstr ""
+msgstr "Balzovník (dospelý)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/old/black/init.lua:11
@@ -5274,7 +5274,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/balsa/old/green/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/old/winter/init.lua:11
 msgid "Balsa Tree (Old)"
-msgstr ""
+msgstr "Balzovník (starý)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/old/black/init.lua:13
@@ -5282,7 +5282,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/balsa/old/green/init.lua:13
 #: ../../data/tribes/immovables/trees/balsa/old/winter/init.lua:13
 msgid "Balsa Tree"
-msgstr ""
+msgstr "Balzovník"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/pole/black/init.lua:11
@@ -5290,7 +5290,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/balsa/pole/green/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/pole/winter/init.lua:11
 msgid "Balsa Tree (Pole)"
-msgstr ""
+msgstr "Balzovník (žrďovina)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #. TRANSLATORS: This is an Amazon rare tree.
@@ -5300,7 +5300,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/balsa/sapling/green/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/winter/init.lua:11
 msgid "Balsa Tree (Sapling)"
-msgstr ""
+msgstr "Balzovník (mladý)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/cocoa/mature/init.lua:8
@@ -5333,7 +5333,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/mature/green/init.lua:11
 #: ../../data/tribes/immovables/trees/ironwood/mature/winter/init.lua:11
 msgid "Ironwood Tree (Mature)"
-msgstr ""
+msgstr "Leopardí strom (dospelý)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/old/black/init.lua:11
@@ -5341,7 +5341,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/old/green/init.lua:11
 #: ../../data/tribes/immovables/trees/ironwood/old/winter/init.lua:11
 msgid "Ironwood Tree (Old)"
-msgstr ""
+msgstr "Leopardí strom (starý)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/old/black/init.lua:13
@@ -5349,7 +5349,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/old/green/init.lua:13
 #: ../../data/tribes/immovables/trees/ironwood/old/winter/init.lua:13
 msgid "Ironwood Tree"
-msgstr ""
+msgstr "Leopardí strom"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/pole/black/init.lua:11
@@ -5357,7 +5357,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/pole/green/init.lua:11
 #: ../../data/tribes/immovables/trees/ironwood/pole/winter/init.lua:11
 msgid "Ironwood Tree (Pole)"
-msgstr ""
+msgstr "Leopardí strom (žrďovina)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/sapling/black/init.lua:11
@@ -5365,7 +5365,7 @@ msgstr ""
 #: ../../data/tribes/immovables/trees/ironwood/sapling/green/init.lua:11
 #: ../../data/tribes/immovables/trees/ironwood/sapling/winter/init.lua:11
 msgid "Ironwood Tree (Sapling)"
-msgstr ""
+msgstr "Leopardí strom (mladý)"
 
 #. TRANSLATORS:  This is an Amazon rare tree.
 #: ../../data/tribes/immovables/trees/rubber/mature/black/init.lua:11
@@ -8232,7 +8232,7 @@ msgstr "Bojovnícka sekera"
 #: ../../data/tribes/wares/balsa/init.lua:8
 msgctxt "ware"
 msgid "Balsa"
-msgstr ""
+msgstr "Balza"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/barley/init.lua:8
@@ -8298,7 +8298,7 @@ msgstr ""
 #: ../../data/tribes/wares/bread_amazons/init.lua:8
 msgctxt "ware"
 msgid "Bread"
-msgstr ""
+msgstr "Chlieb"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/bread_atlanteans/init.lua:8
@@ -8358,7 +8358,7 @@ msgstr ""
 #: ../../data/tribes/wares/chocolate/init.lua:8
 msgctxt "ware"
 msgid "Chocolate"
-msgstr ""
+msgstr "Čokoláda"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/clay/init.lua:8
@@ -8604,7 +8604,7 @@ msgstr "Železná ruda"
 #: ../../data/tribes/wares/ironwood/init.lua:8
 msgctxt "ware"
 msgid "Ironwood"
-msgstr ""
+msgstr "Železné drevo"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/kitchen_tools/init.lua:8
@@ -8617,7 +8617,7 @@ msgstr "Kuchynské nástroje"
 #: ../../data/tribes/wares/liana/init.lua:8
 msgctxt "ware"
 msgid "Liana"
-msgstr ""
+msgstr "Liana"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/log/init.lua:8
@@ -8714,13 +8714,13 @@ msgstr "Trstina"
 #: ../../data/tribes/wares/rope/init.lua:8
 msgctxt "ware"
 msgid "Rope"
-msgstr ""
+msgstr "Lano"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/rubber/init.lua:8
 msgctxt "ware"
 msgid "Rubber"
-msgstr "Guma"
+msgstr "Kaučuk"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/saw/init.lua:8

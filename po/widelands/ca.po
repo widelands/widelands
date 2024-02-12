@@ -6340,7 +6340,7 @@ msgstr "Mira la repetició d’una partida antiga"
 
 #: ../../src/ui_fsmenu/main.cc:464
 msgid "Watch last saved replay"
-msgstr ""
+msgstr "Mira l'última repetició desada"
 
 #: ../../src/ui_fsmenu/main.cc:490
 msgid "Single Player…"
@@ -6356,7 +6356,7 @@ msgstr "Editor…"
 
 #: ../../src/ui_fsmenu/main.cc:493
 msgid "Watch Replay…"
-msgstr ""
+msgstr "Mira repetició…"
 
 #: ../../src/ui_fsmenu/main.cc:495
 msgid "Begin or load a single-player campaign or free game"
@@ -6372,7 +6372,7 @@ msgstr "Inicia l’editor de mapes"
 
 #: ../../src/ui_fsmenu/main.cc:504
 msgid "Watch again a recorded earlier game"
-msgstr ""
+msgstr "Mira una altra vegada una partida gravada."
 
 #: ../../src/ui_fsmenu/main.cc:507 ../../src/wlapplication_options.cc:333
 msgid "Add-Ons"
@@ -7297,19 +7297,19 @@ msgstr "Desmarca-ho tot"
 
 #: ../../src/wlapplication.cc:832
 msgid "Widelands could not find the last edited map."
-msgstr ""
+msgstr "El Widelands no ha pogut trobar l'últim mapa editat."
 
 #: ../../src/wlapplication.cc:836
 msgid "No Last Edited Map"
-msgstr ""
+msgstr "No hi ha últim mapa editat."
 
 #: ../../src/wlapplication.cc:867
 msgid "No last saved replay."
-msgstr ""
+msgstr "No hi ha última repetició desada."
 
 #: ../../src/wlapplication.cc:869
 msgid "No last saved game."
-msgstr ""
+msgstr "No hi ha última partida desada."
 
 #: ../../src/wlapplication.cc:879
 #, c-format
@@ -7598,7 +7598,7 @@ msgstr "Mostra repeticions"
 
 #: ../../src/wlapplication_options.cc:268
 msgid "Watch Latest Replay"
-msgstr ""
+msgstr "Mostra l'última repetició"
 
 #: ../../src/wlapplication_options.cc:287
 msgid "Singleplayer"

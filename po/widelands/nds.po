@@ -6342,7 +6342,7 @@ msgstr "Dat Upteken vun eenem ollen Speel ankieken"
 
 #: ../../src/ui_fsmenu/main.cc:464
 msgid "Watch last saved replay"
-msgstr ""
+msgstr "Tolest sekert Upteken ankieken"
 
 #: ../../src/ui_fsmenu/main.cc:490
 msgid "Single Player…"
@@ -6358,7 +6358,7 @@ msgstr "Bewarker …"
 
 #: ../../src/ui_fsmenu/main.cc:493
 msgid "Watch Replay…"
-msgstr ""
+msgstr "Upteken ankieken …"
 
 #: ../../src/ui_fsmenu/main.cc:495
 msgid "Begin or load a single-player campaign or free game"
@@ -6374,7 +6374,7 @@ msgstr "De Kaart-Bewarker opmaken"
 
 #: ../../src/ui_fsmenu/main.cc:504
 msgid "Watch again a recorded earlier game"
-msgstr ""
+msgstr "Een fröher uptekent Speel weer ankieken"
 
 #: ../../src/ui_fsmenu/main.cc:507 ../../src/wlapplication_options.cc:333
 msgid "Add-Ons"
@@ -7299,19 +7299,19 @@ msgstr "Nix utkören"
 
 #: ../../src/wlapplication.cc:832
 msgid "Widelands could not find the last edited map."
-msgstr ""
+msgstr "Widelands kunn de tolest bewarkt Kaart nich finnen."
 
 #: ../../src/wlapplication.cc:836
 msgid "No Last Edited Map"
-msgstr ""
+msgstr "Keene tolest bewarkt Kaart"
 
 #: ../../src/wlapplication.cc:867
 msgid "No last saved replay."
-msgstr ""
+msgstr "Keen tolest sekert Upteken."
 
 #: ../../src/wlapplication.cc:869
 msgid "No last saved game."
-msgstr ""
+msgstr "Keen tolest sekert Speel."
 
 #: ../../src/wlapplication.cc:879
 #, c-format
@@ -7600,7 +7600,7 @@ msgstr "Upteken ankieken"
 
 #: ../../src/wlapplication_options.cc:268
 msgid "Watch Latest Replay"
-msgstr ""
+msgstr "Lestes Upteken ankieken"
 
 #: ../../src/wlapplication_options.cc:287
 msgid "Singleplayer"
