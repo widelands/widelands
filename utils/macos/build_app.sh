@@ -39,6 +39,8 @@ if [[ -f $SOURCE_DIR/WL_RELEASE ]]; then
    WLVERSION="$(cat $SOURCE_DIR/WL_RELEASE)"
 fi
 
+WLVERSION="${WLVERSION//\//\~}"  # Fix problems with slashes in branch names
+
 echo ""
 echo "   Source:      $SOURCE_DIR"
 echo "   Version:     $WLVERSION"

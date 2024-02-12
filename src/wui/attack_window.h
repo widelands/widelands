@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/player.h"
 #include "ui_basic/box.h"
@@ -29,33 +30,32 @@
 #include "ui_basic/slider.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
+#include "wui/interactive_player.h"
 
 /** Provides the attack settings when clicking on an enemy building. */
-class AttackWindow : public UI::UniqueWindow {
+class AttackPanel : public UI::Box {
 public:
-	AttackWindow(
-	   InteractivePlayer& parent,
-	   UI::UniqueWindow::Registry&,
-	   Widelands::Building& target_bld,
-	   const Widelands::Coords& target_coords,  // not necessarily the building's main location
-	   bool fastclick);
-	~AttackWindow() override;
+	enum class AttackType { kBuilding, kShip, kNavalInvasion };
 
-	static UI::Window& load(FileRead&, InteractiveBase&, Widelands::MapObjectLoader& mol);
+	AttackPanel(UI::Panel& parent,
+	            InteractivePlayer& iplayer,
+	            bool can_attack,
+	            const Widelands::Coords* target_coordinates,
+	            AttackType attack_type,
+	            std::function<std::vector<Widelands::OPtr<Widelands::Bob>>()> get_max_attackers);
+
+	size_t count_soldiers() const;
+	std::vector<Widelands::Serial> soldiers() const;
+
+	Notifications::Signal<> act_attack;
 
 protected:
-	void think() override;
 	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
-
-	UI::Panel::SaveType save_type() const override {
-		return UI::Panel::SaveType::kAttackWindow;
-	}
-	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	void think() override;
 
 private:
-	const unsigned serial_;
+	friend class AttackWindow;
 
-	std::vector<Widelands::Soldier*> get_max_attackers();
 	std::unique_ptr<UI::HorizontalSlider> add_slider(UI::Box& parent,
 	                                                 uint32_t width,
 	                                                 uint32_t height,
@@ -66,30 +66,20 @@ private:
 	UI::Textarea&
 	add_text(UI::Box& parent, const std::string& str, UI::Align alignment, UI::FontStyle style);
 
-	void init_slider(const std::vector<Widelands::Soldier*>&);
-	void init_soldier_lists(const std::vector<Widelands::Soldier*>&);
-	void init_bottombox();
+	void init_slider(const std::vector<Widelands::OPtr<Widelands::Bob>>&, bool can_attack);
+	void init_soldier_lists(const std::vector<Widelands::OPtr<Widelands::Bob>>&);
 
 	void update(bool);
 	void send_less_soldiers();
 	void send_more_soldiers();
 
-	size_t count_soldiers() const;
-	std::vector<Widelands::Serial> soldiers() const;
-
-	bool get_allow_conquer() const {
-		return do_not_conquer_ && !do_not_conquer_->get_state();
-	}
-
 	InteractivePlayer& iplayer_;
-	const Widelands::Map& map_;
-	Widelands::OPtr<Widelands::Building> target_building_;
-	const Widelands::Coords target_coordinates_;
+	const Widelands::Coords* target_coordinates_;
 
 	// A SoldierPanel is not applicable here as it's keyed to a building and thinks too much
 	struct ListOfSoldiers : public UI::Panel {
 		ListOfSoldiers(UI::Panel* parent,
-		               AttackWindow* parent_box,
+		               AttackPanel* parent_box,
 		               int32_t x,
 		               int32_t y,
 		               int w,
@@ -100,18 +90,19 @@ private:
 		void handle_mousein(bool) override;
 		bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
 
-		const Widelands::Soldier* soldier_at(int32_t x, int32_t y) const;
-		void add(const Widelands::Soldier*);
-		void remove(const Widelands::Soldier*);
-		bool contains(const Widelands::Soldier* soldier) const {
+		const Widelands::OPtr<Widelands::Bob> soldier_at(int32_t x, int32_t y) const;
+		void add(Widelands::OPtr<Widelands::Bob>);
+		void remove(Widelands::OPtr<Widelands::Bob>);
+		void sort();
+		bool contains(const Widelands::OPtr<Widelands::Bob> soldier) const {
 			return std::any_of(
 			   soldiers_.begin(), soldiers_.end(), [soldier](const auto& s) { return s == soldier; });
 		}
 
-		std::vector<const Widelands::Soldier*> get_soldiers() const {
+		std::vector<Widelands::OPtr<Widelands::Bob>> get_soldiers() const {
 			return soldiers_;
 		}
-		const Widelands::Soldier* get_soldier() const {
+		const Widelands::OPtr<Widelands::Bob> get_soldier() const {
 			return soldiers_.back();
 		}
 
@@ -135,33 +126,98 @@ private:
 	private:
 		bool restricted_row_number_;
 		uint16_t current_size_;  // Current number of rows or columns
-		std::vector<const Widelands::Soldier*> soldiers_;
+		std::vector<Widelands::OPtr<Widelands::Bob>> soldiers_;
 
 		ListOfSoldiers* other_;
-		AttackWindow* attack_box_;
+		AttackPanel* attack_box_;
 
 		void update_desired_size() override;
 	};
 
-	void act_attack();
-	void act_goto();
-	void act_debug();
+	std::function<std::vector<Widelands::OPtr<Widelands::Bob>>()> get_max_attackers_;
+	const AttackType attack_type_;
+
+	int icon_w_;
+	int icon_h_;
 
 	/// The last time the information in this Panel got updated
 	Time lastupdate_;
 
-	UI::Box mainbox_, linebox_, columnbox_, bottombox_;
+	UI::Box linebox_;
+	UI::Box columnbox_;
 
 	std::unique_ptr<ListOfSoldiers> attacking_soldiers_;
 	std::unique_ptr<ListOfSoldiers> remaining_soldiers_;
 	std::unique_ptr<UI::Button> attack_button_;
-	std::unique_ptr<UI::Checkbox> do_not_conquer_;
 
 	std::unique_ptr<UI::Slider> soldiers_slider_;
 	std::unique_ptr<UI::Textarea> soldiers_text_;
 
 	std::unique_ptr<UI::Button> less_soldiers_;
 	std::unique_ptr<UI::Button> more_soldiers_;
+};
+
+/** Provides the attack settings when clicking on an enemy building. */
+class AttackWindow : public UI::UniqueWindow {
+public:
+	AttackWindow(
+	   InteractivePlayer& parent,
+	   UI::UniqueWindow::Registry&,
+	   Widelands::MapObject* target_building_or_ship,
+	   const Widelands::Coords& target_coords,  // not necessarily the building's main location
+	   bool fastclick);
+	~AttackWindow() override;
+
+	static UI::Window& load(FileRead&, InteractiveBase&, Widelands::MapObjectLoader& mol);
+
+	bool get_allow_conquer() const {
+		return do_not_conquer_ && !do_not_conquer_->get_state();
+	}
+
+protected:
+	void think() override;
+
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kAttackWindow;
+	}
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+
+private:
+	std::vector<Widelands::OPtr<Widelands::Bob>> get_max_attackers();
+
+	void act_attack();
+	void act_goto();
+	void act_debug();
+
+	const unsigned serial_;
+
+	InteractivePlayer& iplayer_;
+	const Widelands::Map& map_;
+	Widelands::OPtr<Widelands::MapObject> target_building_or_ship_;
+	Widelands::Coords target_coordinates_;
+
+	const AttackPanel::AttackType attack_type_;
+
+	[[nodiscard]] Widelands::Building* get_building() const {
+		return attack_type_ != AttackPanel::AttackType::kBuilding ?
+                nullptr :
+                dynamic_cast<Widelands::Building*>(target_building_or_ship_.get(iplayer_.egbase()));
+	}
+	[[nodiscard]] Widelands::Ship* get_ship() const {
+		return attack_type_ != AttackPanel::AttackType::kShip ?
+                nullptr :
+                dynamic_cast<Widelands::Ship*>(target_building_or_ship_.get(iplayer_.egbase()));
+	}
+	[[nodiscard]] bool is_naval_invasion() const {
+		return attack_type_ == AttackPanel::AttackType::kNavalInvasion;
+	}
+
+	void init_bottombox();
+
+	UI::Box mainbox_;
+	AttackPanel attack_panel_;
+	UI::Box bottombox_;
+	std::unique_ptr<UI::Checkbox> do_not_conquer_;
 };
 
 #endif  // end of include guard: WL_WUI_ATTACK_WINDOW_H

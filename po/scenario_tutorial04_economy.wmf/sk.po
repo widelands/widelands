@@ -102,7 +102,7 @@ msgstr "Otvorte okno Štatistika budov pre prehľad o vašich budovách."
 msgid ""
 "First, you will have to open the ‘Statistics’ menu at the bottom of the "
 "screen."
-msgstr ""
+msgstr "Najskôr otvorte menu „Štatistika“ naspodku obrazovky."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:52
 msgid "Afterwards, choose ‘Buildings’."
@@ -111,7 +111,7 @@ msgstr "Následne vyberte „Budovy“."
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:53
 #, lua-format
 msgid "You can also use the hotkey ‘%s’."
-msgstr ""
+msgstr "Tiež môžete použiť klávesovú skratku „%s“."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:58
 msgid "Building statistics"
@@ -243,7 +243,7 @@ msgstr "Znovu ho otvorte a kliknite na druhú kartu (stredné budovy)."
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:121
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:123
 msgid "Open your stock window"
-msgstr ""
+msgstr "Otvorte okno Zásoby"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:124
 msgid ""
@@ -376,7 +376,7 @@ msgstr "V opačnom prípade ho znovu otvorte a kliknite na tretiu kartu."
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:223
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:225
 msgid "Build new taverns"
-msgstr ""
+msgstr "Postavte nové krčmy"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:226
 msgid "Build at least two taverns."
@@ -429,7 +429,7 @@ msgstr "Encyklopédia"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:255
 msgid "How to get help"
-msgstr ""
+msgstr "Ako získať pomoc"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:257
 msgid ""
@@ -448,7 +448,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:266
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:268
 msgid "Look up which wares are needed to recruit soldiers"
-msgstr ""
+msgstr "Vyhľadajte, ktoré výrobky sú potrebné na vycvičenie vojakov"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:269
 msgid ""

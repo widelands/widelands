@@ -34,7 +34,7 @@
 namespace Widelands {
 
 namespace {
-constexpr uint32_t kCurrentPacketVersion = 5;
+constexpr uint32_t kCurrentPacketVersion = 5;  // since v1.0
 
 // Write all .lua files that exist in the given 'path' in 'map_fs' to the 'target_fs'.
 void write_lua_dir(FileSystem& target_fs, FileSystem* map_fs, const std::string& path) {
@@ -61,16 +61,14 @@ void write_tribes_dir(FileSystem& target_fs, FileSystem* map_fs, const std::stri
 		} else {
 			// Write file
 			const std::string filename(FileSystem::fs_filename(file.c_str()));
-			// TODO(GunChleoc): Savegame compatibility, forbid "helptexts.lua" after v1.0
-			if (filename == "init.lua" || filename == "register.lua" || filename == "helptexts.lua" ||
-			    ends_with(filename, ".png")) {
+			if (filename == "init.lua" || filename == "register.lua" || ends_with(filename, ".png")) {
 				size_t length;
 				void* input_data = map_fs->load(file, length);
 				target_fs.write(file, input_data, length);
 				free(input_data);
 			} else {
 				log_warn("File name '%s' is not allowed in scenario tribes – expecting "
-				         "'init.lua', 'register.lua', 'helptexts.lua' or a *.png file\n",
+				         "'init.lua', 'register.lua' or a *.png file\n",
 				         file.c_str());
 			}
 		}
@@ -100,13 +98,10 @@ void MapScriptingPacket::read(FileSystem& fs,
 	if (egbase.is_game() && fr.try_open(fs, "scripting/globals.dump")) {
 		try {
 			const uint32_t packet_version = fr.unsigned_32();
-			if (packet_version >= 4 && packet_version <= kCurrentPacketVersion) {
+			if (packet_version >= 5 && packet_version <= kCurrentPacketVersion) {
 				upcast(LuaGameInterface, lgi, &egbase.lua());
 				signal(SIGABRT, &abort_handler);
-				if (packet_version >= 5) {
-					// TODO(Nordfriese): Savegame compatibility)
-					lgi->read_textdomain_stack(fr);
-				}
+				lgi->read_textdomain_stack(fr);
 				lgi->read_global_env(fr, mol, fr.unsigned_32());
 				signal(SIGABRT, SIG_DFL);
 			} else {

@@ -132,8 +132,7 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 		no_soldier_to_train_message_ = items_table->get_string("no_soldier");
 		no_soldier_for_training_level_message_ = items_table->get_string("no_soldier_for_level");
 	} else {
-		// TODO(GunChleoc): API compatibility - require this after v1.0
-		log_warn("Training site '%s' is lacking its 'messages' table", name().c_str());
+		throw GameDataError("Training site '%s' is lacking its 'messages' table", name().c_str());
 	}
 }
 
