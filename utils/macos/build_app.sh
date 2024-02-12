@@ -106,7 +106,7 @@ EOF
    ASANPATH=`dirname $ASANLIB`
 
    echo "Copying and fixing dynamic libraries... "
-   $SOURCE_DIR/utils/macos/bundle-dylibs \
+   $SOURCE_DIR/utils/macos/bundle-dylibs.sh \
       -l ../libs \
       $DESTINATION/Widelands.app
 
