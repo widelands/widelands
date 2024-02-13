@@ -91,12 +91,16 @@ LuaInterface::~LuaInterface() {
 }
 
 void LuaInterface::interpret_string(const std::string& cmd) {
+	// TODO(tothxa): kObjects before kLua is needed because of Panel::do_run() and plugin actions
+	MutexLock o(MutexLock::ID::kObjects);
 	MutexLock m(MutexLock::ID::kLua);
 	int rv = luaL_dostring(lua_state_, cmd.c_str());
 	check_return_value_for_errors(lua_state_, rv);
 }
 
 std::unique_ptr<LuaTable> LuaInterface::run_script(const std::string& path) {
+	// TODO(tothxa): kObjects before kLua is needed because of Panel::do_run() and plugin actions
+	MutexLock o(MutexLock::ID::kObjects);
 	MutexLock m(MutexLock::ID::kLua);
 	return ::run_script(lua_state_, g_fs->fix_cross_file(path), g_fs);
 }

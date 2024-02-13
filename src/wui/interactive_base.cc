@@ -891,22 +891,6 @@ void InteractiveBase::info_panel_fast_forward_message_queue() {
 // controller's and the AI's `think()` functions) are called.
 // Also updates the stats about the logic FPS and real gamespeed.
 void InteractiveBase::game_logic_think() {
-	// First run pending plugin actions
-	const uint32_t time = SDL_GetTicks();
-	for (auto plugin = plugin_timers_.begin(); plugin != plugin_timers_.end();) {
-		if (time >= plugin->next_run) {
-			plugin->next_run = time + plugin->interval;
-			if (!plugin_action(plugin->action, plugin->failsafe)) {
-				// In case of an error, remove it from the queue
-				log_err("Unregistering defective plugin timer");
-				plugin = plugin_timers_.erase(plugin);
-				continue;
-			}
-		}
-		++plugin;
-	}
-
-	// Track game speed
 	static constexpr uint64_t kFilterTime = 1000;  // milliseconds for averaging
 
 	previous_frame_realtime_ = last_frame_realtime_;
@@ -949,8 +933,7 @@ void InteractiveBase::game_logic_think() {
 		}
 	}
 
-	// Call game logic here. The game advances.
-	egbase().think();
+	egbase().think();  // Call game logic here. The game advances.
 }
 
 void InteractiveBase::think() {
@@ -994,6 +977,20 @@ void InteractiveBase::think() {
 		}
 
 		it = wanted_building_windows_.erase(it);
+	}
+
+	const uint32_t time = SDL_GetTicks();
+	for (auto plugin = plugin_timers_.begin(); plugin != plugin_timers_.end();) {
+		if (time >= plugin->next_run) {
+			plugin->next_run = time + plugin->interval;
+			if (!plugin_action(plugin->action, plugin->failsafe)) {
+				// In case of an error, remove it from the queue
+				log_err("Unregistering defective plugin timer");
+				plugin = plugin_timers_.erase(plugin);
+				continue;
+			}
+		}
+		++plugin;
 	}
 }
 

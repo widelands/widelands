@@ -45,6 +45,8 @@ std::string get_file_content(FileSystem* fs, const std::string& filename) {
 // Runs the 'content' as a lua script identified by 'identifier' in 'L'.
 std::unique_ptr<LuaTable>
 run_string_as_script(lua_State* L, const std::string& identifier, const std::string& content) {
+	// TODO(tothxa): kObjects before kLua is needed because of Panel::do_run() and plugin actions
+	MutexLock o(MutexLock::ID::kObjects);
 	MutexLock m(MutexLock::ID::kLua);
 
 	// Get the current value of __file__

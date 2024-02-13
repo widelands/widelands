@@ -22,6 +22,8 @@
 
 #include "base/log.h"
 
+// TODO(tothxa): This may need locking kObjects before kLua,
+//               because of Panel::do_run() and plugin actions
 LuaTable::LuaTable(lua_State* L) : mutex_lock_(MutexLock::ID::kLua), L_(L) {
 	// S: <table>
 	lua_pushlightuserdata(L_, const_cast<LuaTable*>(this));  // S: this
