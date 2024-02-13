@@ -24,9 +24,7 @@
 
 LuaTable::LuaTable(lua_State* L)
    // TODO(tothxa): kObjects before kLua is needed because of Panel::do_run() and plugin actions
-   : objects_lock_(MutexLock::ID::kObjects),
-     lua_lock_(MutexLock::ID::kLua),
-     L_(L) {
+   : objects_lock_(MutexLock::ID::kObjects), lua_lock_(MutexLock::ID::kLua), L_(L) {
 	// S: <table>
 	lua_pushlightuserdata(L_, const_cast<LuaTable*>(this));  // S: this
 	lua_pushvalue(L, -2);                                    // S: <table> this <table>
