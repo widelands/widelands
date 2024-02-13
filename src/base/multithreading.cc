@@ -22,6 +22,7 @@
 #if __has_feature(address_sanitizer)
 
 // This is what GCC uses
+// NOLINTNEXTLINE
 #define __SANITIZE_ADDRESS__
 
 #endif
