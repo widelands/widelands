@@ -18,6 +18,15 @@
 
 #include "base/multithreading.h"
 
+#ifdef __clang__
+#if __has_feature(address_sanitizer)
+
+// This is what GCC uses
+#define __SANITIZE_ADDRESS__
+
+#endif
+#endif
+
 #include <atomic>
 #include <map>
 #include <memory>
@@ -25,9 +34,21 @@
 
 #include <SDL_timer.h>
 
+#ifdef __SANITIZE_ADDRESS__
+#include <sanitizer/common_interface_defs.h>
+#endif
+
 #include "base/log.h"
 #include "base/mutex.h"
 #include "base/wexception.h"
+
+namespace {
+void print_backtrace() {
+#ifdef __SANITIZE_ADDRESS__
+	__sanitizer_print_stack_trace();
+#endif
+}
+}  // namespace
 
 static const std::thread::id kNoThread;
 static std::thread::id initializer_thread(kNoThread);
@@ -213,6 +234,8 @@ void MutexLock::pop_stay_responsive_function() {
 	stay_responsive_.pop_back();
 }
 
+static std::atomic<bool> backtrace_wanted = false;
+
 MutexLock::MutexLock(const ID i) : id_(i) {
 	if (id_ == ID::kNone) {
 		return;
@@ -271,6 +294,11 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 			             thread_name(self).c_str(), to_string(id_).c_str(), now - start_time);
 		}
 
+		if (backtrace_wanted) {
+			print_backtrace();
+			backtrace_wanted = false;
+		}
+
 		if (now - last_function_call > sleeptime) {
 			{
 				std::lock_guard<std::mutex> guard(responsiveness_list_mutex_);
@@ -294,6 +322,22 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 				if (pair.second.current_owner == self &&
 				    pair.second.waiting_threads.count(record.current_owner) > 0) {
 					// Ouch! Break the deadlock by throwing an exception with a helpful message.
+
+					// First print our backtrace
+					print_backtrace();
+
+					// Now ask other thread to print its backtrace
+					backtrace_wanted = true;
+					const uint32_t backtrace_asked_for = SDL_GetTicks();
+					while (backtrace_wanted) {
+						SDL_Delay(1000);  // We're in a deadlock, we have plenty of time...
+						if (SDL_GetTicks() > backtrace_asked_for + 10000) {
+							// But there's no point in waiting forever
+							backtrace_wanted = false;  // Clean up and break out
+						}
+					}
+
+					// Finally, assemble the exception
 					std::string info = "Deadlock! ";
 					info += thread_name(self);
 					info += " is trying to lock mutex ";
