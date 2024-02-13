@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-10 02:23+0000\n"
+"POT-Creation-Date: 2024-02-12 02:27+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: abuyop <abuyop@gmail.com>, 2015,2017\n"
 "Language-Team: Malay (http://app.transifex.com/widelands/widelands/language/ms/)\n"
@@ -1995,120 +1995,126 @@ msgid "%u game-relevant add-on in use:"
 msgid_plural "%u game-relevant add-ons in use:"
 msgstr[0] ""
 
-#: ../../src/logic/detected_port_space.cc:51
-#, c-format
-msgid "northwest of %s"
+#. * TRANSLATORS: "12 steps northwest of Port1"
+#: ../../src/logic/detected_port_space.cc:52
+msgid "northwest"
 msgstr ""
 
-#: ../../src/logic/detected_port_space.cc:54
-#, c-format
-msgid "northeast of %s"
+#. * TRANSLATORS: "12 steps northeast of Port1"
+#: ../../src/logic/detected_port_space.cc:56
+msgid "northeast"
 msgstr ""
 
-#: ../../src/logic/detected_port_space.cc:57
-#, c-format
-msgid "southwest of %s"
-msgstr ""
-
+#. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../src/logic/detected_port_space.cc:60
-#, c-format
-msgid "southeast of %s"
+msgid "southwest"
 msgstr ""
 
-#: ../../src/logic/detected_port_space.cc:63
-#, c-format
-msgid "north of %s"
+#. * TRANSLATORS: "12 steps southwest of Port1"
+#: ../../src/logic/detected_port_space.cc:64
+msgid "southeast"
 msgstr ""
 
-#: ../../src/logic/detected_port_space.cc:66
-#, c-format
-msgid "south of %s"
+#. * TRANSLATORS: "12 steps north of Port1"
+#: ../../src/logic/detected_port_space.cc:68
+msgid "north"
 msgstr ""
 
-#: ../../src/logic/detected_port_space.cc:69
-#, c-format
-msgid "west of %s"
-msgstr ""
-
+#. * TRANSLATORS: "12 steps south of Port1"
 #: ../../src/logic/detected_port_space.cc:72
-#, c-format
-msgid "east of %s"
+msgid "south"
 msgstr ""
 
+#. * TRANSLATORS: "12 steps west of Port1"
+#: ../../src/logic/detected_port_space.cc:76
+msgid "west"
+msgstr ""
+
+#. * TRANSLATORS: "12 steps east of Port1"
 #: ../../src/logic/detected_port_space.cc:80
+msgid "east"
+msgstr ""
+
+#: ../../src/logic/detected_port_space.cc:88
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s"
 msgstr ""
 
-#. * TRANSLATORS: Last placeholder is "northwest/southeast/... of <port name>"
-#: ../../src/logic/detected_port_space.cc:85
+#. * TRANSLATORS: "Unowned port space discovered at 1:23 by Ship2 34 steps
+#. north of
+#. Port1"
+#: ../../src/logic/detected_port_space.cc:94
 #, c-format
-msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s"
-msgid_plural "Unowned port space discovered at %1$s by %2$s %3$u steps %4$s"
+msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s of %5$s"
+msgid_plural ""
+"Unowned port space discovered at %1$s by %2$s %3$u steps %4$s of %5$s"
 msgstr[0] ""
 
-#: ../../src/logic/detected_port_space.cc:91
+#: ../../src/logic/detected_port_space.cc:101
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s"
 msgstr ""
 
-#. * TRANSLATORS: Last placeholder is "northwest/southeast/... of <port name>"
-#: ../../src/logic/detected_port_space.cc:97
+#. * TRANSLATORS: "Port space of Player3 discovered at 1:23 by Ship2 34 steps
+#. north
+#. of Port1"
+#: ../../src/logic/detected_port_space.cc:108
 #, c-format
-msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s"
-msgid_plural "Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s"
+msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s of %6$s"
+msgid_plural ""
+"Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s of %6$s"
 msgstr[0] ""
 
 #. * TRANSLATORS: This is an abbreviated direction: Northwest.
-#: ../../src/logic/detected_port_space.cc:109
+#: ../../src/logic/detected_port_space.cc:120
 msgctxt "direction"
 msgid "NW"
 msgstr ""
 
 #. * TRANSLATORS: This is an abbreviated direction: Northeast.
-#: ../../src/logic/detected_port_space.cc:113
+#: ../../src/logic/detected_port_space.cc:124
 msgctxt "direction"
 msgid "NE"
 msgstr ""
 
 #. * TRANSLATORS: This is an abbreviated direction: Southwest.
-#: ../../src/logic/detected_port_space.cc:117
+#: ../../src/logic/detected_port_space.cc:128
 msgctxt "direction"
 msgid "SW"
 msgstr ""
 
 #. * TRANSLATORS: This is an abbreviated direction: Southeast.
-#: ../../src/logic/detected_port_space.cc:121
+#: ../../src/logic/detected_port_space.cc:132
 msgctxt "direction"
 msgid "SE"
 msgstr ""
 
 #. * TRANSLATORS: This is an abbreviated direction: North.
-#: ../../src/logic/detected_port_space.cc:125
+#: ../../src/logic/detected_port_space.cc:136
 msgctxt "direction"
 msgid "N"
 msgstr ""
 
 #. * TRANSLATORS: This is an abbreviated direction: South.
-#: ../../src/logic/detected_port_space.cc:129
+#: ../../src/logic/detected_port_space.cc:140
 msgctxt "direction"
 msgid "S"
 msgstr ""
 
 #. * TRANSLATORS: This is an abbreviated direction: West.
-#: ../../src/logic/detected_port_space.cc:133
+#: ../../src/logic/detected_port_space.cc:144
 msgctxt "direction"
 msgid "W"
 msgstr ""
 
 #. * TRANSLATORS: This is an abbreviated direction: East.
-#: ../../src/logic/detected_port_space.cc:137
+#: ../../src/logic/detected_port_space.cc:148
 msgctxt "direction"
 msgid "E"
 msgstr ""
 
 #. * TRANSLATORS: Placeholders are gametime and shipname. Keep this short.
-#: ../../src/logic/detected_port_space.cc:146
+#: ../../src/logic/detected_port_space.cc:157
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s"
@@ -2117,7 +2123,7 @@ msgstr ""
 #. * TRANSLATORS: Placeholders are gametime, shipname, and distance direction
 #. port_name.
 #. *  Keep this short.
-#: ../../src/logic/detected_port_space.cc:151
+#: ../../src/logic/detected_port_space.cc:162
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s / %3$u %4$s %5$s"
@@ -2125,7 +2131,7 @@ msgstr ""
 
 #. * TRANSLATORS: Placeholders are owner, gametime, and shipname. Keep this
 #. short.
-#: ../../src/logic/detected_port_space.cc:157
+#: ../../src/logic/detected_port_space.cc:168
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s"
@@ -2134,7 +2140,7 @@ msgstr ""
 #. * TRANSLATORS: Placeholders are owner, gametime, shipname, and "distance
 #. direction port_name.
 #. *  Keep this short.
-#: ../../src/logic/detected_port_space.cc:163
+#: ../../src/logic/detected_port_space.cc:174
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s / %4$u %5$s %6$s"

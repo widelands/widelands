@@ -3031,7 +3031,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:2065
 msgctxt "amazons"
 msgid "Worker missing"
-msgstr ""
+msgstr "Chýba pracovníčka"
 
 #. TRANSLATORS: Productivity label on an Amazon building if there is 1 worker
 #. coming
@@ -3045,14 +3045,14 @@ msgstr "Pracovníčka prichádza"
 #: ../../data/tribes/initialization/amazons/units.lua:2069
 msgctxt "amazons"
 msgid "Workers missing"
-msgstr ""
+msgstr "Chýbajú pracovníčky"
 
 #. TRANSLATORS: Productivity label on an Amazon building if there is more than
 #. 1 worker coming. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/amazons/units.lua:2071
 msgctxt "amazons"
 msgid "Workers are coming"
-msgstr ""
+msgstr "Pracovníčky prichádzajú"
 
 #. TRANSLATORS: Productivity label on an Amazon building if there is 1
 #. experienced worker missing
@@ -3075,20 +3075,20 @@ msgstr "chýbajú špecialistky"
 msgctxt "amazons_soldier"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% vojačka (+%2%)"
+msgstr[1] "%1% vojačky (+%2%)"
+msgstr[2] "%1% vojačiek (+%2%)"
+msgstr[3] "%1% vojačiek (+%2%)"
 
 #. TRANSLATORS: Number of Amazon soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/amazons/units.lua:2091
 msgctxt "amazons_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% vojačka"
+msgstr[1] "%1% vojačky"
+msgstr[2] "%1% vojačiek"
+msgstr[3] "%1% vojačiek"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
@@ -3097,10 +3097,10 @@ msgstr[3] ""
 msgctxt "amazons_soldier"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) vojačka (+%3%)"
+msgstr[1] "%1%(+%2%) vojačky (+%3%)"
+msgstr[2] "%1%(+%2%) vojačiek (+%3%)"
+msgstr[3] "%1%(+%2%) vojačiek (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building.
@@ -3108,10 +3108,10 @@ msgstr[3] ""
 msgctxt "amazons_soldier"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) vojačka"
+msgstr[1] "%1%(+%2%) vojačky"
+msgstr[2] "%1%(+%2%) vojačiek"
+msgstr[3] "%1%(+%2%) vojačiek"
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Granite, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:435
@@ -5798,7 +5798,7 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:2265
 msgctxt "atlanteans"
 msgid "Worker missing"
-msgstr ""
+msgstr "Chýba pracovník"
 
 #. TRANSLATORS: Productivity label on an Atlantean building if there is 1
 #. worker coming
@@ -5812,14 +5812,14 @@ msgstr "Pracovník prichádza"
 #: ../../data/tribes/initialization/atlanteans/units.lua:2269
 msgctxt "atlanteans"
 msgid "Workers missing"
-msgstr ""
+msgstr "Chýbajú pracovníci"
 
 #. TRANSLATORS: Productivity label on an Atlantean building if there is more
 #. than 1 worker coming. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/atlanteans/units.lua:2271
 msgctxt "atlanteans"
 msgid "Workers are coming"
-msgstr ""
+msgstr "Pracovníci prichádzajú"
 
 #. TRANSLATORS: Productivity label on an Atlantean building if there is 1
 #. experienced worker missing
@@ -5842,20 +5842,20 @@ msgstr "chýbajú špecialisti"
 msgctxt "atlanteans_soldier"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% vojak (+%2%)"
+msgstr[1] "%1% vojaci (+%2%)"
+msgstr[2] "%1% vojakov (+%2%)"
+msgstr[3] "%1% vojakov (+%2%)"
 
 #. TRANSLATORS: Number of Atlantean soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/atlanteans/units.lua:2291
 msgctxt "atlanteans_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% vojak"
+msgstr[1] "%1% vojaci"
+msgstr[2] "%1% vojakov"
+msgstr[3] "%1% vojakov"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -5864,10 +5864,10 @@ msgstr[3] ""
 msgctxt "atlanteans_soldier"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) vojak (+%3%)"
+msgstr[1] "%1%(+%2%) vojaci (+%3%)"
+msgstr[2] "%1%(+%2%) vojakov (+%3%)"
+msgstr[3] "%1%(+%2%) vojakov (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -5875,10 +5875,10 @@ msgstr[3] ""
 msgctxt "atlanteans_soldier"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) vojak"
+msgstr[1] "%1%(+%2%) vojaci"
+msgstr[2] "%1%(+%2%) vojakov"
+msgstr[3] "%1%(+%2%) vojakov"
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Granite, part 2
 #: ../../data/tribes/initialization/barbarians/units.lua:102
@@ -9922,7 +9922,7 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:2574
 msgctxt "barbarians"
 msgid "Worker missing"
-msgstr ""
+msgstr "Chýba pracovník"
 
 #. TRANSLATORS: Productivity label on a Barbarian building if there is 1
 #. worker coming
@@ -9936,14 +9936,14 @@ msgstr "Pracovník prichádza"
 #: ../../data/tribes/initialization/barbarians/units.lua:2578
 msgctxt "barbarians"
 msgid "Workers missing"
-msgstr ""
+msgstr "Chýbajú pracovníci"
 
 #. TRANSLATORS: Productivity label on a Barbarian building if there is more
 #. than 1 worker coming. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/barbarians/units.lua:2580
 msgctxt "barbarians"
 msgid "Workers are coming"
-msgstr ""
+msgstr "Pracovníci prichádzajú"
 
 #. TRANSLATORS: Productivity label on a Barbarian building if there is 1
 #. experienced worker missing
@@ -9966,20 +9966,20 @@ msgstr "chýbajú špecialisti"
 msgctxt "barbarians_soldier"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% vojak (+%2%)"
+msgstr[1] "%1% vojaci (+%2%)"
+msgstr[2] "%1% vojakov (+%2%)"
+msgstr[3] "%1% vojakov (+%2%)"
 
 #. TRANSLATORS: Number of Barbarian soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/barbarians/units.lua:2600
 msgctxt "barbarians_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% vojak"
+msgstr[1] "%1% vojaci"
+msgstr[2] "%1% vojakov"
+msgstr[3] "%1% vojakov"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -9988,10 +9988,10 @@ msgstr[3] ""
 msgctxt "barbarians_soldier"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) vojak (+%3%)"
+msgstr[1] "%1%(+%2%) vojaci (+%3%)"
+msgstr[2] "%1%(+%2%) vojakov (+%3%)"
+msgstr[3] "%1%(+%2%) vojakov (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -9999,10 +9999,10 @@ msgstr[3] ""
 msgctxt "barbarians_soldier"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) vojak"
+msgstr[1] "%1%(+%2%) vojaci"
+msgstr[2] "%1%(+%2%) vojakov"
+msgstr[3] "%1%(+%2%) vojakov"
 
 #. TRANSLATORS: Format string for a latin quote and its translation
 #: ../../data/tribes/initialization/empire/units.lua:12
@@ -13331,7 +13331,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:2723
 msgctxt "empire"
 msgid "Worker missing"
-msgstr ""
+msgstr "Chýba pracovník"
 
 #. TRANSLATORS: Productivity label on an Empire building if there is 1 worker
 #. coming
@@ -13345,14 +13345,14 @@ msgstr "Pracovník prichádza"
 #: ../../data/tribes/initialization/empire/units.lua:2727
 msgctxt "empire"
 msgid "Workers missing"
-msgstr ""
+msgstr "Chýbajú pracovníci"
 
 #. TRANSLATORS: Productivity label on an Empire building if there is more than
 #. 1 worker coming. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/empire/units.lua:2729
 msgctxt "empire"
 msgid "Workers are coming"
-msgstr ""
+msgstr "Pracovníci prichádzajú"
 
 #. TRANSLATORS: Productivity label on an Empire building if there is 1
 #. experienced worker missing
@@ -13375,20 +13375,20 @@ msgstr "chýbajú špecialisti"
 msgctxt "empire_soldier"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% vojak (+%2%)"
+msgstr[1] "%1% vojaci (+%2%)"
+msgstr[2] "%1% vojakov (+%2%)"
+msgstr[3] "%1% vojakov (+%2%)"
 
 #. TRANSLATORS: Number of Empire soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/empire/units.lua:2749
 msgctxt "empire_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% vojak"
+msgstr[1] "%1% vojaci"
+msgstr[2] "%1% vojakov"
+msgstr[3] "%1% vojakov"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
@@ -13397,10 +13397,10 @@ msgstr[3] ""
 msgctxt "empire_soldier"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) vojak (+%3%)"
+msgstr[1] "%1%(+%2%) vojaci (+%3%)"
+msgstr[2] "%1%(+%2%) vojakov (+%3%)"
+msgstr[3] "%1%(+%2%) vojakov (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building.
@@ -13408,10 +13408,10 @@ msgstr[3] ""
 msgctxt "empire_soldier"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) vojak"
+msgstr[1] "%1%(+%2%) vojaci"
+msgstr[2] "%1%(+%2%) vojakov"
+msgstr[3] "%1%(+%2%) vojakov"
 
 #. TRANSLATORS: Helptext for a Frisian ware: Log, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:101
@@ -15919,7 +15919,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2404
 msgctxt "frisians"
 msgid "Worker missing"
-msgstr ""
+msgstr "Chýba pracovník"
 
 #. TRANSLATORS: Productivity label on a Frisian building if there is 1 worker
 #. coming
@@ -15933,14 +15933,14 @@ msgstr "Pracovník prichádza"
 #: ../../data/tribes/initialization/frisians/units.lua:2408
 msgctxt "frisians"
 msgid "Workers missing"
-msgstr ""
+msgstr "Chýbajú pracovníci"
 
 #. TRANSLATORS: Productivity label on a Frisian building if there is more than
 #. 1 worker coming. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/frisians/units.lua:2410
 msgctxt "frisians"
 msgid "Workers are coming"
-msgstr ""
+msgstr "Pracovníci prichádzajú"
 
 #. TRANSLATORS: Productivity label on a Frisian building if there is 1
 #. experienced worker missing
@@ -15963,20 +15963,20 @@ msgstr "chýbajú špecialisti"
 msgctxt "frisians_soldier"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% vojak (+%2%)"
+msgstr[1] "%1% vojaci (+%2%)"
+msgstr[2] "%1% vojakov (+%2%)"
+msgstr[3] "%1% vojakov (+%2%)"
 
 #. TRANSLATORS: Number of Frisian soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/frisians/units.lua:2430
 msgctxt "frisians_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% vojak"
+msgstr[1] "%1% vojaci"
+msgstr[2] "%1% vojakov"
+msgstr[3] "%1% vojakov"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -15985,10 +15985,10 @@ msgstr[3] ""
 msgctxt "frisians_soldier"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) vojak (+%3%)"
+msgstr[1] "%1%(+%2%) vojaci (+%3%)"
+msgstr[2] "%1%(+%2%) vojakov (+%3%)"
+msgstr[3] "%1%(+%2%) vojakov (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -15996,10 +15996,10 @@ msgstr[3] ""
 msgctxt "frisians_soldier"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) vojak"
+msgstr[1] "%1%(+%2%) vojaci"
+msgstr[2] "%1%(+%2%) vojakov"
+msgstr[3] "%1%(+%2%) vojakov"
 
 #. TRANSLATORS: Lore helptext for a building - it hasn't been written yet.
 #. TRANSLATORS: Purpose helptext for a building - it hasn't been written yet.

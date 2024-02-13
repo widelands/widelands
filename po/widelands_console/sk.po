@@ -294,7 +294,7 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:184
 msgid "Display system time in the info panel."
-msgstr "Zobraziť systémový čas v informačnom paneli"
+msgstr "Zobraziť systémový čas v informačnom paneli."
 
 #: ../../src/wlapplication_messages.cc:185
 msgid "Use single watchwindow mode."

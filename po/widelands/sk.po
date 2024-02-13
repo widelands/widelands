@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-10 02:23+0000\n"
+"POT-Creation-Date: 2024-02-12 02:27+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Pavol Gono, 2024\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
@@ -165,7 +165,7 @@ msgstr "pravda"
 #: ../../src/base/format/float_node.h:33
 msgctxt "decimal_separator"
 msgid "."
-msgstr ""
+msgstr ","
 
 #. * TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably
@@ -182,7 +182,7 @@ msgstr "%1%%2%"
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:94
 msgid "Jan"
-msgstr "1."
+msgstr "jan"
 
 #. * TRANSLATORS: February. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -191,7 +191,7 @@ msgstr "1."
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:100
 msgid "Feb"
-msgstr "2."
+msgstr "feb"
 
 #. * TRANSLATORS: March. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -200,7 +200,7 @@ msgstr "2."
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:106
 msgid "Mar"
-msgstr "3."
+msgstr "mar"
 
 #. * TRANSLATORS: April. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -209,7 +209,7 @@ msgstr "3."
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:112
 msgid "Apr"
-msgstr "4."
+msgstr "apr"
 
 #. * TRANSLATORS: May. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -218,7 +218,7 @@ msgstr "4."
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:118
 msgid "May"
-msgstr "5."
+msgstr "máj"
 
 #. * TRANSLATORS: June. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -227,7 +227,7 @@ msgstr "5."
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:124
 msgid "Jun"
-msgstr "6."
+msgstr "jún"
 
 #. * TRANSLATORS: July. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -236,7 +236,7 @@ msgstr "6."
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:130
 msgid "Jul"
-msgstr "7."
+msgstr "júl"
 
 #. * TRANSLATORS: August. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -245,7 +245,7 @@ msgstr "7."
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:136
 msgid "Aug"
-msgstr "8."
+msgstr "aug"
 
 #. * TRANSLATORS: September. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -254,7 +254,7 @@ msgstr "8."
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:142
 msgid "Sep"
-msgstr "9."
+msgstr "sep"
 
 #. * TRANSLATORS: October. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -263,7 +263,7 @@ msgstr "9."
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:148
 msgid "Oct"
-msgstr "10."
+msgstr "okt"
 
 #. * TRANSLATORS: November. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -272,7 +272,7 @@ msgstr "10."
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:154
 msgid "Nov"
-msgstr "11."
+msgstr "nov"
 
 #. * TRANSLATORS: December. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -280,7 +280,7 @@ msgstr "11."
 #. * TRANSLATORS: definition if there is one for your language.
 #: ../../src/base/time_string.cc:159
 msgid "Dec"
-msgstr "12."
+msgstr "dec"
 
 #. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
@@ -484,7 +484,7 @@ msgstr "Nastav počet hráčov, ich mená, kmene a štartovacie pozície"
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:368
 msgid "Map origin"
-msgstr "Pôvod mapy"
+msgstr "Počiatočný bod mapy"
 
 #. * TRANSLATORS: Tooltip for the map origin tool in the editor
 #: ../../src/editor/editorinteractive.cc:371
@@ -1184,7 +1184,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:421
 msgctxt "map_theme"
 msgid "(none)"
-msgstr ""
+msgstr "(žiadna)"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:432
 msgid "Ferry range:"
@@ -1202,7 +1202,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:451
 #: ../../src/ui_fsmenu/mousewheel_options.cc:57
 msgid "Disabled"
-msgstr "Zablokované"
+msgstr "Zakázané"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:473
 #, c-format
@@ -1254,7 +1254,7 @@ msgstr "Vytvára sa prázdna mapa…"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:63
 #: ../../src/logic/addons.cc:59
 msgid "Map Generator"
-msgstr ""
+msgstr "Generátor máp"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:81
 #: ../../src/wui/gamedetails.cc:169
@@ -1322,7 +1322,7 @@ msgstr "Náhodné číslo:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:235
 msgid "Generate a new random number"
-msgstr ""
+msgstr "Generovať nové náhodné číslo"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:244
 msgid "Map ID:"
@@ -1562,7 +1562,7 @@ msgstr "Voľby výškových nástrojov"
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:53
 msgid "Increase/Decrease height by:"
-msgstr ""
+msgstr "Zvýšiť/znížiť výšku o:"
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:66
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:79
@@ -1704,7 +1704,7 @@ msgstr "Veľkosť:"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:64
 msgid "Gaps:"
-msgstr ""
+msgstr "Medzery:"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:67
 msgid "Radius of the active tool"
@@ -1897,7 +1897,7 @@ msgstr "Kmene"
 
 #: ../../src/logic/addons.cc:52
 msgid "World"
-msgstr ""
+msgstr "Svet"
 
 #: ../../src/logic/addons.cc:54
 msgid "Script"
@@ -1905,7 +1905,7 @@ msgstr "Skript"
 
 #: ../../src/logic/addons.cc:56
 msgid "Map Set"
-msgstr ""
+msgstr "Mapy"
 
 #. * TRANSLATORS: Header for campaign name
 #: ../../src/logic/addons.cc:61 ../../src/ui_fsmenu/campaigndetails.cc:48
@@ -1918,7 +1918,7 @@ msgstr "Podmienka výhry"
 
 #: ../../src/logic/addons.cc:67
 msgid "Starting Condition"
-msgstr ""
+msgstr "Počiatočné podmienky"
 
 #: ../../src/logic/addons.cc:72
 msgid "UI Plugin"
@@ -1927,7 +1927,7 @@ msgstr ""
 #: ../../src/logic/addons.cc:112
 #, c-format
 msgid "%1$s.%2$u"
-msgstr ""
+msgstr "%1$s.%2$u"
 
 #: ../../src/logic/addons.cc:209
 msgid "No conflicts"
@@ -2006,137 +2006,143 @@ msgstr "%1$s<br>• %2$s (verzia %3$s)"
 
 #: ../../src/logic/addons.cc:305
 msgid "No game-relevant add-ons in use."
-msgstr ""
+msgstr "Žiaden použitý doplnok týkajúci sa hry."
 
 #: ../../src/logic/addons.cc:310
 #, c-format
 msgid "%u game-relevant add-on in use:"
 msgid_plural "%u game-relevant add-ons in use:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%u použitý doplnok týkajúci sa hry:"
+msgstr[1] "%u použité doplnky týkajúce sa hry:"
+msgstr[2] "%u použitých doplnkov týkajúcich sa hry:"
+msgstr[3] "%u použitých doplnkov týkajúcich sa hry:"
 
-#: ../../src/logic/detected_port_space.cc:51
-#, c-format
-msgid "northwest of %s"
+#. * TRANSLATORS: "12 steps northwest of Port1"
+#: ../../src/logic/detected_port_space.cc:52
+msgid "northwest"
 msgstr ""
 
-#: ../../src/logic/detected_port_space.cc:54
-#, c-format
-msgid "northeast of %s"
+#. * TRANSLATORS: "12 steps northeast of Port1"
+#: ../../src/logic/detected_port_space.cc:56
+msgid "northeast"
 msgstr ""
 
-#: ../../src/logic/detected_port_space.cc:57
-#, c-format
-msgid "southwest of %s"
-msgstr ""
-
+#. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../src/logic/detected_port_space.cc:60
-#, c-format
-msgid "southeast of %s"
+msgid "southwest"
 msgstr ""
 
-#: ../../src/logic/detected_port_space.cc:63
-#, c-format
-msgid "north of %s"
+#. * TRANSLATORS: "12 steps southwest of Port1"
+#: ../../src/logic/detected_port_space.cc:64
+msgid "southeast"
 msgstr ""
 
-#: ../../src/logic/detected_port_space.cc:66
-#, c-format
-msgid "south of %s"
+#. * TRANSLATORS: "12 steps north of Port1"
+#: ../../src/logic/detected_port_space.cc:68
+msgid "north"
 msgstr ""
 
-#: ../../src/logic/detected_port_space.cc:69
-#, c-format
-msgid "west of %s"
-msgstr ""
-
+#. * TRANSLATORS: "12 steps south of Port1"
 #: ../../src/logic/detected_port_space.cc:72
-#, c-format
-msgid "east of %s"
+msgid "south"
 msgstr ""
 
+#. * TRANSLATORS: "12 steps west of Port1"
+#: ../../src/logic/detected_port_space.cc:76
+msgid "west"
+msgstr ""
+
+#. * TRANSLATORS: "12 steps east of Port1"
 #: ../../src/logic/detected_port_space.cc:80
+msgid "east"
+msgstr ""
+
+#: ../../src/logic/detected_port_space.cc:88
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s"
 msgstr ""
 
-#. * TRANSLATORS: Last placeholder is "northwest/southeast/... of <port name>"
-#: ../../src/logic/detected_port_space.cc:85
+#. * TRANSLATORS: "Unowned port space discovered at 1:23 by Ship2 34 steps
+#. north of
+#. Port1"
+#: ../../src/logic/detected_port_space.cc:94
 #, c-format
-msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s"
-msgid_plural "Unowned port space discovered at %1$s by %2$s %3$u steps %4$s"
+msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s of %5$s"
+msgid_plural ""
+"Unowned port space discovered at %1$s by %2$s %3$u steps %4$s of %5$s"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: ../../src/logic/detected_port_space.cc:91
+#: ../../src/logic/detected_port_space.cc:101
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s"
 msgstr ""
 
-#. * TRANSLATORS: Last placeholder is "northwest/southeast/... of <port name>"
-#: ../../src/logic/detected_port_space.cc:97
+#. * TRANSLATORS: "Port space of Player3 discovered at 1:23 by Ship2 34 steps
+#. north
+#. of Port1"
+#: ../../src/logic/detected_port_space.cc:108
 #, c-format
-msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s"
-msgid_plural "Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s"
+msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s of %6$s"
+msgid_plural ""
+"Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s of %6$s"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
 #. * TRANSLATORS: This is an abbreviated direction: Northwest.
-#: ../../src/logic/detected_port_space.cc:109
+#: ../../src/logic/detected_port_space.cc:120
 msgctxt "direction"
 msgid "NW"
 msgstr "SZ"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northeast.
-#: ../../src/logic/detected_port_space.cc:113
+#: ../../src/logic/detected_port_space.cc:124
 msgctxt "direction"
 msgid "NE"
 msgstr "SV"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southwest.
-#: ../../src/logic/detected_port_space.cc:117
+#: ../../src/logic/detected_port_space.cc:128
 msgctxt "direction"
 msgid "SW"
 msgstr "JZ"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southeast.
-#: ../../src/logic/detected_port_space.cc:121
+#: ../../src/logic/detected_port_space.cc:132
 msgctxt "direction"
 msgid "SE"
 msgstr "JV"
 
 #. * TRANSLATORS: This is an abbreviated direction: North.
-#: ../../src/logic/detected_port_space.cc:125
+#: ../../src/logic/detected_port_space.cc:136
 msgctxt "direction"
 msgid "N"
 msgstr "S"
 
 #. * TRANSLATORS: This is an abbreviated direction: South.
-#: ../../src/logic/detected_port_space.cc:129
+#: ../../src/logic/detected_port_space.cc:140
 msgctxt "direction"
 msgid "S"
 msgstr "J"
 
 #. * TRANSLATORS: This is an abbreviated direction: West.
-#: ../../src/logic/detected_port_space.cc:133
+#: ../../src/logic/detected_port_space.cc:144
 msgctxt "direction"
 msgid "W"
 msgstr "Z"
 
 #. * TRANSLATORS: This is an abbreviated direction: East.
-#: ../../src/logic/detected_port_space.cc:137
+#: ../../src/logic/detected_port_space.cc:148
 msgctxt "direction"
 msgid "E"
 msgstr "V"
 
 #. * TRANSLATORS: Placeholders are gametime and shipname. Keep this short.
-#: ../../src/logic/detected_port_space.cc:146
+#: ../../src/logic/detected_port_space.cc:157
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s"
@@ -2145,7 +2151,7 @@ msgstr ""
 #. * TRANSLATORS: Placeholders are gametime, shipname, and distance direction
 #. port_name.
 #. *  Keep this short.
-#: ../../src/logic/detected_port_space.cc:151
+#: ../../src/logic/detected_port_space.cc:162
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s / %3$u %4$s %5$s"
@@ -2153,7 +2159,7 @@ msgstr ""
 
 #. * TRANSLATORS: Placeholders are owner, gametime, and shipname. Keep this
 #. short.
-#: ../../src/logic/detected_port_space.cc:157
+#: ../../src/logic/detected_port_space.cc:168
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s"
@@ -2162,7 +2168,7 @@ msgstr ""
 #. * TRANSLATORS: Placeholders are owner, gametime, shipname, and "distance
 #. direction port_name.
 #. *  Keep this short.
-#: ../../src/logic/detected_port_space.cc:163
+#: ../../src/logic/detected_port_space.cc:174
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s / %4$u %5$s %6$s"
@@ -2666,7 +2672,7 @@ msgstr ""
 #: ../../src/logic/map_objects/tribes/ship.cc:1303
 #: ../../src/logic/map_objects/tribes/ship.cc:1560
 msgid "Naval Attack"
-msgstr ""
+msgstr "Námorný útok"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1304
 #, c-format
@@ -2908,14 +2914,14 @@ msgstr "Budovy"
 #. missing
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:236
 msgid "Worker missing"
-msgstr ""
+msgstr "Chýba pracovník"
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. worker missing.
 #. If you need plural forms here, please let us know.
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:241
 msgid "Workers missing"
-msgstr ""
+msgstr "Chýbajú pracovníci"
 
 #. * TRANSLATORS: Productivity label on a building if there is 1 worker coming
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:245
@@ -2927,7 +2933,7 @@ msgstr "Pracovník prichádza"
 #. you need plural forms here, please let us know.
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:250
 msgid "Workers are coming"
-msgstr ""
+msgstr "Pracovníci prichádzajú"
 
 #. * TRANSLATORS: Productivity label on a building if there is 1
 #. experienced worker missing.
@@ -4168,20 +4174,20 @@ msgstr[3] "%d pixelov"
 msgctxt "spinbox_change"
 msgid "%d field"
 msgid_plural "%d fields"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d políčko"
+msgstr[1] "%d políčka"
+msgstr[2] "%d políčok"
+msgstr[3] "%d políčok"
 
 #. * TRANSLATORS: The current value of a spinbox
 #: ../../src/ui_basic/spinbox.cc:570
 #, c-format
 msgid "%d field"
 msgid_plural "%d fields"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d políčko"
+msgstr[1] "%d políčka"
+msgstr[2] "%d políčok"
+msgstr[3] "%d políčok"
 
 #. * TRANSLATORS: "Increase/Decrease the value by <n>%"
 #. You may want to treat this as "by <n>%", depending on how you
@@ -4341,17 +4347,17 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/manager.cc:89
 msgctxt "quality"
 msgid "Any"
-msgstr ""
+msgstr "Ľubovoľná"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:89
 msgid "Quality not yet evaluated"
-msgstr ""
+msgstr "Kvalita ešte nebola hodnotená"
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../src/ui_fsmenu/addons/manager.cc:95
 msgctxt "quality"
 msgid "Poor"
-msgstr ""
+msgstr "Slabá"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:96
 msgid "This add-on may cause major glitches and errors."
@@ -4361,7 +4367,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/manager.cc:102
 msgctxt "quality"
 msgid "Good"
-msgstr ""
+msgstr "Dobrá"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:102
 msgid "This add-on works as advertised."
@@ -4371,7 +4377,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/manager.cc:107
 msgctxt "quality"
 msgid "Excellent"
-msgstr ""
+msgstr "Výborná"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:108
 msgid "This add-on has been decorated for its remarkably high quality."
@@ -4395,7 +4401,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:230
 msgid "Minimum quality"
-msgstr ""
+msgstr "Minimálna kvalita"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:241
 msgid "Choose add-on to upload…"
@@ -4745,7 +4751,7 @@ msgstr[3] ""
 #: ../../src/ui_fsmenu/addons/manager.cc:1169
 #, c-format
 msgid "• %s"
-msgstr ""
+msgstr "• %s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1205
 #, c-format
@@ -4825,7 +4831,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/manager.cc:1489
 #: ../../src/ui_fsmenu/addons/manager.cc:1551
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1456
 #, c-format
@@ -5553,7 +5559,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:140
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:301
 msgid "Uninstall"
-msgstr ""
+msgstr "Odinštalovať"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:46
 #, c-format
@@ -5604,12 +5610,12 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:150
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:201
 msgid "Disable"
-msgstr ""
+msgstr "Zakázať"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:150
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:201
 msgid "Enable"
-msgstr ""
+msgstr "Povoliť"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:166
@@ -5647,12 +5653,12 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:283
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:403
 msgid "Install"
-msgstr ""
+msgstr "Inštalovať"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:292
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:430
 msgid "Upgrade"
-msgstr ""
+msgstr "Aktualizovať"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:310
 msgid "Comments and Votes"
@@ -6419,7 +6425,7 @@ msgstr "Sledovať záznam starej hry"
 
 #: ../../src/ui_fsmenu/main.cc:464
 msgid "Watch last saved replay"
-msgstr ""
+msgstr "Sledovať naposledy uložený záznam"
 
 #: ../../src/ui_fsmenu/main.cc:490
 msgid "Single Player…"
@@ -6435,7 +6441,7 @@ msgstr "Editor…"
 
 #: ../../src/ui_fsmenu/main.cc:493
 msgid "Watch Replay…"
-msgstr ""
+msgstr "Sledovať záznam…"
 
 #: ../../src/ui_fsmenu/main.cc:495
 msgid "Begin or load a single-player campaign or free game"
@@ -6451,7 +6457,7 @@ msgstr "Spustiť editor máp"
 
 #: ../../src/ui_fsmenu/main.cc:504
 msgid "Watch again a recorded earlier game"
-msgstr ""
+msgstr "Znovu sledovať zaznamenanú hru"
 
 #: ../../src/ui_fsmenu/main.cc:507 ../../src/wlapplication_options.cc:333
 msgid "Add-Ons"
@@ -7294,7 +7300,7 @@ msgstr "Operačný systém:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:95
 msgid "Compiled with SDL version:"
-msgstr ""
+msgstr "Kompilované s verziou SDL:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:102
 msgid "Using SDL version:"
@@ -7302,7 +7308,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/tech_info.cc:108
 msgid "SDL video driver:"
-msgstr ""
+msgstr "Ovládač videa SDL:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:113
 msgid "SDL horizontal scroll:"
@@ -7350,7 +7356,7 @@ msgstr "Kopírovať"
 
 #: ../../src/ui_fsmenu/tech_info.cc:239
 msgid "Copy the technical report to the clipboard"
-msgstr ""
+msgstr "Kopírovať technické informácie do schránky"
 
 #. * TRANSLATORS: Window Title in Options
 #: ../../src/ui_fsmenu/training_wheel_options.cc:42
@@ -7677,7 +7683,7 @@ msgstr "Sledovať záznam"
 
 #: ../../src/wlapplication_options.cc:268
 msgid "Watch Latest Replay"
-msgstr ""
+msgstr "Sledovať najnovší záznam"
 
 #: ../../src/wlapplication_options.cc:287
 msgid "Singleplayer"
@@ -7781,11 +7787,11 @@ msgstr "Obnoviť priblíženie"
 
 #: ../../src/wlapplication_options.cc:447
 msgid "Jump to Next Location"
-msgstr ""
+msgstr "Ísť na nasledujúcu pozíciu"
 
 #: ../../src/wlapplication_options.cc:452
 msgid "Jump to Previous Location"
-msgstr ""
+msgstr "Ísť na predchádzajúcu pozíciu"
 
 #: ../../src/wlapplication_options.cc:466
 msgid "Publish Map Online"
@@ -7829,7 +7835,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:523
 msgid "Map Origin Tool"
-msgstr ""
+msgstr "Nástroj počiatočného bodu mapy"
 
 #: ../../src/wlapplication_options.cc:527
 msgid "Map Size Tool"
@@ -7917,7 +7923,7 @@ msgstr "Štatistika budov"
 
 #: ../../src/wlapplication_options.cc:654
 msgid "Stock Inventory"
-msgstr ""
+msgstr "Zásoby"
 
 #: ../../src/wlapplication_options.cc:659
 #: ../../src/wui/soldier_statistics_menu.cc:148
@@ -8056,12 +8062,12 @@ msgstr "Prepnúť rýchlu navigáciu"
 #: ../../src/wlapplication_options.cc:836
 #, c-format
 msgid "Set Landmark #%d"
-msgstr ""
+msgstr "Nastaviť orientačný bod #%d"
 
 #: ../../src/wlapplication_options.cc:840
 #, c-format
 msgid "Go To Landmark #%d"
-msgstr ""
+msgstr "Ísť na orientačný bod #%d"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #. * TRANSLATORS: An entry in the game's main menu
@@ -8939,11 +8945,11 @@ msgstr ""
 
 #: ../../src/wui/economy_options_window.cc:671
 msgid "Save Profile"
-msgstr ""
+msgstr "Ukladanie profilu"
 
 #: ../../src/wui/economy_options_window.cc:681
 msgid "Existing Profiles"
-msgstr ""
+msgstr "Existujúce profily"
 
 #: ../../src/wui/encyclopedia_window.cc:147
 #, c-format
@@ -9638,11 +9644,11 @@ msgstr "Skryť"
 
 #: ../../src/wui/info_panel.cc:211
 msgid "Move panel to bottom"
-msgstr ""
+msgstr "Presunúť panel dolu"
 
 #: ../../src/wui/info_panel.cc:211
 msgid "Move panel to top"
-msgstr ""
+msgstr "Presunúť panel hore"
 
 #: ../../src/wui/info_panel.cc:407
 msgid "Cheat mode enabled"
@@ -10329,35 +10335,35 @@ msgstr "Rýchla navigácia"
 
 #: ../../src/wui/quicknavigation.cc:174
 msgid "Go to previous location"
-msgstr ""
+msgstr "Ísť na predchádzajúcu pozíciu"
 
 #: ../../src/wui/quicknavigation.cc:186
 msgid "Go to next location"
-msgstr ""
+msgstr "Ísť na nasledujúcu pozíciu"
 
 #: ../../src/wui/quicknavigation.cc:197
 msgid "Add a new landmark"
-msgstr ""
+msgstr "Pridať nový orientačný bod"
 
 #: ../../src/wui/quicknavigation.cc:240 ../../src/wui/quicknavigation.cc:243
 msgid "Go to this landmark"
-msgstr ""
+msgstr "Ísť na tento orientačný bod"
 
 #: ../../src/wui/quicknavigation.cc:251
 msgid "View this landmark in a watch window"
-msgstr ""
+msgstr "Prezrieť si orientačný bod v sledovacom okne"
 
 #: ../../src/wui/quicknavigation.cc:265
 msgid "Unset this landmark"
-msgstr ""
+msgstr "Vymazať tento orientačný bod"
 
 #: ../../src/wui/quicknavigation.cc:275 ../../src/wui/quicknavigation.cc:278
 msgid "Set this landmark to the current map view location"
-msgstr ""
+msgstr "Nastaviť tento orientačný bod na aktuálnu pozíciu mapy"
 
 #: ../../src/wui/quicknavigation.cc:286
 msgid "Remove this landmark"
-msgstr ""
+msgstr "Odstrániť tento orientačný bod"
 
 #: ../../src/wui/savegamedeleter.cc:52
 msgid "Confirm Deleting File"
@@ -10478,7 +10484,7 @@ msgstr "uložené včera o %1%:%2%"
 #. month day, year
 #: ../../src/wui/savegameloader.cc:188
 msgid "%1% %2%, %3%"
-msgstr "%2%.%1%.%3%"
+msgstr "%2%. %1% %3%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
@@ -10487,7 +10493,7 @@ msgstr "%2%.%1%.%3%"
 #: ../../src/wui/savegameloader.cc:194
 #, c-format
 msgid "saved on %1$s %2$u, %3$u"
-msgstr "uložené %2$u.%1$s.%3$u"
+msgstr "uložené %2$u. %1$s %3$u"
 
 #. * TRANSLATORS: %1% is a map's name.
 #: ../../src/wui/savegametable.cc:47
@@ -10561,7 +10567,7 @@ msgstr "Názov súboru, ktorý sa použil pri uložení hry, po ktorom nasleduje
 #. load.
 #: ../../src/wui/savegametable.cc:179 ../../src/wui/savegametable.cc:242
 msgid "Game Mode"
-msgstr ""
+msgstr "Herný režim"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
@@ -10648,7 +10654,7 @@ msgstr "Preváža"
 #: ../../src/wui/seafaring_statistics_menu.cc:272
 msgctxt "ship_state"
 msgid "Being Refitted"
-msgstr ""
+msgstr "Bude prerobená"
 
 #: ../../src/wui/seafaring_statistics_menu.cc:426
 #, c-format

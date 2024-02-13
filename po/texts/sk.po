@@ -390,7 +390,7 @@ msgid ""
 " replay to become incompatible and to ‘go out of sync’. This is similar to "
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
-msgstr "Možnosť „Sledovať záznam“ v hlavnej ponuke vám umožňuje prehrať predošlú hru v presne rovnakej podobe, ako bola hraná. Všimnite si však, že aj malé zmeny v herných dátových súboroch alebo spúšťači Widelands môžu spôsobiť stratu kompatibility alebo synchronizácie záznamu. Je to, ako keď v sieťovej hre nastanú synchronizačné problémy pre odlišnú verziu hry jedného z hráčov."
+msgstr "Možnosť „Sledovať záznam“ v hlavnej ponuke vám umožňuje prehrať predošlú hru v presne rovnakej podobe, ako bola hraná. Všimnite si však, že aj malé zmeny v herných údajových súboroch alebo spúšťači Widelands môžu spôsobiť stratu kompatibility alebo synchronizácie záznamu. Je to, ako keď v sieťovej hre nastanú synchronizačné problémy pre odlišnú verziu hry jedného z hráčov."
 
 #: ../../data/txts/help/common_helptexts.lua:32
 #, lua-format
