@@ -15,6 +15,12 @@ run(function()
 
   fri:place_building("frisians_port", f(179, 5), false, true)
 
+  assert_false(
+    game.allow_naval_warfare,
+    "## Naval warfare is allowed when it should be disabled by template ##"
+  )
+  -- Ship refitting from lua works regardless of this setting, can't test it here
+
   for y = 20, 120, 50 do
     for x = 50, 150, 100 do
       sleep(3000)

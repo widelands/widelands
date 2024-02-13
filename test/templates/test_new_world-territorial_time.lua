@@ -42,14 +42,23 @@ run(function()
   print("Place a port for the winner to conquer some land.")
   atl:place_building("atlanteans_port", f(9, 141), false, true)
 
+  -- Test naval warfare
+
+  -- this is the actual test for the setting
+  assert_true(
+    game.allow_naval_warfare,
+    "## Naval warfare is not allowed when it should be enabled by template ##"
+  )
+
+  -- but we also do a refit, which would still work from lua if naval warfare were disabled
+  -- TODO(tothxa): this can be removed if a proper test case for naval warfare is added to test/maps
+  --               win condition duration can also be decreased then
   local timeout = game.time + 60 * 1000
   while #atl:get_buildings("atlanteans_port") < 1 and game.time < timeout do
     sleep(1000)
   end
 
   assert_true(#atl:get_buildings("atlanteans_port") >= 1, "## Port placement timed out ##")
-
-  -- Test naval warfare
 
   local ships = atl:get_ships()
   assert_true(#ships > 3, "## Too few ships for New World starting condition ##")
@@ -82,6 +91,7 @@ run(function()
 
   assert_equal("warship", ship.type, "## Refitting timed out ##")
   print("Warship is ready")
+  -- end of refit test
 
   -- Time limited win condition, let's just wait.
 end)

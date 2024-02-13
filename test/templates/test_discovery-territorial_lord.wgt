@@ -13,6 +13,7 @@ peaceful="true"
 
 fogless="false"
 custom_starting_positions="false"
+allow_naval_warfare="false"
 
 [player_1]
 tribe="amazons"
