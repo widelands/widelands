@@ -44,6 +44,7 @@
 #include "base/random.h"
 #include "base/string.h"
 #include "base/time_string.h"
+#include "base/warning.h"
 #include "base/wexception.h"
 #include "build_info.h"
 #include "config.h"
@@ -90,6 +91,7 @@
 #include "wui/game_chat_panel.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
+#include "wui/maptable.h"
 
 std::string get_executable_directory(const bool logdir) {
 	std::string executabledir;
@@ -307,8 +309,8 @@ void WLApplication::setup_homedir() {
 		// Create directory structure
 		g_fs->ensure_directory_exists("save");
 		g_fs->ensure_directory_exists("replays");
-		g_fs->ensure_directory_exists(kMapsDir + "/" + kMyMapsDir);
-		g_fs->ensure_directory_exists(kMapsDir + "/" + kDownloadedMapsDir);
+		g_fs->ensure_directory_exists(kMyMapsDirFull);
+		g_fs->ensure_directory_exists(kDownloadedMapsDirFull);
 
 		g_fs->ensure_directory_exists(kCrashDir);
 		segfault_backtrace_dir = homedir_;
@@ -658,7 +660,7 @@ static void init_one_player_from_template(unsigned p,
 	}
 }
 
-void WLApplication::init_and_run_game_from_template() {
+void WLApplication::init_and_run_game_from_template(FsMenu::MainMenu& mainmenu) {
 	AddOns::AddOnsGuard ag;
 
 	Profile profile(filename_.c_str());
@@ -700,8 +702,9 @@ void WLApplication::init_and_run_game_from_template() {
 	std::unique_ptr<GameSettingsProvider> settings;
 	std::shared_ptr<GameController> ctrl;
 	GameHost* host = nullptr;  // will be deleted by ctrl
+	FsMenu::MenuCapsule capsule(mainmenu);
 	if (multiplayer) {
-		host = new GameHost(nullptr, ctrl, get_config_string("nickname", _("nobody")),
+		host = new GameHost(&capsule, ctrl, get_config_string("nickname", _("nobody")),
 		                    Widelands::get_all_tribeinfos(nullptr), false);
 		ctrl.reset(host);
 		settings.reset(new HostGameSettingsProvider(host));
@@ -797,7 +800,7 @@ void WLApplication::init_and_run_game_from_template() {
 	try {
 		game.run(Widelands::Game::StartGameType::kMap, script_to_run_, "single_player");
 	} catch (const std::exception& e) {
-		emergency_save(nullptr, game, e.what());
+		emergency_save(&mainmenu, game, e.what());
 	}
 }
 
@@ -810,22 +813,63 @@ void WLApplication::init_and_run_game_from_template() {
 void WLApplication::run() {
 	GameLogicThread game_logic_thread(&should_die_);
 
-	std::unique_ptr<FsMenu::MainMenu> menu = check_crash_reports();
+	FsMenu::MainMenu menu(game_type_ != GameType::kNone);
 
-	if (game_type_ == GameType::kEditor) {
+	check_crash_reports(menu);
+
+	switch (game_type_) {
+	case GameType::kEditor: {
+		bool success = false;
 		g_sh->change_music(Songset::kIngame);
 		if (filename_.empty()) {
-			EditorInteractive::run_editor(nullptr, EditorInteractive::Init::kDefault);
+			success = EditorInteractive::run_editor(&menu, EditorInteractive::Init::kDefault);
 		} else {
-			EditorInteractive::run_editor(
-			   nullptr, EditorInteractive::Init::kLoadMapDirectly, filename_, script_to_run_);
+			bool have_filename = true;
+			if (use_last(filename_)) {
+				if (std::optional<MapData> map = newest_edited_map(); map.has_value()) {
+					filename_ = map->filenames.at(0);
+				} else {
+					const std::string message = _("Widelands could not find the last edited map.");
+					log_err("%s\n", message.c_str());
+
+					g_sh->change_music(Songset::kMenu);
+					menu.show_messagebox(_("No Last Edited Map"), message);
+					have_filename = false;
+				}
+			}
+
+			if (have_filename) {
+				success = EditorInteractive::run_editor(
+				   &menu, EditorInteractive::Init::kLoadMapDirectly, filename_, script_to_run_);
+			}
 		}
-	} else if (game_type_ == GameType::kReplay || game_type_ == GameType::kLoadGame) {
+
+		if (!success) {
+			menu.main_loop();
+		}
+	} break;
+
+	case GameType::kReplay:
+	case GameType::kLoadGame: {
 		Widelands::Game game;
 		std::string title;
 		std::string message;
+		g_sh->change_music(Songset::kIngame);
 		try {
-			if (game_type_ == GameType::kReplay) {
+			bool start_replay = (game_type_ == GameType::kReplay);
+			if (use_last(filename_)) {
+				std::optional<SavegameData> data = newest_saved_game_or_replay(start_replay);
+				if (data.has_value()) {
+					filename_ = data->filename;
+				} else {
+					// Parameters will be reordered by FileNotFoundError::what()
+					if (start_replay) {
+						throw FileNotFoundError("--replay", _("No last saved replay."), filename_);
+					}
+					throw FileNotFoundError("--loadgame", _("No last saved game."), filename_);
+				}
+			}
+			if (start_replay) {
 				game.run_replay(filename_, "");
 			} else {
 				game.set_ai_training_mode(get_config_bool("ai_training", false));
@@ -841,31 +885,37 @@ void WLApplication::run() {
 			title = _("Error message:");
 		}
 		if (!message.empty()) {
+			log_err("%s\n", message.c_str());
 			game.full_cleanup();
 			g_sh->change_music(Songset::kMenu);
-			FsMenu::MainMenu m(true);
-			m.show_messagebox(title, message);
-			log_err("%s\n", message.c_str());
-			m.main_loop();
+			menu.show_messagebox(title, message);
+			menu.main_loop();
 		}
-	} else if (game_type_ == GameType::kScenario) {
+	} break;
+
+	case GameType::kScenario: {
+		g_sh->change_music(Songset::kIngame);
 		Widelands::Game game;
 		try {
 			game.run_splayer_scenario_direct({filename_}, script_to_run_);
 		} catch (const std::exception& e) {
-			emergency_save(nullptr, game, e.what());
+			emergency_save(&menu, game, e.what());
 		}
-	} else if (game_type_ == GameType::kFromTemplate) {
-		init_and_run_game_from_template();
-	} else {
+	} break;
+
+	case GameType::kFromTemplate: {
+		g_sh->change_music(Songset::kIngame);
+		init_and_run_game_from_template(menu);
+	} break;
+
+	default:
+		// TODO(tothxa): This is actually never heard due to the next one replacing it immediately.
+		//               Can we delete this, and the song file too?
 		g_sh->change_music(Songset::kIntro);
 
 		g_sh->change_music(Songset::kMenu, 1000);
 
-		if (menu == nullptr) {
-			menu.reset(new FsMenu::MainMenu());
-		}
-		menu->main_loop();
+		menu.main_loop();
 	}
 
 	g_sh->stop_music(500);
@@ -1892,7 +1942,7 @@ bool WLApplication::redirect_output(std::string path) {
 	return true;
 }
 
-std::unique_ptr<FsMenu::MainMenu> WLApplication::check_crash_reports() {
+void WLApplication::check_crash_reports(FsMenu::MainMenu& menu) {
 	// First, delete very old crash reports
 	for (const std::string& filename : g_fs->filter_directory(
 	        kCrashDir, [](const std::string& fn) { return ends_with(fn, kOldCrashExtension); })) {
@@ -1911,7 +1961,7 @@ std::unique_ptr<FsMenu::MainMenu> WLApplication::check_crash_reports() {
 	FilenameSet crashes = g_fs->filter_directory(
 	   kCrashDir, [](const std::string& fn) { return ends_with(fn, kCrashExtension); });
 	if (crashes.empty()) {
-		return nullptr;
+		return;
 	}
 
 	log_info("Found %" PRIuS " unsent crash reports.\nPlease consider submitting them to the "
@@ -1921,9 +1971,8 @@ std::unique_ptr<FsMenu::MainMenu> WLApplication::check_crash_reports() {
 		log_info("- %s", filename.c_str());
 	}
 
-	std::unique_ptr<FsMenu::MainMenu> menu(new FsMenu::MainMenu(true));
-	FsMenu::CrashReportWindow reporter(*menu, crashes);
+	g_sh->change_music(Songset::kMenu);
+	menu.abort_splashscreen();
+	FsMenu::CrashReportWindow reporter(menu, crashes);
 	reporter.run<UI::Panel::Returncodes>();
-
-	return menu;
 }
