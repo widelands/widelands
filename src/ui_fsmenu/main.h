@@ -21,13 +21,11 @@
 
 #include <memory>
 
-#include "logic/map_revision.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "ui_fsmenu/menu.h"
-#include "wui/mapdata.h"
 
 namespace Widelands {
 class Game;
@@ -46,6 +44,7 @@ enum class MenuTarget {
 	kTutorial,
 	kContinueLastsave,
 	kReplay,
+	kReplayLast,
 	kOptions,
 	kAddOns,
 	kAbout,
@@ -100,10 +99,9 @@ public:
 	int16_t calc_desired_window_width(UI::Window::WindowLayoutID);
 	int16_t calc_desired_window_height(UI::Window::WindowLayoutID);
 
-	using MapEntry = std::pair<MapData, Widelands::MapVersion>;
-	static void find_maps(const std::string& directory, std::vector<MapEntry>& results);
-
 	Widelands::Game* create_safe_game(bool show_error = true);
+
+	void abort_splashscreen();
 
 protected:
 	void update_template() override;
@@ -119,7 +117,7 @@ private:
 
 	UI::Dropdown<MenuTarget> singleplayer_;
 	UI::Dropdown<MenuTarget> multiplayer_;
-	UI::Button replay_;
+	UI::Dropdown<MenuTarget> replay_;
 	UI::Dropdown<MenuTarget> editor_;
 	UI::Button addons_;
 	UI::Button options_;
@@ -129,7 +127,9 @@ private:
 	UI::Textarea version_;
 	UI::Textarea copyright_;
 
-	std::string filename_for_continue_playing_, filename_for_continue_editing_;
+	std::string filename_for_continue_playing_;
+	std::string filename_for_continue_editing_;
+	std::string filename_for_last_replay_;
 
 	const Image* splashscreen_;
 	const Image* title_image_;

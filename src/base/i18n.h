@@ -113,6 +113,15 @@ std::string localize_list(const std::vector<std::string>& items, ConcatenateWith
  */
 std::string join_sentences(const std::string& sentence1, const std::string& sentence2);
 
+/**
+ * Checks whether 'input' is the translation of 'base'. Also returns true if
+ * 'input' is the same as 'base'. If 'textdomain_name' is given, then uses that
+ * textdomain, otherwise the current one.
+ */
+bool is_translation_of(const std::string& input,
+                       const std::string& base,
+                       const std::string& textdomain_name = "");
+
 }  // namespace i18n
 
 #endif  // end of include guard: WL_BASE_I18N_H

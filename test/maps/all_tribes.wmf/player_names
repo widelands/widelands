@@ -1,4 +1,4 @@
-# Automatically created by Widelands r24458[ea6e6ce@tribes-filtering] (Debug)
+# Automatically created by Widelands 1.2~git26455 (bb52261@master) Release
 
 [global]
 packet_version="2"
@@ -8,45 +8,61 @@ name="Barbarians"
 tribe="barbarians"
 ai="empty"
 closeable="false"
+team="0"
+random="false"
 
 [player_2]
 name="Empire"
 tribe="empire"
 ai="empty"
 closeable="false"
+team="0"
+random="false"
 
 [player_3]
 name="Atlanteans"
 tribe="atlanteans"
 ai="empty"
 closeable="false"
+team="0"
+random="false"
 
 [player_4]
 name="Frisians"
 tribe="frisians"
 ai="empty"
 closeable="false"
+team="0"
+random="false"
 
 [player_5]
 name="Amazons"
 tribe="amazons"
 ai="empty"
 closeable="false"
+team="0"
+random="false"
 
 [player_6]
 name="Available6"
 tribe=
 ai="empty"
 closeable="false"
+team="0"
+random="false"
 
 [player_7]
 name="Available7"
 tribe=
 ai="empty"
 closeable="false"
+team="0"
+random="false"
 
 [player_8]
 name="Available8"
 tribe=
 ai="empty"
 closeable="false"
+team="0"
+random="false"
