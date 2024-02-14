@@ -69,12 +69,12 @@ jobs:
         ./make.py html -graphs
         # Create a downloadable workflow artifact for testing
         mv build widelands-doc-${{ github.sha }}
-        zip -r ../../../Widelands-${{ github.sha }}-Developer-Documentation.zip widelands-doc-${{ github.sha }}
+        zip -r ${{ github.workspace }}/Widelands-${{ github.sha }}-Developer-Documentation.zip widelands-doc-${{ github.sha }}
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: Widelands Developer Documentation
-        path: Widelands-${{ github.sha }}-Developer-Documentation.zip
+        path: ${{ github.workspace }}/Widelands-${{ github.sha }}-Developer-Documentation.zip
 
   lua_style:
     runs-on: ubuntu-latest
