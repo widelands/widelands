@@ -1353,45 +1353,85 @@ void WLApplication::parse_commandline(int const argc, char const* const* const a
 	}
 }
 
+namespace {
+
+void throw_extra_value(const std::string& opt) {
+	throw ParameterError(
+	   CmdLineVerbosity::None, format(_("Command line parameter --%s can not use a value"), opt));
+}
+
+void throw_empty_value(const std::string& opt) {
+	throw ParameterError(
+	   CmdLineVerbosity::None, format(_("Empty value of command line parameter --%s"), opt));
+}
+
+void throw_exclusive(const std::string& opt, const std::string& other) {
+	throw ParameterError(
+	   CmdLineVerbosity::None,
+	   format(_("Command line parameters --%1$s and --%2$s can not be combined"), opt, other));
+}
+
+}  // namespace
+
+// Checks and returns whether `param` was set, but throws ParameterError if it also had a value.
+bool WLApplication::check_commandline_flag(const std::string& opt) {
+	auto found = commandline_.find(opt);
+	if (found == commandline_.end()) {
+		return false;
+	}
+	if (!found->second.empty()) {
+		throw_extra_value(opt);
+	}
+	commandline_.erase(found);
+	return true;
+}
+
+// Returns the value of `opt`. Only returns std::nullopt if `opt` was not used.
+// If `opt` was used without a value, then returns an empty string if `allow_empty` is true,
+// otherwise throws ParameterError.
+OptionalParameter WLApplication::get_commandline_option_value(const std::string& opt,
+                                                              const bool allow_empty) {
+	auto found = commandline_.find(opt);
+	if (found == commandline_.end()) {
+		return std::nullopt;
+	}
+	// need to copy before deletion for returning later
+	std::string rv = found->second;
+	if (!allow_empty && rv.empty()) {
+		throw_empty_value(opt);
+	}
+	commandline_.erase(found);
+
+	// Fix warning in old clang versions
+#ifdef __clang__
+#if __clang_major__ < 13
+	return std::move(rv);
+#else
+	return rv;
+#endif
+#else
+	return rv;
+#endif
+}
+
 /**
  * Parse the command line given in commandline_
  *
  * \throw a ParameterError if there were errors during parsing \e or if "--help"
  */
 void WLApplication::handle_commandline_parameters() {
-	auto throw_empty_value = [](const std::string& opt) {
-		throw ParameterError(
-		   CmdLineVerbosity::None, format(_("Empty value of command line parameter: %s"), opt));
-	};
 
-	auto throw_exclusive = [](const std::string& opt) {
-		throw ParameterError(
-		   CmdLineVerbosity::None, format(_("%s can not be combined with other actions"), opt));
-	};
-
-	if (commandline_.count("nosound") != 0u) {
-		SoundHandler::disable_backend();
-		commandline_.erase("nosound");
-	}
-	if (commandline_.count("verbose-i18n") != 0u) {
+	if (check_commandline_flag("verbose-i18n")) {
 		i18n::enable_verbose_i18n();
-		commandline_.erase("verbose-i18n");
-	}
-	if (commandline_.count("fail-on-lua-error") != 0u) {
-		g_fail_on_lua_error = true;
-		commandline_.erase("fail-on-lua-error");
-	}
-	if (commandline_.count("nozip") != 0u) {
-		set_config_bool("nozip", true);
-		commandline_.erase("nozip");
-	}
-	if (commandline_.count("localedir") != 0u) {
-		localedir_ = commandline_["localedir"];
-		commandline_.erase("localedir");
 	}
 
-	const bool skip_check_datadir_version = commandline_.count("skip_check_datadir_version") != 0u;
-	commandline_.erase("skip_check_datadir_version");
+	if (OptionalParameter localedir_option = get_commandline_option_value("localedir");
+	    localedir_option.has_value()) {
+		localedir_ = *localedir_option;
+	}
+
+	const bool skip_check_datadir_version = check_commandline_flag("skip_check_datadir_version");
+
 	auto checkdatadirversion = [skip_check_datadir_version](const std::string& dd) {
 		if (skip_check_datadir_version) {
 			return std::string();
@@ -1431,9 +1471,9 @@ void WLApplication::handle_commandline_parameters() {
 		return std::string();
 	};
 	bool found = false;
-	if (commandline_.count("datadir") != 0u) {
-		datadir_ = commandline_["datadir"];
-		commandline_.erase("datadir");
+	if (OptionalParameter datadir_option = get_commandline_option_value("datadir");
+	    datadir_option.has_value()) {
+		datadir_ = *datadir_option;
 
 		const std::string err = checkdatadirversion(datadir_);
 		found = err.empty();
@@ -1503,164 +1543,159 @@ void WLApplication::handle_commandline_parameters() {
 		}
 	}
 
-	if (commandline_.count("language") != 0u) {
-		const std::string& lang = commandline_["language"];
-		if (!lang.empty()) {
-			set_config_string("language", lang);
-		} else {
-			if (found) {
-				init_language();
-			}
-			throw_empty_value("--language");
-		}
+	if (OptionalParameter lang = get_commandline_option_value("language"); lang.has_value()) {
+		set_config_string("language", *lang);
 	}
 	if (found) {
 		init_language();  // do this now to have translated command line help
 	}
+	// Set up list of valid command line options and their translated help texts
 	fill_parameter_vector();
 
-	if (commandline_.count("error") != 0u) {
-		throw ParameterError(CmdLineVerbosity::Normal,
-		                     format(_("Unknown command line parameter: %s\nMaybe a '=' is missing?"),
-		                            commandline_["error"]));
+	// This is used by the parser to report an error
+	if (OptionalParameter err = get_commandline_option_value("error"); err.has_value()) {
+		throw ParameterError(
+		   CmdLineVerbosity::Normal,
+		   format(_("Unknown command line parameter: %s\nMaybe a '=' is missing?"), *err));
 	}
 
-	if (commandline_.count("datadir_for_testing") != 0u) {
-		datadir_for_testing_ = commandline_["datadir_for_testing"];
-		commandline_.erase("datadir_for_testing");
+	if (OptionalParameter testdir = get_commandline_option_value("datadir_for_testing");
+	    testdir.has_value()) {
+		datadir_for_testing_ = *testdir;
 	}
 
-	if (commandline_.count("verbose") != 0u) {
+	// TODO(tothxa): These were checked before datadir and locale were set up, but don't seem to be
+	//               used during detecting and setting them up. Let's see if anything breaks if we
+	//               move them here.
+	if (check_commandline_flag("nosound")) {
+		SoundHandler::disable_backend();
+	}
+	if (check_commandline_flag("fail-on-lua-error")) {
+		g_fail_on_lua_error = true;
+	}
+
+	// Mutually exclusive options.
+	// These would be better as e.g. "--use_zip=[true|false]", but then we'd have to negate the
+	// boolean value stored in the string, but trueWords and falseWords are hidden in io/profile.cc.
+	// The obvious "--nozip=[true|false]" would be confusing, or at least hard to write a helptext
+	// for.
+	const bool has_nozip = check_commandline_flag("nozip");
+	const bool has_zip = check_commandline_flag("zip");
+	if (has_nozip && has_zip) {
+		throw_exclusive("nozip", "zip");
+	}
+	// Only override config file if we have a command line parameter
+	if (has_nozip || has_zip) {
+		set_config_bool("nozip", has_nozip);
+	}
+
+	// *** End of moved checks ***
+
+	if (check_commandline_flag("verbose")) {
 		g_verbose = true;
-		commandline_.erase("verbose");
 	}
 
-	if (commandline_.count("editor") != 0u) {
-		filename_ = commandline_["editor"];
-		if (!filename_.empty() && *filename_.rbegin() == '/') {
+	static const std::map<GameType, std::string> game_type_options = {
+	   {GameType::kEditor, "editor"},
+	   {GameType::kReplay, "replay"},
+	   {GameType::kFromTemplate, "new_game_from_template"},
+	   {GameType::kLoadGame, "loadgame"},
+	   {GameType::kScenario, "scenario"}};
+
+	for (const auto& pair : game_type_options) {
+		const std::string& opt = pair.second;
+		const bool allow_empty = opt == "editor";
+		OptionalParameter val = get_commandline_option_value(opt, allow_empty);
+		if (!val.has_value()) {
+			continue;
+		}
+
+		if (game_type_ != GameType::kNone) {
+			throw_exclusive(opt, game_type_options.at(game_type_));
+		}
+		game_type_ = pair.first;
+
+		filename_ = *val;
+		if (filename_.back() == '/') {
+			// Strip trailing directory separator
 			filename_.erase(filename_.size() - 1);
 		}
-		game_type_ = GameType::kEditor;
-		commandline_.erase("editor");
 	}
 
-	if (commandline_.count("replay") != 0u) {
-		if (game_type_ != GameType::kNone) {
-			throw_exclusive("replay");
-		}
-		filename_ = commandline_["replay"];
-		if (filename_.empty()) {
-			throw_empty_value("--replay");
-		}
-		if (*filename_.rbegin() == '/') {
-			filename_.erase(filename_.size() - 1);
-		}
-		game_type_ = GameType::kReplay;
-		commandline_.erase("replay");
-	}
-
-	if (commandline_.count("new_game_from_template") != 0u) {
-		if (game_type_ != GameType::kNone) {
-		}
-		filename_ = commandline_["new_game_from_template"];
-		if (filename_.empty()) {
-			throw_empty_value("--new_game_from_template");
-		}
-		game_type_ = GameType::kFromTemplate;
-		commandline_.erase("new_game_from_template");
-	}
-
-	if (commandline_.count("loadgame") != 0u) {
-		if (game_type_ != GameType::kNone) {
-			throw_exclusive("loadgame");
-		}
-		filename_ = commandline_["loadgame"];
-		if (filename_.empty()) {
-			throw_empty_value("--loadgame");
-		}
-		if (*filename_.rbegin() == '/') {
-			filename_.erase(filename_.size() - 1);
-		}
-		game_type_ = GameType::kLoadGame;
-		commandline_.erase("loadgame");
-	}
-
-	if (commandline_.count("scenario") != 0u) {
-		if (game_type_ != GameType::kNone) {
-			throw_exclusive("scenario");
-		}
-		filename_ = commandline_["scenario"];
-		if (filename_.empty()) {
-			throw_empty_value("--scenario");
-		}
-		if (*filename_.rbegin() == '/') {
-			filename_.erase(filename_.size() - 1);
-		}
-		game_type_ = GameType::kScenario;
-		commandline_.erase("scenario");
-	}
-	if (commandline_.count("script") != 0u) {
-		script_to_run_ = commandline_["script"];
-		if (script_to_run_.empty()) {
-			throw_empty_value("--script");
-		}
-		if (*script_to_run_.rbegin() == '/') {
+	if (OptionalParameter val = get_commandline_option_value("script"); val.has_value()) {
+		script_to_run_ = *val;
+		if (script_to_run_.back() == '/') {
+			// Strip trailing directory separator
 			script_to_run_.erase(script_to_run_.size() - 1);
 		}
-		commandline_.erase("script");
 	}
 
 	// Following is used for training of AI
-	if (commandline_.count("ai_training") != 0u) {
-		set_config_bool("ai_training", true);
-		commandline_.erase("ai_training");
-	} else {
-		set_config_bool("ai_training", false);
-	}
+	set_config_bool("ai_training", check_commandline_flag("ai_training"));
 
-	if (commandline_.count("auto_speed") != 0u) {
-		set_config_bool("auto_speed", true);
-		commandline_.erase("auto_speed");
-	} else {
-		set_config_bool("auto_speed", false);
-	}
+	set_config_bool("auto_speed", check_commandline_flag("auto_speed"));
 
-	if (commandline_.count("enable_development_testing_tools") != 0u) {
+	if (check_commandline_flag("enable_development_testing_tools")) {
 		g_allow_script_console = true;
-		commandline_.erase("enable_development_testing_tools");
 	}
 #ifndef NDEBUG
 	// Always enable in debug builds
 	g_allow_script_console = true;
 #endif
 
-	if (commandline_.count("write_syncstreams") != 0u) {
+	if (check_commandline_flag("write_syncstreams")) {
 		g_write_syncstreams = true;
-		commandline_.erase("write_syncstreams");
 	}
 
-	if (commandline_.count("version") != 0u) {
+	if (check_commandline_flag("version")) {
 		throw ParameterError(CmdLineVerbosity::None);  // No message on purpose
 	}
 
-	if (commandline_.count("help-all") != 0u) {
+	if (check_commandline_flag("help-all")) {
 		throw ParameterError(CmdLineVerbosity::All);  // No message on purpose
 	}
 
-	if (commandline_.count("help") != 0u) {
+	if (check_commandline_flag("help")) {
 		throw ParameterError(CmdLineVerbosity::Normal);  // No message on purpose
 	}
 
-	// Override maximized and fullscreen settings for window options
-	uint8_t exclusives = commandline_.count("xres") + commandline_.count("yres") +
-	                     2 * commandline_.count("maximized") + 2 * commandline_.count("fullscreen");
-	if (exclusives > 2) {
-		throw ParameterError(CmdLineVerbosity::None,
-		                     _("--xres/--yres, --maximized and --fullscreen can not be combined"));
-	}
-	if (exclusives > 0) {
-		set_config_bool("maximized", false);
-		set_config_bool("fullscreen", false);
+	// Window size: three mutually exclusive possibilities
+	// TODO(tothxa): Move to a function, but I don't want to add another member.
+	//               The whole commandline parsing and handling together with reading the config file
+	//               should be moved out of WLApplication, but it's a mess with scattered global
+	//               variables and variables that need passing back to WLApplication.
+	{
+		const bool display_fullscreen = check_commandline_flag("fullscreen");
+		const bool display_maximized = check_commandline_flag("maximized");
+		if (display_maximized && display_fullscreen) {
+			throw_exclusive("fullscreen", "maximized");
+		}
+
+		const OptionalParameter xres = get_commandline_option_value("xres");
+		const OptionalParameter yres = get_commandline_option_value("yres");
+		if ((xres.has_value() || yres.has_value()) && (display_fullscreen || display_maximized)) {
+			std::string which_res;
+			if (xres.has_value() && yres.has_value()) {
+				// "--" will be prepended... ugly here but convenient everywhere else
+				which_res = "xres/--yres";
+			} else {
+				// Exactly one of them
+				which_res = xres.has_value() ? "xres" : "yres";
+			}
+			throw_exclusive(display_fullscreen ? "fullscreen" : "maximized", which_res);
+		}
+
+		// Only override config file if we have a command line parameter
+		if (xres.has_value() || yres.has_value() || display_fullscreen || display_maximized) {
+			set_config_bool("fullscreen", display_fullscreen);
+			set_config_bool("maximized", display_maximized);
+			if (xres.has_value()) {
+				set_config_string("xres", *xres);
+			}
+			if (yres.has_value()) {
+				set_config_string("yres", *yres);
+			}
+		}
 	}
 
 	// If it hasn't been handled yet it's probably an attempt to
