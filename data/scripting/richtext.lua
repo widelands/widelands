@@ -756,7 +756,7 @@ end
 --    :align: center
 --
 -- Please try to avoid hardcoding colors and non-default spacing and sizes. Best practice is to use
--- `styles.color()` to get color values and `styles.get_size()` to get values for spacing and
+-- :meth:`~styles.color` to get color values and :meth:`~styles.get_size()` to get values for spacing and
 -- other sizes from the style manager whenever possible.
 --
 -- :ref:`Return to index<richtext.lua>`
