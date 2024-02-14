@@ -102,7 +102,7 @@ class WidelandsTestCase(unittest.TestCase):
 
         with open(stdout_filename, 'a') as stdout_file:
             args = [self.path_to_widelands_binary,
-                    '--verbose=true',
+                    '--verbose',
                     '--datadir={}'.format(datadir()),
                     '--datadir_for_testing={}'.format(datadir_for_testing()),
                     '--homedir={}'.format(self.run_dir),

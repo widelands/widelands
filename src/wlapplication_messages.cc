@@ -147,6 +147,7 @@ void fill_parameter_vector() {
 		_("Do not create an autosave when the user has been inactive since the last autosave."),
 		true},
 	  {"", "nozip", "", _("Do not save files as binary zip archives."), false},
+	  {"", "zip", "", _("Save files as binary zip archives."), false},
 	  // The below comment is duplicated from above for the other case, when false is the default.
 	  /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
 	  /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain. */
@@ -210,10 +211,9 @@ void fill_parameter_vector() {
 		_("Create syncstream dump files to help debug network games."), true},
 
 	  /// Interface options
-	  {_("Graphic options:"), "fullscreen", _("[true|false*]"),
-		_("Whether to use the whole display for the game screen."), false},
-	  {"", "maximized", _("[true|false*]"), _("Whether to start the game in a maximized window."),
+	  {_("Graphic options:"), "fullscreen", "", _("Use the whole display for the game screen."),
 		false},
+	  {"", "maximized", "", _("Start the game in a maximized window."), false},
 	  {"", "xres",
 		/** TRANSLATORS: A placeholder for window width */
 		_("x"),
@@ -263,16 +263,20 @@ void fill_parameter_vector() {
 }
 
 const std::vector<std::string> get_all_parameters() {
-	std::vector<std::string> result(parameters.size());
-	std::transform(parameters.begin(), parameters.end(), result.begin(),
-	               [](const Parameter& p) { return p.key_; });
+	std::vector<std::string> result;
+	for (const Parameter& param : parameters) {
+		// Filter out special entries
+		if (param.hint_ != "--") {
+			result.emplace_back(param.key_);
+		}
+	}
 	return result;
 }
 
 bool is_parameter(const std::string& name) {
 	auto result = std::find_if(
 	   parameters.begin(), parameters.end(), [name](const Parameter& p) { return p.key_ == name; });
-	return result != parameters.end();
+	return result != parameters.end() && result->hint_ != "--";
 }
 
 bool use_last(const std::string& filename_arg) {
