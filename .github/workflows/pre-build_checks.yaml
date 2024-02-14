@@ -67,11 +67,14 @@ jobs:
         sphinx-build -W -b json -d build/doctrees source build/json
         # This is suitable for user testing
         ./make.py html -graphs
+        # Create a downloadable workflow artifact for testing
+        mv build widelands-doc-${{ github.sha }}
+        zip -r ../../../Widelands-${{ github.sha }}-Developer-Documentation.zip widelands-doc-${{ github.sha }}
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: Widelands-${{ github.sha }}-Developer-Documentation
-        path: "doc/sphinx/build/**"
+        name: Widelands Developer Documentation
+        path: Widelands-${{ github.sha }}-Developer-Documentation.zip
 
   lua_style:
     runs-on: ubuntu-latest
