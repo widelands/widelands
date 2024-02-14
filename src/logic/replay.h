@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2023 by the Widelands Development Team
+ * Copyright (C) 2007-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -84,9 +84,14 @@ struct ReplayfileSavegameExtractor {
 		return temp_file_.empty() ? source_file_ : temp_file_;
 	}
 
+	[[nodiscard]] bool is_replay() const {
+		return is_replay_;
+	}
+
 private:
 	const std::string& source_file_;
 	std::string temp_file_;
+	bool is_replay_{false};
 };
 
 }  // namespace Widelands

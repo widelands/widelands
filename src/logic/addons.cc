@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2023 by the Widelands Development Team
+ * Copyright (C) 2020-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -68,8 +68,8 @@ const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories = {
                       "tribes/buildings/warehouses/atlanteans/headquarters/menu.png", true}},
    {AddOnCategory::kTheme, AddOnCategoryInfo{"theme", []() { return _("Theme"); },
                                              "images/wui/menus/main_menu.png", false}},
-   {AddOnCategory::kUIPlugin, AddOnCategoryInfo{"ui_plugin", []() { return _("UI Plugin"); },
-                                                "images/logos/WL-Editor-32.png", false}}};
+   {AddOnCategory::kUIPlugin,
+    AddOnCategoryInfo{"ui_plugin", []() { return _("UI Plugin"); }, "images/plugin.png", false}}};
 
 std::vector<AddOnState> g_addons;
 
@@ -272,7 +272,7 @@ AddOnConflict check_requirements(const AddOnRequirements& required_addons) {
 	}
 	AddOnConflict result = check_requirements_conflicts(required_addons);
 	for (const auto& pair : required_addons) {
-		result.first = format(_("%1$s<br>· %2$s (version %3$s)"), result.first, pair.first,
+		result.first = format(_("%1$s<br>• %2$s (version %3$s)"), result.first, pair.first,
 		                      version_to_string(pair.second));
 	}
 	return result;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,7 +32,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 4;
+constexpr uint16_t kCurrentPacketVersion = 4;  // since v1.0
 
 // constants to handle special building types
 constexpr uint8_t kTypeBuilding = 0;
@@ -54,7 +54,7 @@ void MapBuildingPacket::read(FileSystem& fs,
 	}
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version >= 3 && packet_version <= kCurrentPacketVersion) {
+		if (packet_version >= 4 && packet_version <= kCurrentPacketVersion) {
 			const Map& map = egbase.map();
 			uint16_t const width = map.get_width();
 			uint16_t const height = map.get_height();
@@ -96,11 +96,6 @@ void MapBuildingPacket::read(FileSystem& fs,
 							}
 
 							mol.register_object<Building>(serial, *building);
-							// TODO(Nordfriese): Savegame compatibility
-							if (packet_version <= 3) {
-								// In newer versions this info lives in MapBuildingDataPacket
-								read_priorities(*building, fr);
-							}
 						} else {
 							throw GameDataError("player %u does not exist", p);
 						}
@@ -162,46 +157,4 @@ void MapBuildingPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 	// DONE
 }
 
-// TODO(Nordfriese): Savegame compatibility. Delete this function after v1.0
-void MapBuildingPacket::read_priorities(Building& building, FileRead& fr) {
-	// TODO(unknown): savegame compatibility
-	fr.unsigned_32();  // unused, was base_priority which is unused. Remove after b20.
-
-	const TribeDescr& tribe = building.owner().tribe();
-	Widelands::DescriptionIndex ware_type;
-	// read ware type
-	while (0xff != (ware_type = fr.unsigned_8())) {
-		// read count of priorities assigned for this ware type
-		const uint8_t count = fr.unsigned_8();
-		for (uint8_t i = 0; i < count; ++i) {
-			DescriptionIndex idx;
-			if (wwWARE == ware_type) {
-				idx = tribe.safe_ware_index(fr.c_string());
-			} else if (wwWORKER == ware_type) {
-				idx = tribe.safe_worker_index(fr.c_string());
-			} else {
-				throw GameDataError("unrecognized ware type %d while reading priorities", ware_type);
-			}
-
-			// convert old priority constants
-			const int32_t priority = fr.unsigned_32();
-			const WarePriority* p;
-			switch (priority) {
-			case 2:
-				p = &WarePriority::kLow;
-				break;
-			case 4:
-				p = &WarePriority::kNormal;
-				break;
-			case 8:
-				p = &WarePriority::kHigh;
-				break;
-			default:
-				throw GameDataError("Invalid legacy priority %i", priority);
-			}
-
-			building.set_priority(WareWorker(ware_type), idx, *p);
-		}
-	}
-}
 }  // namespace Widelands

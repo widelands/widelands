@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -112,6 +112,15 @@ std::string localize_list(const std::vector<std::string>& items, ConcatenateWith
  * a blank space, because some languages don't use blank spaces.
  */
 std::string join_sentences(const std::string& sentence1, const std::string& sentence2);
+
+/**
+ * Checks whether 'input' is the translation of 'base'. Also returns true if
+ * 'input' is the same as 'base'. If 'textdomain_name' is given, then uses that
+ * textdomain, otherwise the current one.
+ */
+bool is_translation_of(const std::string& input,
+                       const std::string& base,
+                       const std::string& textdomain_name = "");
 
 }  // namespace i18n
 

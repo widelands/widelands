@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -425,6 +425,20 @@ std::string join_sentences(const std::string& sentence1, const std::string& sent
 	/** TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese script probably
 	 * want to lose the blank space here. */
 	return format(pgettext("sentence_separator", "%1% %2%"), sentence1, sentence2);
+}
+
+bool is_translation_of(const std::string& input,
+                       const std::string& base,
+                       const std::string& textdomain_name) {
+	if (input == base) {
+		return true;
+	}
+	if (textdomain_name.empty()) {
+		return input == translate(base);
+	}
+
+	Textdomain td(textdomain_name);
+	return input == translate(base);
 }
 
 }  // namespace i18n

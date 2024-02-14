@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2023 by the Widelands Development Team
+ * Copyright (C) 2004-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,6 @@
 
 #include "economy/flag.h"
 #include "logic/cmd_queue.h"
-#include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/warehouse.h"
@@ -257,23 +256,23 @@ private:
 	Serial serial_{0U};
 };
 
-struct CmdMilitarySiteSetSoldierPreference : public PlayerCommand {
-	CmdMilitarySiteSetSoldierPreference() = default;  // For savegame loading
-	CmdMilitarySiteSetSoldierPreference(const Time& t,
-	                                    const PlayerNumber p,
-	                                    Building& b,
-	                                    SoldierPreference prefs)
-	   : PlayerCommand(t, p), serial(b.serial()), preference(prefs) {
+struct CmdSetSoldierPreference : public PlayerCommand {
+	CmdSetSoldierPreference() = default;  // For savegame loading
+	CmdSetSoldierPreference(const Time& t,
+	                        const PlayerNumber p,
+	                        MapObject& mo,
+	                        SoldierPreference prefs)
+	   : PlayerCommand(t, p), serial(mo.serial()), preference(prefs) {
 	}
 
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
 
 	[[nodiscard]] QueueCommandTypes id() const override {
-		return QueueCommandTypes::kMilitarysiteSetSoldierPreference;
+		return QueueCommandTypes::kSetSoldierPreference;
 	}
 
-	explicit CmdMilitarySiteSetSoldierPreference(StreamRead&);
+	explicit CmdSetSoldierPreference(StreamRead&);
 
 	void execute(Game&) override;
 	void serialize(StreamWrite&) override;
@@ -404,6 +403,57 @@ private:
 	Serial serial{0U};
 };
 
+struct CmdShipRefit : public PlayerCommand {
+	CmdShipRefit() = default;  // For savegame loading
+	CmdShipRefit(const Time& t, PlayerNumber const p, Serial s, ShipType ss)
+	   : PlayerCommand(t, p), serial_(s), type_(ss) {
+	}
+
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+	[[nodiscard]] QueueCommandTypes id() const override {
+		return QueueCommandTypes::kShipRefit;
+	}
+
+	explicit CmdShipRefit(StreamRead&);
+
+	void execute(Game&) override;
+	void serialize(StreamWrite&) override;
+
+private:
+	Serial serial_{0U};
+	ShipType type_{ShipType::kTransport};
+};
+
+struct CmdWarshipCommand : public PlayerCommand {
+	CmdWarshipCommand() = default;  // For savegame loading
+	CmdWarshipCommand(const Time& t,
+	                  PlayerNumber const p,
+	                  Serial s,
+	                  WarshipCommand c,
+	                  const std::vector<uint32_t>& params)
+	   : PlayerCommand(t, p), serial_(s), parameters_(params), cmd_(c) {
+	}
+
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+	[[nodiscard]] QueueCommandTypes id() const override {
+		return QueueCommandTypes::kWarshipCommand;
+	}
+
+	explicit CmdWarshipCommand(StreamRead&);
+
+	void execute(Game&) override;
+	void serialize(StreamWrite&) override;
+
+private:
+	Serial serial_{0U};
+	std::vector<uint32_t> parameters_;
+	WarshipCommand cmd_{WarshipCommand::kAttack};
+};
+
 struct CmdShipScoutDirection : public PlayerCommand {
 	CmdShipScoutDirection() = default;  // For savegame loading
 	CmdShipScoutDirection(const Time& t, PlayerNumber const p, Serial s, WalkingDir direction)
@@ -474,6 +524,36 @@ struct CmdShipExploreIsland : public PlayerCommand {
 private:
 	Serial serial{0U};
 	IslandExploreDirection island_explore_direction{IslandExploreDirection::kNotSet};
+};
+
+struct CmdShipSetDestination : public PlayerCommand {
+	CmdShipSetDestination() = default;  // For savegame loading
+	CmdShipSetDestination(const Time& t, PlayerNumber const p, Serial s, Serial dest)
+	   : PlayerCommand(t, p), serial_(s), destination_object_(dest) {
+	}
+	CmdShipSetDestination(const Time& t,
+	                      PlayerNumber const p,
+	                      Serial s,
+	                      const DetectedPortSpace& dest)
+	   : PlayerCommand(t, p), serial_(s), destination_coords_(dest.serial) {
+	}
+
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+	[[nodiscard]] QueueCommandTypes id() const override {
+		return QueueCommandTypes::kShipSetDestination;
+	}
+
+	explicit CmdShipSetDestination(StreamRead&);
+
+	void execute(Game&) override;
+	void serialize(StreamWrite&) override;
+
+private:
+	Serial serial_{0U};
+	Serial destination_object_{0U};
+	Serial destination_coords_{0U};
 };
 
 struct CmdShipSink : public PlayerCommand {
@@ -690,7 +770,7 @@ private:
 
 struct CmdDropSoldier : public PlayerCommand {
 	CmdDropSoldier() = default;  //  for savegames
-	CmdDropSoldier(const Time& t, const int32_t p, Building& b, const int32_t init_soldier)
+	CmdDropSoldier(const Time& t, const int32_t p, MapObject& b, const int32_t init_soldier)
 	   : PlayerCommand(t, p), serial(b.serial()), soldier(init_soldier) {
 	}
 

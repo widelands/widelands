@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -111,7 +111,9 @@ public:
 		kRandom,           // show Random Map window
 		kLoad              // show Load Map window
 	};
-	static void run_editor(UI::Panel* error_message_parent,
+
+	// Returns true on clean exit, false if an exception was caught by the wrapper
+	static bool run_editor(UI::Panel* error_message_parent,
 	                       EditorInteractive::Init,
 	                       const std::string& filename = "",
 	                       const std::string& script_to_run = "");

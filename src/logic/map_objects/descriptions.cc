@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -418,12 +418,6 @@ void Descriptions::register_scenario_tribes(FileSystem* filesystem) {
 void Descriptions::add_object_description(const LuaTable& table, MapObjectType type) {
 	const std::string& type_name = table.get_string("name");
 	const std::string& type_descname = table.get_string("descname");
-
-	// TODO(GunChleoc): Compatibility, remove after v1.0
-	if (table.has_key<std::string>("msgctxt")) {
-		log_warn(
-		   "The 'msgctxt' entry is no longer needed in '%s', please remove it", type_name.c_str());
-	}
 
 	description_manager_->mark_loading_in_progress(type_name);
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,8 +21,6 @@
 
 #include "map_io/map_data_packet.h"
 
-class FileRead;
-
 namespace Widelands {
 
 class Building;
@@ -34,9 +32,6 @@ class Building;
 struct MapBuildingPacket {
 	void read(FileSystem&, EditorGameBase&, bool, MapObjectLoader&);
 	void write(FileSystem&, EditorGameBase&, MapObjectSaver&);
-
-protected:
-	void read_priorities(Building&, FileRead&);
 };
 }  // namespace Widelands
 

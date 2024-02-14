@@ -1,14 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
+# Ivan Bižaca <biza@malilosinj.info>, 2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2015-02-03 14:30+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: Ivan Bižaca <biza@malilosinj.info>, 2023\n"
 "Language-Team: Croatian (http://app.transifex.com/widelands/widelands/language/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,25 +20,25 @@ msgstr ""
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:20
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:22
 msgid "Build two ranger’s huts"
-msgstr ""
+msgstr "Sagradi dvije kolibe za šumara"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:23
 msgid "Build a ranger’s hut next to each lumberjack’s hut."
-msgstr ""
+msgstr "Sagradi kolibu za šumara odmah pored svake kolibe za drvosječu."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:24
 msgid ""
 "Naturally, trees only grow at a slow rate. To make sure you have enough "
 "logs, you have to build rangers."
-msgstr ""
+msgstr "Prirodno, stabla rastu polako. Kako bi osigurali da imate dovoljno drva, morate zaposliti šumare."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:30
 msgid "Expand north-east and build a quarry"
-msgstr ""
+msgstr "Proširi se na sjevero-istok i sagradi kamenolom"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:32
 msgid "Expand north-east to the rocks"
-msgstr ""
+msgstr "Proširi se na sjevero-istok do stijena"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:33
 msgid ""
@@ -316,38 +317,38 @@ msgstr ""
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:165
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:177
 msgid "The Story Begins"
-msgstr ""
+msgstr "Priča započinje"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:142
 msgid "Thron sighs…"
-msgstr ""
+msgstr "Thron je uzdahnuo..."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:144
 msgid ""
 "It’s been months, and we are still hiding where the forests are old and "
 "dark."
-msgstr ""
+msgstr "Prošli su mjeseci, a još uvijek se skrivamo u starim i mračnim šumama."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:147
 msgid ""
 "My warriors hunt at day and lie awake at night – listening to the sounds of "
 "the cruel slaughter echoing from afar amongst the ancient trees."
-msgstr ""
+msgstr "Moji ratnici danju love, a noću ne spavaju – slušaju zvukove okrutnih borbi koji izdaleka odjekuju među drevnim drvećem."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:156
 msgid ""
 "We can see the raging flames that swallow Al’thunran from here, miles away."
-msgstr ""
+msgstr "Odavdje, miljama daleko, vidi se plamen kako bijesni i guta Al’thunran."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:159
 msgid ""
 "The red lights flash in the darkness and dance to the rhythm of the war "
 "drums that haunt me even in my nightmares."
-msgstr ""
+msgstr "Crvena svjetla bljeskaju u tami i plešu u ritmu ratnih bubnjeva, to me progoni čak i u noćnim morama."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:168
@@ -355,7 +356,7 @@ msgid ""
 "My father’s bones rest peacefully in the ground on which he once ended the "
 "senseless spilling of blood that had arisen amongst us. It pains me that his"
 " peace only endured for one generation."
-msgstr ""
+msgstr "Kosti mog oca mirno počivaju u zemlji na kojoj je on jednom okončao besmisleno prolijevanje krvi koje je postojalo među nama. Boli me što je njegov mir trajao tako kratko, samo jednu generaciju."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:171
@@ -364,7 +365,7 @@ msgid ""
 "me in these dark times. He keeps my spirits high and those of my warriors "
 "awake, preventing greed or despair from destroying the bonds between us as "
 "well."
-msgstr ""
+msgstr "Boldreth, moj odani suputnik i prijatelj, izvor mi je mira i utjehe u ovim mračnim vremenima. On održava moje raspoloženje i moje ratnike drži spremnima. Sprječava pohlepu ili očaj da unište prijateljstvo među nama."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:180
@@ -372,23 +373,23 @@ msgid ""
 "As father told me, there are times to fight and times to lie and wait, "
 "trying not to fall asleep or die before the right time comes. And so I do "
 "wait."
-msgstr ""
+msgstr "Kao što mi je otac jednom rekao, postoji vrijeme za borbu i vrijeme za skrivanje i čekanje. Pokušavam ne zaspati ili umrijeti prije nego što dođe pravo vrijeme za borbu. I zbog toga, čekam."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:186
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:199
 msgid "Thron is Contemplating the War"
-msgstr ""
+msgstr "Thron razmišlja o ratu"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:187
 msgid "Thron is shaking his head…"
-msgstr ""
+msgstr "Thron odmahuje glavom..."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:189
 msgid ""
 "Yet the war goes on. More and more of our brothers and sisters flee the "
 "brutal war raging in the capital beneath the trees."
-msgstr ""
+msgstr "Ipak, rat traje. Sve više i više naše braće i sestara bježi od brutalnog rata koji bjesni u glavnom gradu. Bježe i skrivaju se ispod drveća."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:192
@@ -398,7 +399,7 @@ msgid ""
 " Yet whenever I close my eyes, I see the fortress my father built consumed "
 "by flames. The Throne Among the Trees, the symbol of unity and peace among "
 "our kin, became the wedge that drives us apart."
-msgstr ""
+msgstr "Priče koje pričaju o djelima naših sunarodnjaka žalosno je čuti. Proveo sam noći ležeći budan, nemiran, umorniji nego što sam ikad vjerovao da čovjek može biti. Ipak, kad god zatvorim oči, vidim tvrđavu koju je sagradio moj otac spaljenu i u plamenu. Prijestolje među drvećem, simbol jedinstva i mira našeg plemena, postalo je klin koji nas razdvaja."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:202
@@ -410,18 +411,18 @@ msgid ""
 "brothers will ever gain and hold control over the wooden throne, none of the"
 " tribes will be strong enough to subdue the other. There will be no end to "
 "this slaughter, unless… is this it? As father told me?"
-msgstr ""
+msgstr "Danas su moji lovci preda mnom doveli muškarce, žene i malu djecu koji su se sakrili u šumama, pokušavajući pobjeći od rata, mržnje i osvete. Tog bijesa među plemenima koja se međusobno bore kao u davna vremena, tada nismo bili nego divlje zvijeri vođeni instinktima. Nitko od moje braće nikada neće steći i zadržati kontrolu nad drvenim prijestoljem, nijedna od frakcija neće biti dovoljno snažna da pokori onu drugu. Neće biti kraja ovom pokolju, osim ako... je li to to? Kako mi je otac rekao?"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:205
 msgid ""
 "To rise against whoever threatens our very existence, even though it may be "
 "one of your own blood or mind?"
-msgstr ""
+msgstr "Morate ustati protiv onoga tko prijeti samom našem postojanju, čak i ako je to netko vaše vlastite krvi?"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:211
 msgid "Thron is Considering the Future"
-msgstr ""
+msgstr "Thron razmišlja o budućnosti"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:214
@@ -431,7 +432,7 @@ msgid ""
 "more than huts and barracks. I never intended to stay out here in the "
 "wilderness for so long – but I never thought my brothers would engage in "
 "this senseless battle for so long either."
-msgstr ""
+msgstr "Boldreth se čini sve rastrganijim kako dani prolaze. Raspoloženje mojih kolega tone kako se približava hladna zima, a mi još uvijek živimo samo u kolibama i barakama. Nikada nisam imao namjeru ostati ovdje u divljini toliko dugo – ali isto tako nikada nisam mislio da su moja braća u stanju voditi ovu besmislenu bitku tako dugo."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:217
@@ -440,22 +441,22 @@ msgid ""
 " it’s time to give those who still live and think united a new home, "
 "replacing what is now lost to us? Until we can return to the place we once "
 "called our home…"
-msgstr ""
+msgstr "Možda je vrijeme da se ovdje malo opustimo. Možda je vrijeme da onima koji misle kao i mi damo novi dom, zamjenjujući dom koji izgubljen? Sve dok se ne vratimo na mjesto koje smo nekada zvali svojim domom..."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:222
 msgid "Somebody Comes up to You"
-msgstr ""
+msgstr "Netko vam prilazi"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:223
 msgid "An old man says…"
-msgstr ""
+msgstr "Starac vam se obrača"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:225
 msgid ""
 "Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my counsel through these darkened days."
-msgstr ""
+msgstr "Pozdrav poglavico, Ja sam Khantrukh i vidio sam mnogo ljeta i zima. Molim vas dopustite mi da vam pomognem i ponudim savjete u ovim mračnim vremenima."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:228
@@ -463,7 +464,7 @@ msgid ""
 "Only the gods know for how long we have to remain hidden here. The warriors "
 "hope we may march back gloriously any day now, but I strongly doubt that "
 "will happen soon. And the days are short and cold…"
-msgstr ""
+msgstr "Samo bogovi znaju koliko dugo moramo ostati skriveni ovdje. Ratnici se nadaju da bismo za nekoliko dana mogli slavno marširati natrag, ali čisto sumnjam da će se to uskoro dogoditi. A dani su kratki i hladni..."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:234
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:307
@@ -476,18 +477,18 @@ msgstr ""
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:457
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:468
 msgid "The Advisor"
-msgstr ""
+msgstr "Savjetnik"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:235
 msgid "Khantrukh notes…"
-msgstr ""
+msgstr "Khantrukh podsjeća…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:237
 msgid ""
 "I see you have already built a quarry and two lumberjack’s huts. That is a "
 "good beginning if we want to stay here longer."
-msgstr ""
+msgstr "Vidim da ste već sagradili kamenolom i dvije kolibe za drvosječe. To je dobar početak ako planiramo ovdje duže ostati."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:240
@@ -495,14 +496,14 @@ msgid ""
 "But never forget – these forests are our heritage, entrusted upon us by our "
 "ancestors. We must always respect and care for them. What we take, we must "
 "give back again."
-msgstr ""
+msgstr "Ali nikada nemojte zaboraviti – ove šume su naše bogatsvo i nasljeđe, naši preci su nam ih ostavili da se brinemo o njima. Ono što iz šume uzmemo, moramo šumi i vratiti."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:243
 msgid ""
 "So, in order to replace the trees we chop down, we should build some "
 "ranger’s huts, preferably close to the lumberjack’s huts."
-msgstr ""
+msgstr "Kako bi smo to ispoštovali i zamjenili stabla koja posječemo  moramo sagraditi kolibe za šumara, po mogućnosti u blizini drvosječinih."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:249
 msgid "In the Night"
@@ -980,7 +981,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:513
 msgid "Thron looks worried…"
-msgstr ""
+msgstr "Thron izgleda zabrinuto..."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:515
@@ -988,19 +989,19 @@ msgid ""
 "The winter is upon us. Many of us are suffering from the cold, yet we must "
 "endure. The day we may return cannot be far anymore – it must not be far "
 "anymore."
-msgstr ""
+msgstr "Zima je nad nama. Mnogi od nas pate od hladnoće, ali moramo izdržati. Dan kada ćemo se vratiti ne može biti daleko – ne smije biti daleko."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:518
 msgid ""
 "I prayed that it might get warmer again, as I prayed that the war would "
 "finally come to an end."
-msgstr ""
+msgstr "Molio sam se da će ponovno postati toplije, i također molio sam se da će rat napokon završiti."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:521
 msgid "So far, it seems that neither prayer was fulfilled."
-msgstr ""
+msgstr "Za sada mi se čini da ni jedna od tih molitva nije ispunjena."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:525
 msgid "A friendly village has joined us!"

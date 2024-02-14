@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 by the Widelands Development Team
+ * Copyright (C) 2010-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 #include <cstddef>
 #include <memory>
 
+#include "base/multithreading.h"
 #include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -256,6 +257,7 @@ void State::enable_vertex_attrib_array(std::unordered_set<GLint> entries) {
 
 // static
 State& State::instance() {
+	assert(is_initializer_thread());
 	static State binder;
 	return binder;
 }

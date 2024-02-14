@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: utf-8
 
 from glob import glob
@@ -102,7 +102,7 @@ class WidelandsTestCase(unittest.TestCase):
 
         with open(stdout_filename, 'a') as stdout_file:
             args = [self.path_to_widelands_binary,
-                    '--verbose=true',
+                    '--verbose',
                     '--datadir={}'.format(datadir()),
                     '--datadir_for_testing={}'.format(datadir_for_testing()),
                     '--homedir={}'.format(self.run_dir),
@@ -246,6 +246,7 @@ def parse_args():
 
 def discover_loadgame_tests(regexp, suite):
     """Add all tests using --loadgame to the 'suite'."""
+    # Savegames with custom scripts
     for fixture in sorted(glob(os.path.join("test", "save", "*"))):
         if not os.path.isdir(fixture):
             continue
@@ -256,6 +257,13 @@ def discover_loadgame_tests(regexp, suite):
             suite.addTest(
                     WidelandsTestCase(test_script,
                         loadgame=savegame, script=test_script))
+    # Savegames without custom script, just test loading
+    test_script = os.path.join("test", "scripting", "load_and_quit.lua")
+    for savegame in sorted(glob(os.path.join("test", "save", "*.wgf"))):
+        if regexp is not None and not re.search(regexp, savegame):
+            continue
+        suite.addTest(WidelandsTestCase(savegame, loadgame=savegame, script=test_script))
+
 
 def discover_scenario_tests(regexp, suite):
     """Add all tests using --scenario to the 'suite'."""

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -151,6 +151,10 @@ add_iterator_function_to_not_unpersist(lua_State* L, const std::string& global, 
 // Those are the globals that will be regenerated (not by the persistence engine),
 // e.g. C-functions or automatically populated fields. Changing the ordering here will
 // break save game compatibility.
+// clang-format off
+// TODO(tothxa): The to-do comment in the middle made clang-format decide on a wildly different
+//               format than without it. You can re-enable it if the to-do is solved and the
+//               comment is removed.
 static const char* kPersistentGlobals[] = {"_VERSION",
                                            "assert",
                                            "collectgarbage",
@@ -192,7 +196,12 @@ static const char* kPersistentGlobals[] = {"_VERSION",
                                            "xpcall",
                                            "string",
                                            "_",
+
+                                           // TODO(tothxa): set_textdomain should be deleted, but
+                                           //    that would break the rest. Replace the next time
+                                           //    when a new global function is added?
                                            "set_textdomain",
+
                                            "get_build_id",
                                            "coroutine.yield",
                                            "ngettext",
@@ -205,6 +214,7 @@ static const char* kPersistentGlobals[] = {"_VERSION",
                                            "npgettext",
                                            "styles",
                                            nullptr};
+// clang-format on
 
 /**
  * Does all the persisting work. Returns the number of bytes

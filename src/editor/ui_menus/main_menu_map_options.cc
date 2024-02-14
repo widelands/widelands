@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -592,6 +592,7 @@ void MainMenuMapOptions::clicked_ok() {
 			map.get_suggested_teams().push_back(ste->team());
 		}
 	}
+	map.sanitize_suggested_teams();
 
 	map.clear_tags();
 	for (const auto& tag : tags_checkboxes_) {

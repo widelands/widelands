@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2023 by the Widelands Development Team
+ * Copyright (C) 2019-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -303,7 +303,7 @@ void ShippingSchedule::port_removed(Game& game, PortDock* dock) {
 		for (ShippingItem& si : ship->items_) {
 			if (si.destination_dock_.serial() == dock->serial()) {
 				sslog("found a shippingitem on %s\n", ship->get_shipname().c_str());
-				si.destination_dock_ = ship->get_destination();
+				si.destination_dock_ = ship->get_destination_port(game);
 			}
 		}
 	}
@@ -311,13 +311,16 @@ void ShippingSchedule::port_removed(Game& game, PortDock* dock) {
 }
 
 void ShippingSchedule::ship_removed(const Game& /* game */, Ship* ship) {
-	auto it = plans_.find(ship);
-	assert(it != plans_.end());
-	plans_.erase(it);
+	if (auto it = plans_.find(ship); it != plans_.end()) {
+		plans_.erase(it);
+	} else if (ship->get_ship_type() != ShipType::kWarship) {  // Warships might not have a schedule.
+		throw wexception(
+		   "Removing ship %s from fleet which did not have a schedule", ship->get_shipname().c_str());
+	}
 
-	auto i = last_actual_duration_recalculation_.find(ship);
-	if (i != last_actual_duration_recalculation_.end()) {
-		last_actual_duration_recalculation_.erase(i);
+	if (auto it = last_actual_duration_recalculation_.find(ship);
+	    it != last_actual_duration_recalculation_.end()) {
+		last_actual_duration_recalculation_.erase(it);
 	}
 
 	// Handling any items that were intended to be transported by this ship
@@ -326,7 +329,11 @@ void ShippingSchedule::ship_removed(const Game& /* game */, Ship* ship) {
 
 void ShippingSchedule::ship_added(Game& game, Ship& s) {
 	sslog("\nShippingSchedule::ship_added (%s)\n", s.get_shipname().c_str());
-	assert(!s.get_destination());
+	if (s.get_ship_type() == ShipType::kWarship) {
+		sslog("Is a warship, won't create a plan.\n\n");
+		return;
+	}
+	assert(s.get_destination_port(game) == nullptr);
 	plans_[&s] = ShipPlan();
 	last_actual_duration_recalculation_[&s] = game.get_gametime();
 	if (fleet_.get_ports().empty()) {
@@ -374,7 +381,7 @@ void ShippingSchedule::port_added(Game& game, PortDock& dock) {
 	// All ships are most likely panicking because they have
 	// no destination. Send them all to the new port.
 	for (Ship* ship : fleet_.get_ships()) {
-		assert(!ship->get_destination());
+		assert(ship->get_destination_port(game) == nullptr);
 		sslog("Rerouting %s there\n", ship->get_shipname().c_str());
 		ship->set_destination(game, &dock);
 		for (ShippingItem& si : ship->items_) {
@@ -984,7 +991,7 @@ Duration ShippingSchedule::update(Game& game) {
 		if (plans_[ship].empty()) {
 			sslog("No orders left, setting to idle\n");
 			ship->set_destination(game, nullptr);
-		} else if (plans_[ship].front().dock != ship->get_destination()) {
+		} else if (plans_[ship].front().dock != ship->get_destination_port(game)) {
 			PortDock* dest = plans_[ship].front().dock.get(game);
 			ship->set_destination(game, dest);
 			sslog("Rerouted to %u %s\n", dest->serial(),
@@ -1638,7 +1645,7 @@ Duration ShippingSchedule::update(Game& game) {
 void ShippingSchedule::log_general_info(const EditorGameBase& e) const {
 	const Time& t = e.get_gametime();
 	for (const auto& plan : plans_) {
-		log_dbg_time(t, "· %s: carrying %u items (capacity %u)\n",
+		log_dbg_time(t, "• %s: carrying %u items (capacity %u)\n",
 		             plan.first.get(e)->get_shipname().c_str(), plan.first.get(e)->get_nritems(),
 		             plan.first.get(e)->get_capacity());
 		std::map<Serial, uint32_t> dests;
@@ -1656,7 +1663,7 @@ void ShippingSchedule::log_general_info(const EditorGameBase& e) const {
 		}
 		log_dbg_time(t, "  SCHEDULE: %" PRIuS " stations\n", plan.second.size());
 		for (const SchedulingState& ss : plan.second) {
-			log_dbg_time(t, "          · in %u ms at %u\n", ss.duration_from_previous_location.get(),
+			log_dbg_time(t, "          • in %u ms at %u\n", ss.duration_from_previous_location.get(),
 			             ss.dock.serial());
 			log_dbg_time(t, "            load there: ");
 			if (ss.expedition) {

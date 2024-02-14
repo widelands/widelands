@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,9 @@
 #include "economy/flag_job.h"
 #include "io/streamwrite.h"
 #include "logic/cmd_queue.h"
+#include "logic/detected_port_space.h"
 #include "logic/editor_game_base.h"
+#include "logic/map_objects/tribes/shipstates.h"
 #include "logic/save_handler.h"
 #include "logic/trade_agreement.h"
 #include "scripting/logic.h"
@@ -50,7 +52,6 @@ struct PlayerImmovable;
 enum class IslandExploreDirection;
 class PortDock;
 enum class ScoutingDirection;
-enum class SoldierPreference : uint8_t;
 struct Ship;
 class TrainingSite;
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
@@ -138,6 +139,9 @@ public:
 		std::vector<uint32_t> nr_civil_blds_lost;
 		std::vector<uint32_t> nr_civil_blds_defeated;
 		std::vector<uint32_t> miltary_strength;
+		std::vector<uint32_t> nr_ships;
+		std::vector<uint32_t> nr_naval_victories;
+		std::vector<uint32_t> nr_naval_losses;
 
 		std::vector<uint32_t> custom_statistic;
 	};
@@ -214,7 +218,6 @@ public:
 
 	void postload() override;
 	void postload_addons_before_loading();
-	void check_legacy_addons_desync_magic();
 
 	void think() override;
 
@@ -276,7 +279,7 @@ public:
 	void send_player_flagaction(Flag&, FlagJob::Type);
 	void send_player_start_stop_building(Building&);
 	void send_player_toggle_infinite_production(Building&);
-	void send_player_militarysite_set_soldier_preference(Building&, SoldierPreference preference);
+	void send_player_set_soldier_preference(MapObject&, SoldierPreference preference);
 	void send_player_start_or_cancel_expedition(Building&);
 	void send_player_expedition_config(PortDock&, WareWorker, DescriptionIndex, bool);
 
@@ -288,7 +291,7 @@ public:
 	void send_player_set_input_max_fill(
 	   PlayerImmovable&, DescriptionIndex index, WareWorker type, uint32_t, bool is_cs = false);
 	void send_player_change_training_options(TrainingSite&, TrainingAttribute, int32_t);
-	void send_player_drop_soldier(Building&, int32_t);
+	void send_player_drop_soldier(MapObject&, int32_t);
 	void send_player_change_soldier_capacity(Building&, int32_t);
 	void send_player_enemyflagaction(const Flag&,
 	                                 PlayerNumber,
@@ -296,10 +299,16 @@ public:
 	                                 bool allow_conquer);
 	void send_player_mark_object_for_removal(PlayerNumber, Immovable&, bool);
 
-	void send_player_ship_scouting_direction(const Ship&, WalkingDir);
-	void send_player_ship_construct_port(const Ship&, Coords);
-	void send_player_ship_explore_island(const Ship&, IslandExploreDirection);
-	void send_player_sink_ship(const Ship&);
+	void send_player_ship_scouting_direction(const Ship& ship, WalkingDir direction);
+	void send_player_ship_construct_port(const Ship& ship, Coords coords);
+	void send_player_ship_explore_island(const Ship& ship, IslandExploreDirection direction);
+	void send_player_ship_set_destination(const Ship& ship, const MapObject* dest);
+	void send_player_ship_set_destination(const Ship& ship, const DetectedPortSpace& dest);
+	void send_player_sink_ship(const Ship& ship);
+	void send_player_refit_ship(const Ship& ship, ShipType t);
+	void send_player_warship_command(const Ship& ship,
+	                                 WarshipCommand cmd,
+	                                 const std::vector<uint32_t>& parameters);
 	void send_player_cancel_expedition_ship(const Ship&);
 	void send_player_propose_trade(const Trade& trade);
 	void send_player_toggle_mute(const Building&, bool all);
@@ -330,8 +339,8 @@ public:
 		return general_stats_;
 	}
 
-	void read_statistics(FileRead&);
-	void write_statistics(FileWrite&);
+	void read_statistics(FileRead& fr, uint16_t packet_version);
+	void write_statistics(FileWrite& fw);
 
 	void sample_statistics();
 
@@ -395,11 +404,18 @@ public:
 		return pending_diplomacy_actions_;
 	}
 
-	bool diplomacy_allowed() const {
+	[[nodiscard]] bool diplomacy_allowed() const {
 		return diplomacy_allowed_;
 	}
-	void set_diplomacy_allowed(bool d) {
-		diplomacy_allowed_ = d;
+	void set_diplomacy_allowed(bool allow) {
+		diplomacy_allowed_ = allow;
+	}
+
+	[[nodiscard]] bool naval_warfare_allowed() const {
+		return naval_warfare_allowed_;
+	}
+	void set_naval_warfare_allowed(bool allow) {
+		naval_warfare_allowed_ = allow;
 	}
 
 private:
@@ -485,6 +501,7 @@ private:
 
 	std::list<PendingDiplomacyAction> pending_diplomacy_actions_;
 	bool diplomacy_allowed_{true};
+	bool naval_warfare_allowed_{true};
 
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;
@@ -507,6 +524,7 @@ inline Coords Game::random_location(Coords location, uint8_t radius) {
 	const uint16_t s = radius * 2 + 1;
 	location.x += logic_rand() % s - radius;
 	location.y += logic_rand() % s - radius;
+	map().normalize_coords(location);
 	return location;
 }
 }  // namespace Widelands

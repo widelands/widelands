@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,6 @@
 #include <SDL_timer.h>
 
 #include "base/i18n.h"
-#include "base/log.h"
 #include "build_info.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -117,12 +116,14 @@ static int L_string_bformat(lua_State* L) {
 			case LUA_TFUNCTION:
 			case LUA_TUSERDATA:
 			case LUA_TTHREAD:
-			case LUA_TLIGHTUSERDATA:
-				report_error(L, "Cannot format the given type %s at index %i", lua_typename(L, i), i);
+			case LUA_TLIGHTUSERDATA: {
+				const std::string type = lua_typename(L, lua_type(L, i));
+				report_error(L, "Cannot format the given type %s at index %i", type.c_str(), i);
 				NEVER_HERE();  // as report_error will never return
+			}
 
 			default: {
-				const std::string type = lua_typename(L, i);
+				const std::string type = lua_typename(L, lua_type(L, i));
 				throw LuaError("Unexpected type " + type + " is not supported");
 			}
 			}
@@ -167,17 +168,6 @@ static int L_push_textdomain(lua_State* L) {
 static int L_pop_textdomain(lua_State* L) {
 	textdomains.at(L).pop_back();
 	return 0;
-}
-
-/* RST
-   .. function:: set_textdomain(domain)
-
-      DEPRECATED. Use `push_textdomain(domain)` instead.
-*/
-// TODO(Nordfriese): Delete after v1.0
-static int L_set_textdomain(lua_State* L) {
-	log_warn("set_textdomain is deprecated, use push_textdomain instead");
-	return L_push_textdomain(L);
 }
 
 static const TextdomainInfo* current_textdomain(const lua_State* L) {
@@ -417,11 +407,19 @@ static int L_ticks(lua_State* L) {
 .. function:: get_build_id()
 
    returns the version string of this widelands executable.  Something like
-   "build-16[debug]".
+   "1.1" (for a release),
+   "1.2~git26354 (4ba897c@master)" (development for 1.2) or
+   "build-16[debug]" (old, before version 1.0).
 */
 static int L_get_build_id(lua_State* L) {
 	lua_pushstring(L, build_id());
 	return 1;
+}
+
+// set_textdomain() was deprecated before v1.0, removed in v1.2
+// TODO(tothxa): Remove if the position in kPersistentGlobals can be filled with a new function?
+static int L_set_textdomain(lua_State*) {
+	throw LuaError("set_textdomain() is no longer supported");
 }
 
 const static struct luaL_Reg globals[] = {{"_", &L__},
@@ -430,6 +428,8 @@ const static struct luaL_Reg globals[] = {{"_", &L__},
                                           {"ngettext", &L_ngettext},
                                           {"pgettext", &L_pgettext},
                                           {"npgettext", &L_npgettext},
+                                          // TODO(tothxa): set_textdomain was removed, replace the
+                                          //   next time when a new global function is added?
                                           {"set_textdomain", &L_set_textdomain},
                                           {"push_textdomain", &L_push_textdomain},
                                           {"pop_textdomain", &L_pop_textdomain},

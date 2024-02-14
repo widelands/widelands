@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -896,13 +896,19 @@ bool Bob::check_node_blocked(Game& game, const FCoords& field, bool /* commit */
  * This will update the owner's viewing area.
  */
 void Bob::set_owner(Player* const player) {
-	if ((owner_ != nullptr) && (position_.field != nullptr)) {
-		owner_.load()->unsee_area(Area<FCoords>(get_position(), descr().vision_range()));
+	Player* old_owner = owner_.load();
+
+	if (old_owner != nullptr && position_.field != nullptr) {
+		old_owner->unsee_area(Area<FCoords>(get_position(), descr().vision_range()));
 	}
+
 	owner_ = player;
-	if ((owner_ != nullptr) && (position_.field != nullptr)) {
-		owner_.load()->see_area(Area<FCoords>(get_position(), descr().vision_range()));
+
+	if (player != nullptr && position_.field != nullptr) {
+		player->see_area(Area<FCoords>(get_position(), descr().vision_range()));
 	}
+
+	owner_changed(old_owner, player);
 }
 
 /**
@@ -910,6 +916,8 @@ void Bob::set_owner(Player* const player) {
  *
  * Performs the necessary (un)linking in the \ref Field structures and
  * updates the owner's viewing area, if the bob has an owner.
+ *
+ * Overriding implementations must always call this function!
  */
 void Bob::set_position(EditorGameBase& egbase, const Coords& coords) {
 	FCoords oldposition = position_;
@@ -958,7 +966,7 @@ void Bob::log_general_info(const EditorGameBase& egbase) const {
 	FORMAT_WARNINGS_OFF
 	molog(egbase.get_gametime(), "Owner: %p\n", owner_.load());
 	FORMAT_WARNINGS_ON
-	molog(egbase.get_gametime(), "Postition: (%i, %i)\n", position_.x, position_.y);
+	molog(egbase.get_gametime(), "Position: (%i, %i)\n", position_.x, position_.y);
 	molog(egbase.get_gametime(), "ActID: %i\n", actid_);
 	molog(egbase.get_gametime(), "ActScheduled: %s\n", actscheduled_ ? "true" : "false");
 	molog(egbase.get_gametime(), "Animation: %s\n",

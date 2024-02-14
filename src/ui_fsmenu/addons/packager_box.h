@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2023 by the Widelands Development Team
+ * Copyright (C) 2021-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,6 +26,7 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textinput.h"
 #include "ui_fsmenu/main.h"
+#include "wui/maptable.h"
 
 namespace AddOnsUI {
 
@@ -82,7 +83,7 @@ private:
 	// To keep track of which selection index in `dirstruct_`
 	// refers to which point of the file system hierarchy:
 	std::vector<std::vector<std::string>> dirstruct_to_tree_map_;
-	std::vector<FsMenu::MainMenu::MapEntry> maps_list_;
+	std::vector<MapEntry> maps_list_;
 	AddOns::AddOnCategory last_category_{AddOns::AddOnCategory::kNone};
 
 	UI::Box box_maps_list_, box_buttonsbox_, box_dirstruct_displayname_;

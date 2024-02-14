@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2023 by the Widelands Development Team
+ * Copyright (C) 2021-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -225,7 +225,7 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(FsMenu::MainMenu& mainmenu, Panel* 
 	add_space(kSpacing);
 	add(&box_maps_list_, UI::Box::Resizing::kExpandBoth);
 
-	FsMenu::MainMenu::find_maps("maps/My_Maps", maps_list_);
+	find_maps(kMyMapsDirFull, maps_list_);
 
 	my_maps_.selected.connect(
 	   [this](uint32_t /* value */) { map_add_.set_enabled(dirstruct_.selection_index() > 0); });
@@ -267,35 +267,35 @@ void MapsAddOnsPackagerBox::load_addon(AddOns::MutableAddOn* a) {
 	if (a->get_category() != last_category_) {
 		last_category_ = a->get_category();
 		my_maps_.clear();
-		for (const FsMenu::MainMenu::MapEntry& entry : maps_list_) {
-			if (entry.first.maptype == MapData::MapType::kNormal &&
+		for (const MapEntry& entry : maps_list_) {
+			if (entry.data.maptype == MapData::MapType::kNormal &&
 			    last_category_ == AddOns::AddOnCategory::kCampaign) {
 				// Only include scenarios for campaigns
 				continue;
 			}
 			my_maps_.add(
-			   entry.first.localized_name, entry.first.filenames.at(0), nullptr, false,
-			   format("%s<br>%s<br>%s<br>%s<br>%s<br>%s",
-			          g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
-			             .as_font_tag(entry.first.filenames.at(0)),
-			          format(_("Name: %s"),
-			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(entry.first.localized_name)),
-			          format(_("Size: %s"),
-			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(
-			                       format(_("%1$u×%2$u"), entry.first.width, entry.first.height))),
-			          format(_("Players: %s"),
-			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(std::to_string(entry.first.nrplayers))),
-			          format(_("Minimum Widelands Version: %s"),
-			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(entry.first.minimum_required_widelands_version.empty() ?
-                                             _("(none)") :
-                                             entry.first.minimum_required_widelands_version)),
-			          format(_("Description: %s"),
-			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                    .as_font_tag(entry.first.description))));
+			   entry.data.localized_name, entry.data.filenames.at(0), nullptr, false,
+			   format(
+			      "%s<br>%s<br>%s<br>%s<br>%s<br>%s",
+			      g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
+			         .as_font_tag(entry.data.filenames.at(0)),
+			      format(_("Name: %s"),
+			             g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                .as_font_tag(entry.data.localized_name)),
+			      format(_("Size: %s"),
+			             g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                .as_font_tag(format(_("%1$u×%2$u"), entry.data.width, entry.data.height))),
+			      format(_("Players: %s"),
+			             g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                .as_font_tag(std::to_string(entry.data.nrplayers))),
+			      format(_("Minimum Widelands Version: %s"),
+			             g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                .as_font_tag(entry.data.minimum_required_widelands_version.empty() ?
+                                         _("(none)") :
+                                         entry.data.minimum_required_widelands_version)),
+			      format(_("Description: %s"),
+			             g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                .as_font_tag(entry.data.description))));
 		}
 	}
 

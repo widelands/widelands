@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,6 +37,10 @@
 
 namespace Widelands {
 
+/* Changelog:
+ * 9: v1.1
+ * 10: Added configurable win condition duration
+ */
 constexpr uint16_t kCurrentPacketVersion = 10;
 constexpr const char* kMinimapFilename = "minimap.png";
 
@@ -56,13 +60,12 @@ void GamePreloadPacket::read(FileSystem& fs, Game& /* game */, MapObjectLoader* 
 		Section& s = prof.get_safe_section("global");
 		int32_t const packet_version = s.get_int("packet_version");
 
-		if (packet_version >= 6 && packet_version <= kCurrentPacketVersion) {
+		if (packet_version >= 9 && packet_version <= kCurrentPacketVersion) {
 			gametime_ = Time(s.get_safe_int("gametime"));
 			mapname_ = s.get_safe_string("mapname");
 
 			background_ = s.get_safe_string("background");
-			// TODO(Nordfriese): Savegame compatibility
-			background_theme_ = (packet_version < 7 ? "" : s.get_safe_string("theme"));
+			background_theme_ = s.get_safe_string("theme");
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0. `kCurrentPacketVersion` will
        // then need to be increased, and the minimum version for the following two values updated
        // accordingly.
@@ -73,7 +76,7 @@ void GamePreloadPacket::read(FileSystem& fs, Game& /* game */, MapObjectLoader* 
 #endif
 			player_nr_ = s.get_safe_int("player_nr");
 			win_condition_ = s.get_safe_string("win_condition");
-			// TODO(Nordfriese): Savegame compatibility
+			// TODO(Nordfriese): Savegame compatibility v1.1
 			win_condition_duration_ = (packet_version < 10 ? kDefaultWinConditionDuration :
                                                           s.get_safe_int("win_condition_duration"));
 			number_of_players_ = s.get_safe_int("player_amount");

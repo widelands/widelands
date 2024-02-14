@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
 # Elisabeth Jäger, 2015-2016
@@ -7,7 +7,7 @@
 # 39a0b2e5ef9bf024c2fcfbdd0522de1a_96abb62, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Lennard Hofmann <lennard.hofmann@web.de>, 2021
-# Matthias Mast <mastmatthias@gmail.com>, 2021
+# Matthias Mast, 2021
 # Simon Heimberg, 2023
 # Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022
 # Elisabeth Jäger, 2015
@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-05 02:59+0000\n"
+"POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
 "Last-Translator: Simon Heimberg, 2023\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,7 +50,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
                                  UI::UniqueWindow::Registry& registry,
                                  Registry& map_options_registry)
    : MainMenuLoadOrSaveMap(
-        parent, registry, "save_map_menu", _("Save Map"), false, true, "maps/My_Maps"),
+        parent, registry, "save_map_menu", _("Save Map"), false, true, kMyMapsDirFull),
      map_options_registry_(map_options_registry),
      edit_options_(&map_details_box_,
                    "edit_options",

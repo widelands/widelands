@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -75,7 +75,7 @@ Game
 
    .. code-block:: lua
 
-      current_speed = wl.Game().real_Speed
+      current_speed = wl.Game().real_speed
 
 */
 const char LuaGame::className[] = "Game";
@@ -90,7 +90,8 @@ const PropertyType<LuaGame> LuaGame::Properties[] = {
    PROP_RO(LuaGame, last_save_time),     PROP_RO(LuaGame, type),
    PROP_RO(LuaGame, interactive_player), PROP_RO(LuaGame, scenario_difficulty),
    PROP_RO(LuaGame, win_condition),      PROP_RO(LuaGame, win_condition_duration),
-   PROP_RW(LuaGame, allow_diplomacy),    {nullptr, nullptr, nullptr},
+   PROP_RW(LuaGame, allow_diplomacy),    PROP_RW(LuaGame, allow_naval_warfare),
+   {nullptr, nullptr, nullptr},
 };
 
 LuaGame::LuaGame(lua_State* /* L */) {
@@ -111,8 +112,12 @@ void LuaGame::__unpersist(lua_State* /* L */) {
 /* RST
    .. attribute:: real_speed
 
-      (RO) The speed that the current game is running at in ms.
+      (RO) The speed that the current game is set to run at in ms.
       For example, for game speed = 2x, this returns 2000.
+
+      In network games this is the speed resulting from the votes of the players, so it can be
+      different from the local player's :attr:`desired_speed`.
+      Else it is the same as :attr:`desired_speed`.
 */
 int LuaGame::get_real_speed(lua_State* L) {
 	lua_pushinteger(L, get_game(L).game_controller()->real_speed());
@@ -133,8 +138,9 @@ int LuaGame::get_time(lua_State* L) {
    .. attribute:: desired_speed
 
       (RW) Sets the desired speed of the game in ms per real second, so a speed of
-      2000 means the game runs at 2x speed. Note that this will not work in
-      network games as expected.
+      2000 means the game runs at 2x speed.
+      Note that in network games this is the speed voted by the current player. The speed resulting
+      from the votes is in :attr:`real_speed`.
 */
 // UNTESTED
 int LuaGame::set_desired_speed(lua_State* L) {
@@ -271,6 +277,23 @@ int LuaGame::get_allow_diplomacy(lua_State* L) {
 }
 int LuaGame::set_allow_diplomacy(lua_State* L) {
 	get_game(L).set_diplomacy_allowed(luaL_checkboolean(L, -1));
+	return 0;
+}
+
+/* RST
+   .. attribute:: allow_naval_warfare
+
+      .. versionadded:: 1.2
+
+      (RW) Whether players are allowed to refit ships to warships and
+      launch coastal invasions and ship-to-ship battles.
+*/
+int LuaGame::get_allow_naval_warfare(lua_State* L) {
+	lua_pushboolean(L, static_cast<int>(get_game(L).naval_warfare_allowed()));
+	return 1;
+}
+int LuaGame::set_allow_naval_warfare(lua_State* L) {
+	get_game(L).set_naval_warfare_allowed(luaL_checkboolean(L, -1));
 	return 0;
 }
 
@@ -846,6 +869,7 @@ int LuaDescriptions::new_tribe(lua_State* L) {
          ============================================  =======================================  =============
          :const:`"heal_per_second"`                    **amount**         (*int*)               1.1
          :const:`"conquers"`                           **radius**         (*int*)               1.1
+         :const:`"max_garrison"`                       **amount**         (*int*)               1.2
          ============================================  =======================================  =============
 
       .. table:: ``"tribe"``
@@ -1380,6 +1404,8 @@ void LuaDescriptions::do_modify_warehouse(lua_State* L,
 		whdescr.set_conquers(luaL_checkuint32(L, 5));
 	} else if (property == "heal_per_second") {
 		whdescr.set_heal_per_second(luaL_checkuint32(L, 5));
+	} else if (property == "max_garrison") {
+		whdescr.set_max_garrison(luaL_checkuint32(L, 5));
 	} else {
 		report_error(L, "modify_unit: invalid warehouse property '%s'", property.c_str());
 	}
@@ -1400,27 +1426,8 @@ void luaopen_wlroot(lua_State* L, bool in_editor) {
 		register_class<LuaGame>(L, "", true);
 		add_parent<LuaGame, LuaBases::LuaEditorGameBase>(L);
 		lua_pop(L, 1);  // Pop the meta table
-
-		// TODO(GunChleoc): These 2 classes are only here for savegame compatibility
-		register_class<LuaWorld>(L, "", false);
-		register_class<LuaTribes>(L, "", false);
 	}
 	register_class<LuaDescriptions>(L, "", false);
 }
-
-const char LuaWorld::className[] = "World";
-const MethodType<LuaWorld> LuaWorld::Methods[] = {
-   {nullptr, nullptr},
-};
-const PropertyType<LuaWorld> LuaWorld::Properties[] = {
-   {nullptr, nullptr, nullptr},
-};
-const char LuaTribes::className[] = "Tribes";
-const MethodType<LuaTribes> LuaTribes::Methods[] = {
-   {nullptr, nullptr},
-};
-const PropertyType<LuaTribes> LuaTribes::Properties[] = {
-   {nullptr, nullptr, nullptr},
-};
 
 }  // namespace LuaRoot

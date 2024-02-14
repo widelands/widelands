@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -114,11 +114,6 @@ TerrainDescription::TerrainDescription(const LuaTable& table,
 	if (dither_layer_disambiguator >= kMaxDitherLayerDisambiguator) {
 		throw wexception("Terrain %s: dither layer disambiguator %u exceeds maximum of %u",
 		                 name_.c_str(), dither_layer_disambiguator, kMaxDitherLayerDisambiguator);
-	}
-
-	if (table.has_key("tooltips")) {
-		// TODO(GunChleoc): Compatibility, remove after v1.0
-		log_warn("Terrain '%s' contains obsolete 'tooltips' table", name().c_str());
 	}
 
 	for (DescriptionIndex di = descriptions.nr_terrains(); di != 0u; --di) {

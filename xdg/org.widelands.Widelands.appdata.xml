@@ -20,6 +20,7 @@
   <summary xml:lang="fr">Un jeu de stratégie et de construction en temps réel</summary>
   <summary xml:lang="fy">In strategysk bouwspultsje mei rinnende tiid</summary>
   <summary xml:lang="gd">Geama ro-innleachd togail fìor-ama</summary>
+  <summary xml:lang="hr">Strateška igra građenja u stvarnom vremenu</summary>
   <summary xml:lang="hu">Valós idejű építkező stratégiai játék</summary>
   <summary xml:lang="id">Sebuah permainan pembangunan strategi dalam waktu nyata</summary>
   <summary xml:lang="it">Un gioco di costruzione e strategia in tempo reale</summary>
@@ -35,7 +36,7 @@
   <summary xml:lang="pt_BR">Um jogo em tempo real de estratégia e evolução</summary>
   <summary xml:lang="ro">Un joc strategic de construire în timp real</summary>
   <summary xml:lang="ru">Стратегия развития в реальном времени</summary>
-  <summary xml:lang="sk">Budovateľská stretegická hra v reálnom čase</summary>
+  <summary xml:lang="sk">Budovateľská strategická hra v reálnom čase</summary>
   <summary xml:lang="sl">Graditeljska strateška igra v realnem času</summary>
   <summary xml:lang="sr">Graditeljska strateška igra u realnom vremenu</summary>
   <summary xml:lang="sv">Ett uppbyggnadsstrategispel i realtid</summary>
@@ -145,6 +146,12 @@
     </p>
     <p xml:lang="gd">
       Bheir Widelands modh aon-chluicheadair chut le iomairtean a dh’innseas sgeulachdan nan treubhan agus an còmhstri aca air saoghal Widelands. Co-dhiù, cha tòisich an tuineachadh ann an dà-rìribh ach nuair a bhios tu ’s do charaidean cruinn còmhla air an eadar-lìn no air lìonra ionadail gus impireachdan ùra a thogail còmhla – no gus càch a chèile a cheannsachadh air a’ bhlàr. Tha inntinn fhuadain aig Widelands cuideachd a bheir dùbhlan dhut.
+    </p>
+    <p xml:lang="hr">
+      Postali ste poglavica malenog plemena. Vaš zadatak je da sagradite naselje koje stalno raste i širi se. Svaki član vašeg plemena će učiniti svoj dio kako bi proizveo više resursa za daljnji rast.
+    </p>
+    <p xml:lang="hr">
+      Widelands možete igrati sami protiv umjetne inteligencije u fino razrađenim i ispričanim pohodima (kampanjama) smještenim u Widelands svijet. Ipak, zabava stvarno počinje kad se udružite sa vašim prijateljima i zaigrate preko interneta ili LAN-a, stvarajte nova carstva zajedno ili se uništite u sveopćem ratu!
     </p>
     <p xml:lang="hu">
       Egy kis klán uralkodója vagy. A feladatod az, hogy felépíts egy folyamatosan növekvő települést. A klánod minden tagja kiveszi a részét a nyersanyagok termeléséből, hogy tovább segítse ezt a növekedést.

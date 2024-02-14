@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -213,6 +213,11 @@ public:
 	                                       bool avoid_fastclick,
 	                                       bool workarea_preview_wanted);
 	UI::UniqueWindow& show_ship_window(Widelands::Ship* ship);
+	virtual UI::Window* show_attack_window(const Widelands::Coords& /* coords */,
+	                                       Widelands::MapObject* /* object */,
+	                                       bool /* fastclick */) {
+		NEVER_HERE();  // Overridden in InteractivePlayer
+	}
 
 	MapView* map_view() {
 		return &map_view_;
@@ -246,6 +251,12 @@ public:
 		return true;
 	}
 
+	void add_toolbar_plugin(const std::string& action,
+	                        const std::string& icon,
+	                        const std::string& label,
+	                        const std::string& tt);
+	void add_plugin_timer(const std::string& action, uint32_t interval, bool failsafe);
+
 	UI::Box* toolbar();
 	// Sets the toolbar's position to the bottom middle and configures its background images
 	void finalize_toolbar();
@@ -264,6 +275,9 @@ protected:
 	void rebuild_mapview_menu();
 	// Takes the appropriate action when an item in the mapviewmenu_ is selected
 	void mapview_menu_selected(MapviewMenuEntry entry);
+
+	void add_plugin_menu();
+	bool plugin_action(const std::string& action, bool failsafe);
 
 	/// Adds a toolbar button to the toolbar
 	/// \param image_basename:      File path for button image starting from 'images' and without
@@ -444,7 +458,21 @@ private:
 
 	// Map View menu on the toolbar
 	UI::Dropdown<MapviewMenuEntry> mapviewmenu_;
+	UI::Dropdown<std::string> plugins_dropdown_;
 	QuickNavigation quick_navigation_;
+
+	struct PluginTimer {
+		PluginTimer() = default;
+		explicit PluginTimer(const std::string& a, uint32_t i, bool f)
+		   : action(a), interval(i), failsafe(f) {
+		}
+
+		std::string action;
+		uint32_t interval{0U};
+		uint32_t next_run{0U};
+		bool failsafe{false};
+	};
+	std::vector<PluginTimer> plugin_timers_;
 
 public:
 	MiniMap::Registry minimap_registry_;

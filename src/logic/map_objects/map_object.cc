@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -262,12 +262,6 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
                                const std::string& init_descname,
                                const LuaTable& table)
    : MapObjectDescr(init_type, init_name, init_descname) {
-	if (table.has_key("helptext_script")) {
-		// TODO(GunChleoc): Compatibility - remove after v1.0
-		log_warn("Helptexts script for %s is obsolete - please move strings to "
-		         "tribes/initializations/<tribename>/units.lua",
-		         name().c_str());
-	}
 
 	bool has_animations = false;
 	const std::string animation_directory(
@@ -295,11 +289,6 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 		}
 	}
 	check_representative_image();
-
-	// TODO(GunChleoc): Compatibility, remove after v1.0
-	if (table.has_key("attributes")) {
-		throw GameDataError("Attributes need to be defined in 'register.lua' now");
-	}
 }
 MapObjectDescr::~MapObjectDescr() {
 	anims_.clear();

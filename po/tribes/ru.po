@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
@@ -12,7 +12,8 @@
 # CupIvan <mail@cupivan.ru>, 2015
 # Sergey Trofimov <sarg@sarg.org.ru>, 2021
 # Viktor Skachkov <awsswa59@gmail.com>, 2018
-# Yuriy Sokolov <lention@mail.ru>, 2015,2022-2023
+# Viktor Skachkov <awsswa59@gmail.com>, 2023
+# Yuriy Sokolov <lention@mail.ru>, 2015,2022-2024
 # Владимир Шевцов, 2022
 # Олег Шевченко <olegrock@gmail.com>, 2017
 # Олег Шевченко <olegrock@gmail.com>, 2018
@@ -20,9 +21,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-10-05 02:30+0000\n"
+"POT-Creation-Date: 2024-02-08 02:24+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2022-2023\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2022-2024\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1465,7 +1466,7 @@ msgstr "Хижина золотоискателя"
 #. TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
 #: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:52
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:53
-#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:64
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:65
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:73
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:63
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:78
@@ -1481,8 +1482,8 @@ msgstr "Хижина золотоискателя"
 msgid "mining gold"
 msgstr "добывает золото"
 
-#: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:65
-#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:82
+#: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:66
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:83
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:87
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:96
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:85
@@ -1493,8 +1494,8 @@ msgstr "добывает золото"
 msgid "No Gold"
 msgstr "Нет золота"
 
-#: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:66
-#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:83
+#: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:67
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:84
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:88
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:97
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:86
@@ -1505,7 +1506,7 @@ msgstr "Нет золота"
 msgid "Main Gold Vein Exhausted"
 msgstr "Главная золотая жила истощена"
 
-#: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:68
+#: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:69
 msgctxt "amazons_building"
 msgid ""
 "This gold digger dwelling’s main vein is exhausted. Expect strongly "
@@ -1525,26 +1526,26 @@ msgid "gathering"
 msgstr "собирает съестное"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
-#: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:48
+#: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:51
 msgid "gathering meat"
 msgstr "добывает мясо"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
-#: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:56
+#: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:63
 msgid "gathering fish"
 msgstr "добывает рыбу"
 
-#: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:65
+#: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:76
 msgid "No Game, No Fish"
 msgstr "Нет дичи и улова"
 
 #. TRANSLATORS: "Game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:67
+#: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:78
 msgid "Out of Game and Fish"
 msgstr "Больше нет ни дичи, ни улова"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:69
+#: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:80
 msgctxt "amazons_building"
 msgid ""
 "The hunter-gatherer working out of this hunter-gatherer’s hut can’t find any"
@@ -1591,11 +1592,11 @@ msgstr "срезает лианы"
 
 #. TRANSLATORS: Short for "No Trees to cut lianas" for clay pits
 #: ../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:49
-#: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:57
-#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:46
-#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:58
-#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:49
-#: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:56
+#: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:65
+#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:50
+#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:62
+#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:53
+#: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:60
 msgid "No Trees"
 msgstr "Нет деревьев"
 
@@ -1619,19 +1620,19 @@ msgstr "Хижина рубщика редких деревьев"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
-#: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:39
+#: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:42
 msgid "harvesting balsa"
 msgstr "добывает бальсу"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
-#: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:48
+#: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:54
 msgid "harvesting rubber"
 msgstr "сбор каучука"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
-#: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:57
+#: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:66
 msgid "harvesting ironwood"
 msgstr "рубит железное дерево"
 
@@ -1678,15 +1679,15 @@ msgstr "Хижина разведчика"
 
 #. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
 #: ../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:41
-#: ../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:49
+#: ../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:53
 #: ../../data/tribes/buildings/productionsites/atlanteans/scouts_house/init.lua:50
-#: ../../data/tribes/buildings/productionsites/atlanteans/scouts_house/init.lua:61
+#: ../../data/tribes/buildings/productionsites/atlanteans/scouts_house/init.lua:65
 #: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:56
-#: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:64
+#: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:68
 #: ../../data/tribes/buildings/productionsites/empire/scouts_house/init.lua:51
-#: ../../data/tribes/buildings/productionsites/empire/scouts_house/init.lua:59
+#: ../../data/tribes/buildings/productionsites/empire/scouts_house/init.lua:63
 #: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:52
-#: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:60
+#: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:64
 msgid "scouting"
 msgstr "разведывает"
 
@@ -1713,7 +1714,7 @@ msgid "Stone Workshop"
 msgstr "Каменотесный цех"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:86
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:87
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:212
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:222
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:218
@@ -1723,14 +1724,14 @@ msgstr "делает лопату"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:98
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:99
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:118
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:75
 msgid "making a felling ax"
 msgstr "делает топор дровосека"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:110
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:111
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:173
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:196
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:179
@@ -1738,13 +1739,13 @@ msgid "making a pick"
 msgstr "делает кирку"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a machete because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:122
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:123
 msgid "making a machete"
 msgstr "делает мачете"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:134
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:135
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:183
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:166
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:184
@@ -1752,7 +1753,7 @@ msgid "making kitchen tools"
 msgstr "делает кухонную утварь"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:146
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:147
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:121
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:157
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:140
@@ -1761,42 +1762,42 @@ msgid "making a hammer"
 msgstr "делает молоток"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a chisel because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:158
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:159
 msgid "making a chisel"
 msgstr "делает зубило"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:170
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:171
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:220
 msgid "making needles"
 msgstr "Производит иглы"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a stone bowl because
 #. ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:182
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:183
 msgid "making a stone bowl"
 msgstr "вырезает каменную чашу"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making firestones because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:194
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:195
 msgid "making firestones"
-msgstr ""
+msgstr "делает огниво"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a wooden spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:206
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:207
 msgid "making a wooden spear"
 msgstr "делает деревянное копьё"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a stone-tipped spear
 #. because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:218
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:219
 msgid "making a stone-tipped spear"
 msgstr "делает копьё с каменным наконечником"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hardened spear
 #. because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:230
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:231
 msgid "making a hardened spear"
 msgstr "делает закаленное копьё"
 
@@ -1811,23 +1812,23 @@ msgstr "Хижина камнетёса"
 msgid "cutting granite"
 msgstr "рубит гранит"
 
-#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:44
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:45
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:56
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:69
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:56
+#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:48
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:49
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:60
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:80
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:60
 msgid "No Rocks"
 msgstr "Нет скал"
 
-#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:45
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:46
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:57
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:70
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:57
+#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:49
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:50
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:61
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:81
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:61
 msgid "Out of Rocks"
 msgstr "Больше нет скал"
 
-#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:46
+#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:50
 msgctxt "amazons_building"
 msgid ""
 "The stonecutter working at this stonecutter’s hut can’t find any rocks in "
@@ -1843,7 +1844,7 @@ msgstr "Каменоломня"
 #. TRANSLATORS: Completed/Skipped/Did not start mining because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:51
 msgid "mining"
-msgstr ""
+msgstr "рубит"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:64
@@ -1870,11 +1871,11 @@ msgstr "добывает кварц"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:91
 msgid "No Stones"
-msgstr ""
+msgstr "Нет камня"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:92
 msgid "Main Stone Vein Exhausted"
-msgstr ""
+msgstr "Главная каменная жила истощена"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:94
 msgctxt "amazons_building"
@@ -1901,23 +1902,23 @@ msgctxt "amazons_building"
 msgid "Water Gatherer’s Hut"
 msgstr "Хижина водоноса"
 
-#: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:50
-#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:55
-#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:64
-#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:59
-#: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:61
+#: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:55
+#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:58
+#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:67
+#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:62
+#: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:64
 msgid "No Water"
 msgstr "Нет воды"
 
-#: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:51
-#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:56
-#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:65
-#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:60
-#: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:62
+#: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:56
+#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:59
+#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:68
+#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:63
+#: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:65
 msgid "Out of Water"
 msgstr "Вода закончилась"
 
-#: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:52
+#: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:57
 msgctxt "amazons_building"
 msgid ""
 "The carrier working at this water gatherer’s hut can’t find any water in its"
@@ -1958,15 +1959,15 @@ msgstr "Хижина лесоруба"
 msgid "felling trees"
 msgstr "рубит деревья"
 
-#: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:58
-#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:47
-#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:59
-#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:50
-#: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:57
+#: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:66
+#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:51
+#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:63
+#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:54
+#: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:61
 msgid "Out of Trees"
 msgstr "Больше нет деревьев"
 
-#: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:59
+#: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:67
 msgctxt "amazons_building"
 msgid ""
 "The woodcutter working at this woodcutter’s hut can’t find any trees in her "
@@ -2171,18 +2172,18 @@ msgid "Fish Breeder’s House"
 msgstr "Дом рыбовода"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:51
-#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:52
-#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:61
-#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:52
-#: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:59
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:56
+#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:65
+#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:56
+#: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:63
 msgid "No Fish"
 msgstr "Нет рыбы"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:52
-#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:53
-#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:62
-#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:53
-#: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:60
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:57
+#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:66
+#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:57
+#: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:64
 msgid "Out of Fish"
 msgstr "Больше нет рыбы"
 
@@ -2214,7 +2215,7 @@ msgstr "Дом рыболова"
 msgid "fishing"
 msgstr "рыбачит"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:54
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:58
 msgctxt "atlanteans_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
@@ -2245,7 +2246,7 @@ msgctxt "atlanteans_building"
 msgid "Gold Mine"
 msgstr "Золотая шахта"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:85
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:86
 msgctxt "atlanteans_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2278,23 +2279,23 @@ msgstr "Домик охотника"
 msgid "hunting"
 msgstr "охотится"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:48
-#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:66
-#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:51
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:67
+#: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:52
+#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:70
+#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:55
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:71
 msgid "No Game"
 msgstr "Нет дичи"
 
 #. TRANSLATORS: "Game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:50
-#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:68
-#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:53
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:69
+#: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:54
+#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:72
+#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:57
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:73
 msgid "Out of Game"
 msgstr "Больше нет дичи"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:52
+#: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:56
 msgctxt "atlanteans_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
@@ -2379,12 +2380,12 @@ msgstr "Каменоломня"
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:36
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:47
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:52
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:55
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:47
 msgid "quarrying granite"
 msgstr "добывает гранит"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:47
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:51
 msgctxt "atlanteans_building"
 msgid ""
 "The stonecutter working at this quarry can’t find any rocks in his work "
@@ -2590,7 +2591,7 @@ msgctxt "atlanteans_building"
 msgid "Well"
 msgstr "Колодец"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:57
+#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:60
 msgctxt "atlanteans_building"
 msgid "The carrier working at this well can’t find any water in his well."
 msgstr "Носильщик, работающий у этого колодца, не может найти воду нем."
@@ -2601,7 +2602,7 @@ msgctxt "atlanteans_building"
 msgid "Woodcutter’s House"
 msgstr "Дом лесоруба"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:48
+#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:52
 msgctxt "atlanteans_building"
 msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
@@ -2776,7 +2777,7 @@ msgctxt "barbarians_building"
 msgid "Fisher’s Hut"
 msgstr "Хижина рыболова"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:63
+#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:67
 msgctxt "barbarians_building"
 msgid ""
 "The fisher working out of this fisher’s hut can’t find any fish in his work "
@@ -2879,7 +2880,7 @@ msgid "Hunter’s Hut"
 msgstr "Хижина охотника"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:70
+#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:74
 msgctxt "barbarians_building"
 msgid ""
 "The hunter working out of this hunter’s hut can’t find any game in his work "
@@ -2944,7 +2945,7 @@ msgctxt "barbarians_building"
 msgid "Lumberjack’s Hut"
 msgstr "Хижина дровосека"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:60
+#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:64
 msgctxt "barbarians_building"
 msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
@@ -2993,7 +2994,7 @@ msgctxt "barbarians_building"
 msgid "Quarry"
 msgstr "Каменоломня"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:58
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:62
 msgctxt "barbarians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -3096,7 +3097,7 @@ msgctxt "barbarians_building"
 msgid "Well"
 msgstr "Колодец"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:66
+#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:69
 msgctxt "barbarians_building"
 msgid "The carrier working at this well can’t find any water in his well."
 msgstr "Носильщик, работающий у этого колодца, не может найти воду в нем."
@@ -3235,7 +3236,7 @@ msgctxt "empire_building"
 msgid "Fisher’s House"
 msgstr "Дом рыболова"
 
-#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:54
+#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:58
 msgctxt "empire_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
@@ -3282,7 +3283,7 @@ msgid "Hunter’s House"
 msgstr "Домик охотника"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:55
+#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:59
 msgctxt "empire_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
@@ -3328,7 +3329,7 @@ msgctxt "empire_building"
 msgid "Lumberjack’s House"
 msgstr "Дом дровосека"
 
-#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:51
+#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:55
 msgctxt "empire_building"
 msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
@@ -3411,11 +3412,11 @@ msgid "Quarry"
 msgstr "Каменоломня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying marble because ...
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:60
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:67
 msgid "quarrying marble"
 msgstr "добывает мрамор"
 
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:71
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:82
 msgctxt "empire_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -3558,7 +3559,7 @@ msgctxt "empire_building"
 msgid "Well"
 msgstr "Колодец"
 
-#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:61
+#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:64
 msgctxt "empire_building"
 msgid "The carrier working at this well can’t find any water in his well."
 msgstr "Носильщик, работающий у этого колодца, не может найти воду в нем."
@@ -3898,7 +3899,7 @@ msgctxt "frisians_building"
 msgid "Fisher’s House"
 msgstr "Дом рыболова"
 
-#: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:61
+#: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:65
 msgctxt "frisians_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
@@ -3963,7 +3964,7 @@ msgid "Hunter’s House"
 msgstr "Домик охотника"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:71
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:75
 msgctxt "frisians_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
@@ -4015,7 +4016,7 @@ msgctxt "frisians_building"
 msgid "Quarry"
 msgstr "Каменоломня"
 
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:58
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:62
 msgctxt "frisians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -4186,7 +4187,7 @@ msgctxt "frisians_building"
 msgid "Well"
 msgstr "Колодец"
 
-#: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:63
+#: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:66
 msgctxt "frisians_building"
 msgid "The carrier working at this well can’t find any water in his well."
 msgstr "Носильщик, работающий у этого колодца, не может найти воду в нем."
@@ -4197,7 +4198,7 @@ msgctxt "frisians_building"
 msgid "Woodcutter’s House"
 msgstr "Дом лесоруба"
 
-#: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:58
+#: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:62
 msgctxt "frisians_building"
 msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
@@ -4679,7 +4680,7 @@ msgid "Warehouse"
 msgstr "Склад"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua:79
+#: ../../data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua:83
 msgctxt "atlanteans_building"
 msgid "Headquarters"
 msgstr "Штаб"
@@ -4859,19 +4860,19 @@ msgstr "Красная смородина (крохотное)"
 
 #: ../../data/tribes/immovables/berry_bushes/desert_hackberry/medium/init.lua:9
 msgid "Desert Hackberry (medium)"
-msgstr "Каркас (среднее)"
+msgstr "Пустынная ежевика (среднее)"
 
 #: ../../data/tribes/immovables/berry_bushes/desert_hackberry/ripe/init.lua:9
 msgid "Desert Hackberry (ripe)"
-msgstr "Каркас (зрелое)"
+msgstr "Пустынная ежевика (зрелое)"
 
 #: ../../data/tribes/immovables/berry_bushes/desert_hackberry/small/init.lua:9
 msgid "Desert Hackberry (small)"
-msgstr "Каркас (малое)"
+msgstr "Пустынная ежевика (малое)"
 
 #: ../../data/tribes/immovables/berry_bushes/desert_hackberry/tiny/init.lua:9
 msgid "Desert Hackberry (tiny)"
-msgstr "Каркас (крохотное)"
+msgstr "Пустынная ежевика (крохотное)"
 
 #: ../../data/tribes/immovables/berry_bushes/juniper/medium/init.lua:9
 msgid "Juniper (medium)"
@@ -5167,13 +5168,13 @@ msgstr "Нет ресурсов"
 #: ../../data/tribes/immovables/resi/amazons/stones_1/init.lua:8
 msgctxt "resource_indicator"
 msgid "Some Quartz"
-msgstr ""
+msgstr "Немного Кварца"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/amazons/stones_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Quartz"
-msgstr ""
+msgstr "Много кварца"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/coal_1/init.lua:8
@@ -5611,7 +5612,7 @@ msgid ""
 "an economy. Warning: the AI can’t successfully start from this."
 msgstr "Начать игру лишь со складом и просто нулевой экономикой. Внимание: ИИ не может полноценно играть в этом режиме."
 
-#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:45
+#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:46
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
 #: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:47
 #: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:48
@@ -5619,7 +5620,7 @@ msgstr "Начать игру лишь со складом и просто ну�
 msgid "Be careful"
 msgstr "Будь осторожен!"
 
-#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:45
+#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:46
 msgid ""
 "You only have exactly the wares for each tool you will need to start your "
 "economy. Make sure no unneeded tool is created."
@@ -5778,1507 +5779,1507 @@ msgid "Ship"
 msgstr "Судно"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:41
+#: ../../data/tribes/ships/amazons/init.lua:48
 msgctxt "shipname"
 msgid "Orinoco"
 msgstr "Ориноко"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:43
+#: ../../data/tribes/ships/amazons/init.lua:50
 msgctxt "shipname"
 msgid "Amazonas"
 msgstr "Амазонка"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:45
+#: ../../data/tribes/ships/amazons/init.lua:52
 msgctxt "shipname"
 msgid "Abacaxis"
 msgstr "Абакашис"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:47
+#: ../../data/tribes/ships/amazons/init.lua:54
 msgctxt "shipname"
 msgid "Anchicayá"
 msgstr "Анчикайя"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:49
+#: ../../data/tribes/ships/amazons/init.lua:56
 msgctxt "shipname"
 msgid "Guáitara"
 msgstr "Гуайтара"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:51
+#: ../../data/tribes/ships/amazons/init.lua:58
 msgctxt "shipname"
 msgid "Iscuandé"
 msgstr "Искуанде"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:53
+#: ../../data/tribes/ships/amazons/init.lua:60
 msgctxt "shipname"
 msgid "Putumayo"
 msgstr "Путумайо"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:55
+#: ../../data/tribes/ships/amazons/init.lua:62
 msgctxt "shipname"
 msgid "Acari"
 msgstr "Акари"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:57
+#: ../../data/tribes/ships/amazons/init.lua:64
 msgctxt "shipname"
 msgid "Acre"
 msgstr "Акре"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:59
+#: ../../data/tribes/ships/amazons/init.lua:66
 msgctxt "shipname"
 msgid "Açuã"
 msgstr "Асуа"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:61
+#: ../../data/tribes/ships/amazons/init.lua:68
 msgctxt "shipname"
 msgid "Acurauá"
 msgstr "Акурауа"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:63
+#: ../../data/tribes/ships/amazons/init.lua:70
 msgctxt "shipname"
 msgid "Aiari"
 msgstr "Аяри"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:65
+#: ../../data/tribes/ships/amazons/init.lua:72
 msgctxt "shipname"
 msgid "Alalaú"
 msgstr "Алалау"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:67
+#: ../../data/tribes/ships/amazons/init.lua:74
 msgctxt "shipname"
 msgid "Amanã"
 msgstr "Амана"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:69
+#: ../../data/tribes/ships/amazons/init.lua:76
 msgctxt "shipname"
 msgid "Amapá"
 msgstr "Амапа"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:71
+#: ../../data/tribes/ships/amazons/init.lua:78
 msgctxt "shipname"
 msgid "Andirá"
 msgstr "Андира"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:73
+#: ../../data/tribes/ships/amazons/init.lua:80
 msgctxt "shipname"
 msgid "Antimary"
 msgstr "Антимари"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:75
+#: ../../data/tribes/ships/amazons/init.lua:82
 msgctxt "shipname"
 msgid "Apoquitaua"
 msgstr "Апоквитауа"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:77
+#: ../../data/tribes/ships/amazons/init.lua:84
 msgctxt "shipname"
 msgid "Apuaú"
 msgstr "Апуау"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:79
+#: ../../data/tribes/ships/amazons/init.lua:86
 msgctxt "shipname"
 msgid "Araçá"
 msgstr "Араса"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:81
+#: ../../data/tribes/ships/amazons/init.lua:88
 msgctxt "shipname"
 msgid "Arara"
 msgstr "Арара"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:83
+#: ../../data/tribes/ships/amazons/init.lua:90
 msgctxt "shipname"
 msgid "Ararirá"
 msgstr "Арарира"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:85
+#: ../../data/tribes/ships/amazons/init.lua:92
 msgctxt "shipname"
 msgid "Arauã"
 msgstr "Арауа"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:87
+#: ../../data/tribes/ships/amazons/init.lua:94
 msgctxt "shipname"
 msgid "Aripuanã"
 msgstr "Арипуана"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:89
+#: ../../data/tribes/ships/amazons/init.lua:96
 msgctxt "shipname"
 msgid "Arrojo"
 msgstr "Аррожо"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:91
+#: ../../data/tribes/ships/amazons/init.lua:98
 msgctxt "shipname"
 msgid "Atiparaná"
 msgstr "Атипарана"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:93
+#: ../../data/tribes/ships/amazons/init.lua:100
 msgctxt "shipname"
 msgid "Atucatiquini"
 msgstr "Атукатиквини"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:95
+#: ../../data/tribes/ships/amazons/init.lua:102
 msgctxt "shipname"
 msgid "Autaz-mirim"
 msgstr "Аутаз-мирим"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:97
+#: ../../data/tribes/ships/amazons/init.lua:104
 msgctxt "shipname"
 msgid "Badajós"
 msgstr "Бадажос"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:99
+#: ../../data/tribes/ships/amazons/init.lua:106
 msgctxt "shipname"
 msgid "Bararati"
 msgstr "Барарати"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:101
+#: ../../data/tribes/ships/amazons/init.lua:108
 msgctxt "shipname"
 msgid "Biá"
 msgstr "Бия"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:103
+#: ../../data/tribes/ships/amazons/init.lua:110
 msgctxt "shipname"
 msgid "Camaiú"
 msgstr "Камаю"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:105
+#: ../../data/tribes/ships/amazons/init.lua:112
 msgctxt "shipname"
 msgid "Camanaú"
 msgstr "Каманау"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:107
+#: ../../data/tribes/ships/amazons/init.lua:114
 msgctxt "shipname"
 msgid "Canumã"
 msgstr "Канума"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:109
+#: ../../data/tribes/ships/amazons/init.lua:116
 msgctxt "shipname"
 msgid "Capucapu"
 msgstr "Капукапу"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:111
+#: ../../data/tribes/ships/amazons/init.lua:118
 msgctxt "shipname"
 msgid "Carabinani"
 msgstr "Карабинани"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:113
+#: ../../data/tribes/ships/amazons/init.lua:120
 msgctxt "shipname"
 msgid "Cauaburi"
 msgstr "Кауабури"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:115
+#: ../../data/tribes/ships/amazons/init.lua:122
 msgctxt "shipname"
 msgid "Caurés"
 msgstr "Каурез"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:117
+#: ../../data/tribes/ships/amazons/init.lua:124
 msgctxt "shipname"
 msgid "Ciriquiri"
 msgstr "Чирикири"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:119
+#: ../../data/tribes/ships/amazons/init.lua:126
 msgctxt "shipname"
 msgid "Coari"
 msgstr "Коари"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:121
+#: ../../data/tribes/ships/amazons/init.lua:128
 msgctxt "shipname"
 msgid "Copatana"
 msgstr "Копатана"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:123
+#: ../../data/tribes/ships/amazons/init.lua:130
 msgctxt "shipname"
 msgid "Coti"
 msgstr "Коти"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:125
+#: ../../data/tribes/ships/amazons/init.lua:132
 msgctxt "shipname"
 msgid "Cubate"
 msgstr "Кубате"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:127
+#: ../../data/tribes/ships/amazons/init.lua:134
 msgctxt "shipname"
 msgid "Cuiari"
 msgstr "Квиари"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:129
+#: ../../data/tribes/ships/amazons/init.lua:136
 msgctxt "shipname"
 msgid "Cuieiras"
 msgstr "Куэйрас"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:131
+#: ../../data/tribes/ships/amazons/init.lua:138
 msgctxt "shipname"
 msgid "Cuini"
 msgstr "Куини"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:133
+#: ../../data/tribes/ships/amazons/init.lua:140
 msgctxt "shipname"
 msgid "Cuniuá"
 msgstr "Куниуа"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:135
+#: ../../data/tribes/ships/amazons/init.lua:142
 msgctxt "shipname"
 msgid "Curicuriari"
 msgstr "Курикуриари"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:137
+#: ../../data/tribes/ships/amazons/init.lua:144
 msgctxt "shipname"
 msgid "Curiuaú"
 msgstr "Куриуау"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:139
+#: ../../data/tribes/ships/amazons/init.lua:146
 msgctxt "shipname"
 msgid "Curuçá"
 msgstr "Куруса"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:141
+#: ../../data/tribes/ships/amazons/init.lua:148
 msgctxt "shipname"
 msgid "Curuduri"
 msgstr "Курудури"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:143
+#: ../../data/tribes/ships/amazons/init.lua:150
 msgctxt "shipname"
 msgid "Curuquetê"
 msgstr "Курукете"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:145
+#: ../../data/tribes/ships/amazons/init.lua:152
 msgctxt "shipname"
 msgid "Daraá"
 msgstr "Дараа"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:147
+#: ../../data/tribes/ships/amazons/init.lua:154
 msgctxt "shipname"
 msgid "Demini"
 msgstr "Демини"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:149
+#: ../../data/tribes/ships/amazons/init.lua:156
 msgctxt "shipname"
 msgid "Eiru"
 msgstr "Эйру"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:151
+#: ../../data/tribes/ships/amazons/init.lua:158
 msgctxt "shipname"
 msgid "Endimari"
 msgstr "Эндимари"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:153
+#: ../../data/tribes/ships/amazons/init.lua:160
 msgctxt "shipname"
 msgid "Envira"
 msgstr "Энвира"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:155
+#: ../../data/tribes/ships/amazons/init.lua:162
 msgctxt "shipname"
 msgid "Gregório"
 msgstr "Грегорио"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:157
+#: ../../data/tribes/ships/amazons/init.lua:164
 msgctxt "shipname"
 msgid "Guaribe"
 msgstr "Гуарибе"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:159
+#: ../../data/tribes/ships/amazons/init.lua:166
 msgctxt "shipname"
 msgid "Iá"
 msgstr "Иа"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:161
+#: ../../data/tribes/ships/amazons/init.lua:168
 msgctxt "shipname"
 msgid "Iaco"
 msgstr "Яко"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:163
+#: ../../data/tribes/ships/amazons/init.lua:170
 msgctxt "shipname"
 msgid "Içá"
 msgstr "Иса"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:165
+#: ../../data/tribes/ships/amazons/init.lua:172
 msgctxt "shipname"
 msgid "Içana"
 msgstr "Исана"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:167
+#: ../../data/tribes/ships/amazons/init.lua:174
 msgctxt "shipname"
 msgid "Igapó-Açu"
 msgstr "Игапо-Асу"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:169
+#: ../../data/tribes/ships/amazons/init.lua:176
 msgctxt "shipname"
 msgid "Inauini"
 msgstr "Инауини"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:171
+#: ../../data/tribes/ships/amazons/init.lua:178
 msgctxt "shipname"
 msgid "Ipixuna"
 msgstr "Ипиксуна"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:173
+#: ../../data/tribes/ships/amazons/init.lua:180
 msgctxt "shipname"
 msgid "Itanhauá"
 msgstr "Итанауа"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:175
+#: ../../data/tribes/ships/amazons/init.lua:182
 msgctxt "shipname"
 msgid "Itaparaná"
 msgstr "Итапарна"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:177
+#: ../../data/tribes/ships/amazons/init.lua:184
 msgctxt "shipname"
 msgid "Itaquai"
 msgstr "Итакуай"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:179
+#: ../../data/tribes/ships/amazons/init.lua:186
 msgctxt "shipname"
 msgid "Itucumã"
 msgstr "Итукума"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:181
+#: ../../data/tribes/ships/amazons/init.lua:188
 msgctxt "shipname"
 msgid "Ituí"
 msgstr "Итуи"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:183
+#: ../../data/tribes/ships/amazons/init.lua:190
 msgctxt "shipname"
 msgid "Ituxi"
 msgstr "Итукси"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:185
+#: ../../data/tribes/ships/amazons/init.lua:192
 msgctxt "shipname"
 msgid "Jacaré"
 msgstr "Жакар"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:187
+#: ../../data/tribes/ships/amazons/init.lua:194
 msgctxt "shipname"
 msgid "Jamicia"
 msgstr "Жамасия"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:189
+#: ../../data/tribes/ships/amazons/init.lua:196
 msgctxt "shipname"
 msgid "Jandiatuba"
 msgstr "Жандиатуба"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:191
+#: ../../data/tribes/ships/amazons/init.lua:198
 msgctxt "shipname"
 msgid "Japurá"
 msgstr "Жапура"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:193
+#: ../../data/tribes/ships/amazons/init.lua:200
 msgctxt "shipname"
 msgid "Jaquirana"
 msgstr "Жаквирана"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:195
+#: ../../data/tribes/ships/amazons/init.lua:202
 msgctxt "shipname"
 msgid "Jari"
 msgstr "Жари"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:197
+#: ../../data/tribes/ships/amazons/init.lua:204
 msgctxt "shipname"
 msgid "Jatapu"
 msgstr "Жатапу"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:199
+#: ../../data/tribes/ships/amazons/init.lua:206
 msgctxt "shipname"
 msgid "Jatuarana"
 msgstr "Жатуарана"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:201
+#: ../../data/tribes/ships/amazons/init.lua:208
 msgctxt "shipname"
 msgid "Jaú"
 msgstr "Жау"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:203
+#: ../../data/tribes/ships/amazons/init.lua:210
 msgctxt "shipname"
 msgid "Jauaperi"
 msgstr "Жауапери"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:205
+#: ../../data/tribes/ships/amazons/init.lua:212
 msgctxt "shipname"
 msgid "Javary"
 msgstr "Жавари"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:207
+#: ../../data/tribes/ships/amazons/init.lua:214
 msgctxt "shipname"
 msgid "Juami"
 msgstr "Жуами"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:209
+#: ../../data/tribes/ships/amazons/init.lua:216
 msgctxt "shipname"
 msgid "Jufari"
 msgstr "Жуфари"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:211
+#: ../../data/tribes/ships/amazons/init.lua:218
 msgctxt "shipname"
 msgid "Juma"
 msgstr "Жума"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:213
+#: ../../data/tribes/ships/amazons/init.lua:220
 msgctxt "shipname"
 msgid "Juruá"
 msgstr "Журуа"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:215
+#: ../../data/tribes/ships/amazons/init.lua:222
 msgctxt "shipname"
 msgid "Juruena"
 msgstr "Журуена"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:217
+#: ../../data/tribes/ships/amazons/init.lua:224
 msgctxt "shipname"
 msgid "Jurupari"
 msgstr "Журупари"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:219
+#: ../../data/tribes/ships/amazons/init.lua:226
 msgctxt "shipname"
 msgid "Jutai"
 msgstr "Жутаи"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:221
+#: ../../data/tribes/ships/amazons/init.lua:228
 msgctxt "shipname"
 msgid "Jutaizinho"
 msgstr "Жутайзиньо"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:223
+#: ../../data/tribes/ships/amazons/init.lua:230
 msgctxt "shipname"
 msgid "Luna"
 msgstr "Луна"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:225
+#: ../../data/tribes/ships/amazons/init.lua:232
 msgctxt "shipname"
 msgid "Maiá"
 msgstr "Майя"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:227
+#: ../../data/tribes/ships/amazons/init.lua:234
 msgctxt "shipname"
 msgid "Maici"
 msgstr "Майси"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:229
+#: ../../data/tribes/ships/amazons/init.lua:236
 msgctxt "shipname"
 msgid "Mamiá"
 msgstr "Мамия"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:231
+#: ../../data/tribes/ships/amazons/init.lua:238
 msgctxt "shipname"
 msgid "Mamoriá"
 msgstr "Мамория"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:233
+#: ../../data/tribes/ships/amazons/init.lua:240
 msgctxt "shipname"
 msgid "Mamuru"
 msgstr "Мамуру"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:235
+#: ../../data/tribes/ships/amazons/init.lua:242
 msgctxt "shipname"
 msgid "Manacapuru"
 msgstr "Манакапуру"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:237
+#: ../../data/tribes/ships/amazons/init.lua:244
 msgctxt "shipname"
 msgid "Manicoré"
 msgstr "Маникоре"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:239
+#: ../../data/tribes/ships/amazons/init.lua:246
 msgctxt "shipname"
 msgid "Manicorezinho"
 msgstr "Маникорезиньо"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:241
+#: ../../data/tribes/ships/amazons/init.lua:248
 msgctxt "shipname"
 msgid "Mapari"
 msgstr "Мапари"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:243
+#: ../../data/tribes/ships/amazons/init.lua:250
 msgctxt "shipname"
 msgid "Mapiá"
 msgstr "Мапиа"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:245
+#: ../../data/tribes/ships/amazons/init.lua:252
 msgctxt "shipname"
 msgid "Maracanã"
 msgstr "Маракана"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:247
+#: ../../data/tribes/ships/amazons/init.lua:254
 msgctxt "shipname"
 msgid "Marari"
 msgstr "Марари"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:249
+#: ../../data/tribes/ships/amazons/init.lua:256
 msgctxt "shipname"
 msgid "Marauiá"
 msgstr "Марауйя"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:251
+#: ../../data/tribes/ships/amazons/init.lua:258
 msgctxt "shipname"
 msgid "Marié"
 msgstr "Мариэ"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:253
+#: ../../data/tribes/ships/amazons/init.lua:260
 msgctxt "shipname"
 msgid "Mariepauá"
 msgstr "Мариепауа"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:255
+#: ../../data/tribes/ships/amazons/init.lua:262
 msgctxt "shipname"
 msgid "Marimari"
 msgstr "Маримари"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:257
+#: ../../data/tribes/ships/amazons/init.lua:264
 msgctxt "shipname"
 msgid "Mataurá"
 msgstr "Матаура"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:259
+#: ../../data/tribes/ships/amazons/init.lua:266
 msgctxt "shipname"
 msgid "Matupiri"
 msgstr "Матупири"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:261
+#: ../../data/tribes/ships/amazons/init.lua:268
 msgctxt "shipname"
 msgid "Maués Açu"
 msgstr "Мауес Асу"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:263
+#: ../../data/tribes/ships/amazons/init.lua:270
 msgctxt "shipname"
 msgid "Mineruázinho"
 msgstr "Минеруазиньо"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:265
+#: ../../data/tribes/ships/amazons/init.lua:272
 msgctxt "shipname"
 msgid "Muaco"
 msgstr "Муако"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:267
+#: ../../data/tribes/ships/amazons/init.lua:274
 msgctxt "shipname"
 msgid "Mucum"
 msgstr "Мукум"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:269
+#: ../../data/tribes/ships/amazons/init.lua:276
 msgctxt "shipname"
 msgid "Mutum"
 msgstr "Мутум"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:271
+#: ../../data/tribes/ships/amazons/init.lua:278
 msgctxt "shipname"
 msgid "Nhamundá"
 msgstr "Намунда"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:273
+#: ../../data/tribes/ships/amazons/init.lua:280
 msgctxt "shipname"
 msgid "Paciá"
 msgstr "Пасия"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:275
+#: ../../data/tribes/ships/amazons/init.lua:282
 msgctxt "shipname"
 msgid "Padauari"
 msgstr "Падаунари"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:277
+#: ../../data/tribes/ships/amazons/init.lua:284
 msgctxt "shipname"
 msgid "Papagaio"
 msgstr "Папагайо"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:279
+#: ../../data/tribes/ships/amazons/init.lua:286
 msgctxt "shipname"
 msgid "Papuri"
 msgstr "Папури"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:281
+#: ../../data/tribes/ships/amazons/init.lua:288
 msgctxt "shipname"
 msgid "Paraconi"
 msgstr "Паракони"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:283
+#: ../../data/tribes/ships/amazons/init.lua:290
 msgctxt "shipname"
 msgid "Parauari"
 msgstr "Парауари"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:285
+#: ../../data/tribes/ships/amazons/init.lua:292
 msgctxt "shipname"
 msgid "Pardo"
 msgstr "Пардо"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:287
+#: ../../data/tribes/ships/amazons/init.lua:294
 msgctxt "shipname"
 msgid "Pati"
 msgstr "Пати"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:289
+#: ../../data/tribes/ships/amazons/init.lua:296
 msgctxt "shipname"
 msgid "Pauini"
 msgstr "Пауини"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:291
+#: ../../data/tribes/ships/amazons/init.lua:298
 msgctxt "shipname"
 msgid "Pinhuã"
 msgstr "Пинуа"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:293
+#: ../../data/tribes/ships/amazons/init.lua:300
 msgctxt "shipname"
 msgid "Piorini"
 msgstr "Пиорини"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:295
+#: ../../data/tribes/ships/amazons/init.lua:302
 msgctxt "shipname"
 msgid "Piratucu"
 msgstr "Пиратуку"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:297
+#: ../../data/tribes/ships/amazons/init.lua:304
 msgctxt "shipname"
 msgid "Pitinga"
 msgstr "Питинга"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:299
+#: ../../data/tribes/ships/amazons/init.lua:306
 msgctxt "shipname"
 msgid "Preto"
 msgstr "Прето"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:301
+#: ../../data/tribes/ships/amazons/init.lua:308
 msgctxt "shipname"
 msgid "Puduari"
 msgstr "Падуари"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:303
+#: ../../data/tribes/ships/amazons/init.lua:310
 msgctxt "shipname"
 msgid "Pureté"
 msgstr "Пуретэ"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:305
+#: ../../data/tribes/ships/amazons/init.lua:312
 msgctxt "shipname"
 msgid "Puruê"
 msgstr "Пуруэ"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:307
+#: ../../data/tribes/ships/amazons/init.lua:314
 msgctxt "shipname"
 msgid "Purus"
 msgstr "Пурус"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:309
+#: ../../data/tribes/ships/amazons/init.lua:316
 msgctxt "shipname"
 msgid "Quixito"
 msgstr "Квиксито"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:311
+#: ../../data/tribes/ships/amazons/init.lua:318
 msgctxt "shipname"
 msgid "Sepatini"
 msgstr "Сепатини"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:313
+#: ../../data/tribes/ships/amazons/init.lua:320
 msgctxt "shipname"
 msgid "Sepoti"
 msgstr "Сепоти"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:315
+#: ../../data/tribes/ships/amazons/init.lua:322
 msgctxt "shipname"
 msgid "Seruini"
 msgstr "Серуйни"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:317
+#: ../../data/tribes/ships/amazons/init.lua:324
 msgctxt "shipname"
 msgid "Sucunduri"
 msgstr "Секундури"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:319
+#: ../../data/tribes/ships/amazons/init.lua:326
 msgctxt "shipname"
 msgid "Tapajós"
 msgstr "Тапажос"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:321
+#: ../../data/tribes/ships/amazons/init.lua:328
 msgctxt "shipname"
 msgid "Tapauá"
 msgstr "Тапауа"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:323
+#: ../../data/tribes/ships/amazons/init.lua:330
 msgctxt "shipname"
 msgid "Tarauacá"
 msgstr "Тарауака"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:325
+#: ../../data/tribes/ships/amazons/init.lua:332
 msgctxt "shipname"
 msgid "Tarumã Açu"
 msgstr "Тарума Асу"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:327
+#: ../../data/tribes/ships/amazons/init.lua:334
 msgctxt "shipname"
 msgid "Tarumã Mirim"
 msgstr "Тарума Мирим"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:329
+#: ../../data/tribes/ships/amazons/init.lua:336
 msgctxt "shipname"
 msgid "Tea"
 msgstr "Теа"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:331
+#: ../../data/tribes/ships/amazons/init.lua:338
 msgctxt "shipname"
 msgid "Tefé"
 msgstr "Тефе"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:333
+#: ../../data/tribes/ships/amazons/init.lua:340
 msgctxt "shipname"
 msgid "Tonantins"
 msgstr "Тонантинс"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:335
+#: ../../data/tribes/ships/amazons/init.lua:342
 msgctxt "shipname"
 msgid "Toototobi"
 msgstr "Тоототоби"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:337
+#: ../../data/tribes/ships/amazons/init.lua:344
 msgctxt "shipname"
 msgid "Traíra"
 msgstr "Траира"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:339
+#: ../../data/tribes/ships/amazons/init.lua:346
 msgctxt "shipname"
 msgid "Tumiã"
 msgstr "Тумия"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:341
+#: ../../data/tribes/ships/amazons/init.lua:348
 msgctxt "shipname"
 msgid "Tupana"
 msgstr "Тупана"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:343
+#: ../../data/tribes/ships/amazons/init.lua:350
 msgctxt "shipname"
 msgid "Uaicurapa"
 msgstr "Уайкурапа"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:345
+#: ../../data/tribes/ships/amazons/init.lua:352
 msgctxt "shipname"
 msgid "Uarini"
 msgstr "Уарини"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:347
+#: ../../data/tribes/ships/amazons/init.lua:354
 msgctxt "shipname"
 msgid "Uatumã"
 msgstr "Уатума"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:349
+#: ../../data/tribes/ships/amazons/init.lua:356
 msgctxt "shipname"
 msgid "Uaupés"
 msgstr "Уаупес"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:351
+#: ../../data/tribes/ships/amazons/init.lua:358
 msgctxt "shipname"
 msgid "Umari"
 msgstr "Умари"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:353
+#: ../../data/tribes/ships/amazons/init.lua:360
 msgctxt "shipname"
 msgid "Uneiuxi"
 msgstr "Юнеиукси"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:355
+#: ../../data/tribes/ships/amazons/init.lua:362
 msgctxt "shipname"
 msgid "Unini"
 msgstr "Уними"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:357
+#: ../../data/tribes/ships/amazons/init.lua:364
 msgctxt "shipname"
 msgid "Uruá"
 msgstr "Уруа"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:359
+#: ../../data/tribes/ships/amazons/init.lua:366
 msgctxt "shipname"
 msgid "Urubaxi"
 msgstr "Урубакси"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:361
+#: ../../data/tribes/ships/amazons/init.lua:368
 msgctxt "shipname"
 msgid "Urubu"
 msgstr "Урубу"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:363
+#: ../../data/tribes/ships/amazons/init.lua:370
 msgctxt "shipname"
 msgid "Urucu"
 msgstr "Уруку"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:365
+#: ../../data/tribes/ships/amazons/init.lua:372
 msgctxt "shipname"
 msgid "Urupadi"
 msgstr "Урупади"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:367
+#: ../../data/tribes/ships/amazons/init.lua:374
 msgctxt "shipname"
 msgid "Xeruã"
 msgstr "Ксеруа"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
-#: ../../data/tribes/ships/amazons/init.lua:369
+#: ../../data/tribes/ships/amazons/init.lua:376
 msgctxt "shipname"
 msgid "Xie"
 msgstr "Се"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
-#: ../../data/tribes/ships/amazons/init.lua:371
+#: ../../data/tribes/ships/amazons/init.lua:378
 msgctxt "shipname"
 msgid "Apu Illapu"
 msgstr "Апу Иллапу"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
-#: ../../data/tribes/ships/amazons/init.lua:373
+#: ../../data/tribes/ships/amazons/init.lua:380
 msgctxt "shipname"
 msgid "Ayar Cachi"
 msgstr "Айяр Качи"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
-#: ../../data/tribes/ships/amazons/init.lua:375
+#: ../../data/tribes/ships/amazons/init.lua:382
 msgctxt "shipname"
 msgid "Illapa"
 msgstr "Иллапа"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
-#: ../../data/tribes/ships/amazons/init.lua:377
+#: ../../data/tribes/ships/amazons/init.lua:384
 msgctxt "shipname"
 msgid "Inti"
 msgstr "Инти"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
-#: ../../data/tribes/ships/amazons/init.lua:379
+#: ../../data/tribes/ships/amazons/init.lua:386
 msgctxt "shipname"
 msgid "Kuychi"
 msgstr "Кёйчи"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
-#: ../../data/tribes/ships/amazons/init.lua:381
+#: ../../data/tribes/ships/amazons/init.lua:388
 msgctxt "shipname"
 msgid "Mama Killa"
 msgstr "Мама Килла"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
-#: ../../data/tribes/ships/amazons/init.lua:383
+#: ../../data/tribes/ships/amazons/init.lua:390
 msgctxt "shipname"
 msgid "Mama Occlo"
 msgstr "Мама Оккло"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
-#: ../../data/tribes/ships/amazons/init.lua:385
+#: ../../data/tribes/ships/amazons/init.lua:392
 msgctxt "shipname"
 msgid "Manco Cápac"
 msgstr "Манко Капак"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
-#: ../../data/tribes/ships/amazons/init.lua:387
+#: ../../data/tribes/ships/amazons/init.lua:394
 msgctxt "shipname"
 msgid "Pachamama"
 msgstr "Пачамама"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
-#: ../../data/tribes/ships/amazons/init.lua:389
+#: ../../data/tribes/ships/amazons/init.lua:396
 msgctxt "shipname"
 msgid "Quchamama"
 msgstr "Кучамама"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
-#: ../../data/tribes/ships/amazons/init.lua:391
+#: ../../data/tribes/ships/amazons/init.lua:398
 msgctxt "shipname"
 msgid "Sachamama"
 msgstr "Сачамама"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
-#: ../../data/tribes/ships/amazons/init.lua:393
+#: ../../data/tribes/ships/amazons/init.lua:400
 msgctxt "shipname"
 msgid "Viracocha"
 msgstr "Виракоча"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca god
-#: ../../data/tribes/ships/amazons/init.lua:395
+#: ../../data/tribes/ships/amazons/init.lua:402
 msgctxt "shipname"
 msgid "Yakumama"
 msgstr "Якумама"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
-#: ../../data/tribes/ships/amazons/init.lua:397
+#: ../../data/tribes/ships/amazons/init.lua:404
 msgctxt "shipname"
 msgid "Atahuallpa"
 msgstr "Атауальпа"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
-#: ../../data/tribes/ships/amazons/init.lua:399
+#: ../../data/tribes/ships/amazons/init.lua:406
 msgctxt "shipname"
 msgid "Lloqe Yupanki"
 msgstr "Льоке Юпанки"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
-#: ../../data/tribes/ships/amazons/init.lua:401
+#: ../../data/tribes/ships/amazons/init.lua:408
 msgctxt "shipname"
 msgid "Manqo Qhapaq"
 msgstr "Манко Капакк"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
-#: ../../data/tribes/ships/amazons/init.lua:403
+#: ../../data/tribes/ships/amazons/init.lua:410
 msgctxt "shipname"
 msgid "Mayta Qhapaq"
 msgstr "Майта Капак"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
-#: ../../data/tribes/ships/amazons/init.lua:405
+#: ../../data/tribes/ships/amazons/init.lua:412
 msgctxt "shipname"
 msgid "Pachakuti"
 msgstr "Пачакути"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
-#: ../../data/tribes/ships/amazons/init.lua:407
+#: ../../data/tribes/ships/amazons/init.lua:414
 msgctxt "shipname"
 msgid "Qhapaq Yupanki"
 msgstr "Капак Юпанки"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
-#: ../../data/tribes/ships/amazons/init.lua:409
+#: ../../data/tribes/ships/amazons/init.lua:416
 msgctxt "shipname"
 msgid "Thupa"
 msgstr "Тхупа"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
-#: ../../data/tribes/ships/amazons/init.lua:411
+#: ../../data/tribes/ships/amazons/init.lua:418
 msgctxt "shipname"
 msgid "Urqon"
 msgstr "Уркон"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
-#: ../../data/tribes/ships/amazons/init.lua:413
+#: ../../data/tribes/ships/amazons/init.lua:420
 msgctxt "shipname"
 msgid "Washkar"
 msgstr "Вашкар"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
-#: ../../data/tribes/ships/amazons/init.lua:415
+#: ../../data/tribes/ships/amazons/init.lua:422
 msgctxt "shipname"
 msgid "Wayna Qhapaq"
 msgstr "Уайна Капак"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
-#: ../../data/tribes/ships/amazons/init.lua:417
+#: ../../data/tribes/ships/amazons/init.lua:424
 msgctxt "shipname"
 msgid "Yawar Waqaq"
 msgstr "Явар Вакак"
 
 #. TRANSLATORS: This Amazonian ship is named after an Inca ruler
-#: ../../data/tribes/ships/amazons/init.lua:419
+#: ../../data/tribes/ships/amazons/init.lua:426
 msgctxt "shipname"
 msgid "Zinchi Roqa"
 msgstr "Цинки Рока"
 
 #. TRANSLATORS: This Amazonian ship is named after the lake in the Andes
-#: ../../data/tribes/ships/amazons/init.lua:421
+#: ../../data/tribes/ships/amazons/init.lua:428
 msgctxt "shipname"
 msgid "Lake Titicaca"
 msgstr "Озеро Титикака"
 
 #. TRANSLATORS: This Amazonian ship is named after the main Inca temple
-#: ../../data/tribes/ships/amazons/init.lua:423
+#: ../../data/tribes/ships/amazons/init.lua:430
 msgctxt "shipname"
 msgid "Koricancha"
 msgstr "Кориканча"
 
 #. TRANSLATORS: This is the Atlanteans' ship's name used in lists of units
-#: ../../data/tribes/ships/atlanteans/init.lua:101
+#: ../../data/tribes/ships/atlanteans/init.lua:113
 msgctxt "atlanteans_ship"
 msgid "Ship"
 msgstr "Судно"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/ships/atlanteans/init.lua:134
+#: ../../data/tribes/ships/atlanteans/init.lua:153
 msgctxt "shipname"
 msgid "Abaco"
 msgstr "Абако"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/ships/atlanteans/init.lua:136
+#: ../../data/tribes/ships/atlanteans/init.lua:155
 msgctxt "shipname"
 msgid "Agate"
 msgstr "Агат"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/ships/atlanteans/init.lua:138
+#: ../../data/tribes/ships/atlanteans/init.lua:157
 msgctxt "shipname"
 msgid "Alexandrite"
 msgstr "Александрит"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/ships/atlanteans/init.lua:140
+#: ../../data/tribes/ships/atlanteans/init.lua:159
 msgctxt "shipname"
 msgid "Amber"
 msgstr "Янтарь"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/ships/atlanteans/init.lua:142
+#: ../../data/tribes/ships/atlanteans/init.lua:161
 msgctxt "shipname"
 msgid "Amethyst"
 msgstr "Аметист"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/ships/atlanteans/init.lua:144
+#: ../../data/tribes/ships/atlanteans/init.lua:163
 msgctxt "shipname"
 msgid "Anguilla"
 msgstr "Ангилья"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/ships/atlanteans/init.lua:146
+#: ../../data/tribes/ships/atlanteans/init.lua:165
 msgctxt "shipname"
 msgid "Antigua"
 msgstr "Антигуа"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/ships/atlanteans/init.lua:148
+#: ../../data/tribes/ships/atlanteans/init.lua:167
 msgctxt "shipname"
 msgid "Aquamarine"
 msgstr "Аквамарин"
 
 #. TRANSLATORS: This is an Atlantean ship name
-#: ../../data/tribes/ships/atlanteans/init.lua:150
+#: ../../data/tribes/ships/atlanteans/init.lua:169
 msgctxt "shipname"
 msgid "Atlantean’s Stronghold"
 msgstr "Твердыня Атлантов"
 
 #. TRANSLATORS: This is an Atlantean ship name
-#: ../../data/tribes/ships/atlanteans/init.lua:152
+#: ../../data/tribes/ships/atlanteans/init.lua:171
 msgctxt "shipname"
 msgid "Atlantis"
 msgstr "Атлантида"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/ships/atlanteans/init.lua:154
+#: ../../data/tribes/ships/atlanteans/init.lua:173
 msgctxt "shipname"
 msgid "Bahama"
 msgstr "Багамы"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/ships/atlanteans/init.lua:156
+#: ../../data/tribes/ships/atlanteans/init.lua:175
 msgctxt "shipname"
 msgid "Barbados"
 msgstr "Барбадос"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/ships/atlanteans/init.lua:158
+#: ../../data/tribes/ships/atlanteans/init.lua:177
 msgctxt "shipname"
 msgid "Barbuda"
 msgstr "Бермуды"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/ships/atlanteans/init.lua:160
+#: ../../data/tribes/ships/atlanteans/init.lua:179
 msgctxt "shipname"
 msgid "Beryl"
 msgstr "Берил"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/ships/atlanteans/init.lua:162
+#: ../../data/tribes/ships/atlanteans/init.lua:181
 msgctxt "shipname"
 msgid "Blanquilla"
 msgstr "Бланквилия"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/ships/atlanteans/init.lua:164
+#: ../../data/tribes/ships/atlanteans/init.lua:183
 msgctxt "shipname"
 msgid "Caicos"
 msgstr "Кайкос"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/ships/atlanteans/init.lua:166
+#: ../../data/tribes/ships/atlanteans/init.lua:185
 msgctxt "shipname"
 msgid "Cassiterite"
 msgstr "Олово"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/ships/atlanteans/init.lua:168
+#: ../../data/tribes/ships/atlanteans/init.lua:187
 msgctxt "shipname"
 msgid "Cat’s Eye"
 msgstr "Кошачий глаз"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/ships/atlanteans/init.lua:170
+#: ../../data/tribes/ships/atlanteans/init.lua:189
 msgctxt "shipname"
 msgid "Citrine"
 msgstr "Цитрин"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
-#: ../../data/tribes/ships/atlanteans/init.lua:172
+#: ../../data/tribes/ships/atlanteans/init.lua:191
 msgctxt "shipname"
 msgid "Colionder"
 msgstr "Колиондер"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/ships/atlanteans/init.lua:174
+#: ../../data/tribes/ships/atlanteans/init.lua:193
 msgctxt "shipname"
 msgid "Dominica"
 msgstr "Доминика"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/ships/atlanteans/init.lua:176
+#: ../../data/tribes/ships/atlanteans/init.lua:195
 msgctxt "shipname"
 msgid "Eleuthera"
 msgstr "Элевтера"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/ships/atlanteans/init.lua:178
+#: ../../data/tribes/ships/atlanteans/init.lua:197
 msgctxt "shipname"
 msgid "Emerald"
 msgstr "Изумруд"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/ships/atlanteans/init.lua:180
+#: ../../data/tribes/ships/atlanteans/init.lua:199
 msgctxt "shipname"
 msgid "Grenada"
 msgstr "Гренада"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/ships/atlanteans/init.lua:182
+#: ../../data/tribes/ships/atlanteans/init.lua:201
 msgctxt "shipname"
 msgid "Guadeloupe"
 msgstr "Гваделупа"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/ships/atlanteans/init.lua:184
+#: ../../data/tribes/ships/atlanteans/init.lua:203
 msgctxt "shipname"
 msgid "Inagua"
 msgstr "Инагуа"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
-#: ../../data/tribes/ships/atlanteans/init.lua:186
+#: ../../data/tribes/ships/atlanteans/init.lua:205
 msgctxt "shipname"
 msgid "Jundlina"
 msgstr "Джандлина"
 
 #. TRANSLATORS: This is an Atlantean ship name
-#: ../../data/tribes/ships/atlanteans/init.lua:188
+#: ../../data/tribes/ships/atlanteans/init.lua:207
 msgctxt "shipname"
 msgid "Juventud"
 msgstr "Жувентюд"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
-#: ../../data/tribes/ships/atlanteans/init.lua:190
+#: ../../data/tribes/ships/atlanteans/init.lua:209
 msgctxt "shipname"
 msgid "King Ajanthul"
 msgstr "Король Аджантул"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
-#: ../../data/tribes/ships/atlanteans/init.lua:192
+#: ../../data/tribes/ships/atlanteans/init.lua:211
 msgctxt "shipname"
 msgid "King Askandor"
 msgstr "Король Аскандор"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/ships/atlanteans/init.lua:194
+#: ../../data/tribes/ships/atlanteans/init.lua:213
 msgctxt "shipname"
 msgid "Kitts"
 msgstr "Киттс"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
-#: ../../data/tribes/ships/atlanteans/init.lua:196
+#: ../../data/tribes/ships/atlanteans/init.lua:215
 msgctxt "shipname"
 msgid "Loftomor"
 msgstr "Лофтомор"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/ships/atlanteans/init.lua:198
+#: ../../data/tribes/ships/atlanteans/init.lua:217
 msgctxt "shipname"
 msgid "Malachite"
 msgstr "Малахит"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/ships/atlanteans/init.lua:200
+#: ../../data/tribes/ships/atlanteans/init.lua:219
 msgctxt "shipname"
 msgid "Martinique"
 msgstr "Мартиника"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/ships/atlanteans/init.lua:202
+#: ../../data/tribes/ships/atlanteans/init.lua:221
 msgctxt "shipname"
 msgid "Montserrat"
 msgstr "Монсеррат"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/ships/atlanteans/init.lua:204
+#: ../../data/tribes/ships/atlanteans/init.lua:223
 msgctxt "shipname"
 msgid "Moonstone"
 msgstr "Лунный камень"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/ships/atlanteans/init.lua:206
+#: ../../data/tribes/ships/atlanteans/init.lua:225
 msgctxt "shipname"
 msgid "Mystic Quartz"
 msgstr "Горный кварц"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/ships/atlanteans/init.lua:208
+#: ../../data/tribes/ships/atlanteans/init.lua:227
 msgctxt "shipname"
 msgid "Nassau"
 msgstr "Нассау"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/ships/atlanteans/init.lua:210
+#: ../../data/tribes/ships/atlanteans/init.lua:229
 msgctxt "shipname"
 msgid "Nevis"
 msgstr "Невис"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/ships/atlanteans/init.lua:212
+#: ../../data/tribes/ships/atlanteans/init.lua:231
 msgctxt "shipname"
 msgid "Obsidian"
 msgstr "Обсидан"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/ships/atlanteans/init.lua:214
+#: ../../data/tribes/ships/atlanteans/init.lua:233
 msgctxt "shipname"
 msgid "Onyx"
 msgstr "Оникс"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
-#: ../../data/tribes/ships/atlanteans/init.lua:216
+#: ../../data/tribes/ships/atlanteans/init.lua:235
 msgctxt "shipname"
 msgid "Opol"
 msgstr "Опал"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/ships/atlanteans/init.lua:218
+#: ../../data/tribes/ships/atlanteans/init.lua:237
 msgctxt "shipname"
 msgid "Orchila"
 msgstr "Орчила"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
-#: ../../data/tribes/ships/atlanteans/init.lua:220
+#: ../../data/tribes/ships/atlanteans/init.lua:239
 msgctxt "shipname"
 msgid "Ostur"
 msgstr "Остур"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/ships/atlanteans/init.lua:222
+#: ../../data/tribes/ships/atlanteans/init.lua:241
 msgctxt "shipname"
 msgid "Pearl"
 msgstr "Жемчужина"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/ships/atlanteans/init.lua:224
+#: ../../data/tribes/ships/atlanteans/init.lua:243
 msgctxt "shipname"
 msgid "Sapphire"
 msgstr "Сапфир"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
-#: ../../data/tribes/ships/atlanteans/init.lua:226
+#: ../../data/tribes/ships/atlanteans/init.lua:245
 msgctxt "shipname"
 msgid "Satul"
 msgstr "Сатул"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
-#: ../../data/tribes/ships/atlanteans/init.lua:228
+#: ../../data/tribes/ships/atlanteans/init.lua:247
 msgctxt "shipname"
 msgid "Sidolus"
 msgstr "Сидолюс"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/ships/atlanteans/init.lua:230
+#: ../../data/tribes/ships/atlanteans/init.lua:249
 msgctxt "shipname"
 msgid "Sphalerite"
 msgstr "Сфалерит"
 
 #. TRANSLATORS: This is an Atlantean ship name
-#: ../../data/tribes/ships/atlanteans/init.lua:232
+#: ../../data/tribes/ships/atlanteans/init.lua:251
 msgctxt "shipname"
 msgid "Spider"
 msgstr "Паучиха"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/ships/atlanteans/init.lua:234
+#: ../../data/tribes/ships/atlanteans/init.lua:253
 msgctxt "shipname"
 msgid "Spinel"
 msgstr "Шпинель"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/ships/atlanteans/init.lua:236
+#: ../../data/tribes/ships/atlanteans/init.lua:255
 msgctxt "shipname"
 msgid "Sunstone"
 msgstr "Янтарь"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/ships/atlanteans/init.lua:238
+#: ../../data/tribes/ships/atlanteans/init.lua:257
 msgctxt "shipname"
 msgid "Tiger Eye"
 msgstr "Тигровый глаз"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/ships/atlanteans/init.lua:240
+#: ../../data/tribes/ships/atlanteans/init.lua:259
 msgctxt "shipname"
 msgid "Tobago"
 msgstr "Тобаго"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/ships/atlanteans/init.lua:242
+#: ../../data/tribes/ships/atlanteans/init.lua:261
 msgctxt "shipname"
 msgid "Topaz"
 msgstr "Топаз"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/ships/atlanteans/init.lua:244
+#: ../../data/tribes/ships/atlanteans/init.lua:263
 msgctxt "shipname"
 msgid "Tortuga"
 msgstr "Тортуга"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
-#: ../../data/tribes/ships/atlanteans/init.lua:246
+#: ../../data/tribes/ships/atlanteans/init.lua:265
 msgctxt "shipname"
 msgid "Tourmaline"
 msgstr "Турмалин"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
-#: ../../data/tribes/ships/atlanteans/init.lua:248
+#: ../../data/tribes/ships/atlanteans/init.lua:267
 msgctxt "shipname"
 msgid "Trinidad"
 msgstr "Тринидад"
@@ -7290,241 +7291,241 @@ msgid "Ship"
 msgstr "Судно"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:34
+#: ../../data/tribes/ships/barbarians/init.lua:41
 msgctxt "shipname"
 msgid "Agilaz"
 msgstr "Агилас"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:36
+#: ../../data/tribes/ships/barbarians/init.lua:43
 msgctxt "shipname"
 msgid "Aslaug"
 msgstr "Аслуг"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:38
+#: ../../data/tribes/ships/barbarians/init.lua:45
 msgctxt "shipname"
 msgid "Baldr"
 msgstr "Бальдр"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:40
+#: ../../data/tribes/ships/barbarians/init.lua:47
 msgctxt "shipname"
 msgid "Bear"
 msgstr "Медведь"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:42
+#: ../../data/tribes/ships/barbarians/init.lua:49
 msgctxt "shipname"
 msgid "Beowulf"
 msgstr "Беовульф"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:44
+#: ../../data/tribes/ships/barbarians/init.lua:51
 msgctxt "shipname"
 msgid "Bison"
 msgstr "Бизон"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
-#: ../../data/tribes/ships/barbarians/init.lua:46
+#: ../../data/tribes/ships/barbarians/init.lua:53
 msgctxt "shipname"
 msgid "Boldreth"
 msgstr "Болдрет"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
-#: ../../data/tribes/ships/barbarians/init.lua:48
+#: ../../data/tribes/ships/barbarians/init.lua:55
 msgctxt "shipname"
 msgid "Chat’Karuth"
 msgstr "Чат'Карут"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:50
+#: ../../data/tribes/ships/barbarians/init.lua:57
 msgctxt "shipname"
 msgid "Dellingr"
 msgstr "Делингр"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:52
+#: ../../data/tribes/ships/barbarians/init.lua:59
 msgctxt "shipname"
 msgid "Eagle"
 msgstr "Орёл"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:54
+#: ../../data/tribes/ships/barbarians/init.lua:61
 msgctxt "shipname"
 msgid "Fulla"
 msgstr "Фулла"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:56
+#: ../../data/tribes/ships/barbarians/init.lua:63
 msgctxt "shipname"
 msgid "Gersemi"
 msgstr "Герсеми"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:58
+#: ../../data/tribes/ships/barbarians/init.lua:65
 msgctxt "shipname"
 msgid "Hagbard"
 msgstr "Хагбард"
 
 #. TRANSLATORS: This Barbarian ship is named after a barbarian bard
-#: ../../data/tribes/ships/barbarians/init.lua:60
+#: ../../data/tribes/ships/barbarians/init.lua:67
 msgctxt "shipname"
 msgid "Hakhor"
 msgstr "Хакхор"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:62
+#: ../../data/tribes/ships/barbarians/init.lua:69
 msgctxt "shipname"
 msgid "Heidrek"
 msgstr "Хейдрик"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:64
+#: ../../data/tribes/ships/barbarians/init.lua:71
 msgctxt "shipname"
 msgid "Heimdallr"
 msgstr "Хеймдаль"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:66
+#: ../../data/tribes/ships/barbarians/init.lua:73
 msgctxt "shipname"
 msgid "Hnoss"
 msgstr "Хнос"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:68
+#: ../../data/tribes/ships/barbarians/init.lua:75
 msgctxt "shipname"
 msgid "Hrothgar"
 msgstr "Хротгар"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:70
+#: ../../data/tribes/ships/barbarians/init.lua:77
 msgctxt "shipname"
 msgid "Ingeld"
 msgstr "Ингельд"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:72
+#: ../../data/tribes/ships/barbarians/init.lua:79
 msgctxt "shipname"
 msgid "Karl Hundason"
 msgstr "Карл Хундсон"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
-#: ../../data/tribes/ships/barbarians/init.lua:74
+#: ../../data/tribes/ships/barbarians/init.lua:81
 msgctxt "shipname"
 msgid "Khantrukh"
 msgstr "Хантрух"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:76
+#: ../../data/tribes/ships/barbarians/init.lua:83
 msgctxt "shipname"
 msgid "Lynx"
 msgstr "Рысь"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:78
+#: ../../data/tribes/ships/barbarians/init.lua:85
 msgctxt "shipname"
 msgid "Mani"
 msgstr "Мани"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:80
+#: ../../data/tribes/ships/barbarians/init.lua:87
 msgctxt "shipname"
 msgid "Odin"
 msgstr "Водан"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:82
+#: ../../data/tribes/ships/barbarians/init.lua:89
 msgctxt "shipname"
 msgid "Red Fox"
 msgstr "Красный лис"
 
 #. TRANSLATORS: This Barbarian ship is mentioned in some lore texts
-#: ../../data/tribes/ships/barbarians/init.lua:84
+#: ../../data/tribes/ships/barbarians/init.lua:91
 msgctxt "shipname"
 msgid "Saxnot"
 msgstr "Сакснот"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:86
+#: ../../data/tribes/ships/barbarians/init.lua:93
 msgctxt "shipname"
 msgid "Sigmund"
 msgstr "Зигмунд"
 
 #. TRANSLATORS: This Barbarian ship is named after a barbarian bard
-#: ../../data/tribes/ships/barbarians/init.lua:88
+#: ../../data/tribes/ships/barbarians/init.lua:95
 msgctxt "shipname"
 msgid "Sigurd"
 msgstr "Сигурд"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:90
+#: ../../data/tribes/ships/barbarians/init.lua:97
 msgctxt "shipname"
 msgid "Snotra"
 msgstr "Снотра"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:92
+#: ../../data/tribes/ships/barbarians/init.lua:99
 msgctxt "shipname"
 msgid "Thor"
 msgstr "Тор"
 
 #. TRANSLATORS: This Barbarian ship is named after an in-game character
-#: ../../data/tribes/ships/barbarians/init.lua:94
+#: ../../data/tribes/ships/barbarians/init.lua:101
 msgctxt "shipname"
 msgid "Thron"
 msgstr "Трон"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:96
+#: ../../data/tribes/ships/barbarians/init.lua:103
 msgctxt "shipname"
 msgid "Ullr"
 msgstr "Уль"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:98
+#: ../../data/tribes/ships/barbarians/init.lua:105
 msgctxt "shipname"
 msgid "Valdar"
 msgstr "Вальдр"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:100
+#: ../../data/tribes/ships/barbarians/init.lua:107
 msgctxt "shipname"
 msgid "Vili"
 msgstr "Вили"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:102
+#: ../../data/tribes/ships/barbarians/init.lua:109
 msgctxt "shipname"
 msgid "Volf"
 msgstr "Волк"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:104
+#: ../../data/tribes/ships/barbarians/init.lua:111
 msgctxt "shipname"
 msgid "Wild Boar"
 msgstr "Секач"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:106
+#: ../../data/tribes/ships/barbarians/init.lua:113
 msgctxt "shipname"
 msgid "Valkyrie"
 msgstr "Валькирия"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:108
+#: ../../data/tribes/ships/barbarians/init.lua:115
 msgctxt "shipname"
 msgid "Wisent"
 msgstr "Зубр"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:110
+#: ../../data/tribes/ships/barbarians/init.lua:117
 msgctxt "shipname"
 msgid "Wolverine"
 msgstr "Росомаха"
 
 #. TRANSLATORS: This a Barbarian ship name
-#: ../../data/tribes/ships/barbarians/init.lua:112
+#: ../../data/tribes/ships/barbarians/init.lua:119
 msgctxt "shipname"
 msgid "Yrsa"
 msgstr "Ирса"
@@ -7536,463 +7537,463 @@ msgid "Ship"
 msgstr "Судно"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:34
+#: ../../data/tribes/ships/empire/init.lua:41
 msgctxt "shipname"
 msgid "Adriatic Sea"
 msgstr "Адриатика"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:36
+#: ../../data/tribes/ships/empire/init.lua:43
 msgctxt "shipname"
 msgid "Adamas"
 msgstr "Адамант"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:38
+#: ../../data/tribes/ships/empire/init.lua:45
 msgctxt "shipname"
 msgid "Agrippa"
 msgstr "Агриппа"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:40
+#: ../../data/tribes/ships/empire/init.lua:47
 msgctxt "shipname"
 msgid "Alexandria"
 msgstr "Алексадрия"
 
 #. TRANSLATORS: This Empire ship is named after an in-game character
-#: ../../data/tribes/ships/empire/init.lua:42
+#: ../../data/tribes/ships/empire/init.lua:49
 msgctxt "shipname"
 msgid "Amalea"
 msgstr "Амалия"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:44
+#: ../../data/tribes/ships/empire/init.lua:51
 msgctxt "shipname"
 msgid "Amolius"
 msgstr "Амолий"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
-#: ../../data/tribes/ships/empire/init.lua:46
+#: ../../data/tribes/ships/empire/init.lua:53
 msgctxt "shipname"
 msgid "Apollo"
 msgstr "Апполон"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:48
+#: ../../data/tribes/ships/empire/init.lua:55
 msgctxt "shipname"
 msgid "Aquila"
 msgstr "Аквила"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:50
+#: ../../data/tribes/ships/empire/init.lua:57
 msgctxt "shipname"
 msgid "Augustus"
 msgstr "Август"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:52
+#: ../../data/tribes/ships/empire/init.lua:59
 msgctxt "shipname"
 msgid "Aurum"
 msgstr "Аурум"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:54
+#: ../../data/tribes/ships/empire/init.lua:61
 msgctxt "shipname"
 msgid "Azurea Sea"
 msgstr "Лазурия"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:56
+#: ../../data/tribes/ships/empire/init.lua:63
 msgctxt "shipname"
 msgid "Baltic Sea"
 msgstr "Балтика"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:58
+#: ../../data/tribes/ships/empire/init.lua:65
 msgctxt "shipname"
 msgid "Bellona"
 msgstr "Беллона"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:60
+#: ../../data/tribes/ships/empire/init.lua:67
 msgctxt "shipname"
 msgid "Brutus"
 msgstr "Брут"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:62
+#: ../../data/tribes/ships/empire/init.lua:69
 msgctxt "shipname"
 msgid "Caligula"
 msgstr "Калигула"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:64
+#: ../../data/tribes/ships/empire/init.lua:71
 msgctxt "shipname"
 msgid "Camilla"
 msgstr "Камилла"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:66
+#: ../../data/tribes/ships/empire/init.lua:73
 msgctxt "shipname"
 msgid "Carrara"
 msgstr "Каррара"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:68
+#: ../../data/tribes/ships/empire/init.lua:75
 msgctxt "shipname"
 msgid "Cato"
 msgstr "Катон"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:70
+#: ../../data/tribes/ships/empire/init.lua:77
 msgctxt "shipname"
 msgid "Cæsar"
 msgstr "Цезарь"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:72
+#: ../../data/tribes/ships/empire/init.lua:79
 msgctxt "shipname"
 msgid "Cervus"
 msgstr "Цервус"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:74
+#: ../../data/tribes/ships/empire/init.lua:81
 msgctxt "shipname"
 msgid "Cicero"
 msgstr "Цицерон"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:76
+#: ../../data/tribes/ships/empire/init.lua:83
 msgctxt "shipname"
 msgid "Claudius"
 msgstr "Клавдий"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:78
+#: ../../data/tribes/ships/empire/init.lua:85
 msgctxt "shipname"
 msgid "Diana"
 msgstr "Диана"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:80
+#: ../../data/tribes/ships/empire/init.lua:87
 msgctxt "shipname"
 msgid "Delphinus"
 msgstr "Дельфин"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:82
+#: ../../data/tribes/ships/empire/init.lua:89
 msgctxt "shipname"
 msgid "Domitianus"
 msgstr "Домициан"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:84
+#: ../../data/tribes/ships/empire/init.lua:91
 msgctxt "shipname"
 msgid "Etna"
 msgstr "Этна"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:86
+#: ../../data/tribes/ships/empire/init.lua:93
 msgctxt "shipname"
 msgid "Faustulus"
 msgstr "Фавст"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:88
+#: ../../data/tribes/ships/empire/init.lua:95
 msgctxt "shipname"
 msgid "Ferrum"
 msgstr "Феррум"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:90
+#: ../../data/tribes/ships/empire/init.lua:97
 msgctxt "shipname"
 msgid "Galba"
 msgstr "Гальба"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:92
+#: ../../data/tribes/ships/empire/init.lua:99
 msgctxt "shipname"
 msgid "Gallus"
 msgstr "Галл"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:94
+#: ../../data/tribes/ships/empire/init.lua:101
 msgctxt "shipname"
 msgid "Gladiator"
 msgstr "Гладиатор"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:96
+#: ../../data/tribes/ships/empire/init.lua:103
 msgctxt "shipname"
 msgid "Gloria Imperii"
 msgstr "Глория империи"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:98
+#: ../../data/tribes/ships/empire/init.lua:105
 msgctxt "shipname"
 msgid "Ianus"
 msgstr "Янус"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:100
+#: ../../data/tribes/ships/empire/init.lua:107
 msgctxt "shipname"
 msgid "Iulius Cæsar"
 msgstr "Юлий Цезарь"
 
 #. TRANSLATORS: This Empire ship is named after a Roman goddess
-#: ../../data/tribes/ships/empire/init.lua:102
+#: ../../data/tribes/ships/empire/init.lua:109
 msgctxt "shipname"
 msgid "Iuno"
 msgstr "Юнона"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
-#: ../../data/tribes/ships/empire/init.lua:104
+#: ../../data/tribes/ships/empire/init.lua:111
 msgctxt "shipname"
 msgid "Iupiter"
 msgstr "Юпитер"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:106
+#: ../../data/tribes/ships/empire/init.lua:113
 msgctxt "shipname"
 msgid "Latium"
 msgstr "Лаций"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:108
+#: ../../data/tribes/ships/empire/init.lua:115
 msgctxt "shipname"
 msgid "Latonia"
 msgstr "Латония"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:110
+#: ../../data/tribes/ships/empire/init.lua:117
 msgctxt "shipname"
 msgid "Leo"
 msgstr "Лео"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:112
+#: ../../data/tribes/ships/empire/init.lua:119
 msgctxt "shipname"
 msgid "Lepus"
 msgstr "Лепус"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:114
+#: ../../data/tribes/ships/empire/init.lua:121
 msgctxt "shipname"
 msgid "Liguria"
 msgstr "Лигурия"
 
 #. TRANSLATORS: This Empire ship is named after an in-game character
-#: ../../data/tribes/ships/empire/init.lua:116
+#: ../../data/tribes/ships/empire/init.lua:123
 msgctxt "shipname"
 msgid "Lutius"
 msgstr "Люций"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:118
+#: ../../data/tribes/ships/empire/init.lua:125
 msgctxt "shipname"
 msgid "Marble"
 msgstr "Мрамор"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:120
+#: ../../data/tribes/ships/empire/init.lua:127
 msgctxt "shipname"
 msgid "Marcus Aurelius"
 msgstr "Марк Аврелий"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
-#: ../../data/tribes/ships/empire/init.lua:122
+#: ../../data/tribes/ships/empire/init.lua:129
 msgctxt "shipname"
 msgid "Mars"
 msgstr "Марс"
 
 #. TRANSLATORS: This Empire ship is named after a Roman goddess
-#: ../../data/tribes/ships/empire/init.lua:124
+#: ../../data/tribes/ships/empire/init.lua:131
 msgctxt "shipname"
 msgid "Minerva"
 msgstr "Минерва"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
-#: ../../data/tribes/ships/empire/init.lua:126
+#: ../../data/tribes/ships/empire/init.lua:133
 msgctxt "shipname"
 msgid "Neptune"
 msgstr "Нептун"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:128
+#: ../../data/tribes/ships/empire/init.lua:135
 msgctxt "shipname"
 msgid "Nero"
 msgstr "Нерон"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:130
+#: ../../data/tribes/ships/empire/init.lua:137
 msgctxt "shipname"
 msgid "Nerva"
 msgstr "Нерва"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:132
+#: ../../data/tribes/ships/empire/init.lua:139
 msgctxt "shipname"
 msgid "Octavianus"
 msgstr "Октавиан"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:134
+#: ../../data/tribes/ships/empire/init.lua:141
 msgctxt "shipname"
 msgid "Otho"
 msgstr "Ото"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
-#: ../../data/tribes/ships/empire/init.lua:136
+#: ../../data/tribes/ships/empire/init.lua:143
 msgctxt "shipname"
 msgid "Pluto"
 msgstr "Плутон"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:138
+#: ../../data/tribes/ships/empire/init.lua:145
 msgctxt "shipname"
 msgid "Portus Bellus"
 msgstr "Порт Беллус"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:140
+#: ../../data/tribes/ships/empire/init.lua:147
 msgctxt "shipname"
 msgid "Præda"
 msgstr "Преда"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:142
+#: ../../data/tribes/ships/empire/init.lua:149
 msgctxt "shipname"
 msgid "Quirinus"
 msgstr "Квирин"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:144
+#: ../../data/tribes/ships/empire/init.lua:151
 msgctxt "shipname"
 msgid "Remus"
 msgstr "Рем"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:146
+#: ../../data/tribes/ships/empire/init.lua:153
 msgctxt "shipname"
 msgid "Romulus"
 msgstr "Ромул"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:148
+#: ../../data/tribes/ships/empire/init.lua:155
 msgctxt "shipname"
 msgid "Sagitta"
 msgstr "Сагитта"
 
 #. TRANSLATORS: This Empire ship is named after an in-game character
-#: ../../data/tribes/ships/empire/init.lua:150
+#: ../../data/tribes/ships/empire/init.lua:157
 msgctxt "shipname"
 msgid "Saledus"
 msgstr "Салед"
 
 #. TRANSLATORS: This Empire ship is named after a Roman deity
-#: ../../data/tribes/ships/empire/init.lua:152
+#: ../../data/tribes/ships/empire/init.lua:159
 msgctxt "shipname"
 msgid "Saturn"
 msgstr "Сатурн"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:154
+#: ../../data/tribes/ships/empire/init.lua:161
 msgctxt "shipname"
 msgid "Scipio"
 msgstr "Сципион"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:156
+#: ../../data/tribes/ships/empire/init.lua:163
 msgctxt "shipname"
 msgid "Seneca"
 msgstr "Сенека"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:158
+#: ../../data/tribes/ships/empire/init.lua:165
 msgctxt "shipname"
 msgid "Siena"
 msgstr "Сиена"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:160
+#: ../../data/tribes/ships/empire/init.lua:167
 msgctxt "shipname"
 msgid "Spiculum"
 msgstr "Спикулюм"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:162
+#: ../../data/tribes/ships/empire/init.lua:169
 msgctxt "shipname"
 msgid "Thyrrenia"
 msgstr "Тиррения"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:164
+#: ../../data/tribes/ships/empire/init.lua:171
 msgctxt "shipname"
 msgid "Tiberius"
 msgstr "Тиберий"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:166
+#: ../../data/tribes/ships/empire/init.lua:173
 msgctxt "shipname"
 msgid "Titus"
 msgstr "Тит"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:168
+#: ../../data/tribes/ships/empire/init.lua:175
 msgctxt "shipname"
 msgid "Traianus"
 msgstr "Траян"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:170
+#: ../../data/tribes/ships/empire/init.lua:177
 msgctxt "shipname"
 msgid "Venator"
 msgstr "Венатор"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:172
+#: ../../data/tribes/ships/empire/init.lua:179
 msgctxt "shipname"
 msgid "Venus"
 msgstr "Венера"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:174
+#: ../../data/tribes/ships/empire/init.lua:181
 msgctxt "shipname"
 msgid "Vergilius"
 msgstr "Вергилий"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:176
+#: ../../data/tribes/ships/empire/init.lua:183
 msgctxt "shipname"
 msgid "Vespa"
 msgstr "Веспа"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:178
+#: ../../data/tribes/ships/empire/init.lua:185
 msgctxt "shipname"
 msgid "Vespasianus"
 msgstr "Веспасиан"
 
 #. TRANSLATORS: This Empire ship is named after a Roman goddess
-#: ../../data/tribes/ships/empire/init.lua:180
+#: ../../data/tribes/ships/empire/init.lua:187
 msgctxt "shipname"
 msgid "Vesta"
 msgstr "Веста"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:182
+#: ../../data/tribes/ships/empire/init.lua:189
 msgctxt "shipname"
 msgid "Vesuvius"
 msgstr "Везувий"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:184
+#: ../../data/tribes/ships/empire/init.lua:191
 msgctxt "shipname"
 msgid "Vinea"
 msgstr "Винея"
 
 #. TRANSLATORS: This is an Empire ship name
-#: ../../data/tribes/ships/empire/init.lua:186
+#: ../../data/tribes/ships/empire/init.lua:193
 msgctxt "shipname"
 msgid "Vitellius"
 msgstr "Вителлий"
@@ -8004,168 +8005,168 @@ msgid "Ship"
 msgstr "Судно"
 
 #. TRANSLATORS: This Frisian ship is named after an island in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:40
+#: ../../data/tribes/ships/frisians/init.lua:48
 msgctxt "shipname"
 msgid "Amrum"
 msgstr "Амрум"
 
 #. TRANSLATORS: This Frisian ship is named after a no longer existing island
 #. in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:42
+#: ../../data/tribes/ships/frisians/init.lua:50
 msgctxt "shipname"
 msgid "Alt-Nordstrand"
 msgstr "Альт-Нордстранд"
 
 #. TRANSLATORS: This Frisian ship is named after a peninsula in Northern
 #. Frisia
-#: ../../data/tribes/ships/frisians/init.lua:44
+#: ../../data/tribes/ships/frisians/init.lua:52
 msgctxt "shipname"
 msgid "Eiderstedt"
 msgstr "Эйдерстедт"
 
 #. TRANSLATORS: This Frisian ship is named after an island in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:46
+#: ../../data/tribes/ships/frisians/init.lua:54
 msgctxt "shipname"
 msgid "Föhr"
 msgstr "Фёр"
 
 #. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:48
+#: ../../data/tribes/ships/frisians/init.lua:56
 msgctxt "shipname"
 msgid "Gröde"
 msgstr "Грёде"
 
 #. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:50
+#: ../../data/tribes/ships/frisians/init.lua:58
 msgctxt "shipname"
 msgid "Habel"
 msgstr "Хабель"
 
 #. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:52
+#: ../../data/tribes/ships/frisians/init.lua:60
 msgctxt "shipname"
 msgid "Hamburger Hallig"
 msgstr "Гамбургер Халлиг"
 
 #. TRANSLATORS: This Frisian ship is named after an island in the North Sea
-#: ../../data/tribes/ships/frisians/init.lua:54
+#: ../../data/tribes/ships/frisians/init.lua:62
 msgctxt "shipname"
 msgid "Helgoland"
 msgstr "Гельголанд"
 
 #. TRANSLATORS: This Frisian ship is named after a region in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:56
+#: ../../data/tribes/ships/frisians/init.lua:64
 msgctxt "shipname"
 msgid "Hever"
 msgstr "Хевер"
 
 #. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:58
+#: ../../data/tribes/ships/frisians/init.lua:66
 msgctxt "shipname"
 msgid "Hooge"
 msgstr "Хооге"
 
 #. TRANSLATORS: This Frisian ship is named after a sand in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:60
+#: ../../data/tribes/ships/frisians/init.lua:68
 msgctxt "shipname"
 msgid "Japsand"
 msgstr "Япсанд"
 
 #. TRANSLATORS: This Frisian ship is named after a sand in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:62
+#: ../../data/tribes/ships/frisians/init.lua:70
 msgctxt "shipname"
 msgid "Kormoransand"
 msgstr "Корморансанд"
 
 #. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:64
+#: ../../data/tribes/ships/frisians/init.lua:72
 msgctxt "shipname"
 msgid "Langeneß"
 msgstr "Лангенесс"
 
 #. TRANSLATORS: This Frisian ship is named after a water body in Northern
 #. Frisia
-#: ../../data/tribes/ships/frisians/init.lua:66
+#: ../../data/tribes/ships/frisians/init.lua:74
 msgctxt "shipname"
 msgid "Norderaue"
 msgstr "Нордерауе"
 
 #. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:68
+#: ../../data/tribes/ships/frisians/init.lua:76
 msgctxt "shipname"
 msgid "Norderoog"
 msgstr "Нордеруг"
 
 #. TRANSLATORS: This Frisian ship is named after a sand in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:70
+#: ../../data/tribes/ships/frisians/init.lua:78
 msgctxt "shipname"
 msgid "Norderoogsand"
 msgstr "Нордеругсанд"
 
 #. TRANSLATORS: This Frisian ship is named after an island in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:72
+#: ../../data/tribes/ships/frisians/init.lua:80
 msgctxt "shipname"
 msgid "Nordstrand"
 msgstr "Нордстранд"
 
 #. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:74
+#: ../../data/tribes/ships/frisians/init.lua:82
 msgctxt "shipname"
 msgid "Nordstrandischmoor"
 msgstr "Нордстрандишмур"
 
 #. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:76
+#: ../../data/tribes/ships/frisians/init.lua:84
 msgctxt "shipname"
 msgid "Oland"
 msgstr "Оланд"
 
 #. TRANSLATORS: This Frisian ship is named after an island in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:78
+#: ../../data/tribes/ships/frisians/init.lua:86
 msgctxt "shipname"
 msgid "Pellworm"
 msgstr "Пилворм"
 
 #. TRANSLATORS: This Frisian ship is named after a no longer existing island
 #. in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:80
+#: ../../data/tribes/ships/frisians/init.lua:88
 msgctxt "shipname"
 msgid "Strand"
 msgstr "Странд"
 
 #. TRANSLATORS: This Frisian ship is named after a water body in Northern
 #. Frisia
-#: ../../data/tribes/ships/frisians/init.lua:82
+#: ../../data/tribes/ships/frisians/init.lua:90
 msgctxt "shipname"
 msgid "Süderaue"
 msgstr "Зюдерау"
 
 #. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:84
+#: ../../data/tribes/ships/frisians/init.lua:92
 msgctxt "shipname"
 msgid "Süderoog"
 msgstr "Зюдеруг"
 
 #. TRANSLATORS: This Frisian ship is named after a sand in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:86
+#: ../../data/tribes/ships/frisians/init.lua:94
 msgctxt "shipname"
 msgid "Süderoogsand"
 msgstr "Зюдеругсанд"
 
 #. TRANSLATORS: This Frisian ship is named after a Hallig in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:88
+#: ../../data/tribes/ships/frisians/init.lua:96
 msgctxt "shipname"
 msgid "Südfall"
 msgstr "Зюдфал"
 
 #. TRANSLATORS: This Frisian ship is named after an island in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:90
+#: ../../data/tribes/ships/frisians/init.lua:98
 msgctxt "shipname"
 msgid "Sylt"
 msgstr "Зильт"
 
 #. TRANSLATORS: This Frisian ship is named after a region in Northern Frisia
-#: ../../data/tribes/ships/frisians/init.lua:92
+#: ../../data/tribes/ships/frisians/init.lua:100
 msgctxt "shipname"
 msgid "Uthlande"
 msgstr "Ютландия"
@@ -8426,7 +8427,7 @@ msgstr "Клещи"
 #: ../../data/tribes/wares/firestones/init.lua:8
 msgctxt "ware"
 msgid "Firestones"
-msgstr ""
+msgstr "Огниво"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/fish/init.lua:8

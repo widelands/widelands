@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2023 by the Widelands Development Team
+ * Copyright (C) 2008-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -79,7 +79,6 @@ struct DefaultAI : ComputerPlayer {
 	enum class WalkSearch : uint8_t { kAnyPlayer, kOtherPlayers, kEnemy };
 	enum class WoodPolicy : uint8_t { kDismantleRangers, kStopRangers, kAllowRangers };
 	enum class NewShip : uint8_t { kBuilt, kFoundOnLoad };
-	enum class FleetStatus : uint8_t { kNeedShip = 0, kEnoughShips = 1, kDoNothing = 2 };
 	enum class PerfEvaluation : uint8_t { kForConstruction, kForDismantle };
 	enum class BasicEconomyBuildingStatus : uint8_t { kEncouraged, kDiscouraged, kNeutral, kNone };
 
@@ -144,6 +143,33 @@ private:
 
 	static constexpr bool kAbsValue = true;
 	static constexpr int32_t kSpotsTooLittle = 15;
+	// following two are used for roads management, for creating shortcuts and dismantling
+	// dispensable roads
+	static constexpr int32_t kSpotsEnough = 25;
+	static constexpr uint16_t kTargetQuantCap = 30;
+
+	// this is intended for map developers & testers, should be off by default
+	// also note that some of that stats is printed only in verbose mode
+	static constexpr bool kEnableStatsPrint = false;
+	// enable also the above to print the results of the performance data collection
+	static constexpr bool kCollectPerfData = false;
+
+	// for scheduler
+	static constexpr int kMaxJobs = 4;
+
+	// Count of mine types / ground resources
+	static constexpr int kMineTypes = 4;
+	// following is in milliseconds (widelands counts time in ms)
+	static constexpr Duration kFieldInfoExpiration{14 * 1000};
+	static constexpr Duration kMineFieldInfoExpiration{20 * 1000};
+	static constexpr Duration kNewMineConstInterval{19000};
+	// building of the same building can be started after 25s at earliest
+	static constexpr Duration kBuildingMinInterval{25 * 1000};
+	static constexpr Duration kMinBFCheckInterval{5 * 1000};
+	static constexpr Duration kMinMFCheckInterval{19 * 1000};
+	static constexpr Duration kRemainingBasicBuildingsResetTime{1 * 60 * 1000};
+	// management frequencies
+	static constexpr Duration kBusyMineUpdateInterval{2000};
 	static constexpr Duration kManagementUpdateInterval{10 * 60 * 1000};
 	static constexpr Duration kStatUpdateInterval{15 * 1000};
 	static constexpr Duration kFlagWarehouseUpdInterval{15 * 1000};
@@ -154,6 +180,16 @@ private:
 	static constexpr Duration kExpeditionMaxDuration{210 * 60 * 1000};
 	static constexpr Widelands::Serial kNoShip = Widelands::kInvalidSerial;
 	static constexpr Duration kShipCheckInterval{5 * 1000};
+	static constexpr Duration kMarineDecisionInterval{20 * 1000};
+
+	// Maximum number of ports per tradeship
+	static constexpr Widelands::Quantity kPortsPerTradeShip = 3;
+
+	// Number of defending warships the AI sets for each port initially
+	static constexpr Widelands::Quantity kWarshipsPerPort = 2;
+
+	// Number of defending soldiers the AI sets for each port initially
+	static constexpr Widelands::Quantity kPortDefaultGarrison = 5;
 
 	// used by defaultai_warfare.cc
 	// duration of military campaign
@@ -272,17 +308,6 @@ private:
 	// Remove a member from std::deque
 	template <typename T> bool remove_from_dqueue(std::deque<T const*>&, T const*);
 
-	// Functions used for seafaring / defaultai_seafaring.cc
-	Widelands::IslandExploreDirection randomExploreDirection();
-	void gain_ship(Widelands::Ship&, NewShip);
-	void check_ship_in_expedition(ShipObserver&, const Time&);
-	void expedition_management(ShipObserver&);
-	// considering trees, rocks, mines, water, fish for candidate for colonization (new port)
-	uint8_t spot_scoring(Widelands::Coords candidate_spot);
-	bool marine_main_decisions(const Time&);
-	bool check_ships(const Time&);
-	bool attempt_escape(ShipObserver& so);
-
 	// finding and owner
 	Widelands::PlayerNumber get_land_owner(const Widelands::Map&, uint32_t) const;
 
@@ -299,7 +324,6 @@ private:
 	bool critical_mine_unoccupied(const Time&);
 
 	SoldiersStatus soldier_status_;
-	int32_t vacant_mil_positions_average_;
 	uint16_t attackers_count_{0U};
 	EventTimeQueue soldier_trained_log;
 	EventTimeQueue soldier_attacks_log;
@@ -329,10 +353,11 @@ private:
 	std::deque<EconomyObserver*> economies;
 	std::deque<ProductionSiteObserver> productionsites;
 	std::deque<ProductionSiteObserver> mines_;
+	std::deque<ProductionSiteObserver> shipyardsites;
 	std::deque<MilitarySiteObserver> militarysites;
 	std::deque<WarehouseSiteObserver> warehousesites;
+	std::deque<PortSiteObserver> portsites;
 	std::deque<TrainingSiteObserver> trainingsites;
-	std::deque<ShipObserver> allships;
 	std::vector<WareObserver> wares;
 	// This is a vector that is filled up on initiatlization
 	// and no items are added/removed afterwards
@@ -406,23 +431,44 @@ private:
 	   "ax",      "armor",  "boots",  "garment", "helm",  "padded", "sword",
 	   "trident", "tabard", "shield", "mask",    "spear", "warrior"};
 
-	// seafaring related
-	enum { kReprioritize, kStopShipyard, kStartShipyard };
-	static Time last_seafaring_check_;
-	// False by default, until Map::allows_seafaring() is true
-	static bool map_allows_seafaring_;
-	bool potential_wrong_shipyard_ = false;
-	uint32_t expedition_ship_;
-	Duration expedition_max_duration;
-	std::vector<int16_t> marine_task_queue;
-	std::unordered_set<uint32_t> expedition_visited_spots;
-
 	std::vector<std::vector<int16_t>> AI_military_matrix;
 	std::vector<int16_t> AI_military_numbers;
 
-	uint16_t buil_material_mines_count = 0;
+	uint16_t build_material_mines_count{0U};
+	bool ai_training_mode_{false};
 
-	bool ai_training_mode_ = false;
+	// ------------- Seafaring -----------------------------
+	// Functions used for seafaring / defaultai_seafaring.cc
+	Widelands::IslandExploreDirection randomExploreDirection();
+	void gain_ship(Widelands::Ship&, NewShip);
+	void check_ship_in_expedition(ShipObserver&, const Time&);
+	void expedition_management(ShipObserver&);
+	void warship_management(ShipObserver&);
+	Widelands::ShipFleet* get_main_fleet();  // TODO(tothxa): until AI handles multiple fleets
+	// considering trees, rocks, mines, water, fish for candidate for colonization (new port)
+	uint8_t spot_scoring(Widelands::Coords candidate_spot);
+	bool marine_main_decisions(const Time&);
+	void evaluate_fleet();    // part of marine_main_decisions()
+	void manage_shipyards();  // part of marine_main_decisions()
+	void manage_ports();      // part of marine_main_decisions()
+	bool check_ships(const Time&);
+	bool attempt_escape(ShipObserver& so);
+	// seafaring related variables
+	uint32_t expedition_ship_;
+	Duration expedition_max_duration;
+	std::unordered_set<uint32_t> expedition_visited_spots;
+	uint16_t ports_count{0U};
+	uint16_t ports_finished_count{0U};
+	uint16_t expeditions_in_prep{0U};
+	uint16_t expeditions_ready{0U};
+	uint16_t expeditions_in_progress{0U};
+	uint16_t warships_count{0U};
+	uint16_t tradeships_count{0U};
+	uint16_t fleet_target{1U};
+	bool start_expedition{false};
+	bool warship_needed{false};
+	bool tradeship_refit_needed{false};
+	std::deque<ShipObserver> allships;
 
 	// Notification subscribers
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>>

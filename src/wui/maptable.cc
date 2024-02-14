@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,9 +17,14 @@
 
 #include "wui/maptable.h"
 
+#include <memory>
+
 #include "base/i18n.h"
 #include "graphic/image_cache.h"
 #include "io/filesystem/filesystem.h"
+#include "io/filesystem/layered_filesystem.h"
+#include "map_io/widelands_map_loader.h"
+#include "wui/mapdata.h"
 
 MapTable::MapTable(
    UI::Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style)
@@ -73,4 +78,44 @@ void MapTable::fill(const std::vector<MapData>& entries, MapData::DisplayType ty
 	}
 	sort();
 	layout();
+}
+
+void find_maps(const std::string& directory, std::vector<MapEntry>& results) {
+	for (const std::string& file : g_fs->list_directory(directory)) {
+		Widelands::Map map;
+		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(file);
+		if (ml != nullptr) {
+			try {
+				map.set_filename(file);
+				ml->preload_map(true, nullptr);
+				if (map.version().map_version_timestamp > 0) {
+					MapData::MapType type = map.scenario_types() == Widelands::Map::SP_SCENARIO ?
+                                          MapData::MapType::kScenario :
+                                          MapData::MapType::kNormal;
+					results.emplace_back(MapEntry(
+					   {MapData(map, file, type, MapData::DisplayType::kFilenames), map.version()}));
+				}
+			} catch (...) {
+				// invalid file - silently ignore
+			}
+		} else if (g_fs->is_directory(file)) {
+			find_maps(file, results);
+		}
+	}
+}
+
+std::optional<MapData> newest_edited_map() {
+	std::vector<MapEntry> all_maps;
+	find_maps(kMyMapsDirFull, all_maps);
+	MapEntry* last_edited = nullptr;
+	for (MapEntry& m : all_maps) {
+		if (last_edited == nullptr ||
+		    m.version.map_version_timestamp > last_edited->version.map_version_timestamp) {
+			last_edited = &m;
+		}
+	}
+	if (last_edited == nullptr) {
+		return std::nullopt;
+	}
+	return last_edited->data;
 }

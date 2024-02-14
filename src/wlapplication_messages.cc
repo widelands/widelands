@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2023 by the Widelands Development Team
+ * Copyright (C) 2012-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,6 +47,21 @@ static const std::string kDefaultHomedir = "%USERPROFILE%\\.widelands";
 static std::vector<Parameter> parameters;
 void fill_parameter_vector() {
 	i18n::Textdomain textdomain("widelands_console");
+
+	/** TRANSLATORS: Separator for alternative values for command line parameters */
+	const std::string alternatives_format = _("%1$s|%2$s");
+
+	// TODO(tothxa): Replace all uses and do this for true|false and others as well
+	const std::string filename_placeholder = _("FILENAME");
+
+	/** TRANSLATORS: Used instead of a file name indicating last savegame, replay or map.
+	    Use '_' instead of spaces if you need multiple words and don't use punctuation marks
+	 */
+	const std::string lastused_word = _("last");
+
+	const std::string file_or_last_placeholder =
+	   format(alternatives_format, filename_placeholder, lastused_word);
+
 	parameters =
 	{ {_("Usage:"), _("widelands <option0>=<value0> ... <optionN>=<valueN>"), "--", "", false},
 	  {"", _("widelands <save.wgf>/<replay.wry>"), "--", "", false},
@@ -76,15 +91,28 @@ void fill_parameter_vector() {
 		false},
 	  {"", "scenario", _("FILENAME"),
 		_("Start the map `FILENAME` directly as a singleplayer scenario."), false},
-	  {"", "loadgame", _("FILENAME"), _("Load the savegame `FILENAME` directly."), false},
-	  {"", "replay", _("FILENAME"), _("Load the replay `FILENAME` directly."), false},
+	  {"", "loadgame", file_or_last_placeholder,
+		/** TRANSLATORS: %1 is translation for FILENAME,
+		                 %2 is translation for "last" for last used file */
+		format(_("Load the savegame `%1$s` directly or the last saved game if `=%2$s` is used."),
+		       filename_placeholder, lastused_word),
+		false},
+	  {"", "replay", file_or_last_placeholder,
+		/** TRANSLATORS: %1 is translation for FILENAME,
+		                 %2 is translation for "last" for last used file */
+		format(_("Load the replay `%1$s` directly or the last saved replay if `=%2$s` is used."),
+		       filename_placeholder, lastused_word),
+		false},
+	  {"", "editor", "",
+		/** TRANSLATORS: %1 is translation for FILENAME,
+		                 %2 is translation for "last" for last used file */
+		format(_("Start the Widelands map editor directly. You can add `=%1$s` to directly load the "
+		         "map `FILENAME` in the editor or `=%2$s` to load the last edited map."),
+		       filename_placeholder, lastused_word),
+		false},
 	  {"", "script", _("FILENAME"),
 		_("Run the given Lua script after initialization. Only valid with --scenario, --loadgame, or "
 		  "--editor."),
-		false},
-	  {"", "editor", "",
-		_("Start the Widelands map editor directly. You can add `=FILENAME` to directly load the map "
-		  "`FILENAME` in the editor."),
 		false},
 	  /// Misc
 	  {"", "nosound", "", _("Start the game with sound disabled."), false},
@@ -119,6 +147,7 @@ void fill_parameter_vector() {
 		_("Do not create an autosave when the user has been inactive since the last autosave."),
 		true},
 	  {"", "nozip", "", _("Do not save files as binary zip archives."), false},
+	  {"", "zip", "", _("Save files as binary zip archives."), false},
 	  // The below comment is duplicated from above for the other case, when false is the default.
 	  /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
 	  /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain. */
@@ -182,10 +211,9 @@ void fill_parameter_vector() {
 		_("Create syncstream dump files to help debug network games."), true},
 
 	  /// Interface options
-	  {_("Graphic options:"), "fullscreen", _("[true|false*]"),
-		_("Whether to use the whole display for the game screen."), false},
-	  {"", "maximized", _("[true|false*]"), _("Whether to start the game in a maximized window."),
+	  {_("Graphic options:"), "fullscreen", "", _("Use the whole display for the game screen."),
 		false},
+	  {"", "maximized", "", _("Start the game in a maximized window."), false},
 	  {"", "xres",
 		/** TRANSLATORS: A placeholder for window width */
 		_("x"),
@@ -235,16 +263,24 @@ void fill_parameter_vector() {
 }
 
 const std::vector<std::string> get_all_parameters() {
-	std::vector<std::string> result(parameters.size());
-	std::transform(parameters.begin(), parameters.end(), result.begin(),
-	               [](const Parameter& p) { return p.key_; });
+	std::vector<std::string> result;
+	for (const Parameter& param : parameters) {
+		// Filter out special entries
+		if (param.hint_ != "--") {
+			result.emplace_back(param.key_);
+		}
+	}
 	return result;
 }
 
 bool is_parameter(const std::string& name) {
 	auto result = std::find_if(
 	   parameters.begin(), parameters.end(), [name](const Parameter& p) { return p.key_ == name; });
-	return result != parameters.end();
+	return result != parameters.end() && result->hint_ != "--";
+}
+
+bool use_last(const std::string& filename_arg) {
+	return i18n::is_translation_of(filename_arg, "last", "widelands_console");
 }
 
 /**

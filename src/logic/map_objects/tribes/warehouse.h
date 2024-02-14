@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 
 #include "base/macros.h"
 #include "economy/request.h"
+#include "economy/soldier_request.h"
 #include "economy/ware_instance.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
@@ -59,9 +60,18 @@ public:
 		heal_per_second_ = h;
 	}
 
+	[[nodiscard]] Quantity get_max_garrison() const {
+		return max_garrison_;
+	}
+	void set_max_garrison(Quantity g) {
+		max_garrison_ = g;
+	}
+
 private:
 	int32_t conquers_{0};
 	unsigned heal_per_second_{0U};
+	Quantity max_garrison_{0U};
+
 	DISALLOW_COPY_AND_ASSIGN(WarehouseDescr);
 };
 
@@ -220,6 +230,16 @@ public:
 	}
 	void set_warehouse_name(const std::string& name);
 
+	[[nodiscard]] Quantity get_desired_soldier_count() const {
+		return desired_soldier_count_;
+	}
+	void set_desired_soldier_count(Quantity q);
+
+	void set_soldier_preference(SoldierPreference);
+	[[nodiscard]] SoldierPreference get_soldier_preference() const {
+		return soldier_request_.get_preference();
+	}
+
 	void log_general_info(const EditorGameBase&) const override;
 
 private:
@@ -293,8 +313,14 @@ private:
 	void update_planned_workers(Game&, PlannedWorkers& pw);
 	void update_all_planned_workers(Game&);
 
+	static void
+	request_soldier_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
+	Quantity desired_soldier_count_{0U};
 	AttackTarget attack_target_;
 	SoldierControl soldier_control_;
+	SoldierRequest soldier_request_;
+	Time next_swap_soldiers_time_{0U};
+
 	WarehouseSupply* supply_;
 
 	std::vector<StockPolicy> ware_policy_;

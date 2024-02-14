@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2023 by the Widelands Development Team
+ * Copyright (C) 2012-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -256,6 +256,16 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          keysym(SDLK_r),
                          "mainmenu_replay",
                          gettext_noop("Watch Replay"))},
+   {KeyboardShortcut::kMainMenuLoadReplay,
+    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
+                         keysym(SDLK_g),
+                         "mainmenu_load_replay",
+                         gettext_noop("Load Replay"))},
+   {KeyboardShortcut::kMainMenuReplayLast,
+    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
+                         keysym(SDLK_d),
+                         "mainmenu_replay_last",
+                         gettext_noop("Watch Latest Replay"))},
    {KeyboardShortcut::kMainMenuRandomMatch,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
                          keysym(SDLK_z),
@@ -802,6 +812,16 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          keysym(SDLK_5, KMOD_SHIFT),
                          "game_sfstats_filter_port",
                          gettext_noop("Show Expeditions with Port Spaces"))},
+   {KeyboardShortcut::kInGameSeafaringstatsFilterWarship,
+    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                         keysym(SDLK_6, KMOD_SHIFT),
+                         "game_sfstats_filter_warship",
+                         gettext_noop("Show Warships"))},
+   {KeyboardShortcut::kInGameSeafaringstatsFilterRefitting,
+    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                         keysym(SDLK_7, KMOD_SHIFT),
+                         "game_sfstats_filter_refitting",
+                         gettext_noop("Show Ships Being Refitted"))},
    {KeyboardShortcut::kInGameQuicknavGUI,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_v),

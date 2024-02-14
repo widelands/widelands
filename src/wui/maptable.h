@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +19,11 @@
 #ifndef WL_WUI_MAPTABLE_H
 #define WL_WUI_MAPTABLE_H
 
+#include <optional>
+#include <string>
+#include <vector>
+
+#include "logic/map_revision.h"
 #include "ui_basic/table.h"
 #include "wui/mapdata.h"
 
@@ -34,5 +39,12 @@ public:
 	/// Fill the table with maps and directories.
 	void fill(const std::vector<MapData>& entries, MapData::DisplayType type);
 };
+
+struct MapEntry {
+	MapData data;
+	Widelands::MapVersion version;
+};
+void find_maps(const std::string& directory, std::vector<MapEntry>& results);
+std::optional<MapData> newest_edited_map();
 
 #endif  // end of include guard: WL_WUI_MAPTABLE_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2023 by the Widelands Development Team
+ * Copyright (C) 2008-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -117,6 +117,8 @@ struct GameSettings {
 		kCustomStartingPositions = 1 << 1,  ///< Players may choose their own starting positions.
 		kFogless = 1 << 2,                  ///< The entire map is always visible.
 		kForbidDiplomacy = 1 << 3,          ///< Players may not change their alliances.
+		kAllowNavalWarfare = 1 << 4,        ///< Allow naval warfare (experimental in v1.2);
+		                                    ///< TODO(Nordfriese): Enable by default in v1.3
 	};
 
 	GameSettings() {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2023 by the Widelands Development Team
+ * Copyright (C) 2008-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -813,10 +813,10 @@ void GameClient::handle_hello(RecvPacket& packet) {
 		std::string message = format(
 		   ngettext("%u add-on mismatch detected:\n", "%u add-on mismatches detected:\n", nr), nr);
 		for (const std::string& name : missing_addons) {
-			message = format(_("%1$s\n· ‘%2$s’ required by host not found"), message, name);
+			message = format(_("%1$s\n• ‘%2$s’ required by host not found"), message, name);
 		}
 		for (const auto& pair : wrong_version_addons) {
-			message = format(_("%1$s\n· ‘%2$s’ installed at version %3$s but host uses version %4$s"),
+			message = format(_("%1$s\n• ‘%2$s’ installed at version %3$s but host uses version %4$s"),
 			                 message, pair.first, pair.second.first, pair.second.second);
 		}
 		throw AddOnsMismatchException(message);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2023 by the Widelands Development Team
+ * Copyright (C) 2006-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -150,7 +150,7 @@ std::unique_ptr<LuaTable> LuaCoroutine::pop_table() {
 	return result;
 }
 
-constexpr uint8_t kCoroutineDataPacketVersion = 5;
+constexpr uint8_t kCoroutineDataPacketVersion = 5;  // since v1.0
 void LuaCoroutine::write(FileWrite& fw) const {
 	fw.unsigned_8(kCoroutineDataPacketVersion);
 
@@ -164,7 +164,7 @@ void LuaCoroutine::write(FileWrite& fw) const {
 void LuaCoroutine::read(lua_State* parent, FileRead& fr) {
 	const uint8_t packet_version = fr.unsigned_8();
 
-	if (packet_version > kCoroutineDataPacketVersion || packet_version < 4) {
+	if (packet_version > kCoroutineDataPacketVersion || packet_version < 5) {
 		throw Widelands::UnhandledVersionError(
 		   "LuaCoroutine", packet_version, kCoroutineDataPacketVersion);
 	}
@@ -178,8 +178,5 @@ void LuaCoroutine::read(lua_State* parent, FileRead& fr) {
 	lua_state_ = luaL_checkthread(parent, -1);
 	lua_pop(parent, 2);
 
-	// TODO(Nordfriese): Savegame compatibility
-	if (packet_version >= 5) {
-		LuaGlobals::read_textdomain_stack(fr, lua_state_);
-	}
+	LuaGlobals::read_textdomain_stack(fr, lua_state_);
 }

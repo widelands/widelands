@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2023 by the Widelands Development Team
+ * Copyright (C) 2020-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -82,11 +82,6 @@ void DescriptionManager::register_directory(const std::string& dirname,
 				if (caller.first == RegistryCallerType::kScenario) {
 					std::unique_ptr<LuaTable> names_table = lua_->run_script("map:" + file);
 					for (const std::string& object_name : names_table->keys<std::string>()) {
-						if (object_name == "frisians_diker" || object_name == "frisians_dikers_house") {
-							// TODO(Nordfriese): Ugly v1.0 savegame compatibility hack, remove after v1.1
-							continue;
-						}
-
 						const std::vector<std::string> attributes =
 						   names_table->get_table(object_name)->array_entries<std::string>();
 						register_scenario_description(filesystem, object_name,

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,6 +26,7 @@
 #include "wui/economy_options_window.h"
 #include "wui/portdockwaresdisplay.h"
 #include "wui/soldier_statistics_menu.h"
+#include "wui/soldierlist.h"
 #include "wui/waresdisplay.h"
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
@@ -295,10 +296,11 @@ void WarehouseWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	   new WarehouseWaresPanel(get_tabs(), Width, *ibase(), *warehouse, Widelands::wwWORKER),
 	   _("Workers"));
 
-	get_tabs()->add(
-	   "soldiers", g_image_cache->get(pic_tab_soldiers),
+	UI::Box* soldiers_box =
+	   new UI::Box(get_tabs(), UI::PanelStyle::kWui, "soldiers_box", 0, 0, UI::Box::Vertical);
+	soldiers_box->add(
 	   new SoldierStatisticsPanel(
-	      *get_tabs(), warehouse->owner(),
+	      *soldiers_box, warehouse->owner(),
 	      [this](uint32_t h, uint32_t a, uint32_t d, uint32_t e) {
 		      uint32_t n = 0;
 		      if (Widelands::Warehouse* wh = warehouse_.get(ibase()->egbase())) {
@@ -312,7 +314,14 @@ void WarehouseWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 		      }
 		      return n;
 	      }),
-	   _("Soldiers"));
+	   UI::Box::Resizing::kFullSize);
+
+	if (warehouse->attack_target()->can_be_attacked()) {
+		soldiers_box->add(
+		   create_soldier_list(*soldiers_box, *ibase(), *warehouse), UI::Box::Resizing::kFullSize);
+	}
+
+	get_tabs()->add("soldiers", g_image_cache->get(pic_tab_soldiers), soldiers_box, _("Soldiers"));
 
 	if (const Widelands::PortDock* pd = warehouse->get_portdock()) {
 		get_tabs()->add("dock_wares", g_image_cache->get(pic_tab_dock_wares),

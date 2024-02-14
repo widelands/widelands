@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -960,6 +960,57 @@ void Map::set_nrplayers(PlayerNumber const nrplayers) {
 	scenario_tribes_.resize(nrplayers);
 
 	nrplayers_ = nrplayers;  // in case the number players got less
+
+	sanitize_suggested_teams();
+}
+
+/*
+===============
+Remove invalid and duplicate players from suggested teams and remove empty teams and lineups.
+===============
+*/
+void Map::sanitize_suggested_teams() {
+	for (size_t lineup_index = 0; lineup_index < suggested_teams_.size();) {
+		SuggestedTeamLineup& stl = suggested_teams_.at(lineup_index);
+		std::set<PlayerNumber> used;
+		for (size_t team_index = 0; team_index < stl.size();) {
+			SuggestedTeam& team = stl.at(team_index);
+			for (size_t player_index = 0; player_index < team.size();) {
+				PlayerNumber pn = team.at(player_index);  // Zero-based
+				if (pn >= nrplayers_ || used.count(pn) > 0) {
+					team.erase(team.begin() + player_index);
+				} else {
+					used.insert(pn);
+					++player_index;
+				}
+			}
+			if (team.empty()) {
+				stl.erase(stl.begin() + team_index);
+			} else {
+				++team_index;
+			}
+		}
+		if (stl.empty()) {
+			suggested_teams_.erase(suggested_teams_.begin() + lineup_index);
+		} else {
+			++lineup_index;
+		}
+	}
+
+	for (auto it = suggested_teams_.begin(); it != suggested_teams_.end();) {
+		bool remove = false;
+		for (auto other = suggested_teams_.begin(); other != it; ++other) {
+			if (*other == *it) {
+				remove = true;
+				break;
+			}
+		}
+		if (remove) {
+			it = suggested_teams_.erase(it);
+		} else {
+			++it;
+		}
+	}
 }
 
 /*
@@ -1794,18 +1845,19 @@ bool Map::is_cycle_connected(const FCoords& start, const std::vector<WalkingDir>
 	return true;
 }
 
+static constexpr WalkingDir kPortSpaceWalkingDirs[16] = {
+   WALK_NE, WALK_NE, WALK_NE, WALK_NW, WALK_NW, WALK_W, WALK_W, WALK_W,
+   WALK_SW, WALK_SW, WALK_SW, WALK_SE, WALK_SE, WALK_E, WALK_E, WALK_E};
+
 /**
  * Returns a list of portdock fields (if any) that a port built at \p c should have.
  */
 std::vector<Coords> Map::find_portdock(const Coords& c, bool force) const {
-	static const WalkingDir cycledirs[16] = {WALK_NE, WALK_NE, WALK_NE, WALK_NW, WALK_NW, WALK_W,
-	                                         WALK_W,  WALK_W,  WALK_SW, WALK_SW, WALK_SW, WALK_SE,
-	                                         WALK_SE, WALK_E,  WALK_E,  WALK_E};
 	const FCoords start = br_n(br_n(get_fcoords(c)));
 	const Widelands::PlayerNumber owner = start.field->get_owned_by();
 	FCoords f = start;
 	std::vector<Coords> portdock;
-	for (uint32_t i = 0; i < 16; ++i) {
+	for (WalkingDir next_direction : kPortSpaceWalkingDirs) {
 		if (force) {
 			if ((f.field->maxcaps() & MOVECAPS_SWIM) != 0) {
 				return {f};
@@ -1839,12 +1891,31 @@ std::vector<Coords> Map::find_portdock(const Coords& c, bool force) const {
 			}
 		}
 
-		if (i < 15) {
-			f = get_neighbour(f, cycledirs[i]);
-		}
+		f = get_neighbour(f, next_direction);
 	}
 
 	return portdock;
+}
+
+/**
+ * Finds a port space field where a port, if built, could have the provided coords in its portdock.
+ * Returns Coords::null() if no such port space exists.
+ */
+Coords Map::find_portspace_for_dockpoint(Coords dockpoint) const {
+	if (port_spaces_.empty()) {
+		return Coords::null();
+	}
+
+	dockpoint = tl_n(tl_n(dockpoint));
+	for (WalkingDir next_direction : kPortSpaceWalkingDirs) {
+		if (is_port_space(dockpoint)) {
+			return dockpoint;
+		}
+
+		dockpoint = get_neighbour(dockpoint, get_backward_dir(next_direction));
+	}
+
+	return Coords::null();
 }
 
 bool Map::is_port_space_allowed(const EditorGameBase& egbase, const FCoords& fc) const {
@@ -1884,7 +1955,7 @@ bool Map::set_port_space(const EditorGameBase& egbase,
  * Calculate the (Manhattan) distance from a to b
  * a and b are expected to be normalized!
  */
-uint32_t Map::calc_distance(const Coords& a, const Coords& b) const {
+uint32_t Map::calc_distance(const Coords a, const Coords b) const {
 	uint32_t dist;
 	int32_t dy;
 

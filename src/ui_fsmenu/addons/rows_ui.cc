@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2023 by the Widelands Development Team
+ * Copyright (C) 2021-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -355,7 +355,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
         info->internal_name.empty() ?
            "" :
            format(
-              /** TRANSLATORS: Filesize · Download count · Average rating · Number of comments ·
+              /** TRANSLATORS: Filesize • Download count • Average rating • Number of comments •
                  Number of screenshots */
               _("%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"),
               filesize_string(info->total_file_size),

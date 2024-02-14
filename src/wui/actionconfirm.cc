@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -442,9 +442,9 @@ void ShipCancelExpeditionConfirm::ok() {
 	Widelands::Game& game = iaplayer().game();
 	upcast(Widelands::Ship, ship, object_.get(game));
 
-	if ((ship != nullptr) && iaplayer().can_act(ship->get_owner()->player_number()) &&
-	    ship->get_ship_state() != Widelands::Ship::ShipStates::kTransport &&
-	    ship->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionColonizing) {
+	if (ship != nullptr && iaplayer().can_act(ship->get_owner()->player_number()) &&
+	    ship->get_ship_state() != Widelands::ShipStates::kTransport &&
+	    ship->get_ship_state() != Widelands::ShipStates::kExpeditionColonizing) {
 		game.send_player_cancel_expedition_ship(*ship);
 	}
 

@@ -1,11 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
 # Andrzej 'Endrju' Krentosz <endrjux@gmail.com>, 2006
 # Antoni Szpikowski <szantek2004@gmail.com>, 2021-2022
 # Wesmania <ikk_pl@yahoo.co.uk>, 2015
 # Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
+# Leszek Szary, 2024
 # Mateusz Pu <mateusz.pudlo@poczta.onet.pl>, 2020
 # Niektóry <niektory@gmail.com>, 2020
 # Niektóry <niektory@gmail.com>, 2020
@@ -15,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-08-24 02:15+0000\n"
+"POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>, 2021-2022\n"
+"Last-Translator: Leszek Szary, 2024\n"
 "Language-Team: Polish (http://app.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -205,141 +206,142 @@ msgstr "Jeśli masz zapis gry lub powtórkę demonstrującą błąd (np. dla bł
 msgid "Widelands Translators"
 msgstr "Tłumacze Widelands"
 
-#: ../../data/txts/developers.lua:3
-msgid "Add-Ons"
-msgstr "Dodatki"
-
-#: ../../data/txts/developers.lua:3
-msgid "Atlanteans"
-msgstr "Atlantowie"
-
-#: ../../data/txts/developers.lua:3
-msgid "Barbarians"
-msgstr "Barbarzyńcy"
-
-#: ../../data/txts/developers.lua:3
-msgid "Campaign Story"
-msgstr "Fabuła kampanii"
-
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:5
 msgid "Chieftains"
 msgstr "Wodzowie"
 
-#: ../../data/txts/developers.lua:3
-msgid "Coders"
-msgstr "Programiści"
-
-#: ../../data/txts/developers.lua:3
-msgid "Debian Linux"
-msgstr "Debian Linux"
-
-#: ../../data/txts/developers.lua:3
-msgid "Documentation, Help and Wiki"
-msgstr "Dokumentacja, pomoc i wiki"
-
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:18
 msgid "Elders"
 msgstr "Starszyzna"
 
-#: ../../data/txts/developers.lua:3
-msgid "Empire"
-msgstr "Imperium"
-
-#: ../../data/txts/developers.lua:3
-msgid "Fedora Linux"
-msgstr "Fedora Linux"
-
-#: ../../data/txts/developers.lua:3
-msgid "Flatpak"
-msgstr "Flatpak"
-
-#: ../../data/txts/developers.lua:3
-msgid "Former Elders"
-msgstr "Była starszyzna"
-
-#: ../../data/txts/developers.lua:3
-msgid "FreeBSD"
-msgstr "FreeBSD"
-
-#: ../../data/txts/developers.lua:3
-msgid "Frisians"
-msgstr "Fryzowie"
-
-#: ../../data/txts/developers.lua:3
-msgid "Graphicians"
-msgstr "Graficy"
-
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:22 ../../data/txts/developers.lua:414
 msgid "Graphics"
 msgstr "Grafika"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:28 ../../data/txts/developers.lua:358
+#: ../../data/txts/developers.lua:421
 msgid "Homepage"
 msgstr "Strona domowa"
 
-#: ../../data/txts/developers.lua:3
-msgid "Homepage Coders"
-msgstr "Programiści strony internetowej"
-
-#: ../../data/txts/developers.lua:3
-msgid "Mac OS X"
-msgstr "Mac OS X"
-
-#: ../../data/txts/developers.lua:3
-msgid "Mandriva Linux"
-msgstr "Mandriva Linux"
-
-#: ../../data/txts/developers.lua:3
-msgid "Maps and Missions"
-msgstr "Mapy i misje"
-
-#: ../../data/txts/developers.lua:3
-msgid "Musicians"
-msgstr "Muzycy"
-
-#: ../../data/txts/developers.lua:3
-msgid "Other"
-msgstr "Inne"
-
-#: ../../data/txts/developers.lua:3
-msgid "Packagers"
-msgstr "Opiekuni pakietów"
-
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:34
 msgid "Scripting"
 msgstr "Pisanie scenariuszy"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:40 ../../data/txts/developers.lua:429
 msgid "Sound"
 msgstr "Dźwięk"
 
-#: ../../data/txts/developers.lua:3
-msgid "Sound Effects"
-msgstr "Efekty dźwiękowe"
+#: ../../data/txts/developers.lua:42
+msgid "vacant"
+msgstr "wolny"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:46
 msgid "Tongues"
 msgstr "Narzecza"
 
-#: ../../data/txts/developers.lua:3
-msgid "Translation"
-msgstr "Tłumaczenie"
+#: ../../data/txts/developers.lua:54
+msgid "Coders"
+msgstr "Programiści"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:149
+msgid "Graphicians"
+msgstr "Graficy"
+
+#: ../../data/txts/developers.lua:186
+msgid "Musicians"
+msgstr "Muzycy"
+
+#: ../../data/txts/developers.lua:205
+msgid "Sound Effects"
+msgstr "Efekty dźwiękowe"
+
+#: ../../data/txts/developers.lua:221
+msgid "Maps and Missions"
+msgstr "Mapy i misje"
+
+#: ../../data/txts/developers.lua:255
+msgid "Campaign Story"
+msgstr "Fabuła kampanii"
+
+#: ../../data/txts/developers.lua:259
+msgid "Barbarians"
+msgstr "Barbarzyńcy"
+
+#: ../../data/txts/developers.lua:267
+msgid "Empire"
+msgstr "Imperium"
+
+#: ../../data/txts/developers.lua:274
+msgid "Atlanteans"
+msgstr "Atlantowie"
+
+#: ../../data/txts/developers.lua:282
+msgid "Frisians"
+msgstr "Fryzowie"
+
+#: ../../data/txts/developers.lua:290
+msgid "Packagers"
+msgstr "Opiekuni pakietów"
+
+#: ../../data/txts/developers.lua:294
+msgid "Debian Linux"
+msgstr "Debian Linux"
+
+#: ../../data/txts/developers.lua:300
+msgid "Fedora Linux"
+msgstr "Fedora Linux"
+
+#: ../../data/txts/developers.lua:308
+msgid "Mandriva Linux"
+msgstr "Mandriva Linux"
+
+#: ../../data/txts/developers.lua:314
+msgid "FreeBSD"
+msgstr "FreeBSD"
+
+#: ../../data/txts/developers.lua:320
+msgid "Flatpak"
+msgstr "Flatpak"
+
+#: ../../data/txts/developers.lua:327
+msgid "Mac OS X"
+msgstr "Mac OS X"
+
+#: ../../data/txts/developers.lua:339
 msgid "Windows"
 msgstr "Windows"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:350
 msgid "ZetaOS"
 msgstr "ZetaOS"
 
-#: ../../data/txts/developers.lua:3
+#: ../../data/txts/developers.lua:362
+msgid "Homepage Coders"
+msgstr "Programiści strony internetowej"
+
+#: ../../data/txts/developers.lua:373
+msgid "Documentation, Help and Wiki"
+msgstr "Dokumentacja, pomoc i wiki"
+
+#: ../../data/txts/developers.lua:391
+msgid "Add-Ons"
+msgstr "Dodatki"
+
+#: ../../data/txts/developers.lua:410
+msgid "Former Elders"
+msgstr "Była starszyzna"
+
+#: ../../data/txts/developers.lua:436
+msgid "Translation"
+msgstr "Tłumaczenie"
+
+#: ../../data/txts/developers.lua:445
+msgid "Other"
+msgstr "Inne"
+
+#: ../../data/txts/developers.lua:453
 msgid "and many, many more (thank you for everything you’ve done)"
 msgstr "i wiele, wiele więcej (dziękuję za wszystko co zrobiłeś)"
-
-#: ../../data/txts/developers.lua:3
-msgid "vacant"
-msgstr "wolny"
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
@@ -384,7 +386,7 @@ msgid ""
 "This file contains an initial savegame and all commands that were issued by "
 "all players, such as building a road or attacking an enemy. The filename "
 "will tell you the time you started the game."
-msgstr ""
+msgstr "Widelands zapisuje przebieg każdej twojej gry w pliku powtórki z rozszerzeniem .wry. Ten plik zawiera początkowy zapis stanu gry i wszystkie polecenia wydane przez wszystkich graczy, takie jak budowanie drogi, czy zaatakowanie przeciwnika. Nazwa pliku informuje o czasie rozpoczęcia gry."
 
 #: ../../data/txts/help/common_helptexts.lua:31
 msgid ""
@@ -610,7 +612,7 @@ msgstr "Większość ulepszonych budynków wymaga doświadczonych pracowników. 
 msgid ""
 "Widelands is creating an emergency save, so you can continue playing exactly"
 " where the game closed."
-msgstr ""
+msgstr "Widelands tworzy awaryjny zapis gry, dzięki czemu możesz kontynuować ją dokładnie w tym miejscu, w którym została ona zamknięta."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/editor.lua:8
@@ -643,7 +645,7 @@ msgstr "Przytrzymanie klawisza Shift zmienia narzędzie na pierwsze alternatywne
 #: ../../data/txts/tips/editor.lua:24
 msgid ""
 "Holding down Ctrl switches the second alternative tool on (if it exists)."
-msgstr ""
+msgstr "Przytrzymanie Ctrl przełącza na alternatywne narzędzie (jeśli istnieje)."
 
 #: ../../data/txts/tips/editor.lua:28
 msgid ""
@@ -788,14 +790,14 @@ msgid ""
 "An economy consists of all buildings and flags connected by roads, ferries, "
 "or ships. The supplies and demands of buildings are handled in their "
 "economy. A player can have more than one economy."
-msgstr ""
+msgstr "Na gospodarkę składają się wszystkie budynki i flagi połączone drogami, promami lub statkami. Dostawy i zapotrzebowanie budynków są obsługiwane w ramach tego systemu. Gracz może posiadać więcej niż jedną gospodarkę."
 
 #: ../../data/txts/tips/general_game.lua:69
 msgid ""
 "You can have more than one economy if their flags are not connected by any "
 "means of transportation. This is why the Configure Economy menu can only be "
 "accessed from flags and warehouses, not the player’s main menu."
-msgstr ""
+msgstr "Możesz mieć więcej niż jedną gospodarkę, jeśli ich flagi nie są połączone żadnym środkiem transportu. Dlatego też dostęp do menu konfiguracji gospodarki można uzyskać wyłącznie z flag i magazynów, a nie z głównego menu gracza."
 
 #: ../../data/txts/tips/general_game.lua:73
 msgid ""
@@ -846,7 +848,7 @@ msgid ""
 "touchpad scrolling in the ‘Options’ → ‘Edit keyboard and mouse actions’ "
 "menu. For example, moving the map view can be much more comfortable by "
 "scrolling instead of dragging with the right mouse button."
-msgstr ""
+msgstr "Jeśli grasz na laptopie z touchpadem, możesz przypisać funkcjonalność przewijania touchpadem w menu \"Opcje\" → \"Edytuj akcje klawiatury i myszy\". Na przykład przesuwanie widoku mapy może być znacznie wygodniejsze poprzez przewijanie zamiast przeciągania prawym przyciskiem myszy."
 
 #: ../../data/txts/tips/general_game.lua:106
 msgid ""

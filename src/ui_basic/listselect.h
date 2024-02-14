@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -109,6 +109,13 @@ struct BaseListselect : public Panel {
 		min_lineheight_ = minh;
 	}
 
+	void set_select_with_wheel(bool s) {
+		select_with_wheel_ = s;
+	}
+	[[nodiscard]] bool get_select_with_wheel() const {
+		return select_with_wheel_;
+	}
+
 	uint32_t get_eff_w() const;
 
 	int calculate_desired_width();
@@ -176,6 +183,7 @@ private:
 	int lineheight_;
 	int min_lineheight_{0};
 	std::string current_tooltip_;
+	bool select_with_wheel_{true};
 
 	UI::BaseDropdown* linked_dropdown{nullptr};
 };

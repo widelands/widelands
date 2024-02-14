@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -74,8 +74,8 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 		return *new CmdDismantleBuilding();
 	case QueueCommandTypes::kEvictWorker:
 		return *new CmdEvictWorker();
-	case QueueCommandTypes::kMilitarysiteSetSoldierPreference:
-		return *new CmdMilitarySiteSetSoldierPreference();
+	case QueueCommandTypes::kSetSoldierPreference:
+		return *new CmdSetSoldierPreference();
 	case QueueCommandTypes::kProposeTrade:
 		return *new CmdProposeTrade();
 	case QueueCommandTypes::kShipSink:
@@ -92,6 +92,12 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 		return *new CmdShipScoutDirection();
 	case QueueCommandTypes::kShipExploreIsland:
 		return *new CmdShipExploreIsland();
+	case QueueCommandTypes::kShipSetDestination:
+		return *new CmdShipSetDestination();
+	case QueueCommandTypes::kShipRefit:
+		return *new CmdShipRefit();
+	case QueueCommandTypes::kWarshipCommand:
+		return *new CmdWarshipCommand();
 	case QueueCommandTypes::kDestroyMapObject:
 		return *new CmdDestroyMapObject();
 	case QueueCommandTypes::kAct:

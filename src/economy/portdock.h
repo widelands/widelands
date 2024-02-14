@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2023 by the Widelands Development Team
+ * Copyright (C) 2011-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 
 #include "base/macros.h"
 #include "economy/shippingitem.h"
+#include "economy/soldier_request.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/wareworker.h"
 
@@ -77,20 +78,20 @@ public:
 	~PortDock() override;
 
 	void add_position(Widelands::Coords where);
-	Warehouse* get_warehouse() const;
+	[[nodiscard]] Warehouse* get_warehouse() const;
 
-	ShipFleet* get_fleet() const {
+	[[nodiscard]] ShipFleet* get_fleet() const {
 		return fleet_;
 	}
-	PortDock* get_dock(Flag& flag) const;
+	[[nodiscard]] PortDock* get_dock(Flag& flag) const;
 
 	void set_economy(Economy*, WareWorker) override;
 
-	int32_t get_size() const override;
-	bool get_passable() const override;
+	[[nodiscard]] int32_t get_size() const override;
+	[[nodiscard]] bool get_passable() const override;
 
-	Flag& base_flag() override;
-	PositionList get_positions(const EditorGameBase&) const override;
+	[[nodiscard]] Flag& base_flag() override;
+	[[nodiscard]] PositionList get_positions(const EditorGameBase&) const override;
 
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
@@ -109,11 +110,11 @@ public:
 
 	void log_general_info(const EditorGameBase&) const override;
 
-	uint32_t count_waiting(WareWorker waretype, DescriptionIndex wareindex) const;
-	uint32_t count_waiting(const PortDock* = nullptr) const;
+	[[nodiscard]] uint32_t count_waiting(WareWorker waretype, DescriptionIndex wareindex) const;
+	[[nodiscard]] uint32_t count_waiting(const PortDock* = nullptr) const;
 
 	// Returns true if a expedition is started or ready to be send out.
-	bool expedition_started() const;
+	[[nodiscard]] bool expedition_started() const;
 
 	// Called when the button in the warehouse window is pressed.
 	void start_expedition();
@@ -121,16 +122,23 @@ public:
 
 	// May return nullptr when there is no expedition ongoing or if the
 	// expedition ship is already underway.
-	ExpeditionBootstrap* expedition_bootstrap() const;
+	[[nodiscard]] ExpeditionBootstrap* expedition_bootstrap() const;
 
-	bool is_expedition_ready() const {
+	[[nodiscard]] bool is_expedition_ready() const {
 		return expedition_ready_;
 	}
 
 	// Gets called by the ExpeditionBootstrap as soon as all wares and workers are available.
 	void set_expedition_bootstrap_complete(Game& game, bool complete);
 
+	[[nodiscard]] SoldierRequest* get_warship_request(Serial ship) const;
+	SoldierRequest& create_warship_request(Ship* ship, SoldierPreference pref);
+	void erase_warship_request(Serial ship);
+	[[nodiscard]] Ship* find_ship_for_warship_request(const EditorGameBase& egbase,
+	                                                  const Request& req) const;
+
 private:
+	friend class MapBuildingdataPacket;
 	friend struct ShipFleet;
 	friend struct ShippingSchedule;
 
@@ -145,7 +153,7 @@ private:
 
 	bool load_one_item(Game&, Ship&, const PortDock& dest);
 
-	uint32_t calc_max_priority(const EditorGameBase&, const PortDock& dest) const;
+	[[nodiscard]] uint32_t calc_max_priority(const EditorGameBase&, const PortDock& dest) const;
 
 	ShipFleet* fleet_{nullptr};
 	Warehouse* warehouse_;
@@ -155,6 +163,8 @@ private:
 	bool expedition_cancelling_{false};
 
 	std::unique_ptr<ExpeditionBootstrap> expedition_bootstrap_;
+
+	std::map<Serial, std::unique_ptr<SoldierRequest>> warship_soldier_requests_;
 
 	// saving and loading
 protected:

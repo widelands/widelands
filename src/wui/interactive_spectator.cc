@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2023 by the Widelands Development Team
+ * Copyright (C) 2007-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,6 +67,8 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 	}
 
 	add_diplomacy_menu();
+
+	add_plugin_menu();
 
 	finalize_toolbar();
 
@@ -204,7 +206,7 @@ void InteractiveSpectator::node_action(const Widelands::NodeAndTriangle<>& node_
 		return;
 	}
 
-	if (try_show_ship_window()) {
+	if (try_show_ship_windows()) {
 		return;
 	}
 

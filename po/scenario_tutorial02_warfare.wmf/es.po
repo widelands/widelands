@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007
@@ -10,12 +10,12 @@
 # Puniasterus <puniasterus@gmail.com>, 2023
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020,2022
 # Gontzal Pujana Onaindia <juchuf@gmail.com>, 2017
-# Walter Benkel <tromaster@gmail.com>, 2020
+# Walter Benkel, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-05 02:59+0000\n"
+"POT-Creation-Date: 2024-02-01 02:29+0000\n"
 "PO-Revision-Date: 2015-02-03 14:47+0000\n"
 "Last-Translator: Puniasterus <puniasterus@gmail.com>, 2023\n"
 "Language-Team: Spanish (http://app.transifex.com/widelands/widelands/language/es/)\n"
@@ -114,8 +114,8 @@ msgid ""
 "Barbarians cannot train in this skill and therefore have always defense "
 "level 0, which means that the damage is always reduced by %1%%%. If an "
 "attacker with an attack value of 3500 points hits a Barbarian soldier, the "
-"Barbarian will lose 3500·%2%%% = %3% health."
-msgstr "La defensa es el porcentaje de puntos de ataque que se resta del daño recibido. Los Bárbaros no pueden entrenar esta habilidad y por tanto siempre tienen defensa nivel 0, lo que significa que el daño recibido siempre se reduce un %1%%%. Si un atacante con un valor de ataque de 3500 puntos alcanza a un soldado Bárbaro, el Bárbaro perderá 3500·%2%%% = %3% puntos de vida"
+"Barbarian will lose 3500×%2%%% = %3% health."
+msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:49
 msgid "Evade:"

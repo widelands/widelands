@@ -47,6 +47,9 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _("working"),
          actions = {
+            -- time total: 20 + 20 + 3.6 = 43.6 sec
+            -- average time if water resource is depleted:
+            --   (65 * (20 + 20 + 3.6) + 35 * (20 + 20 + 10)) / 65 = 70.523 sec
             "sleep=duration:20s",
             "animate=working duration:20s",
             "mine=resource_water radius:1 yield:100% when_empty:65%",

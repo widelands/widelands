@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,6 +51,7 @@ public:
 	void update_custom_starting_positions();
 	void update_fogless();
 	void update_forbid_diplomacy();
+	void update_naval_warfare();
 
 protected:
 	std::unique_ptr<LuaInterface> lua_;
@@ -108,6 +109,7 @@ protected:
 	GameController* ctrl_;
 
 	bool peaceful_mode_forbidden_{false};
+	bool map_is_seafaring_{false};
 
 private:
 	void add_all_widgets();

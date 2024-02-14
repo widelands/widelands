@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,6 @@
 #include <cstdlib>
 #include <regex>
 
-#include "base/log.h"
 #include "base/math.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/map_object.h"
@@ -184,7 +183,7 @@ You can combine these units in descending order as you please. Examples:
 * ``1m500s100000ms`` will work too, but is not recommended (unreadable)
 
 */
-Duration MapObjectProgram::read_duration(const std::string& input, const MapObjectDescr& descr) {
+Duration MapObjectProgram::read_duration(const std::string& input) {
 	// Convert unit part into milliseconds
 	auto as_ms = [](uint32_t number, const std::string& unit) {
 		if (unit == "s") {
@@ -221,13 +220,6 @@ Duration MapObjectProgram::read_duration(const std::string& input, const MapObje
 			const Duration part2(as_ms(read_positive(match[3], Duration().get()), match[4]));
 			const Duration part3(as_ms(read_positive(match[5], Duration().get()), match[6]));
 			return part1 + part2 + part3;
-		}
-		// TODO(GunChleoc): Compatibility, remove unitless option after v1.0
-		std::regex without_unit("^(\\d+)$");
-		if (std::regex_match(input, without_unit)) {
-			log_warn("Duration '%s' without unit in %s's program is deprecated", input.c_str(),
-			         descr.name().c_str());
-			return Duration(read_positive(input, Duration().get()));
 		}
 	} catch (const WException& e) {
 		throw GameDataError(
@@ -351,13 +343,7 @@ MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(
 	if (arguments.size() == 2) {
 		const std::pair<std::string, std::string> item = read_key_value_pair(arguments.at(1), ':');
 		if (item.first == "duration") {
-			result.duration = read_duration(item.second, descr);
-		} else if (item.second.empty()) {
-			// TODO(GunChleoc): Compatibility, remove this option after v1.0
-			result.duration = read_duration(item.first, descr);
-			log_warn("'animate' program without parameter name is deprecated, please use "
-			         "'animate=<animation_name> duration:<duration>' in %s\n",
-			         descr.name().c_str());
+			result.duration = read_duration(item.second);
 		} else {
 			throw GameDataError("Unknown argument '%s'. Usage: <animation_name> [duration:<duration>]",
 			                    arguments.at(1).c_str());
@@ -427,8 +413,7 @@ playsound
       }
 */
 MapObjectProgram::PlaySoundParameters
-MapObjectProgram::parse_act_play_sound(const std::vector<std::string>& arguments,
-                                       const MapObjectDescr& descr) {
+MapObjectProgram::parse_act_play_sound(const std::vector<std::string>& arguments) {
 	if (arguments.size() != 2 && arguments.size() != 3) {
 		throw GameDataError(
 		   "Usage: playsound=<sound_dir/sound_name> priority:<percent> [allow_multiple]");
@@ -440,17 +425,8 @@ MapObjectProgram::parse_act_play_sound(const std::vector<std::string>& arguments
 	const std::pair<std::string, std::string> item = read_key_value_pair(arguments.at(1), ':');
 	if (item.first == "priority") {
 		result.priority = math::read_percent_to_int(item.second);
-	} else if (item.second.empty()) {
-		if (item.first == "allow_multiple") {
-			result.allow_multiple = true;
-		} else {
-			// TODO(GunChleoc): Compatibility, remove this option after v1.0
-			result.priority = (read_positive(arguments.at(1)) * math::k100PercentAsInt * 2U) / 256;
-			log_warn("Deprecated usage in %s. Please convert playsound's 'priority' option to "
-			         "percentage, like this: "
-			         "playsound=<sound_dir/sound_name> priority:<percent> [allow_multiple]\n",
-			         descr.name().c_str());
-		}
+	} else if (item.second.empty() && (item.first == "allow_multiple")) {
+		result.allow_multiple = true;
 	} else {
 		throw GameDataError("Unknown argument '%s'. Usage: playsound=<sound_dir/sound_name> "
 		                    "priority:<percent> [allow_multiple]",

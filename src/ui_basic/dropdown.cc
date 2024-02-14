@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2023 by the Widelands Development Team
+ * Copyright (C) 2016-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -364,6 +364,10 @@ void BaseDropdown::set_errored(const std::string& error_message) {
 }
 
 void BaseDropdown::set_enabled(bool on) {
+	if (is_enabled_ == on) {
+		return;
+	}
+
 	is_enabled_ = on;
 	set_can_focus(on);
 	if (push_button_ != nullptr) {

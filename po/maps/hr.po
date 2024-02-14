@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
-# Ivan Bižaca <biza@malilosinj.info>, 2015
+# Ivan Bižaca <biza@malilosinj.info>, 2015,2023
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2024-02-08 02:24+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: GunChleoc, 2016\n"
+"Last-Translator: Ivan Bižaca <biza@malilosinj.info>, 2015,2023\n"
 "Language-Team: Croatian (http://app.transifex.com/widelands/widelands/language/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,7 +27,7 @@ msgstr "Iz propasti do nastanka"
 msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
-msgstr "Nakon pristajanja na mistični otok u blizini Atlantide, ostatak Atlantiđana se muči stvoriniti novi dom."
+msgstr "Nakon pristajanja na tajanstveni otok u blizini Atlantide, ostatak Atlantiđana se muči stvoriti svoj novi dom."
 
 #: ../../data/campaigns/atl02.wmf/elemental:8
 msgid "Struggling For a New Home Again"
@@ -37,7 +37,7 @@ msgstr ""
 msgid ""
 "After the quick escape from the drowning island, the Atlanteans around "
 "Jundlina are faced with new challenges."
-msgstr ""
+msgstr "Nakon bijega sa tonućeg otoka, Atlantiđani okupljeni oko Jundline su suočeni sa mnogim novim izazovima."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
 msgid "A Place to Call Home"
@@ -57,12 +57,12 @@ msgstr "Ova zemlja je naša zemlja"
 msgid ""
 "This tutorial explains the handling of military and training site buildings "
 "and will introduce fighting."
-msgstr "Ovaj vodič objašnjava rukovanje vojnicima i treniranje vojske. Također, uvodi i borbu."
+msgstr "Ovaj vodič objašnjava upravljanje vojnicima i treniranje vojske. Također, nas upoznaje sa osnovnim vojnim građevinama i borbom."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:14
 msgid "Easy."
-msgstr ""
+msgstr "Lagano."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:20
@@ -82,12 +82,12 @@ msgstr ""
 #. TRANSLATORS: The name of a Barbarian campaign
 #: ../../data/campaigns/campaigns.lua:43
 msgid "The Second Empire"
-msgstr ""
+msgstr "Drugo carstvo"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:49
 msgid "Introduces the Barbarians."
-msgstr ""
+msgstr "Upoznajte Barbare."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:52
@@ -105,7 +105,7 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr ""
+msgstr "Chat'Karuth je bio starac, otac trojice snažnih i ambicioznih sinova i vojskovođa vojske koja se mogla mjeriti s svakim neprijateljem koji bi se usudio ustati protiv drevnih šuma. Na kraju svoje slavne vladavine Chat'Karuth je izabrao svog najstarijeg sina, Throna, da ga naslijedi kao vođa plemena. Njegova druga dva sina su bila nezadovoljna time i stari vojskovođa je to znao. Nakon njegove smrti, kao što mu je otac naredio, Thron je napustio prijestolnicu Al’thunran, dom Prijestolja među drvećem, i povukao svoje snage na visoke brežuljke. Tamo je pokopao tijelo svog oca i zakleo se bogovima i očevim duhom da će se vratiti i ponovno uspostaviti red. Dok njegova braća vode ludi rat protiv Throna i ono malo snaga koje je ostavio da osiguraju granice Al’thunrana, mladi vojskovođa nastoji ponovno ujediniti svoju ambicioznu braću i prisiliti podjeljeno pleme da ponovno maršira pod zajedničkom barjakom."
 
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../data/campaigns/campaigns.lua:70
@@ -135,12 +135,12 @@ msgstr ""
 #. TRANSLATORS: The name of an Atlantean campaign
 #: ../../data/campaigns/campaigns.lua:93
 msgid "The Run for the Fire"
-msgstr ""
+msgstr "Trka za Vatru"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:96
 msgid "Introduces the Atlanteans."
-msgstr ""
+msgstr "Upoznajte Atlantiđane"
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:98
@@ -150,7 +150,7 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr ""
+msgstr "Kad je njihov Bog izgubio vjeru u Atlantiđane i potopio njihov otok, borba jedne žene za pravdu i drugu priliku za njezin narod postati će legendarna. Vodeći preostale Atlantiđane u novu budućnost u novom dijelu svijeta, Jundlina je postala najmoćniji čovjek svog vremena, ali uz visoku cijenu njene ljudskosti i duše."
 
 #. TRANSLATORS: The name of a Frisian campaign
 #: ../../data/campaigns/campaigns.lua:108
@@ -160,7 +160,7 @@ msgstr ""
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:111
 msgid "Introduces the Frisians."
-msgstr ""
+msgstr "Upoznajte Frizijce"
 
 #. TRANSLATORS: A campaign difficulty (easiest of three options)
 #: ../../data/campaigns/campaigns.lua:116
@@ -326,7 +326,7 @@ msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
 "soldiers, how to train them and how to lead them in battle. Scouting will be"
 " also covered."
-msgstr ""
+msgstr "Kad prođete ovaj vodič znati ćete tajne ratovanja: kako napraviti vojsku, kako ih obučiti i voditi u bitkama. Također naučiti ćete i osnove izviđanja."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
 msgid "Seafaring"
@@ -336,7 +336,7 @@ msgstr "Pomorstvo"
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports, and how to use ferries and waterways."
-msgstr ""
+msgstr "Ovaj vodić provesti će vas kroz pomorstvo. Naučiti ćete upravljati brodovima i lukama, i kako koristiti vodene puteve."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy"
@@ -346,7 +346,7 @@ msgstr "Ekonomija"
 msgid ""
 "In this tutorial, you will learn what option Widelands offers to adjust your"
 " economy. Recommended for players with some experience."
-msgstr ""
+msgstr "Ovaj vodič preporučamo iskusnijim igračima. Pokazati će vam koje su mogućnosti i alati za učinkovito upravljanje ekonomijom."
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
@@ -458,10 +458,6 @@ msgstr ""
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
-msgstr ""
-
-#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:11
-msgid "This map is not winnable with the ‘Autocrat’ win condition."
 msgstr ""
 
 #: ../../data/maps/Dolomites.wmf/elemental:8

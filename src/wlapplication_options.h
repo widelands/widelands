@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2023 by the Widelands Development Team
+ * Copyright (C) 2012-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -106,6 +106,8 @@ enum class KeyboardShortcut : uint16_t {
 	kMainMenuEditorLoad,
 	kMainMenuContinueEditing,
 	kMainMenuReplay,
+	kMainMenuLoadReplay,
+	kMainMenuReplayLast,
 	kMainMenuOptions,
 	kMainMenuAddons,
 	kMainMenuAbout,
@@ -296,6 +298,8 @@ enum class KeyboardShortcut : uint16_t {
 	kInGameSeafaringstatsFilterExpWait,
 	kInGameSeafaringstatsFilterExpScout,
 	kInGameSeafaringstatsFilterExpPortspace,
+	kInGameSeafaringstatsFilterWarship,
+	kInGameSeafaringstatsFilterRefitting,
 	kInGameSeafaringstatsGotoShip,
 	kInGameSeafaringstatsWatchShip,
 	kInGameSeafaringstatsOpenShipWindow,

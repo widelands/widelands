@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,7 +53,7 @@ public:
 
 	void show_watch_window(Widelands::Bob&);
 
-	bool try_show_ship_window();
+	bool try_show_ship_windows();
 	bool is_multiplayer() const {
 		return multiplayer_;
 	}

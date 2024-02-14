@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2023 by the Widelands Development Team
+ * Copyright (C) 2009-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -344,7 +344,7 @@ EconomyObserver::EconomyObserver(Widelands::Economy& e)
    : economy(e), fields_block_last_time(Time(0)) {
 }
 
-int32_t BuildingObserver::total_count() const {
+uint32_t BuildingObserver::total_count() const {
 	return cnt_built + cnt_under_construction;
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2023 by the Widelands Development Team
+ * Copyright (C) 2021-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -457,7 +457,7 @@ void AddOnsPackager::die() {
 		             addons_with_changes_.size()),
 		          addons_with_changes_.size());
 		for (const auto& str : addons_with_changes_) {
-			msg = format(_("%1$s\n· %2$s"), msg, str.first);
+			msg = format(_("%1$s\n• %2$s"), msg, str.first);
 		}
 
 		UI::WLMessageBox m(get_parent(), UI::WindowStyle::kFsMenu, _("Quit Packager"), msg,
@@ -484,7 +484,7 @@ void AddOnsPackager::clicked_discard_changes() {
 		                   addons_with_changes_.size()),
 		          addons_with_changes_.size());
 		for (const auto& str : addons_with_changes_) {
-			msg = format(_("%1$s\n· %2$s"), msg, str.first);
+			msg = format(_("%1$s\n• %2$s"), msg, str.first);
 		}
 	}
 
@@ -509,7 +509,7 @@ void AddOnsPackager::clicked_write_changes() {
 		            addons_with_changes_.size()),
 		   addons_with_changes_.size());
 		for (const auto& str : addons_with_changes_) {
-			msg = format(_("%1$s\n· %2$s"), msg, str.first);
+			msg = format(_("%1$s\n• %2$s"), msg, str.first);
 		}
 	}
 	msg += "\n\n";

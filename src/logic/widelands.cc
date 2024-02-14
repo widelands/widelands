@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2023 by the Widelands Development Team
+ * Copyright (C) 2017-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,4 +16,22 @@
  *
  */
 
-// Dummy file as cmake cannot handle header only libraries :(.
+#include "logic/widelands.h"
+
+#include "base/wexception.h"
+
+namespace Widelands {
+
+std::string soldier_preference_icon(const SoldierPreference p) {
+	switch (p) {
+	case SoldierPreference::kHeroes:
+		return "↑";
+	case SoldierPreference::kRookies:
+		return "↓";
+	case SoldierPreference::kAny:
+		return "=";
+	}
+	NEVER_HERE();
+}
+
+}  // namespace Widelands

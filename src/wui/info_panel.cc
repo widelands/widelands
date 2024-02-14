@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2023 by the Widelands Development Team
+ * Copyright (C) 2020-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -449,14 +449,14 @@ void InfoPanel::update_time_speed_string() {
 		break;
 	case 2:
 		text_time_speed_.set_text(format(
-		   /** TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime · Gamespeed)
+		   /** TRANSLATORS: (Gametime • Realtime) or (Gametime • Gamespeed) or (Realtime • Gamespeed)
 		    */
-		   _("%1$s · %2$s"), *non_empty[0], *non_empty[1]));
+		   _("%1$s • %2$s"), *non_empty[0], *non_empty[1]));
 		break;
 	case 3:
 		text_time_speed_.set_text(format(
-		   /** TRANSLATORS: Gametime · Realtime · Gamespeed */
-		   _("%1$s · %2$s · %3$s"), *non_empty[0], *non_empty[1], *non_empty[2]));
+		   /** TRANSLATORS: Gametime • Realtime • Gamespeed */
+		   _("%1$s • %2$s • %3$s"), *non_empty[0], *non_empty[1], *non_empty[2]));
 		break;
 	default:
 		NEVER_HERE();

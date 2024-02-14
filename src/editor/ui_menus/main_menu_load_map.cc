@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,7 @@
 #include "base/string.h"
 #include "editor/editorinteractive.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/filesystem_constants.h"
 #include "map_io/widelands_map_loader.h"
 #include "wui/mapdetails.h"
 #include "wui/maptable.h"
@@ -77,14 +78,14 @@ void MainMenuLoadMap::set_current_directory(const std::vector<std::string>& file
 	if (starts_with(display_dir, "/")) {
 		display_dir = display_dir.substr(1);
 	}
-	if (starts_with(display_dir, "My_Maps")) {
-		replace_first(display_dir, "My_Maps", _("My Maps"));
-	} else if (starts_with(display_dir, "MP_Scenarios")) {
-		replace_first(display_dir, "MP_Scenarios", _("Multiplayer Scenarios"));
-	} else if (starts_with(display_dir, "SP_Scenarios")) {
-		replace_first(display_dir, "MP_Scenarios", _("Singleplayer Scenarios"));
-	} else if (starts_with(display_dir, "Downloaded")) {
-		replace_first(display_dir, "Downloaded", _("Downloaded Maps"));
+	if (starts_with(display_dir, kMyMapsDir)) {
+		replace_first(display_dir, kMyMapsDir, _("My Maps"));
+	} else if (starts_with(display_dir, kMultiPlayerScenarioDir)) {
+		replace_first(display_dir, kMultiPlayerScenarioDir, _("Multiplayer Scenarios"));
+	} else if (starts_with(display_dir, kSinglePlayerScenarioDir)) {
+		replace_first(display_dir, kSinglePlayerScenarioDir, _("Singleplayer Scenarios"));
+	} else if (starts_with(display_dir, kDownloadedMapsDir)) {
+		replace_first(display_dir, kDownloadedMapsDir, _("Downloaded Maps"));
 	}
 	/** TRANSLATORS: The folder that a file will be saved to. */
 	directory_info_.set_text(format(_("Current directory: %s"), display_dir));

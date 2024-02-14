@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,6 +43,8 @@ std::string to_string(const MapObjectType type) {
 		return "ship_fleet_yard_interface";
 	case MapObjectType::FERRY_FLEET_YARD_INTERFACE:
 		return "ferry_fleet_yard_interface";
+	case MapObjectType::NAVAL_INVASION_BASE:
+		return "naval_invasion_base";
 	case MapObjectType::WORKER:
 		return "worker";
 	case MapObjectType::CARRIER:

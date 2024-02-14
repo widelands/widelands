@@ -6,7 +6,7 @@ configure_file (${CMAKE_CURRENT_SOURCE_DIR}/../cmake/datadirversion.cmake ${CMAK
 add_custom_target(codecheck)
 add_custom_target(run_build_deps
   COMMAND
-    ${PYTHON_EXECUTABLE}
+    ${Python3_EXECUTABLE}
     ${CMAKE_SOURCE_DIR}/utils/build_deps.py
   COMMENT "Checking CMakeLists.txt files."
 )
@@ -31,7 +31,7 @@ wl_library(build_info
 )
 
 if (WIN32)
-	configure_file (${CMAKE_CURRENT_SOURCE_DIR}/../utils/win32/widelands.rc.cmake ${CMAKE_CURRENT_BINARY_DIR}/widelands.rc)
+	configure_file (${CMAKE_CURRENT_SOURCE_DIR}/../utils/windows/widelands.rc.cmake ${CMAKE_CURRENT_BINARY_DIR}/widelands.rc)
 	message (STATUS "Configured windows resource file")
 	set(WIN32_ICON_O ${CMAKE_CURRENT_BINARY_DIR}/wl_icon.o)
 	if(MSVC)
@@ -146,6 +146,7 @@ wl_library(widelands_ball_of_mud
     widelands_options
     wui
     wui_chat_ui
+    wui_common_mapdetails
 )
 
 wl_library(widelands_options

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2023 by the Widelands Development Team
+ * Copyright (C) 2007-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,6 +30,7 @@
 #include "logic/map_objects/pinned_note.h"
 #include "logic/map_objects/tribes/battle.h"
 #include "logic/map_objects/tribes/ship.h"
+#include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/map_objects/world/critter.h"
 #include "map_io/map_object_loader.h"
@@ -107,6 +108,10 @@ void MapObjectPacket::read(FileSystem& fs, EditorGameBase& egbase, MapObjectLoad
 
 			case MapObject::HeaderFerryFleetInterface:
 				loaders.insert(FerryFleetYardInterface::load(egbase, mol, fr));
+				break;
+
+			case MapObject::HeaderNavalInvasionBase:
+				loaders.insert(NavalInvasionBase::load(egbase, mol, fr));
 				break;
 
 			default:

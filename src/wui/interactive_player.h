@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,6 @@
 #include <memory>
 
 #include "io/profile.h"
-#include "logic/map_objects/tribes/ship.h"
 #include "logic/message_id.h"
 #include "logic/note_map_options.h"
 #include "ui_basic/button.h"
@@ -68,11 +67,8 @@ public:
 	void think() override;
 	void draw(RenderTarget& dst) override;
 
-	std::map<const Widelands::OPtr<Widelands::Ship>, Widelands::Coords>&
-	get_expedition_port_spaces() {
-		return expedition_port_spaces_;
-	}
-	bool has_expedition_port_space(const Widelands::Coords&) const;
+	enum class HasExpeditionPortSpace { kNone, kPrimary, kOther };
+	HasExpeditionPortSpace has_expedition_port_space(const Widelands::Coords&) const;
 
 	void set_flag_to_connect(const Widelands::Coords& location) {
 		flag_to_connect_ = location;
@@ -83,8 +79,13 @@ public:
 
 	void popup_message(Widelands::MessageId, const Widelands::Message&) const;
 
-	/** Open an attack box for the building at the given position, if applicable. */
-	UI::Window* show_attack_window(const Widelands::Coords&, bool fastclick);
+	/**
+	 * Open an attack window for the provided map object. If no object is specified,
+	 * auto-detect what kind of attack window to show at the provided location.
+	 */
+	UI::Window* show_attack_window(const Widelands::Coords& coords,
+	                               Widelands::MapObject* object,
+	                               bool fastclick) override;
 
 	void edit_pinned_note(const Widelands::FCoords& c);
 
@@ -153,10 +154,7 @@ private:
 	                                       RenderTarget*,
 	                                       std::set<Widelands::Coords>&);
 
-	std::map<const Widelands::OPtr<Widelands::Ship>, Widelands::Coords> expedition_port_spaces_;
-
 	std::unique_ptr<Notifications::Subscriber<NoteMapOptions>> map_options_subscriber_;
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShip>> shipnotes_subscriber_;
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_PLAYER_H

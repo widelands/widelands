@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021-2023 by the Widelands Development Team
+ * Copyright (C) 2021-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -163,7 +163,7 @@ void MutableAddOn::cleanup_temp_dir() {
 }
 
 std::string MutableAddOn::parse_requirements() {
-	// · We need to read the original `addon` file (if it exists) to
+	// • We need to read the original `addon` file (if it exists) to
 	//   determine the requirements. Then write the file, and we are done.
 	const std::string directory = kAddOnDir + FileSystem::file_separator() + internal_name_;
 	bool dir_exists = g_fs->file_exists(directory);
@@ -233,7 +233,7 @@ MapsAddon::MapsAddon(const AddOnInfo& a) : MutableAddOn(a) {
 }
 
 std::string MapsAddon::parse_requirements() {
-	// · For maps, we need to gather the information regarding the maps' required add-ons
+	// • For maps, we need to gather the information regarding the maps' required add-ons
 	//   before writing the profile so we can generate the correct `requires` string.
 	std::string requirements;
 	std::vector<std::string> req;

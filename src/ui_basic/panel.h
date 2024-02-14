@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2023 by the Widelands Development Team
+ * Copyright (C) 2002-2024 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -91,6 +91,8 @@ public:
 		pf_hide_all_overlays = 1 << 13,
 		// Other panels will snap to this one.
 		pf_snap_target = 1 << 14,
+		// Layouting hint that this panel is expected to grow to some very large sizes.
+		pf_unlimited_size = 1 << 15,
 	};
 
 	/** The Z ordering of overlapping panels; highest value is always on top. */
@@ -433,8 +435,19 @@ public:
 		kQuicknav,
 		kFleetOptions,
 	};
+	/*
+	 * Actual save type after initialization.
+	 * Overridden in derived classes
+	 */
 	virtual SaveType save_type() const {
 		return SaveType::kNone;
+	}
+	/*
+	 * Saving partially initialized windows can trigger
+	 * race conditions. Wait until initialization_complete().
+	 */
+	SaveType current_save_type() const {
+		return initialized_ ? save_type() : SaveType::kNone;
 	}
 	virtual void save(FileWrite&, Widelands::MapObjectSaver&) const {
 		NEVER_HERE();
@@ -502,6 +515,7 @@ protected:
 
 	const PanelStyle panel_style_;
 
+public:
 	/** Never call this function, except when you need Widelands to stay responsive
 	 *  during a costly operation and you can guarantee that it will not interfere
 	 *  with the "normal" graphics refreshing done periodically from `Panel::do_run`.
@@ -512,7 +526,6 @@ protected:
 	void do_redraw_now(bool handle_input = true,
 	                   const std::string& message_to_display = std::string());
 
-public:
 	virtual bool check_handles_mouse(int32_t /* x */, int32_t /* y */) {
 		return get_flag(pf_handle_mouse);
 	}
