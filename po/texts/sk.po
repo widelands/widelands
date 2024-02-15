@@ -219,7 +219,7 @@ msgstr "Domovská stránka"
 
 #: ../../data/txts/developers.lua:34
 msgid "Scripting"
-msgstr ""
+msgstr "Skriptovanie"
 
 #: ../../data/txts/developers.lua:40 ../../data/txts/developers.lua:429
 msgid "Sound"
@@ -390,7 +390,7 @@ msgid ""
 " replay to become incompatible and to ‘go out of sync’. This is similar to "
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
-msgstr "Možnosť „Sledovať záznam“ v hlavnej ponuke vám umožňuje prehrať predošlú hru v presne rovnakej podobe, ako bola hraná. Všimnite si však, že aj malé zmeny v herných dátových súboroch alebo spúšťači Widelands môžu spôsobiť stratu kompatibility alebo synchronizácie záznamu. Je to, ako keď v sieťovej hre nastanú synchronizačné problémy pre odlišnú verziu hry jedného z hráčov."
+msgstr "Možnosť „Sledovať záznam“ v hlavnej ponuke vám umožňuje prehrať predošlú hru v presne rovnakej podobe, ako bola hraná. Všimnite si však, že aj malé zmeny v herných údajových súboroch alebo spúšťači Widelands môžu spôsobiť stratu kompatibility alebo synchronizácie záznamu. Je to, ako keď v sieťovej hre nastanú synchronizačné problémy pre odlišnú verziu hry jedného z hráčov."
 
 #: ../../data/txts/help/common_helptexts.lua:32
 #, lua-format
@@ -412,7 +412,7 @@ msgstr "%s:"
 #: ../../data/txts/help/common_helptexts.lua:57
 #: ../../data/txts/help/common_helptexts.lua:67
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../data/txts/help/multiplayer_help.lua:8
 msgid "Multiplayer Game Setup"
@@ -723,7 +723,7 @@ msgstr "Baníci pracujú, len ak sú zásobovaní jedlom."
 msgid ""
 "Split your roads into shorter sections by planting some flags. This will "
 "speed up transportation of your wares."
-msgstr "Rozdeľte svoje cesty na kratšie úseky umiestnením vlajok. Tak sa preprava vašich tovarov zrýchli."
+msgstr "Rozdeľte svoje cesty na kratšie úseky umiestnením vlajok. Tak sa preprava vašich výrobkov zrýchli."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/general_game.lua:28

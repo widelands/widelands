@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-08 02:24+0000\n"
+"POT-Creation-Date: 2024-02-15 02:28+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2017,2022-2024\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
@@ -93,7 +93,7 @@ msgstr "Новые задания"
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
 #. space here.
-#: ../../data/scripting/richtext.lua:671
+#: ../../data/scripting/richtext.lua:675
 #, lua-format
 msgctxt "sentence_separator"
 msgid "%s %s"
@@ -101,14 +101,14 @@ msgstr "%s %s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/richtext.lua:699 ../../src/base/i18n.cc:400
+#: ../../data/scripting/richtext.lua:703 ../../src/base/i18n.cc:400
 #, c-format
 msgid "%1$s & %2$s"
 msgstr "%1$s и %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/richtext.lua:701 ../../src/base/i18n.cc:404
+#: ../../data/scripting/richtext.lua:705 ../../src/base/i18n.cc:404
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s или %2$s"
@@ -117,7 +117,7 @@ msgstr "%1$s или %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/richtext.lua:703 ../../data/scripting/richtext.lua:708
+#: ../../data/scripting/richtext.lua:707 ../../data/scripting/richtext.lua:712
 #: ../../src/base/i18n.cc:408 ../../src/base/i18n.cc:417
 #: ../../src/logic/addons.cc:236
 #, c-format
@@ -127,7 +127,7 @@ msgstr "%1$s, %2$s"
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: The current value of a spinbox, "X hours and Y minutes"
-#: ../../data/scripting/richtext.lua:705 ../../src/base/i18n.cc:412
+#: ../../data/scripting/richtext.lua:709 ../../src/base/i18n.cc:412
 #: ../../src/ui_basic/spinbox.cc:515
 #, c-format
 msgid "%1$s and %2$s"
@@ -312,7 +312,7 @@ msgstr "Esc"
 #. * TRANSLATORS: Title for the tool menu button in the editor
 #. * TRANSLATORS: Heading in the editor keyboard shortcuts help
 #: ../../src/editor/editorinteractive.cc:114
-#: ../../src/wlapplication_options.cc:1044
+#: ../../src/wlapplication_options.cc:1054
 msgctxt "editor"
 msgid "Tools"
 msgstr "Инструменты"
@@ -333,18 +333,18 @@ msgid "Tool size"
 msgstr "Размер инструмента"
 
 #: ../../src/editor/editorinteractive.cc:158
-#: ../../src/wlapplication_options.cc:465
+#: ../../src/wlapplication_options.cc:475
 msgid "Undo"
 msgstr "Отменить"
 
 #: ../../src/editor/editorinteractive.cc:163
-#: ../../src/wlapplication_options.cc:469
+#: ../../src/wlapplication_options.cc:479
 msgid "Redo"
 msgstr "Повторить"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/editor/editorinteractive.cc:175
-#: ../../src/wlapplication_options.cc:865 ../../src/wui/buildingwindow.cc:443
+#: ../../src/wlapplication_options.cc:875 ../../src/wui/buildingwindow.cc:443
 #: ../../src/wui/interactive_player.cc:237
 msgid "Help"
 msgstr "Помощь"
@@ -352,22 +352,22 @@ msgstr "Помощь"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:207
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:40
-#: ../../src/ui_fsmenu/main.cc:445 ../../src/wlapplication_options.cc:447
+#: ../../src/ui_fsmenu/main.cc:419 ../../src/wlapplication_options.cc:457
 msgid "New Map"
 msgstr "Новая карта"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:216
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:842
-#: ../../src/wlapplication_options.cc:452
+#: ../../src/wlapplication_options.cc:462
 msgid "New Random Map"
 msgstr "Новая случайная карта"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/editor/editorinteractive.cc:224
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:33
-#: ../../src/ui_fsmenu/main.cc:450 ../../src/wlapplication_options.cc:856
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:34
+#: ../../src/ui_fsmenu/main.cc:424 ../../src/wlapplication_options.cc:866
 msgid "Load Map"
 msgstr "Загрузить карту"
 
@@ -375,7 +375,7 @@ msgstr "Загрузить карту"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/editor/editorinteractive.cc:232
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:53
-#: ../../src/wlapplication_options.cc:859
+#: ../../src/wlapplication_options.cc:869
 msgid "Save Map"
 msgstr "Сохранить Карту"
 
@@ -388,14 +388,14 @@ msgstr "Опубликовать карту онлайн..."
 #: ../../src/editor/editorinteractive.cc:245
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:227
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:62
-#: ../../src/wlapplication_options.cc:461
+#: ../../src/wlapplication_options.cc:471
 msgid "Map Options"
 msgstr "Параметры карты"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/editor/editorinteractive.cc:250
-#: ../../src/wlapplication_options.cc:862
+#: ../../src/wlapplication_options.cc:872
 msgid "Exit Editor"
 msgstr "Выход из редактора"
 
@@ -528,7 +528,7 @@ msgstr "Щелкнуть на поле, чтобы показать информ
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:393
 #: ../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:44
-#: ../../src/wlapplication_options.cc:526
+#: ../../src/wlapplication_options.cc:536
 msgid "Tool History"
 msgstr "История инструмента"
 
@@ -656,13 +656,13 @@ msgstr "Вы уверены, что хотите выйти из редакто�
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:480
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:486
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
-#: ../../src/ui_fsmenu/launch_mpg.cc:320 ../../src/ui_fsmenu/main.cc:273
-#: ../../src/wlapplication.cc:1680
+#: ../../src/ui_fsmenu/launch_mpg.cc:320 ../../src/ui_fsmenu/main.cc:285
+#: ../../src/wlapplication.cc:1765
 msgid "Error"
 msgstr "Ошибка"
 
-#: ../../src/editor/editorinteractive.cc:1143 ../../src/ui_fsmenu/main.cc:257
-#: ../../src/wlapplication.cc:1682
+#: ../../src/editor/editorinteractive.cc:1143 ../../src/ui_fsmenu/main.cc:269
+#: ../../src/wlapplication.cc:1767
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -673,13 +673,13 @@ msgid ""
 "Please add this information to your report."
 msgstr "Обнаружена ошибка. Сообщение об ошибке:\n\n%1$s\n\nПожалуйста, сообщите нам о проблеме, чтобы мы могли улучшить Widelands. Вы найдете соответствующие сообщения в стандартном выводе (stdout.txt в Windows). Вы используете версию %2$s.\nПожалуйста, добавьте эту информацию в ваш отчёт."
 
-#: ../../src/editor/editorinteractive.cc:1177
+#: ../../src/editor/editorinteractive.cc:1179
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "Загрузка карты “%s”…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:1199
+#: ../../src/editor/editorinteractive.cc:1201
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:115
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:620
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:144
@@ -688,7 +688,7 @@ msgid "No Name"
 msgstr "Без имени"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:1202
+#: ../../src/editor/editorinteractive.cc:1204
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:116
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:621
 #: ../../src/logic/map.h:232 ../../src/ui_fsmenu/addons/packager.cc:412
@@ -696,20 +696,20 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: ../../src/editor/editorinteractive.cc:1226
+#: ../../src/editor/editorinteractive.cc:1228
 msgid "Loading world…"
 msgstr "Загрузка мира..."
 
-#: ../../src/editor/editorinteractive.cc:1405
+#: ../../src/editor/editorinteractive.cc:1407
 #, c-format
 msgid "Tool gaps: %u%%"
 msgstr "Зазор инструметов: %u%%"
 
-#: ../../src/editor/editorinteractive.cc:1428
+#: ../../src/editor/editorinteractive.cc:1430
 msgid "Publish Map"
 msgstr "Опубликовать карту"
 
-#: ../../src/editor/editorinteractive.cc:1429
+#: ../../src/editor/editorinteractive.cc:1431
 #, c-format
 msgid ""
 "Are you certain that you want to publish this map online?\n"
@@ -721,50 +721,50 @@ msgid ""
 "Hint: %5$s\n"
 msgstr "Вы уверены что хотите опубликовать эту карту?\n\nНазвание: %1$s\nВнутреннее имя: %2$s\nАвтор: %3$s\nОписание: %4$s\nСовет: %5$s\n"
 
-#: ../../src/editor/editorinteractive.cc:1453
+#: ../../src/editor/editorinteractive.cc:1455
 msgid "Login Error"
 msgstr "Ошибка авторизации"
 
-#: ../../src/editor/editorinteractive.cc:1458
+#: ../../src/editor/editorinteractive.cc:1460
 msgid "Uploading Add-On…"
 msgstr "Выгрузка дополнения..."
 
-#: ../../src/editor/editorinteractive.cc:1459
+#: ../../src/editor/editorinteractive.cc:1461
 msgid "Saving map…"
 msgstr "Сохранение карты..."
 
-#: ../../src/editor/editorinteractive.cc:1478
+#: ../../src/editor/editorinteractive.cc:1480
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:315
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:370
 msgid "Error Saving Map!"
 msgstr "Ошибка сохранения карты!"
 
-#: ../../src/editor/editorinteractive.cc:1484
+#: ../../src/editor/editorinteractive.cc:1486
 msgid "Packaging add-on…"
 msgstr "Упаковка дополнения..."
 
-#: ../../src/editor/editorinteractive.cc:1535
+#: ../../src/editor/editorinteractive.cc:1537
 msgid "Add-On Generation Error"
 msgstr "Ошибка генератора дополнений"
 
-#: ../../src/editor/editorinteractive.cc:1536
+#: ../../src/editor/editorinteractive.cc:1538
 msgid "The add-on could not be written to the disk."
 msgstr "Дополнение нельзя записать на диск."
 
-#: ../../src/editor/editorinteractive.cc:1543
+#: ../../src/editor/editorinteractive.cc:1545
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:108
 msgid "Uploading…"
 msgstr "Загружается"
 
-#: ../../src/editor/editorinteractive.cc:1549
+#: ../../src/editor/editorinteractive.cc:1551
 msgid "Upload Error"
 msgstr "Ошибка выгрузки"
 
-#: ../../src/editor/editorinteractive.cc:1571
+#: ../../src/editor/editorinteractive.cc:1573
 msgid "Success"
 msgstr "Успешно"
 
-#: ../../src/editor/editorinteractive.cc:1572
+#: ../../src/editor/editorinteractive.cc:1574
 msgid "The add-on was uploaded successfully."
 msgstr "Дополнение успешно выгружено."
 
@@ -984,7 +984,7 @@ msgstr "Автор: %s"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:244
 #: ../../src/ui_fsmenu/addons/packager_box.cc:296
-#: ../../src/ui_fsmenu/main.cc:484 ../../src/ui_fsmenu/mapdetailsbox.cc:124
+#: ../../src/ui_fsmenu/main.cc:449 ../../src/ui_fsmenu/mapdetailsbox.cc:124
 #, c-format
 msgid "Description: %s"
 msgstr "Описание: %s"
@@ -1007,39 +1007,39 @@ msgid "Enabled Add-Ons: %s"
 msgstr "Включить аддоны: %s"
 
 #: ../../src/editor/ui_menus/help.cc:36 ../../src/ui_fsmenu/login_box.cc:255
-#: ../../src/ui_fsmenu/main.cc:255 ../../src/ui_fsmenu/main.cc:1084
+#: ../../src/ui_fsmenu/main.cc:267 ../../src/ui_fsmenu/main.cc:1101
 #: ../../src/wui/encyclopedia_window.cc:146
 #: ../../src/wui/tribal_encyclopedia.cc:55
 msgid "Error!"
 msgstr "Ошибка!"
 
 #. * TRANSLATORS: Directory name for user maps in map selection
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:81
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:82
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:284
 #: ../../src/ui_fsmenu/addons/packager_box.cc:217 ../../src/wui/mapdata.cc:196
 msgid "My Maps"
 msgstr "Мои карты"
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:83
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:84
 #: ../../src/wui/mapdata.cc:190
 msgid "Multiplayer Scenarios"
 msgstr "Многопользовательские сценарии"
 
 #. * TRANSLATORS: Directory name for SP Scenarios in map selection
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:85
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:86
 #: ../../src/wui/mapdata.cc:193
 msgid "Singleplayer Scenarios"
 msgstr "Одиночные сценарии"
 
 #. * TRANSLATORS: Directory name for downloaded maps in map selection
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:87
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:88
 #: ../../src/wui/mapdata.cc:199
 msgid "Downloaded Maps"
 msgstr "Загруженные карты"
 
 #. * TRANSLATORS: The folder that a file will be saved to.
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:90
+#: ../../src/editor/ui_menus/main_menu_load_map.cc:91
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:284
 #, c-format
 msgid "Current directory: %s"
@@ -1375,7 +1375,7 @@ msgstr "Создание случайной карты..."
 #. editor.
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:691
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:725
-#: ../../src/ui_fsmenu/main.cc:447
+#: ../../src/ui_fsmenu/main.cc:421
 msgid "Random Map"
 msgstr "Случайная карта"
 
@@ -1520,7 +1520,7 @@ msgstr "Отмена"
 msgid "Player Options"
 msgstr "Настройка игроков"
 
-#: ../../src/editor/ui_menus/player_menu.cc:151 ../../src/wui/maptable.cc:29
+#: ../../src/editor/ui_menus/player_menu.cc:151 ../../src/wui/maptable.cc:34
 msgid "Number of players"
 msgstr "Количество игроков"
 
@@ -1751,7 +1751,7 @@ msgstr "Очередь команд"
 
 #: ../../src/game_io/game_loader.cc:157 ../../src/map_io/map_saver.cc:146
 #: ../../src/map_io/widelands_map_loader.cc:400
-#: ../../src/wlapplication_options.cc:667
+#: ../../src/wlapplication_options.cc:677
 #: ../../src/wui/interactive_player.cc:227
 #: ../../src/wui/interactive_player.cc:482
 msgid "Messages"
@@ -2029,126 +2029,132 @@ msgstr[1] "Задействованы %u игровых дополнения:"
 msgstr[2] "Задействовано %u игровых дополнений:"
 msgstr[3] "Задействовано %u игровых дополнений:"
 
-#: ../../src/logic/detected_port_space.cc:51
-#, c-format
-msgid "northwest of %s"
+#. * TRANSLATORS: "12 steps northwest of Port1"
+#: ../../src/logic/detected_port_space.cc:52
+msgid "northwest"
 msgstr ""
 
-#: ../../src/logic/detected_port_space.cc:54
-#, c-format
-msgid "northeast of %s"
+#. * TRANSLATORS: "12 steps northeast of Port1"
+#: ../../src/logic/detected_port_space.cc:56
+msgid "northeast"
 msgstr ""
 
-#: ../../src/logic/detected_port_space.cc:57
-#, c-format
-msgid "southwest of %s"
-msgstr ""
-
+#. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../src/logic/detected_port_space.cc:60
-#, c-format
-msgid "southeast of %s"
+msgid "southwest"
 msgstr ""
 
-#: ../../src/logic/detected_port_space.cc:63
-#, c-format
-msgid "north of %s"
+#. * TRANSLATORS: "12 steps southwest of Port1"
+#: ../../src/logic/detected_port_space.cc:64
+msgid "southeast"
 msgstr ""
 
-#: ../../src/logic/detected_port_space.cc:66
-#, c-format
-msgid "south of %s"
+#. * TRANSLATORS: "12 steps north of Port1"
+#: ../../src/logic/detected_port_space.cc:68
+msgid "north"
 msgstr ""
 
-#: ../../src/logic/detected_port_space.cc:69
-#, c-format
-msgid "west of %s"
-msgstr ""
-
+#. * TRANSLATORS: "12 steps south of Port1"
 #: ../../src/logic/detected_port_space.cc:72
-#, c-format
-msgid "east of %s"
+msgid "south"
 msgstr ""
 
+#. * TRANSLATORS: "12 steps west of Port1"
+#: ../../src/logic/detected_port_space.cc:76
+msgid "west"
+msgstr ""
+
+#. * TRANSLATORS: "12 steps east of Port1"
 #: ../../src/logic/detected_port_space.cc:80
+msgid "east"
+msgstr ""
+
+#: ../../src/logic/detected_port_space.cc:88
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s"
 msgstr ""
 
-#. * TRANSLATORS: Last placeholder is "northwest/southeast/... of <port name>"
-#: ../../src/logic/detected_port_space.cc:85
+#. * TRANSLATORS: "Unowned port space discovered at 1:23 by Ship2 34 steps
+#. north of
+#. Port1"
+#: ../../src/logic/detected_port_space.cc:94
 #, c-format
-msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s"
-msgid_plural "Unowned port space discovered at %1$s by %2$s %3$u steps %4$s"
+msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s of %5$s"
+msgid_plural ""
+"Unowned port space discovered at %1$s by %2$s %3$u steps %4$s of %5$s"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: ../../src/logic/detected_port_space.cc:91
+#: ../../src/logic/detected_port_space.cc:101
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s"
 msgstr ""
 
-#. * TRANSLATORS: Last placeholder is "northwest/southeast/... of <port name>"
-#: ../../src/logic/detected_port_space.cc:97
+#. * TRANSLATORS: "Port space of Player3 discovered at 1:23 by Ship2 34 steps
+#. north
+#. of Port1"
+#: ../../src/logic/detected_port_space.cc:108
 #, c-format
-msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s"
-msgid_plural "Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s"
+msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s of %6$s"
+msgid_plural ""
+"Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s of %6$s"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
 #. * TRANSLATORS: This is an abbreviated direction: Northwest.
-#: ../../src/logic/detected_port_space.cc:109
+#: ../../src/logic/detected_port_space.cc:120
 msgctxt "direction"
 msgid "NW"
 msgstr ""
 
 #. * TRANSLATORS: This is an abbreviated direction: Northeast.
-#: ../../src/logic/detected_port_space.cc:113
+#: ../../src/logic/detected_port_space.cc:124
 msgctxt "direction"
 msgid "NE"
 msgstr ""
 
 #. * TRANSLATORS: This is an abbreviated direction: Southwest.
-#: ../../src/logic/detected_port_space.cc:117
+#: ../../src/logic/detected_port_space.cc:128
 msgctxt "direction"
 msgid "SW"
 msgstr ""
 
 #. * TRANSLATORS: This is an abbreviated direction: Southeast.
-#: ../../src/logic/detected_port_space.cc:121
+#: ../../src/logic/detected_port_space.cc:132
 msgctxt "direction"
 msgid "SE"
 msgstr ""
 
 #. * TRANSLATORS: This is an abbreviated direction: North.
-#: ../../src/logic/detected_port_space.cc:125
+#: ../../src/logic/detected_port_space.cc:136
 msgctxt "direction"
 msgid "N"
 msgstr ""
 
 #. * TRANSLATORS: This is an abbreviated direction: South.
-#: ../../src/logic/detected_port_space.cc:129
+#: ../../src/logic/detected_port_space.cc:140
 msgctxt "direction"
 msgid "S"
 msgstr ""
 
 #. * TRANSLATORS: This is an abbreviated direction: West.
-#: ../../src/logic/detected_port_space.cc:133
+#: ../../src/logic/detected_port_space.cc:144
 msgctxt "direction"
 msgid "W"
 msgstr ""
 
 #. * TRANSLATORS: This is an abbreviated direction: East.
-#: ../../src/logic/detected_port_space.cc:137
+#: ../../src/logic/detected_port_space.cc:148
 msgctxt "direction"
 msgid "E"
 msgstr ""
 
 #. * TRANSLATORS: Placeholders are gametime and shipname. Keep this short.
-#: ../../src/logic/detected_port_space.cc:146
+#: ../../src/logic/detected_port_space.cc:157
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s"
@@ -2157,7 +2163,7 @@ msgstr ""
 #. * TRANSLATORS: Placeholders are gametime, shipname, and distance direction
 #. port_name.
 #. *  Keep this short.
-#: ../../src/logic/detected_port_space.cc:151
+#: ../../src/logic/detected_port_space.cc:162
 #, c-format
 msgctxt "detected_port_space"
 msgid "Unowned / %1$s / %2$s / %3$u %4$s %5$s"
@@ -2165,7 +2171,7 @@ msgstr ""
 
 #. * TRANSLATORS: Placeholders are owner, gametime, and shipname. Keep this
 #. short.
-#: ../../src/logic/detected_port_space.cc:157
+#: ../../src/logic/detected_port_space.cc:168
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s"
@@ -2174,7 +2180,7 @@ msgstr ""
 #. * TRANSLATORS: Placeholders are owner, gametime, shipname, and "distance
 #. direction port_name.
 #. *  Keep this short.
-#: ../../src/logic/detected_port_space.cc:163
+#: ../../src/logic/detected_port_space.cc:174
 #, c-format
 msgctxt "detected_port_space"
 msgid "%1$s / %2$s / %3$s / %4$u %5$s %6$s"
@@ -2954,30 +2960,30 @@ msgstr "Не хватает опытного работника"
 msgid "Experts missing"
 msgstr "Не хватает опытных работников"
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:581
+#: ../../src/logic/map_objects/tribes/warehouse.cc:591
 msgid "A new port was added to your economy."
 msgstr "Новый порт присоединился к экономике."
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:584
+#: ../../src/logic/map_objects/tribes/warehouse.cc:594
 msgid "A new headquarters was added to your economy."
 msgstr "Новый штаб добавлен к экономике."
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:587
+#: ../../src/logic/map_objects/tribes/warehouse.cc:597
 msgid "A new warehouse was added to your economy."
 msgstr "Новый склад добавлен к экономике."
 
 #. * TRANSLATORS: Message header, short for "Waterway Destroyed" (not much
 #. space
 #. * available)
-#: ../../src/logic/map_objects/tribes/warehouse.cc:675
+#: ../../src/logic/map_objects/tribes/warehouse.cc:685
 msgid "Waterway"
 msgstr "Переправа"
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:676
+#: ../../src/logic/map_objects/tribes/warehouse.cc:686
 msgid "Waterway destroyed"
 msgstr "Переправа разрушена"
 
-#: ../../src/logic/map_objects/tribes/warehouse.cc:677
+#: ../../src/logic/map_objects/tribes/warehouse.cc:687
 msgid "A waterway had to be destroyed to make room for your new port dock."
 msgstr "Переправа была уничтожена чтобы освободить место под новый порт."
 
@@ -3056,7 +3062,7 @@ msgid "Warehouse %d"
 msgstr "Склад %d"
 
 #: ../../src/logic/playercommand.cc:2357
-#: ../../src/wlapplication_options.cc:663
+#: ../../src/wlapplication_options.cc:673
 #: ../../src/wui/game_diplomacy_menu.cc:36
 #: ../../src/wui/interactive_gamebase.cc:248
 msgid "Diplomacy"
@@ -3262,7 +3268,7 @@ msgstr "Сценарий"
 
 #: ../../src/map_io/map_saver.cc:303
 #: ../../src/map_io/widelands_map_loader.cc:418
-#: ../../src/wlapplication_options.cc:658
+#: ../../src/wlapplication_options.cc:668
 #: ../../src/wui/game_objectives_menu.cc:30
 #: ../../src/wui/interactive_player.cc:217
 msgid "Objectives"
@@ -3326,7 +3332,7 @@ msgid "Postloading map objects"
 msgstr "Загрузка объектов карты"
 
 #: ../../src/network/gameclient.cc:162 ../../src/network/gamehost.cc:561
-#: ../../src/ui_fsmenu/launch_spg.cc:174 ../../src/wlapplication.cc:785
+#: ../../src/ui_fsmenu/launch_spg.cc:174 ../../src/wlapplication.cc:788
 msgid "Preparing game…"
 msgstr "Подготовка к игре..."
 
@@ -3928,11 +3934,11 @@ msgstr "Widelands не удалось использовать локальну�
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
-#: ../../src/scripting/lua_ui.cc:1136 ../../src/wui/interactive_base.cc:311
+#: ../../src/scripting/lua_ui.cc:1137 ../../src/wui/interactive_base.cc:311
 msgid "Plugin Error"
 msgstr "Ошибка плагина"
 
-#: ../../src/scripting/lua_ui.cc:1137 ../../src/wui/interactive_base.cc:312
+#: ../../src/scripting/lua_ui.cc:1138 ../../src/wui/interactive_base.cc:312
 #, c-format
 msgid ""
 "Error when running plugin:\n"
@@ -4230,8 +4236,8 @@ msgid "%1$s<br>(%2$s)"
 msgstr "%1$s<br>(%2$s)"
 
 #: ../../src/ui_basic/window.cc:101 ../../src/ui_fsmenu/about.cc:41
-#: ../../src/ui_fsmenu/crash_report.cc:70
-#: ../../src/ui_fsmenu/crash_report.cc:160
+#: ../../src/ui_fsmenu/crash_report.cc:71
+#: ../../src/ui_fsmenu/crash_report.cc:161
 #: ../../src/ui_fsmenu/mousewheel_report.cc:74
 #: ../../src/wui/watchwindow.cc:110
 msgid "Close"
@@ -4253,7 +4259,7 @@ msgstr "Закрепить"
 msgid "Unpin"
 msgstr "Освободить"
 
-#: ../../src/ui_fsmenu/about.cc:38 ../../src/ui_fsmenu/main.cc:517
+#: ../../src/ui_fsmenu/about.cc:38 ../../src/ui_fsmenu/main.cc:515
 msgid "About Widelands"
 msgstr "О Widelands"
 
@@ -5156,27 +5162,27 @@ msgstr "Отображаемое имя каталога"
 msgid "Directory Tree"
 msgstr "Дерево каталогов"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:281
-#: ../../src/ui_fsmenu/main.cc:474
+#: ../../src/ui_fsmenu/addons/packager_box.cc:282
+#: ../../src/ui_fsmenu/main.cc:442
 #, c-format
 msgid "Name: %s"
 msgstr "Название: %s"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:284
-#: ../../src/ui_fsmenu/main.cc:477 ../../src/ui_fsmenu/mapdetailsbox.cc:112
+#: ../../src/ui_fsmenu/addons/packager_box.cc:285
+#: ../../src/ui_fsmenu/main.cc:444 ../../src/ui_fsmenu/mapdetailsbox.cc:112
 #, c-format
 msgid "Size: %s"
 msgstr "Размеры: %s"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:287
-#: ../../src/ui_fsmenu/main.cc:479 ../../src/ui_fsmenu/mapdetailsbox.cc:114
+#: ../../src/ui_fsmenu/main.cc:446 ../../src/ui_fsmenu/mapdetailsbox.cc:114
 #, c-format
 msgid "%1$u×%2$u"
 msgstr "%1$u×%2$u"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:288
-#: ../../src/ui_fsmenu/main.cc:418 ../../src/ui_fsmenu/main.cc:481
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:119
+#: ../../src/ui_fsmenu/main.cc:396 ../../src/ui_fsmenu/main.cc:447
+#: ../../src/ui_fsmenu/main.cc:477 ../../src/ui_fsmenu/mapdetailsbox.cc:119
 #, c-format
 msgid "Players: %s"
 msgstr "Игроки: %s"
@@ -5807,35 +5813,35 @@ msgstr "Название племени"
 msgid "Campaign Name"
 msgstr "Название кампании"
 
-#: ../../src/ui_fsmenu/crash_report.cc:43
+#: ../../src/ui_fsmenu/crash_report.cc:44
 msgid "Crash Report Details"
 msgstr "Отчет о сбое подробно"
 
-#: ../../src/ui_fsmenu/crash_report.cc:61
-#: ../../src/ui_fsmenu/crash_report.cc:148
+#: ../../src/ui_fsmenu/crash_report.cc:62
+#: ../../src/ui_fsmenu/crash_report.cc:149
 msgid "Open link"
 msgstr "Перейти по ссылке"
 
-#: ../../src/ui_fsmenu/crash_report.cc:63
-#: ../../src/ui_fsmenu/crash_report.cc:150
+#: ../../src/ui_fsmenu/crash_report.cc:64
+#: ../../src/ui_fsmenu/crash_report.cc:151
 msgid "Copy link"
 msgstr "Скопировать ссылку"
 
-#: ../../src/ui_fsmenu/crash_report.cc:67
-#: ../../src/ui_fsmenu/crash_report.cc:155
+#: ../../src/ui_fsmenu/crash_report.cc:68
+#: ../../src/ui_fsmenu/crash_report.cc:156
 msgid "Copy report"
 msgstr "Скопировать отчет"
 
-#: ../../src/ui_fsmenu/crash_report.cc:68
-#: ../../src/ui_fsmenu/crash_report.cc:155
+#: ../../src/ui_fsmenu/crash_report.cc:69
+#: ../../src/ui_fsmenu/crash_report.cc:156
 msgid "Copy the full report to the clipboard"
 msgstr "Скопировать полный отчет в буфер обмена"
 
-#: ../../src/ui_fsmenu/crash_report.cc:97
+#: ../../src/ui_fsmenu/crash_report.cc:98
 msgid "Crash Report"
 msgstr "Отчет о сбое"
 
-#: ../../src/ui_fsmenu/crash_report.cc:131
+#: ../../src/ui_fsmenu/crash_report.cc:132
 #, c-format
 msgid ""
 "It looks like Widelands crashed the last time you ran it, but a backtrace "
@@ -5845,15 +5851,15 @@ msgid ""
 "the problem."
 msgstr "Похоже, что во время последнего запуска Widelands произошел сбой, при этом был автоматически сгенерирован отчет об ошибках для отладки. Пожалуйста, отправьте отчет вместе с описанием ваших действий в игре, производившихся перед сбоем, команде разработчиков Widelands по адресу %s, чтобы мы могли исправить проблему."
 
-#: ../../src/ui_fsmenu/crash_report.cc:141
+#: ../../src/ui_fsmenu/crash_report.cc:142
 msgid "Show details…"
 msgstr "Показать подробности..."
 
-#: ../../src/ui_fsmenu/crash_report.cc:141
+#: ../../src/ui_fsmenu/crash_report.cc:142
 msgid "View the detailed crash report"
 msgstr "Просмотреть подробный отчет о сбое"
 
-#: ../../src/ui_fsmenu/crash_report.cc:158
+#: ../../src/ui_fsmenu/crash_report.cc:159
 msgid "Remind me later"
 msgstr "Напомнить позже"
 
@@ -5863,7 +5869,7 @@ msgid "Help: %s"
 msgstr "Помощь: %s"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:55
-#: ../../src/wlapplication_options.cc:331
+#: ../../src/wlapplication_options.cc:341
 msgid "Metaserver Lobby"
 msgstr "Лобби метасервера"
 
@@ -6004,7 +6010,7 @@ msgid "General"
 msgstr "Главное"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:299
-#: ../../src/wlapplication_options.cc:285
+#: ../../src/wlapplication_options.cc:295
 msgid "Editor"
 msgstr "Редактор"
 
@@ -6263,11 +6269,11 @@ msgstr "Вернуться в меню одиночной игры"
 msgid "Load this game"
 msgstr "Загрузить игру"
 
-#: ../../src/ui_fsmenu/login_box.cc:37 ../../src/ui_fsmenu/main.cc:438
+#: ../../src/ui_fsmenu/login_box.cc:37 ../../src/ui_fsmenu/main.cc:412
 msgid "Online Game Settings"
 msgstr "Настройки онлайн игры"
 
-#: ../../src/ui_fsmenu/login_box.cc:44 ../../src/wlapplication_options.cc:407
+#: ../../src/ui_fsmenu/login_box.cc:44 ../../src/wlapplication_options.cc:417
 #: ../../src/wui/economy_options_window.cc:678
 msgid "Save"
 msgstr "Сохранить"
@@ -6284,7 +6290,7 @@ msgstr "Имя:"
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:119
-#: ../../src/ui_fsmenu/netsetup_lan.cc:138 ../../src/wlapplication.cc:704
+#: ../../src/ui_fsmenu/netsetup_lan.cc:138 ../../src/wlapplication.cc:707
 msgid "nobody"
 msgstr "никто"
 
@@ -6302,7 +6308,7 @@ msgstr "Введите корректное имя. Это значение мо
 msgid "Please enter your password!"
 msgstr "Пожалуйста, введите пароль!"
 
-#: ../../src/ui_fsmenu/main.cc:274
+#: ../../src/ui_fsmenu/main.cc:286
 #, c-format
 msgid ""
 "Unable to create a Game instance!\n"
@@ -6310,125 +6316,144 @@ msgid ""
 "%s"
 msgstr "Не удаётся создать игру!\nСообщение об ошибке:\n%s"
 
-#: ../../src/ui_fsmenu/main.cc:371
+#: ../../src/ui_fsmenu/main.cc:361
 msgid "Begin a new game"
 msgstr "Начать новую игру"
 
-#: ../../src/ui_fsmenu/main.cc:371 ../../src/wlapplication_options.cc:249
+#: ../../src/ui_fsmenu/main.cc:361 ../../src/wlapplication_options.cc:249
 msgid "New Game"
 msgstr "Новая игра"
 
-#: ../../src/ui_fsmenu/main.cc:373 ../../src/ui_fsmenu/random_game.cc:29
-#: ../../src/wlapplication_options.cc:263
+#: ../../src/ui_fsmenu/main.cc:363 ../../src/ui_fsmenu/random_game.cc:29
+#: ../../src/wlapplication_options.cc:273
 msgid "New Random Game"
 msgstr "Новая игра со случайными параметрами"
 
-#: ../../src/ui_fsmenu/main.cc:374
+#: ../../src/ui_fsmenu/main.cc:364
 msgid "Create a new random match"
 msgstr "Начать новую случайную игру"
 
-#: ../../src/ui_fsmenu/main.cc:376 ../../src/wlapplication_options.cc:273
+#: ../../src/ui_fsmenu/main.cc:366 ../../src/wlapplication_options.cc:283
 msgid "Campaigns"
 msgstr "Кампании"
 
-#: ../../src/ui_fsmenu/main.cc:376
+#: ../../src/ui_fsmenu/main.cc:366
 msgid "Play a campaign"
 msgstr "Сыграть в кампанию"
 
-#: ../../src/ui_fsmenu/main.cc:378 ../../src/wlapplication_options.cc:268
+#: ../../src/ui_fsmenu/main.cc:368 ../../src/wlapplication_options.cc:278
 msgid "Tutorials"
 msgstr "Обучение"
 
-#: ../../src/ui_fsmenu/main.cc:379
+#: ../../src/ui_fsmenu/main.cc:369
 msgid "Play one of our beginners’ tutorials"
 msgstr "Пройти один из обучающих сценариев"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/ui_fsmenu/main.cc:381 ../../src/wlapplication_options.cc:253
-#: ../../src/wlapplication_options.cc:877
+#: ../../src/ui_fsmenu/main.cc:371 ../../src/wlapplication_options.cc:253
+#: ../../src/wlapplication_options.cc:887
 #: ../../src/wui/game_main_menu_save_game.cc:48
 #: ../../src/wui/interactive_gamebase.cc:181
 msgid "Load Game"
 msgstr "Загрузить игру"
 
-#: ../../src/ui_fsmenu/main.cc:382
+#: ../../src/ui_fsmenu/main.cc:372
 msgid "Continue a saved game"
 msgstr "Продолжить сохраненную игру"
 
-#: ../../src/ui_fsmenu/main.cc:403 ../../src/wlapplication_options.cc:310
+#: ../../src/ui_fsmenu/main.cc:383 ../../src/wlapplication_options.cc:320
 msgid "Continue Playing"
 msgstr "Продолжить игру"
 
-#: ../../src/ui_fsmenu/main.cc:412
+#: ../../src/ui_fsmenu/main.cc:392 ../../src/ui_fsmenu/main.cc:473
 #, c-format
 msgid "Map: %s"
 msgstr "Карта: %s"
 
-#: ../../src/ui_fsmenu/main.cc:415
+#: ../../src/ui_fsmenu/main.cc:394 ../../src/ui_fsmenu/main.cc:475
 #, c-format
 msgid "Win Condition: %s"
 msgstr "Условие победы: %s"
 
-#: ../../src/ui_fsmenu/main.cc:421
+#: ../../src/ui_fsmenu/main.cc:398 ../../src/ui_fsmenu/main.cc:479
 #, c-format
 msgid "Gametime: %s"
 msgstr "Игровое время: %s"
 
 #. * TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today,
 #. * 10:30'
-#: ../../src/ui_fsmenu/main.cc:427
+#: ../../src/ui_fsmenu/main.cc:403 ../../src/ui_fsmenu/main.cc:484
 #, c-format
 msgid "Saved: %s"
 msgstr "Сохранено: %s"
 
-#: ../../src/ui_fsmenu/main.cc:435
+#: ../../src/ui_fsmenu/main.cc:409
 msgid "Online Game"
 msgstr "Игра онлайн"
 
-#: ../../src/ui_fsmenu/main.cc:436
+#: ../../src/ui_fsmenu/main.cc:410
 msgid "Join the Widelands lobby"
 msgstr "Присоединиться к лобби Widelands"
 
-#: ../../src/ui_fsmenu/main.cc:439
+#: ../../src/ui_fsmenu/main.cc:413
 msgid "Log in as a registered user"
 msgstr "Войти как зарегистрированный игрок"
 
-#: ../../src/ui_fsmenu/main.cc:441 ../../src/wlapplication_options.cc:327
+#: ../../src/ui_fsmenu/main.cc:415 ../../src/wlapplication_options.cc:337
 msgid "LAN / Direct IP"
 msgstr "LAN / Direct IP"
 
-#: ../../src/ui_fsmenu/main.cc:442
+#: ../../src/ui_fsmenu/main.cc:416
 msgid "Play a private online game"
 msgstr "Играть в приватную игру по сети"
 
-#: ../../src/ui_fsmenu/main.cc:445
+#: ../../src/ui_fsmenu/main.cc:419
 msgid "Create a new empty map"
 msgstr "Создать пустую карту"
 
-#: ../../src/ui_fsmenu/main.cc:448
+#: ../../src/ui_fsmenu/main.cc:422
 msgid "Create a new random map"
 msgstr "Сгенерировать новую карту"
 
-#: ../../src/ui_fsmenu/main.cc:450
+#: ../../src/ui_fsmenu/main.cc:424
 msgid "Edit an existing map"
 msgstr "Изменить имеющуюся карту"
 
-#: ../../src/ui_fsmenu/main.cc:467 ../../src/wlapplication_options.cc:305
+#: ../../src/ui_fsmenu/main.cc:433 ../../src/wlapplication_options.cc:315
 msgid "Continue Editing"
 msgstr "Продолжить правку"
 
-#: ../../src/ui_fsmenu/main.cc:491
+#. * TRANSLATORS: An entry in the game's main menu
+#: ../../src/ui_fsmenu/main.cc:455 ../../src/wlapplication_options.cc:263
+#: ../../src/wui/game_main_menu_save_game.cc:46
+#: ../../src/wui/interactive_gamebase.cc:167
+msgid "Load Replay"
+msgstr "Загрузить повтор"
+
+#: ../../src/ui_fsmenu/main.cc:456
+msgid "Watch the replay of an old game"
+msgstr "Просмотр повтора старой игры"
+
+#: ../../src/ui_fsmenu/main.cc:464
+msgid "Watch last saved replay"
+msgstr ""
+
+#: ../../src/ui_fsmenu/main.cc:490
 msgid "Single Player…"
 msgstr "Один игрок..."
 
-#: ../../src/ui_fsmenu/main.cc:492
+#: ../../src/ui_fsmenu/main.cc:491
 msgid "Multiplayer…"
 msgstr "Мультиплеер..."
 
-#: ../../src/ui_fsmenu/main.cc:493
+#: ../../src/ui_fsmenu/main.cc:492
 msgid "Editor…"
 msgstr "Редактор..."
+
+#: ../../src/ui_fsmenu/main.cc:493
+msgid "Watch Replay…"
+msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:495
 msgid "Begin or load a single-player campaign or free game"
@@ -6442,77 +6467,73 @@ msgstr "Сыграйте с друзьями по сети"
 msgid "Launch the map editor"
 msgstr "Запустить редактор карт"
 
-#: ../../src/ui_fsmenu/main.cc:504 ../../src/wlapplication_options.cc:258
-msgid "Watch Replay"
-msgstr "Посмотреть повтор"
+#: ../../src/ui_fsmenu/main.cc:504
+msgid "Watch again a recorded earlier game"
+msgstr ""
 
-#: ../../src/ui_fsmenu/main.cc:506
-msgid "Watch the replay of an old game"
-msgstr "Просмотр повтора старой игры"
-
-#: ../../src/ui_fsmenu/main.cc:509 ../../src/wlapplication_options.cc:323
+#: ../../src/ui_fsmenu/main.cc:507 ../../src/wlapplication_options.cc:333
 msgid "Add-Ons"
 msgstr "Дополнения"
 
-#: ../../src/ui_fsmenu/main.cc:511
+#: ../../src/ui_fsmenu/main.cc:509
 msgid "Install and manage add-ons"
 msgstr "Установить и настроить дополнения"
 
-#: ../../src/ui_fsmenu/main.cc:513 ../../src/ui_fsmenu/options.cc:87
-#: ../../src/wlapplication_options.cc:340
+#: ../../src/ui_fsmenu/main.cc:511 ../../src/ui_fsmenu/options.cc:87
+#: ../../src/wlapplication_options.cc:350
 msgid "Options"
 msgstr "Настройки"
 
-#: ../../src/ui_fsmenu/main.cc:515
+#: ../../src/ui_fsmenu/main.cc:513
 msgid "Technical and game-related settings"
 msgstr "Технические и не только настройки игры"
 
-#: ../../src/ui_fsmenu/main.cc:519
+#: ../../src/ui_fsmenu/main.cc:517
 msgid "Readme, License, and Credits"
 msgstr "Readme, лицензия и благодарности"
 
-#: ../../src/ui_fsmenu/main.cc:521 ../../src/wlapplication_options.cc:314
+#: ../../src/ui_fsmenu/main.cc:519 ../../src/wlapplication_options.cc:324
 msgid "Exit Widelands"
 msgstr "Выйти из Widelands"
 
-#: ../../src/ui_fsmenu/main.cc:523
+#: ../../src/ui_fsmenu/main.cc:521
 msgid "Quit the game"
 msgstr "Выйти из игры"
 
 #. * TRANSLATORS: %1$s = version string and build type  ("Debug" or "Release")
-#: ../../src/ui_fsmenu/main.cc:528
+#: ../../src/ui_fsmenu/main.cc:526
 #, c-format
 msgid "Version %1$s"
 msgstr "Версия %1$s"
 
 #. * TRANSLATORS: Placeholders are the copyright years
-#: ../../src/ui_fsmenu/main.cc:531
+#: ../../src/ui_fsmenu/main.cc:529
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team • Licensed under the GNU "
 "General Public License V2.0"
 msgstr "(C) %1%-%2% команда разработчиков Widelands • Лицензировано по GNU General Public License V2.0"
 
-#: ../../src/ui_fsmenu/main.cc:873
+#: ../../src/ui_fsmenu/main.cc:882
 msgid "Desyncing Add-On Found"
 msgstr "Рассинхронизация дополнений"
 
-#: ../../src/ui_fsmenu/main.cc:874
+#: ../../src/ui_fsmenu/main.cc:883
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
 msgstr "Это объявление доступно, но рассинхронизовано с сервером. Использовать на свой страх и риск."
 
-#: ../../src/ui_fsmenu/main.cc:976 ../../src/ui_fsmenu/netsetup_lan.cc:352
+#: ../../src/ui_fsmenu/main.cc:993 ../../src/ui_fsmenu/netsetup_lan.cc:352
 msgid "No tribes found!"
 msgstr "Племён не найдено!"
 
-#: ../../src/ui_fsmenu/main.cc:977 ../../src/ui_fsmenu/netsetup_lan.cc:353
+#: ../../src/ui_fsmenu/main.cc:994 ../../src/ui_fsmenu/netsetup_lan.cc:353
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "В data/tribes/initialization/[tribename]/init.lua не найдено племен."
 
-#: ../../src/ui_fsmenu/main.cc:1021
+#: ../../src/ui_fsmenu/main.cc:1038
 msgid "Exit Confirmation"
 msgstr "Подтверждение выхода"
 
-#: ../../src/ui_fsmenu/main.cc:1022
+#: ../../src/ui_fsmenu/main.cc:1039
 msgid "Are you sure you wish to exit Widelands?"
 msgstr "Вы уверены, что хотите выйти из Widelands?"
 
@@ -7371,60 +7392,77 @@ msgstr "Пометить все"
 msgid "Unmark All"
 msgstr "Снять метки со всех"
 
-#: ../../src/wlapplication.cc:835
+#: ../../src/wlapplication.cc:832
+msgid "Widelands could not find the last edited map."
+msgstr ""
+
+#: ../../src/wlapplication.cc:836
+msgid "No Last Edited Map"
+msgstr ""
+
+#: ../../src/wlapplication.cc:867
+msgid "No last saved replay."
+msgstr ""
+
+#: ../../src/wlapplication.cc:869
+msgid "No last saved game."
+msgstr ""
+
+#: ../../src/wlapplication.cc:879
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr "Игра не нашла этот файл: \"%s\""
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:836 ../../src/wlapplication.cc:841
-#: ../../src/wui/savegameloader.cc:119
+#: ../../src/wlapplication.cc:880 ../../src/wlapplication.cc:885
+#: ../../src/wui/savegameloader.cc:131
 msgid "Error message:"
 msgstr "Сообщение об ошибке:"
 
-#: ../../src/wlapplication.cc:837
+#: ../../src/wlapplication.cc:881
 msgid "File system error"
 msgstr "Ошибка файловой системы"
 
-#: ../../src/wlapplication.cc:1314
+#: ../../src/wlapplication.cc:1360
 #, c-format
-msgid "Empty value of command line parameter: %s"
-msgstr "Не указан параметр командной строки %s"
+msgid "Command line parameter --%s can not use a value"
+msgstr ""
 
-#: ../../src/wlapplication.cc:1319
+#: ../../src/wlapplication.cc:1365
 #, c-format
-msgid "%s can not be combined with other actions"
-msgstr "Сочетать %s с другими действиями не получится"
+msgid "Empty value of command line parameter --%s"
+msgstr ""
 
-#: ../../src/wlapplication.cc:1474
+#: ../../src/wlapplication.cc:1371
+#, c-format
+msgid "Command line parameters --%1$s and --%2$s can not be combined"
+msgstr ""
+
+#: ../../src/wlapplication.cc:1559
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Неизвестный параметр командной строки: %s\nМожет, пропущен знак \"=\"?"
 
-#: ../../src/wlapplication.cc:1609
-msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
-msgstr "Нельзя использовать сочетания параметров --xres/--yres, --maximized и --fullscreen. Выберите что-то одно"
-
-#: ../../src/wlapplication.cc:1627
+#: ../../src/wlapplication.cc:1712
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Задан неизвестный параметр командной строки: %s"
 
-#: ../../src/wlapplication.cc:1658
+#: ../../src/wlapplication.cc:1743
 msgid "Incompatible"
 msgstr "Несовместимо"
 
-#: ../../src/wlapplication.cc:1695
+#: ../../src/wlapplication.cc:1780
 msgid "Game ended unexpectedly"
 msgstr "Неожиданный конец игры"
 
-#: ../../src/wlapplication.cc:1695
+#: ../../src/wlapplication.cc:1780
 msgid "Unexpected error during the game"
 msgstr "Неожиданная ошибка во время игры"
 
-#: ../../src/wlapplication.cc:1698
+#: ../../src/wlapplication.cc:1783
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -7438,7 +7476,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Во время игры произошла ошибка. Сообщение об ошибке:\n\n%1$s\n\nПожалуйста, сообщите об этой проблеме, чтобы помочь нам улучшить Widelands. Вы найдете соответствующие сообщения в стандартном выводе (stdout.txt в Windows). Вы используете версию %2$s.\n\nПожалуйста, добавьте эту информацию в свой отчет.\n\nХотели бы вы, чтобы Widelands попытался создать автосохранение? Часто – хотя и не всегда – можно загрузить его и продолжить играть."
 
-#: ../../src/wlapplication.cc:1707
+#: ../../src/wlapplication.cc:1792
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -7448,11 +7486,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Игра неожиданно завершилась по следующей причине:\n\n%s.\n\nХотели бы вы, чтобы Widelands попытался создать автосохранение? Часто – хотя и не всегда – можно загрузить его и продолжить играть."
 
-#: ../../src/wlapplication.cc:1741
+#: ../../src/wlapplication.cc:1826
 msgid "Emergency save failed"
 msgstr "Автосохранение завершилось с ошибкой"
 
-#: ../../src/wlapplication.cc:1742
+#: ../../src/wlapplication.cc:1827
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -7652,393 +7690,401 @@ msgstr "Поддержка отрасли"
 msgid "Terraforming"
 msgstr "Терраформирование"
 
-#: ../../src/wlapplication_options.cc:277
+#: ../../src/wlapplication_options.cc:258
+msgid "Watch Replay"
+msgstr "Посмотреть повтор"
+
+#: ../../src/wlapplication_options.cc:268
+msgid "Watch Latest Replay"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:287
 msgid "Singleplayer"
 msgstr "Один игрок"
 
-#: ../../src/wlapplication_options.cc:281
+#: ../../src/wlapplication_options.cc:291
 msgid "Multiplayer"
 msgstr "Многопользовательская игра"
 
-#: ../../src/wlapplication_options.cc:290
+#: ../../src/wlapplication_options.cc:300
 msgid "Editor – Load Map"
 msgstr "Редактор – Загрузка карты"
 
-#: ../../src/wlapplication_options.cc:295
+#: ../../src/wlapplication_options.cc:305
 msgid "Editor – New Map"
 msgstr "Редактор – Новая карта"
 
-#: ../../src/wlapplication_options.cc:300
+#: ../../src/wlapplication_options.cc:310
 msgid "Editor – New Random Map"
 msgstr "Редактор – Сгенерировать карту"
 
-#: ../../src/wlapplication_options.cc:318
+#: ../../src/wlapplication_options.cc:328
 msgid "About"
 msgstr "Об игре"
 
-#: ../../src/wlapplication_options.cc:335
+#: ../../src/wlapplication_options.cc:345
 msgid "Internet Login"
 msgstr "Ник для игры в Интернет"
 
-#: ../../src/wlapplication_options.cc:346
+#: ../../src/wlapplication_options.cc:356
 msgid "Toggle Building Spaces"
 msgstr "Показать/скрыть Места строительства"
 
-#: ../../src/wlapplication_options.cc:351
+#: ../../src/wlapplication_options.cc:361
 msgid "Toggle Minimap"
 msgstr "Показать/скрыть миникарту"
 
-#: ../../src/wlapplication_options.cc:356
+#: ../../src/wlapplication_options.cc:366
 msgid "Encyclopedia"
 msgstr "Энциклопедия"
 
-#: ../../src/wlapplication_options.cc:360
+#: ../../src/wlapplication_options.cc:370
 msgid "Cut Text"
 msgstr "Вырезать текст"
 
-#: ../../src/wlapplication_options.cc:364
+#: ../../src/wlapplication_options.cc:374
 msgid "Copy Text"
 msgstr "Скопировать текст"
 
-#: ../../src/wlapplication_options.cc:368
+#: ../../src/wlapplication_options.cc:378
 msgid "Paste Text"
 msgstr "Вставить текст"
 
-#: ../../src/wlapplication_options.cc:372
+#: ../../src/wlapplication_options.cc:382
 msgid "Select All"
 msgstr "Выбрать все"
 
-#: ../../src/wlapplication_options.cc:377
+#: ../../src/wlapplication_options.cc:387
 msgid "Delete Item"
 msgstr "Удалить пункт"
 
-#: ../../src/wlapplication_options.cc:382
+#: ../../src/wlapplication_options.cc:392
 msgid "Tooltip Accessibility Mode Key"
 msgstr "Переключение между режимами доступа"
 
-#: ../../src/wlapplication_options.cc:387
+#: ../../src/wlapplication_options.cc:397
 msgid "Toggle Fullscreen"
 msgstr "Переключение Полноэкранного режима"
 
-#: ../../src/wlapplication_options.cc:392
+#: ../../src/wlapplication_options.cc:402
 msgid "Take Screenshot"
 msgstr "Сделать снимок экрана"
 
-#: ../../src/wlapplication_options.cc:397
+#: ../../src/wlapplication_options.cc:407
 msgid "Open the Debug Console (developer tool)"
 msgstr "Открыть отладочную консоль (инструменты разработчика)"
 
-#: ../../src/wlapplication_options.cc:402
+#: ../../src/wlapplication_options.cc:412
 msgid "Toggle Cheat Mode (developer tool)"
 msgstr "Переключить в читер режим (инструменты разработчика)"
 
-#: ../../src/wlapplication_options.cc:412
+#: ../../src/wlapplication_options.cc:422
 msgid "Load"
 msgstr "Загрузить"
 
-#: ../../src/wlapplication_options.cc:417
+#: ../../src/wlapplication_options.cc:427
 msgid "Exit"
 msgstr "Выход"
 
-#: ../../src/wlapplication_options.cc:422
+#: ../../src/wlapplication_options.cc:432
 msgid "Zoom In"
 msgstr "Приблизить"
 
-#: ../../src/wlapplication_options.cc:427
+#: ../../src/wlapplication_options.cc:437
 msgid "Zoom Out"
 msgstr "Отдалить"
 
-#: ../../src/wlapplication_options.cc:432
+#: ../../src/wlapplication_options.cc:442
 msgid "Reset Zoom"
 msgstr "Сбросить масштаб"
 
-#: ../../src/wlapplication_options.cc:437
+#: ../../src/wlapplication_options.cc:447
 msgid "Jump to Next Location"
 msgstr "Перейти в следующее место"
 
-#: ../../src/wlapplication_options.cc:442
+#: ../../src/wlapplication_options.cc:452
 msgid "Jump to Previous Location"
 msgstr "Вернуться на прежнее место"
 
-#: ../../src/wlapplication_options.cc:456
+#: ../../src/wlapplication_options.cc:466
 msgid "Publish Map Online"
 msgstr "Опубликовать карту онлайн"
 
-#: ../../src/wlapplication_options.cc:473
+#: ../../src/wlapplication_options.cc:483
 msgid "Toggle Tools Menu"
 msgstr "Переключить меню инструментов"
 
-#: ../../src/wlapplication_options.cc:478
+#: ../../src/wlapplication_options.cc:488
 msgid "Change Height Tool"
 msgstr "Изменить инструмент высоты"
 
-#: ../../src/wlapplication_options.cc:483
+#: ../../src/wlapplication_options.cc:493
 msgid "Random Height Tool"
 msgstr "Случайный инструмент высоты"
 
-#: ../../src/wlapplication_options.cc:487
+#: ../../src/wlapplication_options.cc:497
 msgid "Terrain Tool"
 msgstr "Инструмент ландшафта"
 
-#: ../../src/wlapplication_options.cc:492
+#: ../../src/wlapplication_options.cc:502
 msgid "Immovables Tool"
 msgstr "Инструмент объектов"
 
-#: ../../src/wlapplication_options.cc:496
+#: ../../src/wlapplication_options.cc:506
 msgid "Animals Tool"
 msgstr "Инструмент животных"
 
-#: ../../src/wlapplication_options.cc:500
+#: ../../src/wlapplication_options.cc:510
 msgid "Resources Tool"
 msgstr "Инструмент ресурсов"
 
-#: ../../src/wlapplication_options.cc:505
+#: ../../src/wlapplication_options.cc:515
 msgid "Port Spaces Tool"
 msgstr "Инструмент мест под порт"
 
-#: ../../src/wlapplication_options.cc:509
+#: ../../src/wlapplication_options.cc:519
 msgid "Info Tool"
 msgstr "Инструменты информирования"
 
-#: ../../src/wlapplication_options.cc:513
+#: ../../src/wlapplication_options.cc:523
 msgid "Map Origin Tool"
 msgstr "Инструмент источника карты"
 
-#: ../../src/wlapplication_options.cc:517
+#: ../../src/wlapplication_options.cc:527
 msgid "Map Size Tool"
 msgstr "Инструмент размера карты"
 
-#: ../../src/wlapplication_options.cc:521
+#: ../../src/wlapplication_options.cc:531
 msgid "Players Menu"
 msgstr "Игровое меню"
 
-#: ../../src/wlapplication_options.cc:531
+#: ../../src/wlapplication_options.cc:541
 msgid "Toggle Grid"
 msgstr "Переключить видимость сетки"
 
-#: ../../src/wlapplication_options.cc:536
+#: ../../src/wlapplication_options.cc:546
 msgid "Toggle Immovables"
 msgstr "Переключение статичных объектов"
 
-#: ../../src/wlapplication_options.cc:541
+#: ../../src/wlapplication_options.cc:551
 msgid "Toggle Animals"
 msgstr "Переключить видимость животных"
 
-#: ../../src/wlapplication_options.cc:546
+#: ../../src/wlapplication_options.cc:556
 msgid "Toggle Resources"
 msgstr "Переключение ресурсов"
 
-#: ../../src/wlapplication_options.cc:552
+#: ../../src/wlapplication_options.cc:562
 msgid "Toggle Maximum Build Spaces"
 msgstr "Переключение показа всего пригодного к застройке места"
 
-#: ../../src/wlapplication_options.cc:559
+#: ../../src/wlapplication_options.cc:569
 #, c-format
 msgid "Set Toolsize to %d"
 msgstr "Задать размер панели инструментов равный %d"
 
-#: ../../src/wlapplication_options.cc:578
+#: ../../src/wlapplication_options.cc:588
 #, c-format
 msgid "Set Tool Gap to %d%%"
 msgstr "Задать зазор инструмента %d%%"
 
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/wlapplication_options.cc:596
+#: ../../src/wlapplication_options.cc:606
 #: ../../src/wui/game_options_sound_menu.cc:34
 #: ../../src/wui/interactive_gamebase.cc:147
 msgid "Sound Options"
 msgstr "Настройки звука"
 
-#: ../../src/wlapplication_options.cc:601
+#: ../../src/wlapplication_options.cc:611
 msgid "Restart Scenario or Replay"
 msgstr "Перезапустить Сценарий или воспроизвести повтор"
 
-#: ../../src/wlapplication_options.cc:606
+#: ../../src/wlapplication_options.cc:616
 msgid "Toggle Census"
 msgstr "Переключить подписи"
 
-#: ../../src/wlapplication_options.cc:611
+#: ../../src/wlapplication_options.cc:621
 msgid "Toggle Status Labels"
 msgstr "Переключение меток состояния"
 
-#: ../../src/wlapplication_options.cc:616
+#: ../../src/wlapplication_options.cc:626
 msgid "Toggle Soldier Levels"
 msgstr "Переключение уровня солдат"
 
-#: ../../src/wlapplication_options.cc:621
+#: ../../src/wlapplication_options.cc:631
 msgid "Toggle Buildings Visibility"
 msgstr "Переключение видимости зданий"
 
-#: ../../src/wlapplication_options.cc:626
+#: ../../src/wlapplication_options.cc:636
 msgid "Toggle Overlapping Workareas"
 msgstr "Переключение видимости наложения рабочих областей"
 
-#: ../../src/wlapplication_options.cc:631
+#: ../../src/wlapplication_options.cc:641
 #: ../../src/wui/general_statistics_menu.cc:47
 msgid "General Statistics"
 msgstr "Общая статистика"
 
-#: ../../src/wlapplication_options.cc:635
+#: ../../src/wlapplication_options.cc:645
 #: ../../src/wui/ware_statistics_menu.cc:105
 msgid "Ware Statistics"
 msgstr "Статистика товаров"
 
-#: ../../src/wlapplication_options.cc:640
+#: ../../src/wlapplication_options.cc:650
 #: ../../src/wui/building_statistics_menu.cc:52
 msgid "Building Statistics"
 msgstr "Статистика построек"
 
-#: ../../src/wlapplication_options.cc:644
+#: ../../src/wlapplication_options.cc:654
 msgid "Stock Inventory"
 msgstr "Перечень товаров"
 
-#: ../../src/wlapplication_options.cc:649
+#: ../../src/wlapplication_options.cc:659
 #: ../../src/wui/soldier_statistics_menu.cc:148
 msgid "Soldier Statistics"
 msgstr "Статистика по солдатам"
 
-#: ../../src/wlapplication_options.cc:654
+#: ../../src/wlapplication_options.cc:664
 msgid "Seafaring Statistics"
 msgstr "Статистика мореплавания"
 
-#: ../../src/wlapplication_options.cc:672
+#: ../../src/wlapplication_options.cc:682
 msgid "Decrease Game Speed by 1×"
 msgstr "Замедлить игру в 1× раз"
 
-#: ../../src/wlapplication_options.cc:677
+#: ../../src/wlapplication_options.cc:687
 msgid "Decrease Game Speed by 0.25×"
 msgstr "Замедлить игру на 0.25 раз"
 
-#: ../../src/wlapplication_options.cc:682
+#: ../../src/wlapplication_options.cc:692
 msgid "Decrease Game Speed by 10×"
 msgstr "Замедлить игру в 10× раз"
 
-#: ../../src/wlapplication_options.cc:687
+#: ../../src/wlapplication_options.cc:697
 msgid "Increase Game Speed by 1×"
 msgstr "Ускорить игру в 1× раз"
 
-#: ../../src/wlapplication_options.cc:692
+#: ../../src/wlapplication_options.cc:702
 msgid "Increase Game Speed by 0.25×"
 msgstr "Ускорить игру на 0.25 раза"
 
-#: ../../src/wlapplication_options.cc:697
+#: ../../src/wlapplication_options.cc:707
 msgid "Increase Game Speed by 10×"
 msgstr "Ускорить игру в 10× раз"
 
-#: ../../src/wlapplication_options.cc:701
+#: ../../src/wlapplication_options.cc:711
 msgid "Reset Game Speed"
 msgstr "Вернуться к нормальной скорости игры"
 
-#: ../../src/wlapplication_options.cc:705
+#: ../../src/wlapplication_options.cc:715
 msgid "Pause The Game"
 msgstr "Приостановить игру"
 
-#: ../../src/wlapplication_options.cc:710
+#: ../../src/wlapplication_options.cc:720
 msgid "Scroll to Starting Field"
 msgstr "Прокрутить к стартовому полю"
 
-#: ../../src/wlapplication_options.cc:714 ../../src/wui/game_chat_menu.cc:68
+#: ../../src/wlapplication_options.cc:724 ../../src/wui/game_chat_menu.cc:68
 #: ../../src/wui/interactive_gamebase.cc:410
 msgid "Chat"
 msgstr "Общение"
 
-#: ../../src/wlapplication_options.cc:719 ../../src/wui/pinned_note.cc:41
+#: ../../src/wlapplication_options.cc:729 ../../src/wui/pinned_note.cc:41
 msgid "Pinned Note"
 msgstr "Прикрепленная записка"
 
-#: ../../src/wlapplication_options.cc:724
+#: ../../src/wlapplication_options.cc:734
 msgid "Go to Location"
 msgstr "Перейти к местоположению"
 
-#: ../../src/wlapplication_options.cc:729
+#: ../../src/wlapplication_options.cc:739
 msgid "Show All Messages"
 msgstr "Показать все сообщения"
 
-#: ../../src/wlapplication_options.cc:734
+#: ../../src/wlapplication_options.cc:744
 msgid "Show Geologists’ Messages Only"
 msgstr "Показать сообщения только от геологов"
 
-#: ../../src/wlapplication_options.cc:739
+#: ../../src/wlapplication_options.cc:749
 msgid "Show Economy Messages Only"
 msgstr "Показать только сообщения о состоянии экономики"
 
-#: ../../src/wlapplication_options.cc:744
+#: ../../src/wlapplication_options.cc:754
 msgid "Show Seafaring Messages Only"
 msgstr "Показать только сообщения о мореплавании"
 
-#: ../../src/wlapplication_options.cc:749
+#: ../../src/wlapplication_options.cc:759
 msgid "Show Military Messages Only"
 msgstr "Показать только военные сообщения"
 
-#: ../../src/wlapplication_options.cc:754
+#: ../../src/wlapplication_options.cc:764
 msgid "Show Scenario Messages Only"
 msgstr "Показать только сообщения сценария"
 
-#: ../../src/wlapplication_options.cc:759
+#: ../../src/wlapplication_options.cc:769
 msgid "Go to Ship"
 msgstr "Идти в корабль"
 
-#: ../../src/wlapplication_options.cc:764
+#: ../../src/wlapplication_options.cc:774
 msgid "Watch Ship"
 msgstr "Наблюдать за кораблём"
 
-#: ../../src/wlapplication_options.cc:769
+#: ../../src/wlapplication_options.cc:779
 msgid "Open Ship Window"
 msgstr "Открыть окно корабля"
 
-#: ../../src/wlapplication_options.cc:774
+#: ../../src/wlapplication_options.cc:784
 msgid "Open Ship Window And Go to Ship"
 msgstr "Открыть окно корабля и перейти к кораблю"
 
-#: ../../src/wlapplication_options.cc:779
+#: ../../src/wlapplication_options.cc:789
 msgid "Show All Ships"
 msgstr "Показать все корабли"
 
-#: ../../src/wlapplication_options.cc:784
+#: ../../src/wlapplication_options.cc:794
 msgid "Show Idle Ships"
 msgstr "Показать бездействующие корабли"
 
-#: ../../src/wlapplication_options.cc:789
+#: ../../src/wlapplication_options.cc:799
 msgid "Show Transport Ships"
 msgstr "Показать загруженные суда"
 
-#: ../../src/wlapplication_options.cc:794
+#: ../../src/wlapplication_options.cc:804
 msgid "Show Waiting Expeditions"
 msgstr "Показать простаивающие экспедиции"
 
-#: ../../src/wlapplication_options.cc:799
+#: ../../src/wlapplication_options.cc:809
 msgid "Show Scouting Expeditions"
 msgstr "Показать действующие экспедиции"
 
-#: ../../src/wlapplication_options.cc:804
+#: ../../src/wlapplication_options.cc:814
 msgid "Show Expeditions with Port Spaces"
 msgstr "Показать экспедиции, с местами для портов"
 
-#: ../../src/wlapplication_options.cc:809
+#: ../../src/wlapplication_options.cc:819
 msgid "Show Warships"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:814
+#: ../../src/wlapplication_options.cc:824
 msgid "Show Ships Being Refitted"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:819
+#: ../../src/wlapplication_options.cc:829
 msgid "Toggle Quick Navigation"
 msgstr "Переключение быстрой навигации"
 
-#: ../../src/wlapplication_options.cc:826
+#: ../../src/wlapplication_options.cc:836
 #, c-format
 msgid "Set Landmark #%d"
 msgstr "Установить метку №%d"
 
-#: ../../src/wlapplication_options.cc:830
+#: ../../src/wlapplication_options.cc:840
 #, c-format
 msgid "Go To Landmark #%d"
 msgstr "Перейти к метке №%d"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/wlapplication_options.cc:880
+#: ../../src/wlapplication_options.cc:890
 #: ../../src/wui/game_main_menu_save_game.cc:50
 #: ../../src/wui/interactive_gamebase.cc:157
 msgid "Save Game"
@@ -8047,125 +8093,125 @@ msgstr "Сохранить игру"
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/wlapplication_options.cc:883
+#: ../../src/wlapplication_options.cc:893
 #: ../../src/wui/game_client_disconnected.cc:112
 #: ../../src/wui/game_summary.cc:108 ../../src/wui/interactive_gamebase.cc:194
 msgid "Exit Game"
 msgstr "Выход из игры"
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../src/wlapplication_options.cc:901
+#: ../../src/wlapplication_options.cc:911
 msgctxt "hotkey"
 msgid "Arrow keys"
 msgstr "Клавиши со стрелками"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/wlapplication_options.cc:903
+#: ../../src/wlapplication_options.cc:913
 msgid "Move the map"
 msgstr "Двигать карту"
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../src/wlapplication_options.cc:905
+#: ../../src/wlapplication_options.cc:915
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
 msgstr "Ctrl + стрелки"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/wlapplication_options.cc:907
+#: ../../src/wlapplication_options.cc:917
 msgid "Move the map fast"
 msgstr "Двигать карту быстро"
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../src/wlapplication_options.cc:909
+#: ../../src/wlapplication_options.cc:919
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
 msgstr "Shift + стрелки"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/wlapplication_options.cc:911
+#: ../../src/wlapplication_options.cc:921
 msgid "Move the map slowly"
 msgstr "Двигать карту медленно"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/wlapplication_options.cc:923
+#: ../../src/wlapplication_options.cc:933
 msgid "Remember current location"
 msgstr "Запомнить текущее расположение"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/wlapplication_options.cc:926
+#: ../../src/wlapplication_options.cc:936
 msgid "Go to previously remembered location"
 msgstr "Перейти к предыдущему сохраненному расположению"
 
 #. * TRANSLATORS: Separator for a list of hotkeys
-#: ../../src/wlapplication_options.cc:975
+#: ../../src/wlapplication_options.cc:985
 #, c-format
 msgctxt "hotkey"
 msgid "%1$s / %2$s"
 msgstr "%1$s / %2$s"
 
-#: ../../src/wlapplication_options.cc:993
-#: ../../src/wlapplication_options.cc:1034
+#: ../../src/wlapplication_options.cc:1003
+#: ../../src/wlapplication_options.cc:1044
 msgid "Keyboard Shortcuts"
 msgstr "Горячие клавиши"
 
 #. * TRANSLATORS: Section heading in "Controls" help
-#: ../../src/wlapplication_options.cc:1004
+#: ../../src/wlapplication_options.cc:1014
 msgid "Message Window"
 msgstr "Окно сообщений"
 
 #. * TRANSLATORS: Section heading in "Controls" help
-#: ../../src/wlapplication_options.cc:1009
+#: ../../src/wlapplication_options.cc:1019
 msgid "Ship Statistics"
 msgstr "Статистика судоходства"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/wlapplication_options.cc:1048
+#: ../../src/wlapplication_options.cc:1058
 msgid "Change tool size"
 msgstr "Изменить размер инструмента"
 
-#: ../../src/wlapplication_options.cc:1049
+#: ../../src/wlapplication_options.cc:1059
 msgid "Change tool gap"
 msgstr "Изменить зазор инструмента"
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../src/wlapplication_options.cc:1054
+#: ../../src/wlapplication_options.cc:1064
 msgctxt "hotkey"
 msgid "Click"
 msgstr "Левая Кнопка Мыши"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/wlapplication_options.cc:1056
+#: ../../src/wlapplication_options.cc:1066
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
 msgstr "Разместите новые элементы на карте или увеличьте количество элементов выбрав \"Увеличить/Уменьшить значение\""
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../src/wlapplication_options.cc:1060
+#: ../../src/wlapplication_options.cc:1070
 msgctxt "hotkey"
 msgid "Shift + Click"
 msgstr "Shift + ЛКМ"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/wlapplication_options.cc:1062
+#: ../../src/wlapplication_options.cc:1072
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
 msgstr "Удалите элементы с карты, или уменьшите количество элементов, выбрав «Увеличить/уменьшить значение»"
 
 #. * TRANSLATORS: This is an access key combination.
-#: ../../src/wlapplication_options.cc:1065
+#: ../../src/wlapplication_options.cc:1075
 msgctxt "hotkey"
 msgid "Ctrl + Click"
 msgstr "Ctrl + ЛКМ"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
-#: ../../src/wlapplication_options.cc:1067
+#: ../../src/wlapplication_options.cc:1077
 msgid "Set map elements to the value selected by ‘Set Value’"
 msgstr "Установить для элементов карты значение, через \"Установить значение\""
 
 #. * TRANSLATORS: prefix for message window shortcuts in keyboard options
-#: ../../src/wlapplication_options.cc:1171
+#: ../../src/wlapplication_options.cc:1181
 #, c-format
 msgctxt "hotkey"
 msgid "Messages: %s"
@@ -8173,235 +8219,235 @@ msgstr "Сообщения: %s"
 
 #. * TRANSLATORS: prefix for seafaring statistics window shortcuts in keyboard
 #. options
-#: ../../src/wlapplication_options.cc:1176
+#: ../../src/wlapplication_options.cc:1186
 #, c-format
 msgctxt "hotkey"
 msgid "Seafaring: %s"
 msgstr "Мореплавание: %s"
 
-#: ../../src/wlapplication_options.cc:1369
+#: ../../src/wlapplication_options.cc:1379
 msgctxt "hotkey"
 msgid "Shift"
 msgstr "Shift"
 
-#: ../../src/wlapplication_options.cc:1372
+#: ../../src/wlapplication_options.cc:1382
 msgctxt "hotkey"
 msgid "Alt"
 msgstr "Alt"
 
-#: ../../src/wlapplication_options.cc:1376
+#: ../../src/wlapplication_options.cc:1386
 msgctxt "hotkey"
 msgid "Cmd"
 msgstr "Cmd"
 
-#: ../../src/wlapplication_options.cc:1378
+#: ../../src/wlapplication_options.cc:1388
 msgctxt "hotkey"
 msgid "GUI"
 msgstr "GUI"
 
-#: ../../src/wlapplication_options.cc:1382
+#: ../../src/wlapplication_options.cc:1392
 msgctxt "hotkey"
 msgid "Ctrl"
 msgstr "Ctrl"
 
-#: ../../src/wlapplication_options.cc:1391
+#: ../../src/wlapplication_options.cc:1401
 #, c-format
 msgid "%1$s+%2$s"
 msgstr "%1$s+%2$s"
 
-#: ../../src/wlapplication_options.cc:1404
+#: ../../src/wlapplication_options.cc:1414
 msgctxt "hotkey"
 msgid "Space"
 msgstr "Пробел"
 
-#: ../../src/wlapplication_options.cc:1406
+#: ../../src/wlapplication_options.cc:1416
 msgctxt "hotkey"
 msgid "Enter"
 msgstr "Enter"
 
-#: ../../src/wlapplication_options.cc:1408
+#: ../../src/wlapplication_options.cc:1418
 msgctxt "hotkey"
 msgid "Escape"
 msgstr "Escape"
 
-#: ../../src/wlapplication_options.cc:1410
+#: ../../src/wlapplication_options.cc:1420
 msgctxt "hotkey"
 msgid "Tab"
 msgstr "Tab"
 
-#: ../../src/wlapplication_options.cc:1412
+#: ../../src/wlapplication_options.cc:1422
 msgctxt "hotkey"
 msgid "Menu"
 msgstr "Меню"
 
-#: ../../src/wlapplication_options.cc:1414
+#: ../../src/wlapplication_options.cc:1424
 msgctxt "hotkey"
 msgid "Pause"
 msgstr "Пауза"
 
-#: ../../src/wlapplication_options.cc:1416
+#: ../../src/wlapplication_options.cc:1426
 msgctxt "hotkey"
 msgid "Page Up"
 msgstr "Page Up"
 
-#: ../../src/wlapplication_options.cc:1418
+#: ../../src/wlapplication_options.cc:1428
 msgctxt "hotkey"
 msgid "Page Down"
 msgstr "Page Down"
 
-#: ../../src/wlapplication_options.cc:1420
+#: ../../src/wlapplication_options.cc:1430
 msgctxt "hotkey"
 msgid "Home"
 msgstr "Home"
 
-#: ../../src/wlapplication_options.cc:1422
+#: ../../src/wlapplication_options.cc:1432
 msgctxt "hotkey"
 msgid "End"
 msgstr "End"
 
-#: ../../src/wlapplication_options.cc:1424
+#: ../../src/wlapplication_options.cc:1434
 msgctxt "hotkey"
 msgid "Left Arrow Key"
 msgstr "Стрелка влево"
 
-#: ../../src/wlapplication_options.cc:1426
+#: ../../src/wlapplication_options.cc:1436
 msgctxt "hotkey"
 msgid "Right Arrow Key"
 msgstr "Стрелка вправо"
 
-#: ../../src/wlapplication_options.cc:1428
+#: ../../src/wlapplication_options.cc:1438
 msgctxt "hotkey"
 msgid "Up Arrow Key"
 msgstr "Стрелка вверх"
 
-#: ../../src/wlapplication_options.cc:1430
+#: ../../src/wlapplication_options.cc:1440
 msgctxt "hotkey"
 msgid "Down Arrow Key"
 msgstr "Стрелка вниз"
 
-#: ../../src/wlapplication_options.cc:1432
+#: ../../src/wlapplication_options.cc:1442
 msgctxt "hotkey"
 msgid "Insert"
 msgstr "Insert"
 
-#: ../../src/wlapplication_options.cc:1434
+#: ../../src/wlapplication_options.cc:1444
 msgctxt "hotkey"
 msgid "Delete"
 msgstr "Delete"
 
-#: ../../src/wlapplication_options.cc:1436
+#: ../../src/wlapplication_options.cc:1446
 msgctxt "hotkey"
 msgid "Backspace"
 msgstr "Backspace"
 
-#: ../../src/wlapplication_options.cc:1438
+#: ../../src/wlapplication_options.cc:1448
 msgctxt "hotkey"
 msgid "Caps Lock"
 msgstr "Caps Lock"
 
-#: ../../src/wlapplication_options.cc:1440
+#: ../../src/wlapplication_options.cc:1450
 msgctxt "hotkey"
 msgid "Numpad Lock"
 msgstr "Numpad Lock"
 
-#: ../../src/wlapplication_options.cc:1442
+#: ../../src/wlapplication_options.cc:1452
 msgctxt "hotkey"
 msgid "Scroll Lock"
 msgstr "Scroll Lock"
 
-#: ../../src/wlapplication_options.cc:1444
+#: ../../src/wlapplication_options.cc:1454
 msgctxt "hotkey"
 msgid "Keypad 1"
 msgstr "Keypad 1"
 
-#: ../../src/wlapplication_options.cc:1446
+#: ../../src/wlapplication_options.cc:1456
 msgctxt "hotkey"
 msgid "Keypad 2"
 msgstr "Keypad 2"
 
-#: ../../src/wlapplication_options.cc:1448
+#: ../../src/wlapplication_options.cc:1458
 msgctxt "hotkey"
 msgid "Keypad 3"
 msgstr "Keypad 3"
 
-#: ../../src/wlapplication_options.cc:1450
+#: ../../src/wlapplication_options.cc:1460
 msgctxt "hotkey"
 msgid "Keypad 4"
 msgstr "Keypad 4"
 
-#: ../../src/wlapplication_options.cc:1452
+#: ../../src/wlapplication_options.cc:1462
 msgctxt "hotkey"
 msgid "Keypad 5"
 msgstr "Keypad 5"
 
-#: ../../src/wlapplication_options.cc:1454
+#: ../../src/wlapplication_options.cc:1464
 msgctxt "hotkey"
 msgid "Keypad 6"
 msgstr "Keypad 6"
 
-#: ../../src/wlapplication_options.cc:1456
+#: ../../src/wlapplication_options.cc:1466
 msgctxt "hotkey"
 msgid "Keypad 7"
 msgstr "Keypad 7"
 
-#: ../../src/wlapplication_options.cc:1458
+#: ../../src/wlapplication_options.cc:1468
 msgctxt "hotkey"
 msgid "Keypad 8"
 msgstr "Keypad 8"
 
-#: ../../src/wlapplication_options.cc:1460
+#: ../../src/wlapplication_options.cc:1470
 msgctxt "hotkey"
 msgid "Keypad 9"
 msgstr "Keypad 9"
 
-#: ../../src/wlapplication_options.cc:1462
+#: ../../src/wlapplication_options.cc:1472
 msgctxt "hotkey"
 msgid "Keypad 0"
 msgstr "Keypad 0"
 
-#: ../../src/wlapplication_options.cc:1464
+#: ../../src/wlapplication_options.cc:1474
 msgctxt "hotkey"
 msgid "Keypad ."
 msgstr "Keypad ."
 
-#: ../../src/wlapplication_options.cc:1466
+#: ../../src/wlapplication_options.cc:1476
 msgctxt "hotkey"
 msgid "Keypad +"
 msgstr "Keypad +"
 
-#: ../../src/wlapplication_options.cc:1468
+#: ../../src/wlapplication_options.cc:1478
 msgctxt "hotkey"
 msgid "Keypad -"
 msgstr "Keypad -"
 
-#: ../../src/wlapplication_options.cc:1470
+#: ../../src/wlapplication_options.cc:1480
 msgctxt "hotkey"
 msgid "Keypad *"
 msgstr "Keypad *"
 
-#: ../../src/wlapplication_options.cc:1472
+#: ../../src/wlapplication_options.cc:1482
 msgctxt "hotkey"
 msgid "Keypad /"
 msgstr "Keypad /"
 
-#: ../../src/wlapplication_options.cc:1474
+#: ../../src/wlapplication_options.cc:1484
 msgctxt "hotkey"
 msgid "Keypad Enter"
 msgstr "Keypad Enter"
 
-#: ../../src/wlapplication_options.cc:1483
+#: ../../src/wlapplication_options.cc:1493
 msgid "(disabled)"
 msgstr "(отключено)"
 
 #. * TRANSLATORS: The first placeholder is the stock amount of a ware/worker,
 #. and the second is an
 #. * icon indicating a trend. Very little space is available.
-#: ../../src/wlapplication_options.cc:1486 ../../src/wui/waresdisplay.cc:548
+#: ../../src/wlapplication_options.cc:1496 ../../src/wui/waresdisplay.cc:548
 #, c-format
 msgid "%1$s%2$s"
 msgstr "%1$s%2$s"
 
-#: ../../src/wlapplication_options.cc:1511
+#: ../../src/wlapplication_options.cc:1521
 #, c-format
 msgid "Fastplace #%i"
 msgstr "Площадка №%i"
@@ -9308,12 +9354,6 @@ msgstr "Подтверждение выхода из игры"
 msgid "Are you sure you wish to exit this game?"
 msgstr "Вы действительно хотите покинуть эту игру?"
 
-#. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/wui/game_main_menu_save_game.cc:46
-#: ../../src/wui/interactive_gamebase.cc:167
-msgid "Load Replay"
-msgstr "Загрузить повтор"
-
 #: ../../src/wui/game_main_menu_save_game.cc:288
 #: ../../src/wui/game_main_menu_save_game.cc:328
 msgid "Error Saving Game!"
@@ -10144,27 +10184,27 @@ msgid "Game data error"
 msgstr "Ошибка в данных игры"
 
 #. * TRANSLATORS: Column title for number of players in map list
-#: ../../src/wui/maptable.cc:29
+#: ../../src/wui/maptable.cc:34
 msgid "Pl."
 msgstr "Игр."
 
-#: ../../src/wui/maptable.cc:30 ../../src/wui/maptable.cc:59
+#: ../../src/wui/maptable.cc:35 ../../src/wui/maptable.cc:64
 msgid "Filename"
 msgstr "Имя файла"
 
-#: ../../src/wui/maptable.cc:30
+#: ../../src/wui/maptable.cc:35
 msgid "The name of the map or scenario"
 msgstr "Название карты или сценария"
 
-#: ../../src/wui/maptable.cc:32
+#: ../../src/wui/maptable.cc:37
 msgid "Size"
 msgstr "Размер"
 
-#: ../../src/wui/maptable.cc:32
+#: ../../src/wui/maptable.cc:37
 msgid "The size of the map (Width x Height)"
 msgstr "Размер карты (ширина x высота)"
 
-#: ../../src/wui/maptable.cc:63
+#: ../../src/wui/maptable.cc:68
 msgid "Map Name"
 msgstr "Карта"
 
@@ -10418,7 +10458,7 @@ msgstr[3] "%d повторы не могут быть удалены."
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
-#: ../../src/wui/savegameloader.cc:116
+#: ../../src/wui/savegameloader.cc:128
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
@@ -10427,35 +10467,35 @@ msgstr "Этот файл имеет неправильный формат и н
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute
-#: ../../src/wui/savegameloader.cc:148
+#: ../../src/wui/savegameloader.cc:160
 msgid "Today, %1%:%2%"
 msgstr "Сегодня, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute. This is part of a list.
-#: ../../src/wui/savegameloader.cc:153
+#: ../../src/wui/savegameloader.cc:165
 msgid "saved today at %1%:%2%"
 msgstr "сохранена сегодня в %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute
-#: ../../src/wui/savegameloader.cc:166
+#: ../../src/wui/savegameloader.cc:178
 msgid "Yesterday, %1%:%2%"
 msgstr "Вчера, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute. This is part of a list.
-#: ../../src/wui/savegameloader.cc:171
+#: ../../src/wui/savegameloader.cc:183
 msgid "saved yesterday at %1%:%2%"
 msgstr "сохранена вчера в %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. month day, year
-#: ../../src/wui/savegameloader.cc:176
+#: ../../src/wui/savegameloader.cc:188
 msgid "%1% %2%, %3%"
 msgstr "%2% %1%, %3%"
 
@@ -10463,7 +10503,7 @@ msgstr "%2% %1%, %3%"
 #. are:
 #. month (short name) day (number),
 #. year (number). This is part of a list.
-#: ../../src/wui/savegameloader.cc:182
+#: ../../src/wui/savegameloader.cc:194
 #, c-format
 msgid "saved on %1$s %2$u, %3$u"
 msgstr "сохранение от %2$u %1$s %3$u "

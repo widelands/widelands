@@ -27,7 +27,7 @@ jobs:
       vcpkg_ref: ${{ steps.prepare.outputs.vcpkg_ref }}
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 1
     - name: Get vcpkg version
@@ -48,7 +48,7 @@ jobs:
       shell: bash
     - name: Check whether cache exists
       id: lookup
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         # Explicit path here because env is overridden by msvc-dev-cmd
         path: C:\vcpkg\installed
@@ -83,7 +83,7 @@ jobs:
     runs-on: windows-2022
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 1
         persist-credentials: false

@@ -39,4 +39,5 @@ wl_library(ui_addons
     logic_addons
     network
     graphic
+    wui_common_mapdetails
 )
