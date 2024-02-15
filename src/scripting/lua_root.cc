@@ -176,6 +176,8 @@ int LuaGame::get_allow_saving(lua_State* L) {
    .. attribute:: interactive_player
 
       (RO) The player number of the interactive player, or 0 for spectator
+
+      value of :attr:`wl.game.Player.number` of the interactive player
 */
 int LuaGame::get_interactive_player(lua_State* L) {
 	upcast(const InteractivePlayer, p, get_game(L).get_ibase());

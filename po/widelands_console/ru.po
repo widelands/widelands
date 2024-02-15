@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-10 02:23+0000\n"
+"POT-Creation-Date: 2024-02-15 02:28+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
 "Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2015,2022-2024\n"
 "Language-Team: Russian (http://app.transifex.com/widelands/widelands/language/ru/)\n"
@@ -162,9 +162,9 @@ msgstr "Удалять повторы автоматически через `n` 
 #: ../../src/wlapplication_messages.cc:120
 #: ../../src/wlapplication_messages.cc:137
 #: ../../src/wlapplication_messages.cc:140
-#: ../../src/wlapplication_messages.cc:161
-#: ../../src/wlapplication_messages.cc:192
-#: ../../src/wlapplication_messages.cc:204
+#: ../../src/wlapplication_messages.cc:162
+#: ../../src/wlapplication_messages.cc:193
+#: ../../src/wlapplication_messages.cc:205
 #: ../../src/wlapplication_messages.cc:236
 #: ../../src/wlapplication_messages.cc:245
 msgid "n"
@@ -209,11 +209,11 @@ msgstr "Выделить под откатываемое автосохране�
 #. widelands textdomain.
 #. * TRANSLATORS: * marks the default value
 #: ../../src/wlapplication_messages.cc:146
-#: ../../src/wlapplication_messages.cc:156
-#: ../../src/wlapplication_messages.cc:158
-#: ../../src/wlapplication_messages.cc:164
-#: ../../src/wlapplication_messages.cc:173
-#: ../../src/wlapplication_messages.cc:186
+#: ../../src/wlapplication_messages.cc:157
+#: ../../src/wlapplication_messages.cc:159
+#: ../../src/wlapplication_messages.cc:165
+#: ../../src/wlapplication_messages.cc:174
+#: ../../src/wlapplication_messages.cc:187
 #: ../../src/wlapplication_messages.cc:227
 #: ../../src/wlapplication_messages.cc:234
 msgid "[true*|false]"
@@ -229,142 +229,144 @@ msgstr "Не создавать автосохранение, если поль�
 msgid "Do not save files as binary zip archives."
 msgstr "Не сжимать сохранения в архивы."
 
+#: ../../src/wlapplication_messages.cc:150
+msgid "Save files as binary zip archives."
+msgstr ""
+
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands textdomain.
 #. * TRANSLATORS: * marks the default value
-#: ../../src/wlapplication_messages.cc:154
-#: ../../src/wlapplication_messages.cc:178
-#: ../../src/wlapplication_messages.cc:180
-#: ../../src/wlapplication_messages.cc:182
-#: ../../src/wlapplication_messages.cc:184
+#: ../../src/wlapplication_messages.cc:155
+#: ../../src/wlapplication_messages.cc:179
+#: ../../src/wlapplication_messages.cc:181
+#: ../../src/wlapplication_messages.cc:183
 #: ../../src/wlapplication_messages.cc:185
-#: ../../src/wlapplication_messages.cc:199
-#: ../../src/wlapplication_messages.cc:213
-#: ../../src/wlapplication_messages.cc:215
+#: ../../src/wlapplication_messages.cc:186
+#: ../../src/wlapplication_messages.cc:200
 #: ../../src/wlapplication_messages.cc:229
 #: ../../src/wlapplication_messages.cc:241
 msgid "[true|false*]"
 msgstr "[true|false*]"
 
-#: ../../src/wlapplication_messages.cc:155
+#: ../../src/wlapplication_messages.cc:156
 msgid "Whether to save the history of sent chat messages to a file."
 msgstr "Следует ли сохранять историю отправленных сообщений чата в файл."
 
-#: ../../src/wlapplication_messages.cc:156
+#: ../../src/wlapplication_messages.cc:157
 msgid "Show filenames in the replay screen."
 msgstr "Показывать названия файлов в окне повторов."
 
-#: ../../src/wlapplication_messages.cc:159
+#: ../../src/wlapplication_messages.cc:160
 msgid ""
 "Whether a warning should be shown in the editor if there are too many "
 "players."
 msgstr "Должно ли отображаться предупреждение в редакторе, если игроков слишком много."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
-#: ../../src/wlapplication_messages.cc:163
+#: ../../src/wlapplication_messages.cc:164
 msgid "Pause the game after `n` minutes of user inactivity."
 msgstr "Ставить игру на паузу после `n` минут бездействия пользователя."
 
-#: ../../src/wlapplication_messages.cc:165
+#: ../../src/wlapplication_messages.cc:166
 msgid "Start building a road after placing a flag."
 msgstr "Начинать строительство дороги сразу после установки флага."
 
-#: ../../src/wlapplication_messages.cc:169
+#: ../../src/wlapplication_messages.cc:170
 msgid "Bitmask of display flags to set for new games."
 msgstr "Битовая маска отображаемых флагов для установки новых игр."
 
 #. * TRANSLATORS: The … character is not used on purpose to increase
 #. readability on monospaced
 #. terminals
-#: ../../src/wlapplication_messages.cc:169
-#: ../../src/wlapplication_messages.cc:188
-#: ../../src/wlapplication_messages.cc:195
+#: ../../src/wlapplication_messages.cc:170
+#: ../../src/wlapplication_messages.cc:189
 #: ../../src/wlapplication_messages.cc:196
 #: ../../src/wlapplication_messages.cc:197
 #: ../../src/wlapplication_messages.cc:198
-#: ../../src/wlapplication_messages.cc:201
+#: ../../src/wlapplication_messages.cc:199
+#: ../../src/wlapplication_messages.cc:202
 msgid "[...]"
 msgstr "[...]"
 
-#: ../../src/wlapplication_messages.cc:179
+#: ../../src/wlapplication_messages.cc:180
 msgid "Scroll when the mouse cursor is near the screen edge."
 msgstr "Сдвигать обзор, когда курсор близок к краю экрана."
 
-#: ../../src/wlapplication_messages.cc:180
+#: ../../src/wlapplication_messages.cc:181
 msgid "Invert click-and-drag map movement direction."
 msgstr "Обратить движение карты при click-and-drag (щелчке и перетаскивании)"
 
-#: ../../src/wlapplication_messages.cc:183
+#: ../../src/wlapplication_messages.cc:184
 msgid "Allow diagonal scrolling with the numeric keypad."
 msgstr "Разрешить сдвиг обзора по диагонали с применением цифровых клавиш."
 
-#: ../../src/wlapplication_messages.cc:184
+#: ../../src/wlapplication_messages.cc:185
 msgid "Display system time in the info panel."
 msgstr "Показывать системное время на информационной панели."
 
-#: ../../src/wlapplication_messages.cc:185
+#: ../../src/wlapplication_messages.cc:186
 msgid "Use single watchwindow mode."
 msgstr "Используйте режим одиночного окна наблюдения."
 
-#: ../../src/wlapplication_messages.cc:187
+#: ../../src/wlapplication_messages.cc:188
 msgid "Show in-game chat with transparent background."
 msgstr "Показывать внутри-игровой чат на прозрачном фоне."
 
-#: ../../src/wlapplication_messages.cc:188
+#: ../../src/wlapplication_messages.cc:189
 msgid "Bitmask to set the toolbar location and mode."
 msgstr "Битовая маска для установки местоположения и режима панели инструментов."
 
-#: ../../src/wlapplication_messages.cc:190
+#: ../../src/wlapplication_messages.cc:191
 msgid "Networking:"
 msgstr "Сеть:"
 
-#: ../../src/wlapplication_messages.cc:190
+#: ../../src/wlapplication_messages.cc:191
 msgid "URI"
 msgstr "URI"
 
-#: ../../src/wlapplication_messages.cc:191
+#: ../../src/wlapplication_messages.cc:192
 msgid "Connect to a different metaserver for internet gaming."
 msgstr "Подключиться к другому метасерверу для сетевой игры."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
-#: ../../src/wlapplication_messages.cc:194
+#: ../../src/wlapplication_messages.cc:195
 msgid "Port number `n` of the metaserver for internet gaming."
 msgstr "Занять порт  `n` метасерером для игры в Интеренете."
 
-#: ../../src/wlapplication_messages.cc:195
+#: ../../src/wlapplication_messages.cc:196
 msgid "The name of the last hosted game."
 msgstr "Название последней сетевой игры."
 
-#: ../../src/wlapplication_messages.cc:196
+#: ../../src/wlapplication_messages.cc:197
 msgid "The nickname used for LAN and online games."
 msgstr "Ник для сетевой игры, будь то LAN или по Интернету."
 
-#: ../../src/wlapplication_messages.cc:197
+#: ../../src/wlapplication_messages.cc:198
 msgid "Name of map author."
 msgstr "Имя автора карты."
 
-#: ../../src/wlapplication_messages.cc:198
+#: ../../src/wlapplication_messages.cc:199
 msgid "The last host connected to."
 msgstr "Последний подключенный сервер."
 
-#: ../../src/wlapplication_messages.cc:200
+#: ../../src/wlapplication_messages.cc:201
 msgid "Whether the used metaserver login is for a registered user."
 msgstr "Используется ли вход на метасервер для зарегистрированного пользователя."
 
-#: ../../src/wlapplication_messages.cc:201
+#: ../../src/wlapplication_messages.cc:202
 msgid "The hashed password for online logins."
 msgstr "Хэш пароля для сетевых игр."
 
-#: ../../src/wlapplication_messages.cc:202
+#: ../../src/wlapplication_messages.cc:203
 msgid "IP"
 msgstr "IP"
 
-#: ../../src/wlapplication_messages.cc:203
+#: ../../src/wlapplication_messages.cc:204
 msgid "Connect to a different server address from the add-ons manager."
 msgstr "Подключитесь к другому адресу сервера из менеджера дополнений."
 
-#: ../../src/wlapplication_messages.cc:205
+#: ../../src/wlapplication_messages.cc:206
 msgid "Connect to a different server port from the add-ons manager."
 msgstr "Подключитесь к другому порту сервера из менеджера дополнений."
 
@@ -372,21 +374,21 @@ msgstr "Подключитесь к другому порту сервера и�
 #. used in multiplayer
 #. * TRANSLATORS: games to make sure that there is no mismatch between the
 #. players.
-#: ../../src/wlapplication_messages.cc:210
+#: ../../src/wlapplication_messages.cc:211
 msgid "Create syncstream dump files to help debug network games."
 msgstr "Создавайте файлы дампа syncstream, чтобы облегчить отладку сетевых игр."
 
-#: ../../src/wlapplication_messages.cc:213
+#: ../../src/wlapplication_messages.cc:214
 msgid "Graphic options:"
 msgstr "Настройки графики:"
 
 #: ../../src/wlapplication_messages.cc:214
-msgid "Whether to use the whole display for the game screen."
-msgstr "Использовать ли весь дисплей для игрового экрана."
+msgid "Use the whole display for the game screen."
+msgstr ""
 
-#: ../../src/wlapplication_messages.cc:215
-msgid "Whether to start the game in a maximized window."
-msgstr "Запускать ли игру в развернутом окне."
+#: ../../src/wlapplication_messages.cc:216
+msgid "Start the game in a maximized window."
+msgstr ""
 
 #. * TRANSLATORS: A placeholder for window width
 #: ../../src/wlapplication_messages.cc:219
@@ -487,12 +489,12 @@ msgid ""
 msgstr "Загрузить данную сохраненную игру или переиграть её. Работает с расширениями файлов .wgf/.wrpl. Не работает с другими опциями. Также смотрите --loadgame/--replay."
 
 #. * TRANSLATORS: %s = version information
-#: ../../src/wlapplication_messages.cc:291
+#: ../../src/wlapplication_messages.cc:295
 #, c-format
 msgid "This is Widelands version %s"
 msgstr "Это версия Widelands %s"
 
-#: ../../src/wlapplication_messages.cc:349
+#: ../../src/wlapplication_messages.cc:353
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://www.widelands.org/\n"
