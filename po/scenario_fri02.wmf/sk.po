@@ -22,7 +22,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../data/campaigns/fri02.wmf/scripting/init.lua:33
 msgid "Note"
-msgstr ""
+msgstr "Poznámka"
 
 #: ../../data/campaigns/fri02.wmf/scripting/init.lua:34
 msgid ""
@@ -216,11 +216,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:99
 msgid "Defeat the Barbarians!"
-msgstr ""
+msgstr "Porazte Barbarov!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:101
 msgid "Defeat the Barbarians"
-msgstr ""
+msgstr "Porazte Barbarov"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:102
 msgid "Defeat the hostile tribe living northwest of the Empire’s outpost!"
@@ -853,11 +853,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:413
 msgid "Victory"
-msgstr ""
+msgstr "Víťazstvo"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:414
 msgid "Victory!"
-msgstr ""
+msgstr "Víťazstvo!"
 
 #. TRANSLATORS: Reebaud – victory
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:416
@@ -868,7 +868,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:417
 msgid "Congratulations"
-msgstr ""
+msgstr "Blahoželáme"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:418
 msgid ""

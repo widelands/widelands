@@ -31,6 +31,7 @@
 #include <atomic>
 #include <map>
 #include <memory>
+#include <optional>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -62,6 +63,8 @@ struct ParameterError : public std::runtime_error {
 
 	CmdLineVerbosity level_;
 };
+
+using OptionalParameter = std::optional<std::string>;
 
 // Callbacks input events to the UI. All functions return true when the event
 // was handled, false otherwise.
@@ -216,6 +219,8 @@ private:
 
 	void parse_commandline(int argc, char const* const* argv);
 	void handle_commandline_parameters();
+	bool check_commandline_flag(const std::string& opt);
+	OptionalParameter get_commandline_option_value(const std::string& opt, bool allow_empty = false);
 
 	void setup_homedir();
 
@@ -224,9 +229,9 @@ private:
 	void cleanup_temp_files();
 	void cleanup_temp_backups(const std::string& dir);
 	void cleanup_temp_backups();
-	std::unique_ptr<FsMenu::MainMenu> check_crash_reports();
+	void check_crash_reports(FsMenu::MainMenu& menu);
 
-	void init_and_run_game_from_template();
+	void init_and_run_game_from_template(FsMenu::MainMenu& mainmenu);
 
 	bool redirect_output(std::string path = "");
 

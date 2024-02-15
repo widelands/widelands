@@ -633,7 +633,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:601
 msgctxt "amazons_worker"
 msgid "Breeds tapirs for adding them to the transportation system."
-msgstr ""
+msgstr "Chová tapíry, ktoré sa začlenia do prepravného systému."
 
 #. TRANSLATORS: Helptext for an Amazon worker: Stonecutter
 #: ../../data/tribes/initialization/amazons/units.lua:611
@@ -683,7 +683,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:660
 msgctxt "amazons_worker"
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "Pracuje v lodenici a stavia nové lode."
 
 #. TRANSLATORS: Helptext for an Amazon worker: Hunter-Gatherer
 #: ../../data/tribes/initialization/amazons/units.lua:670
@@ -751,7 +751,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:751
 msgctxt "amazons_worker"
 msgid "Defend and Conquer!"
-msgstr ""
+msgstr "Obraňuj a panuj!"
 
 #. TRANSLATORS: Helptext for an Amazon worker: Trainer
 #: ../../data/tribes/initialization/amazons/units.lua:758
@@ -1129,7 +1129,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one granite between %1$s and %2$s, depending on "
 "how far the stonecutter has to walk."
-msgstr "Táto budova dokáže vyrobiť jednu žulu za %1$s až %2$s, podľa toho, ako ďaleko musí kamenár prejsť."
+msgstr "Táto budova dokáže vyrobiť jednu žulu za %1$s až %2$s, podľa toho, ako ďaleko musí kamenárka prejsť."
 
 #. TRANSLATORS: Performance helptext for an Amazon production site:
 #. Stonecutter's Hut, part 2
@@ -1154,7 +1154,7 @@ msgstr "Táto budova dokáže vyrobiť jednu žulu za %1$s až %2$s, podľa toho
 #: ../../data/tribes/initialization/amazons/units.lua:1420
 msgctxt "amazons_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr " Čas sa predĺži v prípade svahov alebo prekážok po ceste."
+msgstr "Čas sa predĺži v prípade svahov alebo prekážok po ceste."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Woodcutter's
 #. Hut
@@ -1177,7 +1177,7 @@ msgid ""
 "This building can produce one log between %1$s and %2$s (with master "
 "woodcutter between %3$s and %4$s), depending on how far the woodcutter has "
 "to walk."
-msgstr "Táto budova dokáže vyrobiť jeden kmeň za %1$s až %2$s (s majstrom drevorubačom za %3$s až %4$s), podľa toho, ako ďaleko musí drevorubač prejsť."
+msgstr "Táto budova dokáže vyrobiť jeden kmeň za %1$s až %2$s (s majsterkou drevorubačkou za %3$s až %4$s), podľa toho, ako ďaleko musí drevorubačka prejsť."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Jungle
 #. Preserver's Hut
@@ -1308,7 +1308,7 @@ msgctxt "amazons_building"
 msgid ""
 "This building can produce one bucket of water between %1$s and %2$s on "
 "average, depending on how far the carrier has to walk."
-msgstr "Táto budova dokáže vyrobiť jedno vedro vody priemerne za %1$s až %2$s, podľa toho, ako ďaleko musí nosič prejsť."
+msgstr "Táto budova dokáže vyrobiť jedno vedro vody priemerne za %1$s až %2$s, podľa toho, ako ďaleko musí nosička prejsť."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Rare Tree
 #. Cutter's Hut
@@ -1364,7 +1364,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1418
 msgctxt "amazons_building"
 msgid "One exploration trip of the scout takes between %1$s and %2$s."
-msgstr "Jeden prieskum prieskumníka trvá %1$s až %2$s."
+msgstr "Jeden prieskum prieskumníčky trvá %1$s až %2$s."
 
 #. TRANSLATORS: Lore author helptext for an Amazon production site: Rope
 #. Weaver's Booth
@@ -1579,7 +1579,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1539
 msgctxt "amazons_building"
 msgid "Breeds tapirs for adding them to the transportation system."
-msgstr ""
+msgstr "Chová tapíry, ktoré sa začlenia do prepravného systému."
 
 #. TRANSLATORS: Note helptext for an Amazon production site: Tapir Farm
 #: ../../data/tribes/initialization/amazons/units.lua:1541
@@ -3031,35 +3031,35 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:2065
 msgctxt "amazons"
 msgid "Worker missing"
-msgstr ""
+msgstr "Chýba pracovníčka"
 
 #. TRANSLATORS: Productivity label on an Amazon building if there is 1 worker
 #. coming
 #: ../../data/tribes/initialization/amazons/units.lua:2067
 msgctxt "amazons"
 msgid "Worker is coming"
-msgstr ""
+msgstr "Pracovníčka prichádza"
 
 #. TRANSLATORS: Productivity label on an Amazon building if there is more than
 #. 1 worker missing. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/amazons/units.lua:2069
 msgctxt "amazons"
 msgid "Workers missing"
-msgstr ""
+msgstr "Chýbajú pracovníčky"
 
 #. TRANSLATORS: Productivity label on an Amazon building if there is more than
 #. 1 worker coming. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/amazons/units.lua:2071
 msgctxt "amazons"
 msgid "Workers are coming"
-msgstr ""
+msgstr "Pracovníčky prichádzajú"
 
 #. TRANSLATORS: Productivity label on an Amazon building if there is 1
 #. experienced worker missing
 #: ../../data/tribes/initialization/amazons/units.lua:2073
 msgctxt "amazons"
 msgid "Expert missing"
-msgstr ""
+msgstr "chýba špecialistka"
 
 #. TRANSLATORS: Productivity label on an Amazon building if there is more than
 #. 1 experienced worker missing. If you need plural forms here, please let us
@@ -3067,7 +3067,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:2075
 msgctxt "amazons"
 msgid "Experts missing"
-msgstr ""
+msgstr "chýbajú špecialistky"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. is the maximum number of soldier slots in the building.
@@ -3075,20 +3075,20 @@ msgstr ""
 msgctxt "amazons_soldier"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% vojačka (+%2%)"
+msgstr[1] "%1% vojačky (+%2%)"
+msgstr[2] "%1% vojačiek (+%2%)"
+msgstr[3] "%1% vojačiek (+%2%)"
 
 #. TRANSLATORS: Number of Amazon soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/amazons/units.lua:2091
 msgctxt "amazons_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% vojačka"
+msgstr[1] "%1% vojačky"
+msgstr[2] "%1% vojačiek"
+msgstr[3] "%1% vojačiek"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
@@ -3097,10 +3097,10 @@ msgstr[3] ""
 msgctxt "amazons_soldier"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) vojačka (+%3%)"
+msgstr[1] "%1%(+%2%) vojačky (+%3%)"
+msgstr[2] "%1%(+%2%) vojačiek (+%3%)"
+msgstr[3] "%1%(+%2%) vojačiek (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building.
@@ -3108,10 +3108,10 @@ msgstr[3] ""
 msgctxt "amazons_soldier"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) vojačka"
+msgstr[1] "%1%(+%2%) vojačky"
+msgstr[2] "%1%(+%2%) vojačiek"
+msgstr[3] "%1%(+%2%) vojačiek"
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Granite, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:435
@@ -4114,7 +4114,7 @@ msgstr "Táto budova dokáže vyrobiť jednu žulu za %1$s až %2$s, podľa toho
 #: ../../data/tribes/initialization/atlanteans/units.lua:1646
 msgctxt "atlanteans_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr " Čas sa predĺži v prípade svahov alebo prekážok po ceste."
+msgstr "Čas sa predĺži v prípade svahov alebo prekážok po ceste."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site:
 #. Woodcutter's House
@@ -4386,7 +4386,7 @@ msgstr "Nosič prinesie jedno vedro plné vody za %s."
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "If the water resource is depleted, the carrier needs %s on average."
-msgstr " Ak je vodný zdroj vyčerpaný, nosič potrebuje v priemere %s."
+msgstr "Ak je vodný zdroj vyčerpaný, nosič potrebuje v priemere %s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Gold
 #. Spinning Mill
@@ -5798,35 +5798,35 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:2265
 msgctxt "atlanteans"
 msgid "Worker missing"
-msgstr ""
+msgstr "Chýba pracovník"
 
 #. TRANSLATORS: Productivity label on an Atlantean building if there is 1
 #. worker coming
 #: ../../data/tribes/initialization/atlanteans/units.lua:2267
 msgctxt "atlanteans"
 msgid "Worker is coming"
-msgstr ""
+msgstr "Pracovník prichádza"
 
 #. TRANSLATORS: Productivity label on an Atlantean building if there is more
 #. than 1 worker missing. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/atlanteans/units.lua:2269
 msgctxt "atlanteans"
 msgid "Workers missing"
-msgstr ""
+msgstr "Chýbajú pracovníci"
 
 #. TRANSLATORS: Productivity label on an Atlantean building if there is more
 #. than 1 worker coming. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/atlanteans/units.lua:2271
 msgctxt "atlanteans"
 msgid "Workers are coming"
-msgstr ""
+msgstr "Pracovníci prichádzajú"
 
 #. TRANSLATORS: Productivity label on an Atlantean building if there is 1
 #. experienced worker missing
 #: ../../data/tribes/initialization/atlanteans/units.lua:2273
 msgctxt "atlanteans"
 msgid "Expert missing"
-msgstr ""
+msgstr "chýba špecialista"
 
 #. TRANSLATORS: Productivity label on an Atlantean building if there is more
 #. than 1 experienced worker missing. If you need plural forms here, please
@@ -5834,7 +5834,7 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:2275
 msgctxt "atlanteans"
 msgid "Experts missing"
-msgstr ""
+msgstr "chýbajú špecialisti"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% is the maximum number of soldier slots in the building.
@@ -5842,20 +5842,20 @@ msgstr ""
 msgctxt "atlanteans_soldier"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% vojak (+%2%)"
+msgstr[1] "%1% vojaci (+%2%)"
+msgstr[2] "%1% vojakov (+%2%)"
+msgstr[3] "%1% vojakov (+%2%)"
 
 #. TRANSLATORS: Number of Atlantean soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/atlanteans/units.lua:2291
 msgctxt "atlanteans_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% vojak"
+msgstr[1] "%1% vojaci"
+msgstr[2] "%1% vojakov"
+msgstr[3] "%1% vojakov"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -5864,10 +5864,10 @@ msgstr[3] ""
 msgctxt "atlanteans_soldier"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) vojak (+%3%)"
+msgstr[1] "%1%(+%2%) vojaci (+%3%)"
+msgstr[2] "%1%(+%2%) vojakov (+%3%)"
+msgstr[3] "%1%(+%2%) vojakov (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -5875,10 +5875,10 @@ msgstr[3] ""
 msgctxt "atlanteans_soldier"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) vojak"
+msgstr[1] "%1%(+%2%) vojaci"
+msgstr[2] "%1%(+%2%) vojakov"
+msgstr[3] "%1%(+%2%) vojakov"
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Granite, part 2
 #: ../../data/tribes/initialization/barbarians/units.lua:102
@@ -6639,7 +6639,7 @@ msgstr "Táto budova dokáže vyrobiť jednu žulu za %1$s až %2$s, podľa toho
 #: ../../data/tribes/initialization/barbarians/units.lua:1274
 msgctxt "barbarians_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr " Čas sa predĺži v prípade svahov alebo prekážok po ceste."
+msgstr "Čas sa predĺži v prípade svahov alebo prekážok po ceste."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Lumberjack_s
 #. Hut
@@ -6835,7 +6835,7 @@ msgstr "Nosič prinesie jedno vedro plné vody za %s."
 #, lua-format
 msgctxt "barbarians_building"
 msgid "If the water resource is depleted, the carrier needs %s on average."
-msgstr " Ak je vodný zdroj vyčerpaný, nosič potrebuje v priemere %s."
+msgstr "Ak je vodný zdroj vyčerpaný, nosič potrebuje v priemere %s."
 
 #: ../../data/tribes/initialization/barbarians/units.lua:1263
 msgctxt "barbarians_building"
@@ -9922,35 +9922,35 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:2574
 msgctxt "barbarians"
 msgid "Worker missing"
-msgstr ""
+msgstr "Chýba pracovník"
 
 #. TRANSLATORS: Productivity label on a Barbarian building if there is 1
 #. worker coming
 #: ../../data/tribes/initialization/barbarians/units.lua:2576
 msgctxt "barbarians"
 msgid "Worker is coming"
-msgstr ""
+msgstr "Pracovník prichádza"
 
 #. TRANSLATORS: Productivity label on a Barbarian building if there is more
 #. than 1 worker missing. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/barbarians/units.lua:2578
 msgctxt "barbarians"
 msgid "Workers missing"
-msgstr ""
+msgstr "Chýbajú pracovníci"
 
 #. TRANSLATORS: Productivity label on a Barbarian building if there is more
 #. than 1 worker coming. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/barbarians/units.lua:2580
 msgctxt "barbarians"
 msgid "Workers are coming"
-msgstr ""
+msgstr "Pracovníci prichádzajú"
 
 #. TRANSLATORS: Productivity label on a Barbarian building if there is 1
 #. experienced worker missing
 #: ../../data/tribes/initialization/barbarians/units.lua:2582
 msgctxt "barbarians"
 msgid "Expert missing"
-msgstr ""
+msgstr "chýba špecialista"
 
 #. TRANSLATORS: Productivity label on a Barbarian building if there is more
 #. than 1 experienced worker missing. If you need plural forms here, please
@@ -9958,7 +9958,7 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:2584
 msgctxt "barbarians"
 msgid "Experts missing"
-msgstr ""
+msgstr "chýbajú špecialisti"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% is the maximum number of soldier slots in the building.
@@ -9966,20 +9966,20 @@ msgstr ""
 msgctxt "barbarians_soldier"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% vojak (+%2%)"
+msgstr[1] "%1% vojaci (+%2%)"
+msgstr[2] "%1% vojakov (+%2%)"
+msgstr[3] "%1% vojakov (+%2%)"
 
 #. TRANSLATORS: Number of Barbarian soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/barbarians/units.lua:2600
 msgctxt "barbarians_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% vojak"
+msgstr[1] "%1% vojaci"
+msgstr[2] "%1% vojakov"
+msgstr[3] "%1% vojakov"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -9988,10 +9988,10 @@ msgstr[3] ""
 msgctxt "barbarians_soldier"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) vojak (+%3%)"
+msgstr[1] "%1%(+%2%) vojaci (+%3%)"
+msgstr[2] "%1%(+%2%) vojakov (+%3%)"
+msgstr[3] "%1%(+%2%) vojakov (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -9999,10 +9999,10 @@ msgstr[3] ""
 msgctxt "barbarians_soldier"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) vojak"
+msgstr[1] "%1%(+%2%) vojaci"
+msgstr[2] "%1%(+%2%) vojakov"
+msgstr[3] "%1%(+%2%) vojakov"
 
 #. TRANSLATORS: Format string for a latin quote and its translation
 #: ../../data/tribes/initialization/empire/units.lua:12
@@ -10807,7 +10807,7 @@ msgstr "Táto budova dokáže vyrobiť jednu žulu za %1$s až %2$s a jeden mram
 #: ../../data/tribes/initialization/empire/units.lua:1422
 msgctxt "empire_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr " Čas sa predĺži v prípade svahov alebo prekážok po ceste."
+msgstr "Čas sa predĺži v prípade svahov alebo prekážok po ceste."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11013,7 +11013,7 @@ msgstr "Nosič prinesie jedno vedro plné vody za %s."
 #, lua-format
 msgctxt "empire_building"
 msgid "If the water resource is depleted, the carrier needs %s on average."
-msgstr " Ak je vodný zdroj vyčerpaný, nosič potrebuje v priemere %s."
+msgstr "Ak je vodný zdroj vyčerpaný, nosič potrebuje v priemere %s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -13331,35 +13331,35 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:2723
 msgctxt "empire"
 msgid "Worker missing"
-msgstr ""
+msgstr "Chýba pracovník"
 
 #. TRANSLATORS: Productivity label on an Empire building if there is 1 worker
 #. coming
 #: ../../data/tribes/initialization/empire/units.lua:2725
 msgctxt "empire"
 msgid "Worker is coming"
-msgstr ""
+msgstr "Pracovník prichádza"
 
 #. TRANSLATORS: Productivity label on an Empire building if there is more than
 #. 1 worker missing. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/empire/units.lua:2727
 msgctxt "empire"
 msgid "Workers missing"
-msgstr ""
+msgstr "Chýbajú pracovníci"
 
 #. TRANSLATORS: Productivity label on an Empire building if there is more than
 #. 1 worker coming. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/empire/units.lua:2729
 msgctxt "empire"
 msgid "Workers are coming"
-msgstr ""
+msgstr "Pracovníci prichádzajú"
 
 #. TRANSLATORS: Productivity label on an Empire building if there is 1
 #. experienced worker missing
 #: ../../data/tribes/initialization/empire/units.lua:2731
 msgctxt "empire"
 msgid "Expert missing"
-msgstr ""
+msgstr "chýba špecialista"
 
 #. TRANSLATORS: Productivity label on an Empire building if there is more than
 #. 1 experienced worker missing. If you need plural forms here, please let us
@@ -13367,7 +13367,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:2733
 msgctxt "empire"
 msgid "Experts missing"
-msgstr ""
+msgstr "chýbajú špecialisti"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. is the maximum number of soldier slots in the building.
@@ -13375,20 +13375,20 @@ msgstr ""
 msgctxt "empire_soldier"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% vojak (+%2%)"
+msgstr[1] "%1% vojaci (+%2%)"
+msgstr[2] "%1% vojakov (+%2%)"
+msgstr[3] "%1% vojakov (+%2%)"
 
 #. TRANSLATORS: Number of Empire soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/empire/units.lua:2749
 msgctxt "empire_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% vojak"
+msgstr[1] "%1% vojaci"
+msgstr[2] "%1% vojakov"
+msgstr[3] "%1% vojakov"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
@@ -13397,10 +13397,10 @@ msgstr[3] ""
 msgctxt "empire_soldier"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) vojak (+%3%)"
+msgstr[1] "%1%(+%2%) vojaci (+%3%)"
+msgstr[2] "%1%(+%2%) vojakov (+%3%)"
+msgstr[3] "%1%(+%2%) vojakov (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building.
@@ -13408,10 +13408,10 @@ msgstr[3] ""
 msgctxt "empire_soldier"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) vojak"
+msgstr[1] "%1%(+%2%) vojaci"
+msgstr[2] "%1%(+%2%) vojakov"
+msgstr[3] "%1%(+%2%) vojakov"
 
 #. TRANSLATORS: Helptext for a Frisian ware: Log, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:101
@@ -13884,7 +13884,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:722
 msgctxt "frisians_worker"
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "Pracuje v lodenici a stavia nové lode."
 
 #. TRANSLATORS: Purpose helptext for a Frisian worker: Diker
 #: ../../data/tribes/initialization/frisians/units.lua:729
@@ -14007,7 +14007,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:880
 msgctxt "frisians_worker"
 msgid "Defend and Conquer!"
-msgstr ""
+msgstr "Obraňuj a panuj!"
 
 #. TRANSLATORS: Helptext for a Frisian worker: Trainer
 #: ../../data/tribes/initialization/frisians/units.lua:887
@@ -14247,7 +14247,7 @@ msgstr "Táto budova dokáže vyrobiť jednu žulu za %1$s až %2$s, podľa toho
 #: ../../data/tribes/initialization/frisians/units.lua:1777
 msgctxt "frisians_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr " Čas sa predĺži v prípade svahov alebo prekážok po ceste."
+msgstr "Čas sa predĺži v prípade svahov alebo prekážok po ceste."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Woodcutter's
 #. House
@@ -14435,7 +14435,7 @@ msgstr "Nosič prinesie jedno vedro plné vody za %s."
 #, lua-format
 msgctxt "frisians_building"
 msgid "If the water resource is depleted, the carrier needs %s on average."
-msgstr " Ak je vodný zdroj vyčerpaný, nosič potrebuje v priemere %s."
+msgstr "Ak je vodný zdroj vyčerpaný, nosič potrebuje v priemere %s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Clay Pit
 #: ../../data/tribes/initialization/frisians/units.lua:1683
@@ -15919,35 +15919,35 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2404
 msgctxt "frisians"
 msgid "Worker missing"
-msgstr ""
+msgstr "Chýba pracovník"
 
 #. TRANSLATORS: Productivity label on a Frisian building if there is 1 worker
 #. coming
 #: ../../data/tribes/initialization/frisians/units.lua:2406
 msgctxt "frisians"
 msgid "Worker is coming"
-msgstr ""
+msgstr "Pracovník prichádza"
 
 #. TRANSLATORS: Productivity label on a Frisian building if there is more than
 #. 1 worker missing. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/frisians/units.lua:2408
 msgctxt "frisians"
 msgid "Workers missing"
-msgstr ""
+msgstr "Chýbajú pracovníci"
 
 #. TRANSLATORS: Productivity label on a Frisian building if there is more than
 #. 1 worker coming. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/frisians/units.lua:2410
 msgctxt "frisians"
 msgid "Workers are coming"
-msgstr ""
+msgstr "Pracovníci prichádzajú"
 
 #. TRANSLATORS: Productivity label on a Frisian building if there is 1
 #. experienced worker missing
 #: ../../data/tribes/initialization/frisians/units.lua:2412
 msgctxt "frisians"
 msgid "Expert missing"
-msgstr ""
+msgstr "chýba špecialista"
 
 #. TRANSLATORS: Productivity label on a Frisian building if there is more than
 #. 1 experienced worker missing. If you need plural forms here, please let us
@@ -15955,7 +15955,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2414
 msgctxt "frisians"
 msgid "Experts missing"
-msgstr ""
+msgstr "chýbajú špecialisti"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% is the maximum number of soldier slots in the building.
@@ -15963,20 +15963,20 @@ msgstr ""
 msgctxt "frisians_soldier"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% vojak (+%2%)"
+msgstr[1] "%1% vojaci (+%2%)"
+msgstr[2] "%1% vojakov (+%2%)"
+msgstr[3] "%1% vojakov (+%2%)"
 
 #. TRANSLATORS: Number of Frisian soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/frisians/units.lua:2430
 msgctxt "frisians_soldier"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% vojak"
+msgstr[1] "%1% vojaci"
+msgstr[2] "%1% vojakov"
+msgstr[3] "%1% vojakov"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -15985,10 +15985,10 @@ msgstr[3] ""
 msgctxt "frisians_soldier"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) vojak (+%3%)"
+msgstr[1] "%1%(+%2%) vojaci (+%3%)"
+msgstr[2] "%1%(+%2%) vojakov (+%3%)"
+msgstr[3] "%1%(+%2%) vojakov (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -15996,10 +15996,10 @@ msgstr[3] ""
 msgctxt "frisians_soldier"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1%(+%2%) vojak"
+msgstr[1] "%1%(+%2%) vojaci"
+msgstr[2] "%1%(+%2%) vojakov"
+msgstr[3] "%1%(+%2%) vojakov"
 
 #. TRANSLATORS: Lore helptext for a building - it hasn't been written yet.
 #. TRANSLATORS: Purpose helptext for a building - it hasn't been written yet.
@@ -16321,7 +16321,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:28
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr ""
+msgstr "Ctrl + klik"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:30
@@ -16333,7 +16333,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/controls.lua:32
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr ""
+msgstr "Shift + klik"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:34
