@@ -2014,42 +2014,42 @@ msgstr[1] "%u bővítmény van bekapcsolva, ami befolyásolja a játékot:"
 #. * TRANSLATORS: "12 steps northwest of Port1"
 #: ../../src/logic/detected_port_space.cc:52
 msgid "northwest"
-msgstr ""
+msgstr "északnyugatra"
 
 #. * TRANSLATORS: "12 steps northeast of Port1"
 #: ../../src/logic/detected_port_space.cc:56
 msgid "northeast"
-msgstr ""
+msgstr "északkeletre"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../src/logic/detected_port_space.cc:60
 msgid "southwest"
-msgstr ""
+msgstr "délnyugatra"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../src/logic/detected_port_space.cc:64
 msgid "southeast"
-msgstr ""
+msgstr "délkeletre"
 
 #. * TRANSLATORS: "12 steps north of Port1"
 #: ../../src/logic/detected_port_space.cc:68
 msgid "north"
-msgstr ""
+msgstr "északra"
 
 #. * TRANSLATORS: "12 steps south of Port1"
 #: ../../src/logic/detected_port_space.cc:72
 msgid "south"
-msgstr ""
+msgstr "délre"
 
 #. * TRANSLATORS: "12 steps west of Port1"
 #: ../../src/logic/detected_port_space.cc:76
 msgid "west"
-msgstr ""
+msgstr "nyugatra"
 
 #. * TRANSLATORS: "12 steps east of Port1"
 #: ../../src/logic/detected_port_space.cc:80
 msgid "east"
-msgstr ""
+msgstr "keletre"
 
 #: ../../src/logic/detected_port_space.cc:88
 #, c-format
@@ -2064,13 +2064,13 @@ msgstr "Szabad kikötőhely, amit %1$s-kor talált %2$s"
 msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s of %5$s"
 msgid_plural ""
 "Unowned port space discovered at %1$s by %2$s %3$u steps %4$s of %5$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Szabad kikötőhely, amit a(z) %2$s talált %1$s-kor %5$s kikötőjétől %3$u távolságra %4$s"
+msgstr[1] "Szabad kikötőhely, amit a(z) %2$s talált %1$s-kor %5$s kikötőjétől %3$u távolságra %4$s"
 
 #: ../../src/logic/detected_port_space.cc:101
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s"
-msgstr "%1$s kikötőhelye, amit %2$s-kor talált %3$s"
+msgstr "%1$s kikötőhelye, amit a(z) %3$s talált %2$s-kor"
 
 #. * TRANSLATORS: "Port space of Player3 discovered at 1:23 by Ship2 34 steps
 #. north
@@ -2080,8 +2080,8 @@ msgstr "%1$s kikötőhelye, amit %2$s-kor talált %3$s"
 msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s of %6$s"
 msgid_plural ""
 "Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s of %6$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s kikötőhelye, amit a(z) %3$s talált %2$s-kor %6$s kikötőjétől %4$u távolságra %5$s"
+msgstr[1] "%1$s kikötőhelye, amit a(z) %3$s talált %2$s-kor %6$s kikötőjétől %4$u távolságra %5$s"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northwest.
 #: ../../src/logic/detected_port_space.cc:120
@@ -6355,7 +6355,7 @@ msgstr "Egy korábbi játék visszajátszásának megtekintése"
 
 #: ../../src/ui_fsmenu/main.cc:464
 msgid "Watch last saved replay"
-msgstr ""
+msgstr "A legutóbbi visszajátszás megtekintése"
 
 #: ../../src/ui_fsmenu/main.cc:490
 msgid "Single Player…"
@@ -6371,7 +6371,7 @@ msgstr "Térképszerkesztő…"
 
 #: ../../src/ui_fsmenu/main.cc:493
 msgid "Watch Replay…"
-msgstr ""
+msgstr "Visszajátszás megtekintése…"
 
 #: ../../src/ui_fsmenu/main.cc:495
 msgid "Begin or load a single-player campaign or free game"
@@ -6387,7 +6387,7 @@ msgstr "A térképszerkesztő megnyitása"
 
 #: ../../src/ui_fsmenu/main.cc:504
 msgid "Watch again a recorded earlier game"
-msgstr ""
+msgstr "Egy korábbi játék visszajátszásának megtekintése"
 
 #: ../../src/ui_fsmenu/main.cc:507 ../../src/wlapplication_options.cc:333
 msgid "Add-Ons"
@@ -7312,19 +7312,19 @@ msgstr "Kijelölések megszüntetése"
 
 #: ../../src/wlapplication.cc:832
 msgid "Widelands could not find the last edited map."
-msgstr ""
+msgstr "A Widelands nem találja a legutóbb szerkesztett térképet."
 
 #: ../../src/wlapplication.cc:836
 msgid "No Last Edited Map"
-msgstr ""
+msgstr "Nincs legutóbb szerkesztett térkép"
 
 #: ../../src/wlapplication.cc:867
 msgid "No last saved replay."
-msgstr ""
+msgstr "Nincs legutóbbi visszajátszás"
 
 #: ../../src/wlapplication.cc:869
 msgid "No last saved game."
-msgstr ""
+msgstr "Nincs legutóbbi mentett játék"
 
 #: ../../src/wlapplication.cc:879
 #, c-format
@@ -7613,7 +7613,7 @@ msgstr "Visszajátszás megtekintése"
 
 #: ../../src/wlapplication_options.cc:268
 msgid "Watch Latest Replay"
-msgstr ""
+msgstr "A legutóbbi visszajátszás megtekintése"
 
 #: ../../src/wlapplication_options.cc:287
 msgid "Singleplayer"

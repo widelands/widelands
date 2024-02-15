@@ -2007,42 +2007,42 @@ msgstr[1] "%u speelwichtig Verwiederns anknipst:"
 #. * TRANSLATORS: "12 steps northwest of Port1"
 #: ../../src/logic/detected_port_space.cc:52
 msgid "northwest"
-msgstr ""
+msgstr "noordwestelk"
 
 #. * TRANSLATORS: "12 steps northeast of Port1"
 #: ../../src/logic/detected_port_space.cc:56
 msgid "northeast"
-msgstr ""
+msgstr "noordoostelk"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../src/logic/detected_port_space.cc:60
 msgid "southwest"
-msgstr ""
+msgstr "südwestelk"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../src/logic/detected_port_space.cc:64
 msgid "southeast"
-msgstr ""
+msgstr "südoostelk"
 
 #. * TRANSLATORS: "12 steps north of Port1"
 #: ../../src/logic/detected_port_space.cc:68
 msgid "north"
-msgstr ""
+msgstr "noordelk"
 
 #. * TRANSLATORS: "12 steps south of Port1"
 #: ../../src/logic/detected_port_space.cc:72
 msgid "south"
-msgstr ""
+msgstr "südelk"
 
 #. * TRANSLATORS: "12 steps west of Port1"
 #: ../../src/logic/detected_port_space.cc:76
 msgid "west"
-msgstr ""
+msgstr "westelk"
 
 #. * TRANSLATORS: "12 steps east of Port1"
 #: ../../src/logic/detected_port_space.cc:80
 msgid "east"
-msgstr ""
+msgstr "oostelk"
 
 #: ../../src/logic/detected_port_space.cc:88
 #, c-format
@@ -2057,8 +2057,8 @@ msgstr "Rüümte för Muden sünner Eegner um %1$s vun %2$s funnen"
 msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s of %5$s"
 msgid_plural ""
 "Unowned port space discovered at %1$s by %2$s %3$u steps %4$s of %5$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Rüümte för Muden sünner Eegner um %1$s vun %2$s %3$u Stapp %4$s vun %5$s funnen"
+msgstr[1] "Rüümte för Muden sünner Eegner um %1$s vun %2$s %3$u Stappen %4$s vun %5$s funnen"
 
 #: ../../src/logic/detected_port_space.cc:101
 #, c-format
@@ -2073,8 +2073,8 @@ msgstr "Rüümte för Muden vun %1$s um %2$s vun %3$s funnen"
 msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s of %6$s"
 msgid_plural ""
 "Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s of %6$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Rüümte för Muden vun %1$s um %2$s vun %3$s %4$u Stapp %5$s vun %6$s funnen"
+msgstr[1] "Rüümte för Muden vun %1$s um %2$s vun %3$s %4$u Stappen %5$s vun %6$s funnen"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northwest.
 #: ../../src/logic/detected_port_space.cc:120

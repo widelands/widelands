@@ -8,7 +8,7 @@
 # millimarg, 2015,2017
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Simon Heimberg, 2023
-# Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2023
+# Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2024
 # The Widelands development team <widelands-public@Alists.sf.net>, 2010
 # Thomas Ho <tomohnetom@web.de>, 2021
 # Elisabeth Jäger, 2015-2016
@@ -20,7 +20,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-02-10 02:23+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
-"Last-Translator: Simon Heimberg, 2023\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2024\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,7 +32,7 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:52
 #, c-format
 msgid "%1$s|%2$s"
-msgstr ""
+msgstr "%1$s|%2$s"
 
 #: ../../src/wlapplication_messages.cc:55
 #: ../../src/wlapplication_messages.cc:87
@@ -47,7 +47,7 @@ msgstr "DATEINAME"
 #. punctuation marks
 #: ../../src/wlapplication_messages.cc:60
 msgid "last"
-msgstr ""
+msgstr "letztes"
 
 #: ../../src/wlapplication_messages.cc:66
 msgid "Usage:"
@@ -120,7 +120,7 @@ msgstr "Starte die Karte `DATEINAME` direkt als Einzelspielerszenario."
 #, c-format
 msgid ""
 "Load the savegame `%1$s` directly or the last saved game if `=%2$s` is used."
-msgstr ""
+msgstr "Lade direkt das gespeicherte Spiel `%1$s` oder das letzte gespeicherte Spiel wenn `=%2$s` benutzt wird."
 
 #. * TRANSLATORS: %1 is translation for FILENAME,
 #. %2 is translation for "last" for last used file
@@ -128,7 +128,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Load the replay `%1$s` directly or the last saved replay if `=%2$s` is used."
-msgstr ""
+msgstr "Lade direkt die Aufzeichnung `%1$s` oder die letzte Aufzeichnung wenn `=%2$s` benutzt wird."
 
 #. * TRANSLATORS: %1 is translation for FILENAME,
 #. %2 is translation for "last" for last used file
@@ -138,7 +138,7 @@ msgid ""
 "Start the Widelands map editor directly. You can add `=%1$s` to directly "
 "load the map `FILENAME` in the editor or `=%2$s` to load the last edited "
 "map."
-msgstr ""
+msgstr "Starte direkt den Widelands Karteneditor. Du kannst `=%1$s` hinzufügen, um direkt die Karte `FILENAME` im Editor zu laden, oder `=%2$s` um die letzte editierte Karte zu laden."
 
 #: ../../src/wlapplication_messages.cc:114
 msgid ""

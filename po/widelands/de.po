@@ -2034,42 +2034,42 @@ msgstr[1] "%u spielrelevante Erweiterungen in Gebrauch:"
 #. * TRANSLATORS: "12 steps northwest of Port1"
 #: ../../src/logic/detected_port_space.cc:52
 msgid "northwest"
-msgstr ""
+msgstr "nordwestlich"
 
 #. * TRANSLATORS: "12 steps northeast of Port1"
 #: ../../src/logic/detected_port_space.cc:56
 msgid "northeast"
-msgstr ""
+msgstr "nordöstlich"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../src/logic/detected_port_space.cc:60
 msgid "southwest"
-msgstr ""
+msgstr "südwestlich"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../src/logic/detected_port_space.cc:64
 msgid "southeast"
-msgstr ""
+msgstr "südöstlich"
 
 #. * TRANSLATORS: "12 steps north of Port1"
 #: ../../src/logic/detected_port_space.cc:68
 msgid "north"
-msgstr ""
+msgstr "nördlich"
 
 #. * TRANSLATORS: "12 steps south of Port1"
 #: ../../src/logic/detected_port_space.cc:72
 msgid "south"
-msgstr ""
+msgstr "südlich"
 
 #. * TRANSLATORS: "12 steps west of Port1"
 #: ../../src/logic/detected_port_space.cc:76
 msgid "west"
-msgstr ""
+msgstr "westlich"
 
 #. * TRANSLATORS: "12 steps east of Port1"
 #: ../../src/logic/detected_port_space.cc:80
 msgid "east"
-msgstr ""
+msgstr "östlich"
 
 #: ../../src/logic/detected_port_space.cc:88
 #, c-format
@@ -2084,8 +2084,8 @@ msgstr "Herrenloser Hafenbauplatz bei %1$s durch %2$s entdeckt"
 msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s of %5$s"
 msgid_plural ""
 "Unowned port space discovered at %1$s by %2$s %3$u steps %4$s of %5$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Herrenloser Hafenbauplatz bei%1$s,%3$u Feld %4$s von %5$s, durch %2$sentdeckt"
+msgstr[1] "Herrenloser Hafenbauplatz bei %1$s, %3$u Felder %4$s von %5$s, durch %2$s entdeckt"
 
 #: ../../src/logic/detected_port_space.cc:101
 #, c-format
@@ -2100,8 +2100,8 @@ msgstr "Hafenbauplatz von %1$s bei %2$s durch %3$s entdeckt"
 msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s of %6$s"
 msgid_plural ""
 "Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s of %6$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Hafenbauplatz von %1$s bei %2$s, %4$u Feld %5$s von %6$s, durch %3$s entdeckt"
+msgstr[1] "Hafenbauplatz von %1$s bei %2$s, %4$u Felder %5$s von %6$s, durch  %3$s entdeckt"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northwest.
 #: ../../src/logic/detected_port_space.cc:120

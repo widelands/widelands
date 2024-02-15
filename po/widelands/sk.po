@@ -85,7 +85,7 @@ msgstr "Nové úlohy"
 #, lua-format
 msgctxt "sentence_separator"
 msgid "%s %s"
-msgstr "%s%s"
+msgstr "%s %s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -173,7 +173,7 @@ msgstr ","
 #: ../../src/base/i18n.cc:427
 msgctxt "sentence_separator"
 msgid "%1% %2%"
-msgstr "%1%%2%"
+msgstr "%1% %2%"
 
 #. * TRANSLATORS: January. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -370,7 +370,7 @@ msgstr "Uložiť mapu"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:237
 msgid "Publish Map Online…"
-msgstr "Zverejni mapu online..."
+msgstr "Zverejniť mapu online…"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:245
@@ -719,7 +719,7 @@ msgstr "Nahrávanie doplnku…"
 
 #: ../../src/editor/editorinteractive.cc:1461
 msgid "Saving map…"
-msgstr "Ukladanie mapy..."
+msgstr "Ukladanie mapy…"
 
 #: ../../src/editor/editorinteractive.cc:1480
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:315
@@ -3041,7 +3041,7 @@ msgstr "Loď %d"
 #, c-format
 msgctxt "warehouse"
 msgid "Port %d"
-msgstr ""
+msgstr "Prístav %d"
 
 #: ../../src/logic/player.cc:2037
 #, c-format
@@ -4205,7 +4205,7 @@ msgstr ""
 #, c-format
 msgctxt "spinbox_change"
 msgid "%d"
-msgstr ""
+msgstr "%d"
 
 #: ../../src/ui_basic/table.cc:157
 msgid "Click to reverse sorting"
@@ -5629,7 +5629,7 @@ msgstr ""
 #: ../../src/wui/constructionsitewindow.cc:137
 #, c-format
 msgid "(%s)"
-msgstr ""
+msgstr "(%s)"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:186
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:387
@@ -7795,7 +7795,7 @@ msgstr "Ísť na predchádzajúcu pozíciu"
 
 #: ../../src/wlapplication_options.cc:466
 msgid "Publish Map Online"
-msgstr ""
+msgstr "Zverejniť mapu online"
 
 #: ../../src/wlapplication_options.cc:483
 msgid "Toggle Tools Menu"

@@ -88,7 +88,7 @@ msgstr "Druhá ríša"
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:49
 msgid "Introduces the Barbarians."
-msgstr " Kampaň vám predstaví Barbarov."
+msgstr "Kampaň vám predstaví Barbarov."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:52
@@ -116,7 +116,7 @@ msgstr "Mesiace vo vyhnanstve"
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:73
 msgid "Introduces the Empire."
-msgstr " Kampaň vám predstaví Impérium."
+msgstr "Kampaň vám predstaví Impérium."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:75
@@ -141,7 +141,7 @@ msgstr "Honba za ohňom"
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:96
 msgid "Introduces the Atlanteans."
-msgstr " Kampaň vám predstaví Atlantíďanov."
+msgstr "Kampaň vám predstaví Atlantíďanov."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:98
@@ -161,7 +161,7 @@ msgstr "Od vody k ľadu"
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:111
 msgid "Introduces the Frisians."
-msgstr " Kampaň vám predstaví Frízanov."
+msgstr "Kampaň vám predstaví Frízanov."
 
 #. TRANSLATORS: A campaign difficulty (easiest of three options)
 #: ../../data/campaigns/campaigns.lua:116

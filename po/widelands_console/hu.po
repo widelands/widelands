@@ -10,7 +10,7 @@
 # litoll <litoll@freemail.hu>, 2017
 # litoll <litoll@freemail.hu>, 2017
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2016
-# Tóth András <txa-dev@posteo.hu>, 2021-2022
+# Tóth András <txa-dev@posteo.hu>, 2021-2024
 # Tóth András <txa-dev@posteo.hu>, 2023
 # vargaviktor <viktor.varga@gmail.com>, 2021
 # vargaviktor <viktor.varga@gmail.com>, 2021
@@ -34,7 +34,7 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:52
 #, c-format
 msgid "%1$s|%2$s"
-msgstr ""
+msgstr "%1$s|%2$s"
 
 #: ../../src/wlapplication_messages.cc:55
 #: ../../src/wlapplication_messages.cc:87
@@ -49,7 +49,7 @@ msgstr "FÁJLNÉV"
 #. punctuation marks
 #: ../../src/wlapplication_messages.cc:60
 msgid "last"
-msgstr ""
+msgstr "legutóbbi"
 
 #: ../../src/wlapplication_messages.cc:66
 msgid "Usage:"
@@ -122,7 +122,7 @@ msgstr "A `FÁJLNÉV` térkép közvetlen indítása egyszemélyes küldetéské
 #, c-format
 msgid ""
 "Load the savegame `%1$s` directly or the last saved game if `=%2$s` is used."
-msgstr ""
+msgstr "Játék indítása a `%1$s`, vagy `=%2$s` használata esetén a legutóbbi mentett állás közvetlen betöltésével."
 
 #. * TRANSLATORS: %1 is translation for FILENAME,
 #. %2 is translation for "last" for last used file
@@ -130,7 +130,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Load the replay `%1$s` directly or the last saved replay if `=%2$s` is used."
-msgstr ""
+msgstr "A `%1$s`, vagy `=%2$s` használata esetén a legutóbbi visszajátszás közvetlen indítása."
 
 #. * TRANSLATORS: %1 is translation for FILENAME,
 #. %2 is translation for "last" for last used file
@@ -140,7 +140,7 @@ msgid ""
 "Start the Widelands map editor directly. You can add `=%1$s` to directly "
 "load the map `FILENAME` in the editor or `=%2$s` to load the last edited "
 "map."
-msgstr ""
+msgstr "A Widelands térképszerkesztő közvetlen indítása. Megadható az indításkor betöltendő térkép is `=FÁJLNÉV` használatával, vagy a legutóbb szerkesztett térkép az `=%2$s` használatával."
 
 #: ../../src/wlapplication_messages.cc:114
 msgid ""
