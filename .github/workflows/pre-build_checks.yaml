@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 1
     - name: Validate JSON files
@@ -45,26 +45,42 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 1
     - name: Installing python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: 3.x
+        cache: pip
+    - name: Install graphviz
+      run: |
+        sudo apt-get update
+        sudo apt-get install graphviz
     - name: Generate documentation
       run: |
         cd doc/sphinx
         pip install -r requirements.txt
         mkdir source/_static
         ./extract_rst.py
+        # Test building for the homepage
         sphinx-build -W -b json -d build/doctrees source build/json
+        # This is suitable for user testing
+        ./make.py html -graphs
+        # Create a downloadable workflow artifact for testing
+        mv build widelands-doc-${{ github.sha }}
+        zip -r ${{ github.workspace }}/Widelands-${{ github.sha }}-Developer-Documentation.zip widelands-doc-${{ github.sha }}
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: Widelands Developer Documentation
+        path: ${{ github.workspace }}/Widelands-${{ github.sha }}-Developer-Documentation.zip
 
   lua_style:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 1
     - name: Prepare documentation examples for parsing

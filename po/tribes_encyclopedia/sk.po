@@ -1154,7 +1154,7 @@ msgstr "Táto budova dokáže vyrobiť jednu žulu za %1$s až %2$s, podľa toho
 #: ../../data/tribes/initialization/amazons/units.lua:1420
 msgctxt "amazons_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr " Čas sa predĺži v prípade svahov alebo prekážok po ceste."
+msgstr "Čas sa predĺži v prípade svahov alebo prekážok po ceste."
 
 #. TRANSLATORS: Purpose helptext for an Amazon production site: Woodcutter's
 #. Hut
@@ -4114,7 +4114,7 @@ msgstr "Táto budova dokáže vyrobiť jednu žulu za %1$s až %2$s, podľa toho
 #: ../../data/tribes/initialization/atlanteans/units.lua:1646
 msgctxt "atlanteans_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr " Čas sa predĺži v prípade svahov alebo prekážok po ceste."
+msgstr "Čas sa predĺži v prípade svahov alebo prekážok po ceste."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site:
 #. Woodcutter's House
@@ -4386,7 +4386,7 @@ msgstr "Nosič prinesie jedno vedro plné vody za %s."
 #, lua-format
 msgctxt "atlanteans_building"
 msgid "If the water resource is depleted, the carrier needs %s on average."
-msgstr " Ak je vodný zdroj vyčerpaný, nosič potrebuje v priemere %s."
+msgstr "Ak je vodný zdroj vyčerpaný, nosič potrebuje v priemere %s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Gold
 #. Spinning Mill
@@ -6639,7 +6639,7 @@ msgstr "Táto budova dokáže vyrobiť jednu žulu za %1$s až %2$s, podľa toho
 #: ../../data/tribes/initialization/barbarians/units.lua:1274
 msgctxt "barbarians_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr " Čas sa predĺži v prípade svahov alebo prekážok po ceste."
+msgstr "Čas sa predĺži v prípade svahov alebo prekážok po ceste."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Lumberjack_s
 #. Hut
@@ -6835,7 +6835,7 @@ msgstr "Nosič prinesie jedno vedro plné vody za %s."
 #, lua-format
 msgctxt "barbarians_building"
 msgid "If the water resource is depleted, the carrier needs %s on average."
-msgstr " Ak je vodný zdroj vyčerpaný, nosič potrebuje v priemere %s."
+msgstr "Ak je vodný zdroj vyčerpaný, nosič potrebuje v priemere %s."
 
 #: ../../data/tribes/initialization/barbarians/units.lua:1263
 msgctxt "barbarians_building"
@@ -10807,7 +10807,7 @@ msgstr "Táto budova dokáže vyrobiť jednu žulu za %1$s až %2$s a jeden mram
 #: ../../data/tribes/initialization/empire/units.lua:1422
 msgctxt "empire_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr " Čas sa predĺži v prípade svahov alebo prekážok po ceste."
+msgstr "Čas sa predĺži v prípade svahov alebo prekážok po ceste."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -11013,7 +11013,7 @@ msgstr "Nosič prinesie jedno vedro plné vody za %s."
 #, lua-format
 msgctxt "empire_building"
 msgid "If the water resource is depleted, the carrier needs %s on average."
-msgstr " Ak je vodný zdroj vyčerpaný, nosič potrebuje v priemere %s."
+msgstr "Ak je vodný zdroj vyčerpaný, nosič potrebuje v priemere %s."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -14247,7 +14247,7 @@ msgstr "Táto budova dokáže vyrobiť jednu žulu za %1$s až %2$s, podľa toho
 #: ../../data/tribes/initialization/frisians/units.lua:1777
 msgctxt "frisians_building"
 msgid "In case of slopes or obstacles in the way, the time is increased."
-msgstr " Čas sa predĺži v prípade svahov alebo prekážok po ceste."
+msgstr "Čas sa predĺži v prípade svahov alebo prekážok po ceste."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Woodcutter's
 #. House
@@ -14435,7 +14435,7 @@ msgstr "Nosič prinesie jedno vedro plné vody za %s."
 #, lua-format
 msgctxt "frisians_building"
 msgid "If the water resource is depleted, the carrier needs %s on average."
-msgstr " Ak je vodný zdroj vyčerpaný, nosič potrebuje v priemere %s."
+msgstr "Ak je vodný zdroj vyčerpaný, nosič potrebuje v priemere %s."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Clay Pit
 #: ../../data/tribes/initialization/frisians/units.lua:1683
