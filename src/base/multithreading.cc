@@ -18,9 +18,8 @@
 
 #include "base/multithreading.h"
 
-#include <iostream>
-
 #include <atomic>
+#include <iostream>
 #include <map>
 #include <memory>
 #include <set>
