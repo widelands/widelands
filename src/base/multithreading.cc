@@ -223,11 +223,11 @@ void MutexLock::pop_stay_responsive_function() {
 	assert(!stay_responsive_.empty());
 	assert(!responsiveness_run_mutexes_.empty());
 	uint32_t last_reported = 0;
-	while(!responsiveness_run_mutexes_.back()->try_lock()) {
-	uint32_t now = SDL_GetTicks();
+	while (!responsiveness_run_mutexes_.back()->try_lock()) {
+		uint32_t now = SDL_GetTicks();
 		if (last_reported + 1000 < now) {
-			std::cout << "Trying to pop stay responsive function while it's executing... waiting" <<
-			   std::endl;
+			std::cout << "Trying to pop stay responsive function while it's executing... waiting"
+			          << std::endl;
 			last_reported = now;
 		}
 		SDL_Delay(10);
