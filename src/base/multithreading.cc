@@ -214,6 +214,10 @@ void MutexLock::pop_stay_responsive_function() {
 	stay_responsive_.pop_back();
 }
 
+static std::thread::id prev_self;
+static std::thread::id prev_owner;
+static MutexLock::ID prev_lock = MutexLock::ID::kNone;
+
 MutexLock::MutexLock(const ID i) : id_(i) {
 	if (id_ == ID::kNone) {
 		return;
@@ -239,10 +243,14 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 			if (pair.first == self && pair.second == record.current_owner) {
 				s_mutex_.unlock();  // Must unlock before verb_log_dbg()
 				if (id_ != ID::kLog) {
-					// TODO(tothxa): Rate limit? Modal message boxes spam the log with this.
-					verb_log_dbg("%s skips locking mutex %s owned by wrapping thread %s",
-					             thread_name(self).c_str(), to_string(id_).c_str(),
-					             thread_name(record.current_owner).c_str());
+					if (id_ != prev_lock || self != prev_self || record.current_owner != prev_owner) {
+						prev_lock = id_;
+						prev_self = self;
+						prev_owner = record.current_owner;
+						verb_log_dbg("%s skips locking mutex %s owned by wrapping thread %s",
+						             thread_name(self).c_str(), to_string(id_).c_str(),
+						             thread_name(record.current_owner).c_str());
+					}
 				} else {
 					std::cout << "Skip re-locking Log mutex" << std::endl;
 				}
