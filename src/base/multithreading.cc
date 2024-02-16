@@ -36,13 +36,7 @@ static std::thread::id logic_thread(kNoThread);
 
 // To protect the global mutex list
 std::mutex MutexLock::s_mutex_;
-
-// Protects adding and removing elements of MutexLock::stay_responsive_
 static std::mutex responsiveness_list_mutex_;
-
-// A separate lock for each entry of MutexLock::stay_responsive_ to protect running it
-// TODO(tothxa): Make it a std::pair with the function itself?
-static std::vector<std::unique_ptr<std::mutex>> responsiveness_run_mutexes_;
 
 std::vector<std::function<void()>> MutexLock::stay_responsive_;
 
@@ -212,29 +206,13 @@ constexpr uint32_t kMutexLogicFrameLockInterval = 400;
 
 void MutexLock::push_stay_responsive_function(std::function<void()> fn) {
 	std::lock_guard<std::mutex> guard(responsiveness_list_mutex_);
-	responsiveness_run_mutexes_.emplace_back(new std::mutex);
 	stay_responsive_.emplace_back(fn);
-	assert(responsiveness_run_mutexes_.size() == stay_responsive_.size());
 }
 
 void MutexLock::pop_stay_responsive_function() {
-	std::lock_guard<std::mutex> guard(responsiveness_list_mutex_);
 	assert(!stay_responsive_.empty());
-	assert(!responsiveness_run_mutexes_.empty());
-	uint32_t last_reported = 0;
-	while (!responsiveness_run_mutexes_.back()->try_lock()) {
-		uint32_t now = SDL_GetTicks();
-		if (last_reported + 1000 < now) {
-			std::cout << "Trying to pop stay responsive function while it's executing... waiting"
-			          << std::endl;
-			last_reported = now;
-		}
-		SDL_Delay(10);
-	}
-	responsiveness_run_mutexes_.back()->unlock();
-	responsiveness_run_mutexes_.pop_back();
+	std::lock_guard<std::mutex> guard(responsiveness_list_mutex_);
 	stay_responsive_.pop_back();
-	assert(responsiveness_run_mutexes_.size() == stay_responsive_.size());
 }
 
 MutexLock::MutexLock(const ID i) : id_(i) {
@@ -304,33 +282,11 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 
 		if (now - last_function_call > sleeptime) {
 			{
-				std::mutex* last_responsiveness_run_mutex = nullptr;
-				std::function<void()> last_responsiveness_function;
-				bool can_run = false;
-				{
-					// std::lock_guard<std::mutex> guard(responsiveness_list_mutex_);
-					if (responsiveness_list_mutex_.try_lock()) {
-						if (!stay_responsive_.empty()) {
-							assert(!responsiveness_run_mutexes_.empty());
-							last_responsiveness_run_mutex = responsiveness_run_mutexes_.back().get();
-							last_responsiveness_function = stay_responsive_.back();
-							assert(last_responsiveness_run_mutex != nullptr);
-							can_run = last_responsiveness_run_mutex->try_lock();
-						} else {
-							std::cout << "Trying to re-lock responsiveness_list_mutex_" << std::endl;
-						}
-						responsiveness_list_mutex_.unlock();
-					}
-				}
-				if (can_run) {
-					last_responsiveness_function();
-					last_responsiveness_run_mutex->unlock();
+				std::lock_guard<std::mutex> guard(responsiveness_list_mutex_);
+				if (!stay_responsive_.empty()) {
+					stay_responsive_.back()();
 				} else if (id_ != ID::kLog) {
-					if (last_responsiveness_run_mutex == nullptr) {
-						verb_log_dbg("WARNING: Mutex locking: No responsiveness function set");
-					} else {
-						log_dbg("Acquiring another log while stay responsible function is running");
-					}
+					verb_log_dbg("WARNING: Mutex locking: No responsiveness function set");
 				}
 			}
 
