@@ -13,8 +13,27 @@ run(function()
    create_two_ships()
    port:start_expedition()
    wait_for_message("Expedition")
+
+   local mv = wl.ui.MapView()
+   local pf = port.fields[1]
+   assert_nil(mv.windows.building_window)
+   mv:click(pf)
+   while(mv.windows.building_window == nil) do
+      sleep(100)
+   end
+   local port_window = mv.windows.building_window
+   assert_nil(port_window.tabs.expedition)
+
    port:start_expedition()
+   while(port_window.tabs.expedition_wares_queue == nil) do
+      sleep(100)
+   end
+   port_window.tabs.expedition_wares_queue:click()
+
    wait_for_message("Expedition")
+   assert_nil(port_window.tabs.expedition_wares_queue)
+   port_window:close()
+
    game.desired_speed = 2 * 1000
 
    first_ship.island_explore_direction="ccw"
