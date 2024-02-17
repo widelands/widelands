@@ -2005,42 +2005,42 @@ msgstr[1] "Es fa servir %u complement rellevant:"
 #. * TRANSLATORS: "12 steps northwest of Port1"
 #: ../../src/logic/detected_port_space.cc:52
 msgid "northwest"
-msgstr ""
+msgstr "nord-oest"
 
 #. * TRANSLATORS: "12 steps northeast of Port1"
 #: ../../src/logic/detected_port_space.cc:56
 msgid "northeast"
-msgstr ""
+msgstr "nord-est"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../src/logic/detected_port_space.cc:60
 msgid "southwest"
-msgstr ""
+msgstr "sud-oest"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../src/logic/detected_port_space.cc:64
 msgid "southeast"
-msgstr ""
+msgstr "sud-est"
 
 #. * TRANSLATORS: "12 steps north of Port1"
 #: ../../src/logic/detected_port_space.cc:68
 msgid "north"
-msgstr ""
+msgstr "nord"
 
 #. * TRANSLATORS: "12 steps south of Port1"
 #: ../../src/logic/detected_port_space.cc:72
 msgid "south"
-msgstr ""
+msgstr "sud"
 
 #. * TRANSLATORS: "12 steps west of Port1"
 #: ../../src/logic/detected_port_space.cc:76
 msgid "west"
-msgstr ""
+msgstr "oest"
 
 #. * TRANSLATORS: "12 steps east of Port1"
 #: ../../src/logic/detected_port_space.cc:80
 msgid "east"
-msgstr ""
+msgstr "est"
 
 #: ../../src/logic/detected_port_space.cc:88
 #, c-format
@@ -2055,8 +2055,8 @@ msgstr "S'ha descobert un espai portuari sense propietari %1$s de %2$s"
 msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s of %5$s"
 msgid_plural ""
 "Unowned port space discovered at %1$s by %2$s %3$u steps %4$s of %5$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "S'ha descobert un espai portuari sense propietari a les %1$s per %2$s a %3$u pas al %4$s de %5$s"
+msgstr[1] "S'ha descobert un espai portuari sense propietari a les %1$s per %2$s a %3$u passos al %4$s de %5$s"
 
 #: ../../src/logic/detected_port_space.cc:101
 #, c-format
@@ -2071,8 +2071,8 @@ msgstr "S'ha descobert un espai portuari de %1$s descobert %2$s de %3$s"
 msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s of %6$s"
 msgid_plural ""
 "Port space of %1$s discovered at %2$s by %3$s %4$u steps %5$s of %6$s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "S'ha descobert un espai portuari de %1$s a les %2$s per %3$s a %4$u pas %5$s de %6$s"
+msgstr[1] "S'ha descobert un espai portuari de %1$s a les %2$s per %3$s a %4$u passos al %5$s de %6$s"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northwest.
 #: ../../src/logic/detected_port_space.cc:120
@@ -7335,17 +7335,17 @@ msgstr "S’ha produït un error en el sistema de fitxers."
 #: ../../src/wlapplication.cc:1360
 #, c-format
 msgid "Command line parameter --%s can not use a value"
-msgstr ""
+msgstr "El paràmetre de la línia d'ordres --%s no pot prendre cap valor"
 
 #: ../../src/wlapplication.cc:1365
 #, c-format
 msgid "Empty value of command line parameter --%s"
-msgstr ""
+msgstr "Valor buit del paràmetre de la línia d’ordres --%s"
 
 #: ../../src/wlapplication.cc:1371
 #, c-format
 msgid "Command line parameters --%1$s and --%2$s can not be combined"
-msgstr ""
+msgstr "Els paràmetres de la línia d'ordres --%1$s i --%2$s no es poden combinar"
 
 #: ../../src/wlapplication.cc:1559
 #, c-format

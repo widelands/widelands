@@ -7337,17 +7337,17 @@ msgstr "Dateisysteem-Fehler"
 #: ../../src/wlapplication.cc:1360
 #, c-format
 msgid "Command line parameter --%s can not use a value"
-msgstr ""
+msgstr "Oorderreeg-Angaav --%s kann keenen Weert bruken"
 
 #: ../../src/wlapplication.cc:1365
 #, c-format
 msgid "Empty value of command line parameter --%s"
-msgstr ""
+msgstr "Leger Weert för Oorderreeg-Angaav --%s"
 
 #: ../../src/wlapplication.cc:1371
 #, c-format
 msgid "Command line parameters --%1$s and --%2$s can not be combined"
-msgstr ""
+msgstr "Oorderreeg-Angaven --%1$s un --%2$s könen nich tosamen bruukt worden"
 
 #: ../../src/wlapplication.cc:1559
 #, c-format
