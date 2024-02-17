@@ -18,6 +18,8 @@
 
 #include "scripting/lua_ui.h"
 
+#include <memory>
+
 #include <SDL_mouse.h>
 
 #include "base/log.h"
