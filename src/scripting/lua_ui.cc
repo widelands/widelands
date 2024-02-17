@@ -4085,7 +4085,8 @@ static int L_show_messagebox(lua_State* L) {
 	   get_egbase(L).get_ibase(), UI::WindowStyle::kWui, title, text,
 	   allow_cancel ? UI::WLMessageBox::MBoxType::kOkCancel : UI::WLMessageBox::MBoxType::kOk));
 	UI::Panel::Returncodes result;
-	NoteThreadSafeFunction::instantiate([&result, &m]() { result = m->run<UI::Panel::Returncodes>(); }, true);
+	NoteThreadSafeFunction::instantiate(
+	   [&result, &m]() { result = m->run<UI::Panel::Returncodes>(); }, true);
 
 	lua_pushboolean(L, static_cast<int>(result == UI::Panel::Returncodes::kOk));
 	return 1;
