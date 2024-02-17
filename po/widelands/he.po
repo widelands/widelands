@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-15 02:28+0000\n"
+"POT-Creation-Date: 2024-02-17 02:25+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: GunChleoc, 2015\n"
 "Language-Team: Hebrew (http://app.transifex.com/widelands/widelands/language/he/)\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: he\n"
-"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;\n"
+"Plural-Forms: nplurals=3; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;\n"
 
 #. TRANSLATORS: Help text - Probability to grow for an immovable
 #: ../../data/scripting/help.lua:110
@@ -1205,7 +1205,6 @@ msgid_plural "%u Players"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:477
 msgid "Suggested Teams:"
@@ -1944,7 +1943,6 @@ msgid_plural "%1$u add-ons with wrong version: %2$s"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../src/logic/addons.cc:239
 #, c-format
@@ -1953,7 +1951,6 @@ msgid_plural "%1$u missing add-ons: %2$s"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../src/logic/addons.cc:247
 #, c-format
@@ -1977,7 +1974,6 @@ msgid_plural "%u missing add-ons"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../src/logic/addons.cc:260
 #, c-format
@@ -1986,7 +1982,6 @@ msgid_plural "%u add-ons with wrong version"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. * TRANSLATORS: This map or savegame uses no add-ons
 #: ../../src/logic/addons.cc:271
@@ -2009,7 +2004,6 @@ msgid_plural "%u game-relevant add-ons in use:"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. * TRANSLATORS: "12 steps northwest of Port1"
 #: ../../src/logic/detected_port_space.cc:52
@@ -2067,7 +2061,6 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../src/logic/detected_port_space.cc:101
 #, c-format
@@ -2085,7 +2078,6 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. * TRANSLATORS: This is an abbreviated direction: Northwest.
 #: ../../src/logic/detected_port_space.cc:120
@@ -2493,7 +2485,6 @@ msgid_plural "%s are missing"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
@@ -2505,7 +2496,6 @@ msgid_plural "Produced %s"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
@@ -2517,7 +2507,6 @@ msgid_plural "Recruited %s"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:1846
 msgid "No soldier found for this training level!"
@@ -3337,7 +3326,6 @@ msgid_plural "%u add-on mismatches detected:\n"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../src/network/gameclient.cc:816
 #, c-format
@@ -3495,7 +3483,6 @@ msgid_plural "%li seconds"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../src/network/internet_gaming.cc:105
 msgid ""
@@ -3569,7 +3556,6 @@ msgid_plural "Server time offset is %d seconds."
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../src/network/internet_gaming.cc:509
 #, c-format
@@ -3912,7 +3898,7 @@ msgstr ""
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1364
+#: ../../src/scripting/lua_game.cc:1370
 msgid "%1% (%2%)"
 msgstr ""
 
@@ -4038,7 +4024,6 @@ msgid_plural "%d minutes"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. * TRANSLATORS: The current value of a spinbox
 #: ../../src/ui_basic/spinbox.cc:488 ../../src/ui_basic/spinbox.cc:539
@@ -4048,7 +4033,6 @@ msgid_plural "%d minutes"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. * TRANSLATORS: "Increase/Decrease the value by <n> hours"
 #. You may want to treat this as "by <n> hours", depending on how you
@@ -4061,7 +4045,6 @@ msgid_plural "%d hours"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. * TRANSLATORS: The current value of a spinbox
 #: ../../src/ui_basic/spinbox.cc:501 ../../src/ui_basic/spinbox.cc:527
@@ -4071,7 +4054,6 @@ msgid_plural "%d hours"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. * TRANSLATORS: "Increase/Decrease the value by X hours and Y minutes"
 #. You may want to treat this as "by X hours and Y minutes", depending on how
@@ -4098,7 +4080,6 @@ msgid_plural "%d hours"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. * TRANSLATORS: ..
 #. The minutes part of "Increase/Decrease the value by X hours and Y minutes"
@@ -4112,7 +4093,6 @@ msgid_plural "%d minutes"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. * TRANSLATORS: "Increase/Decrease the value by <n> weeks"
 #. You may want to treat this as "by <n> weeks", depending on how you
@@ -4125,7 +4105,6 @@ msgid_plural "%d weeks"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. * TRANSLATORS: The current value of a spinbox
 #: ../../src/ui_basic/spinbox.cc:552
@@ -4135,7 +4114,6 @@ msgid_plural "%d weeks"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. * TRANSLATORS: "Increase/Decrease the value by <n> pixels"
 #. You may want to treat this as "by <n> pixels", depending on how you
@@ -4148,7 +4126,6 @@ msgid_plural "%d pixels"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. * TRANSLATORS: The current value of a spinbox
 #: ../../src/ui_basic/spinbox.cc:561
@@ -4158,7 +4135,6 @@ msgid_plural "%d pixels"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. * TRANSLATORS: "Increase/Decrease the value by <n> fields"
 #. You may want to treat this as "by <n> fields", depending on how you
@@ -4171,7 +4147,6 @@ msgid_plural "%d fields"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. * TRANSLATORS: The current value of a spinbox
 #: ../../src/ui_basic/spinbox.cc:570
@@ -4181,7 +4156,6 @@ msgid_plural "%d fields"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. * TRANSLATORS: "Increase/Decrease the value by <n>%"
 #. You may want to treat this as "by <n>%", depending on how you
@@ -4594,7 +4568,6 @@ msgid_plural "Are you certain that you want to upgrade these %u add-ons?"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:655
 #, c-format
@@ -4740,7 +4713,6 @@ msgid_plural "Upgrade the following %u add-ons:"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1169
 #, c-format
@@ -4784,7 +4756,6 @@ msgid_plural "%u Dependency Errors"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1280
 msgid ""
@@ -4983,7 +4954,6 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:460
 #: ../../src/ui_fsmenu/addons/packager.cc:487
@@ -5011,7 +4981,6 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:491
 msgid "Discard Changes"
@@ -5032,7 +5001,6 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:516
 msgid ""
@@ -5497,7 +5465,6 @@ msgid_plural "Average rating: %1$.3f (%2$u votes)"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:870
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:501
@@ -5515,7 +5482,6 @@ msgid_plural "%u comments:"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:900
 #, c-format
@@ -5715,7 +5681,6 @@ msgid_plural "Total size: %u bytes"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:496
 #, c-format
@@ -5724,7 +5689,6 @@ msgid_plural "%u downloads"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:502
 #, c-format
@@ -5733,7 +5697,6 @@ msgid_plural "%u comments"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:504
 #, c-format
@@ -5742,7 +5705,6 @@ msgid_plural "%u screenshots"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:41
 #, c-format
@@ -8519,7 +8481,6 @@ msgid_plural "%u ships"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. * TRANSLATORS: Number of soldiers that should attack. Used in the attack
 #. window.
@@ -8531,7 +8492,6 @@ msgid_plural "%u soldiers"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../src/wui/attack_window.cc:368
 msgid "Number of ships"
@@ -9425,7 +9385,6 @@ msgid_plural "Restore the selected %d messages"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:638
@@ -9443,7 +9402,6 @@ msgid_plural "Archive the selected %d messages"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:653
@@ -9530,7 +9488,6 @@ msgid_plural "%d files"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. * TRANSLATORS: %1% = number of selected directories, %2% = number of
 #. selected files
@@ -9540,7 +9497,6 @@ msgid_plural "Selected %1% directories and %2%:"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../src/wui/gamedetails.cc:137
 msgid "Directory Name:"
@@ -9958,7 +9914,6 @@ msgid_plural "%u new messages"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../src/wui/interactive_player.cc:978
 msgid "Fastplace Shortcuts"
@@ -10222,7 +10177,6 @@ msgid_plural "%1%d"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. * TRANSLATORS: hour(s). Keep this as short as possible. Used in statistics.
 #: ../../src/wui/plot_area.cc:105
@@ -10232,7 +10186,6 @@ msgid_plural "%1%h"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. * TRANSLATORS: minute(s). Keep this as short as possible. Used in
 #. statistics.
@@ -10243,7 +10196,6 @@ msgid_plural "%1%m"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
 #: ../../src/wui/plot_area.cc:121
@@ -10381,7 +10333,6 @@ msgid_plural "Do you really want to delete these %d games?"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../src/wui/savegamedeleter.cc:96
 msgid "Error Deleting File!"
@@ -10405,7 +10356,6 @@ msgid_plural "%d games could not be deleted."
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../src/wui/savegamedeleter.cc:124
 msgid "Do you really want to delete this replay?"
@@ -10420,7 +10370,6 @@ msgid_plural "Do you really want to delete these %d replays?"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../src/wui/savegamedeleter.cc:137
 msgid "The replay could not be deleted."
@@ -10436,7 +10385,6 @@ msgid_plural "%d replays could not be deleted."
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
@@ -10658,7 +10606,6 @@ msgid_plural "Seafaring Statistics (%u Ships)"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:568
@@ -10709,7 +10656,6 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../src/wui/shipwindow.cc:111
 msgid "Scout towards the north west"
