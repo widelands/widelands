@@ -39,7 +39,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-15 02:28+0000\n"
+"POT-Creation-Date: 2024-02-17 02:25+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2024\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
@@ -3916,7 +3916,7 @@ msgstr "Widelands konnte nicht auf das lokale Netzwerk zugreifen. Möglicherweis
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1364
+#: ../../src/scripting/lua_game.cc:1370
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -6375,7 +6375,7 @@ msgstr "Sieh dir die Aufzeichnung eines vergangenen Spiels an"
 
 #: ../../src/ui_fsmenu/main.cc:464
 msgid "Watch last saved replay"
-msgstr ""
+msgstr "Letzte gespeicherte Aufzeichnung wiedergeben"
 
 #: ../../src/ui_fsmenu/main.cc:490
 msgid "Single Player…"
@@ -6391,7 +6391,7 @@ msgstr "Editor …"
 
 #: ../../src/ui_fsmenu/main.cc:493
 msgid "Watch Replay…"
-msgstr ""
+msgstr "Aufzeichnung wiedergeben…"
 
 #: ../../src/ui_fsmenu/main.cc:495
 msgid "Begin or load a single-player campaign or free game"
@@ -6407,7 +6407,7 @@ msgstr "Starte den Karteneditor"
 
 #: ../../src/ui_fsmenu/main.cc:504
 msgid "Watch again a recorded earlier game"
-msgstr ""
+msgstr "Ein früher aufgezeichnetes Spiel erneut wiedergeben"
 
 #: ../../src/ui_fsmenu/main.cc:507 ../../src/wlapplication_options.cc:333
 msgid "Add-Ons"
@@ -7332,19 +7332,19 @@ msgstr "Alle Markierungen aufheben"
 
 #: ../../src/wlapplication.cc:832
 msgid "Widelands could not find the last edited map."
-msgstr ""
+msgstr "Widelands konnte die letzte editierte Karte nicht finden."
 
 #: ../../src/wlapplication.cc:836
 msgid "No Last Edited Map"
-msgstr ""
+msgstr "Keine letzte editierte Karte"
 
 #: ../../src/wlapplication.cc:867
 msgid "No last saved replay."
-msgstr ""
+msgstr "Keine letzte gespeicherte Aufzeichnung."
 
 #: ../../src/wlapplication.cc:869
 msgid "No last saved game."
-msgstr ""
+msgstr "Kein letztes gespeichertes Spiel."
 
 #: ../../src/wlapplication.cc:879
 #, c-format
@@ -7364,17 +7364,17 @@ msgstr "Dateisystemfehler"
 #: ../../src/wlapplication.cc:1360
 #, c-format
 msgid "Command line parameter --%s can not use a value"
-msgstr ""
+msgstr "Der Kommandozeilenparameter --%s kann keine Werte verarbeiten"
 
 #: ../../src/wlapplication.cc:1365
 #, c-format
 msgid "Empty value of command line parameter --%s"
-msgstr ""
+msgstr "Es fehlt ein Wert für den Kommandozeilenparameter --%s"
 
 #: ../../src/wlapplication.cc:1371
 #, c-format
 msgid "Command line parameters --%1$s and --%2$s can not be combined"
-msgstr ""
+msgstr "Die Kommandozeilenparameter --%1$s und --%2$s können nicht kombiniert werden"
 
 #: ../../src/wlapplication.cc:1559
 #, c-format
@@ -7634,7 +7634,7 @@ msgstr "Aufzeichnung wiedergeben"
 
 #: ../../src/wlapplication_options.cc:268
 msgid "Watch Latest Replay"
-msgstr ""
+msgstr "Letzte Aufzeichnung wiedergeben"
 
 #: ../../src/wlapplication_options.cc:287
 msgid "Singleplayer"

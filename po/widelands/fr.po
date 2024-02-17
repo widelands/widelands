@@ -29,7 +29,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-15 02:28+0000\n"
+"POT-Creation-Date: 2024-02-17 02:25+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Arthinet Balika, 2023\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
@@ -3920,7 +3920,7 @@ msgstr "Widelands n'a pas été capable d'utiliser le réseau local. Peut être 
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1364
+#: ../../src/scripting/lua_game.cc:1370
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
