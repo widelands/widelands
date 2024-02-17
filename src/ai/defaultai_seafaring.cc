@@ -134,6 +134,7 @@ bool DefaultAI::marine_main_decisions(const Time& /* gametime */) {
 	ports_finished_count = 0;
 	expeditions_in_prep = 0;
 	expeditions_ready = 0;
+	warships_in_prep = 0;
 
 	BuildingObserver& port_obs = get_building_observer(BuildingAttribute::kPort);
 	ports_finished_count = port_obs.cnt_built;
@@ -141,11 +142,18 @@ bool DefaultAI::marine_main_decisions(const Time& /* gametime */) {
 	// goes over all warehouses (these includes ports)
 	for (const PortSiteObserver& p_obs : portsites) {
 		if (const Widelands::PortDock* pd = p_obs.site->get_portdock()) {
-			if (pd->expedition_started()) {
-				++expeditions_in_prep;
-			}
-			if (pd->is_expedition_ready()) {
-				++expeditions_ready;
+			if (pd->expedition_state() == Widelands::PortDock::ExpeditionState::kStarted) {
+				if (pd->expedition_type() == Widelands::ExpeditionType::kExpedition) {
+					++expeditions_in_prep;
+				} else {
+					++warships_in_prep;
+				}
+			} else if (pd->expedition_state() == Widelands::PortDock::ExpeditionState::kReady) {
+				if (pd->expedition_type() == Widelands::ExpeditionType::kExpedition) {
+					++expeditions_ready;
+				} else {
+					++warships_in_prep;
+				}
 			}
 		}
 	}
@@ -175,7 +183,7 @@ void DefaultAI::evaluate_fleet() {
 
 	const uint32_t warships_target = ports_finished_count * kWarshipsPerPort;
 	const bool warship_shortage =
-	   game().naval_warfare_allowed() && (warships_target > warships_count);
+	   game().naval_warfare_allowed() && (warships_target > warships_count + warships_in_prep);
 
 	const bool consider_expedition =
 	   ports_count > 0 && !persistent_data->no_more_expeditions &&
@@ -368,6 +376,14 @@ void DefaultAI::manage_ports() {
 			game().send_player_start_or_cancel_expedition(
 				   *p_obs.site, Widelands::ExpeditionType::kExpedition);
 			start_expedition = false;
+		} else if (warship_needed) {
+			verb_log_dbg_time(game().get_gametime(),
+			                  "  %1d: Starting preparation for warship refit in port at %3dx%3d\n",
+			                  player_number(), p_obs.site->get_position().x,
+			                  p_obs.site->get_position().y);
+			game().send_player_start_or_cancel_expedition(
+				   *p_obs.site, Widelands::ExpeditionType::kRefitToWarship);
+			warship_needed = false;
 		}
 
 		const Widelands::Quantity current_garrison = p_obs.site->get_desired_soldier_count();
@@ -469,20 +485,7 @@ bool DefaultAI::check_ships(const Time& gametime) {
 			}
 		} else {
 			if (!so.ship->is_refitting()) {
-				if (warship_needed && !so.ship->state_is_expedition()) {
-					verb_log_dbg_time(gametime, "AI %d: Refit ship %s to warship",
-					                  player_->player_number(), so.ship->get_shipname().c_str());
-					game().send_player_refit_ship(*so.ship, Widelands::ShipType::kWarship);
-					// transport ships remember soldier capacity
-					if (so.ship->get_warship_soldier_capacity() > 0) {
-						game().send_player_warship_command(
-						   *so.ship, Widelands::WarshipCommand::kSetCapacity, {0u});
-					}
-					warship_needed = false;
-					++warships_count;
-				} else {
-					++tradeships_count;
-				}
+				++tradeships_count;
 			} else {
 				++warships_count;
 			}
@@ -810,7 +813,7 @@ void DefaultAI::warship_management(ShipObserver& so) {
 
 			verb_log_dbg_time(gametime, "AI %d: Refit warship %s to trade ship",
 			                  player_->player_number(), so.ship->get_shipname().c_str());
-			game().send_player_refit_ship(*so.ship, Widelands::ShipType::kTransport);
+			game().send_player_refit_to_transport_ship(*so.ship);
 			tradeship_refit_needed = false;
 			--warships_count;
 			++tradeships_count;
