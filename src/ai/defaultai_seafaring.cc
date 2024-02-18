@@ -374,7 +374,7 @@ void DefaultAI::manage_ports() {
 			                  player_number(), p_obs.site->get_position().x,
 			                  p_obs.site->get_position().y);
 			game().send_player_start_or_cancel_expedition(
-				   *p_obs.site, Widelands::ExpeditionType::kExpedition);
+			   *p_obs.site, Widelands::ExpeditionType::kExpedition);
 			start_expedition = false;
 		} else if (warship_needed) {
 			verb_log_dbg_time(game().get_gametime(),
@@ -382,7 +382,7 @@ void DefaultAI::manage_ports() {
 			                  player_number(), p_obs.site->get_position().x,
 			                  p_obs.site->get_position().y);
 			game().send_player_start_or_cancel_expedition(
-				   *p_obs.site, Widelands::ExpeditionType::kRefitToWarship);
+			   *p_obs.site, Widelands::ExpeditionType::kRefitToWarship);
 			warship_needed = false;
 		}
 
