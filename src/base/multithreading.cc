@@ -260,10 +260,9 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 						if (!same || (now > last_borrow_time + 1000)) {
 							if (borrow_counter > 1) {
 								// Only log as repeated if more than 1 occurences before timing out
-								verb_log_dbg(
-								   "%s skipped locking mutex %s %u times in %ums",
-								   thread_name(prev_self).c_str(), to_string(prev_lock).c_str(),
-								   borrow_counter, now - last_borrow_time);
+								verb_log_dbg("%s skipped locking mutex %s %u times in %ums",
+								             thread_name(prev_self).c_str(), to_string(prev_lock).c_str(),
+								             borrow_counter, now - last_borrow_time);
 							} else {
 								// Different or happened a long time ago
 								verb_log_dbg("%s skips locking mutex %s owned by wrapping thread %s",
