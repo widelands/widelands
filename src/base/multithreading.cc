@@ -216,9 +216,12 @@ void MutexLock::pop_stay_responsive_function() {
 	stay_responsive_.pop_back();
 }
 
+// Only used for verbose logging of borrowing
 static std::thread::id prev_self;
 static std::thread::id prev_owner;
 static MutexLock::ID prev_lock = MutexLock::ID::kNone;
+static uint32_t last_borrow_time = 0;
+static uint32_t borrow_counter = 0;
 
 MutexLock::MutexLock(const ID i) : id_(i) {
 	if (id_ == ID::kNone) {
@@ -244,18 +247,40 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 		for (const auto& pair : acting_as_another_thread) {
 			if (pair.first == self && pair.second == record.current_owner) {
 				s_mutex_.unlock();  // Must unlock before verb_log_dbg()
-				if (id_ != ID::kLog) {
-					if (id_ != prev_lock || self != prev_self || record.current_owner != prev_owner) {
-						prev_lock = id_;
-						prev_self = self;
-						prev_owner = record.current_owner;
-						verb_log_dbg("%s skips locking mutex %s owned by wrapping thread %s",
-						             thread_name(self).c_str(), to_string(id_).c_str(),
-						             thread_name(record.current_owner).c_str());
+
+				if (g_verbose) {  // All this is only used for verb_log_dbg() or equivalent std:cout <<
+					if (id_ != ID::kLog) {
+						const uint32_t now = SDL_GetTicks();
+						const bool same =
+						   id_ == prev_lock && self == prev_self && record.current_owner == prev_owner;
+						if (same) {
+							++borrow_counter;
+						}
+						// once per second, otherwise modal windows spam the log
+						if (!same || (now > last_borrow_time + 1000)) {
+							if (borrow_counter > 1) {
+								// Only log as repeated if more than 1 occurences before timing out
+								verb_log_dbg(
+								   "%s skipped locking mutex %s %u times in %ums",
+								   thread_name(prev_self).c_str(), to_string(prev_lock).c_str(),
+								   borrow_counter, now - last_borrow_time);
+							} else {
+								// Different or happened a long time ago
+								verb_log_dbg("%s skips locking mutex %s owned by wrapping thread %s",
+								             thread_name(self).c_str(), to_string(id_).c_str(),
+								             thread_name(record.current_owner).c_str());
+							}
+							prev_lock = id_;
+							prev_self = self;
+							prev_owner = record.current_owner;
+							last_borrow_time = now;
+							borrow_counter = 0;
+						}
+					} else {
+						std::cout << "Skip re-locking Log mutex" << std::endl;
 					}
-				} else {
-					std::cout << "Skip re-locking Log mutex" << std::endl;
-				}
+				}  // end of verb_log_dbg() stuff
+
 				id_ = ID::kNone;
 				return;
 			}
