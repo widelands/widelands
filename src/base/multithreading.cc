@@ -271,15 +271,15 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 		if (id_ == ID::kLog) {
 			// Above only checked borrowing situations. Here we check for the same thread already
 			// waiting somewhere up the stack. Can happen because of stay responsive functions.
-			std::cout << thread_name(self) << " is already waiting for mutex kLog, skip locking" <<
-			   std::endl;
+			std::cout << thread_name(self) << " is already waiting for mutex kLog, skip locking"
+			          << std::endl;
 			s_mutex_.unlock();
 			id_ = ID::kNone;
 			return;
 		}
 
-		std::cout << thread_name(self) << " is already waiting for mutex " << to_string(id_) <<
-		   std::endl;
+		std::cout << thread_name(self) << " is already waiting for mutex " << to_string(id_)
+		          << std::endl;
 	}
 
 	assert(record.waiting_threads.count(self) == 0);
@@ -302,10 +302,10 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 			if (id_ != ID::kLog) {
 				verb_log_dbg("WARNING: %s locking mutex %s, already waiting for %d ms",
 				             thread_name(self).c_str(), to_string(id_).c_str(), now - start_time);
-			} else if(g_verbose) {
+			} else if (g_verbose) {
 				// not including format() for the time info
-				std::cout << "WARNING: " << thread_name(self) << " locking mutex Log still waiting" <<
-				   std::endl;
+				std::cout << "WARNING: " << thread_name(self) << " locking mutex Log still waiting"
+				          << std::endl;
 			}
 		}
 
