@@ -550,7 +550,9 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type,
 			quantity_global += stock;
 
 			if (flag != nullptr) {
-				const StockPolicy policy = type() == wwWARE ? wh->get_ware_policy(ware_or_worker_type) : wh->get_worker_policy(ware_or_worker_type);
+				const StockPolicy policy = type() == wwWARE ?
+                                          wh->get_ware_policy(ware_or_worker_type) :
+                                          wh->get_worker_policy(ware_or_worker_type);
 				if (flag->get_district_center(type()) == wh->base_flag().get_district_center(type())) {
 					quantity_district += stock;
 
