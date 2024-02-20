@@ -4561,7 +4561,7 @@ int LuaEconomy::set_target_quantity(lua_State* L) {
 int LuaEconomy::needs(lua_State* L) {
 	const std::string wname = luaL_checkstring(L, 2);
 	Widelands::Flag* flag = nullptr;
-	if (!lua_isnil(L, 3)) {
+	if (lua_gettop(L) > 2) {
 		flag = (*get_user_class<LuaMaps::LuaFlag>(L, 3))->get(L, get_egbase(L));
 		if (flag->get_economy(get()->type()) != get()) {
 			report_error(L, "Flag does not belong to this economy.");
