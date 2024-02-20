@@ -5,6 +5,7 @@
 # Translators:
 # Pawel <pawcio980@gmail.com>, 2022
 # Damian Hennek, 2023
+# Karol Zygmunt, 2024
 # 
 msgid ""
 msgstr ""
@@ -12,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
-"Last-Translator: Damian Hennek, 2023\n"
+"Last-Translator: Karol Zygmunt, 2024\n"
 "Language-Team: Polish (https://app.transifex.com/widelands/teams/35159/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -236,6 +237,9 @@ msgid ""
 "Törver, that is rapidly building up its armies. They may soon have become "
 "too strong to be defeated."
 msgstr ""
+"Od północy jesteśmy zagrożeni przez wojownicze plemię pod wodzą Törvera, "
+"który szybko formuje swoje armie. Niedługo mogą stać się zbyt silni, żeby "
+"mogli zostać pokonani."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
 msgid ""
@@ -285,6 +289,10 @@ msgid ""
 " our rival in the North is still stronger than all our armies combined. We "
 "should avoid a conflict until we are able to defeat them."
 msgstr ""
+"Panie, mimo, że nasi żołnierze stanęli by odważnie z każdym wrogiem, nasz "
+"rywal na północy jest nadal silniejszy niż wszystkie nasze armie razem "
+"wzięte. Powinniśmy unikać z nim kontaktu dopóki nie będziemy w stanie go "
+"pokonać."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:30
 msgid ""
@@ -296,7 +304,7 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
 msgid "Peril from the North"
-msgstr ""
+msgstr "Peril z Północy"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:36
 msgid ""
@@ -348,6 +356,9 @@ msgid ""
 "their excellent access to the adjacent great lake. A port in the North will "
 "give us better opportunities to have contact with other tribes."
 msgstr ""
+"Panie! Teraz gdy podbiliśmy ziemie Törvera możemy użyć wspaniałego dojścia "
+"do przylegającego wielkiego jeziora. Port na północy da nam lepsze "
+"możliwości do kontaktu w innymi plemieniami."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
 msgid ""
@@ -421,6 +432,10 @@ msgid ""
 "continue. If you bring enough shovels to the new warehouse then volunteers "
 "will remove the swamps."
 msgstr ""
+"Panie! Sezon deszczowy spowodował utworzenie się bagnisk wzdłuż strumienia "
+"na wschodzie poprzez które nie możemy przejść. Musimy je usunąć zanim "
+"będziemy mogli iść dalej. Jeśli przetransportujesz odpowiednią ilość łopat "
+"do nowego magazynu wtedy ochotnicy usuną bagniska."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
 msgid ""
@@ -428,6 +443,10 @@ msgid ""
 "will not have removed the swamps before the next wet season. If you bring "
 "more shovels to the new warehouse then more volunteers will join in."
 msgstr ""
+"Panie! Wszystkie łopaty zostały przekazane ale jeśli będziemy kontynuować w "
+"tym tempie nie zdążymy usunąć bagien przed następnym sezonem deszczowym. "
+"Jeśli przetransportujesz więcej łopat do nowego magazynu więcej ochotników "
+"dołączy do pomocy."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
 msgid ""

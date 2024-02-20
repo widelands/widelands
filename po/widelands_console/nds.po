@@ -220,7 +220,7 @@ msgstr "Dateien nich as Binäär-Zip-Archiven sekern."
 
 #: ../../src/wlapplication_messages.cc:150
 msgid "Save files as binary zip archives."
-msgstr ""
+msgstr "Dateien as Binäär-Zip-Archiven sekern."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -373,11 +373,11 @@ msgstr "Biller-Instellens:"
 
 #: ../../src/wlapplication_messages.cc:214
 msgid "Use the whole display for the game screen."
-msgstr ""
+msgstr "De hele Billschirm för dat Speel bruken."
 
 #: ../../src/wlapplication_messages.cc:216
 msgid "Start the game in a maximized window."
-msgstr ""
+msgstr "Dat Speel in eenem ganz groten Fenster starten."
 
 #. * TRANSLATORS: A placeholder for window width
 #: ../../src/wlapplication_messages.cc:219
