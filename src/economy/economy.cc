@@ -531,6 +531,9 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type,
 			target_district = 0;
 		}
 
+		bool this_district_has_normal = false;
+		bool this_district_has_prefer = false;
+		bool other_district_has_prefer = false;
 		Quantity quantity_global = 0;
 		Quantity quantity_district = 0;
 		for (const Warehouse* wh : warehouses_) {
@@ -547,21 +550,38 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type,
 			quantity_global += stock;
 
 			if (flag != nullptr) {
+				const StockPolicy policy = type() == wwWARE ? wh->get_ware_policy(ware_or_worker_type) : wh->get_worker_policy(ware_or_worker_type);
 				if (flag->get_district_center(type()) == wh->base_flag().get_district_center(type())) {
 					quantity_district += stock;
+
+					this_district_has_normal |= policy == StockPolicy::kNormal;
+					this_district_has_prefer |= policy == StockPolicy::kPrefer;
+
 					if (quantity_district >= target_district && quantity_global >= target_global) {
 						// If a district is specified, the ware is needed if the district lacks it
 						// even if the global stock is above target.
 						// If the global stock is below target we also need it.
 						return false;
 					}
+				} else {
+					other_district_has_prefer |= policy == StockPolicy::kPrefer;
 				}
 			} else if (quantity_global >= target_global) {
 				return false;
 			}
 		}
 
-		return true;
+		if (flag != nullptr && quantity_global >= target_global) {
+			// We only need the ware locally but not globally. But...
+			if (!this_district_has_normal && !this_district_has_prefer) {
+				return false;  // we can't store it, so we don't need it.
+			}
+			if (other_district_has_prefer && !this_district_has_prefer) {
+				return false;  // another district would take it all.
+			}
+		}
+
+		return true;  // Ware is needed globally or locally.
 	}
 
 	// Target quantity is set to 0, we need to check if there is an open request.
