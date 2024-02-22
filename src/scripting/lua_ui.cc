@@ -667,7 +667,8 @@ int LuaPanel::get_child(lua_State* L) {
              * ``"replacements"``: **Optional**. An array of tables with keys ``"value"`` and
                ``"replacement"``. When the spinbox's value is equal to any replaced value,
                the replacement string is displayed instead of the value.
-             * ``"on_changed"``: **Optional**. Callback code to run when the spinbox's value changes.
+             * ``"on_changed"``: **Optional**. Callback code to run when the spinbox's value
+   changes.
 
            * Properties for normal spinboxes (forbidden with ``"values"``):
 
@@ -1730,7 +1731,7 @@ UI::Panel* LuaPanel::do_create_child_spinbox(lua_State* L, UI::Panel* parent) {
 	int32_t step_size_small = 1;
 	int32_t step_size_big = 0;
 	UI::SpinBox::Units units;
-   UI::SpinBox::Type sb_type = UI::SpinBox::Type::kSmall;
+	UI::SpinBox::Type sb_type = UI::SpinBox::Type::kSmall;
 
 	if (value_list.empty()) {
 
@@ -1794,9 +1795,9 @@ UI::Panel* LuaPanel::do_create_child_spinbox(lua_State* L, UI::Panel* parent) {
 		report_error(L, "Spinbox initial value out of range");
 	}
 
-	UI::SpinBox* spinbox = new UI::SpinBox(
-	   parent, name, x, y, w, unit_w, val, val_min, val_max, UI::PanelStyle::kWui, label, units,
-	   sb_type, step_size_small, step_size_big);
+	UI::SpinBox* spinbox =
+	   new UI::SpinBox(parent, name, x, y, w, unit_w, val, val_min, val_max, UI::PanelStyle::kWui,
+	                   label, units, sb_type, step_size_small, step_size_big);
 
 	if (!value_list.empty()) {
 		spinbox->set_value_list(value_list);
