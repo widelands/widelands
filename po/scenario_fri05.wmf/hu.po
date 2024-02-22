@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2024 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Tóth András <txa-dev@posteo.hu>, 2024
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2023-01-04 20:43+0000\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2024\n"
 "Language-Team: Hungarian (https://app.transifex.com/widelands/teams/35159/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,7 +22,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../data/campaigns/fri05.wmf/scripting/init.lua:46
 msgid "Note"
-msgstr ""
+msgstr "Megjegyzés"
 
 #: ../../data/campaigns/fri05.wmf/scripting/init.lua:47
 msgid ""
@@ -26,64 +30,71 @@ msgid ""
 "this scenario, but you will be at a disadvantage. I recommend that you "
 "complete the previous scenario first and then restart this mission."
 msgstr ""
+"Úgy tűnik, hogy nem fejezted be az előző küldetést. Így is játszhatod ezt a "
+"küldetést, de hátrányban leszel. Javaslom, hogy először fejezd be az előző "
+"küldetést, és utána kezdd újra ezt."
 
 #: ../../data/campaigns/fri05.wmf/scripting/init_p1.lua:2978
 #: ../../data/campaigns/fri05.wmf/scripting/tribes/helgoland/init.lua:7
 msgid "Helgoland"
-msgstr ""
+msgstr "Helgoland"
 
 #. TRANSLATORS: This Danish ship is named after the Capital of Denmark
 #: ../../data/campaigns/fri05.wmf/scripting/init_p2.lua:13
 msgid "København"
-msgstr ""
+msgstr "Koppenhága"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:34
 msgid "%1$d× %2$s"
-msgstr ""
+msgstr "%1$d× %2$s"
 
 #. TRANSLATORS: The placeholders are ware lists in a trade description, e.g.
 #. "2× Fish and 1× Honey → 1× Granite"
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:41
 msgid "%1$s → %2$s"
-msgstr ""
+msgstr "%1$s → %2$s"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:45
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:47
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:204
 msgid "Trade"
-msgstr ""
+msgstr "Kereskedelem"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:48
 msgid ""
 "You can not mine resources or quarry rocks on this island. Instead, you can "
 "trade local produce against other types of wares."
 msgstr ""
+"Ezen a szigeten nem tudsz bányászni és követ fejteni. Ehelyett a helyi "
+"termékeket tudod elcserélni más árukra."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:49
 msgid ""
 "Any wares stored in a port will be traded. The trade prices are indicated by"
 " the following chart."
 msgstr ""
+"Minden, a kikötőidben tárolt árut elcserélnek. Az áruk ellenértékeit az "
+"alábbi táblázat tartalmazza:"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:56
 msgid "Defeat the invaders"
-msgstr ""
+msgstr "Az ellenség legyőzése"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:58
 msgid "Defeat Atterdag’s Forces."
-msgstr ""
+msgstr "Győzd le Atterdag seregeit!"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:59
 msgid "Destroy all the enemy’s buildings."
-msgstr ""
+msgstr "Rombold le az ellenség összes épületét!"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:65
 msgid "Block the bottleneck"
-msgstr ""
+msgstr "A szűkület lezárása"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:67
 msgid "Block the Bottleneck."
-msgstr ""
+msgstr "Zárd le a szűkületet!"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:68
 msgid ""
@@ -91,48 +102,51 @@ msgid ""
 "military buildings, so the enemy cannot get past before you’re ready for the"
 " attack."
 msgstr ""
+"Védd meg a fennsíktól keletre lévő szűk átjárót néhány nagy katonai "
+"építménnyel, hogy az ellenség ne juthasson át, mielőtt te készen állnál a "
+"támadásra."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:74
 msgid "Wood production"
-msgstr ""
+msgstr "Fa termelés"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:76
 msgid "Secure your Wood Production."
-msgstr ""
+msgstr "Biztosítsd a fa ellátásodat!"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:77
 msgid "Build at least three woodcutter’s houses."
-msgstr ""
+msgstr "Építs legalább három favágóházat!"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:78
 msgid "Build at least four forester’s houses."
-msgstr ""
+msgstr "Építs legalább négy erdészházat!"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:84
 msgid "The Uplands"
-msgstr ""
+msgstr "A fennsík"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:86
 msgid "Use the Uplands Wisely."
-msgstr ""
+msgstr "Használd bölcsen a fennsíkot!"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:87
 msgid "Relocate your industry to the Uplands."
-msgstr ""
+msgstr "Költöztesd át a termelést a fennsíkra!"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:96
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:106
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:116
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:126
 msgid "Introduction"
-msgstr ""
+msgstr "Bevezetés"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:97
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:107
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:117
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:127
 msgid "Welcome back!"
-msgstr ""
+msgstr "Üdvözöllek újra!"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:99
@@ -140,6 +154,9 @@ msgid ""
 "Home at last! I cannot put into words the joy I feel at seeing my homelands "
 "again… nor the impatience at being so close and yet so far away."
 msgstr ""
+"Végre itthon! Nem is tudom szavakba önteni a boldogságot, ami eltölti "
+"szívemet, hogy újra láthatom a szülőföldemet… se a nyughatatlan "
+"türelmetlenségemet, amiért ilyen közel és mégis ilyen távol vagyok tőle."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:102
@@ -152,6 +169,13 @@ msgid ""
 "will inspire his soldiers to fight as hard as my own troops will strive to "
 "reclaim our home."
 msgstr ""
+"A tenger ez alkalommal szelíd volt, így gyorsan át tudtunk kelni rajta "
+"vissza dél felé. Hennekével mindketten a hajó orrában töltöttük az út nagy "
+"részét, a hazatérést várva. Reebaud viszont eleinte a hajó hátuljáról nézett"
+" visszafelé, úgy, ahogy mi előre. Nyilvánvalóan épp úgy szereti az új "
+"hazáját, ahogy én a saját régimet. Bízom benne, hogy a győztes hazatérés "
+"utáni vágyuk úgy fogja tüzelni a katonáit, ahogy az enyémeket az otthonunk "
+"visszavétele."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:109
@@ -160,6 +184,9 @@ msgid ""
 "joyous laughter and excited anticipation of our return turned into a somber "
 "mood as we prepared for battle."
 msgstr ""
+"A hangulat egyre feszültebbé vált a hajón, ahogy közeledtünk az ismert "
+"vizekhez. A korábbi vidám nevetés és izgatott várakozás helyét átvette a "
+"komorság, ahogy felkészültünk a harcra."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:112
@@ -168,6 +195,9 @@ msgid ""
 "island Sylt and knew we’d land on Föhr on the evening of that same day. But "
 "then –"
 msgstr ""
+"Aztán eljött végre a nap! Megláttuk Sylt szigetének legészakibb csücskét, és"
+" már arra készültünk, hogy még aznap este partra szállhatunk Föhrön. Ám "
+"akkor…"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:119
@@ -176,6 +206,9 @@ msgid ""
 "being no more careful than a cabin boy. Over the course of the months since "
 "we had left Föhr, we had neglected to pay attention to the calendar."
 msgstr ""
+"Elkövettük az egyik legalapvetőbb hibát, és mindnyájan szégyellhetjük "
+"magunkat, amiért olyan óvatlanok voltunk, mint egy újonc hajósinas. A "
+"hónapok során, mióta elhagytuk Föhrt, nem figyeltük a naptárat."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:122
@@ -186,6 +219,10 @@ msgid ""
 "storms that always blow at this time of year have sent many a careless "
 "sailor to a watery grave."
 msgstr ""
+"Ma van halottak napja, november másodika, és felénk még a gyerekek is "
+"tudják, hogy egyetlen épeszű kapitánynak se jutna eszébe ennek a napnak a "
+"környékén kihajózni. Időtlen idők óta, az évnek ebben a szakában mindig erős"
+" viharok tombolnak, amelyek sok óvatlan hajóst küldtek már a hullámsírba."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 4
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:129
@@ -196,6 +233,11 @@ msgid ""
 "hope – it is obviously a sign that our perilous endeavour is blessed by the "
 "saints."
 msgstr ""
+"Csak a színtiszta szerencse mentett meg minket. A hajónk alig sérült meg, és"
+" egyetlen tengerész sem veszett a tengerbe. El sem hinném, hogy valaki "
+"ennyire szerencsés lehet, ha nem látom a saját szememmel. Hihetetlen "
+"megmenekülésünk reménnyel tölt el — ez csakis a szentek áldásának a jele "
+"lehet."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 4
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:132
@@ -207,6 +249,12 @@ msgid ""
 "hospitality, and the chance to rest and refresh ourselves before the battle "
 "will make a difference. Some of them might even join our cause."
 msgstr ""
+"A vihar két napnyi távolságra sodort minket útirányunktól. Szerencsére még "
+"így is ismerős vizeken járunk, így ez csak csekély késedelem. Amikor a vihar"
+" alábbhagyott, Helgoland partjainak közelében találtuk magunkat, ezért úgy "
+"döntöttünk, kikötünk a szigeten. A helybéliek messze földön híresek a "
+"vendégszeretetükről, és jót fog tenni nekünk egy kis pihenés és felüdülés a "
+"csata előtt. Hátha néhányan még csatlakoznak is hozzánk."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:136
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:143
@@ -215,12 +263,12 @@ msgstr ""
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:164
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:171
 msgid "Greetings"
-msgstr ""
+msgstr "Üdvözlet"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:137
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:151
 msgid "Welcome to Helgoland!"
-msgstr ""
+msgstr "Üdvözöllek Helgolandon!"
 
 #. TRANSLATORS: Ocke Ketelsen – Introduction 5
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:139
@@ -231,10 +279,15 @@ msgid ""
 "and despite these hard times I am pleased and honoured to receive such "
 "illustrious guests."
 msgstr ""
+"Békével köszöntelek Helgolandon! A híred megelőzött titeket, Claus Lembeck, "
+"Föhr nagyra becsült ura és Reebaud, akit a dalnokok csak az elszánt, bátor "
+"és hatalmas jelzőkkel illetnek! Ocke Ketelsen vagyok, Helgoland tanácsának "
+"vezetője, és a nehéz idők ellenére örvendek a megtiszteltetésnek, hogy ilyen"
+" nagyra méltó vendégeket üdvözölhetek."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:144
 msgid "Hospitality"
-msgstr ""
+msgstr "Barátság"
 
 #. TRANSLATORS: Reebaud – Introduction 6
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:146
@@ -246,6 +299,12 @@ msgid ""
 " Assuming you don’t mind if I ask and that this question does not appear "
 "impertinent, I would like to know if we can help you in any way."
 msgstr ""
+"Béke és köszönet a barátságos fogadtatásért néked, Ocke Ketelsen! Kellemes "
+"újdonság, hogy nem kell harcolnunk a helybéliekkel egy szigeten, ahol partra"
+" szállunk. De a köszöntő beszéded váratlanul rövid volt. Mivel szavaid igen "
+"melegek, így csak arra vélhetem ezt, hogy valami más gond nyomja a lelkedet."
+" Remélem nem sértelek meg, és kérdésemet nem veszed türelmetlenkedésnek, ha "
+"tudni szeretném, segíthetünk-e neked bármilyen módon."
 
 #. TRANSLATORS: Ocke Ketelsen – Introduction 7
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:153
@@ -253,18 +312,20 @@ msgid ""
 "You are remarkably astute. Indeed we have a problem, and you can see it "
 "right over there."
 msgstr ""
+"Megfigyelésed kiváló. Valóban, nagy gondunk van, és te magad is láthatod "
+"ott, arrafelé."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:158
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:165
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:172
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:184
 msgid "Enemies"
-msgstr ""
+msgstr "Ellenségek"
 
 #. TRANSLATORS: Henneke Lembeck – Introduction 8
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:160
 msgid "Danes! Does Atterdag’s thirst for conquest reach this far then?"
-msgstr ""
+msgstr "Dánok! Atterdag telhetetlen hódítási vágya hát idáig is elér?"
 
 #. TRANSLATORS: Ocke Ketelsen – Introduction 9
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:167
@@ -272,6 +333,8 @@ msgid ""
 "It does. I see that you recognize this enemy, and I would be interested in "
 "hearing how you met – though I imagine it will not have gone well for them!"
 msgstr ""
+"Valóban, elér. Látom ismeritek az ellenséget, és szívesen meghallgatnám, "
+"hogyan találkoztatok velük — el tudom képzelni, hogy nem volt az ínyükre!"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 10
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:174
@@ -282,6 +345,11 @@ msgid ""
 "fact, we were sailing to Föhr to drive the invaders out once and for all "
 "when a storm blew us off our course and to Helgoland."
 msgstr ""
+"Őszinte sajnálatomra, feltételezésed téves. A rövidség kedvéért csak annyit "
+"mondok, hogy Atterdag oly hatalmas erőkkel támadta meg Föhrt, hogy el "
+"kellett hagynom, és Reebaud segítségét kérnem a visszaszerzéséhez. Igazság "
+"szerint, éppen Föhr felé hajóztunk örökre kiűzni a betolakodókat, amikor egy"
+" vihar elsodort utunkról ide Helgolandra."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 10
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:177
@@ -290,12 +358,15 @@ msgid ""
 "fight this enemy. A warm-up battle, so to speak – I am looking forward to "
 "it!"
 msgstr ""
+"Hogy így történt, mennyei beavatkozás eredménye lehet. Örömmel segítünk "
+"megküzdeni ezzel az ellenséggel. Vehetjük ezt bemelegítő csatának — boldogan"
+" állok elébe!"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:183
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:196
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:203
 msgid "War Preparations"
-msgstr ""
+msgstr "Előkészületek a csatára"
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 1
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:186
@@ -661,7 +732,7 @@ msgstr ""
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:348
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:362
 msgid "Victory!"
-msgstr ""
+msgstr "Győzelem!"
 
 #. TRANSLATORS: Reebaud – Victory 5
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:350
@@ -700,10 +771,12 @@ msgstr ""
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:368
 msgid "Congratulations"
-msgstr ""
+msgstr "Gratulálunk!"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:369
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Befejezted ezt a küldetést. Ha szeretnél, játszhatsz még tovább, máskülönben"
+" folytasd a következő küldetéssel!"

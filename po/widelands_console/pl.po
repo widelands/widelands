@@ -7,6 +7,7 @@
 # Endrju <endrjux@gmail.com>, 2005
 # Wesmania <ikk_pl@yahoo.co.uk>, 2015
 # Wesmania <ikk_pl@yahoo.co.uk>, 2016
+# Karol Zygmunt, 2024
 # Marcin S <dzidek1003@o2.pl>, 2021
 # Pawel <pawcio980@gmail.com>, 2022
 # tombox <wptom@wp.pl>, 2016,2018-2019
@@ -17,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-02-15 02:28+0000\n"
 "PO-Revision-Date: 2015-02-03 14:54+0000\n"
-"Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>, 2021-2022\n"
+"Last-Translator: Karol Zygmunt, 2024\n"
 "Language-Team: Polish (http://app.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +30,7 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:52
 #, c-format
 msgid "%1$s|%2$s"
-msgstr ""
+msgstr "%1$s|%2$s"
 
 #: ../../src/wlapplication_messages.cc:55
 #: ../../src/wlapplication_messages.cc:87
@@ -44,7 +45,7 @@ msgstr "NAZWAPLIKU"
 #. punctuation marks
 #: ../../src/wlapplication_messages.cc:60
 msgid "last"
-msgstr ""
+msgstr "ostatni"
 
 #: ../../src/wlapplication_messages.cc:66
 msgid "Usage:"
@@ -56,7 +57,7 @@ msgstr "widelands<option0>=<value0> ... <optionN>=<valueN>"
 
 #: ../../src/wlapplication_messages.cc:67
 msgid "widelands <save.wgf>/<replay.wry>"
-msgstr ""
+msgstr "widelands <save.wgf>/<replay.wry>"
 
 #: ../../src/wlapplication_messages.cc:69
 #: ../../src/wlapplication_messages.cc:71
@@ -117,7 +118,7 @@ msgstr "Rozegraj mapę `NAZWAPLIKU` bezpośrednio jako scenariusz dla jednego gr
 #, c-format
 msgid ""
 "Load the savegame `%1$s` directly or the last saved game if `=%2$s` is used."
-msgstr ""
+msgstr "Załaduj zapis gry `%1$s` bezpośrednio albo ostatnio zapisaną grę jeżeli `=%2$s` jest użyty."
 
 #. * TRANSLATORS: %1 is translation for FILENAME,
 #. %2 is translation for "last" for last used file
@@ -125,7 +126,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Load the replay `%1$s` directly or the last saved replay if `=%2$s` is used."
-msgstr ""
+msgstr "Załaduj powtórkę `%1$s` bezpośrednio albo ostatnio zapisaną powtórkę jeżeli `=%2$s` jest użyta."
 
 #. * TRANSLATORS: %1 is translation for FILENAME,
 #. %2 is translation for "last" for last used file
@@ -135,7 +136,7 @@ msgid ""
 "Start the Widelands map editor directly. You can add `=%1$s` to directly "
 "load the map `FILENAME` in the editor or `=%2$s` to load the last edited "
 "map."
-msgstr ""
+msgstr "Uruchom bezpośrednio edytor map Widelands. Możesz dodać `=%1$s` do bezpośredniego załadowania mapy `FILENAME` w edytorze lub `=%2$s` do załadowania ostatniej zedytowanej mapy."
 
 #: ../../src/wlapplication_messages.cc:114
 msgid ""
@@ -153,7 +154,7 @@ msgstr "Wymuś wysypanie się Widelands kiedy nastąpi błąd Lua."
 
 #: ../../src/wlapplication_messages.cc:120
 msgid "Delete replays automatically after `n` weeks."
-msgstr ""
+msgstr "Usunięcie powtórki autmatycznie po `n` tygodniach."
 
 #. * TRANSLATORS: A placeholder for a numerical value
 #: ../../src/wlapplication_messages.cc:120
@@ -181,7 +182,7 @@ msgstr "Automatycznie dopasowywuj na bieżąco prędkość gry zależnie od opó
 
 #: ../../src/wlapplication_messages.cc:130
 msgid "Enable the Script Console and Cheating Mode."
-msgstr ""
+msgstr "Aktywuj Skrypy konsolowy i Tryb Oszukiwania"
 
 #: ../../src/wlapplication_messages.cc:133
 msgid "Game options:"
@@ -220,7 +221,7 @@ msgstr "[true*|false]"
 msgid ""
 "Do not create an autosave when the user has been inactive since the last "
 "autosave."
-msgstr ""
+msgstr "Nie tworzy autozapisu automatycznie kiedy użytkownik był nieaktywny od czasu ostatniego autozapisu."
 
 #: ../../src/wlapplication_messages.cc:149
 msgid "Do not save files as binary zip archives."
@@ -228,7 +229,7 @@ msgstr "Nie zapisuj plików jako binarnych archiwów zip."
 
 #: ../../src/wlapplication_messages.cc:150
 msgid "Save files as binary zip archives."
-msgstr ""
+msgstr "Zapisz pliki jaki binarne archiwa zip."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -248,7 +249,7 @@ msgstr "[true|false*]"
 
 #: ../../src/wlapplication_messages.cc:156
 msgid "Whether to save the history of sent chat messages to a file."
-msgstr ""
+msgstr "Zapisz historię wysłanych wiadomości na chacie do pliku."
 
 #: ../../src/wlapplication_messages.cc:157
 msgid "Show filenames in the replay screen."
@@ -263,7 +264,7 @@ msgstr "Czy ostrzeżenie powinno być pokazane w edytorze jeśli jest za dużo g
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:164
 msgid "Pause the game after `n` minutes of user inactivity."
-msgstr ""
+msgstr "Zatrzymaj grę po `n` minutach nieaktywności użytkownika."
 
 #: ../../src/wlapplication_messages.cc:166
 msgid "Start building a road after placing a flag."
@@ -381,11 +382,11 @@ msgstr "Opcje graficzne:"
 
 #: ../../src/wlapplication_messages.cc:214
 msgid "Use the whole display for the game screen."
-msgstr ""
+msgstr "Użyj pełnego wyświetlania dla ekranu gry."
 
 #: ../../src/wlapplication_messages.cc:216
 msgid "Start the game in a maximized window."
-msgstr ""
+msgstr "Uruchom grę w zmaksymalizowanym oknie."
 
 #. * TRANSLATORS: A placeholder for window width
 #: ../../src/wlapplication_messages.cc:219
@@ -476,14 +477,14 @@ msgstr "Pokaż tą pomoc ze wszystkimi dostępnymi opcjami konfiguracji."
 
 #: ../../src/wlapplication_messages.cc:259
 msgid "<save.wgf>/<replay.wry>"
-msgstr ""
+msgstr "<save.wgf>/<replay.wry>"
 
 #: ../../src/wlapplication_messages.cc:260
 msgid ""
 "Load the given savegame or replay directly. Useful for .wgf/.wry file "
 "extension association. Does not work with other options. Also see "
 "--loadgame/--replay."
-msgstr ""
+msgstr "Załaduj bezpośrednio otrzymane zapisy gry lub powtórki. Użyteczne dla .wgf/.wrpl zrzeszenia rozszerzeń. Nie działa z innymi opcjami. Zobacz także --loadgame/--replay."
 
 #. * TRANSLATORS: %s = version information
 #: ../../src/wlapplication_messages.cc:295
