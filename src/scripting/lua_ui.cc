@@ -653,33 +653,47 @@ int LuaPanel::get_child(lua_State* L) {
            * ``"percent"``: **Optional**. Whether to show a percentage instead of absolute values.
              Default: :const:`true`.
 
-         * ``"spinbox"``: A box with buttons to increase or decrease a numerical value. Properties:
+         * ``"spinbox"``: A box with buttons to increase or decrease a numerical value. There are
+           two kinds of spinboxes by their value ranges: normal spinboxes that can have any integer
+           value within a range, and spinboxes that can only use values from a value list. Some
+           properties are only used by one kind of spinbox and forbidden for the other kind.
 
-           * ``"unit_w"``: **Mandatory**. The total width of the buttons and value display.
-           * ``"value"``: **Mandatory**. The spinbox's initial value.
-           * ``"min"``: **Mandatory**. The spinbox's minimum value.
-           * ``"max"``: **Mandatory**. The spinbox's maximum value.
-           * ``"label"``: **Optional**. Text to display next to the spinbox.
-           * ``"units"``: **Optional**. The unit for the spinbox's value. One of:
+           * Common Properties:
 
-             * ``"none"`` (default)
-             * ``"pixels"``
-             * ``"percent"``
-             * ``"fields"``
-             * ``"minutes"``
-             * ``"weeks"``
+             * ``"unit_w"``: **Mandatory**. The total width of the buttons and value display.
+             * ``"value"``: **Mandatory**. The spinbox's initial value. For value list spinboxes,
+               this is the 0 based index of the initial value within ``"values"``.
+             * ``"label"``: **Optional**. Text to display next to the spinbox.
+             * ``"replacements"``: **Optional**. An array of tables with keys ``"value"`` and
+               ``"replacement"``. When the spinbox's value is equal to any replaced value,
+               the replacement string is displayed instead of the value.
+             * ``"on_changed"``: **Optional**. Callback code to run when the spinbox's value changes.
 
-           * ``"step_size_small"``: **Optional**.
-             The amount by which the value changes on each button click.
-           * ``"step_size_big"``: **Optional**. If set, the spinbox additionally shows
-             buttons to change the value by this larger amount.
-           * ``"values"``: **Optional**. An array of integers.
-             If set, the spinbox can only switch between the values in this array.
-             Can not be combined with ``"step_size_small"`` and ``"step_size_big"``.
-           * ``"replacements"``: **Optional**. An array of tables with keys ``"value"`` and
-             ``"replacement"``. When the spinbox's value is equal to any replaced value,
-             the replacement string is displayed instead of the value.
-           * ``"on_changed"``: **Optional**. Callback code to run when the spinbox's value changes.
+           * Properties for normal spinboxes (forbidden with ``"values"``):
+
+             * ``"min"``: **Mandatory**. The spinbox's minimum value. Ignored if ``"values"`` are
+               provided.
+             * ``"max"``: **Mandatory**. The spinbox's maximum value. Ignored if ``"values"`` are
+               provided.
+             * ``"units"``: **Optional**. The unit for the spinbox's value. Ignored if ``"values"``
+               are provided. One of:
+
+               * ``"none"`` (default)
+               * ``"pixels"``
+               * ``"percent"``
+               * ``"fields"``
+               * ``"minutes"``
+               * ``"weeks"``
+
+             * ``"step_size_small"``: **Optional**.
+               The amount by which the value changes on each button click.
+             * ``"step_size_big"``: **Optional**. If set, the spinbox additionally shows
+               buttons to change the value by this larger amount.
+
+           * Properties for value list spinboxes:
+
+             * ``"values"``: **Mandatory**. An array of integers. The spinbox can only switch
+               between the values in this array.
 
            This widget can not have a custom tooltip.
 
@@ -1688,63 +1702,101 @@ UI::Panel* LuaPanel::do_create_child_slider(lua_State* L, UI::Panel* parent) {
 UI::Panel* LuaPanel::do_create_child_spinbox(lua_State* L, UI::Panel* parent) {
 	std::string name = get_table_string(L, "name", true);
 	uint32_t unit_w = get_table_int(L, "unit_w", true);
-	int32_t val_min = get_table_int(L, "min", true);
-	int32_t val_max = get_table_int(L, "max", true);
 	int32_t val = get_table_int(L, "value", true);
-	int32_t step_size_small = get_table_int(L, "step_size_small", false, 1);
-	int32_t step_size_big = get_table_int(L, "step_size_big", false, 0);
 	std::string label = get_table_string(L, "label", false);
-
-	if (val_min > val_max) {
-		report_error(L, "Malformed spinbox value range");
-	}
-	if (val < val_min || val > val_max) {
-		report_error(L, "Spinbox initial value out of range");
-	}
 
 	int32_t x = get_table_int(L, "x", false);
 	int32_t y = get_table_int(L, "y", false);
 	int32_t w = get_table_int(L, "w", false);
 
-	std::string units_str = get_table_string(L, "units", false);
-	UI::SpinBox::Units units;
-	if (units_str.empty() || units_str == "none") {
-		units = UI::SpinBox::Units::kNone;
-	} else if (units_str == "pixels") {
-		units = UI::SpinBox::Units::kPixels;
-	} else if (units_str == "minutes") {
-		units = UI::SpinBox::Units::kMinutes;
-	} else if (units_str == "weeks") {
-		units = UI::SpinBox::Units::kWeeks;
-	} else if (units_str == "percent") {
-		units = UI::SpinBox::Units::kPercent;
-	} else if (units_str == "fields") {
-		units = UI::SpinBox::Units::kFields;
-	} else {
-		report_error(L, "Unknown spinbox unit '%s'", units_str.c_str());
-	}
-
 	std::vector<int32_t> value_list;
 
 	lua_getfield(L, -1, "values");
 	if (!lua_isnil(L, -1)) {
-		if (step_size_big != 0 || step_size_small != 1) {
-			report_error(L, "Spinbox: Cannot combine value list and step sizes");
-		}
 		luaL_checktype(L, -1, LUA_TTABLE);
 		lua_pushnil(L);
 		while (lua_next(L, -2) != 0) {
 			value_list.push_back(luaL_checkint32(L, -1));
 			lua_pop(L, 1);
 		}
+		if (value_list.empty()) {
+			report_error(L, "Spinbox: Empty values table");
+		}
 	}
 	lua_pop(L, 1);
 
+	int32_t val_min = 0;
+	int32_t val_max = 0;
+	int32_t step_size_small = 1;
+	int32_t step_size_big = 0;
+	UI::SpinBox::Units units;
+   UI::SpinBox::Type sb_type = UI::SpinBox::Type::kSmall;
+
+	if (value_list.empty()) {
+
+		// Spinbox with normal numeric values
+
+		val_min = get_table_int(L, "min", true);
+		val_max = get_table_int(L, "max", true);
+		step_size_small = get_table_int(L, "step_size_small", false, 1);
+		step_size_big = get_table_int(L, "step_size_big", false, 0);
+
+		std::string units_str = get_table_string(L, "units", false);
+		if (units_str.empty() || units_str == "none") {
+			units = UI::SpinBox::Units::kNone;
+		} else if (units_str == "pixels") {
+			units = UI::SpinBox::Units::kPixels;
+		} else if (units_str == "minutes") {
+			units = UI::SpinBox::Units::kMinutes;
+		} else if (units_str == "weeks") {
+			units = UI::SpinBox::Units::kWeeks;
+		} else if (units_str == "percent") {
+			units = UI::SpinBox::Units::kPercent;
+		} else if (units_str == "fields") {
+			units = UI::SpinBox::Units::kFields;
+		} else {
+			report_error(L, "Unknown spinbox unit '%s'", units_str.c_str());
+		}
+
+		if (val_min > val_max) {
+			report_error(L, "Malformed spinbox value range");
+		}
+		if (step_size_big > 0) {
+			sb_type = UI::SpinBox::Type::kBig;
+		}
+
+	} else {
+
+		// Spinbox with custom value list
+
+		sb_type = UI::SpinBox::Type::kValueList;
+
+		// These are ignored by SpinBox::SpinBox if type == kValueList
+		units = UI::SpinBox::Units::kNone;
+		val_min = 0;
+		val_max = value_list.size() - 1;  // only used for range-checking the initial value below
+		step_size_small = 1;
+		step_size_big = 0;
+
+		// Check conflicting settings
+		if (luna_table_has_key(L, "min") || luna_table_has_key(L, "max")) {
+			report_error(L, "Spinbox: Cannot combine value list and min/max value");
+		}
+		if (luna_table_has_key(L, "step_size_small") || luna_table_has_key(L, "step_size_big")) {
+			report_error(L, "Spinbox: Cannot combine value list and step sizes");
+		}
+		if (luna_table_has_key(L, "units")) {
+			report_error(L, "Spinbox: Cannot combine value list and units");
+		}
+	}
+
+	if (val < val_min || val > val_max) {
+		report_error(L, "Spinbox initial value out of range");
+	}
+
 	UI::SpinBox* spinbox = new UI::SpinBox(
 	   parent, name, x, y, w, unit_w, val, val_min, val_max, UI::PanelStyle::kWui, label, units,
-	   value_list.empty() ? step_size_big > 0 ? UI::SpinBox::Type::kBig : UI::SpinBox::Type::kSmall :
-                           UI::SpinBox::Type::kValueList,
-	   step_size_small, step_size_big);
+	   sb_type, step_size_small, step_size_big);
 
 	if (!value_list.empty()) {
 		spinbox->set_value_list(value_list);

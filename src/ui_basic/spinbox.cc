@@ -104,14 +104,15 @@ SpinBox::SpinBox(Panel* const parent,
 	if (type_ == SpinBox::Type::kValueList) {
 		sbi_->min = 0;
 		sbi_->max = 0;
+		sbi_->unit = SpinBox::Units::kNone;  // will not be used
 	} else {
 		assert(minval <= maxval);
 
 		sbi_->min = minval;
 		sbi_->max = maxval;
+		sbi_->unit = unit;
 	}
 	sbi_->value = startval;
-	sbi_->unit = unit;
 	sbi_->button_style = style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
                                                            UI::ButtonStyle::kWuiSecondary;
 
@@ -146,20 +147,33 @@ SpinBox::SpinBox(Panel* const parent,
 		calculate_big_step();
 	}
 
+	std::string button_tooltip;
+	if (type_ == SpinBox::Type::kValueList) {
+		button_tooltip = _("Decrease the value");
+	} else {
+		/** TRANSLATORS: You may want to treat this as "Decrease the value %s", you get
+		                 the chance to translate the substituted text as "by <n units>" */
+		button_tooltip = format(_("Decrease the value by %s"), unit_text(sbi_->step_size, true));
+	}
 	sbi_->button_minus =
 	   new Button(box_, "-", 0, 0, button_size_, button_size_, sbi_->button_style,
 	              g_image_cache->get(is_big ? "images/ui_basic/scrollbar_left.png" :
                                              "images/ui_basic/scrollbar_down.png"),
-	              /** TRANSLATORS: You may want to treat this as "Decrease the value %s", you get
-	                               the chance to translate the substituted text as "by <n units>" */
-	              format(_("Decrease the value by %s"), unit_text(sbi_->step_size, true)));
+		           button_tooltip);
+
+	if (type_ == SpinBox::Type::kValueList) {
+		button_tooltip = _("Increase the value");
+	} else {
+		/** TRANSLATORS: You may want to treat this as "Increase the value %s", you get
+		                 the chance to translate the substituted text as "by <n units>" */
+		button_tooltip = format(_("Increase the value by %s"), unit_text(sbi_->step_size, true));
+	}
 	sbi_->button_plus =
 	   new Button(box_, "+", 0, 0, button_size_, button_size_, sbi_->button_style,
 	              g_image_cache->get(is_big ? "images/ui_basic/scrollbar_right.png" :
                                              "images/ui_basic/scrollbar_up.png"),
-	              /** TRANSLATORS: You may want to treat this as "Increase the value %s", you get
-	                               the chance to translate the substituted text as "by <n units>" */
-	              format(_("Increase the value by %s"), unit_text(sbi_->step_size, true)));
+		           button_tooltip);
+
 	sbi_->button_minus->set_can_focus(false);
 	sbi_->button_plus->set_can_focus(false);
 
