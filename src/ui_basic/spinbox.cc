@@ -104,15 +104,14 @@ SpinBox::SpinBox(Panel* const parent,
 	if (type_ == SpinBox::Type::kValueList) {
 		sbi_->min = 0;
 		sbi_->max = 0;
-		sbi_->unit = SpinBox::Units::kNone;  // will not be used
 	} else {
 		assert(minval <= maxval);
 
 		sbi_->min = minval;
 		sbi_->max = maxval;
-		sbi_->unit = unit;
 	}
 	sbi_->value = startval;
+	sbi_->unit = unit;
 	sbi_->button_style = style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
                                                            UI::ButtonStyle::kWuiSecondary;
 

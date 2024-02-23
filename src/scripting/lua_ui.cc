@@ -664,20 +664,7 @@ int LuaPanel::get_child(lua_State* L) {
              * ``"value"``: **Mandatory**. The spinbox's initial value. For value list spinboxes,
                this is the 0 based index of the initial value within ``"values"``.
              * ``"label"``: **Optional**. Text to display next to the spinbox.
-             * ``"replacements"``: **Optional**. An array of tables with keys ``"value"`` and
-               ``"replacement"``. When the spinbox's value is equal to any replaced value,
-               the replacement string is displayed instead of the value.
-             * ``"on_changed"``: **Optional**. Callback code to run when the spinbox's value
-   changes.
-
-           * Properties for normal spinboxes (forbidden with ``"values"``):
-
-             * ``"min"``: **Mandatory**. The spinbox's minimum value. Ignored if ``"values"`` are
-               provided.
-             * ``"max"``: **Mandatory**. The spinbox's maximum value. Ignored if ``"values"`` are
-               provided.
-             * ``"units"``: **Optional**. The unit for the spinbox's value. Ignored if ``"values"``
-               are provided. One of:
+             * ``"units"``: **Optional**. The unit for the spinbox's value. One of:
 
                * ``"none"`` (default)
                * ``"pixels"``
@@ -686,6 +673,18 @@ int LuaPanel::get_child(lua_State* L) {
                * ``"minutes"``
                * ``"weeks"``
 
+             * ``"replacements"``: **Optional**. An array of tables with keys ``"value"`` and
+               ``"replacement"``. When the spinbox's value is equal to any replaced value,
+               the replacement string is displayed instead of the value.
+             * ``"on_changed"``: **Optional**. Callback code to run when the spinbox's value
+               changes.
+
+           * Properties for normal spinboxes (forbidden with ``"values"``):
+
+             * ``"min"``: **Mandatory**. The spinbox's minimum value. Ignored if ``"values"`` are
+               provided.
+             * ``"max"``: **Mandatory**. The spinbox's maximum value. Ignored if ``"values"`` are
+               provided.
              * ``"step_size_small"``: **Optional**.
                The amount by which the value changes on each button click.
              * ``"step_size_big"``: **Optional**. If set, the spinbox additionally shows
@@ -1710,6 +1709,25 @@ UI::Panel* LuaPanel::do_create_child_spinbox(lua_State* L, UI::Panel* parent) {
 	int32_t y = get_table_int(L, "y", false);
 	int32_t w = get_table_int(L, "w", false);
 
+	UI::SpinBox::Units units;
+
+	std::string units_str = get_table_string(L, "units", false);
+	if (units_str.empty() || units_str == "none") {
+		units = UI::SpinBox::Units::kNone;
+	} else if (units_str == "pixels") {
+		units = UI::SpinBox::Units::kPixels;
+	} else if (units_str == "minutes") {
+		units = UI::SpinBox::Units::kMinutes;
+	} else if (units_str == "weeks") {
+		units = UI::SpinBox::Units::kWeeks;
+	} else if (units_str == "percent") {
+		units = UI::SpinBox::Units::kPercent;
+	} else if (units_str == "fields") {
+		units = UI::SpinBox::Units::kFields;
+	} else {
+		report_error(L, "Unknown spinbox unit '%s'", units_str.c_str());
+	}
+
 	std::vector<int32_t> value_list;
 
 	lua_getfield(L, -1, "values");
@@ -1730,11 +1748,9 @@ UI::Panel* LuaPanel::do_create_child_spinbox(lua_State* L, UI::Panel* parent) {
 	int32_t val_max = 0;
 	int32_t step_size_small = 1;
 	int32_t step_size_big = 0;
-	UI::SpinBox::Units units;
 	UI::SpinBox::Type sb_type = UI::SpinBox::Type::kSmall;
 
 	if (value_list.empty()) {
-
 		// Spinbox with normal numeric values
 
 		val_min = get_table_int(L, "min", true);
@@ -1742,42 +1758,20 @@ UI::Panel* LuaPanel::do_create_child_spinbox(lua_State* L, UI::Panel* parent) {
 		step_size_small = get_table_int(L, "step_size_small", false, 1);
 		step_size_big = get_table_int(L, "step_size_big", false, 0);
 
-		std::string units_str = get_table_string(L, "units", false);
-		if (units_str.empty() || units_str == "none") {
-			units = UI::SpinBox::Units::kNone;
-		} else if (units_str == "pixels") {
-			units = UI::SpinBox::Units::kPixels;
-		} else if (units_str == "minutes") {
-			units = UI::SpinBox::Units::kMinutes;
-		} else if (units_str == "weeks") {
-			units = UI::SpinBox::Units::kWeeks;
-		} else if (units_str == "percent") {
-			units = UI::SpinBox::Units::kPercent;
-		} else if (units_str == "fields") {
-			units = UI::SpinBox::Units::kFields;
-		} else {
-			report_error(L, "Unknown spinbox unit '%s'", units_str.c_str());
-		}
-
 		if (val_min > val_max) {
 			report_error(L, "Malformed spinbox value range");
 		}
 		if (step_size_big > 0) {
 			sb_type = UI::SpinBox::Type::kBig;
 		}
-
 	} else {
-
 		// Spinbox with custom value list
 
 		sb_type = UI::SpinBox::Type::kValueList;
 
 		// These are ignored by SpinBox::SpinBox if type == kValueList
-		units = UI::SpinBox::Units::kNone;
 		val_min = 0;
 		val_max = value_list.size() - 1;  // only used for range-checking the initial value below
-		step_size_small = 1;
-		step_size_big = 0;
 
 		// Check conflicting settings
 		if (luna_table_has_key(L, "min") || luna_table_has_key(L, "max")) {
@@ -1785,9 +1779,6 @@ UI::Panel* LuaPanel::do_create_child_spinbox(lua_State* L, UI::Panel* parent) {
 		}
 		if (luna_table_has_key(L, "step_size_small") || luna_table_has_key(L, "step_size_big")) {
 			report_error(L, "Spinbox: Cannot combine value list and step sizes");
-		}
-		if (luna_table_has_key(L, "units")) {
-			report_error(L, "Spinbox: Cannot combine value list and units");
 		}
 	}
 
