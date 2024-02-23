@@ -216,12 +216,49 @@ void MutexLock::pop_stay_responsive_function() {
 	stay_responsive_.pop_back();
 }
 
-// Only used for verbose logging of borrowing
-static std::thread::id prev_self;
-static std::thread::id prev_owner;
-static MutexLock::ID prev_lock = MutexLock::ID::kNone;
-static uint32_t last_borrow_time = 0;
-static uint32_t borrow_counter = 0;
+// Only used for verbose logging of lock borrowing
+// TODO(tothxa): Should this be a static member of MutexLock?
+//               Except it's too deep implementation detail to be included in mutex.h
+class MutexBorrowLogger {
+public:
+	void report_borrowing(std::thread::id borrower, std::thread::id owner, MutexLock::ID lock);
+private:
+	std::thread::id last_borrower_{kNoThread};
+	std::thread::id last_owner_{kNoThread};
+	MutexLock::ID last_lock_{MutexLock::ID::kNone};
+	uint32_t last_log_time_{0};
+	uint32_t borrow_counter_{0};
+};
+static MutexBorrowLogger g_mutex_borrow_logger;
+
+void MutexBorrowLogger::report_borrowing(
+   std::thread::id borrower, std::thread::id owner, MutexLock::ID lock) {
+
+	const uint32_t now = SDL_GetTicks();
+	const bool same = lock == last_lock_ && borrower == last_borrower_ && owner == last_owner_;
+	if (same) {
+		++borrow_counter_;
+	}
+	// once per second, otherwise modal windows spam the log
+	if (!same || (now > last_log_time_ + 1000)) {
+		if (borrow_counter_ > 1) {
+			// Only log as repeated if more than 1 occurences before timing out
+			verb_log_dbg("%s skipped locking mutex %s %u times in %ums",
+							 thread_name(last_borrower_).c_str(), to_string(last_lock_).c_str(),
+							 borrow_counter_, now - last_log_time_);
+		} else {
+			// Different or happened a long time ago
+			verb_log_dbg("%s skips locking mutex %s owned by wrapping thread %s",
+							 thread_name(borrower).c_str(), to_string(lock).c_str(),
+							 thread_name(owner).c_str());
+		}
+		last_lock_ = lock;
+		last_borrower_ = borrower;
+		last_owner_ = owner;
+		last_log_time_ = now;
+		borrow_counter_ = 0;
+	}
+}
 
 MutexLock::MutexLock(const ID i) : id_(i) {
 	if (id_ == ID::kNone) {
@@ -248,33 +285,9 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 			if (pair.first == self && pair.second == record.current_owner) {
 				s_mutex_.unlock();  // Must unlock before verb_log_dbg()
 
-				if (g_verbose) {  // All this is only used for verb_log_dbg() or equivalent std:cout <<
+				if (g_verbose) {  // Only used for verb_log_dbg() or equivalent std:cout <<
 					if (id_ != ID::kLog) {
-						const uint32_t now = SDL_GetTicks();
-						const bool same =
-						   id_ == prev_lock && self == prev_self && record.current_owner == prev_owner;
-						if (same) {
-							++borrow_counter;
-						}
-						// once per second, otherwise modal windows spam the log
-						if (!same || (now > last_borrow_time + 1000)) {
-							if (borrow_counter > 1) {
-								// Only log as repeated if more than 1 occurences before timing out
-								verb_log_dbg("%s skipped locking mutex %s %u times in %ums",
-								             thread_name(prev_self).c_str(), to_string(prev_lock).c_str(),
-								             borrow_counter, now - last_borrow_time);
-							} else {
-								// Different or happened a long time ago
-								verb_log_dbg("%s skips locking mutex %s owned by wrapping thread %s",
-								             thread_name(self).c_str(), to_string(id_).c_str(),
-								             thread_name(record.current_owner).c_str());
-							}
-							prev_lock = id_;
-							prev_self = self;
-							prev_owner = record.current_owner;
-							last_borrow_time = now;
-							borrow_counter = 0;
-						}
+						g_mutex_borrow_logger.report_borrowing(self, record.current_owner, id_);
 					} else {
 						std::cout << "Skip re-locking Log mutex" << std::endl;
 					}
