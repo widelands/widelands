@@ -18,6 +18,8 @@
 
 #include "scripting/lua_ui.h"
 
+#include <memory>
+
 #include <SDL_mouse.h>
 
 #include "base/log.h"
@@ -4128,7 +4130,9 @@ static int L_show_messagebox(lua_State* L) {
 	UI::WLMessageBox m(
 	   get_egbase(L).get_ibase(), UI::WindowStyle::kWui, title, text,
 	   allow_cancel ? UI::WLMessageBox::MBoxType::kOkCancel : UI::WLMessageBox::MBoxType::kOk);
-	UI::Panel::Returncodes result = m.run<UI::Panel::Returncodes>();
+	UI::Panel::Returncodes result;
+	NoteThreadSafeFunction::instantiate(
+	   [&result, &m]() { result = m.run<UI::Panel::Returncodes>(); }, true);
 
 	lua_pushboolean(L, static_cast<int>(result == UI::Panel::Returncodes::kOk));
 	return 1;
