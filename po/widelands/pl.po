@@ -7,6 +7,7 @@
 # GunChleoc, 2016,2018
 # Wesmania <ikk_pl@yahoo.co.uk>, 2015
 # Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
+# Karol Zygmunt, 2024
 # Lech Lorens <lech.lorens@gmail.com>, 2019
 # Leszek Szary, 2024
 # Marcin S <dzidek1003@o2.pl>, 2021
@@ -26,9 +27,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-17 02:25+0000\n"
+"POT-Creation-Date: 2024-02-19 02:28+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Leszek Szary, 2024\n"
+"Last-Translator: Karol Zygmunt, 2024\n"
 "Language-Team: Polish (http://app.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -805,7 +806,7 @@ msgstr "Zwierzęta: %1$s"
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:93
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:98
 msgid "Automatic Trees"
-msgstr ""
+msgstr "Automatyczne Drzewa"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../src/editor/tools/place_immovable_tool.cc:148
@@ -1653,7 +1654,7 @@ msgstr "%1$s %2$s"
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:51
 #, c-format
 msgid "%1$s (removable by e.g. placing roads)"
-msgstr ""
+msgstr "%1$s (usuwalne za pomocą np. układania dróg)"
 
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:54
 #, c-format
@@ -1721,7 +1722,7 @@ msgstr "Odstępy:"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:67
 msgid "Radius of the active tool"
-msgstr ""
+msgstr "Promień aktywnego narzędzia"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:68
 msgid "Amount of random gaps in the tool’s area"
@@ -1843,7 +1844,7 @@ msgstr "Skopiuj link do schowka"
 #, c-format
 msgctxt "definitionterm"
 msgid "%s:"
-msgstr ""
+msgstr "%s:"
 
 #. * TRANSLATORS: Part of tooltip entry for characters in illegal filenames.
 #. replaces the
@@ -1935,7 +1936,7 @@ msgstr "Warunek początkowy"
 
 #: ../../src/logic/addons.cc:72
 msgid "UI Plugin"
-msgstr ""
+msgstr "Plugin UI"
 
 #: ../../src/logic/addons.cc:112
 #, c-format
@@ -2015,7 +2016,7 @@ msgstr "Brak"
 #: ../../src/logic/addons.cc:275
 #, c-format
 msgid "%1$s<br>• %2$s (version %3$s)"
-msgstr ""
+msgstr "%1$s<br>· %2$s (wersja %3$s)"
 
 #: ../../src/logic/addons.cc:305
 msgid "No game-relevant add-ons in use."
@@ -2033,51 +2034,51 @@ msgstr[3] ""
 #. * TRANSLATORS: "12 steps northwest of Port1"
 #: ../../src/logic/detected_port_space.cc:52
 msgid "northwest"
-msgstr ""
+msgstr "północny zachód"
 
 #. * TRANSLATORS: "12 steps northeast of Port1"
 #: ../../src/logic/detected_port_space.cc:56
 msgid "northeast"
-msgstr ""
+msgstr "północny wschód"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../src/logic/detected_port_space.cc:60
 msgid "southwest"
-msgstr ""
+msgstr "południowy zachód"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../src/logic/detected_port_space.cc:64
 msgid "southeast"
-msgstr ""
+msgstr "południowy wschód"
 
 #. * TRANSLATORS: "12 steps north of Port1"
 #: ../../src/logic/detected_port_space.cc:68
 msgid "north"
-msgstr ""
+msgstr "na północ"
 
 #. * TRANSLATORS: "12 steps south of Port1"
 #: ../../src/logic/detected_port_space.cc:72
 msgid "south"
-msgstr ""
+msgstr "na południe"
 
 #. * TRANSLATORS: "12 steps west of Port1"
 #: ../../src/logic/detected_port_space.cc:76
 msgid "west"
-msgstr ""
+msgstr "na zachód"
 
 #. * TRANSLATORS: "12 steps east of Port1"
 #: ../../src/logic/detected_port_space.cc:80
 msgid "east"
-msgstr ""
+msgstr "na wschód"
 
 #: ../../src/logic/detected_port_space.cc:88
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s"
-msgstr ""
+msgstr "Bezpańskie miejsce na port odkryte na %1$s przez %2$s"
 
-#. * TRANSLATORS: "Unowned port space discovered at 1:23 by Ship2 34 steps
+#. * TRANSLATORS: "Unowned port space discovered at 1:11 by Ship2 33 steps
 #. north of
-#. Port1"
+#. Port5"
 #: ../../src/logic/detected_port_space.cc:94
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s of %5$s"
@@ -2093,9 +2094,9 @@ msgstr[3] ""
 msgid "Port space of %1$s discovered at %2$s by %3$s"
 msgstr ""
 
-#. * TRANSLATORS: "Port space of Player3 discovered at 1:23 by Ship2 34 steps
+#. * TRANSLATORS: "Port space of Player1 discovered at 2:22 by Ship3 44 steps
 #. north
-#. of Port1"
+#. of Port6"
 #: ../../src/logic/detected_port_space.cc:108
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s of %6$s"
@@ -2110,49 +2111,49 @@ msgstr[3] ""
 #: ../../src/logic/detected_port_space.cc:120
 msgctxt "direction"
 msgid "NW"
-msgstr ""
+msgstr "PŁN-ZACH"
 
 #. * TRANSLATORS: This is an abbreviated direction: Northeast.
 #: ../../src/logic/detected_port_space.cc:124
 msgctxt "direction"
 msgid "NE"
-msgstr ""
+msgstr "PŁN-WSCH"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southwest.
 #: ../../src/logic/detected_port_space.cc:128
 msgctxt "direction"
 msgid "SW"
-msgstr ""
+msgstr "PŁD-ZACH"
 
 #. * TRANSLATORS: This is an abbreviated direction: Southeast.
 #: ../../src/logic/detected_port_space.cc:132
 msgctxt "direction"
 msgid "SE"
-msgstr ""
+msgstr "PŁD-WSCH"
 
 #. * TRANSLATORS: This is an abbreviated direction: North.
 #: ../../src/logic/detected_port_space.cc:136
 msgctxt "direction"
 msgid "N"
-msgstr ""
+msgstr "PŁN"
 
 #. * TRANSLATORS: This is an abbreviated direction: South.
 #: ../../src/logic/detected_port_space.cc:140
 msgctxt "direction"
 msgid "S"
-msgstr ""
+msgstr "PŁD"
 
 #. * TRANSLATORS: This is an abbreviated direction: West.
 #: ../../src/logic/detected_port_space.cc:144
 msgctxt "direction"
 msgid "W"
-msgstr ""
+msgstr "ZACH"
 
 #. * TRANSLATORS: This is an abbreviated direction: East.
 #: ../../src/logic/detected_port_space.cc:148
 msgctxt "direction"
 msgid "E"
-msgstr ""
+msgstr "WSCH"
 
 #. * TRANSLATORS: Placeholders are gametime and shipname. Keep this short.
 #: ../../src/logic/detected_port_space.cc:157
@@ -2595,27 +2596,27 @@ msgstr "Twoja stocznia promów nie została wybudowana wystarczająco blisko brz
 
 #: ../../src/logic/map_objects/tribes/ship.cc:399
 msgid "Destination Gone"
-msgstr ""
+msgstr "Kierunek przepadł"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:399
 msgid "Ship Destination Vanished"
-msgstr ""
+msgstr "Kierunek statku zniknął"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:400
 msgid "Your ship’s destination has disappeared."
-msgstr ""
+msgstr "Kierunek twojego statku zniknął."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:427
 msgid "Ship Arrived"
-msgstr ""
+msgstr "Statek Przypłynął"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:427
 msgid "Ship Reached Destination"
-msgstr ""
+msgstr "Statek dotarł do celu"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:428
 msgid "Your ship has arrived at its destination."
-msgstr ""
+msgstr "Twój statek dotarł do celu."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:637
 msgid "A warship arrived at a known port build space."
@@ -2632,7 +2633,7 @@ msgstr "Miejsce na port"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:639
 msgid "Port Space Spotted"
-msgstr ""
+msgstr "Miejsce na port dostrzeżone"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:645
 msgid "A warship found a new port build space."
@@ -2648,65 +2649,65 @@ msgstr "Znaleziono miejsce na port"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:747
 msgid "Enemy Ship"
-msgstr ""
+msgstr "Wrogi statek"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:747
 msgid "Enemy Ship Spotted"
-msgstr ""
+msgstr "Wrogi statek dostrzeżony"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:748
 msgid "A warship spotted an enemy ship."
-msgstr ""
+msgstr "Okręt dostrzegł wrogi statek."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:778
 #: ../../src/logic/map_objects/tribes/ship.cc:797
 msgid "Destination Unreachable"
-msgstr ""
+msgstr "Kierunek nieosiągalny"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:778
 #: ../../src/logic/map_objects/tribes/ship.cc:797
 msgid "Ship Destination Unreachable"
-msgstr ""
+msgstr "Kierunek statku nieosiągalny"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:779
 msgid "Your ship could not find a path to its destination."
-msgstr ""
+msgstr "Twój statek nie mógł znaleźć ścieżki do celu."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:798
 #, c-format
 msgid "Your ship could not find a path to its destination port ‘%s’."
-msgstr ""
+msgstr "Twój statek nie mógł znaleźć ścieżki do docelowego portu '%s'."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1303
 #: ../../src/logic/map_objects/tribes/ship.cc:1561
 msgid "Enemy Ship Attacking"
-msgstr ""
+msgstr "Wrogi statek atakuje"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1303
 #: ../../src/logic/map_objects/tribes/ship.cc:1560
 msgid "Naval Attack"
-msgstr ""
+msgstr "Atak morski"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1304
 #, c-format
 msgid "Your ship ‘%s’ is under attack from an enemy warship."
-msgstr ""
+msgstr "Twój statek '%s' jest pod atakiem wrogiego okrętu."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1423
 msgid "Ship Destroyed"
-msgstr ""
+msgstr "Statek zniszczony"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1423
 msgid "Ship Sunk"
-msgstr ""
+msgstr "Statek zatonął"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1424
 msgid "An enemy ship has destroyed your warship."
-msgstr ""
+msgstr "Wrogi statek zniszczył twój okręt."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1562
 msgid "Your coast is under attack from an enemy warship."
-msgstr ""
+msgstr "Twój brzeg jest atakowany przez wrogi okręt."
 
 #: ../../src/logic/map_objects/tribes/ship.cc:1791
 msgid "Island Circumnavigated"
@@ -2766,15 +2767,15 @@ msgstr "Odkryte miejsce na budowę portu nie jest już dostępne."
 #: ../../src/logic/map_objects/tribes/ship.cc:2214
 msgctxt "ship"
 msgid "Warship"
-msgstr ""
+msgstr "Okręt"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2214
 msgid "Warship Ready"
-msgstr ""
+msgstr "Okręt gotowy"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2215
 msgid "A warship is waiting for your commands."
-msgstr ""
+msgstr "Okręt czeka na twoje rozkazy."
 
 #. * TRANSLATORS: Ship expedition ready
 #: ../../src/logic/map_objects/tribes/ship.cc:2220
@@ -2793,28 +2794,28 @@ msgstr "Statek ekspedycyjny czeka na twoje rozkazy."
 #: ../../src/logic/map_objects/tribes/ship.cc:2385
 msgctxt "ship_state"
 msgid "Sinking"
-msgstr ""
+msgstr "Zatonięcie"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2387
 msgctxt "ship_state"
 msgid "Fighting"
-msgstr ""
+msgstr "Walka"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2391
 msgctxt "ship_state"
 msgid "Refitting to Transport Ship"
-msgstr ""
+msgstr "Remont do statku transportowego"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2394
 msgctxt "ship_state"
 msgid "Refitting to Warship"
-msgstr ""
+msgstr "Remont do okrętu"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:2400
 #: ../../src/wui/seafaring_statistics_menu.cc:270
 msgctxt "ship_state"
 msgid "Warship"
-msgstr ""
+msgstr "Okręt"
 
 #. * TRANSLATORS: This is a ship state. The ship is
 #. * currently sailing to a specific destination ship.
@@ -2829,7 +2830,7 @@ msgstr ""
 #, c-format
 msgctxt "ship_state"
 msgid "Sailing to %s"
-msgstr ""
+msgstr "Płynięcie do %s"
 
 #. * TRANSLATORS: This is a ship state. The ship is ready
 #. * to transport wares, but has nothing to do.
@@ -2845,7 +2846,7 @@ msgstr "Pusty"
 #, c-format
 msgctxt "ship_state"
 msgid "Shipping to %s"
-msgstr ""
+msgstr "Transport do %s"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
@@ -3175,7 +3176,7 @@ msgstr "Zapisywanie gry…"
 
 #: ../../src/logic/save_handler.cc:152
 msgid "Saving skipped"
-msgstr ""
+msgstr "Zapis pominięty"
 
 #: ../../src/logic/save_handler.cc:170
 #: ../../src/wui/game_main_menu_save_game.cc:338
@@ -3330,7 +3331,7 @@ msgstr "Sprawdzanie mapy"
 
 #: ../../src/map_io/widelands_map_loader.cc:450
 msgid "Postloading map objects"
-msgstr ""
+msgstr "Postładowanie map obiektu"
 
 #: ../../src/network/gameclient.cc:162 ../../src/network/gamehost.cc:561
 #: ../../src/ui_fsmenu/launch_spg.cc:174 ../../src/wlapplication.cc:788
@@ -3363,14 +3364,14 @@ msgstr[3] "%u wykryto niezgodności dodatków:\n"
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ required by host not found"
-msgstr ""
+msgstr "%1$s\n. '%2$s' wymagany przez hosta nie został znaleziony"
 
 #: ../../src/network/gameclient.cc:819
 #, c-format
 msgid ""
 "%1$s\n"
 "• ‘%2$s’ installed at version %3$s but host uses version %4$s"
-msgstr ""
+msgstr "%1$s\n. '%2$s' zainstalowano wersję %3$s, gdy host używa wersji %4$s"
 
 #: ../../src/network/gameclient.cc:990
 msgid "/me ’s file failed md5 checksumming."
@@ -4620,7 +4621,7 @@ msgstr[3] "Czy na pewno chcesz zaktualizować te dodatki: %u?"
 msgid ""
 "\n"
 "• %1$s (%2$s) by %3$s"
-msgstr ""
+msgstr "\n· %1$s (%2$s) przez %3$s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:656
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:413
@@ -4764,29 +4765,29 @@ msgstr[3] "Zaktualizuj następujące dodatki: %u"
 #: ../../src/ui_fsmenu/addons/manager.cc:1169
 #, c-format
 msgid "• %s"
-msgstr ""
+msgstr "· %s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1205
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which could not be found"
-msgstr ""
+msgstr "· ‘%1$s’ wymaga ‘%2$s’, który nie został znaleziony"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1210
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is disabled"
-msgstr ""
+msgstr "· ‘%1$s’ wymaga ‘%2$s’, który jest wyłączony"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1217
 #, c-format
 msgid "• ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
-msgstr ""
+msgstr "· ‘%1$s’ wymaga ‘%2$s’, który jest wypisany niżej następującego dodatku"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1245
 #, c-format
 msgid ""
 "• ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
-msgstr ""
+msgstr "· ‘%1$s’ wymaga najpierw ‘%2$s’, a potem ‘%3$s’, ale są wymienione w złej kolejności"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1261
 #, c-format
@@ -5011,7 +5012,7 @@ msgstr[3] "Jeśli opuścisz narzędzie do pakowania dodatków, wszystkie zmiany 
 msgid ""
 "%1$s\n"
 "• %2$s"
-msgstr ""
+msgstr "%1$s\n· %2$s"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:463
 msgid "Quit Packager"
@@ -6058,7 +6059,7 @@ msgstr "Zabroń dyplomacji"
 
 #: ../../src/ui_fsmenu/launch_game.cc:141
 msgid "Enable naval warfare (experimental feature)"
-msgstr ""
+msgstr "Włączono wojnę morską (funkcja eksperymentalna)"
 
 #: ../../src/ui_fsmenu/launch_game.cc:149
 msgid "Custom starting positions"
@@ -6066,7 +6067,7 @@ msgstr "Niestandardowe pozycje startowe"
 
 #: ../../src/ui_fsmenu/launch_game.cc:157
 msgid "Write Replay"
-msgstr ""
+msgstr "Napisz powtórkę"
 
 #: ../../src/ui_fsmenu/launch_game.cc:167
 msgid "Change map…"
@@ -6124,23 +6125,23 @@ msgstr "Zezwól graczom na ustawienie własnych pozycji startowych na początku 
 
 #: ../../src/ui_fsmenu/launch_game.cc:370
 msgid "Player vision is set by the scenario"
-msgstr ""
+msgstr "Wizja graczy jest ustalana przez scenariusz"
 
 #: ../../src/ui_fsmenu/launch_game.cc:372
 msgid "Player vision is set by the saved game"
-msgstr ""
+msgstr "Wizja graczy jest ustalana przez zapis gry"
 
 #: ../../src/ui_fsmenu/launch_game.cc:374
 msgid "Give all players permanent vision of the entire map"
-msgstr ""
+msgstr "Daj wszystkim graczom nieskończoną wizję całej mapy"
 
 #: ../../src/ui_fsmenu/launch_game.cc:395
 msgid "Naval warfare is set by the scenario"
-msgstr ""
+msgstr "Wojna morska jest ustawiana przez scenariusz"
 
 #: ../../src/ui_fsmenu/launch_game.cc:397
 msgid "Naval warfare is set by the saved game"
-msgstr ""
+msgstr "Wojna morska jest ustalana przez zapis gry"
 
 #: ../../src/ui_fsmenu/launch_game.cc:400
 msgid ""
@@ -6438,7 +6439,7 @@ msgstr "Obejrzyj powtórkę starej gry"
 
 #: ../../src/ui_fsmenu/main.cc:464
 msgid "Watch last saved replay"
-msgstr ""
+msgstr "Obejrzyj ostatnią zapisaną powtórkę"
 
 #: ../../src/ui_fsmenu/main.cc:490
 msgid "Single Player…"
@@ -6454,7 +6455,7 @@ msgstr "Edytor..."
 
 #: ../../src/ui_fsmenu/main.cc:493
 msgid "Watch Replay…"
-msgstr ""
+msgstr "Obejrzyj powtórkę..."
 
 #: ../../src/ui_fsmenu/main.cc:495
 msgid "Begin or load a single-player campaign or free game"
@@ -6470,7 +6471,7 @@ msgstr "Włącz edytor map"
 
 #: ../../src/ui_fsmenu/main.cc:504
 msgid "Watch again a recorded earlier game"
-msgstr ""
+msgstr "Obejrzyj ponownie wcześniej nagraną rozgrywkę"
 
 #: ../../src/ui_fsmenu/main.cc:507 ../../src/wlapplication_options.cc:333
 msgid "Add-Ons"
@@ -6512,7 +6513,7 @@ msgstr "Wersja %1$s"
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team • Licensed under the GNU "
 "General Public License V2.0"
-msgstr ""
+msgstr "(C) %1%-%2% przez Widelands Development Team · Opublikowane na licencji GNU General Public License V2.0"
 
 #: ../../src/ui_fsmenu/main.cc:882
 msgid "Desyncing Add-On Found"
@@ -6774,7 +6775,7 @@ msgstr "Zmień rozmiar narzędzi edytora"
 #. The ':' will be added by another format string.
 #: ../../src/ui_fsmenu/mousewheel_options.cc:457
 msgid "Change Editor Tool Gap"
-msgstr ""
+msgstr "Zmień odstęp narzędzia edytora"
 
 #. * TRANSLATORS: Used as e.g. "Invert scroll direction for map zooming:
 #. Vertical"
@@ -6854,7 +6855,7 @@ msgstr "Obserwator"
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:198
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:54
 msgid "Player Number"
-msgstr ""
+msgstr "Numer gracza"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:216
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:370
@@ -7375,13 +7376,13 @@ msgstr "Kopiuj informacje techniczne do schowka"
 #: ../../src/ui_fsmenu/training_wheel_options.cc:42
 msgctxt "teaching_progress"
 msgid "Edit Teaching Progress"
-msgstr ""
+msgstr "Edycja postępu nauczania"
 
 #. * TRANSLATORS: Title above a list
 #: ../../src/ui_fsmenu/training_wheel_options.cc:65
 msgctxt "teaching_progress"
 msgid "Teaching objectives"
-msgstr ""
+msgstr "Cele nauczania"
 
 #. * TRANSLATORS: Button label to mark or unmark all checkboxes in an options
 #. window
@@ -7395,19 +7396,19 @@ msgstr "Odznacz wszystko"
 
 #: ../../src/wlapplication.cc:832
 msgid "Widelands could not find the last edited map."
-msgstr ""
+msgstr "Widelands nie mogło znaleźć ostatniej, zedytowanej mapy"
 
 #: ../../src/wlapplication.cc:836
 msgid "No Last Edited Map"
-msgstr ""
+msgstr "Brak zedytowanej mapy"
 
 #: ../../src/wlapplication.cc:867
 msgid "No last saved replay."
-msgstr ""
+msgstr "Brak zapisanej powtórki"
 
 #: ../../src/wlapplication.cc:869
 msgid "No last saved game."
-msgstr ""
+msgstr "Brak zapisanej gry"
 
 #: ../../src/wlapplication.cc:879
 #, c-format

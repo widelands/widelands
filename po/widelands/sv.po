@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-17 02:25+0000\n"
+"POT-Creation-Date: 2024-02-19 02:28+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Niklas Nordgren, 2022-2023\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
@@ -2051,9 +2051,9 @@ msgstr ""
 msgid "Unowned port space discovered at %1$s by %2$s"
 msgstr ""
 
-#. * TRANSLATORS: "Unowned port space discovered at 1:23 by Ship2 34 steps
+#. * TRANSLATORS: "Unowned port space discovered at 1:11 by Ship2 33 steps
 #. north of
-#. Port1"
+#. Port5"
 #: ../../src/logic/detected_port_space.cc:94
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s of %5$s"
@@ -2067,9 +2067,9 @@ msgstr[1] ""
 msgid "Port space of %1$s discovered at %2$s by %3$s"
 msgstr ""
 
-#. * TRANSLATORS: "Port space of Player3 discovered at 1:23 by Ship2 34 steps
+#. * TRANSLATORS: "Port space of Player1 discovered at 2:22 by Ship3 44 steps
 #. north
-#. of Port1"
+#. of Port6"
 #: ../../src/logic/detected_port_space.cc:108
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s of %6$s"

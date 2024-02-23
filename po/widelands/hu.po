@@ -19,9 +19,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-17 02:25+0000\n"
+"POT-Creation-Date: 2024-02-19 02:28+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: zone <z-one@freemail.hu>, 2015\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021-2024\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2056,9 +2056,9 @@ msgstr "keletre"
 msgid "Unowned port space discovered at %1$s by %2$s"
 msgstr "Szabad kikötőhely, amit %1$s-kor talált %2$s"
 
-#. * TRANSLATORS: "Unowned port space discovered at 1:23 by Ship2 34 steps
+#. * TRANSLATORS: "Unowned port space discovered at 1:11 by Ship2 33 steps
 #. north of
-#. Port1"
+#. Port5"
 #: ../../src/logic/detected_port_space.cc:94
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s of %5$s"
@@ -2072,9 +2072,9 @@ msgstr[1] "Szabad kikötőhely, amit a(z) %2$s talált %1$s-kor %5$s kikötőjé
 msgid "Port space of %1$s discovered at %2$s by %3$s"
 msgstr "%1$s kikötőhelye, amit a(z) %3$s talált %2$s-kor"
 
-#. * TRANSLATORS: "Port space of Player3 discovered at 1:23 by Ship2 34 steps
+#. * TRANSLATORS: "Port space of Player1 discovered at 2:22 by Ship3 44 steps
 #. north
-#. of Port1"
+#. of Port6"
 #: ../../src/logic/detected_port_space.cc:108
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s of %6$s"
@@ -7344,17 +7344,17 @@ msgstr "Fájlrendszer hiba"
 #: ../../src/wlapplication.cc:1360
 #, c-format
 msgid "Command line parameter --%s can not use a value"
-msgstr ""
+msgstr "A --%s parancssori beállításhoz nem lehet értéket megadni."
 
 #: ../../src/wlapplication.cc:1365
 #, c-format
 msgid "Empty value of command line parameter --%s"
-msgstr ""
+msgstr "Hiányzik az érték a --%s parancssori beállításhoz."
 
 #: ../../src/wlapplication.cc:1371
 #, c-format
 msgid "Command line parameters --%1$s and --%2$s can not be combined"
-msgstr ""
+msgstr "A --%1$s és a --%2$s beállítások nem használhatók együtt."
 
 #: ../../src/wlapplication.cc:1559
 #, c-format
