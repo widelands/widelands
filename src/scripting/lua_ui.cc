@@ -683,8 +683,8 @@ int LuaPanel::get_child(lua_State* L) {
 
            * Properties for normal spinboxes:
 
-             * ``"min"``: The spinbox's minimum value.
-             * ``"max"``: The spinbox's maximum value.
+             * ``"min"``: **Mandatory** for normal spinboxes. The spinbox's minimum value.
+             * ``"max"``: **Mandatory** for normal spinboxes. The spinbox's maximum value.
              * ``"step_size_small"``: **Optional**.
                The amount by which the value changes on each button click.
              * ``"step_size_big"``: **Optional**. If set, the spinbox additionally shows
@@ -692,10 +692,10 @@ int LuaPanel::get_child(lua_State* L) {
 
            * Properties for value list spinboxes:
 
-             * ``"values"``: An array of integers. The spinbox can only switch between the values
-               in this array.
+             * ``"values"``: **Mandatory** to set the type to value list. An array of integers.
+               The spinbox can only switch between the values in this array.
 
-           Both ``"min"`` and ``"max"`` are required when ``"values"`` is not used.
+             The properties for normal spinboxes above cannot be used when ``"values"`` is used.
 
            This widget can not have a custom tooltip.
 
