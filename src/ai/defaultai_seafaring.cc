@@ -338,7 +338,8 @@ void DefaultAI::manage_ports() {
 	for (PortSiteObserver& p_obs : portsites) {
 		if (p_obs.site == nullptr) {
 			// Race condition?
-			log_err_time(game().get_gametime(), "AI %d: Invalid port", player_number());
+			log_warn_time(
+			   game().get_gametime(), "AI %d: manage_ports(): Invalid port", player_number());
 			continue;
 		}
 
@@ -368,15 +369,51 @@ void DefaultAI::manage_ports() {
 			start_expedition = false;
 		}
 
-		if (game().naval_warfare_allowed() &&
-		    p_obs.site->get_desired_soldier_count() < kPortDefaultGarrison) {
-			// Check garrisoned soldiers
-			verb_log_dbg_time(game().get_gametime(), "AI %d: Set garrison for port %s",
-			                  player_number(), p_obs.site->get_warehouse_name().c_str());
-			game().send_player_change_soldier_capacity(
-			   *p_obs.site, kPortDefaultGarrison - p_obs.site->get_desired_soldier_count());
+		const Widelands::Quantity current_garrison = p_obs.site->get_desired_soldier_count();
+		const bool full =
+		   p_obs.site->soldier_control()->associated_soldiers().size() >= current_garrison;
+
+		Widelands::Quantity desired_garrison = kPortDefaultGarrison;
+		int32_t change_value = 0;
+
+		switch (soldier_status_) {
+		case SoldiersStatus::kBadShortage:
+			// reduce minimum to allow garrison of some milsites to ensure expansion
+			desired_garrison = 2;
+			if (current_garrison > desired_garrison) {
+				change_value = -1;
+			}
+			break;
+		case SoldiersStatus::kShortage:
+			desired_garrison = kPortDefaultGarrison;
+			if (current_garrison > desired_garrison) {
+				change_value = -1;
+			}
+			break;
+		case SoldiersStatus::kEnough:
+			desired_garrison = kPortDefaultGarrison * 2;
+			if (full && current_garrison < desired_garrison) {
+				change_value = 1;
+			}
+			break;
+		case SoldiersStatus::kFull:
+			desired_garrison = kPortDefaultGarrison * 3;
+			if (full && current_garrison < desired_garrison) {
+				change_value = 1;
+			}
+		}
+
+		// Check soldiers requirement of port and set garrison to desired value
+		if (change_value != 0) {
+			// ports should always require Heroes
 			game().send_player_set_soldier_preference(
 			   *p_obs.site, Widelands::SoldierPreference::kHeroes);
+			verb_log_dbg_time(game().get_gametime(),
+			                  "AI %d: Set garrison for port %s, desired garrison %d, actual garrison "
+			                  "%d, change value %d\n",
+			                  player_number(), p_obs.site->get_warehouse_name().c_str(),
+			                  desired_garrison, p_obs.site->get_desired_soldier_count(), change_value);
+			game().send_player_change_soldier_capacity(*p_obs.site, change_value);
 		}
 		// Warships assign themselves
 	}
@@ -408,7 +445,8 @@ bool DefaultAI::check_ships(const Time& gametime) {
 	for (ShipObserver& so : allships) {
 
 		if (so.ship == nullptr) {  // good old paranoia
-			log_err_time(game().get_gametime(), "AI %d: Invalid ship", player_number());
+			log_warn_time(
+			   game().get_gametime(), "AI %d: check_ships(): Invalid ship", player_number());
 			continue;
 		}
 
@@ -484,7 +522,7 @@ bool DefaultAI::check_ships(const Time& gametime) {
 				if (!so.guarding) {
 					verb_log_warn_time(
 					   gametime,
-					   "  %1d: last command for ship %s at %3dx%3d was %3d seconds ago, something "
+					   "AI %1d: last command for ship %s at %3dx%3d was %3d seconds ago, something "
 					   "wrong here?...\n",
 					   player_number(), so.ship->get_shipname().c_str(), so.ship->get_position().x,
 					   so.ship->get_position().y, (gametime - so.last_command_time).get() / 1000);
@@ -512,17 +550,28 @@ bool DefaultAI::check_ships(const Time& gametime) {
 			// Checking utilization
 
 			// Good utilization is 10 pieces of ware onboard, to track utilization we use range
-			// 0-10000
-			// to avoid float or rounding errors if integers in range 0-100
-			const int16_t tmp_util =
-			   (so.ship->get_nritems() > 10) ? 10000 : so.ship->get_nritems() * 1000;
-			// This number is kind of average
-			persistent_data->ships_utilization =
-			   persistent_data->ships_utilization * 19 / 20 + tmp_util / 20;
+			// 0-10000 to avoid float or rounding errors if integers in range 0-100
+			const uint32_t tmp_util = std::min(so.ship->get_nritems(), 10U) * 1000;
 
-			// Arithmetics check
-			assert(persistent_data->ships_utilization >= 0 &&
-			       persistent_data->ships_utilization <= 10000);
+			// persistent_data->ships_utilization is uint16_t, and saved in player data in
+			// savegames. Let's just work around the limitation, then convert back.
+			uint32_t average_util = persistent_data->ships_utilization;
+			average_util = (average_util * 19 + tmp_util) / 20;
+
+			// Sanity checks
+			if ((persistent_data->ships_utilization == tmp_util && average_util != tmp_util) ||
+			    // std::min/max is picky about integer size...
+			    (average_util < persistent_data->ships_utilization && average_util < tmp_util) ||
+			    (average_util > persistent_data->ships_utilization && average_util > tmp_util) ||
+			    // ..._util < 0 is prevented by uint type
+			    tmp_util > 10000 || average_util > 10000) {
+				log_warn_time(
+				   gametime, "AI %d: Ship utilisation calculation error: old: %u current: %u new: %u",
+				   player_number(), persistent_data->ships_utilization, tmp_util, average_util);
+			}
+
+			// Now we can safely assign new value back to uint16_t
+			persistent_data->ships_utilization = average_util;
 		}
 	}
 
@@ -658,7 +707,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 
 	// We will dereference this all over this function. Let's check at least once.
 	if (so.ship == nullptr) {  // Should only happen in race conditions.
-		log_err_time(gametime, "AI %d: expedition_management(): Invalid expedition ship.", pn);
+		log_warn_time(gametime, "AI %d: expedition_management(): Invalid expedition ship.", pn);
 		return;
 	}
 

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-01 02:43+0000\n"
+"POT-Creation-Date: 2024-02-08 02:24+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: Niklas Nordgren, 2023\n"
 "Language-Team: Swedish (http://app.transifex.com/widelands/widelands/language/sv/)\n"
@@ -461,10 +461,6 @@ msgstr "Kristin – editerad av 3plus4i"
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
 msgstr "Bemanna fartygen och segla mot horisonten."
-
-#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:11
-msgid "This map is not winnable with the ‘Autocrat’ win condition."
-msgstr "Denna karta går inte att vinna i med 'Autocrat' satt som vinnande mål."
 
 #: ../../data/maps/Dolomites.wmf/elemental:8
 msgid "Dolomites 3.0"
