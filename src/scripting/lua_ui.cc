@@ -661,8 +661,8 @@ int LuaPanel::get_child(lua_State* L) {
            * Common Properties:
 
              * ``"unit_w"``: **Mandatory**. The total width of the buttons and value display.
-             * ``"value"``: **Mandatory**. The spinbox's initial value. For value list spinboxes,
-               this is the 0 based index of the initial value within ``"values"``.
+             * ``"value"``: **Mandatory**. The spinbox's initial value. When ``"values"`` is used,
+               this is a 0 based index within the value list.
              * ``"label"``: **Optional**. Text to display next to the spinbox.
              * ``"units"``: **Optional**. The unit for the spinbox's value. One of:
 
@@ -679,12 +679,10 @@ int LuaPanel::get_child(lua_State* L) {
              * ``"on_changed"``: **Optional**. Callback code to run when the spinbox's value
                changes.
 
-           * Properties for normal spinboxes (forbidden with ``"values"``):
+           * Properties for normal spinboxes:
 
-             * ``"min"``: **Mandatory**. The spinbox's minimum value. Ignored if ``"values"`` are
-               provided.
-             * ``"max"``: **Mandatory**. The spinbox's maximum value. Ignored if ``"values"`` are
-               provided.
+             * ``"min"``: The spinbox's minimum value.
+             * ``"max"``: The spinbox's maximum value.
              * ``"step_size_small"``: **Optional**.
                The amount by which the value changes on each button click.
              * ``"step_size_big"``: **Optional**. If set, the spinbox additionally shows
@@ -692,8 +690,10 @@ int LuaPanel::get_child(lua_State* L) {
 
            * Properties for value list spinboxes:
 
-             * ``"values"``: **Mandatory**. An array of integers. The spinbox can only switch
-               between the values in this array.
+             * ``"values"``: An array of integers. The spinbox can only switch between the values
+               in this array.
+
+           Both ``"min"`` and ``"max"`` are required when ``"values"`` is not used.
 
            This widget can not have a custom tooltip.
 
