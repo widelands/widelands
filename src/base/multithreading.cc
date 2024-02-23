@@ -222,6 +222,7 @@ void MutexLock::pop_stay_responsive_function() {
 class MutexBorrowLogger {
 public:
 	void report_borrowing(std::thread::id borrower, std::thread::id owner, MutexLock::ID lock);
+
 private:
 	std::thread::id last_borrower_{kNoThread};
 	std::thread::id last_owner_{kNoThread};
@@ -231,8 +232,9 @@ private:
 };
 static MutexBorrowLogger g_mutex_borrow_logger;
 
-void MutexBorrowLogger::report_borrowing(
-   std::thread::id borrower, std::thread::id owner, MutexLock::ID lock) {
+void MutexBorrowLogger::report_borrowing(std::thread::id borrower,
+                                         std::thread::id owner,
+                                         MutexLock::ID lock) {
 
 	const uint32_t now = SDL_GetTicks();
 	const bool same = lock == last_lock_ && borrower == last_borrower_ && owner == last_owner_;
@@ -244,13 +246,13 @@ void MutexBorrowLogger::report_borrowing(
 		if (borrow_counter_ > 1) {
 			// Only log as repeated if more than 1 occurences before timing out
 			verb_log_dbg("%s skipped locking mutex %s %u times in %ums",
-							 thread_name(last_borrower_).c_str(), to_string(last_lock_).c_str(),
-							 borrow_counter_, now - last_log_time_);
+			             thread_name(last_borrower_).c_str(), to_string(last_lock_).c_str(),
+			             borrow_counter_, now - last_log_time_);
 		} else {
 			// Different or happened a long time ago
 			verb_log_dbg("%s skips locking mutex %s owned by wrapping thread %s",
-							 thread_name(borrower).c_str(), to_string(lock).c_str(),
-							 thread_name(owner).c_str());
+			             thread_name(borrower).c_str(), to_string(lock).c_str(),
+			             thread_name(owner).c_str());
 		}
 		last_lock_ = lock;
 		last_borrower_ = borrower;
