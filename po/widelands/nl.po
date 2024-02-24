@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-19 02:28+0000\n"
+"POT-Creation-Date: 2024-02-24 02:22+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Alex Rijckaert, 2023-2024\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
@@ -2230,55 +2230,55 @@ msgid ""
 " anymore, or it’s a new version that can’t be handled yet."
 msgstr "Dit spel was bewaard met een oudere versie van Widelands en kan niet meer geladen worden, of het is een nieuwe versie die nog niet herkend wordt."
 
-#: ../../src/logic/generic_save_handler.cc:221
-#: ../../src/logic/generic_save_handler.cc:225
+#: ../../src/logic/generic_save_handler.cc:223
+#: ../../src/logic/generic_save_handler.cc:227
 msgid "File successfully saved!"
 msgstr "Bestand met succes opgeslagen!"
 
-#: ../../src/logic/generic_save_handler.cc:226
+#: ../../src/logic/generic_save_handler.cc:228
 #, c-format
 msgid "Backup file ‘%s’ could not be deleted."
 msgstr "Kon backupbestand ‘%s’ niet verwijderen."
 
-#: ../../src/logic/generic_save_handler.cc:230
+#: ../../src/logic/generic_save_handler.cc:232
 #, c-format
 msgid "Directory ‘%s’ could not be created!"
 msgstr "Kon bestandsmap ‘%s’ niet aanmaken."
 
-#: ../../src/logic/generic_save_handler.cc:234
+#: ../../src/logic/generic_save_handler.cc:236
 #, c-format
 msgid "File ‘%s’ could not be removed!"
 msgstr "Kon bestand ‘%s’ niet verwijderen."
 
-#: ../../src/logic/generic_save_handler.cc:235
+#: ../../src/logic/generic_save_handler.cc:237
 msgid "Try saving under a different name!"
 msgstr "Probeer met een andere naam op te slaan!"
 
-#: ../../src/logic/generic_save_handler.cc:240
+#: ../../src/logic/generic_save_handler.cc:242
 #, c-format
 msgid "Error writing data to file ‘%s’!"
 msgstr "Fout bij het schrijven van gegevens naar bestand ‘%s’!"
 
-#: ../../src/logic/generic_save_handler.cc:247
+#: ../../src/logic/generic_save_handler.cc:249
 msgid "Saved file may be corrupt!"
 msgstr "Opgeslagen bestand is mogelijk onbruikbaar!"
 
-#: ../../src/logic/generic_save_handler.cc:254
+#: ../../src/logic/generic_save_handler.cc:256
 #, c-format
 msgid "File ‘%s’ could not be restored!"
 msgstr "Kon bestand ‘%s’ niet terugplaatsen!"
 
-#: ../../src/logic/generic_save_handler.cc:255
+#: ../../src/logic/generic_save_handler.cc:257
 #, c-format
 msgid "Backup file ‘%s’ will be available for some time."
 msgstr "Backupbestand ‘%s’ zal nog enige tijd beschikbaar blijven."
 
-#: ../../src/logic/generic_save_handler.cc:264
+#: ../../src/logic/generic_save_handler.cc:266
 #, c-format
 msgid "File ‘%s’ was restored from backup."
 msgstr "Bestand ‘%s’ werd hersteld vanuit een backup."
 
-#: ../../src/logic/generic_save_handler.cc:271
+#: ../../src/logic/generic_save_handler.cc:273
 msgid "An unexpected error occurred:"
 msgstr "Er trad een overwachtte fout op:"
 
@@ -3893,15 +3893,15 @@ msgstr "Widelands kon het lokale netwerk niet gebruiken. Misschien voert een and
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1370
+#: ../../src/scripting/lua_game.cc:1386
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
-#: ../../src/scripting/lua_ui.cc:1137 ../../src/wui/interactive_base.cc:311
+#: ../../src/scripting/lua_ui.cc:1139 ../../src/wui/interactive_base.cc:311
 msgid "Plugin Error"
 msgstr "Fout in plugin"
 
-#: ../../src/scripting/lua_ui.cc:1138 ../../src/wui/interactive_base.cc:312
+#: ../../src/scripting/lua_ui.cc:1140 ../../src/wui/interactive_base.cc:312
 #, c-format
 msgid ""
 "Error when running plugin:\n"
@@ -3984,7 +3984,7 @@ msgstr "Geen overeenkomsten"
 msgid "Please wait…"
 msgstr "Even geduld a.u.b .."
 
-#: ../../src/ui_basic/panel.cc:450
+#: ../../src/ui_basic/panel.cc:457
 msgid "Game ending – please wait…"
 msgstr "Het spel stopt – even geduld aub..."
 
