@@ -63,7 +63,8 @@ MessagePreview::MessagePreview(InfoPanel* i, const Widelands::Message* m, Widela
 
 inline bool MessagePreview::message_still_exists() const {
 	return !(id_.operator bool()) || (owner_.message_queue_ == nullptr) ||
-	       (owner_.message_queue_->count(id_.value()) != 0u && message_->status() != Widelands::Message::Status::kArchived);
+	       (owner_.message_queue_->count(id_.value()) != 0u &&
+	        message_->status() != Widelands::Message::Status::kArchived);
 }
 
 void MessagePreview::think() {
@@ -115,7 +116,8 @@ bool MessagePreview::handle_mousepress(const uint8_t button, int32_t /* x */, in
 		break;
 	case SDL_BUTTON_MIDDLE:  // hide and delete message
 		if (owner_.iplayer_ != nullptr && message_ != nullptr) {
-			owner_.iplayer_->game().send_player_command(new Widelands::CmdMessageSetStatusArchived(owner_.iplayer_->game().get_gametime(), owner_.iplayer_->player_number(), id_));
+			owner_.iplayer_->game().send_player_command(new Widelands::CmdMessageSetStatusArchived(
+			   owner_.iplayer_->game().get_gametime(), owner_.iplayer_->player_number(), id_));
 		}
 		owner_.pop_message(this);
 		break;
