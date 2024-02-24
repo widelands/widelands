@@ -62,7 +62,7 @@ constexpr int kButtonSize = 34;
 }  // namespace
 
 ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelands::Ship* ship)
-   : UniqueWindow(&ib, UI::WindowStyle::kWui, "shipwindow", &reg, 0, 0, ship->get_shipname()),
+   : UniqueWindow(&ib, UI::WindowStyle::kWui, format("shipwindow_%u", ship->serial()), &reg, 0, 0, ship->get_shipname()),
      ibase_(ib),
      ship_(ship),
      vbox_(this, UI::PanelStyle::kWui, "vbox", 0, 0, UI::Box::Vertical),
