@@ -376,6 +376,10 @@ msgid ""
 "enormous force of Danish soldiers, and even your mighty soldiers will not be"
 " able to defeat them all."
 msgstr ""
+"A lelkesedésed éppúgy melengeti lelkemet, ahogy a balsorsod kelti fel "
+"együttérzésemet. Ám az ellenség erősebb, mint amilyennek látszik. Dán "
+"katonák hatalmas seregét hozták, és még a te rettenthetetlen harcosaid sem "
+"fogják tudni mindet legyőzni."
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 1
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:189
@@ -384,6 +388,9 @@ msgid ""
 "farmers, we do not have the expertise or economy to support a drawn-out "
 "battle. Your expertise in this area would be much appreciated."
 msgstr ""
+"A szigetünk nem szokott effajta hadviseléshez. Halászok és földművesek "
+"vagyunk, nincs se tapasztalatunk, se eszközeink arra, hogy tartós háborút "
+"vívjunk. Igen nagyra értékelnénk a ti értő segítségeteket ezen a téren."
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 1
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:192
@@ -391,10 +398,11 @@ msgid ""
 "But first let me give you a clear picture of our small island by showing you"
 " around."
 msgstr ""
+"De először is, hadd vezesselek körbe a szigeten, hogy tisztán lássatok."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:197
 msgid "Economy"
-msgstr ""
+msgstr "Gazdaság"
 
 #. TRANSLATORS: Henneke Lembeck – Trade 2
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:199
@@ -404,6 +412,9 @@ msgid ""
 "any trees, and no places where you could mine iron and other minerals! How "
 "do you come by?"
 msgstr ""
+"Hogyan éltek meg itt egyáltalán? A sziklák lenyűgözőek, de ahogy látom, nem "
+"lehet őket kifejteni, hogy kőházakat építsetek. Alig látok fákat is, és "
+"sehol egy hely, ahol bányászhatnátok! Hogy boldogultok itt?"
 
 #. TRANSLATORS: Ocke Ketelsen – Trade 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:206
@@ -416,6 +427,13 @@ msgid ""
 " I will take care of the rest. This chart indicates how many goods of which "
 "sorts we usually trade."
 msgstr ""
+"Kereskedünk. Gabonát, halat és más árukat adunk el a szárazföldre, ahol "
+"érceket és gránitot veszünk értük. Osszuk meg a feladatokat aszerint, hogy "
+"ki mihez ért legjobban: Ti átszervezitek a gazdaságunkat a háborúhoz, és "
+"kiképzitek az embereinket a harcra, én pedig megszervezem az áruk "
+"behozatalát, hogy mindenből legyen annyi, amennyire csak szükségetek van. "
+"Csak juttassátok el az eladó árukat a kikötőkbe, és én mindent elintézek. "
+"Itt a lista a szokásos árakról."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:212
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:225
@@ -424,11 +442,11 @@ msgstr ""
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:265
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:276
 msgid "Planning the War"
-msgstr ""
+msgstr "A haditerv"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:213
 msgid "Use the Uplands wisely"
-msgstr ""
+msgstr "Használd bölcsen a fennsíkot!"
 
 #. TRANSLATORS: Reebaud – Getting Started 1
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:215
@@ -437,6 +455,9 @@ msgid ""
 " woefully unguarded. We must plan ahead tactically, because I agree that "
 "this battle will not be won quickly."
 msgstr ""
+"Haladjunk sorjában. A városnak kiválóan védhető fekvése van, de jelenleg "
+"borzasztóan védtelen. Taktikusan kell terveznünk, mert egyetértek veled "
+"abban, hogy ezt a csatát nem fogjuk gyorsan megnyerni."
 
 #. TRANSLATORS: Reebaud – Getting Started 1
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:218
@@ -450,10 +471,18 @@ msgid ""
 "advance. Of course we’d be cut off from the ports and the trade routes, so "
 "we should try to avoid getting to this point."
 msgstr ""
+"A fennsíkot csak egy irányból lehet megközelíteni: ezen az emelkedőn, "
+"közvetlenül a városközpont mellett. Építsük az összes fontos termelő "
+"épületet odafent. Néhány sűrűn elhelyezett erőddel a déli végén szinte "
+"bevehetetlenné tehetjük az egész hatalmas területet. Még ha az ellenség el "
+"is tudná foglalni a sziget alját teljesen, itt akár évekig kitarthatunk, "
+"feltéve, hogy elég tartalékot tudunk felhalmozni raktárakban a fennsíkon "
+"előre. Persze ez esetben el lennénk vágva a kikötőktől és a kereskedelmi "
+"utaktól, úgyhogy igyekeznünk kell elkerülni ezt a helyzetet."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:226
 msgid "Fortify the narrow"
-msgstr ""
+msgstr "A szűkület megerősítése"
 
 #. TRANSLATORS: Reebaud – Getting Started 2
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:228
@@ -468,6 +497,15 @@ msgid ""
 " unwise to build anything at all north of the pass, as it would be "
 "dangerously exposed."
 msgstr ""
+"Azonban a legsürgősebb tennivalónk az lenne, hogy bebiztosítsuk ezt az "
+"átjárót itt a legészakibb kikötőnk mellett. Az ellenségnek át kell itt "
+"törnie ahhoz, hogy elérhessen minket, de ez fordítva is igaz. Ha jól "
+"vigyázunk, itt sokáig feltarthatjuk az ellenséget, amíg készen nem állunk az"
+" ellentámadásra. De az átjáró túl szűk, nem olyan könnyű megerősíteni, mint "
+"a fennsík bejáratát. Azért igyekeznünk kell annyi erődöt építeni ide "
+"szorosan egymás mellé, amennyit csak tudunk, hogy visszaszorítsuk az "
+"ellenséget. Nem lenne bölcs dolog az átjárótól északra építkeznünk, ott "
+"minden túl könnyű préda lenne."
 
 #. TRANSLATORS: Reebaud – Getting Started 2
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:231
@@ -478,10 +516,14 @@ msgid ""
 "otherwise, will be in constant danger of being burnt down during a Danish "
 "incursion."
 msgstr ""
+"Ha elég építőanyagot tudunk összeszedni, érdemes lehet lebontani innen a "
+"többi épületet, hogy több erőd férjen el. Akárhogy is, ezen a területen "
+"minden épület, akár katonai, akár más, állandó veszélynek lesz kitéve, "
+"bármikor felégetheti őket egy Dán áttörés."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:239
 msgid "Wood supply"
-msgstr ""
+msgstr "Faellátás"
 
 #. TRANSLATORS: Henneke Lembeck – Getting Started 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:241
@@ -490,6 +532,9 @@ msgid ""
 "buildings. Besides their strategic value they offer lots of space for "
 "construction, of which the lower island is somewhat short."
 msgstr ""
+"Ahogy Reebaud helytállóan megjegyezte, a fennsík a legalkalmasabb hely új "
+"épületek számára. A stratégiai értéke mellet rengeteg hely áll rendelkezésre"
+" építkezésre, míg a sziget alacsonyan fekvő része kicsit szűkös."
 
 #. TRANSLATORS: Henneke Lembeck – Getting Started 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:244
@@ -500,6 +545,11 @@ msgid ""
 "for wood, so we must secure our wood production at once before all our wood "
 "has been used up by the smokeries and charcoal burners!"
 msgstr ""
+"De hogy mit építsünk, abban más a véleményem. A több helyőrség fontos, de "
+"még fontosabb, hogy először is legyen egyáltalán miből építkezni. A szigeten"
+" sehol sincsenek favágók, és fáért a kereskedésre sem támaszkodhatunk, "
+"úgyhogy azonnal biztosítani kell a fatermelésünket, mielőtt az összes fát "
+"elhasználnák a füstölők és a faszénégetők!"
 
 #. TRANSLATORS: Henneke Lembeck – Getting Started 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:247
@@ -510,10 +560,15 @@ msgid ""
 " down here and relocate some of the farms to the Uplands. Farms, reed farms,"
 " and berry farms do not depend on fertile land quite as much as trees do."
 msgstr ""
+"A föld meglehetősen kopárnak tűnik, úgyhogy a kívánatosnál több helyet kell "
+"erdősítésre szánnunk. Az alföld talaja kicsit termékenyebb, ezért bölcsebb "
+"lenne az erdészeket és favágókat ide építeni, a földbirtokok egy részét "
+"pedig áttelepíteni a fennsíkra. A földbirtokok, a nád ültetvények és a "
+"gyümölcsösök jobban boldogulnak a rosszabb talajon is, mint a fák."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:255
 msgid "Long-term strategy"
-msgstr ""
+msgstr "Hosszú távú stratégia"
 
 #. TRANSLATORS: Henneke Lembeck – Training
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:257
@@ -525,6 +580,12 @@ msgid ""
 "provide enough weapons and armour as well as food for our soldiers. Needless"
 " to say, a pair of training sites and a barracks are also essential."
 msgstr ""
+"Sikerült beindítanunk a kereskedést. Most meg kell terveznünk a toborzáshoz "
+"és kiképzéshez szükséges gazdaságunkat. Van már alapszintű élelem és fém "
+"termelésünk, de eddig tervezetlenül épült, és nem lesz elég az igényeink "
+"kielégítéséhez. Több és jobb épületekre lesz szükségünk, hogy elég fegyvert "
+"és páncélt gyártsanak, valamint élelemre a katonáknak. Nem is kell mondanom,"
+" egy-egy kiképzőhely és egy laktanya is létszükséglet."
 
 #. TRANSLATORS: Henneke Lembeck – Training
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:260
@@ -536,10 +597,16 @@ msgid ""
 "expensive, and we will need to mark out a large amount of space purely to "
 "produce wares to sell."
 msgstr ""
+"Közben mindig gondosan figyelnünk kell az eladható áruk termelésére is. "
+"Megkérem Ocke Ketelsent, hogy csak azt szerezze be, amire a gazdaságunknak "
+"tényleg szüksége van, hogy ne pocsékoljunk el semmit, de azt nekünk kell "
+"biztosítanunk, hogy mindent ki is tudjunk fizetni. Az összes kereskedelmi "
+"utunk nagyon költséges, így nagyon nagy helyet kell fenntartanunk csak az "
+"eladásra szánt áruk termelése számára is."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:266
 msgid "Diking"
-msgstr ""
+msgstr "Gátépítés"
 
 #. TRANSLATORS: Claus Lembeck – Diking
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:268
@@ -550,6 +617,10 @@ msgid ""
 " may need to take some chances, and use superior tactics to compensate for "
 "this disadvantage."
 msgstr ""
+"Még mindig gond, hogy Helgolandon kevés a hely. Arra ugyan elég, hogy "
+"elfogadható sereget képezzünk ki elfogadható időn belül, de akkorát, amire "
+"feltételezésünk szerint szükségünk lesz, örökké tartana. Lehet, hogy "
+"kockáztatnunk kell majd, és jobb taktikával ellensúlyoznunk ezt a hátrányt."
 
 #. TRANSLATORS: Claus Lembeck – Diking
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:271
@@ -561,10 +632,16 @@ msgid ""
 "in the east, or if we are to be truly bold we could dike around the whole "
 "western coast of the island to attack the enemy from two sides at once!"
 msgstr ""
+"De ha biztosra akarunk menni, ne felejtsük el, hogy akár meg is növelhetjük "
+"a szigetet. Mivel mostanra biztos a faellátásunk, építhetünk akár gátakat és"
+" víztörőket is, hogy több területet hódítsunk el a tengertől. Amikor készen "
+"állunk a támadásra, ezzel megkerülhetjük a szűkületet kelet felől, vagy ha "
+"igazán elszántak vagyunk, körbekeríthetjük végig a sziget nyugati oldalát, "
+"hogy egyszerre két oldalról tudjuk támadni az ellenséget!"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:277
 msgid "Good luck!"
-msgstr ""
+msgstr "Sok szerencsét!"
 
 #. TRANSLATORS: Ocke Ketelsen – Getting Started 4
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:279
@@ -572,14 +649,16 @@ msgid ""
 "I am heartened by your forwardness. Let us all hasten to our separate tasks,"
 " and may fortune smile on us!"
 msgstr ""
+"Fellelkesít a határozottságotok. Lásson hát mindenki a maga dolgához, és a "
+"szerencse mosolyogjon ránk!"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:283
 msgid "Wood Supply"
-msgstr ""
+msgstr "Faellátás"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:284
 msgid "Wood supply is ensured"
-msgstr ""
+msgstr "A faellátás biztosítva"
 
 #. TRANSLATORS: Henneke Lembeck – Wood Supply
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:286
@@ -588,14 +667,16 @@ msgid ""
 "time before we have a steady supply of logs, but the immediate problem has "
 "been averted."
 msgstr ""
+"Az erdészeink és favágóink munkához láttak. Kell még egy kis idő, amíg "
+"folyamatos lesz a faellátás, de a közvetlen problémát elhárítottuk."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:290
 msgid "Pass Secured"
-msgstr ""
+msgstr "Az átjáró lezárva"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:291
 msgid "The pass is under guard"
-msgstr ""
+msgstr "Az átjáró őrsége készen áll"
 
 #. TRANSLATORS: Claus Lembeck – Pass Secured
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:293
@@ -603,14 +684,16 @@ msgid ""
 "Our soldiers have fortified the pass. Surely no enemy will get past them "
 "before we are ready."
 msgstr ""
+"A katonáink megerősítették az átjáró őrségét. Most már biztosan nem juthat "
+"át ellenség mielőtt készen állnánk."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:297
 msgid "Uplands Colonized"
-msgstr ""
+msgstr "A fennsík betelepítve"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:298
 msgid "The Uplands have been settled"
-msgstr ""
+msgstr "A fennsík betelepítése megkezdődött"
 
 #. TRANSLATORS: Reebaud – Uplands Secured
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:300
@@ -619,6 +702,9 @@ msgid ""
 " forget to always keep a close eye on the ware exchange between the Lowlands"
 " and the Uplands and keep it to a minimum so as to avoid jams on the roads."
 msgstr ""
+"A fennsík lassan tényleg átalakul a gazdaságunk központjává. De figyeljünk "
+"gondosan az áruk cseréjére a fennsík és az alföld között, és igyekezzünk "
+"minimalizálni, hogy ne alakuljanak ki torlódások az utakon."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:304
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:314
@@ -628,12 +714,12 @@ msgstr ""
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:354
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:361
 msgid "Victory"
-msgstr ""
+msgstr "Győzelem"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:305
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:315
 msgid "Enemy defeated"
-msgstr ""
+msgstr "Ellenség legyőzve"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 1
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:307
@@ -642,6 +728,9 @@ msgid ""
 "beaten them by ourselves. Our town did not even sustain any major damage – "
 "on the contrary, you have expanded it far beyond its former bounds."
 msgstr ""
+"Legyőztük őket! Köszönöm, nagyon köszönöm a segítségeteket! Magunktól soha "
+"nem tudtuk volna kiűzni őket. Még a városunk sem szenvedett el nagy károkat "
+"— épp ellenkezőleg, messze a korábbi határain túlra terjesztettétek ki."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 1
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:310
@@ -651,6 +740,11 @@ msgid ""
 "to liberate your own home. If there is anything else we can do for you, now "
 "or forevermore, you need only ask and we will be yours to command."
 msgstr ""
+"Az embereim és én soha nem fogjuk tudni eléggé meghálálni azt, amit értünk "
+"tettetek. Elküldöm veletek az összes katonát, akit kiképeztetek, hogy "
+"segítsenek titeket a saját otthonotok felszabadításáért folytatott "
+"harcotokban. Ha van még bármi más, amit megtehetünk értetek, most vagy "
+"mostantól bármikor, csak kérnetek kell, és a rendelkezésetekre állunk."
 
 #. TRANSLATORS: Claus Lembeck – Victory 2
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:317
@@ -658,6 +752,8 @@ msgid ""
 "You are very welcome, Ocke Ketelsen. Do not belittle your own part in this "
 "victory though, for we could not have achieved this by ourselves."
 msgstr ""
+"Nagyon szívesen, Ocke Ketelsen. De ne csorbítsd saját érdemeidet a "
+"győzelemben, mert magunkban nem érhettük volna el ezt."
 
 #. TRANSLATORS: Claus Lembeck – Victory 2
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:320
@@ -670,12 +766,19 @@ msgid ""
 "that might be useful – any piece of tactical advice – any towns who might "
 "join us – please share this information with us."
 msgstr ""
+"Fogadd őszinte köszönetemet az ígéretedért, hogy elküldöd a katonáidat. "
+"Eddig is tudtam, hogy Atterdag hatalmas ellenfél, de a haderő, amivel itt "
+"találkoztunk felülmúl mindent, amit egész életemben láttam, pedig ez csak "
+"egy előőrs volt! Minden előnyre szükségünk lesz, amit csak megszerezhetünk, "
+"és még akkor sem vagyok már annyira biztos a győzelmünkben, mint ezelőtt "
+"voltam. Ha esetleg hallottál bármit, ami hasznunkra válhat — bármilyen "
+"taktikai tanácsot — kérjük oszd meg velünk!"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:325
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:335
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:355
 msgid "Know your enemy"
-msgstr ""
+msgstr "Ismerd az ellenségedet!"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:327
@@ -686,6 +789,11 @@ msgid ""
 "stronghold on Föhr has always been their only defence to speak of, so once "
 "you were gone he seized the entire area with ease."
 msgstr ""
+"Örömmel teszem. Valóban, Atterdag hódítás utáni étvágya a kereskedelmi "
+"partnereim szerint is határtalan. Miután megvetette a lábát Föhrön, az "
+"összes környező szigetet is elfoglalta. A te föhri erődítményed volt mindig "
+"is az egyetlen érdemi védelmük, így miután téged elűzött, az egész környéket"
+" könnyedén elfoglalhatta."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:330
@@ -696,6 +804,12 @@ msgid ""
 "said to have been executed for embezzling a bushel of grain. People are "
 "suffering, and will no doubt gladly join anyone who comes to free them."
 msgstr ""
+"Azt beszélik, a megszállók kegyetlen uralmat vezettek be. Tudjuk, hogy "
+"elzártak minden kereskedelmi lehetőséget, és a helyieknek minden terményük "
+"felét be kell szolgáltatniuk a dánoknak. A felét! Már több tucat embert "
+"végeztek ki azzal a váddal, hogy elrejtettek egy véka gabonát. A nép "
+"szenved, és semmi kétség, boldogan csatlakoznak bárkihez, aki fel akarja "
+"szabadítani őket."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:337
@@ -705,6 +819,10 @@ msgid ""
 " swear that the pirates were in fact Danish soldiers, and that their ships "
 "belong to the Danish fleet."
 msgstr ""
+"Még egy dolog. A megszállt területtől jóval északabbra kerülő "
+"kereskedőhajókat is kalózok özönlöttek és süllyesztettek el. A túlélők "
+"azonban megesküsznek rá, hogy a kalózok valójában dán katonák voltak, a "
+"hajóik pedig a dán flottához tartoznak."
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:340
@@ -715,6 +833,11 @@ msgid ""
 "would do that. Clearly he attempts to disguise this fact. Why would he do "
 "that, unless he believes this secret to be of strategical importance?"
 msgstr ""
+"A többi csak feltételezés, de én azt hiszem, hogy Atterdag a seregeit hajón "
+"szállítja a dán fővárosból a megszállt szigetekre. A szárazföldi út sokkal "
+"hosszabb és megerőltetőbb, így ez teljesen érthető is lenne. De "
+"nyilvánvalóan igyekszik ezt a tényt leplezni. Miért tenné, hacsak nincs "
+"ennek valami stratégiai jelentősége?"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 3
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:343
@@ -728,6 +851,13 @@ msgid ""
 "ships, you can seize the islands and build a belt of inconquerable "
 "strongholds that block any enemy ship attempting to pass."
 msgstr ""
+"Nem tudhatom, hogy a katonái mekkora részét szállítja hajón, de azt "
+"javasolnám, hogy zárd el ezt az utat. Amint te is tudod, csak egy tengeri "
+"útvonal vezet a két terület között, az pedig a Kattegat nevű szoroson vezet "
+"át. Ez a szoros néhány mérföld széles, és aprócska szigetek találhatók benne"
+" elszórva. Ha eléred ezt a helyet anélkül, hogy a hajóival megtámadna, "
+"elfoglalhatod a szigeteket, és legyőzhetetlen erődök hálózatát építheted ki "
+"rajtuk, ami feltartóztathat minden ellenséges hajót, ami át akarna kelni."
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:348
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:362
@@ -742,6 +872,10 @@ msgid ""
 " then we’ll raise the people of Föhr and all the other islands in joint "
 "rebellion against the invader!"
 msgstr ""
+"És ha ezt lezárjuk, elveszítik a legfontosabb kereskedelmi útvonalukat. Meg "
+"kell próbálnunk! Azonnal a Kattegathoz hajózunk, hogy elfoglaljuk a szorost."
+" Ezután felkelésre hívjuk Föhr és a többi sziget népét, együtt lázadni a "
+"betolakodó ellen!"
 
 #. TRANSLATORS: Ocke Ketelsen – Victory 6
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:357
@@ -753,6 +887,13 @@ msgid ""
 "to me afterwards. In the meantime, we will use the industry you built for us"
 " to train more soldiers who shall aid you in your subsequent endeavours."
 msgstr ""
+"Még egy kérést szeretnék hozzátok intézni. Egy kérést, ami egyben ajánlat. A"
+" két fiam, Harke Ockesen és Eschel Ockesen katonának és hadvezérnek tanul. "
+"Nagyra értékelném, ha megengednétek, hogy elkísérjenek a kattegati "
+"hadjáratra gyakorlati tapasztalatot szerezni, utána pedig visszaküldenétek "
+"őket hozzám. Időközben pedig az általatok számunkra felépített ipar "
+"segítségével további katonákat képzünk, akik segítségetekre lehetnek a "
+"későbbi harcotokban."
 
 #. TRANSLATORS: Reebaud – Victory 7
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:364
@@ -761,6 +902,8 @@ msgid ""
 "care of them. You certainly have a knack for assigning your sons the best "
 "teachers."
 msgstr ""
+"Örömmel vesszük őket magunkhoz, és ígérem, vigyázni fogok rájuk. Látom "
+"értesz hozzá, hogy a fiaidat a legjobb tanárokra bízd."
 
 #. TRANSLATORS: Reebaud – Victory 7
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:367
@@ -768,6 +911,8 @@ msgid ""
 "And thus we part, to meet again soon. Farewell, and may lasting peace bless "
 "all of Helgoland!"
 msgstr ""
+"Így hát elválunk, hogy hamarosan újra találkozhassunk. Isten veletek, és "
+"tartós béke áldása szálljon egész Helgolandra!"
 
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:368
 msgid "Congratulations"
