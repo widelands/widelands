@@ -79,7 +79,7 @@ static std::string const base_immovable_name = "unknown";
  * \note this function will remove the immovable (if existing) currently connected to this position.
  */
 void BaseImmovable::set_position(EditorGameBase& egbase, const Coords& c) {
-	assert(c);
+	assert(c.valid());
 
 	Map* map = egbase.mutable_map();
 	FCoords f = map->get_fcoords(c);

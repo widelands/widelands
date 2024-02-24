@@ -83,7 +83,7 @@ public:
 	[[nodiscard]] uint16_t value() const {
 		return value_;
 	}
-	VisibleState state() const {
+	[[nodiscard]] VisibleState state() const {
 		switch (static_cast<Override>(override_)) {
 		case Override::kHidden:
 			return VisibleState::kUnexplored;
@@ -101,11 +101,11 @@ public:
 		}
 	}
 
-	bool operator==(const Vision other) const {
+	[[nodiscard]] bool operator==(const Vision other) const {
 		return value_ == other.value_ && override_ == other.override_;
 	}
 
-	bool operator!=(const Vision other) const {
+	[[nodiscard]] bool operator!=(const Vision other) const {
 		return value_ != other.value_ || override_ != other.override_;
 	}
 

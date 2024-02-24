@@ -457,7 +457,7 @@ void GameMessageMenu::center_view() {
 	assert(selection < list->size());
 	if (Message const* const message =
 	       iplayer().player().messages()[MessageId((*list)[selection])]) {
-		assert(message->position());
+		assert(message->position().valid());
 		iplayer().map_view()->scroll_to_field(message->position(), MapView::Transition::Smooth);
 	}
 }
