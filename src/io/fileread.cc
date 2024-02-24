@@ -99,7 +99,7 @@ char* FileRead::c_string(const Pos& pos) {
 	char* const result = data_ + i.value();
 	for (char* p = result; *p != 0; ++p, ++i) {
 	}
-	++i;                      //  beyond the null
+	++i;                              //  beyond the null
 	if (i.value() > (length_ + 1)) {  // allow EOF as end marker for string
 		throw FileBoundaryExceeded();
 	}
