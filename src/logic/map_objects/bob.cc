@@ -1222,7 +1222,7 @@ void Bob::save(EditorGameBase& eg, MapObjectSaver& mos, FileWrite& fw) {
 
 		write_coords_32(&fw, state.coords);
 
-		if (state.diranims) {
+		if (state.diranims.valid()) {
 			fw.unsigned_8(1);
 			for (int dir = 1; dir <= 6; ++dir) {
 				fw.c_string(descr().get_animation_name(state.diranims.get_animation(dir)).c_str());

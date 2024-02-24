@@ -20,23 +20,8 @@
 
 namespace Widelands {
 
-Coords::Coords(const int16_t nx, const int16_t ny) : x(nx), y(ny) {
-}
-
-bool Coords::operator==(const Coords& other) const {
-	return x == other.x && y == other.y;
-}
-
-bool Coords::operator!=(const Coords& other) const {
-	return !(*this == other);
-}
-
-Coords::operator bool() const {
-	return *this != null();
-}
-
 void Coords::reorigin(Coords new_origin, const Extent& extent) {
-	if (*this) {
+	if (valid()) {
 		if (y < new_origin.y) {
 			y += extent.h;
 		}
@@ -49,11 +34,6 @@ void Coords::reorigin(Coords new_origin, const Extent& extent) {
 		}
 		x -= new_origin.x;
 	}
-}
-
-// static
-Coords Coords::null() {
-	return Coords(-1, -1);
 }
 
 // Hash coordinates to use them as keys in a container

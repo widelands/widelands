@@ -83,7 +83,7 @@ public:
 	[[nodiscard]] uint16_t value() const {
 		return value_;
 	}
-	operator VisibleState() const {  // NOLINT allow implicit conversion
+	VisibleState state() const {
 		switch (static_cast<Override>(override_)) {
 		case Override::kHidden:
 			return VisibleState::kUnexplored;

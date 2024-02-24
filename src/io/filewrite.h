@@ -30,11 +30,11 @@ class FileSystem;
 class FileWrite : public StreamWrite {
 public:
 	struct Pos {
-		Pos(size_t const p = 0) : pos(p) {  // NOLINT allow implicit conversion
+		explicit Pos(size_t const p = 0) : pos(p) {  // NOLINT allow implicit conversion
 		}
 
 		/// Returns a special value indicating invalidity.
-		static Pos null() {
+		[[nodiscard]] static Pos null() {
 			return Pos(std::numeric_limits<size_t>::max());
 		}
 
@@ -44,7 +44,7 @@ public:
 		[[nodiscard]] bool is_null() const {
 			return *this == null();
 		}
-		operator size_t() const {  // NOLINT allow implicit conversion
+		[[nodiscard]] size_t value() const {
 			return pos;
 		}
 		Pos& operator++() {

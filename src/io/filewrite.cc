@@ -34,7 +34,7 @@ void FileWrite::clear() {
 	free(data_);
 	data_ = nullptr;
 	length_ = max_size_ = 0;
-	filepos_ = 0;
+	filepos_ = Pos(0);
 }
 
 void FileWrite::write(FileSystem& fs, const std::string& filename) {
@@ -51,26 +51,26 @@ void FileWrite::set_pos(const Pos& pos) {
 }
 
 void FileWrite::data(const void* const src, const size_t size, Pos const pos = Pos::null()) {
-	assert(data_ || !length_);
+	assert(data_ != nullptr || length_ == 0);
 
 	Pos i = pos;
 	if (pos.is_null()) {
 		i = filepos_;
-		filepos_ += size;
+		filepos_ += Pos(size);
 	}
-	if (i + size > length_) {
-		if (i + size > max_size_) {
+	if (i.value() + size > length_) {
+		if (i.value() + size > max_size_) {
 			max_size_ += 4096;
-			if (max_size_ < i + size) {
-				max_size_ = i + size;
+			if (max_size_ < i.value() + size) {
+				max_size_ = i.value() + size;
 			}
 			char* new_data = static_cast<char*>(realloc(data_, max_size_));
 			assert(new_data);
 			data_ = new_data;
 		}
-		length_ = i + size;
+		length_ = i.value() + size;
 	}
-	memcpy(data_ + i, src, size);
+	memcpy(data_ + i.value(), src, size);
 }
 
 void FileWrite::data(void const* const src, size_t const size) {

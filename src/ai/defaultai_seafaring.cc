@@ -732,7 +732,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 	// if we have a port-space we can build a Port or continue exploring
 	// 1. examine to build a port (colony founding)
 	const Widelands::Coords portspace = so.ship->current_portspace();
-	if (static_cast<bool>(portspace)) {
+	if (portspace.valid()) {
 
 		// we score the place (value max == 8)
 		const uint8_t spot_score = spot_scoring(portspace) * 2;

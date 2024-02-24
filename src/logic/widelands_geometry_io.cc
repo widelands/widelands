@@ -66,7 +66,7 @@ Coords read_coords_32_allow_null(StreamRead* fr, const Extent& extent) {
 	uint16_t const x = fr->unsigned_16();
 	uint16_t const y = fr->unsigned_16();
 	const Coords result(x, y);
-	if (result) {
+	if (result.valid()) {
 		if (extent.w <= x) {
 			throw ExceededWidth(extent.w, x);
 		}

@@ -666,7 +666,7 @@ void ShipWindow::act_construct_port() {
 		return;
 	}
 	const Widelands::Coords portspace = ship->current_portspace();
-	if (!static_cast<bool>(portspace)) {
+	if (!portspace.valid()) {
 		return;
 	}
 	if (Widelands::Game* game = ibase_.get_game()) {
