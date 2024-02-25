@@ -237,7 +237,9 @@ private:
 	// Get a lua value of the specific type. See template specializations.
 	template <typename T> T get_value() const;
 
-	MutexLock mutex_lock_;
+	// TODO(tothxa): kObjects before kLua is needed because of Panel::do_run() and plugin actions
+	MutexLock objects_lock_;
+	MutexLock lua_lock_;
 	lua_State* L_;
 	mutable std::set<std::string> accessed_keys_;
 	bool warn_about_unaccessed_keys_{true};

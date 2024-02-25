@@ -39,7 +39,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-15 02:28+0000\n"
+"POT-Creation-Date: 2024-02-24 02:22+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2024\n"
 "Language-Team: German (http://app.transifex.com/widelands/widelands/language/de/)\n"
@@ -2076,9 +2076,9 @@ msgstr "östlich"
 msgid "Unowned port space discovered at %1$s by %2$s"
 msgstr "Herrenloser Hafenbauplatz bei %1$s durch %2$s entdeckt"
 
-#. * TRANSLATORS: "Unowned port space discovered at 1:23 by Ship2 34 steps
+#. * TRANSLATORS: "Unowned port space discovered at 1:11 by Ship2 33 steps
 #. north of
-#. Port1"
+#. Port5"
 #: ../../src/logic/detected_port_space.cc:94
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s of %5$s"
@@ -2092,9 +2092,9 @@ msgstr[1] "Herrenloser Hafenbauplatz bei %1$s, %3$u Felder %4$s von %5$s, durch 
 msgid "Port space of %1$s discovered at %2$s by %3$s"
 msgstr "Hafenbauplatz von %1$s bei %2$s durch %3$s entdeckt"
 
-#. * TRANSLATORS: "Port space of Player3 discovered at 1:23 by Ship2 34 steps
+#. * TRANSLATORS: "Port space of Player1 discovered at 2:22 by Ship3 44 steps
 #. north
-#. of Port1"
+#. of Port6"
 #: ../../src/logic/detected_port_space.cc:108
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s of %6$s"
@@ -2253,55 +2253,55 @@ msgid ""
 " anymore, or it’s a new version that can’t be handled yet."
 msgstr "Dieses Spiel wurde mit einer inkompatiblen Widelands-Version gespeichert und kann deshalb nicht geladen werden."
 
-#: ../../src/logic/generic_save_handler.cc:221
-#: ../../src/logic/generic_save_handler.cc:225
+#: ../../src/logic/generic_save_handler.cc:223
+#: ../../src/logic/generic_save_handler.cc:227
 msgid "File successfully saved!"
 msgstr "Datei erfolgreich gespeichert!"
 
-#: ../../src/logic/generic_save_handler.cc:226
+#: ../../src/logic/generic_save_handler.cc:228
 #, c-format
 msgid "Backup file ‘%s’ could not be deleted."
 msgstr "Die Sicherungsdatei „%s“ konnte nicht gelöscht werden."
 
-#: ../../src/logic/generic_save_handler.cc:230
+#: ../../src/logic/generic_save_handler.cc:232
 #, c-format
 msgid "Directory ‘%s’ could not be created!"
 msgstr "Das Verzeichnis „%s“ konnte nicht erstellt werden!"
 
-#: ../../src/logic/generic_save_handler.cc:234
+#: ../../src/logic/generic_save_handler.cc:236
 #, c-format
 msgid "File ‘%s’ could not be removed!"
 msgstr "Die Datei „%s“ konnte nicht entfernt werden!"
 
-#: ../../src/logic/generic_save_handler.cc:235
+#: ../../src/logic/generic_save_handler.cc:237
 msgid "Try saving under a different name!"
 msgstr "Versuche es mit einem anderen Speichernamen!"
 
-#: ../../src/logic/generic_save_handler.cc:240
+#: ../../src/logic/generic_save_handler.cc:242
 #, c-format
 msgid "Error writing data to file ‘%s’!"
 msgstr "Fehler beim Schreiben von Daten in die Datei „%s“!"
 
-#: ../../src/logic/generic_save_handler.cc:247
+#: ../../src/logic/generic_save_handler.cc:249
 msgid "Saved file may be corrupt!"
 msgstr "Die gespeicherte Datei könnte beschädigt sein!"
 
-#: ../../src/logic/generic_save_handler.cc:254
+#: ../../src/logic/generic_save_handler.cc:256
 #, c-format
 msgid "File ‘%s’ could not be restored!"
 msgstr "Die Datei „%s“ konnte nicht wiederhergestellt werden!"
 
-#: ../../src/logic/generic_save_handler.cc:255
+#: ../../src/logic/generic_save_handler.cc:257
 #, c-format
 msgid "Backup file ‘%s’ will be available for some time."
 msgstr "Die Sicherungsdatei „%s“ wird für einige Zeit verfügbar sein."
 
-#: ../../src/logic/generic_save_handler.cc:264
+#: ../../src/logic/generic_save_handler.cc:266
 #, c-format
 msgid "File ‘%s’ was restored from backup."
 msgstr "Die Datei „%s“ konnte aus einer Sicherung wiederhergestellt werden."
 
-#: ../../src/logic/generic_save_handler.cc:271
+#: ../../src/logic/generic_save_handler.cc:273
 msgid "An unexpected error occurred:"
 msgstr "Ein unerwarteter Fehler trat auf:"
 
@@ -3916,15 +3916,15 @@ msgstr "Widelands konnte nicht auf das lokale Netzwerk zugreifen. Möglicherweis
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1364
+#: ../../src/scripting/lua_game.cc:1386
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
-#: ../../src/scripting/lua_ui.cc:1137 ../../src/wui/interactive_base.cc:311
+#: ../../src/scripting/lua_ui.cc:1139 ../../src/wui/interactive_base.cc:311
 msgid "Plugin Error"
 msgstr "Plugin Fehler"
 
-#: ../../src/scripting/lua_ui.cc:1138 ../../src/wui/interactive_base.cc:312
+#: ../../src/scripting/lua_ui.cc:1140 ../../src/wui/interactive_base.cc:312
 #, c-format
 msgid ""
 "Error when running plugin:\n"
@@ -4007,7 +4007,7 @@ msgstr "Keine Treffer"
 msgid "Please wait…"
 msgstr "Bitte warten …"
 
-#: ../../src/ui_basic/panel.cc:450
+#: ../../src/ui_basic/panel.cc:457
 msgid "Game ending – please wait…"
 msgstr "Spiel wird beendet – Bitte warten …"
 
@@ -6375,7 +6375,7 @@ msgstr "Sieh dir die Aufzeichnung eines vergangenen Spiels an"
 
 #: ../../src/ui_fsmenu/main.cc:464
 msgid "Watch last saved replay"
-msgstr ""
+msgstr "Letzte gespeicherte Aufzeichnung wiedergeben"
 
 #: ../../src/ui_fsmenu/main.cc:490
 msgid "Single Player…"
@@ -6391,7 +6391,7 @@ msgstr "Editor …"
 
 #: ../../src/ui_fsmenu/main.cc:493
 msgid "Watch Replay…"
-msgstr ""
+msgstr "Aufzeichnung wiedergeben…"
 
 #: ../../src/ui_fsmenu/main.cc:495
 msgid "Begin or load a single-player campaign or free game"
@@ -6407,7 +6407,7 @@ msgstr "Starte den Karteneditor"
 
 #: ../../src/ui_fsmenu/main.cc:504
 msgid "Watch again a recorded earlier game"
-msgstr ""
+msgstr "Ein früher aufgezeichnetes Spiel erneut wiedergeben"
 
 #: ../../src/ui_fsmenu/main.cc:507 ../../src/wlapplication_options.cc:333
 msgid "Add-Ons"
@@ -7332,19 +7332,19 @@ msgstr "Alle Markierungen aufheben"
 
 #: ../../src/wlapplication.cc:832
 msgid "Widelands could not find the last edited map."
-msgstr ""
+msgstr "Widelands konnte die letzte editierte Karte nicht finden."
 
 #: ../../src/wlapplication.cc:836
 msgid "No Last Edited Map"
-msgstr ""
+msgstr "Keine letzte editierte Karte"
 
 #: ../../src/wlapplication.cc:867
 msgid "No last saved replay."
-msgstr ""
+msgstr "Keine letzte gespeicherte Aufzeichnung."
 
 #: ../../src/wlapplication.cc:869
 msgid "No last saved game."
-msgstr ""
+msgstr "Kein letztes gespeichertes Spiel."
 
 #: ../../src/wlapplication.cc:879
 #, c-format
@@ -7364,17 +7364,17 @@ msgstr "Dateisystemfehler"
 #: ../../src/wlapplication.cc:1360
 #, c-format
 msgid "Command line parameter --%s can not use a value"
-msgstr ""
+msgstr "Der Kommandozeilenparameter --%s kann keine Werte verarbeiten"
 
 #: ../../src/wlapplication.cc:1365
 #, c-format
 msgid "Empty value of command line parameter --%s"
-msgstr ""
+msgstr "Es fehlt ein Wert für den Kommandozeilenparameter --%s"
 
 #: ../../src/wlapplication.cc:1371
 #, c-format
 msgid "Command line parameters --%1$s and --%2$s can not be combined"
-msgstr ""
+msgstr "Die Kommandozeilenparameter --%1$s und --%2$s können nicht kombiniert werden"
 
 #: ../../src/wlapplication.cc:1559
 #, c-format
@@ -7634,7 +7634,7 @@ msgstr "Aufzeichnung wiedergeben"
 
 #: ../../src/wlapplication_options.cc:268
 msgid "Watch Latest Replay"
-msgstr ""
+msgstr "Letzte Aufzeichnung wiedergeben"
 
 #: ../../src/wlapplication_options.cc:287
 msgid "Singleplayer"

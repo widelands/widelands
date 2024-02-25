@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-15 02:28+0000\n"
+"POT-Creation-Date: 2024-02-24 02:22+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: GunChleoc, 2015\n"
 "Language-Team: Chinese (Taiwan) (http://app.transifex.com/widelands/widelands/language/zh_TW/)\n"
@@ -2040,9 +2040,9 @@ msgstr ""
 msgid "Unowned port space discovered at %1$s by %2$s"
 msgstr ""
 
-#. * TRANSLATORS: "Unowned port space discovered at 1:23 by Ship2 34 steps
+#. * TRANSLATORS: "Unowned port space discovered at 1:11 by Ship2 33 steps
 #. north of
-#. Port1"
+#. Port5"
 #: ../../src/logic/detected_port_space.cc:94
 #, c-format
 msgid "Unowned port space discovered at %1$s by %2$s %3$u step %4$s of %5$s"
@@ -2055,9 +2055,9 @@ msgstr[0] ""
 msgid "Port space of %1$s discovered at %2$s by %3$s"
 msgstr ""
 
-#. * TRANSLATORS: "Port space of Player3 discovered at 1:23 by Ship2 34 steps
+#. * TRANSLATORS: "Port space of Player1 discovered at 2:22 by Ship3 44 steps
 #. north
-#. of Port1"
+#. of Port6"
 #: ../../src/logic/detected_port_space.cc:108
 #, c-format
 msgid "Port space of %1$s discovered at %2$s by %3$s %4$u step %5$s of %6$s"
@@ -2215,55 +2215,55 @@ msgid ""
 " anymore, or it’s a new version that can’t be handled yet."
 msgstr ""
 
-#: ../../src/logic/generic_save_handler.cc:221
-#: ../../src/logic/generic_save_handler.cc:225
+#: ../../src/logic/generic_save_handler.cc:223
+#: ../../src/logic/generic_save_handler.cc:227
 msgid "File successfully saved!"
 msgstr ""
 
-#: ../../src/logic/generic_save_handler.cc:226
+#: ../../src/logic/generic_save_handler.cc:228
 #, c-format
 msgid "Backup file ‘%s’ could not be deleted."
 msgstr ""
 
-#: ../../src/logic/generic_save_handler.cc:230
+#: ../../src/logic/generic_save_handler.cc:232
 #, c-format
 msgid "Directory ‘%s’ could not be created!"
 msgstr ""
 
-#: ../../src/logic/generic_save_handler.cc:234
+#: ../../src/logic/generic_save_handler.cc:236
 #, c-format
 msgid "File ‘%s’ could not be removed!"
 msgstr ""
 
-#: ../../src/logic/generic_save_handler.cc:235
+#: ../../src/logic/generic_save_handler.cc:237
 msgid "Try saving under a different name!"
 msgstr ""
 
-#: ../../src/logic/generic_save_handler.cc:240
+#: ../../src/logic/generic_save_handler.cc:242
 #, c-format
 msgid "Error writing data to file ‘%s’!"
 msgstr ""
 
-#: ../../src/logic/generic_save_handler.cc:247
+#: ../../src/logic/generic_save_handler.cc:249
 msgid "Saved file may be corrupt!"
 msgstr ""
 
-#: ../../src/logic/generic_save_handler.cc:254
+#: ../../src/logic/generic_save_handler.cc:256
 #, c-format
 msgid "File ‘%s’ could not be restored!"
 msgstr ""
 
-#: ../../src/logic/generic_save_handler.cc:255
+#: ../../src/logic/generic_save_handler.cc:257
 #, c-format
 msgid "Backup file ‘%s’ will be available for some time."
 msgstr ""
 
-#: ../../src/logic/generic_save_handler.cc:264
+#: ../../src/logic/generic_save_handler.cc:266
 #, c-format
 msgid "File ‘%s’ was restored from backup."
 msgstr ""
 
-#: ../../src/logic/generic_save_handler.cc:271
+#: ../../src/logic/generic_save_handler.cc:273
 msgid "An unexpected error occurred:"
 msgstr ""
 
@@ -3872,15 +3872,15 @@ msgstr ""
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1364
+#: ../../src/scripting/lua_game.cc:1386
 msgid "%1% (%2%)"
 msgstr ""
 
-#: ../../src/scripting/lua_ui.cc:1137 ../../src/wui/interactive_base.cc:311
+#: ../../src/scripting/lua_ui.cc:1139 ../../src/wui/interactive_base.cc:311
 msgid "Plugin Error"
 msgstr ""
 
-#: ../../src/scripting/lua_ui.cc:1138 ../../src/wui/interactive_base.cc:312
+#: ../../src/scripting/lua_ui.cc:1140 ../../src/wui/interactive_base.cc:312
 #, c-format
 msgid ""
 "Error when running plugin:\n"
@@ -3963,7 +3963,7 @@ msgstr ""
 msgid "Please wait…"
 msgstr ""
 
-#: ../../src/ui_basic/panel.cc:450
+#: ../../src/ui_basic/panel.cc:457
 msgid "Game ending – please wait…"
 msgstr ""
 
