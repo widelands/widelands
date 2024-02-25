@@ -70,7 +70,9 @@ AttackWindow::AttackWindow(InteractivePlayer& parent,
                            bool fastclick)
    : UI::UniqueWindow(&parent,
                       UI::WindowStyle::kWui,
-                      format("attack_%u", target_building_or_ship->serial()),
+                      target_building_or_ship != nullptr ?
+                         format("attack_%u", target_building_or_ship->serial()) :
+                         format("attack_%d_%d", target_coords.x, target_coords.y),
                       &reg,
                       0,
                       0,
