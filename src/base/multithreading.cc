@@ -19,6 +19,7 @@
 #include "base/multithreading.h"
 
 #include <atomic>
+#include <iostream>
 #include <map>
 #include <memory>
 #include <set>
@@ -37,6 +38,7 @@ static std::thread::id logic_thread(kNoThread);
 std::mutex MutexLock::s_mutex_;
 
 std::vector<std::function<void()>> MutexLock::stay_responsive_;
+
 /* When a thread X is handling a thread-safe-function note sent from another thread Y, and Y is
  * waiting for completion, then we add a pair {X, Y} here to register that for the duration
  * of the note handling, all resources (especially mutexes) owned by Y are also owned by X.
@@ -173,6 +175,8 @@ static std::string to_string(const MutexLock::ID i) {
 	switch (i) {
 	case MutexLock::ID::kNone:
 		return "None";
+	case MutexLock::ID::kMutexInternal:
+		return "MutexInternal";
 	case MutexLock::ID::kLogicFrame:
 		return "LogicFrame";
 	case MutexLock::ID::kObjects:
@@ -212,15 +216,66 @@ void MutexLock::pop_stay_responsive_function() {
 	stay_responsive_.pop_back();
 }
 
+// Only used for verbose logging of lock borrowing
+// TODO(tothxa): Should this be a static member of MutexLock?
+//               Except it's too deep implementation detail to be included in mutex.h
+class MutexBorrowLogger {
+public:
+	void report_borrowing(std::thread::id borrower, std::thread::id owner, MutexLock::ID lock);
+
+private:
+	std::thread::id last_borrower_{kNoThread};
+	std::thread::id last_owner_{kNoThread};
+	MutexLock::ID last_lock_{MutexLock::ID::kNone};
+	uint32_t last_log_time_{0};
+	uint32_t borrow_counter_{0};
+};
+static MutexBorrowLogger g_mutex_borrow_logger;
+
+void MutexBorrowLogger::report_borrowing(std::thread::id borrower,
+                                         std::thread::id owner,
+                                         MutexLock::ID lock) {
+
+	const uint32_t now = SDL_GetTicks();
+	const bool same = lock == last_lock_ && borrower == last_borrower_ && owner == last_owner_;
+	if (same) {
+		++borrow_counter_;
+	}
+	// once per second, otherwise modal windows spam the log
+	if (!same || (now > last_log_time_ + 1000)) {
+		if (borrow_counter_ > 1) {
+			// Only log as repeated if more than 1 occurences before timing out
+			verb_log_dbg("%s skipped locking mutex %s %u times in %ums",
+			             thread_name(last_borrower_).c_str(), to_string(last_lock_).c_str(),
+			             borrow_counter_, now - last_log_time_);
+		} else {
+			// Different or happened a long time ago
+			verb_log_dbg("%s skips locking mutex %s owned by wrapping thread %s",
+			             thread_name(borrower).c_str(), to_string(lock).c_str(),
+			             thread_name(owner).c_str());
+		}
+		last_lock_ = lock;
+		last_borrower_ = borrower;
+		last_owner_ = owner;
+		last_log_time_ = now;
+		borrow_counter_ = 0;
+	}
+}
+
 MutexLock::MutexLock(const ID i) : id_(i) {
 	if (id_ == ID::kNone) {
 		return;
 	}
 
 	const uint32_t start_time = SDL_GetTicks();
+
 #ifdef MUTEX_LOCK_DEBUG
 	uint32_t counter = 0;
-	log_dbg("Starting to lock mutex %s ...", to_string(id_).c_str());
+	if (id_ != ID::kLog) {
+		log_dbg("Starting to lock mutex %s ...", to_string(id_).c_str());
+	} else {
+		std::cout << "Starting to lock mutex Log..." << std::endl;
+	}
 #endif
 
 	const std::thread::id self = std::this_thread::get_id();
@@ -230,10 +285,16 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 	if (record.current_owner != kNoThread) {
 		for (const auto& pair : acting_as_another_thread) {
 			if (pair.first == self && pair.second == record.current_owner) {
-				verb_log_dbg("%s skips locking mutex %s owned by wrapping thread %s",
-				             thread_name(self).c_str(), to_string(id_).c_str(),
-				             thread_name(record.current_owner).c_str());
-				s_mutex_.unlock();
+				s_mutex_.unlock();  // Must unlock before verb_log_dbg()
+
+				if (g_verbose) {  // Only used for verb_log_dbg() or equivalent std:cout <<
+					if (id_ != ID::kLog) {
+						g_mutex_borrow_logger.report_borrowing(self, record.current_owner, id_);
+					} else {
+						std::cout << "Skip re-locking Log mutex" << std::endl;
+					}
+				}  // end of verb_log_dbg() stuff
+
 				id_ = ID::kNone;
 				return;
 			}
@@ -244,6 +305,22 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 	// by giving it a lower sleep time between attempts. This keeps overall waiting times low.
 	// The Logic Frame mutex's extended sleep time is higher because it's locked much longer.
 	const bool has_priority = (record.waiting_threads.empty() || is_initializer_thread());
+
+	if (record.waiting_threads.count(self) != 0) {
+		if (id_ == ID::kLog) {
+			// Above only checked borrowing situations. Here we check for the same thread already
+			// waiting somewhere up the stack. Can happen because of stay responsive functions.
+			std::cout << thread_name(self) << " is already waiting for mutex kLog, skip locking"
+			          << std::endl;
+			s_mutex_.unlock();
+			id_ = ID::kNone;
+			return;
+		}
+
+		std::cout << thread_name(self) << " is already waiting for mutex " << to_string(id_)
+		          << std::endl;
+	}
+
 	assert(record.waiting_threads.count(self) == 0);
 	record.waiting_threads.insert(self);
 	s_mutex_.unlock();
@@ -256,20 +333,30 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 	}
 
 	uint32_t last_function_call = 0;
+	uint32_t last_log_time = 0;
 	while (!record.mutex.try_lock()) {
 		const uint32_t now = SDL_GetTicks();
-		if (now - start_time > 1000) {
-			verb_log_dbg("WARNING: %s locking mutex %s, already waiting for %d ms",
-			             thread_name(self).c_str(), to_string(id_).c_str(), now - start_time);
+		if (now - start_time > 1000 && now - last_log_time > 1000) {
+			last_log_time = now;
+			if (id_ != ID::kLog) {
+				verb_log_dbg("WARNING: %s locking mutex %s, already waiting for %d ms",
+				             thread_name(self).c_str(), to_string(id_).c_str(), now - start_time);
+			} else if (g_verbose) {
+				// not including format() for the time info
+				std::cout << "WARNING: " << thread_name(self) << " locking mutex Log still waiting"
+				          << std::endl;
+			}
 		}
 
 		if (now - last_function_call > sleeptime) {
-			{
+			if (id_ != MutexLock::ID::kMutexInternal) {
 				MutexLock guard(MutexLock::ID::kMutexInternal);
 				if (!stay_responsive_.empty()) {
 					stay_responsive_.back()();
-				} else {
+				} else if (id_ != ID::kLog) {
 					verb_log_dbg("WARNING: Mutex locking: No responsiveness function set");
+				} else if (g_verbose) {
+					std::cout << "WARNING: Mutex locking: No responsiveness function set" << std::endl;
 				}
 			}
 
@@ -310,7 +397,11 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 					}
 
 					s_mutex_.unlock();
-					log_err("%s", info.c_str());
+					if (id_ != ID::kLog) {
+						log_err("%s", info.c_str());
+					} else {
+						std::cout << info << std::endl;
+					}
 					throw wexception("%s", info.c_str());
 				}
 			}
@@ -335,8 +426,13 @@ MutexLock::MutexLock(const ID i) : id_(i) {
 	record.ownership_count++;
 
 #ifdef MUTEX_LOCK_DEBUG
-	log_dbg("Locking mutex %s took %ums (%u function calls)", to_string(id_).c_str(),
-	        SDL_GetTicks() - start_time, counter);
+	if (id_ != ID::kLog) {
+		log_dbg("Locking mutex %s took %ums (%u function calls)", to_string(id_).c_str(),
+		        SDL_GetTicks() - start_time, counter);
+	} else {
+		// not including format() for the time info
+		std::cout << "Mutex Log is now locked." << std::endl;
+	}
 #endif
 }
 MutexLock::~MutexLock() {
@@ -345,7 +441,11 @@ MutexLock::~MutexLock() {
 	}
 
 #ifdef MUTEX_LOCK_DEBUG
-	log_dbg("Unlocking mutex %s", to_string(id_).c_str());
+	if (id_ != ID::kLog) {
+		log_dbg("Unlocking mutex %s", to_string(id_).c_str());
+	} else {
+		std::cout << "Unlocking mutex Log" << std::endl;
+	}
 #endif
 
 	std::lock_guard<std::mutex> guard(s_mutex_);
