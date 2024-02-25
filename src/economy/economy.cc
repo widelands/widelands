@@ -23,7 +23,6 @@
 
 #include "base/log.h"
 #include "base/macros.h"
-#include "base/scoped_timer.h"  // NOCOM
 #include "base/wexception.h"
 #include "economy/cmd_call_economy_balance.h"
 #include "economy/flag.h"
@@ -1231,10 +1230,6 @@ bool Economy::same_district(const PlayerImmovable& p1, const PlayerImmovable& p2
 
 // Note: Do not call this function when pending road network splits and merges may exist!
 void Economy::recalc_districts() {
-	ScopedTimer NOCOM_Timer(
-	   format("NOCOM Recalcing districts for %u flags and %u warehouses took %%u ms", flags_.size(),
-	          warehouses_.size()));
-
 	if (flags_.empty()) {
 		nr_districts_ = 0;
 		return;
@@ -1360,10 +1355,6 @@ void Economy::recalc_districts() {
 
 /** Cancel cross-district imports when suitable wares become available locally. */
 void Economy::check_imports(Game& game) {
-	ScopedTimer NOCOM_Timer(
-	   format("NOCOM Checking imports for %u flags and %u warehouses took %%u ms", flags_.size(),
-	          warehouses_.size()));
-
 	for (Request* request : requests_) {
 		if (request->get_num_transfers() == 0) {
 			continue;
@@ -1399,23 +1390,6 @@ void Economy::check_imports(Game& game) {
 			Supply* local_supply = find_best_supply(game, *request, cost, false);
 			if (local_supply == nullptr) {
 				continue;
-			}
-
-			{
-				Flag& new_supply_flag = local_supply->get_position(game)->base_flag();
-				Warehouse* new_supply_district = new_supply_flag.get_district_center(type());
-				log_dbg("NOCOM Exchanging an import:");
-				log_dbg("NOCOM \t Request    at %3dx%3d (district %u) for %s",
-				        target_flag.get_position().x, target_flag.get_position().y,
-				        target_district->serial(),
-				        type() == wwWARE ?
-                       game.descriptions().get_ware_descr(request->get_index())->name().c_str() :
-                       game.descriptions().get_worker_descr(request->get_index())->name().c_str());
-				log_dbg("NOCOM \t Old supply at %3dx%3d (district %u)", supply_flag.get_position().x,
-				        supply_flag.get_position().y, supply_district->serial());
-				log_dbg("NOCOM \t New supply at %3dx%3d (district %u)",
-				        new_supply_flag.get_position().x, new_supply_flag.get_position().y,
-				        new_supply_district->serial());
 			}
 
 			request->cancel_transfer(i);

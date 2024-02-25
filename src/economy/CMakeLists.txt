@@ -63,7 +63,6 @@ wl_library(economy
     base
     base_exceptions
     base_macros
-    base_scoped_timer  # NOCOM
     base_times
     graphic
     io_fileread

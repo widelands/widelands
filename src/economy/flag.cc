@@ -864,7 +864,7 @@ void Flag::cleanup(EditorGameBase& egbase) {
 }
 
 void Flag::draw(const Time& gametime,
-                const InfoToDraw info_to_draw,
+                const InfoToDraw /*info_to_draw*/,
                 const Vector2f& field_on_dst,
                 const Coords& coords,
                 float scale,
@@ -890,17 +890,6 @@ void Flag::draw(const Time& gametime,
 		                    wares_[i].ware->descr().get_animation("idle", wares_[i].ware), Time(0),
 		                    &player_color);
 	}
-
-	// NOCOM for testing only
-	std::string NOCOM;
-	if (district_center_[0] == district_center_[1]) {
-		NOCOM = district_center_[0] == nullptr ? "-" : as_string(district_center_[0]->serial());
-	} else {
-		NOCOM = format(
-		   "%s / %s", district_center_[0] == nullptr ? "-" : as_string(district_center_[0]->serial()),
-		   district_center_[1] == nullptr ? "-" : as_string(district_center_[1]->serial()));
-	}
-	do_draw_info(info_to_draw, "", NOCOM, field_on_dst, scale, dst);
 }
 
 /**
