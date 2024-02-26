@@ -220,7 +220,7 @@ msgstr "No desis els fitxers com a arxius zip binaris."
 
 #: ../../src/wlapplication_messages.cc:150
 msgid "Save files as binary zip archives."
-msgstr ""
+msgstr "Desa els fitxers en format zip binari."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -373,11 +373,11 @@ msgstr "Opcions gràfiques:"
 
 #: ../../src/wlapplication_messages.cc:214
 msgid "Use the whole display for the game screen."
-msgstr ""
+msgstr "Fes servir tota la pantalla per al joc."
 
 #: ../../src/wlapplication_messages.cc:216
 msgid "Start the game in a maximized window."
-msgstr ""
+msgstr "Inicia el joc en una finestra maximitzada."
 
 #. * TRANSLATORS: A placeholder for window width
 #: ../../src/wlapplication_messages.cc:219

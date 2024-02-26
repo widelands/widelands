@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: he\n"
-"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;\n"
+"Plural-Forms: nplurals=3; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;\n"
 
 #. TRANSLATORS: Helptext for an Amazon ware: Log, part 1
 #. TRANSLATORS: Helptext for an Atlantean ware: Log, part 1
@@ -3074,7 +3074,6 @@ msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. TRANSLATORS: Number of Amazon soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/amazons/units.lua:2091
@@ -3084,7 +3083,6 @@ msgid_plural "%1% soldiers"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
@@ -3096,7 +3094,6 @@ msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building.
@@ -3107,7 +3104,6 @@ msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. TRANSLATORS: Helptext for an Atlantean ware: Granite, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:435
@@ -5841,7 +5837,6 @@ msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. TRANSLATORS: Number of Atlantean soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/atlanteans/units.lua:2291
@@ -5851,7 +5846,6 @@ msgid_plural "%1% soldiers"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -5863,7 +5857,6 @@ msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -5874,7 +5867,6 @@ msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. TRANSLATORS: Helptext for a Barbarian ware: Granite, part 2
 #: ../../data/tribes/initialization/barbarians/units.lua:102
@@ -9965,7 +9957,6 @@ msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. TRANSLATORS: Number of Barbarian soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/barbarians/units.lua:2600
@@ -9975,7 +9966,6 @@ msgid_plural "%1% soldiers"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -9987,7 +9977,6 @@ msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -9998,7 +9987,6 @@ msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. TRANSLATORS: Format string for a latin quote and its translation
 #: ../../data/tribes/initialization/empire/units.lua:12
@@ -13374,7 +13362,6 @@ msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. TRANSLATORS: Number of Empire soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/empire/units.lua:2749
@@ -13384,7 +13371,6 @@ msgid_plural "%1% soldiers"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
@@ -13396,7 +13382,6 @@ msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building.
@@ -13407,7 +13392,6 @@ msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. TRANSLATORS: Helptext for a Frisian ware: Log, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:101
@@ -15962,7 +15946,6 @@ msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. TRANSLATORS: Number of Frisian soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/frisians/units.lua:2430
@@ -15972,7 +15955,6 @@ msgid_plural "%1% soldiers"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -15984,7 +15966,6 @@ msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -15995,7 +15976,6 @@ msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. TRANSLATORS: Lore helptext for a building - it hasn't been written yet.
 #. TRANSLATORS: Purpose helptext for a building - it hasn't been written yet.
@@ -16056,7 +16036,6 @@ msgid_plural "Garrisoned soldiers heal %d health points per second."
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../data/tribes/scripting/help/building_help.lua:358
 #: ../../data/tribes/scripting/help/building_help.lua:364
@@ -16522,7 +16501,6 @@ msgid_plural "%d seconds"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../data/tribes/scripting/help/time_strings.lua:42
 #: ../../data/tribes/scripting/help/time_strings.lua:61
@@ -16532,7 +16510,6 @@ msgid_plural "%d minutes"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../data/tribes/scripting/help/time_strings.lua:60
 msgid "%1% and %2%"
@@ -16625,7 +16602,6 @@ msgid_plural "Increased by %1% points for each level."
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. TRANSLATORS: Soldier health / attack defense / evade level
 #: ../../data/tribes/scripting/help/worker_help.lua:187
@@ -16637,7 +16613,6 @@ msgid_plural "The maximum level is %1%."
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../data/tribes/scripting/help/worker_help.lua:189
 msgid "Attack"
