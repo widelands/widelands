@@ -416,10 +416,12 @@ static int L_get_build_id(lua_State* L) {
 	return 1;
 }
 
-// set_textdomain() was deprecated before v1.0, removed in v1.2
-// TODO(tothxa): Remove if the position in kPersistentGlobals can be filled with a new function?
-static int L_set_textdomain(lua_State*) {
-	throw LuaError("set_textdomain() is no longer supported");
+/* Use our own logging function as a replacement for Lua's built-in print(). */
+static int L_print(lua_State* L) {
+	for (int i = 1; i <= lua_gettop(L); ++i) {
+		log_dbg("%s", luaL_checkstring(L, i));
+	}
+	return 0;
 }
 
 const static struct luaL_Reg globals[] = {{"_", &L__},
@@ -428,9 +430,7 @@ const static struct luaL_Reg globals[] = {{"_", &L__},
                                           {"ngettext", &L_ngettext},
                                           {"pgettext", &L_pgettext},
                                           {"npgettext", &L_npgettext},
-                                          // TODO(tothxa): set_textdomain was removed, replace the
-                                          //   next time when a new global function is added?
-                                          {"set_textdomain", &L_set_textdomain},
+                                          {"print", &L_print},
                                           {"push_textdomain", &L_push_textdomain},
                                           {"pop_textdomain", &L_pop_textdomain},
                                           {"ticks", &L_ticks},
