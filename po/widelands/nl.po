@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-24 02:22+0000\n"
+"POT-Creation-Date: 2024-02-26 02:28+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Alex Rijckaert, 2023-2024\n"
 "Language-Team: Dutch (http://app.transifex.com/widelands/widelands/language/nl/)\n"
@@ -119,7 +119,7 @@ msgstr "%1$s, %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: The current value of a spinbox, "X hours and Y minutes"
 #: ../../data/scripting/richtext.lua:709 ../../src/base/i18n.cc:412
-#: ../../src/ui_basic/spinbox.cc:515
+#: ../../src/ui_basic/spinbox.cc:528
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s en %2$s"
@@ -335,7 +335,7 @@ msgstr "Opnieuw"
 
 #. * TRANSLATORS: This is the helptext for an access key combination.
 #: ../../src/editor/editorinteractive.cc:175
-#: ../../src/wlapplication_options.cc:875 ../../src/wui/buildingwindow.cc:443
+#: ../../src/wlapplication_options.cc:875 ../../src/wui/buildingwindow.cc:448
 #: ../../src/wui/interactive_player.cc:237
 msgid "Help"
 msgstr "Help"
@@ -983,7 +983,7 @@ msgstr "Beschrijving: %s"
 #. * TRANSLATORS: No add-ons enabled
 #: ../../src/editor/ui_menus/field_info_window.cc:251
 #: ../../src/ui_fsmenu/addons/packager_box.cc:294
-#: ../../src/wui/shipwindow.cc:355
+#: ../../src/wui/shipwindow.cc:361
 msgid "(none)"
 msgstr "(geen)"
 
@@ -1308,7 +1308,7 @@ msgstr "Bergen:"
 #. * TRANSLATORS: The current value of a spinbox
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:193
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:500
-#: ../../src/ui_basic/spinbox.cc:579
+#: ../../src/ui_basic/spinbox.cc:592
 #, c-format
 msgid "%i %%"
 msgstr "%i %%"
@@ -3897,11 +3897,11 @@ msgstr "Widelands kon het lokale netwerk niet gebruiken. Misschien voert een and
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
-#: ../../src/scripting/lua_ui.cc:1139 ../../src/wui/interactive_base.cc:311
+#: ../../src/scripting/lua_ui.cc:1153 ../../src/wui/interactive_base.cc:311
 msgid "Plugin Error"
 msgstr "Fout in plugin"
 
-#: ../../src/scripting/lua_ui.cc:1140 ../../src/wui/interactive_base.cc:312
+#: ../../src/scripting/lua_ui.cc:1154 ../../src/wui/interactive_base.cc:312
 #, c-format
 msgid ""
 "Error when running plugin:\n"
@@ -3992,18 +3992,26 @@ msgstr "Het spel stopt – even geduld aub..."
 msgid "Loading…"
 msgstr "Laden…"
 
+#: ../../src/ui_basic/spinbox.cc:151
+msgid "Decrease the value"
+msgstr ""
+
 #. * TRANSLATORS: You may want to treat this as "Decrease the value %s", you
 #. get
 #. the chance to translate the substituted text as "by <n units>"
-#: ../../src/ui_basic/spinbox.cc:155 ../../src/ui_basic/spinbox.cc:170
+#: ../../src/ui_basic/spinbox.cc:155 ../../src/ui_basic/spinbox.cc:183
 #, c-format
 msgid "Decrease the value by %s"
 msgstr "Verlaag de waarde met %s"
 
+#: ../../src/ui_basic/spinbox.cc:164
+msgid "Increase the value"
+msgstr ""
+
 #. * TRANSLATORS: You may want to treat this as "Increase the value %s", you
 #. get
 #. the chance to translate the substituted text as "by <n units>"
-#: ../../src/ui_basic/spinbox.cc:162 ../../src/ui_basic/spinbox.cc:174
+#: ../../src/ui_basic/spinbox.cc:168 ../../src/ui_basic/spinbox.cc:187
 #, c-format
 msgid "Increase the value by %s"
 msgstr "Verhoog de waarde met %s"
@@ -4011,7 +4019,7 @@ msgstr "Verhoog de waarde met %s"
 #. * TRANSLATORS: "Increase/Decrease the value by <n> minutes"
 #. You may want to treat this as "by <n> minutes", depending on how you
 #. translated "Increase/Decrease the value by %s".
-#: ../../src/ui_basic/spinbox.cc:485
+#: ../../src/ui_basic/spinbox.cc:498
 #, c-format
 msgctxt "spinbox_change"
 msgid "%d minute"
@@ -4020,7 +4028,7 @@ msgstr[0] "%d minuut"
 msgstr[1] "%d minuten"
 
 #. * TRANSLATORS: The current value of a spinbox
-#: ../../src/ui_basic/spinbox.cc:488 ../../src/ui_basic/spinbox.cc:539
+#: ../../src/ui_basic/spinbox.cc:501 ../../src/ui_basic/spinbox.cc:552
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -4030,7 +4038,7 @@ msgstr[1] "%d minuten"
 #. * TRANSLATORS: "Increase/Decrease the value by <n> hours"
 #. You may want to treat this as "by <n> hours", depending on how you
 #. translated "Increase/Decrease the value by %s".
-#: ../../src/ui_basic/spinbox.cc:498
+#: ../../src/ui_basic/spinbox.cc:511
 #, c-format
 msgctxt "spinbox_change"
 msgid "%d hour"
@@ -4039,7 +4047,7 @@ msgstr[0] "%d uur"
 msgstr[1] "%d uren"
 
 #. * TRANSLATORS: The current value of a spinbox
-#: ../../src/ui_basic/spinbox.cc:501 ../../src/ui_basic/spinbox.cc:527
+#: ../../src/ui_basic/spinbox.cc:514 ../../src/ui_basic/spinbox.cc:540
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
@@ -4052,7 +4060,7 @@ msgstr[1] "%d uren"
 #. translated "Increase/Decrease the value by %s". You can also defer
 #. translation
 #. of "by X hours" and "by Y minutes".
-#: ../../src/ui_basic/spinbox.cc:513
+#: ../../src/ui_basic/spinbox.cc:526
 #, c-format
 msgctxt "spinbox_change_hours_mins"
 msgid "%1$s and %2$s"
@@ -4063,7 +4071,7 @@ msgstr "%1$s en %2$s"
 #. You may want to treat this as "by <n> hours", depending on how you
 #. translated
 #. "Increase/Decrease the value by %s" and "%1$s and %2$s".
-#: ../../src/ui_basic/spinbox.cc:524
+#: ../../src/ui_basic/spinbox.cc:537
 #, c-format
 msgctxt "spinbox_change_hours_mins"
 msgid "%d hour"
@@ -4075,7 +4083,7 @@ msgstr[1] "%d uren"
 #. The minutes part of "Increase/Decrease the value by X hours and Y minutes"
 #. You may want to treat this as "by <n> minutes", depending on how you
 #. translated "Increase/Decrease the value by %s" and "%1$s and %2$s".
-#: ../../src/ui_basic/spinbox.cc:536
+#: ../../src/ui_basic/spinbox.cc:549
 #, c-format
 msgctxt "spinbox_change_hours_mins"
 msgid "%d minute"
@@ -4086,7 +4094,7 @@ msgstr[1] "%d minuten"
 #. * TRANSLATORS: "Increase/Decrease the value by <n> weeks"
 #. You may want to treat this as "by <n> weeks", depending on how you
 #. translated "Increase/Decrease the value by %s".
-#: ../../src/ui_basic/spinbox.cc:549
+#: ../../src/ui_basic/spinbox.cc:562
 #, c-format
 msgctxt "spinbox_change"
 msgid "%d week"
@@ -4095,7 +4103,7 @@ msgstr[0] "%d week"
 msgstr[1] "%d weken"
 
 #. * TRANSLATORS: The current value of a spinbox
-#: ../../src/ui_basic/spinbox.cc:552
+#: ../../src/ui_basic/spinbox.cc:565
 #, c-format
 msgid "%d week"
 msgid_plural "%d weeks"
@@ -4105,7 +4113,7 @@ msgstr[1] "%d weken"
 #. * TRANSLATORS: "Increase/Decrease the value by <n> pixels"
 #. You may want to treat this as "by <n> pixels", depending on how you
 #. translated "Increase/Decrease the value by %s".
-#: ../../src/ui_basic/spinbox.cc:558
+#: ../../src/ui_basic/spinbox.cc:571
 #, c-format
 msgctxt "spinbox_change"
 msgid "%d pixel"
@@ -4114,7 +4122,7 @@ msgstr[0] "%d pixel"
 msgstr[1] "%d pixels"
 
 #. * TRANSLATORS: The current value of a spinbox
-#: ../../src/ui_basic/spinbox.cc:561
+#: ../../src/ui_basic/spinbox.cc:574
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -4124,7 +4132,7 @@ msgstr[1] "%d pixels"
 #. * TRANSLATORS: "Increase/Decrease the value by <n> fields"
 #. You may want to treat this as "by <n> fields", depending on how you
 #. translated "Increase/Decrease the value by %s".
-#: ../../src/ui_basic/spinbox.cc:567
+#: ../../src/ui_basic/spinbox.cc:580
 #, c-format
 msgctxt "spinbox_change"
 msgid "%d field"
@@ -4133,7 +4141,7 @@ msgstr[0] "%d veld"
 msgstr[1] "%d velden"
 
 #. * TRANSLATORS: The current value of a spinbox
-#: ../../src/ui_basic/spinbox.cc:570
+#: ../../src/ui_basic/spinbox.cc:583
 #, c-format
 msgid "%d field"
 msgid_plural "%d fields"
@@ -4143,7 +4151,7 @@ msgstr[1] "%d velden"
 #. * TRANSLATORS: "Increase/Decrease the value by <n>%"
 #. You may want to treat this as "by <n>%", depending on how you
 #. translated "Increase/Decrease the value by %s".
-#: ../../src/ui_basic/spinbox.cc:576
+#: ../../src/ui_basic/spinbox.cc:589
 #, c-format
 msgctxt "spinbox_change"
 msgid "%i %%"
@@ -4152,7 +4160,7 @@ msgstr "%i %%"
 #. * TRANSLATORS: "Increase/Decrease the value by <n>"
 #. You may want to treat this as "by <n>", depending on how you
 #. translated "Increase/Decrease the value by %s".
-#: ../../src/ui_basic/spinbox.cc:585
+#: ../../src/ui_basic/spinbox.cc:598
 #, c-format
 msgctxt "spinbox_change"
 msgid "%d"
@@ -8439,13 +8447,13 @@ msgstr "Wil je echt opgeven en een toeschouwer worden?"
 msgid "Resign?"
 msgstr "Overgegeven?"
 
-#: ../../src/wui/attack_window.cc:71
+#: ../../src/wui/attack_window.cc:79
 msgid "Attack"
 msgstr "Aanval"
 
 #. * TRANSLATORS: Number of ships that should attack. Used in the attack
 #. window.
-#: ../../src/wui/attack_window.cc:283
+#: ../../src/wui/attack_window.cc:291
 #, c-format
 msgid "%u ship"
 msgid_plural "%u ships"
@@ -8454,7 +8462,7 @@ msgstr[1] "%u schepen"
 
 #. * TRANSLATORS: Number of soldiers that should attack. Used in the attack
 #. window.
-#: ../../src/wui/attack_window.cc:285
+#: ../../src/wui/attack_window.cc:293
 #: ../../src/wui/constructionsitewindow.cc:567
 #, c-format
 msgid "%u soldier"
@@ -8462,115 +8470,115 @@ msgid_plural "%u soldiers"
 msgstr[0] "%u soldaat"
 msgstr[1] "%u soldaten"
 
-#: ../../src/wui/attack_window.cc:368
+#: ../../src/wui/attack_window.cc:376
 msgid "Number of ships"
 msgstr "Aantal schepen"
 
-#: ../../src/wui/attack_window.cc:368
+#: ../../src/wui/attack_window.cc:376
 msgid "Number of soldiers"
 msgstr "Aantal soldaten"
 
-#: ../../src/wui/attack_window.cc:375
+#: ../../src/wui/attack_window.cc:383
 msgid "Send less ships. Hold down Ctrl to send no ships"
 msgstr "Stuur minder schepen. Houd Ctrl ingedrukt om geen schepen te sturen"
 
-#: ../../src/wui/attack_window.cc:376
+#: ../../src/wui/attack_window.cc:384
 msgid "Send less soldiers. Hold down Ctrl to send no soldiers"
 msgstr "Stuur minder soldaten. Houd Ctrl ingedrukt om geen soldaten te sturen"
 
-#: ../../src/wui/attack_window.cc:382
+#: ../../src/wui/attack_window.cc:390
 msgid "Send more ships. Hold down Ctrl to send as many ships as possible"
 msgstr "Stuur meer schepen. Houd Ctrl ingedrukt om zoveel mogelijk schepen te sturen."
 
-#: ../../src/wui/attack_window.cc:383
+#: ../../src/wui/attack_window.cc:391
 msgid ""
 "Send more soldiers. Hold down Ctrl to send as many soldiers as possible"
 msgstr "Stuur meer soldaten. Houd Ctrl ingedrukt om het maximale aantal soldaten te sturen"
 
-#: ../../src/wui/attack_window.cc:388
+#: ../../src/wui/attack_window.cc:396
 msgid "Start attack"
 msgstr "Start aanval"
 
-#: ../../src/wui/attack_window.cc:409
+#: ../../src/wui/attack_window.cc:417
 msgid "Attackers:"
 msgstr "Aanvallers:"
 
-#: ../../src/wui/attack_window.cc:416
+#: ../../src/wui/attack_window.cc:424
 msgid "Click on a ship to remove her from the list of attackers"
 msgstr "Klik op een schip om het te verwijderen uit de lijst met aanvallers"
 
-#: ../../src/wui/attack_window.cc:417
+#: ../../src/wui/attack_window.cc:425
 msgid "Click on a soldier to remove him from the list of attackers"
 msgstr "Klik op een soldaat om deze te verwijderen uit de lijst van aanvallers"
 
-#: ../../src/wui/attack_window.cc:419
+#: ../../src/wui/attack_window.cc:427
 msgid "Hold down Ctrl to remove all ships from the list"
 msgstr "Houd Ctrl ingedrukt om alle schepen uit de lijst te verwijderen"
 
-#: ../../src/wui/attack_window.cc:420
+#: ../../src/wui/attack_window.cc:428
 msgid "Hold down Ctrl to remove all soldiers from the list"
 msgstr "Houd Ctrl ingedrukt om alle soldaten uit de lijst te verwijderen"
 
-#: ../../src/wui/attack_window.cc:424
+#: ../../src/wui/attack_window.cc:432
 msgid "Hold down Shift to remove all ships up to the one you’re pointing at"
 msgstr "Houd Shift ingedrukt om alle schepen te verwijderen tot aan het schip dat je aanwijst."
 
-#: ../../src/wui/attack_window.cc:425
+#: ../../src/wui/attack_window.cc:433
 msgid ""
 "Hold down Shift to remove all soldiers up to the one you’re pointing at"
 msgstr "Houd Shift ingedrukt om de soldaten te verwijderen tot degene die je aanwijst"
 
-#: ../../src/wui/attack_window.cc:432
+#: ../../src/wui/attack_window.cc:440
 msgid "Not attacking:"
 msgstr "Niet aanvallen:"
 
-#: ../../src/wui/attack_window.cc:438
+#: ../../src/wui/attack_window.cc:446
 msgid "Click on a ship to add her to the list of attackers"
 msgstr "Klik op een schip om het toe te voegen aan de lijst met aanvallers"
 
-#: ../../src/wui/attack_window.cc:439
+#: ../../src/wui/attack_window.cc:447
 msgid "Click on a soldier to add him to the list of attackers"
 msgstr "Klik op een soldaat om deze toe te voegen aan de lijst van aanvallers"
 
-#: ../../src/wui/attack_window.cc:441
+#: ../../src/wui/attack_window.cc:449
 msgid "Hold down Ctrl to add all ships to the list"
 msgstr "Houd Ctrl ingedrukt om alle schepen aan de lijst toe te voegen"
 
-#: ../../src/wui/attack_window.cc:442
+#: ../../src/wui/attack_window.cc:450
 msgid "Hold down Ctrl to add all soldiers to the list"
 msgstr "Houd Ctrl ingedrukt om alle soldaten aan de lijst toe te voegen"
 
-#: ../../src/wui/attack_window.cc:445
+#: ../../src/wui/attack_window.cc:453
 msgid "Hold down Shift to add all ships up to the one you’re pointing at"
 msgstr "Houd Shift ingedrukt om alle schepen toe te voegen tot aan het schip waar je naar wijst"
 
-#: ../../src/wui/attack_window.cc:446
+#: ../../src/wui/attack_window.cc:454
 msgid "Hold down Shift to add all soldiers up to the one you’re pointing at"
 msgstr "Houd Shift ingedrukt om de soldaten toe te voegen tot degene die je aanwijst"
 
-#: ../../src/wui/attack_window.cc:463
+#: ../../src/wui/attack_window.cc:471
 msgid "Destroy target"
 msgstr "Vernietig gekozen doel"
 
-#: ../../src/wui/attack_window.cc:464
+#: ../../src/wui/attack_window.cc:472
 msgid "Destroy the target building instead of conquering it"
 msgstr "Vernietig het  gekozen gebouw in plaats van het te veroveren"
 
-#: ../../src/wui/attack_window.cc:475 ../../src/wui/buildingwindow.cc:415
-#: ../../src/wui/shipwindow.cc:191
+#: ../../src/wui/attack_window.cc:483 ../../src/wui/buildingwindow.cc:420
+#: ../../src/wui/shipwindow.cc:197
 msgid "Show Debug Window"
 msgstr "Toon Debugvenster"
 
-#: ../../src/wui/attack_window.cc:479 ../../src/wui/buildingwindow.cc:431
+#: ../../src/wui/attack_window.cc:487 ../../src/wui/buildingwindow.cc:436
 msgid "Center view on this"
 msgstr "Beeld centreren"
 
-#: ../../src/wui/attack_window.cc:622
+#: ../../src/wui/attack_window.cc:630
 #, c-format
 msgid "%1$s  HP: %2$u/%3$u  AT: +%4$u%%"
 msgstr "%1$s  HP: %2$u/%3$u  AT: +%4$u%%"
 
-#: ../../src/wui/attack_window.cc:627 ../../src/wui/soldierlist.cc:556
+#: ../../src/wui/attack_window.cc:635 ../../src/wui/soldierlist.cc:556
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
 msgstr "L: %1$u/%2$u A: %3$u/%4$u V: %5$u/%6$u O: %7$u/%8$u"
@@ -8648,81 +8656,81 @@ msgstr "%1%/%2%"
 msgid "Lacking soldiers:"
 msgstr "Ontbrekende soldaten:"
 
-#: ../../src/wui/buildingwindow.cc:207
+#: ../../src/wui/buildingwindow.cc:212
 msgid "Muted – click to unmute"
 msgstr "Berichten gestopt – klik om berichten aan te zetten"
 
-#: ../../src/wui/buildingwindow.cc:208
+#: ../../src/wui/buildingwindow.cc:213
 msgid "Mute this building’s messages"
 msgstr "Stop de berichten van dit gebouw"
 
-#: ../../src/wui/buildingwindow.cc:213
+#: ../../src/wui/buildingwindow.cc:218
 msgid "All buildings of this type are muted – click to unmute"
 msgstr "Alle berichten van gebouwen van dit type zijn gestopt – klik om weer door te geven"
 
-#: ../../src/wui/buildingwindow.cc:217
+#: ../../src/wui/buildingwindow.cc:222
 msgid "Mute all buildings of this type"
 msgstr "Stop berichten van alle gebouwen van dit type"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:281
+#: ../../src/wui/buildingwindow.cc:286
 msgid "Continue"
 msgstr "Doorgaan"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:283
+#: ../../src/wui/buildingwindow.cc:288
 msgid "Stop"
 msgstr "Stop"
 
 #. * TRANSLATORS: Infinite Production toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:297
+#: ../../src/wui/buildingwindow.cc:302
 msgid "Stop producing indefinitely"
 msgstr "Voor onbepaalde tijd stoppen met produceren"
 
 #. * TRANSLATORS: Infinite Production toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:299
+#: ../../src/wui/buildingwindow.cc:304
 msgid "Produce indefinitely regardless of the economy’s needs"
 msgstr "Onbeperkt produceren, ongeacht de behoeften van de economie"
 
-#: ../../src/wui/buildingwindow.cc:323
+#: ../../src/wui/buildingwindow.cc:328
 #, c-format
 msgid "Enhance to %s"
 msgstr "Verbeter naar %s"
 
-#: ../../src/wui/buildingwindow.cc:326 ../../src/wui/fieldaction.cc:107
+#: ../../src/wui/buildingwindow.cc:331 ../../src/wui/fieldaction.cc:107
 msgid "Construction costs:"
 msgstr "Bouwkosten:"
 
-#: ../../src/wui/buildingwindow.cc:344
+#: ../../src/wui/buildingwindow.cc:349
 msgid "Destroy"
 msgstr "Vernietigen"
 
-#: ../../src/wui/buildingwindow.cc:359
+#: ../../src/wui/buildingwindow.cc:364
 msgid "Dismantle"
 msgstr "Ontmantelen"
 
-#: ../../src/wui/buildingwindow.cc:362
+#: ../../src/wui/buildingwindow.cc:367
 msgid "Returns:"
 msgstr "Levert op:"
 
-#: ../../src/wui/buildingwindow.cc:424
+#: ../../src/wui/buildingwindow.cc:429
 msgid "Watch the scout"
 msgstr "Bekijk de Verkenner"
 
-#: ../../src/wui/buildingwindow.cc:698
+#: ../../src/wui/buildingwindow.cc:703
 msgid "Hide work area"
 msgstr "Verberg werkgebied"
 
-#: ../../src/wui/buildingwindow.cc:701
+#: ../../src/wui/buildingwindow.cc:706
 msgid "Show work area"
 msgstr "Toon werkgebied"
 
-#: ../../src/wui/buildingwindow.cc:726
+#: ../../src/wui/buildingwindow.cc:731
 #: ../../src/wui/constructionsitewindow.cc:302
 msgid "Start an expedition"
 msgstr "Begin een expeditie"
 
-#: ../../src/wui/buildingwindow.cc:730
+#: ../../src/wui/buildingwindow.cc:735
 msgid "Cancel the expedition"
 msgstr "Annuleer de expeditie"
 
@@ -10603,7 +10611,7 @@ msgstr "Toon Oorlogsschepen"
 msgid "Show ships being refitted"
 msgstr "Laat schepen zien die worden omgebouwd"
 
-#: ../../src/wui/shipwindow.cc:86
+#: ../../src/wui/shipwindow.cc:92
 #, c-format
 msgid ""
 "Damaged warships regain %u hitpoint per second when anchored in a port."
@@ -10612,92 +10620,92 @@ msgid_plural ""
 msgstr[0] "Beschadigde oorlogsschepen herwinnen %u hitpoints per seconde wanneer ze voor anker liggen in een haven."
 msgstr[1] "Beschadigde oorlogsschepen herwinnen %u hitpoints per seconde wanneer ze voor anker liggen in een haven."
 
-#: ../../src/wui/shipwindow.cc:111
+#: ../../src/wui/shipwindow.cc:117
 msgid "Scout towards the north west"
 msgstr "Verken naar het noordwesten"
 
-#: ../../src/wui/shipwindow.cc:116
+#: ../../src/wui/shipwindow.cc:122
 msgid "Explore the island’s coast clockwise"
 msgstr "Verken de kust van het eiland met de klok mee"
 
-#: ../../src/wui/shipwindow.cc:121
+#: ../../src/wui/shipwindow.cc:127
 msgid "Scout towards the north east"
 msgstr "Verken naar het noordoosten"
 
-#: ../../src/wui/shipwindow.cc:126
+#: ../../src/wui/shipwindow.cc:132
 msgid "Scout towards the west"
 msgstr "Verken naar het westen"
 
-#: ../../src/wui/shipwindow.cc:131
+#: ../../src/wui/shipwindow.cc:137
 msgid "Construct a port at the current location"
 msgstr "Bouw een haven op de huidige locatie"
 
-#: ../../src/wui/shipwindow.cc:136
+#: ../../src/wui/shipwindow.cc:142
 msgid "Anchor at the current location"
 msgstr "Veranker op de huidige locatie"
 
-#: ../../src/wui/shipwindow.cc:141
+#: ../../src/wui/shipwindow.cc:147
 msgid "Scout towards the east"
 msgstr "Verken naar het oosten"
 
-#: ../../src/wui/shipwindow.cc:146
+#: ../../src/wui/shipwindow.cc:152
 msgid "Scout towards the south west"
 msgstr "Verken naar het zuidwesten"
 
-#: ../../src/wui/shipwindow.cc:151
+#: ../../src/wui/shipwindow.cc:157
 msgid "Explore the island’s coast counter clockwise"
 msgstr "Verken de kust van het eiland tegen de klok in"
 
-#: ../../src/wui/shipwindow.cc:156
+#: ../../src/wui/shipwindow.cc:162
 msgid "Scout towards the south east"
 msgstr "Verken naar het zuidoosten"
 
-#: ../../src/wui/shipwindow.cc:163
+#: ../../src/wui/shipwindow.cc:169
 msgid "Destination"
 msgstr "Bestemming"
 
-#: ../../src/wui/shipwindow.cc:174
+#: ../../src/wui/shipwindow.cc:180
 msgid "Sink the ship"
 msgstr "Laat het schip zinken"
 
-#: ../../src/wui/shipwindow.cc:183
+#: ../../src/wui/shipwindow.cc:189
 msgid "Cancel the Expedition"
 msgstr "Annuleer de expeditie"
 
-#: ../../src/wui/shipwindow.cc:201
+#: ../../src/wui/shipwindow.cc:207
 msgid "Go to ship"
 msgstr "Ga naar schip"
 
 #. * TRANSLATORS: Window label when an expedition can't be canceled
-#: ../../src/wui/shipwindow.cc:272
+#: ../../src/wui/shipwindow.cc:278
 msgid "Cancel Expedition"
 msgstr "Expeditie Annuleren"
 
-#: ../../src/wui/shipwindow.cc:273
+#: ../../src/wui/shipwindow.cc:279
 msgid ""
 "This expedition can’t be canceled, because the ship has no port to return "
 "to."
 msgstr "Deze expeditie kan je niet annuleren, omdat er geen haven is waar het schip weer naar toe kan gaan."
 
-#: ../../src/wui/shipwindow.cc:421 ../../src/wui/shipwindow.cc:426
-#: ../../src/wui/shipwindow.cc:431
+#: ../../src/wui/shipwindow.cc:427 ../../src/wui/shipwindow.cc:432
+#: ../../src/wui/shipwindow.cc:437
 #, c-format
 msgid "Go to destination (%s)"
 msgstr "Ga naar bestemming (%s)"
 
-#: ../../src/wui/shipwindow.cc:436
+#: ../../src/wui/shipwindow.cc:442
 msgid "Go to destination"
 msgstr "Ga naar bestemming"
 
-#: ../../src/wui/shipwindow.cc:463
+#: ../../src/wui/shipwindow.cc:469
 msgid "Refit to transport ship"
 msgstr "Verbouwing tot transportschip"
 
-#: ../../src/wui/shipwindow.cc:464
+#: ../../src/wui/shipwindow.cc:470
 msgid "Refit to warship"
 msgstr "Verbouwing tot oorlogsschip"
 
-#: ../../src/wui/shipwindow.cc:486
+#: ../../src/wui/shipwindow.cc:492
 #, c-format
 msgid "HP: %1$u/%2$u"
 msgstr "HP: %1$u/%2$u"
