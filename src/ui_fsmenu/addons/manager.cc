@@ -1595,6 +1595,9 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 		AddOns::update_ui_theme(AddOns::UpdateThemeAction::kEnableArgument, remote->internal_name);
 		get_topmost_forefather().template_directory_changed();
 	}
+	if (remote->category == AddOns::AddOnCategory::kUIPlugin) {
+		fsmm_.reinit_plugins();
+	}
 	rebuild(true);
 }
 

@@ -54,6 +54,17 @@ wl_library(wui_mapview_pixelfunctions
     wui_mapview_pixelconstants
 )
 
+wl_library(wui_common_plugins
+  SRCS
+    plugins.h
+    plugins.cc
+  DEPENDS
+    base
+    scripting_lua_interface
+    ui_basic
+  USES_SDL2
+)
+
 wl_library(wui_common_suggested_teams
   SRCS
     suggested_teams_box.cc
@@ -343,6 +354,7 @@ wl_library(wui
     widelands_options
     wui_chat_ui
     wui_common_gamedetails
+    wui_common_plugins
     wui_mapview
     wui_mapview_pixelfunctions
     wui_sound_options

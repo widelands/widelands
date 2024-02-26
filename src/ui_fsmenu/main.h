@@ -21,11 +21,14 @@
 
 #include <memory>
 
+#include "scripting/logic.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "ui_fsmenu/menu.h"
+#include "wui/plugins.h"
+#include "wui/unique_window_handler.h"
 
 namespace Widelands {
 class Game;
@@ -101,6 +104,19 @@ public:
 
 	Widelands::Game* create_safe_game(bool show_error = true);
 
+	UniqueWindowHandler& unique_windows() {
+		return unique_windows_;
+	}
+
+	LuaFsMenuInterface& lua() {
+		return *lua_;
+	}
+
+	void reinit_plugins();
+	void add_plugin_timer(const std::string& action, uint32_t interval, bool failsafe) {
+		plugin_timers_->add_plugin_timer(action, interval, failsafe);
+	}
+
 	void abort_splashscreen();
 
 protected:
@@ -108,6 +124,11 @@ protected:
 
 private:
 	void layout() override;
+	void think() override;
+
+	UniqueWindowHandler unique_windows_;
+	std::unique_ptr<LuaFsMenuInterface> lua_;
+	std::unique_ptr<PluginTimers> plugin_timers_;
 
 	Recti box_rect_;
 	uint32_t butw_, buth_;

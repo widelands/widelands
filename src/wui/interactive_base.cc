@@ -159,6 +159,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
                        UI::PanelStyle::kWui,
                        UI::ButtonStyle::kWuiPrimary),
      quick_navigation_(&map_view_),
+     plugin_timers_(this, &the_egbase.lua()),
      minimap_registry_(the_egbase.is_game()),
      workareas_cache_(nullptr),
      egbase_(the_egbase),
@@ -284,36 +285,11 @@ UI::Box* InteractiveBase::toolbar() {
 	return &toolbar_.box;
 }
 
-void InteractiveBase::add_plugin_timer(const std::string& action,
-                                       uint32_t interval,
-                                       bool failsafe) {
-	plugin_timers_.emplace_back(action, interval, failsafe);
-}
-
 void InteractiveBase::add_plugin_menu() {
 	plugins_dropdown_.set_image(g_image_cache->get("images/plugin.png"));
 	toolbar()->add(&plugins_dropdown_);
 	plugins_dropdown_.selected.connect(
-	   [this] { plugin_action(plugins_dropdown_.get_selected(), true); });
-}
-
-bool InteractiveBase::plugin_action(const std::string& action, bool failsafe) {
-	try {
-		egbase().lua().interpret_string(action);
-		return true;
-	} catch (const LuaError& e) {
-		if (!failsafe || g_fail_on_lua_error) {
-			log_err("FATAL: Lua error in plugin: %s", e.what());
-			throw;
-		}
-
-		log_err("Lua error in plugin: %s", e.what());
-		UI::WLMessageBox m(this, UI::WindowStyle::kWui, _("Plugin Error"),
-		                   format_l(_("Error when running plugin:\n%s"), e.what()),
-		                   UI::WLMessageBox::MBoxType::kOk);
-		m.run<UI::Panel::Returncodes>();
-		return false;
-	}
+	   [this] { plugin_timers_.plugin_action(plugins_dropdown_.get_selected(), true); });
 }
 
 void InteractiveBase::add_toolbar_plugin(const std::string& action,
@@ -979,19 +955,7 @@ void InteractiveBase::think() {
 		it = wanted_building_windows_.erase(it);
 	}
 
-	const uint32_t time = SDL_GetTicks();
-	for (auto plugin = plugin_timers_.begin(); plugin != plugin_timers_.end();) {
-		if (time >= plugin->next_run) {
-			plugin->next_run = time + plugin->interval;
-			if (!plugin_action(plugin->action, plugin->failsafe)) {
-				// In case of an error, remove it from the queue
-				log_err("Unregistering defective plugin timer");
-				plugin = plugin_timers_.erase(plugin);
-				continue;
-			}
-		}
-		++plugin;
-	}
+	plugin_timers_.think();
 }
 
 double InteractiveBase::average_fps() const {

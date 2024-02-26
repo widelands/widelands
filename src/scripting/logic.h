@@ -28,6 +28,10 @@
 class EditorFactory;
 class GameFactory;
 
+namespace FsMenu {
+class MainMenu;
+}
+
 class LuaEditorInterface : public LuaInterface {
 public:
 	explicit LuaEditorInterface(Widelands::EditorGameBase* g);
@@ -61,6 +65,12 @@ public:
 
 private:
 	std::unique_ptr<GameFactory> factory_;
+};
+
+class LuaFsMenuInterface : public LuaInterface {
+public:
+	explicit LuaFsMenuInterface(FsMenu::MainMenu* menu);
+	~LuaFsMenuInterface() override = default;
 };
 
 #endif  // end of include guard: WL_SCRIPTING_LOGIC_H

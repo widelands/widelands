@@ -46,7 +46,7 @@ void setup_for_editor_and_game(lua_State* L, Widelands::EditorGameBase* g) {
 	MutexLock m(MutexLock::ID::kLua);
 	LuaBases::luaopen_wlbases(L);
 	LuaMaps::luaopen_wlmap(L);
-	LuaUi::luaopen_wlui(L);
+	LuaUi::luaopen_wlui(L, true);
 
 	// Push the editor game base
 	lua_pushlightuserdata(L, static_cast<void*>(g));
@@ -81,6 +81,15 @@ LuaEditorInterface::LuaEditorInterface(Widelands::EditorGameBase* g)
 
 std::unique_ptr<LuaTable> LuaEditorInterface::run_script(const std::string& script) {
 	return run_script_maybe_from_map(lua_state_, script);
+}
+
+LuaFsMenuInterface::LuaFsMenuInterface(FsMenu::MainMenu* menu) : LuaInterface(true) {
+	// TODO(tothxa): kObjects before kLua is needed because of Panel::do_run() and plugin actions
+	MutexLock o(MutexLock::ID::kObjects);
+	MutexLock m(MutexLock::ID::kLua);
+
+	lua_pushlightuserdata(lua_state_, static_cast<void*>(menu));
+	lua_setfield(lua_state_, LUA_REGISTRYINDEX, "fsmenu");
 }
 
 // Special handling of math.random.

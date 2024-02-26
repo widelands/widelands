@@ -250,6 +250,8 @@ MainMenu::MainMenu(const bool skip_init)
 	layout();
 
 	initialization_complete();
+
+	reinit_plugins();
 }
 
 void MainMenu::main_loop() {
@@ -545,6 +547,23 @@ void MainMenu::set_button_visibility(const bool v) {
 
 void MainMenu::abort_splashscreen() {
 	init_time_ = kNoSplash;
+}
+
+void MainMenu::think() {
+	UI::Panel::think();
+	plugin_timers_->think();
+}
+
+void MainMenu::reinit_plugins() {
+	lua_.reset(new LuaFsMenuInterface(this));
+	plugin_timers_.reset(new PluginTimers(this, lua_.get()));
+
+	for (const auto& pair : AddOns::g_addons) {
+		if (pair.second && pair.first->category == AddOns::AddOnCategory::kUIPlugin) {
+			lua_->run_script(kAddOnDir + FileSystem::file_separator() + pair.first->internal_name +
+			                 FileSystem::file_separator() + "init.lua");
+		}
+	}
 }
 
 bool MainMenu::handle_mousepress(uint8_t /*btn*/, int32_t /*x*/, int32_t /*y*/) {
