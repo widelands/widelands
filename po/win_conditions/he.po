@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: he\n"
-"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;\n"
+"Plural-Forms: nplurals=3; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;\n"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:15
 msgid "Artifacts"
@@ -95,7 +95,6 @@ msgid_plural "%i artifacts"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
 #: ../../data/scripting/win_conditions/artifacts.lua:184
@@ -151,7 +150,6 @@ msgid_plural "Total: %i points"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../data/scripting/win_conditions/collectors.lua:111
 #, lua-format
@@ -165,7 +163,6 @@ msgid_plural "Team Total: %i points"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../data/scripting/win_conditions/defeat_all.lua:15
 msgid "Autocrat"
@@ -225,7 +222,6 @@ msgid_plural "Keep it for %i more minutes to win the game."
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../data/scripting/win_conditions/territorial_functions.lua:264
 #, lua-format
@@ -239,7 +235,6 @@ msgid_plural "You’ve still got %i minutes to prevent a victory."
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:18
 msgid "Territorial Lord"
@@ -277,7 +272,6 @@ msgid_plural "%1% days"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:358
 msgid "%1% hour"
@@ -285,7 +279,6 @@ msgid_plural "%1% hours"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:359
 msgid "%1% minute"
@@ -293,7 +286,6 @@ msgid_plural "%1% minutes"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. TRANSLATORS: 1 day, 12 hours, and 30 minutes
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:364
@@ -381,7 +373,6 @@ msgid_plural "%i trees"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-msgstr[3] ""
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
 #: ../../data/scripting/win_conditions/wood_gnome.lua:71

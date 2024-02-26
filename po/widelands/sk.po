@@ -992,7 +992,7 @@ msgstr "%1$s; %2$s"
 #: ../../src/editor/ui_menus/field_info_window.cc:262
 #, c-format
 msgid "Enabled Add-Ons: %s"
-msgstr "Povolené doplnky: %s"
+msgstr "Aktívne doplnky: %s"
 
 #: ../../src/editor/ui_menus/help.cc:36 ../../src/ui_fsmenu/login_box.cc:255
 #: ../../src/ui_fsmenu/main.cc:267 ../../src/ui_fsmenu/main.cc:1101
@@ -4041,7 +4041,7 @@ msgstr "Zvýšiť hodnotu o %s"
 msgctxt "spinbox_change"
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] "%d minúta"
+msgstr[0] "%d minútu"
 msgstr[1] "%d minúty"
 msgstr[2] "%d minút"
 msgstr[3] "%d minút"
@@ -4064,7 +4064,7 @@ msgstr[3] "%d minút"
 msgctxt "spinbox_change"
 msgid "%d hour"
 msgid_plural "%d hours"
-msgstr[0] "%d hodina"
+msgstr[0] "%d hodinu"
 msgstr[1] "%d hodiny"
 msgstr[2] "%d hodín"
 msgstr[3] "%d hodín"
@@ -4101,7 +4101,7 @@ msgstr ""
 msgctxt "spinbox_change_hours_mins"
 msgid "%d hour"
 msgid_plural "%d hours"
-msgstr[0] "%d hodina"
+msgstr[0] "%d hodinu"
 msgstr[1] "%d hodiny"
 msgstr[2] "%d hodín"
 msgstr[3] "%d hodín"
@@ -4115,7 +4115,7 @@ msgstr[3] "%d hodín"
 msgctxt "spinbox_change_hours_mins"
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] "%d minúta"
+msgstr[0] "%d minútu"
 msgstr[1] "%d minúty"
 msgstr[2] "%d minút"
 msgstr[3] "%d minút"
@@ -5610,12 +5610,12 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:150
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:201
 msgid "Disable"
-msgstr "Zakázať"
+msgstr "Deaktivovať"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:150
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:201
 msgid "Enable"
-msgstr "Povoliť"
+msgstr "Aktivovať"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:166
@@ -7004,7 +7004,7 @@ msgstr "Upraviť akcie klávesnice a myši…"
 
 #: ../../src/ui_fsmenu/options.cc:223
 msgid "Save game automatically every:"
-msgstr "Automaticky uložiť hru každých:"
+msgstr "Automaticky ukladať hru po čase:"
 
 #: ../../src/ui_fsmenu/options.cc:237
 msgid "Maximum number of autosave files:"
@@ -7055,7 +7055,7 @@ msgstr "Zobraz prekrytia pracovných oblastí"
 
 #: ../../src/ui_fsmenu/options.cc:316
 msgid "Pause game when inactive for:"
-msgstr ""
+msgstr "Zastaviť hru po neaktivite:"
 
 #: ../../src/ui_fsmenu/options.cc:326
 msgid "Start building road after placing a flag"
@@ -7344,7 +7344,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/tech_info.cc:126
 msgid "Enabled Add-Ons:"
-msgstr "Povolené doplnky:"
+msgstr "Aktívne doplnky:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:128
 msgid "Inactive Installed Add-Ons:"
@@ -7528,11 +7528,11 @@ msgstr "Pevnosť"
 
 #: ../../src/wlapplication_options.cc:204
 msgid "Woodcutter’s House"
-msgstr ""
+msgstr "Drevorubačský dom"
 
 #: ../../src/wlapplication_options.cc:205
 msgid "Forester’s House"
-msgstr ""
+msgstr "Horáreň"
 
 #: ../../src/wlapplication_options.cc:206
 msgid "Quarry"
@@ -7652,7 +7652,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:235
 msgid "Gold Mine"
-msgstr ""
+msgstr "Zlatá baňa"
 
 #: ../../src/wlapplication_options.cc:236
 msgid "Agricultural Producer"
@@ -8145,7 +8145,7 @@ msgstr "Klávesové skratky"
 #. * TRANSLATORS: Section heading in "Controls" help
 #: ../../src/wlapplication_options.cc:1014
 msgid "Message Window"
-msgstr ""
+msgstr "Okno so správami"
 
 #. * TRANSLATORS: Section heading in "Controls" help
 #: ../../src/wlapplication_options.cc:1019
@@ -8425,7 +8425,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:1493
 msgid "(disabled)"
-msgstr ""
+msgstr "(neaktívne)"
 
 #. * TRANSLATORS: The first placeholder is the stock amount of a ware/worker,
 #. and the second is an
@@ -9968,7 +9968,7 @@ msgstr[3] "%u nových správ"
 
 #: ../../src/wui/interactive_player.cc:978
 msgid "Fastplace Shortcuts"
-msgstr ""
+msgstr "Skratky rýchleho umiestnenia"
 
 #: ../../src/wui/load_or_save_game.cc:146
 msgid "Version Mismatch"
