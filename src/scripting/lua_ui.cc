@@ -761,8 +761,7 @@ int LuaPanel::get_child(lua_State* L) {
              * ``"tooltip"``: **Optional**. The entry's tooltip.
              * ``"select"``: **Optional**. Whether to select this entry (default :const:`false`).
 
-           * ``"icon"``: **Mandatory** for ``pictorial_menu`` dropdowns, ignored for other types.
-             The icon filepath for the dropdown's button.
+           * ``"icon"``: **Optional**. The icon filepath for the dropdown's button, if any.
            * ``"on_selected"``: **Optional**. Callback code to run when the user selects an entry.
 
          * ``"listselect"``: A list of entries from which the user may choose. Properties:
@@ -1431,8 +1430,7 @@ UI::Panel* LuaPanel::do_create_child_dropdown(lua_State* L, UI::Panel* parent) {
 		report_error(L, "Unsupported dropdown datatype '%s'", datatype.c_str());
 	}
 
-	if (type == UI::DropdownType::kPictorialMenu) {
-		std::string icon = get_table_string(L, "icon", true);
+	if (std::string icon = get_table_string(L, "icon", false); !icon.empty()) {
 		dropdown->set_image(g_image_cache->get(icon));
 	}
 
