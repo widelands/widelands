@@ -59,7 +59,7 @@ public:
 	// Wares may be selected (highlighted)
 	void select_ware(Widelands::DescriptionIndex);
 	void unselect_ware(Widelands::DescriptionIndex);
-	bool ware_selected(Widelands::DescriptionIndex);
+	bool ware_selected(Widelands::DescriptionIndex) const;
 
 	// Wares may be hidden
 	void hide_ware(Widelands::DescriptionIndex);
@@ -105,9 +105,11 @@ protected:
 
 	const Widelands::TribeDescr::WaresOrder& icons_order() const;
 	virtual Vector2i ware_position(Widelands::DescriptionIndex) const;
-	void draw(RenderTarget&) override;
-	virtual void draw_ware(RenderTarget&, Widelands::DescriptionIndex);
-	virtual RGBAColor draw_ware_background_overlay(Widelands::DescriptionIndex) {
+	void draw(RenderTarget& dst) override;
+	void draw_ware_backgrounds(RenderTarget& dst);
+	bool draw_ware_as_selected(Widelands::DescriptionIndex id) const;
+	virtual void draw_ware(RenderTarget& dst, Widelands::DescriptionIndex id);
+	virtual RGBAColor draw_ware_background_overlay(Widelands::DescriptionIndex /*id*/) {
 		return RGBAColor(0, 0, 0, 0);
 	}
 
@@ -136,6 +138,10 @@ private:
 	bool horizontal_;
 	int32_t hgap_;
 	int32_t vgap_;
+
+	std::unique_ptr<Texture> background_texture_;
+	std::map<Widelands::DescriptionIndex, std::pair<RGBAColor, std::shared_ptr<const UI::RenderedText>>> ware_details_cache_;
+	uint32_t last_ware_details_cache_update_ = 0;
 
 	WaresOrderCoords order_coords_;
 
