@@ -77,7 +77,8 @@ AbstractWaresDisplay::AbstractWaresDisplay(
 		selected_.insert(std::make_pair(index, false));
 		hidden_.insert(std::make_pair(index, false));
 		in_selection_.insert(std::make_pair(index, false));
-		ware_details_cache_.insert(std::make_pair(index, std::make_pair(RGBAColor(0, 0, 0, 0), nullptr)));
+		ware_details_cache_.insert(
+		   std::make_pair(index, std::make_pair(RGBAColor(0, 0, 0, 0), nullptr)));
 	}
 
 	curware_.set_text(_("Stock"));
@@ -448,7 +449,8 @@ void AbstractWaresDisplay::draw_ware_backgrounds(RenderTarget& dst) {
 		const int imgw = get_inner_w();
 		const int imgh = get_inner_h();
 		background_texture_.reset(new Texture(imgw, imgh));
-		background_texture_->fill_rect(Rectf(0, 0, imgw, imgh), RGBAColor(0, 0, 0, 0), BlendMode::Copy);
+		background_texture_->fill_rect(
+		   Rectf(0, 0, imgw, imgh), RGBAColor(0, 0, 0, 0), BlendMode::Copy);
 
 		for (const Widelands::DescriptionIndex& id : indices_) {
 			if (!hidden_[id]) {
@@ -456,10 +458,11 @@ void AbstractWaresDisplay::draw_ware_backgrounds(RenderTarget& dst) {
 
 				const UI::WareInfoStyleInfo& style =
 				   draw_selected ? g_style_manager->ware_info_style(UI::WareInfoStyle::kHighlight) :
-						          g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal);
+                               g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal);
 
 				if (update) {
-					ware_details_cache_[id].second = UI::g_fh->render(as_richtext_paragraph(info_for_ware(id), style.info_font()));
+					ware_details_cache_[id].second =
+					   UI::g_fh->render(as_richtext_paragraph(info_for_ware(id), style.info_font()));
 				}
 
 				const Image& bg = *style.icon_background_image();
@@ -467,25 +470,29 @@ void AbstractWaresDisplay::draw_ware_backgrounds(RenderTarget& dst) {
 				uint16_t h = bg.height();
 
 				const Vector2i p = ware_position(id);
-				background_texture_->blit(Rectf(p, w, h), bg, Rectf(0, 0, w, h), 1.f, BlendMode::Default);
+				background_texture_->blit(
+				   Rectf(p, w, h), bg, Rectf(0, 0, w, h), 1.f, BlendMode::Default);
 
 				if (const RGBAColor& overlay = ware_details_cache_[id].first; overlay.a != 0) {
 					background_texture_->fill_rect(Rectf(p, w, h), overlay, BlendMode::Default);
 				}
 
 				const Image* icon = type_ == Widelands::wwWARE ? tribe_.get_ware_descr(id)->icon() :
-						                                        tribe_.get_worker_descr(id)->icon();
-				background_texture_->blit(Rectf(p.x + (w - kWareMenuPicWidth) / 2, p.y + 1, icon->width(), icon->height()), *icon,
-						Rectf(0, 0, icon->width(), icon->height()), 1.f, BlendMode::Default);
+                                                             tribe_.get_worker_descr(id)->icon();
+				background_texture_->blit(
+				   Rectf(p.x + (w - kWareMenuPicWidth) / 2, p.y + 1, icon->width(), icon->height()),
+				   *icon, Rectf(0, 0, icon->width(), icon->height()), 1.f, BlendMode::Default);
 			}
 		}
 	} else if (update) {
 		for (const Widelands::DescriptionIndex& id : indices_) {
 			if (!hidden_[id]) {
 				const UI::WareInfoStyleInfo& style =
-				   draw_ware_as_selected(id) ? g_style_manager->ware_info_style(UI::WareInfoStyle::kHighlight) :
-						          g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal);
-				ware_details_cache_[id].second = UI::g_fh->render(as_richtext_paragraph(info_for_ware(id), style.info_font()));
+				   draw_ware_as_selected(id) ?
+                  g_style_manager->ware_info_style(UI::WareInfoStyle::kHighlight) :
+                  g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal);
+				ware_details_cache_[id].second =
+				   UI::g_fh->render(as_richtext_paragraph(info_for_ware(id), style.info_font()));
 			}
 		}
 	}

@@ -140,7 +140,9 @@ private:
 	int32_t vgap_;
 
 	std::unique_ptr<Texture> background_texture_;
-	std::map<Widelands::DescriptionIndex, std::pair<RGBAColor, std::shared_ptr<const UI::RenderedText>>> ware_details_cache_;
+	std::map<Widelands::DescriptionIndex,
+	         std::pair<RGBAColor, std::shared_ptr<const UI::RenderedText>>>
+	   ware_details_cache_;
 	uint32_t last_ware_details_cache_update_ = 0;
 
 	WaresOrderCoords order_coords_;
