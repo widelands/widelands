@@ -151,8 +151,8 @@ function build_lumberjack()
    scroll_to_field(first_lumberjack_field)
    mouse_to_field(first_lumberjack_field)
 
-   local construction_window_name = string.format("building_window_%u",
-                                                  first_lumberjack_field.immovable.serial)
+   local construction_window_name = string.bformat("building_window_%u",
+                                                   first_lumberjack_field.immovable.serial)
    while not wl.ui.MapView().windows[construction_window_name] do sleep(100) end
    -- demonstrate work area button
    blocker = UserInputDisabler:new()
@@ -162,7 +162,7 @@ function build_lumberjack()
    blocker:lift_blocks()
 
    while wl.ui.MapView().windows[construction_window_name] do sleep(100) end
-   -- if the construction site is replaced by the finished building, then the window is replaces,
+   -- if the construction site is replaced by the finished building, then the window is replaced,
    -- so this should be fulfilled
    set_objective_done(o)
    sleep(3000)

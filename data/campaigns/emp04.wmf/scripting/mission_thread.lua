@@ -31,7 +31,7 @@ function farm_plans()
    local f = map:get_field(47, 10)
    local window_names = {}
    for i,b in ipairs(p1:get_buildings("empire_farm1")) do
-      table.insert(window_names, string.format("building_window_%u", b.serial))
+      table.insert(window_names, string.bformat("building_window_%u", b.serial))
    end
    local farmclick = false
    local count = 0
