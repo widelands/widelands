@@ -18,7 +18,6 @@
 
 #include "wui/waresdisplay.h"
 
-#include <chrono>
 #include <memory>
 
 #include <SDL_mouse.h>
@@ -37,13 +36,6 @@
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/player.h"
 #include "ui_basic/window.h"
-
-constexpr int kNOCOMAvgFactors = 15;
-#define NOCOM_T(i) const std::chrono::time_point<std::chrono::high_resolution_clock, std::chrono::nanoseconds> NOCOM_Time##i = std::chrono::high_resolution_clock::now()
-#define NOCOM_D(i, a, b)  \
-	const std::chrono::nanoseconds NOCOM_D##i = NOCOM_Time##b - NOCOM_Time##a;  \
-	static int64_t NOCOM_avg##i(0);  \
-	NOCOM_avg##i = (kNOCOMAvgFactors * NOCOM_avg##i + NOCOM_D##i.count()) / (kNOCOMAvgFactors + 1);
 
 constexpr int kWareMenuInfoSize = 12;
 
@@ -423,8 +415,7 @@ Vector2i AbstractWaresDisplay::ware_position(Widelands::DescriptionIndex id) con
 bool AbstractWaresDisplay::draw_ware_as_selected(Widelands::DescriptionIndex id) const {
 	bool draw_selected = selected_.at(id);
 	if (selection_anchor_ != Widelands::INVALID_INDEX) {
-		// Draw the temporary selected wares as if they were
-		// selected.
+		// Draw the temporary selected wares as if they were selected.
 		// TODO(unknown): Use another pic for the temporary selection
 		if (!ware_selected(selection_anchor_)) {
 			draw_selected |= in_selection_.at(id);
@@ -436,8 +427,6 @@ bool AbstractWaresDisplay::draw_ware_as_selected(Widelands::DescriptionIndex id)
 }
 
 void AbstractWaresDisplay::draw_ware_backgrounds(RenderTarget& dst) {
-	NOCOM_T(1);
-
 	const uint32_t time = SDL_GetTicks();
 	const bool update = time - last_ware_details_cache_update_ > 250;
 
@@ -455,7 +444,6 @@ void AbstractWaresDisplay::draw_ware_backgrounds(RenderTarget& dst) {
 		}
 	}
 
-	NOCOM_T(2);
 	if (background_texture_ == nullptr) {
 		const int imgw = get_inner_w();
 		const int imgh = get_inner_h();
@@ -502,20 +490,7 @@ void AbstractWaresDisplay::draw_ware_backgrounds(RenderTarget& dst) {
 		}
 	}
 
-	NOCOM_T(3);
 	dst.blit(Vector2i::zero(), background_texture_.get(), BlendMode::Default);
-
-	NOCOM_T(4);
-	NOCOM_D(1, 1, 2)
-	NOCOM_D(2, 2, 3)
-	NOCOM_D(3, 3, 4)
-	NOCOM_D(T, 1, 4)
-#if 0
-	log_dbg("draw_ware_backgrounds %-30s took %9ld ns", "#1 Update cache", NOCOM_avg1);
-	log_dbg("draw_ware_backgrounds %-30s took %9ld ns", "#2 Create texture", NOCOM_avg2);
-	log_dbg("draw_ware_backgrounds %-30s took %9ld ns", "#3 Blit texture", NOCOM_avg3);
-	log_dbg("draw_ware_backgrounds %-30s took %9ld ns", "TOTAL", NOCOM_avgT);
-#endif
 }
 
 /*
@@ -526,7 +501,6 @@ Draw one ware icon + additional information.
 ===============
 */
 void AbstractWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIndex id) {
-	NOCOM_T(1);
 	const bool draw_selected = draw_ware_as_selected(id);
 
 	const UI::WareInfoStyleInfo& style =
@@ -537,27 +511,13 @@ void AbstractWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIn
 
 	const Vector2i p = ware_position(id);
 
-	NOCOM_T(2);
 	dst.fill_rect(
 	   Recti(p + Vector2i(0, kWareMenuPicHeight), w, kWareMenuInfoSize), info_color_for_ware(id));
 
-	NOCOM_T(3);
 	const auto& rendered_text = *ware_details_cache_[id].second;
-
 	rendered_text.draw(
 	   dst, Vector2i(p.x + w - rendered_text.width() - 1,
 	                 p.y + kWareMenuPicHeight + kWareMenuInfoSize + 1 - rendered_text.height()));
-	NOCOM_T(4);
-	NOCOM_D(1, 1, 2)
-	NOCOM_D(2, 2, 3)
-	NOCOM_D(3, 3, 4)
-	NOCOM_D(T, 1, 4)
-#if 0
-	log_dbg("draw_ware(%3d) %-30s took %9ld ns", id, "#1 Prepare", NOCOM_avg1);
-	log_dbg("draw_ware(%3d) %-30s took %9ld ns", id, "#2 Solid Color", NOCOM_avg2);
-	log_dbg("draw_ware(%3d) %-30s took %9ld ns", id, "#3 Render Text", NOCOM_avg3);
-	log_dbg("draw_ware(%3d) %-30s took %9ld ns", id, "TOTAL", NOCOM_avgT);
-#endif
 }
 
 // Wares highlighting/selecting
