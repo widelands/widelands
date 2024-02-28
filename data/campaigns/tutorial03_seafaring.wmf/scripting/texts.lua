@@ -148,7 +148,7 @@ expedition2 = {
       p(_([[During an expedition, you send a ship out to discover new islands and maybe found a colony there.]])) ..
       li_image("images/wui/buildings/start_expedition.png",
          join_sentences(_([[Expeditions can be started in every port. Then, all needed wares are transported to that port. The wares are exactly those your tribe needs to build a port (your goal is to build a port far away from home, so this is not surprising), and of course you need a builder, too. When everything is prepared, a ship will come and pick it up.]]),
-         _([[You can check out the needed wares in the fifth tab of your port (it will appear when you’ve started an expedition).]]))) ..
+         _([[You can check out the needed wares in the Expedition tab of your port (it will appear in the last place when you’ve started an expedition).]]))) ..
       p(_([[Now try this out. I will tell you later what the next steps are.]])) ..
       li(_([[Start an expedition in any of your ports.]]))
    )
