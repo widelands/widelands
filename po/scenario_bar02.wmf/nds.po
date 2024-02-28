@@ -1,15 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2022
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2022,2024
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2024-01-01 02:43+0000\n"
 "PO-Revision-Date: 2015-02-03 14:36+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022,2024\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -391,7 +391,7 @@ msgid ""
 "but I don’t care now. Shall he flee and be forgotten for all times as a "
 "tribal leader that would not bow before the wooden throne, that is mine to "
 "take now."
-msgstr "De Verräter hett siene Soldaten liegen laten, waar se starven, as he sehn hett, dat he miene Soldateree nich torügghollen kann. Kalitat is im Krieg wegslichen, aver dat is mi egaal. Sall he doch weglöpen un för all Tieded as een Anföhrer vergeten worden, well sik nich vör de holten Throon verbugen wull, wat ick nu innehmen sall."
+msgstr "De Verräter hett siene Soldaten liggen laten, waar se starven, as he sehn hett, dat he miene Soldateree nich torügghollen kann. Kalitat is im Krieg wegslichen, aver dat is mi egaal. Sall he doch weglöpen un för all Tieden as een Anföhrer vergeten worden, well sik nich vör de holten Throon verbugen wull, wat ick nu innehmen sall."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:223

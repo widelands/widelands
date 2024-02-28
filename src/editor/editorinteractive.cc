@@ -180,6 +180,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 		new EditorHelp(*this, menu_windows_.help, &egbase().lua());
 	};
 
+	add_plugin_menu();
+
 	finalize_toolbar();
 
 	set_display_flags(EditorInteractive::dfShowResources | EditorInteractive::dfShowImmovables |
@@ -1118,7 +1120,7 @@ void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex c
 	tool_settings_changed_ = true;
 }
 
-void EditorInteractive::run_editor(UI::Panel* error_message_parent,
+bool EditorInteractive::run_editor(UI::Panel* error_message_parent,
                                    const EditorInteractive::Init init,
                                    const std::string& filename,
                                    const std::string& script_to_run) {
@@ -1130,7 +1132,7 @@ void EditorInteractive::run_editor(UI::Panel* error_message_parent,
 		        "##############################\n",
 		        e.what());
 		if (error_message_parent == nullptr) {
-			return;
+			return false;
 		}
 		// Note: We don't necessarily want a bug report here, but the wording must
 		// be EXACTLY LIKE THIS in v1.0 to avoid adding a new translatable string
@@ -1145,7 +1147,9 @@ void EditorInteractive::run_editor(UI::Panel* error_message_parent,
 		      e.what(), build_ver_details()),
 		   UI::WLMessageBox::MBoxType::kOk);
 		m.run<UI::Panel::Returncodes>();
+		return false;
 	}
+	return true;
 }
 
 void EditorInteractive::do_run_editor(const EditorInteractive::Init init,

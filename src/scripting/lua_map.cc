@@ -710,6 +710,8 @@ std::string soldier_preference_to_string(const Widelands::SoldierPreference p) {
 		return "heroes";
 	case Widelands::SoldierPreference::kRookies:
 		return "rookies";
+	case Widelands::SoldierPreference::kAny:
+		return "any";
 	}
 	NEVER_HERE();
 }
@@ -720,6 +722,9 @@ Widelands::SoldierPreference string_to_soldier_preference(const std::string& p) 
 	}
 	if (p == "rookies") {
 		return Widelands::SoldierPreference::kRookies;
+	}
+	if (p == "any") {
+		return Widelands::SoldierPreference::kAny;
 	}
 	throw wexception("Invalid soldier preference '%s'", p.c_str());
 }
@@ -859,6 +864,7 @@ int upcasted_map_object_descr_to_lua(lua_State* L, const Widelands::MapObjectDes
 		case Widelands::MapObjectType::PINNED_NOTE:
 		case Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE:
 		case Widelands::MapObjectType::FERRY_FLEET_YARD_INTERFACE:
+		case Widelands::MapObjectType::NAVAL_INVASION_BASE:
 			return CAST_TO_LUA(Widelands::MapObjectDescr, LuaMapObjectDescription);
 		default:
 			verb_log_warn("upcasted_map_object_to_lua: unknown type '%s' to cast to, return general "
@@ -926,6 +932,14 @@ int upcasted_map_object_to_lua(lua_State* L, Widelands::MapObject* mo) {
 		return CAST_TO_LUA(MilitarySite);
 	case Widelands::MapObjectType::TRAININGSITE:
 		return CAST_TO_LUA(TrainingSite);
+	case Widelands::MapObjectType::PINNED_NOTE:
+		return CAST_TO_LUA(PinnedNote);
+	case Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE:
+		return CAST_TO_LUA(ShipFleetYardInterface);
+	case Widelands::MapObjectType::FERRY_FLEET_YARD_INTERFACE:
+		return CAST_TO_LUA(FerryFleetYardInterface);
+	case Widelands::MapObjectType::NAVAL_INVASION_BASE:
+		return CAST_TO_LUA(NavalInvasionBase);
 	case Widelands::MapObjectType::MAPOBJECT:
 	case Widelands::MapObjectType::RESOURCE:
 	case Widelands::MapObjectType::TERRAIN:
@@ -934,9 +948,6 @@ int upcasted_map_object_to_lua(lua_State* L, Widelands::MapObject* mo) {
 	case Widelands::MapObjectType::SHIP_FLEET:
 	case Widelands::MapObjectType::FERRY_FLEET:
 	case Widelands::MapObjectType::WARE:
-	case Widelands::MapObjectType::PINNED_NOTE:
-	case Widelands::MapObjectType::SHIP_FLEET_YARD_INTERFACE:
-	case Widelands::MapObjectType::FERRY_FLEET_YARD_INTERFACE:
 		throw LuaError(
 		   format("upcasted_map_object_to_lua: Unknown %i", static_cast<int>(mo->descr().type())));
 	}
@@ -1528,6 +1539,9 @@ int LuaMap::set_waterway_max_length(lua_State* L) {
 
       (RO) This is an :class:`array` that contains a :class:`~wl.map.PlayerSlot`
       for each player defined in the map.
+
+      Use :attr:`wl.bases.PlayerBase.number` as index to get this player's description as suggested
+      by the map's author.
 */
 int LuaMap::get_player_slots(lua_State* L) {
 	const Widelands::Map& map = get_egbase(L).map();
@@ -1673,11 +1687,6 @@ int LuaMap::place_immovable(lua_State* const L) {
 
 	const std::string objname = luaL_checkstring(L, 2);
 	LuaMaps::LuaField* c = *get_user_class<LuaMaps::LuaField>(L, 3);
-	if (lua_gettop(L) > 3 && !lua_isnil(L, 4)) {
-		// TODO(GunChleoc): Compatibility, remove after v1.0
-		log_warn("Found deprecated parameter '%s' in place_immovable call, placing '%s'",
-		         luaL_checkstring(L, 4), objname.c_str());
-	}
 
 	// Check if the map is still free here
 	if (Widelands::BaseImmovable const* const imm = c->fcoords(L).field->get_immovable()) {
@@ -2399,6 +2408,7 @@ int LuaMapObjectDescription::get_name(lua_State* L) {
         interface to access such objects or descriptions currently exists.
 
         * :const:`battle`, holds information about two soldiers in a fight,
+        * :const:`naval_invasion_base`, links a naval invasion of a port space.
         * :const:`ship_fleet`, holds information for managing ships and ports,
         * :const:`ferry_fleet`, holds information for managing ferries and waterways.
         * :const:`ship_fleet_yard_interface`, links a shipyard to a ship fleet.
@@ -5616,14 +5626,11 @@ int LuaConstructionSite::set_setting_stopped(lua_State* L) {
    .. attribute:: setting_soldier_preference
 
       (RW) Only valid for militarysites under construction. ``"heroes"`` if this site will prefer
-      heroes after completion; ``"rookies"`` otherwise.
+      heroes after completion; ``"rookies"`` for rookies; ``"any"`` for no predilection.
 */
 int LuaConstructionSite::get_setting_soldier_preference(lua_State* L) {
 	if (upcast(Widelands::MilitarysiteSettings, ms, get(L, get_egbase(L))->get_settings())) {
-		lua_pushstring(
-		   L, soldier_preference_to_string(ms->prefer_heroes ? Widelands::SoldierPreference::kHeroes :
-                                                             Widelands::SoldierPreference::kRookies)
-		         .c_str());
+		lua_pushstring(L, soldier_preference_to_string(ms->soldier_preference).c_str());
 	} else {
 		lua_pushnil(L);
 	}
@@ -5635,8 +5642,7 @@ int LuaConstructionSite::set_setting_soldier_preference(lua_State* L) {
 		report_error(L, "This constructionsite will not become a militarysite");
 	}
 	try {
-		ms->prefer_heroes = string_to_soldier_preference(luaL_checkstring(L, -1)) ==
-		                    Widelands::SoldierPreference::kHeroes;
+		ms->soldier_preference = string_to_soldier_preference(luaL_checkstring(L, -1));
 	} catch (const WException& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -6794,7 +6800,8 @@ int LuaMilitarySite::get_capacity(lua_State* L) {
 /* RST
    .. attribute:: soldier_preference
 
-      (RW) ``"heroes"`` if this site prefers heroes; ``"rookies"`` otherwise.
+      (RW) ``"heroes"`` if this site prefers heroes; ``"rookies"`` for rookies;
+         or ``"any"`` for no predilection.
 */
 int LuaMilitarySite::get_soldier_preference(lua_State* L) {
 	lua_pushstring(
@@ -6990,6 +6997,7 @@ const MethodType<LuaShip> LuaShip::Methods[] = {
    METHOD(LuaShip, get_workers),
    METHOD(LuaShip, build_colonization_port),
    METHOD(LuaShip, make_expedition),
+   METHOD(LuaShip, refit),
    {nullptr, nullptr},
 };
 const PropertyType<LuaShip> LuaShip::Properties[] = {
@@ -6998,6 +7006,7 @@ const PropertyType<LuaShip> LuaShip::Properties[] = {
    PROP_RO(LuaShip, last_portdock),
    PROP_RO(LuaShip, destination),
    PROP_RO(LuaShip, state),
+   PROP_RO(LuaShip, type),
    PROP_RW(LuaShip, scouting_direction),
    PROP_RW(LuaShip, island_explore_direction),
    PROP_RW(LuaShip, shipname),
@@ -7024,11 +7033,25 @@ int LuaShip::get_debug_worker_economy(lua_State* L) {
    .. attribute:: destination
 
       (RO) Either :const:`nil` if there is no current destination, otherwise
-      the :class:`PortDock`.
+      the :class:`PortDock` or :class:`Ship`.
 */
 // UNTESTED
 int LuaShip::get_destination(lua_State* L) {
-	return upcasted_map_object_to_lua(L, get(L, get_egbase(L))->get_destination());
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::Ship* ship = get(L, egbase);
+
+	if (Widelands::PortDock* pd = ship->get_destination_port(egbase); pd != nullptr) {
+		return upcasted_map_object_to_lua(L, pd);
+	}
+	if (Widelands::Ship* s = ship->get_destination_ship(egbase); s != nullptr) {
+		return upcasted_map_object_to_lua(L, s);
+	}
+	if (Widelands::PinnedNote* note = ship->get_destination_note(egbase); note != nullptr) {
+		return upcasted_map_object_to_lua(L, note);
+	}
+
+	lua_pushnil(L);
+	return 1;
 }
 
 /* RST
@@ -7062,30 +7085,52 @@ int LuaShip::get_state(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	if (egbase.is_game()) {
 		switch (get(L, egbase)->get_ship_state()) {
-		case Widelands::Ship::ShipStates::kTransport:
+		case Widelands::ShipStates::kTransport:
 			lua_pushstring(L, "transport");
 			break;
-		case Widelands::Ship::ShipStates::kExpeditionWaiting:
+		case Widelands::ShipStates::kExpeditionWaiting:
 			lua_pushstring(L, "exp_waiting");
 			break;
-		case Widelands::Ship::ShipStates::kExpeditionScouting:
+		case Widelands::ShipStates::kExpeditionScouting:
 			lua_pushstring(L, "exp_scouting");
 			break;
-		case Widelands::Ship::ShipStates::kExpeditionPortspaceFound:
+		case Widelands::ShipStates::kExpeditionPortspaceFound:
 			lua_pushstring(L, "exp_found_port_space");
 			break;
-		case Widelands::Ship::ShipStates::kExpeditionColonizing:
+		case Widelands::ShipStates::kExpeditionColonizing:
 			lua_pushstring(L, "exp_colonizing");
 			break;
-		case Widelands::Ship::ShipStates::kSinkRequest:
+		case Widelands::ShipStates::kSinkRequest:
 			lua_pushstring(L, "sink_request");
 			break;
-		case Widelands::Ship::ShipStates::kSinkAnimation:
+		case Widelands::ShipStates::kSinkAnimation:
 			lua_pushstring(L, "sink_animation");
+			break;
 		}
 		return 1;
 	}
 	return 0;
+}
+
+/* RST
+   .. attribute:: type
+
+      .. versionadded:: 1.2
+
+      (RO) The state the ship is in as :const:`string`:
+      :const:`"transport"` or :const:`"warship"`.
+*/
+int LuaShip::get_type(lua_State* L) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	switch (get(L, egbase)->get_ship_type()) {
+	case Widelands::ShipType::kTransport:
+		lua_pushstring(L, "transport");
+		break;
+	case Widelands::ShipType::kWarship:
+		lua_pushstring(L, "warship");
+		break;
+	}
+	return 1;
 }
 
 int LuaShip::get_scouting_direction(lua_State* L) {
@@ -7361,9 +7406,11 @@ int LuaShip::get_workers(lua_State* L) {
 int LuaShip::build_colonization_port(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Ship* ship = get(L, egbase);
-	if (ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
+	if (ship->get_ship_state() == Widelands::ShipStates::kExpeditionPortspaceFound) {
 		if (upcast(Widelands::Game, game, &egbase)) {
-			game->send_player_ship_construct_port(*ship, ship->exp_port_spaces().front());
+			const Widelands::Coords portspace = ship->current_portspace();
+			assert(static_cast<bool>(portspace));
+			game->send_player_ship_construct_port(*ship, portspace);
 			return 1;
 		}
 	}
@@ -7425,8 +7472,7 @@ int LuaShip::make_expedition(lua_State* L) {
 	assert(game);
 	Widelands::Ship* ship = get(L, *game);
 	assert(ship);
-	if (ship->get_ship_state() != Widelands::Ship::ShipStates::kTransport ||
-	    ship->get_nritems() > 0) {
+	if (ship->get_ship_state() != Widelands::ShipStates::kTransport || ship->get_nritems() > 0) {
 		report_error(L, "Ship.make_expedition can be used only on empty transport ships!");
 	}
 
@@ -7482,6 +7528,34 @@ int LuaShip::make_expedition(lua_State* L) {
 	ship->set_destination(*game, nullptr);
 	ship->start_task_expedition(*game);
 
+	return 0;
+}
+
+/* RST
+   .. method:: refit(type)
+
+      .. versionadded:: 1.2
+
+      Order the ship to refit to the given type.
+
+      :arg string type: :const:`"transport"` or :const:`"warship"`
+
+      :returns: :const:`nil`
+*/
+int LuaShip::refit(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Wrong number of arguments to refit!");
+	}
+	Widelands::Game& game = get_game(L);
+	Widelands::Ship* ship = get(L, game);
+	const std::string type = luaL_checkstring(L, 2);
+	if (type == "transport") {
+		ship->refit(game, Widelands::ShipType::kTransport);
+	} else if (type == "warship") {
+		ship->refit(game, Widelands::ShipType::kWarship);
+	} else {
+		report_error(L, "Invalid ship refit type '%s'", type.c_str());
+	}
 	return 0;
 }
 
@@ -7671,6 +7745,301 @@ int LuaSoldier::set_current_health(lua_State* L) {
 
 	s.set_current_health(ch);
 	return 0;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
+/* RST
+PinnedNote
+----------
+
+.. class:: PinnedNote
+
+   .. versionadded:: 1.2
+
+   This represents a note pinned to a map field.
+
+   More properties are available through this object's
+   :class:`MapObjectDescription`, which you can access via :any:`MapObject.descr`.
+*/
+
+const char LuaPinnedNote::className[] = "PinnedNote";
+const MethodType<LuaPinnedNote> LuaPinnedNote::Methods[] = {
+   {nullptr, nullptr},
+};
+const PropertyType<LuaPinnedNote> LuaPinnedNote::Properties[] = {
+   PROP_RO(LuaPinnedNote, owner),
+   PROP_RW(LuaPinnedNote, text),
+   PROP_RW(LuaPinnedNote, color),
+   {nullptr, nullptr, nullptr},
+};
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/* RST
+   .. attribute:: owner
+
+      (RO) The :class:`wl.game.Player` who owns this object.
+*/
+int LuaPinnedNote::get_owner(lua_State* L) {
+	get_factory(L).push_player(L, get(L, get_egbase(L))->get_owner()->player_number());
+	return 1;
+}
+
+/* RST
+   .. attribute:: text
+
+      (RW) The text of the note.
+*/
+int LuaPinnedNote::get_text(lua_State* L) {
+	lua_pushstring(L, get(L, get_egbase(L))->get_text().c_str());
+	return 1;
+}
+int LuaPinnedNote::set_text(lua_State* L) {
+	get(L, get_egbase(L))->set_text(luaL_checkstring(L, -1));
+	return 0;
+}
+
+/* RST
+   .. attribute:: color
+
+      (RW) The color of the note, as an :class:`array` of three integers representing R, G, and B.
+*/
+int LuaPinnedNote::get_color(lua_State* L) {
+	const RGBColor& rgb = get(L, get_egbase(L))->get_rgb();
+	lua_newtable(L);
+	lua_pushuint32(L, 1);
+	lua_pushuint32(L, rgb.r);
+	lua_rawset(L, -3);
+	lua_pushuint32(L, 2);
+	lua_pushuint32(L, rgb.g);
+	lua_rawset(L, -3);
+	lua_pushuint32(L, 3);
+	lua_pushuint32(L, rgb.b);
+	lua_rawset(L, -3);
+	return 1;
+}
+int LuaPinnedNote::set_color(lua_State* L) {
+	luaL_checktype(L, -1, LUA_TTABLE);
+
+	lua_geti(L, -1, 1);
+	const unsigned r = luaL_checkuint32(L, -1);
+	lua_pop(L, 1);
+
+	lua_geti(L, -1, 2);
+	const unsigned g = luaL_checkuint32(L, -1);
+	lua_pop(L, 1);
+
+	lua_geti(L, -1, 3);
+	const unsigned b = luaL_checkuint32(L, -1);
+	lua_pop(L, 1);
+
+	get(L, get_egbase(L))->set_rgb(RGBColor(r, g, b));
+
+	return 0;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
+/* RST
+NavalInvasionBase
+-----------------
+
+.. class:: NavalInvasionBase
+
+   .. versionadded:: 1.2
+
+   This represents a naval invasion in progress.
+
+   More properties are available through this object's
+   :class:`MapObjectDescription`, which you can access via :any:`MapObject.descr`.
+*/
+
+const char LuaNavalInvasionBase::className[] = "NavalInvasionBase";
+const MethodType<LuaNavalInvasionBase> LuaNavalInvasionBase::Methods[] = {
+   {nullptr, nullptr},
+};
+const PropertyType<LuaNavalInvasionBase> LuaNavalInvasionBase::Properties[] = {
+   PROP_RO(LuaNavalInvasionBase, owner),
+   PROP_RO(LuaNavalInvasionBase, soldiers),
+   {nullptr, nullptr, nullptr},
+};
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/* RST
+   .. attribute:: owner
+
+      (RO) The :class:`wl.game.Player` who owns this object.
+*/
+int LuaNavalInvasionBase::get_owner(lua_State* L) {
+	get_factory(L).push_player(L, get(L, get_egbase(L))->get_owner()->player_number());
+	return 1;
+}
+
+/* RST
+   .. attribute:: soldiers
+
+      (RO) An :class:`array` with every :class:`~wl.map.Soldier`
+      currently stationed on this invasion base.
+*/
+int LuaNavalInvasionBase::get_soldiers(lua_State* L) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	const auto& soldiers = get(L, egbase)->get_soldiers();
+	lua_newtable(L);
+	uint32_t cidx = 1;
+	for (const auto& ptr : soldiers) {
+		lua_pushuint32(L, cidx++);
+		upcasted_map_object_to_lua(L, ptr.get(egbase));
+		lua_rawset(L, -3);
+	}
+	return 1;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
+/* RST
+ShipFleetYardInterface
+----------------------
+
+.. class:: ShipFleetYardInterface
+
+   .. versionadded:: 1.2
+
+   This represents an interface between a shipyard and a ship fleet.
+
+   More properties are available through this object's
+   :class:`MapObjectDescription`, which you can access via :any:`MapObject.descr`.
+*/
+
+const char LuaShipFleetYardInterface::className[] = "ShipFleetYardInterface";
+const MethodType<LuaShipFleetYardInterface> LuaShipFleetYardInterface::Methods[] = {
+   {nullptr, nullptr},
+};
+const PropertyType<LuaShipFleetYardInterface> LuaShipFleetYardInterface::Properties[] = {
+   PROP_RO(LuaShipFleetYardInterface, building),
+   {nullptr, nullptr, nullptr},
+};
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/* RST
+   .. attribute:: owner
+
+      (RO) The :class:`wl.game.Player` who owns this object.
+*/
+int LuaShipFleetYardInterface::get_owner(lua_State* L) {
+	get_factory(L).push_player(L, get(L, get_egbase(L))->get_owner()->player_number());
+	return 1;
+}
+
+/* RST
+   .. attribute:: building
+
+      (RO) The shipyard this interface belongs to.
+*/
+int LuaShipFleetYardInterface::get_building(lua_State* L) {
+	upcasted_map_object_to_lua(L, get(L, get_egbase(L))->get_building());
+	return 1;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
+/* RST
+FerryFleetYardInterface
+-----------------------
+
+.. class:: FerryFleetYardInterface
+
+   .. versionadded:: 1.2
+
+   This represents an interface between a ferry yard and a ferry fleet.
+
+   More properties are available through this object's
+   :class:`MapObjectDescription`, which you can access via :any:`MapObject.descr`.
+*/
+
+const char LuaFerryFleetYardInterface::className[] = "FerryFleetYardInterface";
+const MethodType<LuaFerryFleetYardInterface> LuaFerryFleetYardInterface::Methods[] = {
+   {nullptr, nullptr},
+};
+const PropertyType<LuaFerryFleetYardInterface> LuaFerryFleetYardInterface::Properties[] = {
+   PROP_RO(LuaFerryFleetYardInterface, building),
+   {nullptr, nullptr, nullptr},
+};
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/* RST
+   .. attribute:: owner
+
+      (RO) The :class:`wl.game.Player` who owns this object.
+*/
+int LuaFerryFleetYardInterface::get_owner(lua_State* L) {
+	get_factory(L).push_player(L, get(L, get_egbase(L))->get_owner()->player_number());
+	return 1;
+}
+
+/* RST
+   .. attribute:: building
+
+      (RO) The ferry yard this interface belongs to.
+*/
+int LuaFerryFleetYardInterface::get_building(lua_State* L) {
+	upcasted_map_object_to_lua(L, get(L, get_egbase(L))->get_building());
+	return 1;
 }
 
 /*
@@ -8665,6 +9034,26 @@ void luaopen_wlmap(lua_State* L) {
 	add_parent<LuaTrainingSite, LuaPlayerImmovable>(L);
 	add_parent<LuaTrainingSite, LuaBaseImmovable>(L);
 	add_parent<LuaTrainingSite, LuaMapObject>(L);
+	lua_pop(L, 1);  // Pop the meta table
+
+	register_class<LuaPinnedNote>(L, "map", true);
+	add_parent<LuaPinnedNote, LuaBob>(L);
+	add_parent<LuaPinnedNote, LuaMapObject>(L);
+	lua_pop(L, 1);  // Pop the meta table
+
+	register_class<LuaNavalInvasionBase>(L, "map", true);
+	add_parent<LuaNavalInvasionBase, LuaBob>(L);
+	add_parent<LuaNavalInvasionBase, LuaMapObject>(L);
+	lua_pop(L, 1);  // Pop the meta table
+
+	register_class<LuaShipFleetYardInterface>(L, "map", true);
+	add_parent<LuaShipFleetYardInterface, LuaBob>(L);
+	add_parent<LuaShipFleetYardInterface, LuaMapObject>(L);
+	lua_pop(L, 1);  // Pop the meta table
+
+	register_class<LuaFerryFleetYardInterface>(L, "map", true);
+	add_parent<LuaFerryFleetYardInterface, LuaBob>(L);
+	add_parent<LuaFerryFleetYardInterface, LuaMapObject>(L);
 	lua_pop(L, 1);  // Pop the meta table
 }
 }  // namespace LuaMaps

@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -7,15 +7,15 @@
 # Олег Шевченко <olegrock@gmail.com>, 2018
 # 66c17387c1d6640720971b8ab706da27_0feead1, 2019
 # nskdmitry, 2021
-# Yuriy Sokolov <lention@mail.ru>, 2022
+# Yuriy Sokolov <lention@mail.ru>, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2024-02-01 02:29+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2022\n"
+"Last-Translator: Yuriy Sokolov <lention@mail.ru>, 2024\n"
 "Language-Team: Russian (https://app.transifex.com/widelands/teams/35159/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -148,8 +148,8 @@ msgstr "Производство полотна"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:112
 msgid ""
-"Now build a sheep farm and turn all the wheat into at least 50 bales of "
-"wool. Afterwards use the wool to weave cloth in order to build a ship."
+"Now build a sheep farm and use all the wheat to produce at least 50 bales of"
+" wool. Afterwards use the wool to weave cloth in order to build a ship."
 msgstr ""
 "Теперь постройте овцеферму и переработайте всю пшеницу в 50 тюков шерсти. "
 "После этого используйте шерсть, чтобы соткать полотно, которое пойдёт на "

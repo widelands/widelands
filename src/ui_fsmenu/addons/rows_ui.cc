@@ -355,7 +355,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
         info->internal_name.empty() ?
            "" :
            format(
-              /** TRANSLATORS: Filesize · Download count · Average rating · Number of comments ·
+              /** TRANSLATORS: Filesize • Download count • Average rating • Number of comments •
                  Number of screenshots */
               _("%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"),
               filesize_string(info->total_file_size),

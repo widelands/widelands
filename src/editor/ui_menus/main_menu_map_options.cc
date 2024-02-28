@@ -592,6 +592,7 @@ void MainMenuMapOptions::clicked_ok() {
 			map.get_suggested_teams().push_back(ste->team());
 		}
 	}
+	map.sanitize_suggested_teams();
 
 	map.clear_tags();
 	for (const auto& tag : tags_checkboxes_) {

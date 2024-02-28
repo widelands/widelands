@@ -21,6 +21,7 @@
 
 #include <functional>
 #include <mutex>
+#include <vector>
 
 /* Ensures that critical pieces of code are executed by only one thread at a time.
  * More precisely: If n pieces of code C1,…,Cn are structured like this:
@@ -39,6 +40,9 @@ class MutexLock {
 public:
 	// Which mutex to lock. Each entry corresponds to a different mutex.
 	enum class ID : uint32_t {
+		kNone,  ///< Does not represent a valid ID.
+
+		kMutexInternal,        ///< For internal use by the mutex locking logic only.
 		kLogicFrame,           ///< The game logic progression.
 		kObjects,              ///< MapObjects are being modified.
 		kCommands,             ///< The game's command queue is being modified.
@@ -53,14 +57,18 @@ public:
 	};
 
 	static ID create_custom_mutex();
+
+	static void push_stay_responsive_function(std::function<void()> fn);
+	static void pop_stay_responsive_function();
+
 	explicit MutexLock(ID);
-	explicit MutexLock(ID, const std::function<void()>& run_while_waiting);
 	~MutexLock();
 
 private:
 	ID id_;
 	static ID last_custom_mutex_;
 	static std::mutex s_mutex_;
+	static std::vector<std::function<void()>> stay_responsive_;
 };
 
 #endif  // end of include guard: WL_BASE_MUTEX_H

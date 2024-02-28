@@ -1,23 +1,24 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2023 Widelands Development Team
+# Copyright (C) 2005-2024 Widelands Development Team
 # 
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2015-2016
 # GunChleoc, 2016
+# Juan Miguel Bernal González, 2024
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015-2017
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020-2022
 # Gontzal Pujana Onaindia <juchuf@gmail.com>, 2017
-# Walter Benkel <tromaster@gmail.com>, 2020-2021
+# Walter Benkel, 2020-2021
 # X Bello <xbello@gmail.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2023-06-03 02:52+0000\n"
+"POT-Creation-Date: 2024-02-08 02:24+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020-2022\n"
+"Last-Translator: Juan Miguel Bernal González, 2024\n"
 "Language-Team: Spanish (http://app.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,13 +38,13 @@ msgstr "Después de aterrizar en una misteriosa isla, cerca de la Atlántida, lo
 
 #: ../../data/campaigns/atl02.wmf/elemental:8
 msgid "Struggling For a New Home Again"
-msgstr ""
+msgstr "Luchando por un nuevo hogar otra vez"
 
 #: ../../data/campaigns/atl02.wmf/elemental:10
 msgid ""
 "After the quick escape from the drowning island, the Atlanteans around "
 "Jundlina are faced with new challenges."
-msgstr ""
+msgstr "Después de escapar rápidamente del hundimiento de la isla, los atlantes que rodean Jundlina se enfrentan a nuevos desafíos."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
 msgid "A Place to Call Home"
@@ -217,7 +218,7 @@ msgid ""
 "a new life. But his destiny takes his ship into a heavy storm, which nearly "
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
-msgstr ""
+msgstr "Después de perder una importante batalla contra los bárbaros que le supuso la pérdida de gran parte del territorio del Imperio, Lutius abandona Fremil para empezar una nueva vida. Pero su destino lleva su barco a una fuerte tormenta que casi lo destruye. Sólo con mucha suerte consigue varar su barco averiado en una playa desértica desconocida y salvar a su gente. Por ahora."
 
 #: ../../data/campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
@@ -250,7 +251,7 @@ msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
 "importance to reinstate the glory of the Empire."
-msgstr ""
+msgstr "Después de regresar a casa, Lutius y su tripulación se enfrentan a una economía en ruinas. Resolver los cuellos de botella de la economía será de suma importancia para restablecer la gloria del Imperio."
 
 #: ../../data/campaigns/fri01.wmf/elemental:8
 msgid "The Great Stormflood"
@@ -294,24 +295,24 @@ msgstr "Reebaud y su tribu están viviendo felizmente en el Norte. Mientras tant
 
 #: ../../data/campaigns/fri04.wmf/elemental:8
 msgid "Two Friends Reunited"
-msgstr ""
+msgstr "Dos Amigos Reunidos"
 
 #: ../../data/campaigns/fri04.wmf/elemental:10
 msgid ""
 "Claus and Henneke Lembeck have reached the North at last. But will they be "
 "able to convince Reebaud to send them aid?"
-msgstr ""
+msgstr "Claus y Henneke Lembeck por fin han llegado al Norte. ¿Pero podrán convencer a Reebaud para que les envíe ayuda?"
 
 #: ../../data/campaigns/fri05.wmf/elemental:8
 msgid "Reconquest"
-msgstr ""
+msgstr "Reconquista"
 
 #: ../../data/campaigns/fri05.wmf/elemental:10
 msgid ""
 "Back in Northern Frisia at last, Claus, Henneke, and Reebaud are preparing "
 "for battle against the invaders. They must gather allies and plan their "
 "strategy, but the foe is never far away…"
-msgstr ""
+msgstr "Por fin de regreso al norte de Frisia, Claus, Henneke y Reebaud se preparan para la batalla contra los invasores. Deben reunir aliados y planificar su estrategia, pero el enemigo nunca está lejos..."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -465,10 +466,6 @@ msgstr "Kristin – editado por 3plus4i"
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
 msgstr "Tripula tu embarcación y navega hacia el horizonte."
-
-#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:11
-msgid "This map is not winnable with the ‘Autocrat’ win condition."
-msgstr "Este mapa no es ganable con la condición de victoria 'Autócrata'."
 
 #: ../../data/maps/Dolomites.wmf/elemental:8
 msgid "Dolomites 3.0"
@@ -840,7 +837,7 @@ msgid ""
 "developments of better equipped armies. Tough times are on the brink of "
 "emerging, and you should heed the words of your wise advisors, or fade into "
 "oblivion like the others."
-msgstr ""
+msgstr "Es la tierra donde apenas se ve el sol durante el invierno y donde la primavera inunda cualquier recuerdo del pasado. Han aumentado extrañas tensiones entre sus residentes y muchos gobernantes egoístas se han aprovechado del caos. Los supersticiosos no parecen ser un obstáculo para el desarrollo de ejércitos mejor equipados. Están a punto de surgir tiempos difíciles y debes prestar atención a las palabras de tus sabios asesores o desaparecer en el olvido como los demás."
 
 #: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:8
 msgid "The Green Plateau"

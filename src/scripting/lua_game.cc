@@ -78,7 +78,13 @@ Player
 
       local plr = wl.Game().players[1]                            -- the first player (usually blue)
       local plr = wl.Game().players[2]                            -- the second player
-      local plr = wl.Game().players[wl.Game().interactive_player] -- the interactive player
+      local i_plr
+      for p_idx, player in pairs(wl.Game().players) do
+         if player.number == wl.Game().interactive_player then
+            i_plr = player                                        -- the interactive player
+            break
+         end
+      end
 
 */
 const char LuaPlayer::className[] = "Player";
@@ -117,6 +123,7 @@ const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
    PROP_RO(LuaPlayer, objectives),
    PROP_RO(LuaPlayer, defeated),
    PROP_RO(LuaPlayer, resigned),
+   PROP_RO(LuaPlayer, end_result),
    PROP_RO(LuaPlayer, messages),
    PROP_RO(LuaPlayer, inbox),
    PROP_RO(LuaPlayer, color),
@@ -211,6 +218,21 @@ int LuaPlayer::get_resigned(lua_State* L) {
 	const Widelands::PlayerEndStatus* p =
 	   get_egbase(L).player_manager()->get_player_end_status(player_number());
 	lua_pushboolean(L, p != nullptr && p->result == Widelands::PlayerEndResult::kResigned ? 1 : 0);
+	return 1;
+}
+
+/* RST
+   .. attribute:: end_result
+
+      .. versionadded:: 1.2
+
+      (RO) This player's end status: :const:`0`: lost, :const:`1`: won, :const:`2`: resigned,
+           :const:`255`: end status is not set
+*/
+int LuaPlayer::get_end_result(lua_State* L) {
+	const Widelands::PlayerEndStatus* p =
+	   get_egbase(L).player_manager()->get_player_end_status(player_number());
+	lua_pushinteger(L, static_cast<int>(p->result));
 	return 1;
 }
 
@@ -731,10 +753,6 @@ int LuaPlayer::reveal_fields(lua_State* L) {
 
       See also :ref:`field_animations` for animated hiding.
 
-      .. note:: Passing a :class:`boolean` as the **state** argument is deprecated.
-         Use :const:`"permanent"` instead of :const:`true` and :const:`"seen"` instead of
-         :const:`false`.
-
       :arg fields: The fields to hide.
       :type fields: :class:`array` of :class:`fields <wl.map.Field>`.
 
@@ -755,11 +773,7 @@ int LuaPlayer::hide_fields(lua_State* L) {
 	Widelands::Player& p = get(L, game);
 
 	luaL_checktype(L, 2, LUA_TTABLE);
-	// TODO(hessenfarmer): Boolean check for compatibility. Remove after v1.0
-	const std::string state = lua_isnone(L, 3)        ? "seen" :
-	                          !lua_isboolean(L, 3)    ? luaL_checkstring(L, 3) :
-	                          luaL_checkboolean(L, 3) ? "permanent" :
-                                                       "seen";
+	const std::string state = lua_isnone(L, 3) ? "seen" : luaL_checkstring(L, 3);
 	const Widelands::HideOrRevealFieldMode mode =
 	   (state == "permanent")  ? Widelands::HideOrRevealFieldMode::kHide :
 	   (state == "explorable") ? Widelands::HideOrRevealFieldMode::kUnexplore :
@@ -1045,7 +1059,7 @@ int LuaPlayer::allow_workers(lua_State* L) {
       full control over the player given by **playernumber** and loosing control over the
       formerly interactive player.
 
-      :arg playernumber: An index in the :class:`array` of :attr:`~wl.bases.EditorGameBase.players`.
+      :arg playernumber: The :attr:`wl.bases.PlayerBase.number` of the player to switch to.
       :type playernumber: :class:`integer`
 */
 int LuaPlayer::switchplayer(lua_State* L) {
@@ -1109,7 +1123,7 @@ int LuaPlayer::get_produced_wares_count(lua_State* L) {
       necessarily mean that this player *can* attack the other player, as they might for
       example be in the same team.
 
-      :arg playernumber: An index in the :class:`array` of :attr:`~wl.bases.EditorGameBase.players`.
+      :arg playernumber: The value of :attr:`wl.bases.PlayerBase.number` of the other player.
       :type playernumber: :class:`int`
       :rtype: :class:`boolean`
 */
@@ -1126,7 +1140,7 @@ int LuaPlayer::is_attack_forbidden(lua_State* L) {
       **playernumber**. Note that setting this to :const:`false` does not necessarily mean that this
       player *can* attack the other player, as they might for example be in the same team.
 
-      :arg playernumber: An index in the :class:`array` of :attr:`~wl.bases.EditorGameBase.players`.
+      :arg playernumber: The value of :attr:`wl.bases.PlayerBase.number` of the other player.
       :type playernumber: :class:`int`
       :arg forbid: If this is :const:`true` forbids attacking, :const:`false` allows
          attacking (if the player is not in the same team).
