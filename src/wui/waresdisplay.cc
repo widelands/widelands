@@ -480,7 +480,7 @@ void AbstractWaresDisplay::draw_ware_backgrounds(RenderTarget& dst) {
 				const Image* icon = type_ == Widelands::wwWARE ? tribe_.get_ware_descr(id)->icon() :
                                                              tribe_.get_worker_descr(id)->icon();
 				background_texture_->blit(
-				   Rectf(p.x + (w - kWareMenuPicWidth) / 2, p.y + 1, icon->width(), icon->height()),
+				   Rectf(p.x + (w - kWareMenuPicWidth) / 2.f, p.y + 1, icon->width(), icon->height()),
 				   *icon, Rectf(0, 0, icon->width(), icon->height()), 1.f, BlendMode::Default);
 			}
 		}
