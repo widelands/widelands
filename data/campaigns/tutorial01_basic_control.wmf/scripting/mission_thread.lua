@@ -161,15 +161,14 @@ function build_lumberjack()
    campaign_message_box(lumberjack_message_07b, 1000)
    click_on_panel(lumberjack_window().buttons.workarea)
    blocker:lift_blocks()
-
-   while lumberjack_window() ~= nil do sleep(100) end
    set_objective_done(o)
-   sleep(3000)
+
+   sleep(10*1000) -- let the player experiment a bit with the window
 
    campaign_message_box(lumberjack_message_08)
    show_item_from_dropdown("dropdown_menu_gamespeed", 1)
 
-   sleep(20*1000) -- let the player experiment a bit with the window
+   sleep(20*1000) -- let the player experiment with the gamespeed even if the building is ready
 
    while #plr:get_buildings("barbarians_lumberjacks_hut") < 1 do sleep(300) end
 
