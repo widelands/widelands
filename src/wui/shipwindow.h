@@ -90,7 +90,7 @@ private:
 	// format: DIRECTION - 1, as 0 is normally the current location.
 	UI::Button* btn_scout_[Widelands::LAST_DIRECTION];
 	UI::Button* btn_construct_port_;
-	UI::Button* btn_warship_stay_;
+	UI::Button* btn_stay_;
 
 	using DestinationWrapper =
 	   std::pair<Widelands::OPtr<Widelands::MapObject>, const Widelands::DetectedPortSpace*>;
