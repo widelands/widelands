@@ -864,6 +864,12 @@ int LuaPanel::get_child(lua_State* L) {
       Therefore, any callbacks attached to such widgets must not use any functions or variables
       defined at an arbitrary earlier time by your script -
       they may have been deleted by the time the callback is invoked.
+
+      Similarly, in the main menu, a plugin's init script may be called multiple times
+      without resetting the user interface in the mean time. Therefore, the script
+      needs to check whether the elements it intends to add already exist from an
+      earlier invocation using a different Lua context.
+
       Example:
 
       .. code-block:: lua
