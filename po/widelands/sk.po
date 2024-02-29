@@ -4019,7 +4019,7 @@ msgstr "Nahrávanie…"
 
 #: ../../src/ui_basic/spinbox.cc:151
 msgid "Decrease the value"
-msgstr ""
+msgstr "Znížiť hodnotu"
 
 #. * TRANSLATORS: You may want to treat this as "Decrease the value %s", you
 #. get
@@ -4031,7 +4031,7 @@ msgstr "Znížiť hodnotu o %s"
 
 #: ../../src/ui_basic/spinbox.cc:164
 msgid "Increase the value"
-msgstr ""
+msgstr "Zvýšiť hodnotu"
 
 #. * TRANSLATORS: You may want to treat this as "Increase the value %s", you
 #. get
@@ -6127,7 +6127,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launch_game.cc:374
 msgid "Give all players permanent vision of the entire map"
-msgstr ""
+msgstr "Všetci hráči dostanú trvalú viditeľnosť celej mapy"
 
 #: ../../src/ui_fsmenu/launch_game.cc:395
 msgid "Naval warfare is set by the scenario"

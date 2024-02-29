@@ -3994,7 +3994,7 @@ msgstr "Laden…"
 
 #: ../../src/ui_basic/spinbox.cc:151
 msgid "Decrease the value"
-msgstr ""
+msgstr "Verlaag de waarde"
 
 #. * TRANSLATORS: You may want to treat this as "Decrease the value %s", you
 #. get
@@ -4006,7 +4006,7 @@ msgstr "Verlaag de waarde met %s"
 
 #: ../../src/ui_basic/spinbox.cc:164
 msgid "Increase the value"
-msgstr ""
+msgstr "Verhoog de waarde"
 
 #. * TRANSLATORS: You may want to treat this as "Increase the value %s", you
 #. get
