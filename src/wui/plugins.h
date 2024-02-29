@@ -27,7 +27,7 @@ class LuaInterface;
 
 namespace UI {
 class Panel;
-}
+}  // namespace UI
 
 class PluginTimers {
 public:

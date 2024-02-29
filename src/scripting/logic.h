@@ -30,7 +30,7 @@ class GameFactory;
 
 namespace FsMenu {
 class MainMenu;
-}
+}  // namespace FsMenu
 
 class LuaEditorInterface : public LuaInterface {
 public:

@@ -25,7 +25,7 @@
 
 namespace FsMenu {
 class MainMenu;
-}
+}  // namespace FsMenu
 
 bool is_main_menu(lua_State*);
 FsMenu::MainMenu& get_main_menu(lua_State*);
