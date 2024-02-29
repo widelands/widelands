@@ -419,7 +419,7 @@ static int L_get_build_id(lua_State* L) {
 /* Use our own logging function as a replacement for Lua's built-in print(). */
 static int L_print(lua_State* L) {
 	for (int i = 1; i <= lua_gettop(L); ++i) {
-		log_dbg("%s", luaL_checkstring(L, i));
+		do_log(LogType::kLua, Time(), "%s", luaL_checkstring(L, i));
 	}
 	return 0;
 }
