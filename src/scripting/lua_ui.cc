@@ -752,18 +752,20 @@ int LuaPanel::get_child(lua_State* L) {
            * ``"datatype"``: **Mandatory**. The data type of the dropdown's entries.
              Currently only ``"string"`` is supported.
 
+           * ``"icon"``: **Optional**. The icon filepath for the dropdown's button, if any.
+             If an icon is set, the label or selected value are not displayed on the
+             button and only shown as a tooltip.
+
            * ``"entries"``: **Optional**. The entries in the dropdown.
              An array of tables with the following keys:
 
              * ``"label"``: **Mandatory**. The text for this entry.
              * ``"value"``: **Mandatory**. The internal value of this entry.
-             * ``"icon"``: **Mandatory** for pictorial dropdowns, **optional** for other types.
-               The icon filepath for the entry.
+             * ``"icon"``: **Mandatory** for dropdowns of type ``"pictorial"``,
+               **optional** for other types. The icon filepath for the entry.
              * ``"tooltip"``: **Optional**. The entry's tooltip.
              * ``"select"``: **Optional**. Whether to select this entry (default :const:`false`).
 
-           * ``"icon"``: **Optional**. The icon filepath for the dropdown's button, if any.
-             If set, the label is used only as a tooltip but not displayed.
            * ``"on_selected"``: **Optional**. Callback code to run when the user selects an entry.
 
          * ``"listselect"``: A list of entries from which the user may choose. Properties:
