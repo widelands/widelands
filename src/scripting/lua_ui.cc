@@ -1093,7 +1093,8 @@ get_table_button_style(lua_State* L,
 		if (str == "primary") {
 			default_value = mainmenu ? UI::ButtonStyle::kFsMenuPrimary : UI::ButtonStyle::kWuiPrimary;
 		} else if (str == "secondary") {
-			default_value = mainmenu ? UI::ButtonStyle::kFsMenuSecondary : UI::ButtonStyle::kWuiSecondary;
+			default_value =
+			   mainmenu ? UI::ButtonStyle::kFsMenuSecondary : UI::ButtonStyle::kWuiSecondary;
 		} else if (str == "menu") {
 			default_value = mainmenu ? UI::ButtonStyle::kFsMenuMenu : UI::ButtonStyle::kWuiMenu;
 		} else {
@@ -1169,8 +1170,8 @@ static std::function<void(Args...)> create_plugin_action_lambda(lua_State* L,
 				}
 
 				UI::WLMessageBox m(&fsmm, UI::WindowStyle::kFsMenu, _("Plugin Error"),
-					               format_l(_("Error when running plugin:\n%s"), e.what()),
-					               UI::WLMessageBox::MBoxType::kOk);
+				                   format_l(_("Error when running plugin:\n%s"), e.what()),
+				                   UI::WLMessageBox::MBoxType::kOk);
 				m.run<UI::Panel::Returncodes>();
 			}
 		};
@@ -1371,8 +1372,7 @@ UI::Panel* LuaPanel::do_create_child_checkbox(lua_State* L, UI::Panel* parent) {
 		checkbox = new UI::Checkbox(
 		   parent, panel_style(L), name, Vector2i(x, y), g_image_cache->get(icon), tooltip);
 	} else {
-		checkbox =
-		   new UI::Checkbox(parent, panel_style(L), name, Vector2i(x, y), title, tooltip);
+		checkbox = new UI::Checkbox(parent, panel_style(L), name, Vector2i(x, y), title, tooltip);
 	}
 
 	checkbox->set_state(initial_state, false);
@@ -1413,9 +1413,11 @@ UI::Panel* LuaPanel::do_create_child_discrete_slider(lua_State* L, UI::Panel* pa
 		report_error(L, "Discrete slider initial value out of range");
 	}
 
-	UI::DiscreteSlider* slider = new UI::DiscreteSlider(
-	   parent, name, x, y, w, h, labels, init_value,
-	   is_main_menu(L) ? UI::SliderStyle::kFsMenu : dark ? UI::SliderStyle::kWuiDark : UI::SliderStyle::kWuiLight, tooltip, cursor_size);
+	UI::DiscreteSlider* slider = new UI::DiscreteSlider(parent, name, x, y, w, h, labels, init_value,
+	                                                    is_main_menu(L) ? UI::SliderStyle::kFsMenu :
+	                                                    dark            ? UI::SliderStyle::kWuiDark :
+                                                                         UI::SliderStyle::kWuiLight,
+	                                                    tooltip, cursor_size);
 
 	if (std::string on_changed = get_table_string(L, "on_changed", false); !on_changed.empty()) {
 		slider->changed.connect(create_plugin_action_lambda(L, on_changed));
@@ -1608,8 +1610,8 @@ UI::Panel* LuaPanel::do_create_child_multilinetextarea(lua_State* L, UI::Panel* 
 		report_error(L, "Unknown scroll mode '%s'", scroll.c_str());
 	}
 
-	UI::MultilineTextarea* txt = new UI::MultilineTextarea(
-	   parent, name, x, y, w, h, panel_style(L), text, align, scroll_mode);
+	UI::MultilineTextarea* txt =
+	   new UI::MultilineTextarea(parent, name, x, y, w, h, panel_style(L), text, align, scroll_mode);
 
 	if (std::string font = get_table_string(L, "font", false); !font.empty()) {
 		txt->set_style(g_style_manager->safe_font_style(font));
@@ -1678,8 +1680,8 @@ void LuaPanel::do_create_child_radiogroup(lua_State* L, UI::Panel* parent, UI::B
 		int32_t ry = get_table_int(L, "y", false);
 
 		UI::Radiobutton* radiobutton;
-		group->add_button(parent, panel_style(L), name, Vector2i(rx, ry),
-		                  g_image_cache->get(icon), rtooltip, &radiobutton);
+		group->add_button(parent, panel_style(L), name, Vector2i(rx, ry), g_image_cache->get(icon),
+		                  rtooltip, &radiobutton);
 
 		// Box layouting if applicable
 		if (as_box != nullptr) {
@@ -1723,12 +1725,16 @@ UI::Panel* LuaPanel::do_create_child_slider(lua_State* L, UI::Panel* parent) {
 	UI::Slider* slider;
 	if (orientation == UI::Box::Vertical) {
 		slider = new UI::VerticalSlider(parent, name, x, y, w, h, val_min, val_max, val,
-		                                is_main_menu(L) ? UI::SliderStyle::kFsMenu : dark ? UI::SliderStyle::kWuiDark : UI::SliderStyle::kWuiLight,
+		                                is_main_menu(L) ? UI::SliderStyle::kFsMenu :
+		                                dark            ? UI::SliderStyle::kWuiDark :
+                                                        UI::SliderStyle::kWuiLight,
 		                                cursor_size, tooltip);
 	} else {
-		slider = new UI::HorizontalSlider(
-		   parent, name, x, y, w, h, val_min, val_max, val,
-		   is_main_menu(L) ? UI::SliderStyle::kFsMenu : dark ? UI::SliderStyle::kWuiDark : UI::SliderStyle::kWuiLight, tooltip, cursor_size);
+		slider = new UI::HorizontalSlider(parent, name, x, y, w, h, val_min, val_max, val,
+		                                  is_main_menu(L) ? UI::SliderStyle::kFsMenu :
+		                                  dark            ? UI::SliderStyle::kWuiDark :
+                                                          UI::SliderStyle::kWuiLight,
+		                                  tooltip, cursor_size);
 	}
 
 	if (std::string on_changed = get_table_string(L, "on_changed", false); !on_changed.empty()) {
@@ -1826,8 +1832,8 @@ UI::Panel* LuaPanel::do_create_child_spinbox(lua_State* L, UI::Panel* parent) {
 	}
 
 	UI::SpinBox* spinbox =
-	   new UI::SpinBox(parent, name, x, y, w, unit_w, val, val_min, val_max, panel_style(L),
-	                   label, units, sb_type, step_size_small, step_size_big);
+	   new UI::SpinBox(parent, name, x, y, w, unit_w, val, val_min, val_max, panel_style(L), label,
+	                   units, sb_type, step_size_small, step_size_big);
 
 	if (!value_list.empty()) {
 		spinbox->set_value_list(value_list);
@@ -1856,8 +1862,11 @@ UI::Panel* LuaPanel::do_create_child_tabpanel(lua_State* L, UI::Panel* parent) {
 	std::string name = get_table_string(L, "name", true);
 	bool dark = get_table_boolean(L, "dark", false);
 
-	UI::TabPanel* tabpanel = new UI::TabPanel(
-	   parent, is_main_menu(L) ? UI::TabPanelStyle::kFsMenu : dark ? UI::TabPanelStyle::kWuiDark : UI::TabPanelStyle::kWuiLight, name);
+	UI::TabPanel* tabpanel = new UI::TabPanel(parent,
+	                                          is_main_menu(L) ? UI::TabPanelStyle::kFsMenu :
+	                                          dark            ? UI::TabPanelStyle::kWuiDark :
+                                                               UI::TabPanelStyle::kWuiLight,
+	                                          name);
 
 	lua_getfield(L, -1, "tabs");
 	if (!lua_isnil(L, -1)) {
@@ -2047,8 +2056,7 @@ UI::Panel* LuaPanel::do_create_child_unique_window(lua_State* L, UI::Panel* pare
 	int32_t w = get_table_int(L, "w", false);
 	int32_t h = get_table_int(L, "h", false);
 
-	UI::UniqueWindow* window =
-	   new UI::UniqueWindow(parent, style, name, reg, x, y, w, h, title);
+	UI::UniqueWindow* window = new UI::UniqueWindow(parent, style, name, reg, x, y, w, h, title);
 
 	lua_getfield(L, -1, "content");
 	if (!lua_isnil(L, -1)) {
@@ -2071,7 +2079,9 @@ UI::Panel* LuaPanel::do_create_child_window(lua_State* L, UI::Panel* parent) {
 
 	std::string name = get_table_string(L, "name", true);
 	std::string title = get_table_string(L, "title", true);
-	UI::Window* window = new UI::Window(parent, is_main_menu(L) ? UI::WindowStyle::kWui : UI::WindowStyle::kFsMenu, name, x, y, w, h, title);
+	UI::Window* window =
+	   new UI::Window(parent, is_main_menu(L) ? UI::WindowStyle::kWui : UI::WindowStyle::kFsMenu,
+	                  name, x, y, w, h, title);
 
 	lua_getfield(L, -1, "content");
 	if (!lua_isnil(L, -1)) {
@@ -4243,7 +4253,8 @@ static int L_show_messagebox(lua_State* L) {
 
 	const bool mainmenu = is_main_menu(L);
 	UI::WLMessageBox m(
-	   mainmenu ? static_cast<UI::Panel*>(&get_main_menu(L)) : static_cast<UI::Panel*>(get_egbase(L).get_ibase()),
+	   mainmenu ? static_cast<UI::Panel*>(&get_main_menu(L)) :
+                 static_cast<UI::Panel*>(get_egbase(L).get_ibase()),
 	   mainmenu ? UI::WindowStyle::kFsMenu : UI::WindowStyle::kWui, title, text,
 	   allow_cancel ? UI::WLMessageBox::MBoxType::kOkCancel : UI::WLMessageBox::MBoxType::kOk);
 	UI::Panel::Returncodes result;
