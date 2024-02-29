@@ -122,7 +122,7 @@ msgstr "Zberatelia"
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest score after %s wins the game."
-msgstr ""
+msgstr "Dostávate body za cenné výrobky vo svojich skladoch. Hráč s najväčším počtom výrobkov po %s vyhráva hru."
 
 #. TRANSLATORS: Will be inserted into "The player with the highest score after
 #. %s wins the game."
@@ -133,7 +133,7 @@ msgstr ""
 #: ../../data/scripting/win_conditions/territorial_time.lua:32
 #: ../../data/scripting/win_conditions/wood_gnome.lua:23
 msgid "the configured time limit"
-msgstr ""
+msgstr "nastavenom časovom limite"
 
 #: ../../data/scripting/win_conditions/collectors.lua:28
 msgid "Points"
@@ -256,7 +256,7 @@ msgid ""
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes. If the peaceful mode is selected, the game ends if one "
 "player has more land than any other player could gain."
-msgstr "Každý hráč alebo tím sa snaží získať viac ako polovicu územia na mape. Vyhrá ten hráč alebo tím, ktorý dokáže obrániť túto oblasť po dobu aspoň 20 minút. Ak bol zvolený mierový mód, hra skončí, ak jeden z hráčov má viac územia akoby akýkoľvek iný hráč dokázal získať."
+msgstr "Každý hráč alebo tím sa snaží získať viac ako polovicu územia na mape. Vyhrá ten hráč alebo tím, ktorý dokáže obrániť túto oblasť po dobu aspoň 20 minút. Ak bol zvolený mier, hra skončí, ak jeden z hráčov má viac územia akoby akýkoľvek iný hráč dokázal získať."
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:58
 msgid "Currently no faction owns more than half of the map’s area."
@@ -274,7 +274,7 @@ msgid ""
 "least 20 minutes, or the one with the most territory after %s, whichever "
 "comes first. If the peaceful mode is selected, the game ends if one player "
 "has more land than any other player could gain."
-msgstr ""
+msgstr "Každý hráč alebo tím sa snaží získať viac ako polovicu územia na mape. Vyhrá ten hráč alebo tím, ktorý dokáže obrániť túto oblasť po dobu aspoň 20 minút alebo ten, ktorý bude po %s vlastniť najviac územia, čokoľvek sa stane skôr. Ak bol zvolený mier, hra skončí, ak jeden z hráčov má viac územia akoby akýkoľvek iný hráč dokázal získať."
 
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:357
 msgid "%1% day"
@@ -371,7 +371,7 @@ msgid ""
 "As wood gnome you like big forests, so your task is to have more trees on "
 "your territory than any other player. The game will end after %s. The one "
 "with the most trees at that point will win the game."
-msgstr ""
+msgstr "Ako lesný škriatok obľubujete veľké lesy, takže vašou úlohou je dosiahnuť, aby ste mali na svojom území viac stromov ako ostatní hráči. Hra skončí po %s. Hráč s najväčším počtom stromov vyhráva hru."
 
 #: ../../data/scripting/win_conditions/wood_gnome.lua:28
 msgid "Trees owned"
