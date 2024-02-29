@@ -419,7 +419,20 @@ static int L_get_build_id(lua_State* L) {
 /* Use our own logging function as a replacement for Lua's built-in print(). */
 static int L_print(lua_State* L) {
 	for (int i = 1; i <= lua_gettop(L); ++i) {
-		do_log(LogType::kLua, Time(), "%s", luaL_checkstring(L, i));
+		std::string str;
+		switch (lua_type(L, i)) {
+		case LUA_TBOOLEAN:
+			str = luaL_checkboolean(L, i) ? "true" : "false";
+			break;
+		case LUA_TNUMBER:
+		case LUA_TSTRING:
+			str = luaL_checkstring(L, i);
+			break;
+		default:
+			str = as_string(format("%p", lua_topointer(L, i)));
+			break;
+		}
+		do_log(LogType::kLua, Time(), "%s", str.c_str());
 	}
 	return 0;
 }
