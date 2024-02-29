@@ -763,6 +763,7 @@ int LuaPanel::get_child(lua_State* L) {
              * ``"select"``: **Optional**. Whether to select this entry (default :const:`false`).
 
            * ``"icon"``: **Optional**. The icon filepath for the dropdown's button, if any.
+             If set, the label is used only as a tooltip but not displayed.
            * ``"on_selected"``: **Optional**. Callback code to run when the user selects an entry.
 
          * ``"listselect"``: A list of entries from which the user may choose. Properties:
