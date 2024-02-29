@@ -757,7 +757,8 @@ int LuaPanel::get_child(lua_State* L) {
 
              * ``"label"``: **Mandatory**. The text for this entry.
              * ``"value"``: **Mandatory**. The internal value of this entry.
-             * ``"icon"``: **Optional**. The icon filepath for the entry.
+             * ``"icon"``: **Mandatory** for pictorial dropdowns, **optional** for other types.
+               The icon filepath for the entry.
              * ``"tooltip"``: **Optional**. The entry's tooltip.
              * ``"select"``: **Optional**. Whether to select this entry (default :const:`false`).
 
@@ -1416,7 +1417,7 @@ UI::Panel* LuaPanel::do_create_child_dropdown(lua_State* L, UI::Panel* parent) {
 				std::string elabel = get_table_string(L, "label", true);
 				std::string value = get_table_string(L, "value", true);
 				std::string etooltip = get_table_string(L, "tooltip", false);
-				std::string icon = get_table_string(L, "icon", false);
+				std::string icon = get_table_string(L, "icon", type == UI::DropdownType::kPictorial);
 				bool select = get_table_boolean(L, "select", false);
 
 				dd->add(
