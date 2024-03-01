@@ -89,6 +89,10 @@ AbstractWaresDisplay::AbstractWaresDisplay(
 	recalc_desired_size(false);
 }
 
+AbstractWaresDisplay::~AbstractWaresDisplay() {
+	NoteThreadSafeFunction::instantiate([this]() { ware_details_cache_.clear(); }, true);
+}
+
 Widelands::Extent AbstractWaresDisplay::get_extent() const {
 	int16_t columns = 0;
 	int16_t rows = 0;
@@ -183,7 +187,7 @@ bool AbstractWaresDisplay::handle_mousepress(uint8_t btn, int32_t x, int32_t y) 
 			// multiple ware by dragging.
 			selection_anchor_ = ware;
 			in_selection_[ware] = true;
-			background_texture_.reset();
+			need_texture_update_ = true;
 		} else {
 			// A mouse release has been missed
 		}
@@ -267,7 +271,7 @@ void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y) {
 		return;
 	}
 
-	background_texture_.reset();
+	need_texture_update_ = true;
 
 	for (auto& resetme : in_selection_) {
 		in_selection_[resetme.first] = false;
@@ -342,7 +346,7 @@ void AbstractWaresDisplay::finalize_anchor_selection() {
 		in_selection_[resetme.first] = false;
 	}
 
-	background_texture_.reset();
+	need_texture_update_ = true;
 }
 
 void AbstractWaresDisplay::layout() {
@@ -437,15 +441,20 @@ void AbstractWaresDisplay::draw_ware_backgrounds(RenderTarget& dst) {
 		for (auto& pair : ware_details_cache_) {
 			if (!hidden_[pair.first]) {
 				RGBAColor rgba = draw_ware_background_overlay(pair.first);
-				if (rgba != pair.second.first) {
-					background_texture_.reset();
+				if (pair.second.first != rgba) {
+					need_texture_update_ = true;
+					pair.second.first = rgba;
 				}
-				pair.second.first = rgba;
 			}
 		}
 	}
 
-	if (background_texture_ == nullptr) {
+	/* Blitting many small icons is super expensive.
+	 * Instead we blit them all once to a cached texture that is regenerated only when needed.
+	 * Similary, rendering the info texts is also performance-hungry and not done in every frame.
+	 */
+	if (need_texture_update_ || background_texture_ == nullptr) {
+		need_texture_update_ = false;
 		const int imgw = get_inner_w();
 		const int imgh = get_inner_h();
 		background_texture_.reset(new Texture(imgw, imgh));
@@ -534,7 +543,7 @@ void AbstractWaresDisplay::select_ware(Widelands::DescriptionIndex ware) {
 	}
 
 	selected_[ware] = true;
-	background_texture_.reset();
+	need_texture_update_ = true;
 	if (callback_function_) {
 		callback_function_(ware, true);
 	}
@@ -546,7 +555,7 @@ void AbstractWaresDisplay::unselect_ware(Widelands::DescriptionIndex ware) {
 	}
 
 	selected_[ware] = false;
-	background_texture_.reset();
+	need_texture_update_ = true;
 	if (callback_function_) {
 		callback_function_(ware, false);
 	}
@@ -562,7 +571,7 @@ void AbstractWaresDisplay::hide_ware(Widelands::DescriptionIndex ware) {
 		return;
 	}
 	hidden_[ware] = true;
-	background_texture_.reset();
+	need_texture_update_ = true;
 }
 
 bool AbstractWaresDisplay::is_ware_hidden(Widelands::DescriptionIndex ware) const {

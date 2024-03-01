@@ -50,6 +50,7 @@ public:
 	      CLANG_DIAG_ON("-Wunknown-pragmas") bool horizontal = false,
 	   int32_t hgap = 3,
 	   int32_t vgap = 4);
+	~AbstractWaresDisplay() override;
 
 	bool
 	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
@@ -140,6 +141,7 @@ private:
 	int32_t vgap_;
 
 	std::unique_ptr<Texture> background_texture_;
+	bool need_texture_update_{true};
 	std::map<Widelands::DescriptionIndex,
 	         std::pair<RGBAColor, std::shared_ptr<const UI::RenderedText>>>
 	   ware_details_cache_;
