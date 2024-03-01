@@ -752,12 +752,17 @@ int LuaPanel::get_child(lua_State* L) {
            * ``"datatype"``: **Mandatory**. The data type of the dropdown's entries.
              Currently only ``"string"`` is supported.
 
+           * ``"icon"``: **Optional**. The icon filepath for the dropdown's button, if any.
+             If an icon is set, the label or selected value are not displayed on the
+             button and only shown as a tooltip.
+
            * ``"entries"``: **Optional**. The entries in the dropdown.
              An array of tables with the following keys:
 
              * ``"label"``: **Mandatory**. The text for this entry.
              * ``"value"``: **Mandatory**. The internal value of this entry.
-             * ``"icon"``: **Optional**. The icon filepath for the entry.
+             * ``"icon"``: **Mandatory** for dropdowns of type ``"pictorial"``,
+               **optional** for other types. The icon filepath for the entry.
              * ``"tooltip"``: **Optional**. The entry's tooltip.
              * ``"select"``: **Optional**. Whether to select this entry (default :const:`false`).
 
@@ -1415,7 +1420,7 @@ UI::Panel* LuaPanel::do_create_child_dropdown(lua_State* L, UI::Panel* parent) {
 				std::string elabel = get_table_string(L, "label", true);
 				std::string value = get_table_string(L, "value", true);
 				std::string etooltip = get_table_string(L, "tooltip", false);
-				std::string icon = get_table_string(L, "icon", false);
+				std::string icon = get_table_string(L, "icon", type == UI::DropdownType::kPictorial);
 				bool select = get_table_boolean(L, "select", false);
 
 				dd->add(
@@ -1427,6 +1432,10 @@ UI::Panel* LuaPanel::do_create_child_dropdown(lua_State* L, UI::Panel* parent) {
 
 	} else {
 		report_error(L, "Unsupported dropdown datatype '%s'", datatype.c_str());
+	}
+
+	if (std::string icon = get_table_string(L, "icon", false); !icon.empty()) {
+		dropdown->set_image(g_image_cache->get(icon));
 	}
 
 	if (std::string on_selected = get_table_string(L, "on_selected", false); !on_selected.empty()) {
