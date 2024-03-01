@@ -6,7 +6,7 @@ on:
   pull_request:
     types: [ opened, reopened, synchronize ]
   push:
-    branches: [ master, protected/* ]
+    branches: [ master, protected/*, 6383-gettext ]
 
 jobs:
   changes:
