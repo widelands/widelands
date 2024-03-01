@@ -50,6 +50,7 @@ public:
 	      CLANG_DIAG_ON("-Wunknown-pragmas") bool horizontal = false,
 	   int32_t hgap = 3,
 	   int32_t vgap = 4);
+	~AbstractWaresDisplay() override;
 
 	bool
 	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
@@ -59,7 +60,7 @@ public:
 	// Wares may be selected (highlighted)
 	void select_ware(Widelands::DescriptionIndex);
 	void unselect_ware(Widelands::DescriptionIndex);
-	bool ware_selected(Widelands::DescriptionIndex);
+	bool ware_selected(Widelands::DescriptionIndex) const;
 
 	// Wares may be hidden
 	void hide_ware(Widelands::DescriptionIndex);
@@ -105,9 +106,11 @@ protected:
 
 	const Widelands::TribeDescr::WaresOrder& icons_order() const;
 	virtual Vector2i ware_position(Widelands::DescriptionIndex) const;
-	void draw(RenderTarget&) override;
-	virtual void draw_ware(RenderTarget&, Widelands::DescriptionIndex);
-	virtual RGBAColor draw_ware_background_overlay(Widelands::DescriptionIndex) {
+	void draw(RenderTarget& dst) override;
+	void draw_ware_backgrounds(RenderTarget& dst);
+	bool draw_ware_as_selected(Widelands::DescriptionIndex id) const;
+	virtual void draw_ware(RenderTarget& dst, Widelands::DescriptionIndex id);
+	virtual RGBAColor draw_ware_background_overlay(Widelands::DescriptionIndex /*id*/) {
 		return RGBAColor(0, 0, 0, 0);
 	}
 
@@ -136,6 +139,13 @@ private:
 	bool horizontal_;
 	int32_t hgap_;
 	int32_t vgap_;
+
+	std::unique_ptr<Texture> background_texture_;
+	bool need_texture_update_{true};
+	std::map<Widelands::DescriptionIndex,
+	         std::pair<RGBAColor, std::shared_ptr<const UI::RenderedText>>>
+	   ware_details_cache_;
+	uint32_t last_ware_details_cache_update_ = 0;
 
 	WaresOrderCoords order_coords_;
 
