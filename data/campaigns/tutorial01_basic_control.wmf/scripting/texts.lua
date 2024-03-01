@@ -9,6 +9,9 @@
 local scolded = false
 
 function scold_player()
+   push_textdomain("scenario_tutorial01_basic_control.wmf")
+
+   local title_ = _("Nice And Easy Does It All the Time")
    local warn
    if not scolded then
       warn = p(_("I am sorry, but I will have to tear this down. We might need the space here later on."))
@@ -16,12 +19,14 @@ function scold_player()
    else
       warn = p(_("I am sorry, but I will have to tear this down again. We might need the space here later on."))
    end
+   warn = warn .. p(_([[If I am too slow for you, you might want to play a real game and just find everything out for yourself. Otherwise, please bear with me, I am not the youngest and quickest anymore.]]))
+
+   pop_textdomain()
 
    return {
-      title = _("Nice And Easy Does It All the Time"),
+      title = title_,
       h = styles.get_size("campaign_message_box_h_min"),
-      body = warn ..
-         p(_([[If I am too slow for you, you might want to play a real game and just find everything out for yourself. Otherwise, please bear with me, I am not the youngest and quickest anymore.]])),
+      body = warn,
       show_instantly = true
    }
 end
