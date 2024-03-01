@@ -24,7 +24,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-      if: github.ref == 'refs/heads/master'
+      # if: github.ref == 'refs/heads/master'
       with:
         fetch-depth: 1
     - name: Check for changed files
