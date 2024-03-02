@@ -60,7 +60,7 @@ wl_library(wui_common_plugins
     plugins.cc
   DEPENDS
     base
-    scripting_lua_interface
+    scripting_base
     ui_basic
   USES_SDL2
 )

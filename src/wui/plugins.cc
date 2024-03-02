@@ -22,12 +22,12 @@
 
 #include "base/log.h"
 #include "base/string.h"
-#include "scripting/lua_interface.h"
+#include "scripting/lua_errors.h"
 #include "ui_basic/messagebox.h"
 
 bool PluginTimers::plugin_action(const std::string& action, bool failsafe) {
 	try {
-		lua_->interpret_string(action);
+		lua_(action);
 		return true;
 	} catch (const LuaError& e) {
 		if (!failsafe || g_fail_on_lua_error) {
@@ -36,7 +36,7 @@ bool PluginTimers::plugin_action(const std::string& action, bool failsafe) {
 		}
 
 		log_err("Lua error in plugin: %s", e.what());
-		UI::WLMessageBox m(root_panel_, UI::WindowStyle::kWui, _("Plugin Error"),
+		UI::WLMessageBox m(root_panel_, root_panel_->get_panel_style() == UI::PanelStyle::kWui ? UI::WindowStyle::kWui : UI::WindowStyle::kFsMenu, _("Plugin Error"),
 		                   format_l(_("Error when running plugin:\n%s"), e.what()),
 		                   UI::WLMessageBox::MBoxType::kOk);
 		m.run<UI::Panel::Returncodes>();
@@ -44,18 +44,61 @@ bool PluginTimers::plugin_action(const std::string& action, bool failsafe) {
 	}
 }
 
+PluginTimers::Timer* PluginTimers::get_timer(const std::string& name) {
+	for (Timer& timer : timers_) {
+		if (timer.name == name) {
+			return &timer;
+		}
+	}
+	return nullptr;
+}
+
+const PluginTimers::Timer* PluginTimers::get_timer(const std::string& name) const {
+	for (const Timer& timer : timers_) {
+		if (timer.name == name) {
+			return &timer;
+		}
+	}
+	return nullptr;
+}
+
+uint32_t PluginTimers::remove_timer(const std::string& name, bool all) {
+	uint32_t erased = 0;
+	for (auto timer = timers_.begin(); timer != timers_.end();) {
+		if (timer->name == name) {
+			timer = timers_.erase(timer);
+			++erased;
+			if (!all) {
+				break;
+			}
+		} else {
+			++timer;
+		}
+	}
+	return erased;
+}
+
 void PluginTimers::think() {
-	const uint32_t time = SDL_GetTicks();
-	for (auto plugin = timers_.begin(); plugin != timers_.end();) {
-		if (time >= plugin->next_run) {
-			plugin->next_run = time + plugin->interval;
-			if (!plugin_action(plugin->action, plugin->failsafe)) {
-				// In case of an error, remove it from the queue
-				log_err("Unregistering defective plugin timer");
-				plugin = timers_.erase(plugin);
-				continue;
+	const uint32_t curtime = SDL_GetTicks();
+	for (auto timer = timers_.begin(); timer != timers_.end();) {
+		if (curtime >= timer->next_run) {
+			timer->next_run = curtime + timer->interval;
+			if (timer->active) {
+				if (!plugin_action(timer->action, timer->failsafe)) {
+					// In case of an error, remove it from the queue
+					log_err("Unregistering defective plugin timer");
+					timer = timers_.erase(timer);
+					continue;
+				}
+
+				if (timer->remaining_count != 0) {
+					--timer->remaining_count;
+					if (timer->remaining_count == 0) {
+						timer->active = false;
+					}
+				}
 			}
 		}
-		++plugin;
+		++timer;
 	}
 }

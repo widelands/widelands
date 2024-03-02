@@ -20,10 +20,9 @@
 #define WL_WUI_PLUGINS_H
 
 #include <cstdint>
+#include <functional>
 #include <string>
 #include <vector>
-
-class LuaInterface;
 
 namespace UI {
 class Panel;
@@ -31,7 +30,24 @@ class Panel;
 
 class PluginTimers {
 public:
-	PluginTimers(UI::Panel* p, LuaInterface* lua) : root_panel_(p), lua_(lua) {
+	using RunLuaCommandFn = std::function<void(const std::string&)>;
+
+	struct Timer {
+		Timer() = default;
+		explicit Timer(const std::string& n, const std::string& act, uint32_t iv, uint32_t count, bool on, bool safe)
+		   : name(n), action(act), interval(iv), remaining_count(count), active(on), failsafe(safe) {
+		}
+
+		std::string name;
+		std::string action;
+		uint32_t interval{0U};
+		uint32_t next_run{0U};
+		uint32_t remaining_count{0U};
+		bool active{true};
+		bool failsafe{false};
+	};
+
+	PluginTimers(UI::Panel* p, RunLuaCommandFn lua) : root_panel_(p), lua_(lua) {
 	}
 
 	bool plugin_action(const std::string& action, bool failsafe);
@@ -39,24 +55,23 @@ public:
 	void think();
 
 	void add_plugin_timer(const std::string& action, uint32_t interval, bool failsafe) {
-		timers_.emplace_back(action, interval, failsafe);
+		timers_.emplace_back(std::string(), action, interval, 0, true, failsafe);
+	}
+	void add_plugin_timer(const std::string& name, const std::string& action, uint32_t interval, uint32_t count, bool active, bool failsafe) {
+		timers_.emplace_back(name, action, interval, count, active, failsafe);
 	}
 
+	[[nodiscard]] Timer* get_timer(const std::string& name);
+	[[nodiscard]] const Timer* get_timer(const std::string& name) const;
+	[[nodiscard]] size_t count_timers() const {
+		return timers_.size();
+	}
+
+	uint32_t remove_timer(const std::string& name, bool all);
+
 private:
-	struct Timer {
-		Timer() = default;
-		explicit Timer(const std::string& a, uint32_t i, bool f)
-		   : action(a), interval(i), failsafe(f) {
-		}
-
-		std::string action;
-		uint32_t interval{0U};
-		uint32_t next_run{0U};
-		bool failsafe{false};
-	};
-
 	UI::Panel* root_panel_;
-	LuaInterface* lua_;
+	RunLuaCommandFn lua_;
 
 	std::vector<Timer> timers_;
 };
