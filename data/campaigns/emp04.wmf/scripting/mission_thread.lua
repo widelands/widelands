@@ -29,12 +29,18 @@ end
 -- we need to find the plans how to build a farm
 function farm_plans()
    local f = map:get_field(47, 10)
+   local window_names = {}
+   for i,b in ipairs(p1:get_buildings("empire_farm1")) do
+      table.insert(window_names, string.bformat("building_window_%u", b.serial))
+   end
    local farmclick = false
    local count = 0
    local o1 = nil
    while not (farmclick or p1.defeated or (f.owner == p1)) do
-      if mv.windows.building_window and not mv.windows.building_window.buttons.dismantle and not mv.windows.building_window.tabs.wares and mv.windows.building_window.tabs.workers then
-         farmclick = true
+      for i,w in ipairs(window_names) do
+         if mv.windows[w] then
+            farmclick = true
+         end
       end
       count = count + 1
       if count == 1201 then
