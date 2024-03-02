@@ -14927,7 +14927,7 @@ msgctxt "frisians_building"
 msgid ""
 "If this building is fully supplied, production of one of each smoked food "
 "takes %s on average."
-msgstr "Ha az ellátása folyamatos, akkor a füstölő átlagosan %s enként készít egy-egy füstölt húst és halat."
+msgstr "Ha az ellátása folyamatos, akkor a füstölő átlagosan %senként készít egy-egy füstölt húst és halat."
 
 #. TRANSLATORS: Lore helptext for a Frisian production site: Bakery
 #: ../../data/tribes/initialization/frisians/units.lua:1917
