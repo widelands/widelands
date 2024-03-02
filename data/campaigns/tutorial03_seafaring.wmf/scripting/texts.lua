@@ -212,7 +212,8 @@ expedition4 = {
       li_object('atlanteans_resi_iron_2', _([[You’ve lead the expedition to a successful end and founded a new colony. I’ve sent out some geologists – they already report that they’ve found some iron ore.]])) ..
       p(_([[So far you have learned everything about seafaring: how to build ports and ships and how to send out an expedition. Remember that expeditions are sometimes the fastest way to reach essential resources – and sometimes the only one.]])) ..
       p(_([[But I want to speak a word of warning. Ports are like headquarters: they can be attacked by a nearby enemy. While your headquarters has soldiers to defend it, your newly built port won’t. You should therefore avoid settling next to an enemy.]])) ..
-      p(_([[On this map, there is no enemy to fear. In other games, you should make building one or two military fortifications around your new colonies a priority.]]))
+      p(_([[To make sure they are properly defended, you can set the desired number of defending soldiers for both in the Soldiers tab, similar to military buildings. But they are also warehouses at the same time, so they can hold any number of soldiers. The desired number makes sure that defenders are requested by the port or headquarters, and once there, they don't get sent away to serve other needs.]])) ..
+      p(_([[On this map, there is no enemy to fear. In other games, you should set some defenders for your ports and make building one or two military fortifications around your new colonies a priority.]]))
    )
 }
 
@@ -335,7 +336,8 @@ ferry_yard_production = {
    title = _("Ferry yard production"),
    body = (
       h1(_("More ferries needed?")) ..
-      p(_([[Do remember to stop your ferry yard when you don’t need any new ferries to be produced. As long as a ferry services a waterway, its lifetime is unlimited, but unemployed ferries will rot away and eventually sink.]])) ..
+      p(_([[As you can see, ferries can be produced quite quickly, but you don't need to worry about wasted materials, because ferry yards normally only produce them on demand, when there are unserviced waterways.]])) ..
+      p(_([[As long as a ferry services a waterway, its lifetime is unlimited, but unemployed ferries will rot away and eventually sink.]])) ..
       li_image("images/ui_basic/stop.png", _([[This is the icon for stopping production. You will find it in the building window.]]))
    ),
    h = messagebox_h_step(-3)
