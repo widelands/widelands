@@ -472,7 +472,7 @@ economy_settings1 = {
       -- Yup, that's indeed the correct icon
       li_image("images/wui/stats/genstats_nrwares.png", _([[This is the icon.]])) ..
       p(_([[The same button is also available in warehouse windows.]])) ..
-      p(_([[Note that the buttons are called ‘Configure this flag’s/building’s economy’ for a reason. An economy consists of all buildings and flags connected by roads, ferries, or ships, so you can have more than one economy if their flags are not connected by any means of transportation. In this case, your separate economies can have different settings for wares.]]))
+      p(_([[Note that the buttons are called ‘Configure this flag’s/building’s economy’ for a reason. An economy consists of all buildings and flags connected by roads, ferries, or ships, so you can have more than one economy if their flags are not connected by any means of transportation. In that case, your separate economies can have different settings for wares.]]))
    ),
    h = messagebox_h_step(-1),
 }
