@@ -159,9 +159,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
                        UI::PanelStyle::kWui,
                        UI::ButtonStyle::kWuiPrimary),
      quick_navigation_(&map_view_),
-     plugin_timers_(this, [this](const std::string& cmd) {
-		egbase().lua().interpret_string(cmd);
-     }),
+     plugin_timers_(this, [this](const std::string& cmd) { egbase().lua().interpret_string(cmd); }),
      minimap_registry_(the_egbase.is_game()),
      workareas_cache_(nullptr),
      egbase_(the_egbase),

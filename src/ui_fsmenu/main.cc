@@ -556,9 +556,8 @@ void MainMenu::think() {
 
 void MainMenu::reinit_plugins() {
 	lua_.reset(new LuaFsMenuInterface(this));
-	plugin_timers_.reset(new PluginTimers(this, [this](const std::string& cmd) {
-		lua_->interpret_string(cmd);
-     }));
+	plugin_timers_.reset(
+	   new PluginTimers(this, [this](const std::string& cmd) { lua_->interpret_string(cmd); }));
 
 	for (const auto& pair : AddOns::g_addons) {
 		if (pair.second && pair.first->category == AddOns::AddOnCategory::kUIPlugin) {

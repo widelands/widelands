@@ -34,7 +34,12 @@ public:
 
 	struct Timer {
 		Timer() = default;
-		explicit Timer(const std::string& n, const std::string& act, uint32_t iv, uint32_t count, bool on, bool safe)
+		explicit Timer(const std::string& n,
+		               const std::string& act,
+		               uint32_t iv,
+		               uint32_t count,
+		               bool on,
+		               bool safe)
 		   : name(n), action(act), interval(iv), remaining_count(count), active(on), failsafe(safe) {
 		}
 
@@ -57,7 +62,12 @@ public:
 	void add_plugin_timer(const std::string& action, uint32_t interval, bool failsafe) {
 		timers_.emplace_back(std::string(), action, interval, 0, true, failsafe);
 	}
-	void add_plugin_timer(const std::string& name, const std::string& action, uint32_t interval, uint32_t count, bool active, bool failsafe) {
+	void add_plugin_timer(const std::string& name,
+	                      const std::string& action,
+	                      uint32_t interval,
+	                      uint32_t count,
+	                      bool active,
+	                      bool failsafe) {
 		timers_.emplace_back(name, action, interval, count, active, failsafe);
 	}
 

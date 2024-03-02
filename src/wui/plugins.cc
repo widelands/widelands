@@ -36,8 +36,11 @@ bool PluginTimers::plugin_action(const std::string& action, bool failsafe) {
 		}
 
 		log_err("Lua error in plugin: %s", e.what());
-		UI::WLMessageBox m(root_panel_, root_panel_->get_panel_style() == UI::PanelStyle::kWui ? UI::WindowStyle::kWui : UI::WindowStyle::kFsMenu, _("Plugin Error"),
-		                   format_l(_("Error when running plugin:\n%s"), e.what()),
+		UI::WLMessageBox m(root_panel_,
+		                   root_panel_->get_panel_style() == UI::PanelStyle::kWui ?
+                            UI::WindowStyle::kWui :
+                            UI::WindowStyle::kFsMenu,
+		                   _("Plugin Error"), format_l(_("Error when running plugin:\n%s"), e.what()),
 		                   UI::WLMessageBox::MBoxType::kOk);
 		m.run<UI::Panel::Returncodes>();
 		return false;
