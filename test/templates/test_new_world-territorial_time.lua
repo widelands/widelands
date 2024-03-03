@@ -4,21 +4,20 @@ include "test/scripting/check_game_end.lua"
 map = game.map
 local atl = game.players[2]
 
-function f(x, y)
-  r = map:get_field(x, y)
-  return r
-end
-
 -- Map specific values
 local port_x = 9
 local port_y = 141
+local portspace = map:get_field(port_x, port_y)
 
 local map_w = map.width
 local map_h = map.height
 
 local function side_canal_penalty(x)
-  if x > 15 and x < 175 then
-    return map_w + map_h
+  if x > 15 then
+    return 2 * (x - 15)
+  end
+  if x < 175 then
+    return 2 * (175 - x)
   end
   return 0
 end
@@ -40,7 +39,8 @@ end
 run(function()
   sleep(2000)
   print("Place a port for the winner to conquer some land.")
-  atl:place_building("atlanteans_port", f(9, 141), false, true)
+  atl:place_building("atlanteans_port", portspace, false, true)
+  assert_true(#atl:get_buildings("atlanteans_port") >= 1, "## Port placement failed ##")
 
   -- Test naval warfare
 
@@ -53,13 +53,6 @@ run(function()
   -- but we also do a refit, which would still work from lua if naval warfare were disabled
   -- TODO(tothxa): this can be removed if a proper test case for naval warfare is added to test/maps
   --               win condition duration can also be decreased then
-  local timeout = game.time + 60 * 1000
-  while #atl:get_buildings("atlanteans_port") < 1 and game.time < timeout do
-    sleep(1000)
-  end
-
-  assert_true(#atl:get_buildings("atlanteans_port") >= 1, "## Port placement timed out ##")
-
   local ships = atl:get_ships()
   assert_true(#ships > 3, "## Too few ships for New World starting condition ##")
 
@@ -67,7 +60,7 @@ run(function()
   local ship = nil
   local min_distance = 10 * (map_w + map_h)
   for i,s in ipairs(ships) do
-    if s.type == "transport" then
+    if s.type == "transport" and map:sea_route_exists(s.field, portspace) then
       local current_dist = distance_to_port(s.field)
       if current_dist < min_distance then
         ship = s
