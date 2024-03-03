@@ -56,6 +56,7 @@ hq:set_workers{
    barbarians_stonemason = 2,
 }
 hq:set_soldiers({0,0,0,0}, 45)
+hq.warehousename = _("Ondun")
 
 -- =======================================================================
 --                                 Player 2
