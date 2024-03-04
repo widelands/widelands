@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-01 02:43+0000\n"
+"POT-Creation-Date: 2024-03-04 03:06+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
 "Last-Translator: Juan Miguel Bernal González, 2024\n"
 "Language-Team: Spanish (http://app.transifex.com/widelands/widelands/language/es/)\n"
@@ -761,14 +761,16 @@ msgid "Open the ‘Configure economy’ window."
 msgstr "Abre la ventana \"Configurar economía\"."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:462
-msgid "The window can be accessed by clicking on any flag you own."
-msgstr "Puedes acceder a la ventana haciendo clic en cualquier bandera de tu propiedad."
+msgid ""
+"The window can be accessed by clicking on any flag you own or from warehouse"
+" windows."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:467
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:480
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:495
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:504
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:524
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:482
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:497
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:526
 msgid "Economy options"
 msgstr "Opciones de Economía"
 
@@ -789,26 +791,39 @@ msgstr "Ahora te contaré cómo puedes determinar cuántas mercancías quieres t
 msgid "This is the icon."
 msgstr "Este es el icono."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:483
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:474
+msgid "The same button is also available in warehouse windows."
+msgstr ""
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:475
+msgid ""
+"Note that the buttons are called ‘Configure this flag’s/building’s economy’ "
+"for a reason. An economy consists of all buildings and flags connected by "
+"roads, ferries, or ships, so you can have more than one economy if their "
+"flags are not connected by any means of transportation. In that case, your "
+"separate economies can have different settings for wares."
+msgstr ""
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:485
 msgid ""
 "This window looks similar to the stock window, but it has additional buttons"
 " at the bottom."
 msgstr "Esta ventana es similar a la ventana de existencias, pero tiene botones adicionales en la parte de abajo."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:484
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:486
 msgid ""
 "You first have to select one or more wares (you can also left-click and "
 "drag). Then you can set the desired target quantity for the selected wares."
 msgstr "Primero tienes que seleccionar una o más mercancías (también puedes hacer clic izquierdo y arrastrar). Entonces puedes ajustar la cantidad objetivo deseada para las mercancías seleccionadas."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:485
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:487
 msgid ""
 "Most buildings will only produce something when the stock level in your "
 "warehouses falls below the target quantity, so you should indicate the "
 "reserve you want to stockpile."
 msgstr "La mayoría de los edificios solo producirán algo, cuando el nivel de existencias en tus almacenes caiga por debajo de la cantidad objetivo, por lo que debe indicar la reserva que desea almacenar."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:487
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:489
 msgid ""
 "An example: the default value for scythes is 1. If you build a farm, a "
 "carrier will take a scythe and become a farmer. Then there will be no "
@@ -816,7 +831,7 @@ msgid ""
 "start producing another one."
 msgstr "Un ejemplo: el valor por defecto para guadañas es 1. Si construyes una granja, un transportista cogerá una guadaña y se convertirá en granjero. Entonces no quedarán guadañas, pero la cantidad objetivo es 1, con lo que tu fabricante de herramientas comenzará a producir otra."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:489
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:491
 msgid ""
 "If you build two farms, only one of them will start working immediately. The"
 " second farm will have to wait for its worker, who will lack a scythe. If "
@@ -824,7 +839,7 @@ msgid ""
 "available and both farms would have been able to start working right away."
 msgstr "Si construyes dos granjas, solo una de ellas comenzará a trabajar inmediatamente. La segunda granja tendrá que esperar por su trabajador, a quien le faltará una guadaña. Si hubieras ajustado la cantidad objetivo a 2 antes, dos guadañas habrían estado disponibles para empezar a trabajar inmediatamente."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:497
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:499
 msgid ""
 "Stockpiling wares is a double-edged sword. On the one hand, wares in stock "
 "are useful to buffer temporary fluctuations in your economy, which tend to "
@@ -835,14 +850,14 @@ msgid ""
 "economy. When in doubt, lean towards having some extra reserves."
 msgstr "El almacenamiento de mercancías es un arma de doble filo. Por un lado, los productos en stock son útiles para amortiguar las fluctuaciones temporales la economía, que tienden a ocurrir todo el tiempo. Por otro lado, cualquier artículo que se quede en un almacén en lugar de ser procesado para convertirlo en otra cosa se desperdicia. Encontrar el equilibrio entre el almacenamiento y la producción en las cadenas de suministro es uno de los desafíos más profundos para mejorar la economía. En caso de duda, opte por tener algunas reservas adicionales."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:498
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:500
 msgid ""
 "To ease the process of switching between different economic situations, you "
 "can save and apply economy profiles at the bottom of the economy options "
 "window. A profile for stockpiling and one for efficiency are preset there."
 msgstr "Para facilitar el proceso de cambio entre diferentes situaciones económicas, puede guardar y aplicar perfiles económicos en la parte inferior de la ventana de opciones económicas. Allí están preestablecidos  perfiles de almacenamiento y eficiencia."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:508
 msgid ""
 "Most of the time, the economy options are a useful tool to ensure that "
 "resources are not wasted to produce wares your economy does not actually "
@@ -851,7 +866,7 @@ msgid ""
 "the target of a ware to infinite, so that it will always be produced."
 msgstr "La mayoría de las veces, las opciones económicas son una herramienta útil para garantizar que los recursos no se desperdicien en producir productos no necesarios para la economía. Sin embargo, a veces puede resultar útil almacenar una mercancía en cantidades muy grandes. Para lograr esto, la ventana de opciones económicas le permite establecer el objetivo de un producto en infinito, para que se produzca indefinidamente."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:507
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:509
 msgid ""
 "The same button can also be found in the building window of production "
 "sites. There, it causes only this one site to produce indefinitely, "
@@ -860,36 +875,36 @@ msgid ""
 "there are plenty in stock far away in your homeland."
 msgstr "El mismo botón también se puede encontrar en la ventana de construcción de los lugares de producción. Allí, hace que sólo este sitio produzca indefinidamente, independientemente de la configuración económica. Esto puede ser útil para lograr, por ejemplo, que se produzcan más materiales de construcción cerca de la frontera, incluso si hay suficientes existencias en lugares lejanos, en su país de origen."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:513
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:515
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:517
 msgid "Produce 20 marble columns"
 msgstr "Producir 20 columnas de mármol"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:516
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:518
 msgid ""
 "To be prepared for additional fortifications, you should produce 20 marble "
 "columns."
 msgstr "Para estar preparado para fortificaciones adicionales, deberías producir 20 columnas de mármol."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:517
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:519
 msgid ""
 "Your stonemason will not produce marble columns when they are not needed. "
 "You have to increase the target quantity."
 msgstr "Tu mampostero no producirá columnas de mármol si no se necesitan. Tienes que incrementar la cantidad objetivo."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:518
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:520
 msgid ""
 "To do so, click on any flag and choose ‘Configure economy’. In this window, "
 "you can decide how many wares of each type you wish to have in stock."
 msgstr "Para hacerlo, haz clic en cualquier bandera y elige \"Configurar economía\". En esta ventana puedes decidir cuántas mercancías de cada tipo quieres tener en tus existencias."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:519
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:521
 msgid ""
 "Sometimes, you will need many wares at the same time quickly – faster than "
 "they can be produced. In this case, it is good to have enough on reserve."
 msgstr "A veces necesitarás muchas mercancías a la vez rápido – más rápido de lo que pueden ser producidas. En este caso está bien tener suficientes en reserva."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:527
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:529
 msgid ""
 "By changing the target quantity, you can therefore decide which wares/tools "
 "your resources (in this case: iron) should be turned into or whether you "
@@ -897,86 +912,86 @@ msgid ""
 "for."
 msgstr "Cambiando la cantidad objetivo puedes, por lo tanto, decidir en qué mercancías/herramientas deben ser convertidos tus recursos (en este caso: hierro) o si quieres ahorrar hierro y esperar hasta que sepas para qué lo vas a necesitar."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:528
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:530
 msgid ""
 "Only buildings that consume wares care about this setting. Buildings that "
 "produce wares for free (e.g. your farms or wells) will always keep working."
 msgstr "Solo los edificios que consumen mercancías se ven afectados por este ajuste. Los edificios que producen mercancías sin coste (p.ej. tus granjas o pozos) siempre se mantendrán activos."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:530
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:532
 msgid ""
 "Now let’s try it out: the current target quantity for marble columns is 10. "
 "Increase it to be prepared in case you will have to build up your "
 "fortifications quickly."
 msgstr "Ahora vamos a probarlo: la cantidad objetivo actual para las columnas de mármol es 10. Elévalo para estar preparado en caso de que tengas que construir tus fortificaciones rápidamente."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:537
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:539
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:541
 msgid "Bring 20 marble columns to the front line"
 msgstr "Lleva 20 columnas de mármol al frente"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:540
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:542
 msgid ""
 "Bring all of the 20 marble columns to the warehouse near the front line."
 msgstr "Lleva todas las 20 columnas de mármol al almacén cerca del frente."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:542
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:544
 msgid ""
 "To achieve this, you will have to do two things. First, set a preference for"
 " marble columns in the desired warehouse. All marble columns produced in the"
 " future will be brought there if possible."
 msgstr "Para conseguir esto tendrás que hacer dos cosas. Primero, ajusta la preferencia para las columnas de mármol en el almacén deseado. Todas las columnas de mármol producidas en el futuro se llevarán allí si es posible."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:544
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:546
 msgid ""
 "Then, to move the marble columns out of your headquarters, you will have to "
 "click on the remove button there."
 msgstr "Entonces, para mover las columnas de mármol fuera de tu sede, tendrás que hacer clic en el boton eliminar de ella."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:550
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:552
 msgid "Warehouse Preferences"
 msgstr "Preferencias de Almacén."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:552
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:554
 msgid "Bring the marble columns to the front line"
 msgstr "Lleva las columnas de mármol al frente"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:554
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:556
 msgid ""
 "The production of marble columns is working fine now, but it would be great "
 "if they were stored where we need them."
 msgstr "La producción de las columnas de mármol está trabajando bien ahora, pero sería genial si estuvieran almacenado cuando lo necesitemos."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:555
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:557
 msgid ""
 "Normally, produced wares are brought to the closest warehouse if they are "
 "not needed elsewhere. In this case, this means our headquarters. But we "
 "would like to have them in the warehouse near our fortresses."
 msgstr "Normalmente las mercancías producidas se llevan al almacén más cercano si no se necesitan en otra parte. En este caso, esto significa nuestra sede. Pero nos gustaría tenerlas en el almacén cerca de nuestras fortalezas."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:556
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:558
 msgid ""
 "Every warehouse has four buttons to set the preference. If you move your "
 "mouse pointer over them, you will see tooltips that explain what the buttons"
 " do."
 msgstr "Cada almacén tiene cuatro botones para ajustar la preferencia. Si mueves tu puntero del ratón sobre ellos, veras textos de ayuda emergentes que explican lo que hacen los botones."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:562
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:564
 msgid "Borders Secured"
 msgstr "Fronteras Aseguradas"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:564
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:566
 msgid "We’re safe now"
 msgstr "Ya estamos a salvo"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:566
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:568
 msgid ""
 "Great. We now have enough marble columns so that in case of an aggressor, we"
 " can build up our fortifications. But I do not think that that will be "
 "necessary. So far, no enemy has shown up."
 msgstr "Genial. Ahora tenemos suficientes columnas de mármol como para construir nuestras fortificaciones en caso de una agresión. Hasta ahora no ha aparecido ningún enemigo."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:567
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:569
 msgid ""
 "I hope I could teach you how you can control the economy in Widelands. There"
 " are many options and they can be confusing at first. Even if you’ve only "
@@ -985,7 +1000,7 @@ msgid ""
 "this tutorial and learn the rest!"
 msgstr "Espero haber podido enseñarte cómo controlar la economía en Widelands. Hay muchas opciones y pueden resultar confusas al principio. Incluso si sólo entendiste unos pocos conceptos, no debes rendirte. Pruébalos en algunas partidas, familiarízate con ellos y experimenta con las posiblidades. ¡Después vuelve a este tutorial y aprende el resto!"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:569
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:571
 msgid ""
 "This was the last tutorial I had prepared for you. I’ve now taught you "
 "everything I know. There are still secrets hidden in this world even I don’t"

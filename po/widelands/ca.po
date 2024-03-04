@@ -3988,7 +3988,7 @@ msgstr "Es carrega…"
 
 #: ../../src/ui_basic/spinbox.cc:151
 msgid "Decrease the value"
-msgstr ""
+msgstr "Redueix-ne el valor"
 
 #. * TRANSLATORS: You may want to treat this as "Decrease the value %s", you
 #. get
@@ -4000,7 +4000,7 @@ msgstr "Redueix-ne el valor en %s"
 
 #: ../../src/ui_basic/spinbox.cc:164
 msgid "Increase the value"
-msgstr ""
+msgstr "Augmenta’n el valor"
 
 #. * TRANSLATORS: You may want to treat this as "Increase the value %s", you
 #. get
