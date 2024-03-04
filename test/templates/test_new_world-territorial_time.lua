@@ -13,13 +13,14 @@ local map_w = map.width
 local map_h = map.height
 
 local function side_canal_penalty(x)
-  if x > 15 then
-    return 2 * (x - 15)
+  if x <= 15 or x >= 175 then
+    return 0
   end
-  if x < 175 then
+  if x < 95 then
+    return 2 * (x - 15)
+  else
     return 2 * (175 - x)
   end
-  return 0
 end
 
 local function distance_to_port(f)
