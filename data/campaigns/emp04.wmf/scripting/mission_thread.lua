@@ -33,8 +33,12 @@ function farm_plans()
    local count = 0
    local o1 = nil
    while not (farmclick or p1.defeated or (f.owner == p1)) do
-      if mv.windows.building_window and not mv.windows.building_window.buttons.dismantle and not mv.windows.building_window.tabs.wares and mv.windows.building_window.tabs.workers then
-         farmclick = true
+      -- Serials change on save and reload, we must update for every check
+      for i,b in ipairs(p1:get_buildings("empire_farm1")) do
+         local farm_window_name = string.bformat("building_window_%u", b.serial)
+         if mv.windows[farm_window_name] then
+            farmclick = true
+         end
       end
       count = count + 1
       if count == 1201 then

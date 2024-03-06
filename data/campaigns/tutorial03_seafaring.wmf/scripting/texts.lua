@@ -148,7 +148,7 @@ expedition2 = {
       p(_([[During an expedition, you send a ship out to discover new islands and maybe found a colony there.]])) ..
       li_image("images/wui/buildings/start_expedition.png",
          join_sentences(_([[Expeditions can be started in every port. Then, all needed wares are transported to that port. The wares are exactly those your tribe needs to build a port (your goal is to build a port far away from home, so this is not surprising), and of course you need a builder, too. When everything is prepared, a ship will come and pick it up.]]),
-         _([[You can check out the needed wares in the fifth tab of your port (it will appear when you’ve started an expedition).]]))) ..
+         _([[You can check out the needed wares in the Expedition tab of your port (it will appear in the last place when you’ve started an expedition).]]))) ..
       p(_([[Now try this out. I will tell you later what the next steps are.]])) ..
       li(_([[Start an expedition in any of your ports.]]))
    )
@@ -212,7 +212,8 @@ expedition4 = {
       li_object('atlanteans_resi_iron_2', _([[You’ve lead the expedition to a successful end and founded a new colony. I’ve sent out some geologists – they already report that they’ve found some iron ore.]])) ..
       p(_([[So far you have learned everything about seafaring: how to build ports and ships and how to send out an expedition. Remember that expeditions are sometimes the fastest way to reach essential resources – and sometimes the only one.]])) ..
       p(_([[But I want to speak a word of warning. Ports are like headquarters: they can be attacked by a nearby enemy. While your headquarters has soldiers to defend it, your newly built port won’t. You should therefore avoid settling next to an enemy.]])) ..
-      p(_([[On this map, there is no enemy to fear. In other games, you should make building one or two military fortifications around your new colonies a priority.]]))
+      p(_([[To make sure they are properly defended, you can set the desired number of defending soldiers for both in the Soldiers tab, similar to military buildings. But they are also warehouses at the same time, so they can hold any number of soldiers. The desired number makes sure that defenders are requested by the port or headquarters, and once they are garrisoned there, they don't get sent away to serve other needs.]])) ..
+      p(_([[On this map, there is no enemy to fear. In other games, you should set some defenders for your ports and make building one or two military fortifications around your new colonies a priority.]]))
    )
 }
 
@@ -335,8 +336,8 @@ ferry_yard_production = {
    title = _("Ferry yard production"),
    body = (
       h1(_("More ferries needed?")) ..
-      p(_([[Do remember to stop your ferry yard when you don’t need any new ferries to be produced. As long as a ferry services a waterway, its lifetime is unlimited, but unemployed ferries will rot away and eventually sink.]])) ..
-      li_image("images/ui_basic/stop.png", _([[This is the icon for stopping production. You will find it in the building window.]]))
+      p(_([[As you can see, ferries can be produced quite quickly, but you don't need to worry about wasted materials, because ferry yards normally only produce them on demand, when there are unserviced waterways.]])) ..
+      p(_([[As long as a ferry services a waterway, its lifetime is unlimited, but unemployed ferries will rot away and eventually sink.]]))
    ),
    h = messagebox_h_step(-3)
 }

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-01 02:43+0000\n"
+"POT-Creation-Date: 2024-03-04 03:06+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
 "Last-Translator: Gregers K-Hansen <gregers86@me.com>, 2021\n"
 "Language-Team: Norwegian Bokmål (http://app.transifex.com/widelands/widelands/language/nb/)\n"
@@ -754,14 +754,16 @@ msgid "Open the ‘Configure economy’ window."
 msgstr "Åpne 'Konfigurer økonomi' -vinduet."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:462
-msgid "The window can be accessed by clicking on any flag you own."
-msgstr "Vinduet kan åpnes ved å trykke på hvilket som helst flagg du eier."
+msgid ""
+"The window can be accessed by clicking on any flag you own or from warehouse"
+" windows."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:467
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:480
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:495
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:504
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:524
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:482
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:497
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:526
 msgid "Economy options"
 msgstr "Økonomialternativer"
 
@@ -782,26 +784,39 @@ msgstr "Nå skal jeg fortelle deg hvordan du kan fastslå hvor mange varer du ø
 msgid "This is the icon."
 msgstr "Dette er ikonet."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:483
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:474
+msgid "The same button is also available in warehouse windows."
+msgstr ""
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:475
+msgid ""
+"Note that the buttons are called ‘Configure this flag’s/building’s economy’ "
+"for a reason. An economy consists of all buildings and flags connected by "
+"roads, ferries, or ships, so you can have more than one economy if their "
+"flags are not connected by any means of transportation. In that case, your "
+"separate economies can have different settings for wares."
+msgstr ""
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:485
 msgid ""
 "This window looks similar to the stock window, but it has additional buttons"
 " at the bottom."
 msgstr "Dette vinduet ser likt ut som lager-vinduet, men det har fler knapper i bunn."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:484
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:486
 msgid ""
 "You first have to select one or more wares (you can also left-click and "
 "drag). Then you can set the desired target quantity for the selected wares."
 msgstr "Du må først velge en eller fler varer (du kan også venstre-trykke og dra). deretter kan du velge et foretrukket antall for de valgte varene."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:485
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:487
 msgid ""
 "Most buildings will only produce something when the stock level in your "
 "warehouses falls below the target quantity, so you should indicate the "
 "reserve you want to stockpile."
 msgstr "De fleste bygninger vil kun produsere noe når lagernivået i varehuset faller under det valgte antallet, så du bør indikere reservene du vil ha på lager."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:487
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:489
 msgid ""
 "An example: the default value for scythes is 1. If you build a farm, a "
 "carrier will take a scythe and become a farmer. Then there will be no "
@@ -809,7 +824,7 @@ msgid ""
 "start producing another one."
 msgstr "Et eksempel: normalverdien for ljå er 1. Om du bygger en gård, vil en arbeider ta en ljå og bli en bonde. Deretter vil det ikke være fler ljåer, men det valgte antallet er 1, derfor vil din verktøysmed produsere en til."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:489
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:491
 msgid ""
 "If you build two farms, only one of them will start working immediately. The"
 " second farm will have to wait for its worker, who will lack a scythe. If "
@@ -817,7 +832,7 @@ msgid ""
 "available and both farms would have been able to start working right away."
 msgstr "Om du bygger to gårder, vil kun en starte å jobbe øyeblikkelig. Den andre gården må vente på en arbeider, som mangler en ljå. Om du hadde satt antallet til 2 før, ville 2 ljåer vært tilgjengelig og begge gårdene ville kunnet starte produksjon med en gang."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:497
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:499
 msgid ""
 "Stockpiling wares is a double-edged sword. On the one hand, wares in stock "
 "are useful to buffer temporary fluctuations in your economy, which tend to "
@@ -828,14 +843,14 @@ msgid ""
 "economy. When in doubt, lean towards having some extra reserves."
 msgstr ""
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:498
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:500
 msgid ""
 "To ease the process of switching between different economic situations, you "
 "can save and apply economy profiles at the bottom of the economy options "
 "window. A profile for stockpiling and one for efficiency are preset there."
 msgstr ""
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:508
 msgid ""
 "Most of the time, the economy options are a useful tool to ensure that "
 "resources are not wasted to produce wares your economy does not actually "
@@ -844,7 +859,7 @@ msgid ""
 "the target of a ware to infinite, so that it will always be produced."
 msgstr ""
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:507
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:509
 msgid ""
 "The same button can also be found in the building window of production "
 "sites. There, it causes only this one site to produce indefinitely, "
@@ -853,36 +868,36 @@ msgid ""
 "there are plenty in stock far away in your homeland."
 msgstr ""
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:513
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:515
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:517
 msgid "Produce 20 marble columns"
 msgstr "Produser 20 marmorsøyler"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:516
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:518
 msgid ""
 "To be prepared for additional fortifications, you should produce 20 marble "
 "columns."
 msgstr "For å være forberedt på enda en festning, bør du produsere 20 marmorsøyler."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:517
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:519
 msgid ""
 "Your stonemason will not produce marble columns when they are not needed. "
 "You have to increase the target quantity."
 msgstr "Din stenhugger vil ikke produsere marmorsøyler når de ikke trengs. Du må øke verdiantallet."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:518
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:520
 msgid ""
 "To do so, click on any flag and choose ‘Configure economy’. In this window, "
 "you can decide how many wares of each type you wish to have in stock."
 msgstr "For å gjøre dette, trykk på et flagg og velg ' konfigurer økonomi'. I dette vinduet, kan du velge hvor mange varer av hver type du ønsker å ha på lager."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:519
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:521
 msgid ""
 "Sometimes, you will need many wares at the same time quickly – faster than "
 "they can be produced. In this case, it is good to have enough on reserve."
 msgstr "Av og til, vil du trenge mange av samme type vare raskt – fortere enn de kan produseres. I dette tilfellet, er det lønnsomt å ha en i reserve."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:527
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:529
 msgid ""
 "By changing the target quantity, you can therefore decide which wares/tools "
 "your resources (in this case: iron) should be turned into or whether you "
@@ -890,86 +905,86 @@ msgid ""
 "for."
 msgstr "Ved å endre verdiantallet, kan du derfor velge hvilke varer/verktøy dine ressurser (i dette tilfellet: jern) skal bli laget til eller om du ønsker å ta vare på jernet og vente til du vet hva du trenger det til."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:528
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:530
 msgid ""
 "Only buildings that consume wares care about this setting. Buildings that "
 "produce wares for free (e.g. your farms or wells) will always keep working."
 msgstr "Kun bygninger som bruker varer brys seg om denne instillingen. Bygninger som produserer varer gratis (f.eks gård eller brønn) vil alltid fortsette å arbeide."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:530
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:532
 msgid ""
 "Now let’s try it out: the current target quantity for marble columns is 10. "
 "Increase it to be prepared in case you will have to build up your "
 "fortifications quickly."
 msgstr "La oss prøve det ut: det nåværende verdiantallet for marmorsøyler er 10. øk dette for å være forberedt, og i tilfelle du behøver å bygge en festning fort."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:537
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:539
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:541
 msgid "Bring 20 marble columns to the front line"
 msgstr "Bring 20 marmorsøyler til frontlinjen"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:540
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:542
 msgid ""
 "Bring all of the 20 marble columns to the warehouse near the front line."
 msgstr "Bring alle de 20 marmorsøylene til varehuset nær frontlinjen."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:542
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:544
 msgid ""
 "To achieve this, you will have to do two things. First, set a preference for"
 " marble columns in the desired warehouse. All marble columns produced in the"
 " future will be brought there if possible."
 msgstr "For å oppnå dette, må du gjøre to ting. Først, velg en preferanse for marmorsøyler i det ønskelige varehus. Alle marmorsøyler som produseres i fremtiden vil bli bragt dit om det er mulig."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:544
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:546
 msgid ""
 "Then, to move the marble columns out of your headquarters, you will have to "
 "click on the remove button there."
 msgstr "Deretter, for å flytte marmorsøylene ut av hovedkvarteret, må du trykke på fjern-knappen der."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:550
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:552
 msgid "Warehouse Preferences"
 msgstr "Varehuspreferanser"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:552
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:554
 msgid "Bring the marble columns to the front line"
 msgstr "Bring marmorsøylene til frontlinjen"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:554
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:556
 msgid ""
 "The production of marble columns is working fine now, but it would be great "
 "if they were stored where we need them."
 msgstr "Produksjonen av marmorsøyler virker fint nå, men det ville vært bra om ble lagret der vi trenger dem."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:555
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:557
 msgid ""
 "Normally, produced wares are brought to the closest warehouse if they are "
 "not needed elsewhere. In this case, this means our headquarters. But we "
 "would like to have them in the warehouse near our fortresses."
 msgstr "Vanligvis blir produserte varer bragt til det nærmeste varehuset om det ikke er behov et annet sted. I dette tilfellet, betyr det vårt hovedkvarter. Men vi ønsker å ha dem i varehuset nær festningen vår."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:556
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:558
 msgid ""
 "Every warehouse has four buttons to set the preference. If you move your "
 "mouse pointer over them, you will see tooltips that explain what the buttons"
 " do."
 msgstr "Ethvert varehus har fire knapper for å sette preferansene. Om du beveger musepekeren over dem, vil du se tips som forklarer hva knappene gjør."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:562
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:564
 msgid "Borders Secured"
 msgstr "Grensene sikret"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:564
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:566
 msgid "We’re safe now"
 msgstr "Vi er trygge nå"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:566
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:568
 msgid ""
 "Great. We now have enough marble columns so that in case of an aggressor, we"
 " can build up our fortifications. But I do not think that that will be "
 "necessary. So far, no enemy has shown up."
 msgstr "Herlig. Vi har nå nok marmorsøyler, så i tilfelle en angriper kan vi bygge vår festning. Men jeg tror ikke det blir nødvendig. Enn så lenge, har ingen fiender dukket opp."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:567
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:569
 msgid ""
 "I hope I could teach you how you can control the economy in Widelands. There"
 " are many options and they can be confusing at first. Even if you’ve only "
@@ -978,7 +993,7 @@ msgid ""
 "this tutorial and learn the rest!"
 msgstr "Jeg håper jeg kunne lære deg hvordan du kan kontrollere økonomien i Widelands. Det er mange valg og de kan være forvirrende i begynnelsen. Selv om du kun forstod noen få konsepter, må du ikke gi opp. Prøv dem ut i noen spill, bli kjent med dem og erfar mulighetene. Deretter, gå tilbake til denne opplæringen og lær resten!"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:569
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:571
 msgid ""
 "This was the last tutorial I had prepared for you. I’ve now taught you "
 "everything I know. There are still secrets hidden in this world even I don’t"

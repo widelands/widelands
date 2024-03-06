@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-02-26 02:28+0000\n"
+"POT-Creation-Date: 2024-03-02 02:23+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Pavol Gono, 2024\n"
 "Language-Team: Slovak (http://app.transifex.com/widelands/widelands/language/sk/)\n"
@@ -3922,11 +3922,11 @@ msgstr ""
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
-#: ../../src/scripting/lua_ui.cc:1153 ../../src/wui/interactive_base.cc:311
+#: ../../src/scripting/lua_ui.cc:1158 ../../src/wui/interactive_base.cc:311
 msgid "Plugin Error"
 msgstr ""
 
-#: ../../src/scripting/lua_ui.cc:1154 ../../src/wui/interactive_base.cc:312
+#: ../../src/scripting/lua_ui.cc:1159 ../../src/wui/interactive_base.cc:312
 #, c-format
 msgid ""
 "Error when running plugin:\n"
@@ -4019,7 +4019,7 @@ msgstr "Nahrávanie…"
 
 #: ../../src/ui_basic/spinbox.cc:151
 msgid "Decrease the value"
-msgstr ""
+msgstr "Znížiť hodnotu"
 
 #. * TRANSLATORS: You may want to treat this as "Decrease the value %s", you
 #. get
@@ -4031,7 +4031,7 @@ msgstr "Znížiť hodnotu o %s"
 
 #: ../../src/ui_basic/spinbox.cc:164
 msgid "Increase the value"
-msgstr ""
+msgstr "Zvýšiť hodnotu"
 
 #. * TRANSLATORS: You may want to treat this as "Increase the value %s", you
 #. get
@@ -6127,7 +6127,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launch_game.cc:374
 msgid "Give all players permanent vision of the entire map"
-msgstr ""
+msgstr "Všetci hráči dostanú trvalú viditeľnosť celej mapy"
 
 #: ../../src/ui_fsmenu/launch_game.cc:395
 msgid "Naval warfare is set by the scenario"
@@ -8438,7 +8438,7 @@ msgstr "(neaktívne)"
 #. * TRANSLATORS: The first placeholder is the stock amount of a ware/worker,
 #. and the second is an
 #. * icon indicating a trend. Very little space is available.
-#: ../../src/wlapplication_options.cc:1496 ../../src/wui/waresdisplay.cc:548
+#: ../../src/wlapplication_options.cc:1496 ../../src/wui/waresdisplay.cc:637
 #, c-format
 msgid "%1$s%2$s"
 msgstr ""
@@ -9948,7 +9948,7 @@ msgstr "Vojaci"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:319 ../../src/wui/stock_menu.cc:40
-#: ../../src/wui/ware_statistics_menu.cc:152 ../../src/wui/waresdisplay.cc:81
+#: ../../src/wui/ware_statistics_menu.cc:152 ../../src/wui/waresdisplay.cc:84
 msgid "Stock"
 msgstr "Zásoby"
 
@@ -11030,29 +11030,29 @@ msgstr "Pracovníci čakajúci na nalodenie"
 msgid "Expedition"
 msgstr "Výprava"
 
-#: ../../src/wui/waresdisplay.cc:542
+#: ../../src/wui/waresdisplay.cc:631
 msgid "↓"
 msgstr "↓"
 
-#: ../../src/wui/waresdisplay.cc:544
+#: ../../src/wui/waresdisplay.cc:633
 msgid "↑"
 msgstr "↑"
 
-#: ../../src/wui/waresdisplay.cc:545
+#: ../../src/wui/waresdisplay.cc:634
 msgid "="
 msgstr "="
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:583
+#: ../../src/wui/waresdisplay.cc:672
 msgid "%1%k"
 msgstr ""
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 5M = 5,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:586
+#: ../../src/wui/waresdisplay.cc:675
 msgid "%1%M"
 msgstr ""
 
@@ -11060,7 +11060,7 @@ msgstr ""
 #. 5,000,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:589
+#: ../../src/wui/waresdisplay.cc:678
 msgid "%1%G"
 msgstr ""
 
