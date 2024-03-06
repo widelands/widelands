@@ -29,3 +29,10 @@ function remove_all_rocks(fields, g_sleeptime)
       end
    end
 end
+
+-- We have to update the serial for every check because it can change on save and reload
+function lumberjack_window()
+   if first_lumberjack_field.immovable == nil then return nil end
+   local window_name = string.bformat("building_window_%u", first_lumberjack_field.immovable.serial)
+   return wl.ui.MapView().windows[window_name]
+end

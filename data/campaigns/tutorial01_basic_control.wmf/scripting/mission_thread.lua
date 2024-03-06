@@ -100,6 +100,9 @@ function build_lumberjack()
 
    sleep(500)
 
+   -- We will need this for its window
+   first_lumberjack_field.immovable.destruction_blocked = true
+
    if wl.ui.MapView().is_building_road then
       campaign_message_box(lumberjack_message_03a)
    else
@@ -151,26 +154,21 @@ function build_lumberjack()
    scroll_to_field(first_lumberjack_field)
    mouse_to_field(first_lumberjack_field)
 
-   local construction_window_name = string.bformat("building_window_%u",
-                                                   first_lumberjack_field.immovable.serial)
-   while not wl.ui.MapView().windows[construction_window_name] do sleep(100) end
+   while lumberjack_window() == nil do sleep(100) end
    -- demonstrate work area button
    blocker = UserInputDisabler:new()
    sleep(1000)
    campaign_message_box(lumberjack_message_07b, 1000)
-   click_on_panel(wl.ui.MapView().windows[construction_window_name].buttons.workarea)
+   click_on_panel(lumberjack_window().buttons.workarea)
    blocker:lift_blocks()
-
-   while wl.ui.MapView().windows[construction_window_name] do sleep(100) end
-   -- if the construction site is replaced by the finished building, then the window is replaced,
-   -- so this should be fulfilled
    set_objective_done(o)
-   sleep(3000)
+
+   sleep(10*1000) -- let the player experiment a bit with the window
 
    campaign_message_box(lumberjack_message_08)
    show_item_from_dropdown("dropdown_menu_gamespeed", 1)
 
-   sleep(20*1000) -- let the player experiment a bit with the window
+   sleep(20*1000) -- let the player experiment with the gamespeed even if the building is ready
 
    while #plr:get_buildings("barbarians_lumberjacks_hut") < 1 do sleep(300) end
 

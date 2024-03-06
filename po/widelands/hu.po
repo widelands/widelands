@@ -7028,7 +7028,7 @@ msgstr "Jobb egérgombos térképmozgatás irányának megfordítása"
 
 #: ../../src/ui_fsmenu/options.cc:367
 msgid "Animate automatic map movements"
-msgstr "Automatikus térkép mozgások animálása."
+msgstr "Automatikus térkép mozgások animálása"
 
 #: ../../src/ui_fsmenu/options.cc:376
 msgid "Teach me how to play"
@@ -7328,11 +7328,11 @@ msgstr "Nincs legutóbb szerkesztett térkép"
 
 #: ../../src/wlapplication.cc:867
 msgid "No last saved replay."
-msgstr "Nincs legutóbbi visszajátszás"
+msgstr "Nincs legutóbbi visszajátszás."
 
 #: ../../src/wlapplication.cc:869
 msgid "No last saved game."
-msgstr "Nincs legutóbbi mentett játék"
+msgstr "Nincs legutóbbi mentett játék."
 
 #: ../../src/wlapplication.cc:879
 #, c-format
@@ -10602,7 +10602,7 @@ msgstr "Felderítő expedíciók megjelenítése"
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:598
 msgid "Show expeditions that have found a port space or are founding a colony"
-msgstr "Azon expedíciók megjelenítése, melyek találtak kikötőhelyet, vagy kolóniát alapítanak."
+msgstr "Azon expedíciók megjelenítése, melyek találtak kikötőhelyet, vagy kolóniát alapítanak"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:603

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-01 02:43+0000\n"
+"POT-Creation-Date: 2024-03-04 03:06+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
 "Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015\n"
 "Language-Team: Hungarian (http://app.transifex.com/widelands/widelands/language/hu/)\n"
@@ -758,14 +758,16 @@ msgid "Open the ‘Configure economy’ window."
 msgstr "Nyisd meg a „Gazdaság beállításai” ablakot!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:462
-msgid "The window can be accessed by clicking on any flag you own."
-msgstr "Az ablak elérhető bármelyik zászlódra kattintva."
+msgid ""
+"The window can be accessed by clicking on any flag you own or from warehouse"
+" windows."
+msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:467
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:480
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:495
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:504
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:524
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:482
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:497
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:526
 msgid "Economy options"
 msgstr "Gazdaság beállításai"
 
@@ -786,26 +788,39 @@ msgstr "Most megmutatom, hogyan állíthatod be, hogy miből mennyit szeretnél.
 msgid "This is the icon."
 msgstr "Ez az az ikon."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:483
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:474
+msgid "The same button is also available in warehouse windows."
+msgstr ""
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:475
+msgid ""
+"Note that the buttons are called ‘Configure this flag’s/building’s economy’ "
+"for a reason. An economy consists of all buildings and flags connected by "
+"roads, ferries, or ships, so you can have more than one economy if their "
+"flags are not connected by any means of transportation. In that case, your "
+"separate economies can have different settings for wares."
+msgstr ""
+
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:485
 msgid ""
 "This window looks similar to the stock window, but it has additional buttons"
 " at the bottom."
 msgstr "Ez az ablak hasonlít a készletek ablakra, de több gomb van az alján."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:484
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:486
 msgid ""
 "You first have to select one or more wares (you can also left-click and "
 "drag). Then you can set the desired target quantity for the selected wares."
 msgstr "Először válassz ki egy vagy több árut (a bal egérgombot nyomva tartva húzással is)! Ezután be tudod állítani a kiválasztott áruk kívánt mennyiségét."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:485
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:487
 msgid ""
 "Most buildings will only produce something when the stock level in your "
 "warehouses falls below the target quantity, so you should indicate the "
 "reserve you want to stockpile."
 msgstr "A legtöbb épület csak addig termel árut, amíg a raktárakban lévő árukészlet az adott áruból el nem éri a kívánt mennyiséget. Tehát itt a kívánt tartalék mennyiségét tudod beállítani."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:487
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:489
 msgid ""
 "An example: the default value for scythes is 1. If you build a farm, a "
 "carrier will take a scythe and become a farmer. Then there will be no "
@@ -813,7 +828,7 @@ msgid ""
 "start producing another one."
 msgstr "Pl. a kasza alapértelmezett értéke 1. Ha építesz egy földbirtokot, egy hordár elveszi a kaszát, és földművessé válik. Így nem marad több kasza, de mivel a célérték 1, a szerszámkovács készíteni fog egy újat."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:489
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:491
 msgid ""
 "If you build two farms, only one of them will start working immediately. The"
 " second farm will have to wait for its worker, who will lack a scythe. If "
@@ -821,7 +836,7 @@ msgid ""
 "available and both farms would have been able to start working right away."
 msgstr "Ha két földbirtokot építesz, csak az egyik tud egyből munkához látni. A másik hiába fogja várni a munkást, mert nem jut neki kasza. Ha korábban 2-re állítottad volna a célértéket, akkor lett volna raktáron két kasza, így mindkét földbirtok egyből munkához láthatott volna."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:497
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:499
 msgid ""
 "Stockpiling wares is a double-edged sword. On the one hand, wares in stock "
 "are useful to buffer temporary fluctuations in your economy, which tend to "
@@ -832,14 +847,14 @@ msgid ""
 "economy. When in doubt, lean towards having some extra reserves."
 msgstr "A raktárkészlet kétélű fegyver. Egyfelől az elraktározott áruk segítenek a termelésed elkerülhetetlen hullámzásainak kisimításában. Másfelől viszont ha egy áru a raktárban pihen ahelyett, hogy felhasználnák valamire, az pazarlás. A tökéletes gazdaság kialakításának egyik legnagyobb kihívása az, hogy megtaláld az egyensúlyt a pazarló raktározás és az ellátási láncaid hibátlan ütemezése között. Ha bizonytalan vagy, inkább engedj meg kicsivel nagyobb raktárkészletet."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:498
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:500
 msgid ""
 "To ease the process of switching between different economic situations, you "
 "can save and apply economy profiles at the bottom of the economy options "
 "window. A profile for stockpiling and one for efficiency are preset there."
 msgstr "Hogy könnyebben tudj váltani a különböző gazdasági helyzetek igényei között, a „Gazdaság beállításai” ablak alján el tudod menteni és vissza tudod állítani a célbeállításokat. Két beállítás van előre elmentve: egy a felhalmozáshoz és egy a hatékonysághoz."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:506
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:508
 msgid ""
 "Most of the time, the economy options are a useful tool to ensure that "
 "resources are not wasted to produce wares your economy does not actually "
@@ -848,7 +863,7 @@ msgid ""
 "the target of a ware to infinite, so that it will always be produced."
 msgstr "A gazdaság beállításai általában azért hasznosak, hogy biztosítsák, hogy ne pazarolj nyersanyagokat olyan árukra, amikre a gazdaságodnak nincs is éppen szüksége. Néha viszont szükséged lehet arra, hogy bizonyos árukból hatalmas készletet halmozz fel. Ehhez a gazdaság beállításai ablakban be tudsz állítani végtelen mennyiséget is az adott áruból, hogy ennek soha ne álljon le a termelése."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:507
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:509
 msgid ""
 "The same button can also be found in the building window of production "
 "sites. There, it causes only this one site to produce indefinitely, "
@@ -857,36 +872,36 @@ msgid ""
 "there are plenty in stock far away in your homeland."
 msgstr "Ugyanez a gomb megtalálható a termelő épületek ablakaiban is. Itt csak az adott épületre vonatkozóan tudod beállítani, hogy állandóan termeljen, a gazdaság beállításaitól függetlenül. Ez akkor hasznos, ha pl. az újonnan meghódított területeken akarsz építőanyagokat termelni, miközben távol, a területed belsejében bőségesen állnak raktáron."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:513
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:515
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:517
 msgid "Produce 20 marble columns"
 msgstr "Márványoszlopok készítése"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:516
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:518
 msgid ""
 "To be prepared for additional fortifications, you should produce 20 marble "
 "columns."
 msgstr "Készíts 20 márványoszlopot, hogy készen állj további erődítmények építésére!"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:517
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:519
 msgid ""
 "Your stonemason will not produce marble columns when they are not needed. "
 "You have to increase the target quantity."
 msgstr "A kőfaragód nem fog márványoszlopokat készíteni, amikor nincs rájuk szükség. Meg kell emelned a célmennyiséget."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:518
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:520
 msgid ""
 "To do so, click on any flag and choose ‘Configure economy’. In this window, "
 "you can decide how many wares of each type you wish to have in stock."
 msgstr "Ehhez kattints egy zászlóra és válaszd a zászlót tartalmazó gazdaság beállítását! Ebben az ablakban be tudod állítani, hogy melyik áruból mennyit szeretnél készleten tartani."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:519
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:521
 msgid ""
 "Sometimes, you will need many wares at the same time quickly – faster than "
 "they can be produced. In this case, it is good to have enough on reserve."
 msgstr "Van, amikor gyorsan van szükséged sok árura – gyorsabban, mint ahogy elő tudod állítani. Ilyenkor jó, ha van elég tartalékod."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:527
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:529
 msgid ""
 "By changing the target quantity, you can therefore decide which wares/tools "
 "your resources (in this case: iron) should be turned into or whether you "
@@ -894,86 +909,86 @@ msgid ""
 "for."
 msgstr "A célmennyiség beállításával így el tudod dönteni, hogy a nyersanyagokból, pl. vasból milyen árukat vagy szerszámokat készítsenek, vagy inkább halmozzák fel magát a vasat későbbre, amikor kiderül, hogy mihez lesz rá szükség."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:528
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:530
 msgid ""
 "Only buildings that consume wares care about this setting. Buildings that "
 "produce wares for free (e.g. your farms or wells) will always keep working."
 msgstr "Ez a beállítás csak azoknak az épületeknek fontos, amelyek árut fogyasztanak a termeléshez. Azok az épületek, amelyek ingyen dolgoznak (pl. a földbirtokok vagy a kutak), mindig folyamatosan termelnek."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:530
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:532
 msgid ""
 "Now let’s try it out: the current target quantity for marble columns is 10. "
 "Increase it to be prepared in case you will have to build up your "
 "fortifications quickly."
 msgstr "Akkor most próbáljuk ki! A márványoszlop célmennyisége jelenleg 10. Növeld meg, hogy készen állj, ha esetleg gyorsan kellene erődítményeket építened!"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:537
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:539
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:541
 msgid "Bring 20 marble columns to the front line"
 msgstr "Márványoszlopok átszállítása a frontvonalhoz"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:540
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:542
 msgid ""
 "Bring all of the 20 marble columns to the warehouse near the front line."
 msgstr "Hozd mind a 20 márványoszlopot a frontvonal közelében álló raktárba!"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:542
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:544
 msgid ""
 "To achieve this, you will have to do two things. First, set a preference for"
 " marble columns in the desired warehouse. All marble columns produced in the"
 " future will be brought there if possible."
 msgstr "Ehhez két dolgot kell tenned. Először állítsd be, hogy a márványoszlopokat lehetőleg a kívánt raktárban tárolják! Így a jövőben készülő márványoszlopokat oda fogják szállítani, ha lehetséges."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:544
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:546
 msgid ""
 "Then, to move the marble columns out of your headquarters, you will have to "
 "click on the remove button there."
 msgstr "Ezután ahhoz, hogy a márványoszlopokat elszállítsák a főhadiszállásodról, ott is be kell állítanod, hogy távolítsák el őket onnan."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:550
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:552
 msgid "Warehouse Preferences"
 msgstr "Raktárbeállítások"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:552
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:554
 msgid "Bring the marble columns to the front line"
 msgstr "Hozd a márványoszlopokat a frontvonalhoz!"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:554
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:556
 msgid ""
 "The production of marble columns is working fine now, but it would be great "
 "if they were stored where we need them."
 msgstr "A márványoszlopok termelése szépen halad, de jó lenne, ha ott tárolnák őket, ahol szükség lesz rájuk."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:555
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:557
 msgid ""
 "Normally, produced wares are brought to the closest warehouse if they are "
 "not needed elsewhere. In this case, this means our headquarters. But we "
 "would like to have them in the warehouse near our fortresses."
 msgstr "Alapesetben a megtermelt árukat a legközelebbi raktárba szállítják, ha nincs máshol szükség rájuk. Ebben az esetben ez a főhadiszállásunk, de mi azt szeretnénk, ha az erődök közelében álló raktárba kerülnének."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:556
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:558
 msgid ""
 "Every warehouse has four buttons to set the preference. If you move your "
 "mouse pointer over them, you will see tooltips that explain what the buttons"
 " do."
 msgstr "Minden raktárnak négy gombja van az áruk tárolásának beállításához. Ha rájuk viszed az egérmutatót, a megjelenő eszköztippek megmutatják, melyik mire való."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:562
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:564
 msgid "Borders Secured"
 msgstr "Határok biztosítva"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:564
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:566
 msgid "We’re safe now"
 msgstr "Biztonságban vagyunk"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:566
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:568
 msgid ""
 "Great. We now have enough marble columns so that in case of an aggressor, we"
 " can build up our fortifications. But I do not think that that will be "
 "necessary. So far, no enemy has shown up."
 msgstr "Nagyszerű! Most már van elég márványoszlopunk, így támadás esetén tudunk erődítményeket építeni. De nem hiszem, hogy szükség lesz rá. Még mindig nem bukkant fel az ellenség."
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:567
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:569
 msgid ""
 "I hope I could teach you how you can control the economy in Widelands. There"
 " are many options and they can be confusing at first. Even if you’ve only "
@@ -982,7 +997,7 @@ msgid ""
 "this tutorial and learn the rest!"
 msgstr "Remélem meg tudtam tanítani, hogy hogyan irányíthatod a gazdaságot a Widelandsben. Sok a lehetőség, és elsőre nehéz lehet eligazodni. Ha most még csak néhány témát értettél is meg belőle, akkor se add fel! Próbáld ki ezeket néhány játékban, így megszokhatod őket és kitapasztalhatod a lehetőségeket. Ezután térj vissza ehhez az oktatójátékhoz, és tanuld meg a többit is!"
 
-#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:569
+#: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:571
 msgid ""
 "This was the last tutorial I had prepared for you. I’ve now taught you "
 "everything I know. There are still secrets hidden in this world even I don’t"
