@@ -63,22 +63,22 @@ msgstr "Tento tutoriál objasní riadenie armády aj výcvikových stavieb a obo
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:14
 msgid "Easy."
-msgstr "Ľahké."
+msgstr "Ľahká."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:20
 msgid "Medium."
-msgstr "Stredné"
+msgstr "Stredná."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:25
 msgid "Hard."
-msgstr "Ťažké."
+msgstr "Ťažká."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:30
 msgid "Challenging."
-msgstr "Náročné."
+msgstr "Náročná."
 
 #. TRANSLATORS: The name of a Barbarian campaign
 #: ../../data/campaigns/campaigns.lua:43

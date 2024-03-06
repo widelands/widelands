@@ -68,7 +68,15 @@ AttackWindow::AttackWindow(InteractivePlayer& parent,
                            Widelands::MapObject* target_building_or_ship,
                            const Widelands::Coords& target_coords,
                            bool fastclick)
-   : UI::UniqueWindow(&parent, UI::WindowStyle::kWui, "attack", &reg, 0, 0, _("Attack")),
+   : UI::UniqueWindow(&parent,
+                      UI::WindowStyle::kWui,
+                      target_building_or_ship != nullptr ?
+                         format("attack_%u", target_building_or_ship->serial()) :
+                         format("attack_%d_%d", target_coords.x, target_coords.y),
+                      &reg,
+                      0,
+                      0,
+                      _("Attack")),
      serial_(next_serial_++),
      iplayer_(parent),
      map_(iplayer_.player().egbase().map()),
