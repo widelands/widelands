@@ -99,7 +99,7 @@ intro_1 = {
       _([[Home at last! I cannot put into words the joy I feel at seeing my homelands again… nor the impatience at being so close and yet so far away.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Claus Lembeck – Introduction 1
-      _([[For once the sea was mild and permitted swift passage back South. Henneke and me both spent the longest part of the voyage standing at the ship’s bow looking forward to our return. Reebaud at first stood at the stern and looked back the same way as we did look ahead. Cleary he loves his new home as much as I do my old one. I am sure the wish to return alive and a victor will inspire his soldiers to fight as hard as my own troops will strive to reclaim our home.]]))
+      _([[For once the sea was mild and permitted swift passage back South. Henneke and me both spent the longest part of the voyage standing at the ship’s bow looking forward to our return. Reebaud at first stood at the stern and looked back the same way as we did look ahead. Clearly he loves his new home as much as I do my old one. I am sure the wish to return alive and a victor will inspire his soldiers to fight as hard as my own troops will strive to reclaim our home.]]))
 }
 
 intro_2 = {
