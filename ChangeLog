@@ -1,6 +1,6 @@
 [TOC]
 
-## Post-1.1 until [git e058662](https://codeberg.org/wl/widelands/commit/e058662c90381ac7dc549e0bafde3890111d776d)
+## Release 1.2
 
 ### Animations, Icons and Overlays
 
@@ -14,10 +14,7 @@
 - Add high resolution images for most tribe immovables (#6137)
 - High resolution images of basic wares from blender models (CB #4576 / GH #6235)
 - Bigger `menu.png` for Amazon ship (#6143)
-
-
-### Sounds and Music
-
+- Optimize images with PNGQuant (CB #4754 / GH #6392)
 
 
 ### Tutorials and Campaigns
@@ -29,6 +26,9 @@
 - Tutorial 01 fixes (#5909)
 - Fix Food Production objective in first atlantean campaign (#6081)
 - Fix changed tab name in encyclopedia tutorial (CB #4707 / GH #6344)
+- Fix building window name and translation regressions in emp04 and tut01 (GH #6380 / CB #4743)
+- Make open building window checks in campaigns saveloading resistant and other campaign fixes (CB #4747 / GH #6385)
+- Campaign consistency fixes (CB #4755 / GH #6393)
 
 
 ### Scripting
@@ -61,6 +61,7 @@
 - Implement `walk=<direction>` in worker programs (CB #4467 / GH #6149)
 - Pass correct parameter to lua_typename() (CB #4646 / GH #6282)
 - Add Lua APIs for Missing Bob Types (#6125): `PinnedNote`, `NavalInvasionBase`, `ShipFleetYardInterface`, `FerryFleetYardInterface`
+- Fix icons on dropdowns in Lua API (CB #4742 / GH #6379)
 
 
 ### Maps
@@ -108,6 +109,7 @@
 - Save and load garrison settings (#5983)
 - Remove v1.0 compatibility code (CB #4615 / GH #6276)
 - Allow loading last savegame/replay/edited map from the command line (CB #4470 / GH #6153)
+- Remove invalid NavalInvasionBase cleanup assert (CB #4723 / GH #6360)
 
 
 ### AI
@@ -188,6 +190,7 @@
 - Warships don't detect own ports as portspaces (#6088)
 - Guard against invalid ship battle situations (#6140)
 - Track warship soldier requests (#6122)
+- Initialise `Game::naval_warfare_allowed_` as `false` (CB #4749 / GH #6387)
 
 
 ### User Interface
@@ -330,6 +333,9 @@
 - Make naval warfare a game flag, disabled by default (CB #4547 / GH #6205)
 - Don't send "known portspace" messages for ship underway to destination (CB #4655 / GH #6292)
 - Show total number of ships in seafaring stats menu (CB #4685 / GH #6322)
+- Fix deadlock in mutex responsiveness code (CB #4726 / GH #6363)
+- Use unique names for map object windows (CB #4737 / GH #6374)
+- Speed up Wares Display Drawing (GH #6382 / CB #4744)
 
 
 ### Internationalization
@@ -339,6 +345,9 @@
 - Keep PO and POT files in sync in translations updates (#6027)
 - Translations update CI: Commit pure translations separately (#6064)
 - Make spinbox current value and change-by value translatable separately (CB #4612 / GH #6273)
+- Don't assemble partial string for detected portspace tooltip (CB #4718 / GH #6355)
+- Turn confusing translators comment into helpful (CB #4728 / GH #6364)
+
 
 ### Help and Documentation
 
@@ -364,6 +373,9 @@
 - Lua doc: explain `wl.Game().real_speed` a bit better (CB #4665 / GH #6302)
 - Lua styles documentation (CB #4704 / GH #6341)
 - Add images to theme documentation for fonts and buttons (CB #4695 / GH #6332)
+- Lua doc about playernumber fixed (CB #4535 / GH #6193)
+- Turn function mentions into links in richtext.lua examples section (CB #4738 / GH #6375)
+- Clarify use of spinbox parameters from Lua (CB #4734 / GH #6371)
 
 
 ### Editor
@@ -415,6 +427,7 @@
 - Game Chat Accessibility Tweaks (#6127)
 - Sanitize network game player names more thoroughly (#6132)
 - Fix calling emergency save from GameHost::disconnect_client() (CB #4597 / GH #6258)
+- Set timeout for add-ons network I/O (CB #4739 / GH #6376)
 
 
 ### Build System
@@ -425,7 +438,7 @@
 - Fix Clang15 Compiler Warnings (#5629)
 - Replace `sprintf` with `snprintf` (#5651)
 - Switch to C++17 (#5672)
-- CI enhancements (#5682, #5750, #5759. #5761, #5772, #5794, #5799, #5831, #5837, #5845)
+- CI enhancements (#5682, #5750, #5759. #5761, #5772, #5794, #5799, #5831, #5837, #5845, GH #6352 / CB #4715)
 - Fix more clang-tidy checks (#5679, #5689, #5696, #5684, #5695, #5693, #5690, #5694, #5692, #5685, #5688, #5698, #5697, #5686, #5699, #5687, #5691, #5681, #5709)
 - Fix member initializer ambiguity regression
 - Added sharpyuv as new SDL_Image extra lib (#5756)
@@ -474,6 +487,10 @@
 - Update `download_asio.sh` to asio version 1.28.0 (CB #4616 / GH #6277)
 - MinGW dependency system (CB #4653 / GH #6290)
 - Skip CI workflows where nothing changed (CB #4644 / GH #6257, CB #4672 / GH #6309, GH #6320 / CB #4683)
+- Speed up all_tribes tests in the testsuite (GH #6353 / CB #4716)
+- Update MacOS CI (CB #4719 / GH #6356)
+- Regression tests for start and win conditions, fix race regressions (CB #4524 / GH #6182)
+- Add gettext tools to vcpkg dependencies (GH #6389 / CB #4751)
 
 
 ### Other Issues
@@ -503,6 +520,8 @@
     - Detect and break deadlocks
     - Refactor NoteThreadSafeFunction handling
 - Correct naval warfare rebasing artifacts (CB #4699)
+- Fix duplicated setting name for replay shortcuts (CB #4721 / GH #6358)
+- Refactor commandline handling (CB #4471 / GH #6154)
 
 
 ## Release 1.1
