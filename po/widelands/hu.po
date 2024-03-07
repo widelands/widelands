@@ -1200,7 +1200,7 @@ msgstr "Kompok hatótávja:"
 msgid ""
 "Enable ferries, waterways, and ferry yards on this map by setting the "
 "maximum length of waterways for ferries"
-msgstr "A kompok, vízi utak és csónakkészítő műhelyek akkor lesznek használhatók ezen a térképen, ha itt beállítod a vízi utak legnagyobb engedélyezett hosszát."
+msgstr "A kompok, víziutak és csónakkészítő műhelyek akkor lesznek használhatók ezen a térképen, ha itt beállítod a vízi utak legnagyobb engedélyezett hosszát."
 
 #. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
@@ -8939,7 +8939,7 @@ msgstr "Út építése"
 
 #: ../../src/wui/fieldaction.cc:429
 msgid "Build waterway"
-msgstr "Vízi út építése"
+msgstr "Víziút építése"
 
 #: ../../src/wui/fieldaction.cc:437
 msgid "Destroy this flag"
@@ -8975,7 +8975,7 @@ msgstr "Út megsemmisítése"
 
 #: ../../src/wui/fieldaction.cc:503
 msgid "Destroy a waterway"
-msgstr "Vízi út megsemmisítése"
+msgstr "Víziút megsemmisítése"
 
 #: ../../src/wui/fieldaction.cc:523
 msgid "Configure this ocean’s ship fleet"
@@ -9019,7 +9019,7 @@ msgstr "Vissza a félkész úthoz"
 
 #: ../../src/wui/fieldaction.cc:705
 msgid "Cancel road and start building waterway"
-msgstr "Út elvetése, helyette vízi út építése"
+msgstr "Út elvetése, helyette víziút építése"
 
 #: ../../src/wui/fieldaction.cc:709
 msgid "Build roads"
@@ -9027,19 +9027,19 @@ msgstr "Út építése"
 
 #: ../../src/wui/fieldaction.cc:722
 msgid "Cancel waterway"
-msgstr "Vízi út elvetése"
+msgstr "Víziút elvetése"
 
 #: ../../src/wui/fieldaction.cc:724
 msgid "Go to waterway"
-msgstr "Vissza a félkész vízi úthoz"
+msgstr "Vissza a félkész víziúthoz"
 
 #: ../../src/wui/fieldaction.cc:727
 msgid "Cancel waterway and start building road"
-msgstr "Vízi út elvetése, helyette út építése"
+msgstr "Víziút elvetése, helyette út építése"
 
 #: ../../src/wui/fieldaction.cc:730
 msgid "Build waterways"
-msgstr "Vízi utak építése"
+msgstr "Víziutak építése"
 
 #. * TRANSLATORS: Placeholders are the hitpoints and the attack bonus of the
 #. warship.
@@ -9715,7 +9715,7 @@ msgstr "Út hossza: %1$u (%2$u)"
 #: ../../src/wui/interactive_base.cc:949
 #, c-format
 msgid "Waterway length: %1$u (%2$u) / %3$u"
-msgstr "Vízi út hossza: %1$u (%2$u) / %3$u"
+msgstr "Víziút hossza: %1$u (%2$u) / %3$u"
 
 #: ../../src/wui/interactive_base.cc:954
 #, c-format
@@ -9725,7 +9725,7 @@ msgstr "Út hossza: %u"
 #: ../../src/wui/interactive_base.cc:957
 #, c-format
 msgid "Waterway length: %1$u / %2$u"
-msgstr "Vízi út hossza: %1$u / %2$u"
+msgstr "Víziút hossza: %1$u / %2$u"
 
 #: ../../src/wui/interactive_base.cc:1887
 msgid "Failed saving screenshot!"
@@ -9983,7 +9983,7 @@ msgstr "Kompok"
 #. * TRANSLATORS: This is a tool tip for a map tag
 #: ../../src/wui/map_tags.cc:58
 msgid "The map allows building ferries, ferry yards and waterways"
-msgstr "A térképen használhatók kompok, vízi utak és csónakkészítő műhelyek"
+msgstr "A térképen használhatók kompok, víziutak és csónakkészítő műhelyek"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:61 ../../src/wui/minimap.cc:226

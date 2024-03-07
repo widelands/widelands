@@ -3,7 +3,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2023
+# Benedikt Straub <benedikt-straub@web.de>, 2024
 # 
 msgid ""
 msgstr ""
@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-03-04 03:06+0000\n"
 "PO-Revision-Date: 2023-01-04 20:43+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2023\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2024\n"
 "Language-Team: Low German (https://app.transifex.com/widelands/teams/35159/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -169,6 +169,14 @@ msgid ""
 " will inspire his soldiers to fight as hard as my own troops will strive to "
 "reclaim our home."
 msgstr ""
+"Ennelk eenmaal weer de See sachte un wi kunnen fix na Süden seilen. Henneke "
+"un ick hebben dat Meest vun de Fahrt daarmit tobrocht, in de Boog vum Schipp"
+" to stahn un na vörn to uns’ Weerkomen to kieken. Reebaud hett toeerst im "
+"Heck stahn un jüüst so torügg kiekt, as ick na vörn kiekt hebb. Openbaar "
+"leevt he siene neje Heimaad so vööl as ick miene olle leev. Ick bün seker, "
+"de Wunsk, levig un as Winner na Huus to komen, word siene Soldaten daarto "
+"brengen, so machtig to kämpen as miene eegene Soldateree sik ofrackern word,"
+" uns’ Heimaad torüggtonehmen."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../data/campaigns/fri05.wmf/scripting/texts.lua:109
