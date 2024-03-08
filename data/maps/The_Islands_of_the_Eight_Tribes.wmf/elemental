@@ -10,7 +10,7 @@ author="Nytren"
 descr=_"This map is designed for a long game! Eight tribes, three islands, and lots of resources. You have a big advantage by creating colonies and using ferries, but this is not necessary to defeat other players. If you want to delay the fighting, you can turn off the last four players."
 hint=
 theme="summer"
-tags="2teams,4teams,artifacts,ferries,ffa,seafaring,unbalanced"
+tags="2teams,4teams,artifacts,ferries,ffa,seafaring,unbalanced,official"
 addons=
 
 [teams00]

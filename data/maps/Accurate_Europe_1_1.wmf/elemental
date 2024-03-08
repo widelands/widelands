@@ -9,7 +9,7 @@ name=_"Accurate Europe 1.1"
 author="Nytren"
 descr=_"Perfect map for roleplaying historical empires. – Several days of work and many maps have been implemented to create the most accurate Europe map in Widelands! – EASY: Ottoman Empire, Sweden, Russian Empire, Carthage – MEDIUM: French Empire, British Empire, Spain, German Empire, Roman Empire – HARD: Egypt, Poland, Greece"
 hint=_"Wide rivers are navigable to create a ”trade network”. All Players have their own challenges, but are relatively balanced to be playable: – British Empire: create sustainable colonies – Russian Empire: Very large distances …"
-tags="2teams,3teams,4teams,ferries,ffa,seafaring,unbalanced"
+tags="2teams,3teams,4teams,ferries,ffa,seafaring,unbalanced,official"
 addons=
 
 [teams00]
