@@ -1,0 +1,19 @@
+# Automatically created by Widelands 1.2~git26575 (5372ade@master) Release
+
+[global]
+packet_version="1"
+waterway_max_length="3"
+number_of_port_spaces="11"
+
+[port_spaces]
+0="101 60"
+1="94 83"
+2="100 89"
+3="101 113"
+4="92 114"
+5="19 130"
+6="174 133"
+7="119 136"
+8="147 136"
+9="80 137"
+10="51 139"
