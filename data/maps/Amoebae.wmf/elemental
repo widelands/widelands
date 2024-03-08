@@ -7,8 +7,8 @@ map_h="160"
 nr_players="8"
 name=_"Amoebae"
 author="kaputtnik"
-descr=_"You are an Amoebae, expand and conquer all other Amoebae... "
-hint=_"Be aware that you are surrounded with enemies. Disable diplomacy for an easier game, enable it for a more challenging game. Additionally you can define the difficulty by playing against different AI-Teams. Although some players have more space in the beginning i would consider this map balanced."
+descr=_"You are an Amoeba, expand and conquer all other Amoebae …"
+hint=_"Be aware that you are surrounded with enemies. Disable diplomacy for an easier game, enable it for a more challenging game. Additionally you can define the difficulty by playing against different AI teams. Although some players have more space in the beginning, I would consider this map balanced."
 tags="1v1,2teams,3teams,4teams,balanced"
 addons=
 
