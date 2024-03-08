@@ -1,0 +1,12 @@
+# Automatically created by Widelands 1.2~git26575 (5372ade@master) Release
+
+[global]
+packet_version="2"
+player_1="0 120"
+player_2="0 40"
+player_3="80 40"
+player_4="80 120"
+player_5="120 0"
+player_6="40 0"
+player_7="40 80"
+player_8="120 80"
