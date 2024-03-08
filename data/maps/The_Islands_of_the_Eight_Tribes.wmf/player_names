@@ -1,0 +1,68 @@
+# Automatically created by Widelands 1.2~git26575 (5372ade@master) Release
+
+[global]
+packet_version="2"
+
+[player_1]
+name="The western barbarians"
+tribe="barbarians"
+ai=
+closeable="false"
+team="0"
+random="false"
+
+[player_2]
+name="The North Frisians"
+tribe="frisians"
+ai=
+closeable="false"
+team="0"
+random="false"
+
+[player_3]
+name="The old empire"
+tribe="empire"
+ai=
+closeable="false"
+team="0"
+random="false"
+
+[player_4]
+name="The old tribe"
+tribe="amazons"
+ai=
+closeable="false"
+team="0"
+random="false"
+
+[player_5]
+name="The unknown tribe"
+tribe="atlanteans"
+ai=
+closeable="false"
+team="0"
+random="false"
+
+[player_6]
+name="The Vikings"
+tribe="barbarians"
+ai=
+closeable="false"
+team="0"
+random="false"
+
+[player_7]
+name="The West Frisians"
+tribe="frisians"
+ai=
+closeable="false"
+team="0"
+random="false"
+
+[player_8]
+name="The uprising empire"
+tribe="empire"
+ai=
+closeable="false"
+team="0"
+random="false"
