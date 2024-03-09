@@ -3,14 +3,14 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
-# Juanjo, 2015-2017,2019-2022
+# Juanjo, 2015-2017,2019-2022,2024
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-03-07 02:19+0000\n"
+"POT-Creation-Date: 2024-03-07 10:16+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
-"Last-Translator: Juanjo, 2015-2017,2019-2022\n"
+"Last-Translator: Juanjo, 2015-2017,2019-2022,2024\n"
 "Language-Team: Catalan (http://app.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -311,7 +311,7 @@ msgstr "Les expedicions es poden iniciar en qualsevol port. La primera fase és 
 msgid ""
 "You can check out the needed wares in the Expedition tab of your port (it "
 "will appear in the last place when you’ve started an expedition)."
-msgstr ""
+msgstr "Podeu comprovar els béns necessaris en la pestanya d'Expedicions del vostre pot (apareixerà a l'últim lloc on heu iniciat una expedició)."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:152
 msgid "Now try this out. I will tell you later what the next steps are."
@@ -472,14 +472,14 @@ msgid ""
 "any number of soldiers. The desired number makes sure that defenders are "
 "requested by the port or headquarters, and once they are garrisoned there, "
 "they don't get sent away to serve other needs."
-msgstr ""
+msgstr "Per a assegurar-vos que estan ben defensats, podeu establir el nombre desitjat de soldats des de la pestanya de Soldats, com en els edificis militars. Però també són magatzems, així que s'hi pot guardar qualsevol nombre de soldats. El nombre desitjat assegura que es demanen aquests defensors pel port o pel quarter general i, una vegada hi hagin arribat, no se n'aniran a altres llocs."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:216
 msgid ""
 "On this map, there is no enemy to fear. In other games, you should set some "
 "defenders for your ports and make building one or two military "
 "fortifications around your new colonies a priority."
-msgstr ""
+msgstr "En aquest mapa no s’ha de témer pels enemics. En les altres partides, hauríeu d'establir alguns defensors als vostres ports i construir una o dues fortificacions militars al voltant de les colònies."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:223
 msgid "Our mission"
@@ -716,13 +716,13 @@ msgid ""
 "As you can see, ferries can be produced quite quickly, but you don't need to"
 " worry about wasted materials, because ferry yards normally only produce "
 "them on demand, when there are unserviced waterways."
-msgstr ""
+msgstr "Com podeu veure, els transbordadors es poden produir en poc temps, però no us heu de preocupar de fer-ne massa, ja que només se'n produeixen quan n'hi ha demanda per alguna via d'aigua que no en tingui."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:340
 msgid ""
 "As long as a ferry services a waterway, its lifetime is unlimited, but "
 "unemployed ferries will rot away and eventually sink."
-msgstr ""
+msgstr "Mentre un transbordador està assignat a una via d'aigua, la seva vida és il·limitada, però els transbordadors aturats es podriran i acabaran afonant-se."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:347
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:349
