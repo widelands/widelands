@@ -897,7 +897,8 @@ void Ship::erase_warship_soldier_request() {
 }
 
 void Ship::update_warship_soldier_request(bool create) {
-	if (ship_type_ != ShipType::kWarship) {
+	if (ship_type_ != ShipType::kWarship || is_refitting()) {
+		erase_warship_soldier_request();
 		return;
 	}
 
