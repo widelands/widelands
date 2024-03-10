@@ -686,16 +686,6 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 	return UI::Panel::handle_key(down, code);
 }
 
-inline Rectf MainMenu::image_pos(const Image& i, const bool crop) {
-	return UI::fit_image(i.width(), i.height(), get_w(), get_h(), crop);
-}
-
-static inline void
-do_draw_image(RenderTarget& r, const Rectf& dest, const Image& img, const float opacity) {
-	r.blitrect_scale(
-	   dest, &img, Recti(0, 0, img.width(), img.height()), opacity, BlendMode::UseAlpha);
-}
-
 inline float MainMenu::calc_opacity(const uint32_t time) const {
 	return last_image_ == draw_image_ ?
              1.f :
@@ -733,6 +723,14 @@ void MainMenu::draw(RenderTarget& r) {
 	if (init_time_ == kNoSplash ||
 	    time - init_time_ > kInitialFadeoutDelay + kInitialFadeoutDuration) {
 		set_button_visibility(true);
+
+		// TODO(tothxa): This probably shouldn't be in draw(), but we don't have think(), nor a
+		//               single entry point, and it is at least related to the splashscreen fade out.
+		//               The songset should be reset when the splash is over and when a game, replay
+		//               or editing session returns.
+		if (g_sh->current_songset() != Songset::kMenu) {
+			g_sh->change_music(Songset::kMenu, 1000);
+		}
 	}
 
 	// Exchange stale background images
@@ -751,13 +749,13 @@ void MainMenu::draw(RenderTarget& r) {
 		float opacity = 1.f;
 
 		if (time - last_image_exchange_time_ < kImageExchangeDuration) {
-			const Image& img = *g_image_cache->get(images_[last_image_]);
+			const Image* img = g_image_cache->get(images_[last_image_]);
 			opacity = calc_opacity(time);
-			do_draw_image(r, image_pos(img), img, 1.f - opacity);
+			r.blit_fit(img, true, 1.f - opacity);
 		}
 
-		const Image& img = *g_image_cache->get(images_[draw_image_]);
-		do_draw_image(r, image_pos(img), img, opacity);
+		const Image* img = g_image_cache->get(images_[draw_image_]);
+		r.blit_fit(img, true, opacity);
 	}
 
 	{  // Darken button boxes
@@ -783,9 +781,8 @@ void MainMenu::draw(RenderTarget& r) {
 
 	// Widelands logo
 	const Rectf rect = title_pos();
-	do_draw_image(
-	   r, Rectf(rect.x + rect.w * 0.2f, rect.y + rect.h * 0.2f, rect.w * 0.6f, rect.h * 0.6f),
-	   *title_image_, 1.f);
+	const Rectf dest(rect.x + rect.w * 0.2f, rect.y + rect.h * 0.2f, rect.w * 0.6f, rect.h * 0.6f);
+	r.blitrect_scale(dest, title_image_, title_image_->rect(), 1.0f, BlendMode::UseAlpha);
 }
 
 void MainMenu::draw_overlay(RenderTarget& r) {
@@ -800,7 +797,7 @@ void MainMenu::draw_overlay(RenderTarget& r) {
                                1.f - static_cast<float>(time - init_time_ - kInitialFadeoutDelay) /
 		                                  kInitialFadeoutDuration :
                                1.f;
-		do_draw_image(r, image_pos(*splashscreen_, false), *splashscreen_, opacity);
+		r.blit_fit(splashscreen_, false, opacity);
 	} else {
 		const unsigned opacity =
 		   255 - 255.f * (time - init_time_ - kInitialFadeoutDelay - kInitialFadeoutDuration) /
@@ -979,7 +976,7 @@ void MainMenu::action(const MenuTarget t) {
 			break;
 		}
 		menu_capsule_.clear_content();
-		g_sh->change_music(Songset::kIngame, 1000);
+		// g_sh->change_music(Songset::kIngame, 1000);
 		new NetSetupLAN(menu_capsule_);
 		break;
 	case MenuTarget::kMetaserver: {
@@ -1003,7 +1000,7 @@ void MainMenu::action(const MenuTarget t) {
 			get_config_string("password_sha1", password_);
 		}
 
-		g_sh->change_music(Songset::kIngame, 1000);
+		// g_sh->change_music(Songset::kIngame, 1000);
 		new InternetLobby(menu_capsule_, nickname_, password_, register_, tribeinfos);
 	} break;
 

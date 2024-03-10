@@ -212,6 +212,14 @@ void RenderTarget::blitrect_scale(Rectf destination_rect,
 	}
 }
 
+void RenderTarget::blit_fit(const Image* image,
+                            const bool crop,
+                            const float opacity,
+                            const BlendMode blend_mode) {
+	const Rectf dest_r = UI::fit_image(image->width(), image->height(), width(), height(), crop);
+	blitrect_scale(dest_r, image, image->rect(), opacity, blend_mode);
+}
+
 void RenderTarget::blitrect_scale_monochrome(Rectf destination_rect,
                                              const Image* image,
                                              Recti source_rect_i,

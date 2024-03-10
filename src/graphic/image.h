@@ -20,6 +20,7 @@
 #define WL_GRAPHIC_IMAGE_H
 
 #include "base/macros.h"
+#include "base/rect.h"
 #include "graphic/gl/blit_data.h"
 
 /**
@@ -35,8 +36,12 @@ public:
 	[[nodiscard]] virtual int width() const = 0;
 	[[nodiscard]] virtual int height() const = 0;
 
+	[[nodiscard]] Recti rect() const {
+		return Recti(0, 0, width(), height());
+	}
+
 	// OpenGL texture and texture coordinates backing this Image. This can
-	// change at any time, so do not hold one to this value for more than one
+	// change at any time, so do not hold on to this value for more than one
 	// frame.
 	[[nodiscard]] virtual const BlitData& blit_data() const = 0;
 

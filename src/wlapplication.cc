@@ -420,6 +420,11 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		exit(2);
 	}
 
+	g_sh = new SoundHandler();
+
+	g_sh->register_songs("music", Songset::kIntro);
+	g_sh->change_music(Songset::kIntro);
+
 	// Try to detect configurations with inverted horizontal scroll
 	const char* sdl_video = SDL_GetCurrentVideoDriver();
 	assert(sdl_video != nullptr);
@@ -462,9 +467,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	g_mouse_cursor = new MouseCursor();
 	g_mouse_cursor->initialize(get_config_bool("sdl_cursor", true));
 
-	g_sh = new SoundHandler();
-
-	g_sh->register_songs("music", Songset::kIntro);
 	g_sh->register_songs("music", Songset::kMenu);
 	g_sh->register_songs("music", Songset::kIngame);
 	g_sh->register_songs("music", Songset::kCustom);
@@ -820,7 +822,7 @@ void WLApplication::run() {
 	switch (game_type_) {
 	case GameType::kEditor: {
 		bool success = false;
-		g_sh->change_music(Songset::kIngame);
+		// g_sh->change_music(Songset::kIngame);
 		if (filename_.empty()) {
 			success = EditorInteractive::run_editor(&menu, EditorInteractive::Init::kDefault);
 		} else {
@@ -854,7 +856,7 @@ void WLApplication::run() {
 		Widelands::Game game;
 		std::string title;
 		std::string message;
-		g_sh->change_music(Songset::kIngame);
+		// g_sh->change_music(Songset::kIngame);
 		try {
 			bool start_replay = (game_type_ == GameType::kReplay);
 			if (use_last(filename_)) {
@@ -894,7 +896,7 @@ void WLApplication::run() {
 	} break;
 
 	case GameType::kScenario: {
-		g_sh->change_music(Songset::kIngame);
+		// g_sh->change_music(Songset::kIngame);
 		Widelands::Game game;
 		try {
 			game.run_splayer_scenario_direct({filename_}, script_to_run_);
@@ -904,16 +906,12 @@ void WLApplication::run() {
 	} break;
 
 	case GameType::kFromTemplate: {
-		g_sh->change_music(Songset::kIngame);
+		// g_sh->change_music(Songset::kIngame);
 		init_and_run_game_from_template(menu);
 	} break;
 
 	default:
-		// TODO(tothxa): This is actually never heard due to the next one replacing it immediately.
-		//               Can we delete this, and the song file too?
-		g_sh->change_music(Songset::kIntro);
-
-		g_sh->change_music(Songset::kMenu, 1000);
+		// g_sh->change_music(Songset::kMenu, 1000);
 
 		menu.main_loop();
 	}
@@ -956,7 +954,8 @@ bool WLApplication::poll_event(SDL_Event& ev) const {
 			 */
 			assert(!SoundHandler::is_backend_disabled());
 			if (g_sh->current_songset() == "intro") {
-				// Special case for splashscreen: there, only one song is ever played
+				// Special case for splashscreen: there, only one song is ever played,
+				// then we simulate a keypress to go to the main menu.
 				SDL_Event new_event;
 				new_event.type = SDL_KEYDOWN;
 				new_event.key.state = SDL_PRESSED;
@@ -2004,7 +2003,6 @@ void WLApplication::check_crash_reports(FsMenu::MainMenu& menu) {
 		log_info("- %s", filename.c_str());
 	}
 
-	g_sh->change_music(Songset::kMenu);
 	menu.abort_splashscreen();
 	FsMenu::CrashReportWindow reporter(menu, crashes);
 	reporter.run<UI::Panel::Returncodes>();
