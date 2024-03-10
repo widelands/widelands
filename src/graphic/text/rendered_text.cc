@@ -72,7 +72,7 @@ RenderedRect::RenderedRect(const Recti& init_rect,
 }
 RenderedRect::RenderedRect(const std::shared_ptr<const Image>& init_image,
                            const TextClickTarget* click_target)
-   : RenderedRect(Recti(0, 0, init_image->width(), init_image->height()),
+   : RenderedRect(init_image->rect(),
                   init_image,
                   false,
                   RGBColor(0, 0, 0),
@@ -81,7 +81,7 @@ RenderedRect::RenderedRect(const std::shared_ptr<const Image>& init_image,
                   click_target) {
 }
 RenderedRect::RenderedRect(const Image* init_image, const TextClickTarget* click_target)
-   : RenderedRect(Recti(0, 0, init_image->width(), init_image->height()),
+   : RenderedRect(init_image->rect(),
                   init_image,
                   false,
                   RGBColor(0, 0, 0),

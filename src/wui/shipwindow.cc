@@ -390,9 +390,7 @@ void ShipWindow::update_destination_buttons(const Widelands::Ship* ship) {
 				result_rect.x = 0;
 				result_rect.y = (kTextureSize - result_rect.h) / 2.f;
 			}
-			rt.blitrect_scale(result_rect, unscaled,
-			                  Recti(0, 0, unscaled->width(), unscaled->height()), 1.f,
-			                  BlendMode::UseAlpha);
+			rt.blitrect_scale(result_rect, unscaled, unscaled->rect(), 1.f, BlendMode::UseAlpha);
 			texture_cache_.emplace(downscaled);
 
 			set_destination_->add(
