@@ -101,7 +101,7 @@ public:
 
 	Widelands::Game* create_safe_game(bool show_error = true);
 
-	void abort_splashscreen();
+	void abort_splashscreen(bool immediately = true);
 
 protected:
 	void update_template() override;
@@ -135,6 +135,9 @@ private:
 	const Image* title_image_;
 
 	uint32_t init_time_;
+
+	enum class SplashState { kSplash, kSplashFadeOut, kMenuFadeIn, kDone };
+	SplashState splash_state_;
 
 	std::vector<std::string> images_;
 	uint32_t last_image_exchange_time_{0U};

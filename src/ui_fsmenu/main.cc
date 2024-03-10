@@ -59,8 +59,7 @@
 
 namespace FsMenu {
 
-constexpr uint32_t kInitialFadeoutDelay = 2500;
-constexpr uint32_t kInitialFadeoutDuration = 4000;
+constexpr uint32_t kSplashFadeoutDuration = 2000;
 constexpr uint32_t kImageExchangeInterval = 20000;
 constexpr uint32_t kImageExchangeDuration = 2500;
 
@@ -200,6 +199,7 @@ MainMenu::MainMenu(const bool skip_init)
                 "",
                 UI::Align::kCenter),
      init_time_(kNoSplash),
+     splash_state_(SplashState::kDone),
 
      menu_capsule_(*this) {
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
@@ -238,6 +238,7 @@ MainMenu::MainMenu(const bool skip_init)
 
 	if (!skip_init) {
 		init_time_ = SDL_GetTicks();
+		splash_state_ = SplashState::kSplash;
 		set_button_visibility(false);
 	}
 
@@ -543,13 +544,20 @@ void MainMenu::set_button_visibility(const bool v) {
 	clock_.set_visible(v);
 }
 
-void MainMenu::abort_splashscreen() {
-	init_time_ = kNoSplash;
+// With fadeout/fadein if not immediately. Repeated call (repeated keypress) is always immediate.
+void MainMenu::abort_splashscreen(const bool immediately) {
+	if (!immediately && splash_state_ == SplashState::kSplash) {
+		init_time_ = SDL_GetTicks();
+		splash_state_ = SplashState::kSplashFadeOut;
+	} else {
+		init_time_ = kNoSplash;
+		splash_state_ = SplashState::kDone;
+	}
 }
 
 bool MainMenu::handle_mousepress(uint8_t /*btn*/, int32_t /*x*/, int32_t /*y*/) {
-	if (init_time_ != kNoSplash) {
-		init_time_ = kNoSplash;
+	if (splash_state_ != SplashState::kDone) {
+		abort_splashscreen(false);
 		return true;
 	}
 	return false;
@@ -579,8 +587,10 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 
 	if (down) {
 		bool fell_through = false;
-		if (init_time_ != kNoSplash) {
-			init_time_ = kNoSplash;
+		if (splash_state_ != SplashState::kDone) {
+			// Default key is "Escape", but also hardcode it
+			abort_splashscreen(
+			   matches_shortcut(KeyboardShortcut::kMainMenuQuit, code) || code.sym == SDLK_ESCAPE);
 			fell_through = true;
 		}
 
@@ -695,9 +705,10 @@ inline float MainMenu::calc_opacity(const uint32_t time) const {
 
 /*
  * The four phases of the animation:
- *   1) Show the splash image with full opacity on a black background for `kInitialFadeoutDelay`
- *   2) Show the splash image semi-transparent on a black background for `kInitialFadeoutDuration`
- *   3) Show the background & menu semi-transparent for `kInitialFadeoutDuration`
+ *   1) Show the splash image with full opacity on a black background until intro music ends or
+ *      keypress (end of music is signalled as a keypress)
+ *   2) Show the splash image semi-transparent on a black background for `kSplashFadeoutDuration`
+ *   3) Show the background & menu semi-transparent for `kSplashFadeoutDuration`
  *   4) Show the background & menu with full opacity indefinitely
  * We skip straight to the last phase 4 if we are returning from some other FsMenu screen.
  */
@@ -707,31 +718,41 @@ void MainMenu::draw(RenderTarget& r) {
 	r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, 255));
 
 	const uint32_t time = SDL_GetTicks();
-	assert(init_time_ == kNoSplash || time >= init_time_);
 
-	if (init_time_ != kNoSplash &&
-	    time - init_time_ < kInitialFadeoutDelay + kInitialFadeoutDuration) {
-		// still in splash phase
-		return;
-	}
+	// Handle splash screen
+	if (splash_state_ != SplashState::kDone) {
+		assert(init_time_ != kNoSplash && time >= init_time_);
 
-	// Sanitize phase info and button visibility
-	if (init_time_ != kNoSplash &&
-	    time - init_time_ > kInitialFadeoutDelay + 2 * kInitialFadeoutDuration) {
-		init_time_ = kNoSplash;
-	}
-	if (init_time_ == kNoSplash ||
-	    time - init_time_ > kInitialFadeoutDelay + kInitialFadeoutDuration) {
-		set_button_visibility(true);
+		if (time - init_time_ > kSplashFadeoutDuration) {
+			switch (splash_state_) {
+			case SplashState::kMenuFadeIn: {
+				init_time_ = kNoSplash;
+				splash_state_ = SplashState::kDone;
+			} break;
+			case SplashState::kSplashFadeOut: {
+				init_time_ = time;
+				splash_state_ = SplashState::kMenuFadeIn;
+			} break;
+			default:
+				break;
+			}
+		}
 
-		// TODO(tothxa): This probably shouldn't be in draw(), but we don't have think(), nor a
-		//               single entry point, and it is at least related to the splashscreen fade out.
-		//               The songset should be reset when the splash is over and when a game, replay
-		//               or editing session returns.
-		if (g_sh->current_songset() != Songset::kMenu) {
-			g_sh->change_music(Songset::kMenu, 1000);
+		if (splash_state_ != SplashState::kMenuFadeIn && splash_state_ != SplashState::kDone) {
+			// still in splash phase
+			return;
 		}
 	}
+
+	// TODO(tothxa): This probably shouldn't be in draw(), but we don't have think(), nor a
+	//               single entry point, and it is at least related to the splashscreen fade out.
+	//               The songset should be reset when the splash is over and when a game, replay
+	//               or editing session returns.
+	if (g_sh->current_songset() != Songset::kMenu) {
+		g_sh->change_music(Songset::kMenu, 1000);
+	}
+
+	set_button_visibility(true);
 
 	// Exchange stale background images
 	assert(time >= last_image_exchange_time_);
@@ -786,23 +807,36 @@ void MainMenu::draw(RenderTarget& r) {
 }
 
 void MainMenu::draw_overlay(RenderTarget& r) {
-	if (init_time_ == kNoSplash) {
+	if (splash_state_ == SplashState::kDone) {
 		// overlays are needed only during the first three phases
 		return;
 	}
 	const uint32_t time = SDL_GetTicks();
 
-	if (time - init_time_ < kInitialFadeoutDelay + kInitialFadeoutDuration) {
-		const float opacity = time - init_time_ > kInitialFadeoutDelay ?
-                               1.f - static_cast<float>(time - init_time_ - kInitialFadeoutDelay) /
-		                                  kInitialFadeoutDuration :
-                               1.f;
-		r.blit_fit(splashscreen_, false, opacity);
+	float progress = 0.0f;
+	if (splash_state_ != SplashState::kSplash) {
+		progress = static_cast<float>(time - init_time_) / kSplashFadeoutDuration;
+		if (progress > 1.0f) {
+			if (splash_state_ == SplashState::kMenuFadeIn) {
+				// We're done
+				init_time_ = kNoSplash;
+				splash_state_ = SplashState::kDone;
+				return;
+			}
+
+			// End of splash fade out, start menu fade in
+			init_time_ = time;
+			splash_state_ = SplashState::kMenuFadeIn;
+			progress = 0.0f;
+		}
+	}
+
+	if (splash_state_ != SplashState::kMenuFadeIn) {
+		r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, 255), BlendMode::Default);
+		r.blit_fit(splashscreen_, false, 1.0f - progress);
 	} else {
-		const unsigned opacity =
-		   255 - 255.f * (time - init_time_ - kInitialFadeoutDelay - kInitialFadeoutDuration) /
-		            kInitialFadeoutDuration;
-		r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, opacity), BlendMode::Default);
+		const unsigned alpha = 255 - 255.f * progress;  // fade in of menu = fade out of overlay
+		r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, alpha), BlendMode::Default);
 	}
 }
 

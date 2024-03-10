@@ -959,7 +959,7 @@ bool WLApplication::poll_event(SDL_Event& ev) const {
 				SDL_Event new_event;
 				new_event.type = SDL_KEYDOWN;
 				new_event.key.state = SDL_PRESSED;
-				new_event.key.keysym.sym = SDLK_ESCAPE;
+				new_event.key.keysym.sym = SDLK_SPACE;
 				SDL_PushEvent(&new_event);
 			} else {
 				g_sh->change_music();
