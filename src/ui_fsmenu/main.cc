@@ -723,18 +723,14 @@ void MainMenu::draw(RenderTarget& r) {
 	if (splash_state_ != SplashState::kDone) {
 		assert(init_time_ != kNoSplash && time >= init_time_);
 
-		if (time - init_time_ > kSplashFadeoutDuration) {
-			switch (splash_state_) {
-			case SplashState::kMenuFadeIn: {
+		if (splash_state_ != SplashState::kSplash && (time - init_time_ > kSplashFadeoutDuration)) {
+			if (splash_state_ == SplashState::kMenuFadeIn ||
+			    (time - init_time_ > 2 * kSplashFadeoutDuration)) {
 				init_time_ = kNoSplash;
 				splash_state_ = SplashState::kDone;
-			} break;
-			case SplashState::kSplashFadeOut: {
+			} else if (splash_state_ == SplashState::kSplashFadeOut) {
 				init_time_ = time;
 				splash_state_ = SplashState::kMenuFadeIn;
-			} break;
-			default:
-				break;
 			}
 		}
 
@@ -817,7 +813,7 @@ void MainMenu::draw_overlay(RenderTarget& r) {
 	if (splash_state_ != SplashState::kSplash) {
 		progress = static_cast<float>(time - init_time_) / kSplashFadeoutDuration;
 		if (progress > 1.0f) {
-			if (splash_state_ == SplashState::kMenuFadeIn) {
+			if (splash_state_ == SplashState::kMenuFadeIn || progress > 2.0f) {
 				// We're done
 				init_time_ = kNoSplash;
 				splash_state_ = SplashState::kDone;
