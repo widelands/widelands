@@ -399,10 +399,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 
 	init_language();  // search paths must already be set up
 	changedir_on_mac();
-	cleanup_replays();
-	cleanup_ai_files();
-	cleanup_temp_files();
-	cleanup_temp_backups();
 
 #ifndef SDL_BYTEORDER
 	log_info("Byte order: unknown, assuming little-endian\n");
@@ -425,13 +421,28 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	g_sh->register_songs("music", Songset::kIntro);
 	g_sh->change_music(Songset::kIntro);
 
+	g_gr = new Graphic();
+
+	if (TTF_Init() == -1) {
+		log_err("True Type library did not initialize: %s\n", TTF_GetError());
+		exit(2);
+	}
+
+	UI::g_fh = UI::create_fonthandler(
+	   g_image_cache, i18n::get_locale());  // This will create the fontset, so loading it first.
+	verb_log_info("Font handler created");
+
+	// This also shows the splash image
+	g_gr->initialize(
+	   get_config_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
+	   get_config_int("xres", kDefaultResolutionW), get_config_int("yres", kDefaultResolutionH),
+	   get_config_bool("fullscreen", false), get_config_bool("maximized", false));
+
 	// Try to detect configurations with inverted horizontal scroll
-	const char* sdl_video = SDL_GetCurrentVideoDriver();
-	assert(sdl_video != nullptr);
 	SDL_version sdl_ver = {SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL};
 	SDL_GetVersion(&sdl_ver);
-	// Keep cursor in window while dragging
-	SDL_SetHint(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1");
+	const char* sdl_video = SDL_GetCurrentVideoDriver();
+	assert(sdl_video != nullptr);
 	bool sdl_scroll_x_bug = false;
 
 	// SDL version < 2.0 is not supported, >= 2.1 will have the changes
@@ -449,23 +460,17 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		update_mousewheel_settings();
 	}
 
-	g_gr = new Graphic();
-
-	if (TTF_Init() == -1) {
-		log_err("True Type library did not initialize: %s\n", TTF_GetError());
-		exit(2);
-	}
-
-	UI::g_fh = UI::create_fonthandler(
-	   g_image_cache, i18n::get_locale());  // This will create the fontset, so loading it first.
-
-	g_gr->initialize(
-	   get_config_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
-	   get_config_int("xres", kDefaultResolutionW), get_config_int("yres", kDefaultResolutionH),
-	   get_config_bool("fullscreen", false), get_config_bool("maximized", false));
+	// Keep cursor in window while dragging
+	SDL_SetHint(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1");
 
 	g_mouse_cursor = new MouseCursor();
 	g_mouse_cursor->initialize(get_config_bool("sdl_cursor", true));
+
+	verb_log_info("Cleaning up temporary files");
+	cleanup_replays();
+	cleanup_ai_files();
+	cleanup_temp_files();
+	cleanup_temp_backups();
 
 	g_sh->register_songs("music", Songset::kMenu);
 	g_sh->register_songs("music", Songset::kIngame);
@@ -473,8 +478,10 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 
 	UI::ColorChooser::read_favorites_settings();
 
+	verb_log_info("Initializing Add-Ons");
 	set_template_dir("");
 	initialize_g_addons();
+	verb_log_info("Done initializing Add-Ons");
 
 	// Register the click sound for UI::Panel.
 	// We do it here to ensure that the sound handler has been created first, and we only want to
@@ -495,6 +502,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		log_info("Developer tools are enabled.");
 		g_script_console_history.load(kScriptConsoleHistoryFile);
 	}
+
+	verb_log_info("WLApplication created");
 }
 
 /**
