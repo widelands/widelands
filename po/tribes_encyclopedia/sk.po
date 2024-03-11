@@ -1688,7 +1688,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1662
 msgctxt "amazons_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Umiestňuje vojačky, aby rozšírili vaše územie."
 
 #. TRANSLATORS: Note helptext for an Amazon military site: Patrol Post
 #. TRANSLATORS: Note helptext for an Amazon military site: Warriors’ Dwelling
@@ -4748,7 +4748,7 @@ msgid ""
 "one kind of trident is needed by the economy, production of one light "
 "trident takes %2$s and one long trident, one steel trident, one double "
 "trident or one heavy double trident takes %3$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje všetky trojzubce, výroba jedného trojzubca trvá priemerne %1$s. Ak ekonomika potrebuje len jeden druh trojzubca, výroba jedného ľahkého trojzubca trvá priemerne %2$s a jedného dlhého, oceľového, dvojitého alebo ťažkého dvojitého trojzubca trvá %3$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Armor
 #. Smithy
@@ -4777,7 +4777,7 @@ msgid ""
 "the economy, production of one of each kind takes %1$s on average. If only "
 "one kind of shield is needed by the economy, production of one steel shield "
 "takes %2$s and one advanced shield takes %3$s on average."
-msgstr ""
+msgstr "Ak je táto budova plne zásobená a ekonomika potrebuje oba druhy štítov, výroba jedného štítu trvá priemerne %1$s. Ak ekonomika potrebuje len jeden druh štítu, výroba jedného oceľového štítu trvá priemerne %2$s a jedného vylepšeného štítu %3$s."
 
 #. TRANSLATORS: Purpose helptext for an Atlantean production site: Barracks
 #: ../../data/tribes/initialization/atlanteans/units.lua:1782
@@ -5164,7 +5164,7 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:2031
 msgctxt "atlanteans_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Umiestňuje vojakov, aby rozšírili vaše územie."
 
 #. TRANSLATORS: Note helptext for an Atlantean military site: Guardhouse
 #. TRANSLATORS: Note helptext for an Atlantean military site: Guardhall
@@ -7032,7 +7032,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce beer in"
 " about %s on average."
-msgstr "Ak sa všetok potrebný tovar dodá načas, táto budova dokáže vyrobiť pivo v priemere za asi %s."
+msgstr "Ak sa všetok potrebný tovar dodá načas, táto budova dokáže vyrobiť pivo v priemere za %s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Brewery
 #: ../../data/tribes/initialization/barbarians/units.lua:1352
@@ -7064,7 +7064,7 @@ msgctxt "barbarians_building"
 msgid ""
 "If all needed wares are delivered in time, this building can produce strong "
 "beer in about %s on average."
-msgstr ""
+msgstr "Ak sa všetok potrebný tovar dodá načas, táto budova dokáže vyrobiť silné pivo v priemere za %s."
 
 #. TRANSLATORS: Lore helptext for a Barbarian production site: Tavern
 #: ../../data/tribes/initialization/barbarians/units.lua:1368
@@ -7719,7 +7719,7 @@ msgstr ""
 #: ../../data/tribes/initialization/barbarians/units.lua:1792
 msgctxt "barbarians_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Umiestňuje vojakov, aby rozšírili vaše územie."
 
 #. TRANSLATORS: Note helptext for a Barbarian military site: Sentry
 #. TRANSLATORS: Note helptext for a Barbarian military site: Barrier
@@ -12057,7 +12057,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:2276
 msgctxt "empire_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Umiestňuje vojakov, aby rozšírili vaše územie."
 
 #. TRANSLATORS: Note helptext for an Empire military site: Blockhouse
 #. TRANSLATORS: Note helptext for an Empire military site: Sentry
@@ -15407,7 +15407,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:2196
 msgctxt "frisians_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Umiestňuje vojakov, aby rozšírili vaše územie."
 
 #. TRANSLATORS: Note helptext for a Frisian military site: Wooden Tower
 #. TRANSLATORS: Note helptext for a Frisian military site: High Wooden Tower
@@ -16057,10 +16057,10 @@ msgstr "Liečenie:"
 #, lua-format
 msgid "Garrisoned soldiers heal %d health point per second."
 msgid_plural "Garrisoned soldiers heal %d health points per second."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Vojaci umiestnení vnútri budovy sa liečia rýchlosťou %d bod zdravia za sekundu."
+msgstr[1] "Vojaci umiestnení vnútri budovy sa liečia rýchlosťou %d body zdravia za sekundu."
+msgstr[2] "Vojaci umiestnení vnútri budovy sa liečia rýchlosťou %d bodov zdravia za sekundu."
+msgstr[3] "Vojaci umiestnení vnútri budovy sa liečia rýchlosťou %d bodov zdravia za sekundu."
 
 #: ../../data/tribes/scripting/help/building_help.lua:358
 #: ../../data/tribes/scripting/help/building_help.lua:364

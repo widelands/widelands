@@ -180,7 +180,7 @@ msgstr "Samovládca"
 msgid ""
 "The tribe or team that can defeat all others wins the game! This means the "
 "opponents do not have any headquarters, ports or warehouses left."
-msgstr ""
+msgstr "Kmeň alebo tím, ktorý porazí ostatných, vyhráva hru! To znamená, že protivníkom neostanú ústredia, prístavy ani sklady."
 
 #: ../../data/scripting/win_conditions/endless_game.lua:14
 msgid "Endless Game"
@@ -198,7 +198,7 @@ msgstr "Lovec ústredí"
 msgid ""
 "The tribe or team that can find and destroy all other headquarters wins the "
 "game! Does not work with starting conditions without headquarters."
-msgstr ""
+msgstr "Kmeň alebo tím, ktorý nájde a zničí všetky ostatné ústredia, vyhráva hru! Nedá sa použiť pri počiatočných podmienkach bez ústredia."
 
 #: ../../data/scripting/win_conditions/territorial_functions.lua:21
 #, lua-format
