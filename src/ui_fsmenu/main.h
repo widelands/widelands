@@ -131,7 +131,6 @@ private:
 	std::string filename_for_continue_editing_;
 	std::string filename_for_last_replay_;
 
-	const Image* splashscreen_;
 	const Image* title_image_;
 
 	uint32_t init_time_;

@@ -133,15 +133,6 @@ void Graphic::initialize(const TraceGl& trace_gl,
 		}
 	}
 	log_info("**** END GRAPHICS REPORT ****\n");
-
-	// Splash screen
-	const Image* image = g_image_cache->get("loadscreens/splash.jpg");
-	get_render_target()->blit_fit(image, false);
-	refresh();
-	verb_log_dbg("Splash image shown");
-
-	// This is slow
-	rebuild_texture_atlas();
 }
 
 void Graphic::rebuild_texture_atlas() const {

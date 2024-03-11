@@ -32,6 +32,7 @@
 #include "build_info.h"
 #include "editor/editorinteractive.h"
 #include "graphic/graphic.h"
+#include "graphic/graphic_functions.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/filesystem_constants.h"
@@ -302,7 +303,6 @@ void MainMenu::update_template() {
 	editor_.set_min_lineheight(dropdowns_lineheight);
 	replay_.set_min_lineheight(dropdowns_lineheight);
 
-	splashscreen_ = g_image_cache->get("loadscreens/splash.jpg");
 	title_image_ = g_image_cache->get("loadscreens/logo.png");
 
 	images_.clear();
@@ -828,8 +828,10 @@ void MainMenu::draw_overlay(RenderTarget& r) {
 	}
 
 	if (splash_state_ != SplashState::kMenuFadeIn) {
-		r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, 255), BlendMode::Default);
-		r.blit_fit(splashscreen_, false, 1.0f - progress);
+		draw_splashscreen(
+		   /** TRANSLATORS: Actually any key works */
+		   r, (splash_state_ == SplashState::kSplash ? _("Press ‘Space’ to skip") : ""),
+		   1.0f - progress);
 	} else {
 		const unsigned alpha = 255 - 255.f * progress;  // fade in of menu = fade out of overlay
 		r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, alpha), BlendMode::Default);

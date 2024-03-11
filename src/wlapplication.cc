@@ -53,6 +53,7 @@
 #include "graphic/default_resolution.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
+#include "graphic/graphic_functions.h"
 #include "graphic/mouse_cursor.h"
 #include "graphic/style_manager.h"
 #include "graphic/text/font_set.h"
@@ -416,13 +417,22 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		exit(2);
 	}
 
+	// Start intro music before splashscreen: it takes slightly less time,
+	// and the music starts with some delay
 	g_sh = new SoundHandler();
-
 	g_sh->register_songs("music", Songset::kIntro);
 	g_sh->change_music(Songset::kIntro);
 
 	g_gr = new Graphic();
+	g_gr->initialize(
+	   get_config_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
+	   get_config_int("xres", kDefaultResolutionW), get_config_int("yres", kDefaultResolutionH),
+	   get_config_bool("fullscreen", false), get_config_bool("maximized", false));
 
+	/*****
+	 * These could be moved later if we decide to show some graphic (an hourglass?) instead
+	 * of the text label in the initial splash screen to draw it faster.
+	 */
 	if (TTF_Init() == -1) {
 		log_err("True Type library did not initialize: %s\n", TTF_GetError());
 		exit(2);
@@ -432,11 +442,22 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	   g_image_cache, i18n::get_locale());  // This will create the fontset, so loading it first.
 	verb_log_info("Font handler created");
 
-	// This also shows the splash image
-	g_gr->initialize(
-	   get_config_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
-	   get_config_int("xres", kDefaultResolutionW), get_config_int("yres", kDefaultResolutionH),
-	   get_config_bool("fullscreen", false), get_config_bool("maximized", false));
+	set_template_dir("");
+	verb_log_info("Loaded default styles");
+	/*
+	 * End of text rendering dependencies
+	 *****/
+
+	// The initital splash screen is only drawn once, it doesn't get updates until the main menu
+	// overrides it. Normally it shouldn't take more than a few seconds.
+	RenderTarget* r = g_gr->get_render_target();
+	draw_splashscreen(*r, _("Loading…"), 1.0f);
+	g_gr->refresh();
+	verb_log_info("Splash screen shown");
+
+	// This was taken out of Graphic::initialize() to allow showing the splashscreen earlier.
+	// This is one of the slowest parts of the start up.
+	g_gr->rebuild_texture_atlas();
 
 	// Try to detect configurations with inverted horizontal scroll
 	SDL_version sdl_ver = {SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL};
@@ -479,7 +500,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	UI::ColorChooser::read_favorites_settings();
 
 	verb_log_info("Initializing Add-Ons");
-	set_template_dir("");
 	initialize_g_addons();
 	verb_log_info("Done initializing Add-Ons");
 
