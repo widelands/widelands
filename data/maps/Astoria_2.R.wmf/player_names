@@ -4,13 +4,13 @@
 packet_version="2"
 
 [player_1]
-name="Human"
+name="Orc"
 tribe="barbarians"
 ai=
 closeable="false"
 
 [player_2]
-name="Human"
+name="Dwarf"
 tribe="empire"
 ai=
 closeable="false"
