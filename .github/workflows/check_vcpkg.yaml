@@ -35,6 +35,9 @@ jobs:
       run: |
         pushd ${{ env.VCPKG_ROOT }}
         HEAD=$(git rev-parse --short HEAD)
+        git remote add patch https://github.com/JonLiu1993/vcpkg
+        git fetch patch
+        git checkout dev/Jon/sdl2-mixer
         popd
         echo "Current HEAD is $HEAD"
         echo "vcpkg_key=${{ hashFiles( './install-dependencies.sh' ) }}-${HEAD}" >> $GITHUB_OUTPUT
