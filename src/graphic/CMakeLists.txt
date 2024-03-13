@@ -317,6 +317,7 @@ wl_library(graphic_functions
     graphic_functions.cc
     graphic_functions.h
   DEPENDS
+    base_geometry
     graphic
     graphic_fonthandler
     graphic_text_layout

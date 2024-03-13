@@ -16,7 +16,11 @@
  *
  */
 
+#include "ui_fsmenu/splash_overlay.h"
+
 #include <algorithm>
+#include <cstdlib>
+#include <memory>
 
 #include <SDL_timer.h>
 
@@ -28,7 +32,6 @@
 #include "graphic/style_manager.h"
 #include "scripting/lua_interface.h"
 // #include "sound/sound_handler.h"
-#include "ui_fsmenu/splash_overlay.h"
 #include "wlapplication_options.h"
 
 namespace FsMenu {
