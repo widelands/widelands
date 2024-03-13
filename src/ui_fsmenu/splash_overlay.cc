@@ -53,7 +53,7 @@ bool SplashOverlay::draw_main(RenderTarget& r) {
 	/** TRANSLATORS: Actually any key works */
 	const Rectf image_pos = draw_splashscreen(r, _("Press ‘Space’ to skip credits"));
 
-	if (credits_.get() == nullptr && !load_credits()) {
+	if (credits_ == nullptr && !load_credits()) {
 		return false;
 	}
 
@@ -164,7 +164,7 @@ bool SplashOverlay::load_credits() {
 
 	verb_log_info("Finished rendering credits");
 
-	if (credits_.get() == nullptr) {
+	if (credits_ == nullptr) {
 		return false;
 	}
 

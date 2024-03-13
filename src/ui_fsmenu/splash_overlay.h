@@ -24,7 +24,7 @@
 class RenderTarget;
 
 namespace UI {
-class RenderedText;
+struct RenderedText;
 }  // namespace UI
 
 namespace FsMenu {

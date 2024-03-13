@@ -837,7 +837,7 @@ void MainMenu::draw_overlay(RenderTarget& r) {
 		const unsigned alpha = 255 - 255.f * progress;  // fade in of menu = fade out of overlay
 		r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, alpha), BlendMode::Default);
 	} else {
-		if (splash_overlay_.get() == nullptr) {
+		if (splash_overlay_ == nullptr) {
 			splash_overlay_.reset(new SplashOverlay());
 		}
 		if (splash_state_ == SplashState::kSplashFadeOut) {
