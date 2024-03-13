@@ -32,7 +32,6 @@
 #include "build_info.h"
 #include "editor/editorinteractive.h"
 #include "graphic/graphic.h"
-#include "graphic/graphic_functions.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/filesystem_constants.h"
@@ -61,6 +60,7 @@
 namespace FsMenu {
 
 constexpr uint32_t kSplashFadeoutDuration = 2000;
+
 constexpr uint32_t kImageExchangeInterval = 20000;
 constexpr uint32_t kImageExchangeDuration = 2500;
 
@@ -200,7 +200,6 @@ MainMenu::MainMenu(const bool skip_init)
                 "",
                 UI::Align::kCenter),
      init_time_(kNoSplash),
-     splash_state_(SplashState::kDone),
 
      menu_capsule_(*this) {
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
@@ -552,6 +551,7 @@ void MainMenu::abort_splashscreen(const bool immediately) {
 	} else {
 		init_time_ = kNoSplash;
 		splash_state_ = SplashState::kDone;
+		splash_overlay_.reset(nullptr);
 	}
 }
 
@@ -564,34 +564,42 @@ bool MainMenu::handle_mousepress(uint8_t /*btn*/, int32_t /*x*/, int32_t /*y*/) 
 }
 
 bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
-	// Forward all keys to the open window if there is one
-	bool has_open_window = false;
-	for (UI::UniqueWindow::Registry* r : {&r_login_, &r_about_, &r_addons_}) {
-		if (r->window != nullptr) {
+	if (splash_state_ == SplashState::kDone) {
+		// Forward all keys to the open window if there is one
+		bool has_open_window = false;
+		for (UI::UniqueWindow::Registry* r : {&r_login_, &r_about_, &r_addons_}) {
+			if (r->window != nullptr) {
+				has_open_window = true;
+				if (r->window->handle_key(down, code)) {
+					return true;
+				}
+			}
+		}
+		if (menu_capsule_.is_visible()) {
 			has_open_window = true;
-			if (r->window->handle_key(down, code)) {
+			if (menu_capsule_.handle_key(down, code)) {
 				return true;
 			}
 		}
-	}
-	if (menu_capsule_.is_visible()) {
-		has_open_window = true;
-		if (menu_capsule_.handle_key(down, code)) {
+		if (has_open_window) {
+			// If any window is open, block all keypresses to prevent accidentally triggering hotkeys
 			return true;
 		}
 	}
-	if (has_open_window) {
-		// If any window is open, block all keypresses to prevent accidentally triggering hotkeys
-		return true;
-	}
 
 	if (down) {
-		bool fell_through = false;
 		if (splash_state_ != SplashState::kDone) {
 			// Default key is "Escape", but also hardcode it
 			abort_splashscreen(
 			   matches_shortcut(KeyboardShortcut::kMainMenuQuit, code) || code.sym == SDLK_ESCAPE);
-			fell_through = true;
+			// Allow first keypress to trigger matching shortcut action, but not the later keypresses
+			if (key_pressed_) {
+				return true;
+			}
+			key_pressed_ = true;
+		} else {
+			// Reset when done, to allow Quit hotkey to work
+			key_pressed_ = false;
 		}
 
 		auto check_match_shortcut = [this, &code](KeyboardShortcut k, MenuTarget t) {
@@ -664,7 +672,7 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kMainMenuQuit, code)) {
-			if (!fell_through) {
+			if (!key_pressed_) {
 				exit();
 				return true;
 			}
@@ -726,8 +734,7 @@ void MainMenu::draw(RenderTarget& r) {
 		if (splash_state_ != SplashState::kSplash && (time - init_time_ > kSplashFadeoutDuration)) {
 			if (splash_state_ == SplashState::kMenuFadeIn ||
 			    (time - init_time_ > 2 * kSplashFadeoutDuration)) {
-				init_time_ = kNoSplash;
-				splash_state_ = SplashState::kDone;
+				abort_splashscreen(true);
 			} else if (splash_state_ == SplashState::kSplashFadeOut) {
 				init_time_ = time;
 				splash_state_ = SplashState::kMenuFadeIn;
@@ -815,8 +822,7 @@ void MainMenu::draw_overlay(RenderTarget& r) {
 		if (progress > 1.0f) {
 			if (splash_state_ == SplashState::kMenuFadeIn || progress > 2.0f) {
 				// We're done
-				init_time_ = kNoSplash;
-				splash_state_ = SplashState::kDone;
+				abort_splashscreen(true);
 				return;
 			}
 
@@ -827,14 +833,20 @@ void MainMenu::draw_overlay(RenderTarget& r) {
 		}
 	}
 
-	if (splash_state_ != SplashState::kMenuFadeIn) {
-		draw_splashscreen(
-		   /** TRANSLATORS: Actually any key works */
-		   r, (splash_state_ == SplashState::kSplash ? _("Press ‘Space’ to skip") : ""),
-		   1.0f - progress);
-	} else {
+	if (splash_state_ == SplashState::kMenuFadeIn) {
 		const unsigned alpha = 255 - 255.f * progress;  // fade in of menu = fade out of overlay
 		r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, alpha), BlendMode::Default);
+	} else {
+		if (splash_overlay_.get() == nullptr) {
+			splash_overlay_.reset(new SplashOverlay());
+		}
+		if (splash_state_ == SplashState::kSplashFadeOut) {
+			splash_overlay_->draw_fade(r, 1.0f - progress);
+		} else {
+			if (!splash_overlay_->draw_main(r)) {
+				abort_splashscreen(false);
+			}
+		}
 	}
 }
 

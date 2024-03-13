@@ -56,6 +56,8 @@ wl_library(ui_fsmenu
     singleplayerdropdown.h
     singleplayersetupbox.cc
     singleplayersetupbox.h
+    splash_overlay.cc
+    splash_overlay.h
     tech_info.cc
     tech_info.h
     training_wheel_options.cc

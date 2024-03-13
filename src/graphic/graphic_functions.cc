@@ -46,12 +46,12 @@ void draw_game_tip(RenderTarget& rt,
 	rendered_text->draw(rt, pt);
 }
 
-void draw_splashscreen(RenderTarget& rt,
+Rectf draw_splashscreen(RenderTarget& rt,
                        const std::string& footer_message,
                        const float opacity) {
-	const Image* image = g_image_cache->get("loadscreens/splash.jpg");
+	const Image* image = g_image_cache->get(kSplashImageName);
 	rt.fill_rect(Recti(0, 0, rt.width(), rt.height()), RGBAColor(0, 0, 0, 255), BlendMode::Default);
-	rt.blit_fit(image, false, opacity);
+	const Rectf rv = rt.blit_fit(image, false, opacity);
 
 	if (!footer_message.empty()) {
 		std::shared_ptr<const UI::RenderedText> footer = UI::g_fh->render(
@@ -59,4 +59,6 @@ void draw_splashscreen(RenderTarget& rt,
 		Vector2i footer_pos(rt.width() / 2, rt.height() - 3 * footer->height());
 		footer->draw(rt, footer_pos, UI::Align::kCenter);
 	}
+
+	return rv;
 }

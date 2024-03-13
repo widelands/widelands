@@ -21,10 +21,14 @@
 
 #include <string>
 
+#include "base/rect.h"
 #include "graphic/rendertarget.h"
 
 void draw_game_tip(RenderTarget& rt, const Recti& bounds, const std::string&, unsigned opacity = 1);
 
-void draw_splashscreen(RenderTarget& rt, const std::string& footer_message, float opacity = 1.0f);
+// Returns the rectangle in which the image was rendered
+Rectf draw_splashscreen(RenderTarget& rt, const std::string& footer_message, float opacity = 1.0f);
+
+const std::string kSplashImageName = "loadscreens/splash.jpg";
 
 #endif  // end of include guard: WL_GRAPHIC_GRAPHIC_FUNCTIONS_H

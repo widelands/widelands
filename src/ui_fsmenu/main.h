@@ -26,6 +26,7 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "ui_fsmenu/menu.h"
+#include "ui_fsmenu/splash_overlay.h"
 
 namespace Widelands {
 class Game;
@@ -133,10 +134,13 @@ private:
 
 	const Image* title_image_;
 
-	uint32_t init_time_;
-
+	// Only used during the splash screen phase
 	enum class SplashState { kSplash, kSplashFadeOut, kMenuFadeIn, kDone };
-	SplashState splash_state_;
+	SplashState splash_state_{SplashState::kDone};
+	std::unique_ptr<SplashOverlay> splash_overlay_{nullptr};
+	uint32_t init_time_;
+	bool key_pressed_{false};
+	//
 
 	std::vector<std::string> images_;
 	uint32_t last_image_exchange_time_{0U};
