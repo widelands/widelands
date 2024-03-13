@@ -3334,7 +3334,7 @@ msgid ""
 "Widelands could not establish a connection to the given address. Either no "
 "Widelands server was running at the supposed port or the server shut down as"
 " you tried to connect."
-msgstr ""
+msgstr "Nepodarilo sa nadviazať spojenie so zadanou adresou. Buď na predpokladanom porte nebežal žiaden server hry Widelands, alebo bol server ukončený, keď ste sa naň pokúšali pripojiť."
 
 #: ../../src/network/gameclient.cc:814
 #, c-format
@@ -3508,7 +3508,7 @@ msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
-msgstr "Nepodarilo sa nadviazať spojenie so zadanou adresou.\nBuď na uvedenom porte nebežal žiaden metaserver,\naleob vaše nastavenie siete je nesprávne."
+msgstr "Nepodarilo sa nadviazať spojenie so zadanou adresou.\nBuď na predpokladanom porte nebežal žiaden metaserver,\nalebo vaše nastavenie siete je nesprávne."
 
 #: ../../src/network/internet_gaming.cc:168
 msgid "Users marked with IRC will possibly not react to messages."
@@ -7452,11 +7452,11 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1780
 msgid "Game ended unexpectedly"
-msgstr ""
+msgstr "Neočakávané ukončenie hry"
 
 #: ../../src/wlapplication.cc:1780
 msgid "Unexpected error during the game"
-msgstr ""
+msgstr "Neočakávaná chyba počas hry"
 
 #: ../../src/wlapplication.cc:1783
 #, c-format
@@ -7480,11 +7480,11 @@ msgid ""
 "%s\n"
 "\n"
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
-msgstr ""
+msgstr "Hra sa skončila neočakávane kvôli nasledovnej príčine:\n\n%s\n\nChcete, aby sa Widelands pokúsil vytvoriť núdzovo uloženú hru? Väčšinou je možné jej načítanie a pokračovanie v hre."
 
 #: ../../src/wlapplication.cc:1826
 msgid "Emergency save failed"
-msgstr ""
+msgstr "Núdzové uloženie zlyhalo"
 
 #: ../../src/wlapplication.cc:1827
 #, c-format
@@ -7728,7 +7728,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:361
 msgid "Toggle Minimap"
-msgstr ""
+msgstr "Prepnúť minimapu"
 
 #: ../../src/wlapplication_options.cc:366
 msgid "Encyclopedia"
@@ -9323,7 +9323,7 @@ msgstr ""
 
 #: ../../src/wui/game_diplomacy_menu.cc:272
 msgid "Approve"
-msgstr ""
+msgstr "Schváliť"
 
 #: ../../src/wui/game_diplomacy_menu.cc:273
 msgid "Reject"

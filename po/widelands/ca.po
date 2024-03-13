@@ -6346,7 +6346,7 @@ msgstr "Continua editant"
 #: ../../src/wui/game_main_menu_save_game.cc:46
 #: ../../src/wui/interactive_gamebase.cc:167
 msgid "Load Replay"
-msgstr "Carrega la repetició"
+msgstr "Carrega una repetició"
 
 #: ../../src/ui_fsmenu/main.cc:456
 msgid "Watch the replay of an old game"
@@ -6370,7 +6370,7 @@ msgstr "Editor…"
 
 #: ../../src/ui_fsmenu/main.cc:493
 msgid "Watch Replay…"
-msgstr "Mira repetició…"
+msgstr "Mira una repetició…"
 
 #: ../../src/ui_fsmenu/main.cc:495
 msgid "Begin or load a single-player campaign or free game"
