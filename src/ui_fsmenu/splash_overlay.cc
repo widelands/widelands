@@ -31,8 +31,9 @@
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "scripting/lua_interface.h"
-// #include "sound/sound_handler.h"
 #include "wlapplication_options.h"
+
+// #include "sound/sound_handler.h"
 
 namespace FsMenu {
 
