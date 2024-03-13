@@ -14,20 +14,15 @@ function list_authors()
          if (entry["subheading"] ~= nil) then
             result = result .. h2_authors(entry["subheading"])
          end
-         for k, member in ipairs(entry["members"])  do
-            result = result .. p("valign=center", img(category["image"]) .. " " .. member)
-         end
+         result = result .. columns(entry["members"], img(category["image"]))
       end
    end
-   return result
+   return div("width=100%", pagetitle(_("Widelands Development Team")) .. result)
 end
 
 -- Main script
 local r = {
-   rt(div("width=100%",
-      pagetitle(_("Widelands Development Team")) ..
-      list_authors()
-   ))
+   rt(list_authors())
 }
 
 set_fs_style(false)

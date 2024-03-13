@@ -178,6 +178,7 @@ function developers() return {
                "Florian Angermeier (fraang)",
                "DragonAtma",
                "Benedikt Straub (Nordfriese)",
+               "Tóth András",
             },
          },
       },

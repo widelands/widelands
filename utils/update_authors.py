@@ -54,6 +54,7 @@ function translators() return {
 for source_filename in source_files:
     # Only json files, and not the template file please
     if source_filename.endswith('.json') and source_filename != 'locales_translators.json':
+        locale_code = source_filename.split('.json')[0]
         source_file = open(source_path + '/' + source_filename, 'r')
         translators = json.load(source_file)
         locale_message = '- Added'
@@ -62,7 +63,7 @@ for source_filename in source_files:
         # Make sure we don't pick up untranslated stuff
         if translators['translator-list'] != 'translator-credits':
             locale_message += ' translators and'
-            lua_translators += '\t{\n'  # entry
+            lua_translators += '\t' + locale_code + ' = {\n'  # entry
             lua_translators += f'''\t\theading = "{ translators['your-language-name'] }'''
             if translators['your-language-name-in-english'] != 'English' and \
                translators['your-language-name-in-english'] != translators['your-language-name']:
@@ -80,7 +81,6 @@ for source_filename in source_files:
 
         # Parsing locale info
         # Make sure we don't pick up untranslated stuff
-        locale_code = source_filename.split('.json')[0]
         locale_message += ' locale info for ' + locale_code
         lua_locales += '\n\t' + locale_code + \
             ' = {\n'  # entry with locale code

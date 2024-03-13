@@ -861,6 +861,7 @@ return {
             face = fs_font_face,
             size = 24,
          },
+         align = "center",
          space_before = fs_heading_space_before_big,
          space_after = fs_heading_space_after,
       },
