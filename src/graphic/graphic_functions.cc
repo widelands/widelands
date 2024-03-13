@@ -46,9 +46,7 @@ void draw_game_tip(RenderTarget& rt,
 	rendered_text->draw(rt, pt);
 }
 
-Rectf draw_splashscreen(RenderTarget& rt,
-                       const std::string& footer_message,
-                       const float opacity) {
+Rectf draw_splashscreen(RenderTarget& rt, const std::string& footer_message, const float opacity) {
 	const Image* image = g_image_cache->get(kSplashImageName);
 	rt.fill_rect(Recti(0, 0, rt.width(), rt.height()), RGBAColor(0, 0, 0, 255), BlendMode::Default);
 	const Rectf rv = rt.blit_fit(image, false, opacity);

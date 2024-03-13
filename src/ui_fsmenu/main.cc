@@ -590,8 +590,8 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 	if (down) {
 		if (splash_state_ != SplashState::kDone) {
 			// Default key is "Escape", but also hardcode it
-			abort_splashscreen(
-			   matches_shortcut(KeyboardShortcut::kMainMenuQuit, code) || code.sym == SDLK_ESCAPE);
+			abort_splashscreen(matches_shortcut(KeyboardShortcut::kMainMenuQuit, code) ||
+			                   code.sym == SDLK_ESCAPE);
 			// Allow first keypress to trigger matching shortcut action, but not the later keypresses
 			if (key_pressed_) {
 				return true;
