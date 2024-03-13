@@ -248,6 +248,7 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     "-Wno-padded"
     "-Wno-sign-conversion"
     "-Wno-missing-noreturn"
+    "-Wno-unsafe-buffer-usage"
 
     # It is impossible to write code that both GCC and Clang will like,
     # so we have to switch off the warning for one of them.
