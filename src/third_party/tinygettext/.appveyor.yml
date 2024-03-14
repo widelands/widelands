@@ -1,0 +1,41 @@
+version: '{build}'
+
+os: Visual Studio 2019
+
+configuration:
+  - Release
+  - Debug
+
+platform:
+  - x64
+  - x86
+
+branches:
+  except:
+    - coverity_scan
+
+cache: c:\tools\vcpkg\installed -> .appveyor.yml
+
+install:
+  - cd C:\Tools\vcpkg
+  - git fetch
+  - git checkout 2020.07
+  - .\bootstrap-vcpkg.bat
+  - cd %APPVEYOR_BUILD_FOLDER%
+
+before_build:
+  - set VCPKG_DEFAULT_TRIPLET=%PLATFORM%-windows
+  - vcpkg install libiconv
+  - git submodule update --init --recursive
+  - if [%PLATFORM%]==[x86] (
+      cmake -G "Visual Studio 16 2019" -A Win32 -DCMAKE_TOOLCHAIN_FILE=c:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_INSTALL_PREFIX="%P%" -DBUILD_TESTS=ON
+    ) else (
+      cmake -G "Visual Studio 16 2019" -A x64 -DCMAKE_TOOLCHAIN_FILE=c:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_INSTALL_PREFIX="%P%" -DBUILD_TESTS=ON
+    )
+
+build:
+  project: ALL_BUILD.vcxproj
+  parallel: true
+  verbosity: normal
+
+# EOF #

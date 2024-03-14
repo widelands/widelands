@@ -1,0 +1,7 @@
+*.o
+*~
+.DS_Store
+/build*/
+/result
+/result-[0-9]
+/tinygettext_Export.h
