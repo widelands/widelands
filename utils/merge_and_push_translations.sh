@@ -31,8 +31,8 @@ if [ ! -f "utils/buildcat.py" ]; then
 fi
 
 # Ensure that our git is clean
-rm -f po/*/*.pot.*~
-rm -f po/*/*.po.*~
+rm -f data/i18n/translations/*/*.pot.*~
+rm -f data/i18n/translations/*/*.po.*~
 
 if [ -n "$(git status -s)" ]; then
   echo "git status must be empty to prevent accidental commits etc."
@@ -106,7 +106,7 @@ gitAddGeneratedFiles() {
 undo_oneliner_diffs() {
   # Undo one-liner diffs of pure timestamps with no other content
   set +x
-  for entry in $(git diff --numstat po/ | sed -En 's/^1\t1\t//p'); do
+  for entry in $(git diff --numstat data/i18n/translations/ | sed -En 's/^1\t1\t//p'); do
     if [ -z "$(git diff "$entry" | grep '^[+-][^+-]' | grep -v '^[+-]"POT-Creation-Date:')" ]
     then # no other diff line remaining
       echo "Skipping changes to $entry"
@@ -139,7 +139,7 @@ if [ -n "$(git status -s)" ]; then
   update_statistics
 
   # Stage translations
-  git add 'po/*/*.po' 'data/i18n/locales/*.json' 'xdg/translations/*.json'
+  git add 'data/i18n/translations/*/*.po' 'data/i18n/locales/*.json' 'xdg/translations/*.json'
   # and generated files
   gitAddGeneratedFiles
 
@@ -182,7 +182,7 @@ if [ -n "$(git status -s)" ]; then
 
   # Stage changes
   # - Translations and templates
-  git add 'po/*/*.po' 'po/*/*.pot' 'data/i18n/locales/*.json' 'xdg/translations/*.json' || true
+  git add 'data/i18n/translations/*/*.po' 'data/i18n/translations/*/*.pot' 'data/i18n/locales/*.json' 'xdg/translations/*.json' || true
   # - generated files
   gitAddGeneratedFiles
 

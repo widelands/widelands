@@ -45,11 +45,6 @@ print_help () {
     echo "-w or --no-website    Omit building of website binaries."
     echo "+w or --with-website  Enable building of website binaries."
     echo " "
-    echo "-t or --no-translations"
-    echo "                      Omit building translations."
-    echo "+t or --with-translations"
-    echo "                      Enable building translations."
-    echo " "
     echo "-s or --skip-tests    Skip linking and executing the tests."
     echo "+s or --do-tests      Link and execute the tests."
     echo " "
@@ -122,7 +117,6 @@ print_help () {
 
 ## Options to control the build.
 BUILD_WEBSITE="ON"
-BUILD_TRANSLATIONS="ON"
 BUILD_TESTS="ON"
 BUILD_TYPE="Debug"
 USE_FLTO="yes"
@@ -233,14 +227,6 @@ do
       if [ "${USE_ASAN}" = "default" ] && [ "${USE_TSAN}" = "OFF" ]; then
         USE_ASAN="ON"
       fi
-    shift
-    ;;
-    -t|--no-translations)
-      BUILD_TRANSLATIONS="OFF"
-    shift
-    ;;
-    +t|--with-translations)
-      BUILD_TRANSLATIONS="ON"
     shift
     ;;
     -c|--no-cross-opt)
@@ -419,16 +405,6 @@ else
   CMD_ADD "--no-website"
 fi
 echo " "
-if [ $BUILD_TRANSLATIONS = "ON" ]; then
-  echo "Translations will be built."
-  echo "You can use -t or --no-translations to omit building them."
-  CMD_ADD "--with-translations"
-else
-  echo "Translations will not be built."
-  echo "You can use +t or --with-translations to build them."
-  CMD_ADD "--no-translations"
-fi
-echo " "
 if [ $BUILD_TESTS = "ON" ]; then
   echo "Tests will be built."
   echo "You can use -s or --skip-tests to omit building them."
@@ -549,7 +525,6 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
     $RUN cmake $GENERATOR .. $EXTRA_OPTS                       \
                -DCMAKE_BUILD_TYPE=$BUILD_TYPE                  \
                -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE     \
-               -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS \
                -DOPTION_BUILD_TESTS=$BUILD_TESTS               \
                -DOPTION_ASAN=$USE_ASAN                         \
                -DOPTION_TSAN=$USE_TSAN                         \
@@ -672,11 +647,6 @@ if [ $BUILD_TYPE = "Release" ]; then
   echo "# - Release build                                         #"
 else
   echo "# - Debug build                                           #"
-fi
-if [ $BUILD_TRANSLATIONS = "ON" ]; then
-  echo "# - Translations                                          #"
-else
-  echo "# - No translations                                       #"
 fi
 if [ $BUILD_TESTS = "ON" ]; then
   echo "# - Tests                                                 #"

@@ -7,7 +7,6 @@ macro(_parse_common_args ARGS)
     WIN32 # Windows binary/library.
     USES_ATOMIC
     USES_ICU
-    USES_INTL
     USES_MINIZIP
     USES_OPENGL
     USES_PNG
@@ -15,6 +14,7 @@ macro(_parse_common_args ARGS)
     USES_SDL2_IMAGE
     USES_SDL2_MIXER
     USES_SDL2_TTF
+    USES_TINYGETTEXT
     USES_ZLIB
   )
   set(ONE_VALUE_ARG )
@@ -180,13 +180,8 @@ macro(_common_compile_tasks)
     target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL2::TTF ${SDL_TTF_STATIC_LIBS})
   endif()
 
-  if (ARG_USES_INTL)
-    # libintl is not used on all systems, so only include it, when we actually
-    # found it.
-    if (Intl_FOUND)
-      wl_include_system_directories(${NAME} ${Intl_INCLUDE_DIRS})
-      target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} ${Intl_LIBRARIES})
-    endif()
+  if(ARG_USES_TINYGETTEXT)
+    target_link_libraries(${NAME} tinygettext)
   endif()
 
   if(ARG_USES_ICU)

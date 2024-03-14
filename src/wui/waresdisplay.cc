@@ -669,20 +669,20 @@ static const char* unit_suffixes[] = {
    "%1%",
    /** TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000). */
    /** TRANSLATORS: Space is limited, use only 1 letter for the suffix and no whitespace. */
-   _("%1%k"),
+   gettext_noop("%1%k"),
    /** TRANSLATORS: This is a large number with a suffix (e.g. 5M = 5,000,000). */
    /** TRANSLATORS: Space is limited, use only 1 letter for the suffix and no whitespace. */
-   _("%1%M"),
+   gettext_noop("%1%M"),
    /** TRANSLATORS: This is a large number with a suffix (e.g. 5G = 5,000,000,000). */
    /** TRANSLATORS: Space is limited, use only 1 letter for the suffix and no whitespace. */
-   _("%1%G")};
+   gettext_noop("%1%G")};
 std::string get_amount_string(uint32_t amount, bool cutoff1k) {
 	uint8_t size = 0;
 	while (amount >= ((size != 0u) || cutoff1k ? 1000 : 10000)) {
 		amount /= 1000;
 		size++;
 	}
-	return format(unit_suffixes[size], amount);
+	return format(_(unit_suffixes[size]), amount);
 }
 
 uint32_t StockMenuWaresDisplay::amount_of(const Widelands::DescriptionIndex ware) {

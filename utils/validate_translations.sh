@@ -37,12 +37,12 @@ fi
 echo "Running i18nspector. This can take a while."
 
 # We want a log of all errors.
-i18nspector po/*/*.po \
+i18nspector data/i18n/translations/*/*.po \
   | grep "E:" \
   > po_validation/maintainers/i18nspector-errors.log
 
 # We don't care about all warnings, so we filter some out.
-i18nspector po/*/*.po \
+i18nspector data/i18n/translations/*/*.po \
   | grep "W:" \
   | grep -v "invalid-last-translator" \
   | grep -v boilerplate \
@@ -57,7 +57,7 @@ function run_pofilter() {
     mkdir po_validation/maintainers/$1/
   fi
   echo "Running pofilter for '$1'"
-  pofilter -t $1 -i po/ -o po_validation/maintainers/$1/
+  pofilter -t $1 -i data/i18n/translations/ -o po_validation/maintainers/$1/
 }
 
 # These checks are critical
@@ -87,7 +87,7 @@ if [ ! -d "po_validation/maintainers/options/" ]; then
   mkdir po_validation/maintainers/options/
 fi
 echo "Running pofilter for 'options'"
-pofilter -t options -i po/widelands_console/ -o po_validation/maintainers/options/
+pofilter -t options -i data/i18n/translations/widelands_console/ -o po_validation/maintainers/options/
 
 echo "Processing directories"
 for dir in po_validation/maintainers/*/

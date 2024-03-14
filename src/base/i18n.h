@@ -22,10 +22,14 @@
 #include <string>
 #include <vector>
 
+// Prevent namespace clashes with this system include
+#if __has_include(<libintl.h>)
+#include <libintl.h>
+#endif
+
 #include "base/macros.h"
 #include "base/mutex.h"
 #include "config.h"
-#include "third_party/gettext/gettext.h"  // For ngettext and pgettext.
 
 // prevent defining sprintf / snprintf / vsnprintf to libintl_sprintf / libintl_snprintf /
 // libintl_vsnprintf in libintl.h, libintl.h is included by getext.h
@@ -52,23 +56,34 @@
 #define npgettext(c, s, p, n) i18n::npgettext_wrapper(c, s, p, n)
 #endif
 
+inline const char* gettext_noop(const char* str) {
+	return str;
+}
+inline const std::string& gettext_noop(const std::string& str) {
+	return str;
+}
+
 namespace i18n {
 
 // Make every call to translate log the string for debugging.
 void enable_verbose_i18n();
 
-char const* translate(char const*) __attribute__((format_arg(1)));
-char const* translate(const std::string&);
-char const* ngettext_wrapper(const char* singular, const char* plural, int n);
-char const* pgettext_wrapper(const char* msgctxt, const char* msgid);
-char const* npgettext_wrapper(const char* msgctxt, const char* singular, const char* plural, int n);
+const char* translate(const char*)  __attribute__((format_arg(1)));
+const std::string& translate(const std::string&);
+const char* ngettext_wrapper(const char* singular, const char* plural, int n);
+const std::string& ngettext_wrapper(const std::string& singular, const std::string& plural, int n);
+const char* pgettext_wrapper(const char* msgctxt, const char* msgid);
+const std::string& pgettext_wrapper(const std::string& msgctxt, const std::string& msgid);
+const char* npgettext_wrapper(const char* msgctxt, const char* singular, const char* plural, int n);
+const std::string& npgettext_wrapper(const std::string& msgctxt, const std::string& singular, const std::string& plural, int n);
 
-void grab_textdomain(const std::string&, const char* ldir);
+void grab_textdomain(const std::string& domain, const std::string& ldir);
 void release_textdomain();
 
 void init_locale();
 void set_locale(const std::string&);
 const std::string& get_locale();
+const std::string& get_locale_or_default();
 
 void set_localedir(const std::string&);
 const std::string& get_localedir();

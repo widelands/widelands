@@ -26,25 +26,15 @@
 
 #include <cstdlib>
 #include <map>
+#include <memory>
 
 #include "base/log.h"
 #include "base/string.h"
 #include "config.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
-
-#ifdef __APPLE__
-#if LIBINTL_VERSION >= 0x001201
-// for older libintl versions, setlocale is just fine
-#define SETLOCALE libintl_setlocale
-#endif  // LIBINTL_VERSION
-#else   // __APPLE__
-#if defined _WIN32
-#define SETLOCALE setlocale
-#else
-#define SETLOCALE std::setlocale
-#endif
-#endif
+#include "third_party/tinygettext/include/tinygettext/log.hpp"
+#include "third_party/tinygettext/include/tinygettext/tinygettext.hpp"
 
 namespace i18n {
 
@@ -53,7 +43,44 @@ namespace i18n {
 /// \see grab_texdomain()
 namespace {
 
-std::vector<std::pair<std::string, std::string>> textdomains;
+struct TextdomainStackEntry {
+	explicit TextdomainStackEntry(const std::string& dir) {
+		if (g_fs->is_directory(dir)) {
+			dictionary_manager.add_directory(dir);
+		} else {
+			log_warn("Textdomain directory %s does not exist", dir.c_str());
+		}
+	}
+
+	const std::string& translate_ctxt_plural(const std::string& ctxt, const std::string& sg, const std::string& pl, int n) {
+		cached_return_values.push_back(dictionary().translate_ctxt_plural(ctxt, sg, pl, n));
+		return cached_return_values.back();
+	}
+	const std::string& translate_ctxt(const std::string& ctxt, const std::string& msg) {
+		cached_return_values.push_back(dictionary().translate_ctxt(ctxt, msg));
+		return cached_return_values.back();
+	}
+	const std::string& translate_plural(const std::string& sg, const std::string& pl, int n) {
+		cached_return_values.push_back(dictionary().translate_plural(sg, pl, n));
+		return cached_return_values.back();
+	}
+	const std::string& translate(const std::string& msg) {
+		cached_return_values.push_back(dictionary().translate(msg));
+		return cached_return_values.back();
+	}
+
+private:
+	tinygettext::DictionaryManager dictionary_manager;
+
+	// To prevent translations from going out of scope before use in complex string assemblies.
+	std::vector<std::string> cached_return_values;
+
+	tinygettext::Dictionary& dictionary() {
+		return dictionary_manager.get_dictionary(tinygettext::Language::from_env(get_locale_or_default()));
+	}
+};
+
+std::vector<std::unique_ptr<TextdomainStackEntry>> textdomains;
 
 std::string env_locale;
 std::string locale;
@@ -74,30 +101,65 @@ void enable_verbose_i18n() {
 	log_i18n_if_desired_ = log_i18n_on;
 }
 
-/**
- * Translate a string with gettext
- */
-// TODO(unknown): Implement a workaround if gettext was not found
-char const* translate(char const* const str) {
-	log_i18n_if_desired_("gettext", str);
-	return gettext(str);
+static void tinygettext_log_err(const std::string& msg) {
+	log_err("%s", msg.c_str());
 }
-char const* translate(const std::string& str) {
-	return translate(str.c_str());
+static void tinygettext_log_warn(const std::string& msg) {
+	log_warn("%s", msg.c_str());
+}
+static void tinygettext_log_info(const std::string& msg) {
+	verb_log_info("%s", msg.c_str());
 }
 
-char const* pgettext_wrapper(const char* msgctxt, const char* msgid) {
-	log_i18n_if_desired_("pgettext", msgid);
-	return pgettext_expr(msgctxt, msgid);
+/**
+ * Translate a string.
+ */
+const char* translate(const char* const str) {
+	return translate(std::string(str)).c_str();
 }
-char const* ngettext_wrapper(const char* singular, const char* plural, const int n) {
-	log_i18n_if_desired_("ngettext", singular);
-	return ngettext(singular, plural, n);
+const std::string& translate(const std::string& str) {
+	log_i18n_if_desired_("gettext", str.c_str());
+	if (textdomains.empty()) {
+		log_err("Call to translate with empty textdomain stack");
+		return str;
+	}
+	return textdomains.back()->translate(str);
 }
-char const*
-npgettext_wrapper(const char* msgctxt, const char* singular, const char* plural, int n) {
-	log_i18n_if_desired_("npgettext", singular);
-	return npgettext_expr(msgctxt, singular, plural, n);
+
+const char* pgettext_wrapper(const char* msgctxt, const char* msgid) {
+	return pgettext_wrapper(std::string(msgctxt), std::string(msgid)).c_str();
+}
+const std::string& pgettext_wrapper(const std::string& msgctxt, const std::string& msgid) {
+	log_i18n_if_desired_("pgettext", msgid.c_str());
+	if (textdomains.empty()) {
+		log_err("Call to pgettext with empty textdomain stack");
+		return msgid;
+	}
+	return textdomains.back()->translate_ctxt(msgctxt, msgid);
+}
+
+const char* ngettext_wrapper(const char* singular, const char* plural, const int n) {
+	return ngettext_wrapper(std::string(singular), std::string(plural), n).c_str();
+}
+const std::string& ngettext_wrapper(const std::string& singular, const std::string& plural, const int n) {
+	log_i18n_if_desired_("ngettext", singular.c_str());
+	if (textdomains.empty()) {
+		log_err("Call to ngettext with empty textdomain stack");
+		return n == 1 ? singular : plural;
+	}
+	return textdomains.back()->translate_plural(singular, plural, n);
+}
+
+const char* npgettext_wrapper(const char* msgctxt, const char* singular, const char* plural, int n) {
+	return npgettext_wrapper(std::string(msgctxt), std::string(singular), std::string(plural), n).c_str();
+}
+const std::string& npgettext_wrapper(const std::string& msgctxt, const std::string& singular, const std::string& plural, int n) {
+	log_i18n_if_desired_("npgettext", singular.c_str());
+	if (textdomains.empty()) {
+		log_err("Call to npgettext with empty textdomain stack");
+		return n == 1 ? singular : plural;
+	}
+	return textdomains.back()->translate_ctxt_plural(msgctxt, singular, plural, n);
 }
 
 /**
@@ -117,6 +179,15 @@ void set_homedir(const std::string& dname) {
 
 const std::string& get_homedir() {
 	return homedir;
+}
+
+static std::string canonical_addon_locale_dir;
+const std::string& get_addon_locale_dir() {
+	if (canonical_addon_locale_dir.empty()) {
+		canonical_addon_locale_dir = g_fs->canonicalize_name(homedir + "/" + kAddOnLocaleDir);
+		assert(!canonical_addon_locale_dir.empty());
+	}
+	return canonical_addon_locale_dir;
 }
 
 GenericTextdomain::GenericTextdomain() : lock_(MutexLock::ID::kI18N) {
@@ -141,14 +212,9 @@ AddOnTextdomain::AddOnTextdomain(std::string addon, const int i18n_version) {
  * it -> we're back in widelands domain. Negative: We can't translate error
  * messages. Who cares?
  */
-void grab_textdomain(const std::string& domain, const char* ldir) {
-	char const* const dom = domain.c_str();
-
-	bindtextdomain(dom, ldir);
-	bind_textdomain_codeset(dom, "UTF-8");
+void grab_textdomain(const std::string& domain, const std::string& ldir) {
 	log_i18n_if_desired_("textdomain", (domain + " @ " + ldir).c_str());
-	textdomain(dom);
-	textdomains.emplace_back(dom, ldir);
+	textdomains.emplace_back(new TextdomainStackEntry(ldir + "/" + domain));
 }
 
 /**
@@ -156,235 +222,36 @@ void grab_textdomain(const std::string& domain, const char* ldir) {
  */
 void release_textdomain() {
 	if (textdomains.empty()) {
-		log_err("trying to pop textdomain from empty stack");
+		log_err("Trying to pop textdomain from empty stack");
 		return;
 	}
 	textdomains.pop_back();
-
-	// Don't try to get the previous TD when the very first one ('widelands')
-	// just got dropped
-	if (!textdomains.empty()) {
-		char const* const domain = textdomains.back().first.c_str();
-
-		bind_textdomain_codeset(domain, "UTF-8");
-		bindtextdomain(domain, textdomains.back().second.c_str());
-		textdomain(domain);
-	}
 }
 
-/**
- * Initialize locale to English.
- * Save system language (for later selection).
- * Code inspired by wesnoth.org
- */
-void init_locale() {
-	env_locale = std::string();
-#ifdef _WIN32
-	locale = "English";
-	SETLOCALE(LC_ALL, "English");
-#else
-	// first, save environment variable
-	char* lang;
-	lang = getenv("LANG");
-	if (lang != nullptr) {
-		env_locale = lang;
-	}
-	if (env_locale.empty()) {
-		lang = getenv("LANGUAGE");
-		if (lang != nullptr) {
-			env_locale = lang;
-		} else {  // Finall fallback in case we cannot find out anything (#1784495)
-			env_locale = "en";
-		}
-	}
-	locale = "C";
-	SETLOCALE(LC_ALL, "C");
-	SETLOCALE(LC_MESSAGES, "");
-#endif
-}
-
-static std::string canonical_addon_locale_dir;
-const std::string& get_addon_locale_dir() {
-	if (canonical_addon_locale_dir.empty()) {
-		canonical_addon_locale_dir = g_fs->canonicalize_name(homedir + "/" + kAddOnLocaleDir);
-		assert(!canonical_addon_locale_dir.empty());
-	}
-	return canonical_addon_locale_dir;
-}
-
-/**
- * Set the locale to the given string.
- * Code inspired by wesnoth.org
- */
 void set_locale(const std::string& name) {
-	const std::map<std::string, std::string> kAlternatives = {
-	   {"ar", "ar,ar_AR,ar_AE,ar_BH,ar_DZ,ar_EG,ar_IN,ar_IQ,ar_JO,ar_KW,ar_LB,ar_LY,ar_MA,ar_OM,ar_"
-	          "QA,ar_SA,ar_SD,ar_SY,ar_TN,ar_YE"},
-	   {"ast", "ast,ast_ES"},
-	   {"ca", "ca,ca_ES,ca_ES@valencia,ca_FR,ca_IT"},
-	   {"cs", "cs,cs_CZ"},
-	   {"da", "da,da_DK"},
-	   {"de", "de,de_DE,de_AT,de_CH,de_LI,de_LU,de_BE"},
-	   {"el", "el,el_GR,el_CY"},
-	   {"en", "en,en_US,en_GB,en_AU,en_CA,en_AG,en_BW,en_DK,en_HK,en_IE,en_IN,en_NG,en_NZ,en_PH,en_"
-	          "SG,en_ZA,en_ZW"},
-	   {"en_AU", "en_AU,en,en_US,en_GB"},
-	   {"en_CA", "en_CA,en,en_US,en_GB"},
-	   {"en_GB", "en_GB,en,en_US"},
-	   {"eo", "eo,eo_XX"},
-	   {"es", "es,es_ES,es_MX,es_US"},
-	   {"et", "et,et_EE"},
-	   {"eu", "eu,eu_ES,eu_FR"},
-	   {"fa", "fa,fa_IR"},
-	   {"fi", "fi,fi_FI"},
-	   {"fr", "fr,fr_FR,fr_CH,fr_BE,fr_CA,fr_LU"},
-	   {"gd", "gd,gd_GB,gd_CA"},
-	   {"gl", "ga,gl_ES"},
-	   {"he", "he,he_IL"},
-	   {"hr", "hr,hr_HR,hr_RS,hr_BA,hr_ME,hr_HU"},
-	   {"hu", "hu,hu_HU"},
-	   {"ia", "ia"},
-	   {"id", "id,id_ID"},
-	   {"it", "it,it_IT,it_CH"},
-	   {"ja", "ja,ja_JP"},
-	   {"jv", "jv,jv_ID,jv_MY,jv_SR,jv_NC"},
-	   {"ka", "ka,ka_GE"},
-	   {"ko", "ko,ko_KR"},
-	   {"la", "la,la_AU,la_VA"},
-	   {"mr", "mr,mr_IN"},
-	   {"ms", "ms,ms_MY"},
-	   {"my", "my,my_MM"},
-	   {"nb", "nb,nb_NO"},
-	   {"nl", "nl,nl_NL,nl_BE,nl_AW"},
-	   {"nn", "nn,nn_NO"},
-	   {"oc", "oc,oc_FR"},
-	   {"pl", "pl,pl_PL"},
-	   {"pt", "pt,pt_PT,pt_BR"},
-	   {"pt_BR", "pt_BR,pt,pt_PT"},
-	   {"ru", "ru,ru_RU,ru_UA"},
-	   {"si", "si,si_LK"},
-	   {"sk", "sk,sk_SK"},
-	   {"sl", "sl,sl_SI"},
-	   {"sr", "sr,sr_RS,sr_ME"},
-	   {"sv", "sv,sv_FI,sv_SE"},
-	   {"tr", "tr,tr_TR,tr_CY"},
-	   {"uk", "uk,uk_UA"},
-	   {"vi", "vi,vi_VN"},
-	   {"zh", "zh,zh_CN,zh_TW,zh_HK,zh_MO"},
-	   {"zh_CN", "zh_CN,zh,zh_TW,zh_HK,zh_MO"},
-	   {"zh_TW", "zh_TW,zh_HK,zh_MO,zh,zh_CN"},
-	};
-
-	std::string lang(name);
-
-	log_info("selected language: %s\n", lang.empty() ? "(system language)" : lang.c_str());
-
-#ifndef _WIN32
-#ifndef __AMIGAOS4__
-#ifndef __APPLE__
-	unsetenv("LANGUAGE");  // avoid problems with this variable
-#endif
-#endif
-#endif
-
-	std::string alt_str;
-	if (lang.empty()) {
-		// reload system language, if selected
-		lang = env_locale;
-		alt_str = env_locale;
-	} else {
-		alt_str = lang;
-		// otherwise, try alternatives.
-		if (kAlternatives.count(lang) != 0u) {
-			alt_str = kAlternatives.at(lang);
-		}
-	}
-	alt_str += ",";
-
-// Somehow setlocale doesn't behave same on
-// some systems.
-#ifdef __BEOS__
-	setenv("LANG", lang.c_str(), 1);
-	setenv("LC_ALL", lang.c_str(), 1);
-	locale = lang;
-#endif
-#ifdef __APPLE__
-	setenv("LANGUAGE", lang.c_str(), 1);
-	setenv("LANG", lang.c_str(), 1);
-	setenv("LC_ALL", lang.c_str(), 1);
-	locale = lang;
-#endif
-#ifdef _WIN32
-	_putenv_s("LANG", lang.c_str());
-	locale = lang;
-#endif
-
-#ifdef __linux__
-	char* res = nullptr;
-	char const* encodings[] = {"", ".utf-8", "@euro", ".UTF-8"};
-	std::size_t found = alt_str.find(',', 0);
-	bool leave_while = false;
-	// try every possible combination of alternative and encoding
-	while (found != std::string::npos) {
-		std::string base_locale = alt_str.substr(0, int(found));
-		alt_str = alt_str.erase(0, int(found) + 1);
-
-		for (char const* encoding : encodings) {
-			std::string try_locale = base_locale + encoding;
-			res = SETLOCALE(LC_MESSAGES, try_locale.c_str());
-			if (res != nullptr) {
-				locale = try_locale;
-				log_info("using locale %s\n", try_locale.c_str());
-				leave_while = true;
-				break;
-			}  // log("locale is not working: %s\n", try_locale.c_str());
-		}
-		if (leave_while) {
-			break;
-		}
-
-		found = alt_str.find(',', 0);
-	}
-	if (leave_while) {
-		setenv("LC_ALL", locale.c_str(), 1);
-		setenv("LANG", locale.c_str(), 1);
-		setenv("LANGUAGE", locale.c_str(), 1);
-	} else {
-		log_warn("No corresponding locale found\n");
-		log_warn(" - Set LANGUAGE, LANG and LC_ALL to '%s'\n", lang.c_str());
-
-		setenv("LANGUAGE", lang.c_str(), 1);
-		setenv("LANG", lang.c_str(), 1);
-		setenv("LC_ALL", lang.c_str(), 1);
-
-		try {
-			SETLOCALE(LC_MESSAGES, "en_US.utf8");  // set locale according to the env. variables
-			                                       // --> see  $ man 3 setlocale
-			log_warn(" - Set system locale to 'en_US.utf8' to make '%s' accessible to libintl\n",
-			         lang.c_str());
-		} catch (std::exception&) {
-			SETLOCALE(LC_MESSAGES, "");  // set locale according to the env. variables
-			                             // --> see  $ man 3 setlocale
-		}
-		// assume that it worked
-		// maybe, do another check with the return value (?)
-		locale = lang;
-	}
-#endif
-
-	SETLOCALE(LC_ALL, "");  //  call to libintl
-
-	if (!textdomains.empty()) {
-		char const* const domain = textdomains.back().first.c_str();
-
-		bind_textdomain_codeset(domain, "UTF-8");
-		bindtextdomain(domain, textdomains.back().second.c_str());
-		textdomain(domain);
-	}
+	locale = name;
 }
-
 const std::string& get_locale() {
 	return locale;
+}
+const std::string& get_locale_or_default() {
+	return locale.empty() ? env_locale : locale;
+}
+
+void init_locale() {
+	tinygettext::Log::set_log_error_callback(tinygettext_log_err);
+	tinygettext::Log::set_log_warning_callback(tinygettext_log_warn);
+	tinygettext::Log::set_log_info_callback(tinygettext_log_info);
+
+	locale = std::string();
+	env_locale = "en";
+	for (const auto& var : {"LANG", "LANGUAGE"}) {
+		const char *environment_variable = getenv(var);
+		if (environment_variable != nullptr && environment_variable[0] != '\0') {
+			env_locale = environment_variable;
+			break;
+		}
+	}
 }
 
 std::string localize_list(const std::vector<std::string>& items, ConcatenateWith listtype) {
@@ -424,7 +291,7 @@ std::string join_sentences(const std::string& sentence1, const std::string& sent
 	i18n::Textdomain td("widelands");
 	/** TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese script probably
 	 * want to lose the blank space here. */
-	return format(pgettext("sentence_separator", "%1% %2%"), sentence1, sentence2);
+	return format(pgettext_wrapper("sentence_separator", "%1% %2%"), sentence1, sentence2);
 }
 
 bool is_translation_of(const std::string& input,

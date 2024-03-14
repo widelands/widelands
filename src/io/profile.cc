@@ -35,25 +35,25 @@ static char const* trueWords[] = {
    "true",
    /** TRANSLATORS: A variant of the commandline parameter "true" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
-   _("true"), "yes",
+   gettext_noop("true"), "yes",
    /** TRANSLATORS: A variant of the commandline parameter "true" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
-   _("yes"), "on",
+   gettext_noop("yes"), "on",
    /** TRANSLATORS: A variant of the commandline parameter "true" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
-   _("on"), "1"};
+   gettext_noop("on"), "1"};
 
 static char const* falseWords[] = {
    "false",
    /** TRANSLATORS: A variant of the commandline parameter "false" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
-   _("false"), "no",
+   gettext_noop("false"), "no",
    /** TRANSLATORS: A variant of the commandline parameter "false" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
-   _("no"), "off",
+   gettext_noop("no"), "off",
    /** TRANSLATORS: A variant of the commandline parameter "false" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
-   _("off"), "0"};
+   gettext_noop("off"), "0"};
 
 Section::Value::Value(const std::string& nname, const char* const nval)
    : used_(false), translate_(false), name_(nname) {

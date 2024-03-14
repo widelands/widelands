@@ -1234,7 +1234,7 @@ void WLApplication::init_language() {
 	if (!localedir_.empty()) {
 		i18n::set_localedir(g_fs->canonicalize_name(localedir_));
 	} else {
-		i18n::set_localedir(g_fs->canonicalize_name(datadir_ + "/locale"));
+		i18n::set_localedir(g_fs->canonicalize_name(datadir_ + "/i18n/translations"));
 	}
 
 	// If locale dir is not a directory, barf. We can handle it not being there tough.

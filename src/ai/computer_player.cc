@@ -38,7 +38,7 @@ struct EmptyAI : ComputerPlayer {
 		   : Implementation(
 		        "empty",
 		        /** TRANSLATORS: This is the name of an AI used in the game setup screens */
-		        _("No AI"),
+		        gettext_noop("No AI"),
 		        "images/ai/ai_empty.png",
 		        Implementation::Type::kEmpty) {
 		}

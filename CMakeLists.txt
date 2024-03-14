@@ -10,7 +10,6 @@ message(STATUS "Using CMake version ${CMAKE_VERSION}")
 option(OPTION_USE_GLBINDING "Use glbinding instead of GLEW" OFF)
 option(OPTION_GLEW_STATIC "Use static GLEW Library" OFF)
 option(OPTION_BUILD_WEBSITE_TOOLS "Build website-related tools" ON)
-option(OPTION_BUILD_TRANSLATIONS "Build translations" ON)
 option(OPTION_BUILD_TESTS "Build tests" ON)
 option(OPTION_BUILD_CODECHECK "Build codecheck" ON)
 option(OPTION_BUILD_WINSTATIC "Build a static linked .exe on windows" OFF)
@@ -112,7 +111,6 @@ endif()
 
 find_package (Python3 REQUIRED)
 
-find_package(Gettext REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(PNG 1.6 REQUIRED)
 
@@ -147,9 +145,6 @@ add_definitions(-DASIO_STANDALONE)
 if (APPLE OR WIN32 OR
     CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR
     CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
-  if (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
-    find_package(Intl REQUIRED)
-  endif()
 endif()
 
 # Disable no symbols warning on macOS, but only on versions where this is
@@ -488,9 +483,6 @@ install (
 
 # Installation.
 add_subdirectory(doc)
-if(OPTION_BUILD_TRANSLATIONS)
-  add_subdirectory(po)
-endif(OPTION_BUILD_TRANSLATIONS)
 add_subdirectory(src)
 
 # install files to the correct locations here
@@ -554,17 +546,6 @@ install(
   COMPONENT DocFiles
   PATTERN "CMakeLists.txt" EXCLUDE
 )
-
-if(OPTION_BUILD_TRANSLATIONS)
-  set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${WL_INSTALL_DATADIR}/locale)
-  install(
-    DIRECTORY
-      ${CMAKE_CURRENT_BINARY_DIR}/locale/
-    DESTINATION ${WL_INSTALL_DATADIR}/locale
-    CONFIGURATIONS Debug;Release;None
-    COMPONENT CoreLanguageFiles
-  )
-endif(OPTION_BUILD_TRANSLATIONS)
 
 if (UNIX AND NOT APPLE)
   add_subdirectory(xdg)

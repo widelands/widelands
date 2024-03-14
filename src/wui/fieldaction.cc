@@ -233,9 +233,9 @@ static const char* const pic_tab_buildhouse[] = {"images/wui/fieldaction/menu_ta
                                                  "images/wui/fieldaction/menu_tab_buildmedium.png",
                                                  "images/wui/fieldaction/menu_tab_buildbig.png",
                                                  "images/wui/fieldaction/menu_tab_buildport.png"};
-static const char* const tooltip_tab_build[] = {_("Build small building"),
-                                                _("Build medium building"), _("Build big building"),
-                                                _("Build port building")};
+static const char* const tooltip_tab_build[] = {gettext_noop("Build small building"),
+                                                gettext_noop("Build medium building"), gettext_noop("Build big building"),
+                                                gettext_noop("Build port building")};
 static const char* const name_tab_build[] = {"small", "medium", "big", "port"};
 
 constexpr const char* const kImgTabBuildmine = "images/wui/fieldaction/menu_tab_buildmine.png";

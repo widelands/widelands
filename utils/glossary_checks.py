@@ -505,7 +505,7 @@ def main():
             return 1
 
         input_path = os.path.abspath(os.path.join(
-            os.path.dirname(__file__), '../po'))
+            os.path.dirname(__file__), '../data/i18n/translations'))
         output_path = make_path(os.path.dirname(
             __file__), '../po_validation/translators')
         result = check_translations_with_glossary(

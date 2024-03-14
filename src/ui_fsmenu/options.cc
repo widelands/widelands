@@ -676,15 +676,16 @@ void Options::add_languages_to_list(const std::string& current_locale) {
 
 		// We start with the locale directory so we can pick up locales
 		// that don't have a configuration file yet.
-		std::unique_ptr<FileSystem> fs(&FileSystem::create(i18n::get_localedir()));
+		std::unique_ptr<FileSystem> fs(&FileSystem::create(i18n::get_localedir() + "/widelands"));
 		FilenameSet files = fs->list_directory(".");
 
-		for (const std::string& localename : files) {  // Begin scan locales directory
+		for (std::string localename : files) {  // Begin scan locales directory
 			const char* path = localename.c_str();
 			if ((strcmp(FileSystem::fs_filename(path), ".") == 0) ||
-			    (strcmp(FileSystem::fs_filename(path), "..") == 0) || !fs->is_directory(path)) {
+			    (strcmp(FileSystem::fs_filename(path), "..") == 0) || FileSystem::filename_ext(path) != ".po") {
 				continue;
 			}
+			localename = FileSystem::filename_without_ext(path);
 
 			try {  // Begin read locale from table
 				std::unique_ptr<LuaTable> table = all_locales->get_table(localename);

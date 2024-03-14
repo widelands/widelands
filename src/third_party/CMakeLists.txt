@@ -1,3 +1,4 @@
+add_subdirectory(tinygettext)
 
 if (NOT MINIZIP_STATIC_LIBRARIES)
   wl_library(third_party_minizip
@@ -86,11 +87,4 @@ wl_library(third_party_eris
     eris/lvm.h
     eris/lzio.c
     eris/lzio.h
-)
-
-wl_library(third_party_gettext
-  THIRD_PARTY
-  SRCS
-    gettext/gettext.h
-    gettext/dummy_gettext.cc
 )

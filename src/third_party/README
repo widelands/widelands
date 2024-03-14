@@ -7,3 +7,6 @@ Changes
 Eris:
 - removed luac.c. It defined a main() function which could hide our own main()
   eris was linked in.
+
+Tinygettext:
+- Added krl and ig to list of languages in language.cpp
