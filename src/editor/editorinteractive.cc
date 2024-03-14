@@ -616,7 +616,6 @@ void EditorInteractive::exit(const bool force) {
 			return;
 		}
 	}
-	g_sh->change_music(Songset::kMenu, 200);
 	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 

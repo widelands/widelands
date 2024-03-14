@@ -254,6 +254,10 @@ private:
 	 */
 	std::string current_songset_;
 
+	/// Marks when kIntro should be the next songset when changing music.
+	/// (see implementation why it is needed)
+	bool intro_scheduled_{false};
+
 	/** The random number generator.
 	 * \note The RNG here \e must \e not be the same as the one for the game
 	 * logic!

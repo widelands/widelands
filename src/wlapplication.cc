@@ -480,6 +480,7 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	g_sh = new SoundHandler();
 
 	g_sh->register_songs("music", Songset::kMenu);
+	g_sh->register_songs("music", Songset::kIntro);
 	g_sh->register_songs("music", Songset::kIngame);
 	g_sh->register_songs("music", Songset::kCustom);
 
@@ -873,7 +874,6 @@ void WLApplication::run() {
 	switch (game_type_) {
 	case GameType::kEditor: {
 		bool success = false;
-		// g_sh->change_music(Songset::kIngame);
 		if (filename_.empty()) {
 			success = EditorInteractive::run_editor(&menu, EditorInteractive::Init::kDefault);
 		} else {
@@ -885,7 +885,6 @@ void WLApplication::run() {
 					const std::string message = _("Widelands could not find the last edited map.");
 					log_err("%s\n", message.c_str());
 
-					g_sh->change_music(Songset::kMenu);
 					menu.show_messagebox(_("No Last Edited Map"), message);
 					have_filename = false;
 				}
@@ -907,7 +906,6 @@ void WLApplication::run() {
 		Widelands::Game game;
 		std::string title;
 		std::string message;
-		// g_sh->change_music(Songset::kIngame);
 		try {
 			bool start_replay = (game_type_ == GameType::kReplay);
 			if (use_last(filename_)) {
@@ -940,14 +938,12 @@ void WLApplication::run() {
 		if (!message.empty()) {
 			log_err("%s\n", message.c_str());
 			game.full_cleanup();
-			g_sh->change_music(Songset::kMenu);
 			menu.show_messagebox(title, message);
 			menu.main_loop();
 		}
 	} break;
 
 	case GameType::kScenario: {
-		// g_sh->change_music(Songset::kIngame);
 		Widelands::Game game;
 		try {
 			game.run_splayer_scenario_direct({filename_}, script_to_run_);
@@ -957,13 +953,10 @@ void WLApplication::run() {
 	} break;
 
 	case GameType::kFromTemplate: {
-		// g_sh->change_music(Songset::kIngame);
 		init_and_run_game_from_template(menu);
 	} break;
 
 	default:
-		// g_sh->change_music(Songset::kMenu, 1000);
-
 		menu.main_loop();
 	}
 
@@ -998,11 +991,17 @@ bool WLApplication::poll_event(SDL_Event& ev) const {
 	// TODO(tothxa): no longer pushes fake event, can be moved to handle_input()
 	case SDL_USEREVENT: {
 		if (ev.user.code == CHANGE_MUSIC) {
-			/* Notofication from the SoundHandler that a song has finished playing.
-			 * Another song from the same songset will be started.
+			/* Notification from the SoundHandler that a song has finished playing.
+			 * Usually, another song from the same songset will be started.
+			 * There is a special case for the intro music: it will only be played
+			 * once, then we switch to the in-game music.
 			 */
 			assert(!SoundHandler::is_backend_disabled());
-			g_sh->change_music();
+			if (g_sh->current_songset() == Songset::kIntro) {
+				g_sh->change_music(Songset::kIngame, 1000);
+			} else {
+				g_sh->change_music();
+			}
 		}
 	} break;
 

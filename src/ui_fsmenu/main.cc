@@ -748,7 +748,7 @@ void MainMenu::draw(RenderTarget& r) {
 	//               entry point.
 	//               Reset the songset when a game, replay or editing session returns.
 	if (g_sh->current_songset() != Songset::kMenu) {
-		g_sh->change_music(Songset::kMenu, 1000);
+		g_sh->change_music(Songset::kMenu, 500);
 	}
 
 	set_button_visibility(true);

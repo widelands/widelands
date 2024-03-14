@@ -729,7 +729,7 @@ bool Game::run(StartGameType const start_game_type,
 		;
 #endif
 
-	g_sh->change_music(Songset::kIngame, 1000);
+	g_sh->change_music(Songset::kIntro);
 
 	state_ = gs_running;
 
@@ -751,8 +751,6 @@ bool Game::run(StartGameType const start_game_type,
 	get_ibase()->run<UI::Panel::Returncodes>();
 
 	state_ = gs_ending;
-
-	g_sh->change_music(Songset::kMenu, 1000);
 
 	cleanup_objects();
 	delete_pending_player_commands();
