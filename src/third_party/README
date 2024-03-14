@@ -9,5 +9,5 @@ Eris:
   eris was linked in.
 
 Tinygettext:
-- Added krl and ig to list of languages in language.cpp
-- Removed CMake version check
+- Added ig and krl to list of languages in language.cpp
+- CMakeLists: Removed version check and excluded unsuitable compiler diagnostic

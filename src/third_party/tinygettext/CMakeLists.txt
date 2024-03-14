@@ -23,6 +23,10 @@ project(tinygettext VERSION "0.2.0")
 file(GLOB TINYGETTEXT_SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} src/*.cpp)
 file(GLOB TINYGETTEXT_HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} include/tinygettext/*.hpp)
 
+if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-documentation-unknown-command")
+endif()
+
 add_library(tinygettext STATIC ${TINYGETTEXT_SOURCES})
 set_target_properties(tinygettext PROPERTIES
   CXX_STANDARD 17

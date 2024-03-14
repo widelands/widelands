@@ -40,9 +40,12 @@ void initialize() {
 	}
 
 	g_fs = new LayeredFileSystem();
-	g_fs->add_file_system(&FileSystem::create(INSTALL_DATADIR));
+	FileSystem& fs = FileSystem::create(INSTALL_DATADIR);
+	g_fs->add_file_system(&fs);
 
+	i18n::set_localedir(fs.canonicalize_name("i18n/translations"));
 	i18n::init_locale();
+	i18n::set_locale("en");
 	i18n::grab_textdomain("widelands", i18n::get_localedir());
 
 	// We don't really need graphics here, but we will get error messages
