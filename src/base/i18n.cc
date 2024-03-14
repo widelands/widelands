@@ -52,7 +52,10 @@ struct TextdomainStackEntry {
 		}
 	}
 
-	const std::string& translate_ctxt_plural(const std::string& ctxt, const std::string& sg, const std::string& pl, int n) {
+	const std::string& translate_ctxt_plural(const std::string& ctxt,
+	                                         const std::string& sg,
+	                                         const std::string& pl,
+	                                         int n) {
 		cached_return_values.push_back(dictionary().translate_ctxt_plural(ctxt, sg, pl, n));
 		return cached_return_values.back();
 	}
@@ -76,7 +79,8 @@ private:
 	std::vector<std::string> cached_return_values;
 
 	tinygettext::Dictionary& dictionary() {
-		return dictionary_manager.get_dictionary(tinygettext::Language::from_env(get_locale_or_default()));
+		return dictionary_manager.get_dictionary(
+		   tinygettext::Language::from_env(get_locale_or_default()));
 	}
 };
 
@@ -141,7 +145,8 @@ const std::string& pgettext_wrapper(const std::string& msgctxt, const std::strin
 const char* ngettext_wrapper(const char* singular, const char* plural, const int n) {
 	return ngettext_wrapper(std::string(singular), std::string(plural), n).c_str();
 }
-const std::string& ngettext_wrapper(const std::string& singular, const std::string& plural, const int n) {
+const std::string&
+ngettext_wrapper(const std::string& singular, const std::string& plural, const int n) {
 	log_i18n_if_desired_("ngettext", singular.c_str());
 	if (textdomains.empty()) {
 		log_err("Call to ngettext with empty textdomain stack");
@@ -150,10 +155,15 @@ const std::string& ngettext_wrapper(const std::string& singular, const std::stri
 	return textdomains.back()->translate_plural(singular, plural, n);
 }
 
-const char* npgettext_wrapper(const char* msgctxt, const char* singular, const char* plural, int n) {
-	return npgettext_wrapper(std::string(msgctxt), std::string(singular), std::string(plural), n).c_str();
+const char*
+npgettext_wrapper(const char* msgctxt, const char* singular, const char* plural, int n) {
+	return npgettext_wrapper(std::string(msgctxt), std::string(singular), std::string(plural), n)
+	   .c_str();
 }
-const std::string& npgettext_wrapper(const std::string& msgctxt, const std::string& singular, const std::string& plural, int n) {
+const std::string& npgettext_wrapper(const std::string& msgctxt,
+                                     const std::string& singular,
+                                     const std::string& plural,
+                                     int n) {
 	log_i18n_if_desired_("npgettext", singular.c_str());
 	if (textdomains.empty()) {
 		log_err("Call to npgettext with empty textdomain stack");
@@ -246,7 +256,7 @@ void init_locale() {
 	locale = std::string();
 	env_locale = "en";
 	for (const auto& var : {"LANG", "LANGUAGE"}) {
-		const char *environment_variable = getenv(var);
+		const char* environment_variable = getenv(var);
 		if (environment_variable != nullptr && environment_variable[0] != '\0') {
 			env_locale = environment_variable;
 			break;

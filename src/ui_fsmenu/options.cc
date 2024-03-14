@@ -682,7 +682,8 @@ void Options::add_languages_to_list(const std::string& current_locale) {
 		for (std::string localename : files) {  // Begin scan locales directory
 			const char* path = localename.c_str();
 			if ((strcmp(FileSystem::fs_filename(path), ".") == 0) ||
-			    (strcmp(FileSystem::fs_filename(path), "..") == 0) || FileSystem::filename_ext(path) != ".po") {
+			    (strcmp(FileSystem::fs_filename(path), "..") == 0) ||
+			    FileSystem::filename_ext(path) != ".po") {
 				continue;
 			}
 			localename = FileSystem::filename_without_ext(path);
