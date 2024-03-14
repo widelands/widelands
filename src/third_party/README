@@ -10,3 +10,4 @@ Eris:
 
 Tinygettext:
 - Added krl and ig to list of languages in language.cpp
+- Removed CMake version check

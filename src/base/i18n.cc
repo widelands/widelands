@@ -56,19 +56,23 @@ struct TextdomainStackEntry {
 	                                         const std::string& sg,
 	                                         const std::string& pl,
 	                                         int n) {
-		cached_return_values.push_back(dictionary().translate_ctxt_plural(ctxt, sg, pl, n));
-		return cached_return_values.back();
-	}
-	const std::string& translate_ctxt(const std::string& ctxt, const std::string& msg) {
-		cached_return_values.push_back(dictionary().translate_ctxt(ctxt, msg));
+		tinygettext::Dictionary* d = dictionary();
+		cached_return_values.push_back(d != nullptr ? d->translate_ctxt_plural(ctxt, sg, pl, n) : n == 1 ? sg : pl);
 		return cached_return_values.back();
 	}
 	const std::string& translate_plural(const std::string& sg, const std::string& pl, int n) {
-		cached_return_values.push_back(dictionary().translate_plural(sg, pl, n));
+		tinygettext::Dictionary* d = dictionary();
+		cached_return_values.push_back(d != nullptr ? d->translate_plural(sg, pl, n) : n == 1 ? sg : pl);
+		return cached_return_values.back();
+	}
+	const std::string& translate_ctxt(const std::string& ctxt, const std::string& msg) {
+		tinygettext::Dictionary* d = dictionary();
+		cached_return_values.push_back(d != nullptr ? d->translate_ctxt(ctxt, msg) : msg);
 		return cached_return_values.back();
 	}
 	const std::string& translate(const std::string& msg) {
-		cached_return_values.push_back(dictionary().translate(msg));
+		tinygettext::Dictionary* d = dictionary();
+		cached_return_values.push_back(d != nullptr ? d->translate(msg) : msg);
 		return cached_return_values.back();
 	}
 
@@ -78,9 +82,14 @@ private:
 	// To prevent translations from going out of scope before use in complex string assemblies.
 	std::vector<std::string> cached_return_values;
 
-	tinygettext::Dictionary& dictionary() {
-		return dictionary_manager.get_dictionary(
-		   tinygettext::Language::from_env(get_locale_or_default()));
+	tinygettext::Dictionary* dictionary() {
+		try {
+			return &dictionary_manager.get_dictionary(
+			   tinygettext::Language::from_env(get_locale_or_default()));
+		} catch (const std::exception& e) {
+			verb_log_warn("Could not open dictionary: %s", e.what());
+		}
+		return nullptr;
 	}
 };
 
