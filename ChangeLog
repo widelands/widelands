@@ -491,6 +491,7 @@
 - Update MacOS CI (CB #4719 / GH #6356)
 - Regression tests for start and win conditions, fix race regressions (CB #4524 / GH #6182)
 - Add gettext tools to vcpkg dependencies (GH #6389 / CB #4751)
+- Suppress unsafe buffer usage warning on Clang (CB #4770 / GH #6408)
 
 
 ### Other Issues
