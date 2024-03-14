@@ -22,7 +22,9 @@
 
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
+#include "wlapplication_options.h"
 
 constexpr int kTextPadding = 48;
 
@@ -47,7 +49,12 @@ void draw_game_tip(RenderTarget& rt,
 }
 
 void draw_splashscreen(RenderTarget& rt, const std::string& footer_message, const float opacity) {
-	const Image* image = g_image_cache->get("loadscreens/splash.jpg");
+	std::string image_name = get_config_string("splash_image", "");
+	if (image_name.empty() || resolve_template_image_filename(image_name) == kFallbackImage) {
+		image_name = kSplashImage;
+	}
+
+	const Image* image = g_image_cache->get(image_name);
 	rt.fill_rect(Recti(0, 0, rt.width(), rt.height()), RGBAColor(0, 0, 0, 255), BlendMode::Default);
 	rt.blit_fit(image, false, opacity);
 

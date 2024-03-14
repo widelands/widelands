@@ -42,6 +42,9 @@ inline bool is_using_default_theme() {
 	return template_dir() == kDefaultTemplate;
 }
 
+extern const std::string kSplashImage;
+extern const std::string kFallbackImage;
+
 namespace UI {
 
 enum class ColorStyle {
