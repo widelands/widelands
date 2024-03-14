@@ -19,6 +19,7 @@
 # Jaypad <ju-ju@nataju.fr>, 2015-2016
 # Julien Schneider <schneider.julien@gmail.com>, 2020
 # nicolas jardin <niko472006@sfr.fr>, 2016
+# Papa Ben <ben-oni@hotmail.fr>, 2024
 # Renaud Bouchard, 2015-2023
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020-2022
 # syl_, 2016
@@ -31,7 +32,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2024-03-02 02:23+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Arthinet Balika, 2023\n"
+"Last-Translator: Papa Ben <ben-oni@hotmail.fr>, 2024\n"
 "Language-Team: French (http://app.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2030,42 +2031,42 @@ msgstr[2] "%u Add-Ons en usage en relation avec le jeu:"
 #. * TRANSLATORS: "12 steps northwest of Port1"
 #: ../../src/logic/detected_port_space.cc:52
 msgid "northwest"
-msgstr ""
+msgstr "vers le nord-ouest"
 
 #. * TRANSLATORS: "12 steps northeast of Port1"
 #: ../../src/logic/detected_port_space.cc:56
 msgid "northeast"
-msgstr ""
+msgstr "vers le nord-est"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../src/logic/detected_port_space.cc:60
 msgid "southwest"
-msgstr ""
+msgstr "vers le sud-ouest"
 
 #. * TRANSLATORS: "12 steps southwest of Port1"
 #: ../../src/logic/detected_port_space.cc:64
 msgid "southeast"
-msgstr ""
+msgstr "vers le sud-est"
 
 #. * TRANSLATORS: "12 steps north of Port1"
 #: ../../src/logic/detected_port_space.cc:68
 msgid "north"
-msgstr ""
+msgstr "vers le nord"
 
 #. * TRANSLATORS: "12 steps south of Port1"
 #: ../../src/logic/detected_port_space.cc:72
 msgid "south"
-msgstr ""
+msgstr "vers le sud"
 
 #. * TRANSLATORS: "12 steps west of Port1"
 #: ../../src/logic/detected_port_space.cc:76
 msgid "west"
-msgstr ""
+msgstr "vers l'ouest"
 
 #. * TRANSLATORS: "12 steps east of Port1"
 #: ../../src/logic/detected_port_space.cc:80
 msgid "east"
-msgstr ""
+msgstr "vers l'est"
 
 #: ../../src/logic/detected_port_space.cc:88
 #, c-format
@@ -6791,7 +6792,7 @@ msgstr "Les réglages de défilement sont en conflit"
 msgid ""
 "‘%1$s’, ‘%2$s’, or ‘%3$s’ conflicts with the recommended settings. Change "
 "the conflicting setting(s) too?"
-msgstr "\"%1$s\", \"%2$s\" ou \"%3$s\" sont en conflit avec les paramètres recommandés. Modifier aussi le(s) paramètre(s) en conflit ?"
+msgstr "\"%1$s\", \"%2$s\" ou \"%3$s\" sont en conflit avec les paramètres recommandés. Modifier aussi le.s paramètre.s en conflit ?"
 
 #: ../../src/ui_fsmenu/mousewheel_report.cc:50
 msgid "Send Feedback for Inverted Horizontal Scrolling"
@@ -6818,7 +6819,7 @@ msgstr "Nom de joueur divergent"
 msgid ""
 "The player name of the selected slot (%1%) does not match your own (%2%). "
 "Are you sure that you want to occupy this slot?"
-msgstr "Le nom du joueur du slot sélectionné (%1%) ne correspond pas au vôtre (%2%). Êtes-vous sûr(e) de vouloir occuper ce créneau ?"
+msgstr "Le nom du joueur du slot sélectionné (%1%) ne correspond pas au vôtre (%2%). Êtes-vous sûr.e de vouloir occuper ce créneau ?"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:146
 msgid "Spectator"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-01 02:43+0000\n"
+"POT-Creation-Date: 2024-03-07 02:19+0000\n"
 "PO-Revision-Date: 2015-02-03 14:36+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022,2024\n"
 "Language-Team: Low German (http://app.transifex.com/widelands/widelands/language/nds/)\n"
@@ -16,6 +16,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: nds\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. TRANSLATORS: The name of the starting village. Keep it consistent with the
+#. other occurences.
+#: ../../data/campaigns/bar02.wmf/scripting/starting_conditions.lua:60
+msgid "Ondun"
+msgstr "Onduun"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:18
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:20
@@ -482,7 +488,7 @@ msgid ""
 "his fears: the forests are deep, and the frontier to Al’thunran is near. I "
 "am sure that there are a thousand greater dangers out there than the unknown"
 " tracks."
-msgstr "De eersten Schanzen, wat Troon hett bauen laten, sünd nu beschickt. Jüüst nu will he Vertrauen un Free to de Lüü brengen, well in de Müren vun uns’ neje Stadt wohnen, wat wi »Onduun« benöhmt hebben. wat in de ollen Spraak »Se well wachten« hett. Aver Troon is noch nich tofree – un ick verstah siene Angst: De Walden sünd deep, un de Grenz vun Alltunraan is dicht bi. Ick bün mi seker, dat dat daar buten dusend slimmere Gefahren as de komsiken Sporen gifft."
+msgstr "De eersten Schanzen, wat Troon hett bauen laten, sünd nu beschickt. Jüüst nu will he Vertrauen un Free to de Lüü brengen, well in de Müren vun uns’ neje Stadt wohnen, wat wi »Onduun« benöhmt hebben, wat in de ollen Spraak »Se well wachten« heet. Aver Troon is noch nich tofree – un ick verstah siene Angst: De Walden sünd deep, un de Grenz vun Alltunraan is dicht bi. Ick bün mi seker, dat dat daar buten dusend slimmere Gefahren as de komisken Sporen gifft."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:272

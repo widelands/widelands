@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2024-01-01 02:43+0000\n"
+"POT-Creation-Date: 2024-03-07 02:19+0000\n"
 "PO-Revision-Date: 2015-02-03 14:36+0000\n"
 "Last-Translator: GunChleoc, 2015\n"
 "Language-Team: Gaelic, Scottish (http://app.transifex.com/widelands/widelands/language/gd/)\n"
@@ -19,6 +19,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: gd\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : (n > 2 && n < 20) ? 2 : 3;\n"
+
+#. TRANSLATORS: The name of the starting village. Keep it consistent with the
+#. other occurences.
+#: ../../data/campaigns/bar02.wmf/scripting/starting_conditions.lua:60
+msgid "Ondun"
+msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:18
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:20
