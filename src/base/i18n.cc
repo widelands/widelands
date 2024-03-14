@@ -43,10 +43,21 @@ namespace i18n {
 /// \see grab_texdomain()
 namespace {
 
+struct DictionaryCache {
+	tinygettext::DictionaryManager manager;
+	std::map<std::string /* language */, tinygettext::Dictionary*> dictionaries;
+};
+std::map<std::string /* textdomain */, std::shared_ptr<DictionaryCache>> g_dictionary_cache;
+
 struct TextdomainStackEntry {
 	explicit TextdomainStackEntry(const std::string& dir) {
 		if (g_fs->is_directory(dir)) {
-			dictionary_manager.add_directory(dir);
+			auto it = g_dictionary_cache.find(dir);
+			if (it == g_dictionary_cache.end()) {
+				it = g_dictionary_cache.emplace(dir, std::make_shared<DictionaryCache>()).first;
+				it->second->manager.add_directory(dir);
+			}
+			dictionary_pointer = it->second;
 		} else {
 			log_warn("Textdomain directory %s does not exist", dir.c_str());
 		}
@@ -81,19 +92,31 @@ struct TextdomainStackEntry {
 	}
 
 private:
-	tinygettext::DictionaryManager dictionary_manager;
+	std::shared_ptr<DictionaryCache> dictionary_pointer;
 
 	// To prevent translations from going out of scope before use in complex string assemblies.
 	std::vector<std::string> cached_return_values;
 
 	tinygettext::Dictionary* dictionary() {
+		if (dictionary_pointer == nullptr) {
+			return nullptr;
+		}
+
+		const std::string& lang_to_use = get_locale_or_default();
+		if (auto it = dictionary_pointer->dictionaries.find(lang_to_use); it != dictionary_pointer->dictionaries.end()) {
+			return it->second;
+		}
+
+		tinygettext::Dictionary* result = nullptr;
 		try {
-			return &dictionary_manager.get_dictionary(
-			   tinygettext::Language::from_env(get_locale_or_default()));
+			result = &dictionary_pointer->manager.get_dictionary(tinygettext::Language::from_env(lang_to_use));
 		} catch (const std::exception& e) {
 			verb_log_warn("Could not open dictionary: %s", e.what());
+			// Cache the null value so we don't retry again and again
 		}
-		return nullptr;
+
+		dictionary_pointer->dictionaries.emplace(lang_to_use, result);
+		return result;
 	}
 };
 
